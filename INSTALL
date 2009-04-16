@@ -1,0 +1,8 @@
+To compile, run the following commands. You will need GTK2 headers installed.
+
+1. ./configure --prefix=/usr
+2. make
+3. sudo make install
+
+Run 'pcsx' to start the program. It will search for plugins and try to
+configure itself automatically.

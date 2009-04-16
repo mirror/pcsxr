@@ -1,0 +1,1559 @@
+# Traditional Chinese translation of pcsxr.
+# Copyright (C) 2008 Wei Mingzhi
+# This file is distributed under the same license as the pcsxr package.
+# Wei Mingzhi <whistler@openoffice.org>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pcsxr 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-06 12:47+0800\n"
+"PO-Revision-Date: 2009-03-07 16:08+0700\n"
+"Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
+"Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=big5\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../data/pcsx.glade2:9
+msgid "PCSX"
+msgstr "PCSX"
+
+#: ../data/pcsx.glade2:23
+msgid "_File"
+msgstr "檔案(_F)"
+
+#: ../data/pcsx.glade2:30
+msgid "Run _CD"
+msgstr "執行光碟(_C)"
+
+#: ../data/pcsx.glade2:46
+msgid "Run _ISO"
+msgstr "執行 _ISO"
+
+#: ../data/pcsx.glade2:62
+msgid "Run _BIOS"
+msgstr "執行 _BIOS"
+
+#: ../data/pcsx.glade2:78
+msgid "Run _EXE"
+msgstr "執行 _EXE"
+
+#: ../data/pcsx.glade2:99
+msgid "_States"
+msgstr "記錄(_S)"
+
+#: ../data/pcsx.glade2:106
+msgid "_Load"
+msgstr "讀取(_L)"
+
+#: ../data/pcsx.glade2:113
+#: ../data/pcsx.glade2:192
+msgid "Slot _1"
+msgstr "記錄 _1"
+
+#: ../data/pcsx.glade2:122
+#: ../data/pcsx.glade2:201
+msgid "Slot _2"
+msgstr "記錄 _2"
+
+#: ../data/pcsx.glade2:131
+#: ../data/pcsx.glade2:210
+msgid "Slot _3"
+msgstr "記錄 _3"
+
+#: ../data/pcsx.glade2:140
+#: ../data/pcsx.glade2:219
+msgid "Slot _4"
+msgstr "記錄 _4"
+
+#: ../data/pcsx.glade2:149
+#: ../data/pcsx.glade2:228
+msgid "Slot _5"
+msgstr "記錄 _5"
+
+#: ../data/pcsx.glade2:158
+#: ../data/pcsx.glade2:237
+msgid "_Other..."
+msgstr "其它(_O)..."
+
+#: ../data/pcsx.glade2:185
+msgid "_Save"
+msgstr "存儲(_S)"
+
+#: ../data/pcsx.glade2:280
+msgid "E_xit"
+msgstr "離開(_X)"
+
+#: ../data/pcsx.glade2:300
+msgid "_Emulator"
+msgstr "模擬器(_E)"
+
+#: ../data/pcsx.glade2:307
+msgid "_Run"
+msgstr "執行(_R)"
+
+#: ../data/pcsx.glade2:322
+msgid "Re_set"
+msgstr "複位(_S)"
+
+#: ../data/pcsx.glade2:342
+msgid "S_witch ISO"
+msgstr "更換 ISO(_W)"
+
+#: ../data/pcsx.glade2:362
+msgid "_Configuration"
+msgstr "配置(_C)"
+
+#: ../data/pcsx.glade2:369
+msgid "_Plugins & BIOS"
+msgstr "外掛及 BIOS(_P)"
+
+#: ../data/pcsx.glade2:390
+msgid "_CPU"
+msgstr "_CPU"
+
+#: ../data/pcsx.glade2:405
+msgid "_Memory Cards"
+msgstr "記憶卡(_M)"
+
+#: ../data/pcsx.glade2:421
+msgid "_Netplay"
+msgstr "聯網遊戲(_N)"
+
+#: ../data/pcsx.glade2:440
+msgid "Chea_t"
+msgstr "金手指(_T)"
+
+#: ../data/pcsx.glade2:448
+msgid "_Browse"
+msgstr "檢視(_B)"
+
+#: ../data/pcsx.glade2:462
+msgid "_Search"
+msgstr "搜尋(_S)"
+
+#: ../data/pcsx.glade2:480
+msgid "_Help"
+msgstr "說明(_H)"
+
+#: ../data/pcsx.glade2:487
+msgid "_About PCSX"
+msgstr "關於 PCSX(_A)"
+
+#: ../data/pcsx.glade2:523
+#: ../gui/Gtk2Gui.c:385
+msgid "Configure PCSX"
+msgstr "配置 PCSX"
+
+#: ../data/pcsx.glade2:623
+msgid "Select Folder to Search"
+msgstr "選擇要查找的資料夾"
+
+#: ../data/pcsx.glade2:639
+msgid "Search in:"
+msgstr "在此處查找外掛:"
+
+#: ../data/pcsx.glade2:912
+msgid "Graphics:"
+msgstr "圖像:"
+
+#: ../data/pcsx.glade2:925
+msgid "Sound:"
+msgstr "聲音:"
+
+#: ../data/pcsx.glade2:940
+msgid "Controller 1:   "
+msgstr "控制器 1:"
+
+#: ../data/pcsx.glade2:955
+msgid "Controller 2:"
+msgstr "控制器 2:"
+
+#: ../data/pcsx.glade2:970
+msgid "CD-ROM:"
+msgstr "CD-ROM:"
+
+#: ../data/pcsx.glade2:1008
+msgid "<b>Plugins</b>"
+msgstr "<b>外掛</b>"
+
+#: ../data/pcsx.glade2:1067
+msgid "<b>BIOS</b>"
+msgstr "<b>BIOS</b>"
+
+#: ../data/pcsx.glade2:1112
+msgid "Configure CPU"
+msgstr "配置 CPU"
+
+#: ../data/pcsx.glade2:1139
+msgid "Enable Debugger"
+msgstr "啟用調試器"
+
+#: ../data/pcsx.glade2:1157
+msgid "SPU IRQ Always Enabled"
+msgstr "SPU IRQ 總是啟用"
+
+#: ../data/pcsx.glade2:1173
+msgid "Black & White Movies"
+msgstr "黑白電影"
+
+#: ../data/pcsx.glade2:1189
+#: ../win32/gui/WndMain.c:1163
+msgid "Enable Console Output"
+msgstr "啟用控制台輸出"
+
+#: ../data/pcsx.glade2:1207
+msgid "Enable Interpreter CPU"
+msgstr "啟用解釋執行 CPU"
+
+#: ../data/pcsx.glade2:1225
+#: ../gui/Plugin.c:204
+#, c-format
+msgid "SIO IRQ Always Enabled"
+msgstr "SIO IRQ 總是啟用"
+
+#: ../data/pcsx.glade2:1241
+msgid "Disable CD Audio"
+msgstr "禁用 CD 音頻"
+
+#: ../data/pcsx.glade2:1257
+msgid "Disable XA Decoding"
+msgstr "禁用 XA 解碼"
+
+#: ../data/pcsx.glade2:1273
+#: ../win32/gui/WndMain.c:1165
+msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
+msgstr "Parasite Eve 2, Vandal Hearts 1/2 修正"
+
+#: ../data/pcsx.glade2:1288
+#: ../win32/gui/WndMain.c:1166
+msgid "InuYasha Sengoku Battle Fix"
+msgstr "InuYasha Sengoku 戰斗修正"
+
+#: ../data/pcsx.glade2:1304
+msgid "<b>Options</b>"
+msgstr "<b>選項</b>"
+
+#: ../data/pcsx.glade2:1327
+#: ../win32/gui/WndMain.c:1161
+msgid "Autodetect"
+msgstr "自動檢測"
+
+#: ../data/pcsx.glade2:1341
+msgid ""
+"NTSC\n"
+"PAL"
+msgstr ""
+"NTSC\n"
+"PAL"
+
+#: ../data/pcsx.glade2:1355
+msgid "<b>System Type</b>"
+msgstr "<b>系統類型</b>"
+
+#: ../data/pcsx.glade2:1397
+msgid "Configure NetPlay"
+msgstr "配置聯網遊戲"
+
+#: ../data/pcsx.glade2:1479
+msgid "<b>NetPlay</b>"
+msgstr "<b>聯網遊戲</b>"
+
+#: ../data/pcsx.glade2:1523
+msgid "Configure Memory Cards"
+msgstr "配置記憶卡"
+
+#: ../data/pcsx.glade2:1593
+#: ../data/pcsx.glade2:1957
+msgid "Format"
+msgstr "格式化"
+
+#: ../data/pcsx.glade2:1637
+#: ../data/pcsx.glade2:2001
+msgid "Reload"
+msgstr "重新加載"
+
+#: ../data/pcsx.glade2:1679
+msgid "<b>Memory Card 1</b>"
+msgstr "<b>記憶卡 1</b>"
+
+#: ../data/pcsx.glade2:1734
+#: ../data/pcsx.glade2:1778
+msgid "Copy"
+msgstr "複制"
+
+#: ../data/pcsx.glade2:1825
+#: ../data/pcsx.glade2:1872
+msgid "Un/Delete"
+msgstr "刪除/恢複"
+
+#: ../data/pcsx.glade2:2043
+msgid "<b>Memory Card 2</b>"
+msgstr "<b>記憶卡 2</b>"
+
+#: ../data/pcsx.glade2:2097
+msgid ""
+"(C) 1999-2003  PCSX Team\n"
+"(C) 2005-2006 Ryan Schultz\n"
+"(C) 2005-2006 Andrew Burton\n"
+"(C) 2008-2009 Wei Mingzhi"
+msgstr ""
+"(C) 1999-2003  PCSX 開發組\n"
+"(C) 2005-2006 Ryan Schultz\n"
+"(C) 2005-2006 Andrew Burton\n"
+"(C) 2008-2009 Wei Mingzhi"
+
+#: ../data/pcsx.glade2:2101
+msgid "A PlayStation emulator."
+msgstr "一個 PlayStation 模擬器。"
+
+#: ../data/pcsx.glade2:2103
+msgid "PCSX Reloaded"
+msgstr "PCSX Reloaded"
+
+#: ../data/pcsx.glade2:2104
+msgid ""
+"This program is free software; you can redistribute it\n"
+"and/or modify it under the terms of the GNU General\n"
+"Public License as published by the Free Software\n"
+"Foundation; either version 2 of the License, or (at your\n"
+"option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be\n"
+"useful, but WITHOUT ANY WARRANTY; without even\n"
+"the implied warranty of MERCHANTABILITY or\n"
+"FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General\n"
+"Public License along with this program; if not, write to\n"
+"the Free Software Foundation, Inc."
+msgstr ""
+
+#: ../data/pcsx.glade2:2133
+msgid "translator-credits"
+msgstr "Wei Mingzhi <whistler@openoffice.org>"
+
+#: ../data/pcsx.glade2:2152
+msgid "Edit Cheat Codes"
+msgstr "編輯金手指"
+
+#: ../data/pcsx.glade2:2188
+msgid "<b>Cheat Codes</b>"
+msgstr "<b>金手指碼</b>"
+
+#: ../data/pcsx.glade2:2206
+msgid "gtk-add"
+msgstr ""
+
+#: ../data/pcsx.glade2:2216
+msgid "gtk-edit"
+msgstr ""
+
+#: ../data/pcsx.glade2:2229
+msgid "gtk-delete"
+msgstr ""
+
+#: ../data/pcsx.glade2:2256
+#: ../gui/Cheat.c:456
+msgid "Enable"
+msgstr "啟用"
+
+#: ../data/pcsx.glade2:2288
+msgid "Disable"
+msgstr "禁用"
+
+#: ../data/pcsx.glade2:2306
+msgid "gtk-open"
+msgstr ""
+
+#: ../data/pcsx.glade2:2319
+msgid "gtk-save-as"
+msgstr ""
+
+#: ../data/pcsx.glade2:2348
+msgid "gtk-close"
+msgstr ""
+
+#: ../libpcsxcore/cdriso.c:125
+#, c-format
+msgid "Could not open %s.\n"
+msgstr "無法開啟 \"%s\"\n"
+
+#: ../libpcsxcore/cheat.c:335
+#: ../libpcsxcore/cheat.c:454
+msgid "(Untitled)"
+msgstr "(未定名)"
+
+#: ../libpcsxcore/misc.c:372
+#, c-format
+msgid "Error opening file: %s"
+msgstr "開啟檔案錯誤: %s!"
+
+#: ../libpcsxcore/misc.c:390
+msgid "CPE files not supported."
+msgstr "CPE 檔案不被支援!"
+
+#: ../libpcsxcore/misc.c:394
+msgid "COFF files not supported."
+msgstr "COFF 檔案不被支援!"
+
+#: ../libpcsxcore/misc.c:398
+msgid "This file does not appear to be a valid PSX file."
+msgstr "此檔案不是一個合法的 PSX 檔案。"
+
+#: ../libpcsxcore/plugins.c:33
+#, c-format
+msgid "Error loading %s: %s"
+msgstr "無法加載 %s: %s"
+
+#: ../libpcsxcore/plugins.c:162
+#, c-format
+msgid "Could not load GPU plugin %s!"
+msgstr "無法加載 GPU 外掛 %s!"
+
+#: ../libpcsxcore/plugins.c:228
+#, c-format
+msgid "Could not load CD-ROM plugin %s!"
+msgstr "無法加載 CD-ROM 外掛 %s!"
+
+#: ../libpcsxcore/plugins.c:467
+#, c-format
+msgid "Could not load SPU plugin %s!"
+msgstr "無法加載 SPU 外掛 %s!"
+
+#: ../libpcsxcore/plugins.c:615
+#, c-format
+msgid "Could not load Controller 1 plugin %s!"
+msgstr "無法加載 \"控制器1\" 外掛 %s!"
+
+#: ../libpcsxcore/plugins.c:669
+#, c-format
+msgid "Could not load Controller 2 plugin %s!"
+msgstr "無法加載 \"控制器2\" 外掛 %s!"
+
+#: ../libpcsxcore/plugins.c:712
+#, c-format
+msgid "Could not load NetPlay plugin %s!"
+msgstr "無法加載聯網遊戲外掛 %s!"
+
+#: ../libpcsxcore/plugins.c:775
+#, c-format
+msgid "Error initializing CD-ROM plugin: %d"
+msgstr "CD-ROM 外掛初始化錯誤: %d"
+
+#: ../libpcsxcore/plugins.c:777
+#, c-format
+msgid "Error initializing GPU plugin: %d"
+msgstr "GPU 外掛初始化錯誤: %d"
+
+#: ../libpcsxcore/plugins.c:779
+#, c-format
+msgid "Error initializing SPU plugin: %d"
+msgstr "SPU 外掛初始化錯誤: %d"
+
+#: ../libpcsxcore/plugins.c:781
+#, c-format
+msgid "Error initializing Controller 1 plugin: %d"
+msgstr "\"控制器1\" 外掛初始化錯誤: %d"
+
+#: ../libpcsxcore/plugins.c:783
+#, c-format
+msgid "Error initializing Controller 2 plugin: %d"
+msgstr "\"控制器2\" 外掛初始化錯誤: %d"
+
+#: ../libpcsxcore/plugins.c:787
+#, c-format
+msgid "Error initializing NetPlay plugin: %d"
+msgstr "聯網遊戲外掛初始化錯誤: %d"
+
+#: ../libpcsxcore/plugins.c:790
+msgid "Plugins loaded.\n"
+msgstr "外掛已加載。\n"
+
+#: ../libpcsxcore/psxmem.c:69
+msgid "Error allocating memory!"
+msgstr "分配內存錯誤!"
+
+#: ../libpcsxcore/psxmem.c:109
+#, c-format
+msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
+msgstr "無法開啟 BIOS: \"%s\"。使用內部 HLE Bios。\n"
+
+#: ../libpcsxcore/r3000a.c:34
+#, c-format
+msgid "Running PCSX Version %s (%s).\n"
+msgstr "PCSX 版本 %s (%s) 執行中。\n"
+
+#: ../libpcsxcore/sio.c:99
+msgid "Connection closed!\n"
+msgstr "連接被關閉!\n"
+
+#: ../libpcsxcore/sio.c:322
+#, c-format
+msgid "No memory card value was specified - creating a default card %s\n"
+msgstr "未指定記憶卡 - 創建一個新的記憶卡 %s\n"
+
+#: ../libpcsxcore/sio.c:326
+#, c-format
+msgid "The memory card %s doesn't exist - creating it\n"
+msgstr "記憶卡 %s 不存在 - 正在創建\n"
+
+#: ../libpcsxcore/sio.c:342
+#, c-format
+msgid "Memory card %s failed to load!\n"
+msgstr "記憶卡 %s 讀取失敗!\n"
+
+#: ../libpcsxcore/sio.c:346
+#, c-format
+msgid "Loading memory card %s\n"
+msgstr "正在加載記憶卡 %s\n"
+
+#: ../gui/Cheat.c:49
+msgid " Yes"
+msgstr " 是"
+
+#: ../gui/Cheat.c:118
+msgid "Add New Cheat"
+msgstr "添加新金手指"
+
+#: ../gui/Cheat.c:126
+#: ../gui/Cheat.c:210
+msgid "Cheat Description:"
+msgstr "金手指描述:"
+
+#: ../gui/Cheat.c:134
+#: ../gui/Cheat.c:219
+msgid "Cheat Code:"
+msgstr "金手指碼:"
+
+#: ../gui/Cheat.c:164
+#: ../gui/Cheat.c:259
+#: ../gui/LnxMain.c:359
+msgid "Error"
+msgstr "錯誤"
+
+#: ../gui/Cheat.c:164
+#: ../gui/Cheat.c:259
+msgid "Invalid cheat code!"
+msgstr "非法金手指碼!"
+
+#: ../gui/Cheat.c:202
+msgid "Edit Cheat"
+msgstr "編輯金手指"
+
+#: ../gui/Cheat.c:357
+msgid "Open Cheat File"
+msgstr "打開金手指檔"
+
+#: ../gui/Cheat.c:367
+#: ../gui/Cheat.c:407
+msgid "PCSX Cheat Code Files (*.cht)"
+msgstr "PCSX 金手指檔 (*.cht)"
+
+#: ../gui/Cheat.c:372
+#: ../gui/Gtk2Gui.c:626
+#: ../win32/gui/WndMain.c:1271
+#: ../win32/gui/WndMain.c:1352
+msgid "All Files"
+msgstr "所有檔案"
+
+#: ../gui/Cheat.c:397
+msgid "Save Cheat File"
+msgstr "儲存金手指檔"
+
+#: ../gui/Cheat.c:412
+msgid "All Files (*.*)"
+msgstr "所有檔案 (*.*)"
+
+#: ../gui/Cheat.c:445
+#: ../gui/Gtk2Gui.c:377
+#: ../gui/Gtk2Gui.c:1013
+msgid "Error: Glade interface could not be loaded!"
+msgstr "錯誤：無法加載 Glade 界面!"
+
+#: ../gui/Cheat.c:450
+msgid "Cheat Codes"
+msgstr "金手指碼"
+
+#: ../gui/Cheat.c:462
+msgid "Description"
+msgstr "描述"
+
+#: ../gui/Gtk2Gui.c:471
+msgid "Select PSX EXE File"
+msgstr "選擇 PS EXE 檔案"
+
+#: ../gui/Gtk2Gui.c:481
+msgid "PlayStation Executable Files"
+msgstr "PlayStation 執行檔"
+
+#: ../gui/Gtk2Gui.c:521
+msgid "Not a valid PSX file"
+msgstr "不是一個合法的 PSX 檔"
+
+#: ../gui/Gtk2Gui.c:521
+msgid "The file does not appear to be a valid Playstation executable"
+msgstr "此文件不是一個合法的 PlayStation 執行檔"
+
+#: ../gui/Gtk2Gui.c:552
+#: ../gui/Gtk2Gui.c:675
+#: ../gui/Gtk2Gui.c:757
+msgid "CD ROM failed"
+msgstr "CD-ROM 失敗"
+
+#: ../gui/Gtk2Gui.c:552
+#: ../gui/Gtk2Gui.c:675
+#: ../gui/Gtk2Gui.c:757
+#: ../win32/gui/WndMain.c:382
+#: ../win32/gui/WndMain.c:431
+#: ../win32/gui/WndMain.c:507
+msgid "The CD does not appear to be a valid Playstation CD"
+msgstr "此光碟不是一張合法的 PlayStation 光碟。"
+
+#: ../gui/Gtk2Gui.c:560
+#: ../gui/Gtk2Gui.c:683
+#: ../gui/Gtk2Gui.c:765
+#: ../win32/gui/WndMain.c:388
+#: ../win32/gui/WndMain.c:437
+#: ../win32/gui/WndMain.c:513
+msgid "Could not load CD-ROM!"
+msgstr "無法加載光碟!"
+
+#: ../gui/Gtk2Gui.c:560
+msgid "The CD ROM could not be loaded"
+msgstr "無法加載 CD-ROM"
+
+#: ../gui/Gtk2Gui.c:575
+msgid "Could not run BIOS"
+msgstr "無法執行 BIOS"
+
+#: ../gui/Gtk2Gui.c:575
+msgid "Running BIOS is not supported with Internal HLE BIOS."
+msgstr "內部 HLE BIOS 不支援直接執行。"
+
+#: ../gui/Gtk2Gui.c:605
+msgid "Open PSX Disc Image File"
+msgstr "打開 PSX 光碟映像檔"
+
+#: ../gui/Gtk2Gui.c:621
+msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
+msgstr "PSX 鏡像檔 (*.bin, *.img, *.mdf, *.iso)"
+
+#: ../gui/Gtk2Gui.c:872
+#, c-format
+msgid "Loaded state %s."
+msgstr "已讀取記錄 %s。"
+
+#: ../gui/Gtk2Gui.c:877
+#, c-format
+msgid "Error loading state %s!"
+msgstr "讀取記錄 %s 時出錯。"
+
+#: ../gui/Gtk2Gui.c:888
+#, c-format
+msgid "Saved state %s."
+msgstr "已存儲記錄 %s"
+
+#: ../gui/Gtk2Gui.c:890
+#, c-format
+msgid "Error saving state %s!"
+msgstr "存儲記錄 %s 時出錯。"
+
+#: ../gui/Gtk2Gui.c:924
+#: ../gui/Gtk2Gui.c:951
+msgid "Select State File"
+msgstr "選擇記錄檔案"
+
+#: ../gui/Gtk2Gui.c:1055
+msgid "Icon"
+msgstr "圖符"
+
+#: ../gui/Gtk2Gui.c:1061
+#: ../win32/gui/WndMain.c:616
+msgid "Title"
+msgstr "標題"
+
+#: ../gui/Gtk2Gui.c:1067
+#: ../win32/gui/WndMain.c:622
+msgid "Status"
+msgstr "狀態"
+
+#: ../gui/Gtk2Gui.c:1073
+msgid "ID"
+msgstr "ID"
+
+#: ../gui/Gtk2Gui.c:1079
+msgid "Name"
+msgstr "名稱"
+
+#: ../gui/Gtk2Gui.c:1141
+#: ../win32/gui/WndMain.c:819
+msgid "Deleted"
+msgstr "已刪除"
+
+#: ../gui/Gtk2Gui.c:1143
+#: ../gui/Gtk2Gui.c:1147
+#: ../win32/gui/WndMain.c:820
+#: ../win32/gui/WndMain.c:823
+msgid "Free"
+msgstr "空閑"
+
+#: ../gui/Gtk2Gui.c:1145
+#: ../win32/gui/WndMain.c:822
+msgid "Used"
+msgstr "已使用"
+
+#: ../gui/Gtk2Gui.c:1239
+msgid "Format this Memory Card?"
+msgstr "格式化此記憶卡?"
+
+#: ../gui/Gtk2Gui.c:1241
+msgid "If you format the memory card, the card will be empty, and any existing data overwritten."
+msgstr "如果您選擇格式化記憶卡，記憶卡將被清空，並且任何現有數據都將被覆蓋。"
+
+#: ../gui/Gtk2Gui.c:1244
+msgid "Format card"
+msgstr "格式化記憶卡"
+
+#: ../gui/Gtk2Gui.c:1359
+msgid "No space available in the target memory card!"
+msgstr "目標記憶卡沒有空餘位置!"
+
+#: ../gui/Gtk2Gui.c:1504
+msgid "Memory Card Manager"
+msgstr "記憶卡管理器"
+
+#: ../gui/Gtk2Gui.c:1773
+msgid "No configuration required"
+msgstr "不需要配置"
+
+#: ../gui/Gtk2Gui.c:1773
+msgid "This plugin doesn't need to be configured."
+msgstr "此外掛需要被配置。"
+
+#: ../gui/Gtk2Gui.c:2032
+#, c-format
+msgid "Could not open BIOS directory: '%s'\n"
+msgstr "無法開啟 BIOS 目錄: \"%s\"\n"
+
+#: ../gui/Gtk2Gui.c:2064
+#: ../gui/Gtk2Gui.c:2158
+#: ../gui/LnxMain.c:145
+#, c-format
+msgid "Could not open directory: '%s'\n"
+msgstr "無法開啟目錄: \"%s\"\n"
+
+#: ../gui/Gtk2Gui.c:2127
+msgid "Internal HLE Bios"
+msgstr "內部 HLE-Bios"
+
+#: ../gui/Gtk2Gui.c:2219
+msgid "Notice"
+msgstr "警告"
+
+#: ../gui/LnxMain.c:64
+#, c-format
+msgid "Creating memory card: %s\n"
+msgstr "創建記憶卡: %s\n"
+
+#: ../gui/LnxMain.c:261
+msgid ""
+" pcsx [options] [file]\n"
+"\toptions:\n"
+"\t-runcd\t\tRuns CD-ROM\n"
+"\t-cdfile FILE\tRuns a CD image file\n"
+"\t-nogui\t\tDon't open the GTK GUI\n"
+"\t-cfg FILE\tLoads desired configuration file (default: ~/.pcsx/pcsx.cfg)\n"
+"\t-psxout\t\tEnable PSX output\n"
+"\t-load STATENUM\tLoads savestate STATENUM (1-5)\n"
+"\t-h -help\tDisplay this message\n"
+"\tfile\t\tLoads file\n"
+msgstr ""
+" pcsx [選項] [檔案]\n"
+"\t選項:\n"
+"\t-runcd\t\t執行 CD-ROM\n"
+"\t-cdfile 檔案\t執行 CD 鏡像檔\n"
+"\t-nogui\t\t不開啟 GTK GUI\n"
+"\t-cfg 檔案\t加載一個特定的配置檔案 (默認為: ~/.pcsx/pcsx.cfg)\n"
+"\t-psxout\t\t啟用 PSX 輸出\n"
+"\t-load 編號\t加載指定編號的記錄 (1-5)\n"
+"\t-h -help\t顯示此信息\n"
+"\t檔案\t\t加載檔案\n"
+
+#: ../gui/LnxMain.c:299
+#, c-format
+msgid "PCSX cannot be configured without using the GUI -- you should restart without -nogui.\n"
+msgstr "PCSX 不能在字符界面下配置 -- 請不使用 -nogui 參數重新啟動程式\n"
+
+#: ../gui/LnxMain.c:359
+msgid "Failed loading plugins!"
+msgstr "外掛加載失敗"
+
+#: ../gui/LnxMain.c:376
+#, c-format
+msgid "Could not load CD-ROM!\n"
+msgstr "無法加載光碟。\n"
+
+#: ../gui/LnxMain.c:415
+#, c-format
+msgid "PSX emulator couldn't be initialized.\n"
+msgstr "PSX 模擬器無法初期化。\n"
+
+#: ../gui/Plugin.c:205
+#, c-format
+msgid "SIO IRQ Not Always Enabled"
+msgstr "SIO IRQ 不總是啟用"
+
+#: ../gui/Plugin.c:211
+#, c-format
+msgid "Black & White Mdecs Only Enabled"
+msgstr "Black & White Mdecs Only 啟用"
+
+#: ../gui/Plugin.c:212
+#, c-format
+msgid "Black & White Mdecs Only Disabled"
+msgstr "Black & White Mdecs Only 禁用"
+
+#: ../gui/Plugin.c:218
+#, c-format
+msgid "XA Enabled"
+msgstr "XA 已啟用"
+
+#: ../gui/Plugin.c:219
+#, c-format
+msgid "XA Disabled"
+msgstr "XA 已禁用"
+
+#: ../gui/Plugin.c:285
+msgid "Error opening CD-ROM plugin!"
+msgstr "無法開啟 CD-ROM 外掛!"
+
+#: ../gui/Plugin.c:287
+msgid "Error opening SPU plugin!"
+msgstr "無法開啟 SPU 外掛!"
+
+#: ../gui/Plugin.c:290
+msgid "Error opening GPU plugin!"
+msgstr "無法開啟 GPU 外掛!"
+
+#: ../gui/Plugin.c:292
+msgid "Error opening Controller 1 plugin!"
+msgstr "無法開啟 \"控制器 1\" 外掛!"
+
+#: ../gui/Plugin.c:294
+msgid "Error opening Controller 2 plugin!"
+msgstr "無法開啟 \"控制器 2\" 外掛!"
+
+#: ../gui/Plugin.c:374
+msgid "Error closing CD-ROM plugin!"
+msgstr "無法關閉 CD-ROM 外掛!"
+
+#: ../gui/Plugin.c:376
+msgid "Error closing SPU plugin!"
+msgstr "無法關閉 SPU 外掛!"
+
+#: ../gui/Plugin.c:378
+msgid "Error closing Controller 1 Plugin!"
+msgstr "無法關閉 \"控制器 1\" 外掛!"
+
+#: ../gui/Plugin.c:380
+msgid "Error closing Controller 2 plugin!"
+msgstr "無法關閉 \"控制器 2\" 外掛!"
+
+#: ../gui/Plugin.c:382
+msgid "Error closing GPU plugin!"
+msgstr "無法關閉 GPU 外掛!"
+
+#: ../win32/gui/AboutDlg.c:26
+msgid ""
+"PCSX - A PlayStation Emulator\n"
+"\n"
+"Original Authors:\n"
+"main coder: linuzappz\n"
+"co-coders: shadow\n"
+"ex-coders: Nocomp, Pete Bernett, nik3d\n"
+"Webmaster: AkumaX"
+msgstr ""
+"PCSX - 一個 PlayStation 模擬器\n"
+"\n"
+"原作者:\n"
+"主程式: linuzappz\n"
+"輔助程式: shadow\n"
+"前程式: Nocomp, Pete Bernett, nik3d\n"
+"網絡管理: AkumaX"
+
+#: ../win32/gui/AboutDlg.c:35
+msgid ""
+"PCSX-df Authors:\n"
+"Ryan Schultz, Andrew Burton, Stephen Chao,\n"
+"Marcus Comstedt, Stefan Sikora\n"
+"\n"
+"PCSX Reloaded By:\n"
+"Wei Mingzhi\n"
+"\n"
+"http://www.codeplex.com/pcsxr"
+msgstr ""
+"PCSX-df 開發者:\n"
+"Ryan Schultz, Andrew Burton, Stephen Chao,\n"
+"Marcus Comstedt, Stefan Sikora\n"
+"\n"
+"PCSX Reloaded 開發者:\n"
+"Wei Mingzhi\n"
+"\n"
+"http://www.codeplex.com/pcsxr"
+
+#: ../win32/gui/AboutDlg.c:46
+msgid "About"
+msgstr "關於 PCSX"
+
+#: ../win32/gui/AboutDlg.c:48
+#: ../win32/gui/AboutDlg.c:52
+#: ../win32/gui/ConfigurePlugins.c:462
+#: ../win32/gui/ConfigurePlugins.c:593
+#: ../win32/gui/WndMain.c:918
+#: ../win32/gui/WndMain.c:1154
+msgid "OK"
+msgstr "確定"
+
+#: ../win32/gui/AboutDlg.c:49
+msgid "PCSX EMU\n"
+msgstr "PCSX 模擬器\n"
+
+#: ../win32/gui/ConfigurePlugins.c:385
+msgid "This plugin reports that should work correctly"
+msgstr "此外掛報告其可正常工作。"
+
+#: ../win32/gui/ConfigurePlugins.c:386
+msgid "This plugin reports that should not work correctly"
+msgstr "此外掛報告其不可正常工作。"
+
+#: ../win32/gui/ConfigurePlugins.c:460
+msgid "Configuration"
+msgstr "配置"
+
+#: ../win32/gui/ConfigurePlugins.c:463
+#: ../win32/gui/ConfigurePlugins.c:594
+#: ../win32/gui/WndMain.c:919
+#: ../win32/gui/WndMain.c:1155
+msgid "Cancel"
+msgstr "取消"
+
+#: ../win32/gui/ConfigurePlugins.c:464
+msgid "Graphics"
+msgstr "圖像"
+
+#: ../win32/gui/ConfigurePlugins.c:465
+msgid "First Controller"
+msgstr "主控制器"
+
+#: ../win32/gui/ConfigurePlugins.c:466
+msgid "Second Controller"
+msgstr "輔控制器"
+
+#: ../win32/gui/ConfigurePlugins.c:467
+msgid "Sound"
+msgstr "聲音"
+
+#: ../win32/gui/ConfigurePlugins.c:468
+msgid "Cdrom"
+msgstr "CD-ROM"
+
+#: ../win32/gui/ConfigurePlugins.c:469
+msgid "Bios"
+msgstr "BIOS"
+
+#: ../win32/gui/ConfigurePlugins.c:470
+msgid "Set Bios Directory"
+msgstr "設置 BIOS 目錄"
+
+#: ../win32/gui/ConfigurePlugins.c:471
+msgid "Set Plugins Directory"
+msgstr "設置外掛目錄"
+
+#: ../win32/gui/ConfigurePlugins.c:472
+#: ../win32/gui/ConfigurePlugins.c:475
+#: ../win32/gui/ConfigurePlugins.c:478
+#: ../win32/gui/ConfigurePlugins.c:481
+#: ../win32/gui/ConfigurePlugins.c:484
+#: ../win32/gui/ConfigurePlugins.c:596
+msgid "Configure..."
+msgstr "配置..."
+
+#: ../win32/gui/ConfigurePlugins.c:473
+#: ../win32/gui/ConfigurePlugins.c:476
+#: ../win32/gui/ConfigurePlugins.c:479
+#: ../win32/gui/ConfigurePlugins.c:482
+#: ../win32/gui/ConfigurePlugins.c:485
+#: ../win32/gui/ConfigurePlugins.c:597
+msgid "Test..."
+msgstr "測試..."
+
+#: ../win32/gui/ConfigurePlugins.c:474
+#: ../win32/gui/ConfigurePlugins.c:477
+#: ../win32/gui/ConfigurePlugins.c:480
+#: ../win32/gui/ConfigurePlugins.c:483
+#: ../win32/gui/ConfigurePlugins.c:486
+#: ../win32/gui/ConfigurePlugins.c:598
+msgid "About..."
+msgstr "關於..."
+
+#: ../win32/gui/ConfigurePlugins.c:591
+msgid "NetPlay Configuration"
+msgstr "聯網遊戲配置"
+
+#: ../win32/gui/ConfigurePlugins.c:595
+msgid "NetPlay"
+msgstr "聯網遊戲"
+
+#: ../win32/gui/ConfigurePlugins.c:599
+msgid "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
+msgstr "注意: 聯網遊戲外掛應和其它外掛放在同一資料夾中。"
+
+#: ../win32/gui/plugin.c:90
+#: ../win32/gui/WndMain.c:235
+#, c-format
+msgid "*PCSX*: Saved State %d"
+msgstr ""
+
+#: ../win32/gui/plugin.c:91
+#: ../win32/gui/WndMain.c:236
+#, c-format
+msgid "*PCSX*: Error Saving State %d"
+msgstr ""
+
+#: ../win32/gui/plugin.c:107
+#: ../win32/gui/WndMain.c:214
+#, c-format
+msgid "*PCSX*: Loaded State %d"
+msgstr ""
+
+#: ../win32/gui/plugin.c:108
+#: ../win32/gui/WndMain.c:215
+#, c-format
+msgid "*PCSX*: Error Loading State %d"
+msgstr ""
+
+#: ../win32/gui/plugin.c:119
+#, c-format
+msgid "*PCSX*: Sio Irq Always Enabled"
+msgstr ""
+
+#: ../win32/gui/plugin.c:120
+#, c-format
+msgid "*PCSX*: Sio Irq Not Always Enabled"
+msgstr ""
+
+#: ../win32/gui/plugin.c:127
+#, c-format
+msgid "*PCSX*: Black&White Mdecs Only Enabled"
+msgstr ""
+
+#: ../win32/gui/plugin.c:128
+#, c-format
+msgid "*PCSX*: Black&White Mdecs Only Disabled"
+msgstr ""
+
+#: ../win32/gui/plugin.c:135
+#, c-format
+msgid "*PCSX*: Xa Enabled"
+msgstr ""
+
+#: ../win32/gui/plugin.c:136
+#, c-format
+msgid "*PCSX*: Xa Disabled"
+msgstr ""
+
+#: ../win32/gui/plugin.c:145
+msgid "*PCSX*: CdRom Case Opened"
+msgstr ""
+
+#: ../win32/gui/plugin.c:150
+msgid "*PCSX*: CdRom Case Closed"
+msgstr ""
+
+#: ../win32/gui/plugin.c:177
+msgid "Connecting..."
+msgstr "正在連接..."
+
+#: ../win32/gui/plugin.c:179
+#: ../win32/gui/plugin.c:186
+#, c-format
+msgid "Please wait while connecting... %c\n"
+msgstr "請稍候，正在連接... %c\n"
+
+#: ../win32/gui/plugin.c:216
+msgid "Error Opening CDR Plugin"
+msgstr "無法開啟 CDR 外掛"
+
+#: ../win32/gui/plugin.c:279
+#, c-format
+msgid "Error Opening GPU Plugin (%d)"
+msgstr "無法開啟 GPU 外掛 (%d)"
+
+#: ../win32/gui/plugin.c:281
+#, c-format
+msgid "Error Opening SPU Plugin (%d)"
+msgstr "無法開啟 SPU 外掛 (%d)"
+
+#: ../win32/gui/plugin.c:284
+#, c-format
+msgid "Error Opening PAD1 Plugin (%d)"
+msgstr "無法開啟 PAD1 外掛 (%d)"
+
+#: ../win32/gui/plugin.c:286
+#, c-format
+msgid "Error Opening PAD2 Plugin (%d)"
+msgstr "無法開啟 PAD2 外掛 (%d)"
+
+#: ../win32/gui/plugin.c:309
+msgid "Error Closing CDR Plugin"
+msgstr "無法關閉 CD-ROM 外掛 (%d)"
+
+#: ../win32/gui/plugin.c:311
+msgid "Error Closing GPU Plugin"
+msgstr "無法關閉 GPU 外掛"
+
+#: ../win32/gui/plugin.c:313
+msgid "Error Closing SPU Plugin"
+msgstr "無法關閉 SPU 外掛"
+
+#: ../win32/gui/plugin.c:315
+msgid "Error Closing PAD1 Plugin"
+msgstr "無法關閉 PAD1 外掛"
+
+#: ../win32/gui/plugin.c:317
+msgid "Error Closing PAD2 Plugin"
+msgstr "無法關閉 PAD2 外掛!"
+
+#: ../win32/gui/plugin.c:335
+#, c-format
+msgid "CDRinit error: %d"
+msgstr "CDRinit 錯誤: %d"
+
+#: ../win32/gui/plugin.c:337
+#, c-format
+msgid "GPUinit error: %d"
+msgstr "GPUinit 錯誤: %d"
+
+#: ../win32/gui/plugin.c:339
+#, c-format
+msgid "SPUinit error: %d"
+msgstr "SPUinit 錯誤: %d"
+
+#: ../win32/gui/plugin.c:341
+#, c-format
+msgid "PAD1init error: %d"
+msgstr "PAD1init 錯誤: %d"
+
+#: ../win32/gui/plugin.c:343
+#, c-format
+msgid "PAD2init error: %d"
+msgstr "PAD2init 錯誤: %d"
+
+#: ../win32/gui/plugin.c:346
+#, c-format
+msgid "NETinit error: %d"
+msgstr "NETinit 錯誤: %d"
+
+#: ../win32/gui/WndMain.c:74
+msgid "Arabic"
+msgstr "阿拉伯語"
+
+#: ../win32/gui/WndMain.c:75
+msgid "Catalan"
+msgstr "加泰隆尼亞語"
+
+#: ../win32/gui/WndMain.c:76
+msgid "German"
+msgstr "德語"
+
+#: ../win32/gui/WndMain.c:77
+msgid "Greek"
+msgstr "希臘語"
+
+#: ../win32/gui/WndMain.c:78
+#: ../win32/gui/WndMain.c:1483
+#: ../win32/gui/WndMain.c:1485
+msgid "English"
+msgstr "英語"
+
+#: ../win32/gui/WndMain.c:79
+msgid "Spanish"
+msgstr "西班牙語"
+
+#: ../win32/gui/WndMain.c:80
+msgid "French"
+msgstr "法語"
+
+#: ../win32/gui/WndMain.c:81
+msgid "Italian"
+msgstr "意大利語"
+
+#: ../win32/gui/WndMain.c:82
+msgid "Portuguese"
+msgstr "葡萄牙語"
+
+#: ../win32/gui/WndMain.c:83
+msgid "Romanian"
+msgstr "羅馬尼亞語"
+
+#: ../win32/gui/WndMain.c:84
+msgid "Russian"
+msgstr "俄語"
+
+#: ../win32/gui/WndMain.c:85
+msgid "Simplified Chinese"
+msgstr "簡體中文"
+
+#: ../win32/gui/WndMain.c:86
+msgid "Traditional Chinese"
+msgstr "繁體中文"
+
+#: ../win32/gui/WndMain.c:87
+msgid "Japanese"
+msgstr "日語"
+
+#: ../win32/gui/WndMain.c:88
+msgid "Korean"
+msgstr "韓國語"
+
+#: ../win32/gui/WndMain.c:129
+msgid "Pcsx needs to be configured"
+msgstr "Pcsx 需要被配置。"
+
+#: ../win32/gui/WndMain.c:133
+msgid "Pcsx now will quit, restart it"
+msgstr "PCSX 將關閉，請重新啟動它。"
+
+#: ../win32/gui/WndMain.c:253
+#: ../win32/gui/WndMain.c:305
+msgid "PCSX State Format"
+msgstr "PCSX 記錄格式"
+
+#: ../win32/gui/WndMain.c:280
+#, c-format
+msgid "*PCSX*: Loaded State %s"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:281
+#, c-format
+msgid "*PCSX*: Error Loading State %s"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:332
+#, c-format
+msgid "*PCSX*: Saved State %s"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:333
+#, c-format
+msgid "*PCSX*: Error Saving State %s"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:398
+msgid "Running BIOS is not supported with Internal HLE Bios."
+msgstr "內部 HLE BIOS 不支援直接執行。"
+
+#: ../win32/gui/WndMain.c:628
+msgid "Game ID"
+msgstr "遊戲 ID"
+
+#: ../win32/gui/WndMain.c:634
+msgid "Game"
+msgstr "遊戲"
+
+#: ../win32/gui/WndMain.c:808
+msgid "mid link block"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:811
+msgid "terminiting link block"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:916
+msgid "Memcard Manager"
+msgstr "記憶卡管理器"
+
+#: ../win32/gui/WndMain.c:920
+#: ../win32/gui/WndMain.c:923
+msgid "Select Mcd"
+msgstr "選擇"
+
+#: ../win32/gui/WndMain.c:921
+#: ../win32/gui/WndMain.c:924
+msgid "Format Mcd"
+msgstr "格式化"
+
+#: ../win32/gui/WndMain.c:922
+#: ../win32/gui/WndMain.c:925
+msgid "Reload Mcd"
+msgstr "重新加載"
+
+#: ../win32/gui/WndMain.c:926
+msgid "-> Copy ->"
+msgstr "-> 複制 ->"
+
+#: ../win32/gui/WndMain.c:927
+msgid "<- Copy <-"
+msgstr "<- 複制 <-"
+
+#: ../win32/gui/WndMain.c:928
+msgid "Paste"
+msgstr "粘貼"
+
+#: ../win32/gui/WndMain.c:929
+msgid "<- Un/Delete"
+msgstr "<- 刪除/恢複"
+
+#: ../win32/gui/WndMain.c:930
+msgid "Un/Delete ->"
+msgstr "刪除/恢複 ->"
+
+#: ../win32/gui/WndMain.c:932
+msgid "Memory Card 1"
+msgstr "記憶卡 1"
+
+#: ../win32/gui/WndMain.c:933
+msgid "Memory Card 2"
+msgstr "記憶卡 2"
+
+#: ../win32/gui/WndMain.c:988
+msgid "Are you sure you want to paste this selection?"
+msgstr "是否確認粘貼此選中內容?"
+
+#: ../win32/gui/WndMain.c:988
+#: ../win32/gui/WndMain.c:1099
+#: ../win32/gui/WndMain.c:1106
+msgid "Confirmation"
+msgstr "確認"
+
+#: ../win32/gui/WndMain.c:1099
+#: ../win32/gui/WndMain.c:1106
+msgid "Are you sure you want to format this Memory Card?"
+msgstr "是否確認格式化此記憶卡?"
+
+#: ../win32/gui/WndMain.c:1152
+msgid "Cpu Config"
+msgstr "CPU 配置"
+
+#: ../win32/gui/WndMain.c:1157
+msgid "Disable Xa Decoding"
+msgstr "禁用 XA 解碼"
+
+#: ../win32/gui/WndMain.c:1158
+msgid "Sio Irq Always Enabled"
+msgstr "SIO IRQ 總是啟用"
+
+#: ../win32/gui/WndMain.c:1159
+msgid "Black && White Movies"
+msgstr "黑白電影"
+
+#: ../win32/gui/WndMain.c:1160
+msgid "Disable Cd audio"
+msgstr "禁用 CD 音頻"
+
+#: ../win32/gui/WndMain.c:1162
+msgid "Enable Interpreter Cpu"
+msgstr "啟用解釋執行 CPU"
+
+#: ../win32/gui/WndMain.c:1164
+msgid "Spu Irq Always Enabled"
+msgstr "SPU IRQ 總是啟用"
+
+#: ../win32/gui/WndMain.c:1168
+msgid "Options"
+msgstr "選項"
+
+#: ../win32/gui/WndMain.c:1169
+msgid "Psx System Type"
+msgstr "Psx 系統類型"
+
+#: ../win32/gui/WndMain.c:1241
+msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
+msgstr "Psx 記憶卡格式 (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
+
+#: ../win32/gui/WndMain.c:1246
+msgid "Psx Memory Card (*.mcr;*.mc)"
+msgstr "Psx 記憶卡 (*.mcr;*.mc)"
+
+#: ../win32/gui/WndMain.c:1251
+msgid "CVGS Memory Card (*.mem;*.vgs)"
+msgstr "VGS 記憶卡 (*.mem;*.vgs)"
+
+#: ../win32/gui/WndMain.c:1256
+msgid "Bleem Memory Card (*.mcd)"
+msgstr "Bleem 記憶卡 (*.mcd)"
+
+#: ../win32/gui/WndMain.c:1261
+msgid "DexDrive Memory Card (*.gme)"
+msgstr "DexDrive 記憶卡 (*.gme)"
+
+#: ../win32/gui/WndMain.c:1266
+msgid "DataDeck Memory Card (*.ddf)"
+msgstr "DataDeck 記憶卡 (*.ddl)"
+
+#: ../win32/gui/WndMain.c:1310
+msgid "Psx Exe Format"
+msgstr "PSX EXE 格式"
+
+#: ../win32/gui/WndMain.c:1347
+msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin)"
+msgstr "Psx 鏡像檔 (*.iso;*.mdf;*.img;*.bin)"
+
+#: ../win32/gui/WndMain.c:1421
+msgid "&File"
+msgstr "檔案(&F)"
+
+#: ../win32/gui/WndMain.c:1422
+msgid "E&xit"
+msgstr "離開(&X)"
+
+#: ../win32/gui/WndMain.c:1424
+msgid "&States"
+msgstr "記錄(&S)"
+
+#: ../win32/gui/WndMain.c:1426
+msgid "Run &EXE"
+msgstr "執行 EXE(&E)"
+
+#: ../win32/gui/WndMain.c:1427
+msgid "Run &BIOS"
+msgstr "執行 BIOS(&B)"
+
+#: ../win32/gui/WndMain.c:1428
+msgid "Run &ISO"
+msgstr "執行 ISO(&I)"
+
+#: ../win32/gui/WndMain.c:1429
+msgid "Run &CD"
+msgstr "執行光碟(&C)"
+
+#: ../win32/gui/WndMain.c:1430
+msgid "&Save"
+msgstr "存儲(&S)"
+
+#: ../win32/gui/WndMain.c:1431
+msgid "&Load"
+msgstr "讀取(&L)"
+
+#: ../win32/gui/WndMain.c:1432
+#: ../win32/gui/WndMain.c:1438
+msgid "&Other..."
+msgstr "其它(&O)..."
+
+#: ../win32/gui/WndMain.c:1433
+#: ../win32/gui/WndMain.c:1439
+msgid "Slot &5"
+msgstr "記錄 5(&5)"
+
+#: ../win32/gui/WndMain.c:1434
+#: ../win32/gui/WndMain.c:1440
+msgid "Slot &4"
+msgstr "記錄 4(&4)"
+
+#: ../win32/gui/WndMain.c:1435
+#: ../win32/gui/WndMain.c:1441
+msgid "Slot &3"
+msgstr "記錄 3(&3)"
+
+#: ../win32/gui/WndMain.c:1436
+#: ../win32/gui/WndMain.c:1442
+msgid "Slot &2"
+msgstr "記錄 2(&2)"
+
+#: ../win32/gui/WndMain.c:1437
+#: ../win32/gui/WndMain.c:1443
+msgid "Slot &1"
+msgstr "記錄 1(&1)"
+
+#: ../win32/gui/WndMain.c:1445
+msgid "&Emulator"
+msgstr "模擬器(&E)"
+
+#: ../win32/gui/WndMain.c:1446
+msgid "S&witch ISO"
+msgstr "更換 ISO(_W)"
+
+#: ../win32/gui/WndMain.c:1448
+msgid "Re&set"
+msgstr "複位(&S)"
+
+#: ../win32/gui/WndMain.c:1449
+msgid "&Run"
+msgstr "執行(&R)"
+
+#: ../win32/gui/WndMain.c:1451
+msgid "&Configuration"
+msgstr "配置(&C)"
+
+#: ../win32/gui/WndMain.c:1452
+msgid "&Memory cards"
+msgstr "記憶卡(&M)"
+
+#: ../win32/gui/WndMain.c:1453
+msgid "C&PU"
+msgstr "CPU(&P)"
+
+#: ../win32/gui/WndMain.c:1455
+msgid "&NetPlay"
+msgstr "聯網遊戲(&N)"
+
+#: ../win32/gui/WndMain.c:1457
+msgid "&Controllers"
+msgstr "控制器(&C)"
+
+#: ../win32/gui/WndMain.c:1458
+msgid "CD-&ROM"
+msgstr "CD-ROM(&R)"
+
+#: ../win32/gui/WndMain.c:1459
+msgid "&Sound"
+msgstr "聲音(&S)"
+
+#: ../win32/gui/WndMain.c:1460
+msgid "&Graphics"
+msgstr "圖像(&G)"
+
+#: ../win32/gui/WndMain.c:1462
+msgid "&Plugins && Bios"
+msgstr "外掛及 BIOS(&P)"
+
+#: ../win32/gui/WndMain.c:1464
+msgid "&Language"
+msgstr "語言(&L)"
+
+#: ../win32/gui/WndMain.c:1488
+msgid "&Help"
+msgstr "說明(&H)"
+
+#: ../win32/gui/WndMain.c:1489
+msgid "&About..."
+msgstr "關於(&A)..."
+
+#: ../win32/gui/WndMain.c:1666
+msgid "Pcsx Msg"
+msgstr "Pcsx 消息"
+
+#: ../win32/gui/WndMain.c:1669
+msgid "Error Loading Symbol"
+msgstr "無法加載符號"
+
+#~ msgid ""
+#~ "PCSX is licensed under the GNU GPL; see the included COPYING file for "
+#~ "more detail."
+#~ msgstr "PCSX 在 GNU GPL 條款下發布；請參看包含的 COPYING 檔案。"
+#~ msgid "This plugin reports that it should work correctly."
+#~ msgstr "此插件報告其可正常工作。"
+#~ msgid "This plugin reports that it won't work correctly."
+#~ msgstr "此插件報告其不可正常工作。"
+#~ msgid "Could not load Cdrom"
+#~ msgstr "無法加載光碟"
+#~ msgid "Could not open plugins directory: '%s'\n"
+#~ msgstr "無法開啟插件目錄: \"%s\"\n"
+#~ msgid "Run CD Though &Bios"
+#~ msgstr "使用 BIOS 運行光碟(&B)"
+#~ msgid "Run CD Through BIOS"
+#~ msgstr "使用 BIOS 運行光碟"
+

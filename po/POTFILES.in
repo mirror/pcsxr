@@ -1,0 +1,8 @@
+gui/Gtk2Gui.c
+gui/LnxMain.c
+gui/Plugin.c
+data/pcsx.glade2
+emulator/Misc.c
+emulator/PsxMem.c
+emulator/Sio.c
+emulator/plugins.c

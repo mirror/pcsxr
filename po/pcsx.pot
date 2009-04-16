@@ -1,0 +1,1439 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-06 12:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../data/pcsx.glade2:9
+msgid "PCSX"
+msgstr ""
+
+#: ../data/pcsx.glade2:23
+msgid "_File"
+msgstr ""
+
+#: ../data/pcsx.glade2:30
+msgid "Run _CD"
+msgstr ""
+
+#: ../data/pcsx.glade2:46
+msgid "Run _ISO"
+msgstr ""
+
+#: ../data/pcsx.glade2:62
+msgid "Run _BIOS"
+msgstr ""
+
+#: ../data/pcsx.glade2:78
+msgid "Run _EXE"
+msgstr ""
+
+#: ../data/pcsx.glade2:99
+msgid "_States"
+msgstr ""
+
+#: ../data/pcsx.glade2:106
+msgid "_Load"
+msgstr ""
+
+#: ../data/pcsx.glade2:113 ../data/pcsx.glade2:192
+msgid "Slot _1"
+msgstr ""
+
+#: ../data/pcsx.glade2:122 ../data/pcsx.glade2:201
+msgid "Slot _2"
+msgstr ""
+
+#: ../data/pcsx.glade2:131 ../data/pcsx.glade2:210
+msgid "Slot _3"
+msgstr ""
+
+#: ../data/pcsx.glade2:140 ../data/pcsx.glade2:219
+msgid "Slot _4"
+msgstr ""
+
+#: ../data/pcsx.glade2:149 ../data/pcsx.glade2:228
+msgid "Slot _5"
+msgstr ""
+
+#: ../data/pcsx.glade2:158 ../data/pcsx.glade2:237
+msgid "_Other..."
+msgstr ""
+
+#: ../data/pcsx.glade2:185
+msgid "_Save"
+msgstr ""
+
+#: ../data/pcsx.glade2:280
+msgid "E_xit"
+msgstr ""
+
+#: ../data/pcsx.glade2:300
+msgid "_Emulator"
+msgstr ""
+
+#: ../data/pcsx.glade2:307
+msgid "_Run"
+msgstr ""
+
+#: ../data/pcsx.glade2:322
+msgid "Re_set"
+msgstr ""
+
+#: ../data/pcsx.glade2:342
+msgid "S_witch ISO"
+msgstr ""
+
+#: ../data/pcsx.glade2:362
+msgid "_Configuration"
+msgstr ""
+
+#: ../data/pcsx.glade2:369
+msgid "_Plugins & BIOS"
+msgstr ""
+
+#: ../data/pcsx.glade2:390
+msgid "_CPU"
+msgstr ""
+
+#: ../data/pcsx.glade2:405
+msgid "_Memory Cards"
+msgstr ""
+
+#: ../data/pcsx.glade2:421
+msgid "_Netplay"
+msgstr ""
+
+#: ../data/pcsx.glade2:440
+msgid "Chea_t"
+msgstr ""
+
+#: ../data/pcsx.glade2:448
+msgid "_Browse"
+msgstr ""
+
+#: ../data/pcsx.glade2:462
+msgid "_Search"
+msgstr ""
+
+#: ../data/pcsx.glade2:480
+msgid "_Help"
+msgstr ""
+
+#: ../data/pcsx.glade2:487
+msgid "_About PCSX"
+msgstr ""
+
+#: ../data/pcsx.glade2:523 ../gui/Gtk2Gui.c:385
+msgid "Configure PCSX"
+msgstr ""
+
+#: ../data/pcsx.glade2:623
+msgid "Select Folder to Search"
+msgstr ""
+
+#: ../data/pcsx.glade2:639
+msgid "Search in:"
+msgstr ""
+
+#: ../data/pcsx.glade2:912
+msgid "Graphics:"
+msgstr ""
+
+#: ../data/pcsx.glade2:925
+msgid "Sound:"
+msgstr ""
+
+#: ../data/pcsx.glade2:940
+msgid "Controller 1:   "
+msgstr ""
+
+#: ../data/pcsx.glade2:955
+msgid "Controller 2:"
+msgstr ""
+
+#: ../data/pcsx.glade2:970
+msgid "CD-ROM:"
+msgstr ""
+
+#: ../data/pcsx.glade2:1008
+msgid "<b>Plugins</b>"
+msgstr ""
+
+#: ../data/pcsx.glade2:1067
+msgid "<b>BIOS</b>"
+msgstr ""
+
+#: ../data/pcsx.glade2:1112
+msgid "Configure CPU"
+msgstr ""
+
+#: ../data/pcsx.glade2:1139
+msgid "Enable Debugger"
+msgstr ""
+
+#: ../data/pcsx.glade2:1157
+msgid "SPU IRQ Always Enabled"
+msgstr ""
+
+#: ../data/pcsx.glade2:1173
+msgid "Black & White Movies"
+msgstr ""
+
+#: ../data/pcsx.glade2:1189 ../win32/gui/WndMain.c:1163
+msgid "Enable Console Output"
+msgstr ""
+
+#: ../data/pcsx.glade2:1207
+msgid "Enable Interpreter CPU"
+msgstr ""
+
+#: ../data/pcsx.glade2:1225 ../gui/Plugin.c:204
+#, c-format
+msgid "SIO IRQ Always Enabled"
+msgstr ""
+
+#: ../data/pcsx.glade2:1241
+msgid "Disable CD Audio"
+msgstr ""
+
+#: ../data/pcsx.glade2:1257
+msgid "Disable XA Decoding"
+msgstr ""
+
+#: ../data/pcsx.glade2:1273 ../win32/gui/WndMain.c:1165
+msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
+msgstr ""
+
+#: ../data/pcsx.glade2:1288 ../win32/gui/WndMain.c:1166
+msgid "InuYasha Sengoku Battle Fix"
+msgstr ""
+
+#: ../data/pcsx.glade2:1304
+msgid "<b>Options</b>"
+msgstr ""
+
+#: ../data/pcsx.glade2:1327 ../win32/gui/WndMain.c:1161
+msgid "Autodetect"
+msgstr ""
+
+#: ../data/pcsx.glade2:1341
+msgid ""
+"NTSC\n"
+"PAL"
+msgstr ""
+
+#: ../data/pcsx.glade2:1355
+msgid "<b>System Type</b>"
+msgstr ""
+
+#: ../data/pcsx.glade2:1397
+msgid "Configure NetPlay"
+msgstr ""
+
+#: ../data/pcsx.glade2:1479
+msgid "<b>NetPlay</b>"
+msgstr ""
+
+#: ../data/pcsx.glade2:1523
+msgid "Configure Memory Cards"
+msgstr ""
+
+#: ../data/pcsx.glade2:1593 ../data/pcsx.glade2:1957
+msgid "Format"
+msgstr ""
+
+#: ../data/pcsx.glade2:1637 ../data/pcsx.glade2:2001
+msgid "Reload"
+msgstr ""
+
+#: ../data/pcsx.glade2:1679
+msgid "<b>Memory Card 1</b>"
+msgstr ""
+
+#: ../data/pcsx.glade2:1734 ../data/pcsx.glade2:1778
+msgid "Copy"
+msgstr ""
+
+#: ../data/pcsx.glade2:1825 ../data/pcsx.glade2:1872
+msgid "Un/Delete"
+msgstr ""
+
+#: ../data/pcsx.glade2:2043
+msgid "<b>Memory Card 2</b>"
+msgstr ""
+
+#: ../data/pcsx.glade2:2097
+msgid ""
+"(C) 1999-2003  PCSX Team\n"
+"(C) 2005-2006 Ryan Schultz\n"
+"(C) 2005-2006 Andrew Burton\n"
+"(C) 2008-2009 Wei Mingzhi"
+msgstr ""
+
+#: ../data/pcsx.glade2:2101
+msgid "A PlayStation emulator."
+msgstr ""
+
+#: ../data/pcsx.glade2:2103
+msgid "PCSX Reloaded"
+msgstr ""
+
+#: ../data/pcsx.glade2:2104
+msgid ""
+"This program is free software; you can redistribute it\n"
+"and/or modify it under the terms of the GNU General\n"
+"Public License as published by the Free Software\n"
+"Foundation; either version 2 of the License, or (at your\n"
+"option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be\n"
+"useful, but WITHOUT ANY WARRANTY; without even\n"
+"the implied warranty of MERCHANTABILITY or\n"
+"FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General\n"
+"Public License along with this program; if not, write to\n"
+"the Free Software Foundation, Inc."
+msgstr ""
+
+#: ../data/pcsx.glade2:2133
+msgid "translator-credits"
+msgstr ""
+
+#: ../data/pcsx.glade2:2152
+msgid "Edit Cheat Codes"
+msgstr ""
+
+#: ../data/pcsx.glade2:2188
+msgid "<b>Cheat Codes</b>"
+msgstr ""
+
+#: ../data/pcsx.glade2:2206
+msgid "gtk-add"
+msgstr ""
+
+#: ../data/pcsx.glade2:2216
+msgid "gtk-edit"
+msgstr ""
+
+#: ../data/pcsx.glade2:2229
+msgid "gtk-delete"
+msgstr ""
+
+#: ../data/pcsx.glade2:2256 ../gui/Cheat.c:456
+msgid "Enable"
+msgstr ""
+
+#: ../data/pcsx.glade2:2288
+msgid "Disable"
+msgstr ""
+
+#: ../data/pcsx.glade2:2306
+msgid "gtk-open"
+msgstr ""
+
+#: ../data/pcsx.glade2:2319
+msgid "gtk-save-as"
+msgstr ""
+
+#: ../data/pcsx.glade2:2348
+msgid "gtk-close"
+msgstr ""
+
+#: ../libpcsxcore/cdriso.c:125
+#, c-format
+msgid "Could not open %s.\n"
+msgstr ""
+
+#: ../libpcsxcore/cheat.c:335 ../libpcsxcore/cheat.c:454
+msgid "(Untitled)"
+msgstr ""
+
+#: ../libpcsxcore/misc.c:372
+#, c-format
+msgid "Error opening file: %s"
+msgstr ""
+
+#: ../libpcsxcore/misc.c:390
+msgid "CPE files not supported."
+msgstr ""
+
+#: ../libpcsxcore/misc.c:394
+msgid "COFF files not supported."
+msgstr ""
+
+#: ../libpcsxcore/misc.c:398
+msgid "This file does not appear to be a valid PSX file."
+msgstr ""
+
+#: ../libpcsxcore/plugins.c:33
+#, c-format
+msgid "Error loading %s: %s"
+msgstr ""
+
+#: ../libpcsxcore/plugins.c:162
+#, c-format
+msgid "Could not load GPU plugin %s!"
+msgstr ""
+
+#: ../libpcsxcore/plugins.c:228
+#, c-format
+msgid "Could not load CD-ROM plugin %s!"
+msgstr ""
+
+#: ../libpcsxcore/plugins.c:467
+#, c-format
+msgid "Could not load SPU plugin %s!"
+msgstr ""
+
+#: ../libpcsxcore/plugins.c:615
+#, c-format
+msgid "Could not load Controller 1 plugin %s!"
+msgstr ""
+
+#: ../libpcsxcore/plugins.c:669
+#, c-format
+msgid "Could not load Controller 2 plugin %s!"
+msgstr ""
+
+#: ../libpcsxcore/plugins.c:712
+#, c-format
+msgid "Could not load NetPlay plugin %s!"
+msgstr ""
+
+#: ../libpcsxcore/plugins.c:775
+#, c-format
+msgid "Error initializing CD-ROM plugin: %d"
+msgstr ""
+
+#: ../libpcsxcore/plugins.c:777
+#, c-format
+msgid "Error initializing GPU plugin: %d"
+msgstr ""
+
+#: ../libpcsxcore/plugins.c:779
+#, c-format
+msgid "Error initializing SPU plugin: %d"
+msgstr ""
+
+#: ../libpcsxcore/plugins.c:781
+#, c-format
+msgid "Error initializing Controller 1 plugin: %d"
+msgstr ""
+
+#: ../libpcsxcore/plugins.c:783
+#, c-format
+msgid "Error initializing Controller 2 plugin: %d"
+msgstr ""
+
+#: ../libpcsxcore/plugins.c:787
+#, c-format
+msgid "Error initializing NetPlay plugin: %d"
+msgstr ""
+
+#: ../libpcsxcore/plugins.c:790
+msgid "Plugins loaded.\n"
+msgstr ""
+
+#: ../libpcsxcore/psxmem.c:69
+msgid "Error allocating memory!"
+msgstr ""
+
+#: ../libpcsxcore/psxmem.c:109
+#, c-format
+msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
+msgstr ""
+
+#: ../libpcsxcore/r3000a.c:34
+#, c-format
+msgid "Running PCSX Version %s (%s).\n"
+msgstr ""
+
+#: ../libpcsxcore/sio.c:99
+msgid "Connection closed!\n"
+msgstr ""
+
+#: ../libpcsxcore/sio.c:322
+#, c-format
+msgid "No memory card value was specified - creating a default card %s\n"
+msgstr ""
+
+#: ../libpcsxcore/sio.c:326
+#, c-format
+msgid "The memory card %s doesn't exist - creating it\n"
+msgstr ""
+
+#: ../libpcsxcore/sio.c:342
+#, c-format
+msgid "Memory card %s failed to load!\n"
+msgstr ""
+
+#: ../libpcsxcore/sio.c:346
+#, c-format
+msgid "Loading memory card %s\n"
+msgstr ""
+
+#: ../gui/Cheat.c:49
+msgid " Yes"
+msgstr ""
+
+#: ../gui/Cheat.c:118
+msgid "Add New Cheat"
+msgstr ""
+
+#: ../gui/Cheat.c:126 ../gui/Cheat.c:210
+msgid "Cheat Description:"
+msgstr ""
+
+#: ../gui/Cheat.c:134 ../gui/Cheat.c:219
+msgid "Cheat Code:"
+msgstr ""
+
+#: ../gui/Cheat.c:164 ../gui/Cheat.c:259 ../gui/LnxMain.c:359
+msgid "Error"
+msgstr ""
+
+#: ../gui/Cheat.c:164 ../gui/Cheat.c:259
+msgid "Invalid cheat code!"
+msgstr ""
+
+#: ../gui/Cheat.c:202
+msgid "Edit Cheat"
+msgstr ""
+
+#: ../gui/Cheat.c:357
+msgid "Open Cheat File"
+msgstr ""
+
+#: ../gui/Cheat.c:367 ../gui/Cheat.c:407
+msgid "PCSX Cheat Code Files (*.cht)"
+msgstr ""
+
+#: ../gui/Cheat.c:372 ../gui/Gtk2Gui.c:626 ../win32/gui/WndMain.c:1271
+#: ../win32/gui/WndMain.c:1352
+msgid "All Files"
+msgstr ""
+
+#: ../gui/Cheat.c:397
+msgid "Save Cheat File"
+msgstr ""
+
+#: ../gui/Cheat.c:412
+msgid "All Files (*.*)"
+msgstr ""
+
+#: ../gui/Cheat.c:445 ../gui/Gtk2Gui.c:377 ../gui/Gtk2Gui.c:1013
+msgid "Error: Glade interface could not be loaded!"
+msgstr ""
+
+#: ../gui/Cheat.c:450
+msgid "Cheat Codes"
+msgstr ""
+
+#: ../gui/Cheat.c:462
+msgid "Description"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:471
+msgid "Select PSX EXE File"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:481
+msgid "PlayStation Executable Files"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:521
+msgid "Not a valid PSX file"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:521
+msgid "The file does not appear to be a valid Playstation executable"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:552 ../gui/Gtk2Gui.c:675 ../gui/Gtk2Gui.c:757
+msgid "CD ROM failed"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:552 ../gui/Gtk2Gui.c:675 ../gui/Gtk2Gui.c:757
+#: ../win32/gui/WndMain.c:382 ../win32/gui/WndMain.c:431
+#: ../win32/gui/WndMain.c:507
+msgid "The CD does not appear to be a valid Playstation CD"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:560 ../gui/Gtk2Gui.c:683 ../gui/Gtk2Gui.c:765
+#: ../win32/gui/WndMain.c:388 ../win32/gui/WndMain.c:437
+#: ../win32/gui/WndMain.c:513
+msgid "Could not load CD-ROM!"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:560
+msgid "The CD ROM could not be loaded"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:575
+msgid "Could not run BIOS"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:575
+msgid "Running BIOS is not supported with Internal HLE BIOS."
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:605
+msgid "Open PSX Disc Image File"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:621
+msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:872
+#, c-format
+msgid "Loaded state %s."
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:877
+#, c-format
+msgid "Error loading state %s!"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:888
+#, c-format
+msgid "Saved state %s."
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:890
+#, c-format
+msgid "Error saving state %s!"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:924 ../gui/Gtk2Gui.c:951
+msgid "Select State File"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1055
+msgid "Icon"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1061 ../win32/gui/WndMain.c:616
+msgid "Title"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1067 ../win32/gui/WndMain.c:622
+msgid "Status"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1073
+msgid "ID"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1079
+msgid "Name"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1141 ../win32/gui/WndMain.c:819
+msgid "Deleted"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1143 ../gui/Gtk2Gui.c:1147 ../win32/gui/WndMain.c:820
+#: ../win32/gui/WndMain.c:823
+msgid "Free"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1145 ../win32/gui/WndMain.c:822
+msgid "Used"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1239
+msgid "Format this Memory Card?"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1241
+msgid ""
+"If you format the memory card, the card will be empty, and any existing data "
+"overwritten."
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1244
+msgid "Format card"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1359
+msgid "No space available in the target memory card!"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1504
+msgid "Memory Card Manager"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1773
+msgid "No configuration required"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:1773
+msgid "This plugin doesn't need to be configured."
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:2032
+#, c-format
+msgid "Could not open BIOS directory: '%s'\n"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:2064 ../gui/Gtk2Gui.c:2158 ../gui/LnxMain.c:145
+#, c-format
+msgid "Could not open directory: '%s'\n"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:2127
+msgid "Internal HLE Bios"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:2219
+msgid "Notice"
+msgstr ""
+
+#: ../gui/LnxMain.c:64
+#, c-format
+msgid "Creating memory card: %s\n"
+msgstr ""
+
+#: ../gui/LnxMain.c:261
+msgid ""
+" pcsx [options] [file]\n"
+"\toptions:\n"
+"\t-runcd\t\tRuns CD-ROM\n"
+"\t-cdfile FILE\tRuns a CD image file\n"
+"\t-nogui\t\tDon't open the GTK GUI\n"
+"\t-cfg FILE\tLoads desired configuration file (default: ~/.pcsx/pcsx.cfg)\n"
+"\t-psxout\t\tEnable PSX output\n"
+"\t-load STATENUM\tLoads savestate STATENUM (1-5)\n"
+"\t-h -help\tDisplay this message\n"
+"\tfile\t\tLoads file\n"
+msgstr ""
+
+#: ../gui/LnxMain.c:299
+#, c-format
+msgid ""
+"PCSX cannot be configured without using the GUI -- you should restart "
+"without -nogui.\n"
+msgstr ""
+
+#: ../gui/LnxMain.c:359
+msgid "Failed loading plugins!"
+msgstr ""
+
+#: ../gui/LnxMain.c:376
+#, c-format
+msgid "Could not load CD-ROM!\n"
+msgstr ""
+
+#: ../gui/LnxMain.c:415
+#, c-format
+msgid "PSX emulator couldn't be initialized.\n"
+msgstr ""
+
+#: ../gui/Plugin.c:205
+#, c-format
+msgid "SIO IRQ Not Always Enabled"
+msgstr ""
+
+#: ../gui/Plugin.c:211
+#, c-format
+msgid "Black & White Mdecs Only Enabled"
+msgstr ""
+
+#: ../gui/Plugin.c:212
+#, c-format
+msgid "Black & White Mdecs Only Disabled"
+msgstr ""
+
+#: ../gui/Plugin.c:218
+#, c-format
+msgid "XA Enabled"
+msgstr ""
+
+#: ../gui/Plugin.c:219
+#, c-format
+msgid "XA Disabled"
+msgstr ""
+
+#: ../gui/Plugin.c:285
+msgid "Error opening CD-ROM plugin!"
+msgstr ""
+
+#: ../gui/Plugin.c:287
+msgid "Error opening SPU plugin!"
+msgstr ""
+
+#: ../gui/Plugin.c:290
+msgid "Error opening GPU plugin!"
+msgstr ""
+
+#: ../gui/Plugin.c:292
+msgid "Error opening Controller 1 plugin!"
+msgstr ""
+
+#: ../gui/Plugin.c:294
+msgid "Error opening Controller 2 plugin!"
+msgstr ""
+
+#: ../gui/Plugin.c:374
+msgid "Error closing CD-ROM plugin!"
+msgstr ""
+
+#: ../gui/Plugin.c:376
+msgid "Error closing SPU plugin!"
+msgstr ""
+
+#: ../gui/Plugin.c:378
+msgid "Error closing Controller 1 Plugin!"
+msgstr ""
+
+#: ../gui/Plugin.c:380
+msgid "Error closing Controller 2 plugin!"
+msgstr ""
+
+#: ../gui/Plugin.c:382
+msgid "Error closing GPU plugin!"
+msgstr ""
+
+#: ../win32/gui/AboutDlg.c:26
+msgid ""
+"PCSX - A PlayStation Emulator\n"
+"\n"
+"Original Authors:\n"
+"main coder: linuzappz\n"
+"co-coders: shadow\n"
+"ex-coders: Nocomp, Pete Bernett, nik3d\n"
+"Webmaster: AkumaX"
+msgstr ""
+
+#: ../win32/gui/AboutDlg.c:35
+msgid ""
+"PCSX-df Authors:\n"
+"Ryan Schultz, Andrew Burton, Stephen Chao,\n"
+"Marcus Comstedt, Stefan Sikora\n"
+"\n"
+"PCSX Reloaded By:\n"
+"Wei Mingzhi\n"
+"\n"
+"http://www.codeplex.com/pcsxr"
+msgstr ""
+
+#: ../win32/gui/AboutDlg.c:46
+msgid "About"
+msgstr ""
+
+#: ../win32/gui/AboutDlg.c:48 ../win32/gui/AboutDlg.c:52
+#: ../win32/gui/ConfigurePlugins.c:462 ../win32/gui/ConfigurePlugins.c:593
+#: ../win32/gui/WndMain.c:918 ../win32/gui/WndMain.c:1154
+msgid "OK"
+msgstr ""
+
+#: ../win32/gui/AboutDlg.c:49
+msgid "PCSX EMU\n"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:385
+msgid "This plugin reports that should work correctly"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:386
+msgid "This plugin reports that should not work correctly"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:460
+msgid "Configuration"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:463 ../win32/gui/ConfigurePlugins.c:594
+#: ../win32/gui/WndMain.c:919 ../win32/gui/WndMain.c:1155
+msgid "Cancel"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:464
+msgid "Graphics"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:465
+msgid "First Controller"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:466
+msgid "Second Controller"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:467
+msgid "Sound"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:468
+msgid "Cdrom"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:469
+msgid "Bios"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:470
+msgid "Set Bios Directory"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:471
+msgid "Set Plugins Directory"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:472 ../win32/gui/ConfigurePlugins.c:475
+#: ../win32/gui/ConfigurePlugins.c:478 ../win32/gui/ConfigurePlugins.c:481
+#: ../win32/gui/ConfigurePlugins.c:484 ../win32/gui/ConfigurePlugins.c:596
+msgid "Configure..."
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:473 ../win32/gui/ConfigurePlugins.c:476
+#: ../win32/gui/ConfigurePlugins.c:479 ../win32/gui/ConfigurePlugins.c:482
+#: ../win32/gui/ConfigurePlugins.c:485 ../win32/gui/ConfigurePlugins.c:597
+msgid "Test..."
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:474 ../win32/gui/ConfigurePlugins.c:477
+#: ../win32/gui/ConfigurePlugins.c:480 ../win32/gui/ConfigurePlugins.c:483
+#: ../win32/gui/ConfigurePlugins.c:486 ../win32/gui/ConfigurePlugins.c:598
+msgid "About..."
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:591
+msgid "NetPlay Configuration"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:595
+msgid "NetPlay"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:599
+msgid ""
+"Note: The NetPlay Plugin Directory should be the same as the other Plugins."
+msgstr ""
+
+#: ../win32/gui/plugin.c:90 ../win32/gui/WndMain.c:235
+#, c-format
+msgid "*PCSX*: Saved State %d"
+msgstr ""
+
+#: ../win32/gui/plugin.c:91 ../win32/gui/WndMain.c:236
+#, c-format
+msgid "*PCSX*: Error Saving State %d"
+msgstr ""
+
+#: ../win32/gui/plugin.c:107 ../win32/gui/WndMain.c:214
+#, c-format
+msgid "*PCSX*: Loaded State %d"
+msgstr ""
+
+#: ../win32/gui/plugin.c:108 ../win32/gui/WndMain.c:215
+#, c-format
+msgid "*PCSX*: Error Loading State %d"
+msgstr ""
+
+#: ../win32/gui/plugin.c:119
+#, c-format
+msgid "*PCSX*: Sio Irq Always Enabled"
+msgstr ""
+
+#: ../win32/gui/plugin.c:120
+#, c-format
+msgid "*PCSX*: Sio Irq Not Always Enabled"
+msgstr ""
+
+#: ../win32/gui/plugin.c:127
+#, c-format
+msgid "*PCSX*: Black&White Mdecs Only Enabled"
+msgstr ""
+
+#: ../win32/gui/plugin.c:128
+#, c-format
+msgid "*PCSX*: Black&White Mdecs Only Disabled"
+msgstr ""
+
+#: ../win32/gui/plugin.c:135
+#, c-format
+msgid "*PCSX*: Xa Enabled"
+msgstr ""
+
+#: ../win32/gui/plugin.c:136
+#, c-format
+msgid "*PCSX*: Xa Disabled"
+msgstr ""
+
+#: ../win32/gui/plugin.c:145
+msgid "*PCSX*: CdRom Case Opened"
+msgstr ""
+
+#: ../win32/gui/plugin.c:150
+msgid "*PCSX*: CdRom Case Closed"
+msgstr ""
+
+#: ../win32/gui/plugin.c:177
+msgid "Connecting..."
+msgstr ""
+
+#: ../win32/gui/plugin.c:179 ../win32/gui/plugin.c:186
+#, c-format
+msgid "Please wait while connecting... %c\n"
+msgstr ""
+
+#: ../win32/gui/plugin.c:216
+msgid "Error Opening CDR Plugin"
+msgstr ""
+
+#: ../win32/gui/plugin.c:279
+#, c-format
+msgid "Error Opening GPU Plugin (%d)"
+msgstr ""
+
+#: ../win32/gui/plugin.c:281
+#, c-format
+msgid "Error Opening SPU Plugin (%d)"
+msgstr ""
+
+#: ../win32/gui/plugin.c:284
+#, c-format
+msgid "Error Opening PAD1 Plugin (%d)"
+msgstr ""
+
+#: ../win32/gui/plugin.c:286
+#, c-format
+msgid "Error Opening PAD2 Plugin (%d)"
+msgstr ""
+
+#: ../win32/gui/plugin.c:309
+msgid "Error Closing CDR Plugin"
+msgstr ""
+
+#: ../win32/gui/plugin.c:311
+msgid "Error Closing GPU Plugin"
+msgstr ""
+
+#: ../win32/gui/plugin.c:313
+msgid "Error Closing SPU Plugin"
+msgstr ""
+
+#: ../win32/gui/plugin.c:315
+msgid "Error Closing PAD1 Plugin"
+msgstr ""
+
+#: ../win32/gui/plugin.c:317
+msgid "Error Closing PAD2 Plugin"
+msgstr ""
+
+#: ../win32/gui/plugin.c:335
+#, c-format
+msgid "CDRinit error: %d"
+msgstr ""
+
+#: ../win32/gui/plugin.c:337
+#, c-format
+msgid "GPUinit error: %d"
+msgstr ""
+
+#: ../win32/gui/plugin.c:339
+#, c-format
+msgid "SPUinit error: %d"
+msgstr ""
+
+#: ../win32/gui/plugin.c:341
+#, c-format
+msgid "PAD1init error: %d"
+msgstr ""
+
+#: ../win32/gui/plugin.c:343
+#, c-format
+msgid "PAD2init error: %d"
+msgstr ""
+
+#: ../win32/gui/plugin.c:346
+#, c-format
+msgid "NETinit error: %d"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:74
+msgid "Arabic"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:75
+msgid "Catalan"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:76
+msgid "German"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:77
+msgid "Greek"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:78 ../win32/gui/WndMain.c:1483
+#: ../win32/gui/WndMain.c:1485
+msgid "English"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:79
+msgid "Spanish"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:80
+msgid "French"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:81
+msgid "Italian"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:82
+msgid "Portuguese"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:83
+msgid "Romanian"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:84
+msgid "Russian"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:85
+msgid "Simplified Chinese"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:86
+msgid "Traditional Chinese"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:87
+msgid "Japanese"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:88
+msgid "Korean"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:129
+msgid "Pcsx needs to be configured"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:133
+msgid "Pcsx now will quit, restart it"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:253 ../win32/gui/WndMain.c:305
+msgid "PCSX State Format"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:280
+#, c-format
+msgid "*PCSX*: Loaded State %s"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:281
+#, c-format
+msgid "*PCSX*: Error Loading State %s"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:332
+#, c-format
+msgid "*PCSX*: Saved State %s"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:333
+#, c-format
+msgid "*PCSX*: Error Saving State %s"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:398
+msgid "Running BIOS is not supported with Internal HLE Bios."
+msgstr ""
+
+#: ../win32/gui/WndMain.c:628
+msgid "Game ID"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:634
+msgid "Game"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:808
+msgid "mid link block"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:811
+msgid "terminiting link block"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:916
+msgid "Memcard Manager"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:920 ../win32/gui/WndMain.c:923
+msgid "Select Mcd"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:921 ../win32/gui/WndMain.c:924
+msgid "Format Mcd"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:922 ../win32/gui/WndMain.c:925
+msgid "Reload Mcd"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:926
+msgid "-> Copy ->"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:927
+msgid "<- Copy <-"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:928
+msgid "Paste"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:929
+msgid "<- Un/Delete"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:930
+msgid "Un/Delete ->"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:932
+msgid "Memory Card 1"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:933
+msgid "Memory Card 2"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:988
+msgid "Are you sure you want to paste this selection?"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:988 ../win32/gui/WndMain.c:1099
+#: ../win32/gui/WndMain.c:1106
+msgid "Confirmation"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1099 ../win32/gui/WndMain.c:1106
+msgid "Are you sure you want to format this Memory Card?"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1152
+msgid "Cpu Config"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1157
+msgid "Disable Xa Decoding"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1158
+msgid "Sio Irq Always Enabled"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1159
+msgid "Black && White Movies"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1160
+msgid "Disable Cd audio"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1162
+msgid "Enable Interpreter Cpu"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1164
+msgid "Spu Irq Always Enabled"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1168
+msgid "Options"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1169
+msgid "Psx System Type"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1241
+msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1246
+msgid "Psx Memory Card (*.mcr;*.mc)"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1251
+msgid "CVGS Memory Card (*.mem;*.vgs)"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1256
+msgid "Bleem Memory Card (*.mcd)"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1261
+msgid "DexDrive Memory Card (*.gme)"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1266
+msgid "DataDeck Memory Card (*.ddf)"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1310
+msgid "Psx Exe Format"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1347
+msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin)"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1421
+msgid "&File"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1422
+msgid "E&xit"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1424
+msgid "&States"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1426
+msgid "Run &EXE"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1427
+msgid "Run &BIOS"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1428
+msgid "Run &ISO"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1429
+msgid "Run &CD"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1430
+msgid "&Save"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1431
+msgid "&Load"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1432 ../win32/gui/WndMain.c:1438
+msgid "&Other..."
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1433 ../win32/gui/WndMain.c:1439
+msgid "Slot &5"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1434 ../win32/gui/WndMain.c:1440
+msgid "Slot &4"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1435 ../win32/gui/WndMain.c:1441
+msgid "Slot &3"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1436 ../win32/gui/WndMain.c:1442
+msgid "Slot &2"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1437 ../win32/gui/WndMain.c:1443
+msgid "Slot &1"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1445
+msgid "&Emulator"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1446
+msgid "S&witch ISO"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1448
+msgid "Re&set"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1449
+msgid "&Run"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1451
+msgid "&Configuration"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1452
+msgid "&Memory cards"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1453
+msgid "C&PU"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1455
+msgid "&NetPlay"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1457
+msgid "&Controllers"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1458
+msgid "CD-&ROM"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1459
+msgid "&Sound"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1460
+msgid "&Graphics"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1462
+msgid "&Plugins && Bios"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1464
+msgid "&Language"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1488
+msgid "&Help"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1489
+msgid "&About..."
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1666
+msgid "Pcsx Msg"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1669
+msgid "Error Loading Symbol"
+msgstr ""

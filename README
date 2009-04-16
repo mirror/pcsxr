@@ -1,0 +1,20 @@
+PCSX-df
+-------------------------------
+
+PCSX-df is a forked version of the dead PCSX emulator, with a nicer interface
+and several improvements to stability and functionality.
+
+PCSX-df uses the PSEMU plugin interface to provide most functionality;
+without them, you will not be able to use it to play games. Debian users
+can find many plugins in the apt archive as 'psemu-<type>-<name>'. PCSX-df
+provides a number of plugins (modified from the most popular free PSEMU
+plugins) to provide basic functionality out of the box.
+
+PCSX-df has a very capable Internal HLE BIOS that can run many games without
+problems. It is recommended that you use it. However, if you own a real
+Playstation, you may be able to use your own BIOS image. PCSX-df will find
+it in ~/.pcsx/bios/ if you place it there. This can improve compatibility,
+especially with certain games and with the use of memory cards.
+
+See the doc/ folder in the source, or /usr/share/doc/pcsx/ on Debian systems,
+for more detailed information on PCSX-df. A UNIX manpage is also available.

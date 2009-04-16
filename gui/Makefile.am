@@ -1,0 +1,19 @@
+INCLUDES = -DPACKAGE_DATA_DIR=\"${datadir}/pcsx/\" \
+	-DPIXMAPDIR=\"${datadir}/pixmaps/\" \
+	-DLOCALE_DIR=\"${datadir}/locale/\" \
+	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) \
+	-I$(top_srcdir)/libpcsxcore -I$(top_srcdir)/include \
+	-DDEF_PLUGIN_DIR=\"${libdir}/games/psemu\"
+
+bin_PROGRAMS = pcsx
+
+pcsx_SOURCES = \
+	LnxMain.c	\
+	Plugin.c	\
+	Config.c	\
+	Gtk2Gui.c	\
+	Cheat.c		\
+	hdebug.c
+
+pcsx_LDADD = \
+	$(GTK2_LIBS) $(GLADE2_LIBS) -lpthread -lz -lm ../libpcsxcore/libpcsxcore.a

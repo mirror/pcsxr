@@ -1,0 +1,250 @@
+Mar 22, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfxvideo/gpu.c: Capture screenshots correctly in RGB24
+   mode.
+
+Mar 11, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * gui/Gtk2Gui.c, win32/gui/WndMain.c: Don't call CheckCdrom() and
+   LoadCdrom() when switching ISO.
+
+Mar 6, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * data/pcsx.glade2: Reorganized menu.
+ * po/zh_CN.po, po/zh_TW.po, po/pcsx.pot: Updated.
+
+Mar 2, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * gui/Gtk2Gui.c: Remember last used directory in the Open Image dialog.
+
+Feb 27, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * libpcsxcore/plugins.c, win32/gui/WndMain.c, gui/Plugin.c: Moved
+   cdOpenCase to libpcsxcore.
+ * data/pcsx.glade2, gui/Gtk2Gui.c: Added "Switch ISO" function.
+ * win32/gui/WndMain.c, win32/resource.h: Likewise.
+ * libpcsxcore/mdec.c: Don't use precalculated table in ROUND(), which
+   may cause crashes due to subscript out of the bound in some cases.
+ * libpcsxcore/psxinterpreter.c: Silenced GCC warnings.
+
+Feb 20, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * configure.ac, Makefile.am: dfOpenGL is now only built when specified
+   with --enable-dfopengl during configure.
+
+Feb 19, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * configure.ac: Allow changing plugins install directory with --libdir.
+ * plugins/dfinput/Makefile.am: Likewise.
+ * plugins/dfcdrom/Makefile.am: Likewise.
+ * plugins/dfxvideo/Makefile.am: Likewise.
+ * plugins/dfsound/Makefile.am: Likewise.
+ * plugins/dfOpenGL/Makefile.am: Likewise.
+ * gui/Cheat.c, libpcsxcore/cheat.c: Moved platform-indepandent stuff
+   to libpcsxcore. Use dynamic memory allocation.
+ * libpcsxcore/cheat.h: Added.
+ * libpcsxcore/r3000a.c: Free all cheats on shutdown.
+ * gui/LnxMain.c, libpcsxcore/psxcounters.c: Moved cheat applying to
+   psxcounters.c from SysUpdate().
+
+Feb 13, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * plugins/dfOpenGL/gpu_i.h: include stdint.h.
+ * plugins/dfOpenGL/cfg.c: Use frame limit by default.
+ * libpcsxcore/ix86/iR3000A.c: Don't execute x86Init(), which causes crash
+   in certain computers.
+
+Feb 12, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * gui/Cheat.c, data/pcsx.glade2: Implemented the Cheat List dialog.
+ * data/pcsx.glade2: Tweaked the About Dialog.
+ * plugins/dfsound/cfg.c: The Volume value in config file should now be
+   handled correctly as 0 (lowest) to 3 (loudest).
+
+Feb 11, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * gui/Cheat.c, gui/Cheat.h: Added cheat support.
+ * gui/Plugin.c: Apply cheats in SysUpdate().
+
+Feb 10, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * gui/Config.c, gui/LnxMain.c: Moved the dotdir creation routine into
+   LnxMain.c. Check the directories and symlinks to plugins each time
+   the program starts.
+ * gui/Gtk2Gui.c, gui/LnxMain.c, gui/Plugin.c: Load the plugins at
+   emulation start instead of program start.
+
+Feb 9, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * libpcsxcore/psxmem.c: Define MAP_ANONYMOUS into MAP_ANON if it's not
+   defined.
+ * libpcsxcore/ix86/iR3000A.c: Likewise.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * libpcsxcore/ppc/pR3000A.c: Likewise.
+ * pixmaps/pcsx-icon.png: Replaced the icon with a better one from PCSX
+   Mac OS X Port project.
+ * win32/gui/cdrom02.ico: Likewise.
+ * configure.ac: Only enable NASM in GNU/Linux.
+ * plugins/dfOpenGL/Makefile.am: Added /usr/X11R6 search path.
+ * plugins/dfxvideo/Makefile.am: Likewise.
+ * plugins/dfinput/Makefile.am: Likewise.
+ * plugins/dfinput/pad.c: Only enable joystick support in GNU/Linux.
+ * plugins/dfinput/cfg.c: Likewise.
+ * configure.ac: Add detection for sys/soundcard.h.
+ * plugins/dfsound/Makefile.am: Use NULL sound input if sys/soundcard.h
+   cannot be found.
+ * plugins/dfsound/nullsnd.c: Added.
+ * plugins/dfsound/spuPeopsSound.c: Removed unused files.
+ * plugins/dfsound/spuPeopsSound.def: Likewise.
+ * plugins/dfsound/stdafx.c: Likewise.
+
+Feb 8, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * data/pcsx.glade2, gui/Gtk2Gui.c: Changed "btn_ConfAbout" to
+   "btn_AboutNet" in the netplay config dialog.
+
+Feb 7, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * plugins/dfinput/cfg.c, plugins/dfinput/pad.c: Use Keyboard instead of
+   Joystick by default when no config file exists.
+ * plugins/dfinput/cfg.c: Update the UI when user switches the current pad.
+   Removed the useless "Device File" label.
+ * plugins/dfcdrom/interface.c: Fixed the behavior when closing the dfcdrom
+   config dialog box directly.
+ * gui/Gtk2Gui.c: Don't enable the "Use Debugger" checkbox when interpreter
+   core is not selected in CPU Config dialog box. Always enable the "Use
+   Interpreter CPU" when dynarec is not enabled during compilation.
+ * configure.ac: --disable-dynarec can now correctly disable the compilation
+   of dynamic recompiler core.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Disable the checkboxes for game
+   fixes initially if the "Enable Special Game Fixes" is not checked.
+
+Feb 6, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * data/pcsx.glade2, gui/Gtk2Gui.c: Enable the GtkFileChooserButton in
+   memcard config dialog only when ready.
+ * win32/pcsx.dsp, win32/pcsx.dev: Added cdriso.c, cdriso.h.
+ * win32/gui/WndMain.c, win32/gui/Win32.h, win32/gui/plugin.c,
+   win32/resource.h: Make use of the internal image reader.
+ * libpcsxcore/cdriso.c: Cast the return value of ISOgetBuffer into
+   unsigned char * instead of char *.
+ * plugins/dfinput/pad.c: Removed usage of pcsx_style.
+ * plugins/dfinput/cfg.c, plugins/dfinput/dfinput.glade2: Likewise.
+
+Feb 5, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * libpcsxcore/plugins.h, win32/gui/plugin.h: Moved definations of GPUopen,
+   SPUopen, PADopen and NETopen to libpcsxcore.
+ * libpcsxcore/plugins.c: Check for each type of plugins in ReleasePlugins().
+ * gui/Plugin.h: Removed useless file.
+ * libpcsxcore/cdriso.c, libpcsxcore/cdriso.h: Added internal image reader.
+ * libpcsxcore/plugins.c, gui/Gtk2Gui.c, gui/LnxMain.c: Make use of the
+   internal image reader.
+ * data/pcsx.glade2: Added "Run ISO" menu item.
+ * libpcsxcore/plugins.c: Initialize handles to plugins with NULL.
+ * plugins/dfiso, plugins/dfbinimage: Removed.
+ * plugins/dfxvideo/gpucfg-0.1df/callbacks.c: Removed unused files.
+ * plugins/dfxvideo/gpucfg-0.1df/callbacks.h: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/interface.c: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/interface.h: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/support.c: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/support.h: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/HACKING: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/gpucfg.gladep: Likewise.
+ * plugins/dfxvideo/callbacks.c: Likewise.
+ * plugins/dfxvideo/callbacks.h: Likewise.
+ * plugins/dfxvideo/interface.c: Likewise.
+ * plugins/dfxvideo/interface.h: Likewise.
+ * plugins/dfxvideo/support.c: Likewise.
+ * plugins/dfxvideo/support.h: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Removed support.h, interface.h.
+ * plugins/dfsound/cfg.c: Removed Windows-specific code.
+ * plugins/dfsound/spu.c: Likewise.
+ * plugins/dfsound/stdafx.c: Likewise.
+ * plugins/dfsound/alsa.c: Likewise.
+ * plugins/dfsound/oss.c: Likewise.
+ * plugins/dfsound/cfg.h: Likewise.
+ * plugins/dfsound/externals.h: Likewise.
+ * plugins/dfsound/freeze.c: Likewise.
+ * plugins/dfsound/debug.c: Removed unused files.
+ * plugins/dfsound/debug.h: Likewise.
+ * plugins/dfsound/resource.h: Likewise.
+ * plugins/dfsound/record.c: Likewise.
+ * plugins/dfsound/record.h: Likewise.
+ * gui/LnxMain.c: Fixed EXE loading in command line.
+ * plugins/dfsound/spucfg-0.1df/main.c: Added default values.
+
+Feb 4, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * gui/Makefile.am, libpcsxcore/Makefile.am: Now libpcsxcore is always
+   statically linked.
+ * INSTALL: Updated.
+ * gui/Gtk2Gui.c, gui/LnxMain.c: Moved ScanPlugins() and
+   check_symlink_in_path() to LnxMain.c.
+ * win32/gui/WndMain.c: Tweaked GUI behaviors.
+ * win32/gui/WndMain.c: Fixed Save/Load state.
+
+Feb 3, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * gui/Gtk2Gui.c, gui/Linux.h, gui/LnxMain.c: Tweaked some of the behaviors
+   of GUI.
+ * gui/Gtk2Gui.c: Removed some unnecessary debug messages.
+
+Feb 2, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * plugins/dfsound/spucfg-0.1df/interface.c: Removed unused files.
+ * plugins/dfsound/spucfg-0.1df/interface.h: Likewise.
+ * plugins/dfsound/spucfg-0.1df/support.c: Likewise.
+ * plugins/dfsound/spucfg-0.1df/support.h: Likewise.
+ * plugins/dfsound/spucfg-0.1df/callbacks.h: Likewise.
+ * plugins/dfsound/spucfg-0.1df/callbacks.h: Likewise.
+ * plugins/dfsound/spucfg-0.1df/Makefile: Likewise.
+ * plugins/dfsound/spucfg-0.1df/HACKING: Likewise.
+ * plugins/dfsound/spucfg-0.1df/spucfg2.gladep: Likewise.
+ * plugins/dfinput/Makefile.noautoconf: Likewise.
+ * plugins/dfcdrom/PSEmu Plugin Defs.h: Removed duplicate files.
+ * plugins/dfcdrom/Makefile.am: Added -I../../libpcsxcore.
+ * plugins/dfcdrom/cdr.h: Changed "PSEmu Plugin Defs.h" into
+   "psemu_plugin_defs.h". Added #include <stdint.h>.
+ * gui/Makefile.am: Added DEF_PLUGIN_DIR defination.
+ * gui/LnxMain.c, gui/Gtk2Gui.c: Also scan for plugins in DEF_PLUGIN_DIR,
+   so that the program can be installed to any path.
+ * libpcsxcore/psxmem.c, libpcsxcore/plugins.c: Don't use GLIB in libpcsxcore.
+ * win32/glue/glib.h: Removed.
+ * win32/pcsx.dsp, win32/pcsx.dev: Removed glib.h.
+ * win32/plugin.c, win32/WndMain.c: Unified the save state naming convention
+   with the GTK port.
+ * win32/WndMain.c: Fixed OpenFile Dialog usage.
+ * data/pcsx.glade2: Changed hotkey for save state into Ctrl+1~5, as Shift
+   key is not working. Changed hotkey for Load Other/Save Other into Alt+0
+   and Ctrl+0.
+ * doc/tweaks.txt, doc/keys.txt: Updated.
+ * debian/docs: Added ChangeLog.df file.
+ * debian/control: This package should be in otherosfs section according
+   to Debian policy.
+ * gui/Gtk2Gui.c: Disable state save/load in menu if no CD is loaded.
+
+Feb 1, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * win32/gui/WndMain.c: Don't paint the logo when the emu is running.
+ * win32/intl/intlconfig.h: Silented MSVC2005 warnings.
+ * Applied x86_64 patch by Dylan Simon (not tested).
+
+Jan 31, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * po/pcsx.pot: Regenerated.
+ * po/zh_CN.po, po/zh_TW.po: Updated.
+ * win32/pcsx.dev: Added Dev-C++ project file.
+ * win32/pcsx.rc: Adjusted some dialog boxes.
+ * Updated FSF's snail address in source files.
+ * data/pcsx.glade2: Fixed shortcut keys for "Save State" menu items.
+
+Jan 30, 2009 Wei Mingzhi <whistler@openoffice.org>
+
+ * First alpha release of PCSX Reloaded.
+   - Backported to Windows.
+   - PCSX-df XVideo Plugin: Don't allow screen saver in fullscreen mode.
+   - PCSX-df XVideo Plugin: Don't show the GNOME panels in fullscreen mode.
+   - Minor bugfixes for UI.
+   - Fixed a bug which caused crash in FF8 Final Boss Fight.
+   - GCC 4.3 support.

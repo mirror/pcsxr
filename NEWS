@@ -1,0 +1,7 @@
+PCSX-df: bringing clarity, joy, and a nice GUI to PCSX.
+
+RELEASE CANDIDATE 1
+
+You should remove your old ~/.pcsx directory before using PCSX-df, to
+avoid any possible compatibility issues, such as missing folders. Remember
+that memcards and savestates are kept there, so be sure to copy them out first!
