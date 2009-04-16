@@ -503,14 +503,35 @@ void RunCheatListDialog() {
 	g_signal_connect_data(GTK_OBJECT(CheatListDlg), "response",
 			GTK_SIGNAL_FUNC(OnCheatListDlg_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
-	gtk_widget_set_sensitive (GTK_WIDGET(glade_xml_get_widget(xml, "savebutton1")), NumCheats);
-	gtk_widget_set_sensitive (GTK_WIDGET(glade_xml_get_widget(xml, "editbutton1")), FALSE);
-	gtk_widget_set_sensitive (GTK_WIDGET(glade_xml_get_widget(xml, "delbutton1")), FALSE);
-	gtk_widget_set_sensitive (GTK_WIDGET(glade_xml_get_widget(xml, "enablebutton1")), FALSE);
-	gtk_widget_set_sensitive (GTK_WIDGET(glade_xml_get_widget(xml, "disablebutton1")), FALSE);
-	gtk_widget_set_sensitive (GTK_WIDGET(glade_xml_get_widget(xml, "editbutton1")), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "savebutton1")), NumCheats);
+	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "editbutton1")), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "delbutton1")), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "enablebutton1")), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "disablebutton1")), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "editbutton1")), FALSE);
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+struct cheatSearchResult {
+	u32				addr;
+	u32				val;
+};
+
+struct cheatSearchResult *SearchResult = NULL;
+int NumSearchResult = 0;
 
 // run the cheat search dialog
 void RunCheatSearchDialog() {
+	GladeXML *xml;
+	GtkWidget *widget;
+
+	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "CheatSearchDlg", NULL);
+	if (!xml) {
+		g_warning(_("Error: Glade interface could not be loaded!"));
+		return;
+	}
+
+	CheatSearchDlg = glade_xml_get_widget(xml, "CheatSearchDlg");
+	gtk_window_set_title(GTK_WINDOW(CheatSearchDlg), _("Cheat Search"));
 }

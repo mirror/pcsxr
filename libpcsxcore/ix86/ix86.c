@@ -1493,20 +1493,17 @@ void MOVD64RtoR(int to, int from) {
 	ModRM(3, from,to);
 }
 
-void MOVQRtoR(int to,int from)
-{
+void MOVQRtoR(int to, int from) {
 	write16(0x6F0F);
 	ModRM(3, to,from);
 }
 
-void PUNPCKHDQRtoR(int to,int from)
-{
+void PUNPCKHDQRtoR(int to, int from) {
 	write16(0x6A0F);
 	ModRM(3, to,from);
 }
 
-void PUNPCKLDQRtoR(int to,int from)
-{
+void PUNPCKLDQRtoR(int to, int from) {
 	write16(0x620F);
 	ModRM(3, to,from);
 }
@@ -1515,61 +1512,52 @@ void PUNPCKLDQRtoR(int to,int from)
 //	SSE	intructions 
 //////////////////////////////////////////////////////////////////////////
 
-void MOVAPSMtoR(int to,int from)
-{
+void MOVAPSMtoR(int to, int from) {
 	write16(0x280f);
 	ModRM(0, to, DISP32);
 	write32(from);
 }
 
-void MOVAPSRtoM(int to,int from)
-{
+void MOVAPSRtoM(int to, int from) {
 	write16(0x2b0f);
 	ModRM(0, from, DISP32);
 	write32(to);
 }
 
-void MOVAPSRtoR(int to,int from)
-{
+void MOVAPSRtoR(int to, int from) {
 	write16(0x290f);
 	ModRM(3, to,from);
 }
 
-void ORPSMtoR(int to,int from)
-{
+void ORPSMtoR(int to, int from) {
 	write16(0x560f);
 	ModRM(0, to, DISP32);
 	write32(from);
 }
 
-void ORPSRtoR(int to,int from)
-{
+void ORPSRtoR(int to, int from) {
 	write16(0x560f);
 	ModRM(3, to,from);
 }
 
-void XORPSMtoR(int to,int from)
-{
+void XORPSMtoR(int to, int from) {
 	write16(0x570f);
 	ModRM(0, to, DISP32);
 	write32(from);
 }
 
-void XORPSRtoR(int to,int from)
-{
+void XORPSRtoR(int to, int from) {
 	write16(0x570f);
 	ModRM(3, to,from);
 }
 
-void ANDPSMtoR(int to,int from)
-{
+void ANDPSMtoR(int to, int from) {
 	write16(0x540f);
 	ModRM(0, to, DISP32);
 	write32(from);
 }
 
-void ANDPSRtoR(int to,int from)
-{
+void ANDPSRtoR(int to, int from) {
 	write16(0x540f);
 	ModRM(3, to,from);
 }
@@ -1578,181 +1566,154 @@ void ANDPSRtoR(int to,int from)
 	3DNOW intructions 
 */
 
-void PFCMPEQMtoR(int to,int from)
-{
+void PFCMPEQMtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(0, to, DISP32); 
 	write32(from); 
 	write8(0xb0);
 }
 
-void PFCMPGTMtoR(int to,int from)
-{
+void PFCMPGTMtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(0, to, DISP32); 
 	write32(from); 
 	write8(0xa0);
 }
 
-void PFCMPGEMtoR(int to,int from)
-{
+void PFCMPGEMtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(0, to, DISP32); 
 	write32(from); 
 	write8(0x90);
 }
 
-
-void PFADDMtoR(int to,int from)
-{
+void PFADDMtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(0, to, DISP32); 
 	write32(from); 
 	write8(0x9e);
 }
 
-void PFADDRtoR(int to,int from)
-{
+void PFADDRtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(3, to, from);
 	write8(0x9e);
 }
 
-
-void PFSUBMtoR(int to,int from)
-{
+void PFSUBMtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(0, to, DISP32); 
 	write32(from); 
 	write8(0x9a);
 }
 
-void PFSUBRtoR(int to,int from)
-{
+void PFSUBRtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(3, to, from); 
 	write8(0x9a);
 }
 
-
-void PFMULMtoR(int to,int from)
-{
+void PFMULMtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(0, to, DISP32); 
 	write32(from); 
 	write8(0xb4);
 }
 
-void PFMULRtoR(int to,int from)
-{
+void PFMULRtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(3, to,from); 
 	write8(0xb4);
 }
 
-void PFRCPMtoR(int to,int from)
-{
+void PFRCPMtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(0, to, DISP32); 
 	write32(from); 
 	write8(0x96);
 }
 
-void PFRCPRtoR(int to,int from)
-{
+void PFRCPRtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(3, to,from); 
 	write8(0x96);
 }
 
-void PFRCPIT1RtoR(int to,int from)
-{
+void PFRCPIT1RtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(3, to,from); 
 	write8(0xa6);
 }
 
-void PFRCPIT2RtoR(int to,int from)
-{
+void PFRCPIT2RtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(3, to,from); 
 	write8(0xb6);
 }
 
-void PFRSQRTRtoR(int to,int from)
-{
+void PFRSQRTRtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(3, to,from); 
 	write8(0x97);
 }
 
-void PFRSQIT1RtoR(int to,int from)
-{
+void PFRSQIT1RtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(3, to,from); 
 	write8(0xa7);
 }
 
-void PF2IDMtoR(int to,int from)
-{
+void PF2IDMtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(0, to, DISP32); 
 	write32(from); 
 	write8(0x1d);
 }
 
-void PF2IDRtoR(int to,int from)
-{
+void PF2IDRtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(3, to, from); 
 	write8(0x1d);
 }
 
-void PI2FDMtoR(int to,int from)
-{
+void PI2FDMtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(0, to, DISP32); 
 	write32(from); 
 	write8(0x0d);
 }
 
-void PI2FDRtoR(int to,int from)
-{
+void PI2FDRtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(3, to, from); 
 	write8(0x0d);
 }
-
 
 /*
 	3DNOW Extension intructions 
 */
 
-void PFMAXMtoR(int to,int from)
-{
+void PFMAXMtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(0, to, DISP32); 
 	write32(from); 
 	write8(0xa4);
 }
 
-void PFMAXRtoR(int to,int from)
-{
+void PFMAXRtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(3, to, from); 
 	write8(0xa4);
 }
 
-void PFMINMtoR(int to,int from)
-{
+void PFMINMtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(0, to, DISP32); 
 	write32(from); 
 	write8(0x94);
 }
 
-void PFMINRtoR(int to,int from)
-{
+void PFMINRtoR(int to, int from) {
 	write16(0x0f0f);
 	ModRM(3, to, from);
 	write8(0x94);
