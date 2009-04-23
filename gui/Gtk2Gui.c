@@ -2019,10 +2019,10 @@ void scan_bios_dir (gchar *dirname) {
 	}
 
 	while ((ent = readdir(dir)) != NULL) {
-		filename = g_build_filename (dirname, ent->d_name, NULL);
-		if (is_valid_bios_file (filename))
-			add_bios_to_list (g_path_get_basename (filename), g_path_get_basename (filename));
-		g_free (filename);
+		filename = g_build_filename(dirname, ent->d_name, NULL);
+		if (is_valid_bios_file(filename))
+			add_bios_to_list(g_path_get_basename(filename), g_path_get_basename (filename));
+		g_free(filename);
 	}
 	closedir(dir);
 
@@ -2051,7 +2051,7 @@ void UpdatePluginsBIOS() {
 	}
 	while ((ent = readdir(dir)) != NULL) {
 		long type, v;
-		linkname = g_build_filename (Config.PluginsDir, ent->d_name, NULL);
+		linkname = g_build_filename(Config.PluginsDir, ent->d_name, NULL);
 
 		// only libraries past this point, not config tools
 		if (strstr(linkname, ".so") == NULL && strstr(linkname, ".dylib") == NULL)
@@ -2064,7 +2064,7 @@ void UpdatePluginsBIOS() {
 			continue;
 		}
 
-		PSE_getLibType = (PSEgetLibType) dlsym(Handle, "PSEgetLibType");
+		PSE_getLibType = (PSEgetLibType)dlsym(Handle, "PSEgetLibType");
 		if (dlerror() != NULL) {
 			if (strstr(linkname, "gpu") != NULL) type = PSE_LT_GPU;
 			else if (strstr(linkname, "cdr") != NULL) type = PSE_LT_CDR;
@@ -2103,15 +2103,14 @@ void UpdatePluginsBIOS() {
 				ComboAddPlugin(Pad2);
 			}
 		}
-
 		g_free(linkname);
 	}
 	closedir(dir);
 
 	/* The BIOS list always contains the PCSX internal BIOS */
-	add_bios_to_list (_("Internal HLE Bios"), "HLE");
+	add_bios_to_list(_("Internal HLE Bios"), "HLE");
 
-	scan_bios_dir (Config.BiosDir);
+	scan_bios_dir(Config.BiosDir);
 }
 
 void UpdatePluginsBIOS_UpdateGUI(GladeXML *xml) {

@@ -56,11 +56,12 @@ static void CreateMemcard(char *filename, char *conf_mcd) {
 	gchar *mcd;
 	struct stat buf;
 
-	mcd = g_build_filename (getenv("HOME"), MEMCARD_DIR, filename, NULL);
+	mcd = g_build_filename(getenv("HOME"), MEMCARD_DIR, filename, NULL);
+
+	strcpy(conf_mcd, mcd);
 
 	/* Only create a memory card if an existing one does not exist */
 	if (stat(mcd, &buf) == -1) {
-		strcpy(conf_mcd, mcd);
 		SysPrintf(_("Creating memory card: %s\n"), mcd);
 		CreateMcd(mcd);
 	}
@@ -303,35 +304,30 @@ int main(int argc, char *argv[]) {
 		// Uh oh, no config file found, use some defaults
 		Config.PsxAuto = 1;	/* ADB TODO */
 
-		gchar *str_bios_dir = g_strconcat (getenv("HOME"), "/.pcsx/bios/", NULL);
+		gchar *str_bios_dir = g_strconcat (getenv("HOME"), BIOS_DIR, NULL);
 		strcpy(Config.BiosDir,  str_bios_dir);
-		g_free (str_bios_dir);
+		g_free(str_bios_dir);
 
 		gchar *str_plugin_dir = g_strconcat (getenv("HOME"), PLUGINS_DIR, NULL);
 		strcpy(Config.PluginsDir,  str_plugin_dir);
-		g_free (str_plugin_dir);
+		g_free(str_plugin_dir);
 
 		gtk_init(NULL, NULL);
-
-		// switch to bios dir for scanning
-		str_plugin_dir = g_build_filename (getenv("HOME"), BIOS_DIR, NULL);
-		chdir (str_plugin_dir);
-		g_free (str_plugin_dir);
 
 		// Update available plugins, but not GUI
 		UpdatePluginsBIOS();
 
 		// Pick some defaults, if they're available
-		set_default_plugin (GpuConfS.plist[0], Config.Gpu);
-		set_default_plugin (SpuConfS.plist[0], Config.Spu);
-		set_default_plugin (CdrConfS.plist[0], Config.Cdr);
-		set_default_plugin (Pad1ConfS.plist[0], Config.Pad1);
-		set_default_plugin (Pad2ConfS.plist[0], Config.Pad2);
-		set_default_plugin (BiosConfS.plist[0], Config.Bios);
+		set_default_plugin(GpuConfS.plist[0], Config.Gpu);
+		set_default_plugin(SpuConfS.plist[0], Config.Spu);
+		set_default_plugin(CdrConfS.plist[0], Config.Cdr);
+		set_default_plugin(Pad1ConfS.plist[0], Config.Pad1);
+		set_default_plugin(Pad2ConfS.plist[0], Config.Pad2);
+		set_default_plugin(BiosConfS.plist[0], Config.Bios);
 
 		// create & load default memcards if they don't exist
-		CreateMemcard ("card1.mcd", Config.Mcd1);
-		CreateMemcard ("card2.mcd", Config.Mcd2);
+		CreateMemcard("card1.mcd", Config.Mcd1);
+		CreateMemcard("card2.mcd", Config.Mcd2);
 
 		LoadMcds(Config.Mcd1, Config.Mcd2);
 
@@ -342,7 +338,7 @@ int main(int argc, char *argv[]) {
 	// this lets plugins work without modification!
 	gchar *plugin_default_dir = g_build_filename (getenv("HOME"), PLUGINS_DIR, NULL);
 	chdir(plugin_default_dir);	/* TODO Error checking - make sure this directory is available */
-	g_free (plugin_default_dir);
+	g_free(plugin_default_dir);
 
 	if (UseGui != DONT_USE_GUI) {
 		cdrfilename[0] = '\0';

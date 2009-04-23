@@ -1,3 +1,8 @@
+Apr 23, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * gui/LnxMain.c: use BIOS_DIR instead of "/.pcsx/bios/". Always set
+   the default memcard in config when config file does not exist.
+
 Mar 25, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * data/pcsx.glade2: Reorganized the menu a bit. Added Cheat Search
