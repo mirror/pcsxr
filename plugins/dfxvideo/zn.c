@@ -23,7 +23,7 @@
 // - psx gpu plugin interface prototypes-------------- //
 // --------------------------------------------------- //
 
-long GPUopen(unsigned long * disp,const char * CapText,const char * CfgFile);
+long GPUopen(unsigned long *disp, const char *CapText, const char *CfgFile);
 
 void CALLBACK GPUdisplayText(char * pText);
 void CALLBACK GPUdisplayFlags(uint32_t dwFlags);
@@ -56,7 +56,7 @@ void CALLBACK GPUkeypressed(int keycode);
 // - zn gpu interface -------------------------------- // 
 // --------------------------------------------------- // 
 
-uint32_t dwGPUVersion=0;
+uint32_t      dwGPUVersion=0;
 int           iGPUHeight=512;
 int           iGPUHeightMask=511;
 int           GlobalTextIL=0;

@@ -9,7 +9,7 @@
 #include "gpu_i.h"
 #include "primitive_drawing.h"
 #include "cfg.h"
-#include "PSEmu_PlugIn_Defs.h"
+#include "psemu_plugin_defs.h"
 
 #include <X11/extensions/xf86vmode.h>
 
@@ -21,16 +21,15 @@ const unsigned char version = PLUGIN_VERSION;	// do not touch - library for PSEm
 
 // it is up to developer but values must be in range 0-255
 
-const unsigned char revision =	1;
-const unsigned char build =		0;
+const unsigned char revision = 1;
+const unsigned char build = 0;
 
 // to obtain library name for your plugin, mail: plugin@psemu.com
 // this must be unique, and only we can provide this
-static char *libraryName =		"PCSX-df OpenGL Plugin";
+static char *libraryName =		"PCSX-df OpenGL Driver";
 
 float scalarDispWidth,scalarDispHeight;
 float scalarDrawWidth,scalarDrawHeight;
-
 
 // driver dependant variables
 GpuConfS gpuConfig;
