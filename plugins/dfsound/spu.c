@@ -24,11 +24,6 @@
 #include "dsoundoss.h"
 #include "regs.h"
  
-// spu version infos/name
-const unsigned char version  = 1;
-const unsigned char revision = 0;
-const unsigned char build    = 0;
-
 #if defined(USEALSA)
 static char * libraryName     = "ALSA Sound";
 #elif defined (USEOSS)
@@ -914,7 +909,7 @@ unsigned long CALLBACK PSEgetLibType(void)
 
 unsigned long CALLBACK PSEgetLibVersion(void)
 {
- return version<<16|revision<<8|build;
+ return (1 << 16) | (6 << 8);
 }
 
 char * SPUgetLibInfos(void)

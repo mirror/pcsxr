@@ -2,7 +2,7 @@ INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 	-DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
 	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) \
-	-DVERSION=0 -DREVISION=1 -DBUILD=0
+	-I../../include
 
 bindir = @libdir@/games/psemu/
 libdir = @libdir@/games/psemu/

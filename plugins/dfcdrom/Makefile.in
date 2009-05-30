@@ -236,8 +236,7 @@ INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 	-DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
 	$(GTK2_CFLAGS) \
-	-DREVISION=1 -DBUILD=0 \
-	-I../../libpcsxcore
+	-I../../libpcsxcore -I../../include
 
 cfgDFCdrom_SOURCES = cfg-gtk2.c main.c support.c interface.c callbacks.c
 cfgDFCdrom_LDADD = $(GTK2_LIBS)

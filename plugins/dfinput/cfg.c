@@ -24,6 +24,8 @@
  *
  */
 
+#include "config.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -44,6 +46,10 @@
 #include <errno.h>
 #include "padjoy.h"
 
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#endif
+
 #ifdef __linux__
 char *LibName = "Gamepad/Keyboard Input";
 #else
@@ -51,10 +57,6 @@ char *LibName = "Keyboard Input";
 #endif
 
 #define CONFIG_FILENAME	"dfinput.cfg"
-
-const unsigned char version = VERSION;
-const unsigned char revision = REVISION;
-const unsigned char build = BUILD;
 
 // Prototypes
 static void loadConfig();
@@ -1273,6 +1275,13 @@ void PADabout(void) {
 /*---------------------------------------------------------------------*/
 
 int main(int argc, char **argv) {
+#ifdef ENABLE_NLS
+  setlocale (LC_ALL, "");
+  bindtextdomain (GETTEXT_PACKAGE, LOCALE_DIR);
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+  textdomain (GETTEXT_PACKAGE);
+#endif
+
   gtk_set_locale();
   gtk_init (&argc, &argv);
 

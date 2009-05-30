@@ -1,3 +1,5 @@
+#include "config.h"
+
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,6 +8,10 @@
 
 #include <glade/glade.h>
 #include <gtk/gtk.h>
+
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#endif
 
 #define READBINARY "rb"
 #define WRITEBINARY "wb"
@@ -67,6 +73,13 @@ int main(int argc, char *argv[])
     int len, val = 0;
     char *pB, *p;
     char cfg[255];
+
+#ifdef ENABLE_NLS
+    setlocale (LC_ALL, "");
+    bindtextdomain (GETTEXT_PACKAGE, LOCALE_DIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    textdomain (GETTEXT_PACKAGE);
+#endif
 
     if (argc != 2) {
     	printf ("Usage: cfgDFSound {ABOUT | CFG}\n");

@@ -1,6 +1,12 @@
 #include <gtk/gtk.h>
 #include <glade/glade.h>
 
+#include "config.h"
+
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#endif
+
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -83,6 +89,13 @@ main (int argc, char *argv[])
   char cfg[255];
   int i;
   char tempstr[50];
+
+#ifdef ENABLE_NLS
+  setlocale (LC_ALL, "");
+  bindtextdomain (GETTEXT_PACKAGE, LOCALE_DIR);
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+  textdomain (GETTEXT_PACKAGE);
+#endif
 
   if (argc!=2) {
     printf("Usage: cfgDFXVideo {ABOUT | CFG}\n");

@@ -243,7 +243,7 @@ INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 	-DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
 	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) \
-	-DVERSION=0 -DREVISION=1 -DBUILD=0
+	-I../../include
 
 lib_LTLIBRARIES = libDFSound.la
 libDFSound_la_SOURCES = spu.c cfg.c dma.c freeze.c psemu.c registers.c \

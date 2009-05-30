@@ -50,10 +50,6 @@ char *LibName = "Gamepad/Keyboard Input";
 char *LibName = "Keyboard Input";
 #endif
 
-const unsigned char version = VERSION;
-const unsigned char revision = REVISION;
-const unsigned char build = BUILD;
-
 // Prototypes
 static void loadConfig();
 static void *thread_check_joydevice(void *arg);
@@ -159,7 +155,7 @@ uint32_t PSEgetLibType(void) {
 }
 
 uint32_t PSEgetLibVersion(void) {
-    return version<<16|revision<<8|build;
+    return 1 << 16;
 }
 
 void init_macros() {

@@ -11,7 +11,7 @@ INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 	-DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
 	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) -I/usr/X11R6/include \
-	-DVERSION=0 -DREVISION=1 -DBUILD=0
+	-I../../include
 
 bin_PROGRAMS = cfgDFInput
 cfgDFInput_SOURCES = cfg.c padjoy.h

@@ -49,10 +49,6 @@ char *LibName = "CDR NULL Plugin";
 
 #endif
 
-const unsigned char version = 1;	// PSEmu 1.x library
-const unsigned char revision = VERSION;
-const unsigned char build = BUILD;
-
 char *PSEgetLibName(void) {
 	return LibName;
 }
@@ -62,7 +58,7 @@ unsigned long PSEgetLibType(void) {
 }
 
 unsigned long PSEgetLibVersion(void) {
-	return version << 16 | revision << 8 | build;
+	return 1 << 16;
 }
 
 #ifdef __linux__

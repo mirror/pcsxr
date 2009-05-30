@@ -16,8 +16,6 @@ long UseSubQ;
 long CacheSize;
 long CdrSpeed;
 
-#define VERSION 1
-
 #ifdef __linux__
 
 #define DEV_DEF		"/dev/cdrom"
