@@ -69,15 +69,15 @@ BOOL           bUsingMovie=FALSE;                      // movie active flag
 PSXRect_t      xrMovieArea;                            // rect for movie upload
 short          sSprite_ux2;                            // needed for sprire adjust
 short          sSprite_vy2;                            // 
-unsigned long  ulOLDCOL=0;                             // active color
-unsigned long  ulClutID;                               // clut
+uint32_t       ulOLDCOL=0;                             // active color
+uint32_t       ulClutID;                               // clut
 
-unsigned long dwCfgFixes;                              // game fixes
-unsigned long dwActFixes=0;
-unsigned long dwEmuFixes=0;
+uint32_t      dwCfgFixes;                              // game fixes
+uint32_t      dwActFixes=0;
+uint32_t      dwEmuFixes=0;
 BOOL          bUseFixes;
 
-long          drawX,drawY,drawW,drawH;                 // offscreen drawing checkers
+int           drawX,drawY,drawW,drawH;                 // offscreen drawing checkers
 short         sxmin,sxmax,symin,symax;
 
 ////////////////////////////////////////////////////////////////////////                                          
@@ -121,9 +121,9 @@ void UpdateGlobalTP(unsigned short gdata)
  STATUSREG|=(gdata & 0x07ff);                          // set the necessary bits
 }
 
-unsigned long DoubleBGR2RGB (unsigned long BGR)
+unsigned int DoubleBGR2RGB (unsigned int BGR)
 {
- unsigned long ebx,eax,edx;
+ unsigned int ebx,eax,edx;
 
  ebx=(BGR&0x000000ff)<<1;
  if(ebx&0x00000100) ebx=0x000000ff;
@@ -137,7 +137,7 @@ unsigned long DoubleBGR2RGB (unsigned long BGR)
  return (ebx|eax|edx);
 }
 
-unsigned short BGR24to16 (unsigned long BGR)
+unsigned short BGR24to16 (uint32_t BGR)
 {
  return ((BGR>>3)&0x1f)|((BGR&0xf80000)>>9)|((BGR&0xf800)>>6);
 }
@@ -622,7 +622,7 @@ __inline void SetZMask4SP(void)
 
 ////////////////////////////////////////////////////////////////////////
 
-__inline void SetRenderState(unsigned long DrawAttributes)
+__inline void SetRenderState(uint32_t DrawAttributes)
 {
  bDrawNonShaded = (SHADETEXBIT(DrawAttributes)) ? TRUE : FALSE;
  DrawSemiTrans = (SEMITRANSBIT(DrawAttributes)) ? TRUE : FALSE;
@@ -630,7 +630,7 @@ __inline void SetRenderState(unsigned long DrawAttributes)
 
 ////////////////////////////////////////////////////////////////////////                                          
 
-__inline void SetRenderColor(unsigned long DrawAttributes)
+__inline void SetRenderColor(uint32_t DrawAttributes)
 {
  if(bDrawNonShaded) {g_m1=g_m2=g_m3=128;}
  else
@@ -643,7 +643,7 @@ __inline void SetRenderColor(unsigned long DrawAttributes)
 
 ////////////////////////////////////////////////////////////////////////                                          
                                
-void SetRenderMode(unsigned long DrawAttributes,BOOL bSCol)
+void SetRenderMode(uint32_t DrawAttributes, BOOL bSCol)
 {
  if((bUseMultiPass) && (bDrawTextured) && !(bDrawNonShaded))
       {bDrawMultiPass = TRUE; SetSemiTransMulti(0);}
@@ -698,7 +698,7 @@ void SetRenderMode(unsigned long DrawAttributes,BOOL bSCol)
 // Set Opaque multipass color
 ////////////////////////////////////////////////////////////////////////
 
-void SetOpaqueColor(unsigned long DrawAttributes)
+void SetOpaqueColor(uint32_t DrawAttributes)
 {
  if(bDrawNonShaded) return;                            // no shading? bye
   
@@ -1073,7 +1073,7 @@ BOOL CheckAgainstFrontScreen(short imageX0,short imageY0,short imageX1,short ima
 
 ////////////////////////////////////////////////////////////////////////
 
-void PrepareFullScreenUpload (long Position)
+void PrepareFullScreenUpload (int Position)
 {
  if (Position==-1)                                     // rgb24
   {
@@ -1155,7 +1155,7 @@ void PrepareFullScreenUpload (long Position)
 
 unsigned char * LoadDirectMovieFast(void);
 
-void UploadScreenEx(long Position)
+void UploadScreenEx(int Position)
 {
  short ya,yb,xa,xb,x, y, YStep, XStep, U, UStep,ux[4],vy[4];
 
@@ -1239,7 +1239,7 @@ void UploadScreenEx(long Position)
 
 ////////////////////////////////////////////////////////////////////////
 
-void UploadScreen(long Position)
+void UploadScreen(int Position)
 {
  short x, y, YStep, XStep, U, s, UStep,ux[4],vy[4];
  short xa,xb,ya,yb;
@@ -1320,8 +1320,8 @@ void UploadScreen(long Position)
      gl_vy[2] = gl_vy[3] = s;
      gl_ux[0] = gl_ux[3] = gl_vy[0] = gl_vy[1] = 0;
 
-     SetRenderState((unsigned long)0x01000000);
-     SetRenderMode((unsigned long)0x01000000, FALSE);  // upload texture data
+     SetRenderState((uint32_t)0x01000000);
+     SetRenderMode((uint32_t)0x01000000, FALSE);  // upload texture data
      offsetScreenUpload(Position);
      assignTextureVRAMWrite();
 
@@ -1386,7 +1386,7 @@ BOOL IsInsideNextScreen(short x, short y, short xoff, short yoff)
 
 void cmdSTP(unsigned char * baseAddr)
 {
- unsigned long gdata = ((unsigned long*)baseAddr)[0];
+ uint32_t gdata = ((uint32_t*)baseAddr)[0];
 
  STATUSREG&=~0x1800;                                   // clear the necessary bits
  STATUSREG|=((gdata & 0x03) << 11);                    // set the current bits
@@ -1419,7 +1419,7 @@ void cmdSTP(unsigned char * baseAddr)
 
 void cmdTexturePage(unsigned char * baseAddr)
 {
- unsigned long gdata = ((unsigned long*)baseAddr)[0];
+ uint32_t gdata = ((uint32_t *)baseAddr)[0];
  UpdateGlobalTP((unsigned short)gdata);
  GlobalTextREST = (gdata&0x00ffffff)>>9;
 }
@@ -1430,9 +1430,8 @@ void cmdTexturePage(unsigned char * baseAddr)
 
 void cmdTextureWindow(unsigned char *baseAddr)
 {
- unsigned long gdata = ((unsigned long*)baseAddr)[0];
-
- unsigned long YAlign,XAlign;
+ uint32_t gdata = ((uint32_t *)baseAddr)[0];
+ uint32_t YAlign,XAlign;
 
  ulGPUInfoVals[INFO_TW]=gdata&0xFFFFF;
 
@@ -1466,8 +1465,8 @@ void cmdTextureWindow(unsigned char *baseAddr)
 
  // Re-calculate the bit field, because we can't trust what is passed in the data
 
- YAlign = (unsigned long)(32 - (TWin.Position.y1 >> 3));
- XAlign = (unsigned long)(32 - (TWin.Position.x1 >> 3));
+ YAlign = (uint32_t)(32 - (TWin.Position.y1 >> 3));
+ XAlign = (uint32_t)(32 - (TWin.Position.x1 >> 3));
 
  // Absolute position of the start of the texture window
 
@@ -1639,7 +1638,7 @@ void ClampToPSXScreenOffset(short *x0, short *y0, short *x1, short *y1)
 
 void cmdDrawAreaStart(unsigned char * baseAddr)
 {
- unsigned long gdata = ((unsigned long*)baseAddr)[0];
+ uint32_t gdata = ((uint32_t *)baseAddr)[0];
 
  drawX = gdata & 0x3ff;                                // for soft drawing
  if(drawX>=1024) drawX=1023;
@@ -1670,7 +1669,7 @@ void cmdDrawAreaStart(unsigned char * baseAddr)
 
 void cmdDrawAreaEnd(unsigned char * baseAddr)
 {
- unsigned long gdata = ((unsigned long*)baseAddr)[0];
+ uint32_t gdata = ((uint32_t *)baseAddr)[0];
 
  drawW = gdata & 0x3ff;                                // for soft drawing
  if(drawW>=1024) drawW=1023;
@@ -1705,14 +1704,14 @@ void cmdDrawAreaEnd(unsigned char * baseAddr)
 
 void cmdDrawOffset(unsigned char * baseAddr)
 {
- unsigned long gdata = ((unsigned long*)baseAddr)[0];
+ uint32_t gdata = ((uint32_t *)baseAddr)[0];
 
  PreviousPSXDisplay.DrawOffset.x = 
   PSXDisplay.DrawOffset.x = (short)(gdata & 0x7ff);
 
- if(dwGPUVersion==2)
+ if (dwGPUVersion == 2)
   {
-   ulGPUInfoVals[INFO_DRAWOFF]=gdata&0x7FFFFF;
+   ulGPUInfoVals[INFO_DRAWOFF] = gdata&0x7FFFFF;
    PSXDisplay.DrawOffset.y = (short)((gdata>>12) & 0x7ff);
   }
  else
@@ -1915,17 +1914,17 @@ void primStoreImage(unsigned char * baseAddr)
 
 void primBlkFill(unsigned char * baseAddr)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
 
- iDrawnSomething=1;
+ iDrawnSomething = 1;
 
  sprtX = sgpuData[2];
  sprtY = sgpuData[3];
  sprtW = sgpuData[4] & 0x3ff;
  sprtH = sgpuData[5] & iGPUHeightMask;
 
- sprtW = (sprtW+15) & ~15;
+ sprtW = (sprtW + 15) & ~15;
 
  // Increase H & W if they are one short of full values, because they never can be full values
  if (sprtH == iGPUHeightMask)  sprtH=iGPUHeight;
@@ -1966,8 +1965,8 @@ void primBlkFill(unsigned char * baseAddr)
       {
        bDrawTextured     = FALSE;
        bDrawSmoothShaded = FALSE;
-       SetRenderState((unsigned long)0x01000000);
-       SetRenderMode((unsigned long)0x01000000, FALSE);
+       SetRenderState((uint32_t)0x01000000);
+       SetRenderMode((uint32_t)0x01000000, FALSE);
        vertex[0].c.lcol=0xff000000;
        SETCOL(vertex[0]); 
        if(ly0>pd->DisplayPosition.y)
@@ -1994,8 +1993,8 @@ void primBlkFill(unsigned char * baseAddr)
     {
      bDrawTextured     = FALSE;
      bDrawSmoothShaded = FALSE;
-     SetRenderState((unsigned long)0x01000000);
-     SetRenderMode((unsigned long)0x01000000, FALSE);
+     SetRenderState((uint32_t)0x01000000);
+     SetRenderMode((uint32_t)0x01000000, FALSE);
      vertex[0].c.lcol=gpuData[0]|0xff000000;
      SETCOL(vertex[0]); 
      glDisable(GL_SCISSOR_TEST);                       
@@ -2165,12 +2164,12 @@ void primMoveImage(unsigned char * baseAddr)
   }
  else
   {
-   unsigned long *SRCPtr, *DSTPtr;
+   uint32_t *SRCPtr, *DSTPtr;
    unsigned short LineOffset;
    int dx=imageSX>>1;
 
-   SRCPtr = (unsigned long *)(psxVuw + (1024*imageY0) + imageX0);
-   DSTPtr = (unsigned long *)(psxVuw + (1024*imageY1) + imageX1);
+   SRCPtr = (uint32_t *)(psxVuw + (1024*imageY0) + imageX0);
+   DSTPtr = (uint32_t *)(psxVuw + (1024*imageY1) + imageX1);
 
    LineOffset = 512 - dx;
 
@@ -2271,7 +2270,7 @@ void primMoveImage(unsigned char * baseAddr)
 
 void primTileS(unsigned char * baseAddr)
 {
- unsigned long *gpuData = ((unsigned long*)baseAddr);
+ uint32_t *gpuData = ((uint32_t *)baseAddr);
  short *sgpuData = ((short *) baseAddr);
 
  sprtX = sgpuData[2];
@@ -2336,8 +2335,8 @@ void primTileS(unsigned char * baseAddr)
 
 void primTile1(unsigned char * baseAddr)
 {
- unsigned long *gpuData = ((unsigned long*)baseAddr);
- short *sgpuData = ((short *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *)baseAddr);
+ short *sgpuData = ((short *)baseAddr);
 
  sprtX = sgpuData[2];
  sprtY = sgpuData[3];
@@ -2383,7 +2382,7 @@ void primTile1(unsigned char * baseAddr)
 
 void primTile8(unsigned char * baseAddr)
 {
- unsigned long *gpuData = ((unsigned long*)baseAddr);
+ uint32_t *gpuData = ((uint32_t *)baseAddr);
  short *sgpuData = ((short *) baseAddr);
 
  sprtX = sgpuData[2];
@@ -2430,8 +2429,8 @@ void primTile8(unsigned char * baseAddr)
 
 void primTile16(unsigned char * baseAddr)
 {
- unsigned long *gpuData = ((unsigned long*)baseAddr);
- short *sgpuData = ((short *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *)baseAddr);
+ short *sgpuData = ((short *)baseAddr);
 
  sprtX = sgpuData[2];
  sprtY = sgpuData[3];
@@ -2477,7 +2476,8 @@ void primTile16(unsigned char * baseAddr)
 
 void DrawMultiBlur(void)
 {
- long lABR,lDST;float fx,fy;
+ int lABR,lDST;
+ float fx,fy;
 
  lABR=GlobalTextABR;
  lDST=DrawSemiTrans;
@@ -2510,7 +2510,7 @@ void DrawMultiBlur(void)
 
 void DrawMultiFilterSprite(void)
 {
- long lABR,lDST;
+ int lABR,lDST;
 
  if(bUseMultiPass || DrawSemiTrans || ubOpaqueDraw) 
   {
@@ -2541,7 +2541,7 @@ void DrawMultiFilterSprite(void)
 
 void primSprt8(unsigned char * baseAddr)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
  short s;
 
@@ -2662,7 +2662,7 @@ void primSprt8(unsigned char * baseAddr)
 
 void primSprt16(unsigned char * baseAddr)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
  short s;
 
@@ -2782,15 +2782,15 @@ void primSprt16(unsigned char * baseAddr)
  
 void primSprtSRest(unsigned char * baseAddr,unsigned short type)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *)baseAddr);
  short *sgpuData = ((short *) baseAddr);
- short s;unsigned short sTypeRest=0;
+ short s;
+ unsigned short sTypeRest=0;
 
  sprtX = sgpuData[2];
  sprtY = sgpuData[3];
  sprtW = sgpuData[6] & 0x3ff;
  sprtH = sgpuData[7] & 0x1ff;
-
 
  // do texture stuff
  switch(type)
@@ -2953,10 +2953,11 @@ void primSprtSRest(unsigned char * baseAddr,unsigned short type)
 
 void primSprtS(unsigned char * baseAddr)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
 
- short s;unsigned short sTypeRest=0;
+ short s;
+ unsigned short sTypeRest=0;
 
  sprtX = sgpuData[2];
  sprtY = sgpuData[3];
@@ -3092,7 +3093,7 @@ void primSprtS(unsigned char * baseAddr)
 
 void primPolyF4(unsigned char *baseAddr)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
 
  lx0 = sgpuData[2];
@@ -3187,12 +3188,12 @@ BOOL bCheckFF9G4(unsigned char * baseAddr)
 
  if(iFF9Fix==2)
   {
-   long labr=GlobalTextABR;
-   GlobalTextABR=1;
+   int labr=GlobalTextABR;
+   GlobalTextABR = 1;
    primPolyG4(pFF9G4Cache);
-   GlobalTextABR=labr;
+   GlobalTextABR = labr;
   }
- iFF9Fix=0;
+ iFF9Fix = 0;
 
  return FALSE;
 }
@@ -3201,8 +3202,8 @@ BOOL bCheckFF9G4(unsigned char * baseAddr)
 
 void primPolyG4(unsigned char * baseAddr)
 {
- unsigned long *gpuData = (unsigned long *)baseAddr;
- short *sgpuData = ((short *) baseAddr);
+ uint32_t *gpuData = (uint32_t *)baseAddr;
+ short *sgpuData = ((short *)baseAddr);
 
  lx0 = sgpuData[2];
  ly0 = sgpuData[3];
@@ -3252,7 +3253,7 @@ void primPolyG4(unsigned char * baseAddr)
 // cmd: flat shaded Texture3
 ////////////////////////////////////////////////////////////////////////
 
-BOOL DoLineCheck(unsigned long * gpuData)
+BOOL DoLineCheck(uint32_t *gpuData)
 {
  BOOL bQuad=FALSE;short dx,dy;
 
@@ -3419,7 +3420,7 @@ BOOL DoLineCheck(unsigned long * gpuData)
 
 void primPolyFT3(unsigned char * baseAddr)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
 
  lx0 = sgpuData[2];
@@ -3855,7 +3856,7 @@ void RectTexAlign(void)
 
 void primPolyFT4(unsigned char * baseAddr)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *)baseAddr);
  short *sgpuData = ((short *) baseAddr);
 
  lx0 = sgpuData[2];
@@ -3942,7 +3943,7 @@ void primPolyFT4(unsigned char * baseAddr)
 
 void primPolyGT3(unsigned char *baseAddr)
 {    
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
 
  lx0 = sgpuData[2];
@@ -4051,7 +4052,7 @@ void primPolyGT3(unsigned char *baseAddr)
 
 void primPolyG3(unsigned char *baseAddr)
 {    
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *)baseAddr);
  short *sgpuData = ((short *) baseAddr);
 
  lx0 = sgpuData[2];
@@ -4096,8 +4097,8 @@ void primPolyG3(unsigned char *baseAddr)
 
 void primPolyGT4(unsigned char *baseAddr)
 { 
- unsigned long *gpuData = ((unsigned long *) baseAddr);
- short *sgpuData = ((short *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *)baseAddr);
+ short *sgpuData = ((short *)baseAddr);
 
  lx0 = sgpuData[2];
  ly0 = sgpuData[3];
@@ -4216,7 +4217,7 @@ void primPolyGT4(unsigned char *baseAddr)
 
 void primPolyF3(unsigned char *baseAddr)
 {    
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
 
  lx0 = sgpuData[2];
@@ -4260,7 +4261,7 @@ void primPolyF3(unsigned char *baseAddr)
 
 void primLineGSkip(unsigned char *baseAddr)
 {    
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
  int iMax=255;
  int i=2;
@@ -4285,7 +4286,7 @@ void primLineGSkip(unsigned char *baseAddr)
 
 void primLineGEx(unsigned char *baseAddr)
 {    
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
  int iMax=255;
  short cx0,cx1,cy0,cy1;int i;BOOL bDraw=TRUE;
 
@@ -4349,7 +4350,7 @@ void primLineGEx(unsigned char *baseAddr)
 
 void primLineG2(unsigned char *baseAddr)
 {    
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
 
  lx0 = sgpuData[2];
@@ -4394,7 +4395,7 @@ void primLineG2(unsigned char *baseAddr)
 
 void primLineFSkip(unsigned char *baseAddr)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
  int i=2,iMax=255;
 
  ly1 = (short)((gpuData[1]>>16) & 0xffff);
@@ -4414,7 +4415,7 @@ void primLineFSkip(unsigned char *baseAddr)
 
 void primLineFEx(unsigned char *baseAddr)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
  int iMax;
  short cx0,cx1,cy0,cy1;int i;
 
@@ -4472,7 +4473,7 @@ void primLineFEx(unsigned char *baseAddr)
 
 void primLineF2(unsigned char *baseAddr)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
 
  lx0 = sgpuData[2];

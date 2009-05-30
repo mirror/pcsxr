@@ -41,18 +41,18 @@ void offsetPSX2(void);
 void offsetPSX3(void);
 void offsetPSX4(void);
 
-void FillSoftwareAreaTrans(short x0,short y0,short x1,short y1,unsigned short col);
-void FillSoftwareArea(short x0,short y0,short x1,short y1,unsigned short col);
-void drawPoly3G(long rgb1, long rgb2, long rgb3);
-void drawPoly4G(long rgb1, long rgb2, long rgb3, long rgb4);
-void drawPoly3F(long rgb);
-void drawPoly4F(long rgb);
-void drawPoly4FT(unsigned char * baseAddr);
-void drawPoly4GT(unsigned char * baseAddr);
-void drawPoly3FT(unsigned char * baseAddr);
-void drawPoly3GT(unsigned char * baseAddr);
-void DrawSoftwareSprite(unsigned char * baseAddr,short w,short h,long tx,long ty);
-void DrawSoftwareSpriteTWin(unsigned char * baseAddr,long w,long h);
-void DrawSoftwareSpriteMirror(unsigned char * baseAddr,long w,long h);
+void FillSoftwareAreaTrans(short x0, short y0, short x1, short y1, unsigned short col);
+void FillSoftwareArea(short x0, short y0, short x1, short y1, unsigned short col);
+void drawPoly3G(int rgb1, int rgb2, int rgb3);
+void drawPoly4G(int rgb1, int rgb2, int rgb3, int rgb4);
+void drawPoly3F(int rgb);
+void drawPoly4F(int rgb);
+void drawPoly4FT(unsigned char *baseAddr);
+void drawPoly4GT(unsigned char *baseAddr);
+void drawPoly3FT(unsigned char *baseAddr);
+void drawPoly3GT(unsigned char *baseAddr);
+void DrawSoftwareSprite(unsigned char *baseAddr, short w, short h, int tx, int ty);
+void DrawSoftwareSpriteTWin(unsigned char *baseAddr, int w, int h);
+void DrawSoftwareSpriteMirror(unsigned char *baseAddr, int w, int h);
 
 #endif // _GPU_SOFT_H_

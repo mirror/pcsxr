@@ -19,8 +19,8 @@
 #ifndef _PRIMDRAW_H_
 #define _PRIMDRAW_H_
 
-void UploadScreen (long Position);
-void PrepareFullScreenUpload (long Position);
+void UploadScreen (int Position);
+void PrepareFullScreenUpload (int Position);
 BOOL CheckAgainstScreen(short imageX0,short imageY0,short imageX1,short imageY1);
 BOOL CheckAgainstFrontScreen(short imageX0,short imageY0,short imageX1,short imageY1);
 BOOL FastCheckAgainstScreen(short imageX0,short imageY0,short imageX1,short imageY1);

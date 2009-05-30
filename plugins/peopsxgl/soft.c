@@ -23,7 +23,7 @@
 #include "externals.h"
 #include "soft.h"
 
-int iDither=0;
+int iDither = 0;
 
 ////////////////////////////////////////////////////////////////////////////////////
 // "NO EDGE BUFFER" POLY VERSION... FUNCS BASED ON FATMAP.TXT FROM MRI / Doomsday
@@ -81,14 +81,14 @@ int iDither=0;
 // soft globals
 ////////////////////////////////////////////////////////////////////////////////////
 
-short g_m1=255,g_m2=255,g_m3=255;
-short DrawSemiTrans=FALSE;
+short g_m1 = 255, g_m2 = 255, g_m3 = 255;
+short DrawSemiTrans = FALSE;
 short Ymin;
 short Ymax;
 
-short          ly0,lx0,ly1,lx1,ly2,lx2,ly3,lx3;        // global psx vertex coords
-long           GlobalTextAddrX,GlobalTextAddrY,GlobalTextTP;
-long           GlobalTextREST,GlobalTextABR,GlobalTextPAGE;
+short          ly0, lx0, ly1, lx1, ly2, lx2, ly3, lx3;   // global psx vertex coords
+int            GlobalTextAddrX, GlobalTextAddrY, GlobalTextTP;
+int            GlobalTextREST, GlobalTextABR, GlobalTextPAGE;
 
 ////////////////////////////////////////////////////////////////////////
 // POLYGON OFFSET FUNCS
@@ -205,15 +205,15 @@ unsigned char dithertable[16] =
     4, 3, 5, 2
 };
 
-void Dither16(unsigned short * pdest,unsigned long r,unsigned long g,unsigned long b,unsigned short sM)
+void Dither16(unsigned short *pdest, uint32_t r, uint32_t g, uint32_t b, unsigned short sM)
 {
  unsigned char coeff;
  unsigned char rlow, glow, blow;
- int x,y;
+ int x, y;
                  
- x=pdest-psxVuw;
- y=x>>10;
- x-=(y<<10);
+ x = pdest - psxVuw;
+ y = x >> 10;
+ x -= (y << 10);
 
  coeff = dithertable[(y&3)*4+(x&3)];
 
@@ -231,16 +231,14 @@ void Dither16(unsigned short * pdest,unsigned long r,unsigned long g,unsigned lo
 }
 
 /////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
 
-__inline void GetShadeTransCol_Dither(unsigned short * pdest,long m1,long m2,long m3)
+__inline void GetShadeTransCol_Dither(unsigned short *pdest, int m1, int m2, int m3)
 {
- long r,g,b;
+ int r,g,b;
 
- if(bCheckMask && *pdest&0x8000) return;
+ if (bCheckMask && *pdest & 0x8000) return;
 
- if(DrawSemiTrans)
+ if (DrawSemiTrans)
   {
    r=((XCOL1D(*pdest))<<3);
    b=((XCOL2D(*pdest))<<3);
@@ -304,7 +302,7 @@ __inline void GetShadeTransCol(unsigned short * pdest,unsigned short color)
 
  if(DrawSemiTrans)
   {
-   long r,g,b;
+   int r,g,b;
  
    if(GlobalTextABR==0)
     {
@@ -357,12 +355,12 @@ __inline void GetShadeTransCol(unsigned short * pdest,unsigned short color)
 
 ////////////////////////////////////////////////////////////////////////
 
-__inline void GetShadeTransCol32(unsigned long * pdest,unsigned long color)
+__inline void GetShadeTransCol32(uint32_t *pdest, uint32_t color)
 {
- if(DrawSemiTrans)
+ if (DrawSemiTrans)
   {
-   long r,g,b;
- 
+   int r,g,b;
+
    if(GlobalTextABR==0)
     {
      if(!bCheckMask)
@@ -384,13 +382,13 @@ __inline void GetShadeTransCol32(unsigned long * pdest,unsigned long color)
    else
    if(GlobalTextABR==2)
     {
-     long sr,sb,sg,src,sbc,sgc,c;
+     int sr,sb,sg,src,sbc,sgc,c;
      src=XCOL1(color);sbc=XCOL2(color);sgc=XCOL3(color);
      c=(*pdest)>>16;
      sr=(XCOL1(c))-src;   if(sr&0x8000) sr=0;
      sb=(XCOL2(c))-sbc;  if(sb&0x8000) sb=0;
      sg=(XCOL3(c))-sgc; if(sg&0x8000) sg=0;
-     r=((long)sr)<<16;b=((long)sb)<<11;g=((long)sg)<<6;
+     r=((int)sr)<<16;b=((int)sb)<<11;g=((int)sg)<<6;
      c=LOWORD(*pdest);
      sr=(XCOL1(c))-src;   if(sr&0x8000) sr=0;
      sb=(XCOL2(c))-sbc;  if(sb&0x8000) sb=0;
@@ -419,7 +417,7 @@ __inline void GetShadeTransCol32(unsigned long * pdest,unsigned long color)
 
    if(bCheckMask) 
     {
-     unsigned long ma=*pdest;
+     uint32_t ma=*pdest;
      *pdest=(X32PSXCOL(r,g,b))|lSetMask;//0x80008000;
      if(ma&0x80000000) *pdest=(ma&0xFFFF0000)|(*pdest&0xFFFF);
      if(ma&0x00008000) *pdest=(ma&0xFFFF)    |(*pdest&0xFFFF0000);
@@ -431,7 +429,7 @@ __inline void GetShadeTransCol32(unsigned long * pdest,unsigned long color)
   {
    if(bCheckMask) 
     {
-     unsigned long ma=*pdest;
+     uint32_t ma=*pdest;
      *pdest=color|lSetMask;//0x80008000;
      if(ma&0x80000000) *pdest=(ma&0xFFFF0000)|(*pdest&0xFFFF);
      if(ma&0x00008000) *pdest=(ma&0xFFFF)    |(*pdest&0xFFFF0000);
@@ -446,7 +444,7 @@ __inline void GetShadeTransCol32(unsigned long * pdest,unsigned long color)
 
 __inline void GetTextureTransColG(unsigned short * pdest,unsigned short color)
 {
- long r,g,b;unsigned short l;
+ int r,g,b;unsigned short l;
 
  if(color==0) return;
 
@@ -519,7 +517,7 @@ __inline void GetTextureTransColG(unsigned short * pdest,unsigned short color)
 
 __inline void GetTextureTransColG_S(unsigned short * pdest,unsigned short color)
 {
- long r,g,b;unsigned short l;
+ int r,g,b;unsigned short l;
 
  if(color==0) return;
 
@@ -541,7 +539,7 @@ __inline void GetTextureTransColG_S(unsigned short * pdest,unsigned short color)
 
 __inline void GetTextureTransColG_SPR(unsigned short * pdest,unsigned short color)
 {
- long r,g,b;unsigned short l;
+ int r,g,b;unsigned short l;
 
  if(color==0) return;
 
@@ -612,9 +610,9 @@ __inline void GetTextureTransColG_SPR(unsigned short * pdest,unsigned short colo
 
 ////////////////////////////////////////////////////////////////////////
 
-__inline void GetTextureTransColG32(unsigned long * pdest,unsigned long color)
+__inline void GetTextureTransColG32(uint32_t *pdest, uint32_t color)
 {
- long r,g,b,l;
+ int r,g,b,l;
 
  if(color==0) return;
 
@@ -638,7 +636,7 @@ __inline void GetTextureTransColG32(unsigned long * pdest,unsigned long color)
    else
    if(GlobalTextABR==2)
     {
-     long t;
+     int t;
      r=(((((X32COL1(color)))* g_m1)&0xFF80FF80)>>7);
      t=(*pdest&0x001f0000)-(r&0x003f0000); if(t&0x80000000) t=0;
      r=(*pdest&0x0000001f)-(r&0x0000003f); if(r&0x80000000) r=0;
@@ -697,7 +695,7 @@ __inline void GetTextureTransColG32(unsigned long * pdest,unsigned long color)
          
  if(bCheckMask) 
   {
-   unsigned long ma=*pdest;
+   uint32_t ma=*pdest;
 
    *pdest=(X32PSXCOL(r,g,b))|l;
    
@@ -716,9 +714,9 @@ __inline void GetTextureTransColG32(unsigned long * pdest,unsigned long color)
 
 ////////////////////////////////////////////////////////////////////////
 
-__inline void GetTextureTransColG32_S(unsigned long * pdest,unsigned long color)
+__inline void GetTextureTransColG32_S(uint32_t *pdest, uint32_t color)
 {
- long r,g,b;
+ int r,g,b;
 
  if(color==0) return;
 
@@ -741,10 +739,10 @@ __inline void GetTextureTransColG32_S(unsigned long * pdest,unsigned long color)
 
 ////////////////////////////////////////////////////////////////////////
 
-__inline void GetTextureTransColG32_SPR(unsigned long * pdest,unsigned long color)
+__inline void GetTextureTransColG32_SPR(uint32_t *pdest, uint32_t color)
 {
- long r,g,b;
-        
+ int r,g,b;
+
  if(color==0) return;
 
  if(DrawSemiTrans && (color&0x80008000))
@@ -765,7 +763,7 @@ __inline void GetTextureTransColG32_SPR(unsigned long * pdest,unsigned long colo
    else
    if(GlobalTextABR==2)
     {
-     long t;
+     int t;
      r=(((((X32COL1(color)))* g_m1)&0xFF80FF80)>>7);
      t=(*pdest&0x001f0000)-(r&0x003f0000); if(t&0x80000000) t=0;
      r=(*pdest&0x0000001f)-(r&0x0000003f); if(r&0x80000000) r=0;
@@ -824,7 +822,7 @@ __inline void GetTextureTransColG32_SPR(unsigned long * pdest,unsigned long colo
          
  if(bCheckMask) 
   {
-   unsigned long ma=*pdest;
+   uint32_t ma=*pdest;
 
    *pdest=(X32PSXCOL(r,g,b))|lSetMask|(color&0x80008000);
    
@@ -843,9 +841,9 @@ __inline void GetTextureTransColG32_SPR(unsigned long * pdest,unsigned long colo
 
 ////////////////////////////////////////////////////////////////////////
 
-__inline void GetTextureTransColGX_Dither(unsigned short * pdest,unsigned short color,long m1,long m2,long m3)
+__inline void GetTextureTransColGX_Dither(unsigned short * pdest, unsigned short color, int m1, int m2, int m3)
 {
- long r,g,b;
+ int r,g,b;
 
  if(color==0) return;
  
@@ -916,7 +914,7 @@ __inline void GetTextureTransColGX_Dither(unsigned short * pdest,unsigned short 
 
 __inline void GetTextureTransColGX(unsigned short * pdest,unsigned short color,short m1,short m2,short m3)
 {
- long r,g,b;unsigned short l;
+ int r,g,b;unsigned short l;
 
  if(color==0) return;
  
@@ -988,7 +986,7 @@ __inline void GetTextureTransColGX(unsigned short * pdest,unsigned short color,s
 
 __inline void GetTextureTransColGX_S(unsigned short * pdest,unsigned short color,short m1,short m2,short m3)
 {
- long r,g,b;
+ int r,g,b;
 
  if(color==0) return;
  
@@ -1005,9 +1003,9 @@ __inline void GetTextureTransColGX_S(unsigned short * pdest,unsigned short color
 
 ////////////////////////////////////////////////////////////////////////
 
-__inline void GetTextureTransColGX32_S(unsigned long * pdest,unsigned long color,short m1,short m2,short m3)
+__inline void GetTextureTransColGX32_S(uint32_t *pdest, uint32_t color, short m1, short m2, short m3)
 {
- long r,g,b;
+ int r,g,b;
  
  if(color==0) return;
 
@@ -1093,11 +1091,11 @@ readdatamem 0x00008000 1
   }
  else                                                  // fast fill
   {
-   unsigned long *DSTPtr;
+   uint32_t *DSTPtr;
    unsigned short LineOffset;
-   unsigned long lcol=lSetMask|(((unsigned long)(col))<<16)|col;
+   uint32_t lcol=lSetMask|(((uint32_t)(col))<<16)|col;
    dx>>=1;
-   DSTPtr = (unsigned long *)(psxVuw + (1024*y0) + x0);
+   DSTPtr = (uint32_t *)(psxVuw + (1024*y0) + x0);
    LineOffset = 512 - dx;
 
    if(!bCheckMask && !DrawSemiTrans)
@@ -1153,11 +1151,11 @@ void FillSoftwareArea(short x0,short y0,short x1,      // FILL AREA (BLK FILL)
   }
  else
   {
-   unsigned long *DSTPtr;
+   uint32_t *DSTPtr;
    unsigned short LineOffset;
-   unsigned long lcol=(((long)col)<<16)|col;
+   uint32_t lcol=(((int)col)<<16)|col;
    dx>>=1;
-   DSTPtr = (unsigned long *)(psxVuw + (1024*y0) + x0);
+   DSTPtr = (uint32_t *)(psxVuw + (1024*y0) + x0);
    LineOffset = 512 - dx;
 
    for(i=0;i<dy;i++)
@@ -1169,18 +1167,14 @@ void FillSoftwareArea(short x0,short y0,short x1,      // FILL AREA (BLK FILL)
 }
 
 ////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
 // EDGE INTERPOLATION
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
 typedef struct SOFTVTAG
 {
  int x,y;   
  int u,v;
- long R,G,B;
+ int R,G,B;
 } soft_vertex;
 
 static soft_vertex vtx[4];
@@ -1374,10 +1368,9 @@ __inline BOOL NextRow_G(void)
  return FALSE;
 }
 
-__inline BOOL SetupSections_G(short x1,short y1,short x2,short y2,short x3,short y3,long rgb1, long rgb2, long rgb3)
-{
- soft_vertex * v1, * v2, * v3;
- int height,longest,temp;
+__inline BOOL SetupSections_G(short x1,short y1,short x2,short y2,short x3,short y3, int rgb1, int rgb2, int rgb3){
+ soft_vertex *v1, *v2, *v3;
+ int height, longest, temp;
 
  v1 = vtx;   v1->x=x1<<16;v1->y=y1;
  v1->R=(rgb1) & 0x00ff0000;
@@ -1662,7 +1655,7 @@ __inline BOOL NextRow_GT(void)
  return FALSE;
 }
 
-__inline BOOL SetupSections_GT(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, long rgb1, long rgb2, long rgb3)
+__inline BOOL SetupSections_GT(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, int rgb1, int rgb2, int rgb3)
 {
  soft_vertex * v1, * v2, * v3;
  int height,longest,temp;
@@ -2285,7 +2278,7 @@ __inline BOOL NextRow_GT4(void)
  return FALSE;
 }
 
-__inline BOOL SetupSections_GT4(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4,long rgb1,long rgb2,long rgb3,long rgb4)
+__inline BOOL SetupSections_GT4(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, int rgb1, int rgb2, int rgb3, int rgb4)
 {
  soft_vertex * v1, * v2, * v3, * v4;
  int height,width,longest1,longest2;
@@ -2451,10 +2444,11 @@ __inline BOOL SetupSections_GT4(short x1, short y1, short x2, short y2, short x3
 // POLY 3/4 FLAT SHADED
 ////////////////////////////////////////////////////////////////////////
 
-__inline void drawPoly3Fi(short x1,short y1,short x2,short y2,short x3,short y3,long rgb)
+__inline void drawPoly3Fi(short x1, short y1, short x2, short y2, short x3, short y3, int rgb)
 {
  int i,j,xmin,xmax,ymin,ymax;
- unsigned short color;unsigned long lcolor;
+ unsigned short color;
+ uint32_t lcolor;
 
  if(x1>drawW && x2>drawW && x3>drawW) return;
  if(y1>drawH && y2>drawH && y3>drawH) return;
@@ -2468,7 +2462,7 @@ __inline void drawPoly3Fi(short x1,short y1,short x2,short y2,short x3,short y3,
  ymax=Ymax;
 
  color = ((rgb & 0x00f80000)>>9) | ((rgb & 0x0000f800)>>6) | ((rgb & 0x000000f8)>>3);
- lcolor=lSetMask|(((unsigned long)(color))<<16)|color;
+ lcolor=lSetMask|(((uint32_t)(color))<<16)|color;
 
  for(ymin=Ymin;ymin<drawY;ymin++)
   if(NextRow_F()) return;
@@ -2485,7 +2479,7 @@ __inline void drawPoly3Fi(short x1,short y1,short x2,short y2,short x3,short y3,
 
      for(j=xmin;j<xmax;j+=2) 
       {
-       *((unsigned long *)&psxVuw[(i<<10)+j])=lcolor;
+       *((uint32_t *)&psxVuw[(i<<10)+j])=lcolor;
       }
      if(j==xmax) psxVuw[(i<<10)+j]=color;
 
@@ -2503,10 +2497,10 @@ __inline void drawPoly3Fi(short x1,short y1,short x2,short y2,short x3,short y3,
 
    for(j=xmin;j<xmax;j+=2) 
     {
-     GetShadeTransCol32((unsigned long *)&psxVuw[(i<<10)+j],lcolor);
+     GetShadeTransCol32((uint32_t *)&psxVuw[(i<<10)+j], lcolor);
     }
-   if(j==xmax)
-    GetShadeTransCol(&psxVuw[(i<<10)+j],color);
+   if(j == xmax)
+    GetShadeTransCol(&psxVuw[(i << 10) + j],color);
 
    if(NextRow_F()) return;
   }
@@ -2514,14 +2508,14 @@ __inline void drawPoly3Fi(short x1,short y1,short x2,short y2,short x3,short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3F(long rgb)
+void drawPoly3F(int rgb)
 {
  drawPoly3Fi(lx0,ly0,lx1,ly1,lx2,ly2,rgb);
 }
 
 #ifdef POLYQUAD3FS
 
-void drawPoly4F_TRI(long rgb)
+void drawPoly4F_TRI(int rgb)
 {
  drawPoly3Fi(lx1,ly1,lx3,ly3,lx2,ly2,rgb);
  drawPoly3Fi(lx0,ly0,lx1,ly1,lx2,ly2,rgb);
@@ -2531,10 +2525,10 @@ void drawPoly4F_TRI(long rgb)
 
 // more exact:
 
-void drawPoly4F(long rgb)
+void drawPoly4F(int rgb)
 {
  int i,j,xmin,xmax,ymin,ymax;
- unsigned short color;unsigned long lcolor;
+ unsigned short color;unsigned int lcolor;
  
  if(lx0>drawW && lx1>drawW && lx2>drawW && lx3>drawW) return;
  if(ly0>drawH && ly1>drawH && ly2>drawH && ly3>drawH) return;
@@ -2551,7 +2545,7 @@ void drawPoly4F(long rgb)
   if(NextRow_F4()) return;
 
  color = ((rgb & 0x00f80000)>>9) | ((rgb & 0x0000f800)>>6) | ((rgb & 0x000000f8)>>3);
- lcolor= lSetMask|(((unsigned long)(color))<<16)|color;
+ lcolor= lSetMask|(((uint32_t)(color))<<16)|color;
 
 #ifdef FASTSOLID
 
@@ -2565,7 +2559,7 @@ void drawPoly4F(long rgb)
 
      for(j=xmin;j<xmax;j+=2) 
       {
-       *((unsigned long *)&psxVuw[(i<<10)+j])=lcolor;
+       *((uint32_t *)&psxVuw[(i<<10)+j])=lcolor;
       }
      if(j==xmax) psxVuw[(i<<10)+j]=color;
 
@@ -2576,16 +2570,16 @@ void drawPoly4F(long rgb)
 
 #endif
 
- for (i=ymin;i<=ymax;i++)
+ for (i = ymin; i <= ymax; i++)
   {
-   xmin=left_x >> 16;      if(drawX>xmin) xmin=drawX;
-   xmax=(right_x >> 16)-1; if(drawW<xmax) xmax=drawW;
+   xmin = left_x >> 16;      if(drawX > xmin) xmin = drawX;
+   xmax = (right_x >> 16) - 1; if(drawW < xmax) xmax = drawW;
 
-   for(j=xmin;j<xmax;j+=2) 
+   for(j = xmin; j < xmax; j += 2) 
     {
-     GetShadeTransCol32((unsigned long *)&psxVuw[(i<<10)+j],lcolor);
+     GetShadeTransCol32((uint32_t *)&psxVuw[(i<<10) + j],lcolor);
     }
-   if(j==xmax) GetShadeTransCol(&psxVuw[(i<<10)+j],color);
+   if(j == xmax) GetShadeTransCol(&psxVuw[(i<<10) + j],color);
 
    if(NextRow_F4()) return;
   }
@@ -2598,31 +2592,31 @@ void drawPoly4F(long rgb)
 void drawPoly3TEx4(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3,short clX, short clY)
 {
  int i,j,xmin,xmax,ymin,ymax;
- long difX, difY,difX2, difY2;
- long posX,posY,YAdjust,XAdjust;
- long clutP;
+ int difX, difY,difX2, difY2;
+ int posX,posY,YAdjust,XAdjust;
+ int clutP;
  short tC1,tC2;
  
- if(x1>drawW && x2>drawW && x3>drawW) return;
- if(y1>drawH && y2>drawH && y3>drawH) return;
- if(x1<drawX && x2<drawX && x3<drawX) return;
- if(y1<drawY && y2<drawY && y3<drawY) return;
- if(drawY>=drawH) return;
- if(drawX>=drawW) return; 
+ if (x1 > drawW && x2 > drawW && x3 > drawW) return;
+ if (y1 > drawH && y2 > drawH && y3 > drawH) return;
+ if (x1 < drawX && x2 < drawX && x3 < drawX) return;
+ if (y1 < drawY && y2 < drawY && y3 < drawY) return;
+ if (drawY >= drawH) return;
+ if (drawX >= drawW) return; 
 
- if(!SetupSections_FT(x1,y1,x2,y2,x3,y3,tx1,ty1,tx2,ty2,tx3,ty3)) return;
+ if (!SetupSections_FT(x1,y1,x2,y2,x3,y3,tx1,ty1,tx2,ty2,tx3,ty3)) return;
 
- ymax=Ymax;
+ ymax = Ymax;
 
- for(ymin=Ymin;ymin<drawY;ymin++)
-  if(NextRow_FT()) return;
+ for (ymin = Ymin; ymin < drawY; ymin++)
+  if (NextRow_FT()) return;
 
- clutP=(clY<<10)+clX;
+ clutP = (clY << 10) + clX;
 
- YAdjust=((GlobalTextAddrY)<<11)+(GlobalTextAddrX<<1);
+ YAdjust = ((GlobalTextAddrY) << 11) + (GlobalTextAddrX << 1);
 
- difX=delta_right_u;difX2=difX<<1;
- difY=delta_right_v;difY2=difY<<1;
+ difX = delta_right_u; difX2 = difX << 1;
+ difY = delta_right_v; difY2 = difY << 1;
 
 #ifdef FASTSOLID
 
@@ -2652,9 +2646,9 @@ void drawPoly3TEx4(short x1, short y1, short x2, short y2, short x3, short y3, s
                     (XAdjust>>1)];
          tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
              psxVuw[clutP+tC1]|
-             ((long)psxVuw[clutP+tC2])<<16);
+             ((int)psxVuw[clutP+tC2])<<16);
 
          posX+=difX2;
          posY+=difY2;
@@ -2702,9 +2696,9 @@ void drawPoly3TEx4(short x1, short y1, short x2, short y2, short x3, short y3, s
                     (XAdjust>>1)];
        tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
            psxVuw[clutP+tC1]|
-           ((long)psxVuw[clutP+tC2])<<16);
+           ((int)psxVuw[clutP+tC2])<<16);
 
        posX+=difX2;
        posY+=difY2;
@@ -2730,9 +2724,9 @@ void drawPoly3TEx4(short x1, short y1, short x2, short y2, short x3, short y3, s
 void drawPoly3TEx4_IL(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3,short clX, short clY)
 {
  int i,j,xmin,xmax,ymin,ymax,n_xi,n_yi,TXV;
- long difX, difY,difX2, difY2;
- long posX,posY,YAdjust,XAdjust;
- long clutP;
+ int difX, difY,difX2, difY2;
+ int posX,posY,YAdjust,XAdjust;
+ int clutP;
  short tC1,tC2;
  
  if(x1>drawW && x2>drawW && x3>drawW) return;
@@ -2792,9 +2786,9 @@ void drawPoly3TEx4_IL(short x1, short y1, short x2, short y2, short x3, short y3
 
          tC2= (psxVuw[(n_yi<<10)+YAdjust+n_xi] >> ((XAdjust & 0x03)<<2)) & 0x0f ;
 
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
              psxVuw[clutP+tC1]|
-             ((long)psxVuw[clutP+tC2])<<16);
+             ((int)psxVuw[clutP+tC2])<<16);
 
          posX+=difX2;
          posY+=difY2;
@@ -2854,9 +2848,9 @@ void drawPoly3TEx4_IL(short x1, short y1, short x2, short y2, short x3, short y3
 
        tC2= (psxVuw[(n_yi<<10)+YAdjust+n_xi] >> ((XAdjust & 0x03)<<2)) & 0x0f ;
 
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
            psxVuw[clutP+tC1]|
-           ((long)psxVuw[clutP+tC2])<<16);
+           ((int)psxVuw[clutP+tC2])<<16);
 
        posX+=difX2;
        posY+=difY2;
@@ -2886,9 +2880,9 @@ void drawPoly3TEx4_IL(short x1, short y1, short x2, short y2, short x3, short y3
 void drawPoly3TEx4_TW(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3,short clX, short clY)
 {
  int i,j,xmin,xmax,ymin,ymax;
- long difX, difY,difX2, difY2;
- long posX,posY,YAdjust,XAdjust;
- long clutP;
+ int difX, difY,difX2, difY2;
+ int posX,posY,YAdjust,XAdjust;
+ int clutP;
  short tC1,tC2;
  
  if(x1>drawW && x2>drawW && x3>drawW) return;
@@ -2944,9 +2938,9 @@ void drawPoly3TEx4_TW(short x1, short y1, short x2, short y2, short x3, short y3
                       YAdjust+(XAdjust>>1)];
          tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i << 10) + j],
              psxVuw[clutP+tC1]|
-             ((long)psxVuw[clutP+tC2])<<16);
+             ((int)psxVuw[clutP+tC2])<<16);
 
          posX+=difX2;
          posY+=difY2;
@@ -2995,9 +2989,9 @@ void drawPoly3TEx4_TW(short x1, short y1, short x2, short y2, short x3, short y3
                     YAdjust+(XAdjust>>1)];
        tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
            psxVuw[clutP+tC1]|
-           ((long)psxVuw[clutP+tC2])<<16);
+           ((int)psxVuw[clutP+tC2])<<16);
 
        posX+=difX2;
        posY+=difY2;
@@ -3038,10 +3032,10 @@ void drawPoly4TEx4_TRI(short x1, short y1, short x2, short y2, short x3, short y
 
 void drawPoly4TEx4(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4,short clX, short clY)
 {
- long num; 
- long i,j,xmin,xmax,ymin,ymax;
- long difX, difY, difX2, difY2;
- long posX,posY,YAdjust,clutP,XAdjust;
+ int num; 
+ int i,j,xmin,xmax,ymin,ymax;
+ int difX, difY, difX2, difY2;
+ int posX,posY,YAdjust,clutP,XAdjust;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW && x4>drawW) return;
@@ -3097,9 +3091,9 @@ void drawPoly4TEx4(short x1, short y1, short x2, short y2, short x3, short y3, s
                        (XAdjust>>1)];
          tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
-              ((long)psxVuw[clutP+tC2])<<16);
+              ((int)psxVuw[clutP+tC2])<<16);
          posX+=difX2;
          posY+=difY2;
         }
@@ -3151,9 +3145,9 @@ void drawPoly4TEx4(short x1, short y1, short x2, short y2, short x3, short y3, s
                      (XAdjust>>1)];
        tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
             psxVuw[clutP+tC1]|
-            ((long)psxVuw[clutP+tC2])<<16);
+            ((int)psxVuw[clutP+tC2])<<16);
        posX+=difX2;
        posY+=difY2;
       }
@@ -3174,10 +3168,10 @@ void drawPoly4TEx4(short x1, short y1, short x2, short y2, short x3, short y3, s
 
 void drawPoly4TEx4_IL(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4,short clX, short clY)
 {
- long num; 
- long i,j,xmin,xmax,ymin,ymax,n_xi,n_yi,TXV;
- long difX, difY, difX2, difY2;
- long posX,posY,YAdjust,clutP,XAdjust;
+ int num; 
+ int i,j,xmin,xmax,ymin,ymax,n_xi,n_yi,TXV;
+ int difX, difY, difX2, difY2;
+ int posX,posY,YAdjust,clutP,XAdjust;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW && x4>drawW) return;
@@ -3241,9 +3235,9 @@ void drawPoly4TEx4_IL(short x1, short y1, short x2, short y2, short x3, short y3
 
          tC2= (psxVuw[(n_yi<<10)+YAdjust+n_xi] >> ((XAdjust & 0x03)<<2)) & 0x0f ;
 
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
-              ((long)psxVuw[clutP+tC2])<<16);
+              ((int)psxVuw[clutP+tC2])<<16);
          posX+=difX2;
          posY+=difY2;
         }
@@ -3307,9 +3301,9 @@ void drawPoly4TEx4_IL(short x1, short y1, short x2, short y2, short x3, short y3
 
        tC2= (psxVuw[(n_yi<<10)+YAdjust+n_xi] >> ((XAdjust & 0x03)<<2)) & 0x0f ;
 
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
             psxVuw[clutP+tC1]|
-            ((long)psxVuw[clutP+tC2])<<16);
+            ((int)psxVuw[clutP+tC2])<<16);
        posX+=difX2;
        posY+=difY2;
       }
@@ -3333,10 +3327,10 @@ void drawPoly4TEx4_IL(short x1, short y1, short x2, short y2, short x3, short y3
 
 void drawPoly4TEx4_TW(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4,short clX, short clY)
 {
- long num; 
- long i,j,xmin,xmax,ymin,ymax;
- long difX, difY, difX2, difY2;
- long posX,posY,YAdjust,clutP,XAdjust;
+ int num; 
+ int i,j,xmin,xmax,ymin,ymax;
+ int difX, difY, difX2, difY2;
+ int posX,posY,YAdjust,clutP,XAdjust;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW && x4>drawW) return;
@@ -3394,9 +3388,9 @@ void drawPoly4TEx4_TW(short x1, short y1, short x2, short y2, short x3, short y3
                       YAdjust+(XAdjust>>1)];
          tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
-              ((long)psxVuw[clutP+tC2])<<16);
+              ((int)psxVuw[clutP+tC2])<<16);
          posX+=difX2;
          posY+=difY2;
         }
@@ -3448,9 +3442,9 @@ void drawPoly4TEx4_TW(short x1, short y1, short x2, short y2, short x3, short y3
                     YAdjust+(XAdjust>>1)];
        tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
             psxVuw[clutP+tC1]|
-            ((long)psxVuw[clutP+tC2])<<16);
+            ((int)psxVuw[clutP+tC2])<<16);
        posX+=difX2;
        posY+=difY2;
       }
@@ -3471,10 +3465,10 @@ void drawPoly4TEx4_TW(short x1, short y1, short x2, short y2, short x3, short y3
 
 void drawPoly4TEx4_TW_S(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4,short clX, short clY)
 {
- long num; 
- long i,j,xmin,xmax,ymin,ymax;
- long difX, difY, difX2, difY2;
- long posX,posY,YAdjust,clutP,XAdjust;
+ int num; 
+ int i,j,xmin,xmax,ymin,ymax;
+ int difX, difY, difX2, difY2;
+ int posX,posY,YAdjust,clutP,XAdjust;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW && x4>drawW) return;
@@ -3532,9 +3526,9 @@ void drawPoly4TEx4_TW_S(short x1, short y1, short x2, short y2, short x3, short 
                       YAdjust+(XAdjust>>1)];
          tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
-              ((long)psxVuw[clutP+tC2])<<16);
+              ((int)psxVuw[clutP+tC2])<<16);
          posX+=difX2;
          posY+=difY2;
         }
@@ -3586,9 +3580,9 @@ void drawPoly4TEx4_TW_S(short x1, short y1, short x2, short y2, short x3, short 
                     YAdjust+(XAdjust>>1)];
        tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
-       GetTextureTransColG32_SPR((unsigned long *)&psxVuw[(i<<10)+j],
+       GetTextureTransColG32_SPR((uint32_t *)&psxVuw[(i<<10)+j],
             psxVuw[clutP+tC1]|
-            ((long)psxVuw[clutP+tC2])<<16);
+            ((int)psxVuw[clutP+tC2])<<16);
        posX+=difX2;
        posY+=difY2;
       }
@@ -3611,8 +3605,8 @@ void drawPoly4TEx4_TW_S(short x1, short y1, short x2, short y2, short x3, short 
 void drawPoly3TEx8(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3,short clX, short clY)
 {
  int i,j,xmin,xmax,ymin,ymax;
- long difX, difY,difX2, difY2;
- long posX,posY,YAdjust,clutP;
+ int difX, difY,difX2, difY2;
+ int posX,posY,YAdjust,clutP;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW) return;
@@ -3659,9 +3653,9 @@ void drawPoly3TEx8(short x1, short y1, short x2, short y2, short x3, short y3, s
          tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
          tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
                       ((posX+difX)>>16)];
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
              psxVuw[clutP+tC1]|
-             ((long)psxVuw[clutP+tC2])<<16);
+             ((int)psxVuw[clutP+tC2])<<16);
          posX+=difX2;
          posY+=difY2;
         }
@@ -3701,9 +3695,9 @@ void drawPoly3TEx8(short x1, short y1, short x2, short y2, short x3, short y3, s
        tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
        tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
                     ((posX+difX)>>16)];
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
            psxVuw[clutP+tC1]|
-           ((long)psxVuw[clutP+tC2])<<16);
+           ((int)psxVuw[clutP+tC2])<<16);
        posX+=difX2;
        posY+=difY2;
       }
@@ -3727,8 +3721,8 @@ void drawPoly3TEx8(short x1, short y1, short x2, short y2, short x3, short y3, s
 void drawPoly3TEx8_IL(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3,short clX, short clY)
 {
  int i,j,xmin,xmax,ymin,ymax,n_xi,n_yi,TXV,TXU;
- long difX, difY,difX2, difY2;
- long posX,posY,YAdjust,clutP;
+ int difX, difY,difX2, difY2;
+ int posX,posY,YAdjust,clutP;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW) return;
@@ -3786,9 +3780,9 @@ void drawPoly3TEx8_IL(short x1, short y1, short x2, short y2, short x3, short y3
 
          tC2= (psxVuw[(n_yi<<10)+YAdjust+n_xi] >> ((TXU & 0x01)<<3)) & 0xff;
 
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
              psxVuw[clutP+tC1]|
-             ((long)psxVuw[clutP+tC2])<<16);
+             ((int)psxVuw[clutP+tC2])<<16);
          posX+=difX2;
          posY+=difY2;
         }
@@ -3845,9 +3839,9 @@ void drawPoly3TEx8_IL(short x1, short y1, short x2, short y2, short x3, short y3
 
        tC2= (psxVuw[(n_yi<<10)+YAdjust+n_xi] >> ((TXU & 0x01)<<3)) & 0xff;
 
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
            psxVuw[clutP+tC1]|
-           ((long)psxVuw[clutP+tC2])<<16);
+           ((int)psxVuw[clutP+tC2])<<16);
        posX+=difX2;
        posY+=difY2;
       }
@@ -3877,8 +3871,8 @@ void drawPoly3TEx8_IL(short x1, short y1, short x2, short y2, short x3, short y3
 void drawPoly3TEx8_TW(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3,short clX, short clY)
 {
  int i,j,xmin,xmax,ymin,ymax;
- long difX, difY,difX2, difY2;
- long posX,posY,YAdjust,clutP;
+ int difX, difY,difX2, difY2;
+ int posX,posY,YAdjust,clutP;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW) return;
@@ -3929,9 +3923,9 @@ void drawPoly3TEx8_TW(short x1, short y1, short x2, short y2, short x3, short y3
                       YAdjust+((posX>>16)%TWin.Position.x1)];
          tC2 = psxVub[((((posY+difY)>>16)%TWin.Position.y1)<<11)+
                       YAdjust+(((posX+difX)>>16)%TWin.Position.x1)];
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
              psxVuw[clutP+tC1]|
-             ((long)psxVuw[clutP+tC2])<<16);
+             ((int)psxVuw[clutP+tC2])<<16);
          posX+=difX2;
          posY+=difY2;
         }
@@ -3973,9 +3967,9 @@ void drawPoly3TEx8_TW(short x1, short y1, short x2, short y2, short x3, short y3
                     YAdjust+((posX>>16)%TWin.Position.x1)];
        tC2 = psxVub[((((posY+difY)>>16)%TWin.Position.y1)<<11)+
                     YAdjust+(((posX+difX)>>16)%TWin.Position.x1)];
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
            psxVuw[clutP+tC1]|
-           ((long)psxVuw[clutP+tC2])<<16);
+           ((int)psxVuw[clutP+tC2])<<16);
        posX+=difX2;
        posY+=difY2;
       }
@@ -4016,10 +4010,10 @@ void drawPoly4TEx8_TRI(short x1, short y1, short x2, short y2, short x3, short y
 
 void drawPoly4TEx8(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4,short clX, short clY)
 {
- long num; 
- long i,j,xmin,xmax,ymin,ymax;
- long difX, difY, difX2, difY2;
- long posX,posY,YAdjust,clutP;
+ int num; 
+ int i,j,xmin,xmax,ymin,ymax;
+ int difX, difY, difX2, difY2;
+ int posX,posY,YAdjust,clutP;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW && x4>drawW) return;
@@ -4070,9 +4064,9 @@ void drawPoly4TEx8(short x1, short y1, short x2, short y2, short x3, short y3, s
          tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
          tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
                      ((posX+difX)>>16)];
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
-              ((long)psxVuw[clutP+tC2])<<16);
+              ((int)psxVuw[clutP+tC2])<<16);
          posX+=difX2;
          posY+=difY2;
         }
@@ -4115,9 +4109,9 @@ void drawPoly4TEx8(short x1, short y1, short x2, short y2, short x3, short y3, s
        tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
        tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
                      ((posX+difX)>>16)];
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
             psxVuw[clutP+tC1]|
-            ((long)psxVuw[clutP+tC2])<<16);
+            ((int)psxVuw[clutP+tC2])<<16);
        posX+=difX2;
        posY+=difY2;
       }
@@ -4135,10 +4129,10 @@ void drawPoly4TEx8(short x1, short y1, short x2, short y2, short x3, short y3, s
 
 void drawPoly4TEx8_IL(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4,short clX, short clY)
 {
- long num; 
- long i,j,xmin,xmax,ymin,ymax,n_xi,n_yi,TXV,TXU;
- long difX, difY, difX2, difY2;
- long posX,posY,YAdjust,clutP;
+ int num; 
+ int i,j,xmin,xmax,ymin,ymax,n_xi,n_yi,TXV,TXU;
+ int difX, difY, difX2, difY2;
+ int posX,posY,YAdjust,clutP;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW && x4>drawW) return;
@@ -4200,9 +4194,9 @@ void drawPoly4TEx8_IL(short x1, short y1, short x2, short y2, short x3, short y3
 
          tC2= (psxVuw[(n_yi<<10)+YAdjust+n_xi] >> ((TXU & 0x01)<<3)) & 0xff;
 
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
-              ((long)psxVuw[clutP+tC2])<<16);
+              ((int)psxVuw[clutP+tC2])<<16);
          posX+=difX2;
          posY+=difY2;
         }
@@ -4262,9 +4256,9 @@ void drawPoly4TEx8_IL(short x1, short y1, short x2, short y2, short x3, short y3
        
        tC2= (psxVuw[(n_yi<<10)+YAdjust+n_xi] >> ((TXU & 0x01)<<3)) & 0xff;
 
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
             psxVuw[clutP+tC1]|
-            ((long)psxVuw[clutP+tC2])<<16);
+            ((int)psxVuw[clutP+tC2])<<16);
        posX+=difX2;
        posY+=difY2;
       }
@@ -4286,11 +4280,11 @@ void drawPoly4TEx8_IL(short x1, short y1, short x2, short y2, short x3, short y3
 
 void drawPoly4TEx8_TW(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4,short clX, short clY)
 {
- long num; 
- long i,j,xmin,xmax,ymin,ymax;
- long difX, difY, difX2, difY2;
- long posX,posY,YAdjust,clutP;
- short tC1,tC2;
+ int num; 
+ int i, j, xmin, xmax, ymin, ymax;
+ int difX, difY, difX2, difY2;
+ int posX, posY, YAdjust, clutP;
+ short tC1, tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW && x4>drawW) return;
  if(y1>drawH && y2>drawH && y3>drawH && y4>drawH) return;
@@ -4342,11 +4336,11 @@ void drawPoly4TEx8_TW(short x1, short y1, short x2, short y2, short x3, short y3
                       YAdjust+((posX>>16)%TWin.Position.x1)];
          tC2 = psxVub[((((posY+difY)>>16)%TWin.Position.y1)<<11)+
                       YAdjust+(((posX+difX)>>16)%TWin.Position.x1)];
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
-              ((long)psxVuw[clutP+tC2])<<16);
-         posX+=difX2;
-         posY+=difY2;
+              ((int)psxVuw[clutP+tC2])<<16);
+         posX += difX2;
+         posY += difY2;
         }
        if(j==xmax)
         {
@@ -4390,9 +4384,9 @@ void drawPoly4TEx8_TW(short x1, short y1, short x2, short y2, short x3, short y3
                     YAdjust+((posX>>16)%TWin.Position.x1)];
        tC2 = psxVub[((((posY+difY)>>16)%TWin.Position.y1)<<11)+
                      YAdjust+(((posX+difX)>>16)%TWin.Position.x1)];
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
             psxVuw[clutP+tC1]|
-            ((long)psxVuw[clutP+tC2])<<16);
+            ((int)psxVuw[clutP+tC2])<<16);
        posX+=difX2;
        posY+=difY2;
       }
@@ -4411,10 +4405,10 @@ void drawPoly4TEx8_TW(short x1, short y1, short x2, short y2, short x3, short y3
 
 void drawPoly4TEx8_TW_S(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4,short clX, short clY)
 {
- long num; 
- long i,j,xmin,xmax,ymin,ymax;
- long difX, difY, difX2, difY2;
- long posX,posY,YAdjust,clutP;
+ int num; 
+ int i,j,xmin,xmax,ymin,ymax;
+ int difX, difY, difX2, difY2;
+ int posX,posY,YAdjust,clutP;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW && x4>drawW) return;
@@ -4467,9 +4461,9 @@ void drawPoly4TEx8_TW_S(short x1, short y1, short x2, short y2, short x3, short 
                       YAdjust+((posX>>16)%TWin.Position.x1)];
          tC2 = psxVub[((((posY+difY)>>16)%TWin.Position.y1)<<11)+
                       YAdjust+(((posX+difX)>>16)%TWin.Position.x1)];
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
-              ((long)psxVuw[clutP+tC2])<<16);
+              ((int)psxVuw[clutP+tC2])<<16);
          posX+=difX2;
          posY+=difY2;
         }
@@ -4515,9 +4509,9 @@ void drawPoly4TEx8_TW_S(short x1, short y1, short x2, short y2, short x3, short 
                     YAdjust+((posX>>16)%TWin.Position.x1)];
        tC2 = psxVub[((((posY+difY)>>16)%TWin.Position.y1)<<11)+
                      YAdjust+(((posX+difX)>>16)%TWin.Position.x1)];
-       GetTextureTransColG32_SPR((unsigned long *)&psxVuw[(i<<10)+j],
+       GetTextureTransColG32_SPR((uint32_t *)&psxVuw[(i<<10)+j],
             psxVuw[clutP+tC1]|
-            ((long)psxVuw[clutP+tC2])<<16);
+            ((int)psxVuw[clutP+tC2])<<16);
        posX+=difX2;
        posY+=difY2;
       }
@@ -4539,8 +4533,8 @@ void drawPoly4TEx8_TW_S(short x1, short y1, short x2, short y2, short x3, short 
 void drawPoly3TD(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3)
 {
  int i,j,xmin,xmax,ymin,ymax;
- long difX, difY,difX2, difY2;
- long posX,posY;
+ int difX, difY,difX2, difY2;
+ int posX,posY;
 
  if(x1>drawW && x2>drawW && x3>drawW) return;
  if(y1>drawH && y2>drawH && y3>drawH) return;
@@ -4579,8 +4573,8 @@ void drawPoly3TD(short x1, short y1, short x2, short y2, short x3, short y3, sho
 
        for(j=xmin;j<xmax;j+=2)
         {
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
-              (((long)psxVuw[((((posY+difY)>>16)+GlobalTextAddrY)<<10)+((posX+difX)>>16)+GlobalTextAddrX])<<16)|
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
+              (((int)psxVuw[((((posY+difY)>>16)+GlobalTextAddrY)<<10)+((posX+difX)>>16)+GlobalTextAddrX])<<16)|
               psxVuw[(((posY>>16)+GlobalTextAddrY)<<10)+((posX)>>16)+GlobalTextAddrX]);
 
          posX+=difX2;
@@ -4616,8 +4610,8 @@ void drawPoly3TD(short x1, short y1, short x2, short y2, short x3, short y3, sho
 
      for(j=xmin;j<xmax;j+=2)
       {
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
-            (((long)psxVuw[((((posY+difY)>>16)+GlobalTextAddrY)<<10)+((posX+difX)>>16)+GlobalTextAddrX])<<16)|
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
+            (((int)psxVuw[((((posY+difY)>>16)+GlobalTextAddrY)<<10)+((posX+difX)>>16)+GlobalTextAddrX])<<16)|
             psxVuw[(((posY>>16)+GlobalTextAddrY)<<10)+((posX)>>16)+GlobalTextAddrX]);
 
        posX+=difX2;
@@ -4639,8 +4633,8 @@ void drawPoly3TD(short x1, short y1, short x2, short y2, short x3, short y3, sho
 void drawPoly3TD_TW(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3)
 {
  int i,j,xmin,xmax,ymin,ymax;
- long difX, difY,difX2, difY2;
- long posX,posY;
+ int difX, difY,difX2, difY2;
+ int posX,posY;
 
  if(x1>drawW && x2>drawW && x3>drawW) return;
  if(y1>drawH && y2>drawH && y3>drawH) return;
@@ -4679,8 +4673,8 @@ void drawPoly3TD_TW(short x1, short y1, short x2, short y2, short x3, short y3, 
 
        for(j=xmin;j<xmax;j+=2)
         {
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
-              (((long)psxVuw[(((((posY+difY)>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
+              (((int)psxVuw[(((((posY+difY)>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
               (((posX+difX)>>16)%TWin.Position.x1)+GlobalTextAddrX+TWin.Position.x0])<<16)|
               psxVuw[((((posY>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
                      (((posX)>>16)%TWin.Position.x1)+GlobalTextAddrX+TWin.Position.x0]);
@@ -4719,8 +4713,8 @@ void drawPoly3TD_TW(short x1, short y1, short x2, short y2, short x3, short y3, 
 
      for(j=xmin;j<xmax;j+=2)
       {
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
-            (((long)psxVuw[(((((posY+difY)>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
+            (((int)psxVuw[(((((posY+difY)>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
             (((posX+difX)>>16)%TWin.Position.x1)+GlobalTextAddrX+TWin.Position.x0])<<16)|
             psxVuw[((((posY>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
                    (((posX)>>16)%TWin.Position.x1)+GlobalTextAddrX+TWin.Position.x0]);
@@ -4759,10 +4753,10 @@ void drawPoly4TD_TRI(short x1, short y1, short x2, short y2, short x3, short y3,
 
 void drawPoly4TD(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4)
 {
- long num; 
- long i,j,xmin,xmax,ymin,ymax;
- long difX, difY, difX2, difY2;
- long posX,posY;
+ int num; 
+ int i,j,xmin,xmax,ymin,ymax;
+ int difX, difY, difX2, difY2;
+ int posX,posY;
 
  if(x1>drawW && x2>drawW && x3>drawW && x4>drawW) return;
  if(y1>drawH && y2>drawH && y3>drawH && y4>drawH) return;
@@ -4805,8 +4799,8 @@ void drawPoly4TD(short x1, short y1, short x2, short y2, short x3, short y3, sho
 
        for(j=xmin;j<xmax;j+=2)
         {
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
-              (((long)psxVuw[((((posY+difY)>>16)+GlobalTextAddrY)<<10)+((posX+difX)>>16)+GlobalTextAddrX])<<16)|
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
+              (((int)psxVuw[((((posY+difY)>>16)+GlobalTextAddrY)<<10)+((posX+difX)>>16)+GlobalTextAddrX])<<16)|
               psxVuw[(((posY>>16)+GlobalTextAddrY)<<10)+((posX)>>16)+GlobalTextAddrX]);
 
          posX+=difX2;
@@ -4846,8 +4840,8 @@ void drawPoly4TD(short x1, short y1, short x2, short y2, short x3, short y3, sho
 
      for(j=xmin;j<xmax;j+=2)
       {
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
-            (((long)psxVuw[((((posY+difY)>>16)+GlobalTextAddrY)<<10)+((posX+difX)>>16)+GlobalTextAddrX])<<16)|
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
+            (((int)psxVuw[((((posY+difY)>>16)+GlobalTextAddrY)<<10)+((posX+difX)>>16)+GlobalTextAddrX])<<16)|
             psxVuw[(((posY>>16)+GlobalTextAddrY)<<10)+((posX)>>16)+GlobalTextAddrX]);
 
        posX+=difX2;
@@ -4865,10 +4859,10 @@ void drawPoly4TD(short x1, short y1, short x2, short y2, short x3, short y3, sho
 
 void drawPoly4TD_TW(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4)
 {
- long num; 
- long i,j,xmin,xmax,ymin,ymax;
- long difX, difY, difX2, difY2;
- long posX,posY;
+ int num; 
+ int i,j,xmin,xmax,ymin,ymax;
+ int difX, difY, difX2, difY2;
+ int posX,posY;
 
  if(x1>drawW && x2>drawW && x3>drawW && x4>drawW) return;
  if(y1>drawH && y2>drawH && y3>drawH && y4>drawH) return;
@@ -4911,8 +4905,8 @@ void drawPoly4TD_TW(short x1, short y1, short x2, short y2, short x3, short y3, 
 
        for(j=xmin;j<xmax;j+=2)
         {
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
-              (((long)psxVuw[(((((posY+difY)>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
+              (((int)psxVuw[(((((posY+difY)>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
                              (((posX+difX)>>16)%TWin.Position.x1)+GlobalTextAddrX+TWin.Position.x0])<<16)|
               psxVuw[((((posY>>16)%TWin.Position.y1)+GlobalTextAddrY)<<10)+TWin.Position.y0+
                      ((posX>>16)%TWin.Position.x1)+GlobalTextAddrX+TWin.Position.x0]);
@@ -4955,8 +4949,8 @@ void drawPoly4TD_TW(short x1, short y1, short x2, short y2, short x3, short y3, 
 
      for(j=xmin;j<xmax;j+=2)
       {
-       GetTextureTransColG32((unsigned long *)&psxVuw[(i<<10)+j],
-            (((long)psxVuw[(((((posY+difY)>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
+       GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
+            (((int)psxVuw[(((((posY+difY)>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
                            (((posX+difX)>>16)%TWin.Position.x1)+GlobalTextAddrX+TWin.Position.x0])<<16)|
             psxVuw[((((posY>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
                    ((posX>>16)%TWin.Position.x1)+GlobalTextAddrX+TWin.Position.x0]);
@@ -4977,10 +4971,10 @@ void drawPoly4TD_TW(short x1, short y1, short x2, short y2, short x3, short y3, 
 
 void drawPoly4TD_TW_S(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4)
 {
- long num; 
- long i,j,xmin,xmax,ymin,ymax;
- long difX, difY, difX2, difY2;
- long posX,posY;
+ int num; 
+ int i,j,xmin,xmax,ymin,ymax;
+ int difX, difY, difX2, difY2;
+ int posX, posY;
 
  if(x1>drawW && x2>drawW && x3>drawW && x4>drawW) return;
  if(y1>drawH && y2>drawH && y3>drawH && y4>drawH) return;
@@ -5023,8 +5017,8 @@ void drawPoly4TD_TW_S(short x1, short y1, short x2, short y2, short x3, short y3
 
        for(j=xmin;j<xmax;j+=2)
         {
-         GetTextureTransColG32_S((unsigned long *)&psxVuw[(i<<10)+j],
-              (((long)psxVuw[(((((posY+difY)>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
+         GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
+              (((int)psxVuw[(((((posY+difY)>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
                              (((posX+difX)>>16)%TWin.Position.x1)+GlobalTextAddrX+TWin.Position.x0])<<16)|
               psxVuw[((((posY>>16)%TWin.Position.y1)+GlobalTextAddrY)<<10)+TWin.Position.y0+
                      ((posX>>16)%TWin.Position.x1)+GlobalTextAddrX+TWin.Position.x0]);
@@ -5067,8 +5061,8 @@ void drawPoly4TD_TW_S(short x1, short y1, short x2, short y2, short x3, short y3
 
      for(j=xmin;j<xmax;j+=2)
       {
-       GetTextureTransColG32_SPR((unsigned long *)&psxVuw[(i<<10)+j],
-            (((long)psxVuw[(((((posY+difY)>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
+       GetTextureTransColG32_SPR((uint32_t *)&psxVuw[(i<<10)+j],
+            (((int)psxVuw[(((((posY+difY)>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
                            (((posX+difX)>>16)%TWin.Position.x1)+GlobalTextAddrX+TWin.Position.x0])<<16)|
             psxVuw[((((posY>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
                    ((posX>>16)%TWin.Position.x1)+GlobalTextAddrX+TWin.Position.x0]);
@@ -5089,11 +5083,11 @@ void drawPoly4TD_TW_S(short x1, short y1, short x2, short y2, short x3, short y3
 // POLY 3/4 G-SHADED
 ////////////////////////////////////////////////////////////////////////
  
-__inline void drawPoly3Gi(short x1,short y1,short x2,short y2,short x3,short y3,long rgb1, long rgb2, long rgb3)
+__inline void drawPoly3Gi(short x1,short y1,short x2,short y2,short x3,short y3, int rgb1, int rgb2, int rgb3)
 {
  int i,j,xmin,xmax,ymin,ymax;
- long cR1,cG1,cB1;
- long difR,difB,difG,difR2,difB2,difG2;
+ int cR1,cG1,cB1;
+ int difR,difB,difG,difR2,difB2,difG2;
 
  if(x1>drawW && x2>drawW && x3>drawW) return;
  if(y1>drawH && y2>drawH && y3>drawH) return;
@@ -5136,7 +5130,7 @@ __inline void drawPoly3Gi(short x1,short y1,short x2,short y2,short x3,short y3,
 
        for(j=xmin;j<xmax;j+=2) 
         {
-         *((unsigned long *)&psxVuw[(i<<10)+j])=
+         *((uint32_t *)&psxVuw[(i<<10)+j])=
             ((((cR1+difR) <<7)&0x7c000000)|(((cG1+difG) << 2)&0x03e00000)|(((cB1+difB)>>3)&0x001f0000)|
              (((cR1) >> 9)&0x7c00)|(((cG1) >> 14)&0x03e0)|(((cB1) >> 19)&0x001f))|lSetMask;
    
@@ -5211,14 +5205,14 @@ __inline void drawPoly3Gi(short x1,short y1,short x2,short y2,short x3,short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3G(long rgb1, long rgb2, long rgb3)
+void drawPoly3G(int rgb1, int rgb2, int rgb3)
 {
  drawPoly3Gi(lx0,ly0,lx1,ly1,lx2,ly2,rgb1,rgb2,rgb3);
 }
 
 // draw two g-shaded tris for right psx shading emulation
 
-void drawPoly4G(long rgb1, long rgb2, long rgb3, long rgb4)
+void drawPoly4G(int rgb1, int rgb2, int rgb3, int rgb4)
 {
  drawPoly3Gi(lx1,ly1,lx3,ly3,lx2,ly2,
              rgb2,rgb4,rgb3);
@@ -5230,13 +5224,13 @@ void drawPoly4G(long rgb1, long rgb2, long rgb3, long rgb4)
 // POLY 3/4 G-SHADED TEX PAL4
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGEx4(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short clX, short clY,long col1, long col2, long col3)
+void drawPoly3TGEx4(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short clX, short clY,int col1, int col2, int col3)
 {
  int i,j,xmin,xmax,ymin,ymax;
- long cR1,cG1,cB1;
- long difR,difB,difG,difR2,difB2,difG2;
- long difX, difY,difX2, difY2;
- long posX,posY,YAdjust,clutP,XAdjust;
+ int cR1,cG1,cB1;
+ int difR,difB,difG,difR2,difB2,difG2;
+ int difX, difY,difX2, difY2;
+ int posX,posY,YAdjust,clutP,XAdjust;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW) return;
@@ -5298,9 +5292,9 @@ void drawPoly3TGEx4(short x1, short y1, short x2, short y2, short x3, short y3, 
                       (XAdjust>>1)];
          tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
-         GetTextureTransColGX32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColGX32_S((uint32_t *)&psxVuw[(i<<10)+j],
                psxVuw[clutP+tC1]|
-               ((long)psxVuw[clutP+tC2])<<16,
+               ((int)psxVuw[clutP+tC2])<<16,
                (cB1>>16)|((cB1+difB)&0xff0000),
                (cG1>>16)|((cG1+difG)&0xff0000),
                (cR1>>16)|((cR1+difR)&0xff0000));
@@ -5376,13 +5370,13 @@ void drawPoly3TGEx4(short x1, short y1, short x2, short y2, short x3, short y3, 
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGEx4_IL(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short clX, short clY,long col1, long col2, long col3)
+void drawPoly3TGEx4_IL(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short clX, short clY,int col1, int col2, int col3)
 {
  int i,j,xmin,xmax,ymin,ymax,n_xi,n_yi,TXV;
- long cR1,cG1,cB1;
- long difR,difB,difG,difR2,difB2,difG2;
- long difX, difY,difX2, difY2;
- long posX,posY,YAdjust,clutP,XAdjust;
+ int cR1,cG1,cB1;
+ int difR,difB,difG,difR2,difB2,difG2;
+ int difX, difY,difX2, difY2;
+ int posX,posY,YAdjust,clutP,XAdjust;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW) return;
@@ -5452,9 +5446,9 @@ void drawPoly3TGEx4_IL(short x1, short y1, short x2, short y2, short x3, short y
 
          tC2= (psxVuw[(n_yi<<10)+YAdjust+n_xi] >> ((XAdjust & 0x03)<<2)) & 0x0f ;
 
-         GetTextureTransColGX32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColGX32_S((uint32_t *)&psxVuw[(i<<10)+j],
                psxVuw[clutP+tC1]|
-               ((long)psxVuw[clutP+tC2])<<16,
+               ((int)psxVuw[clutP+tC2])<<16,
                (cB1>>16)|((cB1+difB)&0xff0000),
                (cG1>>16)|((cG1+difG)&0xff0000),
                (cR1>>16)|((cR1+difR)&0xff0000));
@@ -5540,13 +5534,13 @@ void drawPoly3TGEx4_IL(short x1, short y1, short x2, short y2, short x3, short y
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGEx4_TW(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short clX, short clY,long col1, long col2, long col3)
+void drawPoly3TGEx4_TW(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short clX, short clY, int col1, int col2, int col3)
 {
- int i,j,xmin,xmax,ymin,ymax;
- long cR1,cG1,cB1;
- long difR,difB,difG,difR2,difB2,difG2;
- long difX, difY,difX2, difY2;
- long posX,posY,YAdjust,clutP,XAdjust;
+ int i, j, xmin, xmax, ymin, ymax;
+ int cR1, cG1, cB1;
+ int difR, difB, difG, difR2, difB2, difG2;
+ int difX, difY,difX2, difY2;
+ int posX, posY, YAdjust, clutP, XAdjust;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW) return;
@@ -5609,9 +5603,9 @@ void drawPoly3TGEx4_TW(short x1, short y1, short x2, short y2, short x3, short y
          tC2 = psxVub[((((posY+difY)>>16)%TWin.Position.y1)<<11)+
                       YAdjust+(XAdjust>>1)];
          tC2=(tC2>>((XAdjust&1)<<2))&0xf;
-         GetTextureTransColGX32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColGX32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
-              ((long)psxVuw[clutP+tC2])<<16,
+              ((int)psxVuw[clutP+tC2])<<16,
               (cB1>>16)|((cB1+difB)&0xff0000),
               (cG1>>16)|((cG1+difG)&0xff0000),
               (cR1>>16)|((cR1+difR)&0xff0000));
@@ -5697,7 +5691,7 @@ void drawPoly3TGEx4_TW(short x1, short y1, short x2, short y2, short x3, short y
 void drawPoly4TGEx4_TRI_IL(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, 
                     short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, 
                     short clX, short clY,
-                    long col1, long col2, long col3, long col4)
+                    int col1, int col2, int col3, int col4)
 {
  drawPoly3TGEx4_IL(x2,y2,x3,y3,x4,y4,
                    tx2,ty2,tx3,ty3,tx4,ty4,
@@ -5714,7 +5708,7 @@ void drawPoly4TGEx4_TRI_IL(short x1, short y1, short x2, short y2, short x3, sho
 void drawPoly4TGEx4_TRI(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, 
                     short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, 
                     short clX, short clY,
-                    long col1, long col2, long col3, long col4)
+                    int col1, int col2, int col3, int col4)
 {
  drawPoly3TGEx4(x2,y2,x3,y3,x4,y4,
                 tx2,ty2,tx3,ty3,tx4,ty4,
@@ -5733,14 +5727,14 @@ void drawPoly4TGEx4_TRI(short x1, short y1, short x2, short y2, short x3, short 
 void drawPoly4TGEx4(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, 
                     short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, 
                     short clX, short clY,
-                    long col1, long col2, long col4, long col3)
+                    int col1, int col2, int col4, int col3)
 {
- long num; 
- long i,j,xmin,xmax,ymin,ymax;
- long cR1,cG1,cB1;
- long difR,difB,difG,difR2,difB2,difG2;
- long difX, difY, difX2, difY2;
- long posX,posY,YAdjust,clutP,XAdjust;
+ int num; 
+ int i,j,xmin,xmax,ymin,ymax;
+ int cR1,cG1,cB1;
+ int difR,difB,difG,difR2,difB2,difG2;
+ int difX, difY, difX2, difY2;
+ int posX,posY,YAdjust,clutP,XAdjust;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW && x4>drawW) return;
@@ -5807,9 +5801,9 @@ void drawPoly4TGEx4(short x1, short y1, short x2, short y2, short x3, short y3, 
                        (XAdjust>>1)];
          tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
-         GetTextureTransColGX32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColGX32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
-              ((long)psxVuw[clutP+tC2])<<16,
+              ((int)psxVuw[clutP+tC2])<<16,
               (cB1>>16)|((cB1+difB)&0xff0000),
               (cG1>>16)|((cG1+difG)&0xff0000),
               (cR1>>16)|((cR1+difR)&0xff0000));
@@ -5899,7 +5893,7 @@ void drawPoly4TGEx4(short x1, short y1, short x2, short y2, short x3, short y3, 
 void drawPoly4TGEx4_TW(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, 
                     short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, 
                     short clX, short clY,
-                    long col1, long col2, long col3, long col4)
+                    int col1, int col2, int col3, int col4)
 {
  drawPoly3TGEx4_TW(x2,y2,x3,y3,x4,y4,
                    tx2,ty2,tx3,ty3,tx4,ty4,
@@ -5916,13 +5910,13 @@ void drawPoly4TGEx4_TW(short x1, short y1, short x2, short y2, short x3, short y
 // POLY 3/4 G-SHADED TEX PAL8
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGEx8(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short clX, short clY,long col1, long col2, long col3)
+void drawPoly3TGEx8(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short clX, short clY, int col1, int col2, int col3)
 {
  int i,j,xmin,xmax,ymin,ymax;
- long cR1,cG1,cB1;
- long difR,difB,difG,difR2,difB2,difG2;
- long difX, difY,difX2, difY2;
- long posX,posY,YAdjust,clutP;
+ int cR1,cG1,cB1;
+ int difR,difB,difG,difR2,difB2,difG2;
+ int difX, difY,difX2, difY2;
+ int posX,posY,YAdjust,clutP;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW) return;
@@ -5978,9 +5972,9 @@ void drawPoly3TGEx8(short x1, short y1, short x2, short y2, short x3, short y3, 
          tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+((posX>>16))];
          tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
                       (((posX+difX)>>16))];
-         GetTextureTransColGX32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColGX32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
-              ((long)psxVuw[clutP+tC2])<<16,
+              ((int)psxVuw[clutP+tC2])<<16,
               (cB1>>16)|((cB1+difB)&0xff0000),
               (cG1>>16)|((cG1+difG)&0xff0000),
               (cR1>>16)|((cR1+difR)&0xff0000));
@@ -6052,13 +6046,13 @@ void drawPoly3TGEx8(short x1, short y1, short x2, short y2, short x3, short y3, 
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGEx8_IL(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short clX, short clY,long col1, long col2, long col3)
+void drawPoly3TGEx8_IL(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short clX, short clY, int col1, int col2, int col3)
 {
  int i,j,xmin,xmax,ymin,ymax,n_xi,n_yi,TXV,TXU;
- long cR1,cG1,cB1;
- long difR,difB,difG,difR2,difB2,difG2;
- long difX, difY,difX2, difY2;
- long posX,posY,YAdjust,clutP;
+ int cR1,cG1,cB1;
+ int difR,difB,difG,difR2,difB2,difG2;
+ int difX, difY,difX2, difY2;
+ int posX,posY,YAdjust,clutP;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW) return;
@@ -6125,9 +6119,9 @@ void drawPoly3TGEx8_IL(short x1, short y1, short x2, short y2, short x3, short y
 
          tC2= (psxVuw[(n_yi<<10)+YAdjust+n_xi] >> ((TXU & 0x01)<<3)) & 0xff;
 
-         GetTextureTransColGX32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColGX32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
-              ((long)psxVuw[clutP+tC2])<<16,
+              ((int)psxVuw[clutP+tC2])<<16,
               (cB1>>16)|((cB1+difB)&0xff0000),
               (cG1>>16)|((cG1+difG)&0xff0000),
               (cR1>>16)|((cR1+difR)&0xff0000));
@@ -6211,13 +6205,13 @@ void drawPoly3TGEx8_IL(short x1, short y1, short x2, short y2, short x3, short y
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGEx8_TW(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short clX, short clY,long col1, long col2, long col3)
+void drawPoly3TGEx8_TW(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short clX, short clY, int col1, int col2, int col3)
 {
  int i,j,xmin,xmax,ymin,ymax;
- long cR1,cG1,cB1;
- long difR,difB,difG,difR2,difB2,difG2;
- long difX, difY,difX2, difY2;
- long posX,posY,YAdjust,clutP;
+ int cR1,cG1,cB1;
+ int difR,difB,difG,difR2,difB2,difG2;
+ int difX, difY,difX2, difY2;
+ int posX,posY,YAdjust,clutP;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW) return;
@@ -6276,9 +6270,9 @@ void drawPoly3TGEx8_TW(short x1, short y1, short x2, short y2, short x3, short y
          tC2 = psxVub[((((posY+difY)>>16)%TWin.Position.y1)<<11)+
                       YAdjust+(((posX+difX)>>16)%TWin.Position.x1)];
                       
-         GetTextureTransColGX32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColGX32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
-              ((long)psxVuw[clutP+tC2])<<16,
+              ((int)psxVuw[clutP+tC2])<<16,
               (cB1>>16)|((cB1+difB)&0xff0000),
               (cG1>>16)|((cG1+difG)&0xff0000),
               (cR1>>16)|((cR1+difR)&0xff0000));
@@ -6357,7 +6351,7 @@ void drawPoly3TGEx8_TW(short x1, short y1, short x2, short y2, short x3, short y
 void drawPoly4TGEx8_TRI_IL(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, 
                            short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, 
                            short clX, short clY,
-                           long col1, long col2, long col3, long col4)
+                           int col1, int col2, int col3, int col4)
 {
  drawPoly3TGEx8_IL(x2,y2,x3,y3,x4,y4,
                    tx2,ty2,tx3,ty3,tx4,ty4,
@@ -6374,7 +6368,7 @@ void drawPoly4TGEx8_TRI_IL(short x1, short y1, short x2, short y2, short x3, sho
 void drawPoly4TGEx8_TRI(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, 
                    short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, 
                    short clX, short clY,
-                   long col1, long col2, long col3, long col4)
+                   int col1, int col2, int col3, int col4)
 {
  drawPoly3TGEx8(x2,y2,x3,y3,x4,y4,
                 tx2,ty2,tx3,ty3,tx4,ty4,
@@ -6391,14 +6385,14 @@ void drawPoly4TGEx8_TRI(short x1, short y1, short x2, short y2, short x3, short 
 void drawPoly4TGEx8(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, 
                    short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, 
                    short clX, short clY,
-                   long col1, long col2, long col4, long col3)
+                   int col1, int col2, int col4, int col3)
 {
- long num; 
- long i,j,xmin,xmax,ymin,ymax;
- long cR1,cG1,cB1;
- long difR,difB,difG,difR2,difB2,difG2;
- long difX, difY, difX2, difY2;
- long posX,posY,YAdjust,clutP;
+ int num; 
+ int i,j,xmin,xmax,ymin,ymax;
+ int cR1,cG1,cB1;
+ int difR,difB,difG,difR2,difB2,difG2;
+ int difX, difY, difX2, difY2;
+ int posX,posY,YAdjust,clutP;
  short tC1,tC2;
 
  if(x1>drawW && x2>drawW && x3>drawW && x4>drawW) return;
@@ -6460,9 +6454,9 @@ void drawPoly4TGEx8(short x1, short y1, short x2, short y2, short x3, short y3, 
          tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
                      ((posX+difX)>>16)];
 
-         GetTextureTransColGX32_S((unsigned long *)&psxVuw[(i<<10)+j],
+         GetTextureTransColGX32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
-              ((long)psxVuw[clutP+tC2])<<16,
+              ((int)psxVuw[clutP+tC2])<<16,
               (cB1>>16)|((cB1+difB)&0xff0000),
               (cG1>>16)|((cG1+difG)&0xff0000),
               (cR1>>16)|((cR1+difR)&0xff0000));
@@ -6545,7 +6539,7 @@ void drawPoly4TGEx8(short x1, short y1, short x2, short y2, short x3, short y3, 
 void drawPoly4TGEx8_TW(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, 
                    short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, 
                    short clX, short clY,
-                   long col1, long col2, long col3, long col4)
+                   int col1, int col2, int col3, int col4)
 {
  drawPoly3TGEx8_TW(x2,y2,x3,y3,x4,y4,
                 tx2,ty2,tx3,ty3,tx4,ty4,
@@ -6561,13 +6555,13 @@ void drawPoly4TGEx8_TW(short x1, short y1, short x2, short y2, short x3, short y
 // POLY 3 G-SHADED TEX 15 BIT
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGD(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3,long col1, long col2, long col3)
+void drawPoly3TGD(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, int col1, int col2, int col3)
 {
  int i,j,xmin,xmax,ymin,ymax;
- long cR1,cG1,cB1;
- long difR,difB,difG,difR2,difB2,difG2;
- long difX, difY,difX2, difY2;
- long posX,posY;
+ int cR1,cG1,cB1;
+ int difR,difB,difG,difR2,difB2,difG2;
+ int difX, difY,difX2, difY2;
+ int posX,posY;
 
  if(x1>drawW && x2>drawW && x3>drawW) return;
  if(y1>drawH && y2>drawH && y3>drawH) return;
@@ -6615,8 +6609,8 @@ void drawPoly3TGD(short x1, short y1, short x2, short y2, short x3, short y3, sh
 
        for(j=xmin;j<xmax;j+=2)
         {
-         GetTextureTransColGX32_S((unsigned long *)&psxVuw[(i<<10)+j],
-              (((long)psxVuw[((((posY+difY)>>16)+GlobalTextAddrY)<<10)+((posX+difX)>>16)+GlobalTextAddrX])<<16)|
+         GetTextureTransColGX32_S((uint32_t *)&psxVuw[(i<<10)+j],
+              (((int)psxVuw[((((posY+difY)>>16)+GlobalTextAddrY)<<10)+((posX+difX)>>16)+GlobalTextAddrX])<<16)|
               psxVuw[(((posY>>16)+GlobalTextAddrY)<<10)+((posX)>>16)+GlobalTextAddrX],
               (cB1>>16)|((cB1+difB)&0xff0000),
               (cG1>>16)|((cG1+difG)&0xff0000),
@@ -6685,45 +6679,45 @@ void drawPoly3TGD(short x1, short y1, short x2, short y2, short x3, short y3, sh
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGD_TW(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3,long col1, long col2, long col3)
+void drawPoly3TGD_TW(short x1, short y1, short x2, short y2, short x3, short y3, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, int col1, int col2, int col3)
 {
  int i,j,xmin,xmax,ymin,ymax;
- long cR1,cG1,cB1;
- long difR,difB,difG,difR2,difB2,difG2;
- long difX, difY,difX2, difY2;
- long posX,posY;
+ int cR1,cG1,cB1;
+ int difR,difB,difG,difR2,difB2,difG2;
+ int difX, difY,difX2, difY2;
+ int posX,posY;
 
- if(x1>drawW && x2>drawW && x3>drawW) return;
- if(y1>drawH && y2>drawH && y3>drawH) return;
- if(x1<drawX && x2<drawX && x3<drawX) return;
- if(y1<drawY && y2<drawY && y3<drawY) return;
- if(drawY>=drawH) return;
- if(drawX>=drawW) return; 
+ if (x1>drawW && x2>drawW && x3>drawW) return;
+ if (y1>drawH && y2>drawH && y3>drawH) return;
+ if (x1<drawX && x2<drawX && x3<drawX) return;
+ if (y1<drawY && y2<drawY && y3<drawY) return;
+ if (drawY >= drawH) return;
+ if (drawX >= drawW) return; 
 
- if(!SetupSections_GT(x1,y1,x2,y2,x3,y3,tx1,ty1,tx2,ty2,tx3,ty3,col1,col2,col3)) return;
+ if (!SetupSections_GT(x1,y1,x2,y2,x3,y3,tx1,ty1,tx2,ty2,tx3,ty3,col1,col2,col3)) return;
 
- ymax=Ymax;
+ ymax = Ymax;
 
- for(ymin=Ymin;ymin<drawY;ymin++)
+ for(ymin = Ymin; ymin < drawY; ymin++)
   if(NextRow_GT()) return;
 
- difR=delta_right_R;
- difG=delta_right_G;
- difB=delta_right_B;
- difR2=difR<<1;
- difG2=difG<<1;
- difB2=difB<<1;
- difX=delta_right_u;difX2=difX<<1;
- difY=delta_right_v;difY2=difY<<1;
+ difR = delta_right_R;
+ difG = delta_right_G;
+ difB = delta_right_B;
+ difR2 = difR<<1;
+ difG2 = difG<<1;
+ difB2 = difB<<1;
+ difX = delta_right_u; difX2 = difX<<1;
+ difY = delta_right_v; difY2 = difY<<1;
 
 #ifdef FASTSOLID
 
- if(!bCheckMask && !DrawSemiTrans && !iDither)
+ if (!bCheckMask && !DrawSemiTrans && !iDither)
   {       
-   for (i=ymin;i<=ymax;i++)
+   for (i = ymin; i <= ymax; i++)
     {
-     xmin=(left_x >> 16);
-     xmax=(right_x >> 16)-1; //!!!!!!!!!!!!!!!!!!!!
+     xmin = (left_x >> 16);
+     xmax = (right_x >> 16) - 1; //!!!!!!!!!!!!!!!!!!!!
      if(drawW<xmax) xmax=drawW;
 
      if(xmax>=xmin)
@@ -6739,8 +6733,8 @@ void drawPoly3TGD_TW(short x1, short y1, short x2, short y2, short x3, short y3,
 
        for(j=xmin;j<xmax;j+=2)
         {
-         GetTextureTransColGX32_S((unsigned long *)&psxVuw[(i<<10)+j],
-              (((long)psxVuw[(((((posY+difY)>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
+         GetTextureTransColGX32_S((uint32_t *)&psxVuw[(i<<10)+j],
+              (((int)psxVuw[(((((posY+difY)>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
                              (((posX+difX)>>16)%TWin.Position.x1)+GlobalTextAddrX+TWin.Position.x0])<<16)|
               psxVuw[((((posY>>16)%TWin.Position.y1)+GlobalTextAddrY+TWin.Position.y0)<<10)+
                      (((posX)>>16)%TWin.Position.x1)+GlobalTextAddrX+TWin.Position.x0],
@@ -6818,7 +6812,7 @@ void drawPoly3TGD_TW(short x1, short y1, short x2, short y2, short x3, short y3,
 
 #ifdef POLYQUAD3GT
 
-void drawPoly4TGD_TRI(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, long col1, long col2, long col3, long col4)
+void drawPoly4TGD_TRI(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, int col1, int col2, int col3, int col4)
 {
  drawPoly3TGD(x2,y2,x3,y3,x4,y4,
               tx2,ty2,tx3,ty3,tx4,ty4,
@@ -6830,14 +6824,14 @@ void drawPoly4TGD_TRI(short x1, short y1, short x2, short y2, short x3, short y3
 
 #endif
 
-void drawPoly4TGD(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, long col1, long col2, long col4, long col3)
+void drawPoly4TGD(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, int col1, int col2, int col4, int col3)
 {
- long num; 
- long i,j,xmin,xmax,ymin,ymax;
- long cR1,cG1,cB1;
- long difR,difB,difG,difR2,difB2,difG2;
- long difX, difY, difX2, difY2;
- long posX,posY;
+ int num; 
+ int i,j,xmin,xmax,ymin,ymax;
+ int cR1,cG1,cB1;
+ int difR,difB,difG,difR2,difB2,difG2;
+ int difX, difY, difX2, difY2;
+ int posX,posY;
 
  if(x1>drawW && x2>drawW && x3>drawW && x4>drawW) return;
  if(y1>drawH && y2>drawH && y3>drawH && y4>drawH) return;
@@ -6848,26 +6842,26 @@ void drawPoly4TGD(short x1, short y1, short x2, short y2, short x3, short y3, sh
 
  if(!SetupSections_GT4(x1,y1,x2,y2,x3,y3,x4,y4,tx1,ty1,tx2,ty2,tx3,ty3,tx4,ty4,col1,col2,col3,col4)) return;
 
- ymax=Ymax;
+ ymax = Ymax;
 
- for(ymin=Ymin;ymin<drawY;ymin++)
-  if(NextRow_GT4()) return;
+ for (ymin = Ymin; ymin < drawY; ymin++)
+  if (NextRow_GT4()) return;
 
 #ifdef FASTSOLID
 
  if(!bCheckMask && !DrawSemiTrans && !iDither)
   {
-   for (i=ymin;i<=ymax;i++)
+   for (i = ymin; i <= ymax; i++)
     {
-     xmin=(left_x >> 16);
-     xmax=(right_x >> 16);
+     xmin = (left_x >> 16);
+     xmax = (right_x >> 16);
 
-     if(xmax>=xmin)
+     if(xmax >= xmin)
       {
-       posX=left_u;
-       posY=left_v;
+       posX = left_u;
+       posY = left_v;
 
-       num=(xmax-xmin);
+       num = (xmax-xmin);
        if(num==0) num=1;
        difX=(right_u-posX)/num;
        difY=(right_v-posY)/num;
@@ -6890,8 +6884,8 @@ void drawPoly4TGD(short x1, short y1, short x2, short y2, short x3, short y3, sh
 
        for(j=xmin;j<xmax;j+=2)
         {
-         GetTextureTransColGX32_S((unsigned long *)&psxVuw[(i<<10)+j],
-              (((long)psxVuw[((((posY+difY)>>16)+GlobalTextAddrY)<<10)+((posX+difX)>>16)+GlobalTextAddrX])<<16)|
+         GetTextureTransColGX32_S((uint32_t *)&psxVuw[(i<<10)+j],
+              (((int)psxVuw[((((posY+difY)>>16)+GlobalTextAddrY)<<10)+((posX+difX)>>16)+GlobalTextAddrX])<<16)|
               psxVuw[(((posY>>16)+GlobalTextAddrY)<<10)+((posX)>>16)+GlobalTextAddrX],
               (cB1>>16)|((cB1+difB)&0xff0000),
               (cG1>>16)|((cG1+difG)&0xff0000),
@@ -6968,7 +6962,7 @@ void drawPoly4TGD(short x1, short y1, short x2, short y2, short x3, short y3, sh
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly4TGD_TW(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, long col1, long col2, long col3, long col4)
+void drawPoly4TGD_TW(short x1, short y1, short x2, short y2, short x3, short y3, short x4, short y4, short tx1, short ty1, short tx2, short ty2, short tx3, short ty3, short tx4, short ty4, int col1, int col2, int col3, int col4)
 {
  drawPoly3TGD_TW(x2,y2,x3,y3,x4,y4,
               tx2,ty2,tx3,ty3,tx4,ty4,
@@ -7027,9 +7021,9 @@ __inline BOOL IsNoRect(void)
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3FT(unsigned char * baseAddr)
+void drawPoly3FT(unsigned char *baseAddr)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
 
  if(GlobalTextIL && GlobalTextTP<2)
   {
@@ -7085,9 +7079,9 @@ void drawPoly3FT(unsigned char * baseAddr)
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly4FT(unsigned char * baseAddr)
+void drawPoly4FT(unsigned char *baseAddr)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
 
  if(GlobalTextIL && GlobalTextTP<2)
   {
@@ -7160,7 +7154,7 @@ void drawPoly4FT(unsigned char * baseAddr)
 
 void drawPoly3GT(unsigned char * baseAddr)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
 
  if(GlobalTextIL && GlobalTextTP<2)
   {
@@ -7224,7 +7218,7 @@ void drawPoly3GT(unsigned char * baseAddr)
 
 void drawPoly4GT(unsigned char *baseAddr)
 {
- unsigned long *gpuData = ((unsigned long *) baseAddr);
+ uint32_t *gpuData = ((uint32_t *) baseAddr);
 
  if(GlobalTextIL && GlobalTextTP<2)
   {
@@ -7315,9 +7309,9 @@ void drawPoly4GT(unsigned char *baseAddr)
 // SPRITE FUNCS
 ////////////////////////////////////////////////////////////////////////
 
-void DrawSoftwareSpriteTWin(unsigned char * baseAddr,long w,long h)
+void DrawSoftwareSpriteTWin(unsigned char * baseAddr, int w, int h)
 { 
- unsigned long *gpuData = (unsigned long *)baseAddr;
+ uint32_t *gpuData = (uint32_t *)baseAddr;
  short sx0,sy0,sx1,sy1,sx2,sy2,sx3,sy3;
  short tx0,ty0,tx1,ty1,tx2,ty2,tx3,ty3;
 
@@ -7355,12 +7349,12 @@ void DrawSoftwareSpriteTWin(unsigned char * baseAddr,long w,long h)
 
 ////////////////////////////////////////////////////////////////////////
 
-void DrawSoftwareSpriteMirror(unsigned char * baseAddr,long w,long h)
+void DrawSoftwareSpriteMirror(unsigned char * baseAddr, int w, int h)
 {
- long sprtY,sprtX,sprtW,sprtH,lXDir,lYDir;
- long clutY0,clutX0,clutP,textX0,textY0,sprtYa,sprCY,sprCX,sprA;
+ int sprtY,sprtX,sprtW,sprtH,lXDir,lYDir;
+ int clutY0,clutX0,clutP,textX0,textY0,sprtYa,sprCY,sprCX,sprA;
  short tC;
- unsigned long *gpuData = (unsigned long *)baseAddr;
+ uint32_t *gpuData = (uint32_t *)baseAddr;
  sprtY = ly0;
  sprtX = lx0;
  sprtH = h;
@@ -7457,10 +7451,10 @@ void DrawSoftwareSpriteMirror(unsigned char * baseAddr,long w,long h)
 
 ////////////////////////////////////////////////////////////////////////
 
-void DrawSoftwareSprite_IL(unsigned char * baseAddr,short w,short h,long tx,long ty)
+void DrawSoftwareSprite_IL(unsigned char * baseAddr,short w,short h,int tx,int ty)
 {
- long sprtY,sprtX,sprtW,sprtH,tdx,tdy;
- unsigned long *gpuData = (unsigned long *)baseAddr;
+ int sprtY,sprtX,sprtW,sprtH,tdx,tdy;
+ uint32_t *gpuData = (uint32_t *)baseAddr;
 
  sprtY = ly0;
  sprtX = lx0;
@@ -7495,13 +7489,13 @@ void DrawSoftwareSprite_IL(unsigned char * baseAddr,short w,short h,long tx,long
 
 ////////////////////////////////////////////////////////////////////////
 
-void DrawSoftwareSprite(unsigned char * baseAddr,short w,short h,long tx,long ty)
+void DrawSoftwareSprite(unsigned char *baseAddr, short w, short h, int tx, int ty)
 {
- long sprtY,sprtX,sprtW,sprtH;
- long clutY0,clutX0,clutP,textX0,textY0,sprtYa,sprCY,sprCX,sprA;
- short tC,tC2;
- unsigned long *gpuData = (unsigned long *)baseAddr;
- unsigned char * pV;
+ int sprtY, sprtX, sprtW, sprtH;
+ int clutY0, clutX0, clutP, textX0, textY0, sprtYa, sprCY, sprCX, sprA;
+ short tC, tC2;
+ uint32_t *gpuData = (uint32_t *)baseAddr;
+ unsigned char *pV;
  BOOL bWT,bWS;
 
  if(GlobalTextIL && GlobalTextTP<2)
@@ -7594,8 +7588,8 @@ void DrawSoftwareSprite(unsigned char * baseAddr,short w,short h,long tx,long ty
          { 
           tC=*pV++;
 
-          GetTextureTransColG32_S((unsigned long *)&psxVuw[sprA],
-              (((long)psxVuw[clutP+((tC>>4)&0xf)])<<16)|
+          GetTextureTransColG32_S((uint32_t *)&psxVuw[sprA],
+              (((int)psxVuw[clutP+((tC>>4)&0xf)])<<16)|
               psxVuw[clutP+(tC&0x0f)]);
          }
 
@@ -7625,8 +7619,8 @@ void DrawSoftwareSprite(unsigned char * baseAddr,short w,short h,long tx,long ty
        { 
         tC=*pV++;
 
-        GetTextureTransColG32_SPR((unsigned long *)&psxVuw[sprA],
-            (((long)psxVuw[clutP+((tC>>4)&0xf)])<<16)|
+        GetTextureTransColG32_SPR((uint32_t *)&psxVuw[sprA],
+            (((int)psxVuw[clutP+((tC>>4)&0xf)])<<16)|
             psxVuw[clutP+(tC&0x0f)]);
        }
 
@@ -7653,8 +7647,8 @@ void DrawSoftwareSprite(unsigned char * baseAddr,short w,short h,long tx,long ty
         for(sprCX=0;sprCX<sprtW;sprCX+=2,sprA+=2)
          { 
           tC = *pV++;tC2 = *pV++;
-          GetTextureTransColG32_S((unsigned long *)&psxVuw[sprA],
-              (((long)psxVuw[clutP+tC2])<<16)|
+          GetTextureTransColG32_S((uint32_t *)&psxVuw[sprA],
+              (((int)psxVuw[clutP+tC2])<<16)|
               psxVuw[clutP+tC]);
          }
         if(sprCX==sprtW)
@@ -7672,8 +7666,8 @@ void DrawSoftwareSprite(unsigned char * baseAddr,short w,short h,long tx,long ty
       for(sprCX=0;sprCX<sprtW;sprCX+=2,sprA+=2)
        { 
         tC = *pV++;tC2 = *pV++;
-        GetTextureTransColG32_SPR((unsigned long *)&psxVuw[sprA],
-            (((long)psxVuw[clutP+tC2])<<16)|
+        GetTextureTransColG32_SPR((uint32_t *)&psxVuw[sprA],
+            (((int)psxVuw[clutP+tC2])<<16)|
             psxVuw[clutP+tC]);
        }
       if(sprCX==sprtW)
@@ -7696,8 +7690,8 @@ void DrawSoftwareSprite(unsigned char * baseAddr,short w,short h,long tx,long ty
 
         for (sprCX=0;sprCX<sprtW;sprCX+=2,sprA+=2)
          { 
-          GetTextureTransColG32_S((unsigned long *)&psxVuw[sprA],
-              (((long)psxVuw[(sprCY<<10) + textX0 + sprCX +1])<<16)|
+          GetTextureTransColG32_S((uint32_t *)&psxVuw[sprA],
+              (((int)psxVuw[(sprCY<<10) + textX0 + sprCX +1])<<16)|
               psxVuw[(sprCY<<10) + textX0 + sprCX]);
          }
         if(sprCX==sprtW)
@@ -7716,8 +7710,8 @@ void DrawSoftwareSprite(unsigned char * baseAddr,short w,short h,long tx,long ty
 
       for (sprCX=0;sprCX<sprtW;sprCX+=2,sprA+=2)
        { 
-        GetTextureTransColG32_SPR((unsigned long *)&psxVuw[sprA],
-            (((long)psxVuw[(sprCY<<10) + textX0 + sprCX +1])<<16)|
+        GetTextureTransColG32_SPR((uint32_t *)&psxVuw[sprA],
+            (((int)psxVuw[(sprCY<<10) + textX0 + sprCX +1])<<16)|
             psxVuw[(sprCY<<10) + textX0 + sprCX]);
        }
       if(sprCX==sprtW)
@@ -7742,11 +7736,11 @@ void DrawSoftwareSprite(unsigned char * baseAddr,short w,short h,long tx,long ty
 
 ///////////////////////////////////////////////////////////////////////
 
-void Line_E_SE_Shade(int x0, int y0, int x1, int y1, unsigned long rgb0, unsigned long rgb1)
+void Line_E_SE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0, uint32_t rgb1)
 {
     int dx, dy, incrE, incrSE, d;
-		unsigned long r0, g0, b0, r1, g1, b1;
-		long dr, dg, db;
+		uint32_t r0, g0, b0, r1, g1, b1;
+		int dr, dg, db;
 
 		r0 = (rgb0 & 0x00ff0000);
 		g0 = (rgb0 & 0x0000ff00) << 8;
@@ -7760,15 +7754,15 @@ void Line_E_SE_Shade(int x0, int y0, int x1, int y1, unsigned long rgb0, unsigne
 
 		if (dx > 0)
 		{
-			dr = ((long)r1 - (long)r0) / dx;
-			dg = ((long)g1 - (long)g0) / dx;
-			db = ((long)b1 - (long)b0) / dx;
+			dr = ((int)r1 - (int)r0) / dx;
+			dg = ((int)g1 - (int)g0) / dx;
+			db = ((int)b1 - (int)b0) / dx;
 		}
 		else
 		{
-			dr = ((long)r1 - (long)r0);
-			dg = ((long)g1 - (long)g0);
-			db = ((long)b1 - (long)b0);
+			dr = ((int)r1 - (int)r0);
+			dg = ((int)g1 - (int)g0);
+			db = ((int)b1 - (int)b0);
 		}
 
     d = 2*dy - dx;              /* Initial value of d */
@@ -7801,11 +7795,11 @@ void Line_E_SE_Shade(int x0, int y0, int x1, int y1, unsigned long rgb0, unsigne
 
 ///////////////////////////////////////////////////////////////////////
 
-void Line_S_SE_Shade(int x0, int y0, int x1, int y1, unsigned long rgb0, unsigned long rgb1)
+void Line_S_SE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0, uint32_t rgb1)
 {
     int dx, dy, incrS, incrSE, d;
-		unsigned long r0, g0, b0, r1, g1, b1;
-		long dr, dg, db;
+		uint32_t r0, g0, b0, r1, g1, b1;
+		int dr, dg, db;
 
 		r0 = (rgb0 & 0x00ff0000);
 		g0 = (rgb0 & 0x0000ff00) << 8;
@@ -7819,15 +7813,15 @@ void Line_S_SE_Shade(int x0, int y0, int x1, int y1, unsigned long rgb0, unsigne
 
 		if (dy > 0)
 		{
-			dr = ((long)r1 - (long)r0) / dy;
-			dg = ((long)g1 - (long)g0) / dy;
-			db = ((long)b1 - (long)b0) / dy;
+			dr = ((int)r1 - (int)r0) / dy;
+			dg = ((int)g1 - (int)g0) / dy;
+			db = ((int)b1 - (int)b0) / dy;
 		}
 		else
 		{
-			dr = ((long)r1 - (long)r0);
-			dg = ((long)g1 - (long)g0);
-			db = ((long)b1 - (long)b0);
+			dr = ((int)r1 - (int)r0);
+			dg = ((int)g1 - (int)g0);
+			db = ((int)b1 - (int)b0);
 		}
 
     d = 2*dx - dy;              /* Initial value of d */
@@ -7860,11 +7854,11 @@ void Line_S_SE_Shade(int x0, int y0, int x1, int y1, unsigned long rgb0, unsigne
 
 ///////////////////////////////////////////////////////////////////////
 
-void Line_N_NE_Shade(int x0, int y0, int x1, int y1, unsigned long rgb0, unsigned long rgb1)
+void Line_N_NE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0, uint32_t rgb1)
 {
     int dx, dy, incrN, incrNE, d;
-		unsigned long r0, g0, b0, r1, g1, b1;
-		long dr, dg, db;
+		uint32_t r0, g0, b0, r1, g1, b1;
+		int dr, dg, db;
 
 		r0 = (rgb0 & 0x00ff0000);
 		g0 = (rgb0 & 0x0000ff00) << 8;
@@ -7878,15 +7872,15 @@ void Line_N_NE_Shade(int x0, int y0, int x1, int y1, unsigned long rgb0, unsigne
 
 		if (dy > 0)
 		{
-			dr = ((long)r1 - (long)r0) / dy;
-			dg = ((long)g1 - (long)g0) / dy;
-			db = ((long)b1 - (long)b0) / dy;
+			dr = ((uint32_t)r1 - (uint32_t)r0) / dy;
+			dg = ((uint32_t)g1 - (uint32_t)g0) / dy;
+			db = ((uint32_t)b1 - (uint32_t)b0) / dy;
 		}
 		else
 		{
-			dr = ((long)r1 - (long)r0);
-			dg = ((long)g1 - (long)g0);
-			db = ((long)b1 - (long)b0);
+			dr = ((uint32_t)r1 - (uint32_t)r0);
+			dg = ((uint32_t)g1 - (uint32_t)g0);
+			db = ((uint32_t)b1 - (uint32_t)b0);
 		}
 
     d = 2*dx - dy;              /* Initial value of d */
@@ -7919,11 +7913,11 @@ void Line_N_NE_Shade(int x0, int y0, int x1, int y1, unsigned long rgb0, unsigne
 
 ///////////////////////////////////////////////////////////////////////
 
-void Line_E_NE_Shade(int x0, int y0, int x1, int y1, unsigned long rgb0, unsigned long rgb1)
+void Line_E_NE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0, uint32_t rgb1)
 {
     int dx, dy, incrE, incrNE, d;
-		unsigned long r0, g0, b0, r1, g1, b1;
-		long dr, dg, db;
+		uint32_t r0, g0, b0, r1, g1, b1;
+		int dr, dg, db;
 
 		r0 = (rgb0 & 0x00ff0000);
 		g0 = (rgb0 & 0x0000ff00) << 8;
@@ -7937,15 +7931,15 @@ void Line_E_NE_Shade(int x0, int y0, int x1, int y1, unsigned long rgb0, unsigne
 
 		if (dx > 0)
 		{
-			dr = ((long)r1 - (long)r0) / dx;
-			dg = ((long)g1 - (long)g0) / dx;
-			db = ((long)b1 - (long)b0) / dx;
+			dr = ((int)r1 - (int)r0) / dx;
+			dg = ((int)g1 - (int)g0) / dx;
+			db = ((int)b1 - (int)b0) / dx;
 		}
 		else
 		{
-			dr = ((long)r1 - (long)r0);
-			dg = ((long)g1 - (long)g0);
-			db = ((long)b1 - (long)b0);
+			dr = ((int)r1 - (int)r0);
+			dg = ((int)g1 - (int)g0);
+			db = ((int)b1 - (int)b0);
 		}
 
     d = 2*dy - dx;              /* Initial value of d */
@@ -7978,11 +7972,11 @@ void Line_E_NE_Shade(int x0, int y0, int x1, int y1, unsigned long rgb0, unsigne
 
 ///////////////////////////////////////////////////////////////////////
 
-void VertLineShade(int x, int y0, int y1, unsigned long rgb0, unsigned long rgb1)
+void VertLineShade(int x, int y0, int y1, uint32_t rgb0, uint32_t rgb1)
 {
   int y, dy;
-	unsigned long r0, g0, b0, r1, g1, b1;
-	long dr, dg, db;
+	uint32_t r0, g0, b0, r1, g1, b1;
+	int dr, dg, db;
 
 	r0 = (rgb0 & 0x00ff0000);
 	g0 = (rgb0 & 0x0000ff00) << 8;
@@ -7995,15 +7989,15 @@ void VertLineShade(int x, int y0, int y1, unsigned long rgb0, unsigned long rgb1
 
 	if (dy > 0)
 	{
-		dr = ((long)r1 - (long)r0) / dy;
-		dg = ((long)g1 - (long)g0) / dy;
-		db = ((long)b1 - (long)b0) / dy;
+		dr = ((int)r1 - (int)r0) / dy;
+		dg = ((int)g1 - (int)g0) / dy;
+		db = ((int)b1 - (int)b0) / dy;
 	}
 	else
 	{
-		dr = ((long)r1 - (long)r0);
-		dg = ((long)g1 - (long)g0);
-		db = ((long)b1 - (long)b0);
+		dr = ((int)r1 - (int)r0);
+		dg = ((int)g1 - (int)g0);
+		db = ((int)b1 - (int)b0);
 	}
 
 	if (y0 < drawY)
@@ -8028,11 +8022,11 @@ void VertLineShade(int x, int y0, int y1, unsigned long rgb0, unsigned long rgb1
 
 ///////////////////////////////////////////////////////////////////////
 
-void HorzLineShade(int y, int x0, int x1, unsigned long rgb0, unsigned long rgb1)
+void HorzLineShade(int y, int x0, int x1, uint32_t rgb0, uint32_t rgb1)
 {
   int x, dx;
-	unsigned long r0, g0, b0, r1, g1, b1;
-	long dr, dg, db;
+	uint32_t r0, g0, b0, r1, g1, b1;
+	int dr, dg, db;
 
 	r0 = (rgb0 & 0x00ff0000);
 	g0 = (rgb0 & 0x0000ff00) << 8;
@@ -8045,15 +8039,15 @@ void HorzLineShade(int y, int x0, int x1, unsigned long rgb0, unsigned long rgb1
 
 	if (dx > 0)
 	{
-		dr = ((long)r1 - (long)r0) / dx;
-		dg = ((long)g1 - (long)g0) / dx;
-		db = ((long)b1 - (long)b0) / dx;
+		dr = ((int)r1 - (int)r0) / dx;
+		dg = ((int)g1 - (int)g0) / dx;
+		db = ((int)b1 - (int)b0) / dx;
 	}
 	else
 	{
-		dr = ((long)r1 - (long)r0);
-		dg = ((long)g1 - (long)g0);
-		db = ((long)b1 - (long)b0);
+		dr = ((int)r1 - (int)r0);
+		dg = ((int)g1 - (int)g0);
+		db = ((int)b1 - (int)b0);
 	}
 
 	if (x0 < drawX)
@@ -8243,10 +8237,10 @@ void HorzLineFlat(int y, int x0, int x1, unsigned short colour)
 ///////////////////////////////////////////////////////////////////////
 
 /* Bresenham Line drawing function */
-void DrawSoftwareLineShade(long rgb0, long rgb1)
+void DrawSoftwareLineShade(int rgb0, int rgb1)
 {
 	short x0, y0, x1, y1, xt, yt;
-	long rgbt;
+	int rgbt;
 	double m, dy, dx;
 
 	if(lx0>drawW && lx1>drawW) return;
@@ -8316,7 +8310,7 @@ void DrawSoftwareLineShade(long rgb0, long rgb1)
 
 ///////////////////////////////////////////////////////////////////////
 
-void DrawSoftwareLineFlat(long rgb)
+void DrawSoftwareLineFlat(int rgb)
 {
 	short x0, y0, x1, y1, xt, yt;
 	double m, dy, dx;

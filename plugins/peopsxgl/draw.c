@@ -1018,14 +1018,14 @@ void offsetST(void)
 
 ///////////////////////////////////////////////////////// 
 
-void offsetScreenUpload(long Position)
+void offsetScreenUpload(int Position)
 {
  if(bDisplayNotSet)
   SetOGLDisplaySettings(1);
 
  if(Position==-1)
   {
-   long lmdx,lmdy;
+   int lmdx,lmdy;
 
    lmdx=xrUploadArea.x0;
    lmdy=xrUploadArea.y0;

@@ -25,7 +25,7 @@
 #include "menu.h"
 #include "gpu.h"
 
-unsigned long  dwCoreFlags=0;
+uint32_t       dwCoreFlags=0;
 PSXPoint_t     ptCursorPoint[8];
 unsigned short usCursorActive=0;
 
@@ -1385,7 +1385,7 @@ void ShowGunCursor(void)
 {
  int iPlayer;
  GLfloat fX,fY,fDX,fDY,fYS,fXS;
- const unsigned long crCursorColor32[8]={0xff00ff00,0xffff0000,0xff0000ff,0xffff00ff,0xffffff00,0xff00ffff,0xffffffff,0xff7f7f7f};
+ const uint32_t crCursorColor32[8]={0xff00ff00,0xffff0000,0xff0000ff,0xffff00ff,0xffffff00,0xff00ffff,0xffffffff,0xff7f7f7f};
 
  if(!gTexCursorName)                                   // create gun cursor texture the first time
   {
@@ -1441,6 +1441,3 @@ void ShowGunCursor(void)
 
  glEnable(GL_SCISSOR_TEST);                       
 }
-
-////////////////////////////////////////////////////////////////////////
-
