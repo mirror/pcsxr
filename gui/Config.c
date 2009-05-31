@@ -90,11 +90,13 @@ int LoadConfig(PcsxConfig *Conf) {
 	f = fopen(cfgfile, "r");
 	if (f == NULL) return -1;
 
-	data = (char*)malloc(size);
+	data = (char*)malloc(size + 1);
 	if (data == NULL) return -1;
 
 	fread(data, 1, buf.st_size, f);
 	fclose(f);
+
+	data[size] = '\0';
 
 	GetValue(data, "Bios", Config.Bios);
 	GetValue(data, "Gpu",  Config.Gpu);

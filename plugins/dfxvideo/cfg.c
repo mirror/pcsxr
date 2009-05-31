@@ -108,8 +108,8 @@ void ReadConfigFile()
  in = fopen(t,"rb");
  if (!in) return;
 
- pB=(char *)malloc(size);
- memset(pB,0,size);
+ pB=(char *)malloc(size + 1);
+ memset(pB,0,size + 1);
 
  len = fread(pB, 1, size, in);
  fclose(in);

@@ -1,3 +1,7 @@
+May 31, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * gui/Config.c, plugins/dfxvideo/cfg.c: Fixed invalid memory access.
+
 May 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/peopsxgl/draw.c: Modified for compatiability with x86_64.
