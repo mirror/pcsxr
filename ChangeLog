@@ -1,6 +1,7 @@
 May 31, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * gui/Config.c, plugins/dfxvideo/cfg.c: Fixed invalid memory access.
+ * debian/control: Added libxxf86vm-dev to Build-Depend.
 
 May 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
