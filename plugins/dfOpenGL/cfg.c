@@ -86,20 +86,26 @@ void ExecCfg(char *arg) {
 
 	strcpy(cfg, "./cfgDFOpenGL");
 	if (stat(cfg, &buf) != -1) {
-		sprintf(cfg, "%s %s", cfg, arg);
-		system(cfg); return;
+		strcat(cfg, " ");
+		strcat(cfg, arg);
+		system(cfg);
+		return;
 	}
 
 	strcpy(cfg, "./cfg/cfgDFOpenGL");
 	if (stat(cfg, &buf) != -1) {
-		sprintf(cfg, "%s %s", cfg, arg);
-		system(cfg); return;
+		strcat(cfg, " ");
+		strcat(cfg, arg);
+		system(cfg);
+		return;
 	}
 
 	sprintf(cfg, "%s/.pcsx/plugins/cfg/cfgDFOpenGL", getenv("HOME"));
 	if (stat(cfg, &buf) != -1) {
-		sprintf(cfg, "%s %s", cfg, arg);
-		system(cfg); return;
+		strcat(cfg, " ");
+		strcat(cfg, arg);
+		system(cfg);
+		return;
 	}
 
 	printf("ERROR: cfgDFOpenGL file not found!\n");
