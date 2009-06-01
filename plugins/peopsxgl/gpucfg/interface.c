@@ -827,7 +827,7 @@ create_AboutWnd (void)
   AboutWnd = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_object_set_data (GTK_OBJECT (AboutWnd), "AboutWnd", AboutWnd);
   gtk_container_set_border_width (GTK_CONTAINER (AboutWnd), 12);
-  gtk_window_set_title (GTK_WINDOW (AboutWnd), "About");
+  gtk_window_set_title (GTK_WINDOW (AboutWnd), _("About"));
   gtk_window_set_position (GTK_WINDOW (AboutWnd), GTK_WIN_POS_CENTER);
   gtk_window_set_modal (GTK_WINDOW (AboutWnd), TRUE);
   gtk_window_set_policy (GTK_WINDOW (AboutWnd), FALSE, FALSE, FALSE);
@@ -839,7 +839,7 @@ create_AboutWnd (void)
   gtk_widget_show (fixed8);
   gtk_container_add (GTK_CONTAINER (AboutWnd), fixed8);
 
-  bntAClose = gtk_button_new_with_label ("OK");
+  bntAClose = gtk_button_new_with_label (_("OK"));
   gtk_widget_ref (bntAClose);
   gtk_object_set_data_full (GTK_OBJECT (AboutWnd), "bntAClose", bntAClose,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -848,7 +848,7 @@ create_AboutWnd (void)
   gtk_widget_set_uposition (bntAClose, 136, 184);
   gtk_widget_set_usize (bntAClose, 88, 24);
 
-  label13 = gtk_label_new ("Adapted from P.E.Op.S OpenGL GPU by Pete Bernert");
+  label13 = gtk_label_new (_("Adapted from P.E.Op.S OpenGL GPU by Pete Bernert"));
   gtk_widget_ref (label13);
   gtk_object_set_data_full (GTK_OBJECT (AboutWnd), "label13", label13,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -857,7 +857,7 @@ create_AboutWnd (void)
   gtk_widget_set_uposition (label13, 0, 8);
   gtk_widget_set_usize (label13, 360, 16);
 
-  label15 = gtk_label_new ("Homepage: http://www.pbernert.com");
+  label15 = gtk_label_new (_("Homepage: http://www.pbernert.com"));
   gtk_widget_ref (label15);
   gtk_object_set_data_full (GTK_OBJECT (AboutWnd), "label15", label15,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -875,7 +875,7 @@ create_AboutWnd (void)
   gtk_widget_set_uposition (label21, 0, 136);
   gtk_widget_set_usize (label21, 360, 16);
 
-  label19 = gtk_label_new ("Version: 1.78");
+  label19 = gtk_label_new (_("Version: 1.78"));
   gtk_widget_ref (label19);
   gtk_object_set_data_full (GTK_OBJECT (AboutWnd), "label19", label19,
                             (GtkDestroyNotify) gtk_widget_unref);
