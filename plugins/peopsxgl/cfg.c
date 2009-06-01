@@ -56,7 +56,7 @@ void ReadConfigFile()
  if(iResX<10) iResX=10;
 
  strcpy(t,"\nResY");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
- if(p) iResY=atoi(p+len);                           
+ if(p) iResY=atoi(p+len);
  if(iResY<10) iResY=10;
 
  strcpy(t,"\nKeepRatio");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
@@ -203,7 +203,8 @@ void ReadConfigFile()
 
 void ReadConfig(void)                                  // read config (linux file)
 {
- iResX=640;iResY=480;
+ iResX=640;
+ iResY=480;
  iColDepth=16;
  bChangeRes=FALSE;
  bWindowMode=TRUE;

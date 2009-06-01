@@ -10,6 +10,7 @@ June 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * plugins/peopsxgl/gpucfg/support.h: Added.
  * plugins/peopsxgl/cfg.c: Reverted the filename of config file.
  * plugins/dfcdrom/interface.c: Supported translation.
+ * po/pcsx.pot, po/zh_CN.po, po/zh_TW.po: Updated.
 
 May 31, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

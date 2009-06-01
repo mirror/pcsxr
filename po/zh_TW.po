@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-30 16:09+0800\n"
+"POT-Creation-Date: 2009-06-01 17:02+0800\n"
 "PO-Revision-Date: 2009-03-25 19:25+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
@@ -60,6 +60,7 @@ msgstr "關於 PCSX"
 #: ../win32/gui/AboutDlg.c:48 ../win32/gui/AboutDlg.c:52
 #: ../win32/gui/ConfigurePlugins.c:462 ../win32/gui/ConfigurePlugins.c:593
 #: ../win32/gui/WndMain.c:906 ../win32/gui/WndMain.c:1142
+#: ../plugins/peopsxgl/gpucfg/interface.c:129
 msgid "OK"
 msgstr "確定"
 
@@ -81,6 +82,7 @@ msgstr "配置"
 
 #: ../win32/gui/ConfigurePlugins.c:463 ../win32/gui/ConfigurePlugins.c:594
 #: ../win32/gui/WndMain.c:907 ../win32/gui/WndMain.c:1143
+#: ../plugins/peopsxgl/gpucfg/interface.c:337
 msgid "Cancel"
 msgstr "取消"
 
@@ -533,7 +535,7 @@ msgstr "Parasite Eve 2, Vandal Hearts 1/2 修正"
 msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku 戰斗修正"
 
-#: ../win32/gui/WndMain.c:1156
+#: ../win32/gui/WndMain.c:1156 ../plugins/dfcdrom/interface.c:193
 msgid "Options"
 msgstr "選項"
 
@@ -1214,6 +1216,7 @@ msgid "Toggle windowed/fullscreen mode."
 msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:154
+#: ../plugins/peopsxgl/gpucfg/interface.c:321
 msgid "Fullscreen"
 msgstr ""
 
@@ -1261,6 +1264,7 @@ msgid "<b>Framerate</b>"
 msgstr "<b>金手指碼</b>"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:324
+#: ../plugins/peopsxgl/gpucfg/interface.c:567
 msgid "Use game fixes"
 msgstr ""
 
@@ -1314,6 +1318,7 @@ msgid "Skip every second frame"
 msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:532
+#: ../plugins/peopsxgl/gpucfg/interface.c:639
 msgid "Old frame skipping"
 msgstr ""
 
@@ -1873,6 +1878,381 @@ msgstr ""
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:642
 msgid "<b>PCSX-df Sound Plugin Adaption</b>"
+msgstr ""
+
+#: ../plugins/dfcdrom/interface.c:73
+#, fuzzy
+msgid "CDR configuration"
+msgstr "配置"
+
+#: ../plugins/dfcdrom/interface.c:98
+msgid "Choose your CD-ROM device or type its path if it's not listed"
+msgstr ""
+
+#: ../plugins/dfcdrom/interface.c:101
+#, fuzzy
+msgid "Select CD-ROM device"
+msgstr "選擇"
+
+#: ../plugins/dfcdrom/interface.c:119
+msgid "Select read mode:"
+msgstr ""
+
+#: ../plugins/dfcdrom/interface.c:132
+msgid "Normal (No Cache)"
+msgstr ""
+
+#: ../plugins/dfcdrom/interface.c:136
+msgid "Threaded - Faster (With Cache)"
+msgstr ""
+
+#: ../plugins/dfcdrom/interface.c:151
+msgid "Cache Size (Def. 64):                  "
+msgstr ""
+
+#: ../plugins/dfcdrom/interface.c:172
+msgid "Cdrom Speed (Def. 0 = MAX):    "
+msgstr ""
+
+#: ../plugins/dfcdrom/interface.c:188
+msgid "Enable Subchannel read"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:117
+#, fuzzy
+msgid "OpenGL Driver configuration"
+msgstr "配置"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:137
+msgid "Textures"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:160
+msgid "Quality:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:177
+#: ../plugins/peopsxgl/gpucfg/interface.c:190
+msgid "0: don't care - Use driver's default textures"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:178
+msgid "1: 4444 - Fast, but less colorful"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:179
+msgid "2: 5551 - Nice colors, bad transparency"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:180
+msgid "3: 8888 - Best colors, more ram needed"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:181
+msgid "4: BGR8888 - Faster on some cards"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:192
+msgid "VRam size in MBytes (0..1024, 0=auto):"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:209
+#: ../plugins/peopsxgl/gpucfg/interface.c:224
+msgid "0: None"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:210
+msgid "1: Standard - Glitches will happen"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:211
+msgid "2: Extended - No black borders"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:212
+msgid "3: Standard without sprites - unfiltered 2D"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:213
+msgid "4: Extended without sprites - unfiltered 2D"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:214
+msgid "5: Standard + smoothed sprites"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:215
+msgid "6: Extended + smoothed sprites"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:226
+msgid "Filtering:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:234
+msgid "HiRes Tex:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:251
+#: ../plugins/peopsxgl/gpucfg/interface.c:262
+msgid "0: None (standard)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:252
+msgid "1: 2xSaI (much vram needed)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:253
+msgid "2: Scaled (needs tex filtering)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:264
+msgid "Window options"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:295
+msgid "Width:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:304
+msgid "Height:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:313
+msgid "Keep psx aspect ratio"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:329
+msgid "Dithering"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:345
+#, fuzzy
+msgid "Framerate"
+msgstr "<b>金手指碼</b>"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:368
+msgid "FPS"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:376
+#, fuzzy
+msgid "FPS limit manual"
+msgstr "自動檢測"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:385
+msgid "Show FPS display on startup"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:393
+#, fuzzy
+msgid "Use FPS limit"
+msgstr "自動檢測"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:401
+msgid "FPS limit auto-detection"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:410
+msgid "Use Frame skipping"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:418
+msgid "Compatibility"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:433
+msgid "Advanced blending (Accurate psx color emulation)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:441
+msgid "Framebuffer textures:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:449
+msgid "Offscreen Drawing:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:457
+msgid "Framebuffer access:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:465
+msgid "Alpha Multipass (correct opaque texture areas)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:473
+msgid "Mask bit detection (needed by a few games, zbuffer)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:490
+#: ../plugins/peopsxgl/gpucfg/interface.c:503
+msgid "0: None - Fastest, most glitches"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:491
+msgid "1: Minimum - Missing screens"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:492
+msgid "2: Standard - OK for most games"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:493
+msgid "3: Enhanced - Shows more stuff"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:494
+msgid "4: Extended - Causing garbage"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:514
+#: ../plugins/peopsxgl/gpucfg/interface.c:526
+msgid "0: Emulated vram - Needs FVP"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:515
+msgid "1: Black - Fast, no effects"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:516
+msgid "2: Gfx card buffer - Can be slow"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:517
+msgid "3: Gfx card & soft - slow"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:537
+#: ../plugins/peopsxgl/gpucfg/interface.c:550
+msgid "0: Emulated vram - ok most times"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:538
+msgid "1: Gfx card buffer reads"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:539
+msgid "2: Gfx card buffer moves"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:540
+msgid "3: Gfx buffer reads & moves"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:541
+msgid "4: Full Software (FVP)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:552
+msgid "Special game fixes"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:575
+msgid "Battle cursor (FF7)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:583
+msgid "Direct FB updates"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:591
+msgid "Black brightness (Lunar)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:599
+msgid "Swap front detection"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:607
+#, fuzzy
+msgid "Disable coord check"
+msgstr "禁用 XA 解碼"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:615
+msgid "No blue glitches (LoD)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:623
+msgid "Soft FB access"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:631
+msgid "PC fps calculation"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:647
+msgid "Yellow rect (FF9)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:655
+msgid "No subtr. blending"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:663
+msgid "Lazy upload (DW7)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:671
+msgid "Odd/even hack"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:679
+msgid "Adjust screen width"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:687
+msgid "Old texture filtering"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:695
+msgid "Additional uploads"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:703
+#, fuzzy
+msgid "unused"
+msgstr "已使用"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:711
+msgid "Fake 'gpu busy'"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:719
+msgid "Misc"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:742
+#, fuzzy
+msgid "Scanlines"
+msgstr "西班牙語"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:750
+msgid "Blending (0..255, -1=dot):"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:758
+msgid "Screen smoothing (can be slow or unsupported)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:766
+msgid "Use OpenGL extensions (recommended)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:774
+msgid "Polygon anti-aliasing (slow with most cards)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:782
+msgid "Line mode (polygons will not get filled)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:790
+msgid "Force 15 bit framebuffer updates (faster movies)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:798
+msgid "Unfiltered MDECs (small movie speedup)"
 msgstr ""
 
 #: ../plugins/dfinput/dfinput.glade2:7

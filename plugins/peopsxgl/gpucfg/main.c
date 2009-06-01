@@ -219,7 +219,7 @@ int main (int argc, char *argv[])
    }
   if(val) SETCHECK("chkShowFPS");
 
-  val=0;
+  val=1;
   if(pB)
    {
     strcpy(t,"\nUseFrameLimit");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}

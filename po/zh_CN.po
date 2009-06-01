@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-30 16:09+0800\n"
-"PO-Revision-Date: 2009-05-30 16:27+0700\n"
+"POT-Creation-Date: 2009-06-01 17:02+0800\n"
+"PO-Revision-Date: 2009-06-01 17:03+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -63,6 +63,7 @@ msgstr "关于 PCSX"
 #: ../win32/gui/ConfigurePlugins.c:593
 #: ../win32/gui/WndMain.c:906
 #: ../win32/gui/WndMain.c:1142
+#: ../plugins/peopsxgl/gpucfg/interface.c:129
 msgid "OK"
 msgstr "确定"
 
@@ -86,6 +87,7 @@ msgstr "配置"
 #: ../win32/gui/ConfigurePlugins.c:594
 #: ../win32/gui/WndMain.c:907
 #: ../win32/gui/WndMain.c:1143
+#: ../plugins/peopsxgl/gpucfg/interface.c:337
 msgid "Cancel"
 msgstr "取消"
 
@@ -164,63 +166,63 @@ msgstr "注意: 联网游戏插件应和其它插件放在同一目录中。"
 #: ../win32/gui/WndMain.c:235
 #, c-format
 msgid "*PCSX*: Saved State %d"
-msgstr ""
+msgstr "*PCSX*: Saved State %d"
 
 #: ../win32/gui/plugin.c:91
 #: ../win32/gui/WndMain.c:236
 #, c-format
 msgid "*PCSX*: Error Saving State %d"
-msgstr ""
+msgstr "*PCSX*: Error Saving State %d"
 
 #: ../win32/gui/plugin.c:107
 #: ../win32/gui/WndMain.c:214
 #, c-format
 msgid "*PCSX*: Loaded State %d"
-msgstr ""
+msgstr "*PCSX*: Loaded State %d"
 
 #: ../win32/gui/plugin.c:108
 #: ../win32/gui/WndMain.c:215
 #, c-format
 msgid "*PCSX*: Error Loading State %d"
-msgstr ""
+msgstr "*PCSX*: Error Loading State %d"
 
 #: ../win32/gui/plugin.c:119
 #, c-format
 msgid "*PCSX*: Sio Irq Always Enabled"
-msgstr ""
+msgstr "*PCSX*: Sio Irq Always Enabled"
 
 #: ../win32/gui/plugin.c:120
 #, c-format
 msgid "*PCSX*: Sio Irq Not Always Enabled"
-msgstr ""
+msgstr "*PCSX*: Sio Irq Not Always Enabled"
 
 #: ../win32/gui/plugin.c:127
 #, c-format
 msgid "*PCSX*: Black&White Mdecs Only Enabled"
-msgstr ""
+msgstr "*PCSX*: Black&White Mdecs Only Enabled"
 
 #: ../win32/gui/plugin.c:128
 #, c-format
 msgid "*PCSX*: Black&White Mdecs Only Disabled"
-msgstr ""
+msgstr "*PCSX*: Black&White Mdecs Only Disabled"
 
 #: ../win32/gui/plugin.c:135
 #, c-format
 msgid "*PCSX*: Xa Enabled"
-msgstr ""
+msgstr "*PCSX*: Xa Enabled"
 
 #: ../win32/gui/plugin.c:136
 #, c-format
 msgid "*PCSX*: Xa Disabled"
-msgstr ""
+msgstr "*PCSX*: Xa Disabled"
 
 #: ../win32/gui/plugin.c:145
 msgid "*PCSX*: CdRom Case Opened"
-msgstr ""
+msgstr "*PCSX*: CdRom Case Opened"
 
 #: ../win32/gui/plugin.c:150
 msgid "*PCSX*: CdRom Case Closed"
-msgstr ""
+msgstr "*PCSX*: CdRom Case Closed"
 
 #: ../win32/gui/plugin.c:177
 msgid "Connecting..."
@@ -384,22 +386,22 @@ msgstr "PCSX 存档格式"
 #: ../win32/gui/WndMain.c:280
 #, c-format
 msgid "*PCSX*: Loaded State %s"
-msgstr ""
+msgstr "*PCSX*: Loaded State %s"
 
 #: ../win32/gui/WndMain.c:281
 #, c-format
 msgid "*PCSX*: Error Loading State %s"
-msgstr ""
+msgstr "*PCSX*: Error Loading State %s"
 
 #: ../win32/gui/WndMain.c:332
 #, c-format
 msgid "*PCSX*: Saved State %s"
-msgstr ""
+msgstr "*PCSX*: Saved State %s"
 
 #: ../win32/gui/WndMain.c:333
 #, c-format
 msgid "*PCSX*: Error Saving State %s"
-msgstr ""
+msgstr "*PCSX*: Error Saving State %s"
 
 #: ../win32/gui/WndMain.c:382
 #: ../win32/gui/WndMain.c:431
@@ -439,11 +441,11 @@ msgstr "游戏"
 
 #: ../win32/gui/WndMain.c:796
 msgid "mid link block"
-msgstr ""
+msgstr "mid link block"
 
 #: ../win32/gui/WndMain.c:799
 msgid "terminiting link block"
-msgstr ""
+msgstr "terminiting link block"
 
 #: ../win32/gui/WndMain.c:807
 #: ../gui/Gtk2Gui.c:1126
@@ -573,6 +575,7 @@ msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku 战斗修正"
 
 #: ../win32/gui/WndMain.c:1156
+#: ../plugins/dfcdrom/interface.c:193
 msgid "Options"
 msgstr "选项"
 
@@ -1261,7 +1264,7 @@ msgid ""
 "6: HQ2X\n"
 "7: HQ3X"
 msgstr ""
-"0: None\n"
+"0: 无\n"
 "1: 2xSai\n"
 "2: 2xSuperSai\n"
 "3: SuperEagle\n"
@@ -1289,6 +1292,7 @@ msgid "Toggle windowed/fullscreen mode."
 msgstr "切换窗口/全屏模式"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:154
+#: ../plugins/peopsxgl/gpucfg/interface.c:321
 msgid "Fullscreen"
 msgstr "全屏"
 
@@ -1310,7 +1314,7 @@ msgstr "如果游戏运行得过快，请启用此项。"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:219
 msgid "Autodetect FPS limit"
-msgstr "自动检测 FPS 极限"
+msgstr "自动检测 FPS 界限"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:235
 msgid "Skip frames when rendering."
@@ -1333,6 +1337,7 @@ msgid "<b>Framerate</b>"
 msgstr "<b>帧率</b>"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:324
+#: ../plugins/peopsxgl/gpucfg/interface.c:567
 msgid "Use game fixes"
 msgstr "使用特定游戏修正"
 
@@ -1346,11 +1351,11 @@ msgstr "Dark Forces 运行需要"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:378
 msgid "Draw quads with triangles"
-msgstr ""
+msgstr "使用 quad 绘制三角形"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:394
 msgid "Repeated flat tex triangles"
-msgstr ""
+msgstr "重复平滑多边形纹理"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:410
 msgid "Disable CPU Saving"
@@ -1366,7 +1371,7 @@ msgstr "精确帧率"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:455
 msgid "Better FPS limit in some"
-msgstr "某些游戏中可取得较好的 FPS 极限值"
+msgstr "某些游戏中可取得较好的 FPS 界限值"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:470
 msgid "PC FPS calculation"
@@ -1385,6 +1390,7 @@ msgid "Skip every second frame"
 msgstr "每两帧跳过一帧"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:532
+#: ../plugins/peopsxgl/gpucfg/interface.c:639
 msgid "Old frame skipping"
 msgstr "旧的跳帧方式"
 
@@ -1972,6 +1978,372 @@ msgstr "发布日期: 05.04.2003"
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:642
 msgid "<b>PCSX-df Sound Plugin Adaption</b>"
 msgstr "<b>PCSX-df 音频插件</b>"
+
+#: ../plugins/dfcdrom/interface.c:73
+msgid "CDR configuration"
+msgstr "CDR 配置"
+
+#: ../plugins/dfcdrom/interface.c:98
+msgid "Choose your CD-ROM device or type its path if it's not listed"
+msgstr "请选择您的 CD-ROM 设备或直接输入设备路径"
+
+#: ../plugins/dfcdrom/interface.c:101
+msgid "Select CD-ROM device"
+msgstr "选择 CD-ROM 设备"
+
+#: ../plugins/dfcdrom/interface.c:119
+msgid "Select read mode:"
+msgstr "选择读取模式:"
+
+#: ../plugins/dfcdrom/interface.c:132
+msgid "Normal (No Cache)"
+msgstr "正常 (无缓存)"
+
+#: ../plugins/dfcdrom/interface.c:136
+msgid "Threaded - Faster (With Cache)"
+msgstr "多线程 - 较快 (使用缓存)"
+
+#: ../plugins/dfcdrom/interface.c:151
+msgid "Cache Size (Def. 64):                  "
+msgstr "缓存大小 (默认为 64):"
+
+#: ../plugins/dfcdrom/interface.c:172
+msgid "Cdrom Speed (Def. 0 = MAX):    "
+msgstr "光驱速度 (默认 0 为最大速度):"
+
+#: ../plugins/dfcdrom/interface.c:188
+msgid "Enable Subchannel read"
+msgstr "启用子通道读取"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:117
+msgid "OpenGL Driver configuration"
+msgstr "OpenGL 驱动程序配置"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:137
+msgid "Textures"
+msgstr "纹理"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:160
+msgid "Quality:"
+msgstr "质量:"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:177
+#: ../plugins/peopsxgl/gpucfg/interface.c:190
+msgid "0: don't care - Use driver's default textures"
+msgstr "0: 使用驱动程序的默认纹理"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:178
+msgid "1: 4444 - Fast, but less colorful"
+msgstr "1: 4444 - 较快，较少颜色"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:179
+msgid "2: 5551 - Nice colors, bad transparency"
+msgstr "2: 5551 - 较好的颜色，较差的透明效果"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:180
+msgid "3: 8888 - Best colors, more ram needed"
+msgstr "3: 8888 - 最佳的颜色，需更多内存"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:181
+msgid "4: BGR8888 - Faster on some cards"
+msgstr "4: BGR8888 - 某些显卡较快"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:192
+msgid "VRam size in MBytes (0..1024, 0=auto):"
+msgstr "显存大小，以 MB 为单位 (0..1024, 0=自动):"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:209
+#: ../plugins/peopsxgl/gpucfg/interface.c:224
+msgid "0: None"
+msgstr "0: 无"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:210
+msgid "1: Standard - Glitches will happen"
+msgstr "1: 标准 - 可能会发生问题"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:211
+msgid "2: Extended - No black borders"
+msgstr "2: 增强 - 去除黑框"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:212
+msgid "3: Standard without sprites - unfiltered 2D"
+msgstr "3: 标准，不含贴图 - 未过滤的 2D"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:213
+msgid "4: Extended without sprites - unfiltered 2D"
+msgstr "4: 增强，不含贴图 - 未过滤的 2D"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:214
+msgid "5: Standard + smoothed sprites"
+msgstr "5: 标准 + 平滑贴图"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:215
+msgid "6: Extended + smoothed sprites"
+msgstr "6: 增强 + 平滑贴图"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:226
+msgid "Filtering:"
+msgstr "过滤:"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:234
+msgid "HiRes Tex:"
+msgstr "高分纹理:"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:251
+#: ../plugins/peopsxgl/gpucfg/interface.c:262
+msgid "0: None (standard)"
+msgstr "0: 无 (标准)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:252
+msgid "1: 2xSaI (much vram needed)"
+msgstr "1: 2xSaI (需较多显存)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:253
+msgid "2: Scaled (needs tex filtering)"
+msgstr "2: 拉伸 (需要纹理过滤)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:264
+msgid "Window options"
+msgstr "窗口选项"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:295
+msgid "Width:"
+msgstr "宽度:"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:304
+msgid "Height:"
+msgstr "高度"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:313
+msgid "Keep psx aspect ratio"
+msgstr "保持 psx 纵横比"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:329
+msgid "Dithering"
+msgstr "抖动"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:345
+msgid "Framerate"
+msgstr "帧率"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:368
+msgid "FPS"
+msgstr "FPS"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:376
+msgid "FPS limit manual"
+msgstr "手动设置 FPS 界限"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:385
+msgid "Show FPS display on startup"
+msgstr "启动时显示 FPS"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:393
+msgid "Use FPS limit"
+msgstr "启用 FPS 界限"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:401
+msgid "FPS limit auto-detection"
+msgstr "FPS 界限自动检测"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:410
+msgid "Use Frame skipping"
+msgstr "启用跳帧"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:418
+msgid "Compatibility"
+msgstr "兼容性"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:433
+msgid "Advanced blending (Accurate psx color emulation)"
+msgstr "高级混合 (精确的 psx 色彩模拟)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:441
+msgid "Framebuffer textures:"
+msgstr "帧缓冲纹理:"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:449
+msgid "Offscreen Drawing:"
+msgstr "离屏描绘:"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:457
+msgid "Framebuffer access:"
+msgstr "帧缓冲访问:"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:465
+msgid "Alpha Multipass (correct opaque texture areas)"
+msgstr "半透明多通道 (更正不透明的纹理区域)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:473
+msgid "Mask bit detection (needed by a few games, zbuffer)"
+msgstr "屏蔽位检测 (某些游戏需要)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:490
+#: ../plugins/peopsxgl/gpucfg/interface.c:503
+msgid "0: None - Fastest, most glitches"
+msgstr "0: 无 - 最快，问题较多"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:491
+msgid "1: Minimum - Missing screens"
+msgstr "1: 最小 - 丢失屏幕元素"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:492
+msgid "2: Standard - OK for most games"
+msgstr "2: 标准 - 大多数游戏运行良好"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:493
+msgid "3: Enhanced - Shows more stuff"
+msgstr "3: 增强 - 显示更多的东西"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:494
+msgid "4: Extended - Causing garbage"
+msgstr "4: 增强 - 可能导致错误"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:514
+#: ../plugins/peopsxgl/gpucfg/interface.c:526
+msgid "0: Emulated vram - Needs FVP"
+msgstr "0: 模拟 vram - 需 FVP"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:515
+msgid "1: Black - Fast, no effects"
+msgstr "1: 黑色 - 快，无特效"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:516
+msgid "2: Gfx card buffer - Can be slow"
+msgstr "2: Gfx 卡缓存 - 可能较慢"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:517
+msgid "3: Gfx card & soft - slow"
+msgstr "3: Gfx 卡缓存与软件 - 较慢"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:537
+#: ../plugins/peopsxgl/gpucfg/interface.c:550
+msgid "0: Emulated vram - ok most times"
+msgstr "0: 模拟 vram - 大多数情况运行良好"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:538
+msgid "1: Gfx card buffer reads"
+msgstr "1: Gfx 卡缓存读取"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:539
+msgid "2: Gfx card buffer moves"
+msgstr "2: Gfx 卡缓存移动"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:540
+msgid "3: Gfx buffer reads & moves"
+msgstr "3: Gfx 卡缓存读取与移动"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:541
+msgid "4: Full Software (FVP)"
+msgstr "4: 纯软件 (FVP)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:552
+msgid "Special game fixes"
+msgstr "特定游戏修正"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:575
+msgid "Battle cursor (FF7)"
+msgstr "战斗光标 (FF7)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:583
+msgid "Direct FB updates"
+msgstr "直接 FB 更新"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:591
+msgid "Black brightness (Lunar)"
+msgstr "黑色亮度 (Lunar)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:599
+msgid "Swap front detection"
+msgstr "Swap front 检测"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:607
+msgid "Disable coord check"
+msgstr "禁用坐标检查"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:615
+msgid "No blue glitches (LoD)"
+msgstr "去除蓝色干扰 (LoD)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:623
+msgid "Soft FB access"
+msgstr "软件 FB 访问"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:631
+msgid "PC fps calculation"
+msgstr "PC FPS 计算"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:647
+msgid "Yellow rect (FF9)"
+msgstr "黄色方块 (FF9)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:655
+msgid "No subtr. blending"
+msgstr "无 subtr. 混合"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:663
+msgid "Lazy upload (DW7)"
+msgstr "懒惰上传 (DW7)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:671
+msgid "Odd/even hack"
+msgstr "奇/偶位 hack"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:679
+msgid "Adjust screen width"
+msgstr "调整屏幕宽度"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:687
+msgid "Old texture filtering"
+msgstr "旧的纹理过滤"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:695
+msgid "Additional uploads"
+msgstr "附加上传"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:703
+msgid "unused"
+msgstr "未使用"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:711
+msgid "Fake 'gpu busy'"
+msgstr "欺骗 'gpu 忙' 状态"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:719
+msgid "Misc"
+msgstr "杂项"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:742
+msgid "Scanlines"
+msgstr "扫描线"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:750
+msgid "Blending (0..255, -1=dot):"
+msgstr "混合 (0..255, -1=点阵):"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:758
+msgid "Screen smoothing (can be slow or unsupported)"
+msgstr "屏幕平滑 (可能较慢或不被支持)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:766
+msgid "Use OpenGL extensions (recommended)"
+msgstr "使用 OpenGL 扩展 (推荐)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:774
+msgid "Polygon anti-aliasing (slow with most cards)"
+msgstr "多边形抗锯齿 (对大多数显卡较慢)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:782
+msgid "Line mode (polygons will not get filled)"
+msgstr "框架模式 (不填充多边形)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:790
+msgid "Force 15 bit framebuffer updates (faster movies)"
+msgstr "强制 15 位帧缓冲更新 (影片较快)"
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:798
+msgid "Unfiltered MDECs (small movie speedup)"
+msgstr "非过滤 MDEC (微小的影片加速)"
 
 #: ../plugins/dfinput/dfinput.glade2:7
 msgid "Configure Gamepad/Keyboard"
