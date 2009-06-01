@@ -21,6 +21,13 @@
 #include "interface.h"
 #include "support.h"
 
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#define _(x) gettext(x)
+#else
+#define _(x) (x)
+#endif
+
 #define GLADE_HOOKUP_OBJECT(component,widget,name) \
   g_object_set_data_full (G_OBJECT (component), name, \
     gtk_widget_ref (widget), (GDestroyNotify) gtk_widget_unref)
@@ -69,7 +76,7 @@ create_cfg_dialog (void)
 
   cfg_dialog = gtk_dialog_new ();
   gtk_container_set_border_width (GTK_CONTAINER (cfg_dialog), 5);
-  gtk_window_set_title (GTK_WINDOW (cfg_dialog), "CDR configuration");
+  gtk_window_set_title (GTK_WINDOW (cfg_dialog), _("CDR configuration"));
   gtk_window_set_position (GTK_WINDOW (cfg_dialog), GTK_WIN_POS_CENTER);
   gtk_window_set_modal (GTK_WINDOW (cfg_dialog), TRUE);
   gtk_dialog_set_has_separator (GTK_DIALOG (cfg_dialog), FALSE);
@@ -94,10 +101,10 @@ create_cfg_dialog (void)
 
   cddev_entry = GTK_COMBO (cddev_combo)->entry;
   gtk_widget_show (cddev_entry);
-  gtk_tooltips_set_tip (tooltips, cddev_entry, "Choose yor CD-ROM device or type its path if it's not listed", NULL);
+  gtk_tooltips_set_tip (tooltips, cddev_entry, _("Choose yor CD-ROM device or type its path if it's not listed"), NULL);
   gtk_entry_set_activates_default (GTK_ENTRY (cddev_entry), TRUE);
 
-  cdr_label = gtk_label_new ("Select CD-ROM device");
+  cdr_label = gtk_label_new (_("Select CD-ROM device"));
   gtk_widget_show (cdr_label);
   gtk_frame_set_label_widget (GTK_FRAME (frame1), cdr_label);
   gtk_label_set_justify (GTK_LABEL (cdr_label), GTK_JUSTIFY_LEFT);
@@ -115,7 +122,7 @@ create_cfg_dialog (void)
   gtk_box_pack_start (GTK_BOX (vbox2), hbox1, FALSE, FALSE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (hbox1), 5);
 
-  readmode_label = gtk_label_new ("Select read mode:");
+  readmode_label = gtk_label_new (_("Select read mode:"));
   gtk_widget_show (readmode_label);
   gtk_box_pack_start (GTK_BOX (hbox1), readmode_label, FALSE, FALSE, 0);
   gtk_label_set_justify (GTK_LABEL (readmode_label), GTK_JUSTIFY_LEFT);
@@ -128,11 +135,11 @@ create_cfg_dialog (void)
 
   menu1 = gtk_menu_new ();
 
-  normal = gtk_menu_item_new_with_mnemonic ("Normal (No Cache)");
+  normal = gtk_menu_item_new_with_mnemonic (_("Normal (No Cache)"));
   gtk_widget_show (normal);
   gtk_container_add (GTK_CONTAINER (menu1), normal);
 
-  threaded = gtk_menu_item_new_with_mnemonic ("Threaded - Faster (With Cache)");
+  threaded = gtk_menu_item_new_with_mnemonic (_("Threaded - Faster (With Cache)"));
   gtk_widget_show (threaded);
   gtk_container_add (GTK_CONTAINER (menu1), threaded);
 
@@ -147,7 +154,7 @@ create_cfg_dialog (void)
   gtk_box_pack_start (GTK_BOX (vbox2), hbox2, TRUE, TRUE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (hbox2), 5);
 
-  label4 = gtk_label_new ("Cache Size (Def. 64):                  ");
+  label4 = gtk_label_new (_("Cache Size (Def. 64):                  "));
   gtk_widget_show (label4);
   gtk_box_pack_start (GTK_BOX (hbox2), label4, FALSE, FALSE, 0);
   gtk_label_set_justify (GTK_LABEL (label4), GTK_JUSTIFY_LEFT);
@@ -168,7 +175,7 @@ create_cfg_dialog (void)
   gtk_box_pack_start (GTK_BOX (vbox2), hbox3, TRUE, TRUE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (hbox3), 5);
 
-  label5 = gtk_label_new ("Cdrom Speed (Def. 0 = MAX):    ");
+  label5 = gtk_label_new (_("Cdrom Speed (Def. 0 = MAX):    "));
   gtk_widget_show (label5);
   gtk_box_pack_start (GTK_BOX (hbox3), label5, FALSE, FALSE, 0);
   gtk_label_set_justify (GTK_LABEL (label5), GTK_JUSTIFY_LEFT);
@@ -184,12 +191,12 @@ create_cfg_dialog (void)
   gtk_widget_show (cfg_hseparator);
   gtk_box_pack_start (GTK_BOX (vbox2), cfg_hseparator, TRUE, TRUE, 0);
 
-  subQ_button = gtk_check_button_new_with_mnemonic ("Enable Subchannel read");
+  subQ_button = gtk_check_button_new_with_mnemonic (_("Enable Subchannel read"));
   gtk_widget_show (subQ_button);
   gtk_box_pack_start (GTK_BOX (vbox2), subQ_button, FALSE, FALSE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (subQ_button), 10);
 
-  options_label = gtk_label_new ("Options");
+  options_label = gtk_label_new (_("Options"));
   gtk_widget_show (options_label);
   gtk_frame_set_label_widget (GTK_FRAME (frame2), options_label);
   gtk_label_set_justify (GTK_LABEL (options_label), GTK_JUSTIFY_LEFT);
@@ -223,7 +230,6 @@ create_cfg_dialog (void)
 
   atko = gtk_widget_get_accessible (cfg_hseparator);
   atk_object_set_name (atko, "hseparator");
-
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
   GLADE_HOOKUP_OBJECT_NO_REF (cfg_dialog, cfg_dialog, "cfg_dialog");

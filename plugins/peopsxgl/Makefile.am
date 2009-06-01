@@ -14,9 +14,10 @@ libpeopsxgl_la_SOURCES = cfg.c draw.c fps.c gpu.c key.c menu.c \
 libpeopsxgl_la_LDFLAGS = -module -avoid-version \
 	-L/usr/X11R6/lib64 -L/usr/X11R6/lib -lX11 -lXxf86vm -lGL -lm
 
-#bin_PROGRAMS = cfgpeopsxgl
-#cfgpeopsxgl_SOURCES = gpucfg-0.1df/main.c
-#cfgpeopsxgl_LDADD = $(GTK2_LIBS) $(GLADE2_LIBS)
+bin_PROGRAMS = cfgpeopsxgl
+cfgpeopsxgl_SOURCES = gpucfg/main.c gpucfg/callbacks.c gpucfg/interface.c \
+	gpucfg/support.c
+cfgpeopsxgl_LDADD = $(GTK2_LIBS) $(GLADE2_LIBS)
 
 #glade_DATA = gpucfg-0.1df/peopsxgl.glade2
 #gladedir = $(datadir)/psemu/

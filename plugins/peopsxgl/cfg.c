@@ -41,7 +41,7 @@ void ReadConfigFile()
  if (pConfigFile != NULL)
   in = fopen(pConfigFile, "rb");
  else
-  in = fopen("cfg/peopsxgl.cfg", "rb"); 
+  in = fopen("gpuPeopsMesaGL.cfg", "rb"); 
 
  if (in == NULL) return;
 
