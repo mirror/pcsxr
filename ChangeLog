@@ -1,3 +1,7 @@
+June 2, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/peopsxgl/interface.c: Tweaked UI.
+
 June 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/peopsxgl/Makefile.am: Added config utility.

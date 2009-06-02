@@ -139,8 +139,8 @@ create_CfgWnd (void)
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "frmTextures", frmTextures,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (frmTextures);
-  gtk_fixed_put (GTK_FIXED (fixed1), frmTextures, 342, 0);
-  gtk_widget_set_usize (frmTextures, 360, 136);
+  gtk_fixed_put (GTK_FIXED (fixed1), frmTextures, 372, 0);
+  gtk_widget_set_usize (frmTextures, 364, 136);
 
   fixed3 = gtk_fixed_new ();
   gtk_widget_ref (fixed3);
@@ -154,8 +154,8 @@ create_CfgWnd (void)
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "edtMaxTex", edtMaxTex,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (edtMaxTex);
-  gtk_fixed_put (GTK_FIXED (fixed3), edtMaxTex, 248, 80);
-  gtk_widget_set_usize (edtMaxTex, 96, 24);
+  gtk_fixed_put (GTK_FIXED (fixed3), edtMaxTex, 278, 80);
+  gtk_widget_set_usize (edtMaxTex, 66, 24);
 
   label5 = gtk_label_new (_("Quality:"));
   gtk_widget_ref (label5);
@@ -195,7 +195,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (label7);
   gtk_fixed_put (GTK_FIXED (fixed3), label7, 8, 80);
-  gtk_widget_set_usize (label7, 240, 24);
+  gtk_widget_set_usize (label7, 260, 24);
 
   cmbFilter = gtk_combo_new ();
   gtk_widget_ref (cmbFilter);
@@ -267,7 +267,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (frmWindow);
   gtk_fixed_put (GTK_FIXED (fixed1), frmWindow, 0, 0);
-  gtk_widget_set_usize (frmWindow, 334, 136);
+  gtk_widget_set_usize (frmWindow, 364, 136);
 
   fixed2 = gtk_fixed_new ();
   gtk_widget_ref (fixed2);
@@ -323,8 +323,8 @@ create_CfgWnd (void)
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "chkFullScreen", chkFullScreen,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFullScreen);
-  gtk_fixed_put (GTK_FIXED (fixed2), chkFullScreen, 176, 0);
-  gtk_widget_set_usize (chkFullScreen, 85, 24);
+  gtk_fixed_put (GTK_FIXED (fixed2), chkFullScreen, 196, 0);
+  gtk_widget_set_usize (chkFullScreen, 125, 24);
 
   chkDither = gtk_check_button_new_with_label (_("Dithering"));
   gtk_widget_ref (chkDither);
@@ -348,7 +348,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (frmFPS);
   gtk_fixed_put (GTK_FIXED (fixed1), frmFPS, 0, 136);
-  gtk_widget_set_usize (frmFPS, 334, 176);
+  gtk_widget_set_usize (frmFPS, 364, 176);
 
   fixed4 = gtk_fixed_new ();
   gtk_widget_ref (fixed4);
@@ -405,7 +405,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (rdbLimAuto);
   gtk_fixed_put (GTK_FIXED (fixed4), rdbLimAuto, 32, 80);
-  gtk_widget_set_usize (rdbLimAuto, 160, 24);
+  gtk_widget_set_usize (rdbLimAuto, 200, 24);
 
   chkFPSSkip = gtk_check_button_new_with_label (_("Use Frame skipping"));
   gtk_widget_ref (chkFPSSkip);
@@ -420,8 +420,8 @@ create_CfgWnd (void)
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "frmCompat", frmCompat,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (frmCompat);
-  gtk_fixed_put (GTK_FIXED (fixed1), frmCompat, 342, 136);
-  gtk_widget_set_usize (frmCompat, 360, 176);
+  gtk_fixed_put (GTK_FIXED (fixed1), frmCompat, 372, 136);
+  gtk_widget_set_usize (frmCompat, 364, 176);
 
   fixed5 = gtk_fixed_new ();
   gtk_widget_ref (fixed5);
@@ -436,7 +436,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkABlend);
   gtk_fixed_put (GTK_FIXED (fixed5), chkABlend, 8, 128);
-  gtk_widget_set_usize (chkABlend, 336, 24);
+  gtk_widget_set_usize (chkABlend, 366, 24);
 
   label10 = gtk_label_new (_("Framebuffer textures:"));
   gtk_widget_ref (label10);
@@ -468,7 +468,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkOpaque);
   gtk_fixed_put (GTK_FIXED (fixed5), chkOpaque, 8, 104);
-  gtk_widget_set_usize (chkOpaque, 336, 24);
+  gtk_widget_set_usize (chkOpaque, 366, 24);
 
   chkMaskBit = gtk_check_button_new_with_label (_("Mask bit detection (needed by a few games, zbuffer)"));
   gtk_widget_ref (chkMaskBit);
@@ -476,7 +476,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkMaskBit);
   gtk_fixed_put (GTK_FIXED (fixed5), chkMaskBit, 8, 80);
-  gtk_widget_set_usize (chkMaskBit, 336, 24);
+  gtk_widget_set_usize (chkMaskBit, 366, 24);
 
   cmbOffscreen = gtk_combo_new ();
   gtk_widget_ref (cmbOffscreen);
@@ -554,8 +554,8 @@ create_CfgWnd (void)
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "frmFixes", frmFixes,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (frmFixes);
-  gtk_fixed_put (GTK_FIXED (fixed1), frmFixes, 342, 312);
-  gtk_widget_set_usize (frmFixes, 360, 232);
+  gtk_fixed_put (GTK_FIXED (fixed1), frmFixes, 372, 312);
+  gtk_widget_set_usize (frmFixes, 364, 232);
 
   fixed7 = gtk_fixed_new ();
   gtk_widget_ref (fixed7);
@@ -578,7 +578,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix0);
   gtk_fixed_put (GTK_FIXED (fixed7), chkFix0, 8, 24);
-  gtk_widget_set_usize (chkFix0, 176, 20);
+  gtk_widget_set_usize (chkFix0, 196, 20);
 
   chkFix1 = gtk_check_button_new_with_label (_("Direct FB updates"));
   gtk_widget_ref (chkFix1);
@@ -586,7 +586,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix1);
   gtk_fixed_put (GTK_FIXED (fixed7), chkFix1, 8, 44);
-  gtk_widget_set_usize (chkFix1, 176, 20);
+  gtk_widget_set_usize (chkFix1, 196, 20);
 
   chkFix2 = gtk_check_button_new_with_label (_("Black brightness (Lunar)"));
   gtk_widget_ref (chkFix2);
@@ -594,7 +594,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix2);
   gtk_fixed_put (GTK_FIXED (fixed7), chkFix2, 8, 64);
-  gtk_widget_set_usize (chkFix2, 176, 20);
+  gtk_widget_set_usize (chkFix2, 196, 20);
 
   chkFix3 = gtk_check_button_new_with_label (_("Swap front detection"));
   gtk_widget_ref (chkFix3);
@@ -602,7 +602,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix3);
   gtk_fixed_put (GTK_FIXED (fixed7), chkFix3, 8, 84);
-  gtk_widget_set_usize (chkFix3, 176, 20);
+  gtk_widget_set_usize (chkFix3, 196, 20);
 
   chkFix4 = gtk_check_button_new_with_label (_("Disable coord check"));
   gtk_widget_ref (chkFix4);
@@ -610,7 +610,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix4);
   gtk_fixed_put (GTK_FIXED (fixed7), chkFix4, 8, 104);
-  gtk_widget_set_usize (chkFix4, 176, 20);
+  gtk_widget_set_usize (chkFix4, 196, 20);
 
   chkFix5 = gtk_check_button_new_with_label (_("No blue glitches (LoD)"));
   gtk_widget_ref (chkFix5);
@@ -618,7 +618,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix5);
   gtk_fixed_put (GTK_FIXED (fixed7), chkFix5, 8, 124);
-  gtk_widget_set_usize (chkFix5, 176, 20);
+  gtk_widget_set_usize (chkFix5, 196, 20);
 
   chkFix6 = gtk_check_button_new_with_label (_("Soft FB access"));
   gtk_widget_ref (chkFix6);
@@ -626,7 +626,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix6);
   gtk_fixed_put (GTK_FIXED (fixed7), chkFix6, 8, 144);
-  gtk_widget_set_usize (chkFix6, 176, 20);
+  gtk_widget_set_usize (chkFix6, 196, 20);
 
   chkFix7 = gtk_check_button_new_with_label (_("PC fps calculation"));
   gtk_widget_ref (chkFix7);
@@ -634,7 +634,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix7);
   gtk_fixed_put (GTK_FIXED (fixed7), chkFix7, 8, 164);
-  gtk_widget_set_usize (chkFix7, 168, 20);
+  gtk_widget_set_usize (chkFix7, 196, 20);
 
   chkFix8 = gtk_check_button_new_with_label (_("Old frame skipping"));
   gtk_widget_ref (chkFix8);
@@ -642,79 +642,79 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix8);
   gtk_fixed_put (GTK_FIXED (fixed7), chkFix8, 8, 184);
-  gtk_widget_set_usize (chkFix8, 168, 20);
+  gtk_widget_set_usize (chkFix8, 196, 20);
 
   chkFix9 = gtk_check_button_new_with_label (_("Yellow rect (FF9)"));
   gtk_widget_ref (chkFix9);
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "chkFix9", chkFix9,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix9);
-  gtk_fixed_put (GTK_FIXED (fixed7), chkFix9, 184, 24);
-  gtk_widget_set_usize (chkFix9, 168, 20);
+  gtk_fixed_put (GTK_FIXED (fixed7), chkFix9, 194, 24);
+  gtk_widget_set_usize (chkFix9, 196, 20);
 
   chkFix10 = gtk_check_button_new_with_label (_("No subtr. blending"));
   gtk_widget_ref (chkFix10);
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "chkFix10", chkFix10,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix10);
-  gtk_fixed_put (GTK_FIXED (fixed7), chkFix10, 184, 44);
-  gtk_widget_set_usize (chkFix10, 168, 20);
+  gtk_fixed_put (GTK_FIXED (fixed7), chkFix10, 194, 44);
+  gtk_widget_set_usize (chkFix10, 196, 20);
 
   chkFix11 = gtk_check_button_new_with_label (_("Lazy upload (DW7)"));
   gtk_widget_ref (chkFix11);
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "chkFix11", chkFix11,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix11);
-  gtk_fixed_put (GTK_FIXED (fixed7), chkFix11, 184, 64);
-  gtk_widget_set_usize (chkFix11, 168, 20);
+  gtk_fixed_put (GTK_FIXED (fixed7), chkFix11, 194, 64);
+  gtk_widget_set_usize (chkFix11, 196, 20);
 
   chkFix12 = gtk_check_button_new_with_label (_("Odd/even hack"));
   gtk_widget_ref (chkFix12);
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "chkFix12", chkFix12,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix12);
-  gtk_fixed_put (GTK_FIXED (fixed7), chkFix12, 184, 84);
-  gtk_widget_set_usize (chkFix12, 168, 20);
+  gtk_fixed_put (GTK_FIXED (fixed7), chkFix12, 194, 84);
+  gtk_widget_set_usize (chkFix12, 196, 20);
 
   chkFix13 = gtk_check_button_new_with_label (_("Adjust screen width"));
   gtk_widget_ref (chkFix13);
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "chkFix13", chkFix13,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix13);
-  gtk_fixed_put (GTK_FIXED (fixed7), chkFix13, 184, 104);
-  gtk_widget_set_usize (chkFix13, 168, 20);
+  gtk_fixed_put (GTK_FIXED (fixed7), chkFix13, 194, 104);
+  gtk_widget_set_usize (chkFix13, 196, 20);
 
   chkFix14 = gtk_check_button_new_with_label (_("Old texture filtering"));
   gtk_widget_ref (chkFix14);
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "chkFix14", chkFix14,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix14);
-  gtk_fixed_put (GTK_FIXED (fixed7), chkFix14, 184, 124);
-  gtk_widget_set_usize (chkFix14, 168, 20);
+  gtk_fixed_put (GTK_FIXED (fixed7), chkFix14, 194, 124);
+  gtk_widget_set_usize (chkFix14, 196, 20);
 
   chkFix15 = gtk_check_button_new_with_label (_("Additional uploads"));
   gtk_widget_ref (chkFix15);
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "chkFix15", chkFix15,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix15);
-  gtk_fixed_put (GTK_FIXED (fixed7), chkFix15, 184, 144);
-  gtk_widget_set_usize (chkFix15, 168, 20);
+  gtk_fixed_put (GTK_FIXED (fixed7), chkFix15, 194, 144);
+  gtk_widget_set_usize (chkFix15, 196, 20);
 
   chkFix16 = gtk_check_button_new_with_label (_("unused"));
   gtk_widget_ref (chkFix16);
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "chkFix16", chkFix16,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix16);
-  gtk_fixed_put (GTK_FIXED (fixed7), chkFix16, 184, 164);
-  gtk_widget_set_usize (chkFix16, 168, 20);
+  gtk_fixed_put (GTK_FIXED (fixed7), chkFix16, 194, 164);
+  gtk_widget_set_usize (chkFix16, 196, 20);
 
   chkFix17 = gtk_check_button_new_with_label (_("Fake 'gpu busy'"));
   gtk_widget_ref (chkFix17);
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "chkFix17", chkFix17,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFix17);
-  gtk_fixed_put (GTK_FIXED (fixed7), chkFix17, 184, 184);
-  gtk_widget_set_usize (chkFix17, 168, 20);
+  gtk_fixed_put (GTK_FIXED (fixed7), chkFix17, 194, 184);
+  gtk_widget_set_usize (chkFix17, 196, 20);
 
   frmMisc = gtk_frame_new (_("Misc"));
   gtk_widget_ref (frmMisc);
@@ -722,7 +722,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (frmMisc);
   gtk_fixed_put (GTK_FIXED (fixed1), frmMisc, 0, 312);
-  gtk_widget_set_usize (frmMisc, 334, 232);
+  gtk_widget_set_usize (frmMisc, 364, 232);
 
   fixed6 = gtk_fixed_new ();
   gtk_widget_ref (fixed6);
@@ -736,7 +736,7 @@ create_CfgWnd (void)
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "edtScanBlend", edtScanBlend,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (edtScanBlend);
-  gtk_fixed_put (GTK_FIXED (fixed6), edtScanBlend, 265, 0);
+  gtk_fixed_put (GTK_FIXED (fixed6), edtScanBlend, 285, 0);
   gtk_widget_set_usize (edtScanBlend, 54, 22);
 
   chkScanlines = gtk_check_button_new_with_label (_("Scanlines"));
@@ -753,7 +753,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (label11);
   gtk_fixed_put (GTK_FIXED (fixed6), label11, 108, 0);
-  gtk_widget_set_usize (label11, 144, 24);
+  gtk_widget_set_usize (label11, 164, 24);
 
   chkBlur = gtk_check_button_new_with_label (_("Screen smoothing (can be slow or unsupported)"));
   gtk_widget_ref (chkBlur);
@@ -761,15 +761,15 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkBlur);
   gtk_fixed_put (GTK_FIXED (fixed6), chkBlur, 8, 132);
-  gtk_widget_set_usize (chkBlur, 320, 20);
+  gtk_widget_set_usize (chkBlur, 350, 20);
 
-    chkExtensions = gtk_check_button_new_with_label (_("Use OpenGL extensions (recommended)"));
+  chkExtensions = gtk_check_button_new_with_label (_("Use OpenGL extensions (recommended)"));
   gtk_widget_ref (chkExtensions);
   gtk_object_set_data_full (GTK_OBJECT (CfgWnd), "chkExtensions", chkExtensions,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkExtensions);
   gtk_fixed_put (GTK_FIXED (fixed6), chkExtensions, 8, 112);
-  gtk_widget_set_usize (chkExtensions, 320, 20);
+  gtk_widget_set_usize (chkExtensions, 350, 20);
 
   chkAntiA = gtk_check_button_new_with_label (_("Polygon anti-aliasing (slow with most cards)"));
   gtk_widget_ref (chkAntiA);
@@ -777,7 +777,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkAntiA);
   gtk_fixed_put (GTK_FIXED (fixed6), chkAntiA, 8, 92);
-  gtk_widget_set_usize (chkAntiA, 320, 20);
+  gtk_widget_set_usize (chkAntiA, 350, 20);
 
   chkLinemode = gtk_check_button_new_with_label (_("Line mode (polygons will not get filled)"));
   gtk_widget_ref (chkLinemode);
@@ -785,7 +785,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkLinemode);
   gtk_fixed_put (GTK_FIXED (fixed6), chkLinemode, 8, 72);
-  gtk_widget_set_usize (chkLinemode, 320, 20);
+  gtk_widget_set_usize (chkLinemode, 350, 20);
 
   chk15bitMdec = gtk_check_button_new_with_label (_("Force 15 bit framebuffer updates (faster movies)"));
   gtk_widget_ref (chk15bitMdec);
@@ -793,7 +793,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chk15bitMdec);
   gtk_fixed_put (GTK_FIXED (fixed6), chk15bitMdec, 8, 52);
-  gtk_widget_set_usize (chk15bitMdec, 320, 20);
+  gtk_widget_set_usize (chk15bitMdec, 350, 20);
 
   chkFastMdec = gtk_check_button_new_with_label (_("Unfiltered MDECs (small movie speedup)"));
   gtk_widget_ref (chkFastMdec);
@@ -801,7 +801,7 @@ create_CfgWnd (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (chkFastMdec);
   gtk_fixed_put (GTK_FIXED (fixed6), chkFastMdec, 8, 32);
-  gtk_widget_set_usize (chkFastMdec, 320, 20);
+  gtk_widget_set_usize (chkFastMdec, 350, 20);
 
   gtk_signal_connect (GTK_OBJECT (CfgWnd), "destroy",
                       GTK_SIGNAL_FUNC (on_CfgWnd_destroy), NULL);
