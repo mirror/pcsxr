@@ -1,0 +1,41 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {setCheckbox = id; setCheckboxInverse = id; setVideoType = id; }; 
+            CLASS = ConfigurationController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                autoVTypeCell = id; 
+                bwMdecCell = id; 
+                cdromPlugin = PluginController; 
+                consoleOutputCell = id; 
+                graphicsPlugin = PluginController; 
+                noCDAudioCell = id; 
+                noXaAudioCell = id; 
+                padPlugin = PluginController; 
+                rCountFixCell = id; 
+                sioIrqAlwaysCell = id; 
+                soundPlugin = PluginController; 
+                spuIrqAlwaysCell = id; 
+                usesDynarecCell = id; 
+                usesHleCell = id; 
+                vSyncWAFixCell = id; 
+                vTypePALCell = id; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {doAbout = id; doConfigure = id; selectPlugin = id; }; 
+            CLASS = PluginController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                aboutButton = NSButton; 
+                configureButton = NSButton; 
+                pluginMenu = NSPopUpButton; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}
