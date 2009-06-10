@@ -1,6 +1,6 @@
 /* Localized versions of Info.plist keys */
 
 CFBundleName = "PCSX";
-CFBundleShortVersionString = "PCSX version 1.5 test 3";
-CFBundleGetInfoString = "PCSX Playstation Emulator version 1.5 test 3, Copyright © 2005 Gil Pedersen.";
-NSHumanReadableCopyright = "Copyright © 2005 Gil Pedersen.\nhttp://home.macvaerk.dtu.dk/~gil/pcsx/";
+CFBundleShortVersionString = "PCSX-Reloaded";
+CFBundleGetInfoString = "Playstation Emulator based on PCSX-df Project.";
+NSHumanReadableCopyright = "Copyright (c) 2005 Gil Pedersen.\nCopyright (c) 2009 Wei Mingzhi.";

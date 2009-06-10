@@ -34,7 +34,7 @@ int cdOpenCase = 0;
 
 #if defined (__MACOSX__)
 #define LoadSym(dest, src, name, checkerr) \
-    dest = (src) SysLoadSym(drv, "_" name); \
+    dest = (src) SysLoadSym(drv, name); \
     if (checkerr == 0) { SysLibError(); /*clean error*/ } \
     if (checkerr == 1) CheckErr(name); \
     if (checkerr == 2) { err = SysLibError(); if (err != NULL) errval = 1; }

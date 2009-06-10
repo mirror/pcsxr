@@ -60,15 +60,11 @@ static pthread_mutex_t eventMutex;
 	int res = CheckCdrom();
 	if (res == -1) {
 		ClosePlugins();
-		SysMessage(_("Could not load Cdrom\n"));
+		SysMessage(_("Could not check CD-ROM!\n"));
 		goto done;
 	}
 
-	if (LoadCdrom() == -1) {
-		ClosePlugins();
-		SysMessage(_("Could not load Cdrom\n"));
-		goto done;
-	}
+	LoadCdrom();
 
 	if (defrostPath) {
 		LoadState([defrostPath fileSystemRepresentation]);
