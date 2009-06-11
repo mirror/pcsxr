@@ -1,10 +1,10 @@
 June 11, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
- * pcsxr/macosx/English.lproj/PCSX.nib/objects.nib: Added "Run ISO" function.
- * pcsxr/macosx/English.lproj/PCSX.nib/info.nib: Likewise.
- * pcsxr/macosx/English.lproj/PCSX.nib/classes.nib: Likewise.
- * pcsxr/macosx/PcsxController.h: Likewise.
- * pcsxr/macosx/PcsxController.m: Likewise.
+ * macosx/English.lproj/PCSX.nib/objects.nib: Added "Run ISO" function.
+ * macosx/English.lproj/PCSX.nib/info.nib: Likewise.
+ * macosx/English.lproj/PCSX.nib/classes.nib: Likewise.
+ * macosx/PcsxController.h: Likewise.
+ * macosx/PcsxController.m: Likewise.
 
 June 10, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
