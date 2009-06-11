@@ -21,29 +21,44 @@ NSString *saveStatePath;
 	NSRange rdiskRange;
 	
 	BOOL wasPaused = [EmuThread pauseSafe];
-	
+
 	/* close connection to current cd */
 	if ([EmuThread active])
 		CDR_close();
-	
-	if (CDR_getDriveLetter() != nil) {
-		deviceName = [NSMutableString stringWithCString:CDR_getDriveLetter()];
-		
-		// delete the 'r' in 'rdisk'
-		rdiskRange = [deviceName rangeOfString:@"rdisk"];
-		if (rdiskRange.length != 0) {
-			rdiskRange.length = 1;
-			[deviceName deleteCharactersInRange:rdiskRange];
+
+	// switch to another ISO if using internal image reader, otherwise eject the CD
+	if (cdrfilename[0] != '\0') {
+		NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+
+		[openDlg setCanChooseFiles:YES];
+		[openDlg setCanChooseDirectories:NO];
+
+		if ([openDlg runModalForDirectory:nil file:nil] == NSOKButton) {
+			NSArray* files = [openDlg filenames];
+			strcpy(cdrfilename, (const char *)[[files objectAtIndex:0] UTF8String]);
 		}
-		// execute hdiutil to eject the device
-		ejectTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/hdiutil" arguments:[NSArray arrayWithObjects:@"eject", deviceName, nil]];
-		[ejectTask waitUntilExit];
+
+        cdOpenCase = time(NULL) + 2;
+	} else {
+		if (CDR_getDriveLetter() != nil) {
+			deviceName = [NSMutableString stringWithCString:CDR_getDriveLetter()];
+
+			// delete the 'r' in 'rdisk'
+			rdiskRange = [deviceName rangeOfString:@"rdisk"];
+			if (rdiskRange.length != 0) {
+				rdiskRange.length = 1;
+				[deviceName deleteCharactersInRange:rdiskRange];
+			}
+			// execute hdiutil to eject the device
+			ejectTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/hdiutil" arguments:[NSArray arrayWithObjects:@"eject", deviceName, nil]];
+			[ejectTask waitUntilExit];
+		}
 	}
-	
+
 	/* and open new cd */
 	if ([EmuThread active])
 		CDR_open();
-	
+
 	if (!wasPaused) {
 		[EmuThread resume];
 	}
@@ -90,14 +105,22 @@ NSString *saveStatePath;
 
 - (IBAction)runCD:(id)sender
 {
-//	LoadCdBios = 0;
+	cdrfilename[0] = '\0';
 	[EmuThread run];
 }
 
-- (IBAction)runBios:(id)sender
+- (IBAction)runIso:(id)sender
 {
-//	LoadCdBios = 1;
-	[EmuThread run];
+	NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+
+	[openDlg setCanChooseFiles:YES];
+	[openDlg setCanChooseDirectories:NO];
+
+	if ([openDlg runModalForDirectory:nil file:nil] == NSOKButton) {
+		NSArray* files = [openDlg filenames];
+		strcpy(cdrfilename, (const char *)[[files objectAtIndex:0] UTF8String]);
+		[EmuThread run];
+    }
 }
 
 - (IBAction)runExe:(id)sender
@@ -123,26 +146,26 @@ NSString *saveStatePath;
 	GPU_keypressed(GPU_FULLSCREEN_KEY);
 }
 
-
 - (BOOL)validateMenuItem:(id <NSMenuItem>)menuItem
 {
 	if ([menuItem action] == @selector(pause:)) {
 		[menuItem setState:([EmuThread isPaused] ? NSOnState : NSOffState)];
-	} else if ([menuItem action] == @selector(runBios:)) {
-		return [PcsxController biosAvailable];
 	}
 
 	if ([menuItem action] == @selector(reset:) || [menuItem action] == @selector(pause:) ||
 		 [menuItem action] == @selector(ejectCD:) || [menuItem action] == @selector(freeze:) ||
 		 [menuItem action] == @selector(fullscreen:))
 		return [EmuThread active];
-	
+
+    if ([menuItem action] == @selector(runCD:) || [menuItem action] == @selector(runIso:))
+        return ![EmuThread active];
+
 	if ([menuItem action] == @selector(defrost:)) {
 		if (![EmuThread active])
 			return NO;
-		
+
 		NSString *path = [NSString stringWithFormat:@"%@/%s-%3.3d.pcsxstate", saveStatePath, CdromId, [menuItem tag]];
-		return (CheckState([path fileSystemRepresentation]) == 0);
+		return (CheckState((char *)[path fileSystemRepresentation]) == 0);
 	}
 	
 	return YES;
@@ -151,7 +174,7 @@ NSString *saveStatePath;
 - (void)applicationWillResignActive:(NSNotification *)aNotification
 {
 	wasPausedBeforeBGSwitch = [EmuThread isPaused];
-	
+
 	if (sleepInBackground) {
 		 [EmuThread pause];
 	}
@@ -170,12 +193,12 @@ NSString *saveStatePath;
 	if (![pluginList configured] /*!Config.Gpu[0] || !Config.Spu[0] || !Config.Pad1[0] || !Config.Cdr[0]*/) {
 		// configure plugins
 		[self preferences:nil];
-		
+
 		NSRunCriticalAlertPanel(NSLocalizedString(@"Missing plugins!", nil),
 				NSLocalizedString(@"Pcsx is missing one or more critical plugins. You will need to install these in order to play games.", nil), 
 				nil, nil, nil);
 	}
-	
+
 	if (![PcsxController biosAvailable]) {
 		NSRunInformationalAlertPanel(NSLocalizedString(@"Missing BIOS!", nil),
 				NSLocalizedString(@"Pcsx wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\n"
@@ -237,7 +260,7 @@ NSString *saveStatePath;
 		if (str != nil) strncpy(Config.Bios, str, 255);
 		else strcpy(Config.Bios, "HLE");
 	}
-	
+
 	// FIXME: hack
 	strcpy(Config.Net, "Disabled");
 }
@@ -356,11 +379,6 @@ NSString *saveStatePath;
 	str = [path fileSystemRepresentation];
 	if (str != nil) strncpy(Config.PluginsDir, str, 255);
 
-	// set font location
-//	path = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/GONZN16X.TLF"];
-//	str = [path fileSystemRepresentation];
-//	if (str != nil) strncpy(Config.BiosFont, str, 255);
-
 	// locate a bios
 	biosList = [[NSMutableArray alloc] init];
 	NSFileManager *manager = [NSFileManager defaultManager];
@@ -370,7 +388,7 @@ NSString *saveStatePath;
 		for (i=0; i<[bioses count]; i++) {
 			NSString *file = [bioses objectAtIndex:i];
 			NSDictionary *attrib = [manager fileAttributesAtPath:[NSString stringWithFormat:@"%s%@", Config.BiosDir, file] traverseLink:YES];
-			
+
 			if ([[attrib fileType] isEqualToString:NSFileTypeRegular]) {
 				unsigned long long size = [attrib fileSize];
 				if (([attrib fileSize] % (256*1024)) == 0 && size > 0) {

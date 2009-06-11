@@ -22,7 +22,7 @@
 - (IBAction)preferences:(id)sender;
 - (IBAction)reset:(id)sender;
 - (IBAction)runCD:(id)sender;
-- (IBAction)runBios:(id)sender;
+- (IBAction)runIso:(id)sender;
 - (IBAction)runExe:(id)sender;
 - (IBAction)freeze:(id)sender;
 - (IBAction)defrost:(id)sender;

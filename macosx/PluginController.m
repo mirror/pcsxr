@@ -12,7 +12,7 @@
 - (IBAction)doConfigure:(id)sender
 {
 	 PcsxPlugin *plugin = [plugins objectAtIndex:[pluginMenu indexOfSelectedItem]];
-	 	 
+
 	 [plugin configureAs:pluginType];
 }
 
