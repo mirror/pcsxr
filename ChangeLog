@@ -4,6 +4,9 @@ June 16, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * configure.ac: OpenGL plugin is only built with --enable-opengl.
  * Makefile.am: Likewise.
  * debian/rules: Added --enable-opengl to configure parameters.
+ * plugins/peopsxgl/draw.c: Don't enable OpenGL Extension by default, which
+   may be unsupported or slow with some old cards.
+ * plugins/peopsxgl/gpucfg/main.c: Likewise.
 
 June 11, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

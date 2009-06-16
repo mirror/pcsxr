@@ -320,7 +320,7 @@ int main (int argc, char *argv[])
    }
   if(val) SETCHECK("chkFastMdec");
 
-  val=1;
+  val=0;
   if(pB)
    {
     strcpy(t,"\nOGLExtensions");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}

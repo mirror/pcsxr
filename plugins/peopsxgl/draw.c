@@ -120,7 +120,7 @@ int            iShowFPS=0;
 // OGL extension support
 
 int                iForceVSync=-1;
-int                iUseExts=1;
+int                iUseExts=0;
 BOOL               bGLExt;
 BOOL               bGLFastMovie=FALSE;
 BOOL               bGLSoft;

@@ -15175,10 +15175,6 @@ if test "x$have_xtest" = xno; then
 $as_echo "$as_me: error: unable to find xtest headers" >&2;}
    { (exit 1); exit 1; }; }
 fi
-#AC_CHECK_HEADER(X11/extensions/xf86vmode.h, have_vmode=yes, have_vmode=no)
-#if test "x$have_vmode" = xno; then
-#	AC_MSG_ERROR([unable to find xf86vmode headers])
-#fi
 
 # Check whether --enable-opengl was given.
 if test "${enable_opengl+set}" = set; then
@@ -15467,6 +15463,65 @@ fi
 	if test "x$have_glx" = xno; then
 		{ { $as_echo "$as_me:$LINENO: error: unable to find GLX headers" >&5
 $as_echo "$as_me: error: unable to find GLX headers" >&2;}
+   { (exit 1); exit 1; }; }
+	fi
+	{ $as_echo "$as_me:$LINENO: checking for X11/extensions/xf86vmode.h" >&5
+$as_echo_n "checking for X11/extensions/xf86vmode.h... " >&6; }
+if test "${ac_cv_header_X11_extensions_xf86vmode_h+set}" = set; then
+  $as_echo_n "(cached) " >&6
+else
+  cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+#include <GL/gl.h>
+	#include <GL/glx.h>
+
+
+#include <X11/extensions/xf86vmode.h>
+_ACEOF
+rm -f conftest.$ac_objext
+if { (ac_try="$ac_compile"
+case "(($ac_try" in
+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+  *) ac_try_echo=$ac_try;;
+esac
+eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
+$as_echo "$ac_try_echo") >&5
+  (eval "$ac_compile") 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } && {
+	 test -z "$ac_c_werror_flag" ||
+	 test ! -s conftest.err
+       } && test -s conftest.$ac_objext; then
+  ac_cv_header_X11_extensions_xf86vmode_h=yes
+else
+  $as_echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+	ac_cv_header_X11_extensions_xf86vmode_h=no
+fi
+
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+fi
+{ $as_echo "$as_me:$LINENO: result: $ac_cv_header_X11_extensions_xf86vmode_h" >&5
+$as_echo "$ac_cv_header_X11_extensions_xf86vmode_h" >&6; }
+if test "x$ac_cv_header_X11_extensions_xf86vmode_h" = x""yes; then
+  have_vmode=yes
+else
+  have_vmode=no
+fi
+
+
+	if test "x$have_vmode" = xno; then
+		{ { $as_echo "$as_me:$LINENO: error: unable to find xf86vmode headers" >&5
+$as_echo "$as_me: error: unable to find xf86vmode headers" >&2;}
    { (exit 1); exit 1; }; }
 	fi
 	PEOPSXGL="plugins/peopsxgl"

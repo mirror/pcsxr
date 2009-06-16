@@ -89,10 +89,6 @@ AC_CHECK_HEADER(X11/extensions/XTest.h, have_xtest=yes, have_xtest=no)
 if test "x$have_xtest" = xno; then
 	AC_MSG_ERROR([unable to find xtest headers])
 fi
-#AC_CHECK_HEADER(X11/extensions/xf86vmode.h, have_vmode=yes, have_vmode=no)
-#if test "x$have_vmode" = xno; then
-#	AC_MSG_ERROR([unable to find xf86vmode headers])
-#fi
 
 AC_ARG_ENABLE(opengl, [  --enable-opengl         build OpenGL plugin (default=no)],
 [ BUILD_OPENGL="$enableval" ],[ BUILD_OPENGL="no" ])
@@ -107,6 +103,13 @@ if test "$BUILD_OPENGL" = "yes"; then
 	AC_CHECK_HEADER(GL/glx.h, have_glx=yes, have_glx=no)
 	if test "x$have_glx" = xno; then
 		AC_MSG_ERROR([unable to find GLX headers])
+	fi
+	AC_CHECK_HEADER(X11/extensions/xf86vmode.h, have_vmode=yes, have_vmode=no,
+	[[#include <GL/gl.h>
+	#include <GL/glx.h>
+	]])
+	if test "x$have_vmode" = xno; then
+		AC_MSG_ERROR([unable to find xf86vmode headers])
 	fi
 	PEOPSXGL="plugins/peopsxgl"
 	AC_SUBST(PEOPSXGL)
