@@ -32,7 +32,7 @@ AC_SUBST(GTK2_LIBS)
 AC_SUBST(GLADE2_CFLAGS)
 AC_SUBST(GLADE2_LIBS)
 
-AC_CONFIG_FILES([Makefile data/Makefile doc/Makefile libpcsxcore/Makefile gui/Makefile plugins/dfinput/Makefile plugins/dfsound/Makefile plugins/dfxvideo/Makefile plugins/peopsxgl/Makefile plugins/dfcdrom/Makefile pixmaps/Makefile po/Makefile.in])
+AC_CONFIG_FILES([Makefile data/Makefile doc/Makefile libpcsxcore/Makefile gui/Makefile plugins/dfinput/Makefile plugins/dfsound/Makefile plugins/dfxvideo/Makefile plugins/dfcdrom/Makefile pixmaps/Makefile po/Makefile.in])
 
 dnl Check for -fno-dse option support
 saved_CFLAGS="$CFLAGS"
@@ -94,23 +94,23 @@ fi
 #	AC_MSG_ERROR([unable to find xf86vmode headers])
 #fi
 
-AC_ARG_ENABLE(dfopengl, [  --enable-dfopengl       build experimental dfOpenGL plugin (default=no)],
-[ BUILD_DFOPENGL="$enableval" ],[ BUILD_DFOPENGL="no" ])
+AC_ARG_ENABLE(opengl, [  --enable-opengl         build OpenGL plugin (default=no)],
+[ BUILD_OPENGL="$enableval" ],[ BUILD_OPENGL="no" ])
 
-AC_CHECK_HEADER(GL/gl.h, have_gl=yes, have_gl=no)
-if test "x$have_gl" = xno; then
-	AC_MSG_ERROR([unable to find OpenGL headers])
-fi
-AC_CHECK_HEADER(GL/glx.h, have_glx=yes, have_glx=no)
-if test "x$have_glx" = xno; then
-	AC_MSG_ERROR([unable to find GLX headers])
-fi
+PEOPSXGL=""
 
-DFOPENGL=""
-if test "$BUILD_DFOPENGL" = "yes"; then
-	DFOPENGL="plugins/dfOpenGL"
-	AC_SUBST(DFOPENGL)
-	AC_CONFIG_FILES([plugins/dfOpenGL/Makefile])
+if test "$BUILD_OPENGL" = "yes"; then
+	AC_CHECK_HEADER(GL/gl.h, have_gl=yes, have_gl=no)
+	if test "x$have_gl" = xno; then
+		AC_MSG_ERROR([unable to find OpenGL headers])
+	fi
+	AC_CHECK_HEADER(GL/glx.h, have_glx=yes, have_glx=no)
+	if test "x$have_glx" = xno; then
+		AC_MSG_ERROR([unable to find GLX headers])
+	fi
+	PEOPSXGL="plugins/peopsxgl"
+	AC_SUBST(PEOPSXGL)
+	AC_CONFIG_FILES([plugins/peopsxgl/Makefile])
 fi
 
 AM_CONDITIONAL(X86_NASM, false)

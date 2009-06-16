@@ -1,3 +1,10 @@
+June 16, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfOpenGL: Removed experimental dfOpenGL plugin.
+ * configure.ac: OpenGL plugin is only built with --enable-opengl.
+ * Makefile.am: Likewise.
+ * debian/rules: Added --enable-opengl to configure parameters.
+
 June 11, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * macosx/English.lproj/PCSX.nib/objects.nib: Added "Run ISO" function.

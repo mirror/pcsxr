@@ -1,1 +1,0 @@
-bool SaveTGA(const char* filename, int width, int height, void* pdata);

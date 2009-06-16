@@ -795,7 +795,7 @@ ARCH_X86_TRUE
 NASM
 X86_NASM_FALSE
 X86_NASM_TRUE
-DFOPENGL
+PEOPSXGL
 ALSA_LIBS
 HAVE_ALSA_FALSE
 HAVE_ALSA_TRUE
@@ -958,7 +958,7 @@ enable_rpath
 with_libiconv_prefix
 with_libintl_prefix
 enable_alsa
-enable_dfopengl
+enable_opengl
 enable_dynarec
 '
       ac_precious_vars='build_alias
@@ -1622,7 +1622,7 @@ Optional Features:
   --disable-nls           do not use Native Language Support
   --disable-rpath         do not hardcode runtime library paths
   --enable-alsa           use ALSA sound output (default=no)
-  --enable-dfopengl       build experimental dfOpenGL plugin (default=no)
+  --enable-opengl         build OpenGL plugin (default=no)
   --enable-dynarec=...    force selection of dynamic recompiler platform (x86, x86_64, ppc) (default: autodetect)
 
 Optional Packages:
@@ -14168,7 +14168,7 @@ fi
 
 
 
-ac_config_files="$ac_config_files Makefile data/Makefile doc/Makefile libpcsxcore/Makefile gui/Makefile plugins/dfinput/Makefile plugins/dfsound/Makefile plugins/dfxvideo/Makefile plugins/peopsxgl/Makefile plugins/dfcdrom/Makefile pixmaps/Makefile po/Makefile.in"
+ac_config_files="$ac_config_files Makefile data/Makefile doc/Makefile libpcsxcore/Makefile gui/Makefile plugins/dfinput/Makefile plugins/dfsound/Makefile plugins/dfxvideo/Makefile plugins/dfcdrom/Makefile pixmaps/Makefile po/Makefile.in"
 
 
 saved_CFLAGS="$CFLAGS"
@@ -15180,15 +15180,18 @@ fi
 #	AC_MSG_ERROR([unable to find xf86vmode headers])
 #fi
 
-# Check whether --enable-dfopengl was given.
-if test "${enable_dfopengl+set}" = set; then
-  enableval=$enable_dfopengl;  BUILD_DFOPENGL="$enableval"
+# Check whether --enable-opengl was given.
+if test "${enable_opengl+set}" = set; then
+  enableval=$enable_opengl;  BUILD_OPENGL="$enableval"
 else
-   BUILD_DFOPENGL="no"
+   BUILD_OPENGL="no"
 fi
 
 
-if test "${ac_cv_header_GL_gl_h+set}" = set; then
+PEOPSXGL=""
+
+if test "$BUILD_OPENGL" = "yes"; then
+	if test "${ac_cv_header_GL_gl_h+set}" = set; then
   { $as_echo "$as_me:$LINENO: checking for GL/gl.h" >&5
 $as_echo_n "checking for GL/gl.h... " >&6; }
 if test "${ac_cv_header_GL_gl_h+set}" = set; then
@@ -15322,12 +15325,12 @@ else
 fi
 
 
-if test "x$have_gl" = xno; then
-	{ { $as_echo "$as_me:$LINENO: error: unable to find OpenGL headers" >&5
+	if test "x$have_gl" = xno; then
+		{ { $as_echo "$as_me:$LINENO: error: unable to find OpenGL headers" >&5
 $as_echo "$as_me: error: unable to find OpenGL headers" >&2;}
    { (exit 1); exit 1; }; }
-fi
-if test "${ac_cv_header_GL_glx_h+set}" = set; then
+	fi
+	if test "${ac_cv_header_GL_glx_h+set}" = set; then
   { $as_echo "$as_me:$LINENO: checking for GL/glx.h" >&5
 $as_echo_n "checking for GL/glx.h... " >&6; }
 if test "${ac_cv_header_GL_glx_h+set}" = set; then
@@ -15461,17 +15464,14 @@ else
 fi
 
 
-if test "x$have_glx" = xno; then
-	{ { $as_echo "$as_me:$LINENO: error: unable to find GLX headers" >&5
+	if test "x$have_glx" = xno; then
+		{ { $as_echo "$as_me:$LINENO: error: unable to find GLX headers" >&5
 $as_echo "$as_me: error: unable to find GLX headers" >&2;}
    { (exit 1); exit 1; }; }
-fi
+	fi
+	PEOPSXGL="plugins/peopsxgl"
 
-DFOPENGL=""
-if test "$BUILD_DFOPENGL" = "yes"; then
-	DFOPENGL="plugins/dfOpenGL"
-
-	ac_config_files="$ac_config_files plugins/dfOpenGL/Makefile"
+	ac_config_files="$ac_config_files plugins/peopsxgl/Makefile"
 
 fi
 
@@ -17092,11 +17092,10 @@ do
     "plugins/dfinput/Makefile") CONFIG_FILES="$CONFIG_FILES plugins/dfinput/Makefile" ;;
     "plugins/dfsound/Makefile") CONFIG_FILES="$CONFIG_FILES plugins/dfsound/Makefile" ;;
     "plugins/dfxvideo/Makefile") CONFIG_FILES="$CONFIG_FILES plugins/dfxvideo/Makefile" ;;
-    "plugins/peopsxgl/Makefile") CONFIG_FILES="$CONFIG_FILES plugins/peopsxgl/Makefile" ;;
     "plugins/dfcdrom/Makefile") CONFIG_FILES="$CONFIG_FILES plugins/dfcdrom/Makefile" ;;
     "pixmaps/Makefile") CONFIG_FILES="$CONFIG_FILES pixmaps/Makefile" ;;
     "po/Makefile.in") CONFIG_FILES="$CONFIG_FILES po/Makefile.in" ;;
-    "plugins/dfOpenGL/Makefile") CONFIG_FILES="$CONFIG_FILES plugins/dfOpenGL/Makefile" ;;
+    "plugins/peopsxgl/Makefile") CONFIG_FILES="$CONFIG_FILES plugins/peopsxgl/Makefile" ;;
 
   *) { { $as_echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 $as_echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
