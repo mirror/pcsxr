@@ -1,6 +1,7 @@
 June 18, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
- * plugins/peopsxgl/soft.c: Fixed FVP or x64.
+ * plugins/peopsxgl/soft.c: Fixed crash with full-software (FVP) enabled
+   on x86_64.
 
 June 16, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
