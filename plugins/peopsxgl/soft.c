@@ -2639,10 +2639,10 @@ void drawPoly3TEx4(short x1, short y1, short x2, short y2, short x3, short y3, s
        for(j=xmin;j<xmax;j+=2)
         {
          XAdjust=(posX>>16);
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(XAdjust>>1)];
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(XAdjust>>1)];
          tC1=(tC1>>((XAdjust&1)<<2))&0xf;
          XAdjust=((posX+difX)>>16);
-         tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
+         tC2 = psxVub[(((posY+difY)>>5)&(int)0xFFFFF800)+YAdjust+
                     (XAdjust>>1)];
          tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
@@ -2656,7 +2656,7 @@ void drawPoly3TEx4(short x1, short y1, short x2, short y2, short x3, short y3, s
        if(j==xmax)
         {
          XAdjust=(posX>>16);
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+
                       (XAdjust>>1)];
          tC1=(tC1>>((XAdjust&1)<<2))&0xf;
          GetTextureTransColG_S(&psxVuw[(i<<10)+j],psxVuw[clutP+tC1]);
@@ -2689,10 +2689,10 @@ void drawPoly3TEx4(short x1, short y1, short x2, short y2, short x3, short y3, s
      for(j=xmin;j<xmax;j+=2)
       {
        XAdjust=(posX>>16);
-       tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(XAdjust>>1)];
+       tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(XAdjust>>1)];
        tC1=(tC1>>((XAdjust&1)<<2))&0xf;
        XAdjust=((posX+difX)>>16);
-       tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
+       tC2 = psxVub[(((posY+difY)>>5)&(int)0xFFFFF800)+YAdjust+
                     (XAdjust>>1)];
        tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
@@ -2706,7 +2706,7 @@ void drawPoly3TEx4(short x1, short y1, short x2, short y2, short x3, short y3, s
      if(j==xmax)
       {
        XAdjust=(posX>>16);
-       tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+
+       tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+
                     (XAdjust>>1)];
        tC1=(tC1>>((XAdjust&1)<<2))&0xf;
        GetTextureTransColG(&psxVuw[(i<<10)+j],psxVuw[clutP+tC1]);
@@ -3084,10 +3084,10 @@ void drawPoly4TEx4(short x1, short y1, short x2, short y2, short x3, short y3, s
        for(j=xmin;j<xmax;j+=2)
         {
          XAdjust=(posX>>16);
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(XAdjust>>1)];
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(XAdjust>>1)];
          tC1=(tC1>>((XAdjust&1)<<2))&0xf;
          XAdjust=((posX+difX)>>16);
-         tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
+         tC2 = psxVub[(((posY+difY)>>5)&(int)0xFFFFF800)+YAdjust+
                        (XAdjust>>1)];
          tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
@@ -3100,7 +3100,7 @@ void drawPoly4TEx4(short x1, short y1, short x2, short y2, short x3, short y3, s
        if(j==xmax)
         {
          XAdjust=(posX>>16);
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+
                       (XAdjust>>1)];
          tC1=(tC1>>((XAdjust&1)<<2))&0xf;
          GetTextureTransColG_S(&psxVuw[(i<<10)+j],psxVuw[clutP+tC1]);
@@ -3138,10 +3138,10 @@ void drawPoly4TEx4(short x1, short y1, short x2, short y2, short x3, short y3, s
      for(j=xmin;j<xmax;j+=2)
       {
        XAdjust=(posX>>16);
-       tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(XAdjust>>1)];
+       tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(XAdjust>>1)];
        tC1=(tC1>>((XAdjust&1)<<2))&0xf;
        XAdjust=((posX+difX)>>16);
-       tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
+       tC2 = psxVub[(((posY+difY)>>5)&(int)0xFFFFF800)+YAdjust+
                      (XAdjust>>1)];
        tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
@@ -3154,7 +3154,7 @@ void drawPoly4TEx4(short x1, short y1, short x2, short y2, short x3, short y3, s
      if(j==xmax)
       {
        XAdjust=(posX>>16);
-       tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+
+       tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+
                     (XAdjust>>1)];
        tC1=(tC1>>((XAdjust&1)<<2))&0xf;
        GetTextureTransColG(&psxVuw[(i<<10)+j],psxVuw[clutP+tC1]);
@@ -3650,8 +3650,8 @@ void drawPoly3TEx8(short x1, short y1, short x2, short y2, short x3, short y3, s
 
        for(j=xmin;j<xmax;j+=2)
         {
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
-         tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(posX>>16)];
+         tC2 = psxVub[(((posY+difY)>>5)&(int)0xFFFFF800)+YAdjust+
                       ((posX+difX)>>16)];
          GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
              psxVuw[clutP+tC1]|
@@ -3662,7 +3662,7 @@ void drawPoly3TEx8(short x1, short y1, short x2, short y2, short x3, short y3, s
 
        if(j==xmax)
         {
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(posX>>16)];
          GetTextureTransColG_S(&psxVuw[(i<<10)+j],psxVuw[clutP+tC1]);
         }
       }
@@ -3692,8 +3692,8 @@ void drawPoly3TEx8(short x1, short y1, short x2, short y2, short x3, short y3, s
 
      for(j=xmin;j<xmax;j+=2)
       {
-       tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
-       tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
+       tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(posX>>16)];
+       tC2 = psxVub[(((posY+difY)>>5)&(int)0xFFFFF800)+YAdjust+
                     ((posX+difX)>>16)];
        GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
            psxVuw[clutP+tC1]|
@@ -3704,7 +3704,7 @@ void drawPoly3TEx8(short x1, short y1, short x2, short y2, short x3, short y3, s
 
      if(j==xmax)
       {
-       tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
+       tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(posX>>16)];
        GetTextureTransColG(&psxVuw[(i<<10)+j],psxVuw[clutP+tC1]);
       }
 
@@ -4061,8 +4061,8 @@ void drawPoly4TEx8(short x1, short y1, short x2, short y2, short x3, short y3, s
 
        for(j=xmin;j<xmax;j+=2)
         {
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
-         tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(posX>>16)];
+         tC2 = psxVub[(((posY+difY)>>5)&(int)0xFFFFF800)+YAdjust+
                      ((posX+difX)>>16)];
          GetTextureTransColG32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
@@ -4072,7 +4072,7 @@ void drawPoly4TEx8(short x1, short y1, short x2, short y2, short x3, short y3, s
         }
        if(j==xmax)
         {
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(posX>>16)];
          GetTextureTransColG_S(&psxVuw[(i<<10)+j],psxVuw[clutP+tC1]);
         }
       }
@@ -4106,8 +4106,8 @@ void drawPoly4TEx8(short x1, short y1, short x2, short y2, short x3, short y3, s
 
      for(j=xmin;j<xmax;j+=2)
       {
-       tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
-       tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
+       tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(posX>>16)];
+       tC2 = psxVub[(((posY+difY)>>5)&(int)0xFFFFF800)+YAdjust+
                      ((posX+difX)>>16)];
        GetTextureTransColG32((uint32_t *)&psxVuw[(i<<10)+j],
             psxVuw[clutP+tC1]|
@@ -4117,7 +4117,7 @@ void drawPoly4TEx8(short x1, short y1, short x2, short y2, short x3, short y3, s
       }
      if(j==xmax)
       {
-       tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
+       tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(posX>>16)];
        GetTextureTransColG(&psxVuw[(i<<10)+j],psxVuw[clutP+tC1]);
       }
     }
@@ -5285,10 +5285,10 @@ void drawPoly3TGEx4(short x1, short y1, short x2, short y2, short x3, short y3, 
        for(j=xmin;j<xmax;j+=2) 
         {
          XAdjust=(posX>>16);
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(XAdjust>>1)];
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(XAdjust>>1)];
          tC1=(tC1>>((XAdjust&1)<<2))&0xf;
          XAdjust=((posX+difX)>>16);
-         tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
+         tC2 = psxVub[(((posY+difY)>>5)&(int)0xFFFFF800)+YAdjust+
                       (XAdjust>>1)];
          tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
@@ -5307,7 +5307,7 @@ void drawPoly3TGEx4(short x1, short y1, short x2, short y2, short x3, short y3, 
        if(j==xmax)
         {
          XAdjust=(posX>>16);
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(XAdjust>>1)];
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(XAdjust>>1)];
          tC1=(tC1>>((XAdjust&1)<<2))&0xf;
          GetTextureTransColGX_S(&psxVuw[(i<<10)+j], 
               psxVuw[clutP+tC1],
@@ -5344,7 +5344,7 @@ void drawPoly3TGEx4(short x1, short y1, short x2, short y2, short x3, short y3, 
      for(j=xmin;j<=xmax;j++) 
       {
        XAdjust=(posX>>16);
-       tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(XAdjust>>1)];
+       tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(XAdjust>>1)];
        tC1=(tC1>>((XAdjust&1)<<2))&0xf;
        if(iDither)
         GetTextureTransColGX_Dither(&psxVuw[(i<<10)+j], 
@@ -5794,10 +5794,10 @@ void drawPoly4TGEx4(short x1, short y1, short x2, short y2, short x3, short y3, 
        for(j=xmin;j<xmax;j+=2)
         {
          XAdjust=(posX>>16);
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(XAdjust>>1)];
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(XAdjust>>1)];
          tC1=(tC1>>((XAdjust&1)<<2))&0xf;
          XAdjust=((posX+difX)>>16);
-         tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
+         tC2 = psxVub[(((posY+difY)>>5)&(int)0xFFFFF800)+YAdjust+
                        (XAdjust>>1)];
          tC2=(tC2>>((XAdjust&1)<<2))&0xf;
 
@@ -5816,7 +5816,7 @@ void drawPoly4TGEx4(short x1, short y1, short x2, short y2, short x3, short y3, 
        if(j==xmax)
         {
          XAdjust=(posX>>16);
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+
                       (XAdjust>>1)];
          tC1=(tC1>>((XAdjust&1)<<2))&0xf;
 
@@ -5866,7 +5866,7 @@ void drawPoly4TGEx4(short x1, short y1, short x2, short y2, short x3, short y3, 
      for(j=xmin;j<=xmax;j++)
       {
        XAdjust=(posX>>16);
-       tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+
+       tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+
                     (XAdjust>>1)];
        tC1=(tC1>>((XAdjust&1)<<2))&0xf;
        if(iDither)
@@ -5969,8 +5969,8 @@ void drawPoly3TGEx8(short x1, short y1, short x2, short y2, short x3, short y3, 
 
        for(j=xmin;j<xmax;j+=2)
         {
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+((posX>>16))];
-         tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+((posX>>16))];
+         tC2 = psxVub[(((posY+difY)>>5)&(int)0xFFFFF800)+YAdjust+
                       (((posX+difX)>>16))];
          GetTextureTransColGX32_S((uint32_t *)&psxVuw[(i<<10)+j],
               psxVuw[clutP+tC1]|
@@ -5986,7 +5986,7 @@ void drawPoly3TGEx8(short x1, short y1, short x2, short y2, short x3, short y3, 
         }
        if(j==xmax)
         {
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+((posX>>16))];
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+((posX>>16))];
          GetTextureTransColGX_S(&psxVuw[(i<<10)+j], 
               psxVuw[clutP+tC1],
               (cB1>>16),(cG1>>16),(cR1>>16));
@@ -6021,7 +6021,7 @@ void drawPoly3TGEx8(short x1, short y1, short x2, short y2, short x3, short y3, 
 
      for(j=xmin;j<=xmax;j++)
       {
-       tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+((posX>>16))];
+       tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+((posX>>16))];
        if(iDither)
         GetTextureTransColGX_Dither(&psxVuw[(i<<10)+j], 
             psxVuw[clutP+tC1],
@@ -6450,8 +6450,8 @@ void drawPoly4TGEx8(short x1, short y1, short x2, short y2, short x3, short y3, 
 
        for(j=xmin;j<xmax;j+=2)
         {
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
-         tC2 = psxVub[(((posY+difY)>>5)&0xFFFFF800)+YAdjust+
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(posX>>16)];
+         tC2 = psxVub[(((posY+difY)>>5)&(int)0xFFFFF800)+YAdjust+
                      ((posX+difX)>>16)];
 
          GetTextureTransColGX32_S((uint32_t *)&psxVuw[(i<<10)+j],
@@ -6468,7 +6468,7 @@ void drawPoly4TGEx8(short x1, short y1, short x2, short y2, short x3, short y3, 
         }
        if(j==xmax)
         {
-         tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
+         tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(posX>>16)];
          GetTextureTransColGX_S(&psxVuw[(i<<10)+j], 
              psxVuw[clutP+tC1],
              (cB1>>16),(cG1>>16),(cR1>>16));
@@ -6514,7 +6514,7 @@ void drawPoly4TGEx8(short x1, short y1, short x2, short y2, short x3, short y3, 
 
      for(j=xmin;j<=xmax;j++)
       {
-       tC1 = psxVub[((posY>>5)&0xFFFFF800)+YAdjust+(posX>>16)];
+       tC1 = psxVub[((posY>>5)&(int)0xFFFFF800)+YAdjust+(posX>>16)];
        if(iDither)
         GetTextureTransColGX_Dither(&psxVuw[(i<<10)+j], 
            psxVuw[clutP+tC1],
