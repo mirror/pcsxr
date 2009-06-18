@@ -2,6 +2,7 @@ June 18, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/peopsxgl/soft.c: Fixed crash with full-software (FVP) enabled
    on x86_64.
+ * macosx/main.m: Removed LoadCdBios.
 
 June 16, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

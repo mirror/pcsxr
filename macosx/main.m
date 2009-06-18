@@ -15,7 +15,6 @@
 #include "sio.h"
 
 int sysInited = 0;
-long LoadCdBios;
 
 //#define EMU_LOG
 
