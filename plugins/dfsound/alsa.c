@@ -27,8 +27,6 @@
 #define ALSA_PCM_NEW_SW_PARAMS_API
 #include <alsa/asoundlib.h>
 
-#define ALSA_MEM_DEF
-#include "alsa.h"
 static snd_pcm_t *handle = NULL;
 static snd_pcm_uframes_t buffer_size;
 
@@ -41,26 +39,26 @@ void SetupSound(void)
  int pspeed;
  int pchannels;
  int format;
- int buffer_time;
- int period_time;
+#if 0
+ int buffer_time = 500000;
+ int period_time = buffer_time / 4;
+#endif
  int err;
 
- if(iDisStereo) pchannels=1;
+ if (iDisStereo) pchannels = 1;
  else pchannels=2;
 
- pspeed=44100;
- format=SND_PCM_FORMAT_S16;
- buffer_time=500000;
- period_time=buffer_time/4;
+ pspeed = 44100;
+ format = SND_PCM_FORMAT_S16;
 
- if((err=snd_pcm_open(&handle, "default", 
-                      SND_PCM_STREAM_PLAYBACK, SND_PCM_NONBLOCK))<0)
+ if ((err = snd_pcm_open(&handle, "default", 
+                      SND_PCM_STREAM_PLAYBACK, SND_PCM_NONBLOCK)) < 0)
   {
    printf("Audio open error: %s\n", snd_strerror(err));
    return;
   }
 
- if((err=snd_pcm_nonblock(handle, 0))<0)
+ if((err = snd_pcm_nonblock(handle, 0))<0)
   {
    printf("Can't set blocking moded: %s\n", snd_strerror(err));
    return;
@@ -98,6 +96,7 @@ void SetupSound(void)
    return;
   }
 
+#if 0
  if((err=snd_pcm_hw_params_set_buffer_time_near(handle, hwparams, &buffer_time, 0))<0)
   {
    printf("Buffer time error: %s\n", snd_strerror(err));
@@ -109,6 +108,7 @@ void SetupSound(void)
    printf("Period time error: %s\n", snd_strerror(err));
    return;
   }
+#endif
 
  if((err=snd_pcm_hw_params(handle, hwparams))<0)
   {
@@ -123,7 +123,7 @@ void SetupSound(void)
    return;
   }
 
- buffer_size=snd_pcm_status_get_avail(status);
+ buffer_size = snd_pcm_status_get_avail(status);
 }
 
 // REMOVE SOUND
@@ -142,13 +142,13 @@ unsigned long SoundGetBytesBuffered(void)
 {
  unsigned long l;
 
- if(handle == NULL)                                 // failed to open?
+ if (handle == NULL)                                 // failed to open?
   return SOUNDSIZE;
  l = snd_pcm_avail_update(handle);
- if(l<0) return 0;
- if(l<buffer_size/2)                                 // can we write in at least the half of fragments?
-      l=SOUNDSIZE;                                   // -> no? wait
- else l=0;                                           // -> else go on
+ if(l < 0) return 0;
+ if(l < buffer_size / 2)                             // can we write in at least the half of fragments?
+      l = SOUNDSIZE;                                 // -> no? wait
+ else l = 0;                                         // -> else go on
 
  return l;
 }
@@ -156,12 +156,12 @@ unsigned long SoundGetBytesBuffered(void)
 // FEED SOUND DATA
 void SoundFeedStreamData(unsigned char* pSound,long lBytes)
 {
- if(handle == NULL) return;
+ if (handle == NULL) return;
 
- if(snd_pcm_state(handle) == SND_PCM_STATE_XRUN)
+ if (snd_pcm_state(handle) == SND_PCM_STATE_XRUN)
   snd_pcm_prepare(handle);
  snd_pcm_writei(handle,pSound,
-                iDisStereo == 1 ? lBytes/2 : lBytes/4);
+                iDisStereo ? lBytes / 2 : lBytes / 4);
 }
 
 #endif

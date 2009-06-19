@@ -2,6 +2,12 @@ June 19, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * gui/Gtk2Gui.c: Also allow extensions with capital letters in the open
    file dialog.
+ * plugins/dfsound/alsa.c: Don't include alsa.h, which is useless. Don't
+   set the buffer time and period time manually.
+ * plugins/dfsound/alsa.h: Deleted.
+ * plugins/dfsound/oss.c: Moved the definations from oss.h to oss.c.
+ * plugins/dfsound/oss.h: Deleted.
+ * debian/rules: Added --enable-alsa to configure parameters.
 
 June 18, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

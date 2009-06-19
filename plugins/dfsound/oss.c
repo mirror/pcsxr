@@ -27,8 +27,11 @@
 // oss globals
 ////////////////////////////////////////////////////////////////////////
 
-#define OSS_MEM_DEF
-#include "oss.h"
+#define OSS_MODE_STEREO	    1
+#define OSS_MODE_MONO       0
+
+#define OSS_SPEED_44100     44100
+
 static int oss_audio_fd = -1;
 extern int errno;
 
