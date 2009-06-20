@@ -131,6 +131,7 @@ int GetCdromFile(u8 *mdir, u8 *time, s8 *filename) {
 				mmssdd(dir->extent, (char*)time);
 				READDIR(ddir);
 				i = 0;
+				mdir = ddir;
 			}
 		} else {
 			if (!strnicmp((char*)&dir->name[0], filename, strlen(filename))) {

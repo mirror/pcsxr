@@ -1,3 +1,8 @@
+June 20, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/misc.c: Fixed a bug which prevented files in a subdirectory
+   from being located correctly in GetCdromFile().
+
 June 19, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * gui/Gtk2Gui.c: Also allow extensions with capital letters in the open
