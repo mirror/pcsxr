@@ -5,6 +5,7 @@
 
 #ifdef ENABLE_NLS
 #include <libintl.h>
+#include <locale.h>
 #endif
 
 #include "interface.h"

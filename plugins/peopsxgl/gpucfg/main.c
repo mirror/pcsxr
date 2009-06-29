@@ -11,6 +11,7 @@
 
 #ifdef ENABLE_NLS
 #include <libintl.h>
+#include <locale.h>
 #endif 
 
 #define SETCHECK(winame)  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON ((GtkWidget*) gtk_object_get_data (GTK_OBJECT (CfgWnd),winame)), TRUE)

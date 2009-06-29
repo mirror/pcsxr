@@ -262,14 +262,23 @@ static FileDesc FDesc[32];
 static __inline void softCall(u32 pc) {
 	pc0 = pc;
 	ra = 0x80001000;
+
+	// Fixes crashing problems with at least Final Fantasy 7 and Xenogears.
+	// This should be considered a temporary fix; after all, we do not
+	// know how much space below sp is in use.  It may be worth considering
+	// creating a new stack for interrupt handlers.
+	sp -= 128;
 	while (pc0 != 0x80001000) psxCpu->ExecuteBlock();
+	sp += 128;
 }
 
 static __inline void softCall2(u32 pc) {
 	u32 sra = ra;
 	pc0 = pc;
 	ra = 0x80001000;
+	sp -= 128;
 	while (pc0 != 0x80001000) psxCpu->ExecuteBlock();
+	sp += 128;
 	ra = sra;
 }
 
@@ -611,7 +620,7 @@ void psxBios_InitHeap() { // 39
 	size &= 0xfffffffc;
 	
 	heap_addr = (u32*)Ra0;
-	heap_end = (u32*)((u32)heap_addr + size);
+	heap_end = (u32*)((void *)heap_addr + size);
 	*heap_addr = SWAP32(size | 1);
 
 	SysPrintf("InitHeap %lx,%lx : %lx %lx\n",a0,a1, (uptr)heap_addr-(uptr)psxM, size);

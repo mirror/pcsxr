@@ -11,6 +11,7 @@
 
 #ifdef ENABLE_NLS
 #include <libintl.h>
+#include <locale.h>
 #endif
 
 #define READBINARY "rb"

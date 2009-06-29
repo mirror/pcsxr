@@ -1,3 +1,16 @@
+June 30, 2009 Peter Collingbourne <peter@pcc.me.uk>
+
+ * plugins/dfcdrom/main.c: #include locale.h as well as libintl.h to allow
+   the code to compile in unoptimized mode.
+ * plugins/dfinput/cfg.c: Likewise.
+ * plugins/dfsound/spucfg-0.1df/main.c: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Likewise.
+ * plugins/peopsxgl/gpucfg/main.c: Likewise.
+ * plugins/peopsxgl/gpucfg/interface.c: Likewise.
+ * libpcsxcore/psxbios.c: Fixed a cast that may cause problems on x86_64.
+   Allocate stack space for programs which store data below the stack pointer
+   when an interrupt occurs.
+
 June 29, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/cheat.c: Implemented Cheat Search.
