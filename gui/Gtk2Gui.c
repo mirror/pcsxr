@@ -36,6 +36,7 @@
 
 #include "../libpcsxcore/plugins.h"
 #include "../libpcsxcore/sio.h"
+#include "../libpcsxcore/cheat.h"
 
 extern int UseGui;
 
