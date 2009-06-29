@@ -51,6 +51,9 @@ int psxInit() {
 }
 
 void psxReset() {
+	FreeCheatSearchResults();
+	FreeCheatSearchMem();
+
 	psxCpu->Reset();
 
 	psxMemReset();
@@ -81,6 +84,8 @@ void psxShutdown() {
 	psxCpu->Shutdown();
 
 	ClearAllCheats();
+	FreeCheatSearchResults();
+	FreeCheatSearchMem();
 }
 
 void psxException(u32 code, u32 bd) {

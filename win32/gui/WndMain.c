@@ -126,13 +126,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		Config.PsxAuto = 1;
 		strcpy(Config.PluginsDir, "Plugins\\");
 		strcpy(Config.BiosDir,    "Bios\\");
-		SysMessage(_("Pcsx needs to be configured"));
-		ConfPlug=1;
+
+		strcpy(Config.Mcd1, "memcards\\Mcd001.mcr");
+		strcpy(Config.Mcd2, "memcards\\Mcd002.mcr");
+
+		ConfPlug = 1;
+
 		ConfigurePlugins(gApp.hWnd);
-		DialogBox(gApp.hInstance, MAKEINTRESOURCE(IDD_MCDCONF), gApp.hWnd, (DLGPROC)ConfigureMcdsDlgProc);
-		SysMessage(_("Pcsx now will quit, restart it"));
-		return 0;
+
+		if (LoadConfig() == -1) {
+			return 0;
+		}
 	}
+
 	if (Config.Lang[0] == 0) {
 		strcpy(Config.Lang, "English");
 	}

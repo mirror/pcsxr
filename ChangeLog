@@ -1,3 +1,16 @@
+June 29, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cheat.c: Implemented Cheat Search.
+ * libpcsxcore/cheat.h: Likewise.
+ * gui/Cheat.c: Likewise.
+ * gui/Gtk2Gui.c: Backup the memory for cheat search when continuing emulation.
+ * data/pcsx.glade2: Tweaked the cheat search dialog for implemention. Fixed
+   the main menu under newer version of Glade.
+ * libpcsxcore/r3000a.c: Free cheat search results on exit.
+ * libpcsxcore/psxmem.h: Fixed a typo in psxMu8(). Removed check for __sh__
+   macro.
+ * win32/gui/WndMain.c: Restarting is no longer needed at first run.
+
 June 20, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/misc.c: Fixed a bug which prevented files in a subdirectory

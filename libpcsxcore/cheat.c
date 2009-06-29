@@ -1,6 +1,6 @@
 /*  Cheat Support for PCSX-Reloaded
  *
- *  Copyright (c) 2009, Wei Mingzhi <whistler@openoffice.org>.
+ *  Copyright (c) 2009, Wei Mingzhi <whistler_wmz@users.sf.net>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,26 +31,12 @@ CheatCode *CheatCodes = NULL;
 int NumCodes = 0;
 static int NumCodesAllocated = 0;
 
+s8 *prevM = NULL;
+u32 *SearchResults = NULL;
+int NumSearchResults = 0;
+static int NumSearchResultsAllocated = 0;
+
 #define ALLOC_INCREMENT		100
-
-// cheat types
-#define CHEAT_CONST8		0x30	/* 8-bit Constant Write */
-#define CHEAT_CONST16		0x80	/* 16-bit Constant Write */
-#define CHEAT_INC16			0x10	/* 16-bit Increment */
-#define CHEAT_DEC16			0x11	/* 16-bit Decrement */
-#define CHEAT_INC8			0x20	/* 8-bit Increment */
-#define CHEAT_DEC8			0x21	/* 8-bit Decrement */
-#define CHEAT_SLIDE			0x50	/* Slide Codes */
-#define CHEAT_MEMCPY		0xC2	/* Memory Copy */
-
-#define CHEAT_EQU8			0xE0	/* 8-bit Equal To */
-#define CHEAT_NOTEQU8		0xE1	/* 8-bit Not Equal To */
-#define CHEAT_LESSTHAN8		0xE2	/* 8-bit Less Than */
-#define CHEAT_GREATERTHAN8  0xE3	/* 8-bit Greater Than */
-#define CHEAT_EQU16			0xD0	/* 16-bit Equal To */
-#define CHEAT_NOTEQU16		0xD1	/* 16-bit Not Equal To */
-#define CHEAT_LESSTHAN16	0xD2	/* 16-bit Less Than */
-#define CHEAT_GREATERTHAN16 0xD3	/* 16-bit Greater Than */
 
 void ClearAllCheats() {
 	int i;
@@ -456,4 +442,580 @@ int EditCheat(int index, const char *descr, char *code) {
 	Cheats[index].n = NumCodes - prev;
 
 	return 0;
+}
+
+void FreeCheatSearchResults() {
+	if (SearchResults != NULL) {
+		free(SearchResults);
+	}
+	SearchResults = NULL;
+
+	NumSearchResults = 0;
+	NumSearchResultsAllocated = 0;
+}
+
+void FreeCheatSearchMem() {
+	if (prevM != NULL) {
+		free(prevM);
+	}
+	prevM = NULL;
+}
+
+void CheatSearchBackupMemory() {
+	if (prevM != NULL) {
+		memcpy(prevM, psxM, 0x200000);
+	}
+}
+
+static void CheatSearchInitBackupMemory() {
+	if (prevM == NULL) {
+		prevM = (s8 *)malloc(0x200000);
+		CheatSearchBackupMemory();
+	}
+}
+
+static void CheatSearchAddResult(u32 addr) {
+	if (NumSearchResults >= NumSearchResultsAllocated) {
+		NumSearchResultsAllocated += ALLOC_INCREMENT;
+
+		if (SearchResults == NULL) {
+			SearchResults = (u32 *)malloc(sizeof(u32) * NumSearchResultsAllocated);
+		}
+		else {
+			SearchResults = (u32 *)realloc(SearchResults, sizeof(u32) * NumSearchResultsAllocated);
+		}
+	}
+
+	SearchResults[NumSearchResults++] = addr;
+}
+
+void CheatSearchEqual8(u8 val) {
+	u32 i, j;
+
+	CheatSearchInitBackupMemory();
+
+	if (SearchResults == NULL) {
+		// search the whole memory
+		for (i = 0; i < 0x200000; i++) {
+			if (PSXMu8(i) == val) {
+				CheatSearchAddResult(i);
+			}
+		}
+	}
+	else {
+		// only search within the previous results
+		j = 0;
+
+		for (i = 0; i < NumSearchResults; i++) {
+			if (PSXMu8(SearchResults[i]) == val) {
+				SearchResults[j++] = SearchResults[i];
+			}
+		}
+
+		NumSearchResults = j;
+	}
+}
+
+void CheatSearchEqual16(u16 val) {
+	u32 i, j;
+
+	CheatSearchInitBackupMemory();
+
+	if (SearchResults == NULL) {
+		// search the whole memory
+		for (i = 0; i < 0x200000; i += 2) {
+			if (PSXMu16(i) == val) {
+				CheatSearchAddResult(i);
+			}
+		}
+	}
+	else {
+		// only search within the previous results
+		j = 0;
+
+		for (i = 0; i < NumSearchResults; i++) {
+			if (PSXMu16(SearchResults[i]) == val) {
+				SearchResults[j++] = SearchResults[i];
+			}
+		}
+
+		NumSearchResults = j;
+	}
+}
+
+void CheatSearchEqual32(u32 val) {
+	u32 i, j;
+
+	CheatSearchInitBackupMemory();
+
+	if (SearchResults == NULL) {
+		// search the whole memory
+		for (i = 0; i < 0x200000; i += 4) {
+			if (PSXMu32(i) == val) {
+				CheatSearchAddResult(i);
+			}
+		}
+	}
+	else {
+		// only search within the previous results
+		j = 0;
+
+		for (i = 0; i < NumSearchResults; i++) {
+			if (PSXMu32(SearchResults[i]) == val) {
+				SearchResults[j++] = SearchResults[i];
+			}
+		}
+
+		NumSearchResults = j;
+	}
+}
+
+void CheatSearchNotEqual8(u8 val) {
+	u32 i, j;
+
+	CheatSearchInitBackupMemory();
+
+	if (SearchResults == NULL) {
+		// search the whole memory
+		for (i = 0; i < 0x200000; i++) {
+			if (PSXMu8(i) != val) {
+				CheatSearchAddResult(i);
+			}
+		}
+	}
+	else {
+		// only search within the previous results
+		j = 0;
+
+		for (i = 0; i < NumSearchResults; i++) {
+			if (PSXMu8(SearchResults[i]) != val) {
+				SearchResults[j++] = SearchResults[i];
+			}
+		}
+
+		NumSearchResults = j;
+	}
+}
+
+void CheatSearchNotEqual16(u16 val) {
+	u32 i, j;
+
+	CheatSearchInitBackupMemory();
+
+	if (SearchResults == NULL) {
+		// search the whole memory
+		for (i = 0; i < 0x200000; i += 2) {
+			if (PSXMu16(i) != val) {
+				CheatSearchAddResult(i);
+			}
+		}
+	}
+	else {
+		// only search within the previous results
+		j = 0;
+
+		for (i = 0; i < NumSearchResults; i++) {
+			if (PSXMu16(SearchResults[i]) != val) {
+				SearchResults[j++] = SearchResults[i];
+			}
+		}
+
+		NumSearchResults = j;
+	}
+}
+
+void CheatSearchNotEqual32(u32 val) {
+	u32 i, j;
+
+	CheatSearchInitBackupMemory();
+
+	if (SearchResults == NULL) {
+		// search the whole memory
+		for (i = 0; i < 0x200000; i += 4) {
+			if (PSXMu32(i) != val) {
+				CheatSearchAddResult(i);
+			}
+		}
+	}
+	else {
+		// only search within the previous results
+		j = 0;
+
+		for (i = 0; i < NumSearchResults; i++) {
+			if (PSXMu32(SearchResults[i]) != val) {
+				SearchResults[j++] = SearchResults[i];
+			}
+		}
+
+		NumSearchResults = j;
+	}
+}
+
+void CheatSearchRange8(u8 min, u8 max) {
+	u32 i, j;
+
+	CheatSearchInitBackupMemory();
+
+	if (SearchResults == NULL) {
+		// search the whole memory
+		for (i = 0; i < 0x200000; i++) {
+			if (PSXMu8(i) >= min && PSXMu8(i) <= max) {
+				CheatSearchAddResult(i);
+			}
+		}
+	}
+	else {
+		// only search within the previous results
+		j = 0;
+
+		for (i = 0; i < NumSearchResults; i++) {
+			if (PSXMu8(SearchResults[i]) >= min && PSXMu8(SearchResults[i]) <= max) {
+				SearchResults[j++] = SearchResults[i];
+			}
+		}
+
+		NumSearchResults = j;
+	}
+}
+
+void CheatSearchRange16(u16 min, u16 max) {
+	u32 i, j;
+
+	CheatSearchInitBackupMemory();
+
+	if (SearchResults == NULL) {
+		// search the whole memory
+		for (i = 0; i < 0x200000; i += 2) {
+			if (PSXMu16(i) >= min && PSXMu16(i) <= max) {
+				CheatSearchAddResult(i);
+			}
+		}
+	}
+	else {
+		// only search within the previous results
+		j = 0;
+
+		for (i = 0; i < NumSearchResults; i++) {
+			if (PSXMu16(SearchResults[i]) >= min && PSXMu16(SearchResults[i]) <= max) {
+				SearchResults[j++] = SearchResults[i];
+			}
+		}
+
+		NumSearchResults = j;
+	}
+}
+
+void CheatSearchRange32(u32 min, u32 max) {
+	u32 i, j;
+
+	CheatSearchInitBackupMemory();
+
+	if (SearchResults == NULL) {
+		// search the whole memory
+		for (i = 0; i < 0x200000; i += 4) {
+			if (PSXMu32(i) >= min && PSXMu32(i) <= max) {
+				CheatSearchAddResult(i);
+			}
+		}
+	}
+	else {
+		// only search within the previous results
+		j = 0;
+
+		for (i = 0; i < NumSearchResults; i++) {
+			if (PSXMu32(SearchResults[i]) >= min && PSXMu32(SearchResults[i]) <= max) {
+				SearchResults[j++] = SearchResults[i];
+			}
+		}
+
+		NumSearchResults = j;
+	}
+}
+
+void CheatSearchIncreasedBy8(u8 val) {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PSXMu8(SearchResults[i]) - PrevMu8(SearchResults[i]) == val) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchIncreasedBy16(u16 val) {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PSXMu16(SearchResults[i]) - PrevMu16(SearchResults[i]) == val) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchIncreasedBy32(u32 val) {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PSXMu32(SearchResults[i]) - PrevMu32(SearchResults[i]) == val) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchDecreasedBy8(u8 val) {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu8(SearchResults[i]) - PSXMu8(SearchResults[i]) == val) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchDecreasedBy16(u16 val) {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu16(SearchResults[i]) - PSXMu16(SearchResults[i]) == val) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchDecreasedBy32(u32 val) {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu32(SearchResults[i]) - PSXMu32(SearchResults[i]) == val) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchIncreased8() {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu8(SearchResults[i]) < PSXMu8(SearchResults[i])) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchIncreased16() {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu16(SearchResults[i]) < PSXMu16(SearchResults[i])) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchIncreased32() {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu32(SearchResults[i]) < PSXMu32(SearchResults[i])) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchDecreased8() {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu8(SearchResults[i]) > PSXMu8(SearchResults[i])) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchDecreased16() {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu16(SearchResults[i]) > PSXMu16(SearchResults[i])) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchDecreased32() {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu32(SearchResults[i]) > PSXMu32(SearchResults[i])) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchDifferent8() {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu8(SearchResults[i]) != PSXMu8(SearchResults[i])) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchDifferent16() {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu16(SearchResults[i]) != PSXMu16(SearchResults[i])) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchDifferent32() {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu32(SearchResults[i]) != PSXMu32(SearchResults[i])) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchNoChange8() {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu8(SearchResults[i]) == PSXMu8(SearchResults[i])) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchNoChange16() {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu16(SearchResults[i]) == PSXMu16(SearchResults[i])) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
+}
+
+void CheatSearchNoChange32() {
+	u32 i, j;
+
+	assert(prevM != NULL); // not possible for the first search
+
+	j = 0;
+
+	for (i = 0; i < NumSearchResults; i++) {
+		if (PrevMu32(SearchResults[i]) == PSXMu32(SearchResults[i])) {
+			SearchResults[j++] = SearchResults[i];
+		}
+	}
+
+	NumSearchResults = j;
 }

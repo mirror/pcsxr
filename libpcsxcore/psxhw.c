@@ -54,7 +54,7 @@ u8 psxHwRead8(u32 add) {
 #endif
 			return hard;
 	}
-	
+
 #ifdef PSXHW_LOG
 	PSXHW_LOG("*Known 8bit read at address %lx value %x\n", add, hard);
 #endif
@@ -111,7 +111,7 @@ u16 psxHwRead16(u32 add) {
 	 //	case 0x1f801054: hard = serial_status_read(); break;
 	 //	case 0x1f80105a: hard = serial_control_read(); break;
 	 //	case 0x1f80105e: hard = serial_baud_read(); break;
-	
+
 		case 0x1f801100:
 			hard = psxRcntRcount(0);
 #ifdef PSXHW_LOG
@@ -166,12 +166,12 @@ u16 psxHwRead16(u32 add) {
 			PSXHW_LOG("T2 target read16: %x\n", hard);
 #endif
 			return hard;
-	
+
 		//case 0x1f802030: hard =   //int_2000????
 		//case 0x1f802040: hard =//dip switches...??
 
 		default:
-			if (add>=0x1f801c00 && add<0x1f801e00) {
+			if (add >= 0x1f801c00 && add < 0x1f801e00) {
             	hard = SPU_readRegister(add);
 			} else {
 				hard = psxHu16(add); 

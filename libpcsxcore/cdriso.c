@@ -33,7 +33,6 @@ FILE *cdHandle = NULL;
 static unsigned char cdbuffer[CD_FRAMESIZE_RAW * 10];
 
 char* CALLBACK CDR__getDriveLetter(void);
-unsigned char* CALLBACK CDR__getBufferSub(void);
 long CALLBACK CDR__configure(void);
 long CALLBACK CDR__test(void);
 void CALLBACK CDR__about(void);
@@ -279,6 +278,11 @@ static long CALLBACK ISOstop(void) {
 	return 0; // TODO
 }
 
+// gets subchannel data
+unsigned char* CALLBACK ISOgetBufferSub(void) {
+	return NULL; // TODO
+}
+
 void imageReaderInit(void) {
 	assert(hCDRDriver == NULL);
 
@@ -292,10 +296,10 @@ void imageReaderInit(void) {
 	CDR_getBuffer = ISOgetBuffer;
 	CDR_play = ISOplay;
 	CDR_stop = ISOstop;
+	CDR_getBufferSub = ISOgetBufferSub;
 
 	CDR_getStatus = CDR__getStatus;
 	CDR_getDriveLetter = CDR__getDriveLetter;
-	CDR_getBufferSub = CDR__getBufferSub;
 	CDR_configure = CDR__configure;
 	CDR_test = CDR__test;
 	CDR_about = CDR__about;

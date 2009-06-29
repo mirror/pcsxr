@@ -706,6 +706,7 @@ void OnEmu_Run() {
 	}
 
 	if (Config.Dbg) hdb_start();
+	CheatSearchBackupMemory();
 	psxCpu->Execute();
 }
 
@@ -758,6 +759,7 @@ void OnEmu_SwitchImage() {
 	cdOpenCase = time(NULL) + 2;
 
 	if (Config.Dbg) hdb_start();
+	CheatSearchBackupMemory();
 	psxCpu->Execute();
 }
 

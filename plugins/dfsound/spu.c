@@ -23,7 +23,7 @@
 #include "cfg.h"
 #include "dsoundoss.h"
 #include "regs.h"
- 
+
 #if defined(USEALSA)
 static char * libraryName     = "ALSA Sound";
 #elif defined (USEOSS)
@@ -629,39 +629,37 @@ ENDX:   ;
      }
    }
   else                                                 // stereo:
-  for(ns=0;ns<NSSIZE;ns++)
+  for (ns = 0; ns < NSSIZE; ns++)
    {
-    SSumL[ns]+=MixREVERBLeft(ns);
+    SSumL[ns] += MixREVERBLeft(ns);
 
-    d=SSumL[ns]/voldiv;SSumL[ns]=0;
-    if(d<-32767) d=-32767;if(d>32767) d=32767;
-    *pS++=d;
+    d = SSumL[ns] / voldiv; SSumL[ns] = 0;
+    if (d < -32767) d = -32767; if (d > 32767) d = 32767;
+    *pS++ = d;
 
-    SSumR[ns]+=MixREVERBRight();
+    SSumR[ns] += MixREVERBRight();
 
-    d=SSumR[ns]/voldiv;SSumR[ns]=0;
-    if(d<-32767) d=-32767;if(d>32767) d=32767;
-    *pS++=d;
+    d = SSumR[ns] / voldiv; SSumR[ns] = 0;
+    if(d < -32767) d = -32767; if(d > 32767) d = 32767;
+    *pS++ = d;
    }
 
   InitREVERB();
 
   // feed the sound
   // wanna have around 1/60 sec (16.666 ms) updates
-
-  if(iCycle++>8) //temp fix: lowered for low latency alsa configs
+  if (iCycle++ > 16)
    {
-    SoundFeedStreamData((unsigned char*)pSpuBuffer,
-                        ((unsigned char *)pS)-
-                        ((unsigned char *)pSpuBuffer));
-    pS=(short *)pSpuBuffer;
-    iCycle=0;
+    SoundFeedStreamData((unsigned char *)pSpuBuffer,
+                        ((unsigned char *)pS) - ((unsigned char *)pSpuBuffer));
+    pS = (short *)pSpuBuffer;
+    iCycle = 0;
    }
  }
 
  // end of big main loop...
 
- bThreadEnded=1;
+ bThreadEnded = 1;
 
  return 0;
 }
