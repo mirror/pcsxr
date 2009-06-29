@@ -10,6 +10,7 @@ June 29, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * libpcsxcore/psxmem.h: Fixed a typo in psxMu8(). Removed check for __sh__
    macro.
  * win32/gui/WndMain.c: Restarting is no longer needed at first run.
+ * po/zh_CN.po, po/zh_TW.po: Updated.
 
 June 20, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
