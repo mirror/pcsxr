@@ -1,5 +1,16 @@
 June 30, 2009 Peter Collingbourne <peter@pcc.me.uk>
 
+ * libpcsxcore/psxbios.c: Implemented psxBios_rename(). Interpret a file
+   path of the form buX0: as buX0:* in firstfile() and nextfile(). Ensure
+   that memory card data is saved when deleting a file. Advance the file
+   offset when a write or synchronous read occurs.
+
+June 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/peopsxgl/gpu.c: Changed a format string from %08lx to %08x.
+
+June 30, 2009 Peter Collingbourne <peter@pcc.me.uk>
+
  * plugins/dfcdrom/main.c: #include locale.h as well as libintl.h to allow
    the code to compile in unoptimized mode.
  * plugins/dfinput/cfg.c: Likewise.

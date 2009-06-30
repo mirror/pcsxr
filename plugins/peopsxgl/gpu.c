@@ -305,7 +305,7 @@ char * GetConfigInfos(int hW)
    else             strcat(pB," - not supported\r\n");
   }
  else strcat(pB,"\r\n");
- sprintf(szTxt,"- Game fixes: %s [%08lx]\r\n",szO[bUseFixes],dwCfgFixes);
+ sprintf(szTxt,"- Game fixes: %s [%08x]\r\n",szO[bUseFixes],dwCfgFixes);
  strcat(pB,szTxt);
  //----------------------------------------------------//
  return pB;

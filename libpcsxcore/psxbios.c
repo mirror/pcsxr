@@ -1412,6 +1412,7 @@ void psxBios_lseek() { // 0x33
 	memcpy(Ra1, ptr, a2); \
 	if (FDesc[1 + mcd].mode & 0x8000) v0 = 0; \
 	else v0 = a2; \
+	FDesc[1 + mcd].offset += v0; \
 	DeliverEvent(0x11, 0x2); /* 0xf0000011, 0x0004 */ \
 	DeliverEvent(0x81, 0x2); /* 0xf4000001, 0x0004 */ \
 }
@@ -1442,6 +1443,7 @@ void psxBios_read() { // 0x34
 	SysPrintf("write %d: %x,%x\n", FDesc[1 + mcd].mcfile, FDesc[1 + mcd].offset, a2); \
 	ptr = Mcd##mcd##Data + offset; \
 	memcpy(ptr, Ra1, a2); \
+	FDesc[1 + mcd].offset += a2; \
 	SaveMcd(Config.Mcd##mcd, Mcd##mcd##Data, offset, a2); \
 	if (FDesc[1 + mcd].mode & 0x8000) v0 = 0; \
 	else v0 = a2; \
@@ -1512,7 +1514,9 @@ int nfile;
 		nfile++; \
 		if ((*ptr & 0xF0) != 0x50) continue; \
 		ptr+= 0xa; \
-		for (i=0; i<20; i++) { \
+		if (pfile[0] == 0) { \
+			strcpy(dir->name, ptr); \
+		} else for (i=0; i<20; i++) { \
 			if (pfile[i] == ptr[i]) { \
 				dir->name[i] = ptr[i]; \
 				if (ptr[i] == 0) break; else continue; } \
@@ -1589,12 +1593,56 @@ void psxBios_nextfile() { // 43
 	pc0 = ra;
 }
 
+#define burename(mcd) { \
+	for (i=1; i<16; i++) { \
+		int namelen, j, xor = 0; \
+		ptr = Mcd##mcd##Data + 128 * i; \
+		if ((*ptr & 0xF0) != 0x50) continue; \
+		if (strcmp(Ra0+5, ptr+0xa)) continue; \
+		namelen = strlen(Ra1+5); \
+		memcpy(ptr+0xa, Ra1+5, namelen); \
+		memset(ptr+0xa+namelen, 0, 0x75-namelen); \
+		for (j=0; j<127; j++) xor^= ptr[j]; \
+		ptr[127] = xor; \
+		SaveMcd(Config.Mcd##mcd, Mcd##mcd##Data, 128 * i + 0xa, 0x76); \
+		v0 = 1; \
+		break; \
+	} \
+}
+
+/*
+ *	int rename(char *old, char *new);
+ */
+
+void psxBios_rename() { // 44
+	char *ptr;
+	int i;
+
+#ifdef PSXBIOS_LOG
+	PSXBIOS_LOG("psxBios_%s: %s,%s\n", biosB0n[0x44], Ra0, Ra1);
+#endif
+
+	v0 = 0;
+
+	if (!strncmp(Ra0, "bu00", 4) && !strncmp(Ra1, "bu00", 4)) {
+		burename(1);
+	}
+
+	if (!strncmp(Ra0, "bu10", 4) && !strncmp(Ra1, "bu10", 4)) {
+		burename(2);
+	}
+
+	pc0 = ra;
+}
+
+
 #define budelete(mcd) { \
 	for (i=1; i<16; i++) { \
 		ptr = Mcd##mcd##Data + 128 * i; \
 		if ((*ptr & 0xF0) != 0x50) continue; \
 		if (strcmp(Ra0+5, ptr+0xa)) continue; \
 		*ptr = (*ptr & 0xf) | 0xA0; \
+		SaveMcd(Config.Mcd##mcd, Mcd##mcd##Data, 128 * i, 1); \
 		SysPrintf("delete %s\n", ptr+0xa); \
 		v0 = 1; \
 		break; \
@@ -2058,7 +2106,7 @@ void psxBiosInit() {
 	//biosB0[0x41] = psxBios_format;
 	biosB0[0x42] = psxBios_firstfile;
 	biosB0[0x43] = psxBios_nextfile;
-	//biosB0[0x44] = psxBios_rename;
+	biosB0[0x44] = psxBios_rename;
 	biosB0[0x45] = psxBios_delete;
 	//biosB0[0x46] = psxBios_undelete;
 	//biosB0[0x47] = psxBios_AddDevice;
