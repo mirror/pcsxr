@@ -193,10 +193,10 @@ typedef struct {
 
 /*
 typedef struct {
-	long next;
-	long func1;
-	long func2;
-	long pad;
+	s32 next;
+	s32 func1;
+	s32 func2;
+	s32 pad;
 } SysRPst;
 */
 
@@ -223,10 +223,10 @@ typedef struct {
 
 struct DIRENTRY {
 	char name[20];
-	long attr;
-	long size;
+	s32 attr;
+	s32 size;
 	struct DIRENTRY *next;
-	long head;
+	s32 head;
 	char system[4];
 };
 
