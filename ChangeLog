@@ -1,7 +1,7 @@
 July 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/psxbios.c: Use s32 instead of long in DIRENTRY struct for
-   compatibility with x86_64.
+   compatibility with x86_64. Fixed error in MSVC6.
 
 June 30, 2009 Peter Collingbourne <peter@pcc.me.uk>
 

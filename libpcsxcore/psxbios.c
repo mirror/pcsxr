@@ -613,14 +613,14 @@ void psxBios_InitHeap() { // 39
 #endif
 
 	unsigned int size;
-	
+
 	if (((a0 & 0x1fffff) + a1)>= 0x200000) size = 0x1ffffc - (a0 & 0x1fffff);
 	else size = a1;
-	
+
 	size &= 0xfffffffc;
-	
-	heap_addr = (u32*)Ra0;
-	heap_end = (u32*)((void *)heap_addr + size);
+
+	heap_addr = (u32 *)Ra0;
+	heap_end = (u32 *)((u8 *)heap_addr + size);
 	*heap_addr = SWAP32(size | 1);
 
 	SysPrintf("InitHeap %lx,%lx : %lx %lx\n",a0,a1, (uptr)heap_addr-(uptr)psxM, size);
