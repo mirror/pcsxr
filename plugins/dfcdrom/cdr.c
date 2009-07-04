@@ -482,7 +482,7 @@ long CDRgetStatus(struct CdrStat *stat) {
 }
 
 struct SubQ {
-	char res0[11];
+	char res0[12];
 	unsigned char ControlAndADR;
 	unsigned char TrackNumber;
 	unsigned char IndexNumber;
