@@ -18,19 +18,24 @@
  *   51 Franklin Steet, Fifth Floor, Boston, MA 02111-1307 USA.            *
  ***************************************************************************/
 
-// TODO: implement CDDA & subchannel support.
+// TODO: implement CDDA support.
 
 #include "psxcommon.h"
 #include "plugins.h"
 
-#define MSF2SECT(m, s, f)	(((m) * 60 + (s) - 2) * 75 + (f))
-#define btoi(b)			((b) / 16 * 10 + (b) % 16) /* BCD to u_char */
+#define MSF2SECT(m, s, f)		(((m) * 60 + (s) - 2) * 75 + (f))
+#define btoi(b)					((b) / 16 * 10 + (b) % 16) /* BCD to u_char */
 
-#define CD_FRAMESIZE_RAW	2352
-#define DATA_SIZE		(CD_FRAMESIZE_RAW - 12)
+#define CD_FRAMESIZE_RAW		2352
+#define DATA_SIZE				(CD_FRAMESIZE_RAW - 12)
+
+#define SUB_FRAMESIZE			96
 
 FILE *cdHandle = NULL;
+FILE *subHandle = NULL;
+
 static unsigned char cdbuffer[CD_FRAMESIZE_RAW * 10];
+static unsigned char subbuffer[SUB_FRAMESIZE];
 
 char* CALLBACK CDR__getDriveLetter(void);
 long CALLBACK CDR__configure(void);
@@ -84,24 +89,24 @@ static void tok2msf(char *time, char *msf) {
 	if (token)
 		msf[0] = atoi(token);
 	else
-		msf[0]=0;
+		msf[0] = 0;
 
 	token = strtok(NULL, ":");
 	if (token)
 		msf[1] = atoi(token);
 	else
-		msf[1]=0;
+		msf[1] = 0;
 
 	token = strtok(NULL, ":");
 	if (token)
 		msf[2] = atoi(token);
 	else
-		msf[2]=0;
+		msf[2] = 0;
 }
 
 // this function tries to get the .toc file of the given .bin
-// the neccessary data is put into the ti (trackinformation)-array
-static int parsetoc(char *isofile) {
+// the necessary data is put into the ti (trackinformation)-array
+static int parsetoc(const char *isofile) {
 	char tocname[MAXPATHLEN];
 	FILE *fi;
 	char linebuf[256], dummy[256];
@@ -114,16 +119,14 @@ static int parsetoc(char *isofile) {
 
 	// copy name of the iso and change extension from .bin to .toc
 	strncpy(tocname, isofile, sizeof(tocname));
-	token = strstr(tocname, ".bin");
-	if (token)
-		sprintf((char *)token, ".toc");
+	tocname[MAXPATHLEN - 1] = '\0';
+	if (strlen(tocname) >= 4)
+		strcpy(tocname + strlen(tocname) - 4, ".toc");
 	else
 		return -1;
 
-	if ((fi = fopen(tocname, "r")) == NULL) {
-		SysPrintf(_("Could not open %s.\n"), tocname);
+	if ((fi = fopen(tocname, "r")) == NULL)
 		return -1;
-	}
 
 	memset(&ti, 0, sizeof(ti));
 
@@ -165,17 +168,69 @@ static int parsetoc(char *isofile) {
 			sscanf(linebuf, "START %s", time);
 			tok2msf((char *)&time, (char *)&ti[numtracks].gap);
 		}
-	} 
+	}
 
 	fclose(fi);
 
 	// calculate the true start of each track
 	// start+gap+datasize (+2 secs of silence ? I dunno...)
-	for(i = 2; i <= numtracks; i++) {
+	for (i = 2; i <= numtracks; i++) {
 		t = msf2sec(ti[1].start) + msf2sec(ti[1].length) + msf2sec(ti[i].start) + msf2sec(ti[i].gap);
 		sec2msf(t, ti[i].start);
 	}
 
+	return 0;
+}
+
+// this function tries to get the .cue file of the given .bin
+// the necessary data is put into the ti (trackinformation)-array
+static int parsecue(const char *isofile) {
+	char cuename[MAXPATHLEN];
+
+	numtracks = 0;
+
+	// copy name of the iso and change extension from .bin to .cue
+	strncpy(cuename, isofile, sizeof(cuename));
+	cuename[MAXPATHLEN - 1] = '\0';
+	if (strlen(cuename) >= 4)
+		strcpy(cuename + strlen(cuename) - 4, ".cue");
+	else
+		return -1;
+
+	return 0; // TODO
+}
+
+// this function tries to get the .ccd file of the given .img
+// the necessary data is put into the ti (trackinformation)-array
+static int parseccd(const char *isofile) {
+	char ccdname[MAXPATHLEN];
+
+	numtracks = 0;
+
+	// copy name of the iso and change extension from .img to .ccd
+	strncpy(ccdname, isofile, sizeof(ccdname));
+	ccdname[MAXPATHLEN - 1] = '\0';
+	if (strlen(ccdname) >= 4)
+		strcpy(ccdname + strlen(ccdname) - 4, ".ccd");
+	else
+		return -1;
+
+	return 0; // TODO
+}
+
+// this function tries to get the .sub file of the given .img
+static int opensubfile(const char *isoname) {
+	char subname[MAXPATHLEN];
+
+	// copy name of the iso and change extension from .img to .sub
+	strncpy(subname, isoname, sizeof(subname));
+	subname[MAXPATHLEN - 1] = '\0';
+	if (strlen(subname) >= 4)
+		strcpy(subname + strlen(subname) - 4, ".sub");
+	else
+		return -1;
+
+	subHandle = fopen(subname, "rb");
 	return 0;
 }
 
@@ -188,6 +243,10 @@ static long CALLBACK ISOshutdown(void) {
 	if (cdHandle != NULL) {
 		fclose(cdHandle);
 		cdHandle = NULL;
+	}
+	if (subHandle != NULL) {
+		fclose(subHandle);
+		subHandle = NULL;
 	}
 	return 0;
 }
@@ -202,7 +261,12 @@ static long CALLBACK ISOopen(void) {
 	if (cdHandle == NULL)
 		return -1;
 
-	parsetoc(cdrfilename);
+	if (parsetoc(cdrfilename) == -1)
+		if (parsecue(cdrfilename) == -1)
+			parseccd(cdrfilename);
+
+	opensubfile(cdrfilename);
+
 	return 0;
 }
 
@@ -210,6 +274,10 @@ static long CALLBACK ISOclose(void) {
 	if (cdHandle != NULL) {
 		fclose(cdHandle);
 		cdHandle = NULL;
+	}
+	if (subHandle != NULL) {
+		fclose(subHandle);
+		subHandle = NULL;
 	}
 	return 0;
 }
@@ -258,6 +326,11 @@ static long CALLBACK ISOreadTrack(unsigned char *time) {
 	fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * CD_FRAMESIZE_RAW + 12, SEEK_SET);
 	fread(cdbuffer, 1, DATA_SIZE, cdHandle);
 
+	if (subHandle != NULL) {
+		fseek(subHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * SUB_FRAMESIZE, SEEK_SET);
+		fread(subbuffer, 1, SUB_FRAMESIZE, subHandle);
+	}
+
 	return 0;
 }
 
@@ -280,7 +353,9 @@ static long CALLBACK ISOstop(void) {
 
 // gets subchannel data
 unsigned char* CALLBACK ISOgetBufferSub(void) {
-	return NULL; // TODO
+	if (subHandle != NULL)
+		return subbuffer;
+	return NULL;
 }
 
 void imageReaderInit(void) {
