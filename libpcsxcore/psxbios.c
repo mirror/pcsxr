@@ -225,7 +225,7 @@ struct DIRENTRY {
 	char name[20];
 	s32 attr;
 	s32 size;
-	struct DIRENTRY *next;
+	u32 next;
 	s32 head;
 	char system[4];
 };
