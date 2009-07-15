@@ -1,3 +1,9 @@
+July 15, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/psxbios.c: Allocate more stack spaces to fix crash at FF7
+   minigames.
+ * libpcsxcore/cdriso.c: Implemented CUE parsing.
+
 July 7, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/psxbios.c: Use u32 instead of native pointer for
