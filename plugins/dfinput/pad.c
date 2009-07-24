@@ -202,7 +202,7 @@ long PADopen(unsigned long *Disp) {
 
     if (init_done) {
 //        fprintf(stderr, "DFInput warning: device already initialized.\n");
-	return 0;
+        return 0;
     }
 
     Dsp = (Display *)*Disp;
@@ -292,9 +292,9 @@ long PADclose(void) {
     }
 #endif
 
-    init_done=0;
+    init_done = 0;
 
-	XAutoRepeatOn(Dsp);
+    XAutoRepeatOn(Dsp);
 
     return 0;
 }

@@ -145,7 +145,7 @@ void LoadCheats(const char *filename) {
 
 	fclose(fp);
 
-	SysPrintf("Cheats loaded from: %s\n", filename);
+	SysPrintf(_("Cheats loaded from: %s\n"), filename);
 }
 
 // save all cheats to the specified filename
@@ -177,7 +177,7 @@ void SaveCheats(const char *filename) {
 
 	fclose(fp);
 
-	SysPrintf("Cheats saved to: %s\n", filename);
+	SysPrintf(_("Cheats saved to: %s\n"), filename);
 }
 
 // apply all enabled cheats
@@ -200,27 +200,27 @@ void ApplyCheats() {
 
 			switch (type) {
 				case CHEAT_CONST8:
-					psxMemWrite8(addr, (u8)val);
+					psxMu8ref(addr) = (u8)val;
 					break;
 
 				case CHEAT_CONST16:
-					psxMemWrite16(addr, (u16)val);
+					psxMu16ref(addr) = val;
 					break;
 
 				case CHEAT_INC16:
-					psxMemWrite16(addr, psxMemRead16(addr) + val);
+					psxMu16ref(addr) += val;
 					break;
 
 				case CHEAT_DEC16:
-					psxMemWrite16(addr, psxMemRead16(addr) - val);
+					psxMu16ref(addr) -= val;
 					break;
 
 				case CHEAT_INC8:
-					psxMemWrite8(addr, psxMemRead8(addr) + (u8)val);
+					psxMu8ref(addr) += (u8)val;
 					break;
 
 				case CHEAT_DEC8:
-					psxMemWrite8(addr, psxMemRead8(addr) - (u8)val);
+					psxMu8ref(addr) -= (u8)val;
 					break;
 
 				case CHEAT_SLIDE:
@@ -234,13 +234,14 @@ void ApplyCheats() {
 
 					if (type == CHEAT_CONST8) {
 						for (k = 0; k < ((addr >> 8) & 0xFF); k++) {
-							psxMemWrite8(taddr, (u8)val);
+							psxMu8ref(taddr) = (u8)val;
 							taddr += (s8)(addr & 0xFF);
 							val += (s8)(CheatCodes[j - 1].Val & 0xFF);
 						}
-					} else if (type == CHEAT_CONST16) {
+					}
+					else if (type == CHEAT_CONST16) {
 						for (k = 0; k < ((addr >> 8) & 0xFF); k++) {
-							psxMemWrite16(taddr, val);
+							psxMu16ref(taddr) = val;
 							taddr += (s8)(addr & 0xFF);
 							val += (s8)(CheatCodes[j - 1].Val & 0xFF);
 						}
@@ -254,47 +255,47 @@ void ApplyCheats() {
 
 					taddr = (CheatCodes[j].Addr & 0x001FFFFF);
 					for (k = 0; k < val; k++) {
-						psxMemWrite8(taddr + k, psxMemRead8(addr + k));
+						psxMu8ref(taddr + k) = PSXMu8(addr + k);
 					}
 					break;
 
 				case CHEAT_EQU8:
-					if (psxMemRead8(addr) != (u8)val)
+					if (PSXMu8(addr) != (u8)val)
 						j++; // skip the next code
 					break;
 
 				case CHEAT_NOTEQU8:
-					if (psxMemRead8(addr) == (u8)val)
+					if (PSXMu8(addr) == (u8)val)
 						j++; // skip the next code
 					break;
 
 				case CHEAT_LESSTHAN8:
-					if (psxMemRead8(addr) >= (u8)val)
+					if (PSXMu8(addr) >= (u8)val)
 						j++; // skip the next code
 					break;
 
 				case CHEAT_GREATERTHAN8:
-					if (psxMemRead8(addr) <= (u8)val)
+					if (PSXMu8(addr) <= (u8)val)
 						j++; // skip the next code
 					break;
 
 				case CHEAT_EQU16:
-					if (psxMemRead16(addr) != val)
+					if (PSXMu16(addr) != val)
 						j++; // skip the next code
 					break;
 
 				case CHEAT_NOTEQU16:
-					if (psxMemRead16(addr) == val)
+					if (PSXMu16(addr) == val)
 						j++; // skip the next code
 					break;
 
 				case CHEAT_LESSTHAN16:
-					if (psxMemRead16(addr) >= val)
+					if (PSXMu16(addr) >= val)
 						j++; // skip the next code
 					break;
 
 				case CHEAT_GREATERTHAN16:
-					if (psxMemRead16(addr) <= val)
+					if (PSXMu16(addr) <= val)
 						j++; // skip the next code
 					break;
 			}
@@ -313,7 +314,8 @@ int AddCheat(const char *descr, char *code) {
 			assert(NumCheats == 0);
 			assert(NumCheatsAllocated == ALLOC_INCREMENT);
 			Cheats = (Cheat *)malloc(sizeof(Cheat) * NumCheatsAllocated);
-		} else {
+		}
+		else {
 			Cheats = (Cheat *)realloc(Cheats, sizeof(Cheat) * NumCheatsAllocated);
 		}
 	}
@@ -350,7 +352,8 @@ int AddCheat(const char *descr, char *code) {
 					assert(NumCodes == 0);
 					assert(NumCodesAllocated == ALLOC_INCREMENT);
 					CheatCodes = (CheatCode *)malloc(sizeof(CheatCode) * NumCodesAllocated);
-				} else {
+				}
+				else {
 					CheatCodes = (CheatCode *)realloc(CheatCodes, sizeof(CheatCode) * NumCodesAllocated);
 				}
 			}
@@ -419,7 +422,8 @@ int EditCheat(int index, const char *descr, char *code) {
 					assert(NumCodes == 0);
 					assert(NumCodesAllocated == ALLOC_INCREMENT);
 					CheatCodes = (CheatCode *)malloc(sizeof(CheatCode) * NumCodesAllocated);
-				} else {
+				}
+				else {
 					CheatCodes = (CheatCode *)realloc(CheatCodes, sizeof(CheatCode) * NumCodesAllocated);
 				}
 			}

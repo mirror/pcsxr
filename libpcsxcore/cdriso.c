@@ -83,7 +83,7 @@ unsigned int ISOgetTrackLength(unsigned int s) {
 }
 
 // divide a string of xx:yy:zz into m, s, f
-static void tok2msf(const char *time, char *msf) {
+static void tok2msf(char *time, char *msf) {
 	char *token;
 
 	token = strtok(time, ":");
@@ -160,16 +160,16 @@ static int parsetoc(const char *isofile) {
 			}
 		}
 		else if (!strcmp(token, "DATAFILE")) {
-			sscanf(linebuf, "DATAFILE %s %s", name, time);
+			sscanf(linebuf, "DATAFILE %s %8s", name, time);
 			tok2msf((char *)&time, (char *)&ti[numtracks].length);
 		}
 		else if (!strcmp(token, "FILE")) {
-			sscanf(linebuf, "FILE %s %s %s %s", name, dummy, time, time2);
+			sscanf(linebuf, "FILE %s %s %8s %8s", name, dummy, time, time2);
 			tok2msf((char *)&time, (char *)&ti[numtracks].start);
 			tok2msf((char *)&time2, (char *)&ti[numtracks].length);
 		}
 		else if (!strcmp(token, "START")) {
-			sscanf(linebuf, "START %s", time);
+			sscanf(linebuf, "START %8s", time);
 			tok2msf((char *)&time, (char *)&ti[numtracks].gap);
 		}
 	}
@@ -192,7 +192,6 @@ static int parsecue(const char *isofile) {
 	char			cuename[MAXPATHLEN];
 	FILE			*fi;
 	char			*token;
-	char			name[256];
 	char			time[20];
 	char			*tmp;
 	char			linebuf[256], dummy[256];
@@ -235,7 +234,7 @@ static int parsecue(const char *isofile) {
 			if (tmp != NULL) {
 				tmp += strlen("PREGAP");
 				while (*tmp == ' ') tmp++;
-				if (*tmp != '\n') sscanf(tmp, "%s", time);
+				if (*tmp != '\n') sscanf(tmp, "%8s", time);
 			}
 			tok2msf((char *)&time, (char *)&ti[numtracks].gap);
 		}
@@ -244,7 +243,7 @@ static int parsecue(const char *isofile) {
 			if (tmp != NULL) {
 				tmp += strlen("INDEX") + 3; // 3 - space + numeric index
 				while (*tmp == ' ') tmp++;
-				if (*tmp != '\n') sscanf(tmp, "%s", time);
+				if (*tmp != '\n') sscanf(tmp, "%8s", time);
 			}
 
 			tok2msf((char *)&time, (char *)&ti[numtracks].start);
@@ -275,7 +274,10 @@ static int parsecue(const char *isofile) {
 // this function tries to get the .ccd file of the given .img
 // the necessary data is put into the ti (trackinformation)-array
 static int parseccd(const char *isofile) {
-	char		ccdname[MAXPATHLEN];
+	char			ccdname[MAXPATHLEN];
+	FILE			*fi;
+	char			linebuf[256];
+	unsigned int	t;
 
 	numtracks = 0;
 
@@ -289,7 +291,56 @@ static int parseccd(const char *isofile) {
 		return -1;
 	}
 
-	return -1; // TODO
+	if ((fi = fopen(ccdname, "r")) == NULL) {
+		return -1;
+	}
+
+	memset(&ti, 0, sizeof(ti));
+
+	while (fgets(linebuf, sizeof(linebuf), fi) != NULL) {
+		if (!strncmp(linebuf, "[TRACK", 6)){
+			numtracks++;
+		}
+		else if (!strncmp(linebuf, "MODE=", 5)) {
+			sscanf(linebuf, "MODE=%d", &t);
+			ti[numtracks].type = ((t == 0) ? CDDA : DATA);
+		}
+		else if (!strncmp(linebuf, "INDEX 0=", 8)) {
+			sscanf(linebuf, "INDEX 0=%d", &t);
+			sec2msf(t, ti[numtracks].gap);
+		}
+		else if (!strncmp(linebuf, "INDEX 1=", 8)) {
+			sscanf(linebuf, "INDEX 1=%d", &t);
+
+			if (numtracks <= 1) {
+				t += 2 * 75;
+			}
+
+			if (msf2sec(ti[numtracks].gap) != 0) {
+                sec2msf(t - msf2sec(ti[numtracks].gap), ti[numtracks].gap);
+			}
+
+			t += msf2sec(ti[numtracks].gap);
+			sec2msf(t, ti[numtracks].start);
+
+			// If we've already seen another track, this is its end
+			if (numtracks > 1) {
+				t = msf2sec(ti[numtracks].start) - msf2sec(ti[numtracks - 1].start) + msf2sec(ti[numtracks - 1].gap) - msf2sec(ti[numtracks].gap);
+				sec2msf(t, ti[numtracks - 1].length);
+			}
+		}
+	}
+
+	fclose(fi);
+
+	// Fill out the last track's end based on size
+	if (numtracks >= 1) {
+		fseek(cdHandle, 0, SEEK_END);
+		t = ftell(cdHandle) / 2352 - msf2sec(ti[numtracks].start) + 2 * 75;
+		sec2msf(t, ti[numtracks].length);
+	}
+
+	return 0;
 }
 
 // this function tries to get the .sub file of the given .img
@@ -348,17 +399,17 @@ static long CALLBACK ISOopen(void) {
 	SysPrintf(_("Loaded CD Image: %s"), cdrfilename);
 
 	if (parsetoc(cdrfilename) == 0) {
-		SysPrintf(" [+toc]");
+		SysPrintf("[+toc]");
 	}
 	else if (parsecue(cdrfilename) == 0) {
-		SysPrintf(" [+cue]");
+		SysPrintf("[+cue]");
 	}
 	else if (parseccd(cdrfilename) == 0) {
-		SysPrintf(" [+ccd]");
+		SysPrintf("[+ccd]");
 	}
 
 	if (opensubfile(cdrfilename) == 0) {
-		SysPrintf(" [+sub]");
+		SysPrintf("[+sub]");
 	}
 
 	SysPrintf(".\n");

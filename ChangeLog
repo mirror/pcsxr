@@ -1,3 +1,8 @@
+July 24, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdriso.c: Implemented CCD parsing.
+ * libpcsxcore/cheat.c: Optimized Cheat Applying a bit.
+
 July 15, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/psxbios.c: Allocate more stack spaces to fix crash at FF7
