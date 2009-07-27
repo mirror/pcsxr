@@ -1035,6 +1035,9 @@ void FillSoftwareAreaTrans(short x0,short y0,short x1, // FILL AREA TRANS
 {
  short j,i,dx,dy;
 
+ if(y0<0) y0=0;
+ if(x0<0) x0=0;
+
  if(y0>y1) return;
  if(x0>x1) return;
 
@@ -1124,6 +1127,9 @@ void FillSoftwareArea(short x0,short y0,short x1,      // FILL AREA (BLK FILL)
                       short y1,unsigned short col)     // no draw area check here!
 {
  short j,i,dx,dy;
+
+ if(y0<0) y0=0;
+ if(x0<0) x0=0;
 
  if(y0>y1) return;
  if(x0>x1) return;
