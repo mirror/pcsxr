@@ -1,8 +1,7 @@
 July 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
- * plugins/dfxvideo/soft.c: Don't allow negative offsets in
-   FillSoftwareArea() and FillSoftwareAreaTrans().
- * plugins/peopsxgl/soft.c: Likewise.
+ * plugins/dfxvideo/prim.c: Clamp the offsets before performing
+   blkfill.
 
 July 24, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
