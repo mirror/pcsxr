@@ -592,8 +592,9 @@ void primBlkFill(unsigned char * baseAddr)
  sW+=sX;
  sH+=sY;
 
- if (sX < 0) { sX = 0; sW += sX; }
- if (sY < 0) { sY = 0; sH += sX; }
+ if (sX < 0) sX=0;
+ if (sY < 0) sY=0;
+
  FillSoftwareArea(sX, sY, sW, sH, BGR24to16(GETLE32(&gpuData[0])));
 
  bDoVSyncUpdate=TRUE;
