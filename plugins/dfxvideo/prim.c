@@ -569,33 +569,6 @@ void primStoreImage(unsigned char * baseAddr)
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Used in Blk Fill
-////////////////////////////////////////////////////////////////////////
-
-void ClampToPSXScreenOffset(short *x0, short *y0, short *x1, short *y1)
-{
- if (*x0 < 0)
-  { *x1 += *x0;  *x0 = 0; }
- else
- if (*x0 > 1023)
-  { *x0 = 1023;  *x1 = 0; }
-
- if (*y0 < 0)
-  { *y1 += *y0;  *y0 = 0; }
- else
- if (*y0 > iGPUHeightMask)
-  { *y0 = iGPUHeightMask;   *y1 = 0; }
-
- if (*x1 < 0) *x1 = 0;
-
- if ((*x1 + *x0) > 1024) *x1 = (1024 -  *x0);
-
- if (*y1 < 0) *y1 = 0;
-
- if ((*y1 + *y0) > iGPUHeight)  *y1 = (iGPUHeight -  *y0);
-}
-
-////////////////////////////////////////////////////////////////////////
 // cmd: blkfill - NO primitive! Doesn't care about draw areas...
 ////////////////////////////////////////////////////////////////////////
 
@@ -603,7 +576,7 @@ void primBlkFill(unsigned char * baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
-         
+
  short sX = GETLEs16(&sgpuData[2]);
  short sY = GETLEs16(&sgpuData[3]);
  short sW = GETLEs16(&sgpuData[4]) & 0x3ff;
@@ -619,7 +592,8 @@ void primBlkFill(unsigned char * baseAddr)
  sW+=sX;
  sH+=sY;
 
- ClampToPSXScreenOffset(&sX, &sY, &sW, &sH);
+ if (sX < 0) { sX = 0; sW += sX; }
+ if (sY < 0) { sY = 0; sH += sX; }
  FillSoftwareArea(sX, sY, sW, sH, BGR24to16(GETLE32(&gpuData[0])));
 
  bDoVSyncUpdate=TRUE;
