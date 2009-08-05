@@ -1,3 +1,7 @@
+August 5, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfxvideo/prim.c: Reverted the previous change, which is wrong.
+
 July 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfxvideo/prim.c: Clamp the offsets before performing
