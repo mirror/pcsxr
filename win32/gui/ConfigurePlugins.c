@@ -19,7 +19,7 @@
 #include <windows.h>
 #include <windowsx.h>
 #include <stdio.h>
-#include "PsxCommon.h"
+#include "psxcommon.h"
 #include "plugin.h"
 #include "plugins.h"
 #include "resource.h"
@@ -271,17 +271,16 @@ char *GetSelDLL(HWND hW,int id) {
 }
 
 void OnOK(HWND hW) {
-	char * gpuDLL=GetSelDLL(hW,IDC_LISTGPU);
-	char * spuDLL=GetSelDLL(hW,IDC_LISTSPU);
-	char * cdrDLL=GetSelDLL(hW,IDC_LISTCDR);
-	char * pad1DLL=GetSelDLL(hW,IDC_LISTPAD1);
-	char * pad2DLL=GetSelDLL(hW,IDC_LISTPAD2);
-	char * biosFILE=GetSelDLL(hW,IDC_LISTBIOS);
+	char *gpuDLL=GetSelDLL(hW,IDC_LISTGPU);
+	char *spuDLL=GetSelDLL(hW,IDC_LISTSPU);
+	char *cdrDLL=GetSelDLL(hW,IDC_LISTCDR);
+	char *pad1DLL=GetSelDLL(hW,IDC_LISTPAD1);
+	char *pad2DLL=GetSelDLL(hW,IDC_LISTPAD2);
+	char *biosFILE=GetSelDLL(hW,IDC_LISTBIOS);
 
-    if ((gpuDLL==NULL) || (spuDLL ==NULL) ||
-       (cdrDLL ==NULL) || (pad1DLL==NULL) ||
-	   (pad2DLL==NULL) ||(biosFILE==NULL)) {
-		MessageBox(hW,"Configuration not OK!","Error",MB_OK|MB_ICONERROR);
+    if (gpuDLL == NULL || spuDLL == NULL || cdrDLL == NULL || pad1DLL == NULL ||
+		pad2DLL == NULL || biosFILE == NULL) {
+		MessageBox(hW, _("Configuration not OK!"), _("Error"), MB_OK | MB_ICONERROR);
 		return;
 	}
 
@@ -626,4 +625,3 @@ BOOL CALLBACK ConfigureNetPlayDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM 
 
 	return FALSE;
 }
-

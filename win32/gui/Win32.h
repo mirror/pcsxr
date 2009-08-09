@@ -36,10 +36,15 @@ extern char cfgfile[256];
 extern int Running;
 extern char PcsxDir[256];
 
+void strcatz(char *dst, char *src);
+
 LRESULT WINAPI MainWndProc(HWND, UINT, WPARAM, LPARAM);
 BOOL CALLBACK ConfigureMcdsDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK ConfigureNetPlayDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+LRESULT WINAPI CheatDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam);
+LRESULT WINAPI CheatSearchDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 void ConfigurePlugins(HWND hWnd);
 

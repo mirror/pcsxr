@@ -9,7 +9,7 @@ CppCompiler=-D__GNUWIN32__ -march=pentiumpro -D_M_IX86=600 -W -finline-functions
 Includes=.;./zlib;../libpcsxcore;./glue;./gui;./intl
 Linker=-lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32 -lcomctl32_@@_
 Libs=
-UnitCount=105
+UnitCount=106
 Folders=glue,glue/sys,gui,intl,libpcsxcore,libpcsxcore/ix86,zlib
 ObjFiles=
 PrivateResource=pcsx_private.rc
@@ -1096,4 +1096,14 @@ Link=1
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=$(CC) -c cheat.c -o cheat.o $(CFLAGS)
+
+[Unit106]
+FileName=gui\CheatDlg.c
+CompileCpp=1
+Folder=gui
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
 

@@ -4,28 +4,17 @@
 // Use, redistribution and modification of this code is unrestricted
 // as long as this notice is preserved.
 //
+// This code is provided with ABSOLUTELY NO WARRANTY.
+//
 
 #ifndef MMAN_H
 #define MMAN_H
 
-#define PROT_WRITE      0
-#define PROT_READ       0
-#define PROT_EXEC       0
-#define MAP_PRIVATE     0
-#define MAP_ANONYMOUS   0
-
 #include <stdlib.h>
 
-static inline void *mmap(void *start, size_t length, int prot, int flags,
-                  int fd, off_t offset)
-{
-	return (unsigned char *)malloc(length);
-}
+#define mmap(start, length, prot, flags, fd, offset) \
+	((unsigned char *)malloc(length))
 
-static inline int munmap(void *start, size_t length)
-{
-	free(start);
-	return 0;
-}
+#define munmap(start, length) do { free(start); } while (0)
 
 #endif

@@ -1,25 +1,41 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by pcsx.rc
 //
 #define IDS_TITLE                       1
+#define IDC_SEARCHFOR                   100
 #define IDR_MENU1                       101
 #define IDI_APP_ICON                    102
 #define IDD_MCDCONF                     102
 #define DEBUG_DIALOG                    103
+#define IDC_VALUEFROM                   103
 #define ABOUT_DIALOG                    104
+#define IDC_LABEL_TO                    104
 #define IDD_CPUCONF                     105
+#define IDC_VALUETO                     105
+#define IDC_DATATYPE                    106
 #define IDD_NETPLAY                     108
+#define IDC_LABEL_RESULTSFOUND          108
 #define IDD_CONNECT                     109
+#define IDC_RESLIST                     109
+#define IDD_CHEATLIST                   110
+#define IDC_SEARCH                      110
+#define IDC_NEWSEARCH                   111
+#define IDD_CHEATSEARCH                 112
 #define SPLASH_LOGO                     113
-#define MAIN_LOGO                       118
+#define IDC_MODIFY                      113
 #define IDD_GPREGS                      114
+#define IDC_FREEZE                      114
+#define IDD_CHEATEDIT                   114
 #define IDD_CP0REGS                     115
+#define IDC_COPY                        115
 #define IDD_COP2D                       116
 #define IDD_COP2C                       117
+#define MAIN_LOGO                       118
 #define IDD_CONFIG                      120
 #define IDD_MEMVIEW                     136
 #define IDC_EDIT2                       1001
+#define IDC_CODE                        1001
 #define IDC_MCD2                        1004
 #define IDC_ASMCHECK1                   1005
 #define IDC_MCD1                        1005
@@ -39,6 +55,7 @@
 #define IDC_QKEYS                       1012
 #define IDC_EDIT1                       1013
 #define IDC_CDDA                        1013
+#define IDC_DESCR                       1013
 #define IDC_CLOSE                       1014
 #define IDC_PCSX_ABOUT_TEXT             1014
 #define IDC_PSXOUT                      1014
@@ -108,11 +125,19 @@
 #define IDC_FRAMEMCD1                   1041
 #define IDC_FRAMEMCD2                   1042
 #define IDC_CP031                       1044
+#define IDC_CODELIST                    1044
+#define IDC_REMOVECODE                  1045
+#define IDC_EDITCODE                    1046
 #define IDC_GPR0                        1047
+#define IDC_TOGGLECODE                  1047
 #define IDC_GPR1                        1048
+#define IDC_SAVECODE                    1048
 #define IDC_GPR2                        1049
+#define IDC_LOADCODE                    1049
 #define IDC_GPR3                        1050
+#define IDC_LABEL_DESCR                 1050
 #define IDC_GPR4                        1051
+#define IDC_LABEL_CODE                  1051
 #define IDC_GPR5                        1052
 #define IDC_LISTGPU                     1052
 #define IDC_GPR6                        1053
@@ -257,16 +282,20 @@
 #define IDC_BUTTON1                     1254
 #define IDC_BIOSDIR                     1254
 #define IDC_FORMAT1                     1254
+#define IDC_ADDCODE                     1254
 #define IDC_PLUGINSDIR                  1255
 #define IDC_FORMAT2                     1255
+#define IDC_LABEL_DATATYPE              1260
+#define IDC_LABEL_SEARCHFOR             1261
+#define IDC_LABEL_VALUE                 1262
+#define IDC_LABEL_DATABASE              1263
 #define ID_FILE_EXIT                    40001
+#define ID_HELP_ABOUT                   40002
 #define ID_FILE_RUN_CD                  40003
 #define ID_FILE_RUN_EXE                 40004
-#define ID_FILE_RUN_ISO                 40007
 #define ID_EMULATOR_PAUSE               40005
 #define ID_EMULATOR_RESET               40006
-#define ID_EMULATOR_SWITCH_ISO          40044
-#define ID_HELP_ABOUT                   40002
+#define ID_FILE_RUN_ISO                 40007
 #define ID_DEBUG_ENABLE_DEBUGGER        40008
 #define ID_CONFIGURATION_GRAPHICS       40009
 #define ID_CONFIGURATION_SOUND          40010
@@ -292,15 +321,18 @@
 #define ID_FILE_STATES_SAVE_SLOT5       40041
 #define ID_FILE_STATES_SAVE_OTHER       40042
 #define ID_CONFIGURATION_NETPLAY        40043
+#define ID_EMULATOR_SWITCH_ISO          40044
+#define ID_CONFIGURATION_CHEATLIST      40045
+#define ID_CONFIGURATION_CHEATSEARCH    40046
 #define ID_LANGS                        50000
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        110
-#define _APS_NEXT_COMMAND_VALUE         40045
-#define _APS_NEXT_CONTROL_VALUE         1043
+#define _APS_NEXT_RESOURCE_VALUE        114
+#define _APS_NEXT_COMMAND_VALUE         40047
+#define _APS_NEXT_CONTROL_VALUE         1052
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -43,7 +43,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /YX /FD /c
-# ADD CPP /nologo /G6 /Zp16 /W3 /GX /O2 /Op /Ob2 /I "../" /I "./zlib" /I "../libpcsxcore" /I "./glue" /I "./" /I "./gui" /I "./intl" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "__WIN32__" /D "_MSC_VER_" /D PCSX_VERSION=\"1.5\" /D "__i386__" /D "ENABLE_NLS" /D PACKAGE=\"pcsx\" /D inline=__forceinline /FD /Zm200 /c
+# ADD CPP /nologo /G6 /Zp16 /W3 /GX /O2 /Op /Ob2 /I "../" /I "./zlib" /I "../libpcsxcore" /I "./glue" /I "./" /I "./gui" /I "./intl" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "__WIN32__" /D "_MSC_VER_" /D PCSX_VERSION=\"1.5\" /D "__i386__" /D "ENABLE_NLS" /D PACKAGE=\"pcsx\" /D inline=__forceinline /FR /FD /Zm200 /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x408 /d "NDEBUG"
@@ -69,7 +69,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D PCSX_VERSION=\"1.3\" /YX /FD /GZ /c
-# ADD CPP /nologo /W3 /GX /ZI /Od /I "../" /I "./zlib" /I "../libpcsxcore" /I "./glue" /I "./" /I "./gui" /I "./intl" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "__WIN32__" /D "__i386__" /D PCSX_VERSION=\"1.5\" /D "ENABLE_NLS" /D PACKAGE=\"pcsx\" /D inline= /FD /GZ /Zm200 /c
+# ADD CPP /nologo /W3 /GX /ZI /Od /I "../" /I "./zlib" /I "../libpcsxcore" /I "./glue" /I "./" /I "./gui" /I "./intl" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "__WIN32__" /D "__i386__" /D PCSX_VERSION=\"1.5\" /D "ENABLE_NLS" /D PACKAGE=\"pcsx\" /D inline= /FR /FD /GZ /Zm200 /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x408 /d "_DEBUG"
@@ -293,6 +293,10 @@ SOURCE=.\gui\AboutDlg.h
 # Begin Source File
 
 SOURCE=.\gui\cdrom02.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\CheatDlg.c
 # End Source File
 # Begin Source File
 

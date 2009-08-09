@@ -25,11 +25,11 @@
 #include <time.h>
 #include <stdio.h>
 
-#include "R3000A.h"
+#include "r3000a.h"
 #include "Win32.h"
 #include "NoPic.h"
-#include "Misc.h"
-#include "Sio.h"
+#include "misc.h"
+#include "sio.h"
 
 int ShowPic = 0;
 

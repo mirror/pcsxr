@@ -1,4 +1,4 @@
-//Microsoft Developer Studio generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
 
@@ -21,7 +21,6 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 #pragma code_page(936)
 #endif //_WIN32
 
-#ifndef _MAC
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
@@ -44,18 +43,14 @@ BEGIN
     BEGIN
         BLOCK "080404b0"
         BEGIN
-            VALUE "Comments", "\0"
-            VALUE "CompanyName", " \0"
-            VALUE "FileDescription", "pcsx\0"
-            VALUE "FileVersion", "1, 0, 0, 1\0"
-            VALUE "InternalName", "pcsx\0"
-            VALUE "LegalCopyright", "Copyright (c) 2009\0"
-            VALUE "LegalTrademarks", "\0"
-            VALUE "OriginalFilename", "pcsx.exe\0"
-            VALUE "PrivateBuild", "\0"
-            VALUE "ProductName", "  pcsx\0"
-            VALUE "ProductVersion", "1, 0, 0, 1\0"
-            VALUE "SpecialBuild", "\0"
+            VALUE "CompanyName", " "
+            VALUE "FileDescription", "pcsx"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "pcsx"
+            VALUE "LegalCopyright", "Copyright (c) 2009"
+            VALUE "OriginalFilename", "pcsx.exe"
+            VALUE "ProductName", "  pcsx"
+            VALUE "ProductVersion", "1, 0, 0, 1"
         END
     END
     BLOCK "VarFileInfo"
@@ -63,8 +58,6 @@ BEGIN
         VALUE "Translation", 0x804, 1200
     END
 END
-
-#endif    // !_MAC
 
 #endif    // Chinese (P.R.C.) resources
 /////////////////////////////////////////////////////////////////////////////
@@ -84,8 +77,9 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // Dialog
 //
 
-IDD_MCDCONF DIALOG DISCARDABLE  0, 0, 407, 197
-STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_MCDCONF DIALOG  0, 0, 407, 197
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
 CAPTION "Memcard Manager"
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -113,9 +107,10 @@ BEGIN
 END
 
 ABOUT_DIALOG DIALOGEX 0, 0, 332, 209
-STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
 CAPTION "About"
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,134,187,50,14
     CTEXT           "PCSX EMU\nVersion x.x",IDC_PCSX_ABOUT_TEXT,22,10,112,15,
@@ -129,41 +124,42 @@ BEGIN
     GROUPBOX        "",IDC_STATIC,43,100,234,79
 END
 
-IDD_CPUCONF DIALOG DISCARDABLE  0, 0, 232, 175
-STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_CPUCONF DIALOG  0, 0, 232, 175
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
 CAPTION "Cpu Config"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,50,155,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,120,155,50,14
     CONTROL         "Disable Xa Decoding",IDC_XA,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,10,15,83,10
+                    WS_TABSTOP,10,15,91,10
     CONTROL         "Sio Irq Always Enabled",IDC_SIO,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,10,30,88,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,30,92,10
     CONTROL         "Black && White Movies",IDC_MDEC,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,10,60,85,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,60,200,10
     CONTROL         "Autodetect",IDC_PSXAUTO,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,10,126,51,10
+                    WS_TABSTOP,10,126,83,10
     GROUPBOX        "Misc Options",IDC_MISCOPT,5,5,220,100
     COMBOBOX        IDC_PSXTYPES,105,126,53,50,CBS_DROPDOWNLIST | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
     GROUPBOX        "Select Psx System Type",IDC_SELPSX,5,110,220,35
     CONTROL         "Disable Cd Audio",IDC_CDDA,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,105,15,70,10
+                    WS_TABSTOP,105,15,113,10
     CONTROL         "Enable Console Output",IDC_PSXOUT,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,105,30,89,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,105,30,113,10
     CONTROL         "Enable Interpreter Cpu",IDC_CPU,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,105,45,87,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,105,45,113,10
     CONTROL         "Spu Irq Always Enabled",IDC_SPUIRQ,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,10,45,91,10
     CONTROL         "Parasite Eve 2, Vandal Hearts 1/2 Fix",IDC_RCNTFIX,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,75,135,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,75,205,10
     CONTROL         "InuYasha Sengoku Battle Fix",IDC_VSYNCWA,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,10,90,107,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,90,205,10
 END
 
-IDD_NETPLAY DIALOG DISCARDABLE  0, 0, 165, 95
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_NETPLAY DIALOG  0, 0, 165, 95
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "NetPlay Configuration"
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -179,8 +175,8 @@ BEGIN
                     IDC_NETPLAYNOTE,10,50,145,19
 END
 
-IDD_CONNECT DIALOG DISCARDABLE  0, 0, 112, 31
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_CONNECT DIALOG  0, 0, 112, 31
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Connecting..."
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -188,10 +184,11 @@ BEGIN
                     104,8
 END
 
-IDD_CONFIG DIALOG DISCARDABLE  0, 0, 322, 161
-STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_CONFIG DIALOGEX 0, 0, 322, 161
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
 CAPTION "Configuration"
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
     COMBOBOX        IDC_LISTGPU,10,10,145,74,CBS_DROPDOWNLIST | WS_VSCROLL | 
                     WS_TABSTOP
@@ -234,6 +231,73 @@ BEGIN
     PUSHBUTTON      "Set Plugins Directory",IDC_PLUGINSDIR,10,140,75,14
 END
 
+IDD_CHEATLIST DIALOGEX 0, 0, 392, 201
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Edit Cheat Codes"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "&Close",IDCANCEL,324,180,61,14
+    CONTROL         "List2",IDC_CODELIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | 
+                    LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,7,7,312,187
+    PUSHBUTTON      "&Enable/Disable",IDC_TOGGLECODE,324,7,61,14
+    PUSHBUTTON      "&Add Code",IDC_ADDCODE,324,32,61,14
+    PUSHBUTTON      "&Edit Code",IDC_EDITCODE,324,50,61,14
+    PUSHBUTTON      "&Remove Code",IDC_REMOVECODE,324,68,61,14
+    PUSHBUTTON      "&Load...",IDC_LOADCODE,324,96,61,14
+    PUSHBUTTON      "&Save As...",IDC_SAVECODE,324,114,61,14
+END
+
+IDD_CHEATSEARCH DIALOGEX 0, 0, 280, 214
+STYLE DS_SETFONT | DS_SETFOREGROUND | DS_CENTER | WS_POPUP | WS_CAPTION
+CAPTION "Cheat Search"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Search For:",IDC_LABEL_SEARCHFOR,7,9,51,8,0,
+                    WS_EX_TRANSPARENT
+    COMBOBOX        IDC_SEARCHFOR,60,7,80,224,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Data Type:",IDC_LABEL_DATATYPE,7,26,51,8,0,
+                    WS_EX_TRANSPARENT
+    COMBOBOX        IDC_DATATYPE,60,24,80,224,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Data Base:",IDC_LABEL_DATABASE,147,26,44,8,0,
+                    WS_EX_TRANSPARENT
+    COMBOBOX        107,194,24,81,224,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Value:",IDC_LABEL_VALUE,7,43,50,8,0,WS_EX_TRANSPARENT
+    EDITTEXT        IDC_VALUEFROM,60,41,80,12,ES_AUTOHSCROLL
+    RTEXT           "To",IDC_LABEL_TO,144,43,45,8,0,WS_EX_TRANSPARENT
+    EDITTEXT        IDC_VALUETO,194,41,80,12,ES_AUTOHSCROLL
+    LTEXT           "Addresses Found : 0",IDC_LABEL_RESULTSFOUND,7,180,263,8,
+                    0,WS_EX_TRANSPARENT
+    LISTBOX         IDC_RESLIST,6,62,199,112,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Freeze",IDC_FREEZE,213,63,62,17,WS_DISABLED
+    PUSHBUTTON      "&Modify",IDC_MODIFY,213,86,62,17,WS_DISABLED
+    PUSHBUTTON      "&Copy",IDC_COPY,213,109,62,17,WS_DISABLED
+    DEFPUSHBUTTON   "&Search",IDC_SEARCH,8,194,86,14
+    PUSHBUTTON      "&New Search",IDC_NEWSEARCH,98,194,86,14
+    PUSHBUTTON      "C&lose",IDCANCEL,188,194,86,14
+    EDITTEXT        10000,0,1000,10,10,ES_AUTOHSCROLL | NOT WS_BORDER | NOT 
+                    WS_TABSTOP
+END
+
+IDD_CHEATEDIT DIALOGEX 0, 0, 261, 175
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Edit Cheat Code"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,139,154,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,197,154,50,14
+    LTEXT           "Description:",IDC_LABEL_DESCR,16,15,39,8
+    LTEXT           "Cheat Code:",IDC_LABEL_CODE,15,49,42,8
+    EDITTEXT        IDC_DESCR,15,25,232,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CODE,15,60,231,84,ES_MULTILINE | ES_UPPERCASE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -241,7 +305,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO MOVEABLE PURE 
+GUIDELINES DESIGNINFO 
 BEGIN
     IDD_MCDCONF, DIALOG
     BEGIN
@@ -285,6 +349,22 @@ BEGIN
     BEGIN
         BOTTOMMARGIN, 147
     END
+
+    IDD_CHEATLIST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 385
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 194
+    END
+
+    IDD_CHEATEDIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 254
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 168
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -296,22 +376,22 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_APP_ICON            ICON    DISCARDABLE     "gui\\cdrom02.ico"
+IDI_APP_ICON            ICON                    "gui\\cdrom02.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Bitmap
 //
 
-SPLASH_LOGO             BITMAP  MOVEABLE PURE   "gui\\about.bmp"
-MAIN_LOGO               BITMAP  MOVEABLE PURE   "gui\\pcsx.bmp"
+SPLASH_LOGO             BITMAP                  "gui\\about.bmp"
+MAIN_LOGO               BITMAP                  "gui\\pcsx.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // RT_MANIFEST
 //
 
-24                      RT_MANIFEST MOVEABLE PURE "gui\\pcsx.exe.manifest"
+24                      RT_MANIFEST             "gui\\pcsx.exe.manifest"
 #endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -331,18 +411,18 @@ LANGUAGE LANG_GREEK, SUBLANG_DEFAULT
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE MOVEABLE PURE 
+1 TEXTINCLUDE 
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE MOVEABLE PURE 
+2 TEXTINCLUDE 
 BEGIN
     "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE MOVEABLE PURE 
+3 TEXTINCLUDE 
 BEGIN
     "\r\n"
     "\0"

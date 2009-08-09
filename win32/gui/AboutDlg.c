@@ -20,7 +20,7 @@
 #include <windowsx.h>
 #include "resource.h"
 #include "AboutDlg.h"
-#include "PsxCommon.h"
+#include "psxcommon.h"
 
 char *LabelAuthors = { N_(
 	"PCSX - A PlayStation Emulator\n\n"
@@ -35,13 +35,13 @@ char *LabelGreets = { N_(
 	"PCSX-df Authors:\n"
 	"Ryan Schultz, Andrew Burton, Stephen Chao,\n"
 	"Marcus Comstedt, Stefan Sikora\n\n"
-	"PCSX Reloaded By:\n"
+	"PCSX-Reloaded By:\n"
 	"Wei Mingzhi\n\n"
 	"http://www.codeplex.com/pcsxr")
 };
 
 LRESULT WINAPI AboutDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-	switch(uMsg) {
+	switch (uMsg) {
 		case WM_INITDIALOG:
 			SetWindowText(hDlg, _("About"));
 
@@ -53,7 +53,7 @@ LRESULT WINAPI AboutDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 			return TRUE;
 
 		case WM_COMMAND:
-			switch(wParam) {
+			switch (wParam) {
 				case IDOK:
 					EndDialog(hDlg, TRUE);
 					return TRUE;

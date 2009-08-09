@@ -4,6 +4,8 @@
 // Use, redistribution and modification of this code is unrestricted
 // as long as this notice is preserved.
 //
+// This code is provided with ABSOLUTELY NO WARRANTY.
+//
 
 #ifndef __STDINT_H
 #define __STDINT_H

@@ -27,12 +27,13 @@
 #include "resource.h"
 #include "AboutDlg.h"
 
-#include "PsxCommon.h"
+#include "psxcommon.h"
 #include "plugin.h"
-#include "Debug.h"
+#include "debug.h"
 #include "Win32.h"
-#include "Sio.h"
+#include "sio.h"
 #include "misc.h"
+#include "cheat.h"
 
 #ifdef __MINGW32__
 #ifndef LVM_GETSELECTIONMARK
@@ -222,6 +223,7 @@ void States_Load(int num) {
 	GPU_displayText(Text);
 
 	Running = 1;
+	CheatSearchBackupMemory();
 	psxCpu->Execute();
 }
 
@@ -243,6 +245,7 @@ void States_Save(int num) {
 	GPU_displayText(Text);
 
 	Running = 1;
+	CheatSearchBackupMemory();
 	psxCpu->Execute();
 }
 
@@ -314,7 +317,7 @@ void OnStates_SaveOther() {
 	ofn.lStructSize			= sizeof(OPENFILENAME);
 	ofn.hwndOwner			= gApp.hWnd;
 	ofn.lpstrFilter			= szFilter;
-	ofn.lpstrCustomFilter		= NULL;
+	ofn.lpstrCustomFilter	= NULL;
 	ofn.nMaxCustFilter		= 0;
 	ofn.nFilterIndex		= 1;
 	ofn.lpstrFile			= szFileName;
@@ -324,7 +327,7 @@ void OnStates_SaveOther() {
 	ofn.nMaxFileTitle		= MAXFILENAME;
 	ofn.lpstrTitle			= NULL;
 	ofn.lpstrDefExt			= NULL;
-	ofn.Flags			= OFN_HIDEREADONLY | OFN_NOCHANGEDIR;
+	ofn.Flags				= OFN_HIDEREADONLY | OFN_NOCHANGEDIR;
 
 	if (GetOpenFileName ((LPOPENFILENAME)&ofn)) {
 		char Text[256];
@@ -484,6 +487,7 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 					OpenPlugins(hWnd);
 					ShowCursor(FALSE);
 					Running = 1;
+					CheatSearchBackupMemory();
 					psxCpu->Execute();
 					return TRUE;
 
@@ -510,6 +514,7 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 					ShowCursor(FALSE);
 					Running = 1;
 					cdOpenCase = time(NULL) + 2;
+					CheatSearchBackupMemory();
 					psxCpu->Execute();
 					return TRUE;
 
@@ -546,6 +551,14 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 					ConfigurePlugins(hWnd);
 					return TRUE;
 
+				case ID_CONFIGURATION_CHEATLIST:
+					DialogBox(gApp.hInstance, MAKEINTRESOURCE(IDD_CHEATLIST), hWnd, (DLGPROC)CheatDlgProc);
+					break;
+
+				case ID_CONFIGURATION_CHEATSEARCH:
+					DialogBox(gApp.hInstance, MAKEINTRESOURCE(IDD_CHEATSEARCH), hWnd, (DLGPROC)CheatSearchDlgProc);
+					break;
+
 				case ID_HELP_ABOUT:
 					DialogBox(gApp.hInstance, MAKEINTRESOURCE(ABOUT_DIALOG), hWnd, (DLGPROC)AboutDlgProc);
 					return TRUE;
@@ -567,7 +580,7 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		case WM_KEYDOWN:
 			PADhandleKey(wParam);
 			return TRUE;
-	
+
 		case WM_DESTROY:
 			if (!AccBreak) {
 				if (Running) ClosePlugins();
@@ -576,7 +589,7 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 				exit(0);
 			}
 			else AccBreak = 0;
-		
+
 			DeleteObject(hBm);
 			DeleteDC(hdcmem);
 			return TRUE;
@@ -606,7 +619,7 @@ void CreateListView(int idc) {
 
 	col.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
 	col.fmt  = LVCFMT_LEFT;
-	
+
 	col.pszText  = _("Title");
 	col.cx       = 170;
 	col.iSubItem = 0;
@@ -1417,9 +1430,9 @@ void CreateMainMenu() {
 	ADDSEPARATOR(0);
 	ADDSUBMENUS(0, 1, _("&States"));
 	ADDSEPARATOR(0);
-	ADDMENUITEM(0, _("Run &EXE"), ID_FILE_RUN_EXE);
+	ADDMENUITEM(0, _("Run &EXE..."), ID_FILE_RUN_EXE);
 	ADDMENUITEM(0, _("Run &BIOS"), ID_FILE_RUNBIOS);
-	ADDMENUITEM(0, _("Run &ISO"), ID_FILE_RUN_ISO);
+	ADDMENUITEM(0, _("Run &ISO..."), ID_FILE_RUN_ISO);
 	ADDMENUITEM(0, _("Run &CD"), ID_FILE_RUN_CD);
 	ADDSUBMENUS(1, 3, _("&Save"));
 	ADDSUBMENUS(1, 2, _("&Load"));
@@ -1437,23 +1450,26 @@ void CreateMainMenu() {
 	ADDMENUITEM(3, _("Slot &1"), ID_FILE_STATES_SAVE_SLOT1);
 
 	ADDSUBMENU(0, _("&Emulator"));
-	ADDMENUITEM(0, _("S&witch ISO"), ID_EMULATOR_SWITCH_ISO);
+	ADDMENUITEM(0, _("S&witch ISO..."), ID_EMULATOR_SWITCH_ISO);
 	ADDSEPARATOR(0);
 	ADDMENUITEM(0, _("Re&set"), ID_EMULATOR_RESET);
 	ADDMENUITEM(0, _("&Run"), ID_EMULATOR_RUN);
 
 	ADDSUBMENU(0, _("&Configuration"));
-	ADDMENUITEM(0, _("&Memory cards"), ID_CONFIGURATION_MEMORYCARDMANAGER);
-	ADDMENUITEM(0, _("C&PU"), ID_CONFIGURATION_CPU);
+	ADDMENUITEM(0, _("Cheat &Search..."), ID_CONFIGURATION_CHEATSEARCH);
+	ADDMENUITEM(0, _("Ch&eat Code..."), ID_CONFIGURATION_CHEATLIST);
 	ADDSEPARATOR(0);
-	ADDMENUITEM(0, _("&NetPlay"), ID_CONFIGURATION_NETPLAY);
+	ADDMENUITEM(0, _("&Memory cards..."), ID_CONFIGURATION_MEMORYCARDMANAGER);
+	ADDMENUITEM(0, _("C&PU..."), ID_CONFIGURATION_CPU);
 	ADDSEPARATOR(0);
-	ADDMENUITEM(0, _("&Controllers"), ID_CONFIGURATION_CONTROLLERS);
-	ADDMENUITEM(0, _("CD-&ROM"), ID_CONFIGURATION_CDROM);
-	ADDMENUITEM(0, _("&Sound"), ID_CONFIGURATION_SOUND);
-	ADDMENUITEM(0, _("&Graphics"), ID_CONFIGURATION_GRAPHICS);
+	ADDMENUITEM(0, _("&NetPlay..."), ID_CONFIGURATION_NETPLAY);
 	ADDSEPARATOR(0);
-	ADDMENUITEM(0, _("&Plugins && Bios"), ID_CONFIGURATION);
+	ADDMENUITEM(0, _("&Controllers..."), ID_CONFIGURATION_CONTROLLERS);
+	ADDMENUITEM(0, _("CD-&ROM..."), ID_CONFIGURATION_CDROM);
+	ADDMENUITEM(0, _("&Sound..."), ID_CONFIGURATION_SOUND);
+	ADDMENUITEM(0, _("&Graphics..."), ID_CONFIGURATION_GRAPHICS);
+	ADDSEPARATOR(0);
+	ADDMENUITEM(0, _("&Plugins && Bios..."), ID_CONFIGURATION);
 
 	ADDSUBMENU(0, _("&Language"));
 
@@ -1508,6 +1524,7 @@ void CreateMainMenu() {
 		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT4, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT5, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_OTHER, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CHEATSEARCH, MF_BYCOMMAND | MF_GRAYED);
 	}
 }
 
@@ -1645,7 +1662,7 @@ void SysPrintf(char *fmt, ...) {
 	WriteConsole(hConsole, msg, (DWORD)strlen(msg), &tmp, 0);
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
-	fprintf(emuLog, "%s", msg);
+	if (emuLog != NULL) fprintf(emuLog, "%s", msg);
 #endif
 #endif
 }
