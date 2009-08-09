@@ -11,6 +11,8 @@ August 9, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * win32/gui/ConfigurePlugins.c: Likewise.
  * win32/gui/Win32.h: Added prototype from CheatDlg.c.
  * win32/gui/WndMain.c: Added Cheat functions to the menu.
+ * win32/glue/stdint.h: Added a "no warranty" disclaimer.
+ * win32/glue/sys/mman.h: Likewise.
 
 August 5, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
