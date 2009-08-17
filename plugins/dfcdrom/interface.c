@@ -17,6 +17,7 @@
 
 #ifdef ENABLE_NLS
 #include <libintl.h>
+#include <locale.h>
 #define _(x) gettext(x)
 #else
 #define _(x) (x)

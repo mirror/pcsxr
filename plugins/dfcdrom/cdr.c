@@ -5,6 +5,8 @@
  *
  */
 
+#include "config.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -16,6 +18,16 @@
 #include <string.h>
 
 #include "cdr.h"
+
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#include <locale.h>
+#define _(x)  gettext(x)
+#define N_(x) (x)
+#else
+#define _(x)  (x)
+#define N_(x) (x)
+#endif
 
 #ifdef __linux__
 
@@ -41,16 +53,16 @@ unsigned char* (*fGetBuffer)();
 
 void *CdrThread(void *arg);
 
-char *LibName = "CD-ROM Drive Reader";
+char *LibName = N_("CD-ROM Drive Reader");
 
 #else
 
-char *LibName = "CDR NULL Plugin";
+char *LibName = N_("CDR NULL Plugin");
 
 #endif
 
 char *PSEgetLibName(void) {
-	return LibName;
+	return _(LibName);
 }
 
 unsigned long PSEgetLibType(void) {

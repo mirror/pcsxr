@@ -24,6 +24,8 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#include "config.h"
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -43,11 +45,20 @@
 #include <pthread.h>
 #include <errno.h>
 #include "padjoy.h"
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#include <locale.h>
+#define _(x)  gettext(x)
+#define N_(x) (x)
+#else
+#define _(x)  (x)
+#define N_(x) (x)
+#endif
 
 #ifdef __linux__
-char *LibName = "Gamepad/Keyboard Input";
+char *LibName = N_("Gamepad/Keyboard Input");
 #else
-char *LibName = "Keyboard Input";
+char *LibName = N_("Keyboard Input");
 #endif
 
 // Prototypes
@@ -147,7 +158,7 @@ unsigned short PadStat[MAXDEVICES] = {0xffff, 0xffff};
 int AnalogValue[MAXDEVICES][MAXPSXBUTTONS-4] = {{127,127,127,127}, {127,127,127,127}};
 
 char *PSEgetLibName(void) {
-    return LibName;
+    return _(LibName);
 }
 
 uint32_t PSEgetLibType(void) {

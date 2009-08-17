@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-29 21:04+0800\n"
+"POT-Creation-Date: 2009-08-17 19:14+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,21 +33,22 @@ msgid ""
 "Ryan Schultz, Andrew Burton, Stephen Chao,\n"
 "Marcus Comstedt, Stefan Sikora\n"
 "\n"
-"PCSX Reloaded By:\n"
+"PCSX-Reloaded By:\n"
 "Wei Mingzhi\n"
 "\n"
 "http://www.codeplex.com/pcsxr"
 msgstr ""
 
-#: ../win32/gui/AboutDlg.c:46 ../plugins/peopsxgl/gpucfg/interface.c:830
+#: ../win32/gui/AboutDlg.c:46 ../plugins/peopsxgl/gpucfg/interface.c:831
 msgid "About"
 msgstr ""
 
 #: ../win32/gui/AboutDlg.c:48 ../win32/gui/AboutDlg.c:52
-#: ../win32/gui/ConfigurePlugins.c:462 ../win32/gui/ConfigurePlugins.c:593
-#: ../win32/gui/WndMain.c:912 ../win32/gui/WndMain.c:1148
-#: ../plugins/peopsxgl/gpucfg/interface.c:129
-#: ../plugins/peopsxgl/gpucfg/interface.c:842
+#: ../win32/gui/CheatDlg.c:67 ../win32/gui/CheatDlg.c:119
+#: ../win32/gui/ConfigurePlugins.c:461 ../win32/gui/ConfigurePlugins.c:592
+#: ../win32/gui/WndMain.c:925 ../win32/gui/WndMain.c:1161
+#: ../plugins/peopsxgl/gpucfg/interface.c:130
+#: ../plugins/peopsxgl/gpucfg/interface.c:843
 msgid "OK"
 msgstr ""
 
@@ -55,103 +56,238 @@ msgstr ""
 msgid "PCSX EMU\n"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:385
-msgid "This plugin reports that should work correctly"
+#: ../win32/gui/CheatDlg.c:49 ../win32/gui/CheatDlg.c:218
+#: ../win32/gui/CheatDlg.c:265
+msgid "Yes"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:386
-msgid "This plugin reports that should not work correctly"
+#: ../win32/gui/CheatDlg.c:49 ../win32/gui/CheatDlg.c:218
+#: ../win32/gui/CheatDlg.c:265
+msgid "No"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:460
-msgid "Configuration"
+#: ../win32/gui/CheatDlg.c:64 ../gui/Cheat.c:203
+msgid "Edit Cheat"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:463 ../win32/gui/ConfigurePlugins.c:594
-#: ../win32/gui/WndMain.c:913 ../win32/gui/WndMain.c:1149
-#: ../plugins/peopsxgl/gpucfg/interface.c:337
+#: ../win32/gui/CheatDlg.c:65 ../win32/gui/CheatDlg.c:117 ../gui/Cheat.c:695
+msgid "Description:"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:66 ../win32/gui/CheatDlg.c:118 ../gui/Cheat.c:135
+#: ../gui/Cheat.c:220
+msgid "Cheat Code:"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:68 ../win32/gui/CheatDlg.c:120
+#: ../win32/gui/ConfigurePlugins.c:462 ../win32/gui/ConfigurePlugins.c:593
+#: ../win32/gui/WndMain.c:926 ../win32/gui/WndMain.c:1162
+#: ../plugins/peopsxgl/gpucfg/interface.c:338
 msgid "Cancel"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:464
+#: ../win32/gui/CheatDlg.c:89 ../win32/gui/CheatDlg.c:130
+#: ../win32/gui/ConfigurePlugins.c:283 ../gui/Cheat.c:165 ../gui/Cheat.c:260
+#: ../gui/LnxMain.c:355
+msgid "Error"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:89 ../win32/gui/CheatDlg.c:130 ../gui/Cheat.c:165
+#: ../gui/Cheat.c:260
+msgid "Invalid cheat code!"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:116 ../gui/Cheat.c:119
+msgid "Add New Cheat"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:164 ../data/pcsx.glade2:2255
+msgid "Edit Cheat Codes"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:166
+msgid "&Add Code"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:167
+msgid "&Edit Code"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:168
+msgid "&Remove Code"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:169
+msgid "&Enable/Disable"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:170
+msgid "&Load..."
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:171
+msgid "&Save As..."
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:172
+msgid "&Close"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:183 ../gui/Cheat.c:463
+msgid "Description"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:188
+msgid "Enabled"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:277 ../win32/gui/CheatDlg.c:306
+msgid "PCSX Cheat Code Files"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:392 ../gui/Cheat.c:1182 ../data/pcsx.glade2:2479
+msgid "Cheat Search"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:394 ../data/pcsx.glade2:2526
+msgid "Search For:"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:395 ../data/pcsx.glade2:2536
+msgid "Data Type:"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:396 ../gui/Cheat.c:706 ../data/pcsx.glade2:2548
+msgid "Value:"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:397 ../data/pcsx.glade2:2560
+msgid "Data Base:"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:398 ../data/pcsx.glade2:2620
+msgid "To:"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:399
+msgid "&Freeze"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:400
+msgid "&Modify"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:401
+msgid "&Copy"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:402
+msgid "&Search"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:403
+msgid "&New Search"
+msgstr ""
+
+#: ../win32/gui/CheatDlg.c:404
+msgid "C&lose"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:283
+msgid "Configuration not OK!"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:384
+msgid "This plugin reports that should work correctly"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:385
+msgid "This plugin reports that should not work correctly"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:459
+msgid "Configuration"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:463
 msgid "Graphics"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:465
+#: ../win32/gui/ConfigurePlugins.c:464
 msgid "First Controller"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:466
+#: ../win32/gui/ConfigurePlugins.c:465
 msgid "Second Controller"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:467
+#: ../win32/gui/ConfigurePlugins.c:466
 msgid "Sound"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:468
+#: ../win32/gui/ConfigurePlugins.c:467
 msgid "Cdrom"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:469
+#: ../win32/gui/ConfigurePlugins.c:468
 msgid "Bios"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:470
+#: ../win32/gui/ConfigurePlugins.c:469
 msgid "Set Bios Directory"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:471
+#: ../win32/gui/ConfigurePlugins.c:470
 msgid "Set Plugins Directory"
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:471 ../win32/gui/ConfigurePlugins.c:474
+#: ../win32/gui/ConfigurePlugins.c:477 ../win32/gui/ConfigurePlugins.c:480
+#: ../win32/gui/ConfigurePlugins.c:483 ../win32/gui/ConfigurePlugins.c:595
+msgid "Configure..."
 msgstr ""
 
 #: ../win32/gui/ConfigurePlugins.c:472 ../win32/gui/ConfigurePlugins.c:475
 #: ../win32/gui/ConfigurePlugins.c:478 ../win32/gui/ConfigurePlugins.c:481
 #: ../win32/gui/ConfigurePlugins.c:484 ../win32/gui/ConfigurePlugins.c:596
-msgid "Configure..."
+msgid "Test..."
 msgstr ""
 
 #: ../win32/gui/ConfigurePlugins.c:473 ../win32/gui/ConfigurePlugins.c:476
 #: ../win32/gui/ConfigurePlugins.c:479 ../win32/gui/ConfigurePlugins.c:482
 #: ../win32/gui/ConfigurePlugins.c:485 ../win32/gui/ConfigurePlugins.c:597
-msgid "Test..."
-msgstr ""
-
-#: ../win32/gui/ConfigurePlugins.c:474 ../win32/gui/ConfigurePlugins.c:477
-#: ../win32/gui/ConfigurePlugins.c:480 ../win32/gui/ConfigurePlugins.c:483
-#: ../win32/gui/ConfigurePlugins.c:486 ../win32/gui/ConfigurePlugins.c:598
 msgid "About..."
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:591
+#: ../win32/gui/ConfigurePlugins.c:590
 msgid "NetPlay Configuration"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:595
+#: ../win32/gui/ConfigurePlugins.c:594
 msgid "NetPlay"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:599
+#: ../win32/gui/ConfigurePlugins.c:598
 msgid ""
 "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
 msgstr ""
 
-#: ../win32/gui/plugin.c:90 ../win32/gui/WndMain.c:241
+#: ../win32/gui/plugin.c:90 ../win32/gui/WndMain.c:243
 #, c-format
 msgid "*PCSX*: Saved State %d"
 msgstr ""
 
-#: ../win32/gui/plugin.c:91 ../win32/gui/WndMain.c:242
+#: ../win32/gui/plugin.c:91 ../win32/gui/WndMain.c:244
 #, c-format
 msgid "*PCSX*: Error Saving State %d"
 msgstr ""
 
-#: ../win32/gui/plugin.c:107 ../win32/gui/WndMain.c:220
+#: ../win32/gui/plugin.c:107 ../win32/gui/WndMain.c:221
 #, c-format
 msgid "*PCSX*: Loaded State %d"
 msgstr ""
 
-#: ../win32/gui/plugin.c:108 ../win32/gui/WndMain.c:221
+#: ../win32/gui/plugin.c:108 ../win32/gui/WndMain.c:222
 #, c-format
 msgid "*PCSX*: Error Loading State %d"
 msgstr ""
@@ -277,417 +413,425 @@ msgstr ""
 msgid "NETinit error: %d"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:74
+#: ../win32/gui/WndMain.c:75
 msgid "Arabic"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:75
+#: ../win32/gui/WndMain.c:76
 msgid "Catalan"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:76
+#: ../win32/gui/WndMain.c:77
 msgid "German"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:77
+#: ../win32/gui/WndMain.c:78
 msgid "Greek"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:78 ../win32/gui/WndMain.c:1477
-#: ../win32/gui/WndMain.c:1479
+#: ../win32/gui/WndMain.c:79 ../win32/gui/WndMain.c:1493
+#: ../win32/gui/WndMain.c:1495
 msgid "English"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:79
+#: ../win32/gui/WndMain.c:80
 msgid "Spanish"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:80
+#: ../win32/gui/WndMain.c:81
 msgid "French"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:81
+#: ../win32/gui/WndMain.c:82
 msgid "Italian"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:82
+#: ../win32/gui/WndMain.c:83
 msgid "Portuguese"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:83
+#: ../win32/gui/WndMain.c:84
 msgid "Romanian"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:84
+#: ../win32/gui/WndMain.c:85
 msgid "Russian"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:85
+#: ../win32/gui/WndMain.c:86
 msgid "Simplified Chinese"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:86
+#: ../win32/gui/WndMain.c:87
 msgid "Traditional Chinese"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:87
+#: ../win32/gui/WndMain.c:88
 msgid "Japanese"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:88
+#: ../win32/gui/WndMain.c:89
 msgid "Korean"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:259 ../win32/gui/WndMain.c:311
+#: ../win32/gui/WndMain.c:262 ../win32/gui/WndMain.c:314
 msgid "PCSX State Format"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:286
+#: ../win32/gui/WndMain.c:289
 #, c-format
 msgid "*PCSX*: Loaded State %s"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:287
+#: ../win32/gui/WndMain.c:290
 #, c-format
 msgid "*PCSX*: Error Loading State %s"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:338
+#: ../win32/gui/WndMain.c:341
 #, c-format
 msgid "*PCSX*: Saved State %s"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:339
+#: ../win32/gui/WndMain.c:342
 #, c-format
 msgid "*PCSX*: Error Saving State %s"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:388 ../win32/gui/WndMain.c:437 ../gui/Gtk2Gui.c:553
+#: ../win32/gui/WndMain.c:391 ../win32/gui/WndMain.c:440 ../gui/Gtk2Gui.c:553
 #: ../gui/Gtk2Gui.c:680
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:394 ../win32/gui/WndMain.c:443 ../gui/Gtk2Gui.c:561
+#: ../win32/gui/WndMain.c:397 ../win32/gui/WndMain.c:446 ../gui/Gtk2Gui.c:561
 #: ../gui/Gtk2Gui.c:688
 msgid "Could not load CD-ROM!"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:404
+#: ../win32/gui/WndMain.c:407
 msgid "Running BIOS is not supported with Internal HLE Bios."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:610 ../gui/Gtk2Gui.c:1053
+#: ../win32/gui/WndMain.c:623 ../gui/Gtk2Gui.c:1053
 msgid "Title"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:616 ../gui/Gtk2Gui.c:1059
+#: ../win32/gui/WndMain.c:629 ../gui/Gtk2Gui.c:1059
 msgid "Status"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:622
+#: ../win32/gui/WndMain.c:635
 msgid "Game ID"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:628
+#: ../win32/gui/WndMain.c:641
 msgid "Game"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:802
+#: ../win32/gui/WndMain.c:815
 msgid "mid link block"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:805
+#: ../win32/gui/WndMain.c:818
 msgid "terminiting link block"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:813 ../gui/Gtk2Gui.c:1133
+#: ../win32/gui/WndMain.c:826 ../gui/Gtk2Gui.c:1133
 msgid "Deleted"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:814 ../win32/gui/WndMain.c:817 ../gui/Gtk2Gui.c:1135
+#: ../win32/gui/WndMain.c:827 ../win32/gui/WndMain.c:830 ../gui/Gtk2Gui.c:1135
 #: ../gui/Gtk2Gui.c:1139
 msgid "Free"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:816 ../gui/Gtk2Gui.c:1137
+#: ../win32/gui/WndMain.c:829 ../gui/Gtk2Gui.c:1137
 msgid "Used"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:910
+#: ../win32/gui/WndMain.c:923
 msgid "Memcard Manager"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:914 ../win32/gui/WndMain.c:917
+#: ../win32/gui/WndMain.c:927 ../win32/gui/WndMain.c:930
 msgid "Select Mcd"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:915 ../win32/gui/WndMain.c:918
+#: ../win32/gui/WndMain.c:928 ../win32/gui/WndMain.c:931
 msgid "Format Mcd"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:916 ../win32/gui/WndMain.c:919
+#: ../win32/gui/WndMain.c:929 ../win32/gui/WndMain.c:932
 msgid "Reload Mcd"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:920
+#: ../win32/gui/WndMain.c:933
 msgid "-> Copy ->"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:921
+#: ../win32/gui/WndMain.c:934
 msgid "<- Copy <-"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:922
+#: ../win32/gui/WndMain.c:935
 msgid "Paste"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:923
+#: ../win32/gui/WndMain.c:936
 msgid "<- Un/Delete"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:924
+#: ../win32/gui/WndMain.c:937
 msgid "Un/Delete ->"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:926
+#: ../win32/gui/WndMain.c:939
 msgid "Memory Card 1"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:927
+#: ../win32/gui/WndMain.c:940
 msgid "Memory Card 2"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:982
+#: ../win32/gui/WndMain.c:995
 msgid "Are you sure you want to paste this selection?"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:982 ../win32/gui/WndMain.c:1093
-#: ../win32/gui/WndMain.c:1100
+#: ../win32/gui/WndMain.c:995 ../win32/gui/WndMain.c:1106
+#: ../win32/gui/WndMain.c:1113
 msgid "Confirmation"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1093 ../win32/gui/WndMain.c:1100
+#: ../win32/gui/WndMain.c:1106 ../win32/gui/WndMain.c:1113
 msgid "Are you sure you want to format this Memory Card?"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1146
+#: ../win32/gui/WndMain.c:1159
 msgid "Cpu Config"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1151
+#: ../win32/gui/WndMain.c:1164
 msgid "Disable Xa Decoding"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1152
+#: ../win32/gui/WndMain.c:1165
 msgid "Sio Irq Always Enabled"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1153
+#: ../win32/gui/WndMain.c:1166
 msgid "Black && White Movies"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1154
+#: ../win32/gui/WndMain.c:1167
 msgid "Disable Cd audio"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1155 ../data/pcsx.glade2:1356
+#: ../win32/gui/WndMain.c:1168 ../data/pcsx.glade2:1356
 msgid "Autodetect"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1156
+#: ../win32/gui/WndMain.c:1169
 msgid "Enable Interpreter Cpu"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1157 ../data/pcsx.glade2:1212
+#: ../win32/gui/WndMain.c:1170 ../data/pcsx.glade2:1212
 msgid "Enable Console Output"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1158
+#: ../win32/gui/WndMain.c:1171
 msgid "Spu Irq Always Enabled"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1159 ../data/pcsx.glade2:1299
+#: ../win32/gui/WndMain.c:1172 ../data/pcsx.glade2:1299
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1160 ../data/pcsx.glade2:1314
+#: ../win32/gui/WndMain.c:1173 ../data/pcsx.glade2:1314
 msgid "InuYasha Sengoku Battle Fix"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1162 ../plugins/dfcdrom/interface.c:193
+#: ../win32/gui/WndMain.c:1175 ../plugins/dfcdrom/interface.c:194
 msgid "Options"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1163
+#: ../win32/gui/WndMain.c:1176
 msgid "Psx System Type"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1235
+#: ../win32/gui/WndMain.c:1248
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1240
+#: ../win32/gui/WndMain.c:1253
 msgid "Psx Memory Card (*.mcr;*.mc)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1245
+#: ../win32/gui/WndMain.c:1258
 msgid "CVGS Memory Card (*.mem;*.vgs)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1250
+#: ../win32/gui/WndMain.c:1263
 msgid "Bleem Memory Card (*.mcd)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1255
+#: ../win32/gui/WndMain.c:1268
 msgid "DexDrive Memory Card (*.gme)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1260
+#: ../win32/gui/WndMain.c:1273
 msgid "DataDeck Memory Card (*.ddf)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1265 ../win32/gui/WndMain.c:1346 ../gui/Cheat.c:373
+#: ../win32/gui/WndMain.c:1278 ../win32/gui/WndMain.c:1359 ../gui/Cheat.c:373
 #: ../gui/Gtk2Gui.c:631
 msgid "All Files"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1304
+#: ../win32/gui/WndMain.c:1317
 msgid "Psx Exe Format"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1341
+#: ../win32/gui/WndMain.c:1354
 msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1415
+#: ../win32/gui/WndMain.c:1428
 msgid "&File"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1416
+#: ../win32/gui/WndMain.c:1429
 msgid "E&xit"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1418
+#: ../win32/gui/WndMain.c:1431
 msgid "&States"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1420
-msgid "Run &EXE"
+#: ../win32/gui/WndMain.c:1433
+msgid "Run &EXE..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1421
+#: ../win32/gui/WndMain.c:1434
 msgid "Run &BIOS"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1422
-msgid "Run &ISO"
+#: ../win32/gui/WndMain.c:1435
+msgid "Run &ISO..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1423
+#: ../win32/gui/WndMain.c:1436
 msgid "Run &CD"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1424
+#: ../win32/gui/WndMain.c:1437
 msgid "&Save"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1425
+#: ../win32/gui/WndMain.c:1438
 msgid "&Load"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1426 ../win32/gui/WndMain.c:1432
+#: ../win32/gui/WndMain.c:1439 ../win32/gui/WndMain.c:1445
 msgid "&Other..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1427 ../win32/gui/WndMain.c:1433
+#: ../win32/gui/WndMain.c:1440 ../win32/gui/WndMain.c:1446
 msgid "Slot &5"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1428 ../win32/gui/WndMain.c:1434
+#: ../win32/gui/WndMain.c:1441 ../win32/gui/WndMain.c:1447
 msgid "Slot &4"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1429 ../win32/gui/WndMain.c:1435
+#: ../win32/gui/WndMain.c:1442 ../win32/gui/WndMain.c:1448
 msgid "Slot &3"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1430 ../win32/gui/WndMain.c:1436
+#: ../win32/gui/WndMain.c:1443 ../win32/gui/WndMain.c:1449
 msgid "Slot &2"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1431 ../win32/gui/WndMain.c:1437
+#: ../win32/gui/WndMain.c:1444 ../win32/gui/WndMain.c:1450
 msgid "Slot &1"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1439
+#: ../win32/gui/WndMain.c:1452
 msgid "&Emulator"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1440
-msgid "S&witch ISO"
+#: ../win32/gui/WndMain.c:1453
+msgid "S&witch ISO..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1442
+#: ../win32/gui/WndMain.c:1455
 msgid "Re&set"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1443
+#: ../win32/gui/WndMain.c:1456
 msgid "&Run"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1445
+#: ../win32/gui/WndMain.c:1458
 msgid "&Configuration"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1446
-msgid "&Memory cards"
+#: ../win32/gui/WndMain.c:1459
+msgid "Cheat &Search..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1447
-msgid "C&PU"
+#: ../win32/gui/WndMain.c:1460
+msgid "Ch&eat Code..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1449
-msgid "&NetPlay"
+#: ../win32/gui/WndMain.c:1462
+msgid "&Memory cards..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1451
-msgid "&Controllers"
+#: ../win32/gui/WndMain.c:1463
+msgid "C&PU..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1452
-msgid "CD-&ROM"
+#: ../win32/gui/WndMain.c:1465
+msgid "&NetPlay..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1453
-msgid "&Sound"
+#: ../win32/gui/WndMain.c:1467
+msgid "&Controllers..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1454
-msgid "&Graphics"
+#: ../win32/gui/WndMain.c:1468
+msgid "CD-&ROM..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1456
-msgid "&Plugins && Bios"
+#: ../win32/gui/WndMain.c:1469
+msgid "&Sound..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1458
+#: ../win32/gui/WndMain.c:1470
+msgid "&Graphics..."
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1472
+msgid "&Plugins && Bios..."
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1474
 msgid "&Language"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1482
+#: ../win32/gui/WndMain.c:1498
 msgid "&Help"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1483
+#: ../win32/gui/WndMain.c:1499
 msgid "&About..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1660
+#: ../win32/gui/WndMain.c:1677
 msgid "Pcsx Msg"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1663
+#: ../win32/gui/WndMain.c:1680
 msgid "Error Loading Symbol"
 msgstr ""
 
@@ -695,28 +839,8 @@ msgstr ""
 msgid " Yes"
 msgstr ""
 
-#: ../gui/Cheat.c:119
-msgid "Add New Cheat"
-msgstr ""
-
 #: ../gui/Cheat.c:127 ../gui/Cheat.c:211
 msgid "Cheat Description:"
-msgstr ""
-
-#: ../gui/Cheat.c:135 ../gui/Cheat.c:220
-msgid "Cheat Code:"
-msgstr ""
-
-#: ../gui/Cheat.c:165 ../gui/Cheat.c:260 ../gui/LnxMain.c:355
-msgid "Error"
-msgstr ""
-
-#: ../gui/Cheat.c:165 ../gui/Cheat.c:260
-msgid "Invalid cheat code!"
-msgstr ""
-
-#: ../gui/Cheat.c:203
-msgid "Edit Cheat"
 msgstr ""
 
 #: ../gui/Cheat.c:358
@@ -746,10 +870,6 @@ msgstr ""
 
 #: ../gui/Cheat.c:457 ../data/pcsx.glade2:2365
 msgid "Enable"
-msgstr ""
-
-#: ../gui/Cheat.c:463
-msgid "Description"
 msgstr ""
 
 #: ../gui/Cheat.c:603
@@ -784,24 +904,12 @@ msgstr ""
 msgid "Freeze value"
 msgstr ""
 
-#: ../gui/Cheat.c:695
-msgid "Description:"
-msgstr ""
-
-#: ../gui/Cheat.c:706 ../data/pcsx.glade2:2548
-msgid "Value:"
-msgstr ""
-
 #: ../gui/Cheat.c:788
 msgid "Modify value"
 msgstr ""
 
 #: ../gui/Cheat.c:796
 msgid "New value:"
-msgstr ""
-
-#: ../gui/Cheat.c:1182 ../data/pcsx.glade2:2479
-msgid "Cheat Search"
 msgstr ""
 
 #: ../gui/Cheat.c:1187
@@ -1046,12 +1154,22 @@ msgstr ""
 msgid "Error closing GPU plugin!"
 msgstr ""
 
-#: ../libpcsxcore/cdriso.c:124
+#: ../libpcsxcore/cdriso.c:399
 #, c-format
-msgid "Could not open %s.\n"
+msgid "Loaded CD Image: %s"
 msgstr ""
 
-#: ../libpcsxcore/cheat.c:321 ../libpcsxcore/cheat.c:440
+#: ../libpcsxcore/cheat.c:148
+#, c-format
+msgid "Cheats loaded from: %s\n"
+msgstr ""
+
+#: ../libpcsxcore/cheat.c:180
+#, c-format
+msgid "Cheats saved to: %s\n"
+msgstr ""
+
+#: ../libpcsxcore/cheat.c:323 ../libpcsxcore/cheat.c:444
 msgid "(Untitled)"
 msgstr ""
 
@@ -1179,6 +1297,20 @@ msgstr ""
 msgid "Loading memory card %s\n"
 msgstr ""
 
+#: ../plugins/dfxvideo/gpu.c:52
+msgid "XVideo Driver"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpu.c:53
+msgid ""
+"P.E.Op.S. Xvideo Driver V1.17\n"
+"Coded by Pete Bernert and the P.E.Op.S. team\n"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpu.c:55
+msgid "Pete Bernert and the P.E.Op.S. team"
+msgstr ""
+
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:8
 msgid "Configure X11 Video"
 msgstr ""
@@ -1234,7 +1366,7 @@ msgid "Toggle windowed/fullscreen mode."
 msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:154
-#: ../plugins/peopsxgl/gpucfg/interface.c:321
+#: ../plugins/peopsxgl/gpucfg/interface.c:322
 msgid "Fullscreen"
 msgstr ""
 
@@ -1279,7 +1411,7 @@ msgid "<b>Framerate</b>"
 msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:324
-#: ../plugins/peopsxgl/gpucfg/interface.c:567
+#: ../plugins/peopsxgl/gpucfg/interface.c:568
 msgid "Use game fixes"
 msgstr ""
 
@@ -1332,7 +1464,7 @@ msgid "Skip every second frame"
 msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:532
-#: ../plugins/peopsxgl/gpucfg/interface.c:639
+#: ../plugins/peopsxgl/gpucfg/interface.c:640
 msgid "Old frame skipping"
 msgstr ""
 
@@ -1673,10 +1805,6 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
-#: ../data/pcsx.glade2:2255
-msgid "Edit Cheat Codes"
-msgstr ""
-
 #: ../data/pcsx.glade2:2292
 msgid "<b>Cheat Codes</b>"
 msgstr ""
@@ -1716,18 +1844,6 @@ msgid ""
 "32-bit"
 msgstr ""
 
-#: ../data/pcsx.glade2:2526
-msgid "Search For:"
-msgstr ""
-
-#: ../data/pcsx.glade2:2536
-msgid "Data Type:"
-msgstr ""
-
-#: ../data/pcsx.glade2:2560
-msgid "Data Base:"
-msgstr ""
-
 #: ../data/pcsx.glade2:2574
 msgid ""
 "Equal Value\n"
@@ -1745,10 +1861,6 @@ msgstr ""
 msgid ""
 "Decimal\n"
 "Hexadecimal"
-msgstr ""
-
-#: ../data/pcsx.glade2:2620
-msgid "To:"
 msgstr ""
 
 #: ../data/pcsx.glade2:2704
@@ -1773,6 +1885,24 @@ msgstr ""
 
 #: ../data/pcsx.glade2:2909
 msgid "<b>Cheat Search</b>"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:39
+msgid "ALSA Sound"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:41
+msgid "OSS Sound"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:43
+msgid "NULL Sound"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:46
+msgid ""
+"P.E.Op.S. OSS Driver V1.7\n"
+"Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:9
@@ -1878,382 +2008,412 @@ msgstr ""
 msgid "<b>PCSX-df Sound Plugin Adaption</b>"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:73
+#: ../plugins/dfcdrom/cdr.c:56
+msgid "CD-ROM Drive Reader"
+msgstr ""
+
+#: ../plugins/dfcdrom/cdr.c:60
+msgid "CDR NULL Plugin"
+msgstr ""
+
+#: ../plugins/dfcdrom/interface.c:74
 msgid "CDR configuration"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:98
+#: ../plugins/dfcdrom/interface.c:99
 msgid "Choose your CD-ROM device or type its path if it's not listed"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:101
+#: ../plugins/dfcdrom/interface.c:102
 msgid "Select CD-ROM device"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:119
+#: ../plugins/dfcdrom/interface.c:120
 msgid "Select read mode:"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:132
+#: ../plugins/dfcdrom/interface.c:133
 msgid "Normal (No Cache)"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:136
+#: ../plugins/dfcdrom/interface.c:137
 msgid "Threaded - Faster (With Cache)"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:151
+#: ../plugins/dfcdrom/interface.c:152
 msgid "Cache Size (Def. 64):                  "
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:172
+#: ../plugins/dfcdrom/interface.c:173
 msgid "Cdrom Speed (Def. 0 = MAX):    "
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:188
+#: ../plugins/dfcdrom/interface.c:189
 msgid "Enable Subchannel read"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:117
+#: ../plugins/peopsxgl/gpu.c:61
+msgid "OpenGL Driver"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpu.c:63
+msgid "Pete Bernert"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpu.c:64
+msgid ""
+"Based on P.E.Op.S. MesaGL Driver V1.78\n"
+"Coded by Pete Bernert\n"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/interface.c:118
 msgid "OpenGL Driver configuration"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:137
+#: ../plugins/peopsxgl/gpucfg/interface.c:138
 msgid "Textures"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:160
+#: ../plugins/peopsxgl/gpucfg/interface.c:161
 msgid "Quality:"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:177
-#: ../plugins/peopsxgl/gpucfg/interface.c:190
+#: ../plugins/peopsxgl/gpucfg/interface.c:178
+#: ../plugins/peopsxgl/gpucfg/interface.c:191
 msgid "0: don't care - Use driver's default textures"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:178
+#: ../plugins/peopsxgl/gpucfg/interface.c:179
 msgid "1: 4444 - Fast, but less colorful"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:179
+#: ../plugins/peopsxgl/gpucfg/interface.c:180
 msgid "2: 5551 - Nice colors, bad transparency"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:180
+#: ../plugins/peopsxgl/gpucfg/interface.c:181
 msgid "3: 8888 - Best colors, more ram needed"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:181
+#: ../plugins/peopsxgl/gpucfg/interface.c:182
 msgid "4: BGR8888 - Faster on some cards"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:192
+#: ../plugins/peopsxgl/gpucfg/interface.c:193
 msgid "VRam size in MBytes (0..1024, 0=auto):"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:209
-#: ../plugins/peopsxgl/gpucfg/interface.c:224
+#: ../plugins/peopsxgl/gpucfg/interface.c:210
+#: ../plugins/peopsxgl/gpucfg/interface.c:225
 msgid "0: None"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:210
+#: ../plugins/peopsxgl/gpucfg/interface.c:211
 msgid "1: Standard - Glitches will happen"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:211
+#: ../plugins/peopsxgl/gpucfg/interface.c:212
 msgid "2: Extended - No black borders"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:212
+#: ../plugins/peopsxgl/gpucfg/interface.c:213
 msgid "3: Standard without sprites - unfiltered 2D"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:213
+#: ../plugins/peopsxgl/gpucfg/interface.c:214
 msgid "4: Extended without sprites - unfiltered 2D"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:214
+#: ../plugins/peopsxgl/gpucfg/interface.c:215
 msgid "5: Standard + smoothed sprites"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:215
+#: ../plugins/peopsxgl/gpucfg/interface.c:216
 msgid "6: Extended + smoothed sprites"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:226
+#: ../plugins/peopsxgl/gpucfg/interface.c:227
 msgid "Filtering:"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:234
+#: ../plugins/peopsxgl/gpucfg/interface.c:235
 msgid "HiRes Tex:"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:251
-#: ../plugins/peopsxgl/gpucfg/interface.c:262
+#: ../plugins/peopsxgl/gpucfg/interface.c:252
+#: ../plugins/peopsxgl/gpucfg/interface.c:263
 msgid "0: None (standard)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:252
+#: ../plugins/peopsxgl/gpucfg/interface.c:253
 msgid "1: 2xSaI (much vram needed)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:253
+#: ../plugins/peopsxgl/gpucfg/interface.c:254
 msgid "2: Scaled (needs tex filtering)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:264
+#: ../plugins/peopsxgl/gpucfg/interface.c:265
 msgid "Window options"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:295
+#: ../plugins/peopsxgl/gpucfg/interface.c:296
 msgid "Width:"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:304
+#: ../plugins/peopsxgl/gpucfg/interface.c:305
 msgid "Height:"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:313
+#: ../plugins/peopsxgl/gpucfg/interface.c:314
 msgid "Keep psx aspect ratio"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:329
+#: ../plugins/peopsxgl/gpucfg/interface.c:330
 msgid "Dithering"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:345
+#: ../plugins/peopsxgl/gpucfg/interface.c:346
 msgid "Framerate"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:368
+#: ../plugins/peopsxgl/gpucfg/interface.c:369
 msgid "FPS"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:376
+#: ../plugins/peopsxgl/gpucfg/interface.c:377
 msgid "FPS limit manual"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:385
+#: ../plugins/peopsxgl/gpucfg/interface.c:386
 msgid "Show FPS display on startup"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:393
+#: ../plugins/peopsxgl/gpucfg/interface.c:394
 msgid "Use FPS limit"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:401
+#: ../plugins/peopsxgl/gpucfg/interface.c:402
 msgid "FPS limit auto-detection"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:410
+#: ../plugins/peopsxgl/gpucfg/interface.c:411
 msgid "Use Frame skipping"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:418
+#: ../plugins/peopsxgl/gpucfg/interface.c:419
 msgid "Compatibility"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:433
+#: ../plugins/peopsxgl/gpucfg/interface.c:434
 msgid "Advanced blending (Accurate psx color emulation)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:441
+#: ../plugins/peopsxgl/gpucfg/interface.c:442
 msgid "Framebuffer textures:"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:449
+#: ../plugins/peopsxgl/gpucfg/interface.c:450
 msgid "Offscreen Drawing:"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:457
+#: ../plugins/peopsxgl/gpucfg/interface.c:458
 msgid "Framebuffer access:"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:465
+#: ../plugins/peopsxgl/gpucfg/interface.c:466
 msgid "Alpha Multipass (correct opaque texture areas)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:473
+#: ../plugins/peopsxgl/gpucfg/interface.c:474
 msgid "Mask bit detection (needed by a few games, zbuffer)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:490
-#: ../plugins/peopsxgl/gpucfg/interface.c:503
+#: ../plugins/peopsxgl/gpucfg/interface.c:491
+#: ../plugins/peopsxgl/gpucfg/interface.c:504
 msgid "0: None - Fastest, most glitches"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:491
+#: ../plugins/peopsxgl/gpucfg/interface.c:492
 msgid "1: Minimum - Missing screens"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:492
+#: ../plugins/peopsxgl/gpucfg/interface.c:493
 msgid "2: Standard - OK for most games"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:493
+#: ../plugins/peopsxgl/gpucfg/interface.c:494
 msgid "3: Enhanced - Shows more stuff"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:494
+#: ../plugins/peopsxgl/gpucfg/interface.c:495
 msgid "4: Extended - Causing garbage"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:514
-#: ../plugins/peopsxgl/gpucfg/interface.c:526
+#: ../plugins/peopsxgl/gpucfg/interface.c:515
+#: ../plugins/peopsxgl/gpucfg/interface.c:527
 msgid "0: Emulated vram - Needs FVP"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:515
+#: ../plugins/peopsxgl/gpucfg/interface.c:516
 msgid "1: Black - Fast, no effects"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:516
+#: ../plugins/peopsxgl/gpucfg/interface.c:517
 msgid "2: Gfx card buffer - Can be slow"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:517
+#: ../plugins/peopsxgl/gpucfg/interface.c:518
 msgid "3: Gfx card & soft - slow"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:537
-#: ../plugins/peopsxgl/gpucfg/interface.c:550
+#: ../plugins/peopsxgl/gpucfg/interface.c:538
+#: ../plugins/peopsxgl/gpucfg/interface.c:551
 msgid "0: Emulated vram - ok most times"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:538
+#: ../plugins/peopsxgl/gpucfg/interface.c:539
 msgid "1: Gfx card buffer reads"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:539
+#: ../plugins/peopsxgl/gpucfg/interface.c:540
 msgid "2: Gfx card buffer moves"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:540
+#: ../plugins/peopsxgl/gpucfg/interface.c:541
 msgid "3: Gfx buffer reads & moves"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:541
+#: ../plugins/peopsxgl/gpucfg/interface.c:542
 msgid "4: Full Software (FVP)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:552
+#: ../plugins/peopsxgl/gpucfg/interface.c:553
 msgid "Special game fixes"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:575
+#: ../plugins/peopsxgl/gpucfg/interface.c:576
 msgid "Battle cursor (FF7)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:583
+#: ../plugins/peopsxgl/gpucfg/interface.c:584
 msgid "Direct FB updates"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:591
+#: ../plugins/peopsxgl/gpucfg/interface.c:592
 msgid "Black brightness (Lunar)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:599
+#: ../plugins/peopsxgl/gpucfg/interface.c:600
 msgid "Swap front detection"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:607
+#: ../plugins/peopsxgl/gpucfg/interface.c:608
 msgid "Disable coord check"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:615
+#: ../plugins/peopsxgl/gpucfg/interface.c:616
 msgid "No blue glitches (LoD)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:623
+#: ../plugins/peopsxgl/gpucfg/interface.c:624
 msgid "Soft FB access"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:631
+#: ../plugins/peopsxgl/gpucfg/interface.c:632
 msgid "PC fps calculation"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:647
+#: ../plugins/peopsxgl/gpucfg/interface.c:648
 msgid "Yellow rect (FF9)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:655
+#: ../plugins/peopsxgl/gpucfg/interface.c:656
 msgid "No subtr. blending"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:663
+#: ../plugins/peopsxgl/gpucfg/interface.c:664
 msgid "Lazy upload (DW7)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:671
+#: ../plugins/peopsxgl/gpucfg/interface.c:672
 msgid "Odd/even hack"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:679
+#: ../plugins/peopsxgl/gpucfg/interface.c:680
 msgid "Adjust screen width"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:687
+#: ../plugins/peopsxgl/gpucfg/interface.c:688
 msgid "Old texture filtering"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:695
+#: ../plugins/peopsxgl/gpucfg/interface.c:696
 msgid "Additional uploads"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:703
+#: ../plugins/peopsxgl/gpucfg/interface.c:704
 msgid "unused"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:711
+#: ../plugins/peopsxgl/gpucfg/interface.c:712
 msgid "Fake 'gpu busy'"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:719
+#: ../plugins/peopsxgl/gpucfg/interface.c:720
 msgid "Misc"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:742
+#: ../plugins/peopsxgl/gpucfg/interface.c:743
 msgid "Scanlines"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:750
+#: ../plugins/peopsxgl/gpucfg/interface.c:751
 msgid "Blending (0..255, -1=dot):"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:758
+#: ../plugins/peopsxgl/gpucfg/interface.c:759
 msgid "Screen smoothing (can be slow or unsupported)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:766
+#: ../plugins/peopsxgl/gpucfg/interface.c:767
 msgid "Use OpenGL extensions (recommended)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:774
+#: ../plugins/peopsxgl/gpucfg/interface.c:775
 msgid "Polygon anti-aliasing (slow with most cards)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:782
+#: ../plugins/peopsxgl/gpucfg/interface.c:783
 msgid "Line mode (polygons will not get filled)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:790
+#: ../plugins/peopsxgl/gpucfg/interface.c:791
 msgid "Force 15 bit framebuffer updates (faster movies)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:798
+#: ../plugins/peopsxgl/gpucfg/interface.c:799
 msgid "Unfiltered MDECs (small movie speedup)"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:851
+#: ../plugins/peopsxgl/gpucfg/interface.c:852
 msgid "Adapted from P.E.Op.S OpenGL GPU by Pete Bernert"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:860
+#: ../plugins/peopsxgl/gpucfg/interface.c:861
 msgid "Homepage: http://www.pbernert.com"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/interface.c:878
+#: ../plugins/peopsxgl/gpucfg/interface.c:879
 msgid "Version: 1.78"
+msgstr ""
+
+#: ../plugins/dfinput/pad.c:59
+msgid "Gamepad/Keyboard Input"
+msgstr ""
+
+#: ../plugins/dfinput/pad.c:61
+msgid "Keyboard Input"
 msgstr ""
 
 #: ../plugins/dfinput/dfinput.glade2:7

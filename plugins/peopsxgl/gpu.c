@@ -20,6 +20,7 @@
 //#define NOVMODE
 
 #include "stdafx.h"
+#include "config.h"
 
 #ifndef NOVMODE
 #include <X11/extensions/xf86vmode.h>
@@ -39,7 +40,15 @@ static int iOldMode=0;
 #include "menu.h"
 #include "fps.h"
 #include "key.h"
-
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#include <locale.h>
+#define _(x)  gettext(x)
+#define N_(x) (x)
+#else
+#define _(x)  (x)
+#define N_(x) (x)
+#endif
                                
 ////////////////////////////////////////////////////////////////////////
 // PPDK developer must change libraryName field and can change revision and build
@@ -49,10 +58,10 @@ const  unsigned char version  = 1;    // do not touch - library for PSEmu 1.x
 const  unsigned char revision = 1;
 const  unsigned char build    = 78;
 
-static char *libraryName     = "OpenGL Driver";
+static char *libraryName     = N_("OpenGL Driver");
 
-static char *PluginAuthor    = "Pete Bernert";
-static char *libraryInfo     = "Based on P.E.Op.S. MesaGL Driver V1.78\nCoded by Pete Bernert\n";
+static char *PluginAuthor    = N_("Pete Bernert");
+static char *libraryInfo     = N_("Based on P.E.Op.S. MesaGL Driver V1.78\nCoded by Pete Bernert\n");
 
 ////////////////////////////////////////////////////////////////////////
 // memory image of the PSX vram
@@ -137,7 +146,7 @@ int             iRumbleTime   = 0;
 
 char * CALLBACK PSEgetLibName(void)
 {
- return libraryName;
+ return _(libraryName);
 }
 
 unsigned long CALLBACK PSEgetLibType(void)
@@ -152,7 +161,7 @@ unsigned long CALLBACK PSEgetLibVersion(void)
 
 char * GPUgetLibInfos(void)
 {
- return libraryInfo;
+ return _(libraryInfo);
 }
 
 ////////////////////////////////////////////////////////////////////////

@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "config.h"
+
 #define _IN_GPU
 
 #include "externals.h"
@@ -29,6 +31,16 @@
 #include "fps.h"
 #include "swap.h"
 
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#include <locale.h>
+#define _(x)  gettext(x)
+#define N_(x) (x)
+#else
+#define _(x)  (x)
+#define N_(x) (x)
+#endif
+
 ////////////////////////////////////////////////////////////////////////
 // PPDK developer must change libraryName field and can change revision and build
 ////////////////////////////////////////////////////////////////////////
@@ -37,10 +49,10 @@ const  unsigned char version  = 1;    // do not touch - library for PSEmu 1.x
 const  unsigned char revision = 1;
 const  unsigned char build    = 17;   // increase that with each version
 
-static char *libraryName      = "XVideo Driver";
-static char *libraryInfo      = "P.E.Op.S. Xvideo Driver V1.17\nCoded by Pete Bernert and the P.E.Op.S. team\n";
+static char *libraryName      = N_("XVideo Driver");
+static char *libraryInfo      = N_("P.E.Op.S. Xvideo Driver V1.17\nCoded by Pete Bernert and the P.E.Op.S. team\n");
 
-static char *PluginAuthor     = "Pete Bernert and the P.E.Op.S. team";
+static char *PluginAuthor     = N_("Pete Bernert and the P.E.Op.S. team");
 
 ////////////////////////////////////////////////////////////////////////
 // memory image of the PSX vram 
@@ -117,7 +129,7 @@ void CALLBACK GPUdisplayFlags(unsigned long dwFlags)   // some info func
 
 char * CALLBACK PSEgetLibName(void)
 {
- return libraryName;
+ return _(libraryName);
 }
 
 unsigned long CALLBACK PSEgetLibType(void)
@@ -132,7 +144,7 @@ unsigned long CALLBACK PSEgetLibVersion(void)
 
 char * GPUgetLibInfos(void)
 {
- return libraryInfo;
+ return _(libraryInfo);
 }
 
 ////////////////////////////////////////////////////////////////////////

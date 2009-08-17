@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include "stdafx.h"
+#include "config.h"
 
 #define _IN_SPU
 
@@ -24,15 +25,25 @@
 #include "dsoundoss.h"
 #include "regs.h"
 
-#if defined(USEALSA)
-static char * libraryName     = "ALSA Sound";
-#elif defined (USEOSS)
-static char * libraryName     = "OSS Sound";
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#include <locale.h>
+#define _(x)  gettext(x)
+#define N_(x) (x)
 #else
-static char * libraryName     = "NULL Sound";
+#define _(x)  (x)
+#define N_(x) (x)
 #endif
 
-static char * libraryInfo     = "P.E.Op.S. OSS Driver V1.7\nCoded by Pete Bernert and the P.E.Op.S. team\n";
+#if defined(USEALSA)
+static char * libraryName     = N_("ALSA Sound");
+#elif defined (USEOSS)
+static char * libraryName     = N_("OSS Sound");
+#else
+static char * libraryName     = N_("NULL Sound");
+#endif
+
+static char * libraryInfo     = N_("P.E.Op.S. OSS Driver V1.7\nCoded by Pete Bernert and the P.E.Op.S. team\n");
 
 // globals
 
@@ -897,7 +908,7 @@ void CALLBACK SPUregisterCDDAVolume(void (CALLBACK *CDDAVcallback)(unsigned shor
 // COMMON PLUGIN INFO FUNCS
 char * CALLBACK PSEgetLibName(void)
 {
- return libraryName;
+ return _(libraryName);
 }
 
 unsigned long CALLBACK PSEgetLibType(void)
@@ -912,5 +923,5 @@ unsigned long CALLBACK PSEgetLibVersion(void)
 
 char * SPUgetLibInfos(void)
 {
- return libraryInfo;
+ return _(libraryInfo);
 }
