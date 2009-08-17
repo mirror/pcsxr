@@ -1,6 +1,6 @@
 August 17, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
- * plugins/peopsxgl/gpu.c: Make the name of the plugin translateable.
+ * plugins/peopsxgl/gpu.c: Made the name of the plugin translatable.
  * plugins/dfsound/spu.c: Likewise.
  * plugins/dfxvideo/gpu.c: Likewise.
  * plugins/dfinput/pad.c: Likewise.
@@ -8,7 +8,7 @@ August 17, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * plugins/dfcdrom/interface.c: #include locale.h.
  * po/update-pot.sh: Also check plugins' source files.
  * plugins/dfxvideo/Makefile.am: Removed VERSION and NUMBER defination.
- * po/zh_CN.po, po/zh_TW.po: Updated.
+ * po/zh_CN.po, po/zh_TW.po, po/pcsx.pot: Updated.
 
 August 9, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
