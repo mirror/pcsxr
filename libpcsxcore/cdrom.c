@@ -604,7 +604,7 @@ void cdrReadInterrupt() {
 	fprintf(emuLog, "cdrReadInterrupt() Log: cdr.Transfer %x:%x:%x\n", cdr.Transfer[0], cdr.Transfer[1], cdr.Transfer[2]);
 #endif
 
-	if (!cdr.Muted && (cdr.Mode & 0x40) && (!Config.Xa) && (cdr.FirstSector != -1)) { // CD-XA
+	if ((!cdr.Muted) && (cdr.Mode & 0x40) && (!Config.Xa) && (cdr.FirstSector != -1)) { // CD-XA
 		if ((cdr.Transfer[4 + 2] & 0x4) &&
 			((cdr.Mode & 0x8) ? (cdr.Transfer[4 + 1] == cdr.Channel) : 1) &&
 			(cdr.Transfer[4 + 0] == cdr.File)) {
