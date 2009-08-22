@@ -1,6 +1,11 @@
+August 22, 2009 dario86
+
+ * libpcsxcore/cdrom.c: Demute the CD-DA by default.
+
 August 22, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/misc.c: Also check for PSX.EXE in CheckCdrom().
+ * debian/rules: Removed dh_desktop.
 
 August 17, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
