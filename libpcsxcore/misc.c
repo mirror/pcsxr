@@ -263,7 +263,7 @@ int LoadCdromFile(char *filename, EXE_HEADER *head) {
 
 int CheckCdrom() {
 	struct iso_directory_record *dir;
-	unsigned char time[4],*buf;
+	unsigned char time[4], *buf;
 	unsigned char mdir[4096];
 	char exename[256];
 	int i, c;
@@ -274,47 +274,52 @@ int CheckCdrom() {
 
 	READTRACK();
 
-	CdromLabel[0] = 0;
-	CdromId[0] = 0;
+	CdromLabel[0] = '\0';
+	CdromId[0] = '\0';
 
 	strncpy(CdromLabel, buf + 52, 32);
 
 	// skip head and sub, and go to the root directory record
-	dir = (struct iso_directory_record*) &buf[12 + 156]; 
+	dir = (struct iso_directory_record *)&buf[12 + 156]; 
 
-	mmssdd(dir->extent, (char*)time);
+	mmssdd(dir->extent, (char *)time);
 
 	READDIR(mdir);
 
 	if (GetCdromFile(mdir, time, "SYSTEM.CNF;1") != -1) {
 		READTRACK();
 
-		sscanf((char*)buf+12, "BOOT = cdrom:\\%256s", exename);
+		sscanf((char *)buf + 12, "BOOT = cdrom:\\%256s", exename);
 		if (GetCdromFile(mdir, time, exename) == -1) {
-			sscanf((char*)buf+12, "BOOT = cdrom:%256s", exename);
+			sscanf((char *)buf + 12, "BOOT = cdrom:%256s", exename);
 			if (GetCdromFile(mdir, time, exename) == -1) {
-				char *ptr = strstr(buf+12, "cdrom:");			// possibly the executable is in some subdir
+				char *ptr = strstr(buf + 12, "cdrom:");			// possibly the executable is in some subdir
 				for (i=0; i<32; i++) {
 					if (ptr[i] == ' ') continue;
 					if (ptr[i] == '\\') continue;
 				}
-				if(ptr) {
+				if (ptr) {
 					strncpy(exename, ptr, 256);
 					if (GetCdromFile(mdir, time, exename) == -1)
-				 	return -1;		// main executable not found
+					 	return -1;		// main executable not found
 				}
 			}
 		}
+	} else if (GetCdromFile(mdir, time, "PSX.EXE;1") != -1) {
+		strcpy(exename, "PSX.EXE;1");
+		strcpy(CdromId, "SLUS99999");
 	} else
-		return -1;		// SYSTEM.CNF not found
+		return -1;		// SYSTEM.CNF and PSX.EXE not found
 
-	i = strlen(exename);
-	if (i >= 2) {
-		if (exename[i - 2] == ';') i-= 2;
-		c = 8; i--;
-		while (i >= 0 && c >= 0) {
-			if (isalnum(exename[i])) CdromId[c--] = exename[i];
-			i--;
+	if (CdromId[0] == '\0') {
+		i = strlen(exename);
+		if (i >= 2) {
+			if (exename[i - 2] == ';') i-= 2;
+			c = 8; i--;
+			while (i >= 0 && c >= 0) {
+				if (isalnum(exename[i])) CdromId[c--] = exename[i];
+				i--;
+			}
 		}
 	}
 
@@ -588,7 +593,6 @@ int RecvPcsxInfo() {
 
 	return 0;
 }
-
 
 void __Log(char *fmt, ...) {
 	va_list list;
