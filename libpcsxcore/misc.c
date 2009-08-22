@@ -339,28 +339,28 @@ int CheckCdrom() {
 }
 
 static int PSXGetFileType(FILE *f) {
-    unsigned long current;
-    u32 mybuf[2048];
-    EXE_HEADER *exe_hdr;
-    FILHDR *coff_hdr;
+	unsigned long current;
+	u8 mybuf[2048];
+	EXE_HEADER *exe_hdr;
+	FILHDR *coff_hdr;
 
-    current = ftell(f);
-    fseek(f,0L,SEEK_SET);
-    fread(mybuf,2048,1,f);
-    fseek(f,current,SEEK_SET);
+	current = ftell(f);
+	fseek(f, 0L, SEEK_SET);
+	fread(mybuf, 2048, 1, f);
+	fseek(f, current, SEEK_SET);
 
-    exe_hdr = (EXE_HEADER *)mybuf;
-    if (memcmp(exe_hdr->id,"PS-X EXE",8)==0)
-        return PSX_EXE;
+	exe_hdr = (EXE_HEADER *)mybuf;
+	if (memcmp(exe_hdr->id, "PS-X EXE", 8) == 0)
+		return PSX_EXE;
 
-    if (mybuf[0]=='C' && mybuf[1]=='P' && mybuf[2]=='E')
-        return CPE_EXE;
+	if (mybuf[0] == 'C' && mybuf[1] == 'P' && mybuf[2] == 'E')
+		return CPE_EXE;
 
-    coff_hdr = (FILHDR *)mybuf;
-    if (coff_hdr->f_magic == 0x0162)
-        return COFF_EXE;
+	coff_hdr = (FILHDR *)mybuf;
+	if (SWAPu16(coff_hdr->f_magic) == 0x0162)
+		return COFF_EXE;
 
-    return INVALID_EXE;
+	return INVALID_EXE;
 }
 
 /* TODO Error handling - return integer for each error case below, defined in an enum. Pass variable on return */

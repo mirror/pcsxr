@@ -480,6 +480,9 @@ void OnFile_RunExe() {
 		gtk_file_filter_add_pattern (exefilter, "*.exe");
 		gtk_file_filter_add_pattern (exefilter, "*.psx");
 		gtk_file_filter_add_pattern (exefilter, "*.cpe");
+		gtk_file_filter_add_pattern (exefilter, "*.EXE");
+		gtk_file_filter_add_pattern (exefilter, "*.PSX");
+		gtk_file_filter_add_pattern (exefilter, "*.CPE");
 		gtk_file_filter_set_name (exefilter, _("PlayStation Executable Files"));
 		gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (file_chooser), exefilter);
 		GtkFileFilter *allfilter = gtk_file_filter_new ();
