@@ -369,14 +369,16 @@ int Load(char *ExePath) {
 	EXE_HEADER tmpHead;
 	int type;
 	int retval = 0;
+	u8 opcode;
+	u32 section_address, section_size;
 
 	strncpy(CdromId, "SLUS99999", 9);
 	strncpy(CdromLabel, "SLUS_999.99", 11);
 
-	tmpFile = fopen(ExePath,"rb");
+	tmpFile = fopen(ExePath, "rb");
 	if (tmpFile == NULL) {
-		SysMessage(_("Error opening file: %s"), ExePath);
-		retval = 0;
+		SysPrintf(_("Error opening file: %s.\n"), ExePath);
+		retval = -1;
 	} else {
 		type = PSXGetFileType(tmpFile);
 		switch (type) {
@@ -393,19 +395,50 @@ int Load(char *ExePath) {
 				retval = 0;
 				break;
 			case CPE_EXE:
-				SysMessage(_("CPE files not supported."));
-				retval = -1;
+				fseek(tmpFile, 6, SEEK_SET); /* Something tells me we should go to 4 and read the "08 00" here... */
+				do {
+					fread(&opcode, 1, 1, tmpFile);
+					switch (opcode) {
+						case 1: /* Section loading */
+							fread(&section_address, 4, 1, tmpFile);
+							fread(&section_size, 4, 1, tmpFile);
+							section_address = SWAPu32(section_address);
+							section_size = SWAPu32(section_size);
+#ifdef EMU_LOG
+							EMU_LOG("Loading %08X bytes from %08X to %08X\n", section_size, ftell(tmpFile), section_address);
+#endif
+							fread(PSXM(section_address), section_size, 1, tmpFile);
+							break;
+						case 3: /* register loading (PC only?) */
+							fseek(tmpFile, 2, SEEK_CUR); /* unknown field */
+							fread(&psxRegs.pc, 4, 1, tmpFile);
+							psxRegs.pc = SWAPu32(psxRegs.pc);
+							break;
+						case 0: /* End of file */
+							break;
+						default:
+							SysPrintf(_("Unknown CPE opcode %02x at position %08x.\n"), opcode, ftell(tmpFile) - 1);
+							retval = -1;
+							break;
+					}
+				} while (opcode != 0 && retval == 0);
 				break;
 			case COFF_EXE:
-				SysMessage(_("COFF files not supported."));
+				SysPrintf(_("COFF files not supported.\n"));
 				retval = -1;
 				break;
 			case INVALID_EXE:
-				SysMessage(_("This file does not appear to be a valid PSX file."));
+				SysPrintf(_("This file does not appear to be a valid PSX file.\n"));
 				retval = -1;
 				break;
 		}
 	}
+
+	if (retval != 0) {
+		CdromId[0] = '\0';
+		CdromLabel[0] = '\0';
+	}
+
 	return retval;
 }
 

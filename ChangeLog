@@ -1,10 +1,14 @@
 August 22, 2009 dario86
 
- * libpcsxcore/cdrom.c: Demute the CD-DA by default.
+ * libpcsxcore/cdrom.c: Demute the CD-DA by default, which fixes the music
+   problem with Tekken 1.
 
 August 22, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
- * libpcsxcore/misc.c: Also check for PSX.EXE in CheckCdrom().
+ * libpcsxcore/misc.c: Also check for PSX.EXE in CheckCdrom(). Added support
+   for CPE binaries. Returns -1 in Load() if EXE is not found. Print the
+   EXE loading error messages in console instead of a message box.
+ * gui/Gtk2Gui.c: Show files with .cpe extension in the Load EXE dialog box.
  * debian/rules: Removed dh_desktop.
 
 August 17, 2009 Wei Mingzhi <weimingzhi@gmail.com>

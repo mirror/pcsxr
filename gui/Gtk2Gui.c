@@ -479,11 +479,12 @@ void OnFile_RunExe() {
 		GtkFileFilter *exefilter = gtk_file_filter_new ();
 		gtk_file_filter_add_pattern (exefilter, "*.exe");
 		gtk_file_filter_add_pattern (exefilter, "*.psx");
+		gtk_file_filter_add_pattern (exefilter, "*.cpe");
 		gtk_file_filter_set_name (exefilter, _("PlayStation Executable Files"));
 		gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (file_chooser), exefilter);
 		GtkFileFilter *allfilter = gtk_file_filter_new ();
 		gtk_file_filter_add_pattern (allfilter, "*");
-		gtk_file_filter_set_name (allfilter, "All Files");
+		gtk_file_filter_set_name (allfilter, _("All Files"));
 		gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (file_chooser), allfilter);
 
 		/* Set this to the config object and retain it - maybe LastUsedDir */
@@ -503,19 +504,16 @@ void OnFile_RunExe() {
 			LoadPlugins();
 			NetOpened = 0;
 
-			/* TODO If a CDR plugin image has not been selected, then OpenPlugins() will prompt us to 
-			   configure the plugin, even though we don't need it for EXE files. Need to pass a parameter
-			   or something */
 			if (OpenPlugins() == -1) {
-				/* TODO Error message */
-				SysRunGui();
 				g_free(file);
+				SysRunGui();
 			} else {
 				SysReset();
+
 				if (Load(file) == 0) {
+					g_free(file);
 					if (Config.Dbg) hdb_start();
 					psxCpu->Execute();
-					g_free(file);
 				} else {
 					g_free(file);
 					ClosePlugins();
