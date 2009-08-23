@@ -44,7 +44,7 @@
                     </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="RunImage">
-                        <property name="label" translatable="yes">Run _ISO</property>
+                        <property name="label" translatable="yes">Run _ISO...</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>
@@ -78,7 +78,7 @@
                     </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="RunExe">
-                        <property name="label" translatable="yes">Run _EXE</property>
+                        <property name="label" translatable="yes">Run _EXE...</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>
@@ -165,7 +165,7 @@
                     </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="SwitchImage">
-                        <property name="label" translatable="yes">_Switch ISO</property>
+                        <property name="label" translatable="yes">S_witch ISO...</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>
@@ -360,7 +360,7 @@
                   <widget class="GtkMenu" id="configuration1_menu">
                     <child>
                       <widget class="GtkImageMenuItem" id="plugins_bios">
-                        <property name="label" translatable="yes">_Plugins &amp; BIOS</property>
+                        <property name="label" translatable="yes">_Plugins &amp; BIOS...</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>
@@ -382,7 +382,7 @@
                     </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="cpu1">
-                        <property name="label" translatable="yes">_CPU</property>
+                        <property name="label" translatable="yes">_CPU...</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>
@@ -398,7 +398,7 @@
                     </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="memory_cards1">
-                        <property name="label" translatable="yes">_Memory Cards</property>
+                        <property name="label" translatable="yes">_Memory Cards...</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>
@@ -415,7 +415,7 @@
                     </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="net1">
-                        <property name="label" translatable="yes">_Netplay</property>
+                        <property name="label" translatable="yes">_Netplay...</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>
@@ -445,7 +445,7 @@
                             <property name="visible">True</property>
                             <child>
                               <widget class="GtkImageMenuItem" id="browse1">
-                                <property name="label" translatable="yes">_Browse</property>
+                                <property name="label" translatable="yes">_Browse...</property>
                                 <property name="visible">True</property>
                                 <property name="use_underline">True</property>
                                 <property name="use_stock">False</property>
@@ -460,7 +460,7 @@
                             </child>
                             <child>
                               <widget class="GtkImageMenuItem" id="search1">
-                                <property name="label" translatable="yes">_Search</property>
+                                <property name="label" translatable="yes">_Search...</property>
                                 <property name="visible">True</property>
                                 <property name="use_underline">True</property>
                                 <property name="use_stock">False</property>
@@ -497,7 +497,7 @@
                   <widget class="GtkMenu" id="help1_menu">
                     <child>
                       <widget class="GtkImageMenuItem" id="about_pcsx1">
-                        <property name="label" translatable="yes">_About PCSX</property>
+                        <property name="label" translatable="yes">_About PCSX...</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>

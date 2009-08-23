@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-17 19:14+0800\n"
+"POT-Creation-Date: 2009-08-23 12:15+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -498,13 +498,13 @@ msgstr ""
 msgid "*PCSX*: Error Saving State %s"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:391 ../win32/gui/WndMain.c:440 ../gui/Gtk2Gui.c:553
-#: ../gui/Gtk2Gui.c:680
+#: ../win32/gui/WndMain.c:391 ../win32/gui/WndMain.c:440 ../gui/Gtk2Gui.c:554
+#: ../gui/Gtk2Gui.c:681
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:397 ../win32/gui/WndMain.c:446 ../gui/Gtk2Gui.c:561
-#: ../gui/Gtk2Gui.c:688
+#: ../win32/gui/WndMain.c:397 ../win32/gui/WndMain.c:446 ../gui/Gtk2Gui.c:562
+#: ../gui/Gtk2Gui.c:689
 msgid "Could not load CD-ROM!"
 msgstr ""
 
@@ -512,11 +512,11 @@ msgstr ""
 msgid "Running BIOS is not supported with Internal HLE Bios."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:623 ../gui/Gtk2Gui.c:1053
+#: ../win32/gui/WndMain.c:623 ../gui/Gtk2Gui.c:1054
 msgid "Title"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:629 ../gui/Gtk2Gui.c:1059
+#: ../win32/gui/WndMain.c:629 ../gui/Gtk2Gui.c:1060
 msgid "Status"
 msgstr ""
 
@@ -536,16 +536,16 @@ msgstr ""
 msgid "terminiting link block"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:826 ../gui/Gtk2Gui.c:1133
+#: ../win32/gui/WndMain.c:826 ../gui/Gtk2Gui.c:1134
 msgid "Deleted"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:827 ../win32/gui/WndMain.c:830 ../gui/Gtk2Gui.c:1135
-#: ../gui/Gtk2Gui.c:1139
+#: ../win32/gui/WndMain.c:827 ../win32/gui/WndMain.c:830 ../gui/Gtk2Gui.c:1136
+#: ../gui/Gtk2Gui.c:1140
 msgid "Free"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:829 ../gui/Gtk2Gui.c:1137
+#: ../win32/gui/WndMain.c:829 ../gui/Gtk2Gui.c:1138
 msgid "Used"
 msgstr ""
 
@@ -683,7 +683,7 @@ msgid "DataDeck Memory Card (*.ddf)"
 msgstr ""
 
 #: ../win32/gui/WndMain.c:1278 ../win32/gui/WndMain.c:1359 ../gui/Cheat.c:373
-#: ../gui/Gtk2Gui.c:631
+#: ../gui/Gtk2Gui.c:490 ../gui/Gtk2Gui.c:632
 msgid "All Files"
 msgstr ""
 
@@ -860,7 +860,7 @@ msgid "All Files (*.*)"
 msgstr ""
 
 #: ../gui/Cheat.c:446 ../gui/Cheat.c:1177 ../gui/Gtk2Gui.c:378
-#: ../gui/Gtk2Gui.c:1005
+#: ../gui/Gtk2Gui.c:1006
 msgid "Error: Glade interface could not be loaded!"
 msgstr ""
 
@@ -924,123 +924,123 @@ msgstr ""
 msgid "Select PSX EXE File"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:482
+#: ../gui/Gtk2Gui.c:486
 msgid "PlayStation Executable Files"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:522
+#: ../gui/Gtk2Gui.c:523
 msgid "Not a valid PSX file"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:522
+#: ../gui/Gtk2Gui.c:523
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:553 ../gui/Gtk2Gui.c:680
+#: ../gui/Gtk2Gui.c:554 ../gui/Gtk2Gui.c:681
 msgid "CD ROM failed"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:561
+#: ../gui/Gtk2Gui.c:562
 msgid "The CD ROM could not be loaded"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:576
+#: ../gui/Gtk2Gui.c:577
 msgid "Could not run BIOS"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:576
+#: ../gui/Gtk2Gui.c:577
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:606
+#: ../gui/Gtk2Gui.c:607
 msgid "Open PSX Disc Image File"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:626
+#: ../gui/Gtk2Gui.c:627
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:864
+#: ../gui/Gtk2Gui.c:865
 #, c-format
 msgid "Loaded state %s."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:869
+#: ../gui/Gtk2Gui.c:870
 #, c-format
 msgid "Error loading state %s!"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:880
+#: ../gui/Gtk2Gui.c:881
 #, c-format
 msgid "Saved state %s."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:882
+#: ../gui/Gtk2Gui.c:883
 #, c-format
 msgid "Error saving state %s!"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:916 ../gui/Gtk2Gui.c:943
+#: ../gui/Gtk2Gui.c:917 ../gui/Gtk2Gui.c:944
 msgid "Select State File"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1047
+#: ../gui/Gtk2Gui.c:1048
 msgid "Icon"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1065
+#: ../gui/Gtk2Gui.c:1066
 msgid "ID"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1071
+#: ../gui/Gtk2Gui.c:1072
 msgid "Name"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1231
+#: ../gui/Gtk2Gui.c:1232
 msgid "Format this Memory Card?"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1233
+#: ../gui/Gtk2Gui.c:1234
 msgid ""
 "If you format the memory card, the card will be empty, and any existing data "
 "overwritten."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1236
+#: ../gui/Gtk2Gui.c:1237
 msgid "Format card"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1351
+#: ../gui/Gtk2Gui.c:1352
 msgid "No space available in the target memory card!"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1496
+#: ../gui/Gtk2Gui.c:1497
 msgid "Memory Card Manager"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1765
+#: ../gui/Gtk2Gui.c:1766
 msgid "No configuration required"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1765
+#: ../gui/Gtk2Gui.c:1766
 msgid "This plugin doesn't need to be configured."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:2024
+#: ../gui/Gtk2Gui.c:2025
 #, c-format
 msgid "Could not open BIOS directory: '%s'\n"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:2056 ../gui/Gtk2Gui.c:2149 ../gui/LnxMain.c:146
+#: ../gui/Gtk2Gui.c:2057 ../gui/Gtk2Gui.c:2150 ../gui/LnxMain.c:146
 #, c-format
 msgid "Could not open directory: '%s'\n"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:2118
+#: ../gui/Gtk2Gui.c:2119
 msgid "Internal HLE Bios"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:2210
+#: ../gui/Gtk2Gui.c:2211
 msgid "Notice"
 msgstr ""
 
@@ -1173,21 +1173,22 @@ msgstr ""
 msgid "(Untitled)"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:373
+#: ../libpcsxcore/misc.c:380
 #, c-format
-msgid "Error opening file: %s"
+msgid "Error opening file: %s.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:391
-msgid "CPE files not supported."
+#: ../libpcsxcore/misc.c:420
+#, c-format
+msgid "Unknown CPE opcode %02x at position %08x.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:395
-msgid "COFF files not supported."
+#: ../libpcsxcore/misc.c:427
+msgid "COFF files not supported.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:399
-msgid "This file does not appear to be a valid PSX file."
+#: ../libpcsxcore/misc.c:431
+msgid "This file does not appear to be a valid PSX file.\n"
 msgstr ""
 
 #: ../libpcsxcore/plugins.c:33
@@ -1549,7 +1550,7 @@ msgid "Run _CD"
 msgstr ""
 
 #: ../data/pcsx.glade2:47
-msgid "Run _ISO"
+msgid "Run _ISO..."
 msgstr ""
 
 #: ../data/pcsx.glade2:64
@@ -1557,7 +1558,7 @@ msgid "Run _BIOS"
 msgstr ""
 
 #: ../data/pcsx.glade2:81
-msgid "Run _EXE"
+msgid "Run _EXE..."
 msgstr ""
 
 #: ../data/pcsx.glade2:103
@@ -1577,7 +1578,7 @@ msgid "_Reset"
 msgstr ""
 
 #: ../data/pcsx.glade2:168
-msgid "_Switch ISO"
+msgid "S_witch ISO..."
 msgstr ""
 
 #: ../data/pcsx.glade2:190
@@ -1617,19 +1618,19 @@ msgid "_Configuration"
 msgstr ""
 
 #: ../data/pcsx.glade2:363
-msgid "_Plugins & BIOS"
+msgid "_Plugins & BIOS..."
 msgstr ""
 
 #: ../data/pcsx.glade2:385
-msgid "_CPU"
+msgid "_CPU..."
 msgstr ""
 
 #: ../data/pcsx.glade2:401
-msgid "_Memory Cards"
+msgid "_Memory Cards..."
 msgstr ""
 
 #: ../data/pcsx.glade2:418
-msgid "_Netplay"
+msgid "_Netplay..."
 msgstr ""
 
 #: ../data/pcsx.glade2:439
@@ -1637,11 +1638,11 @@ msgid "Chea_t"
 msgstr ""
 
 #: ../data/pcsx.glade2:448
-msgid "_Browse"
+msgid "_Browse..."
 msgstr ""
 
 #: ../data/pcsx.glade2:463
-msgid "_Search"
+msgid "_Search..."
 msgstr ""
 
 #: ../data/pcsx.glade2:494
@@ -1649,7 +1650,7 @@ msgid "_Help"
 msgstr ""
 
 #: ../data/pcsx.glade2:500
-msgid "_About PCSX"
+msgid "_About PCSX..."
 msgstr ""
 
 #: ../data/pcsx.glade2:639

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-17 19:14+0800\n"
-"PO-Revision-Date: 2009-08-17 19:22+0700\n"
+"POT-Creation-Date: 2009-08-23 12:15+0800\n"
+"PO-Revision-Date: 2009-08-23 12:17+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -561,15 +561,15 @@ msgstr "*PCSX*: Error Saving State %s"
 
 #: ../win32/gui/WndMain.c:391
 #: ../win32/gui/WndMain.c:440
-#: ../gui/Gtk2Gui.c:553
-#: ../gui/Gtk2Gui.c:680
+#: ../gui/Gtk2Gui.c:554
+#: ../gui/Gtk2Gui.c:681
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "此光盘不是一张合法的 PlayStation 光盘。"
 
 #: ../win32/gui/WndMain.c:397
 #: ../win32/gui/WndMain.c:446
-#: ../gui/Gtk2Gui.c:561
-#: ../gui/Gtk2Gui.c:688
+#: ../gui/Gtk2Gui.c:562
+#: ../gui/Gtk2Gui.c:689
 msgid "Could not load CD-ROM!"
 msgstr "无法加载光盘!"
 
@@ -578,12 +578,12 @@ msgid "Running BIOS is not supported with Internal HLE Bios."
 msgstr "内部 HLE BIOS 不支持直接运行。"
 
 #: ../win32/gui/WndMain.c:623
-#: ../gui/Gtk2Gui.c:1053
+#: ../gui/Gtk2Gui.c:1054
 msgid "Title"
 msgstr "标题"
 
 #: ../win32/gui/WndMain.c:629
-#: ../gui/Gtk2Gui.c:1059
+#: ../gui/Gtk2Gui.c:1060
 msgid "Status"
 msgstr "状态"
 
@@ -604,19 +604,19 @@ msgid "terminiting link block"
 msgstr "terminiting link block"
 
 #: ../win32/gui/WndMain.c:826
-#: ../gui/Gtk2Gui.c:1133
+#: ../gui/Gtk2Gui.c:1134
 msgid "Deleted"
 msgstr "已删除"
 
 #: ../win32/gui/WndMain.c:827
 #: ../win32/gui/WndMain.c:830
-#: ../gui/Gtk2Gui.c:1135
-#: ../gui/Gtk2Gui.c:1139
+#: ../gui/Gtk2Gui.c:1136
+#: ../gui/Gtk2Gui.c:1140
 msgid "Free"
 msgstr "空闲"
 
 #: ../win32/gui/WndMain.c:829
-#: ../gui/Gtk2Gui.c:1137
+#: ../gui/Gtk2Gui.c:1138
 msgid "Used"
 msgstr "已使用"
 
@@ -766,7 +766,8 @@ msgstr "DataDeck 记忆卡 (*.ddl)"
 #: ../win32/gui/WndMain.c:1278
 #: ../win32/gui/WndMain.c:1359
 #: ../gui/Cheat.c:373
-#: ../gui/Gtk2Gui.c:631
+#: ../gui/Gtk2Gui.c:490
+#: ../gui/Gtk2Gui.c:632
 msgid "All Files"
 msgstr "所有文件"
 
@@ -953,7 +954,7 @@ msgstr "所有文件 (*.*)"
 #: ../gui/Cheat.c:446
 #: ../gui/Cheat.c:1177
 #: ../gui/Gtk2Gui.c:378
-#: ../gui/Gtk2Gui.c:1005
+#: ../gui/Gtk2Gui.c:1006
 msgid "Error: Glade interface could not be loaded!"
 msgstr "错误：无法加载 Glade 界面!"
 
@@ -1019,125 +1020,125 @@ msgstr "配置 PCSX"
 msgid "Select PSX EXE File"
 msgstr "选择 PSX EXE 文件"
 
-#: ../gui/Gtk2Gui.c:482
+#: ../gui/Gtk2Gui.c:486
 msgid "PlayStation Executable Files"
 msgstr "PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:522
+#: ../gui/Gtk2Gui.c:523
 msgid "Not a valid PSX file"
 msgstr "不是一个合法的 PSX 文件"
 
-#: ../gui/Gtk2Gui.c:522
+#: ../gui/Gtk2Gui.c:523
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "此文件不是一个合法的 PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:553
-#: ../gui/Gtk2Gui.c:680
+#: ../gui/Gtk2Gui.c:554
+#: ../gui/Gtk2Gui.c:681
 msgid "CD ROM failed"
 msgstr "CD-ROM 失败"
 
-#: ../gui/Gtk2Gui.c:561
+#: ../gui/Gtk2Gui.c:562
 msgid "The CD ROM could not be loaded"
 msgstr "无法加载 CD-ROM"
 
-#: ../gui/Gtk2Gui.c:576
+#: ../gui/Gtk2Gui.c:577
 msgid "Could not run BIOS"
 msgstr "无法运行 BIOS"
 
-#: ../gui/Gtk2Gui.c:576
+#: ../gui/Gtk2Gui.c:577
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr "内部 HLE BIOS 不支持直接运行。"
 
-#: ../gui/Gtk2Gui.c:606
+#: ../gui/Gtk2Gui.c:607
 msgid "Open PSX Disc Image File"
 msgstr "打开 PSX 光盘镜像文件"
 
-#: ../gui/Gtk2Gui.c:626
+#: ../gui/Gtk2Gui.c:627
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr "PS 镜像文件 (*.bin, *.img, *.mdf, *.iso)"
 
-#: ../gui/Gtk2Gui.c:864
+#: ../gui/Gtk2Gui.c:865
 #, c-format
 msgid "Loaded state %s."
 msgstr "已读取存档 %s。"
 
-#: ../gui/Gtk2Gui.c:869
+#: ../gui/Gtk2Gui.c:870
 #, c-format
 msgid "Error loading state %s!"
 msgstr "读取存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:880
+#: ../gui/Gtk2Gui.c:881
 #, c-format
 msgid "Saved state %s."
 msgstr "已保存存档 %s"
 
-#: ../gui/Gtk2Gui.c:882
+#: ../gui/Gtk2Gui.c:883
 #, c-format
 msgid "Error saving state %s!"
 msgstr "保存存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:916
-#: ../gui/Gtk2Gui.c:943
+#: ../gui/Gtk2Gui.c:917
+#: ../gui/Gtk2Gui.c:944
 msgid "Select State File"
 msgstr "选择存档文件"
 
-#: ../gui/Gtk2Gui.c:1047
+#: ../gui/Gtk2Gui.c:1048
 msgid "Icon"
 msgstr "图标"
 
-#: ../gui/Gtk2Gui.c:1065
+#: ../gui/Gtk2Gui.c:1066
 msgid "ID"
 msgstr "ID"
 
-#: ../gui/Gtk2Gui.c:1071
+#: ../gui/Gtk2Gui.c:1072
 msgid "Name"
 msgstr "名称"
 
-#: ../gui/Gtk2Gui.c:1231
+#: ../gui/Gtk2Gui.c:1232
 msgid "Format this Memory Card?"
 msgstr "格式化此记忆卡?"
 
-#: ../gui/Gtk2Gui.c:1233
+#: ../gui/Gtk2Gui.c:1234
 msgid "If you format the memory card, the card will be empty, and any existing data overwritten."
 msgstr "如果您选择格式化记忆卡，记忆卡将被清空，并且任何现有数据都将被覆盖。"
 
-#: ../gui/Gtk2Gui.c:1236
+#: ../gui/Gtk2Gui.c:1237
 msgid "Format card"
 msgstr "格式化记忆卡"
 
-#: ../gui/Gtk2Gui.c:1351
+#: ../gui/Gtk2Gui.c:1352
 msgid "No space available in the target memory card!"
 msgstr "目标记忆卡没有空余位置!"
 
-#: ../gui/Gtk2Gui.c:1496
+#: ../gui/Gtk2Gui.c:1497
 msgid "Memory Card Manager"
 msgstr "记忆卡管理器"
 
-#: ../gui/Gtk2Gui.c:1765
+#: ../gui/Gtk2Gui.c:1766
 msgid "No configuration required"
 msgstr "不需要配置"
 
-#: ../gui/Gtk2Gui.c:1765
+#: ../gui/Gtk2Gui.c:1766
 msgid "This plugin doesn't need to be configured."
 msgstr "此插件需要被配置。"
 
-#: ../gui/Gtk2Gui.c:2024
+#: ../gui/Gtk2Gui.c:2025
 #, c-format
 msgid "Could not open BIOS directory: '%s'\n"
 msgstr "无法打开 BIOS 目录: \"%s\"\n"
 
-#: ../gui/Gtk2Gui.c:2056
-#: ../gui/Gtk2Gui.c:2149
+#: ../gui/Gtk2Gui.c:2057
+#: ../gui/Gtk2Gui.c:2150
 #: ../gui/LnxMain.c:146
 #, c-format
 msgid "Could not open directory: '%s'\n"
 msgstr "无法打开目录: \"%s\"\n"
 
-#: ../gui/Gtk2Gui.c:2118
+#: ../gui/Gtk2Gui.c:2119
 msgid "Internal HLE Bios"
 msgstr "内部 HLE-Bios"
 
-#: ../gui/Gtk2Gui.c:2210
+#: ../gui/Gtk2Gui.c:2211
 msgid "Notice"
 msgstr "警告"
 
@@ -1280,22 +1281,23 @@ msgstr "作弊码己保存: %s\n"
 msgid "(Untitled)"
 msgstr "(未命名)"
 
-#: ../libpcsxcore/misc.c:373
+#: ../libpcsxcore/misc.c:380
 #, c-format
-msgid "Error opening file: %s"
-msgstr "打开文件错误: %s!"
+msgid "Error opening file: %s.\n"
+msgstr "打开文件错误: %s。\n"
 
-#: ../libpcsxcore/misc.c:391
-msgid "CPE files not supported."
-msgstr "CPE 文件不被支持!"
+#: ../libpcsxcore/misc.c:420
+#, c-format
+msgid "Unknown CPE opcode %02x at position %08x.\n"
+msgstr "未知 CPE 指令码 %02x 位于 %08x。\n"
 
-#: ../libpcsxcore/misc.c:395
-msgid "COFF files not supported."
-msgstr "COFF 文件不被支持!"
+#: ../libpcsxcore/misc.c:427
+msgid "COFF files not supported.\n"
+msgstr "COFF 文件尚未支持。\n"
 
-#: ../libpcsxcore/misc.c:399
-msgid "This file does not appear to be a valid PSX file."
-msgstr "此文件不是一个合法的 PSX 文件。"
+#: ../libpcsxcore/misc.c:431
+msgid "This file does not appear to be a valid PSX file.\n"
+msgstr "此文件不是一个合法的 PSX 文件。\n"
 
 #: ../libpcsxcore/plugins.c:33
 #, c-format
@@ -1676,16 +1678,16 @@ msgid "Run _CD"
 msgstr "运行光盘(_C)"
 
 #: ../data/pcsx.glade2:47
-msgid "Run _ISO"
-msgstr "运行 _ISO"
+msgid "Run _ISO..."
+msgstr "运行 _ISO..."
 
 #: ../data/pcsx.glade2:64
 msgid "Run _BIOS"
 msgstr "运行 _BIOS"
 
 #: ../data/pcsx.glade2:81
-msgid "Run _EXE"
-msgstr "运行 _EXE"
+msgid "Run _EXE..."
+msgstr "运行 _EXE..."
 
 #: ../data/pcsx.glade2:103
 msgid "E_xit"
@@ -1704,8 +1706,8 @@ msgid "_Reset"
 msgstr "复位(_R)"
 
 #: ../data/pcsx.glade2:168
-msgid "_Switch ISO"
-msgstr "更换 ISO(_S)"
+msgid "S_witch ISO..."
+msgstr "更换 ISO(_W)..."
 
 #: ../data/pcsx.glade2:190
 msgid "_Save State"
@@ -1750,40 +1752,40 @@ msgid "_Configuration"
 msgstr "配置(_C)"
 
 #: ../data/pcsx.glade2:363
-msgid "_Plugins & BIOS"
-msgstr "插件及 BIOS(_P)"
+msgid "_Plugins & BIOS..."
+msgstr "插件及 BIOS(_P)..."
 
 #: ../data/pcsx.glade2:385
-msgid "_CPU"
-msgstr "_CPU"
+msgid "_CPU..."
+msgstr "_CPU..."
 
 #: ../data/pcsx.glade2:401
-msgid "_Memory Cards"
-msgstr "记忆卡(_M)"
+msgid "_Memory Cards..."
+msgstr "记忆卡(_M)..."
 
 #: ../data/pcsx.glade2:418
-msgid "_Netplay"
-msgstr "联网游戏(_N)"
+msgid "_Netplay..."
+msgstr "联网游戏(_N)..."
 
 #: ../data/pcsx.glade2:439
 msgid "Chea_t"
 msgstr "作弊码(_T)"
 
 #: ../data/pcsx.glade2:448
-msgid "_Browse"
-msgstr "浏览(_B)"
+msgid "_Browse..."
+msgstr "浏览(_B)..."
 
 #: ../data/pcsx.glade2:463
-msgid "_Search"
-msgstr "查找(_S)"
+msgid "_Search..."
+msgstr "查找(_S)..."
 
 #: ../data/pcsx.glade2:494
 msgid "_Help"
 msgstr "帮助(_H)"
 
 #: ../data/pcsx.glade2:500
-msgid "_About PCSX"
-msgstr "关于 PCSX(_A)"
+msgid "_About PCSX..."
+msgstr "关于 PCSX(_A)..."
 
 #: ../data/pcsx.glade2:639
 msgid "Select Folder to Search"
@@ -2626,59 +2628,3 @@ msgstr "<b>按键配置</b>"
 #: ../plugins/dfinput/dfinput.glade2:209
 msgid "Based on PadJoy by Erich Kitzmüller (ammoq@ammoq.com)"
 msgstr "基于由 Erich Kitzmüller (ammoq@ammoq.com) 编写的 PadJoy"
-
-#~ msgid "Could not open %s.\n"
-#~ msgstr "无法打开 %s。\n"
-#~ msgid "Pcsx needs to be configured"
-#~ msgstr "PCSX 需要被配置。"
-#~ msgid "Pcsx now will quit, restart it"
-#~ msgstr "PCSX 将退出，请重新启动它。"
-#~ msgid ""
-#~ "Unsigned 8-bit\n"
-#~ "Unsigned 16-bit\n"
-#~ "Unsigned 32-bit\n"
-#~ "Signed 8-bit\n"
-#~ "Signed 16-bit\n"
-#~ "Signed 32-bit"
-#~ msgstr ""
-#~ "无符号 8 位\n"
-#~ "无符号 16 位\n"
-#~ "无符号 32 位\n"
-#~ "有符号 8 位\n"
-#~ "有符号 16 位\n"
-#~ "有符号 32 位"
-#~ msgid ""
-#~ "Equal Value\n"
-#~ "Not Equal Value\n"
-#~ "Range"
-#~ msgstr ""
-#~ "等于数值\n"
-#~ "不等于数值\n"
-#~ "范围"
-#~ msgid "Big-Endian"
-#~ msgstr "Big-Endian"
-#~ msgid "label"
-#~ msgstr "label"
-#~ msgid "_Load"
-#~ msgstr "读取(_L)"
-#~ msgid "_Save"
-#~ msgstr "保存(_S)"
-#~ msgid "_Run"
-#~ msgstr "运行(_R)"
-#~ msgid ""
-#~ "PCSX is licensed under the GNU GPL; see the included COPYING file for "
-#~ "more detail."
-#~ msgstr "PCSX 在 GNU GPL 条款下发布；请参看包含的 COPYING 文件。"
-#~ msgid "This plugin reports that it should work correctly."
-#~ msgstr "此插件报告其可正常工作。"
-#~ msgid "This plugin reports that it won't work correctly."
-#~ msgstr "此插件报告其不可正常工作。"
-#~ msgid "Could not load Cdrom"
-#~ msgstr "无法加载光盘"
-#~ msgid "Could not open plugins directory: '%s'\n"
-#~ msgstr "无法打开插件目录: \"%s\"\n"
-#~ msgid "Run CD Though &Bios"
-#~ msgstr "使用 BIOS 运行光碟(&B)"
-#~ msgid "Run CD Through BIOS"
-#~ msgstr "使用 BIOS 运行光碟"
-
