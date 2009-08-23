@@ -2422,7 +2422,6 @@ v0=1;	// HDHOSHY experimental patch: Spongebob, Coldblood, fearEffect, Medievil2
 
 #define bfreezes(ptr) bfreeze(ptr, sizeof(ptr))
 #define bfreezel(ptr) bfreeze(ptr, sizeof(*ptr))
-//#define bfreezel(ptr) bfreeze(ptr, sizeof(uintptr_t))
 
 #define bfreezepsxMptr(ptr) \
 	if (Mode == 1) { \
@@ -2451,6 +2450,3 @@ void psxBiosFreeze(int Mode) {
 	bfreezel(&CurThread);
 	bfreezes(FDesc);
 }
-
-
-
