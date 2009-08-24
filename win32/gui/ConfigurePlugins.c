@@ -195,9 +195,9 @@ BOOL OnConfigurePluginsDialog(HWND hW) {
 
 // BIOS
 
-	lp=(char *)malloc(strlen("HLE") + 1);
+	lp = (char *)malloc(strlen("HLE") + 1);
 	sprintf(lp, "HLE");
-	i=ComboBox_AddString(hWC_BIOS, "Internal HLE Bios");
+	i = ComboBox_AddString(hWC_BIOS, _("Internal HLE Bios"));
 	ComboBox_SetItemData(hWC_BIOS, i, lp);
 	if (stricmp(Config.Bios, lp)==0)
 		ComboBox_SetCurSel(hWC_BIOS, i);
@@ -438,7 +438,7 @@ int SelectPath(HWND hW, char *Title, char *Path) {
 void SetPluginsDir(HWND hW) {
 	char Path[256];
 
-	if (SelectPath(hW, "Select Plugins Directory", Path) == -1) return;
+	if (SelectPath(hW, _("Select Plugins Directory"), Path) == -1) return;
 	strcpy(Config.PluginsDir, Path);
 	CleanUpCombos(hW);
 	OnConfigurePluginsDialog(hW);
@@ -447,7 +447,7 @@ void SetPluginsDir(HWND hW) {
 void SetBiosDir(HWND hW) {
 	char Path[256];
 
-	if (SelectPath(hW, "Select Bios Directory", Path) == -1) return;
+	if (SelectPath(hW, _("Select Bios Directory"), Path) == -1) return;
 	strcpy(Config.BiosDir, Path);
 	CleanUpCombos(hW);
 	OnConfigurePluginsDialog(hW);

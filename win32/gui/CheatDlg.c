@@ -53,10 +53,10 @@ static void UpdateCheatDlg(HWND hW) {
 	}
 }
 
-static int iEditItem = -1;
+static int		iEditItem = -1;
+static char		szDescr[256], szCode[1024];
 
 static LRESULT WINAPI CheatEditDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-	char	szDescr[256], szCode[1024];
 	int		i;
 
 	switch (uMsg) {
@@ -86,7 +86,7 @@ static LRESULT WINAPI CheatEditDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM
 					Edit_GetText(GetDlgItem(hW, IDC_CODE), szCode, 1024);
 
 					if (EditCheat(iEditItem, szDescr, szCode) != 0) {
-						SysMessage(_("Error"), _("Invalid cheat code!"));
+						SysMessage(_("Invalid cheat code!"));
 					}
 					else {
                         EndDialog(hW, TRUE);
@@ -109,8 +109,6 @@ static LRESULT WINAPI CheatEditDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM
 }
 
 static LRESULT WINAPI CheatAddDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-	char	szDescr[256], szCode[1024];
-
 	switch (uMsg) {
 		case WM_INITDIALOG:
 			SetWindowText(hW, _("Add New Cheat"));
@@ -118,6 +116,8 @@ static LRESULT WINAPI CheatAddDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM 
 			Static_SetText(GetDlgItem(hW, IDC_LABEL_CODE), _("Cheat Code:"));
 			Button_SetText(GetDlgItem(hW, IDOK), _("OK"));
 			Button_SetText(GetDlgItem(hW, IDCANCEL), _("Cancel"));
+			Edit_SetText(GetDlgItem(hW, IDC_DESCR), szDescr);
+			Edit_SetText(GetDlgItem(hW, IDC_CODE), szCode);
 			break;
 
 		case WM_COMMAND:
@@ -127,7 +127,7 @@ static LRESULT WINAPI CheatAddDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM 
 					Edit_GetText(GetDlgItem(hW, IDC_CODE), szCode, 1024);
 
 					if (AddCheat(szDescr, szCode) != 0) {
-						SysMessage(_("Error"), _("Invalid cheat code!"));
+						SysMessage(_("Invalid cheat code!"));
 					}
 					else {
                         EndDialog(hW, TRUE);
@@ -201,6 +201,9 @@ LRESULT WINAPI CheatDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 				case IDC_ADDCODE:
 					i = NumCheats;
+					szDescr[0] = '\0';
+					szCode[0] = '\0';
+
 					DialogBox(gApp.hInstance, MAKEINTRESOURCE(IDD_CHEATEDIT), hW, CheatAddDlgProc);
 
 					if (NumCheats > i) {
@@ -384,6 +387,12 @@ static uint32_t current_valuefrom	= 0;
 static uint32_t current_valueto		= 0;
 
 static void UpdateCheatSearchDlg(HWND hW) {
+	char		buf[256];
+
+	// clear all combo boxes
+	SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_RESETCONTENT, 0, 0);
+	SendMessage(GetDlgItem(hW, IDC_DATATYPE), CB_RESETCONTENT, 0, 0);
+	SendMessage(GetDlgItem(hW, IDC_DATABASE), CB_RESETCONTENT, 0, 0);
 }
 
 LRESULT WINAPI CheatSearchDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
@@ -407,7 +416,7 @@ LRESULT WINAPI CheatSearchDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			break;
 
 		case WM_COMMAND:
-			switch (wParam) {
+			switch (LOBYTE(wParam)) {
 				case IDCANCEL:
 					EndDialog(hW, TRUE);
 					return TRUE;
@@ -425,6 +434,15 @@ LRESULT WINAPI CheatSearchDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					break;
 
 				case IDC_NEWSEARCH:
+					break;
+
+				case IDC_SEARCHFOR:
+					break;
+
+				case IDC_DATABASE:
+					break;
+
+				case IDC_DATATYPE:
 					break;
 			}
 			break;

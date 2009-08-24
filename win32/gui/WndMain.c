@@ -57,6 +57,8 @@ static HDC          hdcmem;
 static HBITMAP      hBm;
 static BITMAP       bm;
 
+#ifdef ENABLE_NLS
+
 unsigned int langsMax;
 
 typedef struct {
@@ -64,36 +66,35 @@ typedef struct {
 } _langs;
 _langs *langs = NULL;
 
-#define MAXFILENAME 256
-
 typedef struct {
-	char id[8];
-	char name[64];
+	char			id[8];
+	char			name[64];
+	LANGID			langid;
 } LangDef;
 
 LangDef sLangs[] = {
-	{ "ar", N_("Arabic") },
-	{ "ca", N_("Catalan") },
-	{ "de", N_("German") },
-	{ "el", N_("Greek") },
-	{ "en", N_("English") },
-	{ "es", N_("Spanish") },
-	{ "fr_FR", N_("French") },
-	{ "it_IT", N_("Italian") },
-	{ "pt", N_("Portuguese") },
-	{ "ro", N_("Romanian") },
-	{ "ru", N_("Russian") },
-	{ "zh_CN", N_("Simplified Chinese") },
-	{ "zh_TW", N_("Traditional Chinese") },
-	{ "jp", N_("Japanese") },
-	{ "ko", N_("Korean") },
-	{ "", "" },
+	{ "ar",		N_("Arabic"),				0x0401 },
+	{ "ca",		N_("Catalan"),				0x0403 },
+	{ "de",		N_("German"),				0x0407 },
+	{ "el",		N_("Greek"),				0x0408 },
+	{ "en",		N_("English"),				0x0409 },
+	{ "es",		N_("Spanish"),				0x040a },
+	{ "fr_FR",	N_("French"),				0x040c },
+	{ "it_IT",	N_("Italian"),				0x0410 },
+	{ "pt",		N_("Portuguese"),			0x0816 },
+	{ "ro",		N_("Romanian"),				0x0418 },
+	{ "ru",		N_("Russian"),				0x0419 },
+	{ "zh_CN",	N_("Simplified Chinese"),	0x0804 },
+	{ "zh_TW",	N_("Traditional Chinese"),	0x0404 },
+	{ "jp",		N_("Japanese"),				0x0411 },
+	{ "ko",		N_("Korean"),				0x0412 },
+	{ "", "", 0xFFFF },
 };
 
 char *ParseLang(char *id) {
 	int i=0;
 
-	while (sLangs[i].id[0] != 0) {
+	while (sLangs[i].id[0] != '\0') {
 		if (!strcmp(id, sLangs[i].id))
 			return _(sLangs[i].name);
 		i++;
@@ -101,6 +102,26 @@ char *ParseLang(char *id) {
 
 	return id;
 }
+
+static void SetDefaultLang(void) {
+	LANGID langid;
+	int i;
+
+	langid = GetSystemDefaultLangID();
+
+	i = 0;
+	while (sLangs[i].id[0] != '\0') {
+		if (langid == sLangs[i].langid) {
+			strcpy(Config.Lang, sLangs[i].id);
+			return;
+		}
+		i++;
+	}
+
+	strcpy(Config.Lang, "English");
+}
+
+#endif
 
 void strcatz(char *dst, char *src) {
 	int len = strlen(dst) + 1;
@@ -133,6 +154,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		ConfPlug = 1;
 
+#ifdef ENABLE_NLS
+		{
+			char text[256];
+			SetDefaultLang();
+			sprintf(text, "LANGUAGE=%s", Config.Lang);
+			gettext_putenv(text);
+		}
+#endif
+
 		ConfigurePlugins(gApp.hWnd);
 
 		if (LoadConfig() == -1) {
@@ -140,9 +170,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 	}
 
+#ifdef ENABLE_NLS
 	if (Config.Lang[0] == 0) {
-		strcpy(Config.Lang, "English");
+		SetDefaultLang();
+		SaveConfig();
+		LoadConfig();
 	}
+#endif
 
 	if (SysInit() == -1) return 1;
 
@@ -178,7 +212,7 @@ int Slots[5] = { -1, -1, -1, -1, -1 };
 void ResetMenuSlots() {
 	int i;
 
-	for (i=0; i<5; i++) {
+	for (i = 0; i < 5; i++) {
 		if (Slots[i] == -1)
 			EnableMenuItem(GetSubMenu(gApp.hMenu, 0), ID_FILE_STATES_LOAD_SLOT1+i, MF_GRAYED);
 		else 
@@ -190,7 +224,7 @@ void UpdateMenuSlots() {
 	char str[256];
 	int i;
 
-	for (i=0; i<5; i++) {
+	for (i = 0; i < 5; i++) {
 		GetStateFilename(str, i);
 		Slots[i] = CheckState(str);
 	}
@@ -204,7 +238,8 @@ void OpenConsole() {
 }
 
 void CloseConsole() {
-	FreeConsole(); hConsole = NULL;
+	FreeConsole();
+	hConsole = NULL;
 }
 
 void States_Load(int num) {
@@ -251,8 +286,8 @@ void States_Save(int num) {
 
 void OnStates_LoadOther() {
 	OPENFILENAME ofn;
-	char szFileName[MAXFILENAME];
-	char szFileTitle[MAXFILENAME];
+	char szFileName[MAXPATHLEN];
+	char szFileTitle[MAXPATHLEN];
 	char szFilter[256];
 
 	memset(&szFileName,  0, sizeof(szFileName));
@@ -269,10 +304,10 @@ void OnStates_LoadOther() {
 	ofn.nMaxCustFilter		= 0;
 	ofn.nFilterIndex		= 1;
 	ofn.lpstrFile			= szFileName;
-	ofn.nMaxFile			= MAXFILENAME;
+	ofn.nMaxFile			= MAXPATHLEN;
 	ofn.lpstrInitialDir		= NULL;
 	ofn.lpstrFileTitle		= szFileTitle;
-	ofn.nMaxFileTitle		= MAXFILENAME;
+	ofn.nMaxFileTitle		= MAXPATHLEN;
 	ofn.lpstrTitle			= NULL;
 	ofn.lpstrDefExt			= NULL;
 	ofn.Flags			= OFN_HIDEREADONLY | OFN_NOCHANGEDIR;
@@ -303,8 +338,8 @@ void OnStates_Save5() { States_Save(4); }
 
 void OnStates_SaveOther() {
 	OPENFILENAME ofn;
-	char szFileName[MAXFILENAME];
-	char szFileTitle[MAXFILENAME];
+	char szFileName[MAXPATHLEN];
+	char szFileTitle[MAXPATHLEN];
 	char szFilter[256];
 
 	memset(&szFileName,  0, sizeof(szFileName));
@@ -321,10 +356,10 @@ void OnStates_SaveOther() {
 	ofn.nMaxCustFilter		= 0;
 	ofn.nFilterIndex		= 1;
 	ofn.lpstrFile			= szFileName;
-	ofn.nMaxFile			= MAXFILENAME;
+	ofn.nMaxFile			= MAXPATHLEN;
 	ofn.lpstrInitialDir		= NULL;
 	ofn.lpstrFileTitle		= szFileTitle;
-	ofn.nMaxFileTitle		= MAXFILENAME;
+	ofn.nMaxFileTitle		= MAXPATHLEN;
 	ofn.lpstrTitle			= NULL;
 	ofn.lpstrDefExt			= NULL;
 	ofn.Flags				= OFN_HIDEREADONLY | OFN_NOCHANGEDIR;
@@ -564,6 +599,7 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 					return TRUE;
 
 				default:
+#ifdef ENABLE_NLS
 					if (LOWORD(wParam) >= ID_LANGS && LOWORD(wParam) <= (ID_LANGS + langsMax)) {
 						AccBreak = 1;
 						DestroyWindow(gApp.hWnd);
@@ -571,6 +607,8 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 						CreateMainWindow(SW_NORMAL);
 						return TRUE;
 					}
+#endif
+					break;
 			}
 			break;
 
@@ -1236,8 +1274,8 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 
 void Open_Mcd_Proc(HWND hW, int mcd) {
 	OPENFILENAME ofn;
-	char szFileName[MAXFILENAME];
-	char szFileTitle[MAXFILENAME];
+	char szFileName[MAXPATHLEN];
+	char szFileTitle[MAXPATHLEN];
 	char szFilter[1024];
 	char *str;
 
@@ -1286,10 +1324,10 @@ void Open_Mcd_Proc(HWND hW, int mcd) {
     ofn.nMaxCustFilter		= 0;
     ofn.nFilterIndex		= 1;
     ofn.lpstrFile			= szFileName;
-    ofn.nMaxFile			= MAXFILENAME;
+    ofn.nMaxFile			= MAXPATHLEN;
     ofn.lpstrInitialDir		= "memcards";
     ofn.lpstrFileTitle		= szFileTitle;
-    ofn.nMaxFileTitle		= MAXFILENAME;
+    ofn.nMaxFileTitle		= MAXPATHLEN;
     ofn.lpstrTitle			= NULL;
     ofn.lpstrDefExt			= "MCR";
     ofn.Flags				= OFN_HIDEREADONLY | OFN_NOCHANGEDIR;
@@ -1303,8 +1341,8 @@ void Open_Mcd_Proc(HWND hW, int mcd) {
 
 int Open_File_Proc(char *file) {
 	OPENFILENAME ofn;
-	char szFileName[MAXFILENAME];
-	char szFileTitle[MAXFILENAME];
+	char szFileName[MAXPATHLEN];
+	char szFileTitle[MAXPATHLEN];
 	char szFilter[256];
 
 	memset(&szFileName,  0, sizeof(szFileName));
@@ -1322,10 +1360,10 @@ int Open_File_Proc(char *file) {
     ofn.nMaxCustFilter		= 0;
     ofn.nFilterIndex		= 1;
     ofn.lpstrFile			= szFileName;
-    ofn.nMaxFile			= MAXFILENAME;
+    ofn.nMaxFile			= MAXPATHLEN;
     ofn.lpstrInitialDir		= NULL;
     ofn.lpstrFileTitle		= szFileTitle;
-    ofn.nMaxFileTitle		= MAXFILENAME;
+    ofn.nMaxFileTitle		= MAXPATHLEN;
     ofn.lpstrTitle			= NULL;
     ofn.lpstrDefExt			= "EXE";
     ofn.Flags				= OFN_HIDEREADONLY | OFN_NOCHANGEDIR;
@@ -1339,8 +1377,8 @@ int Open_File_Proc(char *file) {
 
 int Open_Iso_Proc(char *file) {
 	OPENFILENAME ofn;
-	char szFileName[MAXFILENAME];
-	char szFileTitle[MAXFILENAME];
+	char szFileName[MAXPATHLEN];
+	char szFileTitle[MAXPATHLEN];
 	char szFilter[256];
 	char *str;
 
@@ -1365,10 +1403,10 @@ int Open_Iso_Proc(char *file) {
     ofn.nMaxCustFilter		= 0;
     ofn.nFilterIndex		= 1;
     ofn.lpstrFile			= szFileName;
-    ofn.nMaxFile			= MAXFILENAME;
+    ofn.nMaxFile			= MAXPATHLEN;
     ofn.lpstrInitialDir		= NULL;
     ofn.lpstrFileTitle		= szFileTitle;
-    ofn.nMaxFileTitle		= MAXFILENAME;
+    ofn.nMaxFileTitle		= MAXPATHLEN;
     ofn.lpstrTitle			= NULL;
     ofn.lpstrDefExt			= "ISO";
     ofn.Flags				= OFN_HIDEREADONLY | OFN_NOCHANGEDIR;
@@ -1415,9 +1453,11 @@ int Open_Iso_Proc(char *file) {
 void CreateMainMenu() {
 	MENUITEMINFO item;
 	HMENU submenu[256];
-	char *lang;
 	char buf[256];
+#ifdef ENABLE_NLS
+	char *lang;
 	int i;
+#endif
 
 	item.cbSize = sizeof(MENUITEMINFO);
 	item.dwTypeData = buf;
@@ -1471,6 +1511,7 @@ void CreateMainMenu() {
 	ADDSEPARATOR(0);
 	ADDMENUITEM(0, _("&Plugins && Bios..."), ID_CONFIGURATION);
 
+#ifdef ENABLE_NLS
 	ADDSUBMENU(0, _("&Language"));
 
 	if (langs != langs) free(langs);
@@ -1494,6 +1535,7 @@ void CreateMainMenu() {
 	} else {
 		ADDMENUITEM(0, _("English"), ID_LANGS);
 	}
+#endif
 
 	ADDSUBMENU(0, _("&Help"));
 	ADDMENUITEM(0, _("&About..."), ID_HELP_ABOUT);
@@ -1566,6 +1608,8 @@ void CreateMainWindow(int nCmdShow) {
 	ShowWindow(hWnd, nCmdShow);
 }
 
+#ifdef ENABLE_NLS
+
 WIN32_FIND_DATA lFindData;
 HANDLE lFind;
 int lFirst;
@@ -1607,6 +1651,8 @@ void ChangeLanguage(char *lang) {
 	SaveConfig();
 	LoadConfig();
 }
+
+#endif
 
 int SysInit() {
 	if (Config.PsxOut) OpenConsole();

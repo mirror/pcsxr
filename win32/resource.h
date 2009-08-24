@@ -14,6 +14,7 @@
 #define IDD_CPUCONF                     105
 #define IDC_VALUETO                     105
 #define IDC_DATATYPE                    106
+#define IDC_DATABASE                    107
 #define IDD_NETPLAY                     108
 #define IDC_LABEL_RESULTSFOUND          108
 #define IDD_CONNECT                     109
