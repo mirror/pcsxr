@@ -6,7 +6,7 @@ August 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
    compilation issue.
  * win32/gui/pcsx.dev: Fixed Dev-C++ build.
  * win32/WndMain.c: Moved Language menu into the Config menu.
- * gui/CheatDlg.c: Clamp values when editing value in Cheat Search dialog.
+ * gui/Cheat.c: Clamp values when editing value in Cheat Search dialog.
  * doc/tweaks.txt: Added instructions to allow CD-DA playing when using
    image files (as suggested by dario86).
 
