@@ -23,3 +23,10 @@ function. These can all be found at Configuration -> CPU.
 * Enable Interpreter CPU:
     Enables interpretive emulation.
     This is often more compatible, but at the price of emulation speed.
+
+Currently, PCSX-Reloaded does not support CD-DA tracks when loading
+image files. In this case, to experience music in games such as Tekken
+and Wipeout 2097, a CD emulation software should be used in conjunction
+with the emulator. DAEMON Tools (http://www.daemon-tools.cc) and CDEmu
+(http://cdemu.sourceforge.net) were tested to work under Windows and
+GNU/Linux respectively.

@@ -1099,11 +1099,11 @@ BuildCmd=$(CC) -c cheat.c -o cheat.o $(CFLAGS)
 
 [Unit106]
 FileName=gui\CheatDlg.c
-CompileCpp=1
+CompileCpp=0
 Folder=gui
 Compile=1
 Link=1
 Priority=1000
 OverrideBuildCmd=0
-BuildCmd=
+BuildCmd=$(CC) -c CheatDlg.c -o CheatDlg.o $(CFLAGS)
 

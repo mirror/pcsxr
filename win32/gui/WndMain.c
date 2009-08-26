@@ -1499,6 +1499,32 @@ void CreateMainMenu() {
 	ADDMENUITEM(0, _("Cheat &Search..."), ID_CONFIGURATION_CHEATSEARCH);
 	ADDMENUITEM(0, _("Ch&eat Code..."), ID_CONFIGURATION_CHEATLIST);
 	ADDSEPARATOR(0);
+#ifdef ENABLE_NLS
+	ADDSUBMENUS(0, 1, _("&Language"));
+
+	if (langs != langs) free(langs);
+	langs = (_langs*)malloc(sizeof(_langs));
+	strcpy(langs[0].lang, "English");
+	InitLanguages(); i=1;
+	while ((lang = GetLanguageNext()) != NULL) {
+		langs = (_langs*)realloc(langs, sizeof(_langs)*(i+1));
+		strcpy(langs[i].lang, lang);
+		if (!strcmp(Config.Lang, lang)) {
+			ADDMENUITEMC(1, ParseLang(langs[i].lang), ID_LANGS + i);
+		} else {
+			ADDMENUITEM(1, ParseLang(langs[i].lang), ID_LANGS + i);
+		}
+		i++;
+	}
+	CloseLanguages();
+	langsMax = i;
+	if (!strcmp(Config.Lang, "English")) {
+		ADDMENUITEMC(1, _("English"), ID_LANGS);
+	} else {
+		ADDMENUITEM(1, _("English"), ID_LANGS);
+	}
+	ADDSEPARATOR(0);
+#endif
 	ADDMENUITEM(0, _("&Memory cards..."), ID_CONFIGURATION_MEMORYCARDMANAGER);
 	ADDMENUITEM(0, _("C&PU..."), ID_CONFIGURATION_CPU);
 	ADDSEPARATOR(0);
@@ -1510,32 +1536,6 @@ void CreateMainMenu() {
 	ADDMENUITEM(0, _("&Graphics..."), ID_CONFIGURATION_GRAPHICS);
 	ADDSEPARATOR(0);
 	ADDMENUITEM(0, _("&Plugins && Bios..."), ID_CONFIGURATION);
-
-#ifdef ENABLE_NLS
-	ADDSUBMENU(0, _("&Language"));
-
-	if (langs != langs) free(langs);
-	langs = (_langs*)malloc(sizeof(_langs));
-	strcpy(langs[0].lang, "English");
-	InitLanguages(); i=1;
-	while ((lang = GetLanguageNext()) != NULL) {
-		langs = (_langs*)realloc(langs, sizeof(_langs)*(i+1));
-		strcpy(langs[i].lang, lang);
-		if (!strcmp(Config.Lang, lang)) {
-			ADDMENUITEMC(0, ParseLang(langs[i].lang), ID_LANGS + i);
-		} else {
-			ADDMENUITEM(0, ParseLang(langs[i].lang), ID_LANGS + i);
-		}
-		i++;
-	}
-	CloseLanguages();
-	langsMax = i;
-	if (!strcmp(Config.Lang, "English")) {
-		ADDMENUITEMC(0, _("English"), ID_LANGS);
-	} else {
-		ADDMENUITEM(0, _("English"), ID_LANGS);
-	}
-#endif
 
 	ADDSUBMENU(0, _("&Help"));
 	ADDMENUITEM(0, _("&About..."), ID_HELP_ABOUT);

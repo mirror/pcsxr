@@ -19,6 +19,9 @@
 
 #include <windows.h>
 #include <windowsx.h>
+#ifndef _WIN32_IE
+#define _WIN32_IE 0x0400
+#endif
 #include <commctrl.h>
 #include <stdio.h>
 #include "psxcommon.h"
@@ -80,7 +83,7 @@ static LRESULT WINAPI CheatEditDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM
 			break;
 
 		case WM_COMMAND:
-			switch (wParam) {
+			switch (LOWORD(wParam)) {
 				case IDOK:
 					Edit_GetText(GetDlgItem(hW, IDC_DESCR), szDescr, 256);
 					Edit_GetText(GetDlgItem(hW, IDC_CODE), szCode, 1024);
@@ -95,13 +98,13 @@ static LRESULT WINAPI CheatEditDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM
 					break;
 
 				case IDCANCEL:
-					EndDialog(hW, TRUE);
+					EndDialog(hW, FALSE);
 					return TRUE;
 			}
 			break;
 
 		case WM_CLOSE:
-			EndDialog(hW, TRUE);
+			EndDialog(hW, FALSE);
 			return TRUE;
 	}
 
@@ -121,7 +124,7 @@ static LRESULT WINAPI CheatAddDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM 
 			break;
 
 		case WM_COMMAND:
-			switch (wParam) {
+			switch (LOWORD(wParam)) {
 				case IDOK:
 					Edit_GetText(GetDlgItem(hW, IDC_DESCR), szDescr, 256);
 					Edit_GetText(GetDlgItem(hW, IDC_CODE), szCode, 1024);
@@ -136,13 +139,13 @@ static LRESULT WINAPI CheatAddDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM 
 					break;
 
 				case IDCANCEL:
-					EndDialog(hW, TRUE);
+					EndDialog(hW, FALSE);
 					return TRUE;
 			}
 			break;
 
 		case WM_CLOSE:
-			EndDialog(hW, TRUE);
+			EndDialog(hW, FALSE);
 			return TRUE;
 	}
 
@@ -194,9 +197,9 @@ LRESULT WINAPI CheatDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 			break;
 
 		case WM_COMMAND:
-			switch (wParam) {
+			switch (LOWORD(wParam)) {
 				case IDCANCEL:
-					EndDialog(hW, TRUE);
+					EndDialog(hW, FALSE);
 					return TRUE;
 
 				case IDC_ADDCODE:
@@ -204,7 +207,7 @@ LRESULT WINAPI CheatDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 					szDescr[0] = '\0';
 					szCode[0] = '\0';
 
-					DialogBox(gApp.hInstance, MAKEINTRESOURCE(IDD_CHEATEDIT), hW, CheatAddDlgProc);
+					DialogBox(gApp.hInstance, MAKEINTRESOURCE(IDD_CHEATEDIT), hW, (DLGPROC)CheatAddDlgProc);
 
 					if (NumCheats > i) {
 						// new cheat added
@@ -230,7 +233,7 @@ LRESULT WINAPI CheatDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 					iEditItem = ListView_GetSelectionMark(List);
 
 					if (iEditItem != -1) {
-						DialogBox(gApp.hInstance, MAKEINTRESOURCE(IDD_CHEATEDIT), hW, CheatEditDlgProc);
+						DialogBox(gApp.hInstance, MAKEINTRESOURCE(IDD_CHEATEDIT), hW, (DLGPROC)CheatEditDlgProc);
 
 						memset(&item, 0, sizeof(item));
 
@@ -274,10 +277,10 @@ LRESULT WINAPI CheatDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 				case IDC_LOADCODE:
 					memset(&szFileName,  0, sizeof(szFileName));
-                    memset(&szFileTitle, 0, sizeof(szFileTitle));
-                    memset(&szFilter,    0, sizeof(szFilter));
+					memset(&szFileTitle, 0, sizeof(szFileTitle));
+					memset(&szFilter,    0, sizeof(szFilter));
 
-                    strcpy(szFilter, _("PCSX Cheat Code Files"));
+					strcpy(szFilter, _("PCSX Cheat Code Files"));
 					strcatz(szFilter, "*.*");
 
 					ofn.lStructSize			= sizeof(OPENFILENAME);
@@ -303,10 +306,10 @@ LRESULT WINAPI CheatDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 				case IDC_SAVECODE:
 					memset(&szFileName,  0, sizeof(szFileName));
-                    memset(&szFileTitle, 0, sizeof(szFileTitle));
-                    memset(&szFilter,    0, sizeof(szFilter));
+					memset(&szFileTitle, 0, sizeof(szFileTitle));
+					memset(&szFilter,    0, sizeof(szFilter));
 
-                    strcpy(szFilter, _("PCSX Cheat Code Files"));
+					strcpy(szFilter, _("PCSX Cheat Code Files"));
 					strcatz(szFilter, "*.*");
 
 					ofn.lStructSize			= sizeof(OPENFILENAME);
@@ -354,7 +357,7 @@ LRESULT WINAPI CheatDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 			break;
 
 		case WM_CLOSE:
-			EndDialog(hW, TRUE);
+			EndDialog(hW, FALSE);
 			return TRUE;
 	}
 
@@ -388,14 +391,284 @@ static uint32_t current_valueto		= 0;
 
 static void UpdateCheatSearchDlg(HWND hW) {
 	char		buf[256];
+	int			i;
 
-	// clear all combo boxes
 	SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_RESETCONTENT, 0, 0);
-	SendMessage(GetDlgItem(hW, IDC_DATATYPE), CB_RESETCONTENT, 0, 0);
-	SendMessage(GetDlgItem(hW, IDC_DATABASE), CB_RESETCONTENT, 0, 0);
+	SendMessage(GetDlgItem(hW, IDC_RESLIST), LB_RESETCONTENT, 0, 0);
+
+	Button_Enable(GetDlgItem(hW, IDC_FREEZE), FALSE);
+	Button_Enable(GetDlgItem(hW, IDC_MODIFY), FALSE);
+	Button_Enable(GetDlgItem(hW, IDC_COPY), FALSE);
+
+	SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_ADDSTRING, 0, (LPARAM)_("Equal Value"));
+	SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_ADDSTRING, 0, (LPARAM)_("Not Equal Value"));
+	SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_ADDSTRING, 0, (LPARAM)_("Range"));
+
+	if (prevM != NULL) {
+		SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_ADDSTRING, 0, (LPARAM)_("Increased By"));
+		SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_ADDSTRING, 0, (LPARAM)_("Decreased By"));
+		SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_ADDSTRING, 0, (LPARAM)_("Increased"));
+		SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_ADDSTRING, 0, (LPARAM)_("Decreased"));
+		SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_ADDSTRING, 0, (LPARAM)_("Different"));
+		SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_ADDSTRING, 0, (LPARAM)_("No Change"));
+	}
+
+	SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_SETCURSEL, (WPARAM)current_search, 0);
+
+	if (current_search == SEARCH_RANGE) {
+		ShowWindow(GetDlgItem(hW, IDC_LABEL_TO), SW_SHOW);
+		ShowWindow(GetDlgItem(hW, IDC_VALUETO), SW_SHOW);
+	}
+	else {
+		ShowWindow(GetDlgItem(hW, IDC_LABEL_TO), SW_HIDE);
+		ShowWindow(GetDlgItem(hW, IDC_VALUETO), SW_HIDE);
+	}
+
+	SendMessage(GetDlgItem(hW, IDC_DATATYPE), CB_SETCURSEL, (WPARAM)current_searchtype, 0);
+	SendMessage(GetDlgItem(hW, IDC_DATABASE), CB_SETCURSEL, (WPARAM)current_searchbase, 0);
+
+	if (current_searchbase == SEARCHBASE_HEX) {
+		sprintf(buf, "%X", current_valuefrom);
+		SetWindowText(GetDlgItem(hW, IDC_VALUEFROM), buf);
+		sprintf(buf, "%X", current_valueto);
+		SetWindowText(GetDlgItem(hW, IDC_VALUETO), buf);
+	}
+	else {
+		sprintf(buf, "%u", current_valuefrom);
+		SetWindowText(GetDlgItem(hW, IDC_VALUEFROM), buf);
+		sprintf(buf, "%u", current_valueto);
+		SetWindowText(GetDlgItem(hW, IDC_VALUETO), buf);
+	}
+
+	if (prevM == NULL) {
+		SendMessage(GetDlgItem(hW, IDC_RESLIST), LB_ADDSTRING, (WPARAM)0, (LPARAM)_("Enter the values and start your search."));
+		EnableWindow(GetDlgItem(hW, IDC_RESLIST), FALSE);
+	}
+	else {
+		if (NumSearchResults == 0) {
+			SendMessage(GetDlgItem(hW, IDC_RESLIST), LB_ADDSTRING, (WPARAM)0, (LPARAM)_("No addresses found."));
+			EnableWindow(GetDlgItem(hW, IDC_RESLIST), FALSE);
+		}
+		else if (NumSearchResults > 100) {
+			SendMessage(GetDlgItem(hW, IDC_RESLIST), LB_ADDSTRING, (WPARAM)0, (LPARAM)_("Too many addresses found."));
+			EnableWindow(GetDlgItem(hW, IDC_RESLIST), FALSE);
+		}
+		else {
+			for (i = 0; i < NumSearchResults; i++) {
+				u32 addr = SearchResults[i];
+
+				switch (current_searchtype) {
+					case SEARCHTYPE_8BIT:
+						sprintf(buf, _("%.8X    Current: %u (%.2X), Previous: %u (%.2X)"),
+							addr, PSXMu8(addr), PSXMu8(addr), PrevMu8(addr), PrevMu8(addr));
+						break;
+
+					case SEARCHTYPE_16BIT:
+						sprintf(buf, _("%.8X    Current: %u (%.4X), Previous: %u (%.4X)"),
+							addr, PSXMu16(addr), PSXMu16(addr), PrevMu16(addr), PrevMu16(addr));
+						break;
+
+					case SEARCHTYPE_32BIT:
+						sprintf(buf, _("%.8X    Current: %u (%.8X), Previous: %u (%.8X)"),
+							addr, PSXMu32(addr), PSXMu32(addr), PrevMu32(addr), PrevMu32(addr));
+						break;
+
+					default:
+						assert(FALSE); // impossible
+						break;
+				}
+
+				SendMessage(GetDlgItem(hW, IDC_RESLIST), LB_ADDSTRING, (WPARAM)0, (LPARAM)buf);
+				SendMessage(GetDlgItem(hW, IDC_RESLIST), LB_SETITEMDATA, i, (LPARAM)i);
+			}
+			EnableWindow(GetDlgItem(hW, IDC_RESLIST), TRUE);
+		}
+	}
+
+	sprintf(buf, _("Founded Addresses: %d"), NumSearchResults);
+	Static_SetText(GetDlgItem(hW, IDC_LABEL_RESULTSFOUND), buf);
+}
+
+static int iCurItem = 0;
+
+static LRESULT WINAPI CheatFreezeProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+	u32			val;
+	char		buf[256];
+
+	switch (uMsg) {
+		case WM_INITDIALOG:
+			SetWindowText(hW, _("Freeze"));
+			Static_SetText(GetDlgItem(hW, IDC_LABEL_ADDRESS), _("Address:"));
+			Static_SetText(GetDlgItem(hW, IDC_LABEL_VALUE), _("Value:"));
+
+			sprintf(buf, "%.8X", SearchResults[iCurItem]);
+			SetWindowText(GetDlgItem(hW, IDC_ADDRESS), buf);
+
+			switch (current_searchtype) {
+				case SEARCHTYPE_8BIT:
+					val = PSXMu8(SearchResults[iCurItem]);
+					break;
+
+				case SEARCHTYPE_16BIT:
+					val = PSXMu16(SearchResults[iCurItem]);
+					break;
+
+				case SEARCHTYPE_32BIT:
+					val = PSXMu32(SearchResults[iCurItem]);
+					break;
+
+				default:
+					assert(FALSE); // should not reach here
+					break;
+			}
+
+			sprintf(buf, "%u", val);
+			SetWindowText(GetDlgItem(hW, IDC_VALUE), buf);
+			break;
+
+		case WM_COMMAND:
+			switch (LOWORD(wParam)) {
+				case IDOK:
+					val = 0;
+					GetWindowText(GetDlgItem(hW, IDC_VALUE), buf, 255);
+					sscanf(buf, "%u", &val);
+
+					switch (current_searchtype) {
+						case SEARCHTYPE_8BIT:
+							if (val > (u32)0xFF) {
+								val = 0xFF;
+							}
+							sprintf(szCode, "%.8X %.4X", (SearchResults[iCurItem] & 0x1FFFFF) | (CHEAT_CONST8 << 24), val);
+							break;
+
+						case SEARCHTYPE_16BIT:
+							if (val > (u32)0xFFFF) {
+								val = 0xFFFF;
+							}
+							sprintf(szCode, "%.8X %.4X", (SearchResults[iCurItem] & 0x1FFFFF) | (CHEAT_CONST16 << 24), val);
+							break;
+
+						case SEARCHTYPE_32BIT:
+							sprintf(szCode, "%.8X %.4X\n%.8X %.4X",
+								(SearchResults[iCurItem] & 0x1FFFFF) | (CHEAT_CONST16 << 24), val & 0xFFFF,
+								((SearchResults[iCurItem] + 2) & 0x1FFFFF) | (CHEAT_CONST16 << 24), ((val & 0xFFFF0000) >> 16) & 0xFFFF);
+							break;
+
+						default:
+							assert(FALSE); // should not reach here
+							break;
+					}
+
+					sprintf(szDescr, _("Freeze %.8X"), SearchResults[iCurItem]);
+
+					if (DialogBox(gApp.hInstance, MAKEINTRESOURCE(IDD_CHEATEDIT), hW, (DLGPROC)CheatAddDlgProc)) {
+						Cheats[NumCheats - 1].Enabled = 1;
+						EndDialog(hW, TRUE);
+						return TRUE;
+					}
+					break;
+
+				case IDCANCEL:
+					EndDialog(hW, FALSE);
+					return TRUE;
+			}
+			break;
+
+		case WM_CLOSE:
+			EndDialog(hW, FALSE);
+			return TRUE;
+	}
+
+	return FALSE;
+}
+
+static LRESULT WINAPI CheatModifyProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+	u32			val;
+	char		buf[256];
+
+	switch (uMsg) {
+		case WM_INITDIALOG:
+			SetWindowText(hW, _("Modify"));
+			Static_SetText(GetDlgItem(hW, IDC_LABEL_ADDRESS), _("Address:"));
+			Static_SetText(GetDlgItem(hW, IDC_LABEL_VALUE), _("Value:"));
+
+			sprintf(buf, "%.8X", SearchResults[iCurItem]);
+			SetWindowText(GetDlgItem(hW, IDC_ADDRESS), buf);
+
+			switch (current_searchtype) {
+				case SEARCHTYPE_8BIT:
+					val = PSXMu8(SearchResults[iCurItem]);
+					break;
+
+				case SEARCHTYPE_16BIT:
+					val = PSXMu16(SearchResults[iCurItem]);
+					break;
+
+				case SEARCHTYPE_32BIT:
+					val = PSXMu32(SearchResults[iCurItem]);
+					break;
+
+				default:
+					assert(FALSE); // should not reach here
+					break;
+			}
+
+			sprintf(buf, "%u", val);
+			SetWindowText(GetDlgItem(hW, IDC_VALUE), buf);
+			break;
+
+		case WM_COMMAND:
+			switch (LOWORD(wParam)) {
+				case IDOK:
+					val = 0;
+					GetWindowText(GetDlgItem(hW, IDC_VALUE), buf, 255);
+					sscanf(buf, "%u", &val);
+
+					switch (current_searchtype) {
+						case SEARCHTYPE_8BIT:
+							if (val > 0xFF) {
+								val = 0xFF;
+							}
+							psxMemWrite8(SearchResults[iCurItem], (u8)val);
+							break;
+
+						case SEARCHTYPE_16BIT:
+							if (val > 0xFFFF) {
+								val = 0xFFFF;
+							}
+							psxMemWrite16(SearchResults[iCurItem], (u16)val);
+							break;
+
+						case SEARCHTYPE_32BIT:
+							psxMemWrite32(SearchResults[iCurItem], (u32)val);
+							break;
+
+						default:
+							assert(FALSE); // should not reach here
+							break;
+					}
+
+					EndDialog(hW, TRUE);
+					return TRUE;
+
+				case IDCANCEL:
+					EndDialog(hW, TRUE);
+					return FALSE;
+			}
+			break;
+
+		case WM_CLOSE:
+			EndDialog(hW, TRUE);
+			return FALSE;
+	}
+
+	return FALSE;
 }
 
 LRESULT WINAPI CheatSearchDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+	char			buf[256];
+	uint32_t		i;
+
 	switch (uMsg) {
 		case WM_INITDIALOG:
 			SetWindowText(hW, _("Cheat Search"));
@@ -412,43 +685,330 @@ LRESULT WINAPI CheatSearchDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Button_SetText(GetDlgItem(hW, IDC_NEWSEARCH), _("&New Search"));
 			Button_SetText(GetDlgItem(hW, IDCANCEL), _("C&lose"));
 
+			SendMessage(GetDlgItem(hW, IDC_DATATYPE), CB_ADDSTRING, 0, (LPARAM)_("8-bit"));
+			SendMessage(GetDlgItem(hW, IDC_DATATYPE), CB_ADDSTRING, 0, (LPARAM)_("16-bit"));
+			SendMessage(GetDlgItem(hW, IDC_DATATYPE), CB_ADDSTRING, 0, (LPARAM)_("32-bit"));
+			SendMessage(GetDlgItem(hW, IDC_DATABASE), CB_ADDSTRING, 0, (LPARAM)_("Decimal"));
+			SendMessage(GetDlgItem(hW, IDC_DATABASE), CB_ADDSTRING, 0, (LPARAM)_("Hexadecimal"));
+
 			UpdateCheatSearchDlg(hW);
 			break;
 
 		case WM_COMMAND:
-			switch (LOBYTE(wParam)) {
+			switch (LOWORD(wParam)) {
 				case IDCANCEL:
-					EndDialog(hW, TRUE);
+					EndDialog(hW, FALSE);
 					return TRUE;
 
 				case IDC_FREEZE:
+					iCurItem = SendMessage(GetDlgItem(hW, IDC_RESLIST), LB_GETCURSEL, 0, 0);
+					DialogBox(gApp.hInstance, MAKEINTRESOURCE(IDD_CHEATVALEDIT), hW, (DLGPROC)CheatFreezeProc);
 					break;
 
 				case IDC_MODIFY:
+					iCurItem = SendMessage(GetDlgItem(hW, IDC_RESLIST), LB_GETCURSEL, 0, 0);
+					DialogBox(gApp.hInstance, MAKEINTRESOURCE(IDD_CHEATVALEDIT), hW, (DLGPROC)CheatModifyProc);
+					UpdateCheatSearchDlg(hW);
 					break;
 
 				case IDC_COPY:
+					i = SendMessage(GetDlgItem(hW, IDC_RESLIST), LB_GETCURSEL, 0, 0);
+					sprintf(buf, "%.8X", SearchResults[i]);
+
+					if (OpenClipboard(gApp.hWnd)) {
+						HGLOBAL hglbCopy = GlobalAlloc(GHND, 256);
+						char *p;
+
+						if (hglbCopy != NULL) {
+							p = (char *)GlobalLock(hglbCopy);
+							strcpy(p, buf);
+							GlobalUnlock(p);
+
+							EmptyClipboard();
+							SetClipboardData(CF_TEXT, (HANDLE)hglbCopy);
+						}
+
+						CloseClipboard();
+					}
 					break;
 
 				case IDC_SEARCH:
+					current_search = SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_GETCURSEL, 0, 0);
+					current_searchtype = SendMessage(GetDlgItem(hW, IDC_DATATYPE), CB_GETCURSEL, 0, 0);
+					current_searchbase = SendMessage(GetDlgItem(hW, IDC_DATABASE), CB_GETCURSEL, 0, 0);
+					current_valuefrom = 0;
+					current_valueto = 0;
+
+					if (current_searchbase == SEARCHBASE_DEC) {
+						GetWindowText(GetDlgItem(hW, IDC_VALUEFROM), (LPTSTR)buf, 255);
+						sscanf(buf, "%u", &current_valuefrom);
+						GetWindowText(GetDlgItem(hW, IDC_VALUETO), (LPTSTR)buf, 255);
+						sscanf(buf, "%u", &current_valueto);
+					}
+					else {
+						GetWindowText(GetDlgItem(hW, IDC_VALUEFROM), (LPTSTR)buf, 255);
+						sscanf(buf, "%x", &current_valuefrom);
+						GetWindowText(GetDlgItem(hW, IDC_VALUETO), (LPTSTR)buf, 255);
+						sscanf(buf, "%x", &current_valueto);
+					}
+
+					switch (current_searchtype) {
+						case SEARCHTYPE_8BIT:
+							if (current_valuefrom > (u32)0xFF) {
+								current_valuefrom = 0xFF;
+							}
+							if (current_valueto > (u32)0xFF) {
+								current_valueto = 0xFF;
+							}
+							break;
+
+						case SEARCHTYPE_16BIT:
+							if (current_valuefrom > (u32)0xFFFF) {
+								current_valuefrom = 0xFFFF;
+							}
+							if (current_valueto > (u32)0xFFFF) {
+								current_valueto = 0xFFFF;
+							}
+						break;
+					}
+
+					if (current_search == SEARCH_RANGE && current_valuefrom > current_valueto) {
+						u32 t = current_valuefrom;
+						current_valuefrom = current_valueto;
+						current_valueto = t;
+					}
+
+					switch (current_search) {
+						case SEARCH_EQUALVAL:
+							switch (current_searchtype) {
+								case SEARCHTYPE_8BIT:
+									CheatSearchEqual8((u8)current_valuefrom);
+									break;
+
+								case SEARCHTYPE_16BIT:
+									CheatSearchEqual16((u16)current_valuefrom);
+									break;
+
+								case SEARCHTYPE_32BIT:
+									CheatSearchEqual32((u32)current_valuefrom);
+									break;
+							}
+							break;
+
+						case SEARCH_NOTEQUALVAL:
+							switch (current_searchtype) {
+								case SEARCHTYPE_8BIT:
+									CheatSearchNotEqual8((u8)current_valuefrom);
+									break;
+
+								case SEARCHTYPE_16BIT:
+									CheatSearchNotEqual16((u16)current_valuefrom);
+									break;
+
+								case SEARCHTYPE_32BIT:
+									CheatSearchNotEqual32((u32)current_valuefrom);
+									break;
+							}
+							break;
+
+						case SEARCH_RANGE:
+							switch (current_searchtype) {
+								case SEARCHTYPE_8BIT:
+									CheatSearchRange8((u8)current_valuefrom, (u8)current_valueto);
+									break;
+
+								case SEARCHTYPE_16BIT:
+									CheatSearchRange16((u16)current_valuefrom, (u16)current_valueto);
+									break;
+
+								case SEARCHTYPE_32BIT:
+									CheatSearchRange32((u32)current_valuefrom, (u32)current_valueto);
+									break;
+							}
+							break;
+
+						case SEARCH_INCBY:
+							switch (current_searchtype) {
+								case SEARCHTYPE_8BIT:
+									CheatSearchIncreasedBy8((u8)current_valuefrom);
+									break;
+
+								case SEARCHTYPE_16BIT:
+									CheatSearchIncreasedBy16((u16)current_valuefrom);
+									break;
+
+								case SEARCHTYPE_32BIT:
+									CheatSearchIncreasedBy32((u32)current_valuefrom);
+									break;
+							}
+							break;
+
+						case SEARCH_DECBY:
+							switch (current_searchtype) {
+								case SEARCHTYPE_8BIT:
+									CheatSearchDecreasedBy8((u8)current_valuefrom);
+									break;
+
+								case SEARCHTYPE_16BIT:
+									CheatSearchDecreasedBy16((u16)current_valuefrom);
+									break;
+
+								case SEARCHTYPE_32BIT:
+									CheatSearchDecreasedBy32((u32)current_valuefrom);
+									break;
+							}
+							break;
+
+						case SEARCH_INC:
+							switch (current_searchtype) {
+								case SEARCHTYPE_8BIT:
+									CheatSearchIncreased8();
+									break;
+
+								case SEARCHTYPE_16BIT:
+									CheatSearchIncreased16();
+									break;
+
+								case SEARCHTYPE_32BIT:
+									CheatSearchIncreased32();
+									break;
+							}
+							break;
+
+						case SEARCH_DEC:
+							switch (current_searchtype) {
+								case SEARCHTYPE_8BIT:
+									CheatSearchDecreased8();
+									break;
+
+								case SEARCHTYPE_16BIT:
+									CheatSearchDecreased16();
+									break;
+
+								case SEARCHTYPE_32BIT:
+									CheatSearchDecreased32();
+									break;
+							}
+							break;
+
+						case SEARCH_DIFFERENT:
+							switch (current_searchtype) {
+								case SEARCHTYPE_8BIT:
+									CheatSearchDifferent8();
+									break;
+
+								case SEARCHTYPE_16BIT:
+									CheatSearchDifferent16();
+									break;
+
+								case SEARCHTYPE_32BIT:
+									CheatSearchDifferent32();
+									break;
+							}
+							break;
+
+						case SEARCH_NOCHANGE:
+							switch (current_searchtype) {
+								case SEARCHTYPE_8BIT:
+									CheatSearchNoChange8();
+									break;
+
+								case SEARCHTYPE_16BIT:
+									CheatSearchNoChange16();
+									break;
+
+								case SEARCHTYPE_32BIT:
+									CheatSearchNoChange32();
+									break;
+							}
+							break;
+
+						default:
+							assert(FALSE); // not possible
+							break;
+					}
+
+					UpdateCheatSearchDlg(hW);
 					break;
 
 				case IDC_NEWSEARCH:
+					FreeCheatSearchMem();
+					FreeCheatSearchResults();
+
+					current_search = SEARCH_EQUALVAL;
+					current_searchtype = SEARCHTYPE_8BIT;
+					current_searchbase = SEARCHBASE_DEC;
+					current_valuefrom = 0;
+					current_valueto = 0;
+
+					UpdateCheatSearchDlg(hW);
 					break;
 
 				case IDC_SEARCHFOR:
+					EnableWindow(GetDlgItem(hW, IDC_VALUEFROM), TRUE);
+
+					if (SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_GETCURSEL, 0, 0) == SEARCH_RANGE) {
+						ShowWindow(GetDlgItem(hW, IDC_LABEL_TO), SW_SHOW);
+						ShowWindow(GetDlgItem(hW, IDC_VALUETO), SW_SHOW);
+					}
+					else {
+						ShowWindow(GetDlgItem(hW, IDC_LABEL_TO), SW_HIDE);
+						ShowWindow(GetDlgItem(hW, IDC_VALUETO), SW_HIDE);
+
+						if (SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_GETCURSEL, 0, 0) >= SEARCH_INC) {
+							EnableWindow(GetDlgItem(hW, IDC_VALUEFROM), FALSE);
+						}
+					}
 					break;
 
 				case IDC_DATABASE:
+					if (SendMessage(GetDlgItem(hW, IDC_DATABASE), CB_GETCURSEL, 0, 0) == SEARCHBASE_DEC) {
+						if (current_searchbase == SEARCHBASE_HEX) {
+							GetWindowText(GetDlgItem(hW, IDC_VALUEFROM), (LPTSTR)buf, 255);
+							sscanf(buf, "%x", &i);
+							sprintf(buf, "%u", i);
+							SetWindowText(GetDlgItem(hW, IDC_VALUEFROM), (LPCTSTR)buf);
+
+							GetWindowText(GetDlgItem(hW, IDC_VALUETO), (LPTSTR)buf, 255);
+							sscanf(buf, "%x", &i);
+							sprintf(buf, "%u", i);
+							SetWindowText(GetDlgItem(hW, IDC_VALUETO), (LPCTSTR)buf);
+						}
+					}
+					else if (current_searchbase == SEARCHBASE_DEC){
+						GetWindowText(GetDlgItem(hW, IDC_VALUEFROM), (LPTSTR)buf, 255);
+						sscanf(buf, "%u", &i);
+						sprintf(buf, "%X", i);
+						SetWindowText(GetDlgItem(hW, IDC_VALUEFROM), (LPCTSTR)buf);
+
+						GetWindowText(GetDlgItem(hW, IDC_VALUETO), (LPTSTR)buf, 255);
+						sscanf(buf, "%u", &i);
+						sprintf(buf, "%X", i);
+						SetWindowText(GetDlgItem(hW, IDC_VALUETO), (LPCTSTR)buf);
+					}
+					current_searchbase = SendMessage(GetDlgItem(hW, IDC_DATABASE), CB_GETCURSEL, 0, 0);
 					break;
 
-				case IDC_DATATYPE:
+				case IDC_RESLIST:
+					switch (HIWORD(wParam)) {
+						case LBN_SELCHANGE:
+							Button_Enable(GetDlgItem(hW, IDC_FREEZE), TRUE);
+							Button_Enable(GetDlgItem(hW, IDC_MODIFY), TRUE);
+							Button_Enable(GetDlgItem(hW, IDC_COPY), TRUE);
+							break;
+
+						case LBN_SELCANCEL:
+							Button_Enable(GetDlgItem(hW, IDC_FREEZE), FALSE);
+							Button_Enable(GetDlgItem(hW, IDC_MODIFY), FALSE);
+							Button_Enable(GetDlgItem(hW, IDC_COPY), FALSE);
+							break;
+					}
 					break;
 			}
 			break;
 
 		case WM_CLOSE:
-			EndDialog(hW, TRUE);
+			EndDialog(hW, FALSE);
 			return TRUE;
 	}
 

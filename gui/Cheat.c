@@ -831,10 +831,16 @@ static void OnCheatSearchDlg_ModifyClicked(GtkWidget *widget, gpointer user_data
 
 		switch (current_searchtype) {
 			case SEARCHTYPE_8BIT:
+				if (val > 0xFF) {
+					val = 0xFF;
+				}
 				psxMemWrite8(addr, (u8)val);
 				break;
 
 			case SEARCHTYPE_16BIT:
+				if (val > 0xFFFF) {
+					val = 0xFFFF;
+				}
 				psxMemWrite16(addr, (u16)val);
 				break;
 

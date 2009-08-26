@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
+// Microsoft Developer Studio generated include file.
 // Used by pcsx.rc
 //
 #define IDS_TITLE                       1
@@ -30,6 +30,7 @@
 #define IDD_CHEATEDIT                   114
 #define IDD_CP0REGS                     115
 #define IDC_COPY                        115
+#define IDD_CHEATVALEDIT                115
 #define IDD_COP2D                       116
 #define IDD_COP2C                       117
 #define MAIN_LOGO                       118
@@ -37,6 +38,7 @@
 #define IDD_MEMVIEW                     136
 #define IDC_EDIT2                       1001
 #define IDC_CODE                        1001
+#define IDC_VALUE                       1001
 #define IDC_MCD2                        1004
 #define IDC_ASMCHECK1                   1005
 #define IDC_MCD1                        1005
@@ -57,6 +59,7 @@
 #define IDC_EDIT1                       1013
 #define IDC_CDDA                        1013
 #define IDC_DESCR                       1013
+#define IDC_ADDRESS                     1013
 #define IDC_CLOSE                       1014
 #define IDC_PCSX_ABOUT_TEXT             1014
 #define IDC_PSXOUT                      1014
@@ -141,6 +144,7 @@
 #define IDC_LABEL_CODE                  1051
 #define IDC_GPR5                        1052
 #define IDC_LISTGPU                     1052
+#define IDC_LABEL_ADDRESS               1052
 #define IDC_GPR6                        1053
 #define IDC_LISTSPU                     1053
 #define IDC_GPR7                        1054
@@ -331,9 +335,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        114
+#define _APS_NEXT_RESOURCE_VALUE        116
 #define _APS_NEXT_COMMAND_VALUE         40047
-#define _APS_NEXT_CONTROL_VALUE         1052
+#define _APS_NEXT_CONTROL_VALUE         1053
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
