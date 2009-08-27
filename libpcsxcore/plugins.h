@@ -203,6 +203,7 @@ typedef struct {
 } SPUFreeze_t;
 typedef long (CALLBACK* SPUfreeze)(uint32_t, SPUFreeze_t *);
 typedef void (CALLBACK* SPUasync)(uint32_t);
+typedef void (CALLBACK* SPUplayCDDAchannel)(short *, int);
 
 //SPU POINTERS
 SPUconfigure        SPU_configure;
@@ -233,6 +234,7 @@ SPUplayADPCMchannel SPU_playADPCMchannel;
 SPUfreeze           SPU_freeze;
 SPUregisterCallback SPU_registerCallback;
 SPUasync            SPU_async;
+SPUplayCDDAchannel  SPU_playCDDAchannel;
 
 // PAD Functions
 

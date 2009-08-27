@@ -1,3 +1,9 @@
+August 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/plugins.h: Added prototype and interface for
+   SPUplayCDDAchannel().
+ * libpcsxcore/plugins.c: Likewise.
+
 August 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * win32/pcsx.rc: Completed the Cheat Search dialog.
