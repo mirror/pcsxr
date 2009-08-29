@@ -35,6 +35,8 @@ static inline int msf_to_lba(char m, char s, char f) {
 	return (((m * CD_SECS) + s) * CD_FRAMES + f) - CD_MSF_OFFSET;
 }
 
+int initial_time = 0;
+
 pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
@@ -127,6 +129,7 @@ long CDRopen(void) {
 
 	playing = 0;
 	stopth = 0;
+	initial_time = 0;
 
 	return 0;
 }
@@ -365,6 +368,18 @@ long CDRplay(unsigned char *sector) {
 	if (cdHandle < 1)
 		return 0;
 
+	// If play was called with the same time as the previous call,
+	// don't restart it. of course, if play is called with a different
+	// track, stop playing the current stream.
+	if (playing)
+	{
+		if (msf_to_lba(sector[0], sector[1], sector[2]) == initial_time)
+			return 0;
+		else
+			CDRstop();
+	}
+	initial_time = msf_to_lba(sector[0], sector[1], sector[2]);
+
 	// 0 is the last track of every cdrom, so play up to there
 	if (CDRgetTD(0, ptmp) == -1)
 		return -1;
@@ -402,6 +417,7 @@ long CDRstop(void) {
 	}
 
 	playing = 0;
+	initial_time = 0;
 
 	return 0;
 }

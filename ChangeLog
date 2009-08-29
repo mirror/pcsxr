@@ -1,3 +1,10 @@
+August 29, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfcdrom/cdr.c: Don't restart the track if play was called with
+   the same time as the previous call.
+ * libpcsxcore/cdriso.c: Added playCDDA() and stopCDDA() functions. (still
+   not implemented)
+
 August 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/plugins.h: Added prototype and interface for

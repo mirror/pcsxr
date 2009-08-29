@@ -111,6 +111,14 @@ static void tok2msf(char *time, char *msf) {
 	}
 }
 
+// start the CDDA playback
+static void startCDDA(unsigned int offset) {
+}
+
+// stop the CDDA playback
+static void stopCDDA() {
+}
+
 // this function tries to get the .toc file of the given .bin
 // the necessary data is put into the ti (trackinformation)-array
 static int parsetoc(const char *isofile) {
@@ -381,6 +389,7 @@ static long CALLBACK ISOshutdown(void) {
 		fclose(subHandle);
 		subHandle = NULL;
 	}
+	stopCDDA();
 	return 0;
 }
 
@@ -426,6 +435,7 @@ static long CALLBACK ISOclose(void) {
 		fclose(subHandle);
 		subHandle = NULL;
 	}
+	stopCDDA();
 	return 0;
 }
 
@@ -494,12 +504,17 @@ static unsigned char * CALLBACK ISOgetBuffer(void) {
 // sector: byte 0 - minute; byte 1 - second; byte 2 - frame
 // does NOT uses bcd format
 static long CALLBACK ISOplay(unsigned char *time) {
-	return 0; // TODO
+	if (SPU_playCDDAchannel != NULL) {
+		SysPrintf("Starting cdda-audio (%i:%i:%i)...\n", time[0], time[1], time[2]);
+		startCDDA(MSF2SECT(time[0], time[1], time[2]) * CD_FRAMESIZE_RAW);
+	}
+	return 0;
 }
 
 // stops cdda audio
 static long CALLBACK ISOstop(void) {
-	return 0; // TODO
+	stopCDDA();
+	return 0;
 }
 
 // gets subchannel data
