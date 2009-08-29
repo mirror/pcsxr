@@ -369,7 +369,7 @@ long CDRplay(unsigned char *sector) {
 		return 0;
 
 	// If play was called with the same time as the previous call,
-	// don't restart it. of course, if play is called with a different
+	// don't restart it. Of course, if play is called with a different
 	// track, stop playing the current stream.
 	if (playing)
 	{
