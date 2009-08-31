@@ -7,7 +7,8 @@ August 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * doc/tweaks.txt: Removed obsolete information.
  * win32/pcsx.dsp: Use Multithreaded instead of Singlethreaded.
  * plugins/dfsound/alsa.c: Set the buffer_time and period_time manually,
-   hopefully the "lagging" issue can be fixed.
+   hopefully the "lagging" issue can be fixed. Implemented
+   SPUplayCDDAchannel() in the ALSA driver.
 
 August 29, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

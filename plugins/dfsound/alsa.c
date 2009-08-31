@@ -30,17 +30,96 @@
 static snd_pcm_t *handle = NULL;
 static snd_pcm_uframes_t buffer_size;
 
+static snd_pcm_t *handle_cdda = NULL;
+
+// SETUP CDDA SOUND
+void SetupCDDASound(void)
+{
+ snd_pcm_hw_params_t *hwparams;
+ unsigned int pspeed;
+ int pchannels = 2;
+ int format;
+ unsigned int buffer_time = 500000;
+ unsigned int period_time = buffer_time / 4;
+ int err;
+
+ pspeed = 44100;
+ format = SND_PCM_FORMAT_S16_LE;
+
+ if ((err = snd_pcm_open(&handle_cdda, "default", 
+                      SND_PCM_STREAM_PLAYBACK, SND_PCM_NONBLOCK)) < 0)
+  {
+   printf("Audio open error: %s\n", snd_strerror(err));
+   return;
+  }
+
+ if((err = snd_pcm_nonblock(handle_cdda, 0))<0)
+  {
+   printf("Can't set blocking moded: %s\n", snd_strerror(err));
+   return;
+  }
+
+ snd_pcm_hw_params_alloca(&hwparams);
+
+ if((err=snd_pcm_hw_params_any(handle_cdda, hwparams))<0)
+  {
+   printf("Broken configuration for this PCM: %s\n", snd_strerror(err));
+   return;
+  }
+
+ if((err=snd_pcm_hw_params_set_access(handle_cdda, hwparams, SND_PCM_ACCESS_RW_INTERLEAVED))<0)
+  {
+   printf("Access type not available: %s\n", snd_strerror(err));
+   return;
+  }
+
+ if((err=snd_pcm_hw_params_set_format(handle_cdda, hwparams, format))<0)
+  {
+   printf("Sample format not available: %s\n", snd_strerror(err));
+   return;
+  }
+
+ if((err=snd_pcm_hw_params_set_channels(handle_cdda, hwparams, pchannels))<0)
+  {
+   printf("Channels count not available: %s\n", snd_strerror(err));
+   return;
+  }
+
+ if((err=snd_pcm_hw_params_set_rate_near(handle_cdda, hwparams, &pspeed, 0))<0)
+  {
+   printf("Rate not available: %s\n", snd_strerror(err));
+   return;
+  }
+
+ if((err=snd_pcm_hw_params_set_buffer_time_near(handle_cdda, hwparams, &buffer_time, 0))<0)
+  {
+   printf("Buffer time error: %s\n", snd_strerror(err));
+   return;
+  }
+
+ if((err=snd_pcm_hw_params_set_period_time_near(handle_cdda, hwparams, &period_time, 0))<0)
+  {
+   printf("Period time error: %s\n", snd_strerror(err));
+   return;
+  }
+
+ if((err=snd_pcm_hw_params(handle_cdda, hwparams))<0)
+  {
+   printf("Unable to install hw params: %s\n", snd_strerror(err));
+   return;
+  }
+}
+
 // SETUP SOUND
 void SetupSound(void)
 {
  snd_pcm_hw_params_t *hwparams;
- snd_pcm_sw_params_t *swparams;
  snd_pcm_status_t *status;
- int pspeed;
+ unsigned int pspeed;
  int pchannels;
  int format;
- int buffer_time = 50000;
- int period_time = buffer_time / 4;
+ unsigned int buffer_time = 50000;
+ unsigned int period_time = buffer_time / 4;
  int err;
 
  if (iDisStereo) pchannels = 1;
@@ -63,7 +142,7 @@ void SetupSound(void)
   }
 
  snd_pcm_hw_params_alloca(&hwparams);
- snd_pcm_sw_params_alloca(&swparams);
+
  if((err=snd_pcm_hw_params_any(handle, hwparams))<0)
   {
    printf("Broken configuration for this PCM: %s\n", snd_strerror(err));
@@ -120,6 +199,8 @@ void SetupSound(void)
   }
 
  buffer_size = snd_pcm_status_get_avail(status);
+
+ SetupCDDASound();
 }
 
 // REMOVE SOUND
@@ -130,6 +211,13 @@ void RemoveSound(void)
    snd_pcm_drop(handle);
    snd_pcm_close(handle);
    handle = NULL;
+  }
+
+ if(handle_cdda != NULL)
+  {
+   snd_pcm_drop(handle_cdda);
+   snd_pcm_close(handle_cdda);
+   handle_cdda = NULL;
   }
 }
 
@@ -160,5 +248,14 @@ void SoundFeedStreamData(unsigned char* pSound,long lBytes)
                 iDisStereo ? lBytes / 2 : lBytes / 4);
 }
 
-#endif
+// PLAY CDDA CHANNEL
+void CALLBACK SPUplayCDDAchannel(short* pcm, int nbytes)
+{
+ if (handle_cdda == NULL) SetupCDDASound();
 
+ if (snd_pcm_state(handle_cdda) == SND_PCM_STATE_XRUN)
+  snd_pcm_prepare(handle_cdda);
+ snd_pcm_writei(handle_cdda, (unsigned char *)pcm, nbytes / 4);
+}
+
+#endif
