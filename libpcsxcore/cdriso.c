@@ -139,13 +139,15 @@ static void *playthread(void *param)
 
 	while (playing) {
 		d = (long)t - GetTickCount();
-		if (d > 0) {
-#ifdef _WIN32
-			Sleep(d);
-#else
-			usleep(d);
-#endif
+		if (d <= 0) {
+			d = 1;
 		}
+
+#ifdef _WIN32
+		Sleep(d);
+#else
+		usleep(d);
+#endif
 
 		t = GetTickCount() + 1000 * (sizeof(sndbuffer) / CD_FRAMESIZE_RAW) / 75;
 
