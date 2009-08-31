@@ -1,3 +1,14 @@
+August 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdriso.c: Implemented CDDA playing via SPUplayCDDAchannel().
+   Now CD tracks can be played directly via a SPU plugin which implements the
+   SPUplayCDDAchannel() function, e.g., spuEternal.
+ * libpcsxcore/cdriso.h: Removed unused prototypes.
+ * doc/tweaks.txt: Removed obsolete information.
+ * win32/pcsx.dsp: Use Multithreaded instead of Singlethreaded.
+ * plugins/dfsound/alsa.c: Set the buffer_time and period_time manually,
+   hopefully the "lagging" issue can be fixed.
+
 August 29, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfcdrom/cdr.c: Don't restart the track if play was called with

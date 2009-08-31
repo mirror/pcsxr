@@ -22,6 +22,5 @@
 #define CDRISO_H
 
 int imageReaderInit(void);
-unsigned int ISOgetTrackLength(unsigned int s);
 
 #endif

@@ -18,10 +18,16 @@
  *   51 Franklin Steet, Fifth Floor, Boston, MA 02111-1307 USA.            *
  ***************************************************************************/
 
-// TODO: implement CDDA support.
-
 #include "psxcommon.h"
 #include "plugins.h"
+
+#ifdef _WIN32
+#include <process.h>
+#include <windows.h>
+#else
+#include <pthread.h>
+#include <sys/time.h>
+#endif
 
 #define MSF2SECT(m, s, f)		(((m) * 60 + (s) - 2) * 75 + (f))
 #define btoi(b)					((b) / 16 * 10 + (b) % 16) /* BCD to u_char */
@@ -32,10 +38,21 @@
 #define SUB_FRAMESIZE			96
 
 FILE *cdHandle = NULL;
+FILE *cddaHandle = NULL;
 FILE *subHandle = NULL;
 
 static unsigned char cdbuffer[DATA_SIZE];
 static unsigned char subbuffer[SUB_FRAMESIZE];
+
+static unsigned char sndbuffer[CD_FRAMESIZE_RAW * 10];
+
+#ifdef _WIN32
+static HANDLE threadid;
+#else
+static pthread_t threadid;
+#endif
+static int initial_offset = 0;
+static int playing = 0;
 
 char* CALLBACK CDR__getDriveLetter(void);
 long CALLBACK CDR__configure(void);
@@ -71,17 +88,6 @@ static void sec2msf(unsigned int s, char *msf) {
 	msf[2] = s;
 }
 
-// get size of a track given the sector
-unsigned int ISOgetTrackLength(unsigned int s) {
-	int i = 1;
-
-	while ((msf2sec(ti[i].start) < s) && i <= numtracks) {
-		i++;
-	}
-
-	return msf2sec(ti[--i].length);
-}
-
 // divide a string of xx:yy:zz into m, s, f
 static void tok2msf(char *time, char *msf) {
 	char *token;
@@ -111,12 +117,103 @@ static void tok2msf(char *time, char *msf) {
 	}
 }
 
-// start the CDDA playback
-static void startCDDA(unsigned int offset) {
+#ifndef _WIN32
+static long GetTickCount(void) {
+	struct timeval now;
+	gettimeofday(&now, NULL);
+	return now.tv_sec * 1000L + now.tv_usec / 1000L;
+}
+#endif
+
+// this thread plays audio data
+#ifdef _WIN32
+static void playthread(void *param)
+#else
+static void *playthread(void *param)
+#endif
+{
+	time_t		t;
+	long		d;
+
+	t = 0;
+
+	while (playing) {
+		d = (long)t - GetTickCount();
+		if (d > 0) {
+#ifdef _WIN32
+			Sleep(d);
+#else
+			usleep(d);
+#endif
+		}
+
+		t = GetTickCount() + 1000 * (sizeof(sndbuffer) / CD_FRAMESIZE_RAW) / 75;
+
+		if ((d = fread(sndbuffer, 1, sizeof(sndbuffer), cddaHandle)) == 0) {
+			playing = 0;
+			fclose(cddaHandle);
+			cddaHandle = NULL;
+			initial_offset = 0;
+			break;
+		}
+
+		SPU_playCDDAchannel((short *)sndbuffer, d);
+	}
+
+#ifdef _WIN32
+	_endthread();
+#else
+	pthread_exit(0);
+	return NULL;
+#endif
 }
 
 // stop the CDDA playback
 static void stopCDDA() {
+	if (!playing) {
+		return;
+	}
+
+	playing = 0;
+#ifdef _WIN32
+	WaitForSingleObject(threadid, INFINITE);
+#else
+	pthread_join(threadid, NULL);
+#endif
+
+	if (cddaHandle != NULL) {
+		fclose(cddaHandle);
+		cddaHandle = NULL;
+	}
+
+	initial_offset = 0;
+}
+
+// start the CDDA playback
+static void startCDDA(unsigned int offset) {
+	if (playing) {
+		if (initial_offset == offset) {
+			return;
+		}
+		stopCDDA();
+	}
+
+	cddaHandle = fopen(cdrfilename, "rb");
+	if (cddaHandle == NULL) {
+		return;
+	}
+
+	initial_offset = offset;
+	fseek(cddaHandle, initial_offset, SEEK_SET);
+
+	offset /= CD_FRAMESIZE_RAW;
+
+	playing = 1;
+#ifdef _WIN32
+	threadid = (HANDLE)_beginthread(playthread, 0, NULL);
+#else
+	pthread_create(&threadid, NULL, playthread, NULL);
+#endif
 }
 
 // this function tries to get the .toc file of the given .bin
@@ -325,7 +422,7 @@ static int parseccd(const char *isofile) {
 			}
 
 			if (msf2sec(ti[numtracks].gap) != 0) {
-                sec2msf(t - msf2sec(ti[numtracks].gap), ti[numtracks].gap);
+				sec2msf(t - msf2sec(ti[numtracks].gap), ti[numtracks].gap);
 			}
 
 			t += msf2sec(ti[numtracks].gap);
@@ -505,7 +602,6 @@ static unsigned char * CALLBACK ISOgetBuffer(void) {
 // does NOT uses bcd format
 static long CALLBACK ISOplay(unsigned char *time) {
 	if (SPU_playCDDAchannel != NULL) {
-		SysPrintf("Starting cdda-audio (%i:%i:%i)...\n", time[0], time[1], time[2]);
 		startCDDA(MSF2SECT(time[0], time[1], time[2]) * CD_FRAMESIZE_RAW);
 	}
 	return 0;

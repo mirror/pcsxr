@@ -39,10 +39,8 @@ void SetupSound(void)
  int pspeed;
  int pchannels;
  int format;
-#if 0
- int buffer_time = 500000;
+ int buffer_time = 50000;
  int period_time = buffer_time / 4;
-#endif
  int err;
 
  if (iDisStereo) pchannels = 1;
@@ -96,7 +94,6 @@ void SetupSound(void)
    return;
   }
 
-#if 0
  if((err=snd_pcm_hw_params_set_buffer_time_near(handle, hwparams, &buffer_time, 0))<0)
   {
    printf("Buffer time error: %s\n", snd_strerror(err));
@@ -108,7 +105,6 @@ void SetupSound(void)
    printf("Period time error: %s\n", snd_strerror(err));
    return;
   }
-#endif
 
  if((err=snd_pcm_hw_params(handle, hwparams))<0)
   {
