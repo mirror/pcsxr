@@ -43,11 +43,13 @@
 #define CdlGetmode     15
 #define CdlGetlocL     16
 #define CdlGetlocP     17
-#define Cdl18          18
+#define CdlReadT       18
 #define CdlGetTN       19
 #define CdlGetTD       20
 #define CdlSeekL       21
 #define CdlSeekP       22
+#define CdlSetclock    23
+#define CdlGetclock    24
 #define CdlTest        25
 #define CdlID          26
 #define CdlReadS       27
@@ -63,14 +65,14 @@
 /* don't set 255, it's reserved */
 
 char *CmdName[0x100]= {
-    "CdlSync",    "CdlNop",       "CdlSetloc",  "CdlPlay",
-    "CdlForward", "CdlBackward",  "CdlReadN",   "CdlStandby",
-    "CdlStop",    "CdlPause",     "CdlInit",    "CdlMute",
-    "CdlDemute",  "CdlSetfilter", "CdlSetmode", "CdlGetmode",
-    "CdlGetlocL", "CdlGetlocP",   "Cdl18",      "CdlGetTN",
-    "CdlGetTD",   "CdlSeekL",     "CdlSeekP",   NULL,
-    NULL,         "CdlTest",      "CdlID",      "CdlReadS",
-    "CdlReset",   NULL,           "CDlReadToc", NULL
+    "CdlSync",     "CdlNop",       "CdlSetloc",  "CdlPlay",
+    "CdlForward",  "CdlBackward",  "CdlReadN",   "CdlStandby",
+    "CdlStop",     "CdlPause",     "CdlInit",    "CdlMute",
+    "CdlDemute",   "CdlSetfilter", "CdlSetmode", "CdlGetmode",
+    "CdlGetlocL",  "CdlGetlocP",   "CdlReadT",   "CdlGetTN",
+    "CdlGetTD",    "CdlSeekL",     "CdlSeekP",   "CdlSetclock",
+    "CdlGetclock", "CdlTest",      "CdlID",      "CdlReadS",
+    "CdlReset",    NULL,           "CDlReadToc", NULL
 };
 
 unsigned char Test04[] = { 0 };

@@ -1,3 +1,7 @@
+September 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdrom.c: Added the definations of some missing commands.
+
 August 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/cdriso.c: Implemented CDDA playing via SPUplayCDDAchannel().
