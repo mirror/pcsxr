@@ -37,6 +37,8 @@
 
 #define SUB_FRAMESIZE			96
 
+#define CDDA_FRAMETIME			(1000 * (sizeof(sndbuffer) / CD_FRAMESIZE_RAW) / 75)
+
 FILE *cdHandle = NULL;
 FILE *cddaHandle = NULL;
 FILE *subHandle = NULL;
@@ -147,13 +149,16 @@ static void *playthread(void *param)
 		if (d <= 0) {
 			d = 1;
 		}
+		else if (d > CDDA_FRAMETIME) {
+			d = CDDA_FRAMETIME;
+		}
 #ifdef _WIN32
 		Sleep(d);
 #else
 		usleep(d);
 #endif
 
-		t = GetTickCount() + 1000 * (sizeof(sndbuffer) / CD_FRAMESIZE_RAW) / 75;
+		t = GetTickCount() + CDDA_FRAMETIME;
 
 		if ((d = fread(sndbuffer, 1, sizeof(sndbuffer), cddaHandle)) == 0) {
 			playing = 0;
