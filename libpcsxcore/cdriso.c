@@ -119,9 +119,16 @@ static void tok2msf(char *time, char *msf) {
 
 #ifndef _WIN32
 static long GetTickCount(void) {
-	struct timeval now;
+	static time_t		initial_time = 0;
+	struct timeval		now;
+
 	gettimeofday(&now, NULL);
-	return now.tv_sec * 1000L + now.tv_usec / 1000L;
+
+	if (initial_time == 0) {
+		initial_time = now.tv_sec;
+	}
+
+	return (now.tv_sec - initial_time) * 1000L + now.tv_usec / 1000L;
 }
 #endif
 
@@ -135,14 +142,13 @@ static void *playthread(void *param)
 	time_t		t;
 	long		d;
 
-	t = 0;
+	t = GetTickCount();
 
 	while (playing) {
 		d = (long)t - GetTickCount();
 		if (d <= 0) {
 			d = 1;
 		}
-
 #ifdef _WIN32
 		Sleep(d);
 #else

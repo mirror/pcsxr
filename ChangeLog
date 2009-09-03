@@ -1,3 +1,7 @@
+September 3, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdriso.c: Fixed time overflow on 32-bit GNU/Linux system.
+
 September 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/cdrom.c: Added the definations of some missing commands.
