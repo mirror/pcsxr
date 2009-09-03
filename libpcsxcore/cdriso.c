@@ -155,7 +155,7 @@ static void *playthread(void *param)
 #ifdef _WIN32
 		Sleep(d);
 #else
-		usleep(d);
+		usleep(d * 1000);
 #endif
 
 		t = GetTickCount() + CDDA_FRAMETIME;
