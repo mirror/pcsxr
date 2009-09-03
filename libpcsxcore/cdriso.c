@@ -139,13 +139,11 @@ static void playthread(void *param)
 static void *playthread(void *param)
 #endif
 {
-	time_t		t;
+	long		t = GetTickCount();
 	long		d;
 
-	t = GetTickCount();
-
 	while (playing) {
-		d = (long)t - GetTickCount();
+		d = t - (long)GetTickCount();
 		if (d <= 0) {
 			d = 1;
 		}
