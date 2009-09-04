@@ -128,7 +128,10 @@ static void *playthread(void *param)
 
 	while (playing) {
 #ifdef _WIN32
-		Sleep(1);
+		// Sleep a little longer under Windows as the music tends to
+		// "skip" a lot with Windows version of spuEternal if the
+		// stream is fed too fast. The detailed reason is unknown.
+		Sleep(80);
 #else
 		usleep(1);
 #endif
