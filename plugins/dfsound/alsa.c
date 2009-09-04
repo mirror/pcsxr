@@ -251,7 +251,7 @@ void SoundFeedStreamData(unsigned char* pSound,long lBytes)
 // PLAY CDDA CHANNEL
 void CALLBACK SPUplayCDDAchannel(short* pcm, int nbytes)
 {
- if (handle_cdda == NULL) SetupCDDASound();
+ if (handle_cdda == NULL) return;
 
  if (snd_pcm_state(handle_cdda) == SND_PCM_STATE_XRUN)
   snd_pcm_prepare(handle_cdda);

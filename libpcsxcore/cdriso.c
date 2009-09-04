@@ -37,8 +37,6 @@
 
 #define SUB_FRAMESIZE			96
 
-#define CDDA_FRAMETIME			(1000 * (sizeof(sndbuffer) / CD_FRAMESIZE_RAW) / 75)
-
 FILE *cdHandle = NULL;
 FILE *cddaHandle = NULL;
 FILE *subHandle = NULL;
@@ -47,6 +45,8 @@ static unsigned char cdbuffer[DATA_SIZE];
 static unsigned char subbuffer[SUB_FRAMESIZE];
 
 static unsigned char sndbuffer[CD_FRAMESIZE_RAW * 10];
+
+#define CDDA_FRAMETIME			(1000 * (sizeof(sndbuffer) / CD_FRAMESIZE_RAW) / 75)
 
 #ifdef _WIN32
 static HANDLE threadid;
