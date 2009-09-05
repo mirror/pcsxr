@@ -20,6 +20,7 @@
 
 #include "psxcommon.h"
 #include "plugins.h"
+#include "cdrom.h"
 
 #ifdef _WIN32
 #include <process.h>
@@ -144,7 +145,16 @@ static void *playthread(void *param)
 			break;
 		}
 
-		SPU_playCDDAchannel((short *)sndbuffer, d);
+		if (!cdr.Muted) {
+			SPU_playCDDAchannel((short *)sndbuffer, d);
+		}
+		else {
+#ifdef _WIN32
+			Sleep(1000 * d / CD_FRAMESIZE_RAW / 75 - 80);
+#else
+			usleep(1000 * d / CD_FRAMESIZE_RAW / 75 * 1000);
+#endif
+		}
 	}
 
 #ifdef _WIN32
@@ -227,7 +237,10 @@ static int parsetoc(const char *isofile) {
 	}
 
 	if ((fi = fopen(tocname, "r")) == NULL) {
-		return -1;
+		sprintf(tocname, "%s.toc", isofile);
+		if ((fi = fopen(tocname, "r")) == NULL) {
+			return -1;
+		}
 	}
 
 	memset(&ti, 0, sizeof(ti));
