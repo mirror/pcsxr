@@ -248,14 +248,43 @@ void SoundFeedStreamData(unsigned char* pSound,long lBytes)
                 iDisStereo ? lBytes / 2 : lBytes / 4);
 }
 
+static unsigned char cdda_buf[23520];
+
 // PLAY CDDA CHANNEL
 void CALLBACK SPUplayCDDAchannel(short* pcm, int nbytes)
 {
+ int i, size, s;
+ unsigned char *p = (unsigned char *)pcm;
+
  if (handle_cdda == NULL) return;
 
- if (snd_pcm_state(handle_cdda) == SND_PCM_STATE_XRUN)
-  snd_pcm_prepare(handle_cdda);
- snd_pcm_writei(handle_cdda, (unsigned char *)pcm, nbytes / 4);
+ while (nbytes > 0)
+ {
+  size = nbytes;
+  if (size > sizeof(cdda_buf)) size = sizeof(cdda_buf);
+
+  for (i = 0; i < size / 4; i++)
+   {
+    s = p[i*2] | (p[i*2+1] << 8);
+    s *= iLeftXAVol;
+    s /= 32767;
+    cdda_buf[i*2] = (s & 0xFF);
+    cdda_buf[i*2+1] = ((s & 0xFF00) >> 8);
+
+    s = p[i*2+2] | (p[i*2+3] << 8);
+    s *= iRightXAVol;
+    s /= 32767;
+    cdda_buf[i*2+2] = (s & 0xFF);
+    cdda_buf[i*2+3] = ((s & 0xFF00) >> 8);
+   }
+
+  if (snd_pcm_state(handle_cdda) == SND_PCM_STATE_XRUN)
+   snd_pcm_prepare(handle_cdda);
+  snd_pcm_writei(handle_cdda, cdda_buf, size / 4);
+
+  nbytes -= size;
+  p += size;
+ }
 }
 
 #endif
