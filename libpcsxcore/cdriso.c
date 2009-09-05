@@ -150,7 +150,7 @@ static void *playthread(void *param)
 		}
 		else {
 #ifdef _WIN32
-			Sleep(1000 * d / CD_FRAMESIZE_RAW / 75 - 80);
+			Sleep(1000 * sizeof(sndbuffer) / CD_FRAMESIZE_RAW / 75 - 80);
 #else
 			usleep(1000 * d / CD_FRAMESIZE_RAW / 75 * 1000);
 #endif
