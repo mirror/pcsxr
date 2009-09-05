@@ -265,17 +265,17 @@ void CALLBACK SPUplayCDDAchannel(short* pcm, int nbytes)
 
   for (i = 0; i < size / 4; i++)
    {
-    s = p[i*2] | (p[i*2+1] << 8);
+    s = (short)(p[i*4] | (p[i*4+1] << 8));
     s *= iLeftXAVol;
     s /= 32767;
-    cdda_buf[i*2] = (s & 0xFF);
-    cdda_buf[i*2+1] = ((s & 0xFF00) >> 8);
+    cdda_buf[i*4] = (s & 0xFF);
+    cdda_buf[i*4+1] = ((s & 0xFF00) >> 8);
 
-    s = p[i*2+2] | (p[i*2+3] << 8);
+    s = (short)(p[i*4+2] | (p[i*4+3] << 8));
     s *= iRightXAVol;
     s /= 32767;
-    cdda_buf[i*2+2] = (s & 0xFF);
-    cdda_buf[i*2+3] = ((s & 0xFF00) >> 8);
+    cdda_buf[i*4+2] = (s & 0xFF);
+    cdda_buf[i*4+3] = ((s & 0xFF00) >> 8);
    }
 
   if (snd_pcm_state(handle_cdda) == SND_PCM_STATE_XRUN)
