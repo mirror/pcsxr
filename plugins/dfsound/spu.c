@@ -54,6 +54,7 @@ unsigned short  spuMem[256*1024];
 unsigned char * spuMemC;
 unsigned char * pSpuIrq=0;
 unsigned char * pSpuBuffer;
+unsigned char * pMixIrq=0;
 
 // user settings
 
@@ -74,7 +75,7 @@ SPUCHAN         s_chan[MAXCHAN+1];                     // channel + 1 infos (1 i
 REVERBInfo      rvb;
 
 unsigned long   dwNoiseVal=1;                          // global noise generator
-int             iWatchDog=0;
+int             iSpuAsyncWait=0;
 
 unsigned short  spuCtrl=0;                             // some vars to store psx reg infos
 unsigned short  spuStat=0;
@@ -103,6 +104,7 @@ static const int f[5][2] = {   {    0,  0  },
                         {  122, -60 } };
 int SSumR[NSSIZE];
 int SSumL[NSSIZE];
+int iFMod[NSSIZE];
 int iCycle=0;
 short * pS;
 
@@ -262,6 +264,164 @@ INLINE void StartSound(int ch)
 }
 
 ////////////////////////////////////////////////////////////////////////
+// ALL KIND OF HELPERS
+////////////////////////////////////////////////////////////////////////
+
+INLINE void VoiceChangeFrequency(int ch)
+{
+ s_chan[ch].iUsedFreq=s_chan[ch].iActFreq;             // -> take it and calc steps
+ s_chan[ch].sinc=s_chan[ch].iRawPitch<<4;
+ if(!s_chan[ch].sinc) s_chan[ch].sinc=1;
+ if(iUseInterpolation==1) s_chan[ch].SB[32]=1;         // -> freq change in simle imterpolation mode: set flag
+}
+
+////////////////////////////////////////////////////////////////////////
+
+INLINE void FModChangeFrequency(int ch,int ns)
+{
+ int NP=s_chan[ch].iRawPitch;
+
+ NP=((32768L+iFMod[ns])*NP)/32768L;
+
+ if(NP>0x3fff) NP=0x3fff;
+ if(NP<0x1)    NP=0x1;
+
+ NP=(44100L*NP)/(4096L);                               // calc frequency
+
+ s_chan[ch].iActFreq=NP;
+ s_chan[ch].iUsedFreq=NP;
+ s_chan[ch].sinc=(((NP/10)<<16)/4410);
+ if(!s_chan[ch].sinc) s_chan[ch].sinc=1;
+ if(iUseInterpolation==1)                              // freq change in simple interpolation mode
+ s_chan[ch].SB[32]=1;
+ iFMod[ns]=0;
+}                    
+
+////////////////////////////////////////////////////////////////////////
+
+// noise handler... just produces some noise data
+// surely wrong... and no noise frequency (spuCtrl&0x3f00) will be used...
+// and sometimes the noise will be used as fmod modulation... pfff
+
+INLINE int iGetNoiseVal(int ch)
+{
+ int fa;
+
+ if((dwNoiseVal<<=1)&0x80000000L)
+  {
+   dwNoiseVal^=0x0040001L;
+   fa=((dwNoiseVal>>2)&0x7fff);
+   fa=-fa;
+  }
+ else fa=(dwNoiseVal>>2)&0x7fff;
+
+ // mmm... depending on the noise freq we allow bigger/smaller changes to the previous val
+ fa=s_chan[ch].iOldNoise+((fa-s_chan[ch].iOldNoise)/((0x001f-((spuCtrl&0x3f00)>>9))+1));
+ if(fa>32767L)  fa=32767L;
+ if(fa<-32767L) fa=-32767L;              
+ s_chan[ch].iOldNoise=fa;
+
+ if(iUseInterpolation<2)                               // no gauss/cubic interpolation?
+ s_chan[ch].SB[29] = fa;                               // -> store noise val in "current sample" slot
+ return fa;
+}                                 
+
+////////////////////////////////////////////////////////////////////////
+
+INLINE void StoreInterpolationVal(int ch,int fa)
+{
+ if(s_chan[ch].bFMod==2)                               // fmod freq channel
+  s_chan[ch].SB[29]=fa;
+ else
+  {
+   if((spuCtrl&0x4000)==0) fa=0;                       // muted?
+   else                                                // else adjust
+    {
+     if(fa>32767L)  fa=32767L;
+     if(fa<-32767L) fa=-32767L;              
+    }
+
+   if(iUseInterpolation>=2)                            // gauss/cubic interpolation
+    {     
+     int gpos = s_chan[ch].SB[28];
+     gval0 = fa;          
+     gpos = (gpos+1) & 3;
+     s_chan[ch].SB[28] = gpos;
+    }
+   else
+   if(iUseInterpolation==1)                            // simple interpolation
+    {
+     s_chan[ch].SB[28] = 0;                    
+     s_chan[ch].SB[29] = s_chan[ch].SB[30];            // -> helpers for simple linear interpolation: delay real val for two slots, and calc the two deltas, for a 'look at the future behaviour'
+     s_chan[ch].SB[30] = s_chan[ch].SB[31];
+     s_chan[ch].SB[31] = fa;
+     s_chan[ch].SB[32] = 1;                            // -> flag: calc new interolation
+    }
+   else s_chan[ch].SB[29]=fa;                          // no interpolation
+  }
+}
+
+////////////////////////////////////////////////////////////////////////
+
+INLINE int iGetInterpolationVal(int ch)
+{
+ int fa;
+
+ if(s_chan[ch].bFMod==2) return s_chan[ch].SB[29];
+
+ switch(iUseInterpolation)
+  {   
+   //--------------------------------------------------//
+   case 3:                                             // cubic interpolation
+    {
+     long xd;int gpos;
+     xd = ((s_chan[ch].spos) >> 1)+1;
+     gpos = s_chan[ch].SB[28];
+
+     fa  = gval(3) - 3*gval(2) + 3*gval(1) - gval0;
+     fa *= (xd - (2<<15)) / 6;
+     fa >>= 15;
+     fa += gval(2) - gval(1) - gval(1) + gval0;
+     fa *= (xd - (1<<15)) >> 1;
+     fa >>= 15;
+     fa += gval(1) - gval0;
+     fa *= xd;
+     fa >>= 15;
+     fa = fa + gval0;
+
+    } break;
+   //--------------------------------------------------//
+   case 2:                                             // gauss interpolation
+    {
+     int vl, vr;int gpos;
+     vl = (s_chan[ch].spos >> 6) & ~3;
+     gpos = s_chan[ch].SB[28];
+     vr=(gauss[vl]*gval0)&~2047;
+     vr+=(gauss[vl+1]*gval(1))&~2047;
+     vr+=(gauss[vl+2]*gval(2))&~2047;
+     vr+=(gauss[vl+3]*gval(3))&~2047;
+     fa = vr>>11;
+    } break;
+   //--------------------------------------------------//
+   case 1:                                             // simple interpolation
+    {
+     if(s_chan[ch].sinc<0x10000L)                      // -> upsampling?
+          InterpolateUp(ch);                           // --> interpolate up
+     else InterpolateDown(ch);                         // --> else down
+     fa=s_chan[ch].SB[29];
+    } break;
+   //--------------------------------------------------//
+   default:                                            // no interpolation
+    {
+     fa=s_chan[ch].SB[29];                  
+    } break;
+   //--------------------------------------------------//
+  }
+
+ return fa;
+}
+
+////////////////////////////////////////////////////////////////////////
 // MAIN SPU FUNCTION
 // here is the main job handler... thread, timer or direct func call
 // basically the whole sound processing is done in this fat func!
@@ -281,7 +441,7 @@ static void *MAINThread(void *arg)
  int s_1,s_2,fa,ns,voldiv=iVolume;
  unsigned char * start;unsigned int nSample;
  int ch,predict_nr,shift_factor,flags,d,s;
- int gpos,bIRQReturn=0;
+ int bIRQReturn=0;
 
  while(!bEndThread)                                    // until we are shutting down
   {
@@ -328,16 +488,14 @@ static void *MAINThread(void *arg)
        if(!s_chan[ch].bOn) continue;                   // channel not playing? next
 
        if(s_chan[ch].iActFreq!=s_chan[ch].iUsedFreq)   // new psx frequency?
-        {
-         s_chan[ch].iUsedFreq=s_chan[ch].iActFreq;     // -> take it and calc steps
-         s_chan[ch].sinc=s_chan[ch].iRawPitch<<4;
-         if(!s_chan[ch].sinc) s_chan[ch].sinc=1;
-         if(iUseInterpolation==1) s_chan[ch].SB[32]=1; // -> freq change in simle imterpolation mode: set flag
-        }
+        VoiceChangeFrequency(ch);
 
        ns=0;
        while(ns<NSSIZE)                                // loop until 1 ms of data is reached
         {
+         if(s_chan[ch].bFMod==1 && iFMod[ns])          // fmod freq channel
+          FModChangeFrequency(ch,ns);
+
          while(s_chan[ch].spos>=0x10000L)
           {
            if(s_chan[ch].iSBPos==28)                   // 28 reached?
@@ -402,20 +560,8 @@ static void *MAINThread(void *arg)
 
                  if(iSPUIRQWait)                       // -> option: wait after irq for main emu
                   {
-                   DWORD dwWatchTime;
-
-                   if(iUseTimer==2)                    // -> special timer mode... give main emu the control
-                    {
-                     bIRQReturn=1;
-                    }
-                   else
-                    {
-                     dwWatchTime=timeGetTime_spu()+2500;
-                     iWatchDog=1;                      // -> should we do some mutex stuff? ahh, naaa
-                     while(iWatchDog && !bEndThread && 
-                           timeGetTime_spu()<dwWatchTime)
-                     usleep(1000L);
-                    }
+                   iSpuAsyncWait=1;
+                   bIRQReturn=1;
                   }
                 }
               }
@@ -446,143 +592,42 @@ static void *MAINThread(void *arg)
              if(bIRQReturn)                            // special return for "spu irq - wait for cpu action"
               {
                bIRQReturn=0;
-               lastch=ch; 
-               lastns=ns;
-               return 0;
+               if(iUseTimer!=2)
+                { 
+                 DWORD dwWatchTime=timeGetTime_spu()+2500;
+
+                 while(iSpuAsyncWait && !bEndThread && 
+                       timeGetTime_spu()<dwWatchTime)
+                     usleep(1000L);
+                }
+               else
+                {
+                 lastch=ch; 
+                 lastns=ns;
+
+                 return 0;
+                }
               }
+
 GOON: ;
             }
 
            fa=s_chan[ch].SB[s_chan[ch].iSBPos++];      // get sample data
 
-           if((spuCtrl&0x4000)==0) fa=0;               // muted?
-           else                                        // else adjust
-            {
-             if(fa>32767L)  fa=32767L;
-             if(fa<-32767L) fa=-32767L;
-            }
-
-           if(iUseInterpolation>=2)                    // gauss/cubic interpolation
-            {
-             gpos = s_chan[ch].SB[28];
-             gval0 = fa;          
-             gpos = (gpos+1) & 3;
-             s_chan[ch].SB[28] = gpos;
-            }
-           else
-           if(iUseInterpolation==1)                    // simple interpolation
-            {
-             s_chan[ch].SB[28] = 0;
-             s_chan[ch].SB[29] = s_chan[ch].SB[30];    // -> helpers for simple linear interpolation: delay real val for two slots, and calc the two deltas, for a 'look at the future behaviour'
-             s_chan[ch].SB[30] = s_chan[ch].SB[31];
-             s_chan[ch].SB[31] = fa;
-             s_chan[ch].SB[32] = 1;                    // -> flag: calc new interolation
-            }
-           else s_chan[ch].SB[29]=fa;                  // no interpolation
+           StoreInterpolationVal(ch,fa);               // store val for later interpolation
 
            s_chan[ch].spos -= 0x10000L;
           }
 
-         // noise handler... just produces some noise data
-         // surely wrong... and no noise frequency (spuCtrl&0x3f00) will be used...
-         // and sometimes the noise will be used as fmod modulation... pfff
-
          if(s_chan[ch].bNoise)
-          {
-           if((dwNoiseVal<<=1)&0x80000000L)
-            {
-             dwNoiseVal^=0x0040001L;
-             fa=((dwNoiseVal>>2)&0x7fff);
-             fa=-fa;
-            }
-           else fa=(dwNoiseVal>>2)&0x7fff;
+              fa=iGetNoiseVal(ch);                     // get noise val
+         else fa=iGetInterpolationVal(ch);             // get sample val
 
-           // mmm... depending on the noise freq we allow bigger/smaller changes to the previous val
-           fa=s_chan[ch].iOldNoise+((fa-s_chan[ch].iOldNoise)/((0x001f-((spuCtrl&0x3f00)>>9))+1));
-           if(fa>32767L)  fa=32767L;
-           if(fa<-32767L) fa=-32767L;
-           s_chan[ch].iOldNoise=fa;
-
-           if(iUseInterpolation<2)                     // no gauss/cubic interpolation?
-            s_chan[ch].SB[29] = fa;                    // -> store noise val in "current sample" slot
-          }                                            //----------------------------------------
-         else                                          // NO NOISE (NORMAL SAMPLE DATA) HERE 
-          {
-           if(iUseInterpolation==3)                    // cubic interpolation
-            {
-             long xd;
-             xd = ((s_chan[ch].spos) >> 1)+1;
-             gpos = s_chan[ch].SB[28];
-
-             fa  = gval(3) - 3*gval(2) + 3*gval(1) - gval0;
-             fa *= (xd - (2<<15)) / 6;
-             fa >>= 15;
-             fa += gval(2) - gval(1) - gval(1) + gval0;
-             fa *= (xd - (1<<15)) >> 1;
-             fa >>= 15;
-             fa += gval(1) - gval0;
-             fa *= xd;
-             fa >>= 15;
-             fa = fa + gval0;
-            }
-           else
-           if(iUseInterpolation==2)                    // gauss interpolation
-            {
-             int vl, vr;
-             vl = (s_chan[ch].spos >> 6) & ~3;
-             gpos = s_chan[ch].SB[28];
-             vr=(gauss[vl]*gval0)&~2047;
-             vr+=(gauss[vl+1]*gval(1))&~2047;
-             vr+=(gauss[vl+2]*gval(2))&~2047;
-             vr+=(gauss[vl+3]*gval(3))&~2047;
-             fa = vr>>11;
-/*
-             vr=(gauss[vl]*gval0)>>9;
-             vr+=(gauss[vl+1]*gval(1))>>9;
-             vr+=(gauss[vl+2]*gval(2))>>9;
-             vr+=(gauss[vl+3]*gval(3))>>9;
-             fa = vr>>2;
-*/
-            }
-           else
-           if(iUseInterpolation==1)                    // simple interpolation
-            {
-             if(s_chan[ch].sinc<0x10000L)              // -> upsampling?
-                  InterpolateUp(ch);                   // --> interpolate up
-             else InterpolateDown(ch);                 // --> else down
-             fa=s_chan[ch].SB[29];
-            }
-           else fa=s_chan[ch].SB[29];                  // no interpolation
-          }
-
-         s_chan[ch].sval = (MixADSR(ch) * fa) / 1023;  // add adsr
+         s_chan[ch].sval = (MixADSR(ch) * fa) / 1023;  // mix adsr
 
          if(s_chan[ch].bFMod==2)                       // fmod freq channel
-          {
-           int NP=s_chan[ch+1].iRawPitch;
-
-           NP=((32768L+s_chan[ch].sval)*NP)/32768L;
-
-           if(NP>0x3fff) NP=0x3fff;
-           if(NP<0x1)    NP=0x1;
-
-// mmmm... if I do this, all is screwed
-//           s_chan[ch+1].iRawPitch=NP;
-
-           NP=(44100L*NP)/(4096L);                     // calc frequency
-
-           s_chan[ch+1].iActFreq=NP;
-           s_chan[ch+1].iUsedFreq=NP;
-           s_chan[ch+1].sinc=(((NP/10)<<16)/4410);
-           if(!s_chan[ch+1].sinc) s_chan[ch+1].sinc=1;
-           if(iUseInterpolation==1)                    // freq change in sipmle interpolation mode
-            s_chan[ch+1].SB[32]=1;
-
-// mmmm... set up freq decoding positions?
-//           s_chan[ch+1].iSBPos=28;
-//           s_chan[ch+1].spos=0x10000L;
-          }
-         else
+          iFMod[ns]=s_chan[ch].sval;                   // -> store 1T sample data, use that to do fmod on next channel
+         else                                          // no fmod freq channel
           {
            //////////////////////////////////////////////
            // ok, left/right sound volume (psx volume goes from 0 ... 0x3fff)
@@ -655,6 +700,40 @@ ENDX:   ;
     *pS++ = d;
    }
 
+  //////////////////////////////////////////////////////                   
+  // special irq handling in the decode buffers (0x0000-0x1000)
+  // we know: 
+  // the decode buffers are located in spu memory in the following way:
+  // 0x0000-0x03ff  CD audio left
+  // 0x0400-0x07ff  CD audio right
+  // 0x0800-0x0bff  Voice 1
+  // 0x0c00-0x0fff  Voice 3
+  // and decoded data is 16 bit for one sample
+  // we assume: 
+  // even if voices 1/3 are off or no cd audio is playing, the internal
+  // play positions will move on and wrap after 0x400 bytes.
+  // Therefore: we just need a pointer from spumem+0 to spumem+3ff, and 
+  // increase this pointer on each sample by 2 bytes. If this pointer
+  // (or 0x400 offsets of this pointer) hits the spuirq address, we generate
+  // an IRQ. Only problem: the "wait for cpu" option is kinda hard to do here
+  // in some of Peops timer modes. So: we ignore this option here (for now).
+
+  if(pMixIrq && irqCallback)
+   {
+    for(ns=0;ns<NSSIZE;ns++)
+     {
+      if((spuCtrl&0x40) && pSpuIrq && pSpuIrq<spuMemC+0x1000)                 
+       {
+        for(ch=0;ch<4;ch++)
+         {
+          if(pSpuIrq>=pMixIrq+(ch*0x400) && pSpuIrq<pMixIrq+(ch*0x400)+2)
+           {irqCallback();s_chan[ch].iIrqDone=1;}
+         }
+       }
+      pMixIrq+=2;if(pMixIrq>spuMemC+0x3ff) pMixIrq=spuMemC;
+     }
+   }
+
   InitREVERB();
 
   // feed the sound
@@ -680,7 +759,12 @@ ENDX:   ;
 
 void CALLBACK SPUasync(unsigned long cycle)
 {
- iWatchDog=0;                                          // clear the watchdog
+ if(iSpuAsyncWait)
+  {
+   iSpuAsyncWait++;
+   if(iSpuAsyncWait<=64) return;
+   iSpuAsyncWait=0;
+  }
 
  if(iUseTimer==2)                                      // special mode, only used in Linux by this spu (or if you enable the experimental Windows mode)
   {
@@ -732,6 +816,7 @@ void SetupTimer(void)
 {
  memset(SSumR,0,NSSIZE*sizeof(int));                   // init some mixing buffers
  memset(SSumL,0,NSSIZE*sizeof(int));
+ memset(iFMod,0,NSSIZE*sizeof(int));
  pS=(short *)pSpuBuffer;                               // setup soundbuffer pointer
 
  bEndThread=0;                                         // init thread vars
@@ -797,6 +882,8 @@ void SetupStreams(void)
    s_chan[i].pStart=spuMemC;
    s_chan[i].pCurr=spuMemC;
   }
+
+  pMixIrq=spuMemC;                                     // enable decoded buffer irqs by setting the address
 }
 
 // REMOVESTREAMS: free most buffer
@@ -826,7 +913,7 @@ long SPUopen(void)
 {
  if (bSPUIsOpen) return 0;                              // security for some stupid main emus
 
- iUseXA = 1;                                             // just small setup
+ iUseXA = 1;                                            // just small setup
  iVolume = 3;
  iReverbOff = -1;
  spuIrq = 0;
@@ -834,13 +921,14 @@ long SPUopen(void)
  bEndThread = 0;
  bThreadEnded = 0;
  spuMemC = (unsigned char *)spuMem;
+ pMixIrq = 0;
  memset((void *)s_chan, 0, (MAXCHAN + 1) * sizeof(SPUCHAN));
  pSpuIrq = 0;
  iSPUIRQWait = 1;
 
  ReadConfig();                                         // read user stuff
 
- SetupSound();                                         // setup midas (before init!)
+ SetupSound();                                         // setup sound (before init!)
 
  SetupStreams();                                       // prepare streaming
 

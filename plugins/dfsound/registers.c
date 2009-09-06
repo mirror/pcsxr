@@ -168,7 +168,7 @@ void CALLBACK SPUwriteRegister(unsigned long reg, unsigned short val)
        break;
      //------------------------------------------------//
     }
-   iWatchDog=0;
+   iSpuAsyncWait=0;
    return;
   }
 
@@ -341,7 +341,7 @@ void CALLBACK SPUwriteRegister(unsigned long reg, unsigned short val)
     case H_Reverb+62  : rvb.IN_COEF_R=(short)val;      break;
    }
 
- iWatchDog=0;
+ iSpuAsyncWait=0;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -352,7 +352,7 @@ unsigned short CALLBACK SPUreadRegister(unsigned long reg)
 {
  const unsigned long r=reg&0xfff;
         
- iWatchDog=0;
+ iSpuAsyncWait=0;
 
  if(r>=0x0c00 && r<0x0d80)
   {

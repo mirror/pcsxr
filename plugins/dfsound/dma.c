@@ -31,7 +31,7 @@ unsigned short CALLBACK SPUreadDMA(void)
  spuAddr+=2;
  if(spuAddr>0x7ffff) spuAddr=0;
 
- iWatchDog=0;
+ iSpuAsyncWait=0;
 
  return s;
 }
@@ -51,7 +51,7 @@ void CALLBACK SPUreadDMAMem(unsigned short * pusPSXMem,int iSize)
    if(spuAddr>0x7ffff) spuAddr=0;                      // wrap
   }
 
- iWatchDog=0;
+ iSpuAsyncWait=0;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -73,7 +73,7 @@ void CALLBACK SPUwriteDMA(unsigned short val)
  spuAddr+=2;                                           // inc spu addr
  if(spuAddr>0x7ffff) spuAddr=0;                        // wrap
 
- iWatchDog=0;
+ iSpuAsyncWait=0;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -91,7 +91,7 @@ void CALLBACK SPUwriteDMAMem(unsigned short * pusPSXMem,int iSize)
    if(spuAddr>0x7ffff) spuAddr=0;                      // wrap
   }
  
- iWatchDog=0;
+ iSpuAsyncWait=0;
 }
 
 ////////////////////////////////////////////////////////////////////////

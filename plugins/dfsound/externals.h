@@ -222,7 +222,7 @@ extern int        iUseInterpolation;
 extern int        iDisStereo;
 // MISC
 
-extern int iWatchDog;
+extern int iSpuAsyncWait;
 
 extern SPUCHAN s_chan[];
 extern REVERBInfo rvb;
