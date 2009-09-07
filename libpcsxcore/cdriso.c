@@ -160,7 +160,7 @@ static void *playthread(void *param)
 		usleep(d * 1000);
 #endif
 
-		t += CDDA_FRAMETIME;
+		t = GetTickCount() + CDDA_FRAMETIME;
 
 		if ((d = fread(sndbuffer, 1, sizeof(sndbuffer), cddaHandle)) == 0) {
 			playing = 0;
