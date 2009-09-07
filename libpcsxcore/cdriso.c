@@ -47,6 +47,8 @@ static unsigned char subbuffer[SUB_FRAMESIZE];
 
 static unsigned char sndbuffer[CD_FRAMESIZE_RAW * 10];
 
+#define CDDA_FRAMETIME			(1000 * (sizeof(sndbuffer) / CD_FRAMESIZE_RAW) / 75)
+
 #ifdef _WIN32
 static HANDLE threadid;
 #else
@@ -118,6 +120,21 @@ static void tok2msf(char *time, char *msf) {
 	}
 }
 
+#ifndef _WIN32
+static long GetTickCount(void) {
+	static time_t		initial_time = 0;
+	struct timeval		now;
+
+	gettimeofday(&now, NULL);
+
+	if (initial_time == 0) {
+		initial_time = now.tv_sec;
+	}
+
+	return (now.tv_sec - initial_time) * 1000L + now.tv_usec / 1000L;
+}
+#endif
+
 // this thread plays audio data
 #ifdef _WIN32
 static void playthread(void *param)
@@ -125,17 +142,25 @@ static void playthread(void *param)
 static void *playthread(void *param)
 #endif
 {
-	long		d;
+	long		d, t;
+
+	t = GetTickCount();
 
 	while (playing) {
+		d = t - (long)GetTickCount();
+		if (d <= 0) {
+			d = 1;
+		}
+		else if (d > CDDA_FRAMETIME) {
+			d = CDDA_FRAMETIME;
+		}
 #ifdef _WIN32
-		// Sleep a little longer under Windows as the music tends to
-		// "skip" a lot with Windows version of spuEternal if the
-		// stream is fed too fast. The detailed reason is unknown.
-		Sleep(80);
+		Sleep(d);
 #else
-		usleep(1);
+		usleep(d * 1000);
 #endif
+
+		t += CDDA_FRAMETIME;
 
 		if ((d = fread(sndbuffer, 1, sizeof(sndbuffer), cddaHandle)) == 0) {
 			playing = 0;
@@ -145,15 +170,8 @@ static void *playthread(void *param)
 			break;
 		}
 
-		if (!cdr.Muted) {
+		if (!cdr.Muted && playing) {
 			SPU_playCDDAchannel((short *)sndbuffer, d);
-		}
-		else {
-#ifdef _WIN32
-			Sleep(1000 * sizeof(sndbuffer) / CD_FRAMESIZE_RAW / 75 - 80);
-#else
-			usleep(1000 * sizeof(sndbuffer) / CD_FRAMESIZE_RAW / 75 * 1000);
-#endif
 		}
 	}
 

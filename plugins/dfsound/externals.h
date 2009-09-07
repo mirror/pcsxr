@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include <stdint.h>
+
 /////////////////////////////////////////////////////////
 // generic defines
 /////////////////////////////////////////////////////////
@@ -142,7 +143,6 @@ typedef struct
  int               iOldNoise;                          // old noise val for this channel   
  ADSRInfo          ADSR;                               // active ADSR settings
  ADSRInfoEx        ADSRX;                              // next ADSR settings (will be moved to active on sample start)
-
 } SPUCHAN;
 
 ///////////////////////////////////////////////////////////
@@ -158,7 +158,6 @@ typedef struct
  int iLastRVBRight;
  int iRVBLeft;
  int iRVBRight;
-
 
  int FB_SRC_A;       // (offset)
  int FB_SRC_B;       // (offset)
@@ -261,6 +260,11 @@ extern uint32_t * XAEnd;
 
 extern uint32_t   XARepeat;
 extern uint32_t   XALastVal;
+
+extern uint32_t * CDDAFeed;
+extern uint32_t * CDDAPlay;
+extern uint32_t * CDDAStart;
+extern uint32_t * CDDAEnd;
 
 extern int           iLeftXAVol;
 extern int           iRightXAVol;

@@ -24,9 +24,7 @@
 #include <sys/soundcard.h>
 #endif
 #include <unistd.h>
-#ifndef NOTHREADLIB
 #include <pthread.h>
-#endif
 #define RRand(range) (random()%range)  
 #include <string.h> 
 #include <sys/time.h>  

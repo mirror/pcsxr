@@ -1,4 +1,20 @@
-Sectember 6, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+September 7, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfsound/alsa.c: Removed ALSA-specific CDDA stuff, which causes
+   problems with some versions of PulseAudio.
+ * plugins/dfsound/spu.c: Implemented CDDA support in a more "general" way.
+ * plugins/dfsound/xa.c: Likewise.
+ * plugins/dfsound/externals.h: Likewise.
+ * plugins/dfsound/spu.h: Likewise.
+ * plugins/dfsound/xa.h: Likewise.
+ * plugins/dfsound/cfg.c: Removed NOTHREADLIB.
+ * plugins/dfsound/spu.c: Likewise.
+ * plugins/dfsound/stdafx.h: Likewise.
+ * libpcsxcore/cdriso.c: Reverted to the method which feeds the CDDA data to
+   the SPU plugin at an interval instead of continuously, otherwise it's still
+   broken with spuEternal in SPUasync mode.
+
+September 6, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfsound/spu.c: Fixed frequency modulation emulation. Handle IRQs
    in the decoded sound buffer areas. (sync'ed from the P.E.Op.S SPU 1.09)

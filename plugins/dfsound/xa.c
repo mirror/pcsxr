@@ -36,6 +36,11 @@ uint32_t * XAEnd   = NULL;
 uint32_t   XARepeat  = 0;
 uint32_t   XALastVal = 0;
 
+uint32_t * CDDAFeed  = NULL;
+uint32_t * CDDAPlay  = NULL;
+uint32_t * CDDAStart = NULL;
+uint32_t * CDDAEnd   = NULL;
+
 int             iLeftXAVol  = 32767;
 int             iRightXAVol = 32767;
 
@@ -48,12 +53,13 @@ static int gauss_window[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 #define gvalr(x) gauss_window[4+((gauss_ptr+x)&3)]
 
 ////////////////////////////////////////////////////////////////////////
-// MIX XA 
+// MIX XA & CDDA
 ////////////////////////////////////////////////////////////////////////
 
 INLINE void MixXA(void)
 {
  int ns;
+ uint32_t l;
 
  for(ns=0;ns<NSSIZE && XAPlay!=XAFeed;ns++)
   {
@@ -71,6 +77,14 @@ INLINE void MixXA(void)
      SSumL[ns]+=(((short)(XALastVal&0xffff))       * iLeftXAVol)/32767;
      SSumR[ns]+=(((short)((XALastVal>>16)&0xffff)) * iRightXAVol)/32767;
     }
+  }
+
+ for(ns=0;ns<NSSIZE && CDDAPlay!=CDDAFeed && (CDDAPlay!=CDDAEnd-1||CDDAFeed!=CDDAStart);ns++)
+  {
+   l=*CDDAPlay++;
+   if(CDDAPlay==CDDAEnd) CDDAPlay=CDDAStart;
+   SSumL[ns]+=(((short)(l&0xffff))       * iLeftXAVol)/32767;
+   SSumR[ns]+=(((short)((l>>16)&0xffff)) * iRightXAVol)/32767;
   }
 }
 
@@ -358,5 +372,25 @@ INLINE void FeedXA(xa_decode_t *xap)
   }
 }
 
-#endif
+////////////////////////////////////////////////////////////////////////
+// FEED CDDA
+////////////////////////////////////////////////////////////////////////
 
+INLINE void FeedCDDA(unsigned char *pcm, int nBytes)
+{
+ while(nBytes>0)
+  {
+   if(CDDAFeed==CDDAEnd) CDDAFeed=CDDAStart;
+   while(CDDAFeed==CDDAPlay-1||
+         (CDDAFeed==CDDAEnd-1&&CDDAPlay==CDDAStart))
+   {
+    if (!iUseTimer) usleep(1000);
+    else return;
+   }
+   *CDDAFeed++=(*pcm | (*(pcm+1)<<8) | (*(pcm+2)<<16) | (*(pcm+3)<<24));
+   nBytes-=4;
+   pcm+=4;
+  }
+}
+
+#endif

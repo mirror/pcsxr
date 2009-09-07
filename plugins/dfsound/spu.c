@@ -86,9 +86,7 @@ int             bThreadEnded=0;
 int             bSpuInit=0;
 int             bSPUIsOpen=0;
 
-#ifndef NOTHREADLIB
 static pthread_t thread = -1;                          // thread id (linux)
-#endif
 
 unsigned long dwNewChannel=0;                          // flags for faster testing, if new channel starts
 
@@ -662,7 +660,7 @@ ENDX:   ;
   //---------------------------------------------------//
   // mix XA infos (if any)
 
-  if(XAPlay!=XAFeed || XARepeat) MixXA();
+  MixXA();
   
   ///////////////////////////////////////////////////////
   // mix all channels (including reverb) into one buffer
@@ -799,6 +797,15 @@ void CALLBACK SPUplayADPCMchannel(xa_decode_t *xap)
  FeedXA(xap);                                          // call main XA feeder
 }
 
+// CDDA AUDIO
+void CALLBACK SPUplayCDDAchannel(short *pcm, int nbytes)
+{
+ if (!pcm)      return;
+ if (nbytes<=0) return;
+
+ FeedCDDA((unsigned char *)pcm, nbytes);
+}
+
 // INIT/EXIT STUFF
 
 // SPUINIT: this func will be called first by the main emu
@@ -823,12 +830,10 @@ void SetupTimer(void)
  bThreadEnded=0; 
  bSpuInit=1;                                           // flag: we are inited
 
-#ifndef NOTHREADLIB
  if(!iUseTimer)                                        // linux: use thread
   {
    pthread_create(&thread, NULL, MAINThread, NULL);
   }
-#endif
 }
 
 // REMOVETIMER: kill threads/timers
@@ -836,14 +841,12 @@ void RemoveTimer(void)
 {
  bEndThread=1;                                         // raise flag to end thread
 
-#ifndef NOTHREADLIB
  if(!iUseTimer)                                        // linux tread?
   {
    int i=0;
    while(!bThreadEnded && i<2000) {usleep(1000L);i++;} // -> wait until thread has ended
    if(thread!=-1) {pthread_cancel(thread);thread=-1;}  // -> cancel thread anyway
   }
-#endif
 
  bThreadEnded=0;                                       // no more spu is running
  bSpuInit=0;
@@ -865,10 +868,16 @@ void SetupStreams(void)
  sRVBPlay = sRVBStart;
 
  XAStart =                                             // alloc xa buffer
-  (uint32_t *)malloc(44100*4);
+  (uint32_t *)malloc(44100 * sizeof(uint32_t));
+ XAEnd   = XAStart + 44100;
  XAPlay  = XAStart;
  XAFeed  = XAStart;
- XAEnd   = XAStart + 44100;
+
+ CDDAStart =                                           // alloc cdda buffer
+  (uint32_t *)malloc(16384 * sizeof(uint32_t));
+ CDDAEnd   = CDDAStart + 16384;
+ CDDAPlay  = CDDAStart;
+ CDDAFeed  = CDDAStart + 1;
 
  for(i=0;i<MAXCHAN;i++)                                // loop sound channels
   {
@@ -890,22 +899,13 @@ void SetupStreams(void)
 void RemoveStreams(void)
 { 
  free(pSpuBuffer);                                     // free mixing buffer
- pSpuBuffer=NULL;
+ pSpuBuffer = NULL;
  free(sRVBStart);                                      // free reverb buffer
- sRVBStart=0;
+ sRVBStart = NULL;
  free(XAStart);                                        // free XA buffer
- XAStart=0;
-
-/*
- int i;
- for(i=0;i<MAXCHAN;i++)
-  {
-   WaitForSingleObject(s_chan[i].hMutex,2000);
-   ReleaseMutex(s_chan[i].hMutex);
-   if(s_chan[i].hMutex)
-    {CloseHandle(s_chan[i].hMutex);s_chan[i].hMutex=0;}
-  }
-*/
+ XAStart = NULL;
+ free(CDDAStart);                                      // free CDDA buffer
+ CDDAStart = NULL;
 }
 
 // SPUOPEN: called by main emu after init

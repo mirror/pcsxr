@@ -125,10 +125,6 @@ void ReadConfigFile(void)
  // in linux. But timer mode 2 (spuupdate) is safe to use.
  if(iUseTimer)   iUseTimer=2; 
 
-#ifdef NOTHREADLIB
- iUseTimer=2; 
-#endif
-
  strcpy(t,"\nSPUIRQWait");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;} 
  if(p)  iSPUIRQWait=atoi(p+len); 
  if(iSPUIRQWait<0) iSPUIRQWait=0; 
