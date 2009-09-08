@@ -92,7 +92,7 @@ static void CheckSubDir() {
 	CreateHomeConfigDir(CHEATS_DIR);
 }
 
-void ScanPlugins(gchar* scandir) {
+static void ScanPlugins(gchar* scandir) {
 	// scan for plugins and configuration tools
 	DIR *dir;
 	struct dirent *ent;
@@ -101,12 +101,8 @@ void ScanPlugins(gchar* scandir) {
 	gchar *filename;
 
 	/* Any plugins found will be symlinked to the following directory */
-
 	dir = opendir(scandir);
-	if (dir == NULL) {
-//		printf(_("Could not open plugins directory: '%s'\n"), scandir);
-	} else {
-//		printf("Scanning %s for plugins\n", scandir);
+	if (dir != NULL) {
 		while ((ent = readdir(dir)) != NULL) {
 			filename = g_build_filename (scandir, ent->d_name, NULL);
 
@@ -117,16 +113,44 @@ void ScanPlugins(gchar* scandir) {
 			} else {
 				/* Create a symlink from this file to the directory ~/.pcsx/plugin */
 				linkname = g_build_filename (getenv("HOME"), PLUGINS_DIR, ent->d_name, NULL);
-//				printf("    Plugin file symlink: %s -> %s\n", filename, linkname);
 				symlink(filename, linkname);
 
 				/* If it's a config tool, make one in the cfg dir as well.
 				   This allows plugins with retarded cfg finding to work :- ) */
 				if (match(filename, "cfg.*") == 1) {
 					linkname = g_build_filename (getenv("HOME"), PLUGINS_CFG_DIR, ent->d_name, NULL);
-//					printf("    Config file symlink: %s -> %s\n", filename, linkname);
 					symlink(filename, linkname);
 				}
+				g_free (linkname);
+			}
+			g_free (filename);
+		}
+		closedir(dir);
+	}
+}
+
+static void ScanBios(gchar* scandir) {
+	// scan for bioses
+	DIR *dir;
+	struct dirent *ent;
+
+	gchar *linkname;
+	gchar *filename;
+
+	/* Any bioses found will be symlinked to the following directory */
+	dir = opendir(scandir);
+	if (dir != NULL) {
+		while ((ent = readdir(dir)) != NULL) {
+			filename = g_build_filename (scandir, ent->d_name, NULL);
+
+			if (match(filename, ".*\\.bin$") == 0 &&
+				match(filename, ".*\\.BIN$") == 0) {
+				continue;	/* Skip this file */
+			} else {
+				/* Create a symlink from this file to the directory ~/.pcsx/plugin */
+				linkname = g_build_filename (getenv("HOME"), BIOS_DIR, ent->d_name, NULL);
+				symlink(filename, linkname);
+
 				g_free (linkname);
 			}
 			g_free (filename);
@@ -154,7 +178,6 @@ static void CheckSymlinksInPath (char* dotdir) {
 
 		if (stat(linkname, &stbuf) == -1) {
 			/* File link is bad, remove it */
-//			printf("unlink: %s\n", linkname);
 			unlink(linkname);
 		}
 		g_free (linkname);
@@ -183,6 +206,28 @@ static void ScanAllPlugins (void) {
 	ScanPlugins(DEF_PLUGIN_DIR "/lib64");
 	ScanPlugins(DEF_PLUGIN_DIR "/config");
 
+	// scan some default locations to find bioses
+	ScanBios("/usr/lib/games/psemu");
+	ScanBios("/usr/lib/games/psemu/bios");
+	ScanBios("/usr/lib64/games/psemu");
+	ScanBios("/usr/lib64/games/psemu/bios");
+	ScanBios("/usr/share/psemu");
+	ScanBios("/usr/share/psemu/bios");
+	ScanBios("/usr/share/pcsx");
+	ScanBios("/usr/share/pcsx/bios");
+	ScanBios("/usr/local/lib/games/psemu");
+	ScanBios("/usr/local/lib/games/psemu/bios");
+	ScanBios("/usr/local/lib64/games/psemu");
+	ScanBios("/usr/local/lib64/games/psemu/bios");
+	ScanBios("/usr/local/share/psemu");
+	ScanBios("/usr/local/share/psemu/bios");
+	ScanBios("/usr/local/share/pcsx");
+	ScanBios("/usr/local/share/pcsx/bios");
+	ScanBios(PACKAGE_DATA_DIR);
+	ScanBios(PSEMU_DATA_DIR);
+	ScanBios(PACKAGE_DATA_DIR "/bios");
+	ScanBios(PSEMU_DATA_DIR "/bios");
+
 	currentdir = g_strconcat (getenv("HOME"), "/.psemu-plugins/", NULL);
 	ScanPlugins(currentdir);
 	g_free (currentdir);
@@ -198,6 +243,11 @@ static void ScanAllPlugins (void) {
 
 	/* Check for bad links in ~/.pcsx/plugins/cfg */
 	currentdir = g_build_filename (getenv("HOME"), PLUGINS_CFG_DIR, NULL);
+	CheckSymlinksInPath (currentdir);
+	g_free (currentdir);
+
+	/* Check for bad links in ~/.pcsx/bios */
+	currentdir = g_build_filename (getenv("HOME"), BIOS_DIR, NULL);
 	CheckSymlinksInPath (currentdir);
 	g_free (currentdir);
 }

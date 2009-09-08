@@ -3,6 +3,7 @@ INCLUDES = -DPACKAGE_DATA_DIR=\"${datadir}/pcsx/\" \
 	-DLOCALE_DIR=\"${datadir}/locale/\" \
 	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) \
 	-I$(top_srcdir)/libpcsxcore -I$(top_srcdir)/include \
+	-DPSEMU_DATA_DIR=\"${datadir}/psemu\" \
 	-DDEF_PLUGIN_DIR=\"${libdir}/games/psemu\"
 
 bin_PROGRAMS = pcsx

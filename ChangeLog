@@ -2,6 +2,11 @@ September 8, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * win32/gui/ConfigurePlugins.c: Select a real BIOS instead of the Internal
    HLE BIOS by default at the first run.
+ * gui/Gtk2Gui.c: Likewise.
+ * gui/LnxMain.c: Scan BIOSes in certain system-wide directories and place
+   symlinks in ~/.pcsx/bios.
+ * gui/Makefile.am, gui/Makefile.in: Added PSEMU_DATA_DIR.
+ * po/pcsx.pot, po/zh_CN.po, po/zh_TW.po: Updated.
 
 September 7, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

@@ -1852,8 +1852,6 @@ void OnBiosPath_Changed(GtkWidget *wdg, gpointer data) {
 	foldername = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (wdg));
 	strcpy(Config.BiosDir, foldername);
 
-//	printf("BIOS directory is now %s\n", foldername);
-
 	UpdatePluginsBIOS();
 	UpdatePluginsBIOS_UpdateGUI(data);
 
@@ -2018,8 +2016,6 @@ void scan_bios_dir (gchar *dirname) {
 	struct dirent *ent;
 	gchar *filename;
 
-//	printf("Scanning bios dir %s\n", dirname);
-
 	dir = opendir(dirname);
 	if (dir == NULL) {
 		SysMessage(_("Could not open BIOS directory: '%s'\n"), dirname);
@@ -2033,8 +2029,6 @@ void scan_bios_dir (gchar *dirname) {
 		g_free(filename);
 	}
 	closedir(dir);
-
-//	printf("Finished scanning bios dir %s\n", dirname);
 }
 
 void UpdatePluginsBIOS() {
@@ -2115,10 +2109,10 @@ void UpdatePluginsBIOS() {
 	}
 	closedir(dir);
 
+	scan_bios_dir(Config.BiosDir);
+
 	/* The BIOS list always contains the PCSX internal BIOS */
 	add_bios_to_list(_("Internal HLE Bios"), "HLE");
-
-	scan_bios_dir(Config.BiosDir);
 }
 
 void UpdatePluginsBIOS_UpdateGUI(GladeXML *xml) {
