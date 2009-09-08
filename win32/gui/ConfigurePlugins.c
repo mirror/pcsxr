@@ -215,10 +215,13 @@ BOOL OnConfigurePluginsDialog(HWND hW) {
 		sprintf(lp, "%s", (char *)FindData.cFileName);
 		i = ComboBox_AddString(hWC_BIOS, FindData.cFileName);
 		ComboBox_SetItemData(hWC_BIOS, i, lp);
-		if (stricmp(Config.Bios, FindData.cFileName)==0)
+		if (Config.Bios[0]=='\0') {
+			ComboBox_SetCurSel(hWC_BIOS, i);
+			strcpy(Config.Bios, FindData.cFileName);
+		} else if (stricmp(Config.Bios, FindData.cFileName)==0)
 			ComboBox_SetCurSel(hWC_BIOS, i);
 	} while (FindNextFile(Find,&FindData));
-    
+
 	if (Find!=INVALID_HANDLE_VALUE) FindClose(Find);
 
 	if (ComboBox_GetCurSel(hWC_CDR ) == -1)

@@ -1,3 +1,8 @@
+September 8, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * win32/gui/ConfigurePlugins.c: Select a real BIOS instead of the Internal
+   HLE BIOS by default at the first run.
+
 September 7, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfsound/alsa.c: Removed ALSA-specific CDDA stuff, which causes
