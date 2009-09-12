@@ -35,6 +35,7 @@
 
 #define CD_FRAMESIZE_RAW		2352
 #define DATA_SIZE				(CD_FRAMESIZE_RAW - 12)
+#define CDDA_DATA_SIZE			(CD_FRAMESIZE_RAW - 12 - 4)
 
 #define SUB_FRAMESIZE			96
 
@@ -45,9 +46,9 @@ FILE *subHandle = NULL;
 static unsigned char cdbuffer[DATA_SIZE];
 static unsigned char subbuffer[SUB_FRAMESIZE];
 
-static unsigned char sndbuffer[CD_FRAMESIZE_RAW * 10];
+static unsigned char sndbuffer[CDDA_DATA_SIZE * 10];
 
-#define CDDA_FRAMETIME			(1000 * (sizeof(sndbuffer) / CD_FRAMESIZE_RAW) / 75)
+#define CDDA_FRAMETIME			(1000 * (sizeof(sndbuffer) / CDDA_DATA_SIZE) / 75)
 
 #ifdef _WIN32
 static HANDLE threadid;
@@ -142,7 +143,7 @@ static void playthread(void *param)
 static void *playthread(void *param)
 #endif
 {
-	long		d, t;
+	long		d, t, i, s;
 
 	t = GetTickCount();
 
@@ -162,7 +163,22 @@ static void *playthread(void *param)
 
 		t = GetTickCount() + CDDA_FRAMETIME;
 
-		if ((d = fread(sndbuffer, 1, sizeof(sndbuffer), cddaHandle)) == 0) {
+		s = 0;
+
+		for (i = 0; i < sizeof(sndbuffer) / CDDA_DATA_SIZE; i++) {
+			// disregard the synchronization information and header data
+			fseek(cddaHandle, CD_FRAMESIZE_RAW - CDDA_DATA_SIZE, SEEK_CUR);
+
+			// read one sector
+			d = fread(sndbuffer + CDDA_DATA_SIZE * i, 1, CDDA_DATA_SIZE, cddaHandle);
+			if (d < CDDA_DATA_SIZE) {
+				break;
+			}
+
+			s += d;
+		}
+
+		if (s == 0) {
 			playing = 0;
 			fclose(cddaHandle);
 			cddaHandle = NULL;
@@ -171,7 +187,7 @@ static void *playthread(void *param)
 		}
 
 		if (!cdr.Muted && playing) {
-			SPU_playCDDAchannel((short *)sndbuffer, d);
+			SPU_playCDDAchannel((short *)sndbuffer, s);
 		}
 	}
 
