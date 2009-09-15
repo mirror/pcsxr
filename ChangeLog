@@ -1,3 +1,7 @@
+September 15, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * debian/changelog: Bumped version.
+
 September 12, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/cdriso.c: Disregard the synchronization information and header
