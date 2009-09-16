@@ -2259,9 +2259,11 @@ Romain Lafourcade</property>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox7">
         <property name="visible">True</property>
+        <property name="orientation">vertical</property>
         <child>
           <widget class="GtkVBox" id="vbox1">
             <property name="visible">True</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">15</property>
             <child>
               <widget class="GtkFrame" id="frame3">
@@ -2278,8 +2280,8 @@ Romain Lafourcade</property>
                     <property name="shadow_type">etched-in</property>
                     <child>
                       <widget class="GtkTreeView" id="GtkCList_Cheat">
-                        <property name="width_request">300</property>
-                        <property name="height_request">250</property>
+                        <property name="width_request">500</property>
+                        <property name="height_request">255</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                       </widget>
@@ -2306,18 +2308,6 @@ Romain Lafourcade</property>
                 <property name="visible">True</property>
                 <property name="spacing">10</property>
                 <child>
-                  <widget class="GtkButton" id="addbutton1">
-                    <property name="label" translatable="yes">gtk-add</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="use_stock">True</property>
-                  </widget>
-                  <packing>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
                   <widget class="GtkButton" id="editbutton1">
                     <property name="label" translatable="yes">gtk-edit</property>
                     <property name="visible">True</property>
@@ -2326,7 +2316,9 @@ Romain Lafourcade</property>
                     <property name="use_stock">True</property>
                   </widget>
                   <packing>
-                    <property name="position">1</property>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
                 <child>
@@ -2338,74 +2330,22 @@ Romain Lafourcade</property>
                     <property name="use_stock">True</property>
                   </widget>
                   <packing>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkButton" id="enablebutton1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <child>
-                      <widget class="GtkHBox" id="hbox2">
-                        <property name="visible">True</property>
-                        <child>
-                          <widget class="GtkImage" id="image3">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-apply</property>
-                            <property name="icon-size">1</property>
-                          </widget>
-                          <packing>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="label2">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Enable</property>
-                          </widget>
-                          <packing>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </widget>
-                    </child>
-                  </widget>
-                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
                     <property name="position">3</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkButton" id="disablebutton1">
+                  <widget class="GtkButton" id="addbutton1">
+                    <property name="label" translatable="yes">gtk-add</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <child>
-                      <widget class="GtkHBox" id="hbox3">
-                        <property name="visible">True</property>
-                        <child>
-                          <widget class="GtkImage" id="image4">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-cancel</property>
-                            <property name="icon-size">1</property>
-                          </widget>
-                          <packing>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="label3">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Disable</property>
-                          </widget>
-                          <packing>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </widget>
-                    </child>
+                    <property name="use_stock">True</property>
                   </widget>
                   <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
                     <property name="position">4</property>
                   </packing>
                 </child>
@@ -2418,7 +2358,10 @@ Romain Lafourcade</property>
                     <property name="use_stock">True</property>
                   </widget>
                   <packing>
-                    <property name="position">5</property>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="pack_type">end</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
                 <child>
@@ -2430,7 +2373,10 @@ Romain Lafourcade</property>
                     <property name="use_stock">True</property>
                   </widget>
                   <packing>
-                    <property name="position">6</property>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="pack_type">end</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
               </widget>

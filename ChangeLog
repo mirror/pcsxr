@@ -4,6 +4,8 @@ September 16, 2009 Wei Mingzhi <weimingzhi@gmail.com>
    to Tibério Vítor <tvtoon at gmail dot com>.
  * po/LINGUAS: Added pt_BR.po.
  * po/pcsx.pot: Updated.
+ * gui/Cheat.c: Use checkboxes for toggling cheats.
+ * data/pcsx.glade2: Likewise.
 
 September 15, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

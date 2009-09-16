@@ -35,7 +35,7 @@ GtkWidget *CheatListDlg = NULL;
 GtkWidget *CheatSearchDlg = NULL;
 
 static void LoadCheatListItems(int index) {
-	GtkListStore *store = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
+	GtkListStore *store = gtk_list_store_new(2, G_TYPE_BOOLEAN, G_TYPE_STRING);
 	GtkTreeIter iter;
 	GtkWidget *widget;
 	GladeXML *xml;
@@ -47,8 +47,7 @@ static void LoadCheatListItems(int index) {
 
 	for (i = 0; i < NumCheats; i++) {
 		gtk_list_store_append(store, &iter);
-		gtk_list_store_set(store, &iter, 0, Cheats[i].Enabled ? _(" Yes") : "",
-			1, Cheats[i].Descr, -1);
+		gtk_list_store_set(store, &iter, 0, Cheats[i].Enabled, 1, Cheats[i].Descr, -1);
 	}
 
 	gtk_tree_view_set_model(GTK_TREE_VIEW(widget), GTK_TREE_MODEL(store));
@@ -93,20 +92,11 @@ static void CheatList_TreeSelectionChanged(GtkTreeSelection *selection, gpointer
 
 		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "editbutton1")), TRUE);
 		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "delbutton1")), TRUE);
-		if (Cheats[i].Enabled) {
-			gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "enablebutton1")), FALSE);
-			gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "disablebutton1")), TRUE);
-		} else {
-			gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "enablebutton1")), TRUE);
-			gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "disablebutton1")), FALSE);
-		}
 	} else {
 		xml = glade_get_widget_tree(CheatListDlg);
 
 		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "editbutton1")), FALSE);
 		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "delbutton1")), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "enablebutton1")), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "disablebutton1")), FALSE);
 	}
 
 	gtk_widget_set_sensitive (GTK_WIDGET(glade_xml_get_widget(xml, "savebutton1")), NumCheats);
@@ -295,55 +285,11 @@ static void OnCheatListDlg_DelClicked(GtkWidget *widget, gpointer user_data) {
 	                       // rather than regenerating the whole list
 }
 
-static void OnCheatListDlg_EnableClicked(GtkWidget *widget, gpointer user_data) {
-	GladeXML *xml;
-	GtkTreeIter iter;
-	GtkTreeModel *model;
-	GtkTreePath *path;
+static void OnCheatListDlg_EnableToggled(GtkWidget *widget, gchar *path, gpointer user_data) {
+	int i = atoi(path);
 
-	gboolean selected;
-	int i = -1;
-
-	xml = glade_get_widget_tree(CheatListDlg);
-	widget = glade_xml_get_widget(xml, "GtkCList_Cheat");
-
-	selected = gtk_tree_selection_get_selected(
-		gtk_tree_view_get_selection(GTK_TREE_VIEW(widget)),
-		&model, &iter);
-
-	if (selected) {
-		path = gtk_tree_model_get_path(model, &iter);
-		i = *gtk_tree_path_get_indices(path);
-
-		Cheats[i].Enabled = 1;
-	}
-
-	LoadCheatListItems(i); // FIXME: should modify it in the list directly
-	                       // rather than regenerating the whole list
-}
-
-static void OnCheatListDlg_DisableClicked(GtkWidget *widget, gpointer user_data) {
-	GladeXML *xml;
-	GtkTreeIter iter;
-	GtkTreeModel *model;
-	GtkTreePath *path;
-
-	gboolean selected;
-	int i = -1;
-
-	xml = glade_get_widget_tree(CheatListDlg);
-	widget = glade_xml_get_widget(xml, "GtkCList_Cheat");
-
-	selected = gtk_tree_selection_get_selected(
-		gtk_tree_view_get_selection(GTK_TREE_VIEW(widget)),
-		&model, &iter);
-
-	if (selected) {
-		path = gtk_tree_model_get_path(model, &iter);
-		i = *gtk_tree_path_get_indices(path);
-
-		Cheats[i].Enabled = 0;
-	}
+	assert(i >= 0 && i < NumCheats);
+	Cheats[i].Enabled ^= 1;
 
 	LoadCheatListItems(i); // FIXME: should modify it in the list directly
 	                       // rather than regenerating the whole list
@@ -453,10 +399,12 @@ void RunCheatListDialog() {
 	widget = glade_xml_get_widget(xml, "GtkCList_Cheat");
 
 	// column for enable
-	renderer = gtk_cell_renderer_text_new ();
+	renderer = gtk_cell_renderer_toggle_new ();
 	column = gtk_tree_view_column_new_with_attributes (_("Enable"),
-			renderer, "text", 0, NULL);
+			renderer, "active", 0, NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW(widget), column);
+
+	g_signal_connect (G_OBJECT(renderer), "toggled", G_CALLBACK(OnCheatListDlg_EnableToggled), 0);
 
 	// column for description
 	renderer = gtk_cell_renderer_text_new ();
@@ -484,14 +432,6 @@ void RunCheatListDialog() {
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 			GTK_SIGNAL_FUNC(OnCheatListDlg_DelClicked), xml, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "enablebutton1");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnCheatListDlg_EnableClicked), xml, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "disablebutton1");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnCheatListDlg_DisableClicked), xml, NULL, G_CONNECT_AFTER);
-
 	widget = glade_xml_get_widget(xml, "loadbutton1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 			GTK_SIGNAL_FUNC(OnCheatListDlg_OpenClicked), xml, NULL, G_CONNECT_AFTER);
@@ -507,8 +447,6 @@ void RunCheatListDialog() {
 	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "savebutton1")), NumCheats);
 	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "editbutton1")), FALSE);
 	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "delbutton1")), FALSE);
-	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "enablebutton1")), FALSE);
-	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "disablebutton1")), FALSE);
 	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "editbutton1")), FALSE);
 }
 
