@@ -1,3 +1,8 @@
+September 18, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * win32/gui/CheatDlg.c: Disable "Search Type" dialog box if search results
+   already exist.
+
 September 16, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * po/pt_BR.po, po/pt_BR.gmo: Added Portuguese (Brazil) translation. Thanks

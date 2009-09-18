@@ -411,6 +411,11 @@ static void UpdateCheatSearchDlg(HWND hW) {
 		SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_ADDSTRING, 0, (LPARAM)_("Decreased"));
 		SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_ADDSTRING, 0, (LPARAM)_("Different"));
 		SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_ADDSTRING, 0, (LPARAM)_("No Change"));
+
+		ComboBox_Enable(GetDlgItem(hW, IDC_DATATYPE), FALSE);
+	}
+	else {
+		ComboBox_Enable(GetDlgItem(hW, IDC_DATATYPE), TRUE);
 	}
 
 	SendMessage(GetDlgItem(hW, IDC_SEARCHFOR), CB_SETCURSEL, (WPARAM)current_search, 0);
