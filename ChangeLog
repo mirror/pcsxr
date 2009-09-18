@@ -1,6 +1,6 @@
 September 18, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
- * win32/gui/CheatDlg.c: Disable "Search Type" dialog box if search results
+ * win32/gui/CheatDlg.c: Disable "Search Type" combo box if search results
    already exist.
 
 September 16, 2009 Wei Mingzhi <weimingzhi@gmail.com>
