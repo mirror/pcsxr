@@ -381,7 +381,6 @@ static int recInit() {
 
 	psxRecLUT = (u32*) malloc(0x010000 * 4);
 
-	//recMem = (char*) malloc(RECMEM_SIZE);
 	recMem = mmap(0, RECMEM_SIZE + 0x1000,
 		PROT_EXEC | PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 
@@ -417,7 +416,6 @@ static void recReset() {
 static void recShutdown() {
 	if (recMem == NULL) return;
 	free(psxRecLUT);
-	//free(recMem);
 	munmap(recMem, RECMEM_SIZE + 0x1000);
 	free(recRAM);
 	free(recROM);

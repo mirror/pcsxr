@@ -1,3 +1,10 @@
+September 20, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * win32/glue/sys/mman.h: Use VirtualAlloc() and VirtualFree() instead of
+   malloc() and free().
+ * libpcsxcore/ix86/iR3000A.c: Minor cleanup.
+ * po/zh_TW.po: Updated.
+
 September 18, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * win32/gui/CheatDlg.c: Disable "Search Type" combo box if search results

@@ -13,8 +13,8 @@
 #include <stdlib.h>
 
 #define mmap(start, length, prot, flags, fd, offset) \
-	((unsigned char *)malloc(length))
+	((unsigned char *)VirtualAlloc(NULL, (length), MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE))
 
-#define munmap(start, length) do { free(start); } while (0)
+#define munmap(start, length) do { VirtualFree((start), (length), MEM_RELEASE); } while (0)
 
 #endif
