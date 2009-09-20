@@ -4,6 +4,7 @@ September 20, 2009 Wei Mingzhi <weimingzhi@gmail.com>
    malloc() and free().
  * libpcsxcore/ix86/iR3000A.c: Minor cleanup.
  * po/zh_TW.po: Updated.
+ * libpcsxcore/cdrom.c: Close & reopen the CDR plugin after switching discs.
 
 September 18, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

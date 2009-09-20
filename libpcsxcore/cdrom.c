@@ -191,13 +191,18 @@ void cdrInterrupt() {
 					cdr.Result[0] &= ~0x02;
 				}
 				else if (i & 0x10) {
+					extern void *hCDRDriver;
 					cdr.StatP |= 0x2;
 					cdr.Result[0] |= 0x2;
+					if (hCDRDriver != NULL) {
+						CDR_close();
+						CDR_open();
+					}
 					CheckCdrom();
 				}
 			}
 			break;
-			
+
 		case CdlSetloc:
 			cdr.CmdProcess = 0;
 			SetResultSize(1);
