@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-09-08 21:54+0800\n"
-"PO-Revision-Date: 2009-09-08 22:04+0700\n"
+"PO-Revision-Date: 2009-09-20 19:22+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,6 @@ msgstr ""
 "網絡管理: AkumaX"
 
 #: ../win32/gui/AboutDlg.c:35
-#, fuzzy
 msgid ""
 "PCSX-df Authors:\n"
 "Ryan Schultz, Andrew Burton, Stephen Chao,\n"
@@ -49,7 +48,7 @@ msgstr ""
 "Ryan Schultz, Andrew Burton, Stephen Chao,\n"
 "Marcus Comstedt, Stefan Sikora\n"
 "\n"
-"PCSX Reloaded 開發者:\n"
+"PCSX-Reloaded 開發者:\n"
 "Wei Mingzhi\n"
 "\n"
 "http://www.codeplex.com/pcsxr"
@@ -79,9 +78,8 @@ msgstr "PCSX 模擬器\n"
 #: ../win32/gui/CheatDlg.c:52
 #: ../win32/gui/CheatDlg.c:224
 #: ../win32/gui/CheatDlg.c:271
-#, fuzzy
 msgid "Yes"
-msgstr " 是"
+msgstr "是"
 
 #: ../win32/gui/CheatDlg.c:52
 #: ../win32/gui/CheatDlg.c:224
@@ -97,9 +95,8 @@ msgstr "編輯金手指"
 #: ../win32/gui/CheatDlg.c:68
 #: ../win32/gui/CheatDlg.c:118
 #: ../gui/Cheat.c:695
-#, fuzzy
 msgid "Description:"
-msgstr "描述"
+msgstr "描述:"
 
 #: ../win32/gui/CheatDlg.c:69
 #: ../win32/gui/CheatDlg.c:119
@@ -140,28 +137,24 @@ msgid "&Add Code"
 msgstr "增加金手指碼(&A)"
 
 #: ../win32/gui/CheatDlg.c:170
-#, fuzzy
 msgid "&Edit Code"
-msgstr "編輯金手指"
+msgstr "編輯金手指(&E):"
 
 #: ../win32/gui/CheatDlg.c:171
 msgid "&Remove Code"
 msgstr "刪除金手指碼(&R)"
 
 #: ../win32/gui/CheatDlg.c:172
-#, fuzzy
 msgid "&Enable/Disable"
-msgstr "禁用"
+msgstr "啟用/禁用(&E)"
 
 #: ../win32/gui/CheatDlg.c:173
-#, fuzzy
 msgid "&Load..."
-msgstr "讀取(&L)"
+msgstr "讀取(&L)..."
 
 #: ../win32/gui/CheatDlg.c:174
-#, fuzzy
 msgid "&Save As..."
-msgstr "存儲(&S)"
+msgstr "存儲為(&S)..."
 
 #: ../win32/gui/CheatDlg.c:175
 msgid "&Close"
@@ -173,13 +166,11 @@ msgid "Description"
 msgstr "描述"
 
 #: ../win32/gui/CheatDlg.c:191
-#, fuzzy
 msgid "Enabled"
-msgstr "啟用"
+msgstr "開啟"
 
 #: ../win32/gui/CheatDlg.c:283
 #: ../win32/gui/CheatDlg.c:312
-#, fuzzy
 msgid "PCSX Cheat Code Files"
 msgstr "PCSX 金手指檔 (*.cht)"
 
@@ -208,9 +199,8 @@ msgid "Increased"
 msgstr "增加"
 
 #: ../win32/gui/CheatDlg.c:411
-#, fuzzy
 msgid "Decreased"
-msgstr "已刪除"
+msgstr "已減少"
 
 #: ../win32/gui/CheatDlg.c:412
 msgid "Different"
@@ -238,36 +228,35 @@ msgstr "找到過多位址。"
 #: ../gui/Cheat.c:612
 #, c-format
 msgid "%.8X    Current: %u (%.2X), Previous: %u (%.2X)"
-msgstr ""
+msgstr "%.8X    當前值: %u (%.2X), 前次值: %u (%.2X)"
 
 #: ../win32/gui/CheatDlg.c:467
 #: ../gui/Cheat.c:617
 #, c-format
 msgid "%.8X    Current: %u (%.4X), Previous: %u (%.4X)"
-msgstr ""
+msgstr "%.8X    當前值: %u (%.4X), 前次值: %u (%.4X)"
 
 #: ../win32/gui/CheatDlg.c:472
 #: ../gui/Cheat.c:622
 #, c-format
 msgid "%.8X    Current: %u (%.8X), Previous: %u (%.8X)"
-msgstr ""
+msgstr "%.8X    當前值: %u (%.8X), 前次值: %u (%.8X)"
 
 #: ../win32/gui/CheatDlg.c:488
 #: ../gui/Cheat.c:637
 #, c-format
 msgid "Founded Addresses: %d"
-msgstr ""
+msgstr "找到位址: %d"
 
 #: ../win32/gui/CheatDlg.c:500
 #: ../data/pcsx.glade2:2704
-#, fuzzy
 msgid "Freeze"
-msgstr "空閑"
+msgstr "固定"
 
 #: ../win32/gui/CheatDlg.c:501
 #: ../win32/gui/CheatDlg.c:592
 msgid "Address:"
-msgstr ""
+msgstr "位址:"
 
 #: ../win32/gui/CheatDlg.c:502
 #: ../win32/gui/CheatDlg.c:593
@@ -275,93 +264,87 @@ msgstr ""
 #: ../gui/Cheat.c:706
 #: ../data/pcsx.glade2:2548
 msgid "Value:"
-msgstr ""
+msgstr "值:"
 
 #: ../win32/gui/CheatDlg.c:562
-#, fuzzy, c-format
+#, c-format
 msgid "Freeze %.8X"
-msgstr "空閑"
+msgstr "固定 %.8X"
 
 #: ../win32/gui/CheatDlg.c:591
 #: ../data/pcsx.glade2:2740
 msgid "Modify"
-msgstr ""
+msgstr "更改"
 
 #: ../win32/gui/CheatDlg.c:674
 #: ../gui/Cheat.c:1188
 #: ../data/pcsx.glade2:2479
-#, fuzzy
 msgid "Cheat Search"
-msgstr "搜尋(_S)"
+msgstr "搜尋金手指碼"
 
 #: ../win32/gui/CheatDlg.c:676
 #: ../data/pcsx.glade2:2526
-#, fuzzy
 msgid "Search For:"
-msgstr "在此處查找外掛:"
+msgstr "搜尋:"
 
 #: ../win32/gui/CheatDlg.c:677
 #: ../data/pcsx.glade2:2536
 msgid "Data Type:"
-msgstr ""
+msgstr "數值類型:"
 
 #: ../win32/gui/CheatDlg.c:679
 #: ../data/pcsx.glade2:2560
 msgid "Data Base:"
-msgstr ""
+msgstr "數值基:"
 
 #: ../win32/gui/CheatDlg.c:680
 #: ../data/pcsx.glade2:2620
 msgid "To:"
-msgstr ""
+msgstr "至:"
 
 #: ../win32/gui/CheatDlg.c:681
-#, fuzzy
 msgid "&Freeze"
-msgstr "空閑"
+msgstr "固定(&F)"
 
 #: ../win32/gui/CheatDlg.c:682
 msgid "&Modify"
-msgstr ""
+msgstr "更改(&M)"
 
 #: ../win32/gui/CheatDlg.c:683
-#, fuzzy
 msgid "&Copy"
-msgstr "複制"
+msgstr "複制(&C)"
 
 #: ../win32/gui/CheatDlg.c:684
-#, fuzzy
 msgid "&Search"
-msgstr "搜尋(_S)"
+msgstr "搜尋(&S)"
 
 #: ../win32/gui/CheatDlg.c:685
-#, fuzzy
 msgid "&New Search"
-msgstr "搜尋(_S)"
+msgstr "新搜尋(&N)"
 
 #: ../win32/gui/CheatDlg.c:686
 msgid "C&lose"
-msgstr ""
+msgstr "關閉(&L)"
 
 #: ../win32/gui/CheatDlg.c:688
 msgid "8-bit"
-msgstr ""
+msgstr "8 位元"
 
 #: ../win32/gui/CheatDlg.c:689
 msgid "16-bit"
-msgstr ""
+msgstr "16 位元"
 
 #: ../win32/gui/CheatDlg.c:690
 msgid "32-bit"
-msgstr ""
+msgstr "32 位元"
 
 #: ../win32/gui/CheatDlg.c:691
 msgid "Decimal"
-msgstr ""
+msgstr "十進制"
 
 #: ../win32/gui/CheatDlg.c:692
 msgid "Hexadecimal"
-msgstr ""
+msgstr "十六進制"
 
 #: ../win32/gui/ConfigurePlugins.c:200
 #: ../gui/Gtk2Gui.c:2119
@@ -369,9 +352,8 @@ msgid "Internal HLE Bios"
 msgstr "內部 HLE-Bios"
 
 #: ../win32/gui/ConfigurePlugins.c:286
-#, fuzzy
 msgid "Configuration not OK!"
-msgstr "配置"
+msgstr "配置不正確!"
 
 #: ../win32/gui/ConfigurePlugins.c:286
 #: ../gui/Cheat.c:165
@@ -389,14 +371,12 @@ msgid "This plugin reports that should not work correctly"
 msgstr "此外掛報告其不可正常工作。"
 
 #: ../win32/gui/ConfigurePlugins.c:444
-#, fuzzy
 msgid "Select Plugins Directory"
-msgstr "設置外掛目錄"
+msgstr "選擇外掛目錄"
 
 #: ../win32/gui/ConfigurePlugins.c:453
-#, fuzzy
 msgid "Select Bios Directory"
-msgstr "設置 BIOS 目錄"
+msgstr "選擇 BIOS 目錄"
 
 #: ../win32/gui/ConfigurePlugins.c:462
 msgid "Configuration"
@@ -477,63 +457,63 @@ msgstr "注意: 聯網遊戲外掛應和其它外掛放在同一資料夾中。"
 #: ../win32/gui/WndMain.c:278
 #, c-format
 msgid "*PCSX*: Saved State %d"
-msgstr ""
+msgstr "*PCSX*: Saved State %d"
 
 #: ../win32/gui/plugin.c:91
 #: ../win32/gui/WndMain.c:279
 #, c-format
 msgid "*PCSX*: Error Saving State %d"
-msgstr ""
+msgstr "*PCSX*: Error Saving State %d"
 
 #: ../win32/gui/plugin.c:107
 #: ../win32/gui/WndMain.c:256
 #, c-format
 msgid "*PCSX*: Loaded State %d"
-msgstr ""
+msgstr "*PCSX*: Loaded State %d"
 
 #: ../win32/gui/plugin.c:108
 #: ../win32/gui/WndMain.c:257
 #, c-format
 msgid "*PCSX*: Error Loading State %d"
-msgstr ""
+msgstr "*PCSX*: Error Loading State %d"
 
 #: ../win32/gui/plugin.c:119
 #, c-format
 msgid "*PCSX*: Sio Irq Always Enabled"
-msgstr ""
+msgstr "*PCSX*: Sio Irq Always Enabled"
 
 #: ../win32/gui/plugin.c:120
 #, c-format
 msgid "*PCSX*: Sio Irq Not Always Enabled"
-msgstr ""
+msgstr "*PCSX*: Sio Irq Not Always Enabled"
 
 #: ../win32/gui/plugin.c:127
 #, c-format
 msgid "*PCSX*: Black&White Mdecs Only Enabled"
-msgstr ""
+msgstr "*PCSX*: Black&White Mdecs Only Enabled"
 
 #: ../win32/gui/plugin.c:128
 #, c-format
 msgid "*PCSX*: Black&White Mdecs Only Disabled"
-msgstr ""
+msgstr "*PCSX*: Black&White Mdecs Only Disabled"
 
 #: ../win32/gui/plugin.c:135
 #, c-format
 msgid "*PCSX*: Xa Enabled"
-msgstr ""
+msgstr "*PCSX*: Xa Enabled"
 
 #: ../win32/gui/plugin.c:136
 #, c-format
 msgid "*PCSX*: Xa Disabled"
-msgstr ""
+msgstr "*PCSX*: Xa Disabled"
 
 #: ../win32/gui/plugin.c:145
 msgid "*PCSX*: CdRom Case Opened"
-msgstr ""
+msgstr "*PCSX*: CdRom Case Opened"
 
 #: ../win32/gui/plugin.c:150
 msgid "*PCSX*: CdRom Case Closed"
-msgstr ""
+msgstr "*PCSX*: CdRom Case Closed"
 
 #: ../win32/gui/plugin.c:177
 msgid "Connecting..."
@@ -689,22 +669,22 @@ msgstr "PCSX 記錄格式"
 #: ../win32/gui/WndMain.c:324
 #, c-format
 msgid "*PCSX*: Loaded State %s"
-msgstr ""
+msgstr "*PCSX*: Loaded State %s"
 
 #: ../win32/gui/WndMain.c:325
 #, c-format
 msgid "*PCSX*: Error Loading State %s"
-msgstr ""
+msgstr "*PCSX*: Error Loading State %s"
 
 #: ../win32/gui/WndMain.c:376
 #, c-format
 msgid "*PCSX*: Saved State %s"
-msgstr ""
+msgstr "*PCSX*: Saved State %s"
 
 #: ../win32/gui/WndMain.c:377
 #, c-format
 msgid "*PCSX*: Error Saving State %s"
-msgstr ""
+msgstr "*PCSX*: Error Saving State %s"
 
 #: ../win32/gui/WndMain.c:426
 #: ../win32/gui/WndMain.c:475
@@ -744,11 +724,11 @@ msgstr "遊戲"
 
 #: ../win32/gui/WndMain.c:853
 msgid "mid link block"
-msgstr ""
+msgstr "mid link block"
 
 #: ../win32/gui/WndMain.c:856
 msgid "terminiting link block"
-msgstr ""
+msgstr "terminiting link block"
 
 #: ../win32/gui/WndMain.c:864
 #: ../gui/Gtk2Gui.c:1134
@@ -939,18 +919,16 @@ msgid "&States"
 msgstr "記錄(&S)"
 
 #: ../win32/gui/WndMain.c:1473
-#, fuzzy
 msgid "Run &EXE..."
-msgstr "執行 EXE(&E)"
+msgstr "執行 EXE(&E)..."
 
 #: ../win32/gui/WndMain.c:1474
 msgid "Run &BIOS"
 msgstr "執行 BIOS(&B)"
 
 #: ../win32/gui/WndMain.c:1475
-#, fuzzy
 msgid "Run &ISO..."
-msgstr "執行 ISO(&I)"
+msgstr "執行 ISO(&I)..."
 
 #: ../win32/gui/WndMain.c:1476
 msgid "Run &CD"
@@ -999,9 +977,8 @@ msgid "&Emulator"
 msgstr "模擬器(&E)"
 
 #: ../win32/gui/WndMain.c:1493
-#, fuzzy
 msgid "S&witch ISO..."
-msgstr "更換 ISO(_W)"
+msgstr "更換 ISO(&W)..."
 
 #: ../win32/gui/WndMain.c:1495
 msgid "Re&set"
@@ -1016,58 +993,48 @@ msgid "&Configuration"
 msgstr "配置(&C)"
 
 #: ../win32/gui/WndMain.c:1499
-#, fuzzy
 msgid "Cheat &Search..."
-msgstr "搜尋(_S)"
+msgstr "搜尋金手指碼(&S)..."
 
 #: ../win32/gui/WndMain.c:1500
-#, fuzzy
 msgid "Ch&eat Code..."
-msgstr "金手指碼:"
+msgstr "金手指碼(&E)..."
 
 #: ../win32/gui/WndMain.c:1503
 msgid "&Language"
 msgstr "語言(&L)"
 
 #: ../win32/gui/WndMain.c:1528
-#, fuzzy
 msgid "&Memory cards..."
-msgstr "記憶卡(&M)"
+msgstr "記憶卡(&M)..."
 
 #: ../win32/gui/WndMain.c:1529
-#, fuzzy
 msgid "C&PU..."
-msgstr "CPU(&P)"
+msgstr "CPU(&P)..."
 
 #: ../win32/gui/WndMain.c:1531
-#, fuzzy
 msgid "&NetPlay..."
-msgstr "聯網遊戲(&N)"
+msgstr "聯網遊戲(&N)..."
 
 #: ../win32/gui/WndMain.c:1533
-#, fuzzy
 msgid "&Controllers..."
-msgstr "控制器(&C)"
+msgstr "控制器(&C)..."
 
 #: ../win32/gui/WndMain.c:1534
-#, fuzzy
 msgid "CD-&ROM..."
-msgstr "CD-ROM(&R)"
+msgstr "CD-ROM(&R)..."
 
 #: ../win32/gui/WndMain.c:1535
-#, fuzzy
 msgid "&Sound..."
-msgstr "聲音(&S)"
+msgstr "聲音(&S)..."
 
 #: ../win32/gui/WndMain.c:1536
-#, fuzzy
 msgid "&Graphics..."
-msgstr "圖像(&G)"
+msgstr "圖像(&G)..."
 
 #: ../win32/gui/WndMain.c:1538
-#, fuzzy
 msgid "&Plugins && Bios..."
-msgstr "外掛及 BIOS(&P)"
+msgstr "外掛及 BIOS(&P)..."
 
 #: ../win32/gui/WndMain.c:1540
 msgid "&Help"
@@ -1129,20 +1096,19 @@ msgstr "啟用"
 
 #: ../gui/Cheat.c:689
 msgid "Freeze value"
-msgstr ""
+msgstr "固定數值"
 
 #: ../gui/Cheat.c:788
 msgid "Modify value"
-msgstr ""
+msgstr "更改數值"
 
 #: ../gui/Cheat.c:796
 msgid "New value:"
-msgstr ""
+msgstr "新值:"
 
 #: ../gui/Cheat.c:1193
-#, fuzzy
 msgid "Search Results"
-msgstr "搜尋(_S)"
+msgstr "搜尋結果"
 
 #: ../gui/Gtk2Gui.c:386
 #: ../data/pcsx.glade2:539
@@ -1233,7 +1199,7 @@ msgstr "格式化此記憶卡?"
 
 #: ../gui/Gtk2Gui.c:1234
 msgid "If you format the memory card, the card will be empty, and any existing data overwritten."
-msgstr "如果您選擇格式化記憶卡，記憶卡將被清空，並且任何現有數據都將被覆蓋。"
+msgstr "如果您選擇格式化記憶卡，記憶卡將被清空，並且任何現有資料都將被覆蓋。"
 
 #: ../gui/Gtk2Gui.c:1237
 msgid "Format card"
@@ -1391,19 +1357,19 @@ msgid "Error closing GPU plugin!"
 msgstr "無法關閉 GPU 外掛!"
 
 #: ../libpcsxcore/cdriso.c:523
-#, fuzzy, c-format
+#, c-format
 msgid "Loaded CD Image: %s"
-msgstr "已讀取記錄 %s。"
+msgstr "已加載 CD 映像: %s"
 
 #: ../libpcsxcore/cheat.c:148
 #, c-format
 msgid "Cheats loaded from: %s\n"
-msgstr ""
+msgstr "金手指碼已加載: %s\n"
 
 #: ../libpcsxcore/cheat.c:180
 #, c-format
 msgid "Cheats saved to: %s\n"
-msgstr ""
+msgstr "金手指碼已保存: %s\n"
 
 #: ../libpcsxcore/cheat.c:323
 #: ../libpcsxcore/cheat.c:444
@@ -1411,24 +1377,22 @@ msgid "(Untitled)"
 msgstr "(未定名)"
 
 #: ../libpcsxcore/misc.c:380
-#, fuzzy, c-format
+#, c-format
 msgid "Error opening file: %s.\n"
-msgstr "開啟檔案錯誤: %s!"
+msgstr "開啟檔案錯誤: %s.\n"
 
 #: ../libpcsxcore/misc.c:420
 #, c-format
 msgid "Unknown CPE opcode %02x at position %08x.\n"
-msgstr ""
+msgstr "未知 CPE opcode %02x 位於 %08x.\n"
 
 #: ../libpcsxcore/misc.c:427
-#, fuzzy
 msgid "COFF files not supported.\n"
-msgstr "COFF 檔案不被支援!"
+msgstr "COFF 檔案不被支援.\n"
 
 #: ../libpcsxcore/misc.c:431
-#, fuzzy
 msgid "This file does not appear to be a valid PSX file.\n"
-msgstr "此檔案不是一個合法的 PSX 檔案。"
+msgstr "此檔案不是一個合法的 PSX 檔案。\n"
 
 #: ../libpcsxcore/plugins.c:33
 #, c-format
@@ -1539,35 +1503,35 @@ msgstr "正在加載記憶卡 %s\n"
 
 #: ../plugins/dfxvideo/gpu.c:52
 msgid "XVideo Driver"
-msgstr ""
+msgstr "XVideo 驅動程式"
 
 #: ../plugins/dfxvideo/gpu.c:53
 msgid ""
 "P.E.Op.S. Xvideo Driver V1.17\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
+"P.E.Op.S. Xvideo 驅動程序 V1.17\n"
+"由 Pete Bernert 及 P.E.Op.S. 開發組編寫\n"
 
 #: ../plugins/dfxvideo/gpu.c:55
 msgid "Pete Bernert and the P.E.Op.S. team"
-msgstr ""
+msgstr "Pete Bernert 和 P.E.Op.S. 開發組"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:8
-#, fuzzy
 msgid "Configure X11 Video"
-msgstr "配置 PCSX"
+msgstr "設定 X11 Video"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:39
 msgid "Initial Window Size:"
-msgstr ""
+msgstr "初始視窗大小:"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:50
-#, fuzzy
 msgid "Stretching:"
-msgstr "在此處查找外掛:"
+msgstr "拉抻:"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:63
 msgid "Dithering:"
-msgstr ""
+msgstr "抖動:"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:76
 msgid ""
@@ -1579,6 +1543,13 @@ msgid ""
 "1280x1024\n"
 "1600x1200"
 msgstr ""
+"320x240\n"
+"640x480\n"
+"800x600\n"
+"1024x768\n"
+"1152x864\n"
+"1280x1024\n"
+"1600x1200"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:95
 msgid ""
@@ -1591,6 +1562,14 @@ msgid ""
 "6: HQ2X\n"
 "7: HQ3X"
 msgstr ""
+"0: 無\n"
+"1: 2xSai\n"
+"2: 2xSuperSai\n"
+"3: SuperEagle\n"
+"4: Scale2x\n"
+"5: Scale3x\n"
+"6: HQ2X\n"
+"7: HQ3X"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:117
 msgid ""
@@ -1598,41 +1577,42 @@ msgid ""
 "1: Game dependant\n"
 "2: Always"
 msgstr ""
+"0: 關閉 (最快)\n"
+"1: 取決于遊戲\n"
+"2: 總是開啟"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:139
 msgid "Maintain 4:3 Aspect Ratio"
-msgstr ""
+msgstr "維持 4:3 縱橫比"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:153
 msgid "Toggle windowed/fullscreen mode."
-msgstr ""
+msgstr "切換視窗/全螢幕方式。"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:154
 #: ../plugins/peopsxgl/gpucfg/interface.c:322
 msgid "Fullscreen"
-msgstr ""
+msgstr "全螢幕"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:177
-#, fuzzy
 msgid "<b>Screen</b>"
-msgstr "<b>BIOS</b>"
+msgstr "<b>螢幕</b>"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:203
 msgid "Toggle whether the FPS will be shown."
-msgstr ""
+msgstr "切換 FPS 是否將被顯示。"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:204
 msgid "Show FPS"
-msgstr ""
+msgstr "顯示 FPS"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:218
 msgid "Enable this if games display too quickly."
-msgstr ""
+msgstr "如遊戲顯示過快，請開啟此項。"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:219
-#, fuzzy
 msgid "Autodetect FPS limit"
-msgstr "自動檢測"
+msgstr "自動偵測 FPS 界限"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:235
 msgid "Skip frames when rendering."
@@ -1644,21 +1624,20 @@ msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:257
 msgid "Set FPS"
-msgstr ""
+msgstr "設定  FPS"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:272
 msgid "200.0"
-msgstr ""
+msgstr "200.0"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:295
-#, fuzzy
 msgid "<b>Framerate</b>"
-msgstr "<b>金手指碼</b>"
+msgstr "<b>幀率</b>"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:324
 #: ../plugins/peopsxgl/gpucfg/interface.c:568
 msgid "Use game fixes"
-msgstr ""
+msgstr "啟用遊戲修補"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:348
 msgid "better g-colors, worse textures"
@@ -1677,9 +1656,8 @@ msgid "Repeated flat tex triangles"
 msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:410
-#, fuzzy
 msgid "Disable CPU Saving"
-msgstr "禁用 CD 音頻"
+msgstr "禁用 CPU Saving"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:426
 msgid "Odd/even bit hack"
@@ -1699,7 +1677,7 @@ msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:486
 msgid "Pandemonium 2"
-msgstr ""
+msgstr "Pandemonium 2"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:501
 msgid "Lazy screen update"
@@ -1723,65 +1701,64 @@ msgid "Ignore brightness color"
 msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:580
-#, fuzzy
 msgid "Disable coordinate check"
-msgstr "禁用 XA 解碼"
+msgstr "禁用坐標檢查"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:596
 msgid "Chrono Cross"
-msgstr ""
+msgstr "Chrono Cross"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:609
 msgid "Capcom fighting games"
-msgstr ""
+msgstr "Capcom 格鬥遊戲"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:624
 msgid "Black screens in Lunar"
-msgstr ""
+msgstr "Lunar 中黑螢幕"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:639
 msgid "Compatibility mode"
-msgstr ""
+msgstr "相容方式"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:664
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:428
 msgid "<b>Compatibility</b>"
-msgstr ""
+msgstr "<b>相容性</b>"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:701
 msgid "About X11 Video Plugin"
-msgstr ""
+msgstr "關於 X11 Video 外掛"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:714
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:516
 msgid "Coded by: Pete Bernert and the P.E.Op.S. team"
-msgstr ""
+msgstr "編寫者: Pete Bernert 及 P.E.Op.S. 開發組"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:725
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:541
 msgid "Homepage: http://home.t-online.de/home/PeteBernert/"
-msgstr ""
+msgstr "網址: http://home.t-online.de/home/PeteBernert/"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:737
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:566
 msgid "EMail: BlackDove@addcom.de"
-msgstr ""
+msgstr "EMail: BlackDove@addcom.de"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:750
 msgid "Version: 1.15"
-msgstr ""
+msgstr "版本: 1.15"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:762
 msgid "Release date: 2003"
-msgstr ""
+msgstr "釋出日期: 2003"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:774
 msgid "<b>PCSX-df Video Plugin Adaption</b>"
-msgstr ""
+msgstr "<b>PCSX-df 圖像外掛</b>"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:787
 msgid "XVideo Support: Stephen Chao"
-msgstr ""
+msgstr "XVideo 支援: Stephen Chao"
 
 #: ../data/pcsx.glade2:9
 msgid "PCSX"
@@ -1796,18 +1773,16 @@ msgid "Run _CD"
 msgstr "執行光碟(_C)"
 
 #: ../data/pcsx.glade2:47
-#, fuzzy
 msgid "Run _ISO..."
-msgstr "執行 ISO(&I)"
+msgstr "執行 _ISO..."
 
 #: ../data/pcsx.glade2:64
 msgid "Run _BIOS"
 msgstr "執行 _BIOS"
 
 #: ../data/pcsx.glade2:81
-#, fuzzy
 msgid "Run _EXE..."
-msgstr "執行 EXE(&E)"
+msgstr "執行 _EXE..."
 
 #: ../data/pcsx.glade2:103
 msgid "E_xit"
@@ -1872,24 +1847,20 @@ msgid "_Configuration"
 msgstr "配置(_C)"
 
 #: ../data/pcsx.glade2:363
-#, fuzzy
 msgid "_Plugins & BIOS..."
-msgstr "外掛及 BIOS(_P)"
+msgstr "外掛及 BIOS(_P)..."
 
 #: ../data/pcsx.glade2:385
-#, fuzzy
 msgid "_CPU..."
-msgstr "CPU(&P)"
+msgstr "_CPU..."
 
 #: ../data/pcsx.glade2:401
-#, fuzzy
 msgid "_Memory Cards..."
-msgstr "記憶卡(_M)"
+msgstr "記憶卡(_M)..."
 
 #: ../data/pcsx.glade2:418
-#, fuzzy
 msgid "_Netplay..."
-msgstr "聯網遊戲(_N)"
+msgstr "聯網遊戲(_N)..."
 
 #: ../data/pcsx.glade2:439
 msgid "Chea_t"
@@ -2070,6 +2041,21 @@ msgid ""
 "Public License along with this program; if not, write to\n"
 "the Free Software Foundation, Inc."
 msgstr ""
+"This program is free software; you can redistribute it\n"
+"and/or modify it under the terms of the GNU General\n"
+"Public License as published by the Free Software\n"
+"Foundation; either version 2 of the License, or (at your\n"
+"option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be\n"
+"useful, but WITHOUT ANY WARRANTY; without even\n"
+"the implied warranty of MERCHANTABILITY or\n"
+"FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General\n"
+"Public License along with this program; if not, write to\n"
+"the Free Software Foundation, Inc."
 
 #: ../data/pcsx.glade2:2234
 #: ../plugins/dfinput/dfinput.glade2:212
@@ -2082,15 +2068,15 @@ msgstr "<b>金手指碼</b>"
 
 #: ../data/pcsx.glade2:2310
 msgid "gtk-add"
-msgstr ""
+msgstr "gtk-add"
 
 #: ../data/pcsx.glade2:2322
 msgid "gtk-edit"
-msgstr ""
+msgstr "gtk-edit"
 
 #: ../data/pcsx.glade2:2334
 msgid "gtk-delete"
-msgstr ""
+msgstr "gtk-delete"
 
 #: ../data/pcsx.glade2:2399
 msgid "Disable"
@@ -2098,16 +2084,16 @@ msgstr "禁用"
 
 #: ../data/pcsx.glade2:2414
 msgid "gtk-open"
-msgstr ""
+msgstr "gtk-open"
 
 #: ../data/pcsx.glade2:2426
 msgid "gtk-save-as"
-msgstr ""
+msgstr "gtk-save-as"
 
 #: ../data/pcsx.glade2:2454
 #: ../data/pcsx.glade2:2927
 msgid "gtk-close"
-msgstr ""
+msgstr "gtk-close"
 
 #: ../data/pcsx.glade2:2511
 msgid ""
@@ -2115,6 +2101,9 @@ msgid ""
 "16-bit\n"
 "32-bit"
 msgstr ""
+"8 位元\n"
+"16 位元\n"
+"32 位元"
 
 #: ../data/pcsx.glade2:2574
 msgid ""
@@ -2137,7 +2126,7 @@ msgstr ""
 
 #: ../data/pcsx.glade2:2809
 msgid "label_resultsfound"
-msgstr ""
+msgstr "label_resultsfound"
 
 #: ../data/pcsx.glade2:2844
 msgid "Search"
@@ -2175,7 +2164,7 @@ msgstr "設定聲音"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:62
 msgid "Volume:"
-msgstr ""
+msgstr "音量:"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:90
 msgid "Interpolation:"
@@ -2183,7 +2172,7 @@ msgstr ""
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:118
 msgid "Reverb:"
-msgstr ""
+msgstr "回響:"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:146
 msgid ""
@@ -2192,6 +2181,10 @@ msgid ""
 "Loud\n"
 "Loudest"
 msgstr ""
+"低\n"
+"中\n"
+"高\n"
+"最高"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:165
 msgid ""
@@ -2199,6 +2192,9 @@ msgid ""
 "Simple\n"
 "Playstation"
 msgstr ""
+"關閉\n"
+"簡易\n"
+"Playstation"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:184
 msgid ""
@@ -2246,7 +2242,7 @@ msgstr ""
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:386
 msgid "SPU IRQ Wait"
-msgstr ""
+msgstr "SPU IRQ 等待"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:404
 msgid "Play only one channel for a performance boost."
@@ -2262,11 +2258,11 @@ msgstr ""
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:592
 msgid "Version: 1.6"
-msgstr ""
+msgstr "版本: 1.6"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:617
 msgid "Release date: 05.04.2003"
-msgstr ""
+msgstr "釋出日期: 05.04.2003"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:642
 msgid "<b>PCSX-df Sound Plugin Adaption</b>"
@@ -2274,11 +2270,11 @@ msgstr ""
 
 #: ../plugins/dfcdrom/cdr.c:58
 msgid "CD-ROM Drive Reader"
-msgstr ""
+msgstr "CD-ROM 裝置讀取外掛"
 
 #: ../plugins/dfcdrom/cdr.c:62
 msgid "CDR NULL Plugin"
-msgstr ""
+msgstr "CDR NULL 外掛"
 
 #: ../plugins/dfcdrom/interface.c:74
 msgid "CDR configuration"
@@ -2322,7 +2318,7 @@ msgstr "OpenGL 驅動程式"
 
 #: ../plugins/peopsxgl/gpu.c:63
 msgid "Pete Bernert"
-msgstr ""
+msgstr "Pete Bernert"
 
 #: ../plugins/peopsxgl/gpu.c:64
 msgid ""
@@ -2331,9 +2327,8 @@ msgid ""
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:118
-#, fuzzy
 msgid "OpenGL Driver configuration"
-msgstr "配置"
+msgstr "OpenGL 驅動程式設定"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:138
 msgid "Textures"
@@ -2439,18 +2434,16 @@ msgid "Dithering"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:346
-#, fuzzy
 msgid "Framerate"
-msgstr "<b>金手指碼</b>"
+msgstr "幀率"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:369
 msgid "FPS"
-msgstr ""
+msgstr "FPS"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:377
-#, fuzzy
 msgid "FPS limit manual"
-msgstr "自動檢測"
+msgstr "手動設定 FPS 界限"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:386
 msgid "Show FPS display on startup"
@@ -2576,9 +2569,8 @@ msgid "Swap front detection"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:608
-#, fuzzy
 msgid "Disable coord check"
-msgstr "禁用 XA 解碼"
+msgstr "禁用坐標檢查"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:616
 msgid "No blue glitches (LoD)"
@@ -2621,9 +2613,8 @@ msgid "Additional uploads"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:704
-#, fuzzy
 msgid "unused"
-msgstr "已使用"
+msgstr "未使用"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:712
 msgid "Fake 'gpu busy'"
@@ -2634,9 +2625,8 @@ msgid "Misc"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:743
-#, fuzzy
 msgid "Scanlines"
-msgstr "西班牙語"
+msgstr "掃描線"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:751
 msgid "Blending (0..255, -1=dot):"
@@ -2668,15 +2658,15 @@ msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:852
 msgid "Adapted from P.E.Op.S OpenGL GPU by Pete Bernert"
-msgstr ""
+msgstr "基於由 Pete Bernert 編寫的 P.E.Op.S OpenGL GPU"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:861
 msgid "Homepage: http://www.pbernert.com"
-msgstr ""
+msgstr "網址: http://www.pbernert.com"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:879
 msgid "Version: 1.78"
-msgstr ""
+msgstr "版本: 1.78"
 
 #: ../plugins/dfinput/pad.c:59
 msgid "Gamepad/Keyboard Input"
@@ -2684,7 +2674,7 @@ msgstr "手把/鍵盤輸入"
 
 #: ../plugins/dfinput/pad.c:61
 msgid "Keyboard Input"
-msgstr ""
+msgstr "鍵盤輸入"
 
 #: ../plugins/dfinput/dfinput.glade2:7
 msgid "Configure Gamepad/Keyboard"
@@ -2696,19 +2686,19 @@ msgstr ""
 
 #: ../plugins/dfinput/dfinput.glade2:36
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #: ../plugins/dfinput/dfinput.glade2:51
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #: ../plugins/dfinput/dfinput.glade2:73
 msgid "Device file:"
-msgstr ""
+msgstr "裝置檔案:"
 
 #: ../plugins/dfinput/dfinput.glade2:104
 msgid "Multi-threaded"
-msgstr ""
+msgstr "多執行緒"
 
 #: ../plugins/dfinput/dfinput.glade2:118
 msgid "Analog"
@@ -2720,5 +2710,5 @@ msgstr "<b>按鍵設定</b>"
 
 #: ../plugins/dfinput/dfinput.glade2:209
 msgid "Based on PadJoy by Erich Kitzmüller (ammoq@ammoq.com)"
-msgstr ""
+msgstr "基於由 Erich Kitzmüller (ammoq@ammoq.com) 編寫的 PadJoy"
 
