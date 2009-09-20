@@ -10,7 +10,7 @@
 #ifndef MMAN_H
 #define MMAN_H
 
-#include <stdlib.h>
+#include <windows.h>
 
 #define mmap(start, length, prot, flags, fd, offset) \
 	((unsigned char *)VirtualAlloc(NULL, (length), MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE))
