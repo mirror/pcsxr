@@ -947,6 +947,7 @@ LRESULT WINAPI CheatSearchDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					current_valueto = 0;
 
 					UpdateCheatSearchDlg(hW);
+					EnableWindow(GetDlgItem(hW, IDC_VALUEFROM), TRUE);
 					break;
 
 				case IDC_SEARCHFOR:

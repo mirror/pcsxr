@@ -1,3 +1,8 @@
+September 22, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * win32/gui/CheatDlg.c: Always enable the value inputbox when "New Search" is
+   clicked.
+
 September 21, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/cdrom.c: Reverted the previous change as the CD change problem
