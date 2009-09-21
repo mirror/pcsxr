@@ -1,3 +1,8 @@
+September 21, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdrom.c: Reverted the previous change as the CD change problem
+   can be fixed in the cdrSapu plugin.
+
 September 20, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * win32/glue/sys/mman.h: Use VirtualAlloc() and VirtualFree() instead of
