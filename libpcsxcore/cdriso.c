@@ -449,12 +449,7 @@ static int parseccd(const char *isofile) {
 		}
 		else if (!strncmp(linebuf, "INDEX 1=", 8)) {
 			sscanf(linebuf, "INDEX 1=%d", &t);
-
-			if (numtracks <= 1) {
-				t += 2 * 75;
-			}
-
-			sec2msf(t, ti[numtracks].start);
+			sec2msf(t + 2 * 75, ti[numtracks].start);
 
 			// If we've already seen another track, this is its end
 			if (numtracks > 1) {
