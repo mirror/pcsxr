@@ -57,6 +57,7 @@ static pthread_t threadid;
 #endif
 static int initial_offset = 0;
 static int playing = 0;
+static int cdda_bigendian = 0;
 
 char* CALLBACK CDR__getDriveLetter(void);
 long CALLBACK CDR__configure(void);
@@ -71,7 +72,6 @@ struct trackinfo {
 	enum {DATA, CDDA} type;
 	char start[3];		// MSF-format
 	char length[3];		// MSF-format
-	char gap[3];		// MSF-format
 };
 
 #define MAXTRACKS 100 /* How many tracks can a CD hold? */
@@ -143,7 +143,8 @@ static void playthread(void *param)
 static void *playthread(void *param)
 #endif
 {
-	long		d, t, i, s;
+	long			d, t, i, s;
+	unsigned char	tmp;
 
 	t = GetTickCount();
 
@@ -187,6 +188,14 @@ static void *playthread(void *param)
 		}
 
 		if (!cdr.Muted && playing) {
+			if (cdda_bigendian) {
+				for (i = 0; i < s / 2; i++) {
+					tmp = sndbuffer[i * 2];
+					sndbuffer[i * 2] = sndbuffer[i * 2 + 1];
+					sndbuffer[i * 2 + 1] = tmp;
+				}
+			}
+
 			SPU_playCDDAchannel((short *)sndbuffer, s);
 		}
 	}
@@ -252,11 +261,10 @@ static void startCDDA(unsigned int offset) {
 static int parsetoc(const char *isofile) {
 	char			tocname[MAXPATHLEN];
 	FILE			*fi;
-	char			linebuf[256], dummy[256];
+	char			linebuf[256], dummy[256], name[256];
 	char			*token;
-	char			name[256];
 	char			time[20], time2[20];
-	unsigned int	i, t;
+	unsigned int	t;
 
 	numtracks = 0;
 
@@ -271,9 +279,21 @@ static int parsetoc(const char *isofile) {
 	}
 
 	if ((fi = fopen(tocname, "r")) == NULL) {
+		// check for image.bin.toc (for AcetoneISO)
 		sprintf(tocname, "%s.toc", isofile);
 		if ((fi = fopen(tocname, "r")) == NULL) {
-			return -1;
+			// if filename is image.toc.bin, try removing .bin (for Brasero)
+			strcpy(tocname, isofile);
+			t = strlen(tocname);
+			if (t >= 8 && strcmp(tocname + t - 8, ".toc.bin") == 0) {
+				tocname[t - 4] = '\0';
+				if ((fi = fopen(tocname, "r")) == NULL) {
+					return -1;
+				}
+			}
+			else {
+				return -1;
+			}
 		}
 	}
 
@@ -299,28 +319,20 @@ static int parsetoc(const char *isofile) {
 			}
 		}
 		else if (!strcmp(token, "DATAFILE")) {
-			sscanf(linebuf, "DATAFILE %s %8s", name, time);
+			sscanf(linebuf, "DATAFILE \"%[^\"]\" %8s", name, time);
 			tok2msf((char *)&time, (char *)&ti[numtracks].length);
 		}
 		else if (!strcmp(token, "FILE")) {
-			sscanf(linebuf, "FILE %s %s %8s %8s", name, dummy, time, time2);
+			sscanf(linebuf, "FILE \"%[^\"]\" #%d %8s %8s", name, &t, time, time2);
 			tok2msf((char *)&time, (char *)&ti[numtracks].start);
+			t /= CD_FRAMESIZE_RAW;
+			t += msf2sec(ti[numtracks].start) + 2 * 75;
+			sec2msf(t, (char *)&ti[numtracks].start);
 			tok2msf((char *)&time2, (char *)&ti[numtracks].length);
-		}
-		else if (!strcmp(token, "START")) {
-			sscanf(linebuf, "START %8s", time);
-			tok2msf((char *)&time, (char *)&ti[numtracks].gap);
 		}
 	}
 
 	fclose(fi);
-
-	// calculate the true start of each track
-	// start+gap+datasize (+2 secs of silence ? I dunno...)
-	for (i = 2; i <= numtracks; i++) {
-		t = msf2sec(ti[1].start) + msf2sec(ti[1].length) + msf2sec(ti[i].start) + msf2sec(ti[i].gap);
-		sec2msf(t, ti[i].start);
-	}
 
 	return 0;
 }
@@ -368,15 +380,6 @@ static int parsecue(const char *isofile) {
 				ti[numtracks].type = DATA;
 			}
 		}
-		else if (!strcmp(token, "PREGAP")) {
-			tmp = strstr(linebuf, "PREGAP");
-			if (tmp != NULL) {
-				tmp += strlen("PREGAP");
-				while (*tmp == ' ') tmp++;
-				if (*tmp != '\n') sscanf(tmp, "%8s", time);
-			}
-			tok2msf((char *)&time, (char *)&ti[numtracks].gap);
-		}
 		else if (!strcmp(token, "INDEX")) {
 			tmp = strstr(linebuf, "INDEX");
 			if (tmp != NULL) {
@@ -387,12 +390,12 @@ static int parsecue(const char *isofile) {
 
 			tok2msf((char *)&time, (char *)&ti[numtracks].start);
 
-			t = msf2sec(ti[numtracks].start) + 2 * 75 + msf2sec(ti[numtracks].gap);
+			t = msf2sec(ti[numtracks].start) + 2 * 75;
 			sec2msf(t, ti[numtracks].start);
 
 			// If we've already seen another track, this is its end
 			if (numtracks > 1) {
-				t = msf2sec(ti[numtracks].start) - msf2sec(ti[numtracks - 1].start) + msf2sec(ti[numtracks - 1].gap) - msf2sec(ti[numtracks].gap);
+				t = msf2sec(ti[numtracks].start) - msf2sec(ti[numtracks - 1].start);
 				sec2msf(t, ti[numtracks - 1].length);
 			}
 		}
@@ -444,10 +447,6 @@ static int parseccd(const char *isofile) {
 			sscanf(linebuf, "MODE=%d", &t);
 			ti[numtracks].type = ((t == 0) ? CDDA : DATA);
 		}
-		else if (!strncmp(linebuf, "INDEX 0=", 8)) {
-			sscanf(linebuf, "INDEX 0=%d", &t);
-			sec2msf(t, ti[numtracks].gap);
-		}
 		else if (!strncmp(linebuf, "INDEX 1=", 8)) {
 			sscanf(linebuf, "INDEX 1=%d", &t);
 
@@ -455,16 +454,11 @@ static int parseccd(const char *isofile) {
 				t += 2 * 75;
 			}
 
-			if (msf2sec(ti[numtracks].gap) != 0) {
-				sec2msf(t - msf2sec(ti[numtracks].gap), ti[numtracks].gap);
-			}
-
-			t += msf2sec(ti[numtracks].gap);
 			sec2msf(t, ti[numtracks].start);
 
 			// If we've already seen another track, this is its end
 			if (numtracks > 1) {
-				t = msf2sec(ti[numtracks].start) - msf2sec(ti[numtracks - 1].start) + msf2sec(ti[numtracks - 1].gap) - msf2sec(ti[numtracks].gap);
+				t = msf2sec(ti[numtracks].start) - msf2sec(ti[numtracks - 1].start);
 				sec2msf(t, ti[numtracks - 1].length);
 			}
 		}
@@ -538,7 +532,10 @@ static long CALLBACK ISOopen(void) {
 
 	SysPrintf(_("Loaded CD Image: %s"), cdrfilename);
 
+	cdda_bigendian = 0;
+
 	if (parsetoc(cdrfilename) == 0) {
+		cdda_bigendian = 1; // cdrdao uses big-endian for CD Audio
 		SysPrintf("[+toc]");
 	}
 	else if (parsecue(cdrfilename) == 0) {
