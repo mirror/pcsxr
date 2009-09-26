@@ -5,6 +5,9 @@ September 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
    and BIOS".
  * gui/Gtk2Gui.c: Likewise.
  * po/pcsx.pot, po/zh_CN.po, po/zh_TW.po, po/pt_BR.po: Updated.
+ * libpcsxcore/cdriso.c: Implemented MDS parsing. MDF files with interleaved
+   subchannel data is now supported.
+ * win32/gui/WndMain.c: Moved States submenu from File menu to Emulator menu.
 
 September 24, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

@@ -35,7 +35,6 @@
 
 #define CD_FRAMESIZE_RAW		2352
 #define DATA_SIZE				(CD_FRAMESIZE_RAW - 12)
-#define CDDA_DATA_SIZE			(CD_FRAMESIZE_RAW - 12 - 4)
 
 #define SUB_FRAMESIZE			96
 
@@ -43,12 +42,14 @@ FILE *cdHandle = NULL;
 FILE *cddaHandle = NULL;
 FILE *subHandle = NULL;
 
+static char subChanInterleaved = 0;
+
 static unsigned char cdbuffer[DATA_SIZE];
 static unsigned char subbuffer[SUB_FRAMESIZE];
 
-static unsigned char sndbuffer[CDDA_DATA_SIZE * 10];
+static unsigned char sndbuffer[CD_FRAMESIZE_RAW * 10];
 
-#define CDDA_FRAMETIME			(1000 * (sizeof(sndbuffer) / CDDA_DATA_SIZE) / 75)
+#define CDDA_FRAMETIME			(1000 * (sizeof(sndbuffer) / CD_FRAMESIZE_RAW) / 75)
 
 #ifdef _WIN32
 static HANDLE threadid;
@@ -56,8 +57,8 @@ static HANDLE threadid;
 static pthread_t threadid;
 #endif
 static int initial_offset = 0;
-static int playing = 0;
-static int cdda_bigendian = 0;
+static char playing = 0;
+static char cddaBigEndian = 0;
 
 char* CALLBACK CDR__getDriveLetter(void);
 long CALLBACK CDR__configure(void);
@@ -164,19 +165,24 @@ static void *playthread(void *param)
 
 		t = GetTickCount() + CDDA_FRAMETIME;
 
-		s = 0;
+		if (subChanInterleaved) {
+			s = 0;
 
-		for (i = 0; i < sizeof(sndbuffer) / CDDA_DATA_SIZE; i++) {
-			// disregard the synchronization information and header data
-			fseek(cddaHandle, CD_FRAMESIZE_RAW - CDDA_DATA_SIZE, SEEK_CUR);
+			for (i = 0; i < sizeof(sndbuffer) / CD_FRAMESIZE_RAW; i++) {
+				// read one sector
+				d = fread(sndbuffer + CD_FRAMESIZE_RAW * i, 1, CD_FRAMESIZE_RAW, cddaHandle);
+				if (d < CD_FRAMESIZE_RAW) {
+					break;
+				}
 
-			// read one sector
-			d = fread(sndbuffer + CDDA_DATA_SIZE * i, 1, CDDA_DATA_SIZE, cddaHandle);
-			if (d < CDDA_DATA_SIZE) {
-				break;
+				s += d;
+
+				// skip the subchannel data
+				fseek(cddaHandle, SUB_FRAMESIZE, SEEK_CUR);
 			}
-
-			s += d;
+		}
+		else {
+			s = fread(sndbuffer, 1, sizeof(sndbuffer), cddaHandle);
 		}
 
 		if (s == 0) {
@@ -188,7 +194,7 @@ static void *playthread(void *param)
 		}
 
 		if (!cdr.Muted && playing) {
-			if (cdda_bigendian) {
+			if (cddaBigEndian) {
 				for (i = 0; i < s / 2; i++) {
 					tmp = sndbuffer[i * 2];
 					sndbuffer[i * 2] = sndbuffer[i * 2 + 1];
@@ -245,8 +251,6 @@ static void startCDDA(unsigned int offset) {
 
 	initial_offset = offset;
 	fseek(cddaHandle, initial_offset, SEEK_SET);
-
-	offset /= CD_FRAMESIZE_RAW;
 
 	playing = 1;
 #ifdef _WIN32
@@ -471,6 +475,105 @@ static int parseccd(const char *isofile) {
 	return 0;
 }
 
+// this function tries to get the .mds file of the given .mdf
+// the necessary data is put into the ti (trackinformation)-array
+static int parsemds(const char *isofile) {
+	char			mdsname[MAXPATHLEN];
+	FILE			*fi;
+	unsigned int	offset, extra_offset, l, i;
+	unsigned short	s;
+
+	numtracks = 0;
+
+	// copy name of the iso and change extension from .mdf to .mds
+	strncpy(mdsname, isofile, sizeof(mdsname));
+	mdsname[MAXPATHLEN - 1] = '\0';
+	if (strlen(mdsname) >= 4) {
+		strcpy(mdsname + strlen(mdsname) - 4, ".mds");
+	}
+	else {
+		return -1;
+	}
+
+	if ((fi = fopen(mdsname, "rb")) == NULL) {
+		return -1;
+	}
+
+	memset(&ti, 0, sizeof(ti));
+
+	// check if it's a valid mds file
+	fread(&i, 1, sizeof(unsigned int), fi);
+	i = SWAP32(i);
+	if (i != 0x4944454D) {
+		// not an valid mds file
+		fclose(fi);
+		return -1;
+	}
+
+	// get offset to session block
+	fseek(fi, 0x50, SEEK_SET);
+	fread(&offset, 1, sizeof(unsigned int), fi);
+	offset = SWAP32(offset);
+
+	// get total number of tracks
+	offset += 14;
+	fseek(fi, offset, SEEK_SET);
+	fread(&s, 1, sizeof(unsigned short), fi);
+	s = SWAP16(s);
+	numtracks = s;
+
+	// get offset to track blocks
+	fseek(fi, 4, SEEK_CUR);
+	fread(&offset, 1, sizeof(unsigned int), fi);
+	offset = SWAP32(offset);
+
+	// skip lead-in data
+	while (1) {
+		fseek(fi, offset + 4, SEEK_SET);
+		if (fgetc(fi) < 0xA0) {
+			break;
+		}
+		offset += 0x50;
+	}
+
+	// check if the image contains interleaved subchannel data
+	fseek(fi, offset + 1, SEEK_SET);
+	subChanInterleaved = fgetc(fi);
+
+	// read track data
+	for (i = 1; i <= numtracks; i++) {
+		fseek(fi, offset, SEEK_SET);
+
+		// get the track type
+		ti[i].type = ((fgetc(fi) == 0xA9) ? CDDA : DATA);
+		fseek(fi, 8, SEEK_CUR);
+
+		// get the track starting point
+		ti[i].start[0] = fgetc(fi);
+		ti[i].start[1] = fgetc(fi);
+		ti[i].start[2] = fgetc(fi);
+
+		if (i > 1) {
+			l = msf2sec(ti[i].start);
+			sec2msf(l - 2 * 75, ti[i].start); // ???
+		}
+
+		// get the track length
+		fread(&extra_offset, 1, sizeof(unsigned int), fi);
+		extra_offset = SWAP32(extra_offset);
+
+		fseek(fi, extra_offset + 4, SEEK_SET);
+		fread(&l, 1, sizeof(unsigned int), fi);
+		l = SWAP32(l);
+		sec2msf(l, ti[i].length);
+
+		offset += 0x50;
+	}
+
+	fclose(fi);
+	return 0;
+}
+
 // this function tries to get the .sub file of the given .img
 static int opensubfile(const char *isoname) {
 	char		subname[MAXPATHLEN];
@@ -527,10 +630,11 @@ static long CALLBACK ISOopen(void) {
 
 	SysPrintf(_("Loaded CD Image: %s"), cdrfilename);
 
-	cdda_bigendian = 0;
+	cddaBigEndian = 0;
+	subChanInterleaved = 0;
 
 	if (parsetoc(cdrfilename) == 0) {
-		cdda_bigendian = 1; // cdrdao uses big-endian for CD Audio
+		cddaBigEndian = 1; // cdrdao uses big-endian for CD Audio
 		SysPrintf("[+toc]");
 	}
 	else if (parsecue(cdrfilename) == 0) {
@@ -539,8 +643,11 @@ static long CALLBACK ISOopen(void) {
 	else if (parseccd(cdrfilename) == 0) {
 		SysPrintf("[+ccd]");
 	}
+	else if (parsemds(cdrfilename) == 0) {
+		SysPrintf("[+mds]");
+	}
 
-	if (opensubfile(cdrfilename) == 0) {
+	if (!subChanInterleaved && opensubfile(cdrfilename) == 0) {
 		SysPrintf("[+sub]");
 	}
 
@@ -607,12 +714,19 @@ static long CALLBACK ISOreadTrack(unsigned char *time) {
 		return -1;
 	}
 
-	fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * CD_FRAMESIZE_RAW + 12, SEEK_SET);
-	fread(cdbuffer, 1, DATA_SIZE, cdHandle);
+	if (subChanInterleaved) {
+		fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * (CD_FRAMESIZE_RAW + SUB_FRAMESIZE) + 12, SEEK_SET);
+		fread(cdbuffer, 1, DATA_SIZE, cdHandle);
+		fread(subbuffer, 1, SUB_FRAMESIZE, cdHandle);
+	}
+	else {
+		fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * CD_FRAMESIZE_RAW + 12, SEEK_SET);
+		fread(cdbuffer, 1, DATA_SIZE, cdHandle);
 
-	if (subHandle != NULL) {
-		fseek(subHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * SUB_FRAMESIZE, SEEK_SET);
-		fread(subbuffer, 1, SUB_FRAMESIZE, subHandle);
+		if (subHandle != NULL) {
+			fseek(subHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * SUB_FRAMESIZE, SEEK_SET);
+			fread(subbuffer, 1, SUB_FRAMESIZE, subHandle);
+		}
 	}
 
 	return 0;
@@ -628,7 +742,12 @@ static unsigned char * CALLBACK ISOgetBuffer(void) {
 // does NOT uses bcd format
 static long CALLBACK ISOplay(unsigned char *time) {
 	if (SPU_playCDDAchannel != NULL) {
-		startCDDA(MSF2SECT(time[0], time[1], time[2]) * CD_FRAMESIZE_RAW);
+		if (subChanInterleaved) {
+			startCDDA(MSF2SECT(time[0], time[1], time[2]) * (CD_FRAMESIZE_RAW + SUB_FRAMESIZE));
+		}
+		else {
+			startCDDA(MSF2SECT(time[0], time[1], time[2]) * CD_FRAMESIZE_RAW);
+		}
 	}
 	return 0;
 }
@@ -641,7 +760,7 @@ static long CALLBACK ISOstop(void) {
 
 // gets subchannel data
 unsigned char* CALLBACK ISOgetBufferSub(void) {
-	if (subHandle != NULL) {
+	if (subHandle != NULL || subChanInterleaved) {
 		return subbuffer;
 	}
 
