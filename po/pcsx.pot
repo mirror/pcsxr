@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-26 12:45+0800\n"
+"POT-Creation-Date: 2009-09-26 13:18+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1705,23 +1705,23 @@ msgid "_Plugins & BIOS..."
 msgstr ""
 
 #: ../data/pcsx.glade2:386
-msgid "_Graphics"
+msgid "_Graphics..."
 msgstr ""
 
 #: ../data/pcsx.glade2:401
-msgid "_Sound"
+msgid "_Sound..."
 msgstr ""
 
 #: ../data/pcsx.glade2:416
-msgid "CD-_ROM"
+msgid "CD-_ROM..."
 msgstr ""
 
 #: ../data/pcsx.glade2:431
-msgid "Controller _1"
+msgid "Controller _1..."
 msgstr ""
 
 #: ../data/pcsx.glade2:446
-msgid "Controller _2"
+msgid "Controller _2..."
 msgstr ""
 
 #: ../data/pcsx.glade2:466

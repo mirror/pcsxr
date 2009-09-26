@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-26 12:45+0800\n"
-"PO-Revision-Date: 2009-09-26 12:46+0700\n"
+"POT-Creation-Date: 2009-09-26 13:18+0800\n"
+"PO-Revision-Date: 2009-09-26 13:21+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -1856,24 +1856,24 @@ msgid "_Plugins & BIOS..."
 msgstr "外掛及 BIOS(_P)..."
 
 #: ../data/pcsx.glade2:386
-msgid "_Graphics"
-msgstr "圖像(_G)"
+msgid "_Graphics..."
+msgstr "圖像(_G)..."
 
 #: ../data/pcsx.glade2:401
-msgid "_Sound"
-msgstr "聲音(_S)"
+msgid "_Sound..."
+msgstr "聲音(_S)..."
 
 #: ../data/pcsx.glade2:416
-msgid "CD-_ROM"
-msgstr "CD-_ROM"
+msgid "CD-_ROM..."
+msgstr "CD-_ROM..."
 
 #: ../data/pcsx.glade2:431
-msgid "Controller _1"
-msgstr "控制器 _1"
+msgid "Controller _1..."
+msgstr "控制器 _1..."
 
 #: ../data/pcsx.glade2:446
-msgid "Controller _2"
-msgstr "控制器 _2"
+msgid "Controller _2..."
+msgstr "控制器 _2..."
 
 #: ../data/pcsx.glade2:466
 msgid "_CPU..."
@@ -2708,6 +2708,12 @@ msgstr "<b>按鍵設定</b>"
 msgid "Based on PadJoy by Erich Kitzmüller (ammoq@ammoq.com)"
 msgstr "基於由 Erich Kitzmüller (ammoq@ammoq.com) 編寫的 PadJoy"
 
+#~ msgid "_Graphics"
+#~ msgstr "圖像(_G)"
+#~ msgid "_Sound"
+#~ msgstr "聲音(_S)"
+#~ msgid "CD-_ROM"
+#~ msgstr "CD-_ROM"
 #~ msgid " Yes"
 #~ msgstr " 是"
 #~ msgid "gtk-add"

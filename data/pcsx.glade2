@@ -383,7 +383,7 @@
                     </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="graphics1">
-                        <property name="label" translatable="yes">_Graphics</property>
+                        <property name="label" translatable="yes">_Graphics...</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>
@@ -398,7 +398,7 @@
                     </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="sound1">
-                        <property name="label" translatable="yes">_Sound</property>
+                        <property name="label" translatable="yes">_Sound...</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>
@@ -413,7 +413,7 @@
                     </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="cdrom1">
-                        <property name="label" translatable="yes">CD-_ROM</property>
+                        <property name="label" translatable="yes">CD-_ROM...</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>
@@ -428,7 +428,7 @@
                     </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="pad1">
-                        <property name="label" translatable="yes">Controller _1</property>
+                        <property name="label" translatable="yes">Controller _1...</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>
@@ -443,7 +443,7 @@
                     </child>
                     <child>
                       <widget class="GtkImageMenuItem" id="pad2">
-                        <property name="label" translatable="yes">Controller _2</property>
+                        <property name="label" translatable="yes">Controller _2...</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>

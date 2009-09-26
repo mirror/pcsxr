@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsx-df\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-26 12:45+0800\n"
-"PO-Revision-Date: 2009-09-26 12:47+0700\n"
+"POT-Creation-Date: 2009-09-26 13:18+0800\n"
+"PO-Revision-Date: 2009-09-26 13:20+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: PoBRE <romhackers@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -1855,24 +1855,24 @@ msgid "_Plugins & BIOS..."
 msgstr "_Extensões e BIOS..."
 
 #: ../data/pcsx.glade2:386
-msgid "_Graphics"
-msgstr "_Gráficos"
+msgid "_Graphics..."
+msgstr "_Gráficos..."
 
 #: ../data/pcsx.glade2:401
-msgid "_Sound"
-msgstr "Á_udio"
+msgid "_Sound..."
+msgstr "Á_udio..."
 
 #: ../data/pcsx.glade2:416
-msgid "CD-_ROM"
-msgstr "CD-_ROM"
+msgid "CD-_ROM..."
+msgstr "CD_ROM..."
 
 #: ../data/pcsx.glade2:431
-msgid "Controller _1"
-msgstr "Controle _1"
+msgid "Controller _1..."
+msgstr "Controle _1..."
 
 #: ../data/pcsx.glade2:446
-msgid "Controller _2"
-msgstr "Controle _2"
+msgid "Controller _2..."
+msgstr "Controle _2..."
 
 #: ../data/pcsx.glade2:466
 msgid "_CPU..."
@@ -2726,6 +2726,12 @@ msgstr "<b>Configuração dos botões</b>"
 msgid "Based on PadJoy by Erich Kitzmüller (ammoq@ammoq.com)"
 msgstr "Baseado no PadJoy por Erich Kitzmüller (ammoq@ammoq.com)"
 
+#~ msgid "_Graphics"
+#~ msgstr "_Gráficos"
+#~ msgid "_Sound"
+#~ msgstr "Á_udio"
+#~ msgid "CD-_ROM"
+#~ msgstr "CD-_ROM"
 #~ msgid " Yes"
 #~ msgstr "Sim"
 #~ msgid "Disable"
