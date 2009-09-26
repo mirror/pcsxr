@@ -1,12 +1,3 @@
-M    data/pcsx.glade2
-M    po/zh_CN.gmo
-M    po/pt_BR.po
-M    po/pt_BR.gmo
-M    po/zh_TW.po
-M    po/zh_TW.gmo
-M    po/zh_CN.po
-M    po/pcsx.pot
-M    gui/Gtk2Gui.c
 September 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * data/pcsx.glade2: Re-added the "Graphics/Sound/CD-ROM/Controller" menuitems
