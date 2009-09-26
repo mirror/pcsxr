@@ -62,6 +62,11 @@ void OnFile_RunImage();
 void OnEmu_Run();
 void OnEmu_Reset();
 void OnEmu_SwitchImage();
+void OnConf_Graphics();
+void OnConf_Sound();
+void OnConf_CdRom();
+void OnConf_Pad1();
+void OnConf_Pad2();
 void OnConf_Mcds();
 void OnConf_Cpu();
 void OnConf_Net();
@@ -326,6 +331,21 @@ void StartGui() {
 	widget = glade_xml_get_widget(xml, "plugins_bios");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(ConfigurePlugins), NULL, NULL, G_CONNECT_AFTER);
+	widget = glade_xml_get_widget(xml, "graphics1");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(OnConf_Graphics), NULL, NULL, G_CONNECT_AFTER);
+	widget = glade_xml_get_widget(xml, "sound1");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(OnConf_Sound), NULL, NULL, G_CONNECT_AFTER);
+	widget = glade_xml_get_widget(xml, "cdrom1");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(OnConf_CdRom), NULL, NULL, G_CONNECT_AFTER);
+	widget = glade_xml_get_widget(xml, "pad1");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(OnConf_Pad1), NULL, NULL, G_CONNECT_AFTER);
+	widget = glade_xml_get_widget(xml, "pad2");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(OnConf_Pad2), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "cpu1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(OnConf_Cpu), NULL, NULL, G_CONNECT_AFTER);
@@ -1359,13 +1379,11 @@ void OnMcd_CopyTo(GtkWidget *widget, gpointer user_data) {
 		source = Mcd2Data;
 		copy = mcd2_row;
 		destination = Mcd1Data;
-//		printf("Copying from card 2 to card 1 from slot %d into slot %d\n", mcd2_row, first_free_slot);
 	} else {
 		str = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(glade_xml_get_widget (xml, "GtkMcd2FSButton")));
 		source = Mcd1Data;
 		copy = mcd1_row;
 		destination = Mcd2Data;
-//		printf("Copying from card 1 to card 2 from slot %d into slot %d\n", mcd1_row, first_free_slot);
 	}
 
 	copy_memcard_data (source, destination, &first_free_slot, str);
@@ -1451,7 +1469,7 @@ void on_memcard_delete (GtkWidget *widget, gpointer user_data) {
 		data = Mcd2Data;
 		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (glade_xml_get_widget (xml, "GtkMcd2FSButton")));
 	}
-//	printf("Will delete from memory card %s\n", filename);
+
 	if (selected) {
 		path = gtk_tree_model_get_path (model, &iter);
 		i = *gtk_tree_path_get_indices (path);
@@ -1475,6 +1493,111 @@ void on_memcard_delete (GtkWidget *widget, gpointer user_data) {
 		SaveMcd((char*)filename, data, i * 128, 128);
 		UpdateMcdDlg(widget);
 	}
+}
+
+void OnConf_Graphics() {
+	void *drv;
+	GPUconfigure conf;
+	char Plugin[MAXPATHLEN];
+
+	sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Gpu);
+	drv = SysLoadLibrary(Plugin);
+	if (drv == NULL) { printf("Error with file %s\n", Plugin); return; }
+
+	while (gtk_events_pending()) gtk_main_iteration();
+
+	conf = (GPUconfigure)SysLoadSym(drv, "GPUconfigure");
+	if (conf != NULL) {
+		conf();
+	}
+	else
+		SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured."));
+
+	SysCloseLibrary(drv);
+}
+
+void OnConf_Sound() {
+	void *drv;
+	SPUconfigure conf;
+	char Plugin[MAXPATHLEN];
+
+	sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Spu);
+	drv = SysLoadLibrary(Plugin);
+	if (drv == NULL) { printf("Error with file %s\n", Plugin); return; }
+
+	while (gtk_events_pending()) gtk_main_iteration();
+
+	conf = (GPUconfigure)SysLoadSym(drv, "SPUconfigure");
+	if (conf != NULL) {
+		conf();
+	}
+	else
+		SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured."));
+
+	SysCloseLibrary(drv);
+}
+
+void OnConf_CdRom() {
+	void *drv;
+	CDRconfigure conf;
+	char Plugin[MAXPATHLEN];
+
+	sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Cdr);
+	drv = SysLoadLibrary(Plugin);
+	if (drv == NULL) { printf("Error with file %s\n", Plugin); return; }
+
+	while (gtk_events_pending()) gtk_main_iteration();
+
+	conf = (GPUconfigure)SysLoadSym(drv, "CDRconfigure");
+	if (conf != NULL) {
+		conf();
+	}
+	else
+		SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured."));
+
+	SysCloseLibrary(drv);
+}
+
+void OnConf_Pad1() {
+	void *drv;
+	PADconfigure conf;
+	char Plugin[MAXPATHLEN];
+
+	sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Pad1);
+	drv = SysLoadLibrary(Plugin);
+	if (drv == NULL) { printf("Error with file %s\n", Plugin); return; }
+
+	while (gtk_events_pending()) gtk_main_iteration();
+
+	conf = (GPUconfigure)SysLoadSym(drv, "PADconfigure");
+	if (conf != NULL) {
+		conf();
+	}
+	else
+		SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured."));
+
+	SysCloseLibrary(drv);
+}
+
+void OnConf_Pad2() {
+	void *drv;
+	PADconfigure conf;
+	char Plugin[MAXPATHLEN];
+
+	sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Pad2);
+	drv = SysLoadLibrary(Plugin);
+	if (drv == NULL) { printf("Error with file %s\n", Plugin); return; }
+
+	while (gtk_events_pending()) gtk_main_iteration();
+
+	conf = (GPUconfigure)SysLoadSym(drv, "PADconfigure");
+	if (conf != NULL) {
+		conf();
+	}
+	else
+		SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured."));
+
+	SysCloseLibrary(drv);
 }
 
 void OnConf_Mcds() {
@@ -1770,7 +1893,6 @@ void OnConf_Cpu() {
 
 void on_configure_plugin (GtkWidget *widget, gpointer user_data) {
 	gint plugin_type = (int) user_data;
-//	printf("Configuring plugin - %d\n", plugin_type);
 
 	while (gtk_events_pending())
 		gtk_main_iteration();
@@ -1792,7 +1914,7 @@ void on_configure_plugin (GtkWidget *widget, gpointer user_data) {
 
 void on_about_plugin (GtkWidget *widget, gpointer user_data) {
 	gint plugin_type = (int) user_data;
-//	printf("About plugin - %d\n", plugin_type);
+
 	while (gtk_events_pending())
 		gtk_main_iteration();
 	if (all_config_set() == TRUE) {
