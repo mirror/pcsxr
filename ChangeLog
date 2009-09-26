@@ -8,10 +8,10 @@ September 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
 September 24, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
- * Fixed filenames with spaces when loading .toc file (Thanks dario86). Force
-   byteswap if .toc file is loaded as cdrdao uses Big-Endian for CD Audio.
-   Fixed skipping of the first 2 seconds when playing CDDA Track #2. Check
-   for image.toc if image.toc.bin is loaded.
+ * libpcsxcore/cdriso.c: Fixed filenames with spaces when loading .toc file
+   (Thanks dario86). Force byteswap if .toc file is loaded as cdrdao uses
+   Big-Endian for CD Audio. Fixed skipping of the first 2 seconds when playing
+   CDDA Track #2. Check for image.toc if image.toc.bin is loaded.
 
 September 22, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
