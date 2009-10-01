@@ -65,8 +65,7 @@ void OnEmu_SwitchImage();
 void OnConf_Graphics();
 void OnConf_Sound();
 void OnConf_CdRom();
-void OnConf_Pad1();
-void OnConf_Pad2();
+void OnConf_Pad();
 void OnConf_Mcds();
 void OnConf_Cpu();
 void OnConf_Net();
@@ -352,10 +351,7 @@ void StartGui() {
 			GTK_SIGNAL_FUNC(OnConf_CdRom), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "pad1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnConf_Pad1), NULL, NULL, G_CONNECT_AFTER);
-	widget = glade_xml_get_widget(xml, "pad2");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnConf_Pad2), NULL, NULL, G_CONNECT_AFTER);
+			GTK_SIGNAL_FUNC(OnConf_Pad), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "cpu1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(OnConf_Cpu), NULL, NULL, G_CONNECT_AFTER);
@@ -1568,7 +1564,7 @@ void OnConf_CdRom() {
 	SysCloseLibrary(drv);
 }
 
-void OnConf_Pad1() {
+void OnConf_Pad() {
 	void *drv;
 	PADconfigure conf;
 	char Plugin[MAXPATHLEN];
@@ -1587,27 +1583,21 @@ void OnConf_Pad1() {
 		SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured."));
 
 	SysCloseLibrary(drv);
-}
 
-void OnConf_Pad2() {
-	void *drv;
-	PADconfigure conf;
-	char Plugin[MAXPATHLEN];
+	if (strcmp(Config.Pad1, Config.Pad2) != 0) {
+		sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Pad2);
+		drv = SysLoadLibrary(Plugin);
+		if (drv == NULL) { printf("Error with file %s\n", Plugin); return; }
 
-	sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Pad2);
-	drv = SysLoadLibrary(Plugin);
-	if (drv == NULL) { printf("Error with file %s\n", Plugin); return; }
+		while (gtk_events_pending()) gtk_main_iteration();
 
-	while (gtk_events_pending()) gtk_main_iteration();
+		conf = (GPUconfigure)SysLoadSym(drv, "PADconfigure");
+		if (conf != NULL) {
+			conf();
+		}
 
-	conf = (GPUconfigure)SysLoadSym(drv, "PADconfigure");
-	if (conf != NULL) {
-		conf();
+		SysCloseLibrary(drv);
 	}
-	else
-		SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured."));
-
-	SysCloseLibrary(drv);
 }
 
 void OnConf_Mcds() {
