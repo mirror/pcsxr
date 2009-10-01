@@ -1,3 +1,8 @@
+October 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * gui/Gtk2Gui.c: Disable the "Graphics/Sound/CD-ROM/Controller" menuitems
+   when the emu is already running.
+
 September 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * data/pcsx.glade2: Re-added the "Graphics/Sound/CD-ROM/Controller" menuitems

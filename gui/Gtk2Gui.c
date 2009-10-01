@@ -173,6 +173,16 @@ void ResetMenuSlots(GladeXML *xml) {
 
 		widget = glade_xml_get_widget (xml, "plugins_bios");
 		gtk_widget_set_sensitive(widget, FALSE);
+		widget = glade_xml_get_widget (xml, "graphics1");
+		gtk_widget_set_sensitive(widget, FALSE);
+		widget = glade_xml_get_widget (xml, "sound1");
+		gtk_widget_set_sensitive(widget, FALSE);
+		widget = glade_xml_get_widget (xml, "cdrom1");
+		gtk_widget_set_sensitive(widget, FALSE);
+		widget = glade_xml_get_widget (xml, "pad1");
+		gtk_widget_set_sensitive(widget, FALSE);
+		widget = glade_xml_get_widget (xml, "pad2");
+		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget (xml, "net1");
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget (xml, "SwitchImage");
