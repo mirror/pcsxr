@@ -180,8 +180,6 @@ void ResetMenuSlots(GladeXML *xml) {
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget (xml, "pad1");
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = glade_xml_get_widget (xml, "pad2");
-		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget (xml, "net1");
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget (xml, "SwitchImage");
