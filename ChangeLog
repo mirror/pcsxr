@@ -1,7 +1,7 @@
 October 3, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfsound/spucfg-0.1df/dfsound.glade2: Removed the "Enable XA" option
-   as we already has such an option in the main emu.
+   as we already have such an option in the main emu.
  * plugins/dfsound/spucfg-0.1df/main.c: Likewise.
  * plugins/dfsound/cfg.c: Likewise.
  * plugins/dfsound/spu.c: Likewise.
@@ -12,6 +12,7 @@ October 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * gui/Gtk2Gui.c: Disable the "Graphics/Sound/CD-ROM/Controller" menuitems
    when the emu is already running.
+ * data/pcsx.glade2: Merged the "Controller 1" and "Controller 2" menuitems.
 
 September 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
