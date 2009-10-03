@@ -58,7 +58,6 @@ unsigned char * pMixIrq=0;
 
 // user settings
 
-int             iUseXA=1;
 int             iVolume=3;
 int             iXAPitch=1;
 int             iUseTimer=2;
@@ -790,7 +789,6 @@ void CALLBACK SPUupdate(void)
 
 void CALLBACK SPUplayADPCMchannel(xa_decode_t *xap)
 {
- if(!iUseXA)    return;                                // no XA? bye
  if(!xap)       return;
  if(!xap->freq) return;                                // no xa freq ? bye
 
@@ -913,7 +911,6 @@ long SPUopen(void)
 {
  if (bSPUIsOpen) return 0;                              // security for some stupid main emus
 
- iUseXA = 1;                                            // just small setup
  iVolume = 3;
  iReverbOff = -1;
  spuIrq = 0;

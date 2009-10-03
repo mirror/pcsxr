@@ -160,18 +160,6 @@ int main(int argc, char *argv[])
     gtk_combo_box_set_active(GTK_COMBO_BOX (glade_xml_get_widget(xml, "cbInterpolation2")), val);
 
     if (pB) {
-	strcpy(t, "\nUseXA");
-	p = strstr(pB, t);
-	if (p) {
-	    p = strstr(p, "=");
-	    len = 1;
-	}
-		val = set_limit (p, len, 0, 1);
-    } else val = 1;
-
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "chkEnableXA")), val);
-
-    if (pB) {
 		strcpy(t, "\nXAPitch");
 		p = strstr(pB, t);
 		if (p) {
@@ -314,9 +302,6 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
 
     val = gtk_combo_box_get_active (GTK_COMBO_BOX (glade_xml_get_widget (xml, "cbInterpolation2")));
 	SetCfgVal(pB, "\nUseInterpolation", val);
-
-    val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "chkEnableXA")));
-	SetCfgVal(pB, "\nUseXA", val);
 
     val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "chkXASpeed")));
     SetCfgVal(pB, "\nXAPitch", val);

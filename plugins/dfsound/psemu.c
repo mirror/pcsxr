@@ -94,6 +94,5 @@ void CALLBACK SPUstopChannels2(unsigned short channels)
 
 void CALLBACK SPUplaySector(unsigned long mode, unsigned char * p)
 {
- if(!iUseXA) return;                                    // no XA? bye
 }
 

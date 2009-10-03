@@ -209,7 +209,6 @@ extern unsigned char * pSpuBuffer;
 
 // user settings
 
-extern int        iUseXA;
 extern int        iVolume;
 extern int        iXAPitch;
 extern int        iUseTimer;

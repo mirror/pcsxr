@@ -108,11 +108,6 @@ void ReadConfigFile(void)
  if(iVolume<1) iVolume=1;
  if(iVolume>4) iVolume=4;
 
- strcpy(t,"\nUseXA");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
- if(p) iUseXA=atoi(p+len);
- if(iUseXA<0) iUseXA=0;
- if(iUseXA>1) iUseXA=1;
-
  strcpy(t,"\nXAPitch");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
  if(p) iXAPitch=atoi(p+len);
  if(iXAPitch<0) iXAPitch=0;
@@ -155,7 +150,6 @@ void ReadConfigFile(void)
 void ReadConfig(void)
 {
  iVolume=3;
- iUseXA=1; 
  iXAPitch=0;
  iSPUIRQWait=1;
  iUseTimer=2;
