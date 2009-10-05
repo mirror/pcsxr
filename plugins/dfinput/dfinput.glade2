@@ -1,19 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--*- mode: xml -*-->
+<?xml version="1.0"?>
 <glade-interface>
+  <!-- interface-requires gtk+ 2.6 -->
+  <!-- interface-naming-policy toplevel-contextual -->
   <widget class="GtkWindow" id="CfgWin">
     <property name="visible">True</property>
     <property name="title" translatable="yes">Configure Gamepad/Keyboard</property>
     <property name="modal">True</property>
+    <property name="type_hint">dialog</property>
     <child>
       <widget class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
         <property name="border_width">6</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">6</property>
         <child>
           <widget class="GtkVBox" id="vbox2">
             <property name="visible">True</property>
+            <property name="orientation">vertical</property>
             <child>
               <widget class="GtkHBox" id="hbox1">
                 <property name="visible">True</property>
@@ -27,15 +30,16 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
                   <widget class="GtkRadioButton" id="radiobutton1">
+                    <property name="label" translatable="yes">1</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="label" translatable="yes">1</property>
+                    <property name="receives_default">False</property>
                     <property name="use_underline">True</property>
-                    <property name="response_id">0</property>
                     <property name="draw_indicator">True</property>
                   </widget>
                   <packing>
@@ -46,11 +50,11 @@
                 </child>
                 <child>
                   <widget class="GtkRadioButton" id="radiobutton2">
+                    <property name="label" translatable="yes">2</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="label" translatable="yes">2</property>
+                    <property name="receives_default">False</property>
                     <property name="use_underline">True</property>
-                    <property name="response_id">0</property>
                     <property name="draw_indicator">True</property>
                     <property name="group">radiobutton1</property>
                   </widget>
@@ -61,6 +65,9 @@
                   </packing>
                 </child>
               </widget>
+              <packing>
+                <property name="position">0</property>
+              </packing>
             </child>
             <child>
               <widget class="GtkHBox" id="hbox2">
@@ -75,13 +82,13 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
                   <widget class="GtkEntry" id="filename_entry">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="invisible_char">*</property>
                   </widget>
                   <packing>
                     <property name="position">1</property>
@@ -99,25 +106,26 @@
                 <property name="spacing">6</property>
                 <child>
                   <widget class="GtkCheckButton" id="chkMultithreaded">
+                    <property name="label" translatable="yes">Multi-threaded</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="label" translatable="yes">Multi-threaded</property>
+                    <property name="receives_default">False</property>
                     <property name="use_underline">True</property>
-                    <property name="response_id">0</property>
                     <property name="draw_indicator">True</property>
                   </widget>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
                   <widget class="GtkCheckButton" id="chkAnalog">
+                    <property name="label" translatable="yes">Analog</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="label" translatable="yes">Analog</property>
+                    <property name="receives_default">False</property>
                     <property name="use_underline">True</property>
-                    <property name="response_id">0</property>
                     <property name="draw_indicator">True</property>
                   </widget>
                   <packing>
@@ -135,7 +143,7 @@
               <widget class="GtkFrame" id="frame1">
                 <property name="visible">True</property>
                 <property name="label_xalign">0</property>
-                <property name="shadow_type">GTK_SHADOW_OUT</property>
+                <property name="shadow_type">out</property>
                 <child>
                   <widget class="GtkAlignment" id="alignment1">
                     <property name="visible">True</property>
@@ -165,32 +173,42 @@
               </packing>
             </child>
           </widget>
+          <packing>
+            <property name="position">0</property>
+          </packing>
         </child>
         <child>
           <widget class="GtkHButtonBox" id="hbuttonbox1">
             <property name="visible">True</property>
             <property name="spacing">6</property>
-            <property name="layout_style">GTK_BUTTONBOX_END</property>
+            <property name="layout_style">end</property>
             <child>
               <widget class="GtkButton" id="btnCancel">
+                <property name="label">gtk-cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
-                <property name="label">gtk-cancel</property>
+                <property name="receives_default">False</property>
                 <property name="use_stock">True</property>
-                <property name="response_id">0</property>
               </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
             </child>
             <child>
               <widget class="GtkButton" id="btnOK">
+                <property name="label">gtk-ok</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
-                <property name="label">gtk-ok</property>
+                <property name="receives_default">False</property>
                 <property name="use_stock">True</property>
-                <property name="response_id">0</property>
               </widget>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -205,19 +223,21 @@
   </widget>
   <widget class="GtkAboutDialog" id="AboutWin">
     <property name="visible">True</property>
-    <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
-    <property name="comments" translatable="yes">Based on PadJoy by Erich Kitzmüller (ammoq@ammoq.com)</property>
-    <property name="authors">Erich Kitzmüller (ammoq@ammoq.com)
+    <property name="window_position">center</property>
+    <property name="type_hint">normal</property>
+    <property name="comments" translatable="yes">Based on PadJoy by Erich Kitzm&#xFC;ller (ammoq@ammoq.com)</property>
+    <property name="authors">Erich Kitzm&#xFC;ller (ammoq@ammoq.com)
 Andrew Burton (adb@iinet.net.au)</property>
     <property name="translator_credits" translatable="yes" comments="TRANSLATORS: Replace this string with your names, one name per line.">translator-credits</property>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox1">
+        <property name="orientation">vertical</property>
         <child internal-child="action_area">
-          <widget class="GtkHButtonBox" id="dialog-action_area1">
-          </widget>
+          <widget class="GtkHButtonBox" id="dialog-action_area1"/>
           <packing>
             <property name="expand">False</property>
-            <property name="pack_type">GTK_PACK_END</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
           </packing>
         </child>
       </widget>

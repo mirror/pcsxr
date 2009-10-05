@@ -2,6 +2,19 @@ October 4, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfxvideo/gpucfg-0.1df/main.c: Fixed: when trying to choose
    resolution for dfxvideo, values>1024x768 doesn't save.
+ * plugins/peopsxgl/cfg.c: Minor cleanup.
+ * plugins/peopsxgl/gpu.c: Use fork()/execl() instead of system() to launch
+   the configuration utility.
+ * plugins/dfsound/cfg.c: Likewise.
+ * plugins/dfxvideo/cfg.c: Likewise.
+ * plugins/dfinput/pad.c: Likewise.
+ * plugins/dfcdrom/cdr.c: Likewise.
+ * plugins/dfsound/spucfg-0.1df/dfsound.glade2: Display the dialog box at
+   the center of the screen. Removed unused About dialog box.
+ * plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2: Likewise.
+ * plugins/dfsound/spucfg-0.1df/main.c: Minor cleanup.
+ * plugins/dfinput/dfinput.glade2: Fixed problem with new version of glade-3.
+ * plugins/dfcdrom/cfgCdr.glade: Likewise.
 
 October 3, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

@@ -18,6 +18,7 @@
 #define _IN_CFG
 
 #include <sys/stat.h>
+#include <unistd.h>
 #undef FALSE
 #undef TRUE
 #define MAKELONG(low,high)     ((unsigned long)(((unsigned short)(low)) | (((unsigned long)((unsigned short)(high))) << 16)))
@@ -26,12 +27,9 @@
 #include "cfg.h"
 #include "gpu.h"
 
-// CONFIG FILE helpers.... used in (non-fpse) Linux and ZN Windows
-
-#include <sys/stat.h>
-
 char * pConfigFile = NULL;
 
+// CONFIG FILE helpers....
 // some helper macros:
 
 #define GetValue(name, var) \
@@ -172,25 +170,25 @@ void ExecCfg(char *arg) {
 
 	strcpy(cfg, "./cfgDFXVideo");
 	if (stat(cfg, &buf) != -1) {
-		strcat(cfg, " ");
-		strcat(cfg, arg);
-		system(cfg);
+		if (fork() == 0) {
+			execl(cfg, "cfgDFXVideo", arg, NULL);
+		}
 		return;
 	}
 
 	strcpy(cfg, "./cfg/cfgDFXVideo");
 	if (stat(cfg, &buf) != -1) {
-		strcat(cfg, " ");
-		strcat(cfg, arg);
-		system(cfg);
+		if (fork() == 0) {
+			execl(cfg, "cfgDFXVideo", arg, NULL);
+		}
 		return;
 	}
 
 	sprintf(cfg, "%s/.pcsx/plugins/cfg/cfgDFXVideo", getenv("HOME"));
 	if (stat(cfg, &buf) != -1) {
-		strcat(cfg, " ");
-		strcat(cfg, arg);
-		system(cfg);
+		if (fork() == 0) {
+			execl(cfg, "cfgDFXVideo", arg, NULL);
+		}
 		return;
 	}
 

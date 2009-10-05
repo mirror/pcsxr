@@ -20,21 +20,6 @@
 
 void SaveConfig (GtkWidget *widget, gpointer user_datal);
 
-/* ADB DONE
-GtkWidget *wndMain = 0;
-
-GtkWidget *create_CfgWnd(GladeXML * xml)
-{
-    wndMain = glade_xml_get_widget(xml, "CfgWnd");
-    return wndMain;
-}
-
-GtkWidget *create_AboutWnd(GladeXML * xml)
-{
-    wndMain = glade_xml_get_widget(xml, "AboutWnd");
-    return wndMain;
-}*/
-
 /*	This function checks for the value being outside the accepted range,
 	and returns the appropriate boundary value */
 int set_limit (char *p, int len, int lower, int upper)

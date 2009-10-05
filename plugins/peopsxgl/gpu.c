@@ -2624,25 +2624,25 @@ void StartCfgTool(char *arg) // linux: start external cfg tool
 
 	strcpy(cfg, "./cfgpeopsxgl");
 	if (stat(cfg, &buf) != -1) {
-		strcat(cfg, " ");
-		strcat(cfg, arg);
-		system(cfg);
+		if (fork() == 0) {
+			execl(cfg, "cfgpeopsxgl", arg, NULL);
+		}
 		return;
 	}
 
 	strcpy(cfg, "./cfg/cfgpeopsxgl");
 	if (stat(cfg, &buf) != -1) {
-		strcat(cfg, " ");
-		strcat(cfg, arg);
-		system(cfg);
+		if (fork() == 0) {
+			execl(cfg, "cfgpeopsxgl", arg, NULL);
+		}
 		return;
 	}
 
 	sprintf(cfg, "%s/.pcsx/plugins/cfg/cfgpeopsxgl", getenv("HOME"));
 	if (stat(cfg, &buf) != -1) {
-		strcat(cfg, " ");
-		strcat(cfg, arg);
-		system(cfg);
+		if (fork() == 0) {
+			execl(cfg, "cfgpeopsxgl", arg, NULL);
+		}
 		return;
 	}
 

@@ -956,7 +956,9 @@ static void loadConfig() {
 }
 
 long PADconfigure(void) {
-    system("cfg/cfgDFInput");
+    if (fork() == 0) {
+        execl("cfg/cfgDFInput", "cfgDFInput", NULL);
+    }
     return 0;
 }
 
@@ -967,7 +969,9 @@ long PADconfigure(void) {
 
 
 void PADabout(void) {
-    system("cfg/cfgDFInput -about");
+    if (fork() == 0) {
+        execl("cfg/cfgDFInput", "cfgDFInput", "-about", NULL);
+    }
 }
 
 #ifdef __linux__

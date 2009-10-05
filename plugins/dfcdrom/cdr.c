@@ -569,17 +569,17 @@ void ExecCfg(char *arg) {
 
 	strcpy(cfg, "./cfgDFCdrom");
 	if (stat(cfg, &buf) != -1) {
-		strcat(cfg, " ");
-		strcat(cfg, arg);
-		system(cfg);
+		if (fork() == 0) {
+			execl(cfg, "cfgDFCdrom", arg, NULL);
+		}
 		return;
 	}
 
 	strcpy(cfg, "./cfg/DFCdrom");
 	if (stat(cfg, &buf) != -1) {
-		strcat(cfg, " ");
-		strcat(cfg, arg);
-		system(cfg);
+		if (fork() == 0) {
+			execl(cfg, "cfgDFCdrom", arg, NULL);
+		}
 		return;
 	}
 

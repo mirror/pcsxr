@@ -247,8 +247,3 @@ void ReadConfig(void)                                  // read config (linux fil
  else            iZBufferDepth=0;
  if(bUseFixes)   dwActFixes=dwCfgFixes;                // init game fix global
 }
-
-
-
-
-

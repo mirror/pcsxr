@@ -33,18 +33,19 @@
 
 void StartCfgTool(char * pCmdLine)
 {
- FILE * cf;char filename[255],t[255];
+ FILE * cf;
+ char filename[255];
 
  strcpy(filename,"cfg/cfgDFSound");
  cf=fopen(filename,"rb");
  if(cf!=NULL)
   {
    fclose(cf);
-   getcwd(t,255);
-   chdir("cfg");
-   sprintf(filename,"./cfgDFSound %s",pCmdLine);
-   system(filename);
-   chdir(t);
+   if(fork()==0)
+    {
+     chdir("cfg");
+     execl(filename,"cfgDFSound",pCmdLine,NULL);
+    }
   }
  else
   {
@@ -53,8 +54,10 @@ void StartCfgTool(char * pCmdLine)
    if(cf!=NULL)
     {
      fclose(cf);
-     sprintf(filename,"./cfgDFSound %s",pCmdLine);
-     system(filename);
+     if(fork()==0)
+      {
+       execl(filename,"cfgDFSound",pCmdLine,NULL);
+      }
     }
    else
     {
@@ -63,11 +66,11 @@ void StartCfgTool(char * pCmdLine)
      if(cf!=NULL)
       {
        fclose(cf);
-       getcwd(t,255);
-       chdir(getenv("HOME"));
-       sprintf(filename,"./cfgDFSound %s",pCmdLine);
-       system(filename);
-       chdir(t);
+       if(fork()==0)
+       {
+        chdir(getenv("HOME"));
+        execl(filename,"cfgDFSound",pCmdLine,NULL);
+       }
       }
      else printf("Sound error: cfgDFSound not found!\n");
     }
