@@ -309,6 +309,10 @@ static int parsetoc(const char *isofile) {
 		strncpy(dummy, linebuf, sizeof(linebuf));
 		token = strtok(dummy, " ");
 
+		if (token == NULL) {
+			continue;
+		}
+
 		if (!strcmp(token, "TRACK")) {
 			// get type of track
 			token = strtok(NULL, " ");
@@ -373,6 +377,10 @@ static int parsecue(const char *isofile) {
 	while (fgets(linebuf, sizeof(linebuf), fi) != NULL) {
 		strncpy(dummy, linebuf, sizeof(linebuf));
 		token = strtok(dummy, " ");
+
+		if (token == NULL) {
+			continue;
+		}
 
 		if (!strcmp(token, "TRACK")){
 			numtracks++;

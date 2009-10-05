@@ -15,6 +15,8 @@ October 4, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * plugins/dfsound/spucfg-0.1df/main.c: Minor cleanup.
  * plugins/dfinput/dfinput.glade2: Fixed problem with new version of glade-3.
  * plugins/dfcdrom/cfgCdr.glade: Likewise.
+ * libpcsxcore/cdriso.c: Fixed crash bug when the .toc/.cue file contains
+   empty lines.
 
 October 3, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
