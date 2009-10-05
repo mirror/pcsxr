@@ -44,7 +44,7 @@ void StartCfgTool(char * pCmdLine)
    if(fork()==0)
     {
      chdir("cfg");
-     execl(filename,"cfgDFSound",pCmdLine,NULL);
+     execl("./cfgDFSound","cfgDFSound",pCmdLine,NULL);
      exit(0);
     }
   }
@@ -57,7 +57,7 @@ void StartCfgTool(char * pCmdLine)
      fclose(cf);
      if(fork()==0)
       {
-       execl(filename,"cfgDFSound",pCmdLine,NULL);
+       execl("./cfgDFSound","cfgDFSound",pCmdLine,NULL);
        exit(0);
       }
     }
@@ -71,7 +71,7 @@ void StartCfgTool(char * pCmdLine)
        if(fork()==0)
        {
         chdir(getenv("HOME"));
-        execl(filename,"cfgDFSound",pCmdLine,NULL);
+        execl("./cfgDFSound","cfgDFSound",pCmdLine,NULL);
         exit(0);
        }
       }
