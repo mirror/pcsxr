@@ -2626,6 +2626,7 @@ void StartCfgTool(char *arg) // linux: start external cfg tool
 	if (stat(cfg, &buf) != -1) {
 		if (fork() == 0) {
 			execl(cfg, "cfgpeopsxgl", arg, NULL);
+			exit(0);
 		}
 		return;
 	}
@@ -2634,6 +2635,7 @@ void StartCfgTool(char *arg) // linux: start external cfg tool
 	if (stat(cfg, &buf) != -1) {
 		if (fork() == 0) {
 			execl(cfg, "cfgpeopsxgl", arg, NULL);
+			exit(0);
 		}
 		return;
 	}
@@ -2642,6 +2644,7 @@ void StartCfgTool(char *arg) // linux: start external cfg tool
 	if (stat(cfg, &buf) != -1) {
 		if (fork() == 0) {
 			execl(cfg, "cfgpeopsxgl", arg, NULL);
+			exit(0);
 		}
 		return;
 	}

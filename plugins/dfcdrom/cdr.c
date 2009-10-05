@@ -571,6 +571,7 @@ void ExecCfg(char *arg) {
 	if (stat(cfg, &buf) != -1) {
 		if (fork() == 0) {
 			execl(cfg, "cfgDFCdrom", arg, NULL);
+			exit(0);
 		}
 		return;
 	}
@@ -579,6 +580,7 @@ void ExecCfg(char *arg) {
 	if (stat(cfg, &buf) != -1) {
 		if (fork() == 0) {
 			execl(cfg, "cfgDFCdrom", arg, NULL);
+			exit(0);
 		}
 		return;
 	}

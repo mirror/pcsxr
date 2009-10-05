@@ -958,6 +958,7 @@ static void loadConfig() {
 long PADconfigure(void) {
     if (fork() == 0) {
         execl("cfg/cfgDFInput", "cfgDFInput", NULL);
+        exit(0);
     }
     return 0;
 }

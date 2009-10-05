@@ -45,6 +45,7 @@ void StartCfgTool(char * pCmdLine)
     {
      chdir("cfg");
      execl(filename,"cfgDFSound",pCmdLine,NULL);
+     exit(0);
     }
   }
  else
@@ -57,6 +58,7 @@ void StartCfgTool(char * pCmdLine)
      if(fork()==0)
       {
        execl(filename,"cfgDFSound",pCmdLine,NULL);
+       exit(0);
       }
     }
    else
@@ -70,6 +72,7 @@ void StartCfgTool(char * pCmdLine)
        {
         chdir(getenv("HOME"));
         execl(filename,"cfgDFSound",pCmdLine,NULL);
+        exit(0);
        }
       }
      else printf("Sound error: cfgDFSound not found!\n");
