@@ -20,16 +20,17 @@ void SaveConfig (GtkWidget *widget, gpointer user_datal);
 #define WRITEBINARY "wb"
 #define CONFIG_FILENAME "dfxvideo.cfg"
 
-/* ADB */
 enum {
-	VIDMODE_320x200,
+	VIDMODE_320x200 = 0,
 	VIDMODE_640x480,
 	VIDMODE_800x600,
-	VIDMODE_1024x768
+	VIDMODE_1024x768,
+	VIDMODE_1152x864,
+	VIDMODE_1280x1024,
+	VIDMODE_1600x1200
 }; /* Video_modes */
 
 /*ADB static GtkWidget * wndMain=0;*/
-
 
 /*	This function checks for the value being outside the accepted range,
 	and returns the appropriate boundary value */
@@ -153,16 +154,16 @@ main (int argc, char *argv[])
   if(pB)
    {
     strcpy(t,"\nResX");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
-
-       val = set_limit (p, len, 0, 1024);
+    val = set_limit (p, len, 0, 1600);
    }
 
-   /* ADB TODO Replace this with calls to the enum video_modes above */
- if (val == 1024) val = 3;
-  if (val == 800) val = 2;
-   if (val == 640) val = 1;
-    if (val == 320) val = 0;
-
+  if (val == 1600) val = VIDMODE_1600x1200;
+  else if (val == 1280) val = VIDMODE_1280x1024;
+  else if (val == 1152) val = VIDMODE_1152x864;
+  else if (val == 1024) val = VIDMODE_1024x768;
+  else if (val == 800) val = VIDMODE_800x600;
+  else if (val == 640) val = VIDMODE_640x480;
+  else if (val == 320) val = VIDMODE_320x200;
 
   gtk_combo_box_set_active(GTK_COMBO_BOX (glade_xml_get_widget(xml, "resCombo2")), val);
 
@@ -171,7 +172,7 @@ main (int argc, char *argv[])
    {
     strcpy(t,"\nNoStretch");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
 
-       val = set_limit (p, len, 0, 9);
+    val = set_limit (p, len, 0, 9);
    }
 
   gtk_combo_box_set_active(GTK_COMBO_BOX (glade_xml_get_widget(xml, "stretchCombo2")), val);
@@ -355,13 +356,13 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
 
   val = gtk_combo_box_get_active (GTK_COMBO_BOX (glade_xml_get_widget (xml, "resCombo2")));
 
-// SetCfgVal(pB,"\nRes",val);
-
-/* ADB TODO Replace with constants and enums */
- if (val == 0) { SetCfgVal(pB,"\nResX",320); SetCfgVal(pB,"\nResY",240); }
- if (val == 1) { SetCfgVal(pB,"\nResX",640); SetCfgVal(pB,"\nResY",480); }
- if (val == 2) { SetCfgVal(pB,"\nResX",800); SetCfgVal(pB,"\nResY",600); }
- if (val == 3) { SetCfgVal(pB,"\nResX",1024); SetCfgVal(pB,"\nResY",768); }
+ if (val == VIDMODE_320x200) { SetCfgVal(pB,"\nResX",320); SetCfgVal(pB,"\nResY",240); }
+ else if (val == VIDMODE_640x480) { SetCfgVal(pB,"\nResX",640); SetCfgVal(pB,"\nResY",480); }
+ else if (val == VIDMODE_800x600) { SetCfgVal(pB,"\nResX",800); SetCfgVal(pB,"\nResY",600); }
+ else if (val == VIDMODE_1024x768) { SetCfgVal(pB,"\nResX",1024); SetCfgVal(pB,"\nResY",768); }
+ else if (val == VIDMODE_1152x864) { SetCfgVal(pB,"\nResX",1152); SetCfgVal(pB,"\nResY",864); }
+ else if (val == VIDMODE_1280x1024) { SetCfgVal(pB,"\nResX",1280); SetCfgVal(pB,"\nResY",1024); }
+ else if (val == VIDMODE_1600x1200) { SetCfgVal(pB,"\nResX",1600); SetCfgVal(pB,"\nResY",1200); }
 
  val = gtk_combo_box_get_active (GTK_COMBO_BOX (glade_xml_get_widget (xml, "stretchCombo2")));
  SetCfgVal(pB,"\nNoStretch",val);

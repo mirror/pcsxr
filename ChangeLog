@@ -1,3 +1,8 @@
+October 4, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Fixed: when trying to choose
+   resolution for dfxvideo, values>1024x768 doesn't save.
+
 October 3, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfsound/spucfg-0.1df/dfsound.glade2: Removed the "Enable XA" option
