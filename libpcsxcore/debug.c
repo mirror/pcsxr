@@ -328,10 +328,11 @@ void StartDebugger() {
 }
 
 void StopDebugger() {
-    if (!debugger_active) {
+    if (debugger_active) {
         StopServer();
         SysPrintf(_("Debugger stopped.\n"));
     }
+
     if (MemoryMap != NULL) {
         free(MemoryMap);
         MemoryMap = NULL;
@@ -410,7 +411,7 @@ void ProcessDebug() {
 static void ProcessCommands() {
     int code, i, dumping;
     FILE *sfile;
-    char cmd[257], *arguments, *p, reply[10240], sname[L_tmpnam], *save, *dump;
+    char cmd[257], *arguments, *p, reply[10240], *save, *dump;
     u32 reg, value, size, address;
     breakpoint_t *bp;
 

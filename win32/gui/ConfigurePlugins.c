@@ -68,6 +68,11 @@ int LoadConfig() {
 	QueryKeyV(sizeof(Conf->SpuIrq),  "SpuIrq",  &Conf->SpuIrq);
 	QueryKeyV(sizeof(Conf->RCntFix), "RCntFix", &Conf->RCntFix);
 	QueryKeyV(sizeof(Conf->VSyncWA), "VSyncWA", &Conf->VSyncWA);
+	QueryKeyV(sizeof(Conf->Debug),   "Debug",   &Conf->Debug);
+
+	if (!Config.Cpu) {
+		Config.Debug = 0; // don't enable debugger if using dynarec core
+	}
 
 	RegCloseKey(myKey);
 

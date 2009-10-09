@@ -39,7 +39,6 @@ static int ptr = 0;
 #define PORT_NUMBER 12345
 
 int StartServer() {
-    struct hostent * localhostent;
     struct in_addr localhostaddr;
     struct sockaddr_in localsocketaddr;
 

@@ -1206,6 +1206,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Button_SetText(GetDlgItem(hW,IDC_PSXAUTO), _("Autodetect"));
 			Button_SetText(GetDlgItem(hW,IDC_CPU),     _("Enable Interpreter Cpu"));
 			Button_SetText(GetDlgItem(hW,IDC_PSXOUT),  _("Enable Console Output"));
+			Button_SetText(GetDlgItem(hW,IDC_DEBUG),   _("Enable Debugger"));
 			Button_SetText(GetDlgItem(hW,IDC_SPUIRQ),  _("Spu Irq Always Enabled"));
 			Button_SetText(GetDlgItem(hW,IDC_RCNTFIX), _("Parasite Eve 2, Vandal Hearts 1/2 Fix"));
 			Button_SetText(GetDlgItem(hW,IDC_VSYNCWA), _("InuYasha Sengoku Battle Fix"));
@@ -1220,6 +1221,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 	   		Button_SetCheck(GetDlgItem(hW,IDC_PSXAUTO), Config.PsxAuto);
 	   		Button_SetCheck(GetDlgItem(hW,IDC_CPU),     Config.Cpu);
 	   		Button_SetCheck(GetDlgItem(hW,IDC_PSXOUT),  Config.PsxOut);
+			Button_SetCheck(GetDlgItem(hW,IDC_DEBUG),   Config.Debug);
 	   		Button_SetCheck(GetDlgItem(hW,IDC_SPUIRQ),  Config.SpuIrq);
 	   		Button_SetCheck(GetDlgItem(hW,IDC_RCNTFIX), Config.RCntFix);
 	   		Button_SetCheck(GetDlgItem(hW,IDC_VSYNCWA), Config.VSyncWA);
@@ -1227,8 +1229,17 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 	   		ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES),"PAL");
 	   		ComboBox_SetCurSel(GetDlgItem(hW,IDC_PSXTYPES),Config.PsxType);
 
+			if (!Config.Cpu) {
+				Config.Debug = 0;
+				Button_SetCheck(GetDlgItem(hW, IDC_DEBUG), FALSE);
+				EnableWindow(GetDlgItem(hW, IDC_DEBUG), FALSE);
+			}
+
+			EnableWindow(GetDlgItem(hW,IDC_PSXTYPES), !Config.PsxAuto);
+			break;
+
 		case WM_COMMAND: {
-     		switch (LOWORD(wParam)) {
+			switch (LOWORD(wParam)) {
        			case IDCANCEL: EndDialog(hW,FALSE); return TRUE;
         		case IDOK:
 					tmp = ComboBox_GetCurSel(GetDlgItem(hW,IDC_PSXTYPES));
@@ -1257,6 +1268,12 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					Config.SpuIrq  = Button_GetCheck(GetDlgItem(hW,IDC_SPUIRQ));
 					Config.RCntFix = Button_GetCheck(GetDlgItem(hW,IDC_RCNTFIX));
 					Config.VSyncWA = Button_GetCheck(GetDlgItem(hW,IDC_VSYNCWA));
+					tmp = Config.Debug;
+					Config.Debug   = Button_GetCheck(GetDlgItem(hW,IDC_DEBUG));
+					if (tmp != Config.Debug) {
+						if (Config.Debug) StartDebugger();
+						else StopDebugger();
+					}
 
 					SaveConfig();
 
@@ -1266,6 +1283,23 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					else CloseConsole();
 
 					return TRUE;
+
+				case IDC_CPU:
+					if (Button_GetCheck(GetDlgItem(hW,IDC_CPU))) {
+						EnableWindow(GetDlgItem(hW,IDC_DEBUG), TRUE);
+					} else {
+						Button_SetCheck(GetDlgItem(hW,IDC_DEBUG), FALSE);
+						EnableWindow(GetDlgItem(hW,IDC_DEBUG), FALSE);
+					}
+					break;
+
+				case IDC_PSXAUTO:
+					if (Button_GetCheck(GetDlgItem(hW,IDC_PSXAUTO))) {
+						EnableWindow(GetDlgItem(hW,IDC_PSXTYPES), FALSE);
+					} else {
+						EnableWindow(GetDlgItem(hW,IDC_PSXTYPES), TRUE);
+					}
+					break;
 			}
 		}
 	}
@@ -1675,6 +1709,8 @@ int SysInit() {
 	}
 	LoadMcds(Config.Mcd1, Config.Mcd2);
 
+	if (Config.Debug) StartDebugger();
+
 	return 0;
 }
 
@@ -1685,6 +1721,8 @@ void SysReset() {
 void SysClose() {
 	psxShutdown();
 	ReleasePlugins();
+
+	StopDebugger();
 
 	if (Config.PsxOut) CloseConsole();
 

@@ -147,6 +147,7 @@
 #define IDC_LABEL_ADDRESS               1052
 #define IDC_GPR6                        1053
 #define IDC_LISTSPU                     1053
+#define IDC_DEBUG                       1053
 #define IDC_GPR7                        1054
 #define IDC_LISTCDR                     1054
 #define IDC_GPR8                        1055
@@ -337,7 +338,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        116
 #define _APS_NEXT_COMMAND_VALUE         40047
-#define _APS_NEXT_CONTROL_VALUE         1053
+#define _APS_NEXT_CONTROL_VALUE         1054
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -7,9 +7,9 @@ Type=0
 Compiler=-D__GNUWIN32__ -march=pentiumpro -D_M_IX86=600 -W -finline-functions -DWIN32 -DNDEBUG -D_WINDOWS -D_MBCS -D__WIN32__ -DPCSX_VERSION=\"1.5\" -D__i386__ -DENABLE_NLS -DPACKAGE=\"pcsx\"  -Dinline=__inline___@@_
 CppCompiler=-D__GNUWIN32__ -march=pentiumpro -D_M_IX86=600 -W -finline-functions -DWIN32 -DNDEBUG -D_WINDOWS -D_MBCS -D__WIN32__ -D_MSC_VER_ -DPCSX_VERSION=\"1.5\" -D__i386__ -DENABLE_NLS -DPACKAGE=\"pcsx\"_@@_
 Includes=.;./zlib;../libpcsxcore;./glue;./gui;./intl
-Linker=-lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32 -lcomctl32_@@_
+Linker=-lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32 -lcomctl32 -lwsock32_@@_
 Libs=
-UnitCount=106
+UnitCount=109
 Folders=glue,glue/sys,gui,intl,libpcsxcore,libpcsxcore/ix86,zlib
 ObjFiles=
 PrivateResource=pcsx_private.rc
@@ -1106,4 +1106,34 @@ Link=1
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=$(CC) -c CheatDlg.c -o CheatDlg.o $(CFLAGS)
+
+[Unit107]
+FileName=..\libpcsxcore\socket.h
+CompileCpp=1
+Folder=libpcsxcore
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit108]
+FileName=..\libpcsxcore\debug.c
+CompileCpp=0
+Folder=libpcsxcore
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=$(CC) -c debug.c -o debug.o $(CFLAGS)
+
+[Unit109]
+FileName=..\libpcsxcore\socket.c
+CompileCpp=0
+Folder=libpcsxcore
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=$(CC) -c socket.c -o socket.o $(CFLAGS)
 
