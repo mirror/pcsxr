@@ -464,6 +464,10 @@ int SysInit() {
 
 	LoadMcds(Config.Mcd1, Config.Mcd2);	/* TODO Do we need to have this here, or in the calling main() function?? */
 
+	if (Config.Debug) {
+		StartDebugger();
+	}
+
 	return 0;
 }
 
@@ -474,6 +478,8 @@ void SysReset() {
 void SysClose() {
 	psxShutdown();
 	ReleasePlugins();
+
+	StopDebugger();
 
 	if (emuLog != NULL) fclose(emuLog);
 }

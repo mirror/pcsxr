@@ -159,6 +159,7 @@ void psxRcntUpdate() {
 	}
 
 	psxRcntSet();
+	DebugVSync();
 }
 
 void psxRcntWcount(u32 index, u32 value) {

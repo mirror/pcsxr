@@ -116,7 +116,7 @@ int LoadConfig(PcsxConfig *Conf) {
 	GetValuel(data, "PsxType", &Config.PsxType);
 	GetValuel(data, "Cdda",    &Config.Cdda);
 	GetValuel(data, "Cpu",     &Config.Cpu);
-	GetValuel(data, "Dbg",     &Config.Dbg);
+	GetValuel(data, "Dbg",     &Config.Debug);
 	GetValuel(data, "PsxOut",  &Config.PsxOut);
 	GetValuel(data, "SpuIrq",  &Config.SpuIrq);
 	GetValuel(data, "RCntFix", &Config.RCntFix);
@@ -154,7 +154,7 @@ void SaveConfig() {
 	SetValuel("PsxType", Config.PsxType);
 	SetValuel("Cdda",    Config.Cdda);
 	SetValuel("Cpu",     Config.Cpu);
-	SetValuel("Dbg",     Config.Dbg);
+	SetValuel("Dbg",     Config.Debug);
 	SetValuel("PsxOut",  Config.PsxOut);
 	SetValuel("SpuIrq",  Config.SpuIrq);
 	SetValuel("RCntFix", Config.RCntFix);

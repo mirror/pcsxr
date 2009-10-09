@@ -35,12 +35,10 @@ int psxInit() {
 
 #ifdef PSXREC
 	if (Config.Cpu) {
-		if (Config.Dbg) psxCpu = &psxIntDbg;
-		else psxCpu = &psxInt;
+		psxCpu = &psxInt;
 	} else psxCpu = &psxRec;
 #else
-	if (Config.Dbg) psxCpu = &psxIntDbg;
-	else psxCpu = &psxInt;
+	psxCpu = &psxInt;
 #endif
 
 	Log = 0;

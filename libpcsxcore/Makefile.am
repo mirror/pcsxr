@@ -23,6 +23,7 @@ libpcsxcore_a_SOURCES = \
 	$(top_builddir)/libpcsxcore/psxhle.c	\
 	$(top_builddir)/libpcsxcore/cdrom.h \
 	$(top_builddir)/libpcsxcore/coff.h \
+	$(top_builddir)/libpcsxcore/debug.c \
 	$(top_builddir)/libpcsxcore/debug.h \
 	$(top_builddir)/libpcsxcore/decode_xa.h \
 	$(top_builddir)/libpcsxcore/gte.h \
@@ -44,7 +45,9 @@ libpcsxcore_a_SOURCES = \
 	$(top_builddir)/libpcsxcore/cdriso.c \
 	$(top_builddir)/libpcsxcore/cdriso.h \
 	$(top_builddir)/libpcsxcore/cheat.c \
-	$(top_builddir)/libpcsxcore/cheat.h
+	$(top_builddir)/libpcsxcore/cheat.h \
+	$(top_builddir)/libpcsxcore/socket.c \
+	$(top_builddir)/libpcsxcore/socket.h
 
 if ARCH_X86_64
 libpcsxcore_a_SOURCES += \

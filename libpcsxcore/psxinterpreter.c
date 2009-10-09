@@ -26,8 +26,6 @@
 #include "r3000a.h"
 #include "gte.h"
 #include "psxhle.h"
-/*FIXME*/
-#include "../gui/hdebug.h"
 
 static int branch = 0;
 static int branch2 = 0;
@@ -42,7 +40,6 @@ static u32 branchPC;
 #endif
 
 inline void execI();
-inline void execIDbg();
 
 // Subsets
 void (*psxBSC[64])();
@@ -773,19 +770,9 @@ static void intExecute() {
 		execI();
 }
 
-static void intExecuteDbg() {
-	for (;;) 
-		execIDbg();
-}
-
 static void intExecuteBlock() {
 	branch2 = 0;
 	while (!branch2) execI();
-}
-
-static void intExecuteBlockDbg() {
-	branch2 = 0;
-	while (!branch2) execIDbg();
 }
 
 static void intClear(u32 Addr, u32 Size) {
@@ -801,41 +788,12 @@ inline void execI() {
 
 	debugI();
 
+	if (Config.Debug) ProcessDebug();
+
 	psxRegs.pc += 4;
 	psxRegs.cycle++;
 
 	psxBSC[psxRegs.code >> 26]();
-}
-
-/* debugger version */
-inline void execIDbg() { 
-	u32 *code = (u32 *)PSXM(psxRegs.pc);
-	psxRegs.code = ((code == NULL) ? 0 : SWAP32(*code));
-
-	// dump opcode when LOG_CPU is enabled
-	debugI();
-
-	// normal execution
-	if (!hdb_pause) {
-		psxRegs.pc += 4;
-		psxRegs.cycle++;
-		psxBSC[psxRegs.code >> 26]();
-	}
-
-	// trace one instruction
-	if(hdb_pause == 2) {
-		psxRegs.pc += 4;
-		psxRegs.cycle++;
-		psxBSC[psxRegs.code >> 26]();
-		hdb_pause = 1;
-	}
-	
-	// wait for breakpoint
-	if(hdb_pause == 3) {
-		psxRegs.pc+= 4; psxRegs.cycle++;
-		psxBSC[psxRegs.code >> 26]();
-		if(psxRegs.pc == hdb_break) hdb_pause = 1;
-	}
 }
 
 R3000Acpu psxInt = {
@@ -843,15 +801,6 @@ R3000Acpu psxInt = {
 	intReset,
 	intExecute,
 	intExecuteBlock,
-	intClear,
-	intShutdown
-};
-
-R3000Acpu psxIntDbg = {
-	intInit,
-	intReset,
-	intExecuteDbg,
-	intExecuteBlockDbg,
 	intClear,
 	intShutdown
 };

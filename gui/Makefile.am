@@ -13,8 +13,7 @@ pcsx_SOURCES = \
 	Plugin.c	\
 	Config.c	\
 	Gtk2Gui.c	\
-	Cheat.c		\
-	hdebug.c
+	Cheat.c
 
 pcsx_LDADD = \
 	$(GTK2_LIBS) $(GLADE2_LIBS) -lpthread -lz -lm ../libpcsxcore/libpcsxcore.a

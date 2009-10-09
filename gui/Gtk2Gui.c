@@ -32,8 +32,6 @@
 
 #include "Linux.h"
 
-#include "hdebug.h"
-
 #include "../libpcsxcore/plugins.h"
 #include "../libpcsxcore/sio.h"
 #include "../libpcsxcore/cheat.h"
@@ -539,7 +537,6 @@ void OnFile_RunExe() {
 
 				if (Load(file) == 0) {
 					g_free(file);
-					if (Config.Dbg) hdb_start();
 					psxCpu->Execute();
 				} else {
 					g_free(file);
@@ -587,7 +584,6 @@ void OnFile_RunCd() {
 		SysRunGui();
 	}
 
-	if (Config.Dbg) hdb_start();
 	psxCpu->Execute();
 }
 
@@ -618,7 +614,6 @@ void OnFile_RunBios() {
 	CdromId[0] = '\0';
 	CdromLabel[0] = '\0';
 
-	if (Config.Dbg) hdb_start();
 	psxCpu->Execute();
 }
 
@@ -714,7 +709,6 @@ void OnFile_RunImage() {
 		SysRunGui();
 	}
 
-	if (Config.Dbg) hdb_start();
 	psxCpu->Execute();
 }
 
@@ -731,7 +725,6 @@ void OnEmu_Run() {
 		return;
 	}
 
-	if (Config.Dbg) hdb_start();
 	CheatSearchBackupMemory();
 	psxCpu->Execute();
 }
@@ -755,7 +748,6 @@ void OnEmu_Reset() {
 		LoadCdrom();
 	}
 
-	if (Config.Dbg) hdb_start();
 	psxCpu->Execute();
 }
 
@@ -784,7 +776,6 @@ void OnEmu_SwitchImage() {
 
 	cdOpenCase = time(NULL) + 2;
 
-	if (Config.Dbg) hdb_start();
 	CheatSearchBackupMemory();
 	psxCpu->Execute();
 }
@@ -888,7 +879,6 @@ void state_load (gchar *state_filename) {
 #endif
 		sprintf(Text, _("Loaded state %s."), state_filename);
 		GPU_displayText(Text);
-		if (Config.Dbg) hdb_start();
 		psxCpu->Execute();
 	} else {
 		sprintf(Text, _("Error loading state %s!"), state_filename);
@@ -1769,7 +1759,12 @@ void OnCpu_Clicked (GtkDialog *dialog, gint arg1, gpointer user_data) {
 
 		Config.PsxAuto = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxAuto")));
 
-		Config.Dbg = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Dbg")));
+		t = Config.Debug;
+		Config.Debug = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Dbg")));
+		if (t != Config.Debug) {
+			if (Config.Debug) StartDebugger();
+			else StopDebugger();
+		}
 
 		t = Config.Cpu;
 		Config.Cpu = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Cpu")));
@@ -1777,13 +1772,11 @@ void OnCpu_Clicked (GtkDialog *dialog, gint arg1, gpointer user_data) {
 			psxCpu->Shutdown();
 #ifdef PSXREC
 			if (Config.Cpu) {
-				if (Config.Dbg) psxCpu = &psxIntDbg;
-				else psxCpu = &psxInt;
+				psxCpu = &psxInt;
 			}
 			else psxCpu = &psxRec;
 #else
-			if (Config.Dbg) psxCpu = &psxIntDbg;
-			else psxCpu = &psxInt;
+			psxCpu = &psxInt;
 #endif
 			if (psxCpu->Init() == -1) {
 				SysClose();
@@ -1848,7 +1841,7 @@ void OnConf_Cpu() {
 	gtk_widget_set_sensitive (GTK_WIDGET (glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), FALSE);
 #endif
 
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Dbg")), Config.Cpu && Config.Dbg);
+	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Dbg")), Config.Cpu && Config.Debug);
 	gtk_widget_set_sensitive (GTK_WIDGET (glade_xml_get_widget(xml, "GtkCheckButton_Dbg")), Config.Cpu);
 
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_PsxOut")), Config.PsxOut);

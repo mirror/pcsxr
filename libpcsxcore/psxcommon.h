@@ -107,7 +107,7 @@ typedef struct {
 	long Cdda;
 	long HLE;
 	long Cpu;
-	long Dbg;
+	long Debug;
 	long PsxOut;
 	long SpuIrq;
 	long RCntFix;

@@ -37,7 +37,6 @@ typedef struct {
 
 R3000Acpu *psxCpu;
 extern R3000Acpu psxInt;
-extern R3000Acpu psxIntDbg;
 #if (defined(__x86_64__) || defined(__i386__) || defined(__sh__) || defined(__ppc__)) && !defined(NOPSXREC)
 extern R3000Acpu psxRec;
 #define PSXREC

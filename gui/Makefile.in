@@ -47,7 +47,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
 am_pcsx_OBJECTS = LnxMain.$(OBJEXT) Plugin.$(OBJEXT) Config.$(OBJEXT) \
-	Gtk2Gui.$(OBJEXT) Cheat.$(OBJEXT) hdebug.$(OBJEXT)
+	Gtk2Gui.$(OBJEXT) Cheat.$(OBJEXT)
 pcsx_OBJECTS = $(am_pcsx_OBJECTS)
 am__DEPENDENCIES_1 =
 pcsx_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
@@ -228,8 +228,7 @@ pcsx_SOURCES = \
 	Plugin.c	\
 	Config.c	\
 	Gtk2Gui.c	\
-	Cheat.c		\
-	hdebug.c
+	Cheat.c
 
 pcsx_LDADD = \
 	$(GTK2_LIBS) $(GLADE2_LIBS) -lpthread -lz -lm ../libpcsxcore/libpcsxcore.a
@@ -310,7 +309,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Gtk2Gui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/LnxMain.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Plugin.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hdebug.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

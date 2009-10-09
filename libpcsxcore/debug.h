@@ -18,19 +18,34 @@
  *   51 Franklin Steet, Fifth Floor, Boston, MA 02111-1307 USA.            *
  ***************************************************************************/
 
-/* 
-* Specficies which logs should be activated.
-* Ryan TODO: These should ALL be definable with configure flags.
-*/
-
 #ifndef __DEBUG_H__
 #define __DEBUG_H__
+
+enum breakpoint_types {
+	E, R1, R2, R4, W1, W2, W4
+};
+
+void StartDebugger();
+void StopDebugger();
+
+void DebugVSync();
+void ProcessDebug();
+
+void DebugCheckBP(u32 address, enum breakpoint_types type);
+
+void PauseDebugger();
+void ResumeDebugger();
 
 extern char *disRNameCP0[];
 
 char* disR3000AF(u32 code, u32 pc);
 
 FILE *emuLog;
+
+/* 
+ * Specficies which logs should be activated.
+ * Ryan TODO: These should ALL be definable with configure flags.
+ */
 
 //#define GTE_DUMP
 
