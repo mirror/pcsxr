@@ -49,7 +49,7 @@ typedef union {
 						s0, s1, s2, s3, s4, s5, s6, s7,
 						t8, t9, k0, k1, gp, sp, s8, ra, lo, hi;
 	} n;
-	u32 r[34]; /* Lo, Hi in r[33] and r[34] */
+	u32 r[34]; /* Lo, Hi in r[32] and r[33] */
 } psxGPRRegs;
 
 typedef union {
