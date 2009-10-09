@@ -418,7 +418,7 @@ static void ProcessCommands() {
     if (!HasClient())
         return;
     if (ReadSocket(cmd, 256) > 0) {
-        arguments = 0;
+        arguments = NULL;
         if (strlen(cmd) <= 2) {
             code = 0;
         } else if (strlen(cmd) == 3) {
@@ -434,15 +434,15 @@ static void ProcessCommands() {
         while (arguments && *arguments && *arguments == 0x20)
             arguments++;
 
-        if (!*arguments)
-            arguments = 0;
+        if (*arguments == '\0')
+            arguments = NULL;
 
-        dumping = 0;
-        save = 0;
+        dumping = NULL;
+        save = NULL;
 
         switch (code) {
         case 0x100:
-            sprintf(reply, "200 %s\r\n", arguments);
+            sprintf(reply, "200 %s\r\n", arguments == NULL ? "OK" : arguments);
             break;
         case 0x101:
             sprintf(reply, "201 %s\r\n", PACKAGE_VERSION);
