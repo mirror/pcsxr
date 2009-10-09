@@ -437,7 +437,7 @@ static void ProcessCommands() {
         if (*arguments == '\0')
             arguments = NULL;
 
-        dumping = NULL;
+        dumping = 0;
         save = NULL;
 
         switch (code) {
@@ -477,7 +477,7 @@ static void ProcessCommands() {
             }
             break;
         case 0x112:
-            sprintf(reply, "212 LO=%08X HI=%08X\r\n", psxRegs.GPR.r[33], psxRegs.GPR.r[34]);
+            sprintf(reply, "212 LO=%08X HI=%08X\r\n", psxRegs.GPR.n.lo, psxRegs.GPR.n.hi);
             break;
         case 0x113:
             if (arguments) {
@@ -566,9 +566,9 @@ static void ProcessCommands() {
             break;
         case 0x122:
             if (!arguments || strncmp(arguments, "HI=", 3) == 0) {
-                reg = 34;
-            } else if (arguments && strncmp(arguments, "LO=", 3) == 0) {
                 reg = 33;
+            } else if (arguments && strncmp(arguments, "LO=", 3) == 0) {
+                reg = 32;
             } else {
                 arguments[2] = 0;
                 sprintf(reply, "512 Invalid LO/HI register: '%s'\r\n", arguments);
@@ -579,7 +579,7 @@ static void ProcessCommands() {
                 sprintf(reply, "500 Malformed 122 command '%s'\r\n", arguments);
             } else {
                 psxRegs.GPR.r[reg] = value;
-                sprintf(reply, "222 LO=%08X HI=%08X\r\n", psxRegs.GPR.r[33], psxRegs.GPR.r[34]);
+                sprintf(reply, "222 LO=%08X HI=%08X\r\n", psxRegs.GPR.n.lo, psxRegs.GPR.n.hi);
             }
             break;
         case 0x123:
