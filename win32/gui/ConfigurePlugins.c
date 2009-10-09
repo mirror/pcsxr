@@ -64,11 +64,11 @@ int LoadConfig() {
 	QueryKeyV(sizeof(Conf->PsxType), "PsxType", &Conf->PsxType);
 	QueryKeyV(sizeof(Conf->Cdda),    "Cdda",    &Conf->Cdda);
 	QueryKeyV(sizeof(Conf->Cpu),     "Cpu",     &Conf->Cpu);
+	QueryKeyV(sizeof(Conf->Debug),   "Debug",   &Conf->Debug);
 	QueryKeyV(sizeof(Conf->PsxOut),  "PsxOut",  &Conf->PsxOut);
 	QueryKeyV(sizeof(Conf->SpuIrq),  "SpuIrq",  &Conf->SpuIrq);
 	QueryKeyV(sizeof(Conf->RCntFix), "RCntFix", &Conf->RCntFix);
 	QueryKeyV(sizeof(Conf->VSyncWA), "VSyncWA", &Conf->VSyncWA);
-	QueryKeyV(sizeof(Conf->Debug),   "Debug",   &Conf->Debug);
 
 	if (!Config.Cpu) {
 		Config.Debug = 0; // don't enable debugger if using dynarec core
