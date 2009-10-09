@@ -112,6 +112,7 @@ void SaveConfig() {
 	SetKeyV("PsxType", &Conf->PsxType, sizeof(Conf->PsxType), REG_DWORD);
 	SetKeyV("Cdda",    &Conf->Cdda,    sizeof(Conf->Cdda),    REG_DWORD);
 	SetKeyV("Cpu",     &Conf->Cpu,     sizeof(Conf->Cpu),     REG_DWORD);
+	SetKeyV("Debug",   &Conf->Debug,   sizeof(Conf->Debug),   REG_DWORD);
 	SetKeyV("PsxOut",  &Conf->PsxOut,  sizeof(Conf->PsxOut),  REG_DWORD);
 	SetKeyV("SpuIrq",  &Conf->SpuIrq,  sizeof(Conf->SpuIrq),  REG_DWORD);
 	SetKeyV("RCntFix", &Conf->RCntFix, sizeof(Conf->RCntFix), REG_DWORD);
