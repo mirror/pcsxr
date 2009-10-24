@@ -1,3 +1,7 @@
+October 24, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Fixed Mac OS X build.
+
 October 9, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * gui/hdebug.c: Removed PCSX-df debugger, which is incompleted and buggy.

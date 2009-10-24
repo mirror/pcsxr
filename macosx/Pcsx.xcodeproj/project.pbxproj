@@ -37,6 +37,9 @@
 		2BB3D6C605427FE200831ACB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC4786204C7FD3600CAB520 /* Cocoa.framework */; };
 		2BB3D6C705427FE200831ACB /* System.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6E8AAE04C832040017A3B1 /* System.framework */; };
 		2BB3D6C805427FE200831ACB /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6E8AB404C8327C0017A3B1 /* IOKit.framework */; };
+		712FD1E81093096F00575A92 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E51093096F00575A92 /* debug.c */; };
+		712FD1E91093096F00575A92 /* socket.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E61093096F00575A92 /* socket.c */; };
+		712FD1EA1093096F00575A92 /* socket.h in Headers */ = {isa = PBXBuildFile; fileRef = 712FD1E71093096F00575A92 /* socket.h */; };
 		7161C2820FDED6D000225F97 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 7161C2810FDED6D000225F97 /* config.h */; };
 		7161C2980FDED75300225F97 /* ExtendedKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = 7161C2970FDED75300225F97 /* ExtendedKeys.h */; };
 		71F4C5890FDED12800529849 /* cdriso.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5600FDED12800529849 /* cdriso.c */; };
@@ -144,6 +147,9 @@
 		2BBB1792051E113B00B84448 /* EmuThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmuThread.m; sourceTree = "<group>"; };
 		2BBB17DA051E4D0F00B84448 /* Plugin.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = Plugin.c; sourceTree = SOURCE_ROOT; };
 		2BC4786204C7FD3600CAB520 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		712FD1E51093096F00575A92 /* debug.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = debug.c; path = ../libpcsxcore/debug.c; sourceTree = SOURCE_ROOT; };
+		712FD1E61093096F00575A92 /* socket.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = socket.c; path = ../libpcsxcore/socket.c; sourceTree = SOURCE_ROOT; };
+		712FD1E71093096F00575A92 /* socket.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = socket.h; path = ../libpcsxcore/socket.h; sourceTree = SOURCE_ROOT; };
 		7161C2810FDED6D000225F97 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		7161C2970FDED75300225F97 /* ExtendedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedKeys.h; sourceTree = "<group>"; };
 		71F4C5600FDED12800529849 /* cdriso.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cdriso.c; path = ../libpcsxcore/cdriso.c; sourceTree = SOURCE_ROOT; };
@@ -315,6 +321,9 @@
 				71F4C5B30FDED15800529849 /* ix86 */,
 				71F4C5600FDED12800529849 /* cdriso.c */,
 				71F4C5610FDED12800529849 /* cdriso.h */,
+				712FD1E51093096F00575A92 /* debug.c */,
+				712FD1E61093096F00575A92 /* socket.c */,
+				712FD1E71093096F00575A92 /* socket.h */,
 				71F4C5620FDED12800529849 /* cdrom.c */,
 				71F4C5630FDED12800529849 /* cdrom.h */,
 				71F4C5640FDED12800529849 /* cheat.c */,
@@ -409,6 +418,7 @@
 				71F4C5BB0FDED16D00529849 /* ix86.h in Headers */,
 				7161C2820FDED6D000225F97 /* config.h in Headers */,
 				7161C2980FDED75300225F97 /* ExtendedKeys.h in Headers */,
+				712FD1EA1093096F00575A92 /* socket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +527,8 @@
 				71F4C5AF0FDED12800529849 /* spu.c in Sources */,
 				71F4C5B90FDED16D00529849 /* iR3000A.c in Sources */,
 				71F4C5BA0FDED16D00529849 /* ix86.c in Sources */,
+				712FD1E81093096F00575A92 /* debug.c in Sources */,
+				712FD1E91093096F00575A92 /* socket.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
