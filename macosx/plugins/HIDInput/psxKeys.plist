@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>No Controller</string>
+
+	<string>-</string>
+	
+	<string>Analog Pad</string>
+	<dict>
+		<key>Type ID</key>
+		<integer>7</integer>
+		<key>Elements</key>
+		<array>
+			<string>D-Pad Up</string>
+			<dict>
+				<key>Button</key>
+				<integer>4</integer>
+				<key>Axis-Pair</key>
+				<integer>0</integer>
+				<key>Default Mappings</key>
+				<array>
+					<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:82, c:99}</string>
+					<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:1, c:3}</string>
+				</array>
+			</dict>
+			<string>D-Pad Down</string>
+			<dict>
+				<key>Button</key>
+				<integer>6</integer>
+				<key>Axis-Pair</key>
+				<integer>0</integer>
+				<key>Default Mappings</key>
+				<array>
+					<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:81, c:98}</string>
+					<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:2, c:4}</string>
+				</array>
+			</dict>
+			<string>D-Pad Left</string>
+			<dict>
+				<key>Button</key>
+				<integer>7</integer>
+				<key>Axis-Pair</key>
+				<integer>1</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:80, c:97}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:3, c:5}</string>
+				</array>
+			</dict>
+			<string>D-Pad Right</string>
+			<dict>
+				<key>Button</key>
+				<integer>5</integer>
+				<key>Axis-Pair</key>
+				<integer>1</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:79, c:96}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:4, c:6}</string>
+				</array>
+			</dict>
+			<string>Cross</string>
+			<dict>
+				<key>Button</key>
+				<integer>14</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:226, c:4}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:7, c:9}</string>
+				</array>
+			</dict>
+			<string>Circle</string>
+			<dict>
+				<key>Button</key>
+				<integer>13</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:227, c:5}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:6, c:8}</string>
+				</array>
+			</dict>
+			<string>Square</string>
+			<dict>
+				<key>Button</key>
+				<integer>15</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:224, c:2}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:8, c:10}</string>
+				</array>
+			</dict>
+			<string>Triangle</string>
+			<dict>
+				<key>Button</key>
+				<integer>12</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:225, c:3}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:5, c:7}</string>
+				</array>
+			</dict>
+			<string>L1</string>
+			<dict>
+				<key>Button</key>
+				<integer>10</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:29, c:46}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:15, c:17}</string>
+				</array>
+			</dict>
+			<string>R1</string>
+			<dict>
+				<key>Button</key>
+				<integer>11</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:27, c:44}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:13, c:15}</string>
+				</array>
+			</dict>
+			<string>L2</string>
+			<dict>
+				<key>Button</key>
+				<integer>8</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:4, c:21}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:16, c:18}</string>
+				</array>
+			</dict>
+			<string>R2</string>
+			<dict>
+				<key>Button</key>
+				<integer>9</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:22, c:39}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:14, c:16}</string>
+				</array>
+			</dict>
+			<string>Select</string>
+			<dict>
+				<key>Button</key>
+				<integer>0</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:43, c:60}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:10, c:12}</string>
+				</array>
+			</dict>
+			<string>Start</string>
+			<dict>
+				<key>Button</key>
+				<integer>3</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:40, c:57}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:11, c:13}</string>
+				</array>
+			</dict>
+			<string>L-Stick Up</string>
+			<dict>
+				<key>Axis</key>
+				<integer>3</integer>
+				<key>Axis-Pair</key>
+				<integer>2</integer>
+				<key>Axis-Positive</key>
+				<true/>
+			</dict>
+			<string>L-Stick Down</string>
+			<dict>
+				<key>Axis</key>
+				<integer>3</integer>
+				<key>Axis-Pair</key>
+				<integer>2</integer>
+				<key>Axis-Positive</key>
+				<false/>
+			</dict>
+			<string>L-Stick Left</string>
+			<dict>
+				<key>Axis</key>
+				<integer>2</integer>
+				<key>Axis-Pair</key>
+				<integer>3</integer>
+				<key>Axis-Positive</key>
+				<true/>
+			</dict>
+			<string>L-Stick Right</string>
+			<dict>
+				<key>Axis</key>
+				<integer>2</integer>
+				<key>Axis-Pair</key>
+				<integer>3</integer>
+				<key>Axis-Positive</key>
+				<false/>
+			</dict>
+			<string>R-Stick Up</string>
+			<dict>
+				<key>Axis</key>
+				<integer>1</integer>
+				<key>Axis-Pair</key>
+				<integer>4</integer>
+				<key>Axis-Positive</key>
+				<false/>
+			</dict>
+			<string>R-Stick Down</string>
+			<dict>
+				<key>Axis</key>
+				<integer>1</integer>
+				<key>Axis-Pair</key>
+				<integer>4</integer>
+				<key>Axis-Positive</key>
+				<true/>
+			</dict>
+			<string>R-Stick Left</string>
+			<dict>
+				<key>Axis</key>
+				<integer>0</integer>
+				<key>Axis-Pair</key>
+				<integer>5</integer>
+				<key>Axis-Positive</key>
+				<true/>
+			</dict>
+			<string>R-Stick Right</string>
+			<dict>
+				<key>Axis</key>
+				<integer>0</integer>
+				<key>Axis-Pair</key>
+				<integer>5</integer>
+				<key>Axis-Positive</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	
+	<string>Digital Pad</string>
+	<dict>
+		<key>Type ID</key>
+		<integer>4</integer>
+		<key>Elements</key>
+		<array>
+			<string>D-Pad Up</string>
+			<dict>
+				<key>Button</key>
+				<integer>4</integer>
+				<key>Axis-Pair</key>
+				<integer>0</integer>
+				<key>Default Mappings</key>
+				<array>
+					<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:82, c:99}</string>
+					<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:1, c:3}</string>
+				</array>
+			</dict>
+			<string>D-Pad Down</string>
+			<dict>
+				<key>Button</key>
+				<integer>6</integer>
+				<key>Axis-Pair</key>
+				<integer>0</integer>
+				<key>Default Mappings</key>
+				<array>
+					<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:81, c:98}</string>
+					<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:2, c:4}</string>
+				</array>
+			</dict>
+			<string>D-Pad Left</string>
+			<dict>
+				<key>Button</key>
+				<integer>7</integer>
+				<key>Axis-Pair</key>
+				<integer>1</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:80, c:97}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:3, c:5}</string>
+				</array>
+			</dict>
+			<string>D-Pad Right</string>
+			<dict>
+				<key>Button</key>
+				<integer>5</integer>
+				<key>Axis-Pair</key>
+				<integer>1</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:79, c:96}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:4, c:6}</string>
+				</array>
+			</dict>
+			<string>Cross</string>
+			<dict>
+				<key>Button</key>
+				<integer>14</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:226, c:4}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:7, c:9}</string>
+				</array>
+			</dict>
+			<string>Circle</string>
+			<dict>
+				<key>Button</key>
+				<integer>13</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:227, c:5}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:6, c:8}</string>
+				</array>
+			</dict>
+			<string>Square</string>
+			<dict>
+				<key>Button</key>
+				<integer>15</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:224, c:2}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:8, c:10}</string>
+				</array>
+			</dict>
+			<string>Triangle</string>
+			<dict>
+				<key>Button</key>
+				<integer>12</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:225, c:3}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:5, c:7}</string>
+				</array>
+			</dict>
+			<string>L1</string>
+			<dict>
+				<key>Button</key>
+				<integer>10</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:29, c:46}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:15, c:17}</string>
+				</array>
+			</dict>
+			<string>R1</string>
+			<dict>
+				<key>Button</key>
+				<integer>11</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:27, c:44}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:13, c:15}</string>
+				</array>
+			</dict>
+			<string>L2</string>
+			<dict>
+				<key>Button</key>
+				<integer>8</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:4, c:21}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:16, c:18}</string>
+				</array>
+			</dict>
+			<string>R2</string>
+			<dict>
+				<key>Button</key>
+				<integer>9</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:22, c:39}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:14, c:16}</string>
+				</array>
+			</dict>
+			<string>Select</string>
+			<dict>
+				<key>Button</key>
+				<integer>0</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:43, c:60}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:10, c:12}</string>
+				</array>
+			</dict>
+			<string>Start</string>
+			<dict>
+				<key>Button</key>
+				<integer>3</integer>
+				<key>Default Mappings</key>
+				<array>
+						<string>d:{v:0, p:0, l:0, p:1, u:6}, e:{t:2, p:7, u:40, c:57}</string>
+						<string>d:{v:8738, p:16400, l:0, p:1, u:5}, e:{t:2, p:9, u:11, c:13}</string>
+				</array>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>

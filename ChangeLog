@@ -1,6 +1,7 @@
 October 24, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * macosx/Pcsx.xcodeproj/project.pbxproj: Fixed Mac OS X build.
+ * macosx/plugins: Added CDR and PAD plugins for Mac OS X..
 
 October 9, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
