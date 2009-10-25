@@ -5,6 +5,7 @@
   <widget class="GtkDialog" id="CfgWnd">
     <property name="border_width">5</property>
     <property name="resizable">False</property>
+    <property name="window_position">center</property>
     <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
     <child internal-child="vbox">
