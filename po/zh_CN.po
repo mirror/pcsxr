@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 18:26+0800\n"
-"PO-Revision-Date: 2009-10-01 18:27+0700\n"
+"POT-Creation-Date: 2009-10-25 21:49+0800\n"
+"PO-Revision-Date: 2009-10-25 21:55+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -62,8 +62,8 @@ msgstr "关于 PCSX"
 #: ../win32/gui/AboutDlg.c:52
 #: ../win32/gui/CheatDlg.c:70
 #: ../win32/gui/CheatDlg.c:120
-#: ../win32/gui/ConfigurePlugins.c:464
-#: ../win32/gui/ConfigurePlugins.c:595
+#: ../win32/gui/ConfigurePlugins.c:470
+#: ../win32/gui/ConfigurePlugins.c:601
 #: ../win32/gui/WndMain.c:963
 #: ../win32/gui/WndMain.c:1199
 #: ../plugins/peopsxgl/gpucfg/interface.c:130
@@ -107,8 +107,8 @@ msgstr "作弊码:"
 
 #: ../win32/gui/CheatDlg.c:71
 #: ../win32/gui/CheatDlg.c:121
-#: ../win32/gui/ConfigurePlugins.c:465
-#: ../win32/gui/ConfigurePlugins.c:596
+#: ../win32/gui/ConfigurePlugins.c:471
+#: ../win32/gui/ConfigurePlugins.c:602
 #: ../win32/gui/WndMain.c:964
 #: ../win32/gui/WndMain.c:1200
 #: ../plugins/peopsxgl/gpucfg/interface.c:338
@@ -346,110 +346,110 @@ msgstr "十进制"
 msgid "Hexadecimal"
 msgstr "十六进制"
 
-#: ../win32/gui/ConfigurePlugins.c:200
-#: ../gui/Gtk2Gui.c:2237
+#: ../win32/gui/ConfigurePlugins.c:206
+#: ../gui/Gtk2Gui.c:2228
 msgid "Internal HLE Bios"
 msgstr "内部 HLE-Bios"
 
-#: ../win32/gui/ConfigurePlugins.c:286
+#: ../win32/gui/ConfigurePlugins.c:292
 msgid "Configuration not OK!"
 msgstr "配置不正确!"
 
-#: ../win32/gui/ConfigurePlugins.c:286
+#: ../win32/gui/ConfigurePlugins.c:292
 #: ../gui/Cheat.c:155
 #: ../gui/Cheat.c:250
 #: ../gui/LnxMain.c:405
 msgid "Error"
 msgstr "错误"
 
-#: ../win32/gui/ConfigurePlugins.c:387
+#: ../win32/gui/ConfigurePlugins.c:393
 msgid "This plugin reports that should work correctly"
 msgstr "此插件报告其可正常工作。"
 
-#: ../win32/gui/ConfigurePlugins.c:388
+#: ../win32/gui/ConfigurePlugins.c:394
 msgid "This plugin reports that should not work correctly"
 msgstr "此插件报告其不可正常工作。"
 
-#: ../win32/gui/ConfigurePlugins.c:444
+#: ../win32/gui/ConfigurePlugins.c:450
 msgid "Select Plugins Directory"
 msgstr "选择插件目录"
 
-#: ../win32/gui/ConfigurePlugins.c:453
+#: ../win32/gui/ConfigurePlugins.c:459
 msgid "Select Bios Directory"
 msgstr "选择 BIOS 目录"
 
-#: ../win32/gui/ConfigurePlugins.c:462
+#: ../win32/gui/ConfigurePlugins.c:468
 msgid "Configuration"
 msgstr "配置"
 
-#: ../win32/gui/ConfigurePlugins.c:466
+#: ../win32/gui/ConfigurePlugins.c:472
 msgid "Graphics"
 msgstr "图像"
 
-#: ../win32/gui/ConfigurePlugins.c:467
+#: ../win32/gui/ConfigurePlugins.c:473
 msgid "First Controller"
 msgstr "主控制器"
 
-#: ../win32/gui/ConfigurePlugins.c:468
+#: ../win32/gui/ConfigurePlugins.c:474
 msgid "Second Controller"
 msgstr "辅控制器"
 
-#: ../win32/gui/ConfigurePlugins.c:469
+#: ../win32/gui/ConfigurePlugins.c:475
 msgid "Sound"
 msgstr "声音"
 
-#: ../win32/gui/ConfigurePlugins.c:470
+#: ../win32/gui/ConfigurePlugins.c:476
 msgid "Cdrom"
 msgstr "CD-ROM"
 
-#: ../win32/gui/ConfigurePlugins.c:471
+#: ../win32/gui/ConfigurePlugins.c:477
 msgid "Bios"
 msgstr "BIOS"
 
-#: ../win32/gui/ConfigurePlugins.c:472
+#: ../win32/gui/ConfigurePlugins.c:478
 msgid "Set Bios Directory"
 msgstr "设置 BIOS 目录"
 
-#: ../win32/gui/ConfigurePlugins.c:473
+#: ../win32/gui/ConfigurePlugins.c:479
 msgid "Set Plugins Directory"
 msgstr "设置插件目录"
 
-#: ../win32/gui/ConfigurePlugins.c:474
-#: ../win32/gui/ConfigurePlugins.c:477
 #: ../win32/gui/ConfigurePlugins.c:480
 #: ../win32/gui/ConfigurePlugins.c:483
 #: ../win32/gui/ConfigurePlugins.c:486
-#: ../win32/gui/ConfigurePlugins.c:598
+#: ../win32/gui/ConfigurePlugins.c:489
+#: ../win32/gui/ConfigurePlugins.c:492
+#: ../win32/gui/ConfigurePlugins.c:604
 msgid "Configure..."
 msgstr "配置..."
 
-#: ../win32/gui/ConfigurePlugins.c:475
-#: ../win32/gui/ConfigurePlugins.c:478
 #: ../win32/gui/ConfigurePlugins.c:481
 #: ../win32/gui/ConfigurePlugins.c:484
 #: ../win32/gui/ConfigurePlugins.c:487
-#: ../win32/gui/ConfigurePlugins.c:599
+#: ../win32/gui/ConfigurePlugins.c:490
+#: ../win32/gui/ConfigurePlugins.c:493
+#: ../win32/gui/ConfigurePlugins.c:605
 msgid "Test..."
 msgstr "测试..."
 
-#: ../win32/gui/ConfigurePlugins.c:476
-#: ../win32/gui/ConfigurePlugins.c:479
 #: ../win32/gui/ConfigurePlugins.c:482
 #: ../win32/gui/ConfigurePlugins.c:485
 #: ../win32/gui/ConfigurePlugins.c:488
-#: ../win32/gui/ConfigurePlugins.c:600
+#: ../win32/gui/ConfigurePlugins.c:491
+#: ../win32/gui/ConfigurePlugins.c:494
+#: ../win32/gui/ConfigurePlugins.c:606
 msgid "About..."
 msgstr "关于..."
 
-#: ../win32/gui/ConfigurePlugins.c:593
+#: ../win32/gui/ConfigurePlugins.c:599
 msgid "NetPlay Configuration"
 msgstr "联网游戏配置"
 
-#: ../win32/gui/ConfigurePlugins.c:597
+#: ../win32/gui/ConfigurePlugins.c:603
 msgid "NetPlay"
 msgstr "联网游戏"
 
-#: ../win32/gui/ConfigurePlugins.c:601
+#: ../win32/gui/ConfigurePlugins.c:607
 msgid "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
 msgstr "注意: 联网游戏插件应和其它插件放在同一目录中。"
 
@@ -616,8 +616,8 @@ msgid "Greek"
 msgstr "希腊语"
 
 #: ../win32/gui/WndMain.c:80
-#: ../win32/gui/WndMain.c:1522
-#: ../win32/gui/WndMain.c:1524
+#: ../win32/gui/WndMain.c:1556
+#: ../win32/gui/WndMain.c:1558
 msgid "English"
 msgstr "英语"
 
@@ -688,15 +688,15 @@ msgstr "*PCSX*: Error Saving State %s"
 
 #: ../win32/gui/WndMain.c:426
 #: ../win32/gui/WndMain.c:475
-#: ../gui/Gtk2Gui.c:580
-#: ../gui/Gtk2Gui.c:707
+#: ../gui/Gtk2Gui.c:575
+#: ../gui/Gtk2Gui.c:700
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "此光盘不是一张合法的 PlayStation 光盘。"
 
 #: ../win32/gui/WndMain.c:432
 #: ../win32/gui/WndMain.c:481
-#: ../gui/Gtk2Gui.c:588
-#: ../gui/Gtk2Gui.c:715
+#: ../gui/Gtk2Gui.c:583
+#: ../gui/Gtk2Gui.c:708
 msgid "Could not load CD-ROM!"
 msgstr "无法加载光盘!"
 
@@ -705,12 +705,12 @@ msgid "Running BIOS is not supported with Internal HLE Bios."
 msgstr "内部 HLE BIOS 不支持直接运行。"
 
 #: ../win32/gui/WndMain.c:661
-#: ../gui/Gtk2Gui.c:1080
+#: ../gui/Gtk2Gui.c:1068
 msgid "Title"
 msgstr "标题"
 
 #: ../win32/gui/WndMain.c:667
-#: ../gui/Gtk2Gui.c:1086
+#: ../gui/Gtk2Gui.c:1074
 msgid "Status"
 msgstr "状态"
 
@@ -731,19 +731,19 @@ msgid "terminiting link block"
 msgstr "terminiting link block"
 
 #: ../win32/gui/WndMain.c:864
-#: ../gui/Gtk2Gui.c:1160
+#: ../gui/Gtk2Gui.c:1148
 msgid "Deleted"
 msgstr "已删除"
 
 #: ../win32/gui/WndMain.c:865
 #: ../win32/gui/WndMain.c:868
-#: ../gui/Gtk2Gui.c:1162
-#: ../gui/Gtk2Gui.c:1166
+#: ../gui/Gtk2Gui.c:1150
+#: ../gui/Gtk2Gui.c:1154
 msgid "Free"
 msgstr "空闲"
 
 #: ../win32/gui/WndMain.c:867
-#: ../gui/Gtk2Gui.c:1164
+#: ../gui/Gtk2Gui.c:1152
 msgid "Used"
 msgstr "已使用"
 
@@ -844,211 +844,217 @@ msgid "Enable Console Output"
 msgstr "启用控制台输出"
 
 #: ../win32/gui/WndMain.c:1209
+#: ../data/pcsx.glade2:1233
+msgid "Enable Debugger"
+msgstr "启用调试器"
+
+#: ../win32/gui/WndMain.c:1210
 msgid "Spu Irq Always Enabled"
 msgstr "SPU IRQ 总是启用"
 
-#: ../win32/gui/WndMain.c:1210
+#: ../win32/gui/WndMain.c:1211
 #: ../data/pcsx.glade2:1370
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr "Parasite Eve 2, Vandal Hearts 1/2 修正"
 
-#: ../win32/gui/WndMain.c:1211
+#: ../win32/gui/WndMain.c:1212
 #: ../data/pcsx.glade2:1385
 msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku 战斗修正"
 
-#: ../win32/gui/WndMain.c:1213
+#: ../win32/gui/WndMain.c:1214
 #: ../plugins/dfcdrom/interface.c:194
+#: ../plugins/dfinput/dfinput.glade2:447
 msgid "Options"
 msgstr "选项"
 
-#: ../win32/gui/WndMain.c:1214
+#: ../win32/gui/WndMain.c:1215
 msgid "Psx System Type"
 msgstr "Psx 系统类型"
 
-#: ../win32/gui/WndMain.c:1286
+#: ../win32/gui/WndMain.c:1320
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 msgstr "Psx 记忆卡格式 (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 
-#: ../win32/gui/WndMain.c:1291
+#: ../win32/gui/WndMain.c:1325
 msgid "Psx Memory Card (*.mcr;*.mc)"
 msgstr "Psx 记忆卡 (*.mcr;*.mc)"
 
-#: ../win32/gui/WndMain.c:1296
+#: ../win32/gui/WndMain.c:1330
 msgid "CVGS Memory Card (*.mem;*.vgs)"
 msgstr "VGS 记忆卡 (*.mem;*.vgs)"
 
-#: ../win32/gui/WndMain.c:1301
+#: ../win32/gui/WndMain.c:1335
 msgid "Bleem Memory Card (*.mcd)"
 msgstr "Bleem 记忆卡 (*.mcd)"
 
-#: ../win32/gui/WndMain.c:1306
+#: ../win32/gui/WndMain.c:1340
 msgid "DexDrive Memory Card (*.gme)"
 msgstr "DexDrive 记忆卡 (*.gme)"
 
-#: ../win32/gui/WndMain.c:1311
+#: ../win32/gui/WndMain.c:1345
 msgid "DataDeck Memory Card (*.ddf)"
 msgstr "DataDeck 记忆卡 (*.ddl)"
 
-#: ../win32/gui/WndMain.c:1316
-#: ../win32/gui/WndMain.c:1397
+#: ../win32/gui/WndMain.c:1350
+#: ../win32/gui/WndMain.c:1431
 #: ../gui/Cheat.c:319
-#: ../gui/Gtk2Gui.c:516
-#: ../gui/Gtk2Gui.c:658
+#: ../gui/Gtk2Gui.c:512
+#: ../gui/Gtk2Gui.c:651
 msgid "All Files"
 msgstr "所有文件"
 
-#: ../win32/gui/WndMain.c:1355
+#: ../win32/gui/WndMain.c:1389
 msgid "Psx Exe Format"
 msgstr "PSX EXE 格式"
 
-#: ../win32/gui/WndMain.c:1392
+#: ../win32/gui/WndMain.c:1426
 msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin)"
 msgstr "Psx 光盘镜像 (*.iso;*.mdf;*.img;*.bin)"
 
-#: ../win32/gui/WndMain.c:1468
+#: ../win32/gui/WndMain.c:1502
 msgid "&File"
 msgstr "文件(&F)"
 
-#: ../win32/gui/WndMain.c:1469
+#: ../win32/gui/WndMain.c:1503
 msgid "E&xit"
 msgstr "退出(&X)"
 
-#: ../win32/gui/WndMain.c:1471
+#: ../win32/gui/WndMain.c:1505
 msgid "Run &EXE..."
 msgstr "运行 &EXE..."
 
-#: ../win32/gui/WndMain.c:1472
+#: ../win32/gui/WndMain.c:1506
 msgid "Run &BIOS"
 msgstr "运行 BIOS(&B)"
 
-#: ../win32/gui/WndMain.c:1473
+#: ../win32/gui/WndMain.c:1507
 msgid "Run &ISO..."
 msgstr "运行 &ISO..."
 
-#: ../win32/gui/WndMain.c:1474
+#: ../win32/gui/WndMain.c:1508
 msgid "Run &CD"
 msgstr "运行光碟(&C)"
 
-#: ../win32/gui/WndMain.c:1476
+#: ../win32/gui/WndMain.c:1510
 msgid "&Emulator"
 msgstr "模拟器(&E)"
 
-#: ../win32/gui/WndMain.c:1477
+#: ../win32/gui/WndMain.c:1511
 msgid "&States"
 msgstr "存档(&S)"
 
-#: ../win32/gui/WndMain.c:1479
+#: ../win32/gui/WndMain.c:1513
 msgid "S&witch ISO..."
 msgstr "更换 ISO(&W)..."
 
-#: ../win32/gui/WndMain.c:1481
+#: ../win32/gui/WndMain.c:1515
 msgid "Re&set"
 msgstr "复位(&S)"
 
-#: ../win32/gui/WndMain.c:1482
+#: ../win32/gui/WndMain.c:1516
 msgid "&Run"
 msgstr "运行(&R)"
 
-#: ../win32/gui/WndMain.c:1483
+#: ../win32/gui/WndMain.c:1517
 msgid "&Save"
 msgstr "保存(&S)"
 
-#: ../win32/gui/WndMain.c:1484
+#: ../win32/gui/WndMain.c:1518
 msgid "&Load"
 msgstr "读取(&L)"
 
-#: ../win32/gui/WndMain.c:1485
-#: ../win32/gui/WndMain.c:1491
+#: ../win32/gui/WndMain.c:1519
+#: ../win32/gui/WndMain.c:1525
 msgid "&Other..."
 msgstr "其它(&O)..."
 
-#: ../win32/gui/WndMain.c:1486
-#: ../win32/gui/WndMain.c:1492
+#: ../win32/gui/WndMain.c:1520
+#: ../win32/gui/WndMain.c:1526
 msgid "Slot &5"
 msgstr "存档 5(&5)"
 
-#: ../win32/gui/WndMain.c:1487
-#: ../win32/gui/WndMain.c:1493
+#: ../win32/gui/WndMain.c:1521
+#: ../win32/gui/WndMain.c:1527
 msgid "Slot &4"
 msgstr "存档 4(&4)"
 
-#: ../win32/gui/WndMain.c:1488
-#: ../win32/gui/WndMain.c:1494
+#: ../win32/gui/WndMain.c:1522
+#: ../win32/gui/WndMain.c:1528
 msgid "Slot &3"
 msgstr "存档 3(&3)"
 
-#: ../win32/gui/WndMain.c:1489
-#: ../win32/gui/WndMain.c:1495
+#: ../win32/gui/WndMain.c:1523
+#: ../win32/gui/WndMain.c:1529
 msgid "Slot &2"
 msgstr "存档 2(&2)"
 
-#: ../win32/gui/WndMain.c:1490
-#: ../win32/gui/WndMain.c:1496
+#: ../win32/gui/WndMain.c:1524
+#: ../win32/gui/WndMain.c:1530
 msgid "Slot &1"
 msgstr "存档 1(&1)"
 
-#: ../win32/gui/WndMain.c:1498
+#: ../win32/gui/WndMain.c:1532
 msgid "&Configuration"
 msgstr "配置(&C)"
 
-#: ../win32/gui/WndMain.c:1499
+#: ../win32/gui/WndMain.c:1533
 msgid "Cheat &Search..."
 msgstr "查找作弊码(&S)..."
 
-#: ../win32/gui/WndMain.c:1500
+#: ../win32/gui/WndMain.c:1534
 msgid "Ch&eat Code..."
 msgstr "作弊码(&E)..."
 
-#: ../win32/gui/WndMain.c:1503
+#: ../win32/gui/WndMain.c:1537
 msgid "&Language"
 msgstr "语言(&L)"
 
-#: ../win32/gui/WndMain.c:1528
+#: ../win32/gui/WndMain.c:1562
 msgid "&Memory cards..."
 msgstr "记忆卡(&M)..."
 
-#: ../win32/gui/WndMain.c:1529
+#: ../win32/gui/WndMain.c:1563
 msgid "C&PU..."
 msgstr "C&PU..."
 
-#: ../win32/gui/WndMain.c:1531
+#: ../win32/gui/WndMain.c:1565
 msgid "&NetPlay..."
 msgstr "联网游戏(&N)..."
 
-#: ../win32/gui/WndMain.c:1533
+#: ../win32/gui/WndMain.c:1567
 msgid "&Controllers..."
 msgstr "控制器(&C)..."
 
-#: ../win32/gui/WndMain.c:1534
+#: ../win32/gui/WndMain.c:1568
 msgid "CD-&ROM..."
 msgstr "CD-&ROM..."
 
-#: ../win32/gui/WndMain.c:1535
+#: ../win32/gui/WndMain.c:1569
 msgid "&Sound..."
 msgstr "声音(&S)..."
 
-#: ../win32/gui/WndMain.c:1536
+#: ../win32/gui/WndMain.c:1570
 msgid "&Graphics..."
 msgstr "图像(&G)..."
 
-#: ../win32/gui/WndMain.c:1538
+#: ../win32/gui/WndMain.c:1572
 msgid "&Plugins && Bios..."
 msgstr "插件及 BIOS(&P)..."
 
-#: ../win32/gui/WndMain.c:1540
+#: ../win32/gui/WndMain.c:1574
 msgid "&Help"
 msgstr "帮助(&H)"
 
-#: ../win32/gui/WndMain.c:1541
+#: ../win32/gui/WndMain.c:1575
 msgid "&About..."
 msgstr "关于(&A)..."
 
-#: ../win32/gui/WndMain.c:1723
+#: ../win32/gui/WndMain.c:1761
 msgid "Pcsx Msg"
 msgstr "PCSX 消息"
 
-#: ../win32/gui/WndMain.c:1726
+#: ../win32/gui/WndMain.c:1764
 msgid "Error Loading Symbol"
 msgstr "无法加载符号"
 
@@ -1076,8 +1082,8 @@ msgstr "所有文件 (*.*)"
 
 #: ../gui/Cheat.c:392
 #: ../gui/Cheat.c:1121
-#: ../gui/Gtk2Gui.c:404
-#: ../gui/Gtk2Gui.c:1032
+#: ../gui/Gtk2Gui.c:400
+#: ../gui/Gtk2Gui.c:1020
 msgid "Error: Glade interface could not be loaded!"
 msgstr "错误：无法加载 Glade 界面!"
 
@@ -1105,138 +1111,138 @@ msgstr "新值:"
 msgid "Search Results"
 msgstr "查找结果"
 
-#: ../gui/Gtk2Gui.c:412
+#: ../gui/Gtk2Gui.c:408
 #: ../data/pcsx.glade2:605
 msgid "Configure PCSX"
 msgstr "配置 PCSX"
 
-#: ../gui/Gtk2Gui.c:498
+#: ../gui/Gtk2Gui.c:494
 msgid "Select PSX EXE File"
 msgstr "选择 PSX EXE 文件"
 
-#: ../gui/Gtk2Gui.c:512
+#: ../gui/Gtk2Gui.c:508
 msgid "PlayStation Executable Files"
 msgstr "PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:549
+#: ../gui/Gtk2Gui.c:544
 msgid "Not a valid PSX file"
 msgstr "不是一个合法的 PSX 文件"
 
-#: ../gui/Gtk2Gui.c:549
+#: ../gui/Gtk2Gui.c:544
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "此文件不是一个合法的 PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:580
-#: ../gui/Gtk2Gui.c:707
+#: ../gui/Gtk2Gui.c:575
+#: ../gui/Gtk2Gui.c:700
 msgid "CD ROM failed"
 msgstr "CD-ROM 失败"
 
-#: ../gui/Gtk2Gui.c:588
+#: ../gui/Gtk2Gui.c:583
 msgid "The CD ROM could not be loaded"
 msgstr "无法加载 CD-ROM"
 
-#: ../gui/Gtk2Gui.c:603
+#: ../gui/Gtk2Gui.c:597
 msgid "Could not run BIOS"
 msgstr "无法运行 BIOS"
 
-#: ../gui/Gtk2Gui.c:603
+#: ../gui/Gtk2Gui.c:597
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr "内部 HLE BIOS 不支持直接运行。"
 
-#: ../gui/Gtk2Gui.c:633
+#: ../gui/Gtk2Gui.c:626
 msgid "Open PSX Disc Image File"
 msgstr "打开 PSX 光盘镜像文件"
 
-#: ../gui/Gtk2Gui.c:653
+#: ../gui/Gtk2Gui.c:646
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr "PS 镜像文件 (*.bin, *.img, *.mdf, *.iso)"
 
-#: ../gui/Gtk2Gui.c:891
+#: ../gui/Gtk2Gui.c:880
 #, c-format
 msgid "Loaded state %s."
 msgstr "已读取存档 %s。"
 
-#: ../gui/Gtk2Gui.c:896
+#: ../gui/Gtk2Gui.c:884
 #, c-format
 msgid "Error loading state %s!"
 msgstr "读取存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:907
+#: ../gui/Gtk2Gui.c:895
 #, c-format
 msgid "Saved state %s."
 msgstr "已保存存档 %s"
 
-#: ../gui/Gtk2Gui.c:909
+#: ../gui/Gtk2Gui.c:897
 #, c-format
 msgid "Error saving state %s!"
 msgstr "保存存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:943
-#: ../gui/Gtk2Gui.c:970
+#: ../gui/Gtk2Gui.c:931
+#: ../gui/Gtk2Gui.c:958
 msgid "Select State File"
 msgstr "选择存档文件"
 
-#: ../gui/Gtk2Gui.c:1074
+#: ../gui/Gtk2Gui.c:1062
 msgid "Icon"
 msgstr "图标"
 
-#: ../gui/Gtk2Gui.c:1092
+#: ../gui/Gtk2Gui.c:1080
 msgid "ID"
 msgstr "ID"
 
-#: ../gui/Gtk2Gui.c:1098
+#: ../gui/Gtk2Gui.c:1086
 msgid "Name"
 msgstr "名称"
 
-#: ../gui/Gtk2Gui.c:1258
+#: ../gui/Gtk2Gui.c:1246
 msgid "Format this Memory Card?"
 msgstr "格式化此记忆卡?"
 
-#: ../gui/Gtk2Gui.c:1260
+#: ../gui/Gtk2Gui.c:1248
 msgid "If you format the memory card, the card will be empty, and any existing data overwritten."
 msgstr "如果您选择格式化记忆卡，记忆卡将被清空，并且任何现有数据都将被覆盖。"
 
-#: ../gui/Gtk2Gui.c:1263
+#: ../gui/Gtk2Gui.c:1251
 msgid "Format card"
 msgstr "格式化记忆卡"
 
-#: ../gui/Gtk2Gui.c:1378
+#: ../gui/Gtk2Gui.c:1366
 msgid "No space available in the target memory card!"
 msgstr "目标记忆卡没有空余位置!"
 
-#: ../gui/Gtk2Gui.c:1520
-#: ../gui/Gtk2Gui.c:1541
-#: ../gui/Gtk2Gui.c:1562
-#: ../gui/Gtk2Gui.c:1583
-#: ../gui/Gtk2Gui.c:1889
+#: ../gui/Gtk2Gui.c:1508
+#: ../gui/Gtk2Gui.c:1529
+#: ../gui/Gtk2Gui.c:1550
+#: ../gui/Gtk2Gui.c:1571
+#: ../gui/Gtk2Gui.c:1880
 msgid "No configuration required"
 msgstr "不需要配置"
 
-#: ../gui/Gtk2Gui.c:1520
-#: ../gui/Gtk2Gui.c:1541
-#: ../gui/Gtk2Gui.c:1562
-#: ../gui/Gtk2Gui.c:1583
-#: ../gui/Gtk2Gui.c:1889
+#: ../gui/Gtk2Gui.c:1508
+#: ../gui/Gtk2Gui.c:1529
+#: ../gui/Gtk2Gui.c:1550
+#: ../gui/Gtk2Gui.c:1571
+#: ../gui/Gtk2Gui.c:1880
 msgid "This plugin doesn't need to be configured."
 msgstr "此插件需要被配置。"
 
-#: ../gui/Gtk2Gui.c:1620
+#: ../gui/Gtk2Gui.c:1608
 msgid "Memory Card Manager"
 msgstr "记忆卡管理器"
 
-#: ../gui/Gtk2Gui.c:2143
+#: ../gui/Gtk2Gui.c:2134
 #, c-format
 msgid "Could not open BIOS directory: '%s'\n"
 msgstr "无法打开 BIOS 目录: \"%s\"\n"
 
-#: ../gui/Gtk2Gui.c:2173
-#: ../gui/Gtk2Gui.c:2266
+#: ../gui/Gtk2Gui.c:2164
+#: ../gui/Gtk2Gui.c:2257
 #: ../gui/LnxMain.c:170
 #, c-format
 msgid "Could not open directory: '%s'\n"
 msgstr "无法打开目录: \"%s\"\n"
 
-#: ../gui/Gtk2Gui.c:2327
+#: ../gui/Gtk2Gui.c:2318
 msgid "Notice"
 msgstr "警告"
 
@@ -1359,7 +1365,7 @@ msgstr "无法关闭 \"控制器 2\" 插件!"
 msgid "Error closing GPU plugin!"
 msgstr "无法关闭 GPU 插件!"
 
-#: ../libpcsxcore/cdriso.c:631
+#: ../libpcsxcore/cdriso.c:639
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr "已加载 CD 镜像: %s"
@@ -1378,6 +1384,22 @@ msgstr "作弊码己保存: %s\n"
 #: ../libpcsxcore/cheat.c:444
 msgid "(Untitled)"
 msgstr "(未命名)"
+
+#: ../libpcsxcore/debug.c:317
+msgid "Error allocating memory"
+msgstr "分配内存错误"
+
+#: ../libpcsxcore/debug.c:322
+msgid "Unable to start debug server.\n"
+msgstr "无法启动调试服务器。\n"
+
+#: ../libpcsxcore/debug.c:326
+msgid "Debugger started.\n"
+msgstr "调试器已启动。\n"
+
+#: ../libpcsxcore/debug.c:333
+msgid "Debugger stopped.\n"
+msgstr "调试器已停止。\n"
 
 #: ../libpcsxcore/misc.c:380
 #, c-format
@@ -1524,19 +1546,19 @@ msgstr "Pete Bernert 及 P.E.Op.S. 开发组"
 msgid "Configure X11 Video"
 msgstr "配置 X11 视频"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:39
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:44
 msgid "Initial Window Size:"
 msgstr "初始窗口大小:"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:50
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:55
 msgid "Stretching:"
 msgstr "拉抻:"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:63
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:68
 msgid "Dithering:"
 msgstr "抖动:"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:76
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:81
 msgid ""
 "320x240\n"
 "640x480\n"
@@ -1554,7 +1576,7 @@ msgstr ""
 "1280x1024\n"
 "1600x1200"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:95
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:100
 msgid ""
 "0: None\n"
 "1: 2xSai\n"
@@ -1574,7 +1596,7 @@ msgstr ""
 "6: HQ2X\n"
 "7: HQ3X"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:117
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:122
 msgid ""
 "0: Off (fastest)\n"
 "1: Game dependant\n"
@@ -1584,184 +1606,149 @@ msgstr ""
 "1: 取决于游戏\n"
 "2: 总是"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:139
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:145
 msgid "Maintain 4:3 Aspect Ratio"
 msgstr "维持 4:3 宽高比"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:153
-msgid "Toggle windowed/fullscreen mode."
-msgstr "切换窗口/全屏模式"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:154
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:160
 #: ../plugins/peopsxgl/gpucfg/interface.c:322
 msgid "Fullscreen"
 msgstr "全屏"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:177
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:164
+msgid "Toggle windowed/fullscreen mode."
+msgstr "切换窗口/全屏模式"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:186
 msgid "<b>Screen</b>"
 msgstr "<b>屏幕</b>"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:203
-msgid "Toggle whether the FPS will be shown."
-msgstr "切换 FPS (每秒帧数) 是否将被显示。"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:204
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:215
 msgid "Show FPS"
 msgstr "显示 FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:218
-msgid "Enable this if games display too quickly."
-msgstr "如果游戏运行得过快，请启用此项。"
-
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:219
+msgid "Toggle whether the FPS will be shown."
+msgstr "切换 FPS (每秒帧数) 是否将被显示。"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:231
 msgid "Autodetect FPS limit"
 msgstr "自动检测 FPS 界限"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:235
-msgid "Skip frames when rendering."
-msgstr "渲染时跳帧。"
+msgid "Enable this if games display too quickly."
+msgstr "如果游戏运行得过快，请启用此项。"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:236
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:248
 msgid "Enable frame skipping"
 msgstr "启用跳帧"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:257
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:252
+msgid "Skip frames when rendering."
+msgstr "渲染时跳帧。"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:269
 msgid "Set FPS"
 msgstr "设置 FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:272
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:286
 msgid "200.0"
 msgstr "200.0"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:295
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:309
 msgid "<b>Framerate</b>"
 msgstr "<b>帧率</b>"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:324
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:338
 #: ../plugins/peopsxgl/gpucfg/interface.c:568
 msgid "Use game fixes"
 msgstr "使用特定游戏修正"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:348
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:365
 msgid "better g-colors, worse textures"
 msgstr "较好的 g-colors, 较差的纹理"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:363
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:380
 msgid "Needed by Dark Forces"
 msgstr "Dark Forces 运行需要"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:378
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:393
 msgid "Draw quads with triangles"
 msgstr "使用 quad 绘制三角形"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:394
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:409
 msgid "Repeated flat tex triangles"
 msgstr "重复平滑多边形纹理"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:410
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:425
 msgid "Disable CPU Saving"
 msgstr "禁用 CPU 保存"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:426
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:441
 msgid "Odd/even bit hack"
 msgstr "奇/偶位 hack"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:440
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:457
 msgid "For precise framerate"
 msgstr "精确帧率"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:455
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:472
 msgid "Better FPS limit in some"
 msgstr "某些游戏中可取得较好的 FPS 界限值"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:470
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:485
 msgid "PC FPS calculation"
 msgstr "PC FPS 计算"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:486
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:503
 msgid "Pandemonium 2"
 msgstr "Pandemonium 2"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:501
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:516
 msgid "Lazy screen update"
 msgstr "懒惰的屏幕更新"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:517
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:534
 msgid "Skip every second frame"
 msgstr "每两帧跳过一帧"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:532
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:547
 #: ../plugins/peopsxgl/gpucfg/interface.c:640
 msgid "Old frame skipping"
 msgstr "旧的跳帧方式"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:548
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:563
 msgid "Expand screen width"
 msgstr "扩展屏幕宽度"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:564
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:579
 msgid "Ignore brightness color"
 msgstr "忽略亮色"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:580
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:595
 msgid "Disable coordinate check"
 msgstr "禁用坐标检查"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:596
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:613
 msgid "Chrono Cross"
 msgstr "Chrono Cross"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:609
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:626
 msgid "Capcom fighting games"
 msgstr "Capcom 格斗游戏"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:624
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:641
 msgid "Black screens in Lunar"
 msgstr "Lunar 中黑屏"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:639
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:656
 msgid "Compatibility mode"
 msgstr "兼容模式"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:664
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:428
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:681
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:267
 msgid "<b>Compatibility</b>"
 msgstr "<b>兼容性</b>"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:701
-msgid "About X11 Video Plugin"
-msgstr "关于 X11 视频插件"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:714
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:516
-msgid "Coded by: Pete Bernert and the P.E.Op.S. team"
-msgstr "编写: Pete Bernert 以及 P.E.Op.S. 开发组"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:725
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:541
-msgid "Homepage: http://home.t-online.de/home/PeteBernert/"
-msgstr "主页: http://home.t-online.de/home/PeteBernert/"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:737
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:566
-msgid "EMail: BlackDove@addcom.de"
-msgstr "EMail: BlackDove@addcom.de"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:750
-msgid "Version: 1.15"
-msgstr "版本: 1.15"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:762
-msgid "Release date: 2003"
-msgstr "发布日期: 2003"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:774
-msgid "<b>PCSX-df Video Plugin Adaption</b>"
-msgstr "<b>PCSX-df 视频插件</b>"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:787
-msgid "XVideo Support: Stephen Chao"
-msgstr "XVideo 支持: Stephen Chao"
 
 #: ../data/pcsx.glade2:9
 msgid "PCSX"
@@ -1941,10 +1928,6 @@ msgstr "<b>BIOS</b>"
 msgid "Configure CPU"
 msgstr "配置 CPU"
 
-#: ../data/pcsx.glade2:1233
-msgid "Enable Debugger"
-msgstr "启用调试器"
-
 #: ../data/pcsx.glade2:1251
 msgid "SPU IRQ Always Enabled"
 msgstr "SPU IRQ 总是启用"
@@ -2060,9 +2043,23 @@ msgid ""
 "Public License along with this program; if not, write to\n"
 "the Free Software Foundation, Inc."
 msgstr ""
+"This program is free software; you can redistribute it\n"
+"and/or modify it under the terms of the GNU General\n"
+"Public License as published by the Free Software\n"
+"Foundation; either version 2 of the License, or (at your\n"
+"option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be\n"
+"useful, but WITHOUT ANY WARRANTY; without even\n"
+"the implied warranty of MERCHANTABILITY or\n"
+"FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General\n"
+"Public License along with this program; if not, write to\n"
+"the Free Software Foundation, Inc."
 
 #: ../data/pcsx.glade2:2310
-#: ../plugins/dfinput/dfinput.glade2:212
 msgid "translator-credits"
 msgstr "Wei Mingzhi <whistler@openoffice.org>"
 
@@ -2146,23 +2143,23 @@ msgstr ""
 "P.E.Op.S OSS 驱动程序 V1.7\n"
 "编写: Pete Bernert 以及 P.E.Op.S. 开发组\n"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:9
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:8
 msgid "Configure Sound"
 msgstr "配置音频"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:62
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:41
 msgid "Volume:"
 msgstr "音量:"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:90
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:53
 msgid "Interpolation:"
 msgstr "插值:"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:118
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:67
 msgid "Reverb:"
 msgstr "回响:"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:146
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:80
 msgid ""
 "Low\n"
 "Medium\n"
@@ -2174,7 +2171,7 @@ msgstr ""
 "高\n"
 "最高"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:165
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:94
 msgid ""
 "Off\n"
 "Simple\n"
@@ -2184,7 +2181,7 @@ msgstr ""
 "简易\n"
 "Playstation"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:184
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:110
 msgid ""
 "None\n"
 "Simple\n"
@@ -2196,69 +2193,45 @@ msgstr ""
 "高斯\n"
 "立方"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:208
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:131
 msgid "<b>General</b>"
 msgstr "<b>一般</b>"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:264
-msgid "Enable or disable XA music."
-msgstr "启用或禁用 XA 音乐。"
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:266
-msgid "Enable XA"
-msgstr "启用 XA"
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:284
-msgid "Choose this if XA music is played too quickly."
-msgstr "如 XA 音乐播放得太快，请选择此项。"
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:286
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:162
 msgid "Adjust XA speed"
 msgstr "调整 XA 速度"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:308
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:166
+msgid "Choose this if XA music is played too quickly."
+msgstr "如 XA 音乐播放得太快，请选择此项。"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:183
 msgid "<b>XA Music</b>"
 msgstr "<b>XA 音乐</b>"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:364
-msgid "Use the asynchronous SPU interface."
-msgstr "使用异步 SPU 接口。"
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:366
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:214
 msgid "High compatibility mode"
 msgstr "高兼容性模式"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:384
-msgid "Wait for CPU; only useful for some games."
-msgstr "等待 CPU; 仅在部分游戏中有用处。"
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:218
+msgid "Use the asynchronous SPU interface."
+msgstr "使用异步 SPU 接口。"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:386
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:230
 msgid "SPU IRQ Wait"
 msgstr "SPU IRQ 等待"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:404
-msgid "Play only one channel for a performance boost."
-msgstr "仅播放一个声道以提升性能。"
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:234
+msgid "Wait for CPU; only useful for some games."
+msgstr "等待 CPU; 仅在部分游戏中有用处。"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:406
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:246
 msgid "Single channel sound"
 msgstr "单声道"
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:486
-msgid "About Sound Plugin"
-msgstr "关于音频插件"
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:592
-msgid "Version: 1.6"
-msgstr "版本: 1.6"
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:617
-msgid "Release date: 05.04.2003"
-msgstr "发布日期: 05.04.2003"
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:642
-msgid "<b>PCSX-df Sound Plugin Adaption</b>"
-msgstr "<b>PCSX-df 音频插件</b>"
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:250
+msgid "Play only one channel for a performance boost."
+msgstr "仅播放一个声道以提升性能。"
 
 #: ../plugins/dfcdrom/cdr.c:58
 msgid "CD-ROM Drive Reader"
@@ -2662,50 +2635,277 @@ msgstr "主页: http://www.pbernert.com"
 msgid "Version: 1.78"
 msgstr "版本: 1.78"
 
-#: ../plugins/dfinput/pad.c:59
+#: ../plugins/dfinput/cfg-gtk2.c:48
+msgid "D-Pad Up"
+msgstr "方向键上"
+
+#: ../plugins/dfinput/cfg-gtk2.c:49
+msgid "D-Pad Down"
+msgstr "方向键下"
+
+#: ../plugins/dfinput/cfg-gtk2.c:50
+msgid "D-Pad Left"
+msgstr "方向键左"
+
+#: ../plugins/dfinput/cfg-gtk2.c:51
+msgid "D-Pad Right"
+msgstr "方向键右"
+
+#: ../plugins/dfinput/cfg-gtk2.c:52
+msgid "Cross"
+msgstr "叉号键"
+
+#: ../plugins/dfinput/cfg-gtk2.c:53
+msgid "Circle"
+msgstr "圆圈键"
+
+#: ../plugins/dfinput/cfg-gtk2.c:54
+msgid "Square"
+msgstr "方块键"
+
+#: ../plugins/dfinput/cfg-gtk2.c:55
+msgid "Triangle"
+msgstr "三角键"
+
+#: ../plugins/dfinput/cfg-gtk2.c:56
+msgid "L1"
+msgstr "L1"
+
+#: ../plugins/dfinput/cfg-gtk2.c:57
+msgid "R1"
+msgstr "1R1"
+
+#: ../plugins/dfinput/cfg-gtk2.c:58
+msgid "L2"
+msgstr "L2"
+
+#: ../plugins/dfinput/cfg-gtk2.c:59
+msgid "R2"
+msgstr "R2"
+
+#: ../plugins/dfinput/cfg-gtk2.c:60
+msgid "L3"
+msgstr "L3"
+
+#: ../plugins/dfinput/cfg-gtk2.c:61
+msgid "R3"
+msgstr "R3"
+
+#: ../plugins/dfinput/cfg-gtk2.c:62
+msgid "Select"
+msgstr "选择键"
+
+#: ../plugins/dfinput/cfg-gtk2.c:63
+msgid "Start"
+msgstr "开始键"
+
+#: ../plugins/dfinput/cfg-gtk2.c:67
+msgid "L-Stick X"
+msgstr "左旋钮 X"
+
+#: ../plugins/dfinput/cfg-gtk2.c:68
+msgid "L-Stick Y"
+msgstr "左旋钮 Y"
+
+#: ../plugins/dfinput/cfg-gtk2.c:69
+msgid "R-Stick X"
+msgstr "右旋钮 X"
+
+#: ../plugins/dfinput/cfg-gtk2.c:70
+msgid "R-Stick Y"
+msgstr "右旋钮 Y"
+
+#: ../plugins/dfinput/cfg-gtk2.c:98
+msgid "Centered"
+msgstr "居中"
+
+#: ../plugins/dfinput/cfg-gtk2.c:98
+msgid "Up"
+msgstr "上"
+
+#: ../plugins/dfinput/cfg-gtk2.c:98
+msgid "Right"
+msgstr "右方向键"
+
+#: ../plugins/dfinput/cfg-gtk2.c:98
+msgid "Rightup"
+msgstr "右上"
+
+#: ../plugins/dfinput/cfg-gtk2.c:99
+msgid "Down"
+msgstr "下"
+
+#: ../plugins/dfinput/cfg-gtk2.c:99
+msgid "Rightdown"
+msgstr "右下"
+
+#: ../plugins/dfinput/cfg-gtk2.c:99
+msgid "Left"
+msgstr "左"
+
+#: ../plugins/dfinput/cfg-gtk2.c:99
+msgid "Leftup"
+msgstr "左上"
+
+#: ../plugins/dfinput/cfg-gtk2.c:100
+msgid "Leftdown"
+msgstr "左下"
+
+#: ../plugins/dfinput/cfg-gtk2.c:104
+#, c-format
+msgid "Joystick: Button %d"
+msgstr "手柄: 按钮 %d"
+
+#: ../plugins/dfinput/cfg-gtk2.c:108
+#, c-format
+msgid "Joystick: Axis %d%c"
+msgstr "手柄: 轴 %d%c"
+
+#: ../plugins/dfinput/cfg-gtk2.c:113
+#, c-format
+msgid "Joystick: Hat %d %s"
+msgstr "Joystick: 操纵杆 %d %s"
+
+#: ../plugins/dfinput/cfg-gtk2.c:128
+msgid "Keyboard:"
+msgstr "键盘:"
+
+#: ../plugins/dfinput/cfg-gtk2.c:132
+#: ../plugins/dfinput/cfg-gtk2.c:140
+#, c-format
+msgid "(Not Set)"
+msgstr "(未设定)"
+
+#: ../plugins/dfinput/cfg-gtk2.c:142
+#, c-format
+msgid "Joystick: Axis %d%s"
+msgstr "手柄: 轴 %d%s"
+
+#: ../plugins/dfinput/cfg-gtk2.c:142
+msgid " (Reversed)"
+msgstr " (反向)"
+
+#: ../plugins/dfinput/cfg-gtk2.c:378
+msgid "Device not set"
+msgstr "设备未设置"
+
+#: ../plugins/dfinput/cfg-gtk2.c:378
+msgid "Please select a valid Joystick Device"
+msgstr "请选择一个合法的手柄设备"
+
+#: ../plugins/dfinput/cfg-gtk2.c:384
+msgid "Device open error"
+msgstr "设备打开错误"
+
+#: ../plugins/dfinput/cfg-gtk2.c:384
+msgid "Unable to open Joystick Device"
+msgstr "无法打开手柄设备"
+
+#: ../plugins/dfinput/cfg-gtk2.c:475
+msgid "None"
+msgstr "无"
+
+#: ../plugins/dfinput/cfg-gtk2.c:517
+msgid "Gamepad/Keyboard Input Configuration"
+msgstr "手柄/键盘输入配置"
+
+#: ../plugins/dfinput/cfg-gtk2.c:523
+#: ../plugins/dfinput/cfg-gtk2.c:543
+msgid "Key"
+msgstr "按钮"
+
+#: ../plugins/dfinput/cfg-gtk2.c:529
+#: ../plugins/dfinput/cfg-gtk2.c:549
+msgid "Button"
+msgstr "按键"
+
+#: ../plugins/dfinput/pad.c:23
+msgid "Gamepad/Keyboard Input (ePSXe)"
+msgstr "手柄/键盘输入 (ePSXe)"
+
+#: ../plugins/dfinput/pad.c:25
 msgid "Gamepad/Keyboard Input"
 msgstr "手柄/键盘输入"
 
-#: ../plugins/dfinput/pad.c:61
-msgid "Keyboard Input"
-msgstr "键盘输入"
+#: ../plugins/dfinput/dfinput.glade2:34
+#: ../plugins/dfinput/dfinput.glade2:231
+msgid "Device:"
+msgstr "设备:"
 
-#: ../plugins/dfinput/dfinput.glade2:7
-msgid "Configure Gamepad/Keyboard"
-msgstr "配置手柄/键盘"
+#: ../plugins/dfinput/dfinput.glade2:65
+#: ../plugins/dfinput/dfinput.glade2:262
+msgid "Type:"
+msgstr "类型:"
 
-#: ../plugins/dfinput/dfinput.glade2:25
-msgid "Pad number:"
-msgstr "手柄编号:"
+#: ../plugins/dfinput/dfinput.glade2:77
+#: ../plugins/dfinput/dfinput.glade2:274
+msgid ""
+"Digital Pad\n"
+"Analog Pad"
+msgstr ""
+"数字手柄\n"
+"模拟手柄"
 
-#: ../plugins/dfinput/dfinput.glade2:36
-msgid "1"
-msgstr "1"
+#: ../plugins/dfinput/dfinput.glade2:148
+#: ../plugins/dfinput/dfinput.glade2:345
+msgid "Change"
+msgstr "更改"
 
-#: ../plugins/dfinput/dfinput.glade2:51
-msgid "2"
-msgstr "2"
-
-#: ../plugins/dfinput/dfinput.glade2:73
-msgid "Device file:"
-msgstr "设备文件:"
-
-#: ../plugins/dfinput/dfinput.glade2:104
-msgid "Multi-threaded"
-msgstr "多线程"
-
-#: ../plugins/dfinput/dfinput.glade2:118
-msgid "Analog"
-msgstr "模拟"
-
-#: ../plugins/dfinput/dfinput.glade2:155
-msgid "<b>Button Configuration</b>"
-msgstr "<b>按键配置</b>"
+#: ../plugins/dfinput/dfinput.glade2:184
+#: ../plugins/dfinput/dfinput.glade2:381
+msgid "Reset"
+msgstr "重置"
 
 #: ../plugins/dfinput/dfinput.glade2:209
-msgid "Based on PadJoy by Erich Kitzmüller (ammoq@ammoq.com)"
-msgstr "基于由 Erich Kitzmüller (ammoq@ammoq.com) 编写的 PadJoy"
+msgid "Controller 1"
+msgstr "控制器 1"
 
+#: ../plugins/dfinput/dfinput.glade2:411
+msgid "Controller 2"
+msgstr "控制器 2"
+
+#: ../plugins/dfinput/dfinput.glade2:426
+msgid "Multi-Threaded (Recommended)"
+msgstr "多线程 (推荐)"
+
+#~ msgid "Configure Gamepad/Keyboard"
+#~ msgstr "配置手柄/键盘"
+#~ msgid "Pad number:"
+#~ msgstr "手柄编号:"
+#~ msgid "Analog"
+#~ msgstr "模拟"
+#~ msgid "<b>Button Configuration</b>"
+#~ msgstr "<b>按键配置</b>"
+#~ msgid "Based on PadJoy by Erich Kitzmüller (ammoq@ammoq.com)"
+#~ msgstr "基于由 Erich Kitzmüller (ammoq@ammoq.com) 编写的 PadJoy"
+#~ msgid "About X11 Video Plugin"
+#~ msgstr "关于 X11 视频插件"
+#~ msgid "Coded by: Pete Bernert and the P.E.Op.S. team"
+#~ msgstr "编写: Pete Bernert 以及 P.E.Op.S. 开发组"
+#~ msgid "Homepage: http://home.t-online.de/home/PeteBernert/"
+#~ msgstr "主页: http://home.t-online.de/home/PeteBernert/"
+#~ msgid "EMail: BlackDove@addcom.de"
+#~ msgstr "EMail: BlackDove@addcom.de"
+#~ msgid "Version: 1.15"
+#~ msgstr "版本: 1.15"
+#~ msgid "Release date: 2003"
+#~ msgstr "发布日期: 2003"
+#~ msgid "<b>PCSX-df Video Plugin Adaption</b>"
+#~ msgstr "<b>PCSX-df 视频插件</b>"
+#~ msgid "XVideo Support: Stephen Chao"
+#~ msgstr "XVideo 支持: Stephen Chao"
+#~ msgid "Enable or disable XA music."
+#~ msgstr "启用或禁用 XA 音乐。"
+#~ msgid "Enable XA"
+#~ msgstr "启用 XA"
+#~ msgid "About Sound Plugin"
+#~ msgstr "关于音频插件"
+#~ msgid "Version: 1.6"
+#~ msgstr "版本: 1.6"
+#~ msgid "Release date: 05.04.2003"
+#~ msgstr "发布日期: 05.04.2003"
+#~ msgid "<b>PCSX-df Sound Plugin Adaption</b>"
+#~ msgstr "<b>PCSX-df 音频插件</b>"
 #~ msgid "Controller _1..."
 #~ msgstr "控制器 _1..."
 #~ msgid "Controller _2..."

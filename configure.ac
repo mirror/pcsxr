@@ -25,6 +25,8 @@ PKG_CHECK_MODULES(GLIB2, glib-2.0, [], AC_MSG_ERROR([*** glib2 not found!]))
 PKG_CHECK_MODULES(GTK2, gtk+-2.0, [], AC_MSG_ERROR([*** libgtk2 not found!]))
 PKG_CHECK_MODULES(GLADE2, libglade-2.0, [], AC_MSG_ERROR([*** libglade2 not found!]))
 
+AM_PATH_SDL(1.2.0, :, AC_MSG_ERROR([*** SDL not found!]))
+
 AC_SUBST(GLIB2_CFLAGS)
 AC_SUBST(GLIB2_LIBS)
 AC_SUBST(GTK2_CFLAGS)

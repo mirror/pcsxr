@@ -1,3 +1,20 @@
+October 25, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfinput/cfg.c: Replaced dfinput with new SDL/Xkb-based input plugin.
+ * plugins/dfinput/analog.c: Likewise.
+ * plugins/dfinput/Makefile.in: Likewise.
+ * plugins/dfinput/cfg-gtk2.c: Likewise.
+ * plugins/dfinput/pad.c: Likewise.
+ * plugins/dfinput/sdljoy.c: Likewise.
+ * plugins/dfinput/xkb.c: Likewise.
+ * plugins/dfinput/dfinput.glade2: Likewise.
+ * plugins/dfinput/Makefile.am: Likewise.
+ * plugins/dfinput/pad.h: Likewise.
+ * plugins/dfinput/padjoy.h: Removed.
+ * configure.ac: Check for SDL on configure.
+ * debian/control: Added libsdl1.2-dev to Build-Depends.
+ * po/pt_BR.po, po/zh_TW.po, po/zh_CN.po, po/pcsx.pot: Updated.
+
 October 24, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * macosx/Pcsx.xcodeproj/project.pbxproj: Fixed Mac OS X build.

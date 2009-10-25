@@ -56,17 +56,20 @@ am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
 libLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libDFInput_la_LIBADD =
-am_libDFInput_la_OBJECTS = pad.lo
+am_libDFInput_la_OBJECTS = cfg.lo pad.lo sdljoy.lo xkb.lo analog.lo
 libDFInput_la_OBJECTS = $(am_libDFInput_la_OBJECTS)
 libDFInput_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(libDFInput_la_LDFLAGS) $(LDFLAGS) -o $@
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_cfgDFInput_OBJECTS = cfg.$(OBJEXT)
+am_cfgDFInput_OBJECTS = cfg-gtk2.$(OBJEXT)
 cfgDFInput_OBJECTS = $(am_cfgDFInput_OBJECTS)
 am__DEPENDENCIES_1 =
 cfgDFInput_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+cfgDFInput_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+	$(cfgDFInput_LDFLAGS) $(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/include
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -167,6 +170,9 @@ PEOPSXGL = @PEOPSXGL@
 PKG_CONFIG = @PKG_CONFIG@
 POSUB = @POSUB@
 RANLIB = @RANLIB@
+SDL_CFLAGS = @SDL_CFLAGS@
+SDL_CONFIG = @SDL_CONFIG@
+SDL_LIBS = @SDL_LIBS@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
@@ -233,18 +239,19 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 lib_LTLIBRARIES = libDFInput.la
-libDFInput_la_SOURCES = pad.c padjoy.h
+libDFInput_la_SOURCES = cfg.c pad.c pad.h sdljoy.c xkb.c analog.c
 libDFInput_la_LDFLAGS = -module -avoid-version -lpthread -lX11 \
-	-L/usr/X11R6/lib64 -L/usr/X11R6/lib
+	`sdl-config --libs` -L/usr/X11R6/lib64 -L/usr/X11R6/lib
 
 INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 	-DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
 	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) -I/usr/X11R6/include \
-	-I../../include
+	-I../../include -I../../libpcsxcore `sdl-config --cflags`
 
-cfgDFInput_SOURCES = cfg.c padjoy.h
+cfgDFInput_SOURCES = cfg-gtk2.c pad.h
 cfgDFInput_LDADD = $(GTK2_LIBS) $(GLADE2_LIBS)
+cfgDFInput_LDFLAGS = `sdl-config --libs`
 glade_DATA = dfinput.glade2
 gladedir = $(datadir)/psemu/
 EXTRA_DIST = $(glade_DATA)
@@ -340,7 +347,7 @@ clean-binPROGRAMS:
 	done
 cfgDFInput$(EXEEXT): $(cfgDFInput_OBJECTS) $(cfgDFInput_DEPENDENCIES) 
 	@rm -f cfgDFInput$(EXEEXT)
-	$(LINK) $(cfgDFInput_OBJECTS) $(cfgDFInput_LDADD) $(LIBS)
+	$(cfgDFInput_LINK) $(cfgDFInput_OBJECTS) $(cfgDFInput_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -348,8 +355,12 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cfg.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/analog.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cfg-gtk2.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cfg.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pad.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sdljoy.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xkb.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
