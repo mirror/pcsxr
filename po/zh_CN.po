@@ -2673,7 +2673,7 @@ msgstr "L1"
 
 #: ../plugins/dfinput/cfg-gtk2.c:57
 msgid "R1"
-msgstr "1R1"
+msgstr "R1"
 
 #: ../plugins/dfinput/cfg-gtk2.c:58
 msgid "L2"
