@@ -1,3 +1,8 @@
+October 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfinput/cfg.c: Fixed a bug which caused the settings for analog
+   pad not correctly read from the config file.
+
 October 25, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfinput/cfg.c: Replaced dfinput with new SDL/Xkb-based input plugin.
