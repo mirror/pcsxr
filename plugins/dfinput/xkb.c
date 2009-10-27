@@ -24,14 +24,14 @@ void InitKeyboard() {
 	wmprotocols = XInternAtom(g.Disp, "WM_PROTOCOLS", 0);
 	wmdelwindow = XInternAtom(g.Disp, "WM_DELETE_WINDOW", 0);
 
-	XAutoRepeatOff(g.Disp);
+	XkbSetDetectableAutoRepeat(g.Disp, 1, NULL);
 
 	g.PadState[0].KeyStatus = 0xFFFF;
 	g.PadState[1].KeyStatus = 0xFFFF;
 }
 
 void DestroyKeyboard() {
-	XAutoRepeatOn(g.Disp);
+	XkbSetDetectableAutoRepeat(g.Disp, 0, NULL);
 }
 
 void CheckKeyboard() {
@@ -83,15 +83,6 @@ void CheckKeyboard() {
 					return;
 				}
 				break;
-
-			case FocusOut:
-				XAutoRepeatOn(g.Disp);
-				break;
-
-			case FocusIn:
-				XAutoRepeatOff(g.Disp);
-				break;
 		}
 	}
 }
-

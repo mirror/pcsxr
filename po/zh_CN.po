@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-25 21:49+0800\n"
-"PO-Revision-Date: 2009-10-25 21:55+0700\n"
+"PO-Revision-Date: 2009-10-27 17:17+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -2701,19 +2701,19 @@ msgstr "开始键"
 
 #: ../plugins/dfinput/cfg-gtk2.c:67
 msgid "L-Stick X"
-msgstr "左旋钮 X"
+msgstr "左摇杆 X"
 
 #: ../plugins/dfinput/cfg-gtk2.c:68
 msgid "L-Stick Y"
-msgstr "左旋钮 Y"
+msgstr "左摇杆 Y"
 
 #: ../plugins/dfinput/cfg-gtk2.c:69
 msgid "R-Stick X"
-msgstr "右旋钮 X"
+msgstr "右摇杆 X"
 
 #: ../plugins/dfinput/cfg-gtk2.c:70
 msgid "R-Stick Y"
-msgstr "右旋钮 Y"
+msgstr "右摇杆 Y"
 
 #: ../plugins/dfinput/cfg-gtk2.c:98
 msgid "Centered"
