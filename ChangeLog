@@ -3,6 +3,8 @@ October 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * plugins/dfinput/xkb.c: Use XkbSetDetectableAutoRepeat() instead of
    disabling autorepeat globally.
  * po/zh_CN.po: Updated.
+ * plugins/peopsxgl/gpu.c: Allow clicking close button to return to the main
+   UI instead of bailing out.
 
 October 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

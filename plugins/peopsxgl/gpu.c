@@ -575,7 +575,7 @@ void sysdep_create_display(void)                       // create display
  int myscreen;char gammastr[14];
  Screen * screen;XEvent event;
  XSizeHints hints;XWMHints wm_hints;
- MotifWmHints mwmhints;Atom mwmatom;
+ MotifWmHints mwmhints;Atom mwmatom;Atom delwindow;
  char *glxfx;
 
  glxfx=getenv("MESA_GLX_FX");                          // 3dfx mesa fullscreen flag
@@ -735,6 +735,9 @@ void sysdep_create_display(void)                       // create display
    osd_close_display();                                // -> bye
    return;
   }
+
+ delwindow = XInternAtom(display,"WM_DELETE_WINDOW",0);
+ XSetWMProtocols(display, window, &delwindow, 1);
 
  hints.flags=PMinSize|PMaxSize;                        // hints
  if(fx) hints.flags|=USPosition|USSize;
