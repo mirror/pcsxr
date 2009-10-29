@@ -213,7 +213,11 @@ int main(int argc, char *argv[])
 	g_signal_connect_data(GTK_OBJECT(widget), "delete_event",
 			GTK_SIGNAL_FUNC(on_config_clicked), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_close");
+	widget = glade_xml_get_widget(xml, "btn_cancel");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(on_config_clicked), NULL, NULL, G_CONNECT_AFTER);
+
+	widget = glade_xml_get_widget(xml, "btn_ok");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 			GTK_SIGNAL_FUNC(SaveConfig), xml, NULL, G_CONNECT_AFTER);
 

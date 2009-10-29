@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <glade-interface>
-  <!-- interface-requires gtk+ 2.16 -->
-  <!-- interface-naming-policy toplevel-contextual -->
+  <!-- interface-requires gtk+ 2.12 -->
+  <!-- interface-naming-policy project-wide -->
   <widget class="GtkWindow" id="MainWindow">
     <property name="width_request">350</property>
     <property name="height_request">195</property>
@@ -34,7 +34,7 @@
                         <signal name="activate" handler="OnFile_RunCd"/>
                         <accelerator key="O" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image1">
+                          <widget class="GtkImage" id="image2">
                             <property name="visible">True</property>
                             <property name="xalign">0.49000000953674316</property>
                             <property name="stock">gtk-cdrom</property>
@@ -52,7 +52,7 @@
                         <signal name="activate" handler="OnFile_RunImage"/>
                         <accelerator key="I" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image2">
+                          <widget class="GtkImage" id="image3">
                             <property name="visible">True</property>
                             <property name="stock">gtk-open</property>
                             <property name="icon-size">1</property>
@@ -69,7 +69,7 @@
                         <signal name="activate" handler="OnFile_RunBios"/>
                         <accelerator key="B" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image3">
+                          <widget class="GtkImage" id="image4">
                             <property name="visible">True</property>
                             <property name="stock">gtk-convert</property>
                             <property name="icon-size">1</property>
@@ -86,7 +86,7 @@
                         <signal name="activate" handler="OnFile_RunExe"/>
                         <accelerator key="E" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image4">
+                          <widget class="GtkImage" id="image5">
                             <property name="visible">True</property>
                             <property name="stock">gtk-execute</property>
                             <property name="icon-size">1</property>
@@ -108,7 +108,7 @@
                         <signal name="activate" handler="OnFile_Exit"/>
                         <accelerator key="Q" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <child internal-child="image">
-                          <widget class="GtkImage" id="image5">
+                          <widget class="GtkImage" id="image25">
                             <property name="visible">True</property>
                             <property name="stock">gtk-quit</property>
                             <property name="icon-size">1</property>
@@ -1174,8 +1174,23 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
+              <widget class="GtkButton" id="btn_ConfCancel">
+                <property name="label">gtk-cancel</property>
+                <property name="response_id">-6</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
               <widget class="GtkButton" id="btn_ConfOk">
-                <property name="label">gtk-close</property>
+                <property name="label">gtk-ok</property>
                 <property name="response_id">-5</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -1187,7 +1202,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">0</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </widget>
@@ -1477,9 +1492,24 @@ PAL</property>
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
+              <widget class="GtkButton" id="cancelbutton1">
+                <property name="label">gtk-cancel</property>
+                <property name="response_id">-6</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
               <widget class="GtkButton" id="okbutton1">
-                <property name="label">gtk-close</property>
-                <property name="response_id">-7</property>
+                <property name="label">gtk-ok</property>
+                <property name="response_id">-5</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
@@ -1489,7 +1519,7 @@ PAL</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">0</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </widget>
@@ -1615,9 +1645,24 @@ PAL</property>
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
+              <widget class="GtkButton" id="cancelbutton2">
+                <property name="label">gtk-cancel</property>
+                <property name="response_id">-6</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
               <widget class="GtkButton" id="okbutton2">
-                <property name="label">gtk-close</property>
-                <property name="response_id">-7</property>
+                <property name="label">gtk-ok</property>
+                <property name="response_id">-5</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
@@ -1628,7 +1673,7 @@ PAL</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">0</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </widget>
@@ -2239,9 +2284,24 @@ PAL</property>
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <widget class="GtkButton" id="closebutton1">
-                <property name="label">gtk-close</property>
-                <property name="response_id">-7</property>
+              <widget class="GtkButton" id="cancelbutton3">
+                <property name="label">gtk-cancel</property>
+                <property name="response_id">-6</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkButton" id="okbutton3">
+                <property name="label">gtk-ok</property>
+                <property name="response_id">-5</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
@@ -2251,7 +2311,7 @@ PAL</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">0</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </widget>
@@ -2714,7 +2774,7 @@ Hexadecimal</property>
                                   <widget class="GtkHBox" id="hbox7">
                                     <property name="visible">True</property>
                                     <child>
-                                      <widget class="GtkImage" id="image7">
+                                      <widget class="GtkImage" id="image1">
                                         <property name="visible">True</property>
                                         <property name="stock">gtk-ok</property>
                                         <property name="icon-size">1</property>
@@ -2750,7 +2810,7 @@ Hexadecimal</property>
                                   <widget class="GtkHBox" id="hbox8">
                                     <property name="visible">True</property>
                                     <child>
-                                      <widget class="GtkImage" id="image8">
+                                      <widget class="GtkImage" id="image26">
                                         <property name="visible">True</property>
                                         <property name="stock">gtk-edit</property>
                                         <property name="icon-size">1</property>
@@ -2786,7 +2846,7 @@ Hexadecimal</property>
                                   <widget class="GtkHBox" id="hbox9">
                                     <property name="visible">True</property>
                                     <child>
-                                      <widget class="GtkImage" id="image9">
+                                      <widget class="GtkImage" id="image27">
                                         <property name="visible">True</property>
                                         <property name="stock">gtk-paste</property>
                                         <property name="icon-size">1</property>
@@ -2854,7 +2914,7 @@ Hexadecimal</property>
                               <widget class="GtkHBox" id="hbox5">
                                 <property name="visible">True</property>
                                 <child>
-                                  <widget class="GtkImage" id="image5">
+                                  <widget class="GtkImage" id="image28">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-ok</property>
                                     <property name="icon-size">1</property>
@@ -2890,7 +2950,7 @@ Hexadecimal</property>
                               <widget class="GtkHBox" id="hbox6">
                                 <property name="visible">True</property>
                                 <child>
-                                  <widget class="GtkImage" id="image6">
+                                  <widget class="GtkImage" id="image29">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-undo</property>
                                     <property name="icon-size">1</property>

@@ -463,8 +463,8 @@ Analog Pad</property>
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <widget class="GtkButton" id="btnclose">
-                <property name="label">gtk-close</property>
+              <widget class="GtkButton" id="btncancel">
+                <property name="label">gtk-cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -474,6 +474,20 @@ Analog Pad</property>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
                 <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkButton" id="btnok">
+                <property name="label">gtk-ok</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </widget>

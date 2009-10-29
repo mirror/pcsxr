@@ -1,3 +1,15 @@
+October 29, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * data/pcsx.glade2: Replaced the "Close" button on many dialog boxes to
+   "OK/Cancel" buttons.
+ * gui/Gtk2Gui.c: Likewise.
+ * plugins/dfsound/spucfg-0.1df/dfsound.glade2: Likewise.
+ * plugins/dfsound/spucfg-0.1df/main.c: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Likewise.
+ * plugins/dfinput/dfinput.glade2: Likewise.
+ * plugins/dfinput/cfg-gtk2.c: Likewise.
+
 October 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfinput/xkb.c: Use XkbSetDetectableAutoRepeat() instead of

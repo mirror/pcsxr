@@ -1194,7 +1194,7 @@ void UpdateMcdDlg(GtkWidget *widget) {
 void OnMcd_Clicked (GtkDialog *dialog, gint arg1, gpointer user_data) {
 	GladeXML *xml = user_data;
 
-	if (arg1 == GTK_RESPONSE_CLOSE) {
+	if (arg1 == GTK_RESPONSE_OK) {
 		gchar *tmp;
 		GtkWidget *widget;
 
@@ -1731,7 +1731,7 @@ static void OnCpu_CpuClicked (GtkWidget *widget, gpointer user_data) {
 }
 
 void OnCpu_Clicked (GtkDialog *dialog, gint arg1, gpointer user_data) {
-	if (arg1 == GTK_RESPONSE_CLOSE) {
+	if (arg1 == GTK_RESPONSE_OK) {
 		GtkWidget *widget;
 		GladeXML *xml = user_data;
 		int tmp;
