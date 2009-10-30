@@ -5,13 +5,13 @@ lib_LTLIBRARIES = libDFInput.la
 
 libDFInput_la_SOURCES = cfg.c pad.c pad.h sdljoy.c xkb.c analog.c
 libDFInput_la_LDFLAGS = -module -avoid-version -lpthread -lX11 \
-	`sdl-config --libs` -L/usr/X11R6/lib64 -L/usr/X11R6/lib
+	`$(SDL_CONFIG) --libs` -L/usr/X11R6/lib64 -L/usr/X11R6/lib
 
 INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 	-DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
 	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) -I/usr/X11R6/include \
-	-I../../include -I../../libpcsxcore `sdl-config --cflags`
+	-I../../include -I../../libpcsxcore `$(SDL_CONFIG) --cflags`
 
 bin_PROGRAMS = cfgDFInput
 cfgDFInput_SOURCES = cfg-gtk2.c pad.h
