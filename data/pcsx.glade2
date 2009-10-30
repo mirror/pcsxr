@@ -603,6 +603,7 @@
   <widget class="GtkDialog" id="ConfDlg">
     <property name="visible">True</property>
     <property name="title" translatable="yes">Configure PCSX</property>
+    <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
@@ -1218,6 +1219,7 @@
   <widget class="GtkDialog" id="CpuDlg">
     <property name="visible">True</property>
     <property name="title" translatable="yes">Configure CPU</property>
+    <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
@@ -1535,6 +1537,7 @@ PAL</property>
   <widget class="GtkDialog" id="NetDlg">
     <property name="visible">True</property>
     <property name="title" translatable="yes">Configure NetPlay</property>
+    <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="type_hint">dialog</property>
     <signal name="destroy" handler="OnNet_Cancel"/>
@@ -1689,6 +1692,7 @@ PAL</property>
   <widget class="GtkDialog" id="McdsDlg">
     <property name="visible">True</property>
     <property name="title" translatable="yes">Configure Memory Cards</property>
+    <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="default_width">688</property>
     <property name="default_height">400</property>
@@ -1720,6 +1724,8 @@ PAL</property>
                         <property name="shadow_type">in</property>
                         <child>
                           <widget class="GtkTreeView" id="GtkCList_McdList1">
+                            <property name="width_request">265</property>
+                            <property name="height_request">250</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                           </widget>
@@ -2116,6 +2122,8 @@ PAL</property>
                         <property name="shadow_type">in</property>
                         <child>
                           <widget class="GtkTreeView" id="GtkCList_McdList2">
+                            <property name="width_request">265</property>
+                            <property name="height_request">250</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                           </widget>
@@ -2326,6 +2334,7 @@ PAL</property>
   </widget>
   <widget class="GtkAboutDialog" id="AboutDlg">
     <property name="visible">True</property>
+    <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center</property>
     <property name="destroy_with_parent">True</property>
@@ -2390,6 +2399,7 @@ Romain Lafourcade</property>
     <property name="visible">True</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Edit Cheat Codes</property>
+    <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center</property>
     <property name="type_hint">dialog</property>
@@ -2560,6 +2570,7 @@ Romain Lafourcade</property>
     <property name="visible">True</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Cheat Search</property>
+    <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center</property>
     <property name="type_hint">dialog</property>
