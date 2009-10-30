@@ -108,22 +108,22 @@ typedef struct tagConfig {
 } CONFIG;
 
 typedef struct tagPadState {
-	SDL_Joystick	*JoyDev;
-	uint8_t			PadMode;
-	uint8_t			PadID;
-	uint16_t		KeyStatus;
-	uint16_t		JoyKeyStatus;
-	uint8_t			AnalogStatus[ANALOG_TOTAL][2]; // 0-255 where 128 is center position
+	SDL_Joystick		*JoyDev;
+	uint8_t				PadMode;
+	uint8_t				PadID;
+	volatile uint16_t	KeyStatus;
+	volatile uint16_t	JoyKeyStatus;
+	volatile uint8_t	AnalogStatus[ANALOG_TOTAL][2]; // 0-255 where 128 is center position
 } PADSTATE;
 
 typedef struct tagGlobalData {
-	CONFIG			cfg;
+	CONFIG				cfg;
 
-	uint8_t			Opened;
-	Display			*Disp;
+	uint8_t				Opened;
+	Display				*Disp;
 
-	PADSTATE		PadState[2];
-	long			KeyLeftOver;
+	PADSTATE			PadState[2];
+	volatile long		KeyLeftOver;
 } GLOBALDATA;
 
 extern GLOBALDATA		g;

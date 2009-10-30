@@ -3,6 +3,7 @@ October 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * data/pcsx.glade2: Do not allow resizing for dialog boxes.
  * plugins/dfsound/spucfg-0.1df/dfsound.glade2: Likewise.
  * plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2: Likewise.
+ * plugins/dfinput/pad.h: Declare several variables as volatile.
 
 October 29, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
