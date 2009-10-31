@@ -2,6 +2,7 @@ October 31, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/cdriso.c: Declare thread controlling variable as volatile.
  * plugins/dfinput/pad.c: Likewise.
+ * macosx/plugins/PeopsSpu109: Added SPU plugin for Mac OS X.
 
 October 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
