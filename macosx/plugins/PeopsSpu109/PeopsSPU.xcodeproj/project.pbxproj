@@ -273,25 +273,6 @@
 			};
 			name = Development;
 		};
-		71155B280FDFA2EB00EC0BC5 /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = "";
-				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PREPROCESSOR_DEFINITIONS = _MACOSX;
-				HEADER_SEARCH_PATHS = src/;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				LIBRARY_STYLE = BUNDLE;
-				PRODUCT_NAME = PeopsSPU;
-				WRAPPER_EXTENSION = psxplugin;
-				ZERO_LINK = NO;
-			};
-			name = Beta;
-		};
 		71155B290FDFA2EB00EC0BC5 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -300,6 +281,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 2;
 				GCC_PREPROCESSOR_DEFINITIONS = _MACOSX;
 				HEADER_SEARCH_PATHS = src/;
 				INFOPLIST_FILE = Info.plist;
@@ -311,44 +293,17 @@
 			};
 			name = Deployment;
 		};
-		71155B2A0FDFA2EB00EC0BC5 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = "";
-				GCC_PREPROCESSOR_DEFINITIONS = _MACOSX;
-				HEADER_SEARCH_PATHS = src/;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				LIBRARY_STYLE = BUNDLE;
-				PRODUCT_NAME = PeopsSPU;
-				WRAPPER_EXTENSION = psxplugin;
-			};
-			name = Default;
-		};
 		71155B2C0FDFA2EB00EC0BC5 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Development;
 		};
-		71155B2D0FDFA2EB00EC0BC5 /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Beta;
-		};
 		71155B2E0FDFA2EB00EC0BC5 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Deployment;
-		};
-		71155B2F0FDFA2EB00EC0BC5 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Default;
 		};
 /* End XCBuildConfiguration section */
 
@@ -357,23 +312,19 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				71155B270FDFA2EB00EC0BC5 /* Development */,
-				71155B280FDFA2EB00EC0BC5 /* Beta */,
 				71155B290FDFA2EB00EC0BC5 /* Deployment */,
-				71155B2A0FDFA2EB00EC0BC5 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Development;
 		};
 		71155B2B0FDFA2EB00EC0BC5 /* Build configuration list for PBXProject "PeopsSPU" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				71155B2C0FDFA2EB00EC0BC5 /* Development */,
-				71155B2D0FDFA2EB00EC0BC5 /* Beta */,
 				71155B2E0FDFA2EB00EC0BC5 /* Deployment */,
-				71155B2F0FDFA2EB00EC0BC5 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Development;
 		};
 /* End XCConfigurationList section */
 	};
