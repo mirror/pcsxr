@@ -57,7 +57,7 @@ static HANDLE threadid;
 static pthread_t threadid;
 #endif
 static int initial_offset = 0;
-static char playing = 0;
+static volatile char playing = 0;
 static char cddaBigEndian = 0;
 
 char* CALLBACK CDR__getDriveLetter(void);

@@ -50,8 +50,8 @@ long PADshutdown(void) {
 	return PSE_PAD_ERR_SUCCESS;
 }
 
-static pthread_t	ThreadID;
-static uint8_t		TerminateThread = 0;
+static pthread_t			ThreadID;
+static volatile uint8_t		TerminateThread = 0;
 
 static void *JoyThread(void *param) {
 	while (!TerminateThread) {

@@ -1,3 +1,8 @@
+October 31, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdriso.c: Declare thread controlling variable as volatile.
+ * plugins/dfinput/pad.c: Likewise.
+
 October 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * data/pcsx.glade2: Do not allow resizing for dialog boxes.
