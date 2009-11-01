@@ -11,7 +11,6 @@
                 irqWaitBox = NetSfPeopsSPUPluginNamedSlider; 
                 monoSoundBox = NSControl; 
                 reverbValue = NSControl; 
-                xaEnableBox = NSControl; 
                 xaSpeedBox = NSControl; 
             }; 
             SUPERCLASS = NSWindowController; 
