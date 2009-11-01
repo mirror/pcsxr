@@ -5,6 +5,7 @@ November 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
    files for building existing dfsound sources for Mac OS X.
  * plugins/dfsound/stdafx.h: Made necessary changes for Mac OS X build.
  * plugins/dfsound/spu.c: Likewise.
+ * plugins/dfsound/xa.c: Likewise.
 
 October 31, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

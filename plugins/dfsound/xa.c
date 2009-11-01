@@ -65,8 +65,13 @@ INLINE void MixXA(void)
   {
    XALastVal=*XAPlay++;
    if(XAPlay==XAEnd) XAPlay=XAStart;
+#ifdef XA_HACK
+   SSumL[ns]+=(((short)(XALastVal&0xffff))       * iLeftXAVol)/32768;
+   SSumR[ns]+=(((short)((XALastVal>>16)&0xffff)) * iRightXAVol)/32768;
+#else
    SSumL[ns]+=(((short)(XALastVal&0xffff))       * iLeftXAVol)/32767;
    SSumR[ns]+=(((short)((XALastVal>>16)&0xffff)) * iRightXAVol)/32767;
+#endif
   }
 
  if(XAPlay==XAFeed && XARepeat)
@@ -74,8 +79,13 @@ INLINE void MixXA(void)
    XARepeat--;
    for(;ns<NSSIZE;ns++)
     {
+#ifdef XA_HACK
+     SSumL[ns]+=(((short)(XALastVal&0xffff))       * iLeftXAVol)/32768;
+     SSumR[ns]+=(((short)((XALastVal>>16)&0xffff)) * iRightXAVol)/32768;
+#else
      SSumL[ns]+=(((short)(XALastVal&0xffff))       * iLeftXAVol)/32767;
      SSumR[ns]+=(((short)((XALastVal>>16)&0xffff)) * iRightXAVol)/32767;
+#endif
     }
   }
 
@@ -112,7 +122,11 @@ INLINE void FeedXA(xa_decode_t *xap)
  xapGlobal = xap;                                      // store info for save states
  XARepeat  = 100;                                      // set up repeat
 
+#ifdef XA_HACK
+ iSize=((45500*xap->nsamples)/xap->freq);              // get size
+#else
  iSize=((44100*xap->nsamples)/xap->freq);              // get size
+#endif
  if(!iSize) return;                                    // none? bye
 
  if(XAFeed<XAPlay) iPlace=XAPlay-XAFeed;               // how much space in my buf?
