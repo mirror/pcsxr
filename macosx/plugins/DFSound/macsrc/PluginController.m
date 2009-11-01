@@ -66,16 +66,14 @@ void ReadConfig(void)
 			[[NSMutableDictionary alloc] initWithObjectsAndKeys:
 					[NSNumber numberWithBool:YES], @"High Compatibility Mode",
 					[NSNumber numberWithBool:YES], @"SPU IRQ Wait",
-					[NSNumber numberWithBool:YES], @"Enable XA",
 					[NSNumber numberWithBool:NO], @"XA Pitch",
-					//[NSNumber numberWithBool:YES], @"Decoded Buffer IRQ",
 					[NSNumber numberWithInt:0], @"Interpolation Quality",
 					[NSNumber numberWithInt:1], @"Reverb Quality",
 					nil], PrefsKey,
 			nil]];
-	
+
 	keyValues = [defaults dictionaryForKey:PrefsKey];
-	
+
 	iUseTimer = [[keyValues objectForKey:@"High Compatibility Mode"] boolValue] ? 2 : 0;
 	iSPUIRQWait = [[keyValues objectForKey:@"SPU IRQ Wait"] boolValue];
 	iDisStereo = [[keyValues objectForKey:@"Mono Sound Output"] boolValue];
