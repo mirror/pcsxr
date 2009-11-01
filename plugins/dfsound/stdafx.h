@@ -15,6 +15,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifndef _MACOSX
+#include "config.h"
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/ioctl.h>
@@ -36,6 +39,8 @@
 #define LOWORD(l)           ((unsigned short)(l)) 
 #define HIWORD(l)           ((unsigned short)(((unsigned long)(l) >> 16) & 0xFFFF)) 
 
+#ifndef INLINE
 #define INLINE inline
+#endif
 
 #include "psemuxa.h"

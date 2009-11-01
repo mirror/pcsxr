@@ -1,3 +1,11 @@
+November 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * macosx/plugins/PeopsSpu109: Removed.
+ * macosx/plugins/DFSound: Added project file and necessary platform-dependant
+   files for building existing dfsound sources for Mac OS X.
+ * plugins/dfsound/stdafx.h: Made necessary changes for Mac OS X build.
+ * plugins/dfsound/spu.c: Likewise.
+
 October 31, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/cdriso.c: Declare thread controlling variable as volatile.

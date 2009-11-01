@@ -16,7 +16,6 @@
  ***************************************************************************/
 
 #include "stdafx.h"
-#include "config.h"
 
 #define _IN_SPU
 
@@ -37,6 +36,8 @@
 
 #if defined(USEALSA)
 static char * libraryName     = N_("ALSA Sound");
+#elif defined (USEMACOSX)
+static char * libraryName     = N_("Mac OS X Sound");
 #elif defined (USEOSS)
 static char * libraryName     = N_("OSS Sound");
 #else
@@ -435,7 +436,12 @@ INLINE int iGetInterpolationVal(int ch)
 
 static void *MAINThread(void *arg)
 {
- int s_1,s_2,fa,ns,voldiv=iVolume;
+ int s_1,s_2,fa,ns;
+#ifndef _MACOSX
+ int voldiv=iVolume;
+#else
+ const int voldiv=1;
+#endif
  unsigned char * start;unsigned int nSample;
  int ch,predict_nr,shift_factor,flags,d,s;
  int bIRQReturn=0;
@@ -967,14 +973,22 @@ long CALLBACK SPUtest(void)
 // SPUCONFIGURE: call config dialog
 long CALLBACK SPUconfigure(void)
 {
+#ifdef _MACOSX
+ DoConfiguration();
+#else
  StartCfgTool("CFG");
+#endif
  return 0;
 }
 
 // SPUABOUT: show about window
 void CALLBACK SPUabout(void)
 {
+#ifdef _MACOSX
+ DoAbout();
+#else
  StartCfgTool("ABOUT");
+#endif
 }
 
 // SETUP CALLBACKS
