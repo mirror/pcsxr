@@ -1,5 +1,6 @@
 #import "PluginController.h"
 #import "PcsxPlugin.h"
+#import "PcsxController.h"
 
 @implementation PluginController
 
@@ -22,14 +23,14 @@
 		int index = [pluginMenu indexOfSelectedItem];
 		if (index != -1) {
 			PcsxPlugin *plugin = [plugins objectAtIndex:index];
-			
+
 			if (![[PluginList list] setActivePlugin:plugin forType:pluginType]) {
-					/* plugin won't initialize */
+				/* plugin won't initialize */
 			}
-			
+
 			// write selection to defaults
 			[[NSUserDefaults standardUserDefaults] setObject:[plugin path] forKey:defaultKey];
-			
+
 			// set button states
 			[aboutButton setEnabled:[plugin hasAboutAs:pluginType]];
 			[configureButton setEnabled:[plugin hasConfigureAs:pluginType]];
@@ -61,7 +62,7 @@
 	// add the menu entries
 	for (i=0; i<[plugins count]; i++) {
 		[pluginMenu addItemWithTitle:[[plugins objectAtIndex:i] description]];
-		
+
 		// make sure the currently selected is set as such
 		if ([sel isEqualToString:[[plugins objectAtIndex:i] path]]) {
 			[pluginMenu selectItemAtIndex:i];

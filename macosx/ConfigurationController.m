@@ -61,12 +61,12 @@
 - (void)awakeFromNib
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
+
 	[[self window] center];
-	
+
 	// setup checkboxes
 	checkBoxDefaults = [[NSMutableDictionary alloc] init];
-	
+
 	// check that the outlets are active before adding them
 	if (noXaAudioCell) [checkBoxDefaults setObject:noXaAudioCell forKey:@"NoXaAudio"];
 	if (sioIrqAlwaysCell) [checkBoxDefaults setObject:sioIrqAlwaysCell forKey:@"SioIrqAlways"];
@@ -81,7 +81,7 @@
 	if (rCountFixCell) [checkBoxDefaults setObject:rCountFixCell forKey:@"RootCounterFix"];
 	if (vSyncWAFixCell) [checkBoxDefaults setObject:vSyncWAFixCell forKey:@"VideoSyncWAFix"];
 	if (noFastBootCell) [checkBoxDefaults setObject:noFastBootCell forKey:@"NoFastBoot"];
-	
+
 	// make the visuals match the defaults
 	NSEnumerator *enumerator= [checkBoxDefaults keyEnumerator];
 	id key;
@@ -90,14 +90,14 @@
 			[[checkBoxDefaults objectForKey:key] setNextState];
 		}
 	}
-	
+
 	// special cases
 	if (![PcsxController biosAvailable]) {
 		// no bios means always use HLE
 		[usesHleCell setState:NSOnState];
 		[usesHleCell setEnabled:NO];
 	}
-	
+
 	int tag = [defaults integerForKey:@"AutoDetectVideoType"];
 	if (tag)
 		tag = 3;
@@ -110,10 +110,10 @@
 	} else {
 		[vTypePALCell selectItemAtIndex:[vTypePALCell indexOfItemWithTag:tag]];
 	}
-	
+
 	// setup plugin lists
 	PluginList *list = [PluginList list];
-	
+
 	[list refreshPlugins];
 	[graphicsPlugin setPluginsTo:[list pluginsForType:PSE_LT_GPU] withType: PSE_LT_GPU];
 	[soundPlugin setPluginsTo:[list pluginsForType:PSE_LT_SPU] withType: PSE_LT_SPU];
@@ -124,7 +124,6 @@
 - (void)dealloc
 {
 	[checkBoxDefaults release];
-	
 	[super dealloc];
 }
 

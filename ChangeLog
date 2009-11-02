@@ -12,6 +12,9 @@ November 2, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * macosx/plugins/CDDeviceInterface/src/PlugCD.c: Likewise.
  * macosx/plugins/HIDInput/src/PSEmu_Plugin_Defs.h: Removed.
  * macosx/plugins/CDDeviceInterface/src/PSEmu_Plugin_Defs.h: Removed.
+ * macosx/PcsxController.m: Don't allow starting game when Preferences dialog
+   box is opened. Don't allow opening the Preferences dialog when game is
+   running.
 
 November 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

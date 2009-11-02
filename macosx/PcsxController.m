@@ -19,7 +19,7 @@ NSString *saveStatePath;
 	NSMutableString *deviceName;
 	NSTask *ejectTask;
 	NSRange rdiskRange;
-	
+
 	BOOL wasPaused = [EmuThread pauseSafe];
 
 	/* close connection to current cd */
@@ -92,7 +92,7 @@ NSString *saveStatePath;
 		}
 		preferenceWindow = [preferencesController window];
 	}
-	
+
 	/* show the window */
 	[preferenceWindow makeKeyAndOrderFront:self];
 	[preferencesController showWindow:self];
@@ -157,8 +157,14 @@ NSString *saveStatePath;
 		 [menuItem action] == @selector(fullscreen:))
 		return [EmuThread active];
 
-    if ([menuItem action] == @selector(runCD:) || [menuItem action] == @selector(runIso:))
-        return ![EmuThread active];
+	if ([menuItem action] == @selector(runCD:) || [menuItem action] == @selector(runIso:)) {
+		if (preferenceWindow != nil) {
+			if ([preferenceWindow isVisible]) {
+				return NO;
+			}
+		}
+		return ![EmuThread active];
+	}
 
 	if ([menuItem action] == @selector(defrost:)) {
 		if (![EmuThread active])
@@ -167,7 +173,13 @@ NSString *saveStatePath;
 		NSString *path = [NSString stringWithFormat:@"%@/%s-%3.3d.pcsxstate", saveStatePath, CdromId, [menuItem tag]];
 		return (CheckState((char *)[path fileSystemRepresentation]) == 0);
 	}
-	
+
+	if ([menuItem action] == @selector(preferences:)) {
+		if ([EmuThread active])
+			return NO;
+		return YES;
+	}
+
 	return YES;
 }
 
