@@ -126,7 +126,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	}
 	
 	[self setPixelFormat:[pixFmt autorelease]];
-	
+
 	/*
 	long swapInterval = 1 ;
 	[[self openGLContext]
@@ -135,14 +135,14 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	*/
 	[glLock lock];
 	[[self openGLContext] makeCurrentContext];
-	
+
 	// Init object members
 	strExt = glGetString (GL_EXTENSIONS);
 	texture_range  = gluCheckExtension ((const unsigned char *)"GL_APPLE_texture_range", strExt) ? GL_TRUE : GL_FALSE;
 	texture_hint   = GL_STORAGE_SHARED_APPLE ;
 	client_storage = gluCheckExtension ((const unsigned char *)"GL_APPLE_client_storage", strExt) ? GL_TRUE : GL_FALSE;
 	rect_texture   = gluCheckExtension((const unsigned char *)"GL_EXT_texture_rectangle", strExt) ? GL_TRUE : GL_FALSE;
-	
+
 	// Setup some basic OpenGL stuff
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
@@ -152,18 +152,18 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 
 	[NSOpenGLContext clearCurrentContext];
 	[glLock unlock];
-	
+
 	image_width = 1024;
 	image_height = 512;
 	image_depth = 16;
+
 	image_type = GL_UNSIGNED_SHORT_1_5_5_5_REV;
-	
 	image_base = (GLubyte *) calloc(((IMAGE_COUNT * image_width * image_height) / 3) * 4, image_depth >> 3);
 	if (image_base == nil) {
 		[self release];
 		return nil;
 	}
-		
+
 	// Create and load textures for the first time
 	[self loadTextures:GL_TRUE];
 	
@@ -183,9 +183,9 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 - (void)dealloc
 {
 	int i;
-	
+
 	[glLock lock];
-	
+
 	[[self openGLContext] makeCurrentContext];
 	for(i = 0; i < IMAGE_COUNT; i++)
 	{
@@ -193,14 +193,14 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 		glDeleteTextures(1, &dt);
 	}
 	if(texture_range) glTextureRangeAPPLE(GL_TEXTURE_RECTANGLE_EXT, IMAGE_COUNT * image_width * image_height * (image_depth >> 3), image_base);
-	
+
 	[NSOpenGLContext clearCurrentContext];
 	[glLock unlock];
 	[glLock release];
-	
+
 	if (image_base)
 		free(image_base);
-	
+
 	[super dealloc];
 }
 
@@ -218,17 +218,17 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 {
 	// Check if an update has occured to the buffer
 	if ([self lockFocusIfCanDraw]) {
-	
+
 	// Make this context current
 	if (drawBG) {
 		[[NSColor blackColor] setFill];
 		[NSBezierPath fillRect:[self visibleRect]];
 	}
-	
+
 	//glFinish() ;
 	// Swap buffer to screen
 	//[[self openGLContext] flushBuffer];
-	
+
 	[self unlockFocus];
 	}
 }
@@ -237,22 +237,22 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 - (void)update  // moved or resized
 {
 	NSRect rect;
-	
+
 	[super update];
-	
+
 	[[self openGLContext] makeCurrentContext];
 	[[self openGLContext] update];
-	
+
 	rect = [self bounds];
 	
 	glViewport(0, 0, (int) rect.size.width, (int) rect.size.height);
-	
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity(); 
-		
+
 	//[self setNeedsDisplay:true];
 }
 #endif
@@ -260,27 +260,27 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 - (void)reshape	// scrolled, moved or resized
 {
 	[glLock lock];
-	
+
 	NSOpenGLContext *oglContext = [self openGLContext];
 	NSRect rect;
-	
+
 	[super reshape];
-	
+
 	[oglContext makeCurrentContext];
 	[oglContext update];
-	
+
 	rect = [[oglContext view] bounds];
-	
+
 	glViewport(0, 0, (int) rect.size.width, (int) rect.size.height);
-	
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	
 	drawBG = YES;
-	
+
 	[NSOpenGLContext clearCurrentContext];
 	
 //	[self setNeedsDisplay:true];
@@ -292,11 +292,10 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 - (void)renderScreen
 {
 	int bufferIndex = whichImage;
-	
+
 	if (1/*[glLock tryLock]*/) {
 		// Make this context current
 		[[self openGLContext] makeCurrentContext];
-
 		if (PSXDisplay.Disabled) {
 			glClear(GL_COLOR_BUFFER_BIT);
 		} else {
@@ -304,7 +303,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 			if(rect_texture)
 			{
 				glBindTexture(GL_TEXTURE_RECTANGLE_EXT, bufferIndex+1);
-				
+
 				glTexSubImage2D(GL_TEXTURE_RECTANGLE_EXT, 0, 0, 0, image_width, image_height, GL_BGRA, image_type, image[bufferIndex]);
 				glBegin(GL_QUADS);
 					glTexCoord2f(0.0f, 0.0f);
@@ -428,8 +427,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	
 	printf("Disabled=%i\n", PreviousPSXDisplay.Disabled);
 	*/
-	
-	
+
 	image_width = PreviousPSXDisplay.Range.x1;
 	image_height = PreviousPSXDisplay.DisplayMode.y;
 	if (PSXDisplay.RGB24) {
@@ -440,11 +438,11 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 		image_type = GL_UNSIGNED_SHORT_1_5_5_5_REV;
 		//image_width >>= 1;
 	}
-	
+
 	if (image_width * image_height * (image_depth >> 3) > ((1024*512*2)/3)*4)
 		printf("Fatal error: desired dimension are too large! (%ix%i %ibpp)\n",
 				 image_width, image_height, image_depth);
-	
+
 	for(i = 0; i < IMAGE_COUNT; i++)
 		image[i] = image_base + i * image_width * image_height * (image_depth >> 3);
 
@@ -457,7 +455,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 
 		if(texture_range) glTextureRangeAPPLE(GL_TEXTURE_RECTANGLE_EXT, IMAGE_COUNT * image_width * image_height * (image_depth >> 3), image_base);
 		else              glTextureRangeAPPLE(GL_TEXTURE_RECTANGLE_EXT, 0, NULL);
-		
+
 		for(i = 0; i < IMAGE_COUNT; i++)
 		{
 			if(!first)
@@ -465,11 +463,11 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 				GLuint dt = i+1;
 				glDeleteTextures(1, &dt);
 			}
-			
+
 			glDisable(GL_TEXTURE_2D);
 			glEnable(GL_TEXTURE_RECTANGLE_EXT);
 			glBindTexture(GL_TEXTURE_RECTANGLE_EXT, i+1);
-			
+
 			glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_STORAGE_HINT_APPLE , texture_hint);
 			glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE, client_storage);
 			glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -477,7 +475,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 			glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
-			
+
 			glTexImage2D(GL_TEXTURE_RECTANGLE_EXT, 0, GL_RGBA, image_width,
 				image_height, 0, GL_BGRA, image_type, image[i]);
 		}
@@ -488,11 +486,11 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 		image_height2 = mylog2(image_height);
 		image_tx = (float)image_width/(float)image_width2;
 		image_ty = (float)image_height/(float)image_height2;
-			
+
 		glTextureRangeAPPLE(GL_TEXTURE_RECTANGLE_EXT, 0, NULL);
 		if(texture_range) glTextureRangeAPPLE(GL_TEXTURE_2D, IMAGE_COUNT * image_width2 * image_height2 * (image_depth >> 3), image_base);
 		else              glTextureRangeAPPLE(GL_TEXTURE_2D, 0, NULL);
-		
+
 		for(i = 0; i < IMAGE_COUNT; i++)
 		{
 			if(!first)
@@ -500,11 +498,11 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 				GLuint dt = i+1;
 				glDeleteTextures(1, &dt);
 			}
-			
+
 			glDisable(GL_TEXTURE_RECTANGLE_EXT);
 			glEnable(GL_TEXTURE_2D);
 			glBindTexture(GL_TEXTURE_2D, i+1);
-			
+
 			//if(texture_range) glTextureRangeAPPLE(GL_TEXTURE_2D, IMAGE_COUNT * image_width2 * image_height2 * (image_depth >> 3), image_base);
 			//else              glTextureRangeAPPLE(GL_TEXTURE_2D, 0, NULL);
 
@@ -515,7 +513,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
-			
+
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width2,
 				image_height2, 0, GL_BGRA, image_type, image[i]);
 		}
@@ -567,7 +565,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 			{ 
 				startxy=((1024)*(column+y))+x;
 				pD=(unsigned char *)&psxVuw[startxy];
-				
+
 				row=0;
 				// make sure the reads are aligned
 				while ((int)pD & 0x3) {
@@ -576,14 +574,14 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 					pD+=3;
 					row++;
 				}
-				
+
 				for(;row<dx;row+=4)
 				{
 					unsigned long lu1 = *((unsigned long *)pD);
 					unsigned long lu2 = *((unsigned long *)pD+1);
 					unsigned long lu3 = *((unsigned long *)pD+2);
 					unsigned long *dst = ((unsigned long *)((surf)+(column*lPitch)+(row<<2)));
-
+#ifdef __POWERPC__
 					*(dst)=
 						(((lu1>>24)&0xff)<<16)|(((lu1>>16)&0xff)<<8)|(((lu1>>8)&0xff));
 					*(dst+1)=
@@ -592,10 +590,19 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 						(((lu2>>8)&0xff)<<16)|(((lu2>>0)&0xff)<<8)|(((lu3>>24)&0xff));
 					*(dst+3)=
 						(((lu3>>16)&0xff)<<16)|(((lu3>>8)&0xff)<<8)|(((lu3>>0)&0xff));
-
+#else
+					*(dst)=
+						(((lu1>>0)&0xff)<<16)|(((lu1>>8)&0xff)<<8)|(((lu1>>16)&0xff));
+					*(dst+1)=
+						(((lu1>>24)&0xff)<<16)|(((lu2>>0)&0xff)<<8)|(((lu2>>8)&0xff));
+					*(dst+2)=
+						(((lu2>>16)&0xff)<<16)|(((lu2>>24)&0xff)<<8)|(((lu3>>0)&0xff));
+					*(dst+3)=
+						(((lu3>>8)&0xff)<<16)|(((lu3>>16)&0xff)<<8)|(((lu3>>24)&0xff));
+#endif
 					pD+=12;
 				}
-				
+
 				//for(;row<dx;row+=4)
 				/*while (pD&0x3) {
 					*((unsigned long *)((surf)+(column*lPitch)+(row<<2)))=
