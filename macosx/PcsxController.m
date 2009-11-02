@@ -174,11 +174,8 @@ NSString *saveStatePath;
 		return (CheckState((char *)[path fileSystemRepresentation]) == 0);
 	}
 
-	if ([menuItem action] == @selector(preferences:)) {
-		if ([EmuThread active])
-			return NO;
-		return YES;
-	}
+	if ([menuItem action] == @selector(preferences:))
+		return ![EmuThread active];
 
 	return YES;
 }
