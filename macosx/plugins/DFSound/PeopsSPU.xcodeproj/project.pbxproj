@@ -266,7 +266,7 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					src/,
-					../../plugins/dfsound,
+					../../../plugins/dfsound,
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -293,7 +293,7 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					src/,
-					../../plugins/dfsound,
+					../../../plugins/dfsound,
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
