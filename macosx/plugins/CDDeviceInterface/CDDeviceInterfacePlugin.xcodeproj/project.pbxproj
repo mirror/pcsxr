@@ -203,7 +203,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = G3;
+				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
@@ -233,7 +233,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G3;
+				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
@@ -256,84 +256,21 @@
 			};
 			name = Deployment;
 		};
-		7107359C0FDEED75004AD098 /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUGGING_SYMBOLS = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = G3;
-				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				LIBRARY_STYLE = BUNDLE;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = CDDeviceInterface;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = psxplugin;
-			};
-			name = Beta;
-		};
-		7107359D0FDEED75004AD098 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G3;
-				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				LIBRARY_STYLE = BUNDLE;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = CDDeviceInterface;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = psxplugin;
-			};
-			name = Default;
-		};
 		7107359F0FDEED75004AD098 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Development;
 		};
 		710735A00FDEED75004AD098 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_MODEL_TUNING = "";
 			};
 			name = Deployment;
-		};
-		710735A10FDEED75004AD098 /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Beta;
-		};
-		710735A20FDEED75004AD098 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Default;
 		};
 /* End XCBuildConfiguration section */
 
@@ -343,22 +280,18 @@
 			buildConfigurations = (
 				7107359A0FDEED75004AD098 /* Development */,
 				7107359B0FDEED75004AD098 /* Deployment */,
-				7107359C0FDEED75004AD098 /* Beta */,
-				7107359D0FDEED75004AD098 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Development;
 		};
 		7107359E0FDEED75004AD098 /* Build configuration list for PBXProject "CDDeviceInterfacePlugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7107359F0FDEED75004AD098 /* Development */,
 				710735A00FDEED75004AD098 /* Deployment */,
-				710735A10FDEED75004AD098 /* Beta */,
-				710735A20FDEED75004AD098 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Development;
 		};
 /* End XCConfigurationList section */
 	};

@@ -344,86 +344,21 @@
 			};
 			name = Deployment;
 		};
-		71155B0F0FDFA2DE00EC0BC5 /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUGGING_SYMBOLS = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = "";
-				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				LIBRARY_SEARCH_PATHS = .;
-				LIBRARY_STYLE = BUNDLE;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = HIDInput;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = psxplugin;
-			};
-			name = Beta;
-		};
-		71155B100FDFA2DE00EC0BC5 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = "";
-				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				LIBRARY_SEARCH_PATHS = .;
-				LIBRARY_STYLE = BUNDLE;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = HIDInput;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = psxplugin;
-			};
-			name = Default;
-		};
 		71155B120FDFA2DE00EC0BC5 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Development;
 		};
 		71155B130FDFA2DE00EC0BC5 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 			};
 			name = Deployment;
-		};
-		71155B140FDFA2DE00EC0BC5 /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Beta;
-		};
-		71155B150FDFA2DE00EC0BC5 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Default;
 		};
 /* End XCBuildConfiguration section */
 
@@ -433,22 +368,18 @@
 			buildConfigurations = (
 				71155B0D0FDFA2DE00EC0BC5 /* Development */,
 				71155B0E0FDFA2DE00EC0BC5 /* Deployment */,
-				71155B0F0FDFA2DE00EC0BC5 /* Beta */,
-				71155B100FDFA2DE00EC0BC5 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Development;
 		};
 		71155B110FDFA2DE00EC0BC5 /* Build configuration list for PBXProject "HIDInput" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				71155B120FDFA2DE00EC0BC5 /* Development */,
 				71155B130FDFA2DE00EC0BC5 /* Deployment */,
-				71155B140FDFA2DE00EC0BC5 /* Beta */,
-				71155B150FDFA2DE00EC0BC5 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Development;
 		};
 /* End XCConfigurationList section */
 	};
