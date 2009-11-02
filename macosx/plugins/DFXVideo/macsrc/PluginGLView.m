@@ -563,14 +563,19 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 
 			for(column=0;column<dy;column++)
 			{ 
-				startxy=((1024)*(column+y))+x;
-				pD=(unsigned char *)&psxVuw[startxy];
+				startxy = (1024 * (column + y)) + x;
+				pD = (unsigned char *)&psxVuw[startxy];
 
-				row=0;
+				row = 0;
 				// make sure the reads are aligned
 				while ((int)pD & 0x3) {
-					*((unsigned long *)((surf)+(column*lPitch)+(row<<2)))=
+#ifdef __POWERPC__
+					*((unsigned long *)((surf)+(column*lPitch)+(row<<2))) =
 						(*(pD+0)<<16)|(*(pD+1)<<8)|*(pD+2);
+#else
+					*((unsigned long *)((surf)+(column*lPitch)+(row<<2))) =
+						(*(pD+2)<<16)|(*(pD+1)<<8)|*(pD+0);
+#endif
 					pD+=3;
 					row++;
 				}
@@ -615,26 +620,28 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 		else
 		{
 			int LineOffset,SurfOffset;
-			unsigned long * SRCPtr = (unsigned long *)(psxVuw +
-												(y<<10) + x);
+			unsigned long * SRCPtr = (unsigned long *)(psxVuw + (y << 10) + x);
 			unsigned long * DSTPtr =
-				((unsigned long *)surf)+(PreviousPSXDisplay.Range.x0>>1);
+				((unsigned long *)surf) + (PreviousPSXDisplay.Range.x0 >> 1);
 
-			dx>>=1;
+			dx >>= 1;
 
 			LineOffset = 512 - dx;
-			SurfOffset = (lPitch>>2) - dx;
+			SurfOffset = (lPitch >> 2) - dx;
 
 			for(column=0;column<dy;column++)
 			{
 				for(row=0;row<dx;row++)
 				{
+#ifdef __POWERPC__
 					lu=GETLE16D(SRCPtr++);
-
+#else
+					lu=*SRCPtr++;
+#endif
 					*DSTPtr++=
-						((lu<<10)&0x7c007c00)|
-						((lu)&0x3e003e0)|
-						((lu>>10)&0x1f001f);
+						((lu << 10) & 0x7c007c00)|
+						((lu) & 0x3e003e0)|
+						((lu >> 10) & 0x1f001f);
 				}
 				SRCPtr += LineOffset;
 				DSTPtr += SurfOffset;
