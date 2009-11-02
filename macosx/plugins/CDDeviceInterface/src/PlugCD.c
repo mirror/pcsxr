@@ -44,7 +44,7 @@ long CDRclose(void);
 
 /////////////////////////////////////////////////////////
 typedef void* HWND;
-#include "PSEmu_Plugin_Defs.h"
+#include "psemu_plugin_defs.h"
 
 const char *LibName = "CD-ROM Device Interface";
 const int version = 0;

@@ -11,7 +11,6 @@
 		2BC4897906DF966200274548 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC4897706DF966200274548 /* CoreServices.framework */; };
 		2BD707140555995400CB5D9B /* PlugCD.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD707110555995400CB5D9B /* PlugCD.c */; };
 		2BD707150555995400CB5D9B /* PlugCD.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BD707120555995400CB5D9B /* PlugCD.h */; };
-		2BD707160555995400CB5D9B /* PSEmu_Plugin_Defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BD707130555995400CB5D9B /* PSEmu_Plugin_Defs.h */; };
 		2BD707180555997500CB5D9B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD707170555997500CB5D9B /* IOKit.framework */; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
 		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
@@ -24,7 +23,6 @@
 		2BC4897706DF966200274548 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		2BD707110555995400CB5D9B /* PlugCD.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = PlugCD.c; path = src/PlugCD.c; sourceTree = SOURCE_ROOT; };
 		2BD707120555995400CB5D9B /* PlugCD.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PlugCD.h; path = src/PlugCD.h; sourceTree = SOURCE_ROOT; };
-		2BD707130555995400CB5D9B /* PSEmu_Plugin_Defs.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PSEmu_Plugin_Defs.h; path = src/PSEmu_Plugin_Defs.h; sourceTree = SOURCE_ROOT; };
 		2BD707170555997500CB5D9B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		8D576316048677EA00EA77CD /* CDDeviceInterface.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CDDeviceInterface.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -81,7 +79,6 @@
 			children = (
 				2BD707110555995400CB5D9B /* PlugCD.c */,
 				2BD707120555995400CB5D9B /* PlugCD.h */,
-				2BD707130555995400CB5D9B /* PSEmu_Plugin_Defs.h */,
 				2BC488C406DF90FF00274548 /* CoreAudioUtils */,
 			);
 			name = Source;
@@ -111,7 +108,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BD707150555995400CB5D9B /* PlugCD.h in Headers */,
-				2BD707160555995400CB5D9B /* PSEmu_Plugin_Defs.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +257,7 @@
 			buildSettings = {
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = ../../../libpcsxcore;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Development;
@@ -269,6 +266,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_MODEL_TUNING = "";
+				HEADER_SEARCH_PATHS = ../../../libpcsxcore;
 			};
 			name = Deployment;
 		};

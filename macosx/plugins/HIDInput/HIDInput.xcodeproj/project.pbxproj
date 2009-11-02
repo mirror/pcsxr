@@ -43,7 +43,6 @@
 		2B6796E50691938800E2BD4F /* PadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PadView.m; path = src/PadView.m; sourceTree = "<group>"; };
 		2B6796E60691938800E2BD4F /* PlugPAD.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = PlugPAD.c; path = src/PlugPAD.c; sourceTree = "<group>"; };
 		2B6796E70691938800E2BD4F /* PlugPAD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlugPAD.h; path = src/PlugPAD.h; sourceTree = "<group>"; };
-		2B6796E80691938800E2BD4F /* PSEmu_Plugin_Defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSEmu_Plugin_Defs.h; path = src/PSEmu_Plugin_Defs.h; sourceTree = "<group>"; };
 		2B679860069193F300E2BD4F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		2B679861069193F300E2BD4F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		2B679C9F06919D6800E2BD4F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/NetPcsxHIDInputPluginMain.nib; sourceTree = "<group>"; };
@@ -132,7 +131,6 @@
 				2B6796E30691938800E2BD4F /* PadController.m */,
 				2B6796E40691938800E2BD4F /* PadView.h */,
 				2B6796E50691938800E2BD4F /* PadView.m */,
-				2B6796E80691938800E2BD4F /* PSEmu_Plugin_Defs.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -349,6 +347,7 @@
 			buildSettings = {
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = ../../../libpcsxcore;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Development;
@@ -357,6 +356,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				HEADER_SEARCH_PATHS = ../../../libpcsxcore;
 			};
 			name = Deployment;
 		};

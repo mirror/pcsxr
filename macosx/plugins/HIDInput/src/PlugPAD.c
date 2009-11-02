@@ -3,10 +3,12 @@
 #include "HID_Utilities.h"
 #include "PlugPAD.h"
 
-
 /////////////////////////////////////////////////////////
 typedef void* HWND;
-#include "PSEmu_Plugin_Defs.h"
+#include "psemu_plugin_defs.h"
+
+long DoConfiguration();
+void DoAbout();
 
 const char *LibName = "HIDInput";
 const int version = 0;
@@ -100,7 +102,7 @@ long PADconfigure(void) {
             HIDBuildDeviceList(kHIDPage_GenericDesktop, 0);
         }
     }
-    
+
     return DoConfiguration();
 }
 
@@ -153,23 +155,23 @@ long _readPortX(PadDataS *data, int port)
                 buttonState &= ~(1 << keys[i].button);
         }
     }
-    
+
     for (i=0; i<gNumAxes[port]; i++) {
         long value = HIDGetElementValue(axes[i].device, axes[i].element);
-        
+
         if (value != axes[i].lastValue) {
             axes[i].lastValue = value;
-            
+
             if (axes[i].element->usagePage == kHIDPage_GenericDesktop && 
                 axes[i].element->usage >= kHIDUsage_GD_X && axes[i].element->usage <= kHIDUsage_GD_Rz) {
                 /* axis input device */
                 value = HIDCalibrateValue(value, axes[i].element);
                 value = HIDScaleValue(value, axes[i].element);
                 if (!axes[i].positive) value = 255-value;
-                
+
                 if (value >= 127) {
                     if (axes[i].reverse) value = 255-value;
-                    
+
                     switch (axes[i].axis) {
                         case 0: data->rightJoyX = value; break;
                         case 1: data->rightJoyY = value; break;

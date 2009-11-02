@@ -4,6 +4,14 @@ November 2, 2009 Wei Mingzhi <weimingzhi@gmail.com>
    building existing dfxvideo sources for Mac OS X. (NOT bug-free yet!!!)
  * dfxvideo/gpu.c: Made necessary changes for Mac OS X build.
  * dfxvideo/externals.h: Likewise.
+ * macosx/plugins/HIDInput/HIDInput.xcodeproj/project.pbxproj: Use
+   psemu_plugin_defs.h from libpcsxcore.
+ * macosx/plugins/HIDInput/src/PlugPAD.c: Likewise.
+ * macosx/plugins/CDDeviceInterface/CDDeviceInterfacePlugin.xcodeproj/
+   project.pbxproj: Likewise.
+ * macosx/plugins/CDDeviceInterface/src/PlugCD.c: Likewise.
+ * macosx/plugins/HIDInput/src/PSEmu_Plugin_Defs.h: Removed.
+ * macosx/plugins/CDDeviceInterface/src/PSEmu_Plugin_Defs.h: Removed.
 
 November 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
