@@ -1,6 +1,7 @@
 #import "PluginConfigController.h"
 #include "gpu.h"
 #include "cfg.h"
+#include "menu.h"
 #include "externals.h"
 
 #define APP_ID @"net.sf.peops.SoftGpuGLPlugin"
