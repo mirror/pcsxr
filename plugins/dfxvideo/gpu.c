@@ -15,7 +15,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifndef _MACGL
 #include "config.h"
+#endif
 
 #define _IN_GPU
 
@@ -49,8 +51,13 @@ const  unsigned char version  = 1;    // do not touch - library for PSEmu 1.x
 const  unsigned char revision = 1;
 const  unsigned char build    = 17;   // increase that with each version
 
+#ifdef _MACGL
+static char *libraryName      = N_("SoftGL Driver");
+static char *libraryInfo      = N_("P.E.Op.S. SoftGL Driver V1.17\nCoded by Pete Bernert and the P.E.Op.S. team\n");
+#else
 static char *libraryName      = N_("XVideo Driver");
 static char *libraryInfo      = N_("P.E.Op.S. Xvideo Driver V1.17\nCoded by Pete Bernert and the P.E.Op.S. team\n");
+#endif
 
 static char *PluginAuthor     = N_("Pete Bernert and the P.E.Op.S. team");
 
@@ -195,12 +202,14 @@ static char * pGetConfigInfos(int iCfg)
  else sprintf(szTxt,"- FPS limit: %.1f\r\n\r\n",fFrameRate);
  strcat(pB,szTxt);
  //----------------------------------------------------//
+#ifndef _MACGL
  strcpy(szTxt,"Misc:\r\n- MaintainAspect: ");
  if(iMaintainAspect == 0) strcat(szTxt,"disabled");
  else
  if(iMaintainAspect == 1) strcat(szTxt,"enabled");
  strcat(szTxt,"\r\n");
  strcat(pB,szTxt);
+#endif
  sprintf(szTxt,"- Game fixes: %s [%08x]\r\n",szO[iUseFixes],dwCfgFixes);
  strcat(pB,szTxt);
  //----------------------------------------------------//
@@ -646,6 +655,8 @@ void updateDisplayIfChanged(void)                      // UPDATE DISPLAY IF CHAN
 
 ////////////////////////////////////////////////////////////////////////
 
+#ifndef _MACGL
+
 #include "draw.h"
 
 void ChangeWindowMode(void)                            // TOGGLE FULLSCREEN - WINDOW
@@ -743,6 +754,8 @@ void ChangeWindowMode(void)                            // TOGGLE FULLSCREEN - WI
  bDoVSyncUpdate=TRUE;
 }
 
+#endif
+
 ////////////////////////////////////////////////////////////////////////
 // gun cursor func: player=0-7, x=0-511, y=0-255
 ////////////////////////////////////////////////////////////////////////
@@ -796,9 +809,9 @@ void CALLBACK GPUupdateLace(void)                      // VSYNC
       updateDisplay();                                 // -> update display
     }
   }
-
+#ifndef _MACGL
  if(bChangeWinMode) ChangeWindowMode();                // toggle full - window mode
-
+#endif
  bDoVSyncUpdate=FALSE;                                 // vsync done
 }
 

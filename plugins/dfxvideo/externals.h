@@ -61,10 +61,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
-/*#include <GL/gl.h>
-#include <GL/glx.h> */
+#ifndef _MACGL
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
+#endif
 #include <math.h>
 #include <X11/cursorfont.h>
 #include <stdint.h>

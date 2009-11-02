@@ -1,3 +1,10 @@
+November 2, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * macosx/plugins/DFXVideo: Added project file and necessary codes for
+   building existing dfxvideo sources for Mac OS X. (NOT bug-free yet!!!)
+ * dfxvideo/gpu.c: Made necessary changes for Mac OS X build.
+ * dfxvideo/externals.h: Likewise.
+
 November 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * macosx/plugins/PeopsSpu109: Removed.
