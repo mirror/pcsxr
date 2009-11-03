@@ -38,6 +38,10 @@ axisEntry gAxes[MAX_NUM_PADS][MAX_NUM_AXES];
 
 static long sPadFlags = 0;
 
+static unsigned char padid[2] = {0x41, 0x41};
+
+int LoadConfig();
+
 long PADinit(long flags) {
     sPadFlags |= flags;
 
@@ -54,10 +58,12 @@ long PADinit(long flags) {
         
         //HIDCloseReleaseInterface(
     }
-    
+
     LoadConfig();
-    
-	 return 0;
+    padid[0] = 0x41;
+    padid[1] = 0x41;
+
+	return 0;
 }
 
 long PADshutdown(void) {
@@ -182,55 +188,341 @@ long _readPortX(PadDataS *data, int port)
             }
         }
     }
-    
+
     data->controllerType = gControllerType[port];
     data->buttonStatus = buttonState;
     return 0;
 }
 
 long PADreadPort1(PadDataS *data) {
-    static unsigned char lastRightJoyX = 128;
-    static unsigned char lastRightJoyY = 128;
-    static unsigned char lastLeftJoyX = 128;
-    static unsigned char lastLeftJoyY = 128;
-    
-    data->rightJoyX = lastRightJoyX;
-    data->rightJoyY = lastRightJoyY;
-    data->leftJoyX = lastLeftJoyX;
-    data->leftJoyY = lastLeftJoyY;
-    
-    _readPortX(data, 0);
-     
-    lastRightJoyX = data->rightJoyX;
-    lastRightJoyY = data->rightJoyY;
-    lastLeftJoyX = data->leftJoyX;
-    lastLeftJoyY = data->leftJoyY;
-    
-    return 0;
+	static unsigned char lastRightJoyX = 128;
+	static unsigned char lastRightJoyY = 128;
+	static unsigned char lastLeftJoyX = 128;
+	static unsigned char lastLeftJoyY = 128;
+
+	data->rightJoyX = lastRightJoyX;
+	data->rightJoyY = lastRightJoyY;
+	data->leftJoyX = lastLeftJoyX;
+	data->leftJoyY = lastLeftJoyY;
+
+	_readPortX(data, 0);
+
+	lastRightJoyX = data->rightJoyX;
+	lastRightJoyY = data->rightJoyY;
+	lastLeftJoyX = data->leftJoyX;
+	lastLeftJoyY = data->leftJoyY;
+
+	return 0;
 }
 
 long PADreadPort2(PadDataS *data) {
-    static unsigned char lastRightJoyX = 128;
-    static unsigned char lastRightJoyY = 128;
-    static unsigned char lastLeftJoyX = 128;
-    static unsigned char lastLeftJoyY = 128;
-    
-    data->rightJoyX = lastRightJoyX;
-    data->rightJoyY = lastRightJoyY;
-    data->leftJoyX = lastLeftJoyX;
-    data->leftJoyY = lastLeftJoyY;
-    
-    _readPortX(data, 1);
-     
-    lastRightJoyX = data->rightJoyX;
-    lastRightJoyY = data->rightJoyY;
-    lastLeftJoyX = data->leftJoyX;
-    lastLeftJoyY = data->leftJoyY;
-    
-    return 0;
+	static unsigned char lastRightJoyX = 128;
+	static unsigned char lastRightJoyY = 128;
+	static unsigned char lastLeftJoyX = 128;
+	static unsigned char lastLeftJoyY = 128;
+
+	data->rightJoyX = lastRightJoyX;
+	data->rightJoyY = lastRightJoyY;
+	data->leftJoyX = lastLeftJoyX;
+	data->leftJoyY = lastLeftJoyY;
+
+	_readPortX(data, 1);
+
+	lastRightJoyX = data->rightJoyX;
+	lastRightJoyY = data->rightJoyY;
+	lastLeftJoyX = data->leftJoyX;
+	lastLeftJoyY = data->leftJoyY;
+
+	return 0;
 }
 
-long PADkeypressed()
-{
+static unsigned char stdpar[2][20] = {
+	{0xFF, 0x5A, 0xFF, 0xFF, 0x80, 0x80, 0x80, 0x80,
+	 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	 0x00, 0x00, 0x00, 0x00},
+	{0xFF, 0x5A, 0xFF, 0xFF, 0x80, 0x80, 0x80, 0x80,
+	 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	 0x00, 0x00, 0x00, 0x00}
+};
+
+static unsigned char unk46[2][8] = {
+	{0xFF, 0x5A, 0x00, 0x00, 0x01, 0x02, 0x00, 0x0A},
+	{0xFF, 0x5A, 0x00, 0x00, 0x01, 0x02, 0x00, 0x0A}
+};
+
+static unsigned char unk47[2][8] = {
+	{0xFF, 0x5A, 0x00, 0x00, 0x02, 0x00, 0x01, 0x00},
+	{0xFF, 0x5A, 0x00, 0x00, 0x02, 0x00, 0x01, 0x00}
+};
+
+static unsigned char unk4c[2][8] = {
+	{0xFF, 0x5A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
+	{0xFF, 0x5A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
+};
+
+static unsigned char unk4d[2][8] = { 
+	{0xFF, 0x5A, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+	{0xFF, 0x5A, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}
+};
+
+static unsigned char stdcfg[2][8]   = { 
+	{0xFF, 0x5A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
+	{0xFF, 0x5A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
+};
+
+static unsigned char stdmode[2][8]  = { 
+	{0xFF, 0x5A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
+	{0xFF, 0x5A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
+};
+
+static unsigned char stdmodel[2][8] = { 
+	{0xFF,
+	 0x5A,
+	 0x01, // 03 - dualshock2, 01 - dualshock
+	 0x02, // number of modes
+	 0x01, // current mode: 01 - analog, 00 - digital
+	 0x02,
+	 0x01,
+	 0x00},
+	{0xFF, 
+	 0x5A,
+	 0x01, // 03 - dualshock2, 01 - dualshock
+	 0x02, // number of modes
+	 0x01, // current mode: 01 - analog, 00 - digital
+	 0x02,
+	 0x01,
+	 0x00}
+};
+
+static unsigned char CurPad = 0, CurByte = 0, CurCmd = 0, CmdLen = 0;
+
+enum {
+	CMD_READ_DATA_AND_VIBRATE = 0x42,
+	CMD_CONFIG_MODE = 0x43,
+	CMD_SET_MODE_AND_LOCK = 0x44,
+	CMD_QUERY_MODEL_AND_MODE = 0x45,
+	CMD_QUERY_ACT = 0x46, // ??
+	CMD_QUERY_COMB = 0x47, // ??
+	CMD_QUERY_MODE = 0x4C, // QUERY_MODE ??
+	CMD_VIBRATION_TOGGLE = 0x4D,
+};
+
+unsigned char PADstartPoll(int pad) {
+	CurPad = pad - 1;
+	CurByte = 0;
+
+	return 0xFF;
+}
+
+unsigned char PADpoll(unsigned char value) {
+	static unsigned char	*buf = NULL;
+	PadDataS				data;
+
+	if (CurByte == 0) {
+		CurByte++;
+
+		// Don't enable Analog/Vibration for a standard pad
+		if (gControllerType[CurPad] != PSE_PAD_TYPE_ANALOGPAD) {
+			CurCmd = CMD_READ_DATA_AND_VIBRATE;
+		} else {
+			CurCmd = value;
+		}
+
+		switch (CurCmd) {
+			case CMD_CONFIG_MODE:
+				CmdLen = 8;
+				buf = stdcfg[CurPad];
+				if (stdcfg[CurPad][3] == 0xFF) return 0xF3;
+				else return padid[CurPad];
+
+			case CMD_SET_MODE_AND_LOCK:
+				CmdLen = 8;
+				buf = stdmode[CurPad];
+				return 0xF3;
+
+			case CMD_QUERY_MODEL_AND_MODE:
+				CmdLen = 8;
+				buf = stdmodel[CurPad];
+				buf[4] = (padid[CurPad] == 0x41 ? 0 : 1);
+				return 0xF3;
+
+			case CMD_QUERY_ACT:
+				CmdLen = 8;
+				buf = unk46[CurPad];
+				return 0xF3;
+
+			case CMD_QUERY_COMB:
+				CmdLen = 8;
+				buf = unk47[CurPad];
+				return 0xF3;
+
+			case CMD_QUERY_MODE:
+				CmdLen = 8;
+				buf = unk4c[CurPad];
+				return 0xF3;
+
+			case CMD_VIBRATION_TOGGLE:
+				CmdLen = 8;
+				buf = unk4d[CurPad];
+				return 0xF3;
+
+			case CMD_READ_DATA_AND_VIBRATE:
+			default:
+				if (CurPad == 0) {
+					PADreadPort1(&data);
+				} else {
+					PADreadPort2(&data);
+				}
+
+				stdpar[CurPad][2] = data.buttonStatus & 0xFF;
+				stdpar[CurPad][3] = data.buttonStatus >> 8;
+
+				if (padid[CurPad] != 0x41) {
+					CmdLen = 20;
+
+					stdpar[CurPad][4] = data.rightJoyX;
+					stdpar[CurPad][5] = data.rightJoyY;
+					stdpar[CurPad][6] = data.leftJoyX;
+					stdpar[CurPad][7] = data.leftJoyY;
+
+					switch (stdpar[CurPad][3]) {
+						case 0xBF: // X
+							stdpar[CurPad][14] = 0xFF;
+							break;
+
+						case 0xDF: // Circle
+							stdpar[CurPad][13] = 0xFF;
+							break;
+
+						case 0xEF: // Triangle
+							stdpar[CurPad][12] = 0xFF;
+							break;
+
+						case 0x7F: // Square
+							stdpar[CurPad][15] = 0xFF;
+							break;
+
+						case 0xFB: // L1
+							stdpar[CurPad][16] = 0xFF;
+							break;
+
+						case 0xF7: // R1
+							stdpar[CurPad][17] = 0xFF;
+							break;
+
+						case 0xFE: // L2
+							stdpar[CurPad][18] = 0xFF;
+							break;
+
+						case 0xFD: // R2
+							stdpar[CurPad][19] = 0xFF;
+							break;
+
+						default:
+							stdpar[CurPad][14] = 0x00; // Not pressed
+							stdpar[CurPad][13] = 0x00; // Not pressed
+							stdpar[CurPad][12] = 0x00; // Not pressed
+							stdpar[CurPad][15] = 0x00; // Not pressed
+							stdpar[CurPad][16] = 0x00; // Not pressed
+							stdpar[CurPad][17] = 0x00; // Not pressed
+							stdpar[CurPad][18] = 0x00; // Not pressed
+							stdpar[CurPad][19] = 0x00; // Not pressed
+							break;
+					}
+
+					switch (stdpar[CurPad][2] >> 4) {
+						case 0x0E: // UP
+							stdpar[CurPad][10] = 0xFF;
+							break;
+
+						case 0x0B: // DOWN
+							stdpar[CurPad][11] = 0xFF;
+							break;
+
+						case 0x07: // LEFT
+							stdpar[CurPad][9] = 0xFF;
+							break;
+
+						case 0x0D: // RIGHT
+							stdpar[CurPad][8] = 0xFF;
+							break;
+
+						default:
+							stdpar[CurPad][8] = 0x00; // Not pressed
+							stdpar[CurPad][9] = 0x00; // Not pressed
+							stdpar[CurPad][10] = 0x00; // Not pressed
+							stdpar[CurPad][11] = 0x00; // Not pressed
+							break;
+					}
+				} else {
+					CmdLen = 4;
+				}
+
+				buf = stdpar[CurPad];
+				return padid[CurPad];
+		}
+	}
+
+	switch (CurCmd) {
+		case CMD_CONFIG_MODE:
+			if (CurByte == 2) {
+				switch (value) {
+					case 0:
+						buf[2] = 0;
+						buf[3] = 0;
+						break;
+
+					case 1:
+						buf[2] = 0xFF;
+						buf[3] = 0xFF;
+						break;
+				}
+			}
+			break;
+
+		case CMD_SET_MODE_AND_LOCK:
+			if (CurByte == 2) {
+				padid[CurPad] = value ? 0x73 : 0x41;
+			}
+			break;
+
+		case CMD_QUERY_ACT:
+			if (CurByte == 2) {
+				switch (value) {
+					case 0: // default
+						buf[5] = 0x02;
+						buf[6] = 0x00;
+						buf[7] = 0x0A;
+						break;
+
+					case 1: // Param std conf change
+						buf[5] = 0x01;
+						buf[6] = 0x01;
+						buf[7] = 0x14;
+						break;
+				}
+			}
+			break;
+
+		case CMD_QUERY_MODE:
+			if (CurByte == 2) {
+				switch (value) {
+					case 0: // mode 0 - digital mode
+						buf[5] = PSE_PAD_TYPE_STANDARD;
+						break;
+
+					case 1: // mode 1 - analog mode
+						buf[5] = PSE_PAD_TYPE_ANALOGPAD;
+						break;
+				}
+			}
+			break;
+	}
+
+	if (CurByte >= CmdLen) return 0;
+	return buf[CurByte++];
+}
+
+long PADkeypressed() {
 	return 0;
 }

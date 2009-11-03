@@ -1,3 +1,8 @@
+November 3, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * macosx/plugins/HIDInput/src/PlugPAD.c: Implemented PADstartPoll() and
+   PADpoll().
+
 November 2, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * macosx/plugins/DFXVideo: Added project file and necessary codes for
