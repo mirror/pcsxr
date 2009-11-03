@@ -569,13 +569,9 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 				row = 0;
 				// make sure the reads are aligned
 				while ((int)pD & 0x3) {
-#ifdef __POWERPC__
 					*((unsigned long *)((surf)+(column*lPitch)+(row<<2))) =
 						(*(pD+0)<<16)|(*(pD+1)<<8)|*(pD+2);
-#else
-					*((unsigned long *)((surf)+(column*lPitch)+(row<<2))) =
-						(*(pD+2)<<16)|(*(pD+1)<<8)|*(pD+0);
-#endif
+
 					pD+=3;
 					row++;
 				}
