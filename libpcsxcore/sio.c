@@ -491,7 +491,25 @@ void CreateMcd(char *mcd) {
 	for (i = 0; i < 15; i++) { // 15 blocks
 		fputc(0xa0, f);
 		s--;
-		for (j = 0; j < 126; j++) {
+		fputc(0x00, f);
+		s--;
+		fputc(0x00, f);
+		s--;
+		fputc(0x00, f);
+		s--;
+		fputc(0x00, f);
+		s--;
+		fputc(0x00, f);
+		s--;
+		fputc(0x00, f);
+		s--;
+		fputc(0x00, f);
+		s--;
+		fputc(0xff, f);
+		s--;
+		fputc(0xff, f);
+		s--;
+		for (j = 0; j < 117; j++) {
 			fputc(0x00, f);
 			s--;
 		}
@@ -499,8 +517,36 @@ void CreateMcd(char *mcd) {
 		s--;
 	}
 
+	for (i = 0; i < 20; i++) {
+		fputc(0xff, f);
+		s--;
+		fputc(0xff, f);
+		s--;
+		fputc(0xff, f);
+		s--;
+		fputc(0xff, f);
+		s--;
+		fputc(0x00, f);
+		s--;
+		fputc(0x00, f);
+		s--;
+		fputc(0x00, f);
+		s--;
+		fputc(0x00, f);
+		s--;
+		fputc(0xff, f);
+		s--;
+		fputc(0xff, f);
+		s--;
+		for (j = 0; j < 118; j++) {
+			fputc(0x00, f);
+			s--;
+		}
+	}
+
 	while ((s--) >= 0)
 		fputc(0, f);
+
 	fclose(f);
 }
 
