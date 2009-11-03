@@ -2,6 +2,7 @@ November 3, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * macosx/plugins/HIDInput/src/PlugPAD.c: Implemented PADstartPoll() and
    PADpoll().
+ * plugins/dfxvideo/key.c: Handle Fullscreen toggle message for Mac OS X.
 
 November 2, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

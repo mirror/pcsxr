@@ -80,6 +80,9 @@ void GPUkeypressed(int keycode)
      BuildDispMenu(0);
      break;
     }
+#ifdef _MACGL
+   default: { void HandleKey(int keycode); HandleKey(keycode); }
+#endif
   }
 }
 
