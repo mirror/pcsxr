@@ -14,8 +14,7 @@
 #include "psxcommon.h"
 #include "sio.h"
 
-int sysInited = 0;
-
+static BOOL sysInited = NO;
 //#define EMU_LOG
 
 int main(int argc, const char *argv[])
@@ -50,40 +49,35 @@ int main(int argc, const char *argv[])
 }
 
 
-int SysInit()
-{
-    if (sysInited)
-        return 0;
-    
+int SysInit() {
+	if (!sysInited) {
 #ifdef GTE_DUMP
-    gteLog = fopen("gteLog.txt","wb");
-    setvbuf(gteLog, NULL, _IONBF, 0);
+		gteLog = fopen("gteLog.txt","wb");
+		setvbuf(gteLog, NULL, _IONBF, 0);
 #endif
 
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
-    emuLog = fopen("emuLog.txt","wb");
+		emuLog = fopen("emuLog.txt","wb");
 #else
-    emuLog = stdout;
+		emuLog = stdout;
 #endif
-    setvbuf(emuLog, NULL, _IONBF, 0);
+		setvbuf(emuLog, NULL, _IONBF, 0);
 #endif
 
-    if (psxInit() != 0)
-		return -1;
-	
-    while (LoadPlugins() == -1) {
+		if (psxInit() != 0)
 			return -1;
-        //CancelQuit = 1;
-        //ConfigurePlugins();
-        //CancelQuit = 0;
-    }
 
-    LoadMcds(Config.Mcd1, Config.Mcd2);
-    
-    sysInited = 1;
-    
-    return 0;
+		sysInited = YES;
+	}
+
+	if (LoadPlugins() == -1) {
+		return -1;
+	}
+
+	LoadMcds(Config.Mcd1, Config.Mcd2);
+
+	return 0;
 }
 
 void SysReset() {
@@ -91,8 +85,7 @@ void SysReset() {
     //psxReset();
 }
 
-void SysPrintf(char *fmt, ...)
-{
+void SysPrintf(char *fmt, ...) {
     va_list list;
     char msg[512];
 
@@ -238,8 +231,8 @@ void SysClose() // Close mem and plugins
     ReleasePlugins();
 
     if (emuLog != NULL) fclose(emuLog);
-    
-    sysInited = false;
+
+    sysInited = NO;
 }
 
 void OnFile_Exit()

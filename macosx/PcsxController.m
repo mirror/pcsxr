@@ -154,11 +154,11 @@ NSString *saveStatePath;
 		[menuItem setState:([EmuThread isPaused] ? NSOnState : NSOffState)];
 	}
 
-	if ([menuItem action] == @selector(pause:) || [menuItem action] == @selector(freeze:) ||
-		 [menuItem action] == @selector(fullscreen:))
+	if ([menuItem action] == @selector(pause:) || [menuItem action] == @selector(fullscreen:))
 		return [EmuThread active];
 
-	if ([menuItem action] == @selector(reset:) || [menuItem action] == @selector(ejectCD:))
+	if ([menuItem action] == @selector(reset:) || [menuItem action] == @selector(ejectCD:) ||
+		 [menuItem action] == @selector(freeze:))
 		return [EmuThread active] && ![EmuThread isRunBios];
 
 	if ([menuItem action] == @selector(runCD:) || [menuItem action] == @selector(runIso:) ||
@@ -174,7 +174,7 @@ NSString *saveStatePath;
 	}
 
 	if ([menuItem action] == @selector(defrost:)) {
-		if (![EmuThread active])
+		if (![EmuThread active] || [EmuThread isRunBios])
 			return NO;
 
 		NSString *path = [NSString stringWithFormat:@"%@/%s-%3.3d.pcsxstate", saveStatePath, CdromId, [menuItem tag]];
