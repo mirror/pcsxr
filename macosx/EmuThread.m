@@ -33,7 +33,7 @@ static pthread_mutex_t eventMutex;
 - (void)EmuThreadRun:(id)anObject
 {
 	pool = [[NSAutoreleasePool alloc] init];
-    
+
 	[[NSNotificationCenter defaultCenter] addObserver:self
         selector:@selector(emuWindowDidClose:)
         name:@"emuWindowDidClose" object:nil];
@@ -45,14 +45,14 @@ static pthread_mutex_t eventMutex;
 	[[NSNotificationCenter defaultCenter] addObserver:self
         selector:@selector(emuWindowWantResume:)
         name:@"emuWindowWantResume" object:nil];
-	 
+
 	// we shouldn't change the priority, since we might depend on subthreads
 	//[NSThread setThreadPriority:1.0-((1.0-[NSThread threadPriority])/4.0)];
 
 	// Do processing here
 	if (OpenPlugins() == -1)
 		goto done;
-    
+
 	if (setjmp(restartJmp) == 0) {
 		psxReset();
 	}
@@ -69,6 +69,42 @@ static pthread_mutex_t eventMutex;
 	if (defrostPath) {
 		LoadState([defrostPath fileSystemRepresentation]);
 		[defrostPath release]; defrostPath = nil;
+	}
+
+	psxCpu->Execute();
+
+done:
+	[pool release]; pool = nil;
+	emuThread = nil;
+	
+	return;
+}
+
+- (void)EmuThreadRunBios:(id)anObject
+{
+	pool = [[NSAutoreleasePool alloc] init];
+
+	[[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(emuWindowDidClose:)
+        name:@"emuWindowDidClose" object:nil];
+
+	[[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(emuWindowWantPause:)
+        name:@"emuWindowWantPause" object:nil];
+
+	[[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(emuWindowWantResume:)
+        name:@"emuWindowWantResume" object:nil];
+
+	// we shouldn't change the priority, since we might depend on subthreads
+	//[NSThread setThreadPriority:1.0-((1.0-[NSThread threadPriority])/4.0)];
+
+	// Do processing here
+	if (OpenPlugins() == -1)
+		goto done;
+
+	if (setjmp(restartJmp) == 0) {
+		psxReset();
 	}
 
 	psxCpu->Execute();
@@ -170,39 +206,73 @@ done:
 	}
 }
 
-
 + (void)run
 {
 	int err;
-	
+
 	if (emuThread) {
 		[EmuThread resume];
 		return;
 	}
-	
+
 	if (pthread_mutex_lock(&eventMutex) != 0) {
 		err = pthread_cond_init(&eventCond, NULL);
 		if (err) return;
 
 		err = pthread_mutex_init(&eventMutex, NULL);
 		if (err) return;
-		
+
 		pthread_mutex_lock(&eventMutex);
 	}
-	
+
     safeEvent = EMUEVENT_NONE;
     paused = NO;
-    
+
 	if (SysInit() != 0) {
 		pthread_mutex_unlock(&eventMutex);
 		return;
 	}
-    
-	 emuThread = [[EmuThread alloc] init];
+
+	emuThread = [[EmuThread alloc] init];
 
     [NSThread detachNewThreadSelector:@selector(EmuThreadRun:) 
                 toTarget:emuThread withObject:nil];
-	
+
+	pthread_mutex_unlock(&eventMutex);
+}
+
++ (void)runBios
+{
+	int err;
+
+	if (emuThread) {
+		[EmuThread resume];
+		return;
+	}
+
+	if (pthread_mutex_lock(&eventMutex) != 0) {
+		err = pthread_cond_init(&eventCond, NULL);
+		if (err) return;
+
+		err = pthread_mutex_init(&eventMutex, NULL);
+		if (err) return;
+
+		pthread_mutex_lock(&eventMutex);
+	}
+
+    safeEvent = EMUEVENT_NONE;
+    paused = NO;
+
+	if (SysInit() != 0) {
+		pthread_mutex_unlock(&eventMutex);
+		return;
+	}
+
+	emuThread = [[EmuThread alloc] init];
+
+    [NSThread detachNewThreadSelector:@selector(EmuThreadRunBios:) 
+                toTarget:emuThread withObject:nil];
+
 	pthread_mutex_unlock(&eventMutex);
 }
 

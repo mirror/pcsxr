@@ -123,8 +123,10 @@ NSString *saveStatePath;
     }
 }
 
-- (IBAction)runExe:(id)sender
+- (IBAction)runBios:(id)sender
 {
+	cdrfilename[0] = '\0';
+	[EmuThread runBios];
 }
 
 - (IBAction)freeze:(id)sender
@@ -157,12 +159,15 @@ NSString *saveStatePath;
 		 [menuItem action] == @selector(fullscreen:))
 		return [EmuThread active];
 
-	if ([menuItem action] == @selector(runCD:) || [menuItem action] == @selector(runIso:)) {
-		if (preferenceWindow != nil) {
-			if ([preferenceWindow isVisible]) {
+	if ([menuItem action] == @selector(runCD:) || [menuItem action] == @selector(runIso:) ||
+		 [menuItem action] == @selector(runBios:)) {
+		if (preferenceWindow != nil)
+			if ([preferenceWindow isVisible])
 				return NO;
-			}
-		}
+
+		if ([menuItem action] == @selector(runBios:) && strcmp(Config.Bios, "HLE") == 0)
+			return NO;
+
 		return ![EmuThread active];
 	}
 

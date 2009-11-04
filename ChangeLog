@@ -2,6 +2,13 @@ November 4, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/sio.c: Fixed the format of new memory card file, which solves
    the saving problem with Final Fantasy 6.
+ * macosx/EmuThread.h: Added "Run BIOS" menu item.
+ * macosx/PcsxController.h: Likewise.
+ * macosx/EmuThread.m: Likewise.
+ * macosx/PcsxController.m: Likewise.
+ * macosx/English.lproj/PCSX.nib/objects.nib: Likewise.
+ * macosx/English.lproj/PCSX.nib/info.nib: Likewise.
+ * macosx/English.lproj/PCSX.nib/classes.nib: Likewise.
 
 November 3, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

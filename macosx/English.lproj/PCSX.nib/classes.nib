@@ -11,6 +11,7 @@
                 pause = id; 
                 preferences = id; 
                 reset = id; 
+                runBios = id; 
                 runCD = id; 
                 runExe = id; 
                 runIso = id; 

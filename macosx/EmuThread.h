@@ -16,9 +16,11 @@
 }
 
 - (void)EmuThreadRun:(id)anObject;
+- (void)EmuThreadRunBios:(id)anObject;
 - (void)handleEvents;
 
 + (void)run;
++ (void)runBios;
 + (void)stop;
 + (BOOL)pause;
 + (BOOL)pauseSafe;
