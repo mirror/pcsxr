@@ -30,6 +30,7 @@
 
 + (BOOL)isPaused;
 + (BOOL)active;
++ (BOOL)isRunBios;
 
 + (void)freezeAt:(NSString *)path which:(int)num;
 + (BOOL)defrostAt:(NSString *)path;

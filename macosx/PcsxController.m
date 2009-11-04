@@ -154,10 +154,12 @@ NSString *saveStatePath;
 		[menuItem setState:([EmuThread isPaused] ? NSOnState : NSOffState)];
 	}
 
-	if ([menuItem action] == @selector(reset:) || [menuItem action] == @selector(pause:) ||
-		 [menuItem action] == @selector(ejectCD:) || [menuItem action] == @selector(freeze:) ||
+	if ([menuItem action] == @selector(pause:) || [menuItem action] == @selector(freeze:) ||
 		 [menuItem action] == @selector(fullscreen:))
 		return [EmuThread active];
+
+	if ([menuItem action] == @selector(reset:) || [menuItem action] == @selector(ejectCD:))
+		return [EmuThread active] && ![EmuThread isRunBios];
 
 	if ([menuItem action] == @selector(runCD:) || [menuItem action] == @selector(runIso:) ||
 		 [menuItem action] == @selector(runBios:)) {

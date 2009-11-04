@@ -19,6 +19,7 @@ EmuThread *emuThread;
 NSString *defrostPath = nil;
 static int safeEvent;
 static int paused;
+static int runbios;
 
 static pthread_cond_t eventCond;
 static pthread_mutex_t eventMutex;
@@ -227,6 +228,7 @@ done:
 
     safeEvent = EMUEVENT_NONE;
     paused = NO;
+    runbios = NO;
 
 	if (SysInit() != 0) {
 		pthread_mutex_unlock(&eventMutex);
@@ -262,6 +264,7 @@ done:
 
     safeEvent = EMUEVENT_NONE;
     paused = NO;
+    runbios = YES;
 
 	if (SysInit() != 0) {
 		pthread_mutex_unlock(&eventMutex);
@@ -355,6 +358,11 @@ done:
 + (BOOL)isPaused
 {
     return paused;
+}
+
++ (BOOL)isRunBios
+{
+    return runbios;
 }
 
 + (BOOL)active
