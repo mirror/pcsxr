@@ -1345,11 +1345,18 @@ void BlitScreen32(unsigned char *surf, int32_t x, int32_t y)
  unsigned short row, column;
  unsigned short dx = PreviousPSXDisplay.Range.x1;
  unsigned short dy = PreviousPSXDisplay.DisplayMode.y;
- 
- //int32_t lPitch = (dx + PreviousPSXDisplay.Range.x0) << 2;
+
  int32_t lPitch = PSXDisplay.DisplayMode.x << 2;
 
  uint32_t *destpix;
+
+ if (PreviousPSXDisplay.Range.y0) // centering needed?
+  {
+   surf += PreviousPSXDisplay.Range.y0 * lPitch;
+   dy -= PreviousPSXDisplay.Range.y0;
+  }
+
+ surf += PreviousPSXDisplay.Range.x0 << 2;
 
  if (PSXDisplay.RGB24)
   {
@@ -1392,63 +1399,68 @@ void BlitToYUV(unsigned char * surf,int32_t x,int32_t y)
  unsigned short dx=PreviousPSXDisplay.Range.x1;
  unsigned short dy=PreviousPSXDisplay.DisplayMode.y;
  int Y,U,V, R,G,B;
- 
-	//int32_t lPitch=(dx+PreviousPSXDisplay.Range.x0)<<2;
-	int32_t lPitch=PSXDisplay.DisplayMode.x<<2;
-	uint32_t *destpix;
 
- if(PSXDisplay.RGB24)
+ int32_t lPitch=PSXDisplay.DisplayMode.x << 2;
+ uint32_t *destpix;
+
+ if (PreviousPSXDisplay.Range.y0) // centering needed?
   {
-   for(column=0;column<dy;column++)
+   surf += PreviousPSXDisplay.Range.y0 * lPitch;
+   dy -= PreviousPSXDisplay.Range.y0;
+  }
+
+ surf += PreviousPSXDisplay.Range.x0 << 2;
+
+ if (PSXDisplay.RGB24)
+  {
+   for (column = 0; column < dy; column++)
     {
-     startxy=((1024)*(column+y))+x;
-     pD=(unsigned char *)&psxVuw[startxy];
-     destpix=(uint32_t*)(surf+(column*lPitch));
-     for(row=0;row<dx;row++)
+     startxy = (1024 * (column + y)) + x;
+     pD = (unsigned char *)&psxVuw[startxy];
+     destpix = (uint32_t *)(surf + (column * lPitch));
+     for (row = 0; row < dx; row++)
       {
-       lu=*((uint32_t *)pD);
+       lu = *((uint32_t *)pD);
 
-	R = RED(lu);
-	G = GREEN(lu);
-	B = BLUE(lu);
+       R = RED(lu);
+       G = GREEN(lu);
+       B = BLUE(lu);
 
-	Y = min(abs(R * 2104 + G * 4130 + B * 802 + 4096 + 131072) >> 13, 235);
-	U = min(abs(R * -1214 + G * -2384 + B * 3598 + 4096 + 1048576) >> 13, 240);
-	V = min(abs(R * 3598 + G * -3013 + B * -585 + 4096 + 1048576) >> 13, 240);
+       Y = min(abs(R * 2104 + G * 4130 + B * 802 + 4096 + 131072) >> 13, 235);
+       U = min(abs(R * -1214 + G * -2384 + B * 3598 + 4096 + 1048576) >> 13, 240);
+       V = min(abs(R * 3598 + G * -3013 + B * -585 + 4096 + 1048576) >> 13, 240);
 
-	destpix[row] = 
 #ifdef __BIG_ENDIAN__
-        Y << 24 | U << 16 | Y << 8 | V;
+       destpix[row] = Y << 24 | U << 16 | Y << 8 | V;
 #else
-        Y << 24 | V << 16 | Y << 8 | U;
+       destpix[row] = Y << 24 | V << 16 | Y << 8 | U;
 #endif
-       pD+=3;
+       pD += 3;
       }
     }
   }
  else
   {
-   for(column=0;column<dy;column++)
+   for (column = 0; column < dy; column++)
     {
-     startxy=((1024)*(column+y))+x;
-     destpix=(uint32_t*)(surf+(column*lPitch));
-     for(row=0;row<dx;row++)
+     startxy = (1024 * (column + y)) + x;
+     destpix = (uint32_t *)(surf + (column * lPitch));
+     for (row = 0; row < dx; row++)
       {
-       s=GETLE16(&psxVuw[startxy++]);
+       s = GETLE16(&psxVuw[startxy++]);
 
-	R = (s << 3) &0xf8;
-	G = (s >> 2) &0xf8;
-	B = (s >> 7) &0xf8;
+       R = (s << 3) &0xf8;
+       G = (s >> 2) &0xf8;
+       B = (s >> 7) &0xf8;
 
-	Y = min(abs(R * 2104 + G * 4130 + B * 802 + 4096 + 131072) >> 13, 235);
-	U = min(abs(R * -1214 + G * -2384 + B * 3598 + 4096 + 1048576) >> 13, 240);
-	V = min(abs(R * 3598 + G * -3013 + B * -585 + 4096 + 1048576) >> 13, 240);
+       Y = min(abs(R * 2104 + G * 4130 + B * 802 + 4096 + 131072) >> 13, 235);
+       U = min(abs(R * -1214 + G * -2384 + B * 3598 + 4096 + 1048576) >> 13, 240);
+       V = min(abs(R * 3598 + G * -3013 + B * -585 + 4096 + 1048576) >> 13, 240);
 
-	destpix[row] = 
 #ifdef __BIG_ENDIAN__
-        Y << 24 | U << 16 | Y << 8 | V;
+       destpix[row] = Y << 24 | U << 16 | Y << 8 | V;
 #else
-        Y << 24 | V << 16 | Y << 8 | U;
+       destpix[row] = Y << 24 | V << 16 | Y << 8 | U;
 #endif
       }
     }
@@ -1579,7 +1591,7 @@ void DoBufferSwap(void)
 	Screen *screen;
 	Window _dw;
 	XvImage *xvi;
-	unsigned int dstx,dsty,srcy=0;
+	unsigned int dstx, dsty, srcy = 0;
 	unsigned int _d, _w, _h;	//don't care about _d
 
 	finalw = PSXDisplay.DisplayMode.x;
@@ -1627,7 +1639,7 @@ void DoBufferSwap(void)
 		_w = screen->width;
 		_h = screen->height;
 	}
-	
+
 	dstx = 0;
 	dsty = 0;
 
