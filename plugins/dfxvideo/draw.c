@@ -1352,11 +1352,20 @@ void BlitScreen32(unsigned char *surf, int32_t x, int32_t y)
 
  if (PreviousPSXDisplay.Range.y0) // centering needed?
   {
+   memset(surf, 0, PreviousPSXDisplay.Range.y0 * lPitch);
    surf += PreviousPSXDisplay.Range.y0 * lPitch;
    dy -= PreviousPSXDisplay.Range.y0;
   }
 
- surf += PreviousPSXDisplay.Range.x0 << 2;
+ if (PreviousPSXDisplay.Range.x0)
+  {
+   for (column = 0; column < dy; column++)
+    {
+     destpix = (uint32_t *)(surf + (column * lPitch));
+     memset(destpix, 0, PreviousPSXDisplay.Range.x0 << 2);
+    }
+   surf += PreviousPSXDisplay.Range.x0 << 2;
+  }
 
  if (PSXDisplay.RGB24)
   {
@@ -1405,11 +1414,20 @@ void BlitToYUV(unsigned char * surf,int32_t x,int32_t y)
 
  if (PreviousPSXDisplay.Range.y0) // centering needed?
   {
+   memset(surf, 0, PreviousPSXDisplay.Range.y0 * lPitch);
    surf += PreviousPSXDisplay.Range.y0 * lPitch;
    dy -= PreviousPSXDisplay.Range.y0;
   }
 
- surf += PreviousPSXDisplay.Range.x0 << 2;
+ if (PreviousPSXDisplay.Range.x0)
+  {
+   for (column = 0; column < dy; column++)
+    {
+     destpix = (uint32_t *)(surf + (column * lPitch));
+     memset(destpix, 0, PreviousPSXDisplay.Range.x0 << 2);
+    }
+   surf += PreviousPSXDisplay.Range.x0 << 2;
+  }
 
  if (PSXDisplay.RGB24)
   {
