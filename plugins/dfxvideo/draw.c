@@ -1352,9 +1352,13 @@ void BlitScreen32(unsigned char *surf, int32_t x, int32_t y)
 
  if (PreviousPSXDisplay.Range.y0) // centering needed?
   {
-   memset(surf, 0, PreviousPSXDisplay.Range.y0 * lPitch);
-   surf += PreviousPSXDisplay.Range.y0 * lPitch;
+   memset(surf, 0, (PreviousPSXDisplay.Range.y0 >> 1) * lPitch);
+
    dy -= PreviousPSXDisplay.Range.y0;
+   surf += (PreviousPSXDisplay.Range.y0 >> 1) * lPitch;
+
+   memset(surf + dy * lPitch,
+          0, ((PreviousPSXDisplay.Range.y0 + 1) >> 1) * lPitch);
   }
 
  if (PreviousPSXDisplay.Range.x0)
@@ -1414,9 +1418,13 @@ void BlitToYUV(unsigned char * surf,int32_t x,int32_t y)
 
  if (PreviousPSXDisplay.Range.y0) // centering needed?
   {
-   memset(surf, 0, PreviousPSXDisplay.Range.y0 * lPitch);
-   surf += PreviousPSXDisplay.Range.y0 * lPitch;
+   memset(surf, 0, (PreviousPSXDisplay.Range.y0 >> 1) * lPitch);
+
    dy -= PreviousPSXDisplay.Range.y0;
+   surf += (PreviousPSXDisplay.Range.y0 >> 1) * lPitch;
+
+   memset(surf + dy * lPitch,
+          0, ((PreviousPSXDisplay.Range.y0 + 1) >> 1) * lPitch);
   }
 
  if (PreviousPSXDisplay.Range.x0)
