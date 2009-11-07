@@ -1117,7 +1117,6 @@ if (!myvisual)
 	return;
 }
 
-/*
  if(myvisual->red_mask==0x00007c00 &&
     myvisual->green_mask==0x000003e0 &&
     myvisual->blue_mask==0x0000001f)
@@ -1128,19 +1127,19 @@ if (!myvisual)
     myvisual->blue_mask==0x0000001f)
      {iColDepth=16;}
  else
-*/
  if(myvisual->red_mask==0x00ff0000 &&
     myvisual->green_mask==0x0000ff00 &&
     myvisual->blue_mask==0x000000ff)
      {iColDepth=32;}
  else
   {
-   fprintf(stderr,"COLOR DEPTH NOT SUPPORTED!\n");
+   iColDepth=0;
+/*   fprintf(stderr,"COLOR DEPTH NOT SUPPORTED!\n");
    fprintf(stderr,"r: %08lx\n",myvisual->red_mask);
    fprintf(stderr,"g: %08lx\n",myvisual->green_mask);
    fprintf(stderr,"b: %08lx\n",myvisual->blue_mask);
    DestroyDisplay();
-   return;
+   return;*/
   }
 
  // pffff... much work for a simple blank cursor... oh, well...
@@ -1525,71 +1524,6 @@ void RGB2YUV(uint32_t *s, int width, int height, uint32_t *d)
 			d++;
 		}
 	}
-}
-
-void ShowGunCursor(unsigned char * surf,int iPitch)
-{
- unsigned short dx=(unsigned short)PreviousPSXDisplay.Range.x1;
- unsigned short dy=(unsigned short)PreviousPSXDisplay.DisplayMode.y;
- int x,y,iPlayer,sx,ex,sy,ey;
-
- if(iColDepth==32) iPitch=iPitch<<2;
- else              iPitch=iPitch<<1;
-
- if(PreviousPSXDisplay.Range.y0)                       // centering needed?
-  {
-   surf+=PreviousPSXDisplay.Range.y0*iPitch;
-   dy-=PreviousPSXDisplay.Range.y0;
-  }
-
- if(iColDepth==32)                                     // 32 bit color depth
-  {
-   const uint32_t crCursorColor32[8]={0xffff0000,0xff00ff00,0xff0000ff,0xffff00ff,0xffffff00,0xff00ffff,0xffffffff,0xff7f7f7f};
-
-   surf+=PreviousPSXDisplay.Range.x0<<2;               // -> add x left border
-
-   for(iPlayer=0;iPlayer<8;iPlayer++)                  // -> loop all possible players
-    {
-     if(usCursorActive&(1<<iPlayer))                   // -> player active?
-      {
-       const int ty=(ptCursorPoint[iPlayer].y*dy)/256;  // -> calculate the cursor pos in the current display
-       const int tx=(ptCursorPoint[iPlayer].x*dx)/512;
-       sx=tx-5;if(sx<0) {if(sx&1) sx=1; else sx=0;}
-       sy=ty-5;if(sy<0) {if(sy&1) sy=1; else sy=0;}
-       ex=tx+6;if(ex>dx) ex=dx;
-       ey=ty+6;if(ey>dy) ey=dy;
-
-       for(x=tx,y=sy;y<ey;y+=2)                        // -> do dotted y line
-        *((uint32_t *)((surf)+(y*iPitch)+x*4))=crCursorColor32[iPlayer];
-       for(y=ty,x=sx;x<ex;x+=2)                        // -> do dotted x line
-        *((uint32_t *)((surf)+(y*iPitch)+x*4))=crCursorColor32[iPlayer];
-      }
-    }
-  }
- else                                                  // 16 bit color depth
-  {
-   const unsigned short crCursorColor16[8]={0xf800,0x07c0,0x001f,0xf81f,0xffc0,0x07ff,0xffff,0x7bdf};
-
-   surf+=PreviousPSXDisplay.Range.x0<<1;               // -> same stuff as above
-
-   for(iPlayer=0;iPlayer<8;iPlayer++)
-    {
-     if(usCursorActive&(1<<iPlayer))
-      {
-       const int ty=(ptCursorPoint[iPlayer].y*dy)/256;
-       const int tx=(ptCursorPoint[iPlayer].x*dx)/512;
-       sx=tx-5;if(sx<0) {if(sx&1) sx=1; else sx=0;}
-       sy=ty-5;if(sy<0) {if(sy&1) sy=1; else sy=0;}
-       ex=tx+6;if(ex>dx) ex=dx;
-       ey=ty+6;if(ey>dy) ey=dy;
-
-       for(x=tx,y=sy;y<ey;y+=2)
-        *((unsigned short *)((surf)+(y*iPitch)+x*2))=crCursorColor16[iPlayer];
-       for(y=ty,x=sx;x<ex;x+=2)
-        *((unsigned short *)((surf)+(y*iPitch)+x*2))=crCursorColor16[iPlayer];
-      }
-    }
-  }
 }
 
 extern time_t tStart;

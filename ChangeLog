@@ -1,3 +1,7 @@
+November 7, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfxvideo/draw.c: Don't bail out if the color depth is not set to 32.
+
 November 5, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfxvideo/draw.c: Check for centering during blits.
