@@ -1,3 +1,9 @@
+November 8, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/r3000a.c: Commented out the check for psxRegs.interrupt
+   before checking for hardware interrupts, which fixes the issue with I.Q.
+   Final (maybe other games too).
+
 November 7, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfxvideo/draw.c: Don't bail out if the color depth is not set to 32.
