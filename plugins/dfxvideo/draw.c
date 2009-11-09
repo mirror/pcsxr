@@ -1419,7 +1419,7 @@ void BlitToYUV(unsigned char * surf,int32_t x,int32_t y)
   {
    for (column = 0; column < PreviousPSXDisplay.Range.y0 >> 1; column++)
     {
-     destpix = (uint32_t *)(surf + (column * lPitch));
+     destpix = (uint32_t *)(surf + column * lPitch);
      for (row = 0; row < dx; row++)
      {
       destpix[row] = (4 << 24) | (128 << 16) | (4 << 8) | 128;
@@ -1431,7 +1431,7 @@ void BlitToYUV(unsigned char * surf,int32_t x,int32_t y)
 
    for (column = 0; column < (PreviousPSXDisplay.Range.y0 + 1) >> 1; column++)
     {
-     destpix = (uint32_t *)(surf + dy * lPitch + (column * lPitch));
+     destpix = (uint32_t *)(surf + dy * lPitch + column * lPitch);
      for (row = 0; row < dx; row++)
      {
       destpix[row] = (4 << 24) | (128 << 16) | (4 << 8) | 128;
