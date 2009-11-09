@@ -1,3 +1,7 @@
+November 9, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfxvideo/draw.c: Fixed green edge in YUV mode.
+
 November 8, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/r3000a.c: Commented out the check for psxRegs.interrupt

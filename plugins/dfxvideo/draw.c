@@ -1408,22 +1408,35 @@ void BlitToYUV(unsigned char * surf,int32_t x,int32_t y)
  unsigned int startxy;
  uint32_t lu;unsigned short s;
  unsigned short row,column;
- unsigned short dx=PreviousPSXDisplay.Range.x1;
- unsigned short dy=PreviousPSXDisplay.DisplayMode.y;
+ unsigned short dx = PreviousPSXDisplay.Range.x1;
+ unsigned short dy = PreviousPSXDisplay.DisplayMode.y;
  int Y,U,V, R,G,B;
 
- int32_t lPitch=PSXDisplay.DisplayMode.x << 2;
+ int32_t lPitch = PSXDisplay.DisplayMode.x << 2;
  uint32_t *destpix;
 
  if (PreviousPSXDisplay.Range.y0) // centering needed?
   {
-   memset(surf, 0, (PreviousPSXDisplay.Range.y0 >> 1) * lPitch);
+   for (column = 0; column < PreviousPSXDisplay.Range.y0 >> 1; column++)
+    {
+     destpix = (uint32_t *)(surf + (column * lPitch));
+     for (row = 0; row < dx; row++)
+     {
+      destpix[row] = (4 << 24) | (128 << 16) | (4 << 8) | 128;
+     }
+    }
 
    dy -= PreviousPSXDisplay.Range.y0;
    surf += (PreviousPSXDisplay.Range.y0 >> 1) * lPitch;
 
-   memset(surf + dy * lPitch,
-          0, ((PreviousPSXDisplay.Range.y0 + 1) >> 1) * lPitch);
+   for (column = 0; column < (PreviousPSXDisplay.Range.y0 + 1) >> 1; column++)
+    {
+     destpix = (uint32_t *)(surf + dy * lPitch + (column * lPitch));
+     for (row = 0; row < dx; row++)
+     {
+      destpix[row] = (4 << 24) | (128 << 16) | (4 << 8) | 128;
+     }
+    }
   }
 
  if (PreviousPSXDisplay.Range.x0)
@@ -1431,7 +1444,10 @@ void BlitToYUV(unsigned char * surf,int32_t x,int32_t y)
    for (column = 0; column < dy; column++)
     {
      destpix = (uint32_t *)(surf + (column * lPitch));
-     memset(destpix, 0, PreviousPSXDisplay.Range.x0 << 2);
+     for (row = 0; row < PreviousPSXDisplay.Range.x0; row++)
+      {
+       destpix[row] = (4 << 24) | (128 << 16) | (4 << 8) | 128;
+      }
     }
    surf += PreviousPSXDisplay.Range.x0 << 2;
   }
