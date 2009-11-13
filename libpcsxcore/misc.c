@@ -146,7 +146,7 @@ int GetCdromFile(u8 *mdir, u8 *time, s8 *filename) {
 int LoadCdrom() {
 	EXE_HEADER tmpHead;
 	struct iso_directory_record *dir;
-	u8 time[4],*buf;
+	u8 time[4], *buf;
 	u8 mdir[4096];
 	s8 exename[256];
 
@@ -177,16 +177,23 @@ int LoadCdrom() {
 		// read the SYSTEM.CNF
 		READTRACK();
 
-		sscanf((char*)buf+12, "BOOT = cdrom:\\%256s", exename);
+		sscanf((char *)buf + 12, "BOOT = cdrom:\\%256s", exename);
 		if (GetCdromFile(mdir, time, exename) == -1) {
-			sscanf((char*)buf+12, "BOOT = cdrom:%256s", exename);
+			sscanf((char *)buf + 12, "BOOT = cdrom:%256s", exename);
 			if (GetCdromFile(mdir, time, exename) == -1) {
-				char *ptr = strstr(buf+12, "cdrom:");
-				if(ptr) {
-					strncpy(exename, ptr, 256);
+				char *ptr = strstr(buf + 12, "cdrom:");
+				if (ptr != NULL) {
+					ptr += 6;
+					while (*ptr == '\\' || *ptr == '/') ptr++;
+					strncpy(exename, ptr, 255);
+					exename[255] = '\0';
+					ptr = exename;
+					while (*ptr != '\0' && *ptr != '\r' && *ptr != '\n') ptr++;
+					*ptr = '\0';
 					if (GetCdromFile(mdir, time, exename) == -1)
 						return -1;
-				}
+				} else
+					return -1;
 			}
 		}
 
@@ -194,8 +201,7 @@ int LoadCdrom() {
 		READTRACK();
 	}
 
-	
-	memcpy(&tmpHead, buf+12, sizeof(EXE_HEADER));
+	memcpy(&tmpHead, buf + 12, sizeof(EXE_HEADER));
 
 	psxRegs.pc = SWAP32(tmpHead.pc0);
 	psxRegs.GPR.n.gp = SWAP32(tmpHead.gp0);
@@ -234,7 +240,7 @@ int LoadCdromFile(char *filename, EXE_HEADER *head) {
 	READTRACK();
 
 	// skip head and sub, and go to the root directory record
-	dir = (struct iso_directory_record*) &buf[12+156]; 
+	dir = (struct iso_directory_record *)&buf[12 + 156]; 
 
 	mmssdd(dir->extent, (char*)time);
 
@@ -244,7 +250,7 @@ int LoadCdromFile(char *filename, EXE_HEADER *head) {
 
 	READTRACK();
 
-	memcpy(head, buf+12, sizeof(EXE_HEADER));
+	memcpy(head, buf + 12, sizeof(EXE_HEADER));
 	size = head->t_size;
 	addr = head->t_addr;
 
@@ -252,7 +258,7 @@ int LoadCdromFile(char *filename, EXE_HEADER *head) {
 		incTime();
 		READTRACK();
 
-		memcpy((void *)PSXM(addr), buf+12, 2048);
+		memcpy((void *)PSXM(addr), buf + 12, 2048);
 
 		size -= 2048;
 		addr += 2048;
@@ -294,15 +300,18 @@ int CheckCdrom() {
 			sscanf((char *)buf + 12, "BOOT = cdrom:%256s", exename);
 			if (GetCdromFile(mdir, time, exename) == -1) {
 				char *ptr = strstr(buf + 12, "cdrom:");			// possibly the executable is in some subdir
-				for (i=0; i<32; i++) {
-					if (ptr[i] == ' ') continue;
-					if (ptr[i] == '\\') continue;
-				}
-				if (ptr) {
-					strncpy(exename, ptr, 256);
+				if (ptr != NULL) {
+					ptr += 6;
+					while (*ptr == '\\' || *ptr == '/') ptr++;
+					strncpy(exename, ptr, 255);
+					exename[255] = '\0';
+					ptr = exename;
+					while (*ptr != '\0' && *ptr != '\r' && *ptr != '\n') ptr++;
+					*ptr = '\0';
 					if (GetCdromFile(mdir, time, exename) == -1)
 					 	return -1;		// main executable not found
-				}
+				} else
+					return -1;
 			}
 		}
 	} else if (GetCdromFile(mdir, time, "PSX.EXE;1") != -1) {

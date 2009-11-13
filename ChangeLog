@@ -1,3 +1,8 @@
+November 13, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/misc.c: Fixed CheckCdrom() and LoadCdrom() so that format like
+   "cdrom:\\FILENAME" and "cdrom:/FILENAME" in SYSTEM.CNF can be accepted.
+
 November 9, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfxvideo/draw.c: Fixed green edge in YUV mode.
