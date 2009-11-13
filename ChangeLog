@@ -5,6 +5,8 @@ November 13, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * libpcsxcore/ix86_64/README: Removed obsolete information.
  * macosx/plugins/CDDeviceInterface/src/PlugCD.c: Changed the include path
    to SCSITaskLib.h for compatibility with Mac OS X 10.6 (Thanks maggix).
+ * macosx/English.lproj/PCSX.nib/objects.nib: Added 2 more savestate slots.
+ * macosx/English.lproj/PCSX.nib/info.nib: Likewise.
 
 November 9, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
