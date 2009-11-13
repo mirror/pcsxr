@@ -32,7 +32,7 @@
 #include <IOKit/storage/IOMedia.h>
 #include <IOKit/storage/IOCDTypes.h>
 #include <IOKit/storage/IOCDMediaBSDClient.h>
-#include <IOKit/scsi-commands/SCSITaskLib.h>
+#include <IOKit/scsi/SCSITaskLib.h>
 #include <CoreFoundation/CoreFoundation.h>
 
 //#include "plugins.h"

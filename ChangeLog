@@ -2,6 +2,8 @@ November 13, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/misc.c: Fixed CheckCdrom() and LoadCdrom() so that format like
    "cdrom:\\FILENAME" and "cdrom:/FILENAME" in SYSTEM.CNF can be accepted.
+ * macosx/plugins/CDDeviceInterface/src/PlugCD.c: Changed the include path
+   to SCSITaskLib.h for compatibility with Mac OS X 10.6 (Thanks maggix).
 
 November 9, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
