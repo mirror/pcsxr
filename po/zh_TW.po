@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-14 13:12+0800\n"
-"PO-Revision-Date: 2009-11-14 13:17+0700\n"
+"PO-Revision-Date: 2009-11-25 23:27+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -631,7 +631,7 @@ msgstr "法語"
 
 #: ../win32/gui/WndMain.c:83
 msgid "Italian"
-msgstr "意大利語"
+msgstr "義大利語"
 
 #: ../win32/gui/WndMain.c:84
 msgid "Portuguese"
@@ -651,7 +651,7 @@ msgstr "簡體中文"
 
 #: ../win32/gui/WndMain.c:88
 msgid "Traditional Chinese"
-msgstr "繁體中文"
+msgstr "正體中文"
 
 #: ../win32/gui/WndMain.c:89
 msgid "Japanese"
@@ -1269,7 +1269,7 @@ msgstr ""
 "\t-runcd\t\t執行 CD-ROM\n"
 "\t-cdfile 檔案\t執行 CD 鏡像檔\n"
 "\t-nogui\t\t不開啟 GTK GUI\n"
-"\t-cfg 檔案\t加載一個特定的配置檔案 (默認為: ~/.pcsx/pcsx.cfg)\n"
+"\t-cfg 檔案\t加載一個特定的配置檔案 (缺省為: ~/.pcsx/pcsx.cfg)\n"
 "\t-psxout\t\t啟用 PSX 輸出\n"
 "\t-load 編號\t加載指定編號的記錄 (1-5)\n"
 "\t-h -help\t顯示此信息\n"
@@ -1657,7 +1657,7 @@ msgstr "開啟跳幀"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:253
 msgid "Skip frames when rendering."
-msgstr ""
+msgstr "渲染時跳幀。"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:270
 msgid "Set FPS"
@@ -1678,19 +1678,19 @@ msgstr "啟用遊戲修補"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:366
 msgid "better g-colors, worse textures"
-msgstr ""
+msgstr "較好的 g-colors，較差的紋理"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:381
 msgid "Needed by Dark Forces"
-msgstr ""
+msgstr "Dark Forces 需要"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:394
 msgid "Draw quads with triangles"
-msgstr ""
+msgstr "用三角形繪製 quad"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:410
 msgid "Repeated flat tex triangles"
-msgstr ""
+msgstr "重復平滑多邊形紋理"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:426
 msgid "Disable CPU Saving"
@@ -1698,19 +1698,19 @@ msgstr "禁用 CPU Saving"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:442
 msgid "Odd/even bit hack"
-msgstr ""
+msgstr "奇偶位修正"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:458
 msgid "For precise framerate"
-msgstr ""
+msgstr "確保準確幀率"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:473
 msgid "Better FPS limit in some"
-msgstr ""
+msgstr "部分遊戲中可取得更佳的 FPS 界限"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:486
 msgid "PC FPS calculation"
-msgstr ""
+msgstr "PC FPS 計算"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:504
 msgid "Pandemonium 2"
@@ -1718,24 +1718,24 @@ msgstr "Pandemonium 2"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:517
 msgid "Lazy screen update"
-msgstr ""
+msgstr "延遲熒幕更新"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:535
 msgid "Skip every second frame"
-msgstr ""
+msgstr "每兩幀跳過一幀"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:548
 #: ../plugins/peopsxgl/gpucfg/interface.c:640
 msgid "Old frame skipping"
-msgstr ""
+msgstr "老式跳幀"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:564
 msgid "Expand screen width"
-msgstr ""
+msgstr "擴展熒幕寬度"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:580
 msgid "Ignore brightness color"
-msgstr ""
+msgstr "忽略高亮度顏色"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:596
 msgid "Disable coordinate check"
@@ -2097,12 +2097,23 @@ msgid ""
 "Different\n"
 "No Change"
 msgstr ""
+"等于數值\n"
+"不等于數值\n"
+"範圍\n"
+"增加數值\n"
+"減少數值\n"
+"增加\n"
+"減少\n"
+"不同\n"
+"無變動"
 
 #: ../data/pcsx.glade2:2702
 msgid ""
 "Decimal\n"
 "Hexadecimal"
 msgstr ""
+"十進制\n"
+"十六進制"
 
 #: ../data/pcsx.glade2:2905
 msgid "label_resultsfound"
@@ -2141,6 +2152,8 @@ msgid ""
 "P.E.Op.S. OSS Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
+"P.E.Op.S. OSS 驅動程式 V1.7\n"
+"由 Pete Bernert 及 P.E.Op.S. 開發組編寫\n"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:8
 msgid "Configure Sound"
@@ -2152,7 +2165,7 @@ msgstr "音量:"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:54
 msgid "Interpolation:"
-msgstr ""
+msgstr "插值:"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:68
 msgid "Reverb:"
@@ -2187,6 +2200,10 @@ msgid ""
 "Gaussian\n"
 "Cubic"
 msgstr ""
+"無\n"
+"簡易\n"
+"高斯\n"
+"立方"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:132
 msgid "<b>General</b>"
@@ -2194,11 +2211,11 @@ msgstr "<b>一般</b>"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:163
 msgid "Adjust XA speed"
-msgstr ""
+msgstr "調整 XA 速度"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:167
 msgid "Choose this if XA music is played too quickly."
-msgstr ""
+msgstr "如 XA 音樂播放得過快，選中此項。"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:184
 msgid "<b>XA Music</b>"
@@ -2206,11 +2223,11 @@ msgstr "<b>XA 音樂</b>"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:215
 msgid "High compatibility mode"
-msgstr ""
+msgstr "高相容性模式"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:219
 msgid "Use the asynchronous SPU interface."
-msgstr ""
+msgstr "使用異步 SPU 介面。"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:231
 msgid "SPU IRQ Wait"
@@ -2218,15 +2235,15 @@ msgstr "SPU IRQ 等待"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:235
 msgid "Wait for CPU; only useful for some games."
-msgstr ""
+msgstr "等待 CPU；僅在一部分遊戲中有效。"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:247
 msgid "Single channel sound"
-msgstr ""
+msgstr "單聲道聲音"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:251
 msgid "Play only one channel for a performance boost."
-msgstr ""
+msgstr "僅播放一個聲道以提高性能。"
 
 #: ../plugins/dfcdrom/cdr.c:58
 msgid "CD-ROM Drive Reader"
@@ -2242,7 +2259,7 @@ msgstr "CDR 設定"
 
 #: ../plugins/dfcdrom/interface.c:99
 msgid "Choose your CD-ROM device or type its path if it's not listed"
-msgstr ""
+msgstr "選擇 CD-ROM 裝置，如未列出請輸入其路徑"
 
 #: ../plugins/dfcdrom/interface.c:102
 msgid "Select CD-ROM device"
@@ -2250,27 +2267,27 @@ msgstr "選擇 CD-ROM 裝置"
 
 #: ../plugins/dfcdrom/interface.c:120
 msgid "Select read mode:"
-msgstr ""
+msgstr "選擇讀取模式:"
 
 #: ../plugins/dfcdrom/interface.c:133
 msgid "Normal (No Cache)"
-msgstr ""
+msgstr "正常 (無快取)"
 
 #: ../plugins/dfcdrom/interface.c:137
 msgid "Threaded - Faster (With Cache)"
-msgstr ""
+msgstr "多執行緒 - 較快 (使用快取)"
 
 #: ../plugins/dfcdrom/interface.c:152
 msgid "Cache Size (Def. 64):                  "
-msgstr ""
+msgstr "快取大小 (缺省 64):"
 
 #: ../plugins/dfcdrom/interface.c:173
 msgid "Cdrom Speed (Def. 0 = MAX):    "
-msgstr ""
+msgstr "Cdrom 速度 (缺省 0 = 最快):"
 
 #: ../plugins/dfcdrom/interface.c:189
 msgid "Enable Subchannel read"
-msgstr ""
+msgstr "啟用子通道讀取"
 
 #: ../plugins/peopsxgl/gpu.c:61
 msgid "OpenGL Driver"
@@ -2285,6 +2302,8 @@ msgid ""
 "Based on P.E.Op.S. MesaGL Driver V1.78\n"
 "Coded by Pete Bernert\n"
 msgstr ""
+"基于 P.E.Op.S. MesaGL 驅動程式 V1.78\n"
+"由 Pete Bernert 編寫\n"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:118
 msgid "OpenGL Driver configuration"
@@ -2292,16 +2311,16 @@ msgstr "OpenGL 驅動程式設定"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:138
 msgid "Textures"
-msgstr ""
+msgstr "紋理"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:161
 msgid "Quality:"
-msgstr ""
+msgstr "質量:"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:178
 #: ../plugins/peopsxgl/gpucfg/interface.c:191
 msgid "0: don't care - Use driver's default textures"
-msgstr ""
+msgstr "0: 不設定 - 使用驅動程式缺省紋理"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:179
 msgid "1: 4444 - Fast, but less colorful"
@@ -2321,20 +2340,20 @@ msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:193
 msgid "VRam size in MBytes (0..1024, 0=auto):"
-msgstr ""
+msgstr "顯存大小 MB (0..1024, 0=自動):"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:210
 #: ../plugins/peopsxgl/gpucfg/interface.c:225
 msgid "0: None"
-msgstr ""
+msgstr "0: 無"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:211
 msgid "1: Standard - Glitches will happen"
-msgstr ""
+msgstr "1: 標準 - 可能有問題"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:212
 msgid "2: Extended - No black borders"
-msgstr ""
+msgstr "2: 擴展 - 無黑色邊緣"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:213
 msgid "3: Standard without sprites - unfiltered 2D"
@@ -2354,16 +2373,16 @@ msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:227
 msgid "Filtering:"
-msgstr ""
+msgstr "過濾:"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:235
 msgid "HiRes Tex:"
-msgstr ""
+msgstr "高分辨率紋理:"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:252
 #: ../plugins/peopsxgl/gpucfg/interface.c:263
 msgid "0: None (standard)"
-msgstr ""
+msgstr "0: 無 (標準)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:253
 msgid "1: 2xSaI (much vram needed)"
@@ -2387,11 +2406,11 @@ msgstr "高度:"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:314
 msgid "Keep psx aspect ratio"
-msgstr ""
+msgstr "保持 psx 縱橫比"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:330
 msgid "Dithering"
-msgstr ""
+msgstr "抖動"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:346
 msgid "Framerate"
@@ -2407,7 +2426,7 @@ msgstr "手動設定 FPS 界限"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:386
 msgid "Show FPS display on startup"
-msgstr ""
+msgstr "啟動時顯示 FPS"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:394
 msgid "Use FPS limit"
@@ -2419,7 +2438,7 @@ msgstr "FPS 界限自動偵測"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:411
 msgid "Use Frame skipping"
-msgstr ""
+msgstr "開啟跳幀"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:419
 msgid "Compatibility"
@@ -2427,27 +2446,27 @@ msgstr "相容性"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:434
 msgid "Advanced blending (Accurate psx color emulation)"
-msgstr ""
+msgstr "高級混合 (準確的 psx 顏色模擬)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:442
 msgid "Framebuffer textures:"
-msgstr ""
+msgstr "Framebuffer 紋理:"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:450
 msgid "Offscreen Drawing:"
-msgstr ""
+msgstr "離熒幕描繪:"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:458
 msgid "Framebuffer access:"
-msgstr ""
+msgstr "Framebuffer 存取:"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:466
 msgid "Alpha Multipass (correct opaque texture areas)"
-msgstr ""
+msgstr "半透明多通道 (更正不透明的紋理區域)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:474
 msgid "Mask bit detection (needed by a few games, zbuffer)"
-msgstr ""
+msgstr "屏蔽位偵測 (部分遊戲需要, zbuffer)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:491
 #: ../plugins/peopsxgl/gpucfg/interface.c:504
@@ -2506,27 +2525,27 @@ msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:542
 msgid "4: Full Software (FVP)"
-msgstr ""
+msgstr "4: 全軟體 (FVP)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:553
 msgid "Special game fixes"
-msgstr ""
+msgstr "特定遊戲修正"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:576
 msgid "Battle cursor (FF7)"
-msgstr ""
+msgstr "戰鬥光標 (FF7)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:584
 msgid "Direct FB updates"
-msgstr ""
+msgstr "直接 FB 更新"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:592
 msgid "Black brightness (Lunar)"
-msgstr ""
+msgstr "黑色亮度 (Lunar)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:600
 msgid "Swap front detection"
-msgstr ""
+msgstr "swap front 偵測"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:608
 msgid "Disable coord check"
@@ -2534,43 +2553,43 @@ msgstr "禁用坐標檢查"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:616
 msgid "No blue glitches (LoD)"
-msgstr ""
+msgstr "無藍色干擾 (LoD)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:624
 msgid "Soft FB access"
-msgstr ""
+msgstr "軟 FB 存取"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:632
 msgid "PC fps calculation"
-msgstr ""
+msgstr "PC fps 計算"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:648
 msgid "Yellow rect (FF9)"
-msgstr ""
+msgstr "黃色方塊 (FF9)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:656
 msgid "No subtr. blending"
-msgstr ""
+msgstr "無 subtr. 混合"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:664
 msgid "Lazy upload (DW7)"
-msgstr ""
+msgstr "延遲上傳 (DW7)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:672
 msgid "Odd/even hack"
-msgstr ""
+msgstr "奇偶位修正"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:680
 msgid "Adjust screen width"
-msgstr ""
+msgstr "調整熒幕寬度"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:688
 msgid "Old texture filtering"
-msgstr ""
+msgstr "老式紋理過濾"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:696
 msgid "Additional uploads"
-msgstr ""
+msgstr "附加上傳"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:704
 msgid "unused"
@@ -2578,11 +2597,11 @@ msgstr "未使用"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:712
 msgid "Fake 'gpu busy'"
-msgstr ""
+msgstr "欺騙 'gpu 忙'"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:720
 msgid "Misc"
-msgstr ""
+msgstr "雜項"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:743
 msgid "Scanlines"
@@ -2590,31 +2609,31 @@ msgstr "掃描線"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:751
 msgid "Blending (0..255, -1=dot):"
-msgstr ""
+msgstr "混合 (0..255, -1=dot):"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:759
 msgid "Screen smoothing (can be slow or unsupported)"
-msgstr ""
+msgstr "平滑熒幕 (可能較慢或不被支援)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:767
 msgid "Use OpenGL extensions (recommended)"
-msgstr ""
+msgstr "使用 OpenGL 擴展 (建議使用)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:775
 msgid "Polygon anti-aliasing (slow with most cards)"
-msgstr ""
+msgstr "多邊形抗鋸齒 (對于大多數顯卡較慢)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:783
 msgid "Line mode (polygons will not get filled)"
-msgstr ""
+msgstr "直線模式 (多邊形將不被填充)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:791
 msgid "Force 15 bit framebuffer updates (faster movies)"
-msgstr ""
+msgstr "強制 15 位 framebuffer 更新 (影片較快)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:799
 msgid "Unfiltered MDECs (small movie speedup)"
-msgstr ""
+msgstr "非過濾 MDECs (微小的影片加速)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:852
 msgid "Adapted from P.E.Op.S OpenGL GPU by Pete Bernert"
@@ -2630,19 +2649,19 @@ msgstr "版本: 1.78"
 
 #: ../plugins/dfinput/cfg-gtk2.c:48
 msgid "D-Pad Up"
-msgstr ""
+msgstr "上方向鍵"
 
 #: ../plugins/dfinput/cfg-gtk2.c:49
 msgid "D-Pad Down"
-msgstr ""
+msgstr "下方向鍵"
 
 #: ../plugins/dfinput/cfg-gtk2.c:50
 msgid "D-Pad Left"
-msgstr ""
+msgstr "左方向鍵"
 
 #: ../plugins/dfinput/cfg-gtk2.c:51
 msgid "D-Pad Right"
-msgstr ""
+msgstr "右方向鍵"
 
 #: ../plugins/dfinput/cfg-gtk2.c:52
 msgid "Cross"
@@ -2650,11 +2669,11 @@ msgstr "叉號鍵"
 
 #: ../plugins/dfinput/cfg-gtk2.c:53
 msgid "Circle"
-msgstr ""
+msgstr "圓圈鍵"
 
 #: ../plugins/dfinput/cfg-gtk2.c:54
 msgid "Square"
-msgstr ""
+msgstr "方塊鍵"
 
 #: ../plugins/dfinput/cfg-gtk2.c:55
 msgid "Triangle"
@@ -2678,11 +2697,11 @@ msgstr "R2"
 
 #: ../plugins/dfinput/cfg-gtk2.c:60
 msgid "L3"
-msgstr ""
+msgstr "L3"
 
 #: ../plugins/dfinput/cfg-gtk2.c:61
 msgid "R3"
-msgstr ""
+msgstr "R3"
 
 #: ../plugins/dfinput/cfg-gtk2.c:62
 msgid "Select"
@@ -2694,70 +2713,70 @@ msgstr "開始鍵"
 
 #: ../plugins/dfinput/cfg-gtk2.c:67
 msgid "L-Stick X"
-msgstr ""
+msgstr "左搖桿 X"
 
 #: ../plugins/dfinput/cfg-gtk2.c:68
 msgid "L-Stick Y"
-msgstr ""
+msgstr "左搖桿 Y"
 
 #: ../plugins/dfinput/cfg-gtk2.c:69
 msgid "R-Stick X"
-msgstr ""
+msgstr "右搖桿 X"
 
 #: ../plugins/dfinput/cfg-gtk2.c:70
 msgid "R-Stick Y"
-msgstr ""
+msgstr "右搖桿 Y"
 
 #: ../plugins/dfinput/cfg-gtk2.c:98
 msgid "Centered"
-msgstr ""
+msgstr "居中"
 
 #: ../plugins/dfinput/cfg-gtk2.c:98
 msgid "Up"
-msgstr ""
+msgstr "上"
 
 #: ../plugins/dfinput/cfg-gtk2.c:98
 msgid "Right"
-msgstr ""
+msgstr "右"
 
 #: ../plugins/dfinput/cfg-gtk2.c:98
 msgid "Rightup"
-msgstr ""
+msgstr "右上"
 
 #: ../plugins/dfinput/cfg-gtk2.c:99
 msgid "Down"
-msgstr ""
+msgstr "下"
 
 #: ../plugins/dfinput/cfg-gtk2.c:99
 msgid "Rightdown"
-msgstr ""
+msgstr "右下"
 
 #: ../plugins/dfinput/cfg-gtk2.c:99
 msgid "Left"
-msgstr ""
+msgstr "左"
 
 #: ../plugins/dfinput/cfg-gtk2.c:99
 msgid "Leftup"
-msgstr ""
+msgstr "左上"
 
 #: ../plugins/dfinput/cfg-gtk2.c:100
 msgid "Leftdown"
-msgstr ""
+msgstr "左下"
 
 #: ../plugins/dfinput/cfg-gtk2.c:104
 #, c-format
 msgid "Joystick: Button %d"
-msgstr ""
+msgstr "手把: 按鈕 %d"
 
 #: ../plugins/dfinput/cfg-gtk2.c:108
 #, c-format
 msgid "Joystick: Axis %d%c"
-msgstr ""
+msgstr "手把: 軸 %d%c"
 
 #: ../plugins/dfinput/cfg-gtk2.c:113
 #, c-format
 msgid "Joystick: Hat %d %s"
-msgstr ""
+msgstr "手把: Hat %d %s"
 
 #: ../plugins/dfinput/cfg-gtk2.c:128
 msgid "Keyboard:"
@@ -2767,16 +2786,16 @@ msgstr "鍵盤:"
 #: ../plugins/dfinput/cfg-gtk2.c:140
 #, c-format
 msgid "(Not Set)"
-msgstr ""
+msgstr "(未設定)"
 
 #: ../plugins/dfinput/cfg-gtk2.c:142
 #, c-format
 msgid "Joystick: Axis %d%s"
-msgstr ""
+msgstr "手把: 軸 %d%s"
 
 #: ../plugins/dfinput/cfg-gtk2.c:142
 msgid " (Reversed)"
-msgstr ""
+msgstr " (反向)"
 
 #: ../plugins/dfinput/cfg-gtk2.c:385
 msgid "Device not set"
@@ -2784,7 +2803,7 @@ msgstr "裝置未設定"
 
 #: ../plugins/dfinput/cfg-gtk2.c:385
 msgid "Please select a valid Joystick Device"
-msgstr ""
+msgstr "請選擇一個合法的手把裝置"
 
 #: ../plugins/dfinput/cfg-gtk2.c:391
 msgid "Device open error"
@@ -2799,9 +2818,8 @@ msgid "None"
 msgstr "無"
 
 #: ../plugins/dfinput/cfg-gtk2.c:524
-#, fuzzy
 msgid "Gamepad/Keyboard Input Configuration"
-msgstr "手把/鍵盤輸入"
+msgstr "手把/鍵盤輸入設定"
 
 #: ../plugins/dfinput/cfg-gtk2.c:530
 #: ../plugins/dfinput/cfg-gtk2.c:550
@@ -2814,9 +2832,8 @@ msgid "Button"
 msgstr "按鈕"
 
 #: ../plugins/dfinput/pad.c:23
-#, fuzzy
 msgid "Gamepad/Keyboard Input (ePSXe)"
-msgstr "手把/鍵盤輸入"
+msgstr "手把/鍵盤輸入 (ePSXe)"
 
 #: ../plugins/dfinput/pad.c:25
 msgid "Gamepad/Keyboard Input"
@@ -2829,9 +2846,8 @@ msgstr "裝置:"
 
 #: ../plugins/dfinput/dfinput.glade2:66
 #: ../plugins/dfinput/dfinput.glade2:263
-#, fuzzy
 msgid "Type:"
-msgstr "數值類型:"
+msgstr "類型:"
 
 #: ../plugins/dfinput/dfinput.glade2:78
 #: ../plugins/dfinput/dfinput.glade2:275
@@ -2839,88 +2855,27 @@ msgid ""
 "Digital Pad\n"
 "Analog Pad"
 msgstr ""
+"數字手把\n"
+"模擬手把"
 
 #: ../plugins/dfinput/dfinput.glade2:149
 #: ../plugins/dfinput/dfinput.glade2:346
-#, fuzzy
 msgid "Change"
-msgstr "無改變"
+msgstr "更改"
 
 #: ../plugins/dfinput/dfinput.glade2:185
 #: ../plugins/dfinput/dfinput.glade2:382
-#, fuzzy
 msgid "Reset"
-msgstr "複位(&S)"
+msgstr "重置"
 
 #: ../plugins/dfinput/dfinput.glade2:210
-#, fuzzy
 msgid "Controller 1"
-msgstr "控制器 2:"
+msgstr "控制器 1"
 
 #: ../plugins/dfinput/dfinput.glade2:412
-#, fuzzy
 msgid "Controller 2"
-msgstr "控制器 2:"
+msgstr "控制器 2"
 
 #: ../plugins/dfinput/dfinput.glade2:427
-#, fuzzy
 msgid "Multi-Threaded (Recommended)"
-msgstr "多執行緒"
-
-#~ msgid "PCSX Reloaded"
-#~ msgstr "PCSX Reloaded"
-#~ msgid "Configure Gamepad/Keyboard"
-#~ msgstr "設定手把/鍵盤"
-#~ msgid "<b>Button Configuration</b>"
-#~ msgstr "<b>按鍵設定</b>"
-#~ msgid "Based on PadJoy by Erich Kitzmüller (ammoq@ammoq.com)"
-#~ msgstr "基於由 Erich Kitzmüller (ammoq@ammoq.com) 編寫的 PadJoy"
-#~ msgid "About X11 Video Plugin"
-#~ msgstr "關於 X11 Video 外掛"
-#~ msgid "Coded by: Pete Bernert and the P.E.Op.S. team"
-#~ msgstr "編寫者: Pete Bernert 及 P.E.Op.S. 開發組"
-#~ msgid "Homepage: http://home.t-online.de/home/PeteBernert/"
-#~ msgstr "網址: http://home.t-online.de/home/PeteBernert/"
-#~ msgid "EMail: BlackDove@addcom.de"
-#~ msgstr "EMail: BlackDove@addcom.de"
-#~ msgid "Version: 1.15"
-#~ msgstr "版本: 1.15"
-#~ msgid "Release date: 2003"
-#~ msgstr "釋出日期: 2003"
-#~ msgid "<b>PCSX-df Video Plugin Adaption</b>"
-#~ msgstr "<b>PCSX-df 圖像外掛</b>"
-#~ msgid "XVideo Support: Stephen Chao"
-#~ msgstr "XVideo 支援: Stephen Chao"
-#~ msgid "Enable XA"
-#~ msgstr "開啟 XA"
-#~ msgid "Version: 1.6"
-#~ msgstr "版本: 1.6"
-#~ msgid "Release date: 05.04.2003"
-#~ msgstr "釋出日期: 05.04.2003"
-#~ msgid "Controller _1..."
-#~ msgstr "控制器 _1..."
-#~ msgid "Controller _2..."
-#~ msgstr "控制器 _2..."
-#~ msgid "_Graphics"
-#~ msgstr "圖像(_G)"
-#~ msgid "_Sound"
-#~ msgstr "聲音(_S)"
-#~ msgid "CD-_ROM"
-#~ msgstr "CD-_ROM"
-#~ msgid " Yes"
-#~ msgstr " 是"
-#~ msgid "gtk-add"
-#~ msgstr "gtk-add"
-#~ msgid "gtk-edit"
-#~ msgstr "gtk-edit"
-#~ msgid "gtk-delete"
-#~ msgstr "gtk-delete"
-#~ msgid "Disable"
-#~ msgstr "禁用"
-#~ msgid "gtk-open"
-#~ msgstr "gtk-open"
-#~ msgid "gtk-save-as"
-#~ msgstr "gtk-save-as"
-#~ msgid "gtk-close"
-#~ msgstr "gtk-close"
-
+msgstr "多執行緒 (建議使用)"
