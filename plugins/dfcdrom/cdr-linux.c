@@ -199,8 +199,7 @@ long ReadThreaded() {
 	int addr = msf_to_lba(cr.msf.cdmsf_min0, cr.msf.cdmsf_sec0, cr.msf.cdmsf_frame0);
 	int i;
 
-	if (addr >= cacheaddr && addr < (cacheaddr + CacheSize) &&
-		cacheaddr != -1) {
+	if (addr >= cacheaddr && addr < (cacheaddr + CacheSize) && cacheaddr != -1) {
 		i = addr - cacheaddr;
 		PRINTF("found %d\n", (addr - cacheaddr));
 		cdbuffer = cdcache[i].cr.buf + 12;
