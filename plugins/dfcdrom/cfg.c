@@ -5,7 +5,7 @@
  *
  */
 
-#ifdef __linux__
+#if defined (__linux__)
 
 #include <stdio.h>
 #include <stdlib.h>

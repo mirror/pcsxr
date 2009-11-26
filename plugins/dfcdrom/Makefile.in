@@ -241,7 +241,10 @@ INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 	$(GTK2_CFLAGS) \
 	-I../../libpcsxcore -I../../include
 
-cfgDFCdrom_SOURCES = cfg-gtk2.c main.c support.c interface.c callbacks.c
+cfgDFCdrom_SOURCES = cdrcfg-0.1df/cfg-gtk2.c cdrcfg-0.1df/main.c \
+	cdrcfg-0.1df/support.c cdrcfg-0.1df/interface.c \
+	cdrcfg-0.1df/callbacks.c
+
 cfgDFCdrom_LDADD = $(GTK2_LIBS)
 all: all-am
 
@@ -371,6 +374,76 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
+
+cfg-gtk2.o: cdrcfg-0.1df/cfg-gtk2.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT cfg-gtk2.o -MD -MP -MF $(DEPDIR)/cfg-gtk2.Tpo -c -o cfg-gtk2.o `test -f 'cdrcfg-0.1df/cfg-gtk2.c' || echo '$(srcdir)/'`cdrcfg-0.1df/cfg-gtk2.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cfg-gtk2.Tpo $(DEPDIR)/cfg-gtk2.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/cfg-gtk2.c' object='cfg-gtk2.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o cfg-gtk2.o `test -f 'cdrcfg-0.1df/cfg-gtk2.c' || echo '$(srcdir)/'`cdrcfg-0.1df/cfg-gtk2.c
+
+cfg-gtk2.obj: cdrcfg-0.1df/cfg-gtk2.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT cfg-gtk2.obj -MD -MP -MF $(DEPDIR)/cfg-gtk2.Tpo -c -o cfg-gtk2.obj `if test -f 'cdrcfg-0.1df/cfg-gtk2.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/cfg-gtk2.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/cfg-gtk2.c'; fi`
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cfg-gtk2.Tpo $(DEPDIR)/cfg-gtk2.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/cfg-gtk2.c' object='cfg-gtk2.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o cfg-gtk2.obj `if test -f 'cdrcfg-0.1df/cfg-gtk2.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/cfg-gtk2.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/cfg-gtk2.c'; fi`
+
+main.o: cdrcfg-0.1df/main.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT main.o -MD -MP -MF $(DEPDIR)/main.Tpo -c -o main.o `test -f 'cdrcfg-0.1df/main.c' || echo '$(srcdir)/'`cdrcfg-0.1df/main.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/main.Tpo $(DEPDIR)/main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/main.c' object='main.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o main.o `test -f 'cdrcfg-0.1df/main.c' || echo '$(srcdir)/'`cdrcfg-0.1df/main.c
+
+main.obj: cdrcfg-0.1df/main.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT main.obj -MD -MP -MF $(DEPDIR)/main.Tpo -c -o main.obj `if test -f 'cdrcfg-0.1df/main.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/main.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/main.c'; fi`
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/main.Tpo $(DEPDIR)/main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/main.c' object='main.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o main.obj `if test -f 'cdrcfg-0.1df/main.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/main.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/main.c'; fi`
+
+support.o: cdrcfg-0.1df/support.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT support.o -MD -MP -MF $(DEPDIR)/support.Tpo -c -o support.o `test -f 'cdrcfg-0.1df/support.c' || echo '$(srcdir)/'`cdrcfg-0.1df/support.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/support.Tpo $(DEPDIR)/support.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/support.c' object='support.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o support.o `test -f 'cdrcfg-0.1df/support.c' || echo '$(srcdir)/'`cdrcfg-0.1df/support.c
+
+support.obj: cdrcfg-0.1df/support.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT support.obj -MD -MP -MF $(DEPDIR)/support.Tpo -c -o support.obj `if test -f 'cdrcfg-0.1df/support.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/support.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/support.c'; fi`
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/support.Tpo $(DEPDIR)/support.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/support.c' object='support.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o support.obj `if test -f 'cdrcfg-0.1df/support.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/support.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/support.c'; fi`
+
+interface.o: cdrcfg-0.1df/interface.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT interface.o -MD -MP -MF $(DEPDIR)/interface.Tpo -c -o interface.o `test -f 'cdrcfg-0.1df/interface.c' || echo '$(srcdir)/'`cdrcfg-0.1df/interface.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/interface.Tpo $(DEPDIR)/interface.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/interface.c' object='interface.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o interface.o `test -f 'cdrcfg-0.1df/interface.c' || echo '$(srcdir)/'`cdrcfg-0.1df/interface.c
+
+interface.obj: cdrcfg-0.1df/interface.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT interface.obj -MD -MP -MF $(DEPDIR)/interface.Tpo -c -o interface.obj `if test -f 'cdrcfg-0.1df/interface.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/interface.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/interface.c'; fi`
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/interface.Tpo $(DEPDIR)/interface.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/interface.c' object='interface.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o interface.obj `if test -f 'cdrcfg-0.1df/interface.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/interface.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/interface.c'; fi`
+
+callbacks.o: cdrcfg-0.1df/callbacks.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT callbacks.o -MD -MP -MF $(DEPDIR)/callbacks.Tpo -c -o callbacks.o `test -f 'cdrcfg-0.1df/callbacks.c' || echo '$(srcdir)/'`cdrcfg-0.1df/callbacks.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/callbacks.Tpo $(DEPDIR)/callbacks.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/callbacks.c' object='callbacks.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o callbacks.o `test -f 'cdrcfg-0.1df/callbacks.c' || echo '$(srcdir)/'`cdrcfg-0.1df/callbacks.c
+
+callbacks.obj: cdrcfg-0.1df/callbacks.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT callbacks.obj -MD -MP -MF $(DEPDIR)/callbacks.Tpo -c -o callbacks.obj `if test -f 'cdrcfg-0.1df/callbacks.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/callbacks.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/callbacks.c'; fi`
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/callbacks.Tpo $(DEPDIR)/callbacks.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/callbacks.c' object='callbacks.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o callbacks.obj `if test -f 'cdrcfg-0.1df/callbacks.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/callbacks.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/callbacks.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

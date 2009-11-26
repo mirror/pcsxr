@@ -15,7 +15,7 @@
 #include <time.h>
 #include <string.h>
 
-#include "cdr.h"
+#include "../cdr.h"
 
 void LoadConf() {
 	FILE *f;

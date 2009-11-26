@@ -15,7 +15,7 @@
 
 #include <gtk/gtk.h>
 
-#include "cdr.h"
+#include "../cdr.h"
 #include "callbacks.h"
 #include "interface.h"
 #include "support.h"

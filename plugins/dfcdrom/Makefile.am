@@ -13,5 +13,7 @@ INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 	-I../../libpcsxcore -I../../include
 
 bin_PROGRAMS = cfgDFCdrom
-cfgDFCdrom_SOURCES = cfg-gtk2.c main.c support.c interface.c callbacks.c
+cfgDFCdrom_SOURCES = cdrcfg-0.1df/cfg-gtk2.c cdrcfg-0.1df/main.c \
+	cdrcfg-0.1df/support.c cdrcfg-0.1df/interface.c \
+	cdrcfg-0.1df/callbacks.c
 cfgDFCdrom_LDADD = $(GTK2_LIBS)

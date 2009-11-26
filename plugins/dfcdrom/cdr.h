@@ -1,9 +1,7 @@
 #ifndef __CDR_H__
 #define __CDR_H__
 
-#ifdef __linux__
 #include <linux/cdrom.h>
-#endif
 
 typedef char HWND;
 
@@ -15,8 +13,6 @@ long ReadMode;
 long UseSubQ;
 long CacheSize;
 long CdrSpeed;
-
-#ifdef __linux__
 
 #define DEV_DEF		"/dev/cdrom"
 #define NORMAL		0
@@ -60,7 +56,5 @@ long CDRstop(void);
 
 void LoadConf();
 void SaveConf();
-
-#endif
 
 #endif /* __CDR_H__ */

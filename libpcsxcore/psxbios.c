@@ -487,12 +487,12 @@ void psxBios_srand() { // 30
 
 
 void psxBios_malloc() { // 33
-#ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s\n", biosA0n[0x33]);
-#endif
 	unsigned int *chunk, *newchunk;
 	unsigned int dsize, csize, cstat;
 	int colflag;
+#ifdef PSXBIOS_LOG
+	PSXBIOS_LOG("psxBios_%s\n", biosA0n[0x33]);
+#endif
 	
 	// scan through heap and combine free chunks of space
 	chunk = heap_addr;
@@ -591,12 +591,11 @@ void psxBios_calloc() { // 37
 }
 
 void psxBios_realloc() { // 38
+	u32 block = a0;
+	u32 size = a1;
 #ifdef PSXBIOS_LOG
 	PSXBIOS_LOG("psxBios_%s\n", biosA0n[0x38]);
 #endif
-
-	u32 block = a0;
-	u32 size = a1;
 
 	a0 = block;
 	psxBios_free();
@@ -607,12 +606,11 @@ void psxBios_realloc() { // 38
 
 /* InitHeap(void *block , int n) */
 void psxBios_InitHeap() { // 39
+	unsigned int size;
 
 #ifdef PSXBIOS_LOG
 	PSXBIOS_LOG("psxBios_%s\n", biosA0n[0x39]);
 #endif
-
-	unsigned int size;
 
 	if (((a0 & 0x1fffff) + a1)>= 0x200000) size = 0x1ffffc - (a0 & 0x1fffff);
 	else size = a1;
@@ -893,18 +891,19 @@ void psxBios__96_remove() { // 72
 }
 
 void psxBios_SetMem() { // 9f
+	u32 new = psxHu32(0x1060);
+
 #ifdef PSXBIOS_LOG
 	PSXBIOS_LOG("psxBios_%s: %x, %x\n", biosA0n[0x9f], a0, a1);
 #endif
 
-	u32 new = psxHu32(0x1060);
 	switch(a0) {
 		case 2:
 			psxHu32ref(0x1060) = SWAP32(new);
 			psxMu32ref(0x060) = a0;
 			SysPrintf("Change effective memory : %d MBytes\n",a0);
 			break;
-	
+
 		case 8:
 			psxHu32ref(0x1060) = SWAP32(new | 0x300);
 			psxMu32ref(0x060) = a0;

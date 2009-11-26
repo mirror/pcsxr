@@ -1,3 +1,23 @@
+November 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfcdrom/cdr.c: Separated GNU/Linux-specific code and NULL code
+   into separate files (cdr-linux.c and cdr-null.c).
+ * plugins/dfcdrom/cdr-linux.c: Added.
+ * plugins/dfcdrom/cdr-null.c: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df: Moved configuration utility into a subdir.
+ * plugins/dfcdrom/interface.c: Moved into cdrcfg-0.1df directory.
+ * plugins/dfcdrom/interface.h: Likewise.
+ * plugins/dfcdrom/cfg-gtk2.c: Likewise.
+ * plugins/dfcdrom/support.c: Likewise.
+ * plugins/dfcdrom/support.h: Likewise.
+ * plugins/dfcdrom/main.c: Likewise.
+ * plugins/dfcdrom/callbacks.c: Likewise.
+ * plugins/dfcdrom/callbacks.h: Likewise.
+ * plugins/dfcdrom/cfgCdr.glade: Likewise.
+ * plugins/dfcdrom/Makefile.am: Likewise.
+ * libpcsxcore/psxbios.c: Fixed MSVC6 errors when psxbios logging is enabled.
+ * debian/changelog: Changed version number.
+
 November 25, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * po/zh_CN.po, po/zh_TW.po: Updated.
