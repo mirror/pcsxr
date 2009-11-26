@@ -55,18 +55,6 @@ void *CdrThread(void *arg);
 
 char *LibName = N_("CD-ROM Drive Reader");
 
-char *PSEgetLibName(void) {
-	return _(LibName);
-}
-
-unsigned long PSEgetLibType(void) {
-	return PSE_LT_CDR;
-}
-
-unsigned long PSEgetLibVersion(void) {
-	return 1 << 16;
-}
-
 long CDRinit(void) {
 	cdHandle = -1;
 	thread = -1;

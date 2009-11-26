@@ -25,18 +25,6 @@
 
 char *LibName = N_("CDR NULL Plugin");
 
-char *PSEgetLibName(void) {
-	return _(LibName);
-}
-
-unsigned long PSEgetLibType(void) {
-	return PSE_LT_CDR;
-}
-
-unsigned long PSEgetLibVersion(void) {
-	return 1 << 16;
-}
-
 long CDRinit(void) {
 	return 0;
 }
