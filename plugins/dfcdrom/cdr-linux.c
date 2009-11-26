@@ -212,7 +212,7 @@ long ReadThreaded() {
 	if (addr >= cacheaddr && addr < (cacheaddr + CacheSize) &&
 		cacheaddr != -1) {
 		i = addr - cacheaddr;
-//		printf("found %d\n", (addr - cacheaddr));
+		PRINTF("found %d\n", (addr - cacheaddr));
 		cdbuffer = cdcache[i].cr.buf + 12;
 		while (btoi(cdbuffer[0]) != cr.msf.cdmsf_min0 ||
 			   btoi(cdbuffer[1]) != cr.msf.cdmsf_sec0 ||
@@ -223,7 +223,7 @@ long ReadThreaded() {
 			}
 			usleep(5000);
 		}
-//		printf("%x:%x:%x, %p, %p\n", cdbuffer[0], cdbuffer[1], cdbuffer[2], cdbuffer, cdcache);
+		PRINTF("%x:%x:%x, %p, %p\n", cdbuffer[0], cdbuffer[1], cdbuffer[2], cdbuffer, cdcache);
 		found = 1;
 
 		return 0;
@@ -245,7 +245,8 @@ long ReadThreaded() {
 }
 
 unsigned char* GetBThreaded() {
-//	printf("threadc %d\n", found);
+	PRINTF("threadc %d\n", found);
+
 	if (found == 1) { found = 0; return cdbuffer; }
 	cdbuffer = cdcache[0].cr.buf + 12;
 	while (btoi(cdbuffer[0]) != cr.msf.cdmsf_min0 ||
@@ -272,7 +273,7 @@ long CDRreadTrack(unsigned char *time) {
 		return 0;
 	}
 
-//	printf("CDRreadTrack %d:%d:%d\n", btoi(time[0]), btoi(time[1]), btoi(time[2]));
+	PRINTF("CDRreadTrack %d:%d:%d\n", btoi(time[0]), btoi(time[1]), btoi(time[2]));
 
 	if (UseSubQ) memcpy(lastTime, time, 3);
 	subqread = 0;
@@ -299,14 +300,14 @@ void *CdrThread(void *arg) {
 
 		memcpy(curTime, &cr.msf, 3);
 
-//		printf("start thc %d:%d:%d\n", curTime[0], curTime[1], curTime[2]);
+		PRINTF("start thc %d:%d:%d\n", curTime[0], curTime[1], curTime[2]);
 
 		for (i=0; i<CacheSize; i++) {
 			memcpy(&cdcache[i].cr.msf, curTime, 3);
-//			printf("reading %d:%d:%d\n", crp.msf.cdmsf_min0, crp.msf.cdmsf_sec0, crp.msf.cdmsf_frame0);
+			PRINTF("reading %d:%d:%d\n", crp.msf.cdmsf_min0, crp.msf.cdmsf_sec0, crp.msf.cdmsf_frame0);
 			cdcache[i].ret = ioctl(cdHandle, CDROMREADRAW, &cdcache[i].cr);
 
-//			printf("readed %x:%x:%x\n", crd.buf[12], crd.buf[13], crd.buf[14]);
+			PRINTF("readed %x:%x:%x\n", crd.buf[12], crd.buf[13], crd.buf[14]);
 			if (cdcache[i].ret == -1) break;
 
 			curTime[2]++;
@@ -531,12 +532,10 @@ unsigned char *CDRgetBufferSub(void) {
 	subq.AbsoluteAddress[1] = itob(subchnl.cdsc_absaddr.msf.second);
 	subq.AbsoluteAddress[2] = itob(subchnl.cdsc_absaddr.msf.frame);
 
-#if 0
-	printf("subq : %x,%x : %x,%x,%x : %x,%x,%x\n",
+	PRINTF("subq : %x,%x : %x,%x,%x : %x,%x,%x\n",
 		   subchnl.cdsc_trk, subchnl.cdsc_ind,
 		   itob(subchnl.cdsc_reladdr.msf.minute), itob(subchnl.cdsc_reladdr.msf.second), itob(subchnl.cdsc_reladdr.msf.frame),
 		   itob(subchnl.cdsc_absaddr.msf.minute), itob(subchnl.cdsc_absaddr.msf.second), itob(subchnl.cdsc_absaddr.msf.frame));
-#endif
 
 	return (unsigned char *)&subq;
 }
@@ -563,7 +562,7 @@ void ExecCfg(char *arg) {
 		return;
 	}
 
-	printf("cfgDFCdrom file not found!\n");
+	fprintf(stderr, "cfgDFCdrom file not found!\n");
 }
 
 long CDRconfigure() {

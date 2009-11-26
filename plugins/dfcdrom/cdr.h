@@ -57,4 +57,10 @@ long CDRstop(void);
 void LoadConf();
 void SaveConf();
 
+#ifdef DEBUG
+#define PRINTF printf
+#else
+#define PRINTF(...) /* */
+#endif
+
 #endif /* __CDR_H__ */
