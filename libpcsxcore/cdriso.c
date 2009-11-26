@@ -56,9 +56,10 @@ static HANDLE threadid;
 #else
 static pthread_t threadid;
 #endif
-static int initial_offset = 0;
+static unsigned int initial_offset = 0;
 static volatile char playing = 0;
 static char cddaBigEndian = 0;
+static volatile unsigned int cddaCurOffset = 0;
 
 char* CALLBACK CDR__getDriveLetter(void);
 long CALLBACK CDR__configure(void);
@@ -204,6 +205,8 @@ static void *playthread(void *param)
 
 			SPU_playCDDAchannel((short *)sndbuffer, s);
 		}
+
+		cddaCurOffset += s;
 	}
 
 #ifdef _WIN32
@@ -250,9 +253,11 @@ static void startCDDA(unsigned int offset) {
 	}
 
 	initial_offset = offset;
+	cddaCurOffset = initial_offset;
 	fseek(cddaHandle, initial_offset, SEEK_SET);
 
 	playing = 1;
+
 #ifdef _WIN32
 	threadid = (HANDLE)_beginthread(playthread, 0, NULL);
 #else
@@ -767,12 +772,27 @@ static long CALLBACK ISOstop(void) {
 }
 
 // gets subchannel data
-unsigned char* CALLBACK ISOgetBufferSub(void) {
+static unsigned char* CALLBACK ISOgetBufferSub(void) {
 	if (subHandle != NULL || subChanInterleaved) {
 		return subbuffer;
 	}
 
 	return NULL;
+}
+
+static long CALLBACK ISOgetStatus(struct CdrStat *stat) {
+	int sec;
+
+	CDR__getStatus(stat);
+
+	if (playing) {
+		stat->Type = 0x02;
+		stat->Status |= 0x80;
+		sec = cddaCurOffset / CD_FRAMESIZE_RAW;
+		sec2msf(sec, (char *)stat->Time);
+	}
+
+	return 0;
 }
 
 void imageReaderInit(void) {
@@ -789,8 +809,8 @@ void imageReaderInit(void) {
 	CDR_play = ISOplay;
 	CDR_stop = ISOstop;
 	CDR_getBufferSub = ISOgetBufferSub;
+	CDR_getStatus = ISOgetStatus;
 
-	CDR_getStatus = CDR__getStatus;
 	CDR_getDriveLetter = CDR__getDriveLetter;
 	CDR_configure = CDR__configure;
 	CDR_test = CDR__test;
