@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-14 13:12+0800\n"
+"POT-Creation-Date: 2009-11-26 23:05+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -771,7 +771,8 @@ msgstr ""
 msgid "InuYasha Sengoku Battle Fix"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1214 ../plugins/dfcdrom/interface.c:194
+#: ../win32/gui/WndMain.c:1214
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:277
 #: ../plugins/dfinput/dfinput.glade2:448
 msgid "Options"
 msgstr ""
@@ -1242,7 +1243,7 @@ msgstr ""
 msgid "Error closing GPU plugin!"
 msgstr ""
 
-#: ../libpcsxcore/cdriso.c:639
+#: ../libpcsxcore/cdriso.c:644
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr ""
@@ -2040,48 +2041,75 @@ msgstr ""
 msgid "Play only one channel for a performance boost."
 msgstr ""
 
-#: ../plugins/dfcdrom/cdr.c:58
+#: ../plugins/dfcdrom/cdr-linux.c:48
 msgid "CD-ROM Drive Reader"
 msgstr ""
 
-#: ../plugins/dfcdrom/cdr.c:62
+#: ../plugins/dfcdrom/cdr-null.c:10
 msgid "CDR NULL Plugin"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:74
+#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:166
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:8
 msgid "CDR configuration"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:99
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:33
 msgid "Choose your CD-ROM device or type its path if it's not listed"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:102
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:44
 msgid "Select CD-ROM device"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:120
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:72
 msgid "Select read mode:"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:133
-msgid "Normal (No Cache)"
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:83
+msgid ""
+"Normal (No Cache)\n"
+"Threaded - Faster (With Cache)"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:137
-msgid "Threaded - Faster (With Cache)"
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:114
+msgid "Cache Size (Def. 64):"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:152
-msgid "Cache Size (Def. 64):                  "
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:159
+msgid "Spindown Time:"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:173
-msgid "Cdrom Speed (Def. 0 = MAX):    "
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:170
+msgid ""
+"Default\n"
+"125ms\n"
+"250ms\n"
+"500ms\n"
+"1s\n"
+"2s\n"
+"4s\n"
+"8s\n"
+"16s\n"
+"32s\n"
+"1min\n"
+"2min\n"
+"4min\n"
+"8min\n"
+"16min\n"
+"32min"
 msgstr ""
 
-#: ../plugins/dfcdrom/interface.c:189
-msgid "Enable Subchannel read"
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:216
+msgid "Cdrom Speed (Def. 0 = MAX):"
+msgstr ""
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:248
+msgid "hseparator"
+msgstr ""
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:258
+msgid "Enable subchannel read"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpu.c:61

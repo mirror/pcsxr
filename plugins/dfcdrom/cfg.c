@@ -17,6 +17,13 @@
 
 #include "cdr.h"
 
+char CdromDev[256];
+long ReadMode;
+long UseSubQ;
+long CacheSize;
+long CdrSpeed;
+long SpinDown;
+
 void LoadConf() {
 	FILE *f;
 	char cfg[255];
@@ -26,6 +33,7 @@ void LoadConf() {
 	UseSubQ = 0;
 	CacheSize = 64;
 	CdrSpeed = 0;
+	SpinDown = SPINDOWN_VENDOR_SPECIFIC;
 
 	sprintf(cfg, "dfcdrom.cfg");
 	f = fopen(cfg, "r");
@@ -36,11 +44,14 @@ void LoadConf() {
 	fscanf(f, "UseSubQ = %ld\n", &UseSubQ);
 	fscanf(f, "CacheSize = %ld\n", &CacheSize);
 	fscanf(f, "CdrSpeed = %ld\n", &CdrSpeed);
+	fscanf(f, "SpinDown = %ld\n", &SpinDown);
 	fclose(f);
 
 	if (ReadMode >= READ_MODES) ReadMode = THREADED;
 	if (CacheSize <= 0) CacheSize = 32;
 	if (CacheSize > 2048) CacheSize = 2048;
+	if (SpinDown <= 0) SpinDown = SPINDOWN_VENDOR_SPECIFIC;
+	if (SpinDown > SPINDOWN_32MIN) SpinDown = SPINDOWN_32MIN;
 }
 
 void SaveConf() {
@@ -56,6 +67,7 @@ void SaveConf() {
 	fprintf(f, "UseSubQ = %ld\n", UseSubQ);
 	fprintf(f, "CacheSize = %ld\n", CacheSize);
 	fprintf(f, "CdrSpeed = %ld\n", CdrSpeed);
+	fprintf(f, "SpinDown = %ld\n", SpinDown);
 	fclose(f);
 }
 

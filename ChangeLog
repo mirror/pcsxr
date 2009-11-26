@@ -1,3 +1,23 @@
+November 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfcdrom/cdrcfg-0.1df/main.c: Rewritten the configuration utility
+   with libglade.
+ * plugins/dfcdrom/Makefile.am: Fixed compiling.
+ * plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2: Added.
+ * plugins/dfcdrom/cdrcfg-0.1df/callbacks.c: Removed Glade-generated code.
+ * plugins/dfcdrom/cdrcfg-0.1df/callbacks.h: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/support.c: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/support.h: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/interface.c: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/interface.h: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/cfgCdr.glade: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/cfg-gtk2: Likewise.
+ * plugins/dfcdrom/cdr-linux.c: Added selection of spin-down time.
+ * plugins/dfcdrom/cfg.c: Likewise.
+ * plugins/dfcdrom/cfg.h: Likewise.
+ * po/update-pot.sh: Include files from plugins/dfcdrom/cdrcfg-0.1df.
+ * po/pcsx.pot, po/zh_CN.po, po/zh_TW.po, po/pt_BR.po: Updated.
+
 November 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfcdrom/cdr.c: Separated GNU/Linux-specific code and NULL code

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-14 13:12+0800\n"
-"PO-Revision-Date: 2009-11-25 23:27+0700\n"
+"POT-Creation-Date: 2009-11-26 23:05+0800\n"
+"PO-Revision-Date: 2009-11-26 23:11+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -146,7 +146,7 @@ msgstr "刪除金手指碼(&R)"
 
 #: ../win32/gui/CheatDlg.c:172
 msgid "&Enable/Disable"
-msgstr "啟用/禁用(&E)"
+msgstr "開啟/關閉(&E)"
 
 #: ../win32/gui/CheatDlg.c:173
 msgid "&Load..."
@@ -819,7 +819,7 @@ msgstr "禁用 XA 解碼"
 
 #: ../win32/gui/WndMain.c:1203
 msgid "Sio Irq Always Enabled"
-msgstr "SIO IRQ 總是啟用"
+msgstr "SIO IRQ 總是開啟"
 
 #: ../win32/gui/WndMain.c:1204
 msgid "Black && White Movies"
@@ -836,21 +836,21 @@ msgstr "自動檢測"
 
 #: ../win32/gui/WndMain.c:1207
 msgid "Enable Interpreter Cpu"
-msgstr "啟用解釋執行 CPU"
+msgstr "開啟解釋執行 CPU"
 
 #: ../win32/gui/WndMain.c:1208
 #: ../data/pcsx.glade2:1300
 msgid "Enable Console Output"
-msgstr "啟用控制台輸出"
+msgstr "開啟控制台輸出"
 
 #: ../win32/gui/WndMain.c:1209
 #: ../data/pcsx.glade2:1250
 msgid "Enable Debugger"
-msgstr "啟用調試器"
+msgstr "開啟調試器"
 
 #: ../win32/gui/WndMain.c:1210
 msgid "Spu Irq Always Enabled"
-msgstr "SPU IRQ 總是啟用"
+msgstr "SPU IRQ 總是開啟"
 
 #: ../win32/gui/WndMain.c:1211
 #: ../data/pcsx.glade2:1387
@@ -863,7 +863,7 @@ msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku 戰斗修正"
 
 #: ../win32/gui/WndMain.c:1214
-#: ../plugins/dfcdrom/interface.c:194
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:277
 #: ../plugins/dfinput/dfinput.glade2:448
 msgid "Options"
 msgstr "選項"
@@ -1093,7 +1093,7 @@ msgstr "金手指碼"
 
 #: ../gui/Cheat.c:403
 msgid "Enable"
-msgstr "啟用"
+msgstr "開啟"
 
 #: ../gui/Cheat.c:627
 msgid "Freeze value"
@@ -1270,9 +1270,9 @@ msgstr ""
 "\t-cdfile 檔案\t執行 CD 鏡像檔\n"
 "\t-nogui\t\t不開啟 GTK GUI\n"
 "\t-cfg 檔案\t加載一個特定的配置檔案 (缺省為: ~/.pcsx/pcsx.cfg)\n"
-"\t-psxout\t\t啟用 PSX 輸出\n"
+"\t-psxout\t\t開啟 PSX 輸出\n"
 "\t-load 編號\t加載指定編號的記錄 (1-5)\n"
-"\t-h -help\t顯示此信息\n"
+"\t-h -help\t顯示此說明\n"
 "\t檔案\t\t加載檔案\n"
 
 #: ../gui/LnxMain.c:350
@@ -1298,17 +1298,17 @@ msgstr "PSX 模擬器無法初期化。\n"
 #: ../data/pcsx.glade2:1336
 #, c-format
 msgid "SIO IRQ Always Enabled"
-msgstr "SIO IRQ 總是啟用"
+msgstr "SIO IRQ 總是開啟"
 
 #: ../gui/Plugin.c:205
 #, c-format
 msgid "SIO IRQ Not Always Enabled"
-msgstr "SIO IRQ 不總是啟用"
+msgstr "SIO IRQ 不總是開啟"
 
 #: ../gui/Plugin.c:211
 #, c-format
 msgid "Black & White Mdecs Only Enabled"
-msgstr "Black & White Mdecs Only 啟用"
+msgstr "Black & White Mdecs Only 開啟"
 
 #: ../gui/Plugin.c:212
 #, c-format
@@ -1318,7 +1318,7 @@ msgstr "Black & White Mdecs Only 禁用"
 #: ../gui/Plugin.c:218
 #, c-format
 msgid "XA Enabled"
-msgstr "XA 已啟用"
+msgstr "XA 已開啟"
 
 #: ../gui/Plugin.c:219
 #, c-format
@@ -1365,7 +1365,7 @@ msgstr "無法關閉 \"控制器 2\" 外掛!"
 msgid "Error closing GPU plugin!"
 msgstr "無法關閉 GPU 外掛!"
 
-#: ../libpcsxcore/cdriso.c:639
+#: ../libpcsxcore/cdriso.c:644
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr "已加載 CD 映像: %s"
@@ -1674,7 +1674,7 @@ msgstr "<b>幀率</b>"
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:339
 #: ../plugins/peopsxgl/gpucfg/interface.c:568
 msgid "Use game fixes"
-msgstr "啟用遊戲修補"
+msgstr "開啟遊戲修補"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:366
 msgid "better g-colors, worse textures"
@@ -1942,7 +1942,7 @@ msgstr "配置 CPU"
 
 #: ../data/pcsx.glade2:1268
 msgid "SPU IRQ Always Enabled"
-msgstr "SPU IRQ 總是啟用"
+msgstr "SPU IRQ 總是開啟"
 
 #: ../data/pcsx.glade2:1284
 msgid "Black & White Movies"
@@ -1950,7 +1950,7 @@ msgstr "黑白電影"
 
 #: ../data/pcsx.glade2:1318
 msgid "Enable Interpreter CPU"
-msgstr "啟用解釋執行 CPU"
+msgstr "開啟解釋執行 CPU"
 
 #: ../data/pcsx.glade2:1352
 msgid "Disable CD Audio"
@@ -2245,49 +2245,94 @@ msgstr "單聲道聲音"
 msgid "Play only one channel for a performance boost."
 msgstr "僅播放一個聲道以提高性能。"
 
-#: ../plugins/dfcdrom/cdr.c:58
+#: ../plugins/dfcdrom/cdr-linux.c:48
 msgid "CD-ROM Drive Reader"
 msgstr "CD-ROM 裝置讀取外掛"
 
-#: ../plugins/dfcdrom/cdr.c:62
+#: ../plugins/dfcdrom/cdr-null.c:10
 msgid "CDR NULL Plugin"
 msgstr "CDR NULL 外掛"
 
-#: ../plugins/dfcdrom/interface.c:74
+#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:166
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:8
 msgid "CDR configuration"
 msgstr "CDR 設定"
 
-#: ../plugins/dfcdrom/interface.c:99
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:33
 msgid "Choose your CD-ROM device or type its path if it's not listed"
 msgstr "選擇 CD-ROM 裝置，如未列出請輸入其路徑"
 
-#: ../plugins/dfcdrom/interface.c:102
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:44
 msgid "Select CD-ROM device"
 msgstr "選擇 CD-ROM 裝置"
 
-#: ../plugins/dfcdrom/interface.c:120
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:72
 msgid "Select read mode:"
 msgstr "選擇讀取模式:"
 
-#: ../plugins/dfcdrom/interface.c:133
-msgid "Normal (No Cache)"
-msgstr "正常 (無快取)"
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:83
+msgid ""
+"Normal (No Cache)\n"
+"Threaded - Faster (With Cache)"
+msgstr ""
+"正常 (無快取)\n"
+"多執行緒 - 較快 (使用快取)"
 
-#: ../plugins/dfcdrom/interface.c:137
-msgid "Threaded - Faster (With Cache)"
-msgstr "多執行緒 - 較快 (使用快取)"
-
-#: ../plugins/dfcdrom/interface.c:152
-msgid "Cache Size (Def. 64):                  "
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:114
+msgid "Cache Size (Def. 64):"
 msgstr "快取大小 (缺省 64):"
 
-#: ../plugins/dfcdrom/interface.c:173
-msgid "Cdrom Speed (Def. 0 = MAX):    "
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:159
+msgid "Spindown Time:"
+msgstr "電機停轉時限:"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:170
+msgid ""
+"Default\n"
+"125ms\n"
+"250ms\n"
+"500ms\n"
+"1s\n"
+"2s\n"
+"4s\n"
+"8s\n"
+"16s\n"
+"32s\n"
+"1min\n"
+"2min\n"
+"4min\n"
+"8min\n"
+"16min\n"
+"32min"
+msgstr ""
+"缺省\n"
+"125 毫秒\n"
+"250 毫秒\n"
+"500 毫秒\n"
+"1 秒\n"
+"2 秒\n"
+"4 秒\n"
+"8 秒\n"
+"16 秒\n"
+"32 秒\n"
+"1 分鐘\n"
+"2 分鐘\n"
+"4 分鐘\n"
+"8 分鐘\n"
+"16 分鐘\n"
+"32 分鐘"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:216
+msgid "Cdrom Speed (Def. 0 = MAX):"
 msgstr "Cdrom 速度 (缺省 0 = 最快):"
 
-#: ../plugins/dfcdrom/interface.c:189
-msgid "Enable Subchannel read"
-msgstr "啟用子通道讀取"
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:248
+msgid "hseparator"
+msgstr "hseparator"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:258
+msgid "Enable subchannel read"
+msgstr "開啟子通道讀取"
 
 #: ../plugins/peopsxgl/gpu.c:61
 msgid "OpenGL Driver"
@@ -2879,3 +2924,7 @@ msgstr "控制器 2"
 #: ../plugins/dfinput/dfinput.glade2:427
 msgid "Multi-Threaded (Recommended)"
 msgstr "多執行緒 (建議使用)"
+
+#~ msgid "Normal (No Cache)"
+#~ msgstr "正常 (無快取)"
+

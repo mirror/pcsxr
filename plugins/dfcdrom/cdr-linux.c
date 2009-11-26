@@ -17,6 +17,10 @@
 
 #include "cdr.h"
 
+#ifndef CDROMSETSPINDOWN
+#define CDROMSETSPINDOWN 0x531e
+#endif
+
 static inline int msf_to_lba(char m, char s, char f) {
 	return (((m * CD_SECS) + s) * CD_FRAMES + f) - CD_MSF_OFFSET;
 }
@@ -55,6 +59,8 @@ long CDRshutdown(void) {
 }
 
 long CDRopen(void) {
+	char spindown;
+
 	LoadConf();
 
 	if (cdHandle > 0)
@@ -63,6 +69,9 @@ long CDRopen(void) {
 	if (cdHandle != -1) {		// if we can't open the cdrom we'll works as a null plugin
 		ioctl(cdHandle, CDROM_LOCKDOOR, 0);
 //		ioctl(cdHandle, CDROMSTART, NULL);
+
+		spindown = (char)SpinDown;
+		ioctl(cdHandle, CDROMSETSPINDOWN, &spindown);
 
 		ioctl(cdHandle, CDROM_SELECT_SPEED, CdrSpeed);
 	} else {
@@ -101,9 +110,13 @@ long CDRopen(void) {
 }
 
 long CDRclose(void) {
+	char spindown;
+
 	if (cdHandle < 1) return 0;
 
 	if (playing) CDRstop();
+	spindown = SPINDOWN_VENDOR_SPECIFIC;
+	ioctl(cdHandle, CDROMSETSPINDOWN, &spindown);
 	close(cdHandle);
 	cdHandle = -1;
 
@@ -419,6 +432,7 @@ long CDRgetStatus(struct CdrStat *stat) {
 	struct cdrom_subchnl sc;
 	int ret;
 	static time_t to;
+	char spindown;
 
 	if (cdHandle < 1)
 		return -1;
@@ -460,6 +474,8 @@ long CDRgetStatus(struct CdrStat *stat) {
 			stat->Status |= 0x10;
 			break;
 		default:
+			spindown = (char)SpinDown;
+			ioctl(cdHandle, CDROMSETSPINDOWN, &spindown);
 			ioctl(cdHandle, CDROM_LOCKDOOR, 0);
 			break;
 	}
@@ -554,7 +570,6 @@ void ExecCfg(char *arg) {
 
 long CDRconfigure() {
 	ExecCfg("configure");
-
 	return 0;
 }
 

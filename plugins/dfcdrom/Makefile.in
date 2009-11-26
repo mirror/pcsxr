@@ -15,6 +15,7 @@
 @SET_MAKE@
 
 
+
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
@@ -50,7 +51,8 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)"
+am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
+	"$(DESTDIR)$(gladedir)"
 libLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libDFCdrom_la_LIBADD =
@@ -61,11 +63,10 @@ libDFCdrom_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(libDFCdrom_la_LDFLAGS) $(LDFLAGS) -o $@
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_cfgDFCdrom_OBJECTS = cfg-gtk2.$(OBJEXT) main.$(OBJEXT) \
-	support.$(OBJEXT) interface.$(OBJEXT) callbacks.$(OBJEXT)
+am_cfgDFCdrom_OBJECTS = main.$(OBJEXT)
 cfgDFCdrom_OBJECTS = $(am_cfgDFCdrom_OBJECTS)
 am__DEPENDENCIES_1 =
-cfgDFCdrom_DEPENDENCIES = $(am__DEPENDENCIES_1)
+cfgDFCdrom_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/include
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -80,6 +81,8 @@ LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	$(LDFLAGS) -o $@
 SOURCES = $(libDFCdrom_la_SOURCES) $(cfgDFCdrom_SOURCES)
 DIST_SOURCES = $(libDFCdrom_la_SOURCES) $(cfgDFCdrom_SOURCES)
+gladeDATA_INSTALL = $(INSTALL_DATA)
+DATA = $(glade_DATA)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -238,14 +241,14 @@ libDFCdrom_la_LDFLAGS = -module -avoid-version -lpthread
 INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 	-DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
-	$(GTK2_CFLAGS) \
+	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) \
 	-I../../libpcsxcore -I../../include
 
-cfgDFCdrom_SOURCES = cdrcfg-0.1df/cfg-gtk2.c cdrcfg-0.1df/main.c \
-	cdrcfg-0.1df/support.c cdrcfg-0.1df/interface.c \
-	cdrcfg-0.1df/callbacks.c
-
-cfgDFCdrom_LDADD = $(GTK2_LIBS)
+cfgDFCdrom_SOURCES = cdrcfg-0.1df/main.c
+cfgDFCdrom_LDADD = $(GTK2_LIBS) $(GLADE2_LIBS)
+glade_DATA = cdrcfg-0.1df/dfcdrom.glade2
+gladedir = $(datadir)/psemu/
+EXTRA_DIST = $(glade_DATA)
 all: all-am
 
 .SUFFIXES:
@@ -346,13 +349,9 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/callbacks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cdr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cfg-gtk2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cfg.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/interface.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/support.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -375,20 +374,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
 
-cfg-gtk2.o: cdrcfg-0.1df/cfg-gtk2.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT cfg-gtk2.o -MD -MP -MF $(DEPDIR)/cfg-gtk2.Tpo -c -o cfg-gtk2.o `test -f 'cdrcfg-0.1df/cfg-gtk2.c' || echo '$(srcdir)/'`cdrcfg-0.1df/cfg-gtk2.c
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cfg-gtk2.Tpo $(DEPDIR)/cfg-gtk2.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/cfg-gtk2.c' object='cfg-gtk2.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o cfg-gtk2.o `test -f 'cdrcfg-0.1df/cfg-gtk2.c' || echo '$(srcdir)/'`cdrcfg-0.1df/cfg-gtk2.c
-
-cfg-gtk2.obj: cdrcfg-0.1df/cfg-gtk2.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT cfg-gtk2.obj -MD -MP -MF $(DEPDIR)/cfg-gtk2.Tpo -c -o cfg-gtk2.obj `if test -f 'cdrcfg-0.1df/cfg-gtk2.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/cfg-gtk2.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/cfg-gtk2.c'; fi`
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cfg-gtk2.Tpo $(DEPDIR)/cfg-gtk2.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/cfg-gtk2.c' object='cfg-gtk2.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o cfg-gtk2.obj `if test -f 'cdrcfg-0.1df/cfg-gtk2.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/cfg-gtk2.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/cfg-gtk2.c'; fi`
-
 main.o: cdrcfg-0.1df/main.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT main.o -MD -MP -MF $(DEPDIR)/main.Tpo -c -o main.o `test -f 'cdrcfg-0.1df/main.c' || echo '$(srcdir)/'`cdrcfg-0.1df/main.c
 @am__fastdepCC_TRUE@	mv -f $(DEPDIR)/main.Tpo $(DEPDIR)/main.Po
@@ -403,53 +388,28 @@ main.obj: cdrcfg-0.1df/main.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o main.obj `if test -f 'cdrcfg-0.1df/main.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/main.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/main.c'; fi`
 
-support.o: cdrcfg-0.1df/support.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT support.o -MD -MP -MF $(DEPDIR)/support.Tpo -c -o support.o `test -f 'cdrcfg-0.1df/support.c' || echo '$(srcdir)/'`cdrcfg-0.1df/support.c
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/support.Tpo $(DEPDIR)/support.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/support.c' object='support.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o support.o `test -f 'cdrcfg-0.1df/support.c' || echo '$(srcdir)/'`cdrcfg-0.1df/support.c
-
-support.obj: cdrcfg-0.1df/support.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT support.obj -MD -MP -MF $(DEPDIR)/support.Tpo -c -o support.obj `if test -f 'cdrcfg-0.1df/support.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/support.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/support.c'; fi`
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/support.Tpo $(DEPDIR)/support.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/support.c' object='support.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o support.obj `if test -f 'cdrcfg-0.1df/support.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/support.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/support.c'; fi`
-
-interface.o: cdrcfg-0.1df/interface.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT interface.o -MD -MP -MF $(DEPDIR)/interface.Tpo -c -o interface.o `test -f 'cdrcfg-0.1df/interface.c' || echo '$(srcdir)/'`cdrcfg-0.1df/interface.c
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/interface.Tpo $(DEPDIR)/interface.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/interface.c' object='interface.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o interface.o `test -f 'cdrcfg-0.1df/interface.c' || echo '$(srcdir)/'`cdrcfg-0.1df/interface.c
-
-interface.obj: cdrcfg-0.1df/interface.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT interface.obj -MD -MP -MF $(DEPDIR)/interface.Tpo -c -o interface.obj `if test -f 'cdrcfg-0.1df/interface.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/interface.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/interface.c'; fi`
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/interface.Tpo $(DEPDIR)/interface.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/interface.c' object='interface.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o interface.obj `if test -f 'cdrcfg-0.1df/interface.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/interface.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/interface.c'; fi`
-
-callbacks.o: cdrcfg-0.1df/callbacks.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT callbacks.o -MD -MP -MF $(DEPDIR)/callbacks.Tpo -c -o callbacks.o `test -f 'cdrcfg-0.1df/callbacks.c' || echo '$(srcdir)/'`cdrcfg-0.1df/callbacks.c
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/callbacks.Tpo $(DEPDIR)/callbacks.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/callbacks.c' object='callbacks.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o callbacks.o `test -f 'cdrcfg-0.1df/callbacks.c' || echo '$(srcdir)/'`cdrcfg-0.1df/callbacks.c
-
-callbacks.obj: cdrcfg-0.1df/callbacks.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT callbacks.obj -MD -MP -MF $(DEPDIR)/callbacks.Tpo -c -o callbacks.obj `if test -f 'cdrcfg-0.1df/callbacks.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/callbacks.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/callbacks.c'; fi`
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/callbacks.Tpo $(DEPDIR)/callbacks.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='cdrcfg-0.1df/callbacks.c' object='callbacks.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o callbacks.obj `if test -f 'cdrcfg-0.1df/callbacks.c'; then $(CYGPATH_W) 'cdrcfg-0.1df/callbacks.c'; else $(CYGPATH_W) '$(srcdir)/cdrcfg-0.1df/callbacks.c'; fi`
-
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
+install-gladeDATA: $(glade_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(gladedir)" || $(MKDIR_P) "$(DESTDIR)$(gladedir)"
+	@list='$(glade_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(gladeDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(gladedir)/$$f'"; \
+	  $(gladeDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(gladedir)/$$f"; \
+	done
+
+uninstall-gladeDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(glade_DATA)'; for p in $$list; do \
+	  f=$(am__strip_dir) \
+	  echo " rm -f '$(DESTDIR)$(gladedir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(gladedir)/$$f"; \
+	done
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
@@ -526,11 +486,11 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(LTLIBRARIES) $(PROGRAMS)
+all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(DATA)
 install-binPROGRAMS: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(gladedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -578,7 +538,7 @@ info: info-am
 
 info-am:
 
-install-data-am:
+install-data-am: install-gladeDATA
 
 install-dvi: install-dvi-am
 
@@ -614,7 +574,8 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-binPROGRAMS uninstall-libLTLIBRARIES
+uninstall-am: uninstall-binPROGRAMS uninstall-gladeDATA \
+	uninstall-libLTLIBRARIES
 
 .MAKE: install-am install-strip
 
@@ -624,14 +585,15 @@ uninstall-am: uninstall-binPROGRAMS uninstall-libLTLIBRARIES
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
 	html-am info info-am install install-am install-binPROGRAMS \
 	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-libLTLIBRARIES \
-	install-man install-pdf install-pdf-am install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags uninstall \
-	uninstall-am uninstall-binPROGRAMS uninstall-libLTLIBRARIES
+	install-exec install-exec-am install-gladeDATA install-html \
+	install-html-am install-info install-info-am \
+	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags uninstall uninstall-am uninstall-binPROGRAMS \
+	uninstall-gladeDATA uninstall-libLTLIBRARIES
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

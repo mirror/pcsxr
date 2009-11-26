@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-14 13:12+0800\n"
-"PO-Revision-Date: 2009-11-14 13:13+0700\n"
+"POT-Creation-Date: 2009-11-26 23:05+0800\n"
+"PO-Revision-Date: 2009-11-26 23:08+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -863,7 +863,7 @@ msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku 战斗修正"
 
 #: ../win32/gui/WndMain.c:1214
-#: ../plugins/dfcdrom/interface.c:194
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:277
 #: ../plugins/dfinput/dfinput.glade2:448
 msgid "Options"
 msgstr "选项"
@@ -1365,7 +1365,7 @@ msgstr "无法关闭 \"控制器 2\" 插件!"
 msgid "Error closing GPU plugin!"
 msgstr "无法关闭 GPU 插件!"
 
-#: ../libpcsxcore/cdriso.c:639
+#: ../libpcsxcore/cdriso.c:644
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr "已加载 CD 镜像: %s"
@@ -2245,48 +2245,93 @@ msgstr "单声道"
 msgid "Play only one channel for a performance boost."
 msgstr "仅播放一个声道以提升性能。"
 
-#: ../plugins/dfcdrom/cdr.c:58
+#: ../plugins/dfcdrom/cdr-linux.c:48
 msgid "CD-ROM Drive Reader"
 msgstr "CD-ROM 设备读取插件"
 
-#: ../plugins/dfcdrom/cdr.c:62
+#: ../plugins/dfcdrom/cdr-null.c:10
 msgid "CDR NULL Plugin"
 msgstr "CDR 空插件"
 
-#: ../plugins/dfcdrom/interface.c:74
+#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:166
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:8
 msgid "CDR configuration"
 msgstr "CDR 配置"
 
-#: ../plugins/dfcdrom/interface.c:99
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:33
 msgid "Choose your CD-ROM device or type its path if it's not listed"
 msgstr "请选择您的 CD-ROM 设备或直接输入设备路径"
 
-#: ../plugins/dfcdrom/interface.c:102
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:44
 msgid "Select CD-ROM device"
 msgstr "选择 CD-ROM 设备"
 
-#: ../plugins/dfcdrom/interface.c:120
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:72
 msgid "Select read mode:"
 msgstr "选择读取模式:"
 
-#: ../plugins/dfcdrom/interface.c:133
-msgid "Normal (No Cache)"
-msgstr "正常 (无缓存)"
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:83
+msgid ""
+"Normal (No Cache)\n"
+"Threaded - Faster (With Cache)"
+msgstr ""
+"正常 (无缓存)\n"
+"多线程 - 较快 (使用缓存)"
 
-#: ../plugins/dfcdrom/interface.c:137
-msgid "Threaded - Faster (With Cache)"
-msgstr "多线程 - 较快 (使用缓存)"
-
-#: ../plugins/dfcdrom/interface.c:152
-msgid "Cache Size (Def. 64):                  "
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:114
+msgid "Cache Size (Def. 64):"
 msgstr "缓存大小 (默认为 64):"
 
-#: ../plugins/dfcdrom/interface.c:173
-msgid "Cdrom Speed (Def. 0 = MAX):    "
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:159
+msgid "Spindown Time:"
+msgstr "电机停转时限:"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:170
+msgid ""
+"Default\n"
+"125ms\n"
+"250ms\n"
+"500ms\n"
+"1s\n"
+"2s\n"
+"4s\n"
+"8s\n"
+"16s\n"
+"32s\n"
+"1min\n"
+"2min\n"
+"4min\n"
+"8min\n"
+"16min\n"
+"32min"
+msgstr ""
+"默认\n"
+"125 毫秒\n"
+"250 毫秒\n"
+"500 毫秒\n"
+"1 秒\n"
+"2 秒\n"
+"4 秒\n"
+"8 秒\n"
+"16 秒\n"
+"32 秒\n"
+"1 分钟\n"
+"2 分钟\n"
+"4 分钟\n"
+"8 分钟\n"
+"16 分钟\n"
+"32 分钟"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:216
+msgid "Cdrom Speed (Def. 0 = MAX):"
 msgstr "光驱速度 (默认 0 为最大速度):"
 
-#: ../plugins/dfcdrom/interface.c:189
-msgid "Enable Subchannel read"
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:248
+msgid "hseparator"
+msgstr "hseparator"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:258
+msgid "Enable subchannel read"
 msgstr "启用子通道读取"
 
 #: ../plugins/peopsxgl/gpu.c:61
@@ -2879,3 +2924,7 @@ msgstr "控制器 2"
 #: ../plugins/dfinput/dfinput.glade2:427
 msgid "Multi-Threaded (Recommended)"
 msgstr "多线程 (推荐)"
+
+#~ msgid "Normal (No Cache)"
+#~ msgstr "正常 (无缓存)"
+
