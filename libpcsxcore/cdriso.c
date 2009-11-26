@@ -791,6 +791,9 @@ static long CALLBACK ISOgetStatus(struct CdrStat *stat) {
 		sec = cddaCurOffset / CD_FRAMESIZE_RAW;
 		sec2msf(sec, (char *)stat->Time);
 	}
+	else {
+		stat->Type = 0x01;
+	}
 
 	return 0;
 }
