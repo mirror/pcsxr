@@ -5,7 +5,6 @@
  *
  */
 
-#include "config.h"
 #include <stdint.h>
 
 char *LibName = N_("CDR NULL Plugin");
