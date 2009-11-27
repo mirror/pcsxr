@@ -1,11 +1,3 @@
-November 28, 2009 Wei Mingzhi <weimingzhi@gmail.com>
-
- * plugins/dfcdrom/cdr-linux.c: Don't return NULL when CDRgetBuffer() is
-   called more than once without another CDRreadTrack() call in threaded
-   mode, which solves the problem with Final Fantasy 6 (maybe other games
-   too).
- * plugins/dfcdrom/cdr.h: Moved global variables into cdr-linux.c.
-
 November 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfcdrom/cdrcfg-0.1df/main.c: Rewritten the configuration utility
@@ -21,10 +13,14 @@ November 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * plugins/dfcdrom/cdrcfg-0.1df/cfgCdr.glade: Likewise.
  * plugins/dfcdrom/cdrcfg-0.1df/cfg-gtk2: Likewise.
  * plugins/dfcdrom/cdr-linux.c: Added selection of spin-down time.
+   Don't return NULL when CDRgetBuffer() is called more than once without
+   another CDRreadTrack() call in threaded mode, which solves the problem
+   with Final Fantasy 6 (maybe other games too).
  * plugins/dfcdrom/cfg.c: Likewise.
  * plugins/dfcdrom/cfg.h: Likewise.
  * po/update-pot.sh: Include files from plugins/dfcdrom/cdrcfg-0.1df.
  * po/pcsx.pot, po/zh_CN.po, po/zh_TW.po, po/pt_BR.po: Updated.
+ * plugins/dfcdrom/cdr.h: Moved global variables into cdr-linux.c.
 
 November 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
