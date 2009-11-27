@@ -30,6 +30,18 @@ int initial_time = 0;
 pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
+CacheData *cdcache;
+unsigned char *cdbuffer;
+int cacheaddr;
+
+crdata cr;
+
+unsigned char lastTime[3];
+int cdHandle;
+pthread_t thread;
+int subqread;
+volatile int stopth, found, locked, playing;
+
 long (*ReadTrackT[])() = {
 	ReadNormal,
 	ReadThreaded,
@@ -247,7 +259,7 @@ long ReadThreaded() {
 unsigned char* GetBThreaded() {
 	PRINTF("threadc %d\n", found);
 
-	if (found == 1) { found = 0; return cdbuffer; }
+	if (found == 1) { /*found = 0;*/ return cdbuffer; }
 	cdbuffer = cdcache[0].cr.buf + 12;
 	while (btoi(cdbuffer[0]) != cr.msf.cdmsf_min0 ||
 		   btoi(cdbuffer[1]) != cr.msf.cdmsf_sec0 ||
@@ -260,6 +272,49 @@ unsigned char* GetBThreaded() {
 	return cdbuffer;
 }
 
+void *CdrThread(void *arg) {
+	unsigned char curTime[3];
+	int i;
+
+	for (;;) {
+		locked = 1;
+		pthread_mutex_lock(&mut);
+		pthread_cond_wait(&cond, &mut);
+
+		if (stopth == 2) pthread_exit(NULL);
+		// refill the buffer
+		cacheaddr = msf_to_lba(cr.msf.cdmsf_min0, cr.msf.cdmsf_sec0, cr.msf.cdmsf_frame0);
+
+		memcpy(curTime, &cr.msf, 3);
+
+		PRINTF("start thc %d:%d:%d\n", curTime[0], curTime[1], curTime[2]);
+
+		for (i = 0; i < CacheSize; i++) {
+			memcpy(&cdcache[i].cr.msf, curTime, 3);
+			PRINTF("reading %d:%d:%d\n", curTime[0], curTime[1], curTime[2]);
+			cdcache[i].ret = ioctl(cdHandle, CDROMREADRAW, &cdcache[i].cr);
+
+			PRINTF("readed %x:%x:%x\n", cdcache[i].cr.buf[12], cdcache[i].cr.buf[13], cdcache[i].cr.buf[14]);
+			if (cdcache[i].ret == -1) break;
+
+			curTime[2]++;
+			if (curTime[2] == 75) {
+				curTime[2] = 0;
+				curTime[1]++;
+				if (curTime[1] == 60) {
+					curTime[1] = 0;
+					curTime[0]++;
+				}
+			}
+
+			if (stopth) break;
+		}
+
+		pthread_mutex_unlock(&mut);
+	}
+
+	return NULL;
+}
 
 // read track
 // time:
@@ -283,50 +338,6 @@ long CDRreadTrack(unsigned char *time) {
 	cr.msf.cdmsf_frame0 = btoi(time[2]);
 
 	return fReadTrack();
-}
-
-void *CdrThread(void *arg) {
-	unsigned char curTime[3];
-	int i;
-
-	for (;;) {
-		locked = 1;
-		pthread_mutex_lock(&mut);
-		pthread_cond_wait(&cond, &mut);
-
-		if (stopth == 2) pthread_exit(NULL);
-		// refill the buffer
-		cacheaddr = msf_to_lba(cr.msf.cdmsf_min0, cr.msf.cdmsf_sec0, cr.msf.cdmsf_frame0);
-
-		memcpy(curTime, &cr.msf, 3);
-
-		PRINTF("start thc %d:%d:%d\n", curTime[0], curTime[1], curTime[2]);
-
-		for (i=0; i<CacheSize; i++) {
-			memcpy(&cdcache[i].cr.msf, curTime, 3);
-			PRINTF("reading %d:%d:%d\n", crp.msf.cdmsf_min0, crp.msf.cdmsf_sec0, crp.msf.cdmsf_frame0);
-			cdcache[i].ret = ioctl(cdHandle, CDROMREADRAW, &cdcache[i].cr);
-
-			PRINTF("readed %x:%x:%x\n", crd.buf[12], crd.buf[13], crd.buf[14]);
-			if (cdcache[i].ret == -1) break;
-
-			curTime[2]++;
-			if (curTime[2] == 75) {
-				curTime[2] = 0;
-				curTime[1]++;
-				if (curTime[1] == 60) {
-					curTime[1] = 0;
-					curTime[0]++;
-				}
-			}
-
-			if (stopth) break;
-		}
-
-		pthread_mutex_unlock(&mut);
-	}
-
-	return NULL;
 }
 
 // return readed track

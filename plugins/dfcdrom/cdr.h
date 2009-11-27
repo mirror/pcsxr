@@ -48,23 +48,10 @@ typedef union {
 	unsigned char buf[CD_FRAMESIZE_RAW];
 } crdata;
 
-crdata cr;
-
 typedef struct {
 	crdata cr;
 	int ret;
 } CacheData;
-
-CacheData *cdcache;
-unsigned char *cdbuffer;
-int cacheaddr;
-
-unsigned char lastTime[3];
-int cdHandle;
-pthread_t thread;
-int subqread, stopth;
-int found, locked;
-int playing;
 
 long ReadNormal();
 long ReadThreaded();
