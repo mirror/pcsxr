@@ -253,7 +253,7 @@ lib_LTLIBRARIES = libDFXVideo.la
 libDFXVideo_la_SOURCES = gpu.c cfg.c draw.c fps.c key.c menu.c prim.c \
 	soft.c zn.c $(am__append_1)
 libDFXVideo_la_LDFLAGS = -module -avoid-version -L/usr/X11R6/lib64 \
-	-L/usr/X11R6/lib -lX11 -lXv -lXext -lXtst -lm
+	-L/usr/X11R6/lib -lX11 -lXv -lXext -lm
 cfgDFXVideo_SOURCES = gpucfg-0.1df/main.c
 cfgDFXVideo_LDADD = $(GTK2_LIBS) $(GLADE2_LIBS) -L/usr/X11R6/lib -lXext
 glade_DATA = gpucfg-0.1df/dfxvideo.glade2

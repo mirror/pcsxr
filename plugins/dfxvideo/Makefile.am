@@ -25,7 +25,7 @@ INCLUDES += -DUSE_NASM=1
 endif
 libDFXVideo_la_LDFLAGS = -module -avoid-version
 libDFXVideo_la_LDFLAGS += -L/usr/X11R6/lib64 -L/usr/X11R6/lib \
-	-lX11 -lXv -lXext -lXtst -lm
+	-lX11 -lXv -lXext -lm
 
 bin_PROGRAMS = cfgDFXVideo
 cfgDFXVideo_SOURCES = gpucfg-0.1df/main.c

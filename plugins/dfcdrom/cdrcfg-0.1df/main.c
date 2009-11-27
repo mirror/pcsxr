@@ -17,6 +17,7 @@
 #ifdef __linux__
 
 #include "../cfg.c"
+#include <sys/ioctl.h>
 
 GtkWidget *MainWindow;
 

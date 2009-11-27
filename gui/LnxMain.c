@@ -31,7 +31,7 @@
 #include <sys/stat.h>
 
 #include "Linux.h"
-/* FIXME */
+
 #include "../libpcsxcore/sio.h"
 
 #include "config.h"
@@ -39,6 +39,8 @@
 #ifdef ENABLE_NLS
 #include <locale.h>
 #endif
+
+#include <X11/extensions/XTest.h>
 
 enum {
 	DONT_USE_GUI = 0,
@@ -528,9 +530,33 @@ void SysCloseLibrary(void *lib) {
 	dlclose(lib);
 }
 
+static void SysDisableScreenSaver() {
+	static time_t fake_key_timer = 0;
+	static char first_time = 1, has_test_ext = 0;
+	Display *display;
+	extern unsigned long gpuDisp;
+
+	display = (Display *)gpuDisp;
+
+	if (first_time) {
+		// check if xtest is available
+		int a, b, c, d;
+		has_test_ext = XTestQueryExtension(display, &a, &b, &c, &d);
+
+		first_time = 0;
+	}
+
+	if (has_test_ext && fake_key_timer < time(NULL)) {
+		XTestFakeRelativeMotionEvent(display, 1, 0, 0);
+		fake_key_timer = time(NULL) + 55;
+	}
+}
+
 void SysUpdate() {
 	PADhandleKey(PAD1_keypressed());
 	PADhandleKey(PAD2_keypressed());
+
+	SysDisableScreenSaver();
 }
 
 /* ADB TODO Replace RunGui() with StartGui ()*/

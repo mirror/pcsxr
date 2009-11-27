@@ -16,4 +16,5 @@ pcsx_SOURCES = \
 	Cheat.c
 
 pcsx_LDADD = \
-	$(GTK2_LIBS) $(GLADE2_LIBS) -lpthread -lz -lm ../libpcsxcore/libpcsxcore.a
+	$(GTK2_LIBS) $(GLADE2_LIBS) -lpthread -lz -lm -lXext -lXtst \
+	../libpcsxcore/libpcsxcore.a

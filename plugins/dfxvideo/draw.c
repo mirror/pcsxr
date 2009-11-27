@@ -54,7 +54,6 @@ float pixelaspect;
 #include <X11/extensions/Xv.h>
 #include <X11/extensions/Xvlib.h>
 #include <X11/extensions/XShm.h>
-#include <X11/extensions/XTest.h>
 int xv_port = -1;
 int xv_id = -1;
 int xv_depth = 0;
@@ -62,19 +61,17 @@ int yuv_port = -1;
 int yuv_id = -1;
 int use_yuv = 0;
 int xv_vsync = 0;
-int has_test_ext = 0;
-int fake_key_timer = 0;
 
 XShmSegmentInfo shminfo;
 int finalw,finalh;
 
 extern XvImage  *XvShmCreateImage(Display*, XvPortID, int, char*, int, int, XShmSegmentInfo*);
 
+#include <time.h>
+
 // prototypes
 void hq2x_32( unsigned char * srcPtr, DWORD srcPitch, unsigned char * dstPtr, int width, int height);
 void hq3x_32( unsigned char * srcPtr,  DWORD srcPitch, unsigned char * dstPtr, int width, int height);
-
-#include <time.h>
 
 ////////////////////////////////////////////////////////////////////////
 // generic 2xSaI helpers
@@ -1325,11 +1322,6 @@ shminfo.readOnly = 0;
     printf("XShmAttach failed !\n");
     exit (-1);
  }
-
- {
-  int a,b,c,d;
-  has_test_ext = XTestQueryExtension(display, &a, &b, &c, &d);
- }
 }
 
 void (*p2XSaIFunc) (unsigned char *, DWORD, unsigned char *, int, int);
@@ -1575,12 +1567,6 @@ void DoBufferSwap(void)
 
 	if (finalw == 0 || finalh == 0)
 		return;
-
-	// disable screensaver
-	if (has_test_ext && fake_key_timer < time(NULL)) {
-		XTestFakeRelativeMotionEvent(display, 1, 0, 0);
-		fake_key_timer = time(NULL) + 55;
-	}
 
 	XSync(display,False);
 

@@ -21,6 +21,11 @@ November 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * po/update-pot.sh: Include files from plugins/dfcdrom/cdrcfg-0.1df.
  * po/pcsx.pot, po/zh_CN.po, po/zh_TW.po, po/pt_BR.po: Updated.
  * plugins/dfcdrom/cdr.h: Moved global variables into cdr-linux.c.
+ * plugins/dfxvideo/draw.c: Removed the screensaver disabling code.
+ * plugins/dfxvideo/Makefile.am: Don't link against Xtst.
+ * gui/LnxMain.c: Disable screensaver in the main emu, so that it will be
+   effective in all of the plugins.
+ * gui/Makefile.am: Added -lXext -lXtst.
 
 November 26, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
