@@ -2924,7 +2924,3 @@ msgstr "控制器 2"
 #: ../plugins/dfinput/dfinput.glade2:427
 msgid "Multi-Threaded (Recommended)"
 msgstr "多线程 (推荐)"
-
-#~ msgid "Normal (No Cache)"
-#~ msgstr "正常 (无缓存)"
-

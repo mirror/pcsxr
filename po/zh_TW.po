@@ -1224,7 +1224,7 @@ msgstr "不需要配置"
 #: ../gui/Gtk2Gui.c:1571
 #: ../gui/Gtk2Gui.c:1880
 msgid "This plugin doesn't need to be configured."
-msgstr "此外掛需要被配置。"
+msgstr "此外掛不需要被配置。"
 
 #: ../gui/Gtk2Gui.c:1608
 msgid "Memory Card Manager"
@@ -2924,7 +2924,3 @@ msgstr "控制器 2"
 #: ../plugins/dfinput/dfinput.glade2:427
 msgid "Multi-Threaded (Recommended)"
 msgstr "多執行緒 (建議使用)"
-
-#~ msgid "Normal (No Cache)"
-#~ msgstr "正常 (無快取)"
-
