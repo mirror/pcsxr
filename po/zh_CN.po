@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-28 19:06+0800\n"
-"PO-Revision-Date: 2009-11-28 19:07+0700\n"
+"POT-Creation-Date: 2009-11-28 19:26+0800\n"
+"PO-Revision-Date: 2009-11-28 19:27+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -347,7 +347,7 @@ msgid "Hexadecimal"
 msgstr "十六进制"
 
 #: ../win32/gui/ConfigurePlugins.c:206
-#: ../gui/Gtk2Gui.c:1665
+#: ../gui/Gtk2Gui.c:1663
 msgid "Internal HLE Bios"
 msgstr "内部 HLE-Bios"
 
@@ -358,7 +358,7 @@ msgstr "配置不正确!"
 #: ../win32/gui/ConfigurePlugins.c:292
 #: ../gui/Cheat.c:156
 #: ../gui/Cheat.c:252
-#: ../gui/LnxMain.c:407
+#: ../gui/LnxMain.c:409
 msgid "Error"
 msgstr "错误"
 
@@ -688,15 +688,15 @@ msgstr "*PCSX*: Error Saving State %s"
 
 #: ../win32/gui/WndMain.c:426
 #: ../win32/gui/WndMain.c:475
-#: ../gui/Gtk2Gui.c:573
-#: ../gui/Gtk2Gui.c:698
+#: ../gui/Gtk2Gui.c:571
+#: ../gui/Gtk2Gui.c:696
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "此光盘不是一张合法的 PlayStation 光盘。"
 
 #: ../win32/gui/WndMain.c:432
 #: ../win32/gui/WndMain.c:481
-#: ../gui/Gtk2Gui.c:581
-#: ../gui/Gtk2Gui.c:706
+#: ../gui/Gtk2Gui.c:579
+#: ../gui/Gtk2Gui.c:704
 msgid "Could not load CD-ROM!"
 msgstr "无法加载光盘!"
 
@@ -903,8 +903,8 @@ msgstr "DataDeck 记忆卡 (*.ddl)"
 #: ../win32/gui/WndMain.c:1350
 #: ../win32/gui/WndMain.c:1431
 #: ../gui/Cheat.c:322
-#: ../gui/Gtk2Gui.c:510
-#: ../gui/Gtk2Gui.c:649
+#: ../gui/Gtk2Gui.c:508
+#: ../gui/Gtk2Gui.c:647
 msgid "All Files"
 msgstr "所有文件"
 
@@ -1086,8 +1086,8 @@ msgstr "所有文件 (*.*)"
 
 #: ../gui/Cheat.c:395
 #: ../gui/Cheat.c:1125
-#: ../gui/Gtk2Gui.c:398
-#: ../gui/Gtk2Gui.c:1018
+#: ../gui/Gtk2Gui.c:396
+#: ../gui/Gtk2Gui.c:1016
 msgid "Error: Glade interface could not be loaded!"
 msgstr "错误：无法加载 Glade 界面!"
 
@@ -1115,115 +1115,115 @@ msgstr "新值:"
 msgid "Search Results"
 msgstr "查找结果"
 
-#: ../gui/Gtk2Gui.c:406
+#: ../gui/Gtk2Gui.c:404
 #: ../data/pcsx.glade2:605
 msgid "Configure PCSX"
 msgstr "配置 PCSX"
 
-#: ../gui/Gtk2Gui.c:492
+#: ../gui/Gtk2Gui.c:490
 msgid "Select PSX EXE File"
 msgstr "选择 PSX EXE 文件"
 
-#: ../gui/Gtk2Gui.c:506
+#: ../gui/Gtk2Gui.c:504
 msgid "PlayStation Executable Files"
 msgstr "PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:542
+#: ../gui/Gtk2Gui.c:540
 msgid "Not a valid PSX file"
 msgstr "不是一个合法的 PSX 文件"
 
-#: ../gui/Gtk2Gui.c:542
+#: ../gui/Gtk2Gui.c:540
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "此文件不是一个合法的 PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:573
-#: ../gui/Gtk2Gui.c:698
+#: ../gui/Gtk2Gui.c:571
+#: ../gui/Gtk2Gui.c:696
 msgid "CD ROM failed"
 msgstr "CD-ROM 失败"
 
-#: ../gui/Gtk2Gui.c:581
+#: ../gui/Gtk2Gui.c:579
 msgid "The CD ROM could not be loaded"
 msgstr "无法加载 CD-ROM"
 
-#: ../gui/Gtk2Gui.c:595
+#: ../gui/Gtk2Gui.c:593
 msgid "Could not run BIOS"
 msgstr "无法运行 BIOS"
 
-#: ../gui/Gtk2Gui.c:595
+#: ../gui/Gtk2Gui.c:593
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr "内部 HLE BIOS 不支持直接运行。"
 
-#: ../gui/Gtk2Gui.c:624
+#: ../gui/Gtk2Gui.c:622
 msgid "Open PSX Disc Image File"
 msgstr "打开 PSX 光盘镜像文件"
 
-#: ../gui/Gtk2Gui.c:644
+#: ../gui/Gtk2Gui.c:642
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr "PS 镜像文件 (*.bin, *.img, *.mdf, *.iso)"
 
-#: ../gui/Gtk2Gui.c:878
+#: ../gui/Gtk2Gui.c:876
 #, c-format
 msgid "Loaded state %s."
 msgstr "已读取存档 %s。"
 
-#: ../gui/Gtk2Gui.c:882
+#: ../gui/Gtk2Gui.c:880
 #, c-format
 msgid "Error loading state %s!"
 msgstr "读取存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:893
+#: ../gui/Gtk2Gui.c:891
 #, c-format
 msgid "Saved state %s."
 msgstr "已保存存档 %s"
 
-#: ../gui/Gtk2Gui.c:895
+#: ../gui/Gtk2Gui.c:893
 #, c-format
 msgid "Error saving state %s!"
 msgstr "保存存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:929
-#: ../gui/Gtk2Gui.c:956
+#: ../gui/Gtk2Gui.c:927
+#: ../gui/Gtk2Gui.c:954
 msgid "Select State File"
 msgstr "选择存档文件"
 
-#: ../gui/Gtk2Gui.c:1055
-#: ../gui/Gtk2Gui.c:1076
-#: ../gui/Gtk2Gui.c:1097
-#: ../gui/Gtk2Gui.c:1118
-#: ../gui/Gtk2Gui.c:1317
+#: ../gui/Gtk2Gui.c:1053
+#: ../gui/Gtk2Gui.c:1074
+#: ../gui/Gtk2Gui.c:1095
+#: ../gui/Gtk2Gui.c:1116
+#: ../gui/Gtk2Gui.c:1315
 msgid "No configuration required"
 msgstr "不需要配置"
 
-#: ../gui/Gtk2Gui.c:1055
-#: ../gui/Gtk2Gui.c:1076
-#: ../gui/Gtk2Gui.c:1097
-#: ../gui/Gtk2Gui.c:1118
-#: ../gui/Gtk2Gui.c:1317
+#: ../gui/Gtk2Gui.c:1053
+#: ../gui/Gtk2Gui.c:1074
+#: ../gui/Gtk2Gui.c:1095
+#: ../gui/Gtk2Gui.c:1116
+#: ../gui/Gtk2Gui.c:1315
 msgid "This plugin doesn't need to be configured."
 msgstr "此插件需要被配置。"
 
-#: ../gui/Gtk2Gui.c:1571
+#: ../gui/Gtk2Gui.c:1569
 #, c-format
 msgid "Could not open BIOS directory: '%s'\n"
 msgstr "无法打开 BIOS 目录: \"%s\"\n"
 
-#: ../gui/Gtk2Gui.c:1601
-#: ../gui/Gtk2Gui.c:1694
-#: ../gui/LnxMain.c:172
+#: ../gui/Gtk2Gui.c:1599
+#: ../gui/Gtk2Gui.c:1692
+#: ../gui/LnxMain.c:167
 #, c-format
 msgid "Could not open directory: '%s'\n"
 msgstr "无法打开目录: \"%s\"\n"
 
-#: ../gui/Gtk2Gui.c:1755
+#: ../gui/Gtk2Gui.c:1753
 msgid "Notice"
 msgstr "警告"
 
-#: ../gui/LnxMain.c:67
+#: ../gui/LnxMain.c:62
 #, c-format
 msgid "Creating memory card: %s\n"
 msgstr "建立记忆卡: %s\n"
 
-#: ../gui/LnxMain.c:314
+#: ../gui/LnxMain.c:320
 msgid ""
 " pcsx [options] [file]\n"
 "\toptions:\n"
@@ -1247,21 +1247,21 @@ msgstr ""
 "\t-h -help\t显示此信息\n"
 "\t文件\t\t加载文件\n"
 
-#: ../gui/LnxMain.c:352
+#: ../gui/LnxMain.c:357
 #, c-format
 msgid "PCSX cannot be configured without using the GUI -- you should restart without -nogui.\n"
 msgstr "PCSX 不能在字符界面下配置 -- 请不使用 -nogui 参数重新启动程序\n"
 
-#: ../gui/LnxMain.c:407
+#: ../gui/LnxMain.c:409
 msgid "Failed loading plugins!"
 msgstr "加载插件失败!"
 
-#: ../gui/LnxMain.c:424
+#: ../gui/LnxMain.c:426
 #, c-format
 msgid "Could not load CD-ROM!\n"
 msgstr "无法加载光盘。\n"
 
-#: ../gui/LnxMain.c:463
+#: ../gui/LnxMain.c:465
 #, c-format
 msgid "PSX emulator couldn't be initialized.\n"
 msgstr "无法初始化 PSX 模拟器。\n"
@@ -1293,6 +1293,10 @@ msgstr "格式化记忆卡"
 #: ../gui/MemcardDlg.c:339
 msgid "Create a new Memory Card"
 msgstr "新建记忆卡"
+
+#: ../gui/MemcardDlg.c:348
+msgid "New Memory Card.mcd"
+msgstr "新记忆卡.mcd"
 
 #: ../gui/MemcardDlg.c:456
 msgid "No free space on memory card"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-28 19:06+0800\n"
+"POT-Creation-Date: 2009-11-28 19:26+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -293,7 +293,7 @@ msgstr ""
 msgid "Hexadecimal"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:206 ../gui/Gtk2Gui.c:1665
+#: ../win32/gui/ConfigurePlugins.c:206 ../gui/Gtk2Gui.c:1663
 msgid "Internal HLE Bios"
 msgstr ""
 
@@ -302,7 +302,7 @@ msgid "Configuration not OK!"
 msgstr ""
 
 #: ../win32/gui/ConfigurePlugins.c:292 ../gui/Cheat.c:156 ../gui/Cheat.c:252
-#: ../gui/LnxMain.c:407
+#: ../gui/LnxMain.c:409
 msgid "Error"
 msgstr ""
 
@@ -615,13 +615,13 @@ msgstr ""
 msgid "*PCSX*: Error Saving State %s"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:426 ../win32/gui/WndMain.c:475 ../gui/Gtk2Gui.c:573
-#: ../gui/Gtk2Gui.c:698
+#: ../win32/gui/WndMain.c:426 ../win32/gui/WndMain.c:475 ../gui/Gtk2Gui.c:571
+#: ../gui/Gtk2Gui.c:696
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:432 ../win32/gui/WndMain.c:481 ../gui/Gtk2Gui.c:581
-#: ../gui/Gtk2Gui.c:706
+#: ../win32/gui/WndMain.c:432 ../win32/gui/WndMain.c:481 ../gui/Gtk2Gui.c:579
+#: ../gui/Gtk2Gui.c:704
 msgid "Could not load CD-ROM!"
 msgstr ""
 
@@ -807,7 +807,7 @@ msgid "DataDeck Memory Card (*.ddf)"
 msgstr ""
 
 #: ../win32/gui/WndMain.c:1350 ../win32/gui/WndMain.c:1431 ../gui/Cheat.c:322
-#: ../gui/Gtk2Gui.c:510 ../gui/Gtk2Gui.c:649
+#: ../gui/Gtk2Gui.c:508 ../gui/Gtk2Gui.c:647
 msgid "All Files"
 msgstr ""
 
@@ -979,8 +979,8 @@ msgstr ""
 msgid "All Files (*.*)"
 msgstr ""
 
-#: ../gui/Cheat.c:395 ../gui/Cheat.c:1125 ../gui/Gtk2Gui.c:398
-#: ../gui/Gtk2Gui.c:1018
+#: ../gui/Cheat.c:395 ../gui/Cheat.c:1125 ../gui/Gtk2Gui.c:396
+#: ../gui/Gtk2Gui.c:1016
 msgid "Error: Glade interface could not be loaded!"
 msgstr ""
 
@@ -1008,104 +1008,104 @@ msgstr ""
 msgid "Search Results"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:406 ../data/pcsx.glade2:605
+#: ../gui/Gtk2Gui.c:404 ../data/pcsx.glade2:605
 msgid "Configure PCSX"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:492
+#: ../gui/Gtk2Gui.c:490
 msgid "Select PSX EXE File"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:506
+#: ../gui/Gtk2Gui.c:504
 msgid "PlayStation Executable Files"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:542
+#: ../gui/Gtk2Gui.c:540
 msgid "Not a valid PSX file"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:542
+#: ../gui/Gtk2Gui.c:540
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:573 ../gui/Gtk2Gui.c:698
+#: ../gui/Gtk2Gui.c:571 ../gui/Gtk2Gui.c:696
 msgid "CD ROM failed"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:581
+#: ../gui/Gtk2Gui.c:579
 msgid "The CD ROM could not be loaded"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:595
+#: ../gui/Gtk2Gui.c:593
 msgid "Could not run BIOS"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:595
+#: ../gui/Gtk2Gui.c:593
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:624
+#: ../gui/Gtk2Gui.c:622
 msgid "Open PSX Disc Image File"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:644
+#: ../gui/Gtk2Gui.c:642
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:878
+#: ../gui/Gtk2Gui.c:876
 #, c-format
 msgid "Loaded state %s."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:882
+#: ../gui/Gtk2Gui.c:880
 #, c-format
 msgid "Error loading state %s!"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:893
+#: ../gui/Gtk2Gui.c:891
 #, c-format
 msgid "Saved state %s."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:895
+#: ../gui/Gtk2Gui.c:893
 #, c-format
 msgid "Error saving state %s!"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:929 ../gui/Gtk2Gui.c:956
+#: ../gui/Gtk2Gui.c:927 ../gui/Gtk2Gui.c:954
 msgid "Select State File"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1055 ../gui/Gtk2Gui.c:1076 ../gui/Gtk2Gui.c:1097
-#: ../gui/Gtk2Gui.c:1118 ../gui/Gtk2Gui.c:1317
+#: ../gui/Gtk2Gui.c:1053 ../gui/Gtk2Gui.c:1074 ../gui/Gtk2Gui.c:1095
+#: ../gui/Gtk2Gui.c:1116 ../gui/Gtk2Gui.c:1315
 msgid "No configuration required"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1055 ../gui/Gtk2Gui.c:1076 ../gui/Gtk2Gui.c:1097
-#: ../gui/Gtk2Gui.c:1118 ../gui/Gtk2Gui.c:1317
+#: ../gui/Gtk2Gui.c:1053 ../gui/Gtk2Gui.c:1074 ../gui/Gtk2Gui.c:1095
+#: ../gui/Gtk2Gui.c:1116 ../gui/Gtk2Gui.c:1315
 msgid "This plugin doesn't need to be configured."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1571
+#: ../gui/Gtk2Gui.c:1569
 #, c-format
 msgid "Could not open BIOS directory: '%s'\n"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1601 ../gui/Gtk2Gui.c:1694 ../gui/LnxMain.c:172
+#: ../gui/Gtk2Gui.c:1599 ../gui/Gtk2Gui.c:1692 ../gui/LnxMain.c:167
 #, c-format
 msgid "Could not open directory: '%s'\n"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1755
+#: ../gui/Gtk2Gui.c:1753
 msgid "Notice"
 msgstr ""
 
-#: ../gui/LnxMain.c:67
+#: ../gui/LnxMain.c:62
 #, c-format
 msgid "Creating memory card: %s\n"
 msgstr ""
 
-#: ../gui/LnxMain.c:314
+#: ../gui/LnxMain.c:320
 msgid ""
 " pcsx [options] [file]\n"
 "\toptions:\n"
@@ -1119,23 +1119,23 @@ msgid ""
 "\tfile\t\tLoads file\n"
 msgstr ""
 
-#: ../gui/LnxMain.c:352
+#: ../gui/LnxMain.c:357
 #, c-format
 msgid ""
 "PCSX cannot be configured without using the GUI -- you should restart "
 "without -nogui.\n"
 msgstr ""
 
-#: ../gui/LnxMain.c:407
+#: ../gui/LnxMain.c:409
 msgid "Failed loading plugins!"
 msgstr ""
 
-#: ../gui/LnxMain.c:424
+#: ../gui/LnxMain.c:426
 #, c-format
 msgid "Could not load CD-ROM!\n"
 msgstr ""
 
-#: ../gui/LnxMain.c:463
+#: ../gui/LnxMain.c:465
 #, c-format
 msgid "PSX emulator couldn't be initialized.\n"
 msgstr ""
@@ -1168,6 +1168,10 @@ msgstr ""
 
 #: ../gui/MemcardDlg.c:339
 msgid "Create a new Memory Card"
+msgstr ""
+
+#: ../gui/MemcardDlg.c:348
+msgid "New Memory Card.mcd"
 msgstr ""
 
 #: ../gui/MemcardDlg.c:456
