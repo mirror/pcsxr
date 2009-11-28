@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-28 18:23+0800\n"
-"PO-Revision-Date: 2009-11-28 18:25+0700\n"
+"POT-Creation-Date: 2009-11-28 19:06+0800\n"
+"PO-Revision-Date: 2009-11-28 19:07+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -731,23 +731,23 @@ msgid "terminiting link block"
 msgstr "terminiting link block"
 
 #: ../win32/gui/WndMain.c:864
-#: ../gui/MemcardDlg.c:173
-#: ../gui/MemcardDlg.c:243
+#: ../gui/MemcardDlg.c:147
+#: ../gui/MemcardDlg.c:217
 msgid "Deleted"
 msgstr "已删除"
 
 #: ../win32/gui/WndMain.c:865
 #: ../win32/gui/WndMain.c:868
-#: ../gui/MemcardDlg.c:175
-#: ../gui/MemcardDlg.c:179
-#: ../gui/MemcardDlg.c:245
-#: ../gui/MemcardDlg.c:249
+#: ../gui/MemcardDlg.c:149
+#: ../gui/MemcardDlg.c:153
+#: ../gui/MemcardDlg.c:219
+#: ../gui/MemcardDlg.c:223
 msgid "Free"
 msgstr "空闲"
 
 #: ../win32/gui/WndMain.c:867
-#: ../gui/MemcardDlg.c:177
-#: ../gui/MemcardDlg.c:247
+#: ../gui/MemcardDlg.c:151
+#: ../gui/MemcardDlg.c:221
 msgid "Used"
 msgstr "已使用"
 
@@ -1278,27 +1278,31 @@ msgstr "ID"
 msgid "Name"
 msgstr "名称"
 
-#: ../gui/MemcardDlg.c:333
+#: ../gui/MemcardDlg.c:308
 msgid "Format this Memory Card?"
 msgstr "格式化此记忆卡?"
 
-#: ../gui/MemcardDlg.c:335
+#: ../gui/MemcardDlg.c:310
 msgid "If you format the memory card, the card will be empty, and any existing data overwritten."
 msgstr "如果您选择格式化记忆卡，记忆卡将被清空，并且任何现有数据都将被覆盖。"
 
-#: ../gui/MemcardDlg.c:338
+#: ../gui/MemcardDlg.c:313
 msgid "Format card"
 msgstr "格式化记忆卡"
 
-#: ../gui/MemcardDlg.c:441
+#: ../gui/MemcardDlg.c:339
+msgid "Create a new Memory Card"
+msgstr "新建记忆卡"
+
+#: ../gui/MemcardDlg.c:456
 msgid "No free space on memory card"
 msgstr "记忆卡无空余位置"
 
-#: ../gui/MemcardDlg.c:442
+#: ../gui/MemcardDlg.c:457
 msgid "There are no free slots available on the target memory card. Please delete a slot first."
 msgstr "目标记忆卡上无空余位置。请先删除一个存档。"
 
-#: ../gui/MemcardDlg.c:597
+#: ../gui/MemcardDlg.c:611
 msgid "Memory Card Manager"
 msgstr "记忆卡管理器"
 
@@ -2780,107 +2784,107 @@ msgstr "右摇杆 X"
 msgid "R-Stick Y"
 msgstr "右摇杆 Y"
 
-#: ../plugins/dfinput/cfg-gtk2.c:98
+#: ../plugins/dfinput/cfg-gtk2.c:99
 msgid "Centered"
 msgstr "居中"
 
-#: ../plugins/dfinput/cfg-gtk2.c:98
+#: ../plugins/dfinput/cfg-gtk2.c:99
 msgid "Up"
 msgstr "上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:98
+#: ../plugins/dfinput/cfg-gtk2.c:99
 msgid "Right"
 msgstr "右方向键"
 
-#: ../plugins/dfinput/cfg-gtk2.c:98
+#: ../plugins/dfinput/cfg-gtk2.c:99
 msgid "Rightup"
 msgstr "右上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:99
+#: ../plugins/dfinput/cfg-gtk2.c:100
 msgid "Down"
 msgstr "下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:99
+#: ../plugins/dfinput/cfg-gtk2.c:100
 msgid "Rightdown"
 msgstr "右下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:99
+#: ../plugins/dfinput/cfg-gtk2.c:100
 msgid "Left"
 msgstr "左"
 
-#: ../plugins/dfinput/cfg-gtk2.c:99
+#: ../plugins/dfinput/cfg-gtk2.c:100
 msgid "Leftup"
 msgstr "左上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:100
+#: ../plugins/dfinput/cfg-gtk2.c:101
 msgid "Leftdown"
 msgstr "左下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:104
+#: ../plugins/dfinput/cfg-gtk2.c:105
 #, c-format
 msgid "Joystick: Button %d"
 msgstr "手柄: 按钮 %d"
 
-#: ../plugins/dfinput/cfg-gtk2.c:108
+#: ../plugins/dfinput/cfg-gtk2.c:109
 #, c-format
 msgid "Joystick: Axis %d%c"
 msgstr "手柄: 轴 %d%c"
 
-#: ../plugins/dfinput/cfg-gtk2.c:113
+#: ../plugins/dfinput/cfg-gtk2.c:114
 #, c-format
 msgid "Joystick: Hat %d %s"
 msgstr "Joystick: 操纵杆 %d %s"
 
-#: ../plugins/dfinput/cfg-gtk2.c:128
+#: ../plugins/dfinput/cfg-gtk2.c:129
 msgid "Keyboard:"
 msgstr "键盘:"
 
-#: ../plugins/dfinput/cfg-gtk2.c:132
-#: ../plugins/dfinput/cfg-gtk2.c:140
+#: ../plugins/dfinput/cfg-gtk2.c:133
+#: ../plugins/dfinput/cfg-gtk2.c:141
 #, c-format
 msgid "(Not Set)"
 msgstr "(未设定)"
 
-#: ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:143
 #, c-format
 msgid "Joystick: Axis %d%s"
 msgstr "手柄: 轴 %d%s"
 
-#: ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:143
 msgid " (Reversed)"
 msgstr " (反向)"
 
-#: ../plugins/dfinput/cfg-gtk2.c:385
+#: ../plugins/dfinput/cfg-gtk2.c:387
 msgid "Device not set"
 msgstr "设备未设置"
 
-#: ../plugins/dfinput/cfg-gtk2.c:385
+#: ../plugins/dfinput/cfg-gtk2.c:387
 msgid "Please select a valid Joystick Device"
 msgstr "请选择一个合法的手柄设备"
 
-#: ../plugins/dfinput/cfg-gtk2.c:391
+#: ../plugins/dfinput/cfg-gtk2.c:393
 msgid "Device open error"
 msgstr "设备打开错误"
 
-#: ../plugins/dfinput/cfg-gtk2.c:391
+#: ../plugins/dfinput/cfg-gtk2.c:393
 msgid "Unable to open Joystick Device"
 msgstr "无法打开手柄设备"
 
-#: ../plugins/dfinput/cfg-gtk2.c:482
+#: ../plugins/dfinput/cfg-gtk2.c:484
 msgid "None"
 msgstr "无"
 
-#: ../plugins/dfinput/cfg-gtk2.c:524
+#: ../plugins/dfinput/cfg-gtk2.c:526
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr "手柄/键盘输入配置"
 
-#: ../plugins/dfinput/cfg-gtk2.c:530
-#: ../plugins/dfinput/cfg-gtk2.c:550
+#: ../plugins/dfinput/cfg-gtk2.c:532
+#: ../plugins/dfinput/cfg-gtk2.c:552
 msgid "Key"
 msgstr "按钮"
 
-#: ../plugins/dfinput/cfg-gtk2.c:536
-#: ../plugins/dfinput/cfg-gtk2.c:556
+#: ../plugins/dfinput/cfg-gtk2.c:538
+#: ../plugins/dfinput/cfg-gtk2.c:558
 msgid "Button"
 msgstr "按键"
 
@@ -2932,3 +2936,4 @@ msgstr "控制器 2"
 #: ../plugins/dfinput/dfinput.glade2:427
 msgid "Multi-Threaded (Recommended)"
 msgstr "多线程 (推荐)"
+
