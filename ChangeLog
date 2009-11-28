@@ -3,6 +3,7 @@ November 28, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * data/pcsx.glade2: Adjusted Memcard dialog.
  * po/pt_BR.po, po/zh_CN.po, po/zh_TW.po, po/pcsx.pot: Updated.
  * gui/Cheat.c: Fixed memory leaks.
+ * plugins/dfinput/cfg-gtk2.c: Likewise.
  * gui/Gtk2Gui.c: Moved memcard dialog stuff into MemcardDlg.c.
  * gui/MemcardDlg.c: Added.
  * gui/MemcardDlg.h: Likewise.

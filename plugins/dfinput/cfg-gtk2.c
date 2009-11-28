@@ -90,6 +90,7 @@ static int GetSelectedKeyIndex(int padnum) {
 
 	path = gtk_tree_model_get_path(model, &iter);
 	i = *gtk_tree_path_get_indices(path);
+	gtk_tree_path_free(path);
 
 	return i;
 }
@@ -242,6 +243,7 @@ static void TreeSelectionChanged(GtkTreeSelection *selection, gpointer user_data
 	if (selected) {
 		path = gtk_tree_model_get_path(model, &iter);
 		i = *gtk_tree_path_get_indices(path);
+		gtk_tree_path_free(path);
 
 		// If a row was selected, and the row is not blank, we can now enable
 		// some of the disabled widgets
