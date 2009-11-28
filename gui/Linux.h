@@ -21,7 +21,6 @@
 
 #include "config.h"
 
-/* FIXME */
 #include "../libpcsxcore/psxcommon.h"
 #include <gtk/gtk.h>
 
@@ -37,7 +36,7 @@
 #define STATES_DIR "/.pcsx/sstates/"
 #define CHEATS_DIR "/.pcsx/cheats/"
 
-extern int UseGui;
+extern gboolean UseGui;
 char cfgfile[MAXPATHLEN];	/* ADB Comment this out - make a local var, or at least use gchar funcs */
 char cfgfile_basename[MAXPATHLEN];	/* ADB Comment this out - make a local var, or at least use gchar funcs */
 

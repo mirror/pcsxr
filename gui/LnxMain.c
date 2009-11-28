@@ -43,16 +43,11 @@
 #include <X11/extensions/XTest.h>
 
 enum {
-	DONT_USE_GUI = 0,
-	USE_GUI
-};
-
-enum {
 	RUN = 0,
 	RUN_CD,
 };
 
-int UseGui = USE_GUI;
+gboolean UseGui = TRUE;
 
 static void CreateMemcard(char *filename, char *conf_mcd) {
 	gchar *mcd;
@@ -143,25 +138,25 @@ static void ScanBios(gchar* scandir) {
 	dir = opendir(scandir);
 	if (dir != NULL) {
 		while ((ent = readdir(dir)) != NULL) {
-			filename = g_build_filename (scandir, ent->d_name, NULL);
+			filename = g_build_filename(scandir, ent->d_name, NULL);
 
 			if (match(filename, ".*\\.bin$") == 0 &&
 				match(filename, ".*\\.BIN$") == 0) {
 				continue;	/* Skip this file */
 			} else {
 				/* Create a symlink from this file to the directory ~/.pcsx/plugin */
-				linkname = g_build_filename (getenv("HOME"), BIOS_DIR, ent->d_name, NULL);
+				linkname = g_build_filename(getenv("HOME"), BIOS_DIR, ent->d_name, NULL);
 				symlink(filename, linkname);
 
-				g_free (linkname);
+				g_free(linkname);
 			}
-			g_free (filename);
+			g_free(filename);
 		}
 		closedir(dir);
 	}
 }
 
-static void CheckSymlinksInPath (char* dotdir) {
+static void CheckSymlinksInPath(char* dotdir) {
 	DIR *dir;
 	struct dirent *ent;
 	struct stat stbuf;
@@ -203,9 +198,16 @@ static void ScanAllPlugins (void) {
 	ScanPlugins("/usr/local/lib64/games/psemu/lib/");
 	ScanPlugins("/usr/local/lib64/games/psemu/config/");
 	ScanPlugins("/usr/local/lib64/games/psemu/");
+	ScanPlugins("/usr/lib32/games/psemu/");
+	ScanPlugins("/usr/lib32/games/psemu/lib/");
+	ScanPlugins("/usr/lib32/games/psemu/config/");
+	ScanPlugins("/usr/local/lib32/games/psemu/lib/");
+	ScanPlugins("/usr/local/lib32/games/psemu/config/");
+	ScanPlugins("/usr/local/lib32/games/psemu/");
 	ScanPlugins(DEF_PLUGIN_DIR);
 	ScanPlugins(DEF_PLUGIN_DIR "/lib");
 	ScanPlugins(DEF_PLUGIN_DIR "/lib64");
+	ScanPlugins(DEF_PLUGIN_DIR "/lib32");
 	ScanPlugins(DEF_PLUGIN_DIR "/config");
 
 	// scan some default locations to find bioses
@@ -213,6 +215,8 @@ static void ScanAllPlugins (void) {
 	ScanBios("/usr/lib/games/psemu/bios");
 	ScanBios("/usr/lib64/games/psemu");
 	ScanBios("/usr/lib64/games/psemu/bios");
+	ScanBios("/usr/lib32/games/psemu");
+	ScanBios("/usr/lib32/games/psemu/bios");
 	ScanBios("/usr/share/psemu");
 	ScanBios("/usr/share/psemu/bios");
 	ScanBios("/usr/share/pcsx");
@@ -221,6 +225,8 @@ static void ScanAllPlugins (void) {
 	ScanBios("/usr/local/lib/games/psemu/bios");
 	ScanBios("/usr/local/lib64/games/psemu");
 	ScanBios("/usr/local/lib64/games/psemu/bios");
+	ScanBios("/usr/local/lib32/games/psemu");
+	ScanBios("/usr/local/lib32/games/psemu/bios");
 	ScanBios("/usr/local/share/psemu");
 	ScanBios("/usr/local/share/psemu/bios");
 	ScanBios("/usr/local/share/pcsx");
@@ -230,28 +236,28 @@ static void ScanAllPlugins (void) {
 	ScanBios(PACKAGE_DATA_DIR "/bios");
 	ScanBios(PSEMU_DATA_DIR "/bios");
 
-	currentdir = g_strconcat (getenv("HOME"), "/.psemu-plugins/", NULL);
+	currentdir = g_strconcat(getenv("HOME"), "/.psemu-plugins/", NULL);
 	ScanPlugins(currentdir);
-	g_free (currentdir);
+	g_free(currentdir);
 
-	currentdir = g_strconcat (getenv("HOME"), "/.psemu/", NULL);
+	currentdir = g_strconcat(getenv("HOME"), "/.psemu/", NULL);
 	ScanPlugins(currentdir);
-	g_free (currentdir);
+	g_free(currentdir);
 
 	/* Check for bad links in ~/.pcsx/plugins/ */
-	currentdir = g_build_filename (getenv("HOME"), PLUGINS_DIR, NULL);
-	CheckSymlinksInPath (currentdir);
-	g_free (currentdir);
+	currentdir = g_build_filename(getenv("HOME"), PLUGINS_DIR, NULL);
+	CheckSymlinksInPath(currentdir);
+	g_free(currentdir);
 
 	/* Check for bad links in ~/.pcsx/plugins/cfg */
-	currentdir = g_build_filename (getenv("HOME"), PLUGINS_CFG_DIR, NULL);
-	CheckSymlinksInPath (currentdir);
-	g_free (currentdir);
+	currentdir = g_build_filename(getenv("HOME"), PLUGINS_CFG_DIR, NULL);
+	CheckSymlinksInPath(currentdir);
+	g_free(currentdir);
 
 	/* Check for bad links in ~/.pcsx/bios */
-	currentdir = g_build_filename (getenv("HOME"), BIOS_DIR, NULL);
-	CheckSymlinksInPath (currentdir);
-	g_free (currentdir);
+	currentdir = g_build_filename(getenv("HOME"), BIOS_DIR, NULL);
+	CheckSymlinksInPath(currentdir);
+	g_free(currentdir);
 }
 
 /* Set the default plugin name */
@@ -284,7 +290,7 @@ int main(int argc, char *argv[]) {
 	// read command line options
 	for (i=1; i<argc; i++) {
 		if (!strcmp(argv[i], "-runcd")) runcd = RUN_CD;
-		else if (!strcmp(argv[i], "-nogui")) UseGui = DONT_USE_GUI;
+		else if (!strcmp(argv[i], "-nogui")) UseGui = FALSE;
 		else if (!strcmp(argv[i], "-psxout")) Config.PsxOut = 1;
 		else if (!strcmp(argv[i], "-load")) loadst = atol(argv[++i]);
 		else if (!strcmp(argv[i], "-cfg")) {
@@ -339,8 +345,7 @@ int main(int argc, char *argv[]) {
 	memset(&Config, 0, sizeof(PcsxConfig));
 	strcpy(Config.Net, "Disabled");
 
-	if (UseGui == USE_GUI)
-		gtk_init(NULL, NULL);
+	if (UseGui) gtk_init(NULL, NULL);
 
 	CheckSubDir();
 	ScanAllPlugins();
@@ -348,13 +353,13 @@ int main(int argc, char *argv[]) {
 	// try to load config
 	// if the config file doesn't exist
 	if (LoadConfig() == -1) {
-		if (UseGui == DONT_USE_GUI) {
+		if (!UseGui) {
 			printf(_("PCSX cannot be configured without using the GUI -- you should restart without -nogui.\n"));
 			return 1;
 		}
 
 		// Uh oh, no config file found, use some defaults
-		Config.PsxAuto = 1;	/* ADB TODO */
+		Config.PsxAuto = 1;
 
 		gchar *str_bios_dir = g_strconcat (getenv("HOME"), BIOS_DIR, NULL);
 		strcpy(Config.BiosDir,  str_bios_dir);
@@ -392,14 +397,11 @@ int main(int argc, char *argv[]) {
 	chdir(plugin_default_dir);	/* TODO Error checking - make sure this directory is available */
 	g_free(plugin_default_dir);
 
-	if (UseGui != DONT_USE_GUI) {
-		cdrfilename[0] = '\0';
-	}
+	if (!UseGui) cdrfilename[0] = '\0';
 
-	if (SysInit() == -1)
-		return 1;
+	if (SysInit() == -1) return 1;
 
-	if (UseGui == USE_GUI) {
+	if (UseGui) {
 		StartGui();
 	} else {
 		// the following only occurs if the gui isn't started

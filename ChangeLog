@@ -8,6 +8,8 @@ November 28, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * gui/MemcardDlg.c: Added.
  * gui/MemcardDlg.h: Likewise.
  * gui/Makefile.am: Added MemcardDlg.c.
+ * gui/LnxMain.c: Minor cleanup.
+ * gui/Linux.h: Likewise.
 
 November 27, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

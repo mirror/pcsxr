@@ -38,8 +38,6 @@
 
 #include "MemcardDlg.h"
 
-extern int UseGui;
-
 PSEgetLibType		PSE_getLibType = NULL;
 PSEgetLibVersion	PSE_getLibVersion = NULL;
 PSEgetLibName		PSE_getLibName = NULL;
@@ -1748,7 +1746,7 @@ void SysMessage(char *fmt, ...) {
 		msg[strlen(msg) - 1] = 0;
 
 	if (!UseGui) {
-		printf ("%s\n", msg);
+		fprintf(stderr, "%s\n", msg);
 		return;
 	}
 
