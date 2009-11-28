@@ -47,7 +47,8 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
 am_pcsx_OBJECTS = LnxMain.$(OBJEXT) Plugin.$(OBJEXT) Config.$(OBJEXT) \
-	Gtk2Gui.$(OBJEXT) MemcardDlg.$(OBJEXT) Cheat.$(OBJEXT)
+	Gtk2Gui.$(OBJEXT) MemcardDlg.$(OBJEXT) ConfDlg.$(OBJEXT) \
+	Cheat.$(OBJEXT)
 pcsx_OBJECTS = $(am_pcsx_OBJECTS)
 am__DEPENDENCIES_1 =
 pcsx_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
@@ -232,6 +233,7 @@ pcsx_SOURCES = \
 	Config.c	\
 	Gtk2Gui.c	\
 	MemcardDlg.c	\
+	ConfDlg.c	\
 	Cheat.c
 
 pcsx_LDADD = \
@@ -310,6 +312,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Cheat.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ConfDlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Config.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Gtk2Gui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/LnxMain.Po@am__quote@

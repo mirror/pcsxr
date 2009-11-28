@@ -14,6 +14,7 @@ pcsx_SOURCES = \
 	Config.c	\
 	Gtk2Gui.c	\
 	MemcardDlg.c	\
+	ConfDlg.c	\
 	Cheat.c
 
 pcsx_LDADD = \

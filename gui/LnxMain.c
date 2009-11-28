@@ -16,6 +16,8 @@
  *  Foundation, Inc., 51 Franklin Steet, Fifth Floor, Boston, MA 02111-1307 USA
  */
 
+#include "config.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -29,12 +31,10 @@
 #include <pthread.h>
 #include <dirent.h>
 #include <sys/stat.h>
-
-#include "Linux.h"
-
 #include "../libpcsxcore/sio.h"
 
-#include "config.h"
+#include "Linux.h"
+#include "ConfDlg.h"
 
 #ifdef ENABLE_NLS
 #include <locale.h>

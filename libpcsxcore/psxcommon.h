@@ -58,7 +58,6 @@ typedef uintptr_t uptr;
 #include "system.h"
 #include "debug.h"
 
-/* Ryan TODO WTF is this? */
 #if defined (__LINUX__) || defined (__MACOSX__)
 #define strnicmp strncasecmp
 #endif
@@ -88,15 +87,15 @@ extern int Log;
 void __Log(char *fmt, ...);
 
 typedef struct {
-	char Gpu[256];
-	char Spu[256];
-	char Cdr[256];
-	char Pad1[256];
-	char Pad2[256];
-	char Net[256];
-	char Mcd1[256];
-	char Mcd2[256];
-	char Bios[256];
+	char Gpu[MAXPATHLEN];
+	char Spu[MAXPATHLEN];
+	char Cdr[MAXPATHLEN];
+	char Pad1[MAXPATHLEN];
+	char Pad2[MAXPATHLEN];
+	char Net[MAXPATHLEN];
+	char Mcd1[MAXPATHLEN];
+	char Mcd2[MAXPATHLEN];
+	char Bios[MAXPATHLEN];
 	char BiosDir[MAXPATHLEN];
 	char PluginsDir[MAXPATHLEN];
 	long Xa;

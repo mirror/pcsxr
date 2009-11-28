@@ -172,6 +172,31 @@ static void LoadListItems(int mcd, GtkWidget *widget) {
 	gtk_widget_show(List);
 }
 
+static void UpdateFilenameButtons(GtkWidget *widget) {
+	int i;
+	GladeXML *xml;
+	GtkWidget *dialog;
+	const char *filename;
+	gchar *p;
+
+	xml = glade_get_widget_tree(widget);
+	dialog = glade_xml_get_widget(xml, "McdsDlg");
+
+	for (i = 0; i < 2; i++) {
+		if (i == 0) {
+			widget = glade_xml_get_widget(xml, "Mcd1Label");
+			filename = Config.Mcd1;
+		} else {
+			widget = glade_xml_get_widget(xml, "Mcd2Label");
+			filename = Config.Mcd2;
+		}
+
+		p = g_path_get_basename(filename);
+		gtk_label_set_text(GTK_LABEL(widget), p);
+		g_free(p);
+	}
+}
+
 static void LoadMcdDlg(GtkWidget *widget) {
 	int i;
 
@@ -182,6 +207,8 @@ static void LoadMcdDlg(GtkWidget *widget) {
 
 	LoadListItems(1, widget);
 	LoadListItems(2, widget);
+
+	UpdateFilenameButtons(widget);
 }
 
 static void OnTreeSelectionChanged(GtkTreeSelection *selection, gpointer user_data);
@@ -252,54 +279,57 @@ static void UpdateMcdDlg(GtkWidget *widget) {
 
 	UpdateListItems(1, widget);
 	UpdateListItems(2, widget);
+
+	UpdateFilenameButtons(widget);
 }
 
-static void OnMcd_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
-	GladeXML *xml = user_data;
-
-	if (arg1 == GTK_RESPONSE_OK) {
-		gchar *tmp;
-		GtkWidget *widget;
-
-		widget = glade_xml_get_widget(xml, "GtkMcd1FSButton");
-		if ((tmp = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(widget))) != NULL) {
-			strcpy(Config.Mcd1, tmp);
-			g_free(tmp);
-		}
-
-		widget = glade_xml_get_widget(xml, "GtkMcd2FSButton");
-		if ((tmp = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (widget))) != NULL) {
-			strcpy(Config.Mcd2, tmp);
-			g_free(tmp);
-		}
-
-		SaveConfig();
-		LoadMcds(Config.Mcd1, Config.Mcd2);
-	} 
-
+static void OnMcd_Close(GtkDialog *dialog, gint arg1, gpointer user_data) {
+	SaveConfig();
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
-static void OnMemcardFileChanged(GtkWidget *widget, gpointer user_data) {
-	gint memcard = (int) user_data;
-	gchar *filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
+static void OnMcd_FileChange(GtkWidget *widget, gpointer user_data) {
+	gint memcard = (int)user_data;
+	gchar *filename;
+	GtkWidget *chooser;
 
-	if (filename != NULL) {
-		LoadMcd(memcard, filename);
-		UpdateMcdDlg(widget);
-		gtk_widget_set_sensitive(widget, TRUE);
+	// Ask for name of memory card
+	chooser = gtk_file_chooser_dialog_new(_("Select A File"),
+	    NULL, GTK_FILE_CHOOSER_ACTION_OPEN,
+	    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+	    GTK_STOCK_OPEN, GTK_RESPONSE_OK,
+	    NULL);
+
+	if (memcard == 1)
+		gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(chooser), Config.Mcd1);
+	else
+		gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(chooser), Config.Mcd2);
+
+	if (gtk_dialog_run(GTK_DIALOG(chooser)) == GTK_RESPONSE_OK) {
+		gtk_widget_hide(chooser);
+
+		filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(chooser));
+
+		if (filename != NULL) {
+			if (memcard == 1) strncpy(Config.Mcd1, filename, MAXPATHLEN);
+			else strncpy(Config.Mcd2, filename, MAXPATHLEN);
+
+			LoadMcd(memcard, filename);
+			UpdateMcdDlg(widget);
+
+			g_free(filename);
+		}
 	}
 
-	g_free(filename);
+	gtk_widget_destroy(chooser);
 }
 
 // create a new, formatted memory card
 static void OnMcd_Format(GtkWidget *widget, gpointer user_data) {
 	GladeXML *xml;
-	GtkWidget *memcard_fs;
 	GtkWidget *message_dialog;
 	gint result;
-	gchar *str;
+	char *str;
 
 	gint memcard = (int)user_data;
 
@@ -308,7 +338,7 @@ static void OnMcd_Format(GtkWidget *widget, gpointer user_data) {
 		_("Format this Memory Card?"));
 	gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(message_dialog),
 		_("If you format the memory card, the card will be empty, and any existing data overwritten."));
-	gtk_dialog_add_buttons(GTK_DIALOG (message_dialog),
+	gtk_dialog_add_buttons(GTK_DIALOG(message_dialog),
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		_("Format card"), GTK_RESPONSE_YES, NULL);
 
@@ -317,17 +347,14 @@ static void OnMcd_Format(GtkWidget *widget, gpointer user_data) {
 
 	if (result == GTK_RESPONSE_YES) {
 		xml = glade_get_widget_tree(widget);
-		if (memcard == 1)
-			memcard_fs = glade_xml_get_widget(xml, "GtkMcd1FSButton");
-		else
-			memcard_fs = glade_xml_get_widget(xml, "GtkMcd2FSButton");
 
-		str = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(memcard_fs));
+		if (memcard == 1) str = Config.Mcd1;
+		else str = Config.Mcd2;
 
 		CreateMcd(str);
 		LoadMcd(memcard, str);
+
 		UpdateMcdDlg(widget);
-		g_free(str);
 	}
 }
 
@@ -350,26 +377,19 @@ static void OnMcd_New(GtkWidget *widget, gpointer user_data) {
 
 	if (gtk_dialog_run(GTK_DIALOG(chooser)) == GTK_RESPONSE_OK) {
 		gchar *name;
-		gchar *widget_name;
-		GladeXML *xml;
 
 		gtk_widget_hide(chooser);
-
 		name = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(chooser));
 
 		CreateMcd(name);
 
-		// Set the name on the FileChooserButton - this will trigger the
-		// callback to load the card and update the dialog
-		widget_name = g_strdup_printf("GtkMcd%dFSButton", (int)user_data);
-		xml = glade_get_widget_tree(widget);
+		if ((int)user_data == 1) strncpy(Config.Mcd1, name, MAXPATHLEN);
+		else strncpy(Config.Mcd2, name, MAXPATHLEN);
 
-		gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(glade_xml_get_widget(xml, widget_name)), name);
-
-		g_free(widget_name);	
-		g_free(name);
-
+		LoadMcd((int)user_data, name);
 		UpdateMcdDlg(widget);
+
+		g_free(name);
 	}
 
 	gtk_widget_destroy(chooser);
@@ -383,7 +403,7 @@ static int GetFreeMemcardSlot(int target_card) {
 	gboolean found = FALSE;
 
 	int i = 0;
-	while (i < 15  && found == FALSE) {
+	while (i < 15 && found == FALSE) {
 		Info = &Blocks[target_card][i];
 		if (g_ascii_strcasecmp(Info->Title, "") == 0) {
 			found = TRUE;
@@ -461,11 +481,11 @@ static void OnMcd_CopyTo(GtkWidget *widget, gpointer user_data) {
 	xml = glade_get_widget_tree(GtkCList_McdList1);
 
 	if (mcd == 1) {
-		str = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(glade_xml_get_widget(xml, "GtkMcd1FSButton")));
+		str = Config.Mcd1;
 		source = Mcd2Data;
 		destination = Mcd1Data;
 	} else {
-		str = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(glade_xml_get_widget(xml, "GtkMcd2FSButton")));
+		str = Config.Mcd2;
 		source = Mcd1Data;
 		destination = Mcd2Data;
 	}
@@ -496,13 +516,13 @@ static void OnMemcardDelete(GtkWidget *widget, gpointer user_data) {
 		sel = gtk_tree_view_get_selection(GTK_TREE_VIEW (tree));
 		selected = gtk_tree_selection_get_selected (sel, &model, &iter);
 		data = Mcd1Data;
-		filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(glade_xml_get_widget(xml, "GtkMcd1FSButton")));
+		filename = Config.Mcd1;
 	} else {
 		tree = glade_xml_get_widget(xml, "GtkCList_McdList2");
 		sel = gtk_tree_view_get_selection(GTK_TREE_VIEW (tree));
 		selected = gtk_tree_selection_get_selected(sel, &model, &iter);
 		data = Mcd2Data;
-		filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(glade_xml_get_widget(xml, "GtkMcd2FSButton")));
+		filename = Config.Mcd2;
 	}
 
 	if (selected) {
@@ -644,7 +664,7 @@ void OnConf_Mcds() {
 
 	// Setup a handler for when Close or Cancel is clicked
 	g_signal_connect_data(GTK_OBJECT(dialog), "response",
-			GTK_SIGNAL_FUNC(OnMcd_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+			GTK_SIGNAL_FUNC(OnMcd_Close), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "GtkButton_Format1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
@@ -654,15 +674,13 @@ void OnConf_Mcds() {
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 			GTK_SIGNAL_FUNC(OnMcd_Format), (gpointer)2, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "GtkMcd1FSButton");
-	g_signal_connect_data(GTK_OBJECT(widget), "selection-changed",
-			GTK_SIGNAL_FUNC(OnMemcardFileChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
-	gtk_file_chooser_select_filename(GTK_FILE_CHOOSER(widget), Config.Mcd1);
+	widget = glade_xml_get_widget(xml, "Mcd1Button");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(OnMcd_FileChange), (gpointer)1, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "GtkMcd2FSButton");
-	g_signal_connect_data(GTK_OBJECT(widget), "selection-changed",
-			GTK_SIGNAL_FUNC(OnMemcardFileChanged), (gpointer) 2, NULL, G_CONNECT_AFTER);
-	gtk_file_chooser_select_filename(GTK_FILE_CHOOSER(widget), Config.Mcd2);
+	widget = glade_xml_get_widget(xml, "Mcd2Button");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(OnMcd_FileChange), (gpointer)2, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "GtkButton_New1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",

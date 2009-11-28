@@ -33,22 +33,10 @@
 #include "Linux.h"
 
 #include "../libpcsxcore/plugins.h"
-#include "../libpcsxcore/sio.h"
 #include "../libpcsxcore/cheat.h"
 
 #include "MemcardDlg.h"
-
-PSEgetLibType		PSE_getLibType = NULL;
-PSEgetLibVersion	PSE_getLibVersion = NULL;
-PSEgetLibName		PSE_getLibName = NULL;
-
-// Helper Functions
-void UpdatePluginsBIOS();
-void UpdatePluginsBIOS_UpdateGUI(GladeXML *xml);
-void FindNetPlugin(GladeXML *xml);
-
-void OnNet_Conf(GtkWidget *widget, gpointer user_data);
-void OnNet_About(GtkWidget *widget, gpointer user_data);
+#include "ConfDlg.h"
 
 // Functions Callbacks
 void OnFile_RunCd();
@@ -58,61 +46,21 @@ void OnFile_RunImage();
 void OnEmu_Run();
 void OnEmu_Reset();
 void OnEmu_SwitchImage();
-void OnConf_Graphics();
-void OnConf_Sound();
-void OnConf_CdRom();
-void OnConf_Pad();
-void OnConf_Cpu();
-void OnConf_Net();
 void OnHelp_Help();
 void OnHelp_About();
 void OnDestroy();
 void OnFile_Exit();
-
-void OnBiosPath_Changed(GtkWidget *wdg, gpointer data);
-void OnConf_Clicked (GtkDialog *dialog, gint arg1, gpointer user_data);
-void OnPluginPath_Changed(GtkWidget *wdg, gpointer data);
-void OnConfConf_Pad1About(GtkWidget *widget, gpointer user_data);
-void OnConfConf_Pad2About(GtkWidget *widget, gpointer user_data);
-void OnConfConf_Pad1Conf(GtkWidget *widget, gpointer user_data);
-void OnConfConf_Pad2Conf(GtkWidget *widget, gpointer user_data);
 
 void on_states_load(GtkWidget *widget, gpointer user_data);
 void on_states_load_other();
 void on_states_save(GtkWidget *widget, gpointer user_data);
 void on_states_save_other();
 
-void on_configure_plugin(GtkWidget *widget, gpointer user_data);
-void on_about_plugin(GtkWidget *widget, gpointer user_data);
-
 GtkWidget *Window = NULL;
-GtkWidget *ConfDlg = NULL;
-
-//GtkAccelGroup *AccelGroup;
-
-GtkWidget *controlwidget;
 
 int destroy = 0;
 
 #define MAX_SLOTS 5
-
-#define FindComboText(combo, list, conf) \
-	if (strlen(conf) > 0) { \
-		int i; \
-		for (i = 2; i < 255; i += 2) { \
-			if (!strcmp(conf, list[i - 2])) { \
-				gtk_combo_box_set_active (GTK_COMBO_BOX (combo), i / 2 - 1); \
-				break; \
-			} \
-		} \
-	}
-
-#define GetComboText(combo, list, conf) \
-	{ \
-		int row; \
-		row = gtk_combo_box_get_active(GTK_COMBO_BOX(combo)); \
-		strcpy(conf, (char *)list[row * 2]); \
-	}
 
 /* TODO - If MAX_SLOTS changes, need to find a way to automatically set all positions */
 int Slots[MAX_SLOTS] = { -1, -1, -1, -1, -1 };
@@ -123,7 +71,7 @@ void ResetMenuSlots(GladeXML *xml) {
 	int i;
 
 	if (CdromId[0] == '\0') {
-		/* disable state saving/loading if no CD is loaded */
+		// disable state saving/loading if no CD is loaded
 		for (i = 0; i < MAX_SLOTS; i++) {
 			str = g_strdup_printf("GtkMenuItem_SaveSlot%d", i+1);
 			widget = glade_xml_get_widget(xml, str);
@@ -132,24 +80,26 @@ void ResetMenuSlots(GladeXML *xml) {
 			gtk_widget_set_sensitive(widget, FALSE);
 
 			str = g_strdup_printf("GtkMenuItem_LoadSlot%d", i+1);
-			widget = glade_xml_get_widget (xml, str);
-			g_free (str);
+			widget = glade_xml_get_widget(xml, str);
+			g_free(str);
 
 			gtk_widget_set_sensitive(widget, FALSE);
 		}
 
-		/* also disable certain menu items */
-		widget = glade_xml_get_widget (xml, "other1");
+		// also disable certain menu/toolbar items
+		widget = glade_xml_get_widget(xml, "other1");
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = glade_xml_get_widget (xml, "other2");
+		widget = glade_xml_get_widget(xml, "other2");
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = glade_xml_get_widget (xml, "run1");
+		widget = glade_xml_get_widget(xml, "run1");
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = glade_xml_get_widget (xml, "reset1");
+		widget = glade_xml_get_widget(xml, "reset1");
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = glade_xml_get_widget (xml, "search1");
+		widget = glade_xml_get_widget(xml, "search1");
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = glade_xml_get_widget (xml, "SwitchImage");
+		widget = glade_xml_get_widget(xml, "SwitchImage");
+		gtk_widget_set_sensitive(widget, FALSE);
+		widget = glade_xml_get_widget(xml, "toolbutton_switchimage");
 		gtk_widget_set_sensitive(widget, FALSE);
 	}
 	else {
@@ -164,20 +114,30 @@ void ResetMenuSlots(GladeXML *xml) {
 				gtk_widget_set_sensitive(widget, TRUE);
 		}
 
-		widget = glade_xml_get_widget (xml, "plugins_bios");
+		widget = glade_xml_get_widget(xml, "plugins_bios");
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = glade_xml_get_widget (xml, "graphics1");
+		widget = glade_xml_get_widget(xml, "graphics1");
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = glade_xml_get_widget (xml, "sound1");
+		widget = glade_xml_get_widget(xml, "sound1");
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = glade_xml_get_widget (xml, "cdrom1");
+		widget = glade_xml_get_widget(xml, "cdrom1");
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = glade_xml_get_widget (xml, "pad1");
+		widget = glade_xml_get_widget(xml, "pad1");
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = glade_xml_get_widget (xml, "net1");
+		widget = glade_xml_get_widget(xml, "net1");
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = glade_xml_get_widget (xml, "SwitchImage");
+		widget = glade_xml_get_widget(xml, "SwitchImage");
 		gtk_widget_set_sensitive(widget, cdrfilename[0]);
+		widget = glade_xml_get_widget(xml, "toolbutton_switchimage");
+		gtk_widget_set_sensitive(widget, cdrfilename[0]);
+		widget = glade_xml_get_widget(xml, "toolbutton_graphics");
+		gtk_widget_set_sensitive(widget, FALSE);
+		widget = glade_xml_get_widget(xml, "toolbutton_sound");
+		gtk_widget_set_sensitive(widget, FALSE);
+		widget = glade_xml_get_widget(xml, "toolbutton_cdrom");
+		gtk_widget_set_sensitive(widget, FALSE);
+		widget = glade_xml_get_widget(xml, "toolbutton_controllers");
+		gtk_widget_set_sensitive(widget, FALSE);
 	}
 }
 
@@ -185,7 +145,7 @@ int match(const char *string, char *pattern) {
 	int    status;
 	regex_t    re;
 
-	if (regcomp(&re, pattern, REG_EXTENDED|REG_NOSUB) != 0) {
+	if (regcomp(&re, pattern, REG_EXTENDED | REG_NOSUB) != 0) {
 		return 0;
 	}
 	status = regexec(&re, string, (size_t) 0, NULL, 0);
@@ -197,7 +157,7 @@ int match(const char *string, char *pattern) {
 	return 1;
 }
 
-gchar* get_state_filename (int i) {
+gchar* get_state_filename(int i) {
 	gchar *state_filename;
 	char SStateFile[64];
 	char trimlabel[33];
@@ -252,11 +212,11 @@ void StartGui() {
 	gtk_window_set_default_icon_from_file(PIXMAPDIR "pcsx-icon.png", NULL);
 	ResetMenuSlots(xml);
 
-	/* Set up callbacks */
+	// Set up callbacks
 	g_signal_connect_data(GTK_OBJECT(Window), "delete-event",
 			GTK_SIGNAL_FUNC(OnDestroy), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
-	/* File menu */	
+	// File menu
 	widget = glade_xml_get_widget(xml, "RunCd");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(OnFile_RunCd), NULL, NULL, G_CONNECT_AFTER);
@@ -273,15 +233,11 @@ void StartGui() {
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(OnFile_RunImage), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "SwitchImage");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnEmu_SwitchImage), NULL, NULL, G_CONNECT_AFTER);
-
 	widget = glade_xml_get_widget(xml, "exit2");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(OnFile_Exit), NULL, NULL, G_CONNECT_AFTER);
 
-	/* States */
+	// States
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 0, NULL, G_CONNECT_AFTER);
@@ -320,15 +276,18 @@ void StartGui() {
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(on_states_save_other), NULL, NULL, G_CONNECT_AFTER);
 
-	/* Emulation menu */
+	// Emulation menu
 	widget = glade_xml_get_widget(xml, "run1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(OnEmu_Run), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "reset1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(OnEmu_Reset), NULL, NULL, G_CONNECT_AFTER);
+	widget = glade_xml_get_widget(xml, "SwitchImage");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(OnEmu_SwitchImage), NULL, NULL, G_CONNECT_AFTER);
 
-	/* Configuration menu */
+	// Configuration menu
 	widget = glade_xml_get_widget(xml, "plugins_bios");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(ConfigurePlugins), NULL, NULL, G_CONNECT_AFTER);
@@ -354,7 +313,7 @@ void StartGui() {
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(OnConf_Net), NULL, NULL, G_CONNECT_AFTER);
 
-	/* Cheat menu */
+	// Cheat menu
 	widget = glade_xml_get_widget(xml, "browse1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(RunCheatListDialog), NULL, NULL, G_CONNECT_AFTER);
@@ -362,114 +321,49 @@ void StartGui() {
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(RunCheatSearchDialog), NULL, NULL, G_CONNECT_AFTER);
 
-	/* Help menu */
+	// Help menu
 	widget = glade_xml_get_widget(xml, "about_pcsx1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(OnHelp_About), NULL, NULL, G_CONNECT_AFTER);
+
+	// Toolbar
+	widget = glade_xml_get_widget(xml, "toolbutton_runcd");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(OnFile_RunCd), NULL, NULL, G_CONNECT_AFTER);
+
+	widget = glade_xml_get_widget(xml, "toolbutton_runimage");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(OnFile_RunImage), NULL, NULL, G_CONNECT_AFTER);
+
+	widget = glade_xml_get_widget(xml, "toolbutton_switchimage");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(OnEmu_SwitchImage), NULL, NULL, G_CONNECT_AFTER);
+
+	widget = glade_xml_get_widget(xml, "toolbutton_memcards");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(OnConf_Mcds), NULL, NULL, G_CONNECT_AFTER);
+
+	widget = glade_xml_get_widget(xml, "toolbutton_graphics");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(OnConf_Graphics), NULL, NULL, G_CONNECT_AFTER);
+
+	widget = glade_xml_get_widget(xml, "toolbutton_sound");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(OnConf_Sound), NULL, NULL, G_CONNECT_AFTER);
+
+	widget = glade_xml_get_widget(xml, "toolbutton_cdrom");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(OnConf_CdRom), NULL, NULL, G_CONNECT_AFTER);
+
+	widget = glade_xml_get_widget(xml, "toolbutton_controllers");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(OnConf_Pad), NULL, NULL, G_CONNECT_AFTER);
 
 	gtk_main();
 }
 
 void OnDestroy() {
 	if (!destroy) OnFile_Exit();
-}
-
-void ConfigurePlugins() {
-	if (!UseGui) {
-		/* How do we get here if we're not running the GUI? */
-		/* Ryan: we're going to imagine that someday, there will be a way
-		 * to configure plugins from the commandline */
-		printf("ERROR: Plugins cannot be configured without the GUI.");
-		return;
-	}
-
-	GladeXML *xml;
-	GtkWidget *widget;
-
-	gchar *path;
-
-	UpdatePluginsBIOS();
-
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "ConfDlg", NULL);
-
-	if (!xml) {
-		g_warning(_("Error: Glade interface could not be loaded!"));
-		return;
-	}
-
-	UpdatePluginsBIOS_UpdateGUI(xml);
-
-	ConfDlg = glade_xml_get_widget(xml, "ConfDlg");
-
-	gtk_window_set_title(GTK_WINDOW(ConfDlg), _("Configure PCSX"));
-
-	/* Set the paths in the file choosers to be based on the saved configurations */
-	widget = glade_xml_get_widget(xml, "GtkFileChooser_Bios");
-	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (widget), 
-			Config.BiosDir);
-
-	widget = glade_xml_get_widget(xml, "GtkFileChooser_Plugin");
-	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (widget), 
-			Config.PluginsDir);
-
-	if (strlen(Config.PluginsDir) == 0) {
-		if((path = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (widget))) != NULL) {
-			strcpy(Config.PluginsDir, path);
-			g_free(path);
-		}
-	}
-
-	widget = glade_xml_get_widget(xml, "btn_ConfGpu");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_configure_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "btn_ConfSpu");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_configure_plugin), (gpointer) PSE_LT_SPU, NULL, G_CONNECT_AFTER);
-
-	/* ADB TODO Does pad 1 and 2 need to be different? */
-	widget = glade_xml_get_widget(xml, "btn_ConfPad1");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnConfConf_Pad1Conf), xml, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "btn_ConfPad2");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnConfConf_Pad2Conf), xml, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "btn_ConfCdr");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_configure_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "btn_AboutGpu");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_about_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "btn_AboutSpu");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_about_plugin), (gpointer) PSE_LT_SPU, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "btn_AboutPad1");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnConfConf_Pad1About), xml, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "btn_AboutPad2");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnConfConf_Pad2About), xml, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "btn_AboutCdr");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_about_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "GtkFileChooser_Bios");
-	g_signal_connect_data(GTK_OBJECT(widget), "current_folder_changed",
-			GTK_SIGNAL_FUNC(OnBiosPath_Changed), xml, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "GtkFileChooser_Plugin");
-	g_signal_connect_data(GTK_OBJECT(widget), "current_folder_changed",
-			GTK_SIGNAL_FUNC(OnPluginPath_Changed), xml, NULL, G_CONNECT_AFTER);
-
-	g_signal_connect_data(GTK_OBJECT(ConfDlg), "response",
-			GTK_SIGNAL_FUNC(OnConf_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }
 
 void destroy_main_window () {
@@ -493,7 +387,7 @@ void OnFile_RunExe() {
 				GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
 				NULL);
 
-		/* Add file filter */
+		// Add file filters
 		GtkFileFilter *exefilter = gtk_file_filter_new ();
 		gtk_file_filter_add_pattern (exefilter, "*.exe");
 		gtk_file_filter_add_pattern (exefilter, "*.psx");
@@ -508,8 +402,8 @@ void OnFile_RunExe() {
 		gtk_file_filter_set_name (allfilter, _("All Files"));
 		gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (file_chooser), allfilter);
 
-		/* Set this to the config object and retain it - maybe LastUsedDir */
-		gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER (file_chooser), getenv("HOME"));
+		// Set this to the config object and retain it - maybe LastUsedDir
+		gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(file_chooser), getenv("HOME"));
 
 		if (gtk_dialog_run(GTK_DIALOG(file_chooser)) == GTK_RESPONSE_ACCEPT) {
 			gchar *file;
@@ -573,10 +467,10 @@ void OnFile_RunCd() {
 		return;
 	}
 
-	/* Read main executable directly from CDRom and start it */
+	// Read main executable directly from CDRom and start it
 	if (LoadCdrom() == -1) {
 		ClosePlugins();
-		SysErrorMessage(_("Could not load CD-ROM!"), _("The CD ROM could not be loaded"));
+		SysErrorMessage(_("Could not load CD-ROM!"), _("The CD-ROM could not be loaded"));
 		SysRunGui();
 	}
 
@@ -691,17 +585,17 @@ void OnFile_RunImage() {
 	SysReset();
 
 	if (CheckCdrom() == -1) {
-		/* Only check the CD if we are starting the console with a CD */
+		// Only check the CD if we are starting the console with a CD
 		ClosePlugins();
 		SysErrorMessage (_("CD ROM failed"), _("The CD does not appear to be a valid Playstation CD"));
 		SysRunGui();
 		return;
 	}
 
-	/* Read main executable directly from CDRom and start it */
+	// Read main executable directly from CDRom and start it
 	if (LoadCdrom() == -1) {
 		ClosePlugins();
-		SysErrorMessage(_("Could not load CD-ROM!"), "The CD ROM could not be loaded");
+		SysErrorMessage(_("Could not load CD-ROM!"), _("The CD-ROM could not be loaded"));
 		SysRunGui();
 	}
 
@@ -814,27 +708,26 @@ void OnFile_Exit() {
 		exit(0);
 }
 
-void state_load (gchar *state_filename) {
+void state_load(gchar *state_filename) {
 	int ret;
-	char Text[MAXPATHLEN+20];
+	char Text[MAXPATHLEN + 20];
 	FILE *fp;
 
-	/* check if the state file actually exists */
+	// check if the state file actually exists
 	fp = fopen(state_filename, "rb");
 	if (fp == NULL) {
-		/* file does not exist */
+		// file does not exist
 		return;
 	}
 
 	fclose(fp);
 
-	/* If the window exists, then we are loading the state from within
-	   within the PCSX GUI. We need to initialise the plugins first */
+	// If the window exists, then we are loading the state from within
+	// within the PCSX GUI. We need to initialise the plugins first
 	if (Window) {
 		destroy_main_window();
 
 		if (OpenPlugins() == -1) {
-			/* TODO Error message */
 			SysRunGui();
 			return;
 		}
@@ -844,35 +737,13 @@ void state_load (gchar *state_filename) {
 
 	ret = LoadState(state_filename);
 	if (ret == 0) {
-		/* Check the CD ROM is valid */
+		// Check the CD-ROM is valid
 		if (CheckCdrom() == -1) {
-			/* TODO Error message */
-			ClosePlugins ();
+			ClosePlugins();
 			SysRunGui();
 			return;
 		}
 
-#if 0 /* Whistler: this will cause crash when using the "Load Other" option */
-		/* Check that the currently loaded CD ROM ID matches that of the CD
-		   used when saving the state file. The latter is stored in the filename */
-		gchar *cmp = g_strrstr (g_path_get_basename (state_filename), "-");
-		cmp++;
-		if (g_ascii_strncasecmp (cmp, CdromId, 9) != 0) {
-			ClosePlugins ();
-			gchar *error_desc, *label;
-			gint pos;
-			label = g_strdup_printf("%.9s", state_filename);
-			error_desc = g_strdup_printf ("The Playstation CD that is currently in use is %s. It is not the same CD as that used when saving the state file. The state file is looking for %s.",
-									label,
-									CdromLabel);
-			SysErrorMessage ("The CD does not match the state file",
-							 error_desc);
-			g_free (error_desc);
-			g_free (label);
-			SysRunGui();
-			return;
-		}
-#endif
 		sprintf(Text, _("Loaded state %s."), state_filename);
 		GPU_displayText(Text);
 		psxCpu->Execute();
@@ -882,7 +753,7 @@ void state_load (gchar *state_filename) {
 	}
 }
 
-void state_save (gchar *state_filename) {
+void state_save(gchar *state_filename) {
 	char Text[MAXPATHLEN + 20];
 
 	GPU_updateLace();
@@ -897,26 +768,25 @@ void state_save (gchar *state_filename) {
 
 void on_states_load (GtkWidget *widget, gpointer user_data) {
 	gchar *state_filename;
-	gint state = (int) user_data;
+	gint state = (int)user_data;
 
-	state_filename = get_state_filename (state);
+	state_filename = get_state_filename(state);
 
-	state_load (state_filename);
+	state_load(state_filename);
 
-	g_free (state_filename);
+	g_free(state_filename);
 }
 
 void on_states_save (GtkWidget *widget, gpointer user_data) {
 	gchar *state_filename;
-	gint state = (int) user_data;
+	gint state = (int)user_data;
 
-	state_filename = get_state_filename (state);
+	state_filename = get_state_filename(state);
 
-	state_save (state_filename);
+	state_save(state_filename);
 
-	g_free (state_filename);
+	g_free(state_filename);
 }
-
 
 void on_states_load_other() {
 	GtkWidget *file_chooser;
@@ -956,477 +826,28 @@ void on_states_save_other() {
 			GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 			GTK_STOCK_SAVE, GTK_RESPONSE_OK,
 			NULL);
-	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (file_chooser), SStateFile);
+	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(file_chooser), SStateFile);
 
-	if (gtk_dialog_run (GTK_DIALOG (file_chooser)) == GTK_RESPONSE_OK) {
+	if (gtk_dialog_run (GTK_DIALOG(file_chooser)) == GTK_RESPONSE_OK) {
 		gchar *filename;
 
-		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (file_chooser));
+		filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (file_chooser));
 		gtk_widget_destroy(file_chooser);
 
-		state_save (filename);
+		state_save(filename);
 
-		g_free (filename);
+		g_free(filename);
 	}
 	else
-		gtk_widget_destroy (file_chooser);
+		gtk_widget_destroy(file_chooser);
 
-	g_free (SStateFile);
+	g_free(SStateFile);
 } 
-
-int all_config_set () {
-	int retval;
-
-	if ((strlen(Config.Gpu) != 0) &&
-	    (strlen(Config.Spu) != 0) &&
-	    (strlen(Config.Cdr) != 0) &&
-	    (strlen(Config.Pad1) != 0) &&
-	    (strlen(Config.Pad2) != 0))
-		retval = TRUE;
-	else
-		retval = FALSE;
-
-	return retval;
-}
-
-GtkWidget *NetDlg;
-
-void OnNet_Clicked (GtkDialog *dialog, gint arg1, gpointer user_data) {
-	if (arg1 == GTK_RESPONSE_OK) {
-		GetComboText(NetConfS.Combo, NetConfS.plist, Config.Net);
-		SaveConfig();
-	}
-
-	gtk_widget_destroy(GTK_WIDGET (dialog));
-	NetDlg = NULL;
-}
-
-void OnConf_Net() {
-	GladeXML *xml;
-	GtkWidget *widget;
-
-	if (NetDlg != NULL) {
-		gtk_window_present (GTK_WINDOW (NetDlg));
-		return;
-	}
-
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "NetDlg", NULL);
-
-	if (!xml) {
-		g_warning(_("Error: Glade interface could not be loaded!"));
-		return;
-	}
-
-	NetDlg = glade_xml_get_widget(xml, "NetDlg");
-
-	FindNetPlugin(xml);
-
-	/* Setup a handler for when Close or Cancel is clicked */
-	g_signal_connect_data(GTK_OBJECT(NetDlg), "response",
-			GTK_SIGNAL_FUNC(OnNet_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "btn_ConfNet");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnNet_Conf), xml, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "btn_AboutNet");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnNet_About), xml, NULL, G_CONNECT_AFTER);
-}
-
-void OnConf_Graphics() {
-	void *drv;
-	GPUconfigure conf;
-	char Plugin[MAXPATHLEN];
-
-	sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Gpu);
-	drv = SysLoadLibrary(Plugin);
-	if (drv == NULL) { printf("Error with file %s\n", Plugin); return; }
-
-	while (gtk_events_pending()) gtk_main_iteration();
-
-	conf = (GPUconfigure)SysLoadSym(drv, "GPUconfigure");
-	if (conf != NULL) {
-		conf();
-	}
-	else
-		SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured."));
-
-	SysCloseLibrary(drv);
-}
-
-void OnConf_Sound() {
-	void *drv;
-	SPUconfigure conf;
-	char Plugin[MAXPATHLEN];
-
-	sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Spu);
-	drv = SysLoadLibrary(Plugin);
-	if (drv == NULL) { printf("Error with file %s\n", Plugin); return; }
-
-	while (gtk_events_pending()) gtk_main_iteration();
-
-	conf = (GPUconfigure)SysLoadSym(drv, "SPUconfigure");
-	if (conf != NULL) {
-		conf();
-	}
-	else
-		SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured."));
-
-	SysCloseLibrary(drv);
-}
-
-void OnConf_CdRom() {
-	void *drv;
-	CDRconfigure conf;
-	char Plugin[MAXPATHLEN];
-
-	sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Cdr);
-	drv = SysLoadLibrary(Plugin);
-	if (drv == NULL) { printf("Error with file %s\n", Plugin); return; }
-
-	while (gtk_events_pending()) gtk_main_iteration();
-
-	conf = (GPUconfigure)SysLoadSym(drv, "CDRconfigure");
-	if (conf != NULL) {
-		conf();
-	}
-	else
-		SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured."));
-
-	SysCloseLibrary(drv);
-}
-
-void OnConf_Pad() {
-	void *drv;
-	PADconfigure conf;
-	char Plugin[MAXPATHLEN];
-
-	sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Pad1);
-	drv = SysLoadLibrary(Plugin);
-	if (drv == NULL) { printf("Error with file %s\n", Plugin); return; }
-
-	while (gtk_events_pending()) gtk_main_iteration();
-
-	conf = (GPUconfigure)SysLoadSym(drv, "PADconfigure");
-	if (conf != NULL) {
-		conf();
-	}
-	else
-		SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured."));
-
-	SysCloseLibrary(drv);
-
-	if (strcmp(Config.Pad1, Config.Pad2) != 0) {
-		sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Pad2);
-		drv = SysLoadLibrary(Plugin);
-		if (drv == NULL) { printf("Error with file %s\n", Plugin); return; }
-
-		while (gtk_events_pending()) gtk_main_iteration();
-
-		conf = (GPUconfigure)SysLoadSym(drv, "PADconfigure");
-		if (conf != NULL) {
-			conf();
-		}
-
-		SysCloseLibrary(drv);
-	}
-}
-
-GtkWidget *CpuDlg;
-GtkWidget *PsxCombo;
-GList *psxglist;
-char *psxtypes[] = {
-	"NTSC",
-	"PAL"
-};
-
-/* When the auto-detect CPU type is selected, disable the NTSC/PAL selection */
-static void OnCpu_PsxAutoClicked (GtkWidget *widget, gpointer user_data) {
-	GtkWidget *combo;
-	GladeXML *xml = user_data;
-	combo = glade_xml_get_widget(xml, "GtkCombo_PsxType");
-
-	gtk_widget_set_sensitive (combo,
-			!(gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))));
-}
-
-/* When the interpreter core is deselected, disable the debugger checkbox */
-static void OnCpu_CpuClicked (GtkWidget *widget, gpointer user_data) {
-	GtkWidget *check;
-	GladeXML *xml = user_data;
-	check = glade_xml_get_widget(xml, "GtkCheckButton_Dbg");
-
-	// Debugger is only working with interpreter not recompiler, so let's set it
-	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), FALSE);
-
-	gtk_widget_set_sensitive (check,
-			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
-}
-
-void OnCpu_Clicked (GtkDialog *dialog, gint arg1, gpointer user_data) {
-	if (arg1 == GTK_RESPONSE_OK) {
-		GtkWidget *widget;
-		GladeXML *xml = user_data;
-		int tmp;
-		long t;
-
-		widget = glade_xml_get_widget(xml, "GtkCombo_PsxType");
-
-		/* If nothing chosen, default to NTSC */
-		tmp = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
-		if (tmp == -1)	
-			tmp = PSX_TYPE_NTSC;
-		
-		if (!strcmp("NTSC",psxtypes[tmp]))
-			Config.PsxType = PSX_TYPE_NTSC;
-		else
-			Config.PsxType = PSX_TYPE_PAL;
-
-		Config.Xa = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Xa")));
-
-		Config.Sio = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Sio")));
-
-		Config.Mdec = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Mdec")));
-
-		Config.Cdda = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_CDDA")));
-
-		Config.PsxAuto = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxAuto")));
-
-		t = Config.Debug;
-		Config.Debug = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Dbg")));
-		if (t != Config.Debug) {
-			if (Config.Debug) StartDebugger();
-			else StopDebugger();
-		}
-
-		t = Config.Cpu;
-		Config.Cpu = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Cpu")));
-		if (t != Config.Cpu) {
-			psxCpu->Shutdown();
-#ifdef PSXREC
-			if (Config.Cpu) {
-				psxCpu = &psxInt;
-			}
-			else psxCpu = &psxRec;
-#else
-			psxCpu = &psxInt;
-#endif
-			if (psxCpu->Init() == -1) {
-				SysClose();
-				exit(1);
-			}
-			psxCpu->Reset();
-		}
-
-		Config.PsxOut = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxOut")));
-
-		Config.SpuIrq = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_SpuIrq")));
-
-		Config.RCntFix = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_RCntFix")));
-
-		Config.VSyncWA = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_VSyncWA")));
-
-		SaveConfig();
-	} 
-
-	gtk_widget_destroy(CpuDlg);
-	CpuDlg = NULL;
-}
-
-void OnConf_Cpu() {
-	GladeXML *xml;
-
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "CpuDlg", NULL);
-
-	if (!xml) {
-		g_warning("We could not load the interface!");
-		return;
-	}
-
-	CpuDlg = glade_xml_get_widget(xml, "CpuDlg");
-
-	PsxCombo = glade_xml_get_widget(xml, "GtkCombo_PsxType");
-	gtk_combo_box_set_active (GTK_COMBO_BOX (PsxCombo), Config.PsxType);
-	gtk_widget_set_sensitive (GTK_WIDGET (PsxCombo), !Config.PsxAuto);
-
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Xa")), Config.Xa);
-
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Sio")), Config.Sio);
-
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Mdec")), Config.Mdec);
-
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_CDDA")), Config.Cdda);
-
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_PsxAuto")), Config.PsxAuto);
-
-	g_signal_connect_data(GTK_OBJECT(glade_xml_get_widget(xml, "GtkCheckButton_PsxAuto")), "toggled",
-			GTK_SIGNAL_FUNC(OnCpu_PsxAutoClicked), xml, NULL, G_CONNECT_AFTER);
-
-#ifdef PSXREC
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), Config.Cpu);
-
-	g_signal_connect_data(GTK_OBJECT(glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), "toggled",
-			GTK_SIGNAL_FUNC(OnCpu_CpuClicked), xml, NULL, G_CONNECT_AFTER);
-#else
-	Config.Cpu = 1;
-
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), TRUE);
-	gtk_widget_set_sensitive (GTK_WIDGET (glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), FALSE);
-#endif
-
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Dbg")), Config.Cpu && Config.Debug);
-	gtk_widget_set_sensitive (GTK_WIDGET (glade_xml_get_widget(xml, "GtkCheckButton_Dbg")), Config.Cpu);
-
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_PsxOut")), Config.PsxOut);
-
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_SpuIrq")), Config.SpuIrq);
-
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_RCntFix")), Config.RCntFix);
-
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_VSyncWA")), Config.VSyncWA);
-
-	/* Setup a handler for when Close or Cancel is clicked */
-	g_signal_connect_data(GTK_OBJECT(CpuDlg), "response",
-			GTK_SIGNAL_FUNC(OnCpu_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
-}
-
-/* TODO Check whether configuration is required when we choose the plugin, and set the state of the
-    button appropriately. New gtk tooltip API should allow us to put a tooltip explanation for
-    disabled widgets */
-/* TODO If combo screen hasn't been opened and the user chooses the menu config option, confs.Combo will be null and cause a segfault */
-#define ConfPlugin(src, confs, plugin, name, parent)  { \
-	void *drv; \
-	src conf; \
-	gchar *filename; \
- \
-	GetComboText(confs.Combo, confs.plist, plugin); \
-	filename = g_build_filename (getenv("HOME"), PLUGINS_DIR, plugin, NULL); \
-	/*printf("Configuring plugin %s\n", filename);*/ \
-	drv = SysLoadLibrary(filename); \
-	if (drv == NULL) {printf("Error with file %s\n", filename);return; } \
-\
-	while (gtk_events_pending()) gtk_main_iteration(); \
-	conf = (src) SysLoadSym(drv, name); \
-	if (conf) { \
-		conf(); \
-	} else \
-		SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured.")); \
-	SysCloseLibrary(drv); \
-	g_free (filename); \
-}
-
-void on_configure_plugin (GtkWidget *widget, gpointer user_data) {
-	gint plugin_type = (int) user_data;
-
-	while (gtk_events_pending())
-		gtk_main_iteration();
-	if (all_config_set() == TRUE) {
-		switch (plugin_type) {
-			case PSE_LT_GPU:
-				ConfPlugin(GPUconfigure, GpuConfS, Config.Gpu, "GPUconfigure", ConfDlg);
-				break;
-			case PSE_LT_SPU:
-				ConfPlugin(SPUconfigure, SpuConfS, Config.Spu, "SPUconfigure", ConfDlg);
-				break;
-			case PSE_LT_CDR:
-				ConfPlugin(CDRconfigure, CdrConfS, Config.Cdr, "CDRconfigure", ConfDlg);
-				break;
-		}
-	} else
-		ConfigurePlugins();
-}
-
-void on_about_plugin (GtkWidget *widget, gpointer user_data) {
-	gint plugin_type = (int) user_data;
-
-	while (gtk_events_pending())
-		gtk_main_iteration();
-	if (all_config_set() == TRUE) {
-		switch (plugin_type) {
-			case PSE_LT_GPU:
-				ConfPlugin(GPUconfigure, GpuConfS, Config.Gpu, "GPUabout", ConfDlg);
-				break;
-			case PSE_LT_SPU:
-				ConfPlugin(SPUconfigure, SpuConfS, Config.Spu, "SPUabout", ConfDlg);
-				break;
-			case PSE_LT_CDR:
-				ConfPlugin(CDRconfigure, CdrConfS, Config.Cdr, "CDRabout", ConfDlg);
-				break;
-		}
-	} else
-		ConfigurePlugins();
-}
-
-void OnConfConf_Pad1About(GtkWidget *widget, gpointer user_data) {
-	ConfPlugin(PADabout, Pad1ConfS, Config.Pad1, "PADabout", ConfDlg);
-}
-
-void OnConfConf_Pad2About(GtkWidget *widget, gpointer user_data) {
-	ConfPlugin(PADabout, Pad2ConfS, Config.Pad2, "PADabout", ConfDlg);
-}
-
-void OnConfConf_Pad1Conf(GtkWidget *widget, gpointer user_data) {
-	ConfPlugin(PADabout, Pad1ConfS, Config.Pad1, "PADconfigure", ConfDlg);
-}
-
-void OnConfConf_Pad2Conf(GtkWidget *widget, gpointer user_data) {
-	ConfPlugin(PADabout, Pad2ConfS, Config.Pad2, "PADconfigure", ConfDlg);
-}
-
-void OnNet_Conf(GtkWidget *widget, gpointer user_data) {
-	ConfPlugin(NETconfigure, NetConfS, Config.Net, "NETconfigure", NetDlg);
-}
-
-void OnNet_About(GtkWidget *widget, gpointer user_data) {
-	ConfPlugin(NETabout, NetConfS, Config.Net, "NETabout", NetDlg);
-}
-
-void OnPluginPath_Changed(GtkWidget *wdg, gpointer data) {
-	gchar *path;
-
-	path = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (wdg));
-	strcpy(Config.PluginsDir, path);
-	UpdatePluginsBIOS();
-	UpdatePluginsBIOS_UpdateGUI(data);
-
-	g_free (path);
-}
-
-void OnBiosPath_Changed(GtkWidget *wdg, gpointer data) {
-	gchar *foldername;
-
-	foldername = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (wdg));
-	strcpy(Config.BiosDir, foldername);
-
-	UpdatePluginsBIOS();
-	UpdatePluginsBIOS_UpdateGUI(data);
-
-	g_free (foldername);
-}
-
-void OnConf_Clicked (GtkDialog *dialog, gint arg1, gpointer user_data) {
-	if (arg1 == GTK_RESPONSE_OK) {
-		GetComboText(GpuConfS.Combo, GpuConfS.plist, Config.Gpu);
-		GetComboText(SpuConfS.Combo, SpuConfS.plist, Config.Spu);
-		GetComboText(CdrConfS.Combo, CdrConfS.plist, Config.Cdr);
-		GetComboText(Pad1ConfS.Combo, Pad1ConfS.plist, Config.Pad1);
-		GetComboText(Pad2ConfS.Combo, Pad2ConfS.plist, Config.Pad2);
-		GetComboText(BiosConfS.Combo, BiosConfS.plist, Config.Bios);
-		/* TODO Validation */
-
-		SaveConfig();
-	} 
-
-	gtk_widget_destroy (ConfDlg);
-	ConfDlg = NULL;
-}
 
 void OnHelp_About(GtkWidget *widget, gpointer user_data) {
 	GladeXML *xml;
 	GtkWidget *about_dialog;
-	
+
 	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "AboutDlg", NULL);
 
 	if (!xml) {
@@ -1435,302 +856,9 @@ void OnHelp_About(GtkWidget *widget, gpointer user_data) {
 	}
 
 	about_dialog = glade_xml_get_widget(xml, "AboutDlg");
-	
-	gtk_dialog_run (GTK_DIALOG (about_dialog));
-	gtk_widget_destroy (about_dialog);
-}
 
-#define ComboAddPlugin(type) { \
-	type##ConfS.plugins += 2; \
-	strcpy(type##ConfS.plist[type##ConfS.plugins - 1], name); \
-	strcpy(type##ConfS.plist[type##ConfS.plugins - 2], ent->d_name); \
-	type##ConfS.glist = g_list_append(type##ConfS.glist, type##ConfS.plist[type##ConfS.plugins-1]); \
-}
-
-void populate_combo_box (GtkWidget *widget, GList *list) {
-	GtkListStore *store;
-	GtkCellRenderer *renderer;
-	store = gtk_list_store_new (1, G_TYPE_STRING);
-
-	/* Clear existing data from combo box */
-	gtk_cell_layout_clear (GTK_CELL_LAYOUT (widget));
-
-	renderer = gtk_cell_renderer_text_new();
-	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (widget), renderer, FALSE);
-	gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (widget), renderer, "text", 0);
-
-	while (list != NULL) {
-		GtkTreeIter iter;
-		gtk_list_store_append (store, &iter);
-		gtk_list_store_set (store, &iter, 0, (char *)list->data, -1);
-		list = list->next;
-	}
-
-	gtk_combo_box_set_model (GTK_COMBO_BOX (widget), GTK_TREE_MODEL (store));
-}
-
-#define ConfCreatePConf(name, type) \
-	/* Populate the relevant combo widget with the list of plugins. \
-	   If no plugins available, disable the combo and its controls. \
-	   Note that the Bios plugin has no About/Conf control. */ \
-	type##ConfS.Combo = glade_xml_get_widget(xml, "GtkCombo_" name); \
-	if (type##ConfS.glist != NULL) { \
-		populate_combo_box (type##ConfS.Combo, type##ConfS.glist); \
-		FindComboText(type##ConfS.Combo, type##ConfS.plist, Config.type); \
-		gtk_widget_set_sensitive (type##ConfS.Combo, TRUE); \
-		if (g_ascii_strcasecmp (name, "Bios") != 0) { \
-			controlwidget = glade_xml_get_widget(xml, "btn_Conf" name); \
-			gtk_widget_set_sensitive (controlwidget, TRUE); \
-			controlwidget = glade_xml_get_widget(xml, "btn_About" name); \
-			gtk_widget_set_sensitive (controlwidget, TRUE); \
-		} \
-	} else { \
-		if (g_ascii_strcasecmp (name, "Bios") != 0) { \
-			gtk_cell_layout_clear (GTK_CELL_LAYOUT (type##ConfS.Combo)); \
-			gtk_widget_set_sensitive (type##ConfS.Combo, FALSE); \
-			controlwidget = glade_xml_get_widget(xml, "btn_Conf" name); \
-			gtk_widget_set_sensitive (controlwidget, FALSE); \
-			controlwidget = glade_xml_get_widget(xml, "btn_About" name); \
-			gtk_widget_set_sensitive (controlwidget, FALSE); \
-		} \
-	}
-
-int plugin_is_available (gchar *plugin) {
-	int retval;
-	gchar *pluginfile;
-	struct stat stbuf;
-
-//	printf("Checking plugin_is_available - %s\n", plugin);
-	pluginfile = g_strconcat (getenv("HOME"), PLUGINS_DIR, plugin, NULL);
-
-	if (stat(pluginfile, &stbuf) == -1)
-		retval = FALSE;
-	else
-		retval = TRUE;
-
-	g_free (pluginfile);
-
-	return retval;
-}
-
-/* TODO Combine this with all_config_set() */
-int plugins_configured() {
-	// make sure there are choices for all of the plugins!!
-//	if ((strlen(Config.Gpu) == 0) || (strlen(Config.Spu) == 0) || (strlen(Config.Cdr) == 0) || (strlen(Config.Pad1) == 0) || (strlen(Config.Pad2) == 0)) {
-	if (all_config_set() == FALSE)
-		return FALSE;
-//	}
-	// and make sure they can all be accessed
-	// if they can't be, wipe the variable and return FALSE
-	if (plugin_is_available (Config.Gpu) == FALSE) { Config.Gpu[0] = '\0'; return FALSE; }
-	if (plugin_is_available (Config.Spu) == FALSE) { Config.Spu[0] = '\0'; return FALSE; }
-	if (plugin_is_available (Config.Cdr) == FALSE) { Config.Cdr[0] = '\0'; return FALSE; }
-	if (plugin_is_available (Config.Pad1) == FALSE) { Config.Pad1[0] = '\0'; return FALSE; }
-	if (plugin_is_available (Config.Pad2) == FALSE) { Config.Pad2[0] = '\0'; return FALSE; }
-
-	// if everything is happy, return TRUE
-	return TRUE;
-}
-
-int is_valid_bios_file (gchar *filename) {
-	int valid;
-	struct stat buf;
-
-//	printf("  Checking is_valid_bios_file - %s\n", filename);
-	if ((stat(filename, &buf) == -1) || (buf.st_size != (1024*512)))
-		valid = FALSE;
-	else {
-		valid = TRUE;
-//		printf("    %s is a valid BIOS file\n", filename);
-	}
-
-	return valid;
-}
-
-/* Add the name of the BIOS file to the drop-down list. This will
-   be the filename, not the full path to the file */
-void add_bios_to_list (gchar *bios_name, gchar *internal_name) {
-	BiosConfS.plugins+=2;
-	strcpy(BiosConfS.plist[BiosConfS.plugins-1], bios_name);
-	strcpy(BiosConfS.plist[BiosConfS.plugins-2], internal_name);
-	/* Error handling - BIOS
-	strcpy(BiosConfS.plist[BiosConfS.plugins-1], internal_name);
-	strcpy(BiosConfS.plist[BiosConfS.plugins-2], bios_name);*/
-	BiosConfS.glist = g_list_append(BiosConfS.glist, BiosConfS.plist[BiosConfS.plugins-1]);
-}
-
-void scan_bios_dir (gchar *dirname) {
-	DIR *dir;
-	struct dirent *ent;
-	gchar *filename;
-
-	dir = opendir(dirname);
-	if (dir == NULL) {
-		SysMessage(_("Could not open BIOS directory: '%s'\n"), dirname);
-		return;
-	}
-
-	while ((ent = readdir(dir)) != NULL) {
-		filename = g_build_filename(dirname, ent->d_name, NULL);
-		if (is_valid_bios_file(filename))
-			add_bios_to_list(g_path_get_basename(filename), g_path_get_basename (filename));
-		g_free(filename);
-	}
-	closedir(dir);
-}
-
-void UpdatePluginsBIOS() {
-	DIR *dir;
-	struct dirent *ent;
-	void *Handle;
-	char name[256];
-	gchar *linkname;
-
-	GpuConfS.plugins  = 0; SpuConfS.plugins  = 0; CdrConfS.plugins  = 0;
-	Pad1ConfS.plugins = 0; Pad2ConfS.plugins = 0; BiosConfS.plugins = 0;
-	GpuConfS.glist  = NULL; SpuConfS.glist  = NULL; CdrConfS.glist  = NULL;
-	Pad1ConfS.glist = NULL; Pad2ConfS.glist = NULL; BiosConfS.glist = NULL;
-	GpuConfS.plist[0][0]  = '\0'; SpuConfS.plist[0][0]  = '\0'; CdrConfS.plist[0][0]  = '\0';
-	Pad1ConfS.plist[0][0] = '\0'; Pad2ConfS.plist[0][0] = '\0'; BiosConfS.plist[0][0] = '\0';
-
-	/* Load and get plugin info */
-	dir = opendir(Config.PluginsDir);
-	if (dir == NULL) {
-		printf(_("Could not open directory: '%s'\n"), Config.PluginsDir);
-		return;
-	}
-	while ((ent = readdir(dir)) != NULL) {
-		long type, v;
-		linkname = g_build_filename(Config.PluginsDir, ent->d_name, NULL);
-
-		// only libraries past this point, not config tools
-		if (strstr(linkname, ".so") == NULL && strstr(linkname, ".dylib") == NULL)
-			continue;
-
-		Handle = dlopen(linkname, RTLD_NOW);
-		if (Handle == NULL) {
-			printf("%s\n", dlerror());
-			g_free(linkname);
-			continue;
-		}
-
-		PSE_getLibType = (PSEgetLibType)dlsym(Handle, "PSEgetLibType");
-		if (dlerror() != NULL) {
-			if (strstr(linkname, "gpu") != NULL) type = PSE_LT_GPU;
-			else if (strstr(linkname, "cdr") != NULL) type = PSE_LT_CDR;
-			else if (strstr(linkname, "spu") != NULL) type = PSE_LT_SPU;
-			else if (strstr(linkname, "pad") != NULL) type = PSE_LT_PAD;
-			else { g_free(linkname); continue; }
-		}
-		else type = PSE_getLibType();
-
-		PSE_getLibName = (PSEgetLibName) dlsym(Handle, "PSEgetLibName");
-		if (dlerror() == NULL) {
-			sprintf(name, "%s", PSE_getLibName());
-			PSE_getLibVersion = (PSEgetLibVersion) dlsym(Handle, "PSEgetLibVersion");
-			if (dlerror() == NULL) {
-				char ver[32];
-
-				v = PSE_getLibVersion();
-				sprintf(ver, " %ld.%ld.%ld", v >> 16, (v >> 8) & 0xff, v & 0xff);
-				strcat(name, ver);
-			}
-		}
-		else strcpy(name, ent->d_name);
-
-		if (type & PSE_LT_CDR)
-			ComboAddPlugin(Cdr);
-		if (type & PSE_LT_GPU)
-			ComboAddPlugin(Gpu);
-		if (type & PSE_LT_SPU)
-			ComboAddPlugin(Spu);
-		if (type & PSE_LT_PAD) {
-			PADquery query = (PADquery)dlsym(Handle, "PADquery");
-			if (query() & 0x1) {
-				ComboAddPlugin(Pad1);
-			}
-			if (query() & 0x2) {
-				ComboAddPlugin(Pad2);
-			}
-		}
-		g_free(linkname);
-	}
-	closedir(dir);
-
-	scan_bios_dir(Config.BiosDir);
-
-	/* The BIOS list always contains the PCSX internal BIOS */
-	add_bios_to_list(_("Internal HLE Bios"), "HLE");
-}
-
-void UpdatePluginsBIOS_UpdateGUI(GladeXML *xml) {
-	/* Populate the plugin combo boxes */
-	ConfCreatePConf("Gpu", Gpu);
-	ConfCreatePConf("Spu", Spu);
-	ConfCreatePConf("Pad1", Pad1);
-	ConfCreatePConf("Pad2", Pad2);
-	ConfCreatePConf("Cdr", Cdr);
-	ConfCreatePConf("Bios", Bios);
-}
-
-void FindNetPlugin(GladeXML *xml) {
-	DIR *dir;
-	struct dirent *ent;
-	void *Handle;
-	char plugin[MAXPATHLEN],name[MAXPATHLEN];
-
-	NetConfS.plugins  = 0;
-	NetConfS.glist = NULL; 
-
-	NetConfS.plugins += 2;
-	strcpy(NetConfS.plist[NetConfS.plugins - 1], "Disabled");
-	strcpy(NetConfS.plist[NetConfS.plugins - 2], "Disabled");
-	NetConfS.glist = g_list_append(NetConfS.glist, NetConfS.plist[NetConfS.plugins - 1]);
-
-	dir = opendir(Config.PluginsDir);
-	if (dir == NULL)
-		SysMessage(_("Could not open directory: '%s'\n"), Config.PluginsDir);
-	else {
-		/* ADB TODO Replace the following with a function */
-		while ((ent = readdir(dir)) != NULL) {
-			long type, v;
-
-			sprintf(plugin, "%s/%s", Config.PluginsDir, ent->d_name);
-
-			if (strstr(plugin, ".so") == NULL && strstr(plugin, ".dylib") == NULL)
-				continue;
-			Handle = dlopen(plugin, RTLD_NOW);
-			if (Handle == NULL) continue;
-
-			PSE_getLibType = (PSEgetLibType) dlsym(Handle, "PSEgetLibType");
-			if (dlerror() != NULL) {
-				if (strstr(plugin, "net") != NULL) type = PSE_LT_NET;
-				else continue;
-			}
-			else type = PSE_getLibType();
-
-			PSE_getLibName = (PSEgetLibName) dlsym(Handle, "PSEgetLibName");
-			if (dlerror() == NULL) {
-				sprintf(name, "%s", PSE_getLibName());
-				PSE_getLibVersion = (PSEgetLibVersion) dlsym(Handle, "PSEgetLibVersion");
-				if (dlerror() == NULL) {
-					char ver[32];
-
-					v = PSE_getLibVersion();
-					sprintf(ver, " %ld.%ld.%ld",v>>16,(v>>8)&0xff,v&0xff);
-					strcat(name, ver);
-				}
-			}
-			else strcpy(name, ent->d_name);
-
-			if (type & PSE_LT_NET) {
-				ComboAddPlugin(Net);
-			}
-		}
-		closedir(dir);
-
-		ConfCreatePConf("Net", Net);
-	}
+	gtk_dialog_run(GTK_DIALOG (about_dialog));
+	gtk_widget_destroy(about_dialog);
 }
 
 void SysMessage(char *fmt, ...) {
@@ -1750,7 +878,7 @@ void SysMessage(char *fmt, ...) {
 		return;
 	}
 
-	MsgDlg =  gtk_dialog_new_with_buttons (_("Notice"), NULL,
+	MsgDlg = gtk_dialog_new_with_buttons(_("Notice"), NULL,
 		GTK_DIALOG_DESTROY_WITH_PARENT, GTK_STOCK_OK, GTK_RESPONSE_NONE, NULL);
 
 	gtk_window_set_position (GTK_WINDOW(MsgDlg), GTK_WIN_POS_CENTER);
@@ -1770,17 +898,17 @@ void SysErrorMessage(gchar *primary, gchar *secondary) {
 	if (!UseGui)
 		printf ("%s - %s\n", primary, secondary);
 	else {
-		message_dialog =  gtk_message_dialog_new (NULL,
+		message_dialog = gtk_message_dialog_new(NULL,
 				GTK_DIALOG_MODAL,
 				GTK_MESSAGE_ERROR,
 				GTK_BUTTONS_CLOSE,
 				primary,
 				NULL);
-		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message_dialog),
+		gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(message_dialog),
 				secondary);
 
-		gtk_dialog_run (GTK_DIALOG (message_dialog));
-		gtk_widget_destroy (message_dialog);
+		gtk_dialog_run(GTK_DIALOG(message_dialog));
+		gtk_widget_destroy(message_dialog);
 	}
 }
 
@@ -1789,16 +917,16 @@ void SysInfoMessage(gchar *primary, gchar *secondary) {
 	if (!UseGui)
 		printf ("%s - %s\n", primary, secondary);
 	else {
-		message_dialog =  gtk_message_dialog_new (NULL,
+		message_dialog = gtk_message_dialog_new(NULL,
 				GTK_DIALOG_MODAL,
 				GTK_MESSAGE_INFO,
 				GTK_BUTTONS_CLOSE,
 				primary,
 				NULL);
-		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message_dialog),
+		gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(message_dialog),
 				secondary);
 
-		gtk_dialog_run (GTK_DIALOG (message_dialog));
-		gtk_widget_destroy (message_dialog);
+		gtk_dialog_run(GTK_DIALOG(message_dialog));
+		gtk_widget_destroy(message_dialog);
 	}
 }

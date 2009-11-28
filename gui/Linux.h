@@ -45,8 +45,6 @@ void SaveConfig();
 
 void StartGui();
 
-void ConfigurePlugins();
-
 void PADhandleKey(int key);
 
 void UpdateMenuSlots();
@@ -63,20 +61,5 @@ void UpdatePluginsBIOS();
 
 void SysErrorMessage(gchar *primary, gchar *secondary);
 void SysInfoMessage(gchar *primary, gchar *secondary);
-
-typedef struct {
-	GtkWidget *Combo;
-	GList *glist;
-	char plist[255][255];	/* TODO Comment this out */
-	int plugins;			/* TODO Comment this out and replace with glist count */
-} PluginConf;
-
-PluginConf GpuConfS;
-PluginConf SpuConfS;
-PluginConf CdrConfS;
-PluginConf Pad1ConfS;
-PluginConf Pad2ConfS;
-PluginConf NetConfS;
-PluginConf BiosConfS;
 
 #endif /* __LINUX_H__ */

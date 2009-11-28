@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-28 19:26+0800\n"
+"POT-Creation-Date: 2009-11-28 23:14+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,7 +95,7 @@ msgstr ""
 msgid "Add New Cheat"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:167 ../data/pcsx.glade2:2402
+#: ../win32/gui/CheatDlg.c:167 ../data/pcsx.glade2:2629
 msgid "Edit Cheat Codes"
 msgstr ""
 
@@ -207,7 +207,7 @@ msgstr ""
 msgid "Founded Addresses: %d"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:505 ../data/pcsx.glade2:2801
+#: ../win32/gui/CheatDlg.c:505 ../data/pcsx.glade2:3028
 msgid "Freeze"
 msgstr ""
 
@@ -216,7 +216,7 @@ msgid "Address:"
 msgstr ""
 
 #: ../win32/gui/CheatDlg.c:507 ../win32/gui/CheatDlg.c:598
-#: ../win32/gui/CheatDlg.c:683 ../gui/Cheat.c:648 ../data/pcsx.glade2:2645
+#: ../win32/gui/CheatDlg.c:683 ../gui/Cheat.c:648 ../data/pcsx.glade2:2872
 msgid "Value:"
 msgstr ""
 
@@ -225,27 +225,27 @@ msgstr ""
 msgid "Freeze %.8X"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:596 ../data/pcsx.glade2:2837
+#: ../win32/gui/CheatDlg.c:596 ../data/pcsx.glade2:3064
 msgid "Modify"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:679 ../gui/Cheat.c:1130 ../data/pcsx.glade2:2573
+#: ../win32/gui/CheatDlg.c:679 ../gui/Cheat.c:1130 ../data/pcsx.glade2:2800
 msgid "Cheat Search"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:681 ../data/pcsx.glade2:2623
+#: ../win32/gui/CheatDlg.c:681 ../data/pcsx.glade2:2850
 msgid "Search For:"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:682 ../data/pcsx.glade2:2633
+#: ../win32/gui/CheatDlg.c:682 ../data/pcsx.glade2:2860
 msgid "Data Type:"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:684 ../data/pcsx.glade2:2657
+#: ../win32/gui/CheatDlg.c:684 ../data/pcsx.glade2:2884
 msgid "Data Base:"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:685 ../data/pcsx.glade2:2717
+#: ../win32/gui/CheatDlg.c:685 ../data/pcsx.glade2:2944
 msgid "To:"
 msgstr ""
 
@@ -293,7 +293,7 @@ msgstr ""
 msgid "Hexadecimal"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:206 ../gui/Gtk2Gui.c:1663
+#: ../win32/gui/ConfigurePlugins.c:206 ../gui/ConfDlg.c:680
 msgid "Internal HLE Bios"
 msgstr ""
 
@@ -615,13 +615,13 @@ msgstr ""
 msgid "*PCSX*: Error Saving State %s"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:426 ../win32/gui/WndMain.c:475 ../gui/Gtk2Gui.c:571
-#: ../gui/Gtk2Gui.c:696
+#: ../win32/gui/WndMain.c:426 ../win32/gui/WndMain.c:475 ../gui/Gtk2Gui.c:465
+#: ../gui/Gtk2Gui.c:590
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:432 ../win32/gui/WndMain.c:481 ../gui/Gtk2Gui.c:579
-#: ../gui/Gtk2Gui.c:704
+#: ../win32/gui/WndMain.c:432 ../win32/gui/WndMain.c:481 ../gui/Gtk2Gui.c:473
+#: ../gui/Gtk2Gui.c:598
 msgid "Could not load CD-ROM!"
 msgstr ""
 
@@ -653,17 +653,17 @@ msgstr ""
 msgid "terminiting link block"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:864 ../gui/MemcardDlg.c:147 ../gui/MemcardDlg.c:217
+#: ../win32/gui/WndMain.c:864 ../gui/MemcardDlg.c:147 ../gui/MemcardDlg.c:244
 msgid "Deleted"
 msgstr ""
 
 #: ../win32/gui/WndMain.c:865 ../win32/gui/WndMain.c:868
-#: ../gui/MemcardDlg.c:149 ../gui/MemcardDlg.c:153 ../gui/MemcardDlg.c:219
-#: ../gui/MemcardDlg.c:223
+#: ../gui/MemcardDlg.c:149 ../gui/MemcardDlg.c:153 ../gui/MemcardDlg.c:246
+#: ../gui/MemcardDlg.c:250
 msgid "Free"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:867 ../gui/MemcardDlg.c:151 ../gui/MemcardDlg.c:221
+#: ../win32/gui/WndMain.c:867 ../gui/MemcardDlg.c:151 ../gui/MemcardDlg.c:248
 msgid "Used"
 msgstr ""
 
@@ -744,7 +744,7 @@ msgstr ""
 msgid "Disable Cd audio"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1206 ../data/pcsx.glade2:1444
+#: ../win32/gui/WndMain.c:1206 ../data/pcsx.glade2:1588
 msgid "Autodetect"
 msgstr ""
 
@@ -752,11 +752,11 @@ msgstr ""
 msgid "Enable Interpreter Cpu"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1208 ../data/pcsx.glade2:1300
+#: ../win32/gui/WndMain.c:1208 ../data/pcsx.glade2:1444
 msgid "Enable Console Output"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1209 ../data/pcsx.glade2:1250
+#: ../win32/gui/WndMain.c:1209 ../data/pcsx.glade2:1394
 msgid "Enable Debugger"
 msgstr ""
 
@@ -764,11 +764,11 @@ msgstr ""
 msgid "Spu Irq Always Enabled"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1211 ../data/pcsx.glade2:1387
+#: ../win32/gui/WndMain.c:1211 ../data/pcsx.glade2:1531
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1212 ../data/pcsx.glade2:1402
+#: ../win32/gui/WndMain.c:1212 ../data/pcsx.glade2:1546
 msgid "InuYasha Sengoku Battle Fix"
 msgstr ""
 
@@ -807,7 +807,7 @@ msgid "DataDeck Memory Card (*.ddf)"
 msgstr ""
 
 #: ../win32/gui/WndMain.c:1350 ../win32/gui/WndMain.c:1431 ../gui/Cheat.c:322
-#: ../gui/Gtk2Gui.c:508 ../gui/Gtk2Gui.c:647
+#: ../gui/Gtk2Gui.c:402 ../gui/Gtk2Gui.c:541
 msgid "All Files"
 msgstr ""
 
@@ -979,8 +979,8 @@ msgstr ""
 msgid "All Files (*.*)"
 msgstr ""
 
-#: ../gui/Cheat.c:395 ../gui/Cheat.c:1125 ../gui/Gtk2Gui.c:396
-#: ../gui/Gtk2Gui.c:1016
+#: ../gui/Cheat.c:395 ../gui/Cheat.c:1125 ../gui/ConfDlg.c:104
+#: ../gui/ConfDlg.c:203
 msgid "Error: Glade interface could not be loaded!"
 msgstr ""
 
@@ -1008,95 +1008,95 @@ msgstr ""
 msgid "Search Results"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:404 ../data/pcsx.glade2:605
+#: ../gui/ConfDlg.c:112 ../data/pcsx.glade2:749
 msgid "Configure PCSX"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:490
-msgid "Select PSX EXE File"
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:504
-msgid "PlayStation Executable Files"
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:540
-msgid "Not a valid PSX file"
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:540
-msgid "The file does not appear to be a valid Playstation executable"
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:571 ../gui/Gtk2Gui.c:696
-msgid "CD ROM failed"
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:579
-msgid "The CD ROM could not be loaded"
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:593
-msgid "Could not run BIOS"
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:593
-msgid "Running BIOS is not supported with Internal HLE BIOS."
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:622
-msgid "Open PSX Disc Image File"
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:642
-msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:876
-#, c-format
-msgid "Loaded state %s."
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:880
-#, c-format
-msgid "Error loading state %s!"
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:891
-#, c-format
-msgid "Saved state %s."
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:893
-#, c-format
-msgid "Error saving state %s!"
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:927 ../gui/Gtk2Gui.c:954
-msgid "Select State File"
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:1053 ../gui/Gtk2Gui.c:1074 ../gui/Gtk2Gui.c:1095
-#: ../gui/Gtk2Gui.c:1116 ../gui/Gtk2Gui.c:1315
+#: ../gui/ConfDlg.c:240 ../gui/ConfDlg.c:261 ../gui/ConfDlg.c:282
+#: ../gui/ConfDlg.c:303 ../gui/ConfDlg.c:358
 msgid "No configuration required"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1053 ../gui/Gtk2Gui.c:1074 ../gui/Gtk2Gui.c:1095
-#: ../gui/Gtk2Gui.c:1116 ../gui/Gtk2Gui.c:1315
+#: ../gui/ConfDlg.c:240 ../gui/ConfDlg.c:261 ../gui/ConfDlg.c:282
+#: ../gui/ConfDlg.c:303 ../gui/ConfDlg.c:358
 msgid "This plugin doesn't need to be configured."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1569
+#: ../gui/ConfDlg.c:586
 #, c-format
 msgid "Could not open BIOS directory: '%s'\n"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1599 ../gui/Gtk2Gui.c:1692 ../gui/LnxMain.c:167
+#: ../gui/ConfDlg.c:616 ../gui/ConfDlg.c:709 ../gui/LnxMain.c:167
 #, c-format
 msgid "Could not open directory: '%s'\n"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:1753
+#: ../gui/Gtk2Gui.c:384
+msgid "Select PSX EXE File"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:398
+msgid "PlayStation Executable Files"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:434
+msgid "Not a valid PSX file"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:434
+msgid "The file does not appear to be a valid Playstation executable"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:465 ../gui/Gtk2Gui.c:590
+msgid "CD ROM failed"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:473 ../gui/Gtk2Gui.c:598
+msgid "The CD-ROM could not be loaded"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:487
+msgid "Could not run BIOS"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:487
+msgid "Running BIOS is not supported with Internal HLE BIOS."
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:516
+msgid "Open PSX Disc Image File"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:536
+msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:747
+#, c-format
+msgid "Loaded state %s."
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:751
+#, c-format
+msgid "Error loading state %s!"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:762
+#, c-format
+msgid "Saved state %s."
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:764
+#, c-format
+msgid "Error saving state %s!"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:797 ../gui/Gtk2Gui.c:824
+msgid "Select State File"
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:881
 msgid "Notice"
 msgstr ""
 
@@ -1152,43 +1152,47 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:308
+#: ../gui/MemcardDlg.c:297
+msgid "Select A File"
+msgstr ""
+
+#: ../gui/MemcardDlg.c:338
 msgid "Format this Memory Card?"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:310
+#: ../gui/MemcardDlg.c:340
 msgid ""
 "If you format the memory card, the card will be empty, and any existing data "
 "overwritten."
 msgstr ""
 
-#: ../gui/MemcardDlg.c:313
+#: ../gui/MemcardDlg.c:343
 msgid "Format card"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:339
+#: ../gui/MemcardDlg.c:366
 msgid "Create a new Memory Card"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:348
+#: ../gui/MemcardDlg.c:375
 msgid "New Memory Card.mcd"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:456
+#: ../gui/MemcardDlg.c:476
 msgid "No free space on memory card"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:457
+#: ../gui/MemcardDlg.c:477
 msgid ""
 "There are no free slots available on the target memory card. Please delete a "
 "slot first."
 msgstr ""
 
-#: ../gui/MemcardDlg.c:611
+#: ../gui/MemcardDlg.c:631
 msgid "Memory Card Manager"
 msgstr ""
 
-#: ../gui/Plugin.c:204 ../data/pcsx.glade2:1336
+#: ../gui/Plugin.c:204 ../data/pcsx.glade2:1480
 #, c-format
 msgid "SIO IRQ Always Enabled"
 msgstr ""
@@ -1764,117 +1768,173 @@ msgstr ""
 msgid "_About PCSX..."
 msgstr ""
 
+#: ../data/pcsx.glade2:599 ../data/pcsx.glade2:600
+msgid "Run CD"
+msgstr ""
+
+#: ../data/pcsx.glade2:612
+msgid "Run ISO Image"
+msgstr ""
+
+#: ../data/pcsx.glade2:613
+msgid "Run ISO..."
+msgstr ""
+
+#: ../data/pcsx.glade2:634
+msgid "Switch ISO Image"
+msgstr ""
+
+#: ../data/pcsx.glade2:635
+msgid "Switch ISO..."
+msgstr ""
+
+#: ../data/pcsx.glade2:656 ../data/pcsx.glade2:1838
+msgid "Configure Memory Cards"
+msgstr ""
+
+#: ../data/pcsx.glade2:657
+msgid "Memcards..."
+msgstr ""
+
+#: ../data/pcsx.glade2:669
+msgid "Configure Graphics"
+msgstr ""
+
+#: ../data/pcsx.glade2:670
+msgid "Graphics..."
+msgstr ""
+
+#: ../data/pcsx.glade2:682 ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:8
+msgid "Configure Sound"
+msgstr ""
+
+#: ../data/pcsx.glade2:683
+msgid "Sound..."
+msgstr ""
+
+#: ../data/pcsx.glade2:695
+msgid "Configure CD-ROM"
+msgstr ""
+
+#: ../data/pcsx.glade2:696
+msgid "CD-ROM..."
+msgstr ""
+
 #: ../data/pcsx.glade2:708
+msgid "Configure Controllers"
+msgstr ""
+
+#: ../data/pcsx.glade2:709
+msgid "Controllers..."
+msgstr ""
+
+#: ../data/pcsx.glade2:852
 msgid "Select Folder to Search"
 msgstr ""
 
-#: ../data/pcsx.glade2:724
+#: ../data/pcsx.glade2:868
 msgid "Search in:"
 msgstr ""
 
-#: ../data/pcsx.glade2:997
+#: ../data/pcsx.glade2:1141
 msgid "Graphics:"
 msgstr ""
 
-#: ../data/pcsx.glade2:1010
+#: ../data/pcsx.glade2:1154
 msgid "Sound:"
 msgstr ""
 
-#: ../data/pcsx.glade2:1025
+#: ../data/pcsx.glade2:1169
 msgid "Controller 1:   "
 msgstr ""
 
-#: ../data/pcsx.glade2:1040
+#: ../data/pcsx.glade2:1184
 msgid "Controller 2:"
 msgstr ""
 
-#: ../data/pcsx.glade2:1055
+#: ../data/pcsx.glade2:1199
 msgid "CD-ROM:"
 msgstr ""
 
-#: ../data/pcsx.glade2:1093
+#: ../data/pcsx.glade2:1237
 msgid "<b>Plugins</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:1154
+#: ../data/pcsx.glade2:1298
 msgid "<b>BIOS</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:1221
+#: ../data/pcsx.glade2:1365
 msgid "Configure CPU"
 msgstr ""
 
-#: ../data/pcsx.glade2:1268
+#: ../data/pcsx.glade2:1412
 msgid "SPU IRQ Always Enabled"
 msgstr ""
 
-#: ../data/pcsx.glade2:1284
+#: ../data/pcsx.glade2:1428
 msgid "Black & White Movies"
 msgstr ""
 
-#: ../data/pcsx.glade2:1318
+#: ../data/pcsx.glade2:1462
 msgid "Enable Interpreter CPU"
 msgstr ""
 
-#: ../data/pcsx.glade2:1352
+#: ../data/pcsx.glade2:1496
 msgid "Disable CD Audio"
 msgstr ""
 
-#: ../data/pcsx.glade2:1368
+#: ../data/pcsx.glade2:1512
 msgid "Disable XA Decoding"
 msgstr ""
 
-#: ../data/pcsx.glade2:1420
+#: ../data/pcsx.glade2:1564
 msgid "<b>Options</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:1461
+#: ../data/pcsx.glade2:1605
 msgid ""
 "NTSC\n"
 "PAL"
 msgstr ""
 
-#: ../data/pcsx.glade2:1475
+#: ../data/pcsx.glade2:1619
 msgid "<b>System Type</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:1539
+#: ../data/pcsx.glade2:1683
 msgid "Configure NetPlay"
 msgstr ""
 
-#: ../data/pcsx.glade2:1627
+#: ../data/pcsx.glade2:1771
 msgid "<b>NetPlay</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:1694
-msgid "Configure Memory Cards"
-msgstr ""
-
-#: ../data/pcsx.glade2:1773 ../data/pcsx.glade2:2122
+#: ../data/pcsx.glade2:1917 ../data/pcsx.glade2:2315
 msgid "New"
 msgstr ""
 
-#: ../data/pcsx.glade2:1823 ../data/pcsx.glade2:2172
+#: ../data/pcsx.glade2:1967 ../data/pcsx.glade2:2365
 msgid "Format"
 msgstr ""
 
-#: ../data/pcsx.glade2:1873 ../data/pcsx.glade2:2222
+#: ../data/pcsx.glade2:2017 ../data/pcsx.glade2:2415
 msgid "Un/Delete"
 msgstr ""
 
-#: ../data/pcsx.glade2:1917
+#: ../data/pcsx.glade2:2110
 msgid "<b>Memory Card 1</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:1978 ../data/pcsx.glade2:2028 ../data/pcsx.glade2:2873
+#: ../data/pcsx.glade2:2171 ../data/pcsx.glade2:2221 ../data/pcsx.glade2:3100
 msgid "Copy"
 msgstr ""
 
-#: ../data/pcsx.glade2:2266
+#: ../data/pcsx.glade2:2508
 msgid "<b>Memory Card 2</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:2344
+#: ../data/pcsx.glade2:2571
 msgid ""
 "(C) 1999-2003  PCSX Team\n"
 "(C) 2005-2006 Ryan Schultz\n"
@@ -1882,11 +1942,11 @@ msgid ""
 "(C) 2008-2009 Wei Mingzhi"
 msgstr ""
 
-#: ../data/pcsx.glade2:2348
+#: ../data/pcsx.glade2:2575
 msgid "A PlayStation emulator."
 msgstr ""
 
-#: ../data/pcsx.glade2:2351
+#: ../data/pcsx.glade2:2578
 msgid ""
 "This program is free software; you can redistribute it\n"
 "and/or modify it under the terms of the GNU General\n"
@@ -1905,22 +1965,22 @@ msgid ""
 "the Free Software Foundation, Inc."
 msgstr ""
 
-#: ../data/pcsx.glade2:2380
+#: ../data/pcsx.glade2:2607
 msgid "translator-credits"
 msgstr ""
 
-#: ../data/pcsx.glade2:2442
+#: ../data/pcsx.glade2:2669
 msgid "<b>Cheat Codes</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:2608
+#: ../data/pcsx.glade2:2835
 msgid ""
 "8-bit\n"
 "16-bit\n"
 "32-bit"
 msgstr ""
 
-#: ../data/pcsx.glade2:2671
+#: ../data/pcsx.glade2:2898
 msgid ""
 "Equal Value\n"
 "Not Equal Value\n"
@@ -1933,25 +1993,25 @@ msgid ""
 "No Change"
 msgstr ""
 
-#: ../data/pcsx.glade2:2703
+#: ../data/pcsx.glade2:2930
 msgid ""
 "Decimal\n"
 "Hexadecimal"
 msgstr ""
 
-#: ../data/pcsx.glade2:2906
+#: ../data/pcsx.glade2:3133
 msgid "label_resultsfound"
 msgstr ""
 
-#: ../data/pcsx.glade2:2941
+#: ../data/pcsx.glade2:3168
 msgid "Search"
 msgstr ""
 
-#: ../data/pcsx.glade2:2977
+#: ../data/pcsx.glade2:3204
 msgid "Restart"
 msgstr ""
 
-#: ../data/pcsx.glade2:3006
+#: ../data/pcsx.glade2:3233
 msgid "<b>Cheat Search</b>"
 msgstr ""
 
@@ -1975,10 +2035,6 @@ msgstr ""
 msgid ""
 "P.E.Op.S. OSS Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
-msgstr ""
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:8
-msgid "Configure Sound"
 msgstr ""
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:42

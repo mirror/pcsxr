@@ -3,8 +3,6 @@
   <!-- interface-requires gtk+ 2.12 -->
   <!-- interface-naming-policy project-wide -->
   <widget class="GtkWindow" id="MainWindow">
-    <property name="width_request">350</property>
-    <property name="height_request">195</property>
     <property name="visible">True</property>
     <property name="title" translatable="yes">PCSX</property>
     <property name="resizable">False</property>
@@ -589,12 +587,158 @@
           </packing>
         </child>
         <child>
+          <widget class="GtkToolbar" id="toolbar1">
+            <property name="visible">True</property>
+            <property name="toolbar_style">icons</property>
+            <property name="icon_size_set">True</property>
+            <child>
+              <widget class="GtkToolButton" id="toolbutton_runcd">
+                <property name="visible">True</property>
+                <property name="tooltip" translatable="yes">Run CD</property>
+                <property name="label" translatable="yes">Run CD</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-cdrom</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="toolbutton_runimage">
+                <property name="visible">True</property>
+                <property name="tooltip" translatable="yes">Run ISO Image</property>
+                <property name="label" translatable="yes">Run ISO...</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-open</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkSeparatorToolItem" id="toolbutton3">
+                <property name="visible">True</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="toolbutton_switchimage">
+                <property name="visible">True</property>
+                <property name="tooltip" translatable="yes">Switch ISO Image</property>
+                <property name="label" translatable="yes">Switch ISO...</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-undo</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkSeparatorToolItem" id="toolbutton4">
+                <property name="visible">True</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="toolbutton_memcards">
+                <property name="visible">True</property>
+                <property name="tooltip" translatable="yes">Configure Memory Cards</property>
+                <property name="label" translatable="yes">Memcards...</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-floppy</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="toolbutton_graphics">
+                <property name="visible">True</property>
+                <property name="tooltip" translatable="yes">Configure Graphics</property>
+                <property name="label" translatable="yes">Graphics...</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-select-color</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="toolbutton_sound">
+                <property name="visible">True</property>
+                <property name="tooltip" translatable="yes">Configure Sound</property>
+                <property name="label" translatable="yes">Sound...</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-convert</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="toolbutton_cdrom">
+                <property name="visible">True</property>
+                <property name="tooltip" translatable="yes">Configure CD-ROM</property>
+                <property name="label" translatable="yes">CD-ROM...</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-cdrom</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="toolbutton_controllers">
+                <property name="visible">True</property>
+                <property name="tooltip" translatable="yes">Configure Controllers</property>
+                <property name="label" translatable="yes">Controllers...</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-execute</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
           <widget class="GtkImage" id="image160">
+            <property name="width_request">354</property>
+            <property name="height_request">174</property>
             <property name="visible">True</property>
             <property name="pixbuf">pcsx.jpg</property>
           </widget>
           <packing>
-            <property name="position">1</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkStatusbar" id="statusbar">
+            <property name="visible">True</property>
+            <property name="spacing">2</property>
+            <property name="has_resize_grip">False</property>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">3</property>
           </packing>
         </child>
       </widget>
@@ -1897,12 +2041,61 @@ PAL</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkFileChooserButton" id="GtkMcd1FSButton">
+                      <widget class="GtkButton" id="Mcd1Button">
                         <property name="visible">True</property>
-                        <property name="sensitive">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <child>
+                          <widget class="GtkHBox" id="hbox2">
+                            <property name="visible">True</property>
+                            <property name="spacing">3</property>
+                            <child>
+                              <widget class="GtkImage" id="image30">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-floppy</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="Mcd1Label">
+                                <property name="visible">True</property>
+                                <property name="label">Loading...</property>
+                                <property name="ellipsize">middle</property>
+                                <property name="single_line_mode">True</property>
+                              </widget>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkVSeparator" id="vseparator1">
+                                <property name="visible">True</property>
+                                <property name="orientation">vertical</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkImage" id="image31">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-open</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">3</property>
+                              </packing>
+                            </child>
+                          </widget>
+                        </child>
                       </widget>
                       <packing>
-                        <property name="expand">False</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
@@ -1938,7 +2131,7 @@ PAL</property>
               <widget class="GtkAlignment" id="alignment51">
                 <property name="visible">True</property>
                 <property name="top_padding">27</property>
-                <property name="bottom_padding">102</property>
+                <property name="bottom_padding">132</property>
                 <child>
                   <widget class="GtkVButtonBox" id="vbuttonbox2">
                     <property name="visible">True</property>
@@ -2246,12 +2439,61 @@ PAL</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkFileChooserButton" id="GtkMcd2FSButton">
+                      <widget class="GtkButton" id="Mcd2Button">
                         <property name="visible">True</property>
-                        <property name="sensitive">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <child>
+                          <widget class="GtkHBox" id="hbox3">
+                            <property name="visible">True</property>
+                            <property name="spacing">3</property>
+                            <child>
+                              <widget class="GtkImage" id="image32">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-floppy</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="Mcd2Label">
+                                <property name="visible">True</property>
+                                <property name="label">Loading...</property>
+                                <property name="ellipsize">middle</property>
+                                <property name="single_line_mode">True</property>
+                              </widget>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkVSeparator" id="vseparator2">
+                                <property name="visible">True</property>
+                                <property name="orientation">vertical</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkImage" id="image33">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-open</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">3</property>
+                              </packing>
+                            </child>
+                          </widget>
+                        </child>
                       </widget>
                       <packing>
-                        <property name="expand">False</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
@@ -2293,23 +2535,8 @@ PAL</property>
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <widget class="GtkButton" id="cancelbutton3">
-                <property name="label">gtk-cancel</property>
-                <property name="response_id">-6</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-              </widget>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkButton" id="okbutton3">
-                <property name="label">gtk-ok</property>
+              <widget class="GtkButton" id="McdClose">
+                <property name="label">gtk-close</property>
                 <property name="response_id">-5</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -2320,7 +2547,7 @@ PAL</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">1</property>
+                <property name="position">0</property>
               </packing>
             </child>
           </widget>
