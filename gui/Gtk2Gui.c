@@ -69,6 +69,7 @@ void ResetMenuSlots(GladeXML *xml) {
 	GtkWidget *widget;
 	gchar *str;
 	int i;
+	gint context_id;
 
 	if (CdromId[0] == '\0') {
 		// disable state saving/loading if no CD is loaded
@@ -103,6 +104,10 @@ void ResetMenuSlots(GladeXML *xml) {
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget(xml, "toolbutton_switchimage");
 		gtk_widget_set_sensitive(widget, FALSE);
+
+		widget = glade_xml_get_widget(xml, "statusbar");
+		gtk_statusbar_pop(GTK_STATUSBAR(widget), 1);
+		gtk_statusbar_push(GTK_STATUSBAR(widget), 1, _("Ready"));
 	}
 	else {
 		for (i = 0; i < MAX_SLOTS; i++) {
@@ -140,6 +145,10 @@ void ResetMenuSlots(GladeXML *xml) {
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget(xml, "toolbutton_controllers");
 		gtk_widget_set_sensitive(widget, FALSE);
+
+		widget = glade_xml_get_widget(xml, "statusbar");
+		gtk_statusbar_pop(GTK_STATUSBAR(widget), 1);
+		gtk_statusbar_push(GTK_STATUSBAR(widget), 1, _("Emulation Paused."));
 	}
 }
 

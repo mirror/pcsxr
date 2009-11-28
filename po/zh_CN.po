@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-28 23:56+0800\n"
-"PO-Revision-Date: 2009-11-28 23:56+0700\n"
+"POT-Creation-Date: 2009-11-29 02:11+0800\n"
+"PO-Revision-Date: 2009-11-29 02:12+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -128,7 +128,7 @@ msgid "Add New Cheat"
 msgstr "添加新作弊码"
 
 #: ../win32/gui/CheatDlg.c:167
-#: ../data/pcsx.glade2:2642
+#: ../data/pcsx.glade2:2644
 msgid "Edit Cheat Codes"
 msgstr "编辑作弊码"
 
@@ -249,7 +249,7 @@ msgid "Founded Addresses: %d"
 msgstr "找到地址个数: %d"
 
 #: ../win32/gui/CheatDlg.c:505
-#: ../data/pcsx.glade2:3041
+#: ../data/pcsx.glade2:3043
 msgid "Freeze"
 msgstr "固定"
 
@@ -262,7 +262,7 @@ msgstr "地址:"
 #: ../win32/gui/CheatDlg.c:598
 #: ../win32/gui/CheatDlg.c:683
 #: ../gui/Cheat.c:648
-#: ../data/pcsx.glade2:2885
+#: ../data/pcsx.glade2:2887
 msgid "Value:"
 msgstr "值:"
 
@@ -272,33 +272,33 @@ msgid "Freeze %.8X"
 msgstr "固定 %.8X"
 
 #: ../win32/gui/CheatDlg.c:596
-#: ../data/pcsx.glade2:3077
+#: ../data/pcsx.glade2:3079
 msgid "Modify"
 msgstr "修改"
 
 #: ../win32/gui/CheatDlg.c:679
 #: ../gui/Cheat.c:1130
-#: ../data/pcsx.glade2:2813
+#: ../data/pcsx.glade2:2815
 msgid "Cheat Search"
 msgstr "查找作弊码"
 
 #: ../win32/gui/CheatDlg.c:681
-#: ../data/pcsx.glade2:2863
+#: ../data/pcsx.glade2:2865
 msgid "Search For:"
 msgstr "查找:"
 
 #: ../win32/gui/CheatDlg.c:682
-#: ../data/pcsx.glade2:2873
+#: ../data/pcsx.glade2:2875
 msgid "Data Type:"
 msgstr "数据类型:"
 
 #: ../win32/gui/CheatDlg.c:684
-#: ../data/pcsx.glade2:2897
+#: ../data/pcsx.glade2:2899
 msgid "Data Base:"
 msgstr "数据基:"
 
 #: ../win32/gui/CheatDlg.c:685
-#: ../data/pcsx.glade2:2957
+#: ../data/pcsx.glade2:2959
 msgid "To:"
 msgstr "到:"
 
@@ -688,15 +688,15 @@ msgstr "*PCSX*: Error Saving State %s"
 
 #: ../win32/gui/WndMain.c:426
 #: ../win32/gui/WndMain.c:475
-#: ../gui/Gtk2Gui.c:471
-#: ../gui/Gtk2Gui.c:596
+#: ../gui/Gtk2Gui.c:480
+#: ../gui/Gtk2Gui.c:605
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "此光盘不是一张合法的 PlayStation 光盘。"
 
 #: ../win32/gui/WndMain.c:432
 #: ../win32/gui/WndMain.c:481
-#: ../gui/Gtk2Gui.c:479
-#: ../gui/Gtk2Gui.c:604
+#: ../gui/Gtk2Gui.c:488
+#: ../gui/Gtk2Gui.c:613
 msgid "Could not load CD-ROM!"
 msgstr "无法加载光盘!"
 
@@ -834,7 +834,7 @@ msgid "Disable Cd audio"
 msgstr "禁用 CD 音频"
 
 #: ../win32/gui/WndMain.c:1206
-#: ../data/pcsx.glade2:1601
+#: ../data/pcsx.glade2:1603
 msgid "Autodetect"
 msgstr "自动检测"
 
@@ -843,12 +843,12 @@ msgid "Enable Interpreter Cpu"
 msgstr "启用解释执行 CPU"
 
 #: ../win32/gui/WndMain.c:1208
-#: ../data/pcsx.glade2:1457
+#: ../data/pcsx.glade2:1459
 msgid "Enable Console Output"
 msgstr "启用控制台输出"
 
 #: ../win32/gui/WndMain.c:1209
-#: ../data/pcsx.glade2:1407
+#: ../data/pcsx.glade2:1409
 msgid "Enable Debugger"
 msgstr "启用调试器"
 
@@ -857,12 +857,12 @@ msgid "Spu Irq Always Enabled"
 msgstr "SPU IRQ 总是启用"
 
 #: ../win32/gui/WndMain.c:1211
-#: ../data/pcsx.glade2:1544
+#: ../data/pcsx.glade2:1546
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr "Parasite Eve 2, Vandal Hearts 1/2 修正"
 
 #: ../win32/gui/WndMain.c:1212
-#: ../data/pcsx.glade2:1559
+#: ../data/pcsx.glade2:1561
 msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku 战斗修正"
 
@@ -903,8 +903,8 @@ msgstr "DataDeck 记忆卡 (*.ddl)"
 #: ../win32/gui/WndMain.c:1350
 #: ../win32/gui/WndMain.c:1431
 #: ../gui/Cheat.c:322
-#: ../gui/Gtk2Gui.c:408
-#: ../gui/Gtk2Gui.c:547
+#: ../gui/Gtk2Gui.c:417
+#: ../gui/Gtk2Gui.c:556
 msgid "All Files"
 msgstr "所有文件"
 
@@ -1116,7 +1116,7 @@ msgid "Search Results"
 msgstr "查找结果"
 
 #: ../gui/ConfDlg.c:112
-#: ../data/pcsx.glade2:762
+#: ../data/pcsx.glade2:764
 msgid "Configure PCSX"
 msgstr "配置 PCSX"
 
@@ -1148,74 +1148,82 @@ msgstr "无法打开 BIOS 目录: \"%s\"\n"
 msgid "Could not open directory: '%s'\n"
 msgstr "无法打开目录: \"%s\"\n"
 
-#: ../gui/Gtk2Gui.c:390
+#: ../gui/Gtk2Gui.c:110
+msgid "Ready"
+msgstr "就绪"
+
+#: ../gui/Gtk2Gui.c:151
+msgid "Emulation Paused."
+msgstr "模拟器已暂停。"
+
+#: ../gui/Gtk2Gui.c:399
 msgid "Select PSX EXE File"
 msgstr "选择 PSX EXE 文件"
 
-#: ../gui/Gtk2Gui.c:404
+#: ../gui/Gtk2Gui.c:413
 msgid "PlayStation Executable Files"
 msgstr "PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:440
+#: ../gui/Gtk2Gui.c:449
 msgid "Not a valid PSX file"
 msgstr "不是一个合法的 PSX 文件"
 
-#: ../gui/Gtk2Gui.c:440
+#: ../gui/Gtk2Gui.c:449
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "此文件不是一个合法的 PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:471
-#: ../gui/Gtk2Gui.c:596
+#: ../gui/Gtk2Gui.c:480
+#: ../gui/Gtk2Gui.c:605
 msgid "CD ROM failed"
 msgstr "CD-ROM 失败"
 
-#: ../gui/Gtk2Gui.c:479
-#: ../gui/Gtk2Gui.c:604
+#: ../gui/Gtk2Gui.c:488
+#: ../gui/Gtk2Gui.c:613
 msgid "The CD-ROM could not be loaded"
 msgstr "无法加载 CD-ROM"
 
-#: ../gui/Gtk2Gui.c:493
+#: ../gui/Gtk2Gui.c:502
 msgid "Could not run BIOS"
 msgstr "无法运行 BIOS"
 
-#: ../gui/Gtk2Gui.c:493
+#: ../gui/Gtk2Gui.c:502
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr "内部 HLE BIOS 不支持直接运行。"
 
-#: ../gui/Gtk2Gui.c:522
+#: ../gui/Gtk2Gui.c:531
 msgid "Open PSX Disc Image File"
 msgstr "打开 PSX 光盘镜像文件"
 
-#: ../gui/Gtk2Gui.c:542
+#: ../gui/Gtk2Gui.c:551
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr "PS 镜像文件 (*.bin, *.img, *.mdf, *.iso)"
 
-#: ../gui/Gtk2Gui.c:753
+#: ../gui/Gtk2Gui.c:762
 #, c-format
 msgid "Loaded state %s."
 msgstr "已读取存档 %s。"
 
-#: ../gui/Gtk2Gui.c:757
+#: ../gui/Gtk2Gui.c:766
 #, c-format
 msgid "Error loading state %s!"
 msgstr "读取存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:768
+#: ../gui/Gtk2Gui.c:777
 #, c-format
 msgid "Saved state %s."
 msgstr "已保存存档 %s"
 
-#: ../gui/Gtk2Gui.c:770
+#: ../gui/Gtk2Gui.c:779
 #, c-format
 msgid "Error saving state %s!"
 msgstr "保存存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:803
-#: ../gui/Gtk2Gui.c:830
+#: ../gui/Gtk2Gui.c:812
+#: ../gui/Gtk2Gui.c:839
 msgid "Select State File"
 msgstr "选择存档文件"
 
-#: ../gui/Gtk2Gui.c:887
+#: ../gui/Gtk2Gui.c:896
 msgid "Notice"
 msgstr "警告"
 
@@ -1316,7 +1324,7 @@ msgid "Memory Card Manager"
 msgstr "记忆卡管理器"
 
 #: ../gui/Plugin.c:204
-#: ../data/pcsx.glade2:1493
+#: ../data/pcsx.glade2:1495
 #, c-format
 msgid "SIO IRQ Always Enabled"
 msgstr "SIO IRQ 总是启用"
@@ -1819,244 +1827,244 @@ msgstr "模拟器(_E)"
 msgid "_Continue"
 msgstr "继续(_C)"
 
-#: ../data/pcsx.glade2:146
+#: ../data/pcsx.glade2:147
 msgid "_Reset"
 msgstr "复位(_R)"
 
-#: ../data/pcsx.glade2:167
+#: ../data/pcsx.glade2:169
 msgid "S_witch ISO..."
 msgstr "更换 ISO(_W)..."
 
-#: ../data/pcsx.glade2:189
+#: ../data/pcsx.glade2:191
 msgid "_Save State"
 msgstr "即时存档(_S)"
 
-#: ../data/pcsx.glade2:198
-#: ../data/pcsx.glade2:279
+#: ../data/pcsx.glade2:200
+#: ../data/pcsx.glade2:281
 msgid "Slot _1"
 msgstr "存档 _1"
 
-#: ../data/pcsx.glade2:207
-#: ../data/pcsx.glade2:288
+#: ../data/pcsx.glade2:209
+#: ../data/pcsx.glade2:290
 msgid "Slot _2"
 msgstr "存档 _2"
 
-#: ../data/pcsx.glade2:216
-#: ../data/pcsx.glade2:297
+#: ../data/pcsx.glade2:218
+#: ../data/pcsx.glade2:299
 msgid "Slot _3"
 msgstr "存档 _3"
 
-#: ../data/pcsx.glade2:225
-#: ../data/pcsx.glade2:306
+#: ../data/pcsx.glade2:227
+#: ../data/pcsx.glade2:308
 msgid "Slot _4"
 msgstr "存档 _4"
 
-#: ../data/pcsx.glade2:234
-#: ../data/pcsx.glade2:315
+#: ../data/pcsx.glade2:236
+#: ../data/pcsx.glade2:317
 msgid "Slot _5"
 msgstr "存档 _5"
 
-#: ../data/pcsx.glade2:242
-#: ../data/pcsx.glade2:323
+#: ../data/pcsx.glade2:244
+#: ../data/pcsx.glade2:325
 msgid "_Other..."
 msgstr "其它(_O)..."
 
-#: ../data/pcsx.glade2:270
+#: ../data/pcsx.glade2:272
 msgid "_Load State"
 msgstr "即时读档(_L)"
 
-#: ../data/pcsx.glade2:356
+#: ../data/pcsx.glade2:358
 msgid "_Configuration"
 msgstr "配置(_C)"
 
-#: ../data/pcsx.glade2:362
+#: ../data/pcsx.glade2:364
 msgid "_Plugins & BIOS..."
 msgstr "插件及 BIOS(_P)..."
 
-#: ../data/pcsx.glade2:384
+#: ../data/pcsx.glade2:386
 msgid "_Graphics..."
 msgstr "图像(_G)..."
 
-#: ../data/pcsx.glade2:399
+#: ../data/pcsx.glade2:401
 msgid "_Sound..."
 msgstr "声音(_S)..."
 
-#: ../data/pcsx.glade2:414
+#: ../data/pcsx.glade2:416
 msgid "CD-_ROM..."
 msgstr "CD-_ROM..."
 
-#: ../data/pcsx.glade2:429
+#: ../data/pcsx.glade2:431
 msgid "C_ontrollers..."
 msgstr "控制器(_O)..."
 
-#: ../data/pcsx.glade2:449
+#: ../data/pcsx.glade2:451
 msgid "_CPU..."
 msgstr "_CPU..."
 
-#: ../data/pcsx.glade2:465
+#: ../data/pcsx.glade2:467
 msgid "_Memory Cards..."
 msgstr "记忆卡(_M)..."
 
-#: ../data/pcsx.glade2:482
+#: ../data/pcsx.glade2:484
 msgid "_Netplay..."
 msgstr "联网游戏(_N)..."
 
-#: ../data/pcsx.glade2:503
+#: ../data/pcsx.glade2:505
 msgid "Chea_t"
 msgstr "作弊码(_T)"
 
-#: ../data/pcsx.glade2:512
+#: ../data/pcsx.glade2:514
 msgid "_Browse..."
 msgstr "浏览(_B)..."
 
-#: ../data/pcsx.glade2:527
+#: ../data/pcsx.glade2:529
 msgid "_Search..."
 msgstr "查找(_S)..."
 
-#: ../data/pcsx.glade2:558
+#: ../data/pcsx.glade2:560
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../data/pcsx.glade2:564
+#: ../data/pcsx.glade2:566
 msgid "_About PCSX..."
 msgstr "关于 PCSX(_A)..."
 
-#: ../data/pcsx.glade2:597
-#: ../data/pcsx.glade2:598
+#: ../data/pcsx.glade2:599
+#: ../data/pcsx.glade2:600
 msgid "Run CD"
 msgstr "运行光碟"
 
-#: ../data/pcsx.glade2:610
+#: ../data/pcsx.glade2:612
 msgid "Run ISO Image"
 msgstr "运行 ISO 光盘镜像"
 
-#: ../data/pcsx.glade2:611
+#: ../data/pcsx.glade2:613
 msgid "Run ISO..."
 msgstr "运行 ISO..."
 
-#: ../data/pcsx.glade2:632
+#: ../data/pcsx.glade2:634
 msgid "Continue Emulation"
 msgstr "继续模拟"
 
-#: ../data/pcsx.glade2:633
+#: ../data/pcsx.glade2:635
 msgid "Continue..."
 msgstr "继续..."
 
-#: ../data/pcsx.glade2:645
+#: ../data/pcsx.glade2:647
 msgid "Switch ISO Image"
 msgstr "更换 ISO 光盘镜像"
 
-#: ../data/pcsx.glade2:646
+#: ../data/pcsx.glade2:648
 msgid "Switch ISO..."
 msgstr "更换 ISO..."
 
-#: ../data/pcsx.glade2:667
-#: ../data/pcsx.glade2:1851
+#: ../data/pcsx.glade2:669
+#: ../data/pcsx.glade2:1853
 msgid "Configure Memory Cards"
 msgstr "配置记忆卡"
 
-#: ../data/pcsx.glade2:668
+#: ../data/pcsx.glade2:670
 msgid "Memcards..."
 msgstr "记忆卡..."
 
-#: ../data/pcsx.glade2:680
+#: ../data/pcsx.glade2:682
 msgid "Configure Graphics"
 msgstr "配置图像"
 
-#: ../data/pcsx.glade2:681
+#: ../data/pcsx.glade2:683
 msgid "Graphics..."
 msgstr "图像..."
 
-#: ../data/pcsx.glade2:693
+#: ../data/pcsx.glade2:695
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:8
 msgid "Configure Sound"
 msgstr "配置音频"
 
-#: ../data/pcsx.glade2:694
+#: ../data/pcsx.glade2:696
 msgid "Sound..."
 msgstr "声音..."
 
-#: ../data/pcsx.glade2:706
+#: ../data/pcsx.glade2:708
 msgid "Configure CD-ROM"
 msgstr "配置 CD-ROM"
 
-#: ../data/pcsx.glade2:707
+#: ../data/pcsx.glade2:709
 msgid "CD-ROM..."
 msgstr "CD-ROM..."
 
-#: ../data/pcsx.glade2:719
+#: ../data/pcsx.glade2:721
 msgid "Configure Controllers"
 msgstr "配置控制器"
 
-#: ../data/pcsx.glade2:720
+#: ../data/pcsx.glade2:722
 msgid "Controllers..."
 msgstr "控制器..."
 
-#: ../data/pcsx.glade2:865
+#: ../data/pcsx.glade2:867
 msgid "Select Folder to Search"
 msgstr "选择要查找的文件夹"
 
-#: ../data/pcsx.glade2:881
+#: ../data/pcsx.glade2:883
 msgid "Search in:"
 msgstr "在此处查找插件:"
 
-#: ../data/pcsx.glade2:1154
+#: ../data/pcsx.glade2:1156
 msgid "Graphics:"
 msgstr "图像:"
 
-#: ../data/pcsx.glade2:1167
+#: ../data/pcsx.glade2:1169
 msgid "Sound:"
 msgstr "声音:"
 
-#: ../data/pcsx.glade2:1182
+#: ../data/pcsx.glade2:1184
 msgid "Controller 1:   "
 msgstr "控制器 1:"
 
-#: ../data/pcsx.glade2:1197
+#: ../data/pcsx.glade2:1199
 msgid "Controller 2:"
 msgstr "控制器 2:"
 
-#: ../data/pcsx.glade2:1212
+#: ../data/pcsx.glade2:1214
 msgid "CD-ROM:"
 msgstr "CD-ROM:"
 
-#: ../data/pcsx.glade2:1250
+#: ../data/pcsx.glade2:1252
 msgid "<b>Plugins</b>"
 msgstr "<b>插件</b>"
 
-#: ../data/pcsx.glade2:1311
+#: ../data/pcsx.glade2:1313
 msgid "<b>BIOS</b>"
 msgstr "<b>BIOS</b>"
 
-#: ../data/pcsx.glade2:1378
+#: ../data/pcsx.glade2:1380
 msgid "Configure CPU"
 msgstr "配置 CPU"
 
-#: ../data/pcsx.glade2:1425
+#: ../data/pcsx.glade2:1427
 msgid "SPU IRQ Always Enabled"
 msgstr "SPU IRQ 总是启用"
 
-#: ../data/pcsx.glade2:1441
+#: ../data/pcsx.glade2:1443
 msgid "Black & White Movies"
 msgstr "黑白电影"
 
-#: ../data/pcsx.glade2:1475
+#: ../data/pcsx.glade2:1477
 msgid "Enable Interpreter CPU"
 msgstr "启用解释执行 CPU"
 
-#: ../data/pcsx.glade2:1509
+#: ../data/pcsx.glade2:1511
 msgid "Disable CD Audio"
 msgstr "禁用 CD 音频"
 
-#: ../data/pcsx.glade2:1525
+#: ../data/pcsx.glade2:1527
 msgid "Disable XA Decoding"
 msgstr "禁用 XA 解码"
 
-#: ../data/pcsx.glade2:1577
+#: ../data/pcsx.glade2:1579
 msgid "<b>Options</b>"
 msgstr "<b>选项</b>"
 
-#: ../data/pcsx.glade2:1618
+#: ../data/pcsx.glade2:1620
 msgid ""
 "NTSC\n"
 "PAL"
@@ -2064,48 +2072,48 @@ msgstr ""
 "NTSC\n"
 "PAL"
 
-#: ../data/pcsx.glade2:1632
+#: ../data/pcsx.glade2:1634
 msgid "<b>System Type</b>"
 msgstr "<b>系统类型</b>"
 
-#: ../data/pcsx.glade2:1696
+#: ../data/pcsx.glade2:1698
 msgid "Configure NetPlay"
 msgstr "配置联网游戏"
 
-#: ../data/pcsx.glade2:1784
+#: ../data/pcsx.glade2:1786
 msgid "<b>NetPlay</b>"
 msgstr "<b>联网游戏</b>"
 
-#: ../data/pcsx.glade2:1930
-#: ../data/pcsx.glade2:2328
+#: ../data/pcsx.glade2:1932
+#: ../data/pcsx.glade2:2330
 msgid "New"
 msgstr "新建"
 
-#: ../data/pcsx.glade2:1980
-#: ../data/pcsx.glade2:2378
+#: ../data/pcsx.glade2:1982
+#: ../data/pcsx.glade2:2380
 msgid "Format"
 msgstr "格式化"
 
-#: ../data/pcsx.glade2:2030
-#: ../data/pcsx.glade2:2428
+#: ../data/pcsx.glade2:2032
+#: ../data/pcsx.glade2:2430
 msgid "Un/Delete"
 msgstr "删除/恢复"
 
-#: ../data/pcsx.glade2:2123
+#: ../data/pcsx.glade2:2125
 msgid "<b>Memory Card 1</b>"
 msgstr "<b>记忆卡 1</b>"
 
-#: ../data/pcsx.glade2:2184
-#: ../data/pcsx.glade2:2234
-#: ../data/pcsx.glade2:3113
+#: ../data/pcsx.glade2:2186
+#: ../data/pcsx.glade2:2236
+#: ../data/pcsx.glade2:3115
 msgid "Copy"
 msgstr "复制"
 
-#: ../data/pcsx.glade2:2521
+#: ../data/pcsx.glade2:2523
 msgid "<b>Memory Card 2</b>"
 msgstr "<b>记忆卡 2</b>"
 
-#: ../data/pcsx.glade2:2584
+#: ../data/pcsx.glade2:2586
 msgid ""
 "(C) 1999-2003  PCSX Team\n"
 "(C) 2005-2006 Ryan Schultz\n"
@@ -2117,11 +2125,11 @@ msgstr ""
 "(C) 2005-2006 Andrew Burton\n"
 "(C) 2008-2009 Wei Mingzhi"
 
-#: ../data/pcsx.glade2:2588
+#: ../data/pcsx.glade2:2590
 msgid "A PlayStation emulator."
 msgstr "一个 PlayStation 模拟器。"
 
-#: ../data/pcsx.glade2:2591
+#: ../data/pcsx.glade2:2593
 msgid ""
 "This program is free software; you can redistribute it\n"
 "and/or modify it under the terms of the GNU General\n"
@@ -2155,15 +2163,15 @@ msgstr ""
 "Public License along with this program; if not, write to\n"
 "the Free Software Foundation, Inc."
 
-#: ../data/pcsx.glade2:2620
+#: ../data/pcsx.glade2:2622
 msgid "translator-credits"
 msgstr "Wei Mingzhi <whistler@openoffice.org>"
 
-#: ../data/pcsx.glade2:2682
+#: ../data/pcsx.glade2:2684
 msgid "<b>Cheat Codes</b>"
 msgstr "<b>作弊码</b>"
 
-#: ../data/pcsx.glade2:2848
+#: ../data/pcsx.glade2:2850
 msgid ""
 "8-bit\n"
 "16-bit\n"
@@ -2173,7 +2181,7 @@ msgstr ""
 "16 位\n"
 "32 位"
 
-#: ../data/pcsx.glade2:2911
+#: ../data/pcsx.glade2:2913
 msgid ""
 "Equal Value\n"
 "Not Equal Value\n"
@@ -2195,7 +2203,7 @@ msgstr ""
 "改变\n"
 "无改变"
 
-#: ../data/pcsx.glade2:2943
+#: ../data/pcsx.glade2:2945
 msgid ""
 "Decimal\n"
 "Hexadecimal"
@@ -2203,19 +2211,19 @@ msgstr ""
 "十进制\n"
 "十六进制"
 
-#: ../data/pcsx.glade2:3146
+#: ../data/pcsx.glade2:3148
 msgid "label_resultsfound"
 msgstr "label_resultsfound"
 
-#: ../data/pcsx.glade2:3181
+#: ../data/pcsx.glade2:3183
 msgid "Search"
 msgstr "查找"
 
-#: ../data/pcsx.glade2:3217
+#: ../data/pcsx.glade2:3219
 msgid "Restart"
 msgstr "复位"
 
-#: ../data/pcsx.glade2:3246
+#: ../data/pcsx.glade2:3248
 msgid "<b>Cheat Search</b>"
 msgstr "<b>作弊码查找</b>"
 
