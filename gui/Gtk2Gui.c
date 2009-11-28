@@ -99,6 +99,8 @@ void ResetMenuSlots(GladeXML *xml) {
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget(xml, "SwitchImage");
 		gtk_widget_set_sensitive(widget, FALSE);
+		widget = glade_xml_get_widget(xml, "toolbutton_run");
+		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget(xml, "toolbutton_switchimage");
 		gtk_widget_set_sensitive(widget, FALSE);
 	}
@@ -334,6 +336,10 @@ void StartGui() {
 	widget = glade_xml_get_widget(xml, "toolbutton_runimage");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 			GTK_SIGNAL_FUNC(OnFile_RunImage), NULL, NULL, G_CONNECT_AFTER);
+
+	widget = glade_xml_get_widget(xml, "toolbutton_run");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(OnEmu_Run), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "toolbutton_switchimage");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",

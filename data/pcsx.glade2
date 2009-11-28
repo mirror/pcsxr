@@ -627,6 +627,19 @@
               </packing>
             </child>
             <child>
+              <widget class="GtkToolButton" id="toolbutton_run">
+                <property name="visible">True</property>
+                <property name="tooltip" translatable="yes">Continue Emulation</property>
+                <property name="label" translatable="yes">Continue...</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-go-forward</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
               <widget class="GtkToolButton" id="toolbutton_switchimage">
                 <property name="visible">True</property>
                 <property name="tooltip" translatable="yes">Switch ISO Image</property>
