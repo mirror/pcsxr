@@ -13,6 +13,7 @@ pcsx_SOURCES = \
 	Plugin.c	\
 	Config.c	\
 	Gtk2Gui.c	\
+	MemcardDlg.c	\
 	Cheat.c
 
 pcsx_LDADD = \

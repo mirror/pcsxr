@@ -1741,6 +1741,56 @@ PAL</property>
                         <property name="border_width">5</property>
                         <property name="spacing">5</property>
                         <child>
+                          <widget class="GtkButton" id="GtkButton_New1">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="can_default">True</property>
+                            <property name="receives_default">False</property>
+                            <signal name="clicked" handler="OnMcd_Reload1"/>
+                            <child>
+                              <widget class="GtkAlignment" id="alignment1">
+                                <property name="visible">True</property>
+                                <property name="xscale">0</property>
+                                <property name="yscale">0</property>
+                                <child>
+                                  <widget class="GtkHBox" id="hbox57">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">2</property>
+                                    <child>
+                                      <widget class="GtkImage" id="image324">
+                                        <property name="visible">True</property>
+                                        <property name="stock">gtk-new</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <widget class="GtkLabel" id="label1">
+                                        <property name="visible">True</property>
+                                        <property name="label" translatable="yes">New</property>
+                                        <property name="use_underline">True</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </widget>
+                                </child>
+                              </widget>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
                           <widget class="GtkButton" id="GtkButton_Format1">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -1787,29 +1837,29 @@ PAL</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">0</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkButton" id="GtkButton_Reload1">
+                          <widget class="GtkButton" id="GtkButton_Delete1">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="can_default">True</property>
-                            <property name="receives_default">False</property>
-                            <signal name="clicked" handler="OnMcd_Reload1"/>
+                            <property name="receives_default">True</property>
+                            <signal name="clicked" handler="OnMcd_Delete1"/>
                             <child>
-                              <widget class="GtkAlignment" id="alignment1">
+                              <widget class="GtkAlignment" id="alignment45">
                                 <property name="visible">True</property>
                                 <property name="xscale">0</property>
                                 <property name="yscale">0</property>
                                 <child>
-                                  <widget class="GtkHBox" id="hbox57">
+                                  <widget class="GtkHBox" id="hbox63">
                                     <property name="visible">True</property>
                                     <property name="spacing">2</property>
                                     <child>
-                                      <widget class="GtkImage" id="image324">
+                                      <widget class="GtkImage" id="image330">
                                         <property name="visible">True</property>
-                                        <property name="stock">gtk-redo</property>
+                                        <property name="stock">gtk-delete</property>
                                       </widget>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1818,9 +1868,9 @@ PAL</property>
                                       </packing>
                                     </child>
                                     <child>
-                                      <widget class="GtkLabel" id="label1">
+                                      <widget class="GtkLabel" id="label105">
                                         <property name="visible">True</property>
-                                        <property name="label" translatable="yes">Reload</property>
+                                        <property name="label" translatable="yes">Un/Delete</property>
                                         <property name="use_underline">True</property>
                                       </widget>
                                       <packing>
@@ -1837,7 +1887,7 @@ PAL</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">1</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                       </widget>
@@ -1892,6 +1942,7 @@ PAL</property>
                 <child>
                   <widget class="GtkVButtonBox" id="vbuttonbox2">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <property name="layout_style">spread</property>
                     <child>
@@ -1994,106 +2045,6 @@ PAL</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
-                    <child>
-                      <widget class="GtkButton" id="GtkButton_Delete2">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="can_default">True</property>
-                        <property name="receives_default">False</property>
-                        <signal name="clicked" handler="OnMcd_Delete2"/>
-                        <child>
-                          <widget class="GtkAlignment" id="alignment44">
-                            <property name="visible">True</property>
-                            <property name="xscale">0</property>
-                            <property name="yscale">0</property>
-                            <child>
-                              <widget class="GtkHBox" id="hbox62">
-                                <property name="visible">True</property>
-                                <property name="spacing">2</property>
-                                <child>
-                                  <widget class="GtkImage" id="image329">
-                                    <property name="visible">True</property>
-                                    <property name="stock">gtk-go-forward</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <widget class="GtkLabel" id="label104">
-                                    <property name="visible">True</property>
-                                    <property name="label" translatable="yes">Un/Delete</property>
-                                    <property name="use_underline">True</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </widget>
-                            </child>
-                          </widget>
-                        </child>
-                      </widget>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkButton" id="GtkButton_Delete1">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="can_default">True</property>
-                        <property name="receives_default">False</property>
-                        <signal name="clicked" handler="OnMcd_Delete1"/>
-                        <child>
-                          <widget class="GtkAlignment" id="alignment45">
-                            <property name="visible">True</property>
-                            <property name="xscale">0</property>
-                            <property name="yscale">0</property>
-                            <child>
-                              <widget class="GtkHBox" id="hbox63">
-                                <property name="visible">True</property>
-                                <property name="spacing">2</property>
-                                <child>
-                                  <widget class="GtkImage" id="image330">
-                                    <property name="visible">True</property>
-                                    <property name="stock">gtk-go-back</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <widget class="GtkLabel" id="label105">
-                                    <property name="visible">True</property>
-                                    <property name="label" translatable="yes">Un/Delete</property>
-                                    <property name="use_underline">True</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </widget>
-                            </child>
-                          </widget>
-                        </child>
-                      </widget>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">3</property>
-                      </packing>
-                    </child>
                   </widget>
                 </child>
               </widget>
@@ -2138,6 +2089,56 @@ PAL</property>
                         <property name="visible">True</property>
                         <property name="border_width">5</property>
                         <property name="spacing">5</property>
+                        <child>
+                          <widget class="GtkButton" id="GtkButton_New2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="can_default">True</property>
+                            <property name="receives_default">False</property>
+                            <signal name="clicked" handler="OnMcd_Reload2"/>
+                            <child>
+                              <widget class="GtkAlignment" id="alignment48">
+                                <property name="visible">True</property>
+                                <property name="xscale">0</property>
+                                <property name="yscale">0</property>
+                                <child>
+                                  <widget class="GtkHBox" id="hbox66">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">2</property>
+                                    <child>
+                                      <widget class="GtkImage" id="image333">
+                                        <property name="visible">True</property>
+                                        <property name="stock">gtk-new</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <widget class="GtkLabel" id="label108">
+                                        <property name="visible">True</property>
+                                        <property name="label" translatable="yes">New</property>
+                                        <property name="use_underline">True</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </widget>
+                                </child>
+                              </widget>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
                         <child>
                           <widget class="GtkButton" id="GtkButton_Format2">
                             <property name="visible">True</property>
@@ -2185,29 +2186,29 @@ PAL</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">0</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkButton" id="GtkButton_Reload2">
+                          <widget class="GtkButton" id="GtkButton_Delete2">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="can_default">True</property>
-                            <property name="receives_default">False</property>
-                            <signal name="clicked" handler="OnMcd_Reload2"/>
+                            <property name="receives_default">True</property>
+                            <signal name="clicked" handler="OnMcd_Delete2"/>
                             <child>
-                              <widget class="GtkAlignment" id="alignment48">
+                              <widget class="GtkAlignment" id="alignment44">
                                 <property name="visible">True</property>
                                 <property name="xscale">0</property>
                                 <property name="yscale">0</property>
                                 <child>
-                                  <widget class="GtkHBox" id="hbox66">
+                                  <widget class="GtkHBox" id="hbox62">
                                     <property name="visible">True</property>
                                     <property name="spacing">2</property>
                                     <child>
-                                      <widget class="GtkImage" id="image333">
+                                      <widget class="GtkImage" id="image329">
                                         <property name="visible">True</property>
-                                        <property name="stock">gtk-redo</property>
+                                        <property name="stock">gtk-delete</property>
                                       </widget>
                                       <packing>
                                         <property name="expand">False</property>
@@ -2216,9 +2217,9 @@ PAL</property>
                                       </packing>
                                     </child>
                                     <child>
-                                      <widget class="GtkLabel" id="label108">
+                                      <widget class="GtkLabel" id="label104">
                                         <property name="visible">True</property>
-                                        <property name="label" translatable="yes">Reload</property>
+                                        <property name="label" translatable="yes">Un/Delete</property>
                                         <property name="use_underline">True</property>
                                       </widget>
                                       <packing>
@@ -2235,7 +2236,7 @@ PAL</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">1</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                       </widget>

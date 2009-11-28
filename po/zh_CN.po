@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-26 23:05+0800\n"
-"PO-Revision-Date: 2009-11-26 23:08+0700\n"
+"POT-Creation-Date: 2009-11-28 18:23+0800\n"
+"PO-Revision-Date: 2009-11-28 18:25+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -88,20 +88,20 @@ msgid "No"
 msgstr "否"
 
 #: ../win32/gui/CheatDlg.c:67
-#: ../gui/Cheat.c:193
+#: ../gui/Cheat.c:195
 msgid "Edit Cheat"
 msgstr "编辑作弊码"
 
 #: ../win32/gui/CheatDlg.c:68
 #: ../win32/gui/CheatDlg.c:118
-#: ../gui/Cheat.c:633
+#: ../gui/Cheat.c:637
 msgid "Description:"
 msgstr "描述:"
 
 #: ../win32/gui/CheatDlg.c:69
 #: ../win32/gui/CheatDlg.c:119
-#: ../gui/Cheat.c:125
-#: ../gui/Cheat.c:210
+#: ../gui/Cheat.c:126
+#: ../gui/Cheat.c:212
 msgid "Cheat Code:"
 msgstr "作弊码:"
 
@@ -117,18 +117,18 @@ msgstr "取消"
 
 #: ../win32/gui/CheatDlg.c:92
 #: ../win32/gui/CheatDlg.c:133
-#: ../gui/Cheat.c:155
-#: ../gui/Cheat.c:250
+#: ../gui/Cheat.c:156
+#: ../gui/Cheat.c:252
 msgid "Invalid cheat code!"
 msgstr "非法作弊码!"
 
 #: ../win32/gui/CheatDlg.c:117
-#: ../gui/Cheat.c:109
+#: ../gui/Cheat.c:110
 msgid "Add New Cheat"
 msgstr "添加新作弊码"
 
 #: ../win32/gui/CheatDlg.c:167
-#: ../data/pcsx.glade2:2401
+#: ../data/pcsx.glade2:2402
 msgid "Edit Cheat Codes"
 msgstr "编辑作弊码"
 
@@ -161,7 +161,7 @@ msgid "&Close"
 msgstr "关闭(&C)"
 
 #: ../win32/gui/CheatDlg.c:186
-#: ../gui/Cheat.c:411
+#: ../gui/Cheat.c:414
 msgid "Description"
 msgstr "描述"
 
@@ -211,7 +211,7 @@ msgid "No Change"
 msgstr "无改变"
 
 #: ../win32/gui/CheatDlg.c:449
-#: ../gui/Cheat.c:583
+#: ../gui/Cheat.c:586
 msgid "Enter the values and start your search."
 msgstr "输入数值并开始查找。"
 
@@ -220,36 +220,36 @@ msgid "No addresses found."
 msgstr "未找到地址。"
 
 #: ../win32/gui/CheatDlg.c:458
-#: ../gui/Cheat.c:541
+#: ../gui/Cheat.c:544
 msgid "Too many addresses found."
 msgstr "找到过多的地址。"
 
 #: ../win32/gui/CheatDlg.c:467
-#: ../gui/Cheat.c:550
+#: ../gui/Cheat.c:553
 #, c-format
 msgid "%.8X    Current: %u (%.2X), Previous: %u (%.2X)"
 msgstr "%.8X    当前值: %u (%.2X), 前次值: %u (%.2X)"
 
 #: ../win32/gui/CheatDlg.c:472
-#: ../gui/Cheat.c:555
+#: ../gui/Cheat.c:558
 #, c-format
 msgid "%.8X    Current: %u (%.4X), Previous: %u (%.4X)"
 msgstr "%.8X    当前值: %u (%.4X), 前次值: %u (%.4X)"
 
 #: ../win32/gui/CheatDlg.c:477
-#: ../gui/Cheat.c:560
+#: ../gui/Cheat.c:563
 #, c-format
 msgid "%.8X    Current: %u (%.8X), Previous: %u (%.8X)"
 msgstr "%.8X    当前值: %u (%.8X), 前次值: %u (%.8X)"
 
 #: ../win32/gui/CheatDlg.c:493
-#: ../gui/Cheat.c:575
+#: ../gui/Cheat.c:578
 #, c-format
 msgid "Founded Addresses: %d"
 msgstr "找到地址个数: %d"
 
 #: ../win32/gui/CheatDlg.c:505
-#: ../data/pcsx.glade2:2800
+#: ../data/pcsx.glade2:2801
 msgid "Freeze"
 msgstr "固定"
 
@@ -261,8 +261,8 @@ msgstr "地址:"
 #: ../win32/gui/CheatDlg.c:507
 #: ../win32/gui/CheatDlg.c:598
 #: ../win32/gui/CheatDlg.c:683
-#: ../gui/Cheat.c:644
-#: ../data/pcsx.glade2:2644
+#: ../gui/Cheat.c:648
+#: ../data/pcsx.glade2:2645
 msgid "Value:"
 msgstr "值:"
 
@@ -272,33 +272,33 @@ msgid "Freeze %.8X"
 msgstr "固定 %.8X"
 
 #: ../win32/gui/CheatDlg.c:596
-#: ../data/pcsx.glade2:2836
+#: ../data/pcsx.glade2:2837
 msgid "Modify"
 msgstr "修改"
 
 #: ../win32/gui/CheatDlg.c:679
-#: ../gui/Cheat.c:1126
-#: ../data/pcsx.glade2:2572
+#: ../gui/Cheat.c:1130
+#: ../data/pcsx.glade2:2573
 msgid "Cheat Search"
 msgstr "查找作弊码"
 
 #: ../win32/gui/CheatDlg.c:681
-#: ../data/pcsx.glade2:2622
+#: ../data/pcsx.glade2:2623
 msgid "Search For:"
 msgstr "查找:"
 
 #: ../win32/gui/CheatDlg.c:682
-#: ../data/pcsx.glade2:2632
+#: ../data/pcsx.glade2:2633
 msgid "Data Type:"
 msgstr "数据类型:"
 
 #: ../win32/gui/CheatDlg.c:684
-#: ../data/pcsx.glade2:2656
+#: ../data/pcsx.glade2:2657
 msgid "Data Base:"
 msgstr "数据基:"
 
 #: ../win32/gui/CheatDlg.c:685
-#: ../data/pcsx.glade2:2716
+#: ../data/pcsx.glade2:2717
 msgid "To:"
 msgstr "到:"
 
@@ -347,7 +347,7 @@ msgid "Hexadecimal"
 msgstr "十六进制"
 
 #: ../win32/gui/ConfigurePlugins.c:206
-#: ../gui/Gtk2Gui.c:2228
+#: ../gui/Gtk2Gui.c:1665
 msgid "Internal HLE Bios"
 msgstr "内部 HLE-Bios"
 
@@ -356,9 +356,9 @@ msgid "Configuration not OK!"
 msgstr "配置不正确!"
 
 #: ../win32/gui/ConfigurePlugins.c:292
-#: ../gui/Cheat.c:155
-#: ../gui/Cheat.c:250
-#: ../gui/LnxMain.c:405
+#: ../gui/Cheat.c:156
+#: ../gui/Cheat.c:252
+#: ../gui/LnxMain.c:407
 msgid "Error"
 msgstr "错误"
 
@@ -688,15 +688,15 @@ msgstr "*PCSX*: Error Saving State %s"
 
 #: ../win32/gui/WndMain.c:426
 #: ../win32/gui/WndMain.c:475
-#: ../gui/Gtk2Gui.c:575
-#: ../gui/Gtk2Gui.c:700
+#: ../gui/Gtk2Gui.c:573
+#: ../gui/Gtk2Gui.c:698
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "此光盘不是一张合法的 PlayStation 光盘。"
 
 #: ../win32/gui/WndMain.c:432
 #: ../win32/gui/WndMain.c:481
-#: ../gui/Gtk2Gui.c:583
-#: ../gui/Gtk2Gui.c:708
+#: ../gui/Gtk2Gui.c:581
+#: ../gui/Gtk2Gui.c:706
 msgid "Could not load CD-ROM!"
 msgstr "无法加载光盘!"
 
@@ -705,12 +705,12 @@ msgid "Running BIOS is not supported with Internal HLE Bios."
 msgstr "内部 HLE BIOS 不支持直接运行。"
 
 #: ../win32/gui/WndMain.c:661
-#: ../gui/Gtk2Gui.c:1068
+#: ../gui/MemcardDlg.c:59
 msgid "Title"
 msgstr "标题"
 
 #: ../win32/gui/WndMain.c:667
-#: ../gui/Gtk2Gui.c:1074
+#: ../gui/MemcardDlg.c:65
 msgid "Status"
 msgstr "状态"
 
@@ -731,19 +731,23 @@ msgid "terminiting link block"
 msgstr "terminiting link block"
 
 #: ../win32/gui/WndMain.c:864
-#: ../gui/Gtk2Gui.c:1148
+#: ../gui/MemcardDlg.c:173
+#: ../gui/MemcardDlg.c:243
 msgid "Deleted"
 msgstr "已删除"
 
 #: ../win32/gui/WndMain.c:865
 #: ../win32/gui/WndMain.c:868
-#: ../gui/Gtk2Gui.c:1150
-#: ../gui/Gtk2Gui.c:1154
+#: ../gui/MemcardDlg.c:175
+#: ../gui/MemcardDlg.c:179
+#: ../gui/MemcardDlg.c:245
+#: ../gui/MemcardDlg.c:249
 msgid "Free"
 msgstr "空闲"
 
 #: ../win32/gui/WndMain.c:867
-#: ../gui/Gtk2Gui.c:1152
+#: ../gui/MemcardDlg.c:177
+#: ../gui/MemcardDlg.c:247
 msgid "Used"
 msgstr "已使用"
 
@@ -898,9 +902,9 @@ msgstr "DataDeck 记忆卡 (*.ddl)"
 
 #: ../win32/gui/WndMain.c:1350
 #: ../win32/gui/WndMain.c:1431
-#: ../gui/Cheat.c:319
-#: ../gui/Gtk2Gui.c:512
-#: ../gui/Gtk2Gui.c:651
+#: ../gui/Cheat.c:322
+#: ../gui/Gtk2Gui.c:510
+#: ../gui/Gtk2Gui.c:649
 msgid "All Files"
 msgstr "所有文件"
 
@@ -1058,200 +1062,168 @@ msgstr "PCSX 消息"
 msgid "Error Loading Symbol"
 msgstr "无法加载符号"
 
-#: ../gui/Cheat.c:117
-#: ../gui/Cheat.c:201
+#: ../gui/Cheat.c:118
+#: ../gui/Cheat.c:203
 msgid "Cheat Description:"
 msgstr "作弊码描述:"
 
-#: ../gui/Cheat.c:304
+#: ../gui/Cheat.c:307
 msgid "Open Cheat File"
 msgstr "打开作弊码文件"
 
-#: ../gui/Cheat.c:314
-#: ../gui/Cheat.c:354
+#: ../gui/Cheat.c:317
+#: ../gui/Cheat.c:357
 msgid "PCSX Cheat Code Files (*.cht)"
 msgstr "PCSX 作弊码文件 (*.cht)"
 
-#: ../gui/Cheat.c:344
+#: ../gui/Cheat.c:347
 msgid "Save Cheat File"
 msgstr "保存作弊码文件"
 
-#: ../gui/Cheat.c:359
+#: ../gui/Cheat.c:362
 msgid "All Files (*.*)"
 msgstr "所有文件 (*.*)"
 
-#: ../gui/Cheat.c:392
-#: ../gui/Cheat.c:1121
-#: ../gui/Gtk2Gui.c:400
-#: ../gui/Gtk2Gui.c:1020
+#: ../gui/Cheat.c:395
+#: ../gui/Cheat.c:1125
+#: ../gui/Gtk2Gui.c:398
+#: ../gui/Gtk2Gui.c:1018
 msgid "Error: Glade interface could not be loaded!"
 msgstr "错误：无法加载 Glade 界面!"
 
-#: ../gui/Cheat.c:397
+#: ../gui/Cheat.c:400
 msgid "Cheat Codes"
 msgstr "作弊码"
 
-#: ../gui/Cheat.c:403
+#: ../gui/Cheat.c:406
 msgid "Enable"
 msgstr "启用"
 
-#: ../gui/Cheat.c:627
+#: ../gui/Cheat.c:631
 msgid "Freeze value"
 msgstr "固定数值"
 
-#: ../gui/Cheat.c:726
+#: ../gui/Cheat.c:730
 msgid "Modify value"
 msgstr "修改数值"
 
-#: ../gui/Cheat.c:734
+#: ../gui/Cheat.c:738
 msgid "New value:"
 msgstr "新值:"
 
-#: ../gui/Cheat.c:1131
+#: ../gui/Cheat.c:1135
 msgid "Search Results"
 msgstr "查找结果"
 
-#: ../gui/Gtk2Gui.c:408
+#: ../gui/Gtk2Gui.c:406
 #: ../data/pcsx.glade2:605
 msgid "Configure PCSX"
 msgstr "配置 PCSX"
 
-#: ../gui/Gtk2Gui.c:494
+#: ../gui/Gtk2Gui.c:492
 msgid "Select PSX EXE File"
 msgstr "选择 PSX EXE 文件"
 
-#: ../gui/Gtk2Gui.c:508
+#: ../gui/Gtk2Gui.c:506
 msgid "PlayStation Executable Files"
 msgstr "PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:544
+#: ../gui/Gtk2Gui.c:542
 msgid "Not a valid PSX file"
 msgstr "不是一个合法的 PSX 文件"
 
-#: ../gui/Gtk2Gui.c:544
+#: ../gui/Gtk2Gui.c:542
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "此文件不是一个合法的 PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:575
-#: ../gui/Gtk2Gui.c:700
+#: ../gui/Gtk2Gui.c:573
+#: ../gui/Gtk2Gui.c:698
 msgid "CD ROM failed"
 msgstr "CD-ROM 失败"
 
-#: ../gui/Gtk2Gui.c:583
+#: ../gui/Gtk2Gui.c:581
 msgid "The CD ROM could not be loaded"
 msgstr "无法加载 CD-ROM"
 
-#: ../gui/Gtk2Gui.c:597
+#: ../gui/Gtk2Gui.c:595
 msgid "Could not run BIOS"
 msgstr "无法运行 BIOS"
 
-#: ../gui/Gtk2Gui.c:597
+#: ../gui/Gtk2Gui.c:595
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr "内部 HLE BIOS 不支持直接运行。"
 
-#: ../gui/Gtk2Gui.c:626
+#: ../gui/Gtk2Gui.c:624
 msgid "Open PSX Disc Image File"
 msgstr "打开 PSX 光盘镜像文件"
 
-#: ../gui/Gtk2Gui.c:646
+#: ../gui/Gtk2Gui.c:644
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr "PS 镜像文件 (*.bin, *.img, *.mdf, *.iso)"
 
-#: ../gui/Gtk2Gui.c:880
+#: ../gui/Gtk2Gui.c:878
 #, c-format
 msgid "Loaded state %s."
 msgstr "已读取存档 %s。"
 
-#: ../gui/Gtk2Gui.c:884
+#: ../gui/Gtk2Gui.c:882
 #, c-format
 msgid "Error loading state %s!"
 msgstr "读取存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:895
+#: ../gui/Gtk2Gui.c:893
 #, c-format
 msgid "Saved state %s."
 msgstr "已保存存档 %s"
 
-#: ../gui/Gtk2Gui.c:897
+#: ../gui/Gtk2Gui.c:895
 #, c-format
 msgid "Error saving state %s!"
 msgstr "保存存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:931
-#: ../gui/Gtk2Gui.c:958
+#: ../gui/Gtk2Gui.c:929
+#: ../gui/Gtk2Gui.c:956
 msgid "Select State File"
 msgstr "选择存档文件"
 
-#: ../gui/Gtk2Gui.c:1062
-msgid "Icon"
-msgstr "图标"
-
-#: ../gui/Gtk2Gui.c:1080
-msgid "ID"
-msgstr "ID"
-
-#: ../gui/Gtk2Gui.c:1086
-msgid "Name"
-msgstr "名称"
-
-#: ../gui/Gtk2Gui.c:1246
-msgid "Format this Memory Card?"
-msgstr "格式化此记忆卡?"
-
-#: ../gui/Gtk2Gui.c:1248
-msgid "If you format the memory card, the card will be empty, and any existing data overwritten."
-msgstr "如果您选择格式化记忆卡，记忆卡将被清空，并且任何现有数据都将被覆盖。"
-
-#: ../gui/Gtk2Gui.c:1251
-msgid "Format card"
-msgstr "格式化记忆卡"
-
-#: ../gui/Gtk2Gui.c:1366
-msgid "No space available in the target memory card!"
-msgstr "目标记忆卡没有空余位置!"
-
-#: ../gui/Gtk2Gui.c:1508
-#: ../gui/Gtk2Gui.c:1529
-#: ../gui/Gtk2Gui.c:1550
-#: ../gui/Gtk2Gui.c:1571
-#: ../gui/Gtk2Gui.c:1880
+#: ../gui/Gtk2Gui.c:1055
+#: ../gui/Gtk2Gui.c:1076
+#: ../gui/Gtk2Gui.c:1097
+#: ../gui/Gtk2Gui.c:1118
+#: ../gui/Gtk2Gui.c:1317
 msgid "No configuration required"
 msgstr "不需要配置"
 
-#: ../gui/Gtk2Gui.c:1508
-#: ../gui/Gtk2Gui.c:1529
-#: ../gui/Gtk2Gui.c:1550
-#: ../gui/Gtk2Gui.c:1571
-#: ../gui/Gtk2Gui.c:1880
+#: ../gui/Gtk2Gui.c:1055
+#: ../gui/Gtk2Gui.c:1076
+#: ../gui/Gtk2Gui.c:1097
+#: ../gui/Gtk2Gui.c:1118
+#: ../gui/Gtk2Gui.c:1317
 msgid "This plugin doesn't need to be configured."
 msgstr "此插件需要被配置。"
 
-#: ../gui/Gtk2Gui.c:1608
-msgid "Memory Card Manager"
-msgstr "记忆卡管理器"
-
-#: ../gui/Gtk2Gui.c:2134
+#: ../gui/Gtk2Gui.c:1571
 #, c-format
 msgid "Could not open BIOS directory: '%s'\n"
 msgstr "无法打开 BIOS 目录: \"%s\"\n"
 
-#: ../gui/Gtk2Gui.c:2164
-#: ../gui/Gtk2Gui.c:2257
-#: ../gui/LnxMain.c:170
+#: ../gui/Gtk2Gui.c:1601
+#: ../gui/Gtk2Gui.c:1694
+#: ../gui/LnxMain.c:172
 #, c-format
 msgid "Could not open directory: '%s'\n"
 msgstr "无法打开目录: \"%s\"\n"
 
-#: ../gui/Gtk2Gui.c:2318
+#: ../gui/Gtk2Gui.c:1755
 msgid "Notice"
 msgstr "警告"
 
-#: ../gui/LnxMain.c:65
+#: ../gui/LnxMain.c:67
 #, c-format
 msgid "Creating memory card: %s\n"
 msgstr "建立记忆卡: %s\n"
 
-#: ../gui/LnxMain.c:312
+#: ../gui/LnxMain.c:314
 msgid ""
 " pcsx [options] [file]\n"
 "\toptions:\n"
@@ -1275,24 +1247,60 @@ msgstr ""
 "\t-h -help\t显示此信息\n"
 "\t文件\t\t加载文件\n"
 
-#: ../gui/LnxMain.c:350
+#: ../gui/LnxMain.c:352
 #, c-format
 msgid "PCSX cannot be configured without using the GUI -- you should restart without -nogui.\n"
 msgstr "PCSX 不能在字符界面下配置 -- 请不使用 -nogui 参数重新启动程序\n"
 
-#: ../gui/LnxMain.c:405
+#: ../gui/LnxMain.c:407
 msgid "Failed loading plugins!"
 msgstr "加载插件失败!"
 
-#: ../gui/LnxMain.c:422
+#: ../gui/LnxMain.c:424
 #, c-format
 msgid "Could not load CD-ROM!\n"
 msgstr "无法加载光盘。\n"
 
-#: ../gui/LnxMain.c:461
+#: ../gui/LnxMain.c:463
 #, c-format
 msgid "PSX emulator couldn't be initialized.\n"
 msgstr "无法初始化 PSX 模拟器。\n"
+
+#: ../gui/MemcardDlg.c:53
+msgid "Icon"
+msgstr "图标"
+
+#: ../gui/MemcardDlg.c:71
+msgid "ID"
+msgstr "ID"
+
+#: ../gui/MemcardDlg.c:77
+msgid "Name"
+msgstr "名称"
+
+#: ../gui/MemcardDlg.c:333
+msgid "Format this Memory Card?"
+msgstr "格式化此记忆卡?"
+
+#: ../gui/MemcardDlg.c:335
+msgid "If you format the memory card, the card will be empty, and any existing data overwritten."
+msgstr "如果您选择格式化记忆卡，记忆卡将被清空，并且任何现有数据都将被覆盖。"
+
+#: ../gui/MemcardDlg.c:338
+msgid "Format card"
+msgstr "格式化记忆卡"
+
+#: ../gui/MemcardDlg.c:441
+msgid "No free space on memory card"
+msgstr "记忆卡无空余位置"
+
+#: ../gui/MemcardDlg.c:442
+msgid "There are no free slots available on the target memory card. Please delete a slot first."
+msgstr "目标记忆卡上无空余位置。请先删除一个存档。"
+
+#: ../gui/MemcardDlg.c:597
+msgid "Memory Card Manager"
+msgstr "记忆卡管理器"
 
 #: ../gui/Plugin.c:204
 #: ../data/pcsx.glade2:1336
@@ -1989,35 +1997,35 @@ msgid "Configure Memory Cards"
 msgstr "配置记忆卡"
 
 #: ../data/pcsx.glade2:1773
-#: ../data/pcsx.glade2:2171
+#: ../data/pcsx.glade2:2122
+msgid "New"
+msgstr "新建"
+
+#: ../data/pcsx.glade2:1823
+#: ../data/pcsx.glade2:2172
 msgid "Format"
 msgstr "格式化"
 
-#: ../data/pcsx.glade2:1823
-#: ../data/pcsx.glade2:2221
-msgid "Reload"
-msgstr "重新加载"
-
-#: ../data/pcsx.glade2:1867
-msgid "<b>Memory Card 1</b>"
-msgstr "<b>记忆卡 1</b>"
-
-#: ../data/pcsx.glade2:1927
-#: ../data/pcsx.glade2:1977
-#: ../data/pcsx.glade2:2872
-msgid "Copy"
-msgstr "复制"
-
-#: ../data/pcsx.glade2:2027
-#: ../data/pcsx.glade2:2077
+#: ../data/pcsx.glade2:1873
+#: ../data/pcsx.glade2:2222
 msgid "Un/Delete"
 msgstr "删除/恢复"
 
-#: ../data/pcsx.glade2:2265
+#: ../data/pcsx.glade2:1917
+msgid "<b>Memory Card 1</b>"
+msgstr "<b>记忆卡 1</b>"
+
+#: ../data/pcsx.glade2:1978
+#: ../data/pcsx.glade2:2028
+#: ../data/pcsx.glade2:2873
+msgid "Copy"
+msgstr "复制"
+
+#: ../data/pcsx.glade2:2266
 msgid "<b>Memory Card 2</b>"
 msgstr "<b>记忆卡 2</b>"
 
-#: ../data/pcsx.glade2:2343
+#: ../data/pcsx.glade2:2344
 msgid ""
 "(C) 1999-2003  PCSX Team\n"
 "(C) 2005-2006 Ryan Schultz\n"
@@ -2029,11 +2037,11 @@ msgstr ""
 "(C) 2005-2006 Andrew Burton\n"
 "(C) 2008-2009 Wei Mingzhi"
 
-#: ../data/pcsx.glade2:2347
+#: ../data/pcsx.glade2:2348
 msgid "A PlayStation emulator."
 msgstr "一个 PlayStation 模拟器。"
 
-#: ../data/pcsx.glade2:2350
+#: ../data/pcsx.glade2:2351
 msgid ""
 "This program is free software; you can redistribute it\n"
 "and/or modify it under the terms of the GNU General\n"
@@ -2067,15 +2075,15 @@ msgstr ""
 "Public License along with this program; if not, write to\n"
 "the Free Software Foundation, Inc."
 
-#: ../data/pcsx.glade2:2379
+#: ../data/pcsx.glade2:2380
 msgid "translator-credits"
 msgstr "Wei Mingzhi <whistler@openoffice.org>"
 
-#: ../data/pcsx.glade2:2441
+#: ../data/pcsx.glade2:2442
 msgid "<b>Cheat Codes</b>"
 msgstr "<b>作弊码</b>"
 
-#: ../data/pcsx.glade2:2607
+#: ../data/pcsx.glade2:2608
 msgid ""
 "8-bit\n"
 "16-bit\n"
@@ -2085,7 +2093,7 @@ msgstr ""
 "16 位\n"
 "32 位"
 
-#: ../data/pcsx.glade2:2670
+#: ../data/pcsx.glade2:2671
 msgid ""
 "Equal Value\n"
 "Not Equal Value\n"
@@ -2107,7 +2115,7 @@ msgstr ""
 "改变\n"
 "无改变"
 
-#: ../data/pcsx.glade2:2702
+#: ../data/pcsx.glade2:2703
 msgid ""
 "Decimal\n"
 "Hexadecimal"
@@ -2115,19 +2123,19 @@ msgstr ""
 "十进制\n"
 "十六进制"
 
-#: ../data/pcsx.glade2:2905
+#: ../data/pcsx.glade2:2906
 msgid "label_resultsfound"
 msgstr "label_resultsfound"
 
-#: ../data/pcsx.glade2:2940
+#: ../data/pcsx.glade2:2941
 msgid "Search"
 msgstr "查找"
 
-#: ../data/pcsx.glade2:2976
+#: ../data/pcsx.glade2:2977
 msgid "Restart"
 msgstr "复位"
 
-#: ../data/pcsx.glade2:3005
+#: ../data/pcsx.glade2:3006
 msgid "<b>Cheat Search</b>"
 msgstr "<b>作弊码查找</b>"
 
@@ -2245,7 +2253,7 @@ msgstr "单声道"
 msgid "Play only one channel for a performance boost."
 msgstr "仅播放一个声道以提升性能。"
 
-#: ../plugins/dfcdrom/cdr-linux.c:48
+#: ../plugins/dfcdrom/cdr-linux.c:60
 msgid "CD-ROM Drive Reader"
 msgstr "CD-ROM 设备读取插件"
 
@@ -2253,7 +2261,7 @@ msgstr "CD-ROM 设备读取插件"
 msgid "CDR NULL Plugin"
 msgstr "CDR 空插件"
 
-#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:166
+#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:175
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:8
 msgid "CDR configuration"
 msgstr "CDR 配置"

@@ -85,6 +85,7 @@ static void CheatList_TreeSelectionChanged(GtkTreeSelection *selection, gpointer
 	if (selected) {
 		path = gtk_tree_model_get_path(model, &iter);
 		i = *gtk_tree_path_get_indices(path);
+		gtk_tree_path_free(path);
 
 		// If a row was selected, and the row is not blank, we can now enable
 		// some of the disabled widgets
@@ -189,6 +190,7 @@ static void OnCheatListDlg_EditClicked(GtkWidget *widget, gpointer user_data) {
 
 	path = gtk_tree_model_get_path(model, &iter);
 	index = *gtk_tree_path_get_indices(path);
+	gtk_tree_path_free(path);
 
 	dlg = gtk_dialog_new_with_buttons(_("Edit Cheat"), GTK_WINDOW(CheatListDlg),
 		GTK_DIALOG_MODAL, GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
@@ -277,6 +279,7 @@ static void OnCheatListDlg_DelClicked(GtkWidget *widget, gpointer user_data) {
 	if (selected) {
 		path = gtk_tree_model_get_path(model, &iter);
 		i = *gtk_tree_path_get_indices(path);
+		gtk_tree_path_free(path);
 
 		RemoveCheat(i);
 	}
@@ -610,6 +613,7 @@ static int GetSelectedResultIndex() {
 
 	path = gtk_tree_model_get_path(model, &iter);
 	i = *gtk_tree_path_get_indices(path);
+	gtk_tree_path_free(path);
 
 	assert(i < NumSearchResults);
 	return i;
