@@ -345,7 +345,7 @@ static void OnMcd_New(GtkWidget *widget, gpointer user_data) {
 	// Card should be put into $HOME/.pcsx/memcards
 	path = g_build_filename(g_get_home_dir(), ".pcsx", "memcards", NULL);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(chooser), path);
-	gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(chooser), "new.mcd");
+	gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(chooser), _("New Memory Card.mcd"));
 	gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(chooser), TRUE);
 
 	if (gtk_dialog_run(GTK_DIALOG(chooser)) == GTK_RESPONSE_OK) {
@@ -362,8 +362,8 @@ static void OnMcd_New(GtkWidget *widget, gpointer user_data) {
 		// Set the name on the FileChooserButton - this will trigger the
 		// callback to load the card and update the dialog
 		widget_name = g_strdup_printf("GtkMcd%dFSButton", (int)user_data);
-
 		xml = glade_get_widget_tree(widget);
+
 		gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(glade_xml_get_widget(xml, widget_name)), name);
 
 		g_free(widget_name);	
