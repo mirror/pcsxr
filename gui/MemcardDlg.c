@@ -116,32 +116,6 @@ static GdkPixbuf *SetIcon(GtkWidget *dialog, short *icon, int i) {
 										0, 0, 0, 0, -1, -1);
 }
 
-static int GetSelection(int memcard) {
-	GtkTreeIter iter;
-	GtkTreeModel *model;
-	GtkTreePath *path;
-	GtkTreeSelection *selection;
-	int r;
-
-	gboolean selected;
-
-	if (memcard == 1)
-		selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GtkCList_McdList1));
-	else
-		selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GtkCList_McdList2));
-
-	selected = gtk_tree_selection_get_selected(selection, &model, &iter);
-
-	if (selected) {
-		path = gtk_tree_model_get_path(model, &iter);
-		r = *gtk_tree_path_get_indices(path);
-		gtk_tree_path_free(path);
-		return r;
-	}
-
-	return -1;
-}
-
 static void LoadListItems(int mcd, GtkWidget *widget) {
 	int i;
 	GladeXML *xml;
@@ -624,7 +598,6 @@ void OnConf_Mcds() {
 	GtkWidget *widget;
 	GtkTreeSelection *treesel1, *treesel2;
 	gchar *str;
-	int i;
 
 	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "McdsDlg", NULL);
 
