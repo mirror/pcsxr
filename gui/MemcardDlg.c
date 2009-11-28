@@ -569,7 +569,7 @@ static void OnTreeSelectionChanged(GtkTreeSelection *selection, gpointer user_da
 		} else {
 			GetMcdBlockInfo(2, i + 1, &b);
 
-			if ((b.Flags >= 0xA0 && b.Flags <= 0xA3) || ((b.Flags & 0xF0) == 0x50)) {
+			if ((b.Flags >= 0xA1 && b.Flags <= 0xA3) || ((b.Flags & 0xF0) == 0x50)) {
 				gtk_widget_set_sensitive(glade_xml_get_widget(xml, "GtkButton_Delete2"), TRUE);
 			} else {
 				gtk_widget_set_sensitive(glade_xml_get_widget(xml, "GtkButton_Delete2"), FALSE);
