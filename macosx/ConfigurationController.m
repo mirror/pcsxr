@@ -59,8 +59,6 @@
 			[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithCString:mcd] forKey:@"Mcd1"];
 		else
 			[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithCString:mcd] forKey:@"Mcd2"];
-
-		LoadMcds(Config.Mcd1, Config.Mcd2);
     }
 }
 
@@ -88,7 +86,6 @@
 			[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithCString:mcd] forKey:@"Mcd2"];
 
 		CreateMcd(mcd);
-		LoadMcds(Config.Mcd1, Config.Mcd2);
     }
 }
 
