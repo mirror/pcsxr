@@ -301,6 +301,7 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = HIDInput;
 				SECTORDER_FLAGS = "";
+				SYMROOT = ../../build;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -332,6 +333,7 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = HIDInput;
 				SECTORDER_FLAGS = "";
+				SYMROOT = ../../build;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",

@@ -273,6 +273,7 @@
 				LIBRARY_STYLE = BUNDLE;
 				OTHER_CFLAGS = "-DUSEMACOSX=1";
 				PRODUCT_NAME = PeopsSPU;
+				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 				ZERO_LINK = NO;
 			};
@@ -301,6 +302,7 @@
 				OTHER_CFLAGS = "";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = PeopsSPU;
+				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 				ZERO_LINK = NO;
 			};

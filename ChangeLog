@@ -1,3 +1,14 @@
+November 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * macosx/plugins/DFSound/PeopsSPU.xcodeproj/project.pbxproj: Changed build
+   directory into ../../build.
+ * macosx/plugins/HIDInput/HIDInput.xcodeproj/project.pbxproj: Likewise.
+ * macosx/plugins/CDDeviceInterface/CDDeviceInterfacePlugin.xcodeproj/
+   project.pbxproj: Likewise.
+ * macosx/plugins/DFXVideo/PeopsSoftGPU.xcodeproj/project.pbxproj: Likewise.
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Include building and copying plugins
+   to the bundle (thanks avlex).
+
 November 29, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * data/pcsx.glade2: Got rid of GtkFileChooserButton, which is buggy. Added
