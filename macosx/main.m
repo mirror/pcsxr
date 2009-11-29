@@ -105,13 +105,13 @@ void SysMessage(char *fmt, ...)
 {
 	va_list list;
 	char msg[512];
-	
+
 	NSString *locFmtString = NSLocalizedString([NSString stringWithCString:fmt], nil);
-	
+
 	va_start(list, fmt);
 	vsprintf(msg, [locFmtString lossyCString], list);
 	va_end(list);
-	
+
 	NSRunAlertPanel(NSLocalizedString(@"Error!", nil),
 		[NSString stringWithCString:msg], 
 		nil, nil, nil);
@@ -119,10 +119,10 @@ void SysMessage(char *fmt, ...)
 
 #if 1
 void *SysLoadLibrary(char *lib) {
-        NSBundle *bundle = [NSBundle bundleWithPath:[NSString stringWithCString:lib]];
-        if (bundle != nil) {
-            return dlopen([[bundle executablePath] fileSystemRepresentation], RTLD_LAZY /*RTLD_NOW*/);
-        }
+	NSBundle *bundle = [NSBundle bundleWithPath:[NSString stringWithCString:lib]];
+	if (bundle != nil) {
+		return dlopen([[bundle executablePath] fileSystemRepresentation], RTLD_LAZY /*RTLD_NOW*/);
+	}
 	return dlopen(lib, RTLD_LAZY);
 }
 

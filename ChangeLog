@@ -13,6 +13,13 @@ November 29, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * po/pt_BR.po, po/zh_CN.po, po/zh_TW.po, po/pcsx.pot: Updated.
  * po/update-pot.sh: Also run msgmerge automatically.
  * doc/pcsx.1: Don't say "PCSX-df".
+ * macosx/main.m: Minor cleanup.
+ * macosx/PluginController.m: Likewise.
+ * macosx/PcsxController.m: Made the memory card files configurable.
+ * macosx/ConfigurationController.m: Likewise.
+ * macosx/ConfigurationController.h: Likewise.
+ * macosx/English.lproj/Configuration.nib/info.nib: Likewise.
+ * macosx/English.lproj/Configuration.nib/classes.nib: Likewise.
 
 November 28, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

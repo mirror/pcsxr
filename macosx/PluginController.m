@@ -47,20 +47,20 @@
 {
 	NSString *sel;
 	int i;
-	
+
 	// remember the list
 	pluginType = type;
 	plugins = [list retain];
 	defaultKey = [[PcsxPlugin getDefaultKeyForType:pluginType] retain];
-	
+
 	// clear the previous menu items
 	[pluginMenu removeAllItems];
-	
+
 	// load the currently selected plugin
 	sel = [[NSUserDefaults standardUserDefaults] stringForKey:defaultKey];
-	
+
 	// add the menu entries
-	for (i=0; i<[plugins count]; i++) {
+	for (i = 0; i < [plugins count]; i++) {
 		[pluginMenu addItemWithTitle:[[plugins objectAtIndex:i] description]];
 
 		// make sure the currently selected is set as such
@@ -68,7 +68,7 @@
 			[pluginMenu selectItemAtIndex:i];
 		}
 	}
-	
+
 	[self selectPlugin:pluginMenu];
 }
 

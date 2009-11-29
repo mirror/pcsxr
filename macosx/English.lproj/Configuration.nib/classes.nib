@@ -1,7 +1,13 @@
 {
     IBClasses = (
         {
-            ACTIONS = {setCheckbox = id; setCheckboxInverse = id; setVideoType = id; }; 
+            ACTIONS = {
+                mcdChangeClicked = id; 
+                mcdNewClicked = id; 
+                setCheckbox = id; 
+                setCheckboxInverse = id; 
+                setVideoType = id; 
+            }; 
             CLASS = ConfigurationController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
@@ -10,6 +16,8 @@
                 cdromPlugin = PluginController; 
                 consoleOutputCell = id; 
                 graphicsPlugin = PluginController; 
+                mcd1Label = NSTextField; 
+                mcd2Label = NSTextField; 
                 noCDAudioCell = id; 
                 noXaAudioCell = id; 
                 padPlugin = PluginController; 

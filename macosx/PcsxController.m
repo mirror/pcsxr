@@ -33,9 +33,9 @@ NSString *saveStatePath;
 		[openDlg setCanChooseFiles:YES];
 		[openDlg setCanChooseDirectories:NO];
 
-		if ([openDlg runModalForDirectory:nil file:nil] == NSOKButton) {
+		if ([openDlg runModal] == NSOKButton) {
 			NSArray* files = [openDlg filenames];
-			strcpy(cdrfilename, (const char *)[[files objectAtIndex:0] UTF8String]);
+			strcpy(cdrfilename, (const char *)[[files objectAtIndex:0] fileSystemRepresentation]);
 		}
 
         cdOpenCase = time(NULL) + 2;
@@ -118,7 +118,7 @@ NSString *saveStatePath;
 
 	if ([openDlg runModalForDirectory:nil file:nil] == NSOKButton) {
 		NSArray* files = [openDlg filenames];
-		strcpy(cdrfilename, (const char *)[[files objectAtIndex:0] UTF8String]);
+		strcpy(cdrfilename, (const char *)[[files objectAtIndex:0] fileSystemRepresentation]);
 		[EmuThread run];
     }
 }
@@ -228,7 +228,6 @@ NSString *saveStatePath;
 - (void)dealloc
 {
 	[pluginList release];
-	
 	[super dealloc];
 }
 
@@ -238,7 +237,7 @@ NSString *saveStatePath;
 	const char *str;
 	NSString *key;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
+
 	/*
 	enumerator = [prefStringKeys keyEnumerator];
 	while ((key = [enumerator nextObject])) {
@@ -246,7 +245,7 @@ NSString *saveStatePath;
 		char *dst = (char *)[[prefStringKeys objectForKey:key] pointerValue];
 		if (str != nil && dst != nil) strncpy(dst, str, 255);
 	}*/
-	
+
 	enumerator = [prefLongKeys keyEnumerator];
 	while ((key = [enumerator nextObject])) {
 		long *dst = (long *)[[prefLongKeys objectForKey:key] pointerValue];
@@ -256,7 +255,7 @@ NSString *saveStatePath;
 	// special cases
 	//str = [[defaults stringForKey:@"PluginPAD"] fileSystemRepresentation];
 	//if (str != nil) strncpy(Config.Pad2, str, 255);
-	
+
 	str = [[defaults stringForKey:@"Bios"] fileSystemRepresentation];
 	if (str) {
 		NSString *path = [defaults stringForKey:@"Bios"];
@@ -268,12 +267,18 @@ NSString *saveStatePath;
 			[biosList exchangeObjectAtIndex:index withObjectAtIndex:0];
 		}
 	}
-	
+
+	str = [[defaults stringForKey:@"Mcd1"] fileSystemRepresentation];
+	if (str) strncpy(Config.Mcd1, str, MAXPATHLEN);
+
+	str = [[defaults stringForKey:@"Mcd2"] fileSystemRepresentation];
+	if (str) strncpy(Config.Mcd2, str, MAXPATHLEN);
+
 	if ([defaults boolForKey:@"UseHLE"] || 0 == [biosList count]) {
 		strcpy(Config.Bios, "HLE");
 	} else {
 		str = [(NSString *)[biosList objectAtIndex:0] fileSystemRepresentation];
-		if (str != nil) strncpy(Config.Bios, str, 255);
+		if (str != nil) strncpy(Config.Bios, str, MAXPATHLEN);
 		else strcpy(Config.Bios, "HLE");
 	}
 
@@ -284,13 +289,13 @@ NSString *saveStatePath;
 + (void)setDefaultFromConfig:(NSString *)defaultKey
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
+
 	char *str = (char *)[[prefStringKeys objectForKey:defaultKey] pointerValue];
 	if (str) {
 		[defaults setObject:[NSString stringWithCString:str] forKey:defaultKey];
 		return;
 	}
-	
+
 	long *val = (long *)[[prefLongKeys objectForKey:defaultKey] pointerValue];
 	if (val) {
 		[defaults setInteger:*val forKey:defaultKey];
@@ -312,21 +317,21 @@ NSString *saveStatePath;
 	NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
 		@"Disabled", @"PluginNET",
 		[NSNumber numberWithInt:0], @"NoDynarec",
-		[NSNumber numberWithInt:1], @"AutoDetectVideoType", 
-//		@"HLE", @"Bios",
+		[NSNumber numberWithInt:1], @"AutoDetectVideoType",
 		[NSNumber numberWithInt:0], @"UseHLE",
 		[NSNumber numberWithInt:1], @"CpuBiasShift",
 		nil];
 
 	[defaults registerDefaults:appDefaults];
-	
+
 	prefStringKeys = [[NSDictionary alloc] initWithObjectsAndKeys:
 		[NSValue valueWithPointer:Config.Gpu], @"PluginGPU",
 		[NSValue valueWithPointer:Config.Spu], @"PluginSPU",
 		[NSValue valueWithPointer:Config.Pad1], @"PluginPAD",
 		[NSValue valueWithPointer:Config.Cdr], @"PluginCDR",
 		[NSValue valueWithPointer:Config.Net], @"PluginNET",
-//		[NSValue valueWithPointer:Config.Bios], @"Bios",
+		[NSValue valueWithPointer:Config.Mcd1], @"Mcd1",
+		[NSValue valueWithPointer:Config.Mcd2], @"Mcd2",
 		nil];
 
 	prefLongKeys = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -342,40 +347,39 @@ NSString *saveStatePath;
 		[NSValue valueWithPointer:&Config.RCntFix], @"RootCounterFix",
 		[NSValue valueWithPointer:&Config.VSyncWA], @"VideoSyncWAFix",
 		nil];
-	
+
 	// setup application support paths
 	NSArray *libPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
 	if ([libPaths count] > 0) {
 		NSString *path;
 		BOOL dir;
-		
+
 		// create them if needed
 		NSFileManager *dfm = [NSFileManager defaultManager];
 		NSString *supportPath = [NSString stringWithFormat:@"%@/Application Support", [libPaths objectAtIndex:0]];
 		if (![dfm fileExistsAtPath:supportPath isDirectory:&dir])
 			[dfm createDirectoryAtPath:supportPath attributes:nil];
-	
+
 		path = [NSString stringWithFormat:@"%@/Pcsx", supportPath];
 		if (![dfm fileExistsAtPath:path isDirectory:&dir])
 			[dfm createDirectoryAtPath:path attributes:nil];
-		
+
 		path = [NSString stringWithFormat:@"%@/Pcsx/Bios", supportPath];
 		if (![dfm fileExistsAtPath:path isDirectory:&dir])
 			[dfm createDirectoryAtPath:path attributes:nil];
-		
+
 		path = [NSString stringWithFormat:@"%@/Pcsx/Memory Cards", supportPath];
 		if (![dfm fileExistsAtPath:path isDirectory:&dir])
 			[dfm createDirectoryAtPath:path attributes:nil];
-		
+
 		saveStatePath = [[NSString stringWithFormat:@"%@/Pcsx/Save States", supportPath] retain];
 		if (![dfm fileExistsAtPath:saveStatePath isDirectory:&dir])
 			[dfm createDirectoryAtPath:saveStatePath attributes:nil];
-		
-		
+
 		path = [NSString stringWithFormat:@"%@/Pcsx/Memory Cards/Mcd001.mcr", supportPath];
 		str = [path fileSystemRepresentation];
 		if (str != nil) strncpy(Config.Mcd1, str, 255);
-		
+
 		path = [NSString stringWithFormat:@"%@/Pcsx/Memory Cards/Mcd002.mcr", supportPath];
 		str = [path fileSystemRepresentation];
 		if (str != nil) strncpy(Config.Mcd2, str, 255);
@@ -385,7 +389,7 @@ NSString *saveStatePath;
 		if (str != nil) strncpy(Config.BiosDir, str, 255);
 	} else {
 		strcpy(Config.BiosDir, "Bios/");
-		
+
 		saveStatePath = @"sstates";
 		[saveStatePath retain];
 	}
@@ -401,19 +405,19 @@ NSString *saveStatePath;
 	NSArray *bioses = [manager directoryContentsAtPath:[NSString stringWithCString:Config.BiosDir]];
 	if (bioses) {
 		int i;
-		for (i=0; i<[bioses count]; i++) {
+		for (i = 0; i < [bioses count]; i++) {
 			NSString *file = [bioses objectAtIndex:i];
 			NSDictionary *attrib = [manager fileAttributesAtPath:[NSString stringWithFormat:@"%s%@", Config.BiosDir, file] traverseLink:YES];
 
 			if ([[attrib fileType] isEqualToString:NSFileTypeRegular]) {
 				unsigned long long size = [attrib fileSize];
-				if (([attrib fileSize] % (256*1024)) == 0 && size > 0) {
+				if (([attrib fileSize] % (256 * 1024)) == 0 && size > 0) {
 					[biosList addObject:file];
 				}
 			}
 		}
 	}
-	
+
 	[PcsxController setConfigFromDefaults];
 }
 

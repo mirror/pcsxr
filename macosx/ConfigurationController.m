@@ -33,10 +33,69 @@
 	}
 }
 
+- (IBAction)mcdChangeClicked:(id)sender
+{
+	int tag = [sender tag];
+	char *mcd;
+	NSTextField *label;
+	NSOpenPanel *openDlg = [NSOpenPanel openPanel];
+	NSString *path;
+
+	if (tag == 1) { mcd = Config.Mcd1; label = mcd1Label; }
+	else { mcd = Config.Mcd2; label = mcd2Label; }
+
+	[openDlg setCanChooseFiles:YES];
+	[openDlg setCanChooseDirectories:NO];
+
+	path = [NSString stringWithCString:mcd];
+
+	if ([openDlg runModalForDirectory:[path stringByDeletingLastPathComponent] file:[path lastPathComponent]] == NSOKButton) {
+		NSArray* files = [openDlg filenames];
+		strcpy(mcd, (const char *)[[files objectAtIndex:0] fileSystemRepresentation]);
+
+		[label setTitleWithMnemonic:[NSString stringWithCString:mcd]];
+
+		if (tag == 1)
+			[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithCString:mcd] forKey:@"Mcd1"];
+		else
+			[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithCString:mcd] forKey:@"Mcd2"];
+
+		LoadMcds(Config.Mcd1, Config.Mcd2);
+    }
+}
+
+- (IBAction)mcdNewClicked:(id)sender
+{
+	int tag = [sender tag];
+	char *mcd;
+	NSTextField *label;
+	NSSavePanel *openDlg = [NSSavePanel savePanel];
+	NSString *path;
+
+	if (tag == 1) { mcd = Config.Mcd1; label = mcd1Label; }
+	else { mcd = Config.Mcd2; label = mcd2Label; }
+
+	path = [NSString stringWithCString:mcd];
+
+	if ([openDlg runModalForDirectory:[path stringByDeletingLastPathComponent] file:@"New Memory Card File.mcr"] == NSOKButton) {
+		strcpy(mcd, (const char *)[[openDlg filename] fileSystemRepresentation]);
+
+		[label setTitleWithMnemonic:[NSString stringWithCString:mcd]];
+
+		if (tag == 1)
+			[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithCString:mcd] forKey:@"Mcd1"];
+		else
+			[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithCString:mcd] forKey:@"Mcd2"];
+
+		CreateMcd(mcd);
+		LoadMcds(Config.Mcd1, Config.Mcd2);
+    }
+}
+
 - (IBAction)setVideoType:(id)sender
 {
 	int tag = [[sender selectedItem] tag];
-	
+
 	if (3 == tag) {
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoDetectVideoType"];
 	} else if (1 == tag || 2 == tag) {
@@ -46,7 +105,7 @@
 		return;
 	}
 	[PcsxController setConfigFromDefaults];
-	
+
 	if ([sender pullsDown]) {
 		NSArray *items = [sender itemArray];
 		int i;
@@ -98,6 +157,10 @@
 		[usesHleCell setEnabled:NO];
 	}
 
+	// setup labels
+	[mcd1Label setTitleWithMnemonic:[NSString stringWithCString:Config.Mcd1]];
+	[mcd2Label setTitleWithMnemonic:[NSString stringWithCString:Config.Mcd2]];
+
 	int tag = [defaults integerForKey:@"AutoDetectVideoType"];
 	if (tag)
 		tag = 3;
@@ -136,7 +199,7 @@
 		if ([object isEqual:sender])
 			return key;
 	}
-	
+
 	return nil;
 }
 
