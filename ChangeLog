@@ -1,6 +1,7 @@
 December 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
- * plugins/dfcdrom/cdr-linux.c: Fixed crash bug when resuming emulation.
+ * plugins/dfcdrom/cdr-linux.c: Fixed crash bug when resuming emulation in
+   Threaded mode.
 
 November 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 

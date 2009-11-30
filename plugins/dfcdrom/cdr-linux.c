@@ -261,7 +261,7 @@ long ReadThreaded() {
 unsigned char* GetBThreaded() {
 	PRINTF("threadc %d\n", found);
 
-	if (found == 1) { /*found = 0;*/ return cdbuffer; }
+	if (found == 1) return cdbuffer;
 	cdbuffer = cdcache[0].cr.buf + 12;
 	while (btoi(cdbuffer[0]) != cr.msf.cdmsf_min0 ||
 		   btoi(cdbuffer[1]) != cr.msf.cdmsf_sec0 ||
