@@ -97,6 +97,8 @@ long CDRopen(void) {
 		cdcache = (CacheData *)malloc(CacheSize * sizeof(CacheData));
 		if (cdcache == NULL) return -1;
 		memset(cdcache, 0, CacheSize * sizeof(CacheData));
+
+		found = 0;
 	} else {
 		cdbuffer = cr.buf + 12; /* skip sync data */
 	}

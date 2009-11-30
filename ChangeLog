@@ -1,3 +1,7 @@
+December 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfcdrom/cdr-linux.c: Fixed crash bug when resuming emulation.
+
 November 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * macosx/plugins/DFSound/PeopsSPU.xcodeproj/project.pbxproj: Changed build
