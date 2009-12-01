@@ -315,7 +315,7 @@ static void OnMcd_FileChange(GtkWidget *widget, gpointer user_data) {
 			else strncpy(Config.Mcd2, filename, MAXPATHLEN);
 
 			LoadMcd(memcard, filename);
-			UpdateMcdDlg(widget);
+			LoadMcdDlg(widget);
 
 			g_free(filename);
 		}
@@ -324,7 +324,7 @@ static void OnMcd_FileChange(GtkWidget *widget, gpointer user_data) {
 	gtk_widget_destroy(chooser);
 }
 
-// create a new, formatted memory card
+// format a memory card
 static void OnMcd_Format(GtkWidget *widget, gpointer user_data) {
 	GladeXML *xml;
 	GtkWidget *message_dialog;
@@ -354,10 +354,11 @@ static void OnMcd_Format(GtkWidget *widget, gpointer user_data) {
 		CreateMcd(str);
 		LoadMcd(memcard, str);
 
-		UpdateMcdDlg(widget);
+		LoadMcdDlg(widget);
 	}
 }
 
+// create a new, formatted memory card
 static void OnMcd_New(GtkWidget *widget, gpointer user_data) {
 	GtkWidget *chooser;
 	gchar *path;
@@ -387,7 +388,7 @@ static void OnMcd_New(GtkWidget *widget, gpointer user_data) {
 		else strncpy(Config.Mcd2, name, MAXPATHLEN);
 
 		LoadMcd((int)user_data, name);
-		UpdateMcdDlg(widget);
+		LoadMcdDlg(widget);
 
 		g_free(name);
 	}
