@@ -3,7 +3,7 @@ December 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * plugins/dfcdrom/cdr-linux.c: Fixed crash bug when resuming emulation in
    Threaded mode.
  * gui/MemcardDlg.c: Don't keep previous selection after creating a new
-   memcard, formatting a memcard, or changing a memcard.
+   memcard or changing a memcard.
  * gui/Gtk2Gui.c: Minor cleanup.
 
 November 30, 2009 Wei Mingzhi <weimingzhi@gmail.com>

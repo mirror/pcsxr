@@ -354,7 +354,7 @@ static void OnMcd_Format(GtkWidget *widget, gpointer user_data) {
 		CreateMcd(str);
 		LoadMcd(memcard, str);
 
-		LoadMcdDlg(widget);
+		UpdateMcdDlg(widget);
 	}
 }
 
