@@ -69,7 +69,6 @@ void ResetMenuSlots(GladeXML *xml) {
 	GtkWidget *widget;
 	gchar *str;
 	int i;
-	gint context_id;
 
 	if (CdromId[0] == '\0') {
 		// disable state saving/loading if no CD is loaded
