@@ -257,82 +257,12 @@ unsigned char PADpoll(unsigned char value) {
 				stdpar[CurPad][3] = n >> 8;
 
 				if (g.PadState[CurPad].PadMode == 1) {
-					CmdLen = 20;
+					CmdLen = 8;
 
 					stdpar[CurPad][4] = g.PadState[CurPad].AnalogStatus[ANALOG_RIGHT][ANALOG_X];
 					stdpar[CurPad][5] = g.PadState[CurPad].AnalogStatus[ANALOG_RIGHT][ANALOG_Y];
 					stdpar[CurPad][6] = g.PadState[CurPad].AnalogStatus[ANALOG_LEFT][ANALOG_X];
 					stdpar[CurPad][7] = g.PadState[CurPad].AnalogStatus[ANALOG_LEFT][ANALOG_Y];
-
-					switch (stdpar[CurPad][3]) {
-						case 0xBF: // X
-							stdpar[CurPad][14] = 0xFF;
-							break;
-
-						case 0xDF: // Circle
-							stdpar[CurPad][13] = 0xFF;
-							break;
-
-						case 0xEF: // Triangle
-							stdpar[CurPad][12] = 0xFF;
-							break;
-
-						case 0x7F: // Square
-							stdpar[CurPad][15] = 0xFF;
-							break;
-
-						case 0xFB: // L1
-							stdpar[CurPad][16] = 0xFF;
-							break;
-
-						case 0xF7: // R1
-							stdpar[CurPad][17] = 0xFF;
-							break;
-
-						case 0xFE: // L2
-							stdpar[CurPad][18] = 0xFF;
-							break;
-
-						case 0xFD: // R2
-							stdpar[CurPad][19] = 0xFF;
-							break;
-
-						default:
-							stdpar[CurPad][14] = 0x00; // Not pressed
-							stdpar[CurPad][13] = 0x00; // Not pressed
-							stdpar[CurPad][12] = 0x00; // Not pressed
-							stdpar[CurPad][15] = 0x00; // Not pressed
-							stdpar[CurPad][16] = 0x00; // Not pressed
-							stdpar[CurPad][17] = 0x00; // Not pressed
-							stdpar[CurPad][18] = 0x00; // Not pressed
-							stdpar[CurPad][19] = 0x00; // Not pressed
-							break;
-					}
-
-					switch (stdpar[CurPad][2] >> 4) {
-						case 0x0E: // UP
-							stdpar[CurPad][10] = 0xFF;
-							break;
-
-						case 0x0B: // DOWN
-							stdpar[CurPad][11] = 0xFF;
-							break;
-
-						case 0x07: // LEFT
-							stdpar[CurPad][9] = 0xFF;
-							break;
-
-						case 0x0D: // RIGHT
-							stdpar[CurPad][8] = 0xFF;
-							break;
-
-						default:
-							stdpar[CurPad][8] = 0x00; // Not pressed
-							stdpar[CurPad][9] = 0x00; // Not pressed
-							stdpar[CurPad][10] = 0x00; // Not pressed
-							stdpar[CurPad][11] = 0x00; // Not pressed
-							break;
-					}
 				} else {
 					CmdLen = 4;
 				}

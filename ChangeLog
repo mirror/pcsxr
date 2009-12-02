@@ -1,3 +1,8 @@
+December 2, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfinput/pad.c: Removed DualShock2-specific stuff in PADpoll().
+ * macosx/plugins/HIDInput/src/PlugPAD.c: Likewise.
+
 December 1, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfcdrom/cdr-linux.c: Fixed crash bug when resuming emulation in
