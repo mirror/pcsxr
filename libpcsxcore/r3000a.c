@@ -159,7 +159,6 @@ void psxBranchTest() {
 			psxTestHWInts();
 //		}
 	}
-//	if (psxRegs.cycle > 0xd29c6500) Log=1;
 }
 
 void psxTestHWInts() {

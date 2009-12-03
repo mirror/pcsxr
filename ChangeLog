@@ -4,6 +4,7 @@ December 3, 2009 Wei Mingzhi <weimingzhi@gmail.com>
    of 128, which fixes the FF8 problem. Still need further confirmation about
    this, as all of the protocol docs I've read as well as psemu_plugin_defs.h
    say 128 is the center position.
+ * libpcsxcore/r3000a.c: Minor cleanup.
 
 December 2, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
