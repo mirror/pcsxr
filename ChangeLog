@@ -8,8 +8,7 @@ December 4, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * plugins/dfinput/pad.h: Likewise.
  * po/zh_CN.po, po/zh_TW.po, po/pt_BR.po, po/pcsx.pot: Updated.
  * libpcsxcore/psxbios.c: Don't touch the stack pointer if pointed to the
-   hardware area, which fixes FF7 chocobo racing problem. Don't always
-   allocate stack spaces before softcall.
+   hardware area, which fixes FF7 chocobo racing problem.
 
 December 3, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
