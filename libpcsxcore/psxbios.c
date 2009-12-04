@@ -263,22 +263,15 @@ static __inline void softCall(u32 pc) {
 	pc0 = pc;
 	ra = 0x80001000;
 
-	// Fixes crashing problems with at least Final Fantasy 7 and Xenogears.
-	// This should be considered a temporary fix; after all, we do not
-	// know how much space below sp is in use.  It may be worth considering
-	// creating a new stack for interrupt handlers.
-	sp -= 256;
 	while (pc0 != 0x80001000) psxCpu->ExecuteBlock();
-	sp += 256;
 }
 
 static __inline void softCall2(u32 pc) {
 	u32 sra = ra;
 	pc0 = pc;
 	ra = 0x80001000;
-	sp -= 128;
+
 	while (pc0 != 0x80001000) psxCpu->ExecuteBlock();
-	sp += 128;
 	ra = sra;
 }
 
@@ -2297,7 +2290,6 @@ void biosInterrupt() {
 				if (NET_recvPadData(&((u16*)buf)[1], 2) == -1)
 					netError();
 			}
-
 		}
 		if (Config.UseNet && pad_buf1 && pad_buf2) {
 			psxBios_PADpoll(1);
@@ -2332,7 +2324,13 @@ void biosInterrupt() {
 		for (i=0; i<3; i++) {
 			if (psxHu32(0x1070) & (1 << (i+4))) {
 				if (RcEV[i][1].status == EvStACTIVE) {
+					// Fixes crashing problems with at least Final Fantasy 7 and Xenogears.
+					// This should be considered a temporary fix; after all, we do not
+					// know how much space below sp is in use.  It may be worth considering
+					// creating a new stack for interrupt handlers.
+					if ((sp >> 24) != 0x1f) sp -= 256;
 					softCall(RcEV[i][1].fhandler);
+					if ((sp >> 24) != 0x1f) sp += 256;
 				}
 				psxHwWrite32(0x1f801070, ~(1 << (i+4)));
 			}
