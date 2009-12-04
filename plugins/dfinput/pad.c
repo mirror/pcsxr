@@ -19,11 +19,7 @@
 #include "pad.h"
 
 char *PSEgetLibName(void) {
-#ifdef EPSXE
-	return _("Gamepad/Keyboard Input (ePSXe)");
-#else
 	return _("Gamepad/Keyboard Input");
-#endif
 }
 
 uint32_t PSEgetLibType(void) {
@@ -124,8 +120,6 @@ static void UpdateInput(void) {
 	if (!g.cfg.Threaded) CheckJoy();
 	CheckKeyboard();
 }
-
-#ifndef EPSXE
 
 static uint8_t stdpar[2][8] = {
 	{0xFF, 0x5A, 0xFF, 0xFF, 0x80, 0x80, 0x80, 0x80},
@@ -255,10 +249,10 @@ unsigned char PADpoll(unsigned char value) {
 				if (g.PadState[CurPad].PadMode == 1) {
 					CmdLen = 8;
 
-					stdpar[CurPad][4] = g.PadState[CurPad].AnalogStatus[ANALOG_RIGHT][ANALOG_X];
-					stdpar[CurPad][5] = g.PadState[CurPad].AnalogStatus[ANALOG_RIGHT][ANALOG_Y];
-					stdpar[CurPad][6] = g.PadState[CurPad].AnalogStatus[ANALOG_LEFT][ANALOG_X];
-					stdpar[CurPad][7] = g.PadState[CurPad].AnalogStatus[ANALOG_LEFT][ANALOG_Y];
+					stdpar[CurPad][4] = g.PadState[CurPad].AnalogStatus[ANALOG_RIGHT][0];
+					stdpar[CurPad][5] = g.PadState[CurPad].AnalogStatus[ANALOG_RIGHT][1];
+					stdpar[CurPad][6] = g.PadState[CurPad].AnalogStatus[ANALOG_LEFT][0];
+					stdpar[CurPad][7] = g.PadState[CurPad].AnalogStatus[ANALOG_LEFT][1];
 				} else {
 					CmdLen = 4;
 				}
@@ -329,25 +323,21 @@ unsigned char PADpoll(unsigned char value) {
 	return buf[CurByte++];
 }
 
-#endif
-
 static long PADreadPort(int num, PadDataS *pad) {
 	UpdateInput();
 
 	pad->buttonStatus = (g.PadState[num].KeyStatus & g.PadState[num].JoyKeyStatus);
 
-#ifdef EPSXE
 	// ePSXe different from pcsx, swap bytes
 	pad->buttonStatus = (pad->buttonStatus >> 8) | (pad->buttonStatus << 8);
-#endif
 
 	switch (g.cfg.PadDef[num].Type) {
 		case PSE_PAD_TYPE_ANALOGPAD: // Analog Controller SCPH-1150
 			pad->controllerType = PSE_PAD_TYPE_ANALOGPAD;
-			pad->rightJoyX = g.PadState[num].AnalogStatus[ANALOG_RIGHT][ANALOG_X];
-			pad->rightJoyY = g.PadState[num].AnalogStatus[ANALOG_RIGHT][ANALOG_Y];
-			pad->leftJoyX = g.PadState[num].AnalogStatus[ANALOG_LEFT][ANALOG_X];
-			pad->leftJoyY = g.PadState[num].AnalogStatus[ANALOG_LEFT][ANALOG_Y];
+			pad->rightJoyX = g.PadState[num].AnalogStatus[ANALOG_RIGHT][0];
+			pad->rightJoyY = g.PadState[num].AnalogStatus[ANALOG_RIGHT][1];
+			pad->leftJoyX = g.PadState[num].AnalogStatus[ANALOG_LEFT][0];
+			pad->leftJoyY = g.PadState[num].AnalogStatus[ANALOG_LEFT][1];
 			break;
 
 		case PSE_PAD_TYPE_STANDARD: // Standard Pad SCPH-1080, SCPH-1150

@@ -19,28 +19,20 @@
 #include "pad.h"
 
 void InitAnalog() {
-#if 0
-	g.PadState[0].AnalogStatus[ANALOG_LEFT][ANALOG_X] = 128;
-	g.PadState[0].AnalogStatus[ANALOG_LEFT][ANALOG_Y] = 128;
-	g.PadState[0].AnalogStatus[ANALOG_RIGHT][ANALOG_X] = 128;
-	g.PadState[0].AnalogStatus[ANALOG_RIGHT][ANALOG_Y] = 128;
-	g.PadState[1].AnalogStatus[ANALOG_LEFT][ANALOG_X] = 128;
-	g.PadState[1].AnalogStatus[ANALOG_LEFT][ANALOG_Y] = 128;
-	g.PadState[1].AnalogStatus[ANALOG_RIGHT][ANALOG_X] = 128;
-	g.PadState[1].AnalogStatus[ANALOG_RIGHT][ANALOG_Y] = 128;
-#else
 	// use 127 instead of 128 fixes the FF8 "reverting" problem, but
 	// why ALL of the protocol docs I seen as well as psemu_plugin_defs.h
 	// say 128 is the center position?
-	g.PadState[0].AnalogStatus[ANALOG_LEFT][ANALOG_X] = 127;
-	g.PadState[0].AnalogStatus[ANALOG_LEFT][ANALOG_Y] = 127;
-	g.PadState[0].AnalogStatus[ANALOG_RIGHT][ANALOG_X] = 127;
-	g.PadState[0].AnalogStatus[ANALOG_RIGHT][ANALOG_Y] = 127;
-	g.PadState[1].AnalogStatus[ANALOG_LEFT][ANALOG_X] = 127;
-	g.PadState[1].AnalogStatus[ANALOG_LEFT][ANALOG_Y] = 127;
-	g.PadState[1].AnalogStatus[ANALOG_RIGHT][ANALOG_X] = 127;
-	g.PadState[1].AnalogStatus[ANALOG_RIGHT][ANALOG_Y] = 127;
-#endif
+	g.PadState[0].AnalogStatus[ANALOG_LEFT][0] = 127;
+	g.PadState[0].AnalogStatus[ANALOG_LEFT][1] = 127;
+	g.PadState[0].AnalogStatus[ANALOG_RIGHT][0] = 127;
+	g.PadState[0].AnalogStatus[ANALOG_RIGHT][1] = 127;
+	g.PadState[1].AnalogStatus[ANALOG_LEFT][0] = 127;
+	g.PadState[1].AnalogStatus[ANALOG_LEFT][1] = 127;
+	g.PadState[1].AnalogStatus[ANALOG_RIGHT][0] = 127;
+	g.PadState[1].AnalogStatus[ANALOG_RIGHT][1] = 127;
+
+	memset(g.PadState[0].AnalogKeyStatus, 0, sizeof(g.PadState[0].AnalogKeyStatus));
+	memset(g.PadState[1].AnalogKeyStatus, 0, sizeof(g.PadState[1].AnalogKeyStatus));
 }
 
 void CheckAnalog() {
@@ -53,28 +45,142 @@ void CheckAnalog() {
 		}
 
 		for (j = 0; j < ANALOG_TOTAL; j++) {
-			for (k = 0; k < 2; k++) {
-				if (g.cfg.PadDef[i].AnalogDef[j][k] == 0) {
+			for (k = 0; k < 4; k++) {
+				if (g.PadState[i].AnalogKeyStatus[j][k]) {
+					switch (k) {
+						case ANALOG_XP: g.PadState[i].AnalogStatus[j][0] = 255; k++; break;
+						case ANALOG_XM: g.PadState[i].AnalogStatus[j][0] = 0; break;
+						case ANALOG_YP: g.PadState[i].AnalogStatus[j][1] = 255; k++; break;
+						case ANALOG_YM: g.PadState[i].AnalogStatus[j][1] = 0; break;
+					}
 					continue;
 				}
 
-				n = abs(g.cfg.PadDef[i].AnalogDef[j][k]) - 1;
+				switch (g.cfg.PadDef[i].AnalogDef[j][k].JoyEvType) {
+					case AXIS:
+						n = abs(g.cfg.PadDef[i].AnalogDef[j][k].J.Axis) - 1;
 
-				val = SDL_JoystickGetAxis(g.PadState[i].JoyDev, n);
+						if (g.cfg.PadDef[i].AnalogDef[j][k].J.Axis > 0) {
+							val = SDL_JoystickGetAxis(g.PadState[i].JoyDev, n);
+							if (val >= 0) {
+								val += 32767;
+								val /= 256;
 
-#if 0
-				val += 32768;
-#else
-				val += 32767;
-#endif
-				val /= 256;
+								switch (k) {
+									case ANALOG_XP: g.PadState[i].AnalogStatus[j][0] = val; break;
+									case ANALOG_XM: g.PadState[i].AnalogStatus[j][0] = 255 - val; break;
+									case ANALOG_YP: g.PadState[i].AnalogStatus[j][1] = val; break;
+									case ANALOG_YM: g.PadState[i].AnalogStatus[j][1] = 255 - val; break;
+								}
+							}
+						} else if (g.cfg.PadDef[i].AnalogDef[j][k].J.Axis < 0) {
+							val = SDL_JoystickGetAxis(g.PadState[i].JoyDev, n);
+							if (val <= 0) {
+								val += 32767;
+								val /= 256;
 
-				if (g.cfg.PadDef[i].AnalogDef[j][k] < 0) {
-					g.PadState[i].AnalogStatus[j][k] = 255 - val;
-				} else {
-					g.PadState[i].AnalogStatus[j][k] = val;
+								switch (k) {
+									case ANALOG_XP: g.PadState[i].AnalogStatus[j][0] = 255 - val; break;
+									case ANALOG_XM: g.PadState[i].AnalogStatus[j][0] = val; break;
+									case ANALOG_YP: g.PadState[i].AnalogStatus[j][1] = 255 - val; break;
+									case ANALOG_YM: g.PadState[i].AnalogStatus[j][1] = val; break;
+								}
+							}
+						}
+						break;
+
+					case HAT:
+						n = (g.cfg.PadDef[i].AnalogDef[j][k].J.Hat >> 8);
+
+						g.PadState[i].AnalogStatus[j][0] = 0;
+
+						if (SDL_JoystickGetHat(g.PadState[i].JoyDev, n) & (g.cfg.PadDef[i].AnalogDef[j][k].J.Hat & 0xFF)) {
+							switch (k) {
+								case ANALOG_XP: g.PadState[i].AnalogStatus[j][0] = 255; k++; break;
+								case ANALOG_XM: g.PadState[i].AnalogStatus[j][0] = 0; break;
+								case ANALOG_YP: g.PadState[i].AnalogStatus[j][1] = 255; k++; break;
+								case ANALOG_YM: g.PadState[i].AnalogStatus[j][1] = 0; break;
+							}
+						} else {
+							switch (k) {
+								case ANALOG_XP: g.PadState[i].AnalogStatus[j][0] = 127; break;
+								case ANALOG_XM: g.PadState[i].AnalogStatus[j][0] = 127; break;
+								case ANALOG_YP: g.PadState[i].AnalogStatus[j][1] = 127; break;
+								case ANALOG_YM: g.PadState[i].AnalogStatus[j][1] = 127; break;
+							}
+						}
+						break;
+
+					case BUTTON:
+						if (SDL_JoystickGetButton(g.PadState[i].JoyDev, g.cfg.PadDef[i].AnalogDef[j][k].J.Button)) {
+							switch (k) {
+								case ANALOG_XP: g.PadState[i].AnalogStatus[j][0] = 255; k++; break;
+								case ANALOG_XM: g.PadState[i].AnalogStatus[j][0] = 0; break;
+								case ANALOG_YP: g.PadState[i].AnalogStatus[j][1] = 255; k++; break;
+								case ANALOG_YM: g.PadState[i].AnalogStatus[j][1] = 0; break;
+							}
+						} else {
+							switch (k) {
+								case ANALOG_XP: g.PadState[i].AnalogStatus[j][0] = 127; break;
+								case ANALOG_XM: g.PadState[i].AnalogStatus[j][0] = 127; break;
+								case ANALOG_YP: g.PadState[i].AnalogStatus[j][1] = 127; break;
+								case ANALOG_YM: g.PadState[i].AnalogStatus[j][1] = 127; break;
+							}
+						}
+						break;
+
+					default:
+						switch (k) {
+							case ANALOG_XP: g.PadState[i].AnalogStatus[j][0] = 127; break;
+							case ANALOG_XM: g.PadState[i].AnalogStatus[j][0] = 127; break;
+							case ANALOG_YP: g.PadState[i].AnalogStatus[j][1] = 127; break;
+							case ANALOG_YM: g.PadState[i].AnalogStatus[j][1] = 127; break;
+						}
+						break;
 				}
 			}
 		}
 	}
+}
+
+int AnalogKeyPressed(uint16_t Key) {
+	int i, j, k;
+
+	for (i = 0; i < 2; i++) {
+		if (g.cfg.PadDef[i].Type != PSE_PAD_TYPE_ANALOGPAD) {
+			continue;
+		}
+
+		for (j = 0; j < ANALOG_TOTAL; j++) {
+			for (k = 0; k < 4; k++) {
+				if (g.cfg.PadDef[i].AnalogDef[j][k].Key == Key) {
+					g.PadState[i].AnalogKeyStatus[j][k] = 1;
+					return 1;
+				}
+			}
+		}
+	}
+
+	return 0;
+}
+
+int AnalogKeyReleased(uint16_t Key) {
+	int i, j, k;
+
+	for (i = 0; i < 2; i++) {
+		if (g.cfg.PadDef[i].Type != PSE_PAD_TYPE_ANALOGPAD) {
+			continue;
+		}
+
+		for (j = 0; j < ANALOG_TOTAL; j++) {
+			for (k = 0; k < 4; k++) {
+				if (g.cfg.PadDef[i].AnalogDef[j][k].Key == Key) {
+					g.PadState[i].AnalogKeyStatus[j][k] = 0;
+					return 1;
+				}
+			}
+		}
+	}
+
+	return 0;
 }

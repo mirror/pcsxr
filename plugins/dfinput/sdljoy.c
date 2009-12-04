@@ -55,7 +55,6 @@ void DestroySDLJoy() {
 
 void CheckJoy() {
 	uint8_t				i, j, n;
-	int					dx, dy;
 
 	SDL_JoystickUpdate();
 

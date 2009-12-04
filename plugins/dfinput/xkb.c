@@ -54,7 +54,7 @@ void CheckKeyboard() {
 						}
 					}
 				}
-				if (!found) {
+				if (!found && !AnalogKeyPressed(Key)) {
 					g.KeyLeftOver = Key;
 				}
 				return;
@@ -70,7 +70,7 @@ void CheckKeyboard() {
 						}
 					}
 				}
-				if (!found) {
+				if (!found && !AnalogKeyReleased(Key)) {
 					g.KeyLeftOver = ((long)Key | 0x40000000);
 				}
 				break;

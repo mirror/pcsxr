@@ -218,14 +218,46 @@ void LoadConfig() {
 			g.cfg.PadDef[current].KeyDef[DKEY_SQUARE].Key = a;
 			g.cfg.PadDef[current].KeyDef[DKEY_SQUARE].JoyEvType = b;
 			g.cfg.PadDef[current].KeyDef[DKEY_SQUARE].J.d = c;
-		} else if (strncmp(buf, "LeftAnalogX=", 12) == 0) {
-			g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_X] = atoi(&buf[12]);
-		} else if (strncmp(buf, "LeftAnalogY=", 12) == 0) {
-			g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_Y] = atoi(&buf[12]);
-		} else if (strncmp(buf, "RightAnalogX=", 13) == 0) {
-			g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_X] = atoi(&buf[13]);
-		} else if (strncmp(buf, "RightAnalogY=", 13) == 0) {
-			g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_Y] = atoi(&buf[13]);
+		} else if (strncmp(buf, "LeftAnalogXP=", 13) == 0) {
+			sscanf(buf, "LeftAnalogXP=%d,%d,%d", &a, &b, &c);
+			g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_XP].Key = a;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_XP].JoyEvType = b;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_XP].J.d = c;
+		} else if (strncmp(buf, "LeftAnalogXM=", 13) == 0) {
+			sscanf(buf, "LeftAnalogXM=%d,%d,%d", &a, &b, &c);
+			g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_XM].Key = a;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_XM].JoyEvType = b;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_XM].J.d = c;
+		} else if (strncmp(buf, "LeftAnalogYP=", 13) == 0) {
+			sscanf(buf, "LeftAnalogYP=%d,%d,%d", &a, &b, &c);
+			g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_YP].Key = a;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_YP].JoyEvType = b;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_YP].J.d = c;
+		} else if (strncmp(buf, "LeftAnalogYM=", 13) == 0) {
+			sscanf(buf, "LeftAnalogYM=%d,%d,%d", &a, &b, &c);
+			g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_YM].Key = a;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_YM].JoyEvType = b;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_YM].J.d = c;
+		} else if (strncmp(buf, "RightAnalogXP=", 14) == 0) {
+			sscanf(buf, "RightAnalogXP=%d,%d,%d", &a, &b, &c);
+			g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_XP].Key = a;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_XP].JoyEvType = b;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_XP].J.d = c;
+		} else if (strncmp(buf, "RightAnalogXM=", 14) == 0) {
+			sscanf(buf, "RightAnalogXM=%d,%d,%d", &a, &b, &c);
+			g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_XM].Key = a;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_XM].JoyEvType = b;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_XM].J.d = c;
+		} else if (strncmp(buf, "RightAnalogYP=", 14) == 0) {
+			sscanf(buf, "RightAnalogYP=%d,%d,%d", &a, &b, &c);
+			g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_YP].Key = a;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_YP].JoyEvType = b;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_YP].J.d = c;
+		} else if (strncmp(buf, "RightAnalogYM=", 14) == 0) {
+			sscanf(buf, "RightAnalogYM=%d,%d,%d", &a, &b, &c);
+			g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_YM].Key = a;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_YM].JoyEvType = b;
+			g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_YM].J.d = c;
 		}
 	}
 
@@ -282,11 +314,30 @@ void SaveConfig() {
 			g.cfg.PadDef[i].KeyDef[DKEY_CROSS].JoyEvType, g.cfg.PadDef[i].KeyDef[DKEY_CROSS].J.d);
 		fprintf(fp, "Square=%d,%d,%d\n", g.cfg.PadDef[i].KeyDef[DKEY_SQUARE].Key,
 			g.cfg.PadDef[i].KeyDef[DKEY_SQUARE].JoyEvType, g.cfg.PadDef[i].KeyDef[DKEY_SQUARE].J.d);
-
-		fprintf(fp, "LeftAnalogX=%d\n", g.cfg.PadDef[i].AnalogDef[ANALOG_LEFT][ANALOG_X]);
-		fprintf(fp, "LeftAnalogY=%d\n", g.cfg.PadDef[i].AnalogDef[ANALOG_LEFT][ANALOG_Y]);
-		fprintf(fp, "RightAnalogX=%d\n", g.cfg.PadDef[i].AnalogDef[ANALOG_RIGHT][ANALOG_X]);
-		fprintf(fp, "RightAnalogY=%d\n", g.cfg.PadDef[i].AnalogDef[ANALOG_RIGHT][ANALOG_Y]);
+		fprintf(fp, "LeftAnalogXP=%d,%d,%d\n", g.cfg.PadDef[i].AnalogDef[ANALOG_LEFT][ANALOG_XP].Key,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_LEFT][ANALOG_XP].JoyEvType,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_LEFT][ANALOG_XP].J.d);
+		fprintf(fp, "LeftAnalogXM=%d,%d,%d\n", g.cfg.PadDef[i].AnalogDef[ANALOG_LEFT][ANALOG_XM].Key,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_LEFT][ANALOG_XM].JoyEvType,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_LEFT][ANALOG_XM].J.d);
+		fprintf(fp, "LeftAnalogYP=%d,%d,%d\n", g.cfg.PadDef[i].AnalogDef[ANALOG_LEFT][ANALOG_YP].Key,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_LEFT][ANALOG_YP].JoyEvType,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_LEFT][ANALOG_YP].J.d);
+		fprintf(fp, "LeftAnalogYM=%d,%d,%d\n", g.cfg.PadDef[i].AnalogDef[ANALOG_LEFT][ANALOG_YM].Key,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_LEFT][ANALOG_YM].JoyEvType,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_LEFT][ANALOG_YM].J.d);
+		fprintf(fp, "RightAnalogXP=%d,%d,%d\n", g.cfg.PadDef[i].AnalogDef[ANALOG_RIGHT][ANALOG_XP].Key,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_RIGHT][ANALOG_XP].JoyEvType,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_RIGHT][ANALOG_XP].J.d);
+		fprintf(fp, "RightAnalogXM=%d,%d,%d\n", g.cfg.PadDef[i].AnalogDef[ANALOG_RIGHT][ANALOG_XM].Key,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_RIGHT][ANALOG_XM].JoyEvType,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_RIGHT][ANALOG_XM].J.d);
+		fprintf(fp, "RightAnalogYP=%d,%d,%d\n", g.cfg.PadDef[i].AnalogDef[ANALOG_RIGHT][ANALOG_YP].Key,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_RIGHT][ANALOG_YP].JoyEvType,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_RIGHT][ANALOG_YP].J.d);
+		fprintf(fp, "RightAnalogYM=%d,%d,%d\n", g.cfg.PadDef[i].AnalogDef[ANALOG_RIGHT][ANALOG_YM].Key,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_RIGHT][ANALOG_YM].JoyEvType,
+			g.cfg.PadDef[i].AnalogDef[ANALOG_RIGHT][ANALOG_YM].J.d);
 
 		fprintf(fp, "\n");
 	}

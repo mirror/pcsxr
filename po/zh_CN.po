@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-29 02:11+0800\n"
-"PO-Revision-Date: 2009-11-29 02:12+0700\n"
+"POT-Creation-Date: 2009-12-04 14:14+0800\n"
+"PO-Revision-Date: 2009-12-04 14:15+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -688,15 +688,15 @@ msgstr "*PCSX*: Error Saving State %s"
 
 #: ../win32/gui/WndMain.c:426
 #: ../win32/gui/WndMain.c:475
-#: ../gui/Gtk2Gui.c:480
-#: ../gui/Gtk2Gui.c:605
+#: ../gui/Gtk2Gui.c:479
+#: ../gui/Gtk2Gui.c:604
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "此光盘不是一张合法的 PlayStation 光盘。"
 
 #: ../win32/gui/WndMain.c:432
 #: ../win32/gui/WndMain.c:481
-#: ../gui/Gtk2Gui.c:488
-#: ../gui/Gtk2Gui.c:613
+#: ../gui/Gtk2Gui.c:487
+#: ../gui/Gtk2Gui.c:612
 msgid "Could not load CD-ROM!"
 msgstr "无法加载光盘!"
 
@@ -903,8 +903,8 @@ msgstr "DataDeck 记忆卡 (*.ddl)"
 #: ../win32/gui/WndMain.c:1350
 #: ../win32/gui/WndMain.c:1431
 #: ../gui/Cheat.c:322
-#: ../gui/Gtk2Gui.c:417
-#: ../gui/Gtk2Gui.c:556
+#: ../gui/Gtk2Gui.c:416
+#: ../gui/Gtk2Gui.c:555
 msgid "All Files"
 msgstr "所有文件"
 
@@ -1148,82 +1148,82 @@ msgstr "无法打开 BIOS 目录: \"%s\"\n"
 msgid "Could not open directory: '%s'\n"
 msgstr "无法打开目录: \"%s\"\n"
 
-#: ../gui/Gtk2Gui.c:110
+#: ../gui/Gtk2Gui.c:109
 msgid "Ready"
 msgstr "就绪"
 
-#: ../gui/Gtk2Gui.c:151
+#: ../gui/Gtk2Gui.c:150
 msgid "Emulation Paused."
 msgstr "模拟器已暂停。"
 
-#: ../gui/Gtk2Gui.c:399
+#: ../gui/Gtk2Gui.c:398
 msgid "Select PSX EXE File"
 msgstr "选择 PSX EXE 文件"
 
-#: ../gui/Gtk2Gui.c:413
+#: ../gui/Gtk2Gui.c:412
 msgid "PlayStation Executable Files"
 msgstr "PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:449
+#: ../gui/Gtk2Gui.c:448
 msgid "Not a valid PSX file"
 msgstr "不是一个合法的 PSX 文件"
 
-#: ../gui/Gtk2Gui.c:449
+#: ../gui/Gtk2Gui.c:448
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "此文件不是一个合法的 PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:480
-#: ../gui/Gtk2Gui.c:605
+#: ../gui/Gtk2Gui.c:479
+#: ../gui/Gtk2Gui.c:604
 msgid "CD ROM failed"
 msgstr "CD-ROM 失败"
 
-#: ../gui/Gtk2Gui.c:488
-#: ../gui/Gtk2Gui.c:613
+#: ../gui/Gtk2Gui.c:487
+#: ../gui/Gtk2Gui.c:612
 msgid "The CD-ROM could not be loaded"
 msgstr "无法加载 CD-ROM"
 
-#: ../gui/Gtk2Gui.c:502
+#: ../gui/Gtk2Gui.c:501
 msgid "Could not run BIOS"
 msgstr "无法运行 BIOS"
 
-#: ../gui/Gtk2Gui.c:502
+#: ../gui/Gtk2Gui.c:501
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr "内部 HLE BIOS 不支持直接运行。"
 
-#: ../gui/Gtk2Gui.c:531
+#: ../gui/Gtk2Gui.c:530
 msgid "Open PSX Disc Image File"
 msgstr "打开 PSX 光盘镜像文件"
 
-#: ../gui/Gtk2Gui.c:551
+#: ../gui/Gtk2Gui.c:550
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr "PS 镜像文件 (*.bin, *.img, *.mdf, *.iso)"
 
-#: ../gui/Gtk2Gui.c:762
+#: ../gui/Gtk2Gui.c:761
 #, c-format
 msgid "Loaded state %s."
 msgstr "已读取存档 %s。"
 
-#: ../gui/Gtk2Gui.c:766
+#: ../gui/Gtk2Gui.c:765
 #, c-format
 msgid "Error loading state %s!"
 msgstr "读取存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:777
+#: ../gui/Gtk2Gui.c:776
 #, c-format
 msgid "Saved state %s."
 msgstr "已保存存档 %s"
 
-#: ../gui/Gtk2Gui.c:779
+#: ../gui/Gtk2Gui.c:778
 #, c-format
 msgid "Error saving state %s!"
 msgstr "保存存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:812
-#: ../gui/Gtk2Gui.c:839
+#: ../gui/Gtk2Gui.c:811
+#: ../gui/Gtk2Gui.c:838
 msgid "Select State File"
 msgstr "选择存档文件"
 
-#: ../gui/Gtk2Gui.c:896
+#: ../gui/Gtk2Gui.c:895
 msgid "Notice"
 msgstr "警告"
 
@@ -1303,23 +1303,23 @@ msgstr "如果您选择格式化记忆卡，记忆卡将被清空，并且任何
 msgid "Format card"
 msgstr "格式化记忆卡"
 
-#: ../gui/MemcardDlg.c:366
+#: ../gui/MemcardDlg.c:367
 msgid "Create a new Memory Card"
 msgstr "新建记忆卡"
 
-#: ../gui/MemcardDlg.c:375
+#: ../gui/MemcardDlg.c:376
 msgid "New Memory Card.mcd"
 msgstr "新记忆卡.mcd"
 
-#: ../gui/MemcardDlg.c:476
+#: ../gui/MemcardDlg.c:477
 msgid "No free space on memory card"
 msgstr "记忆卡无空余位置"
 
-#: ../gui/MemcardDlg.c:477
+#: ../gui/MemcardDlg.c:478
 msgid "There are no free slots available on the target memory card. Please delete a slot first."
 msgstr "目标记忆卡上无空余位置。请先删除一个存档。"
 
-#: ../gui/MemcardDlg.c:631
+#: ../gui/MemcardDlg.c:632
 msgid "Memory Card Manager"
 msgstr "记忆卡管理器"
 
@@ -2833,146 +2833,145 @@ msgid "R2"
 msgstr "R2"
 
 #: ../plugins/dfinput/cfg-gtk2.c:60
-msgid "L3"
-msgstr "L3"
-
-#: ../plugins/dfinput/cfg-gtk2.c:61
-msgid "R3"
-msgstr "R3"
-
-#: ../plugins/dfinput/cfg-gtk2.c:62
 msgid "Select"
 msgstr "选择键"
 
-#: ../plugins/dfinput/cfg-gtk2.c:63
+#: ../plugins/dfinput/cfg-gtk2.c:61
 msgid "Start"
 msgstr "开始键"
 
+#: ../plugins/dfinput/cfg-gtk2.c:62
+msgid "L3"
+msgstr "L3"
+
+#: ../plugins/dfinput/cfg-gtk2.c:63
+msgid "R3"
+msgstr "R3"
+
 #: ../plugins/dfinput/cfg-gtk2.c:67
-msgid "L-Stick X"
-msgstr "左摇杆 X"
+msgid "L-Stick Right"
+msgstr "左摇杆右方向"
 
 #: ../plugins/dfinput/cfg-gtk2.c:68
-msgid "L-Stick Y"
-msgstr "左摇杆 Y"
+msgid "L-Stick Left"
+msgstr "左摇杆左方向"
 
 #: ../plugins/dfinput/cfg-gtk2.c:69
-msgid "R-Stick X"
-msgstr "右摇杆 X"
+msgid "L-Stick Down"
+msgstr "左摇杆下方向"
 
 #: ../plugins/dfinput/cfg-gtk2.c:70
-msgid "R-Stick Y"
-msgstr "右摇杆 Y"
+msgid "L-Stick Up"
+msgstr "左摇杆上方向"
 
-#: ../plugins/dfinput/cfg-gtk2.c:99
+#: ../plugins/dfinput/cfg-gtk2.c:71
+msgid "R-Stick Right"
+msgstr "右摇杆右方向"
+
+#: ../plugins/dfinput/cfg-gtk2.c:72
+msgid "R-Stick Left"
+msgstr "右摇杆左方向"
+
+#: ../plugins/dfinput/cfg-gtk2.c:73
+msgid "R-Stick Down"
+msgstr "右摇杆下方向"
+
+#: ../plugins/dfinput/cfg-gtk2.c:74
+msgid "R-Stick Up"
+msgstr "右摇杆上方向"
+
+#: ../plugins/dfinput/cfg-gtk2.c:103
+#: ../plugins/dfinput/cfg-gtk2.c:142
 msgid "Centered"
 msgstr "居中"
 
-#: ../plugins/dfinput/cfg-gtk2.c:99
+#: ../plugins/dfinput/cfg-gtk2.c:103
+#: ../plugins/dfinput/cfg-gtk2.c:142
 msgid "Up"
 msgstr "上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:99
+#: ../plugins/dfinput/cfg-gtk2.c:103
+#: ../plugins/dfinput/cfg-gtk2.c:142
 msgid "Right"
 msgstr "右方向键"
 
-#: ../plugins/dfinput/cfg-gtk2.c:99
+#: ../plugins/dfinput/cfg-gtk2.c:103
+#: ../plugins/dfinput/cfg-gtk2.c:142
 msgid "Rightup"
 msgstr "右上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:100
+#: ../plugins/dfinput/cfg-gtk2.c:104
+#: ../plugins/dfinput/cfg-gtk2.c:143
 msgid "Down"
 msgstr "下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:100
+#: ../plugins/dfinput/cfg-gtk2.c:104
+#: ../plugins/dfinput/cfg-gtk2.c:143
 msgid "Rightdown"
 msgstr "右下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:100
+#: ../plugins/dfinput/cfg-gtk2.c:104
+#: ../plugins/dfinput/cfg-gtk2.c:143
 msgid "Left"
 msgstr "左"
 
-#: ../plugins/dfinput/cfg-gtk2.c:100
+#: ../plugins/dfinput/cfg-gtk2.c:104
+#: ../plugins/dfinput/cfg-gtk2.c:143
 msgid "Leftup"
 msgstr "左上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:101
+#: ../plugins/dfinput/cfg-gtk2.c:105
+#: ../plugins/dfinput/cfg-gtk2.c:144
 msgid "Leftdown"
 msgstr "左下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:105
+#: ../plugins/dfinput/cfg-gtk2.c:109
+#: ../plugins/dfinput/cfg-gtk2.c:148
 #, c-format
 msgid "Joystick: Button %d"
 msgstr "手柄: 按钮 %d"
 
-#: ../plugins/dfinput/cfg-gtk2.c:109
+#: ../plugins/dfinput/cfg-gtk2.c:113
+#: ../plugins/dfinput/cfg-gtk2.c:152
 #, c-format
 msgid "Joystick: Axis %d%c"
 msgstr "手柄: 轴 %d%c"
 
-#: ../plugins/dfinput/cfg-gtk2.c:114
+#: ../plugins/dfinput/cfg-gtk2.c:118
+#: ../plugins/dfinput/cfg-gtk2.c:157
 #, c-format
 msgid "Joystick: Hat %d %s"
 msgstr "Joystick: 操纵杆 %d %s"
 
-#: ../plugins/dfinput/cfg-gtk2.c:129
+#: ../plugins/dfinput/cfg-gtk2.c:133
+#: ../plugins/dfinput/cfg-gtk2.c:172
 msgid "Keyboard:"
 msgstr "键盘:"
 
-#: ../plugins/dfinput/cfg-gtk2.c:133
-#: ../plugins/dfinput/cfg-gtk2.c:141
-#, c-format
+#: ../plugins/dfinput/cfg-gtk2.c:137
+#: ../plugins/dfinput/cfg-gtk2.c:176
 msgid "(Not Set)"
 msgstr "(未设定)"
 
-#: ../plugins/dfinput/cfg-gtk2.c:143
-#, c-format
-msgid "Joystick: Axis %d%s"
-msgstr "手柄: 轴 %d%s"
-
-#: ../plugins/dfinput/cfg-gtk2.c:143
-msgid " (Reversed)"
-msgstr " (反向)"
-
-#: ../plugins/dfinput/cfg-gtk2.c:387
-msgid "Device not set"
-msgstr "设备未设置"
-
-#: ../plugins/dfinput/cfg-gtk2.c:387
-msgid "Please select a valid Joystick Device"
-msgstr "请选择一个合法的手柄设备"
-
-#: ../plugins/dfinput/cfg-gtk2.c:393
-msgid "Device open error"
-msgstr "设备打开错误"
-
-#: ../plugins/dfinput/cfg-gtk2.c:393
-msgid "Unable to open Joystick Device"
-msgstr "无法打开手柄设备"
-
-#: ../plugins/dfinput/cfg-gtk2.c:484
+#: ../plugins/dfinput/cfg-gtk2.c:546
 msgid "None"
 msgstr "无"
 
-#: ../plugins/dfinput/cfg-gtk2.c:526
+#: ../plugins/dfinput/cfg-gtk2.c:588
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr "手柄/键盘输入配置"
 
-#: ../plugins/dfinput/cfg-gtk2.c:532
-#: ../plugins/dfinput/cfg-gtk2.c:552
+#: ../plugins/dfinput/cfg-gtk2.c:594
+#: ../plugins/dfinput/cfg-gtk2.c:614
 msgid "Key"
 msgstr "按钮"
 
-#: ../plugins/dfinput/cfg-gtk2.c:538
-#: ../plugins/dfinput/cfg-gtk2.c:558
+#: ../plugins/dfinput/cfg-gtk2.c:600
+#: ../plugins/dfinput/cfg-gtk2.c:620
 msgid "Button"
 msgstr "按键"
 
-#: ../plugins/dfinput/pad.c:23
-msgid "Gamepad/Keyboard Input (ePSXe)"
-msgstr "手柄/键盘输入 (ePSXe)"
-
-#: ../plugins/dfinput/pad.c:25
+#: ../plugins/dfinput/pad.c:22
 msgid "Gamepad/Keyboard Input"
 msgstr "手柄/键盘输入"
 
@@ -2992,8 +2991,8 @@ msgid ""
 "Digital Pad\n"
 "Analog Pad"
 msgstr ""
-"数字手柄\n"
-"模拟手柄"
+"普通手柄\n"
+"摇杆手柄"
 
 #: ../plugins/dfinput/dfinput.glade2:149
 #: ../plugins/dfinput/dfinput.glade2:346
@@ -3016,4 +3015,23 @@ msgstr "控制器 2"
 #: ../plugins/dfinput/dfinput.glade2:427
 msgid "Multi-Threaded (Recommended)"
 msgstr "多线程 (推荐)"
+
+#~ msgid "L-Stick Y"
+#~ msgstr "左摇杆 Y"
+#~ msgid "R-Stick Y"
+#~ msgstr "右摇杆 Y"
+#~ msgid "Joystick: Axis %d%s"
+#~ msgstr "手柄: 轴 %d%s"
+#~ msgid " (Reversed)"
+#~ msgstr " (反向)"
+#~ msgid "Device not set"
+#~ msgstr "设备未设置"
+#~ msgid "Please select a valid Joystick Device"
+#~ msgstr "请选择一个合法的手柄设备"
+#~ msgid "Device open error"
+#~ msgstr "设备打开错误"
+#~ msgid "Unable to open Joystick Device"
+#~ msgstr "无法打开手柄设备"
+#~ msgid "Gamepad/Keyboard Input (ePSXe)"
+#~ msgstr "手柄/键盘输入 (ePSXe)"
 

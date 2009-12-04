@@ -38,10 +38,10 @@ const int DPad[DKEY_TOTAL] = {
 	DKEY_R1,
 	DKEY_L2,
 	DKEY_R2,
-	DKEY_L3,
-	DKEY_R3,
 	DKEY_SELECT,
-	DKEY_START
+	DKEY_START,
+	DKEY_L3,
+	DKEY_R3
 };
 
 const char *DPadText[DKEY_TOTAL] = {
@@ -57,17 +57,21 @@ const char *DPadText[DKEY_TOTAL] = {
 	N_("R1"),
 	N_("L2"),
 	N_("R2"),
-	N_("L3"),
-	N_("R3"),
 	N_("Select"),
-	N_("Start")
+	N_("Start"),
+	N_("L3"),
+	N_("R3")
 };
 
 const char *AnalogText[] = {
-	N_("L-Stick X"),
-	N_("L-Stick Y"),
-	N_("R-Stick X"),
-	N_("R-Stick Y")
+	N_("L-Stick Right"),
+	N_("L-Stick Left"),
+	N_("L-Stick Down"),
+	N_("L-Stick Up"),
+	N_("R-Stick Right"),
+	N_("R-Stick Left"),
+	N_("R-Stick Down"),
+	N_("R-Stick Up")
 };
 
 static int GetSelectedKeyIndex(int padnum) {
@@ -134,13 +138,42 @@ static void GetKeyDescription(char *buf, int joynum, int key) {
 	}
 }
 
-static void GetAnalogDescription(char *buf, int joynum, int analognum, int analogaxis) {
-	int16_t v = g.cfg.PadDef[joynum].AnalogDef[analognum][analogaxis];
+static void GetAnalogDescription(char *buf, int joynum, int analognum, int dir) {
+	const char *hatname[16] = {_("Centered"), _("Up"), _("Right"), _("Rightup"),
+		_("Down"), "", _("Rightdown"), "", _("Left"), _("Leftup"), "", "",
+		_("Leftdown"), "", "", ""};
 
-	if (v == 0) {
-		sprintf(buf, _("(Not Set)"));
-	} else {
-		sprintf(buf, _("Joystick: Axis %d%s"), abs(v) - 1, (v < 0) ? _(" (Reversed)") : "");
+	switch (g.cfg.PadDef[joynum].AnalogDef[analognum][dir].JoyEvType) {
+		case BUTTON:
+			sprintf(buf, _("Joystick: Button %d"), g.cfg.PadDef[joynum].AnalogDef[analognum][dir].J.Button);
+			break;
+
+		case AXIS:
+			sprintf(buf, _("Joystick: Axis %d%c"), abs(g.cfg.PadDef[joynum].AnalogDef[analognum][dir].J.Axis) - 1,
+				g.cfg.PadDef[joynum].AnalogDef[analognum][dir].J.Axis > 0 ? '+' : '-');
+			break;
+
+		case HAT:
+			sprintf(buf, _("Joystick: Hat %d %s"), (g.cfg.PadDef[joynum].AnalogDef[analognum][dir].J.Hat >> 8),
+				hatname[g.cfg.PadDef[joynum].AnalogDef[analognum][dir].J.Hat & 0x0F]);
+			break;
+
+		case NONE:
+		default:
+			buf[0] = '\0';
+			break;
+	}
+
+	if (g.cfg.PadDef[joynum].AnalogDef[analognum][dir].Key != 0) {
+		if (buf[0] != '\0') {
+			strcat(buf, " / ");
+		}
+
+		strcat(buf, _("Keyboard:"));
+		strcat(buf, " ");
+		strcat(buf, XKeysymToString(g.cfg.PadDef[joynum].AnalogDef[analognum][dir].Key));
+	} else if (buf[0] == '\0') {
+		strcpy(buf, _("(Not Set)"));
 	}
 }
 
@@ -157,20 +190,28 @@ static void UpdateKeyList() {
 	xml = glade_get_widget_tree(MainWindow);
 
 	for (i = 0; i < 2; i++) {
+		int total;
+
+		if (g.cfg.PadDef[i].Type == PSE_PAD_TYPE_ANALOGPAD) {
+			total = DKEY_TOTAL;
+		} else {
+			total = DKEY_TOTAL - 2;
+		}
+
 		widget = glade_xml_get_widget(xml, widgetname[i]);
 
 		store = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
 
-		for (j = 0; j < DKEY_TOTAL; j++) {
+		for (j = 0; j < total; j++) {
 			gtk_list_store_append(store, &iter);
 			GetKeyDescription(buf, i, DPad[j]);
 			gtk_list_store_set(store, &iter, 0, _(DPadText[j]), 1, buf, -1);
 		}
 
 		if (g.cfg.PadDef[i].Type == PSE_PAD_TYPE_ANALOGPAD) {
-			for (j = 0; j < 4; j++) {
+			for (j = 0; j < 8; j++) {
 				gtk_list_store_append(store, &iter);
-				GetAnalogDescription(buf, i, j / 2, j % 2);
+				GetAnalogDescription(buf, i, j / 4, j % 4);
 				gtk_list_store_set(store, &iter, 0, _(AnalogText[j]), 1, buf, -1);
 			}
 		}
@@ -204,7 +245,7 @@ static void UpdateKey() {
 		if (index < DKEY_TOTAL) {
 			GetKeyDescription(buf, i, DPad[index]);
 		} else {
-			GetAnalogDescription(buf, i, (index - DKEY_TOTAL) / 2, (index - DKEY_TOTAL) % 2);
+			GetAnalogDescription(buf, i, (index - DKEY_TOTAL) / 4, (index - DKEY_TOTAL) % 4);
 		}
 
 		g_value_init(&value, G_TYPE_STRING);
@@ -286,17 +327,6 @@ static void OnThreadedToggled(GtkWidget *widget, gpointer user_data) {
 	g.cfg.Threaded = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 }
 
-static void SysErrorMessage(gchar *primary, gchar *secondary) {
-	GtkWidget *message_dialog;	
-
-	message_dialog = gtk_message_dialog_new(NULL,
-		GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, primary, NULL);
-	gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG (message_dialog), secondary);
-
-	gtk_dialog_run(GTK_DIALOG(message_dialog));
-	gtk_widget_destroy(message_dialog);
-}
-
 static void ReadDKeyEvent(int padnum, int key) {
 	SDL_Joystick *js;
 	time_t t;
@@ -376,44 +406,72 @@ end:
 	}
 }
 
-static void ReadAnalogEvent(int padnum, int analognum, int analogaxis) {
+static void ReadAnalogEvent(int padnum, int analognum, int analogdir) {
 	SDL_Joystick *js;
 	time_t t;
 	GdkEvent *ge;
 	int i;
 	Sint16 axis;
 
-	if (g.cfg.PadDef[padnum].DevNum < 0) {
-		SysErrorMessage(_("Device not set"), _("Please select a valid Joystick Device"));
-		return;
-	}
-
-	js = SDL_JoystickOpen(g.cfg.PadDef[padnum].DevNum);
-	if (js == NULL) {
-		SysErrorMessage(_("Device open error"), _("Unable to open Joystick Device"));
-		return;
+	if (g.cfg.PadDef[padnum].DevNum >= 0) {
+		js = SDL_JoystickOpen(g.cfg.PadDef[padnum].DevNum);
+		SDL_JoystickEventState(SDL_IGNORE);
+	} else {
+		js = NULL;
 	}
 
 	t = time(NULL);
 
 	while (time(NULL) < t + 10) {
 		// check joystick events
-		SDL_JoystickUpdate();
-		for (i = 0; i < SDL_JoystickNumAxes(js); i++) {
-			axis = SDL_JoystickGetAxis(js, i);
-			if (abs(axis) > 16383) {
-				g.cfg.PadDef[padnum].AnalogDef[analognum][analogaxis] = (i + 1) * (axis > 0 ? 1 : -1);
-				goto end1;
+		if (js != NULL) {
+			SDL_JoystickUpdate();
+
+			for (i = 0; i < SDL_JoystickNumButtons(js); i++) {
+				if (SDL_JoystickGetButton(js, i)) {
+					g.cfg.PadDef[padnum].AnalogDef[analognum][analogdir].JoyEvType = BUTTON;
+					g.cfg.PadDef[padnum].AnalogDef[analognum][analogdir].J.Button = i;
+					goto end;
+				}
+			}
+
+			for (i = 0; i < SDL_JoystickNumAxes(js); i++) {
+				axis = SDL_JoystickGetAxis(js, i);
+				if (abs(axis) > 16383) {
+					g.cfg.PadDef[padnum].AnalogDef[analognum][analogdir].JoyEvType = AXIS;
+					g.cfg.PadDef[padnum].AnalogDef[analognum][analogdir].J.Axis = (i + 1) * (axis > 0 ? 1 : -1);
+					goto end;
+				}
+			}
+
+			for (i = 0; i < SDL_JoystickNumHats(js); i++) {
+				axis = SDL_JoystickGetHat(js, i);
+				if (axis != SDL_HAT_CENTERED) {
+					g.cfg.PadDef[padnum].AnalogDef[analognum][analogdir].JoyEvType = HAT;
+
+					if (axis & SDL_HAT_UP) {
+						g.cfg.PadDef[padnum].AnalogDef[analognum][analogdir].J.Hat = ((i << 8) | SDL_HAT_UP);
+					} else if (axis & SDL_HAT_DOWN) {
+						g.cfg.PadDef[padnum].AnalogDef[analognum][analogdir].J.Hat = ((i << 8) | SDL_HAT_DOWN);
+					} else if (axis & SDL_HAT_LEFT) {
+						g.cfg.PadDef[padnum].AnalogDef[analognum][analogdir].J.Hat = ((i << 8) | SDL_HAT_LEFT);
+					} else if (axis & SDL_HAT_RIGHT) {
+						g.cfg.PadDef[padnum].AnalogDef[analognum][analogdir].J.Hat = ((i << 8) | SDL_HAT_RIGHT);
+					}
+
+					goto end;
+				}
 			}
 		}
 
 		// check keyboard events
 		while ((ge = gdk_event_get()) != NULL) {
 			if (ge->type == GDK_KEY_PRESS) {
-				if (ge->key.keyval == XK_Escape) {
-					gdk_event_free(ge);
-					goto end1;
+				if (ge->key.keyval != XK_Escape) {
+					g.cfg.PadDef[padnum].AnalogDef[analognum][analogdir].Key = ge->key.keyval;
 				}
+				gdk_event_free(ge);
+				goto end;
 			}
 			gdk_event_free(ge);
 		}
@@ -421,8 +479,10 @@ static void ReadAnalogEvent(int padnum, int analognum, int analogaxis) {
 		usleep(5000);
 	}
 
-end1:
-	SDL_JoystickClose(js);
+end:
+	if (js != NULL) {
+		SDL_JoystickClose(js);
+	}
 }
 
 static void OnChangeClicked(GtkWidget *widget, gpointer user_data) {
@@ -435,7 +495,7 @@ static void OnChangeClicked(GtkWidget *widget, gpointer user_data) {
 		ReadDKeyEvent(pad, DPad[index]);
 	} else {
 		index -= DKEY_TOTAL;
-		ReadAnalogEvent(pad, index / 2, index % 2);
+		ReadAnalogEvent(pad, index / 4, index % 4);
 	}
 
 	UpdateKey();
@@ -453,7 +513,9 @@ static void OnResetClicked(GtkWidget *widget, gpointer user_data) {
 		g.cfg.PadDef[pad].KeyDef[DPad[index]].J.Button = 0;
 	} else {
 		index -= DKEY_TOTAL;
-		g.cfg.PadDef[pad].AnalogDef[index / 2][index % 2] = 0;
+		g.cfg.PadDef[pad].AnalogDef[index / 4][index % 4].Key = 0;
+		g.cfg.PadDef[pad].AnalogDef[index / 4][index % 4].JoyEvType = NONE;
+		g.cfg.PadDef[pad].AnalogDef[index / 4][index % 4].J.Button = 0;
 	}
 
 	UpdateKey();
@@ -641,11 +703,7 @@ void PADabout() {
 	GtkWidget *widget;
 
 	widget = gtk_about_dialog_new();
-#ifdef EPSXE
-	gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(widget), "Gamepad/Keyboard Input (ePSXe)");
-#else
 	gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(widget), "Gamepad/Keyboard Input");
-#endif
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(widget), "1.1");
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(widget), authors);
 	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(widget), "http://www.codeplex.com/pcsxr/");

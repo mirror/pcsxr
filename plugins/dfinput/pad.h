@@ -23,8 +23,6 @@
 extern "C" {
 #endif
 
-//#define EPSXE 1
-
 #include "config.h"
 
 #include <stdio.h>
@@ -93,13 +91,13 @@ typedef struct tagKeyDef {
 	uint16_t		Key;
 } KEYDEF;
 
-enum { ANALOG_X = 0, ANALOG_Y };
+enum { ANALOG_XP = 0, ANALOG_XM, ANALOG_YP, ANALOG_YM };
 
 typedef struct tagPadDef {
 	int8_t			DevNum;
 	uint16_t		Type;
 	KEYDEF			KeyDef[DKEY_TOTAL];
-	int16_t			AnalogDef[ANALOG_TOTAL][2]; // positive=axis+, negative=axis-, abs(Axis)-1=axis index
+	KEYDEF			AnalogDef[ANALOG_TOTAL][4];
 } PADDEF;
 
 typedef struct tagConfig {
@@ -113,7 +111,8 @@ typedef struct tagPadState {
 	uint8_t				PadID;
 	volatile uint16_t	KeyStatus;
 	volatile uint16_t	JoyKeyStatus;
-	volatile uint8_t	AnalogStatus[ANALOG_TOTAL][2]; // 0-255 where 128 is center position
+	volatile uint8_t	AnalogStatus[ANALOG_TOTAL][2]; // 0-255 where 127 is center position
+	volatile uint8_t	AnalogKeyStatus[ANALOG_TOTAL][4];
 } PADSTATE;
 
 typedef struct tagGlobalData {
@@ -156,6 +155,8 @@ void CheckKeyboard();
 // analog.c functions...
 void InitAnalog();
 void CheckAnalog();
+int AnalogKeyPressed(uint16_t Key);
+int AnalogKeyReleased(uint16_t Key);
 
 // pad.c functions...
 char *PSEgetLibName(void);
