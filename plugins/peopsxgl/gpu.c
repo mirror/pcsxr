@@ -782,12 +782,33 @@ void sysdep_create_display(void)                       // create display
  printf("\n");
 */
 
- if(fx)                                                // after make current: fullscreen resize
+ if (fx)                                               // after make current: fullscreen resize
   {
    XResizeWindow(display,window,screen->width,screen->height);
    hints.min_width   = hints.max_width = hints.base_width = screen->width;
    hints.min_height= hints.max_height = hints.base_height = screen->height;
    XSetWMNormalHints(display,window,&hints);
+
+   // set the window layer for GNOME
+   {
+    XEvent xev;
+
+    memset(&xev, 0, sizeof(xev));
+    xev.xclient.type = ClientMessage;
+    xev.xclient.serial = 0;
+    xev.xclient.send_event = 1;
+    xev.xclient.message_type = XInternAtom(display, "_NET_WM_STATE", 0);
+    xev.xclient.window = window;
+    xev.xclient.format = 32;
+    xev.xclient.data.l[0] = 1;
+    xev.xclient.data.l[1] = XInternAtom(display, "_NET_WM_STATE_FULLSCREEN", 0);
+    xev.xclient.data.l[2] = 0;
+    xev.xclient.data.l[3] = 0;
+    xev.xclient.data.l[4] = 0;
+
+    XSendEvent(display, RootWindow(display, DefaultScreen(display)), 0,
+      SubstructureRedirectMask | SubstructureNotifyMask, &xev);
+   }
   }
 }
 
