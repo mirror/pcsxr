@@ -87,7 +87,7 @@ LangDef sLangs[] = {
 	{ "ru",		N_("Russian"),				0x0419 },
 	{ "zh_CN",	N_("Simplified Chinese"),	0x0804 },
 	{ "zh_TW",	N_("Traditional Chinese"),	0x0404 },
-	{ "jp",		N_("Japanese"),				0x0411 },
+	{ "ja",		N_("Japanese"),				0x0411 },
 	{ "ko",		N_("Korean"),				0x0412 },
 	{ "", "", 0xFFFF },
 };
