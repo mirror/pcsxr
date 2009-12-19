@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-04 14:14+0800\n"
-"PO-Revision-Date: 2009-12-04 14:15+0700\n"
+"POT-Creation-Date: 2009-12-19 12:58+0800\n"
+"PO-Revision-Date: 2009-12-19 12:59+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -64,8 +64,8 @@ msgstr "關於 PCSX"
 #: ../win32/gui/CheatDlg.c:120
 #: ../win32/gui/ConfigurePlugins.c:470
 #: ../win32/gui/ConfigurePlugins.c:601
-#: ../win32/gui/WndMain.c:963
-#: ../win32/gui/WndMain.c:1199
+#: ../win32/gui/WndMain.c:964
+#: ../win32/gui/WndMain.c:1200
 #: ../plugins/peopsxgl/gpucfg/interface.c:130
 #: ../plugins/peopsxgl/gpucfg/interface.c:843
 msgid "OK"
@@ -109,8 +109,8 @@ msgstr "金手指碼:"
 #: ../win32/gui/CheatDlg.c:121
 #: ../win32/gui/ConfigurePlugins.c:471
 #: ../win32/gui/ConfigurePlugins.c:602
-#: ../win32/gui/WndMain.c:964
-#: ../win32/gui/WndMain.c:1200
+#: ../win32/gui/WndMain.c:965
+#: ../win32/gui/WndMain.c:1201
 #: ../plugins/peopsxgl/gpucfg/interface.c:338
 msgid "Cancel"
 msgstr "取消"
@@ -454,25 +454,25 @@ msgid "Note: The NetPlay Plugin Directory should be the same as the other Plugin
 msgstr "注意: 聯網遊戲外掛應和其它外掛放在同一資料夾中。"
 
 #: ../win32/gui/plugin.c:90
-#: ../win32/gui/WndMain.c:278
+#: ../win32/gui/WndMain.c:279
 #, c-format
 msgid "*PCSX*: Saved State %d"
 msgstr "*PCSX*: Saved State %d"
 
 #: ../win32/gui/plugin.c:91
-#: ../win32/gui/WndMain.c:279
+#: ../win32/gui/WndMain.c:280
 #, c-format
 msgid "*PCSX*: Error Saving State %d"
 msgstr "*PCSX*: Error Saving State %d"
 
 #: ../win32/gui/plugin.c:107
-#: ../win32/gui/WndMain.c:256
+#: ../win32/gui/WndMain.c:257
 #, c-format
 msgid "*PCSX*: Loaded State %d"
 msgstr "*PCSX*: Loaded State %d"
 
 #: ../win32/gui/plugin.c:108
-#: ../win32/gui/WndMain.c:257
+#: ../win32/gui/WndMain.c:258
 #, c-format
 msgid "*PCSX*: Error Loading State %d"
 msgstr "*PCSX*: Error Loading State %d"
@@ -616,8 +616,8 @@ msgid "Greek"
 msgstr "希臘語"
 
 #: ../win32/gui/WndMain.c:80
-#: ../win32/gui/WndMain.c:1556
-#: ../win32/gui/WndMain.c:1558
+#: ../win32/gui/WndMain.c:1557
+#: ../win32/gui/WndMain.c:1559
 msgid "English"
 msgstr "英語"
 
@@ -638,106 +638,110 @@ msgid "Portuguese"
 msgstr "葡萄牙語"
 
 #: ../win32/gui/WndMain.c:85
+msgid "Portuguese (Brazilian)"
+msgstr "葡萄牙語 (巴西)"
+
+#: ../win32/gui/WndMain.c:86
 msgid "Romanian"
 msgstr "羅馬尼亞語"
 
-#: ../win32/gui/WndMain.c:86
+#: ../win32/gui/WndMain.c:87
 msgid "Russian"
 msgstr "俄語"
 
-#: ../win32/gui/WndMain.c:87
+#: ../win32/gui/WndMain.c:88
 msgid "Simplified Chinese"
 msgstr "簡體中文"
 
-#: ../win32/gui/WndMain.c:88
+#: ../win32/gui/WndMain.c:89
 msgid "Traditional Chinese"
 msgstr "正體中文"
 
-#: ../win32/gui/WndMain.c:89
+#: ../win32/gui/WndMain.c:90
 msgid "Japanese"
 msgstr "日語"
 
-#: ../win32/gui/WndMain.c:90
+#: ../win32/gui/WndMain.c:91
 msgid "Korean"
 msgstr "韓國語"
 
-#: ../win32/gui/WndMain.c:297
-#: ../win32/gui/WndMain.c:349
+#: ../win32/gui/WndMain.c:298
+#: ../win32/gui/WndMain.c:350
 msgid "PCSX State Format"
 msgstr "PCSX 記錄格式"
 
-#: ../win32/gui/WndMain.c:324
+#: ../win32/gui/WndMain.c:325
 #, c-format
 msgid "*PCSX*: Loaded State %s"
 msgstr "*PCSX*: Loaded State %s"
 
-#: ../win32/gui/WndMain.c:325
+#: ../win32/gui/WndMain.c:326
 #, c-format
 msgid "*PCSX*: Error Loading State %s"
 msgstr "*PCSX*: Error Loading State %s"
 
-#: ../win32/gui/WndMain.c:376
+#: ../win32/gui/WndMain.c:377
 #, c-format
 msgid "*PCSX*: Saved State %s"
 msgstr "*PCSX*: Saved State %s"
 
-#: ../win32/gui/WndMain.c:377
+#: ../win32/gui/WndMain.c:378
 #, c-format
 msgid "*PCSX*: Error Saving State %s"
 msgstr "*PCSX*: Error Saving State %s"
 
-#: ../win32/gui/WndMain.c:426
-#: ../win32/gui/WndMain.c:475
+#: ../win32/gui/WndMain.c:427
+#: ../win32/gui/WndMain.c:476
 #: ../gui/Gtk2Gui.c:479
 #: ../gui/Gtk2Gui.c:604
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "此光碟不是一張合法的 PlayStation 光碟。"
 
-#: ../win32/gui/WndMain.c:432
-#: ../win32/gui/WndMain.c:481
+#: ../win32/gui/WndMain.c:433
+#: ../win32/gui/WndMain.c:482
 #: ../gui/Gtk2Gui.c:487
 #: ../gui/Gtk2Gui.c:612
 msgid "Could not load CD-ROM!"
 msgstr "無法加載光碟!"
 
-#: ../win32/gui/WndMain.c:442
+#: ../win32/gui/WndMain.c:443
 msgid "Running BIOS is not supported with Internal HLE Bios."
 msgstr "內部 HLE BIOS 不支援直接執行。"
 
-#: ../win32/gui/WndMain.c:661
+#: ../win32/gui/WndMain.c:662
 #: ../gui/MemcardDlg.c:59
 msgid "Title"
 msgstr "標題"
 
-#: ../win32/gui/WndMain.c:667
+#: ../win32/gui/WndMain.c:668
 #: ../gui/MemcardDlg.c:65
 msgid "Status"
 msgstr "狀態"
 
-#: ../win32/gui/WndMain.c:673
+#: ../win32/gui/WndMain.c:674
 msgid "Game ID"
 msgstr "遊戲 ID"
 
-#: ../win32/gui/WndMain.c:679
+#: ../win32/gui/WndMain.c:680
 msgid "Game"
 msgstr "遊戲"
 
-#: ../win32/gui/WndMain.c:853
+#: ../win32/gui/WndMain.c:854
 msgid "mid link block"
 msgstr "mid link block"
 
-#: ../win32/gui/WndMain.c:856
+#: ../win32/gui/WndMain.c:857
 msgid "terminiting link block"
 msgstr "terminiting link block"
 
-#: ../win32/gui/WndMain.c:864
+#: ../win32/gui/WndMain.c:865
 #: ../gui/MemcardDlg.c:147
 #: ../gui/MemcardDlg.c:244
 msgid "Deleted"
 msgstr "已刪除"
 
-#: ../win32/gui/WndMain.c:865
-#: ../win32/gui/WndMain.c:868
+#: ../win32/gui/WndMain.c:866
+#: ../win32/gui/WndMain.c:869
 #: ../gui/MemcardDlg.c:149
 #: ../gui/MemcardDlg.c:153
 #: ../gui/MemcardDlg.c:246
@@ -745,320 +749,320 @@ msgstr "已刪除"
 msgid "Free"
 msgstr "空閑"
 
-#: ../win32/gui/WndMain.c:867
+#: ../win32/gui/WndMain.c:868
 #: ../gui/MemcardDlg.c:151
 #: ../gui/MemcardDlg.c:248
 msgid "Used"
 msgstr "已使用"
 
-#: ../win32/gui/WndMain.c:961
+#: ../win32/gui/WndMain.c:962
 msgid "Memcard Manager"
 msgstr "記憶卡管理器"
 
-#: ../win32/gui/WndMain.c:965
-#: ../win32/gui/WndMain.c:968
+#: ../win32/gui/WndMain.c:966
+#: ../win32/gui/WndMain.c:969
 msgid "Select Mcd"
 msgstr "選擇"
 
-#: ../win32/gui/WndMain.c:966
-#: ../win32/gui/WndMain.c:969
+#: ../win32/gui/WndMain.c:967
+#: ../win32/gui/WndMain.c:970
 msgid "Format Mcd"
 msgstr "格式化"
 
-#: ../win32/gui/WndMain.c:967
-#: ../win32/gui/WndMain.c:970
+#: ../win32/gui/WndMain.c:968
+#: ../win32/gui/WndMain.c:971
 msgid "Reload Mcd"
 msgstr "重新加載"
 
-#: ../win32/gui/WndMain.c:971
+#: ../win32/gui/WndMain.c:972
 msgid "-> Copy ->"
 msgstr "-> 複制 ->"
 
-#: ../win32/gui/WndMain.c:972
+#: ../win32/gui/WndMain.c:973
 msgid "<- Copy <-"
 msgstr "<- 複制 <-"
 
-#: ../win32/gui/WndMain.c:973
+#: ../win32/gui/WndMain.c:974
 msgid "Paste"
 msgstr "粘貼"
 
-#: ../win32/gui/WndMain.c:974
+#: ../win32/gui/WndMain.c:975
 msgid "<- Un/Delete"
 msgstr "<- 刪除/恢複"
 
-#: ../win32/gui/WndMain.c:975
+#: ../win32/gui/WndMain.c:976
 msgid "Un/Delete ->"
 msgstr "刪除/恢複 ->"
 
-#: ../win32/gui/WndMain.c:977
+#: ../win32/gui/WndMain.c:978
 msgid "Memory Card 1"
 msgstr "記憶卡 1"
 
-#: ../win32/gui/WndMain.c:978
+#: ../win32/gui/WndMain.c:979
 msgid "Memory Card 2"
 msgstr "記憶卡 2"
 
-#: ../win32/gui/WndMain.c:1033
+#: ../win32/gui/WndMain.c:1034
 msgid "Are you sure you want to paste this selection?"
 msgstr "是否確認粘貼此選中內容?"
 
-#: ../win32/gui/WndMain.c:1033
-#: ../win32/gui/WndMain.c:1144
-#: ../win32/gui/WndMain.c:1151
+#: ../win32/gui/WndMain.c:1034
+#: ../win32/gui/WndMain.c:1145
+#: ../win32/gui/WndMain.c:1152
 msgid "Confirmation"
 msgstr "確認"
 
-#: ../win32/gui/WndMain.c:1144
-#: ../win32/gui/WndMain.c:1151
+#: ../win32/gui/WndMain.c:1145
+#: ../win32/gui/WndMain.c:1152
 msgid "Are you sure you want to format this Memory Card?"
 msgstr "是否確認格式化此記憶卡?"
 
-#: ../win32/gui/WndMain.c:1197
+#: ../win32/gui/WndMain.c:1198
 msgid "Cpu Config"
 msgstr "CPU 配置"
 
-#: ../win32/gui/WndMain.c:1202
+#: ../win32/gui/WndMain.c:1203
 msgid "Disable Xa Decoding"
 msgstr "禁用 XA 解碼"
 
-#: ../win32/gui/WndMain.c:1203
+#: ../win32/gui/WndMain.c:1204
 msgid "Sio Irq Always Enabled"
 msgstr "SIO IRQ 總是開啟"
 
-#: ../win32/gui/WndMain.c:1204
+#: ../win32/gui/WndMain.c:1205
 msgid "Black && White Movies"
 msgstr "黑白電影"
 
-#: ../win32/gui/WndMain.c:1205
+#: ../win32/gui/WndMain.c:1206
 msgid "Disable Cd audio"
 msgstr "禁用 CD 音頻"
 
-#: ../win32/gui/WndMain.c:1206
+#: ../win32/gui/WndMain.c:1207
 #: ../data/pcsx.glade2:1603
 msgid "Autodetect"
 msgstr "自動檢測"
 
-#: ../win32/gui/WndMain.c:1207
+#: ../win32/gui/WndMain.c:1208
 msgid "Enable Interpreter Cpu"
 msgstr "開啟解釋執行 CPU"
 
-#: ../win32/gui/WndMain.c:1208
+#: ../win32/gui/WndMain.c:1209
 #: ../data/pcsx.glade2:1459
 msgid "Enable Console Output"
 msgstr "開啟控制台輸出"
 
-#: ../win32/gui/WndMain.c:1209
+#: ../win32/gui/WndMain.c:1210
 #: ../data/pcsx.glade2:1409
 msgid "Enable Debugger"
 msgstr "開啟調試器"
 
-#: ../win32/gui/WndMain.c:1210
+#: ../win32/gui/WndMain.c:1211
 msgid "Spu Irq Always Enabled"
 msgstr "SPU IRQ 總是開啟"
 
-#: ../win32/gui/WndMain.c:1211
+#: ../win32/gui/WndMain.c:1212
 #: ../data/pcsx.glade2:1546
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr "Parasite Eve 2, Vandal Hearts 1/2 修正"
 
-#: ../win32/gui/WndMain.c:1212
+#: ../win32/gui/WndMain.c:1213
 #: ../data/pcsx.glade2:1561
 msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku 戰斗修正"
 
-#: ../win32/gui/WndMain.c:1214
+#: ../win32/gui/WndMain.c:1215
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:277
 #: ../plugins/dfinput/dfinput.glade2:448
 msgid "Options"
 msgstr "選項"
 
-#: ../win32/gui/WndMain.c:1215
+#: ../win32/gui/WndMain.c:1216
 msgid "Psx System Type"
 msgstr "Psx 系統類型"
 
-#: ../win32/gui/WndMain.c:1320
+#: ../win32/gui/WndMain.c:1321
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 msgstr "Psx 記憶卡格式 (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 
-#: ../win32/gui/WndMain.c:1325
+#: ../win32/gui/WndMain.c:1326
 msgid "Psx Memory Card (*.mcr;*.mc)"
 msgstr "Psx 記憶卡 (*.mcr;*.mc)"
 
-#: ../win32/gui/WndMain.c:1330
+#: ../win32/gui/WndMain.c:1331
 msgid "CVGS Memory Card (*.mem;*.vgs)"
 msgstr "VGS 記憶卡 (*.mem;*.vgs)"
 
-#: ../win32/gui/WndMain.c:1335
+#: ../win32/gui/WndMain.c:1336
 msgid "Bleem Memory Card (*.mcd)"
 msgstr "Bleem 記憶卡 (*.mcd)"
 
-#: ../win32/gui/WndMain.c:1340
+#: ../win32/gui/WndMain.c:1341
 msgid "DexDrive Memory Card (*.gme)"
 msgstr "DexDrive 記憶卡 (*.gme)"
 
-#: ../win32/gui/WndMain.c:1345
+#: ../win32/gui/WndMain.c:1346
 msgid "DataDeck Memory Card (*.ddf)"
 msgstr "DataDeck 記憶卡 (*.ddl)"
 
-#: ../win32/gui/WndMain.c:1350
-#: ../win32/gui/WndMain.c:1431
+#: ../win32/gui/WndMain.c:1351
+#: ../win32/gui/WndMain.c:1432
 #: ../gui/Cheat.c:322
 #: ../gui/Gtk2Gui.c:416
 #: ../gui/Gtk2Gui.c:555
 msgid "All Files"
 msgstr "所有檔案"
 
-#: ../win32/gui/WndMain.c:1389
+#: ../win32/gui/WndMain.c:1390
 msgid "Psx Exe Format"
 msgstr "PSX EXE 格式"
 
-#: ../win32/gui/WndMain.c:1426
+#: ../win32/gui/WndMain.c:1427
 msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin)"
 msgstr "Psx 鏡像檔 (*.iso;*.mdf;*.img;*.bin)"
 
-#: ../win32/gui/WndMain.c:1502
+#: ../win32/gui/WndMain.c:1503
 msgid "&File"
 msgstr "檔案(&F)"
 
-#: ../win32/gui/WndMain.c:1503
+#: ../win32/gui/WndMain.c:1504
 msgid "E&xit"
 msgstr "離開(&X)"
 
-#: ../win32/gui/WndMain.c:1505
+#: ../win32/gui/WndMain.c:1506
 msgid "Run &EXE..."
 msgstr "執行 EXE(&E)..."
 
-#: ../win32/gui/WndMain.c:1506
+#: ../win32/gui/WndMain.c:1507
 msgid "Run &BIOS"
 msgstr "執行 BIOS(&B)"
 
-#: ../win32/gui/WndMain.c:1507
+#: ../win32/gui/WndMain.c:1508
 msgid "Run &ISO..."
 msgstr "執行 ISO(&I)..."
 
-#: ../win32/gui/WndMain.c:1508
+#: ../win32/gui/WndMain.c:1509
 msgid "Run &CD"
 msgstr "執行光碟(&C)"
 
-#: ../win32/gui/WndMain.c:1510
+#: ../win32/gui/WndMain.c:1511
 msgid "&Emulator"
 msgstr "模擬器(&E)"
 
-#: ../win32/gui/WndMain.c:1511
+#: ../win32/gui/WndMain.c:1512
 msgid "&States"
 msgstr "記錄(&S)"
 
-#: ../win32/gui/WndMain.c:1513
+#: ../win32/gui/WndMain.c:1514
 msgid "S&witch ISO..."
 msgstr "更換 ISO(&W)..."
 
-#: ../win32/gui/WndMain.c:1515
+#: ../win32/gui/WndMain.c:1516
 msgid "Re&set"
 msgstr "複位(&S)"
 
-#: ../win32/gui/WndMain.c:1516
+#: ../win32/gui/WndMain.c:1517
 msgid "&Run"
 msgstr "執行(&R)"
 
-#: ../win32/gui/WndMain.c:1517
+#: ../win32/gui/WndMain.c:1518
 msgid "&Save"
 msgstr "存儲(&S)"
 
-#: ../win32/gui/WndMain.c:1518
+#: ../win32/gui/WndMain.c:1519
 msgid "&Load"
 msgstr "讀取(&L)"
 
-#: ../win32/gui/WndMain.c:1519
-#: ../win32/gui/WndMain.c:1525
+#: ../win32/gui/WndMain.c:1520
+#: ../win32/gui/WndMain.c:1526
 msgid "&Other..."
 msgstr "其它(&O)..."
 
-#: ../win32/gui/WndMain.c:1520
-#: ../win32/gui/WndMain.c:1526
+#: ../win32/gui/WndMain.c:1521
+#: ../win32/gui/WndMain.c:1527
 msgid "Slot &5"
 msgstr "記錄 5(&5)"
 
-#: ../win32/gui/WndMain.c:1521
-#: ../win32/gui/WndMain.c:1527
+#: ../win32/gui/WndMain.c:1522
+#: ../win32/gui/WndMain.c:1528
 msgid "Slot &4"
 msgstr "記錄 4(&4)"
 
-#: ../win32/gui/WndMain.c:1522
-#: ../win32/gui/WndMain.c:1528
+#: ../win32/gui/WndMain.c:1523
+#: ../win32/gui/WndMain.c:1529
 msgid "Slot &3"
 msgstr "記錄 3(&3)"
 
-#: ../win32/gui/WndMain.c:1523
-#: ../win32/gui/WndMain.c:1529
+#: ../win32/gui/WndMain.c:1524
+#: ../win32/gui/WndMain.c:1530
 msgid "Slot &2"
 msgstr "記錄 2(&2)"
 
-#: ../win32/gui/WndMain.c:1524
-#: ../win32/gui/WndMain.c:1530
+#: ../win32/gui/WndMain.c:1525
+#: ../win32/gui/WndMain.c:1531
 msgid "Slot &1"
 msgstr "記錄 1(&1)"
 
-#: ../win32/gui/WndMain.c:1532
+#: ../win32/gui/WndMain.c:1533
 msgid "&Configuration"
 msgstr "配置(&C)"
 
-#: ../win32/gui/WndMain.c:1533
+#: ../win32/gui/WndMain.c:1534
 msgid "Cheat &Search..."
 msgstr "搜尋金手指碼(&S)..."
 
-#: ../win32/gui/WndMain.c:1534
+#: ../win32/gui/WndMain.c:1535
 msgid "Ch&eat Code..."
 msgstr "金手指碼(&E)..."
 
-#: ../win32/gui/WndMain.c:1537
+#: ../win32/gui/WndMain.c:1538
 msgid "&Language"
 msgstr "語言(&L)"
 
-#: ../win32/gui/WndMain.c:1562
+#: ../win32/gui/WndMain.c:1563
 msgid "&Memory cards..."
 msgstr "記憶卡(&M)..."
 
-#: ../win32/gui/WndMain.c:1563
+#: ../win32/gui/WndMain.c:1564
 msgid "C&PU..."
 msgstr "CPU(&P)..."
 
-#: ../win32/gui/WndMain.c:1565
+#: ../win32/gui/WndMain.c:1566
 msgid "&NetPlay..."
 msgstr "聯網遊戲(&N)..."
 
-#: ../win32/gui/WndMain.c:1567
+#: ../win32/gui/WndMain.c:1568
 msgid "&Controllers..."
 msgstr "控制器(&C)..."
 
-#: ../win32/gui/WndMain.c:1568
+#: ../win32/gui/WndMain.c:1569
 msgid "CD-&ROM..."
 msgstr "CD-ROM(&R)..."
 
-#: ../win32/gui/WndMain.c:1569
+#: ../win32/gui/WndMain.c:1570
 msgid "&Sound..."
 msgstr "聲音(&S)..."
 
-#: ../win32/gui/WndMain.c:1570
+#: ../win32/gui/WndMain.c:1571
 msgid "&Graphics..."
 msgstr "圖像(&G)..."
 
-#: ../win32/gui/WndMain.c:1572
+#: ../win32/gui/WndMain.c:1573
 msgid "&Plugins && Bios..."
 msgstr "外掛及 BIOS(&P)..."
 
-#: ../win32/gui/WndMain.c:1574
+#: ../win32/gui/WndMain.c:1575
 msgid "&Help"
 msgstr "說明(&H)"
 
-#: ../win32/gui/WndMain.c:1575
+#: ../win32/gui/WndMain.c:1576
 msgid "&About..."
 msgstr "關於(&A)..."
 
-#: ../win32/gui/WndMain.c:1761
+#: ../win32/gui/WndMain.c:1762
 msgid "Pcsx Msg"
 msgstr "Pcsx 消息"
 
-#: ../win32/gui/WndMain.c:1764
+#: ../win32/gui/WndMain.c:1765
 msgid "Error Loading Symbol"
 msgstr "無法加載符號"
 

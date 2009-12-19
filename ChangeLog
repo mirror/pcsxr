@@ -1,3 +1,8 @@
+December 19, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * win32/gui/WndMain.c: Added Portuguese (Brazilian) to the language list.
+ * po/pt_BR.po, po/zh_CN.po, po/zh_TW.po, po/pcsx.pot: Updated.
+
 December 8, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/peopsxgl/gpu.c: Hide the panels in fullscreen mode.
