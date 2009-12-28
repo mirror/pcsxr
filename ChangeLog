@@ -1,3 +1,18 @@
+December 28, 2009 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * data/pcsx.glade2: Reverted to "Close" button instead of "OK/Cancel" for
+   consistency with GNOME UI standards.
+ * plugins/dfsound/spucfg-0.1df/dfsound.glade2: Likewise.
+ * plugins/dfsound/spucfg-0.1df/main.c: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2: Likewise.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Likewise.
+ * plugins/dfinput/cfg-gtk2.c: Likewise.
+ * plugins/dfinput/dfinput.glade2: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/main.c: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2: Likewise.
+ * gui/ConfDlg.c: Likewise.
+ * po/zh_TW.po: Updated.
+
 December 19, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * win32/gui/WndMain.c: Added Portuguese (Brazilian) to the language list.

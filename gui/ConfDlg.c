@@ -179,12 +179,9 @@ void ConfigurePlugins() {
 }
 
 void OnNet_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
-	if (arg1 == GTK_RESPONSE_OK) {
-		GetComboText(NetConfS.Combo, NetConfS.plist, Config.Net);
-		SaveConfig();
-	}
-
-	gtk_widget_destroy(GTK_WIDGET (dialog));
+	GetComboText(NetConfS.Combo, NetConfS.plist, Config.Net);
+	SaveConfig();
+	gtk_widget_destroy(GTK_WIDGET(dialog));
 	NetDlg = NULL;
 }
 
@@ -450,16 +447,14 @@ static void OnBiosPath_Changed(GtkWidget *wdg, gpointer data) {
 }
 
 void OnConf_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
-	if (arg1 == GTK_RESPONSE_OK) {
-		GetComboText(GpuConfS.Combo, GpuConfS.plist, Config.Gpu);
-		GetComboText(SpuConfS.Combo, SpuConfS.plist, Config.Spu);
-		GetComboText(CdrConfS.Combo, CdrConfS.plist, Config.Cdr);
-		GetComboText(Pad1ConfS.Combo, Pad1ConfS.plist, Config.Pad1);
-		GetComboText(Pad2ConfS.Combo, Pad2ConfS.plist, Config.Pad2);
-		GetComboText(BiosConfS.Combo, BiosConfS.plist, Config.Bios);
+	GetComboText(GpuConfS.Combo, GpuConfS.plist, Config.Gpu);
+	GetComboText(SpuConfS.Combo, SpuConfS.plist, Config.Spu);
+	GetComboText(CdrConfS.Combo, CdrConfS.plist, Config.Cdr);
+	GetComboText(Pad1ConfS.Combo, Pad1ConfS.plist, Config.Pad1);
+	GetComboText(Pad2ConfS.Combo, Pad2ConfS.plist, Config.Pad2);
+	GetComboText(BiosConfS.Combo, BiosConfS.plist, Config.Bios);
 
-		SaveConfig();
-	} 
+	SaveConfig();
 
 	gtk_widget_destroy(ConfDlg);
 	ConfDlg = NULL;
@@ -783,63 +778,61 @@ static void OnCpu_CpuClicked(GtkWidget *widget, gpointer user_data) {
 }
 
 void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
-	if (arg1 == GTK_RESPONSE_OK) {
-		GtkWidget *widget;
-		GladeXML *xml = user_data;
-		int tmp;
-		long t;
+	GtkWidget *widget;
+	GladeXML *xml = user_data;
+	int tmp;
+	long t;
 
-		widget = glade_xml_get_widget(xml, "GtkCombo_PsxType");
+	widget = glade_xml_get_widget(xml, "GtkCombo_PsxType");
 
-		// If nothing chosen, default to NTSC
-		tmp = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
-		if (tmp == -1)	
-			tmp = PSX_TYPE_NTSC;
+	// If nothing chosen, default to NTSC
+	tmp = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
+	if (tmp == -1)	
+		tmp = PSX_TYPE_NTSC;
 
-		if (!strcmp("NTSC", psxtypes[tmp]))
-			Config.PsxType = PSX_TYPE_NTSC;
-		else
-			Config.PsxType = PSX_TYPE_PAL;
+	if (!strcmp("NTSC", psxtypes[tmp]))
+		Config.PsxType = PSX_TYPE_NTSC;
+	else
+		Config.PsxType = PSX_TYPE_PAL;
 
-		Config.Xa = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Xa")));
-		Config.Sio = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Sio")));
-		Config.Mdec = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Mdec")));
-		Config.Cdda = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_CDDA")));
-		Config.PsxAuto = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxAuto")));
+	Config.Xa = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Xa")));
+	Config.Sio = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Sio")));
+	Config.Mdec = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Mdec")));
+	Config.Cdda = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_CDDA")));
+	Config.PsxAuto = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxAuto")));
 
-		t = Config.Debug;
-		Config.Debug = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Dbg")));
-		if (t != Config.Debug) {
-			if (Config.Debug) StartDebugger();
-			else StopDebugger();
-		}
+	t = Config.Debug;
+	Config.Debug = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Dbg")));
+	if (t != Config.Debug) {
+		if (Config.Debug) StartDebugger();
+		else StopDebugger();
+	}
 
-		t = Config.Cpu;
-		Config.Cpu = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Cpu")));
-		if (t != Config.Cpu) {
-			psxCpu->Shutdown();
+	t = Config.Cpu;
+	Config.Cpu = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Cpu")));
+	if (t != Config.Cpu) {
+		psxCpu->Shutdown();
 #ifdef PSXREC
-			if (Config.Cpu) {
-				psxCpu = &psxInt;
-			}
-			else psxCpu = &psxRec;
-#else
+		if (Config.Cpu) {
 			psxCpu = &psxInt;
-#endif
-			if (psxCpu->Init() == -1) {
-				SysClose();
-				exit(1);
-			}
-			psxCpu->Reset();
 		}
+		else psxCpu = &psxRec;
+#else
+		psxCpu = &psxInt;
+#endif
+		if (psxCpu->Init() == -1) {
+			SysClose();
+			exit(1);
+		}
+		psxCpu->Reset();
+	}
 
-		Config.PsxOut = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxOut")));
-		Config.SpuIrq = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_SpuIrq")));
-		Config.RCntFix = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_RCntFix")));
-		Config.VSyncWA = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_VSyncWA")));
+	Config.PsxOut = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxOut")));
+	Config.SpuIrq = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_SpuIrq")));
+	Config.RCntFix = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_RCntFix")));
+	Config.VSyncWA = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_VSyncWA")));
 
-		SaveConfig();
-	} 
+	SaveConfig();
 
 	gtk_widget_destroy(CpuDlg);
 	CpuDlg = NULL;

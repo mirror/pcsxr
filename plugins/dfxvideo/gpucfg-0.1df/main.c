@@ -14,7 +14,7 @@
 #include <string.h>
 #include <sys/stat.h>
 
-void SaveConfig (GtkWidget *widget, gpointer user_datal);
+void SaveConfig(GtkWidget *widget, gpointer user_datal);
 
 #define READBINARY "rb"
 #define WRITEBINARY "wb"
@@ -49,24 +49,18 @@ int set_limit (char *p, int len, int lower, int upper)
     return val;
 }
 
-void on_about_clicked (GtkWidget *widget, gpointer user_data)
+void on_about_clicked(GtkWidget *widget, gpointer user_data)
 {
 	gtk_widget_destroy (widget);
 	exit (0);
 }
 
-void on_config_clicked (GtkWidget *widget, gpointer user_data)
-{
-	gtk_widget_destroy (widget);
-	exit (0);
-}
-
-void set_widget_sensitive (GtkWidget *widget, gpointer user_data)
+void set_widget_sensitive(GtkWidget *widget, gpointer user_data)
 {
 	gtk_widget_set_sensitive (widget, (int)user_data);
 }
 
-void on_use_fixes_toggled (GtkWidget *widget, gpointer user_data)
+void on_use_fixes_toggled(GtkWidget *widget, gpointer user_data)
 {
 	GtkWidget *check, *table_fixes;
 	GladeXML *xml;
@@ -78,6 +72,14 @@ void on_use_fixes_toggled (GtkWidget *widget, gpointer user_data)
 	/* Set the state of each of the fixes to the value of the use fixes toggle */
 	gtk_container_foreach (GTK_CONTAINER (table_fixes), (GtkCallback) set_widget_sensitive,
 		(void *)gtk_toggle_button_get_active (check));
+}
+
+void OnConfigClose(GtkWidget *widget, gpointer user_data)
+{
+	GladeXML *xml = (GladeXML *)user_data;
+
+	gtk_widget_destroy(glade_xml_get_widget(xml, "CfgWnd"));
+	gtk_exit(0);
 }
 
 int
@@ -118,7 +120,7 @@ main (int argc, char *argv[])
 		gtk_about_dialog_set_name (GTK_ABOUT_DIALOG (widget), "P.E.Op.S PCSX Video Plugin");
 		gtk_about_dialog_set_version (GTK_ABOUT_DIALOG (widget), "1.17");
 		gtk_about_dialog_set_authors (GTK_ABOUT_DIALOG (widget), authors);
-		gtk_about_dialog_set_website (GTK_ABOUT_DIALOG (widget), "http://home.t-online.de/home/PeteBernert/");
+		gtk_about_dialog_set_website (GTK_ABOUT_DIALOG (widget), "http://pcsx-df.sourceforge.net/");
 
 	g_signal_connect_data(GTK_OBJECT(widget), "response",
 			GTK_SIGNAL_FUNC(on_about_clicked), NULL, NULL, G_CONNECT_AFTER);
@@ -282,16 +284,12 @@ main (int argc, char *argv[])
   if(pB) free(pB);
 
 	widget = glade_xml_get_widget(xml, "CfgWnd");
-	g_signal_connect_data(GTK_OBJECT(widget), "delete_event",
-			GTK_SIGNAL_FUNC(on_config_clicked), NULL, NULL, G_CONNECT_AFTER);
+	g_signal_connect_data(GTK_OBJECT(widget), "destroy",
+			GTK_SIGNAL_FUNC(SaveConfig), xml, NULL, 0);
 
-	widget = glade_xml_get_widget(xml, "btn_cancel");
+	widget = glade_xml_get_widget(xml, "btn_close");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_config_clicked), NULL, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "btn_ok");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(SaveConfig), xml, NULL, G_CONNECT_AFTER);
+			GTK_SIGNAL_FUNC(OnConfigClose), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "checkUseFixes");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
@@ -420,9 +418,6 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
 
  free(pB);
  
-    gtk_widget_destroy (glade_xml_get_widget (xml, "CfgWnd"));
-//    g_free (xml);
-
-	/* Close the window and exit control from the plugin */
-	exit (0); 
+	// Close the window and exit control from the plugin
+	gtk_exit (0); 
 }

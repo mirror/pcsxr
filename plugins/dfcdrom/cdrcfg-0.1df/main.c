@@ -125,11 +125,6 @@ void fill_drives_list(GtkWidget *widget) {
 }
 
 static void OnConfigExit(GtkWidget *widget, gpointer user_data) {
-	gtk_widget_destroy(widget);
-	gtk_exit(0);
-}
-
-static void OnConfigOk(GtkWidget *widget, gpointer user_data) {
 	GladeXML *xml;
 
 	xml = glade_get_widget_tree(MainWindow);
@@ -178,13 +173,9 @@ long CDRconfigure() {
 	g_signal_connect_data(GTK_OBJECT(widget), "delete_event",
 		GTK_SIGNAL_FUNC(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "cfg_cancelbutton");
+	widget = glade_xml_get_widget(xml, "cfg_closebutton");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 		GTK_SIGNAL_FUNC(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "cfg_okbutton");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnConfigOk), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "cddev_comboboxentry");
 	fill_drives_list(widget);

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-19 12:58+0800\n"
-"PO-Revision-Date: 2009-12-19 12:59+0700\n"
+"PO-Revision-Date: 2009-12-28 17:04+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -353,7 +353,7 @@ msgstr "內部 HLE-Bios"
 
 #: ../win32/gui/ConfigurePlugins.c:292
 msgid "Configuration not OK!"
-msgstr "配置不正確!"
+msgstr "設定不正確!"
 
 #: ../win32/gui/ConfigurePlugins.c:292
 #: ../gui/Cheat.c:156
@@ -380,7 +380,7 @@ msgstr "選擇 BIOS 目錄"
 
 #: ../win32/gui/ConfigurePlugins.c:468
 msgid "Configuration"
-msgstr "配置"
+msgstr "設定"
 
 #: ../win32/gui/ConfigurePlugins.c:472
 msgid "Graphics"
@@ -408,11 +408,11 @@ msgstr "BIOS"
 
 #: ../win32/gui/ConfigurePlugins.c:478
 msgid "Set Bios Directory"
-msgstr "設置 BIOS 目錄"
+msgstr "設定 BIOS 目錄"
 
 #: ../win32/gui/ConfigurePlugins.c:479
 msgid "Set Plugins Directory"
-msgstr "設置外掛目錄"
+msgstr "設定外掛目錄"
 
 #: ../win32/gui/ConfigurePlugins.c:480
 #: ../win32/gui/ConfigurePlugins.c:483
@@ -421,7 +421,7 @@ msgstr "設置外掛目錄"
 #: ../win32/gui/ConfigurePlugins.c:492
 #: ../win32/gui/ConfigurePlugins.c:604
 msgid "Configure..."
-msgstr "配置..."
+msgstr "設定..."
 
 #: ../win32/gui/ConfigurePlugins.c:481
 #: ../win32/gui/ConfigurePlugins.c:484
@@ -443,7 +443,7 @@ msgstr "關於..."
 
 #: ../win32/gui/ConfigurePlugins.c:599
 msgid "NetPlay Configuration"
-msgstr "聯網遊戲配置"
+msgstr "聯網遊戲設定"
 
 #: ../win32/gui/ConfigurePlugins.c:603
 msgid "NetPlay"
@@ -819,7 +819,7 @@ msgstr "是否確認格式化此記憶卡?"
 
 #: ../win32/gui/WndMain.c:1198
 msgid "Cpu Config"
-msgstr "CPU 配置"
+msgstr "CPU 設定"
 
 #: ../win32/gui/WndMain.c:1203
 msgid "Disable Xa Decoding"
@@ -1004,7 +1004,7 @@ msgstr "記錄 1(&1)"
 
 #: ../win32/gui/WndMain.c:1533
 msgid "&Configuration"
-msgstr "配置(&C)"
+msgstr "設定(&C)"
 
 #: ../win32/gui/WndMain.c:1534
 msgid "Cheat &Search..."
@@ -1122,7 +1122,7 @@ msgstr "搜尋結果"
 #: ../gui/ConfDlg.c:112
 #: ../data/pcsx.glade2:764
 msgid "Configure PCSX"
-msgstr "配置 PCSX"
+msgstr "設定 PCSX"
 
 #: ../gui/ConfDlg.c:240
 #: ../gui/ConfDlg.c:261
@@ -1130,7 +1130,7 @@ msgstr "配置 PCSX"
 #: ../gui/ConfDlg.c:303
 #: ../gui/ConfDlg.c:358
 msgid "No configuration required"
-msgstr "不需要配置"
+msgstr "不需要設定"
 
 #: ../gui/ConfDlg.c:240
 #: ../gui/ConfDlg.c:261
@@ -1138,7 +1138,7 @@ msgstr "不需要配置"
 #: ../gui/ConfDlg.c:303
 #: ../gui/ConfDlg.c:358
 msgid "This plugin doesn't need to be configured."
-msgstr "此外掛不需要被配置。"
+msgstr "此外掛不需要被設定。"
 
 #: ../gui/ConfDlg.c:586
 #, c-format
@@ -1254,7 +1254,7 @@ msgstr ""
 "\t-runcd\t\t執行 CD-ROM\n"
 "\t-cdfile 檔案\t執行 CD 鏡像檔\n"
 "\t-nogui\t\t不開啟 GTK GUI\n"
-"\t-cfg 檔案\t加載一個特定的配置檔案 (缺省為: ~/.pcsx/pcsx.cfg)\n"
+"\t-cfg 檔案\t加載一個特定的設定檔案 (缺省為: ~/.pcsx/pcsx.cfg)\n"
 "\t-psxout\t\t開啟 PSX 輸出\n"
 "\t-load 編號\t加載指定編號的記錄 (1-5)\n"
 "\t-h -help\t顯示此說明\n"
@@ -1263,7 +1263,7 @@ msgstr ""
 #: ../gui/LnxMain.c:357
 #, c-format
 msgid "PCSX cannot be configured without using the GUI -- you should restart without -nogui.\n"
-msgstr "PCSX 不能在字符界面下配置 -- 請不使用 -nogui 參數重新啟動程式\n"
+msgstr "PCSX 不能在字符界面下設定 -- 請不使用 -nogui 參數重新啟動程式\n"
 
 #: ../gui/LnxMain.c:409
 msgid "Failed loading plugins!"
@@ -1879,7 +1879,7 @@ msgstr "讀取記錄(_L)"
 
 #: ../data/pcsx.glade2:358
 msgid "_Configuration"
-msgstr "配置(_C)"
+msgstr "設定(_C)"
 
 #: ../data/pcsx.glade2:364
 msgid "_Plugins & BIOS..."
@@ -1965,7 +1965,7 @@ msgstr "更換 ISO..."
 #: ../data/pcsx.glade2:669
 #: ../data/pcsx.glade2:1853
 msgid "Configure Memory Cards"
-msgstr "配置記憶卡"
+msgstr "記憶卡設定"
 
 #: ../data/pcsx.glade2:670
 msgid "Memcards..."
@@ -1973,7 +1973,7 @@ msgstr "記憶卡..."
 
 #: ../data/pcsx.glade2:682
 msgid "Configure Graphics"
-msgstr "配置圖像"
+msgstr "圖像設定"
 
 #: ../data/pcsx.glade2:683
 msgid "Graphics..."
@@ -1982,7 +1982,7 @@ msgstr "圖像..."
 #: ../data/pcsx.glade2:695
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:8
 msgid "Configure Sound"
-msgstr "設定聲音"
+msgstr "聲音設定"
 
 #: ../data/pcsx.glade2:696
 msgid "Sound..."
@@ -1990,7 +1990,7 @@ msgstr "聲音..."
 
 #: ../data/pcsx.glade2:708
 msgid "Configure CD-ROM"
-msgstr "配置 CD-ROM"
+msgstr "CD-ROM 設定"
 
 #: ../data/pcsx.glade2:709
 msgid "CD-ROM..."
@@ -1998,7 +1998,7 @@ msgstr "CD-ROM..."
 
 #: ../data/pcsx.glade2:721
 msgid "Configure Controllers"
-msgstr "配置控制器"
+msgstr "控制器設定"
 
 #: ../data/pcsx.glade2:722
 msgid "Controllers..."
@@ -2006,11 +2006,11 @@ msgstr "控制器..."
 
 #: ../data/pcsx.glade2:867
 msgid "Select Folder to Search"
-msgstr "選擇要查找的資料夾"
+msgstr "選擇要檢索的資料夾"
 
 #: ../data/pcsx.glade2:883
 msgid "Search in:"
-msgstr "在此處查找外掛:"
+msgstr "在此處檢索外掛:"
 
 #: ../data/pcsx.glade2:1156
 msgid "Graphics:"
@@ -2042,7 +2042,7 @@ msgstr "<b>BIOS</b>"
 
 #: ../data/pcsx.glade2:1380
 msgid "Configure CPU"
-msgstr "配置 CPU"
+msgstr "CPU 設定"
 
 #: ../data/pcsx.glade2:1427
 msgid "SPU IRQ Always Enabled"
@@ -2082,7 +2082,7 @@ msgstr "<b>系統類型</b>"
 
 #: ../data/pcsx.glade2:1698
 msgid "Configure NetPlay"
-msgstr "配置聯網遊戲"
+msgstr "聯網遊戲設定"
 
 #: ../data/pcsx.glade2:1786
 msgid "<b>NetPlay</b>"

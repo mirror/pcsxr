@@ -255,13 +255,6 @@ static void UpdateKey() {
 }
 
 static void OnConfigExit(GtkWidget *widget, gpointer user_data) {
-	gtk_widget_destroy(widget);
-	SDL_Quit();
-
-	gtk_exit(0);
-}
-
-static void OnConfigOk(GtkWidget *widget, gpointer user_data) {
 	SaveConfig();
 
 	gtk_widget_destroy(widget);
@@ -631,13 +624,9 @@ long PADconfigure() {
 	g_signal_connect_data(GTK_OBJECT(widget), "delete_event",
 		GTK_SIGNAL_FUNC(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btncancel");
+	widget = glade_xml_get_widget(xml, "btnclose");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 		GTK_SIGNAL_FUNC(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
-
-	widget = glade_xml_get_widget(xml, "btnok");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnConfigOk), xml, NULL, G_CONNECT_AFTER);
 
 	PopulateDevList();
 	UpdateKeyList();
