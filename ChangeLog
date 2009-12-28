@@ -12,6 +12,7 @@ December 28, 2009 Wei Mingzhi <weimingzhi@gmail.com>
  * plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2: Likewise.
  * gui/ConfDlg.c: Likewise.
  * po/zh_TW.po: Updated.
+ * README, NEWS: Updated.
 
 December 19, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
