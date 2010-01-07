@@ -1,3 +1,8 @@
+January 7, 2010 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * plugins/dfxvideo/draw.c: MaintainAspect() now only depends on screen
+   resolution.
+
 December 28, 2009 Wei Mingzhi <weimingzhi@gmail.com>
 
  * data/pcsx.glade2: Reverted to "Close" button instead of "OK/Cancel" for

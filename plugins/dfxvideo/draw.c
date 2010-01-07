@@ -47,8 +47,6 @@ unsigned short usCursorActive = 0;
 //unsigned int   LUT16to32[65536];
 //unsigned int   RGBtoYUV[65536];
 
-float pixelaspect;
-
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <X11/extensions/Xv.h>
@@ -1014,9 +1012,6 @@ void CreateDisplay(void)
 
  screen=DefaultScreenOfDisplay(display);
 
- pixelaspect = ((float)DisplayWidth(display, myscreen) / (float)DisplayWidthMM(display, myscreen)) / 
-		((float)DisplayHeight(display, myscreen) / (float)DisplayHeightMM(display, myscreen));
-
  root_window_id=RootWindow(display,DefaultScreen(display));
 
   //Look for an Xvideo RGB port
@@ -1536,23 +1531,22 @@ void RGB2YUV(uint32_t *s, int width, int height, uint32_t *d)
 
 extern time_t tStart;
 
-//Note: dest w,h are both input and output variables
+//Note: dest x,y,w,h are both input and output variables
 inline void MaintainAspect(unsigned int *dx,unsigned int *dy,unsigned int *dw,unsigned int *dh)
 {
 	//Currently just 4/3 aspect ratio
 	int t;
 
-	if (*dw * 3 > (float)*dh * pixelaspect * 4) {
-		t = (float)*dh * pixelaspect * 4.0f / 3;	//new width aspect
+	if (*dw * 3 > *dh * 4) {
+		t = *dh * 4.0f / 3;	//new width aspect
 		*dx = (*dw - t) / 2;	//centering
 		*dw = t;
 	} else {
-		t = (float)(*dw * 3) / (float)(4.0f * pixelaspect);
+		t = *dw * 3.0f / 4;
 		*dy = (*dh - t) / 2;
 		*dh = t;
 	}
 }
-
 
 void DoBufferSwap(void)
 {
