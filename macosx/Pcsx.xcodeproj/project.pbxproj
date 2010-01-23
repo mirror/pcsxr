@@ -40,6 +40,8 @@
 		712FD1E81093096F00575A92 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E51093096F00575A92 /* debug.c */; };
 		712FD1E91093096F00575A92 /* socket.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E61093096F00575A92 /* socket.c */; };
 		712FD1EA1093096F00575A92 /* socket.h in Headers */ = {isa = PBXBuildFile; fileRef = 712FD1E71093096F00575A92 /* socket.h */; };
+		713B530E110B75650002F164 /* ppf.c in Sources */ = {isa = PBXBuildFile; fileRef = 713B530C110B75650002F164 /* ppf.c */; };
+		713B530F110B75650002F164 /* ppf.h in Headers */ = {isa = PBXBuildFile; fileRef = 713B530D110B75650002F164 /* ppf.h */; };
 		7161C2820FDED6D000225F97 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 7161C2810FDED6D000225F97 /* config.h */; };
 		7161C2980FDED75300225F97 /* ExtendedKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = 7161C2970FDED75300225F97 /* ExtendedKeys.h */; };
 		71AD2DF310C3575000365243 /* CDDeviceInterface.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DC410C356EE00365243 /* CDDeviceInterface.psxplugin */; };
@@ -219,7 +221,7 @@
 		2BA44360052DB2EA00E21DDD /* PcsxPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxPlugin.h; sourceTree = "<group>"; };
 		2BA44361052DB2EA00E21DDD /* PcsxPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxPlugin.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
 		2BB3D6CF05427FE200831ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
-		2BB3D6D105427FE200831ACB /* PCSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PCSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BB3D6D105427FE200831ACB /* PCSX.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PCSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBB1126051DC00500B84448 /* PluginList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginList.h; sourceTree = "<group>"; };
 		2BBB1127051DC00500B84448 /* PluginList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginList.m; sourceTree = "<group>"; };
 		2BBB1787051E0D9700B84448 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = Credits.rtf; sourceTree = "<group>"; };
@@ -230,6 +232,8 @@
 		712FD1E51093096F00575A92 /* debug.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = debug.c; path = ../libpcsxcore/debug.c; sourceTree = SOURCE_ROOT; };
 		712FD1E61093096F00575A92 /* socket.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = socket.c; path = ../libpcsxcore/socket.c; sourceTree = SOURCE_ROOT; };
 		712FD1E71093096F00575A92 /* socket.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = socket.h; path = ../libpcsxcore/socket.h; sourceTree = SOURCE_ROOT; };
+		713B530C110B75650002F164 /* ppf.c */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.c; name = ppf.c; path = ../libpcsxcore/ppf.c; sourceTree = SOURCE_ROOT; };
+		713B530D110B75650002F164 /* ppf.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = ppf.h; path = ../libpcsxcore/ppf.h; sourceTree = SOURCE_ROOT; };
 		7161C2810FDED6D000225F97 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		7161C2970FDED75300225F97 /* ExtendedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedKeys.h; sourceTree = "<group>"; };
 		71AD2DBA10C356EE00365243 /* CDDeviceInterfacePlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CDDeviceInterfacePlugin.xcodeproj; path = plugins/CDDeviceInterface/CDDeviceInterfacePlugin.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -429,6 +433,8 @@
 				71F4C5700FDED12800529849 /* misc.h */,
 				71F4C5710FDED12800529849 /* plugins.c */,
 				71F4C5720FDED12800529849 /* plugins.h */,
+				713B530C110B75650002F164 /* ppf.c */,
+				713B530D110B75650002F164 /* ppf.h */,
 				71F4C5730FDED12800529849 /* psemu_plugin_defs.h */,
 				71F4C5740FDED12800529849 /* psxbios.c */,
 				71F4C5750FDED12800529849 /* psxbios.h */,
@@ -539,6 +545,7 @@
 				7161C2820FDED6D000225F97 /* config.h in Headers */,
 				7161C2980FDED75300225F97 /* ExtendedKeys.h in Headers */,
 				712FD1EA1093096F00575A92 /* socket.h in Headers */,
+				713B530F110B75650002F164 /* ppf.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -703,6 +710,7 @@
 				71F4C5BA0FDED16D00529849 /* ix86.c in Sources */,
 				712FD1E81093096F00575A92 /* debug.c in Sources */,
 				712FD1E91093096F00575A92 /* socket.c in Sources */,
+				713B530E110B75650002F164 /* ppf.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

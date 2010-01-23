@@ -17,6 +17,7 @@ January 23, 2010 Wei Mingzhi <weimingzhi@gmail.com>
  * libpcsxcore/Makefile.am: Added ppf.c and ppf.h.
  * win32/pcsx.dsp: Likewise.
  * win32/pcsx.dev: Likewise.
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Likewise.
  * po/zh_CN.po, po/zh_TW.po, po/pt_BR.po, po/pcsx.pot: Updated.
 
 January 7, 2010 Wei Mingzhi <weimingzhi@gmail.com>
