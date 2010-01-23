@@ -192,6 +192,14 @@ SOURCE=..\libpcsxcore\plugins.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\libpcsxcore\ppf.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\libpcsxcore\ppf.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\libpcsxcore\psemu_plugin_defs.h
 # End Source File
 # Begin Source File

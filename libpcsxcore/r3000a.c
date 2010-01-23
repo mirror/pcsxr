@@ -27,6 +27,7 @@
 #include "mdec.h"
 #include "gte.h"
 #include "cheat.h"
+#include "ppf.h"
 
 psxRegisters psxRegs;
 
