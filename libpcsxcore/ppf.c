@@ -131,7 +131,7 @@ void CheckPPFCache(unsigned char *pB, unsigned char m, unsigned char s, unsigned
 	}
 }
 
-static void AddToPPF(s32 ladr, s32 pos, s32 anz, s8 *ppfmem) {
+static void AddToPPF(s32 ladr, s32 pos, s32 anz, unsigned char *ppfmem) {
 	if (!ppfHead) {
 		ppfHead = (PPF_DATA *)malloc(sizeof(PPF_DATA) + anz);
 		ppfHead->addr = ladr;
@@ -173,7 +173,8 @@ void BuildPPFCache() {
 	char			buffer[12];
 	char			method, undo = 0, blockcheck = 0;
 	int				dizlen, dizyn;
-	unsigned char   ppfmem[512], szPPF[MAXPATHLEN];
+	unsigned char	ppfmem[512];
+	char			szPPF[MAXPATHLEN];
 	int				count, seekpos, pos;
 	u32				anz; // use 32-bit to avoid stupid overflows
 	s32				ladr, off, anx;
@@ -300,7 +301,7 @@ void BuildPPFCache() {
 		if (off + anz > CD_FRAMESIZE_RAW) {
 			anx = off + anz - CD_FRAMESIZE_RAW;
 			anz -= (unsigned char)anx;
-			AddToPPF(ladr + 1, 0, anx, ppfmem + anz);
+			AddToPPF(ladr + 1, 0, anx, &ppfmem[anz]);
 		}
 
 		AddToPPF(ladr, off, anz, ppfmem); // add to link list
