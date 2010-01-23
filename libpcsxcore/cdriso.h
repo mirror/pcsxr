@@ -24,7 +24,6 @@
 void imageReaderInit(void);
 
 #define MSF2SECT(m, s, f)		(((m) * 60 + (s) - 2) * 75 + (f))
-#define btoi(b)					((b) / 16 * 10 + (b) % 16) /* BCD to u_char */
 
 #define CD_FRAMESIZE_RAW		2352
 #define DATA_SIZE				(CD_FRAMESIZE_RAW - 12)
