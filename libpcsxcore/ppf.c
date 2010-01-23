@@ -169,14 +169,14 @@ static void AddToPPF(s32 ladr, s32 pos, s32 anz, s8 *ppfmem) {
 }
 
 void BuildPPFCache() {
-	FILE *ppffile;
-	char buffer[12];
-	char method, undo = 0, blockcheck = 0;
-	int  dizlen, dizyn;
-	char ppfmem[512], szPPF[MAXPATHLEN];
-	int  count, seekpos, pos;
-	u32 anz; // avoids stupid overflows
-	s32 ladr, off, anx;
+	FILE			*ppffile;
+	char			buffer[12];
+	char			method, undo = 0, blockcheck = 0;
+	int				dizlen, dizyn;
+	unsigned char   ppfmem[512], szPPF[MAXPATHLEN];
+	int				count, seekpos, pos;
+	u32				anz; // use 32-bit to avoid stupid overflows
+	s32				ladr, off, anx;
 
 	ppfHead = NULL;
 
