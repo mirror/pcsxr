@@ -179,7 +179,7 @@ void BuildPPFCache() {
 	u32				anz; // use 32-bit to avoid stupid overflows
 	s32				ladr, off, anx;
 
-	ppfHead = NULL;
+	FreePPFCache();
 
 	// Generate filename in the format of SLUS_123.45
 	buffer[0] = toupper(CdromId[0]);
