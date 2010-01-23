@@ -171,6 +171,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 	}
 
+	strcpy(Config.PatchesDir, "Patches\\");
+
 #ifdef ENABLE_NLS
 	if (Config.Lang[0] == 0) {
 		SetDefaultLang();

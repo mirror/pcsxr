@@ -47,7 +47,9 @@ libpcsxcore_a_SOURCES = \
 	$(top_builddir)/libpcsxcore/cheat.c \
 	$(top_builddir)/libpcsxcore/cheat.h \
 	$(top_builddir)/libpcsxcore/socket.c \
-	$(top_builddir)/libpcsxcore/socket.h
+	$(top_builddir)/libpcsxcore/socket.h \
+	$(top_builddir)/libpcsxcore/ppf.c \
+	$(top_builddir)/libpcsxcore/ppf.h
 
 if ARCH_X86_64
 libpcsxcore_a_SOURCES += \

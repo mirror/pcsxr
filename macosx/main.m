@@ -38,16 +38,15 @@ int main(int argc, const char *argv[])
         assert ( chdir ("../../../") == 0 ); /* chdir to the .app's parent */
     }
 
-    // TODO: make this redundant
     strcpy(Config.BiosDir,    "Bios/");
-    
-	 // Setup the X11 window
+    strcpy(Config.PatchesDir, "Patches/");
+
+    // Setup the X11 window
     if (getenv("DISPLAY") == NULL)
         setenv("DISPLAY", ":0.0", 0); // Default to first local display
 
     return NSApplicationMain(argc, argv);
 }
-
 
 int SysInit() {
 	if (!sysInited) {
@@ -144,11 +143,11 @@ void *SysLoadLibrary(char *lib)
     CFBundleRef myBundle;
     CFURLRef    bundleURL;
     CFStringRef	path;
-    
+
     path = CFStringCreateWithCString(kCFAllocatorDefault, lib, CFStringGetSystemEncoding());
     if (!path)
         goto error;
-    
+
     bundleURL = CFURLCreateWithFileSystemPath( 
                     kCFAllocatorDefault, 
                     path,
@@ -156,16 +155,16 @@ void *SysLoadLibrary(char *lib)
                     true );
     if (!bundleURL)
         goto error;
-    
+
     myBundle = CFBundleCreate( kCFAllocatorDefault, bundleURL );
-    
+
     if (!CFBundleLoadExecutable(myBundle))
         goto error;
-    
+
 good:
     if (path) CFRelease(path);
     if (bundleURL) CFRelease(bundleURL);
-    
+
     return myBundle;
     
 error:
@@ -214,10 +213,10 @@ void PADhandleKey(int key);
 void SysUpdate()
 {
 	UpdateSystemActivity(UsrActivity);
-	
+
 	PADhandleKey(PAD1_keypressed());
 	//PADhandleKey(PAD2_keypressed());
-	
+
 	[emuThread handleEvents];
 }
 

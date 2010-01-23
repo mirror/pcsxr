@@ -84,6 +84,8 @@ void psxShutdown() {
 	ClearAllCheats();
 	FreeCheatSearchResults();
 	FreeCheatSearchMem();
+
+	FreePPFCache();
 }
 
 void psxException(u32 code, u32 bd) {

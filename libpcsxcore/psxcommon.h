@@ -98,6 +98,7 @@ typedef struct {
 	char Bios[MAXPATHLEN];
 	char BiosDir[MAXPATHLEN];
 	char PluginsDir[MAXPATHLEN];
+	char PatchesDir[MAXPATHLEN];
 	long Xa;
 	long Sio;
 	long Mdec;

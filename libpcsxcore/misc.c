@@ -25,6 +25,7 @@
 #include "misc.h"
 #include "cdrom.h"
 #include "mdec.h"
+#include "ppf.h"
 
 int Log = 0;
 
@@ -95,7 +96,8 @@ void mmssdd( char *b, char *p )
 
 #define READTRACK() \
 	if (CDR_readTrack(time) == -1) return -1; \
-	buf = CDR_getBuffer(); if (buf == NULL) return -1;
+	buf = CDR_getBuffer(); \
+	if (buf == NULL) return -1; else CheckPPFCache(buf, time[0], time[1], time[2]);
 
 #define READDIR(_dir) \
 	READTRACK(); \
@@ -112,8 +114,8 @@ int GetCdromFile(u8 *mdir, u8 *time, s8 *filename) {
 	int i;
 
 	// only try to scan if a filename is given
-	if(!strlen(filename)) return -1;
-	
+	if (!strlen(filename)) return -1;
+
 	i = 0;
 	while (i < 4096) {
 		dir = (struct iso_directory_record*) &mdir[i];
@@ -123,19 +125,19 @@ int GetCdromFile(u8 *mdir, u8 *time, s8 *filename) {
 		i += dir->length[0];
 
 		if (dir->flags[0] & 0x2) { // it's a dir
-			if (!strnicmp((char*)&dir->name[0], filename, dir->name_len[0])) {
+			if (!strnicmp((char *)&dir->name[0], filename, dir->name_len[0])) {
 				if (filename[dir->name_len[0]] != '\\') continue;
-				
-				filename+= dir->name_len[0] + 1;
 
-				mmssdd(dir->extent, (char*)time);
+				filename += dir->name_len[0] + 1;
+
+				mmssdd(dir->extent, (char *)time);
 				READDIR(ddir);
 				i = 0;
 				mdir = ddir;
 			}
 		} else {
-			if (!strnicmp((char*)&dir->name[0], filename, strlen(filename))) {
-				mmssdd(dir->extent, (char*)time);
+			if (!strnicmp((char *)&dir->name[0], filename, strlen(filename))) {
+				mmssdd(dir->extent, (char *)time);
 				break;
 			}
 		}
@@ -274,6 +276,8 @@ int CheckCdrom() {
 	char exename[256];
 	int i, c;
 
+	FreePPFCache();
+
 	time[0] = itob(0);
 	time[1] = itob(2);
 	time[2] = itob(0x10);
@@ -343,6 +347,8 @@ int CheckCdrom() {
 	}
 	SysPrintf("CD-ROM Label: %.32s\n", CdromLabel);
 	SysPrintf("CD-ROM ID: %.9s\n", CdromId);
+
+	BuildPPFCache();
 
 	return 0;
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-19 12:58+0800\n"
+"POT-Creation-Date: 2010-01-23 16:38+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr ""
 #: ../win32/gui/AboutDlg.c:48 ../win32/gui/AboutDlg.c:52
 #: ../win32/gui/CheatDlg.c:70 ../win32/gui/CheatDlg.c:120
 #: ../win32/gui/ConfigurePlugins.c:470 ../win32/gui/ConfigurePlugins.c:601
-#: ../win32/gui/WndMain.c:964 ../win32/gui/WndMain.c:1200
+#: ../win32/gui/WndMain.c:966 ../win32/gui/WndMain.c:1202
 #: ../plugins/peopsxgl/gpucfg/interface.c:130
 #: ../plugins/peopsxgl/gpucfg/interface.c:843
 msgid "OK"
@@ -81,7 +81,7 @@ msgstr ""
 
 #: ../win32/gui/CheatDlg.c:71 ../win32/gui/CheatDlg.c:121
 #: ../win32/gui/ConfigurePlugins.c:471 ../win32/gui/ConfigurePlugins.c:602
-#: ../win32/gui/WndMain.c:965 ../win32/gui/WndMain.c:1201
+#: ../win32/gui/WndMain.c:967 ../win32/gui/WndMain.c:1203
 #: ../plugins/peopsxgl/gpucfg/interface.c:338
 msgid "Cancel"
 msgstr ""
@@ -95,7 +95,7 @@ msgstr ""
 msgid "Add New Cheat"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:167 ../data/pcsx.glade2:2644
+#: ../win32/gui/CheatDlg.c:167 ../data/pcsx.glade2:2594
 msgid "Edit Cheat Codes"
 msgstr ""
 
@@ -207,7 +207,7 @@ msgstr ""
 msgid "Founded Addresses: %d"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:505 ../data/pcsx.glade2:3043
+#: ../win32/gui/CheatDlg.c:505 ../data/pcsx.glade2:2993
 msgid "Freeze"
 msgstr ""
 
@@ -216,7 +216,7 @@ msgid "Address:"
 msgstr ""
 
 #: ../win32/gui/CheatDlg.c:507 ../win32/gui/CheatDlg.c:598
-#: ../win32/gui/CheatDlg.c:683 ../gui/Cheat.c:648 ../data/pcsx.glade2:2887
+#: ../win32/gui/CheatDlg.c:683 ../gui/Cheat.c:648 ../data/pcsx.glade2:2837
 msgid "Value:"
 msgstr ""
 
@@ -225,27 +225,27 @@ msgstr ""
 msgid "Freeze %.8X"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:596 ../data/pcsx.glade2:3079
+#: ../win32/gui/CheatDlg.c:596 ../data/pcsx.glade2:3029
 msgid "Modify"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:679 ../gui/Cheat.c:1130 ../data/pcsx.glade2:2815
+#: ../win32/gui/CheatDlg.c:679 ../gui/Cheat.c:1130 ../data/pcsx.glade2:2765
 msgid "Cheat Search"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:681 ../data/pcsx.glade2:2865
+#: ../win32/gui/CheatDlg.c:681 ../data/pcsx.glade2:2815
 msgid "Search For:"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:682 ../data/pcsx.glade2:2875
+#: ../win32/gui/CheatDlg.c:682 ../data/pcsx.glade2:2825
 msgid "Data Type:"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:684 ../data/pcsx.glade2:2899
+#: ../win32/gui/CheatDlg.c:684 ../data/pcsx.glade2:2849
 msgid "Data Base:"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:685 ../data/pcsx.glade2:2959
+#: ../win32/gui/CheatDlg.c:685 ../data/pcsx.glade2:2909
 msgid "To:"
 msgstr ""
 
@@ -293,7 +293,7 @@ msgstr ""
 msgid "Hexadecimal"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:206 ../gui/ConfDlg.c:680
+#: ../win32/gui/ConfigurePlugins.c:206 ../gui/ConfDlg.c:675
 msgid "Internal HLE Bios"
 msgstr ""
 
@@ -302,7 +302,7 @@ msgid "Configuration not OK!"
 msgstr ""
 
 #: ../win32/gui/ConfigurePlugins.c:292 ../gui/Cheat.c:156 ../gui/Cheat.c:252
-#: ../gui/LnxMain.c:409
+#: ../gui/LnxMain.c:414
 msgid "Error"
 msgstr ""
 
@@ -389,22 +389,22 @@ msgid ""
 "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
 msgstr ""
 
-#: ../win32/gui/plugin.c:90 ../win32/gui/WndMain.c:279
+#: ../win32/gui/plugin.c:90 ../win32/gui/WndMain.c:281
 #, c-format
 msgid "*PCSX*: Saved State %d"
 msgstr ""
 
-#: ../win32/gui/plugin.c:91 ../win32/gui/WndMain.c:280
+#: ../win32/gui/plugin.c:91 ../win32/gui/WndMain.c:282
 #, c-format
 msgid "*PCSX*: Error Saving State %d"
 msgstr ""
 
-#: ../win32/gui/plugin.c:107 ../win32/gui/WndMain.c:257
+#: ../win32/gui/plugin.c:107 ../win32/gui/WndMain.c:259
 #, c-format
 msgid "*PCSX*: Loaded State %d"
 msgstr ""
 
-#: ../win32/gui/plugin.c:108 ../win32/gui/WndMain.c:258
+#: ../win32/gui/plugin.c:108 ../win32/gui/WndMain.c:260
 #, c-format
 msgid "*PCSX*: Error Loading State %d"
 msgstr ""
@@ -546,8 +546,8 @@ msgstr ""
 msgid "Greek"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:80 ../win32/gui/WndMain.c:1557
-#: ../win32/gui/WndMain.c:1559
+#: ../win32/gui/WndMain.c:80 ../win32/gui/WndMain.c:1559
+#: ../win32/gui/WndMain.c:1561
 msgid "English"
 msgstr ""
 
@@ -595,371 +595,371 @@ msgstr ""
 msgid "Korean"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:298 ../win32/gui/WndMain.c:350
+#: ../win32/gui/WndMain.c:300 ../win32/gui/WndMain.c:352
 msgid "PCSX State Format"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:325
+#: ../win32/gui/WndMain.c:327
 #, c-format
 msgid "*PCSX*: Loaded State %s"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:326
+#: ../win32/gui/WndMain.c:328
 #, c-format
 msgid "*PCSX*: Error Loading State %s"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:377
+#: ../win32/gui/WndMain.c:379
 #, c-format
 msgid "*PCSX*: Saved State %s"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:378
+#: ../win32/gui/WndMain.c:380
 #, c-format
 msgid "*PCSX*: Error Saving State %s"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:427 ../win32/gui/WndMain.c:476 ../gui/Gtk2Gui.c:479
+#: ../win32/gui/WndMain.c:429 ../win32/gui/WndMain.c:478 ../gui/Gtk2Gui.c:479
 #: ../gui/Gtk2Gui.c:604
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:433 ../win32/gui/WndMain.c:482 ../gui/Gtk2Gui.c:487
+#: ../win32/gui/WndMain.c:435 ../win32/gui/WndMain.c:484 ../gui/Gtk2Gui.c:487
 #: ../gui/Gtk2Gui.c:612
 msgid "Could not load CD-ROM!"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:443
+#: ../win32/gui/WndMain.c:445
 msgid "Running BIOS is not supported with Internal HLE Bios."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:662 ../gui/MemcardDlg.c:59
+#: ../win32/gui/WndMain.c:664 ../gui/MemcardDlg.c:59
 msgid "Title"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:668 ../gui/MemcardDlg.c:65
+#: ../win32/gui/WndMain.c:670 ../gui/MemcardDlg.c:65
 msgid "Status"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:674
+#: ../win32/gui/WndMain.c:676
 msgid "Game ID"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:680
+#: ../win32/gui/WndMain.c:682
 msgid "Game"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:854
+#: ../win32/gui/WndMain.c:856
 msgid "mid link block"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:857
+#: ../win32/gui/WndMain.c:859
 msgid "terminiting link block"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:865 ../gui/MemcardDlg.c:147 ../gui/MemcardDlg.c:244
+#: ../win32/gui/WndMain.c:867 ../gui/MemcardDlg.c:147 ../gui/MemcardDlg.c:244
 msgid "Deleted"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:866 ../win32/gui/WndMain.c:869
+#: ../win32/gui/WndMain.c:868 ../win32/gui/WndMain.c:871
 #: ../gui/MemcardDlg.c:149 ../gui/MemcardDlg.c:153 ../gui/MemcardDlg.c:246
 #: ../gui/MemcardDlg.c:250
 msgid "Free"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:868 ../gui/MemcardDlg.c:151 ../gui/MemcardDlg.c:248
+#: ../win32/gui/WndMain.c:870 ../gui/MemcardDlg.c:151 ../gui/MemcardDlg.c:248
 msgid "Used"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:962
+#: ../win32/gui/WndMain.c:964
 msgid "Memcard Manager"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:966 ../win32/gui/WndMain.c:969
+#: ../win32/gui/WndMain.c:968 ../win32/gui/WndMain.c:971
 msgid "Select Mcd"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:967 ../win32/gui/WndMain.c:970
+#: ../win32/gui/WndMain.c:969 ../win32/gui/WndMain.c:972
 msgid "Format Mcd"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:968 ../win32/gui/WndMain.c:971
+#: ../win32/gui/WndMain.c:970 ../win32/gui/WndMain.c:973
 msgid "Reload Mcd"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:972
+#: ../win32/gui/WndMain.c:974
 msgid "-> Copy ->"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:973
+#: ../win32/gui/WndMain.c:975
 msgid "<- Copy <-"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:974
+#: ../win32/gui/WndMain.c:976
 msgid "Paste"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:975
+#: ../win32/gui/WndMain.c:977
 msgid "<- Un/Delete"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:976
+#: ../win32/gui/WndMain.c:978
 msgid "Un/Delete ->"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:978
+#: ../win32/gui/WndMain.c:980
 msgid "Memory Card 1"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:979
+#: ../win32/gui/WndMain.c:981
 msgid "Memory Card 2"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1034
+#: ../win32/gui/WndMain.c:1036
 msgid "Are you sure you want to paste this selection?"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1034 ../win32/gui/WndMain.c:1145
-#: ../win32/gui/WndMain.c:1152
+#: ../win32/gui/WndMain.c:1036 ../win32/gui/WndMain.c:1147
+#: ../win32/gui/WndMain.c:1154
 msgid "Confirmation"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1145 ../win32/gui/WndMain.c:1152
+#: ../win32/gui/WndMain.c:1147 ../win32/gui/WndMain.c:1154
 msgid "Are you sure you want to format this Memory Card?"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1198
+#: ../win32/gui/WndMain.c:1200
 msgid "Cpu Config"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1203
+#: ../win32/gui/WndMain.c:1205
 msgid "Disable Xa Decoding"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1204
+#: ../win32/gui/WndMain.c:1206
 msgid "Sio Irq Always Enabled"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1205
+#: ../win32/gui/WndMain.c:1207
 msgid "Black && White Movies"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1206
+#: ../win32/gui/WndMain.c:1208
 msgid "Disable Cd audio"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1207 ../data/pcsx.glade2:1603
+#: ../win32/gui/WndMain.c:1209 ../data/pcsx.glade2:1586
 msgid "Autodetect"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1208
+#: ../win32/gui/WndMain.c:1210
 msgid "Enable Interpreter Cpu"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1209 ../data/pcsx.glade2:1459
+#: ../win32/gui/WndMain.c:1211 ../data/pcsx.glade2:1442
 msgid "Enable Console Output"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1210 ../data/pcsx.glade2:1409
+#: ../win32/gui/WndMain.c:1212 ../data/pcsx.glade2:1392
 msgid "Enable Debugger"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1211
+#: ../win32/gui/WndMain.c:1213
 msgid "Spu Irq Always Enabled"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1212 ../data/pcsx.glade2:1546
+#: ../win32/gui/WndMain.c:1214 ../data/pcsx.glade2:1529
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1213 ../data/pcsx.glade2:1561
+#: ../win32/gui/WndMain.c:1215 ../data/pcsx.glade2:1544
 msgid "InuYasha Sengoku Battle Fix"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1215
+#: ../win32/gui/WndMain.c:1217
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:277
 #: ../plugins/dfinput/dfinput.glade2:448
 msgid "Options"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1216
+#: ../win32/gui/WndMain.c:1218
 msgid "Psx System Type"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1321
+#: ../win32/gui/WndMain.c:1323
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1326
+#: ../win32/gui/WndMain.c:1328
 msgid "Psx Memory Card (*.mcr;*.mc)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1331
+#: ../win32/gui/WndMain.c:1333
 msgid "CVGS Memory Card (*.mem;*.vgs)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1336
+#: ../win32/gui/WndMain.c:1338
 msgid "Bleem Memory Card (*.mcd)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1341
+#: ../win32/gui/WndMain.c:1343
 msgid "DexDrive Memory Card (*.gme)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1346
+#: ../win32/gui/WndMain.c:1348
 msgid "DataDeck Memory Card (*.ddf)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1351 ../win32/gui/WndMain.c:1432 ../gui/Cheat.c:322
+#: ../win32/gui/WndMain.c:1353 ../win32/gui/WndMain.c:1434 ../gui/Cheat.c:322
 #: ../gui/Gtk2Gui.c:416 ../gui/Gtk2Gui.c:555
 msgid "All Files"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1390
+#: ../win32/gui/WndMain.c:1392
 msgid "Psx Exe Format"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1427
+#: ../win32/gui/WndMain.c:1429
 msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1503
+#: ../win32/gui/WndMain.c:1505
 msgid "&File"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1504
+#: ../win32/gui/WndMain.c:1506
 msgid "E&xit"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1506
+#: ../win32/gui/WndMain.c:1508
 msgid "Run &EXE..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1507
+#: ../win32/gui/WndMain.c:1509
 msgid "Run &BIOS"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1508
+#: ../win32/gui/WndMain.c:1510
 msgid "Run &ISO..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1509
+#: ../win32/gui/WndMain.c:1511
 msgid "Run &CD"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1511
+#: ../win32/gui/WndMain.c:1513
 msgid "&Emulator"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1512
+#: ../win32/gui/WndMain.c:1514
 msgid "&States"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1514
+#: ../win32/gui/WndMain.c:1516
 msgid "S&witch ISO..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1516
+#: ../win32/gui/WndMain.c:1518
 msgid "Re&set"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1517
+#: ../win32/gui/WndMain.c:1519
 msgid "&Run"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1518
+#: ../win32/gui/WndMain.c:1520
 msgid "&Save"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1519
+#: ../win32/gui/WndMain.c:1521
 msgid "&Load"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1520 ../win32/gui/WndMain.c:1526
+#: ../win32/gui/WndMain.c:1522 ../win32/gui/WndMain.c:1528
 msgid "&Other..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1521 ../win32/gui/WndMain.c:1527
+#: ../win32/gui/WndMain.c:1523 ../win32/gui/WndMain.c:1529
 msgid "Slot &5"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1522 ../win32/gui/WndMain.c:1528
+#: ../win32/gui/WndMain.c:1524 ../win32/gui/WndMain.c:1530
 msgid "Slot &4"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1523 ../win32/gui/WndMain.c:1529
+#: ../win32/gui/WndMain.c:1525 ../win32/gui/WndMain.c:1531
 msgid "Slot &3"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1524 ../win32/gui/WndMain.c:1530
+#: ../win32/gui/WndMain.c:1526 ../win32/gui/WndMain.c:1532
 msgid "Slot &2"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1525 ../win32/gui/WndMain.c:1531
+#: ../win32/gui/WndMain.c:1527 ../win32/gui/WndMain.c:1533
 msgid "Slot &1"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1533
+#: ../win32/gui/WndMain.c:1535
 msgid "&Configuration"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1534
+#: ../win32/gui/WndMain.c:1536
 msgid "Cheat &Search..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1535
+#: ../win32/gui/WndMain.c:1537
 msgid "Ch&eat Code..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1538
+#: ../win32/gui/WndMain.c:1540
 msgid "&Language"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1563
+#: ../win32/gui/WndMain.c:1565
 msgid "&Memory cards..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1564
+#: ../win32/gui/WndMain.c:1566
 msgid "C&PU..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1566
+#: ../win32/gui/WndMain.c:1568
 msgid "&NetPlay..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1568
+#: ../win32/gui/WndMain.c:1570
 msgid "&Controllers..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1569
+#: ../win32/gui/WndMain.c:1571
 msgid "CD-&ROM..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1570
+#: ../win32/gui/WndMain.c:1572
 msgid "&Sound..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1571
+#: ../win32/gui/WndMain.c:1573
 msgid "&Graphics..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1573
+#: ../win32/gui/WndMain.c:1575
 msgid "&Plugins && Bios..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1575
+#: ../win32/gui/WndMain.c:1577
 msgid "&Help"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1576
+#: ../win32/gui/WndMain.c:1578
 msgid "&About..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1762
+#: ../win32/gui/WndMain.c:1764
 msgid "Pcsx Msg"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1765
+#: ../win32/gui/WndMain.c:1767
 msgid "Error Loading Symbol"
 msgstr ""
 
@@ -984,7 +984,7 @@ msgid "All Files (*.*)"
 msgstr ""
 
 #: ../gui/Cheat.c:395 ../gui/Cheat.c:1125 ../gui/ConfDlg.c:104
-#: ../gui/ConfDlg.c:203
+#: ../gui/ConfDlg.c:200
 msgid "Error: Glade interface could not be loaded!"
 msgstr ""
 
@@ -1016,22 +1016,22 @@ msgstr ""
 msgid "Configure PCSX"
 msgstr ""
 
-#: ../gui/ConfDlg.c:240 ../gui/ConfDlg.c:261 ../gui/ConfDlg.c:282
-#: ../gui/ConfDlg.c:303 ../gui/ConfDlg.c:358
+#: ../gui/ConfDlg.c:237 ../gui/ConfDlg.c:258 ../gui/ConfDlg.c:279
+#: ../gui/ConfDlg.c:300 ../gui/ConfDlg.c:355
 msgid "No configuration required"
 msgstr ""
 
-#: ../gui/ConfDlg.c:240 ../gui/ConfDlg.c:261 ../gui/ConfDlg.c:282
-#: ../gui/ConfDlg.c:303 ../gui/ConfDlg.c:358
+#: ../gui/ConfDlg.c:237 ../gui/ConfDlg.c:258 ../gui/ConfDlg.c:279
+#: ../gui/ConfDlg.c:300 ../gui/ConfDlg.c:355
 msgid "This plugin doesn't need to be configured."
 msgstr ""
 
-#: ../gui/ConfDlg.c:586
+#: ../gui/ConfDlg.c:581
 #, c-format
 msgid "Could not open BIOS directory: '%s'\n"
 msgstr ""
 
-#: ../gui/ConfDlg.c:616 ../gui/ConfDlg.c:709 ../gui/LnxMain.c:167
+#: ../gui/ConfDlg.c:611 ../gui/ConfDlg.c:704 ../gui/LnxMain.c:168
 #, c-format
 msgid "Could not open directory: '%s'\n"
 msgstr ""
@@ -1117,7 +1117,7 @@ msgstr ""
 msgid "Creating memory card: %s\n"
 msgstr ""
 
-#: ../gui/LnxMain.c:320
+#: ../gui/LnxMain.c:321
 msgid ""
 " pcsx [options] [file]\n"
 "\toptions:\n"
@@ -1131,23 +1131,23 @@ msgid ""
 "\tfile\t\tLoads file\n"
 msgstr ""
 
-#: ../gui/LnxMain.c:357
+#: ../gui/LnxMain.c:358
 #, c-format
 msgid ""
 "PCSX cannot be configured without using the GUI -- you should restart "
 "without -nogui.\n"
 msgstr ""
 
-#: ../gui/LnxMain.c:409
+#: ../gui/LnxMain.c:414
 msgid "Failed loading plugins!"
 msgstr ""
 
-#: ../gui/LnxMain.c:426
+#: ../gui/LnxMain.c:431
 #, c-format
 msgid "Could not load CD-ROM!\n"
 msgstr ""
 
-#: ../gui/LnxMain.c:465
+#: ../gui/LnxMain.c:467
 #, c-format
 msgid "PSX emulator couldn't be initialized.\n"
 msgstr ""
@@ -1204,7 +1204,7 @@ msgstr ""
 msgid "Memory Card Manager"
 msgstr ""
 
-#: ../gui/Plugin.c:204 ../data/pcsx.glade2:1495
+#: ../gui/Plugin.c:204 ../data/pcsx.glade2:1478
 #, c-format
 msgid "SIO IRQ Always Enabled"
 msgstr ""
@@ -1274,7 +1274,7 @@ msgstr ""
 msgid "Error closing GPU plugin!"
 msgstr ""
 
-#: ../libpcsxcore/cdriso.c:644
+#: ../libpcsxcore/cdriso.c:637
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr ""
@@ -1309,21 +1309,21 @@ msgstr ""
 msgid "Debugger stopped.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:389
+#: ../libpcsxcore/misc.c:395
 #, c-format
 msgid "Error opening file: %s.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:429
+#: ../libpcsxcore/misc.c:435
 #, c-format
 msgid "Unknown CPE opcode %02x at position %08x.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:436
+#: ../libpcsxcore/misc.c:442
 msgid "COFF files not supported.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:440
+#: ../libpcsxcore/misc.c:446
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr ""
 
@@ -1394,6 +1394,21 @@ msgstr ""
 
 #: ../libpcsxcore/plugins.c:791
 msgid "Plugins loaded.\n"
+msgstr ""
+
+#: ../libpcsxcore/ppf.c:206
+#, c-format
+msgid "Invalid PPF patch: %s.\n"
+msgstr ""
+
+#: ../libpcsxcore/ppf.c:282
+#, c-format
+msgid "Unsupported PPF version (%d).\n"
+msgstr ""
+
+#: ../libpcsxcore/ppf.c:321
+#, c-format
+msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr ""
 
 #: ../libpcsxcore/psxmem.c:69
@@ -1808,7 +1823,7 @@ msgstr ""
 msgid "Switch ISO..."
 msgstr ""
 
-#: ../data/pcsx.glade2:669 ../data/pcsx.glade2:1853
+#: ../data/pcsx.glade2:669 ../data/pcsx.glade2:1803
 msgid "Configure Memory Cards"
 msgstr ""
 
@@ -1884,77 +1899,77 @@ msgstr ""
 msgid "<b>BIOS</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:1380
+#: ../data/pcsx.glade2:1363
 msgid "Configure CPU"
 msgstr ""
 
-#: ../data/pcsx.glade2:1427
+#: ../data/pcsx.glade2:1410
 msgid "SPU IRQ Always Enabled"
 msgstr ""
 
-#: ../data/pcsx.glade2:1443
+#: ../data/pcsx.glade2:1426
 msgid "Black & White Movies"
 msgstr ""
 
-#: ../data/pcsx.glade2:1477
+#: ../data/pcsx.glade2:1460
 msgid "Enable Interpreter CPU"
 msgstr ""
 
-#: ../data/pcsx.glade2:1511
+#: ../data/pcsx.glade2:1494
 msgid "Disable CD Audio"
 msgstr ""
 
-#: ../data/pcsx.glade2:1527
+#: ../data/pcsx.glade2:1510
 msgid "Disable XA Decoding"
 msgstr ""
 
-#: ../data/pcsx.glade2:1579
+#: ../data/pcsx.glade2:1562
 msgid "<b>Options</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:1620
+#: ../data/pcsx.glade2:1603
 msgid ""
 "NTSC\n"
 "PAL"
 msgstr ""
 
-#: ../data/pcsx.glade2:1634
+#: ../data/pcsx.glade2:1617
 msgid "<b>System Type</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:1698
+#: ../data/pcsx.glade2:1665
 msgid "Configure NetPlay"
 msgstr ""
 
-#: ../data/pcsx.glade2:1786
+#: ../data/pcsx.glade2:1753
 msgid "<b>NetPlay</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:1932 ../data/pcsx.glade2:2330
+#: ../data/pcsx.glade2:1882 ../data/pcsx.glade2:2280
 msgid "New"
 msgstr ""
 
-#: ../data/pcsx.glade2:1982 ../data/pcsx.glade2:2380
+#: ../data/pcsx.glade2:1932 ../data/pcsx.glade2:2330
 msgid "Format"
 msgstr ""
 
-#: ../data/pcsx.glade2:2032 ../data/pcsx.glade2:2430
+#: ../data/pcsx.glade2:1982 ../data/pcsx.glade2:2380
 msgid "Un/Delete"
 msgstr ""
 
-#: ../data/pcsx.glade2:2125
+#: ../data/pcsx.glade2:2075
 msgid "<b>Memory Card 1</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:2186 ../data/pcsx.glade2:2236 ../data/pcsx.glade2:3115
+#: ../data/pcsx.glade2:2136 ../data/pcsx.glade2:2186 ../data/pcsx.glade2:3065
 msgid "Copy"
 msgstr ""
 
-#: ../data/pcsx.glade2:2523
+#: ../data/pcsx.glade2:2473
 msgid "<b>Memory Card 2</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:2586
+#: ../data/pcsx.glade2:2536
 msgid ""
 "(C) 1999-2003  PCSX Team\n"
 "(C) 2005-2006 Ryan Schultz\n"
@@ -1962,11 +1977,11 @@ msgid ""
 "(C) 2008-2009 Wei Mingzhi"
 msgstr ""
 
-#: ../data/pcsx.glade2:2590
+#: ../data/pcsx.glade2:2540
 msgid "A PlayStation emulator."
 msgstr ""
 
-#: ../data/pcsx.glade2:2593
+#: ../data/pcsx.glade2:2543
 msgid ""
 "This program is free software; you can redistribute it\n"
 "and/or modify it under the terms of the GNU General\n"
@@ -1985,22 +2000,22 @@ msgid ""
 "the Free Software Foundation, Inc."
 msgstr ""
 
-#: ../data/pcsx.glade2:2622
+#: ../data/pcsx.glade2:2572
 msgid "translator-credits"
 msgstr ""
 
-#: ../data/pcsx.glade2:2684
+#: ../data/pcsx.glade2:2634
 msgid "<b>Cheat Codes</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:2850
+#: ../data/pcsx.glade2:2800
 msgid ""
 "8-bit\n"
 "16-bit\n"
 "32-bit"
 msgstr ""
 
-#: ../data/pcsx.glade2:2913
+#: ../data/pcsx.glade2:2863
 msgid ""
 "Equal Value\n"
 "Not Equal Value\n"
@@ -2013,25 +2028,25 @@ msgid ""
 "No Change"
 msgstr ""
 
-#: ../data/pcsx.glade2:2945
+#: ../data/pcsx.glade2:2895
 msgid ""
 "Decimal\n"
 "Hexadecimal"
 msgstr ""
 
-#: ../data/pcsx.glade2:3148
+#: ../data/pcsx.glade2:3098
 msgid "label_resultsfound"
 msgstr ""
 
-#: ../data/pcsx.glade2:3183
+#: ../data/pcsx.glade2:3133
 msgid "Search"
 msgstr ""
 
-#: ../data/pcsx.glade2:3219
+#: ../data/pcsx.glade2:3169
 msgid "Restart"
 msgstr ""
 
-#: ../data/pcsx.glade2:3248
+#: ../data/pcsx.glade2:3198
 msgid "<b>Cheat Search</b>"
 msgstr ""
 
@@ -2140,7 +2155,7 @@ msgstr ""
 msgid "CDR NULL Plugin"
 msgstr ""
 
-#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:175
+#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:170
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:8
 msgid "CDR configuration"
 msgstr ""
@@ -2714,19 +2729,19 @@ msgstr ""
 msgid "(Not Set)"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:546
+#: ../plugins/dfinput/cfg-gtk2.c:539
 msgid "None"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:588
+#: ../plugins/dfinput/cfg-gtk2.c:581
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:594 ../plugins/dfinput/cfg-gtk2.c:614
+#: ../plugins/dfinput/cfg-gtk2.c:587 ../plugins/dfinput/cfg-gtk2.c:607
 msgid "Key"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:600 ../plugins/dfinput/cfg-gtk2.c:620
+#: ../plugins/dfinput/cfg-gtk2.c:593 ../plugins/dfinput/cfg-gtk2.c:613
 msgid "Button"
 msgstr ""
 

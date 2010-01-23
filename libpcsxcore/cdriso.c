@@ -21,6 +21,7 @@
 #include "psxcommon.h"
 #include "plugins.h"
 #include "cdrom.h"
+#include "cdriso.h"
 
 #ifdef _WIN32
 #include <process.h>
@@ -29,14 +30,6 @@
 #include <pthread.h>
 #include <sys/time.h>
 #endif
-
-#define MSF2SECT(m, s, f)		(((m) * 60 + (s) - 2) * 75 + (f))
-#define btoi(b)					((b) / 16 * 10 + (b) % 16) /* BCD to u_char */
-
-#define CD_FRAMESIZE_RAW		2352
-#define DATA_SIZE				(CD_FRAMESIZE_RAW - 12)
-
-#define SUB_FRAMESIZE			96
 
 FILE *cdHandle = NULL;
 FILE *cddaHandle = NULL;

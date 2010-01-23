@@ -87,6 +87,7 @@ static void CheckSubDir() {
 	CreateHomeConfigDir(PLUGINS_DIR);
 	CreateHomeConfigDir(PLUGINS_CFG_DIR);
 	CreateHomeConfigDir(CHEATS_DIR);
+	CreateHomeConfigDir(PATCHES_DIR);
 }
 
 static void ScanPlugins(gchar* scandir) {
@@ -244,24 +245,24 @@ static void ScanAllPlugins (void) {
 	ScanPlugins(currentdir);
 	g_free(currentdir);
 
-	/* Check for bad links in ~/.pcsx/plugins/ */
+	// Check for bad links in ~/.pcsx/plugins/
 	currentdir = g_build_filename(getenv("HOME"), PLUGINS_DIR, NULL);
 	CheckSymlinksInPath(currentdir);
 	g_free(currentdir);
 
-	/* Check for bad links in ~/.pcsx/plugins/cfg */
+	// Check for bad links in ~/.pcsx/plugins/cfg
 	currentdir = g_build_filename(getenv("HOME"), PLUGINS_CFG_DIR, NULL);
 	CheckSymlinksInPath(currentdir);
 	g_free(currentdir);
 
-	/* Check for bad links in ~/.pcsx/bios */
+	// Check for bad links in ~/.pcsx/bios
 	currentdir = g_build_filename(getenv("HOME"), BIOS_DIR, NULL);
 	CheckSymlinksInPath(currentdir);
 	g_free(currentdir);
 }
 
-/* Set the default plugin name */
-void set_default_plugin (char *plugin_name, char *conf_plugin_name) {
+// Set the default plugin name
+void set_default_plugin(char *plugin_name, char *conf_plugin_name) {
 	if (strlen(plugin_name) != 0) {
 		strcpy(conf_plugin_name, plugin_name);
 		printf("Picking default plugin: %s\n", plugin_name);
@@ -288,7 +289,7 @@ int main(int argc, char *argv[]) {
 	strcpy(cfgfile_basename, "pcsx.cfg");
 
 	// read command line options
-	for (i=1; i<argc; i++) {
+	for (i = 1; i < argc; i++) {
 		if (!strcmp(argv[i], "-runcd")) runcd = RUN_CD;
 		else if (!strcmp(argv[i], "-nogui")) UseGui = FALSE;
 		else if (!strcmp(argv[i], "-psxout")) Config.PsxOut = 1;
@@ -361,12 +362,12 @@ int main(int argc, char *argv[]) {
 		// Uh oh, no config file found, use some defaults
 		Config.PsxAuto = 1;
 
-		gchar *str_bios_dir = g_strconcat (getenv("HOME"), BIOS_DIR, NULL);
-		strcpy(Config.BiosDir,  str_bios_dir);
+		gchar *str_bios_dir = g_strconcat(getenv("HOME"), BIOS_DIR, NULL);
+		strcpy(Config.BiosDir, str_bios_dir);
 		g_free(str_bios_dir);
 
-		gchar *str_plugin_dir = g_strconcat (getenv("HOME"), PLUGINS_DIR, NULL);
-		strcpy(Config.PluginsDir,  str_plugin_dir);
+		gchar *str_plugin_dir = g_strconcat(getenv("HOME"), PLUGINS_DIR, NULL);
+		strcpy(Config.PluginsDir, str_plugin_dir);
 		g_free(str_plugin_dir);
 
 		gtk_init(NULL, NULL);
@@ -391,10 +392,14 @@ int main(int argc, char *argv[]) {
 		SaveConfig();
 	}
 
+	gchar *str_patches_dir = g_strconcat(getenv("HOME"), PATCHES_DIR, NULL);
+	strcpy(Config.PatchesDir,  str_patches_dir);
+	g_free(str_patches_dir);
+
 	// switch to plugin dotdir
 	// this lets plugins work without modification!
-	gchar *plugin_default_dir = g_build_filename (getenv("HOME"), PLUGINS_DIR, NULL);
-	chdir(plugin_default_dir);	/* TODO Error checking - make sure this directory is available */
+	gchar *plugin_default_dir = g_build_filename(getenv("HOME"), PLUGINS_DIR, NULL);
+	chdir(plugin_default_dir);
 	g_free(plugin_default_dir);
 
 	if (!UseGui) cdrfilename[0] = '\0';
@@ -429,12 +434,12 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
-		/* If a state has been specified, then load that */
+		// If a state has been specified, then load that
 		if (loadst) {
 			StatesC = loadst - 1;
-			gchar *state_filename = get_state_filename (StatesC);
-			LoadState(state_filename); /* TODO Error checking */
-			g_free (state_filename);
+			gchar *state_filename = get_state_filename(StatesC);
+			LoadState(state_filename);
+			g_free(state_filename);
 		}
 
 		psxCpu->Execute();
@@ -442,8 +447,6 @@ int main(int argc, char *argv[]) {
 
 	return 0;
 }
-
-DIR *dir;
 
 int SysInit() {
 #ifdef GTE_DUMP
@@ -461,7 +464,6 @@ int SysInit() {
 #endif
 
 	if (psxInit() == -1) {
-		/* TODO Error handling */
 		printf(_("PSX emulator couldn't be initialized.\n"));
 		return -1;
 	}

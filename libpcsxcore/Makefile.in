@@ -113,6 +113,8 @@ am__libpcsxcore_a_SOURCES_DIST =  \
 	$(top_builddir)/libpcsxcore/cheat.h \
 	$(top_builddir)/libpcsxcore/socket.c \
 	$(top_builddir)/libpcsxcore/socket.h \
+	$(top_builddir)/libpcsxcore/ppf.c \
+	$(top_builddir)/libpcsxcore/ppf.h \
 	$(top_builddir)/libpcsxcore/ix86_64/iR3000A-64.c \
 	$(top_builddir)/libpcsxcore/ix86_64/ix86-64.c \
 	$(top_builddir)/libpcsxcore/ix86_64/ix86_cpudetect.c \
@@ -142,7 +144,8 @@ am_libpcsxcore_a_OBJECTS = psxbios.$(OBJEXT) cdrom.$(OBJEXT) \
 	decode_xa.$(OBJEXT) r3000a.$(OBJEXT) psxinterpreter.$(OBJEXT) \
 	gte.$(OBJEXT) psxhle.$(OBJEXT) debug.$(OBJEXT) \
 	cdriso.$(OBJEXT) cheat.$(OBJEXT) socket.$(OBJEXT) \
-	$(am__objects_1) $(am__objects_2) $(am__objects_3)
+	ppf.$(OBJEXT) $(am__objects_1) $(am__objects_2) \
+	$(am__objects_3)
 libpcsxcore_a_OBJECTS = $(am_libpcsxcore_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/include
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -360,7 +363,9 @@ libpcsxcore_a_SOURCES = $(top_builddir)/libpcsxcore/psxbios.c \
 	$(top_builddir)/libpcsxcore/cheat.c \
 	$(top_builddir)/libpcsxcore/cheat.h \
 	$(top_builddir)/libpcsxcore/socket.c \
-	$(top_builddir)/libpcsxcore/socket.h $(am__append_1) \
+	$(top_builddir)/libpcsxcore/socket.h \
+	$(top_builddir)/libpcsxcore/ppf.c \
+	$(top_builddir)/libpcsxcore/ppf.h $(am__append_1) \
 	$(am__append_2) $(am__append_3)
 @ARCH_PPC_TRUE@libpcsxcore_a_CCASFLAGS = -x assembler-with-cpp -mregnames
 all: all-am
@@ -431,6 +436,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pR3000A.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugins.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ppc.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ppf.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/psxbios.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/psxcounters.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/psxdma.Po@am__quote@
@@ -758,6 +764,20 @@ socket.obj: $(top_builddir)/libpcsxcore/socket.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$(top_builddir)/libpcsxcore/socket.c' object='socket.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o socket.obj `if test -f '$(top_builddir)/libpcsxcore/socket.c'; then $(CYGPATH_W) '$(top_builddir)/libpcsxcore/socket.c'; else $(CYGPATH_W) '$(srcdir)/$(top_builddir)/libpcsxcore/socket.c'; fi`
+
+ppf.o: $(top_builddir)/libpcsxcore/ppf.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ppf.o -MD -MP -MF $(DEPDIR)/ppf.Tpo -c -o ppf.o `test -f '$(top_builddir)/libpcsxcore/ppf.c' || echo '$(srcdir)/'`$(top_builddir)/libpcsxcore/ppf.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/ppf.Tpo $(DEPDIR)/ppf.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$(top_builddir)/libpcsxcore/ppf.c' object='ppf.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ppf.o `test -f '$(top_builddir)/libpcsxcore/ppf.c' || echo '$(srcdir)/'`$(top_builddir)/libpcsxcore/ppf.c
+
+ppf.obj: $(top_builddir)/libpcsxcore/ppf.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ppf.obj -MD -MP -MF $(DEPDIR)/ppf.Tpo -c -o ppf.obj `if test -f '$(top_builddir)/libpcsxcore/ppf.c'; then $(CYGPATH_W) '$(top_builddir)/libpcsxcore/ppf.c'; else $(CYGPATH_W) '$(srcdir)/$(top_builddir)/libpcsxcore/ppf.c'; fi`
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/ppf.Tpo $(DEPDIR)/ppf.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$(top_builddir)/libpcsxcore/ppf.c' object='ppf.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ppf.obj `if test -f '$(top_builddir)/libpcsxcore/ppf.c'; then $(CYGPATH_W) '$(top_builddir)/libpcsxcore/ppf.c'; else $(CYGPATH_W) '$(srcdir)/$(top_builddir)/libpcsxcore/ppf.c'; fi`
 
 iR3000A-64.o: $(top_builddir)/libpcsxcore/ix86_64/iR3000A-64.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT iR3000A-64.o -MD -MP -MF $(DEPDIR)/iR3000A-64.Tpo -c -o iR3000A-64.o `test -f '$(top_builddir)/libpcsxcore/ix86_64/iR3000A-64.c' || echo '$(srcdir)/'`$(top_builddir)/libpcsxcore/ix86_64/iR3000A-64.c

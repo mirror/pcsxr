@@ -1,3 +1,21 @@
+January 23, 2010 Wei Mingzhi <weimingzhi@gmail.com>
+
+ * libpcsxcore/cdriso.c: Moved several definations into cdriso.h.
+ * libpcsxcore/cdriso.h: Likewise.
+ * libpcsxcore/ppf.c: Added PPF patch support.
+ * libpcsxcore/ppf.h: Likewise.
+ * libpcsxcore/cdrom.c: Likewise.
+ * libpcsxcore/misc.c: Likewise.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/psxcommon.h: Likewise.
+ * gui/LnxMain.c: Likewise.
+ * gui/Linux.h: Likewise.
+ * win32/gui/WndMain.c: Likewise.
+ * macosx/main.m: Likewise.
+ * macosx/PcsxController.m: Likewise.
+ * libpcsxcore/Makefile.am: Added ppf.c and ppf.h.
+ * po/zh_CN.po, po/zh_TW.po, po/pt_BR.po, po/pcsx.pot: Updated.
+
 January 7, 2010 Wei Mingzhi <weimingzhi@gmail.com>
 
  * plugins/dfxvideo/draw.c: MaintainAspect() now only depends on screen

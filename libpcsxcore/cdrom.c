@@ -23,6 +23,7 @@
 */
 
 #include "cdrom.h"
+#include "ppf.h"
 
 /* CD-ROM magic numbers */
 #define CdlSync        0
@@ -600,6 +601,8 @@ void cdrReadInterrupt() {
 	}
 
 	memcpy(cdr.Transfer, buf, 2340);
+	CheckPPFCache(cdr.Transfer, cdr.Prev[0], cdr.Prev[1], cdr.Prev[2]);
+
     cdr.Stat = DataReady;
 
 #ifdef CDR_LOG

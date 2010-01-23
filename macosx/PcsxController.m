@@ -372,6 +372,10 @@ NSString *saveStatePath;
 		if (![dfm fileExistsAtPath:path isDirectory:&dir])
 			[dfm createDirectoryAtPath:path attributes:nil];
 
+		path = [NSString stringWithFormat:@"%@/Pcsx/Patches", supportPath];
+		if (![dfm fileExistsAtPath:path isDirectory:&dir])
+			[dfm createDirectoryAtPath:path attributes:nil];
+
 		saveStatePath = [[NSString stringWithFormat:@"%@/Pcsx/Save States", supportPath] retain];
 		if (![dfm fileExistsAtPath:saveStatePath isDirectory:&dir])
 			[dfm createDirectoryAtPath:saveStatePath attributes:nil];
@@ -387,8 +391,13 @@ NSString *saveStatePath;
 		path = [NSString stringWithFormat:@"%@/Pcsx/Bios/", supportPath];
 		str = [path fileSystemRepresentation];
 		if (str != nil) strncpy(Config.BiosDir, str, 255);
+
+		path = [NSString stringWithFormat:@"%@/Pcsx/Patches/", supportPath];
+		str = [path fileSystemRepresentation];
+		if (str != nil) strncpy(Config.PatchesDir, str, 255);
 	} else {
 		strcpy(Config.BiosDir, "Bios/");
+		strcpy(Config.PatchesDir, "Patches/");
 
 		saveStatePath = @"sstates";
 		[saveStatePath retain];
