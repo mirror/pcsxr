@@ -132,7 +132,7 @@ void CheckPPFCache(unsigned char *pB, unsigned char m, unsigned char s, unsigned
 }
 
 static void AddToPPF(s32 ladr, s32 pos, s32 anz, unsigned char *ppfmem) {
-	if (!ppfHead) {
+	if (ppfHead == NULL) {
 		ppfHead = (PPF_DATA *)malloc(sizeof(PPF_DATA) + anz);
 		ppfHead->addr = ladr;
 		ppfHead->pNext = NULL;
