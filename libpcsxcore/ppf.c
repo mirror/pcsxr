@@ -181,10 +181,10 @@ void BuildPPFCache() {
 	ppfHead = NULL;
 
 	// Generate filename in the format of SLUS_123.45
-	buffer[0] = CdromId[0];
-	buffer[1] = CdromId[1];
-	buffer[2] = CdromId[2];
-	buffer[3] = CdromId[3];
+	buffer[0] = toupper(CdromId[0]);
+	buffer[1] = toupper(CdromId[1]);
+	buffer[2] = toupper(CdromId[2]);
+	buffer[3] = toupper(CdromId[3]);
 	buffer[4] = '_';
 	buffer[5] = CdromId[4];
 	buffer[6] = CdromId[5];
