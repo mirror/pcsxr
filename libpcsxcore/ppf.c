@@ -91,7 +91,7 @@ void FreePPFCache() {
 	ppfCache = NULL;
 }
 
-void CheckPPFCache(unsigned char *pB, u8 m, u8 s, u8 f) {
+void CheckPPFCache(unsigned char *pB, unsigned char m, unsigned char s, unsigned char f) {
 	PPF_CACHE *pcstart, *pcend, *pcpos;
 	int addr = MSF2SECT(btoi(m), btoi(s), btoi(f)), pos, anz, start;
 
