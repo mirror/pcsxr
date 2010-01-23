@@ -22,6 +22,6 @@
 
 void BuildPPFCache();
 void FreePPFCache();
-void CheckPPFCache(unsigned char *pB, int m, int s, int f);
+void CheckPPFCache(unsigned char *pB, u8 m, u8 s, u8 f);
 
 #endif
