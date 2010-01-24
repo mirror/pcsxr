@@ -536,7 +536,7 @@ void SysCloseLibrary(void *lib) {
 
 static void SysDisableScreenSaver() {
 	static time_t fake_key_timer = 0;
-	static char first_time = 1, has_test_ext = 0;
+	static char first_time = 1, has_test_ext = 0, t = 1;
 	Display *display;
 	extern unsigned long gpuDisp;
 
@@ -551,7 +551,7 @@ static void SysDisableScreenSaver() {
 	}
 
 	if (has_test_ext && fake_key_timer < time(NULL)) {
-		XTestFakeRelativeMotionEvent(display, 1, 0, 0);
+		XTestFakeRelativeMotionEvent(display, t *= -1, 0, 0);
 		fake_key_timer = time(NULL) + 55;
 	}
 }

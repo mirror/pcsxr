@@ -1,3 +1,8 @@
+January 24, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * gui/LnxMain.c: Don't always move the mouse to the right for screensaver
+   disabling.
+
 January 23, 2010 Wei Mingzhi <weimingzhi@gmail.com>
 
  * libpcsxcore/cdriso.c: Moved several definations into cdriso.h.
