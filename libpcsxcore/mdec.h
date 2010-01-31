@@ -36,4 +36,4 @@ void psxDma1(u32 madr, u32 bcr, u32 chcr);
 void mdec1Interrupt();
 int  mdecFreeze(gzFile f, int Mode);
 
-#endif /* __MDEC_H__ */
+#endif

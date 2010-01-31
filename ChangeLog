@@ -2,6 +2,7 @@ January 31, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * macosx/EmuThread.m: Use setjmp()/longjmp() for resetting to avoid nasty
    plugin issues.
+ * libpcsxcore/mdec.c: Minor cleanup.
 
 January 24, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
