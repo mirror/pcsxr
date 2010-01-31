@@ -54,9 +54,9 @@ static pthread_mutex_t eventMutex;
 	if (OpenPlugins() == -1)
 		goto done;
 
-	if (setjmp(restartJmp) == 0) {
-		psxReset();
-	}
+	setjmp(restartJmp);
+
+	psxReset();
 
 	int res = CheckCdrom();
 	if (res == -1) {
@@ -104,9 +104,7 @@ done:
 	if (OpenPlugins() == -1)
 		goto done;
 
-	if (setjmp(restartJmp) == 0) {
-		psxReset();
-	}
+	psxReset();
 
 	psxCpu->Execute();
 
@@ -190,8 +188,6 @@ done:
 #else
 				safeEvent &= ~EMUEVENT_RESET;
 				pthread_mutex_unlock(&eventMutex);
-
-				psxReset();
 
 				longjmp(restartJmp, 0);
 #endif
