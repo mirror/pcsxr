@@ -191,7 +191,7 @@ done:
 				safeEvent &= ~EMUEVENT_RESET;
 				pthread_mutex_unlock(&eventMutex);
 
-				psxCpu->Reset();
+				psxReset();
 
 				longjmp(restartJmp, 0);
 #endif
