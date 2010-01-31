@@ -1,3 +1,8 @@
+January 31, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/EmuThread.m: Use setjmp()/longjmp() for resetting to avoid nasty
+   plugin issues.
+
 January 24, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * gui/LnxMain.c: Don't always move the mouse to the right for screensaver

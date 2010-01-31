@@ -77,7 +77,7 @@ static pthread_mutex_t eventMutex;
 done:
 	[pool release]; pool = nil;
 	emuThread = nil;
-	
+
 	return;
 }
 
@@ -121,10 +121,10 @@ done:
 {
 	// remove all registered observers
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:nil object:nil];
-	
+
 	if (pool)
 		[pool release];
-	
+
 	[super dealloc];
 }
 
@@ -171,11 +171,11 @@ done:
 			}
 
 			if (safeEvent & EMUEVENT_RESET) {
-#if 1
+#if 0
 				/* signify that the emulation has stopped */
 				[emuThread autorelease];
 				emuThread = nil;
-				
+
 				/* better unlock the mutex before killing ourself */
 				pthread_mutex_unlock(&eventMutex);
 
@@ -183,14 +183,14 @@ done:
 
 				// start a new emulation thread
 				[EmuThread run];
-				
+
 				//[[NSThread currentThread] autorelease];
 				[NSThread exit];
 				return;
 #else
 				safeEvent &= ~EMUEVENT_RESET;
 				pthread_mutex_unlock(&eventMutex);
-				
+
 				psxCpu->Reset();
 
 				longjmp(restartJmp, 0);
@@ -334,7 +334,7 @@ done:
 	pthread_mutex_lock(&eventMutex);
 	safeEvent = EMUEVENT_RESET;
 	pthread_mutex_unlock(&eventMutex);
-	
+
 	pthread_cond_broadcast(&eventCond);
 }
 
@@ -374,13 +374,13 @@ done:
 {
 	BOOL emuWasPaused = [EmuThread pauseSafe];
 	char Text[256];
-	
+
 	GPU_freeze(2, (GPUFreeze_t *)&num);
 	int ret = SaveState([path fileSystemRepresentation]);
 	if (ret == 0) sprintf (Text, _("*PCSX*: Saved State %d"), num+1);
 	else sprintf (Text, _("*PCSX*: Error Saving State %d"), num+1);
 	GPU_displayText(Text);
-	
+
 	if (!emuWasPaused) {
 		[EmuThread resume];
 	}
@@ -391,13 +391,11 @@ done:
 	const char *cPath = [path fileSystemRepresentation];
 	if (CheckState(cPath) != 0)
 		return NO;
-	
-	defrostPath = [path retain];
-	
-	[EmuThread reset];
-	
-	GPU_displayText(_("*PCSX*: Loaded State"));
 
+	defrostPath = [path retain];
+	[EmuThread reset];
+
+	GPU_displayText(_("*PCSX*: Loaded State"));
 	return YES;
 }
 
