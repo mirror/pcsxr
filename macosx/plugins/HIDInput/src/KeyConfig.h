@@ -20,7 +20,7 @@
 
 #import <Carbon/Carbon.h>
 #include <IOKit/hid/IOHIDUsageTables.h>
-#include "HID_Utilities.h"
+#include "HID_Utilities_External.h"
 #import "ControllerList.h"
 
 @class ControllerList;

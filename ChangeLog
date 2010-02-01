@@ -1,3 +1,11 @@
+February 1, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/plugins/HIDInput/src/HID_Utilities.h: Removed duplicate file.
+ * macosx/plugins/HIDInput/src/PlugPAD.c: #include HID_Utilities_External.h
+   instead of HID_Utilities.h.
+ * macosx/plugins/HIDInput/src/PadController.m: Likewise.
+ * macosx/plugins/HIDInput/src/KeyConfig.h: Likewise.
+
 January 31, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * macosx/EmuThread.m: Use setjmp()/longjmp() for resetting to avoid nasty

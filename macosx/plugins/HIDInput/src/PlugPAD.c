@@ -1,6 +1,6 @@
 
 #include <IOKit/hid/IOHIDUsageTables.h>
-#include "HID_Utilities.h"
+#include "HID_Utilities_External.h"
 #include "PlugPAD.h"
 
 /////////////////////////////////////////////////////////
