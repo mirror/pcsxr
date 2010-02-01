@@ -38,7 +38,7 @@ int LoadConfig()
 {
 	if (!sKeyconfig)
 		sKeyconfig = [[KeyConfig alloc] init];
-	
+
 	return 0;
 }
 
@@ -80,7 +80,7 @@ static void GetDeviceElementNameString(pRecDevice pDevice, pRecElement pElement,
 {
 	if ((self = [super init]) == nil)
 		return nil;
-	
+
 	/* Using the defaults system means that we will effectively piggy-back on
 		the parent process' preferences. This behaviour is ok, since it allows
 		for seperate preferences for each application that will use the plugin */
@@ -89,15 +89,15 @@ static void GetDeviceElementNameString(pRecDevice pDevice, pRecElement pElement,
 			@"Default", @"net.pcsx.HIDInputPlugin Current Set",
 			[[NSMutableDictionary alloc] initWithCapacity:1], @"net.pcsx.HIDInputPlugin Pad Settings",
 			nil]];
-	
+
 	/* load from preferences */
 	keyValues = [[defaults dictionaryForKey:@"net.pcsx.HIDInputPlugin Pad Settings"] retain];
 
 	list = [[ControllerList alloc] initWithConfig:self];
-	
+
 	[self setCurrentSet:[self currentSet]];
 	[self updateKeys];
-	
+
 	return self;
 }
 
@@ -469,30 +469,30 @@ static void GetDeviceElementNameString(pRecDevice pDevice, pRecElement pElement,
 - (void)updateKeys
 {
 	int i, j, k;
-	
+
 	/* transfer to working set */
 	for (i=0; i<MAX_NUM_PADS; i++) {
 		NSString *type = [self currentTypeForPlayer:i];
-		
+
 		gControllerType[i] = [list controllerTypeIdForType:type];
 		gNumKeys[i] = gNumAxes[i] = 0;
-		
+
 		for (j=0; j<[list elementCountForType:type]; j++) {
 			NSString *name = [list elementNameAtIndex:j type:type];
 			NSArray *mappings = [self currentMappingsForElement:name player:i];
 			int button = [list buttonIdAtIndex:j type:type];
-			
+
 			if (-1 == button) {
 				int axis = [list axisIdAtIndex:j type:type];
 				if (-1 != axis) {
 					BOOL positive = ([list axisDirectionAtIndex:j type:type] >= 0);
-					
+
 					for (k=0; k<[mappings count]; k++) {
 						NSString *mapId = [mappings objectAtIndex:k];
-						
+
 						if (gNumAxes[i] >= MAX_NUM_AXES)
 							break;
-						
+
 						if ([KeyConfig reverseMappingForId:mapId outElement:&gAxes[i][gNumAxes[i]].element outDevice:&gAxes[i][gNumAxes[i]].device]) {
 							gAxes[i][gNumAxes[i]].axis = axis;
 							gAxes[i][gNumAxes[i]].reverse = [KeyConfig mappingIsReverse:mapId];
@@ -505,7 +505,7 @@ static void GetDeviceElementNameString(pRecDevice pDevice, pRecElement pElement,
 			} else {
 				for (k=0; k<[mappings count]; k++) {
 					NSString *mapId = [mappings objectAtIndex:k];
-					
+
 					if (gNumKeys[i] >= MAX_NUM_KEYS)
 						break;
 
@@ -518,7 +518,7 @@ static void GetDeviceElementNameString(pRecDevice pDevice, pRecElement pElement,
 			}
 		}
 	}
-	
+
 	/* save to preferences */
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setObject:keyValues forKey:@"net.pcsx.HIDInputPlugin Pad Settings"];

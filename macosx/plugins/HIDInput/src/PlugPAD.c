@@ -49,13 +49,13 @@ long PADinit(long flags) {
     if (!HIDHaveDeviceList()) {
         // List all HID devices
         HIDBuildDeviceList(kHIDPage_GenericDesktop, 0);
-        
+
         if (HIDCountDevices() == 0) {
             // No devices found!
             HIDReleaseDeviceList();
             return PSE_PAD_ERR_INIT;
         }
-        
+
         //HIDCloseReleaseInterface(
     }
 
@@ -103,7 +103,7 @@ long PADclose(void) {
 long PADconfigure(void) {
     // make sure our previous configuration was loaded
     if (sPadFlags == 0) {
-        fprintf(stderr, "PADconfigure() called before PADinit()\n");
+        //fprintf(stderr, "PADconfigure() called before PADinit()\n");
         if (!HIDHaveDeviceList()) {
             HIDBuildDeviceList(kHIDPage_GenericDesktop, 0);
         }
@@ -116,16 +116,15 @@ void PADabout(void) {
     DoAbout();
 }
 
-long _readPortX(PadDataS *data, int port)
-{
+long _readPortX(PadDataS *data, int port) {
     unsigned short buttonState = 0xffff;
     keyEntry *keys = gKeys[port];
     axisEntry *axes = gAxes[port];
     int i;
-    
+
     //pRecDevice device;
     //IOHIDEventStruct event;
-    
+
     /*device = HIDGetFirstDevice();
     do {
         while (HIDGetEvent(device, &event)) {
@@ -140,10 +139,10 @@ long _readPortX(PadDataS *data, int port)
             }
         }
     while (HIDGetNextDevice(device));*/
-    
+
     for (i=0; i<gNumKeys[port]; i++) {
         long value = HIDGetElementValue(keys[i].device, keys[i].element);
-        
+
         if (keys[i].element->usagePage == kHIDPage_GenericDesktop && 
             keys[i].element->usage >= kHIDUsage_GD_X && keys[i].element->usage <= kHIDUsage_GD_Rz) {
             /* axis input device */

@@ -292,6 +292,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = (
+					../../../libpcsxcore,
+					../HID,
+					Utilities,
+					Source,
+				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LIBRARY_SEARCH_PATHS = .;
@@ -324,6 +330,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = (
+					../../../libpcsxcore,
+					../HID,
+					Utilities,
+					Source,
+				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LIBRARY_SEARCH_PATHS = .;
@@ -358,7 +370,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				HEADER_SEARCH_PATHS = ../../../libpcsxcore;
+				HEADER_SEARCH_PATHS = (
+					../../../libpcsxcore,
+				);
 			};
 			name = Deployment;
 		};
