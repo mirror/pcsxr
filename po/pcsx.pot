@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-23 16:38+0800\n"
+"POT-Creation-Date: 2010-02-07 18:32+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1309,21 +1309,21 @@ msgstr ""
 msgid "Debugger stopped.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:395
+#: ../libpcsxcore/misc.c:392
 #, c-format
 msgid "Error opening file: %s.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:435
+#: ../libpcsxcore/misc.c:432
 #, c-format
 msgid "Unknown CPE opcode %02x at position %08x.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:442
+#: ../libpcsxcore/misc.c:439
 msgid "COFF files not supported.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:446
+#: ../libpcsxcore/misc.c:443
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr ""
 
@@ -1396,17 +1396,17 @@ msgstr ""
 msgid "Plugins loaded.\n"
 msgstr ""
 
-#: ../libpcsxcore/ppf.c:206
+#: ../libpcsxcore/ppf.c:207
 #, c-format
 msgid "Invalid PPF patch: %s.\n"
 msgstr ""
 
-#: ../libpcsxcore/ppf.c:282
+#: ../libpcsxcore/ppf.c:283
 #, c-format
 msgid "Unsupported PPF version (%d).\n"
 msgstr ""
 
-#: ../libpcsxcore/ppf.c:321
+#: ../libpcsxcore/ppf.c:322
 #, c-format
 msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr ""
@@ -1420,7 +1420,7 @@ msgstr ""
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr ""
 
-#: ../libpcsxcore/r3000a.c:34
+#: ../libpcsxcore/r3000a.c:35
 #, c-format
 msgid "Running PCSX Version %s (%s).\n"
 msgstr ""
@@ -2063,10 +2063,18 @@ msgid "OSS Sound"
 msgstr ""
 
 #: ../plugins/dfsound/spu.c:44
+msgid "PulseAudio Simple Sound"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:46
+msgid "PulseAudio Sound"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:48
 msgid "NULL Sound"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:47
+#: ../plugins/dfsound/spu.c:51
 msgid ""
 "P.E.Op.S. OSS Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"

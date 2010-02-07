@@ -139,7 +139,7 @@ unsigned long SoundGetBytesBuffered(void)
 
  if (handle == NULL)                                 // failed to open?
   return SOUNDSIZE;
- l = snd_pcm_avail_update(handle);
+ l = snd_pcm_avail(handle);
  if (l < 0) return 0;
  if (l < buffer_size / 2)                            // can we write in at least the half of fragments?
       l = SOUNDSIZE;                                 // -> no? wait

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsx-df\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-23 16:38+0800\n"
+"POT-Creation-Date: 2010-02-07 18:32+0800\n"
 "PO-Revision-Date: 2009-11-28 23:57+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: PoBRE <romhackers@gmail.com>\n"
@@ -1337,21 +1337,21 @@ msgstr ""
 msgid "Debugger stopped.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:395
+#: ../libpcsxcore/misc.c:392
 #, c-format
 msgid "Error opening file: %s.\n"
 msgstr "Erro ao abrir o arquivo \"%s\"!\n"
 
-#: ../libpcsxcore/misc.c:435
+#: ../libpcsxcore/misc.c:432
 #, c-format
 msgid "Unknown CPE opcode %02x at position %08x.\n"
 msgstr "Código operacional CPE %02x desconhecido, na posição %08x.\n"
 
-#: ../libpcsxcore/misc.c:442
+#: ../libpcsxcore/misc.c:439
 msgid "COFF files not supported.\n"
 msgstr "Arquivos COFF não são suportados!\n"
 
-#: ../libpcsxcore/misc.c:446
+#: ../libpcsxcore/misc.c:443
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "Esse arquivo não parece ser um arquivo válido de PSX!\n"
 
@@ -1424,17 +1424,17 @@ msgstr "Erro ao iniciar a extensão de jogo em rede \"%d\"!"
 msgid "Plugins loaded.\n"
 msgstr "Extensões carregadas.\n"
 
-#: ../libpcsxcore/ppf.c:206
+#: ../libpcsxcore/ppf.c:207
 #, c-format
 msgid "Invalid PPF patch: %s.\n"
 msgstr ""
 
-#: ../libpcsxcore/ppf.c:282
+#: ../libpcsxcore/ppf.c:283
 #, c-format
 msgid "Unsupported PPF version (%d).\n"
 msgstr ""
 
-#: ../libpcsxcore/ppf.c:321
+#: ../libpcsxcore/ppf.c:322
 #, fuzzy, c-format
 msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr "Arquivo de estado \"%s\" carregado."
@@ -1448,7 +1448,7 @@ msgstr "Erro ao alocar memória!"
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr "Não conseguiu abrir a BIOS\"%s\". Usando BIOS HLE!\n"
 
-#: ../libpcsxcore/r3000a.c:34
+#: ../libpcsxcore/r3000a.c:35
 #, c-format
 msgid "Running PCSX Version %s (%s).\n"
 msgstr "Rodando o PCSX Versão %s (%s).\n"
@@ -2147,10 +2147,18 @@ msgid "OSS Sound"
 msgstr "Sistema OSS"
 
 #: ../plugins/dfsound/spu.c:44
+msgid "PulseAudio Simple Sound"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:46
+msgid "PulseAudio Sound"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:48
 msgid "NULL Sound"
 msgstr "Sem som"
 
-#: ../plugins/dfsound/spu.c:47
+#: ../plugins/dfsound/spu.c:51
 msgid ""
 "P.E.Op.S. OSS Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"

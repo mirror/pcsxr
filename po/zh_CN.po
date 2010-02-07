@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-23 16:38+0800\n"
-"PO-Revision-Date: 2010-01-23 16:39+0700\n"
+"POT-Creation-Date: 2010-02-07 18:32+0800\n"
+"PO-Revision-Date: 2010-02-07 18:32+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -1434,21 +1434,21 @@ msgstr "调试器已启动。\n"
 msgid "Debugger stopped.\n"
 msgstr "调试器已停止。\n"
 
-#: ../libpcsxcore/misc.c:395
+#: ../libpcsxcore/misc.c:392
 #, c-format
 msgid "Error opening file: %s.\n"
 msgstr "打开文件错误: %s。\n"
 
-#: ../libpcsxcore/misc.c:435
+#: ../libpcsxcore/misc.c:432
 #, c-format
 msgid "Unknown CPE opcode %02x at position %08x.\n"
 msgstr "未知 CPE 指令码 %02x 位于 %08x。\n"
 
-#: ../libpcsxcore/misc.c:442
+#: ../libpcsxcore/misc.c:439
 msgid "COFF files not supported.\n"
 msgstr "COFF 文件尚未支持。\n"
 
-#: ../libpcsxcore/misc.c:446
+#: ../libpcsxcore/misc.c:443
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "此文件不是一个合法的 PSX 文件。\n"
 
@@ -1521,17 +1521,17 @@ msgstr "联网游戏插件初始化错误: %d"
 msgid "Plugins loaded.\n"
 msgstr "插件已加载。\n"
 
-#: ../libpcsxcore/ppf.c:206
+#: ../libpcsxcore/ppf.c:207
 #, c-format
 msgid "Invalid PPF patch: %s.\n"
 msgstr "非法 PPF 补丁: %s。\n"
 
-#: ../libpcsxcore/ppf.c:282
+#: ../libpcsxcore/ppf.c:283
 #, c-format
 msgid "Unsupported PPF version (%d).\n"
 msgstr "不支持的 PPF 补丁版本 (%d)。\n"
 
-#: ../libpcsxcore/ppf.c:321
+#: ../libpcsxcore/ppf.c:322
 #, c-format
 msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr "已加载 PPF %d.0 补丁文件: %s。\n"
@@ -1545,7 +1545,7 @@ msgstr "分配内存错误!"
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr "无法打开 BIOS: \"%s\"。使用内部 HLE Bios。\n"
 
-#: ../libpcsxcore/r3000a.c:34
+#: ../libpcsxcore/r3000a.c:35
 #, c-format
 msgid "Running PCSX Version %s (%s).\n"
 msgstr "正在运行 PCSX 版本 %s (%s)。\n"
@@ -2259,10 +2259,18 @@ msgid "OSS Sound"
 msgstr "OSS 声音"
 
 #: ../plugins/dfsound/spu.c:44
+msgid "PulseAudio Simple Sound"
+msgstr "PulseAudio Simple 声音"
+
+#: ../plugins/dfsound/spu.c:46
+msgid "PulseAudio Sound"
+msgstr "PulseAudio 声音"
+
+#: ../plugins/dfsound/spu.c:48
 msgid "NULL Sound"
 msgstr "空声音"
 
-#: ../plugins/dfsound/spu.c:47
+#: ../plugins/dfsound/spu.c:51
 msgid ""
 "P.E.Op.S. OSS Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"

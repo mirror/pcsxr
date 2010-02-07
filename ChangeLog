@@ -1,3 +1,17 @@
+February 7, 2010 Tristin Celestin <cetris1@umbc.edu>
+
+ * plugins/dfsound/pulseaudio.c: Added PulseAudio support (not working yet).
+ * plugins/dfsound/pulseaudiosimple.c: Added PulseAudio Simple API support
+   (not working with SPUasync).
+ * plugins/dfsound/alsa.c: Fixed the alsa plugin so that it produces cleaner
+   audio through PulseAudio.
+ * plugins/dfsound/nullsnd.c: Don't compile when PulseAudio or PulseAudio
+   Simple API support is enabled.
+ * plugins/dfsound/spu.c: Added strings for PulseAudio plugin.
+ * plugins/dfsound/Makefile.am: Added pulseaudio.c and pulseaudiosimple.c.
+ * configure.ac: Added PulseAudio-related stuff.
+ * po/zh_CN.po, po/zh_TW.po, po/pt_BR.po, po/pcsx.pot: Updated.
+
 February 1, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * macosx/plugins/HIDInput/src/HID_Utilities.h: Removed duplicate file.

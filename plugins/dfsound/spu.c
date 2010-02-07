@@ -34,12 +34,16 @@
 #define N_(x) (x)
 #endif
 
-#if defined(USEALSA)
+#if defined (USEALSA)
 static char * libraryName     = N_("ALSA Sound");
 #elif defined (USEMACOSX)
 static char * libraryName     = N_("Mac OS X Sound");
 #elif defined (USEOSS)
 static char * libraryName     = N_("OSS Sound");
+#elif defined (USEPULSEAUDIOSIMPLE)
+static char * libraryName     = N_("PulseAudio Simple Sound");
+#elif defined (USEPULSEAUDIO)
+static char * libraryName     = N_("PulseAudio Sound");
 #else
 static char * libraryName     = N_("NULL Sound");
 #endif

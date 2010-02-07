@@ -10,7 +10,7 @@ libdir = @libdir@/games/psemu/
 lib_LTLIBRARIES = libDFSound.la
 
 libDFSound_la_SOURCES = spu.c cfg.c dma.c freeze.c psemu.c registers.c \
-	alsa.c oss.c nullsnd.c
+	alsa.c oss.c pulseaudio.c pulseaudiosimple.c nullsnd.c
 
 libDFSound_la_CFLAGS =
 libDFSound_la_LDFLAGS = -module -avoid-version -lpthread -lm
@@ -22,6 +22,16 @@ endif
 
 if HAVE_OSS
 libDFSound_la_CFLAGS += -DUSEOSS=1
+endif
+
+if HAVE_PULSEAUDIOSIMPLE
+libDFSound_la_CFLAGS += $(PULSEAUDIO_CFLAGS) -DUSEPULSEAUDIOSIMPLE=1
+libDFSound_la_LDFLAGS += $(PULSEAUDIO_LIBS)
+endif
+
+if HAVE_PULSEAUDIO
+libDFSound_la_CFLAGS += $(PULSEAUDIO_CFLAGS) -DUSEPULSEAUDIO=1
+libDFSound_la_LDFLAGS += $(PULSEAUDIO_LIBS)
 endif
 
 bin_PROGRAMS = cfgDFSound
