@@ -5,7 +5,10 @@ begin                : Thu Feb 04 2010
 copyright            : (C) 2010 by Tristin Celestin
 email                : cetris1@umbc.edu
 comment              : Much of this was taken from pulseaudio.cpp (authored
-                       by RedDwarf) in bsnes (http://byuu.org/bsnes/)
+                       by slouken) in SDL 
+                       (http://lists.libsdl.org/pipermail/svn-libsdl.org/2009-September/001809.html()
+                       and in pulseaudio.cpp (authored by RedDwarf) in bsnes
+                       (http://www.byuu.org/bsnes)
 ***************************************************************************/
 /***************************************************************************
  *                                                                         *
@@ -29,8 +32,7 @@ comment              : Much of this was taken from pulseaudio.cpp (authored
 ////////////////////////////////////////////////////////////////////////
 // declarations for pulseaudio callbacks
 ////////////////////////////////////////////////////////////////////////
-void announce_connection_success (pa_context *context, const char *name, pa_proplist *property_list, void *user_data);
-
+void connection_state_callback (pa_context *context, const char *name, pa_proplist *property_list, void *user_data);
 
 ////////////////////////////////////////////////////////////////////////
 // pulseaudio structs
@@ -48,7 +50,7 @@ typedef struct {
 
 typedef struct {
      unsigned int frequency;
-     unsigned int latency;
+     unsigned int latency_in_msec;
 } Settings;
 
 ////////////////////////////////////////////////////////////////////////
@@ -64,7 +66,7 @@ static Device device = {
 
 static Settings settings = {
      .frequency = 44100,
-     .latency = 80
+     .latency_in_msec = 40,
 };
 
 ////////////////////////////////////////////////////////////////////////
@@ -100,7 +102,7 @@ void SetupSound (void)
      }
      else
      {
-	  fprintf (stderr, "Connected to PulseAudio synchronously.\n");
+	  fprintf (stderr, "Connected to PulseAudio asynchronously.\n");
      }
 
      // Run mainloop until sever is ready //////////////////////////////////////
@@ -134,11 +136,13 @@ void SetupSound (void)
      device.spec.rate = settings.frequency;
 
      // Set buffer attributes //////////////////////////////////////////////////
-     int mixlen = pa_usec_to_bytes (settings.latency * PA_USEC_PER_MSEC, &device.spec);
-     device.buffer_attr.maxlength = -1;
-     device.buffer_attr.tlength = 2 * mixlen;
-     device.buffer_attr.prebuf = -1;
-     device.buffer_attr.minreq = mixlen;
+     int mixlen = pa_usec_to_bytes (settings.latency_in_msec * PA_USEC_PER_MSEC, &device.spec);
+     fprintf (stderr, "Size of buffer is: %ld\n", mixlen);
+     device.buffer_attr.maxlength = (uint32_t) -1;
+     device.buffer_attr.tlength = mixlen;
+     device.buffer_attr.prebuf = 0;
+     device.buffer_attr.minreq = (uint32_t) -1;
+     //device.buffer_attr.minreq = mixlen;
 
      // Acquire new stream using spec and buffer attributes ////////////////////
      device.stream = pa_stream_new (device.context, "PCSX", &device.spec, NULL);
@@ -176,6 +180,7 @@ void SetupSound (void)
 	  }
      } while (stream_state != PA_STREAM_READY);
 
+     fprintf  (stderr, "PulseAudio should be connected.\n");
      return;
 }
 
@@ -214,17 +219,23 @@ void RemoveSound (void)
 unsigned long SoundGetBytesBuffered (void)
 {
      int size;
-     
-     fprintf (stderr, "In SoundGetBytesBuffered\n");
+     int error_code;
 
      size = pa_stream_writable_size (device.stream);
      fprintf (stderr, "Writable size: %d\n", size);
 
-     // need to figure out length of buffer
-     if (size > TESTSIZE)
-	  return size;
-     else
-	  return 0;
+     while (size < device.buffer_attr.tlength)
+     {
+	  size = pa_stream_writable_size (device.stream);
+	  fprintf (stderr, "Looping - Writable size: %d\n", size);
+	  pa_mainloop_iterate (device.mainloop, 1, &error_code);
+	  if (error_code < 0)
+	  {
+	       fprintf (stderr, "Error on iterating loop while getting bytes buffered: %s\n", pa_strerror (error_code));
+	       return SOUNDSIZE;
+	  }
+     }
+     return 0;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -233,10 +244,19 @@ unsigned long SoundGetBytesBuffered (void)
 
 void SoundFeedStreamData (unsigned char *pSound, long lBytes)
 {
-     fprintf (stderr, "In SoundFeedStreamData\n");
+     fprintf (stderr, "Number of bytes to write: %ld\n", lBytes);
 
      if (pa_stream_write (device.stream, pSound, lBytes, NULL, 0LL, PA_SEEK_RELATIVE) < 0)
 	  fprintf (stderr, "Error: Could not perform write with PulseAudio\n");
+}
+
+///////////////////////////////////////////////////////////////////////
+// CALLBACK TO NOTIFY US OF PA CONTEXT CHANGES
+///////////////////////////////////////////////////////////////////////
+
+void connection_state_callback (pa_context *context, const char *name, pa_proplist *property_list, void *user_data)
+{
+     return;
 }
 
 #endif

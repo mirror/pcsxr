@@ -1,3 +1,8 @@
+February 10, 2010 Tristin Celestin <cetris1@umbc.edu>
+
+ * plugins/dfsound/pulseaudio.c: PulseAudio Normal API support is now working
+   in threaded non-SPUasync() mode.
+
 February 7, 2010 Tristin Celestin <cetris1@umbc.edu>
 
  * plugins/dfsound/pulseaudio.c: Added PulseAudio support (not working yet).
