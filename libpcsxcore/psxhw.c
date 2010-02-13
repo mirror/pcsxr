@@ -194,9 +194,9 @@ u32 psxHwRead32(u32 add) {
 	switch (add) {
 		case 0x1f801040:
 			hard = sioRead8();
-			hard|= sioRead8() << 8;
-			hard|= sioRead8() << 16;
-			hard|= sioRead8() << 24;
+			hard |= sioRead8() << 8;
+			hard |= sioRead8() << 16;
+			hard |= sioRead8() << 24;
 #ifdef PAD_LOG
 			PAD_LOG("sio read32 ;ret = %lx\n", hard);
 #endif
@@ -480,9 +480,12 @@ void psxHwWrite16(u32 add, u16 value) {
 }
 
 #define DmaExec(n) { \
-	if (SWAPu32(HW_DMA##n##_CHCR) & 0x01000000) return; \
+	if (SWAPu32(HW_DMA##n##_CHCR) & 0x01000000) { \
+		HW_DMA##n##_CHCR = SWAPu32(value); \
+		return; \
+	} \
 	HW_DMA##n##_CHCR = SWAPu32(value); \
- \
+\
 	if (SWAPu32(HW_DMA##n##_CHCR) & 0x01000000 && SWAPu32(HW_DMA_PCR) & (8 << (n * 4))) { \
 		psxDma##n(SWAPu32(HW_DMA##n##_MADR), SWAPu32(HW_DMA##n##_BCR), SWAPu32(HW_DMA##n##_CHCR)); \
 	} \

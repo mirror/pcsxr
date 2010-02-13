@@ -105,13 +105,14 @@ static struct SubQ *subq;
   	cdr.FirstSector = 1; \
   	cdr.Readed = 0xff; \
 	AddIrqQueue(READ_ACK, 0x800); \
-}	
+}
 
 #define StopReading() { \
 	if (cdr.Reading) { \
 		cdr.Reading = 0; \
 		psxRegs.interrupt &= ~0x40000; \
 	} \
+	cdr.StatP &= ~0x20; \
 }
 
 #define StopCdda() { \

@@ -1,3 +1,11 @@
+February 13, 2010 shalma
+
+ * libpcsxcore/cdrom.c: Clear the 0x20 flag when stop reading, which fixes the
+   problem with Syphon Filter.
+ * libpcsxcore/psxhw.c: Always update HW_DMAx_CHCR in DmaExec(), which fixes
+   the problem with Harvest Moon.
+   (http://forums.ngemu.com/pcsx-discussion/116599-developers-wanted-pcsx-revival-2.html)
+
 February 10, 2010 Tristin Celestin <cetris1@umbc.edu>
 
  * plugins/dfsound/pulseaudio.c: PulseAudio Normal API support is now working
