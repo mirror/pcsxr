@@ -1,3 +1,8 @@
+February 14, 2010 shalma
+
+ * libpcsxcore/cdrom.c: Fixed GetlocP, which solves the problem with libcrypt
+   copy protected games.
+
 February 13, 2010 shalma
 
  * libpcsxcore/cdrom.c: Clear the 0x20 flag when stop reading, which fixes the

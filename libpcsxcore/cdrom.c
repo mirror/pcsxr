@@ -112,7 +112,7 @@ static struct SubQ *subq;
 		cdr.Reading = 0; \
 		psxRegs.interrupt &= ~0x40000; \
 	} \
-	cdr.StatP &= ~0x20; \
+	cdr.StatP &= ~0x20;\
 }
 
 #define StopCdda() { \
@@ -129,7 +129,7 @@ static struct SubQ *subq;
 	cdr.ResultReady = 1; \
 }
 
-void ReadTrack() {
+static void ReadTrack() {
 	cdr.Prev[0] = itob(cdr.SetSector[0]);
 	cdr.Prev[1] = itob(cdr.SetSector[1]);
 	cdr.Prev[2] = itob(cdr.SetSector[2]);
@@ -160,6 +160,7 @@ void AddIrqQueue(unsigned char irq, unsigned long ecycle) {
 void cdrInterrupt() {
 	int i;
 	unsigned char Irq = cdr.Irq;
+	char cdr_localTime[3];
 
 	if (cdr.Stat) {
 		CDR_INT(0x800);
@@ -330,24 +331,48 @@ void cdrInterrupt() {
         	cdr.Stat = Acknowledge;
         	break;
 
-    	case CdlGetlocP:
+		case CdlGetlocP:
 			SetResultSize(8);
 			subq = (struct SubQ *)CDR_getBufferSub();
+
+			cdr_localTime[0] = btoi(cdr.Prev[0]);
+			cdr_localTime[1] = btoi(cdr.Prev[1]) - 2;
+			cdr_localTime[2] = cdr.Prev[2];
+
+			// m:s adjustment
+			if (cdr_localTime[1] < 0) {
+				cdr_localTime[1] += 60;
+				cdr_localTime[0] -= 1;
+			}
+
+			cdr_localTime[1] = itob(cdr_localTime[1]);
+			cdr_localTime[0] = itob(cdr_localTime[0]);
+
 			if (subq != NULL) {
 				cdr.Result[0] = subq->TrackNumber;
 				cdr.Result[1] = subq->IndexNumber;
-		    	memcpy(cdr.Result + 2, subq->TrackRelativeAddress, 3);
-		    	memcpy(cdr.Result + 5, subq->AbsoluteAddress, 3);
+				memcpy(cdr.Result + 2, subq->TrackRelativeAddress, 3);
+				memcpy(cdr.Result + 5, subq->AbsoluteAddress, 3);
+
+				// subQ integrity check
+				if (cdr_localTime[0] != cdr.Result[2] ||
+					cdr_localTime[1] != cdr.Result[3] ||
+					cdr_localTime[2] != cdr.Result[4] ||
+					cdr.Prev[0] != cdr.Result[5] ||
+					cdr.Prev[1] != cdr.Result[6] ||
+					cdr.Prev[2] != cdr.Result[7]) {
+					// wipe out time data
+					memset(cdr.Result + 2, 0, 3 + 3);
+				}
 			} else {
-	        	cdr.Result[0] = 1;
-	        	cdr.Result[1] = 1;
-	        	cdr.Result[2] = cdr.Prev[0];
-	        	cdr.Result[3] = itob((btoi(cdr.Prev[1])) - 2);
-	        	cdr.Result[4] = cdr.Prev[2];
-		    	memcpy(cdr.Result + 5, cdr.Prev, 3);
+				cdr.Result[0] = 1;
+				cdr.Result[1] = 1;
+				memcpy(cdr.Result + 2, cdr_localTime, 3);
+				memcpy(cdr.Result + 5, cdr.Prev, 3);
 			}
-        	cdr.Stat = Acknowledge;
-        	break;
+
+			cdr.Stat = Acknowledge;
+			break;
 
     	case CdlGetTN:
 			cdr.CmdProcess = 0;
@@ -513,8 +538,6 @@ void cdrInterrupt() {
 			cdr.StatP |= 0x20;
         	cdr.Stat = Acknowledge;
 
-			ReadTrack();
-
 //			CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
 			CDREAD_INT(0x40000);
 			break;
@@ -582,6 +605,8 @@ void cdrReadInterrupt() {
 	cdr.StatP &= ~0x40;
     cdr.Result[0] = cdr.StatP;
 
+	ReadTrack();
+
 	buf = CDR_getBuffer();
 	if (buf == NULL)
 		cdr.RErr = -1;
@@ -593,7 +618,6 @@ void cdrReadInterrupt() {
 		memset(cdr.Transfer, 0, 2340);
 		cdr.Stat = DiskError;
 		cdr.Result[0] |= 0x01;
-		ReadTrack();
 		CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
 		return;
 	}
@@ -641,7 +665,6 @@ void cdrReadInterrupt() {
 		AddIrqQueue(CdlPause, 0x800);
 	}
 	else {
-		ReadTrack();
 		CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
 	}
 	psxHu32ref(0x1070) |= SWAP32((u32)0x4);
