@@ -2,6 +2,7 @@ February 15, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/psxhw.c: Don't skip calls to psxDman() when TR flag of CHCR is
    true, which fixes the menu problem in Dragon Quest 7.
+ * plugins/dfcdrom/cdr-linux.c: Fixed subchannel reading in threaded mode.
 
 February 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

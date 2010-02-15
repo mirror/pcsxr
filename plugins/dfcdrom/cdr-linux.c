@@ -522,19 +522,27 @@ unsigned char *CDRgetBufferSub(void) {
 	int ret;
 
 	if (!UseSubQ) return NULL;
-
 	if (subqread) return (unsigned char *)&subq;
 
 	cr.msf.cdmsf_min0 = btoi(lastTime[0]);
 	cr.msf.cdmsf_sec0 = btoi(lastTime[1]);
 	cr.msf.cdmsf_frame0 = btoi(lastTime[2]);
+
+	if (ReadMode == THREADED) pthread_mutex_lock(&mut);
+
 	if (ioctl(cdHandle, CDROMSEEK, &cr.msf) == -1) {
 		// will be slower, but there's no other way to make it accurate
-		if (ioctl(cdHandle, CDROMREADRAW, &cr) == -1) return NULL;
+		if (ioctl(cdHandle, CDROMREADRAW, &cr) == -1) {
+			if (ReadMode == THREADED) pthread_mutex_unlock(&mut);
+			return NULL;
+		}
 	}
 
 	subchnl.cdsc_format = CDROM_MSF;
 	ret = ioctl(cdHandle, CDROMSUBCHNL, &subchnl);
+
+	if (ReadMode == THREADED) pthread_mutex_unlock(&mut);
+
 	if (ret == -1) return NULL;
 
 	subqread = 1;
