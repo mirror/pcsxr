@@ -3,6 +3,7 @@ February 17, 2010 Tristin Celestin <cetris1@umbc.edu>
  * configure.ac: Removed PulseAudio Simple API support.
  * plugins/dfsound/Makefile.am: Likewise.
  * plugins/dfsound/nullsnd.c: Likewise.
+ * plugins/dfsound/spu.c: Likewise.
  * plugins/dfsound/pulseaudiosimple.c: Removed.
  * plugins/dfsound/pulseaudio.c: Fixed high-compatibility (SPUasync) mode.
 

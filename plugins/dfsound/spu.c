@@ -40,8 +40,6 @@ static char * libraryName     = N_("ALSA Sound");
 static char * libraryName     = N_("Mac OS X Sound");
 #elif defined (USEOSS)
 static char * libraryName     = N_("OSS Sound");
-#elif defined (USEPULSEAUDIOSIMPLE)
-static char * libraryName     = N_("PulseAudio Simple Sound");
 #elif defined (USEPULSEAUDIO)
 static char * libraryName     = N_("PulseAudio Sound");
 #else
