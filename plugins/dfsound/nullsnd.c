@@ -2,7 +2,7 @@
 #define _IN_OSS
 #include "externals.h"
 
-#if !defined (USEALSA) && !defined (USEOSS) && !defined (USEPULSEAUDIO) && !defined(USEPULSEAUDIOSIMPLE)
+#if !defined (USEALSA) && !defined (USEOSS) && !defined (USEPULSEAUDIO)
 
 #warning "Using NULL sound output..."
 

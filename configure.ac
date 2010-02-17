@@ -49,7 +49,6 @@ fi
 
 AM_CONDITIONAL(HAVE_OSS, false)
 AM_CONDITIONAL(HAVE_PULSEAUDIO, false)
-AM_CONDITIONAL(HAVE_PULSEAUDIOSIMPLE, false)
 
 dnl Check for ALSA 1.x, OSS, or PulseAudio
 
@@ -57,13 +56,9 @@ AC_ARG_ENABLE(alsa, [  --enable-alsa           use ALSA sound output (default=no
 [ BUILD_ALSA="$enableval" ],[ BUILD_ALSA="no" ])
 AC_ARG_ENABLE(pulseaudio, [  --enable-pulseaudio     use PulseAudio sound output (default=no)],
 [ BUILD_PULSEAUDIO="$enableval" ],[ BUILD_PULSEAUDIO="no" ])
-AC_ARG_ENABLE(pasimple, [  --enable-pasimple       use PulseAudio simple sound output (default=no)],
-[ BUILD_PULSEAUDIOSIMPLE="$enableval" ],[ BUILD_PULSEAUDIOSIMPLE="no" ])
 
 if test "$BUILD_ALSA" = "yes"; then
 	PKG_CHECK_MODULES(ALSA, alsa >= 1.0.0, have_alsa=yes, have_alsa=no)
-elif test "$BUILD_PULSEAUDIOSIMPLE" = "yes"; then
-	PKG_CHECK_MODULES(PULSEAUDIO, libpulse-simple >= 0.9.16, have_pulseaudiosimple=yes)
 elif test "$BUILD_PULSEAUDIO" = "yes"; then
 	PKG_CHECK_MODULES(PULSEAUDIO, libpulse >= 0.9.16, have_pulseaudio=yes)
 else
@@ -77,7 +72,6 @@ fi
 
 AM_CONDITIONAL(HAVE_ALSA,test "x$have_alsa" = xyes)
 AC_SUBST(ALSA_LIBS)
-AM_CONDITIONAL(HAVE_PULSEAUDIOSIMPLE,test "x$have_pulseaudiosimple" = xyes)
 AM_CONDITIONAL(HAVE_PULSEAUDIO,test "x$have_pulseaudio" = xyes)
 AC_SUBST(PULSEAUDIO_CFLAGS)
 AC_SUBST(PULSEAUDIO_LIBS)

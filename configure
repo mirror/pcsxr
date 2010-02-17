@@ -802,8 +802,6 @@ PULSEAUDIO_LIBS
 PULSEAUDIO_CFLAGS
 ALSA_LIBS
 ALSA_CFLAGS
-HAVE_PULSEAUDIOSIMPLE_FALSE
-HAVE_PULSEAUDIOSIMPLE_TRUE
 HAVE_PULSEAUDIO_FALSE
 HAVE_PULSEAUDIO_TRUE
 HAVE_OSS_FALSE
@@ -972,7 +970,6 @@ with_sdl_exec_prefix
 enable_sdltest
 enable_alsa
 enable_pulseaudio
-enable_pasimple
 enable_opengl
 enable_dynarec
 '
@@ -1643,7 +1640,6 @@ Optional Features:
   --disable-sdltest       Do not try to compile and run a test SDL program
   --enable-alsa           use ALSA sound output (default=no)
   --enable-pulseaudio     use PulseAudio sound output (default=no)
-  --enable-pasimple       use PulseAudio simple sound output (default=no)
   --enable-opengl         build OpenGL plugin (default=no)
   --enable-dynarec=...    force selection of dynamic recompiler platform (x86, x86_64, ppc) (default: autodetect)
 
@@ -4624,13 +4620,13 @@ if test "${lt_cv_nm_interface+set}" = set; then
 else
   lt_cv_nm_interface="BSD nm"
   echo "int some_variable = 0;" > conftest.$ac_ext
-  (eval echo "\"\$as_me:4627: $ac_compile\"" >&5)
+  (eval echo "\"\$as_me:4623: $ac_compile\"" >&5)
   (eval "$ac_compile" 2>conftest.err)
   cat conftest.err >&5
-  (eval echo "\"\$as_me:4630: $NM \\\"conftest.$ac_objext\\\"\"" >&5)
+  (eval echo "\"\$as_me:4626: $NM \\\"conftest.$ac_objext\\\"\"" >&5)
   (eval "$NM \"conftest.$ac_objext\"" 2>conftest.err > conftest.out)
   cat conftest.err >&5
-  (eval echo "\"\$as_me:4633: output\"" >&5)
+  (eval echo "\"\$as_me:4629: output\"" >&5)
   cat conftest.out >&5
   if $GREP 'External.*some_variable' conftest.out > /dev/null; then
     lt_cv_nm_interface="MS dumpbin"
@@ -5836,7 +5832,7 @@ ia64-*-hpux*)
   ;;
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 5839 "configure"' > conftest.$ac_ext
+  echo '#line 5835 "configure"' > conftest.$ac_ext
   if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -7659,11 +7655,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:7662: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:7658: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:7666: \$? = $ac_status" >&5
+   echo "$as_me:7662: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -7998,11 +7994,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:8001: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:7997: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:8005: \$? = $ac_status" >&5
+   echo "$as_me:8001: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -8103,11 +8099,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:8106: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:8102: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:8110: \$? = $ac_status" >&5
+   echo "$as_me:8106: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -8158,11 +8154,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:8161: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:8157: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:8165: \$? = $ac_status" >&5
+   echo "$as_me:8161: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -10971,7 +10967,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 10974 "configure"
+#line 10970 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11067,7 +11063,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11070 "configure"
+#line 11066 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -14591,14 +14587,6 @@ else
   HAVE_PULSEAUDIO_FALSE=
 fi
 
- if false; then
-  HAVE_PULSEAUDIOSIMPLE_TRUE=
-  HAVE_PULSEAUDIOSIMPLE_FALSE='#'
-else
-  HAVE_PULSEAUDIOSIMPLE_TRUE='#'
-  HAVE_PULSEAUDIOSIMPLE_FALSE=
-fi
-
 
 
 # Check whether --enable-alsa was given.
@@ -14613,13 +14601,6 @@ if test "${enable_pulseaudio+set}" = set; then
   enableval=$enable_pulseaudio;  BUILD_PULSEAUDIO="$enableval"
 else
    BUILD_PULSEAUDIO="no"
-fi
-
-# Check whether --enable-pasimple was given.
-if test "${enable_pasimple+set}" = set; then
-  enableval=$enable_pasimple;  BUILD_PULSEAUDIOSIMPLE="$enableval"
-else
-   BUILD_PULSEAUDIOSIMPLE="no"
 fi
 
 
@@ -14694,120 +14675,6 @@ else
         { $as_echo "$as_me:$LINENO: result: yes" >&5
 $as_echo "yes" >&6; }
 	have_alsa=yes
-fi
-elif test "$BUILD_PULSEAUDIOSIMPLE" = "yes"; then
-
-pkg_failed=no
-{ $as_echo "$as_me:$LINENO: checking for PULSEAUDIO" >&5
-$as_echo_n "checking for PULSEAUDIO... " >&6; }
-
-if test -n "$PKG_CONFIG"; then
-    if test -n "$PULSEAUDIO_CFLAGS"; then
-        pkg_cv_PULSEAUDIO_CFLAGS="$PULSEAUDIO_CFLAGS"
-    else
-        if test -n "$PKG_CONFIG" && \
-    { ($as_echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"libpulse-simple >= 0.9.16\"") >&5
-  ($PKG_CONFIG --exists --print-errors "libpulse-simple >= 0.9.16") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; then
-  pkg_cv_PULSEAUDIO_CFLAGS=`$PKG_CONFIG --cflags "libpulse-simple >= 0.9.16" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
-    fi
-else
-	pkg_failed=untried
-fi
-if test -n "$PKG_CONFIG"; then
-    if test -n "$PULSEAUDIO_LIBS"; then
-        pkg_cv_PULSEAUDIO_LIBS="$PULSEAUDIO_LIBS"
-    else
-        if test -n "$PKG_CONFIG" && \
-    { ($as_echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"libpulse-simple >= 0.9.16\"") >&5
-  ($PKG_CONFIG --exists --print-errors "libpulse-simple >= 0.9.16") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; then
-  pkg_cv_PULSEAUDIO_LIBS=`$PKG_CONFIG --libs "libpulse-simple >= 0.9.16" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
-    fi
-else
-	pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        PULSEAUDIO_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "libpulse-simple >= 0.9.16"`
-        else
-	        PULSEAUDIO_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "libpulse-simple >= 0.9.16"`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$PULSEAUDIO_PKG_ERRORS" >&5
-
-	{ { $as_echo "$as_me:$LINENO: error: Package requirements (libpulse-simple >= 0.9.16) were not met:
-
-$PULSEAUDIO_PKG_ERRORS
-
-Consider adjusting the PKG_CONFIG_PATH environment variable if you
-installed software in a non-standard prefix.
-
-Alternatively, you may set the environment variables PULSEAUDIO_CFLAGS
-and PULSEAUDIO_LIBS to avoid the need to call pkg-config.
-See the pkg-config man page for more details.
-" >&5
-$as_echo "$as_me: error: Package requirements (libpulse-simple >= 0.9.16) were not met:
-
-$PULSEAUDIO_PKG_ERRORS
-
-Consider adjusting the PKG_CONFIG_PATH environment variable if you
-installed software in a non-standard prefix.
-
-Alternatively, you may set the environment variables PULSEAUDIO_CFLAGS
-and PULSEAUDIO_LIBS to avoid the need to call pkg-config.
-See the pkg-config man page for more details.
-" >&2;}
-   { (exit 1); exit 1; }; }
-elif test $pkg_failed = untried; then
-	{ { $as_echo "$as_me:$LINENO: error: in \`$ac_pwd':" >&5
-$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
-{ { $as_echo "$as_me:$LINENO: error: The pkg-config script could not be found or is too old.  Make sure it
-is in your PATH or set the PKG_CONFIG environment variable to the full
-path to pkg-config.
-
-Alternatively, you may set the environment variables PULSEAUDIO_CFLAGS
-and PULSEAUDIO_LIBS to avoid the need to call pkg-config.
-See the pkg-config man page for more details.
-
-To get pkg-config, see <http://pkg-config.freedesktop.org/>.
-See \`config.log' for more details." >&5
-$as_echo "$as_me: error: The pkg-config script could not be found or is too old.  Make sure it
-is in your PATH or set the PKG_CONFIG environment variable to the full
-path to pkg-config.
-
-Alternatively, you may set the environment variables PULSEAUDIO_CFLAGS
-and PULSEAUDIO_LIBS to avoid the need to call pkg-config.
-See the pkg-config man page for more details.
-
-To get pkg-config, see <http://pkg-config.freedesktop.org/>.
-See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; }; }
-else
-	PULSEAUDIO_CFLAGS=$pkg_cv_PULSEAUDIO_CFLAGS
-	PULSEAUDIO_LIBS=$pkg_cv_PULSEAUDIO_LIBS
-        { $as_echo "$as_me:$LINENO: result: yes" >&5
-$as_echo "yes" >&6; }
-	have_pulseaudiosimple=yes
 fi
 elif test "$BUILD_PULSEAUDIO" = "yes"; then
 
@@ -15081,14 +14948,6 @@ else
   HAVE_ALSA_FALSE=
 fi
 
-
- if test "x$have_pulseaudiosimple" = xyes; then
-  HAVE_PULSEAUDIOSIMPLE_TRUE=
-  HAVE_PULSEAUDIOSIMPLE_FALSE='#'
-else
-  HAVE_PULSEAUDIOSIMPLE_TRUE='#'
-  HAVE_PULSEAUDIOSIMPLE_FALSE=
-fi
 
  if test "x$have_pulseaudio" = xyes; then
   HAVE_PULSEAUDIO_TRUE=
@@ -16776,13 +16635,6 @@ $as_echo "$as_me: error: conditional \"HAVE_PULSEAUDIO\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
-if test -z "${HAVE_PULSEAUDIOSIMPLE_TRUE}" && test -z "${HAVE_PULSEAUDIOSIMPLE_FALSE}"; then
-  { { $as_echo "$as_me:$LINENO: error: conditional \"HAVE_PULSEAUDIOSIMPLE\" was never defined.
-Usually this means the macro was only invoked conditionally." >&5
-$as_echo "$as_me: error: conditional \"HAVE_PULSEAUDIOSIMPLE\" was never defined.
-Usually this means the macro was only invoked conditionally." >&2;}
-   { (exit 1); exit 1; }; }
-fi
 if test -z "${HAVE_OSS_TRUE}" && test -z "${HAVE_OSS_FALSE}"; then
   { { $as_echo "$as_me:$LINENO: error: conditional \"HAVE_OSS\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
@@ -16794,13 +16646,6 @@ if test -z "${HAVE_ALSA_TRUE}" && test -z "${HAVE_ALSA_FALSE}"; then
   { { $as_echo "$as_me:$LINENO: error: conditional \"HAVE_ALSA\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
 $as_echo "$as_me: error: conditional \"HAVE_ALSA\" was never defined.
-Usually this means the macro was only invoked conditionally." >&2;}
-   { (exit 1); exit 1; }; }
-fi
-if test -z "${HAVE_PULSEAUDIOSIMPLE_TRUE}" && test -z "${HAVE_PULSEAUDIOSIMPLE_FALSE}"; then
-  { { $as_echo "$as_me:$LINENO: error: conditional \"HAVE_PULSEAUDIOSIMPLE\" was never defined.
-Usually this means the macro was only invoked conditionally." >&5
-$as_echo "$as_me: error: conditional \"HAVE_PULSEAUDIOSIMPLE\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi

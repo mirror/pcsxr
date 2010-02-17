@@ -4,11 +4,8 @@
 begin                : Thu Feb 04 2010
 copyright            : (C) 2010 by Tristin Celestin
 email                : cetris1@umbc.edu
-comment              : Much of this was taken from pulseaudio.cpp (authored
-                       by slouken) in SDL 
-                       (http://lists.libsdl.org/pipermail/svn-libsdl.org/2009-September/001809.html()
-                       and in pulseaudio.cpp (authored by RedDwarf) in bsnes
-                       (http://www.byuu.org/bsnes)
+comment              : Much of this was taken from simple.c, in the pulseaudio
+                       library
 ***************************************************************************/
 /***************************************************************************
  *                                                                         *
@@ -30,21 +27,15 @@ comment              : Much of this was taken from pulseaudio.cpp (authored
 #include <pulse/pulseaudio.h>
 
 ////////////////////////////////////////////////////////////////////////
-// declarations for pulseaudio callbacks
-////////////////////////////////////////////////////////////////////////
-void connection_state_callback (pa_context *context, const char *name, pa_proplist *property_list, void *user_data);
-
-////////////////////////////////////////////////////////////////////////
 // pulseaudio structs
 ////////////////////////////////////////////////////////////////////////
 
 typedef struct {
-     pa_mainloop *mainloop;
+     pa_threaded_mainloop *mainloop;
      pa_context *context;
      pa_mainloop_api *api;
      pa_stream *stream;
      pa_sample_spec spec;
-     pa_buffer_attr buffer_attr;
      int first;
 } Device;
 
@@ -66,8 +57,80 @@ static Device device = {
 
 static Settings settings = {
      .frequency = 44100,
-     .latency_in_msec = 40,
+     .latency_in_msec = 20,
 };
+
+// the number of bytes written in SoundFeedStreamData
+const int mixlen = 3240;
+
+// used to calculate how much space is used in the buffer, for debugging purposes
+//int maxlength = 0;
+
+////////////////////////////////////////////////////////////////////////
+// CALLBACKS FOR THREADED MAINLOOP
+////////////////////////////////////////////////////////////////////////
+static void context_state_cb (pa_context *context, void *userdata)
+{
+     Device *dev = userdata;
+
+     if ((context == NULL) || (dev == NULL))
+	  return;
+
+     switch (pa_context_get_state (context))
+     {
+     case PA_CONTEXT_READY:
+     case PA_CONTEXT_TERMINATED:
+     case PA_CONTEXT_FAILED:
+	  pa_threaded_mainloop_signal (dev->mainloop, 0);
+	  break;
+
+     case PA_CONTEXT_UNCONNECTED:
+     case PA_CONTEXT_CONNECTING:
+     case PA_CONTEXT_AUTHORIZING:
+     case PA_CONTEXT_SETTING_NAME:
+	  break;
+     }
+}
+
+static void stream_state_cb (pa_stream *stream, void * userdata)
+{
+     Device *dev = userdata;
+    
+     if ((stream == NULL) || (dev == NULL))
+	  return;
+
+     switch (pa_stream_get_state (stream))
+     {
+     case PA_STREAM_READY:
+     case PA_STREAM_FAILED:
+     case PA_STREAM_TERMINATED:
+	  pa_threaded_mainloop_signal (dev->mainloop, 0);
+	  break;
+
+     case PA_STREAM_UNCONNECTED:
+     case PA_STREAM_CREATING:
+	  break;
+     }
+}
+
+static void stream_latency_update_cb (pa_stream *stream, void *userdata)
+{
+     Device *dev = userdata;
+
+     if ((stream == NULL) || (dev == NULL))
+	  return;
+
+     pa_threaded_mainloop_signal (dev->mainloop, 0);
+}
+
+static void stream_request_cb (pa_stream *stream, size_t length, void *userdata)
+{
+     Device *dev = userdata;
+
+     if ((stream == NULL) || (dev == NULL))
+	  return;
+     pa_threaded_mainloop_signal (dev->mainloop, 0);
+}
 
 ////////////////////////////////////////////////////////////////////////
 // SETUP SOUND
@@ -78,7 +141,7 @@ void SetupSound (void)
      int error_number;
 
      // Acquire mainloop ///////////////////////////////////////////////////////
-     device.mainloop = pa_mainloop_new ();
+     device.mainloop = pa_threaded_mainloop_new ();
      if (device.mainloop == NULL)
      {
 	  fprintf (stderr, "Could not acquire PulseAudio main loop\n");
@@ -86,8 +149,10 @@ void SetupSound (void)
      }
 
      // Acquire context ////////////////////////////////////////////////////////
-     device.api = pa_mainloop_get_api (device.mainloop);
+     device.api = pa_threaded_mainloop_get_api (device.mainloop);
      device.context = pa_context_new (device.api, "PCSX");
+     pa_context_set_state_callback (device.context, context_state_cb, &device);
+
      if (device.context == NULL)
      {
 	  fprintf (stderr, "Could not acquire PulseAudio device context\n");
@@ -95,37 +160,38 @@ void SetupSound (void)
      }
 
      // Connect to PulseAudio server ///////////////////////////////////////////
-     error_number = pa_context_connect (device.context, NULL, 0, NULL);
-     if (error_number < 0) {
+     if (pa_context_connect (device.context, NULL, 0, NULL) < 0)
+     {
+	  error_number = pa_context_errno (device.context);
 	  fprintf (stderr, "Could not connect to PulseAudio server: %s\n", pa_strerror(error_number));
 	  return;
      }
-     else
+
+     // Run mainloop until sever context is ready //////////////////////////////
+     pa_threaded_mainloop_lock (device.mainloop);
+     if (pa_threaded_mainloop_start (device.mainloop) < 0)
      {
-	  fprintf (stderr, "Connected to PulseAudio asynchronously.\n");
+	  fprintf (stderr, "Could not start mainloop\n");
+	  return;
      }
 
-     // Run mainloop until sever is ready //////////////////////////////////////
      pa_context_state_t context_state;
-     do 
+     context_state = pa_context_get_state (device.context);
+     while (context_state != PA_CONTEXT_READY)
      {
-	  error_number = pa_mainloop_iterate (device.mainloop, 1, NULL);
-	  if (error_number < 0) {
-	       fprintf (stderr, "Could not run pa_mainloop_iterate ():%s\n", pa_strerror (error_number));
-	       return;
-	  }
-
 	  context_state = pa_context_get_state (device.context);
 	  if (! PA_CONTEXT_IS_GOOD (context_state))
 	  {
-	       fprintf (stderr, "Context state is not good.\n");
+	       error_number = pa_context_errno (device.context);
+	       fprintf (stderr, "Context state is not good: %s\n", pa_strerror (error_number));
 	       return;
 	  }
+	  else if (context_state == PA_CONTEXT_READY)
+	       break;
 	  else
-	  {
 	       fprintf (stderr, "PulseAudio context state is %d\n", context_state);
-	  }
-     } while (context_state != PA_CONTEXT_READY);
+	  pa_threaded_mainloop_wait (device.mainloop);
+     }
 
      // Set sample spec ////////////////////////////////////////////////////////
      device.spec.format = PA_SAMPLE_S16LE;
@@ -135,69 +201,84 @@ void SetupSound (void)
 	  device.spec.channels = 2;
      device.spec.rate = settings.frequency;
 
-     // Set buffer attributes //////////////////////////////////////////////////
-     int mixlen = pa_usec_to_bytes (settings.latency_in_msec * PA_USEC_PER_MSEC, &device.spec);
-     fprintf (stderr, "Size of buffer is: %ld\n", mixlen);
-     device.buffer_attr.maxlength = (uint32_t) -1;
-     device.buffer_attr.tlength = mixlen;
-     device.buffer_attr.prebuf = 0;
-     device.buffer_attr.minreq = (uint32_t) -1;
-     //device.buffer_attr.minreq = mixlen;
+     pa_buffer_attr buffer_attributes;
+     buffer_attributes.tlength = pa_bytes_per_second (& device.spec) / 5;
+     buffer_attributes.maxlength = buffer_attributes.tlength * 3;
+     buffer_attributes.minreq = buffer_attributes.tlength / 3;
+     buffer_attributes.prebuf = buffer_attributes.tlength;
 
-     // Acquire new stream using spec and buffer attributes ////////////////////
+     //maxlength = buffer_attributes.maxlength;
+     //fprintf (stderr, "Total space: %u\n", buffer_attributes.maxlength);
+     //fprintf (stderr, "Minimum request size: %u\n", buffer_attributes.minreq);
+     //fprintf (stderr, "Bytes needed before playback: %u\n", buffer_attributes.prebuf);
+     //fprintf (stderr, "Target buffer size: %lu\n", buffer_attributes.tlength);
+
+     // Acquire new stream using spec //////////////////////////////////////////
      device.stream = pa_stream_new (device.context, "PCSX", &device.spec, NULL);
      if (device.stream == NULL)
      {
-	  fprintf (stderr, "Could not get new PulseAudio stream.\n");
+	  error_number = pa_context_errno (device.context);
+	  fprintf (stderr, "Could not acquire new PulseAudio stream: %s\n", pa_strerror (error_number));
 	  return;
      }
 
-     pa_stream_flags_t flags = (pa_stream_flags_t) (PA_STREAM_ADJUST_LATENCY | PA_STREAM_VARIABLE_RATE);
-     error_number = pa_stream_connect_playback (device.stream, NULL, &device.buffer_attr, flags, NULL, NULL);
-     if (error_number < 0) {
-	  fprintf (stderr, "Could not connect for playback successfully :%s\n", pa_strerror (error_number));
+     // Set callbacks for server events ////////////////////////////////////////
+     pa_stream_set_state_callback (device.stream, stream_state_cb, &device);
+     pa_stream_set_write_callback (device.stream, stream_request_cb, &device);
+     pa_stream_set_latency_update_callback (device.stream, stream_latency_update_cb, &device);
+
+     // Ready stream for playback //////////////////////////////////////////////
+     pa_stream_flags_t flags = (pa_stream_flags_t) (PA_STREAM_ADJUST_LATENCY | PA_STREAM_INTERPOLATE_TIMING | PA_STREAM_AUTO_TIMING_UPDATE);
+     //pa_stream_flags_t flags = (pa_stream_flags_t) (PA_STREAM_INTERPOLATE_TIMING | PA_STREAM_AUTO_TIMING_UPDATE | PA_STREAM_EARLY_REQUESTS);
+     if (pa_stream_connect_playback (device.stream, NULL, &buffer_attributes, flags, NULL, NULL) < 0)
+     {
+	  pa_context_errno (device.context);
+	  fprintf (stderr, "Could not connect for playback: %s\n", pa_strerror (error_number));
 	  return;
      }
 
      // Run mainloop until stream is ready /////////////////////////////////////
      pa_stream_state_t stream_state;
-     do {
-	  error_number = pa_mainloop_iterate (device.mainloop, 1, NULL); 
-	  if (error_number < 0) {
-	       fprintf (stderr, "Could not run pa_mainloop_iterate ():%s\n", pa_strerror (error_number));
-	       return;
-	  }
-
+     stream_state = pa_stream_get_state (device.stream);
+     while (stream_state != PA_STREAM_READY)
+     {
 	  stream_state = pa_stream_get_state (device.stream);
-	  if (! PA_STREAM_IS_GOOD (stream_state))
+
+	  if (stream_state == PA_STREAM_READY)
+	       break;
+
+	  else if (! PA_STREAM_IS_GOOD (stream_state))
 	  {
-	       fprintf (stderr, "Could not acquire PulseAudio stream.\n");
+	       error_number = pa_context_errno (device.context);
+	       fprintf (stderr, "Stream state is not good: %s\n", pa_strerror (error_number));
 	       return;
 	  }
 	  else
-	  {
-	       fprintf (stderr, "PulseAudio stream state is %d.\n", stream_state);
-	  }
-     } while (stream_state != PA_STREAM_READY);
+	       fprintf (stderr, "PulseAudio stream state is %d\n", stream_state);
+	  pa_threaded_mainloop_wait (device.mainloop);
+     }
 
-     fprintf  (stderr, "PulseAudio should be connected.\n");
+     pa_threaded_mainloop_unlock (device.mainloop);
+
+     fprintf  (stderr, "PulseAudio should be connected\n");
      return;
 }
 
 ////////////////////////////////////////////////////////////////////////
 // REMOVE SOUND
 ////////////////////////////////////////////////////////////////////////
-
 void RemoveSound (void)
 {
+     if (device.mainloop != NULL)
+	  pa_threaded_mainloop_stop (device.mainloop);
 
+     // Release in reverse order of acquisition
      if (device.stream != NULL)
      {
-	  pa_stream_disconnect (device.stream);
 	  pa_stream_unref (device.stream);
 	  device.stream = NULL;
-     }
 
+     }
      if (device.context != NULL)
      {
 	  pa_context_disconnect (device.context);
@@ -207,9 +288,10 @@ void RemoveSound (void)
 
      if (device.mainloop != NULL)
      {
-	  pa_mainloop_free (device.mainloop);
+	  pa_threaded_mainloop_free (device.mainloop);
 	  device.mainloop = NULL;
      }
+
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -218,24 +300,32 @@ void RemoveSound (void)
 
 unsigned long SoundGetBytesBuffered (void)
 {
-     int size;
+     int free_space;
      int error_code;
+     long latency;
+     int playing = 0;
 
-     size = pa_stream_writable_size (device.stream);
-     fprintf (stderr, "Writable size: %d\n", size);
+     if ((device.mainloop == NULL) || (device.api == NULL) || ( device.context == NULL) || (device.stream == NULL))
+     	  return SOUNDSIZE;
 
-     while (size < device.buffer_attr.tlength)
+     pa_threaded_mainloop_lock (device.mainloop);
+     free_space = pa_stream_writable_size (device.stream);
+     pa_threaded_mainloop_unlock (device.mainloop);
+
+     //fprintf (stderr, "Free space: %d\n", free_space);
+     //fprintf (stderr, "Used space: %d\n", maxlength - free_space);
+     if  (free_space < mixlen * 3)
      {
-	  size = pa_stream_writable_size (device.stream);
-	  fprintf (stderr, "Looping - Writable size: %d\n", size);
-	  pa_mainloop_iterate (device.mainloop, 1, &error_code);
-	  if (error_code < 0)
-	  {
-	       fprintf (stderr, "Error on iterating loop while getting bytes buffered: %s\n", pa_strerror (error_code));
-	       return SOUNDSIZE;
-	  }
+	  // Don't buffer anymore, just play
+	  //fprintf (stderr, "Not buffering.\n");
+     	  return SOUNDSIZE;
      }
-     return 0;
+     else 
+     {
+	  // Buffer some sound
+	  //fprintf (stderr, "Buffering.\n");
+     	  return 0;
+     }
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -244,19 +334,21 @@ unsigned long SoundGetBytesBuffered (void)
 
 void SoundFeedStreamData (unsigned char *pSound, long lBytes)
 {
-     fprintf (stderr, "Number of bytes to write: %ld\n", lBytes);
+     int error_code;
+     int size;
 
-     if (pa_stream_write (device.stream, pSound, lBytes, NULL, 0LL, PA_SEEK_RELATIVE) < 0)
-	  fprintf (stderr, "Error: Could not perform write with PulseAudio\n");
+     if (device.mainloop != NULL)
+     {
+	  pa_threaded_mainloop_lock (device.mainloop);
+	  if (pa_stream_write (device.stream, pSound, lBytes, NULL, 0LL, PA_SEEK_RELATIVE) < 0)
+	  {
+	       fprintf (stderr, "Could not perform write\n");
+	  }
+	  else
+	  {
+	       //fprintf (stderr, "Wrote %d bytes\n", lBytes);
+	       pa_threaded_mainloop_unlock (device.mainloop);
+	  }
+     }
 }
-
-///////////////////////////////////////////////////////////////////////
-// CALLBACK TO NOTIFY US OF PA CONTEXT CHANGES
-///////////////////////////////////////////////////////////////////////
-
-void connection_state_callback (pa_context *context, const char *name, pa_proplist *property_list, void *user_data)
-{
-     return;
-}
-
 #endif
