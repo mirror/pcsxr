@@ -19,4 +19,12 @@ df Copyright:	(C) 2005 Ryan Schultz
 		(C) 2007 Stephen Chao
 		(C) 2006 Marcus Comstedt
 
-PCSX-Reloaded Authors: Wei Mingzhi <whistler@openoffice.org>
+PCSX-Reloaded Maintainer: Wei Mingzhi <whistler@openoffice.org>
+
+PCSX-Reloaded Contributors: avlex (Help on xcode project)
+			    dario86 (Various fixes)
+			    maggix (Leopard compilation fix)
+			    Peter Collingbourne (Various core/psxbios fixes)
+			    shalma (Various core fixes)
+			    Tibério Vítor (Brazilian Portuguese Translation)
+			    Tristin Celestin (PulseAudio support)
