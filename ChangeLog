@@ -1,3 +1,9 @@
+February 23, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfinput/analog.c: Confirmed center value should be 127 instead of
+   128, removed obsolete comments.
+   (http://code.google.com/p/pcsx2/source/detail?r=2587)
+
 February 18, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * AUTHORS: Updated info.

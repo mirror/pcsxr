@@ -19,9 +19,6 @@
 #include "pad.h"
 
 void InitAnalog() {
-	// use 127 instead of 128 fixes the FF8 "reverting" problem, but
-	// why ALL of the protocol docs I seen as well as psemu_plugin_defs.h
-	// say 128 is the center position?
 	g.PadState[0].AnalogStatus[ANALOG_LEFT][0] = 127;
 	g.PadState[0].AnalogStatus[ANALOG_LEFT][1] = 127;
 	g.PadState[0].AnalogStatus[ANALOG_RIGHT][0] = 127;
@@ -63,7 +60,7 @@ void CheckAnalog() {
 						if (g.cfg.PadDef[i].AnalogDef[j][k].J.Axis > 0) {
 							val = SDL_JoystickGetAxis(g.PadState[i].JoyDev, n);
 							if (val >= 0) {
-								val += 32767;
+								val += 32640;
 								val /= 256;
 
 								switch (k) {
@@ -76,7 +73,7 @@ void CheckAnalog() {
 						} else if (g.cfg.PadDef[i].AnalogDef[j][k].J.Axis < 0) {
 							val = SDL_JoystickGetAxis(g.PadState[i].JoyDev, n);
 							if (val <= 0) {
-								val += 32767;
+								val += 32640;
 								val /= 256;
 
 								switch (k) {
