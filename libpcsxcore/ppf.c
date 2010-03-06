@@ -38,7 +38,7 @@ typedef struct tagPPF_CACHE {
 } PPF_CACHE;
 
 static PPF_CACHE		*ppfCache = NULL;
-static PPF_DATA			*ppfHead = NULL;
+static PPF_DATA			*ppfHead = NULL, *ppfLast = NULL;
 static int				iPPFNum = 0;
 
 // using a linked data list, and address array
@@ -86,6 +86,7 @@ void FreePPFCache() {
 		p = (PPF_DATA *)pn;
 	}
 	ppfHead = NULL;
+	ppfLast = NULL;
 
 	if (ppfCache != NULL) free(ppfCache);
 	ppfCache = NULL;
@@ -140,22 +141,30 @@ static void AddToPPF(s32 ladr, s32 pos, s32 anz, unsigned char *ppfmem) {
 		ppfHead->anz = anz;
 		memcpy(ppfHead + 1, ppfmem, anz);
 		iPPFNum = 1;
+		ppfLast = ppfHead;
 	} else {
 		PPF_DATA *p = ppfHead;
 		PPF_DATA *plast = NULL;
 		PPF_DATA *padd;
-		while (p != NULL) {
-			if (ladr < p->addr) break;
-			if (ladr == p->addr) {
-				while (p && ladr == p->addr && pos > p->pos) {
-					plast = p;
-					p = p->pNext;
+
+		if (ladr > ppfLast->addr || (ladr == ppfLast->addr && pos > ppfLast->pos)) {
+			p = NULL;
+			plast = ppfLast;
+		} else {
+			while (p != NULL) {
+				if (ladr < p->addr) break;
+				if (ladr == p->addr) {
+					while (p && ladr == p->addr && pos > p->pos) {
+						plast = p;
+						p = p->pNext;
+					}
+					break;
 				}
-				break;
+				plast = p;
+				p = p->pNext;
 			}
-			plast = p;
-			p = p->pNext;
 		}
+
 		padd = (PPF_DATA *)malloc(sizeof(PPF_DATA) + anz);
 		padd->addr = ladr;
 		padd->pNext = p;
@@ -165,6 +174,8 @@ static void AddToPPF(s32 ladr, s32 pos, s32 anz, unsigned char *ppfmem) {
 		iPPFNum++;
 		if (plast == NULL) ppfHead = padd;
 		else plast->pNext = padd;
+
+		if (padd->pNext == NULL) ppfLast = padd;
 	}
 }
 

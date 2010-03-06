@@ -1,3 +1,8 @@
+March 6, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/ppf.c: Speeded up the PPF loading routine when the PPF file
+   is "in order".
+
 February 23, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfinput/analog.c: Confirmed center value should be 127 instead of
