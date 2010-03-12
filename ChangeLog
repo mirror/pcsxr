@@ -1,6 +1,7 @@
 March 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * gui/LnxMain.c: Fixed -cdfile switch (Thanks NeToU).
+ * AUTHORS: Updated info.
 
 March 6, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

@@ -22,8 +22,9 @@ df Copyright:	(C) 2005 Ryan Schultz
 PCSX-Reloaded Maintainer: Wei Mingzhi <whistler@openoffice.org>
 
 PCSX-Reloaded Contributors: avlex (Help on xcode project)
-			    dario86 (Various fixes)
+			    dario86 (Various bugfixes)
 			    maggix (Leopard compilation fix)
+			    NeToU (Bugfix)
 			    Peter Collingbourne (Various core/psxbios fixes)
 			    shalma (Various core fixes)
 			    Tibério Vítor (Brazilian Portuguese Translation)
