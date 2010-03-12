@@ -1,3 +1,7 @@
+March 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * gui/LnxMain.c: Fixed -cdfile switch (Thanks NeToU).
+
 March 6, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/ppf.c: Speeded up the PPF loading routine when the PPF file

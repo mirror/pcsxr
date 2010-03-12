@@ -402,7 +402,7 @@ int main(int argc, char *argv[]) {
 	chdir(plugin_default_dir);
 	g_free(plugin_default_dir);
 
-	if (!UseGui) cdrfilename[0] = '\0';
+	if (UseGui) cdrfilename[0] = '\0';
 
 	if (SysInit() == -1) return 1;
 
