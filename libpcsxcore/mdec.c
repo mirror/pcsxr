@@ -149,9 +149,9 @@ void idct(int *block,int used_col) {
 	ptr = block;
 	if (used_col == 1) {
 		for (i = 0; i < DSIZE; i++)
-			fillrow(block+DSIZE*i,block[DSIZE*i]);    
+			fillrow(block + DSIZE * i, block[DSIZE * i]);    
 	} else {
-		for (i = 0; i < DSIZE; i++ ,ptr+=DSIZE) {
+		for (i = 0; i < DSIZE; i++, ptr += DSIZE) {
 			z10 = ptr[0] + ptr[4];
 			z11 = ptr[0] - ptr[4];
 			z13 = ptr[2] + ptr[6];
@@ -187,17 +187,17 @@ void idct(int *block,int used_col) {
 }
 
 // mdec0: command register
-#define MDEC0_STP       0x02000000
-#define MDEC0_RGB24     0x08000000
-#define MDEC0_SIZE_MASK 0xFFFF
+#define MDEC0_STP			0x02000000
+#define MDEC0_RGB24			0x08000000
+#define MDEC0_SIZE_MASK		0xFFFF
 
 // mdec1: status register
-#define MDEC1_BUSY	0x20000000
-#define MDEC1_DREQ	0x18000000
-#define MDEC1_FIFO	0xc0000000
-#define MDEC1_RGB24	0x02000000
-#define MDEC1_STP	0x00800000
-#define MDEC1_RESET     0x80000000
+#define MDEC1_BUSY			0x20000000
+#define MDEC1_DREQ			0x18000000
+#define MDEC1_FIFO			0xc0000000
+#define MDEC1_RGB24			0x02000000
+#define MDEC1_STP			0x00800000
+#define MDEC1_RESET			0x80000000
 
 struct {
     u32 reg0;
