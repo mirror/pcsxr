@@ -233,7 +233,7 @@ static int aanscales[DSIZE2] = {
 static void iqtab_init(int *iqtab, unsigned char *iq_y) {
 	int i;
 
-	for(i = 0; i < DSIZE2; i++) {
+	for (i = 0; i < DSIZE2; i++) {
 		iqtab[i] = (iq_y[i] * SCALER(aanscales[zscan[i]], AAN_PRESCALE_SCALE));
 	}
 }
@@ -259,7 +259,7 @@ unsigned short *rl2blk(int *blk, unsigned short *mdec_rl) {
 			k += RLE_RUN(rl) + 1;	// skip zero-coefficients
 
 			if (k > 63) {
-				printf("run lenght exceeded 64 enties\n");
+				// printf("run lenght exceeded 64 enties\n");
 				break;
 			}
 
