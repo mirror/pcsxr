@@ -36,10 +36,10 @@
 #define AAN_PRESCALE_SCALE		(AAN_PRESCALE_SIZE-AAN_PRESCALE_BITS)
 #define AAN_EXTRA				12
 
-#define FIX_1_082392200		SCALER(18159528,AAN_CONST_SCALE) // B6
-#define FIX_1_414213562		SCALER(23726566,AAN_CONST_SCALE) // A4
-#define FIX_1_847759065		SCALER(31000253,AAN_CONST_SCALE) // A2
-#define FIX_2_613125930		SCALER(43840978,AAN_CONST_SCALE) // B2
+#define FIX_1_082392200		SCALER(18159528, AAN_CONST_SCALE) // B6
+#define FIX_1_414213562		SCALER(23726566, AAN_CONST_SCALE) // A4
+#define FIX_1_847759065		SCALER(31000253, AAN_CONST_SCALE) // A2
+#define FIX_2_613125930		SCALER(43840978, AAN_CONST_SCALE) // B2
 
 #define MULS(var, const)	(SCALE((var) * (const), AAN_CONST_BITS))
 
@@ -470,7 +470,7 @@ void psxDma0(u32 adr, u32 bcr, u32 chcr) {
 
 	size = (bcr >> 16) * (bcr & 0xffff);
 
-	switch(cmd >> 28) {
+	switch (cmd >> 28) {
 		case 0x3: // decode
 			mdec.rl = (u16 *)PSXM(adr);
 			mdec.rlsize = mdec.reg0 & MDEC0_SIZE_MASK;
