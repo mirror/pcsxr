@@ -1,3 +1,9 @@
+March 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/mdec.c: Rewritten MDEC decoder to replace non-free code, also
+   fixes image quality issues and improves decoding speed. (Thanks gorlik)
+ * AUTHORS: Updated info.
+
 March 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * gui/LnxMain.c: Fixed -cdfile switch (Thanks NeToU).
