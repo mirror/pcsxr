@@ -295,7 +295,7 @@ unsigned short *rl2blk(int *blk, unsigned short *mdec_rl) {
 #define	SCALE8(c)				SCALER(c, 20) 
 #define SCALE5(c)				SCALER(c, 23)
 
-#define CLAMP5(c)   ( ((c) < -16) ? 0 : (((c) > (15 - 16)) ? 15 : ((c) + 16)) )
+#define CLAMP5(c)   ( ((c) < -16) ? 0 : (((c) > (31 - 16)) ? 31 : ((c) + 16)) )
 #define CLAMP8(c)	( ((c) < -128) ? 0 : (((c) > (255 - 128)) ? 255 : ((c) + 128)) )
 
 #define CLAMP_SCALE8(a)   (CLAMP8(SCALE8(a)))
