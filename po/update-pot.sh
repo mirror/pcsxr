@@ -3,3 +3,4 @@ xgettext --keyword=_ --keyword=N_ ../win32/gui/*.c ../gui/*.c ../gui/*.h ../libp
 msgmerge -U --backup=none pt_BR.po pcsx.pot
 msgmerge -U --backup=none zh_CN.po pcsx.pot
 msgmerge -U --backup=none zh_TW.po pcsx.pot
+msgmerge -U --backup=none it.po pcsx.pot

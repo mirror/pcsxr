@@ -1,6 +1,8 @@
 March 15, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/mdec.c: 0x1f should be 31 rather than 15 (stupid /me).
+ * po/it.po: Added Italian translation (Thanks Giovanni Scafora).
+ * AUTHORS, po/LINGUAS, po/update-pot.sh: Updated.
 
 March 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

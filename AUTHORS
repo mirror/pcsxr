@@ -24,6 +24,7 @@ PCSX-Reloaded Maintainer: Wei Mingzhi <whistler@openoffice.org>
 PCSX-Reloaded Contributors: avlex (Help on xcode project)
 			    dario86 (Various bugfixes)
 			    Gabriele Gorla (Rewritten MDEC decoder)
+			    Giovanni Scafora (Italian Translation)
 			    maggix (Leopard compilation fix)
 			    NeToU (Bugfix)
 			    Peter Collingbourne (Various core/psxbios fixes)
