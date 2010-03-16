@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-15 11:22+0800\n"
-"PO-Revision-Date: 2010-03-14 19:00+0200\n"
+"PO-Revision-Date: 2010-03-15 16:00+0200\n"
 "Last-Translator: Giovanni Scafora <giovanni@archlinux.org>\n"
 "Language-Team: Arch Linux Italian Team <giovanni@archlinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -476,47 +476,47 @@ msgstr "Attendere prego, connessione in corso... %c\n"
 
 #: ../win32/gui/plugin.c:216
 msgid "Error Opening CDR Plugin"
-msgstr "Si è verificato un errore durante l'apertura del plugin CDR"
+msgstr "Si è verificato un errore durante l'apertura del plugin del CD-ROM"
 
 #: ../win32/gui/plugin.c:279
 #, c-format
 msgid "Error Opening GPU Plugin (%d)"
-msgstr "Si è verificato un errore durante l'apertura del plugin GPU (%d)"
+msgstr "Si è verificato un errore durante l'apertura del plugin della GPU (%d)"
 
 #: ../win32/gui/plugin.c:281
 #, c-format
 msgid "Error Opening SPU Plugin (%d)"
-msgstr "Si è verificato un errore durante l'apertura del plugin SPU (%d)"
+msgstr "Si è verificato un errore durante l'apertura del plugin della SPU (%d)"
 
 #: ../win32/gui/plugin.c:284
 #, c-format
 msgid "Error Opening PAD1 Plugin (%d)"
-msgstr "Si è verificato un errore durante l'apertura del plugin PAD1 (%d)"
+msgstr "Si è verificato un errore durante l'apertura del plugin del PAD1 (%d)"
 
 #: ../win32/gui/plugin.c:286
 #, c-format
 msgid "Error Opening PAD2 Plugin (%d)"
-msgstr "Si è verificato un errore durante l'apertura del plugin PAD2 (%d)"
+msgstr "Si è verificato un errore durante l'apertura del plugin del PAD2 (%d)"
 
 #: ../win32/gui/plugin.c:309
 msgid "Error Closing CDR Plugin"
-msgstr "Si è verificato un errore durante la chiusura del plugin CDR"
+msgstr "Si è verificato un errore durante la chiusura del plugin del CD-ROM"
 
 #: ../win32/gui/plugin.c:311
 msgid "Error Closing GPU Plugin"
-msgstr "Si è verificato un errore durante la chiusura del plugin GPU"
+msgstr "Si è verificato un errore durante la chiusura del plugin della GPU"
 
 #: ../win32/gui/plugin.c:313
 msgid "Error Closing SPU Plugin"
-msgstr "Si è verificato un errore durante la chiusura del plugin SPU"
+msgstr "Si è verificato un errore durante la chiusura del plugin della SPU"
 
 #: ../win32/gui/plugin.c:315
 msgid "Error Closing PAD1 Plugin"
-msgstr "Si è verificato un errore durante la chiusura del plugin PAD1"
+msgstr "Si è verificato un errore durante la chiusura del plugin del PAD1"
 
 #: ../win32/gui/plugin.c:317
 msgid "Error Closing PAD2 Plugin"
-msgstr "Si è verificato un errore durante la chiusura del plugin PAD2"
+msgstr "Si è verificato un errore durante la chiusura del plugin del PAD2"
 
 #: ../win32/gui/plugin.c:335
 #, c-format
@@ -882,7 +882,7 @@ msgstr "C&ambia ISO..."
 
 #: ../win32/gui/WndMain.c:1518
 msgid "Re&set"
-msgstr "re&setta"
+msgstr "Re&setta"
 
 #: ../win32/gui/WndMain.c:1519
 msgid "&Run"
@@ -966,7 +966,7 @@ msgstr "&Video..."
 
 #: ../win32/gui/WndMain.c:1575
 msgid "&Plugins && Bios..."
-msgstr "&Plugin e bios..."
+msgstr "&Plugin e Bios..."
 
 #: ../win32/gui/WndMain.c:1577
 msgid "&Help"
@@ -982,7 +982,7 @@ msgstr "Messaggio di pcsx"
 
 #: ../win32/gui/WndMain.c:1767
 msgid "Error Loading Symbol"
-msgstr "Si è verificato un errore durante l'apertura del simbolo"
+msgstr "Si è verificato un errore durante il caricamento del simbolo"
 
 #: ../gui/Cheat.c:118 ../gui/Cheat.c:203
 msgid "Cheat Description:"
@@ -1040,7 +1040,7 @@ msgstr "Configura PCSX"
 #: ../gui/ConfDlg.c:237 ../gui/ConfDlg.c:258 ../gui/ConfDlg.c:279
 #: ../gui/ConfDlg.c:300 ../gui/ConfDlg.c:355
 msgid "No configuration required"
-msgstr "Nessuna configurazione richiesta"
+msgstr "Non necessita di essere configurato"
 
 #: ../gui/ConfDlg.c:237 ../gui/ConfDlg.c:258 ../gui/ConfDlg.c:279
 #: ../gui/ConfDlg.c:300 ../gui/ConfDlg.c:355
@@ -1063,7 +1063,7 @@ msgstr "Pronto"
 
 #: ../gui/Gtk2Gui.c:150
 msgid "Emulation Paused."
-msgstr "Emulazione in pausa."
+msgstr "L'emulazione è stata messa in pausa."
 
 #: ../gui/Gtk2Gui.c:398
 msgid "Select PSX EXE File"
@@ -1158,10 +1158,10 @@ msgstr ""
 "\t-nogui\t\tNon apre la GUI GTK\n"
 "\t-cfg FILE\tCarica il file della configurazione desiderata (default: ~/."
 "pcsx/pcsx.cfg)\n"
-"\t-psxout\t\tAbilita l'output PSX\n"
+"\t-psxout\t\tAbilita l'output della PSX\n"
 "\t-load STATENUM\tCarica salvataggio (1-5)\n"
 "\t-h -help\tVisualizza questo messaggio\n"
-"\tfile\t\tCarica il file\n"
+"\tfile\t\tCarica un file\n"
 
 #: ../gui/LnxMain.c:358
 #, c-format
@@ -1204,19 +1204,19 @@ msgstr "Seleziona un file"
 
 #: ../gui/MemcardDlg.c:338
 msgid "Format this Memory Card?"
-msgstr "Formatto questo memory card?"
+msgstr "Formatto questa memory card?"
 
 #: ../gui/MemcardDlg.c:340
 msgid ""
 "If you format the memory card, the card will be empty, and any existing data "
 "overwritten."
 msgstr ""
-"Se formatti la memory card, la card sarà svuotata e tutti i dati esistenti "
+"Se formatti la memory card, questa sarà svuotata e tutti i dati esistenti "
 "saranno sovrascritti."
 
 #: ../gui/MemcardDlg.c:343
 msgid "Format card"
-msgstr "Formatta la card"
+msgstr "Formatta la memory card"
 
 #: ../gui/MemcardDlg.c:367
 msgid "Create a new Memory Card"
@@ -1235,7 +1235,7 @@ msgid ""
 "There are no free slots available on the target memory card. Please delete a "
 "slot first."
 msgstr ""
-"Non vi sono slot liberi disponibili nella memory card. Elimina uno slot."
+"Non vi sono slot liberi disponibili nella memory card. Elimina almeno uno slot."
 
 #: ../gui/MemcardDlg.c:632
 msgid "Memory Card Manager"
@@ -1273,15 +1273,15 @@ msgstr "XA disabilitato"
 
 #: ../gui/Plugin.c:285
 msgid "Error opening CD-ROM plugin!"
-msgstr "Si è verificato un errore durante l'apertura del plugin CD-ROM!"
+msgstr "Si è verificato un errore durante l'apertura del plugin del CD-ROM!"
 
 #: ../gui/Plugin.c:287
 msgid "Error opening SPU plugin!"
-msgstr "Si è verificato un errore durante l'apertura del plugin SPU!"
+msgstr "Si è verificato un errore durante l'apertura del plugin della SPU!"
 
 #: ../gui/Plugin.c:290
 msgid "Error opening GPU plugin!"
-msgstr "Si è verificato un errore durante l'apertura del plugin GPU!"
+msgstr "Si è verificato un errore durante l'apertura del plugin della GPU!"
 
 #: ../gui/Plugin.c:292
 msgid "Error opening Controller 1 plugin!"
@@ -1295,11 +1295,11 @@ msgstr ""
 
 #: ../gui/Plugin.c:374
 msgid "Error closing CD-ROM plugin!"
-msgstr "Si è verificato un errore durante la chiusura del plugin CD-ROM!"
+msgstr "Si è verificato un errore durante la chiusura del plugin del CD-ROM!"
 
 #: ../gui/Plugin.c:376
 msgid "Error closing SPU plugin!"
-msgstr "Si è verificato un errore durante la chiusura del plugin SPU!"
+msgstr "Si è verificato un errore durante la chiusura del plugin della SPU!"
 
 #: ../gui/Plugin.c:378
 msgid "Error closing Controller 1 Plugin!"
@@ -1313,12 +1313,12 @@ msgstr ""
 
 #: ../gui/Plugin.c:382
 msgid "Error closing GPU plugin!"
-msgstr "Si è verificato un errore durante la chiusura del plugin GPU!"
+msgstr "Si è verificato un errore durante la chiusura del plugin della GPU!"
 
 #: ../libpcsxcore/cdriso.c:637
 #, c-format
 msgid "Loaded CD Image: %s"
-msgstr "Caricata l'immagine del CD: %s"
+msgstr "È stata caricata l'immagine del CD: %s"
 
 #: ../libpcsxcore/cheat.c:148
 #, c-format
@@ -1469,7 +1469,7 @@ msgstr "Si è verificato un errore durante l'allocazione della memoria!"
 #: ../libpcsxcore/psxmem.c:109
 #, c-format
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
-msgstr "Impossibile aprire il BIOS:\"%s\". Sto abilitando il Bios HLE!\n"
+msgstr "Impossibile aprire il BIOS:\"%s\". Sto abilitando il bios HLE!\n"
 
 #: ../libpcsxcore/r3000a.c:35
 #, c-format
@@ -1579,8 +1579,8 @@ msgstr ""
 "1: 2xSai\n"
 "2: 2xSuperSai\n"
 "3: SuperEagle\n"
-"4: Scale2x\n"
-"5: Scale3x\n"
+"4: Scala2x\n"
+"5: Scala3x\n"
 "6: HQ2X\n"
 "7: HQ3X"
 
@@ -1654,7 +1654,7 @@ msgstr "Usa le difficoltà del gioco"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:366
 msgid "better g-colors, worse textures"
-msgstr "Migliori g-color, strutture più difettose"
+msgstr "Miglior g-color, strutture poco definite"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:381
 msgid "Needed by Dark Forces"
@@ -1976,7 +1976,7 @@ msgstr "<b>BIOS</b>"
 
 #: ../data/pcsx.glade2:1363
 msgid "Configure CPU"
-msgstr "Configure la CPU"
+msgstr "Configura la CPU"
 
 #: ../data/pcsx.glade2:1410
 msgid "SPU IRQ Always Enabled"
@@ -1988,7 +1988,7 @@ msgstr "Filmati in bianco e nero"
 
 #: ../data/pcsx.glade2:1460
 msgid "Enable Interpreter CPU"
-msgstr "Abilita l'interprete CPU"
+msgstr "Abilita l'interprete della CPU"
 
 #: ../data/pcsx.glade2:1494
 msgid "Disable CD Audio"
@@ -2016,7 +2016,7 @@ msgstr "<b>Regione del sistema</b>"
 
 #: ../data/pcsx.glade2:1665
 msgid "Configure NetPlay"
-msgstr "Configura NetPlay"
+msgstr "Configura il NetPlay"
 
 #: ../data/pcsx.glade2:1753
 msgid "<b>NetPlay</b>"
@@ -2099,7 +2099,7 @@ msgstr ""
 #: ../data/pcsx.glade2:2572
 msgid "translator-credits"
 msgstr ""
-"Traduzione italiana a cura di Giovanni Scafora (giovanni@archlinux.org)"
+"Traduzione italiana a cura di Giovanni Scafora <giovanni@archlinux.org>"
 
 #: ../data/pcsx.glade2:2634
 msgid "<b>Cheat Codes</b>"
@@ -2257,15 +2257,15 @@ msgstr "Alto modo di compatibilità"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:219
 msgid "Use the asynchronous SPU interface."
-msgstr "Usa l'interfaccia asincrona di SPU."
+msgstr "Usa l'interfaccia asincrona della SPU."
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:231
 msgid "SPU IRQ Wait"
-msgstr "Attesa di SPU IRQ"
+msgstr "Attesa dell'IRQ della SPU"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:235
 msgid "Wait for CPU; only useful for some games."
-msgstr "Aspetta la CPU; utile soltanto per alcuni giochi."
+msgstr "Attende la CPU; utile solo per alcuni giochi."
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:247
 msgid "Single channel sound"
@@ -2273,7 +2273,7 @@ msgstr "Audio del singolo canale"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:251
 msgid "Play only one channel for a performance boost."
-msgstr "Suona solo un canale per una prestazione migliore."
+msgstr "Suona solo un canale, per una prestazione migliore."
 
 #: ../plugins/dfcdrom/cdr-linux.c:60
 msgid "CD-ROM Drive Reader"
@@ -2286,7 +2286,7 @@ msgstr "Plugin NULL CDR"
 #: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:170
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:8
 msgid "CDR configuration"
-msgstr "Configurazione del CDR"
+msgstr "Configurazione del CD-ROM"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:33
 msgid "Choose your CD-ROM device or type its path if it's not listed"
@@ -2306,7 +2306,7 @@ msgid ""
 "Normal (No Cache)\n"
 "Threaded - Faster (With Cache)"
 msgstr ""
-"Normale (Nessuna cache)\n"
+"Normale (senza cache)\n"
 "Threaded, veloce (con la cache)"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:114
@@ -2396,7 +2396,7 @@ msgstr "Qualità"
 #: ../plugins/peopsxgl/gpucfg/interface.c:178
 #: ../plugins/peopsxgl/gpucfg/interface.c:191
 msgid "0: don't care - Use driver's default textures"
-msgstr "0: non si preoccupa, usa le strutture di default del driver"
+msgstr "0: non se ne preoccupa, usa le strutture di default del driver"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:179
 msgid "1: 4444 - Fast, but less colorful"
@@ -2585,7 +2585,7 @@ msgstr "3: Gfx card e soft, lento"
 #: ../plugins/peopsxgl/gpucfg/interface.c:538
 #: ../plugins/peopsxgl/gpucfg/interface.c:551
 msgid "0: Emulated vram - ok most times"
-msgstr "0: Vram emulata, va bene la maggior parte delle volte"
+msgstr "0: Vram emulata, funziona quasi sempre bene"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:539
 msgid "1: Gfx card buffer reads"
@@ -2605,7 +2605,7 @@ msgstr "4: Software completo (FVP)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:553
 msgid "Special game fixes"
-msgstr "Attiva gioco speciale"
+msgstr "Attiva il gioco speciale"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:576
 msgid "Battle cursor (FF7)"
@@ -2669,7 +2669,7 @@ msgstr "Invio di dati addizionali"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:704
 msgid "unused"
-msgstr "inutilizzato"
+msgstr "Inutilizzato"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:712
 msgid "Fake 'gpu busy'"
@@ -2697,7 +2697,7 @@ msgstr "Usa le estensioni OpenGL (consigliato)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:775
 msgid "Polygon anti-aliasing (slow with most cards)"
-msgstr "Poligono anti-aliasing (letto con la maggior parte delle schede)"
+msgstr "Poligono anti-aliasing (lento con la maggior parte delle schede)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:783
 msgid "Line mode (polygons will not get filled)"
@@ -2868,7 +2868,7 @@ msgstr "Joystick: Asse %d%c"
 #: ../plugins/dfinput/cfg-gtk2.c:118 ../plugins/dfinput/cfg-gtk2.c:157
 #, c-format
 msgid "Joystick: Hat %d %s"
-msgstr "Joystick: Hat %d %s"
+msgstr "Joystick: hat %d %s"
 
 #: ../plugins/dfinput/cfg-gtk2.c:133 ../plugins/dfinput/cfg-gtk2.c:172
 msgid "Keyboard:"

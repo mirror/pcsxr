@@ -1,3 +1,7 @@
+March 16, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * po/it.po: Updated Italian translation by Giovanni Scafora.
+
 March 15, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/mdec.c: 0x1f should be 31 rather than 15 (stupid /me).
