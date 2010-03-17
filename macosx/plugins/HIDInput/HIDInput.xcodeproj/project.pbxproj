@@ -297,6 +297,9 @@
 					../HID,
 					Utilities,
 					Source,
+					./HID,
+					Utilities,
+					Source,
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -335,6 +338,9 @@
 					../HID,
 					Utilities,
 					Source,
+					./HID,
+					Utilities,
+					Source,
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -370,9 +376,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				HEADER_SEARCH_PATHS = (
-					../../../libpcsxcore,
-				);
+				HEADER_SEARCH_PATHS = ../../../libpcsxcore;
 			};
 			name = Deployment;
 		};
