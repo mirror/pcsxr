@@ -146,7 +146,7 @@ long _readPortX(PadDataS *data, int port) {
         if (keys[i].element->usagePage == kHIDPage_GenericDesktop && 
             keys[i].element->usage >= kHIDUsage_GD_X && keys[i].element->usage <= kHIDUsage_GD_Rz) {
             /* axis input device */
-            value = HIDCalibrateValue(value, keys[i].element);
+            // value = HIDCalibrateValue(value, keys[i].element);
             value = HIDScaleValue(value, keys[i].element);
             if (keys[i].reverse) {
                 if (value < 64)
@@ -170,7 +170,7 @@ long _readPortX(PadDataS *data, int port) {
             if (axes[i].element->usagePage == kHIDPage_GenericDesktop && 
                 axes[i].element->usage >= kHIDUsage_GD_X && axes[i].element->usage <= kHIDUsage_GD_Rz) {
                 /* axis input device */
-                value = HIDCalibrateValue(value, axes[i].element);
+                // value = HIDCalibrateValue(value, axes[i].element);
                 value = HIDScaleValue(value, axes[i].element);
                 if (!axes[i].positive) value = 255-value;
 

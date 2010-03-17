@@ -1,3 +1,8 @@
+March 18, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/plugins/HIDInput/src/PlugPAD.c: Commented out calls to
+   HIDCalibrateValue(), which caused problem in some cases.
+
 March 17, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * macosx/plugins/HIDInput/HIDInput.xcodeproj/project.pbxproj: Fixed build
