@@ -1,3 +1,7 @@
+March 21, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/mdec.c: Minor cleanup.
+
 March 18, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * macosx/plugins/HIDInput/src/PlugPAD.c: Commented out calls to

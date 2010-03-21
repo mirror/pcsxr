@@ -316,7 +316,7 @@ static void putquadrgb15(unsigned short *image, int *Yblk, int Cr, int Cb) {
 	int Y, R, G, B;
 	int A = (mdec.reg0 & MDEC0_STP) ? 0x8000 : 0;
 	R = MULR(Cr);
-	G = MULG2(Cb,Cr);
+	G = MULG2(Cb, Cr);
 	B = MULB(Cb);
 
 	// added transparency
@@ -330,7 +330,7 @@ static void putquadrgb15(unsigned short *image, int *Yblk, int Cr, int Cb) {
 	image[17] = MAKERGB15(CLAMP_SCALE5(Y + R), CLAMP_SCALE5(Y + G), CLAMP_SCALE5(Y + B), A);
 }
 
-static void yuv2rgb15(int *blk,unsigned short *image) {
+static void yuv2rgb15(int *blk, unsigned short *image) {
 	int x, y;
 	int *Yblk = blk + DSIZE2 * 2;
 	int *Crblk = blk;
@@ -478,7 +478,7 @@ void psxDma0(u32 adr, u32 bcr, u32 chcr) {
 
 		case 0x4: // quantization table upload
 			{
-				u8 *p = (u8*)PSXM(adr);
+				u8 *p = (u8 *)PSXM(adr);
 				// printf("uploading new quantization table\n");
 				// printmatrixu8(p);
 				// printmatrixu8(p + 64);
@@ -508,7 +508,7 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 #ifdef CDR_LOG
 	CDR_LOG("DMA1 %08x %08x %08x (cmd = %08x)\n", adr, bcr, chcr, mdec.reg0);
 #endif
-	
+
 	if (chcr != 0x01000200) return;
 
 	size = (bcr >> 16) * (bcr & 0xffff);
