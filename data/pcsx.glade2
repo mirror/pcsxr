@@ -2548,10 +2548,10 @@ PAL</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">normal</property>
     <property name="program_name">PCSX-Reloaded</property>
-    <property name="copyright" translatable="yes">(C) 1999-2003  PCSX Team
-(C) 2005-2006 Ryan Schultz
-(C) 2005-2006 Andrew Burton
-(C) 2008-2009 Wei Mingzhi</property>
+    <property name="version">1.9.91</property>
+    <property name="copyright" translatable="yes">(C) 1999-2003 PCSX Team
+(C) 2005-2009 PCSX-df Team
+(C) 2009-2010 PCSX-Reloaded Team</property>
     <property name="comments" translatable="yes">A PlayStation emulator.</property>
     <property name="website">http://pcsxr.codeplex.com/</property>
     <property name="website_label">http://pcsxr.codeplex.com/</property>
@@ -2570,14 +2570,27 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General
 Public License along with this program; if not, write to
 the Free Software Foundation, Inc.</property>
-    <property name="authors">Wei Mingzhi &lt;weimingzhi@gmail.com&gt;
+    <property name="authors">PCSX-Reloaded Maintainer:
+Wei Mingzhi &lt;whistler_wmz@users.sourceforge.net&gt;
+
+PCSX-Reloaded Contributors:
+avlex (Help on xcode project)
+dario86 (Various bugfixes)
+Gabriele Gorla (Rewritten MDEC decoder)
+Giovanni Scafora (Italian Translation)
+maggix (Leopard compilation fix)
+NeToU (Bugfix)
+Peter Collingbourne (Various core/psxbios fixes)
+shalma (Various core fixes)
+Tib&#xE9;rio V&#xED;tor (Brazilian Portuguese Translation)
+Tristin Celestin (PulseAudio support)
 
 PCSX-df Team:
 Ryan Schultz &lt;schultz.ryan@gmail.com&gt;
 Andrew Burton &lt;adb@iinet.net.au&gt;
 Stephen Chao
 
-Original PCSX Team:
+PCSX Team:
 Linuzappz
 Shadow
 Pete Bernert
