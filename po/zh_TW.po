@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 20:25+0800\n"
-"PO-Revision-Date: 2010-04-10 20:26+0700\n"
+"POT-Creation-Date: 2010-04-10 22:41+0800\n"
+"PO-Revision-Date: 2010-04-10 22:43+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -288,6 +288,7 @@ msgid "Search For:"
 msgstr "搜尋:"
 
 #: ../win32/gui/CheatDlg.c:682
+#: ../gui/DebugMemory.c:200
 #: ../data/pcsx.glade2:2853
 msgid "Data Type:"
 msgstr "數值類型:"
@@ -327,14 +328,17 @@ msgid "C&lose"
 msgstr "關閉(&L)"
 
 #: ../win32/gui/CheatDlg.c:693
+#: ../gui/DebugMemory.c:205
 msgid "8-bit"
 msgstr "8 位元"
 
 #: ../win32/gui/CheatDlg.c:694
+#: ../gui/DebugMemory.c:206
 msgid "16-bit"
 msgstr "16 位元"
 
 #: ../win32/gui/CheatDlg.c:695
+#: ../gui/DebugMemory.c:207
 msgid "32-bit"
 msgstr "32 位元"
 
@@ -692,15 +696,15 @@ msgstr "*PCSX*: Error Saving State %s"
 
 #: ../win32/gui/WndMain.c:429
 #: ../win32/gui/WndMain.c:478
-#: ../gui/Gtk2Gui.c:485
-#: ../gui/Gtk2Gui.c:610
+#: ../gui/Gtk2Gui.c:484
+#: ../gui/Gtk2Gui.c:609
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "此光碟不是一張合法的 PlayStation 光碟。"
 
 #: ../win32/gui/WndMain.c:435
 #: ../win32/gui/WndMain.c:484
-#: ../gui/Gtk2Gui.c:493
-#: ../gui/Gtk2Gui.c:618
+#: ../gui/Gtk2Gui.c:492
+#: ../gui/Gtk2Gui.c:617
 msgid "Could not load CD-ROM!"
 msgstr "無法加載光碟!"
 
@@ -907,8 +911,8 @@ msgstr "DataDeck 記憶卡 (*.ddl)"
 #: ../win32/gui/WndMain.c:1353
 #: ../win32/gui/WndMain.c:1434
 #: ../gui/Cheat.c:322
-#: ../gui/Gtk2Gui.c:422
-#: ../gui/Gtk2Gui.c:561
+#: ../gui/Gtk2Gui.c:421
+#: ../gui/Gtk2Gui.c:560
 msgid "All Files"
 msgstr "所有檔案"
 
@@ -1092,7 +1096,7 @@ msgstr "所有檔案 (*.*)"
 #: ../gui/Cheat.c:1125
 #: ../gui/ConfDlg.c:104
 #: ../gui/ConfDlg.c:200
-#: ../gui/DebugMemory.c:123
+#: ../gui/DebugMemory.c:262
 msgid "Error: Glade interface could not be loaded!"
 msgstr "錯誤：無法加載 Glade 界面!"
 
@@ -1153,15 +1157,51 @@ msgstr "無法開啟 BIOS 目錄: \"%s\"\n"
 msgid "Could not open directory: '%s'\n"
 msgstr "無法開啟目錄: \"%s\"\n"
 
-#: ../gui/DebugMemory.c:128
+#: ../gui/DebugMemory.c:102
+#: ../data/pcsx.glade2:3270
+msgid "Memory Dump"
+msgstr "記憶體轉儲"
+
+#: ../gui/DebugMemory.c:110
+msgid "Start Address (Hexadecimal):"
+msgstr "起始位址 (十六進制):"
+
+#: ../gui/DebugMemory.c:118
+msgid "Length (Decimal):"
+msgstr "長度 (十進制):"
+
+#: ../gui/DebugMemory.c:144
+#: ../gui/Gtk2Gui.c:404
+msgid "Select PSX EXE File"
+msgstr "選擇 PS EXE 檔案"
+
+#: ../gui/DebugMemory.c:159
+#, c-format
+msgid "Error writing to %s!"
+msgstr "存儲至 %s 時出錯!"
+
+#: ../gui/DebugMemory.c:176
+msgid "Memory Patch"
+msgstr "記憶體修改"
+
+#: ../gui/DebugMemory.c:184
+#: ../data/pcsx.glade2:3292
+msgid "Address (Hexadecimal):"
+msgstr "位址 (十六進制):"
+
+#: ../gui/DebugMemory.c:192
+msgid "Value (Hexadecimal):"
+msgstr "數值 (十六進制):"
+
+#: ../gui/DebugMemory.c:267
 msgid "Memory Viewer"
 msgstr "記憶體檢視"
 
-#: ../gui/DebugMemory.c:133
+#: ../gui/DebugMemory.c:272
 msgid "Address"
 msgstr "位址"
 
-#: ../gui/DebugMemory.c:151
+#: ../gui/DebugMemory.c:290
 msgid "Text"
 msgstr "文字"
 
@@ -1173,74 +1213,70 @@ msgstr "就緒"
 msgid "Emulation Paused."
 msgstr "模擬器已暫停。"
 
-#: ../gui/Gtk2Gui.c:404
-msgid "Select PSX EXE File"
-msgstr "選擇 PS EXE 檔案"
-
-#: ../gui/Gtk2Gui.c:418
+#: ../gui/Gtk2Gui.c:417
 msgid "PlayStation Executable Files"
 msgstr "PlayStation 執行檔"
 
-#: ../gui/Gtk2Gui.c:454
+#: ../gui/Gtk2Gui.c:453
 msgid "Not a valid PSX file"
 msgstr "不是一個合法的 PSX 檔"
 
-#: ../gui/Gtk2Gui.c:454
+#: ../gui/Gtk2Gui.c:453
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "此文件不是一個合法的 PlayStation 執行檔"
 
-#: ../gui/Gtk2Gui.c:485
-#: ../gui/Gtk2Gui.c:610
+#: ../gui/Gtk2Gui.c:484
+#: ../gui/Gtk2Gui.c:609
 msgid "CD ROM failed"
 msgstr "CD-ROM 失敗"
 
-#: ../gui/Gtk2Gui.c:493
-#: ../gui/Gtk2Gui.c:618
+#: ../gui/Gtk2Gui.c:492
+#: ../gui/Gtk2Gui.c:617
 msgid "The CD-ROM could not be loaded"
 msgstr "無法加載 CD-ROM"
 
-#: ../gui/Gtk2Gui.c:507
+#: ../gui/Gtk2Gui.c:506
 msgid "Could not run BIOS"
 msgstr "無法執行 BIOS"
 
-#: ../gui/Gtk2Gui.c:507
+#: ../gui/Gtk2Gui.c:506
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr "內部 HLE BIOS 不支援直接執行。"
 
-#: ../gui/Gtk2Gui.c:536
+#: ../gui/Gtk2Gui.c:535
 msgid "Open PSX Disc Image File"
 msgstr "打開 PSX 光碟映像檔"
 
-#: ../gui/Gtk2Gui.c:556
+#: ../gui/Gtk2Gui.c:555
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr "PSX 鏡像檔 (*.bin, *.img, *.mdf, *.iso)"
 
-#: ../gui/Gtk2Gui.c:767
+#: ../gui/Gtk2Gui.c:766
 #, c-format
 msgid "Loaded state %s."
 msgstr "已讀取記錄 %s。"
 
-#: ../gui/Gtk2Gui.c:771
+#: ../gui/Gtk2Gui.c:770
 #, c-format
 msgid "Error loading state %s!"
 msgstr "讀取記錄 %s 時出錯。"
 
-#: ../gui/Gtk2Gui.c:782
+#: ../gui/Gtk2Gui.c:781
 #, c-format
 msgid "Saved state %s."
 msgstr "已存儲記錄 %s"
 
-#: ../gui/Gtk2Gui.c:784
+#: ../gui/Gtk2Gui.c:783
 #, c-format
 msgid "Error saving state %s!"
 msgstr "存儲記錄 %s 時出錯。"
 
-#: ../gui/Gtk2Gui.c:817
-#: ../gui/Gtk2Gui.c:844
+#: ../gui/Gtk2Gui.c:816
+#: ../gui/Gtk2Gui.c:843
 msgid "Select State File"
 msgstr "選擇記錄檔案"
 
-#: ../gui/Gtk2Gui.c:901
+#: ../gui/Gtk2Gui.c:900
 msgid "Notice"
 msgstr "警告"
 
@@ -2261,17 +2297,9 @@ msgstr "重新開始"
 msgid "<b>Cheat Search</b>"
 msgstr "<b>金手指碼搜尋</b>"
 
-#: ../data/pcsx.glade2:3270
-msgid "Memory Dump"
-msgstr "記憶體轉儲"
-
-#: ../data/pcsx.glade2:3292
-msgid "Address (Hexadecimal):"
-msgstr "位址 (十六進制):"
-
 #: ../data/pcsx.glade2:3384
-msgid "Dump Memory..."
-msgstr "轉儲記憶體..."
+msgid "Raw Dump..."
+msgstr "Raw 轉儲..."
 
 #: ../data/pcsx.glade2:3419
 msgid "Patch Memory..."
@@ -3070,6 +3098,8 @@ msgstr "控制器 2"
 msgid "Multi-Threaded (Recommended)"
 msgstr "多執行緒 (建議使用)"
 
+#~ msgid "Dump Memory..."
+#~ msgstr "轉儲記憶體..."
 #~ msgid ""
 #~ "(C) 1999-2003  PCSX Team\n"
 #~ "(C) 2005-2006 Ryan Schultz\n"

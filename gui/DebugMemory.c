@@ -96,12 +96,151 @@ static void MemView_Go() {
 }
 
 static void MemView_Dump() {
-	// TODO
+	GtkWidget *dlg;
+	GtkWidget *box, *table, *label, *start_edit, *length_edit;
+
+	dlg = gtk_dialog_new_with_buttons(_("Memory Dump"), GTK_WINDOW(MemViewDlg),
+		GTK_DIALOG_MODAL, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
+
+	box = GTK_WIDGET(GTK_DIALOG(dlg)->vbox);
+
+	table = gtk_table_new(2, 2, FALSE);
+
+	label = gtk_label_new(_("Start Address (Hexadecimal):"));
+	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 0, 1, 0, 0, 5, 5);
+	gtk_widget_show(label);
+
+	start_edit = gtk_entry_new();
+	gtk_table_attach(GTK_TABLE(table), start_edit, 1, 2, 0, 1, 0, 0, 5, 5);
+	gtk_widget_show(start_edit);
+
+	label = gtk_label_new(_("Length (Decimal):"));
+	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 1, 2, 0, 0, 5, 5);
+	gtk_widget_show(label);
+
+	length_edit = gtk_entry_new();
+	gtk_table_attach(GTK_TABLE(table), length_edit, 1, 2, 1, 2, 0, 0, 5, 5);
+	gtk_widget_show(length_edit);
+
+	gtk_box_pack_start(GTK_BOX(box), table, FALSE, FALSE, 5);
+
+	gtk_window_set_position(GTK_WINDOW(dlg), GTK_WIN_POS_CENTER);
+	gtk_widget_show_all(dlg);
+
+	if (gtk_dialog_run(GTK_DIALOG(dlg)) == GTK_RESPONSE_ACCEPT) {
+		s32 start = 0, length = 0;
+
+		sscanf(gtk_entry_get_text(GTK_ENTRY(start_edit)), "%x", &start);
+		sscanf(gtk_entry_get_text(GTK_ENTRY(length_edit)), "%d", &length);
+
+		start &= 0x1fffff;
+
+		if (start + length > 0x1fffff) {
+			length = 0x1fffff - start;
+		}
+
+		if (length > 0) {
+			GtkWidget *file_chooser = gtk_file_chooser_dialog_new(_("Select PSX EXE File"),
+				NULL, GTK_FILE_CHOOSER_ACTION_SAVE,
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT, NULL);
+
+			gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(file_chooser), getenv("HOME"));
+
+			if (gtk_dialog_run(GTK_DIALOG(file_chooser)) == GTK_RESPONSE_ACCEPT) {
+				gchar *file = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(file_chooser));
+				FILE *fp = fopen(file, "wb");
+
+				if (fp != NULL) {
+					fwrite(PSXM(start), 1, length, fp);
+					fclose(fp);
+				} else {
+					SysMessage(_("Error writing to %s!"), file);
+				}
+				
+				g_free(file);
+			}
+
+			gtk_widget_destroy(file_chooser);
+		}
+	}
+
+	gtk_widget_destroy(dlg);
 }
 
 static void MemView_Patch() {
-	// TODO
-	UpdateMemViewDlg();
+	GtkWidget *dlg;
+	GtkWidget *box, *table, *label, *addr_edit, *val_edit, *type_combo;
+
+	dlg = gtk_dialog_new_with_buttons(_("Memory Patch"), GTK_WINDOW(MemViewDlg),
+		GTK_DIALOG_MODAL, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
+
+	box = GTK_WIDGET(GTK_DIALOG(dlg)->vbox);
+
+	table = gtk_table_new(2, 3, FALSE);
+
+	label = gtk_label_new(_("Address (Hexadecimal):"));
+	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 0, 1, 0, 0, 5, 5);
+	gtk_widget_show(label);
+
+	addr_edit = gtk_entry_new();
+	gtk_table_attach(GTK_TABLE(table), addr_edit, 1, 2, 0, 1, 0, 0, 5, 5);
+	gtk_widget_show(addr_edit);
+
+	label = gtk_label_new(_("Value (Hexadecimal):"));
+	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 1, 2, 0, 0, 5, 5);
+	gtk_widget_show(label);
+
+	val_edit = gtk_entry_new();
+	gtk_table_attach(GTK_TABLE(table), val_edit, 1, 2, 1, 2, 0, 0, 5, 5);
+	gtk_widget_show(val_edit);
+
+	label = gtk_label_new(_("Data Type:"));
+	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 2, 3, 0, 0, 5, 5);
+	gtk_widget_show(label);
+
+	type_combo = gtk_combo_box_new_text();
+	gtk_combo_box_append_text(GTK_COMBO_BOX(type_combo), _("8-bit"));
+	gtk_combo_box_append_text(GTK_COMBO_BOX(type_combo), _("16-bit"));
+	gtk_combo_box_append_text(GTK_COMBO_BOX(type_combo), _("32-bit"));
+	gtk_combo_box_set_active(GTK_COMBO_BOX(type_combo), 0);
+	gtk_table_attach(GTK_TABLE(table), type_combo, 1, 2, 2, 3, 0, 0, 5, 5);
+	gtk_widget_show(type_combo);
+
+	gtk_box_pack_start(GTK_BOX(box), table, FALSE, FALSE, 5);
+
+	gtk_window_set_position(GTK_WINDOW(dlg), GTK_WIN_POS_CENTER);
+	gtk_widget_show_all(dlg);
+
+	if (gtk_dialog_run(GTK_DIALOG(dlg)) == GTK_RESPONSE_ACCEPT) {
+		u32 addr = 0xffffffff, val = 0;
+		sscanf(gtk_entry_get_text(GTK_ENTRY(addr_edit)), "%x", &addr);
+		if (addr != 0xffffffff) {
+			addr &= 0x1fffff;
+			sscanf(gtk_entry_get_text(GTK_ENTRY(val_edit)), "%x", &val);
+			
+			switch (gtk_combo_box_get_active(GTK_COMBO_BOX(type_combo))) {
+				case 0: // 8-bit
+					psxMemWrite8(addr, (u8)val);
+					break;
+
+				case 1: // 16-bit
+					psxMemWrite16(addr, (u16)val);
+					break;
+
+				case 2: // 32-bit
+					psxMemWrite32(addr, (u32)val);
+					break;
+			}
+
+			MemViewAddress = addr;
+			UpdateMemViewDlg();
+		}
+	}
+
+	gtk_widget_destroy(dlg);
 }
 
 // close the memory viewer window

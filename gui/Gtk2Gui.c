@@ -401,11 +401,10 @@ void OnFile_RunExe() {
 	if (plugins_configured() == FALSE) {
 		ConfigurePlugins();
 	} else {
-		file_chooser = gtk_file_chooser_dialog_new (_("Select PSX EXE File"),
-				NULL, GTK_FILE_CHOOSER_ACTION_OPEN,
-				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-				NULL);
+		file_chooser = gtk_file_chooser_dialog_new(_("Select PSX EXE File"),
+			NULL, GTK_FILE_CHOOSER_ACTION_OPEN,
+			GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+			GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
 
 		// Add file filters
 		GtkFileFilter *exefilter = gtk_file_filter_new ();

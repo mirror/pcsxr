@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 20:25+0800\n"
+"POT-Creation-Date: 2010-04-10 22:41+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -237,7 +237,8 @@ msgstr ""
 msgid "Search For:"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:682 ../data/pcsx.glade2:2853
+#: ../win32/gui/CheatDlg.c:682 ../gui/DebugMemory.c:200
+#: ../data/pcsx.glade2:2853
 msgid "Data Type:"
 msgstr ""
 
@@ -273,15 +274,15 @@ msgstr ""
 msgid "C&lose"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:693
+#: ../win32/gui/CheatDlg.c:693 ../gui/DebugMemory.c:205
 msgid "8-bit"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:694
+#: ../win32/gui/CheatDlg.c:694 ../gui/DebugMemory.c:206
 msgid "16-bit"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:695
+#: ../win32/gui/CheatDlg.c:695 ../gui/DebugMemory.c:207
 msgid "32-bit"
 msgstr ""
 
@@ -619,13 +620,13 @@ msgstr ""
 msgid "*PCSX*: Error Saving State %s"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:429 ../win32/gui/WndMain.c:478 ../gui/Gtk2Gui.c:485
-#: ../gui/Gtk2Gui.c:610
+#: ../win32/gui/WndMain.c:429 ../win32/gui/WndMain.c:478 ../gui/Gtk2Gui.c:484
+#: ../gui/Gtk2Gui.c:609
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:435 ../win32/gui/WndMain.c:484 ../gui/Gtk2Gui.c:493
-#: ../gui/Gtk2Gui.c:618
+#: ../win32/gui/WndMain.c:435 ../win32/gui/WndMain.c:484 ../gui/Gtk2Gui.c:492
+#: ../gui/Gtk2Gui.c:617
 msgid "Could not load CD-ROM!"
 msgstr ""
 
@@ -811,7 +812,7 @@ msgid "DataDeck Memory Card (*.ddf)"
 msgstr ""
 
 #: ../win32/gui/WndMain.c:1353 ../win32/gui/WndMain.c:1434 ../gui/Cheat.c:322
-#: ../gui/Gtk2Gui.c:422 ../gui/Gtk2Gui.c:561
+#: ../gui/Gtk2Gui.c:421 ../gui/Gtk2Gui.c:560
 msgid "All Files"
 msgstr ""
 
@@ -984,7 +985,7 @@ msgid "All Files (*.*)"
 msgstr ""
 
 #: ../gui/Cheat.c:395 ../gui/Cheat.c:1125 ../gui/ConfDlg.c:104
-#: ../gui/ConfDlg.c:200 ../gui/DebugMemory.c:123
+#: ../gui/ConfDlg.c:200 ../gui/DebugMemory.c:262
 msgid "Error: Glade interface could not be loaded!"
 msgstr ""
 
@@ -1036,15 +1037,48 @@ msgstr ""
 msgid "Could not open directory: '%s'\n"
 msgstr ""
 
-#: ../gui/DebugMemory.c:128
+#: ../gui/DebugMemory.c:102 ../data/pcsx.glade2:3270
+msgid "Memory Dump"
+msgstr ""
+
+#: ../gui/DebugMemory.c:110
+msgid "Start Address (Hexadecimal):"
+msgstr ""
+
+#: ../gui/DebugMemory.c:118
+msgid "Length (Decimal):"
+msgstr ""
+
+#: ../gui/DebugMemory.c:144 ../gui/Gtk2Gui.c:404
+msgid "Select PSX EXE File"
+msgstr ""
+
+#: ../gui/DebugMemory.c:159
+#, c-format
+msgid "Error writing to %s!"
+msgstr ""
+
+#: ../gui/DebugMemory.c:176
+msgid "Memory Patch"
+msgstr ""
+
+#: ../gui/DebugMemory.c:184 ../data/pcsx.glade2:3292
+msgid "Address (Hexadecimal):"
+msgstr ""
+
+#: ../gui/DebugMemory.c:192
+msgid "Value (Hexadecimal):"
+msgstr ""
+
+#: ../gui/DebugMemory.c:267
 msgid "Memory Viewer"
 msgstr ""
 
-#: ../gui/DebugMemory.c:133
+#: ../gui/DebugMemory.c:272
 msgid "Address"
 msgstr ""
 
-#: ../gui/DebugMemory.c:151
+#: ../gui/DebugMemory.c:290
 msgid "Text"
 msgstr ""
 
@@ -1056,71 +1090,67 @@ msgstr ""
 msgid "Emulation Paused."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:404
-msgid "Select PSX EXE File"
-msgstr ""
-
-#: ../gui/Gtk2Gui.c:418
+#: ../gui/Gtk2Gui.c:417
 msgid "PlayStation Executable Files"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:454
+#: ../gui/Gtk2Gui.c:453
 msgid "Not a valid PSX file"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:454
+#: ../gui/Gtk2Gui.c:453
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:485 ../gui/Gtk2Gui.c:610
+#: ../gui/Gtk2Gui.c:484 ../gui/Gtk2Gui.c:609
 msgid "CD ROM failed"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:493 ../gui/Gtk2Gui.c:618
+#: ../gui/Gtk2Gui.c:492 ../gui/Gtk2Gui.c:617
 msgid "The CD-ROM could not be loaded"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:507
+#: ../gui/Gtk2Gui.c:506
 msgid "Could not run BIOS"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:507
+#: ../gui/Gtk2Gui.c:506
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:536
+#: ../gui/Gtk2Gui.c:535
 msgid "Open PSX Disc Image File"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:556
+#: ../gui/Gtk2Gui.c:555
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:767
+#: ../gui/Gtk2Gui.c:766
 #, c-format
 msgid "Loaded state %s."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:771
+#: ../gui/Gtk2Gui.c:770
 #, c-format
 msgid "Error loading state %s!"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:782
+#: ../gui/Gtk2Gui.c:781
 #, c-format
 msgid "Saved state %s."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:784
+#: ../gui/Gtk2Gui.c:783
 #, c-format
 msgid "Error saving state %s!"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:817 ../gui/Gtk2Gui.c:844
+#: ../gui/Gtk2Gui.c:816 ../gui/Gtk2Gui.c:843
 msgid "Select State File"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:901
+#: ../gui/Gtk2Gui.c:900
 msgid "Notice"
 msgstr ""
 
@@ -2065,16 +2095,8 @@ msgstr ""
 msgid "<b>Cheat Search</b>"
 msgstr ""
 
-#: ../data/pcsx.glade2:3270
-msgid "Memory Dump"
-msgstr ""
-
-#: ../data/pcsx.glade2:3292
-msgid "Address (Hexadecimal):"
-msgstr ""
-
 #: ../data/pcsx.glade2:3384
-msgid "Dump Memory..."
+msgid "Raw Dump..."
 msgstr ""
 
 #: ../data/pcsx.glade2:3419
