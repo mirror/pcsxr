@@ -6,6 +6,7 @@
 #include "interface.h"
 #include "support.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void SaveConfig(void);
 
