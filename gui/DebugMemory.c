@@ -141,7 +141,7 @@ static void MemView_Dump() {
 		}
 
 		if (length > 0) {
-			GtkWidget *file_chooser = gtk_file_chooser_dialog_new(_("Select PSX EXE File"),
+			GtkWidget *file_chooser = gtk_file_chooser_dialog_new(_("Dump to File"),
 				NULL, GTK_FILE_CHOOSER_ACTION_SAVE,
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT, NULL);

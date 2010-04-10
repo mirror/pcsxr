@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 22:41+0800\n"
+"POT-Creation-Date: 2010-04-10 22:46+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1049,8 +1049,8 @@ msgstr ""
 msgid "Length (Decimal):"
 msgstr ""
 
-#: ../gui/DebugMemory.c:144 ../gui/Gtk2Gui.c:404
-msgid "Select PSX EXE File"
+#: ../gui/DebugMemory.c:144
+msgid "Dump to File"
 msgstr ""
 
 #: ../gui/DebugMemory.c:159
@@ -1088,6 +1088,10 @@ msgstr ""
 
 #: ../gui/Gtk2Gui.c:153
 msgid "Emulation Paused."
+msgstr ""
+
+#: ../gui/Gtk2Gui.c:404
+msgid "Select PSX EXE File"
 msgstr ""
 
 #: ../gui/Gtk2Gui.c:417

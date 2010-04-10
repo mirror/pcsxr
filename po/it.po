@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 22:41+0800\n"
+"POT-Creation-Date: 2010-04-10 22:46+0800\n"
 "PO-Revision-Date: 2010-03-15 16:00+0200\n"
 "Last-Translator: Giovanni Scafora <giovanni@archlinux.org>\n"
 "Language-Team: Arch Linux Italian Team <giovanni@archlinux.org>\n"
@@ -1071,9 +1071,9 @@ msgstr "Esadecimale"
 msgid "Length (Decimal):"
 msgstr ""
 
-#: ../gui/DebugMemory.c:144 ../gui/Gtk2Gui.c:404
-msgid "Select PSX EXE File"
-msgstr "Seleziona un file EXE della PSX"
+#: ../gui/DebugMemory.c:144
+msgid "Dump to File"
+msgstr ""
 
 #: ../gui/DebugMemory.c:159
 #, fuzzy, c-format
@@ -1117,6 +1117,10 @@ msgstr "Pronto"
 #: ../gui/Gtk2Gui.c:153
 msgid "Emulation Paused."
 msgstr "L'emulazione è stata messa in pausa."
+
+#: ../gui/Gtk2Gui.c:404
+msgid "Select PSX EXE File"
+msgstr "Seleziona un file EXE della PSX"
 
 #: ../gui/Gtk2Gui.c:417
 msgid "PlayStation Executable Files"
