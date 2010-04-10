@@ -1,6 +1,7 @@
 April 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
- * data/pcsx.glade2: Added "Memory Dump" to menu item.
+ * data/pcsx.glade2: Added "Memory Dump" to menu item. Added Memory Viewer
+   dialog box. Added more info to About dialog box.
  * gui/Gtk2Gui.c: Likewise.
  * gui/DebugMemory.c: Implemented memory viewer/dumper.
  * gui/DebugMemory.h: Likewise.

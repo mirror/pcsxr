@@ -220,7 +220,7 @@ static void MemView_Patch() {
 		if (addr != 0xffffffff) {
 			addr &= 0x1fffff;
 			sscanf(gtk_entry_get_text(GTK_ENTRY(val_edit)), "%x", &val);
-			
+
 			switch (gtk_combo_box_get_active(GTK_COMBO_BOX(type_combo))) {
 				case 0: // 8-bit
 					psxMemWrite8(addr, (u8)val);
