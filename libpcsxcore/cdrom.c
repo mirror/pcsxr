@@ -256,7 +256,8 @@ void cdrInterrupt() {
 					cdr.Stat = DiskError;
 					cdr.Result[0] |= 0x11;
 					cdr.Result[0] &= ~0x02;
-				} else if (i & 0x10) {
+				}
+				else if (i & 0x10) {
 					cdr.StatP |= 0x2;
 					cdr.Result[0] |= 0x2;
 					CheckCdrom();
