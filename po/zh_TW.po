@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 18:00+0800\n"
-"PO-Revision-Date: 2010-04-10 18:03+0700\n"
+"POT-Creation-Date: 2010-04-10 20:25+0800\n"
+"PO-Revision-Date: 2010-04-10 20:26+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -128,7 +128,7 @@ msgid "Add New Cheat"
 msgstr "添加新金手指"
 
 #: ../win32/gui/CheatDlg.c:167
-#: ../data/pcsx.glade2:2609
+#: ../data/pcsx.glade2:2622
 msgid "Edit Cheat Codes"
 msgstr "編輯金手指"
 
@@ -249,7 +249,7 @@ msgid "Founded Addresses: %d"
 msgstr "找到位址: %d"
 
 #: ../win32/gui/CheatDlg.c:505
-#: ../data/pcsx.glade2:3009
+#: ../data/pcsx.glade2:3022
 msgid "Freeze"
 msgstr "固定"
 
@@ -262,7 +262,7 @@ msgstr "位址:"
 #: ../win32/gui/CheatDlg.c:598
 #: ../win32/gui/CheatDlg.c:683
 #: ../gui/Cheat.c:648
-#: ../data/pcsx.glade2:2852
+#: ../data/pcsx.glade2:2865
 msgid "Value:"
 msgstr "值:"
 
@@ -272,33 +272,33 @@ msgid "Freeze %.8X"
 msgstr "固定 %.8X"
 
 #: ../win32/gui/CheatDlg.c:596
-#: ../data/pcsx.glade2:3045
+#: ../data/pcsx.glade2:3058
 msgid "Modify"
 msgstr "更改"
 
 #: ../win32/gui/CheatDlg.c:679
 #: ../gui/Cheat.c:1130
-#: ../data/pcsx.glade2:2780
+#: ../data/pcsx.glade2:2793
 msgid "Cheat Search"
 msgstr "搜尋金手指碼"
 
 #: ../win32/gui/CheatDlg.c:681
-#: ../data/pcsx.glade2:2830
+#: ../data/pcsx.glade2:2843
 msgid "Search For:"
 msgstr "搜尋:"
 
 #: ../win32/gui/CheatDlg.c:682
-#: ../data/pcsx.glade2:2840
+#: ../data/pcsx.glade2:2853
 msgid "Data Type:"
 msgstr "數值類型:"
 
 #: ../win32/gui/CheatDlg.c:684
-#: ../data/pcsx.glade2:2864
+#: ../data/pcsx.glade2:2877
 msgid "Data Base:"
 msgstr "數值基:"
 
 #: ../win32/gui/CheatDlg.c:685
-#: ../data/pcsx.glade2:2924
+#: ../data/pcsx.glade2:2937
 msgid "To:"
 msgstr "至:"
 
@@ -2141,7 +2141,7 @@ msgstr "<b>記憶卡 1</b>"
 
 #: ../data/pcsx.glade2:2151
 #: ../data/pcsx.glade2:2201
-#: ../data/pcsx.glade2:3081
+#: ../data/pcsx.glade2:3094
 msgid "Copy"
 msgstr "複制"
 
@@ -2149,17 +2149,15 @@ msgstr "複制"
 msgid "<b>Memory Card 2</b>"
 msgstr "<b>記憶卡 2</b>"
 
-#: ../data/pcsx.glade2:2551
+#: ../data/pcsx.glade2:2552
 msgid ""
-"(C) 1999-2003  PCSX Team\n"
-"(C) 2005-2006 Ryan Schultz\n"
-"(C) 2005-2006 Andrew Burton\n"
-"(C) 2008-2009 Wei Mingzhi"
+"(C) 1999-2003 PCSX Development Team\n"
+"(C) 2005-2009 PCSX-df Team\n"
+"(C) 2009-2010 PCSX-Reloaded Team"
 msgstr ""
-"(C) 1999-2003  PCSX 開發組\n"
-"(C) 2005-2006 Ryan Schultz\n"
-"(C) 2005-2006 Andrew Burton\n"
-"(C) 2008-2009 Wei Mingzhi"
+"(C) 1999-2003 PCSX 開發組\n"
+"(C) 2005-2009 PCSX-df 開發組\n"
+"(C) 2009-2010 PCSX-Reloaded 開發組"
 
 #: ../data/pcsx.glade2:2555
 msgid "A PlayStation emulator."
@@ -2199,15 +2197,15 @@ msgstr ""
 "Public License along with this program; if not, write to\n"
 "the Free Software Foundation, Inc."
 
-#: ../data/pcsx.glade2:2587
+#: ../data/pcsx.glade2:2600
 msgid "translator-credits"
 msgstr "Wei Mingzhi <whistler@openoffice.org>"
 
-#: ../data/pcsx.glade2:2649
+#: ../data/pcsx.glade2:2662
 msgid "<b>Cheat Codes</b>"
 msgstr "<b>金手指碼</b>"
 
-#: ../data/pcsx.glade2:2815
+#: ../data/pcsx.glade2:2828
 msgid ""
 "8-bit\n"
 "16-bit\n"
@@ -2217,7 +2215,7 @@ msgstr ""
 "16 位元\n"
 "32 位元"
 
-#: ../data/pcsx.glade2:2878
+#: ../data/pcsx.glade2:2891
 msgid ""
 "Equal Value\n"
 "Not Equal Value\n"
@@ -2239,7 +2237,7 @@ msgstr ""
 "不同\n"
 "無變動"
 
-#: ../data/pcsx.glade2:2910
+#: ../data/pcsx.glade2:2923
 msgid ""
 "Decimal\n"
 "Hexadecimal"
@@ -2247,35 +2245,35 @@ msgstr ""
 "十進制\n"
 "十六進制"
 
-#: ../data/pcsx.glade2:3114
+#: ../data/pcsx.glade2:3127
 msgid "label_resultsfound"
 msgstr "label_resultsfound"
 
-#: ../data/pcsx.glade2:3149
+#: ../data/pcsx.glade2:3162
 msgid "Search"
 msgstr "搜尋"
 
-#: ../data/pcsx.glade2:3185
+#: ../data/pcsx.glade2:3198
 msgid "Restart"
 msgstr "重新開始"
 
-#: ../data/pcsx.glade2:3214
+#: ../data/pcsx.glade2:3227
 msgid "<b>Cheat Search</b>"
 msgstr "<b>金手指碼搜尋</b>"
 
-#: ../data/pcsx.glade2:3257
+#: ../data/pcsx.glade2:3270
 msgid "Memory Dump"
 msgstr "記憶體轉儲"
 
-#: ../data/pcsx.glade2:3279
+#: ../data/pcsx.glade2:3292
 msgid "Address (Hexadecimal):"
 msgstr "位址 (十六進制):"
 
-#: ../data/pcsx.glade2:3371
+#: ../data/pcsx.glade2:3384
 msgid "Dump Memory..."
 msgstr "轉儲記憶體..."
 
-#: ../data/pcsx.glade2:3406
+#: ../data/pcsx.glade2:3419
 msgid "Patch Memory..."
 msgstr "修改記憶體..."
 
@@ -3072,6 +3070,16 @@ msgstr "控制器 2"
 msgid "Multi-Threaded (Recommended)"
 msgstr "多執行緒 (建議使用)"
 
+#~ msgid ""
+#~ "(C) 1999-2003  PCSX Team\n"
+#~ "(C) 2005-2006 Ryan Schultz\n"
+#~ "(C) 2005-2006 Andrew Burton\n"
+#~ "(C) 2008-2009 Wei Mingzhi"
+#~ msgstr ""
+#~ "(C) 1999-2003  PCSX 開發組\n"
+#~ "(C) 2005-2006 Ryan Schultz\n"
+#~ "(C) 2005-2006 Andrew Burton\n"
+#~ "(C) 2008-2009 Wei Mingzhi"
 #~ msgid "PulseAudio Simple Sound"
 #~ msgstr "PulseAudio Simple 聲音"
 #~ msgid "L-Stick Y"

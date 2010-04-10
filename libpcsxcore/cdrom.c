@@ -171,19 +171,19 @@ void cdrInterrupt() {
 	cdr.Ctrl &= ~0x80;
 
 	switch (Irq) {
-    	case CdlSync:
+		case CdlSync:
 			SetResultSize(1);
 			cdr.StatP |= 0x2;
-        	cdr.Result[0] = cdr.StatP;
-        	cdr.Stat = Acknowledge; 
+			cdr.Result[0] = cdr.StatP;
+			cdr.Stat = Acknowledge; 
 			break;
 
-    	case CdlNop:
+		case CdlNop:
 			SetResultSize(1);
-        	cdr.Result[0] = cdr.StatP;
-        	cdr.Stat = Acknowledge;
+			cdr.Result[0] = cdr.StatP;
+			cdr.Stat = Acknowledge;
 			i = stat.Status;
-        	if (CDR_getStatus(&stat) != -1) {
+			if (CDR_getStatus(&stat) != -1) {
 				if (stat.Type == 0xff) cdr.Stat = DiskError;
 				if (stat.Status & 0x10) {
 					cdr.Stat = DiskError;
@@ -202,8 +202,8 @@ void cdrInterrupt() {
 			cdr.CmdProcess = 0;
 			SetResultSize(1);
 			cdr.StatP |= 0x2;
-        	cdr.Result[0] = cdr.StatP;
-        	cdr.Stat = Acknowledge;
+			cdr.Result[0] = cdr.StatP;
+			cdr.Stat = Acknowledge;
 			break;
 
 		case CdlPlay:
@@ -236,17 +236,32 @@ void cdrInterrupt() {
 			cdr.CmdProcess = 0;
 			SetResultSize(1);
 			cdr.StatP |= 0x2;
-        	cdr.Result[0] = cdr.StatP;
-        	cdr.Stat = Complete;
+			cdr.Result[0] = cdr.StatP;
+			cdr.Stat = Complete;
 			break;
 
 		case CdlStop:
 			cdr.CmdProcess = 0;
 			SetResultSize(1);
-        	cdr.StatP &= ~0x2;
+			cdr.StatP &= ~0x2;
 			cdr.Result[0] = cdr.StatP;
-        	cdr.Stat = Complete;
-//        	cdr.Stat = Acknowledge;
+			cdr.Stat = Complete;
+//			cdr.Stat = Acknowledge;
+
+			// check case open/close -shalma
+			i = stat.Status;
+			if (CDR_getStatus(&stat) != -1) {
+				if (stat.Type == 0xff) cdr.Stat = DiskError;
+				if (stat.Status & 0x10) {
+					cdr.Stat = DiskError;
+					cdr.Result[0] |= 0x11;
+					cdr.Result[0] &= ~0x02;
+				} else if (i & 0x10) {
+					cdr.StatP |= 0x2;
+					cdr.Result[0] |= 0x2;
+					CheckCdrom();
+				}
+			}
 			break;
 
 		case CdlPause:

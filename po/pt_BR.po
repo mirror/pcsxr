@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsx-df\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 18:00+0800\n"
+"POT-Creation-Date: 2010-04-10 20:25+0800\n"
 "PO-Revision-Date: 2009-11-28 23:57+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: PoBRE <romhackers@gmail.com>\n"
@@ -108,7 +108,7 @@ msgstr "Código de trapaça inválido!"
 msgid "Add New Cheat"
 msgstr "Adicionar nova Trapaça"
 
-#: ../win32/gui/CheatDlg.c:167 ../data/pcsx.glade2:2609
+#: ../win32/gui/CheatDlg.c:167 ../data/pcsx.glade2:2622
 msgid "Edit Cheat Codes"
 msgstr "Editar Códigos de Trapaça"
 
@@ -220,7 +220,7 @@ msgstr "%.8X    Atual: %u (%.8X), Anterior: %u (%.8X)"
 msgid "Founded Addresses: %d"
 msgstr "Endereços com o número: %d"
 
-#: ../win32/gui/CheatDlg.c:505 ../data/pcsx.glade2:3009
+#: ../win32/gui/CheatDlg.c:505 ../data/pcsx.glade2:3022
 msgid "Freeze"
 msgstr "Parar"
 
@@ -229,7 +229,7 @@ msgid "Address:"
 msgstr "Endereço:"
 
 #: ../win32/gui/CheatDlg.c:507 ../win32/gui/CheatDlg.c:598
-#: ../win32/gui/CheatDlg.c:683 ../gui/Cheat.c:648 ../data/pcsx.glade2:2852
+#: ../win32/gui/CheatDlg.c:683 ../gui/Cheat.c:648 ../data/pcsx.glade2:2865
 msgid "Value:"
 msgstr "Valor:"
 
@@ -238,27 +238,27 @@ msgstr "Valor:"
 msgid "Freeze %.8X"
 msgstr "Parar %.8X"
 
-#: ../win32/gui/CheatDlg.c:596 ../data/pcsx.glade2:3045
+#: ../win32/gui/CheatDlg.c:596 ../data/pcsx.glade2:3058
 msgid "Modify"
 msgstr "Modificar"
 
-#: ../win32/gui/CheatDlg.c:679 ../gui/Cheat.c:1130 ../data/pcsx.glade2:2780
+#: ../win32/gui/CheatDlg.c:679 ../gui/Cheat.c:1130 ../data/pcsx.glade2:2793
 msgid "Cheat Search"
 msgstr "Procurar por trapaça"
 
-#: ../win32/gui/CheatDlg.c:681 ../data/pcsx.glade2:2830
+#: ../win32/gui/CheatDlg.c:681 ../data/pcsx.glade2:2843
 msgid "Search For:"
 msgstr "Buscar por:"
 
-#: ../win32/gui/CheatDlg.c:682 ../data/pcsx.glade2:2840
+#: ../win32/gui/CheatDlg.c:682 ../data/pcsx.glade2:2853
 msgid "Data Type:"
 msgstr "Tipo de dados:"
 
-#: ../win32/gui/CheatDlg.c:684 ../data/pcsx.glade2:2864
+#: ../win32/gui/CheatDlg.c:684 ../data/pcsx.glade2:2877
 msgid "Data Base:"
 msgstr "Banco de dados:"
 
-#: ../win32/gui/CheatDlg.c:685 ../data/pcsx.glade2:2924
+#: ../win32/gui/CheatDlg.c:685 ../data/pcsx.glade2:2937
 msgid "To:"
 msgstr "Para:"
 
@@ -2030,7 +2030,7 @@ msgstr "Apagar/Desfazer"
 msgid "<b>Memory Card 1</b>"
 msgstr "<b>Cartão de memória 1</b>"
 
-#: ../data/pcsx.glade2:2151 ../data/pcsx.glade2:2201 ../data/pcsx.glade2:3081
+#: ../data/pcsx.glade2:2151 ../data/pcsx.glade2:2201 ../data/pcsx.glade2:3094
 msgid "Copy"
 msgstr "Copiar"
 
@@ -2038,17 +2038,12 @@ msgstr "Copiar"
 msgid "<b>Memory Card 2</b>"
 msgstr "<b>Cartão de memória 2</b>"
 
-#: ../data/pcsx.glade2:2551
+#: ../data/pcsx.glade2:2552
 msgid ""
-"(C) 1999-2003  PCSX Team\n"
-"(C) 2005-2006 Ryan Schultz\n"
-"(C) 2005-2006 Andrew Burton\n"
-"(C) 2008-2009 Wei Mingzhi"
+"(C) 1999-2003 PCSX Development Team\n"
+"(C) 2005-2009 PCSX-df Team\n"
+"(C) 2009-2010 PCSX-Reloaded Team"
 msgstr ""
-"(C) 1999-2003 Equipe do PCSX\n"
-"(C) 2005-2006 Ryan Schultz\n"
-"(C) 2005-2006 Andrew Burton\n"
-"(C) 2008-2009 Wei Mingzhi"
 
 #: ../data/pcsx.glade2:2555
 msgid "A PlayStation emulator."
@@ -2088,16 +2083,16 @@ msgstr ""
 "Public License along with this program; if not, write to\n"
 "the Free Software Foundation, Inc."
 
-#: ../data/pcsx.glade2:2587
+#: ../data/pcsx.glade2:2600
 msgid "translator-credits"
 msgstr ""
 "Tradução para português brasileiro por Tibério Vítor (tvtoon@gmail.com)"
 
-#: ../data/pcsx.glade2:2649
+#: ../data/pcsx.glade2:2662
 msgid "<b>Cheat Codes</b>"
 msgstr "<b>Códigos de trapaça</b>"
 
-#: ../data/pcsx.glade2:2815
+#: ../data/pcsx.glade2:2828
 msgid ""
 "8-bit\n"
 "16-bit\n"
@@ -2107,7 +2102,7 @@ msgstr ""
 "16-bit\n"
 "32-bit"
 
-#: ../data/pcsx.glade2:2878
+#: ../data/pcsx.glade2:2891
 msgid ""
 "Equal Value\n"
 "Not Equal Value\n"
@@ -2129,7 +2124,7 @@ msgstr ""
 "Diferente\n"
 "Sem mudanças"
 
-#: ../data/pcsx.glade2:2910
+#: ../data/pcsx.glade2:2923
 msgid ""
 "Decimal\n"
 "Hexadecimal"
@@ -2137,37 +2132,37 @@ msgstr ""
 "Decimal\n"
 "Hexadecimal"
 
-#: ../data/pcsx.glade2:3114
+#: ../data/pcsx.glade2:3127
 msgid "label_resultsfound"
 msgstr "Resultados encontrados:"
 
-#: ../data/pcsx.glade2:3149
+#: ../data/pcsx.glade2:3162
 msgid "Search"
 msgstr "Buscar"
 
-#: ../data/pcsx.glade2:3185
+#: ../data/pcsx.glade2:3198
 msgid "Restart"
 msgstr "Reiniciar"
 
-#: ../data/pcsx.glade2:3214
+#: ../data/pcsx.glade2:3227
 msgid "<b>Cheat Search</b>"
 msgstr "<b>Busca de trapaças</b>"
 
-#: ../data/pcsx.glade2:3257
+#: ../data/pcsx.glade2:3270
 msgid "Memory Dump"
 msgstr ""
 
-#: ../data/pcsx.glade2:3279
+#: ../data/pcsx.glade2:3292
 #, fuzzy
 msgid "Address (Hexadecimal):"
 msgstr "Hexadecimal"
 
-#: ../data/pcsx.glade2:3371
+#: ../data/pcsx.glade2:3384
 #, fuzzy
 msgid "Dump Memory..."
 msgstr "&Cartões de memória..."
 
-#: ../data/pcsx.glade2:3406
+#: ../data/pcsx.glade2:3419
 msgid "Patch Memory..."
 msgstr ""
 
@@ -2923,3 +2918,14 @@ msgstr "Controle 2"
 #: ../plugins/dfinput/dfinput.glade2:427
 msgid "Multi-Threaded (Recommended)"
 msgstr ""
+
+#~ msgid ""
+#~ "(C) 1999-2003  PCSX Team\n"
+#~ "(C) 2005-2006 Ryan Schultz\n"
+#~ "(C) 2005-2006 Andrew Burton\n"
+#~ "(C) 2008-2009 Wei Mingzhi"
+#~ msgstr ""
+#~ "(C) 1999-2003 Equipe do PCSX\n"
+#~ "(C) 2005-2006 Ryan Schultz\n"
+#~ "(C) 2005-2006 Andrew Burton\n"
+#~ "(C) 2008-2009 Wei Mingzhi"

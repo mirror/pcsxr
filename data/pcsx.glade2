@@ -2548,8 +2548,8 @@ PAL</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">normal</property>
     <property name="program_name">PCSX-Reloaded</property>
-    <property name="version">1.9.91</property>
-    <property name="copyright" translatable="yes">(C) 1999-2003 PCSX Team
+    <property name="version">1.9.91+</property>
+    <property name="copyright" translatable="yes">(C) 1999-2003 PCSX Development Team
 (C) 2005-2009 PCSX-df Team
 (C) 2009-2010 PCSX-Reloaded Team</property>
     <property name="comments" translatable="yes">A PlayStation emulator.</property>
@@ -2571,7 +2571,7 @@ You should have received a copy of the GNU General
 Public License along with this program; if not, write to
 the Free Software Foundation, Inc.</property>
     <property name="authors">PCSX-Reloaded Maintainer:
-Wei Mingzhi &lt;whistler_wmz@users.sourceforge.net&gt;
+Wei Mingzhi &lt;whistler_wmz@users.sf.net&gt;
 
 PCSX-Reloaded Contributors:
 avlex (Help on xcode project)
