@@ -158,7 +158,7 @@ static void MemView_Dump() {
 				} else {
 					SysMessage(_("Error writing to %s!"), file);
 				}
-				
+
 				g_free(file);
 			}
 
