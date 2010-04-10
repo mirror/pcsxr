@@ -108,8 +108,8 @@ static void OnCheatListDlg_AddClicked(GtkWidget *widget, gpointer user_data) {
 	GtkWidget *box, *scroll, *label, *descr_edit, *code_edit;
 
 	dlg = gtk_dialog_new_with_buttons(_("Add New Cheat"), GTK_WINDOW(CheatListDlg),
-		GTK_DIALOG_MODAL, GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
-		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
+		GTK_DIALOG_MODAL, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
 
 	gtk_window_set_default_size(GTK_WINDOW(dlg), 350, 350);
 
@@ -193,8 +193,8 @@ static void OnCheatListDlg_EditClicked(GtkWidget *widget, gpointer user_data) {
 	gtk_tree_path_free(path);
 
 	dlg = gtk_dialog_new_with_buttons(_("Edit Cheat"), GTK_WINDOW(CheatListDlg),
-		GTK_DIALOG_MODAL, GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
-		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
+		GTK_DIALOG_MODAL, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
 
 	gtk_window_set_default_size(GTK_WINDOW(dlg), 350, 350);
 

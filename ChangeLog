@@ -5,9 +5,10 @@ April 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * gui/DebugMemory.c: Implemented memory viewer/dumper.
  * gui/DebugMemory.h: Likewise.
  * gui/Makefile.am: Added DebugMemory.c.
+ * gui/Cheat.c: Changed the order of OK/Cancel buttons for consistency with
+   GNOME UI standards.
  * libpcsxcore/psxmem.c: Minor cleanup (thanks Sebun).
  * libpcsxcore/spu.c: Likewise.
- * gui/Cheat.c: Likewise.
  * libpcsxcore/cdrom.c: Check case open/close in CdlStop (courtesy of shalma).
  * po/zh_CN.po, po/zh_TW.po, po/it.po, po/pt_BR.po, po/pcsx.pot: Updated.
 
