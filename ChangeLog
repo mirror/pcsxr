@@ -1,3 +1,7 @@
+April 11, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/cdriso.c: Check the CRC value of subchannel after reading.
+
 April 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * data/pcsx.glade2: Added "Memory Dump" to menu item. Added Memory Viewer
