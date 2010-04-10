@@ -37,6 +37,7 @@
 
 #include "MemcardDlg.h"
 #include "ConfDlg.h"
+#include "DebugMemory.h"
 
 // Functions Callbacks
 void OnFile_RunCd();
@@ -98,6 +99,8 @@ void ResetMenuSlots(GladeXML *xml) {
 		widget = glade_xml_get_widget(xml, "search1");
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget(xml, "SwitchImage");
+		gtk_widget_set_sensitive(widget, FALSE);
+		widget = glade_xml_get_widget(xml, "memorydump1");
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget(xml, "toolbutton_run");
 		gtk_widget_set_sensitive(widget, FALSE);
@@ -322,6 +325,9 @@ void StartGui() {
 	widget = glade_xml_get_widget(xml, "net1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(OnConf_Net), NULL, NULL, G_CONNECT_AFTER);
+	widget = glade_xml_get_widget(xml, "memorydump1");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(RunDebugMemoryDialog), NULL, NULL, G_CONNECT_AFTER);
 
 	// Cheat menu
 	widget = glade_xml_get_widget(xml, "browse1");

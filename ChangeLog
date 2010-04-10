@@ -1,3 +1,15 @@
+April 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * data/pcsx.glade2: Added "Memory Dump" to menu item.
+ * gui/Gtk2Gui.c: Likewise.
+ * gui/DebugMemory.c: Implemented memory viewer/dumper.
+ * gui/DebugMemory.h: Likewise.
+ * gui/Makefile.am: Added DebugMemory.c.
+ * libpcsxcore/psxmem.c: Minor cleanup (thanks Sebun).
+ * libpcsxcore/spu.c: Likewise.
+ * gui/Cheat.c: Likewise.
+ * po/zh_CN.po, po/zh_TW.po, po/it.po, po/pt_BR.po, po/pcsx.pot: Updated.
+
 March 21, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/mdec.c: Minor cleanup.

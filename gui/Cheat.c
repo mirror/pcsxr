@@ -402,26 +402,26 @@ void RunCheatListDialog() {
 	widget = glade_xml_get_widget(xml, "GtkCList_Cheat");
 
 	// column for enable
-	renderer = gtk_cell_renderer_toggle_new ();
-	column = gtk_tree_view_column_new_with_attributes (_("Enable"),
-			renderer, "active", 0, NULL);
-	gtk_tree_view_append_column (GTK_TREE_VIEW(widget), column);
+	renderer = gtk_cell_renderer_toggle_new();
+	column = gtk_tree_view_column_new_with_attributes(_("Enable"),
+		renderer, "active", 0, NULL);
+	gtk_tree_view_append_column(GTK_TREE_VIEW(widget), column);
 
-	g_signal_connect (G_OBJECT(renderer), "toggled", G_CALLBACK(OnCheatListDlg_EnableToggled), 0);
+	g_signal_connect(G_OBJECT(renderer), "toggled", G_CALLBACK(OnCheatListDlg_EnableToggled), 0);
 
 	// column for description
-	renderer = gtk_cell_renderer_text_new ();
-	column = gtk_tree_view_column_new_with_attributes (_("Description"),
-			renderer, "text", 1, NULL);
-	gtk_tree_view_append_column (GTK_TREE_VIEW(widget), column);
+	renderer = gtk_cell_renderer_text_new();
+	column = gtk_tree_view_column_new_with_attributes(_("Description"),
+		renderer, "text", 1, NULL);
+	gtk_tree_view_append_column(GTK_TREE_VIEW(widget), column);
 
 	LoadCheatListItems(-1);
 
-	treesel = gtk_tree_view_get_selection (GTK_TREE_VIEW(widget));
-	gtk_tree_selection_set_mode (treesel, GTK_SELECTION_SINGLE);
-	g_signal_connect_data (G_OBJECT (treesel), "changed",
-						   G_CALLBACK (CheatList_TreeSelectionChanged),
-						   NULL, NULL, G_CONNECT_AFTER);
+	treesel = gtk_tree_view_get_selection(GTK_TREE_VIEW(widget));
+	gtk_tree_selection_set_mode(treesel, GTK_SELECTION_SINGLE);
+	g_signal_connect_data(G_OBJECT (treesel), "changed",
+						  G_CALLBACK (CheatList_TreeSelectionChanged),
+						  NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "addbutton1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",

@@ -15,7 +15,8 @@ pcsx_SOURCES = \
 	Gtk2Gui.c	\
 	MemcardDlg.c	\
 	ConfDlg.c	\
-	Cheat.c
+	Cheat.c		\
+	DebugMemory.c
 
 pcsx_LDADD = \
 	$(GTK2_LIBS) $(GLADE2_LIBS) -lpthread -lz -lm -lXext -lXtst \
