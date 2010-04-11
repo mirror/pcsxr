@@ -62,7 +62,7 @@ static void UpdateMemViewDlg() {
 		sprintf(bufaddr, "%.8X", start);
 
 		for (i = 0; i < 16; i++) {
-			buftext[i] = PSXMs8(start + i);
+			buftext[i] = psxMs8(start + i);
 			sprintf(bufdata[i], "%.2X", (u8)buftext[i]);
 			if ((s8)buftext[i] < 32) buftext[i] = '.';
 		}
@@ -98,6 +98,7 @@ static void MemView_Go() {
 static void MemView_Dump() {
 	GtkWidget *dlg;
 	GtkWidget *box, *table, *label, *start_edit, *length_edit;
+	char buf[10];
 
 	dlg = gtk_dialog_new_with_buttons(_("Memory Dump"), GTK_WINDOW(MemViewDlg),
 		GTK_DIALOG_MODAL, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -111,7 +112,9 @@ static void MemView_Dump() {
 	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 0, 1, 0, 0, 5, 5);
 	gtk_widget_show(label);
 
-	start_edit = gtk_entry_new();
+	start_edit = gtk_entry_new_with_max_length(8);
+	sprintf(buf, "%.8X", MemViewAddress);
+	gtk_entry_set_text(GTK_ENTRY(start_edit), buf);
 	gtk_table_attach(GTK_TABLE(table), start_edit, 1, 2, 0, 1, 0, 0, 5, 5);
 	gtk_widget_show(start_edit);
 
@@ -153,7 +156,7 @@ static void MemView_Dump() {
 				FILE *fp = fopen(file, "wb");
 
 				if (fp != NULL) {
-					fwrite(PSXM(start), 1, length, fp);
+					fwrite(&psxM[start], 1, length, fp);
 					fclose(fp);
 				} else {
 					SysMessage(_("Error writing to %s!"), file);
@@ -171,7 +174,8 @@ static void MemView_Dump() {
 
 static void MemView_Patch() {
 	GtkWidget *dlg;
-	GtkWidget *box, *table, *label, *addr_edit, *val_edit, *type_combo;
+	GtkWidget *box, *table, *label, *addr_edit, *val_edit;
+	char buf[10];
 
 	dlg = gtk_dialog_new_with_buttons(_("Memory Patch"), GTK_WINDOW(MemViewDlg),
 		GTK_DIALOG_MODAL, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -179,35 +183,25 @@ static void MemView_Patch() {
 
 	box = GTK_WIDGET(GTK_DIALOG(dlg)->vbox);
 
-	table = gtk_table_new(2, 3, FALSE);
+	table = gtk_table_new(2, 2, FALSE);
 
 	label = gtk_label_new(_("Address (Hexadecimal):"));
 	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 0, 1, 0, 0, 5, 5);
 	gtk_widget_show(label);
 
-	addr_edit = gtk_entry_new();
+	addr_edit = gtk_entry_new_with_max_length(8);
+	sprintf(buf, "%.8X", MemViewAddress);
+	gtk_entry_set_text(GTK_ENTRY(addr_edit), buf);
 	gtk_table_attach(GTK_TABLE(table), addr_edit, 1, 2, 0, 1, 0, 0, 5, 5);
 	gtk_widget_show(addr_edit);
 
-	label = gtk_label_new(_("Value (Hexadecimal):"));
+	label = gtk_label_new(_("Value (Hexa string):"));
 	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 1, 2, 0, 0, 5, 5);
 	gtk_widget_show(label);
 
 	val_edit = gtk_entry_new();
 	gtk_table_attach(GTK_TABLE(table), val_edit, 1, 2, 1, 2, 0, 0, 5, 5);
 	gtk_widget_show(val_edit);
-
-	label = gtk_label_new(_("Data Type:"));
-	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 2, 3, 0, 0, 5, 5);
-	gtk_widget_show(label);
-
-	type_combo = gtk_combo_box_new_text();
-	gtk_combo_box_append_text(GTK_COMBO_BOX(type_combo), _("8-bit"));
-	gtk_combo_box_append_text(GTK_COMBO_BOX(type_combo), _("16-bit"));
-	gtk_combo_box_append_text(GTK_COMBO_BOX(type_combo), _("32-bit"));
-	gtk_combo_box_set_active(GTK_COMBO_BOX(type_combo), 0);
-	gtk_table_attach(GTK_TABLE(table), type_combo, 1, 2, 2, 3, 0, 0, 5, 5);
-	gtk_widget_show(type_combo);
 
 	gtk_box_pack_start(GTK_BOX(box), table, FALSE, FALSE, 5);
 
@@ -216,26 +210,29 @@ static void MemView_Patch() {
 
 	if (gtk_dialog_run(GTK_DIALOG(dlg)) == GTK_RESPONSE_ACCEPT) {
 		u32 addr = 0xffffffff, val = 0;
+		const char *p = gtk_entry_get_text(GTK_ENTRY(val_edit));
+		int r = strlen(p);
+
 		sscanf(gtk_entry_get_text(GTK_ENTRY(addr_edit)), "%x", &addr);
-		if (addr != 0xffffffff) {
+
+		if (r > 0 && addr != 0xffffffff) {
 			addr &= 0x1fffff;
-			sscanf(gtk_entry_get_text(GTK_ENTRY(val_edit)), "%x", &val);
+			MemViewAddress = addr;
 
-			switch (gtk_combo_box_get_active(GTK_COMBO_BOX(type_combo))) {
-				case 0: // 8-bit
-					psxMemWrite8(addr, (u8)val);
-					break;
+			while (r > 0 && addr <= 0x1fffff) {
+				sscanf(p, "%2x", &val);
+				p += 2;
+				r -= 2;
 
-				case 1: // 16-bit
-					psxMemWrite16(addr, (u16)val);
-					break;
+				while (r > 0 && (*p == '\t' || *p == ' ')) {
+					p++;
+					r--;
+				}
 
-				case 2: // 32-bit
-					psxMemWrite32(addr, (u32)val);
-					break;
+				psxMemWrite8(addr, (u8)val);
+				addr++;
 			}
 
-			MemViewAddress = addr;
 			UpdateMemViewDlg();
 		}
 	}

@@ -1,6 +1,9 @@
 April 11, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/cdriso.c: Check the CRC value of subchannel after reading.
+ * gui/DebugMemory.c: Allow using a hexa string instead of one value for
+   Memory Patch.
+ * po/zh_CN.po, po/zh_TW.po, po/it.po, po/pt_BR.po, po/pcsx.pot: Updated.
 
 April 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

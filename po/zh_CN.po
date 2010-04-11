@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 22:46+0800\n"
-"PO-Revision-Date: 2010-04-10 22:46+0700\n"
+"POT-Creation-Date: 2010-04-11 20:17+0800\n"
+"PO-Revision-Date: 2010-04-11 20:18+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -288,7 +288,6 @@ msgid "Search For:"
 msgstr "查找:"
 
 #: ../win32/gui/CheatDlg.c:682
-#: ../gui/DebugMemory.c:200
 #: ../data/pcsx.glade2:2853
 msgid "Data Type:"
 msgstr "数据类型:"
@@ -328,17 +327,14 @@ msgid "C&lose"
 msgstr "关闭(&L)"
 
 #: ../win32/gui/CheatDlg.c:693
-#: ../gui/DebugMemory.c:205
 msgid "8-bit"
 msgstr "8 位"
 
 #: ../win32/gui/CheatDlg.c:694
-#: ../gui/DebugMemory.c:206
 msgid "16-bit"
 msgstr "16 位"
 
 #: ../win32/gui/CheatDlg.c:695
-#: ../gui/DebugMemory.c:207
 msgid "32-bit"
 msgstr "32 位"
 
@@ -1096,7 +1092,7 @@ msgstr "所有文件 (*.*)"
 #: ../gui/Cheat.c:1125
 #: ../gui/ConfDlg.c:104
 #: ../gui/ConfDlg.c:200
-#: ../gui/DebugMemory.c:262
+#: ../gui/DebugMemory.c:256
 msgid "Error: Glade interface could not be loaded!"
 msgstr "错误：无法加载 Glade 界面!"
 
@@ -1179,28 +1175,28 @@ msgstr "转储至文件"
 msgid "Error writing to %s!"
 msgstr "写入到 %s 时出错!"
 
-#: ../gui/DebugMemory.c:176
+#: ../gui/DebugMemory.c:177
 msgid "Memory Patch"
 msgstr "内存修改"
 
-#: ../gui/DebugMemory.c:184
+#: ../gui/DebugMemory.c:185
 #: ../data/pcsx.glade2:3292
 msgid "Address (Hexadecimal):"
 msgstr "地址 (十六进制):"
 
-#: ../gui/DebugMemory.c:192
-msgid "Value (Hexadecimal):"
-msgstr "数值 (十六进制):"
+#: ../gui/DebugMemory.c:195
+msgid "Value (Hexa string):"
+msgstr "数值 (十六进制串):"
 
-#: ../gui/DebugMemory.c:267
+#: ../gui/DebugMemory.c:261
 msgid "Memory Viewer"
 msgstr "内存查看器"
 
-#: ../gui/DebugMemory.c:272
+#: ../gui/DebugMemory.c:266
 msgid "Address"
 msgstr "地址"
 
-#: ../gui/DebugMemory.c:290
+#: ../gui/DebugMemory.c:284
 msgid "Text"
 msgstr "文本"
 
@@ -3100,37 +3096,3 @@ msgstr "控制器 2"
 #: ../plugins/dfinput/dfinput.glade2:427
 msgid "Multi-Threaded (Recommended)"
 msgstr "多线程 (推荐)"
-
-#~ msgid "Dump Memory..."
-#~ msgstr "转储内存..."
-#~ msgid ""
-#~ "(C) 1999-2003  PCSX Team\n"
-#~ "(C) 2005-2006 Ryan Schultz\n"
-#~ "(C) 2005-2006 Andrew Burton\n"
-#~ "(C) 2008-2009 Wei Mingzhi"
-#~ msgstr ""
-#~ "(C) 1999-2003  PCSX 开发组\n"
-#~ "(C) 2005-2006 Ryan Schultz\n"
-#~ "(C) 2005-2006 Andrew Burton\n"
-#~ "(C) 2008-2009 Wei Mingzhi"
-#~ msgid "PulseAudio Simple Sound"
-#~ msgstr "PulseAudio Simple 声音"
-#~ msgid "L-Stick Y"
-#~ msgstr "左摇杆 Y"
-#~ msgid "R-Stick Y"
-#~ msgstr "右摇杆 Y"
-#~ msgid "Joystick: Axis %d%s"
-#~ msgstr "手柄: 轴 %d%s"
-#~ msgid " (Reversed)"
-#~ msgstr " (反向)"
-#~ msgid "Device not set"
-#~ msgstr "设备未设置"
-#~ msgid "Please select a valid Joystick Device"
-#~ msgstr "请选择一个合法的手柄设备"
-#~ msgid "Device open error"
-#~ msgstr "设备打开错误"
-#~ msgid "Unable to open Joystick Device"
-#~ msgstr "无法打开手柄设备"
-#~ msgid "Gamepad/Keyboard Input (ePSXe)"
-#~ msgstr "手柄/键盘输入 (ePSXe)"
-

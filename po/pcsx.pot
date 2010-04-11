@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 22:46+0800\n"
+"POT-Creation-Date: 2010-04-11 20:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -237,8 +237,7 @@ msgstr ""
 msgid "Search For:"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:682 ../gui/DebugMemory.c:200
-#: ../data/pcsx.glade2:2853
+#: ../win32/gui/CheatDlg.c:682 ../data/pcsx.glade2:2853
 msgid "Data Type:"
 msgstr ""
 
@@ -274,15 +273,15 @@ msgstr ""
 msgid "C&lose"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:693 ../gui/DebugMemory.c:205
+#: ../win32/gui/CheatDlg.c:693
 msgid "8-bit"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:694 ../gui/DebugMemory.c:206
+#: ../win32/gui/CheatDlg.c:694
 msgid "16-bit"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:695 ../gui/DebugMemory.c:207
+#: ../win32/gui/CheatDlg.c:695
 msgid "32-bit"
 msgstr ""
 
@@ -985,7 +984,7 @@ msgid "All Files (*.*)"
 msgstr ""
 
 #: ../gui/Cheat.c:395 ../gui/Cheat.c:1125 ../gui/ConfDlg.c:104
-#: ../gui/ConfDlg.c:200 ../gui/DebugMemory.c:262
+#: ../gui/ConfDlg.c:200 ../gui/DebugMemory.c:256
 msgid "Error: Glade interface could not be loaded!"
 msgstr ""
 
@@ -1058,27 +1057,27 @@ msgstr ""
 msgid "Error writing to %s!"
 msgstr ""
 
-#: ../gui/DebugMemory.c:176
+#: ../gui/DebugMemory.c:177
 msgid "Memory Patch"
 msgstr ""
 
-#: ../gui/DebugMemory.c:184 ../data/pcsx.glade2:3292
+#: ../gui/DebugMemory.c:185 ../data/pcsx.glade2:3292
 msgid "Address (Hexadecimal):"
 msgstr ""
 
-#: ../gui/DebugMemory.c:192
-msgid "Value (Hexadecimal):"
+#: ../gui/DebugMemory.c:195
+msgid "Value (Hexa string):"
 msgstr ""
 
-#: ../gui/DebugMemory.c:267
+#: ../gui/DebugMemory.c:261
 msgid "Memory Viewer"
 msgstr ""
 
-#: ../gui/DebugMemory.c:272
+#: ../gui/DebugMemory.c:266
 msgid "Address"
 msgstr ""
 
-#: ../gui/DebugMemory.c:290
+#: ../gui/DebugMemory.c:284
 msgid "Text"
 msgstr ""
 

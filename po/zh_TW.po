@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 22:46+0800\n"
-"PO-Revision-Date: 2010-04-10 22:46+0700\n"
+"POT-Creation-Date: 2010-04-11 20:17+0800\n"
+"PO-Revision-Date: 2010-04-11 20:18+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -288,7 +288,6 @@ msgid "Search For:"
 msgstr "搜尋:"
 
 #: ../win32/gui/CheatDlg.c:682
-#: ../gui/DebugMemory.c:200
 #: ../data/pcsx.glade2:2853
 msgid "Data Type:"
 msgstr "數值類型:"
@@ -328,17 +327,14 @@ msgid "C&lose"
 msgstr "關閉(&L)"
 
 #: ../win32/gui/CheatDlg.c:693
-#: ../gui/DebugMemory.c:205
 msgid "8-bit"
 msgstr "8 位元"
 
 #: ../win32/gui/CheatDlg.c:694
-#: ../gui/DebugMemory.c:206
 msgid "16-bit"
 msgstr "16 位元"
 
 #: ../win32/gui/CheatDlg.c:695
-#: ../gui/DebugMemory.c:207
 msgid "32-bit"
 msgstr "32 位元"
 
@@ -1096,7 +1092,7 @@ msgstr "所有檔案 (*.*)"
 #: ../gui/Cheat.c:1125
 #: ../gui/ConfDlg.c:104
 #: ../gui/ConfDlg.c:200
-#: ../gui/DebugMemory.c:262
+#: ../gui/DebugMemory.c:256
 msgid "Error: Glade interface could not be loaded!"
 msgstr "錯誤：無法加載 Glade 界面!"
 
@@ -1179,28 +1175,28 @@ msgstr "轉儲至檔案"
 msgid "Error writing to %s!"
 msgstr "存儲至 %s 時出錯!"
 
-#: ../gui/DebugMemory.c:176
+#: ../gui/DebugMemory.c:177
 msgid "Memory Patch"
 msgstr "記憶體修改"
 
-#: ../gui/DebugMemory.c:184
+#: ../gui/DebugMemory.c:185
 #: ../data/pcsx.glade2:3292
 msgid "Address (Hexadecimal):"
 msgstr "位址 (十六進制):"
 
-#: ../gui/DebugMemory.c:192
-msgid "Value (Hexadecimal):"
-msgstr "數值 (十六進制):"
+#: ../gui/DebugMemory.c:195
+msgid "Value (Hexa string):"
+msgstr "數值 (十六進制串):"
 
-#: ../gui/DebugMemory.c:267
+#: ../gui/DebugMemory.c:261
 msgid "Memory Viewer"
 msgstr "記憶體檢視"
 
-#: ../gui/DebugMemory.c:272
+#: ../gui/DebugMemory.c:266
 msgid "Address"
 msgstr "位址"
 
-#: ../gui/DebugMemory.c:290
+#: ../gui/DebugMemory.c:284
 msgid "Text"
 msgstr "文字"
 
@@ -3100,37 +3096,3 @@ msgstr "控制器 2"
 #: ../plugins/dfinput/dfinput.glade2:427
 msgid "Multi-Threaded (Recommended)"
 msgstr "多執行緒 (建議使用)"
-
-#~ msgid "Dump Memory..."
-#~ msgstr "轉儲記憶體..."
-#~ msgid ""
-#~ "(C) 1999-2003  PCSX Team\n"
-#~ "(C) 2005-2006 Ryan Schultz\n"
-#~ "(C) 2005-2006 Andrew Burton\n"
-#~ "(C) 2008-2009 Wei Mingzhi"
-#~ msgstr ""
-#~ "(C) 1999-2003  PCSX 開發組\n"
-#~ "(C) 2005-2006 Ryan Schultz\n"
-#~ "(C) 2005-2006 Andrew Burton\n"
-#~ "(C) 2008-2009 Wei Mingzhi"
-#~ msgid "PulseAudio Simple Sound"
-#~ msgstr "PulseAudio Simple 聲音"
-#~ msgid "L-Stick Y"
-#~ msgstr "左搖桿 Y"
-#~ msgid "R-Stick Y"
-#~ msgstr "右搖桿 Y"
-#~ msgid "Joystick: Axis %d%s"
-#~ msgstr "手把: 軸 %d%s"
-#~ msgid " (Reversed)"
-#~ msgstr " (反向)"
-#~ msgid "Device not set"
-#~ msgstr "裝置未設定"
-#~ msgid "Please select a valid Joystick Device"
-#~ msgstr "請選擇一個合法的手把裝置"
-#~ msgid "Device open error"
-#~ msgstr "裝置開啟錯誤"
-#~ msgid "Unable to open Joystick Device"
-#~ msgstr "無法開啟手把裝置"
-#~ msgid "Gamepad/Keyboard Input (ePSXe)"
-#~ msgstr "手把/鍵盤輸入 (ePSXe)"
-

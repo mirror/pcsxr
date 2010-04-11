@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsx-df\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 22:46+0800\n"
+"POT-Creation-Date: 2010-04-11 20:17+0800\n"
 "PO-Revision-Date: 2009-11-28 23:57+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: PoBRE <romhackers@gmail.com>\n"
@@ -250,8 +250,7 @@ msgstr "Procurar por trapaça"
 msgid "Search For:"
 msgstr "Buscar por:"
 
-#: ../win32/gui/CheatDlg.c:682 ../gui/DebugMemory.c:200
-#: ../data/pcsx.glade2:2853
+#: ../win32/gui/CheatDlg.c:682 ../data/pcsx.glade2:2853
 msgid "Data Type:"
 msgstr "Tipo de dados:"
 
@@ -287,15 +286,15 @@ msgstr "&Nova busca"
 msgid "C&lose"
 msgstr "Fe&char"
 
-#: ../win32/gui/CheatDlg.c:693 ../gui/DebugMemory.c:205
+#: ../win32/gui/CheatDlg.c:693
 msgid "8-bit"
 msgstr "8-bit"
 
-#: ../win32/gui/CheatDlg.c:694 ../gui/DebugMemory.c:206
+#: ../win32/gui/CheatDlg.c:694
 msgid "16-bit"
 msgstr "16-bit"
 
-#: ../win32/gui/CheatDlg.c:695 ../gui/DebugMemory.c:207
+#: ../win32/gui/CheatDlg.c:695
 msgid "32-bit"
 msgstr "32-bit"
 
@@ -1001,7 +1000,7 @@ msgid "All Files (*.*)"
 msgstr "Todos os arquivos (*.*)"
 
 #: ../gui/Cheat.c:395 ../gui/Cheat.c:1125 ../gui/ConfDlg.c:104
-#: ../gui/ConfDlg.c:200 ../gui/DebugMemory.c:262
+#: ../gui/ConfDlg.c:200 ../gui/DebugMemory.c:256
 msgid "Error: Glade interface could not be loaded!"
 msgstr "Erro: o ambiente Glade não pôde ser carregado!"
 
@@ -1075,32 +1074,32 @@ msgstr ""
 msgid "Error writing to %s!"
 msgstr "Erro ao salvar o arquivo de estado \"%s\"!"
 
-#: ../gui/DebugMemory.c:176
+#: ../gui/DebugMemory.c:177
 #, fuzzy
 msgid "Memory Patch"
 msgstr "Cartão de memória 1"
 
-#: ../gui/DebugMemory.c:184 ../data/pcsx.glade2:3292
+#: ../gui/DebugMemory.c:185 ../data/pcsx.glade2:3292
 #, fuzzy
 msgid "Address (Hexadecimal):"
 msgstr "Hexadecimal"
 
-#: ../gui/DebugMemory.c:192
+#: ../gui/DebugMemory.c:195
 #, fuzzy
-msgid "Value (Hexadecimal):"
+msgid "Value (Hexa string):"
 msgstr "Hexadecimal"
 
-#: ../gui/DebugMemory.c:267
+#: ../gui/DebugMemory.c:261
 #, fuzzy
 msgid "Memory Viewer"
 msgstr "Cartão de memória 1"
 
-#: ../gui/DebugMemory.c:272
+#: ../gui/DebugMemory.c:266
 #, fuzzy
 msgid "Address"
 msgstr "Endereço:"
 
-#: ../gui/DebugMemory.c:290
+#: ../gui/DebugMemory.c:284
 #, fuzzy
 msgid "Text"
 msgstr "Texturas"
