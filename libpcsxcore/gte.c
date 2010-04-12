@@ -27,6 +27,159 @@
 #pragma warning(disable : 4761)
 #endif
 
+#if defined(__BIGENDIAN__)
+#define SEL16(n) ((n) ^ 1)
+#define SEL8(n) ((n) ^ 3)
+#else
+#define SEL16(n) (n)
+#define SEL8(n) (n)
+#endif
+
+#define VX(n) (n < 3 ? psxRegs.CP2D.p[n << 1].sw.l : psxRegs.CP2D.p[9].sw.l)
+#define VY(n) (n < 3 ? psxRegs.CP2D.p[n << 1].sw.h : psxRegs.CP2D.p[10].sw.l)
+#define VZ(n) (n < 3 ? psxRegs.CP2D.p[(n << 1) + 1].sw.l : psxRegs.CP2D.p[11].sw.l)
+#define MX11(n) (n < 3 ? psxRegs.CP2C.p[(n << 3)].sw.l : 0)
+#define MX12(n) (n < 3 ? psxRegs.CP2C.p[(n << 3)].sw.h : 0)
+#define MX13(n) (n < 3 ? psxRegs.CP2C.p[(n << 3) + 1].sw.l : 0)
+#define MX21(n) (n < 3 ? psxRegs.CP2C.p[(n << 3) + 1].sw.h : 0)
+#define MX22(n) (n < 3 ? psxRegs.CP2C.p[(n << 3) + 2].sw.l : 0)
+#define MX23(n) (n < 3 ? psxRegs.CP2C.p[(n << 3) + 2].sw.h : 0)
+#define MX31(n) (n < 3 ? psxRegs.CP2C.p[(n << 3) + 3].sw.l : 0)
+#define MX32(n) (n < 3 ? psxRegs.CP2C.p[(n << 3) + 3].sw.h : 0)
+#define MX33(n) (n < 3 ? psxRegs.CP2C.p[(n << 3) + 4].sw.l : 0)
+#define CV1(n) (n < 3 ? (s32)psxRegs.CP2C.r[(n << 3) + 5] : 0)
+#define CV2(n) (n < 3 ? (s32)psxRegs.CP2C.r[(n << 3) + 6] : 0)
+#define CV3(n) (n < 3 ? (s32)psxRegs.CP2C.r[(n << 3) + 7] : 0)
+
+#define fSX(n) ((psxRegs.CP2D.p)[((n) + 12)].sw.l)
+#define fSY(n) ((psxRegs.CP2D.p)[((n) + 12)].sw.h)
+#define fSZ(n) ((psxRegs.CP2D.p)[((n) + 17)].w.l) /* (n == 0) => SZ1; */
+
+#define gteVX0     ((s16*)psxRegs.CP2D.r)[SEL16(0)]
+#define gteVY0     ((s16*)psxRegs.CP2D.r)[SEL16(1)]
+#define gteVZ0     ((s16*)psxRegs.CP2D.r)[SEL16(2)]
+#define gteVX1     ((s16*)psxRegs.CP2D.r)[SEL16(4)]
+#define gteVY1     ((s16*)psxRegs.CP2D.r)[SEL16(5)]
+#define gteVZ1     ((s16*)psxRegs.CP2D.r)[SEL16(6)]
+#define gteVX2     ((s16*)psxRegs.CP2D.r)[SEL16(8)]
+#define gteVY2     ((s16*)psxRegs.CP2D.r)[SEL16(9)]
+#define gteVZ2     ((s16*)psxRegs.CP2D.r)[SEL16(10)]
+#define gteRGB     psxRegs.CP2D.r[6]
+#define gteOTZ     ((s16*)psxRegs.CP2D.r)[SEL16(7*2)]
+#define gteIR0     ((s32*)psxRegs.CP2D.r)[8]
+#define gteIR1     ((s32*)psxRegs.CP2D.r)[9]
+#define gteIR2     ((s32*)psxRegs.CP2D.r)[10]
+#define gteIR3     ((s32*)psxRegs.CP2D.r)[11]
+#define gteSXY0    ((s32*)psxRegs.CP2D.r)[12]
+#define gteSXY1    ((s32*)psxRegs.CP2D.r)[13]
+#define gteSXY2    ((s32*)psxRegs.CP2D.r)[14]
+#define gteSXYP    ((s32*)psxRegs.CP2D.r)[15]
+#define gteSX0     ((s16*)psxRegs.CP2D.r)[SEL16(12*2)]
+#define gteSY0     ((s16*)psxRegs.CP2D.r)[SEL16(12*2+1)]
+#define gteSX1     ((s16*)psxRegs.CP2D.r)[SEL16(13*2)]
+#define gteSY1     ((s16*)psxRegs.CP2D.r)[SEL16(13*2+1)]
+#define gteSX2     ((s16*)psxRegs.CP2D.r)[SEL16(14*2)]
+#define gteSY2     ((s16*)psxRegs.CP2D.r)[SEL16(14*2+1)]
+#define gteSXP     ((s16*)psxRegs.CP2D.r)[SEL16(15*2)]
+#define gteSYP     ((s16*)psxRegs.CP2D.r)[SEL16(15*2+1)]
+#define gteSZ0     ((u16*)psxRegs.CP2D.r)[SEL16(16*2)]
+#define gteSZ1     ((u16*)psxRegs.CP2D.r)[SEL16(17*2)]
+#define gteSZ2     ((u16*)psxRegs.CP2D.r)[SEL16(18*2)]
+#define gteSZ3     ((u16*)psxRegs.CP2D.r)[SEL16(19*2)]
+#define gteRGB0    psxRegs.CP2D.r[20]
+#define gteRGB1    psxRegs.CP2D.r[21]
+#define gteRGB2    psxRegs.CP2D.r[22]
+#define gteMAC0    psxRegs.CP2D.r[24]
+#define gteMAC1    ((s32*)psxRegs.CP2D.r)[25]
+#define gteMAC2    ((s32*)psxRegs.CP2D.r)[26]
+#define gteMAC3    ((s32*)psxRegs.CP2D.r)[27]
+#define gteIRGB    psxRegs.CP2D.r[28]
+#define gteORGB    psxRegs.CP2D.r[29]
+#define gteLZCS    psxRegs.CP2D.r[30]
+#define gteLZCR    psxRegs.CP2D.r[31]
+
+#define gteR       ((u8 *)psxRegs.CP2D.r)[SEL8(6*4)]
+#define gteG       ((u8 *)psxRegs.CP2D.r)[SEL8(6*4+1)]
+#define gteB       ((u8 *)psxRegs.CP2D.r)[SEL8(6*4+2)]
+#define gteCODE    ((u8 *)psxRegs.CP2D.r)[SEL8(6*4+3)]
+#define gteC       gteCODE
+
+#define gteR0      ((u8 *)psxRegs.CP2D.r)[SEL8(20*4)]
+#define gteG0      ((u8 *)psxRegs.CP2D.r)[SEL8(20*4+1)]
+#define gteB0      ((u8 *)psxRegs.CP2D.r)[SEL8(20*4+2)]
+#define gteCODE0   ((u8 *)psxRegs.CP2D.r)[SEL8(20*4+3)]
+#define gteC0      gteCODE0
+
+#define gteR1      ((u8 *)psxRegs.CP2D.r)[SEL8(21*4)]
+#define gteG1      ((u8 *)psxRegs.CP2D.r)[SEL8(21*4+1)]
+#define gteB1      ((u8 *)psxRegs.CP2D.r)[SEL8(21*4+2)]
+#define gteCODE1   ((u8 *)psxRegs.CP2D.r)[SEL8(21*4+3)]
+#define gteC1      gteCODE1
+
+#define gteR2      ((u8 *)psxRegs.CP2D.r)[SEL8(22*4)]
+#define gteG2      ((u8 *)psxRegs.CP2D.r)[SEL8(22*4+1)]
+#define gteB2      ((u8 *)psxRegs.CP2D.r)[SEL8(22*4+2)]
+#define gteCODE2   ((u8 *)psxRegs.CP2D.r)[SEL8(22*4+3)]
+#define gteC2      gteCODE2
+
+#define gteR11  ((s16*)psxRegs.CP2C.r)[SEL16(0)]
+#define gteR12  ((s16*)psxRegs.CP2C.r)[SEL16(1)]
+#define gteR13  ((s16*)psxRegs.CP2C.r)[SEL16(2)]
+#define gteR21  ((s16*)psxRegs.CP2C.r)[SEL16(3)]
+#define gteR22  ((s16*)psxRegs.CP2C.r)[SEL16(4)]
+#define gteR23  ((s16*)psxRegs.CP2C.r)[SEL16(5)]
+#define gteR31  ((s16*)psxRegs.CP2C.r)[SEL16(6)]
+#define gteR32  ((s16*)psxRegs.CP2C.r)[SEL16(7)]
+#define gteR33  ((s16*)psxRegs.CP2C.r)[SEL16(8)]
+#define gteTRX  ((s32*)psxRegs.CP2C.r)[5]
+#define gteTRY  ((s32*)psxRegs.CP2C.r)[6]
+#define gteTRZ  ((s32*)psxRegs.CP2C.r)[7]
+#define gteL11  ((s16*)psxRegs.CP2C.r)[SEL16(16)]
+#define gteL12  ((s16*)psxRegs.CP2C.r)[SEL16(17)]
+#define gteL13  ((s16*)psxRegs.CP2C.r)[SEL16(18)]
+#define gteL21  ((s16*)psxRegs.CP2C.r)[SEL16(19)]
+#define gteL22  ((s16*)psxRegs.CP2C.r)[SEL16(20)]
+#define gteL23  ((s16*)psxRegs.CP2C.r)[SEL16(21)]
+#define gteL31  ((s16*)psxRegs.CP2C.r)[SEL16(22)]
+#define gteL32  ((s16*)psxRegs.CP2C.r)[SEL16(23)]
+#define gteL33  ((s16*)psxRegs.CP2C.r)[SEL16(24)]
+#define gteRBK  ((s32*)psxRegs.CP2C.r)[13]
+#define gteGBK  ((s32*)psxRegs.CP2C.r)[14]
+#define gteBBK  ((s32*)psxRegs.CP2C.r)[15]
+#define gteLR1  ((s16*)psxRegs.CP2C.r)[SEL16(32)]
+#define gteLR2  ((s16*)psxRegs.CP2C.r)[SEL16(33)]
+#define gteLR3  ((s16*)psxRegs.CP2C.r)[SEL16(34)]
+#define gteLG1  ((s16*)psxRegs.CP2C.r)[SEL16(35)]
+#define gteLG2  ((s16*)psxRegs.CP2C.r)[SEL16(36)]
+#define gteLG3  ((s16*)psxRegs.CP2C.r)[SEL16(37)]
+#define gteLB1  ((s16*)psxRegs.CP2C.r)[SEL16(38)]
+#define gteLB2  ((s16*)psxRegs.CP2C.r)[SEL16(39)]
+#define gteLB3  ((s16*)psxRegs.CP2C.r)[SEL16(40)]
+#define gteRFC  ((s32*)psxRegs.CP2C.r)[21]
+#define gteGFC  ((s32*)psxRegs.CP2C.r)[22]
+#define gteBFC  ((s32*)psxRegs.CP2C.r)[23]
+#define gteOFX  ((s32*)psxRegs.CP2C.r)[24]
+#define gteOFY  ((s32*)psxRegs.CP2C.r)[25]
+#define gteH    ((u16*)psxRegs.CP2C.r)[SEL16(52)]
+#define gteDQA  ((s16*)psxRegs.CP2C.r)[SEL16(54)]
+#define gteDQB  ((s32*)psxRegs.CP2C.r)[28]
+#define gteZSF3 ((s16*)psxRegs.CP2C.r)[SEL16(58)]
+#define gteZSF4 ((s16*)psxRegs.CP2C.r)[SEL16(60)]
+#define gteFLAG psxRegs.CP2C.r[31]
+
+#define GTE_OP(op) ((op >> 20) & 31)
+#define GTE_SF(op) ((op >> 19) & 1)
+#define GTE_MX(op) ((op >> 17) & 3)
+#define GTE_V(op) ((op >> 15) & 3)
+#define GTE_CV(op) ((op >> 13) & 3)
+#define GTE_CD(op) ((op >> 11 ) & 3) /* not used */
+#define GTE_LM(op) ((op >> 10 ) & 1)
+#define GTE_CT(op) ((op >> 6) & 15) /* not used */
+#define GTE_FUNCT(op) (op & 63)
+#define INS_COFUN(op) (op & 0x1ffffff)
+
+#define gteop (INS_COFUN(psxRegs.code))
+
 static inline s64 BOUNDS(s64 n_value, s64 n_max, int n_maxflag, s64 n_min, int n_minflag) {
 	if (n_value > n_max) {
 		gteFLAG |= n_maxflag;
