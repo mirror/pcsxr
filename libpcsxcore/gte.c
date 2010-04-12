@@ -226,7 +226,7 @@ static inline u32 Lm_E(u32 result) {
 #define Lm_G2(a) LIM((a), 0x3ff, -0x400, (1 << 31) | (1 << 13))
 #define Lm_H(a) LIM((a), 0xfff, 0x000, (1 << 12))
 
-__inline u32 MFC2(int reg) {
+static inline u32 MFC2(int reg) {
 	switch(reg) {
 		case 1: case 3: case 5:
 		case 8: case 9: case 10:
@@ -256,7 +256,7 @@ __inline u32 MFC2(int reg) {
 	return psxRegs.CP2D.r[reg];
 }
 
-__inline void MTC2(unsigned long value, int reg) {
+static inline void MTC2(unsigned long value, int reg) {
 	switch (reg) {
 		case 15:
 			gteSXY0 = gteSXY1;
@@ -303,7 +303,7 @@ __inline void MTC2(unsigned long value, int reg) {
 	}
 }
 
-static void setcp2cr(int reg, u32 value) {
+static inline void setcp2cr(int reg, u32 value) {
 	switch (reg) {
 		case 4:
 		case 12:
@@ -312,7 +312,7 @@ static void setcp2cr(int reg, u32 value) {
 		case 27:
 		case 29:
 		case 30:
-			value = (s32)(s16) value;
+			value = (s32)(s16)value;
 			break;
 
 		case 31:
