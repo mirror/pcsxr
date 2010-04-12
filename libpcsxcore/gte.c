@@ -27,14 +27,6 @@
 #pragma warning(disable : 4761)
 #endif
 
-#if defined(__BIGENDIAN__)
-#define SEL16(n) ((n) ^ 1)
-#define SEL8(n) ((n) ^ 3)
-#else
-#define SEL16(n) (n)
-#define SEL8(n) (n)
-#endif
-
 #define VX(n) (n < 3 ? psxRegs.CP2D.p[n << 1].sw.l : psxRegs.CP2D.p[9].sw.l)
 #define VY(n) (n < 3 ? psxRegs.CP2D.p[n << 1].sw.h : psxRegs.CP2D.p[10].sw.l)
 #define VZ(n) (n < 3 ? psxRegs.CP2D.p[(n << 1) + 1].sw.l : psxRegs.CP2D.p[11].sw.l)
