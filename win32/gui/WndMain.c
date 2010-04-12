@@ -1696,10 +1696,6 @@ int SysInit() {
 
 	if (psxInit() == -1) return -1;
 
-#ifdef GTE_DUMP
-	gteLog = fopen("gteLog.txt","w");
-#endif
-
 #ifdef EMU_LOG
 	emuLog = fopen("emuLog.txt","w");
 	setvbuf(emuLog, NULL,  _IONBF, 0);
@@ -1730,9 +1726,6 @@ void SysClose() {
 	if (Config.PsxOut) CloseConsole();
 
 	if (emuLog != NULL) fclose(emuLog);
-#ifdef GTE_DUMP
-	if (gteLog != NULL) fclose(gteLog);
-#endif
 }
 
 void SysPrintf(char *fmt, ...) {

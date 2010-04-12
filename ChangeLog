@@ -1,3 +1,19 @@
+April 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/gte.c: Backported the new GTE code from PCSX-Revolution project
+   (http://code.google.com/p/pcsx-revolution), which is more accurate & fixes
+   at least graphic corruption problems with Mat Hoffman's Pro BMX.
+ * libpcsxcore/gte.h: Likewise.
+ * libpcsxcore/r3000a.h: Likewise.
+ * libpcsxcore/ppc/pGte.h: Call functions in gte.c instead of generating
+   machine code directly for now.
+ * libpcsxcore/ix86_64/iGte.h: Likewise.
+ * libpcsxcore/ix86/iGte.h: Likewise.
+ * libpcsxcore/debug.h: Removed GTE_DUMP.
+ * gui/LnxMain.c: Likewise.
+ * macosx/main.m: Likewise.
+ * win32/gui/WndMain.c: Likewise.
+
 April 11, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/cdriso.c: Check the CRC value of subchannel after reading.

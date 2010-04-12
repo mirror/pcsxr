@@ -50,11 +50,6 @@ int main(int argc, const char *argv[])
 
 int SysInit() {
 	if (!sysInited) {
-#ifdef GTE_DUMP
-		gteLog = fopen("gteLog.txt","wb");
-		setvbuf(gteLog, NULL, _IONBF, 0);
-#endif
-
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
 		emuLog = fopen("emuLog.txt","wb");

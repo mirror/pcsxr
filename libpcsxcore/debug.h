@@ -47,12 +47,6 @@ FILE *emuLog;
  * Ryan TODO: These should ALL be definable with configure flags.
  */
 
-//#define GTE_DUMP
-
-#ifdef GTE_DUMP
-FILE *gteLog;
-#endif
-
 //#define LOG_STDOUT
 
 //#define PAD_LOG  __Log

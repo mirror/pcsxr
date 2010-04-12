@@ -449,11 +449,6 @@ int main(int argc, char *argv[]) {
 }
 
 int SysInit() {
-#ifdef GTE_DUMP
-	gteLog = fopen("gteLog.txt","wb");
-	setvbuf(gteLog, NULL, _IONBF, 0);
-#endif
-
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
 	emuLog = fopen("emuLog.txt","wb");
