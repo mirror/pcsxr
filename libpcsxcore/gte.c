@@ -498,8 +498,8 @@ void gteOP() {
 }
 
 void gteDCPL() {
-	int shift = 12 * GTE_SF( gteop );
-	int lm = GTE_LM( gteop );
+	int shift = 12 * GTE_SF(gteop);
+	int lm = GTE_LM(gteop);
 
 #ifdef GTE_LOG
 	GTE_LOG("DCPL\n");
@@ -549,7 +549,7 @@ void gteGPF() {
 }
 
 void gteGPL() {
-	int shift = 12 * GTE_SF( gteop );
+	int shift = 12 * GTE_SF(gteop);
 
 #ifdef GTE_LOG
 	GTE_LOG("GPL\n");
@@ -572,7 +572,7 @@ void gteGPL() {
 }
 
 void gteDPCS() {
-	int shift = 12 * GTE_SF( gteop );
+	int shift = 12 * GTE_SF(gteop);
 
 #ifdef GTE_LOG
 	GTE_LOG("DPCS\n");
