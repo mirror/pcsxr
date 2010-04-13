@@ -22,11 +22,6 @@
 #include "gte.h"
 #include "psxmem.h"
 
-#ifdef _MSC_VER_
-#pragma warning(disable : 4244)
-#pragma warning(disable : 4761)
-#endif
-
 #define VX(n) (n < 3 ? psxRegs.CP2D.p[n << 1].sw.l : psxRegs.CP2D.p[9].sw.l)
 #define VY(n) (n < 3 ? psxRegs.CP2D.p[n << 1].sw.h : psxRegs.CP2D.p[10].sw.l)
 #define VZ(n) (n < 3 ? psxRegs.CP2D.p[(n << 1) + 1].sw.l : psxRegs.CP2D.p[11].sw.l)
