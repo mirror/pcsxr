@@ -202,7 +202,6 @@ static inline u32 Lm_E(u32 result) {
 		gteFLAG |= (1 << 31) | (1 << 17);
 		return 0x1ffff;
 	}
-
 	return result;
 }
 
@@ -229,7 +228,6 @@ static inline u32 MFC2(int reg) {
 			break;
 
 		case 28: case 30:
-//			SysPrintf("MFC2: psxRegs.CP2D.r[%d] cannot be read\n");
 			return 0;
 
 		case 29:
@@ -241,7 +239,7 @@ static inline u32 MFC2(int reg) {
 	return psxRegs.CP2D.r[reg];
 }
 
-static inline void MTC2(unsigned long value, int reg) {
+static inline void MTC2(u32 value, int reg) {
 	switch (reg) {
 		case 15:
 			gteSXY0 = gteSXY1;
@@ -249,8 +247,6 @@ static inline void MTC2(unsigned long value, int reg) {
 			gteSXY2 = value;
 			gteSXYP = value;
 			break;
-
-//		case 23: SysPrintf("RES1\n"); break;
 
 		case 28:
 			gteIRGB = value;
@@ -281,7 +277,6 @@ static inline void MTC2(unsigned long value, int reg) {
 			break;
 
 		case 7: case 29: case 31:
-//			SysPrintf("MTC2: psxRegs.CP2D.r[%d] cannot be write\n", reg);
 			return;
 
 		default:
@@ -289,7 +284,7 @@ static inline void MTC2(unsigned long value, int reg) {
 	}
 }
 
-static inline void setcp2cr(int reg, u32 value) {
+static inline void CTC2(u32 value, int reg) {
 	switch (reg) {
 		case 4:
 		case 12:
@@ -302,7 +297,6 @@ static inline void setcp2cr(int reg, u32 value) {
 			break;
 
 		case 31:
-//			SysPrintf("setcp2cr: reg=%d\n", reg);
 			value = value & 0x7ffff000;
 			if ((value & 0x7f87e000) != 0) {
 				value |= 0x80000000;
@@ -328,7 +322,7 @@ void gteMTC2() {
 }
 
 void gteCTC2() {
-	setcp2cr(_Rd_, psxRegs.GPR.r[_Rt_]);
+	CTC2(psxRegs.GPR.r[_Rt_], _Rd_);
 }
 
 #define _oB_ (psxRegs.GPR.r[_Rs_] + _Imm_)
