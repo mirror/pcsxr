@@ -266,9 +266,10 @@ static inline void MTC2(unsigned long value, int reg) {
 
 		case 30:
 			{
+				int a;
 				gteLZCS = value;
 
-				int a = gteLZCS;
+				a = gteLZCS;
 				if (a > 0) {
 					int i;
 					for (i = 31; (a & (1 << i)) == 0 && i >= 0; i--);
@@ -643,15 +644,14 @@ void gteOP() {
 void gteDCPL() {
 	int shift = 12 * GTE_SF(gteop);
 	int lm = GTE_LM(gteop);
+	s64 iR = (gteR << 4) * gteIR1;
+	s64 iG = (gteG << 4) * gteIR2;
+	s64 iB = (gteB << 4) * gteIR3;
 
 #ifdef GTE_LOG
 	GTE_LOG("DCPL\n");
 #endif
 	gteFLAG = 0;
-
-	s64 iR = (gteR << 4) * gteIR1;
-	s64 iG = (gteG << 4) * gteIR2;
-	s64 iB = (gteB << 4) * gteIR3;
 
 	gteMAC1 = A1(iR + gteIR0 * Lm_B1(gteRFC - iR, 0)) >> shift;
 	gteMAC2 = A2(iG + gteIR0 * Lm_B1(gteGFC - iG, 0)) >> shift;
