@@ -2,6 +2,10 @@ April 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/gte.c: Use u32 instead of unsigned long.
  * COPYING: Fixed a typo in FSF's address.
+ * plugins/dfxvideo/soft.c: Army Man invisible bullets fix (courtesy of
+   edgbla).
+ * AUTHORS: Updated info.
+ * data/pcsx.glade2: Likewise.
 
 April 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

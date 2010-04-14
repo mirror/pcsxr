@@ -2573,18 +2573,6 @@ the Free Software Foundation, Inc.</property>
     <property name="authors">PCSX-Reloaded Maintainer:
 Wei Mingzhi &lt;whistler_wmz@users.sf.net&gt;
 
-PCSX-Reloaded Contributors:
-avlex (Help on xcode project)
-dario86 (Various bugfixes)
-Gabriele Gorla (Rewritten MDEC decoder)
-Giovanni Scafora (Italian Translation)
-maggix (Leopard compilation fix)
-NeToU (Bugfix)
-Peter Collingbourne (Various core/psxbios fixes)
-shalma (Various core fixes)
-Tib&#xE9;rio V&#xED;tor (Brazilian Portuguese Translation)
-Tristin Celestin (PulseAudio support)
-
 PCSX-df Team:
 Ryan Schultz &lt;schultz.ryan@gmail.com&gt;
 Andrew Burton &lt;adb@iinet.net.au&gt;

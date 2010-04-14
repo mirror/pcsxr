@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 #define _IN_SOFT
-                   
+
 #include "externals.h"
 #include "soft.h"
 
@@ -25,7 +25,6 @@
 #include "prim.h"
 #include "menu.h"
 #include "swap.h"
-
 
 ////////////////////////////////////////////////////////////////////////////////////
 // "NO EDGE BUFFER" POLY VERSION... FUNCS BASED ON FATMAP.TXT FROM MRI / Doomsday
@@ -8330,7 +8329,7 @@ void HorzLineFlat(int y, int x0, int x1, unsigned short colour)
 		x1 = drawW;
 
 	for (x = x0; x <= x1; x++)
-		GetShadeTransCol(&psxVuw[(y<<10)+x], colour);
+		GetShadeTransCol(&psxVuw[(y << 10) + x], colour);
 }
 
 ///////////////////////////////////////////////////////////////////////
@@ -8342,12 +8341,12 @@ void DrawSoftwareLineShade(int32_t rgb0, int32_t rgb1)
 	int32_t rgbt;
 	double m, dy, dx;
 
-	if(lx0>drawW && lx1>drawW) return;
-	if(ly0>drawH && ly1>drawH) return;
-	if(lx0<drawX && lx1<drawX) return;
-	if(ly0<drawY && ly1<drawY) return;
-	if(drawY>=drawH) return;
-	if(drawX>=drawW) return; 
+	if (lx0 > drawW && lx1 > drawW) return;
+	if (ly0 > drawH && ly1 > drawH) return;
+	if (lx0 < drawX && lx1 < drawX) return;
+	if (ly0 < drawY && ly1 < drawY) return;
+	if (drawY >= drawH) return;
+	if (drawX >= drawW) return; 
 
 	x0 = lx0;
 	y0 = ly0;
@@ -8384,13 +8383,13 @@ void DrawSoftwareLineShade(int32_t rgb0, int32_t rgb1)
 				rgb0 = rgb1;
 				x1 = xt;
 				y1 = yt;
-				rgb1 = rgb0;
+				rgb1 = rgbt;
 
 				dx = x1 - x0;
 				dy = y1 - y0;
 			}
 
-			m = dy/dx;
+			m = dy / dx;
 
 			if (m >= 0)
 			{
@@ -8415,14 +8414,14 @@ void DrawSoftwareLineFlat(int32_t rgb)
 	double m, dy, dx;
 	unsigned short colour = 0;
  
-	if(lx0>drawW && lx1>drawW) return;
-	if(ly0>drawH && ly1>drawH) return;
-	if(lx0<drawX && lx1<drawX) return;
-	if(ly0<drawY && ly1<drawY) return;
-	if(drawY>=drawH) return;
-	if(drawX>=drawW) return; 
+	if (lx0 > drawW && lx1 > drawW) return;
+	if (ly0 > drawH && ly1 > drawH) return;
+	if (lx0 < drawX && lx1 < drawX) return;
+	if (ly0 < drawY && ly1 < drawY) return;
+	if (drawY >= drawH) return;
+	if (drawX >= drawW) return; 
 
-	colour = ((rgb & 0x00f80000)>>9) | ((rgb & 0x0000f800)>>6) | ((rgb & 0x000000f8)>>3);
+	colour = ((rgb & 0x00f80000) >> 9) | ((rgb & 0x0000f800) >> 6) | ((rgb & 0x000000f8) >> 3);
 
 	x0 = lx0;
 	y0 = ly0;
