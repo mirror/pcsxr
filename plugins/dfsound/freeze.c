@@ -169,6 +169,8 @@ void LoadStateV5(SPUFreeze_t * pF)
    s_chan[i].iMute=0;
    s_chan[i].iIrqDone=0;
   }
+
+  spuAddr = 0xffffffff;
 }
 
 ////////////////////////////////////////////////////////////////////////

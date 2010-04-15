@@ -1,3 +1,11 @@
+April 15, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfsound/freeze.c: Fixed the sound doesn't always play properly
+   after loading the state. (Thanks edgbla)
+ * libpcsxcore/psxmem.c: Fixed KKND freeze at startup. (edgbla)
+ * libpcsxcore/gte.c: Fixed gteDCPL. (edgbla)
+ * AUTHORS: Updated info.
+
 April 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/gte.c: Use u32 instead of unsigned long.

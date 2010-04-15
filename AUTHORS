@@ -19,13 +19,13 @@ df Copyright:	(C) 2005 Ryan Schultz
 		(C) 2007 Stephen Chao
 		(C) 2006 Marcus Comstedt
 
-PCSX-Reloaded Maintainer: Wei Mingzhi <whistler@openoffice.org>
+PCSX-Reloaded Maintainer: Wei Mingzhi <whistler_wmz@users.sf.net>
 
 PCSX-Reloaded Contributors: avlex (Help on xcode project)
 			    dario86 (Various bugfixes)
-			    edgbla (Bugfix)
-			    Gabriele Gorla (Rewritten MDEC decoder)
-			    maggix (Leopard compilation fix)
+			    edgbla (Various core/plugin fixes)
+			    Gabriele Gorla (MDEC decoder)
+			    maggix (Snow Leopard compile fix)
 			    NeToU (Bugfix)
 			    Peter Collingbourne (Various core/psxbios fixes)
 			    shalma (Various core fixes)

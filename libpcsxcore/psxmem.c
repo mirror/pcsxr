@@ -62,7 +62,7 @@ int psxMemInit() {
 	psxP = &psxM[0x200000];
 	psxH = &psxM[0x210000];
 
-	psxR = (char *)malloc(0x00080000);
+	psxR = (s8 *)malloc(0x00080000);
 
 	if (psxMemRLUT == NULL || psxMemWLUT == NULL || 
 		psxM == NULL || psxP == NULL || psxH == NULL) {
@@ -295,7 +295,7 @@ void psxMemWrite32(u32 mem, u32 value) {
 						memset(psxMemWLUT + 0x8000, 0, 0x80 * sizeof(void *));
 						memset(psxMemWLUT + 0xa000, 0, 0x80 * sizeof(void *));
 						break;
-					case 0x1e988:
+					case 0x00: case 0x1e988:
 						if (writeok == 1) break;
 						writeok = 1;
 						for (i = 0; i < 0x80; i++) psxMemWLUT[i + 0x0000] = (void *)&psxM[(i & 0x1f) << 16];

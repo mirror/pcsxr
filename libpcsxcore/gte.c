@@ -157,8 +157,8 @@
 #define GTE_MX(op) ((op >> 17) & 3)
 #define GTE_V(op) ((op >> 15) & 3)
 #define GTE_CV(op) ((op >> 13) & 3)
-#define GTE_CD(op) ((op >> 11 ) & 3) /* not used */
-#define GTE_LM(op) ((op >> 10 ) & 1)
+#define GTE_CD(op) ((op >> 11) & 3) /* not used */
+#define GTE_LM(op) ((op >> 10) & 1)
 #define GTE_CT(op) ((op >> 6) & 15) /* not used */
 #define GTE_FUNCT(op) (op & 63)
 #define INS_COFUN(op) (op & 0x1ffffff)
@@ -191,10 +191,10 @@ static inline s32 LIM(s32 value, s32 max, s32 min, u32 flag) {
 #define A3(a) BOUNDS((a), 0x7fffffff, (1 << 28), -(s64)0x80000000, (1 << 31) | (1 << 25))
 #define limB1(a, l) LIM((a), 0x7fff, -0x8000 * !l, (1 << 31) | (1 << 24))
 #define limB2(a, l) LIM((a), 0x7fff, -0x8000 * !l, (1 << 31) | (1 << 23))
-#define limB3(a, l) LIM((a), 0x7fff, -0x8000 * !l, (1 << 22) )
-#define limC1(a) LIM((a), 0x00ff, 0x0000, (1 << 21) )
-#define limC2(a) LIM((a), 0x00ff, 0x0000, (1 << 20) )
-#define limC3(a) LIM((a), 0x00ff, 0x0000, (1 << 19) )
+#define limB3(a, l) LIM((a), 0x7fff, -0x8000 * !l, (1 << 22))
+#define limC1(a) LIM((a), 0x00ff, 0x0000, (1 << 21))
+#define limC2(a) LIM((a), 0x00ff, 0x0000, (1 << 20))
+#define limC3(a) LIM((a), 0x00ff, 0x0000, (1 << 19))
 #define limD(a) LIM((a), 0xffff, 0x0000, (1 << 31) | (1 << 18))
 
 static inline u32 limE(u32 result) {
@@ -641,24 +641,25 @@ void gteOP() {
 }
 
 void gteDCPL() {
-	int shift = 12 * GTE_SF(gteop);
 	int lm = GTE_LM(gteop);
-	s64 iR = (gteR << 4) * gteIR1;
-	s64 iG = (gteG << 4) * gteIR2;
-	s64 iB = (gteB << 4) * gteIR3;
+
+	s64 RIR1 = ((s64)gteR * gteIR1) >> 8;
+	s64 GIR2 = ((s64)gteG * gteIR2) >> 8;
+	s64 BIR3 = ((s64)gteB * gteIR3) >> 8;
 
 #ifdef GTE_LOG
 	GTE_LOG("DCPL\n");
 #endif
 	gteFLAG = 0;
 
-	gteMAC1 = A1(iR + gteIR0 * limB1(gteRFC - iR, 0)) >> shift;
-	gteMAC2 = A2(iG + gteIR0 * limB1(gteGFC - iG, 0)) >> shift;
-	gteMAC3 = A3(iB + gteIR0 * limB1(gteBFC - iB, 0)) >> shift;
+	gteMAC1 = A1(RIR1 + ((gteIR0 * limB1(gteRFC - RIR1, 0)) >> 12));
+	gteMAC2 = A2(GIR2 + ((gteIR0 * limB1(gteGFC - GIR2, 0)) >> 12));
+	gteMAC3 = A3(BIR3 + ((gteIR0 * limB1(gteBFC - BIR3, 0)) >> 12));
 
-	gteIR1 = limB1(gteMAC1 >> 4, lm);
-	gteIR2 = limB2(gteMAC2 >> 4, lm);
-	gteIR3 = limB3(gteMAC3 >> 4, lm);
+	gteIR1 = limB1(gteMAC1, lm);
+	gteIR2 = limB2(gteMAC2, lm);
+	gteIR3 = limB3(gteMAC3, lm);
+
 	gteRGB0 = gteRGB1;
 	gteRGB1 = gteRGB2;
 	gteCODE2 = gteCODE;
