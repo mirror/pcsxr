@@ -349,7 +349,7 @@ void gteRTPS() {
 	int h_over_sz3;
 
 #ifdef GTE_LOG
-	GTE_LOG("RTPS\n");
+	GTE_LOG("GTE RTPS\n");
 #endif
 	gteFLAG = 0;
 
@@ -379,7 +379,7 @@ void gteRTPT() {
 	s32 vx, vy, vz;
 
 #ifdef GTE_LOG
-	GTE_LOG("RTPT\n");
+	GTE_LOG("GTE RTPT\n");
 #endif
 	gteFLAG = 0;
 
@@ -414,7 +414,7 @@ void gteMVMVA() {
 	s32 vz = VZ(v);
 
 #ifdef GTE_LOG
-	GTE_LOG("MVMVA\n");
+	GTE_LOG("GTE MVMVA\n");
 #endif
 	gteFLAG = 0;
 
@@ -429,7 +429,7 @@ void gteMVMVA() {
 
 void gteNCLIP() {
 #ifdef GTE_LOG
-	GTE_LOG("NCLIP\n");
+	GTE_LOG("GTE NCLIP\n");
 #endif
 	gteFLAG = 0;
 
@@ -440,7 +440,7 @@ void gteNCLIP() {
 
 void gteAVSZ3() {
 #ifdef GTE_LOG
-	GTE_LOG("AVSZ3\n");
+	GTE_LOG("GTE AVSZ3\n");
 #endif
 	gteFLAG = 0;
 
@@ -450,7 +450,7 @@ void gteAVSZ3() {
 
 void gteAVSZ4() {
 #ifdef GTE_LOG
-	GTE_LOG("AVSZ4\n");
+	GTE_LOG("GTE AVSZ4\n");
 #endif
 	gteFLAG = 0;
 
@@ -463,7 +463,7 @@ void gteSQR() {
 	int lm = GTE_LM(gteop);
 
 #ifdef GTE_LOG
-	GTE_LOG("SQR\n");
+	GTE_LOG("GTE SQR\n");
 #endif
 	gteFLAG = 0;
 
@@ -477,7 +477,7 @@ void gteSQR() {
 
 void gteNCCS() {
 #ifdef GTE_LOG
-	GTE_LOG("NCCS\n");
+	GTE_LOG("GTE NCCS\n");
 #endif
 	gteFLAG = 0;
 
@@ -513,7 +513,7 @@ void gteNCCT() {
 	s32 vx, vy, vz;
 
 #ifdef GTE_LOG
-	GTE_LOG("NCCT\n");
+	GTE_LOG("GTE NCCT\n");
 #endif
 	gteFLAG = 0;
 
@@ -551,7 +551,7 @@ void gteNCCT() {
 
 void gteNCDS() {
 #ifdef GTE_LOG
-	GTE_LOG("NCDS\n");
+	GTE_LOG("GTE NCDS\n");
 #endif
 	gteFLAG = 0;
 
@@ -587,7 +587,7 @@ void gteNCDT() {
 	s32 vx, vy, vz;
 
 #ifdef GTE_LOG
-	GTE_LOG("NCDT\n");
+	GTE_LOG("GTE NCDT\n");
 #endif
 	gteFLAG = 0;
 
@@ -628,7 +628,7 @@ void gteOP() {
 	int lm = GTE_LM(gteop);
 
 #ifdef GTE_LOG
-	GTE_LOG("OP\n");
+	GTE_LOG("GTE OP\n");
 #endif
 	gteFLAG = 0;
 
@@ -648,7 +648,7 @@ void gteDCPL() {
 	s64 BIR3 = ((s64)gteB * gteIR3) >> 8;
 
 #ifdef GTE_LOG
-	GTE_LOG("DCPL\n");
+	GTE_LOG("GTE DCPL\n");
 #endif
 	gteFLAG = 0;
 
@@ -672,7 +672,7 @@ void gteGPF() {
 	int shift = 12 * GTE_SF(gteop);
 
 #ifdef GTE_LOG
-	GTE_LOG("GPF\n");
+	GTE_LOG("GTE GPF\n");
 #endif
 	gteFLAG = 0;
 
@@ -695,7 +695,7 @@ void gteGPL() {
 	int shift = 12 * GTE_SF(gteop);
 
 #ifdef GTE_LOG
-	GTE_LOG("GPL\n");
+	GTE_LOG("GTE GPL\n");
 #endif
 	gteFLAG = 0;
 
@@ -718,7 +718,7 @@ void gteDPCS() {
 	int shift = 12 * GTE_SF(gteop);
 
 #ifdef GTE_LOG
-	GTE_LOG("DPCS\n");
+	GTE_LOG("GTE DPCS\n");
 #endif
 	gteFLAG = 0;
 
@@ -741,7 +741,7 @@ void gteDPCT() {
 	int v;
 
 #ifdef GTE_LOG
-	GTE_LOG("DPCT\n");
+	GTE_LOG("GTE DPCT\n");
 #endif
 	gteFLAG = 0;
 
@@ -764,7 +764,7 @@ void gteDPCT() {
 
 void gteNCS() {
 #ifdef GTE_LOG
-	GTE_LOG("NCS\n");
+	GTE_LOG("GTE NCS\n");
 #endif
 	gteFLAG = 0;
 
@@ -794,7 +794,7 @@ void gteNCT() {
 	s32 vx, vy, vz;
 
 #ifdef GTE_LOG
-	GTE_LOG("NCT\n");
+	GTE_LOG("GTE NCT\n");
 #endif
 	gteFLAG = 0;
 
@@ -825,7 +825,7 @@ void gteNCT() {
 
 void gteCC() {
 #ifdef GTE_LOG
-	GTE_LOG("CC\n");
+	GTE_LOG("GTE CC\n");
 #endif
 	gteFLAG = 0;
 
@@ -855,7 +855,7 @@ void gteINTPL() {
 	int lm = GTE_LM(gteop);
 
 #ifdef GTE_LOG
-	GTE_LOG("INTPL\n");
+	GTE_LOG("GTE INTPL\n");
 #endif
 	gteFLAG = 0;
 
@@ -875,7 +875,7 @@ void gteINTPL() {
 
 void gteCDP() {
 #ifdef GTE_LOG
-	GTE_LOG("CDP\n");
+	GTE_LOG("GTE CDP\n");
 #endif
 	gteFLAG = 0;
 
