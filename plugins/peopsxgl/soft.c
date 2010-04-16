@@ -8285,7 +8285,7 @@ void DrawSoftwareLineShade(int rgb0, int rgb1)
 				rgb0 = rgb1;
 				x1 = xt;
 				y1 = yt;
-				rgb1 = rgb0;
+				rgb1 = rgbt;
 
 				dx = x1 - x0;
 				dy = y1 - y0;
