@@ -351,7 +351,7 @@ void gteSWC2() {
 }
 
 void gteRTPS() {
-	int h_over_sz3;
+	int quotient;
 
 #ifdef GTE_LOG
 	GTE_LOG("GTE RTPS\n");
@@ -368,18 +368,18 @@ void gteRTPS() {
 	gteSZ1 = gteSZ2;
 	gteSZ2 = gteSZ3;
 	gteSZ3 = limD(gteMAC3);
-	h_over_sz3 = limE(DIVIDE(gteH, gteSZ3));
+	quotient = limE(DIVIDE(gteH, gteSZ3));
 	gteSXY0 = gteSXY1;
 	gteSXY1 = gteSXY2;
-	gteSX2 = limG1(F((s64)gteOFX + ((s64)gteIR1 * h_over_sz3)) >> 16);
-	gteSY2 = limG2(F((s64)gteOFY + ((s64)gteIR2 * h_over_sz3)) >> 16);
+	gteSX2 = limG1(F((s64)gteOFX + ((s64)gteIR1 * quotient)) >> 16);
+	gteSY2 = limG2(F((s64)gteOFY + ((s64)gteIR2 * quotient)) >> 16);
 
-	gteMAC0 = F((s64)(gteDQB + ((s64)gteDQA * h_over_sz3)) >> 12);
+	gteMAC0 = F((s64)(gteDQB + ((s64)gteDQA * quotient)) >> 12);
 	gteIR0 = limH(gteMAC0);
 }
 
 void gteRTPT() {
-	int h_over_sz3;
+	int quotient;
 	int v;
 	s32 vx, vy, vz;
 
@@ -400,11 +400,11 @@ void gteRTPT() {
 		gteIR2 = limB2(gteMAC2, 0);
 		gteIR3 = limB3(gteMAC3, 0);
 		fSZ(v) = limD(gteMAC3);
-		h_over_sz3 = limE(DIVIDE(gteH, fSZ(v)));
-		fSX(v) = limG1(F((s64)gteOFX + ((s64)gteIR1 * h_over_sz3)) >> 16);
-		fSY(v) = limG2(F((s64)gteOFY + ((s64)gteIR2 * h_over_sz3)) >> 16);
+		quotient = limE(DIVIDE(gteH, fSZ(v)));
+		fSX(v) = limG1(F((s64)gteOFX + ((s64)gteIR1 * quotient)) >> 16);
+		fSY(v) = limG2(F((s64)gteOFY + ((s64)gteIR2 * quotient)) >> 16);
 	}
-	gteMAC0 = F((s64)(gteDQB + ((s64)gteDQA * h_over_sz3)) >> 12);
+	gteMAC0 = F((s64)(gteDQB + ((s64)gteDQA * quotient)) >> 12);
 	gteIR0 = limH(gteMAC0);
 }
 
