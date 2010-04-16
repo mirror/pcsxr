@@ -210,6 +210,13 @@ static inline u32 limE(u32 result) {
 #define limG2(a) LIM((a), 0x3ff, -0x400, (1 << 31) | (1 << 13))
 #define limH(a) LIM((a), 0xfff, 0x000, (1 << 12))
 
+static inline u32 DIVIDE(s16 n, u16 d) {
+	if (n >= 0 && n < d * 2) {
+		return ((u32)n << 16) / d;
+	}
+	return 0xffffffff;
+}
+
 static inline u32 MFC2(int reg) {
 	switch (reg) {
 		case 1:
@@ -308,9 +315,7 @@ static inline void CTC2(u32 value, int reg) {
 
 		case 31:
 			value = value & 0x7ffff000;
-			if ((value & 0x7f87e000) != 0) {
-				value |= 0x80000000;
-			}
+			if (value & 0x7f87e000) value |= 0x80000000;
 			break;
 	}
 
@@ -363,7 +368,7 @@ void gteRTPS() {
 	gteSZ1 = gteSZ2;
 	gteSZ2 = gteSZ3;
 	gteSZ3 = limD(gteMAC3);
-	h_over_sz3 = limE((gteH * 65536) / (gteSZ3 + 0.5));
+	h_over_sz3 = limE(DIVIDE(gteH, gteSZ3));
 	gteSXY0 = gteSXY1;
 	gteSXY1 = gteSXY2;
 	gteSX2 = limG1(F((s64)gteOFX + ((s64)gteIR1 * h_over_sz3)) >> 16);
@@ -395,7 +400,7 @@ void gteRTPT() {
 		gteIR2 = limB2(gteMAC2, 0);
 		gteIR3 = limB3(gteMAC3, 0);
 		fSZ(v) = limD(gteMAC3);
-		h_over_sz3 = limE((gteH * 65536) / (fSZ(v) + 0.5));
+		h_over_sz3 = limE(DIVIDE(gteH, fSZ(v)));
 		fSX(v) = limG1(F((s64)gteOFX + ((s64)gteIR1 * h_over_sz3)) >> 16);
 		fSY(v) = limG2(F((s64)gteOFY + ((s64)gteIR2 * h_over_sz3)) >> 16);
 	}

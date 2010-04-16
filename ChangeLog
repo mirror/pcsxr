@@ -1,6 +1,7 @@
 April 16, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/peopsxgl/soft.c: Applied the same fix by edgbla as dfxvideo.
+ * libpcsxcore/gte.c: Use integer math for division operations.
 
 April 15, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
