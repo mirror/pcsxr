@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-04-11 20:17+0800\n"
-"PO-Revision-Date: 2010-04-16 21:48+0500\n"
+"PO-Revision-Date: 2010-04-17 10:30+0500\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -291,27 +291,27 @@ msgstr "До:"
 
 #: ../win32/gui/CheatDlg.c:686
 msgid "&Freeze"
-msgstr ""
+msgstr "Заморозить"
 
 #: ../win32/gui/CheatDlg.c:687
 msgid "&Modify"
-msgstr ""
+msgstr "Изменить"
 
 #: ../win32/gui/CheatDlg.c:688
 msgid "&Copy"
-msgstr ""
+msgstr "Копировать"
 
 #: ../win32/gui/CheatDlg.c:689
 msgid "&Search"
-msgstr ""
+msgstr "Поиск"
 
 #: ../win32/gui/CheatDlg.c:690
 msgid "&New Search"
-msgstr ""
+msgstr "Новый поиск"
 
 #: ../win32/gui/CheatDlg.c:691
 msgid "C&lose"
-msgstr ""
+msgstr "Закрыть"
 
 #: ../win32/gui/CheatDlg.c:693
 msgid "8-bit"
@@ -429,7 +429,6 @@ msgid "About..."
 msgstr "О..."
 
 #: ../win32/gui/ConfigurePlugins.c:599
-#, fuzzy
 msgid "NetPlay Configuration"
 msgstr "Настройка сетевой игры"
 
@@ -445,45 +444,45 @@ msgstr ""
 #: ../win32/gui/WndMain.c:281
 #, c-format
 msgid "*PCSX*: Saved State %d"
-msgstr ""
+msgstr "*PCSX*: Состояние сохранено %d"
 
 #: ../win32/gui/plugin.c:91
 #: ../win32/gui/WndMain.c:282
 #, c-format
 msgid "*PCSX*: Error Saving State %d"
-msgstr ""
+msgstr "*PCSX*: Ошибка сохранения состояния %d"
 
 #: ../win32/gui/plugin.c:107
 #: ../win32/gui/WndMain.c:259
 #, c-format
 msgid "*PCSX*: Loaded State %d"
-msgstr ""
+msgstr "PCSX*: Состояние загружено %d"
 
 #: ../win32/gui/plugin.c:108
 #: ../win32/gui/WndMain.c:260
 #, c-format
 msgid "*PCSX*: Error Loading State %d"
-msgstr ""
+msgstr "*PCSX*: Ошибка загрузки состояния %d"
 
 #: ../win32/gui/plugin.c:119
 #, c-format
 msgid "*PCSX*: Sio Irq Always Enabled"
-msgstr ""
+msgstr "*PCSX*: Удерживание линии прерывания SIO включено"
 
 #: ../win32/gui/plugin.c:120
 #, c-format
 msgid "*PCSX*: Sio Irq Not Always Enabled"
-msgstr ""
+msgstr "*PCSX*: Удерживание линии прерывания SIO выключено"
 
 #: ../win32/gui/plugin.c:127
 #, c-format
 msgid "*PCSX*: Black&White Mdecs Only Enabled"
-msgstr ""
+msgstr "*PCSX*: Режим чёрно-белых видео вставок (Mdecs) включен"
 
 #: ../win32/gui/plugin.c:128
 #, c-format
 msgid "*PCSX*: Black&White Mdecs Only Disabled"
-msgstr ""
+msgstr "*PCSX*: Режим чёрно-белых видео вставок (Mdecs) выключен"
 
 #: ../win32/gui/plugin.c:135
 #, c-format
@@ -560,32 +559,32 @@ msgstr "Ошибка при закрытии PAD2 плагина"
 #: ../win32/gui/plugin.c:335
 #, c-format
 msgid "CDRinit error: %d"
-msgstr ""
+msgstr "Ошибка в CDRinit: %d"
 
 #: ../win32/gui/plugin.c:337
 #, c-format
 msgid "GPUinit error: %d"
-msgstr ""
+msgstr "Ошибка в GPUinit: %d"
 
 #: ../win32/gui/plugin.c:339
 #, c-format
 msgid "SPUinit error: %d"
-msgstr ""
+msgstr "Ошибка в SPUinit: %d"
 
 #: ../win32/gui/plugin.c:341
 #, c-format
 msgid "PAD1init error: %d"
-msgstr ""
+msgstr "Ошибка в PAD1init: %d"
 
 #: ../win32/gui/plugin.c:343
 #, c-format
 msgid "PAD2init error: %d"
-msgstr ""
+msgstr "Ошибка в PAD2init: %d"
 
 #: ../win32/gui/plugin.c:346
 #, c-format
 msgid "NETinit error: %d"
-msgstr ""
+msgstr "Ошибка в NETinit: %d"
 
 #: ../win32/gui/WndMain.c:76
 msgid "Arabic"
@@ -656,7 +655,7 @@ msgstr "Корейский"
 #: ../win32/gui/WndMain.c:300
 #: ../win32/gui/WndMain.c:352
 msgid "PCSX State Format"
-msgstr ""
+msgstr "Формат состояния PCSX"
 
 #: ../win32/gui/WndMain.c:327
 #, c-format
@@ -695,6 +694,8 @@ msgstr "Не удалось загрузить CD-ROM!"
 #: ../win32/gui/WndMain.c:445
 msgid "Running BIOS is not supported with Internal HLE Bios."
 msgstr ""
+"Стандартная оболочка, позволяющая управлять картами памяти и проигрывать DA музыку, при "
+"использовании HLE-биоса недоступна."
 
 #: ../win32/gui/WndMain.c:664
 #: ../gui/MemcardDlg.c:59
@@ -815,7 +816,7 @@ msgstr "Отключить декодирование XA"
 
 #: ../win32/gui/WndMain.c:1206
 msgid "Sio Irq Always Enabled"
-msgstr "Прерывание SIO установлено постоянно"
+msgstr "Удерживание линии прерывания SIO"
 
 #: ../win32/gui/WndMain.c:1207
 msgid "Black && White Movies"
@@ -846,7 +847,7 @@ msgstr "Включить отладчик"
 
 #: ../win32/gui/WndMain.c:1213
 msgid "Spu Irq Always Enabled"
-msgstr "Прерывание SPU установлено постоянно"
+msgstr "Удерживание линии прерывания SPU"
 
 #: ../win32/gui/WndMain.c:1214
 #: ../data/pcsx.glade2:1544
@@ -870,27 +871,27 @@ msgstr "Тип системы psx"
 
 #: ../win32/gui/WndMain.c:1323
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
-msgstr ""
+msgstr "Форматы карт памяти psx (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 
 #: ../win32/gui/WndMain.c:1328
 msgid "Psx Memory Card (*.mcr;*.mc)"
-msgstr ""
+msgstr "Карта памяти psx (*.mcr;*.mc)"
 
 #: ../win32/gui/WndMain.c:1333
 msgid "CVGS Memory Card (*.mem;*.vgs)"
-msgstr ""
+msgstr "Карта памяти CVGS (*.mem;*.vgs)"
 
 #: ../win32/gui/WndMain.c:1338
 msgid "Bleem Memory Card (*.mcd)"
-msgstr ""
+msgstr "Карта памяти Bleem (*.mcd)"
 
 #: ../win32/gui/WndMain.c:1343
 msgid "DexDrive Memory Card (*.gme)"
-msgstr ""
+msgstr "Карта памяти DexDrive (*.gme)"
 
 #: ../win32/gui/WndMain.c:1348
 msgid "DataDeck Memory Card (*.ddf)"
-msgstr ""
+msgstr "Карта памяти DataDeck (*.ddf)"
 
 #: ../win32/gui/WndMain.c:1353
 #: ../win32/gui/WndMain.c:1434
@@ -1052,7 +1053,7 @@ msgstr "Сообщение pcsx"
 
 #: ../win32/gui/WndMain.c:1767
 msgid "Error Loading Symbol"
-msgstr ""
+msgstr "Ошибка загрузки символа"
 
 #: ../gui/Cheat.c:118
 #: ../gui/Cheat.c:203
@@ -1229,6 +1230,8 @@ msgstr "Не удалось запустить биос"
 #: ../gui/Gtk2Gui.c:506
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr ""
+"Стандартная оболочка, позволяющая управлять картами памяти и проигрывать DA музыку, при "
+"использовании HLE-биоса недоступна."
 
 #: ../gui/Gtk2Gui.c:535
 msgid "Open PSX Disc Image File"
@@ -1285,6 +1288,16 @@ msgid ""
 "\t-h -help\tDisplay this message\n"
 "\tfile\t\tLoads file\n"
 msgstr ""
+" pcsx [опции] [файл]\n"
+"\tопции:\n"
+"\t-runcd\t\tЗапустить с CD-привода\n"
+"\t-cdfile FILE\tЗапустить с файла образа CD\n"
+"\t-nogui\t\tНе использовать графический интерфейс GTK\n"
+"\t-cfg FILE\tУказать файл конфигурации (по умолчанию: ~/.pcsx/pcsx.cfg)\n"
+"\t-psxout\t\tВключить вывод PSX\n"
+"\t-load STATENUM\tЗагрузить состояние с номером STATENUM (1-5)\n"
+"\t-h -help\tПоказать это сообщение\n"
+"\tfile\t\tЗагрузить файл\n"
 
 #: ../gui/LnxMain.c:358
 #, c-format
@@ -1359,22 +1372,22 @@ msgstr "Менеджер карт памяти"
 #: ../data/pcsx.glade2:1493
 #, c-format
 msgid "SIO IRQ Always Enabled"
-msgstr "Прерывание SIO установлено постоянно"
+msgstr "Удерживание линии прерывания SIO"
 
 #: ../gui/Plugin.c:205
 #, c-format
 msgid "SIO IRQ Not Always Enabled"
-msgstr ""
+msgstr "Удерживание линии прерывания SIO выключено"
 
 #: ../gui/Plugin.c:211
 #, c-format
 msgid "Black & White Mdecs Only Enabled"
-msgstr ""
+msgstr "Режим чёрно-белых видео вставок (Mdecs) включен"
 
 #: ../gui/Plugin.c:212
 #, c-format
 msgid "Black & White Mdecs Only Disabled"
-msgstr ""
+msgstr "Режим чёрно-белых видео вставок (Mdecs) выключен"
 
 #: ../gui/Plugin.c:218
 #, c-format
@@ -1585,7 +1598,7 @@ msgstr "Соединение закрыто!\n"
 #: ../libpcsxcore/sio.c:322
 #, c-format
 msgid "No memory card value was specified - creating a default card %s\n"
-msgstr ""
+msgstr "Карта памяти не указана - создана новая карта %s\n"
 
 #: ../libpcsxcore/sio.c:326
 #, c-format
@@ -1763,7 +1776,7 @@ msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:442
 msgid "Odd/even bit hack"
-msgstr ""
+msgstr "Хак бита ODE"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:458
 msgid "For precise framerate"
@@ -1800,7 +1813,7 @@ msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:580
 msgid "Ignore brightness color"
-msgstr ""
+msgstr "Игнорировать яркость цвета"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:596
 msgid "Disable coordinate check"
@@ -2082,7 +2095,7 @@ msgstr "Настройка ЦПУ"
 
 #: ../data/pcsx.glade2:1425
 msgid "SPU IRQ Always Enabled"
-msgstr "Прерывание SIO установлено постоянно"
+msgstr "Удерживание линии прерывания SPU"
 
 #: ../data/pcsx.glade2:1441
 msgid "Black & White Movies"
@@ -2247,11 +2260,11 @@ msgstr "<b>Поиск читов</b>"
 
 #: ../data/pcsx.glade2:3384
 msgid "Raw Dump..."
-msgstr ""
+msgstr "\"Сырой\" дамп"
 
 #: ../data/pcsx.glade2:3419
 msgid "Patch Memory..."
-msgstr ""
+msgstr "Патч памяти..."
 
 #: ../plugins/dfsound/spu.c:38
 msgid "ALSA Sound"
@@ -2470,7 +2483,7 @@ msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:118
 msgid "OpenGL Driver configuration"
-msgstr ""
+msgstr "Настройка OpenGL Driver"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:138
 msgid "Textures"
@@ -2625,7 +2638,7 @@ msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:466
 msgid "Alpha Multipass (correct opaque texture areas)"
-msgstr ""
+msgstr "Многопроходная отрисовка текстур с прозрачностью"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:474
 msgid "Mask bit detection (needed by a few games, zbuffer)"
@@ -2704,7 +2717,7 @@ msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:592
 msgid "Black brightness (Lunar)"
-msgstr ""
+msgstr "Чёрный экран в LunarSSSC"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:600
 msgid "Swap front detection"
@@ -2732,19 +2745,19 @@ msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:656
 msgid "No subtr. blending"
-msgstr ""
+msgstr "Отключить вычитающее смешивание"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:664
 msgid "Lazy upload (DW7)"
-msgstr ""
+msgstr "\"Ленивая\" загрузка (DW7)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:672
 msgid "Odd/even hack"
-msgstr ""
+msgstr "Хак бита ODE"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:680
 msgid "Adjust screen width"
-msgstr ""
+msgstr "Корректировка ширины экрана"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:688
 msgid "Old texture filtering"
@@ -2788,7 +2801,7 @@ msgstr "Антиалиясинг полигонов (медленно на бо�
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:783
 msgid "Line mode (polygons will not get filled)"
-msgstr ""
+msgstr "Режим линий (отрисовываются только края полигонов)"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:791
 msgid "Force 15 bit framebuffer updates (faster movies)"
@@ -2800,7 +2813,7 @@ msgstr "Не фильтровать MDECs (некоторый прирост с�
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:852
 msgid "Adapted from P.E.Op.S OpenGL GPU by Pete Bernert"
-msgstr ""
+msgstr "Адаптированно из \"P.E.Op.S OpenGL GPU\" от Pete Bernert"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:861
 msgid "Homepage: http://www.pbernert.com"
