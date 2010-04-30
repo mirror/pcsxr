@@ -1,19 +1,23 @@
-/* PCSX-Revolution - PS Emulator for Nintendo Wii
- * Copyright (C) 2009-2010  PCSX-Revolution Dev Team
- *
- * PCSX-Revolution is free software: you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation, either version 2 of the
- * License, or (at your option) any later version.
- *
- * PCSX-Revolution is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with PCSX-Revolution. If not, see <http://www.gnu.org/licenses/>.
- */
+/***************************************************************************
+ *   PCSX-Revolution - PlayStation Emulator for Nintendo Wii               *
+ *   Copyright (C) 2009-2010  PCSX-Revolution Dev Team                     *
+ *   <http://code.google.com/p/pcsx-revolution/>                           *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA.           *
+ ***************************************************************************/
 
 /*
 * GTE functions.
@@ -161,9 +165,8 @@
 #define GTE_LM(op) ((op >> 10) & 1)
 #define GTE_CT(op) ((op >> 6) & 15) /* not used */
 #define GTE_FUNCT(op) (op & 63)
-#define INS_COFUN(op) (op & 0x1ffffff)
 
-#define gteop (INS_COFUN(psxRegs.code))
+#define gteop (psxRegs.code & 0x1ffffff)
 
 static inline s64 BOUNDS(s64 n_value, s64 n_max, int n_maxflag, s64 n_min, int n_minflag) {
 	if (n_value > n_max) {

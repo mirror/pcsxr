@@ -1,5 +1,4 @@
 /*  Cheat Support for PCSX-Reloaded
- *
  *  Copyright (C) 2009, Wei Mingzhi <whistler@openoffice.org>.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -14,7 +13,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Steet, Fifth Floor, Boston, MA 02111-1307 USA
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA
  */
 
 #ifndef GUI_CHEAT_H
