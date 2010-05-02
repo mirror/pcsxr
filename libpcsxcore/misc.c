@@ -337,7 +337,7 @@ int CheckCdrom() {
 			Config.PsxType = 1; // pal
 		else Config.PsxType = 0; // ntsc
 	}
-	psxUpdateVSyncRate();
+	
 	if (CdromLabel[0] == ' ') {
 		strncpy(CdromLabel, CdromId, 9);
 	}
@@ -612,7 +612,7 @@ int RecvPcsxInfo() {
 	NET_recvData(&Config.SpuIrq, sizeof(Config.SpuIrq), PSE_NET_BLOCKING);
 	NET_recvData(&Config.RCntFix, sizeof(Config.RCntFix), PSE_NET_BLOCKING);
 	NET_recvData(&Config.PsxType, sizeof(Config.PsxType), PSE_NET_BLOCKING);
-	psxUpdateVSyncRate();
+	//psxUpdateVSyncRate();
 
 	SysUpdate();
 

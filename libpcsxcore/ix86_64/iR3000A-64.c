@@ -1428,16 +1428,22 @@ static void recLHU() {
 					if (!_Rt_) return;
 					iRegs[_Rt_].state = ST_UNK;
 
-					MOVZX32M16toR(EAX, (uptr)&psxCounters[(addr >> 4) & 0x3].mode);
+					MOV64ItoR(X86ARG1, (addr >> 4) & 0x3);
+                    CALLFunc((uptr)psxRcntRmode);
+                    MOVZX32R16toR(EAX, EAX);
 					MOV32RtoM((uptr)&psxRegs.GPR.r[_Rt_], EAX);
+                    resp+= 4;
 					return;
 
 				case 0x1f801108: case 0x1f801118: case 0x1f801128:
 					if (!_Rt_) return;
 					iRegs[_Rt_].state = ST_UNK;
 
-					MOVZX32M16toR(EAX, (uptr)&psxCounters[(addr >> 4) & 0x3].target);
+					MOV64ItoR(X86ARG1, (addr >> 4) & 0x3);
+                    CALLFunc((uptr)psxRcntRtarget);
+                    MOVZX32R16toR(EAX, EAX);
 					MOV32RtoM((uptr)&psxRegs.GPR.r[_Rt_], EAX);
+                    resp+= 4;
 					return;
 			}
 		}

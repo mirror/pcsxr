@@ -1,3 +1,13 @@
+May 2, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/psxcounters.h: Root counters code was written from scratch.
+ * libpcsxcore/psxcounters.c: Likewise.
+ * libpcsxcore/psxhw.c: Likewise.
+ * libpcsxcore/misc.c: Likewise.
+ * libpcsxcore/ix86/iR3000A.c: Likewise.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * libpcsxcore/ppc/pR3000A.c: Likewise.
+
 April 30, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * Mass update to the copyright headers. Fixed typo in FSF's address,

@@ -13,7 +13,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA
+ *  Foundation, Inc., 51 Franklin Steet, Fifth Floor, Boston, MA 02111-1307 USA
  */
 
 #ifdef _MSC_VER_
@@ -2011,15 +2011,27 @@ static void recLHU() {
 					case 0x1f801104: case 0x1f801114: case 0x1f801124:
 						if (!_Rt_) return;
 						
-						LIW(PutHWReg32(_Rt_), (u32)&psxCounters[(addr >> 4) & 0x3].mode);
-						LWZ(PutHWReg32(_Rt_), 0, GetHWReg32(_Rt_));
+                        ReserveArgs(1);
+                        LIW(PutHWRegSpecial(ARG1), (addr >> 4) & 0x3);
+                        DisposeHWReg(iRegs[_Rt_].reg);
+                        InvalidateCPURegs();
+                        CALLFunc((u32)psxRcntRmode);
+                        
+                        SetDstCPUReg(3);
+                        PutHWReg32(_Rt_);
 						return;
 	
 					case 0x1f801108: case 0x1f801118: case 0x1f801128:
 						if (!_Rt_) return;
 
-						LIW(PutHWReg32(_Rt_), (u32)&psxCounters[(addr >> 4) & 0x3].target);
-						LWZ(PutHWReg32(_Rt_), 0, GetHWReg32(_Rt_));
+                        ReserveArgs(1);
+                        LIW(PutHWRegSpecial(ARG1), (addr >> 4) & 0x3);
+                        DisposeHWReg(iRegs[_Rt_].reg);
+                        InvalidateCPURegs();
+                        CALLFunc((u32)psxRcntRtarget);
+                        
+                        SetDstCPUReg(3);
+                        PutHWReg32(_Rt_);
 						return;
 					}
 		}
