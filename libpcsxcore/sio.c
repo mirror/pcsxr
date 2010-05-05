@@ -42,8 +42,6 @@ static unsigned int mcdst,rdwr;
 static unsigned char adrH,adrL;
 static unsigned int padst;
 
-PadDataS pad;
-
 char Mcd1Data[MCD_SIZE], Mcd2Data[MCD_SIZE];
 
 // clk cycle byte

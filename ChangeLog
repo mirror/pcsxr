@@ -1,6 +1,11 @@
 May 5, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * gui/DebugMemory.c: Show 0x7f as dots.
+ * libpcsxcore/plugins.c: Got rid of old PAD_readPort1()/PAD_readPort2() APIs.
+   PAD_startPoll() and PAD_poll() are now required.
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psemu_plugin_defs.h: Updated info.
 
 May 2, 2010 edgbla <edgbla@yandex.ru>
 

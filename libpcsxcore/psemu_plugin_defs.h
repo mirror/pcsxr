@@ -132,8 +132,8 @@ typedef struct
   long  PADtest(void);			// called from Configure Dialog and after PADopen();
   long	PADquery(void);
 
-  long	PADreadPort1(PadDataS *);
-  long	PADreadPort2(PadDataS *);
+  unsigned char PADstartPoll(int);
+  unsigned char PADpoll(unsigned char);
 
 */
 
@@ -142,9 +142,9 @@ typedef struct
 // notice that PSEmu will call PADinit and PADopen only once when they are from
 // same plugin
 
-// might be used in port 1 (must support PADreadPort1() function)
+// might be used in port 1
 #define PSE_PAD_USE_PORT1			1
-// might be used in port 2 (must support PADreadPort2() function)
+// might be used in port 2
 #define PSE_PAD_USE_PORT2			2
 
 
@@ -194,7 +194,7 @@ typedef struct
 	unsigned short buttonStatus;
 
 	// for analog pad fill those next 4 bytes
-	// values are analog in range 0-255 where 128 is center position
+	// values are analog in range 0-255 where 127 is center position
 	unsigned char rightJoyX, rightJoyY, leftJoyX, leftJoyY;
 
 	// for mouse fill those next 2 bytes
