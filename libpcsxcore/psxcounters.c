@@ -26,7 +26,7 @@
 
 /******************************************************************************/
 
-typedef struct
+typedef struct Rcnt
 {
     u16 mode, target;
     u32 rate, irq, counterState, irqState;
@@ -37,7 +37,7 @@ enum
 {
     Rc0Gate           = 0x0001, // 0    not implemented
     Rc1Gate           = 0x0001, // 0    not implemented
-    Rc2Disable        = 0x0001, // 0    not implemented
+    Rc2Disable        = 0x0001, // 0    partially implemented
     RcUnknown1        = 0x0002, // 1    ?
     RcUnknown2        = 0x0004, // 2    ?
     RcCountToTarget   = 0x0008, // 3
@@ -119,7 +119,7 @@ void _psxRcntWcount( u32 index, u32 value )
     rcnts[index].cycleStart  = psxRegs.cycle * BIAS;
     rcnts[index].cycleStart -= value * rcnts[index].rate;
 
-    // TODO: <=
+    // TODO: <=.
     if( value < rcnts[index].target )
     {
         rcnts[index].cycle = rcnts[index].target * rcnts[index].rate;
@@ -205,6 +205,7 @@ void psxRcntReset( u32 index )
         {
             if( (rcnts[index].mode & RcIrqRegenerate) || (!rcnts[index].irqState) )
             {
+                verboseLog( 3, "[RCNT %i] irq: %x\n", index, count );
                 setIrq( rcnts[index].irq );
                 rcnts[index].irqState = 1;
             }
@@ -225,6 +226,7 @@ void psxRcntReset( u32 index )
         {
             if( (rcnts[index].mode & RcIrqRegenerate) || (!rcnts[index].irqState) )
             {
+                verboseLog( 3, "[RCNT %i] irq: %x\n", index, count );
                 setIrq( rcnts[index].irq );
                 rcnts[index].irqState = 1;
             }
@@ -356,6 +358,12 @@ void psxRcntWmode( u32 index, u32 value )
             {
                 rcnts[index].rate = 1;
             }
+
+            // TODO: wcount must work.
+            if( value & Rc2Disable )
+            {
+                rcnts[index].rate = 0xffffffff;
+            }
         break;
     }
 
@@ -386,9 +394,9 @@ u32 psxRcntRcount( u32 index )
     count = _psxRcntRcount( index );
 
     // Parasite Eve 2 fix.
-    if( index == 2 )
+    if( Config.RCntFix )
     {
-        if( Config.RCntFix )
+        if( index == 2 )
         {
             if( rcnts[index].counterState == CountToTarget )
             {
@@ -429,15 +437,15 @@ void psxRcntInit()
 {
     s32 i;
 
-    // rcnt0.
+    // rcnt 0.
     rcnts[0].rate   = 1;
     rcnts[0].irq    = 0x10;
 
-    // rcnt1.
+    // rcnt 1.
     rcnts[1].rate   = 1;
     rcnts[1].irq    = 0x20;
 
-    // rcnt2.
+    // rcnt 2.
     rcnts[2].rate   = 1;
     rcnts[2].irq    = 0x40;
 
