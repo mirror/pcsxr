@@ -63,7 +63,8 @@ static void UpdateMemViewDlg() {
 		for (i = 0; i < 16; i++) {
 			buftext[i] = psxMs8(start + i);
 			sprintf(bufdata[i], "%.2X", (u8)buftext[i]);
-			if ((s8)buftext[i] < 32) buftext[i] = '.';
+			if ((u8)buftext[i] < 32 || (u8)buftext[i] >= 127)
+				buftext[i] = '.';
 		}
 
 		gtk_list_store_append(store, &iter);
