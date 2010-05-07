@@ -1728,7 +1728,7 @@ void SysClose() {
 	if (emuLog != NULL) fclose(emuLog);
 }
 
-void SysPrintf(char *fmt, ...) {
+void SysPrintf(const char *fmt, ...) {
 	va_list list;
 	char msg[512];
 	DWORD tmp;
@@ -1747,7 +1747,7 @@ void SysPrintf(char *fmt, ...) {
 #endif
 }
 
-void SysMessage(char *fmt, ...) {
+void SysMessage(const char *fmt, ...) {
 	va_list list;
 	char tmp[512];
 
@@ -1760,11 +1760,11 @@ void SysMessage(char *fmt, ...) {
 static char *err = N_("Error Loading Symbol");
 static int errval;
 
-void *SysLoadLibrary(char *lib) {
+void *SysLoadLibrary(const char *lib) {
 	return LoadLibrary(lib);
 }
 
-void *SysLoadSym(void *lib, char *sym) {
+void *SysLoadSym(void *lib, const char *sym) {
 	void *tmp = GetProcAddress((HINSTANCE)lib, sym);
 	if (tmp == NULL) errval = 1;
 	else errval = 0;

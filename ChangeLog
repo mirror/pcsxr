@@ -29,8 +29,11 @@ May 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * libpcsxcore/ix86_64/ix86-64.c: Likewise.
  * gui/LnxMain.c: Likewise.
  * gui/Gtk2Gui.c: Likewise.
+ * win32/WndMain.c: Likewise.
  * libpcsxcore/psxcommon.c: Added.
  * win32/pcsx.dsp: Added psxcommon.c.
+ * win32/pcsx.dev: Likewise.
+ * win32/pcsx.vcproj: Likewise.
  * libpcsxcore/Makefile.am: Likewise.
  * autogen.sh: Run autoreconf as well.
  * AUTHORS: Updated info.
