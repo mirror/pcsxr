@@ -880,7 +880,7 @@ void OnHelp_About(GtkWidget *widget, gpointer user_data) {
 	gtk_widget_destroy(about_dialog);
 }
 
-void SysMessage(char *fmt, ...) {
+void SysMessage(const char *fmt, ...) {
 	GtkWidget *Txt, *MsgDlg;
 	va_list list;
 	char msg[512];

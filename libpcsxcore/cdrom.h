@@ -27,8 +27,15 @@
 #include "psxmem.h"
 #include "psxhw.h"
 
-#define btoi(b)     ((b)/16*10 + (b)%16)    /* BCD to u_char */
-#define itob(i)     ((i)/10*16 + (i)%10)    /* u_char to BCD */
+#define btoi(b)     ((b) / 16 * 10 + (b) % 16) /* BCD to u_char */
+#define itob(i)     ((i) / 10 * 16 + (i) % 10) /* u_char to BCD */
+
+#define MSF2SECT(m, s, f)		(((m) * 60 + (s) - 2) * 75 + (f))
+
+#define CD_FRAMESIZE_RAW		2352
+#define DATA_SIZE				(CD_FRAMESIZE_RAW - 12)
+
+#define SUB_FRAMESIZE			96
 
 typedef struct {
 	unsigned char OCUP;
@@ -40,7 +47,7 @@ typedef struct {
 
 	unsigned char StatP;
 
-	unsigned char Transfer[2352];
+	unsigned char Transfer[CD_FRAMESIZE_RAW];
 	unsigned char *pTransfer;
 
 	unsigned char Prev[4];
@@ -80,7 +87,7 @@ typedef struct {
 	char Unused[4083];
 } cdrStruct;
 
-cdrStruct cdr;
+extern cdrStruct cdr;
 
 void cdrReset();
 void cdrInterrupt();
@@ -95,4 +102,4 @@ void cdrWrite2(unsigned char rt);
 void cdrWrite3(unsigned char rt);
 int cdrFreeze(gzFile f, int Mode);
 
-#endif /* __CDROM_H__ */
+#endif

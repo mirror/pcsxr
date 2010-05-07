@@ -38,8 +38,8 @@ unsigned short BaudReg;
 
 static unsigned int bufcount;
 static unsigned int parp;
-static unsigned int mcdst,rdwr;
-static unsigned char adrH,adrL;
+static unsigned int mcdst, rdwr;
+static unsigned char adrH, adrL;
 static unsigned int padst;
 
 char Mcd1Data[MCD_SIZE], Mcd2Data[MCD_SIZE];
@@ -48,8 +48,8 @@ char Mcd1Data[MCD_SIZE], Mcd2Data[MCD_SIZE];
 // 4us * 8bits = ((PSXCLK / 1000000) * 32) / BIAS; (linuzappz)
 #define SIO_INT() { \
 	if (!Config.Sio) { \
-		psxRegs.interrupt|= 0x80; \
-		psxRegs.intCycle[7+1] = 200; /*270;*/ \
+		psxRegs.interrupt |= 0x80; \
+		psxRegs.intCycle[7 + 1] = 200; /*270;*/ \
 		psxRegs.intCycle[7] = psxRegs.cycle; \
 	} \
 }

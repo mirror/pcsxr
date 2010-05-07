@@ -21,13 +21,7 @@
 #ifndef CDRISO_H
 #define CDRISO_H
 
-void imageReaderInit(void);
-
-#define MSF2SECT(m, s, f)		(((m) * 60 + (s) - 2) * 75 + (f))
-
-#define CD_FRAMESIZE_RAW		2352
-#define DATA_SIZE				(CD_FRAMESIZE_RAW - 12)
-
-#define SUB_FRAMESIZE			96
+void cdrIsoInit(void);
+int cdrIsoActive(void);
 
 #endif

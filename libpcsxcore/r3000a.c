@@ -49,8 +49,8 @@ int psxInit() {
 }
 
 void psxReset() {
-	FreeCheatSearchResults();
-	FreeCheatSearchMem();
+	FreeCheatSearchResults(); // FIXME: cleanup
+	FreeCheatSearchMem(); // FIXME: cleanup
 
 	psxCpu->Reset();
 
@@ -81,11 +81,11 @@ void psxShutdown() {
 
 	psxCpu->Shutdown();
 
-	ClearAllCheats();
-	FreeCheatSearchResults();
-	FreeCheatSearchMem();
+	ClearAllCheats(); // FIXME: cleanup
+	FreeCheatSearchResults(); // FIXME: cleanup
+	FreeCheatSearchMem(); // FIXME: cleanup
 
-	FreePPFCache();
+	FreePPFCache(); // FIXME: cleanup
 }
 
 void psxException(u32 code, u32 bd) {

@@ -52,6 +52,8 @@ typedef struct {
 extern char CdromId[10];
 extern char CdromLabel[33];
 
+extern FILE *emuLog;
+
 int LoadCdrom();
 int LoadCdromFile(char *filename, EXE_HEADER *head);
 int CheckCdrom();
@@ -66,7 +68,4 @@ int RecvPcsxInfo();
 
 void trim(char *str);
 
-extern char *LabelAuthors;
-extern char *LabelGreets;
-
-#endif /* __MISC_H__ */
+#endif

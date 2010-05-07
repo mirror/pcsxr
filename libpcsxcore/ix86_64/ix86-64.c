@@ -46,8 +46,6 @@ s8  *x86Ptr;
 u8  *j8Ptr[32];
 u32 *j32Ptr[32];
 
-extern void SysPrintf(char *fmt, ...);
-
 void WriteRmOffset(x86IntRegType to, int offset)
 {
 	if( (to&7) == ESP ) {

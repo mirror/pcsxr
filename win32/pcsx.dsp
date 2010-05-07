@@ -212,6 +212,10 @@ SOURCE=..\libpcsxcore\psxbios.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\libpcsxcore\psxcommon.c
+# End Source File
+# Begin Source File
+
 SOURCE=..\libpcsxcore\psxcommon.h
 # End Source File
 # Begin Source File

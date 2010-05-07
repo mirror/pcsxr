@@ -31,9 +31,9 @@
 #include <sys/time.h>
 #endif
 
-FILE *cdHandle = NULL;
-FILE *cddaHandle = NULL;
-FILE *subHandle = NULL;
+static FILE *cdHandle = NULL;
+static FILE *cddaHandle = NULL;
+static FILE *subHandle = NULL;
 
 static char subChanInterleaved = 0;
 
@@ -843,9 +843,7 @@ static long CALLBACK ISOgetStatus(struct CdrStat *stat) {
 	return 0;
 }
 
-void imageReaderInit(void) {
-	assert(hCDRDriver == NULL);
-
+void cdrIsoInit(void) {
 	CDR_init = ISOinit;
 	CDR_shutdown = ISOshutdown;
 	CDR_open = ISOopen;
@@ -866,4 +864,8 @@ void imageReaderInit(void) {
 	CDR_setfilename = CDR__setfilename;
 
 	numtracks = 0;
+}
+
+int cdrIsoActive(void) {
+	return (cdHandle != NULL);
 }

@@ -22,7 +22,6 @@
 #include "psxcommon.h"
 #include "ppf.h"
 #include "cdrom.h"
-#include "cdriso.h"
 
 typedef struct tagPPF_DATA {
 	s32					addr;

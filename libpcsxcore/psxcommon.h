@@ -27,7 +27,7 @@
 
 #include "config.h"
 
-/* System includes */
+// System includes
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
@@ -40,7 +40,7 @@
 #include <assert.h>
 #include <zlib.h>
 
-/* Define types */
+// Define types
 typedef int8_t s8;
 typedef int16_t s16;
 typedef int32_t s32;
@@ -53,7 +53,7 @@ typedef uint32_t u32;
 typedef uint64_t u64;
 typedef uintptr_t uptr;
 
-/* Local includes */
+// Local includes
 #include "system.h"
 #include "debug.h"
 
@@ -62,7 +62,7 @@ typedef uintptr_t uptr;
 #endif
 #define __inline inline
 
-/* Enables NLS/internationalization if active */
+// Enables NLS/internationalization if active
 #ifdef ENABLE_NLS
 
 #include <libintl.h>
@@ -102,7 +102,7 @@ typedef struct {
 	long Sio;
 	long Mdec;
 	long PsxAuto;
-	long PsxType;		/* NTSC or PAL */
+	long PsxType; // PSX_TYPE_NTSC or PSX_TYPE_PAL
 	long Cdda;
 	long HLE;
 	long Cpu;
@@ -117,7 +117,7 @@ typedef struct {
 #endif
 } PcsxConfig;
 
-PcsxConfig Config;
+extern PcsxConfig Config;
 
 extern int StatesC;
 extern int cdOpenCase;
@@ -134,14 +134,13 @@ extern int NetOpened;
 #define PSXCLK	33868800	/* 33.8688 Mhz */
 
 enum {
-	BIOS_USER_DEFINED,
+	BIOS_USER_DEFINED = 0,
 	BIOS_HLE
-};	/* BIOS Types */
+}; // BIOS Types
 
 enum {
-	PSX_TYPE_NTSC,
+	PSX_TYPE_NTSC = 0,
 	PSX_TYPE_PAL
-};	/* PSX Type */
+}; // PSX Type
 
-
-#endif /* __PSXCOMMON_H__ */
+#endif

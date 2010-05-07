@@ -39,11 +39,8 @@ extern char *disRNameCP0[];
 
 char* disR3000AF(u32 code, u32 pc);
 
-FILE *emuLog;
-
 /* 
  * Specficies which logs should be activated.
- * Ryan TODO: These should ALL be definable with configure flags.
  */
 
 //#define LOG_STDOUT
@@ -65,4 +62,4 @@ FILE *emuLog;
 #define EMU_LOG __Log
 #endif
 
-#endif /* __DEBUG_H__ */
+#endif

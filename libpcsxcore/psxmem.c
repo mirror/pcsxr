@@ -30,6 +30,14 @@
 #define MAP_ANONYMOUS MAP_ANON
 #endif
 
+s8 *psxM = NULL;
+s8 *psxP = NULL;
+s8 *psxR = NULL;
+s8 *psxH = NULL;
+
+u8 **psxMemWLUT = NULL;
+u8 **psxMemRLUT = NULL;
+
 /*  Playstation Memory Map (from Playstation doc by Joshua Walker)
 0x0000_0000-0x0000_ffff		Kernel (64K)	
 0x0001_0000-0x001f_ffff		User Memory (1.9 Meg)	

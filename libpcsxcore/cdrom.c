@@ -24,6 +24,8 @@
 #include "cdrom.h"
 #include "ppf.h"
 
+cdrStruct cdr;
+
 /* CD-ROM magic numbers */
 #define CdlSync        0
 #define CdlNop         1
@@ -630,14 +632,14 @@ void cdrReadInterrupt() {
 #ifdef CDR_LOG
 		fprintf(emuLog, "cdrReadInterrupt() Log: err\n");
 #endif
-		memset(cdr.Transfer, 0, 2340);
+		memset(cdr.Transfer, 0, DATA_SIZE);
 		cdr.Stat = DiskError;
 		cdr.Result[0] |= 0x01;
 		CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
 		return;
 	}
 
-	memcpy(cdr.Transfer, buf, 2340);
+	memcpy(cdr.Transfer, buf, DATA_SIZE);
 	CheckPPFCache(cdr.Transfer, cdr.Prev[0], cdr.Prev[1], cdr.Prev[2]);
 
     cdr.Stat = DataReady;

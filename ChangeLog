@@ -1,3 +1,40 @@
+May 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/misc.h: Preparing for refactor/cleanup, moved all definations
+   into .c files, other minor cleanups. (Breaks Mac OS X and maybe Windows as
+   well for now, will fix later)
+ * libpcsxcore/psxdma.h: Likewise.
+ * libpcsxcore/psxcounters.h: Likewise.
+ * libpcsxcore/cdrom.c: Likewise.
+ * libpcsxcore/cdrom.h: Likewise.
+ * libpcsxcore/psxmem.c: Likewise.
+ * libpcsxcore/psxmem.h: Likewise.
+ * libpcsxcore/cdriso.c: Likewise.
+ * libpcsxcore/ppf.c: Likewise.
+ * libpcsxcore/cdriso.h: Likewise.
+ * libpcsxcore/system.h: Likewise.
+ * libpcsxcore/debug.h: Likewise.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/psxhle.h: Likewise.
+ * libpcsxcore/spu.h: Likewise.
+ * libpcsxcore/mdec.h: Likewise.
+ * libpcsxcore/psxhw.h: Likewise.
+ * libpcsxcore/plugins.c: Likewise.
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/psxcommon.h: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/misc.c: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * libpcsxcore/ix86_64/ix86-64.c: Likewise.
+ * gui/LnxMain.c: Likewise.
+ * gui/Gtk2Gui.c: Likewise.
+ * libpcsxcore/psxcommon.c: Added.
+ * win32/pcsx.dsp: Added psxcommon.c.
+ * libpcsxcore/Makefile.am: Likewise.
+ * autogen.sh: Run autoreconf as well.
+ * AUTHORS: Updated info.
+
 May 5, 2010 edgbla <edgbla@yandex.ru>
 
  * libpcsxcore/psxcounters.c: Updated (Rc2Disable).

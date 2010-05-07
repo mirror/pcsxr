@@ -79,6 +79,8 @@ static Rcnt rcnts[ CounterQuantity ];
 static u32 hSyncCount;
 static u32 spuSyncCount;
 
+u32 psxNextCounter, psxNextsCounter;
+
 /******************************************************************************/
 
 static inline

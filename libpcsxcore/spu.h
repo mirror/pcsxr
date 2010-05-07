@@ -25,10 +25,6 @@
 #include "r3000a.h"
 #include "psxmem.h"
 
-#ifndef _WIN32
-#define CALLBACK
-#endif
-
 #define H_SPUirqAddr     0x0da4
 #define H_SPUaddr        0x0da6
 #define H_SPUdata        0x0da8
@@ -41,4 +37,4 @@
 
 void CALLBACK SPUirq(void);
 
-#endif /* __SPU_H__ */
+#endif

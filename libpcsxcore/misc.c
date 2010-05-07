@@ -27,6 +27,7 @@
 #include "ppf.h"
 
 int Log = 0;
+FILE *emuLog = NULL;
 
 char CdromId[10] = "";
 char CdromLabel[33] = "";
@@ -374,7 +375,6 @@ static int PSXGetFileType(FILE *f) {
 	return INVALID_EXE;
 }
 
-/* TODO Error handling - return integer for each error case below, defined in an enum. Pass variable on return */
 int Load(char *ExePath) {
 	FILE *tmpFile;
 	EXE_HEADER tmpHead;
@@ -469,10 +469,10 @@ int SaveState(char *file) {
 
 	gzwrite(f, (void*)PcsxHeader, 32);
 
-	pMem = (unsigned char *) malloc(128*96*3);
+	pMem = (unsigned char *)malloc(128 * 96 * 3);
 	if (pMem == NULL) return -1;
 	GPU_getScreenPic(pMem);
-	gzwrite(f, pMem, 128*96*3);
+	gzwrite(f, pMem, 128 * 96 * 3);
 	free(pMem);
 
 	if (Config.HLE)

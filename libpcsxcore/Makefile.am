@@ -32,6 +32,7 @@ libpcsxcore_a_SOURCES = \
 	$(top_builddir)/libpcsxcore/plugins.h \
 	$(top_builddir)/libpcsxcore/psemu_plugin_defs.h \
 	$(top_builddir)/libpcsxcore/psxbios.h \
+	$(top_builddir)/libpcsxcore/psxcommon.c \
 	$(top_builddir)/libpcsxcore/psxcommon.h \
 	$(top_builddir)/libpcsxcore/psxcounters.h \
 	$(top_builddir)/libpcsxcore/psxdma.h \

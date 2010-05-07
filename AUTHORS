@@ -19,17 +19,16 @@ df Copyright:	(C) 2005 Ryan Schultz
 		(C) 2007 Stephen Chao
 		(C) 2006 Marcus Comstedt
 
-PCSX-Reloaded Maintainer: Wei Mingzhi <whistler_wmz@users.sf.net>
-
-PCSX-Reloaded Contributors: avlex (Help on xcode project)
+PCSX-Reloaded Authors/Contributors: avlex (Help on xcode project)
 			    dario86 (Various bugfixes)
-			    edgbla (Various core/plugin fixes)
+			    edgbla (Root counter, various core/plugin fixes)
 			    Gabriele Gorla (MDEC decoder)
 			    maggix (Snow Leopard compile fix)
 			    NeToU (Bugfix)
 			    Peter Collingbourne (Various core/psxbios fixes)
 			    shalma (Various core fixes)
 			    Tristin Celestin (PulseAudio support)
+			    Wei Mingzhi (Maintainer, input plugin, iso/cheat support, misc stuff)
 
 PCSX-Reloaded Translators: edgbla (Russian)
 			   Giovanni Scafora (Italian)

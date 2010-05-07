@@ -26,4 +26,4 @@
 
 extern void (*psxHLEt[256])();
 
-#endif /* __PSXHLE_H__ */
+#endif
