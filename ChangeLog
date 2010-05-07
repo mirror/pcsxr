@@ -1,5 +1,14 @@
 May 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
+ * libpcsxcore/r3000a.c: Removed unneeded declarations, other minor cleanups.
+ * libpcsxcore/plugins.c: Likewise.
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/psxcommon.h: Added definations for boolean type, as well as
+   TRUE and FALSE (not used for now).
+ * gui/Linux.h: Declares StatesC here.
+
+May 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
  * libpcsxcore/misc.h: Preparing for refactor/cleanup, moved all definations
    into .c files, other minor cleanups. (Breaks Mac OS X and maybe Windows as
    well for now, will fix later)

@@ -53,6 +53,16 @@ typedef uint32_t u32;
 typedef uint64_t u64;
 typedef uintptr_t uptr;
 
+typedef uint8_t boolean;
+
+#ifndef TRUE
+#define TRUE 1
+#endif
+
+#ifndef FALSE
+#define FALSE 0
+#endif
+
 // Local includes
 #include "system.h"
 #include "debug.h"
@@ -119,8 +129,7 @@ typedef struct {
 
 extern PcsxConfig Config;
 
-extern int StatesC;
-extern int cdOpenCase;
+extern int cdOpenCase; // FIXME: cleanup
 extern int NetOpened;
 
 #define gzfreeze(ptr, size) \

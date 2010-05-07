@@ -85,7 +85,7 @@ void psxShutdown() {
 	FreeCheatSearchResults(); // FIXME: cleanup
 	FreeCheatSearchMem(); // FIXME: cleanup
 
-	FreePPFCache(); // FIXME: cleanup
+	FreePPFCache();
 }
 
 void psxException(u32 code, u32 bd) {

@@ -24,7 +24,9 @@
 #include "plugins.h"
 #include "cdriso.h"
 
-// FIXME: Stuff these into structs
+char cdrfilename[MAXPATHLEN] = ""; // FIXME: cleanup
+int cdOpenCase = 0; // FIXME: cleanup
+
 GPUupdateLace         GPU_updateLace;
 GPUinit               GPU_init;
 GPUshutdown           GPU_shutdown; 
@@ -139,9 +141,6 @@ NETrecvPadData        NET_recvPadData;
 NETsetInfo            NET_setInfo;
 NETkeypressed         NET_keypressed;
 
-char cdrfilename[MAXPATHLEN] = ""; // FIXME: cleanup
-int cdOpenCase = 0; // FIXME: cleanup
-
 #define CheckErr(func) \
     err = SysLibError(); \
     if (err != NULL) { SysMessage(_("Error loading %s: %s"), func, err); return -1; }
@@ -183,7 +182,6 @@ void CALLBACK GPU__displayText(char *pText) {
 	SysPrintf("%s\n", pText);
 }
 
-extern int StatesC;
 long CALLBACK GPU__freeze(uint32_t ulGetFreezeData, GPUFreeze_t *pF) {
 	pF->ulFreezeVersion = 1;
 	if (ulGetFreezeData == 0) {
@@ -267,7 +265,7 @@ void CALLBACK GPU__clearDynarec(void (CALLBACK *callback)(void)) { }
 #define LoadGpuSymN(dest, name) \
 	LoadSym(GPU_##dest, GPU##dest, name, 0);
 
-int LoadGPUplugin(char *GPUdll) {
+static int LoadGPUplugin(const char *GPUdll) {
 	void *drv;
 
 	hGPUDriver = SysLoadLibrary(GPUdll);
@@ -333,8 +331,13 @@ long CALLBACK CDR__setfilename(char*filename) { return 0; }
 #define LoadCdrSymN(dest, name) \
 	LoadSym(CDR_##dest, CDR##dest, name, 0);
 
-int LoadCDRplugin(char *CDRdll) {
+static int LoadCDRplugin(const char *CDRdll) {
 	void *drv;
+
+	if (CDRdll == NULL) {
+		cdrIsoInit();
+		return 0;
+	}
 
 	hCDRDriver = SysLoadLibrary(CDRdll);
 	if (hCDRDriver == NULL) {
@@ -539,10 +542,10 @@ long CALLBACK SPU__freeze(uint32_t ulFreezeMode, SPUFreeze_t *pF) {
 
 		val = SPU_readRegister(0x1f801da6);
 		SPU_writeRegister(0x1f801da6, 0);
-		SPU_writeDMAMem((unsigned short *)pF->SPURam, 0x80000/2);
+		SPU_writeDMAMem((unsigned short *)pF->SPURam, 0x80000 / 2);
 		SPU_writeRegister(0x1f801da6, val);
 
-		for (addr = 0x1f801c00; addr < 0x1f801e00; addr+=2) {
+		for (addr = 0x1f801c00; addr < 0x1f801e00; addr += 2) {
 			if (addr == 0x1f801da8) { regs++; continue; }
 			SPU_writeRegister(addr, *(regs++));
 		}
@@ -572,7 +575,7 @@ void CALLBACK SPU__registerCallback(void (CALLBACK *callback)(void)) {}
 #define LoadSpuSymN(dest, name) \
 	LoadSym(SPU_##dest, SPU##dest, name, 0); \
 
-int LoadSPUplugin(char *SPUdll) {
+static int LoadSPUplugin(const char *SPUdll) {
 	void *drv;
 
 	hSPUDriver = SysLoadLibrary(SPUdll);
@@ -634,7 +637,7 @@ long CALLBACK PAD1__keypressed() { return 0; }
 	LoadSym(PAD1_##dest, PAD##dest, name, 0); \
 	if (PAD1_##dest == NULL) PAD1_##dest = (PAD##dest) PAD1__##dest;
 
-int LoadPAD1plugin(char *PAD1dll) {
+static int LoadPAD1plugin(const char *PAD1dll) {
 	void *drv;
 
 	hPAD1Driver = SysLoadLibrary(PAD1dll);
@@ -675,7 +678,7 @@ long CALLBACK PAD2__keypressed() { return 0; }
 #define LoadPad2SymN(dest, name) \
 	LoadSym(PAD2_##dest, PAD##dest, name, 0);
 
-int LoadPAD2plugin(char *PAD2dll) {
+static int LoadPAD2plugin(const char *PAD2dll) {
 	void *drv;
 
 	hPAD2Driver = SysLoadLibrary(PAD2dll);
@@ -718,7 +721,7 @@ void CALLBACK NET__about(void) {}
 	LoadSym(NET_##dest, NET##dest, name, 0); \
 	if (NET_##dest == NULL) NET_##dest = (NET##dest) NET__##dest;
 
-int LoadNETplugin(char *NETdll) {
+static int LoadNETplugin(const char *NETdll) {
 	void *drv;
 
 	hNETDriver = SysLoadLibrary(NETdll);
@@ -757,7 +760,7 @@ int LoadPlugins() {
 	ReleasePlugins();
 
 	if (cdrfilename[0] != '\0') {
-		cdrIsoInit();
+		LoadCDRplugin(NULL);
 	} else {
 		sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Cdr);
 		if (LoadCDRplugin(Plugin) == -1) return -1;

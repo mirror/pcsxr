@@ -326,13 +326,6 @@ extern NETrecvPadData        NET_recvPadData;
 extern NETsetInfo            NET_setInfo;
 extern NETkeypressed         NET_keypressed;
 
-int LoadCDRplugin(char *CDRdll);
-int LoadGPUplugin(char *GPUdll);
-int LoadSPUplugin(char *SPUdll);
-int LoadPAD1plugin(char *PAD1dll);
-int LoadPAD2plugin(char *PAD2dll);
-int LoadNETplugin(char *NETdll);
-
 void CALLBACK clearDynarec(void);
 
 extern char cdrfilename[MAXPATHLEN]; // FIXME: cleanup
