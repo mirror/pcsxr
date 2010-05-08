@@ -20,6 +20,10 @@
 #ifndef __PLUGINS_H__
 #define __PLUGINS_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "psxcommon.h"
 
 #ifndef _WIN32
@@ -330,4 +334,7 @@ void CALLBACK clearDynarec(void);
 
 extern char cdrfilename[MAXPATHLEN]; // FIXME: cleanup
 
+#ifdef __cplusplus
+}
+#endif
 #endif

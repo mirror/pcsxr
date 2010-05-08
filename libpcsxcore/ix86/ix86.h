@@ -26,6 +26,10 @@
 #ifndef __IX86_H__
 #define __IX86_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // include basic types
 #include "../psxcommon.h"
 #include "../r3000a.h"
@@ -93,9 +97,9 @@
 #define XMM6 6
 #define XMM7 7
 
-s8  *x86Ptr;
-u8  *j8Ptr[32];
-u32 *j32Ptr[32];
+extern s8  *x86Ptr;
+extern u8  *j8Ptr[32];
+extern u32 *j32Ptr[32];
 
 void x86Init();
 void x86SetPtr(char *ptr);
@@ -663,4 +667,7 @@ void XORPSRtoR(int to,int from);
 void ANDPSMtoR(int to,int from);
 void ANDPSRtoR(int to,int from);
 
-#endif /* __IX86_H__ */
+#ifdef __cplusplus
+}
+#endif
+#endif

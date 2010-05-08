@@ -16,6 +16,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA
  */
 
+#ifndef PGET_H
+#define PGET_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 int psxCP2time[64] = {
         2, 16 , 1 , 1, 1, 1 , 8, 1, // 00
         1 , 1 , 1 , 1, 6 , 1 , 1 , 1, // 08
@@ -77,3 +84,8 @@ CP2_FUNCNC(RTPT);
 CP2_FUNC(GPF);
 CP2_FUNC(GPL);
 CP2_FUNCNC(NCCT);
+
+#ifdef __cplusplus
+}
+#endif
+#endif

@@ -56,7 +56,7 @@ static pthread_mutex_t eventMutex;
 
 	setjmp(restartJmp);
 
-	psxReset();
+	EmuReset();
 
 	int res = CheckCdrom();
 	if (res == -1) {
@@ -104,7 +104,7 @@ done:
 	if (OpenPlugins() == -1)
 		goto done;
 
-	psxReset();
+	EmuReset();
 
 	psxCpu->Execute();
 

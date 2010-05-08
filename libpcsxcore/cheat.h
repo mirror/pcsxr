@@ -19,6 +19,10 @@
 #ifndef CHEAT_H
 #define CHEAT_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
 	uint32_t	Addr;
 	uint16_t	Val;
@@ -107,4 +111,7 @@ extern int NumSearchResults;
 #define CHEAT_LESSTHAN16	0xD2	/* 16-bit Less Than */
 #define CHEAT_GREATERTHAN16 0xD3	/* 16-bit Greater Than */
 
+#ifdef __cplusplus
+}
+#endif
 #endif

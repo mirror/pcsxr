@@ -18,5 +18,51 @@
  ***************************************************************************/
 
 #include "psxcommon.h"
+#include "r3000a.h"
+
+#include "cheat.h"
 
 PcsxConfig Config;
+
+int Log = 0;
+FILE *emuLog = NULL;
+
+int EmuInit() {
+	return psxInit();
+}
+
+void EmuReset() {
+	FreeCheatSearchResults();
+	FreeCheatSearchMem();
+
+	psxReset();
+}
+
+void EmuShutdown() {
+	ClearAllCheats();
+	FreeCheatSearchResults();
+	FreeCheatSearchMem();
+
+	psxShutdown();
+}
+
+void EmuUpdate() {
+	SysUpdate();
+	ApplyCheats();
+}
+
+void __Log(char *fmt, ...) {
+	va_list list;
+#ifdef LOG_STDOUT
+	char tmp[1024];
+#endif
+
+	va_start(list, fmt);
+#ifndef LOG_STDOUT
+	vfprintf(emuLog, fmt, list);
+#else
+	vsprintf(tmp, fmt, list);
+	SysPrintf(tmp);
+#endif
+	va_end(list);
+}

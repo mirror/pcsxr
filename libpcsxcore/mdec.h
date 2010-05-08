@@ -20,6 +20,10 @@
 #ifndef __MDEC_H__
 #define __MDEC_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "psxcommon.h"
 #include "r3000a.h"
 #include "psxhw.h"
@@ -35,4 +39,7 @@ void psxDma1(u32 madr, u32 bcr, u32 chcr);
 void mdec1Interrupt();
 int mdecFreeze(gzFile f, int Mode);
 
+#ifdef __cplusplus
+}
+#endif
 #endif

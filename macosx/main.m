@@ -59,7 +59,7 @@ int SysInit() {
 		setvbuf(emuLog, NULL, _IONBF, 0);
 #endif
 
-		if (psxInit() != 0)
+		if (EmuInit() != 0)
 			return -1;
 
 		sysInited = YES;
@@ -76,7 +76,7 @@ int SysInit() {
 
 void SysReset() {
     [EmuThread resetNow];
-    //psxReset();
+    //EmuReset();
 }
 
 void SysPrintf(char *fmt, ...) {
@@ -221,7 +221,7 @@ void SysRunGui() // Returns to the Gui
 }
 void SysClose() // Close mem and plugins
 {
-    psxShutdown();
+    EmuShutdown();
     ReleasePlugins();
 
     if (emuLog != NULL) fclose(emuLog);

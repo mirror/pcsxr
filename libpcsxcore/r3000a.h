@@ -20,6 +20,10 @@
 #ifndef __R3000A_H__
 #define __R3000A_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "psxcommon.h"
 #include "psxmem.h"
 #include "psxcounters.h"
@@ -34,7 +38,7 @@ typedef struct {
 	void (*Shutdown)();
 } R3000Acpu;
 
-R3000Acpu *psxCpu;
+extern R3000Acpu *psxCpu;
 extern R3000Acpu psxInt;
 #if (defined(__x86_64__) || defined(__i386__) || defined(__sh__) || defined(__ppc__)) && !defined(NOPSXREC)
 extern R3000Acpu psxRec;
@@ -237,4 +241,7 @@ void psxTestSWInts();
 void psxTestHWInts();
 void psxJumpTest();
 
-#endif /* __R3000A_H__ */
+#ifdef __cplusplus
+}
+#endif
+#endif

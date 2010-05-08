@@ -35,4 +35,4 @@ struct external_filehdr {
 #define	FILHDR	struct external_filehdr
 #define	FILHSZ	sizeof(FILHDR)
 
-#endif /* __COFF_H__ */
+#endif

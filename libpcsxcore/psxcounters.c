@@ -22,7 +22,6 @@
  */
 
 #include "psxcounters.h"
-#include "cheat.h"
 
 /******************************************************************************/
 
@@ -300,8 +299,7 @@ void psxRcntUpdate()
             setIrq( 0x01 );
 
             GPU_updateLace();
-            SysUpdate();
-            ApplyCheats();
+            EmuUpdate();
         }
     }
 

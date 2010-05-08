@@ -25,9 +25,9 @@
 #include "cdrom.h"
 #include "mdec.h"
 #include "gte.h"
-#include "cheat.h"
 #include "ppf.h"
 
+R3000Acpu *psxCpu = NULL;
 psxRegisters psxRegs;
 
 int psxInit() {
@@ -49,9 +49,6 @@ int psxInit() {
 }
 
 void psxReset() {
-	FreeCheatSearchResults(); // FIXME: cleanup
-	FreeCheatSearchMem(); // FIXME: cleanup
-
 	psxCpu->Reset();
 
 	psxMemReset();
@@ -80,10 +77,6 @@ void psxShutdown() {
 	psxBiosShutdown();
 
 	psxCpu->Shutdown();
-
-	ClearAllCheats(); // FIXME: cleanup
-	FreeCheatSearchResults(); // FIXME: cleanup
-	FreeCheatSearchMem(); // FIXME: cleanup
 
 	FreePPFCache();
 }

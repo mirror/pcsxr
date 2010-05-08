@@ -20,6 +20,10 @@
 #ifndef __PSXHW_H__
 #define __PSXHW_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "psxcommon.h"
 #include "r3000a.h"
 #include "psxmem.h"
@@ -69,4 +73,7 @@ void psxHwWrite16(u32 add, u16 value);
 void psxHwWrite32(u32 add, u32 value);
 int psxHwFreeze(gzFile f, int Mode);
 
+#ifdef __cplusplus
+}
+#endif
 #endif

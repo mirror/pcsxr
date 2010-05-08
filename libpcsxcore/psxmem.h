@@ -20,6 +20,10 @@
 #ifndef __PSXMEMORY_H__
 #define __PSXMEMORY_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "psxcommon.h"
 
 #if defined(__BIGENDIAN__)
@@ -134,4 +138,7 @@ void psxMemWrite16(u32 mem, u16 value);
 void psxMemWrite32(u32 mem, u32 value);
 void *psxMemPointer(u32 mem);
 
+#ifdef __cplusplus
+}
+#endif
 #endif

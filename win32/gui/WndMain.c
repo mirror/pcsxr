@@ -1694,7 +1694,7 @@ void ChangeLanguage(char *lang) {
 int SysInit() {
 	if (Config.PsxOut) OpenConsole();
 
-	if (psxInit() == -1) return -1;
+	if (EmuInit() == -1) return -1;
 
 #ifdef EMU_LOG
 	emuLog = fopen("emuLog.txt","w");
@@ -1714,11 +1714,11 @@ int SysInit() {
 }
 
 void SysReset() {
-	psxReset();
+	EmuReset();
 }
 
 void SysClose() {
-	psxShutdown();
+	EmuShutdown();
 	ReleasePlugins();
 
 	StopDebugger();

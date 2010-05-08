@@ -20,6 +20,10 @@
 #ifndef __DEBUG_H__
 #define __DEBUG_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 enum breakpoint_types {
 	E, R1, R2, R4, W1, W2, W4
 };
@@ -62,4 +66,7 @@ char* disR3000AF(u32 code, u32 pc);
 #define EMU_LOG __Log
 #endif
 
+#ifdef __cplusplus
+}
+#endif
 #endif

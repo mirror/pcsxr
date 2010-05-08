@@ -18,16 +18,13 @@
  ***************************************************************************/
 
 /*
-* Miscellaneous functions, including savesates and CD-ROM loading.
+* Miscellaneous functions, including savestates and CD-ROM loading.
 */
 
 #include "misc.h"
 #include "cdrom.h"
 #include "mdec.h"
 #include "ppf.h"
-
-int Log = 0;
-FILE *emuLog = NULL;
 
 char CdromId[10] = "";
 char CdromLabel[33] = "";
@@ -636,22 +633,6 @@ int RecvPcsxInfo() {
 //	SysPrintf("Recv OK\n");
 
 	return 0;
-}
-
-void __Log(char *fmt, ...) {
-	va_list list;
-#ifdef LOG_STDOUT
-	char tmp[1024];
-#endif
-
-	va_start(list, fmt);
-#ifndef LOG_STDOUT
-	vfprintf(emuLog, fmt, list);
-#else
-	vsprintf(tmp, fmt, list);
-	SysPrintf(tmp);
-#endif
-	va_end(list);
 }
 
 // remove the leading and trailing spaces in a string

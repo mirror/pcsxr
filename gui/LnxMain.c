@@ -458,7 +458,7 @@ int SysInit() {
 	setvbuf(emuLog, NULL, _IONBF, 0);
 #endif
 
-	if (psxInit() == -1) {
+	if (EmuInit() == -1) {
 		printf(_("PSX emulator couldn't be initialized.\n"));
 		return -1;
 	}
@@ -473,11 +473,11 @@ int SysInit() {
 }
 
 void SysReset() {
-	psxReset();
+	EmuReset();
 }
 
 void SysClose() {
-	psxShutdown();
+	EmuShutdown();
 	ReleasePlugins();
 
 	StopDebugger();

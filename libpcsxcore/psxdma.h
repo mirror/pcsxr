@@ -20,6 +20,10 @@
 #ifndef __PSXDMA_H__
 #define __PSXDMA_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "psxcommon.h"
 #include "r3000a.h"
 #include "psxhw.h"
@@ -43,4 +47,7 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr);
 void psxDma6(u32 madr, u32 bcr, u32 chcr);
 void gpuInterrupt();
 
+#ifdef __cplusplus
+}
+#endif
 #endif

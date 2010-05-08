@@ -1,3 +1,46 @@
+May 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/sio.h: Added extern "C" to all headers.
+ * libpcsxcore/misc.h: Likewise.
+ * libpcsxcore/ppc/reguse.h: Likewise.
+ * libpcsxcore/ppc/pGte.h: Likewise.
+ * libpcsxcore/ppc/ppc.h: Likewise.
+ * libpcsxcore/psxdma.h: Likewise.
+ * libpcsxcore/psxcounters.h: Likewise.
+ * libpcsxcore/cdrom.h: Likewise.
+ * libpcsxcore/psxmem.h: Likewise.
+ * libpcsxcore/decode_xa.h: Likewise.
+ * libpcsxcore/coff.h: Likewise.
+ * libpcsxcore/gte.h: Likewise.
+ * libpcsxcore/ix86_64/iGte.h: Likewise.
+ * libpcsxcore/cdriso.h: Likewise.
+ * libpcsxcore/system.h: Likewise.
+ * libpcsxcore/ppf.h: Likewise.
+ * libpcsxcore/debug.h: Likewise.
+ * libpcsxcore/psxbios.h: Likewise.
+ * libpcsxcore/psxhle.h: Likewise.
+ * libpcsxcore/r3000a.h: Likewise.
+ * libpcsxcore/spu.h: Likewise.
+ * libpcsxcore/psemu_plugin_defs.h: Likewise.
+ * libpcsxcore/mdec.h: Likewise.
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/ix86/iGte.h: Likewise.
+ * libpcsxcore/psxhw.h: Likewise.
+ * libpcsxcore/cheat.h: Likewise.
+ * libpcsxcore/socket.h: Likewise.
+ * libpcsxcore/r3000a.c: Separated cheat related stuff out of the r3000a code.
+ * libpcsxcore/psxcounters.c: Likewise.
+ * libpcsxcore/psxcommon.h: Added EmuInit, EmuReset, EmuShutdown & EmuReset.
+ * libpcsxcore/misc.c: Moved logging stuff to psxcommon.c.
+ * libpcsxcore/psxcommon.c: Added EmuInit, EmuReset, EmuShutdown & EmuReset,
+   moved logging stuff from misc.c to here.
+ * gui/LnxMain.c: Call Emu* instead of psx*.
+ * macosx/main.m: Likewise.
+ * macosx/EmuThread.m: Likewise.
+ * win32/gui/WndMain.c: Likewise.
+ * libpcsxcore/ix86/ix86.c: Moved definations in ix86.h to source file.
+ * libpcsxcore/ix86/ix86.h: Likewise.
+
 May 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/r3000a.c: Removed unneeded declarations, other minor cleanups.

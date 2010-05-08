@@ -21,6 +21,10 @@
 #ifndef _SIO_H_
 #define _SIO_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "psxcommon.h"
 #include "r3000a.h"
 #include "psxmem.h"
@@ -81,4 +85,7 @@ typedef struct {
 
 void GetMcdBlockInfo(int mcd, int block, McdBlock *info);
 
+#ifdef __cplusplus
+}
+#endif
 #endif

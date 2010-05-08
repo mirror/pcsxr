@@ -19,8 +19,15 @@
 #ifndef __PPF_H__
 #define __PPF_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void BuildPPFCache();
 void FreePPFCache();
 void CheckPPFCache(unsigned char *pB, unsigned char m, unsigned char s, unsigned char f);
 
+#ifdef __cplusplus
+}
+#endif
 #endif

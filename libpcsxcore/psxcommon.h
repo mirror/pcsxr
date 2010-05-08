@@ -25,6 +25,10 @@
 #ifndef __PSXCOMMON_H__
 #define __PSXCOMMON_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "config.h"
 
 // System includes
@@ -92,7 +96,9 @@ typedef uint8_t boolean;
 
 #endif
 
+extern FILE *emuLog;
 extern int Log;
+
 void __Log(char *fmt, ...);
 
 typedef struct {
@@ -152,4 +158,12 @@ enum {
 	PSX_TYPE_PAL
 }; // PSX Type
 
+int EmuInit();
+void EmuReset();
+void EmuShutdown();
+void EmuUpdate();
+
+#ifdef __cplusplus
+}
+#endif
 #endif

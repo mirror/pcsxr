@@ -20,6 +20,10 @@
 #ifndef __CDROM_H__
 #define __CDROM_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "psxcommon.h"
 #include "decode_xa.h"
 #include "r3000a.h"
@@ -102,4 +106,7 @@ void cdrWrite2(unsigned char rt);
 void cdrWrite3(unsigned char rt);
 int cdrFreeze(gzFile f, int Mode);
 
+#ifdef __cplusplus
+}
+#endif
 #endif

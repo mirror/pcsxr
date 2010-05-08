@@ -22,6 +22,10 @@
 #ifndef __GTE_H__
 #define __GTE_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "psxcommon.h"
 #include "r3000a.h"
 
@@ -55,4 +59,7 @@ void gteGPF();
 void gteGPL();
 void gteNCCT();
 
+#ifdef __cplusplus
+}
+#endif
 #endif
