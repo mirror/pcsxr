@@ -43,6 +43,8 @@ void EmuShutdown() {
 	FreeCheatSearchResults();
 	FreeCheatSearchMem();
 
+	FreePPFCache();
+
 	psxShutdown();
 }
 

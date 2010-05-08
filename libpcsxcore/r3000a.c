@@ -25,7 +25,6 @@
 #include "cdrom.h"
 #include "mdec.h"
 #include "gte.h"
-#include "ppf.h"
 
 R3000Acpu *psxCpu = NULL;
 psxRegisters psxRegs;
@@ -77,8 +76,6 @@ void psxShutdown() {
 	psxBiosShutdown();
 
 	psxCpu->Shutdown();
-
-	FreePPFCache();
 }
 
 void psxException(u32 code, u32 bd) {
