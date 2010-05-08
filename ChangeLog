@@ -1,3 +1,8 @@
+May 8, 2010 edgbla <edgbla@yandex.ru>
+
+ * plugins/dfxvideo/prim.c: Dithering logic was fixed.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Likewise.
+
 May 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/misc.c: Use const for input strings.

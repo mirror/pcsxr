@@ -182,7 +182,7 @@ main (int argc, char *argv[])
   val=0;
   if(pB)
    {
-    strcpy(t,"\nUseDither");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+    strcpy(t,"\nDithering");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
 
            val = set_limit (p, len, 0, 2);
    }
@@ -370,7 +370,7 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
  SetCfgVal(pB,"\nNoStretch",val);
 
  val = gtk_combo_box_get_active (GTK_COMBO_BOX (glade_xml_get_widget (xml, "ditherCombo2")));
- SetCfgVal(pB,"\nUseDither",val);
+ SetCfgVal(pB,"\nDithering",val);
 
     val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "maintain43")));
  SetCfgVal(pB,"\nMaintain43",val);

@@ -77,12 +77,7 @@ __inline void UpdateGlobalTP(unsigned short gdata)
      GlobalTextABR = (unsigned short)((gdata >> 7) & 0x3);
      GlobalTextTP = (gdata >> 9) & 0x3;
      if(GlobalTextTP==3) GlobalTextTP=2;
-     usMirror =0;
      lGPUstatusRet = (lGPUstatusRet & 0xffffe000 ) | (gdata & 0x1fff );
-
-     // tekken dithering? right now only if dithering is forced by user
-     if(iUseDither==2) iDither=2; else iDither=0;
-
      return;
     }
    else
@@ -92,25 +87,28 @@ __inline void UpdateGlobalTP(unsigned short gdata)
   }
  else GlobalTextAddrY = (gdata << 4) & 0x100;
 
- usMirror=gdata&0x3000;
-
- if(iUseDither==2)  
-  {
-   iDither=2;
-  }
- else  
-  {
-   if(gdata&200) iDither=iUseDither; else iDither=0;
-  }
-
  GlobalTextTP = (gdata >> 7) & 0x3;                    // tex mode (4,8,15)
 
  if(GlobalTextTP==3) GlobalTextTP=2;                   // seen in Wild9 :(
 
  GlobalTextABR = (gdata >> 5) & 0x3;                   // blend mode
 
- lGPUstatusRet&=~0x07ff;                               // Clear the necessary bits
- lGPUstatusRet|=(gdata & 0x07ff);                      // set the necessary bits
+ lGPUstatusRet&=~0x000001ff;                           // Clear the necessary bits
+ lGPUstatusRet|=(gdata & 0x01ff);                      // set the necessary bits
+
+ switch(iUseDither)
+ {
+  case 0:
+   iDither=0;
+  break;
+  case 1:
+   if(lGPUstatusRet&0x0200) iDither=2;
+   else iDither=0;
+  break;
+  case 2:
+   iDither=2;
+  break;
+ }
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -381,6 +379,11 @@ void cmdTexturePage(unsigned char * baseAddr)
 {
  uint32_t gdata = GETLE32(&((uint32_t*)baseAddr)[0]);
 
+ lGPUstatusRet&=~0x000007ff;
+ lGPUstatusRet|=(gdata & 0x07ff);
+ 
+ usMirror=gdata&0x3000;
+ 
  UpdateGlobalTP((unsigned short)gdata);
  GlobalTextREST = (gdata&0x00ffffff)>>9;
 }
