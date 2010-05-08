@@ -2773,8 +2773,6 @@ static void recMTC0() {
 		iFlushRegs();
 		MOV32ItoM((uptr)&psxRegs.pc, (u32)pc);
 		CALLFunc((uptr)psxTestSWInts);
-		if (_Rd_ == 12)
-			OR32ItoM((uptr)&psxRegs.interrupt, 0x80000000);
 		if (branch == 0) {
 			branch = 2;
 			iRet();

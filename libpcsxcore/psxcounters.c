@@ -86,7 +86,6 @@ static inline
 void setIrq( u32 irq )
 {
     psxHu32ref(0x1070) |= SWAPu32(irq);
-    psxRegs.interrupt |= 0x80000000;
 }
 
 static

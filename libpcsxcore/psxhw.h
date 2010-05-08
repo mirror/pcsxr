@@ -61,7 +61,6 @@ extern "C" {
 	if (SWAPu32(HW_DMA_ICR) & (1 << (16 + n))) {    \
 		HW_DMA_ICR |= SWAP32(1 << (24 + n));        \
 		psxHu32ref(0x1070) |= SWAP32(8);            \
-		psxRegs.interrupt |= 0x80000000;            \
 	}
 
 void psxHwReset();

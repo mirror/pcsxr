@@ -57,13 +57,13 @@ extern char CdromId[10];
 extern char CdromLabel[33];
 
 int LoadCdrom();
-int LoadCdromFile(char *filename, EXE_HEADER *head);
+int LoadCdromFile(const char *filename, EXE_HEADER *head);
 int CheckCdrom();
-int Load(char *ExePath);
+int Load(const char *ExePath);
 
-int SaveState(char *file);
-int LoadState(char *file);
-int CheckState(char *file);
+int SaveState(const char *file);
+int LoadState(const char *file);
+int CheckState(const char *file);
 
 int SendPcsxInfo();
 int RecvPcsxInfo();

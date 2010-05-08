@@ -29,7 +29,7 @@
 char CdromId[10] = "";
 char CdromLabel[33] = "";
 
-/* PSX Executable types */
+// PSX Executable types
 #define PSX_EXE     1
 #define CPE_EXE     2
 #define COFF_EXE    3
@@ -52,24 +52,24 @@ struct iso_directory_record {
 };
 
 void mmssdd( char *b, char *p )
- {
+{
 	int m, s, d;
 #if defined(__BIGENDIAN__)
-	int block = (b[0]&0xff) | ((b[1]&0xff)<<8) | ((b[2]&0xff)<<16) | (b[3]<<24);
+	int block = (b[0] & 0xff) | ((b[1] & 0xff) << 8) | ((b[2] & 0xff) << 16) | (b[3] << 24);
 #else
 	int block = *((int*)b);
 #endif
-	
+
 	block += 150;
-	m = block / 4500;			// minuten
-	block = block - m * 4500;	// minuten rest
-	s = block / 75;				// sekunden
-	d = block - s * 75;			// sekunden rest
-	
-	m = ( ( m / 10 ) << 4 ) | m % 10;
-	s = ( ( s / 10 ) << 4 ) | s % 10;
-	d = ( ( d / 10 ) << 4 ) | d % 10;	
-	
+	m = block / 4500;			// minutes
+	block = block - m * 4500;	// minutes rest
+	s = block / 75;				// seconds
+	d = block - s * 75;			// seconds rest
+
+	m = ((m / 10) << 4) | m % 10;
+	s = ((s / 10) << 4) | s % 10;
+	d = ((d / 10) << 4) | d % 10;	
+
 	p[0] = m;
 	p[1] = s;
 	p[2] = d;
@@ -95,11 +95,11 @@ void mmssdd( char *b, char *p )
 
 #define READDIR(_dir) \
 	READTRACK(); \
-	memcpy(_dir, buf+12, 2048); \
+	memcpy(_dir, buf + 12, 2048); \
  \
 	incTime(); \
 	READTRACK(); \
-	memcpy(_dir+2048, buf+12, 2048);
+	memcpy(_dir + 2048, buf + 12, 2048);
 
 int GetCdromFile(u8 *mdir, u8 *time, s8 *filename) {
 	struct iso_directory_record *dir;
@@ -223,7 +223,7 @@ int LoadCdrom() {
 	return 0;
 }
 
-int LoadCdromFile(char *filename, EXE_HEADER *head) {
+int LoadCdromFile(const char *filename, EXE_HEADER *head) {
 	struct iso_directory_record *dir;
 	u8 time[4],*buf;
 	u8 mdir[4096], exename[256];
@@ -372,7 +372,7 @@ static int PSXGetFileType(FILE *f) {
 	return INVALID_EXE;
 }
 
-int Load(char *ExePath) {
+int Load(const char *ExePath) {
 	FILE *tmpFile;
 	EXE_HEADER tmpHead;
 	int type;
@@ -454,7 +454,7 @@ int Load(char *ExePath) {
 
 const char PcsxHeader[32] = "STv3 PCSX v" PACKAGE_VERSION;
 
-int SaveState(char *file) {
+int SaveState(const char *file) {
 	gzFile f;
 	GPUFreeze_t *gpufP;
 	SPUFreeze_t *spufP;
@@ -464,7 +464,7 @@ int SaveState(char *file) {
 	f = gzopen(file, "wb");
 	if (f == NULL) return -1;
 
-	gzwrite(f, (void*)PcsxHeader, 32);
+	gzwrite(f, (const void *)PcsxHeader, 32);
 
 	pMem = (unsigned char *)malloc(128 * 96 * 3);
 	if (pMem == NULL) return -1;
@@ -508,7 +508,7 @@ int SaveState(char *file) {
 	return 0;
 }
 
-int LoadState(char *file) {
+int LoadState(const char *file) {
 	gzFile f;
 	GPUFreeze_t *gpufP;
 	SPUFreeze_t *spufP;
@@ -558,7 +558,7 @@ int LoadState(char *file) {
 	return 0;
 }
 
-int CheckState(char *file) {
+int CheckState(const char *file) {
 	gzFile f;
 	char header[32];
 

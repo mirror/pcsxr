@@ -303,8 +303,7 @@ void sioInterrupt() {
 #endif
 //	SysPrintf("Sio Interrupt\n");
 	StatReg|= IRQ;
-	psxHu32ref(0x1070)|= SWAPu32(0x80);
-	psxRegs.interrupt|= 0x80000000;
+	psxHu32ref(0x1070) |= SWAPu32(0x80);
 }
 
 void LoadMcd(int mcd, char *str) {

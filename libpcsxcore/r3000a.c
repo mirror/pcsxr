@@ -88,7 +88,7 @@ void psxException(u32 code, u32 bd) {
 		PSXCPU_LOG("bd set!!!\n");
 #endif
 		SysPrintf("bd set!!!\n");
-		psxRegs.CP0.n.Cause|= 0x80000000;
+		psxRegs.CP0.n.Cause |= 0x80000000;
 		psxRegs.CP0.n.EPC = (psxRegs.pc - 4);
 	} else
 		psxRegs.CP0.n.EPC = (psxRegs.pc);
@@ -145,15 +145,8 @@ void psxBranchTest() {
 				mdec1Interrupt();
 			}
 		}
-
-//		if (psxRegs.interrupt & 0x80000000) {
-			psxRegs.interrupt&=~0x80000000;
-			psxTestHWInts();
-//		}
 	}
-}
 
-void psxTestHWInts() {
 	if (psxHu32(0x1070) & psxHu32(0x1074)) {
 		if ((psxRegs.CP0.n.Status & 0x401) == 0x401) {
 #ifdef PSXCPU_LOG

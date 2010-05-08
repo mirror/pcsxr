@@ -1,5 +1,21 @@
 May 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
+ * libpcsxcore/misc.c: Use const for input strings.
+ * libpcsxcore/misc.h: Likewise.
+ * libpcsxcore/spu.c: Got rid of 0x80000000 flag of psxRegs.interrupt.
+ * libpcsxcore/psxinterpreter.c: Likewise.
+ * libpcsxcore/cdrom.c: Likewise.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/psxhw.c: Likewise.
+ * libpcsxcore/r3000a.h: Likewise.
+ * libpcsxcore/ix86/iR3000A.c: Likewise.
+ * libpcsxcore/psxhw.h: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+
+May 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
  * libpcsxcore/sio.h: Added extern "C" to all headers.
  * libpcsxcore/misc.h: Likewise.
  * libpcsxcore/ppc/reguse.h: Likewise.
