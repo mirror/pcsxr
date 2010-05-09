@@ -21,7 +21,7 @@ df Copyright:	(C) 2005 Ryan Schultz
 
 PCSX-Reloaded Authors/Contributors: avlex (Help on xcode project)
 			    dario86 (Various bugfixes)
-			    edgbla (Root counter, various core/plugin fixes)
+			    edgbla (Root counters, various core/plugin fixes)
 			    Gabriele Gorla (MDEC decoder)
 			    maggix (Snow Leopard compile fix)
 			    NeToU (Bugfix)

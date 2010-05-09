@@ -77,7 +77,12 @@ __inline void UpdateGlobalTP(unsigned short gdata)
      GlobalTextABR = (unsigned short)((gdata >> 7) & 0x3);
      GlobalTextTP = (gdata >> 9) & 0x3;
      if(GlobalTextTP==3) GlobalTextTP=2;
+     usMirror =0;
      lGPUstatusRet = (lGPUstatusRet & 0xffffe000 ) | (gdata & 0x1fff );
+
+     // tekken dithering? right now only if dithering is forced by user
+     if(iUseDither==2) iDither=2; else iDither=0;
+
      return;
     }
    else
