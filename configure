@@ -13714,17 +13714,6 @@ fi
 if test "x$have_zlib" = xno; then
 	as_fn_error "unable to find libz headers" "$LINENO" 5
 fi
-ac_fn_c_check_header_mongrel "$LINENO" "bzlib.h" "ac_cv_header_bzlib_h" "$ac_includes_default"
-if test "x$ac_cv_header_bzlib_h" = x""yes; then :
-  have_bzlib=yes
-else
-  have_bzlib=no
-fi
-
-
-if test "x$have_bzlib" = xno; then
-	as_fn_error "unable to find libbz2 headers" "$LINENO" 5
-fi
 ac_fn_c_check_header_mongrel "$LINENO" "X11/extensions/Xv.h" "ac_cv_header_X11_extensions_Xv_h" "$ac_includes_default"
 if test "x$ac_cv_header_X11_extensions_Xv_h" = x""yes; then :
   have_xv=yes

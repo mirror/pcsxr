@@ -80,10 +80,6 @@ AC_CHECK_HEADER(zlib.h, have_zlib=yes, have_zlib=no)
 if test "x$have_zlib" = xno; then
 	AC_MSG_ERROR([unable to find libz headers])
 fi
-AC_CHECK_HEADER(bzlib.h, have_bzlib=yes, have_bzlib=no)
-if test "x$have_bzlib" = xno; then
-	AC_MSG_ERROR([unable to find libbz2 headers])
-fi
 AC_CHECK_HEADER(X11/extensions/Xv.h, have_xv=yes, have_xv=no)
 if test "x$have_xv" = xno; then
 	AC_MSG_ERROR([unable to find xv headers])
