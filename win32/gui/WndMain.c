@@ -414,7 +414,7 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 					return TRUE;
 
 				case ID_FILE_RUN_CD:
-					cdrfilename[0] = '\0';
+					SetIsoFile(NULL);
 					SetMenu(hWnd, NULL);
 					LoadPlugins();
 					if (OpenPlugins(hWnd) == -1) {
@@ -445,7 +445,7 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 						SysMessage(_("Running BIOS is not supported with Internal HLE Bios."));
 						return TRUE;
 					}
-					cdrfilename[0] = '\0';
+					SetIsoFile(NULL);
 					SetMenu(hWnd, NULL);
 					LoadPlugins();
 					if (OpenPlugins(hWnd) == -1) {
@@ -463,7 +463,7 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
 				case ID_FILE_RUN_ISO:
 					if (!Open_Iso_Proc(File)) return TRUE;
-					strcpy(cdrfilename, File);
+					SetIsoFile(File);
 					SetMenu(hWnd, NULL);
 					LoadPlugins();
 					if (OpenPlugins(hWnd) == -1) {
@@ -491,7 +491,7 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
 				case ID_FILE_RUN_EXE:
 					if (!Open_File_Proc(File)) return TRUE;
-					cdrfilename[0] = '\0';
+					SetIsoFile(NULL);
 					SetMenu(hWnd, NULL);
 					LoadPlugins();
 					if (OpenPlugins(hWnd) == -1) {
@@ -542,7 +542,7 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
 				case ID_EMULATOR_SWITCH_ISO:
 					if (!Open_Iso_Proc(File)) return TRUE;
-					strcpy(cdrfilename, File);
+					SetIsoFile(File);
 					SetMenu(hWnd, NULL);
 					if (OpenPlugins(hWnd) == -1) {
 						ClosePlugins();
@@ -551,7 +551,7 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 					}
 					ShowCursor(FALSE);
 					Running = 1;
-					cdOpenCase = time(NULL) + 2;
+					SetCdOpenCaseTime(time(NULL) + 2);
 					CheatSearchBackupMemory();
 					psxCpu->Execute();
 					return TRUE;
@@ -1584,7 +1584,7 @@ void CreateMainMenu() {
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_SOUND, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_GRAPHICS, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION, MF_BYCOMMAND | MF_GRAYED);
-		if (cdrfilename[0] == '\0') {
+		if (UsingIso()) {
 			EnableMenuItem(gApp.hMenu, ID_EMULATOR_SWITCH_ISO, MF_BYCOMMAND | MF_GRAYED);
 		}
 	} else {

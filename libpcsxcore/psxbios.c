@@ -2235,8 +2235,6 @@ __inline void LoadRegs() {
 	} \
 }
 
-void netError();
-
 void biosInterrupt() {
 	int i, bufcount;
 

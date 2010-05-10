@@ -143,12 +143,12 @@ void PADhandleKey(int key) {
 
 		case VK_F9:
 			GPU_displayText(_("*PCSX*: CdRom Case Opened"));
-			cdOpenCase = -1;
+			SetCdOpenCaseTime(-1);
 			break;
 
 		case VK_F10:
 			GPU_displayText(_("*PCSX*: CdRom Case Closed"));
-			cdOpenCase = 0;
+			SetCdOpenCaseTime(0);
 			break;
 
 		case VK_F12:
@@ -197,8 +197,6 @@ BOOL CALLBACK ConnectDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 	return FALSE;
 }
-
-int NetOpened = 0;
 
 #define PARSEPATH(dst, src) \
 	ptr = src + strlen(src); \
