@@ -5,6 +5,7 @@ May 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * libpcsxcore/psxcommon.h: Likewise.
  * libpcsxcore/sio.c: Likewise.
  * libpcsxcore/psxcounters.c: Likewise.
+ * libpcsxcore/misc.c: Added savestate versioning support.
 
 May 10, 2010 edgbla <edgbla@yandex.ru>
 

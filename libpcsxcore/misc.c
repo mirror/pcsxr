@@ -452,7 +452,11 @@ int Load(const char *ExePath) {
 
 // STATES
 
-const char PcsxHeader[32] = "STv3 PCSX v" PACKAGE_VERSION;
+static const char PcsxHeader[32] = "STv4 PCSX v" PACKAGE_VERSION;
+
+// Savestate Versioning!
+// If you make changes to the savestate version, please increment the value below.
+static const u32 SaveVersion = SWAPu32(0x8b410001);
 
 int SaveState(const char *file) {
 	gzFile f;
@@ -465,6 +469,7 @@ int SaveState(const char *file) {
 	if (f == NULL) return -1;
 
 	gzwrite(f, (const void *)PcsxHeader, 32);
+	gzwrite(f, (const void *)&SaveVersion, sizeof(SaveVersion));
 
 	pMem = (unsigned char *)malloc(128 * 96 * 3);
 	if (pMem == NULL) return -1;
@@ -478,10 +483,10 @@ int SaveState(const char *file) {
 	gzwrite(f, psxM, 0x00200000);
 	gzwrite(f, psxR, 0x00080000);
 	gzwrite(f, psxH, 0x00010000);
-	gzwrite(f, (void*)&psxRegs, sizeof(psxRegs));
+	gzwrite(f, (void *)&psxRegs, sizeof(psxRegs));
 
 	// gpu
-	gpufP = (GPUFreeze_t *) malloc(sizeof(GPUFreeze_t));
+	gpufP = (GPUFreeze_t *)malloc(sizeof(GPUFreeze_t));
 	gpufP->ulFreezeVersion = 1;
 	GPU_freeze(1, gpufP);
 	gzwrite(f, gpufP, sizeof(GPUFreeze_t));
@@ -514,35 +519,39 @@ int LoadState(const char *file) {
 	SPUFreeze_t *spufP;
 	int Size;
 	char header[32];
+	u32 version;
 
 	f = gzopen(file, "rb");
 	if (f == NULL) return -1;
 
+	gzread(f, header, sizeof(header));
+	gzread(f, &version, sizeof(u32));
+
+	if (strncmp("STv4 PCSX", header, 9) != 0 || version != SaveVersion) {
+		gzclose(f);
+		return -1;
+	}
+
 	psxCpu->Reset();
-
-	gzread(f, header, 32);
-
-	if (strncmp("STv3 PCSX", header, 9)) { gzclose(f); return -1; }
-
-	gzseek(f, 128*96*3, SEEK_CUR);
+	gzseek(f, 128 * 96 * 3, SEEK_CUR);
 
 	gzread(f, psxM, 0x00200000);
 	gzread(f, psxR, 0x00080000);
 	gzread(f, psxH, 0x00010000);
-	gzread(f, (void*)&psxRegs, sizeof(psxRegs));
+	gzread(f, (void *)&psxRegs, sizeof(psxRegs));
 
 	if (Config.HLE)
 		psxBiosFreeze(0);
 
 	// gpu
-	gpufP = (GPUFreeze_t *) malloc (sizeof(GPUFreeze_t));
+	gpufP = (GPUFreeze_t *)malloc(sizeof(GPUFreeze_t));
 	gzread(f, gpufP, sizeof(GPUFreeze_t));
 	GPU_freeze(0, gpufP);
 	free(gpufP);
 
 	// spu
 	gzread(f, &Size, 4);
-	spufP = (SPUFreeze_t *) malloc (Size);
+	spufP = (SPUFreeze_t *)malloc(Size);
 	gzread(f, spufP, Size);
 	SPU_freeze(0, spufP);
 	free(spufP);
@@ -561,17 +570,18 @@ int LoadState(const char *file) {
 int CheckState(const char *file) {
 	gzFile f;
 	char header[32];
+	u32 version;
 
 	f = gzopen(file, "rb");
 	if (f == NULL) return -1;
 
-	psxCpu->Reset();
-
-	gzread(f, header, 32);
+	gzread(f, header, sizeof(header));
+	gzread(f, &version, sizeof(u32));
 
 	gzclose(f);
 
-	if (strncmp("STv3 PCSX", header, 9)) return -1;
+	if (strncmp("STv4 PCSX", header, 9) != 0 || version != SaveVersion)
+		return -1;
 
 	return 0;
 }
