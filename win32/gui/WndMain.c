@@ -1584,7 +1584,7 @@ void CreateMainMenu() {
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_SOUND, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_GRAPHICS, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION, MF_BYCOMMAND | MF_GRAYED);
-		if (UsingIso()) {
+		if (!UsingIso()) {
 			EnableMenuItem(gApp.hMenu, ID_EMULATOR_SWITCH_ISO, MF_BYCOMMAND | MF_GRAYED);
 		}
 	} else {
