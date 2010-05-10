@@ -558,8 +558,8 @@ void mdec1Interrupt() {
 
 int mdecFreeze(gzFile f, int Mode) {
 	gzfreeze(&mdec, sizeof(mdec));
-	gzfreezel(iq_y);
-	gzfreezel(iq_uv);
+	gzfreeze(iq_y, sizeof(iq_y));
+	gzfreeze(iq_uv, sizeof(iq_uv));
 
 	return 0;
 }

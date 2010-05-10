@@ -465,9 +465,11 @@ void psxRcntInit()
 
 s32 psxRcntFreeze( gzFile f, s32 Mode )
 {
-    gzfreezel( rcnts );
+    gzfreeze( &rcnts, sizeof(rcnts) );
     gzfreeze( &hSyncCount, sizeof(hSyncCount) );
     gzfreeze( &spuSyncCount, sizeof(spuSyncCount) );
+    gzfreeze( &psxNextCounter, sizeof(psxNextCounter) );
+    gzfreeze( &psxNextsCounter, sizeof(psxNextsCounter) );
 
     return 0;
 }

@@ -142,8 +142,6 @@ extern int NetOpened;
 	if (Mode == 1) gzwrite(f, ptr, size); \
 	if (Mode == 0) gzread(f, ptr, size);
 
-#define gzfreezel(ptr) gzfreeze(ptr, sizeof(ptr))
-
 //#define BIAS	4
 #define BIAS	2
 #define PSXCLK	33868800	/* 33.8688 Mhz */
