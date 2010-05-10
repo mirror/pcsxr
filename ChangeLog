@@ -1,3 +1,8 @@
+May 10, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/sio.h: Some code (regs,macro) was moved to the 'c' file. 
+ * libpcsxcore/sio.c: Likewise.
+
 May 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * configure.ac: libbz2 is no longer needed.

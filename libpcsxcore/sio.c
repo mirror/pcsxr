@@ -1,20 +1,20 @@
 /***************************************************************************
- *   Copyright (C) 2007 Ryan Schultz, PCSX-df Team, PCSX team              *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA.           *
+ *	 Copyright (C) 2007 Ryan Schultz, PCSX-df Team, PCSX team			   *
+ *																		   *
+ *	 This program is free software; you can redistribute it and/or modify  *
+ *	 it under the terms of the GNU General Public License as published by  *
+ *	 the Free Software Foundation; either version 2 of the License, or	   *
+ *	 (at your option) any later version.								   *
+ *																		   *
+ *	 This program is distributed in the hope that it will be useful,	   *
+ *	 but WITHOUT ANY WARRANTY; without even the implied warranty of		   *
+ *	 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the		   *
+ *	 GNU General Public License for more details.						   *
+ *																		   *
+ *	 You should have received a copy of the GNU General Public License	   *
+ *	 along with this program; if not, write to the						   *
+ *	 Free Software Foundation, Inc.,									   *
+ *	 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA.		   *
  ***************************************************************************/
 
 /*
@@ -24,6 +24,27 @@
 #include "sio.h"
 #include <sys/stat.h>
 
+// Status Flags
+#define TX_RDY		0x0001
+#define RX_RDY		0x0002
+#define TX_EMPTY	0x0004
+#define PARITY_ERR	0x0008
+#define RX_OVERRUN	0x0010
+#define FRAMING_ERR	0x0020
+#define SYNC_DETECT	0x0040
+#define DSR			0x0080
+#define CTS			0x0100
+#define IRQ			0x0200
+
+// Control Flags
+#define TX_PERM		0x0001
+#define DTR			0x0002
+#define RX_PERM		0x0004
+#define BREAK		0x0008
+#define RESET_ERR	0x0010
+#define RTS			0x0020
+#define SIO_RESET	0x0040
+
 // *** FOR WORKS ON PADS AND MEMORY CARDS *****
 
 static unsigned char buf[256];
@@ -31,10 +52,10 @@ unsigned char cardh[4] = { 0x00, 0x00, 0x5a, 0x5d };
 
 //static unsigned short StatReg = 0x002b;
 // Transfer Ready and the Buffer is Empty
-unsigned short StatReg = TX_RDY | TX_EMPTY;
-unsigned short ModeReg;
-unsigned short CtrlReg;
-unsigned short BaudReg;
+static unsigned short StatReg = TX_RDY | TX_EMPTY;
+static unsigned short ModeReg;
+static unsigned short CtrlReg;
+static unsigned short BaudReg;
 
 static unsigned int bufcount;
 static unsigned int parp;
@@ -52,49 +73,6 @@ char Mcd1Data[MCD_SIZE], Mcd2Data[MCD_SIZE];
 		psxRegs.intCycle[7 + 1] = 200; /*270;*/ \
 		psxRegs.intCycle[7] = psxRegs.cycle; \
 	} \
-}
-
-unsigned char sioRead8() {
-	unsigned char ret = 0;
-
-	if ((StatReg & RX_RDY)/* && (CtrlReg & RX_PERM)*/) {
-//		StatReg &= ~RX_OVERRUN;
-		ret = buf[parp];
-		if (parp == bufcount) {
-			StatReg &= ~RX_RDY;		// Receive is not Ready now
-			if (mcdst == 5) {
-				mcdst = 0;
-				if (rdwr == 2) {
-					switch (CtrlReg&0x2002) {
-						case 0x0002:
-							memcpy(Mcd1Data + (adrL | (adrH << 8)) * 128, &buf[1], 128);
-							SaveMcd(Config.Mcd1, Mcd1Data, (adrL | (adrH << 8)) * 128, 128);
-							break;
-						case 0x2002:
-							memcpy(Mcd2Data + (adrL | (adrH << 8)) * 128, &buf[1], 128);
-							SaveMcd(Config.Mcd2, Mcd2Data, (adrL | (adrH << 8)) * 128, 128);
-							break;
-					}
-				}
-			}
-			if (padst == 2) padst = 0;
-			if (mcdst == 1) {
-				mcdst = 2;
-				StatReg|= RX_RDY;
-			}
-		}
-	}
-
-#ifdef PAD_LOG
-	PAD_LOG("sio read8 ;ret = %x\n", ret);
-#endif
-	return ret;
-}
-
-void netError() {
-	ClosePlugins();
-	SysMessage(_("Connection closed!\n"));
-	SysRunGui();
 }
 
 void sioWrite8(unsigned char value) {
@@ -220,7 +198,7 @@ void sioWrite8(unsigned char value) {
 			}
 			mcdst = 5;
 			return;
-		case 5:	
+		case 5:
 			parp++;
 			if (rdwr == 2) {
 				if (parp < 128) buf[parp+1] = value;
@@ -287,7 +265,17 @@ void sioWrite8(unsigned char value) {
 	}
 }
 
-void sioWriteCtrl16(unsigned short value) {
+void sioWriteStat16(unsigned short value)
+{
+}
+
+void sioWriteMode16(unsigned short value)
+{
+	ModeReg = value;
+}
+
+void sioWriteCtrl16(unsigned short value)
+{
 	CtrlReg = value & ~RESET_ERR;
 	if (value & RESET_ERR) StatReg &= ~IRQ;
 	if ((CtrlReg & SIO_RESET) || (!CtrlReg)) {
@@ -296,6 +284,75 @@ void sioWriteCtrl16(unsigned short value) {
 		psxRegs.interrupt&=~0x80;
 	}
 }
+
+void sioWriteBaud16(unsigned short value)
+{
+	BaudReg = value;
+}
+
+unsigned char sioRead8() {
+	unsigned char ret = 0;
+
+	if ((StatReg & RX_RDY)/* && (CtrlReg & RX_PERM)*/) {
+//		StatReg &= ~RX_OVERRUN;
+		ret = buf[parp];
+		if (parp == bufcount) {
+			StatReg &= ~RX_RDY;		// Receive is not Ready now
+			if (mcdst == 5) {
+				mcdst = 0;
+				if (rdwr == 2) {
+					switch (CtrlReg&0x2002) {
+						case 0x0002:
+							memcpy(Mcd1Data + (adrL | (adrH << 8)) * 128, &buf[1], 128);
+							SaveMcd(Config.Mcd1, Mcd1Data, (adrL | (adrH << 8)) * 128, 128);
+							break;
+						case 0x2002:
+							memcpy(Mcd2Data + (adrL | (adrH << 8)) * 128, &buf[1], 128);
+							SaveMcd(Config.Mcd2, Mcd2Data, (adrL | (adrH << 8)) * 128, 128);
+							break;
+					}
+				}
+			}
+			if (padst == 2) padst = 0;
+			if (mcdst == 1) {
+				mcdst = 2;
+				StatReg|= RX_RDY;
+			}
+		}
+	}
+
+#ifdef PAD_LOG
+	PAD_LOG("sio read8 ;ret = %x\n", ret);
+#endif
+	return ret;
+}
+
+unsigned short sioReadStat16()
+{
+	return StatReg;
+}
+
+unsigned short sioReadMode16()
+{
+	return ModeReg;
+}
+
+unsigned short sioReadCtrl16()
+{
+	return CtrlReg;
+}
+
+unsigned short sioReadBaud16()
+{
+	return BaudReg;
+}
+
+void netError() {
+	ClosePlugins();
+	SysMessage(_("Connection closed!\n"));
+	SysRunGui();
+}
+
 
 void sioInterrupt() {
 #ifdef PAD_LOG
@@ -326,11 +383,11 @@ void LoadMcd(int mcd, char *str) {
 			struct stat buf;
 
 			if (stat(str, &buf) != -1) {
-				if (buf.st_size == MCD_SIZE + 64) 
+				if (buf.st_size == MCD_SIZE + 64)
 					fseek(f, 64, SEEK_SET);
 				else if(buf.st_size == MCD_SIZE + 3904)
 					fseek(f, 3904, SEEK_SET);
-			}			
+			}
 			fread(data, 1, MCD_SIZE, f);
 			fclose(f);
 		}
@@ -341,7 +398,7 @@ void LoadMcd(int mcd, char *str) {
 		struct stat buf;
 		SysPrintf(_("Loading memory card %s\n"), str);
 		if (stat(str, &buf) != -1) {
-			if (buf.st_size == MCD_SIZE + 64) 
+			if (buf.st_size == MCD_SIZE + 64)
 				fseek(f, 64, SEEK_SET);
 			else if(buf.st_size == MCD_SIZE + 3904)
 				fseek(f, 3904, SEEK_SET);
@@ -358,7 +415,7 @@ void LoadMcds(char *mcd1, char *mcd2) {
 
 void SaveMcd(char *mcd, char *data, uint32_t adr, int size) {
 	FILE *f;
-	
+
 	f = fopen(mcd, "r+b");
 	if (f != NULL) {
 		struct stat buf;
@@ -391,7 +448,7 @@ void SaveMcd(char *mcd, char *data, uint32_t adr, int size) {
 }
 
 void CreateMcd(char *mcd) {
-	FILE *f;	
+	FILE *f;
 	struct stat buf;
 	int s = MCD_SIZE;
 	int i = 0, j;
@@ -400,8 +457,8 @@ void CreateMcd(char *mcd) {
 	if (f == NULL)
 		return;
 
-	if (stat(mcd, &buf)!=-1) {		
-		if ((buf.st_size == MCD_SIZE + 3904) || strstr(mcd, ".gme")) {			
+	if (stat(mcd, &buf)!=-1) {
+		if ((buf.st_size == MCD_SIZE + 3904) || strstr(mcd, ".gme")) {
 			s = s + 3904;
 			fputc('1', f);
 			s--;
@@ -436,9 +493,9 @@ void CreateMcd(char *mcd) {
 			fputc(1, f);
 			s--;
 			fputc('M', f);
-			s--; 
+			s--;
 			fputc('Q', f);
-			s--; 
+			s--;
 			for (i = 0; i < 14; i++) {
 				fputc(0xa0, f);
 				s--;
@@ -551,13 +608,13 @@ void ConvertMcd(char *mcd, char *data) {
 	int i = 0;
 	int s = MCD_SIZE;
 
-	if (strstr(mcd, ".gme")) {		
+	if (strstr(mcd, ".gme")) {
 		f = fopen(mcd, "wb");
-		if (f != NULL) {		
+		if (f != NULL) {
 			fwrite(data-3904, 1, MCD_SIZE+3904, f);
 			fclose(f);
-		}		
-		f = fopen(mcd, "r+");		
+		}
+		f = fopen(mcd, "r+");
 		s = s + 3904;
 		fputc('1', f); s--;
 		fputc('2', f); s--;
@@ -572,7 +629,7 @@ void ConvertMcd(char *mcd, char *data) {
 		fputc('D', f); s--;
 		for(i=0;i<7;i++) {
 			fputc(0, f); s--;
-		}		
+		}
 		fputc(1, f); s--;
 		fputc(0, f); s--;
 		fputc(1, f); s--;
@@ -585,14 +642,14 @@ void ConvertMcd(char *mcd, char *data) {
 		fputc(0xff, f);
 		while (s-- > (MCD_SIZE+1)) fputc(0, f);
 		fclose(f);
-	} else if(strstr(mcd, ".mem") || strstr(mcd,".vgs")) {		
+	} else if(strstr(mcd, ".mem") || strstr(mcd,".vgs")) {
 		f = fopen(mcd, "wb");
-		if (f != NULL) {		
+		if (f != NULL) {
 			fwrite(data-64, 1, MCD_SIZE+64, f);
 			fclose(f);
-		}		
-		f = fopen(mcd, "r+");		
-		s = s + 64;				
+		}
+		f = fopen(mcd, "r+");
+		s = s + 64;
 		fputc('V', f); s--;
 		fputc('g', f); s--;
 		fputc('s', f); s--;
@@ -609,7 +666,7 @@ void ConvertMcd(char *mcd, char *data) {
 		fclose(f);
 	} else {
 		f = fopen(mcd, "wb");
-		if (f != NULL) {		
+		if (f != NULL) {
 			fwrite(data, 1, MCD_SIZE, f);
 			fclose(f);
 		}

@@ -81,25 +81,25 @@ u16 psxHwRead16(u32 add) {
 #endif
 			return hard;
 		case 0x1f801044:
-			hard = StatReg;
+			hard = sioReadStat16();
 #ifdef PAD_LOG
 			PAD_LOG("sio read16 %lx; ret = %x\n", add&0xf, hard);
 #endif
 			return hard;
 		case 0x1f801048:
-			hard = ModeReg;
+			hard = sioReadMode16();
 #ifdef PAD_LOG
 			PAD_LOG("sio read16 %lx; ret = %x\n", add&0xf, hard);
 #endif
 			return hard;
 		case 0x1f80104a:
-			hard = CtrlReg;
+			hard = sioReadCtrl16();
 #ifdef PAD_LOG
 			PAD_LOG("sio read16 %lx; ret = %x\n", add&0xf, hard);
 #endif
 			return hard;
 		case 0x1f80104e:
-			hard = BaudReg;
+			hard = sioReadBaud16();
 #ifdef PAD_LOG
 			PAD_LOG("sio read16 %lx; ret = %x\n", add&0xf, hard);
 #endif
@@ -366,12 +366,13 @@ void psxHwWrite16(u32 add, u16 value) {
 #endif
 			return;
 		case 0x1f801044:
+            sioWriteStat16(value);
 #ifdef PAD_LOG
 			PAD_LOG ("sio write16 %lx, %x\n", add&0xf, value);
 #endif
 			return;
 		case 0x1f801048:
-			ModeReg = value;
+            sioWriteMode16(value);
 #ifdef PAD_LOG
 			PAD_LOG ("sio write16 %lx, %x\n", add&0xf, value);
 #endif
@@ -383,7 +384,7 @@ void psxHwWrite16(u32 add, u16 value) {
 #endif
 			return;
 		case 0x1f80104e: // baudrate register
-			BaudReg = value;
+            sioWriteBaud16(value);
 #ifdef PAD_LOG
 			PAD_LOG ("sio write16 %lx, %x\n", add&0xf, value);
 #endif
