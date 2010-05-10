@@ -6,6 +6,8 @@ May 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * libpcsxcore/sio.c: Likewise.
  * libpcsxcore/psxcounters.c: Likewise.
  * libpcsxcore/misc.c: Added savestate versioning support.
+ * gui/Gtk2Gui.c: Don't reset when loading from savestate unless loading
+   succeeded.
 
 May 10, 2010 edgbla <edgbla@yandex.ru>
 

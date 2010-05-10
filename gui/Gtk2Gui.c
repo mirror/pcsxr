@@ -752,10 +752,10 @@ void state_load(gchar *state_filename) {
 		}
 	}
 
-	SysReset();
-
 	ret = LoadState(state_filename);
 	if (ret == 0) {
+		SysReset();
+
 		// Check the CD-ROM is valid
 		if (CheckCdrom() == -1) {
 			ClosePlugins();
@@ -765,7 +765,6 @@ void state_load(gchar *state_filename) {
 
 		sprintf(Text, _("Loaded state %s."), state_filename);
 		GPU_displayText(Text);
-		psxCpu->Execute();
 	} else {
 		sprintf(Text, _("Error loading state %s!"), state_filename);
 		GPU_displayText(Text);
@@ -794,6 +793,8 @@ void on_states_load (GtkWidget *widget, gpointer user_data) {
 	state_load(state_filename);
 
 	g_free(state_filename);
+
+	psxCpu->Execute();
 }
 
 void on_states_save (GtkWidget *widget, gpointer user_data) {
@@ -818,6 +819,7 @@ void on_states_load_other() {
 		GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
 		NULL);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER (file_chooser), SStateFile);
+	g_free(SStateFile);
 
 	if (gtk_dialog_run(GTK_DIALOG(file_chooser)) == GTK_RESPONSE_ACCEPT) {
 		gchar *filename;
@@ -828,10 +830,10 @@ void on_states_load_other() {
 		state_load(filename);
 
 		g_free(filename);
+
+		psxCpu->Execute();
 	} else
 		gtk_widget_destroy(file_chooser);
-
-	g_free(SStateFile);
 } 
 
 void on_states_save_other() {
@@ -846,6 +848,7 @@ void on_states_save_other() {
 			GTK_STOCK_SAVE, GTK_RESPONSE_OK,
 			NULL);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(file_chooser), SStateFile);
+	g_free(SStateFile);
 
 	if (gtk_dialog_run (GTK_DIALOG(file_chooser)) == GTK_RESPONSE_OK) {
 		gchar *filename;
@@ -859,8 +862,6 @@ void on_states_save_other() {
 	}
 	else
 		gtk_widget_destroy(file_chooser);
-
-	g_free(SStateFile);
 } 
 
 void OnHelp_About(GtkWidget *widget, gpointer user_data) {
