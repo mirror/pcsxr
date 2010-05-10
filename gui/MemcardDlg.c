@@ -31,6 +31,9 @@
 
 #define MAX_MEMCARD_BLOCKS 15
 
+static int quit;
+static int currentIcon = 0;
+
 McdBlock Blocks[2][MAX_MEMCARD_BLOCKS];	// Assuming 2 cards, 15 blocks?
 int IconC[2][MAX_MEMCARD_BLOCKS];
 enum {
@@ -83,6 +86,7 @@ static GdkPixbuf *SetIcon(GtkWidget *dialog, short *icon, int i) {
 	GdkPixmap *pixmap;
 	GdkImage  *image;
 	GdkVisual *visual;
+	GdkPixbuf *pixbuf;
 	GdkGC     *gc;
 	int x, y, c;
 
@@ -90,11 +94,11 @@ static GdkPixbuf *SetIcon(GtkWidget *dialog, short *icon, int i) {
 
 	if (visual->depth == 8) return NULL;
 
-	image = gdk_image_new(GDK_IMAGE_NORMAL, visual, 16, 16);
+	image = gdk_image_new(GDK_IMAGE_NORMAL, visual, 32, 32);
 
-	for (y = 0; y < 16; y++) {
-		for (x = 0; x < 16; x++) {
-			c = icon[y * 16 + x];
+	for (y = 0; y < 32; y++) {
+		for (x = 0; x < 32; x++) {
+			c = icon[(y>>1) * 16 + (x>>1)];
 			c = ((c & 0x001f) << 10) | ((c & 0x7c00) >> 10) | (c & 0x03e0);
 			if (visual->depth == 16)
 				c = (c & 0x001f) | ((c & 0x7c00) << 1) | ((c & 0x03e0) << 1);
@@ -105,15 +109,18 @@ static GdkPixbuf *SetIcon(GtkWidget *dialog, short *icon, int i) {
 		}
 	}
 
-	pixmap = gdk_pixmap_new(dialog->window, 16, 16, visual->depth);
+	pixmap = gdk_pixmap_new(dialog->window, 32, 32, visual->depth);
 
 	gc = gdk_gc_new(pixmap);
-	gdk_draw_image(pixmap, gc, image, 0, 0, 0, 0, 16, 16);
+	gdk_draw_image(pixmap, gc, image, 0, 0, 0, 0, 32, 32);
 	gdk_gc_destroy(gc);
 	gdk_image_destroy(image);
 
-	return gdk_pixbuf_get_from_drawable(NULL, GDK_PIXMAP (pixmap), NULL,
+	pixbuf = gdk_pixbuf_get_from_drawable(NULL, GDK_PIXMAP (pixmap), NULL,
 										0, 0, 0, 0, -1, -1);
+	g_object_unref(pixmap);
+	
+	return pixbuf;
 }
 
 static void LoadListItems(int mcd, GtkWidget *widget) {
@@ -152,8 +159,6 @@ static void LoadListItems(int mcd, GtkWidget *widget) {
 		else
 			state = _("Free");
 
-//		if (Info->IconCount == 0) continue;
-
 		pixbuf = SetIcon(dialog, Info->Icon, i + 1);
 
 		gtk_list_store_append(store, &iter);
@@ -164,6 +169,8 @@ static void LoadListItems(int mcd, GtkWidget *widget) {
 				CL_NAME, Info->Name,
 				CL_ID, Info->ID,
 				-1);
+		
+		g_object_unref(pixbuf);
 	}
 
 	gtk_tree_view_set_model(GTK_TREE_VIEW(List), GTK_TREE_MODEL(store));
@@ -220,6 +227,7 @@ static void UpdateListItems(int mcd, GtkWidget *widget) {
 	GtkListStore *store;
 	GtkTreeIter iter;
 	GdkPixbuf *pixbuf;
+	short *pIcon;
 	int i;
 
 	xml = glade_get_widget_tree(widget);
@@ -249,9 +257,13 @@ static void UpdateListItems(int mcd, GtkWidget *widget) {
 		else
 			state = _("Free");
 
-//		if (Info->IconCount == 0) continue;
+		pIcon = Info->Icon;
+		if( Info->IconCount > 1 && currentIcon <= Info->IconCount )
+		{
+			pIcon = &Info->Icon[currentIcon*16*16];
+		}
 
-		pixbuf = SetIcon(dialog, Info->Icon, i + 1);
+		pixbuf = SetIcon(dialog, pIcon, i + 1);
 
 		gtk_list_store_set(store, &iter,
 				CL_ICON, pixbuf,
@@ -260,10 +272,17 @@ static void UpdateListItems(int mcd, GtkWidget *widget) {
 				CL_NAME, Info->Name,
 				CL_ID, Info->ID,
 				-1);
-
+		
+		g_object_unref(pixbuf);
 		gtk_tree_model_iter_next(GTK_TREE_MODEL(store), &iter);
 	}
 
+	currentIcon++;
+	if( currentIcon > 2 )
+	{
+		currentIcon = 0;
+	}
+	
 	gtk_widget_show(List);
 
 	OnTreeSelectionChanged(gtk_tree_view_get_selection(GTK_TREE_VIEW(List)), (gpointer)mcd);
@@ -284,6 +303,7 @@ static void UpdateMcdDlg(GtkWidget *widget) {
 }
 
 static void OnMcd_Close(GtkDialog *dialog, gint arg1, gpointer user_data) {
+	quit = 1;
 	SaveConfig();
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
@@ -613,6 +633,15 @@ static void OnTreeSelectionChanged(GtkTreeSelection *selection, gpointer user_da
 	}
 }
 
+gboolean updateFunc(gpointer data)
+{
+	if( quit ) return 0;
+	UpdateListItems(1, GtkCList_McdList1);
+	UpdateListItems(2, GtkCList_McdList2);
+	g_timeout_add( 333, updateFunc, 0 );
+	return 0;
+}
+
 void OnConf_Mcds() {
 	GladeXML *xml;
 	GtkWidget *dialog;
@@ -711,5 +740,8 @@ void OnConf_Mcds() {
 			GTK_SIGNAL_FUNC(OnMemcardDelete), (gpointer)2, NULL, G_CONNECT_AFTER);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), FALSE);
 
-	while (gtk_events_pending()) gtk_main_iteration();
+	quit = 0;
+    g_timeout_add( 1, updateFunc, 0 );
+	
+	while (gtk_events_pending()) {  gtk_main_iteration(); }
 }

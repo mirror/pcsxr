@@ -1816,7 +1816,6 @@ PAL</property>
   <widget class="GtkDialog" id="McdsDlg">
     <property name="visible">True</property>
     <property name="title" translatable="yes">Configure Memory Cards</property>
-    <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="default_width">688</property>
     <property name="default_height">400</property>
@@ -1849,7 +1848,7 @@ PAL</property>
                         <child>
                           <widget class="GtkTreeView" id="GtkCList_McdList1">
                             <property name="width_request">265</property>
-                            <property name="height_request">250</property>
+                            <property name="height_request">400</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                           </widget>
@@ -2076,6 +2075,7 @@ PAL</property>
                         </child>
                       </widget>
                       <packing>
+                        <property name="expand">False</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
@@ -2222,6 +2222,7 @@ PAL</property>
                 </child>
               </widget>
               <packing>
+                <property name="expand">False</property>
                 <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
@@ -2247,7 +2248,7 @@ PAL</property>
                         <child>
                           <widget class="GtkTreeView" id="GtkCList_McdList2">
                             <property name="width_request">265</property>
-                            <property name="height_request">250</property>
+                            <property name="height_request">400</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                           </widget>
@@ -2474,6 +2475,7 @@ PAL</property>
                         </child>
                       </widget>
                       <packing>
+                        <property name="expand">False</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
