@@ -1,20 +1,20 @@
 /***************************************************************************
- *	 Copyright (C) 2007 Ryan Schultz, PCSX-df Team, PCSX team			   *
- *																		   *
- *	 This program is free software; you can redistribute it and/or modify  *
- *	 it under the terms of the GNU General Public License as published by  *
- *	 the Free Software Foundation; either version 2 of the License, or	   *
- *	 (at your option) any later version.								   *
- *																		   *
- *	 This program is distributed in the hope that it will be useful,	   *
- *	 but WITHOUT ANY WARRANTY; without even the implied warranty of		   *
- *	 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the		   *
- *	 GNU General Public License for more details.						   *
- *																		   *
- *	 You should have received a copy of the GNU General Public License	   *
- *	 along with this program; if not, write to the						   *
- *	 Free Software Foundation, Inc.,									   *
- *	 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA.		   *
+ *   Copyright (C) 2007 Ryan Schultz, PCSX-df Team, PCSX team              *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA.           *
  ***************************************************************************/
 
 /*
@@ -50,8 +50,8 @@
 static unsigned char buf[256];
 unsigned char cardh[4] = { 0x00, 0x00, 0x5a, 0x5d };
 
-//static unsigned short StatReg = 0x002b;
 // Transfer Ready and the Buffer is Empty
+// static unsigned short StatReg = 0x002b;
 static unsigned short StatReg = TX_RDY | TX_EMPTY;
 static unsigned short ModeReg;
 static unsigned short CtrlReg;
@@ -70,7 +70,7 @@ char Mcd1Data[MCD_SIZE], Mcd2Data[MCD_SIZE];
 #define SIO_INT() { \
 	if (!Config.Sio) { \
 		psxRegs.interrupt |= 0x80; \
-		psxRegs.intCycle[7 + 1] = 200; /*270;*/ \
+		psxRegs.intCycle[7 + 1] = 200; /*271;*/ \
 		psxRegs.intCycle[7] = psxRegs.cycle; \
 	} \
 }
@@ -81,10 +81,10 @@ void sioWrite8(unsigned char value) {
 #endif
 	switch (padst) {
 		case 1: SIO_INT();
-			if ((value&0x40) == 0x40) {
+			if ((value & 0x40) == 0x40) {
 				padst = 2; parp = 1;
 				if (!Config.UseNet) {
-					switch (CtrlReg&0x2002) {
+					switch (CtrlReg & 0x2002) {
 						case 0x0002:
 							buf[parp] = PAD1_poll(value);
 							break;
@@ -122,7 +122,7 @@ void sioWrite8(unsigned char value) {
 				return;
 			}*/
 			if (!Config.UseNet) {
-				switch (CtrlReg&0x2002) {
+				switch (CtrlReg & 0x2002) {
 					case 0x0002: buf[parp] = PAD1_poll(value); break;
 					case 0x2002: buf[parp] = PAD2_poll(value); break;
 				}
@@ -169,7 +169,7 @@ void sioWrite8(unsigned char value) {
 					buf[1] = 0x5d;
 					buf[2] = adrH;
 					buf[3] = adrL;
-					switch (CtrlReg&0x2002) {
+					switch (CtrlReg & 0x2002) {
 						case 0x0002:
 							memcpy(&buf[4], Mcd1Data + (adrL | (adrH << 8)) * 128, 128);
 							break;
@@ -201,7 +201,7 @@ void sioWrite8(unsigned char value) {
 		case 5:
 			parp++;
 			if (rdwr == 2) {
-				if (parp < 128) buf[parp+1] = value;
+				if (parp < 128) buf[parp + 1] = value;
 			}
 			SIO_INT();
 			return;
@@ -212,7 +212,7 @@ void sioWrite8(unsigned char value) {
 			StatReg |= RX_RDY;		// Transfer is Ready
 
 			if (!Config.UseNet) {
-				switch (CtrlReg&0x2002) {
+				switch (CtrlReg & 0x2002) {
 					case 0x0002: buf[0] = PAD1_startPoll(1); break;
 					case 0x2002: buf[0] = PAD2_startPoll(2); break;
 				}
@@ -241,10 +241,10 @@ void sioWrite8(unsigned char value) {
 
 					if (NET_recvPadData(buf, 1) == -1)
 						netError();
-					if (NET_recvPadData(buf+128, 2) == -1)
+					if (NET_recvPadData(buf + 128, 2) == -1)
 						netError();
 				} else {
-					memcpy(buf, buf+128, 32);
+					memcpy(buf, buf + 128, 32);
 				}
 			}
 
@@ -265,28 +265,24 @@ void sioWrite8(unsigned char value) {
 	}
 }
 
-void sioWriteStat16(unsigned short value)
-{
+void sioWriteStat16(unsigned short value) {
 }
 
-void sioWriteMode16(unsigned short value)
-{
+void sioWriteMode16(unsigned short value) {
 	ModeReg = value;
 }
 
-void sioWriteCtrl16(unsigned short value)
-{
+void sioWriteCtrl16(unsigned short value) {
 	CtrlReg = value & ~RESET_ERR;
 	if (value & RESET_ERR) StatReg &= ~IRQ;
 	if ((CtrlReg & SIO_RESET) || (!CtrlReg)) {
 		padst = 0; mcdst = 0; parp = 0;
 		StatReg = TX_RDY | TX_EMPTY;
-		psxRegs.interrupt&=~0x80;
+		psxRegs.interrupt &= ~0x80;
 	}
 }
 
-void sioWriteBaud16(unsigned short value)
-{
+void sioWriteBaud16(unsigned short value) {
 	BaudReg = value;
 }
 
@@ -301,7 +297,7 @@ unsigned char sioRead8() {
 			if (mcdst == 5) {
 				mcdst = 0;
 				if (rdwr == 2) {
-					switch (CtrlReg&0x2002) {
+					switch (CtrlReg & 0x2002) {
 						case 0x0002:
 							memcpy(Mcd1Data + (adrL | (adrH << 8)) * 128, &buf[1], 128);
 							SaveMcd(Config.Mcd1, Mcd1Data, (adrL | (adrH << 8)) * 128, 128);
@@ -327,23 +323,19 @@ unsigned char sioRead8() {
 	return ret;
 }
 
-unsigned short sioReadStat16()
-{
+unsigned short sioReadStat16() {
 	return StatReg;
 }
 
-unsigned short sioReadMode16()
-{
+unsigned short sioReadMode16() {
 	return ModeReg;
 }
 
-unsigned short sioReadCtrl16()
-{
+unsigned short sioReadCtrl16() {
 	return CtrlReg;
 }
 
-unsigned short sioReadBaud16()
-{
+unsigned short sioReadBaud16() {
 	return BaudReg;
 }
 
@@ -353,13 +345,12 @@ void netError() {
 	SysRunGui();
 }
 
-
 void sioInterrupt() {
 #ifdef PAD_LOG
 	PAD_LOG("Sio Interrupt (CP0.Status = %x)\n", psxRegs.CP0.n.Status);
 #endif
 //	SysPrintf("Sio Interrupt\n");
-	StatReg|= IRQ;
+	StatReg |= IRQ;
 	psxHu32ref(0x1070) |= SWAPu32(0x80);
 }
 
@@ -457,7 +448,7 @@ void CreateMcd(char *mcd) {
 	if (f == NULL)
 		return;
 
-	if (stat(mcd, &buf)!=-1) {
+	if (stat(mcd, &buf) != -1) {
 		if ((buf.st_size == MCD_SIZE + 3904) || strstr(mcd, ".gme")) {
 			s = s + 3904;
 			fputc('1', f);
@@ -611,7 +602,7 @@ void ConvertMcd(char *mcd, char *data) {
 	if (strstr(mcd, ".gme")) {
 		f = fopen(mcd, "wb");
 		if (f != NULL) {
-			fwrite(data-3904, 1, MCD_SIZE+3904, f);
+			fwrite(data - 3904, 1, MCD_SIZE + 3904, f);
 			fclose(f);
 		}
 		f = fopen(mcd, "r+");
@@ -627,7 +618,7 @@ void ConvertMcd(char *mcd, char *data) {
 		fputc('S', f); s--;
 		fputc('T', f); s--;
 		fputc('D', f); s--;
-		for(i=0;i<7;i++) {
+		for (i = 0; i < 7; i++) {
 			fputc(0, f); s--;
 		}
 		fputc(1, f); s--;
@@ -690,14 +681,14 @@ void GetMcdBlockInfo(int mcd, int block, McdBlock *Info) {
 
 	Info->IconCount = *ptr & 0x3;
 
-	ptr+= 2;
+	ptr += 2;
 
-	i=0;
+	i = 0;
 	memcpy(Info->sTitle, ptr, 48*2);
 
-	for (i=0; i < 48; i++) {
+	for (i = 0; i < 48; i++) {
 		c = *(ptr) << 8;
-		c|= *(ptr+1);
+		c|= *(ptr + 1);
 		if (!c) break;
 
 		if (c >= 0x8281 && c <= 0x8298)
@@ -712,19 +703,17 @@ void GetMcdBlockInfo(int mcd, int block, McdBlock *Info) {
 		else if (c == 0x816D) c = '[';
 		else if (c == 0x816E) c = ']';
 		else if (c == 0x817C) c = '-';
-		else {
-			c = ' ';
-		}
+		else c = ' ';
 
 		str[i] = c;
-		ptr+=2;
+		ptr += 2;
 	}
 	str[i] = 0;
 
 	ptr = data + block * 8192 + 0x60; // icon palete data
 
 	for (i = 0; i < 16; i++) {
-		clut[i] = *((unsigned short*)ptr);
+		clut[i] = *((unsigned short *)ptr);
 		ptr += 2;
 	}
 

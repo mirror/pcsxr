@@ -136,9 +136,9 @@ void ResetMenuSlots(GladeXML *xml) {
 		widget = glade_xml_get_widget(xml, "net1");
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget(xml, "SwitchImage");
-		gtk_widget_set_sensitive(widget, cdrfilename[0]);
+		gtk_widget_set_sensitive(widget, UsingIso());
 		widget = glade_xml_get_widget(xml, "toolbutton_switchimage");
-		gtk_widget_set_sensitive(widget, cdrfilename[0]);
+		gtk_widget_set_sensitive(widget, UsingIso());
 		widget = glade_xml_get_widget(xml, "toolbutton_graphics");
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget(xml, "toolbutton_sound");
@@ -434,7 +434,7 @@ void OnFile_RunExe() {
 			gtk_widget_destroy (file_chooser);
 			destroy_main_window();
 
-			cdrfilename[0] = '\0';
+			SetIsoFile(NULL);
 			LoadPlugins();
 			NetOpened = 0;
 
@@ -467,7 +467,7 @@ void OnFile_RunCd() {
 
 	destroy_main_window();
 
-	cdrfilename[0] = '\0';
+	SetIsoFile(NULL);
 	LoadPlugins();
 	NetOpened = 0;
 
@@ -509,7 +509,7 @@ void OnFile_RunBios() {
 
 	destroy_main_window();
 
-	cdrfilename[0] = '\0';
+	SetIsoFile(NULL);
 	LoadPlugins();
 	NetOpened = 0;
 
@@ -590,7 +590,7 @@ void OnFile_RunImage() {
 
 	destroy_main_window();
 
-	strcpy(cdrfilename, filename);
+	SetIsoFile(filename);
 	g_free(filename);
 
 	LoadPlugins();
@@ -675,7 +675,7 @@ void OnEmu_SwitchImage() {
 
 	destroy_main_window();
 
-	strcpy(cdrfilename, filename);
+	SetIsoFile(filename);
 	g_free(filename);
 
 	if (OpenPlugins() == -1) {
@@ -683,7 +683,7 @@ void OnEmu_SwitchImage() {
 		return;
 	}
 
-	cdOpenCase = time(NULL) + 2;
+	SetCdOpenCaseTime(time(NULL) + 2);
 
 	CheatSearchBackupMemory();
 	psxCpu->Execute();

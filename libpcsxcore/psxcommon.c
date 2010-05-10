@@ -23,6 +23,7 @@
 #include "cheat.h"
 
 PcsxConfig Config;
+boolean NetOpened = FALSE;
 
 int Log = 0;
 FILE *emuLog = NULL;

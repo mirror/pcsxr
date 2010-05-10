@@ -39,7 +39,6 @@ unsigned long gpuDisp;
 
 int StatesC = 0;
 extern int UseGui;
-extern int cdOpenCase;
 int ShowPic = 0;
 
 void gpuShowPic() {
@@ -223,10 +222,10 @@ void PADhandleKey(int key) {
 			GPU_makeSnapshot();
 			break;
 		case XK_F9:
-			cdOpenCase = -1;
+			SetCdOpenCaseTime(-1);
 			break;
 		case XK_F10:
-			cdOpenCase = 0;
+			SetCdOpenCaseTime(0);
 			break;
 		case XK_Escape:
 			// TODO
@@ -261,10 +260,6 @@ void SignalExit(int sig) {
 	ClosePlugins();
 	OnFile_Exit();
 }
-
-void SPUirq(void);
-
-int NetOpened = 0;
 
 #define PARSEPATH(dst, src) \
 	ptr = src + strlen(src); \

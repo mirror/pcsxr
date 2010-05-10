@@ -24,8 +24,8 @@
 #include "plugins.h"
 #include "cdriso.h"
 
-char cdrfilename[MAXPATHLEN] = ""; // FIXME: cleanup
-int cdOpenCase = 0; // FIXME: cleanup
+static char IsoFile[MAXPATHLEN] = "";
+static s64 cdOpenCaseTime = 0;
 
 GPUupdateLace         GPU_updateLace;
 GPUinit               GPU_init;
@@ -213,7 +213,7 @@ long CALLBACK CDR__play(unsigned char *sector) { return 0; }
 long CALLBACK CDR__stop(void) { return 0; }
 
 long CALLBACK CDR__getStatus(struct CdrStat *stat) {
-	if (cdOpenCase < 0 || cdOpenCase > time(NULL))
+	if (cdOpenCaseTime < 0 || cdOpenCaseTime > (s64)time(NULL))
 		stat->Status = 0x10;
 	else
 		stat->Status = 0;
@@ -460,7 +460,7 @@ int LoadPlugins() {
 
 	ReleasePlugins();
 
-	if (cdrfilename[0] != '\0') {
+	if (UsingIso()) {
 		LoadCDRplugin(NULL);
 	} else {
 		sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Cdr);
@@ -511,7 +511,7 @@ void ReleasePlugins() {
 	if (Config.UseNet) {
 		int ret = NET_close();
 		if (ret < 0) Config.UseNet = 0;
-		NetOpened = 0;
+		NetOpened = FALSE;
 	}
 
 	if (hCDRDriver != NULL || cdrIsoActive()) CDR_shutdown();
@@ -531,4 +531,24 @@ void ReleasePlugins() {
 	if (Config.UseNet && hNETDriver != NULL) {
 		SysCloseLibrary(hNETDriver); hNETDriver = NULL;
 	}
+}
+
+void SetIsoFile(const char *filename) {
+	if (filename == NULL) {
+		IsoFile[0] = '\0';
+		return;
+	}
+	strncpy(IsoFile, filename, MAXPATHLEN);
+}
+
+const char *GetIsoFile(void) {
+	return IsoFile;
+}
+
+boolean UsingIso(void) {
+	return (IsoFile[0] != '\0');
+}
+
+void SetCdOpenCaseTime(s64 time) {
+	cdOpenCaseTime = time;
 }

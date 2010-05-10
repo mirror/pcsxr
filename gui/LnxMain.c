@@ -300,17 +300,21 @@ int main(int argc, char *argv[]) {
 			printf("Using config file %s.\n", cfgfile_basename);
 		}
 		else if (!strcmp(argv[i], "-cdfile")) {
+			char isofilename[MAXPATHLEN];
+
 			if (i+1 >= argc) break;
-			strncpy(cdrfilename, argv[++i], MAXPATHLEN);
-			if (cdrfilename[0] != '/') {
+			strncpy(isofilename, argv[++i], MAXPATHLEN);
+			if (isofilename[0] != '/') {
 				getcwd(path, MAXPATHLEN);
-				if (strlen(path) + strlen(cdrfilename) + 1 < MAXPATHLEN) {
+				if (strlen(path) + strlen(isofilename) + 1 < MAXPATHLEN) {
 					strcat(path, "/");
-					strcat(path, cdrfilename);
-					strcpy(cdrfilename, path);
+					strcat(path, isofilename);
+					strcpy(isofilename, path);
 				} else
-					cdrfilename[0] = 0;
+					isofilename[0] = 0;
 			}
+
+			SetIsoFile(isofilename);
 			runcd = RUN_CD;
 		}
 		else if (!strcmp(argv[i], "-h") ||
@@ -402,7 +406,7 @@ int main(int argc, char *argv[]) {
 	chdir(plugin_default_dir);
 	g_free(plugin_default_dir);
 
-	if (UseGui) cdrfilename[0] = '\0';
+	if (UseGui) SetIsoFile(NULL);
 
 	if (SysInit() == -1) return 1;
 

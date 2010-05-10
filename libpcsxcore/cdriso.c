@@ -240,7 +240,7 @@ static void startCDDA(unsigned int offset) {
 		stopCDDA();
 	}
 
-	cddaHandle = fopen(cdrfilename, "rb");
+	cddaHandle = fopen(GetIsoFile(), "rb");
 	if (cddaHandle == NULL) {
 		return;
 	}
@@ -629,31 +629,31 @@ static long CALLBACK ISOopen(void) {
 		return 0; // it's already open
 	}
 
-	cdHandle = fopen(cdrfilename, "rb");
+	cdHandle = fopen(GetIsoFile(), "rb");
 	if (cdHandle == NULL) {
 		return -1;
 	}
 
-	SysPrintf(_("Loaded CD Image: %s"), cdrfilename);
+	SysPrintf(_("Loaded CD Image: %s"), GetIsoFile());
 
 	cddaBigEndian = 0;
 	subChanInterleaved = 0;
 
-	if (parsetoc(cdrfilename) == 0) {
+	if (parsetoc(GetIsoFile()) == 0) {
 		cddaBigEndian = 1; // cdrdao uses big-endian for CD Audio
 		SysPrintf("[+toc]");
 	}
-	else if (parsecue(cdrfilename) == 0) {
+	else if (parsecue(GetIsoFile()) == 0) {
 		SysPrintf("[+cue]");
 	}
-	else if (parseccd(cdrfilename) == 0) {
+	else if (parseccd(GetIsoFile()) == 0) {
 		SysPrintf("[+ccd]");
 	}
-	else if (parsemds(cdrfilename) == 0) {
+	else if (parsemds(GetIsoFile()) == 0) {
 		SysPrintf("[+mds]");
 	}
 
-	if (!subChanInterleaved && opensubfile(cdrfilename) == 0) {
+	if (!subChanInterleaved && opensubfile(GetIsoFile()) == 0) {
 		SysPrintf("[+sub]");
 	}
 

@@ -134,9 +134,7 @@ typedef struct {
 } PcsxConfig;
 
 extern PcsxConfig Config;
-
-extern int cdOpenCase; // FIXME: cleanup
-extern int NetOpened;
+extern boolean NetOpened;
 
 #define gzfreeze(ptr, size) \
 	if (Mode == 1) gzwrite(f, ptr, size); \

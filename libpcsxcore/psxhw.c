@@ -26,12 +26,12 @@
 #include "cdrom.h"
 
 void psxHwReset() {
-    if (Config.Sio) psxHu32ref(0x1070) |= SWAP32(0x80);
-    if (Config.SpuIrq) psxHu32ref(0x1070) |= SWAP32(0x200);
+	if (Config.Sio) psxHu32ref(0x1070) |= SWAP32(0x80);
+	if (Config.SpuIrq) psxHu32ref(0x1070) |= SWAP32(0x200);
 
 	memset(psxH, 0, 0x10000);
 
-	mdecInit(); //intialize mdec decoder
+	mdecInit(); // initialize mdec decoder
 	cdrReset();
 	psxRcntInit();
 }
@@ -366,7 +366,7 @@ void psxHwWrite16(u32 add, u16 value) {
 #endif
 			return;
 		case 0x1f801044:
-            sioWriteStat16(value);
+			sioWriteStat16(value);
 #ifdef PAD_LOG
 			PAD_LOG ("sio write16 %lx, %x\n", add&0xf, value);
 #endif

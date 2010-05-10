@@ -1,5 +1,19 @@
 May 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
+ * libpcsxcore/plugins.c: Use functions instead of using global variables,
+   other minor cleanups.
+ * gui/Plugin.c: Likewise.
+ * gui/LnxMain.c: Likewise.
+ * gui/Gtk2Gui.c: Likewise.
+ * libpcsxcore/cdriso.c: Likewise.
+ * libpcsxcore/psxcommon.c: Likewise.
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/psxcommon.h: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psxhw.c: Likewise.
+
+May 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
  * libpcsxcore/cdrom.c: Got rid of gzfreezel.
  * libpcsxcore/mdec.c: Likewise.
  * libpcsxcore/psxcommon.h: Likewise.

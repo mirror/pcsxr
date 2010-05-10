@@ -312,7 +312,10 @@ extern NETkeypressed         NET_keypressed;
 
 void CALLBACK clearDynarec(void);
 
-extern char cdrfilename[MAXPATHLEN]; // FIXME: cleanup
+void SetIsoFile(const char *filename);
+const char *GetIsoFile(void);
+boolean UsingIso(void);
+void SetCdOpenCaseTime(s64 time);
 
 #ifdef __cplusplus
 }
