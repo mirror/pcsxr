@@ -468,8 +468,8 @@ int SaveState(const char *file) {
 	f = gzopen(file, "wb");
 	if (f == NULL) return -1;
 
-	gzwrite(f, (const void *)PcsxHeader, 32);
-	gzwrite(f, (const void *)&SaveVersion, sizeof(SaveVersion));
+	gzwrite(f, (void *)PcsxHeader, 32);
+	gzwrite(f, (void *)&SaveVersion, sizeof(SaveVersion));
 
 	pMem = (unsigned char *)malloc(128 * 96 * 3);
 	if (pMem == NULL) return -1;

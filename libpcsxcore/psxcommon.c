@@ -21,6 +21,7 @@
 #include "r3000a.h"
 
 #include "cheat.h"
+#include "ppf.h"
 
 PcsxConfig Config;
 boolean NetOpened = FALSE;

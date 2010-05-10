@@ -1,5 +1,10 @@
 May 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
+ * libpcsxcore/psxcommon.c: Include ppf.h.
+ * libpcsxcore/misc.c: Silenced MSVC warning.
+
+May 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
  * libpcsxcore/plugins.c: Use functions instead of using global variables,
    other minor cleanups.
  * gui/Plugin.c: Likewise.
