@@ -752,7 +752,9 @@ void state_load(gchar *state_filename) {
 		}
 	}
 
-	ret = LoadState(state_filename);
+	ret = CheckState(state_filename);
+	if (ret == 0) ret = LoadState(state_filename);
+
 	if (ret == 0) {
 		SysReset();
 
