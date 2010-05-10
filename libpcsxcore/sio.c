@@ -672,7 +672,7 @@ void GetMcdBlockInfo(int mcd, int block, McdBlock *Info) {
 	}
 
 	for (i = 0; i < Info->IconCount; i++) {
-		short *icon = &Info->Icon[i*16*16];
+		short *icon = &Info->Icon[i * 16 * 16];
 
 		ptr = data + block * 8192 + 128 + 128 * i; // icon data
 
@@ -695,8 +695,6 @@ void GetMcdBlockInfo(int mcd, int block, McdBlock *Info) {
 }
 
 int sioFreeze(gzFile f, int Mode) {
-	char Unused[4096];
-
 	gzfreezel(buf);
 	gzfreezel(&StatReg);
 	gzfreezel(&ModeReg);
@@ -709,7 +707,6 @@ int sioFreeze(gzFile f, int Mode) {
 	gzfreezel(&adrH);
 	gzfreezel(&adrL);
 	gzfreezel(&padst);
-	gzfreezel(Unused);
 
 	return 0;
 }

@@ -557,12 +557,9 @@ void mdec1Interrupt() {
 }
 
 int mdecFreeze(gzFile f, int Mode) {
-	char Unused[4096];
-
 	gzfreeze(&mdec, sizeof(mdec));
 	gzfreezel(iq_y);
 	gzfreezel(iq_uv);
-	gzfreezel(Unused);
 
 	return 0;
 }

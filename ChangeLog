@@ -3,6 +3,12 @@ May 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * configure.ac: libbz2 is no longer needed.
  * debian/control: Likewise.
  * libpcsxcore/plugins.c: CDRgetBufferSub() is now mandatory.
+ * libpcsxcore/cdrom.h: Savestate compatibility is already broken, so no need
+   to stuff garbage into saved files :)
+ * libpcsxcore/mdec.c: Likewise.
+ * libpcsxcore/psxhw.c: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
 
 May 9, 2010 edgbla <edgbla@yandex.ru>
 

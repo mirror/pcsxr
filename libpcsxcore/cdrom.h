@@ -87,8 +87,6 @@ typedef struct {
 	unsigned long eCycle;
 
 	int Seeked;
-
-	char Unused[4083];
 } cdrStruct;
 
 extern cdrStruct cdr;
