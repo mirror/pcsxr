@@ -214,7 +214,7 @@ int _OpenPlugins(HWND hWnd) {
 	if (ret < 0) { SysMessage (_("Error Opening CDR Plugin")); return -1; }
 
 	SetCurrentDirectory(PcsxDir);
-	if (Config.UseNet && NetOpened == 0) {
+	if (Config.UseNet && !NetOpened) {
 		netInfo info;
 		char path[256];
 
@@ -268,7 +268,7 @@ int _OpenPlugins(HWND hWnd) {
 
 			DestroyWindow(hW);
 		}
-		NetOpened = 1;
+		NetOpened = TRUE;
 	} else if (Config.UseNet) {
 		NET_resume();
 	}
@@ -344,5 +344,5 @@ void ResetPlugins() {
 		if (ret < 0) { SysMessage (_("NETinit error: %d"), ret); return; }
 	}
 
-	NetOpened = 0;
+	NetOpened = FALSE;
 }

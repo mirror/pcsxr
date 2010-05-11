@@ -288,7 +288,7 @@ int _OpenPlugins() {
 	ret = PAD2_open(&gpuDisp);
 	if (ret < 0) { SysMessage(_("Error opening Controller 2 plugin!")); return -1; }
 
-	if (Config.UseNet && NetOpened == 0) {
+	if (Config.UseNet && !NetOpened) {
 		netInfo info;
 		char path[MAXPATHLEN];
 		char dotdir[MAXPATHLEN];
@@ -341,7 +341,7 @@ int _OpenPlugins() {
 				if (RecvPcsxInfo() == -1) Config.UseNet = 0;
 			}
 		}
-		NetOpened = 1;
+		NetOpened = TRUE;
 	} else if (Config.UseNet) {
 		NET_resume();
 	}

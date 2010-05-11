@@ -436,7 +436,7 @@ void OnFile_RunExe() {
 
 			SetIsoFile(NULL);
 			LoadPlugins();
-			NetOpened = 0;
+			NetOpened = FALSE;
 
 			if (OpenPlugins() == -1) {
 				g_free(file);
@@ -469,7 +469,7 @@ void OnFile_RunCd() {
 
 	SetIsoFile(NULL);
 	LoadPlugins();
-	NetOpened = 0;
+	NetOpened = FALSE;
 
 	if (OpenPlugins() == -1) {
 		SysRunGui();
@@ -511,7 +511,7 @@ void OnFile_RunBios() {
 
 	SetIsoFile(NULL);
 	LoadPlugins();
-	NetOpened = 0;
+	NetOpened = FALSE;
 
 	if (OpenPlugins() == -1) {
 		SysRunGui();
@@ -594,7 +594,7 @@ void OnFile_RunImage() {
 	g_free(filename);
 
 	LoadPlugins();
-	NetOpened = 0;
+	NetOpened = FALSE;
 
 	if (OpenPlugins() == -1) {
 		SysRunGui();

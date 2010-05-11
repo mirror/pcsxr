@@ -42,78 +42,6 @@ void gpuShowPic() {
 }
 
 void PADhandleKey(int key) {
-/*	char Text[255];
-	int ret;
-
-	switch (key) {
-		case 0: break;
-		case XK_F1:
-			sprintf(Text, "sstates/%10.10s.%3.3d", CdromLabel, StatesC);
-			GPU_freeze(2, (GPUFreeze_t *)&StatesC);
-			ret = SaveState(Text);
-			if (ret == 0)
-				 sprintf(Text, _("*PCSX*: Saved State %d"), StatesC+1);
-			else sprintf(Text, _("*PCSX*: Error Saving State %d"), StatesC+1);
-			GPU_displayText(Text);
-			if (ShowPic) { ShowPic = 0; gpuShowPic(); }
-			break;
-		case XK_F2:
-			if (StatesC < 4) StatesC++;
-			else StatesC = 0;
-			GPU_freeze(2, (GPUFreeze_t *)&StatesC);
-			if (ShowPic) { ShowPic = 0; gpuShowPic(); }
-			break;
-		case XK_F3:			
-			sprintf (Text, "sstates/%10.10s.%3.3d", CdromLabel, StatesC);
-			ret = LoadState(Text);
-			if (ret == 0)
-				 sprintf(Text, _("*PCSX*: Loaded State %d"), StatesC+1);
-			else sprintf(Text, _("*PCSX*: Error Loading State %d"), StatesC+1);
-			GPU_displayText(Text);
-			break;
-		case XK_F4:
-			gpuShowPic();
-			break;
-		case XK_F5:
-			Config.Sio ^= 0x1;
-			if (Config.Sio)
-				 sprintf(Text, _("*PCSX*: Sio Irq Always Enabled"));
-			else sprintf(Text, _("*PCSX*: Sio Irq Not Always Enabled"));
-			GPU_displayText(Text);
-			break;
-		case XK_F6:
-			Config.Mdec ^= 0x1;
-			if (Config.Mdec)
-				 sprintf(Text, _("*PCSX*: Black&White Mdecs Only Enabled"));
-			else sprintf(Text, _("*PCSX*: Black&White Mdecs Only Disabled"));
-			GPU_displayText(Text);
-			break;
-		case XK_F7:
-			Config.Xa ^= 0x1;
-			if (Config.Xa == 0)
-				 sprintf (Text, _("*PCSX*: Xa Enabled"));
-			else sprintf (Text, _("*PCSX*: Xa Disabled"));
-			GPU_displayText(Text);
-			break;
-		case XK_F8:
-			GPU_makeSnapshot();
-			break;
-		case XK_F9:
-			cdOpenCase = 1;
-			break;
-		case XK_F10:
-			cdOpenCase = 0;
-			break;
-		case XK_Escape:
-			ClosePlugins();
-			UpdateMenuSlots();
-			if (!UseGui) OnFile_Exit();
-			RunGui();
-			break;
-		default:
-			GPU_keypressed(key);
-			if (Config.UseNet) NET_keypressed(key);
-	}*/
 }
 
 long PAD1__open(void) {
@@ -132,8 +60,6 @@ void SignalExit(int sig) {
 }
 
 void SPUirq(void);
-
-int NetOpened = 0;
 
 #define PARSEPATH(dst, src) \
 	ptr = src + strlen(src); \
@@ -168,60 +94,6 @@ int _OpenPlugins() {
 	ret = PAD2_open(&gpuDisp);
 	if (ret < 0) { SysMessage(_("Error Opening PAD2 Plugin")); return -1; }
 
-/*	if (Config.UseNet && NetOpened == 0) {
-		netInfo info;
-		char path[256];
-
-		strcpy(info.EmuName, "PCSX v" PCSX_VERSION);
-		strncpy(info.CdromID, CdromId, 9);
-		strncpy(info.CdromLabel, CdromLabel, 9);
-		info.psxMem = psxM;
-		info.GPU_showScreenPic = GPU_showScreenPic;
-		info.GPU_displayText = GPU_displayText;
-		info.GPU_showScreenPic = GPU_showScreenPic;
-		info.PAD_setSensitive = PAD1_setSensitive;
-		sprintf(path, "%s%s", Config.BiosDir, Config.Bios);
-		strcpy(info.BIOSpath, path);
-		strcpy(info.MCD1path, Config.Mcd1);
-		strcpy(info.MCD2path, Config.Mcd2);
-		sprintf(path, "%s%s", Config.PluginsDir, Config.Gpu);
-		strcpy(info.GPUpath, path);
-		sprintf(path, "%s%s", Config.PluginsDir, Config.Spu);
-		strcpy(info.SPUpath, path);
-		sprintf(path, "%s%s", Config.PluginsDir, Config.Cdr);
-		strcpy(info.CDRpath, path);
-		NET_setInfo(&info);
-
-		ret = NET_open(&gpuDisp);
-		if (ret < 0) {
-			if (ret == -2) {
-				// -2 is returned when something in the info
-				// changed and needs to be synced
-				char *ptr;
-
-				PARSEPATH(Config.Bios, info.BIOSpath);
-				PARSEPATH(Config.Gpu,  info.GPUpath);
-				PARSEPATH(Config.Spu,  info.SPUpath);
-				PARSEPATH(Config.Cdr,  info.CDRpath);
-
-				strcpy(Config.Mcd1, info.MCD1path);
-				strcpy(Config.Mcd2, info.MCD2path);
-				return -2;
-			} else {
-				Config.UseNet = 0;
-			}
-		} else {
-			if (NET_queryPlayer() == 1) {
-				if (SendPcsxInfo() == -1) Config.UseNet = 0;
-			} else {
-				if (RecvPcsxInfo() == -1) Config.UseNet = 0;
-			}
-		}
-		NetOpened = 1;
-	} else if (Config.UseNet) {
-		NET_resume();
-	}
-*/
 	return 0;
 }
 
@@ -251,10 +123,6 @@ void ClosePlugins() {
 	if (ret < 0) { SysMessage(_("Error Closing PAD2 Plugin")); return; }
 	ret = GPU_close();
 	if (ret < 0) { SysMessage(_("Error Closing GPU Plugin")); return; }
-
-	/*if (Config.UseNet) {
-		NET_pause();
-	}*/
 }
 
 void ResetPlugins() {
@@ -265,7 +133,6 @@ void ResetPlugins() {
 	SPU_shutdown();
 	PAD1_shutdown();
 	PAD2_shutdown();
-	//if (Config.UseNet) NET_shutdown(); 
 
 	ret = CDR_init();
 	if (ret < 0) { SysMessage(_("CDRinit error: %d"), ret); return; }
@@ -277,11 +144,7 @@ void ResetPlugins() {
 	if (ret < 0) { SysMessage(_("PAD1init error: %d"), ret); return; }
 	ret = PAD2_init(2);
 	if (ret < 0) { SysMessage(_("PAD2init error: %d"), ret); return; }
-	/*if (Config.UseNet) {
-		ret = NET_init();
-		if (ret < 0) { SysMessage(_("NETinit error: %d"), ret); return; }
-	}*/
 
-	NetOpened = 0;
+	NetOpened = FALSE;
 }
 

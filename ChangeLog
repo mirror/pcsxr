@@ -1,3 +1,10 @@
+May 11, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * gui/Gtk2Gui.c: Use TRUE/FALSE instead of 0/1 for NetOpened.
+ * gui/Plugin.c: Likewise.
+ * win32/gui/plugin.c: Likewise.
+ * macosx/Plugin.c: Removed obsolete code.
+
 May 10, 2010 edgbla <edgbla@yandex.ru>
 
  * data/pcsx.glade2: Memory cards dialog is now resizable, icons were
