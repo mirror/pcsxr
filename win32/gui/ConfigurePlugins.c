@@ -25,20 +25,20 @@
 #include "resource.h"
 #include "Win32.h"
 
-#define QueryKeyB(name, var) \
+#define QueryKeyV(name, var) \
 	size = sizeof(DWORD); \
 	if (RegQueryValueEx(myKey, name, 0, &type, (LPBYTE)&tmp, &size) != 0) { if (err) { RegCloseKey(myKey); return -1; } } \
-	var = (tmp != 0);
+	var = tmp;
 
-#define QueryKeyV(s, name, var) \
+#define QueryKey(s, name, var) \
 	size = s; \
 	if (RegQueryValueEx(myKey, name, 0, &type, (LPBYTE)var, &size) != 0) { if (err) { RegCloseKey(myKey); return -1; } }
 
-#define SetKeyB(name, var) \
-	tmp = ((var) ? 1 : 0); \
+#define SetKeyV(name, var) \
+	tmp = var; \
 	RegSetValueEx(myKey, name, 0, REG_DWORD, (LPBYTE)&tmp, sizeof(DWORD));
 
-#define SetKeyV(name, var, s, t) \
+#define SetKey(name, var, s, t) \
 	RegSetValueEx(myKey, name, 0, t, (LPBYTE)var, s);
 
 int LoadConfig() {
@@ -53,33 +53,33 @@ int LoadConfig() {
 	if (RegOpenKeyEx(HKEY_CURRENT_USER,cfgfile,0,KEY_ALL_ACCESS,&myKey)!=ERROR_SUCCESS) return -1;
 
 	err = 1;
-	QueryKeyV(256, "Bios", Conf->Bios);
-	QueryKeyV(256, "Gpu",  Conf->Gpu);
-	QueryKeyV(256, "Spu",  Conf->Spu);
-	QueryKeyV(256, "Cdr",  Conf->Cdr);
-	QueryKeyV(256, "Pad1", Conf->Pad1);
-	QueryKeyV(256, "Pad2", Conf->Pad2);
-	QueryKeyV(256, "Mcd1", Conf->Mcd1);
-	QueryKeyV(256, "Mcd2", Conf->Mcd2);
-	QueryKeyV(256, "PluginsDir", Conf->PluginsDir);
-	QueryKeyV(256, "BiosDir",    Conf->BiosDir);
+	QueryKey(256, "Bios", Conf->Bios);
+	QueryKey(256, "Gpu",  Conf->Gpu);
+	QueryKey(256, "Spu",  Conf->Spu);
+	QueryKey(256, "Cdr",  Conf->Cdr);
+	QueryKey(256, "Pad1", Conf->Pad1);
+	QueryKey(256, "Pad2", Conf->Pad2);
+	QueryKey(256, "Mcd1", Conf->Mcd1);
+	QueryKey(256, "Mcd2", Conf->Mcd2);
+	QueryKey(256, "PluginsDir", Conf->PluginsDir);
+	QueryKey(256, "BiosDir",    Conf->BiosDir);
 	err = 0;
-	QueryKeyV(256, "Net",  Conf->Net);
-	QueryKeyV(256, "Lang", Conf->Lang);
+	QueryKey(256, "Net",  Conf->Net);
+	QueryKey(256, "Lang", Conf->Lang);
 
-	QueryKeyB("Xa",      Conf->Xa);
-	QueryKeyB("Sio",     Conf->Sio);
-	QueryKeyB("Mdec",    Conf->Mdec);
-	QueryKeyB("PsxAuto", Conf->PsxAuto);
-	QueryKeyB("Cdda",    Conf->Cdda);
-	QueryKeyB("Debug",   Conf->Debug);
-	QueryKeyB("PsxOut",  Conf->PsxOut);
-	QueryKeyB("SpuIrq",  Conf->SpuIrq);
-	QueryKeyB("RCntFix", Conf->RCntFix);
-	QueryKeyB("VSyncWA", Conf->VSyncWA);
+	QueryKeyV("Xa",       Conf->Xa);
+	QueryKeyV("Sio",      Conf->Sio);
+	QueryKeyV("Mdec",     Conf->Mdec);
+	QueryKeyV("PsxAuto",  Conf->PsxAuto);
+	QueryKeyV("Cdda",     Conf->Cdda);
+	QueryKeyV("Debug",    Conf->Debug);
+	QueryKeyV("PsxOut",   Conf->PsxOut);
+	QueryKeyV("SpuIrq",   Conf->SpuIrq);
+	QueryKeyV("RCntFix",  Conf->RCntFix);
+	QueryKeyV("VSyncWA",  Conf->VSyncWA);
 
-	QueryKeyV(sizeof(Conf->Cpu),     "Cpu",     &Conf->Cpu);
-	QueryKeyV(sizeof(Conf->PsxType), "PsxType", &Conf->PsxType);
+	QueryKeyV("Cpu",      Conf->Cpu);
+	QueryKeyV("PsxType",  Conf->PsxType);
 
 	if (Config.Cpu == CPU_DYNAREC) {
 		Config.Debug = 0; // don't enable debugger if using dynarec core
@@ -104,32 +104,32 @@ void SaveConfig() {
 
 	RegCreateKeyEx(HKEY_CURRENT_USER, cfgfile, 0, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, &myKey, &myDisp);
 
-	SetKeyV("Bios", Conf->Bios, strlen(Conf->Bios), REG_SZ);
-	SetKeyV("Gpu",  Conf->Gpu,  strlen(Conf->Gpu),  REG_SZ);
-	SetKeyV("Spu",  Conf->Spu,  strlen(Conf->Spu),  REG_SZ);
-	SetKeyV("Cdr",  Conf->Cdr,  strlen(Conf->Cdr),  REG_SZ);
-	SetKeyV("Pad1", Conf->Pad1, strlen(Conf->Pad1), REG_SZ);
-	SetKeyV("Pad2", Conf->Pad2, strlen(Conf->Pad2), REG_SZ);
-	SetKeyV("Net",  Conf->Net,  strlen(Conf->Net),  REG_SZ);
-	SetKeyV("Mcd1", Conf->Mcd1, strlen(Conf->Mcd1), REG_SZ);
-	SetKeyV("Mcd2", Conf->Mcd2, strlen(Conf->Mcd2), REG_SZ);
-	SetKeyV("Lang", Conf->Lang, strlen(Conf->Lang), REG_SZ);
-	SetKeyV("PluginsDir", Conf->PluginsDir, strlen(Conf->PluginsDir), REG_SZ);
-	SetKeyV("BiosDir",    Conf->BiosDir,    strlen(Conf->BiosDir), REG_SZ);
+	SetKey("Bios", Conf->Bios, strlen(Conf->Bios), REG_SZ);
+	SetKey("Gpu",  Conf->Gpu,  strlen(Conf->Gpu),  REG_SZ);
+	SetKey("Spu",  Conf->Spu,  strlen(Conf->Spu),  REG_SZ);
+	SetKey("Cdr",  Conf->Cdr,  strlen(Conf->Cdr),  REG_SZ);
+	SetKey("Pad1", Conf->Pad1, strlen(Conf->Pad1), REG_SZ);
+	SetKey("Pad2", Conf->Pad2, strlen(Conf->Pad2), REG_SZ);
+	SetKey("Net",  Conf->Net,  strlen(Conf->Net),  REG_SZ);
+	SetKey("Mcd1", Conf->Mcd1, strlen(Conf->Mcd1), REG_SZ);
+	SetKey("Mcd2", Conf->Mcd2, strlen(Conf->Mcd2), REG_SZ);
+	SetKey("Lang", Conf->Lang, strlen(Conf->Lang), REG_SZ);
+	SetKey("PluginsDir", Conf->PluginsDir, strlen(Conf->PluginsDir), REG_SZ);
+	SetKey("BiosDir",    Conf->BiosDir,    strlen(Conf->BiosDir), REG_SZ);
 
-	SetKeyB("Xa",      Conf->Xa);
-	SetKeyB("Sio",     Conf->Sio);
-	SetKeyB("Mdec",    Conf->Mdec);
-	SetKeyB("PsxAuto", Conf->PsxAuto);
-	SetKeyB("Cdda",    Conf->Cdda);
-	SetKeyB("Debug",   Conf->Debug);
-	SetKeyB("PsxOut",  Conf->PsxOut);
-	SetKeyB("SpuIrq",  Conf->SpuIrq);
-	SetKeyB("RCntFix", Conf->RCntFix);
-	SetKeyB("VSyncWA", Conf->VSyncWA);
+	SetKeyV("Xa",      Conf->Xa);
+	SetKeyV("Sio",     Conf->Sio);
+	SetKeyV("Mdec",    Conf->Mdec);
+	SetKeyV("PsxAuto", Conf->PsxAuto);
+	SetKeyV("Cdda",    Conf->Cdda);
+	SetKeyV("Debug",   Conf->Debug);
+	SetKeyV("PsxOut",  Conf->PsxOut);
+	SetKeyV("SpuIrq",  Conf->SpuIrq);
+	SetKeyV("RCntFix", Conf->RCntFix);
+	SetKeyV("VSyncWA", Conf->VSyncWA);
 
-	SetKeyV("Cpu",     &Conf->Cpu,     sizeof(Conf->Cpu),     REG_DWORD);
-	SetKeyV("PsxType", &Conf->PsxType, sizeof(Conf->PsxType), REG_DWORD);
+	SetKeyV("Cpu",     Conf->Cpu);
+	SetKeyV("PsxType", Conf->PsxType);
 
 	RegCloseKey(myKey);
 }

@@ -25,7 +25,7 @@
 #include "Linux.h"
 
 /* TODO escaping/unescaping would be nice, as would maxchars */
-void GetValue(char *src, char *name, char *outvar) {
+static void GetValue(char *src, char *name, char *outvar) {
 	char *tmp;
 
 	*outvar = 0;
@@ -42,22 +42,24 @@ void GetValue(char *src, char *name, char *outvar) {
 	return;
 }
 
-void GetValuel(char *src, char *name, long *var) {
+static long GetValuel(char *src, char *name) {
 	char *tmp = strstr(src, name);
 	if (tmp != NULL) {
 		tmp += strlen(name);
 		while ((*tmp == ' ') || (*tmp == '=')) tmp++;
-		if (*tmp != '\n') *var = atol(tmp);
+		if (*tmp != '\n') return atol(tmp);
 	}
+	return 0;
 }
 
-void GetValueb(char *src, char *name, boolean *var) {
+static boolean GetValueb(char *src, char *name) {
 	char *tmp = strstr(src, name);
 	if (tmp != NULL) {
 		tmp += strlen(name);
 		while ((*tmp == ' ') || (*tmp == '=')) tmp++;
-		if (*tmp != '\n') *var = (atoi(tmp) != 0);
+		if (*tmp != '\n') return (atoi(tmp) != 0);
 	}
+	return false;
 }
 
 #define SetValue(name, var) \
@@ -120,19 +122,19 @@ int LoadConfig(PcsxConfig *Conf) {
 	GetValue(data, "BiosDir",    Config.BiosDir);
 	GetValue(data, "PluginsDir",    Config.PluginsDir);
 
-	GetValueb(data, "Xa",      &Config.Xa);
-	GetValueb(data, "Sio",     &Config.Sio);
-	GetValueb(data, "Mdec",    &Config.Mdec);
-	GetValueb(data, "PsxAuto", &Config.PsxAuto);
-	GetValueb(data, "Cdda",    &Config.Cdda);
-	GetValueb(data, "Dbg",     &Config.Debug);
-	GetValueb(data, "PsxOut",  &Config.PsxOut);
-	GetValueb(data, "SpuIrq",  &Config.SpuIrq);
-	GetValueb(data, "RCntFix", &Config.RCntFix);
-	GetValueb(data, "VSyncWA", &Config.VSyncWA);
+	Config.Xa      = GetValueb(data, "Xa");
+	Config.Sio     = GetValueb(data, "Sio");
+	Config.Mdec    = GetValueb(data, "Mdec");
+	Config.PsxAuto = GetValueb(data, "PsxAuto");
+	Config.Cdda    = GetValueb(data, "Cdda");
+	Config.Debug   = GetValueb(data, "Dbg");
+	Config.PsxOut  = GetValueb(data, "PsxOut");
+	Config.SpuIrq  = GetValueb(data, "SpuIrq");
+	Config.RCntFix = GetValueb(data, "RCntFix");
+	Config.VSyncWA = GetValueb(data, "VSyncWA");
 
-	GetValuel(data, "Cpu",     &Config.Cpu);
-	GetValuel(data, "PsxType", &Config.PsxType);
+	Config.Cpu     = GetValuel(data, "Cpu");
+	Config.PsxType = GetValuel(data, "PsxType");
 
 	free(data);
 
