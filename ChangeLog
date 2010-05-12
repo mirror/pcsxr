@@ -7,6 +7,7 @@ May 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
    config.
  * gui/ConfDlg.c: Likewise.
  * win32/gui/ConfigurePlugins.c: Likewise.
+ * win32/gui/WndMain.c: Likewise.
  * libpcsxcore/psxmem.c: Likewise.
  * libpcsxcore/r3000a.c: Likewise.
  * libpcsxcore/plugins.c: Likewise.

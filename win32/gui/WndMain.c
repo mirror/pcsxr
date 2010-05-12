@@ -1222,17 +1222,17 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Button_SetCheck(GetDlgItem(hW,IDC_MDEC),    Config.Mdec);
 			Button_SetCheck(GetDlgItem(hW,IDC_CDDA),    Config.Cdda);
 	   		Button_SetCheck(GetDlgItem(hW,IDC_PSXAUTO), Config.PsxAuto);
-	   		Button_SetCheck(GetDlgItem(hW,IDC_CPU),     Config.Cpu);
+	   		Button_SetCheck(GetDlgItem(hW,IDC_CPU),     (Config.Cpu == CPU_INTERPRETER));
 	   		Button_SetCheck(GetDlgItem(hW,IDC_PSXOUT),  Config.PsxOut);
 			Button_SetCheck(GetDlgItem(hW,IDC_DEBUG),   Config.Debug);
 	   		Button_SetCheck(GetDlgItem(hW,IDC_SPUIRQ),  Config.SpuIrq);
 	   		Button_SetCheck(GetDlgItem(hW,IDC_RCNTFIX), Config.RCntFix);
 	   		Button_SetCheck(GetDlgItem(hW,IDC_VSYNCWA), Config.VSyncWA);
-	   		ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES),"NTSC");
-	   		ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES),"PAL");
+	   		ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "NTSC");
+	   		ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "PAL");
 	   		ComboBox_SetCurSel(GetDlgItem(hW,IDC_PSXTYPES),Config.PsxType);
 
-			if (!Config.Cpu) {
+			if (Config.Cpu == CPU_DYNAREC) {
 				Config.Debug = 0;
 				Button_SetCheck(GetDlgItem(hW, IDC_DEBUG), FALSE);
 				EnableWindow(GetDlgItem(hW, IDC_DEBUG), FALSE);
@@ -1243,7 +1243,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 
 		case WM_COMMAND: {
 			switch (LOWORD(wParam)) {
-       			case IDCANCEL: EndDialog(hW,FALSE); return TRUE;
+       			case IDCANCEL: EndDialog(hW, FALSE); return TRUE;
         		case IDOK:
 					tmp = ComboBox_GetCurSel(GetDlgItem(hW,IDC_PSXTYPES));
 					if (tmp == 0) Config.PsxType = 0;
@@ -1255,11 +1255,10 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					Config.Cdda    = Button_GetCheck(GetDlgItem(hW,IDC_CDDA));
 					Config.PsxAuto = Button_GetCheck(GetDlgItem(hW,IDC_PSXAUTO));
 					tmp = Config.Cpu;
-					Config.Cpu     = Button_GetCheck(GetDlgItem(hW,IDC_CPU));
+					Config.Cpu     = (Button_GetCheck(GetDlgItem(hW,IDC_CPU)) ? CPU_INTERPRETER : CPU_DYNAREC);
 					if (tmp != Config.Cpu) {
 						psxCpu->Shutdown();
-						if (Config.Cpu)	
-							 psxCpu = &psxInt;
+						if (Config.Cpu == CPU_INTERPRETER) psxCpu = &psxInt;
 						else psxCpu = &psxRec;
 						if (psxCpu->Init() == -1) {
 							SysClose();

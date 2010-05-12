@@ -25,16 +25,25 @@
 #include "resource.h"
 #include "Win32.h"
 
+#define QueryKeyB(name, var) \
+	size = sizeof(DWORD); \
+	if (RegQueryValueEx(myKey, name, 0, &type, (LPBYTE)&tmp, &size) != 0) { if (err) { RegCloseKey(myKey); return -1; } } \
+	var = (tmp != 0);
+
 #define QueryKeyV(s, name, var) \
 	size = s; \
-	if (RegQueryValueEx(myKey, name, 0, &type, (LPBYTE) var, &size) != 0) { if (err) { RegCloseKey(myKey); return -1; } }
+	if (RegQueryValueEx(myKey, name, 0, &type, (LPBYTE)var, &size) != 0) { if (err) { RegCloseKey(myKey); return -1; } }
+
+#define SetKeyB(name, var) \
+	tmp = ((var) ? 1 : 0); \
+	RegSetValueEx(myKey, name, 0, REG_DWORD, (LPBYTE)&tmp, sizeof(DWORD));
 
 #define SetKeyV(name, var, s, t) \
-	RegSetValueEx(myKey, name, 0, t, (LPBYTE) var, s);
+	RegSetValueEx(myKey, name, 0, t, (LPBYTE)var, s);
 
 int LoadConfig() {
 	HKEY myKey;
-	DWORD type,size;
+	DWORD type, size, tmp;
 	PcsxConfig *Conf = &Config;
 	int err;
 #ifdef ENABLE_NLS
@@ -57,16 +66,18 @@ int LoadConfig() {
 	err = 0;
 	QueryKeyV(256, "Net",  Conf->Net);
 	QueryKeyV(256, "Lang", Conf->Lang);
-	QueryKeyV(sizeof(Conf->Xa),      "Xa",      &Conf->Xa);
-	QueryKeyV(sizeof(Conf->Sio),     "Sio",     &Conf->Sio);
-	QueryKeyV(sizeof(Conf->Mdec),    "Mdec",    &Conf->Mdec);
-	QueryKeyV(sizeof(Conf->PsxAuto), "PsxAuto", &Conf->PsxAuto);
-	QueryKeyV(sizeof(Conf->Cdda),    "Cdda",    &Conf->Cdda);
-	QueryKeyV(sizeof(Conf->Debug),   "Debug",   &Conf->Debug);
-	QueryKeyV(sizeof(Conf->PsxOut),  "PsxOut",  &Conf->PsxOut);
-	QueryKeyV(sizeof(Conf->SpuIrq),  "SpuIrq",  &Conf->SpuIrq);
-	QueryKeyV(sizeof(Conf->RCntFix), "RCntFix", &Conf->RCntFix);
-	QueryKeyV(sizeof(Conf->VSyncWA), "VSyncWA", &Conf->VSyncWA);
+
+	QueryKeyB("Xa",      Conf->Xa);
+	QueryKeyB("Sio",     Conf->Sio);
+	QueryKeyB("Mdec",    Conf->Mdec);
+	QueryKeyB("PsxAuto", Conf->PsxAuto);
+	QueryKeyB("Cdda",    Conf->Cdda);
+	QueryKeyB("Debug",   Conf->Debug);
+	QueryKeyB("PsxOut",  Conf->PsxOut);
+	QueryKeyB("SpuIrq",  Conf->SpuIrq);
+	QueryKeyB("RCntFix", Conf->RCntFix);
+	QueryKeyB("VSyncWA", Conf->VSyncWA);
+
 	QueryKeyV(sizeof(Conf->Cpu),     "Cpu",     &Conf->Cpu);
 	QueryKeyV(sizeof(Conf->PsxType), "PsxType", &Conf->PsxType);
 
@@ -88,7 +99,7 @@ int LoadConfig() {
 
 void SaveConfig() {
 	HKEY myKey;
-	DWORD myDisp;
+	DWORD myDisp, tmp;
 	PcsxConfig *Conf = &Config;
 
 	RegCreateKeyEx(HKEY_CURRENT_USER, cfgfile, 0, NULL, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, NULL, &myKey, &myDisp);
@@ -105,18 +116,20 @@ void SaveConfig() {
 	SetKeyV("Lang", Conf->Lang, strlen(Conf->Lang), REG_SZ);
 	SetKeyV("PluginsDir", Conf->PluginsDir, strlen(Conf->PluginsDir), REG_SZ);
 	SetKeyV("BiosDir",    Conf->BiosDir,    strlen(Conf->BiosDir), REG_SZ);
-	SetKeyV("Xa",      &Conf->Xa,      sizeof(Conf->Xa),      REG_DWORD);
-	SetKeyV("Sio",     &Conf->Sio,     sizeof(Conf->Sio),     REG_DWORD);
-	SetKeyV("Mdec",    &Conf->Mdec,    sizeof(Conf->Mdec),    REG_DWORD);
-	SetKeyV("PsxAuto", &Conf->PsxAuto, sizeof(Conf->PsxAuto), REG_DWORD);
-	SetKeyV("PsxType", &Conf->PsxType, sizeof(Conf->PsxType), REG_DWORD);
-	SetKeyV("Cdda",    &Conf->Cdda,    sizeof(Conf->Cdda),    REG_DWORD);
+
+	SetKeyB("Xa",      Conf->Xa);
+	SetKeyB("Sio",     Conf->Sio);
+	SetKeyB("Mdec",    Conf->Mdec);
+	SetKeyB("PsxAuto", Conf->PsxAuto);
+	SetKeyB("Cdda",    Conf->Cdda);
+	SetKeyB("Debug",   Conf->Debug);
+	SetKeyB("PsxOut",  Conf->PsxOut);
+	SetKeyB("SpuIrq",  Conf->SpuIrq);
+	SetKeyB("RCntFix", Conf->RCntFix);
+	SetKeyB("VSyncWA", Conf->VSyncWA);
+
 	SetKeyV("Cpu",     &Conf->Cpu,     sizeof(Conf->Cpu),     REG_DWORD);
-	SetKeyV("Debug",   &Conf->Debug,   sizeof(Conf->Debug),   REG_DWORD);
-	SetKeyV("PsxOut",  &Conf->PsxOut,  sizeof(Conf->PsxOut),  REG_DWORD);
-	SetKeyV("SpuIrq",  &Conf->SpuIrq,  sizeof(Conf->SpuIrq),  REG_DWORD);
-	SetKeyV("RCntFix", &Conf->RCntFix, sizeof(Conf->RCntFix), REG_DWORD);
-	SetKeyV("VSyncWA", &Conf->VSyncWA, sizeof(Conf->VSyncWA), REG_DWORD);
+	SetKeyV("PsxType", &Conf->PsxType, sizeof(Conf->PsxType), REG_DWORD);
 
 	RegCloseKey(myKey);
 }
