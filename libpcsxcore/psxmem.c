@@ -111,15 +111,15 @@ void psxMemReset() {
 		f = fopen(bios, "rb");
 
 		if (f == NULL) {
-			SysMessage (_("Could not open BIOS:\"%s\". Enabling HLE Bios!\n"), bios);
+			SysMessage(_("Could not open BIOS:\"%s\". Enabling HLE Bios!\n"), bios);
 			memset(psxR, 0, 0x80000);
-			Config.HLE = BIOS_HLE;
+			Config.HLE = TRUE;
 		} else {
 			fread(psxR, 1, 0x80000, f);
 			fclose(f);
-			Config.HLE = BIOS_USER_DEFINED;
+			Config.HLE = FALSE;
 		}
-	} else Config.HLE = BIOS_HLE;
+	} else Config.HLE = TRUE;
 }
 
 void psxMemShutdown() {

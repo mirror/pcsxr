@@ -813,7 +813,7 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 	if (t != Config.Cpu) {
 		psxCpu->Shutdown();
 #ifdef PSXREC
-		if (Config.Cpu) {
+		if (Config.Cpu == CPU_INTERPRETER) {
 			psxCpu = &psxInt;
 		}
 		else psxCpu = &psxRec;
@@ -869,7 +869,7 @@ void OnConf_Cpu() {
 	g_signal_connect_data(GTK_OBJECT(glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), "toggled",
 			GTK_SIGNAL_FUNC(OnCpu_CpuClicked), xml, NULL, G_CONNECT_AFTER);
 #else
-	Config.Cpu = 1;
+	Config.Cpu = CPU_INTERPRETER;
 
 	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), TRUE);
 	gtk_widget_set_sensitive(GTK_WIDGET (glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), FALSE);

@@ -332,8 +332,8 @@ int CheckCdrom() {
 
 	if (Config.PsxAuto) { // autodetect system (pal or ntsc)
 		if (strstr(exename, "ES") != NULL)
-			Config.PsxType = 1; // pal
-		else Config.PsxType = 0; // ntsc
+			Config.PsxType = PSX_TYPE_PAL; // pal
+		else Config.PsxType = PSX_TYPE_NTSC; // ntsc
 	}
 
 	if (CdromLabel[0] == ' ') {
@@ -619,7 +619,6 @@ int RecvPcsxInfo() {
 	NET_recvData(&Config.SpuIrq, sizeof(Config.SpuIrq), PSE_NET_BLOCKING);
 	NET_recvData(&Config.RCntFix, sizeof(Config.RCntFix), PSE_NET_BLOCKING);
 	NET_recvData(&Config.PsxType, sizeof(Config.PsxType), PSE_NET_BLOCKING);
-	//psxUpdateVSyncRate();
 
 	SysUpdate();
 
@@ -628,8 +627,7 @@ int RecvPcsxInfo() {
 	if (tmp != Config.Cpu) {
 		psxCpu->Shutdown();
 #ifdef PSXREC
-		if (Config.Cpu)	
-			psxCpu = &psxInt;
+		if (Config.Cpu == CPU_INTERPRETER) psxCpu = &psxInt;
 		else psxCpu = &psxRec;
 #else
 		psxCpu = &psxInt;

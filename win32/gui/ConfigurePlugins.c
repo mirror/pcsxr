@@ -61,16 +61,16 @@ int LoadConfig() {
 	QueryKeyV(sizeof(Conf->Sio),     "Sio",     &Conf->Sio);
 	QueryKeyV(sizeof(Conf->Mdec),    "Mdec",    &Conf->Mdec);
 	QueryKeyV(sizeof(Conf->PsxAuto), "PsxAuto", &Conf->PsxAuto);
-	QueryKeyV(sizeof(Conf->PsxType), "PsxType", &Conf->PsxType);
 	QueryKeyV(sizeof(Conf->Cdda),    "Cdda",    &Conf->Cdda);
-	QueryKeyV(sizeof(Conf->Cpu),     "Cpu",     &Conf->Cpu);
 	QueryKeyV(sizeof(Conf->Debug),   "Debug",   &Conf->Debug);
 	QueryKeyV(sizeof(Conf->PsxOut),  "PsxOut",  &Conf->PsxOut);
 	QueryKeyV(sizeof(Conf->SpuIrq),  "SpuIrq",  &Conf->SpuIrq);
 	QueryKeyV(sizeof(Conf->RCntFix), "RCntFix", &Conf->RCntFix);
 	QueryKeyV(sizeof(Conf->VSyncWA), "VSyncWA", &Conf->VSyncWA);
+	QueryKeyV(sizeof(Conf->Cpu),     "Cpu",     &Conf->Cpu);
+	QueryKeyV(sizeof(Conf->PsxType), "PsxType", &Conf->PsxType);
 
-	if (!Config.Cpu) {
+	if (Config.Cpu == CPU_DYNAREC) {
 		Config.Debug = 0; // don't enable debugger if using dynarec core
 	}
 

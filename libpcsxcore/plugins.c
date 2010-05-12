@@ -480,11 +480,11 @@ int LoadPlugins() {
 	if (LoadPAD2plugin(Plugin) == -1) return -1;
 
 	if (strcmp("Disabled", Config.Net) == 0 || strcmp("", Config.Net) == 0)
-		Config.UseNet = 0;
+		Config.UseNet = FALSE;
 	else {
-		Config.UseNet = 1;
+		Config.UseNet = TRUE;
 		sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Net);
-		if (LoadNETplugin(Plugin) == -1) Config.UseNet = 0;
+		if (LoadNETplugin(Plugin) == -1) Config.UseNet = FALSE;
 	}
 
 	ret = CDR_init();

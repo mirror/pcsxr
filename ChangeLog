@@ -2,6 +2,15 @@ May 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/sio.c: Erase CdromId and CdromLabel when net connection
    closed.
+ * libpcsxcore/psxcommon.h: Use boolean type for config values.
+ * gui/Config.c: Use TRUE/FALSE for boolean values, enums for long values in
+   config.
+ * gui/ConfDlg.c: Likewise.
+ * win32/gui/ConfigurePlugins.c: Likewise.
+ * libpcsxcore/psxmem.c: Likewise.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/plugins.c: Likewise.
+ * libpcsxcore/misc.c: Likewise.
 
 May 11, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

@@ -43,22 +43,32 @@ void GetValue(char *src, char *name, char *outvar) {
 }
 
 void GetValuel(char *src, char *name, long *var) {
-	char *tmp = strstr(src, name); 
-	if (tmp != NULL) { 
-		tmp+=strlen(name); 
-		while ((*tmp == ' ') || (*tmp == '=')) tmp++; 
-		if (*tmp != '\n') sscanf(tmp, "%lx", var); 
+	char *tmp = strstr(src, name);
+	if (tmp != NULL) {
+		tmp += strlen(name);
+		while ((*tmp == ' ') || (*tmp == '=')) tmp++;
+		if (*tmp != '\n') *var = atol(tmp);
 	}
-	return;
+}
+
+void GetValueb(char *src, char *name, boolean *var) {
+	char *tmp = strstr(src, name);
+	if (tmp != NULL) {
+		tmp += strlen(name);
+		while ((*tmp == ' ') || (*tmp == '=')) tmp++;
+		if (*tmp != '\n') *var = (atoi(tmp) != 0);
+	}
 }
 
 #define SetValue(name, var) \
-	fprintf (f,"%s = %s\n", name, var);
+	fprintf(f, "%s = %s\n", name, var);
 
 #define SetValuel(name, var) \
-	fprintf (f,"%s = %lx\n", name, var);
+	fprintf(f, "%s = %lx\n", name, var);
 
-/* TODO Use glib functions for filename handling, use constants, glib-key-value-file-parser */
+#define SetValueb(name, var) \
+	fprintf(f, "%s = %d\n", name, (var) ? 1 : 0);
+
 int LoadConfig(PcsxConfig *Conf) {
 	struct stat buf;
 	FILE *f;
@@ -90,7 +100,7 @@ int LoadConfig(PcsxConfig *Conf) {
 	f = fopen(cfgfile, "r");
 	if (f == NULL) return -1;
 
-	data = (char*)malloc(size + 1);
+	data = (char *)malloc(size + 1);
 	if (data == NULL) return -1;
 
 	fread(data, 1, buf.st_size, f);
@@ -109,18 +119,20 @@ int LoadConfig(PcsxConfig *Conf) {
 	GetValue(data, "Mcd2", Config.Mcd2);
 	GetValue(data, "BiosDir",    Config.BiosDir);
 	GetValue(data, "PluginsDir",    Config.PluginsDir);
-	GetValuel(data, "Xa",      &Config.Xa);
-	GetValuel(data, "Sio",     &Config.Sio);
-	GetValuel(data, "Mdec",    &Config.Mdec);
-	GetValuel(data, "PsxAuto", &Config.PsxAuto);
-	GetValuel(data, "PsxType", &Config.PsxType);
-	GetValuel(data, "Cdda",    &Config.Cdda);
+
+	GetValueb(data, "Xa",      &Config.Xa);
+	GetValueb(data, "Sio",     &Config.Sio);
+	GetValueb(data, "Mdec",    &Config.Mdec);
+	GetValueb(data, "PsxAuto", &Config.PsxAuto);
+	GetValueb(data, "Cdda",    &Config.Cdda);
+	GetValueb(data, "Dbg",     &Config.Debug);
+	GetValueb(data, "PsxOut",  &Config.PsxOut);
+	GetValueb(data, "SpuIrq",  &Config.SpuIrq);
+	GetValueb(data, "RCntFix", &Config.RCntFix);
+	GetValueb(data, "VSyncWA", &Config.VSyncWA);
+
 	GetValuel(data, "Cpu",     &Config.Cpu);
-	GetValuel(data, "Dbg",     &Config.Debug);
-	GetValuel(data, "PsxOut",  &Config.PsxOut);
-	GetValuel(data, "SpuIrq",  &Config.SpuIrq);
-	GetValuel(data, "RCntFix", &Config.RCntFix);
-	GetValuel(data, "VSyncWA", &Config.VSyncWA);
+	GetValuel(data, "PsxType", &Config.PsxType);
 
 	free(data);
 
@@ -147,18 +159,20 @@ void SaveConfig() {
 	SetValue("Mcd2", Config.Mcd2);
 	SetValue("BiosDir",    Config.BiosDir);
 	SetValue("PluginsDir",    Config.PluginsDir);
-	SetValuel("Xa",      Config.Xa);
-	SetValuel("Sio",     Config.Sio);
-	SetValuel("Mdec",    Config.Mdec);
-	SetValuel("PsxAuto", Config.PsxAuto);
-	SetValuel("PsxType", Config.PsxType);
-	SetValuel("Cdda",    Config.Cdda);
+
+	SetValueb("Xa",      Config.Xa);
+	SetValueb("Sio",     Config.Sio);
+	SetValueb("Mdec",    Config.Mdec);
+	SetValueb("PsxAuto", Config.PsxAuto);
+	SetValueb("Cdda",    Config.Cdda);
+	SetValueb("Dbg",     Config.Debug);
+	SetValueb("PsxOut",  Config.PsxOut);
+	SetValueb("SpuIrq",  Config.SpuIrq);
+	SetValueb("RCntFix", Config.RCntFix);
+	SetValueb("VSyncWA", Config.VSyncWA);
+
 	SetValuel("Cpu",     Config.Cpu);
-	SetValuel("Dbg",     Config.Debug);
-	SetValuel("PsxOut",  Config.PsxOut);
-	SetValuel("SpuIrq",  Config.SpuIrq);
-	SetValuel("RCntFix", Config.RCntFix);
-	SetValuel("VSyncWA", Config.VSyncWA);
+	SetValuel("PsxType", Config.PsxType);
 
 	fclose(f);
 }

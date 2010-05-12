@@ -114,20 +114,20 @@ typedef struct {
 	char BiosDir[MAXPATHLEN];
 	char PluginsDir[MAXPATHLEN];
 	char PatchesDir[MAXPATHLEN];
-	long Xa;
-	long Sio;
-	long Mdec;
-	long PsxAuto;
+	boolean Xa;
+	boolean Sio;
+	boolean Mdec;
+	boolean PsxAuto;
+	boolean Cdda;
+	boolean HLE;
+	boolean Debug;
+	boolean PsxOut;
+	boolean SpuIrq;
+	boolean RCntFix;
+	boolean UseNet;
+	boolean VSyncWA;
+	long Cpu; // CPU_DYNAREC or CPU_INTERPRETER
 	long PsxType; // PSX_TYPE_NTSC or PSX_TYPE_PAL
-	long Cdda;
-	long HLE;
-	long Cpu;
-	long Debug;
-	long PsxOut;
-	long SpuIrq;
-	long RCntFix;
-	long UseNet;
-	long VSyncWA;
 #ifdef _WIN32
 	char Lang[256];
 #endif
@@ -145,14 +145,14 @@ extern boolean NetOpened;
 #define PSXCLK	33868800	/* 33.8688 Mhz */
 
 enum {
-	BIOS_USER_DEFINED = 0,
-	BIOS_HLE
-}; // BIOS Types
-
-enum {
 	PSX_TYPE_NTSC = 0,
 	PSX_TYPE_PAL
-}; // PSX Type
+}; // PSX Types
+
+enum {
+	CPU_DYNAREC = 0,
+	CPU_INTERPRETER
+}; // CPU Types
 
 int EmuInit();
 void EmuReset();
