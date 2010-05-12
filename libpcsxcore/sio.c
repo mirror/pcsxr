@@ -342,6 +342,10 @@ unsigned short sioReadBaud16() {
 void netError() {
 	ClosePlugins();
 	SysMessage(_("Connection closed!\n"));
+
+	CdromId[0] = '\0';
+	CdromLabel[0] = '\0';
+
 	SysRunGui();
 }
 
