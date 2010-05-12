@@ -27,7 +27,7 @@ NSString *saveStatePath;
 		CDR_close();
 
 	// switch to another ISO if using internal image reader, otherwise eject the CD
-	if (cdrfilename[0] != '\0') {
+	if (UsingIso()) {
 		NSOpenPanel* openDlg = [NSOpenPanel openPanel];
 
 		[openDlg setCanChooseFiles:YES];
@@ -35,10 +35,10 @@ NSString *saveStatePath;
 
 		if ([openDlg runModal] == NSOKButton) {
 			NSArray* files = [openDlg filenames];
-			strcpy(cdrfilename, (const char *)[[files objectAtIndex:0] fileSystemRepresentation]);
+			SetIsoFile((const char *)[[files objectAtIndex:0] fileSystemRepresentation]);
 		}
 
-        cdOpenCase = time(NULL) + 2;
+        SetCdOpenCaseTime(time(NULL) + 2);
 	} else {
 		if (CDR_getDriveLetter() != nil) {
 			deviceName = [NSMutableString stringWithCString:CDR_getDriveLetter()];
@@ -105,7 +105,7 @@ NSString *saveStatePath;
 
 - (IBAction)runCD:(id)sender
 {
-	cdrfilename[0] = '\0';
+	SetIsoFile(NULL);
 	[EmuThread run];
 }
 
@@ -118,14 +118,14 @@ NSString *saveStatePath;
 
 	if ([openDlg runModalForDirectory:nil file:nil] == NSOKButton) {
 		NSArray* files = [openDlg filenames];
-		strcpy(cdrfilename, (const char *)[[files objectAtIndex:0] fileSystemRepresentation]);
+		SetIsoFile((const char *)[[files objectAtIndex:0] fileSystemRepresentation]);
 		[EmuThread run];
     }
 }
 
 - (IBAction)runBios:(id)sender
 {
-	cdrfilename[0] = '\0';
+	SetIsoFile(NULL);
 	[EmuThread runBios];
 }
 

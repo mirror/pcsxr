@@ -5,8 +5,8 @@ PCSX Upstream Authors:	Linuzappz     <linuzappz@pcsx.net>
 	Nik3d
 	Akumax        <akumax@pcsx.net>
 
-PCSX Copyright:	(C) 1999-2003  Pcsx Team
-	(C) 1998 Vision Thing
+PCSX Copyright:	(c) 1999-2003  Pcsx Team
+	(c) 1998 Vision Thing
 
 df Upstream Authors:	Ryan Schultz <schultz.ryan@gmail.com>
 			Andrew Burton <adb@iinet.net.au>
@@ -14,14 +14,15 @@ df Upstream Authors:	Ryan Schultz <schultz.ryan@gmail.com>
 			Marcus Comstedt <marcus@mc.pp.se>
 			Stefan Sikora <hoshy@schrauberstube.de>
 
-df Copyright:	(C) 2005 Ryan Schultz
-		(C) 2005 Andrew Burton
-		(C) 2007 Stephen Chao
-		(C) 2006 Marcus Comstedt
+df Copyright:	(c) 2005 Ryan Schultz
+		(c) 2005 Andrew Burton
+		(c) 2007 Stephen Chao
+		(c) 2006 Marcus Comstedt
 
 PCSX-Reloaded Authors/Contributors: avlex (Help on xcode project)
 			    dario86 (Various bugfixes)
 			    edgbla (Root counters, various core/plugin fixes)
+			    Firnis (GTE code from PCSX-Revolution Project)
 			    Gabriele Gorla (MDEC decoder)
 			    maggix (Snow Leopard compile fix)
 			    NeToU (Bugfix)
@@ -34,3 +35,4 @@ PCSX-Reloaded Translators: edgbla (Russian)
 			   Giovanni Scafora (Italian)
 			   Tibério Vítor (Brazilian Portuguese)
 			   Wei Mingzhi (Simplified & Traditional Chinese)
+
