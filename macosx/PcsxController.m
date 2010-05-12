@@ -8,7 +8,7 @@
 #include "ExtendedKeys.h"
 
 NSDictionary *prefStringKeys;
-NSDictionary *prefLongKeys;
+NSDictionary *prefByteKeys;
 NSMutableArray *biosList;
 NSString *saveStatePath;
 
@@ -246,9 +246,9 @@ NSString *saveStatePath;
 		if (str != nil && dst != nil) strncpy(dst, str, 255);
 	}*/
 
-	enumerator = [prefLongKeys keyEnumerator];
+	enumerator = [prefByteKeys keyEnumerator];
 	while ((key = [enumerator nextObject])) {
-		long *dst = (long *)[[prefLongKeys objectForKey:key] pointerValue];
+		u8 *dst = (u8 *)[[prefByteKeys objectForKey:key] pointerValue];
 		if (dst != nil) *dst = [defaults integerForKey:key];
 	}
 
@@ -296,7 +296,7 @@ NSString *saveStatePath;
 		return;
 	}
 
-	long *val = (long *)[[prefLongKeys objectForKey:defaultKey] pointerValue];
+	u8 *val = (u8 *)[[prefByteKeys objectForKey:defaultKey] pointerValue];
 	if (val) {
 		[defaults setInteger:*val forKey:defaultKey];
 		return;
@@ -334,7 +334,7 @@ NSString *saveStatePath;
 		[NSValue valueWithPointer:Config.Mcd2], @"Mcd2",
 		nil];
 
-	prefLongKeys = [[NSDictionary alloc] initWithObjectsAndKeys:
+	prefByteKeys = [[NSDictionary alloc] initWithObjectsAndKeys:
 		[NSValue valueWithPointer:&Config.Xa], @"NoXaAudio",
 		[NSValue valueWithPointer:&Config.Sio], @"SioIrqAlways",
 		[NSValue valueWithPointer:&Config.Mdec], @"BlackAndWhiteMDECVideo",
