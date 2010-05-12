@@ -59,14 +59,14 @@ static boolean GetValueb(char *src, char *name) {
 		while ((*tmp == ' ') || (*tmp == '=')) tmp++;
 		if (*tmp != '\n') return (atoi(tmp) != 0);
 	}
-	return false;
+	return FALSE;
 }
 
 #define SetValue(name, var) \
 	fprintf(f, "%s = %s\n", name, var);
 
 #define SetValuel(name, var) \
-	fprintf(f, "%s = %lx\n", name, var);
+	fprintf(f, "%s = %x\n", name, var);
 
 #define SetValueb(name, var) \
 	fprintf(f, "%s = %d\n", name, (var) ? 1 : 0);
