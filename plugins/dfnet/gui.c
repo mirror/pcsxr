@@ -28,7 +28,7 @@ void cfgSysMessage(const char *fmt, ...) {
 
 	MsgDlg = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL,
 		GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, _("NetPlay"));
-	gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(MsgDlg), msg);
+	gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(MsgDlg), "%s", msg);
 
 	gtk_dialog_run(GTK_DIALOG(MsgDlg));
 	gtk_widget_destroy(MsgDlg);
