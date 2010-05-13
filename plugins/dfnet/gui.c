@@ -56,7 +56,7 @@ void sockGetIP(char *IPAddress) {
 	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) >= 0) {
 		ifc.ifc_len = sizeof(buf);
 		ifc.ifc_buf = (caddr_t)buf;
-		if (!ioctl (fd, SIOCGIFCONF, (char *)&ifc)) {
+		if (!ioctl(fd, SIOCGIFCONF, (char *)&ifc)) {
 			intrface = ifc.ifc_len / sizeof(struct ifreq);
 			while (intrface-- > 0) {
 				if (!(ioctl(fd, SIOCGIFADDR, (char *)&buf[intrface]))) {
@@ -64,8 +64,8 @@ void sockGetIP(char *IPAddress) {
 					strcpy(IPAddress, inet_ntoa(addr.sin_addr));
 					break;
 				}
-			}   
-		}   
+			}
+		}
 		close(fd);
 	}
 }
