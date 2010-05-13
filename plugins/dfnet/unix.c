@@ -19,19 +19,19 @@ extern int errno;
 
 #include "dfnet.h"
 
-int ExecCfg(const char *arg) {
+int ExecCfg(const char *arg, int f) {
 	char cfg[512];
-	struct stat buf;
 
 	strcpy(cfg, "cfg/cfgDFNet");
-	if (stat(cfg, &buf) != -1) {
-		strcat(cfg, " ");
-		strcat(cfg, arg);
-		return system(cfg);
+	strcat(cfg, " ");
+	strcat(cfg, arg);
+
+	if (f) {
+		if (fork() == 0) system(cfg);
+		return 0;
 	}
 
-	printf("cfgDFNet file not found!\n");
-	return -1;
+	return system(cfg);
 }
 
 void SysMessage(const char *fmt, ...) {
@@ -44,7 +44,7 @@ void SysMessage(const char *fmt, ...) {
 	va_end(list);
 
 	sprintf(cmd, "message %s\n", msg);
-	ExecCfg(cmd);
+	ExecCfg(cmd, 1);
 }
 
 long sockInit() {
@@ -60,7 +60,7 @@ long sockShutdown() {
 }
 
 long sockOpen() {
-	if (ExecCfg("open") == 0) return -1;
+	if (ExecCfg("open", 0) == 0) return -1;
 
 	LoadConf();
 
@@ -83,11 +83,11 @@ int sockPing() {
 }
 
 void CALLBACK NETconfigure() {
-	ExecCfg("configure");
+	ExecCfg("configure", 1);
 }
 
 void CALLBACK NETabout() {
-	ExecCfg("about");
+	ExecCfg("about", 1);
 }
 
 pid_t cfgpid = 0;
