@@ -12,6 +12,7 @@
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 #include <glade/glade.h>
+#include <signal.h>
 
 #include "cfg.c"
 
