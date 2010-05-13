@@ -99,17 +99,6 @@ int RECV(void *buf, int Size, int Mode) {
 	return count;
 }
 
-void sockGetIP(char *IPAddress) {
-	char str[256];
-	struct hostent *host;
-	unsigned char *addr;
-
-	gethostname(str, 256);
-	host = gethostbyname(str);
-	addr = host->h_addr_list[0];
-	sprintf(IPAddress, "%d.%d.%d.%d", addr[0], addr[1], addr[2], addr[3]);
-}
-
 long CALLBACK NETopen(unsigned long *gpuDisp) {
 	int ret = sockOpen();
 

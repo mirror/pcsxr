@@ -69,8 +69,6 @@ long sockOpen();
 void sockCreateWaitDlg();
 void sockDlgUpdate();
 void sockDestroyWaitDlg();
-
-void sockGetIP(char *IPAddress);
 int sockPing();
 
 int ShowPauseDlg();

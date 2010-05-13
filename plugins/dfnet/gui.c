@@ -38,16 +38,53 @@ void CFGconfigure() {
 	cfgSysMessage(_("Nothing to configure"));
 }
 
+#ifdef __linux__
+
+#include <sys/ioctl.h>
+#include <linux/if.h>
+
+#define MAXINTERFACES 16
+
 void sockGetIP(char *IPAddress) {
-	char str[256];
+	int fd, intrface;
+	struct ifreq buf[MAXINTERFACES];
+	struct ifconf ifc;
+	struct sockaddr_in addr;
+
+	strcpy(IPAddress, "127.0.0.1");
+
+	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) >= 0) {
+		ifc.ifc_len = sizeof(buf);
+		ifc.ifc_buf = (caddr_t)buf;
+		if (!ioctl (fd, SIOCGIFCONF, (char *)&ifc)) {
+			intrface = ifc.ifc_len / sizeof(struct ifreq);
+			while (intrface-- > 0) {
+				if (!(ioctl(fd, SIOCGIFADDR, (char *)&buf[intrface]))) {
+					memcpy(&addr, &(buf[intrface].ifr_addr), sizeof(addr));
+					strcpy(IPAddress, inet_ntoa(addr.sin_addr));
+					break;
+				}
+			}   
+		}   
+		close(fd);
+	}
+}
+
+#else
+
+void sockGetIP(char *IPAddress) {
 	struct hostent *host;
-	unsigned char *addr;
+	char str[256];
 
 	gethostname(str, 256);
 	host = gethostbyname(str);
-	addr = (unsigned char *)host->h_addr_list[0];
-	sprintf(IPAddress, "%d.%d.%d.%d", addr[0], addr[1], addr[2], addr[3]);
+
+	if (host != NULL)
+		strcpy(IPAddress, inet_ntoa(*((struct in_addr *)host->h_addr_list[0])));
+	else strcpy(IPAddress, "127.0.0.1");
 }
+
+#endif
 
 void OnCopyIP(GtkWidget *widget, gpointer user_data) {
 	char str[256];
