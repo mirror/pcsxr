@@ -682,11 +682,6 @@ long PADconfigure() {
 	return 0;
 }
 
-static void OnAboutExit(GtkWidget *widget, gpointer user_data) {
-	gtk_widget_destroy(widget);
-	gtk_exit(0);
-}
-
 void PADabout() {
 	const char *authors[]= {"Wei Mingzhi <weimingzhi@gmail.com>", NULL};
 	GtkWidget *widget;
@@ -697,11 +692,8 @@ void PADabout() {
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(widget), authors);
 	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(widget), "http://www.codeplex.com/pcsxr/");
 
-	g_signal_connect_data(GTK_OBJECT(widget), "response",
-		GTK_SIGNAL_FUNC(OnAboutExit), NULL, NULL, G_CONNECT_AFTER);
-
-	gtk_widget_show(widget);
-	gtk_main();
+	gtk_dialog_run(GTK_DIALOG(widget));
+	gtk_widget_destroy(widget);
 }
 
 int main(int argc, char *argv[]) {

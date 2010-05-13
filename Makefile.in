@@ -257,7 +257,8 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = data doc po libpcsxcore gui pixmaps plugins/dfinput \
-	plugins/dfsound plugins/dfxvideo plugins/dfcdrom $(PEOPSXGL)
+	plugins/dfsound plugins/dfxvideo plugins/dfcdrom plugins/dfnet \
+	$(PEOPSXGL)
 EXTRA_DIST = AUTHORS COPYING INSTALL NEWS README ChangeLog ChangeLog.df
 all: all-recursive
 

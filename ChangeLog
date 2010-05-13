@@ -1,3 +1,20 @@
+May 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * configure.ac: Added plugins/dfnet/Makefile.am.
+ * Makefile.am: Added plugins/dfnet.
+ * plugins/dfnet/dfnet.c: Added NetPlay plugin (based on netSock).
+ * plugins/dfnet/unix.c: Likewise.
+ * plugins/dfnet/cfg.c: Likewise.
+ * plugins/dfnet/gui.c: Likewise.
+ * plugins/dfnet/dfnet.h: Likewise.
+ * plugins/dfnet/Makefile.am: Likewise.
+ * plugins/dfnet/dfnet.glade2: Likewise.
+ * plugins/dfinput/cfg-gtk2.c: Use gtk_dialog_run() for about dialog.
+ * plugins/dfcdrom/cdrcfg-0.1df/main.c: Likewise.
+ * po/pt_BR.po, po/it.po, po/zh_CN.po, po/zh_TW.po, po/ru_RU.po, po/pcsx.pot:
+   Updated.
+ * po/update-pot.sh: Added files in plugins/dfnet.
+
 May 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/sio.c: Erase CdromId and CdromLabel when net connection closed.

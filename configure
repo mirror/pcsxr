@@ -13427,7 +13427,7 @@ rm -f core conftest.err conftest.$ac_objext \
 
 
 
-ac_config_files="$ac_config_files Makefile data/Makefile doc/Makefile libpcsxcore/Makefile gui/Makefile plugins/dfinput/Makefile plugins/dfsound/Makefile plugins/dfxvideo/Makefile plugins/dfcdrom/Makefile pixmaps/Makefile po/Makefile.in"
+ac_config_files="$ac_config_files Makefile data/Makefile doc/Makefile libpcsxcore/Makefile gui/Makefile plugins/dfinput/Makefile plugins/dfsound/Makefile plugins/dfxvideo/Makefile plugins/dfcdrom/Makefile plugins/dfnet/Makefile pixmaps/Makefile po/Makefile.in"
 
 
 saved_CFLAGS="$CFLAGS"
@@ -15271,6 +15271,7 @@ do
     "plugins/dfsound/Makefile") CONFIG_FILES="$CONFIG_FILES plugins/dfsound/Makefile" ;;
     "plugins/dfxvideo/Makefile") CONFIG_FILES="$CONFIG_FILES plugins/dfxvideo/Makefile" ;;
     "plugins/dfcdrom/Makefile") CONFIG_FILES="$CONFIG_FILES plugins/dfcdrom/Makefile" ;;
+    "plugins/dfnet/Makefile") CONFIG_FILES="$CONFIG_FILES plugins/dfnet/Makefile" ;;
     "pixmaps/Makefile") CONFIG_FILES="$CONFIG_FILES pixmaps/Makefile" ;;
     "po/Makefile.in") CONFIG_FILES="$CONFIG_FILES po/Makefile.in" ;;
     "plugins/peopsxgl/Makefile") CONFIG_FILES="$CONFIG_FILES plugins/peopsxgl/Makefile" ;;
