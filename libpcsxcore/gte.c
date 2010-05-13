@@ -213,12 +213,7 @@ static inline u32 limE(u32 result) {
 #define limG2(a) LIM((a), 0x3ff, -0x400, (1 << 31) | (1 << 13))
 #define limH(a) LIM((a), 0xfff, 0x000, (1 << 12))
 
-static inline u32 DIVIDE(s16 n, u16 d) {
-	if (n >= 0 && n < d * 2) {
-		return ((u32)n << 16) / d;
-	}
-	return 0xffffffff;
-}
+#include "gte_divider.h"
 
 static inline u32 MFC2(int reg) {
 	switch (reg) {

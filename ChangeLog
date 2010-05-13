@@ -4,6 +4,9 @@ May 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * plugins/dfnet/dfnet.c: Removed sockGetIP(), which is unused in plugin.
  * plugins/dfnet/dfnet.h: Likewise.
  * plugins/dfnet/dfnet.glade2: Fixed max length of IP address entry.
+ * libpcsxcore/gte.c: Improved accuracy (or 'inaccuracy') of the divider
+   (courtesy of shalma).
+ * libpcsxcore/gte_divider.h: Added.
 
 May 13, 2010 edgbla <edgbla@yandex.ru>
 
