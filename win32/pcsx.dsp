@@ -168,6 +168,10 @@ SOURCE=..\libpcsxcore\gte.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\libpcsxcore\gte_divider.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\libpcsxcore\mdec.c
 # End Source File
 # Begin Source File

@@ -7,6 +7,8 @@ May 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * libpcsxcore/gte.c: Improved accuracy (or 'inaccuracy') of the divider
    (courtesy of shalma).
  * libpcsxcore/gte_divider.h: Added.
+ * win32/pcsx.dsp: Added gte_divider.h.
+ * win32/pcsx.vcproj: Likewise.
 
 May 13, 2010 edgbla <edgbla@yandex.ru>
 
