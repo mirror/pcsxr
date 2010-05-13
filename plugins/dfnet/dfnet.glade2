@@ -78,8 +78,9 @@ If you selected Client please enter the IP address the Server gave to you in the
                   <widget class="GtkEntry" id="tbServerIP">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="max_length">11</property>
+                    <property name="max_length">15</property>
                     <property name="invisible_char">&#x25CF;</property>
+                    <signal name="activate" handler="on_tbServerIP_activate"/>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
