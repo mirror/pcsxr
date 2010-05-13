@@ -4102,8 +4102,8 @@ static u16 initial_guess[32768] = {
 
 // note: returns 16.16 fixed-point
 static inline u32 DIVIDE(s16 n, u16 d) {
-	if (numerator >= 0 && numerator < d * 2) {
-		u32 offset = denominator;
+	if (n >= 0 && n < d * 2) {
+		u32 offset = d;
 		int shift = 0;
 		u64 reciprocal;
 		u32 r, s;
@@ -4125,7 +4125,7 @@ static inline u32 DIVIDE(s16 n, u16 d) {
 
 		reciprocal = (u64)(r) << shift;
 
-		return (u32)(((reciprocal * numerator) + 0x8000) >> 16);
+		return (u32)(((reciprocal * n) + 0x8000) >> 16);
 	}
 
 	return 0xffffffff;
