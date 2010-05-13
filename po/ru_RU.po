@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-05-13 11:15+0800\n"
-"PO-Revision-Date: 2010-04-17 10:30+0500\n"
+"PO-Revision-Date: 2010-05-13 09:19+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -390,6 +390,8 @@ msgstr "Сетевая игра"
 msgid ""
 "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
 msgstr ""
+"Внимание! NetPlay плагин должен находится в том же каталоге что и остальные "
+"плагины."
 
 #: ../win32/gui/WndMain.c:76
 msgid "Arabic"
@@ -2926,18 +2928,17 @@ msgid "Socket Driver"
 msgstr ""
 
 #: ../plugins/dfnet/dfnet.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "error connecting to %s: %s\n"
-msgstr "Ошибка загрузки %s: %s"
+msgstr "Ошибка загрузки %s: %s\n"
 
 #: ../plugins/dfnet/dfnet.c:197
-#, fuzzy
 msgid "Error allocating memory!\n"
-msgstr "Ошибка выделения памяти!"
+msgstr "Ошибка выделения памяти!\n"
 
 #: ../plugins/dfnet/gui.c:38
 msgid "Nothing to configure"
-msgstr ""
+msgstr "Не подлежит настройке"
 
 #: ../plugins/dfnet/gui.c:57
 #, c-format
@@ -2946,11 +2947,11 @@ msgstr ""
 
 #: ../plugins/dfnet/gui.c:127
 msgid "Waiting for connection..."
-msgstr ""
+msgstr "Ожидание соединения..."
 
 #: ../plugins/dfnet/gui.c:130
 msgid "The Client should now Start a Connection, waiting..."
-msgstr ""
+msgstr "Ожидаем соединения с клиентом..."
 
 #: ../plugins/dfnet/dfnet.glade2:23
 msgid ""
@@ -2962,32 +2963,43 @@ msgid ""
 "If you selected Client please enter the IP address the Server gave to you in "
 "the IP Address Control."
 msgstr ""
+"Выберите здесь сторону: Сервер (Игрок 1) или Клиент (Игрок 2)\n"
+"\n"
+"Если вы выбрали Сервер - скопируйте IP адрес в буфер обмена "
+"и вставьте (Ctrl+V) куда-либо, чтобы Клиент мог его видеть.\n"
+"\n"
+"Если вы выбрали Клиента - введите полученный IP адрес Сервера в "
+"соответствующее поле."
 
 #: ../plugins/dfnet/dfnet.glade2:63
 msgid "Copy PC IP to Clipboard"
-msgstr ""
+msgstr "Скопировать IP адрес в буфер обмена"
 
 #: ../plugins/dfnet/dfnet.glade2:93
 msgid "Server (Player1)"
-msgstr ""
+msgstr "Сервер (Игрок 1)"
 
 #: ../plugins/dfnet/dfnet.glade2:103
 msgid "Client (Player2)"
-msgstr ""
+msgstr "Клиент (Игрок 2)"
 
 #: ../plugins/dfnet/dfnet.glade2:129
 msgid ""
 "Do not change if not necessary (remember it must be changed on both sides)."
 msgstr ""
+"Не меняйте без особой необходимости (помните что порты должны быть одинаковы "
+"для обеих сторон)"
 
 #: ../plugins/dfnet/dfnet.glade2:142
 msgid "Port Number"
-msgstr ""
+msgstr "Номер порта"
 
 #: ../plugins/dfnet/dfnet.glade2:201
 msgid "Start Game"
-msgstr ""
+msgstr "Начать сетевую игру"
 
 #: ../plugins/dfnet/dfnet.glade2:239
 msgid "Play Offline"
-msgstr ""
+msgstr "Начать без использования сети"
+
+
