@@ -27,7 +27,7 @@ int ExecCfg(const char *arg, int f) {
 	strcat(cfg, arg);
 
 	if (f) {
-		if (fork() == 0) system(cfg);
+		if (fork() == 0) { system(cfg); exit(0); }
 		return 0;
 	}
 
