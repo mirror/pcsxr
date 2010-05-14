@@ -12,7 +12,6 @@
     <child>
       <widget class="GtkVBox" id="vbox18">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <child>
           <widget class="GtkMenuBar" id="menubar1">
             <property name="visible">True</property>
@@ -783,12 +782,10 @@
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox4">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <child>
           <widget class="GtkVBox" id="vbox28">
             <property name="visible">True</property>
             <property name="border_width">4</property>
-            <property name="orientation">vertical</property>
             <property name="spacing">3</property>
             <child>
               <widget class="GtkFrame" id="frame17">
@@ -1382,11 +1379,9 @@
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <child>
           <widget class="GtkVBox" id="vbox25">
             <property name="visible">True</property>
-            <property name="orientation">vertical</property>
             <child>
               <widget class="GtkFrame" id="frame15">
                 <property name="visible">True</property>
@@ -1396,7 +1391,6 @@
                   <widget class="GtkVBox" id="vbox26">
                     <property name="visible">True</property>
                     <property name="border_width">5</property>
-                    <property name="orientation">vertical</property>
                     <child>
                       <widget class="GtkTable" id="table3">
                         <property name="visible">True</property>
@@ -1685,11 +1679,9 @@ PAL</property>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <child>
           <widget class="GtkVBox" id="vbox27">
             <property name="visible">True</property>
-            <property name="orientation">vertical</property>
             <child>
               <widget class="GtkFrame" id="frame19">
                 <property name="visible">True</property>
@@ -1823,7 +1815,6 @@ PAL</property>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox3">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <child>
           <widget class="GtkHBox" id="hbox54">
             <property name="visible">True</property>
@@ -1836,7 +1827,6 @@ PAL</property>
                   <widget class="GtkVBox" id="vbox31">
                     <property name="visible">True</property>
                     <property name="border_width">6</property>
-                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <widget class="GtkScrolledWindow" id="scrolledwindow3">
@@ -2053,7 +2043,6 @@ PAL</property>
                             <child>
                               <widget class="GtkVSeparator" id="vseparator1">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
@@ -2115,7 +2104,6 @@ PAL</property>
                 <child>
                   <widget class="GtkVButtonBox" id="vbuttonbox2">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <property name="layout_style">spread</property>
                     <child>
@@ -2236,7 +2224,6 @@ PAL</property>
                   <widget class="GtkVBox" id="vbox32">
                     <property name="visible">True</property>
                     <property name="border_width">6</property>
-                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <widget class="GtkScrolledWindow" id="scrolledwindow4">
@@ -2453,7 +2440,6 @@ PAL</property>
                             <child>
                               <widget class="GtkVSeparator" id="vseparator2">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
@@ -2542,70 +2528,6 @@ PAL</property>
       </widget>
     </child>
   </widget>
-  <widget class="GtkAboutDialog" id="AboutDlg">
-    <property name="visible">True</property>
-    <property name="resizable">False</property>
-    <property name="modal">True</property>
-    <property name="window_position">center</property>
-    <property name="destroy_with_parent">True</property>
-    <property name="type_hint">normal</property>
-    <property name="program_name">PCSX-Reloaded</property>
-    <property name="version">1.9.91+</property>
-    <property name="copyright" translatable="yes">(C) 1999-2003 PCSX Development Team
-(C) 2005-2009 PCSX-df Team
-(C) 2009-2010 PCSX-Reloaded Team</property>
-    <property name="comments" translatable="yes">A PlayStation emulator.</property>
-    <property name="website">http://pcsxr.codeplex.com/</property>
-    <property name="website_label">http://pcsxr.codeplex.com/</property>
-    <property name="license" translatable="yes">This program is free software; you can redistribute it
-and/or modify it under the terms of the GNU General
-Public License as published by the Free Software
-Foundation; either version 2 of the License, or (at your
-option) any later version.
-
-This program is distributed in the hope that it will be
-useful, but WITHOUT ANY WARRANTY; without even
-the implied warranty of MERCHANTABILITY or
-FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General
-Public License along with this program; if not, write to
-the Free Software Foundation, Inc.</property>
-    <property name="authors">PCSX-Reloaded Maintainer:
-Wei Mingzhi &lt;whistler_wmz@users.sf.net&gt;
-
-PCSX-df Team:
-Ryan Schultz &lt;schultz.ryan@gmail.com&gt;
-Andrew Burton &lt;adb@iinet.net.au&gt;
-Stephen Chao
-
-PCSX Team:
-Linuzappz
-Shadow
-Pete Bernert
-NoComp
-Nik3d</property>
-    <property name="documenters">Ryan Schultz &lt;schultz.ryan@gmail.com&gt;</property>
-    <property name="translator_credits" translatable="yes" comments="TRANSLATORS: Replace this string with your names, one name per line.">translator-credits</property>
-    <property name="artists">Ryan Schultz &lt;schultz.ryan@gmail.com&gt;
-
-Icon Design:
-Romain Lafourcade</property>
-    <child internal-child="vbox">
-      <widget class="GtkVBox" id="dialog-vbox6">
-        <property name="orientation">vertical</property>
-        <child internal-child="action_area">
-          <widget class="GtkHButtonBox" id="dialog-action_area6"/>
-          <packing>
-            <property name="expand">False</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </widget>
-    </child>
-  </widget>
   <widget class="GtkDialog" id="CheatListDlg">
     <property name="visible">True</property>
     <property name="border_width">5</property>
@@ -2617,11 +2539,9 @@ Romain Lafourcade</property>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox7">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <child>
           <widget class="GtkVBox" id="vbox1">
             <property name="visible">True</property>
-            <property name="orientation">vertical</property>
             <property name="spacing">15</property>
             <child>
               <widget class="GtkFrame" id="frame3">
@@ -2788,7 +2708,6 @@ Romain Lafourcade</property>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox8">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <widget class="GtkFrame" id="frame4">
@@ -2803,7 +2722,6 @@ Romain Lafourcade</property>
                 <child>
                   <widget class="GtkVBox" id="vbox2">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <widget class="GtkTable" id="table1">
@@ -3266,7 +3184,6 @@ Hexadecimal</property>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox9">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">5</property>
         <child>
           <widget class="GtkHBox" id="hbox10">

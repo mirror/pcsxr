@@ -38,6 +38,7 @@
 #include "MemcardDlg.h"
 #include "ConfDlg.h"
 #include "DebugMemory.h"
+#include "AboutDlg.h"
 
 // Functions Callbacks
 void OnFile_RunCd();
@@ -869,20 +870,7 @@ void on_states_save_other() {
 } 
 
 void OnHelp_About(GtkWidget *widget, gpointer user_data) {
-	GladeXML *xml;
-	GtkWidget *about_dialog;
-
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "AboutDlg", NULL);
-
-	if (!xml) {
-		g_warning("We could not load the interface!");
-		return;
-	}
-
-	about_dialog = glade_xml_get_widget(xml, "AboutDlg");
-
-	gtk_dialog_run(GTK_DIALOG (about_dialog));
-	gtk_widget_destroy(about_dialog);
+	RunAboutDialog();
 }
 
 void SysMessage(const char *fmt, ...) {
