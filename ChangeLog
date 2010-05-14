@@ -1,3 +1,17 @@
+May 14, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/psxinterpreter.c: Bias was moved into rec/int.
+ * libpcsxcore/ppc/pR3000A.c: Likewise.
+ * libpcsxcore/cdrom.c: Likewise.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * libpcsxcore/mdec.c: Likewise.
+ * libpcsxcore/ix86/iR3000A.c: Likewise.
+ * libpcsxcore/psxcommon.h: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psxdma.c: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+ * po/ru_RU.po: Updated.
+
 May 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * data/pcsx.glade2: Moved About dialog box out of glade2 file.

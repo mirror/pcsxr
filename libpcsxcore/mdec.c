@@ -516,16 +516,16 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 	image = (u16 *)PSXM(adr);
 
 	if (mdec.reg0 & MDEC0_RGB24) { // 15-b decoding
-		// MDECOUTDMA_INT(((size * (1000000 / 9000)) / 4) /** 4*/ / BIAS);
-		MDECOUTDMA_INT((size / 4) / BIAS);
+		// MDECOUTDMA_INT(((size * (1000000 / 9000)) / 4) /** 4*/);
+		MDECOUTDMA_INT((size / 4));
 		size = size / ((16 * 16) / 2);
 		for (; size > 0; size--, image += (16 * 16)) {
 			mdec.rl = rl2blk(blk, mdec.rl);
 			yuv2rgb15(blk, image);
 		}
 	} else { // 24-b decoding
-		// MDECOUTDMA_INT(((size * (1000000 / 9000)) / 4) /** 4*/ / BIAS);
-		MDECOUTDMA_INT((size / 4) / BIAS);
+		// MDECOUTDMA_INT(((size * (1000000 / 9000)) / 4) /** 4*/);
+		MDECOUTDMA_INT((size / 4));
 		size = size / ((24 * 16) / 2);
 		for (; size>0; size--, image += (24 * 16)) {
 			mdec.rl = rl2blk(blk, mdec.rl);

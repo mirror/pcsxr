@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-05-14 10:55+0800\n"
-"PO-Revision-Date: 2010-05-13 09:19+0400\n"
+"PO-Revision-Date: 2010-05-14 06:01+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -387,8 +387,7 @@ msgid "NetPlay"
 msgstr "Сетевая игра"
 
 #: ../win32/gui/ConfigurePlugins.c:620
-msgid ""
-"Note: The NetPlay Plugin Directory should be the same as the other Plugins."
+msgid "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
 msgstr ""
 "Внимание! NetPlay плагин должен находится в том же каталоге что и остальные "
 "плагины."
@@ -635,7 +634,7 @@ msgstr "Выключить CD музыку"
 
 #: ../win32/gui/WndMain.c:1209 ../data/pcsx.glade2:1595
 msgid "Autodetect"
-msgstr "Автоопределение"
+msgstr "Авто-определение"
 
 #: ../win32/gui/WndMain.c:1210
 msgid "Enable Interpreter Cpu"
@@ -1273,8 +1272,7 @@ msgstr "Отформатировать карту памяти?"
 msgid ""
 "If you format the memory card, the card will be empty, and any existing data "
 "overwritten."
-msgstr ""
-"При форматировании все данные на карте памяти будут безвозвратно утеряны."
+msgstr "При форматировании все данные на карте памяти будут безвозвратно утеряны."
 
 #: ../gui/MemcardDlg.c:363
 msgid "Format card"
@@ -1651,15 +1649,15 @@ msgstr "Отображать FPS"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:220
 msgid "Toggle whether the FPS will be shown."
-msgstr "Toggle whether the FPS will be shown."
+msgstr "Отображать FPS при старте эмуляции."
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:232
 msgid "Autodetect FPS limit"
-msgstr "Автоопределение FPS"
+msgstr "Авто-определение FPS"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:236
 msgid "Enable this if games display too quickly."
-msgstr "Enable this if games display too quickly."
+msgstr "Следует включить для автоматического определения и ограничения скорости игры."
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:249
 msgid "Enable frame skipping"
@@ -1704,7 +1702,7 @@ msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:426
 msgid "Disable CPU Saving"
-msgstr ""
+msgstr "Выключить экономию ресурсов ЦПУ"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:442
 msgid "Odd/even bit hack"
@@ -1716,7 +1714,7 @@ msgstr "Для повышения точности частоты смены к�
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:473
 msgid "Better FPS limit in some"
-msgstr ""
+msgstr "Возможно более точное ограничение FPS"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:486
 msgid "PC FPS calculation"
@@ -1741,7 +1739,7 @@ msgstr "Старый режим пропуска кадров"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:564
 msgid "Expand screen width"
-msgstr ""
+msgstr "Увеличить ширину экрана"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:580
 msgid "Ignore brightness color"
@@ -1814,7 +1812,7 @@ msgstr "Сброс(_R)"
 
 #: ../data/pcsx.glade2:168
 msgid "S_witch ISO..."
-msgstr "Изменить ISO..."
+msgstr "Сменить ISO..."
 
 #: ../data/pcsx.glade2:190
 msgid "_Save State"
@@ -1930,11 +1928,11 @@ msgstr "Продолжить..."
 
 #: ../data/pcsx.glade2:661
 msgid "Switch ISO Image"
-msgstr "Изменить образ ISO"
+msgstr "Сменить образ ISO"
 
 #: ../data/pcsx.glade2:662
 msgid "Switch ISO..."
-msgstr "Изменить ISO..."
+msgstr "Сменить ISO..."
 
 #: ../data/pcsx.glade2:683 ../data/pcsx.glade2:1810
 msgid "Configure Memory Cards"
@@ -2002,7 +2000,7 @@ msgstr "Контроллер 2:"
 
 #: ../data/pcsx.glade2:1226
 msgid "CD-ROM:"
-msgstr "CD-ROM:"
+msgstr "CD-привод:"
 
 #: ../data/pcsx.glade2:1264
 msgid "<b>Plugins</b>"
@@ -2277,8 +2275,7 @@ msgstr "Настройка CDR"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:33
 msgid "Choose your CD-ROM device or type its path if it's not listed"
-msgstr ""
-"Выберите CD-привод или введите свой путь, если устройства нету в списке"
+msgstr "Выберите CD-привод или введите свой путь, если устройства нету в списке"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:44
 msgid "Select CD-ROM device"
@@ -2495,7 +2492,7 @@ msgstr "Включить ограничение FPS"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:402
 msgid "FPS limit auto-detection"
-msgstr "Автоопределение FPS"
+msgstr "Авто-определение FPS"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:411
 msgid "Use Frame skipping"
@@ -2928,7 +2925,7 @@ msgstr ""
 #: ../plugins/dfnet/dfnet.c:161
 #, c-format
 msgid "error connecting to %s: %s\n"
-msgstr "Ошибка загрузки %s: %s\n"
+msgstr "Ошибка соединения с %s: %s\n"
 
 #: ../plugins/dfnet/dfnet.c:186
 msgid "Error allocating memory!\n"
@@ -2949,7 +2946,7 @@ msgstr "Ожидание соединения..."
 
 #: ../plugins/dfnet/gui.c:168
 msgid "The Client should now Start a Connection, waiting..."
-msgstr "Ожидаем соединения с клиентом..."
+msgstr "Ожидание соединения с клиентом..."
 
 #: ../plugins/dfnet/dfnet.glade2:23
 msgid ""
@@ -2982,8 +2979,7 @@ msgid "Client (Player2)"
 msgstr "Клиент (Игрок 2)"
 
 #: ../plugins/dfnet/dfnet.glade2:130
-msgid ""
-"Do not change if not necessary (remember it must be changed on both sides)."
+msgid "Do not change if not necessary (remember it must be changed on both sides)."
 msgstr ""
 "Не меняйте без особой необходимости (помните что порты должны быть одинаковы "
 "для обеих сторон)"
@@ -2999,3 +2995,4 @@ msgstr "Начать сетевую игру"
 #: ../plugins/dfnet/dfnet.glade2:240
 msgid "Play Offline"
 msgstr "Начать без использования сети"
+
