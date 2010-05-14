@@ -239,8 +239,8 @@ typedef struct {
 
 static u32 *jmp_int = NULL;
 static int *pad_buf = NULL;
-static char *pad_buf1, *pad_buf2;//shadow add
-static int pad_buf1len, pad_buf2len;//shadow add
+static char *pad_buf1 = NULL, *pad_buf2 = NULL;
+static int pad_buf1len, pad_buf2len;
 
 static u32 regs[35];
 static EvCB *Event;
@@ -2239,7 +2239,7 @@ void biosInterrupt() {
 	int i, bufcount;
 
 //	if (psxHu32(0x1070) & 0x1) { // Vsync
-		if (pad_buf) {
+		if (pad_buf != NULL) {
 			u32 *buf = (u32*)pad_buf;
 
 			if (!Config.UseNet) {
@@ -2288,7 +2288,7 @@ void biosInterrupt() {
 					netError();
 			}
 		}
-		if (Config.UseNet && pad_buf1 && pad_buf2) {
+		if (Config.UseNet && pad_buf1 != NULL && pad_buf2 != NULL) {
 			psxBios_PADpoll(1);
 
 			if (NET_sendPadData(pad_buf1, i) == -1)

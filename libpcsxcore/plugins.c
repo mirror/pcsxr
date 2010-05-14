@@ -614,9 +614,9 @@ int LoadPlugins() {
 void ReleasePlugins() {
 	if (Config.UseNet) {
 		int ret = NET_close();
-		if (ret < 0) Config.UseNet = 0;
-		NetOpened = FALSE;
+		if (ret < 0) Config.UseNet = FALSE;
 	}
+	NetOpened = FALSE;
 
 	if (hCDRDriver != NULL || cdrIsoActive()) CDR_shutdown();
 	if (hGPUDriver != NULL) GPU_shutdown();

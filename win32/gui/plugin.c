@@ -254,16 +254,16 @@ int _OpenPlugins(HWND hWnd) {
 				strcpy(Config.Mcd2, info.MCD2path);
 				return -2;
 			} else {
-				Config.UseNet = 0;
+				Config.UseNet = FALSE;
 			}
 		} else {
 			HWND hW = CreateDialog(gApp.hInstance, MAKEINTRESOURCE(IDD_CONNECT), gApp.hWnd, ConnectDlgProc);
 			ShowWindow(hW, SW_SHOW);
 
 			if (NET_queryPlayer() == 1) {
-				if (SendPcsxInfo() == -1) Config.UseNet = 0;
+				if (SendPcsxInfo() == -1) Config.UseNet = FALSE;
 			} else {
-				if (RecvPcsxInfo() == -1) Config.UseNet = 0;
+				if (RecvPcsxInfo() == -1) Config.UseNet = FALSE;
 			}
 
 			DestroyWindow(hW);

@@ -1,3 +1,11 @@
+May 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/plugins.c: Fixed crash when launching another game if netplay
+   plugin is selected but not used during the previously running game.
+ * libpcsxcore/psxbios.c: Use TRUE/FALSE for Config.UseNet.
+ * gui/Plugin.c: Likewise.
+ * win32/gui/plugin.c: Likewise.
+
 May 14, 2010 edgbla <edgbla@yandex.ru>
 
  * libpcsxcore/psxinterpreter.c: Bias was moved into rec/int.

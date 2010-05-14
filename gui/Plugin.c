@@ -332,13 +332,13 @@ int _OpenPlugins() {
 				strcpy(Config.Mcd2, info.MCD2path);
 				return -2;
 			} else {
-				Config.UseNet = 0;
+				Config.UseNet = FALSE;
 			}
 		} else {
 			if (NET_queryPlayer() == 1) {
-				if (SendPcsxInfo() == -1) Config.UseNet = 0;
+				if (SendPcsxInfo() == -1) Config.UseNet = FALSE;
 			} else {
-				if (RecvPcsxInfo() == -1) Config.UseNet = 0;
+				if (RecvPcsxInfo() == -1) Config.UseNet = FALSE;
 			}
 		}
 		NetOpened = TRUE;
