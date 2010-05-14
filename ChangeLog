@@ -1,3 +1,9 @@
+May 15, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/psxdma.h: spu dma was fixed.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/psxdma.c: Likewise.
+
 May 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/plugins.c: Fixed crash when launching another game if netplay

@@ -35,6 +35,12 @@ extern "C" {
 	psxRegs.intCycle[3 + 24] = psxRegs.cycle; \
 }
 
+#define SPUDMA_INT(eCycle) { \
+    psxRegs.interrupt |= 0x04000000; \
+    psxRegs.intCycle[1 + 24 + 1] = eCycle; \
+    psxRegs.intCycle[1 + 24] = psxRegs.cycle; \
+}
+
 #define MDECOUTDMA_INT(eCycle) { \
 	psxRegs.interrupt |= 0x02000000; \
 	psxRegs.intCycle[5 + 24 + 1] = eCycle; \
@@ -46,6 +52,7 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr);
 void psxDma4(u32 madr, u32 bcr, u32 chcr);
 void psxDma6(u32 madr, u32 bcr, u32 chcr);
 void gpuInterrupt();
+void spuInterrupt();
 
 #ifdef __cplusplus
 }
