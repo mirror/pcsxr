@@ -67,9 +67,9 @@ void RunAboutDialog(void) {
 	};
 
 	const gchar *copyright = N_(
-		"(c) 1999-2003 PCSX Team\n"
-		"(c) 2005-2009 PCSX-df Team\n"
-		"(c) 2009-2010 PCSX-Reloaded Team");
+		"(C) 1999-2003 PCSX Team\n"
+		"(C) 2005-2009 PCSX-df Team\n"
+		"(C) 2009-2010 PCSX-Reloaded Team");
 
 	const gchar *license = N_(
 		"This program is free software; you can redistribute it and/or modify "

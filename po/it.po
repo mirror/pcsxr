@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-14 09:33+0800\n"
+"POT-Creation-Date: 2010-05-14 10:55+0800\n"
 "PO-Revision-Date: 2010-03-15 16:00+0200\n"
 "Last-Translator: Giovanni Scafora <giovanni@archlinux.org>\n"
 "Language-Team: Arch Linux Italian Team <giovanni@archlinux.org>\n"
@@ -985,14 +985,14 @@ msgstr "PAD2init errore: %d"
 msgid "NETinit error: %d"
 msgstr "NETinit errore: %d"
 
-#: ../gui/AboutDlg.c:79
+#: ../gui/AboutDlg.c:70
 msgid ""
-"(c) 1999-2003 PCSX Team\n"
-"(c) 2005-2009 PCSX-df Team\n"
-"(c) 2009-2010 PCSX-Reloaded Team"
+"(C) 1999-2003 PCSX Team\n"
+"(C) 2005-2009 PCSX-df Team\n"
+"(C) 2009-2010 PCSX-Reloaded Team"
 msgstr ""
 
-#: ../gui/AboutDlg.c:84
+#: ../gui/AboutDlg.c:75
 #, fuzzy
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
@@ -1025,12 +1025,12 @@ msgstr ""
 "Public License along with this program; if not, write to\n"
 "the Free Software Foundation, Inc."
 
-#: ../gui/AboutDlg.c:107
+#: ../gui/AboutDlg.c:98
 msgid "translator-credits"
 msgstr ""
 "Traduzione italiana a cura di Giovanni Scafora <giovanni@archlinux.org>"
 
-#: ../gui/AboutDlg.c:108
+#: ../gui/AboutDlg.c:99
 msgid "A PlayStation emulator."
 msgstr "Un emulatore della PlayStation."
 

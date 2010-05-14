@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-14 09:33+0800\n"
+"POT-Creation-Date: 2010-05-14 11:04+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -964,14 +964,14 @@ msgstr ""
 msgid "NETinit error: %d"
 msgstr ""
 
-#: ../gui/AboutDlg.c:79
+#: ../gui/AboutDlg.c:70
 msgid ""
-"(c) 1999-2003 PCSX Team\n"
-"(c) 2005-2009 PCSX-df Team\n"
-"(c) 2009-2010 PCSX-Reloaded Team"
+"(C) 1999-2003 PCSX Team\n"
+"(C) 2005-2009 PCSX-df Team\n"
+"(C) 2009-2010 PCSX-Reloaded Team"
 msgstr ""
 
-#: ../gui/AboutDlg.c:84
+#: ../gui/AboutDlg.c:75
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -988,11 +988,11 @@ msgid ""
 "Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
 msgstr ""
 
-#: ../gui/AboutDlg.c:107
+#: ../gui/AboutDlg.c:98
 msgid "translator-credits"
 msgstr ""
 
-#: ../gui/AboutDlg.c:108
+#: ../gui/AboutDlg.c:99
 msgid "A PlayStation emulator."
 msgstr ""
 

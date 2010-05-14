@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-14 09:33+0800\n"
-"PO-Revision-Date: 2010-05-14 09:34+0800\n"
+"POT-Creation-Date: 2010-05-14 11:03+0800\n"
+"PO-Revision-Date: 2010-05-14 11:04+0800\n"
 "Last-Translator: Wei Mingzhi <whistler_wmz@users.sourceforge.net>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -1068,17 +1068,17 @@ msgstr "PAD2init 错误: %d"
 msgid "NETinit error: %d"
 msgstr "NETinit 错误: %d"
 
-#: ../gui/AboutDlg.c:79
+#: ../gui/AboutDlg.c:70
 msgid ""
-"(c) 1999-2003 PCSX Team\n"
-"(c) 2005-2009 PCSX-df Team\n"
-"(c) 2009-2010 PCSX-Reloaded Team"
+"(C) 1999-2003 PCSX Team\n"
+"(C) 2005-2009 PCSX-df Team\n"
+"(C) 2009-2010 PCSX-Reloaded Team"
 msgstr ""
-"(c) 1999-2003 PCSX 开发组\n"
-"(c) 2005-2009 PCSX-df 开发组\n"
-"(c) 2009-2010 PCSX-Reloaded 开发组"
+"(C) 1999-2003 PCSX 开发组\n"
+"(C) 2005-2009 PCSX-df 开发组\n"
+"(C) 2009-2010 PCSX-Reloaded 开发组"
 
-#: ../gui/AboutDlg.c:84
+#: ../gui/AboutDlg.c:75
 msgid ""
 "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.\n"
 "\n"
@@ -1092,11 +1092,11 @@ msgstr ""
 "\n"
 "You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
 
-#: ../gui/AboutDlg.c:107
+#: ../gui/AboutDlg.c:98
 msgid "translator-credits"
 msgstr "Wei Mingzhi <whistler@openoffice.org>"
 
-#: ../gui/AboutDlg.c:108
+#: ../gui/AboutDlg.c:99
 msgid "A PlayStation emulator."
 msgstr "一个 PlayStation 模拟器。"
 

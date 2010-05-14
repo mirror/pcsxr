@@ -8,6 +8,7 @@ May 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * po/pcsx.pot, po/pt_BR.po, po/it.po, po/zh_TW.po, po/ru_RU.po, po/zh_CN.po:
    Updated.
  * gui/Makefile.am: Added AboutDlg.c.
+ * po/POTFILES.in: Added all current files.
 
 May 13, 2010 edgbla <edgbla@yandex.ru>
 
