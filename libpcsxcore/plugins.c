@@ -135,18 +135,20 @@ NETkeypressed         NET_keypressed;
 
 static const char *err;
 
-#define CheckErr(func) \
+#define CheckErr(func) { \
 	err = SysLibError(); \
-	if (err != NULL) { SysMessage(_("Error loading %s: %s"), func, err); return -1; }
+	if (err != NULL) { SysMessage(_("Error loading %s: %s"), func, err); return -1; } \
+}
 
 #if defined (__MACOSX__)
-#define LoadSym(dest, src, name, checkerr) \
+#define LoadSym(dest, src, name, checkerr) { \
 	dest = (src)SysLoadSym(drv, name); \
-	if (checkerr) CheckErr(name); \
-	else SysLibError();
+	if (checkerr) CheckErr(name); else SysLibError(); \
+}
 #else
-#define LoadSym(dest, src, name, checkerr) \
-	dest = (src)SysLoadSym(drv, name); if (checkerr) CheckErr(name);
+#define LoadSym(dest, src, name, checkerr) { \
+	dest = (src)SysLoadSym(drv, name); if (checkerr) CheckErr(name); \
+}
 #endif
 
 void *hGPUDriver = NULL;
