@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsx-df\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-14 10:55+0800\n"
+"POT-Creation-Date: 2010-05-19 16:31+0800\n"
 "PO-Revision-Date: 2009-11-28 23:57+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: PoBRE <romhackers@gmail.com>\n"
@@ -1462,67 +1462,67 @@ msgstr "Esse arquivo não parece ser um arquivo válido de PSX!\n"
 msgid "Error loading %s: %s"
 msgstr "Erro carregando \"%s\": \"%s\""
 
-#: ../libpcsxcore/plugins.c:183
+#: ../libpcsxcore/plugins.c:185
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "Não conseguiu carregar a extensão de GPU \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:254
+#: ../libpcsxcore/plugins.c:256
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "Não conseguiu carregar a extensão de CD-ROM \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:300
+#: ../libpcsxcore/plugins.c:302
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "Não conseguiu carregar a extensão de SPU \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:437
+#: ../libpcsxcore/plugins.c:439
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "Não conseguiu carregar a extensão do Controle 1 \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:491
+#: ../libpcsxcore/plugins.c:493
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "Não conseguiu carregar a extensão do Controle 2 \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:534
+#: ../libpcsxcore/plugins.c:536
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "Não conseguiu carregar a extensão de jogo em rede \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:595
+#: ../libpcsxcore/plugins.c:597
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr "Erro ao iniciar a extensão de CD-ROM \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:597
+#: ../libpcsxcore/plugins.c:599
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr "Erro ao iniciar a extensão de GPU \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:599
+#: ../libpcsxcore/plugins.c:601
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr "Erro ao iniciar a extensão de SPU \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:601
+#: ../libpcsxcore/plugins.c:603
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr "Erro ao iniciar a extensão do Controle 1 \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:603
+#: ../libpcsxcore/plugins.c:605
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr "Erro ao iniciar a extensão do Controle 2 \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:607
+#: ../libpcsxcore/plugins.c:609
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr "Erro ao iniciar a extensão de jogo em rede \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:610
+#: ../libpcsxcore/plugins.c:612
 msgid "Plugins loaded.\n"
 msgstr "Extensões carregadas.\n"
 
@@ -1555,26 +1555,26 @@ msgstr "Não conseguiu abrir a BIOS\"%s\". Usando BIOS HLE!\n"
 msgid "Running PCSX Version %s (%s).\n"
 msgstr "Rodando o PCSX Versão %s (%s).\n"
 
-#: ../libpcsxcore/sio.c:344
+#: ../libpcsxcore/sio.c:345
 msgid "Connection closed!\n"
 msgstr "Conexão encerrada!\n"
 
-#: ../libpcsxcore/sio.c:370
+#: ../libpcsxcore/sio.c:371
 #, c-format
 msgid "No memory card value was specified - creating a default card %s\n"
 msgstr "Nenhum cartão de memória foi especificado, criando um \"%s\" padrão.\n"
 
-#: ../libpcsxcore/sio.c:374
+#: ../libpcsxcore/sio.c:375
 #, c-format
 msgid "The memory card %s doesn't exist - creating it\n"
 msgstr "O cartão de memória \"%s\" não existe, será criado.\n"
 
-#: ../libpcsxcore/sio.c:390
+#: ../libpcsxcore/sio.c:391
 #, c-format
 msgid "Memory card %s failed to load!\n"
 msgstr "Cartão de memória \"%s\" falhou para carregar!\n"
 
-#: ../libpcsxcore/sio.c:394
+#: ../libpcsxcore/sio.c:395
 #, c-format
 msgid "Loading memory card %s\n"
 msgstr "Carregando cartão de memória \"%s\".\n"
@@ -2194,28 +2194,18 @@ msgid "Patch Memory..."
 msgstr ""
 
 #: ../plugins/dfsound/spu.c:38
-msgid "ALSA Sound"
-msgstr "Sistema ALSA"
-
-#: ../plugins/dfsound/spu.c:40
 msgid "Mac OS X Sound"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:42
-msgid "OSS Sound"
+#: ../plugins/dfsound/spu.c:40
+#, fuzzy
+msgid "SDL Sound"
 msgstr "Sistema OSS"
 
-#: ../plugins/dfsound/spu.c:44
-msgid "PulseAudio Sound"
-msgstr ""
-
-#: ../plugins/dfsound/spu.c:46
-msgid "NULL Sound"
-msgstr "Sem som"
-
-#: ../plugins/dfsound/spu.c:49
+#: ../plugins/dfsound/spu.c:43
+#, fuzzy
 msgid ""
-"P.E.Op.S. OSS Driver V1.7\n"
+"P.E.Op.S. Sound Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
 "Extensão OSS P.E.Op.S. V1.7\n"
@@ -3017,6 +3007,12 @@ msgstr ""
 #: ../plugins/dfnet/dfnet.glade2:240
 msgid "Play Offline"
 msgstr ""
+
+#~ msgid "ALSA Sound"
+#~ msgstr "Sistema ALSA"
+
+#~ msgid "NULL Sound"
+#~ msgstr "Sem som"
 
 #, fuzzy
 #~ msgid "Dump Memory..."

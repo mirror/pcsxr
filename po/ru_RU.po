@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-14 10:55+0800\n"
+"POT-Creation-Date: 2010-05-19 16:31+0800\n"
 "PO-Revision-Date: 2010-05-14 06:01+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -387,7 +387,8 @@ msgid "NetPlay"
 msgstr "Сетевая игра"
 
 #: ../win32/gui/ConfigurePlugins.c:620
-msgid "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
+msgid ""
+"Note: The NetPlay Plugin Directory should be the same as the other Plugins."
 msgstr ""
 "Внимание! NetPlay плагин должен находится в том же каталоге что и остальные "
 "плагины."
@@ -1272,7 +1273,8 @@ msgstr "Отформатировать карту памяти?"
 msgid ""
 "If you format the memory card, the card will be empty, and any existing data "
 "overwritten."
-msgstr "При форматировании все данные на карте памяти будут безвозвратно утеряны."
+msgstr ""
+"При форматировании все данные на карте памяти будут безвозвратно утеряны."
 
 #: ../gui/MemcardDlg.c:363
 msgid "Format card"
@@ -1428,67 +1430,67 @@ msgstr "This file does not appear to be a valid PSX file.\n"
 msgid "Error loading %s: %s"
 msgstr "Ошибка загрузки %s: %s"
 
-#: ../libpcsxcore/plugins.c:183
+#: ../libpcsxcore/plugins.c:185
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "Не удалось загрузить GPU плагин %s!"
 
-#: ../libpcsxcore/plugins.c:254
+#: ../libpcsxcore/plugins.c:256
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "Не удалось загрузить CD-ROM плагин %s!"
 
-#: ../libpcsxcore/plugins.c:300
+#: ../libpcsxcore/plugins.c:302
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "Не удалось загрузить SPU плагин %s!"
 
-#: ../libpcsxcore/plugins.c:437
+#: ../libpcsxcore/plugins.c:439
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "Не удалось загрузить PAD1 плагин %s!"
 
-#: ../libpcsxcore/plugins.c:491
+#: ../libpcsxcore/plugins.c:493
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "Не удалось загрузить PAD2 плагин %s!"
 
-#: ../libpcsxcore/plugins.c:534
+#: ../libpcsxcore/plugins.c:536
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "Не удалось загрузить NetPlay плагин %s!"
 
-#: ../libpcsxcore/plugins.c:595
+#: ../libpcsxcore/plugins.c:597
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr "Ошибка инициализации CD-ROM плагина: %d"
 
-#: ../libpcsxcore/plugins.c:597
+#: ../libpcsxcore/plugins.c:599
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr "Ошибка инициализации GPU плагина: %d"
 
-#: ../libpcsxcore/plugins.c:599
+#: ../libpcsxcore/plugins.c:601
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr "Ошибка инициализации SPU плагина: %d"
 
-#: ../libpcsxcore/plugins.c:601
+#: ../libpcsxcore/plugins.c:603
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr "Ошибка инициализации PAD1 плагина: %d"
 
-#: ../libpcsxcore/plugins.c:603
+#: ../libpcsxcore/plugins.c:605
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr "Ошибка инициализации PAD2 плагина: %d"
 
-#: ../libpcsxcore/plugins.c:607
+#: ../libpcsxcore/plugins.c:609
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr "Ошибка инициализации NetPlay плагина: %d"
 
-#: ../libpcsxcore/plugins.c:610
+#: ../libpcsxcore/plugins.c:612
 msgid "Plugins loaded.\n"
 msgstr "Плагины загружены.\n"
 
@@ -1521,26 +1523,26 @@ msgstr "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgid "Running PCSX Version %s (%s).\n"
 msgstr "Запуск PCSX версии %s (%s) 執行中。\n"
 
-#: ../libpcsxcore/sio.c:344
+#: ../libpcsxcore/sio.c:345
 msgid "Connection closed!\n"
 msgstr "Соединение закрыто!\n"
 
-#: ../libpcsxcore/sio.c:370
+#: ../libpcsxcore/sio.c:371
 #, c-format
 msgid "No memory card value was specified - creating a default card %s\n"
 msgstr "Карта памяти не указана - создана новая карта %s\n"
 
-#: ../libpcsxcore/sio.c:374
+#: ../libpcsxcore/sio.c:375
 #, c-format
 msgid "The memory card %s doesn't exist - creating it\n"
 msgstr "Карта памяти %s не существует - создана новая\n"
 
-#: ../libpcsxcore/sio.c:390
+#: ../libpcsxcore/sio.c:391
 #, c-format
 msgid "Memory card %s failed to load!\n"
 msgstr "Ошибка загрузки карты памяти %s!\n"
 
-#: ../libpcsxcore/sio.c:394
+#: ../libpcsxcore/sio.c:395
 #, c-format
 msgid "Loading memory card %s\n"
 msgstr "Загрузка карты памяти %s\n"
@@ -1657,7 +1659,8 @@ msgstr "Авто-определение FPS"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:236
 msgid "Enable this if games display too quickly."
-msgstr "Следует включить для автоматического определения и ограничения скорости игры."
+msgstr ""
+"Следует включить для автоматического определения и ограничения скорости игры."
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:249
 msgid "Enable frame skipping"
@@ -2149,28 +2152,17 @@ msgid "Patch Memory..."
 msgstr "Патч памяти..."
 
 #: ../plugins/dfsound/spu.c:38
-msgid "ALSA Sound"
-msgstr ""
-
-#: ../plugins/dfsound/spu.c:40
 msgid "Mac OS X Sound"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:42
-msgid "OSS Sound"
-msgstr ""
+#: ../plugins/dfsound/spu.c:40
+#, fuzzy
+msgid "SDL Sound"
+msgstr "Звук"
 
-#: ../plugins/dfsound/spu.c:44
-msgid "PulseAudio Sound"
-msgstr ""
-
-#: ../plugins/dfsound/spu.c:46
-msgid "NULL Sound"
-msgstr ""
-
-#: ../plugins/dfsound/spu.c:49
+#: ../plugins/dfsound/spu.c:43
 msgid ""
-"P.E.Op.S. OSS Driver V1.7\n"
+"P.E.Op.S. Sound Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
 
@@ -2275,7 +2267,8 @@ msgstr "Настройка CDR"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:33
 msgid "Choose your CD-ROM device or type its path if it's not listed"
-msgstr "Выберите CD-привод или введите свой путь, если устройства нету в списке"
+msgstr ""
+"Выберите CD-привод или введите свой путь, если устройства нету в списке"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:44
 msgid "Select CD-ROM device"
@@ -2979,7 +2972,8 @@ msgid "Client (Player2)"
 msgstr "Клиент (Игрок 2)"
 
 #: ../plugins/dfnet/dfnet.glade2:130
-msgid "Do not change if not necessary (remember it must be changed on both sides)."
+msgid ""
+"Do not change if not necessary (remember it must be changed on both sides)."
 msgstr ""
 "Не меняйте без особой необходимости (помните что порты должны быть одинаковы "
 "для обеих сторон)"
@@ -2995,4 +2989,3 @@ msgstr "Начать сетевую игру"
 #: ../plugins/dfnet/dfnet.glade2:240
 msgid "Play Offline"
 msgstr "Начать без использования сети"
-

@@ -516,18 +516,18 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 	image = (u16 *)PSXM(adr);
 
 	if (mdec.reg0 & MDEC0_RGB24) { // 15-b decoding
-		// MDECOUTDMA_INT(((size * (1000000 / 9000)) / 4) /** 4*/);
-		MDECOUTDMA_INT((size / 4));
+		// MDECOUTDMA_INT(((size * (1000000 / 9000)) / 4) /** 4*/ / BIAS);
+		MDECOUTDMA_INT((size / 4) / BIAS);
 		size = size / ((16 * 16) / 2);
 		for (; size > 0; size--, image += (16 * 16)) {
 			mdec.rl = rl2blk(blk, mdec.rl);
 			yuv2rgb15(blk, image);
 		}
 	} else { // 24-b decoding
-		// MDECOUTDMA_INT(((size * (1000000 / 9000)) / 4) /** 4*/);
-		MDECOUTDMA_INT((size / 4));
+		// MDECOUTDMA_INT(((size * (1000000 / 9000)) / 4) /** 4*/ / BIAS);
+		MDECOUTDMA_INT((size / 4) / BIAS);
 		size = size / ((24 * 16) / 2);
-		for (; size>0; size--, image += (24 * 16)) {
+		for (; size > 0; size--, image += (24 * 16)) {
 			mdec.rl = rl2blk(blk, mdec.rl);
 			yuv2rgb24(blk, (u8 *)image);
 		}
@@ -546,9 +546,9 @@ void mdec1Interrupt() {
 		// PSXCLK / 1000 seems good for FF9. (for FF9 need < ~28000)
 		// CAUTION: commented interrupt-handling may lead to problems, keep an eye ;-)
 		MDECOUTDMA_INT(PSXCLK / 1000);
-		// psxRegs.interrupt |= 0x02000000;
-		// psxRegs.intCycle[5 + 24 + 1] *= 8;
-		// psxRegs.intCycle[5 + 24] = psxRegs.cycle;
+//		psxRegs.interrupt |= 0x02000000;
+//		psxRegs.intCycle[5 + 24 + 1] *= 8;
+//		psxRegs.intCycle[5 + 24] = psxRegs.cycle;
 		HW_DMA1_CHCR &= SWAP32(~0x01000000);
 		DMA_INTERRUPT(1);
 	} else {

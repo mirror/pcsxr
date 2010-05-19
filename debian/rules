@@ -22,7 +22,7 @@ CONFIGURE_PARAM = \
 	--bindir=/usr/games \
 	--mandir=\$${prefix}/share/man \
 	--infodir=\$${prefix}/share/info \
-	--enable-opengl --enable-alsa
+	--enable-opengl
 
 config.status: configure
 	dh_testdir

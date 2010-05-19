@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-14 11:04+0800\n"
+"POT-Creation-Date: 2010-05-19 16:31+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1410,67 +1410,67 @@ msgstr ""
 msgid "Error loading %s: %s"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:183
+#: ../libpcsxcore/plugins.c:185
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:254
+#: ../libpcsxcore/plugins.c:256
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:300
+#: ../libpcsxcore/plugins.c:302
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:437
+#: ../libpcsxcore/plugins.c:439
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:491
+#: ../libpcsxcore/plugins.c:493
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:534
+#: ../libpcsxcore/plugins.c:536
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:595
+#: ../libpcsxcore/plugins.c:597
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:597
+#: ../libpcsxcore/plugins.c:599
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:599
+#: ../libpcsxcore/plugins.c:601
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:601
+#: ../libpcsxcore/plugins.c:603
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:603
+#: ../libpcsxcore/plugins.c:605
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:607
+#: ../libpcsxcore/plugins.c:609
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:610
+#: ../libpcsxcore/plugins.c:612
 msgid "Plugins loaded.\n"
 msgstr ""
 
@@ -1503,26 +1503,26 @@ msgstr ""
 msgid "Running PCSX Version %s (%s).\n"
 msgstr ""
 
-#: ../libpcsxcore/sio.c:344
+#: ../libpcsxcore/sio.c:345
 msgid "Connection closed!\n"
 msgstr ""
 
-#: ../libpcsxcore/sio.c:370
+#: ../libpcsxcore/sio.c:371
 #, c-format
 msgid "No memory card value was specified - creating a default card %s\n"
 msgstr ""
 
-#: ../libpcsxcore/sio.c:374
+#: ../libpcsxcore/sio.c:375
 #, c-format
 msgid "The memory card %s doesn't exist - creating it\n"
 msgstr ""
 
-#: ../libpcsxcore/sio.c:390
+#: ../libpcsxcore/sio.c:391
 #, c-format
 msgid "Memory card %s failed to load!\n"
 msgstr ""
 
-#: ../libpcsxcore/sio.c:394
+#: ../libpcsxcore/sio.c:395
 #, c-format
 msgid "Loading memory card %s\n"
 msgstr ""
@@ -2106,28 +2106,16 @@ msgid "Patch Memory..."
 msgstr ""
 
 #: ../plugins/dfsound/spu.c:38
-msgid "ALSA Sound"
-msgstr ""
-
-#: ../plugins/dfsound/spu.c:40
 msgid "Mac OS X Sound"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:42
-msgid "OSS Sound"
+#: ../plugins/dfsound/spu.c:40
+msgid "SDL Sound"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:44
-msgid "PulseAudio Sound"
-msgstr ""
-
-#: ../plugins/dfsound/spu.c:46
-msgid "NULL Sound"
-msgstr ""
-
-#: ../plugins/dfsound/spu.c:49
+#: ../plugins/dfsound/spu.c:43
 msgid ""
-"P.E.Op.S. OSS Driver V1.7\n"
+"P.E.Op.S. Sound Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
 

@@ -85,8 +85,8 @@ unsigned char Test23[] = { 0x43, 0x58, 0x44, 0x32, 0x39 ,0x34, 0x30, 0x51 };
 
 // 1x = 75 sectors per second
 // PSXCLK = 1 sec in the ps
-// so (PSXCLK / 75) = cdr read time (linuzappz)
-#define cdReadTime (PSXCLK / 75)
+// so (PSXCLK / 75) / BIAS = cdr read time (linuzappz)
+#define cdReadTime ((PSXCLK / 75) / BIAS)
 
 static struct CdrStat stat;
 static struct SubQ *subq;
@@ -1057,9 +1057,9 @@ void cdrWrite3(unsigned char rt) {
 			cdr.Irq = 0;
 			return;
 		}
-        if (cdr.Irq)
+		if (cdr.Irq)
 			CDR_INT(cdr.eCycle);
-        if (cdr.Reading && !cdr.ResultReady) 
+		if (cdr.Reading && !cdr.ResultReady) 
             CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
 
 		return;
@@ -1068,7 +1068,7 @@ void cdrWrite3(unsigned char rt) {
 		cdr.Readed = 1;
 		cdr.pTransfer = cdr.Transfer;
 
-		switch (cdr.Mode&0x30) {
+		switch (cdr.Mode & 0x30) {
 			case 0x10:
 			case 0x00:
 				cdr.pTransfer += 12;

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-14 10:55+0800\n"
+"POT-Creation-Date: 2010-05-19 16:31+0800\n"
 "PO-Revision-Date: 2010-03-15 16:00+0200\n"
 "Last-Translator: Giovanni Scafora <giovanni@archlinux.org>\n"
 "Language-Team: Arch Linux Italian Team <giovanni@archlinux.org>\n"
@@ -1476,77 +1476,77 @@ msgstr "Questo file non sembra essere un file valido di PSX.\n"
 msgid "Error loading %s: %s"
 msgstr "Si è verificato un errore durante il caricamento di %s: %s"
 
-#: ../libpcsxcore/plugins.c:183
+#: ../libpcsxcore/plugins.c:185
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "Impossibile caricare il plugin %s della GPU!"
 
-#: ../libpcsxcore/plugins.c:254
+#: ../libpcsxcore/plugins.c:256
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "Impossibile caricare il plugin %s del CD-ROM!"
 
-#: ../libpcsxcore/plugins.c:300
+#: ../libpcsxcore/plugins.c:302
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "Impossibile caricare il plugin %s della SPU!"
 
-#: ../libpcsxcore/plugins.c:437
+#: ../libpcsxcore/plugins.c:439
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "Impossibile caricare il plugin %s del controller 1!"
 
-#: ../libpcsxcore/plugins.c:491
+#: ../libpcsxcore/plugins.c:493
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "Impossibile caricare il plugin %s del controller 2!"
 
-#: ../libpcsxcore/plugins.c:534
+#: ../libpcsxcore/plugins.c:536
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "Impossibile caricare il plugin %s di NetPlay!"
 
-#: ../libpcsxcore/plugins.c:595
+#: ../libpcsxcore/plugins.c:597
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin del CD-ROM: %"
 "d"
 
-#: ../libpcsxcore/plugins.c:597
+#: ../libpcsxcore/plugins.c:599
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin della GPU: %d"
 
-#: ../libpcsxcore/plugins.c:599
+#: ../libpcsxcore/plugins.c:601
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin della SPU: %d"
 
-#: ../libpcsxcore/plugins.c:601
+#: ../libpcsxcore/plugins.c:603
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin del "
 "controller 1: %d"
 
-#: ../libpcsxcore/plugins.c:603
+#: ../libpcsxcore/plugins.c:605
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin del "
 "controller 2: %d"
 
-#: ../libpcsxcore/plugins.c:607
+#: ../libpcsxcore/plugins.c:609
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin di NetPlay: %"
 "d"
 
-#: ../libpcsxcore/plugins.c:610
+#: ../libpcsxcore/plugins.c:612
 msgid "Plugins loaded.\n"
 msgstr "Plugin caricati.\n"
 
@@ -1579,28 +1579,28 @@ msgstr "Impossibile aprire il BIOS:\"%s\". Sto abilitando il bios HLE!\n"
 msgid "Running PCSX Version %s (%s).\n"
 msgstr "Avvio in corso di PCSX versione %s (%s).\n"
 
-#: ../libpcsxcore/sio.c:344
+#: ../libpcsxcore/sio.c:345
 msgid "Connection closed!\n"
 msgstr "Connessione chiusa!\n"
 
-#: ../libpcsxcore/sio.c:370
+#: ../libpcsxcore/sio.c:371
 #, c-format
 msgid "No memory card value was specified - creating a default card %s\n"
 msgstr ""
 "Nessun valore specificato per la memory card, sto creando una card di "
 "default %s\n"
 
-#: ../libpcsxcore/sio.c:374
+#: ../libpcsxcore/sio.c:375
 #, c-format
 msgid "The memory card %s doesn't exist - creating it\n"
 msgstr "La memory card %s non esiste, la sto creando\n"
 
-#: ../libpcsxcore/sio.c:390
+#: ../libpcsxcore/sio.c:391
 #, c-format
 msgid "Memory card %s failed to load!\n"
 msgstr "Impossibile caricare la memory card %s!\n"
 
-#: ../libpcsxcore/sio.c:394
+#: ../libpcsxcore/sio.c:395
 #, c-format
 msgid "Loading memory card %s\n"
 msgstr "Sto caricando la memory card %s\n"
@@ -2222,28 +2222,18 @@ msgid "Patch Memory..."
 msgstr ""
 
 #: ../plugins/dfsound/spu.c:38
-msgid "ALSA Sound"
-msgstr "Audio ALSA"
-
-#: ../plugins/dfsound/spu.c:40
 msgid "Mac OS X Sound"
 msgstr "Audio Mac OS X"
 
-#: ../plugins/dfsound/spu.c:42
-msgid "OSS Sound"
+#: ../plugins/dfsound/spu.c:40
+#, fuzzy
+msgid "SDL Sound"
 msgstr "Audio OSS"
 
-#: ../plugins/dfsound/spu.c:44
-msgid "PulseAudio Sound"
-msgstr "Audio PulseAudio"
-
-#: ../plugins/dfsound/spu.c:46
-msgid "NULL Sound"
-msgstr "Senza audio"
-
-#: ../plugins/dfsound/spu.c:49
+#: ../plugins/dfsound/spu.c:43
+#, fuzzy
 msgid ""
-"P.E.Op.S. OSS Driver V1.7\n"
+"P.E.Op.S. Sound Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
 "P.E.Op.S. OSS Driver V1.7\n"
@@ -3066,6 +3056,15 @@ msgstr "Tasto Start"
 #: ../plugins/dfnet/dfnet.glade2:240
 msgid "Play Offline"
 msgstr ""
+
+#~ msgid "ALSA Sound"
+#~ msgstr "Audio ALSA"
+
+#~ msgid "PulseAudio Sound"
+#~ msgstr "Audio PulseAudio"
+
+#~ msgid "NULL Sound"
+#~ msgstr "Senza audio"
 
 #, fuzzy
 #~ msgid "Dump Memory..."

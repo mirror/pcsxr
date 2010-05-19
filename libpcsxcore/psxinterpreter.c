@@ -286,7 +286,7 @@ __inline void doBranch(u32 tar) {
 	debugI();
 
 	psxRegs.pc += 4;
-	psxRegs.cycle += BIAS;
+	psxRegs.cycle++;
 
 	// check for load delay
 	tmp = psxRegs.code >> 26;
@@ -789,7 +789,7 @@ inline void execI() {
 	if (Config.Debug) ProcessDebug();
 
 	psxRegs.pc += 4;
-	psxRegs.cycle += BIAS;
+	psxRegs.cycle++;
 
 	psxBSC[psxRegs.code >> 26]();
 }

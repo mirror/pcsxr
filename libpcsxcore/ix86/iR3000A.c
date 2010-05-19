@@ -97,7 +97,7 @@ static void iFlushRegs() {
 
 static void iRet() {
 	/* store cycle */
-	count = ((pc - pcold) / 4) * BIAS;
+	count = (pc - pcold)/4;
 	ADD32ItoM((u32)&psxRegs.cycle, count);
 	if (resp) ADD32ItoR(ESP, resp);
 	RET();
@@ -148,7 +148,7 @@ static void SetBranch() {
 		iFlushRegs();
 		MOV32ItoM((u32)&psxRegs.code, psxRegs.code);
 		/* store cycle */
-		count = ((pc - pcold) / 4) * BIAS;
+		count = (pc - pcold) / 4;
 		ADD32ItoM((u32)&psxRegs.cycle, count);
 		if (resp) ADD32ItoR(ESP, resp);
 
@@ -180,7 +180,7 @@ static void iJump(u32 branchPC) {
 		iFlushRegs();
 		MOV32ItoM((u32)&psxRegs.code, psxRegs.code);
 		/* store cycle */
-		count = ((pc - pcold) / 4) * BIAS;
+		count = (pc - pcold)/4;
 		ADD32ItoM((u32)&psxRegs.cycle, count);
 		if (resp) ADD32ItoR(ESP, resp);
 
@@ -199,7 +199,7 @@ static void iJump(u32 branchPC) {
 	MOV32ItoM((u32)&psxRegs.pc, branchPC);
 	CALLFunc((u32)psxBranchTest);
 	/* store cycle */
-	count = ((pc - pcold) / 4) * BIAS;
+	count = (pc - pcold)/4;
 	ADD32ItoM((u32)&psxRegs.cycle, count);
 	if (resp) ADD32ItoR(ESP, resp);
 
@@ -236,7 +236,7 @@ static void iBranch(u32 branchPC, int savectx) {
 		iFlushRegs();
 		MOV32ItoM((u32)&psxRegs.code, psxRegs.code);
 		/* store cycle */
-		count = (((pc+4) - pcold) / 4) * BIAS;
+		count = ((pc+4) - pcold)/4;
 		ADD32ItoM((u32)&psxRegs.cycle, count);
 		if (resp) ADD32ItoR(ESP, resp);
 
@@ -256,7 +256,7 @@ static void iBranch(u32 branchPC, int savectx) {
 	MOV32ItoM((u32)&psxRegs.pc, branchPC);
 	CALLFunc((u32)psxBranchTest);
 	/* store cycle */
-	count = ((pc - pcold) / 4) * BIAS;
+	count = (pc - pcold)/4;
 	ADD32ItoM((u32)&psxRegs.cycle, count);
 	if (resp) ADD32ItoR(ESP, resp);
 

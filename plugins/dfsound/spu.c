@@ -34,19 +34,13 @@
 #define N_(x) (x)
 #endif
 
-#if defined (USEALSA)
-static char * libraryName     = N_("ALSA Sound");
-#elif defined (USEMACOSX)
+#if defined (USEMACOSX)
 static char * libraryName     = N_("Mac OS X Sound");
-#elif defined (USEOSS)
-static char * libraryName     = N_("OSS Sound");
-#elif defined (USEPULSEAUDIO)
-static char * libraryName     = N_("PulseAudio Sound");
 #else
-static char * libraryName     = N_("NULL Sound");
+static char * libraryName     = N_("SDL Sound");
 #endif
 
-static char * libraryInfo     = N_("P.E.Op.S. OSS Driver V1.7\nCoded by Pete Bernert and the P.E.Op.S. team\n");
+static char * libraryInfo     = N_("P.E.Op.S. Sound Driver V1.7\nCoded by Pete Bernert and the P.E.Op.S. team\n");
 
 // globals
 

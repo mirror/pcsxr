@@ -66,14 +66,14 @@ static unsigned int padst;
 char Mcd1Data[MCD_SIZE], Mcd2Data[MCD_SIZE];
 
 // clk cycle byte
-// 4us * 8bits = ((PSXCLK / 1000000) * 32); (linuzappz)
+// 4us * 8bits = ((PSXCLK / 1000000) * 32) / BIAS; (linuzappz)
 // TODO: add SioModePrescaler and BaudReg
-#define SIO_INT() { \
-	if (!Config.Sio) { \
-		psxRegs.interrupt |= 0x80; \
-		psxRegs.intCycle[7 + 1] = 400; \
-		psxRegs.intCycle[7] = psxRegs.cycle; \
-	} \
+static inline void SIO_INT() {
+	if (!Config.Sio) {
+		psxRegs.interrupt |= 0x80;
+		psxRegs.intCycle[7 + 1] = 200; /*271;*/
+		psxRegs.intCycle[7] = psxRegs.cycle;
+	}
 }
 
 void sioWrite8(unsigned char value) {

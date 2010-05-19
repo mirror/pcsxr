@@ -37,11 +37,6 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-@HAVE_ALSA_TRUE@am__append_1 = -DUSEALSA=1
-@HAVE_ALSA_TRUE@am__append_2 = $(ALSA_LIBS)
-@HAVE_OSS_TRUE@am__append_3 = -DUSEOSS=1
-@HAVE_PULSEAUDIO_TRUE@am__append_4 = $(PULSEAUDIO_CFLAGS) -DUSEPULSEAUDIO=1
-@HAVE_PULSEAUDIO_TRUE@am__append_5 = $(PULSEAUDIO_LIBS)
 bin_PROGRAMS = cfgDFSound$(EXEEXT)
 subdir = plugins/dfsound
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
@@ -81,8 +76,7 @@ libDFSound_la_LIBADD =
 am_libDFSound_la_OBJECTS = libDFSound_la-spu.lo libDFSound_la-cfg.lo \
 	libDFSound_la-dma.lo libDFSound_la-freeze.lo \
 	libDFSound_la-psemu.lo libDFSound_la-registers.lo \
-	libDFSound_la-alsa.lo libDFSound_la-oss.lo \
-	libDFSound_la-pulseaudio.lo libDFSound_la-nullsnd.lo
+	libDFSound_la-sdl.lo
 libDFSound_la_OBJECTS = $(am_libDFSound_la_OBJECTS)
 libDFSound_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(libDFSound_la_CFLAGS) \
@@ -112,8 +106,6 @@ ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
-ALSA_CFLAGS = @ALSA_CFLAGS@
-ALSA_LIBS = @ALSA_LIBS@
 AMTAR = @AMTAR@
 AR = @AR@
 AUTOCONF = @AUTOCONF@
@@ -193,8 +185,6 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 PEOPSXGL = @PEOPSXGL@
 PKG_CONFIG = @PKG_CONFIG@
 POSUB = @POSUB@
-PULSEAUDIO_CFLAGS = @PULSEAUDIO_CFLAGS@
-PULSEAUDIO_LIBS = @PULSEAUDIO_LIBS@
 RANLIB = @RANLIB@
 SDL_CFLAGS = @SDL_CFLAGS@
 SDL_CONFIG = @SDL_CONFIG@
@@ -271,12 +261,10 @@ INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 	-I../../include
 
 lib_LTLIBRARIES = libDFSound.la
-libDFSound_la_SOURCES = spu.c cfg.c dma.c freeze.c psemu.c registers.c \
-	alsa.c oss.c pulseaudio.c nullsnd.c
-
-libDFSound_la_CFLAGS = $(am__append_1) $(am__append_3) $(am__append_4)
+libDFSound_la_SOURCES = spu.c cfg.c dma.c freeze.c psemu.c registers.c sdl.c
+libDFSound_la_CFLAGS = `$(SDL_CONFIG) --cflags`
 libDFSound_la_LDFLAGS = -module -avoid-version -lpthread -lm \
-	$(am__append_2) $(am__append_5)
+	`$(SDL_CONFIG) --libs`
 cfgDFSound_SOURCES = spucfg-0.1df/main.c
 cfgDFSound_LDADD = $(GTK2_LIBS) $(GLADE2_LIBS)
 glade_DATA = spucfg-0.1df/dfsound.glade2
@@ -402,15 +390,12 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-alsa.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-cfg.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-dma.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-freeze.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-nullsnd.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-oss.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-psemu.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-pulseaudio.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-registers.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-sdl.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-spu.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 
@@ -477,33 +462,12 @@ libDFSound_la-registers.lo: registers.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -c -o libDFSound_la-registers.lo `test -f 'registers.c' || echo '$(srcdir)/'`registers.c
 
-libDFSound_la-alsa.lo: alsa.c
-@am__fastdepCC_TRUE@	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -MT libDFSound_la-alsa.lo -MD -MP -MF $(DEPDIR)/libDFSound_la-alsa.Tpo -c -o libDFSound_la-alsa.lo `test -f 'alsa.c' || echo '$(srcdir)/'`alsa.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/libDFSound_la-alsa.Tpo $(DEPDIR)/libDFSound_la-alsa.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='alsa.c' object='libDFSound_la-alsa.lo' libtool=yes @AMDEPBACKSLASH@
+libDFSound_la-sdl.lo: sdl.c
+@am__fastdepCC_TRUE@	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -MT libDFSound_la-sdl.lo -MD -MP -MF $(DEPDIR)/libDFSound_la-sdl.Tpo -c -o libDFSound_la-sdl.lo `test -f 'sdl.c' || echo '$(srcdir)/'`sdl.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/libDFSound_la-sdl.Tpo $(DEPDIR)/libDFSound_la-sdl.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='sdl.c' object='libDFSound_la-sdl.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -c -o libDFSound_la-alsa.lo `test -f 'alsa.c' || echo '$(srcdir)/'`alsa.c
-
-libDFSound_la-oss.lo: oss.c
-@am__fastdepCC_TRUE@	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -MT libDFSound_la-oss.lo -MD -MP -MF $(DEPDIR)/libDFSound_la-oss.Tpo -c -o libDFSound_la-oss.lo `test -f 'oss.c' || echo '$(srcdir)/'`oss.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/libDFSound_la-oss.Tpo $(DEPDIR)/libDFSound_la-oss.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='oss.c' object='libDFSound_la-oss.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -c -o libDFSound_la-oss.lo `test -f 'oss.c' || echo '$(srcdir)/'`oss.c
-
-libDFSound_la-pulseaudio.lo: pulseaudio.c
-@am__fastdepCC_TRUE@	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -MT libDFSound_la-pulseaudio.lo -MD -MP -MF $(DEPDIR)/libDFSound_la-pulseaudio.Tpo -c -o libDFSound_la-pulseaudio.lo `test -f 'pulseaudio.c' || echo '$(srcdir)/'`pulseaudio.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/libDFSound_la-pulseaudio.Tpo $(DEPDIR)/libDFSound_la-pulseaudio.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='pulseaudio.c' object='libDFSound_la-pulseaudio.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -c -o libDFSound_la-pulseaudio.lo `test -f 'pulseaudio.c' || echo '$(srcdir)/'`pulseaudio.c
-
-libDFSound_la-nullsnd.lo: nullsnd.c
-@am__fastdepCC_TRUE@	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -MT libDFSound_la-nullsnd.lo -MD -MP -MF $(DEPDIR)/libDFSound_la-nullsnd.Tpo -c -o libDFSound_la-nullsnd.lo `test -f 'nullsnd.c' || echo '$(srcdir)/'`nullsnd.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/libDFSound_la-nullsnd.Tpo $(DEPDIR)/libDFSound_la-nullsnd.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='nullsnd.c' object='libDFSound_la-nullsnd.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -c -o libDFSound_la-nullsnd.lo `test -f 'nullsnd.c' || echo '$(srcdir)/'`nullsnd.c
+@am__fastdepCC_FALSE@	$(LIBTOOL)  --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -c -o libDFSound_la-sdl.lo `test -f 'sdl.c' || echo '$(srcdir)/'`sdl.c
 
 main.o: spucfg-0.1df/main.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT main.o -MD -MP -MF $(DEPDIR)/main.Tpo -c -o main.o `test -f 'spucfg-0.1df/main.c' || echo '$(srcdir)/'`spucfg-0.1df/main.c

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-14 11:03+0800\n"
-"PO-Revision-Date: 2010-05-14 11:04+0800\n"
+"POT-Creation-Date: 2010-05-19 16:31+0800\n"
+"PO-Revision-Date: 2010-05-19 16:32+0800\n"
 "Last-Translator: Wei Mingzhi <whistler_wmz@users.sourceforge.net>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -1539,67 +1539,67 @@ msgstr "此檔案不是一個合法的 PSX 檔案。\n"
 msgid "Error loading %s: %s"
 msgstr "無法加載 %s: %s"
 
-#: ../libpcsxcore/plugins.c:183
+#: ../libpcsxcore/plugins.c:185
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "無法加載 GPU 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:254
+#: ../libpcsxcore/plugins.c:256
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "無法加載 CD-ROM 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:300
+#: ../libpcsxcore/plugins.c:302
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "無法加載 SPU 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:437
+#: ../libpcsxcore/plugins.c:439
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "無法加載 \"控制器1\" 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:491
+#: ../libpcsxcore/plugins.c:493
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "無法加載 \"控制器2\" 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:534
+#: ../libpcsxcore/plugins.c:536
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "無法加載聯網遊戲外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:595
+#: ../libpcsxcore/plugins.c:597
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr "CD-ROM 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:597
+#: ../libpcsxcore/plugins.c:599
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr "GPU 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:599
+#: ../libpcsxcore/plugins.c:601
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr "SPU 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:601
+#: ../libpcsxcore/plugins.c:603
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr "\"控制器1\" 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:603
+#: ../libpcsxcore/plugins.c:605
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr "\"控制器2\" 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:607
+#: ../libpcsxcore/plugins.c:609
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr "聯網遊戲外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:610
+#: ../libpcsxcore/plugins.c:612
 msgid "Plugins loaded.\n"
 msgstr "外掛已加載。\n"
 
@@ -1632,26 +1632,26 @@ msgstr "無法開啟 BIOS: \"%s\"。使用內部 HLE Bios。\n"
 msgid "Running PCSX Version %s (%s).\n"
 msgstr "PCSX 版本 %s (%s) 執行中。\n"
 
-#: ../libpcsxcore/sio.c:344
+#: ../libpcsxcore/sio.c:345
 msgid "Connection closed!\n"
 msgstr "連接被關閉!\n"
 
-#: ../libpcsxcore/sio.c:370
+#: ../libpcsxcore/sio.c:371
 #, c-format
 msgid "No memory card value was specified - creating a default card %s\n"
 msgstr "未指定記憶卡 - 創建一個新的記憶卡 %s\n"
 
-#: ../libpcsxcore/sio.c:374
+#: ../libpcsxcore/sio.c:375
 #, c-format
 msgid "The memory card %s doesn't exist - creating it\n"
 msgstr "記憶卡 %s 不存在 - 正在創建\n"
 
-#: ../libpcsxcore/sio.c:390
+#: ../libpcsxcore/sio.c:391
 #, c-format
 msgid "Memory card %s failed to load!\n"
 msgstr "記憶卡 %s 讀取失敗!\n"
 
-#: ../libpcsxcore/sio.c:394
+#: ../libpcsxcore/sio.c:395
 #, c-format
 msgid "Loading memory card %s\n"
 msgstr "正在加載記憶卡 %s\n"
@@ -2287,31 +2287,19 @@ msgid "Patch Memory..."
 msgstr "修改記憶體..."
 
 #: ../plugins/dfsound/spu.c:38
-msgid "ALSA Sound"
-msgstr "ALSA 聲音"
-
-#: ../plugins/dfsound/spu.c:40
 msgid "Mac OS X Sound"
 msgstr "Mac OS X 聲音"
 
-#: ../plugins/dfsound/spu.c:42
-msgid "OSS Sound"
-msgstr "OSS 聲音"
+#: ../plugins/dfsound/spu.c:40
+msgid "SDL Sound"
+msgstr "SDL 聲音"
 
-#: ../plugins/dfsound/spu.c:44
-msgid "PulseAudio Sound"
-msgstr "PulseAudio 聲音"
-
-#: ../plugins/dfsound/spu.c:46
-msgid "NULL Sound"
-msgstr "NULL 聲音"
-
-#: ../plugins/dfsound/spu.c:49
+#: ../plugins/dfsound/spu.c:43
 msgid ""
-"P.E.Op.S. OSS Driver V1.7\n"
+"P.E.Op.S. Sound Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
-"P.E.Op.S. OSS 驅動程式 V1.7\n"
+"P.E.Op.S. Sound 驅動程式 V1.7\n"
 "由 Pete Bernert 及 P.E.Op.S. 開發組編寫\n"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:42
@@ -3150,4 +3138,11 @@ msgstr "開始遊戲"
 #: ../plugins/dfnet/dfnet.glade2:240
 msgid "Play Offline"
 msgstr "離線遊戲"
+
+#~ msgid "ALSA Sound"
+#~ msgstr "ALSA 聲音"
+#~ msgid "PulseAudio Sound"
+#~ msgstr "PulseAudio 聲音"
+#~ msgid "NULL Sound"
+#~ msgstr "NULL 聲音"
 

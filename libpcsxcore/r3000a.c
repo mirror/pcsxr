@@ -115,42 +115,42 @@ void psxBranchTest() {
 		psxRcntUpdate();
 
 	if (psxRegs.interrupt) {
-		if ((psxRegs.interrupt & 0x80) && (!Config.Sio)) { // sio
-			if ((psxRegs.cycle - psxRegs.intCycle[7]) >= psxRegs.intCycle[7+1]) {
-				psxRegs.interrupt&=~0x80;
+		if ((psxRegs.interrupt & 0x80) && !Config.Sio) { // sio
+			if ((psxRegs.cycle - psxRegs.intCycle[7]) >= psxRegs.intCycle[7 + 1]) {
+				psxRegs.interrupt &= ~0x80;
 				sioInterrupt();
 			}
 		}
 		if (psxRegs.interrupt & 0x04) { // cdr
-			if ((psxRegs.cycle - psxRegs.intCycle[2]) >= psxRegs.intCycle[2+1]) {
-				psxRegs.interrupt&=~0x04;
+			if ((psxRegs.cycle - psxRegs.intCycle[2]) >= psxRegs.intCycle[2 + 1]) {
+				psxRegs.interrupt &= ~0x04;
 				cdrInterrupt();
 			}
 		}
 		if (psxRegs.interrupt & 0x040000) { // cdr read
-			if ((psxRegs.cycle - psxRegs.intCycle[2+16]) >= psxRegs.intCycle[2+16+1]) {
-				psxRegs.interrupt&=~0x040000;
+			if ((psxRegs.cycle - psxRegs.intCycle[2 + 16]) >= psxRegs.intCycle[2 + 16 + 1]) {
+				psxRegs.interrupt &= ~0x040000;
 				cdrReadInterrupt();
 			}
 		}
 		if (psxRegs.interrupt & 0x01000000) { // gpu dma
-			if ((psxRegs.cycle - psxRegs.intCycle[3+24]) >= psxRegs.intCycle[3+24+1]) {
-				psxRegs.interrupt&=~0x01000000;
+			if ((psxRegs.cycle - psxRegs.intCycle[3 + 24]) >= psxRegs.intCycle[3 + 24 + 1]) {
+				psxRegs.interrupt &= ~0x01000000;
 				gpuInterrupt();
 			}
 		}
 		if (psxRegs.interrupt & 0x02000000) { // mdec out dma
-			if ((psxRegs.cycle - psxRegs.intCycle[5+24]) >= psxRegs.intCycle[5+24+1]) {
-				psxRegs.interrupt&=~0x02000000;
+			if ((psxRegs.cycle - psxRegs.intCycle[5 + 24]) >= psxRegs.intCycle[5 + 24 + 1]) {
+				psxRegs.interrupt &= ~0x02000000;
 				mdec1Interrupt();
 			}
 		}
-        if (psxRegs.interrupt & 0x04000000) { // spu dma
-            if ((psxRegs.cycle - psxRegs.intCycle[1+24]) >= psxRegs.intCycle[1+24+1]) {
-                psxRegs.interrupt&=~0x04000000;
-                spuInterrupt();
-            }
-        }
+		if (psxRegs.interrupt & 0x04000000) { // spu dma
+			if ((psxRegs.cycle - psxRegs.intCycle[1 + 24]) >= psxRegs.intCycle[1 + 24 + 1]) {
+				psxRegs.interrupt &= ~0x04000000;
+				spuInterrupt();
+			}
+		}
 	}
 
 	if (psxHu32(0x1070) & psxHu32(0x1074)) {

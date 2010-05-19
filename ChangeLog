@@ -1,3 +1,30 @@
+May 19, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfsound/sdl.c: Use SDL for Sound Plugin.
+ * plugins/dfsound/oss.c: Removed OSS, PulseAudio, ALSA & NULL sound code.
+ * plugins/dfsound/pulseaudio.c: Likewise.
+ * plugins/dfsound/nullsnd.c: Likewise.
+ * plugins/dfsound/alsa.c: Likewise.
+ * plugins/dfsound/spu.c: Removed OSS/PulseAudio/ALSA/NULL plugin names,
+   added SDL plugin name.
+ * debian/control: Removed libasound2-dev.
+ * debian/rules: Removed --enable-alsa.
+ * configure.ac: Removed SDL, PulseAudio & OSS stuff.
+ * plugins/dfsound/Makefile.am: Likewise.
+ * po/pt_BR.po, po/it.po, po/zh_TW.po, po/ru_RU.po, po/pcsx.pot, po/zh_CN.po:
+   Updated.
+ * libpcsxcore/psxinterpreter.c: Reverted the change to how BIAS was handled in
+   r48024, which was causing problems with x64 dynarec core.
+ * libpcsxcore/ppc/pR3000A.c: Likewise.
+ * libpcsxcore/cdrom.c: Likewise.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/mdec.c: Likewise.
+ * libpcsxcore/ix86/iR3000A.c: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psxdma.c: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+
 May 16, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/plugins.c: Added brackets around CheckErr() and LoadSym().

@@ -116,7 +116,7 @@ void _psxRcntWcount( u32 index, u32 value )
         value &= 0xffff;
     }
 
-    rcnts[index].cycleStart  = psxRegs.cycle;
+    rcnts[index].cycleStart  = psxRegs.cycle * BIAS;
     rcnts[index].cycleStart -= value * rcnts[index].rate;
 
     // TODO: <=.
@@ -137,7 +137,7 @@ u32 _psxRcntRcount( u32 index )
 {
     u32 count;
 
-    count  = psxRegs.cycle;
+    count  = psxRegs.cycle * BIAS;
     count -= rcnts[index].cycleStart;
     count /= rcnts[index].rate;
 
@@ -158,7 +158,7 @@ void psxRcntSet()
     s32 countToUpdate;
     u32 i;
 
-    psxNextsCounter = psxRegs.cycle;
+    psxNextsCounter = psxRegs.cycle * BIAS;
     psxNextCounter  = 0x7fffffff;
 
     for( i = 0; i < CounterQuantity; ++i )
@@ -189,7 +189,7 @@ void psxRcntReset( u32 index )
     {
         if( rcnts[index].mode & RcCountToTarget )
         {
-            count  = psxRegs.cycle;
+            count  = psxRegs.cycle * BIAS;
             count -= rcnts[index].cycleStart;
             count /= rcnts[index].rate;
             count -= rcnts[index].target;
@@ -215,7 +215,7 @@ void psxRcntReset( u32 index )
     }
     else if( rcnts[index].counterState == CountToOverflow )
     {
-        count  = psxRegs.cycle;
+        count  = psxRegs.cycle * BIAS;
         count -= rcnts[index].cycleStart;
         count /= rcnts[index].rate;
         count -= 0xffff;
@@ -244,7 +244,7 @@ void psxRcntUpdate()
 {
     u32 cycle;
 
-    cycle = psxRegs.cycle;
+    cycle = psxRegs.cycle * BIAS;
 
     // rcnt 0.
     if( cycle - rcnts[0].cycleStart >= rcnts[0].cycle )

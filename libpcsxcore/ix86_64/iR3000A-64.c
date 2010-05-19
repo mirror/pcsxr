@@ -110,7 +110,7 @@ static void iFlushRegs() {
 
 static void iRet() {
 	/* store cycle */
-	count = ((pc - pcold) / 4) * BIAS;
+	count = (pc - pcold)/4;
 	ADD32ItoM((uptr)&psxRegs.cycle, count);
 	StackRes();
 	RET();
@@ -161,7 +161,7 @@ static void SetBranch() {
 		iFlushRegs();
 		MOV32ItoM((uptr)&psxRegs.code, psxRegs.code);
 		/* store cycle */
-		count = ((pc - pcold) / 4) * BIAS;
+		count = (pc - pcold)/4;
 		ADD32ItoM((uptr)&psxRegs.cycle, count);
 
 		//PUSH64M((uptr)&target);
@@ -193,7 +193,7 @@ static void iJump(u32 branchPC) {
 		iFlushRegs();
 		MOV32ItoM((uptr)&psxRegs.code, psxRegs.code);
 		/* store cycle */
-		count = ((pc - pcold) / 4) * BIAS;
+		count = (pc - pcold)/4;
 		ADD32ItoM((uptr)&psxRegs.cycle, count);
 
 		//PUSHI(branchPC);
@@ -213,7 +213,7 @@ static void iJump(u32 branchPC) {
 	MOV32ItoM((uptr)&psxRegs.pc, branchPC);
 	CALLFunc((uptr)psxBranchTest);
 	/* store cycle */
-	count = ((pc - pcold) / 4) * BIAS;
+	count = (pc - pcold)/4;
 	ADD32ItoM((uptr)&psxRegs.cycle, count);
 	StackRes();
 
@@ -257,7 +257,7 @@ static void iBranch(u32 branchPC, int savectx) {
 		iFlushRegs();
 		MOV32ItoM((uptr)&psxRegs.code, psxRegs.code);
 		/* store cycle */
-		count = (((pc+4) - pcold) / 4) * BIAS;
+		count = ((pc+4) - pcold)/4;
 		ADD32ItoM((uptr)&psxRegs.cycle, count);
 		//if (resp) ADD32ItoR(ESP, resp);
 
@@ -278,7 +278,7 @@ static void iBranch(u32 branchPC, int savectx) {
 	MOV32ItoM((uptr)&psxRegs.pc, branchPC);
 	CALLFunc((uptr)psxBranchTest);
 	/* store cycle */
-	count = ((pc - pcold) / 4) * BIAS;
+	count = (pc - pcold)/4;
 	ADD32ItoM((uptr)&psxRegs.cycle, count);
 	
 	StackRes();
@@ -415,8 +415,6 @@ static int recInit() {
 	recRAM = mmap(0,
 		0x280000*PTRMULT,
 		PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-	//recRAM = (uptr*) malloc(0x200000 * sizeof(void*));
-	//recROM = (uptr*) malloc(0x080000 * sizeof(void*));
 	recROM = &recRAM[0x200000*PTRMULT];
 
 	if (recRAM == NULL || recROM == NULL || recMem == NULL || psxRecLUT == NULL) {
@@ -452,11 +450,8 @@ static void recReset() {
 static void recShutdown() {
 	if (recMem == NULL) return;
 	free(psxRecLUT);
-	//free(recMem);
 	munmap(recMem, RECMEM_SIZE + PTRMULT*0x1000);
-	//free(recRAM);
 	munmap(recRAM, 0x280000*PTRMULT);
-	//free(recROM);
 	x86Shutdown();
 }
 
@@ -2344,7 +2339,7 @@ REC_SYS(SYSCALL);
 REC_SYS(BREAK);
 #endif
 
-int dump;
+int dump = 0;
 
 #if 1
 static void recSYSCALL() {
@@ -2878,7 +2873,7 @@ static void recRecompile() {
 	char *p;
 	char *ptr;
 
-	dump=0;
+	dump = 0;
 	resp = 0;
 
 	/* if x86Ptr reached the mem limit reset whole mem */
@@ -2966,4 +2961,3 @@ R3000Acpu psxRec = {
 	recClear,
 	recShutdown
 };
-

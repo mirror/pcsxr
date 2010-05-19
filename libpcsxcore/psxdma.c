@@ -27,8 +27,8 @@
 // Dma3   in CdRom.c
 
 void spuInterrupt() {
-    HW_DMA4_CHCR &= SWAP32(~0x01000000);
-    DMA_INTERRUPT(4);
+	HW_DMA4_CHCR &= SWAP32(~0x01000000);
+	DMA_INTERRUPT(4);
 }
 
 void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
@@ -48,7 +48,7 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 				break;
 			}
 			SPU_writeDMAMem(ptr, (bcr >> 16) * (bcr & 0xffff) * 2);
-            SPUDMA_INT((bcr >> 16) * (bcr & 0xffff) / 2);
+			SPUDMA_INT(((bcr >> 16) * (bcr & 0xffff) / 2) / BIAS);
 			return;
 
 		case 0x01000200: //spu to cpu transfer
@@ -63,7 +63,7 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 				break;
 			}
 			size = (bcr >> 16) * (bcr & 0xffff) * 2;
-    		SPU_readDMAMem(ptr, size);
+			SPU_readDMAMem(ptr, size);
 			psxCpu->Clear(madr, size);
 			break;
 
@@ -112,7 +112,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			}
 			size = (bcr >> 16) * (bcr & 0xffff);
 			GPU_writeDataMem(ptr, size);
-			GPUDMA_INT((size / 4));
+			GPUDMA_INT((size / 4) / BIAS);
 			return;
 
 		case 0x01000401: // dma chain
