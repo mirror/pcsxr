@@ -6,7 +6,9 @@ May 20, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 May 19, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfsound/sdl.c: Use SDL for Sound Plugin.
- * plugins/dfsound/oss.c: Removed OSS, PulseAudio, ALSA & NULL sound code.
+ * plugins/dfsound/oss.c: Removed OSS, PulseAudio, ALSA & NULL sound code. If
+   these are ever needed in the future we still have the thing called version
+   control.
  * plugins/dfsound/pulseaudio.c: Likewise.
  * plugins/dfsound/nullsnd.c: Likewise.
  * plugins/dfsound/alsa.c: Likewise.
@@ -14,7 +16,7 @@ May 19, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
    added SDL plugin name.
  * debian/control: Removed libasound2-dev.
  * debian/rules: Removed --enable-alsa.
- * configure.ac: Removed SDL, PulseAudio & OSS stuff.
+ * configure.ac: Removed ALSA, PulseAudio & OSS stuff.
  * plugins/dfsound/Makefile.am: Likewise.
  * po/pt_BR.po, po/it.po, po/zh_TW.po, po/ru_RU.po, po/pcsx.pot, po/zh_CN.po:
    Updated.
