@@ -143,11 +143,11 @@ static const char *err;
 #if defined (__MACOSX__)
 #define LoadSym(dest, src, name, checkerr) { \
 	dest = (src)SysLoadSym(drv, name); \
-	if (checkerr) CheckErr(name); else SysLibError(); \
+	if (checkerr) { CheckErr(name); } else SysLibError(); \
 }
 #else
 #define LoadSym(dest, src, name, checkerr) { \
-	dest = (src)SysLoadSym(drv, name); if (checkerr) CheckErr(name); \
+	dest = (src)SysLoadSym(drv, name); if (checkerr) { CheckErr(name); } \
 }
 #endif
 
@@ -444,7 +444,7 @@ static int LoadPAD1plugin(const char *PAD1dll) {
 	LoadPad1Sym1(open, "PADopen");
 	LoadPad1Sym1(close, "PADclose");
 	LoadPad1Sym0(query, "PADquery");
-    LoadPad1Sym1(readPort1, "PADreadPort1");
+	LoadPad1Sym1(readPort1, "PADreadPort1");
 	LoadPad1Sym0(configure, "PADconfigure");
 	LoadPad1Sym0(test, "PADtest");
 	LoadPad1Sym0(about, "PADabout");
@@ -457,15 +457,15 @@ static int LoadPAD1plugin(const char *PAD1dll) {
 }
 
 unsigned char CALLBACK PAD2__startPoll(int pad) {
-    PadDataS padd;
+	PadDataS padd;
 
-    PAD2_readPort2(&padd);
+	PAD2_readPort2(&padd);
     
-    return _PADstartPoll(&padd);
+	return _PADstartPoll(&padd);
 }
 
 unsigned char CALLBACK PAD2__poll(unsigned char value) {
-    return _PADpoll(value);
+	return _PADpoll(value);
 }
 
 long CALLBACK PAD2__configure(void) { return 0; }
@@ -498,7 +498,7 @@ static int LoadPAD2plugin(const char *PAD2dll) {
 	LoadPad2Sym1(open, "PADopen");
 	LoadPad2Sym1(close, "PADclose");
 	LoadPad2Sym0(query, "PADquery");
-    LoadPad2Sym1(readPort2, "PADreadPort2");
+	LoadPad2Sym1(readPort2, "PADreadPort2");
 	LoadPad2Sym0(configure, "PADconfigure");
 	LoadPad2Sym0(test, "PADtest");
 	LoadPad2Sym0(about, "PADabout");

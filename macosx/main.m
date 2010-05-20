@@ -17,8 +17,7 @@
 static BOOL sysInited = NO;
 //#define EMU_LOG
 
-int main(int argc, const char *argv[])
-{
+int main(int argc, const char *argv[]) {
     if ( argc >= 2 && strncmp (argv[1], "-psn", 4) == 0 ) {
         char parentdir[MAXPATHLEN];
         char *c;
@@ -79,7 +78,7 @@ void SysReset() {
     //EmuReset();
 }
 
-void SysPrintf(char *fmt, ...) {
+void SysPrintf(const char *fmt, ...) {
     va_list list;
     char msg[512];
 
@@ -95,8 +94,7 @@ void SysPrintf(char *fmt, ...) {
 #endif
 }
 
-void SysMessage(char *fmt, ...)
-{
+void SysMessage(const char *fmt, ...) {
 	va_list list;
 	char msg[512];
 
@@ -111,8 +109,7 @@ void SysMessage(char *fmt, ...)
 		nil, nil, nil);
 }
 
-#if 1
-void *SysLoadLibrary(char *lib) {
+void *SysLoadLibrary(const char *lib) {
 	NSBundle *bundle = [NSBundle bundleWithPath:[NSString stringWithCString:lib]];
 	if (bundle != nil) {
 		return dlopen([[bundle executablePath] fileSystemRepresentation], RTLD_LAZY /*RTLD_NOW*/);
@@ -120,7 +117,7 @@ void *SysLoadLibrary(char *lib) {
 	return dlopen(lib, RTLD_LAZY);
 }
 
-void *SysLoadSym(void *lib, char *sym) {
+void *SysLoadSym(void *lib, const char *sym) {
 	return dlsym(lib, sym);
 }
 
@@ -131,96 +128,20 @@ const char *SysLibError() {
 void SysCloseLibrary(void *lib) {
 	//dlclose(lib);
 }
-#else
-static int LoadResult = 0;
-void *SysLoadLibrary(char *lib)
-{
-    CFBundleRef myBundle;
-    CFURLRef    bundleURL;
-    CFStringRef	path;
-
-    path = CFStringCreateWithCString(kCFAllocatorDefault, lib, CFStringGetSystemEncoding());
-    if (!path)
-        goto error;
-
-    bundleURL = CFURLCreateWithFileSystemPath( 
-                    kCFAllocatorDefault, 
-                    path,
-                    kCFURLPOSIXPathStyle,
-                    true );
-    if (!bundleURL)
-        goto error;
-
-    myBundle = CFBundleCreate( kCFAllocatorDefault, bundleURL );
-
-    if (!CFBundleLoadExecutable(myBundle))
-        goto error;
-
-good:
-    if (path) CFRelease(path);
-    if (bundleURL) CFRelease(bundleURL);
-
-    return myBundle;
-    
-error:
-    if (LoadResult == 0) LoadResult = -1;
-    myBundle = NULL;
-    goto good;
-}
-
-void *SysLoadSym(void *lib, char *sym)
-{
-    CFStringRef funcName;
-    void *func;
-    
-    funcName = CFStringCreateWithCString(kCFAllocatorDefault, sym, CFStringGetSystemEncoding());
-    func = CFBundleGetFunctionPointerForName((CFBundleRef)lib, funcName);
-    if (func == nil) {
-        LoadResult = -2;
-    }
-    
-    CFRelease(funcName);
-    return func;
-}
-
-const char *SysLibError()
-{
-    char *result = NULL;
-    
-    if (LoadResult != 0)
-        result = "Error loading code";
-    
-    LoadResult = 0;
-    return result;
-}
-void SysCloseLibrary(void *lib)
-{
-    if (lib) {
-        CFBundleUnloadExecutable((CFBundleRef)lib);
-        CFRelease((CFBundleRef)lib);
-    }
-}
-#endif
-
-void PADhandleKey(int key);
 
 // Called periodically from the emu thread
-void SysUpdate()
-{
+void SysUpdate() {
 	UpdateSystemActivity(UsrActivity);
-
-	PADhandleKey(PAD1_keypressed());
-	//PADhandleKey(PAD2_keypressed());
 
 	[emuThread handleEvents];
 }
 
-void SysRunGui() // Returns to the Gui
-{
-    
+// Returns to the Gui
+void SysRunGui() {
 }
-void SysClose() // Close mem and plugins
-{
+
+// Close mem and plugins
+void SysClose() {
     EmuShutdown();
     ReleasePlugins();
 
@@ -229,8 +150,7 @@ void SysClose() // Close mem and plugins
     sysInited = NO;
 }
 
-void OnFile_Exit()
-{
+void OnFile_Exit() {
     SysClose();
     exit(0);
 }

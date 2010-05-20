@@ -1,3 +1,8 @@
+May 20, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/main.m: Removed obsolete code, added const too function definations.
+ * libpcsxcore/plugins.c: Added brackets around the use of CheckErr().
+
 May 19, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfsound/sdl.c: Use SDL for Sound Plugin.
