@@ -30,29 +30,31 @@
 #define MAP_ANONYMOUS MAP_ANON
 #endif
 
-s8 *psxM = NULL;
-s8 *psxP = NULL;
-s8 *psxR = NULL;
-s8 *psxH = NULL;
+s8 *psxM = NULL; // Kernel & User Memory (2 Meg)
+s8 *psxP = NULL; // Parallel Port (64K)
+s8 *psxR = NULL; // BIOS ROM (512K)
+s8 *psxH = NULL; // Hardware Registers (8K)
 
 u8 **psxMemWLUT = NULL;
 u8 **psxMemRLUT = NULL;
 
 /*  Playstation Memory Map (from Playstation doc by Joshua Walker)
-0x0000_0000-0x0000_ffff		Kernel (64K)	
-0x0001_0000-0x001f_ffff		User Memory (1.9 Meg)	
+0x0000_0000-0x0000_ffff		Kernel (64K)
+0x0001_0000-0x001f_ffff		User Memory (1.9 Meg)
 
-0x1f00_0000-0x1f00_ffff		Parallel Port (64K)	
+0x1f00_0000-0x1f00_ffff		Parallel Port (64K)
 
-0x1f80_0000-0x1f80_03ff		Scratch Pad (1024 bytes)	
+0x1f80_0000-0x1f80_03ff		Scratch Pad (1024 bytes)
 
-0x1f80_1000-0x1f80_2fff		Hardware Registers (8K)	
+0x1f80_1000-0x1f80_2fff		Hardware Registers (8K)
 
-0x8000_0000-0x801f_ffff		Kernel and User Memory Mirror (2 Meg) Cached	
+0x1fc0_0000-0x1fc7_ffff		BIOS (512K)
 
-0xa000_0000-0xa01f_ffff		Kernel and User Memory Mirror (2 Meg) Uncached	
+0x8000_0000-0x801f_ffff		Kernel and User Memory Mirror (2 Meg) Cached
+0x9fc0_0000-0x9fc7_ffff		BIOS Mirror (512K) Cached
 
-0xbfc0_0000-0xbfc7_ffff		BIOS (512K)
+0xa000_0000-0xa01f_ffff		Kernel and User Memory Mirror (2 Meg) Uncached
+0xbfc0_0000-0xbfc7_ffff		BIOS Mirror (512K) Uncached
 */
 
 int psxMemInit() {
@@ -86,7 +88,10 @@ int psxMemInit() {
 	psxMemRLUT[0x1f00] = (u8 *)psxP;
 	psxMemRLUT[0x1f80] = (u8 *)psxH;
 
-	for (i = 0; i < 0x08; i++) psxMemRLUT[i + 0xbfc0] = (u8 *)&psxR[i << 16];
+	for (i = 0; i < 0x08; i++) psxMemRLUT[i + 0x1fc0] = (u8 *)&psxR[i << 16];
+
+	memcpy(psxMemRLUT + 0x9fc0, psxMemRLUT + 0x1fc0, 0x08 * sizeof(void *));
+	memcpy(psxMemRLUT + 0xbfc0, psxMemRLUT + 0x1fc0, 0x08 * sizeof(void *));
 
 // MemW
 	for (i = 0; i < 0x80; i++) psxMemWLUT[i + 0x0000] = (u8 *)&psxM[(i & 0x1f) << 16];
@@ -106,7 +111,7 @@ void psxMemReset() {
 	memset(psxM, 0, 0x00200000);
 	memset(psxP, 0, 0x00010000);
 
-	if (strcmp(Config.Bios, "HLE")) {
+	if (strcmp(Config.Bios, "HLE") != 0) {
 		sprintf(bios, "%s/%s", Config.BiosDir, Config.Bios);
 		f = fopen(bios, "rb");
 

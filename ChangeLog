@@ -5,6 +5,8 @@ May 20, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * libpcsxcore/psxcommon.h: Added brackets around gzfreeze().
  * plugins/dfinput/Makefile.am: Use $(SDL_CFLAGS) and $(SDL_LIBS).
  * plugins/dfsound/Makefile.am: Likewise.
+ * libpcsxcore/psxmem.c: Map 1fc00000-1fc7ffff and 9fc00000-9fc7ffff to BIOS
+   as well.
 
 May 19, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
