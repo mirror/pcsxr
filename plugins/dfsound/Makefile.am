@@ -11,9 +11,9 @@ lib_LTLIBRARIES = libDFSound.la
 
 libDFSound_la_SOURCES = spu.c cfg.c dma.c freeze.c psemu.c registers.c sdl.c
 
-libDFSound_la_CFLAGS = `$(SDL_CONFIG) --cflags`
+libDFSound_la_CFLAGS = $(SDL_CFLAGS)
 libDFSound_la_LDFLAGS = -module -avoid-version -lpthread -lm
-libDFSound_la_LDFLAGS += `$(SDL_CONFIG) --libs`
+libDFSound_la_LDFLAGS += $(SDL_LIBS)
 
 bin_PROGRAMS = cfgDFSound
 cfgDFSound_SOURCES = spucfg-0.1df/main.c

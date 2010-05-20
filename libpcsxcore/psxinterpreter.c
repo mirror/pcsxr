@@ -781,7 +781,7 @@ static void intShutdown() {
 
 // interpreter execution
 inline void execI() { 
-	u32 *code = (u32 *)PSXM(psxRegs.pc); 
+	u32 *code = (u32 *)PSXM(psxRegs.pc);
 	psxRegs.code = ((code == NULL) ? 0 : SWAP32(*code));
 
 	debugI();

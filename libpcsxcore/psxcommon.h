@@ -136,12 +136,16 @@ typedef struct {
 extern PcsxConfig Config;
 extern boolean NetOpened;
 
-#define gzfreeze(ptr, size) \
+#define gzfreeze(ptr, size) { \
 	if (Mode == 1) gzwrite(f, ptr, size); \
-	if (Mode == 0) gzread(f, ptr, size);
+	if (Mode == 0) gzread(f, ptr, size); \
+}
 
+// Make the timing events trigger faster as we are currently assuming everything
+// takes one cycle, which is not the case on real hardware.
+// FIXME: Count the proper cycle and get rid of this
 #define BIAS	2
-#define PSXCLK	33868800	/* 33.8688 Mhz */
+#define PSXCLK	33868800	/* 33.8688 MHz */
 
 enum {
 	PSX_TYPE_NTSC = 0,
