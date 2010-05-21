@@ -11,6 +11,7 @@ May 21, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
    Updated.
  * libpcsxcore/psxbios.c: Implemented several HLE BIOS functions inside the
    core instead of calling the standard C functions. (Not done yet)
+ * plugins/dfsound/sdl.c: Changed buffer size.
 
 May 20, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

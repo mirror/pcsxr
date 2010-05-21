@@ -366,7 +366,7 @@ void psxBios_strcat() { // 0x15
 
 	while (*p1++);
 	--p1;
-	while (*p1++ = *p2++);
+	while ((*p1++ = *p2++) != '\0');
 
 	v0 = a0; pc0 = ra;
 }
@@ -381,7 +381,7 @@ void psxBios_strncat() { // 0x16
 
 	while (*p1++);
 	--p1;
-	while (*p1++ = *p2++) {
+	while ((*p1++ = *p2++) != '\0') {
 		if (--n < 0) {
 			*--p1 = '\0';
 			break;
@@ -432,7 +432,7 @@ void psxBios_strncmp() { // 0x18
 
 void psxBios_strcpy() { // 0x19
 	char *p1 = (char *)Ra0, *p2 = (char *)Ra1;
-	while (*p1++ = *p2++);
+	while ((*p1++ = *p2++) != '\0');
 
 	v0 = a0; pc0 = ra;
 }

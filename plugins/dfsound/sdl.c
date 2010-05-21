@@ -21,11 +21,11 @@
 #include "externals.h"
 #include <SDL.h>
 
-#define BUFFER_SIZE		11025
+#define BUFFER_SIZE		22050
 
 short			*pSndBuffer = NULL;
-int			iBufSize = 0;
-volatile int		iReadPos = 0, iWritePos = 0;
+int				iBufSize = 0;
+volatile int	iReadPos = 0, iWritePos = 0;
 
 static void SOUND_FillAudio(void *unused, Uint8 *stream, int len) {
 	short *p = (short *)stream;
@@ -71,7 +71,7 @@ void SetupSound(void) {
 	spec.freq = 44100;
 	spec.format = AUDIO_S16SYS;
 	spec.channels = iDisStereo ? 1 : 2;
-	spec.samples = 1024;
+	spec.samples = 512;
 	spec.callback = SOUND_FillAudio;
 
 	if (SDL_OpenAudio(&spec, NULL) < 0) {
