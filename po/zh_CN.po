@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-19 16:31+0800\n"
-"PO-Revision-Date: 2010-05-19 16:31+0800\n"
+"POT-Creation-Date: 2010-05-21 08:44+0800\n"
+"PO-Revision-Date: 2010-05-21 08:45+0800\n"
 "Last-Translator: Wei Mingzhi <whistler_wmz@users.sourceforge.net>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -1618,11 +1618,11 @@ msgstr "不支持的 PPF 补丁版本 (%d)。\n"
 msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr "已加载 PPF %d.0 补丁文件: %s。\n"
 
-#: ../libpcsxcore/psxmem.c:76
+#: ../libpcsxcore/psxmem.c:78
 msgid "Error allocating memory!"
 msgstr "分配内存错误!"
 
-#: ../libpcsxcore/psxmem.c:114
+#: ../libpcsxcore/psxmem.c:119
 #, c-format
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr "无法打开 BIOS: \"%s\"。使用内部 HLE Bios。\n"
@@ -2291,10 +2291,26 @@ msgid "Mac OS X Sound"
 msgstr "Mac OS X 声音"
 
 #: ../plugins/dfsound/spu.c:40
+msgid "ALSA Sound"
+msgstr "ALSA 声音"
+
+#: ../plugins/dfsound/spu.c:42
+msgid "OSS Sound"
+msgstr "OSS 声音"
+
+#: ../plugins/dfsound/spu.c:44
 msgid "SDL Sound"
 msgstr "SDL 声音"
 
-#: ../plugins/dfsound/spu.c:43
+#: ../plugins/dfsound/spu.c:46
+msgid "PulseAudio Sound"
+msgstr "PulseAudio 声音"
+
+#: ../plugins/dfsound/spu.c:48
+msgid "NULL Sound"
+msgstr "空声音"
+
+#: ../plugins/dfsound/spu.c:51
 msgid ""
 "P.E.Op.S. Sound Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
@@ -3138,11 +3154,4 @@ msgstr "开始游戏"
 #: ../plugins/dfnet/dfnet.glade2:240
 msgid "Play Offline"
 msgstr "离线运行"
-
-#~ msgid "ALSA Sound"
-#~ msgstr "ALSA 声音"
-#~ msgid "PulseAudio Sound"
-#~ msgstr "PulseAudio 声音"
-#~ msgid "NULL Sound"
-#~ msgstr "空声音"
 

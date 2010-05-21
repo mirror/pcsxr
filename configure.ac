@@ -47,6 +47,40 @@ then
   CFLAGS="$CFLAGS -fno-dse"
 fi
 
+AM_CONDITIONAL(SOUND_OSS, false)
+AM_CONDITIONAL(SOUND_SDL, false)
+AM_CONDITIONAL(SOUND_NULL, false)
+
+dnl Check for ALSA 1.x, OSS, or PulseAudio
+
+AC_ARG_ENABLE(sound, [  --enable-sound=...      force selection of sound backend (alsa, null, oss, pulseaudio, sdl) (default: sdl)],
+[ SOUND="$enableval" ],[ SOUND="sdl" ])
+
+if test "x$SOUND" = xalsa; then
+	PKG_CHECK_MODULES(ALSA, alsa >= 1.0.0, have_alsa=yes, have_alsa=no)
+elif test "x$SOUND" = xpulseaudio; then
+	PKG_CHECK_MODULES(PULSEAUDIO, libpulse >= 0.9.16, have_pulseaudio=yes)
+elif test "x$SOUND" = xoss; then
+	AC_CHECK_HEADER(sys/soundcard.h, have_oss=yes, have_oss=no)
+	if test "x$have_oss" = xno; then
+		AC_MSG_ERROR([sys/soundcard.h not found!])
+	else
+		AM_CONDITIONAL(SOUND_OSS, true)
+	fi
+elif test "x$SOUND" = xno; then
+	AM_CONDITIONAL(SOUND_NULL, true)
+elif test "x$SOUND" = xnull; then
+	AM_CONDITIONAL(SOUND_NULL, true)
+else
+	AM_CONDITIONAL(SOUND_SDL, true)
+fi
+
+AM_CONDITIONAL(SOUND_ALSA, test "x$have_alsa" = xyes)
+AC_SUBST(ALSA_LIBS)
+AM_CONDITIONAL(SOUND_PULSEAUDIO, test "x$have_pulseaudio" = xyes)
+AC_SUBST(PULSEAUDIO_CFLAGS)
+AC_SUBST(PULSEAUDIO_LIBS)
+
 AC_CHECK_HEADER(zlib.h, have_zlib=yes, have_zlib=no)
 if test "x$have_zlib" = xno; then
 	AC_MSG_ERROR([unable to find libz headers])

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-19 16:31+0800\n"
+"POT-Creation-Date: 2010-05-21 08:44+0800\n"
 "PO-Revision-Date: 2010-03-15 16:00+0200\n"
 "Last-Translator: Giovanni Scafora <giovanni@archlinux.org>\n"
 "Language-Team: Arch Linux Italian Team <giovanni@archlinux.org>\n"
@@ -1565,11 +1565,11 @@ msgstr "Versione PPF non supportata (%d).\n"
 msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr "Caricata la patch PPF %d.0: %s.\n"
 
-#: ../libpcsxcore/psxmem.c:76
+#: ../libpcsxcore/psxmem.c:78
 msgid "Error allocating memory!"
 msgstr "Si è verificato un errore durante l'allocazione della memoria!"
 
-#: ../libpcsxcore/psxmem.c:114
+#: ../libpcsxcore/psxmem.c:119
 #, c-format
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr "Impossibile aprire il BIOS:\"%s\". Sto abilitando il bios HLE!\n"
@@ -2226,11 +2226,28 @@ msgid "Mac OS X Sound"
 msgstr "Audio Mac OS X"
 
 #: ../plugins/dfsound/spu.c:40
+msgid "ALSA Sound"
+msgstr "Audio ALSA"
+
+#: ../plugins/dfsound/spu.c:42
+#, fuzzy
+msgid "OSS Sound"
+msgstr "Audio OSS"
+
+#: ../plugins/dfsound/spu.c:44
 #, fuzzy
 msgid "SDL Sound"
 msgstr "Audio OSS"
 
-#: ../plugins/dfsound/spu.c:43
+#: ../plugins/dfsound/spu.c:46
+msgid "PulseAudio Sound"
+msgstr "Audio PulseAudio"
+
+#: ../plugins/dfsound/spu.c:48
+msgid "NULL Sound"
+msgstr "Senza audio"
+
+#: ../plugins/dfsound/spu.c:51
 #, fuzzy
 msgid ""
 "P.E.Op.S. Sound Driver V1.7\n"
@@ -3056,15 +3073,6 @@ msgstr "Tasto Start"
 #: ../plugins/dfnet/dfnet.glade2:240
 msgid "Play Offline"
 msgstr ""
-
-#~ msgid "ALSA Sound"
-#~ msgstr "Audio ALSA"
-
-#~ msgid "PulseAudio Sound"
-#~ msgstr "Audio PulseAudio"
-
-#~ msgid "NULL Sound"
-#~ msgstr "Senza audio"
 
 #, fuzzy
 #~ msgid "Dump Memory..."

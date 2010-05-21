@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-19 16:31+0800\n"
+"POT-Creation-Date: 2010-05-21 08:44+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1489,11 +1489,11 @@ msgstr ""
 msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr ""
 
-#: ../libpcsxcore/psxmem.c:76
+#: ../libpcsxcore/psxmem.c:78
 msgid "Error allocating memory!"
 msgstr ""
 
-#: ../libpcsxcore/psxmem.c:114
+#: ../libpcsxcore/psxmem.c:119
 #, c-format
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr ""
@@ -2110,10 +2110,26 @@ msgid "Mac OS X Sound"
 msgstr ""
 
 #: ../plugins/dfsound/spu.c:40
+msgid "ALSA Sound"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:42
+msgid "OSS Sound"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:44
 msgid "SDL Sound"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:43
+#: ../plugins/dfsound/spu.c:46
+msgid "PulseAudio Sound"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:48
+msgid "NULL Sound"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:51
 msgid ""
 "P.E.Op.S. Sound Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"

@@ -18,13 +18,11 @@
  ***************************************************************************/
 
 /*
-* Internal emulated HLE BIOS.
+* Internal simulated HLE BIOS.
 */
 
 #include "psxbios.h"
 #include "psxhw.h"
-
-//We try to emulate bios :) HELP US :P
 
 char *biosA0n[256] = {
 // 0x00

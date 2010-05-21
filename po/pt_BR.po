@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsx-df\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-19 16:31+0800\n"
+"POT-Creation-Date: 2010-05-21 08:44+0800\n"
 "PO-Revision-Date: 2009-11-28 23:57+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: PoBRE <romhackers@gmail.com>\n"
@@ -1541,11 +1541,11 @@ msgstr ""
 msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr "Arquivo de estado \"%s\" carregado."
 
-#: ../libpcsxcore/psxmem.c:76
+#: ../libpcsxcore/psxmem.c:78
 msgid "Error allocating memory!"
 msgstr "Erro ao alocar memória!"
 
-#: ../libpcsxcore/psxmem.c:114
+#: ../libpcsxcore/psxmem.c:119
 #, c-format
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr "Não conseguiu abrir a BIOS\"%s\". Usando BIOS HLE!\n"
@@ -2198,11 +2198,28 @@ msgid "Mac OS X Sound"
 msgstr ""
 
 #: ../plugins/dfsound/spu.c:40
+msgid "ALSA Sound"
+msgstr "Sistema ALSA"
+
+#: ../plugins/dfsound/spu.c:42
+#, fuzzy
+msgid "OSS Sound"
+msgstr "Sistema OSS"
+
+#: ../plugins/dfsound/spu.c:44
 #, fuzzy
 msgid "SDL Sound"
 msgstr "Sistema OSS"
 
-#: ../plugins/dfsound/spu.c:43
+#: ../plugins/dfsound/spu.c:46
+msgid "PulseAudio Sound"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:48
+msgid "NULL Sound"
+msgstr "Sem som"
+
+#: ../plugins/dfsound/spu.c:51
 #, fuzzy
 msgid ""
 "P.E.Op.S. Sound Driver V1.7\n"
@@ -3007,12 +3024,6 @@ msgstr ""
 #: ../plugins/dfnet/dfnet.glade2:240
 msgid "Play Offline"
 msgstr ""
-
-#~ msgid "ALSA Sound"
-#~ msgstr "Sistema ALSA"
-
-#~ msgid "NULL Sound"
-#~ msgstr "Sem som"
 
 #, fuzzy
 #~ msgid "Dump Memory..."

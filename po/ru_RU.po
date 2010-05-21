@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-19 16:31+0800\n"
+"POT-Creation-Date: 2010-05-21 08:44+0800\n"
 "PO-Revision-Date: 2010-05-14 06:01+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -1509,11 +1509,11 @@ msgstr "Неподдерживаемая версия PPF(%d).\n"
 msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr "Загружен PPF %d.0 патч: %s。\n"
 
-#: ../libpcsxcore/psxmem.c:76
+#: ../libpcsxcore/psxmem.c:78
 msgid "Error allocating memory!"
 msgstr "Ошибка выделения памяти!"
 
-#: ../libpcsxcore/psxmem.c:114
+#: ../libpcsxcore/psxmem.c:119
 #, c-format
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
@@ -2157,10 +2157,29 @@ msgstr ""
 
 #: ../plugins/dfsound/spu.c:40
 #, fuzzy
+msgid "ALSA Sound"
+msgstr "Звук"
+
+#: ../plugins/dfsound/spu.c:42
+#, fuzzy
+msgid "OSS Sound"
+msgstr "Звук"
+
+#: ../plugins/dfsound/spu.c:44
+#, fuzzy
 msgid "SDL Sound"
 msgstr "Звук"
 
-#: ../plugins/dfsound/spu.c:43
+#: ../plugins/dfsound/spu.c:46
+msgid "PulseAudio Sound"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:48
+#, fuzzy
+msgid "NULL Sound"
+msgstr "Звук"
+
+#: ../plugins/dfsound/spu.c:51
 msgid ""
 "P.E.Op.S. Sound Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
