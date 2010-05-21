@@ -12,6 +12,16 @@ May 21, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * libpcsxcore/psxbios.c: Implemented several HLE BIOS functions inside the
    core instead of calling the standard C functions. (Not done yet)
  * plugins/dfsound/sdl.c: Changed buffer size.
+ * libpcsxcore/psxinterpreter.c: Revert the previous revert (why the problem
+   on amd64 disappeared?).
+ * libpcsxcore/ppc/pR3000A.c: Likewise.
+ * libpcsxcore/cdrom.c: Likewise.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * libpcsxcore/ix86/iR3000A.c: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+ * libpcsxcore/psxdma.c: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+ * libpcsxcore/mdec.c: Likewise, and fixed the cycle value in mdec1Interrupt().
 
 May 20, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

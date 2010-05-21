@@ -85,8 +85,8 @@ unsigned char Test23[] = { 0x43, 0x58, 0x44, 0x32, 0x39 ,0x34, 0x30, 0x51 };
 
 // 1x = 75 sectors per second
 // PSXCLK = 1 sec in the ps
-// so (PSXCLK / 75) / BIAS = cdr read time (linuzappz)
-#define cdReadTime ((PSXCLK / 75) / BIAS)
+// so (PSXCLK / 75) = cdr read time (linuzappz)
+#define cdReadTime (PSXCLK / 75)
 
 static struct CdrStat stat;
 static struct SubQ *subq;

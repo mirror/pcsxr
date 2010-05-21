@@ -225,7 +225,7 @@ static int aanscales[DSIZE2] = {
 	1370031, 1900287, 1790031, 1610986, 1370031, 1076426, 741455, 377991,
 	1232995, 1710213, 1610986, 1449849, 1232995,  968758, 667292, 340183,
 	1048576, 1454417, 1370031, 1232995, 1048576,  823861, 567485, 289301,
-	823861,  1142728, 1076426,  968758,  823861,  647303, 445870, 227303,
+	823861,  1142728, 1076426, 968758,  823861,  647303, 445870, 227303,
 	567485,  787125,  741455,  667292,  567485,  445870, 307121, 156569,
 	289301,  401273,  377991,  340183,  289301,  227303, 156569,  79818
 };
@@ -516,16 +516,16 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 	image = (u16 *)PSXM(adr);
 
 	if (mdec.reg0 & MDEC0_RGB24) { // 15-b decoding
-		// MDECOUTDMA_INT(((size * (1000000 / 9000)) / 4) /** 4*/ / BIAS);
-		MDECOUTDMA_INT((size / 4) / BIAS);
+		// MDECOUTDMA_INT(((size * (1000000 / 9000)) / 4) /** 4*/);
+		MDECOUTDMA_INT(size / 4);
 		size = size / ((16 * 16) / 2);
 		for (; size > 0; size--, image += (16 * 16)) {
 			mdec.rl = rl2blk(blk, mdec.rl);
 			yuv2rgb15(blk, image);
 		}
 	} else { // 24-b decoding
-		// MDECOUTDMA_INT(((size * (1000000 / 9000)) / 4) /** 4*/ / BIAS);
-		MDECOUTDMA_INT((size / 4) / BIAS);
+		// MDECOUTDMA_INT(((size * (1000000 / 9000)) / 4) /** 4*/);
+		MDECOUTDMA_INT(size / 4);
 		size = size / ((24 * 16) / 2);
 		for (; size > 0; size--, image += (24 * 16)) {
 			mdec.rl = rl2blk(blk, mdec.rl);
@@ -545,7 +545,7 @@ void mdec1Interrupt() {
 		// PSXCLK / 60 or PSXCLK / 50 since the bug happened at end of frame.
 		// PSXCLK / 1000 seems good for FF9. (for FF9 need < ~28000)
 		// CAUTION: commented interrupt-handling may lead to problems, keep an eye ;-)
-		MDECOUTDMA_INT(PSXCLK / 1000);
+		MDECOUTDMA_INT(PSXCLK / 1000 * BIAS);
 //		psxRegs.interrupt |= 0x02000000;
 //		psxRegs.intCycle[5 + 24 + 1] *= 8;
 //		psxRegs.intCycle[5 + 24] = psxRegs.cycle;

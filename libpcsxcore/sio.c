@@ -71,7 +71,7 @@ char Mcd1Data[MCD_SIZE], Mcd2Data[MCD_SIZE];
 static inline void SIO_INT() {
 	if (!Config.Sio) {
 		psxRegs.interrupt |= 0x80;
-		psxRegs.intCycle[7 + 1] = 200; /*271;*/
+		psxRegs.intCycle[7 + 1] = 400;
 		psxRegs.intCycle[7] = psxRegs.cycle;
 	}
 }

@@ -48,7 +48,7 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 				break;
 			}
 			SPU_writeDMAMem(ptr, (bcr >> 16) * (bcr & 0xffff) * 2);
-			SPUDMA_INT(((bcr >> 16) * (bcr & 0xffff) / 2) / BIAS);
+			SPUDMA_INT((bcr >> 16) * (bcr & 0xffff) / 2);
 			return;
 
 		case 0x01000200: //spu to cpu transfer
@@ -112,7 +112,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			}
 			size = (bcr >> 16) * (bcr & 0xffff);
 			GPU_writeDataMem(ptr, size);
-			GPUDMA_INT((size / 4) / BIAS);
+			GPUDMA_INT(size / 4);
 			return;
 
 		case 0x01000401: // dma chain
