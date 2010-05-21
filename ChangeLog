@@ -9,6 +9,8 @@ May 21, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * plugins/dfsound/Makefile.am: Likewise.
  * po/pt_BR.po, po/it.po, po/zh_TW.po, po/ru_RU.po, po/pcsx.pot, po/zh_CN.po:
    Updated.
+ * libpcsxcore/psxbios.c: Implemented several HLE BIOS functions inside the
+   core instead of calling the standard C functions. (Not done yet)
 
 May 20, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
