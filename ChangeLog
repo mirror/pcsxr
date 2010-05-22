@@ -1,3 +1,7 @@
+May 22, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfsound/pulseaudio.c: Use Native Endian instead of Little Endian.
+
 May 21, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfsound/oss.c: Readded OSS, PulseAudio, ALSA & NULL backends.
