@@ -181,8 +181,8 @@ void sioWrite8(unsigned char value) {
 					{
 					char xor = 0;
 					int i;
-					for (i=2;i<128+4;i++)
-						xor^=buf[i];
+					for (i = 2; i < 128 + 4; i++)
+						xor ^= buf[i];
 					buf[132] = xor;
 					}
 					buf[133] = 0x47;
@@ -720,6 +720,9 @@ void GetMcdBlockInfo(int mcd, int block, McdBlock *Info) {
 		str[i] = sstr[x++] = c;
 		ptr += 2;
 	}
+
+	trim(str);
+	trim(sstr);
 
 	ptr = data + block * 8192 + 0x60; // icon palette data
 

@@ -1,7 +1,7 @@
 May 23, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
- * AUTHORS: Updated on request.
- * gui/AboutDlg.c: Likewise.
+ * AUTHORS: Updated info.
+ * gui/AboutDlg.c: Likewise, and fixed FTBFS on SLED 10.
  * gui/MemcardDlg.c: Show Japanese titles properly.
  * libpcsxcore/sio.h: Likewise.
  * libpcsxcore/sio.c: Likewise.

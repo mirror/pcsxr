@@ -21,6 +21,8 @@
 * PSX memory functions.
 */
 
+// TODO: Implement caches & cycle penalty.
+
 #include "psxmem.h"
 #include "r3000a.h"
 #include "psxhw.h"
