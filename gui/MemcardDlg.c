@@ -131,6 +131,7 @@ static void LoadListItems(int mcd, GtkWidget *widget) {
 	GtkListStore *store;
 	GtkTreeIter iter;
 	GdkPixbuf *pixbuf;
+	gchar *title;
 
 	store = gtk_list_store_new(NUM_CL, GDK_TYPE_PIXBUF, G_TYPE_STRING,
 			G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
@@ -162,13 +163,19 @@ static void LoadListItems(int mcd, GtkWidget *widget) {
 		pixbuf = SetIcon(dialog, Info->Icon, i + 1);
 
 		gtk_list_store_append(store, &iter);
+
+		title = g_convert(Info->sTitle, strlen(Info->sTitle), "UTF-8",
+			"Shift-JIS", NULL, NULL, NULL);
+
 		gtk_list_store_set(store, &iter,
 				CL_ICON, pixbuf,
-				CL_TITLE, Info->Title,
+				CL_TITLE, title,
 				CL_STAT, state,
 				CL_NAME, Info->Name,
 				CL_ID, Info->ID,
 				-1);
+
+		g_free(title);
 		
 		g_object_unref(pixbuf);
 	}
@@ -265,7 +272,7 @@ static void UpdateListItems(int mcd, GtkWidget *widget) {
 
 		pixbuf = SetIcon(dialog, pIcon, i + 1);
 		title = g_convert(Info->sTitle, strlen(Info->sTitle), "UTF-8",
-		                  "Shift-JIS", NULL, NULL, NULL);
+			"Shift-JIS", NULL, NULL, NULL);
 
 		gtk_list_store_set(store, &iter,
 				CL_ICON, pixbuf,
