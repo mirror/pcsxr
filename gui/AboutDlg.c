@@ -30,7 +30,7 @@ void RunAboutDialog(void) {
 		"Wei Mingzhi <whistler_wmz@users.sf.net>",
 		"",
 		"Contributors:",
-		"dario86",
+		"Dario",
 		"Firnis",
 		"Gabriele Gorla",
 		"Peter Collingbourne",

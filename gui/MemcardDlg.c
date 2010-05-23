@@ -229,6 +229,7 @@ static void UpdateListItems(int mcd, GtkWidget *widget) {
 	GdkPixbuf *pixbuf;
 	short *pIcon;
 	int i;
+	gchar *title;
 
 	xml = glade_get_widget_tree(widget);
 	dialog = glade_xml_get_widget(xml, "McdsDlg");
@@ -258,21 +259,24 @@ static void UpdateListItems(int mcd, GtkWidget *widget) {
 			state = _("Free");
 
 		pIcon = Info->Icon;
-		if( Info->IconCount > 1 && currentIcon <= Info->IconCount )
-		{
-			pIcon = &Info->Icon[currentIcon*16*16];
+		if (Info->IconCount > 1 && currentIcon <= Info->IconCount) {
+			pIcon = &Info->Icon[currentIcon * 16 * 16];
 		}
 
 		pixbuf = SetIcon(dialog, pIcon, i + 1);
+		title = g_convert(Info->sTitle, strlen(Info->sTitle), "UTF-8",
+		                  "Shift-JIS", NULL, NULL, NULL);
 
 		gtk_list_store_set(store, &iter,
 				CL_ICON, pixbuf,
-				CL_TITLE, Info->Title,
+				CL_TITLE, title,
 				CL_STAT, state,
 				CL_NAME, Info->Name,
 				CL_ID, Info->ID,
 				-1);
-		
+
+		g_free(title);
+
 		g_object_unref(pixbuf);
 		gtk_tree_model_iter_next(GTK_TREE_MODEL(store), &iter);
 	}

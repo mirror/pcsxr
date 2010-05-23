@@ -670,14 +670,12 @@ void ConvertMcd(char *mcd, char *data) {
 }
 
 void GetMcdBlockInfo(int mcd, int block, McdBlock *Info) {
-	unsigned char *data = NULL, *ptr, *str;
+	unsigned char *data = NULL, *ptr, *str, *sstr;
 	unsigned short clut[16];
 	unsigned short c;
 	int i, x;
 
 	memset(Info, 0, sizeof(McdBlock));
-
-	str = Info->Title;
 
 	if (mcd == 1) data = Mcd1Data;
 	if (mcd == 2) data = Mcd2Data;
@@ -688,34 +686,42 @@ void GetMcdBlockInfo(int mcd, int block, McdBlock *Info) {
 
 	ptr += 2;
 
-	i = 0;
-	memcpy(Info->sTitle, ptr, 48*2);
+	x = 0;
+
+	str = Info->Title;
+	sstr = Info->sTitle;
 
 	for (i = 0; i < 48; i++) {
 		c = *(ptr) << 8;
-		c|= *(ptr + 1);
+		c |= *(ptr + 1);
 		if (!c) break;
 
+		// Convert ASCII characters to half-width
 		if (c >= 0x8281 && c <= 0x8298)
 			c = (c - 0x8281) + 'a';
 		else if (c >= 0x824F && c <= 0x827A)
 			c = (c - 0x824F) + '0';
+		else if (c == 0x8140) c = ' ';
 		else if (c == 0x8144) c = '.';
 		else if (c == 0x8146) c = ':';
+		else if (c == 0x815E) c = '/';
 		else if (c == 0x8168) c = '"';
 		else if (c == 0x8169) c = '(';
 		else if (c == 0x816A) c = ')';
 		else if (c == 0x816D) c = '[';
 		else if (c == 0x816E) c = ']';
 		else if (c == 0x817C) c = '-';
-		else c = ' ';
+		else {
+			str[i] = ' ';
+			sstr[x++] = *ptr++; sstr[x++] = *ptr++;
+			continue;
+		}
 
-		str[i] = c;
+		str[i] = sstr[x++] = c;
 		ptr += 2;
 	}
-	str[i] = 0;
 
-	ptr = data + block * 8192 + 0x60; // icon palete data
+	ptr = data + block * 8192 + 0x60; // icon palette data
 
 	for (i = 0; i < 16; i++) {
 		clut[i] = *((unsigned short *)ptr);
@@ -740,7 +746,6 @@ void GetMcdBlockInfo(int mcd, int block, McdBlock *Info) {
 
 	ptr += 0xa;
 	strncpy(Info->ID, ptr, 12);
-	Info->ID[12] = 0;
 	ptr += 12;
 	strncpy(Info->Name, ptr, 16);
 }

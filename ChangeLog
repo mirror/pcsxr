@@ -1,3 +1,11 @@
+May 23, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * AUTHORS: Updated on request.
+ * gui/AboutDlg.c: Likewise.
+ * gui/MemcardDlg.c: Show Japanese titles properly.
+ * libpcsxcore/sio.h: Likewise.
+ * libpcsxcore/sio.c: Likewise.
+
 May 22, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfsound/pulseaudio.c: Use Native Endian instead of Little Endian.
