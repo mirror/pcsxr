@@ -843,7 +843,7 @@ void UpdateMcdItems(int mcd, int idc) {
 void McdListGetDispInfo(int mcd, int idc, LPNMHDR pnmh) {
 	LV_DISPINFO *lpdi = (LV_DISPINFO *)pnmh;
 	McdBlock *Info;
-	char buf[256], buftitle[256];
+	static char buf[256], buftitle[256];
 
 	Info = &Blocks[mcd - 1][lpdi->item.iItem];
 
