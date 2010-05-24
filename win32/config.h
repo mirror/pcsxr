@@ -40,6 +40,7 @@
 
 #ifdef _MSC_VER
 #pragma warning (disable:4133)
+#pragma warning (disable:4142)
 #pragma warning (disable:4244)
 #pragma warning (disable:4996)
 #pragma warning (disable:4018)
