@@ -75,10 +75,10 @@ static const s32 VerboseLevel     = 0;
 
 static Rcnt rcnts[ CounterQuantity ];
 
-static u32 hSyncCount;
-static u32 spuSyncCount;
+static u32 hSyncCount = 0;
+static u32 spuSyncCount = 0;
 
-u32 psxNextCounter, psxNextsCounter;
+u32 psxNextCounter = 0, psxNextsCounter = 0;
 
 /******************************************************************************/
 
@@ -273,7 +273,7 @@ void psxRcntUpdate()
         hSyncCount++;
 
         // Update spu.
-        if( spuSyncCount == SpuUpdInterval[Config.PsxType] )
+        if( spuSyncCount >= SpuUpdInterval[Config.PsxType] )
         {
             spuSyncCount = 0;
 
@@ -285,13 +285,13 @@ void psxRcntUpdate()
         /*
         // For the best times. :D
         // VSync irq.
-        if( hSyncCount == VBlankStart[Config.PsxType] )
+        if( hSyncCount >= VBlankStart[Config.PsxType] )
         {
             setIrq( 0x01 );
         }
         */
         // Update lace. (with InuYasha fix)
-        if( hSyncCount == (Config.VSyncWA ? HSyncTotal[Config.PsxType] / BIAS : HSyncTotal[Config.PsxType]) )
+        if( hSyncCount >= (Config.VSyncWA ? HSyncTotal[Config.PsxType] / BIAS : HSyncTotal[Config.PsxType]) )
         {
             hSyncCount = 0;
 

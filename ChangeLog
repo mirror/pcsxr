@@ -7,6 +7,8 @@ May 24, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * win32/config.h: Silenced MSVC6 warnings.
  * libpcsxcore/psxbios.c: Implemented more functions. RNG should behave
    exactly the same as real BIOS now.
+ * libpcsxcore/psxcounters.c: Fixed freeze bug when launching an NTSC game
+   when Config.PsxAuto is enabled and Config.PsxType is set to PAL.
 
 May 23, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
