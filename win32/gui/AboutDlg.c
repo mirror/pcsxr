@@ -36,8 +36,8 @@ char *LabelGreets = { N_(
 	"Ryan Schultz, Andrew Burton, Stephen Chao,\n"
 	"Marcus Comstedt, Stefan Sikora\n\n"
 	"PCSX-Reloaded By:\n"
-	"Wei Mingzhi\n\n"
-	"http://www.codeplex.com/pcsxr")
+	"Blade_Arma, Wei Mingzhi, et al.\n\n"
+	"http://pcsxr.codeplex.com")
 };
 
 LRESULT WINAPI AboutDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam) {
