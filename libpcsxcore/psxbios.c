@@ -21,6 +21,9 @@
 * Internal simulated HLE BIOS.
 */
 
+// TODO: Get rid of the use of standard C functions, implement all system calls,
+// count the exact CPU cycle.
+
 #include "psxbios.h"
 #include "psxhw.h"
 
