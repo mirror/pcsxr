@@ -5,6 +5,8 @@ May 24, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * win32/intl/gettext.c: Added a hack for UTF-8 support.
  * win32/gui/AboutDlg.c: Updated info.
  * win32/config.h: Silenced MSVC6 warnings.
+ * libpcsxcore/psxbios.c: Implemented more functions. RNG should behave
+   exactly the same as real BIOS now.
 
 May 23, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

@@ -376,7 +376,7 @@ void psxBios_strncat() { // 0x16
 	s32 n = a2;
 
 #ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s: %s (%lx), %s (%lx), %d\n", biosA0n[0x18], Ra0, a0, Ra1, a1, a2);
+	PSXBIOS_LOG("psxBios_%s: %s (%lx), %s (%lx), %d\n", biosA0n[0x16], Ra0, a0, Ra1, a1, a2);
 #endif
 
 	while (*p1++);
@@ -462,57 +462,64 @@ void psxBios_strlen() { // 0x1b
 }
 
 void psxBios_index() { // 0x1c
-	char *pcA0 = (char *)Ra0; 
-	char *pcRet = strchr(pcA0, a1); 
-	if (pcRet) 
-		v0 = a0 + pcRet - pcA0; 
-	else 
-		v0 = 0;
-    pc0 = ra;
+	char *p = (char *)Ra0;
+
+	do {
+		if (*p == a1) {
+			v0 = a0 + (p - (char *)Ra0);
+			pc0 = ra;
+			return;
+		}
+	} while (*p++ != '\0');
+
+	v0 = 0; pc0 = ra;
 }
 
 void psxBios_rindex() { // 0x1d
-	char *pcA0 = (char *)Ra0; 
-	char *pcRet = strrchr(pcA0, a1); 
-	if (pcRet) 
-		v0 = a0 + pcRet - pcA0; 
-	else 
-		v0 = 0;
-    pc0 = ra;  
+	char *p = (char *)Ra0;
+
+	v0 = 0;
+
+	do {
+		if (*p == a1)
+			v0 = a0 + (p - (char *)Ra0);
+	} while (*p++ != '\0');
+
+	pc0 = ra;
 }
 
 void psxBios_strchr() { // 0x1e
-	char *pcA0 = (char *)Ra0; 
-	char *pcRet = strchr(pcA0, a1); 
-	if (pcRet) 
-		v0 = a0 + pcRet - pcA0; 
-	else 
-		v0 = 0;
-    pc0 = ra;
+	psxBios_index();
 }
 
 void psxBios_strrchr() { // 0x1f
-	char *pcA0 = (char *)Ra0; 
-	char *pcRet = strrchr(pcA0, a1); 
-	if (pcRet) 
-		v0 = a0 + pcRet - pcA0; 
-	else 
-		v0 = 0;
-    pc0 = ra;
+	psxBios_rindex();
 }
 
 void psxBios_strpbrk() { // 0x20
-	char *pcA0 = (char *)Ra0; 
-	char *pcRet = strpbrk(pcA0, (char *)Ra1); 
-	if(pcRet) 
-		v0 = a0 + pcRet - pcA0; 
-	else 
-		v0 = 0;
-    pc0 = ra;
+	char *p1 = (char *)Ra0, *p2 = (char *)Ra1, *scanp, c, sc;
+
+	while ((c = *p1++) != '\0') {
+		for (scanp = p2; (sc = *scanp++) != '\0';) {
+			if (sc == c) {
+				v0 = a0 + (p1 - 1 - (char *)Ra0);
+				pc0 = ra;
+				return;
+			}
+		}
+	}
+
+	// should return a0 instead of NULL if not found (???)
+	v0 = a0; pc0 = ra;
 }
 
-void psxBios_strspn()  { v0 = strspn ((char *)Ra0, (char *)Ra1); pc0 = ra;}/*21*/ 
-void psxBios_strcspn() { v0 = strcspn((char *)Ra0, (char *)Ra1); pc0 = ra;}/*22*/ 
+void psxBios_strspn() { // 0x21
+	v0 = strspn ((char *)Ra0, (char *)Ra1); pc0 = ra;
+}
+
+void psxBios_strcspn() { // 0x22
+	v0 = strcspn((char *)Ra0, (char *)Ra1); pc0 = ra;
+}
 
 void psxBios_strtok() { // 0x23
 	char *pcA0 = (char *)Ra0;
@@ -534,10 +541,26 @@ void psxBios_strstr() { // 0x24
     pc0 = ra;
 }
 
-/*0x25*/void psxBios_toupper() {v0 = toupper(a0); pc0 = ra;}
-/*0x26*/void psxBios_tolower() {v0 = tolower(a0); pc0 = ra;}
-/*0x27*/void psxBios_bcopy()   {memcpy(Ra1,Ra0,a2); pc0=ra;}
-/*0x28*/void psxBios_bzero()   {memset(Ra0,0,a1); pc0=ra;}
+void psxBios_toupper() { // 0x25
+	v0 = toupper(a0);
+	pc0 = ra;
+}
+
+void psxBios_tolower() { // 0x26
+	v0 = tolower(a0);
+	pc0 = ra;
+}
+
+void psxBios_bcopy() { // 0x27
+	memcpy(Ra1,Ra0,a2);
+	pc0 = ra;
+}
+
+void psxBios_bzero() { // 0x28
+	memset(Ra0,0,a1);
+	pc0 = ra;
+}
+
 /*0x29*/void psxBios_bcmp()    {v0 = memcmp(Ra0,Ra1,a2); pc0=ra; }
 /*0x2a*/void psxBios_memcpy()  {memcpy(Ra0, Ra1, a2); v0 = a0; pc0 = ra;}
 /*0x2b*/void psxBios_memset()  {memset(Ra0, a1, a2); v0 = a0; pc0 = ra;}
@@ -546,20 +569,22 @@ void psxBios_strstr() { // 0x24
 
 void psxBios_memchr() { // 2e
 	void *ret = memchr(Ra0, a1, a2);
-	if (ret != NULL) v0 = (u32)((char*)ret - Ra0) + a0;
+	if (ret != NULL) v0 = (u32)((char *)ret - Ra0) + a0;
 	else v0 = 0;
 	pc0 = ra;
 }
 
 void psxBios_rand() { // 2f
-	v0 = 1+(int) (32767.0*rand()/(RAND_MAX+1.0));
+	u32 s = psxMs32(0x9010) * 1103515245 + 12345;
+	v0 = (s >> 16) & 0x7fff;
+	psxMu32ref(0x9010) = SWAPu32(s);
 	pc0 = ra;
 }
 
 void psxBios_srand() { // 30
-	srand(a0); pc0 = ra;
+	psxMu32ref(0x9010) = SWAPu32(a0);
+	pc0 = ra;
 }
-
 
 void psxBios_malloc() { // 33
 	unsigned int *chunk, *newchunk;
@@ -2283,6 +2308,9 @@ void psxBiosInit() {
 
 	// memory size 2 MB
 	psxHu32ref(0x1060) = SWAPu32(0x00000b88);
+
+	// initial RNG seed
+	psxMu32ref(0x9010) = SWAPu32(0xac20cc00);
 }
 
 void psxBiosShutdown() {
@@ -2401,8 +2429,8 @@ void biosInterrupt() {
 	if (psxHu32(0x1070) & 0x70) { // Rcnt 0,1,2
 		int i;
 
-		for (i=0; i<3; i++) {
-			if (psxHu32(0x1070) & (1 << (i+4))) {
+		for (i = 0; i < 3; i++) {
+			if (psxHu32(0x1070) & (1 << (i + 4))) {
 				if (RcEV[i][1].status == EvStACTIVE) {
 					// Fixes crashing problems with at least Final Fantasy 7 and Xenogears.
 					// This should be considered a temporary fix; after all, we do not
@@ -2412,7 +2440,7 @@ void biosInterrupt() {
 					softCall(RcEV[i][1].fhandler);
 					if ((sp >> 24) != 0x1f) sp += 256;
 				}
-				psxHwWrite32(0x1f801070, ~(1 << (i+4)));
+				psxHwWrite32(0x1f801070, ~(1 << (i + 4)));
 			}
 		}
 	}
@@ -2430,9 +2458,9 @@ void psxBiosException() {
 
 			biosInterrupt();
 
-			for (i=0; i<8; i++) {
+			for (i = 0; i < 8; i++) {
 				if (SysIntRP[i]) {
-					u32 *queue = (u32*)PSXM(SysIntRP[i]);
+					u32 *queue = (u32 *)PSXM(SysIntRP[i]);
 
 					s0 = queue[2];
 					softCall(queue[1]);
@@ -2447,8 +2475,8 @@ void psxBiosException() {
 				ra = jmp_int[0];
 				sp = jmp_int[1];
 				fp = jmp_int[2];
-				for (i=0; i<8; i++) // s0-s7
-					 psxRegs.GPR.r[16+i] = jmp_int[3+i];
+				for (i = 0; i < 8; i++) // s0-s7
+					 psxRegs.GPR.r[16 + i] = jmp_int[3 + i];
 				gp = jmp_int[11];
 
 				v0 = 1;
@@ -2464,12 +2492,12 @@ void psxBiosException() {
 #endif
 			switch (a0) {
 				case 1: // EnterCritical - disable irq's
-					psxRegs.CP0.n.Status&=~0x404; 
+					psxRegs.CP0.n.Status &= ~0x404; 
 v0=1;	// HDHOSHY experimental patch: Spongebob, Coldblood, fearEffect, Medievil2, Martian Gothic
 					break;
 
 				case 2: // ExitCritical - enable irq's
-					psxRegs.CP0.n.Status|= 0x404; 
+					psxRegs.CP0.n.Status |= 0x404; 
 					break;
 			}
 			pc0 = psxRegs.CP0.n.EPC + 4;
@@ -2492,15 +2520,16 @@ v0=1;	// HDHOSHY experimental patch: Spongebob, Coldblood, fearEffect, Medievil2
 						  ((psxRegs.CP0.n.Status & 0x3c) >> 2);
 }
 
-#define bfreeze(ptr, size) \
+#define bfreeze(ptr, size) { \
 	if (Mode == 1) memcpy(&psxR[base], ptr, size); \
 	if (Mode == 0) memcpy(ptr, &psxR[base], size); \
-	base+=size;
+	base += size; \
+}
 
 #define bfreezes(ptr) bfreeze(ptr, sizeof(ptr))
 #define bfreezel(ptr) bfreeze(ptr, sizeof(*ptr))
 
-#define bfreezepsxMptr(ptr) \
+#define bfreezepsxMptr(ptr) { \
 	if (Mode == 1) { \
 		if (ptr) psxRu32ref(base) = SWAPu32((uintptr_t)ptr - (uintptr_t)psxM); \
 		else psxRu32ref(base) = 0; \
@@ -2508,7 +2537,8 @@ v0=1;	// HDHOSHY experimental patch: Spongebob, Coldblood, fearEffect, Medievil2
 		if (psxRu32(base)) *(u8**)&ptr = (u8*)(psxM + psxRu32(base)); \
 		else ptr = NULL; \
 	} \
-	base += sizeof(uintptr_t);
+	base += sizeof(uintptr_t); \
+}
 
 void psxBiosFreeze(int Mode) {
 	u32 base = 0x40000;
