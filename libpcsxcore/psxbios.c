@@ -18,11 +18,12 @@
  ***************************************************************************/
 
 /*
-* Internal simulated HLE BIOS.
-*/
+ * Internal simulated HLE BIOS.
+ */
 
-// TODO: Get rid of the use of standard C functions, implement all system calls,
-// count the exact CPU cycle.
+// TODO:
+// Get rid of standard C functions, implement all system calls,
+// count the exact CPU cycles of system calls.
 
 #include "psxbios.h"
 #include "psxhw.h"
@@ -578,7 +579,7 @@ void psxBios_memchr() { // 2e
 }
 
 void psxBios_rand() { // 2f
-	u32 s = psxMs32(0x9010) * 1103515245 + 12345;
+	u32 s = psxMu32(0x9010) * 1103515245 + 12345;
 	v0 = (s >> 16) & 0x7fff;
 	psxMu32ref(0x9010) = SWAPu32(s);
 	pc0 = ra;
