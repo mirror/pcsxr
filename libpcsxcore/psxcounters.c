@@ -285,7 +285,7 @@ void psxRcntUpdate()
         /*
         // For the best times. :D
         // VSync irq.
-        if( hSyncCount >= VBlankStart[Config.PsxType] )
+        if( hSyncCount == VBlankStart[Config.PsxType] )
         {
             setIrq( 0x01 );
         }
