@@ -52,6 +52,8 @@
 # define DGETTEXT dgettext__
 #endif
 
+#include <windows.h> // Added by Wei Mingzhi 5-4-2010
+
 /* Look up MSGID in the current default message catalog for the current
    LC_MESSAGES locale.  If not found, returns MSGID itself (the default
    text).  */
@@ -59,7 +61,22 @@ char *
 GETTEXT (msgid)
      const char *msgid;
 {
-  return DGETTEXT (NULL, msgid);
+//  return DGETTEXT (NULL, msgid);
+
+	// 5-24-2010 Wei Mingzhi
+	// Hack for UTF-8 support
+	char *t = DGETTEXT(NULL, msgid);
+	static char buf[16384], bufout[16384];
+
+	if (MultiByteToWideChar(CP_UTF8, 0, (LPCSTR)t, -1, (LPWSTR)buf, sizeof(buf)) == 0) {
+		return t;
+	}
+
+	if (WideCharToMultiByte(CP_ACP, 0, (LPCWSTR)buf, -1, (LPSTR)bufout, sizeof(bufout), NULL, NULL) == 0) {
+		return t;
+	}
+
+	return bufout;
 }
 
 #ifdef _LIBC

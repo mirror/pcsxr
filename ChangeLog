@@ -1,3 +1,9 @@
+May 24, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * win32/gui/WndMain.c: Also show Japanese titles properly for Windows
+   (need to set ACP to east-asian languages).
+ * win32/intl/gettext.c: Added a hack for UTF-8 support.
+
 May 23, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * AUTHORS: Updated info.

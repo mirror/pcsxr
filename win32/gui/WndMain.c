@@ -843,14 +843,21 @@ void UpdateMcdItems(int mcd, int idc) {
 void McdListGetDispInfo(int mcd, int idc, LPNMHDR pnmh) {
 	LV_DISPINFO *lpdi = (LV_DISPINFO *)pnmh;
 	McdBlock *Info;
+	char buf[256], buftitle[256];
 
-	Info = &Blocks[mcd-1][lpdi->item.iItem];
+	Info = &Blocks[mcd - 1][lpdi->item.iItem];
 
 	switch (lpdi->item.iSubItem) {
 		case 0:
 			switch (Info->Flags & 0xF) {
 				case 1:
-					lpdi->item.pszText = Info->Title;
+					if (MultiByteToWideChar(932, 0, (LPCSTR)Info->sTitle, -1, (LPWSTR)buf, sizeof(buf)) == 0) {
+						lpdi->item.pszText = Info->Title;
+					} else if (WideCharToMultiByte(CP_ACP, 0, (LPCWSTR)buf, -1, (LPSTR)buftitle, sizeof(buftitle), NULL, NULL) == 0) {
+						lpdi->item.pszText = Info->Title;
+					} else {
+						lpdi->item.pszText = buftitle;
+					}
 					break;
 				case 2:
 					lpdi->item.pszText = _("mid link block");
