@@ -66,7 +66,8 @@ GETTEXT (msgid)
 	// 5-24-2010 Wei Mingzhi
 	// Hack for UTF-8 support
 	char *t = DGETTEXT(NULL, msgid);
-	static char buf[16384], bufout[16384];
+	char buf[16384];
+	static char bufout[16384];
 
 	if (MultiByteToWideChar(CP_UTF8, 0, (LPCSTR)t, -1, (LPWSTR)buf, sizeof(buf)) == 0) {
 		return t;

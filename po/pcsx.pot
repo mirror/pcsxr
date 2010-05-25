@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-21 08:44+0800\n"
+"POT-Creation-Date: 2010-05-25 18:35+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,9 +34,9 @@ msgid ""
 "Marcus Comstedt, Stefan Sikora\n"
 "\n"
 "PCSX-Reloaded By:\n"
-"Wei Mingzhi\n"
+"Blade_Arma, Wei Mingzhi, et al.\n"
 "\n"
-"http://www.codeplex.com/pcsxr"
+"http://pcsxr.codeplex.com"
 msgstr ""
 
 #: ../win32/gui/AboutDlg.c:46 ../plugins/peopsxgl/gpucfg/interface.c:831
@@ -46,7 +46,7 @@ msgstr ""
 #: ../win32/gui/AboutDlg.c:48 ../win32/gui/AboutDlg.c:52
 #: ../win32/gui/CheatDlg.c:69 ../win32/gui/CheatDlg.c:119
 #: ../win32/gui/ConfigurePlugins.c:483 ../win32/gui/ConfigurePlugins.c:614
-#: ../win32/gui/WndMain.c:966 ../win32/gui/WndMain.c:1202
+#: ../win32/gui/WndMain.c:973 ../win32/gui/WndMain.c:1209
 #: ../plugins/peopsxgl/gpucfg/interface.c:130
 #: ../plugins/peopsxgl/gpucfg/interface.c:843
 msgid "OK"
@@ -81,7 +81,7 @@ msgstr ""
 
 #: ../win32/gui/CheatDlg.c:70 ../win32/gui/CheatDlg.c:120
 #: ../win32/gui/ConfigurePlugins.c:484 ../win32/gui/ConfigurePlugins.c:615
-#: ../win32/gui/WndMain.c:967 ../win32/gui/WndMain.c:1203
+#: ../win32/gui/WndMain.c:974 ../win32/gui/WndMain.c:1210
 #: ../plugins/peopsxgl/gpucfg/interface.c:338
 msgid "Cancel"
 msgstr ""
@@ -406,8 +406,8 @@ msgstr ""
 msgid "Greek"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:80 ../win32/gui/WndMain.c:1558
-#: ../win32/gui/WndMain.c:1560
+#: ../win32/gui/WndMain.c:80 ../win32/gui/WndMain.c:1565
+#: ../win32/gui/WndMain.c:1567
 msgid "English"
 msgstr ""
 
@@ -529,317 +529,317 @@ msgstr ""
 msgid "Game"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:856
+#: ../win32/gui/WndMain.c:863
 msgid "mid link block"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:859
+#: ../win32/gui/WndMain.c:866
 msgid "terminiting link block"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:867 ../gui/MemcardDlg.c:154 ../gui/MemcardDlg.c:252
+#: ../win32/gui/WndMain.c:874 ../gui/MemcardDlg.c:155 ../gui/MemcardDlg.c:260
 msgid "Deleted"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:868 ../win32/gui/WndMain.c:871
-#: ../gui/MemcardDlg.c:156 ../gui/MemcardDlg.c:160 ../gui/MemcardDlg.c:254
-#: ../gui/MemcardDlg.c:258
+#: ../win32/gui/WndMain.c:875 ../win32/gui/WndMain.c:878
+#: ../gui/MemcardDlg.c:157 ../gui/MemcardDlg.c:161 ../gui/MemcardDlg.c:262
+#: ../gui/MemcardDlg.c:266
 msgid "Free"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:870 ../gui/MemcardDlg.c:158 ../gui/MemcardDlg.c:256
+#: ../win32/gui/WndMain.c:877 ../gui/MemcardDlg.c:159 ../gui/MemcardDlg.c:264
 msgid "Used"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:964
+#: ../win32/gui/WndMain.c:971
 msgid "Memcard Manager"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:968 ../win32/gui/WndMain.c:971
+#: ../win32/gui/WndMain.c:975 ../win32/gui/WndMain.c:978
 msgid "Select Mcd"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:969 ../win32/gui/WndMain.c:972
+#: ../win32/gui/WndMain.c:976 ../win32/gui/WndMain.c:979
 msgid "Format Mcd"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:970 ../win32/gui/WndMain.c:973
+#: ../win32/gui/WndMain.c:977 ../win32/gui/WndMain.c:980
 msgid "Reload Mcd"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:974
+#: ../win32/gui/WndMain.c:981
 msgid "-> Copy ->"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:975
+#: ../win32/gui/WndMain.c:982
 msgid "<- Copy <-"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:976
+#: ../win32/gui/WndMain.c:983
 msgid "Paste"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:977
+#: ../win32/gui/WndMain.c:984
 msgid "<- Un/Delete"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:978
+#: ../win32/gui/WndMain.c:985
 msgid "Un/Delete ->"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:980
+#: ../win32/gui/WndMain.c:987
 msgid "Memory Card 1"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:981
+#: ../win32/gui/WndMain.c:988
 msgid "Memory Card 2"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1036
+#: ../win32/gui/WndMain.c:1043
 msgid "Are you sure you want to paste this selection?"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1036 ../win32/gui/WndMain.c:1147
-#: ../win32/gui/WndMain.c:1154
+#: ../win32/gui/WndMain.c:1043 ../win32/gui/WndMain.c:1154
+#: ../win32/gui/WndMain.c:1161
 msgid "Confirmation"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1147 ../win32/gui/WndMain.c:1154
+#: ../win32/gui/WndMain.c:1154 ../win32/gui/WndMain.c:1161
 msgid "Are you sure you want to format this Memory Card?"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1200
+#: ../win32/gui/WndMain.c:1207
 msgid "Cpu Config"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1205
+#: ../win32/gui/WndMain.c:1212
 msgid "Disable Xa Decoding"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1206
+#: ../win32/gui/WndMain.c:1213
 msgid "Sio Irq Always Enabled"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1207
+#: ../win32/gui/WndMain.c:1214
 msgid "Black && White Movies"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1208
+#: ../win32/gui/WndMain.c:1215
 msgid "Disable Cd audio"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1209 ../data/pcsx.glade2:1595
+#: ../win32/gui/WndMain.c:1216 ../data/pcsx.glade2:1595
 msgid "Autodetect"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1210
+#: ../win32/gui/WndMain.c:1217
 msgid "Enable Interpreter Cpu"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1211 ../data/pcsx.glade2:1451
+#: ../win32/gui/WndMain.c:1218 ../data/pcsx.glade2:1451
 msgid "Enable Console Output"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1212 ../data/pcsx.glade2:1401
+#: ../win32/gui/WndMain.c:1219 ../data/pcsx.glade2:1401
 msgid "Enable Debugger"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1213
+#: ../win32/gui/WndMain.c:1220
 msgid "Spu Irq Always Enabled"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1214 ../data/pcsx.glade2:1538
+#: ../win32/gui/WndMain.c:1221 ../data/pcsx.glade2:1538
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1215 ../data/pcsx.glade2:1553
+#: ../win32/gui/WndMain.c:1222 ../data/pcsx.glade2:1553
 msgid "InuYasha Sengoku Battle Fix"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1217
+#: ../win32/gui/WndMain.c:1224
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:277
 #: ../plugins/dfinput/dfinput.glade2:448
 msgid "Options"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1218
+#: ../win32/gui/WndMain.c:1225
 msgid "Psx System Type"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1322
+#: ../win32/gui/WndMain.c:1329
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1327
+#: ../win32/gui/WndMain.c:1334
 msgid "Psx Memory Card (*.mcr;*.mc)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1332
+#: ../win32/gui/WndMain.c:1339
 msgid "CVGS Memory Card (*.mem;*.vgs)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1337
+#: ../win32/gui/WndMain.c:1344
 msgid "Bleem Memory Card (*.mcd)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1342
+#: ../win32/gui/WndMain.c:1349
 msgid "DexDrive Memory Card (*.gme)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1347
+#: ../win32/gui/WndMain.c:1354
 msgid "DataDeck Memory Card (*.ddf)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1352 ../win32/gui/WndMain.c:1433 ../gui/Cheat.c:321
+#: ../win32/gui/WndMain.c:1359 ../win32/gui/WndMain.c:1440 ../gui/Cheat.c:321
 #: ../gui/Gtk2Gui.c:422 ../gui/Gtk2Gui.c:561
 msgid "All Files"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1391
+#: ../win32/gui/WndMain.c:1398
 msgid "Psx Exe Format"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1428
+#: ../win32/gui/WndMain.c:1435
 msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1504
+#: ../win32/gui/WndMain.c:1511
 msgid "&File"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1505
+#: ../win32/gui/WndMain.c:1512
 msgid "E&xit"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1507
+#: ../win32/gui/WndMain.c:1514
 msgid "Run &EXE..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1508
+#: ../win32/gui/WndMain.c:1515
 msgid "Run &BIOS"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1509
+#: ../win32/gui/WndMain.c:1516
 msgid "Run &ISO..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1510
+#: ../win32/gui/WndMain.c:1517
 msgid "Run &CD"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1512
+#: ../win32/gui/WndMain.c:1519
 msgid "&Emulator"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1513
+#: ../win32/gui/WndMain.c:1520
 msgid "&States"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1515
+#: ../win32/gui/WndMain.c:1522
 msgid "S&witch ISO..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1517
+#: ../win32/gui/WndMain.c:1524
 msgid "Re&set"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1518
+#: ../win32/gui/WndMain.c:1525
 msgid "&Run"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1519
+#: ../win32/gui/WndMain.c:1526
 msgid "&Save"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1520
+#: ../win32/gui/WndMain.c:1527
 msgid "&Load"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1521 ../win32/gui/WndMain.c:1527
+#: ../win32/gui/WndMain.c:1528 ../win32/gui/WndMain.c:1534
 msgid "&Other..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1522 ../win32/gui/WndMain.c:1528
+#: ../win32/gui/WndMain.c:1529 ../win32/gui/WndMain.c:1535
 msgid "Slot &5"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1523 ../win32/gui/WndMain.c:1529
+#: ../win32/gui/WndMain.c:1530 ../win32/gui/WndMain.c:1536
 msgid "Slot &4"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1524 ../win32/gui/WndMain.c:1530
+#: ../win32/gui/WndMain.c:1531 ../win32/gui/WndMain.c:1537
 msgid "Slot &3"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1525 ../win32/gui/WndMain.c:1531
+#: ../win32/gui/WndMain.c:1532 ../win32/gui/WndMain.c:1538
 msgid "Slot &2"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1526 ../win32/gui/WndMain.c:1532
+#: ../win32/gui/WndMain.c:1533 ../win32/gui/WndMain.c:1539
 msgid "Slot &1"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1534
+#: ../win32/gui/WndMain.c:1541
 msgid "&Configuration"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1535
+#: ../win32/gui/WndMain.c:1542
 msgid "Cheat &Search..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1536
+#: ../win32/gui/WndMain.c:1543
 msgid "Ch&eat Code..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1539
+#: ../win32/gui/WndMain.c:1546
 msgid "&Language"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1564
+#: ../win32/gui/WndMain.c:1571
 msgid "&Memory cards..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1565
+#: ../win32/gui/WndMain.c:1572
 msgid "C&PU..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1567
+#: ../win32/gui/WndMain.c:1574
 msgid "&NetPlay..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1569
+#: ../win32/gui/WndMain.c:1576
 msgid "&Controllers..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1570
+#: ../win32/gui/WndMain.c:1577
 msgid "CD-&ROM..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1571
+#: ../win32/gui/WndMain.c:1578
 msgid "&Sound..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1572
+#: ../win32/gui/WndMain.c:1579
 msgid "&Graphics..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1574
+#: ../win32/gui/WndMain.c:1581
 msgid "&Plugins && Bios..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1576
+#: ../win32/gui/WndMain.c:1583
 msgid "&Help"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1577
+#: ../win32/gui/WndMain.c:1584
 msgid "&About..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1756
+#: ../win32/gui/WndMain.c:1763
 msgid "Pcsx Msg"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1759
+#: ../win32/gui/WndMain.c:1766
 msgid "Error Loading Symbol"
 msgstr ""
 
@@ -964,14 +964,14 @@ msgstr ""
 msgid "NETinit error: %d"
 msgstr ""
 
-#: ../gui/AboutDlg.c:70
+#: ../gui/AboutDlg.c:74
 msgid ""
 "(C) 1999-2003 PCSX Team\n"
 "(C) 2005-2009 PCSX-df Team\n"
 "(C) 2009-2010 PCSX-Reloaded Team"
 msgstr ""
 
-#: ../gui/AboutDlg.c:75
+#: ../gui/AboutDlg.c:79
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -988,11 +988,11 @@ msgid ""
 "Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
 msgstr ""
 
-#: ../gui/AboutDlg.c:98
+#: ../gui/AboutDlg.c:102
 msgid "translator-credits"
 msgstr ""
 
-#: ../gui/AboutDlg.c:99
+#: ../gui/AboutDlg.c:103
 msgid "A PlayStation emulator."
 msgstr ""
 
@@ -1242,43 +1242,43 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:317
+#: ../gui/MemcardDlg.c:328
 msgid "Select A File"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:358
+#: ../gui/MemcardDlg.c:369
 msgid "Format this Memory Card?"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:360
+#: ../gui/MemcardDlg.c:371
 msgid ""
 "If you format the memory card, the card will be empty, and any existing data "
 "overwritten."
 msgstr ""
 
-#: ../gui/MemcardDlg.c:363
+#: ../gui/MemcardDlg.c:374
 msgid "Format card"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:387
+#: ../gui/MemcardDlg.c:398
 msgid "Create a new Memory Card"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:396
+#: ../gui/MemcardDlg.c:407
 msgid "New Memory Card.mcd"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:497
+#: ../gui/MemcardDlg.c:508
 msgid "No free space on memory card"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:498
+#: ../gui/MemcardDlg.c:509
 msgid ""
 "There are no free slots available on the target memory card. Please delete a "
 "slot first."
 msgstr ""
 
-#: ../gui/MemcardDlg.c:661
+#: ../gui/MemcardDlg.c:672
 msgid "Memory Card Manager"
 msgstr ""
 
@@ -1489,11 +1489,11 @@ msgstr ""
 msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr ""
 
-#: ../libpcsxcore/psxmem.c:78
+#: ../libpcsxcore/psxmem.c:80
 msgid "Error allocating memory!"
 msgstr ""
 
-#: ../libpcsxcore/psxmem.c:119
+#: ../libpcsxcore/psxmem.c:121
 #, c-format
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr ""

@@ -1,3 +1,10 @@
+May 25, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * po/pt_BR.po, po/it.po, po/zh_TW.po, po/ru_RU.po, po/pcsx.pot, po/zh_CN.po:
+   Updated.
+ * win32/gui/WndMain.c: Do not make temporary buffer static.
+ * win32/intl/gettext.c: Likewise.
+
 May 24, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * win32/gui/WndMain.c: Also show Japanese titles properly for Windows

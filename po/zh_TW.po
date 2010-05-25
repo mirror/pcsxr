@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-21 08:44+0800\n"
-"PO-Revision-Date: 2010-05-21 08:45+0800\n"
+"POT-Creation-Date: 2010-05-25 18:35+0800\n"
+"PO-Revision-Date: 2010-05-25 18:45+0800\n"
 "Last-Translator: Wei Mingzhi <whistler_wmz@users.sourceforge.net>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgstr ""
 "主程式: linuzappz\n"
 "輔助程式: shadow\n"
 "前程式: Nocomp, Pete Bernett, nik3d\n"
-"網絡管理: AkumaX"
+"網站管理: AkumaX"
 
 #: ../win32/gui/AboutDlg.c:35
 msgid ""
@@ -40,18 +40,18 @@ msgid ""
 "Marcus Comstedt, Stefan Sikora\n"
 "\n"
 "PCSX-Reloaded By:\n"
-"Wei Mingzhi\n"
+"Blade_Arma, Wei Mingzhi, et al.\n"
 "\n"
-"http://www.codeplex.com/pcsxr"
+"http://pcsxr.codeplex.com"
 msgstr ""
 "PCSX-df 開發者:\n"
 "Ryan Schultz, Andrew Burton, Stephen Chao,\n"
 "Marcus Comstedt, Stefan Sikora\n"
 "\n"
 "PCSX-Reloaded 開發者:\n"
-"Wei Mingzhi\n"
+"Blade_Arma, Wei Mingzhi, et al.\n"
 "\n"
-"http://www.codeplex.com/pcsxr"
+"http://pcsxr.codeplex.com"
 
 #: ../win32/gui/AboutDlg.c:46
 #: ../plugins/peopsxgl/gpucfg/interface.c:831
@@ -64,8 +64,8 @@ msgstr "關於 PCSX"
 #: ../win32/gui/CheatDlg.c:119
 #: ../win32/gui/ConfigurePlugins.c:483
 #: ../win32/gui/ConfigurePlugins.c:614
-#: ../win32/gui/WndMain.c:966
-#: ../win32/gui/WndMain.c:1202
+#: ../win32/gui/WndMain.c:973
+#: ../win32/gui/WndMain.c:1209
 #: ../plugins/peopsxgl/gpucfg/interface.c:130
 #: ../plugins/peopsxgl/gpucfg/interface.c:843
 msgid "OK"
@@ -109,8 +109,8 @@ msgstr "金手指碼:"
 #: ../win32/gui/CheatDlg.c:120
 #: ../win32/gui/ConfigurePlugins.c:484
 #: ../win32/gui/ConfigurePlugins.c:615
-#: ../win32/gui/WndMain.c:967
-#: ../win32/gui/WndMain.c:1203
+#: ../win32/gui/WndMain.c:974
+#: ../win32/gui/WndMain.c:1210
 #: ../plugins/peopsxgl/gpucfg/interface.c:338
 msgid "Cancel"
 msgstr "取消"
@@ -443,17 +443,17 @@ msgstr "關於..."
 
 #: ../win32/gui/ConfigurePlugins.c:612
 msgid "NetPlay Configuration"
-msgstr "聯網遊戲設定"
+msgstr "聯線遊戲設定"
 
 #: ../win32/gui/ConfigurePlugins.c:616
 #: ../plugins/dfnet/gui.c:31
 #: ../plugins/dfnet/gui.c:112
 msgid "NetPlay"
-msgstr "聯網遊戲"
+msgstr "聯線遊戲"
 
 #: ../win32/gui/ConfigurePlugins.c:620
 msgid "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
-msgstr "注意: 聯網遊戲外掛應和其它外掛放在同一資料夾中。"
+msgstr "注意: 聯線遊戲外掛應和其它外掛放在同一資料夾中。"
 
 #: ../win32/gui/WndMain.c:76
 msgid "Arabic"
@@ -472,8 +472,8 @@ msgid "Greek"
 msgstr "希臘語"
 
 #: ../win32/gui/WndMain.c:80
-#: ../win32/gui/WndMain.c:1558
-#: ../win32/gui/WndMain.c:1560
+#: ../win32/gui/WndMain.c:1565
+#: ../win32/gui/WndMain.c:1567
 msgid "English"
 msgstr "英語"
 
@@ -606,343 +606,343 @@ msgstr "遊戲 ID"
 msgid "Game"
 msgstr "遊戲"
 
-#: ../win32/gui/WndMain.c:856
+#: ../win32/gui/WndMain.c:863
 msgid "mid link block"
 msgstr "mid link block"
 
-#: ../win32/gui/WndMain.c:859
+#: ../win32/gui/WndMain.c:866
 msgid "terminiting link block"
 msgstr "terminiting link block"
 
-#: ../win32/gui/WndMain.c:867
-#: ../gui/MemcardDlg.c:154
-#: ../gui/MemcardDlg.c:252
+#: ../win32/gui/WndMain.c:874
+#: ../gui/MemcardDlg.c:155
+#: ../gui/MemcardDlg.c:260
 msgid "Deleted"
 msgstr "已刪除"
 
-#: ../win32/gui/WndMain.c:868
-#: ../win32/gui/WndMain.c:871
-#: ../gui/MemcardDlg.c:156
-#: ../gui/MemcardDlg.c:160
-#: ../gui/MemcardDlg.c:254
-#: ../gui/MemcardDlg.c:258
+#: ../win32/gui/WndMain.c:875
+#: ../win32/gui/WndMain.c:878
+#: ../gui/MemcardDlg.c:157
+#: ../gui/MemcardDlg.c:161
+#: ../gui/MemcardDlg.c:262
+#: ../gui/MemcardDlg.c:266
 msgid "Free"
 msgstr "空閑"
 
-#: ../win32/gui/WndMain.c:870
-#: ../gui/MemcardDlg.c:158
-#: ../gui/MemcardDlg.c:256
+#: ../win32/gui/WndMain.c:877
+#: ../gui/MemcardDlg.c:159
+#: ../gui/MemcardDlg.c:264
 msgid "Used"
 msgstr "已使用"
 
-#: ../win32/gui/WndMain.c:964
+#: ../win32/gui/WndMain.c:971
 msgid "Memcard Manager"
 msgstr "記憶卡管理器"
 
-#: ../win32/gui/WndMain.c:968
-#: ../win32/gui/WndMain.c:971
+#: ../win32/gui/WndMain.c:975
+#: ../win32/gui/WndMain.c:978
 msgid "Select Mcd"
 msgstr "選擇"
 
-#: ../win32/gui/WndMain.c:969
-#: ../win32/gui/WndMain.c:972
+#: ../win32/gui/WndMain.c:976
+#: ../win32/gui/WndMain.c:979
 msgid "Format Mcd"
 msgstr "格式化"
 
-#: ../win32/gui/WndMain.c:970
-#: ../win32/gui/WndMain.c:973
+#: ../win32/gui/WndMain.c:977
+#: ../win32/gui/WndMain.c:980
 msgid "Reload Mcd"
 msgstr "重新加載"
 
-#: ../win32/gui/WndMain.c:974
+#: ../win32/gui/WndMain.c:981
 msgid "-> Copy ->"
 msgstr "-> 複制 ->"
 
-#: ../win32/gui/WndMain.c:975
+#: ../win32/gui/WndMain.c:982
 msgid "<- Copy <-"
 msgstr "<- 複制 <-"
 
-#: ../win32/gui/WndMain.c:976
+#: ../win32/gui/WndMain.c:983
 msgid "Paste"
 msgstr "粘貼"
 
-#: ../win32/gui/WndMain.c:977
+#: ../win32/gui/WndMain.c:984
 msgid "<- Un/Delete"
 msgstr "<- 刪除/恢複"
 
-#: ../win32/gui/WndMain.c:978
+#: ../win32/gui/WndMain.c:985
 msgid "Un/Delete ->"
 msgstr "刪除/恢複 ->"
 
-#: ../win32/gui/WndMain.c:980
+#: ../win32/gui/WndMain.c:987
 msgid "Memory Card 1"
 msgstr "記憶卡 1"
 
-#: ../win32/gui/WndMain.c:981
+#: ../win32/gui/WndMain.c:988
 msgid "Memory Card 2"
 msgstr "記憶卡 2"
 
-#: ../win32/gui/WndMain.c:1036
+#: ../win32/gui/WndMain.c:1043
 msgid "Are you sure you want to paste this selection?"
 msgstr "是否確認粘貼此選中內容?"
 
-#: ../win32/gui/WndMain.c:1036
-#: ../win32/gui/WndMain.c:1147
+#: ../win32/gui/WndMain.c:1043
 #: ../win32/gui/WndMain.c:1154
+#: ../win32/gui/WndMain.c:1161
 msgid "Confirmation"
 msgstr "確認"
 
-#: ../win32/gui/WndMain.c:1147
 #: ../win32/gui/WndMain.c:1154
+#: ../win32/gui/WndMain.c:1161
 msgid "Are you sure you want to format this Memory Card?"
 msgstr "是否確認格式化此記憶卡?"
 
-#: ../win32/gui/WndMain.c:1200
+#: ../win32/gui/WndMain.c:1207
 msgid "Cpu Config"
 msgstr "CPU 設定"
 
-#: ../win32/gui/WndMain.c:1205
+#: ../win32/gui/WndMain.c:1212
 msgid "Disable Xa Decoding"
 msgstr "禁用 XA 解碼"
 
-#: ../win32/gui/WndMain.c:1206
+#: ../win32/gui/WndMain.c:1213
 msgid "Sio Irq Always Enabled"
 msgstr "SIO IRQ 總是開啟"
 
-#: ../win32/gui/WndMain.c:1207
+#: ../win32/gui/WndMain.c:1214
 msgid "Black && White Movies"
 msgstr "黑白電影"
 
-#: ../win32/gui/WndMain.c:1208
+#: ../win32/gui/WndMain.c:1215
 msgid "Disable Cd audio"
 msgstr "禁用 CD 音頻"
 
-#: ../win32/gui/WndMain.c:1209
+#: ../win32/gui/WndMain.c:1216
 #: ../data/pcsx.glade2:1595
 msgid "Autodetect"
 msgstr "自動檢測"
 
-#: ../win32/gui/WndMain.c:1210
+#: ../win32/gui/WndMain.c:1217
 msgid "Enable Interpreter Cpu"
 msgstr "開啟解釋執行 CPU"
 
-#: ../win32/gui/WndMain.c:1211
+#: ../win32/gui/WndMain.c:1218
 #: ../data/pcsx.glade2:1451
 msgid "Enable Console Output"
 msgstr "開啟控制台輸出"
 
-#: ../win32/gui/WndMain.c:1212
+#: ../win32/gui/WndMain.c:1219
 #: ../data/pcsx.glade2:1401
 msgid "Enable Debugger"
 msgstr "開啟調試器"
 
-#: ../win32/gui/WndMain.c:1213
+#: ../win32/gui/WndMain.c:1220
 msgid "Spu Irq Always Enabled"
 msgstr "SPU IRQ 總是開啟"
 
-#: ../win32/gui/WndMain.c:1214
+#: ../win32/gui/WndMain.c:1221
 #: ../data/pcsx.glade2:1538
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr "Parasite Eve 2, Vandal Hearts 1/2 修正"
 
-#: ../win32/gui/WndMain.c:1215
+#: ../win32/gui/WndMain.c:1222
 #: ../data/pcsx.glade2:1553
 msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku 戰斗修正"
 
-#: ../win32/gui/WndMain.c:1217
+#: ../win32/gui/WndMain.c:1224
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:277
 #: ../plugins/dfinput/dfinput.glade2:448
 msgid "Options"
 msgstr "選項"
 
-#: ../win32/gui/WndMain.c:1218
+#: ../win32/gui/WndMain.c:1225
 msgid "Psx System Type"
 msgstr "Psx 系統類型"
 
-#: ../win32/gui/WndMain.c:1322
+#: ../win32/gui/WndMain.c:1329
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 msgstr "Psx 記憶卡格式 (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 
-#: ../win32/gui/WndMain.c:1327
+#: ../win32/gui/WndMain.c:1334
 msgid "Psx Memory Card (*.mcr;*.mc)"
 msgstr "Psx 記憶卡 (*.mcr;*.mc)"
 
-#: ../win32/gui/WndMain.c:1332
+#: ../win32/gui/WndMain.c:1339
 msgid "CVGS Memory Card (*.mem;*.vgs)"
 msgstr "VGS 記憶卡 (*.mem;*.vgs)"
 
-#: ../win32/gui/WndMain.c:1337
+#: ../win32/gui/WndMain.c:1344
 msgid "Bleem Memory Card (*.mcd)"
 msgstr "Bleem 記憶卡 (*.mcd)"
 
-#: ../win32/gui/WndMain.c:1342
+#: ../win32/gui/WndMain.c:1349
 msgid "DexDrive Memory Card (*.gme)"
 msgstr "DexDrive 記憶卡 (*.gme)"
 
-#: ../win32/gui/WndMain.c:1347
+#: ../win32/gui/WndMain.c:1354
 msgid "DataDeck Memory Card (*.ddf)"
 msgstr "DataDeck 記憶卡 (*.ddl)"
 
-#: ../win32/gui/WndMain.c:1352
-#: ../win32/gui/WndMain.c:1433
+#: ../win32/gui/WndMain.c:1359
+#: ../win32/gui/WndMain.c:1440
 #: ../gui/Cheat.c:321
 #: ../gui/Gtk2Gui.c:422
 #: ../gui/Gtk2Gui.c:561
 msgid "All Files"
 msgstr "所有檔案"
 
-#: ../win32/gui/WndMain.c:1391
+#: ../win32/gui/WndMain.c:1398
 msgid "Psx Exe Format"
 msgstr "PSX EXE 格式"
 
-#: ../win32/gui/WndMain.c:1428
+#: ../win32/gui/WndMain.c:1435
 msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin)"
 msgstr "Psx 鏡像檔 (*.iso;*.mdf;*.img;*.bin)"
 
-#: ../win32/gui/WndMain.c:1504
+#: ../win32/gui/WndMain.c:1511
 msgid "&File"
 msgstr "檔案(&F)"
 
-#: ../win32/gui/WndMain.c:1505
+#: ../win32/gui/WndMain.c:1512
 msgid "E&xit"
 msgstr "離開(&X)"
 
-#: ../win32/gui/WndMain.c:1507
+#: ../win32/gui/WndMain.c:1514
 msgid "Run &EXE..."
 msgstr "執行 EXE(&E)..."
 
-#: ../win32/gui/WndMain.c:1508
+#: ../win32/gui/WndMain.c:1515
 msgid "Run &BIOS"
 msgstr "執行 BIOS(&B)"
 
-#: ../win32/gui/WndMain.c:1509
+#: ../win32/gui/WndMain.c:1516
 msgid "Run &ISO..."
 msgstr "執行 ISO(&I)..."
 
-#: ../win32/gui/WndMain.c:1510
+#: ../win32/gui/WndMain.c:1517
 msgid "Run &CD"
 msgstr "執行光碟(&C)"
 
-#: ../win32/gui/WndMain.c:1512
+#: ../win32/gui/WndMain.c:1519
 msgid "&Emulator"
 msgstr "模擬器(&E)"
 
-#: ../win32/gui/WndMain.c:1513
+#: ../win32/gui/WndMain.c:1520
 msgid "&States"
 msgstr "記錄(&S)"
 
-#: ../win32/gui/WndMain.c:1515
+#: ../win32/gui/WndMain.c:1522
 msgid "S&witch ISO..."
 msgstr "更換 ISO(&W)..."
 
-#: ../win32/gui/WndMain.c:1517
+#: ../win32/gui/WndMain.c:1524
 msgid "Re&set"
 msgstr "複位(&S)"
 
-#: ../win32/gui/WndMain.c:1518
+#: ../win32/gui/WndMain.c:1525
 msgid "&Run"
 msgstr "執行(&R)"
 
-#: ../win32/gui/WndMain.c:1519
+#: ../win32/gui/WndMain.c:1526
 msgid "&Save"
 msgstr "存儲(&S)"
 
-#: ../win32/gui/WndMain.c:1520
+#: ../win32/gui/WndMain.c:1527
 msgid "&Load"
 msgstr "讀取(&L)"
 
-#: ../win32/gui/WndMain.c:1521
-#: ../win32/gui/WndMain.c:1527
+#: ../win32/gui/WndMain.c:1528
+#: ../win32/gui/WndMain.c:1534
 msgid "&Other..."
 msgstr "其它(&O)..."
 
-#: ../win32/gui/WndMain.c:1522
-#: ../win32/gui/WndMain.c:1528
+#: ../win32/gui/WndMain.c:1529
+#: ../win32/gui/WndMain.c:1535
 msgid "Slot &5"
 msgstr "記錄 5(&5)"
 
-#: ../win32/gui/WndMain.c:1523
-#: ../win32/gui/WndMain.c:1529
+#: ../win32/gui/WndMain.c:1530
+#: ../win32/gui/WndMain.c:1536
 msgid "Slot &4"
 msgstr "記錄 4(&4)"
 
-#: ../win32/gui/WndMain.c:1524
-#: ../win32/gui/WndMain.c:1530
+#: ../win32/gui/WndMain.c:1531
+#: ../win32/gui/WndMain.c:1537
 msgid "Slot &3"
 msgstr "記錄 3(&3)"
 
-#: ../win32/gui/WndMain.c:1525
-#: ../win32/gui/WndMain.c:1531
+#: ../win32/gui/WndMain.c:1532
+#: ../win32/gui/WndMain.c:1538
 msgid "Slot &2"
 msgstr "記錄 2(&2)"
 
-#: ../win32/gui/WndMain.c:1526
-#: ../win32/gui/WndMain.c:1532
+#: ../win32/gui/WndMain.c:1533
+#: ../win32/gui/WndMain.c:1539
 msgid "Slot &1"
 msgstr "記錄 1(&1)"
 
-#: ../win32/gui/WndMain.c:1534
+#: ../win32/gui/WndMain.c:1541
 msgid "&Configuration"
 msgstr "設定(&C)"
 
-#: ../win32/gui/WndMain.c:1535
+#: ../win32/gui/WndMain.c:1542
 msgid "Cheat &Search..."
 msgstr "搜尋金手指碼(&S)..."
 
-#: ../win32/gui/WndMain.c:1536
+#: ../win32/gui/WndMain.c:1543
 msgid "Ch&eat Code..."
 msgstr "金手指碼(&E)..."
 
-#: ../win32/gui/WndMain.c:1539
+#: ../win32/gui/WndMain.c:1546
 msgid "&Language"
 msgstr "語言(&L)"
 
-#: ../win32/gui/WndMain.c:1564
+#: ../win32/gui/WndMain.c:1571
 msgid "&Memory cards..."
 msgstr "記憶卡(&M)..."
 
-#: ../win32/gui/WndMain.c:1565
+#: ../win32/gui/WndMain.c:1572
 msgid "C&PU..."
 msgstr "CPU(&P)..."
 
-#: ../win32/gui/WndMain.c:1567
+#: ../win32/gui/WndMain.c:1574
 msgid "&NetPlay..."
-msgstr "聯網遊戲(&N)..."
+msgstr "聯線遊戲(&N)..."
 
-#: ../win32/gui/WndMain.c:1569
+#: ../win32/gui/WndMain.c:1576
 msgid "&Controllers..."
 msgstr "控制器(&C)..."
 
-#: ../win32/gui/WndMain.c:1570
+#: ../win32/gui/WndMain.c:1577
 msgid "CD-&ROM..."
 msgstr "CD-ROM(&R)..."
 
-#: ../win32/gui/WndMain.c:1571
+#: ../win32/gui/WndMain.c:1578
 msgid "&Sound..."
 msgstr "聲音(&S)..."
 
-#: ../win32/gui/WndMain.c:1572
+#: ../win32/gui/WndMain.c:1579
 msgid "&Graphics..."
 msgstr "圖像(&G)..."
 
-#: ../win32/gui/WndMain.c:1574
+#: ../win32/gui/WndMain.c:1581
 msgid "&Plugins && Bios..."
 msgstr "外掛及 BIOS(&P)..."
 
-#: ../win32/gui/WndMain.c:1576
+#: ../win32/gui/WndMain.c:1583
 msgid "&Help"
 msgstr "說明(&H)"
 
-#: ../win32/gui/WndMain.c:1577
+#: ../win32/gui/WndMain.c:1584
 msgid "&About..."
 msgstr "關於(&A)..."
 
-#: ../win32/gui/WndMain.c:1756
+#: ../win32/gui/WndMain.c:1763
 msgid "Pcsx Msg"
 msgstr "Pcsx 消息"
 
-#: ../win32/gui/WndMain.c:1759
+#: ../win32/gui/WndMain.c:1766
 msgid "Error Loading Symbol"
 msgstr "無法加載符號"
 
@@ -1068,7 +1068,7 @@ msgstr "PAD2init 錯誤: %d"
 msgid "NETinit error: %d"
 msgstr "NETinit 錯誤: %d"
 
-#: ../gui/AboutDlg.c:70
+#: ../gui/AboutDlg.c:74
 msgid ""
 "(C) 1999-2003 PCSX Team\n"
 "(C) 2005-2009 PCSX-df Team\n"
@@ -1078,7 +1078,7 @@ msgstr ""
 "(C) 2005-2009 PCSX-df 開發組\n"
 "(C) 2009-2010 PCSX-Reloaded 開發組"
 
-#: ../gui/AboutDlg.c:75
+#: ../gui/AboutDlg.c:79
 msgid ""
 "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.\n"
 "\n"
@@ -1092,11 +1092,11 @@ msgstr ""
 "\n"
 "You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
 
-#: ../gui/AboutDlg.c:98
+#: ../gui/AboutDlg.c:102
 msgid "translator-credits"
 msgstr "Wei Mingzhi <whistler@openoffice.org>"
 
-#: ../gui/AboutDlg.c:99
+#: ../gui/AboutDlg.c:103
 msgid "A PlayStation emulator."
 msgstr "一個 PlayStation 模擬器。"
 
@@ -1373,39 +1373,39 @@ msgstr "ID"
 msgid "Name"
 msgstr "名稱"
 
-#: ../gui/MemcardDlg.c:317
+#: ../gui/MemcardDlg.c:328
 msgid "Select A File"
 msgstr "選擇檔案"
 
-#: ../gui/MemcardDlg.c:358
+#: ../gui/MemcardDlg.c:369
 msgid "Format this Memory Card?"
 msgstr "格式化此記憶卡?"
 
-#: ../gui/MemcardDlg.c:360
+#: ../gui/MemcardDlg.c:371
 msgid "If you format the memory card, the card will be empty, and any existing data overwritten."
 msgstr "如果您選擇格式化記憶卡，記憶卡將被清空，並且任何現有資料都將被覆蓋。"
 
-#: ../gui/MemcardDlg.c:363
+#: ../gui/MemcardDlg.c:374
 msgid "Format card"
 msgstr "格式化記憶卡"
 
-#: ../gui/MemcardDlg.c:387
+#: ../gui/MemcardDlg.c:398
 msgid "Create a new Memory Card"
 msgstr "新增記憶卡"
 
-#: ../gui/MemcardDlg.c:396
+#: ../gui/MemcardDlg.c:407
 msgid "New Memory Card.mcd"
 msgstr "新記憶卡檔.mcd"
 
-#: ../gui/MemcardDlg.c:497
+#: ../gui/MemcardDlg.c:508
 msgid "No free space on memory card"
 msgstr "記憶卡無空餘位置"
 
-#: ../gui/MemcardDlg.c:498
+#: ../gui/MemcardDlg.c:509
 msgid "There are no free slots available on the target memory card. Please delete a slot first."
 msgstr "目的記憶卡無空餘位置。請先刪除一個檔案。"
 
-#: ../gui/MemcardDlg.c:661
+#: ../gui/MemcardDlg.c:672
 msgid "Memory Card Manager"
 msgstr "記憶卡管理器"
 
@@ -1567,7 +1567,7 @@ msgstr "無法加載 \"控制器2\" 外掛 %s!"
 #: ../libpcsxcore/plugins.c:536
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
-msgstr "無法加載聯網遊戲外掛 %s!"
+msgstr "無法加載聯線遊戲外掛 %s!"
 
 #: ../libpcsxcore/plugins.c:597
 #, c-format
@@ -1597,7 +1597,7 @@ msgstr "\"控制器2\" 外掛初始化錯誤: %d"
 #: ../libpcsxcore/plugins.c:609
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
-msgstr "聯網遊戲外掛初始化錯誤: %d"
+msgstr "聯線遊戲外掛初始化錯誤: %d"
 
 #: ../libpcsxcore/plugins.c:612
 msgid "Plugins loaded.\n"
@@ -1618,11 +1618,11 @@ msgstr "不支援的 PPF 補丁版本 (%d)。\n"
 msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr "已加載 PPF %d.0 補丁: %s。\n"
 
-#: ../libpcsxcore/psxmem.c:78
+#: ../libpcsxcore/psxmem.c:80
 msgid "Error allocating memory!"
 msgstr "分配記憶體錯誤!"
 
-#: ../libpcsxcore/psxmem.c:119
+#: ../libpcsxcore/psxmem.c:121
 #, c-format
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr "無法開啟 BIOS: \"%s\"。使用內部 HLE Bios。\n"
@@ -2008,7 +2008,7 @@ msgstr "記憶卡(_M)..."
 
 #: ../data/pcsx.glade2:483
 msgid "_Netplay..."
-msgstr "聯網遊戲(_N)..."
+msgstr "聯線遊戲(_N)..."
 
 #: ../data/pcsx.glade2:504
 msgid "Chea_t"
@@ -2183,11 +2183,11 @@ msgstr "<b>系統類型</b>"
 
 #: ../data/pcsx.glade2:1674
 msgid "Configure NetPlay"
-msgstr "聯網遊戲設定"
+msgstr "聯線遊戲設定"
 
 #: ../data/pcsx.glade2:1760
 msgid "<b>NetPlay</b>"
-msgstr "<b>聯網遊戲</b>"
+msgstr "<b>聯線遊戲</b>"
 
 #: ../data/pcsx.glade2:1886
 #: ../data/pcsx.glade2:2283
