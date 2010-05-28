@@ -3,6 +3,8 @@ May 28, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * macosx/Pcsx.xcodeproj/project.pbxproj: Fixed Xcode Project.
  * macosx/English.lproj/InfoPlist.strings: Updated info.
  * autogen.sh: Removed autoreconf.
+ * libpcsxcore/psxbios.c: Implemented more functions by hand (qsort() is not
+   tested).
 
 May 25, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
