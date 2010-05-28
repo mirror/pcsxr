@@ -1,3 +1,9 @@
+May 28, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Fixed Xcode Project.
+ * macosx/English.lproj/InfoPlist.strings: Updated info.
+ * autogen.sh: Removed autoreconf.
+
 May 25, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * po/pt_BR.po, po/it.po, po/zh_TW.po, po/ru_RU.po, po/pcsx.pot, po/zh_CN.po:

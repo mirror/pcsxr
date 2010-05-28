@@ -3,4 +3,4 @@
 CFBundleName = "PCSX";
 CFBundleShortVersionString = "PCSX-Reloaded";
 CFBundleGetInfoString = "Playstation Emulator based on PCSX-df Project.";
-NSHumanReadableCopyright = "Copyright (c) 2005 Gil Pedersen.\nCopyright (c) 2009 Wei Mingzhi.";
+NSHumanReadableCopyright = "Copyright (c) 2003-2005 PCSX Team, Gil Pedersen.\nCopyright (c) 2009-2010 PCSX-Reloaded Team.";

@@ -44,6 +44,8 @@
 		713B530F110B75650002F164 /* ppf.h in Headers */ = {isa = PBXBuildFile; fileRef = 713B530D110B75650002F164 /* ppf.h */; };
 		7161C2820FDED6D000225F97 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 7161C2810FDED6D000225F97 /* config.h */; };
 		7161C2980FDED75300225F97 /* ExtendedKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = 7161C2970FDED75300225F97 /* ExtendedKeys.h */; };
+		719594B111AEFE8C004AD686 /* gte_divider.h in Headers */ = {isa = PBXBuildFile; fileRef = 719594AF11AEFE8C004AD686 /* gte_divider.h */; };
+		719594B211AEFE8C004AD686 /* psxcommon.c in Sources */ = {isa = PBXBuildFile; fileRef = 719594B011AEFE8C004AD686 /* psxcommon.c */; };
 		71AD2DF310C3575000365243 /* CDDeviceInterface.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DC410C356EE00365243 /* CDDeviceInterface.psxplugin */; };
 		71AD2DF410C3575300365243 /* PeopsSPU.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DD110C356FD00365243 /* PeopsSPU.psxplugin */; };
 		71AD2DF510C3575C00365243 /* PeopsSoftGL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DDC10C3570900365243 /* PeopsSoftGL.psxplugin */; };
@@ -236,6 +238,8 @@
 		713B530D110B75650002F164 /* ppf.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = ppf.h; path = ../libpcsxcore/ppf.h; sourceTree = SOURCE_ROOT; };
 		7161C2810FDED6D000225F97 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		7161C2970FDED75300225F97 /* ExtendedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedKeys.h; sourceTree = "<group>"; };
+		719594AF11AEFE8C004AD686 /* gte_divider.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = gte_divider.h; path = ../libpcsxcore/gte_divider.h; sourceTree = SOURCE_ROOT; };
+		719594B011AEFE8C004AD686 /* psxcommon.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = psxcommon.c; path = ../libpcsxcore/psxcommon.c; sourceTree = SOURCE_ROOT; };
 		71AD2DBA10C356EE00365243 /* CDDeviceInterfacePlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CDDeviceInterfacePlugin.xcodeproj; path = plugins/CDDeviceInterface/CDDeviceInterfacePlugin.xcodeproj; sourceTree = SOURCE_ROOT; };
 		71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PeopsSPU.xcodeproj; path = plugins/DFSound/PeopsSPU.xcodeproj; sourceTree = SOURCE_ROOT; };
 		71AD2DD210C3570900365243 /* PeopsSoftGPU.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PeopsSoftGPU.xcodeproj; path = plugins/DFXVideo/PeopsSoftGPU.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -413,20 +417,19 @@
 				71F4C5B30FDED15800529849 /* ix86 */,
 				71F4C5600FDED12800529849 /* cdriso.c */,
 				71F4C5610FDED12800529849 /* cdriso.h */,
-				712FD1E51093096F00575A92 /* debug.c */,
-				712FD1E61093096F00575A92 /* socket.c */,
-				712FD1E71093096F00575A92 /* socket.h */,
 				71F4C5620FDED12800529849 /* cdrom.c */,
 				71F4C5630FDED12800529849 /* cdrom.h */,
 				71F4C5640FDED12800529849 /* cheat.c */,
 				71F4C5650FDED12800529849 /* cheat.h */,
 				71F4C5660FDED12800529849 /* coff.h */,
+				712FD1E51093096F00575A92 /* debug.c */,
 				71F4C5670FDED12800529849 /* debug.h */,
 				71F4C5680FDED12800529849 /* decode_xa.c */,
 				71F4C5690FDED12800529849 /* decode_xa.h */,
 				71F4C56A0FDED12800529849 /* disr3000a.c */,
 				71F4C56B0FDED12800529849 /* gte.c */,
 				71F4C56C0FDED12800529849 /* gte.h */,
+				719594AF11AEFE8C004AD686 /* gte_divider.h */,
 				71F4C56D0FDED12800529849 /* mdec.c */,
 				71F4C56E0FDED12800529849 /* mdec.h */,
 				71F4C56F0FDED12800529849 /* misc.c */,
@@ -438,6 +441,7 @@
 				71F4C5730FDED12800529849 /* psemu_plugin_defs.h */,
 				71F4C5740FDED12800529849 /* psxbios.c */,
 				71F4C5750FDED12800529849 /* psxbios.h */,
+				719594B011AEFE8C004AD686 /* psxcommon.c */,
 				71F4C5760FDED12800529849 /* psxcommon.h */,
 				71F4C5770FDED12800529849 /* psxcounters.c */,
 				71F4C5780FDED12800529849 /* psxcounters.h */,
@@ -454,6 +458,8 @@
 				71F4C5830FDED12800529849 /* r3000a.h */,
 				71F4C5840FDED12800529849 /* sio.c */,
 				71F4C5850FDED12800529849 /* sio.h */,
+				712FD1E61093096F00575A92 /* socket.c */,
+				712FD1E71093096F00575A92 /* socket.h */,
 				71F4C5860FDED12800529849 /* spu.c */,
 				71F4C5870FDED12800529849 /* spu.h */,
 				71F4C5880FDED12800529849 /* system.h */,
@@ -546,6 +552,7 @@
 				7161C2980FDED75300225F97 /* ExtendedKeys.h in Headers */,
 				712FD1EA1093096F00575A92 /* socket.h in Headers */,
 				713B530F110B75650002F164 /* ppf.h in Headers */,
+				719594B111AEFE8C004AD686 /* gte_divider.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,6 +718,7 @@
 				712FD1E81093096F00575A92 /* debug.c in Sources */,
 				712FD1E91093096F00575A92 /* socket.c in Sources */,
 				713B530E110B75650002F164 /* ppf.c in Sources */,
+				719594B211AEFE8C004AD686 /* psxcommon.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
