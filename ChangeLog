@@ -1,3 +1,8 @@
+May 29, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/psxbios.c: Implemented more functions without standard C library
+   calls.
+
 May 28, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * macosx/Pcsx.xcodeproj/project.pbxproj: Fixed Xcode Project.
