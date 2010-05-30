@@ -2540,8 +2540,6 @@ void psxBiosShutdown() {
 void biosInterrupt() {
 	int i, bufcount;
 
-	sp = psxMu32(0x6c80); // create new stack for interrupt handlers
-
 //	if (psxHu32(0x1070) & 0x1) { // Vsync
 		if (pad_buf != NULL) {
 			u32 *buf = (u32*)pad_buf;
@@ -2642,6 +2640,8 @@ void psxBiosException() {
 //			PSXCPU_LOG("interrupt\n");
 #endif
 			SaveRegs();
+
+			sp = psxMu32(0x6c80); // create new stack for interrupt handlers
 
 			biosInterrupt();
 
