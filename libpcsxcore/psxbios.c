@@ -257,14 +257,14 @@ static TCB Thread[8];
 static int CurThread = 0;
 static FileDesc FDesc[32];
 
-static __inline void softCall(u32 pc) {
+static inline void softCall(u32 pc) {
 	pc0 = pc;
 	ra = 0x80001000;
 
 	while (pc0 != 0x80001000) psxCpu->ExecuteBlock();
 }
 
-static __inline void softCall2(u32 pc) {
+static inline void softCall2(u32 pc) {
 	u32 sra = ra;
 	pc0 = pc;
 	ra = 0x80001000;
@@ -273,13 +273,26 @@ static __inline void softCall2(u32 pc) {
 	ra = sra;
 }
 
-static __inline void DeliverEvent(u32 ev, u32 spec) {
+static inline void DeliverEvent(u32 ev, u32 spec) {
 	if (Event[ev][spec].status != EvStACTIVE) return;
 
 //	Event[ev][spec].status = EvStALREADY;
 	if (Event[ev][spec].mode == EvMdINTR) {
 		softCall2(Event[ev][spec].fhandler);
 	} else Event[ev][spec].status = EvStALREADY;
+}
+
+static inline void SaveRegs() {
+	memcpy(regs, psxRegs.GPR.r, 32*4);
+	regs[32] = psxRegs.GPR.n.lo;
+	regs[33] = psxRegs.GPR.n.hi;
+	regs[34] = psxRegs.pc;
+}
+
+static inline void LoadRegs() {
+	memcpy(psxRegs.GPR.r, regs, 32*4);
+	psxRegs.GPR.n.lo = regs[32];
+	psxRegs.GPR.n.hi = regs[33];
 }
 
 /*                                           *
@@ -1543,9 +1556,8 @@ void psxBios_PAD_init() { // 15
 #ifdef PSXBIOS_LOG
 	PSXBIOS_LOG("psxBios_%s\n", biosB0n[0x15]);
 #endif
-
 	psxHwWrite16(0x1f801074, (u16)(psxHwRead16(0x1f801074) | 0x1));
-	pad_buf = (int*)Ra1;
+	pad_buf = (int *)Ra1;
 	*pad_buf = -1;
 	psxRegs.CP0.n.Status |= 0x401;
 	pc0 = ra;
@@ -1560,12 +1572,10 @@ void psxBios_PAD_dr() { // 16
 }
 
 void psxBios_ReturnFromException() { // 17
-	memcpy(psxRegs.GPR.r, regs, 32*4);
-	psxRegs.GPR.n.lo = regs[32];
-	psxRegs.GPR.n.hi = regs[33];
+	LoadRegs();
 
 	pc0 = psxRegs.CP0.n.EPC;
-	if (psxRegs.CP0.n.Cause & 0x80000000) pc0+=4;
+	if (psxRegs.CP0.n.Cause & 0x80000000) pc0 += 4;
 
 	psxRegs.CP0.n.Status = (psxRegs.CP0.n.Status & 0xfffffff0) |
 						  ((psxRegs.CP0.n.Status & 0x3c) >> 2);
@@ -2510,20 +2520,6 @@ void psxBiosInit() {
 
 void psxBiosShutdown() {
 }
-
-__inline void SaveRegs() {
-	memcpy(regs, psxRegs.GPR.r, 32*4);
-	regs[32] = psxRegs.GPR.n.lo;
-	regs[33] = psxRegs.GPR.n.hi;
-	regs[34] = psxRegs.pc;
-}
-
-__inline void LoadRegs() {
-	memcpy(psxRegs.GPR.r, regs, 32*4);
-	psxRegs.GPR.n.lo = regs[32];
-	psxRegs.GPR.n.hi = regs[33];
-}
-
 
 #define psxBios_PADpoll(pad) { \
 	PAD##pad##_startPoll(pad); \
