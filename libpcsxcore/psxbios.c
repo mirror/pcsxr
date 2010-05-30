@@ -21,9 +21,7 @@
  * Internal simulated HLE BIOS.
  */
 
-// TODO:
-// Get rid of standard C functions, implement all system calls,
-// count the exact CPU cycles of system calls.
+// TODO: implement all system calls, count the exact CPU cycles of system calls.
 
 #include "psxbios.h"
 #include "psxhw.h"
@@ -151,6 +149,8 @@ char *biosC0n[256] = {
 #define t5 (psxRegs.GPR.n.t5)
 #define t6 (psxRegs.GPR.n.t6)
 #define t7 (psxRegs.GPR.n.t7)
+#define t8 (psxRegs.GPR.n.t8)
+#define t9 (psxRegs.GPR.n.t9)
 #define s0 (psxRegs.GPR.n.s0)
 #define s1 (psxRegs.GPR.n.s1)
 #define s2 (psxRegs.GPR.n.s2)
@@ -159,8 +159,6 @@ char *biosC0n[256] = {
 #define s5 (psxRegs.GPR.n.s5)
 #define s6 (psxRegs.GPR.n.s6)
 #define s7 (psxRegs.GPR.n.s7)
-#define t8 (psxRegs.GPR.n.t6)
-#define t9 (psxRegs.GPR.n.t7)
 #define k0 (psxRegs.GPR.n.k0)
 #define k1 (psxRegs.GPR.n.k1)
 #define gp (psxRegs.GPR.n.gp)
@@ -355,7 +353,7 @@ void psxBios_longjmp() { // 0x14
 	sp = jmp_buf[1]; /* sp */
 	fp = jmp_buf[2]; /* fp */
 	for (i = 0; i < 8; i++) // s0-s7
-	   psxRegs.GPR.r[16 + i] = jmp_buf[3 + i];
+		psxRegs.GPR.r[16 + i] = jmp_buf[3 + i];
 	gp = jmp_buf[11]; /* gp */
 
 	v0 = a1; pc0 = ra;
@@ -546,17 +544,30 @@ void psxBios_strtok() { // 0x23
 		v0 = a0 + pcRet - pcA0;
 	else
 		v0 = 0;
-    pc0 = ra;
+	pc0 = ra;
 }
 
 void psxBios_strstr() { // 0x24
-	char *pcA0 = (char *)Ra0;
-	char *pcRet = strstr(pcA0, (char *)Ra1);
-	if (pcRet)
-		v0 = a0 + pcRet - pcA0;
-	else
-		v0 = 0;
-    pc0 = ra;
+	char *p = (char *)Ra0, *p1, *p2;
+
+	while (*p != '\0') {
+		p1 = p;
+		p2 = (char *)Ra1;
+
+		while (*p1 != '\0' && *p2 != '\0' && *p1 == *p2) {
+			p1++; p2++;
+		}
+
+		if (*p2 == '\0') {
+			v0 = a0 + (p - (char *)Ra0);
+			pc0 = ra;
+			return;
+		}
+
+		p++;
+	}
+
+	v0 = 0; pc0 = ra;
 }
 
 void psxBios_toupper() { // 0x25
@@ -603,7 +614,7 @@ void psxBios_bcmp() { // 0x29
 
 void psxBios_memcpy() { // 0x2a
 	char *p1 = (char *)Ra0, *p2 = (char *)Ra1;
-	while (a3-- > 0) *p1++ = *p2++;
+	while (a2-- > 0) *p1++ = *p2++;
 
 	v0 = a0; pc0 = ra;
 }
@@ -1738,14 +1749,14 @@ void psxBios_read() { // 0x34
 void psxBios_write() { // 0x35/0x03
 	char *ptr;
 
-    if (a0 == 1) { // stdout
+	if (a0 == 1) { // stdout
 		char *ptr = Ra1;
 
 		while (a2 > 0) {
 			SysPrintf("%c", *ptr++); a2--;
 		}
 		pc0 = ra; return;
-    }
+	}
 #ifdef PSXBIOS_LOG
 	PSXBIOS_LOG("psxBios_%s: %x,%x,%x\n", biosB0n[0x35], a0, a1, a2);
 #endif
@@ -1756,7 +1767,7 @@ void psxBios_write() { // 0x35/0x03
 		case 2: buwrite(1); break;
 		case 3: buwrite(2); break;
 	}
-  		
+
 	pc0 = ra;
 }
 
@@ -2487,11 +2498,14 @@ void psxBiosInit() {
 	psxMu32ref(0x0884) = SWAPu32((0x3b << 26) | 0);
 	psxMu32ref(0x0894) = SWAPu32((0x3b << 26) | 0);
 
-	// memory size 2 MB
-	psxHu32ref(0x1060) = SWAPu32(0x00000b88);
+	// initial stack pointer for BIOS interrupt
+	psxMu32ref(0x6c80) = SWAPu32(0x000085c8);
 
 	// initial RNG seed
 	psxMu32ref(0x9010) = SWAPu32(0xac20cc00);
+
+	// memory size 2 MB
+	psxHu32ref(0x1060) = SWAPu32(0x00000b88);
 }
 
 void psxBiosShutdown() {
@@ -2530,6 +2544,8 @@ __inline void LoadRegs() {
 void biosInterrupt() {
 	int i, bufcount;
 
+	sp = psxMu32(0x6c80); // create new stack for interrupt handlers
+
 //	if (psxHu32(0x1070) & 0x1) { // Vsync
 		if (pad_buf != NULL) {
 			u32 *buf = (u32*)pad_buf;
@@ -2539,10 +2555,10 @@ void biosInterrupt() {
 				if (PAD1_poll(0x42) == 0x23) {
 					PAD1_poll(0);
 					*buf = PAD1_poll(0) << 8;
-					*buf|= PAD1_poll(0);
+					*buf |= PAD1_poll(0);
 					PAD1_poll(0);
-					*buf&= ~((PAD1_poll(0)>0x20)?1<<6:0);
-					*buf&= ~((PAD1_poll(0)>0x20)?1<<7:0);
+					*buf &= ~((PAD1_poll(0) > 0x20) ? 1 << 6 : 0);
+					*buf &= ~((PAD1_poll(0) > 0x20) ? 1 << 7 : 0);
 				} else {
 					PAD1_poll(0);
 					*buf = PAD1_poll(0) << 8;
@@ -2552,15 +2568,15 @@ void biosInterrupt() {
 				PAD2_startPoll(2);
 				if (PAD2_poll(0x42) == 0x23) {
 					PAD2_poll(0);
-					*buf|= PAD2_poll(0) << 24;
-					*buf|= PAD2_poll(0) << 16;
+					*buf |= PAD2_poll(0) << 24;
+					*buf |= PAD2_poll(0) << 16;
 					PAD2_poll(0);
-					*buf&= ~((PAD2_poll(0)>0x20)?1<<22:0);
-					*buf&= ~((PAD2_poll(0)>0x20)?1<<23:0);
+					*buf &= ~((PAD2_poll(0) > 0x20) ? 1 << 22 : 0);
+					*buf &= ~((PAD2_poll(0) > 0x20) ? 1 << 23 : 0);
 				} else {
 					PAD2_poll(0);
-					*buf|= PAD2_poll(0) << 24;
-					*buf|= PAD2_poll(0) << 16;
+					*buf |= PAD2_poll(0) << 24;
+					*buf |= PAD2_poll(0) << 16;
 				}
 			} else {
 				u16 data;
@@ -2569,7 +2585,7 @@ void biosInterrupt() {
 				PAD1_poll(0x42);
 				PAD1_poll(0);
 				data = PAD1_poll(0) << 8;
-				data|= PAD1_poll(0);
+				data |= PAD1_poll(0);
 
 				if (NET_sendPadData(&data, 2) == -1)
 					netError();
@@ -2613,13 +2629,7 @@ void biosInterrupt() {
 		for (i = 0; i < 3; i++) {
 			if (psxHu32(0x1070) & (1 << (i + 4))) {
 				if (RcEV[i][1].status == EvStACTIVE) {
-					// Fixes crashing problems with at least Final Fantasy 7 and Xenogears.
-					// This should be considered a temporary fix; after all, we do not
-					// know how much space below sp is in use.  It may be worth considering
-					// creating a new stack for interrupt handlers.
-					if ((sp >> 24) != 0x1f) sp -= 256;
 					softCall(RcEV[i][1].fhandler);
-					if ((sp >> 24) != 0x1f) sp += 256;
 				}
 				psxHwWrite32(0x1f801070, ~(1 << (i + 4)));
 			}

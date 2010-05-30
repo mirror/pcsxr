@@ -1,3 +1,8 @@
+May 30, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/psxbios.c: Fixed memcpy(), create new stack for interrupt
+   handlers.
+
 May 29, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/psxbios.c: Implemented more functions without standard C library
