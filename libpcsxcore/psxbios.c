@@ -206,17 +206,17 @@ typedef struct {
 } TCB;
 
 typedef struct {                   
-	u32 _pc0;      
-	u32 gp0;      
-	u32 t_addr;   
-	u32 t_size;   
-	u32 d_addr;   
-	u32 d_size;   
-	u32 b_addr;   
-	u32 b_size;   
+	u32 _pc0;
+	u32 gp0;
+	u32 t_addr;
+	u32 t_size;
+	u32 d_addr;
+	u32 d_size;
+	u32 b_addr;
+	u32 b_size;
 	u32 S_addr;
 	u32 s_size;
-	u32 _sp,_fp,_gp,ret,base;
+	u32 _sp, _fp, _gp, ret, base;
 } EXEC;
 
 struct DIRENTRY {
@@ -2057,6 +2057,49 @@ void psxBios__new_card() { // 0x50
 	pc0 = ra;
 }
 
+void psxBios_Krom2RawAdd() { // 0x51
+	int i = 0;
+
+	const u32 table_8140[][2] = {
+		{0x8140, 0x0000}, {0x8180, 0x0762}, {0x81ad, 0x0cc6}, {0x81b8, 0x0ca8},
+		{0x81c0, 0x0f00}, {0x81c8, 0x0d98}, {0x81cf, 0x10c2}, {0x81da, 0x0e6a},
+		{0x81e9, 0x13ce}, {0x81f0, 0x102c}, {0x81f8, 0x1590}, {0x81fc, 0x111c},
+		{0x81fd, 0x1626}, {0x824f, 0x113a}, {0x8259, 0x20ee}, {0x8260, 0x1266},
+		{0x827a, 0x24cc}, {0x8281, 0x1572}, {0x829b, 0x28aa}, {0x829f, 0x187e},
+		{0x82f2, 0x32dc}, {0x8340, 0x2238}, {0x837f, 0x4362}, {0x8380, 0x299a},
+		{0x8397, 0x4632}, {0x839f, 0x2c4c}, {0x83b7, 0x49f2}, {0x83bf, 0x2f1c},
+		{0x83d7, 0x4db2}, {0x8440, 0x31ec}, {0x8461, 0x5dde}, {0x8470, 0x35ca},
+		{0x847f, 0x6162}, {0x8480, 0x378c}, {0x8492, 0x639c}, {0x849f, 0x39a8},
+		{0xffff, 0}
+	};
+
+	const u32 table_889f[][2] = {
+		{0x889f, 0x3d68},  {0x8900, 0x40ec},  {0x897f, 0x4fb0},  {0x8a00, 0x56f4},
+		{0x8a7f, 0x65b8},  {0x8b00, 0x6cfc},  {0x8b7f, 0x7bc0},  {0x8c00, 0x8304},
+		{0x8c7f, 0x91c8},  {0x8d00, 0x990c},  {0x8d7f, 0xa7d0},  {0x8e00, 0xaf14},
+		{0x8e7f, 0xbdd8},  {0x8f00, 0xc51c},  {0x8f7f, 0xd3e0},  {0x9000, 0xdb24},
+		{0x907f, 0xe9e8},  {0x9100, 0xf12c},  {0x917f, 0xfff0},  {0x9200, 0x10734},
+		{0x927f, 0x115f8}, {0x9300, 0x11d3c}, {0x937f, 0x12c00}, {0x9400, 0x13344},
+		{0x947f, 0x14208}, {0x9500, 0x1494c}, {0x957f, 0x15810}, {0x9600, 0x15f54},
+		{0x967f, 0x16e18}, {0x9700, 0x1755c}, {0x977f, 0x18420}, {0x9800, 0x18b64},
+		{0xffff, 0}
+	};
+
+	if (a0 >= 0x8140 && a0 <= 0x84be) {
+		while (table_8140[i][0] <= a0) i++;
+		a0 -= table_8140[i - 1][0];
+		v0 = 0xbfc66000 + (a0 * 0x1e + table_8140[i - 1][1]);
+	} else if (a0 >= 0x889f && a0 <= 0x9872) {
+		while (table_889f[i][0] <= a0) i++;
+		a0 -= table_889f[i - 1][0];
+		v0 = 0xbfc66000 + (a0 * 0x1e + table_889f[i - 1][1]);
+	} else {
+		v0 = 0xffffffff;
+	}
+
+	pc0 = ra;
+}
+
 void psxBios_GetC0Table() { // 56
 #ifdef PSXBIOS_LOG
 	PSXBIOS_LOG("psxBios_%s\n", biosB0n[0x56]);
@@ -2136,6 +2179,8 @@ void psxBios_dummy() {
 void (*biosA0[256])();
 void (*biosB0[256])();
 void (*biosC0[256])();
+
+#include "sjisfont.h"
 
 void psxBiosInit() {
 	u32 base, size;
@@ -2420,14 +2465,14 @@ void psxBiosInit() {
 	biosB0[0x4e] = psxBios__card_write;
 	biosB0[0x4f] = psxBios__card_read;
 	biosB0[0x50] = psxBios__new_card;
-	//biosB0[0x51] = psxBios_Krom2RawAdd;
+	biosB0[0x51] = psxBios_Krom2RawAdd;
 	//biosB0[0x52] = psxBios_sys_b0_52;
 	//biosB0[0x53] = psxBios_sys_b0_53;
 	//biosB0[0x54] = psxBios__get_errno;
 	//biosB0[0x55] = psxBios__get_error;
 	biosB0[0x56] = psxBios_GetC0Table;
 	biosB0[0x57] = psxBios_GetB0Table;
-    //biosB0[0x58] = psxBios__card_chan;
+	//biosB0[0x58] = psxBios__card_chan;
 	//biosB0[0x59] = psxBios_sys_b0_59;
 	//biosB0[0x5a] = psxBios_sys_b0_5a;
 	biosB0[0x5b] = psxBios_ChangeClearPad;
@@ -2476,10 +2521,10 @@ void psxBiosInit() {
 	SwEV = Event + 32*4;
 	ThEV = Event + 32*5;
 
-	ptr = (u32*)&psxM[0x0874]; // b0 table
+	ptr = (u32 *)&psxM[0x0874]; // b0 table
 	ptr[0] = SWAPu32(0x4c54 - 0x884);
 
-	ptr = (u32*)&psxM[0x0674]; // c0 table
+	ptr = (u32 *)&psxM[0x0674]; // c0 table
 	ptr[6] = SWAPu32(0xc80);
 
 	memset(SysIntRP, 0, sizeof(SysIntRP));
@@ -2513,6 +2558,10 @@ void psxBiosInit() {
 
 	// initial RNG seed
 	psxMu32ref(0x9010) = SWAPu32(0xac20cc00);
+
+	// fonts
+	memcpy(psxR + 0x66000, font_8140, sizeof(font_8140));
+	memcpy(psxR + 0x69d68, font_889f, sizeof(font_889f));
 
 	// memory size 2 MB
 	psxHu32ref(0x1060) = SWAPu32(0x00000b88);
@@ -2721,7 +2770,7 @@ v0=1;	// HDHOSHY experimental patch: Spongebob, Coldblood, fearEffect, Medievil2
 		if (ptr) psxRu32ref(base) = SWAPu32((uintptr_t)ptr - (uintptr_t)psxM); \
 		else psxRu32ref(base) = 0; \
 	} else { \
-		if (psxRu32(base)) *(u8**)&ptr = (u8*)(psxM + psxRu32(base)); \
+		if (psxRu32(base)) *(u8 **)&ptr = (u8 *)(psxM + psxRu32(base)); \
 		else ptr = NULL; \
 	} \
 	base += sizeof(uintptr_t); \

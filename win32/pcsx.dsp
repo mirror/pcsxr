@@ -284,6 +284,10 @@ SOURCE=..\libpcsxcore\sio.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\libpcsxcore\sjisfont.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\libpcsxcore\socket.c
 # End Source File
 # Begin Source File

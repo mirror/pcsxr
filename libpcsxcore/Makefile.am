@@ -27,6 +27,7 @@ libpcsxcore_a_SOURCES = \
 	$(top_builddir)/libpcsxcore/debug.h \
 	$(top_builddir)/libpcsxcore/decode_xa.h \
 	$(top_builddir)/libpcsxcore/gte.h \
+	$(top_builddir)/libpcsxcore/gte_divider.h \
 	$(top_builddir)/libpcsxcore/mdec.h \
 	$(top_builddir)/libpcsxcore/misc.h \
 	$(top_builddir)/libpcsxcore/plugins.h \
@@ -41,6 +42,7 @@ libpcsxcore_a_SOURCES = \
 	$(top_builddir)/libpcsxcore/psxmem.h \
 	$(top_builddir)/libpcsxcore/r3000a.h \
 	$(top_builddir)/libpcsxcore/sio.h \
+	$(top_builddir)/libpcsxcore/sjisfont.h \
 	$(top_builddir)/libpcsxcore/spu.h \
 	$(top_builddir)/libpcsxcore/system.h \
 	$(top_builddir)/libpcsxcore/cdriso.c \

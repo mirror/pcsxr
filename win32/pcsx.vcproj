@@ -767,6 +767,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\libpcsxcore\sjisfont.h"
+				>
+			</File>
+			<File
 				RelativePath="..\libpcsxcore\socket.c"
 				>
 				<FileConfiguration

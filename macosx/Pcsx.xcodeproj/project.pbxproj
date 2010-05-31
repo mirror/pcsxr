@@ -95,6 +95,7 @@
 		71F4C5B90FDED16D00529849 /* iR3000A.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5B50FDED16D00529849 /* iR3000A.c */; };
 		71F4C5BA0FDED16D00529849 /* ix86.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5B60FDED16D00529849 /* ix86.c */; };
 		71F4C5BB0FDED16D00529849 /* ix86.h in Headers */ = {isa = PBXBuildFile; fileRef = 71F4C5B70FDED16D00529849 /* ix86.h */; };
+		71F703A711B3A673007DD5C5 /* sjisfont.h in Headers */ = {isa = PBXBuildFile; fileRef = 71F703A611B3A673007DD5C5 /* sjisfont.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -223,7 +224,7 @@
 		2BA44360052DB2EA00E21DDD /* PcsxPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxPlugin.h; sourceTree = "<group>"; };
 		2BA44361052DB2EA00E21DDD /* PcsxPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxPlugin.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
 		2BB3D6CF05427FE200831ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
-		2BB3D6D105427FE200831ACB /* PCSX.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PCSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BB3D6D105427FE200831ACB /* PCSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PCSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBB1126051DC00500B84448 /* PluginList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginList.h; sourceTree = "<group>"; };
 		2BBB1127051DC00500B84448 /* PluginList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginList.m; sourceTree = "<group>"; };
 		2BBB1787051E0D9700B84448 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = Credits.rtf; sourceTree = "<group>"; };
@@ -289,6 +290,7 @@
 		71F4C5B50FDED16D00529849 /* iR3000A.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = iR3000A.c; path = ../libpcsxcore/ix86/iR3000A.c; sourceTree = SOURCE_ROOT; };
 		71F4C5B60FDED16D00529849 /* ix86.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ix86.c; path = ../libpcsxcore/ix86/ix86.c; sourceTree = SOURCE_ROOT; };
 		71F4C5B70FDED16D00529849 /* ix86.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ix86.h; path = ../libpcsxcore/ix86/ix86.h; sourceTree = SOURCE_ROOT; };
+		71F703A611B3A673007DD5C5 /* sjisfont.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = sjisfont.h; path = ../libpcsxcore/sjisfont.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -458,6 +460,7 @@
 				71F4C5830FDED12800529849 /* r3000a.h */,
 				71F4C5840FDED12800529849 /* sio.c */,
 				71F4C5850FDED12800529849 /* sio.h */,
+				71F703A611B3A673007DD5C5 /* sjisfont.h */,
 				712FD1E61093096F00575A92 /* socket.c */,
 				712FD1E71093096F00575A92 /* socket.h */,
 				71F4C5860FDED12800529849 /* spu.c */,
@@ -553,6 +556,7 @@
 				712FD1EA1093096F00575A92 /* socket.h in Headers */,
 				713B530F110B75650002F164 /* ppf.h in Headers */,
 				719594B111AEFE8C004AD686 /* gte_divider.h in Headers */,
+				71F703A711B3A673007DD5C5 /* sjisfont.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

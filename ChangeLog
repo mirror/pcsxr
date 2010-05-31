@@ -1,3 +1,12 @@
+May 31, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/psxbios.c: Implemented Krom2RawAdd().
+ * libpcsxcore/sjisfont.h: Added font data.
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Added sjisfont.h.
+ * win32/pcsx.vcproj: Likewise.
+ * win32/pcsx.dsp: Likewise.
+ * libpcsxcore/Makefile.am: Likewise.
+
 May 30, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/psxbios.c: Fixed memcpy(), create new stack for interrupt
