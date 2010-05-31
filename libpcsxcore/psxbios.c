@@ -2186,6 +2186,7 @@ void psxBiosInit() {
 	u32 base, size;
 	u32 *ptr; 
 	int i;
+	uLongf len;
 
 	for(i = 0; i < 256; i++) {
 		biosA0[i] = NULL;
@@ -2206,7 +2207,7 @@ void psxBiosInit() {
 		if (biosC0[i] == NULL) biosC0[i] = psxBios_dummy;
 	}
 
-    biosA0[0x00] = psxBios_open;
+	biosA0[0x00] = psxBios_open;
 	biosA0[0x01] = psxBios_lseek;
 	biosA0[0x02] = psxBios_read;
 	biosA0[0x03] = psxBios_write;
@@ -2222,8 +2223,8 @@ void psxBiosInit() {
 	//biosA0[0x0d] = psxBios_strtol;
 	biosA0[0x0e] = psxBios_abs;
 	biosA0[0x0f] = psxBios_labs;
-    biosA0[0x10] = psxBios_atoi;
-    biosA0[0x11] = psxBios_atol;
+	biosA0[0x10] = psxBios_atoi;
+	biosA0[0x11] = psxBios_atol;
 	//biosA0[0x12] = psxBios_atob;
 	biosA0[0x13] = psxBios_setjmp;
 	biosA0[0x14] = psxBios_longjmp;
@@ -2243,11 +2244,11 @@ void psxBiosInit() {
 	biosA0[0x22] = psxBios_strcspn;
 	biosA0[0x23] = psxBios_strtok;
 	biosA0[0x24] = psxBios_strstr;
-    biosA0[0x25] = psxBios_toupper;
-    biosA0[0x26] = psxBios_tolower;
-    biosA0[0x27] = psxBios_bcopy;
-    biosA0[0x28] = psxBios_bzero;
-    biosA0[0x29] = psxBios_bcmp;
+	biosA0[0x25] = psxBios_toupper;
+	biosA0[0x26] = psxBios_tolower;
+	biosA0[0x27] = psxBios_bcopy;
+	biosA0[0x28] = psxBios_bzero;
+	biosA0[0x29] = psxBios_bcmp;
 	biosA0[0x2a] = psxBios_memcpy;
 	biosA0[0x2b] = psxBios_memset;
 	biosA0[0x2c] = psxBios_memmove;
@@ -2261,10 +2262,10 @@ void psxBiosInit() {
 	biosA0[0x34] = psxBios_free;
 	//biosA0[0x35] = psxBios_lsearch;
 	//biosA0[0x36] = psxBios_bsearch;
-    biosA0[0x37] = psxBios_calloc;
-    biosA0[0x38] = psxBios_realloc;
+	biosA0[0x37] = psxBios_calloc;
+	biosA0[0x38] = psxBios_realloc;
 	biosA0[0x39] = psxBios_InitHeap;
-    //biosA0[0x3a] = psxBios__exit;
+	//biosA0[0x3a] = psxBios__exit;
 	biosA0[0x3b] = psxBios_getchar;
 	biosA0[0x3c] = psxBios_putchar;	
 	//biosA0[0x3d] = psxBios_gets;
@@ -2273,14 +2274,14 @@ void psxBiosInit() {
 	biosA0[0x42] = psxBios_Load;
 	biosA0[0x43] = psxBios_Exec;
 	biosA0[0x44] = psxBios_FlushCache;
-    //biosA0[0x45] = psxBios_InstallInterruptHandler;
+	//biosA0[0x45] = psxBios_InstallInterruptHandler;
 	biosA0[0x46] = psxBios_GPU_dw;
 	biosA0[0x47] = psxBios_mem2vram;
 	biosA0[0x48] = psxBios_SendGPU;
 	biosA0[0x49] = psxBios_GPU_cw;
-    biosA0[0x4a] = psxBios_GPU_cwb;
+	biosA0[0x4a] = psxBios_GPU_cwb;
 	biosA0[0x4b] = psxBios_GPU_SendPackets;
-    biosA0[0x4c] = psxBios_sys_a0_4c;
+	biosA0[0x4c] = psxBios_sys_a0_4c;
 	biosA0[0x4d] = psxBios_GPU_GetGPUStatus;
 	//biosA0[0x4e] = psxBios_GPU_sync;	
 	//biosA0[0x4f] = psxBios_sys_a0_4f;
@@ -2400,10 +2401,10 @@ void psxBiosInit() {
 	biosB0[0x0b] = psxBios_TestEvent;
 	biosB0[0x0c] = psxBios_EnableEvent;
 	biosB0[0x0d] = psxBios_DisableEvent;
-    biosB0[0x0e] = psxBios_OpenTh;
-    biosB0[0x0f] = psxBios_CloseTh;
-    biosB0[0x10] = psxBios_ChangeTh;
-    //biosB0[0x11] = psxBios_psxBios_b0_11;
+	biosB0[0x0e] = psxBios_OpenTh;
+	biosB0[0x0f] = psxBios_CloseTh;
+	biosB0[0x10] = psxBios_ChangeTh;
+	//biosB0[0x11] = psxBios_psxBios_b0_11;
 	biosB0[0x12] = psxBios_InitPAD;
 	biosB0[0x13] = psxBios_StartPAD;
 	biosB0[0x14] = psxBios_StopPAD;
@@ -2412,7 +2413,7 @@ void psxBiosInit() {
 	biosB0[0x17] = psxBios_ReturnFromException;
 	biosB0[0x18] = psxBios_ResetEntryInt;
 	biosB0[0x19] = psxBios_HookEntryInt;
-    //biosB0[0x1a] = psxBios_sys_b0_1a;
+	//biosB0[0x1a] = psxBios_sys_b0_1a;
 	//biosB0[0x1b] = psxBios_sys_b0_1b;
 	//biosB0[0x1c] = psxBios_sys_b0_1c;
 	//biosB0[0x1d] = psxBios_sys_b0_1d;
@@ -2436,11 +2437,11 @@ void psxBiosInit() {
 	//biosB0[0x2f] = psxBios_sys_b0_2f;
 	//biosB0[0x30] = psxBios_sys_b0_30;
 	//biosB0[0x31] = psxBios_sys_b0_31;
-    biosB0[0x32] = psxBios_open;
+	biosB0[0x32] = psxBios_open;
 	biosB0[0x33] = psxBios_lseek;
 	biosB0[0x34] = psxBios_read;
 	biosB0[0x35] = psxBios_write;
-    biosB0[0x36] = psxBios_close;
+	biosB0[0x36] = psxBios_close;
 	//biosB0[0x37] = psxBios_ioctl;
 	//biosB0[0x38] = psxBios_exit;
 	//biosB0[0x39] = psxBios_sys_b0_39;
@@ -2492,7 +2493,7 @@ void psxBiosInit() {
 	biosC0[0x0a] = psxBios_ChangeClearRCnt;	
 	//biosC0[0x0b] = psxBios_SystemError;
 	//biosC0[0x0c] = psxBios_InitDefInt;
-    //biosC0[0x0d] = psxBios_sys_c0_0d;
+	//biosC0[0x0d] = psxBios_sys_c0_0d;
 	//biosC0[0x0e] = psxBios_sys_c0_0e;
 	//biosC0[0x0f] = psxBios_sys_c0_0f;
 	//biosC0[0x10] = psxBios_sys_c0_10;
@@ -2512,14 +2513,14 @@ void psxBiosInit() {
 /**/
 	base = 0x1000;
 	size = sizeof(EvCB) * 32;
-	Event = (void *)&psxR[base]; base+= size*6;
+	Event = (void *)&psxR[base]; base += size * 6;
 	memset(Event, 0, size * 6);
 	HwEV = Event;
 	EvEV = Event + 32;
-	RcEV = Event + 32*2;
-	UeEV = Event + 32*3;
-	SwEV = Event + 32*4;
-	ThEV = Event + 32*5;
+	RcEV = Event + 32 * 2;
+	UeEV = Event + 32 * 3;
+	SwEV = Event + 32 * 4;
+	ThEV = Event + 32 * 5;
 
 	ptr = (u32 *)&psxM[0x0874]; // b0 table
 	ptr[0] = SWAPu32(0x4c54 - 0x884);
@@ -2560,8 +2561,10 @@ void psxBiosInit() {
 	psxMu32ref(0x9010) = SWAPu32(0xac20cc00);
 
 	// fonts
-	memcpy(psxR + 0x66000, font_8140, sizeof(font_8140));
-	memcpy(psxR + 0x69d68, font_889f, sizeof(font_889f));
+	len = 0x80000 - 0x66000;
+	uncompress((Bytef *)(psxR + 0x66000), &len, font_8140, sizeof(font_8140));
+	len = 0x80000 - 0x69d68;
+	uncompress((Bytef *)(psxR + 0x69d68), &len, font_889f, sizeof(font_889f));
 
 	// memory size 2 MB
 	psxHu32ref(0x1060) = SWAPu32(0x00000b88);
