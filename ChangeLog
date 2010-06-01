@@ -3,6 +3,8 @@ Jun 1, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * gui/MemcardDlg.c: Fixed icon animation.
  * gui/ConfDlg.c: Minor text change.
  * win32/gui/ConfigurePlugins.c: Likewise.
+ * po/pcsx.pot, po/zh_CN.po, po/zh_TW.po, po/ru_RU.po, po/it.po, po/pt_BR.po:
+   Updated.
 
 May 31, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
