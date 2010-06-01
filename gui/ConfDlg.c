@@ -672,7 +672,7 @@ void UpdatePluginsBIOS() {
 	scan_bios_dir(Config.BiosDir);
 
 	// The BIOS list always contains the PCSX internal BIOS
-	add_bios_to_list(_("Internal HLE Bios"), "HLE");
+	add_bios_to_list(_("Use BIOS Simulation"), "HLE");
 }
 
 static void UpdatePluginsBIOS_UpdateGUI(GladeXML *xml) {
