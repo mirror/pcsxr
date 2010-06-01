@@ -4,12 +4,12 @@ Name=pcsx
 Ver=1
 IsCpp=1
 Type=0
-Compiler=-D__GNUWIN32__ -march=pentiumpro -D_M_IX86=600 -W -finline-functions -DWIN32 -DNDEBUG -D_WINDOWS -D_MBCS -D__WIN32__ -DPCSX_VERSION=\"1.5\" -D__i386__ -DENABLE_NLS -DPACKAGE=\"pcsx\"  -Dinline=__inline___@@_
+Compiler=-D__GNUWIN32__ -march=pentiumpro -D_M_IX86=600 -W -finline-functions -fomit-frame-pointer -DWIN32 -DNDEBUG -D_WINDOWS -D_MBCS -D__WIN32__ -DPCSX_VERSION=\"1.5\" -D__i386__ -DENABLE_NLS -DPACKAGE=\"pcsx\"  -Dinline=__inline___@@_
 CppCompiler=-D__GNUWIN32__ -march=pentiumpro -D_M_IX86=600 -W -finline-functions -DWIN32 -DNDEBUG -D_WINDOWS -D_MBCS -D__WIN32__ -D_MSC_VER_ -DPCSX_VERSION=\"1.5\" -D__i386__ -DENABLE_NLS -DPACKAGE=\"pcsx\"_@@_
 Includes=.;./zlib;../libpcsxcore;./glue;./gui;./intl
 Linker=-lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32 -lcomctl32 -lwsock32_@@_
 Libs=
-UnitCount=113
+UnitCount=114
 Folders=glue,glue/sys,gui,intl,libpcsxcore,libpcsxcore/ix86,zlib
 ObjFiles=
 PrivateResource=pcsx_private.rc
@@ -1169,6 +1169,16 @@ BuildCmd=$(CC) -c psxcommon.c -o psxcommon.o $(CFLAGS)
 
 [Unit113]
 FileName=..\libpcsxcore\gte_divider.h
+CompileCpp=1
+Folder=libpcsxcore
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit114]
+FileName=..\libpcsxcore\sjisfont.h
 CompileCpp=1
 Folder=libpcsxcore
 Compile=1
