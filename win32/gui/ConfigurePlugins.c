@@ -216,7 +216,7 @@ BOOL OnConfigurePluginsDialog(HWND hW) {
 
 	lp = (char *)malloc(strlen("HLE") + 1);
 	sprintf(lp, "HLE");
-	i = ComboBox_AddString(hWC_BIOS, _("Use BIOS Simulation"));
+	i = ComboBox_AddString(hWC_BIOS, _("Simulate PSX BIOS"));
 	ComboBox_SetItemData(hWC_BIOS, i, lp);
 	if (stricmp(Config.Bios, lp)==0)
 		ComboBox_SetCurSel(hWC_BIOS, i);
