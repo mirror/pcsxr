@@ -349,7 +349,7 @@ msgstr "十六進制"
 #: ../win32/gui/ConfigurePlugins.c:219
 #: ../gui/ConfDlg.c:675
 msgid "Simulate PSX BIOS"
-msgstr "仿真 PSX BIOS"
+msgstr "模擬 PSX BIOS"
 
 #: ../win32/gui/ConfigurePlugins.c:305
 msgid "Configuration not OK!"
