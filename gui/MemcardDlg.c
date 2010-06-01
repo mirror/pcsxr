@@ -31,8 +31,8 @@
 
 #define MAX_MEMCARD_BLOCKS 15
 
-static int quit;
-static int currentIcon = 0;
+static gboolean quit;
+static int currentIcon;
 
 McdBlock Blocks[2][MAX_MEMCARD_BLOCKS];	// Assuming 2 cards, 15 blocks?
 int IconC[2][MAX_MEMCARD_BLOCKS];
@@ -265,9 +265,10 @@ static void UpdateListItems(int mcd, GtkWidget *widget) {
 		else
 			state = _("Free");
 
-		pIcon = Info->Icon;
-		if (Info->IconCount > 1 && currentIcon <= Info->IconCount) {
-			pIcon = &Info->Icon[currentIcon * 16 * 16];
+		if (Info->IconCount > 0) {
+			pIcon = &Info->Icon[(currentIcon % Info->IconCount) * 16 * 16];
+		} else {
+			pIcon = Info->Icon;
 		}
 
 		pixbuf = SetIcon(dialog, pIcon, i + 1);
@@ -288,12 +289,6 @@ static void UpdateListItems(int mcd, GtkWidget *widget) {
 		gtk_tree_model_iter_next(GTK_TREE_MODEL(store), &iter);
 	}
 
-	currentIcon++;
-	if( currentIcon > 2 )
-	{
-		currentIcon = 0;
-	}
-	
 	gtk_widget_show(List);
 
 	OnTreeSelectionChanged(gtk_tree_view_get_selection(GTK_TREE_VIEW(List)), (gpointer)mcd);
@@ -314,7 +309,7 @@ static void UpdateMcdDlg(GtkWidget *widget) {
 }
 
 static void OnMcd_Close(GtkDialog *dialog, gint arg1, gpointer user_data) {
-	quit = 1;
+	quit = TRUE;
 	SaveConfig();
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
@@ -644,13 +639,13 @@ static void OnTreeSelectionChanged(GtkTreeSelection *selection, gpointer user_da
 	}
 }
 
-gboolean updateFunc(gpointer data)
-{
-	if( quit ) return 0;
+gboolean updateFunc(gpointer data) {
+	if (quit) return FALSE;
+	currentIcon++;
 	UpdateListItems(1, GtkCList_McdList1);
 	UpdateListItems(2, GtkCList_McdList2);
-	g_timeout_add( 333, updateFunc, 0 );
-	return 0;
+	g_timeout_add(333, updateFunc, 0);
+	return FALSE;
 }
 
 void OnConf_Mcds() {
@@ -751,8 +746,10 @@ void OnConf_Mcds() {
 			GTK_SIGNAL_FUNC(OnMemcardDelete), (gpointer)2, NULL, G_CONNECT_AFTER);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), FALSE);
 
-	quit = 0;
-    g_timeout_add( 1, updateFunc, 0 );
-	
+	quit = FALSE;
+	currentIcon = 0;
+
+    g_timeout_add(1, updateFunc, 0);
+
 	while (gtk_events_pending()) {  gtk_main_iteration(); }
 }

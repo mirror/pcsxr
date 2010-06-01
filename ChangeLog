@@ -1,3 +1,7 @@
+Jun 1, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * gui/MemcardDlg.c: Fixed icon animation.
+
 May 31, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/psxbios.c: Implemented Krom2RawAdd().
