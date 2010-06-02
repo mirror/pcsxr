@@ -16,7 +16,7 @@ INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 bin_PROGRAMS = cfgDFInput
 cfgDFInput_SOURCES = cfg-gtk2.c pad.h
 cfgDFInput_LDADD = $(GTK2_LIBS) $(GLADE2_LIBS)
-cfgDFInput_LDFLAGS = $(SDL_LIBS)
+cfgDFInput_LDFLAGS = $(SDL_LIBS) -L/usr/X11R6/lib64 -L/usr/X11R6/lib -lX11
 
 glade_DATA = dfinput.glade2
 gladedir = $(datadir)/psemu/

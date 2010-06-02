@@ -20,5 +20,5 @@ pcsx_SOURCES = \
 	AboutDlg.c
 
 pcsx_LDADD = \
-	$(GTK2_LIBS) $(GLADE2_LIBS) -lpthread -lz -lm -lXext -lXtst \
+	$(GTK2_LIBS) $(GLADE2_LIBS) -lpthread -ldl -lz -lm -lXext -lXtst \
 	../libpcsxcore/libpcsxcore.a

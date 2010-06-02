@@ -5,6 +5,8 @@ Jun 2, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * libpcsxcore/psxbios.c: Likewise.
  * libpcsxcore/psxdma.c: Likewise.
  * libpcsxcore/psxhw.c: Likewise.
+ * gui/Makefile.am: Added -ldl.
+ * plugins/dfinput/Makefile.am: Added -lX11 to cfgDFInput_LDFLAGS.
 
 Jun 1, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
