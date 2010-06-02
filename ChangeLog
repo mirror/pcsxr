@@ -1,3 +1,11 @@
+Jun 2, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * gui/MemcardDlg.c: Use unsigned for currentIcon.
+ * libpcsxcore/cdrom.c: Use %x instead of %lx.
+ * libpcsxcore/psxbios.c: Likewise.
+ * libpcsxcore/psxdma.c: Likewise.
+ * libpcsxcore/psxhw.c: Likewise.
+
 Jun 1, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * gui/MemcardDlg.c: Fixed icon animation.

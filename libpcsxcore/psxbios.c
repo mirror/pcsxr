@@ -391,7 +391,7 @@ void psxBios_strncat() { // 0x16
 	s32 n = a2;
 
 #ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s: %s (%lx), %s (%lx), %d\n", biosA0n[0x16], Ra0, a0, Ra1, a1, a2);
+	PSXBIOS_LOG("psxBios_%s: %s (%x), %s (%x), %d\n", biosA0n[0x16], Ra0, a0, Ra1, a1, a2);
 #endif
 
 	while (*p1++);
@@ -410,7 +410,7 @@ void psxBios_strcmp() { // 0x17
 	char *p1 = (char *)Ra0, *p2 = (char *)Ra1;
 
 #ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s: %s (%lx), %s (%lx)\n", biosA0n[0x17], Ra0, a0, Ra1, a1);
+	PSXBIOS_LOG("psxBios_%s: %s (%x), %s (%x)\n", biosA0n[0x17], Ra0, a0, Ra1, a1);
 #endif
 
 	while (*p1 == *p2++) {
@@ -430,7 +430,7 @@ void psxBios_strncmp() { // 0x18
 	s32 n = a2;
 
 #ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s: %s (%lx), %s (%lx), %d\n", biosA0n[0x18], Ra0, a0, Ra1, a1, a2);
+	PSXBIOS_LOG("psxBios_%s: %s (%x), %s (%x), %d\n", biosA0n[0x18], Ra0, a0, Ra1, a1, a2);
 #endif
 
 	while (--n >= 0 && *p1 == *p2++) {
@@ -836,7 +836,7 @@ void psxBios_malloc() { // 0x33
 
 	// exit on uninitialized heap
 	if (chunk == NULL) {
-		SysPrintf("malloc %lx,%lx: Uninitialized Heap!\n", v0, a0);
+		SysPrintf("malloc %x,%x: Uninitialized Heap!\n", v0, a0);
 		v0 = 0;
 		pc0 = ra;
 		return;
@@ -850,7 +850,7 @@ void psxBios_malloc() { // 0x33
 	}
 
 	// catch out of memory
-	if(chunk >= heap_end) { SysPrintf("malloc %lx,%lx: Out of memory error!\n", v0, a0); v0 = 0; pc0 = ra; return; }
+	if(chunk >= heap_end) { SysPrintf("malloc %x,%x: Out of memory error!\n", v0, a0); v0 = 0; pc0 = ra; return; }
 	
 	// allocate memory
 	if(dsize == csize) {
@@ -867,7 +867,7 @@ void psxBios_malloc() { // 0x33
 	// return pointer to allocated memory
 	v0 = ((unsigned long)chunk - (unsigned long)psxM) + 4;
 	v0|= 0x80000000;
-	SysPrintf ("malloc %lx,%lx\n", v0, a0);
+	SysPrintf ("malloc %x,%x\n", v0, a0);
 	pc0 = ra;
 }
 
@@ -877,7 +877,7 @@ void psxBios_free() { // 0x34
 	PSXBIOS_LOG("psxBios_%s\n", biosA0n[0x34]);
 #endif
 
-	SysPrintf("free %lx: %lx bytes\n", a0, *(u32*)(Ra0-4));
+	SysPrintf("free %x: %x bytes\n", a0, *(u32*)(Ra0-4));
 
 	*(u32*)(Ra0-4) |= 1;	// set chunk to free
 	pc0 = ra;
@@ -924,7 +924,7 @@ void psxBios_InitHeap() { // 0x39
 	heap_end = (u32 *)((u8 *)heap_addr + size);
 	*heap_addr = SWAP32(size | 1);
 
-	SysPrintf("InitHeap %lx,%lx : %lx %lx\n",a0,a1, (uptr)heap_addr-(uptr)psxM, size);
+	SysPrintf("InitHeap %x,%x : %x %x\n",a0,a1, (uptr)heap_addr-(uptr)psxM, size);
 
 	pc0 = ra;
 }
@@ -2171,7 +2171,7 @@ void psxBios_ChangeClearRCnt() { // 0a
 
 void psxBios_dummy() { 
 #ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("unk %lx call: %lx\n", pc0 & 0x1fffff, t1);
+	PSXBIOS_LOG("unk %x call: %x\n", pc0 & 0x1fffff, t1);
 #endif
 	pc0 = ra; 
 }

@@ -38,7 +38,7 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 	switch (chcr) {
 		case 0x01000201: //cpu to spu transfer
 #ifdef PSXDMA_LOG
-			PSXDMA_LOG("*** DMA4 SPU - mem2spu *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
+			PSXDMA_LOG("*** DMA4 SPU - mem2spu *** %x addr = %x size = %x\n", chcr, madr, bcr);
 #endif
 			ptr = (u16 *)PSXM(madr);
 			if (ptr == NULL) {
@@ -53,7 +53,7 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 
 		case 0x01000200: //spu to cpu transfer
 #ifdef PSXDMA_LOG
-			PSXDMA_LOG("*** DMA4 SPU - spu2mem *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
+			PSXDMA_LOG("*** DMA4 SPU - spu2mem *** %x addr = %x size = %x\n", chcr, madr, bcr);
 #endif
 			ptr = (u16 *)PSXM(madr);
 			if (ptr == NULL) {
@@ -69,7 +69,7 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 
 #ifdef PSXDMA_LOG
 		default:
-			PSXDMA_LOG("*** DMA4 SPU - unknown *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
+			PSXDMA_LOG("*** DMA4 SPU - unknown *** %x addr = %x size = %x\n", chcr, madr, bcr);
 			break;
 #endif
 	}
@@ -85,7 +85,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 	switch(chcr) {
 		case 0x01000200: // vram2mem
 #ifdef PSXDMA_LOG
-			PSXDMA_LOG("*** DMA2 GPU - vram2mem *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
+			PSXDMA_LOG("*** DMA2 GPU - vram2mem *** %x addr = %x size = %x\n", chcr, madr, bcr);
 #endif
 			ptr = (u32 *)PSXM(madr);
 			if (ptr == NULL) {
@@ -101,7 +101,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 
 		case 0x01000201: // mem2vram
 #ifdef PSXDMA_LOG
-			PSXDMA_LOG("*** DMA 2 - GPU mem2vram *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
+			PSXDMA_LOG("*** DMA 2 - GPU mem2vram *** %x addr = %x size = %x\n", chcr, madr, bcr);
 #endif
 			ptr = (u32 *)PSXM(madr);
 			if (ptr == NULL) {
@@ -117,14 +117,14 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 
 		case 0x01000401: // dma chain
 #ifdef PSXDMA_LOG
-			PSXDMA_LOG("*** DMA 2 - GPU dma chain *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
+			PSXDMA_LOG("*** DMA 2 - GPU dma chain *** %x addr = %x size = %x\n", chcr, madr, bcr);
 #endif
 			GPU_dmaChain((u32 *)psxM, madr & 0x1fffff);
 			break;
 
 #ifdef PSXDMA_LOG
 		default:
-			PSXDMA_LOG("*** DMA 2 - GPU unknown *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
+			PSXDMA_LOG("*** DMA 2 - GPU unknown *** %x addr = %x size = %x\n", chcr, madr, bcr);
 			break;
 #endif
 	}
@@ -142,7 +142,7 @@ void psxDma6(u32 madr, u32 bcr, u32 chcr) {
 	u32 *mem = (u32 *)PSXM(madr);
 
 #ifdef PSXDMA_LOG
-	PSXDMA_LOG("*** DMA6 OT *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
+	PSXDMA_LOG("*** DMA6 OT *** %x addr = %x size = %x\n", chcr, madr, bcr);
 #endif
 
 	if (chcr == 0x11000002) {
@@ -164,7 +164,7 @@ void psxDma6(u32 madr, u32 bcr, u32 chcr) {
 #ifdef PSXDMA_LOG
 	else {
 		// Unknown option
-		PSXDMA_LOG("*** DMA6 OT - unknown *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
+		PSXDMA_LOG("*** DMA6 OT - unknown *** %x addr = %x size = %x\n", chcr, madr, bcr);
 	}
 #endif
 

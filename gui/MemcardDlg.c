@@ -32,7 +32,7 @@
 #define MAX_MEMCARD_BLOCKS 15
 
 static gboolean quit;
-static int currentIcon;
+static unsigned int currentIcon;
 
 McdBlock Blocks[2][MAX_MEMCARD_BLOCKS];	// Assuming 2 cards, 15 blocks?
 int IconC[2][MAX_MEMCARD_BLOCKS];

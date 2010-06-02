@@ -1084,7 +1084,7 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 	u8 *ptr;
 
 #ifdef CDR_LOG
-	CDR_LOG("psxDma3() Log: *** DMA 3 *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
+	CDR_LOG("psxDma3() Log: *** DMA 3 *** %x addr = %x size = %x\n", chcr, madr, bcr);
 #endif
 
 	switch (chcr) {
@@ -1112,7 +1112,7 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 			break;
 		default:
 #ifdef CDR_LOG
-			CDR_LOG("psxDma3() Log: Unknown cddma %lx\n", chcr);
+			CDR_LOG("psxDma3() Log: Unknown cddma %x\n", chcr);
 #endif
 			break;
 	}
