@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-01 11:04+0800\n"
+"POT-Creation-Date: 2010-06-03 08:39+0800\n"
 "PO-Revision-Date: 2010-03-15 16:00+0200\n"
 "Last-Translator: Giovanni Scafora <giovanni@archlinux.org>\n"
 "Language-Team: Arch Linux Italian Team <giovanni@archlinux.org>\n"
@@ -308,8 +308,8 @@ msgstr "Decimale"
 msgid "Hexadecimal"
 msgstr "Esadecimale"
 
-#: ../win32/gui/ConfigurePlugins.c:219 ../gui/ConfDlg.c:675
-msgid "Simulate PSX BIOS"
+#: ../win32/gui/ConfigurePlugins.c:219
+msgid "Simulate Psx Bios"
 msgstr ""
 
 #: ../win32/gui/ConfigurePlugins.c:305
@@ -1107,6 +1107,10 @@ msgstr "Impossibile aprire la cartella del BIOS: '%s'\n"
 #, c-format
 msgid "Could not open directory: '%s'\n"
 msgstr "Impossibile aprire la cartella: '%s'\n"
+
+#: ../gui/ConfDlg.c:675
+msgid "Simulate PSX BIOS"
+msgstr ""
 
 #: ../gui/DebugMemory.c:103 ../data/pcsx.glade2:3178
 msgid "Memory Dump"

@@ -203,15 +203,15 @@ void ApplyCheats() {
 					break;
 
 				case CHEAT_CONST16:
-					psxMu16ref(addr) = val;
+					psxMu16ref(addr) = SWAPu16(val);
 					break;
 
 				case CHEAT_INC16:
-					psxMu16ref(addr) += val;
+					psxMu16ref(addr) = SWAPu16(psxMu16(addr) + val);
 					break;
 
 				case CHEAT_DEC16:
-					psxMu16ref(addr) -= val;
+					psxMu16ref(addr) = SWAPu16(psxMu16(addr) - val);
 					break;
 
 				case CHEAT_INC8:
@@ -240,7 +240,7 @@ void ApplyCheats() {
 					}
 					else if (type == CHEAT_CONST16) {
 						for (k = 0; k < ((addr >> 8) & 0xFF); k++) {
-							psxMu16ref(taddr) = val;
+							psxMu16ref(taddr) = SWAPu16(val);
 							taddr += (s8)(addr & 0xFF);
 							val += (s8)(CheatCodes[j - 1].Val & 0xFF);
 						}

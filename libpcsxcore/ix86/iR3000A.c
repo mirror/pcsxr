@@ -316,10 +316,10 @@ void iLogM32(u32 mem) {
 static void iDumpRegs() {
 	int i, j;
 
-	printf("%lx %lx\n", psxRegs.pc, psxRegs.cycle);
-	for (i=0; i<4; i++) {
-		for (j=0; j<8; j++)
-			printf("%lx ", psxRegs.GPR.r[j*i]);
+	printf("%x %x\n", psxRegs.pc, psxRegs.cycle);
+	for (i = 0; i < 4; i++) {
+		for (j = 0; j < 8; j++)
+			printf("%x ", psxRegs.GPR.r[j * i]);
 		printf("\n");
 	}
 }
@@ -330,7 +330,7 @@ void iDumpBlock(char *ptr) {
 
 	SysPrintf("dump1 %x:%x, %x\n", psxRegs.pc, pc, psxRegs.cycle);
 
-	for (i = psxRegs.pc; i < pc; i+=4)
+	for (i = psxRegs.pc; i < pc; i += 4)
 		SysPrintf("%s\n", disR3000AF(PSXMu32(i), i));
 
 	fflush(stdout);
@@ -378,22 +378,22 @@ static void recRecompile();
 static int recInit() {
 	int i;
 
-	psxRecLUT = (u32*) malloc(0x010000 * 4);
+	psxRecLUT = (u32 *)malloc(0x010000 * 4);
 
 	recMem = mmap(0, RECMEM_SIZE + 0x1000,
 		PROT_EXEC | PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 
-	recRAM = (char*) malloc(0x200000);
-	recROM = (char*) malloc(0x080000);
+	recRAM = (char *)malloc(0x200000);
+	recROM = (char *)malloc(0x080000);
 	if (recRAM == NULL || recROM == NULL || recMem == NULL || psxRecLUT == NULL) {
 		SysMessage("Error allocating memory"); return -1;
 	}
 
-	for (i=0; i<0x80; i++) psxRecLUT[i + 0x0000] = (u32)&recRAM[(i & 0x1f) << 16];
+	for (i = 0; i < 0x80; i++) psxRecLUT[i + 0x0000] = (u32)&recRAM[(i & 0x1f) << 16];
 	memcpy(psxRecLUT + 0x8000, psxRecLUT, 0x80 * 4);
 	memcpy(psxRecLUT + 0xa000, psxRecLUT, 0x80 * 4);
 
-	for (i=0; i<0x08; i++) psxRecLUT[i + 0xbfc0] = (u32)&recROM[i << 16];
+	for (i = 0; i < 0x08; i++) psxRecLUT[i + 0xbfc0] = (u32)&recROM[i << 16];
 
 	return 0;
 }

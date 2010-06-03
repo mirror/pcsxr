@@ -344,10 +344,10 @@ void iLogM32(u32 mem) {
 static void iDumpRegs() {
 	int i, j;
 
-	printf("%lx %lx\n", psxRegs.pc, psxRegs.cycle);
-	for (i=0; i<4; i++) {
-		for (j=0; j<8; j++)
-			printf("%lx ", psxRegs.GPR.r[j*i]);
+	printf("%x %x\n", psxRegs.pc, psxRegs.cycle);
+	for (i = 0; i < 4; i++) {
+		for (j = 0; j < 8; j++)
+			printf("%x ", psxRegs.GPR.r[j*i]);
 		printf("\n");
 	}
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-01 11:04+0800\n"
+"POT-Creation-Date: 2010-06-03 08:39+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -293,8 +293,8 @@ msgstr ""
 msgid "Hexadecimal"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:219 ../gui/ConfDlg.c:675
-msgid "Simulate PSX BIOS"
+#: ../win32/gui/ConfigurePlugins.c:219
+msgid "Simulate Psx Bios"
 msgstr ""
 
 #: ../win32/gui/ConfigurePlugins.c:305
@@ -1067,6 +1067,10 @@ msgstr ""
 #: ../gui/ConfDlg.c:611 ../gui/ConfDlg.c:704 ../gui/LnxMain.c:168
 #, c-format
 msgid "Could not open directory: '%s'\n"
+msgstr ""
+
+#: ../gui/ConfDlg.c:675
+msgid "Simulate PSX BIOS"
 msgstr ""
 
 #: ../gui/DebugMemory.c:103 ../data/pcsx.glade2:3178

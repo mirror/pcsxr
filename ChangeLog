@@ -1,3 +1,16 @@
+Jun 3, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/cheat.c: Fixed endianness issue (not tested).
+ * libpcsxcore/cdrom.c: Changed CDR interrupt timing value so that it behaves
+   the same as old revisions. Not sure if it breaks or unbreaks anything.
+ * libpcsxcore/psxbios.c: Silenced some GCC warnings.
+ * libpcsxcore/psxcounters.c: Likewise.
+ * libpcsxcore/misc.c: Bumped savestate version.
+ * libpcsxcore/ix86/iR3000A.c: Use %x instead of %lx.
+ * libpcsxcore/ix86_64/iR3000A-64.c: Likewise.
+ * po/zh_CN.po, po/zh_TW.po: Updated ("PS" seems to be more common than "PSX"
+   in Asian regions).
+
 Jun 2, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * gui/MemcardDlg.c: Use unsigned for currentIcon.

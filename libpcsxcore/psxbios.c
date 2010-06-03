@@ -2535,7 +2535,7 @@ void psxBiosInit() {
 	psxMu32ref(0x0150) = SWAPu32(0x160);
 	psxMu32ref(0x0154) = SWAPu32(0x320);
 	psxMu32ref(0x0160) = SWAPu32(0x248);
-	strcpy(&psxM[0x248], "bu");
+	strcpy((char *)&psxM[0x248], "bu");
 /*	psxMu32ref(0x0ca8) = SWAPu32(0x1f410004);
 	psxMu32ref(0x0cf0) = SWAPu32(0x3c020000);
 	psxMu32ref(0x0cf4) = SWAPu32(0x2442641c);
@@ -2768,25 +2768,25 @@ v0=1;	// HDHOSHY experimental patch: Spongebob, Coldblood, fearEffect, Medievil2
 #define bfreezes(ptr) bfreeze(ptr, sizeof(ptr))
 #define bfreezel(ptr) bfreeze(ptr, sizeof(*ptr))
 
-#define bfreezepsxMptr(ptr) { \
+#define bfreezepsxMptr(ptr, type) { \
 	if (Mode == 1) { \
-		if (ptr) psxRu32ref(base) = SWAPu32((uintptr_t)ptr - (uintptr_t)psxM); \
+		if (ptr) psxRu32ref(base) = SWAPu32((s8 *)(ptr) - psxM); \
 		else psxRu32ref(base) = 0; \
 	} else { \
-		if (psxRu32(base)) *(u8 **)&ptr = (u8 *)(psxM + psxRu32(base)); \
-		else ptr = NULL; \
+		if (psxRu32(base) != 0) ptr = (type *)(psxM + psxRu32(base)); \
+		else (ptr) = NULL; \
 	} \
-	base += sizeof(uintptr_t); \
+	base += sizeof(u32); \
 }
 
 void psxBiosFreeze(int Mode) {
 	u32 base = 0x40000;
 
-	bfreezepsxMptr(jmp_int);
-	bfreezepsxMptr(pad_buf);
-	bfreezepsxMptr(pad_buf1);
-	bfreezepsxMptr(pad_buf2);
-	bfreezepsxMptr(heap_addr);
+	bfreezepsxMptr(jmp_int, u32);
+	bfreezepsxMptr(pad_buf, int);
+	bfreezepsxMptr(pad_buf1, char);
+	bfreezepsxMptr(pad_buf2, char);
+	bfreezepsxMptr(heap_addr, u32);
 	bfreezel(&pad_buf1len);
 	bfreezel(&pad_buf2len);
 	bfreezes(regs);

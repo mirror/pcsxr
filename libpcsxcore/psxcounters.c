@@ -89,7 +89,7 @@ void setIrq( u32 irq )
 }
 
 static
-void verboseLog( s32 level, const s8 *str, ... )
+void verboseLog( s32 level, const char *str, ... )
 {
     if( level <= VerboseLevel )
     {

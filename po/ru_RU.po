@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-01 11:04+0800\n"
+"POT-Creation-Date: 2010-06-03 08:39+0800\n"
 "PO-Revision-Date: 2010-05-14 06:01+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -294,8 +294,8 @@ msgstr "Десятичное"
 msgid "Hexadecimal"
 msgstr "Шестнадцатеричное"
 
-#: ../win32/gui/ConfigurePlugins.c:219 ../gui/ConfDlg.c:675
-msgid "Simulate PSX BIOS"
+#: ../win32/gui/ConfigurePlugins.c:219
+msgid "Simulate Psx Bios"
 msgstr ""
 
 #: ../win32/gui/ConfigurePlugins.c:305
@@ -1073,6 +1073,10 @@ msgstr "Не удалось открыть каталог с биосами BIOS
 #, c-format
 msgid "Could not open directory: '%s'\n"
 msgstr "Не удалось открыть каталог: '%s'\n"
+
+#: ../gui/ConfDlg.c:675
+msgid "Simulate PSX BIOS"
+msgstr ""
 
 #: ../gui/DebugMemory.c:103 ../data/pcsx.glade2:3178
 msgid "Memory Dump"
