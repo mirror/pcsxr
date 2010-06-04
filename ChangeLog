@@ -5,6 +5,7 @@ Jun 4, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
    fix.
  * win32/gui/WndMain.c: Changed language code corresponding to the ones in
    source tree.
+ * libpcsxcore/psxmem.c: Minor comment fix.
 
 Jun 3, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

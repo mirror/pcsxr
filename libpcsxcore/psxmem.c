@@ -35,7 +35,7 @@
 s8 *psxM = NULL; // Kernel & User Memory (2 Meg)
 s8 *psxP = NULL; // Parallel Port (64K)
 s8 *psxR = NULL; // BIOS ROM (512K)
-s8 *psxH = NULL; // Hardware Registers (8K)
+s8 *psxH = NULL; // Scratch Pad (1K) & Hardware Registers (8K)
 
 u8 **psxMemWLUT = NULL;
 u8 **psxMemRLUT = NULL;
@@ -97,6 +97,7 @@ int psxMemInit() {
 
 // MemW
 	for (i = 0; i < 0x80; i++) psxMemWLUT[i + 0x0000] = (u8 *)&psxM[(i & 0x1f) << 16];
+
 	memcpy(psxMemWLUT + 0x8000, psxMemWLUT, 0x80 * sizeof(void *));
 	memcpy(psxMemWLUT + 0xa000, psxMemWLUT, 0x80 * sizeof(void *));
 
