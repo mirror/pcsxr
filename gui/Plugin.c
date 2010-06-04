@@ -75,8 +75,6 @@ void gpuShowPic() {
 	}
 }
 
-
-
 void KeyStateSave(int i) {
 	gchar *state_filename;
 
@@ -93,10 +91,14 @@ void KeyStateLoad(int i) {
 	state_load (state_filename);
 
 	g_free (state_filename);
+
+	// HACKHACK: prevent crash when using recompiler due to execution not
+	// returned from compiled code. This WILL cause memory leak, however a
+	// large amount of refactor is needed for a proper fix.
+	if (Config.Cpu == CPU_DYNAREC) psxCpu->Execute();
 }
 
-
-static short modctrl=0, modalt=0;
+static short modctrl = 0, modalt = 0;
 
 /* Handle keyboard keystrokes */
 void PADhandleKey(int key) {
@@ -178,7 +180,7 @@ void PADhandleKey(int key) {
 			state_save (state_filename);
 
 			g_free (state_filename);
-		
+
 			if (ShowPic) { ShowPic = 0; gpuShowPic(); }
 
 			break;
@@ -191,8 +193,14 @@ void PADhandleKey(int key) {
 		case XK_F3:
 			state_filename = get_state_filename (StatesC);
 			state_load (state_filename);
-		
+
 			g_free (state_filename);
+
+			// HACKHACK: prevent crash when using recompiler due to execution not
+			// returned from compiled code. This WILL cause memory leak, however a
+			// large amount of refactor is needed for a proper fix.
+			if (Config.Cpu == CPU_DYNAREC) psxCpu->Execute();
+
 			break;
 		case XK_F4:
 			gpuShowPic();

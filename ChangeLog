@@ -1,3 +1,9 @@
+Jun 4, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * gui/Plugin.c: Hack-fixed the bug which causes crash when loading state
+   with dynarec CPU core. A large amount of refactor is needed for a proper
+   fix.
+
 Jun 3, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/cheat.c: Fixed endianness issue (not tested).
