@@ -1,3 +1,7 @@
+Jun 6, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/sio.c: Fixed: 'y' and 'z' not converted to half-width.
+
 Jun 4, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * gui/Plugin.c: Hack-fixed the bug which causes crash when loading state

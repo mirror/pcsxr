@@ -697,7 +697,7 @@ void GetMcdBlockInfo(int mcd, int block, McdBlock *Info) {
 		if (!c) break;
 
 		// Convert ASCII characters to half-width
-		if (c >= 0x8281 && c <= 0x8298)
+		if (c >= 0x8281 && c <= 0x829A)
 			c = (c - 0x8281) + 'a';
 		else if (c >= 0x824F && c <= 0x827A)
 			c = (c - 0x824F) + '0';
