@@ -65,16 +65,16 @@ typedef struct {
 	unsigned char ResultReady;
 	unsigned char Cmd;
 	unsigned char Readed;
-	unsigned long Reading;
+	u32 Reading;
 
 	unsigned char ResultTN[6];
 	unsigned char ResultTD[4];
 	unsigned char SetSector[4];
 	unsigned char SetSectorSeek[4];
 	unsigned char Track;
-	int Play;
+	boolean Play, Muted;
 	int CurTrack;
-	int Mode, File, Channel, Muted;
+	int Mode, File, Channel;
 	int Reset;
 	int RErr;
 	int FirstSector;
@@ -84,9 +84,9 @@ typedef struct {
 	int Init;
 
 	unsigned char Irq;
-	unsigned long eCycle;
+	u32 eCycle;
 
-	int Seeked;
+	boolean Seeked;
 } cdrStruct;
 
 extern cdrStruct cdr;

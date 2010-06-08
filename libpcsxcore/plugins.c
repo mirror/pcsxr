@@ -67,6 +67,8 @@ CDRgetBufferSub       CDR_getBufferSub;
 CDRconfigure          CDR_configure;
 CDRabout              CDR_about;
 CDRsetfilename        CDR_setfilename;
+CDRreadCDDA           CDR_readCDDA;
+CDRgetTE              CDR_getTE;
 
 SPUconfigure          SPU_configure;
 SPUabout              SPU_about;
@@ -273,6 +275,8 @@ static int LoadCDRplugin(const char *CDRdll) {
 	LoadCdrSym0(test, "CDRtest");
 	LoadCdrSym0(about, "CDRabout");
 	LoadCdrSym0(setfilename, "CDRsetfilename");
+	LoadCdrSymN(readCDDA, "CDRreadCDDA");
+	LoadCdrSymN(getTE, "CDRgetTE");
 
 	return 0;
 }

@@ -120,7 +120,7 @@ static struct SubQ *subq;
 	if (cdr.Play) { \
 		if (!Config.Cdda) CDR_stop(); \
 		cdr.StatP &= ~0x80; \
-		cdr.Play = 0; \
+		cdr.Play = FALSE; \
 	} \
 }
 
@@ -429,7 +429,7 @@ void cdrInterrupt() {
         	cdr.Result[0] = cdr.StatP;
 			cdr.StatP |= 0x40;
         	cdr.Stat = Acknowledge;
-			cdr.Seeked = 1;
+			cdr.Seeked = TRUE;
 			AddIrqQueue(CdlSeekL + 0x20, 0x1000);
 			break;
 
@@ -548,9 +548,9 @@ void cdrInterrupt() {
 			SetResultSize(1);
 			cdr.StatP |= 0x2;
         	cdr.Result[0] = cdr.StatP;
-			if (cdr.Seeked == 0) {
-				cdr.Seeked = 1;
-				cdr.StatP|= 0x40;
+			if (!cdr.Seeked) {
+				cdr.Seeked = TRUE;
+				cdr.StatP |= 0x40;
 			}
 			cdr.StatP |= 0x20;
         	cdr.Stat = Acknowledge;
@@ -790,7 +790,7 @@ void cdrWrite1(unsigned char rt) {
 
     	case CdlSetloc:
 			StopReading();
-			cdr.Seeked = 0;
+			cdr.Seeked = FALSE;
         	for (i = 0; i < 3; i++)
 				cdr.SetSector[i] = btoi(cdr.Param[i]);
         	cdr.SetSector[3] = 0;
@@ -817,7 +817,7 @@ void cdrWrite1(unsigned char rt) {
 			} else if (!Config.Cdda) {
 				CDR_play(cdr.SetSector);
 			}
-    		cdr.Play = 1;
+    		cdr.Play = TRUE;
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr; 
     		AddIrqQueue(cdr.Cmd, 0x1000);
@@ -881,14 +881,14 @@ void cdrWrite1(unsigned char rt) {
         	break;
 
     	case CdlMute:
-        	cdr.Muted = 1;
+        	cdr.Muted = TRUE;
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr; 
     		AddIrqQueue(cdr.Cmd, 0x1000);
         	break;
 
     	case CdlDemute:
-        	cdr.Muted = 0;
+        	cdr.Muted = FALSE;
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr; 
     		AddIrqQueue(cdr.Cmd, 0x1000);
