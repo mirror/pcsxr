@@ -228,7 +228,6 @@ long CALLBACK CDR__getStatus(struct CdrStat *stat) {
 }
 
 char* CALLBACK CDR__getDriveLetter(void) { return NULL; }
-unsigned char* CALLBACK CDR__getBufferSub(void) { return NULL; }
 long CALLBACK CDR__configure(void) { return 0; }
 long CALLBACK CDR__test(void) { return 0; }
 void CALLBACK CDR__about(void) {}
@@ -270,7 +269,7 @@ static int LoadCDRplugin(const char *CDRdll) {
 	LoadCdrSym0(stop, "CDRstop");
 	LoadCdrSym0(getStatus, "CDRgetStatus");
 	LoadCdrSym0(getDriveLetter, "CDRgetDriveLetter");
-	LoadCdrSym0(getBufferSub, "CDRgetBufferSub");
+	LoadCdrSym1(getBufferSub, "CDRgetBufferSub");
 	LoadCdrSym0(configure, "CDRconfigure");
 	LoadCdrSym0(test, "CDRtest");
 	LoadCdrSym0(about, "CDRabout");

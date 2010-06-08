@@ -44,6 +44,10 @@ unsigned char *CDRgetBuffer(void) {
 	return NULL;
 }
 
+unsigned char *CDRgetBufferSub(void) {
+	return NULL;
+}
+
 long CDRplay(unsigned char *sector) {
 	return 0;
 }

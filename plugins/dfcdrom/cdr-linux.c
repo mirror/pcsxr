@@ -21,8 +21,18 @@
 #define CDROMSETSPINDOWN 0x531e
 #endif
 
-static inline int msf_to_lba(char m, char s, char f) {
+static inline unsigned int msf_to_lba(char m, char s, char f) {
 	return (((m * CD_SECS) + s) * CD_FRAMES + f) - CD_MSF_OFFSET;
+}
+
+static inline void lba_to_msf(unsigned int s, char *msf) {
+	s += CD_MSF_OFFSET;
+
+	msf[0] = s / CD_FRAMES / CD_SECS;
+	s = s - msf[0] * CD_FRAMES * CD_SECS;
+	msf[1] = s / CD_FRAMES;
+	s = s - msf[1] * CD_FRAMES;
+	msf[2] = s;
 }
 
 int initial_time = 0;
@@ -562,6 +572,44 @@ unsigned char *CDRgetBufferSub(void) {
 		   itob(subchnl.cdsc_absaddr.msf.minute), itob(subchnl.cdsc_absaddr.msf.second), itob(subchnl.cdsc_absaddr.msf.frame));
 
 	return (unsigned char *)&subq;
+}
+
+// read CDDA sector into buffer
+long CDRreadCDDA(unsigned char m, unsigned char s, unsigned char f, unsigned char *buffer) {
+	unsigned char msf[3] = {m, s, f};
+	unsigned char *p;
+
+	if (CDRreadTrack(msf) != 0) return -1;
+
+	p = CDRgetBuffer();
+	if (p == NULL) return -1;
+
+	memcpy(buffer, p - 12, 2352); // copy from the beginning of the sector
+	return 0;
+}
+
+// get Track End Time
+long CDRgetTE(unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f) {
+	struct cdrom_tocentry entry;
+	char msf[3];
+
+	if (cdHandle < 1) return -1;
+
+	track++;
+
+	entry.cdte_track = track;
+	entry.cdte_format = CDROM_MSF;
+
+	if (ioctl(cdHandle, CDROMREADTOCENTRY, &entry) == -1)
+		return -1;
+
+	lba_to_msf(msf_to_lba(entry.cdte_addr.msf.minute, entry.cdte_addr.msf.second, entry.cdte_addr.msf.frame) - CD_MSF_OFFSET, msf);
+
+	*m = msf[0];
+	*s = msf[1];
+	*f = msf[2];
+
+	return 0;
 }
 
 void ExecCfg(char *arg) {

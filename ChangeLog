@@ -1,3 +1,10 @@
+Jun 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfcdrom/cdr-linux.c: Implemented CDRgetTE() and CDRreadCDDA() (not
+   tested).
+ * plugins/dfcdrom/cdr-null.c: Added CDRgetBufferSub().
+ * libpcsxcore/plugins.c: CDRgetBufferSub() is now mandatory (again) :)
+
 Jun 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/cdrom.c: Use boolean/TRUE/FALSE for where it should, don't use
