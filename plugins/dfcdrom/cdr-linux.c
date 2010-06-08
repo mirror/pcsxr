@@ -584,7 +584,7 @@ long CDRreadCDDA(unsigned char m, unsigned char s, unsigned char f, unsigned cha
 	p = CDRgetBuffer();
 	if (p == NULL) return -1;
 
-	memcpy(buffer, p - 12, 2352); // copy from the beginning of the sector
+	memcpy(buffer, p - 12, CD_FRAMESIZE_RAW); // copy from the beginning of the sector
 	return 0;
 }
 
@@ -595,9 +595,7 @@ long CDRgetTE(unsigned char track, unsigned char *m, unsigned char *s, unsigned 
 
 	if (cdHandle < 1) return -1;
 
-	track++;
-
-	entry.cdte_track = track;
+	entry.cdte_track = track + 1;
 	entry.cdte_format = CDROM_MSF;
 
 	if (ioctl(cdHandle, CDROMREADTOCENTRY, &entry) == -1)
