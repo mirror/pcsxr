@@ -7,22 +7,18 @@
 //
 // Generated from the TEXTINCLUDE 2 resource.
 //
-#include "windows.h"
-#include "winuser.h"
-#ifndef IDC_STATIC
-#define IDC_STATIC (-1)
-#endif
+#include "afxres.h"
 
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Chinese (P.R.C.) resources
+// English (U.S.) resources
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 #ifdef _WIN32
-LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
-#pragma code_page(936)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
 #endif //_WIN32
 
 #ifndef _MAC
@@ -48,14 +44,14 @@ BEGIN
     BEGIN
         BLOCK "080404b0"
         BEGIN
-            VALUE "CompanyName", " \0"
-            VALUE "FileDescription", "pcsx\0"
-            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "CompanyName", "http://pcsxr.codeplex.com/\0"
+            VALUE "FileDescription", "Playstation Emulator based on PCSX-df\0"
+            VALUE "FileVersion", "1, 9, 1, 1\0"
             VALUE "InternalName", "pcsx\0"
-            VALUE "LegalCopyright", "Copyright (c) 2009\0"
+            VALUE "LegalCopyright", "Copyright (c) 2010\0"
             VALUE "OriginalFilename", "pcsx.exe\0"
-            VALUE "ProductName", "  pcsx\0"
-            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "ProductName", "PCSX-Reloaded\0"
+            VALUE "ProductVersion", "1, 9, 1, 1\0"
         END
     END
     BLOCK "VarFileInfo"
@@ -66,18 +62,6 @@ END
 
 #endif    // !_MAC
 
-#endif    // Chinese (P.R.C.) resources
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
-// English (U.S.) resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
-#pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -305,7 +289,7 @@ END
 IDD_CHEATVALEDIT DIALOGEX 0, 0, 162, 57
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Enter New Value"
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,25,40,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,87,40,50,14
@@ -397,10 +381,10 @@ MAIN_LOGO               BITMAP  MOVEABLE PURE   "gui\\pcsx.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// RT_MANIFEST
+// 24
 //
 
-1                       RT_MANIFEST MOVEABLE PURE "gui\\pcsx.exe.manifest"
+1                       24      MOVEABLE PURE   "gui\\pcsx.exe.manifest"
 #endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////
 

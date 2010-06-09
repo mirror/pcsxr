@@ -1,3 +1,7 @@
+Jun 9, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * win32/pcsx.rc: Embed manifest properly under MSVC6.
+
 Jun 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfcdrom/cdr-linux.c: Implemented CDRgetTE() and CDRreadCDDA() (not
