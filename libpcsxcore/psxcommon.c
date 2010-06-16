@@ -51,7 +51,10 @@ void EmuShutdown() {
 }
 
 void EmuUpdate() {
-	SysUpdate();
+	// Do not allow hotkeys inside a softcall from HLE BIOS
+	if (!Config.HLE || psxRegs.GPR.n.ra != 0x80001000)
+		SysUpdate();
+
 	ApplyCheats();
 }
 

@@ -36,24 +36,13 @@ AC_SUBST(GLADE2_LIBS)
 
 AC_CONFIG_FILES([Makefile data/Makefile doc/Makefile libpcsxcore/Makefile gui/Makefile plugins/dfinput/Makefile plugins/dfsound/Makefile plugins/dfxvideo/Makefile plugins/dfcdrom/Makefile plugins/dfnet/Makefile pixmaps/Makefile po/Makefile.in])
 
-dnl Check for -fno-dse option support
-saved_CFLAGS="$CFLAGS"
-CFLAGS="$CFLAGS -fno-dse"
-AC_CACHE_CHECK([for -fno-dse option support], ac_cv_c_no_dse_support,
-AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <stdio.h>]], [[]])],[ac_cv_c_no_dse_support=yes],[ac_cv_c_no_dse_support=no]))
-CFLAGS="$saved_CFLAGS"
-if test "$ac_cv_c_no_dse_support" = "yes"
-then
-  CFLAGS="$CFLAGS -fno-dse"
-fi
-
 AM_CONDITIONAL(SOUND_OSS, false)
 AM_CONDITIONAL(SOUND_SDL, false)
 AM_CONDITIONAL(SOUND_NULL, false)
 
 dnl Check for ALSA 1.x, OSS, or PulseAudio
 
-AC_ARG_ENABLE(sound, [  --enable-sound=...      force selection of sound backend (alsa, null, oss, pulseaudio, sdl) (default: sdl)],
+AC_ARG_ENABLE(sound, [  --enable-sound=...      force selection of sound backend (alsa/null/oss/pulseaudio/sdl) (default: sdl)],
 [ SOUND="$enableval" ],[ SOUND="sdl" ])
 
 if test "x$SOUND" = xalsa; then
@@ -138,7 +127,7 @@ AM_CONDITIONAL(ARCH_X86, false)
 AM_CONDITIONAL(ARCH_X86_64, false)
 AM_CONDITIONAL(ARCH_PPC, false)
 
-AC_ARG_ENABLE(dynarec, [  --enable-dynarec=...    force selection of dynamic recompiler platform (x86, x86_64, ppc) (default: autodetect)],
+AC_ARG_ENABLE(dynarec, [  --enable-dynarec=...    force selection of dynamic recompiler platform (auto/no/x86/x86_64/ppc) (default: auto)],
 [ DYNAREC="$enableval" ],[ DYNAREC="auto" ])
 
 if test "x$DYNAREC" = xauto; then

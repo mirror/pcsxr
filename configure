@@ -1641,9 +1641,9 @@ Optional Features:
   --disable-nls           do not use Native Language Support
   --disable-rpath         do not hardcode runtime library paths
   --disable-sdltest       Do not try to compile and run a test SDL program
-  --enable-sound=...      force selection of sound backend (alsa, null, oss, pulseaudio, sdl) (default: sdl)
+  --enable-sound=...      force selection of sound backend (alsa/null/oss/pulseaudio/sdl) (default: sdl)
   --enable-opengl         build OpenGL plugin (default=no)
-  --enable-dynarec=...    force selection of dynamic recompiler platform (x86, x86_64, ppc) (default: autodetect)
+  --enable-dynarec=...    force selection of dynamic recompiler platform (auto/no/x86/x86_64/ppc) (default: auto)
 
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
@@ -14514,64 +14514,6 @@ $as_echo "$as_me: error: *** SDL not found!" >&2;}
 
 ac_config_files="$ac_config_files Makefile data/Makefile doc/Makefile libpcsxcore/Makefile gui/Makefile plugins/dfinput/Makefile plugins/dfsound/Makefile plugins/dfxvideo/Makefile plugins/dfcdrom/Makefile plugins/dfnet/Makefile pixmaps/Makefile po/Makefile.in"
 
-
-saved_CFLAGS="$CFLAGS"
-CFLAGS="$CFLAGS -fno-dse"
-{ $as_echo "$as_me:$LINENO: checking for -fno-dse option support" >&5
-$as_echo_n "checking for -fno-dse option support... " >&6; }
-if test "${ac_cv_c_no_dse_support+set}" = set; then
-  $as_echo_n "(cached) " >&6
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-#include <stdio.h>
-int
-main ()
-{
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (ac_try="$ac_compile"
-case "(($ac_try" in
-  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
-  *) ac_try_echo=$ac_try;;
-esac
-eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
-$as_echo "$ac_try_echo") >&5
-  (eval "$ac_compile") 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } && {
-	 test -z "$ac_c_werror_flag" ||
-	 test ! -s conftest.err
-       } && test -s conftest.$ac_objext; then
-  ac_cv_c_no_dse_support=yes
-else
-  $as_echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-	ac_cv_c_no_dse_support=no
-fi
-
-rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
-fi
-{ $as_echo "$as_me:$LINENO: result: $ac_cv_c_no_dse_support" >&5
-$as_echo "$ac_cv_c_no_dse_support" >&6; }
-CFLAGS="$saved_CFLAGS"
-if test "$ac_cv_c_no_dse_support" = "yes"
-then
-  CFLAGS="$CFLAGS -fno-dse"
-fi
 
  if false; then
   SOUND_OSS_TRUE=
