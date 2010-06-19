@@ -35,10 +35,9 @@ NSString *saveStatePath;
 
 		if ([openDlg runModal] == NSOKButton) {
 			NSArray* files = [openDlg filenames];
+			SetCdOpenCaseTime(time(NULL) + 2);
 			SetIsoFile((const char *)[[files objectAtIndex:0] fileSystemRepresentation]);
 		}
-
-        SetCdOpenCaseTime(time(NULL) + 2);
 	} else {
 		if (CDR_getDriveLetter() != nil) {
 			deviceName = [NSMutableString stringWithCString:CDR_getDriveLetter()];

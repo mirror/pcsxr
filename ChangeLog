@@ -1,3 +1,8 @@
+Jun 19, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/PcsxController.m: Do not simulate CD case open if user clicked
+   Cancel in switch ISO dialog.
+
 Jun 16, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/psxcommon.c: Do not allow hotkeys inside a softcall from HLE
