@@ -56,6 +56,8 @@ typedef struct
 void LoadStateV5(SPUFreeze_t * pF);                    // newest version
 void LoadStateUnknown(SPUFreeze_t * pF);               // unknown format
 
+extern int lastch;
+
 ////////////////////////////////////////////////////////////////////////
 // SPUFREEZE: called by main emu on savestate load/save
 ////////////////////////////////////////////////////////////////////////
@@ -128,6 +130,9 @@ long CALLBACK SPUfreeze(uint32_t ulFreezeMode,SPUFreeze_t * pF)
       LoadStateV5(pF);
  else LoadStateUnknown(pF);
 
+ spuAddr = 0xffffffff;
+ lastch = -1;
+
  // repair some globals
  for(i=0;i<=62;i+=2)
   SPUwriteRegister(H_Reverb+i,regArea[(H_Reverb+i-0xc00)>>1]);
@@ -169,8 +174,6 @@ void LoadStateV5(SPUFreeze_t * pF)
    s_chan[i].iMute=0;
    s_chan[i].iIrqDone=0;
   }
-
-  spuAddr = 0xffffffff;
 }
 
 ////////////////////////////////////////////////////////////////////////

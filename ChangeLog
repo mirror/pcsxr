@@ -1,3 +1,9 @@
+Jun 20, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfsound/freeze.c: Reset lastch when loading state, which fixes
+   occasionally crash after state loading.
+ * plugins/dfsound/spu.c: Likewise.
+
 Jun 19, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * macosx/PcsxController.m: Do not simulate CD case open if user clicked

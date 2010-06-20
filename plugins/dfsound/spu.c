@@ -110,7 +110,7 @@ int iFMod[NSSIZE];
 int iCycle=0;
 short * pS;
 
-static int lastch=-1;      // last channel processed on spu irq in timer mode
+int lastch=-1;             // last channel processed on spu irq in timer mode
 static int lastns=0;       // last ns pos
 static int iSecureStart=0; // secure start counter
 
