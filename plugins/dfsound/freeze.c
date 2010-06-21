@@ -97,7 +97,7 @@ long CALLBACK SPUfreeze(uint32_t ulFreezeMode,SPUFreeze_t * pF)
    if(pSpuIrq)  pFO->pSpuIrq  = (unsigned long)pSpuIrq-(unsigned long)spuMemC;
 
    pFO->spuAddr=spuAddr;
-   if(pFO->spuAddr==0) pFO->spuAddr=0xffffffff;
+   if(pFO->spuAddr==0) pFO->spuAddr=0xbaadf00d;
 
    for(i=0;i<MAXCHAN;i++)
     {
@@ -168,7 +168,7 @@ void LoadStateV5(SPUFreeze_t * pF)
  if(pFO->spuAddr)
   {
    spuAddr = pFO->spuAddr;
-   if (spuAddr == 0xffffffff) spuAddr = 0;
+   if (spuAddr == 0xbaadf00d) spuAddr = 0;
   }
 
  for(i=0;i<MAXCHAN;i++)
