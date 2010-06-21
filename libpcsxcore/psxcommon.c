@@ -19,6 +19,7 @@
 
 #include "psxcommon.h"
 #include "r3000a.h"
+#include "psxbios.h"
 
 #include "cheat.h"
 #include "ppf.h"
@@ -52,7 +53,7 @@ void EmuShutdown() {
 
 void EmuUpdate() {
 	// Do not allow hotkeys inside a softcall from HLE BIOS
-	if (!Config.HLE || psxRegs.GPR.n.ra != 0x80001000)
+	if (!Config.HLE || !hleSoftCall)
 		SysUpdate();
 
 	ApplyCheats();

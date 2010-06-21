@@ -814,18 +814,6 @@ void CALLBACK SPUplayCDDAchannel(short *pcm, int nbytes)
  FeedCDDA((unsigned char *)pcm, nbytes);
 }
 
-// INIT/EXIT STUFF
-
-// SPUINIT: this func will be called first by the main emu
-long CALLBACK SPUinit(void)
-{
- spuMemC=(unsigned char *)spuMem;                      // just small setup
- memset((void *)s_chan,0,MAXCHAN*sizeof(SPUCHAN));
- memset((void *)&rvb,0,sizeof(REVERBInfo));
- InitADSR();
- return 0;
-}
-
 // SETUPTIMER: init of certain buffers and threads/timers
 void SetupTimer(void)
 {
@@ -916,10 +904,14 @@ void RemoveStreams(void)
  CDDAStart = NULL;
 }
 
-// SPUOPEN: called by main emu after init
-long SPUopen(void)
+// INIT/EXIT STUFF
+
+// SPUINIT: this func will be called first by the main emu
+long CALLBACK SPUinit(void)
 {
- if (bSPUIsOpen) return 0;                              // security for some stupid main emus
+ spuMemC = (unsigned char *)spuMem;                    // just small setup
+ memset((void *)&rvb, 0, sizeof(REVERBInfo));
+ InitADSR();
 
  iVolume = 3;
  iReverbOff = -1;
@@ -934,11 +926,17 @@ long SPUopen(void)
  iSPUIRQWait = 1;
 
  ReadConfig();                                         // read user stuff
-
- SetupSound();                                         // setup sound (before init!)
-
  SetupStreams();                                       // prepare streaming
 
+ return 0;
+}
+
+// SPUOPEN: called by main emu after init
+long CALLBACK SPUopen(void)
+{
+ if (bSPUIsOpen) return 0;                             // security for some stupid main emus
+
+ SetupSound();                                         // setup sound (before init!)
  SetupTimer();                                         // timer for feeding data
 
  bSPUIsOpen = 1;
@@ -949,15 +947,12 @@ long SPUopen(void)
 // SPUCLOSE: called before shutdown
 long CALLBACK SPUclose(void)
 {
- if (!bSPUIsOpen) return 0;                             // some security
+ if (!bSPUIsOpen) return 0;                            // some security
 
- bSPUIsOpen = 0;                                         // no more open
+ bSPUIsOpen = 0;                                       // no more open
 
  RemoveTimer();                                        // no more feeding
-
  RemoveSound();                                        // no more sound handling
-
- RemoveStreams();                                      // no more streaming
 
  return 0;
 }
@@ -965,6 +960,9 @@ long CALLBACK SPUclose(void)
 // SPUSHUTDOWN: called by main emu on final exit
 long CALLBACK SPUshutdown(void)
 {
+ SPUclose();
+ RemoveStreams();                                      // no more streaming
+
  return 0;
 }
 

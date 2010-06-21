@@ -257,11 +257,17 @@ static TCB Thread[8];
 static int CurThread = 0;
 static FileDesc FDesc[32];
 
+boolean hleSoftCall = FALSE;
+
 static inline void softCall(u32 pc) {
 	pc0 = pc;
 	ra = 0x80001000;
 
+	hleSoftCall = TRUE;
+
 	while (pc0 != 0x80001000) psxCpu->ExecuteBlock();
+
+	hleSoftCall = FALSE;
 }
 
 static inline void softCall2(u32 pc) {
@@ -269,8 +275,12 @@ static inline void softCall2(u32 pc) {
 	pc0 = pc;
 	ra = 0x80001000;
 
+	hleSoftCall = TRUE;
+
 	while (pc0 != 0x80001000) psxCpu->ExecuteBlock();
 	ra = sra;
+
+	hleSoftCall = FALSE;
 }
 
 static inline void DeliverEvent(u32 ev, u32 spec) {
@@ -2568,6 +2578,8 @@ void psxBiosInit() {
 
 	// memory size 2 MB
 	psxHu32ref(0x1060) = SWAPu32(0x00000b88);
+
+	hleSoftCall = FALSE;
 }
 
 void psxBiosShutdown() {

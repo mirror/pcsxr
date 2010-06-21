@@ -42,7 +42,7 @@ typedef struct
 {
  unsigned short  spuIrq;
  uint32_t   pSpuIrq;
- uint32_t   dummy0;
+ uint32_t   spuAddr;
  uint32_t   dummy1;
  uint32_t   dummy2;
  uint32_t   dummy3;
@@ -96,6 +96,9 @@ long CALLBACK SPUfreeze(uint32_t ulFreezeMode,SPUFreeze_t * pF)
    pFO->spuIrq=spuIrq;
    if(pSpuIrq)  pFO->pSpuIrq  = (unsigned long)pSpuIrq-(unsigned long)spuMemC;
 
+   pFO->spuAddr=spuAddr;
+   if(pFO->spuAddr==0) pFO->spuAddr=0xffffffff;
+
    for(i=0;i<MAXCHAN;i++)
     {
      memcpy((void *)&pFO->s_chan[i],(void *)&s_chan[i],sizeof(SPUCHAN));
@@ -125,12 +128,10 @@ long CALLBACK SPUfreeze(uint32_t ulFreezeMode,SPUFreeze_t * pF)
 
  xapGlobal=0;
 
- if(!strcmp(pF->szSPUName,"PBOSS") &&                  
-    pF->ulFreezeVersion==5)
-      LoadStateV5(pF);
+ if(!strcmp(pF->szSPUName,"PBOSS") && pF->ulFreezeVersion==5)
+   LoadStateV5(pF);
  else LoadStateUnknown(pF);
 
- spuAddr = 0xffffffff;
  lastch = -1;
 
  // repair some globals
@@ -161,8 +162,14 @@ void LoadStateV5(SPUFreeze_t * pF)
 
  pFO=(SPUOSSFreeze_t *)(pF+1);
 
- spuIrq   = pFO->spuIrq;
- if(pFO->pSpuIrq)  pSpuIrq  = pFO->pSpuIrq+spuMemC;  else pSpuIrq=0;
+ spuIrq = pFO->spuIrq;
+ if(pFO->pSpuIrq) pSpuIrq = pFO->pSpuIrq+spuMemC; else pSpuIrq=NULL;
+
+ if(pFO->spuAddr)
+  {
+   spuAddr = pFO->spuAddr;
+   if (spuAddr == 0xffffffff) spuAddr = 0;
+  }
 
  for(i=0;i<MAXCHAN;i++)
   {
