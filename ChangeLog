@@ -1,3 +1,7 @@
+Jun 23, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/sio.c: Convert more ASCII characters to half-width.
+
 Jun 21, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/psxbios.c: Use a separate flag to identify whether we are

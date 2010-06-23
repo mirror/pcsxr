@@ -66,7 +66,7 @@ static unsigned int padst;
 char Mcd1Data[MCD_SIZE], Mcd2Data[MCD_SIZE];
 
 // clk cycle byte
-// 4us * 8bits = ((PSXCLK / 1000000) * 32) / BIAS; (linuzappz)
+// 4us * 8bits = (PSXCLK / 1000000) * 32; (linuzappz)
 // TODO: add SioModePrescaler and BaudReg
 static inline void SIO_INT() {
 	if (!Config.Sio) {
@@ -702,8 +702,12 @@ void GetMcdBlockInfo(int mcd, int block, McdBlock *Info) {
 		else if (c >= 0x824F && c <= 0x827A)
 			c = (c - 0x824F) + '0';
 		else if (c == 0x8140) c = ' ';
+		else if (c == 0x8143) c = ',';
 		else if (c == 0x8144) c = '.';
 		else if (c == 0x8146) c = ':';
+		else if (c == 0x8147) c = ';';
+		else if (c == 0x8148) c = '?';
+		else if (c == 0x8149) c = '!';
 		else if (c == 0x815E) c = '/';
 		else if (c == 0x8168) c = '"';
 		else if (c == 0x8169) c = '(';
