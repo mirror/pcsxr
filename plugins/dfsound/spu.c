@@ -924,6 +924,7 @@ long CALLBACK SPUinit(void)
  memset((void *)s_chan, 0, (MAXCHAN + 1) * sizeof(SPUCHAN));
  pSpuIrq = 0;
  iSPUIRQWait = 1;
+ lastch = -1;
 
  ReadConfig();                                         // read user stuff
  SetupStreams();                                       // prepare streaming

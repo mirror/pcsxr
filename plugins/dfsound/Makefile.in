@@ -69,7 +69,7 @@ am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
 libLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libDFSound_la_LIBADD =
-am__libDFSound_la_SOURCES_DIST = spu.c cfg.c dma.c freeze.c psemu.c \
+am__libDFSound_la_SOURCES_DIST = spu.c cfg.c dma.c freeze.c \
 	registers.c alsa.c oss.c pulseaudio.c sdl.c nullsnd.c
 @SOUND_ALSA_TRUE@am__objects_1 = libDFSound_la-alsa.lo
 @SOUND_OSS_TRUE@am__objects_2 = libDFSound_la-oss.lo
@@ -78,9 +78,8 @@ am__libDFSound_la_SOURCES_DIST = spu.c cfg.c dma.c freeze.c psemu.c \
 @SOUND_NULL_TRUE@am__objects_5 = libDFSound_la-nullsnd.lo
 am_libDFSound_la_OBJECTS = libDFSound_la-spu.lo libDFSound_la-cfg.lo \
 	libDFSound_la-dma.lo libDFSound_la-freeze.lo \
-	libDFSound_la-psemu.lo libDFSound_la-registers.lo \
-	$(am__objects_1) $(am__objects_2) $(am__objects_3) \
-	$(am__objects_4) $(am__objects_5)
+	libDFSound_la-registers.lo $(am__objects_1) $(am__objects_2) \
+	$(am__objects_3) $(am__objects_4) $(am__objects_5)
 libDFSound_la_OBJECTS = $(am_libDFSound_la_OBJECTS)
 libDFSound_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(libDFSound_la_CFLAGS) \
@@ -269,7 +268,7 @@ INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 	-I../../include
 
 lib_LTLIBRARIES = libDFSound.la
-libDFSound_la_SOURCES = spu.c cfg.c dma.c freeze.c psemu.c registers.c \
+libDFSound_la_SOURCES = spu.c cfg.c dma.c freeze.c registers.c \
 	$(am__append_1) $(am__append_4) $(am__append_6) \
 	$(am__append_9) $(am__append_12)
 libDFSound_la_CFLAGS = $(am__append_2) $(am__append_5) $(am__append_7) \
@@ -387,7 +386,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-freeze.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-nullsnd.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-oss.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-psemu.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-pulseaudio.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-registers.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libDFSound_la-sdl.Plo@am__quote@
@@ -442,13 +440,6 @@ libDFSound_la-freeze.lo: freeze.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='freeze.c' object='libDFSound_la-freeze.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -c -o libDFSound_la-freeze.lo `test -f 'freeze.c' || echo '$(srcdir)/'`freeze.c
-
-libDFSound_la-psemu.lo: psemu.c
-@am__fastdepCC_TRUE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -MT libDFSound_la-psemu.lo -MD -MP -MF $(DEPDIR)/libDFSound_la-psemu.Tpo -c -o libDFSound_la-psemu.lo `test -f 'psemu.c' || echo '$(srcdir)/'`psemu.c
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/libDFSound_la-psemu.Tpo $(DEPDIR)/libDFSound_la-psemu.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='psemu.c' object='libDFSound_la-psemu.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -c -o libDFSound_la-psemu.lo `test -f 'psemu.c' || echo '$(srcdir)/'`psemu.c
 
 libDFSound_la-registers.lo: registers.c
 @am__fastdepCC_TRUE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libDFSound_la_CFLAGS) $(CFLAGS) -MT libDFSound_la-registers.lo -MD -MP -MF $(DEPDIR)/libDFSound_la-registers.Tpo -c -o libDFSound_la-registers.lo `test -f 'registers.c' || echo '$(srcdir)/'`registers.c
