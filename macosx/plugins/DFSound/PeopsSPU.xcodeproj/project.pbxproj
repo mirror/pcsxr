@@ -16,7 +16,6 @@
 		2BFF7F3E0715D2E00061278A /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BFF7F3D0715D2E00061278A /* Carbon.framework */; };
 		71E4E7AB109DC529003BB7AC /* dma.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E797109DC529003BB7AC /* dma.c */; };
 		71E4E7AC109DC529003BB7AC /* freeze.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E79B109DC529003BB7AC /* freeze.c */; };
-		71E4E7AD109DC529003BB7AC /* psemu.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E79D109DC529003BB7AC /* psemu.c */; };
 		71E4E7AE109DC529003BB7AC /* registers.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E79F109DC529003BB7AC /* registers.c */; };
 		71E4E7B0109DC529003BB7AC /* spu.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E7A4109DC529003BB7AC /* spu.c */; };
 		71E4E7B1109DC529003BB7AC /* xa.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E7A7109DC529003BB7AC /* xa.c */; };
@@ -45,7 +44,6 @@
 		71E4E79A109DC529003BB7AC /* externals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = externals.h; path = ../../../plugins/dfsound/externals.h; sourceTree = SOURCE_ROOT; };
 		71E4E79B109DC529003BB7AC /* freeze.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeze.c; path = ../../../plugins/dfsound/freeze.c; sourceTree = SOURCE_ROOT; };
 		71E4E79C109DC529003BB7AC /* gauss_i.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gauss_i.h; path = ../../../plugins/dfsound/gauss_i.h; sourceTree = SOURCE_ROOT; };
-		71E4E79D109DC529003BB7AC /* psemu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psemu.c; path = ../../../plugins/dfsound/psemu.c; sourceTree = SOURCE_ROOT; };
 		71E4E79E109DC529003BB7AC /* psemuxa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = psemuxa.h; path = ../../../plugins/dfsound/psemuxa.h; sourceTree = SOURCE_ROOT; };
 		71E4E79F109DC529003BB7AC /* registers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = registers.c; path = ../../../plugins/dfsound/registers.c; sourceTree = SOURCE_ROOT; };
 		71E4E7A0109DC529003BB7AC /* registers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = registers.h; path = ../../../plugins/dfsound/registers.h; sourceTree = SOURCE_ROOT; };
@@ -120,7 +118,6 @@
 				71E4E79A109DC529003BB7AC /* externals.h */,
 				71E4E79B109DC529003BB7AC /* freeze.c */,
 				71E4E79C109DC529003BB7AC /* gauss_i.h */,
-				71E4E79D109DC529003BB7AC /* psemu.c */,
 				71E4E79E109DC529003BB7AC /* psemuxa.h */,
 				71E4E79F109DC529003BB7AC /* registers.c */,
 				71E4E7A0109DC529003BB7AC /* registers.h */,
@@ -215,7 +212,6 @@
 				2BE18A00077EED7F008688C9 /* macosx.c in Sources */,
 				71E4E7AB109DC529003BB7AC /* dma.c in Sources */,
 				71E4E7AC109DC529003BB7AC /* freeze.c in Sources */,
-				71E4E7AD109DC529003BB7AC /* psemu.c in Sources */,
 				71E4E7AE109DC529003BB7AC /* registers.c in Sources */,
 				71E4E7B0109DC529003BB7AC /* spu.c in Sources */,
 				71E4E7B1109DC529003BB7AC /* xa.c in Sources */,

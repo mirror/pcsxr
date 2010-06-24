@@ -3,6 +3,7 @@ Jun 24, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * plugins/dfsound/spu.c: Reset lastch to -1 in SPUinit().
  * plugins/dfsound/psemu.c: Removed support for obsoleted ancient API.
  * plugins/dfsound/Makefile.am: Removed psemu.c.
+ * macosx/plugins/DFSound/PeopsSPU.xcodeproj/project.pbxproj: Likewise.
 
 Jun 23, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
