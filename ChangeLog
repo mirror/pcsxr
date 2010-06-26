@@ -1,3 +1,11 @@
+Jun 26, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/psxbios.c: Fixed bcopy() (FF9 battle crash with HLE BIOS - my
+   mistake :( ).
+ * libpcsxcore/misc.c: Added check for HLE BIOS in savestate, bumped savestate
+   version, don't byteswap savestate version as part of savestate data is not
+   endianness clean.
+
 Jun 24, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfsound/spu.c: Reset lastch to -1 in SPUinit().

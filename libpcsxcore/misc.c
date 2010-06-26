@@ -456,7 +456,7 @@ static const char PcsxHeader[32] = "STv4 PCSX v" PACKAGE_VERSION;
 
 // Savestate Versioning!
 // If you make changes to the savestate version, please increment the value below.
-static const u32 SaveVersion = SWAPu32(0x8b410003);
+static const u32 SaveVersion = 0x8b410004;
 
 int SaveState(const char *file) {
 	gzFile f;
@@ -469,7 +469,8 @@ int SaveState(const char *file) {
 	if (f == NULL) return -1;
 
 	gzwrite(f, (void *)PcsxHeader, 32);
-	gzwrite(f, (void *)&SaveVersion, sizeof(SaveVersion));
+	gzwrite(f, (void *)&SaveVersion, sizeof(u32));
+	gzwrite(f, (void *)&Config.HLE, sizeof(boolean));
 
 	pMem = (unsigned char *)malloc(128 * 96 * 3);
 	if (pMem == NULL) return -1;
@@ -520,14 +521,16 @@ int LoadState(const char *file) {
 	int Size;
 	char header[32];
 	u32 version;
+	boolean hle;
 
 	f = gzopen(file, "rb");
 	if (f == NULL) return -1;
 
 	gzread(f, header, sizeof(header));
 	gzread(f, &version, sizeof(u32));
+	gzread(f, &hle, sizeof(boolean));
 
-	if (strncmp("STv4 PCSX", header, 9) != 0 || version != SaveVersion) {
+	if (strncmp("STv4 PCSX", header, 9) != 0 || version != SaveVersion || hle != Config.HLE) {
 		gzclose(f);
 		return -1;
 	}
@@ -571,16 +574,18 @@ int CheckState(const char *file) {
 	gzFile f;
 	char header[32];
 	u32 version;
+	boolean hle;
 
 	f = gzopen(file, "rb");
 	if (f == NULL) return -1;
 
 	gzread(f, header, sizeof(header));
 	gzread(f, &version, sizeof(u32));
+	gzread(f, &hle, sizeof(boolean));
 
 	gzclose(f);
 
-	if (strncmp("STv4 PCSX", header, 9) != 0 || version != SaveVersion)
+	if (strncmp("STv4 PCSX", header, 9) != 0 || version != SaveVersion || hle != Config.HLE)
 		return -1;
 
 	return 0;
@@ -592,16 +597,12 @@ int SendPcsxInfo() {
 	if (NET_recvData == NULL || NET_sendData == NULL)
 		return 0;
 
-//	SysPrintf("SendPcsxInfo\n");
-
 	NET_sendData(&Config.Xa, sizeof(Config.Xa), PSE_NET_BLOCKING);
 	NET_sendData(&Config.Sio, sizeof(Config.Sio), PSE_NET_BLOCKING);
 	NET_sendData(&Config.SpuIrq, sizeof(Config.SpuIrq), PSE_NET_BLOCKING);
 	NET_sendData(&Config.RCntFix, sizeof(Config.RCntFix), PSE_NET_BLOCKING);
 	NET_sendData(&Config.PsxType, sizeof(Config.PsxType), PSE_NET_BLOCKING);
 	NET_sendData(&Config.Cpu, sizeof(Config.Cpu), PSE_NET_BLOCKING);
-
-//	SysPrintf("Send OK\n");
 
 	return 0;
 }
@@ -611,8 +612,6 @@ int RecvPcsxInfo() {
 
 	if (NET_recvData == NULL || NET_sendData == NULL)
 		return 0;
-
-//	SysPrintf("RecvPcsxInfo\n");
 
 	NET_recvData(&Config.Xa, sizeof(Config.Xa), PSE_NET_BLOCKING);
 	NET_recvData(&Config.Sio, sizeof(Config.Sio), PSE_NET_BLOCKING);
@@ -637,8 +636,6 @@ int RecvPcsxInfo() {
 		}
 		psxCpu->Reset();
 	}
-
-//	SysPrintf("Recv OK\n");
 
 	return 0;
 }

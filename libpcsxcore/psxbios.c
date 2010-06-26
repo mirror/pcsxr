@@ -607,7 +607,7 @@ void psxBios_tolower() { // 0x26
 
 void psxBios_bcopy() { // 0x27
 	char *p1 = (char *)Ra1, *p2 = (char *)Ra0;
-	while (a3-- > 0) *p1++ = *p2++;
+	while (a2-- > 0) *p1++ = *p2++;
 
 	pc0 = ra;
 }
