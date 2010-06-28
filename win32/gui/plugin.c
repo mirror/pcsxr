@@ -303,16 +303,16 @@ void ClosePlugins() {
 	int ret;
 
 	UpdateMenuSlots();
+	ret = PAD1_close();
+	if (ret < 0) { SysMessage (_("Error Closing PAD1 Plugin")); return; }
+	ret = PAD2_close();
+	if (ret < 0) { SysMessage (_("Error Closing PAD2 Plugin")); return; }
 	ret = CDR_close();
 	if (ret < 0) { SysMessage (_("Error Closing CDR Plugin")); return; }
 	ret = GPU_close();
 	if (ret < 0) { SysMessage (_("Error Closing GPU Plugin")); return; }
 	ret = SPU_close();
 	if (ret < 0) { SysMessage (_("Error Closing SPU Plugin")); return; }
-	ret = PAD1_close();
-	if (ret < 0) { SysMessage (_("Error Closing PAD1 Plugin")); return; }
-	ret = PAD2_close();
-	if (ret < 0) { SysMessage (_("Error Closing PAD2 Plugin")); return; }
 
 	if (Config.UseNet) {
 		NET_pause();

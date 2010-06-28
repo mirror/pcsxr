@@ -1,3 +1,8 @@
+Jun 28, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * win32/gui/plugin.c: Close PAD plugin before GPU plugin, should fix crash
+   issue when using LilyPad.
+
 Jun 26, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/psxbios.c: Fixed bcopy() (FF9 battle crash with HLE BIOS - my
