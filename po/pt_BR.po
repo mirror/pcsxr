@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsx-df\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-03 08:39+0800\n"
+"POT-Creation-Date: 2010-06-29 18:58+0800\n"
 "PO-Revision-Date: 2009-11-28 23:57+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: PoBRE <romhackers@gmail.com>\n"
@@ -497,52 +497,44 @@ msgstr "Erro ao abrir a extensão do controle 1 (%d)!"
 msgid "Error Opening PAD2 Plugin (%d)"
 msgstr "Erro ao abrir a extensão do controle 2 (%d)!"
 
-#: ../win32/gui/plugin.c:307
+#: ../win32/gui/plugin.c:314
 msgid "Error Closing CDR Plugin"
 msgstr "Erro ao fechar a extensão de CDROM!"
 
-#: ../win32/gui/plugin.c:309
+#: ../win32/gui/plugin.c:316
 msgid "Error Closing GPU Plugin"
 msgstr "Erro ao fechar a extensão de GPU!"
 
-#: ../win32/gui/plugin.c:311
+#: ../win32/gui/plugin.c:318
 msgid "Error Closing SPU Plugin"
 msgstr "Erro ao fechar a extensão de SPU!"
 
-#: ../win32/gui/plugin.c:313
-msgid "Error Closing PAD1 Plugin"
-msgstr "Erro ao fechar a extensão do controle 1!"
-
-#: ../win32/gui/plugin.c:315
-msgid "Error Closing PAD2 Plugin"
-msgstr "Erro ao fechar a extensão do controle 2!"
-
-#: ../win32/gui/plugin.c:333
+#: ../win32/gui/plugin.c:336
 #, c-format
 msgid "CDRinit error: %d"
 msgstr "Erro ao iniciar o CDROM: %d"
 
-#: ../win32/gui/plugin.c:335
+#: ../win32/gui/plugin.c:338
 #, c-format
 msgid "GPUinit error: %d"
 msgstr "Erro ao iniciar a GPU: %d"
 
-#: ../win32/gui/plugin.c:337
+#: ../win32/gui/plugin.c:340
 #, c-format
 msgid "SPUinit error: %d"
 msgstr "Erro ao iniciar a SPU: %d"
 
-#: ../win32/gui/plugin.c:339
+#: ../win32/gui/plugin.c:342
 #, c-format
 msgid "PAD1init error: %d"
 msgstr "Erro ao iniciar o controle 1: %d"
 
-#: ../win32/gui/plugin.c:341
+#: ../win32/gui/plugin.c:344
 #, c-format
 msgid "PAD2init error: %d"
 msgstr "Erro ao iniciar o controle 2: %d"
 
-#: ../win32/gui/plugin.c:344
+#: ../win32/gui/plugin.c:347
 #, c-format
 msgid "NETinit error: %d"
 msgstr "Erro ao iniciar a rede: %d"
@@ -1339,73 +1331,73 @@ msgstr ""
 msgid "Memory Card Manager"
 msgstr "Gerenciador de cartões de memória"
 
-#: ../gui/Plugin.c:203 ../data/pcsx.glade2:1487
+#: ../gui/Plugin.c:211 ../data/pcsx.glade2:1487
 #, c-format
 msgid "SIO IRQ Always Enabled"
 msgstr "IRQ SIO sempre ativada"
 
-#: ../gui/Plugin.c:204
+#: ../gui/Plugin.c:212
 #, c-format
 msgid "SIO IRQ Not Always Enabled"
 msgstr "IRQ SIO nem sempre ativada"
 
-#: ../gui/Plugin.c:210
+#: ../gui/Plugin.c:218
 #, c-format
 msgid "Black & White Mdecs Only Enabled"
 msgstr "Mdecs apenas em preto e branco ativado"
 
-#: ../gui/Plugin.c:211
+#: ../gui/Plugin.c:219
 #, c-format
 msgid "Black & White Mdecs Only Disabled"
 msgstr "Mdecs apenas em preto e branco desativado"
 
-#: ../gui/Plugin.c:217
+#: ../gui/Plugin.c:225
 #, c-format
 msgid "XA Enabled"
 msgstr "XA Ligado"
 
-#: ../gui/Plugin.c:218
+#: ../gui/Plugin.c:226
 #, c-format
 msgid "XA Disabled"
 msgstr "XA Desligado"
 
-#: ../gui/Plugin.c:280
+#: ../gui/Plugin.c:288
 msgid "Error opening CD-ROM plugin!"
 msgstr "Erro ao abrir a extensão de CD-ROM!"
 
-#: ../gui/Plugin.c:282
+#: ../gui/Plugin.c:290
 msgid "Error opening SPU plugin!"
 msgstr "Erro ao abrir a extensão de SPU!"
 
-#: ../gui/Plugin.c:285
+#: ../gui/Plugin.c:293
 msgid "Error opening GPU plugin!"
 msgstr "Erro ao abrir a extensão de GPU!"
 
-#: ../gui/Plugin.c:287
+#: ../gui/Plugin.c:295
 msgid "Error opening Controller 1 plugin!"
 msgstr "Erro ao abrir a extensão do Controle 1!"
 
-#: ../gui/Plugin.c:289
+#: ../gui/Plugin.c:297
 msgid "Error opening Controller 2 plugin!"
 msgstr "Erro ao abrir a extensão do Controle 2!"
 
-#: ../gui/Plugin.c:369
+#: ../gui/Plugin.c:377
 msgid "Error closing CD-ROM plugin!"
 msgstr "Erro ao fechar a extensão de CD-ROM!"
 
-#: ../gui/Plugin.c:371
+#: ../gui/Plugin.c:379
 msgid "Error closing SPU plugin!"
 msgstr "Erro ao fechar a extensão de SPU!"
 
-#: ../gui/Plugin.c:373
+#: ../gui/Plugin.c:381
 msgid "Error closing Controller 1 Plugin!"
 msgstr "Erro ao fechar a extensão do Controle 1!"
 
-#: ../gui/Plugin.c:375
+#: ../gui/Plugin.c:383
 msgid "Error closing Controller 2 plugin!"
 msgstr "Erro ao fechar a extensão de Controle 2!"
 
-#: ../gui/Plugin.c:377
+#: ../gui/Plugin.c:385
 msgid "Error closing GPU plugin!"
 msgstr "Erro ao fechar a extensão de GPU!"
 
@@ -1462,72 +1454,72 @@ msgstr "Arquivos COFF não são suportados!\n"
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "Esse arquivo não parece ser um arquivo válido de PSX!\n"
 
-#: ../libpcsxcore/plugins.c:140
+#: ../libpcsxcore/plugins.c:142
 #, c-format
 msgid "Error loading %s: %s"
 msgstr "Erro carregando \"%s\": \"%s\""
 
-#: ../libpcsxcore/plugins.c:185
+#: ../libpcsxcore/plugins.c:187
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "Não conseguiu carregar a extensão de GPU \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:256
+#: ../libpcsxcore/plugins.c:257
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "Não conseguiu carregar a extensão de CD-ROM \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:302
+#: ../libpcsxcore/plugins.c:305
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "Não conseguiu carregar a extensão de SPU \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:439
+#: ../libpcsxcore/plugins.c:442
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "Não conseguiu carregar a extensão do Controle 1 \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:493
+#: ../libpcsxcore/plugins.c:496
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "Não conseguiu carregar a extensão do Controle 2 \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:536
+#: ../libpcsxcore/plugins.c:539
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "Não conseguiu carregar a extensão de jogo em rede \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:597
+#: ../libpcsxcore/plugins.c:600
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr "Erro ao iniciar a extensão de CD-ROM \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:599
+#: ../libpcsxcore/plugins.c:602
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr "Erro ao iniciar a extensão de GPU \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:601
+#: ../libpcsxcore/plugins.c:604
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr "Erro ao iniciar a extensão de SPU \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:603
+#: ../libpcsxcore/plugins.c:606
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr "Erro ao iniciar a extensão do Controle 1 \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:605
+#: ../libpcsxcore/plugins.c:608
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr "Erro ao iniciar a extensão do Controle 2 \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:609
+#: ../libpcsxcore/plugins.c:612
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr "Erro ao iniciar a extensão de jogo em rede \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:612
+#: ../libpcsxcore/plugins.c:615
 msgid "Plugins loaded.\n"
 msgstr "Extensões carregadas.\n"
 
@@ -1550,7 +1542,7 @@ msgstr "Arquivo de estado \"%s\" carregado."
 msgid "Error allocating memory!"
 msgstr "Erro ao alocar memória!"
 
-#: ../libpcsxcore/psxmem.c:121
+#: ../libpcsxcore/psxmem.c:122
 #, c-format
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr "Não conseguiu abrir a BIOS\"%s\". Usando BIOS HLE!\n"
@@ -1813,7 +1805,16 @@ msgstr "Telas pretas de Lunar."
 msgid "Compatibility mode"
 msgstr "Modo de compatibilidade."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:682
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:670
+#, fuzzy
+msgid "Fake 'gpu busy' states"
+msgstr "Imitar estado 'GPU ocupada'"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:688
+msgid "Toggle busy flags after drawing"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:713
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:268
 msgid "<b>Compatibility</b>"
 msgstr "<b>Compatibilidade</b>"
@@ -2319,7 +2320,7 @@ msgstr "Som em canal único"
 msgid "Play only one channel for a performance boost."
 msgstr "Tocar apenas um canal para melhorar o desempenho."
 
-#: ../plugins/dfcdrom/cdr-linux.c:60
+#: ../plugins/dfcdrom/cdr-linux.c:70
 msgid "CD-ROM Drive Reader"
 msgstr "Leitor de unidade de CDROM"
 
@@ -3029,6 +3030,12 @@ msgstr ""
 #: ../plugins/dfnet/dfnet.glade2:240
 msgid "Play Offline"
 msgstr ""
+
+#~ msgid "Error Closing PAD1 Plugin"
+#~ msgstr "Erro ao fechar a extensão do controle 1!"
+
+#~ msgid "Error Closing PAD2 Plugin"
+#~ msgstr "Erro ao fechar a extensão do controle 2!"
 
 #~ msgid "Internal HLE Bios"
 #~ msgstr "BIOS HLE interna"

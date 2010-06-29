@@ -206,6 +206,7 @@ extern unsigned short  usMirror;
 extern int            iDither;
 extern uint32_t  dwCfgFixes;
 extern uint32_t  dwActFixes;
+extern uint32_t  dwEmuFixes;
 extern int            iUseFixes;
 extern int            iUseDither;
 extern BOOL           bDoVSyncUpdate;

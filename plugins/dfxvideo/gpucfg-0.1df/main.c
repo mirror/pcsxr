@@ -274,7 +274,7 @@ main (int argc, char *argv[])
 			val = atoi(p + len);
 	}
 
-	for (i=0; i<10; i++)
+	for (i=0; i<11; i++)
 	{
 		sprintf(tempstr, "checkFix%d", i+1);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, tempstr)), (val>>i)&1 );
@@ -399,7 +399,7 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
 
 
 	val = 0;
-	for (i=0; i<10; i++)
+	for (i=0; i<11; i++)
 	{
 		sprintf(tempstr, "checkFix%d", i+1);
 		if( gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, tempstr))) )

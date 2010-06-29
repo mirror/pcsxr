@@ -105,7 +105,8 @@ PSXDisplay_t      PreviousPSXDisplay;
 long              lSelectedSlot=0;
 BOOL              bChangeWinMode=FALSE;
 BOOL              bDoLazyUpdate=FALSE;
-uint32_t     lGPUInfoVals[16];
+uint32_t          lGPUInfoVals[16];
+static int        iFakePrimBusy=0;
 
 ////////////////////////////////////////////////////////////////////////
 // some misc external display funcs
@@ -824,14 +825,29 @@ uint32_t CALLBACK GPUreadStatus(void)             // READ STATUS
 {
  if(dwActFixes&1)
   {
-   static int iNumRead=0;                              // odd/even hack
+   static int iNumRead=0;                         // odd/even hack
    if((iNumRead++)==2)
     {
      iNumRead=0;
-     lGPUstatusRet^=0x80000000;                        // interlaced bit toggle... we do it on every 3 read status... needed by some games (like ChronoCross) with old epsxe versions (1.5.2 and older)
+     lGPUstatusRet^=0x80000000;                   // interlaced bit toggle... we do it on every 3 read status... needed by some games (like ChronoCross) with old epsxe versions (1.5.2 and older)
     }
   }
 
+ if(iFakePrimBusy)                                // 27.10.2007 - PETE : emulating some 'busy' while drawing... pfff
+  {
+   iFakePrimBusy--;
+
+   if(iFakePrimBusy&1)                            // we do a busy-idle-busy-idle sequence after/while drawing prims
+    {
+     GPUIsBusy;
+     GPUIsNotReadyForCommands;
+    }
+   else
+    {
+     GPUIsIdle;
+     GPUIsReadyForCommands;
+    }
+  }
  return lGPUstatusRet;
 }
 
@@ -1386,7 +1402,8 @@ ENDVRAM:
       {
        gpuDataC=gpuDataP=0;
        primFunc[gpuCommand]((unsigned char *)gpuDataM);
-      }
+       if(dwEmuFixes&0x0001 || dwActFixes&0x0400)      // hack for emulating "gpu busy" in some games
+        iFakePrimBusy=4;      }
     } 
   }
 
@@ -1929,4 +1946,7 @@ void CALLBACK GPUshowScreenPic(unsigned char * pMem)
  CreatePic(pMem);                                      // create new pic... don't free pMem or something like that... just read from it
 }
 
-////////////////////////////////////////////////////////////////////////
+void CALLBACK GPUsetfix(uint32_t dwFixBits)
+{
+ dwEmuFixes=dwFixBits;
+}

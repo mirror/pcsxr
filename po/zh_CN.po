@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-03 08:39+0800\n"
-"PO-Revision-Date: 2010-06-03 08:39+0800\n"
-"Last-Translator: Wei Mingzhi <whistler_wmz@users.sf.net>\n"
+"POT-Creation-Date: 2010-06-29 18:58+0800\n"
+"PO-Revision-Date: 2010-06-29 18:59+0700\n"
+"Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -550,52 +550,44 @@ msgstr "无法打开 PAD1 插件 (%d)"
 msgid "Error Opening PAD2 Plugin (%d)"
 msgstr "无法打开 PAD2 插件 (%d)"
 
-#: ../win32/gui/plugin.c:307
+#: ../win32/gui/plugin.c:314
 msgid "Error Closing CDR Plugin"
 msgstr "无法关闭 CD-ROM 插件 (%d)"
 
-#: ../win32/gui/plugin.c:309
+#: ../win32/gui/plugin.c:316
 msgid "Error Closing GPU Plugin"
 msgstr "无法关闭 GPU 插件"
 
-#: ../win32/gui/plugin.c:311
+#: ../win32/gui/plugin.c:318
 msgid "Error Closing SPU Plugin"
 msgstr "无法关闭 SPU 插件"
 
-#: ../win32/gui/plugin.c:313
-msgid "Error Closing PAD1 Plugin"
-msgstr "无法关闭 PAD1 插件"
-
-#: ../win32/gui/plugin.c:315
-msgid "Error Closing PAD2 Plugin"
-msgstr "无法关闭 PAD2 插件!"
-
-#: ../win32/gui/plugin.c:333
+#: ../win32/gui/plugin.c:336
 #, c-format
 msgid "CDRinit error: %d"
 msgstr "CDRinit 错误: %d"
 
-#: ../win32/gui/plugin.c:335
+#: ../win32/gui/plugin.c:338
 #, c-format
 msgid "GPUinit error: %d"
 msgstr "GPUinit 错误: %d"
 
-#: ../win32/gui/plugin.c:337
+#: ../win32/gui/plugin.c:340
 #, c-format
 msgid "SPUinit error: %d"
 msgstr "SPUinit 错误: %d"
 
-#: ../win32/gui/plugin.c:339
+#: ../win32/gui/plugin.c:342
 #, c-format
 msgid "PAD1init error: %d"
 msgstr "PAD1init 错误: %d"
 
-#: ../win32/gui/plugin.c:341
+#: ../win32/gui/plugin.c:344
 #, c-format
 msgid "PAD2init error: %d"
 msgstr "PAD2init 错误: %d"
 
-#: ../win32/gui/plugin.c:344
+#: ../win32/gui/plugin.c:347
 #, c-format
 msgid "NETinit error: %d"
 msgstr "NETinit 错误: %d"
@@ -1412,74 +1404,74 @@ msgstr "目标记忆卡上无空余位置。请先删除一个存档。"
 msgid "Memory Card Manager"
 msgstr "记忆卡管理器"
 
-#: ../gui/Plugin.c:203
+#: ../gui/Plugin.c:211
 #: ../data/pcsx.glade2:1487
 #, c-format
 msgid "SIO IRQ Always Enabled"
 msgstr "SIO IRQ 总是启用"
 
-#: ../gui/Plugin.c:204
+#: ../gui/Plugin.c:212
 #, c-format
 msgid "SIO IRQ Not Always Enabled"
 msgstr "SIO IRQ 不总是启用"
 
-#: ../gui/Plugin.c:210
+#: ../gui/Plugin.c:218
 #, c-format
 msgid "Black & White Mdecs Only Enabled"
 msgstr "Black & White Mdecs Only 启用"
 
-#: ../gui/Plugin.c:211
+#: ../gui/Plugin.c:219
 #, c-format
 msgid "Black & White Mdecs Only Disabled"
 msgstr "Black & White Mdecs Only 禁用"
 
-#: ../gui/Plugin.c:217
+#: ../gui/Plugin.c:225
 #, c-format
 msgid "XA Enabled"
 msgstr "XA 已启用"
 
-#: ../gui/Plugin.c:218
+#: ../gui/Plugin.c:226
 #, c-format
 msgid "XA Disabled"
 msgstr "XA 已禁用"
 
-#: ../gui/Plugin.c:280
+#: ../gui/Plugin.c:288
 msgid "Error opening CD-ROM plugin!"
 msgstr "无法打开CD-ROM 插件!"
 
-#: ../gui/Plugin.c:282
+#: ../gui/Plugin.c:290
 msgid "Error opening SPU plugin!"
 msgstr "无法打开 SPU 插件!"
 
-#: ../gui/Plugin.c:285
+#: ../gui/Plugin.c:293
 msgid "Error opening GPU plugin!"
 msgstr "无法打开 GPU 插件!"
 
-#: ../gui/Plugin.c:287
+#: ../gui/Plugin.c:295
 msgid "Error opening Controller 1 plugin!"
 msgstr "无法打开 \"控制器 1\" 插件!"
 
-#: ../gui/Plugin.c:289
+#: ../gui/Plugin.c:297
 msgid "Error opening Controller 2 plugin!"
 msgstr "无法打开 \"控制器 2\" 插件!"
 
-#: ../gui/Plugin.c:369
+#: ../gui/Plugin.c:377
 msgid "Error closing CD-ROM plugin!"
 msgstr "无法关闭 CD-ROM 插件!"
 
-#: ../gui/Plugin.c:371
+#: ../gui/Plugin.c:379
 msgid "Error closing SPU plugin!"
 msgstr "无法关闭 SPU 插件!"
 
-#: ../gui/Plugin.c:373
+#: ../gui/Plugin.c:381
 msgid "Error closing Controller 1 Plugin!"
 msgstr "无法关闭 \"控制器 1\" 插件!"
 
-#: ../gui/Plugin.c:375
+#: ../gui/Plugin.c:383
 msgid "Error closing Controller 2 plugin!"
 msgstr "无法关闭 \"控制器 2\" 插件!"
 
-#: ../gui/Plugin.c:377
+#: ../gui/Plugin.c:385
 msgid "Error closing GPU plugin!"
 msgstr "无法关闭 GPU 插件!"
 
@@ -1537,72 +1529,72 @@ msgstr "COFF 文件尚未支持。\n"
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "此文件不是一个合法的 PSX 文件。\n"
 
-#: ../libpcsxcore/plugins.c:140
+#: ../libpcsxcore/plugins.c:142
 #, c-format
 msgid "Error loading %s: %s"
 msgstr "无法加载 %s: %s"
 
-#: ../libpcsxcore/plugins.c:185
+#: ../libpcsxcore/plugins.c:187
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "无法加载 GPU 插件 %s!"
 
-#: ../libpcsxcore/plugins.c:256
+#: ../libpcsxcore/plugins.c:257
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "无法加载 CD-ROM 插件 %s!"
 
-#: ../libpcsxcore/plugins.c:302
+#: ../libpcsxcore/plugins.c:305
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "无法加载 SPU 插件 %s!"
 
-#: ../libpcsxcore/plugins.c:439
+#: ../libpcsxcore/plugins.c:442
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "无法加载 \"控制器1\" 插件 %s!"
 
-#: ../libpcsxcore/plugins.c:493
+#: ../libpcsxcore/plugins.c:496
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "无法加载 \"控制器2\" 插件 %s!"
 
-#: ../libpcsxcore/plugins.c:536
+#: ../libpcsxcore/plugins.c:539
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "无法加载联网游戏插件 %s!"
 
-#: ../libpcsxcore/plugins.c:597
+#: ../libpcsxcore/plugins.c:600
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr "CD-ROM 插件初始化错误: %d"
 
-#: ../libpcsxcore/plugins.c:599
+#: ../libpcsxcore/plugins.c:602
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr "GPU 插件初始化错误: %d"
 
-#: ../libpcsxcore/plugins.c:601
+#: ../libpcsxcore/plugins.c:604
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr "SPU 插件初始化错误: %d"
 
-#: ../libpcsxcore/plugins.c:603
+#: ../libpcsxcore/plugins.c:606
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr "\"控制器1\" 插件初始化错误: %d"
 
-#: ../libpcsxcore/plugins.c:605
+#: ../libpcsxcore/plugins.c:608
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr "\"控制器2\" 插件初始化错误: %d"
 
-#: ../libpcsxcore/plugins.c:609
+#: ../libpcsxcore/plugins.c:612
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr "联网游戏插件初始化错误: %d"
 
-#: ../libpcsxcore/plugins.c:612
+#: ../libpcsxcore/plugins.c:615
 msgid "Plugins loaded.\n"
 msgstr "插件已加载。\n"
 
@@ -1625,7 +1617,7 @@ msgstr "已加载 PPF %d.0 补丁文件: %s。\n"
 msgid "Error allocating memory!"
 msgstr "分配内存错误!"
 
-#: ../libpcsxcore/psxmem.c:121
+#: ../libpcsxcore/psxmem.c:122
 #, c-format
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr "无法打开 BIOS: \"%s\"。使用内部 HLE Bios。\n"
@@ -1890,7 +1882,15 @@ msgstr "Lunar 中黑屏"
 msgid "Compatibility mode"
 msgstr "兼容模式"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:682
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:670
+msgid "Fake 'gpu busy' states"
+msgstr "欺骗 'gpu 忙' 状态"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:688
+msgid "Toggle busy flags after drawing"
+msgstr "绘制后切换忙碌标志"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:713
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:268
 msgid "<b>Compatibility</b>"
 msgstr "<b>兼容性</b>"
@@ -2407,7 +2407,7 @@ msgstr "单声道"
 msgid "Play only one channel for a performance boost."
 msgstr "仅播放一个声道以提升性能。"
 
-#: ../plugins/dfcdrom/cdr-linux.c:60
+#: ../plugins/dfcdrom/cdr-linux.c:70
 msgid "CD-ROM Drive Reader"
 msgstr "CD-ROM 设备读取插件"
 
@@ -3158,5 +3158,10 @@ msgstr "开始游戏"
 msgid "Play Offline"
 msgstr "离线运行"
 
+#~ msgid "Error Closing PAD1 Plugin"
+#~ msgstr "无法关闭 PAD1 插件"
+#~ msgid "Error Closing PAD2 Plugin"
+#~ msgstr "无法关闭 PAD2 插件!"
 #~ msgid "Internal HLE Bios"
 #~ msgstr "内部 HLE-Bios"
+

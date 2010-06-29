@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-03 08:39+0800\n"
+"POT-Creation-Date: 2010-06-29 18:58+0800\n"
 "PO-Revision-Date: 2010-05-14 06:01+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -484,52 +484,44 @@ msgstr "Ошибка открытия PAD1 плагина (%d)"
 msgid "Error Opening PAD2 Plugin (%d)"
 msgstr "Ошибка открытия PAD2 плагина (%d)"
 
-#: ../win32/gui/plugin.c:307
+#: ../win32/gui/plugin.c:314
 msgid "Error Closing CDR Plugin"
 msgstr "Ошибка при закрытии CD-ROM плагина (%d)"
 
-#: ../win32/gui/plugin.c:309
+#: ../win32/gui/plugin.c:316
 msgid "Error Closing GPU Plugin"
 msgstr "Ошибка при закрытии GPU плагина"
 
-#: ../win32/gui/plugin.c:311
+#: ../win32/gui/plugin.c:318
 msgid "Error Closing SPU Plugin"
 msgstr "Ошибка при закрытии SPU плагина"
 
-#: ../win32/gui/plugin.c:313
-msgid "Error Closing PAD1 Plugin"
-msgstr "Ошибка при закрытии PAD1 плагина"
-
-#: ../win32/gui/plugin.c:315
-msgid "Error Closing PAD2 Plugin"
-msgstr "Ошибка при закрытии PAD2 плагина"
-
-#: ../win32/gui/plugin.c:333
+#: ../win32/gui/plugin.c:336
 #, c-format
 msgid "CDRinit error: %d"
 msgstr "Ошибка в CDRinit: %d"
 
-#: ../win32/gui/plugin.c:335
+#: ../win32/gui/plugin.c:338
 #, c-format
 msgid "GPUinit error: %d"
 msgstr "Ошибка в GPUinit: %d"
 
-#: ../win32/gui/plugin.c:337
+#: ../win32/gui/plugin.c:340
 #, c-format
 msgid "SPUinit error: %d"
 msgstr "Ошибка в SPUinit: %d"
 
-#: ../win32/gui/plugin.c:339
+#: ../win32/gui/plugin.c:342
 #, c-format
 msgid "PAD1init error: %d"
 msgstr "Ошибка в PAD1init: %d"
 
-#: ../win32/gui/plugin.c:341
+#: ../win32/gui/plugin.c:344
 #, c-format
 msgid "PAD2init error: %d"
 msgstr "Ошибка в PAD2init: %d"
 
-#: ../win32/gui/plugin.c:344
+#: ../win32/gui/plugin.c:347
 #, c-format
 msgid "NETinit error: %d"
 msgstr "Ошибка в NETinit: %d"
@@ -1306,73 +1298,73 @@ msgstr "Недостаточно свободных блоков на карте
 msgid "Memory Card Manager"
 msgstr "Менеджер карт памяти"
 
-#: ../gui/Plugin.c:203 ../data/pcsx.glade2:1487
+#: ../gui/Plugin.c:211 ../data/pcsx.glade2:1487
 #, c-format
 msgid "SIO IRQ Always Enabled"
 msgstr "Удерживание линии прерывания SIO"
 
-#: ../gui/Plugin.c:204
+#: ../gui/Plugin.c:212
 #, c-format
 msgid "SIO IRQ Not Always Enabled"
 msgstr "Удерживание линии прерывания SIO выключено"
 
-#: ../gui/Plugin.c:210
+#: ../gui/Plugin.c:218
 #, c-format
 msgid "Black & White Mdecs Only Enabled"
 msgstr "Режим чёрно-белых видео вставок (Mdecs) включен"
 
-#: ../gui/Plugin.c:211
+#: ../gui/Plugin.c:219
 #, c-format
 msgid "Black & White Mdecs Only Disabled"
 msgstr "Режим чёрно-белых видео вставок (Mdecs) выключен"
 
-#: ../gui/Plugin.c:217
+#: ../gui/Plugin.c:225
 #, c-format
 msgid "XA Enabled"
 msgstr "XA включено"
 
-#: ../gui/Plugin.c:218
+#: ../gui/Plugin.c:226
 #, c-format
 msgid "XA Disabled"
 msgstr "XA выключено"
 
-#: ../gui/Plugin.c:280
+#: ../gui/Plugin.c:288
 msgid "Error opening CD-ROM plugin!"
 msgstr "Ошибка открытия CD-ROM плагина!"
 
-#: ../gui/Plugin.c:282
+#: ../gui/Plugin.c:290
 msgid "Error opening SPU plugin!"
 msgstr "Ошибка открытия SPU плагина!"
 
-#: ../gui/Plugin.c:285
+#: ../gui/Plugin.c:293
 msgid "Error opening GPU plugin!"
 msgstr "Ошибка открытия GPU плагина!"
 
-#: ../gui/Plugin.c:287
+#: ../gui/Plugin.c:295
 msgid "Error opening Controller 1 plugin!"
 msgstr "Ошибка открытия PAD1 плагина!"
 
-#: ../gui/Plugin.c:289
+#: ../gui/Plugin.c:297
 msgid "Error opening Controller 2 plugin!"
 msgstr "Ошибка открытия PAD2 плагина!"
 
-#: ../gui/Plugin.c:369
+#: ../gui/Plugin.c:377
 msgid "Error closing CD-ROM plugin!"
 msgstr "Ошибка при закрытии CD-ROM плагина!"
 
-#: ../gui/Plugin.c:371
+#: ../gui/Plugin.c:379
 msgid "Error closing SPU plugin!"
 msgstr "Ошибка при закрытии SPU плагина!"
 
-#: ../gui/Plugin.c:373
+#: ../gui/Plugin.c:381
 msgid "Error closing Controller 1 Plugin!"
 msgstr "Ошибка при закрытии PAD1 плагина!"
 
-#: ../gui/Plugin.c:375
+#: ../gui/Plugin.c:383
 msgid "Error closing Controller 2 plugin!"
 msgstr "Ошибка при закрытии PAD2 плагина!"
 
-#: ../gui/Plugin.c:377
+#: ../gui/Plugin.c:385
 msgid "Error closing GPU plugin!"
 msgstr "Ошибка при закрытии GPU плагина!"
 
@@ -1429,72 +1421,72 @@ msgstr "Формат COFF не поддерживается.\n"
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "This file does not appear to be a valid PSX file.\n"
 
-#: ../libpcsxcore/plugins.c:140
+#: ../libpcsxcore/plugins.c:142
 #, c-format
 msgid "Error loading %s: %s"
 msgstr "Ошибка загрузки %s: %s"
 
-#: ../libpcsxcore/plugins.c:185
+#: ../libpcsxcore/plugins.c:187
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "Не удалось загрузить GPU плагин %s!"
 
-#: ../libpcsxcore/plugins.c:256
+#: ../libpcsxcore/plugins.c:257
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "Не удалось загрузить CD-ROM плагин %s!"
 
-#: ../libpcsxcore/plugins.c:302
+#: ../libpcsxcore/plugins.c:305
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "Не удалось загрузить SPU плагин %s!"
 
-#: ../libpcsxcore/plugins.c:439
+#: ../libpcsxcore/plugins.c:442
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "Не удалось загрузить PAD1 плагин %s!"
 
-#: ../libpcsxcore/plugins.c:493
+#: ../libpcsxcore/plugins.c:496
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "Не удалось загрузить PAD2 плагин %s!"
 
-#: ../libpcsxcore/plugins.c:536
+#: ../libpcsxcore/plugins.c:539
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "Не удалось загрузить NetPlay плагин %s!"
 
-#: ../libpcsxcore/plugins.c:597
+#: ../libpcsxcore/plugins.c:600
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr "Ошибка инициализации CD-ROM плагина: %d"
 
-#: ../libpcsxcore/plugins.c:599
+#: ../libpcsxcore/plugins.c:602
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr "Ошибка инициализации GPU плагина: %d"
 
-#: ../libpcsxcore/plugins.c:601
+#: ../libpcsxcore/plugins.c:604
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr "Ошибка инициализации SPU плагина: %d"
 
-#: ../libpcsxcore/plugins.c:603
+#: ../libpcsxcore/plugins.c:606
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr "Ошибка инициализации PAD1 плагина: %d"
 
-#: ../libpcsxcore/plugins.c:605
+#: ../libpcsxcore/plugins.c:608
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr "Ошибка инициализации PAD2 плагина: %d"
 
-#: ../libpcsxcore/plugins.c:609
+#: ../libpcsxcore/plugins.c:612
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr "Ошибка инициализации NetPlay плагина: %d"
 
-#: ../libpcsxcore/plugins.c:612
+#: ../libpcsxcore/plugins.c:615
 msgid "Plugins loaded.\n"
 msgstr "Плагины загружены.\n"
 
@@ -1517,7 +1509,7 @@ msgstr "Загружен PPF %d.0 патч: %s。\n"
 msgid "Error allocating memory!"
 msgstr "Ошибка выделения памяти!"
 
-#: ../libpcsxcore/psxmem.c:121
+#: ../libpcsxcore/psxmem.c:122
 #, c-format
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
@@ -1772,7 +1764,16 @@ msgstr "Чёрный экран в LunarSSSC"
 msgid "Compatibility mode"
 msgstr "Режим совместимости"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:682
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:670
+#, fuzzy
+msgid "Fake 'gpu busy' states"
+msgstr "Имитация 'занятости' gpu"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:688
+msgid "Toggle busy flags after drawing"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:713
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:268
 msgid "<b>Compatibility</b>"
 msgstr "<b>Совместимость</b>"
@@ -2275,7 +2276,7 @@ msgstr "Одноканальный звук"
 msgid "Play only one channel for a performance boost."
 msgstr "Проигрывать только один канал, для прироста производительности"
 
-#: ../plugins/dfcdrom/cdr-linux.c:60
+#: ../plugins/dfcdrom/cdr-linux.c:70
 msgid "CD-ROM Drive Reader"
 msgstr ""
 
@@ -3012,6 +3013,12 @@ msgstr "Начать сетевую игру"
 #: ../plugins/dfnet/dfnet.glade2:240
 msgid "Play Offline"
 msgstr "Начать без использования сети"
+
+#~ msgid "Error Closing PAD1 Plugin"
+#~ msgstr "Ошибка при закрытии PAD1 плагина"
+
+#~ msgid "Error Closing PAD2 Plugin"
+#~ msgstr "Ошибка при закрытии PAD2 плагина"
 
 #~ msgid "Internal HLE Bios"
 #~ msgstr "Внутренний HLE-биос"
