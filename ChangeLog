@@ -1,3 +1,8 @@
+Jun 29, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * win32/gui/plugin.c: Close PAD plugins before other plugins and don't check
+   return value for PADclose(), which should fix issues with LilyPad.
+
 Jun 26, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/psxbios.c: Fixed bcopy() (FF9 battle crash with HLE BIOS - my

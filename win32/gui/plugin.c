@@ -302,17 +302,20 @@ int OpenPlugins(HWND hWnd, int internaliso) {
 void ClosePlugins() {
 	int ret;
 
+	// PAD plugins have to be closed first, otherwise some plugins like
+	// LilyPad will mess up the window handle and cause crash.
+	// Also don't check return value here, as LilyPad uses void.
+	PAD1_close();
+	PAD2_close();
+
 	UpdateMenuSlots();
+
 	ret = CDR_close();
 	if (ret < 0) { SysMessage (_("Error Closing CDR Plugin")); return; }
 	ret = GPU_close();
 	if (ret < 0) { SysMessage (_("Error Closing GPU Plugin")); return; }
 	ret = SPU_close();
 	if (ret < 0) { SysMessage (_("Error Closing SPU Plugin")); return; }
-	ret = PAD1_close();
-	if (ret < 0) { SysMessage (_("Error Closing PAD1 Plugin")); return; }
-	ret = PAD2_close();
-	if (ret < 0) { SysMessage (_("Error Closing PAD2 Plugin")); return; }
 
 	if (Config.UseNet) {
 		NET_pause();
