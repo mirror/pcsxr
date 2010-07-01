@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-07-01 15:44+0800\n"
-"PO-Revision-Date: 2010-05-14 06:01+0400\n"
+"PO-Revision-Date: 2010-07-01 23:53+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -296,7 +296,7 @@ msgstr "Шестнадцатеричное"
 
 #: ../win32/gui/ConfigurePlugins.c:219
 msgid "Simulate Psx Bios"
-msgstr ""
+msgstr "Симулировать биос psx"
 
 #: ../win32/gui/ConfigurePlugins.c:305
 msgid "Configuration not OK!"
@@ -1068,7 +1068,7 @@ msgstr "Не удалось открыть каталог: '%s'\n"
 
 #: ../gui/ConfDlg.c:675
 msgid "Simulate PSX BIOS"
-msgstr ""
+msgstr "Симулировать биос psx"
 
 #: ../gui/DebugMemory.c:103 ../data/pcsx.glade2:3178
 msgid "Memory Dump"
@@ -1371,7 +1371,7 @@ msgstr "Ошибка при закрытии GPU плагина!"
 #: ../libpcsxcore/cdriso.c:643
 #, c-format
 msgid "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"
-msgstr ""
+msgstr "Трек %.2d (%s) - Начало %.2d:%.2d:%.2d, Длина %.2d:%.2d:%.2d\n"
 
 #: ../libpcsxcore/cdriso.c:662
 #, c-format
@@ -1770,13 +1770,12 @@ msgid "Compatibility mode"
 msgstr "Режим совместимости"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:670
-#, fuzzy
 msgid "Fake 'gpu busy' states"
-msgstr "Имитация 'занятости' gpu"
+msgstr "Имитация 'занятости' gpu "
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:688
 msgid "Toggle busy flags after drawing"
-msgstr ""
+msgstr "Переключить флаг занятости после отрисовки"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:713
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:268
@@ -2166,28 +2165,24 @@ msgid "Mac OS X Sound"
 msgstr ""
 
 #: ../plugins/dfsound/spu.c:40
-#, fuzzy
 msgid "ALSA Sound"
-msgstr "Звук"
+msgstr ""
 
 #: ../plugins/dfsound/spu.c:42
-#, fuzzy
 msgid "OSS Sound"
-msgstr "Звук"
+msgstr ""
 
 #: ../plugins/dfsound/spu.c:44
-#, fuzzy
 msgid "SDL Sound"
-msgstr "Звук"
+msgstr ""
 
 #: ../plugins/dfsound/spu.c:46
 msgid "PulseAudio Sound"
 msgstr ""
 
 #: ../plugins/dfsound/spu.c:48
-#, fuzzy
 msgid "NULL Sound"
-msgstr "Звук"
+msgstr ""
 
 #: ../plugins/dfsound/spu.c:51
 msgid ""
@@ -2271,7 +2266,7 @@ msgstr ""
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:235
 msgid "Wait for CPU; only useful for some games."
-msgstr ""
+msgstr "Ожидать CPU; имеет смысл только для некоторых игр."
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:247
 msgid "Single channel sound"
