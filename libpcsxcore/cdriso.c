@@ -300,6 +300,7 @@ static int parsetoc(const char *isofile) {
 	}
 
 	memset(&ti, 0, sizeof(ti));
+	cddaBigEndian = TRUE; // cdrdao uses big-endian for CD Audio
 
 	// parse the .toc file
 	while (fgets(linebuf, sizeof(linebuf), fi) != NULL) {
@@ -329,8 +330,17 @@ static int parsetoc(const char *isofile) {
 			}
 		}
 		else if (!strcmp(token, "DATAFILE")) {
-			sscanf(linebuf, "DATAFILE \"%[^\"]\" %8s", name, time);
-			tok2msf((char *)&time, (char *)&ti[numtracks].length);
+			if (ti[numtracks].type == CDDA) {
+				sscanf(linebuf, "DATAFILE \"%[^\"]\" #%d %8s", name, &t, time2);
+				t /= CD_FRAMESIZE_RAW + (subChanInterleaved ? SUB_FRAMESIZE : 0);
+				t += 2 * 75;
+				sec2msf(t, (char *)&ti[numtracks].start);
+				tok2msf((char *)&time2, (char *)&ti[numtracks].length);
+			}
+			else {
+				sscanf(linebuf, "DATAFILE \"%[^\"]\" %8s", name, time);
+				tok2msf((char *)&time, (char *)&ti[numtracks].length);
+			}
 		}
 		else if (!strcmp(token, "FILE")) {
 			sscanf(linebuf, "FILE \"%[^\"]\" #%d %8s %8s", name, &t, time, time2);
@@ -626,6 +636,17 @@ static long CALLBACK ISOshutdown(void) {
 	return 0;
 }
 
+static void PrintTracks(void) {
+	int i;
+
+	for (i = 1; i <= numtracks; i++) {
+		SysPrintf(_("Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"),
+			i, (ti[i].type == DATA ? "DATA" : "AUDIO"),
+			ti[i].start[0], ti[i].start[1], ti[i].start[2],
+			ti[i].length[0], ti[i].length[1], ti[i].length[2]);
+	}
+}
+
 // This function is invoked by the front-end when opening an ISO
 // file for playback
 static long CALLBACK ISOopen(void) {
@@ -644,7 +665,6 @@ static long CALLBACK ISOopen(void) {
 	subChanInterleaved = FALSE;
 
 	if (parsetoc(GetIsoFile()) == 0) {
-		cddaBigEndian = TRUE; // cdrdao uses big-endian for CD Audio
 		SysPrintf("[+toc]");
 	}
 	else if (parsecue(GetIsoFile()) == 0) {
@@ -662,6 +682,8 @@ static long CALLBACK ISOopen(void) {
 	}
 
 	SysPrintf(".\n");
+
+	PrintTracks();
 
 	return 0;
 }
