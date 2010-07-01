@@ -1,6 +1,9 @@
 Jun 30, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
- * macosx/PcsxController.m: Default dynarec to off until it's actually working :(
+ * macosx/PcsxController.m: Default dynarec to off until it's actually working
+   for Mac OS X :(
+ * libpcsxcore/cdriso.c: Added support for images ripped with cdrdao with
+   "--read-subchan rw_raw" for subchannel data.
 
 Jun 29, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

@@ -35,7 +35,7 @@ static FILE *cdHandle = NULL;
 static FILE *cddaHandle = NULL;
 static FILE *subHandle = NULL;
 
-static char subChanInterleaved = 0;
+static boolean subChanInterleaved = FALSE;
 
 static unsigned char cdbuffer[DATA_SIZE];
 static unsigned char subbuffer[SUB_FRAMESIZE];
@@ -50,8 +50,8 @@ static HANDLE threadid;
 static pthread_t threadid;
 #endif
 static unsigned int initial_offset = 0;
-static volatile char playing = 0;
-static char cddaBigEndian = 0;
+static volatile boolean playing = FALSE;
+static boolean cddaBigEndian = FALSE;
 static volatile unsigned int cddaCurOffset = 0;
 
 char* CALLBACK CDR__getDriveLetter(void);
@@ -180,7 +180,7 @@ static void *playthread(void *param)
 		}
 
 		if (s == 0) {
-			playing = 0;
+			playing = FALSE;
 			fclose(cddaHandle);
 			cddaHandle = NULL;
 			initial_offset = 0;
@@ -216,7 +216,7 @@ static void stopCDDA() {
 		return;
 	}
 
-	playing = 0;
+	playing = FALSE;
 #ifdef _WIN32
 	WaitForSingleObject(threadid, INFINITE);
 #else
@@ -249,7 +249,7 @@ static void startCDDA(unsigned int offset) {
 	cddaCurOffset = initial_offset;
 	fseek(cddaHandle, initial_offset, SEEK_SET);
 
-	playing = 1;
+	playing = TRUE;
 
 #ifdef _WIN32
 	threadid = (HANDLE)_beginthread(playthread, 0, NULL);
@@ -307,20 +307,24 @@ static int parsetoc(const char *isofile) {
 		strncpy(dummy, linebuf, sizeof(linebuf));
 		token = strtok(dummy, " ");
 
-		if (token == NULL) {
-			continue;
-		}
+		if (token == NULL) continue;
 
 		if (!strcmp(token, "TRACK")) {
 			// get type of track
 			token = strtok(NULL, " ");
 			numtracks++;
 
-			if (!strcmp(token, "MODE2_RAW\n")) {
+			if (!strncmp(token, "MODE2_RAW", 9)) {
 				ti[numtracks].type = DATA;
 				sec2msf(2 * 75, ti[numtracks].start); // assume data track on 0:2:0
+
+				// check if this image contains interleaved subchannel data
+				token = strtok(NULL, " ");
+				if (token != NULL && !strncmp(token, "RW_RAW", 6)) {
+					subChanInterleaved = TRUE;
+				}
 			}
-			else if (!strcmp(token, "AUDIO\n")) {
+			else if (!strncmp(token, "AUDIO", 5)) {
 				ti[numtracks].type = CDDA;
 			}
 		}
@@ -331,7 +335,7 @@ static int parsetoc(const char *isofile) {
 		else if (!strcmp(token, "FILE")) {
 			sscanf(linebuf, "FILE \"%[^\"]\" #%d %8s %8s", name, &t, time, time2);
 			tok2msf((char *)&time, (char *)&ti[numtracks].start);
-			t /= CD_FRAMESIZE_RAW;
+			t /= CD_FRAMESIZE_RAW + (subChanInterleaved ? SUB_FRAMESIZE : 0);
 			t += msf2sec(ti[numtracks].start) + 2 * 75;
 			sec2msf(t, (char *)&ti[numtracks].start);
 			tok2msf((char *)&time2, (char *)&ti[numtracks].length);
@@ -544,7 +548,7 @@ static int parsemds(const char *isofile) {
 
 	// check if the image contains interleaved subchannel data
 	fseek(fi, offset + 1, SEEK_SET);
-	subChanInterleaved = fgetc(fi);
+	subChanInterleaved = (fgetc(fi) ? TRUE : FALSE);
 
 	// read track data
 	for (i = 1; i <= numtracks; i++) {
@@ -636,11 +640,11 @@ static long CALLBACK ISOopen(void) {
 
 	SysPrintf(_("Loaded CD Image: %s"), GetIsoFile());
 
-	cddaBigEndian = 0;
-	subChanInterleaved = 0;
+	cddaBigEndian = FALSE;
+	subChanInterleaved = FALSE;
 
 	if (parsetoc(GetIsoFile()) == 0) {
-		cddaBigEndian = 1; // cdrdao uses big-endian for CD Audio
+		cddaBigEndian = TRUE; // cdrdao uses big-endian for CD Audio
 		SysPrintf("[+toc]");
 	}
 	else if (parsecue(GetIsoFile()) == 0) {
