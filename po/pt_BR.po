@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsx-df\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-29 18:58+0800\n"
+"POT-Creation-Date: 2010-07-01 15:44+0800\n"
 "PO-Revision-Date: 2009-11-28 23:57+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: PoBRE <romhackers@gmail.com>\n"
@@ -1401,7 +1401,12 @@ msgstr "Erro ao fechar a extensão de Controle 2!"
 msgid "Error closing GPU plugin!"
 msgstr "Erro ao fechar a extensão de GPU!"
 
-#: ../libpcsxcore/cdriso.c:637
+#: ../libpcsxcore/cdriso.c:643
+#, c-format
+msgid "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"
+msgstr ""
+
+#: ../libpcsxcore/cdriso.c:662
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr "Carregou a imagem de CD \"%s\"."

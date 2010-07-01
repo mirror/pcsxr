@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-29 18:58+0800\n"
+"POT-Creation-Date: 2010-07-01 15:44+0800\n"
 "PO-Revision-Date: 2010-05-14 06:01+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -1368,7 +1368,12 @@ msgstr "Ошибка при закрытии PAD2 плагина!"
 msgid "Error closing GPU plugin!"
 msgstr "Ошибка при закрытии GPU плагина!"
 
-#: ../libpcsxcore/cdriso.c:637
+#: ../libpcsxcore/cdriso.c:643
+#, c-format
+msgid "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"
+msgstr ""
+
+#: ../libpcsxcore/cdriso.c:662
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr "Загружен образ CD: %s"

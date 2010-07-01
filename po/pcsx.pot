@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-29 18:58+0800\n"
+"POT-Creation-Date: 2010-07-01 15:44+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1348,7 +1348,12 @@ msgstr ""
 msgid "Error closing GPU plugin!"
 msgstr ""
 
-#: ../libpcsxcore/cdriso.c:637
+#: ../libpcsxcore/cdriso.c:643
+#, c-format
+msgid "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"
+msgstr ""
+
+#: ../libpcsxcore/cdriso.c:662
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr ""

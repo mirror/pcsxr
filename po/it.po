@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-29 18:58+0800\n"
+"POT-Creation-Date: 2010-07-01 15:44+0800\n"
 "PO-Revision-Date: 2010-03-15 16:00+0200\n"
 "Last-Translator: Giovanni Scafora <giovanni@archlinux.org>\n"
 "Language-Team: Arch Linux Italian Team <giovanni@archlinux.org>\n"
@@ -1415,7 +1415,12 @@ msgstr ""
 msgid "Error closing GPU plugin!"
 msgstr "Si è verificato un errore durante la chiusura del plugin della GPU!"
 
-#: ../libpcsxcore/cdriso.c:637
+#: ../libpcsxcore/cdriso.c:643
+#, c-format
+msgid "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"
+msgstr ""
+
+#: ../libpcsxcore/cdriso.c:662
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr "È stata caricata l'immagine del CD: %s"
