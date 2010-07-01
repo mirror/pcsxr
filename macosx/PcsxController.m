@@ -315,10 +315,9 @@ NSString *saveStatePath;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
 		@"Disabled", @"PluginNET",
-		[NSNumber numberWithInt:0], @"NoDynarec",
+		[NSNumber numberWithInt:1], @"NoDynarec",
 		[NSNumber numberWithInt:1], @"AutoDetectVideoType",
 		[NSNumber numberWithInt:0], @"UseHLE",
-		[NSNumber numberWithInt:1], @"CpuBiasShift",
 		nil];
 
 	[defaults registerDefaults:appDefaults];

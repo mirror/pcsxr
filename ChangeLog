@@ -1,3 +1,7 @@
+Jun 30, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/PcsxController.m: Default dynarec to off until it's actually working :(
+
 Jun 29, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * win32/gui/plugin.c: Close PAD plugins before other plugins and don't check
