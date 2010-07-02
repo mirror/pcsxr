@@ -140,7 +140,7 @@ static void *playthread(void *param)
 #endif
 {
 	long			d, t, i, s;
-	unsigned short	tmp;
+	unsigned char	tmp;
 
 	t = GetTickCount();
 
