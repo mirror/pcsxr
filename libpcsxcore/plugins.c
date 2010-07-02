@@ -135,6 +135,40 @@ NETrecvPadData        NET_recvPadData;
 NETsetInfo            NET_setInfo;
 NETkeypressed         NET_keypressed;
 
+SIO1init              SIO1_init;
+SIO1shutdown          SIO1_shutdown;
+SIO1open              SIO1_open;
+SIO1close             SIO1_close; 
+SIO1test              SIO1_test;
+SIO1configure         SIO1_configure;
+SIO1about             SIO1_about;
+SIO1pause             SIO1_pause;
+SIO1resume            SIO1_resume;
+SIO1keypressed        SIO1_keypressed;
+SIO1writeData8        SIO1_writeData8;
+SIO1writeData16       SIO1_writeData16;
+SIO1writeData32       SIO1_writeData32;
+SIO1writeStat16       SIO1_writeStat16;
+SIO1writeStat32       SIO1_writeStat32;
+SIO1writeMode16       SIO1_writeMode16;
+SIO1writeMode32       SIO1_writeMode32;
+SIO1writeCtrl16       SIO1_writeCtrl16;
+SIO1writeCtrl32       SIO1_writeCtrl32;
+SIO1writeBaud16       SIO1_writeBaud16;
+SIO1writeBaud32       SIO1_writeBaud32;
+SIO1readData8         SIO1_readData8;
+SIO1readData16        SIO1_readData16;
+SIO1readData32        SIO1_readData32;
+SIO1readStat16        SIO1_readStat16;
+SIO1readStat32        SIO1_readStat32;
+SIO1readMode16        SIO1_readMode16;
+SIO1readMode32        SIO1_readMode32;
+SIO1readCtrl16        SIO1_readCtrl16;
+SIO1readCtrl32        SIO1_readCtrl32;
+SIO1readBaud16        SIO1_readBaud16;
+SIO1readBaud32        SIO1_readBaud32;
+SIO1registerCallback  SIO1_registerCallback;
+
 static const char *err;
 
 #define CheckErr(func) { \
@@ -559,6 +593,101 @@ static int LoadNETplugin(const char *NETdll) {
 	return 0;
 }
 
+void *hSIO1Driver = NULL;
+
+long CALLBACK SIO1__init(void) { return 0; }
+long CALLBACK SIO1__shutdown(void) { return 0; }
+long CALLBACK SIO1__open(void) { return 0; }
+long CALLBACK SIO1__close(void) { return 0; }
+long CALLBACK SIO1__configure(void) { return 0; }
+long CALLBACK SIO1__test(void) { return 0; }
+void CALLBACK SIO1__about(void) {}
+void CALLBACK SIO1__pause(void) {}
+void CALLBACK SIO1__resume(void) {}
+long CALLBACK SIO1__keypressed(int key) { return 0; }
+void CALLBACK SIO1__writeData8(unsigned char val) {}
+void CALLBACK SIO1__writeData16(unsigned short val) {}
+void CALLBACK SIO1__writeData32(unsigned long val) {}
+void CALLBACK SIO1__writeStat16(unsigned short val) {}
+void CALLBACK SIO1__writeStat32(unsigned long val) {}
+void CALLBACK SIO1__writeMode16(unsigned short val) {}
+void CALLBACK SIO1__writeMode32(unsigned long val) {}
+void CALLBACK SIO1__writeCtrl16(unsigned short val) {}
+void CALLBACK SIO1__writeCtrl32(unsigned long val) {}
+void CALLBACK SIO1__writeBaud16(unsigned short val) {}
+void CALLBACK SIO1__writeBaud32(unsigned long val) {}
+unsigned char CALLBACK SIO1__readData8(void) { return 0; }
+unsigned short CALLBACK SIO1__readData16(void) { return 0; }
+unsigned long CALLBACK SIO1__readData32(void) { return 0; }
+unsigned short CALLBACK SIO1__readStat16(void) { return 0; }
+unsigned long CALLBACK SIO1__readStat32(void) { return 0; }
+unsigned short CALLBACK SIO1__readMode16(void) { return 0; }
+unsigned long CALLBACK SIO1__readMode32(void) { return 0; }
+unsigned short CALLBACK SIO1__readCtrl16(void) { return 0; }
+unsigned long CALLBACK SIO1__readCtrl32(void) { return 0; }
+unsigned short CALLBACK SIO1__readBaud16(void) { return 0; }
+unsigned long CALLBACK SIO1__readBaud32(void) { return 0; }
+void CALLBACK SIO1__registerCallback(void (CALLBACK *callback)(void)) {};
+
+void CALLBACK SIO1irq(void) {
+    psxHu32ref(0x1070) |= SWAPu32(0x100);
+}
+
+#define LoadSio1Sym1(dest, name) \
+    LoadSym(SIO1_##dest, SIO1##dest, name, TRUE);
+
+#define LoadSio1SymN(dest, name) \
+    LoadSym(SIO1_##dest, SIO1##dest, name, FALSE);
+
+#define LoadSio1Sym0(dest, name) \
+    LoadSym(SIO1_##dest, SIO1##dest, name, FALSE); \
+    if (SIO1_##dest == NULL) SIO1_##dest = (SIO1##dest) SIO1__##dest;
+
+static int LoadSIO1plugin(const char *SIO1dll) {
+    void *drv;
+/*
+    hSIO1Driver = SysLoadLibrary(SIO1dll);
+    if (hSIO1Driver == NULL) {
+        SysMessage (_("Could not load SIO1 plugin %s!"), SIO1dll); return -1;
+    }
+    drv = hSIO1Driver;
+*/
+    LoadSio1Sym0(init, "SIO1init");
+    LoadSio1Sym0(shutdown, "SIO1shutdown");
+    LoadSio1Sym0(open, "SIO1open");
+    LoadSio1Sym0(close, "SIO1close");
+    LoadSio1Sym0(pause, "SIO1pause");
+    LoadSio1Sym0(resume, "SIO1resume");
+    LoadSio1Sym0(keypressed, "SIO1keypressed");
+    LoadSio1Sym0(configure, "SIO1configure");
+    LoadSio1Sym0(test, "SIO1test");
+    LoadSio1Sym0(about, "SIO1about");
+    LoadSio1Sym0(writeData8, "SIO1writeData8");
+    LoadSio1Sym0(writeData16, "SIO1writeData16");
+    LoadSio1Sym0(writeData32, "SIO1writeData32");
+    LoadSio1Sym0(writeStat16, "SIO1writeStat16");
+    LoadSio1Sym0(writeStat32, "SIO1writeStat32");
+    LoadSio1Sym0(writeMode16, "SIO1writeMode16");
+    LoadSio1Sym0(writeMode32, "SIO1writeMode32");
+    LoadSio1Sym0(writeCtrl16, "SIO1writeCtrl16");
+    LoadSio1Sym0(writeCtrl32, "SIO1writeCtrl32");
+    LoadSio1Sym0(writeBaud16, "SIO1writeBaud16");
+    LoadSio1Sym0(writeBaud32, "SIO1writeBaud32");
+    LoadSio1Sym0(readData16, "SIO1readData16");
+    LoadSio1Sym0(readData32, "SIO1readData32");
+    LoadSio1Sym0(readStat16, "SIO1readStat16");
+    LoadSio1Sym0(readStat32, "SIO1readStat32");
+    LoadSio1Sym0(readMode16, "SIO1readMode16");
+    LoadSio1Sym0(readMode32, "SIO1readMode32");
+    LoadSio1Sym0(readCtrl16, "SIO1readCtrl16");
+    LoadSio1Sym0(readCtrl32, "SIO1readCtrl32");
+    LoadSio1Sym0(readBaud16, "SIO1readBaud16");
+    LoadSio1Sym0(readBaud32, "SIO1readBaud32");
+    LoadSio1Sym0(registerCallback, "SIO1registerCallback");
+
+    return 0;
+}
+
 void CALLBACK clearDynarec(void) {
 	psxCpu->Reset();
 }
@@ -595,6 +724,9 @@ int LoadPlugins() {
 		sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Net);
 		if (LoadNETplugin(Plugin) == -1) Config.UseNet = FALSE;
 	}
+	
+	sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Sio1);
+    if (LoadSIO1plugin(Plugin) == -1) return -1;
 
 	ret = CDR_init();
 	if (ret < 0) { SysMessage (_("Error initializing CD-ROM plugin: %d"), ret); return -1; }
@@ -611,6 +743,9 @@ int LoadPlugins() {
 		ret = NET_init();
 		if (ret < 0) { SysMessage (_("Error initializing NetPlay plugin: %d"), ret); return -1; }
 	}
+	
+	ret = SIO1_init();
+    if (ret < 0) { SysMessage (_("Error initializing SIO1 plugin: %d"), ret); return -1; }
 
 	SysPrintf(_("Plugins loaded.\n"));
 	return 0;
@@ -628,6 +763,7 @@ void ReleasePlugins() {
 	if (hSPUDriver != NULL) SPU_shutdown();
 	if (hPAD1Driver != NULL) PAD1_shutdown();
 	if (hPAD2Driver != NULL) PAD2_shutdown();
+    if (hSIO1Driver != NULL) SIO1_shutdown();
 
 	if (Config.UseNet && hNETDriver != NULL) NET_shutdown(); 
 
@@ -636,6 +772,7 @@ void ReleasePlugins() {
 	if (hSPUDriver != NULL) SysCloseLibrary(hSPUDriver); hSPUDriver = NULL;
 	if (hPAD1Driver != NULL) SysCloseLibrary(hPAD1Driver); hPAD1Driver = NULL;
 	if (hPAD2Driver != NULL) SysCloseLibrary(hPAD2Driver); hPAD2Driver = NULL;
+    if (hSIO1Driver != NULL) SysCloseLibrary(hSIO1Driver); hSIO1Driver = NULL;
 
 	if (Config.UseNet && hNETDriver != NULL) {
 		SysCloseLibrary(hNETDriver); hNETDriver = NULL;
