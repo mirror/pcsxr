@@ -36,6 +36,7 @@ static FILE *cddaHandle = NULL;
 static FILE *subHandle = NULL;
 
 static boolean subChanInterleaved = FALSE;
+static boolean subChanRaw = FALSE;
 
 static unsigned char cdbuffer[DATA_SIZE];
 static unsigned char subbuffer[SUB_FRAMESIZE];
@@ -139,7 +140,7 @@ static void *playthread(void *param)
 #endif
 {
 	long			d, t, i, s;
-	unsigned char	tmp;
+	unsigned short	tmp;
 
 	t = GetTickCount();
 
@@ -281,8 +282,8 @@ static int parsetoc(const char *isofile) {
 	}
 
 	if ((fi = fopen(tocname, "r")) == NULL) {
-		// check for image.bin.toc (for AcetoneISO)
-		sprintf(tocname, "%s.toc", isofile);
+		// try changing extension to .cue (to satisfy some stupid tutorials)
+		strcpy(tocname + strlen(tocname) - 4, ".cue");
 		if ((fi = fopen(tocname, "r")) == NULL) {
 			// if filename is image.toc.bin, try removing .bin (for Brasero)
 			strcpy(tocname, isofile);
@@ -323,6 +324,7 @@ static int parsetoc(const char *isofile) {
 				token = strtok(NULL, " ");
 				if (token != NULL && !strncmp(token, "RW_RAW", 6)) {
 					subChanInterleaved = TRUE;
+					subChanRaw = TRUE;
 				}
 			}
 			else if (!strncmp(token, "AUDIO", 5)) {
@@ -382,6 +384,19 @@ static int parsecue(const char *isofile) {
 
 	if ((fi = fopen(cuename, "r")) == NULL) {
 		return -1;
+	}
+
+	// Some stupid tutorials wrongly tell users to use cdrdao to rip a
+	// "bin/cue" image, which is in fact a "bin/toc" image. So let's check
+	// that...
+	if (fgets(linebuf, sizeof(linebuf), fi) != NULL) {
+		if (!strncmp(linebuf, "CD_ROM_XA", 9)) {
+			// Don't proceed further, as this is actually a .toc file rather
+			// than a .cue file.
+			fclose(fi);
+			return parsetoc(isofile);
+		}
+		fseek(fi, 0, SEEK_SET);
 	}
 
 	memset(&ti, 0, sizeof(ti));
@@ -663,12 +678,13 @@ static long CALLBACK ISOopen(void) {
 
 	cddaBigEndian = FALSE;
 	subChanInterleaved = FALSE;
+	subChanRaw = FALSE;
 
-	if (parsetoc(GetIsoFile()) == 0) {
-		SysPrintf("[+toc]");
-	}
-	else if (parsecue(GetIsoFile()) == 0) {
+	if (parsecue(GetIsoFile()) == 0) {
 		SysPrintf("[+cue]");
+	}
+	else if (parsetoc(GetIsoFile()) == 0) {
+		SysPrintf("[+toc]");
 	}
 	else if (parseccd(GetIsoFile()) == 0) {
 		SysPrintf("[+ccd]");
@@ -782,6 +798,22 @@ static unsigned short calcCrc(unsigned char *d, int len) {
 	return ~crc;
 }
 
+// decode 'raw' subchannel data ripped by cdrdao
+static void DecodeRawSubData(void) {
+	unsigned char subQData[12];
+	int i;
+
+	memset(subQData, 0, sizeof(subQData));
+
+	for (i = 0; i < 8 * 12; i++) {
+		if (subbuffer[i] & (1 << 6)) { // only subchannel Q is needed
+			subQData[i >> 3] |= (1 << (7 - (i & 7)));
+		}
+	}
+
+	memcpy(&subbuffer[12], subQData, 12);
+}
+
 // read track
 // time: byte 0 - minute; byte 1 - second; byte 2 - frame
 // uses bcd format
@@ -795,6 +827,8 @@ static long CALLBACK ISOreadTrack(unsigned char *time) {
 		fread(cdbuffer, 1, DATA_SIZE, cdHandle);
 		fread(subbuffer, 1, SUB_FRAMESIZE, cdHandle);
 
+		if (subChanRaw) DecodeRawSubData();
+
 		if ((((u16)subbuffer[22] << 8) | (u16)subbuffer[23]) != calcCrc(&subbuffer[12], 10)) {
 			memset(&subbuffer[15], 0, 7); // CRC wrong, wipe out time data
 		}
@@ -806,6 +840,8 @@ static long CALLBACK ISOreadTrack(unsigned char *time) {
 		if (subHandle != NULL) {
 			fseek(subHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * SUB_FRAMESIZE, SEEK_SET);
 			fread(subbuffer, 1, SUB_FRAMESIZE, subHandle);
+
+			if (subChanRaw) DecodeRawSubData();
 
 			if ((((u16)subbuffer[22] << 8) | (u16)subbuffer[23]) != calcCrc(&subbuffer[12], 10)) {
 				memset(&subbuffer[15], 0, 7); // CRC wrong, wipe out time data

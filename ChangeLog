@@ -1,3 +1,10 @@
+July 2, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/cdriso.c: Fixed subchannel data handling with images ripped
+   with cdrdao. Removed support for AcetoneISO. Parse .cue file as .toc file
+   when needed to satisfy some stupid tutorials which tell users to use cdrdao
+   to rip a "bin/cue" image which is in fact a "bin/toc" image.
+
 July 2, 2010 edgbla <edgbla@yandex.ru>
 
  * po/ru_RU.po: Updated.
