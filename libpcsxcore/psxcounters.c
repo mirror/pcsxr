@@ -282,19 +282,22 @@ void psxRcntUpdate()
                 SPU_async( SpuUpdInterval[Config.PsxType] * rcnts[3].target );
             }
         }
-        /*
-        // For the best times. :D
+        
         // VSync irq.
         if( hSyncCount == VBlankStart[Config.PsxType] )
         {
-            setIrq( 0x01 );
+            GPU_vBlank( 1 );
+            
+            // For the best times. :D
+            //setIrq( 0x01 );
         }
-        */
+        
         // Update lace. (with InuYasha fix)
         if( hSyncCount >= (Config.VSyncWA ? HSyncTotal[Config.PsxType] / BIAS : HSyncTotal[Config.PsxType]) )
         {
             hSyncCount = 0;
 
+            GPU_vBlank( 0 );
             setIrq( 0x01 );
 
             GPU_updateLace();

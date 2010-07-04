@@ -1,3 +1,9 @@
+July 4, 2010 edgbla <edgbla@yandex.ru>
+
+ * libpcsxcore/plugins.c: GPUvBlank (for gpuBladeSoft now, experimental).
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/psxcounters.c: Likewise.
+
 July 3, 2010 edgbla <edgbla@yandex.ru>
 
  * libpcsxcore/psxhw.c: Sio1 interface (link cable).
