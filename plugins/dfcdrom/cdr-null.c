@@ -6,6 +6,7 @@
  */
 
 #include <stdint.h>
+#include "psemu_plugin_defs.h"
 
 char *LibName = N_("CDR NULL Plugin");
 
