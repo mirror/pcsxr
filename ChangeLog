@@ -5,6 +5,9 @@ July 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * libpcsxcore/psxhw.c: Likewise.
  * win32/gui/AboutDlg.c: Minor text change.
  * po/pcsx.pot, po/*.po: Updated.
+ * libpcsxcore/socket.c: Fixed FTBFS on FreeBSD.
+ * configure.ac: Likewise.
+ * gui/Makefile.am: Likewise.
 
 July 4, 2010 edgbla <edgbla@yandex.ru>
 
