@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-01 15:44+0800\n"
+"POT-Creation-Date: 2010-07-07 13:41+0800\n"
 "PO-Revision-Date: 2010-07-01 23:53+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -37,7 +37,7 @@ msgid ""
 "PCSX-Reloaded By:\n"
 "Blade_Arma, Wei Mingzhi, et al.\n"
 "\n"
-"http://pcsxr.codeplex.com"
+"http://pcsxr.codeplex.com/"
 msgstr ""
 
 #: ../win32/gui/AboutDlg.c:46 ../plugins/peopsxgl/gpucfg/interface.c:831
@@ -1368,12 +1368,12 @@ msgstr "Ошибка при закрытии PAD2 плагина!"
 msgid "Error closing GPU plugin!"
 msgstr "Ошибка при закрытии GPU плагина!"
 
-#: ../libpcsxcore/cdriso.c:643
+#: ../libpcsxcore/cdriso.c:658
 #, c-format
 msgid "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"
 msgstr "Трек %.2d (%s) - Начало %.2d:%.2d:%.2d, Длина %.2d:%.2d:%.2d\n"
 
-#: ../libpcsxcore/cdriso.c:662
+#: ../libpcsxcore/cdriso.c:677
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr "Загружен образ CD: %s"
@@ -1426,72 +1426,82 @@ msgstr "Формат COFF не поддерживается.\n"
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "This file does not appear to be a valid PSX file.\n"
 
-#: ../libpcsxcore/plugins.c:142
+#: ../libpcsxcore/plugins.c:181
 #, c-format
 msgid "Error loading %s: %s"
 msgstr "Ошибка загрузки %s: %s"
 
-#: ../libpcsxcore/plugins.c:187
+#: ../libpcsxcore/plugins.c:227
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "Не удалось загрузить GPU плагин %s!"
 
-#: ../libpcsxcore/plugins.c:257
+#: ../libpcsxcore/plugins.c:298
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "Не удалось загрузить CD-ROM плагин %s!"
 
-#: ../libpcsxcore/plugins.c:305
+#: ../libpcsxcore/plugins.c:346
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "Не удалось загрузить SPU плагин %s!"
 
-#: ../libpcsxcore/plugins.c:442
+#: ../libpcsxcore/plugins.c:483
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "Не удалось загрузить PAD1 плагин %s!"
 
-#: ../libpcsxcore/plugins.c:496
+#: ../libpcsxcore/plugins.c:537
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "Не удалось загрузить PAD2 плагин %s!"
 
-#: ../libpcsxcore/plugins.c:539
+#: ../libpcsxcore/plugins.c:580
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "Не удалось загрузить NetPlay плагин %s!"
 
-#: ../libpcsxcore/plugins.c:600
+#: ../libpcsxcore/plugins.c:660
+#, fuzzy, c-format
+msgid "Could not load SIO1 plugin %s!"
+msgstr "Не удалось загрузить SPU плагин %s!"
+
+#: ../libpcsxcore/plugins.c:745
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr "Ошибка инициализации CD-ROM плагина: %d"
 
-#: ../libpcsxcore/plugins.c:602
+#: ../libpcsxcore/plugins.c:747
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr "Ошибка инициализации GPU плагина: %d"
 
-#: ../libpcsxcore/plugins.c:604
+#: ../libpcsxcore/plugins.c:749
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr "Ошибка инициализации SPU плагина: %d"
 
-#: ../libpcsxcore/plugins.c:606
+#: ../libpcsxcore/plugins.c:751
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr "Ошибка инициализации PAD1 плагина: %d"
 
-#: ../libpcsxcore/plugins.c:608
+#: ../libpcsxcore/plugins.c:753
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr "Ошибка инициализации PAD2 плагина: %d"
 
-#: ../libpcsxcore/plugins.c:612
+#: ../libpcsxcore/plugins.c:757
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr "Ошибка инициализации NetPlay плагина: %d"
 
-#: ../libpcsxcore/plugins.c:615
+#: ../libpcsxcore/plugins.c:762
+#, fuzzy, c-format
+msgid "Error initializing SIO1 plugin: %d"
+msgstr "Ошибка инициализации SPU плагина: %d"
+
+#: ../libpcsxcore/plugins.c:765
 msgid "Plugins loaded.\n"
 msgstr "Плагины загружены.\n"
 

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsx-df\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-01 15:44+0800\n"
+"POT-Creation-Date: 2010-07-07 13:32+0800\n"
 "PO-Revision-Date: 2009-11-28 23:57+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: PoBRE <romhackers@gmail.com>\n"
@@ -42,7 +42,7 @@ msgid ""
 "PCSX-Reloaded By:\n"
 "Blade_Arma, Wei Mingzhi, et al.\n"
 "\n"
-"http://pcsxr.codeplex.com"
+"http://pcsxr.codeplex.com/"
 msgstr ""
 "Autores do PCSX-df:\n"
 "Ryan Schultz, Andrew Burton, Stephen Chao,\n"
@@ -1401,12 +1401,12 @@ msgstr "Erro ao fechar a extensão de Controle 2!"
 msgid "Error closing GPU plugin!"
 msgstr "Erro ao fechar a extensão de GPU!"
 
-#: ../libpcsxcore/cdriso.c:643
+#: ../libpcsxcore/cdriso.c:658
 #, c-format
 msgid "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"
 msgstr ""
 
-#: ../libpcsxcore/cdriso.c:662
+#: ../libpcsxcore/cdriso.c:677
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr "Carregou a imagem de CD \"%s\"."
@@ -1459,72 +1459,82 @@ msgstr "Arquivos COFF não são suportados!\n"
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "Esse arquivo não parece ser um arquivo válido de PSX!\n"
 
-#: ../libpcsxcore/plugins.c:142
+#: ../libpcsxcore/plugins.c:181
 #, c-format
 msgid "Error loading %s: %s"
 msgstr "Erro carregando \"%s\": \"%s\""
 
-#: ../libpcsxcore/plugins.c:187
+#: ../libpcsxcore/plugins.c:227
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "Não conseguiu carregar a extensão de GPU \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:257
+#: ../libpcsxcore/plugins.c:298
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "Não conseguiu carregar a extensão de CD-ROM \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:305
+#: ../libpcsxcore/plugins.c:346
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "Não conseguiu carregar a extensão de SPU \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:442
+#: ../libpcsxcore/plugins.c:483
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "Não conseguiu carregar a extensão do Controle 1 \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:496
+#: ../libpcsxcore/plugins.c:537
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "Não conseguiu carregar a extensão do Controle 2 \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:539
+#: ../libpcsxcore/plugins.c:580
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "Não conseguiu carregar a extensão de jogo em rede \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:600
+#: ../libpcsxcore/plugins.c:660
+#, fuzzy, c-format
+msgid "Could not load SIO1 plugin %s!"
+msgstr "Não conseguiu carregar a extensão de SPU \"%s\"!"
+
+#: ../libpcsxcore/plugins.c:745
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr "Erro ao iniciar a extensão de CD-ROM \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:602
+#: ../libpcsxcore/plugins.c:747
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr "Erro ao iniciar a extensão de GPU \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:604
+#: ../libpcsxcore/plugins.c:749
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr "Erro ao iniciar a extensão de SPU \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:606
+#: ../libpcsxcore/plugins.c:751
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr "Erro ao iniciar a extensão do Controle 1 \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:608
+#: ../libpcsxcore/plugins.c:753
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr "Erro ao iniciar a extensão do Controle 2 \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:612
+#: ../libpcsxcore/plugins.c:757
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr "Erro ao iniciar a extensão de jogo em rede \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:615
+#: ../libpcsxcore/plugins.c:762
+#, fuzzy, c-format
+msgid "Error initializing SIO1 plugin: %d"
+msgstr "Erro ao iniciar a extensão de SPU \"%d\"!"
+
+#: ../libpcsxcore/plugins.c:765
 msgid "Plugins loaded.\n"
 msgstr "Extensões carregadas.\n"
 

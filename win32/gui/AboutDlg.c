@@ -37,7 +37,7 @@ char *LabelGreets = { N_(
 	"Marcus Comstedt, Stefan Sikora\n\n"
 	"PCSX-Reloaded By:\n"
 	"Blade_Arma, Wei Mingzhi, et al.\n\n"
-	"http://pcsxr.codeplex.com")
+	"http://pcsxr.codeplex.com/")
 };
 
 LRESULT WINAPI AboutDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam) {

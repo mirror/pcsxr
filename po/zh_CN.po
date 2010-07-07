@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-01 15:44+0800\n"
-"PO-Revision-Date: 2010-07-01 15:45+0800\n"
+"POT-Creation-Date: 2010-07-07 13:32+0800\n"
+"PO-Revision-Date: 2010-07-07 13:37+0800\n"
 "Last-Translator: Wei Mingzhi <whistler_wmz@users.sf.net>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgid ""
 "PCSX-Reloaded By:\n"
 "Blade_Arma, Wei Mingzhi, et al.\n"
 "\n"
-"http://pcsxr.codeplex.com"
+"http://pcsxr.codeplex.com/"
 msgstr ""
 "PCSX-df 开发者:\n"
 "Ryan Schultz, Andrew Burton, Stephen Chao,\n"
@@ -51,7 +51,7 @@ msgstr ""
 "PCSX-Reloaded 开发者:\n"
 "Blade_Arma, Wei Mingzhi, et al.\n"
 "\n"
-"http://pcsxr.codeplex.com"
+"http://pcsxr.codeplex.com/"
 
 #: ../win32/gui/AboutDlg.c:46
 #: ../plugins/peopsxgl/gpucfg/interface.c:831
@@ -1475,12 +1475,12 @@ msgstr "无法关闭 \"控制器 2\" 插件!"
 msgid "Error closing GPU plugin!"
 msgstr "无法关闭 GPU 插件!"
 
-#: ../libpcsxcore/cdriso.c:643
+#: ../libpcsxcore/cdriso.c:658
 #, c-format
 msgid "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"
 msgstr "音轨 %.2d (%s) - 起始位置 %.2d:%.2d:%.2d, 长度 %.2d:%.2d:%.2d\n"
 
-#: ../libpcsxcore/cdriso.c:662
+#: ../libpcsxcore/cdriso.c:677
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr "已加载 CD 镜像: %s"
@@ -1534,72 +1534,82 @@ msgstr "COFF 文件尚未支持。\n"
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "此文件不是一个合法的 PSX 文件。\n"
 
-#: ../libpcsxcore/plugins.c:142
+#: ../libpcsxcore/plugins.c:181
 #, c-format
 msgid "Error loading %s: %s"
 msgstr "无法加载 %s: %s"
 
-#: ../libpcsxcore/plugins.c:187
+#: ../libpcsxcore/plugins.c:227
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "无法加载 GPU 插件 %s!"
 
-#: ../libpcsxcore/plugins.c:257
+#: ../libpcsxcore/plugins.c:298
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "无法加载 CD-ROM 插件 %s!"
 
-#: ../libpcsxcore/plugins.c:305
+#: ../libpcsxcore/plugins.c:346
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "无法加载 SPU 插件 %s!"
 
-#: ../libpcsxcore/plugins.c:442
+#: ../libpcsxcore/plugins.c:483
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "无法加载 \"控制器1\" 插件 %s!"
 
-#: ../libpcsxcore/plugins.c:496
+#: ../libpcsxcore/plugins.c:537
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "无法加载 \"控制器2\" 插件 %s!"
 
-#: ../libpcsxcore/plugins.c:539
+#: ../libpcsxcore/plugins.c:580
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "无法加载联网游戏插件 %s!"
 
-#: ../libpcsxcore/plugins.c:600
+#: ../libpcsxcore/plugins.c:660
+#, c-format
+msgid "Could not load SIO1 plugin %s!"
+msgstr "无法加载 SIO1 插件 %s!"
+
+#: ../libpcsxcore/plugins.c:745
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr "CD-ROM 插件初始化错误: %d"
 
-#: ../libpcsxcore/plugins.c:602
+#: ../libpcsxcore/plugins.c:747
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr "GPU 插件初始化错误: %d"
 
-#: ../libpcsxcore/plugins.c:604
+#: ../libpcsxcore/plugins.c:749
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr "SPU 插件初始化错误: %d"
 
-#: ../libpcsxcore/plugins.c:606
+#: ../libpcsxcore/plugins.c:751
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr "\"控制器1\" 插件初始化错误: %d"
 
-#: ../libpcsxcore/plugins.c:608
+#: ../libpcsxcore/plugins.c:753
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr "\"控制器2\" 插件初始化错误: %d"
 
-#: ../libpcsxcore/plugins.c:612
+#: ../libpcsxcore/plugins.c:757
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr "联网游戏插件初始化错误: %d"
 
-#: ../libpcsxcore/plugins.c:615
+#: ../libpcsxcore/plugins.c:762
+#, c-format
+msgid "Error initializing SIO1 plugin: %d"
+msgstr "SIO1 插件初始化错误: %d"
+
+#: ../libpcsxcore/plugins.c:765
 msgid "Plugins loaded.\n"
 msgstr "插件已加载。\n"
 
