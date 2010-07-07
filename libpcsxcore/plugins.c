@@ -181,16 +181,10 @@ static const char *err;
 	if (err != NULL) { SysMessage(_("Error loading %s: %s"), func, err); return -1; } \
 }
 
-#if defined (__MACOSX__)
 #define LoadSym(dest, src, name, checkerr) { \
 	dest = (src)SysLoadSym(drv, name); \
 	if (checkerr) { CheckErr(name); } else SysLibError(); \
 }
-#else
-#define LoadSym(dest, src, name, checkerr) { \
-	dest = (src)SysLoadSym(drv, name); if (checkerr) { CheckErr(name); } \
-}
-#endif
 
 void *hGPUDriver = NULL;
 
@@ -306,11 +300,11 @@ static int LoadCDRplugin(const char *CDRdll) {
 	LoadCdrSym1(getTD, "CDRgetTD");
 	LoadCdrSym1(readTrack, "CDRreadTrack");
 	LoadCdrSym1(getBuffer, "CDRgetBuffer");
+	LoadCdrSym1(getBufferSub, "CDRgetBufferSub");
 	LoadCdrSym0(play, "CDRplay");
 	LoadCdrSym0(stop, "CDRstop");
 	LoadCdrSym0(getStatus, "CDRgetStatus");
 	LoadCdrSym0(getDriveLetter, "CDRgetDriveLetter");
-	LoadCdrSym1(getBufferSub, "CDRgetBufferSub");
 	LoadCdrSym0(configure, "CDRconfigure");
 	LoadCdrSym0(test, "CDRtest");
 	LoadCdrSym0(about, "CDRabout");

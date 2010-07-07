@@ -9,6 +9,7 @@ July 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * configure.ac: Likewise.
  * gui/Makefile.am: Likewise.
  * plugins/dfcdrom/cdr-null.c: Likewise.
+ * libpcsxcore/plugins.c: Fixed plugin loading with FreeBSD.
 
 July 4, 2010 edgbla <edgbla@yandex.ru>
 
