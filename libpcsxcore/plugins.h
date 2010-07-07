@@ -347,17 +347,17 @@ typedef void (CALLBACK* SIO1writeCtrl16)(unsigned short);
 typedef void (CALLBACK* SIO1writeCtrl32)(unsigned long);
 typedef void (CALLBACK* SIO1writeBaud16)(unsigned short);
 typedef void (CALLBACK* SIO1writeBaud32)(unsigned long);
-typedef uint32_t (CALLBACK* SIO1readData8)(void);
-typedef uint32_t (CALLBACK* SIO1readData16)(void);
-typedef uint32_t (CALLBACK* SIO1readData32)(void);
-typedef uint32_t (CALLBACK* SIO1readStat16)(void);
-typedef uint32_t (CALLBACK* SIO1readStat32)(void);
-typedef uint32_t (CALLBACK* SIO1readMode16)(void);
-typedef uint32_t (CALLBACK* SIO1readMode32)(void);
-typedef uint32_t (CALLBACK* SIO1readCtrl16)(void);
-typedef uint32_t (CALLBACK* SIO1readCtrl32)(void);
-typedef uint32_t (CALLBACK* SIO1readBaud16)(void);
-typedef uint32_t (CALLBACK* SIO1readBaud32)(void);
+typedef unsigned char (CALLBACK* SIO1readData8)(void);
+typedef unsigned short (CALLBACK* SIO1readData16)(void);
+typedef unsigned long (CALLBACK* SIO1readData32)(void);
+typedef unsigned short (CALLBACK* SIO1readStat16)(void);
+typedef unsigned long (CALLBACK* SIO1readStat32)(void);
+typedef unsigned short (CALLBACK* SIO1readMode16)(void);
+typedef unsigned long (CALLBACK* SIO1readMode32)(void);
+typedef unsigned short (CALLBACK* SIO1readCtrl16)(void);
+typedef unsigned long (CALLBACK* SIO1readCtrl32)(void);
+typedef unsigned short (CALLBACK* SIO1readBaud16)(void);
+typedef unsigned long (CALLBACK* SIO1readBaud32)(void);
 typedef void (CALLBACK* SIO1registerCallback)(void (CALLBACK *callback)(void));
 
 // SIO1 function pointers 

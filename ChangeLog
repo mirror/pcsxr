@@ -1,3 +1,13 @@
+July 7, 2010 edgbla <edgbla@yandex.ru>
+
+ * plugins/bladesio1/gui.c: Sio1 plugin (dummy).
+ * plugins/bladesio1/Makefile.am: Likewise.
+ * plugins/bladesio1/settings.c: Likewise.
+ * plugins/bladesio1/settings.h: Likewise.
+ * plugins/bladesio1/sio1.c: Likewise.
+ * plugins/bladesio1/sio1.h: Likewise.
+ * plugins/bladesio1/sio1.glade2: Likewise.
+
 July 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/plugins.c: #ifdef'ed out the currently unused Sio1 API.
