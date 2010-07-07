@@ -41,7 +41,9 @@ u8 psxHwRead8(u32 add) {
 
 	switch (add) {
 		case 0x1f801040: hard = sioRead8();break; 
-        case 0x1f801050: hard = SIO1_readData8(); break;
+#ifdef ENABLE_SIO1API
+		case 0x1f801050: hard = SIO1_readData8(); break;
+#endif
 		case 0x1f801800: hard = cdrRead0(); break;
 		case 0x1f801801: hard = cdrRead1(); break;
 		case 0x1f801802: hard = cdrRead2(); break;
@@ -104,18 +106,20 @@ u16 psxHwRead16(u32 add) {
 			PAD_LOG("sio read16 %x; ret = %x\n", add&0xf, hard);
 #endif
 			return hard;
-	    case 0x1f801050:
-            hard = SIO1_readData16();
-            return hard;
-	  	case 0x1f801054:
-            hard = SIO1_readStat16();
-            return hard;
-	 	case 0x1f80105a:
-            hard = SIO1_readCtrl16();
-            return hard;
-	 	case 0x1f80105e:
-            hard = SIO1_readBaud16();
-            return hard;
+#ifdef ENABLE_SIO1API
+		case 0x1f801050:
+			hard = SIO1_readData16();
+			return hard;
+		case 0x1f801054:
+			hard = SIO1_readStat16();
+			return hard;
+		case 0x1f80105a:
+			hard = SIO1_readCtrl16();
+			return hard;
+		case 0x1f80105e:
+			hard = SIO1_readBaud16();
+			return hard;
+#endif
 		case 0x1f801100:
 			hard = psxRcntRcount(0);
 #ifdef PSXHW_LOG
@@ -205,9 +209,11 @@ u32 psxHwRead32(u32 add) {
 			PAD_LOG("sio read32 ;ret = %x\n", hard);
 #endif
 			return hard;
+#ifdef ENABLE_SIO1API
 		case 0x1f801050:
-            hard = SIO1_readData32();
-            return hard;
+			hard = SIO1_readData32();
+			return hard;
+#endif
 #ifdef PSXHW_LOG
 		case 0x1f801060:
 			PSXHW_LOG("RAM size read %x\n", psxHu32(0x1060));
@@ -343,7 +349,9 @@ u32 psxHwRead32(u32 add) {
 void psxHwWrite8(u32 add, u8 value) {
 	switch (add) {
 		case 0x1f801040: sioWrite8(value); break;
+#ifdef ENABLE_SIO1API
 		case 0x1f801050: SIO1_writeData8(value); break;
+#endif
 		case 0x1f801800: cdrWrite0(value); break;
 		case 0x1f801801: cdrWrite1(value); break;
 		case 0x1f801802: cdrWrite2(value); break;
@@ -395,18 +403,20 @@ void psxHwWrite16(u32 add, u16 value) {
 			PAD_LOG ("sio write16 %x, %x\n", add&0xf, value);
 #endif
 			return;
-	    case 0x1f801050:
-            SIO1_writeData16(value);
-            return;
-        case 0x1f801054:
-            SIO1_writeStat16(value);
-            return;
+#ifdef ENABLE_SIO1API
+		case 0x1f801050:
+			SIO1_writeData16(value);
+			return;
+		case 0x1f801054:
+			SIO1_writeStat16(value);
+			return;
 		case 0x1f80105a:
-            SIO1_writeCtrl16(value);
-            return;
+			SIO1_writeCtrl16(value);
+			return;
 		case 0x1f80105e:
-            SIO1_writeBaud16(value);
-            return;
+			SIO1_writeBaud16(value);
+			return;
+#endif
 		case 0x1f801070: 
 #ifdef PSXHW_LOG
 			PSXHW_LOG("IREG 16bit write %x\n", value);
@@ -508,9 +518,11 @@ void psxHwWrite32(u32 add, u32 value) {
 			PAD_LOG("sio write32 %x\n", value);
 #endif
 			return;
+#ifdef ENABLE_SIO1API
 		case 0x1f801050:
-            SIO1_writeData32(value);
-            return;
+			SIO1_writeData32(value);
+			return;
+#endif
 #ifdef PSXHW_LOG
 		case 0x1f801060:
 			PSXHW_LOG("RAM size write %x\n", value);

@@ -26,6 +26,8 @@ extern "C" {
 
 #include "psxcommon.h"
 
+//#define ENABLE_SIO1API 1
+
 #ifndef _WIN32
 
 typedef void* HWND;
@@ -322,6 +324,8 @@ extern NETrecvPadData        NET_recvPadData;
 extern NETsetInfo            NET_setInfo;
 extern NETkeypressed         NET_keypressed;
 
+#ifdef ENABLE_SIO1API
+
 // SIO1 Functions (link cable)
 typedef long (CALLBACK* SIO1init)(void);
 typedef long (CALLBACK* SIO1shutdown)(void);
@@ -390,6 +394,8 @@ extern SIO1readCtrl32         SIO1_readCtrl32;
 extern SIO1readBaud16         SIO1_readBaud16;
 extern SIO1readBaud32         SIO1_readBaud32;
 extern SIO1registerCallback   SIO1_registerCallback;
+
+#endif
 
 void CALLBACK clearDynarec(void);
 

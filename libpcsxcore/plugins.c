@@ -136,6 +136,8 @@ NETrecvPadData        NET_recvPadData;
 NETsetInfo            NET_setInfo;
 NETkeypressed         NET_keypressed;
 
+#ifdef ENABLE_SIO1API
+
 SIO1init              SIO1_init;
 SIO1shutdown          SIO1_shutdown;
 SIO1open              SIO1_open;
@@ -169,6 +171,8 @@ SIO1readCtrl32        SIO1_readCtrl32;
 SIO1readBaud16        SIO1_readBaud16;
 SIO1readBaud32        SIO1_readBaud32;
 SIO1registerCallback  SIO1_registerCallback;
+
+#endif
 
 static const char *err;
 
@@ -596,6 +600,8 @@ static int LoadNETplugin(const char *NETdll) {
 	return 0;
 }
 
+#ifdef ENABLE_SIO1API
+
 void *hSIO1Driver = NULL;
 
 long CALLBACK SIO1__init(void) { return 0; }
@@ -648,13 +654,13 @@ void CALLBACK SIO1irq(void) {
 
 static int LoadSIO1plugin(const char *SIO1dll) {
     void *drv;
-/*
+
     hSIO1Driver = SysLoadLibrary(SIO1dll);
     if (hSIO1Driver == NULL) {
         SysMessage (_("Could not load SIO1 plugin %s!"), SIO1dll); return -1;
     }
     drv = hSIO1Driver;
-*/
+
     LoadSio1Sym0(init, "SIO1init");
     LoadSio1Sym0(shutdown, "SIO1shutdown");
     LoadSio1Sym0(open, "SIO1open");
@@ -690,6 +696,8 @@ static int LoadSIO1plugin(const char *SIO1dll) {
 
     return 0;
 }
+
+#endif
 
 void CALLBACK clearDynarec(void) {
 	psxCpu->Reset();
@@ -727,9 +735,11 @@ int LoadPlugins() {
 		sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Net);
 		if (LoadNETplugin(Plugin) == -1) Config.UseNet = FALSE;
 	}
-	
+
+#ifdef ENABLE_SIO1API
 	sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Sio1);
-    if (LoadSIO1plugin(Plugin) == -1) return -1;
+	if (LoadSIO1plugin(Plugin) == -1) return -1;
+#endif
 
 	ret = CDR_init();
 	if (ret < 0) { SysMessage (_("Error initializing CD-ROM plugin: %d"), ret); return -1; }
@@ -746,9 +756,11 @@ int LoadPlugins() {
 		ret = NET_init();
 		if (ret < 0) { SysMessage (_("Error initializing NetPlay plugin: %d"), ret); return -1; }
 	}
-	
+
+#ifdef ENABLE_SIO1API
 	ret = SIO1_init();
-    if (ret < 0) { SysMessage (_("Error initializing SIO1 plugin: %d"), ret); return -1; }
+	if (ret < 0) { SysMessage (_("Error initializing SIO1 plugin: %d"), ret); return -1; }
+#endif
 
 	SysPrintf(_("Plugins loaded.\n"));
 	return 0;
@@ -766,7 +778,6 @@ void ReleasePlugins() {
 	if (hSPUDriver != NULL) SPU_shutdown();
 	if (hPAD1Driver != NULL) PAD1_shutdown();
 	if (hPAD2Driver != NULL) PAD2_shutdown();
-    if (hSIO1Driver != NULL) SIO1_shutdown();
 
 	if (Config.UseNet && hNETDriver != NULL) NET_shutdown(); 
 
@@ -775,11 +786,18 @@ void ReleasePlugins() {
 	if (hSPUDriver != NULL) SysCloseLibrary(hSPUDriver); hSPUDriver = NULL;
 	if (hPAD1Driver != NULL) SysCloseLibrary(hPAD1Driver); hPAD1Driver = NULL;
 	if (hPAD2Driver != NULL) SysCloseLibrary(hPAD2Driver); hPAD2Driver = NULL;
-    if (hSIO1Driver != NULL) SysCloseLibrary(hSIO1Driver); hSIO1Driver = NULL;
 
 	if (Config.UseNet && hNETDriver != NULL) {
 		SysCloseLibrary(hNETDriver); hNETDriver = NULL;
 	}
+
+#ifdef ENABLE_SIO1API
+	if (hSIO1Driver != NULL) {
+		SIO1_shutdown();
+		SysCloseLibrary(hSIO1Driver);
+		hSIO1Driver = NULL;
+	}
+#endif
 }
 
 void SetIsoFile(const char *filename) {

@@ -1,3 +1,9 @@
+July 7, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/plugins.c: #ifdef'ed out the currently unused Sio1 API.
+ * libpcsxcore/plugins.h: Likewise.
+ * libpcsxcore/psxhw.c: Likewise.
+
 July 4, 2010 edgbla <edgbla@yandex.ru>
 
  * libpcsxcore/plugins.c: GPUvBlank (for gpuBladeSoft now, experimental).
