@@ -13559,7 +13559,7 @@ fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_dl_dlsym" >&5
 $as_echo "$ac_cv_lib_dl_dlsym" >&6; }
 if test "x$ac_cv_lib_dl_dlsym" = x""yes; then :
-  LDFLAGS+="-ldl"
+  LDFLAGS="$LDFLAGS -ldl"
 fi
 
 

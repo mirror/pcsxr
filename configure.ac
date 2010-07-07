@@ -36,7 +36,7 @@ AC_SUBST(GLADE2_LIBS)
 
 AC_CONFIG_FILES([Makefile data/Makefile doc/Makefile libpcsxcore/Makefile gui/Makefile plugins/dfinput/Makefile plugins/dfsound/Makefile plugins/dfxvideo/Makefile plugins/dfcdrom/Makefile plugins/dfnet/Makefile pixmaps/Makefile po/Makefile.in])
 
-AC_CHECK_LIB(dl, dlsym, [LDFLAGS+="-ldl"], [])
+AC_CHECK_LIB(dl, dlsym, [LDFLAGS="$LDFLAGS -ldl"], [])
 
 AM_CONDITIONAL(SOUND_OSS, false)
 AM_CONDITIONAL(SOUND_SDL, false)
