@@ -28,7 +28,6 @@ GtkWidget *MainWindow;
 
 // function to check if the device is a cdrom
 int is_cdrom(const char *device) {
-#ifdef __linux__
 	struct stat st;
 	int fd = -1;
 
@@ -41,6 +40,7 @@ int is_cdrom(const char *device) {
 	// try to open the device file descriptor
 	if ((fd = open(device, O_RDONLY | O_NONBLOCK)) < 0) return 0;
 
+#ifdef __linux__
 	// I need a method to check is a device is really a CD-ROM.
 	// some problems/ideas are:
 	// - different protocls (ide, scsi, old proprietary...)
@@ -62,9 +62,9 @@ int is_cdrom(const char *device) {
 		close(fd);
 		return 0;
 	}
+#endif
 
 	close(fd);
-#endif
 
 	// yes, it seems a CD drive!
 	return 1;
@@ -83,6 +83,7 @@ void fill_drives_list(GtkWidget *widget) {
 	GtkListStore *store;
 	GtkTreeIter iter;
 
+#if defined (__linux__)
 	static const char *cdrom_devices[] = {
 		"/dev/cdrom",
 		"/dev/cdrom0",
@@ -107,6 +108,16 @@ void fill_drives_list(GtkWidget *widget) {
 		"/dev/scd3",
 		"/dev/optcd",
 		NULL};
+#elif defined (__FreeBSD__)
+	static const char *cdrom_devices[] = {
+		"/dev/acd0",
+		"/dev/acd1",
+		"/dev/acd2",
+		"/dev/acd3",
+		NULL};
+#else
+	static const char *cdrom_devices[] = { NULL };
+#endif
 
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 
