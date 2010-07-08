@@ -61,7 +61,7 @@ void CloseCdHandle(int handle) {
 	ioctl(handle, IOCATASSPINDOWN, &parameter);
 
 	parameter = CDR_MAX_SPEED;
-	ioctl(h, CDRIOCREADSPEED, &parameter);
+	ioctl(handle, CDRIOCREADSPEED, &parameter);
 
 	close(handle);
 }
