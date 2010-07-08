@@ -1,186 +1,59 @@
 /*
- * Cdrom for Psemu Pro like Emulators
+ * Copyright (c) 2010, Wei Mingzhi <whistler@openoffice.org>.
+ * All Rights Reserved.
  *
+ * Based on: Cdrom for Psemu Pro like Emulators
  * By: linuzappz <linuzappz@hotmail.com>
  *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses>.
  */
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <sys/ioctl.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <pthread.h>
-#include <time.h>
-#include <string.h>
 
 #include "cdr.h"
 
-#ifndef CDROMSETSPINDOWN
-#define CDROMSETSPINDOWN 0x531e
-#endif
-
-static inline unsigned int msf_to_lba(char m, char s, char f) {
-	return (((m * CD_SECS) + s) * CD_FRAMES + f) - CD_MSF_OFFSET;
-}
-
-static inline void lba_to_msf(unsigned int s, char *msf) {
-	s += CD_MSF_OFFSET;
-
-	msf[0] = s / CD_FRAMES / CD_SECS;
-	s = s - msf[0] * CD_FRAMES * CD_SECS;
-	msf[1] = s / CD_FRAMES;
-	s = s - msf[1] * CD_FRAMES;
-	msf[2] = s;
-}
-
-int initial_time = 0;
-
-pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
-pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
-
-CacheData *cdcache;
-unsigned char *cdbuffer;
-int cacheaddr;
-
-crdata cr;
-
-unsigned char lastTime[3];
-int cdHandle;
-pthread_t thread;
-int subqread;
-volatile int stopth, found, locked, playing;
-
-long (*ReadTrackT[])() = {
-	ReadNormal,
-	ReadThreaded,
-};
-
-unsigned char* (*GetBufferT[])() = {
-	GetBNormal,
-	GetBThreaded,
-};
-
-long (*fReadTrack)();
-unsigned char* (*fGetBuffer)();
-
-void *CdrThread(void *arg);
+#ifdef __linux__
 
 char *LibName = N_("CD-ROM Drive Reader");
 
-long CDRinit(void) {
-	cdHandle = -1;
-	thread = -1;
-
-	return 0;
-}
-
-long CDRshutdown(void) {
-	return 0;
-}
-
-long CDRopen(void) {
+int OpenCdHandle(const char *dev) {
+	int h;
 	char spindown;
 
-	LoadConf();
+	h = open(dev, O_RDONLY);
 
-	if (cdHandle > 0)
-		return 0;				/* it's already open */
-	cdHandle = open(CdromDev, O_RDONLY);
-	if (cdHandle != -1) {		// if we can't open the cdrom we'll works as a null plugin
-		ioctl(cdHandle, CDROM_LOCKDOOR, 0);
-//		ioctl(cdHandle, CDROMSTART, NULL);
+	if (h != -1) {
+		ioctl(h, CDROM_LOCKDOOR, 0);
+//		ioctl(h, CDROMSTART, NULL);
 
 		spindown = (char)SpinDown;
-		ioctl(cdHandle, CDROMSETSPINDOWN, &spindown);
+		ioctl(h, CDROMSETSPINDOWN, &spindown);
 
-		ioctl(cdHandle, CDROM_SELECT_SPEED, CdrSpeed);
-	} else {
-		fprintf(stderr, "CDR: Could not open %s\n", CdromDev);
+		ioctl(h, CDROM_SELECT_SPEED, CdrSpeed);
 	}
 
-	fReadTrack = ReadTrackT[ReadMode];
-	fGetBuffer = GetBufferT[ReadMode];
-
-	if (ReadMode == THREADED) {
-		cdcache = (CacheData *)malloc(CacheSize * sizeof(CacheData));
-		if (cdcache == NULL) return -1;
-		memset(cdcache, 0, CacheSize * sizeof(CacheData));
-
-		found = 0;
-	} else {
-		cdbuffer = cr.buf + 12; /* skip sync data */
-	}
-
-	if (ReadMode == THREADED) {
-		pthread_attr_t attr;
-
-		pthread_mutex_init(&mut, NULL);
-		pthread_cond_init(&cond, NULL);
-		locked = 0;
-
-		pthread_attr_init(&attr);
-		pthread_create(&thread, &attr, CdrThread, NULL);
-
-		cacheaddr = -1;
-	} else thread = -1;
-
-	playing = 0;
-	stopth = 0;
-	initial_time = 0;
-
-	return 0;
+	return h;
 }
 
-long CDRclose(void) {
-	char spindown;
-
-	if (cdHandle < 1) return 0;
-
-	if (playing) CDRstop();
-	spindown = SPINDOWN_VENDOR_SPECIFIC;
-	ioctl(cdHandle, CDROMSETSPINDOWN, &spindown);
-	close(cdHandle);
-	cdHandle = -1;
-
-	if (thread != -1) {
-		if (locked == 0) {
-			stopth = 1;
-			while (locked == 0) usleep(5000);
-		}
-
-		stopth = 2;
-		pthread_mutex_lock(&mut);
-		pthread_cond_signal(&cond);
-		pthread_mutex_unlock(&mut);
-
-		pthread_join(thread, NULL);
-		pthread_mutex_destroy(&mut);
-		pthread_cond_destroy(&cond);
-	}
-
-	if (ReadMode == THREADED) {
-		free(cdcache);
-	}
-
-	return 0;
+void CloseCdHandle(int handle) {
+	char spindown = SPINDOWN_VENDOR_SPECIFIC;
+	ioctl(handle, CDROMSETSPINDOWN, &spindown);
+	close(handle);
 }
 
-// return Starting and Ending Track
-// buffer:
-//  byte 0 - start track
-//  byte 1 - end track
-long CDRgetTN(unsigned char *buffer) {
+long GetTN(int handle, unsigned char *buffer) {
 	struct cdrom_tochdr toc;
 
-	if (cdHandle < 1) {
-		buffer[0] = 1;
-		buffer[1] = 1;
-		return 0;
-	}
-
-	if (ioctl(cdHandle, CDROMREADTOCHDR, &toc) == -1)
+	if (ioctl(handle, CDROMREADTOCHDR, &toc) == -1)
 		return -1;
 
 	buffer[0] = toc.cdth_trk0;	// start track
@@ -189,25 +62,15 @@ long CDRgetTN(unsigned char *buffer) {
 	return 0;
 }
 
-// return Track Time
-// buffer:
-//  byte 0 - frame
-//  byte 1 - second
-//  byte 2 - minute
-long CDRgetTD(unsigned char track, unsigned char *buffer) {
+long GetTD(int handle, unsigned char track, unsigned char *buffer) {
 	struct cdrom_tocentry entry;
-
-	if (cdHandle < 1) {
-		memset(buffer + 1, 0, 3);
-		return 0;
-	}
 
 	if (track == 0)
 		track = 0xaa;			// total time
 	entry.cdte_track = track;
 	entry.cdte_format = CDROM_MSF;
 
-	if (ioctl(cdHandle, CDROMREADTOCENTRY, &entry) == -1)
+	if (ioctl(handle, CDROMREADTOCENTRY, &entry) == -1)
 		return -1;
 
 	buffer[0] = entry.cdte_addr.msf.frame;	/* frame */
@@ -217,174 +80,40 @@ long CDRgetTD(unsigned char track, unsigned char *buffer) {
 	return 0;
 }
 
-// normal reading
-long ReadNormal() {
-	if (ioctl(cdHandle, CDROMREADRAW, &cr) == -1)
+long GetTE(int handle, unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f) {
+	struct cdrom_tocentry entry;
+	char msf[3];
+
+	entry.cdte_track = track + 1;
+	entry.cdte_format = CDROM_MSF;
+
+	if (ioctl(handle, CDROMREADTOCENTRY, &entry) == -1)
+		return -1;
+
+	lba_to_msf(msf_to_lba(entry.cdte_addr.msf.minute, entry.cdte_addr.msf.second, entry.cdte_addr.msf.frame) - CD_MSF_OFFSET, msf);
+
+	*m = msf[0];
+	*s = msf[1];
+	*f = msf[2];
+
+	return 0;
+}
+
+long ReadSector(int handle, crdata *cr) {
+	if (ioctl(handle, CDROMREADRAW, cr) == -1)
 		return -1;
 
 	return 0;
 }
 
-unsigned char* GetBNormal() {
-	return cdbuffer;
-}
-
-// threaded reading (with cache)
-long ReadThreaded() {
-	int addr = msf_to_lba(cr.msf.cdmsf_min0, cr.msf.cdmsf_sec0, cr.msf.cdmsf_frame0);
-	int i;
-
-	if (addr >= cacheaddr && addr < (cacheaddr + CacheSize) && cacheaddr != -1) {
-		i = addr - cacheaddr;
-		PRINTF("found %d\n", (addr - cacheaddr));
-		cdbuffer = cdcache[i].cr.buf + 12;
-		while (btoi(cdbuffer[0]) != cr.msf.cdmsf_min0 ||
-			   btoi(cdbuffer[1]) != cr.msf.cdmsf_sec0 ||
-			   btoi(cdbuffer[2]) != cr.msf.cdmsf_frame0) {
-			if (locked == 1) {
-				if (cdcache[i].ret == 0) break;
-				return -1;
-			}
-			usleep(5000);
-		}
-		PRINTF("%x:%x:%x, %p, %p\n", cdbuffer[0], cdbuffer[1], cdbuffer[2], cdbuffer, cdcache);
-		found = 1;
-
-		return 0;
-	} else found = 0;
-
-	if (locked == 0) {
-		stopth = 1;
-		while (locked == 0) { usleep(5000); }
-		stopth = 0;
-	}
-
-	// not found in cache
-	locked = 0;
-	pthread_mutex_lock(&mut);
-	pthread_cond_signal(&cond);
-	pthread_mutex_unlock(&mut);
-
-	return 0;
-}
-
-unsigned char* GetBThreaded() {
-	PRINTF("threadc %d\n", found);
-
-	if (found == 1) return cdbuffer;
-	cdbuffer = cdcache[0].cr.buf + 12;
-	while (btoi(cdbuffer[0]) != cr.msf.cdmsf_min0 ||
-		   btoi(cdbuffer[1]) != cr.msf.cdmsf_sec0 ||
-		   btoi(cdbuffer[2]) != cr.msf.cdmsf_frame0) {
-		if (locked == 1) return NULL;
-		usleep(5000);
-	}
-	if (cdcache[0].ret == -1) return NULL;
-
-	return cdbuffer;
-}
-
-void *CdrThread(void *arg) {
-	unsigned char curTime[3];
-	int i;
-
-	for (;;) {
-		locked = 1;
-		pthread_mutex_lock(&mut);
-		pthread_cond_wait(&cond, &mut);
-
-		if (stopth == 2) pthread_exit(NULL);
-		// refill the buffer
-		cacheaddr = msf_to_lba(cr.msf.cdmsf_min0, cr.msf.cdmsf_sec0, cr.msf.cdmsf_frame0);
-
-		memcpy(curTime, &cr.msf, 3);
-
-		PRINTF("start thc %d:%d:%d\n", curTime[0], curTime[1], curTime[2]);
-
-		for (i = 0; i < CacheSize; i++) {
-			memcpy(&cdcache[i].cr.msf, curTime, 3);
-			PRINTF("reading %d:%d:%d\n", curTime[0], curTime[1], curTime[2]);
-			cdcache[i].ret = ioctl(cdHandle, CDROMREADRAW, &cdcache[i].cr);
-
-			PRINTF("readed %x:%x:%x\n", cdcache[i].cr.buf[12], cdcache[i].cr.buf[13], cdcache[i].cr.buf[14]);
-			if (cdcache[i].ret == -1) break;
-
-			curTime[2]++;
-			if (curTime[2] == 75) {
-				curTime[2] = 0;
-				curTime[1]++;
-				if (curTime[1] == 60) {
-					curTime[1] = 0;
-					curTime[0]++;
-				}
-			}
-
-			if (stopth) break;
-		}
-
-		pthread_mutex_unlock(&mut);
-	}
-
-	return NULL;
-}
-
-// read track
-// time:
-//  byte 0 - minute
-//  byte 1 - second
-//  byte 2 - frame
-// uses bcd format
-long CDRreadTrack(unsigned char *time) {
-	if (cdHandle < 1) {
-		memset(cr.buf, 0, DATA_SIZE);
-		return 0;
-	}
-
-	PRINTF("CDRreadTrack %d:%d:%d\n", btoi(time[0]), btoi(time[1]), btoi(time[2]));
-
-	if (UseSubQ) memcpy(lastTime, time, 3);
-	subqread = 0;
-
-	cr.msf.cdmsf_min0 = btoi(time[0]);
-	cr.msf.cdmsf_sec0 = btoi(time[1]);
-	cr.msf.cdmsf_frame0 = btoi(time[2]);
-
-	return fReadTrack();
-}
-
-// return readed track
-unsigned char *CDRgetBuffer(void) {
-	return fGetBuffer();
-}
-
-// plays cdda audio
-// sector:
-//  byte 0 - minute
-//  byte 1 - second
-//  byte 2 - frame
-// does NOT uses bcd format
-long CDRplay(unsigned char *sector) {
+long PlayCDDA(int handle, unsigned char *sector) {
 	struct cdrom_msf addr;
 	unsigned char ptmp[4];
 
-	if (cdHandle < 1)
-		return 0;
-
-	// If play was called with the same time as the previous call,
-	// don't restart it. Of course, if play is called with a different
-	// track, stop playing the current stream.
-	if (playing)
-	{
-		if (msf_to_lba(sector[0], sector[1], sector[2]) == initial_time)
-			return 0;
-		else
-			CDRstop();
-	}
-	initial_time = msf_to_lba(sector[0], sector[1], sector[2]);
-
 	// 0 is the last track of every cdrom, so play up to there
-	if (CDRgetTD(0, ptmp) == -1)
+	if (GetTD(handle, 0, ptmp) == -1)
 		return -1;
+
 	addr.cdmsf_min0 = sector[0];
 	addr.cdmsf_sec0 = sector[1];
 	addr.cdmsf_frame0 = sector[2];
@@ -392,92 +121,43 @@ long CDRplay(unsigned char *sector) {
 	addr.cdmsf_sec1 = ptmp[1];
 	addr.cdmsf_frame1 = ptmp[0];
 
-	if (ioctl(cdHandle, CDROMPLAYMSF, &addr) == -1)
+	if (ioctl(handle, CDROMPLAYMSF, &addr) == -1)
 		return -1;
-
-	playing = 1;
 
 	return 0;
 }
 
-// stops cdda audio
-long CDRstop(void) {
+long StopCDDA(int handle) {
 	struct cdrom_subchnl sc;
 
-	if (cdHandle < 1)
-		return 0;
-
 	sc.cdsc_format = CDROM_MSF;
-	if (ioctl(cdHandle, CDROMSUBCHNL, &sc) == -1)
+	if (ioctl(handle, CDROMSUBCHNL, &sc) == -1)
 		return -1;
 
 	switch (sc.cdsc_audiostatus) {
 		case CDROM_AUDIO_PAUSED:
 		case CDROM_AUDIO_PLAY:
-			ioctl(cdHandle, CDROMSTOP);
+			ioctl(handle, CDROMSTOP);
 			break;
 	}
-
-	playing = 0;
-	initial_time = 0;
 
 	return 0;
 }
 
-struct CdrStat {
-	unsigned long Type;
-	unsigned long Status;
-	unsigned char Time[3];		// current playing time
-};
-
-struct CdrStat ostat;
-
-// reads cdr status
-// type:
-//  0x00 - unknown
-//  0x01 - data
-//  0x02 - audio
-//  0xff - no cdrom
-// status: (only shell open supported)
-//  0x00 - unknown
-//  0x01 - error
-//  0x04 - seek error
-//  0x10 - shell open
-//  0x20 - reading
-//  0x40 - seeking
-//  0x80 - playing
-// time:
-//  byte 0 - minute
-//  byte 1 - second
-//  byte 2 - frame
-
-long CDRgetStatus(struct CdrStat *stat) {
+long GetStatus(int handle, int playing, struct CdrStat *stat) {
 	struct cdrom_subchnl sc;
 	int ret;
-	static time_t to;
 	char spindown;
-
-	if (cdHandle < 1)
-		return -1;
-
-	if (!playing) { // if not playing update stat only once in a second
-		if (to < time(NULL)) {
-			to = time(NULL);
-		} else {
-			memcpy(stat, &ostat, sizeof(struct CdrStat));
-			return 0;
-		}
-	}
 
 	memset(stat, 0, sizeof(struct CdrStat));
 
 	if (playing) { // return Time only if playing
 		sc.cdsc_format = CDROM_MSF;
-		if (ioctl(cdHandle, CDROMSUBCHNL, &sc) != -1)
+		if (ioctl(handle, CDROMSUBCHNL, &sc) != -1)
 			memcpy(stat->Time, &sc.cdsc_absaddr.msf, 3);
 	}
 
-	ret = ioctl(cdHandle, CDROM_DISC_STATUS);
+	ret = ioctl(handle, CDROM_DISC_STATUS);
 	switch (ret) {
 		case CDS_AUDIO:
 			stat->Type = 0x02;
@@ -489,7 +169,7 @@ long CDRgetStatus(struct CdrStat *stat) {
 			stat->Type = 0x01;
 			break;
 	}
-	ret = ioctl(cdHandle, CDROM_DRIVE_STATUS);
+	ret = ioctl(handle, CDROM_DRIVE_STATUS);
 	switch (ret) {
 		case CDS_NO_DISC:
 		case CDS_TRAY_OPEN:
@@ -498,8 +178,8 @@ long CDRgetStatus(struct CdrStat *stat) {
 			break;
 		default:
 			spindown = (char)SpinDown;
-			ioctl(cdHandle, CDROMSETSPINDOWN, &spindown);
-			ioctl(cdHandle, CDROM_LOCKDOOR, 0);
+			ioctl(handle, CDROMSETSPINDOWN, &spindown);
+			ioctl(handle, CDROM_LOCKDOOR, 0);
 			break;
 	}
 
@@ -509,53 +189,30 @@ long CDRgetStatus(struct CdrStat *stat) {
 			break;
 	}
 
-	memcpy(&ostat, stat, sizeof(struct CdrStat));
-
 	return 0;
 }
 
-struct SubQ {
-	char res0[12];
-	unsigned char ControlAndADR;
-	unsigned char TrackNumber;
-	unsigned char IndexNumber;
-	unsigned char TrackRelativeAddress[3];
-	unsigned char Filler;
-	unsigned char AbsoluteAddress[3];
-	char res1[72];
-};
-
-struct SubQ subq;
-
-unsigned char *CDRgetBufferSub(void) {
+unsigned char *ReadSub(int handle, const unsigned char *time) {
+	static struct SubQ subq;
 	struct cdrom_subchnl subchnl;
 	int ret;
+	crdata cr;
 
-	if (!UseSubQ) return NULL;
-	if (subqread) return (unsigned char *)&subq;
+	cr.msf.cdmsf_min0 = btoi(time[0]);
+	cr.msf.cdmsf_sec0 = btoi(time[1]);
+	cr.msf.cdmsf_frame0 = btoi(time[2]);
 
-	cr.msf.cdmsf_min0 = btoi(lastTime[0]);
-	cr.msf.cdmsf_sec0 = btoi(lastTime[1]);
-	cr.msf.cdmsf_frame0 = btoi(lastTime[2]);
-
-	if (ReadMode == THREADED) pthread_mutex_lock(&mut);
-
-	if (ioctl(cdHandle, CDROMSEEK, &cr.msf) == -1) {
+	if (ioctl(handle, CDROMSEEK, &cr.msf) == -1) {
 		// will be slower, but there's no other way to make it accurate
-		if (ioctl(cdHandle, CDROMREADRAW, &cr) == -1) {
-			if (ReadMode == THREADED) pthread_mutex_unlock(&mut);
+		if (ioctl(handle, CDROMREADRAW, &cr) == -1) {
 			return NULL;
 		}
 	}
 
 	subchnl.cdsc_format = CDROM_MSF;
-	ret = ioctl(cdHandle, CDROMSUBCHNL, &subchnl);
-
-	if (ReadMode == THREADED) pthread_mutex_unlock(&mut);
+	ret = ioctl(handle, CDROMSUBCHNL, &subchnl);
 
 	if (ret == -1) return NULL;
-
-	subqread = 1;
 
 	subq.TrackNumber = subchnl.cdsc_trk;
 	subq.IndexNumber = subchnl.cdsc_ind;
@@ -574,81 +231,4 @@ unsigned char *CDRgetBufferSub(void) {
 	return (unsigned char *)&subq;
 }
 
-// read CDDA sector into buffer
-long CDRreadCDDA(unsigned char m, unsigned char s, unsigned char f, unsigned char *buffer) {
-	unsigned char msf[3] = {m, s, f};
-	unsigned char *p;
-
-	if (CDRreadTrack(msf) != 0) return -1;
-
-	p = CDRgetBuffer();
-	if (p == NULL) return -1;
-
-	memcpy(buffer, p - 12, CD_FRAMESIZE_RAW); // copy from the beginning of the sector
-	return 0;
-}
-
-// get Track End Time
-long CDRgetTE(unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f) {
-	struct cdrom_tocentry entry;
-	char msf[3];
-
-	if (cdHandle < 1) return -1;
-
-	entry.cdte_track = track + 1;
-	entry.cdte_format = CDROM_MSF;
-
-	if (ioctl(cdHandle, CDROMREADTOCENTRY, &entry) == -1)
-		return -1;
-
-	lba_to_msf(msf_to_lba(entry.cdte_addr.msf.minute, entry.cdte_addr.msf.second, entry.cdte_addr.msf.frame) - CD_MSF_OFFSET, msf);
-
-	*m = msf[0];
-	*s = msf[1];
-	*f = msf[2];
-
-	return 0;
-}
-
-void ExecCfg(char *arg) {
-	char cfg[256];
-	struct stat buf;
-
-	strcpy(cfg, "./cfgDFCdrom");
-	if (stat(cfg, &buf) != -1) {
-		if (fork() == 0) {
-			execl(cfg, "cfgDFCdrom", arg, NULL);
-			exit(0);
-		}
-		return;
-	}
-
-	strcpy(cfg, "./cfg/DFCdrom");
-	if (stat(cfg, &buf) != -1) {
-		if (fork() == 0) {
-			execl(cfg, "cfgDFCdrom", arg, NULL);
-			exit(0);
-		}
-		return;
-	}
-
-	fprintf(stderr, "cfgDFCdrom file not found!\n");
-}
-
-long CDRconfigure() {
-	ExecCfg("configure");
-	return 0;
-}
-
-void CDRabout() {
-	ExecCfg("about");
-}
-
-long CDRtest(void) {
-	cdHandle = open(CdromDev, O_RDONLY);
-	if (cdHandle == -1)
-		return -1;
-	close(cdHandle);
-	cdHandle = -1;
-	return 0;
-}
+#endif

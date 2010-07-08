@@ -1,28 +1,34 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <gtk/gtk.h>
-#include <glade/glade.h>
-
-#include "config.h"
-
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#include <locale.h>
-#define _(x) gettext(x)
-#else
-#define _(x) (x)
-#endif
-
-#ifdef __linux__
+/*
+ * Copyright (c) 2010, Wei Mingzhi <whistler@openoffice.org>.
+ * All Rights Reserved.
+ *
+ * Based on: Cdrom for Psemu Pro like Emulators
+ * By: linuzappz <linuzappz@hotmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses>.
+ */
 
 #include "../cfg.c"
-#include <sys/ioctl.h>
+
+#include <gtk/gtk.h>
+#include <glade/glade.h>
 
 GtkWidget *MainWindow;
 
 // function to check if the device is a cdrom
 int is_cdrom(const char *device) {
+#ifdef __linux__
 	struct stat st;
 	int fd = -1;
 
@@ -58,6 +64,7 @@ int is_cdrom(const char *device) {
 	}
 
 	close(fd);
+#endif
 
 	// yes, it seems a CD drive!
 	return 1;
@@ -205,7 +212,8 @@ long CDRconfigure() {
 void CDRabout() {
 	GtkWidget *widget;
 	const char *authors[]= {"linuzappz <linuzappz@hotmail.com>",
-							"xobro <_xobro_@tin.it>", NULL};
+							"xobro <_xobro_@tin.it>",
+							"Wei Mingzhi <whistler_wmz@users.sf.net>", NULL};
 
 	widget = gtk_about_dialog_new();
 	gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(widget), "CD-ROM Device Reader");
@@ -217,8 +225,6 @@ void CDRabout() {
 	gtk_widget_destroy(widget);
 }
 
-#endif
-
 int main(int argc, char *argv[]) {
 #ifdef ENABLE_NLS
 	setlocale(LC_ALL, "");
@@ -227,7 +233,6 @@ int main(int argc, char *argv[]) {
 	textdomain(GETTEXT_PACKAGE);
 #endif
 
-#ifdef __linux__
 	gtk_set_locale();
 	gtk_init(&argc, &argv);
 
@@ -238,7 +243,6 @@ int main(int argc, char *argv[]) {
 	} else {
 		CDRabout();
 	}
-#endif
 
 	return 0;
 }

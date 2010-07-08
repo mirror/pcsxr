@@ -21,9 +21,9 @@
 
 #include "cdr.h"
 
-#ifdef USENULL
+#ifdef __FreeBSD__
 
-char *LibName = N_("CDR NULL Plugin");
+char *LibName = N_("CD-ROM Drive Reader");
 
 int OpenCdHandle(const char *dev) {
 	return -1;

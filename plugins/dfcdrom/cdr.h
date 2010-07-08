@@ -1,12 +1,85 @@
+/*
+ * Copyright (c) 2010, Wei Mingzhi <whistler@openoffice.org>.
+ * All Rights Reserved.
+ *
+ * Based on: Cdrom for Psemu Pro like Emulators
+ * By: linuzappz <linuzappz@hotmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses>.
+ */
+
 #ifndef __CDR_H__
 #define __CDR_H__
 
-#include <linux/cdrom.h>
+//#define DEBUG 1
 
-typedef char HWND;
+#include "config.h"
 
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#include <locale.h>
+#define _(x)  gettext(x)
+#define N_(x) (x)
+#else
+#define _(x)  (x)
+#define N_(x) (x)
+#endif
+
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <time.h>
+#include <string.h>
+
 #include "psemu_plugin_defs.h"
+
+#if defined (__linux__)
+
+#include <linux/cdrom.h>
+#ifndef CDROMSETSPINDOWN
+#define CDROMSETSPINDOWN 0x531e
+#endif
+#define DEV_DEF		"/dev/cdrom"
+
+#else
+
+struct cdrom_msf {
+	unsigned char cdmsf_min0;     /* start minute */
+	unsigned char cdmsf_sec0;     /* start second */
+	unsigned char cdmsf_frame0;   /* start frame */
+	unsigned char cdmsf_min1;     /* end minute */
+	unsigned char cdmsf_sec1;     /* end second */
+	unsigned char cdmsf_frame1;   /* end frame */
+};
+
+#ifdef __FreeBSD__
+
+#define DEV_DEF		"/dev/acd0"
+
+#else
+
+#define DEV_DEF		""
+#define USE_NULL	1
+
+#endif
+
+#endif
 
 extern char CdromDev[256];
 extern long ReadMode;
@@ -15,10 +88,13 @@ extern long CacheSize;
 extern long CdrSpeed;
 extern long SpinDown;
 
-#define DEV_DEF		"/dev/cdrom"
 #define NORMAL		0
 #define THREADED	1
 #define READ_MODES	2
+
+#ifndef CD_FRAMESIZE_RAW
+#define CD_FRAMESIZE_RAW 2352
+#endif
 
 #define DATA_SIZE	(CD_FRAMESIZE_RAW - 12)
 
@@ -53,6 +129,24 @@ typedef struct {
 	int ret;
 } CacheData;
 
+struct CdrStat {
+	unsigned long Type;
+	unsigned long Status;
+	unsigned char Time[3];		// current playing time
+};
+
+struct SubQ {
+	char res0[12];
+	unsigned char ControlAndADR;
+	unsigned char TrackNumber;
+	unsigned char IndexNumber;
+	unsigned char TrackRelativeAddress[3];
+	unsigned char Filler;
+	unsigned char AbsoluteAddress[3];
+	unsigned char CRC[2];
+	char res1[72];
+};
+
 long ReadNormal();
 long ReadThreaded();
 unsigned char* GetBNormal();
@@ -69,4 +163,18 @@ void SaveConf();
 #define PRINTF(...) /* */
 #endif
 
-#endif /* __CDR_H__ */
+unsigned int msf_to_lba(char m, char s, char f);
+void lba_to_msf(unsigned int s, char *msf);
+
+int OpenCdHandle();
+void CloseCdHandle(int handle);
+long GetTN(int handle, unsigned char *buffer);
+long GetTD(int handle, unsigned char track, unsigned char *buffer);
+long GetTE(int handle, unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f);
+long ReadSector(int handle, crdata *cr);
+long PlayCDDA(int handle, unsigned char *sector);
+long StopCDDA(int handle);
+long GetStatus(int handle, int playing, struct CdrStat *stat);
+unsigned char *ReadSub(int handle, const unsigned char *time);
+
+#endif

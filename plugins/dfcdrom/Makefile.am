@@ -3,7 +3,14 @@ libdir = @libdir@/games/psemu/
 
 lib_LTLIBRARIES = libDFCdrom.la
 
-libDFCdrom_la_SOURCES = cdr.c cfg.c
+libDFCdrom_la_SOURCES = \
+	cdr.c \
+	cdr.h \
+	cfg.c \
+	cdr-linux.c \
+	cdr-null.c \
+	cdr-freebsd.c
+
 libDFCdrom_la_LDFLAGS = -module -avoid-version -lpthread
 
 INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \

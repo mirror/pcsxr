@@ -1,3 +1,14 @@
+July 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfcdrom/cdr.c: Refactored for better portability.
+ * plugins/dfcdrom/cdr.h: Likewise.
+ * plugins/dfcdrom/cfg.c: Likewise.
+ * plugins/dfcdrom/cdr-linux.c: Likewise.
+ * plugins/dfcdrom/cdr-null.c: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/main.c: Likewise.
+ * plugins/dfcdrom/cdr-freebsd.c: Added (not implemented yet).
+ * plugins/dfcdrom/Makefile.am: Added cdr-linux.c, cdr-null.c, cdr-freebsd.c.
+
 July 7, 2010 edgbla <edgbla@yandex.ru>
 
  * plugins/bladesio1/gui.c: Sio1 plugin (dummy).
