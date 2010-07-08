@@ -26,10 +26,36 @@
 char *LibName = N_("CD-ROM Drive Reader");
 
 int OpenCdHandle(const char *dev) {
-	return -1;
+	int h, parameter, bsize = CD_FRAMESIZE_RAW;
+	char spindown;
+
+	h = open(dev, O_RDONLY);
+
+	if (h != -1) {
+		if (SpinDown != SPINDOWN_VENDOR_SPECIFIC) {
+			if (SpinDown > SPINDOWN_1S) {
+				parameter = ((int)SpinDown << (SpinDown - SPINDOWN_1S));
+			} else {
+				parameter = 1;
+			}
+
+			ioctl(h, IOCATASSPINDOWN, &parameter);
+
+			parameter = CdrSpeed * 177;
+			ioctl(h, CDRIOCREADSPEED, &parameter);
+
+			ioctl(h, CDRIOCSETBLOCKSIZE, &bsize);
+		}
+	}
+
+	return h;
 }
 
 void CloseCdHandle(int handle) {
+	int spindown = 0;
+	ioctl(handle, IOCATASSPINDOWN, &spindown);
+
+	close(handle);
 }
 
 long GetTN(int handle, unsigned char *buffer) {
@@ -48,7 +74,13 @@ long GetTE(int handle, unsigned char track, unsigned char *m, unsigned char *s, 
 }
 
 long ReadSector(int handle, crdata *cr) {
-	return -1;
+	unsigned int lba = msf_to_lba(cr->msf.cdmsf_min0, cr->msf.cdmsf_sec0,
+								  cr->msf.cdmsf_frame0);
+
+	if (pread(handle, (void *)cr->buf, CD_FRAMESIZE_RAW, lba * CD_FRAMESIZE_RAW) != CD_FRAMESIZE_RAW)
+		return -1;
+
+	return 0;
 }
 
 long PlayCDDA(int handle, unsigned char *sector) {

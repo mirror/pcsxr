@@ -47,6 +47,7 @@ int OpenCdHandle(const char *dev) {
 void CloseCdHandle(int handle) {
 	char spindown = SPINDOWN_VENDOR_SPECIFIC;
 	ioctl(handle, CDROMSETSPINDOWN, &spindown);
+
 	close(handle);
 }
 

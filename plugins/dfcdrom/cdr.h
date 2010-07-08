@@ -76,8 +76,10 @@ struct cdrom_msf {
 
 #ifdef __FreeBSD__
 
-#include <sys/disklabel.h>
+#include <sys/ata.h>
 #include <sys/cdio.h>
+#include <sys/cdrio.h>
+#include <sys/disklabel.h>
 
 #define DEV_DEF		"/dev/acd0"
 
