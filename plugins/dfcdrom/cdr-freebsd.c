@@ -34,7 +34,7 @@ int OpenCdHandle(const char *dev) {
 	if (h != -1) {
 		if (SpinDown != SPINDOWN_VENDOR_SPECIFIC) {
 			if (SpinDown > SPINDOWN_1S) {
-				parameter = ((int)SpinDown << (SpinDown - SPINDOWN_1S));
+				parameter = (1 << (SpinDown - SPINDOWN_1S));
 			} else {
 				parameter = 1;
 			}
