@@ -45,9 +45,6 @@ int OpenCdHandle(const char *dev) {
 			if (parameter == 0) parameter = CDR_MAX_SPEED;
 
 			ioctl(h, CDRIOCREADSPEED, &parameter);
-
-			parameter = CD_FRAMESIZE_RAW;
-			ioctl(h, CDRIOCSETBLOCKSIZE, &parameter);
 		}
 	}
 
@@ -85,8 +82,19 @@ long ReadSector(int handle, crdata *cr) {
 	unsigned int lba = msf_to_lba(cr->msf.cdmsf_min0, cr->msf.cdmsf_sec0,
 								  cr->msf.cdmsf_frame0);
 
-	if (pread(handle, (void *)cr->buf, CD_FRAMESIZE_RAW, lba * CD_FRAMESIZE_RAW) != CD_FRAMESIZE_RAW)
+	int bsize = CD_FRAMESIZE_RAW;
+
+	if (ioctl(handle, CDRIOCSETBLOCKSIZE, &bsize) == -1) {
 		return -1;
+	}
+
+	if (lseek(handle, lba * CD_FRAMESIZE_RAW, SEEK_SET) == -1) {
+		return -1;
+	}
+
+	if (read(handle, (void *)cr->buf, CD_FRAMESIZE_RAW) == -1) {
+		return -1;
+	}
 
 	return 0;
 }
