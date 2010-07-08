@@ -26,7 +26,7 @@
 char *LibName = N_("CD-ROM Drive Reader");
 
 int OpenCdHandle(const char *dev) {
-	int h, parameter, bsize = CD_FRAMESIZE_RAW;
+	int h, parameter;
 	char spindown;
 
 	h = open(dev, O_RDONLY);
@@ -42,9 +42,12 @@ int OpenCdHandle(const char *dev) {
 			ioctl(h, IOCATASSPINDOWN, &parameter);
 
 			parameter = CdrSpeed * 177;
+			if (parameter == 0) parameter = CDR_MAX_SPEED;
+
 			ioctl(h, CDRIOCREADSPEED, &parameter);
 
-			ioctl(h, CDRIOCSETBLOCKSIZE, &bsize);
+			parameter = CD_FRAMESIZE_RAW;
+			ioctl(h, CDRIOCSETBLOCKSIZE, &parameter);
 		}
 	}
 
@@ -52,8 +55,13 @@ int OpenCdHandle(const char *dev) {
 }
 
 void CloseCdHandle(int handle) {
-	int spindown = 0;
-	ioctl(handle, IOCATASSPINDOWN, &spindown);
+	int parameter;
+
+	parameter = 0;
+	ioctl(handle, IOCATASSPINDOWN, &parameter);
+
+	parameter = CDR_MAX_SPEED;
+	ioctl(h, CDRIOCREADSPEED, &parameter);
 
 	close(handle);
 }
