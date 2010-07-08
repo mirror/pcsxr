@@ -39,7 +39,8 @@ long GetTN(int handle, unsigned char *buffer) {
 }
 
 long GetTD(int handle, unsigned char track, unsigned char *buffer) {
-	return -1;
+	memset(buffer + 1, 0, 3);
+	return 0;
 }
 
 long GetTE(int handle, unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f) {
