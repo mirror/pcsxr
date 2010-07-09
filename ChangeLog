@@ -10,6 +10,7 @@ July 9, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * plugins/dfcdrom/cdr-linux.c: Likewise.
  * plugins/dfcdrom/cdrcfg-0.1df/main.c: Added device listing for Solaris.
  * configure.ac: Fixed FTBFS on Solaris.
+ * plugins/peopsxgl/draw.c: Don't use glColorTableEXT on Solaris.
 
 July 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

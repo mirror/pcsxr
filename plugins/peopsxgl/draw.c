@@ -168,6 +168,7 @@ void GetExtInfos(void)
 
  glColorTableEXTEx=(PFNGLCOLORTABLEEXT)NULL;           // init ogl palette func pointer
 
+#ifndef __sun
  if(iGPUHeight!=1024 &&                                // no pal textures in ZN mode (height=1024)! 
     strstr((char *)glGetString(GL_EXTENSIONS),         // otherwise: check ogl support
     "GL_EXT_paletted_texture"))
@@ -179,6 +180,9 @@ void GetExtInfos(void)
    if(glColorTableEXTEx==NULL) iUsePalTextures=0;      // -> ha, cheater... no func, no support
   }
  else iUsePalTextures=0;
+#else
+ iUsePalTextures=0;
+#endif
 }
 
 ////////////////////////////////////////////////////////////////////////
