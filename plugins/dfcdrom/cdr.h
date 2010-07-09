@@ -57,6 +57,14 @@
 #endif
 #define DEV_DEF		"/dev/cdrom"
 
+#elif defined (__sun)
+
+#include <sys/cdio.h>
+
+/* The CD-ROM device name seems to vary on different computers on Solaris, so
+   let user set this. */
+#define DEV_DEF		""
+
 #else
 
 struct cdrom_msf {
@@ -82,14 +90,6 @@ struct cdrom_msf {
 #include <sys/disklabel.h>
 
 #define DEV_DEF		"/dev/acd0"
-
-#elif defined (__sun)
-
-#include <sys/cdio.h>
-
-/* The CD-ROM device name seems to vary on different computers on Solaris, so
-   let user set this. */
-#define DEV_DEF		""
 
 #else
 
