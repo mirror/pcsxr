@@ -25,33 +25,40 @@
 
 char *LibName = N_("CD-ROM Drive Reader");
 
+static int handle = -1;
+
 int OpenCdHandle(const char *dev) {
-	int h;
 	char spindown;
 
-	h = open(dev, O_RDONLY);
+	handle = open(dev, O_RDONLY);
 
-	if (h != -1) {
-		ioctl(h, CDROM_LOCKDOOR, 0);
-//		ioctl(h, CDROMSTART, NULL);
+	if (handle != -1) {
+		ioctl(handle, CDROM_LOCKDOOR, 0);
+//		ioctl(handle, CDROMSTART, NULL);
 
 		spindown = (char)SpinDown;
-		ioctl(h, CDROMSETSPINDOWN, &spindown);
+		ioctl(handle, CDROMSETSPINDOWN, &spindown);
 
-		ioctl(h, CDROM_SELECT_SPEED, CdrSpeed);
+		ioctl(handle, CDROM_SELECT_SPEED, CdrSpeed);
 	}
 
-	return h;
+	return (handle == -1) ? -1 : 0;
 }
 
-void CloseCdHandle(int handle) {
+void CloseCdHandle() {
 	char spindown = SPINDOWN_VENDOR_SPECIFIC;
 	ioctl(handle, CDROMSETSPINDOWN, &spindown);
 
 	close(handle);
+
+	handle = -1;
 }
 
-long GetTN(int handle, unsigned char *buffer) {
+int IsCdHandleOpen () {
+	return (handle != -1);
+}
+
+long GetTN(unsigned char *buffer) {
 	struct cdrom_tochdr toc;
 
 	if (ioctl(handle, CDROMREADTOCHDR, &toc) == -1)
@@ -63,7 +70,7 @@ long GetTN(int handle, unsigned char *buffer) {
 	return 0;
 }
 
-long GetTD(int handle, unsigned char track, unsigned char *buffer) {
+long GetTD(unsigned char track, unsigned char *buffer) {
 	struct cdrom_tocentry entry;
 
 	if (track == 0)
@@ -81,7 +88,7 @@ long GetTD(int handle, unsigned char track, unsigned char *buffer) {
 	return 0;
 }
 
-long GetTE(int handle, unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f) {
+long GetTE(unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f) {
 	struct cdrom_tocentry entry;
 	char msf[3];
 
@@ -100,19 +107,19 @@ long GetTE(int handle, unsigned char track, unsigned char *m, unsigned char *s, 
 	return 0;
 }
 
-long ReadSector(int handle, crdata *cr) {
+long ReadSector(crdata *cr) {
 	if (ioctl(handle, CDROMREADRAW, cr) == -1)
 		return -1;
 
 	return 0;
 }
 
-long PlayCDDA(int handle, unsigned char *sector) {
+long PlayCDDA(unsigned char *sector) {
 	struct cdrom_msf addr;
 	unsigned char ptmp[4];
 
 	// 0 is the last track of every cdrom, so play up to there
-	if (GetTD(handle, 0, ptmp) == -1)
+	if (GetTD(0, ptmp) == -1)
 		return -1;
 
 	addr.cdmsf_min0 = sector[0];
@@ -128,7 +135,7 @@ long PlayCDDA(int handle, unsigned char *sector) {
 	return 0;
 }
 
-long StopCDDA(int handle) {
+long StopCDDA() {
 	struct cdrom_subchnl sc;
 
 	sc.cdsc_format = CDROM_MSF;
@@ -145,7 +152,7 @@ long StopCDDA(int handle) {
 	return 0;
 }
 
-long GetStatus(int handle, int playing, struct CdrStat *stat) {
+long GetStatus(int playing, struct CdrStat *stat) {
 	struct cdrom_subchnl sc;
 	int ret;
 	char spindown;
@@ -193,7 +200,7 @@ long GetStatus(int handle, int playing, struct CdrStat *stat) {
 	return 0;
 }
 
-unsigned char *ReadSub(int handle, const unsigned char *time) {
+unsigned char *ReadSub(const unsigned char *time) {
 	static struct SubQ subq;
 	struct cdrom_subchnl subchnl;
 	int ret;

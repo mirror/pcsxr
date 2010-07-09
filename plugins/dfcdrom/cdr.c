@@ -47,7 +47,6 @@ int cacheaddr;
 crdata cr;
 
 unsigned char lastTime[3];
-int cdHandle;
 pthread_t thread;
 int subqread;
 volatile int stopth, found, locked, playing;
@@ -70,9 +69,7 @@ void *CdrThread(void *arg);
 extern char *LibName;
 
 long CDRinit(void) {
-	cdHandle = -1;
 	thread = -1;
-
 	return 0;
 }
 
@@ -83,11 +80,10 @@ long CDRshutdown(void) {
 long CDRopen(void) {
 	LoadConf();
 
-	if (cdHandle > 0)
+	if (IsCdHandleOpen())
 		return 0;				/* it's already open */
 
-	cdHandle = OpenCdHandle(CdromDev);
-	if (cdHandle == -1) { // if we can't open the cdrom we'll works as a null plugin
+	if (OpenCdHandle(CdromDev) == -1) { // if we can't open the cdrom we'll works as a null plugin
 		fprintf(stderr, "CDR: Could not open %s\n", CdromDev);
 	}
 
@@ -125,12 +121,11 @@ long CDRopen(void) {
 }
 
 long CDRclose(void) {
-	if (cdHandle < 1) return 0;
+	if (!IsCdHandleOpen()) return 0;
 
 	if (playing) CDRstop();
 
-	CloseCdHandle(cdHandle);
-	cdHandle = -1;
+	CloseCdHandle();
 
 	if (thread != -1) {
 		if (locked == 0) {
@@ -160,13 +155,13 @@ long CDRclose(void) {
 //  byte 0 - start track
 //  byte 1 - end track
 long CDRgetTN(unsigned char *buffer) {
-	if (cdHandle < 1) {
+	if (!IsCdHandleOpen()) {
 		buffer[0] = 1;
 		buffer[1] = 1;
 		return 0;
 	}
 
-	return GetTN(cdHandle, buffer);
+	return GetTN(buffer);
 }
 
 // return Track Time
@@ -175,17 +170,17 @@ long CDRgetTN(unsigned char *buffer) {
 //  byte 1 - second
 //  byte 2 - minute
 long CDRgetTD(unsigned char track, unsigned char *buffer) {
-	if (cdHandle < 1) {
+	if (!IsCdHandleOpen()) {
 		memset(buffer + 1, 0, 3);
 		return 0;
 	}
 
-	return GetTD(cdHandle, track, buffer);
+	return GetTD(track, buffer);
 }
 
 // normal reading
 long ReadNormal() {
-	if (ReadSector(cdHandle, &cr) == -1)
+	if (ReadSector(&cr) == -1)
 		return -1;
 
 	return 0;
@@ -270,7 +265,7 @@ void *CdrThread(void *arg) {
 		for (i = 0; i < CacheSize; i++) {
 			memcpy(&cdcache[i].cr.msf, curTime, 3);
 			PRINTF("reading %d:%d:%d\n", curTime[0], curTime[1], curTime[2]);
-			cdcache[i].ret = ReadSector(cdHandle, &cdcache[i].cr);
+			cdcache[i].ret = ReadSector(&cdcache[i].cr);
 
 			PRINTF("readed %x:%x:%x\n", cdcache[i].cr.buf[12], cdcache[i].cr.buf[13], cdcache[i].cr.buf[14]);
 			if (cdcache[i].ret == -1) break;
@@ -301,7 +296,7 @@ void *CdrThread(void *arg) {
 //  byte 2 - frame
 // uses bcd format
 long CDRreadTrack(unsigned char *time) {
-	if (cdHandle < 1) {
+	if (!IsCdHandleOpen()) {
 		memset(cr.buf, 0, DATA_SIZE);
 		return 0;
 	}
@@ -330,7 +325,7 @@ unsigned char *CDRgetBuffer(void) {
 //  byte 2 - frame
 // does NOT uses bcd format
 long CDRplay(unsigned char *sector) {
-	if (cdHandle < 1)
+	if (!IsCdHandleOpen())
 		return 0;
 
 	// If play was called with the same time as the previous call,
@@ -345,7 +340,7 @@ long CDRplay(unsigned char *sector) {
 
 	initial_time = msf_to_lba(sector[0], sector[1], sector[2]);
 
-	if (PlayCDDA(cdHandle, sector) == 0) {
+	if (PlayCDDA(sector) == 0) {
 		playing = 1;
 		return 0;
 	}
@@ -355,10 +350,10 @@ long CDRplay(unsigned char *sector) {
 
 // stops cdda audio
 long CDRstop(void) {
-	if (cdHandle < 1)
+	if (!IsCdHandleOpen())
 		return 0;
 
-	if (StopCDDA(cdHandle) == 0) {
+	if (StopCDDA() == 0) {
 		playing = 0;
 		initial_time = 0;
 
@@ -388,10 +383,10 @@ long CDRstop(void) {
 //  byte 2 - frame
 
 long CDRgetStatus(struct CdrStat *stat) {
-	if (cdHandle < 1)
+	if (!IsCdHandleOpen())
 		return -1;
 
-	return GetStatus(cdHandle, playing, stat);
+	return GetStatus(playing, stat);
 }
 
 unsigned char *CDRgetBufferSub(void) {
@@ -402,7 +397,7 @@ unsigned char *CDRgetBufferSub(void) {
 
 	if (ReadMode == THREADED) pthread_mutex_lock(&mut);
 
-	p = ReadSub(cdHandle, lastTime);
+	p = ReadSub(lastTime);
 
 	if (ReadMode == THREADED) pthread_mutex_unlock(&mut);
 
@@ -427,8 +422,8 @@ long CDRreadCDDA(unsigned char m, unsigned char s, unsigned char f, unsigned cha
 
 // get Track End Time
 long CDRgetTE(unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f) {
-	if (cdHandle < 1) return -1;
-	return GetTE(cdHandle, track, m, s, f);
+	if (!IsCdHandleOpen()) return -1;
+	return GetTE(track, m, s, f);
 }
 
 void ExecCfg(char *arg) {
@@ -469,11 +464,9 @@ void CDRabout() {
 
 long CDRtest(void) {
 #ifndef USE_NULL
-	cdHandle = open(CdromDev, O_RDONLY);
-	if (cdHandle == -1)
+	if (OpenCdHandle(CdromDev) == -1)
 		return -1;
-	close(cdHandle);
-	cdHandle = -1;
+	CloseCdHandle();
 #endif
 	return 0;
 }

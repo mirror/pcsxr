@@ -29,41 +29,45 @@ int OpenCdHandle(const char *dev) {
 	return -1;
 }
 
-void CloseCdHandle(int handle) {
+void CloseCdHandle() {
 }
 
-long GetTN(int handle, unsigned char *buffer) {
+int IsCdHandleOpen () {
+	return 0;
+}
+
+long GetTN(unsigned char *buffer) {
 	buffer[0] = 0;
 	buffer[1] = 0;
 	return 0;
 }
 
-long GetTD(int handle, unsigned char track, unsigned char *buffer) {
+long GetTD(unsigned char track, unsigned char *buffer) {
 	memset(buffer + 1, 0, 3);
 	return 0;
 }
 
-long GetTE(int handle, unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f) {
+long GetTE(unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f) {
 	return -1;
 }
 
-long ReadSector(int handle, crdata *cr) {
+long ReadSector(crdata *cr) {
 	return -1;
 }
 
-long PlayCDDA(int handle, unsigned char *sector) {
+long PlayCDDA(unsigned char *sector) {
 	return -1;
 }
 
-long StopCDDA(int handle) {
+long StopCDDA() {
 	return -1;
 }
 
-long GetStatus(int handle, int playing, struct CdrStat *stat) {
+long GetStatus(int playing, struct CdrStat *stat) {
 	return -1;
 }
 
-unsigned char *ReadSub(int handle, const unsigned char *time) {
+unsigned char *ReadSub(const unsigned char *time) {
 	return NULL;
 }
 

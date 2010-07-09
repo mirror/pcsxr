@@ -107,14 +107,41 @@ void fill_drives_list(GtkWidget *widget) {
 		"/dev/scd2",
 		"/dev/scd3",
 		"/dev/optcd",
-		NULL};
+		""};
 #elif defined (__FreeBSD__)
 	static const char *cdrom_devices[] = {
 		"/dev/acd0",
 		"/dev/acd1",
 		"/dev/acd2",
 		"/dev/acd3",
-		NULL};
+		""};
+#elif defined (__sun)
+	char cdrom_devices[256][256];
+	FILE *fp;
+	char buf[256], *devname, *nick;
+
+	memset(cdrom_devices, 0, sizeof(cdrom_devices));
+
+	i = 0;
+
+	fp = popen("eject -l", "r");
+
+	if (fp != NULL) {
+		while (!feof(fp) && i < 256) {
+			fgets(buf, 256, fp);
+
+			devname = strtok(buf, " ");
+			nick = strtok(NULL, " ");
+
+			if (devname == NULL || nick == NULL) continue;
+
+			if (strstr(nick, "cdrom") != NULL) {
+				strcpy(cdrom_devices[i], devname);
+			}
+		}
+
+		pclose(fp);
+	}
 #else
 	static const char *cdrom_devices[] = { NULL };
 #endif
@@ -126,7 +153,7 @@ void fill_drives_list(GtkWidget *widget) {
 	gtk_list_store_set(store, &iter, 0, CdromDev, -1);
 
 	// scan cdrom_devices for real cdrom and add them to list
-	while (cdrom_devices[i] != NULL) {
+	while (cdrom_devices[i][0] != '\0') {
 		// check that is not our current dev (already in list)
 		if (strcmp(cdrom_devices[i], CdromDev) != 0) {
 			// check that is a cdrom device

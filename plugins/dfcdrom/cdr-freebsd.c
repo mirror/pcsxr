@@ -25,13 +25,15 @@
 
 char *LibName = N_("CD-ROM Drive Reader");
 
+static int handle = -1;
+
 int OpenCdHandle(const char *dev) {
-	int h, parameter;
+	int parameter;
 	char spindown;
 
-	h = open(dev, O_RDONLY);
+	handle = open(dev, O_RDONLY);
 
-	if (h != -1) {
+	if (handle != -1) {
 		if (SpinDown != SPINDOWN_VENDOR_SPECIFIC) {
 			if (SpinDown > SPINDOWN_1S) {
 				parameter = (1 << (SpinDown - SPINDOWN_1S));
@@ -39,19 +41,19 @@ int OpenCdHandle(const char *dev) {
 				parameter = 1;
 			}
 
-			ioctl(h, IOCATASSPINDOWN, &parameter);
+			ioctl(handle, IOCATASSPINDOWN, &parameter);
 
 			parameter = CdrSpeed * 177;
 			if (parameter == 0) parameter = CDR_MAX_SPEED;
 
-			ioctl(h, CDRIOCREADSPEED, &parameter);
+			ioctl(handle, CDRIOCREADSPEED, &parameter);
 		}
 	}
 
-	return h;
+	return (h == -1) ? -1 : 0;
 }
 
-void CloseCdHandle(int handle) {
+void CloseCdHandle() {
 	int parameter;
 
 	parameter = 0;
@@ -61,24 +63,30 @@ void CloseCdHandle(int handle) {
 	ioctl(handle, CDRIOCREADSPEED, &parameter);
 
 	close(handle);
+
+	handle = -1;
 }
 
-long GetTN(int handle, unsigned char *buffer) {
+int IsCdHandleOpen () {
+	return (handle != -1);
+}
+
+long GetTN(unsigned char *buffer) {
 	buffer[0] = 0;
 	buffer[1] = 0;
 	return 0;
 }
 
-long GetTD(int handle, unsigned char track, unsigned char *buffer) {
+long GetTD(unsigned char track, unsigned char *buffer) {
 	memset(buffer + 1, 0, 3);
 	return 0;
 }
 
-long GetTE(int handle, unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f) {
+long GetTE(unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f) {
 	return -1;
 }
 
-long ReadSector(int handle, crdata *cr) {
+long ReadSector(crdata *cr) {
 	unsigned int lba = msf_to_lba(cr->msf.cdmsf_min0, cr->msf.cdmsf_sec0,
 								  cr->msf.cdmsf_frame0);
 
@@ -99,19 +107,19 @@ long ReadSector(int handle, crdata *cr) {
 	return 0;
 }
 
-long PlayCDDA(int handle, unsigned char *sector) {
+long PlayCDDA(unsigned char *sector) {
 	return -1;
 }
 
-long StopCDDA(int handle) {
+long StopCDDA() {
 	return -1;
 }
 
-long GetStatus(int handle, int playing, struct CdrStat *stat) {
+long GetStatus(int playing, struct CdrStat *stat) {
 	return -1;
 }
 
-unsigned char *ReadSub(int handle, const unsigned char *time) {
+unsigned char *ReadSub(const unsigned char *time) {
 	return NULL;
 }
 

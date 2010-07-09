@@ -4,6 +4,11 @@ July 9, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * plugins/dfcdrom/Makefile.am: Added cdr-solaris.c.
  * plugins/dfcdrom/cdr-freebsd.c: Return 0 for PlayCDDA()/StopCDDA().
  * gui/ConfDlg.c: Don't use dlerror() to check for symbol load failure.
+ * plugins/dfcdrom/cdr.c: Make cdHandle singleton as it could be different
+   type on some OS and we don't need to open multiple handles.
+ * plugins/dfcdrom/cdr.h: Likewise.
+ * plugins/dfcdrom/cdr-linux.c: Likewise.
+ * plugins/dfcdrom/cdrcfg-0.1df/main.c: Added device listing for Solaris.
 
 July 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

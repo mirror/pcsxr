@@ -74,7 +74,7 @@ struct cdrom_msf {
 #define CD_FRAMESIZE_SUB	96
 #define CD_MSF_OFFSET		150
 
-#ifdef __FreeBSD__
+#if defined (__FreeBSD__)
 
 #include <sys/ata.h>
 #include <sys/cdio.h>
@@ -82,6 +82,14 @@ struct cdrom_msf {
 #include <sys/disklabel.h>
 
 #define DEV_DEF		"/dev/acd0"
+
+#elif defined (__sun)
+
+#include <sys/cdio.h>
+
+/* The CD-ROM device name seems to vary on different computers on Solaris, so
+   let user set this. */
+#define DEV_DEF		""
 
 #else
 
@@ -178,14 +186,15 @@ unsigned int msf_to_lba(char m, char s, char f);
 void lba_to_msf(unsigned int s, char *msf);
 
 int OpenCdHandle();
-void CloseCdHandle(int handle);
-long GetTN(int handle, unsigned char *buffer);
-long GetTD(int handle, unsigned char track, unsigned char *buffer);
-long GetTE(int handle, unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f);
-long ReadSector(int handle, crdata *cr);
-long PlayCDDA(int handle, unsigned char *sector);
-long StopCDDA(int handle);
-long GetStatus(int handle, int playing, struct CdrStat *stat);
-unsigned char *ReadSub(int handle, const unsigned char *time);
+void CloseCdHandle();
+int IsCdHandleOpen();
+long GetTN(unsigned char *buffer);
+long GetTD(unsigned char track, unsigned char *buffer);
+long GetTE(unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f);
+long ReadSector(crdata *cr);
+long PlayCDDA(unsigned char *sector);
+long StopCDDA();
+long GetStatus(int playing, struct CdrStat *stat);
+unsigned char *ReadSub(const unsigned char *time);
 
 #endif
