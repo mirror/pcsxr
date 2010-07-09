@@ -13679,7 +13679,7 @@ fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_umem_umem_alloc" >&5
 $as_echo "$ac_cv_lib_umem_umem_alloc" >&6; }
 if test "x$ac_cv_lib_umem_umem_alloc" = x""yes; then :
-  LDFLAGS="$LDFLAGS -lumem_alloc"
+  LDFLAGS="$LDFLAGS -lumem"
 fi
 
 
