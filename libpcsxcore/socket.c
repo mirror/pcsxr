@@ -15,7 +15,8 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-#include "config.h"
+#include "psxcommon.h"
+#include "socket.h"
 
 #include <stdio.h>
 #ifdef _WIN32
@@ -29,9 +30,6 @@
 #include <fcntl.h>
 #endif
 #include <stdlib.h>
-
-#include "psxcommon.h"
-#include "socket.h"
 
 static int server_socket = 0;
 static int client_socket = 0;
