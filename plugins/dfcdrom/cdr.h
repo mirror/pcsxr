@@ -61,6 +61,12 @@
 
 #include <sys/cdio.h>
 
+#define CD_SECS				60
+#define CD_FRAMES			75
+#define CD_FRAMESIZE_RAW	2352
+#define CD_FRAMESIZE_SUB	96
+#define CD_MSF_OFFSET		150
+
 /* The CD-ROM device name seems to vary on different computers on Solaris, so
    let user set this. */
 #define DEV_DEF		""
@@ -76,8 +82,8 @@ struct cdrom_msf {
 	unsigned char cdmsf_frame1;   /* end frame */
 };
 
-#define CD_SECS			60
-#define CD_FRAMES		75
+#define CD_SECS				60
+#define CD_FRAMES			75
 #define CD_FRAMESIZE_RAW	2352
 #define CD_FRAMESIZE_SUB	96
 #define CD_MSF_OFFSET		150
