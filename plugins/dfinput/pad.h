@@ -139,8 +139,8 @@ enum {
 };
 
 // cfg.c functions...
-void LoadConfig();
-void SaveConfig();
+void LoadPADConfig();
+void SavePADConfig();
 
 // sdljoy.c functions...
 void InitSDLJoy();

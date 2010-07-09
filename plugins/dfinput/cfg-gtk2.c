@@ -255,7 +255,7 @@ static void UpdateKey() {
 }
 
 static void OnConfigExit(GtkWidget *widget, gpointer user_data) {
-	SaveConfig();
+	SavePADConfig();
 
 	gtk_widget_destroy(widget);
 	SDL_Quit();
@@ -569,7 +569,7 @@ long PADconfigure() {
 		return -1;
 	}
 
-	LoadConfig();
+	LoadPADConfig();
 
 	xml = glade_xml_new(DATADIR "dfinput.glade2", "CfgWnd", NULL);
 	if (xml == NULL) {

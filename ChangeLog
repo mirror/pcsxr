@@ -12,6 +12,12 @@ July 9, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * configure.ac: Fixed FTBFS on Solaris.
  * plugins/peopsxgl/draw.c: Don't use glColorTableEXT on Solaris.
  * libpcsxcore/socket.c: Silenced warning on Solaris.
+ * plugins/dfinput/cfg.c: Renamed LoadConfig()/SaveConfig() to avoid problems
+   with some OSes like Solaris.
+ * plugins/dfinput/cfg-gtk2.c: Likewise.
+ * plugins/dfinput/pad.c: Likewise.
+ * plugins/dfinput/pad.h: Likewise.
+ * gui/AboutDlg.c: Minor text change.
 
 July 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

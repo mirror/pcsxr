@@ -110,7 +110,7 @@ static void SetDefaultConfig() {
 	g.cfg.PadDef[1].KeyDef[DKEY_SQUARE].J.Button = 3;
 }
 
-void LoadConfig() {
+void LoadPADConfig() {
 	FILE		*fp;
 	char		buf[256];
 	int			current, a, b, c;
@@ -264,7 +264,7 @@ void LoadConfig() {
 	fclose(fp);
 }
 
-void SaveConfig() {
+void SavePADConfig() {
 	FILE		*fp;
 	int			i;
 

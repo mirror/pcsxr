@@ -31,7 +31,7 @@ uint32_t PSEgetLibVersion(void) {
 }
 
 long PADinit(long flags) {
-	LoadConfig();
+	LoadPADConfig();
 
 	g.PadState[0].PadMode = 0;
 	g.PadState[0].PadID = 0x41;
