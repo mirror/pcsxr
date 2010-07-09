@@ -79,7 +79,7 @@ int is_cdrom(const char *device) {
 // deliberately ignored old non standard cdroms... )
 // If you come up with a better method let me know!!
 void fill_drives_list(GtkWidget *widget) {
-	int i = 0;
+	int i;
 	GtkListStore *store;
 	GtkTreeIter iter;
 
@@ -136,7 +136,7 @@ void fill_drives_list(GtkWidget *widget) {
 			if (devname == NULL || nick == NULL) continue;
 
 			if (strstr(nick, "cdrom") != NULL) {
-				strcpy(cdrom_devices[i], devname);
+				strcpy(cdrom_devices[i++], devname);
 			}
 		}
 
