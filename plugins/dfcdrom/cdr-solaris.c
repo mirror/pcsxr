@@ -149,51 +149,7 @@ long StopCDDA() {
 }
 
 long GetStatus(int playing, struct CdrStat *stat) {
-	struct cdrom_subchnl sc;
-	int ret;
-	char spindown;
-
-	memset(stat, 0, sizeof(struct CdrStat));
-
-	if (playing) { // return Time only if playing
-		sc.cdsc_format = CDROM_MSF;
-		if (ioctl(handle, CDROMSUBCHNL, &sc) != -1)
-			memcpy(stat->Time, &sc.cdsc_absaddr.msf, 3);
-	}
-
-	ret = ioctl(handle, CDROM_DISC_STATUS);
-	switch (ret) {
-		case CDS_AUDIO:
-			stat->Type = 0x02;
-			break;
-		case CDS_DATA_1:
-		case CDS_DATA_2:
-		case CDS_XA_2_1:
-		case CDS_XA_2_2:
-			stat->Type = 0x01;
-			break;
-	}
-	ret = ioctl(handle, CDROM_DRIVE_STATUS);
-	switch (ret) {
-		case CDS_NO_DISC:
-		case CDS_TRAY_OPEN:
-			stat->Type = 0xff;
-			stat->Status |= 0x10;
-			break;
-		default:
-			spindown = (char)SpinDown;
-//			ioctl(handle, CDROMSETSPINDOWN, &spindown);
-//			ioctl(handle, CDROM_LOCKDOOR, 0);
-			break;
-	}
-
-	switch (sc.cdsc_audiostatus) {
-		case CDROM_AUDIO_PLAY:
-			stat->Status |= 0x80;
-			break;
-	}
-
-	return 0;
+	return -1;
 }
 
 unsigned char *ReadSub(const unsigned char *time) {
