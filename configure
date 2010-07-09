@@ -13602,13 +13602,13 @@ if test "x$ac_cv_lib_socket_socket" = x""yes; then :
   LDFLAGS="$LDFLAGS -lsocket"
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for nsl in -lgethostbyname" >&5
-$as_echo_n "checking for nsl in -lgethostbyname... " >&6; }
-if test "${ac_cv_lib_gethostbyname_nsl+set}" = set; then :
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for gethostbyname in -lnsl" >&5
+$as_echo_n "checking for gethostbyname in -lnsl... " >&6; }
+if test "${ac_cv_lib_nsl_gethostbyname+set}" = set; then :
   $as_echo_n "(cached) " >&6
 else
   ac_check_lib_save_LIBS=$LIBS
-LIBS="-lgethostbyname  $LIBS"
+LIBS="-lnsl  $LIBS"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -13618,27 +13618,27 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 #ifdef __cplusplus
 extern "C"
 #endif
-char nsl ();
+char gethostbyname ();
 int
 main ()
 {
-return nsl ();
+return gethostbyname ();
   ;
   return 0;
 }
 _ACEOF
 if ac_fn_c_try_link "$LINENO"; then :
-  ac_cv_lib_gethostbyname_nsl=yes
+  ac_cv_lib_nsl_gethostbyname=yes
 else
-  ac_cv_lib_gethostbyname_nsl=no
+  ac_cv_lib_nsl_gethostbyname=no
 fi
 rm -f core conftest.err conftest.$ac_objext \
     conftest$ac_exeext conftest.$ac_ext
 LIBS=$ac_check_lib_save_LIBS
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_gethostbyname_nsl" >&5
-$as_echo "$ac_cv_lib_gethostbyname_nsl" >&6; }
-if test "x$ac_cv_lib_gethostbyname_nsl" = x""yes; then :
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_nsl_gethostbyname" >&5
+$as_echo "$ac_cv_lib_nsl_gethostbyname" >&6; }
+if test "x$ac_cv_lib_nsl_gethostbyname" = x""yes; then :
   LDFLAGS="$LDFLAGS -lnsl"
 fi
 
