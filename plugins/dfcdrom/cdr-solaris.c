@@ -32,7 +32,7 @@ int OpenCdHandle(const char *dev) {
 void CloseCdHandle() {
 }
 
-int IsCdHandleOpen () {
+int IsCdHandleOpen() {
 	return 0;
 }
 
