@@ -25,30 +25,85 @@
 
 char *LibName = N_("CD-ROM Device Reader");
 
+int handle = -1;
+
 int OpenCdHandle(const char *dev) {
-	return -1;
+	char spindown;
+
+	handle = open(dev, O_RDONLY);
+
+	if (handle != -1) {
+//		ioctl(handle, CDROM_LOCKDOOR, 0);
+
+		spindown = (char)SpinDown;
+//		ioctl(handle, CDROMSETSPINDOWN, &spindown);
+
+//		ioctl(handle, CDROM_SELECT_SPEED, CdrSpeed);
+	}
+
+	return (handle == -1) ? -1 : 0;
 }
 
 void CloseCdHandle() {
+	char spindown = SPINDOWN_VENDOR_SPECIFIC;
+//	ioctl(handle, CDROMSETSPINDOWN, &spindown);
+
+	close(handle);
+
+	handle = -1;
 }
 
 int IsCdHandleOpen() {
-	return 0;
+	return (handle != -1);
 }
 
 long GetTN(unsigned char *buffer) {
-	buffer[0] = 0;
-	buffer[1] = 0;
+	struct cdrom_tochdr toc;
+
+	if (ioctl(handle, CDROMREADTOCHDR, &toc) == -1)
+		return -1;
+
+	buffer[0] = toc.cdth_trk0;	// start track
+	buffer[1] = toc.cdth_trk1;	// end track
+
 	return 0;
 }
 
 long GetTD(unsigned char track, unsigned char *buffer) {
-	memset(buffer + 1, 0, 3);
+	struct cdrom_tocentry entry;
+
+	if (track == 0)
+		track = 0xaa;			// total time
+	entry.cdte_track = track;
+	entry.cdte_format = CDROM_MSF;
+
+	if (ioctl(handle, CDROMREADTOCENTRY, &entry) == -1)
+		return -1;
+
+	buffer[0] = entry.cdte_addr.msf.frame;	/* frame */
+	buffer[1] = entry.cdte_addr.msf.second;	/* second */
+	buffer[2] = entry.cdte_addr.msf.minute;	/* minute */
+
 	return 0;
 }
 
 long GetTE(unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f) {
-	return -1;
+	struct cdrom_tocentry entry;
+	char msf[3];
+
+	entry.cdte_track = track + 1;
+	entry.cdte_format = CDROM_MSF;
+
+	if (ioctl(handle, CDROMREADTOCENTRY, &entry) == -1)
+		return -1;
+
+	lba_to_msf(msf_to_lba(entry.cdte_addr.msf.minute, entry.cdte_addr.msf.second, entry.cdte_addr.msf.frame) - CD_MSF_OFFSET, msf);
+
+	*m = msf[0];
+	*s = msf[1];
+	*f = msf[2];
+
+	return 0;
 }
 
 long ReadSector(crdata *cr) {
@@ -56,15 +111,89 @@ long ReadSector(crdata *cr) {
 }
 
 long PlayCDDA(unsigned char *sector) {
-	return -1;
+	struct cdrom_msf addr;
+	unsigned char ptmp[4];
+
+	// 0 is the last track of every cdrom, so play up to there
+	if (GetTD(0, ptmp) == -1)
+		return -1;
+
+	addr.cdmsf_min0 = sector[0];
+	addr.cdmsf_sec0 = sector[1];
+	addr.cdmsf_frame0 = sector[2];
+	addr.cdmsf_min1 = ptmp[2];
+	addr.cdmsf_sec1 = ptmp[1];
+	addr.cdmsf_frame1 = ptmp[0];
+
+	if (ioctl(handle, CDROMPLAYMSF, &addr) == -1)
+		return -1;
+
+	return 0;
 }
 
 long StopCDDA() {
-	return -1;
+	struct cdrom_subchnl sc;
+
+	sc.cdsc_format = CDROM_MSF;
+	if (ioctl(handle, CDROMSUBCHNL, &sc) == -1)
+		return -1;
+
+	switch (sc.cdsc_audiostatus) {
+		case CDROM_AUDIO_PAUSED:
+		case CDROM_AUDIO_PLAY:
+			ioctl(handle, CDROMSTOP);
+			break;
+	}
+
+	return 0;
 }
 
 long GetStatus(int playing, struct CdrStat *stat) {
-	return -1;
+	struct cdrom_subchnl sc;
+	int ret;
+	char spindown;
+
+	memset(stat, 0, sizeof(struct CdrStat));
+
+	if (playing) { // return Time only if playing
+		sc.cdsc_format = CDROM_MSF;
+		if (ioctl(handle, CDROMSUBCHNL, &sc) != -1)
+			memcpy(stat->Time, &sc.cdsc_absaddr.msf, 3);
+	}
+
+	ret = ioctl(handle, CDROM_DISC_STATUS);
+	switch (ret) {
+		case CDS_AUDIO:
+			stat->Type = 0x02;
+			break;
+		case CDS_DATA_1:
+		case CDS_DATA_2:
+		case CDS_XA_2_1:
+		case CDS_XA_2_2:
+			stat->Type = 0x01;
+			break;
+	}
+	ret = ioctl(handle, CDROM_DRIVE_STATUS);
+	switch (ret) {
+		case CDS_NO_DISC:
+		case CDS_TRAY_OPEN:
+			stat->Type = 0xff;
+			stat->Status |= 0x10;
+			break;
+		default:
+			spindown = (char)SpinDown;
+//			ioctl(handle, CDROMSETSPINDOWN, &spindown);
+//			ioctl(handle, CDROM_LOCKDOOR, 0);
+			break;
+	}
+
+	switch (sc.cdsc_audiostatus) {
+		case CDROM_AUDIO_PLAY:
+			stat->Status |= 0x80;
+			break;
+	}
+
+	return 0;
 }
 
 unsigned char *ReadSub(const unsigned char *time) {

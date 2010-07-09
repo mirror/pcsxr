@@ -54,7 +54,7 @@ void CloseCdHandle() {
 	handle = -1;
 }
 
-int IsCdHandleOpen () {
+int IsCdHandleOpen() {
 	return (handle != -1);
 }
 
