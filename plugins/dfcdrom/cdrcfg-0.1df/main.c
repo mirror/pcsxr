@@ -149,8 +149,12 @@ void fill_drives_list(GtkWidget *widget) {
 	store = gtk_list_store_new(1, G_TYPE_STRING);
 
 	// first we put our current drive
-	gtk_list_store_append(store, &iter);
-	gtk_list_store_set(store, &iter, 0, CdromDev, -1);
+	if (CdromDev[0] != '\0') {
+		gtk_list_store_append(store, &iter);
+		gtk_list_store_set(store, &iter, 0, CdromDev, -1);
+	}
+
+	i = 0;
 
 	// scan cdrom_devices for real cdrom and add them to list
 	while (cdrom_devices[i][0] != '\0') {
