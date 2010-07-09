@@ -39,6 +39,7 @@ AC_CONFIG_FILES([Makefile data/Makefile doc/Makefile libpcsxcore/Makefile gui/Ma
 AC_CHECK_LIB(dl, dlsym, [LDFLAGS="$LDFLAGS -ldl"], [])
 AC_CHECK_LIB(socket, socket, [LDFLAGS="$LDFLAGS -lsocket"], [])
 AC_CHECK_LIB(nsl, gethostbyname, [LDFLAGS="$LDFLAGS -lnsl"], [])
+AC_CHECK_LIB(umem, umem_alloc, [LDFLAGS="$LDFLAGS -lumem_alloc"], [])
 
 AM_CONDITIONAL(SOUND_OSS, false)
 AM_CONDITIONAL(SOUND_SDL, false)

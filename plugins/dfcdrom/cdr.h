@@ -60,6 +60,7 @@
 #elif defined (__sun)
 
 #include <sys/cdio.h>
+#include <sys/scsi/scsi.h>
 
 #define CD_SECS				60
 #define CD_FRAMES			75

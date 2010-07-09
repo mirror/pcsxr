@@ -40,7 +40,7 @@ void RunAboutDialog(void) {
 		"Peter Collingbourne",
 		"shalma",
 		"Tristin Celestin",
-		"...and many others!",
+		"...see the included AUTHORS file for more detail.",
 		"",
 		"PCSX-df Team:",
 		"Ryan Schultz <schultz.ryan@gmail.com>",
