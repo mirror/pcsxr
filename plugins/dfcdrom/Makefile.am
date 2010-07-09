@@ -9,7 +9,8 @@ libDFCdrom_la_SOURCES = \
 	cfg.c \
 	cdr-linux.c \
 	cdr-null.c \
-	cdr-freebsd.c
+	cdr-freebsd.c \
+	cdr-solaris.c
 
 libDFCdrom_la_LDFLAGS = -module -avoid-version -lpthread
 
