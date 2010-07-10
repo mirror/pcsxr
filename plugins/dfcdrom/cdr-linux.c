@@ -26,8 +26,6 @@
 
 #include "cdr.h"
 
-char *LibName = N_("CD-ROM Drive Reader");
-
 static int cdHandle = -1;
 static int ReadMMC = 0, SubQMMC = 0;
 

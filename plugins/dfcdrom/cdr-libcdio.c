@@ -26,8 +26,6 @@
 #include <cdio/cdio.h>
 #include <cdio/mmc.h>
 
-char *LibName = N_("CD-ROM Drive Reader");
-
 static CdIo_t *cdHandle = NULL;
 
 static void SetSpeed(int speed) {

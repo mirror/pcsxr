@@ -21,6 +21,12 @@
 
 #include "cdr.h"
 
+#ifndef USE_NULL
+static char *LibName = N_("CD-ROM Drive Reader");
+#else
+static char *LibName = N_("CDR NULL Plugin");
+#endif
+
 int initial_time = 0;
 
 pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
@@ -51,8 +57,6 @@ long (*fReadTrack)();
 unsigned char* (*fGetBuffer)();
 
 void *CdrThread(void *arg);
-
-extern char *LibName;
 
 long CDRinit(void) {
 	thread = -1;
