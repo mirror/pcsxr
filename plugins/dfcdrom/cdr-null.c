@@ -19,9 +19,9 @@
  * along with this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-#ifdef USE_NULL
-
 #include "cdr.h"
+
+#ifdef USE_NULL
 
 int OpenCdHandle(const char *dev) {
 	return -1;
