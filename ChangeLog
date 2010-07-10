@@ -1,3 +1,27 @@
+July 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * configure.ac: Added --enable-libcdio parameter.
+ * libpcsxcore/cdriso.c: Moved CRC check into...
+ * libpcsxcore/cdrom.c: ...here.
+ * libpcsxcore/misc.c: Moved calcCrc() to misc.c.
+ * libpcsxcore/misc.h: Likewise.
+ * libpcsxcore/plugins.h: Added CRC field to SubQ struct.
+ * plugins/dfcdrom/cdr-freebsd.c: Removed.
+ * plugins/dfcdrom/cdr-solaris.c: Likewise.
+ * plugins/dfcdrom/cdr-linux.c: Added raw MMC command support.
+ * plugins/dfcdrom/cdr-null.c: Return 0 for PlayCDDA()/StopCDDA().
+ * plugins/dfcdrom/cdr.c: Moved several utility functions to util.c.
+ * plugins/dfcdrom/util.c: Added.
+ * plugins/dfcdrom/cfg.c: Removed unnecessary includes.
+ * plugins/dfcdrom/cdr-libcdio.c: Added libcdio support.
+ * plugins/dfcdrom/Makefile.am: Added util.c and cdr-libcdio.c, removed
+   cdr-freebsd.c and cdr-solaris.c.
+ * plugins/dfsound/cfg.c: Store config file into plugins dir by default.
+ * plugins/dfsound/spu.c: Made volume louder.
+ * po/POTFILES.in: Added files in plugins/bladesio1.
+ * po/update-pot.sh: Likewise.
+ * po/pcsx.pot, po/*.po: Updated.
+
 July 9, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfcdrom/cdr-solaris.c: Added (not implemented for now).

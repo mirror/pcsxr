@@ -21,20 +21,6 @@
 
 #include "cdr.h"
 
-unsigned int msf_to_lba(char m, char s, char f) {
-	return (((m * CD_SECS) + s) * CD_FRAMES + f) - CD_MSF_OFFSET;
-}
-
-void lba_to_msf(unsigned int s, char *msf) {
-	s += CD_MSF_OFFSET;
-
-	msf[0] = s / CD_FRAMES / CD_SECS;
-	s = s - msf[0] * CD_FRAMES * CD_SECS;
-	msf[1] = s / CD_FRAMES;
-	s = s - msf[1] * CD_FRAMES;
-	msf[2] = s;
-}
-
 int initial_time = 0;
 
 pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;

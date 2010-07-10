@@ -88,6 +88,23 @@ if test "x$have_xtest" = xno; then
 	AC_MSG_ERROR([unable to find xtest headers])
 fi
 
+AM_CONDITIONAL(USE_LIBCDIO, false)
+
+AC_ARG_ENABLE(libcdio, [  --enable-libcdio        use GNU libcdio for CD-ROM support (default=no)],
+[ BUILD_LIBCDIO="$enableval" ],[ BUILD_LIBCDIO="no" ])
+
+if test "$BUILD_LIBCDIO" = "yes"; then
+	AC_CHECK_HEADER(cdio/mmc.h, have_mmc=yes, have_mmc=no)
+	if test "x$have_mmc" = xno; then
+		AC_MSG_ERROR([unable to find libcdio headers])
+	fi
+	AC_CHECK_LIB(cdio, cdio_open, have_cdiolib=yes, have_cdiolib=no)
+	if test "x$have_cdiolib" = xno; then
+		AC_MSG_ERROR([unable to find libcdio library])
+	fi
+	AM_CONDITIONAL(USE_LIBCDIO, true)
+fi
+
 AC_ARG_ENABLE(opengl, [  --enable-opengl         build OpenGL plugin (default=no)],
 [ BUILD_OPENGL="$enableval" ],[ BUILD_OPENGL="no" ])
 

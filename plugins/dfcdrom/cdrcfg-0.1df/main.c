@@ -143,7 +143,7 @@ void fill_drives_list(GtkWidget *widget) {
 		pclose(fp);
 	}
 #else
-	static const char *cdrom_devices[] = { NULL };
+	static const char *cdrom_devices[] = { "" };
 #endif
 
 	store = gtk_list_store_new(1, G_TYPE_STRING);

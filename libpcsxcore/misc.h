@@ -69,6 +69,7 @@ int SendPcsxInfo();
 int RecvPcsxInfo();
 
 void trim(char *str);
+u16 calcCrc(u8 *d, int len);
 
 #ifdef __cplusplus
 }

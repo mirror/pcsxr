@@ -151,6 +151,7 @@ struct SubQ {
 	unsigned char TrackRelativeAddress[3];
 	unsigned char Filler;
 	unsigned char AbsoluteAddress[3];
+	unsigned char CRC[2];
 	char res1[72];
 };
 typedef long (CALLBACK* CDRreadCDDA)(unsigned char, unsigned char, unsigned char, unsigned char *);

@@ -2,12 +2,12 @@
 # Copyright (C) 2010 Giovanni Scafora
 # This file is distributed under the same license as the pcsxr package.
 # Giovanni Scafora <giovanni@archlinux.org>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-07 13:32+0800\n"
+"POT-Creation-Date: 2010-07-10 14:04+0800\n"
 "PO-Revision-Date: 2010-03-15 16:00+0200\n"
 "Last-Translator: Giovanni Scafora <giovanni@archlinux.org>\n"
 "Language-Team: Arch Linux Italian Team <giovanni@archlinux.org>\n"
@@ -1455,6 +1455,16 @@ msgstr "Il debugger è stato avviato.\n"
 msgid "Debugger stopped.\n"
 msgstr "Il debugger è stato fermato.\n"
 
+#: ../libpcsxcore/misc.c:342
+#, c-format
+msgid "CD-ROM Label: %.32s\n"
+msgstr ""
+
+#: ../libpcsxcore/misc.c:343
+#, fuzzy, c-format
+msgid "CD-ROM ID: %.9s\n"
+msgstr "CD-ROM:"
+
 #: ../libpcsxcore/misc.c:388
 #, c-format
 msgid "Error opening file: %s.\n"
@@ -1478,88 +1488,88 @@ msgstr "Questo file non sembra essere un file valido di PSX.\n"
 msgid "Error loading %s: %s"
 msgstr "Si è verificato un errore durante il caricamento di %s: %s"
 
-#: ../libpcsxcore/plugins.c:227
+#: ../libpcsxcore/plugins.c:221
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "Impossibile caricare il plugin %s della GPU!"
 
-#: ../libpcsxcore/plugins.c:298
+#: ../libpcsxcore/plugins.c:292
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "Impossibile caricare il plugin %s del CD-ROM!"
 
-#: ../libpcsxcore/plugins.c:346
+#: ../libpcsxcore/plugins.c:340
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "Impossibile caricare il plugin %s della SPU!"
 
-#: ../libpcsxcore/plugins.c:483
+#: ../libpcsxcore/plugins.c:477
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "Impossibile caricare il plugin %s del controller 1!"
 
-#: ../libpcsxcore/plugins.c:537
+#: ../libpcsxcore/plugins.c:531
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "Impossibile caricare il plugin %s del controller 2!"
 
-#: ../libpcsxcore/plugins.c:580
+#: ../libpcsxcore/plugins.c:574
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "Impossibile caricare il plugin %s di NetPlay!"
 
-#: ../libpcsxcore/plugins.c:660
+#: ../libpcsxcore/plugins.c:654
 #, fuzzy, c-format
 msgid "Could not load SIO1 plugin %s!"
 msgstr "Impossibile caricare il plugin %s della SPU!"
 
-#: ../libpcsxcore/plugins.c:745
+#: ../libpcsxcore/plugins.c:739
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin del CD-ROM: %"
 "d"
 
-#: ../libpcsxcore/plugins.c:747
+#: ../libpcsxcore/plugins.c:741
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin della GPU: %d"
 
-#: ../libpcsxcore/plugins.c:749
+#: ../libpcsxcore/plugins.c:743
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin della SPU: %d"
 
-#: ../libpcsxcore/plugins.c:751
+#: ../libpcsxcore/plugins.c:745
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin del "
 "controller 1: %d"
 
-#: ../libpcsxcore/plugins.c:753
+#: ../libpcsxcore/plugins.c:747
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin del "
 "controller 2: %d"
 
-#: ../libpcsxcore/plugins.c:757
+#: ../libpcsxcore/plugins.c:751
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin di NetPlay: %"
 "d"
 
-#: ../libpcsxcore/plugins.c:762
+#: ../libpcsxcore/plugins.c:756
 #, fuzzy, c-format
 msgid "Error initializing SIO1 plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin della SPU: %d"
 
-#: ../libpcsxcore/plugins.c:765
+#: ../libpcsxcore/plugins.c:759
 msgid "Plugins loaded.\n"
 msgstr "Plugin caricati.\n"
 
@@ -2364,15 +2374,15 @@ msgstr "Audio del singolo canale"
 msgid "Play only one channel for a performance boost."
 msgstr "Suona solo un canale, per una prestazione migliore."
 
-#: ../plugins/dfcdrom/cdr-linux.c:70
+#: ../plugins/dfcdrom/cdr-libcdio.c:29 ../plugins/dfcdrom/cdr-linux.c:29
 msgid "CD-ROM Drive Reader"
 msgstr "Lettore del dispositivo CD-ROM"
 
-#: ../plugins/dfcdrom/cdr-null.c:10
+#: ../plugins/dfcdrom/cdr-null.c:26
 msgid "CDR NULL Plugin"
 msgstr "Plugin NULL CDR"
 
-#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:170
+#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:219
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:8
 msgid "CDR configuration"
 msgstr "Configurazione del CD-ROM"
@@ -3095,6 +3105,15 @@ msgstr "Tasto Start"
 #: ../plugins/dfnet/dfnet.glade2:240
 msgid "Play Offline"
 msgstr ""
+
+#: ../plugins/bladesio1/sio1.c:29
+#, fuzzy
+msgid "Sio1 Driver"
+msgstr "Driver SoftGL"
+
+#, fuzzy
+#~ msgid "CD-ROM Device Reader"
+#~ msgstr "Lettore del dispositivo CD-ROM"
 
 #~ msgid "Error Closing PAD1 Plugin"
 #~ msgstr "Si è verificato un errore durante la chiusura del plugin del PAD1"

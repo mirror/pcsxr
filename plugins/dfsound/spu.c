@@ -107,7 +107,7 @@ static const int f[5][2] = {   {    0,  0  },
 int SSumR[NSSIZE];
 int SSumL[NSSIZE];
 int iFMod[NSSIZE];
-int iCycle=0;
+int iCycle = 0;
 short * pS;
 
 int lastch=-1;             // last channel processed on spu irq in timer mode
@@ -442,9 +442,9 @@ static void *MAINThread(void *arg)
 {
  int s_1,s_2,fa,ns;
 #ifndef _MACOSX
- int voldiv=iVolume;
+ int voldiv = iVolume;
 #else
- const int voldiv=1;
+ const int voldiv = 2;
 #endif
  unsigned char * start;unsigned int nSample;
  int ch,predict_nr,shift_factor,flags,d,s;
@@ -676,19 +676,19 @@ ENDX:   ;
 
   if(iDisStereo)                                       // no stereo?
    {
-    int dl,dr;
-    for(ns=0;ns<NSSIZE;ns++)
+    int dl, dr;
+    for (ns = 0; ns < NSSIZE; ns++)
      {
-      SSumL[ns]+=MixREVERBLeft(ns);
+      SSumL[ns] += MixREVERBLeft(ns);
 
-      dl=SSumL[ns]/voldiv;SSumL[ns]=0;
-      if(dl<-32767) dl=-32767;if(dl>32767) dl=32767;
+      dl = SSumL[ns] * 2 / voldiv; SSumL[ns] = 0;
+      if (dl < -32767) dl = -32767; if (dl > 32767) dl = 32767;
 
-      SSumR[ns]+=MixREVERBRight();
+      SSumR[ns] += MixREVERBRight();
 
-      dr=SSumR[ns]/voldiv;SSumR[ns]=0;
-      if(dr<-32767) dr=-32767;if(dr>32767) dr=32767;
-      *pS++=(dl+dr)/2;
+      dr = SSumR[ns] * 2 / voldiv; SSumR[ns] = 0;
+      if (dr < -32767) dr = -32767; if (dr > 32767) dr = 32767;
+      *pS++ = (dl + dr) / 2;
      }
    }
   else                                                 // stereo:
@@ -696,13 +696,13 @@ ENDX:   ;
    {
     SSumL[ns] += MixREVERBLeft(ns);
 
-    d = SSumL[ns] / voldiv; SSumL[ns] = 0;
+    d = SSumL[ns] * 2 / voldiv; SSumL[ns] = 0;
     if (d < -32767) d = -32767; if (d > 32767) d = 32767;
     *pS++ = d;
 
     SSumR[ns] += MixREVERBRight();
 
-    d = SSumR[ns] / voldiv; SSumR[ns] = 0;
+    d = SSumR[ns] * 2 / voldiv; SSumR[ns] = 0;
     if(d < -32767) d = -32767; if(d > 32767) d = 32767;
     *pS++ = d;
    }

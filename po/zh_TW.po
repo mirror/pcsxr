@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-07 13:32+0800\n"
-"PO-Revision-Date: 2010-07-07 13:37+0800\n"
-"Last-Translator: Wei Mingzhi <whistler_wmz@users.sf.net>\n"
+"POT-Creation-Date: 2010-07-10 14:04+0800\n"
+"PO-Revision-Date: 2010-07-10 14:06+0700\n"
+"Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1516,6 +1516,16 @@ msgstr "調試器已啟動。\n"
 msgid "Debugger stopped.\n"
 msgstr "調試器已停止。\n"
 
+#: ../libpcsxcore/misc.c:342
+#, c-format
+msgid "CD-ROM Label: %.32s\n"
+msgstr "CD-ROM 卷標: %.32s\n"
+
+#: ../libpcsxcore/misc.c:343
+#, c-format
+msgid "CD-ROM ID: %.9s\n"
+msgstr "CD-ROM ID: %.9s\n"
+
 #: ../libpcsxcore/misc.c:388
 #, c-format
 msgid "Error opening file: %s.\n"
@@ -1539,77 +1549,77 @@ msgstr "此檔案不是一個合法的 PSX 檔案。\n"
 msgid "Error loading %s: %s"
 msgstr "無法加載 %s: %s"
 
-#: ../libpcsxcore/plugins.c:227
+#: ../libpcsxcore/plugins.c:221
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "無法加載 GPU 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:298
+#: ../libpcsxcore/plugins.c:292
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "無法加載 CD-ROM 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:346
+#: ../libpcsxcore/plugins.c:340
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "無法加載 SPU 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:483
+#: ../libpcsxcore/plugins.c:477
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "無法加載 \"控制器1\" 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:537
+#: ../libpcsxcore/plugins.c:531
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "無法加載 \"控制器2\" 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:580
+#: ../libpcsxcore/plugins.c:574
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "無法加載聯線遊戲外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:660
+#: ../libpcsxcore/plugins.c:654
 #, c-format
 msgid "Could not load SIO1 plugin %s!"
 msgstr "無法加載 SIO1 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:745
+#: ../libpcsxcore/plugins.c:739
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr "CD-ROM 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:747
+#: ../libpcsxcore/plugins.c:741
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr "GPU 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:749
+#: ../libpcsxcore/plugins.c:743
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr "SPU 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:751
+#: ../libpcsxcore/plugins.c:745
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr "\"控制器1\" 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:753
+#: ../libpcsxcore/plugins.c:747
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr "\"控制器2\" 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:757
+#: ../libpcsxcore/plugins.c:751
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr "聯線遊戲外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:762
+#: ../libpcsxcore/plugins.c:756
 #, c-format
 msgid "Error initializing SIO1 plugin: %d"
 msgstr "SIO1 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:765
+#: ../libpcsxcore/plugins.c:759
 msgid "Plugins loaded.\n"
 msgstr "外掛已加載。\n"
 
@@ -2422,15 +2432,16 @@ msgstr "單聲道聲音"
 msgid "Play only one channel for a performance boost."
 msgstr "僅播放一個聲道以提高性能。"
 
-#: ../plugins/dfcdrom/cdr-linux.c:70
+#: ../plugins/dfcdrom/cdr-libcdio.c:29
+#: ../plugins/dfcdrom/cdr-linux.c:29
 msgid "CD-ROM Drive Reader"
 msgstr "CD-ROM 裝置讀取外掛"
 
-#: ../plugins/dfcdrom/cdr-null.c:10
+#: ../plugins/dfcdrom/cdr-null.c:26
 msgid "CDR NULL Plugin"
 msgstr "CDR NULL 外掛"
 
-#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:170
+#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:219
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:8
 msgid "CDR configuration"
 msgstr "CDR 設定"
@@ -3173,11 +3184,6 @@ msgstr "開始遊戲"
 msgid "Play Offline"
 msgstr "離線遊戲"
 
-#~ msgid "Error Closing PAD1 Plugin"
-#~ msgstr "無法關閉 PAD1 外掛"
-
-#~ msgid "Error Closing PAD2 Plugin"
-#~ msgstr "無法關閉 PAD2 外掛!"
-
-#~ msgid "Internal HLE Bios"
-#~ msgstr "內部 HLE-Bios"
+#: ../plugins/bladesio1/sio1.c:29
+msgid "Sio1 Driver"
+msgstr "Sio1 驅動程式"

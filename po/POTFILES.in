@@ -94,6 +94,12 @@ plugins/peopsxgl/menu.c
 plugins/peopsxgl/prim.c
 plugins/peopsxgl/soft.c
 plugins/peopsxgl/texture.c
+plugins/bladesio1/gui.c
+plugins/bladesio1/settings.c
+plugins/bladesio1/settings.h
+plugins/bladesio1/sio1.c
+plugins/bladesio1/sio1.glade2
+plugins/bladesio1/sio1.h
 win32/gui/AboutDlg.c
 win32/gui/CheatDlg.c
 win32/gui/ConfigurePlugins.c

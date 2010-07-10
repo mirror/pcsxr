@@ -36,27 +36,27 @@ void StartCfgTool(char * pCmdLine)
  FILE * cf;
  char filename[255];
 
- strcpy(filename,"cfg/cfgDFSound");
+ strcpy(filename,"cfgDFSound");
  cf=fopen(filename,"rb");
  if(cf!=NULL)
   {
    fclose(cf);
    if(fork()==0)
     {
-     chdir("cfg");
      execl("./cfgDFSound","cfgDFSound",pCmdLine,NULL);
      exit(0);
     }
   }
  else
   {
-   strcpy(filename,"cfgDFSound");
+   strcpy(filename,"cfg/cfgDFSound");
    cf=fopen(filename,"rb");
    if(cf!=NULL)
     {
      fclose(cf);
      if(fork()==0)
       {
+       chdir("cfg");
        execl("./cfgDFSound","cfgDFSound",pCmdLine,NULL);
        exit(0);
       }
@@ -155,7 +155,7 @@ void ReadConfigFile(void)
 
 void ReadConfig(void)
 {
- iVolume=3;
+ iVolume=2;
  iXAPitch=0;
  iSPUIRQWait=1;
  iUseTimer=2;

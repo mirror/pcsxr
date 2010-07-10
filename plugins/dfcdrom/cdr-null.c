@@ -19,9 +19,9 @@
  * along with this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-#include "cdr.h"
-
 #ifdef USENULL
+
+#include "cdr.h"
 
 char *LibName = N_("CDR NULL Plugin");
 
@@ -32,7 +32,7 @@ int OpenCdHandle(const char *dev) {
 void CloseCdHandle() {
 }
 
-int IsCdHandleOpen () {
+int IsCdHandleOpen() {
 	return 0;
 }
 
@@ -56,11 +56,11 @@ long ReadSector(crdata *cr) {
 }
 
 long PlayCDDA(unsigned char *sector) {
-	return -1;
+	return 0;
 }
 
 long StopCDDA() {
-	return -1;
+	return 0;
 }
 
 long GetStatus(int playing, struct CdrStat *stat) {

@@ -52,25 +52,14 @@
 #if defined (__linux__)
 
 #include <linux/cdrom.h>
+#include <scsi/scsi.h>
+#include <scsi/sg.h>
+
 #ifndef CDROMSETSPINDOWN
 #define CDROMSETSPINDOWN 0x531e
 #endif
+
 #define DEV_DEF		"/dev/cdrom"
-
-#elif defined (__sun)
-
-#include <sys/cdio.h>
-#include <sys/scsi/scsi.h>
-
-#define CD_SECS				60
-#define CD_FRAMES			75
-#define CD_FRAMESIZE_RAW	2352
-#define CD_FRAMESIZE_SUB	96
-#define CD_MSF_OFFSET		150
-
-/* The CD-ROM device name seems to vary on different computers on Solaris, so
-   let user set this. */
-#define DEV_DEF		""
 
 #else
 
@@ -90,19 +79,13 @@ struct cdrom_msf {
 #define CD_MSF_OFFSET		150
 
 #if defined (__FreeBSD__)
-
-#include <sys/ata.h>
-#include <sys/cdio.h>
-#include <sys/cdrio.h>
-#include <sys/disklabel.h>
-
 #define DEV_DEF		"/dev/acd0"
-
 #else
-
 #define DEV_DEF		""
-#define USE_NULL	1
+#endif
 
+#ifndef USE_LIBCDIO
+#define USE_NULL	1
 #endif
 
 #endif
@@ -142,18 +125,32 @@ extern long SpinDown;
 #define SPINDOWN_16MIN				0x0E
 #define SPINDOWN_32MIN				0x0F
 
+typedef struct _MMC_READ_CD {
+	unsigned char Code; // 0xBE
+
+	unsigned char RelativeAddress : 1;
+	unsigned char : 1;
+	unsigned char ExpectedSectorType : 3;
+	unsigned char Lun : 3;
+
+	unsigned char StartingLBA[4];
+	unsigned char TransferBlocks[3];
+
+	unsigned char : 1;
+	unsigned char ErrorFlags : 2;
+	unsigned char IncludeEDC : 1;
+	unsigned char IncludeUserData : 1;
+	unsigned char HeaderCode : 2;
+	unsigned char IncludeSyncData : 1;
+
+	unsigned char SubChannelSelection : 3;
+	unsigned char : 5;
+
+	unsigned char Ctrl;
+} MMC_READ_CD;
+
 #define itob(i)		((i)/10*16 + (i)%10)	/* u_char to BCD */
 #define btoi(b)		((b)/16*10 + (b)%16)	/* BCD to u_char */
-
-typedef union {
-	struct cdrom_msf msf;
-	unsigned char buf[CD_FRAMESIZE_RAW];
-} crdata;
-
-typedef struct {
-	crdata cr;
-	int ret;
-} CacheData;
 
 struct CdrStat {
 	unsigned long Type;
@@ -173,6 +170,16 @@ struct SubQ {
 	char res1[72];
 };
 
+typedef union {
+	struct cdrom_msf msf;
+	unsigned char buf[CD_FRAMESIZE_RAW];
+} crdata;
+
+typedef struct {
+	crdata cr;
+	int ret;
+} CacheData;
+
 long ReadNormal();
 long ReadThreaded();
 unsigned char* GetBNormal();
@@ -190,7 +197,9 @@ void SaveConf();
 #endif
 
 unsigned int msf_to_lba(char m, char s, char f);
-void lba_to_msf(unsigned int s, char *msf);
+void lba_to_msf(unsigned int s, unsigned char *msf);
+void DecodeRawSubData(unsigned char *subbuffer);
+unsigned short calcCrc(unsigned char *d, int len);
 
 int OpenCdHandle();
 void CloseCdHandle();

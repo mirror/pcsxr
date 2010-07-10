@@ -161,7 +161,6 @@ void AddIrqQueue(unsigned char irq, unsigned long ecycle) {
 void cdrInterrupt() {
 	int i;
 	unsigned char Irq = cdr.Irq;
-	char cdr_localTime[3];
 
 	if (cdr.Stat) {
 		CDR_INT(0x1000);
@@ -352,19 +351,6 @@ void cdrInterrupt() {
 			SetResultSize(8);
 			subq = (struct SubQ *)CDR_getBufferSub();
 
-			cdr_localTime[0] = btoi(cdr.Prev[0]);
-			cdr_localTime[1] = btoi(cdr.Prev[1]) - 2;
-			cdr_localTime[2] = cdr.Prev[2];
-
-			// m:s adjustment
-			if (cdr_localTime[1] < 0) {
-				cdr_localTime[1] += 60;
-				cdr_localTime[0] -= 1;
-			}
-
-			cdr_localTime[1] = itob(cdr_localTime[1]);
-			cdr_localTime[0] = itob(cdr_localTime[0]);
-
 			if (subq != NULL) {
 				cdr.Result[0] = subq->TrackNumber;
 				cdr.Result[1] = subq->IndexNumber;
@@ -372,19 +358,26 @@ void cdrInterrupt() {
 				memcpy(cdr.Result + 5, subq->AbsoluteAddress, 3);
 
 				// subQ integrity check
-				if (cdr_localTime[0] != cdr.Result[2] ||
-					cdr_localTime[1] != cdr.Result[3] ||
-					cdr_localTime[2] != cdr.Result[4] ||
-					cdr.Prev[0] != cdr.Result[5] ||
-					cdr.Prev[1] != cdr.Result[6] ||
-					cdr.Prev[2] != cdr.Result[7]) {
-					// wipe out time data
-					memset(cdr.Result + 2, 0, 3 + 3);
+				if (calcCrc((u8 *)subq + 12, 10) != (((u16)subq->CRC[0] << 8) | subq->CRC[1])) {
+					memset(cdr.Result + 2, 0, 3 + 3); // CRC wrong, wipe out time data
 				}
 			} else {
 				cdr.Result[0] = 1;
 				cdr.Result[1] = 1;
-				memcpy(cdr.Result + 2, cdr_localTime, 3);
+
+				cdr.Result[2] = btoi(cdr.Prev[0]);
+				cdr.Result[3] = btoi(cdr.Prev[1]) - 2;
+				cdr.Result[4] = cdr.Prev[2];
+
+				// m:s adjustment
+				if ((s8)cdr.Result[3] < 0) {
+					cdr.Result[3] += 60;
+					cdr.Result[2] -= 1;
+				}
+
+				cdr.Result[2] = itob(cdr.Result[2]);
+				cdr.Result[3] = itob(cdr.Result[3]);
+
 				memcpy(cdr.Result + 5, cdr.Prev, 3);
 			}
 
@@ -408,19 +401,19 @@ void cdrInterrupt() {
 
     	case CdlGetTD:
 			cdr.CmdProcess = 0;
-        	cdr.Track = btoi(cdr.Param[0]);
+			cdr.Track = btoi(cdr.Param[0]);
 			SetResultSize(4);
-			cdr.StatP|= 0x2;
-        	if (CDR_getTD(cdr.Track, cdr.ResultTD) == -1) {
+			cdr.StatP |= 0x2;
+			if (CDR_getTD(cdr.Track, cdr.ResultTD) == -1) {
 				cdr.Stat = DiskError;
 				cdr.Result[0] |= 0x01;
-        	} else {
-        		cdr.Stat = Acknowledge;
+			} else {
+				cdr.Stat = Acknowledge;
 				cdr.Result[0] = cdr.StatP;
-	    		cdr.Result[1] = itob(cdr.ResultTD[2]);
-        	    cdr.Result[2] = itob(cdr.ResultTD[1]);
+				cdr.Result[1] = itob(cdr.ResultTD[2]);
+				cdr.Result[2] = itob(cdr.ResultTD[1]);
 				cdr.Result[3] = itob(cdr.ResultTD[0]);
-	    	}
+			}
 			break;
 
     	case CdlSeekL:
