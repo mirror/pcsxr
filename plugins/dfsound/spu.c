@@ -681,12 +681,12 @@ ENDX:   ;
      {
       SSumL[ns] += MixREVERBLeft(ns);
 
-      dl = SSumL[ns] * 2 / voldiv; SSumL[ns] = 0;
+      dl = SSumL[ns] / voldiv; SSumL[ns] = 0;
       if (dl < -32767) dl = -32767; if (dl > 32767) dl = 32767;
 
       SSumR[ns] += MixREVERBRight();
 
-      dr = SSumR[ns] * 2 / voldiv; SSumR[ns] = 0;
+      dr = SSumR[ns] / voldiv; SSumR[ns] = 0;
       if (dr < -32767) dr = -32767; if (dr > 32767) dr = 32767;
       *pS++ = (dl + dr) / 2;
      }
@@ -696,13 +696,13 @@ ENDX:   ;
    {
     SSumL[ns] += MixREVERBLeft(ns);
 
-    d = SSumL[ns] * 2 / voldiv; SSumL[ns] = 0;
+    d = SSumL[ns] / voldiv; SSumL[ns] = 0;
     if (d < -32767) d = -32767; if (d > 32767) d = 32767;
     *pS++ = d;
 
     SSumR[ns] += MixREVERBRight();
 
-    d = SSumR[ns] * 2 / voldiv; SSumR[ns] = 0;
+    d = SSumR[ns] / voldiv; SSumR[ns] = 0;
     if(d < -32767) d = -32767; if(d > 32767) d = 32767;
     *pS++ = d;
    }

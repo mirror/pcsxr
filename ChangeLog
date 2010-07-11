@@ -1,3 +1,8 @@
+July 11, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfcdrom/cfg.c: Pick default cdrom device automatically on Solaris.
+ * plugins/dfsound/spu.c: Reverted the previous change.
+
 July 10, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * configure.ac: Added --enable-libcdio parameter.

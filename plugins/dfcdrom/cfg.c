@@ -30,17 +30,41 @@ long SpinDown;
 
 void LoadConf() {
 	FILE *f;
-	char cfg[255];
 
+#if defined (__sun)
+	char buf[256], *devname, *nick;
+
+	CdromDev[0] = '\0';
+	f = popen("eject -l", "r");
+
+	if (f != NULL) {
+		while (!feof(f)) {
+			fgets(buf, 256, f);
+
+			devname = strtok(buf, " ");
+			nick = strtok(NULL, " ");
+
+			if (devname == NULL || nick == NULL) continue;
+
+			if (strstr(nick, "cdrom") != NULL) {
+				strcpy(CdromDev, devname);
+				break;
+			}
+		}
+
+		pclose(f);
+	}
+#else
 	strcpy(CdromDev, DEV_DEF);
+#endif
+
 	ReadMode = THREADED;
 	UseSubQ = 0;
 	CacheSize = 64;
 	CdrSpeed = 0;
 	SpinDown = SPINDOWN_VENDOR_SPECIFIC;
 
-	sprintf(cfg, "dfcdrom.cfg");
-	f = fopen(cfg, "r");
+	f = fopen("dfcdrom.cfg", "r");
 	if (f == NULL) return;
 
 	fscanf(f, "CdromDev = %s\n", CdromDev);
@@ -60,12 +84,11 @@ void LoadConf() {
 
 void SaveConf() {
 	FILE *f;
-	char cfg[255];
 
-	sprintf(cfg, "dfcdrom.cfg");
-	f = fopen(cfg, "w");
+	f = fopen("dfcdrom.cfg", "w");
 	if (f == NULL)
 		return;
+
 	fprintf(f, "CdromDev = %s\n", CdromDev);
 	fprintf(f, "ReadMode = %ld\n", ReadMode);
 	fprintf(f, "UseSubQ = %ld\n", UseSubQ);
