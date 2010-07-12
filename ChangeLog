@@ -1,3 +1,8 @@
+July 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * configure.ac: Use pkgconfig to detect libcdio.
+ * plugins/dfcdrom/Makefile.am: Likewise.
+
 July 11, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfcdrom/cfg.c: Pick default cdrom device automatically on Solaris.

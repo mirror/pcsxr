@@ -16,8 +16,8 @@ libDFCdrom_la_CFLAGS =
 libDFCdrom_la_LDFLAGS = -module -avoid-version -lpthread
 
 if USE_LIBCDIO
-libDFCdrom_la_CFLAGS += -DUSE_LIBCDIO=1
-libDFCdrom_la_LDFLAGS += -lcdio
+libDFCdrom_la_CFLAGS += -DUSE_LIBCDIO=1 $(LIBCDIO_CFLAGS)
+libDFCdrom_la_LDFLAGS += $(LIBCDIO_LIBS)
 endif
 
 INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
