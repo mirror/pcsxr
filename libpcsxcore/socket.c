@@ -15,13 +15,14 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses>.
  */
 
+#ifdef _WIN32
+#include <winsock2.h>
+#endif
+
 #include "psxcommon.h"
 #include "socket.h"
 
-#include <stdio.h>
-#ifdef _WIN32
-#include <winsock2.h>
-#else
+#ifndef _WIN32
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 #include <arpa/inet.h>
@@ -29,7 +30,6 @@
 #include <unistd.h>
 #include <fcntl.h>
 #endif
-#include <stdlib.h>
 
 static int server_socket = 0;
 static int client_socket = 0;

@@ -1,3 +1,7 @@
+July 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * libpcsxcore/socket.c: Fixed FTBFS on Windows.
+
 July 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * configure.ac: Use pkgconfig to detect libcdio.
