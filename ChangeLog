@@ -1,6 +1,7 @@
 July 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/socket.c: Fixed FTBFS on Windows.
+ * po/zh_CN.po: Updated.
 
 July 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
