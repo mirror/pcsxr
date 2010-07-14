@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
 	    	len = 1;
 		}
 	    val = set_limit (p, len, 0, 4);
-    } else val = 1;
+    } else val = 2;
 
     gtk_combo_box_set_active(GTK_COMBO_BOX (glade_xml_get_widget(xml, "cbVolume2")), val);
 

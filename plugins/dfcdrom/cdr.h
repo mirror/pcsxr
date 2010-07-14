@@ -74,9 +74,8 @@ struct cdrom_msf {
 
 #define CD_SECS				60
 #define CD_FRAMES			75
-#define CD_FRAMESIZE_RAW	2352
-#define CD_FRAMESIZE_SUB	96
 #define CD_MSF_OFFSET		150
+#define CD_FRAMESIZE_SUB	96
 
 #if defined (__FreeBSD__)
 #define DEV_DEF		"/dev/acd0"

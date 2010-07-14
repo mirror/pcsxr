@@ -1,3 +1,9 @@
+July 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfcdrom/cdr.h: Silenced warning on macro redefination when using
+   libcdio with some special configuration.
+ * plugins/dfsound/spucfg-0.1df/main.c: Set volume to High by default.
+
 July 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * libpcsxcore/socket.c: Fixed FTBFS on Windows.
