@@ -79,7 +79,7 @@ int OpenCdHandle(const char *dev) {
 	}
 
 #ifdef __FreeBSD__
-	cdHandle = cdio_open_am_cd(dev, "MMC");
+	cdHandle = cdio_open_am_cd(dev, "CAM");
 #else
 	cdHandle = cdio_open_cd(dev);
 #endif

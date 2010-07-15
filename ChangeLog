@@ -1,6 +1,6 @@
 July 15, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
- * plugins/dfcdrom/cdr-libcdio.c: Force MMC access mode on FreeBSD.
+ * plugins/dfcdrom/cdr-libcdio.c: Force CAM access mode on FreeBSD.
  * plugins/dfcdrom/cdrcfg-0.1df/main.c: Use /dev/cd? instead on /dev/acd? on
    FreeBSD.
  * plugins/dfcdrom/cdr.h: Likewise.
