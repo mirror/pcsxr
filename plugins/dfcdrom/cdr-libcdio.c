@@ -78,7 +78,11 @@ int OpenCdHandle(const char *dev) {
 		}
 	}
 
+#ifdef __FreeBSD__
+	cdHandle = cdio_open_am_cd(dev, "MMC");
+#else
 	cdHandle = cdio_open_cd(dev);
+#endif
 
 	if (cdHandle != NULL) {
 		SetSpeed(CdrSpeed);

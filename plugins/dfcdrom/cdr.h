@@ -78,7 +78,7 @@ struct cdrom_msf {
 #define CD_FRAMESIZE_SUB	96
 
 #if defined (__FreeBSD__)
-#define DEV_DEF		"/dev/acd0"
+#define DEV_DEF		"/dev/cd0"
 #else
 #define DEV_DEF		""
 #endif

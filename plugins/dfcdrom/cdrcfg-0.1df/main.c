@@ -110,10 +110,10 @@ void fill_drives_list(GtkWidget *widget) {
 		""};
 #elif defined (__FreeBSD__)
 	static const char *cdrom_devices[] = {
-		"/dev/acd0",
-		"/dev/acd1",
-		"/dev/acd2",
-		"/dev/acd3",
+		"/dev/cd0",
+		"/dev/cd1",
+		"/dev/cd2",
+		"/dev/cd3",
 		""};
 #elif defined (__sun)
 	char cdrom_devices[256][256];
