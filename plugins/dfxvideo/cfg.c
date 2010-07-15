@@ -227,7 +227,7 @@ void ReadConfig(void)
  fFrameRate=200.0f;
  dwCfgFixes=0;
  iUseFixes=0;
- iUseNoStretchBlt=1;
+ iUseNoStretchBlt=0;
  iUseDither=0;
  iShowFPS=0;
 
@@ -278,7 +278,7 @@ void WriteConfig(void) {
   fFrameRate=200.0f;
   dwCfgFixes=0;
   iUseFixes=0;
-  iUseNoStretchBlt=1;
+  iUseNoStretchBlt=0;
   iUseDither=0;
   iShowFPS=0;
 

@@ -4,6 +4,8 @@ July 15, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * plugins/dfcdrom/cdrcfg-0.1df/main.c: Use /dev/cd? instead on /dev/acd? on
    FreeBSD.
  * plugins/dfcdrom/cdr.h: Likewise.
+ * plugins/dfxvideo/cfg.c: Don't use 2xSai when no config file exists.
+ * autogen.sh: Use autoreconf.
 
 July 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

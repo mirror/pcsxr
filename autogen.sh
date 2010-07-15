@@ -1,8 +1,12 @@
 #!/bin/sh
-# simple script to redo the autotooling
+# Run this to generate all the initial makefiles, etc.
+# Additional options go to configure.
 
-cp /usr/share/libtool/config/ltmain.sh .
-autoheader && aclocal && autoconf && automake --add-missing --copy
-cp /usr/share/gettext/config.rpath .
-cp /usr/share/glib-2.0/gettext/mkinstalldirs .
-rm -r autom4te.cache
+echo "Rebuilding ./configure with autoreconf..."
+autoreconf -f -i
+if [ $? -ne 0 ]; then
+  echo "autoreconf failed"
+  exit $?
+fi
+
+./configure --enable-maintainer-mode "$@"
