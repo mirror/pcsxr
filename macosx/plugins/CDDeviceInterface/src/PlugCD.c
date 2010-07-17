@@ -86,33 +86,41 @@ kern_return_t FindEjectableCDMedia( io_iterator_t *mediaIterator, mach_port_t *m
 {
     kern_return_t kernResult; 
     CFMutableDictionaryRef classesToMatch;
+	int i;
 
     kernResult = IOMasterPort( bootstrap_port, masterPort );
     if ( kernResult != KERN_SUCCESS )
     {
-        printf( "IOMasterPort returned %d\n", kernResult );
+        SysPrintf( "IOMasterPort returned %d\n", kernResult );
         return kernResult;
     }
-    // CD media are instances of class kIOCDMediaClass.
-    classesToMatch = IOServiceMatching( kIOCDMediaClass );
-    if ( classesToMatch == NULL )
-        classesToMatch = IOServiceMatching( kIODVDMediaClass );
 
-    if ( classesToMatch == NULL )
-        printf( "IOServiceMatching returned a NULL dictionary.\n" );
-    else
+    for (i = 0; i < 2; i++)
     {
-        // Each IOMedia object has a property with key kIOMediaEjectable 
-        // which is true if the media is indeed ejectable. So add property
-        // to CFDictionary for matching. 
-        CFDictionarySetValue( classesToMatch, 
-                            CFSTR( kIOMediaEjectableKey ), kCFBooleanTrue ); 
+        // CD media are instances of class kIOCDMediaClass/kIODVDMediaClass.
+        classesToMatch = IOServiceMatching( (i == 0) ? kIOCDMediaClass : kIODVDMediaClass );
+
+        if ( classesToMatch == NULL )
+        {
+            SysPrintf( "IOServiceMatching returned a NULL dictionary.\n" );
+            continue;
+        }
+        else
+        {
+            // Each IOMedia object has a property with key kIOMediaEjectable 
+            // which is true if the media is indeed ejectable. So add property
+            // to CFDictionary for matching.
+            CFDictionarySetValue( classesToMatch, 
+                                CFSTR( kIOMediaEjectableKey ), kCFBooleanTrue );
+        }
+        kernResult = IOServiceGetMatchingServices( *masterPort,
+                                    classesToMatch, mediaIterator );
+        if ( (kernResult != KERN_SUCCESS) || (*mediaIterator == NULL) )
+            SysPrintf( "No ejectable CD media found.\n kernResult = %d\n", kernResult );
+        else
+            break;
     }
-    kernResult = IOServiceGetMatchingServices( *masterPort, 
-                                classesToMatch, mediaIterator );    
-    if ( (kernResult != KERN_SUCCESS) || (*mediaIterator == NULL) )
-        printf( "No ejectable CD media found.\n kernResult = %d\n", 
-                    kernResult );
+
     return kernResult;
 }
 
@@ -142,7 +150,7 @@ kern_return_t GetDeviceFilePath( io_service_t media,
 								 maxPathSize - devPathLength, 
 								 kCFStringEncodingASCII ) )
 		{
-			printf( "BSD path: %s\n", deviceFilePath );
+			SysPrintf( "BSD path: %s\n", deviceFilePath );
 			kernResult = KERN_SUCCESS;
 		}
 		CFRelease( deviceFilePathAsCFString );
@@ -168,7 +176,7 @@ MMCDeviceInterface ** GetMMCInterfaceForDevice(io_service_t service)
         
     if ( err != noErr )
     {
-        printf("IOCreatePlugInInterfaceForService returned %d\n", err);
+        SysPrintf("IOCreatePlugInInterfaceForService returned %d\n", err);
         return NULL;
     }
  
@@ -178,7 +186,7 @@ MMCDeviceInterface ** GetMMCInterfaceForDevice(io_service_t service)
                                         ( LPVOID ) &mmcInterface );
     if ( herr != S_OK )
     {
-        printf("QueryInterface returned %ld\n", herr);
+        SysPrintf("QueryInterface returned %ld\n", herr);
         return NULL;
     }
         
@@ -202,7 +210,7 @@ int GetCDROMServices()
 	kr = IOMasterPort(MACH_PORT_NULL, &masterPort);
 	if (kr || !masterPort)
 	{
-		printf("ERR: Couldn't create a master IOKit Port(%08x)\n", kr);
+		SysPrintf("ERR: Couldn't create a master IOKit Port(%08x)\n", kr);
 		return -1;
 	}
 
@@ -226,7 +234,7 @@ int GetCDROMServices()
 	kr = IOServiceGetMatchingServices( masterPort, 
 									  matchingDict, &iterator );    
 	if ( (kr != KERN_SUCCESS) || (iterator == NULL) ) {
-		printf( "No CDROM drives found.\n kernResult = %d\n", kr );
+		SysPrintf( "No CDROM drives found.\n kernResult = %d\n", kr );
 		goto error;
 	}
 
@@ -356,7 +364,7 @@ long openDisc()
 		
 		CFRelease(toc_cf);
 	} else {
-		printf("failed to read cdrom toc information\n");
+		SysPrintf("failed to read cdrom toc information\n");
 		IOObjectRelease( mediaIterator );
 		return -1;
 	}
@@ -402,7 +410,7 @@ long openDisc()
             return -1;
         }
 			
-        //printf("Track %i: %i - %i\n", di.firstTrackNumberInLastSessionLSB+i,
+        //SysPrintf("Track %i: %i - %i\n", di.firstTrackNumberInLastSessionLSB+i,
         //        ti.trackStartAddress, ti.trackSize);
         
         CD.tl[i].type = ti.trackMode ? Mode2 : Audio; // TODO: set correct type
@@ -461,7 +469,7 @@ long getTD(int track, unsigned char* buffer)
 
    if (track > getNumTracks())
    {
-//      printf("getTD bad %2d\n", track);
+//      SysPrintf("getTD bad %2d\n", track);
       return -1;
    }
 
@@ -477,7 +485,7 @@ long getTD(int track, unsigned char* buffer)
       buffer[1] = CD.tl[track-1].start[1];
       buffer[2] = CD.tl[track-1].start[2];
    }
-//   printf("getTD %2d %02d:%02d:%02d\n", track, (int)buffer[0],
+//   SysPrintf("getTD %2d %02d:%02d:%02d\n", track, (int)buffer[0],
 //         (int)buffer[1], (int)buffer[2]);
 
    // bcd encode it
@@ -498,11 +506,11 @@ unsigned char* getSector(int subchannel)
 		// wait until we can obtain a lock */
 		err = pthread_mutex_lock(&readMutex);
 		if (err != 0) {
-			printf("failed to lock mutex, error = %i\n", err);
+			SysPrintf("failed to lock mutex, error = %i\n", err);
 		} else {
 			err = pthread_mutex_unlock(&readMutex);
 			if (err != 0) {
-				printf("failed to unlock mutex, error = %i\n", err);
+				SysPrintf("failed to unlock mutex, error = %i\n", err);
 			}
 		}
 	}
@@ -523,7 +531,7 @@ char getNumTracks()
         return -1;
     }
 
-//    printf("numtracks %d\n",CD.numtracks);
+//    SysPrintf("numtracks %d\n",CD.numtracks);
 //    SysPrintf("end getNumTracks()\r\n");
     return CD.numtracks;
 }
@@ -568,7 +576,7 @@ void seekSector(const unsigned char m, const unsigned char s, const unsigned cha
 		// wait until we're done reading
 		err = pthread_mutex_lock(&readMutex);
 		if (err != 0) {
-			printf("failed to lock mutex, error = %i\n", err);
+			SysPrintf("failed to lock mutex, error = %i\n", err);
 		} else {
 			// calc byte to search for
 			CD.sector = (( (m * 60) + (s - 2)) * 75 + f) * 2352;
@@ -577,20 +585,20 @@ void seekSector(const unsigned char m, const unsigned char s, const unsigned cha
 			// we signal a cond later in this function
 			err = pthread_mutex_unlock(&readMutex);
 			if (err != 0) {
-				printf("failed to unlock mutex, error = %i\n", err);
+				SysPrintf("failed to unlock mutex, error = %i\n", err);
 			}
 		}
 	} else {
 		// calc byte to search for
 		CD.sector = (( (m * 60) + (s - 2)) * 75 + f) * 2352;
 	}
-//    printf("seek %d %02d:%02d:%02d",CD.sector, (int)m, (int)s, (int)f);
+//    SysPrintf("seek %d %02d:%02d:%02d",CD.sector, (int)m, (int)s, (int)f);
 
 	// is it cached?
 #if 0
 	if ((CD.sector >= CD.bufferPos) &&
 		(CD.sector < (CD.bufferPos + CD.bufferSize)) ) {
-//		printf(" cached %d %d\n",CD.sector - CD.bufferPos,BUFFER_SIZE);
+//		SysPrintf(" cached %d %d\n",CD.sector - CD.bufferPos,BUFFER_SIZE);
 //		SysPrintf("end seekSector()\r\n");
 		return;
 	}
@@ -605,7 +613,7 @@ void seekSector(const unsigned char m, const unsigned char s, const unsigned cha
 			if (pthread_cond_broadcast(&readCond) == 0)
 				return;
 			
-			printf("failed to signal 'readCond'\n");
+			SysPrintf("failed to signal 'readCond'\n");
 		}
 		
 		CD.bufferSize = readSector(CD.sector, CD.buffer);
@@ -634,7 +642,7 @@ void *read_thread(void *arg)
 			err = pthread_cond_wait(&readCond, &readMutex);
 		}
 		if (err == EINVAL) {
-			printf("failed cond wait for 'readCond', error = %i\n", err);
+			SysPrintf("failed cond wait for 'readCond', error = %i\n", err);
 			return (void *)-1;
 		}
 		
@@ -654,13 +662,13 @@ long CDRopen(void)
 		int err;
 		
 		err = pthread_cond_init(&readCond, NULL);
-		if (err!=0) {
-			printf("failed to create conditional, error=%i\n"
+		if (err != 0) {
+			SysPrintf("failed to create conditional, error=%i\n"
 						 "going to single thread mode\n", err);
 		} else {
 			err = pthread_mutex_init(&readMutex, NULL);
-			if (err!=0) {
-				printf("failed to create mutex, error=%i\n"
+			if (err != 0) {
+				SysPrintf("failed to create mutex, error=%i\n"
 							 "going to single thread mode\n", err);
 			} else {
 				struct sched_param params;
@@ -668,7 +676,7 @@ long CDRopen(void)
 				
 				err = pthread_create(&readThread, NULL, read_thread, NULL);
 				if (err!=0) {
-					printf("failed to create read thread, error=%i\n"
+					SysPrintf("failed to create read thread, error=%i\n"
 								 "going to single thread mode\n", err);
 				} else {
 					// set the thread to maximum priority
@@ -740,7 +748,7 @@ long CDRclose(void) {
 }
 
 long CDRgetTN(unsigned char *buffer) {
-    //printf("start CDRgetTN()\n");
+    //SysPrintf("start CDRgetTN()\n");
     return getTN(buffer);
 }
 
@@ -748,7 +756,7 @@ long CDRgetTD(unsigned char track, unsigned char *buffer) {
    unsigned char temp[3];
    int result = getTD((int)track, temp);
 
-   // printf("start CDRgetTD()\n");
+   // SysPrintf("start CDRgetTD()\n");
 
    if (result == -1) return -1;
 
@@ -761,7 +769,7 @@ long CDRgetTD(unsigned char track, unsigned char *buffer) {
 /* called when the psx requests a read */
 long CDRreadTrack(unsigned char *time) {
 //    SysPrintf("start CDR_readTrack()\r\n");
-    //printf("readTrack at %02d:%02d:%02d\n", BCDToInt(time[0]), BCDToInt(time[1]), BCDToInt(time[2]));
+    //SysPrintf("readTrack at %02d:%02d:%02d\n", BCDToInt(time[0]), BCDToInt(time[1]), BCDToInt(time[2]));
 	
 	if (CD.cd != 0)
 		seekSector(BCDToInt(time[0]), BCDToInt(time[1]), BCDToInt(time[2]));
@@ -772,7 +780,7 @@ long CDRreadTrack(unsigned char *time) {
 
 /* called after the read should be finished, and the data is needed */
 unsigned char *CDRgetBuffer(void) {
-    //printf("start CDR_getBuffer()\n");
+    //SysPrintf("start CDR_getBuffer()\n");
 //    SysPrintf("start CDR_getBuffer()\r\n");
 	if (CD.cd == 0)
 		return NULL;
@@ -781,7 +789,7 @@ unsigned char *CDRgetBuffer(void) {
 }
 
 unsigned char *CDRgetBufferSub(void) {
-    //printf("start CDR_getBuffer()\n");
+    //SysPrintf("start CDR_getBuffer()\n");
 //    SysPrintf("start CDR_getBuffer()\r\n");
     return getSector(1);
 }
@@ -854,7 +862,7 @@ long CDRgetStatus(struct CdrStat *stat)
 }
 
 char *CDRgetDriveLetter(void) {
-    //printf("start CDR_getBuffer()\n");
+    //SysPrintf("start CDR_getBuffer()\n");
 //    SysPrintf("start CDR_getBuffer()\r\n");
     return deviceFilePath;
 }
