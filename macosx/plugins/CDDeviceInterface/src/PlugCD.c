@@ -65,7 +65,7 @@ unsigned long PSEgetLibVersion(void) {
 /////////////////////////////////////////////////////////
 
 //#define SysPrintf printf
-#define SysPrintf(X)
+#define SysPrintf(...) ((void)0)
 
 #define UseMultiThreaded	1
 #define NoIdleSleep			1
