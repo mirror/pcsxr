@@ -29,6 +29,7 @@
 #include <IOKit/IOKitLib.h>
 #include <IOKit/IOBSD.h>
 #include <IOKit/storage/IOCDMedia.h>
+#include <IOKit/storage/IODVDMedia.h>
 #include <IOKit/storage/IOMedia.h>
 #include <IOKit/storage/IOCDTypes.h>
 #include <IOKit/storage/IOCDMediaBSDClient.h>
