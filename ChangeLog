@@ -1,3 +1,9 @@
+July 17, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfcdrom/cdr-libcdio.c: Include libcdio headers before cdr.h.
+ * macosx/plugins/CDDeviceInterface/src/PlugCD.c: Check for kIODVDMediaClass
+   as well (MIGHT fix the "Can't check CD-ROM" issue, cannot test).
+
 July 15, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfcdrom/cdr-libcdio.c: Force CAM access mode on FreeBSD.

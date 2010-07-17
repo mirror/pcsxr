@@ -21,10 +21,10 @@
 
 #ifdef USE_LIBCDIO
 
-#include "cdr.h"
-
 #include <cdio/cdio.h>
 #include <cdio/mmc.h>
+
+#include "cdr.h"
 
 static CdIo_t *cdHandle = NULL;
 

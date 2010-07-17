@@ -94,7 +94,10 @@ kern_return_t FindEjectableCDMedia( io_iterator_t *mediaIterator, mach_port_t *m
         return kernResult;
     }
     // CD media are instances of class kIOCDMediaClass.
-    classesToMatch = IOServiceMatching( kIOCDMediaClass ); 
+    classesToMatch = IOServiceMatching( kIOCDMediaClass );
+    if ( classesToMatch == NULL )
+        classesToMatch = IOServiceMatching( kIODVDMediaClass );
+
     if ( classesToMatch == NULL )
         printf( "IOServiceMatching returned a NULL dictionary.\n" );
     else
