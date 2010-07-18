@@ -60,6 +60,18 @@ void set_widget_sensitive(GtkWidget *widget, gpointer user_data)
 	gtk_widget_set_sensitive (widget, (int)user_data);
 }
 
+void on_fullscreen_toggled(GtkWidget *widget, gpointer user_data)
+{
+	GtkWidget *check, *resCombo2;
+	GladeXML *xml;
+	xml = (GladeXML*) user_data;
+
+	check = glade_xml_get_widget(xml, "checkFullscreen");
+	resCombo2 = glade_xml_get_widget(xml, "resCombo2");
+
+	set_widget_sensitive(resCombo2, !gtk_toggle_button_get_active(check));
+}
+
 void on_use_fixes_toggled(GtkWidget *widget, gpointer user_data)
 {
 	GtkWidget *check, *table_fixes;
@@ -72,6 +84,21 @@ void on_use_fixes_toggled(GtkWidget *widget, gpointer user_data)
 	/* Set the state of each of the fixes to the value of the use fixes toggle */
 	gtk_container_foreach (GTK_CONTAINER (table_fixes), (GtkCallback) set_widget_sensitive,
 		(void *)gtk_toggle_button_get_active (check));
+}
+
+void on_fps_toggled(GtkWidget *widget, gpointer user_data)
+{
+	GtkWidget *checkSetFPS, *checkAutoFPSLimit, *entryFPS;
+	GladeXML *xml;
+
+	xml = (GladeXML*) user_data;
+	checkSetFPS = glade_xml_get_widget(xml, "checkSetFPS");
+	checkAutoFPSLimit = glade_xml_get_widget(xml, "checkAutoFPSLimit");
+	entryFPS = glade_xml_get_widget(xml, "entryFPS");
+
+	set_widget_sensitive(entryFPS,
+		gtk_toggle_button_get_active(checkSetFPS) && !gtk_toggle_button_get_active(checkAutoFPSLimit));
+	set_widget_sensitive(checkAutoFPSLimit, gtk_toggle_button_get_active(checkSetFPS));
 }
 
 void OnConfigClose(GtkWidget *widget, gpointer user_data)
@@ -226,7 +253,7 @@ main (int argc, char *argv[])
 
         val = set_limit (p, len, 0, 1);
    }
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "checkAutoFPSLimit")), val);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "checkSetFPS")), val);
 
   val=0;
   if(pB)
@@ -235,7 +262,7 @@ main (int argc, char *argv[])
 
         val = set_limit (p, len, 1, 2);
    }
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "checkSetFPS")), !(val-1));
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "checkAutoFPSLimit")), (val-1));
 
  val=0;
   if(pB)
@@ -291,11 +318,25 @@ main (int argc, char *argv[])
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 			GTK_SIGNAL_FUNC(OnConfigClose), xml, NULL, G_CONNECT_AFTER);
 
+	widget = glade_xml_get_widget(xml, "checkFullscreen");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(on_fullscreen_toggled), xml, NULL, G_CONNECT_AFTER);
+
 	widget = glade_xml_get_widget(xml, "checkUseFixes");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 			GTK_SIGNAL_FUNC(on_use_fixes_toggled), xml, NULL, G_CONNECT_AFTER);
 
-	on_use_fixes_toggled (widget, (gpointer) xml);
+	widget = glade_xml_get_widget(xml, "checkSetFPS");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(on_fps_toggled), xml, NULL, G_CONNECT_AFTER);
+
+	widget = glade_xml_get_widget(xml, "checkAutoFPSLimit");
+	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+			GTK_SIGNAL_FUNC(on_fps_toggled), xml, NULL, G_CONNECT_AFTER);
+
+	on_fullscreen_toggled(widget, (gpointer) xml);
+	on_fps_toggled(widget, (gpointer) xml);
+	on_use_fixes_toggled(widget, (gpointer) xml);
 
   gtk_main ();
   return 0;
@@ -381,11 +422,11 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
      val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "checkShowFPS")));
  SetCfgVal(pB,"\nShowFPS",val);
 
-     val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "checkAutoFPSLimit")));
+     val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "checkSetFPS")));
  SetCfgVal(pB,"\nUseFrameLimit",val);
 
- val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "checkSetFPS")));
- SetCfgVal(pB,"\nFPSDetection",(!val)+1);
+ val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "checkAutoFPSLimit")));
+ SetCfgVal(pB,"\nFPSDetection",val+1);
 
   val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "checkFrameSkip")));
  SetCfgVal(pB,"\nUseFrameSkip",val);

@@ -1,3 +1,9 @@
+July 18, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2: Tweaked the config dialog
+   to make it less confusing.
+ * plugins/dfxvideo/gpucfg-0.1df/main.c: Likewise.
+
 July 17, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfcdrom/cdr-libcdio.c: Include libcdio headers before cdr.h.
