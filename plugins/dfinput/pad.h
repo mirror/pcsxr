@@ -23,7 +23,9 @@
 extern "C" {
 #endif
 
+#ifndef _MACOSX
 #include "config.h"
+#endif
 
 #include <stdio.h>
 #include <stdint.h>
@@ -33,10 +35,17 @@ extern "C" {
 #include <pthread.h>
 
 #include <SDL.h>
+
+#ifdef _MACOSX
+#include <Carbon/Carbon.h>
+typedef void *Display;
+#define ThreadID ThreadID_MACOSX
+#else
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/keysym.h>
 #include <X11/XKBlib.h>
+#endif
 
 #include "psemu_plugin_defs.h"
 

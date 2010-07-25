@@ -1,0 +1,463 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2B679862069193F300E2BD4F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B679860069193F300E2BD4F /* Cocoa.framework */; };
+		2B679863069193F300E2BD4F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B679861069193F300E2BD4F /* IOKit.framework */; };
+		714FA82E11FC822A00517F47 /* analog.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA82A11FC822A00517F47 /* analog.c */; };
+		714FA82F11FC822A00517F47 /* pad.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA82B11FC822A00517F47 /* pad.c */; };
+		714FA83011FC822A00517F47 /* pad.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA82C11FC822A00517F47 /* pad.h */; };
+		714FA83111FC822A00517F47 /* sdljoy.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA82D11FC822A00517F47 /* sdljoy.c */; };
+		714FA86811FC831C00517F47 /* begin_code.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA84B11FC831C00517F47 /* begin_code.h */; };
+		714FA86911FC831C00517F47 /* close_code.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA84C11FC831C00517F47 /* close_code.h */; };
+		714FA86A11FC831C00517F47 /* SDL.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA84D11FC831C00517F47 /* SDL.h */; };
+		714FA86C11FC831C00517F47 /* SDL_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA84F11FC831C00517F47 /* SDL_config.h */; };
+		714FA86D11FC831C00517F47 /* SDL_endian.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA85011FC831C00517F47 /* SDL_endian.h */; };
+		714FA86E11FC831C00517F47 /* SDL_error.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA85111FC831C00517F47 /* SDL_error.h */; };
+		714FA86F11FC831C00517F47 /* SDL_joystick.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA85211FC831C00517F47 /* SDL_joystick.h */; };
+		714FA87111FC831C00517F47 /* SDL_name.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA85411FC831C00517F47 /* SDL_name.h */; };
+		714FA87211FC831C00517F47 /* SDL_platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA85511FC831C00517F47 /* SDL_platform.h */; };
+		714FA87411FC831C00517F47 /* SDL_stdinc.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA85711FC831C00517F47 /* SDL_stdinc.h */; };
+		714FA87611FC831C00517F47 /* SDL_version.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA85911FC831C00517F47 /* SDL_version.h */; };
+		714FA87811FC831C00517F47 /* SDL_sysjoystick.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA85F11FC831C00517F47 /* SDL_sysjoystick.c */; };
+		714FA87911FC831C00517F47 /* SDL_joystick.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA86011FC831C00517F47 /* SDL_joystick.c */; };
+		714FA87A11FC831C00517F47 /* SDL_joystick_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA86111FC831C00517F47 /* SDL_joystick_c.h */; };
+		714FA87B11FC831C00517F47 /* SDL_sysjoystick.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA86211FC831C00517F47 /* SDL_sysjoystick.h */; };
+		714FA87C11FC831C00517F47 /* SDL.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA86311FC831C00517F47 /* SDL.c */; };
+		714FA87D11FC831C00517F47 /* SDL_error.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA86411FC831C00517F47 /* SDL_error.c */; };
+		714FA87E11FC831C00517F47 /* SDL_error_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA86511FC831C00517F47 /* SDL_error_c.h */; };
+		714FA8A011FC846800517F47 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714FA89F11FC846800517F47 /* Carbon.framework */; };
+		714FA8FA11FC863500517F47 /* cfg.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA8F811FC863500517F47 /* cfg.c */; };
+		714FA8FB11FC863500517F47 /* xkb.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA8F911FC863500517F47 /* xkb.c */; };
+		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
+		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
+		2B679860069193F300E2BD4F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		2B679861069193F300E2BD4F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		714FA82A11FC822A00517F47 /* analog.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = analog.c; path = ../../../plugins/dfinput/analog.c; sourceTree = SOURCE_ROOT; };
+		714FA82B11FC822A00517F47 /* pad.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = pad.c; path = ../../../plugins/dfinput/pad.c; sourceTree = SOURCE_ROOT; };
+		714FA82C11FC822A00517F47 /* pad.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = pad.h; path = ../../../plugins/dfinput/pad.h; sourceTree = SOURCE_ROOT; };
+		714FA82D11FC822A00517F47 /* sdljoy.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = sdljoy.c; path = ../../../plugins/dfinput/sdljoy.c; sourceTree = SOURCE_ROOT; };
+		714FA84B11FC831C00517F47 /* begin_code.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = begin_code.h; sourceTree = "<group>"; };
+		714FA84C11FC831C00517F47 /* close_code.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = close_code.h; sourceTree = "<group>"; };
+		714FA84D11FC831C00517F47 /* SDL.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL.h; sourceTree = "<group>"; };
+		714FA84F11FC831C00517F47 /* SDL_config.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_config.h; sourceTree = "<group>"; };
+		714FA85011FC831C00517F47 /* SDL_endian.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_endian.h; sourceTree = "<group>"; };
+		714FA85111FC831C00517F47 /* SDL_error.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_error.h; sourceTree = "<group>"; };
+		714FA85211FC831C00517F47 /* SDL_joystick.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_joystick.h; sourceTree = "<group>"; };
+		714FA85411FC831C00517F47 /* SDL_name.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_name.h; sourceTree = "<group>"; };
+		714FA85511FC831C00517F47 /* SDL_platform.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_platform.h; sourceTree = "<group>"; };
+		714FA85711FC831C00517F47 /* SDL_stdinc.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_stdinc.h; sourceTree = "<group>"; };
+		714FA85911FC831C00517F47 /* SDL_version.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_version.h; sourceTree = "<group>"; };
+		714FA85F11FC831C00517F47 /* SDL_sysjoystick.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = SDL_sysjoystick.c; sourceTree = "<group>"; };
+		714FA86011FC831C00517F47 /* SDL_joystick.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = SDL_joystick.c; sourceTree = "<group>"; };
+		714FA86111FC831C00517F47 /* SDL_joystick_c.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_joystick_c.h; sourceTree = "<group>"; };
+		714FA86211FC831C00517F47 /* SDL_sysjoystick.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_sysjoystick.h; sourceTree = "<group>"; };
+		714FA86311FC831C00517F47 /* SDL.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = SDL.c; sourceTree = "<group>"; };
+		714FA86411FC831C00517F47 /* SDL_error.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = SDL_error.c; sourceTree = "<group>"; };
+		714FA86511FC831C00517F47 /* SDL_error_c.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_error_c.h; sourceTree = "<group>"; };
+		714FA89F11FC846800517F47 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		714FA8F811FC863500517F47 /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = cfg.c; path = macsrc/cfg.c; sourceTree = "<group>"; };
+		714FA8F911FC863500517F47 /* xkb.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = xkb.c; path = macsrc/xkb.c; sourceTree = "<group>"; };
+		8D576316048677EA00EA77CD /* DFInput.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DFInput.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D576313048677EA00EA77CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */,
+				2B679862069193F300E2BD4F /* Cocoa.framework in Frameworks */,
+				2B679863069193F300E2BD4F /* IOKit.framework in Frameworks */,
+				714FA8A011FC846800517F47 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* DFInput */ = {
+			isa = PBXGroup;
+			children = (
+				714FA82911FC820D00517F47 /* macsrc */,
+				714FA82811FC820900517F47 /* src */,
+				714FA84811FC82FA00517F47 /* SDL */,
+				089C167CFE841241C02AAC07 /* Resources */,
+				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
+				19C28FB6FE9D52B211CA2CBB /* Products */,
+			);
+			name = DFInput;
+			sourceTree = "<group>";
+		};
+		089C1671FE841209C02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				714FA89F11FC846800517F47 /* Carbon.framework */,
+				2B679860069193F300E2BD4F /* Cocoa.framework */,
+				2B679861069193F300E2BD4F /* IOKit.framework */,
+				0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D576317048677EA00EA77CD /* Info.plist */,
+				8D5B49A704867FD3000E48DA /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		19C28FB6FE9D52B211CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D576316048677EA00EA77CD /* DFInput.psxplugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		714FA82811FC820900517F47 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				714FA82A11FC822A00517F47 /* analog.c */,
+				714FA82B11FC822A00517F47 /* pad.c */,
+				714FA82C11FC822A00517F47 /* pad.h */,
+				714FA82D11FC822A00517F47 /* sdljoy.c */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		714FA82911FC820D00517F47 /* macsrc */ = {
+			isa = PBXGroup;
+			children = (
+				714FA8F811FC863500517F47 /* cfg.c */,
+				714FA8F911FC863500517F47 /* xkb.c */,
+			);
+			name = macsrc;
+			sourceTree = "<group>";
+		};
+		714FA84811FC82FA00517F47 /* SDL */ = {
+			isa = PBXGroup;
+			children = (
+				714FA84A11FC831C00517F47 /* include */,
+				714FA85A11FC831C00517F47 /* src */,
+			);
+			name = SDL;
+			sourceTree = "<group>";
+		};
+		714FA84A11FC831C00517F47 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				714FA84B11FC831C00517F47 /* begin_code.h */,
+				714FA84C11FC831C00517F47 /* close_code.h */,
+				714FA84D11FC831C00517F47 /* SDL.h */,
+				714FA84F11FC831C00517F47 /* SDL_config.h */,
+				714FA85011FC831C00517F47 /* SDL_endian.h */,
+				714FA85111FC831C00517F47 /* SDL_error.h */,
+				714FA85211FC831C00517F47 /* SDL_joystick.h */,
+				714FA85411FC831C00517F47 /* SDL_name.h */,
+				714FA85511FC831C00517F47 /* SDL_platform.h */,
+				714FA85711FC831C00517F47 /* SDL_stdinc.h */,
+				714FA85911FC831C00517F47 /* SDL_version.h */,
+			);
+			name = include;
+			path = SDL/include;
+			sourceTree = "<group>";
+		};
+		714FA85A11FC831C00517F47 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				714FA85B11FC831C00517F47 /* joystick */,
+				714FA86311FC831C00517F47 /* SDL.c */,
+				714FA86411FC831C00517F47 /* SDL_error.c */,
+				714FA86511FC831C00517F47 /* SDL_error_c.h */,
+			);
+			name = src;
+			path = SDL/src;
+			sourceTree = "<group>";
+		};
+		714FA85B11FC831C00517F47 /* joystick */ = {
+			isa = PBXGroup;
+			children = (
+				714FA85C11FC831C00517F47 /* darwin */,
+				714FA86011FC831C00517F47 /* SDL_joystick.c */,
+				714FA86111FC831C00517F47 /* SDL_joystick_c.h */,
+				714FA86211FC831C00517F47 /* SDL_sysjoystick.h */,
+			);
+			path = joystick;
+			sourceTree = "<group>";
+		};
+		714FA85C11FC831C00517F47 /* darwin */ = {
+			isa = PBXGroup;
+			children = (
+				714FA85F11FC831C00517F47 /* SDL_sysjoystick.c */,
+			);
+			path = darwin;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8D57630E048677EA00EA77CD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				714FA83011FC822A00517F47 /* pad.h in Headers */,
+				714FA86811FC831C00517F47 /* begin_code.h in Headers */,
+				714FA86911FC831C00517F47 /* close_code.h in Headers */,
+				714FA86A11FC831C00517F47 /* SDL.h in Headers */,
+				714FA86C11FC831C00517F47 /* SDL_config.h in Headers */,
+				714FA86D11FC831C00517F47 /* SDL_endian.h in Headers */,
+				714FA86E11FC831C00517F47 /* SDL_error.h in Headers */,
+				714FA86F11FC831C00517F47 /* SDL_joystick.h in Headers */,
+				714FA87111FC831C00517F47 /* SDL_name.h in Headers */,
+				714FA87211FC831C00517F47 /* SDL_platform.h in Headers */,
+				714FA87411FC831C00517F47 /* SDL_stdinc.h in Headers */,
+				714FA87611FC831C00517F47 /* SDL_version.h in Headers */,
+				714FA87A11FC831C00517F47 /* SDL_joystick_c.h in Headers */,
+				714FA87B11FC831C00517F47 /* SDL_sysjoystick.h in Headers */,
+				714FA87E11FC831C00517F47 /* SDL_error_c.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8D57630D048677EA00EA77CD /* DFInput */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71155B0C0FDFA2DE00EC0BC5 /* Build configuration list for PBXNativeTarget "DFInput" */;
+			buildPhases = (
+				8D57630E048677EA00EA77CD /* Headers */,
+				8D57630F048677EA00EA77CD /* Resources */,
+				8D576311048677EA00EA77CD /* Sources */,
+				8D576313048677EA00EA77CD /* Frameworks */,
+				8D576315048677EA00EA77CD /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DFInput;
+			productInstallPath = "$(HOME)/Library/Bundles";
+			productName = DFInput;
+			productReference = 8D576316048677EA00EA77CD /* DFInput.psxplugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 71155B110FDFA2DE00EC0BC5 /* Build configuration list for PBXProject "DFInput" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 089C166AFE841209C02AAC07 /* DFInput */;
+			projectDirPath = "";
+			targets = (
+				8D57630D048677EA00EA77CD /* DFInput */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D57630F048677EA00EA77CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		8D576315048677EA00EA77CD /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D576311048677EA00EA77CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				714FA82E11FC822A00517F47 /* analog.c in Sources */,
+				714FA82F11FC822A00517F47 /* pad.c in Sources */,
+				714FA83111FC822A00517F47 /* sdljoy.c in Sources */,
+				714FA87811FC831C00517F47 /* SDL_sysjoystick.c in Sources */,
+				714FA87911FC831C00517F47 /* SDL_joystick.c in Sources */,
+				714FA87C11FC831C00517F47 /* SDL.c in Sources */,
+				714FA87D11FC831C00517F47 /* SDL_error.c in Sources */,
+				714FA8FA11FC863500517F47 /* cfg.c in Sources */,
+				714FA8FB11FC863500517F47 /* xkb.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8D5B49A704867FD3000E48DA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C167EFE841241C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		71155B0D0FDFA2DE00EC0BC5 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = (
+					../../../libpcsxcore,
+					../HID,
+					Utilities,
+					Source,
+					./HID,
+					Utilities,
+					Source,
+				);
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				LIBRARY_SEARCH_PATHS = .;
+				LIBRARY_STYLE = BUNDLE;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = DFInput;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../../build;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = psxplugin;
+			};
+			name = Development;
+		};
+		71155B0E0FDFA2DE00EC0BC5 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUGGING_SYMBOLS = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = (
+					../../../libpcsxcore,
+					../HID,
+					Utilities,
+					Source,
+					./HID,
+					Utilities,
+					Source,
+				);
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				LIBRARY_SEARCH_PATHS = .;
+				LIBRARY_STYLE = BUNDLE;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = DFInput;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../../build;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = psxplugin;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		71155B120FDFA2DE00EC0BC5 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
+				HEADER_SEARCH_PATHS = (
+					../../../libpcsxcore,
+					../..,
+					../../../plugins/dfinput,
+					./SDL,
+					./SDL/include,
+				);
+				STRIP_INSTALLED_PRODUCT = NO;
+			};
+			name = Development;
+		};
+		71155B130FDFA2DE00EC0BC5 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
+				HEADER_SEARCH_PATHS = (
+					../../../libpcsxcore,
+					../..,
+					../../../plugins/dfinput,
+					./SDL,
+					./SDL/include,
+				);
+			};
+			name = Deployment;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		71155B0C0FDFA2DE00EC0BC5 /* Build configuration list for PBXNativeTarget "DFInput" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71155B0D0FDFA2DE00EC0BC5 /* Development */,
+				71155B0E0FDFA2DE00EC0BC5 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		71155B110FDFA2DE00EC0BC5 /* Build configuration list for PBXProject "DFInput" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71155B120FDFA2DE00EC0BC5 /* Development */,
+				71155B130FDFA2DE00EC0BC5 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

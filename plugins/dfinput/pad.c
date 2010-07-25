@@ -368,6 +368,8 @@ long PADkeypressed(void) {
 	return s;
 }
 
+#ifndef _MACOSX
+
 long PADconfigure(void) {
 	if (fork() == 0) {
 		execl("cfg/cfgDFInput", "cfgDFInput", NULL);
@@ -382,6 +384,8 @@ void PADabout(void) {
 		exit(0);
 	}
 }
+
+#endif
 
 long PADtest(void) {
 	return PSE_PAD_ERR_SUCCESS;

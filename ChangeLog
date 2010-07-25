@@ -6,6 +6,10 @@ July 25, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * macosx/plugins/DFCdrom: Added Mac OS X port of DFCdrom.
  * macosx/plugins/CDDeviceInterface: Removed old CDDeviceInterface plugin.
  * macosx/Pcsx.xcodeproj/project.pbxproj: Added DFCdrom into project.
+ * plugins/dfinput/pad.c: Minor change for Mac OS X.
+ * plugins/dfinput/pad.h: Likewise.
+ * macosx/plugins/DFInput: Added Mac OS X port of DFInput (prelimiary, no
+   config dialog yet).
 
 July 18, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
