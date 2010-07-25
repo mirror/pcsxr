@@ -42,11 +42,11 @@
 		712FD1EA1093096F00575A92 /* socket.h in Headers */ = {isa = PBXBuildFile; fileRef = 712FD1E71093096F00575A92 /* socket.h */; };
 		713B530E110B75650002F164 /* ppf.c in Sources */ = {isa = PBXBuildFile; fileRef = 713B530C110B75650002F164 /* ppf.c */; };
 		713B530F110B75650002F164 /* ppf.h in Headers */ = {isa = PBXBuildFile; fileRef = 713B530D110B75650002F164 /* ppf.h */; };
+		713CB2E411FC49DA0033B6A8 /* DFCdrom.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71F93F6C11FB8E9D007A5A7C /* DFCdrom.psxplugin */; };
 		7161C2820FDED6D000225F97 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 7161C2810FDED6D000225F97 /* config.h */; };
 		7161C2980FDED75300225F97 /* ExtendedKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = 7161C2970FDED75300225F97 /* ExtendedKeys.h */; };
 		719594B111AEFE8C004AD686 /* gte_divider.h in Headers */ = {isa = PBXBuildFile; fileRef = 719594AF11AEFE8C004AD686 /* gte_divider.h */; };
 		719594B211AEFE8C004AD686 /* psxcommon.c in Sources */ = {isa = PBXBuildFile; fileRef = 719594B011AEFE8C004AD686 /* psxcommon.c */; };
-		71AD2DF310C3575000365243 /* CDDeviceInterface.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DC410C356EE00365243 /* CDDeviceInterface.psxplugin */; };
 		71AD2DF410C3575300365243 /* PeopsSPU.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DD110C356FD00365243 /* PeopsSPU.psxplugin */; };
 		71AD2DF510C3575C00365243 /* PeopsSoftGL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DDC10C3570900365243 /* PeopsSoftGL.psxplugin */; };
 		71AD2DF610C3576700365243 /* HIDInput.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DE710C3571700365243 /* HIDInput.psxplugin */; };
@@ -121,12 +121,12 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
-		71AD2DC310C356EE00365243 /* PBXContainerItemProxy */ = {
+		713CB2DD11FC49720033B6A8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 71AD2DBA10C356EE00365243 /* CDDeviceInterfacePlugin.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8D576316048677EA00EA77CD;
-			remoteInfo = CDDeviceInterface;
+			containerPortal = 71F93F6311FB8E9D007A5A7C /* DFCdrom.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D57630D048677EA00EA77CD /* DFCdrom */;
+			remoteInfo = DFCdrom;
 		};
 		71AD2DD010C356FD00365243 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -163,19 +163,19 @@
 			remoteGlobalIDString = 2BAF50920632BB1A00DB9A16;
 			remoteInfo = gpuPeopsSoftGL;
 		};
-		71AD2DEC10C3572700365243 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 71AD2DBA10C356EE00365243 /* CDDeviceInterfacePlugin.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8D57630D048677EA00EA77CD;
-			remoteInfo = CDDeviceInterface;
-		};
 		71AD2DEE10C3572A00365243 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 71AD2DDD10C3571700365243 /* HIDInput.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 8D57630D048677EA00EA77CD;
 			remoteInfo = HIDInput;
+		};
+		71F93F6B11FB8E9D007A5A7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71F93F6311FB8E9D007A5A7C /* DFCdrom.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D576316048677EA00EA77CD;
+			remoteInfo = DFCdrom;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -186,10 +186,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				713CB2E411FC49DA0033B6A8 /* DFCdrom.psxplugin in Copy PlugIns */,
 				71AD2DF610C3576700365243 /* HIDInput.psxplugin in Copy PlugIns */,
 				71AD2DF510C3575C00365243 /* PeopsSoftGL.psxplugin in Copy PlugIns */,
 				71AD2DF410C3575300365243 /* PeopsSPU.psxplugin in Copy PlugIns */,
-				71AD2DF310C3575000365243 /* CDDeviceInterface.psxplugin in Copy PlugIns */,
 			);
 			name = "Copy PlugIns";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,7 +224,7 @@
 		2BA44360052DB2EA00E21DDD /* PcsxPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxPlugin.h; sourceTree = "<group>"; };
 		2BA44361052DB2EA00E21DDD /* PcsxPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxPlugin.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
 		2BB3D6CF05427FE200831ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
-		2BB3D6D105427FE200831ACB /* PCSX.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PCSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BB3D6D105427FE200831ACB /* PCSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PCSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBB1126051DC00500B84448 /* PluginList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginList.h; sourceTree = "<group>"; };
 		2BBB1127051DC00500B84448 /* PluginList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginList.m; sourceTree = "<group>"; };
 		2BBB1787051E0D9700B84448 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = Credits.rtf; sourceTree = "<group>"; };
@@ -241,7 +241,6 @@
 		7161C2970FDED75300225F97 /* ExtendedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedKeys.h; sourceTree = "<group>"; };
 		719594AF11AEFE8C004AD686 /* gte_divider.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = gte_divider.h; path = ../libpcsxcore/gte_divider.h; sourceTree = SOURCE_ROOT; };
 		719594B011AEFE8C004AD686 /* psxcommon.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = psxcommon.c; path = ../libpcsxcore/psxcommon.c; sourceTree = SOURCE_ROOT; };
-		71AD2DBA10C356EE00365243 /* CDDeviceInterfacePlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CDDeviceInterfacePlugin.xcodeproj; path = plugins/CDDeviceInterface/CDDeviceInterfacePlugin.xcodeproj; sourceTree = SOURCE_ROOT; };
 		71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PeopsSPU.xcodeproj; path = plugins/DFSound/PeopsSPU.xcodeproj; sourceTree = SOURCE_ROOT; };
 		71AD2DD210C3570900365243 /* PeopsSoftGPU.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PeopsSoftGPU.xcodeproj; path = plugins/DFXVideo/PeopsSoftGPU.xcodeproj; sourceTree = SOURCE_ROOT; };
 		71AD2DDD10C3571700365243 /* HIDInput.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HIDInput.xcodeproj; path = plugins/HIDInput/HIDInput.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -291,6 +290,7 @@
 		71F4C5B60FDED16D00529849 /* ix86.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ix86.c; path = ../libpcsxcore/ix86/ix86.c; sourceTree = SOURCE_ROOT; };
 		71F4C5B70FDED16D00529849 /* ix86.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ix86.h; path = ../libpcsxcore/ix86/ix86.h; sourceTree = SOURCE_ROOT; };
 		71F703A611B3A673007DD5C5 /* sjisfont.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = sjisfont.h; path = ../libpcsxcore/sjisfont.h; sourceTree = SOURCE_ROOT; };
+		71F93F6311FB8E9D007A5A7C /* DFCdrom.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DFCdrom.xcodeproj; path = plugins/DFCdrom/DFCdrom.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -378,10 +378,10 @@
 		2BBD6C1D04C893F500A83E33 /* PlugIns */ = {
 			isa = PBXGroup;
 			children = (
+				71F93F6311FB8E9D007A5A7C /* DFCdrom.xcodeproj */,
 				71AD2DDD10C3571700365243 /* HIDInput.xcodeproj */,
 				71AD2DD210C3570900365243 /* PeopsSoftGPU.xcodeproj */,
 				71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */,
-				71AD2DBA10C356EE00365243 /* CDDeviceInterfacePlugin.xcodeproj */,
 			);
 			name = PlugIns;
 			sourceTree = "<group>";
@@ -470,14 +470,6 @@
 			name = libpcsxcore;
 			sourceTree = "<group>";
 		};
-		71AD2DC010C356EE00365243 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				71AD2DC410C356EE00365243 /* CDDeviceInterface.psxplugin */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		71AD2DCD10C356FD00365243 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +503,14 @@
 				71F4C5B70FDED16D00529849 /* ix86.h */,
 			);
 			name = ix86;
+			sourceTree = "<group>";
+		};
+		71F93F6411FB8E9D007A5A7C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				71F93F6C11FB8E9D007A5A7C /* DFCdrom.psxplugin */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -581,7 +581,7 @@
 			dependencies = (
 				71AD2DE910C3572200365243 /* PBXTargetDependency */,
 				71AD2DEB10C3572500365243 /* PBXTargetDependency */,
-				71AD2DED10C3572700365243 /* PBXTargetDependency */,
+				713CB2DE11FC49720033B6A8 /* PBXTargetDependency */,
 				71AD2DEF10C3572A00365243 /* PBXTargetDependency */,
 			);
 			name = PCSX;
@@ -601,8 +601,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 71AD2DC010C356EE00365243 /* Products */;
-					ProjectRef = 71AD2DBA10C356EE00365243 /* CDDeviceInterfacePlugin.xcodeproj */;
+					ProductGroup = 71F93F6411FB8E9D007A5A7C /* Products */;
+					ProjectRef = 71F93F6311FB8E9D007A5A7C /* DFCdrom.xcodeproj */;
 				},
 				{
 					ProductGroup = 71AD2DE310C3571700365243 /* Products */;
@@ -624,13 +624,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		71AD2DC410C356EE00365243 /* CDDeviceInterface.psxplugin */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = CDDeviceInterface.psxplugin;
-			remoteRef = 71AD2DC310C356EE00365243 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		71AD2DD110C356FD00365243 /* PeopsSPU.psxplugin */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
@@ -650,6 +643,13 @@
 			fileType = wrapper.cfbundle;
 			path = HIDInput.psxplugin;
 			remoteRef = 71AD2DE610C3571700365243 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		71F93F6C11FB8E9D007A5A7C /* DFCdrom.psxplugin */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DFCdrom.psxplugin;
+			remoteRef = 71F93F6B11FB8E9D007A5A7C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -729,6 +729,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		713CB2DE11FC49720033B6A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DFCdrom;
+			targetProxy = 713CB2DD11FC49720033B6A8 /* PBXContainerItemProxy */;
+		};
 		71AD2DE910C3572200365243 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PeopsSPU;
@@ -738,11 +743,6 @@
 			isa = PBXTargetDependency;
 			name = gpuPeopsSoftGL;
 			targetProxy = 71AD2DEA10C3572500365243 /* PBXContainerItemProxy */;
-		};
-		71AD2DED10C3572700365243 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CDDeviceInterface;
-			targetProxy = 71AD2DEC10C3572700365243 /* PBXContainerItemProxy */;
 		};
 		71AD2DEF10C3572A00365243 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -885,6 +885,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = i386;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 2;
 				HEADER_SEARCH_PATHS = (

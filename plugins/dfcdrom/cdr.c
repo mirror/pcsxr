@@ -59,7 +59,7 @@ unsigned char* (*fGetBuffer)();
 void *CdrThread(void *arg);
 
 long CDRinit(void) {
-	thread = -1;
+	thread = (pthread_t)-1;
 	return 0;
 }
 
@@ -70,8 +70,10 @@ long CDRshutdown(void) {
 long CDRopen(void) {
 	LoadConf();
 
+#ifndef _MACOSX
 	if (IsCdHandleOpen())
-		return 0;				/* it's already open */
+		return 0; // it's already open
+#endif
 
 	if (OpenCdHandle(CdromDev) == -1) { // if we can't open the cdrom we'll works as a null plugin
 		fprintf(stderr, "CDR: Could not open %s\n", CdromDev);
@@ -101,7 +103,7 @@ long CDRopen(void) {
 		pthread_create(&thread, &attr, CdrThread, NULL);
 
 		cacheaddr = -1;
-	} else thread = -1;
+	} else thread = (pthread_t)-1;
 
 	playing = 0;
 	stopth = 0;
@@ -117,7 +119,7 @@ long CDRclose(void) {
 
 	CloseCdHandle();
 
-	if (thread != -1) {
+	if (thread != (pthread_t)-1) {
 		if (locked == 0) {
 			stopth = 1;
 			while (locked == 0) usleep(5000);
@@ -145,13 +147,19 @@ long CDRclose(void) {
 //  byte 0 - start track
 //  byte 1 - end track
 long CDRgetTN(unsigned char *buffer) {
+	long ret;
+
 	if (!IsCdHandleOpen()) {
 		buffer[0] = 1;
 		buffer[1] = 1;
 		return 0;
 	}
 
-	return GetTN(buffer);
+	if (ReadMode == THREADED) pthread_mutex_lock(&mut);
+	ret = GetTN(buffer);
+	if (ReadMode == THREADED) pthread_mutex_unlock(&mut);
+
+	return ret;
 }
 
 // return Track Time
@@ -160,12 +168,18 @@ long CDRgetTN(unsigned char *buffer) {
 //  byte 1 - second
 //  byte 2 - minute
 long CDRgetTD(unsigned char track, unsigned char *buffer) {
+	long ret;
+
 	if (!IsCdHandleOpen()) {
 		memset(buffer + 1, 0, 3);
 		return 0;
 	}
 
-	return GetTD(track, buffer);
+	if (ReadMode == THREADED) pthread_mutex_lock(&mut);
+	ret = GetTD(track, buffer);
+	if (ReadMode == THREADED) pthread_mutex_unlock(&mut);
+
+	return ret;
 }
 
 // normal reading
@@ -315,6 +329,8 @@ unsigned char *CDRgetBuffer(void) {
 //  byte 2 - frame
 // does NOT uses bcd format
 long CDRplay(unsigned char *sector) {
+	long ret;
+
 	if (!IsCdHandleOpen())
 		return 0;
 
@@ -330,7 +346,11 @@ long CDRplay(unsigned char *sector) {
 
 	initial_time = msf_to_lba(sector[0], sector[1], sector[2]);
 
-	if (PlayCDDA(sector) == 0) {
+	if (ReadMode == THREADED) pthread_mutex_lock(&mut);
+	ret = PlayCDDA(sector);
+	if (ReadMode == THREADED) pthread_mutex_unlock(&mut);
+
+	if (ret == 0) {
 		playing = 1;
 		return 0;
 	}
@@ -340,10 +360,16 @@ long CDRplay(unsigned char *sector) {
 
 // stops cdda audio
 long CDRstop(void) {
+	long ret;
+
 	if (!IsCdHandleOpen())
 		return 0;
 
-	if (StopCDDA() == 0) {
+	if (ReadMode == THREADED) pthread_mutex_lock(&mut);
+	ret = StopCDDA();
+	if (ReadMode == THREADED) pthread_mutex_unlock(&mut);
+
+	if (ret == 0) {
 		playing = 0;
 		initial_time = 0;
 
@@ -373,10 +399,16 @@ long CDRstop(void) {
 //  byte 2 - frame
 
 long CDRgetStatus(struct CdrStat *stat) {
+	long ret;
+
 	if (!IsCdHandleOpen())
 		return -1;
 
-	return GetStatus(playing, stat);
+	if (ReadMode == THREADED) pthread_mutex_lock(&mut);
+	ret = GetStatus(playing, stat);
+	if (ReadMode == THREADED) pthread_mutex_unlock(&mut);
+
+	return ret;
 }
 
 unsigned char *CDRgetBufferSub(void) {
@@ -386,9 +418,7 @@ unsigned char *CDRgetBufferSub(void) {
 	if (subqread) return p;
 
 	if (ReadMode == THREADED) pthread_mutex_lock(&mut);
-
 	p = ReadSub(lastTime);
-
 	if (ReadMode == THREADED) pthread_mutex_unlock(&mut);
 
 	if (p != NULL) subqread = 1;
@@ -412,9 +442,18 @@ long CDRreadCDDA(unsigned char m, unsigned char s, unsigned char f, unsigned cha
 
 // get Track End Time
 long CDRgetTE(unsigned char track, unsigned char *m, unsigned char *s, unsigned char *f) {
+	long ret;
+
 	if (!IsCdHandleOpen()) return -1;
-	return GetTE(track, m, s, f);
+
+	if (ReadMode == THREADED) pthread_mutex_lock(&mut);
+	ret = GetTE(track, m, s, f);
+	if (ReadMode == THREADED) pthread_mutex_unlock(&mut);
+
+	return ret;
 }
+
+#ifndef _MACOSX
 
 void ExecCfg(char *arg) {
 	char cfg[256];
@@ -451,6 +490,8 @@ long CDRconfigure() {
 void CDRabout() {
 	ExecCfg("about");
 }
+
+#endif
 
 long CDRtest(void) {
 #ifndef USE_NULL

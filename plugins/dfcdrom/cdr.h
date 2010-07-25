@@ -83,7 +83,7 @@ struct cdrom_msf {
 #define DEV_DEF		""
 #endif
 
-#ifndef USE_LIBCDIO
+#if !defined (USE_LIBCDIO) && !defined (_MACOSX)
 #define USE_NULL	1
 #endif
 

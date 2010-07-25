@@ -1,3 +1,12 @@
+July 25, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfcdrom/cdr.c: Wait for reading thread to complete for all
+   operations.
+ * plugins/dfcdrom/cdr.h: Don't define USE_NULL under Mac OS X.
+ * macosx/plugins/DFCdrom: Added Mac OS X port of DFCdrom.
+ * macosx/plugins/CDDeviceInterface: Removed old CDDeviceInterface plugin.
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Added DFCdrom into project.
+
 July 18, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2: Tweaked the config dialog
