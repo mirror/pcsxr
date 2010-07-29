@@ -74,11 +74,6 @@
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////
-// draw globals
-
-void  glBlendEquationEXT(GLenum mode);
-void  glColorTableEXT(GLenum target, GLenum internalFormat, GLsizei width, GLenum format,GLenum type, const GLvoid *data);
-
 // draw globals; most will be initialized again later (by config or checks) 
 
 BOOL           bIsFirstFrame=TRUE;
@@ -175,7 +170,7 @@ void GetExtInfos(void)
   {
    iUsePalTextures=1;                                  // -> wow, supported, get func pointer
 
-   glColorTableEXTEx=(PFNGLCOLORTABLEEXT)glColorTableEXT;
+   glColorTableEXTEx=(PFNGLCOLORTABLEEXT)glXGetProcAddress("glColorTableEXT");
 
    if(glColorTableEXTEx==NULL) iUsePalTextures=0;      // -> ha, cheater... no func, no support
   }
@@ -201,7 +196,7 @@ void SetExtGLFuncs(void)
     strstr((char *)glGetString(GL_EXTENSIONS),         // and blend_subtract available?
     "GL_EXT_blend_subtract"))
      {                                                 // -> get ogl blend function pointer
-      glBlendEquationEXTEx=(PFNGLBLENDEQU)glBlendEquationEXT; 
+      glBlendEquationEXTEx=(PFNGLBLENDEQU)glXGetProcAddress("glBlendEquationEXT"); 
      }
  else                                                  // no subtract blending?
   {

@@ -25,6 +25,9 @@ July 29, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
    disc is really a PSX CD or not.
  * macosx/Pcsx.xcodeproj/project.pbxproj: Added DFInput to project.
  * macosx/plugins/HIDInput: Removed.
+ * plugins/peopsxgl/draw.c: Replaced global symbols with glXGetProcAddress
+   call (courtesy of siveritas).
+ * AUTHORS: Updated info.
 
 July 25, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
