@@ -18,10 +18,14 @@
             SUPERCLASS = NSWindowController; 
         }, 
         {
-            ACTIONS = {setType = id; }; 
+            ACTIONS = {setDevice = id; setType = id; }; 
             CLASS = NetPcsxHIDInputPluginPadView; 
             LANGUAGE = ObjC; 
-            OUTLETS = {tableView = NSTableView; typeMenu = NSView; }; 
+            OUTLETS = {
+                deviceMenu = NSPopUpButton; 
+                tableView = NSTableView; 
+                typeMenu = NSPopUpButton; 
+            }; 
             SUPERCLASS = NSView; 
         }
     ); 

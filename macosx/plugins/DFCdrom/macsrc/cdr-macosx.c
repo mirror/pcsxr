@@ -34,6 +34,36 @@
 int cdHandle = -1;
 char cdDevice[4096] = "";
 
+static int IsPsxDisc(const char *dev) {
+	int fd;
+	char buf[CD_FRAMESIZE_RAW];
+	dk_cd_read_t r;
+
+	fd = open(dev, O_RDONLY, 0);
+	if (fd < 0) return 0;
+
+	memset(&r, 0, sizeof(r));
+
+	r.offset = msf_to_lba(0, 2, 4) * CD_FRAMESIZE_RAW;
+	r.sectorArea = 0xF8;
+	r.sectorType = kCDSectorTypeUnknown;
+	r.bufferLength = CD_FRAMESIZE_RAW;
+	r.buffer = buf;
+
+	if (ioctl(fd, DKIOCCDREAD, &r) != kIOReturnSuccess) {
+		close(fd);
+		return 0;
+	}
+
+	close(fd);
+
+	if (strncmp(buf + 56, "Sony Computer Entertainment", 27) == 0) {
+		return 1;
+	}
+
+	return 0;
+}
+
 static void FindCdDevice(char *dev) {
 	io_object_t   next_media;
 	kern_return_t kern_result;
@@ -77,12 +107,14 @@ start:
 			if (CFStringGetCString(str_bsd_path, (char *)&psz_buf + dev_path_length,
 				sizeof(psz_buf) - dev_path_length, kCFStringEncodingASCII))
 			{
-				CFRelease(str_bsd_path);
-				IOObjectRelease(next_media);
-				IOObjectRelease(media_iterator);
 				strcpy(dev, psz_buf);
-				PRINTF("Found CD-ROM Device: %s\n", dev);
-				return;
+
+				if (IsPsxDisc(dev)) {
+					CFRelease(str_bsd_path);
+					IOObjectRelease(next_media);
+					IOObjectRelease(media_iterator);
+					return;
+				}
 			}
 
 			CFRelease(str_bsd_path);
@@ -129,8 +161,9 @@ long GetTN(unsigned char *buffer) {
 	if (cdHandle < 0) return -1;
 
 	// TODO
-	buffer[0] = 0;
-	buffer[1] = 0;
+	buffer[0] = 1;
+	buffer[1] = 1;
+
 	return 0;
 }
 
@@ -196,9 +229,11 @@ long GetStatus(int playing, struct CdrStat *stat) {
 		// No CD in drive
 		stat->Type = 0xff;
 		stat->Status |= 0x10;
-	} else if (CdrSpeed > 0) {
-		u_int16_t speed = kCDSpeedMin * CdrSpeed;
-		ioctl(cdHandle, DKIOCCDSETSPEED, &speed);
+	} else {
+		if (CdrSpeed > 0) {
+			u_int16_t speed = kCDSpeedMin * CdrSpeed;
+			ioctl(cdHandle, DKIOCCDSETSPEED, &speed);
+		}
 	}
 
 	return 0;

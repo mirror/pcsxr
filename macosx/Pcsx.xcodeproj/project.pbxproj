@@ -49,7 +49,7 @@
 		719594B211AEFE8C004AD686 /* psxcommon.c in Sources */ = {isa = PBXBuildFile; fileRef = 719594B011AEFE8C004AD686 /* psxcommon.c */; };
 		71AD2DF410C3575300365243 /* PeopsSPU.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DD110C356FD00365243 /* PeopsSPU.psxplugin */; };
 		71AD2DF510C3575C00365243 /* PeopsSoftGL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DDC10C3570900365243 /* PeopsSoftGL.psxplugin */; };
-		71AD2DF610C3576700365243 /* HIDInput.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DE710C3571700365243 /* HIDInput.psxplugin */; };
+		71F2C0881200B6B000322AD9 /* DFInput.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71F2C0861200B69B00322AD9 /* DFInput.psxplugin */; };
 		71F4C5890FDED12800529849 /* cdriso.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5600FDED12800529849 /* cdriso.c */; };
 		71F4C58A0FDED12800529849 /* cdriso.h in Headers */ = {isa = PBXBuildFile; fileRef = 71F4C5610FDED12800529849 /* cdriso.h */; };
 		71F4C58B0FDED12800529849 /* cdrom.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5620FDED12800529849 /* cdrom.c */; };
@@ -125,7 +125,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 71F93F6311FB8E9D007A5A7C /* DFCdrom.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8D57630D048677EA00EA77CD /* DFCdrom */;
+			remoteGlobalIDString = 8D57630D048677EA00EA77CD;
 			remoteInfo = DFCdrom;
 		};
 		71AD2DD010C356FD00365243 /* PBXContainerItemProxy */ = {
@@ -142,13 +142,6 @@
 			remoteGlobalIDString = 2BAF50930632BB1A00DB9A16;
 			remoteInfo = gpuPeopsSoftGL;
 		};
-		71AD2DE610C3571700365243 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 71AD2DDD10C3571700365243 /* HIDInput.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8D576316048677EA00EA77CD;
-			remoteInfo = HIDInput;
-		};
 		71AD2DE810C3572200365243 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */;
@@ -163,12 +156,19 @@
 			remoteGlobalIDString = 2BAF50920632BB1A00DB9A16;
 			remoteInfo = gpuPeopsSoftGL;
 		};
-		71AD2DEE10C3572A00365243 /* PBXContainerItemProxy */ = {
+		71F2C0851200B69B00322AD9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 71AD2DDD10C3571700365243 /* HIDInput.xcodeproj */;
+			containerPortal = 71F2C07E1200B69B00322AD9 /* DFInput.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D576316048677EA00EA77CD;
+			remoteInfo = DFInput;
+		};
+		71F2C0BB1200B75100322AD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71F2C07E1200B69B00322AD9 /* DFInput.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 8D57630D048677EA00EA77CD;
-			remoteInfo = HIDInput;
+			remoteInfo = DFInput;
 		};
 		71F93F6B11FB8E9D007A5A7C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -186,8 +186,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				71F2C0881200B6B000322AD9 /* DFInput.psxplugin in Copy PlugIns */,
 				713CB2E411FC49DA0033B6A8 /* DFCdrom.psxplugin in Copy PlugIns */,
-				71AD2DF610C3576700365243 /* HIDInput.psxplugin in Copy PlugIns */,
 				71AD2DF510C3575C00365243 /* PeopsSoftGL.psxplugin in Copy PlugIns */,
 				71AD2DF410C3575300365243 /* PeopsSPU.psxplugin in Copy PlugIns */,
 			);
@@ -224,7 +224,7 @@
 		2BA44360052DB2EA00E21DDD /* PcsxPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxPlugin.h; sourceTree = "<group>"; };
 		2BA44361052DB2EA00E21DDD /* PcsxPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxPlugin.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
 		2BB3D6CF05427FE200831ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
-		2BB3D6D105427FE200831ACB /* PCSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PCSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BB3D6D105427FE200831ACB /* PCSX.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PCSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBB1126051DC00500B84448 /* PluginList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginList.h; sourceTree = "<group>"; };
 		2BBB1127051DC00500B84448 /* PluginList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginList.m; sourceTree = "<group>"; };
 		2BBB1787051E0D9700B84448 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = Credits.rtf; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 		719594B011AEFE8C004AD686 /* psxcommon.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = psxcommon.c; path = ../libpcsxcore/psxcommon.c; sourceTree = SOURCE_ROOT; };
 		71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PeopsSPU.xcodeproj; path = plugins/DFSound/PeopsSPU.xcodeproj; sourceTree = SOURCE_ROOT; };
 		71AD2DD210C3570900365243 /* PeopsSoftGPU.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PeopsSoftGPU.xcodeproj; path = plugins/DFXVideo/PeopsSoftGPU.xcodeproj; sourceTree = SOURCE_ROOT; };
-		71AD2DDD10C3571700365243 /* HIDInput.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HIDInput.xcodeproj; path = plugins/HIDInput/HIDInput.xcodeproj; sourceTree = SOURCE_ROOT; };
+		71F2C07E1200B69B00322AD9 /* DFInput.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DFInput.xcodeproj; path = plugins/DFInput/DFInput.xcodeproj; sourceTree = "<group>"; };
 		71F4C5600FDED12800529849 /* cdriso.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cdriso.c; path = ../libpcsxcore/cdriso.c; sourceTree = SOURCE_ROOT; };
 		71F4C5610FDED12800529849 /* cdriso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cdriso.h; path = ../libpcsxcore/cdriso.h; sourceTree = SOURCE_ROOT; };
 		71F4C5620FDED12800529849 /* cdrom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cdrom.c; path = ../libpcsxcore/cdrom.c; sourceTree = SOURCE_ROOT; };
@@ -378,8 +378,8 @@
 		2BBD6C1D04C893F500A83E33 /* PlugIns */ = {
 			isa = PBXGroup;
 			children = (
+				71F2C07E1200B69B00322AD9 /* DFInput.xcodeproj */,
 				71F93F6311FB8E9D007A5A7C /* DFCdrom.xcodeproj */,
-				71AD2DDD10C3571700365243 /* HIDInput.xcodeproj */,
 				71AD2DD210C3570900365243 /* PeopsSoftGPU.xcodeproj */,
 				71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */,
 			);
@@ -486,10 +486,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		71AD2DE310C3571700365243 /* Products */ = {
+		71F2C07F1200B69B00322AD9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				71AD2DE710C3571700365243 /* HIDInput.psxplugin */,
+				71F2C0861200B69B00322AD9 /* DFInput.psxplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -582,7 +582,7 @@
 				71AD2DE910C3572200365243 /* PBXTargetDependency */,
 				71AD2DEB10C3572500365243 /* PBXTargetDependency */,
 				713CB2DE11FC49720033B6A8 /* PBXTargetDependency */,
-				71AD2DEF10C3572A00365243 /* PBXTargetDependency */,
+				71F2C0BC1200B75100322AD9 /* PBXTargetDependency */,
 			);
 			name = PCSX;
 			productInstallPath = "$(USER_APPS_DIR)";
@@ -605,8 +605,8 @@
 					ProjectRef = 71F93F6311FB8E9D007A5A7C /* DFCdrom.xcodeproj */;
 				},
 				{
-					ProductGroup = 71AD2DE310C3571700365243 /* Products */;
-					ProjectRef = 71AD2DDD10C3571700365243 /* HIDInput.xcodeproj */;
+					ProductGroup = 71F2C07F1200B69B00322AD9 /* Products */;
+					ProjectRef = 71F2C07E1200B69B00322AD9 /* DFInput.xcodeproj */;
 				},
 				{
 					ProductGroup = 71AD2DD810C3570900365243 /* Products */;
@@ -638,11 +638,11 @@
 			remoteRef = 71AD2DDB10C3570900365243 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		71AD2DE710C3571700365243 /* HIDInput.psxplugin */ = {
+		71F2C0861200B69B00322AD9 /* DFInput.psxplugin */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = HIDInput.psxplugin;
-			remoteRef = 71AD2DE610C3571700365243 /* PBXContainerItemProxy */;
+			path = DFInput.psxplugin;
+			remoteRef = 71F2C0851200B69B00322AD9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		71F93F6C11FB8E9D007A5A7C /* DFCdrom.psxplugin */ = {
@@ -744,10 +744,10 @@
 			name = gpuPeopsSoftGL;
 			targetProxy = 71AD2DEA10C3572500365243 /* PBXContainerItemProxy */;
 		};
-		71AD2DEF10C3572A00365243 /* PBXTargetDependency */ = {
+		71F2C0BC1200B75100322AD9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = HIDInput;
-			targetProxy = 71AD2DEE10C3572A00365243 /* PBXContainerItemProxy */;
+			name = DFInput;
+			targetProxy = 71F2C0BB1200B75100322AD9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		2B679862069193F300E2BD4F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B679860069193F300E2BD4F /* Cocoa.framework */; };
 		2B679863069193F300E2BD4F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B679861069193F300E2BD4F /* IOKit.framework */; };
+		7136F1DA1200E163001973D9 /* ControllerList.h in Headers */ = {isa = PBXBuildFile; fileRef = 71E861A411FF75AC001C1826 /* ControllerList.h */; };
+		7136F1DB1200E163001973D9 /* ControllerList.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E861A511FF75AC001C1826 /* ControllerList.m */; };
+		7136F1DC1200E164001973D9 /* MappingCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 71E861A811FF75AC001C1826 /* MappingCell.h */; };
+		7136F1DD1200E164001973D9 /* MappingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E861A911FF75AC001C1826 /* MappingCell.m */; };
+		7136F1DE1200E165001973D9 /* PadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E861AB11FF75AC001C1826 /* PadController.m */; };
+		7136F1DF1200E165001973D9 /* PadController.h in Headers */ = {isa = PBXBuildFile; fileRef = 71E861AA11FF75AC001C1826 /* PadController.h */; };
+		7136F51A12011BB4001973D9 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 7136F51812011BB4001973D9 /* Credits.rtf */; };
 		714FA82E11FC822A00517F47 /* analog.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA82A11FC822A00517F47 /* analog.c */; };
 		714FA82F11FC822A00517F47 /* pad.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA82B11FC822A00517F47 /* pad.c */; };
 		714FA83011FC822A00517F47 /* pad.h in Headers */ = {isa = PBXBuildFile; fileRef = 714FA82C11FC822A00517F47 /* pad.h */; };
@@ -34,6 +41,10 @@
 		714FA8A011FC846800517F47 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714FA89F11FC846800517F47 /* Carbon.framework */; };
 		714FA8FA11FC863500517F47 /* cfg.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA8F811FC863500517F47 /* cfg.c */; };
 		714FA8FB11FC863500517F47 /* xkb.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA8F911FC863500517F47 /* xkb.c */; };
+		7192EAAE1200D54500038B92 /* cfg.h in Headers */ = {isa = PBXBuildFile; fileRef = 7192EAAB1200D54500038B92 /* cfg.h */; };
+		71E861B611FF75AC001C1826 /* PadView.h in Headers */ = {isa = PBXBuildFile; fileRef = 71E861AC11FF75AC001C1826 /* PadView.h */; };
+		71E861B711FF75AC001C1826 /* PadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E861AD11FF75AC001C1826 /* PadView.m */; };
+		71E861BC11FF75BA001C1826 /* NetPcsxHIDInputPluginMain.nib in Resources */ = {isa = PBXBuildFile; fileRef = 71E861BA11FF75BA001C1826 /* NetPcsxHIDInputPluginMain.nib */; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
 		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
@@ -43,6 +54,7 @@
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		2B679860069193F300E2BD4F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		2B679861069193F300E2BD4F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		7136F51912011BB4001973D9 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		714FA82A11FC822A00517F47 /* analog.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = analog.c; path = ../../../plugins/dfinput/analog.c; sourceTree = SOURCE_ROOT; };
 		714FA82B11FC822A00517F47 /* pad.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = pad.c; path = ../../../plugins/dfinput/pad.c; sourceTree = SOURCE_ROOT; };
 		714FA82C11FC822A00517F47 /* pad.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = pad.h; path = ../../../plugins/dfinput/pad.h; sourceTree = SOURCE_ROOT; };
@@ -68,6 +80,16 @@
 		714FA89F11FC846800517F47 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		714FA8F811FC863500517F47 /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = cfg.c; path = macsrc/cfg.c; sourceTree = "<group>"; };
 		714FA8F911FC863500517F47 /* xkb.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = xkb.c; path = macsrc/xkb.c; sourceTree = "<group>"; };
+		7192EAAB1200D54500038B92 /* cfg.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = cfg.h; path = macsrc/cfg.h; sourceTree = "<group>"; };
+		71E861A411FF75AC001C1826 /* ControllerList.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = ControllerList.h; path = macsrc/ControllerList.h; sourceTree = "<group>"; };
+		71E861A511FF75AC001C1826 /* ControllerList.m */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.objc; name = ControllerList.m; path = macsrc/ControllerList.m; sourceTree = "<group>"; };
+		71E861A811FF75AC001C1826 /* MappingCell.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = MappingCell.h; path = macsrc/MappingCell.h; sourceTree = "<group>"; };
+		71E861A911FF75AC001C1826 /* MappingCell.m */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.objc; name = MappingCell.m; path = macsrc/MappingCell.m; sourceTree = "<group>"; };
+		71E861AA11FF75AC001C1826 /* PadController.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = PadController.h; path = macsrc/PadController.h; sourceTree = "<group>"; };
+		71E861AB11FF75AC001C1826 /* PadController.m */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.objc; name = PadController.m; path = macsrc/PadController.m; sourceTree = "<group>"; };
+		71E861AC11FF75AC001C1826 /* PadView.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = PadView.h; path = macsrc/PadView.h; sourceTree = "<group>"; };
+		71E861AD11FF75AC001C1826 /* PadView.m */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.objc; name = PadView.m; path = macsrc/PadView.m; sourceTree = "<group>"; };
+		71E861BB11FF75BA001C1826 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/NetPcsxHIDInputPluginMain.nib; sourceTree = "<group>"; };
 		8D576316048677EA00EA77CD /* DFInput.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DFInput.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +136,8 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7136F51812011BB4001973D9 /* Credits.rtf */,
+				71E861BA11FF75BA001C1826 /* NetPcsxHIDInputPluginMain.nib */,
 				8D576317048677EA00EA77CD /* Info.plist */,
 				8D5B49A704867FD3000E48DA /* InfoPlist.strings */,
 			);
@@ -142,7 +166,16 @@
 		714FA82911FC820D00517F47 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
+				71E861A411FF75AC001C1826 /* ControllerList.h */,
+				71E861A511FF75AC001C1826 /* ControllerList.m */,
+				71E861A811FF75AC001C1826 /* MappingCell.h */,
+				71E861A911FF75AC001C1826 /* MappingCell.m */,
+				71E861AA11FF75AC001C1826 /* PadController.h */,
+				71E861AB11FF75AC001C1826 /* PadController.m */,
+				71E861AC11FF75AC001C1826 /* PadView.h */,
+				71E861AD11FF75AC001C1826 /* PadView.m */,
 				714FA8F811FC863500517F47 /* cfg.c */,
+				7192EAAB1200D54500038B92 /* cfg.h */,
 				714FA8F911FC863500517F47 /* xkb.c */,
 			);
 			name = macsrc;
@@ -229,6 +262,11 @@
 				714FA87A11FC831C00517F47 /* SDL_joystick_c.h in Headers */,
 				714FA87B11FC831C00517F47 /* SDL_sysjoystick.h in Headers */,
 				714FA87E11FC831C00517F47 /* SDL_error_c.h in Headers */,
+				71E861B611FF75AC001C1826 /* PadView.h in Headers */,
+				7192EAAE1200D54500038B92 /* cfg.h in Headers */,
+				7136F1DA1200E163001973D9 /* ControllerList.h in Headers */,
+				7136F1DC1200E164001973D9 /* MappingCell.h in Headers */,
+				7136F1DF1200E165001973D9 /* PadController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +314,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */,
+				71E861BC11FF75BA001C1826 /* NetPcsxHIDInputPluginMain.nib in Resources */,
+				7136F51A12011BB4001973D9 /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,12 +345,32 @@
 				714FA87D11FC831C00517F47 /* SDL_error.c in Sources */,
 				714FA8FA11FC863500517F47 /* cfg.c in Sources */,
 				714FA8FB11FC863500517F47 /* xkb.c in Sources */,
+				71E861B711FF75AC001C1826 /* PadView.m in Sources */,
+				7136F1DB1200E163001973D9 /* ControllerList.m in Sources */,
+				7136F1DD1200E164001973D9 /* MappingCell.m in Sources */,
+				7136F1DE1200E165001973D9 /* PadController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		7136F51812011BB4001973D9 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7136F51912011BB4001973D9 /* English */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		71E861BA11FF75BA001C1826 /* NetPcsxHIDInputPluginMain.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				71E861BB11FF75BA001C1826 /* English */,
+			);
+			name = NetPcsxHIDInputPluginMain.nib;
+			sourceTree = "<group>";
+		};
 		8D5B49A704867FD3000E48DA /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -414,6 +474,7 @@
 					../../../libpcsxcore,
 					../..,
 					../../../plugins/dfinput,
+					../../../../plugins/dfinput,
 					./SDL,
 					./SDL/include,
 				);
@@ -430,6 +491,7 @@
 					../../../libpcsxcore,
 					../..,
 					../../../plugins/dfinput,
+					../../../../plugins/dfinput,
 					./SDL,
 					./SDL/include,
 				);

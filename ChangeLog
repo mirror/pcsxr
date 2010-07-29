@@ -1,3 +1,31 @@
+July 29, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/plugins/DFInput/DFInput.xcodeproj/project.pbxproj: Implemented
+   config dialog box.
+ * macosx/plugins/DFInput/macsrc/cfg.c: Likewise.
+ * macosx/plugins/DFInput/macsrc/MappingCell.h: Likewise.
+ * macosx/plugins/DFInput/macsrc/PadController.m: Likewise.
+ * macosx/plugins/DFInput/macsrc/cfg.h: Likewise.
+ * macosx/plugins/DFInput/macsrc/ControllerList.h: Likewise.
+ * macosx/plugins/DFInput/macsrc/PadView.h: Likewise.
+ * macosx/plugins/DFInput/macsrc/MappingCell.m: Likewise.
+ * macosx/plugins/DFInput/macsrc/ControllerList.m: Likewise.
+ * macosx/plugins/DFInput/macsrc/PadView.m: Likewise.
+ * macosx/plugins/DFInput/macsrc/PadController.h: Likewise.
+ * macosx/plugins/DFInput/English.lproj/NetPcsxHIDInputPluginMain.nib:
+   Likewise.
+ * macosx/plugins/DFInput/English.lproj/NetPcsxHIDInputPluginMain.nib/
+   info.nib: Likewise.
+ * macosx/plugins/DFInput/English.lproj/NetPcsxHIDInputPluginMain.nib/
+   keyedobjects.nib: Likewise.
+ * macosx/plugins/DFInput/English.lproj/NetPcsxHIDInputPluginMain.nib/
+   classes.nib: Likewise.
+ * macosx/plugins/DFInput/English.lproj/Credits.rtf: Likewise.
+ * macosx/plugins/DFCdrom/macsrc/cdr-macosx.c: Add check for whether the
+   disc is really a PSX CD or not.
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Added DFInput to project.
+ * macosx/plugins/HIDInput: Removed.
+
 July 25, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfcdrom/cdr.c: Wait for reading thread to complete for all
