@@ -35,6 +35,7 @@ extern "C" {
 #include <pthread.h>
 
 #include <SDL.h>
+#include <SDL_joystick.h>
 
 #ifdef _MACOSX
 #include <Carbon/Carbon.h>

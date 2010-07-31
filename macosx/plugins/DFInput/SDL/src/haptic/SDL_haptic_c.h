@@ -20,19 +20,7 @@
     slouken@libsdl.org
 */
 
-/**
- *  \file close_code.h
- *  
- *  This file reverses the effects of begin_code.h and should be included
- *  after you finish any function and structure declarations in your headers
- */
+extern int SDL_HapticInit(void);
+extern void SDL_HapticQuit(void);
 
-#undef _begin_code_h
-
-/* Reset structure packing at previous byte alignment */
-#if defined(_MSC_VER) || defined(__MWERKS__) || defined(__WATCOMC__)  || defined(__BORLANDC__)
-#ifdef __BORLANDC__
-#pragma nopackwarning
-#endif
-#pragma pack(pop)
-#endif /* Compiler needs structure packing set */
+/* vi: set ts=4 sw=4 expandtab: */

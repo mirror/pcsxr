@@ -63,13 +63,6 @@ NSString *saveStatePath;
 	}
 }
 
-- (IBAction)memCardConfig:(id)sender
-{
-	NSRunAlertPanel(NSLocalizedString(@"Unimplemented feature", nil),
-			NSLocalizedString(@"Configuration of memory cards has not yet been implemented, but will be available in the future.", nil), 
-			nil, nil, nil);
-}
-
 - (IBAction)pause:(id)sender
 {
     if ([EmuThread isPaused]) {

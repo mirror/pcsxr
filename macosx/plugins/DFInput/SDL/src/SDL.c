@@ -1,6 +1,6 @@
 /*
     SDL - Simple DirectMedia Layer
-    Copyright (C) 1997-2006 Sam Lantinga
+    Copyright (C) 1997-2010 Sam Lantinga
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -19,79 +19,83 @@
     Sam Lantinga
     slouken@libsdl.org
 */
-
-// 7-25-2010 Wei Mingzhi
-// Removed everything unrelated to Mac OS X Joystick support.
+// 7/31/2010 Wei Mingzhi
+// Removed everything unrated to Mac OS X Joystick support
 
 #include "SDL_config.h"
 
 /* Initialization code for SDL */
 
 #include "SDL.h"
-
-/* Initialization/Cleanup routines */
-extern int  SDL_JoystickInit(void);
-extern void SDL_JoystickQuit(void);
-
-/* The current SDL version */
-static SDL_version version = 
-	{ SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL };
+#include "haptic/SDL_haptic_c.h"
+#include "joystick/SDL_joystick_c.h"
 
 /* The initialized subsystems */
 static Uint32 SDL_initialized = 0;
 
-int SDL_InitSubSystem(Uint32 flags)
+int
+SDL_InitSubSystem(Uint32 flags)
 {
-	/* Initialize the joystick subsystem */
-	if ( (flags & SDL_INIT_JOYSTICK) &&
-	     !(SDL_initialized & SDL_INIT_JOYSTICK) ) {
-		if ( SDL_JoystickInit() < 0 ) {
-			return(-1);
-		}
-		SDL_initialized |= SDL_INIT_JOYSTICK;
-	}
+    /* Initialize the joystick subsystem */
+    if ((flags & SDL_INIT_JOYSTICK) && !(SDL_initialized & SDL_INIT_JOYSTICK)) {
+        if (SDL_JoystickInit() < 0) {
+            return (-1);
+        }
+        SDL_initialized |= SDL_INIT_JOYSTICK;
+    }
 
-	return(0);
+    /* Initialize the haptic subsystem */
+    if ((flags & SDL_INIT_HAPTIC) && !(SDL_initialized & SDL_INIT_HAPTIC)) {
+        if (SDL_HapticInit() < 0) {
+            return (-1);
+        }
+        SDL_initialized |= SDL_INIT_HAPTIC;
+    }
+
+    return (0);
 }
 
-int SDL_Init(Uint32 flags)
+int
+SDL_Init(Uint32 flags)
 {
-	/* Clear the error message */
-	SDL_ClearError();
+    /* Clear the error message */
+    SDL_ClearError();
 
-	/* Initialize the desired subsystems */
-	if ( SDL_InitSubSystem(flags) < 0 ) {
-		return(-1);
-	}
+    /* Initialize the desired subsystems */
+    if (SDL_InitSubSystem(flags) < 0) {
+        return (-1);
+    }
 
-	return(0);
+    return (0);
 }
 
-void SDL_QuitSubSystem(Uint32 flags)
+void
+SDL_QuitSubSystem(Uint32 flags)
 {
-	/* Shut down requested initialized subsystems */
-	if ( (flags & SDL_initialized & SDL_INIT_JOYSTICK) ) {
-		SDL_JoystickQuit();
-		SDL_initialized &= ~SDL_INIT_JOYSTICK;
-	}
+    /* Shut down requested initialized subsystems */
+    if ((flags & SDL_initialized & SDL_INIT_JOYSTICK)) {
+        SDL_JoystickQuit();
+        SDL_initialized &= ~SDL_INIT_JOYSTICK;
+    }
+
+    if ((flags & SDL_initialized & SDL_INIT_HAPTIC)) {
+        SDL_HapticQuit();
+        SDL_initialized &= ~SDL_INIT_HAPTIC;
+    }
 }
 
-Uint32 SDL_WasInit(Uint32 flags)
+Uint32
+SDL_WasInit(Uint32 flags)
 {
-	if ( ! flags ) {
-		flags = SDL_INIT_EVERYTHING;
-	}
-	return (SDL_initialized&flags);
+    if (!flags) {
+        flags = SDL_INIT_EVERYTHING;
+    }
+    return (SDL_initialized & flags);
 }
 
-void SDL_Quit(void)
+void
+SDL_Quit(void)
 {
-	/* Quit all subsystems */
-	SDL_QuitSubSystem(SDL_INIT_EVERYTHING);
-}
-
-/* Return the library version number */
-const SDL_version * SDL_Linked_Version(void)
-{
-	return(&version);
+    /* Quit all subsystems */
+    SDL_QuitSubSystem(SDL_INIT_EVERYTHING);
 }

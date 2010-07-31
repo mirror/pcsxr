@@ -888,11 +888,14 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../libpcsxcore,
 					../macosx,
 				);
+				OTHER_CFLAGS = "-fno-frame-pointer";
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lSystemStubs",

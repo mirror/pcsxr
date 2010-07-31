@@ -17,7 +17,6 @@
 	 BOOL wasPausedBeforeBGSwitch;
 }
 - (IBAction)ejectCD:(id)sender;
-- (IBAction)memCardConfig:(id)sender;
 - (IBAction)pause:(id)sender;
 - (IBAction)preferences:(id)sender;
 - (IBAction)reset:(id)sender;

@@ -19,9 +19,6 @@
 #ifndef CFG_H
 #define CFG_H
 
-#include <Carbon/Carbon.h>
-#include <SDL.h>
-
 #include "pad.h"
 
 void GetKeyDescription(char *buf, int joynum, int key);

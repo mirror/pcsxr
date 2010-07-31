@@ -90,7 +90,7 @@ int             bThreadEnded=0;
 int             bSpuInit=0;
 int             bSPUIsOpen=0;
 
-static pthread_t thread = -1;                          // thread id (linux)
+static pthread_t thread = (pthread_t)-1;               // thread id (linux)
 
 unsigned long dwNewChannel=0;                          // flags for faster testing, if new channel starts
 
@@ -841,7 +841,7 @@ void RemoveTimer(void)
   {
    int i=0;
    while(!bThreadEnded && i<2000) {usleep(1000L);i++;} // -> wait until thread has ended
-   if(thread!=-1) {pthread_cancel(thread);thread=-1;}  // -> cancel thread anyway
+   if(thread!=(pthread_t)-1) {pthread_cancel(thread);thread=(pthread_t)-1;}  // -> cancel thread anyway
   }
 
  bThreadEnded=0;                                       // no more spu is running

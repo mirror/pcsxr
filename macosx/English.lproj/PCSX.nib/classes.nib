@@ -7,7 +7,6 @@
                 ejectCD = id; 
                 freeze = id; 
                 fullscreen = id; 
-                memCardConfig = id; 
                 pause = id; 
                 preferences = id; 
                 reset = id; 
