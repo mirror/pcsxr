@@ -559,6 +559,28 @@ int CheckKeyDown() {
 	return 0;
 }
 
+static Sint16 InitialAxisPos[256], PrevAxisPos[256];
+
+#define NUM_AXES(js) (SDL_JoystickNumAxes(js) > 256 ? 256 : SDL_JoystickNumAxes(js))
+
+void InitAxisPos(int padnum) {
+	int i;
+	SDL_Joystick *js;
+
+	if (g.cfg.PadDef[padnum].DevNum >= 0) {
+		js = SDL_JoystickOpen(g.cfg.PadDef[padnum].DevNum);
+		SDL_JoystickEventState(SDL_IGNORE);
+	} else return;
+
+	SDL_JoystickUpdate();
+
+	for (i = 0; i < NUM_AXES(js); i++) {
+		InitialAxisPos[i] = PrevAxisPos[i] = SDL_JoystickGetAxis(js, i);
+	}
+
+	SDL_JoystickClose(js);
+}
+
 int ReadDKeyEvent(int padnum, int key) {
 	SDL_Joystick *js;
 	int i, changed = 0, t;
@@ -585,14 +607,15 @@ int ReadDKeyEvent(int padnum, int key) {
 				}
 			}
 
-			for (i = 0; i < SDL_JoystickNumAxes(js); i++) {
+			for (i = 0; i < NUM_AXES(js); i++) {
 				axis = SDL_JoystickGetAxis(js, i);
-				if (abs(axis) > 16383) {
+				if (abs(axis) > 16383 && (abs(axis - PrevAxisPos[i]) > 4096 || abs(axis - InitialAxisPos[i]) > 4096)) {
 					g.cfg.PadDef[padnum].KeyDef[key].JoyEvType = AXIS;
 					g.cfg.PadDef[padnum].KeyDef[key].J.Axis = (i + 1) * (axis > 0 ? 1 : -1);
 					changed = 1;
 					goto end;
 				}
+				PrevAxisPos[i] = axis;
 			}
 
 			for (i = 0; i < SDL_JoystickNumHats(js); i++) {
@@ -667,14 +690,15 @@ int ReadAnalogEvent(int padnum, int analognum, int analogdir) {
 				}
 			}
 
-			for (i = 0; i < SDL_JoystickNumAxes(js); i++) {
+			for (i = 0; i < NUM_AXES(js); i++) {
 				axis = SDL_JoystickGetAxis(js, i);
-				if (abs(axis) > 16383) {
+				if (abs(axis) > 16383 && (abs(axis - PrevAxisPos[i]) > 4096 || abs(axis - InitialAxisPos[i]) > 4096)) {
 					g.cfg.PadDef[padnum].AnalogDef[analognum][analogdir].JoyEvType = AXIS;
 					g.cfg.PadDef[padnum].AnalogDef[analognum][analogdir].J.Axis = (i + 1) * (axis > 0 ? 1 : -1);
 					changed = 1;
 					goto end;
 				}
+				PrevAxisPos[i] = axis;
 			}
 
 			for (i = 0; i < SDL_JoystickNumHats(js); i++) {

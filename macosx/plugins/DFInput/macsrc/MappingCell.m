@@ -48,6 +48,8 @@
 	/* delay for a little while to allow user to release the button pressed to activate the element */
 	[NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.15]];
 
+	InitAxisPos(whichPad);
+
 	/* wait for 10 seconds for user to press a key */
 	for (i = 0; i < 10; i++) {
 		[NSApp runModalSession:session];

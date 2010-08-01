@@ -516,6 +516,7 @@
 					../../../libpcsxcore,
 					../..,
 					../../../plugins/dfinput,
+					../../../plugins/dfinput,
 					../../../../plugins/dfinput,
 					./SDL,
 					./SDL/include,

@@ -1,3 +1,13 @@
+August 1, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfinput/cfg-gtk2.c: Only accept axis input if the current axis
+   position is off enough from the previous position or initial position.
+ * macosx/plugins/DFInput/macsrc/cfg.c: Likewise.
+ * macosx/plugins/DFInput/macsrc/cfg.h: Likewise.
+ * macosx/plugins/DFInput/macsrc/MappingCell.m: Likewise.
+ * macosx/plugins/DFInput/DFInput.xcodeproj/project.pbxproj: Fixed compile
+   error.
+
 July 31, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfsound/spu.c: Silenced warning on Mac OS X and FreeBSD.
