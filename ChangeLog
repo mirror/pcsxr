@@ -1,3 +1,8 @@
+August 2, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * macosx/Pcsx.xcodeproj/project.pbxproj: Added some more optimizations
+   parameters for the Deployment build.
+
 August 1, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfinput/cfg-gtk2.c: Only accept axis input if the current axis

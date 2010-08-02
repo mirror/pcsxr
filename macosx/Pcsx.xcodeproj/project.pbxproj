@@ -869,6 +869,7 @@
 			buildSettings = {
 				ARCHS = i386;
 				GCC_MODEL_TUNING = "";
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../libpcsxcore,
@@ -885,17 +886,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = i386;
+				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_UNROLL_LOOPS = YES;
-				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../libpcsxcore,
 					../macosx,
 				);
-				OTHER_CFLAGS = "-fno-frame-pointer";
+				OTHER_CFLAGS = "-fomit-frame-pointer";
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lSystemStubs",
