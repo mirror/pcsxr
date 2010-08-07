@@ -92,14 +92,16 @@ static struct CdrStat stat;
 static struct SubQ *subq;
 
 #define CDR_INT(eCycle) { \
-	psxRegs.interrupt |= 0x4; \
-	psxRegs.intCycle[2 + 1] = eCycle; \
-	psxRegs.intCycle[2] = psxRegs.cycle; }
+	psxRegs.interrupt |= (1 << PSXINT_CDR); \
+	psxRegs.intCycle[PSXINT_CDR].cycle = eCycle; \
+	psxRegs.intCycle[PSXINT_CDR].sCycle = psxRegs.cycle; \
+}
 
 #define CDREAD_INT(eCycle) { \
-	psxRegs.interrupt |= 0x40000; \
-	psxRegs.intCycle[2 + 16 + 1] = eCycle; \
-	psxRegs.intCycle[2 + 16] = psxRegs.cycle; }
+	psxRegs.interrupt |= (1 << PSXINT_CDREAD); \
+	psxRegs.intCycle[PSXINT_CDREAD].cycle = eCycle; \
+	psxRegs.intCycle[PSXINT_CDREAD].sCycle = psxRegs.cycle; \
+}
 
 #define StartReading(type, eCycle) { \
    	cdr.Reading = type; \
@@ -111,7 +113,7 @@ static struct SubQ *subq;
 #define StopReading() { \
 	if (cdr.Reading) { \
 		cdr.Reading = 0; \
-		psxRegs.interrupt &= ~0x40000; \
+		psxRegs.interrupt &= ~(1 << PSXINT_CDREAD); \
 	} \
 	cdr.StatP &= ~0x20;\
 }

@@ -145,6 +145,15 @@ typedef union {
 	PAIR p[32];
 } psxCP2Ctrl;
 
+enum {
+	PSXINT_SIO = 0,
+	PSXINT_CDR,
+	PSXINT_CDREAD,
+	PSXINT_GPUDMA,
+	PSXINT_MDECOUTDMA,
+	PSXINT_SPUDMA
+};
+
 typedef struct {
 	psxGPRRegs GPR;		/* General Purpose Registers */
 	psxCP0Regs CP0;		/* Coprocessor0 Registers */
@@ -154,7 +163,7 @@ typedef struct {
     u32 code;			/* The instruction */
 	u32 cycle;
 	u32 interrupt;
-	u32 intCycle[32];
+	struct { u32 sCycle, cycle; } intCycle[32];
 } psxRegisters;
 
 extern psxRegisters psxRegs;

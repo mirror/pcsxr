@@ -30,21 +30,21 @@ extern "C" {
 #include "psxmem.h"
 
 #define GPUDMA_INT(eCycle) { \
-	psxRegs.interrupt |= 0x01000000; \
-	psxRegs.intCycle[3 + 24 + 1] = eCycle; \
-	psxRegs.intCycle[3 + 24] = psxRegs.cycle; \
+	psxRegs.interrupt |= (1 << PSXINT_GPUDMA); \
+	psxRegs.intCycle[PSXINT_GPUDMA].cycle = eCycle; \
+	psxRegs.intCycle[PSXINT_GPUDMA].sCycle = psxRegs.cycle; \
 }
 
 #define SPUDMA_INT(eCycle) { \
-    psxRegs.interrupt |= 0x04000000; \
-    psxRegs.intCycle[1 + 24 + 1] = eCycle; \
-    psxRegs.intCycle[1 + 24] = psxRegs.cycle; \
+	psxRegs.interrupt |= (1 << PSXINT_SPUDMA); \
+	psxRegs.intCycle[PSXINT_SPUDMA].cycle = eCycle; \
+	psxRegs.intCycle[PSXINT_SPUDMA].sCycle = psxRegs.cycle; \
 }
 
 #define MDECOUTDMA_INT(eCycle) { \
-	psxRegs.interrupt |= 0x02000000; \
-	psxRegs.intCycle[5 + 24 + 1] = eCycle; \
-	psxRegs.intCycle[5 + 24] = psxRegs.cycle; \
+	psxRegs.interrupt |= (1 << PSXINT_MDECOUTDMA); \
+	psxRegs.intCycle[PSXINT_MDECOUTDMA].cycle = eCycle; \
+	psxRegs.intCycle[PSXINT_MDECOUTDMA].sCycle = psxRegs.cycle; \
 }
 
 void psxDma2(u32 madr, u32 bcr, u32 chcr);

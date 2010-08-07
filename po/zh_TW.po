@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-07-10 14:04+0800\n"
-"PO-Revision-Date: 2010-07-10 14:06+0700\n"
+"PO-Revision-Date: 2010-08-07 22:16+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -3087,8 +3087,8 @@ msgid ""
 "Digital Pad\n"
 "Analog Pad"
 msgstr ""
-"數字手把\n"
-"模擬手把"
+"普通手把\n"
+"類比手把"
 
 #: ../plugins/dfinput/dfinput.glade2:149
 #: ../plugins/dfinput/dfinput.glade2:346
@@ -3187,3 +3187,4 @@ msgstr "離線遊戲"
 #: ../plugins/bladesio1/sio1.c:29
 msgid "Sio1 Driver"
 msgstr "Sio1 驅動程式"
+
