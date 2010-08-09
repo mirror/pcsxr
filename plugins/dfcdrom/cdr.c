@@ -32,9 +32,10 @@ int initial_time = 0;
 pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
-CacheData *cdcache;
-unsigned char *cdbuffer;
-int cacheaddr;
+volatile CacheData *cdcache;
+volatile int cacheaddr;
+
+volatile unsigned char *cdbuffer;
 
 crdata cr;
 
@@ -85,7 +86,7 @@ long CDRopen(void) {
 	if (ReadMode == THREADED) {
 		cdcache = (CacheData *)malloc(CacheSize * sizeof(CacheData));
 		if (cdcache == NULL) return -1;
-		memset(cdcache, 0, CacheSize * sizeof(CacheData));
+		memset((void *)cdcache, 0, CacheSize * sizeof(CacheData));
 
 		found = 0;
 	} else {
@@ -136,7 +137,7 @@ long CDRclose(void) {
 	}
 
 	if (ReadMode == THREADED) {
-		free(cdcache);
+		free((void *)cdcache);
 	}
 
 	return 0;
@@ -190,8 +191,8 @@ long ReadNormal() {
 	return 0;
 }
 
-unsigned char* GetBNormal() {
-	return cdbuffer;
+unsigned char *GetBNormal() {
+	return (unsigned char *)cdbuffer;
 }
 
 // threaded reading (with cache)
@@ -203,16 +204,16 @@ long ReadThreaded() {
 		i = addr - cacheaddr;
 		PRINTF("found %d\n", (addr - cacheaddr));
 		cdbuffer = cdcache[i].cr.buf + 12;
-		while (btoi(cdbuffer[0]) != cr.msf.cdmsf_min0 ||
-			   btoi(cdbuffer[1]) != cr.msf.cdmsf_sec0 ||
-			   btoi(cdbuffer[2]) != cr.msf.cdmsf_frame0) {
+		while (cdcache[i].msf[0] != cr.msf.cdmsf_min0 ||
+			   cdcache[i].msf[1] != cr.msf.cdmsf_sec0 ||
+			   cdcache[i].msf[2] != cr.msf.cdmsf_frame0) {
 			if (locked == 1) {
 				if (cdcache[i].ret == 0) break;
 				return -1;
 			}
 			usleep(5000);
 		}
-		PRINTF("%x:%x:%x, %p, %p\n", cdbuffer[0], cdbuffer[1], cdbuffer[2], cdbuffer, cdcache);
+		PRINTF("%d:%d:%d, %p, %p\n", cdcache[i].msf[0], cdcache[i].msf[1], cdcache[i].msf[2], cdbuffer, cdcache);
 		found = 1;
 
 		return 0;
@@ -226,6 +227,7 @@ long ReadThreaded() {
 
 	// not found in cache
 	locked = 0;
+
 	pthread_mutex_lock(&mut);
 	pthread_cond_signal(&cond);
 	pthread_mutex_unlock(&mut);
@@ -233,20 +235,22 @@ long ReadThreaded() {
 	return 0;
 }
 
-unsigned char* GetBThreaded() {
+unsigned char *GetBThreaded() {
 	PRINTF("threadc %d\n", found);
 
-	if (found == 1) return cdbuffer;
+	if (found == 1) return (unsigned char *)cdbuffer;
+
 	cdbuffer = cdcache[0].cr.buf + 12;
-	while (btoi(cdbuffer[0]) != cr.msf.cdmsf_min0 ||
-		   btoi(cdbuffer[1]) != cr.msf.cdmsf_sec0 ||
-		   btoi(cdbuffer[2]) != cr.msf.cdmsf_frame0) {
+
+	while (cdcache[0].msf[0] != cr.msf.cdmsf_min0 ||
+		   cdcache[0].msf[1] != cr.msf.cdmsf_sec0 ||
+		   cdcache[0].msf[2] != cr.msf.cdmsf_frame0) {
 		if (locked == 1) return NULL;
 		usleep(5000);
 	}
 	if (cdcache[0].ret == -1) return NULL;
 
-	return cdbuffer;
+	return (unsigned char *)cdbuffer;
 }
 
 void *CdrThread(void *arg) {
@@ -254,8 +258,9 @@ void *CdrThread(void *arg) {
 	int i;
 
 	for (;;) {
-		locked = 1;
 		pthread_mutex_lock(&mut);
+		locked = 1;
+
 		pthread_cond_wait(&cond, &mut);
 
 		if (stopth == 2) pthread_exit(NULL);
@@ -267,12 +272,20 @@ void *CdrThread(void *arg) {
 		PRINTF("start thc %d:%d:%d\n", curTime[0], curTime[1], curTime[2]);
 
 		for (i = 0; i < CacheSize; i++) {
-			memcpy(&cdcache[i].cr.msf, curTime, 3);
+			cdcache[i].cr.msf.cdmsf_min0 = curTime[0];
+			cdcache[i].cr.msf.cdmsf_sec0 = curTime[1];
+			cdcache[i].cr.msf.cdmsf_frame0 = curTime[2];
+
 			PRINTF("reading %d:%d:%d\n", curTime[0], curTime[1], curTime[2]);
-			cdcache[i].ret = ReadSector(&cdcache[i].cr);
+
+			cdcache[i].ret = ReadSector((crdata *)&cdcache[i].cr);
+			if (cdcache[i].ret == -1) break;
 
 			PRINTF("readed %x:%x:%x\n", cdcache[i].cr.buf[12], cdcache[i].cr.buf[13], cdcache[i].cr.buf[14]);
-			if (cdcache[i].ret == -1) break;
+
+			cdcache[i].msf[0] = curTime[0];
+			cdcache[i].msf[1] = curTime[1];
+			cdcache[i].msf[2] = curTime[2];
 
 			curTime[2]++;
 			if (curTime[2] == 75) {

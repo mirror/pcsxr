@@ -175,6 +175,7 @@ typedef union {
 } crdata;
 
 typedef struct {
+	unsigned char msf[3];
 	crdata cr;
 	int ret;
 } CacheData;

@@ -182,6 +182,7 @@ long GetTE(unsigned char track, unsigned char *m, unsigned char *s, unsigned cha
 long ReadSector(crdata *cr) {
 	int lba;
 	dk_cd_read_t r;
+	char buf[CD_FRAMESIZE_RAW];
 
 	if (cdHandle < 0) return -1;
 
@@ -193,12 +194,13 @@ long ReadSector(crdata *cr) {
 	r.sectorArea = 0xF8;
 	r.sectorType = kCDSectorTypeUnknown;
 	r.bufferLength = CD_FRAMESIZE_RAW;
-	r.buffer = cr->buf;
+	r.buffer = buf; // ??? Why using cr->buf directly does not work in threaded mode?
 
 	if (ioctl(cdHandle, DKIOCCDREAD, &r) != kIOReturnSuccess) {
 		return -1;
 	}
 
+	memcpy(cr->buf, buf, CD_FRAMESIZE_RAW);
 	return 0;
 }
 
