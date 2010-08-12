@@ -333,12 +333,6 @@ void OnStates_LoadOther() {
 	}
 } 
 
-void OnStates_Save1() { States_Save(0); } 
-void OnStates_Save2() { States_Save(1); } 
-void OnStates_Save3() { States_Save(2); } 
-void OnStates_Save4() { States_Save(3); } 
-void OnStates_Save5() { States_Save(4); } 
-
 void OnStates_SaveOther() {
 	OPENFILENAME ofn;
 	char szFileName[MAXPATHLEN];
@@ -511,6 +505,10 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 				case ID_FILE_STATES_LOAD_SLOT3: States_Load(2); return TRUE;
 				case ID_FILE_STATES_LOAD_SLOT4: States_Load(3); return TRUE;
 				case ID_FILE_STATES_LOAD_SLOT5: States_Load(4); return TRUE;
+				case ID_FILE_STATES_LOAD_SLOT6: States_Load(5); return TRUE;
+				case ID_FILE_STATES_LOAD_SLOT7: States_Load(6); return TRUE;
+				case ID_FILE_STATES_LOAD_SLOT8: States_Load(7); return TRUE;
+				case ID_FILE_STATES_LOAD_SLOT9: States_Load(8); return TRUE;
 				case ID_FILE_STATES_LOAD_OTHER: OnStates_LoadOther(); return TRUE;
 
 				case ID_FILE_STATES_SAVE_SLOT1: States_Save(0); return TRUE;
@@ -518,6 +516,10 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 				case ID_FILE_STATES_SAVE_SLOT3: States_Save(2); return TRUE;
 				case ID_FILE_STATES_SAVE_SLOT4: States_Save(3); return TRUE;
 				case ID_FILE_STATES_SAVE_SLOT5: States_Save(4); return TRUE;
+				case ID_FILE_STATES_SAVE_SLOT6: States_Save(5); return TRUE;
+				case ID_FILE_STATES_SAVE_SLOT7: States_Save(6); return TRUE;
+				case ID_FILE_STATES_SAVE_SLOT8: States_Save(7); return TRUE;
+				case ID_FILE_STATES_SAVE_SLOT9: States_Save(8); return TRUE;
 				case ID_FILE_STATES_SAVE_OTHER: OnStates_SaveOther(); return TRUE;
 
 				case ID_EMULATOR_RUN:
@@ -1527,12 +1529,20 @@ void CreateMainMenu() {
 	ADDSUBMENUS(1, 3, _("&Save"));
 	ADDSUBMENUS(1, 2, _("&Load"));
 	ADDMENUITEM(2, _("&Other..."), ID_FILE_STATES_LOAD_OTHER);
+	ADDMENUITEM(2, _("Slot &9"), ID_FILE_STATES_LOAD_SLOT9);
+	ADDMENUITEM(2, _("Slot &8"), ID_FILE_STATES_LOAD_SLOT8);
+	ADDMENUITEM(2, _("Slot &7"), ID_FILE_STATES_LOAD_SLOT7);
+	ADDMENUITEM(2, _("Slot &6"), ID_FILE_STATES_LOAD_SLOT6);
 	ADDMENUITEM(2, _("Slot &5"), ID_FILE_STATES_LOAD_SLOT5);
 	ADDMENUITEM(2, _("Slot &4"), ID_FILE_STATES_LOAD_SLOT4);
 	ADDMENUITEM(2, _("Slot &3"), ID_FILE_STATES_LOAD_SLOT3);
 	ADDMENUITEM(2, _("Slot &2"), ID_FILE_STATES_LOAD_SLOT2);
 	ADDMENUITEM(2, _("Slot &1"), ID_FILE_STATES_LOAD_SLOT1);
 	ADDMENUITEM(3, _("&Other..."), ID_FILE_STATES_SAVE_OTHER);
+	ADDMENUITEM(3, _("Slot &9"), ID_FILE_STATES_SAVE_SLOT9);
+	ADDMENUITEM(3, _("Slot &8"), ID_FILE_STATES_SAVE_SLOT8);
+	ADDMENUITEM(3, _("Slot &7"), ID_FILE_STATES_SAVE_SLOT7);
+	ADDMENUITEM(3, _("Slot &6"), ID_FILE_STATES_SAVE_SLOT6);
 	ADDMENUITEM(3, _("Slot &5"), ID_FILE_STATES_SAVE_SLOT5);
 	ADDMENUITEM(3, _("Slot &4"), ID_FILE_STATES_SAVE_SLOT4);
 	ADDMENUITEM(3, _("Slot &3"), ID_FILE_STATES_SAVE_SLOT3);
@@ -1603,12 +1613,20 @@ void CreateMainMenu() {
 		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT3, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT4, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT5, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT6, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT7, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT8, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT9, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_OTHER, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT1, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT2, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT3, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT4, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT5, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT6, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT7, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT8, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT9, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_OTHER, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CHEATSEARCH, MF_BYCOMMAND | MF_GRAYED);
 	}

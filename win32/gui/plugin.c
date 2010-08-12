@@ -94,7 +94,7 @@ void PADhandleKey(int key) {
 			break;
 
 		case VK_F2:
-			if (StatesC < 4) StatesC++;
+			if (StatesC < 8) StatesC++;
 			else StatesC = 0;
 			GPU_freeze(2, (GPUFreeze_t *)&StatesC);
 			if (ShowPic) { ShowPic = 0; gpuShowPic(); }

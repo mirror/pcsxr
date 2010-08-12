@@ -12,6 +12,9 @@ August 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * gui/Gtk2Gui.c: Likewise.
  * gui/LnxMain.c: Likewise.
  * gui/Plugin.c: Likewise.
+ * win32/gui/plugin.c: Likewise.
+ * win32/gui/WndMain.c: Likewise.
+ * win32/resource.h: Likewise.
  * po/pcsx.pot, po/*.po: Updated.
 
 August 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
