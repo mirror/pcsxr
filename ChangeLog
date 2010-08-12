@@ -1,3 +1,19 @@
+August 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfsound/cfg.h: Readded Windows support.
+ * plugins/dfsound/dsoundoss.h: Likewise.
+ * plugins/dfsound/externals.h: Likewise.
+ * plugins/dfsound/freeze.c: Likewise.
+ * plugins/dfsound/spu.c: Likewise.
+ * plugins/dfsound/stdafx.h: Likewise.
+ * plugins/dfsound/xa.c: Likewise.
+ * win32/plugins/dfsound: Added.
+ * data/pcsx.glade2: Increased number of savestate slots.
+ * gui/Gtk2Gui.c: Likewise.
+ * gui/LnxMain.c: Likewise.
+ * gui/Plugin.c: Likewise.
+ * po/pcsx.pot, po/*.po: Updated.
+
 August 8, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfcdrom/cdr.c: Fixed thread deadlock in some cases.

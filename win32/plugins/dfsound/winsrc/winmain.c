@@ -1,10 +1,11 @@
 /***************************************************************************
-                            cfg.h  -  description
+                         spuPeopsSound.c  -  description
                              -------------------
     begin                : Wed May 15 2002
     copyright            : (C) 2002 by Pete Bernert
     email                : BlackDove@addcom.de
  ***************************************************************************/
+
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -15,11 +16,19 @@
  *                                                                         *
  ***************************************************************************/
 
-void ReadConfig(void);
+// winmain.c : Defines the entry point for the DLL application.
+//
 
-#ifdef _WINDOWS
-BOOL CALLBACK AboutDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam);
-BOOL CALLBACK DSoundDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam);
-#else
-void StartCfgTool(char * pCmdLine);
-#endif
+#include "stdafx.h"
+
+HINSTANCE hInst = NULL;
+
+BOOL APIENTRY DllMain( HANDLE hModule, 
+                       DWORD  ul_reason_for_call, 
+                       LPVOID lpReserved
+					 )
+{
+ hInst=(HINSTANCE)hModule;
+ return TRUE;
+}
+

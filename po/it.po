@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-10 14:04+0800\n"
+"POT-Creation-Date: 2010-08-12 00:15+0800\n"
 "PO-Revision-Date: 2010-03-15 16:00+0200\n"
 "Last-Translator: Giovanni Scafora <giovanni@archlinux.org>\n"
 "Language-Team: Arch Linux Italian Team <giovanni@archlinux.org>\n"
@@ -110,7 +110,7 @@ msgstr "Codice del cheat non valido!"
 msgid "Add New Cheat"
 msgstr "Aggiungi un nuovo cheat"
 
-#: ../win32/gui/CheatDlg.c:166 ../data/pcsx.glade2:2534
+#: ../win32/gui/CheatDlg.c:166 ../data/pcsx.glade2:2599
 msgid "Edit Cheat Codes"
 msgstr "Modifica i codici dei cheat"
 
@@ -222,7 +222,7 @@ msgstr "%.8X    Attuale: %u (%.8X), Precedente: %u (%.8X)"
 msgid "Founded Addresses: %d"
 msgstr "Indirizzi trovati: %d"
 
-#: ../win32/gui/CheatDlg.c:504 ../data/pcsx.glade2:2930
+#: ../win32/gui/CheatDlg.c:504 ../data/pcsx.glade2:2995
 msgid "Freeze"
 msgstr "Blocca"
 
@@ -231,7 +231,7 @@ msgid "Address:"
 msgstr "Indirizzo:"
 
 #: ../win32/gui/CheatDlg.c:506 ../win32/gui/CheatDlg.c:597
-#: ../win32/gui/CheatDlg.c:682 ../gui/Cheat.c:647 ../data/pcsx.glade2:2773
+#: ../win32/gui/CheatDlg.c:682 ../gui/Cheat.c:647 ../data/pcsx.glade2:2838
 msgid "Value:"
 msgstr "Valore:"
 
@@ -240,27 +240,27 @@ msgstr "Valore:"
 msgid "Freeze %.8X"
 msgstr "Blocca %.8x"
 
-#: ../win32/gui/CheatDlg.c:595 ../data/pcsx.glade2:2966
+#: ../win32/gui/CheatDlg.c:595 ../data/pcsx.glade2:3031
 msgid "Modify"
 msgstr "Modifica"
 
-#: ../win32/gui/CheatDlg.c:678 ../gui/Cheat.c:1129 ../data/pcsx.glade2:2703
+#: ../win32/gui/CheatDlg.c:678 ../gui/Cheat.c:1129 ../data/pcsx.glade2:2768
 msgid "Cheat Search"
 msgstr "Cerca cheat"
 
-#: ../win32/gui/CheatDlg.c:680 ../data/pcsx.glade2:2751
+#: ../win32/gui/CheatDlg.c:680 ../data/pcsx.glade2:2816
 msgid "Search For:"
 msgstr "Cerca per:"
 
-#: ../win32/gui/CheatDlg.c:681 ../data/pcsx.glade2:2761
+#: ../win32/gui/CheatDlg.c:681 ../data/pcsx.glade2:2826
 msgid "Data Type:"
 msgstr "Tipo di dato:"
 
-#: ../win32/gui/CheatDlg.c:683 ../data/pcsx.glade2:2785
+#: ../win32/gui/CheatDlg.c:683 ../data/pcsx.glade2:2850
 msgid "Data Base:"
 msgstr "Base di dato:"
 
-#: ../win32/gui/CheatDlg.c:684 ../data/pcsx.glade2:2845
+#: ../win32/gui/CheatDlg.c:684 ../data/pcsx.glade2:2910
 msgid "To:"
 msgstr "A:"
 
@@ -633,13 +633,13 @@ msgid "*PCSX*: Error Saving State %s"
 msgstr ""
 "*PCSX*: si è verificato un errore durante il salvataggio dello stato %s"
 
-#: ../win32/gui/WndMain.c:429 ../win32/gui/WndMain.c:478 ../gui/Gtk2Gui.c:485
-#: ../gui/Gtk2Gui.c:610
+#: ../win32/gui/WndMain.c:429 ../win32/gui/WndMain.c:478 ../gui/Gtk2Gui.c:509
+#: ../gui/Gtk2Gui.c:634
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "Il CD inserito non sembra essere un valido CD della Playstation"
 
-#: ../win32/gui/WndMain.c:435 ../win32/gui/WndMain.c:484 ../gui/Gtk2Gui.c:493
-#: ../gui/Gtk2Gui.c:618
+#: ../win32/gui/WndMain.c:435 ../win32/gui/WndMain.c:484 ../gui/Gtk2Gui.c:517
+#: ../gui/Gtk2Gui.c:642
 msgid "Could not load CD-ROM!"
 msgstr "Impossibile caricare il CD-ROM!"
 
@@ -762,7 +762,7 @@ msgstr "Filmati in bianco e nero"
 msgid "Disable Cd audio"
 msgstr "Disabilita cd audio"
 
-#: ../win32/gui/WndMain.c:1217 ../data/pcsx.glade2:1595
+#: ../win32/gui/WndMain.c:1217 ../data/pcsx.glade2:1660
 msgid "Autodetect"
 msgstr "Rileva automaticamente"
 
@@ -770,11 +770,11 @@ msgstr "Rileva automaticamente"
 msgid "Enable Interpreter Cpu"
 msgstr "Abilita l'interprete della cpu"
 
-#: ../win32/gui/WndMain.c:1219 ../data/pcsx.glade2:1451
+#: ../win32/gui/WndMain.c:1219 ../data/pcsx.glade2:1516
 msgid "Enable Console Output"
 msgstr "Abilita l'output sulla console"
 
-#: ../win32/gui/WndMain.c:1220 ../data/pcsx.glade2:1401
+#: ../win32/gui/WndMain.c:1220 ../data/pcsx.glade2:1466
 msgid "Enable Debugger"
 msgstr "Abilita il debugger"
 
@@ -782,11 +782,11 @@ msgstr "Abilita il debugger"
 msgid "Spu Irq Always Enabled"
 msgstr "Spu irq sempre abilitato"
 
-#: ../win32/gui/WndMain.c:1222 ../data/pcsx.glade2:1538
+#: ../win32/gui/WndMain.c:1222 ../data/pcsx.glade2:1603
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 
-#: ../win32/gui/WndMain.c:1223 ../data/pcsx.glade2:1553
+#: ../win32/gui/WndMain.c:1223 ../data/pcsx.glade2:1618
 msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku Battle Fix"
 
@@ -826,7 +826,7 @@ msgid "DataDeck Memory Card (*.ddf)"
 msgstr "Memory card DataDeck (*.ddf)"
 
 #: ../win32/gui/WndMain.c:1360 ../win32/gui/WndMain.c:1441 ../gui/Cheat.c:321
-#: ../gui/Gtk2Gui.c:422 ../gui/Gtk2Gui.c:561
+#: ../gui/Gtk2Gui.c:446 ../gui/Gtk2Gui.c:585
 msgid "All Files"
 msgstr "Tutti i file"
 
@@ -1076,7 +1076,7 @@ msgstr "Nuovo valore:"
 msgid "Search Results"
 msgstr "Risultati della ricerca"
 
-#: ../gui/ConfDlg.c:112 ../data/pcsx.glade2:778
+#: ../gui/ConfDlg.c:112 ../data/pcsx.glade2:843
 msgid "Configure PCSX"
 msgstr "Configura PCSX"
 
@@ -1104,7 +1104,7 @@ msgstr "Impossibile aprire la cartella: '%s'\n"
 msgid "Simulate PSX BIOS"
 msgstr ""
 
-#: ../gui/DebugMemory.c:103 ../data/pcsx.glade2:3178
+#: ../gui/DebugMemory.c:103 ../data/pcsx.glade2:3243
 msgid "Memory Dump"
 msgstr ""
 
@@ -1131,7 +1131,7 @@ msgstr "Si è verificato un errore durante il salvataggio dello stato %s!"
 msgid "Memory Patch"
 msgstr "Memory card 1"
 
-#: ../gui/DebugMemory.c:188 ../data/pcsx.glade2:3199
+#: ../gui/DebugMemory.c:188 ../data/pcsx.glade2:3264
 #, fuzzy
 msgid "Address (Hexadecimal):"
 msgstr "Esadecimale"
@@ -1164,71 +1164,71 @@ msgstr "Pronto"
 msgid "Emulation Paused."
 msgstr "L'emulazione è stata messa in pausa."
 
-#: ../gui/Gtk2Gui.c:405
+#: ../gui/Gtk2Gui.c:429
 msgid "Select PSX EXE File"
 msgstr "Seleziona un file EXE della PSX"
 
-#: ../gui/Gtk2Gui.c:418
+#: ../gui/Gtk2Gui.c:442
 msgid "PlayStation Executable Files"
 msgstr "File eseguibili della PlayStation"
 
-#: ../gui/Gtk2Gui.c:454
+#: ../gui/Gtk2Gui.c:478
 msgid "Not a valid PSX file"
 msgstr "Non è un file valido della PSX"
 
-#: ../gui/Gtk2Gui.c:454
+#: ../gui/Gtk2Gui.c:478
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "Il file non sembra essere un eseguibile valido della Playstation"
 
-#: ../gui/Gtk2Gui.c:485 ../gui/Gtk2Gui.c:610
+#: ../gui/Gtk2Gui.c:509 ../gui/Gtk2Gui.c:634
 msgid "CD ROM failed"
 msgstr "Si è verificato un problema con il CD ROM"
 
-#: ../gui/Gtk2Gui.c:493 ../gui/Gtk2Gui.c:618
+#: ../gui/Gtk2Gui.c:517 ../gui/Gtk2Gui.c:642
 msgid "The CD-ROM could not be loaded"
 msgstr "Impossibile caricare il CD-ROM"
 
-#: ../gui/Gtk2Gui.c:507
+#: ../gui/Gtk2Gui.c:531
 msgid "Could not run BIOS"
 msgstr "Impossibile avviare il BIOS"
 
-#: ../gui/Gtk2Gui.c:507
+#: ../gui/Gtk2Gui.c:531
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr "L'avvio del BIOS non è supportato con il BIOS HLE interno."
 
-#: ../gui/Gtk2Gui.c:536
+#: ../gui/Gtk2Gui.c:560
 msgid "Open PSX Disc Image File"
 msgstr "Apri il file immagine del disco PSX"
 
-#: ../gui/Gtk2Gui.c:556
+#: ../gui/Gtk2Gui.c:580
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr "File immagine PSX (*.bin, *.img, *.mdf, *.iso)"
 
-#: ../gui/Gtk2Gui.c:771
+#: ../gui/Gtk2Gui.c:795
 #, c-format
 msgid "Loaded state %s."
 msgstr "È stato caricato lo stato %s."
 
-#: ../gui/Gtk2Gui.c:774
+#: ../gui/Gtk2Gui.c:798
 #, c-format
 msgid "Error loading state %s!"
 msgstr "Si è verificato un errore durante il caricamento dello stato %s!"
 
-#: ../gui/Gtk2Gui.c:785
+#: ../gui/Gtk2Gui.c:809
 #, c-format
 msgid "Saved state %s."
 msgstr "È stato salvato lo stato %s."
 
-#: ../gui/Gtk2Gui.c:787
+#: ../gui/Gtk2Gui.c:811
 #, c-format
 msgid "Error saving state %s!"
 msgstr "Si è verificato un errore durante il salvataggio dello stato %s!"
 
-#: ../gui/Gtk2Gui.c:822 ../gui/Gtk2Gui.c:850
+#: ../gui/Gtk2Gui.c:846 ../gui/Gtk2Gui.c:874
 msgid "Select State File"
 msgstr "Seleziona il file dello stato"
 
-#: ../gui/Gtk2Gui.c:893
+#: ../gui/Gtk2Gui.c:917
 msgid "Notice"
 msgstr "Avviso"
 
@@ -1341,77 +1341,77 @@ msgstr ""
 msgid "Memory Card Manager"
 msgstr "Gestore della memory card"
 
-#: ../gui/Plugin.c:211 ../data/pcsx.glade2:1487
+#: ../gui/Plugin.c:235 ../data/pcsx.glade2:1552
 #, c-format
 msgid "SIO IRQ Always Enabled"
 msgstr "SIO IRQ sempre abilitato"
 
-#: ../gui/Plugin.c:212
+#: ../gui/Plugin.c:236
 #, c-format
 msgid "SIO IRQ Not Always Enabled"
 msgstr "SIO IRQ non sempre abilitato"
 
-#: ../gui/Plugin.c:218
+#: ../gui/Plugin.c:242
 #, c-format
 msgid "Black & White Mdecs Only Enabled"
 msgstr "Abilita solo i filmati in bianco e nero"
 
-#: ../gui/Plugin.c:219
+#: ../gui/Plugin.c:243
 #, c-format
 msgid "Black & White Mdecs Only Disabled"
 msgstr "Disabilita solo i filmati in bianco e nero"
 
-#: ../gui/Plugin.c:225
+#: ../gui/Plugin.c:249
 #, c-format
 msgid "XA Enabled"
 msgstr "XA abilitato"
 
-#: ../gui/Plugin.c:226
+#: ../gui/Plugin.c:250
 #, c-format
 msgid "XA Disabled"
 msgstr "XA disabilitato"
 
-#: ../gui/Plugin.c:288
+#: ../gui/Plugin.c:312
 msgid "Error opening CD-ROM plugin!"
 msgstr "Si è verificato un errore durante l'apertura del plugin del CD-ROM!"
 
-#: ../gui/Plugin.c:290
+#: ../gui/Plugin.c:314
 msgid "Error opening SPU plugin!"
 msgstr "Si è verificato un errore durante l'apertura del plugin della SPU!"
 
-#: ../gui/Plugin.c:293
+#: ../gui/Plugin.c:317
 msgid "Error opening GPU plugin!"
 msgstr "Si è verificato un errore durante l'apertura del plugin della GPU!"
 
-#: ../gui/Plugin.c:295
+#: ../gui/Plugin.c:319
 msgid "Error opening Controller 1 plugin!"
 msgstr ""
 "Si è verificato un errore durante l'apertura del plugin del controller 1!"
 
-#: ../gui/Plugin.c:297
+#: ../gui/Plugin.c:321
 msgid "Error opening Controller 2 plugin!"
 msgstr ""
 "Si è verificato un errore durante l'apertura del plugin del controller 2!"
 
-#: ../gui/Plugin.c:377
+#: ../gui/Plugin.c:401
 msgid "Error closing CD-ROM plugin!"
 msgstr "Si è verificato un errore durante la chiusura del plugin del CD-ROM!"
 
-#: ../gui/Plugin.c:379
+#: ../gui/Plugin.c:403
 msgid "Error closing SPU plugin!"
 msgstr "Si è verificato un errore durante la chiusura del plugin della SPU!"
 
-#: ../gui/Plugin.c:381
+#: ../gui/Plugin.c:405
 msgid "Error closing Controller 1 Plugin!"
 msgstr ""
 "Si è verificato un errore durante la chiusura del plugin del controller 1!"
 
-#: ../gui/Plugin.c:383
+#: ../gui/Plugin.c:407
 msgid "Error closing Controller 2 plugin!"
 msgstr ""
 "Si è verificato un errore durante la chiusura del plugin del controller 2!"
 
-#: ../gui/Plugin.c:385
+#: ../gui/Plugin.c:409
 msgid "Error closing GPU plugin!"
 msgstr "Si è verificato un errore durante la chiusura del plugin della GPU!"
 
@@ -1602,28 +1602,28 @@ msgstr "Impossibile aprire il BIOS:\"%s\". Sto abilitando il bios HLE!\n"
 msgid "Running PCSX Version %s (%s).\n"
 msgstr "Avvio in corso di PCSX versione %s (%s).\n"
 
-#: ../libpcsxcore/sio.c:345
+#: ../libpcsxcore/sio.c:347
 msgid "Connection closed!\n"
 msgstr "Connessione chiusa!\n"
 
-#: ../libpcsxcore/sio.c:371
+#: ../libpcsxcore/sio.c:373
 #, c-format
 msgid "No memory card value was specified - creating a default card %s\n"
 msgstr ""
 "Nessun valore specificato per la memory card, sto creando una card di "
 "default %s\n"
 
-#: ../libpcsxcore/sio.c:375
+#: ../libpcsxcore/sio.c:377
 #, c-format
 msgid "The memory card %s doesn't exist - creating it\n"
 msgstr "La memory card %s non esiste, la sto creando\n"
 
-#: ../libpcsxcore/sio.c:391
+#: ../libpcsxcore/sio.c:393
 #, c-format
 msgid "Memory card %s failed to load!\n"
 msgstr "Impossibile caricare la memory card %s!\n"
 
-#: ../libpcsxcore/sio.c:395
+#: ../libpcsxcore/sio.c:397
 #, c-format
 msgid "Loading memory card %s\n"
 msgstr "Sto caricando la memory card %s\n"
@@ -1674,24 +1674,6 @@ msgstr "Retinatura:"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:82
 msgid ""
-"320x240\n"
-"640x480\n"
-"800x600\n"
-"1024x768\n"
-"1152x864\n"
-"1280x1024\n"
-"1600x1200"
-msgstr ""
-"320x240\n"
-"640x480\n"
-"800x600\n"
-"1024x768\n"
-"1152x864\n"
-"1280x1024\n"
-"1600x1200"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:101
-msgid ""
 "0: None\n"
 "1: 2xSai\n"
 "2: 2xSuperSai\n"
@@ -1710,7 +1692,7 @@ msgstr ""
 "6: HQ2X\n"
 "7: HQ3X"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:123
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:104
 msgid ""
 "0: Off (fastest)\n"
 "1: Game dependant\n"
@@ -1720,155 +1702,173 @@ msgstr ""
 "1: Dipendente dal gioco\n"
 "2: Sempre"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:146
-msgid "Maintain 4:3 Aspect Ratio"
-msgstr "Mantiene la proporzione dell'aspetto a 4:3"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:125
+msgid ""
+"320x240\n"
+"640x480\n"
+"800x600\n"
+"1024x768\n"
+"1152x864\n"
+"1280x1024\n"
+"1600x1200"
+msgstr ""
+"320x240\n"
+"640x480\n"
+"800x600\n"
+"1024x768\n"
+"1152x864\n"
+"1280x1024\n"
+"1600x1200"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:161
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:139
 #: ../plugins/peopsxgl/gpucfg/interface.c:322
 msgid "Fullscreen"
 msgstr "Schermo intero"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:165
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:144
 msgid "Toggle windowed/fullscreen mode."
 msgstr "Commuta modo finestra/schermo intero."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:187
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:170
+msgid "Maintain 4:3 Aspect Ratio"
+msgstr "Mantiene la proporzione dell'aspetto a 4:3"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:195
 msgid "<b>Screen</b>"
 msgstr "<b>Schermo</b>"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:216
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:224
 msgid "Show FPS"
 msgstr "Visualizza gli FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:220
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:228
 msgid "Toggle whether the FPS will be shown."
 msgstr "Commuta quando saranno visualizzati gli FPS."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:232
-msgid "Autodetect FPS limit"
-msgstr "Rileva automaticamente il limite degli FPS"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:236
-msgid "Enable this if games display too quickly."
-msgstr "Abilita se i giochi sono visualizzati troppo rapidamente."
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:249
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:240
 msgid "Enable frame skipping"
 msgstr "Abilita il salto dei frame"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:253
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:244
 msgid "Skip frames when rendering."
 msgstr "Salta i frame durante il rendering."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:270
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:261
 msgid "Set FPS"
 msgstr "Imposta gli FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:287
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:265
+msgid "Enable this if games display too quickly."
+msgstr "Abilita se i giochi sono visualizzati troppo rapidamente."
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:279
 msgid "200.0"
 msgstr "200.0"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:310
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:290
+msgid "Autodetect FPS limit"
+msgstr "Rileva automaticamente il limite degli FPS"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:318
 msgid "<b>Framerate</b>"
 msgstr "<b>Framerate</b>"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:339
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:347
 #: ../plugins/peopsxgl/gpucfg/interface.c:568
 msgid "Use game fixes"
 msgstr "Usa le difficoltà del gioco"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:366
-msgid "better g-colors, worse textures"
-msgstr "Miglior g-color, strutture poco definite"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:381
-msgid "Needed by Dark Forces"
-msgstr "Richiesto da Dark Forces"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:394
-msgid "Draw quads with triangles"
-msgstr "Disegna quadrati con trinagoli"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:410
-msgid "Repeated flat tex triangles"
-msgstr "Triangoli della struttura piana ripetuti"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:426
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:372
 msgid "Disable CPU Saving"
 msgstr "Disabilita il salvataggio della CPU"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:442
-msgid "Odd/even bit hack"
-msgstr "Hack del bit dispari/pari"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:458
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:376
 msgid "For precise framerate"
 msgstr "Per framerate preciso"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:473
-msgid "Better FPS limit in some"
-msgstr "Miglior limite degli FPS in qualche"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:389
+msgid "Odd/even bit hack"
+msgstr "Hack del bit dispari/pari"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:486
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:393
+msgid "Chrono Cross"
+msgstr "Chrono Cross"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:404
 msgid "PC FPS calculation"
 msgstr "Calcolo degli FPS del PC"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:504
-msgid "Pandemonium 2"
-msgstr "Pandemonium 2"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:408
+msgid "Better FPS limit in some"
+msgstr "Miglior limite degli FPS in qualche"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:517
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:421
+msgid "Expand screen width"
+msgstr "Espandi la larghezza dello schermo"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:425
+msgid "Capcom fighting games"
+msgstr "Giochi di combattimento della Capcom"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:438
+msgid "Ignore brightness color"
+msgstr "Ignora il colore della luminosità"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:442
+msgid "Black screens in Lunar"
+msgstr "Schermi neri in Lunar"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:455
+msgid "Disable coordinate check"
+msgstr "Disabilita il controllo della coordinata"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:459
+msgid "Compatibility mode"
+msgstr "Modo di compatibilità"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:472
 msgid "Lazy screen update"
 msgstr "Aggiorna schermo pigro"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:535
-msgid "Skip every second frame"
-msgstr "Salta ogni secondo frame"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:477
+msgid "Pandemonium 2"
+msgstr "Pandemonium 2"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:548
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:490
 #: ../plugins/peopsxgl/gpucfg/interface.c:640
 msgid "Old frame skipping"
 msgstr "Vecchio salto del frame"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:564
-msgid "Expand screen width"
-msgstr "Espandi la larghezza dello schermo"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:495
+msgid "Skip every second frame"
+msgstr "Salta ogni secondo frame"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:580
-msgid "Ignore brightness color"
-msgstr "Ignora il colore della luminosità"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:510
+msgid "Repeated flat tex triangles"
+msgstr "Triangoli della struttura piana ripetuti"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:596
-msgid "Disable coordinate check"
-msgstr "Disabilita il controllo della coordinata"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:515
+msgid "Needed by Dark Forces"
+msgstr "Richiesto da Dark Forces"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:614
-msgid "Chrono Cross"
-msgstr "Chrono Cross"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:530
+msgid "Draw quads with triangles"
+msgstr "Disegna quadrati con trinagoli"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:627
-msgid "Capcom fighting games"
-msgstr "Giochi di combattimento della Capcom"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:535
+msgid "better g-colors, worse textures"
+msgstr "Miglior g-color, strutture poco definite"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:642
-msgid "Black screens in Lunar"
-msgstr "Schermi neri in Lunar"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:657
-msgid "Compatibility mode"
-msgstr "Modo di compatibilità"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:670
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:550
 #, fuzzy
 msgid "Fake 'gpu busy' states"
 msgstr "Simula lo stato di 'gpu occupata'"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:688
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:555
 msgid "Toggle busy flags after drawing"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:713
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:585
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:268
 msgid "<b>Compatibility</b>"
 msgstr "<b>Compatibilità</b>"
@@ -1877,271 +1877,291 @@ msgstr "<b>Compatibilità</b>"
 msgid "PCSX"
 msgstr "PCSX"
 
-#: ../data/pcsx.glade2:21
+#: ../data/pcsx.glade2:22
 msgid "_File"
 msgstr "_File"
 
-#: ../data/pcsx.glade2:27
+#: ../data/pcsx.glade2:28
 msgid "Run _CD"
 msgstr "Avvia _CD"
 
-#: ../data/pcsx.glade2:45
+#: ../data/pcsx.glade2:46
 msgid "Run _ISO..."
 msgstr "Avvia _ISO..."
 
-#: ../data/pcsx.glade2:62
+#: ../data/pcsx.glade2:63
 msgid "Run _BIOS"
 msgstr "Avvia _BIOS"
 
-#: ../data/pcsx.glade2:79
+#: ../data/pcsx.glade2:80
 msgid "Run _EXE..."
 msgstr "Avvia _EXE..."
 
-#: ../data/pcsx.glade2:101
+#: ../data/pcsx.glade2:102
 msgid "E_xit"
 msgstr "E_sci"
 
-#: ../data/pcsx.glade2:123
+#: ../data/pcsx.glade2:124
 msgid "_Emulator"
 msgstr "_Emulatore"
 
-#: ../data/pcsx.glade2:129
+#: ../data/pcsx.glade2:130
 msgid "_Continue"
 msgstr "_Continua"
 
-#: ../data/pcsx.glade2:146
+#: ../data/pcsx.glade2:147
 msgid "_Reset"
 msgstr "_Resetta"
 
-#: ../data/pcsx.glade2:168
+#: ../data/pcsx.glade2:169
 msgid "S_witch ISO..."
 msgstr "C_ambia ISO..."
 
-#: ../data/pcsx.glade2:190
+#: ../data/pcsx.glade2:191
 msgid "_Save State"
 msgstr "_Salva stato"
 
-#: ../data/pcsx.glade2:199 ../data/pcsx.glade2:280
+#: ../data/pcsx.glade2:200 ../data/pcsx.glade2:313
 msgid "Slot _1"
 msgstr "Slot _1"
 
-#: ../data/pcsx.glade2:208 ../data/pcsx.glade2:289
+#: ../data/pcsx.glade2:209 ../data/pcsx.glade2:322
 msgid "Slot _2"
 msgstr "Slot _2"
 
-#: ../data/pcsx.glade2:217 ../data/pcsx.glade2:298
+#: ../data/pcsx.glade2:218 ../data/pcsx.glade2:331
 msgid "Slot _3"
 msgstr "Slot _3"
 
-#: ../data/pcsx.glade2:226 ../data/pcsx.glade2:307
+#: ../data/pcsx.glade2:227 ../data/pcsx.glade2:340
 msgid "Slot _4"
 msgstr "Slot _4"
 
-#: ../data/pcsx.glade2:235 ../data/pcsx.glade2:316
+#: ../data/pcsx.glade2:236 ../data/pcsx.glade2:349
 msgid "Slot _5"
 msgstr "Slot _5"
 
-#: ../data/pcsx.glade2:243 ../data/pcsx.glade2:324
+#: ../data/pcsx.glade2:245 ../data/pcsx.glade2:358
+#, fuzzy
+msgid "Slot _6"
+msgstr "Slot _1"
+
+#: ../data/pcsx.glade2:253 ../data/pcsx.glade2:366
+#, fuzzy
+msgid "Slot _7"
+msgstr "Slot _1"
+
+#: ../data/pcsx.glade2:261 ../data/pcsx.glade2:374
+#, fuzzy
+msgid "Slot _8"
+msgstr "Slot _1"
+
+#: ../data/pcsx.glade2:269 ../data/pcsx.glade2:382
+#, fuzzy
+msgid "Slot _9"
+msgstr "Slot _1"
+
+#: ../data/pcsx.glade2:276 ../data/pcsx.glade2:389
 msgid "_Other..."
 msgstr "_Altri..."
 
-#: ../data/pcsx.glade2:271
+#: ../data/pcsx.glade2:304
 msgid "_Load State"
 msgstr "_Carica stato"
 
-#: ../data/pcsx.glade2:357
+#: ../data/pcsx.glade2:422
 msgid "_Configuration"
 msgstr "_Configurazione"
 
-#: ../data/pcsx.glade2:363
+#: ../data/pcsx.glade2:428
 msgid "_Plugins & BIOS..."
 msgstr "_Plugin e BIOS..."
 
-#: ../data/pcsx.glade2:385
+#: ../data/pcsx.glade2:450
 msgid "_Graphics..."
 msgstr "_Video..."
 
-#: ../data/pcsx.glade2:400
+#: ../data/pcsx.glade2:465
 msgid "_Sound..."
 msgstr "_Audio..."
 
-#: ../data/pcsx.glade2:415
+#: ../data/pcsx.glade2:480
 msgid "CD-_ROM..."
 msgstr "CD-_ROM..."
 
-#: ../data/pcsx.glade2:430
+#: ../data/pcsx.glade2:495
 msgid "C_ontrollers..."
 msgstr "C_ontroller..."
 
-#: ../data/pcsx.glade2:450
+#: ../data/pcsx.glade2:515
 msgid "_CPU..."
 msgstr "_CPU..."
 
-#: ../data/pcsx.glade2:466
+#: ../data/pcsx.glade2:531
 msgid "_Memory Cards..."
 msgstr "_Memory card..."
 
-#: ../data/pcsx.glade2:483
+#: ../data/pcsx.glade2:548
 msgid "_Netplay..."
 msgstr "_Netplay..."
 
-#: ../data/pcsx.glade2:504
+#: ../data/pcsx.glade2:569
 msgid "Chea_t"
 msgstr "Chea_t"
 
-#: ../data/pcsx.glade2:513
+#: ../data/pcsx.glade2:578
 msgid "_Browse..."
 msgstr "_Visualizza..."
 
-#: ../data/pcsx.glade2:528
+#: ../data/pcsx.glade2:593
 msgid "_Search..."
 msgstr "_Cerca..."
 
-#: ../data/pcsx.glade2:554
+#: ../data/pcsx.glade2:619
 msgid "Memory _Dump"
 msgstr ""
 
-#: ../data/pcsx.glade2:574
+#: ../data/pcsx.glade2:639
 msgid "_Help"
 msgstr "_Aiuto"
 
-#: ../data/pcsx.glade2:580
+#: ../data/pcsx.glade2:645
 msgid "_About PCSX..."
 msgstr "_Informazioni su PCSX..."
 
-#: ../data/pcsx.glade2:613 ../data/pcsx.glade2:614
+#: ../data/pcsx.glade2:678 ../data/pcsx.glade2:679
 msgid "Run CD"
 msgstr "Avvia il CD"
 
-#: ../data/pcsx.glade2:626
+#: ../data/pcsx.glade2:691
 msgid "Run ISO Image"
 msgstr "Avvia l'immagine ISO"
 
-#: ../data/pcsx.glade2:627
+#: ../data/pcsx.glade2:692
 msgid "Run ISO..."
 msgstr "Avvia ISO..."
 
-#: ../data/pcsx.glade2:648
+#: ../data/pcsx.glade2:713
 msgid "Continue Emulation"
 msgstr "Continua l'emulazione"
 
-#: ../data/pcsx.glade2:649
+#: ../data/pcsx.glade2:714
 msgid "Continue..."
 msgstr "Continua..."
 
-#: ../data/pcsx.glade2:661
+#: ../data/pcsx.glade2:726
 msgid "Switch ISO Image"
 msgstr "Cambia l'immagine ISO"
 
-#: ../data/pcsx.glade2:662
+#: ../data/pcsx.glade2:727
 msgid "Switch ISO..."
 msgstr "Cambia ISO..."
 
-#: ../data/pcsx.glade2:683 ../data/pcsx.glade2:1810
+#: ../data/pcsx.glade2:748 ../data/pcsx.glade2:1875
 msgid "Configure Memory Cards"
 msgstr "Configura la memory card"
 
-#: ../data/pcsx.glade2:684
+#: ../data/pcsx.glade2:749
 msgid "Memcards..."
 msgstr "Memory card..."
 
-#: ../data/pcsx.glade2:696
+#: ../data/pcsx.glade2:761
 msgid "Configure Graphics"
 msgstr "Configura il video"
 
-#: ../data/pcsx.glade2:697
+#: ../data/pcsx.glade2:762
 msgid "Graphics..."
 msgstr "Video..."
 
-#: ../data/pcsx.glade2:709 ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:8
+#: ../data/pcsx.glade2:774 ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:8
 msgid "Configure Sound"
 msgstr "Configura l'audio"
 
-#: ../data/pcsx.glade2:710
+#: ../data/pcsx.glade2:775
 msgid "Sound..."
 msgstr "Audio..."
 
-#: ../data/pcsx.glade2:722
+#: ../data/pcsx.glade2:787
 msgid "Configure CD-ROM"
 msgstr "Configura il CD-ROM"
 
-#: ../data/pcsx.glade2:723
+#: ../data/pcsx.glade2:788
 msgid "CD-ROM..."
 msgstr "CD-ROM..."
 
-#: ../data/pcsx.glade2:735
+#: ../data/pcsx.glade2:800
 msgid "Configure Controllers"
 msgstr "Configura i controller"
 
-#: ../data/pcsx.glade2:736
+#: ../data/pcsx.glade2:801
 msgid "Controllers..."
 msgstr "Controller..."
 
-#: ../data/pcsx.glade2:879
+#: ../data/pcsx.glade2:944
 msgid "Select Folder to Search"
 msgstr "Seleziona una cartella per la ricerca"
 
-#: ../data/pcsx.glade2:895
+#: ../data/pcsx.glade2:960
 msgid "Search in:"
 msgstr "Cerca in:"
 
-#: ../data/pcsx.glade2:1168
+#: ../data/pcsx.glade2:1233
 msgid "Graphics:"
 msgstr "Video:"
 
-#: ../data/pcsx.glade2:1181
+#: ../data/pcsx.glade2:1246
 msgid "Sound:"
 msgstr "Audio:"
 
-#: ../data/pcsx.glade2:1196
+#: ../data/pcsx.glade2:1261
 msgid "Controller 1:   "
 msgstr "Controller 1:   "
 
-#: ../data/pcsx.glade2:1211
+#: ../data/pcsx.glade2:1276
 msgid "Controller 2:"
 msgstr "Controller 2:"
 
-#: ../data/pcsx.glade2:1226
+#: ../data/pcsx.glade2:1291
 msgid "CD-ROM:"
 msgstr "CD-ROM:"
 
-#: ../data/pcsx.glade2:1264
+#: ../data/pcsx.glade2:1329
 msgid "<b>Plugins</b>"
 msgstr "<b>Plugin</b>"
 
-#: ../data/pcsx.glade2:1325
+#: ../data/pcsx.glade2:1390
 msgid "<b>BIOS</b>"
 msgstr "<b>BIOS</b>"
 
-#: ../data/pcsx.glade2:1375
+#: ../data/pcsx.glade2:1440
 msgid "Configure CPU"
 msgstr "Configura la CPU"
 
-#: ../data/pcsx.glade2:1419
+#: ../data/pcsx.glade2:1484
 msgid "SPU IRQ Always Enabled"
 msgstr "SPU IRQ sempre abilitato"
 
-#: ../data/pcsx.glade2:1435
+#: ../data/pcsx.glade2:1500
 msgid "Black & White Movies"
 msgstr "Filmati in bianco e nero"
 
-#: ../data/pcsx.glade2:1469
+#: ../data/pcsx.glade2:1534
 msgid "Enable Interpreter CPU"
 msgstr "Abilita l'interprete della CPU"
 
-#: ../data/pcsx.glade2:1503
+#: ../data/pcsx.glade2:1568
 msgid "Disable CD Audio"
 msgstr "Disabilita CD audio"
 
-#: ../data/pcsx.glade2:1519
+#: ../data/pcsx.glade2:1584
 msgid "Disable XA Decoding"
 msgstr "Disabilita il decoding XA"
 
-#: ../data/pcsx.glade2:1571
+#: ../data/pcsx.glade2:1636
 msgid "<b>Options</b>"
 msgstr "<b>Opzioni</b>"
 
-#: ../data/pcsx.glade2:1612
+#: ../data/pcsx.glade2:1677
 msgid ""
 "NTSC\n"
 "PAL"
@@ -2149,47 +2169,47 @@ msgstr ""
 "NTSC\n"
 "PAL"
 
-#: ../data/pcsx.glade2:1626
+#: ../data/pcsx.glade2:1691
 msgid "<b>System Type</b>"
 msgstr "<b>Regione del sistema</b>"
 
-#: ../data/pcsx.glade2:1674
+#: ../data/pcsx.glade2:1739
 msgid "Configure NetPlay"
 msgstr "Configura il NetPlay"
 
-#: ../data/pcsx.glade2:1760
+#: ../data/pcsx.glade2:1825
 msgid "<b>NetPlay</b>"
 msgstr "<b>NetPlay</b>"
 
-#: ../data/pcsx.glade2:1886 ../data/pcsx.glade2:2283
+#: ../data/pcsx.glade2:1951 ../data/pcsx.glade2:2348
 msgid "New"
 msgstr "Nuovo"
 
-#: ../data/pcsx.glade2:1936 ../data/pcsx.glade2:2333
+#: ../data/pcsx.glade2:2001 ../data/pcsx.glade2:2398
 msgid "Format"
 msgstr "Formatta"
 
-#: ../data/pcsx.glade2:1986 ../data/pcsx.glade2:2383
+#: ../data/pcsx.glade2:2051 ../data/pcsx.glade2:2448
 msgid "Un/Delete"
 msgstr "Non/Elimina"
 
-#: ../data/pcsx.glade2:2079
+#: ../data/pcsx.glade2:2144
 msgid "<b>Memory Card 1</b>"
 msgstr "<b>Memory card 1</b>"
 
-#: ../data/pcsx.glade2:2139 ../data/pcsx.glade2:2189 ../data/pcsx.glade2:3002
+#: ../data/pcsx.glade2:2204 ../data/pcsx.glade2:2254 ../data/pcsx.glade2:3067
 msgid "Copy"
 msgstr "Copia"
 
-#: ../data/pcsx.glade2:2476
+#: ../data/pcsx.glade2:2541
 msgid "<b>Memory Card 2</b>"
 msgstr "<b>Memory card 2</b>"
 
-#: ../data/pcsx.glade2:2572
+#: ../data/pcsx.glade2:2637
 msgid "<b>Cheat Codes</b>"
 msgstr "<b>Codici cheat</b>"
 
-#: ../data/pcsx.glade2:2736
+#: ../data/pcsx.glade2:2801
 msgid ""
 "8-bit\n"
 "16-bit\n"
@@ -2199,7 +2219,7 @@ msgstr ""
 "16-bit\n"
 "32-bit"
 
-#: ../data/pcsx.glade2:2799
+#: ../data/pcsx.glade2:2864
 msgid ""
 "Equal Value\n"
 "Not Equal Value\n"
@@ -2221,7 +2241,7 @@ msgstr ""
 "Differente\n"
 "Nessun cambio"
 
-#: ../data/pcsx.glade2:2831
+#: ../data/pcsx.glade2:2896
 msgid ""
 "Decimal\n"
 "Hexadecimal"
@@ -2229,27 +2249,27 @@ msgstr ""
 "Decimale\n"
 "Esadecimale"
 
-#: ../data/pcsx.glade2:3035
+#: ../data/pcsx.glade2:3100
 msgid "label_resultsfound"
 msgstr "etichetta_risultatitrovati"
 
-#: ../data/pcsx.glade2:3070
+#: ../data/pcsx.glade2:3135
 msgid "Search"
 msgstr "Cerca"
 
-#: ../data/pcsx.glade2:3106
+#: ../data/pcsx.glade2:3171
 msgid "Restart"
 msgstr "Riavvia"
 
-#: ../data/pcsx.glade2:3135
+#: ../data/pcsx.glade2:3200
 msgid "<b>Cheat Search</b>"
 msgstr "<b>Cerca cheat</b>"
 
-#: ../data/pcsx.glade2:3291
+#: ../data/pcsx.glade2:3356
 msgid "Raw Dump..."
 msgstr ""
 
-#: ../data/pcsx.glade2:3326
+#: ../data/pcsx.glade2:3391
 msgid "Patch Memory..."
 msgstr ""
 
@@ -2374,11 +2394,11 @@ msgstr "Audio del singolo canale"
 msgid "Play only one channel for a performance boost."
 msgstr "Suona solo un canale, per una prestazione migliore."
 
-#: ../plugins/dfcdrom/cdr-libcdio.c:29 ../plugins/dfcdrom/cdr-linux.c:29
+#: ../plugins/dfcdrom/cdr.c:25
 msgid "CD-ROM Drive Reader"
 msgstr "Lettore del dispositivo CD-ROM"
 
-#: ../plugins/dfcdrom/cdr-null.c:26
+#: ../plugins/dfcdrom/cdr.c:27
 msgid "CDR NULL Plugin"
 msgstr "Plugin NULL CDR"
 
@@ -2977,19 +2997,19 @@ msgstr "Tastiera:"
 msgid "(Not Set)"
 msgstr "(Nessuna impostazione)"
 
-#: ../plugins/dfinput/cfg-gtk2.c:539
+#: ../plugins/dfinput/cfg-gtk2.c:559
 msgid "None"
 msgstr "Nessuno"
 
-#: ../plugins/dfinput/cfg-gtk2.c:581
+#: ../plugins/dfinput/cfg-gtk2.c:601
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr "Configurazione input del gamepad/tastiera"
 
-#: ../plugins/dfinput/cfg-gtk2.c:587 ../plugins/dfinput/cfg-gtk2.c:607
+#: ../plugins/dfinput/cfg-gtk2.c:607 ../plugins/dfinput/cfg-gtk2.c:627
 msgid "Key"
 msgstr "Tasto"
 
-#: ../plugins/dfinput/cfg-gtk2.c:593 ../plugins/dfinput/cfg-gtk2.c:613
+#: ../plugins/dfinput/cfg-gtk2.c:613 ../plugins/dfinput/cfg-gtk2.c:633
 msgid "Button"
 msgstr "Pulsante"
 

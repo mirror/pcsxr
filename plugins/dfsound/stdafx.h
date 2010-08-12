@@ -15,6 +15,24 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifdef _WINDOWS
+
+#define WIN32_LEAN_AND_MEAN
+#define STRICT
+#include <windows.h>
+#include <windowsx.h>
+#include "mmsystem.h"
+#include <process.h>
+#include <stdlib.h>
+
+#ifndef INLINE
+#define INLINE __inline
+#endif
+
+#include "resource.h"
+
+#else
+
 #ifndef _MACOSX
 #include "config.h"
 #endif
@@ -41,6 +59,8 @@
 
 #ifndef INLINE
 #define INLINE inline
+#endif
+
 #endif
 
 #include "psemuxa.h"

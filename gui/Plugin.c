@@ -31,7 +31,7 @@
 
 #include "nopic.h"
 
-#define MAX_SLOTS 5	/* ADB TODO Same as Gtk2Gui.c */
+#define MAX_SLOTS 9	/* ADB TODO Same as Gtk2Gui.c */
 
 void OnFile_Exit();
 
@@ -172,6 +172,30 @@ void PADhandleKey(int key) {
 				return;
 			if (modalt) KeyStateLoad(4);
 			if (modctrl) KeyStateSave(4);
+			break;
+		case XK_6:
+			if (modalt && modctrl)
+				return;
+			if (modalt) KeyStateLoad(5);
+			if (modctrl) KeyStateSave(5);
+			break;
+		case XK_7:
+			if (modalt && modctrl)
+				return;
+			if (modalt) KeyStateLoad(6);
+			if (modctrl) KeyStateSave(6);
+			break;
+		case XK_8:
+			if (modalt && modctrl)
+				return;
+			if (modalt) KeyStateLoad(7);
+			if (modctrl) KeyStateSave(7);
+			break;
+		case XK_9:
+			if (modalt && modctrl)
+				return;
+			if (modalt) KeyStateLoad(8);
+			if (modctrl) KeyStateSave(8);
 			break;
 
 		case XK_F1:

@@ -1,10 +1,11 @@
 /***************************************************************************
-                            cfg.h  -  description
+                           debug.h  -  description
                              -------------------
     begin                : Wed May 15 2002
     copyright            : (C) 2002 by Pete Bernert
     email                : BlackDove@addcom.de
  ***************************************************************************/
+
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -15,11 +16,14 @@
  *                                                                         *
  ***************************************************************************/
 
-void ReadConfig(void);
+//*************************************************************************//
+// History of changes:
+//
+// 2002/05/15 - Pete
+// - generic cleanup for the Peops release
+//
+//*************************************************************************//
 
 #ifdef _WINDOWS
-BOOL CALLBACK AboutDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam);
-BOOL CALLBACK DSoundDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam);
-#else
-void StartCfgTool(char * pCmdLine);
+BOOL CALLBACK DebugDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam);
 #endif

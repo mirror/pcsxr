@@ -118,6 +118,13 @@ long CALLBACK SPUfreeze(uint32_t ulFreezeMode,SPUFreeze_t * pF)
                                                        
  if(ulFreezeMode!=0) return 0;                         // bad mode? bye
 
+#ifdef _WINDOWS
+ if(iDebugMode && IsWindow(hWDebug))                   // clean debug mute infos
+  SendMessage(hWDebug,WM_MUTE,0,0);
+ if(IsBadReadPtr(pF,sizeof(SPUFreeze_t)))              // check bad emu stuff
+  return 0;
+#endif
+
  RemoveTimer();                                        // we stop processing while doing the save!
 
  memcpy(spuMem,pF->cSPURam,0x80000);                   // get ram

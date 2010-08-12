@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-10 14:04+0800\n"
-"PO-Revision-Date: 2010-07-13 14:36+0800\n"
-"Last-Translator: Wei Mingzhi <whistler_wmz@users.sf.net>\n"
+"POT-Creation-Date: 2010-08-12 00:15+0800\n"
+"PO-Revision-Date: 2010-08-12 00:15+0700\n"
+"Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -128,7 +128,7 @@ msgid "Add New Cheat"
 msgstr "添加新作弊码"
 
 #: ../win32/gui/CheatDlg.c:166
-#: ../data/pcsx.glade2:2534
+#: ../data/pcsx.glade2:2599
 msgid "Edit Cheat Codes"
 msgstr "编辑作弊码"
 
@@ -249,7 +249,7 @@ msgid "Founded Addresses: %d"
 msgstr "找到地址个数: %d"
 
 #: ../win32/gui/CheatDlg.c:504
-#: ../data/pcsx.glade2:2930
+#: ../data/pcsx.glade2:2995
 msgid "Freeze"
 msgstr "固定"
 
@@ -262,7 +262,7 @@ msgstr "地址:"
 #: ../win32/gui/CheatDlg.c:597
 #: ../win32/gui/CheatDlg.c:682
 #: ../gui/Cheat.c:647
-#: ../data/pcsx.glade2:2773
+#: ../data/pcsx.glade2:2838
 msgid "Value:"
 msgstr "值:"
 
@@ -272,33 +272,33 @@ msgid "Freeze %.8X"
 msgstr "固定 %.8X"
 
 #: ../win32/gui/CheatDlg.c:595
-#: ../data/pcsx.glade2:2966
+#: ../data/pcsx.glade2:3031
 msgid "Modify"
 msgstr "修改"
 
 #: ../win32/gui/CheatDlg.c:678
 #: ../gui/Cheat.c:1129
-#: ../data/pcsx.glade2:2703
+#: ../data/pcsx.glade2:2768
 msgid "Cheat Search"
 msgstr "查找作弊码"
 
 #: ../win32/gui/CheatDlg.c:680
-#: ../data/pcsx.glade2:2751
+#: ../data/pcsx.glade2:2816
 msgid "Search For:"
 msgstr "查找:"
 
 #: ../win32/gui/CheatDlg.c:681
-#: ../data/pcsx.glade2:2761
+#: ../data/pcsx.glade2:2826
 msgid "Data Type:"
 msgstr "数据类型:"
 
 #: ../win32/gui/CheatDlg.c:683
-#: ../data/pcsx.glade2:2785
+#: ../data/pcsx.glade2:2850
 msgid "Data Base:"
 msgstr "数据基:"
 
 #: ../win32/gui/CheatDlg.c:684
-#: ../data/pcsx.glade2:2845
+#: ../data/pcsx.glade2:2910
 msgid "To:"
 msgstr "到:"
 
@@ -685,15 +685,15 @@ msgstr "*PCSX*: Error Saving State %s"
 
 #: ../win32/gui/WndMain.c:429
 #: ../win32/gui/WndMain.c:478
-#: ../gui/Gtk2Gui.c:485
-#: ../gui/Gtk2Gui.c:610
+#: ../gui/Gtk2Gui.c:509
+#: ../gui/Gtk2Gui.c:634
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "此光盘不是一张合法的 PlayStation 光盘。"
 
 #: ../win32/gui/WndMain.c:435
 #: ../win32/gui/WndMain.c:484
-#: ../gui/Gtk2Gui.c:493
-#: ../gui/Gtk2Gui.c:618
+#: ../gui/Gtk2Gui.c:517
+#: ../gui/Gtk2Gui.c:642
 msgid "Could not load CD-ROM!"
 msgstr "无法加载光盘!"
 
@@ -831,7 +831,7 @@ msgid "Disable Cd audio"
 msgstr "禁用 CD 音频"
 
 #: ../win32/gui/WndMain.c:1217
-#: ../data/pcsx.glade2:1595
+#: ../data/pcsx.glade2:1660
 msgid "Autodetect"
 msgstr "自动检测"
 
@@ -840,12 +840,12 @@ msgid "Enable Interpreter Cpu"
 msgstr "启用解释执行 CPU"
 
 #: ../win32/gui/WndMain.c:1219
-#: ../data/pcsx.glade2:1451
+#: ../data/pcsx.glade2:1516
 msgid "Enable Console Output"
 msgstr "启用控制台输出"
 
 #: ../win32/gui/WndMain.c:1220
-#: ../data/pcsx.glade2:1401
+#: ../data/pcsx.glade2:1466
 msgid "Enable Debugger"
 msgstr "启用调试器"
 
@@ -854,12 +854,12 @@ msgid "Spu Irq Always Enabled"
 msgstr "SPU IRQ 总是启用"
 
 #: ../win32/gui/WndMain.c:1222
-#: ../data/pcsx.glade2:1538
+#: ../data/pcsx.glade2:1603
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr "Parasite Eve 2, Vandal Hearts 1/2 修正"
 
 #: ../win32/gui/WndMain.c:1223
-#: ../data/pcsx.glade2:1553
+#: ../data/pcsx.glade2:1618
 msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku Battle 修正"
 
@@ -900,8 +900,8 @@ msgstr "DataDeck 记忆卡 (*.ddl)"
 #: ../win32/gui/WndMain.c:1360
 #: ../win32/gui/WndMain.c:1441
 #: ../gui/Cheat.c:321
-#: ../gui/Gtk2Gui.c:422
-#: ../gui/Gtk2Gui.c:561
+#: ../gui/Gtk2Gui.c:446
+#: ../gui/Gtk2Gui.c:585
 msgid "All Files"
 msgstr "所有文件"
 
@@ -1146,7 +1146,7 @@ msgid "Search Results"
 msgstr "查找结果"
 
 #: ../gui/ConfDlg.c:112
-#: ../data/pcsx.glade2:778
+#: ../data/pcsx.glade2:843
 msgid "Configure PCSX"
 msgstr "配置 PCSX"
 
@@ -1183,7 +1183,7 @@ msgid "Simulate PSX BIOS"
 msgstr "模拟 PS BIOS"
 
 #: ../gui/DebugMemory.c:103
-#: ../data/pcsx.glade2:3178
+#: ../data/pcsx.glade2:3243
 msgid "Memory Dump"
 msgstr "内存转储"
 
@@ -1209,7 +1209,7 @@ msgid "Memory Patch"
 msgstr "内存修改"
 
 #: ../gui/DebugMemory.c:188
-#: ../data/pcsx.glade2:3199
+#: ../data/pcsx.glade2:3264
 msgid "Address (Hexadecimal):"
 msgstr "地址 (十六进制):"
 
@@ -1237,74 +1237,74 @@ msgstr "就绪"
 msgid "Emulation Paused."
 msgstr "模拟器已暂停。"
 
-#: ../gui/Gtk2Gui.c:405
+#: ../gui/Gtk2Gui.c:429
 msgid "Select PSX EXE File"
 msgstr "选择 PS EXE 文件"
 
-#: ../gui/Gtk2Gui.c:418
+#: ../gui/Gtk2Gui.c:442
 msgid "PlayStation Executable Files"
 msgstr "PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:454
+#: ../gui/Gtk2Gui.c:478
 msgid "Not a valid PSX file"
 msgstr "不是一个合法的 PSX 文件"
 
-#: ../gui/Gtk2Gui.c:454
+#: ../gui/Gtk2Gui.c:478
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "此文件不是一个合法的 PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:485
-#: ../gui/Gtk2Gui.c:610
+#: ../gui/Gtk2Gui.c:509
+#: ../gui/Gtk2Gui.c:634
 msgid "CD ROM failed"
 msgstr "CD-ROM 失败"
 
-#: ../gui/Gtk2Gui.c:493
-#: ../gui/Gtk2Gui.c:618
+#: ../gui/Gtk2Gui.c:517
+#: ../gui/Gtk2Gui.c:642
 msgid "The CD-ROM could not be loaded"
 msgstr "无法加载 CD-ROM"
 
-#: ../gui/Gtk2Gui.c:507
+#: ../gui/Gtk2Gui.c:531
 msgid "Could not run BIOS"
 msgstr "无法运行 BIOS"
 
-#: ../gui/Gtk2Gui.c:507
+#: ../gui/Gtk2Gui.c:531
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr "内部 HLE BIOS 不支持直接运行。"
 
-#: ../gui/Gtk2Gui.c:536
+#: ../gui/Gtk2Gui.c:560
 msgid "Open PSX Disc Image File"
 msgstr "打开 PS 光盘镜像文件"
 
-#: ../gui/Gtk2Gui.c:556
+#: ../gui/Gtk2Gui.c:580
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr "PS 镜像文件 (*.bin, *.img, *.mdf, *.iso)"
 
-#: ../gui/Gtk2Gui.c:771
+#: ../gui/Gtk2Gui.c:795
 #, c-format
 msgid "Loaded state %s."
 msgstr "已读取存档 %s。"
 
-#: ../gui/Gtk2Gui.c:774
+#: ../gui/Gtk2Gui.c:798
 #, c-format
 msgid "Error loading state %s!"
 msgstr "读取存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:785
+#: ../gui/Gtk2Gui.c:809
 #, c-format
 msgid "Saved state %s."
 msgstr "已保存存档 %s"
 
-#: ../gui/Gtk2Gui.c:787
+#: ../gui/Gtk2Gui.c:811
 #, c-format
 msgid "Error saving state %s!"
 msgstr "保存存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:822
-#: ../gui/Gtk2Gui.c:850
+#: ../gui/Gtk2Gui.c:846
+#: ../gui/Gtk2Gui.c:874
 msgid "Select State File"
 msgstr "选择存档文件"
 
-#: ../gui/Gtk2Gui.c:893
+#: ../gui/Gtk2Gui.c:917
 msgid "Notice"
 msgstr "警告"
 
@@ -1404,74 +1404,74 @@ msgstr "目标记忆卡上无空余位置。请先删除一个存档。"
 msgid "Memory Card Manager"
 msgstr "记忆卡管理器"
 
-#: ../gui/Plugin.c:211
-#: ../data/pcsx.glade2:1487
+#: ../gui/Plugin.c:235
+#: ../data/pcsx.glade2:1552
 #, c-format
 msgid "SIO IRQ Always Enabled"
 msgstr "SIO IRQ 总是启用"
 
-#: ../gui/Plugin.c:212
+#: ../gui/Plugin.c:236
 #, c-format
 msgid "SIO IRQ Not Always Enabled"
 msgstr "SIO IRQ 不总是启用"
 
-#: ../gui/Plugin.c:218
+#: ../gui/Plugin.c:242
 #, c-format
 msgid "Black & White Mdecs Only Enabled"
 msgstr "Black & White Mdecs Only 启用"
 
-#: ../gui/Plugin.c:219
+#: ../gui/Plugin.c:243
 #, c-format
 msgid "Black & White Mdecs Only Disabled"
 msgstr "Black & White Mdecs Only 禁用"
 
-#: ../gui/Plugin.c:225
+#: ../gui/Plugin.c:249
 #, c-format
 msgid "XA Enabled"
 msgstr "XA 已启用"
 
-#: ../gui/Plugin.c:226
+#: ../gui/Plugin.c:250
 #, c-format
 msgid "XA Disabled"
 msgstr "XA 已禁用"
 
-#: ../gui/Plugin.c:288
+#: ../gui/Plugin.c:312
 msgid "Error opening CD-ROM plugin!"
 msgstr "无法打开CD-ROM 插件!"
 
-#: ../gui/Plugin.c:290
+#: ../gui/Plugin.c:314
 msgid "Error opening SPU plugin!"
 msgstr "无法打开 SPU 插件!"
 
-#: ../gui/Plugin.c:293
+#: ../gui/Plugin.c:317
 msgid "Error opening GPU plugin!"
 msgstr "无法打开 GPU 插件!"
 
-#: ../gui/Plugin.c:295
+#: ../gui/Plugin.c:319
 msgid "Error opening Controller 1 plugin!"
 msgstr "无法打开 \"控制器 1\" 插件!"
 
-#: ../gui/Plugin.c:297
+#: ../gui/Plugin.c:321
 msgid "Error opening Controller 2 plugin!"
 msgstr "无法打开 \"控制器 2\" 插件!"
 
-#: ../gui/Plugin.c:377
+#: ../gui/Plugin.c:401
 msgid "Error closing CD-ROM plugin!"
 msgstr "无法关闭 CD-ROM 插件!"
 
-#: ../gui/Plugin.c:379
+#: ../gui/Plugin.c:403
 msgid "Error closing SPU plugin!"
 msgstr "无法关闭 SPU 插件!"
 
-#: ../gui/Plugin.c:381
+#: ../gui/Plugin.c:405
 msgid "Error closing Controller 1 Plugin!"
 msgstr "无法关闭 \"控制器 1\" 插件!"
 
-#: ../gui/Plugin.c:383
+#: ../gui/Plugin.c:407
 msgid "Error closing Controller 2 plugin!"
 msgstr "无法关闭 \"控制器 2\" 插件!"
 
-#: ../gui/Plugin.c:385
+#: ../gui/Plugin.c:409
 msgid "Error closing GPU plugin!"
 msgstr "无法关闭 GPU 插件!"
 
@@ -1652,26 +1652,26 @@ msgstr "无法打开 BIOS: \"%s\"。使用内部 HLE Bios。\n"
 msgid "Running PCSX Version %s (%s).\n"
 msgstr "正在运行 PCSX 版本 %s (%s)。\n"
 
-#: ../libpcsxcore/sio.c:345
+#: ../libpcsxcore/sio.c:347
 msgid "Connection closed!\n"
 msgstr "连接被关闭!\n"
 
-#: ../libpcsxcore/sio.c:371
+#: ../libpcsxcore/sio.c:373
 #, c-format
 msgid "No memory card value was specified - creating a default card %s\n"
 msgstr "未指定记忆卡 - 创建一个默认的记忆卡 %s\n"
 
-#: ../libpcsxcore/sio.c:375
+#: ../libpcsxcore/sio.c:377
 #, c-format
 msgid "The memory card %s doesn't exist - creating it\n"
 msgstr "记忆卡 %s 不存在 - 正在创建\n"
 
-#: ../libpcsxcore/sio.c:391
+#: ../libpcsxcore/sio.c:393
 #, c-format
 msgid "Memory card %s failed to load!\n"
 msgstr "记忆卡 %s 读取失败!\n"
 
-#: ../libpcsxcore/sio.c:395
+#: ../libpcsxcore/sio.c:397
 #, c-format
 msgid "Loading memory card %s\n"
 msgstr "加载记忆卡 %s\n"
@@ -1722,24 +1722,6 @@ msgstr "抖动:"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:82
 msgid ""
-"320x240\n"
-"640x480\n"
-"800x600\n"
-"1024x768\n"
-"1152x864\n"
-"1280x1024\n"
-"1600x1200"
-msgstr ""
-"320x240\n"
-"640x480\n"
-"800x600\n"
-"1024x768\n"
-"1152x864\n"
-"1280x1024\n"
-"1600x1200"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:101
-msgid ""
 "0: None\n"
 "1: 2xSai\n"
 "2: 2xSuperSai\n"
@@ -1758,7 +1740,7 @@ msgstr ""
 "6: HQ2X\n"
 "7: HQ3X"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:123
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:104
 msgid ""
 "0: Off (fastest)\n"
 "1: Game dependant\n"
@@ -1768,154 +1750,172 @@ msgstr ""
 "1: 取决于游戏\n"
 "2: 总是"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:146
-msgid "Maintain 4:3 Aspect Ratio"
-msgstr "维持 4:3 宽高比"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:125
+msgid ""
+"320x240\n"
+"640x480\n"
+"800x600\n"
+"1024x768\n"
+"1152x864\n"
+"1280x1024\n"
+"1600x1200"
+msgstr ""
+"320x240\n"
+"640x480\n"
+"800x600\n"
+"1024x768\n"
+"1152x864\n"
+"1280x1024\n"
+"1600x1200"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:161
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:139
 #: ../plugins/peopsxgl/gpucfg/interface.c:322
 msgid "Fullscreen"
 msgstr "全屏"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:165
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:144
 msgid "Toggle windowed/fullscreen mode."
 msgstr "切换窗口/全屏模式"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:187
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:170
+msgid "Maintain 4:3 Aspect Ratio"
+msgstr "维持 4:3 宽高比"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:195
 msgid "<b>Screen</b>"
 msgstr "<b>屏幕</b>"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:216
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:224
 msgid "Show FPS"
 msgstr "显示 FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:220
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:228
 msgid "Toggle whether the FPS will be shown."
 msgstr "切换 FPS (每秒帧数) 是否将被显示。"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:232
-msgid "Autodetect FPS limit"
-msgstr "自动检测 FPS 界限"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:236
-msgid "Enable this if games display too quickly."
-msgstr "如果游戏运行得过快，请启用此项。"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:249
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:240
 msgid "Enable frame skipping"
 msgstr "启用跳帧"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:253
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:244
 msgid "Skip frames when rendering."
 msgstr "渲染时跳帧。"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:270
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:261
 msgid "Set FPS"
 msgstr "设置 FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:287
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:265
+msgid "Enable this if games display too quickly."
+msgstr "如果游戏运行得过快，请启用此项。"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:279
 msgid "200.0"
 msgstr "200.0"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:310
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:290
+msgid "Autodetect FPS limit"
+msgstr "自动检测 FPS 界限"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:318
 msgid "<b>Framerate</b>"
 msgstr "<b>帧率</b>"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:339
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:347
 #: ../plugins/peopsxgl/gpucfg/interface.c:568
 msgid "Use game fixes"
 msgstr "使用特定游戏修正"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:366
-msgid "better g-colors, worse textures"
-msgstr "较好的 g-colors, 较差的纹理"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:381
-msgid "Needed by Dark Forces"
-msgstr "Dark Forces 运行需要"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:394
-msgid "Draw quads with triangles"
-msgstr "使用三角形绘制 quad"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:410
-msgid "Repeated flat tex triangles"
-msgstr "重复平滑多边形纹理"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:426
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:372
 msgid "Disable CPU Saving"
 msgstr "禁用 CPU 保存"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:442
-msgid "Odd/even bit hack"
-msgstr "奇/偶位 hack"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:458
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:376
 msgid "For precise framerate"
 msgstr "精确帧率"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:473
-msgid "Better FPS limit in some"
-msgstr "某些游戏中可取得较好的 FPS 界限值"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:389
+msgid "Odd/even bit hack"
+msgstr "奇/偶位 hack"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:486
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:393
+msgid "Chrono Cross"
+msgstr "Chrono Cross"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:404
 msgid "PC FPS calculation"
 msgstr "PC FPS 计算"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:504
-msgid "Pandemonium 2"
-msgstr "Pandemonium 2"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:408
+msgid "Better FPS limit in some"
+msgstr "某些游戏中可取得较好的 FPS 界限值"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:517
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:421
+msgid "Expand screen width"
+msgstr "扩展屏幕宽度"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:425
+msgid "Capcom fighting games"
+msgstr "Capcom 格斗游戏"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:438
+msgid "Ignore brightness color"
+msgstr "忽略亮色"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:442
+msgid "Black screens in Lunar"
+msgstr "Lunar 中黑屏"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:455
+msgid "Disable coordinate check"
+msgstr "禁用坐标检查"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:459
+msgid "Compatibility mode"
+msgstr "兼容模式"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:472
 msgid "Lazy screen update"
 msgstr "懒惰的屏幕更新"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:535
-msgid "Skip every second frame"
-msgstr "每两帧跳过一帧"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:477
+msgid "Pandemonium 2"
+msgstr "Pandemonium 2"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:548
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:490
 #: ../plugins/peopsxgl/gpucfg/interface.c:640
 msgid "Old frame skipping"
 msgstr "旧的跳帧方式"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:564
-msgid "Expand screen width"
-msgstr "扩展屏幕宽度"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:495
+msgid "Skip every second frame"
+msgstr "每两帧跳过一帧"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:580
-msgid "Ignore brightness color"
-msgstr "忽略亮色"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:510
+msgid "Repeated flat tex triangles"
+msgstr "重复平滑多边形纹理"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:596
-msgid "Disable coordinate check"
-msgstr "禁用坐标检查"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:515
+msgid "Needed by Dark Forces"
+msgstr "Dark Forces 运行需要"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:614
-msgid "Chrono Cross"
-msgstr "Chrono Cross"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:530
+msgid "Draw quads with triangles"
+msgstr "使用三角形绘制 quad"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:627
-msgid "Capcom fighting games"
-msgstr "Capcom 格斗游戏"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:535
+msgid "better g-colors, worse textures"
+msgstr "较好的 g-colors, 较差的纹理"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:642
-msgid "Black screens in Lunar"
-msgstr "Lunar 中黑屏"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:657
-msgid "Compatibility mode"
-msgstr "兼容模式"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:670
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:550
 msgid "Fake 'gpu busy' states"
 msgstr "欺骗 'gpu 忙' 状态"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:688
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:555
 msgid "Toggle busy flags after drawing"
 msgstr "绘制后切换忙碌标志"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:713
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:585
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:268
 msgid "<b>Compatibility</b>"
 msgstr "<b>兼容性</b>"
@@ -1924,280 +1924,300 @@ msgstr "<b>兼容性</b>"
 msgid "PCSX"
 msgstr "PCSX"
 
-#: ../data/pcsx.glade2:21
+#: ../data/pcsx.glade2:22
 msgid "_File"
 msgstr "文件(_F)"
 
-#: ../data/pcsx.glade2:27
+#: ../data/pcsx.glade2:28
 msgid "Run _CD"
 msgstr "运行光盘(_C)"
 
-#: ../data/pcsx.glade2:45
+#: ../data/pcsx.glade2:46
 msgid "Run _ISO..."
 msgstr "运行 _ISO..."
 
-#: ../data/pcsx.glade2:62
+#: ../data/pcsx.glade2:63
 msgid "Run _BIOS"
 msgstr "运行 _BIOS"
 
-#: ../data/pcsx.glade2:79
+#: ../data/pcsx.glade2:80
 msgid "Run _EXE..."
 msgstr "运行 _EXE..."
 
-#: ../data/pcsx.glade2:101
+#: ../data/pcsx.glade2:102
 msgid "E_xit"
 msgstr "退出(_X)"
 
-#: ../data/pcsx.glade2:123
+#: ../data/pcsx.glade2:124
 msgid "_Emulator"
 msgstr "模拟器(_E)"
 
-#: ../data/pcsx.glade2:129
+#: ../data/pcsx.glade2:130
 msgid "_Continue"
 msgstr "继续(_C)"
 
-#: ../data/pcsx.glade2:146
+#: ../data/pcsx.glade2:147
 msgid "_Reset"
 msgstr "复位(_R)"
 
-#: ../data/pcsx.glade2:168
+#: ../data/pcsx.glade2:169
 msgid "S_witch ISO..."
 msgstr "更换 ISO(_W)..."
 
-#: ../data/pcsx.glade2:190
+#: ../data/pcsx.glade2:191
 msgid "_Save State"
 msgstr "即时存档(_S)"
 
-#: ../data/pcsx.glade2:199
-#: ../data/pcsx.glade2:280
+#: ../data/pcsx.glade2:200
+#: ../data/pcsx.glade2:313
 msgid "Slot _1"
 msgstr "存档 _1"
 
-#: ../data/pcsx.glade2:208
-#: ../data/pcsx.glade2:289
+#: ../data/pcsx.glade2:209
+#: ../data/pcsx.glade2:322
 msgid "Slot _2"
 msgstr "存档 _2"
 
-#: ../data/pcsx.glade2:217
-#: ../data/pcsx.glade2:298
+#: ../data/pcsx.glade2:218
+#: ../data/pcsx.glade2:331
 msgid "Slot _3"
 msgstr "存档 _3"
 
-#: ../data/pcsx.glade2:226
-#: ../data/pcsx.glade2:307
+#: ../data/pcsx.glade2:227
+#: ../data/pcsx.glade2:340
 msgid "Slot _4"
 msgstr "存档 _4"
 
-#: ../data/pcsx.glade2:235
-#: ../data/pcsx.glade2:316
+#: ../data/pcsx.glade2:236
+#: ../data/pcsx.glade2:349
 msgid "Slot _5"
 msgstr "存档 _5"
 
-#: ../data/pcsx.glade2:243
-#: ../data/pcsx.glade2:324
+#: ../data/pcsx.glade2:245
+#: ../data/pcsx.glade2:358
+msgid "Slot _6"
+msgstr "存档 _6"
+
+#: ../data/pcsx.glade2:253
+#: ../data/pcsx.glade2:366
+msgid "Slot _7"
+msgstr "存档 _7"
+
+#: ../data/pcsx.glade2:261
+#: ../data/pcsx.glade2:374
+msgid "Slot _8"
+msgstr "存档 _8"
+
+#: ../data/pcsx.glade2:269
+#: ../data/pcsx.glade2:382
+msgid "Slot _9"
+msgstr "存档 _9"
+
+#: ../data/pcsx.glade2:276
+#: ../data/pcsx.glade2:389
 msgid "_Other..."
 msgstr "其它(_O)..."
 
-#: ../data/pcsx.glade2:271
+#: ../data/pcsx.glade2:304
 msgid "_Load State"
 msgstr "即时读档(_L)"
 
-#: ../data/pcsx.glade2:357
+#: ../data/pcsx.glade2:422
 msgid "_Configuration"
 msgstr "配置(_C)"
 
-#: ../data/pcsx.glade2:363
+#: ../data/pcsx.glade2:428
 msgid "_Plugins & BIOS..."
 msgstr "插件及 BIOS(_P)..."
 
-#: ../data/pcsx.glade2:385
+#: ../data/pcsx.glade2:450
 msgid "_Graphics..."
 msgstr "图像(_G)..."
 
-#: ../data/pcsx.glade2:400
+#: ../data/pcsx.glade2:465
 msgid "_Sound..."
 msgstr "声音(_S)..."
 
-#: ../data/pcsx.glade2:415
+#: ../data/pcsx.glade2:480
 msgid "CD-_ROM..."
 msgstr "CD-_ROM..."
 
-#: ../data/pcsx.glade2:430
+#: ../data/pcsx.glade2:495
 msgid "C_ontrollers..."
 msgstr "控制器(_O)..."
 
-#: ../data/pcsx.glade2:450
+#: ../data/pcsx.glade2:515
 msgid "_CPU..."
 msgstr "_CPU..."
 
-#: ../data/pcsx.glade2:466
+#: ../data/pcsx.glade2:531
 msgid "_Memory Cards..."
 msgstr "记忆卡(_M)..."
 
-#: ../data/pcsx.glade2:483
+#: ../data/pcsx.glade2:548
 msgid "_Netplay..."
 msgstr "联网游戏(_N)..."
 
-#: ../data/pcsx.glade2:504
+#: ../data/pcsx.glade2:569
 msgid "Chea_t"
 msgstr "作弊码(_T)"
 
-#: ../data/pcsx.glade2:513
+#: ../data/pcsx.glade2:578
 msgid "_Browse..."
 msgstr "浏览(_B)..."
 
-#: ../data/pcsx.glade2:528
+#: ../data/pcsx.glade2:593
 msgid "_Search..."
 msgstr "查找(_S)..."
 
-#: ../data/pcsx.glade2:554
+#: ../data/pcsx.glade2:619
 msgid "Memory _Dump"
 msgstr "内存转储(_D)"
 
-#: ../data/pcsx.glade2:574
+#: ../data/pcsx.glade2:639
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../data/pcsx.glade2:580
+#: ../data/pcsx.glade2:645
 msgid "_About PCSX..."
 msgstr "关于 PCSX(_A)..."
 
-#: ../data/pcsx.glade2:613
-#: ../data/pcsx.glade2:614
+#: ../data/pcsx.glade2:678
+#: ../data/pcsx.glade2:679
 msgid "Run CD"
 msgstr "运行光碟"
 
-#: ../data/pcsx.glade2:626
+#: ../data/pcsx.glade2:691
 msgid "Run ISO Image"
 msgstr "运行 ISO 光盘镜像"
 
-#: ../data/pcsx.glade2:627
+#: ../data/pcsx.glade2:692
 msgid "Run ISO..."
 msgstr "运行 ISO..."
 
-#: ../data/pcsx.glade2:648
+#: ../data/pcsx.glade2:713
 msgid "Continue Emulation"
 msgstr "继续模拟"
 
-#: ../data/pcsx.glade2:649
+#: ../data/pcsx.glade2:714
 msgid "Continue..."
 msgstr "继续..."
 
-#: ../data/pcsx.glade2:661
+#: ../data/pcsx.glade2:726
 msgid "Switch ISO Image"
 msgstr "更换 ISO 光盘镜像"
 
-#: ../data/pcsx.glade2:662
+#: ../data/pcsx.glade2:727
 msgid "Switch ISO..."
 msgstr "更换 ISO..."
 
-#: ../data/pcsx.glade2:683
-#: ../data/pcsx.glade2:1810
+#: ../data/pcsx.glade2:748
+#: ../data/pcsx.glade2:1875
 msgid "Configure Memory Cards"
 msgstr "配置记忆卡"
 
-#: ../data/pcsx.glade2:684
+#: ../data/pcsx.glade2:749
 msgid "Memcards..."
 msgstr "记忆卡..."
 
-#: ../data/pcsx.glade2:696
+#: ../data/pcsx.glade2:761
 msgid "Configure Graphics"
 msgstr "配置图像"
 
-#: ../data/pcsx.glade2:697
+#: ../data/pcsx.glade2:762
 msgid "Graphics..."
 msgstr "图像..."
 
-#: ../data/pcsx.glade2:709
+#: ../data/pcsx.glade2:774
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2:8
 msgid "Configure Sound"
 msgstr "配置音频"
 
-#: ../data/pcsx.glade2:710
+#: ../data/pcsx.glade2:775
 msgid "Sound..."
 msgstr "声音..."
 
-#: ../data/pcsx.glade2:722
+#: ../data/pcsx.glade2:787
 msgid "Configure CD-ROM"
 msgstr "配置 CD-ROM"
 
-#: ../data/pcsx.glade2:723
+#: ../data/pcsx.glade2:788
 msgid "CD-ROM..."
 msgstr "CD-ROM..."
 
-#: ../data/pcsx.glade2:735
+#: ../data/pcsx.glade2:800
 msgid "Configure Controllers"
 msgstr "配置控制器"
 
-#: ../data/pcsx.glade2:736
+#: ../data/pcsx.glade2:801
 msgid "Controllers..."
 msgstr "控制器..."
 
-#: ../data/pcsx.glade2:879
+#: ../data/pcsx.glade2:944
 msgid "Select Folder to Search"
 msgstr "选择要查找的文件夹"
 
-#: ../data/pcsx.glade2:895
+#: ../data/pcsx.glade2:960
 msgid "Search in:"
 msgstr "在此处查找插件:"
 
-#: ../data/pcsx.glade2:1168
+#: ../data/pcsx.glade2:1233
 msgid "Graphics:"
 msgstr "图像:"
 
-#: ../data/pcsx.glade2:1181
+#: ../data/pcsx.glade2:1246
 msgid "Sound:"
 msgstr "声音:"
 
-#: ../data/pcsx.glade2:1196
+#: ../data/pcsx.glade2:1261
 msgid "Controller 1:   "
 msgstr "控制器 1:"
 
-#: ../data/pcsx.glade2:1211
+#: ../data/pcsx.glade2:1276
 msgid "Controller 2:"
 msgstr "控制器 2:"
 
-#: ../data/pcsx.glade2:1226
+#: ../data/pcsx.glade2:1291
 msgid "CD-ROM:"
 msgstr "CD-ROM:"
 
-#: ../data/pcsx.glade2:1264
+#: ../data/pcsx.glade2:1329
 msgid "<b>Plugins</b>"
 msgstr "<b>插件</b>"
 
-#: ../data/pcsx.glade2:1325
+#: ../data/pcsx.glade2:1390
 msgid "<b>BIOS</b>"
 msgstr "<b>BIOS</b>"
 
-#: ../data/pcsx.glade2:1375
+#: ../data/pcsx.glade2:1440
 msgid "Configure CPU"
 msgstr "配置 CPU"
 
-#: ../data/pcsx.glade2:1419
+#: ../data/pcsx.glade2:1484
 msgid "SPU IRQ Always Enabled"
 msgstr "SPU IRQ 总是启用"
 
-#: ../data/pcsx.glade2:1435
+#: ../data/pcsx.glade2:1500
 msgid "Black & White Movies"
 msgstr "黑白电影"
 
-#: ../data/pcsx.glade2:1469
+#: ../data/pcsx.glade2:1534
 msgid "Enable Interpreter CPU"
 msgstr "启用解释执行 CPU"
 
-#: ../data/pcsx.glade2:1503
+#: ../data/pcsx.glade2:1568
 msgid "Disable CD Audio"
 msgstr "禁用 CD 音频"
 
-#: ../data/pcsx.glade2:1519
+#: ../data/pcsx.glade2:1584
 msgid "Disable XA Decoding"
 msgstr "禁用 XA 解码"
 
-#: ../data/pcsx.glade2:1571
+#: ../data/pcsx.glade2:1636
 msgid "<b>Options</b>"
 msgstr "<b>选项</b>"
 
-#: ../data/pcsx.glade2:1612
+#: ../data/pcsx.glade2:1677
 msgid ""
 "NTSC\n"
 "PAL"
@@ -2205,52 +2225,52 @@ msgstr ""
 "NTSC\n"
 "PAL"
 
-#: ../data/pcsx.glade2:1626
+#: ../data/pcsx.glade2:1691
 msgid "<b>System Type</b>"
 msgstr "<b>系统类型</b>"
 
-#: ../data/pcsx.glade2:1674
+#: ../data/pcsx.glade2:1739
 msgid "Configure NetPlay"
 msgstr "配置联网游戏"
 
-#: ../data/pcsx.glade2:1760
+#: ../data/pcsx.glade2:1825
 msgid "<b>NetPlay</b>"
 msgstr "<b>联网游戏</b>"
 
-#: ../data/pcsx.glade2:1886
-#: ../data/pcsx.glade2:2283
+#: ../data/pcsx.glade2:1951
+#: ../data/pcsx.glade2:2348
 msgid "New"
 msgstr "新建"
 
-#: ../data/pcsx.glade2:1936
-#: ../data/pcsx.glade2:2333
+#: ../data/pcsx.glade2:2001
+#: ../data/pcsx.glade2:2398
 msgid "Format"
 msgstr "格式化"
 
-#: ../data/pcsx.glade2:1986
-#: ../data/pcsx.glade2:2383
+#: ../data/pcsx.glade2:2051
+#: ../data/pcsx.glade2:2448
 msgid "Un/Delete"
 msgstr "删除/恢复"
 
-#: ../data/pcsx.glade2:2079
+#: ../data/pcsx.glade2:2144
 msgid "<b>Memory Card 1</b>"
 msgstr "<b>记忆卡 1</b>"
 
-#: ../data/pcsx.glade2:2139
-#: ../data/pcsx.glade2:2189
-#: ../data/pcsx.glade2:3002
+#: ../data/pcsx.glade2:2204
+#: ../data/pcsx.glade2:2254
+#: ../data/pcsx.glade2:3067
 msgid "Copy"
 msgstr "复制"
 
-#: ../data/pcsx.glade2:2476
+#: ../data/pcsx.glade2:2541
 msgid "<b>Memory Card 2</b>"
 msgstr "<b>记忆卡 2</b>"
 
-#: ../data/pcsx.glade2:2572
+#: ../data/pcsx.glade2:2637
 msgid "<b>Cheat Codes</b>"
 msgstr "<b>作弊码</b>"
 
-#: ../data/pcsx.glade2:2736
+#: ../data/pcsx.glade2:2801
 msgid ""
 "8-bit\n"
 "16-bit\n"
@@ -2260,7 +2280,7 @@ msgstr ""
 "16 位\n"
 "32 位"
 
-#: ../data/pcsx.glade2:2799
+#: ../data/pcsx.glade2:2864
 msgid ""
 "Equal Value\n"
 "Not Equal Value\n"
@@ -2282,7 +2302,7 @@ msgstr ""
 "改变\n"
 "无改变"
 
-#: ../data/pcsx.glade2:2831
+#: ../data/pcsx.glade2:2896
 msgid ""
 "Decimal\n"
 "Hexadecimal"
@@ -2290,27 +2310,27 @@ msgstr ""
 "十进制\n"
 "十六进制"
 
-#: ../data/pcsx.glade2:3035
+#: ../data/pcsx.glade2:3100
 msgid "label_resultsfound"
 msgstr "label_resultsfound"
 
-#: ../data/pcsx.glade2:3070
+#: ../data/pcsx.glade2:3135
 msgid "Search"
 msgstr "查找"
 
-#: ../data/pcsx.glade2:3106
+#: ../data/pcsx.glade2:3171
 msgid "Restart"
 msgstr "复位"
 
-#: ../data/pcsx.glade2:3135
+#: ../data/pcsx.glade2:3200
 msgid "<b>Cheat Search</b>"
 msgstr "<b>作弊码查找</b>"
 
-#: ../data/pcsx.glade2:3291
+#: ../data/pcsx.glade2:3356
 msgid "Raw Dump..."
 msgstr "Raw 转储..."
 
-#: ../data/pcsx.glade2:3326
+#: ../data/pcsx.glade2:3391
 msgid "Patch Memory..."
 msgstr "修改内存..."
 
@@ -2432,12 +2452,11 @@ msgstr "单声道"
 msgid "Play only one channel for a performance boost."
 msgstr "仅播放一个声道以提升性能。"
 
-#: ../plugins/dfcdrom/cdr-libcdio.c:29
-#: ../plugins/dfcdrom/cdr-linux.c:29
+#: ../plugins/dfcdrom/cdr.c:25
 msgid "CD-ROM Drive Reader"
 msgstr "CD-ROM 设备读取插件"
 
-#: ../plugins/dfcdrom/cdr-null.c:26
+#: ../plugins/dfcdrom/cdr.c:27
 msgid "CDR NULL Plugin"
 msgstr "CDR 空插件"
 
@@ -3049,21 +3068,21 @@ msgstr "键盘:"
 msgid "(Not Set)"
 msgstr "(未设定)"
 
-#: ../plugins/dfinput/cfg-gtk2.c:539
+#: ../plugins/dfinput/cfg-gtk2.c:559
 msgid "None"
 msgstr "无"
 
-#: ../plugins/dfinput/cfg-gtk2.c:581
+#: ../plugins/dfinput/cfg-gtk2.c:601
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr "手柄/键盘输入配置"
 
-#: ../plugins/dfinput/cfg-gtk2.c:587
 #: ../plugins/dfinput/cfg-gtk2.c:607
+#: ../plugins/dfinput/cfg-gtk2.c:627
 msgid "Key"
 msgstr "按钮"
 
-#: ../plugins/dfinput/cfg-gtk2.c:593
 #: ../plugins/dfinput/cfg-gtk2.c:613
+#: ../plugins/dfinput/cfg-gtk2.c:633
 msgid "Button"
 msgstr "按键"
 

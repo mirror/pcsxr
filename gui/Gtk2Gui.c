@@ -62,10 +62,10 @@ GtkWidget *Window = NULL;
 
 int destroy = 0;
 
-#define MAX_SLOTS 5
+#define MAX_SLOTS 9
 
 /* TODO - If MAX_SLOTS changes, need to find a way to automatically set all positions */
-int Slots[MAX_SLOTS] = { -1, -1, -1, -1, -1 };
+int Slots[MAX_SLOTS] = { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 
 void ResetMenuSlots(GladeXML *xml) {
 	GtkWidget *widget;
@@ -267,6 +267,18 @@ void StartGui() {
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot5");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 4, NULL, G_CONNECT_AFTER);	
+	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot6");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 5, NULL, G_CONNECT_AFTER);	
+	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot7");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 6, NULL, G_CONNECT_AFTER);	
+	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot8");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 7, NULL, G_CONNECT_AFTER);	
+	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot9");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 8, NULL, G_CONNECT_AFTER);	
 	widget = glade_xml_get_widget(xml, "other1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(on_states_load_other), NULL, NULL, G_CONNECT_AFTER);			
@@ -286,6 +298,18 @@ void StartGui() {
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_SaveSlot5");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(on_states_save), (gpointer) 4, NULL, G_CONNECT_AFTER);	
+	widget = glade_xml_get_widget(xml, "GtkMenuItem_SaveSlot6");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(on_states_save), (gpointer) 5, NULL, G_CONNECT_AFTER);	
+	widget = glade_xml_get_widget(xml, "GtkMenuItem_SaveSlot7");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(on_states_save), (gpointer) 6, NULL, G_CONNECT_AFTER);	
+	widget = glade_xml_get_widget(xml, "GtkMenuItem_SaveSlot8");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(on_states_save), (gpointer) 7, NULL, G_CONNECT_AFTER);	
+	widget = glade_xml_get_widget(xml, "GtkMenuItem_SaveSlot9");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			GTK_SIGNAL_FUNC(on_states_save), (gpointer) 8, NULL, G_CONNECT_AFTER);	
 	widget = glade_xml_get_widget(xml, "other2");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			GTK_SIGNAL_FUNC(on_states_save_other), NULL, NULL, G_CONNECT_AFTER);
