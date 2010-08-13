@@ -1,3 +1,13 @@
+August 14, 2010 edgbla <edgbla@yandex.ru>
+
+ * gui/Plugin.c: Added gpu busy interface.
+ * macosx/Plugin.c: Likewise.
+ * win32/gui/plugin.c: Likewise.
+ * libpcsxcore/r3000a.c: Likewise.
+ * libpcsxcore/r3000a.h: Likewise.
+ * libpcsxcore/plugins.c: Likewise.
+ * libpcsxcore/plugins.h: Likewise.
+
 August 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfxvideo/cfg.h: Readded Windows support.

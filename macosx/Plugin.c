@@ -89,6 +89,7 @@ int _OpenPlugins() {
 	SPU_registerCallback(SPUirq);
 	ret = GPU_open(&gpuDisp, "PCSX", /*pathUrl ? path :*/ NULL);
 	if (ret < 0) { SysMessage(_("Error Opening GPU Plugin")); return -1; }
+	GPU_registerCallback(GPUbusy);
 	ret = PAD1_open(&gpuDisp);
 	if (ret < 0) { SysMessage(_("Error Opening PAD1 Plugin")); return -1; }
 	ret = PAD2_open(&gpuDisp);

@@ -50,6 +50,8 @@ GPUgetScreenPic       GPU_getScreenPic;
 GPUshowScreenPic      GPU_showScreenPic;
 GPUclearDynarec       GPU_clearDynarec;
 GPUvBlank             GPU_vBlank;
+GPUregisterCallback   GPU_registerCallback;
+GPUidle               GPU_idle;
 
 CDRinit               CDR_init;
 CDRshutdown           CDR_shutdown;
@@ -192,6 +194,16 @@ void CALLBACK GPU__displayText(char *pText) {
 	SysPrintf("%s\n", pText);
 }
 
+void CALLBACK GPUbusy( int ticks )
+{
+    //printf( "GPUbusy( %i )\n", ticks );
+    //fflush( 0 );
+    
+    psxRegs.interrupt |= (1 << PSXINT_GPUBUSY);
+    psxRegs.intCycle[PSXINT_GPUBUSY].cycle = ticks;
+    psxRegs.intCycle[PSXINT_GPUBUSY].sCycle = psxRegs.cycle;
+}
+
 long CALLBACK GPU__configure(void) { return 0; }
 long CALLBACK GPU__test(void) { return 0; }
 void CALLBACK GPU__about(void) {}
@@ -201,6 +213,8 @@ long CALLBACK GPU__getScreenPic(unsigned char *pMem) { return -1; }
 long CALLBACK GPU__showScreenPic(unsigned char *pMem) { return -1; }
 void CALLBACK GPU__clearDynarec(void (CALLBACK *callback)(void)) {}
 void CALLBACK GPU__vBlank(int val) {}
+void CALLBACK GPU__registerCallback(void (CALLBACK *callback)(int)) {};
+void CALLBACK GPU__idle(void) {}
 
 #define LoadGpuSym1(dest, name) \
 	LoadSym(GPU_##dest, GPU##dest, name, TRUE);
@@ -241,6 +255,8 @@ static int LoadGPUplugin(const char *GPUdll) {
 	LoadGpuSym0(showScreenPic, "GPUshowScreenPic");
 	LoadGpuSym0(clearDynarec, "GPUclearDynarec");
     LoadGpuSym0(vBlank, "GPUvBlank");
+    LoadGpuSym0(registerCallback, "GPUregisterCallback");
+    LoadGpuSym0(idle, "GPUidle");
 	LoadGpuSym0(configure, "GPUconfigure");
 	LoadGpuSym0(test, "GPUtest");
 	LoadGpuSym0(about, "GPUabout");

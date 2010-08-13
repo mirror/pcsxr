@@ -94,6 +94,8 @@ typedef long (CALLBACK* GPUgetScreenPic)(unsigned char *);
 typedef long (CALLBACK* GPUshowScreenPic)(unsigned char *);
 typedef void (CALLBACK* GPUclearDynarec)(void (CALLBACK *callback)(void));
 typedef void (CALLBACK* GPUvBlank)(int);
+typedef void (CALLBACK* GPUregisterCallback)(void (CALLBACK *callback)(int));
+typedef void (CALLBACK* GPUidle)(void);
 
 // GPU function pointers
 extern GPUupdateLace    GPU_updateLace;
@@ -119,6 +121,8 @@ extern GPUgetScreenPic  GPU_getScreenPic;
 extern GPUshowScreenPic GPU_showScreenPic;
 extern GPUclearDynarec  GPU_clearDynarec;
 extern GPUvBlank        GPU_vBlank;
+extern GPUregisterCallback GPU_registerCallback;
+extern GPUidle          GPU_idle;
 
 // CD-ROM Functions
 typedef long (CALLBACK* CDRinit)(void);
@@ -399,6 +403,8 @@ extern SIO1registerCallback   SIO1_registerCallback;
 #endif
 
 void CALLBACK clearDynarec(void);
+
+void CALLBACK GPUbusy( int ticks );
 
 void SetIsoFile(const char *filename);
 const char *GetIsoFile(void);

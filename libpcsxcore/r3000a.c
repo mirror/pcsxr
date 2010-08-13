@@ -151,6 +151,12 @@ void psxBranchTest() {
 				spuInterrupt();
 			}
 		}
+        if (psxRegs.interrupt & (1 << PSXINT_GPUBUSY)) { // gpu busy
+            if ((psxRegs.cycle - psxRegs.intCycle[PSXINT_GPUBUSY].sCycle) >= psxRegs.intCycle[PSXINT_GPUBUSY].cycle) {
+                psxRegs.interrupt &= ~(1 << PSXINT_GPUBUSY);
+                GPU_idle();
+            }
+        }
 	}
 
 	if (psxHu32(0x1070) & psxHu32(0x1074)) {
