@@ -208,6 +208,7 @@ typedef struct PSXDISPLAYTAG
 
 #ifdef _WINDOWS
 extern HINSTANCE hInst;
+extern HMODULE hDDrawDLL;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
