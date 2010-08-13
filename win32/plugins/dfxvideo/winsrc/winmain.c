@@ -26,15 +26,14 @@ BOOL APIENTRY DllMain(HANDLE hModule,                  // DLL INIT
                       LPVOID lpReserved)
 {
 	switch (dwReason) {
-	case DLL_PROCESS_ATTACH:
-		hInst = (HINSTANCE)hModule;
-		hDDrawDLL = LoadLibrary(TEXT("DDRAW.DLL"));
-		break;
+		case DLL_PROCESS_ATTACH:
+			hInst = (HINSTANCE)hModule;
+			hDDrawDLL = LoadLibrary(TEXT("DDRAW.DLL"));
+			break;
 
-	case DLL_PROCESS_DETACH:
-		hInst = NULL;
-		if (hDDrawDLL) FreeLibrary(hDDrawDLL);
-		break;
+		case DLL_PROCESS_DETACH:
+			if (hDDrawDLL) FreeLibrary(hDDrawDLL);
+			break;
 	}
 
 	return TRUE;                                          // very quick :)

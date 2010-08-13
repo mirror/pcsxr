@@ -94,10 +94,9 @@ LINK32=link.exe
 # Begin Group "winsrc"
 
 # PROP Default_Filter ""
-# Begin Source File
+# Begin Group "directx"
 
-SOURCE=.\winsrc\cfg.c
-# End Source File
+# PROP Default_Filter ""
 # Begin Source File
 
 SOURCE=.\winsrc\d3d.h
@@ -116,6 +115,15 @@ SOURCE=.\winsrc\ddraw.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\winsrc\dxguid.c
+# End Source File
+# End Group
+# Begin Source File
+
+SOURCE=.\winsrc\cfg.c
+# End Source File
+# Begin Source File
+
 SOURCE=.\winsrc\DFXVideo.def
 # End Source File
 # Begin Source File
@@ -125,10 +133,6 @@ SOURCE=.\winsrc\DFXVideo.rc
 # Begin Source File
 
 SOURCE=.\winsrc\draw.c
-# End Source File
-# Begin Source File
-
-SOURCE=.\winsrc\dxguid.c
 # End Source File
 # Begin Source File
 
