@@ -3669,7 +3669,7 @@ int DXinitialize()
  for(i=0;i<sizeof(GUID);i++,c++)
   {if(*c) {guid=&guiDev;break;}}
 
- hDDrawDLL = GetModuleHandle("DDRAW.DLL");
+ hDDrawDLL = LoadLibrary(TEXT("DDRAW.DLL"));
  if(NULL == hDDrawDLL)
   { 
    MessageBox(NULL, "This GPU requires DirectX!", "Error", MB_OK); 
@@ -3680,11 +3680,13 @@ int DXinitialize()
 
  // create dd
  if(pDDrawCreateFn == NULL || pDDrawCreateFn(guid,&DD,0)) 
-  { 
-   MessageBox(NULL, "This GPU requires DirectX!", "Error", MB_OK); 
+  {
+   FreeLibrary(hDDrawDLL);
+   MessageBox(NULL, "This GPU requires DirectX!", "Error", MB_OK);
    return 0; 
   }
 
+ FreeLibrary(hDDrawDLL);
  DX.DD=DD;
 
  //////////////////////////////////////////////////////// co-op level

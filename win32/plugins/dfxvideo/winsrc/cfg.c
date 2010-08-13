@@ -939,15 +939,18 @@ static BOOL WINAPI DirectDrawEnumCallbackEx( GUID FAR* pGUID, LPSTR strDesc,
  HRESULT (WINAPI *pDDrawCreateFn)(GUID *,LPDIRECTDRAW *,IUnknown *);
  HMODULE hDDrawDLL;
 
- hDDrawDLL = GetModuleHandle("DDRAW.DLL");
+ hDDrawDLL = LoadLibrary(TEXT("DDRAW.DLL"));
  if(NULL == hDDrawDLL) return FALSE;
 
  pDDrawCreateFn = (LPVOID)GetProcAddress( hDDrawDLL, "DirectDrawCreate" );
 
  if( pDDrawCreateFn == NULL || FAILED( pDDrawCreateFn( pGUID, &pDD, 0L ) ) )
   {
+   FreeLibrary(hDDrawDLL);
    return D3DENUMRET_OK;
   }
+
+ FreeLibrary(hDDrawDLL);
 
  // Query the DirectDraw driver for access to Direct3D.
  if( FAILED(IDirectDraw_QueryInterface(pDD, &IID_IDirectDraw4, (VOID**)&g_pDD)))
@@ -999,7 +1002,7 @@ void DoDevEnum(HWND hW)
 {
  LPDIRECTDRAWENUMERATEEX pDDrawEnumFn;
 
- HMODULE hDDrawDLL = GetModuleHandle("DDRAW.DLL");
+ HMODULE hDDrawDLL = LoadLibrary(TEXT("DDRAW.DLL"));
  if(NULL == hDDrawDLL) return;
 
  gHWND=hW;
@@ -1007,11 +1010,13 @@ void DoDevEnum(HWND hW)
  pDDrawEnumFn = (LPDIRECTDRAWENUMERATEEX)
    GetProcAddress( hDDrawDLL, "DirectDrawEnumerateExA" );
 
- if(pDDrawEnumFn)
+ if (pDDrawEnumFn != NULL)
   pDDrawEnumFn( DirectDrawEnumCallbackEx, NULL,
                DDENUM_ATTACHEDSECONDARYDEVICES |
                DDENUM_DETACHEDSECONDARYDEVICES |
                DDENUM_NONDISPLAYDEVICES );
+
+ FreeLibrary(hDDrawDLL);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -1152,13 +1157,18 @@ BOOL bTestModes(void)
 
  bDeviceOK=FALSE;
 
- hDDrawDLL = GetModuleHandle("DDRAW.DLL");
+ hDDrawDLL = LoadLibrary(TEXT("DDRAW.DLL"));
  if(NULL == hDDrawDLL) return FALSE;
 
  pDDrawCreateFn = (LPVOID)GetProcAddress( hDDrawDLL, "DirectDrawCreate" );
 
  if( pDDrawCreateFn == NULL || FAILED( pDDrawCreateFn(guid, &pDD, 0L ) ) )
-  return FALSE;
+  {
+   FreeLibrary(hDDrawDLL);
+   return FALSE;
+  }
+
+ FreeLibrary(hDDrawDLL);
 
  if(FAILED(IDirectDraw_QueryInterface(pDD, &IID_IDirectDraw4, (VOID**)&g_pDD)))
   {
