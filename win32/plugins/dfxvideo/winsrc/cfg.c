@@ -937,20 +937,13 @@ static BOOL WINAPI DirectDrawEnumCallbackEx( GUID FAR* pGUID, LPSTR strDesc,
  LPDIRECTDRAW4 g_pDD;
  LPDIRECT3D3 pD3D;
  HRESULT (WINAPI *pDDrawCreateFn)(GUID *,LPDIRECTDRAW *,IUnknown *);
- HMODULE hDDrawDLL;
-
- hDDrawDLL = LoadLibrary(TEXT("DDRAW.DLL"));
- if(NULL == hDDrawDLL) return FALSE;
 
  pDDrawCreateFn = (LPVOID)GetProcAddress( hDDrawDLL, "DirectDrawCreate" );
 
  if( pDDrawCreateFn == NULL || FAILED( pDDrawCreateFn( pGUID, &pDD, 0L ) ) )
   {
-   FreeLibrary(hDDrawDLL);
    return D3DENUMRET_OK;
   }
-
- FreeLibrary(hDDrawDLL);
 
  // Query the DirectDraw driver for access to Direct3D.
  if( FAILED(IDirectDraw_QueryInterface(pDD, &IID_IDirectDraw4, (VOID**)&g_pDD)))
@@ -1002,21 +995,15 @@ void DoDevEnum(HWND hW)
 {
  LPDIRECTDRAWENUMERATEEX pDDrawEnumFn;
 
- HMODULE hDDrawDLL = LoadLibrary(TEXT("DDRAW.DLL"));
- if(NULL == hDDrawDLL) return;
-
  gHWND=hW;
 
- pDDrawEnumFn = (LPDIRECTDRAWENUMERATEEX)
-   GetProcAddress( hDDrawDLL, "DirectDrawEnumerateExA" );
+ pDDrawEnumFn = (LPVOID)GetProcAddress(hDDrawDLL, "DirectDrawEnumerateExA");
 
  if (pDDrawEnumFn != NULL)
   pDDrawEnumFn( DirectDrawEnumCallbackEx, NULL,
                DDENUM_ATTACHEDSECONDARYDEVICES |
                DDENUM_DETACHEDSECONDARYDEVICES |
                DDENUM_NONDISPLAYDEVICES );
-
- FreeLibrary(hDDrawDLL);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -1148,7 +1135,6 @@ BOOL bTestModes(void)
  LPDIRECTDRAW pDD;
  LPDIRECTDRAW4 g_pDD;
  HRESULT (WINAPI *pDDrawCreateFn)(GUID *,LPDIRECTDRAW *,IUnknown *);
- HMODULE hDDrawDLL;
 
  GUID FAR * guid=0;
  int i;unsigned char * c=(unsigned char *)&guiDev;
@@ -1157,18 +1143,12 @@ BOOL bTestModes(void)
 
  bDeviceOK=FALSE;
 
- hDDrawDLL = LoadLibrary(TEXT("DDRAW.DLL"));
- if(NULL == hDDrawDLL) return FALSE;
-
- pDDrawCreateFn = (LPVOID)GetProcAddress( hDDrawDLL, "DirectDrawCreate" );
+ pDDrawCreateFn = (LPVOID)GetProcAddress(hDDrawDLL, "DirectDrawCreate");
 
  if( pDDrawCreateFn == NULL || FAILED( pDDrawCreateFn(guid, &pDD, 0L ) ) )
   {
-   FreeLibrary(hDDrawDLL);
    return FALSE;
   }
-
- FreeLibrary(hDDrawDLL);
 
  if(FAILED(IDirectDraw_QueryInterface(pDD, &IID_IDirectDraw4, (VOID**)&g_pDD)))
   {

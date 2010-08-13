@@ -3657,7 +3657,6 @@ int DXinitialize()
  DDBLTFX ddbltfx;
  DDPIXELFORMAT dd;
  HRESULT (WINAPI *pDDrawCreateFn)(GUID *,LPDIRECTDRAW *,IUnknown *);
- HMODULE hDDrawDLL;
 
  // init some DX vars
  DX.hWnd = (HWND)hWGPU;
@@ -3669,24 +3668,15 @@ int DXinitialize()
  for(i=0;i<sizeof(GUID);i++,c++)
   {if(*c) {guid=&guiDev;break;}}
 
- hDDrawDLL = LoadLibrary(TEXT("DDRAW.DLL"));
- if(NULL == hDDrawDLL)
-  { 
-   MessageBox(NULL, "This GPU requires DirectX!", "Error", MB_OK); 
-   return 0; 
-  }
-
  pDDrawCreateFn = (LPVOID)GetProcAddress( hDDrawDLL, "DirectDrawCreate" );
 
  // create dd
  if(pDDrawCreateFn == NULL || pDDrawCreateFn(guid,&DD,0)) 
   {
-   FreeLibrary(hDDrawDLL);
    MessageBox(NULL, "This GPU requires DirectX!", "Error", MB_OK);
    return 0; 
   }
 
- FreeLibrary(hDDrawDLL);
  DX.DD=DD;
 
  //////////////////////////////////////////////////////// co-op level
