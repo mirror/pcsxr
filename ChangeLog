@@ -14,6 +14,9 @@ August 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * win32/gui/Win32.h: Likewise.
  * win32/gui/WndMain.c: Likewise.
  * win32/plugins/dfsound/winsrc/cfg.c: Changed registry entry.
+ * plugins/dfsound/stdafx.h: Silenced MSVC warning.
+ * win32/plugins/dfsound/winsrc/dsound.h: Added free dxsdk header from wine.
+ * win32/plugins/dfsound/DFSound.dsp: Added dsound.h.
 
 August 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 

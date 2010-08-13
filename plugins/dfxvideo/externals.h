@@ -60,6 +60,9 @@
 #define  D3D_OVERLOADS
 #define  DIRECT3D_VERSION 0x600
 #define  CINTERFACE
+#ifndef  WINVER
+#define  WINVER 0x0500
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -71,7 +74,7 @@
 #include <tchar.h>
 #include "resource.h"
 
-#include "ddraw.h"                       
+#include "ddraw.h"
 #include "d3dtypes.h"
 #include "d3d.h"
 

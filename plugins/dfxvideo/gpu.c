@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef _MACGL
+#if !defined(_MACGL) && !defined(_WINDOWS)
 #include "config.h"
 #endif
 
@@ -379,9 +379,9 @@ void CALLBACK GPUmakeSnapshot(void)
      if (PSXDisplay.RGB24)
       {
        uint32_t lu = *(uint32_t *)pD;
-       line[j * 3 + 2] = RED(lu);
-       line[j * 3 + 1] = GREEN(lu);
-       line[j * 3 + 0] = BLUE(lu);
+       line[j * 3 + 2] = (unsigned char)RED(lu);
+       line[j * 3 + 1] = (unsigned char)GREEN(lu);
+       line[j * 3 + 0] = (unsigned char)BLUE(lu);
        pD += 3;
       }
      else

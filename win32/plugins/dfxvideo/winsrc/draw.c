@@ -3656,6 +3656,8 @@ int DXinitialize()
  DDSCAPS ddscaps;
  DDBLTFX ddbltfx;
  DDPIXELFORMAT dd;
+ HRESULT (WINAPI *pDDrawCreateFn)(GUID *,LPDIRECTDRAW *,IUnknown *);
+ HMODULE hDDrawDLL;
 
  // init some DX vars
  DX.hWnd = (HWND)hWGPU;
@@ -3667,8 +3669,17 @@ int DXinitialize()
  for(i=0;i<sizeof(GUID);i++,c++)
   {if(*c) {guid=&guiDev;break;}}
 
+ hDDrawDLL = GetModuleHandle("DDRAW.DLL");
+ if(NULL == hDDrawDLL)
+  { 
+   MessageBox(NULL, "This GPU requires DirectX!", "Error", MB_OK); 
+   return 0; 
+  }
+
+ pDDrawCreateFn = (LPVOID)GetProcAddress( hDDrawDLL, "DirectDrawCreate" );
+
  // create dd
- if(DirectDrawCreate(guid,&DD,0)) 
+ if(pDDrawCreateFn == NULL || pDDrawCreateFn(guid,&DD,0)) 
   { 
    MessageBox(NULL, "This GPU requires DirectX!", "Error", MB_OK); 
    return 0; 

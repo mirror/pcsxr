@@ -136,6 +136,10 @@ SOURCE=.\winsrc\dsound.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\winsrc\dsound.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\winsrc\psemu.c
 # End Source File
 # Begin Source File

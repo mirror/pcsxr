@@ -1,7 +1,7 @@
 ; gpuPeopsSoft.def : Declares the module parameters for the DLL.
 
 LIBRARY      "DFXVideo"
-DESCRIPTION  'DFXVideo GPU'
+
 EXPORTS
     ; Explicit exports can go here
 	PSEgetLibType		@2

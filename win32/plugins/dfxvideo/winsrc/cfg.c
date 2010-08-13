@@ -936,8 +936,15 @@ static BOOL WINAPI DirectDrawEnumCallbackEx( GUID FAR* pGUID, LPSTR strDesc,
  LPDIRECTDRAW pDD;
  LPDIRECTDRAW4 g_pDD;
  LPDIRECT3D3 pD3D;
+ HRESULT (WINAPI *pDDrawCreateFn)(GUID *,LPDIRECTDRAW *,IUnknown *);
+ HMODULE hDDrawDLL;
 
- if( FAILED( DirectDrawCreate( pGUID, &pDD, 0L ) ) )
+ hDDrawDLL = GetModuleHandle("DDRAW.DLL");
+ if(NULL == hDDrawDLL) return FALSE;
+
+ pDDrawCreateFn = (LPVOID)GetProcAddress( hDDrawDLL, "DirectDrawCreate" );
+
+ if( pDDrawCreateFn == NULL || FAILED( pDDrawCreateFn( pGUID, &pDD, 0L ) ) )
   {
    return D3DENUMRET_OK;
   }
@@ -995,7 +1002,7 @@ void DoDevEnum(HWND hW)
  HMODULE hDDrawDLL = GetModuleHandle("DDRAW.DLL");
  if(NULL == hDDrawDLL) return;
 
- gHWND=hW;   
+ gHWND=hW;
 
  pDDrawEnumFn = (LPDIRECTDRAWENUMERATEEX)
    GetProcAddress( hDDrawDLL, "DirectDrawEnumerateExA" );
@@ -1005,8 +1012,6 @@ void DoDevEnum(HWND hW)
                DDENUM_ATTACHEDSECONDARYDEVICES |
                DDENUM_DETACHEDSECONDARYDEVICES |
                DDENUM_NONDISPLAYDEVICES );
- else
-  DirectDrawEnumerate( DirectDrawEnumCallback, NULL );
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -1119,7 +1124,7 @@ static HRESULT WINAPI EnumDisplayModesCallback( DDSURFACEDESC2* pddsd,
                                                 VOID* pvContext )
 {
  if(NULL==pddsd) return DDENUMRET_CANCEL;
-       
+
  if(pddsd->ddpfPixelFormat.dwRGBBitCount==(unsigned int)iColDepth &&
     pddsd->dwWidth==(unsigned int)iResX &&
     pddsd->dwHeight==(unsigned int)iResY)
@@ -1137,6 +1142,8 @@ BOOL bTestModes(void)
 {
  LPDIRECTDRAW pDD;
  LPDIRECTDRAW4 g_pDD;
+ HRESULT (WINAPI *pDDrawCreateFn)(GUID *,LPDIRECTDRAW *,IUnknown *);
+ HMODULE hDDrawDLL;
 
  GUID FAR * guid=0;
  int i;unsigned char * c=(unsigned char *)&guiDev;
@@ -1145,7 +1152,12 @@ BOOL bTestModes(void)
 
  bDeviceOK=FALSE;
 
- if( FAILED( DirectDrawCreate(guid, &pDD, 0L ) ) )
+ hDDrawDLL = GetModuleHandle("DDRAW.DLL");
+ if(NULL == hDDrawDLL) return FALSE;
+
+ pDDrawCreateFn = (LPVOID)GetProcAddress( hDDrawDLL, "DirectDrawCreate" );
+
+ if( pDDrawCreateFn == NULL || FAILED( pDDrawCreateFn(guid, &pDD, 0L ) ) )
   return FALSE;
 
  if(FAILED(IDirectDraw_QueryInterface(pDD, &IID_IDirectDraw4, (VOID**)&g_pDD)))

@@ -31,6 +31,8 @@
 
 #include "resource.h"
 
+#pragma warning (disable:4996)
+
 #else
 
 #ifndef _MACOSX

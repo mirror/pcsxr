@@ -53,7 +53,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /dll /machine:I386
-# ADD LINK32 user32.lib gdi32.lib ddraw.lib dxguid.lib winmm.lib advapi32.lib vfw32.lib /nologo /subsystem:windows /dll /machine:I386
+# ADD LINK32 user32.lib gdi32.lib winmm.lib advapi32.lib vfw32.lib /nologo /subsystem:windows /dll /machine:I386
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
 PostBuild_Cmds=rem copy release\DFXVideo.dll  d:\emus\epsxe\plugins	rem copy release\DFXVideo.dll d:\emus\zinc\renderer.znc
@@ -83,7 +83,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /dll /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 user32.lib gdi32.lib ddraw.lib dxguid.lib winmm.lib advapi32.lib vfw32.lib /nologo /subsystem:windows /dll /debug /machine:I386 /pdbtype:sept
+# ADD LINK32 user32.lib gdi32.lib winmm.lib advapi32.lib vfw32.lib /nologo /subsystem:windows /dll /debug /machine:I386 /pdbtype:sept
 
 !ENDIF 
 
@@ -100,6 +100,22 @@ SOURCE=.\winsrc\cfg.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\winsrc\d3d.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\winsrc\d3dcaps.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\winsrc\d3dtypes.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\winsrc\ddraw.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\winsrc\DFXVideo.def
 # End Source File
 # Begin Source File
@@ -109,6 +125,10 @@ SOURCE=.\winsrc\DFXVideo.rc
 # Begin Source File
 
 SOURCE=.\winsrc\draw.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\winsrc\dxguid.c
 # End Source File
 # Begin Source File
 
