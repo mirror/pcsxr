@@ -257,7 +257,7 @@ BEGIN
                     IDC_STATIC,82,150,167,10
 END
 
-IDD_FIXES DIALOG DISCARDABLE  0, 0, 285, 207
+IDD_FIXES DIALOG DISCARDABLE  0, 0, 285, 218
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
 CAPTION "Special game fixes..."
 FONT 8, "MS Sans Serif"
@@ -282,8 +282,8 @@ BEGIN
                     BS_AUTOCHECKBOX | WS_TABSTOP,34,150,97,10
     CONTROL         "Draw tex-quads as triangles",IDC_FIX10,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,34,165,100,10
-    DEFPUSHBUTTON   "OK",IDOK,66,187,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,169,187,50,14
+    DEFPUSHBUTTON   "OK",IDOK,66,199,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,169,199,50,14
     LTEXT           "Activate the following options only if you want to play one of the listed games (or if your game is showing similar glitches)!",
                     IDC_STATIC,8,4,245,22
     LTEXT           "Needed with epsxe 1.5.2 and older",IDC_STATIC,145,30,
@@ -316,6 +316,11 @@ BEGIN
     LTEXT           "Slightly distorted textures can happen",IDC_STATIC,145,
                     165,139,9,SS_CENTERIMAGE
     RTEXT           "0x0200:",IDC_STATIC,1,165,28,9,SS_CENTERIMAGE
+    CONTROL         "Fake 'gpu busy' states",IDC_FIX11,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,34,180,100,10
+    LTEXT           "Toggles busy flags after drawing",IDC_STATIC,145,180,
+                    139,9,SS_CENTERIMAGE
+    RTEXT           "0x0400:",IDC_STATIC,1,180,28,9,SS_CENTERIMAGE
 END
 
 IDD_KEYS DIALOG DISCARDABLE  0, 0, 186, 220
