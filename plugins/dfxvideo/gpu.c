@@ -785,7 +785,7 @@ void ChangeWindowMode(void)                            // TOGGLE FULLSCREEN - WI
  bDoVSyncUpdate=TRUE;
 }
 
-#else !defined (_MACGL)
+#elif !defined (_MACGL)
 
 #include "draw.h"
 
