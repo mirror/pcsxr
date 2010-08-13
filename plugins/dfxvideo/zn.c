@@ -23,8 +23,11 @@
 // - psx gpu plugin interface prototypes-------------- //
 // --------------------------------------------------- //
 
-long GPUopen(unsigned long *disp, const char *CapText, const char *CfgFile);
-
+#ifdef _WINDOWS
+long CALLBACK GPUopen(HWND hwndGPU);
+#else
+long GPUopen(unsigned long * disp,const char * CapText,const char * CfgFile);
+#endif
 void CALLBACK GPUdisplayText(char * pText);
 void CALLBACK GPUdisplayFlags(uint32_t dwFlags);
 void CALLBACK GPUmakeSnapshot(void);
@@ -48,9 +51,9 @@ long CALLBACK GPUtest(void);
 long CALLBACK GPUfreeze(uint32_t ulGetFreezeData,void * pF);
 void CALLBACK GPUgetScreenPic(unsigned char * pMem);
 void CALLBACK GPUshowScreenPic(unsigned char * pMem);
-
+#ifndef _WINDOWS
 void CALLBACK GPUkeypressed(int keycode);
-
+#endif
 
 // --------------------------------------------------- // 
 // - zn gpu interface -------------------------------- // 
@@ -112,8 +115,11 @@ long CALLBACK ZN_GPUopen(void * vcfg)
  if(!cfg)            return -1;
  if(cfg->Version!=1) return -1;
 
+#ifdef _WINDOWS
+ lret=GPUopen((HWND)cfg->hWnd);
+#else
  lret = GPUopen(&cfg->hWnd, cfg->GameName, cfg->CfgFile);
-
+#endif
 
 /*
  if(!lstrcmp(cfg->GameName,"kikaioh")     ||
@@ -248,8 +254,11 @@ void CALLBACK ZN_GPUshowScreenPic(unsigned char * pMem)
 
 // --------------------------------------------------- // 
 
+#ifndef _WINDOWS
+
 void CALLBACK ZN_GPUkeypressed(int keycode)
 {
  GPUkeypressed(keycode);
 }
 
+#endif

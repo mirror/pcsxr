@@ -210,26 +210,16 @@ void RestoreWindow() {
 	ShowCursor(TRUE);
 }
 
-int Slots[5] = { -1, -1, -1, -1, -1 };
-
 void ResetMenuSlots() {
-	int i;
-
-	for (i = 0; i < 5; i++) {
-		if (Slots[i] == -1)
-			EnableMenuItem(GetSubMenu(gApp.hMenu, 0), ID_FILE_STATES_LOAD_SLOT1+i, MF_GRAYED);
-		else 
-			EnableMenuItem(GetSubMenu(gApp.hMenu, 0), ID_FILE_STATES_LOAD_SLOT1+i, MF_ENABLED);
-	}
-}
-
-void UpdateMenuSlots() {
 	char str[256];
 	int i;
 
-	for (i = 0; i < 5; i++) {
+	for (i = 0; i < 9; i++) {
 		GetStateFilename(str, i);
-		Slots[i] = CheckState(str);
+		if (CheckState(str) == -1)
+			EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT1+i, MF_GRAYED);
+		else 
+			EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT1+i, MF_ENABLED);
 	}
 }
 
@@ -1604,6 +1594,8 @@ void CreateMainMenu() {
 		if (!UsingIso()) {
 			EnableMenuItem(gApp.hMenu, ID_EMULATOR_SWITCH_ISO, MF_BYCOMMAND | MF_GRAYED);
 		}
+
+		ResetMenuSlots();
 	} else {
 		EnableMenuItem(gApp.hMenu, ID_EMULATOR_RESET, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_EMULATOR_RUN, MF_BYCOMMAND | MF_GRAYED);
@@ -1662,7 +1654,6 @@ void CreateMainWindow(int nCmdShow) {
 						NULL);
 
 	gApp.hWnd = hWnd;
-	ResetMenuSlots();
 
 	CreateMainMenu();
 	SetMenu(gApp.hWnd, gApp.hMenu);

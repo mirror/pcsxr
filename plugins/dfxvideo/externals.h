@@ -52,6 +52,33 @@
 #define GPUIsNotReadyForCommands (lGPUstatusRet &= ~GPUSTATUS_READYFORCOMMANDS)
 #define GPUIsReadyForCommands (lGPUstatusRet |= GPUSTATUS_READYFORCOMMANDS)
 
+#ifdef _WINDOWS
+
+#ifndef  STRICT
+#define  STRICT
+#endif
+#define  D3D_OVERLOADS
+#define  DIRECT3D_VERSION 0x600
+#define  CINTERFACE
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdarg.h>
+#include <stdint.h>
+#include <windows.h>
+#include <windowsx.h>
+#include <tchar.h>
+#include "resource.h"
+
+#include "ddraw.h"                       
+#include "d3dtypes.h"
+#include "d3d.h"
+
+#pragma warning (disable:864)
+
+#else
+
 #define __X11_C_
 //X11 render
 #define __inline inline
@@ -68,6 +95,8 @@
 #include <math.h>
 #include <X11/cursorfont.h>
 #include <stdint.h>
+
+#endif
 
 /////////////////////////////////////////////////////////////////////////////
 
@@ -104,6 +133,21 @@ typedef struct PSXRECTTAG
  short y1;
 } PSXRect_t;
 
+#ifdef _WINDOWS
+
+typedef struct SDXTAG
+{
+ LPDIRECTDRAW                   DD;
+
+ LPDIRECTDRAWSURFACE            DDSPrimary;
+ LPDIRECTDRAWSURFACE            DDSRender;
+ LPDIRECTDRAWSURFACE            DDSHelper;
+ LPDIRECTDRAWSURFACE            DDSScreenPic;
+ HWND                           hWnd;
+} sDX;
+
+#else
+
 // linux defines for some windows stuff
 
 #define FALSE 0
@@ -122,9 +166,9 @@ typedef struct RECTTAG
  int top;
  int right;
  int bottom;
-}RECT;
+} RECT;
 
-
+#endif
 
 /////////////////////////////////////////////////////////////////////////////
 
@@ -155,13 +199,26 @@ typedef struct PSXDISPLAYTAG
 
 } PSXDisplay_t;
 
+#ifdef _WINDOWS
+extern HINSTANCE hInst;
+#endif
+
 /////////////////////////////////////////////////////////////////////////////
 
 // draw.c
 
 #ifndef _IN_DRAW
 
+#ifdef _WINDOWS
+extern sDX            DX;
+extern HWND           hWGPU; 
+extern GUID           guiDev; 
+extern int            iRefreshRate;
+extern BOOL           bVsync;
+extern BOOL           bVsync_Key;
+#else
 extern char *         pCaptionText;
+#endif
 
 extern int            iResX;
 extern int            iResY;
@@ -180,6 +237,9 @@ extern short          g_m2;
 extern short          g_m3;
 extern short          DrawSemiTrans;
 extern int            iUseGammaVal;
+#ifdef _WINDOWS
+extern int            iUseScanLines;
+#endif
 extern int            iMaintainAspect;
 extern int            iDesktopCol;
 extern int            iUseNoStretchBlt;
@@ -190,6 +250,9 @@ extern int            iFVDisplay;
 extern PSXPoint_t     ptCursorPoint[];
 extern unsigned short usCursorActive;
 
+#ifdef _WINDOWS
+extern int            iSysMemory;
+#endif
 
 #endif
 
@@ -262,6 +325,12 @@ extern uint32_t  ulStatusControl[];
 
 extern uint32_t dwCoreFlags;
 
+#ifdef _WINDOWS
+extern HFONT hGFont;
+extern int   iMPos;
+extern BOOL  bTransparent;
+#endif
+
 #endif
 
 // key.c
@@ -269,6 +338,10 @@ extern uint32_t dwCoreFlags;
 #ifndef _IN_KEY
 
 extern unsigned long  ulKeybits;
+
+#ifdef _WINDOWS
+extern char           szGPUKeys[];
+#endif
 
 #endif
 
@@ -283,6 +356,10 @@ extern int            iFrameLimit;
 extern float          fFrameRateHz;
 extern float          fps_skip;
 extern float          fps_cur;
+#ifdef _WINDOWS
+extern BOOL           IsPerformanceCounter;
+extern int			  iStopSaver;
+#endif
 
 #endif
 
@@ -311,5 +388,3 @@ extern int           GlobalTextIL;
 extern int           iTileCheat;
 
 #endif
-
-

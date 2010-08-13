@@ -1,3 +1,20 @@
+August 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/dfxvideo/cfg.h: Readded Windows support.
+ * plugins/dfxvideo/externals.h: Likewise.
+ * plugins/dfxvideo/gpu.c: Likewise.
+ * plugins/dfxvideo/interp.h: Likewise.
+ * plugins/dfxvideo/menu.c: Likewise.
+ * plugins/dfxvideo/prim.c: Likewise.
+ * plugins/dfxvideo/soft.c: Likewise.
+ * plugins/dfxvideo/zn.c: Likewise.
+ * win32/plugins/dfxvideo: Added.
+ * win32/gui/plugin.c: Disable the menu item of savestate slots
+   which cannot be loaded from.
+ * win32/gui/Win32.h: Likewise.
+ * win32/gui/WndMain.c: Likewise.
+ * win32/plugins/dfsound/winsrc/cfg.c: Changed registry entry.
+
 August 12, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfsound/cfg.h: Readded Windows support.

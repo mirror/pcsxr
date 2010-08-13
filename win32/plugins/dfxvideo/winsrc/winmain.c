@@ -1,10 +1,11 @@
 /***************************************************************************
-                          cfg.h  -  description
+                      gpuPeopsSoft.c  -  description
                              -------------------
     begin                : Sun Oct 28 2001
     copyright            : (C) 2001 by Pete Bernert
     email                : BlackDove@addcom.de
  ***************************************************************************/
+
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -15,18 +16,19 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef _GPU_CFG_H_
-#define _GPU_CFG_H_
+#include "externals.h"
 
-void ReadConfig(void);
-void WriteConfig(void);
-void ReadWinSizeConfig(void);
+///////////////////////////////////////////////////////////////////////////
+// GENERIC FUNCS //////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
-#ifdef _WINDOWS
-BOOL CALLBACK SoftDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam ); 
-#else
-void SoftDlgProc(void);
-void AboutDlgProc(void);
-#endif
+HINSTANCE hInst=NULL;
 
-#endif
+BOOL APIENTRY DllMain(HANDLE hModule,                  // DLL INIT
+                      DWORD  dwReason, 
+                      LPVOID lpReserved)
+{
+ hInst=(HINSTANCE)hModule;
+ return TRUE;                                          // very quick :)
+}
+

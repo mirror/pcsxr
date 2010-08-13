@@ -66,7 +66,7 @@ void ReadConfig(void)
  iUseInterpolation=2;
  iDisStereo=0;
 
- if (RegOpenKeyEx(HKEY_CURRENT_USER,"Software\\Vision Thing\\PSEmu Pro\\SPU\\PeopsSound",0,KEY_ALL_ACCESS,&myKey)==ERROR_SUCCESS)
+ if (RegOpenKeyEx(HKEY_CURRENT_USER,"Software\\Vision Thing\\PSEmu Pro\\SPU\\DFSound",0,KEY_ALL_ACCESS,&myKey)==ERROR_SUCCESS)
   {
    size = 4;
    if(RegQueryValueEx(myKey,"Volume",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
@@ -114,7 +114,7 @@ void WriteConfig(void)
  DWORD myDisp;
  DWORD temp;
 
- RegCreateKeyEx(HKEY_CURRENT_USER,"Software\\Vision Thing\\PSEmu Pro\\SPU\\PeopsSound",0,NULL,REG_OPTION_NON_VOLATILE,KEY_ALL_ACCESS,NULL,&myKey,&myDisp);
+ RegCreateKeyEx(HKEY_CURRENT_USER,"Software\\Vision Thing\\PSEmu Pro\\SPU\\DFSound",0,NULL,REG_OPTION_NON_VOLATILE,KEY_ALL_ACCESS,NULL,&myKey,&myDisp);
  temp=iVolume;
  RegSetValueEx(myKey,"Volume",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=iXAPitch;

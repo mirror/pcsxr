@@ -308,8 +308,6 @@ void ClosePlugins() {
 	PAD1_close();
 	PAD2_close();
 
-	UpdateMenuSlots();
-
 	ret = CDR_close();
 	if (ret < 0) { SysMessage (_("Error Closing CDR Plugin")); return; }
 	ret = GPU_close();

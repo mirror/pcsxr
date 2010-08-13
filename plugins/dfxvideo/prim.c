@@ -387,9 +387,9 @@ void cmdTexturePage(unsigned char * baseAddr)
 
  lGPUstatusRet&=~0x000007ff;
  lGPUstatusRet|=(gdata & 0x07ff);
- 
- usMirror=gdata&0x3000;
- 
+
+ usMirror=(unsigned short)(gdata&0x3000);
+
  UpdateGlobalTP((unsigned short)gdata);
  GlobalTextREST = (gdata&0x00ffffff)>>9;
 }

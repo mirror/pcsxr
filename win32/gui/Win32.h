@@ -58,7 +58,6 @@ void PADhandleKey(int key);
 int  LoadConfig();
 void SaveConfig();
 
-void UpdateMenuSlots();
 void ResetMenuSlots();
 
 void InitLanguages();
