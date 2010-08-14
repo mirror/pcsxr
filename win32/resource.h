@@ -299,6 +299,7 @@
 #define ID_HELP_ABOUT                   40002
 #define ID_FILE_RUN_CD                  40003
 #define ID_FILE_RUN_EXE                 40004
+#define ID_FILE_RUN_NOGUI               40016
 #define ID_EMULATOR_PAUSE               40005
 #define ID_EMULATOR_RESET               40006
 #define ID_FILE_RUN_ISO                 40007

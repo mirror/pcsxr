@@ -50,6 +50,7 @@ int StatesC = 0;
 int CancelQuit = 0;
 char cfgfile[256];
 int Running = 0;
+boolean UseGui = TRUE;
 char PcsxDir[256];
 
 static HDC          hDC;
@@ -130,6 +131,10 @@ void strcatz(char *dst, char *src) {
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+	char *arg = NULL;
+	char cdfile[MAXPATHLEN] = "";
+	int loadstatenum = -1;
+
 	strcpy(cfgfile, "Software\\Pcsx");
 
 	gApp.hInstance = hInstance;
@@ -181,9 +186,42 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 #endif
 
+	// Parse command-line
+	for (arg = strtok(lpCmdLine, " "); arg != NULL; arg = strtok(NULL, " ")) {
+		if (strcmp(arg, "-nogui") == 0) {
+			UseGui = FALSE;
+		} else if (strcmp(arg, "-runcd") == 0) {
+			cdfile[0] = '\0';
+		} else if (strcmp(arg, "-cdfile") == 0) {
+			arg = strtok(NULL, " ");
+			if (arg != NULL) {
+				strcpy(cdfile, arg);
+			}
+		} else if (strcmp(arg, "-psxout") == 0) {
+			Config.PsxOut = TRUE;
+		} else if (strcmp(arg, "-help") == 0) {
+			MessageBox(gApp.hWnd, _(
+				"Usage: pcsx [options]\n"
+				"\toptions:\n"
+				"\t-runcd\t\tRuns CD-ROM\n"
+				"\t-cdfile FILE\tRuns a CD image file\n"
+				"\t-nogui\t\tDon't open the GUI\n"
+				"\t-psxout\t\tEnable PSX output\n"
+				"\t-help\tDisplay this message"),
+				"PCSX", 0);
+
+			return 0;
+		}
+	}
+
 	if (SysInit() == -1) return 1;
 
 	CreateMainWindow(nCmdShow);
+
+	if (!UseGui) {
+		SetIsoFile(cdfile);
+		PostMessage(gApp.hWnd, WM_COMMAND, ID_FILE_RUN_NOGUI, 0);
+	}
 
 	RunGui();
 
@@ -194,7 +232,7 @@ void RunGui() {
 	MSG msg;
 
 	for (;;) {
-		if(PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE)) {
+		if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE)) {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
@@ -208,6 +246,8 @@ void RestoreWindow() {
 	ShowCursor(TRUE);
 	SetCursor(LoadCursor(gApp.hInstance, IDC_ARROW));
 	ShowCursor(TRUE);
+
+	if (!UseGui) PostMessage(gApp.hWnd, WM_COMMAND, ID_FILE_EXIT, 0);
 }
 
 void ResetMenuSlots() {
@@ -511,6 +551,32 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 				case ID_FILE_STATES_SAVE_SLOT8: States_Save(7); return TRUE;
 				case ID_FILE_STATES_SAVE_SLOT9: States_Save(8); return TRUE;
 				case ID_FILE_STATES_SAVE_OTHER: OnStates_SaveOther(); return TRUE;
+
+				case ID_FILE_RUN_NOGUI:
+					SetMenu(hWnd, NULL);
+					LoadPlugins();
+					if (OpenPlugins(hWnd) == -1) {
+						ClosePlugins();
+						RestoreWindow();
+						return TRUE;
+					}
+					SysReset();
+					if (CheckCdrom() == -1) {
+						fprintf(stderr, _("The CD does not appear to be a valid Playstation CD"));
+						ClosePlugins();
+						RestoreWindow();
+						return TRUE;
+					}
+					if (LoadCdrom() == -1) {
+						fprintf(stderr, _("Could not load CD-ROM!"));
+						ClosePlugins();
+						RestoreWindow();
+						return TRUE;
+					}
+					ShowCursor(FALSE);
+					Running = 1;
+					psxCpu->Execute();
+					return TRUE;
 
 				case ID_EMULATOR_RUN:
 					SetMenu(hWnd, NULL);

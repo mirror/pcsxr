@@ -4,6 +4,9 @@ August 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
  * plugins/dfxvideo/hq2x.h: Likewise.
  * plugins/dfxvideo/hq3x.h: Likewise.
  * win32/plugins/dfxvideo/draw.c: Likewise.
+ * win32/gui/WndMain.c: Added support for command line.
+ * win32/gui/Win32.h: Likewise.
+ * win32/gui/resource.h: Likewise.
 
 August 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
