@@ -4357,9 +4357,55 @@ static void hq2x_16_def(unsigned short* dst0, unsigned short* dst1, const unsign
 		if (interp_16_diff(c[8], c[4]))
 			mask |= 1 << 7;
 
+#define P0 dst0[0]
+#define P1 dst0[1]
+#define P2 dst1[0]
+#define P3 dst1[1]
+#define MUR interp_16_diff(c[1], c[5])
+#define MDR interp_16_diff(c[5], c[7])
+#define MDL interp_16_diff(c[7], c[3])
+#define MUL interp_16_diff(c[3], c[1])
+#define IC(p0) c[p0]
+#define I11(p0,p1) interp_16_11(c[p0], c[p1])
+#define I211(p0,p1,p2) interp_16_211(c[p0], c[p1], c[p2])
+#define I31(p0,p1) interp_16_31(c[p0], c[p1])
+#define I332(p0,p1,p2) interp_16_332(c[p0], c[p1], c[p2])
+#define I431(p0,p1,p2) interp_16_431(c[p0], c[p1], c[p2])
+#define I521(p0,p1,p2) interp_16_521(c[p0], c[p1], c[p2])
+#define I53(p0,p1) interp_16_53(c[p0], c[p1])
+#define I611(p0,p1,p2) interp_16_611(c[p0], c[p1], c[p2])
+#define I71(p0,p1) interp_16_71(c[p0], c[p1])
+#define I772(p0,p1,p2) interp_16_772(c[p0], c[p1], c[p2])
+#define I97(p0,p1) interp_16_97(c[p0], c[p1])
+#define I1411(p0,p1,p2) interp_16_1411(c[p0], c[p1], c[p2])
+#define I151(p0,p1) interp_16_151(c[p0], c[p1])
+
 		switch (mask) {
 #include "hq2x.h"
 		}
+
+#undef P0
+#undef P1
+#undef P2
+#undef P3
+#undef MUR
+#undef MDR
+#undef MDL
+#undef MUL
+#undef IC
+#undef I11
+#undef I211
+#undef I31
+#undef I332
+#undef I431
+#undef I521
+#undef I53
+#undef I611
+#undef I71
+#undef I772
+#undef I97
+#undef I1411
+#undef I151
 
 		src0 += 1;
 		src1 += 1;
@@ -4371,8 +4417,6 @@ static void hq2x_16_def(unsigned short* dst0, unsigned short* dst1, const unsign
 
 void hq2x( unsigned char * srcPtr,  DWORD srcPitch, unsigned char * dstPtr, int width, int height)
 {
-
-	//const int srcpitch = srcPitch;
 	const int dstPitch = srcPitch;
 
 	int count = height;
@@ -4455,9 +4499,55 @@ static void hq2x_32_def(unsigned long * dst0, unsigned long * dst1, const unsign
 		if (interp_32_diff(c[8], c[4]))
 			mask |= 1 << 7;
 
+#define P0 dst0[0]
+#define P1 dst0[1]
+#define P2 dst1[0]
+#define P3 dst1[1]
+#define MUR interp_32_diff(c[1], c[5])
+#define MDR interp_32_diff(c[5], c[7])
+#define MDL interp_32_diff(c[7], c[3])
+#define MUL interp_32_diff(c[3], c[1])
+#define IC(p0) c[p0]
+#define I11(p0,p1) interp_32_11(c[p0], c[p1])
+#define I211(p0,p1,p2) interp_32_211(c[p0], c[p1], c[p2])
+#define I31(p0,p1) interp_32_31(c[p0], c[p1])
+#define I332(p0,p1,p2) interp_32_332(c[p0], c[p1], c[p2])
+#define I431(p0,p1,p2) interp_32_431(c[p0], c[p1], c[p2])
+#define I521(p0,p1,p2) interp_32_521(c[p0], c[p1], c[p2])
+#define I53(p0,p1) interp_32_53(c[p0], c[p1])
+#define I611(p0,p1,p2) interp_32_611(c[p0], c[p1], c[p2])
+#define I71(p0,p1) interp_32_71(c[p0], c[p1])
+#define I772(p0,p1,p2) interp_32_772(c[p0], c[p1], c[p2])
+#define I97(p0,p1) interp_32_97(c[p0], c[p1])
+#define I1411(p0,p1,p2) interp_32_1411(c[p0], c[p1], c[p2])
+#define I151(p0,p1) interp_32_151(c[p0], c[p1])
+
 		switch (mask) {
 #include "hq2x.h"
 		}
+
+#undef P0
+#undef P1
+#undef P2
+#undef P3
+#undef MUR
+#undef MDR
+#undef MDL
+#undef MUL
+#undef IC
+#undef I11
+#undef I211
+#undef I31
+#undef I332
+#undef I431
+#undef I521
+#undef I53
+#undef I611
+#undef I71
+#undef I772
+#undef I97
+#undef I1411
+#undef I151
 
 		src0 += 1;
 		src1 += 1;
@@ -4502,7 +4592,6 @@ void hq2x_32( unsigned char * srcPtr,  DWORD srcPitch, unsigned char * dstPtr, i
 
 static void hq3x_32_def(unsigned long*  dst0, unsigned long*  dst1, unsigned long*  dst2, const unsigned long* src0, const unsigned long* src1, const unsigned long* src2, unsigned count)
 {
-
 	unsigned i;
 
 	for(i=0;i<count;++i) {
@@ -4584,7 +4673,6 @@ static void hq3x_32_def(unsigned long*  dst0, unsigned long*  dst1, unsigned lon
 		switch (mask) {
 #include "hq3x.h"
 		}
-
 
 #undef P0
 #undef P1
@@ -4715,9 +4803,65 @@ static void hq3x_16_def(unsigned short* dst0, unsigned short* dst1, unsigned sho
 		if (interp_16_diff(c[8], c[4]))
 			mask |= 1 << 7;
 
+#define P0 dst0[0]
+#define P1 dst0[1]
+#define P2 dst0[2]
+#define P3 dst1[0]
+#define P4 dst1[1]
+#define P5 dst1[2]
+#define P6 dst2[0]
+#define P7 dst2[1]
+#define P8 dst2[2]
+#define MUR interp_16_diff(c[1], c[5])
+#define MDR interp_16_diff(c[5], c[7])
+#define MDL interp_16_diff(c[7], c[3])
+#define MUL interp_16_diff(c[3], c[1])
+#define IC(p0) c[p0]
+#define I11(p0,p1) interp_16_11(c[p0], c[p1])
+#define I211(p0,p1,p2) interp_16_211(c[p0], c[p1], c[p2])
+#define I31(p0,p1) interp_16_31(c[p0], c[p1])
+#define I332(p0,p1,p2) interp_16_332(c[p0], c[p1], c[p2])
+#define I431(p0,p1,p2) interp_16_431(c[p0], c[p1], c[p2])
+#define I521(p0,p1,p2) interp_16_521(c[p0], c[p1], c[p2])
+#define I53(p0,p1) interp_16_53(c[p0], c[p1])
+#define I611(p0,p1,p2) interp_16_611(c[p0], c[p1], c[p2])
+#define I71(p0,p1) interp_16_71(c[p0], c[p1])
+#define I772(p0,p1,p2) interp_16_772(c[p0], c[p1], c[p2])
+#define I97(p0,p1) interp_16_97(c[p0], c[p1])
+#define I1411(p0,p1,p2) interp_16_1411(c[p0], c[p1], c[p2])
+#define I151(p0,p1) interp_16_151(c[p0], c[p1])
+
 		switch (mask) {
-		#include "hq3x.h"
+#include "hq3x.h"
 		}
+
+#undef P0
+#undef P1
+#undef P2
+#undef P3
+#undef P4
+#undef P5
+#undef P6
+#undef P7
+#undef P8
+#undef MUR
+#undef MDR
+#undef MDL
+#undef MUL
+#undef IC
+#undef I11
+#undef I211
+#undef I31
+#undef I332
+#undef I431
+#undef I521
+#undef I53
+#undef I611
+#undef I71
+#undef I772
+#undef I97
+#undef I1411
+#undef I151
 
 		src0 += 1;
 		src1 += 1;

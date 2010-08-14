@@ -32,34 +32,6 @@
  * This effect is a rewritten implementation of the hq effect made by Maxim Stepin
  */
 
-#define P0 dst0[0]
-#define P1 dst0[1]
-#define P2 dst0[2]
-#define P3 dst1[0]
-#define P4 dst1[1]
-#define P5 dst1[2]
-#define P6 dst2[0]
-#define P7 dst2[1]
-#define P8 dst2[2]
-#define MUR interp_32_diff(c[1], c[5])
-#define MDR interp_32_diff(c[5], c[7])
-#define MDL interp_32_diff(c[7], c[3])
-#define MUL interp_32_diff(c[3], c[1])
-#define IC(p0) c[p0]
-#define I11(p0,p1) interp_32_11(c[p0], c[p1])
-#define I211(p0,p1,p2) interp_32_211(c[p0], c[p1], c[p2])
-#define I31(p0,p1) interp_32_31(c[p0], c[p1])
-#define I332(p0,p1,p2) interp_32_332(c[p0], c[p1], c[p2])
-#define I431(p0,p1,p2) interp_32_431(c[p0], c[p1], c[p2])
-#define I521(p0,p1,p2) interp_32_521(c[p0], c[p1], c[p2])
-#define I53(p0,p1) interp_32_53(c[p0], c[p1])
-#define I611(p0,p1,p2) interp_32_611(c[p0], c[p1], c[p2])
-#define I71(p0,p1) interp_32_71(c[p0], c[p1])
-#define I772(p0,p1,p2) interp_32_772(c[p0], c[p1], c[p2])
-#define I97(p0,p1) interp_32_97(c[p0], c[p1])
-#define I1411(p0,p1,p2) interp_32_1411(c[p0], c[p1], c[p2])
-#define I151(p0,p1) interp_32_151(c[p0], c[p1])
-
 case 0 :
 case 1 :
 case 4 :
@@ -2941,30 +2913,3 @@ if (MUR) {
 }
 } break;
 
-#undef P0
-#undef P1
-#undef P2
-#undef P3
-#undef P4
-#undef P5
-#undef P6
-#undef P7
-#undef P8
-#undef MUR
-#undef MDR
-#undef MDL
-#undef MUL
-#undef IC
-#undef I11
-#undef I211
-#undef I31
-#undef I332
-#undef I431
-#undef I521
-#undef I53
-#undef I611
-#undef I71
-#undef I772
-#undef I97
-#undef I1411
-#undef I151

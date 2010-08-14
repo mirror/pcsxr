@@ -1,12 +1,9 @@
-August 14, 2010 edgbla <edgbla@yandex.ru>
+August 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
- * gui/Plugin.c: Added gpu busy interface.
- * macosx/Plugin.c: Likewise.
- * win32/gui/plugin.c: Likewise.
- * libpcsxcore/r3000a.c: Likewise.
- * libpcsxcore/r3000a.h: Likewise.
- * libpcsxcore/plugins.c: Likewise.
- * libpcsxcore/plugins.h: Likewise.
+ * plugins/dfxvideo/draw.c: Fixed hq2x/hq3x under Windows.
+ * plugins/dfxvideo/hq2x.h: Likewise.
+ * plugins/dfxvideo/hq3x.h: Likewise.
+ * win32/plugins/dfxvideo/draw.c: Likewise.
 
 August 13, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
