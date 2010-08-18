@@ -16,5 +16,17 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifdef _WINDOWS
+
+void ReadConfig(void);
+void WriteConfig(void);
+void ReadWinSizeConfig(void);
+BOOL CALLBACK CfgDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK AboutDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+#else
+
 void ReadConfig(void);
 void ReadConfigFile();
+
+#endif

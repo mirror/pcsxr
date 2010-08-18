@@ -1,5 +1,5 @@
 /***************************************************************************
-                           menu.h  -  description
+                           ssave.c  -  description
                              -------------------
     begin                : Sun Mar 08 2009
     copyright            : (C) 1999-2009 by Pete Bernert
@@ -24,22 +24,42 @@
 //
 //*************************************************************************// 
 
-#ifndef _GL_MENU_H_
-#define _GL_MENU_H_
+#include "stdafx.h"
 
-void DisplayText(void);
-void HideText(void);
-void KillDisplayLists(void);
-void MakeDisplayLists(void);
-void BuildDispMenu(int iInc);
-void SwitchDispMenu(int iStep);
-void CreatePic(unsigned char * pMem);
-void DisplayPic(void);
-void DestroyPic(void);
-#ifdef _WINDOWS
-void ShowGpuPic(void);
-void ShowTextGpuPic(void);
+#include "externals.h"
+
+////////////////////////////////////////////////////////////////////////
+// screensaver stuff: dynamically load kernel32.dll to avoid export dependeny
+////////////////////////////////////////////////////////////////////////
+
+#ifdef __MINGW32__
+#define EXECUTION_STATE DWORD
 #endif
-void ShowGunCursor(void);
 
-#endif // _GL_MENU_H_
+void EnableScreenSaver(BOOL bEnab)
+{
+ HINSTANCE hKernel32 = NULL;
+ EXECUTION_STATE (WINAPI *D_SetThreadExecutionState)(EXECUTION_STATE esFlags);
+
+ if(bEnab)
+  {
+   hKernel32 = LoadLibrary("kernel32.dll");
+   if(hKernel32 != NULL)
+    {
+     if((D_SetThreadExecutionState=(EXECUTION_STATE (WINAPI *)(EXECUTION_STATE))GetProcAddress(hKernel32,"SetThreadExecutionState"))!=NULL)
+      D_SetThreadExecutionState(ES_SYSTEM_REQUIRED|ES_DISPLAY_REQUIRED);
+     FreeLibrary(hKernel32);
+    }
+  }
+ else
+  {
+   hKernel32 = LoadLibrary("kernel32.dll");
+   if(hKernel32 != NULL)
+    {
+     if((D_SetThreadExecutionState=(EXECUTION_STATE (WINAPI *)(EXECUTION_STATE))GetProcAddress(hKernel32,"SetThreadExecutionState"))!=NULL)
+      D_SetThreadExecutionState(ES_SYSTEM_REQUIRED|ES_DISPLAY_REQUIRED|ES_CONTINUOUS);
+     FreeLibrary(hKernel32);
+    }
+  }
+}
+

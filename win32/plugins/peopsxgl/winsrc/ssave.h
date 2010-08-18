@@ -1,5 +1,5 @@
 /***************************************************************************
-                           menu.h  -  description
+                           ssave.h  -  description
                              -------------------
     begin                : Sun Mar 08 2009
     copyright            : (C) 1999-2009 by Pete Bernert
@@ -24,22 +24,6 @@
 //
 //*************************************************************************// 
 
-#ifndef _GL_MENU_H_
-#define _GL_MENU_H_
+// prototype
 
-void DisplayText(void);
-void HideText(void);
-void KillDisplayLists(void);
-void MakeDisplayLists(void);
-void BuildDispMenu(int iInc);
-void SwitchDispMenu(int iStep);
-void CreatePic(unsigned char * pMem);
-void DisplayPic(void);
-void DestroyPic(void);
-#ifdef _WINDOWS
-void ShowGpuPic(void);
-void ShowTextGpuPic(void);
-#endif
-void ShowGunCursor(void);
-
-#endif // _GL_MENU_H_
+void EnableScreenSaver(BOOL bEnab);

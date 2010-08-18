@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Developer Studio generated include file.
-// Used by gpuPeopsSoft.rc
+// Used by DFXVideo.rc
 //
 #define IDS_INFO0                       1
 #define IDS_INFO1                       2

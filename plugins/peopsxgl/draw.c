@@ -76,22 +76,27 @@
 ////////////////////////////////////////////////////////////////////////////////////
 // draw globals; most will be initialized again later (by config or checks) 
 
-BOOL           bIsFirstFrame=TRUE;
+#ifdef _WINDOWS
+HDC            dcGlobal = NULL;
+HWND           hWWindow;
+#endif
+
+BOOL           bIsFirstFrame = TRUE;
 
 // resolution/ratio vars
 
 int            iResX;
 int            iResY;
-BOOL           bKeepRatio=FALSE;
+BOOL           bKeepRatio = FALSE;
 RECT           rRatioRect;
 
 // psx mask related vars
 
-BOOL           bCheckMask=FALSE;
-int            iUseMask=0;
-int            iSetMask=0;
-unsigned short sSetMask=0;
-uint32_t       lSetMask=0;
+BOOL           bCheckMask = FALSE;
+int            iUseMask = 0;
+int            iSetMask = 0;
+unsigned short sSetMask = 0;
+uint32_t       lSetMask = 0;
 
 // drawing/coord vars
 
@@ -128,6 +133,55 @@ PFNGLCOLORTABLEEXT glColorTableEXTEx=NULL;
 int            iDepthFunc=0;
 int            iZBufferDepth=0;
 GLbitfield     uiBufferBits=GL_COLOR_BUFFER_BIT;
+
+////////////////////////////////////////////////////////////////////////
+// Set OGL pixel format
+////////////////////////////////////////////////////////////////////////
+ 
+#ifdef _WINDOWS
+BOOL bSetupPixelFormat(HDC hDC)
+{
+ int pixelformat;
+ static PIXELFORMATDESCRIPTOR pfd = 
+  {
+   sizeof(PIXELFORMATDESCRIPTOR),    // size of this pfd
+    1,                               // version number
+    PFD_DRAW_TO_WINDOW |             // support window
+      PFD_SUPPORT_OPENGL |           // support OpenGL
+      PFD_DOUBLEBUFFER,              // double buffered
+    PFD_TYPE_RGBA,                   // RGBA type
+    16,                              // 16-bit color depth  (adjusted later)
+    0, 0, 0, 0, 0, 0,                // color bits ignored
+    0,                               // no alpha buffer
+    0,                               // shift bit ignored
+    0,                               // no accumulation buffer
+    0, 0, 0, 0,                      // accum bits ignored
+    0,                               // z-buffer    
+    0,
+    0,                               // no auxiliary buffer
+    PFD_MAIN_PLANE,                  // main layer
+    0,                               // reserved
+    0, 0, 0                          // layer masks ignored
+  };
+ 
+ pfd.cColorBits=iColDepth;                             // set user color depth
+ pfd.cDepthBits=iZBufferDepth;                         // set user zbuffer (by psx mask)
+
+ if((pixelformat=ChoosePixelFormat(hDC,&pfd))==0)     
+  {
+   MessageBox(NULL,"ChoosePixelFormat failed","Error",MB_OK);
+   return FALSE;
+  }
+
+ if(SetPixelFormat(hDC,pixelformat, &pfd)==FALSE)
+  {
+   MessageBox(NULL,"SetPixelFormat failed","Error",MB_OK);
+   return FALSE;
+  }
+
+ return TRUE;
+}
+#endif
 
 ////////////////////////////////////////////////////////////////////////
 // Get extension infos (f.e. pal textures / packed pixels)
@@ -170,7 +224,11 @@ void GetExtInfos(void)
   {
    iUsePalTextures=1;                                  // -> wow, supported, get func pointer
 
+#ifdef _WINDOWS
+   glColorTableEXTEx=(PFNGLCOLORTABLEEXT)wglGetProcAddress("glColorTableEXT");
+#else
    glColorTableEXTEx=(PFNGLCOLORTABLEEXT)glXGetProcAddress("glColorTableEXT");
+#endif
 
    if(glColorTableEXTEx==NULL) iUsePalTextures=0;      // -> ha, cheater... no func, no support
   }
@@ -192,11 +250,27 @@ void SetExtGLFuncs(void)
 
  //----------------------------------------------------//
 
+#ifdef _WINDOWS
+ if((iForceVSync>=0) &&                                // force vsync?
+    strstr((char *)glGetString(GL_EXTENSIONS),         // and extension available?
+    "WGL_EXT_swap_control"))
+  {
+   PFNWGLSWAPINTERVALFARPROC wglSwapIntervalEXT= 
+    (PFNWGLSWAPINTERVALFARPROC)wglGetProcAddress("wglSwapIntervalEXT");
+
+   if(wglSwapIntervalEXT) wglSwapIntervalEXT(iForceVSync);
+  }
+#endif
+
  if(iUseExts && !(dwActFixes&1024) &&                  // extensions wanted? and not turned off by game fix?
     strstr((char *)glGetString(GL_EXTENSIONS),         // and blend_subtract available?
     "GL_EXT_blend_subtract"))
      {                                                 // -> get ogl blend function pointer
-      glBlendEquationEXTEx=(PFNGLBLENDEQU)glXGetProcAddress("glBlendEquationEXT"); 
+#ifdef _WINDOWS
+      glBlendEquationEXTEx=(PFNGLBLENDEQU)wglGetProcAddress("glBlendEquationEXT");
+#else
+      glBlendEquationEXTEx=(PFNGLBLENDEQU)glXGetProcAddress("glBlendEquationEXT");
+#endif
      }
  else                                                  // no subtract blending?
   {
@@ -446,8 +520,23 @@ void CreateScanLines(void)
 // Initialize OGL
 ////////////////////////////////////////////////////////////////////////
 
+#ifdef _WINDOWS    
+HGLRC GLCONTEXT=NULL;
+#endif
+
 int GLinitialize() 
 {
+#ifdef _WINDOWS
+ HGLRC objectRC;
+ // init
+ dcGlobal = GetDC(hWWindow);                           // FIRST: dc/rc stuff
+ objectRC = wglCreateContext(dcGlobal); 
+ GLCONTEXT=objectRC;
+ wglMakeCurrent(dcGlobal, objectRC);
+ // CheckWGLExtensions(dcGlobal);
+ if(bWindowMode) ReleaseDC(hWWindow,dcGlobal);         // win mode: release dc again
+#endif
+
  glViewport(rRatioRect.left,                           // init viewport by ratio rect
             iResY-(rRatioRect.top+rRatioRect.bottom),
             rRatioRect.right, 
@@ -545,10 +634,13 @@ int GLinitialize()
  glPixelTransferi(GL_ALPHA_SCALE, 1);
  glPixelTransferi(GL_ALPHA_BIAS, 0);                                                  
 
- printf(glGetString(GL_VENDOR));                       // linux: tell user what is getting used
- printf("\n");
- printf(glGetString(GL_RENDERER));
- printf("\n");
+#ifdef _WINDOWS
+                                                       // detect Windows hw/sw mode (just for info)
+ if(!strcmp("Microsoft Corporation",(LPTSTR)glGetString(GL_VENDOR)) &&
+    !strcmp("GDI Generic",          (LPTSTR)glGetString(GL_RENDERER)))
+      bGLSoft=TRUE;
+ else bGLSoft=FALSE;
+#endif
 
  glFlush();                                            // we are done...
  glFinish();                           
@@ -591,6 +683,13 @@ void GLcleanup()
   }
 
  CleanupTextureStore();                                // bye textures
+
+#ifdef _WINDOWS 
+ wglMakeCurrent(NULL, NULL);                           // bye context
+ if(GLCONTEXT) wglDeleteContext(GLCONTEXT);
+ if(!bWindowMode && dcGlobal) 
+  ReleaseDC(hWWindow,dcGlobal);
+#endif
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -1378,7 +1477,9 @@ void assignTexture4(void)
 // render pos / buffers
 ////////////////////////////////////////////////////////////////////////
 
+#ifndef _WINDOWS
 #define EqualRect(pr1,pr2) ((pr1)->left==(pr2)->left && (pr1)->top==(pr2)->top && (pr1)->right==(pr2)->right && (pr1)->bottom==(pr2)->bottom)
+#endif
 
 ////////////////////////////////////////////////////////////////////////
 // SetDisplaySettings: "simply" calcs the new drawing area and updates

@@ -126,6 +126,9 @@ GLubyte texrasters[40][12]= {
 GLuint gTexFontName=0;
 GLuint gTexPicName=0;
 GLuint gTexCursorName=0;
+#ifdef _WINDOWS
+HFONT hGFont=NULL;
+#endif
 
 void MakeDisplayLists(void)                            // MAKE FONT 
 {
@@ -162,6 +165,14 @@ void MakeDisplayLists(void)                            // MAKE FONT
  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
  glTexImage2D(GL_TEXTURE_2D, 0, 3, 64, 64, 0, GL_RGB,
               GL_UNSIGNED_BYTE,TexBytes);
+
+#ifdef _WINDOWS
+ hGFont=CreateFont(13,0,0,0,FW_NORMAL,FALSE,           // windows: create font for hint texts
+                   FALSE,FALSE,DEFAULT_CHARSET,
+                   OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,
+                   DEFAULT_QUALITY,DEFAULT_PITCH,
+                   "Arial");
+#endif
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -170,6 +181,11 @@ void MakeDisplayLists(void)                            // MAKE FONT
 
 void KillDisplayLists(void)
 {
+#ifdef _WINDOWS
+ if(hGFont) DeleteObject(hGFont);                      // windows: kill info font
+ hGFont=NULL;
+#endif
+
  if(gTexFontName)                                      // del font/info textures
   {glDeleteTextures(1,&gTexFontName);gTexFontName=0;}
  if(gTexPicName) 
@@ -555,7 +571,11 @@ void BuildDispMenu(int iInc)
 
  iMPos+=iInc;                                          // up or down
  if(iMPos<0) iMPos=9;                                  // wrap around
- if(iMPos>9) iMPos=0;                                  
+ if(iMPos>9) iMPos=0;
+
+#ifdef _WINDOWS
+ if(gTexPicName) ShowTextGpuPic();                     // windows: show the gpu info as well
+#endif
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -572,6 +592,17 @@ void SwitchDispMenu(int iStep)
     {
      int iType=0;
      bInitCap = TRUE;
+
+#ifdef _WINDOWS
+     if(iFrameLimit==1 && bUseFrameLimit &&
+        GetAsyncKeyState(VK_SHIFT)&32768)
+      {
+       fFrameRate+=iStep;
+       if(fFrameRate<3.0f) fFrameRate=3.0f;
+       SetAutoFrameCap();
+       break;
+      }
+#endif
 
      if(bUseFrameLimit) iType=iFrameLimit;
      iType+=iStep;
@@ -1361,6 +1392,113 @@ void DisplayPic(void)
  glEnable(GL_ALPHA_TEST);
  glEnable(GL_SCISSOR_TEST);                       
 }
+
+////////////////////////////////////////////////////////////////////////
+// windows only: texture with pi-tec sign and version info
+////////////////////////////////////////////////////////////////////////
+
+#ifdef _WINDOWS
+void ShowGpuPic(void)
+{
+ HRSRC hR;HGLOBAL hG;
+ unsigned long * pRMem;
+ unsigned char * pMem;
+ int x,y;unsigned long * pDMem;
+
+ if(gTexPicName) {DestroyPic();return;}                // turn off any screen pic, if it does already exist
+
+ if(ulKeybits&KEY_SHOWFPS) {ShowTextGpuPic();return;}
+
+ hR=FindResource(hInst,MAKEINTRESOURCE(IDB_GPU),RT_BITMAP); // load bitmap from resource
+ hG=LoadResource(hInst,hR);
+ 
+ pRMem=((unsigned long *)LockResource(hG))+10;         // get long ptr to bmp data
+
+ pMem=(unsigned char *)malloc(128*96*3);               // change the data upside-down
+
+ for(y=0;y<96;y++)
+  {
+   pDMem=(unsigned long *)(pMem+(95-y)*128*3);
+   for(x=0;x<96;x++) *pDMem++=*pRMem++;
+  }
+
+ CreatePic(pMem);                                      // show the pic
+ 
+ free(pMem);                                           // clean up
+ DeleteObject(hG);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void ShowTextGpuPic(void)                              // CREATE TEXT SCREEN PIC
+{                                                      // gets an Text and paints
+ unsigned char * pMem;BITMAPINFO bmi;                  // it into a rgb24 bitmap
+ HDC hdc,hdcMem;HBITMAP hBmp,hBmpMem;HFONT hFontMem;   // to display it in the gpu
+ HBRUSH hBrush,hBrushMem;HPEN hPen,hPenMem;
+ char szB[256];
+ RECT r={0,0,128,96};                                  // size of bmp... don't change that
+ COLORREF crFrame = RGB(255,255,128);                  // some example color inits
+ COLORREF crBkg   = RGB(0,0,0);
+ COLORREF crText  = RGB(255,255,0);
+
+ if(gTexPicName) DestroyPic();
+
+ //----------------------------------------------------// creation of the dc & bitmap
+
+ hdc   =GetDC(NULL);                                   // create a dc
+ hdcMem=CreateCompatibleDC(hdc);
+ ReleaseDC(NULL,hdc);
+  
+ memset(&bmi,0,sizeof(BITMAPINFO));                    // create a 24bit dib
+ bmi.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
+ bmi.bmiHeader.biWidth=128;
+ bmi.bmiHeader.biHeight=-96;
+ bmi.bmiHeader.biPlanes=1;
+ bmi.bmiHeader.biBitCount=24;
+ bmi.bmiHeader.biCompression=BI_RGB;
+ hBmp=CreateDIBSection(hdcMem,&bmi,DIB_RGB_COLORS,
+                       (void **)&pMem,NULL,0);         // pMem will point to 128x96x3 bitmap data
+
+ hBmpMem   = (HBITMAP)SelectObject(hdcMem,hBmp);       // sel the bmp into the dc
+
+ //----------------------------------------------------// ok, the following is just a drawing example... change it...
+                                                       // create & select an additional font... whatever you want to paint, paint it in the dc :)
+ hBrush=CreateSolidBrush(crBkg);
+ hPen=CreatePen(PS_SOLID,0,crFrame);
+
+ hBrushMem = (HBRUSH)SelectObject(hdcMem,hBrush);
+ hPenMem   = (HPEN)SelectObject(hdcMem,hPen);
+ hFontMem  = (HFONT)SelectObject(hdcMem,hGFont);
+
+ SetTextColor(hdcMem,crText);
+ SetBkColor(hdcMem,crBkg);
+
+ Rectangle(hdcMem,r.left,r.top,r.right,r.bottom);      // our example: fill rect and paint border
+ InflateRect(&r,-3,-2);                                // reduce the text area
+
+ LoadString(hInst,IDS_INFO0+iMPos,szB,255);
+ DrawText(hdcMem,szB,strlen(szB),&r,                   // paint the text (including clipping and word break)
+          DT_LEFT|DT_WORDBREAK);
+                                                     
+ //----------------------------------------------------// ok, now store the pMem data, or just call the gpu func
+
+ CreatePic(pMem);
+
+ //----------------------------------------------------// finished, now we clean up... needed, or you will get resource leaks :)
+
+ SelectObject(hdcMem,hBmpMem);                         // sel old mem dc objects
+ SelectObject(hdcMem,hBrushMem);
+ SelectObject(hdcMem,hPenMem);
+ SelectObject(hdcMem,hFontMem);
+ DeleteDC(hdcMem);                                     // delete mem dcs
+ DeleteObject(hBmp);
+ DeleteObject(hBrush);                                 // delete created objects
+ DeleteObject(hPen);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+#endif
 
 ////////////////////////////////////////////////////////////////////////
 // show gun cursor

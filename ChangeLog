@@ -1,3 +1,47 @@
+August 18, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * plugins/peopsxgl/cfg.h: Readded Windows support.
+ * plugins/peopsxgl/draw.c: Likewise.
+ * plugins/peopsxgl/draw.h: Likewise.
+ * plugins/peopsxgl/externals.h: Likewise.
+ * plugins/peopsxgl/fps.h: Likewise.
+ * plugins/peopsxgl/gl_ext.h: Likewise.
+ * plugins/peopsxgl/gpu.c: Likewise.
+ * plugins/peopsxgl/menu.c: Likewise.
+ * plugins/peopsxgl/menu.h: Likewise.
+ * plugins/peopsxgl/soft.c: Likewise.
+ * plugins/peopsxgl/stdafx.h: Likewise.
+ * plugins/peopsxgl/texture.c: Likewise.
+ * win32/plugins/peopsxgl: Added.
+ * win32/plugins/dfsound/winsrc/bitmap1.bmp: Moved to...
+ * win32/plugins/dfsound/bitmap1.bmp: Here.
+ * win32/plugins/dfsound/winsrc/bitmap2.bmp: Moved to...
+ * win32/plugins/dfsound/bitmap2.bmp: Here.
+ * win32/plugins/dfsound/winsrc/bitmap3.bmp: Moved to...
+ * win32/plugins/dfsound/bitmap3.bmp: Here.
+ * win32/plugins/dfsound/winsrc/bitmap4.bmp: Moved to...
+ * win32/plugins/dfsound/bitmap4.bmp: Here.
+ * win32/plugins/dfsound/winsrc/bitmap5.bmp: Moved to...
+ * win32/plugins/dfsound/bitmap5.bmp: Here.
+ * win32/plugins/dfsound/winsrc/DFSound.def: Moved to...
+ * win32/plugins/dfsound/DFSound.def: Here.
+ * win32/plugins/dfsound/winsrc/DFSound.rc: Moved to...
+ * win32/plugins/dfsound/DFSound.rc: Here.
+ * win32/plugins/dfsound/winsrc/resource.h: Moved to...
+ * win32/plugins/dfsound/resource.h: Here.
+ * win32/plugins/dfsound/DFSound.dsp: Updated.
+ * win32/plugins/dfsound/DFSound.dev: Added Dev-C++ Project file.
+ * win32/plugins/dfxvideo/winsrc/DFXVideo.def: Moved to...
+ * win32/plugins/dfxvideo/DFXVideo.def: Here.
+ * win32/plugins/dfxvideo/winsrc/DFXVideo.rc: Moved to...
+ * win32/plugins/dfxvideo/DFXVideo.rc: Here.
+ * win32/plugins/dfxvideo/winsrc/gpu.bmp: Moved to...
+ * win32/plugins/dfxvideo/gpu.bmp: Here.
+ * win32/plugins/dfxvideo/winsrc/resource.h: Moved to...
+ * win32/plugins/dfxvideo/resource.h: Here.
+ * win32/plugins/dfxvideo/DFXVideo.dsp: Updated.
+ * win32/plugins/dfxvideo/DFXVideo.dev: Added Dev-C++ Project file.
+
 August 14, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/dfxvideo/draw.c: Fixed hq2x/hq3x under Windows.

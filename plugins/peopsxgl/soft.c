@@ -1188,12 +1188,34 @@ static int left_R, delta_left_R, right_R, delta_right_R;
 static int left_G, delta_left_G, right_G, delta_right_G;
 static int left_B, delta_left_B, right_B, delta_right_B;
 
+#ifdef _MSC_VER
+
+#pragma warning  (disable : 4035)
+
+__inline int shl10idiv(int x, int y)
+{
+ __asm
+  {
+   mov   eax,x
+   mov   ebx,y
+   mov   edx, eax
+   shl   eax, 10
+   sar   edx, 22
+   idiv  ebx
+   // return result in eax
+  }
+}
+
+#else
+
 __inline int shl10idiv(int x, int y)
 {
  long long int bi=x;
  bi<<=10;
  return bi/y;
 }
+
+#endif
 
 __inline int RightSection_F(void)
 {

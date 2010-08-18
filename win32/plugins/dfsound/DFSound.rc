@@ -411,7 +411,6 @@ BEGIN
     "LANGUAGE 9, 1\r\n"
     "#pragma code_page(1252)\r\n"
     "#endif\r\n"
-    "#include ""afxres.rc""         // Standard components\r\n"
     "#endif\0"
 END
 
@@ -435,11 +434,11 @@ LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
 // Bitmap
 //
 
-IDB_BITMAP1             BITMAP  MOVEABLE PURE   "bitmap1.bmp"
-IDB_BITMAP2             BITMAP  MOVEABLE PURE   "bitmap2.bmp"
-IDB_BITMAP3             BITMAP  MOVEABLE PURE   "bitmap3.bmp"
-IDB_BITMAP4             BITMAP  MOVEABLE PURE   "bitmap4.bmp"
-IDB_BITMAP5             BITMAP  MOVEABLE PURE   "bitmap5.bmp"
+IDB_BITMAP1             BITMAP  MOVEABLE PURE   "res\\bitmap1.bmp"
+IDB_BITMAP2             BITMAP  MOVEABLE PURE   "res\\bitmap2.bmp"
+IDB_BITMAP3             BITMAP  MOVEABLE PURE   "res\\bitmap3.bmp"
+IDB_BITMAP4             BITMAP  MOVEABLE PURE   "res\\bitmap4.bmp"
+IDB_BITMAP5             BITMAP  MOVEABLE PURE   "res\\bitmap5.bmp"
 #endif    // German (Germany) resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -460,7 +459,6 @@ IDB_BITMAP5             BITMAP  MOVEABLE PURE   "bitmap5.bmp"
 LANGUAGE 9, 1
 #pragma code_page(1252)
 #endif
-#include "afxres.rc"         // Standard components
 #endif
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED

@@ -28,6 +28,11 @@
 #define COLOR(x) (x & 0xffffff)
 
 // prototypes
+
+#ifdef _WINDOWS
+BOOL bSetupPixelFormat(HDC hDC);
+#endif
+
 int  GLinitialize();
 void GLcleanup();
 BOOL offset2(void);

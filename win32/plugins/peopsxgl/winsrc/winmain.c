@@ -1,5 +1,5 @@
 /***************************************************************************
-                           menu.h  -  description
+                       gpuPeopsOpenGL.c  -  description
                              -------------------
     begin                : Sun Mar 08 2009
     copyright            : (C) 1999-2009 by Pete Bernert
@@ -24,22 +24,19 @@
 //
 //*************************************************************************// 
 
-#ifndef _GL_MENU_H_
-#define _GL_MENU_H_
+#include "stdafx.h"
+               
+///////////////////////////////////////////////////////////////////////////
+// GENERIC FUNCS //////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
-void DisplayText(void);
-void HideText(void);
-void KillDisplayLists(void);
-void MakeDisplayLists(void);
-void BuildDispMenu(int iInc);
-void SwitchDispMenu(int iStep);
-void CreatePic(unsigned char * pMem);
-void DisplayPic(void);
-void DestroyPic(void);
-#ifdef _WINDOWS
-void ShowGpuPic(void);
-void ShowTextGpuPic(void);
-#endif
-void ShowGunCursor(void);
+HINSTANCE hInst=NULL;
 
-#endif // _GL_MENU_H_
+BOOL APIENTRY DllMain(HANDLE hModule,                  // DLL INIT
+                      DWORD  dwReason, 
+                      LPVOID lpReserved)
+{
+ hInst=(HINSTANCE)hModule;
+ return TRUE;                                          // very quick :)
+}
+
