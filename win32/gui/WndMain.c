@@ -132,7 +132,7 @@ void strcatz(char *dst, char *src) {
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	char *arg = NULL;
-	char cdfile[MAXPATHLEN] = "";
+	char cdfile[MAXPATHLEN] = "", buf[4096];
 	int loadstatenum = -1;
 
 	strcpy(cfgfile, "Software\\Pcsx");
@@ -187,18 +187,23 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 #endif
 
 	// Parse command-line
-	for (arg = strtok(lpCmdLine, " "); arg != NULL; arg = strtok(NULL, " ")) {
+	strncpy(buf, lpCmdLine, 4096);
+
+	for (arg = strtok(buf, " "); arg != NULL; arg = strtok(NULL, " ")) {
 		if (strcmp(arg, "-nogui") == 0) {
 			UseGui = FALSE;
 		} else if (strcmp(arg, "-runcd") == 0) {
 			cdfile[0] = '\0';
 		} else if (strcmp(arg, "-cdfile") == 0) {
-			arg = strtok(NULL, "\"");
+			arg = strtok(NULL, " ");
 			if (arg != NULL) {
-				strcpy(cdfile, arg);
-			} else {
-				arg = strtok(NULL, " ");
-				if (arg != NULL) strcpy(cdfile, arg);
+				if (arg[0] == '"') {
+					strncpy(buf, lpCmdLine + (arg - buf), 4096);
+					arg = strtok(buf, "\"");
+					if (arg != NULL) strcpy(cdfile, arg);
+				} else {
+					strcpy(cdfile, arg);
+				}
 			}
 		} else if (strcmp(arg, "-psxout") == 0) {
 			Config.PsxOut = TRUE;
@@ -206,10 +211,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			MessageBox(gApp.hWnd, _(
 				"Usage: pcsx [options]\n"
 				"\toptions:\n"
-				"\t-runcd\t\tRuns CD-ROM (requires -nogui)\n"
-				"\t-cdfile FILE\tRuns a CD image file (requires -nogui)\n"
 				"\t-nogui\t\tDon't open the GUI\n"
 				"\t-psxout\t\tEnable PSX output\n"
+				"\t-runcd\t\tRuns CD-ROM (requires -nogui)\n"
+				"\t-cdfile FILE\tRuns a CD image file (requires -nogui)\n"
 				"\t-help\t\tDisplay this message"),
 				"PCSX", 0);
 
