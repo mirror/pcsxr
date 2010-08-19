@@ -1,3 +1,7 @@
+August 19, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
+
+ * win32/gui/WndMain.c: Handle filename in commandline properly.
+
 August 18, 2010 Wei Mingzhi <whistler_wmz@users.sf.net>
 
  * plugins/peopsxgl/cfg.h: Readded Windows support.

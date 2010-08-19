@@ -193,9 +193,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		} else if (strcmp(arg, "-runcd") == 0) {
 			cdfile[0] = '\0';
 		} else if (strcmp(arg, "-cdfile") == 0) {
-			arg = strtok(NULL, " ");
+			arg = strtok(NULL, "\"");
 			if (arg != NULL) {
 				strcpy(cdfile, arg);
+			} else {
+				arg = strtok(NULL, " ");
+				if (arg != NULL) strcpy(cdfile, arg);
 			}
 		} else if (strcmp(arg, "-psxout") == 0) {
 			Config.PsxOut = TRUE;
@@ -203,11 +206,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			MessageBox(gApp.hWnd, _(
 				"Usage: pcsx [options]\n"
 				"\toptions:\n"
-				"\t-runcd\t\tRuns CD-ROM\n"
-				"\t-cdfile FILE\tRuns a CD image file\n"
+				"\t-runcd\t\tRuns CD-ROM (requires -nogui)\n"
+				"\t-cdfile FILE\tRuns a CD image file (requires -nogui)\n"
 				"\t-nogui\t\tDon't open the GUI\n"
 				"\t-psxout\t\tEnable PSX output\n"
-				"\t-help\tDisplay this message"),
+				"\t-help\t\tDisplay this message"),
 				"PCSX", 0);
 
 			return 0;
