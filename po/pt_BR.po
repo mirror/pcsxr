@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsx-df\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-12 00:15+0800\n"
+"POT-Creation-Date: 2010-08-22 20:16+0800\n"
 "PO-Revision-Date: 2009-11-28 23:57+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: PoBRE <romhackers@gmail.com>\n"
@@ -60,7 +60,7 @@ msgstr "Sobre"
 #: ../win32/gui/AboutDlg.c:48 ../win32/gui/AboutDlg.c:52
 #: ../win32/gui/CheatDlg.c:69 ../win32/gui/CheatDlg.c:119
 #: ../win32/gui/ConfigurePlugins.c:483 ../win32/gui/ConfigurePlugins.c:614
-#: ../win32/gui/WndMain.c:974 ../win32/gui/WndMain.c:1210
+#: ../win32/gui/WndMain.c:1040 ../win32/gui/WndMain.c:1276
 #: ../plugins/peopsxgl/gpucfg/interface.c:130
 #: ../plugins/peopsxgl/gpucfg/interface.c:843
 msgid "OK"
@@ -95,7 +95,7 @@ msgstr "Código de Trapaça:"
 
 #: ../win32/gui/CheatDlg.c:70 ../win32/gui/CheatDlg.c:120
 #: ../win32/gui/ConfigurePlugins.c:484 ../win32/gui/ConfigurePlugins.c:615
-#: ../win32/gui/WndMain.c:975 ../win32/gui/WndMain.c:1211
+#: ../win32/gui/WndMain.c:1041 ../win32/gui/WndMain.c:1277
 #: ../plugins/peopsxgl/gpucfg/interface.c:338
 msgid "Cancel"
 msgstr "Cancelar"
@@ -406,22 +406,22 @@ msgstr ""
 "Observação: o diretório da extensão de jogo em rede deve ser o mesmo que "
 "odas outras extensões."
 
-#: ../win32/gui/plugin.c:90 ../win32/gui/WndMain.c:281
+#: ../win32/gui/plugin.c:90 ../win32/gui/WndMain.c:319
 #, c-format
 msgid "*PCSX*: Saved State %d"
 msgstr "PCSX: Estado \"%d\" salvo."
 
-#: ../win32/gui/plugin.c:91 ../win32/gui/WndMain.c:282
+#: ../win32/gui/plugin.c:91 ../win32/gui/WndMain.c:320
 #, c-format
 msgid "*PCSX*: Error Saving State %d"
 msgstr "PCSX: Erro ao salvar o estado \"%d\"!"
 
-#: ../win32/gui/plugin.c:107 ../win32/gui/WndMain.c:259
+#: ../win32/gui/plugin.c:107 ../win32/gui/WndMain.c:297
 #, c-format
 msgid "*PCSX*: Loaded State %d"
 msgstr "PCSX: Estado \"%d\" carregado."
 
-#: ../win32/gui/plugin.c:108 ../win32/gui/WndMain.c:260
+#: ../win32/gui/plugin.c:108 ../win32/gui/WndMain.c:298
 #, c-format
 msgid "*PCSX*: Error Loading State %d"
 msgstr "PCSX: Erro ao carregar o estado \"%d\"!"
@@ -482,494 +482,527 @@ msgstr "Erro ao abrir a extensão de CDROM!"
 msgid "Error Opening GPU Plugin (%d)"
 msgstr "Erro ao abrir a extensão de GPU (%d)!"
 
-#: ../win32/gui/plugin.c:279
+#: ../win32/gui/plugin.c:280
 #, c-format
 msgid "Error Opening SPU Plugin (%d)"
 msgstr "Erro ao abrir a extensão de SPU (%d)!"
 
-#: ../win32/gui/plugin.c:282
+#: ../win32/gui/plugin.c:283
 #, c-format
 msgid "Error Opening PAD1 Plugin (%d)"
 msgstr "Erro ao abrir a extensão do controle 1 (%d)!"
 
-#: ../win32/gui/plugin.c:284
+#: ../win32/gui/plugin.c:285
 #, c-format
 msgid "Error Opening PAD2 Plugin (%d)"
 msgstr "Erro ao abrir a extensão do controle 2 (%d)!"
 
-#: ../win32/gui/plugin.c:314
+#: ../win32/gui/plugin.c:313
 msgid "Error Closing CDR Plugin"
 msgstr "Erro ao fechar a extensão de CDROM!"
 
-#: ../win32/gui/plugin.c:316
+#: ../win32/gui/plugin.c:315
 msgid "Error Closing GPU Plugin"
 msgstr "Erro ao fechar a extensão de GPU!"
 
-#: ../win32/gui/plugin.c:318
+#: ../win32/gui/plugin.c:317
 msgid "Error Closing SPU Plugin"
 msgstr "Erro ao fechar a extensão de SPU!"
 
-#: ../win32/gui/plugin.c:336
+#: ../win32/gui/plugin.c:335
 #, c-format
 msgid "CDRinit error: %d"
 msgstr "Erro ao iniciar o CDROM: %d"
 
-#: ../win32/gui/plugin.c:338
+#: ../win32/gui/plugin.c:337
 #, c-format
 msgid "GPUinit error: %d"
 msgstr "Erro ao iniciar a GPU: %d"
 
-#: ../win32/gui/plugin.c:340
+#: ../win32/gui/plugin.c:339
 #, c-format
 msgid "SPUinit error: %d"
 msgstr "Erro ao iniciar a SPU: %d"
 
-#: ../win32/gui/plugin.c:342
+#: ../win32/gui/plugin.c:341
 #, c-format
 msgid "PAD1init error: %d"
 msgstr "Erro ao iniciar o controle 1: %d"
 
-#: ../win32/gui/plugin.c:344
+#: ../win32/gui/plugin.c:343
 #, c-format
 msgid "PAD2init error: %d"
 msgstr "Erro ao iniciar o controle 2: %d"
 
-#: ../win32/gui/plugin.c:347
+#: ../win32/gui/plugin.c:346
 #, c-format
 msgid "NETinit error: %d"
 msgstr "Erro ao iniciar a rede: %d"
 
-#: ../win32/gui/WndMain.c:76
+#: ../win32/gui/WndMain.c:77
 msgid "Arabic"
 msgstr "Arábico"
 
-#: ../win32/gui/WndMain.c:77
+#: ../win32/gui/WndMain.c:78
 msgid "Catalan"
 msgstr "Catalão"
 
-#: ../win32/gui/WndMain.c:78
+#: ../win32/gui/WndMain.c:79
 msgid "German"
 msgstr "Alemão"
 
-#: ../win32/gui/WndMain.c:79
+#: ../win32/gui/WndMain.c:80
 msgid "Greek"
 msgstr "Grego"
 
-#: ../win32/gui/WndMain.c:80 ../win32/gui/WndMain.c:1566
-#: ../win32/gui/WndMain.c:1568
+#: ../win32/gui/WndMain.c:81 ../win32/gui/WndMain.c:1640
+#: ../win32/gui/WndMain.c:1642
 msgid "English"
 msgstr "Inglês"
 
-#: ../win32/gui/WndMain.c:81
+#: ../win32/gui/WndMain.c:82
 msgid "Spanish"
 msgstr "Espanhol"
 
-#: ../win32/gui/WndMain.c:82
+#: ../win32/gui/WndMain.c:83
 msgid "French"
 msgstr "Francês"
 
-#: ../win32/gui/WndMain.c:83
+#: ../win32/gui/WndMain.c:84
 msgid "Italian"
 msgstr "Italiano"
 
-#: ../win32/gui/WndMain.c:84
+#: ../win32/gui/WndMain.c:85
 msgid "Portuguese"
 msgstr "Português"
 
-#: ../win32/gui/WndMain.c:85
+#: ../win32/gui/WndMain.c:86
 #, fuzzy
 msgid "Portuguese (Brazilian)"
 msgstr "Português"
 
-#: ../win32/gui/WndMain.c:86
+#: ../win32/gui/WndMain.c:87
 msgid "Romanian"
 msgstr "Romeno"
 
-#: ../win32/gui/WndMain.c:87
+#: ../win32/gui/WndMain.c:88
 msgid "Russian"
 msgstr "Russo"
 
-#: ../win32/gui/WndMain.c:88
+#: ../win32/gui/WndMain.c:89
 msgid "Simplified Chinese"
 msgstr "Chinês Simplificado"
 
-#: ../win32/gui/WndMain.c:89
+#: ../win32/gui/WndMain.c:90
 msgid "Traditional Chinese"
 msgstr "Chinês Tradicional"
 
-#: ../win32/gui/WndMain.c:90
+#: ../win32/gui/WndMain.c:91
 msgid "Japanese"
 msgstr "Japonês"
 
-#: ../win32/gui/WndMain.c:91
+#: ../win32/gui/WndMain.c:92
 msgid "Korean"
 msgstr "Coreano"
 
-#: ../win32/gui/WndMain.c:300 ../win32/gui/WndMain.c:352
+#: ../win32/gui/WndMain.c:212
+msgid ""
+"Usage: pcsx [options]\n"
+"\toptions:\n"
+"\t-nogui\t\tDon't open the GUI\n"
+"\t-psxout\t\tEnable PSX output\n"
+"\t-runcd\t\tRuns CD-ROM (requires -nogui)\n"
+"\t-cdfile FILE\tRuns a CD image file (requires -nogui)\n"
+"\t-help\t\tDisplay this message"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:338 ../win32/gui/WndMain.c:384
 msgid "PCSX State Format"
 msgstr "Formato dos estados salvos do PCSX"
 
-#: ../win32/gui/WndMain.c:327
+#: ../win32/gui/WndMain.c:365
 #, c-format
 msgid "*PCSX*: Loaded State %s"
 msgstr "PCSX: Arquivo de estado \"%s\" carregado."
 
-#: ../win32/gui/WndMain.c:328
+#: ../win32/gui/WndMain.c:366
 #, c-format
 msgid "*PCSX*: Error Loading State %s"
 msgstr "PCSX: Erro ao carregar o arquivo de estado \"%s\"!"
 
-#: ../win32/gui/WndMain.c:379
+#: ../win32/gui/WndMain.c:411
 #, c-format
 msgid "*PCSX*: Saved State %s"
 msgstr "PCSX: Arquivo de estado \"%s\" salvo."
 
-#: ../win32/gui/WndMain.c:380
+#: ../win32/gui/WndMain.c:412
 #, c-format
 msgid "*PCSX*: Error Saving State %s"
 msgstr "PCSX: Erro ao salvar o arquivo de estado \"%s\"!"
 
-#: ../win32/gui/WndMain.c:429 ../win32/gui/WndMain.c:478 ../gui/Gtk2Gui.c:509
-#: ../gui/Gtk2Gui.c:634
+#: ../win32/gui/WndMain.c:461 ../win32/gui/WndMain.c:510
+#: ../win32/gui/WndMain.c:573 ../gui/Gtk2Gui.c:509 ../gui/Gtk2Gui.c:634
+#, c-format
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "Esse CD não parece ser um CD de PlayStation!"
 
-#: ../win32/gui/WndMain.c:435 ../win32/gui/WndMain.c:484 ../gui/Gtk2Gui.c:517
-#: ../gui/Gtk2Gui.c:642
+#: ../win32/gui/WndMain.c:467 ../win32/gui/WndMain.c:516
+#: ../win32/gui/WndMain.c:579 ../gui/Gtk2Gui.c:517 ../gui/Gtk2Gui.c:642
+#, c-format
 msgid "Could not load CD-ROM!"
 msgstr "Não pôde carregar o CDROM!"
 
-#: ../win32/gui/WndMain.c:445
+#: ../win32/gui/WndMain.c:477
 msgid "Running BIOS is not supported with Internal HLE Bios."
 msgstr "Iniciar pela BIOS não é suportado com a BIOS HLE interna."
 
-#: ../win32/gui/WndMain.c:664 ../gui/MemcardDlg.c:62
+#: ../win32/gui/WndMain.c:730 ../gui/MemcardDlg.c:62
 msgid "Title"
 msgstr "Título"
 
-#: ../win32/gui/WndMain.c:670 ../gui/MemcardDlg.c:68
+#: ../win32/gui/WndMain.c:736 ../gui/MemcardDlg.c:68
 msgid "Status"
 msgstr "Estado"
 
-#: ../win32/gui/WndMain.c:676
+#: ../win32/gui/WndMain.c:742
 msgid "Game ID"
 msgstr "ID do Jogo"
 
-#: ../win32/gui/WndMain.c:682
+#: ../win32/gui/WndMain.c:748
 msgid "Game"
 msgstr "Jogo"
 
-#: ../win32/gui/WndMain.c:864
+#: ../win32/gui/WndMain.c:930
 msgid "mid link block"
 msgstr "bloco de ligação intermediário"
 
-#: ../win32/gui/WndMain.c:867
+#: ../win32/gui/WndMain.c:933
 msgid "terminiting link block"
 msgstr "bloco final da ligação"
 
-#: ../win32/gui/WndMain.c:875 ../gui/MemcardDlg.c:155 ../gui/MemcardDlg.c:260
+#: ../win32/gui/WndMain.c:941 ../gui/MemcardDlg.c:155 ../gui/MemcardDlg.c:260
 msgid "Deleted"
 msgstr "Apagado"
 
-#: ../win32/gui/WndMain.c:876 ../win32/gui/WndMain.c:879
+#: ../win32/gui/WndMain.c:942 ../win32/gui/WndMain.c:945
 #: ../gui/MemcardDlg.c:157 ../gui/MemcardDlg.c:161 ../gui/MemcardDlg.c:262
 #: ../gui/MemcardDlg.c:266
 msgid "Free"
 msgstr "Liberado"
 
-#: ../win32/gui/WndMain.c:878 ../gui/MemcardDlg.c:159 ../gui/MemcardDlg.c:264
+#: ../win32/gui/WndMain.c:944 ../gui/MemcardDlg.c:159 ../gui/MemcardDlg.c:264
 msgid "Used"
 msgstr "Usado"
 
-#: ../win32/gui/WndMain.c:972
+#: ../win32/gui/WndMain.c:1038
 msgid "Memcard Manager"
 msgstr "Gerenciador de cartões de memória"
 
-#: ../win32/gui/WndMain.c:976 ../win32/gui/WndMain.c:979
+#: ../win32/gui/WndMain.c:1042 ../win32/gui/WndMain.c:1045
 msgid "Select Mcd"
 msgstr "Selecionar cartão"
 
-#: ../win32/gui/WndMain.c:977 ../win32/gui/WndMain.c:980
+#: ../win32/gui/WndMain.c:1043 ../win32/gui/WndMain.c:1046
 msgid "Format Mcd"
 msgstr "Formatar cartão"
 
-#: ../win32/gui/WndMain.c:978 ../win32/gui/WndMain.c:981
+#: ../win32/gui/WndMain.c:1044 ../win32/gui/WndMain.c:1047
 msgid "Reload Mcd"
 msgstr "Reiniciar cartão"
 
-#: ../win32/gui/WndMain.c:982
+#: ../win32/gui/WndMain.c:1048
 msgid "-> Copy ->"
 msgstr "-> Copiar ->"
 
-#: ../win32/gui/WndMain.c:983
+#: ../win32/gui/WndMain.c:1049
 msgid "<- Copy <-"
 msgstr "<- Copiar <-"
 
-#: ../win32/gui/WndMain.c:984
+#: ../win32/gui/WndMain.c:1050
 msgid "Paste"
 msgstr "Colar"
 
-#: ../win32/gui/WndMain.c:985
+#: ../win32/gui/WndMain.c:1051
 msgid "<- Un/Delete"
 msgstr "<- Apagar/Desfazer"
 
-#: ../win32/gui/WndMain.c:986
+#: ../win32/gui/WndMain.c:1052
 msgid "Un/Delete ->"
 msgstr "Apagar/Desfazer ->"
 
-#: ../win32/gui/WndMain.c:988
+#: ../win32/gui/WndMain.c:1054
 msgid "Memory Card 1"
 msgstr "Cartão de memória 1"
 
-#: ../win32/gui/WndMain.c:989
+#: ../win32/gui/WndMain.c:1055
 msgid "Memory Card 2"
 msgstr "Cartão de memória 2"
 
-#: ../win32/gui/WndMain.c:1044
+#: ../win32/gui/WndMain.c:1110
 msgid "Are you sure you want to paste this selection?"
 msgstr "Você tem certeza que quer colar o selecionado?"
 
-#: ../win32/gui/WndMain.c:1044 ../win32/gui/WndMain.c:1155
-#: ../win32/gui/WndMain.c:1162
+#: ../win32/gui/WndMain.c:1110 ../win32/gui/WndMain.c:1221
+#: ../win32/gui/WndMain.c:1228
 msgid "Confirmation"
 msgstr "Confirmação"
 
-#: ../win32/gui/WndMain.c:1155 ../win32/gui/WndMain.c:1162
+#: ../win32/gui/WndMain.c:1221 ../win32/gui/WndMain.c:1228
 msgid "Are you sure you want to format this Memory Card?"
 msgstr "Você tem certeza que quer formatar esse Cartão de Memória?"
 
-#: ../win32/gui/WndMain.c:1208
+#: ../win32/gui/WndMain.c:1274
 msgid "Cpu Config"
 msgstr "Configuração da CPU"
 
-#: ../win32/gui/WndMain.c:1213
+#: ../win32/gui/WndMain.c:1279
 msgid "Disable Xa Decoding"
 msgstr "Desativar decodificação de XA"
 
-#: ../win32/gui/WndMain.c:1214
+#: ../win32/gui/WndMain.c:1280
 msgid "Sio Irq Always Enabled"
 msgstr "IRQ SIO sempre ativado"
 
-#: ../win32/gui/WndMain.c:1215
+#: ../win32/gui/WndMain.c:1281
 msgid "Black && White Movies"
 msgstr "Filmes em preto e branco"
 
-#: ../win32/gui/WndMain.c:1216
+#: ../win32/gui/WndMain.c:1282
 msgid "Disable Cd audio"
 msgstr "Desativar áudio de CD"
 
-#: ../win32/gui/WndMain.c:1217 ../data/pcsx.glade2:1660
+#: ../win32/gui/WndMain.c:1283 ../data/pcsx.glade2:1660
 msgid "Autodetect"
 msgstr "Detectar Automaticamente"
 
-#: ../win32/gui/WndMain.c:1218
+#: ../win32/gui/WndMain.c:1284
 msgid "Enable Interpreter Cpu"
 msgstr "Ativar interpretador da CPU"
 
-#: ../win32/gui/WndMain.c:1219 ../data/pcsx.glade2:1516
+#: ../win32/gui/WndMain.c:1285 ../data/pcsx.glade2:1516
 msgid "Enable Console Output"
 msgstr "Ativar saída no terminal"
 
-#: ../win32/gui/WndMain.c:1220 ../data/pcsx.glade2:1466
+#: ../win32/gui/WndMain.c:1286 ../data/pcsx.glade2:1466
 msgid "Enable Debugger"
 msgstr "Ligar debugger"
 
-#: ../win32/gui/WndMain.c:1221
+#: ../win32/gui/WndMain.c:1287
 msgid "Spu Irq Always Enabled"
 msgstr "IRQ da SPU sempre ligada"
 
-#: ../win32/gui/WndMain.c:1222 ../data/pcsx.glade2:1603
+#: ../win32/gui/WndMain.c:1288 ../data/pcsx.glade2:1603
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr "Correção para Parasite Eve 2, Vandal Hearts..."
 
-#: ../win32/gui/WndMain.c:1223 ../data/pcsx.glade2:1618
+#: ../win32/gui/WndMain.c:1289 ../data/pcsx.glade2:1618
 msgid "InuYasha Sengoku Battle Fix"
 msgstr "Correção para InuYasha, Sengoku Battle..."
 
-#: ../win32/gui/WndMain.c:1225
+#: ../win32/gui/WndMain.c:1291
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:277
 #: ../plugins/dfinput/dfinput.glade2:448
 msgid "Options"
 msgstr "Opções"
 
-#: ../win32/gui/WndMain.c:1226
+#: ../win32/gui/WndMain.c:1292
 msgid "Psx System Type"
 msgstr "Tipo de sistema do PSX"
 
-#: ../win32/gui/WndMain.c:1330
+#: ../win32/gui/WndMain.c:1396
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 msgstr "Qualquer formato (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 
-#: ../win32/gui/WndMain.c:1335
+#: ../win32/gui/WndMain.c:1401
 msgid "Psx Memory Card (*.mcr;*.mc)"
 msgstr "Cartão de memória binário (*.mcr;*.mc)"
 
-#: ../win32/gui/WndMain.c:1340
+#: ../win32/gui/WndMain.c:1406
 msgid "CVGS Memory Card (*.mem;*.vgs)"
 msgstr "Cartão de memória do CVGS (*.mem;*.vgs)"
 
-#: ../win32/gui/WndMain.c:1345
+#: ../win32/gui/WndMain.c:1411
 msgid "Bleem Memory Card (*.mcd)"
 msgstr "Cartão de memória do Bleem (*.mcd)"
 
-#: ../win32/gui/WndMain.c:1350
+#: ../win32/gui/WndMain.c:1416
 msgid "DexDrive Memory Card (*.gme)"
 msgstr "Cartão de memória do DexDrive (*.gme)"
 
-#: ../win32/gui/WndMain.c:1355
+#: ../win32/gui/WndMain.c:1421
 msgid "DataDeck Memory Card (*.ddf)"
 msgstr "Cartão de memória do DataDeck (*.ddf)"
 
-#: ../win32/gui/WndMain.c:1360 ../win32/gui/WndMain.c:1441 ../gui/Cheat.c:321
+#: ../win32/gui/WndMain.c:1426 ../win32/gui/WndMain.c:1507 ../gui/Cheat.c:321
 #: ../gui/Gtk2Gui.c:446 ../gui/Gtk2Gui.c:585
 msgid "All Files"
 msgstr "Todos os arquivos"
 
-#: ../win32/gui/WndMain.c:1399
+#: ../win32/gui/WndMain.c:1465
 msgid "Psx Exe Format"
 msgstr "Formato executável do PSX"
 
-#: ../win32/gui/WndMain.c:1436
+#: ../win32/gui/WndMain.c:1502
 msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin)"
 msgstr "Imagens de CD (*.iso;*.mdf;*.img;*.bin)"
 
-#: ../win32/gui/WndMain.c:1512
+#: ../win32/gui/WndMain.c:1578
 msgid "&File"
 msgstr "&Arquivo"
 
-#: ../win32/gui/WndMain.c:1513
+#: ../win32/gui/WndMain.c:1579
 msgid "E&xit"
 msgstr "&Sair"
 
-#: ../win32/gui/WndMain.c:1515
+#: ../win32/gui/WndMain.c:1581
 msgid "Run &EXE..."
 msgstr "Rodar &EXE..."
 
-#: ../win32/gui/WndMain.c:1516
+#: ../win32/gui/WndMain.c:1582
 msgid "Run &BIOS"
 msgstr "Iniciar pela &BIOS"
 
-#: ../win32/gui/WndMain.c:1517
+#: ../win32/gui/WndMain.c:1583
 msgid "Run &ISO..."
 msgstr "Rodar &imagem de CD..."
 
-#: ../win32/gui/WndMain.c:1518
+#: ../win32/gui/WndMain.c:1584
 msgid "Run &CD"
 msgstr "Rodar &CD"
 
-#: ../win32/gui/WndMain.c:1520
+#: ../win32/gui/WndMain.c:1586
 msgid "&Emulator"
 msgstr "&Emulador"
 
-#: ../win32/gui/WndMain.c:1521
+#: ../win32/gui/WndMain.c:1587
 msgid "&States"
 msgstr "&Estados"
 
-#: ../win32/gui/WndMain.c:1523
+#: ../win32/gui/WndMain.c:1589
 msgid "S&witch ISO..."
 msgstr "T&rocar de imagem de CD..."
 
-#: ../win32/gui/WndMain.c:1525
+#: ../win32/gui/WndMain.c:1591
 msgid "Re&set"
 msgstr "Re&iniciar"
 
-#: ../win32/gui/WndMain.c:1526
+#: ../win32/gui/WndMain.c:1592
 msgid "&Run"
 msgstr "&Executar"
 
-#: ../win32/gui/WndMain.c:1527
+#: ../win32/gui/WndMain.c:1593
 msgid "&Save"
 msgstr "&Salvar"
 
-#: ../win32/gui/WndMain.c:1528
+#: ../win32/gui/WndMain.c:1594
 msgid "&Load"
 msgstr "&Carregar"
 
-#: ../win32/gui/WndMain.c:1529 ../win32/gui/WndMain.c:1535
+#: ../win32/gui/WndMain.c:1595 ../win32/gui/WndMain.c:1605
 msgid "&Other..."
 msgstr "&Outros..."
 
-#: ../win32/gui/WndMain.c:1530 ../win32/gui/WndMain.c:1536
+#: ../win32/gui/WndMain.c:1596 ../win32/gui/WndMain.c:1606
+#, fuzzy
+msgid "Slot &9"
+msgstr "Unidade &5"
+
+#: ../win32/gui/WndMain.c:1597 ../win32/gui/WndMain.c:1607
+#, fuzzy
+msgid "Slot &8"
+msgstr "Unidade &5"
+
+#: ../win32/gui/WndMain.c:1598 ../win32/gui/WndMain.c:1608
+#, fuzzy
+msgid "Slot &7"
+msgstr "Unidade &5"
+
+#: ../win32/gui/WndMain.c:1599 ../win32/gui/WndMain.c:1609
+#, fuzzy
+msgid "Slot &6"
+msgstr "Unidade &5"
+
+#: ../win32/gui/WndMain.c:1600 ../win32/gui/WndMain.c:1610
 msgid "Slot &5"
 msgstr "Unidade &5"
 
-#: ../win32/gui/WndMain.c:1531 ../win32/gui/WndMain.c:1537
+#: ../win32/gui/WndMain.c:1601 ../win32/gui/WndMain.c:1611
 msgid "Slot &4"
 msgstr "Unidade &4"
 
-#: ../win32/gui/WndMain.c:1532 ../win32/gui/WndMain.c:1538
+#: ../win32/gui/WndMain.c:1602 ../win32/gui/WndMain.c:1612
 msgid "Slot &3"
 msgstr "Unidade &3"
 
-#: ../win32/gui/WndMain.c:1533 ../win32/gui/WndMain.c:1539
+#: ../win32/gui/WndMain.c:1603 ../win32/gui/WndMain.c:1613
 msgid "Slot &2"
 msgstr "Unidade &2"
 
-#: ../win32/gui/WndMain.c:1534 ../win32/gui/WndMain.c:1540
+#: ../win32/gui/WndMain.c:1604 ../win32/gui/WndMain.c:1614
 msgid "Slot &1"
 msgstr "Unidade &1"
 
-#: ../win32/gui/WndMain.c:1542
+#: ../win32/gui/WndMain.c:1616
 msgid "&Configuration"
 msgstr "&Configuração"
 
-#: ../win32/gui/WndMain.c:1543
+#: ../win32/gui/WndMain.c:1617
 msgid "Cheat &Search..."
 msgstr "Procurar por &trapaça..."
 
-#: ../win32/gui/WndMain.c:1544
+#: ../win32/gui/WndMain.c:1618
 msgid "Ch&eat Code..."
 msgstr "&Código de trapaça..."
 
-#: ../win32/gui/WndMain.c:1547
+#: ../win32/gui/WndMain.c:1621
 msgid "&Language"
 msgstr "&Linguagem"
 
-#: ../win32/gui/WndMain.c:1572
+#: ../win32/gui/WndMain.c:1646
 msgid "&Memory cards..."
 msgstr "&Cartões de memória..."
 
-#: ../win32/gui/WndMain.c:1573
+#: ../win32/gui/WndMain.c:1647
 msgid "C&PU..."
 msgstr "C&PU..."
 
-#: ../win32/gui/WndMain.c:1575
+#: ../win32/gui/WndMain.c:1649
 msgid "&NetPlay..."
 msgstr "&Jogo em rede..."
 
-#: ../win32/gui/WndMain.c:1577
+#: ../win32/gui/WndMain.c:1651
 msgid "&Controllers..."
 msgstr "&Controles..."
 
-#: ../win32/gui/WndMain.c:1578
+#: ../win32/gui/WndMain.c:1652
 msgid "CD-&ROM..."
 msgstr "CD&ROM..."
 
-#: ../win32/gui/WndMain.c:1579
+#: ../win32/gui/WndMain.c:1653
 msgid "&Sound..."
 msgstr "Á&udio..."
 
-#: ../win32/gui/WndMain.c:1580
+#: ../win32/gui/WndMain.c:1654
 msgid "&Graphics..."
 msgstr "&Gráficos..."
 
-#: ../win32/gui/WndMain.c:1582
+#: ../win32/gui/WndMain.c:1656
 msgid "&Plugins && Bios..."
 msgstr "&Extensões e BIOS..."
 
-#: ../win32/gui/WndMain.c:1584
+#: ../win32/gui/WndMain.c:1658
 msgid "&Help"
 msgstr "&Ajuda"
 
-#: ../win32/gui/WndMain.c:1585
+#: ../win32/gui/WndMain.c:1659
 msgid "&About..."
 msgstr "&Sobre..."
 
-#: ../win32/gui/WndMain.c:1764
+#: ../win32/gui/WndMain.c:1847
 msgid "Pcsx Msg"
 msgstr "Mensagens do PCSX"
 
-#: ../win32/gui/WndMain.c:1767
+#: ../win32/gui/WndMain.c:1850
 msgid "Error Loading Symbol"
 msgstr "Erro ao carregar símbolo"
 
@@ -1233,6 +1266,7 @@ msgid "Creating memory card: %s\n"
 msgstr "Criando cartão de memória \"%s\"\n"
 
 #: ../gui/LnxMain.c:325
+#, fuzzy
 msgid ""
 " pcsx [options] [file]\n"
 "\toptions:\n"
@@ -1241,7 +1275,7 @@ msgid ""
 "\t-nogui\t\tDon't open the GTK GUI\n"
 "\t-cfg FILE\tLoads desired configuration file (default: ~/.pcsx/pcsx.cfg)\n"
 "\t-psxout\t\tEnable PSX output\n"
-"\t-load STATENUM\tLoads savestate STATENUM (1-5)\n"
+"\t-load STATENUM\tLoads savestate STATENUM (1-9)\n"
 "\t-h -help\tDisplay this message\n"
 "\tfile\t\tLoads file\n"
 msgstr ""
@@ -1373,31 +1407,31 @@ msgstr "Erro ao abrir a extensão de SPU!"
 msgid "Error opening GPU plugin!"
 msgstr "Erro ao abrir a extensão de GPU!"
 
-#: ../gui/Plugin.c:319
+#: ../gui/Plugin.c:320
 msgid "Error opening Controller 1 plugin!"
 msgstr "Erro ao abrir a extensão do Controle 1!"
 
-#: ../gui/Plugin.c:321
+#: ../gui/Plugin.c:322
 msgid "Error opening Controller 2 plugin!"
 msgstr "Erro ao abrir a extensão do Controle 2!"
 
-#: ../gui/Plugin.c:401
+#: ../gui/Plugin.c:402
 msgid "Error closing CD-ROM plugin!"
 msgstr "Erro ao fechar a extensão de CD-ROM!"
 
-#: ../gui/Plugin.c:403
+#: ../gui/Plugin.c:404
 msgid "Error closing SPU plugin!"
 msgstr "Erro ao fechar a extensão de SPU!"
 
-#: ../gui/Plugin.c:405
+#: ../gui/Plugin.c:406
 msgid "Error closing Controller 1 Plugin!"
 msgstr "Erro ao fechar a extensão do Controle 1!"
 
-#: ../gui/Plugin.c:407
+#: ../gui/Plugin.c:408
 msgid "Error closing Controller 2 plugin!"
 msgstr "Erro ao fechar a extensão de Controle 2!"
 
-#: ../gui/Plugin.c:409
+#: ../gui/Plugin.c:410
 msgid "Error closing GPU plugin!"
 msgstr "Erro ao fechar a extensão de GPU!"
 
@@ -1469,82 +1503,82 @@ msgstr "Arquivos COFF não são suportados!\n"
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "Esse arquivo não parece ser um arquivo válido de PSX!\n"
 
-#: ../libpcsxcore/plugins.c:181
+#: ../libpcsxcore/plugins.c:183
 #, c-format
 msgid "Error loading %s: %s"
 msgstr "Erro carregando \"%s\": \"%s\""
 
-#: ../libpcsxcore/plugins.c:221
+#: ../libpcsxcore/plugins.c:235
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "Não conseguiu carregar a extensão de GPU \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:292
+#: ../libpcsxcore/plugins.c:308
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "Não conseguiu carregar a extensão de CD-ROM \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:340
+#: ../libpcsxcore/plugins.c:356
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "Não conseguiu carregar a extensão de SPU \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:477
+#: ../libpcsxcore/plugins.c:493
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "Não conseguiu carregar a extensão do Controle 1 \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:531
+#: ../libpcsxcore/plugins.c:547
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "Não conseguiu carregar a extensão do Controle 2 \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:574
+#: ../libpcsxcore/plugins.c:590
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "Não conseguiu carregar a extensão de jogo em rede \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:654
+#: ../libpcsxcore/plugins.c:670
 #, fuzzy, c-format
 msgid "Could not load SIO1 plugin %s!"
 msgstr "Não conseguiu carregar a extensão de SPU \"%s\"!"
 
-#: ../libpcsxcore/plugins.c:739
+#: ../libpcsxcore/plugins.c:755
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr "Erro ao iniciar a extensão de CD-ROM \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:741
+#: ../libpcsxcore/plugins.c:757
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr "Erro ao iniciar a extensão de GPU \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:743
+#: ../libpcsxcore/plugins.c:759
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr "Erro ao iniciar a extensão de SPU \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:745
+#: ../libpcsxcore/plugins.c:761
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr "Erro ao iniciar a extensão do Controle 1 \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:747
+#: ../libpcsxcore/plugins.c:763
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr "Erro ao iniciar a extensão do Controle 2 \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:751
+#: ../libpcsxcore/plugins.c:767
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr "Erro ao iniciar a extensão de jogo em rede \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:756
+#: ../libpcsxcore/plugins.c:772
 #, fuzzy, c-format
 msgid "Error initializing SIO1 plugin: %d"
 msgstr "Erro ao iniciar a extensão de SPU \"%d\"!"
 
-#: ../libpcsxcore/plugins.c:759
+#: ../libpcsxcore/plugins.c:775
 msgid "Plugins loaded.\n"
 msgstr "Extensões carregadas.\n"
 
@@ -1601,21 +1635,35 @@ msgstr "Cartão de memória \"%s\" falhou para carregar!\n"
 msgid "Loading memory card %s\n"
 msgstr "Carregando cartão de memória \"%s\".\n"
 
-#: ../plugins/dfxvideo/gpu.c:55
+#: ../plugins/dfxvideo/gpu.c:60
+#, fuzzy
+msgid "Soft Driver"
+msgstr "Extensão SoftGL"
+
+#: ../plugins/dfxvideo/gpu.c:61
+#, fuzzy
+msgid ""
+"P.E.Op.S. Soft Driver V1.17\n"
+"Coded by Pete Bernert and the P.E.Op.S. team\n"
+msgstr ""
+"Extensão OSS P.E.Op.S. V1.7\n"
+"Programada por Pete Bernert e a equipe do P.E.Op.S.\n"
+
+#: ../plugins/dfxvideo/gpu.c:63
 msgid "SoftGL Driver"
 msgstr "Extensão SoftGL"
 
-#: ../plugins/dfxvideo/gpu.c:56
+#: ../plugins/dfxvideo/gpu.c:64
 msgid ""
 "P.E.Op.S. SoftGL Driver V1.17\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpu.c:58
+#: ../plugins/dfxvideo/gpu.c:66
 msgid "XVideo Driver"
 msgstr "Extensão XVideo"
 
-#: ../plugins/dfxvideo/gpu.c:59
+#: ../plugins/dfxvideo/gpu.c:67
 msgid ""
 "P.E.Op.S. Xvideo Driver V1.17\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
@@ -1623,7 +1671,7 @@ msgstr ""
 "Extensão Xvideo P.E.Op.S. V1.17\n"
 "Programada por Pete Bernert e a equipe do P.E.Op.S.\n"
 
-#: ../plugins/dfxvideo/gpu.c:62
+#: ../plugins/dfxvideo/gpu.c:70
 msgid "Pete Bernert and the P.E.Op.S. team"
 msgstr "Pete Bernert e a equipe do P.E.Op.S."
 
@@ -2244,33 +2292,38 @@ msgstr ""
 msgid "Patch Memory..."
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:38
+#: ../plugins/dfsound/spu.c:43
+#, fuzzy
+msgid "DirectSound Driver"
+msgstr "Extensão XVideo"
+
+#: ../plugins/dfsound/spu.c:45
 msgid "Mac OS X Sound"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:40
+#: ../plugins/dfsound/spu.c:47
 msgid "ALSA Sound"
 msgstr "Sistema ALSA"
 
-#: ../plugins/dfsound/spu.c:42
+#: ../plugins/dfsound/spu.c:49
 #, fuzzy
 msgid "OSS Sound"
 msgstr "Sistema OSS"
 
-#: ../plugins/dfsound/spu.c:44
+#: ../plugins/dfsound/spu.c:51
 #, fuzzy
 msgid "SDL Sound"
 msgstr "Sistema OSS"
 
-#: ../plugins/dfsound/spu.c:46
+#: ../plugins/dfsound/spu.c:53
 msgid "PulseAudio Sound"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:48
+#: ../plugins/dfsound/spu.c:55
 msgid "NULL Sound"
 msgstr "Sem som"
 
-#: ../plugins/dfsound/spu.c:51
+#: ../plugins/dfsound/spu.c:58
 #, fuzzy
 msgid ""
 "P.E.Op.S. Sound Driver V1.7\n"
@@ -2437,15 +2490,15 @@ msgstr ""
 msgid "Enable subchannel read"
 msgstr "Ligar leitura de subcanal"
 
-#: ../plugins/peopsxgl/gpu.c:61
+#: ../plugins/peopsxgl/gpu.c:70
 msgid "OpenGL Driver"
 msgstr "Extensão OpenGL"
 
-#: ../plugins/peopsxgl/gpu.c:63
+#: ../plugins/peopsxgl/gpu.c:72
 msgid "Pete Bernert"
 msgstr "Pete Bernert"
 
-#: ../plugins/peopsxgl/gpu.c:64
+#: ../plugins/peopsxgl/gpu.c:73
 msgid ""
 "Based on P.E.Op.S. MesaGL Driver V1.78\n"
 "Coded by Pete Bernert\n"
