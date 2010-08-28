@@ -1,14 +1,14 @@
 # Russian translation of pcsxr.
 # Copyright (C) 2010 edgbla
 # This file is distributed under the same license as the pcsxr package.
-# 
+#
 # Blade_Arma <edgbla@yandex.ru>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-08-22 20:16+0800\n"
-"PO-Revision-Date: 2010-07-01 23:53+0400\n"
+"PO-Revision-Date: 2010-08-28 16:44+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -891,24 +891,20 @@ msgid "&Other..."
 msgstr "Другой(&O)..."
 
 #: ../win32/gui/WndMain.c:1596 ../win32/gui/WndMain.c:1606
-#, fuzzy
 msgid "Slot &9"
-msgstr "Слот 5(&5)"
+msgstr "Слот &9"
 
 #: ../win32/gui/WndMain.c:1597 ../win32/gui/WndMain.c:1607
-#, fuzzy
 msgid "Slot &8"
-msgstr "Слот 5(&5)"
+msgstr "Слот &8"
 
 #: ../win32/gui/WndMain.c:1598 ../win32/gui/WndMain.c:1608
-#, fuzzy
 msgid "Slot &7"
-msgstr "Слот 5(&5)"
+msgstr "Слот &7"
 
 #: ../win32/gui/WndMain.c:1599 ../win32/gui/WndMain.c:1609
-#, fuzzy
 msgid "Slot &6"
-msgstr "Слот 5(&5)"
+msgstr "Слот &6"
 
 #: ../win32/gui/WndMain.c:1600 ../win32/gui/WndMain.c:1610
 msgid "Slot &5"
@@ -1232,7 +1228,6 @@ msgid "Creating memory card: %s\n"
 msgstr "Создание карты памяти: %s\n"
 
 #: ../gui/LnxMain.c:325
-#, fuzzy
 msgid ""
 " pcsx [options] [file]\n"
 "\toptions:\n"
@@ -1252,7 +1247,7 @@ msgstr ""
 "\t-nogui\t\tНе использовать графический интерфейс GTK\n"
 "\t-cfg FILE\tУказать файл конфигурации (по умолчанию: ~/.pcsx/pcsx.cfg)\n"
 "\t-psxout\t\tВключить вывод PSX\n"
-"\t-load STATENUM\tЗагрузить состояние с номером STATENUM (1-5)\n"
+"\t-load STATENUM\tЗагрузить состояние с номером STATENUM (1-9)\n"
 "\t-h -help\tПоказать это сообщение\n"
 "\tfile\t\tЗагрузить файл\n"
 
@@ -1445,12 +1440,12 @@ msgstr "Дебаггер остановлен.\n"
 #: ../libpcsxcore/misc.c:342
 #, c-format
 msgid "CD-ROM Label: %.32s\n"
-msgstr ""
+msgstr "Метка CD диска: %.32s\n"
 
 #: ../libpcsxcore/misc.c:343
-#, fuzzy, c-format
+#, c-format
 msgid "CD-ROM ID: %.9s\n"
-msgstr "CD-привод:"
+msgstr "Идентификатор CD диска: %.9s\n"
 
 #: ../libpcsxcore/misc.c:388
 #, c-format
@@ -1506,9 +1501,9 @@ msgid "Could not load NetPlay plugin %s!"
 msgstr "Не удалось загрузить NetPlay плагин %s!"
 
 #: ../libpcsxcore/plugins.c:670
-#, fuzzy, c-format
+#, c-format
 msgid "Could not load SIO1 plugin %s!"
-msgstr "Не удалось загрузить SPU плагин %s!"
+msgstr "Не удалось загрузить SIO1 плагин %s!"
 
 #: ../libpcsxcore/plugins.c:755
 #, c-format
@@ -1541,9 +1536,9 @@ msgid "Error initializing NetPlay plugin: %d"
 msgstr "Ошибка инициализации NetPlay плагина: %d"
 
 #: ../libpcsxcore/plugins.c:772
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing SIO1 plugin: %d"
-msgstr "Ошибка инициализации SPU плагина: %d"
+msgstr "Ошибка инициализации SIO1 плагина: %d"
 
 #: ../libpcsxcore/plugins.c:775
 msgid "Plugins loaded.\n"
@@ -1915,24 +1910,20 @@ msgid "Slot _5"
 msgstr "Слот _5"
 
 #: ../data/pcsx.glade2:245 ../data/pcsx.glade2:358
-#, fuzzy
 msgid "Slot _6"
-msgstr "Слот _1"
+msgstr "Слот _6"
 
 #: ../data/pcsx.glade2:253 ../data/pcsx.glade2:366
-#, fuzzy
 msgid "Slot _7"
-msgstr "Слот _1"
+msgstr "Слот _7"
 
 #: ../data/pcsx.glade2:261 ../data/pcsx.glade2:374
-#, fuzzy
 msgid "Slot _8"
-msgstr "Слот _1"
+msgstr "Слот _8"
 
 #: ../data/pcsx.glade2:269 ../data/pcsx.glade2:382
-#, fuzzy
 msgid "Slot _9"
-msgstr "Слот _1"
+msgstr "Слот _9"
 
 #: ../data/pcsx.glade2:276 ../data/pcsx.glade2:389
 msgid "_Other..."
@@ -2483,23 +2474,23 @@ msgstr "Качество:"
 #: ../plugins/peopsxgl/gpucfg/interface.c:178
 #: ../plugins/peopsxgl/gpucfg/interface.c:191
 msgid "0: don't care - Use driver's default textures"
-msgstr ""
+msgstr "0: Использовать формат текстур по-умолчанию"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:179
 msgid "1: 4444 - Fast, but less colorful"
-msgstr ""
+msgstr "1: 4444 - Быстро, плохая цветопередача"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:180
 msgid "2: 5551 - Nice colors, bad transparency"
-msgstr ""
+msgstr "2: 5551 - Хорошая цветопередача, проблемы с прозрачностью"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:181
 msgid "3: 8888 - Best colors, more ram needed"
-msgstr ""
+msgstr "3: 8888 - Лучшая цветопередача, требует много памяти"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:182
 msgid "4: BGR8888 - Faster on some cards"
-msgstr ""
+msgstr "4: BGR8888 - Быстрее на некоторых видеокартах"
 
 #: ../plugins/peopsxgl/gpucfg/interface.c:193
 msgid "VRam size in MBytes (0..1024, 0=auto):"
