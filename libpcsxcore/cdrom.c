@@ -215,7 +215,7 @@ void cdrInterrupt() {
 			cdr.Result[0] = cdr.StatP;
 			cdr.Stat = Acknowledge;
 			cdr.StatP |= 0x80;
-//			if ((cdr.Mode & 0x5) == 0x5) AddIrqQueue(REPPLAY, cdReadTime);
+			if ((cdr.Mode & 0x5) == 0x5) AddIrqQueue(REPPLAY, cdReadTime);
 			break;
 
     	case CdlForward:
@@ -563,7 +563,7 @@ void cdrInterrupt() {
 
 		case REPPLAY: 
 			if ((cdr.Mode & 5) != 5) break;
-/*			if (CDR_getStatus(&stat) == -1) {
+			if (CDR_getStatus(&stat) == -1) {
 				cdr.Result[0] = 0;
 				cdr.Result[1] = 0;
 				cdr.Result[2] = 0;
@@ -572,11 +572,16 @@ void cdrInterrupt() {
 				cdr.Result[5] = 0;
 				cdr.Result[6] = 0;
 				cdr.Result[7] = 0;
-			} else memcpy(cdr.Result, &stat.Track, 8);
+			}
+			else
+				// FIXME!!
+				//memcpy(cdr.Result, &stat.Track, 8);
+				0;
+
 			cdr.Stat = 1;
 			SetResultSize(8);
 			AddIrqQueue(REPPLAY_ACK, cdReadTime);
-*/			break;
+			break;
 
 		case 0xff:
 			return;
