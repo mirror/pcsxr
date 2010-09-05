@@ -395,6 +395,8 @@ INLINE void FeedXA(xa_decode_t *xap)
 // FEED CDDA
 ////////////////////////////////////////////////////////////////////////
 
+unsigned int cdda_ptr;
+
 INLINE void FeedCDDA(unsigned char *pcm, int nBytes)
 {
  while(nBytes>0)
@@ -414,7 +416,17 @@ INLINE void FeedCDDA(unsigned char *pcm, int nBytes)
    *CDDAFeed++=(*pcm | (*(pcm+1)<<8) | (*(pcm+2)<<16) | (*(pcm+3)<<24));
    nBytes-=4;
    pcm+=4;
-  }
+
+ 
+   spuMem[ cdda_ptr ] = *pcm | (*(pcm+1)<<8);
+   spuMem[ cdda_ptr+0x400 ] = *(pcm+2) | (*(pcm+3)<<8);
+
+   cdda_ptr++;
+   if( cdda_ptr >= 0x400 )
+   {
+     cdda_ptr &= 0x3ff;
+   }
+ }
 }
 
 #endif

@@ -184,20 +184,6 @@ void cdrInterrupt() {
 			SetResultSize(1);
 			cdr.Result[0] = cdr.StatP;
 			cdr.Stat = Acknowledge;
-			i = stat.Status;
-			if (CDR_getStatus(&stat) != -1) {
-				if (stat.Type == 0xff) cdr.Stat = DiskError;
-				if (stat.Status & 0x10) {
-					cdr.Stat = DiskError;
-					cdr.Result[0] |= 0x11;
-					cdr.Result[0] &= ~0x02;
-				}
-				else if (i & 0x10) {
-					cdr.StatP |= 0x2;
-					cdr.Result[0] |= 0x2;
-					CheckCdrom();
-				}
-			}
 			break;
 
 		case CdlSetloc:
@@ -249,22 +235,6 @@ void cdrInterrupt() {
 			cdr.Result[0] = cdr.StatP;
 			cdr.Stat = Complete;
 //			cdr.Stat = Acknowledge;
-
-			// check case open/close -shalma
-			i = stat.Status;
-			if (CDR_getStatus(&stat) != -1) {
-				if (stat.Type == 0xff) cdr.Stat = DiskError;
-				if (stat.Status & 0x10) {
-					cdr.Stat = DiskError;
-					cdr.Result[0] |= 0x11;
-					cdr.Result[0] &= ~0x02;
-				}
-				else if (i & 0x10) {
-					cdr.StatP |= 0x2;
-					cdr.Result[0] |= 0x2;
-					CheckCdrom();
-				}
-			}
 			break;
 
 		case CdlPause:
@@ -353,6 +323,7 @@ void cdrInterrupt() {
 			SetResultSize(8);
 			subq = (struct SubQ *)CDR_getBufferSub();
 
+			// DATA + AUDIO has subchannel data
 			if (subq != NULL) {
 				cdr.Result[0] = subq->TrackNumber;
 				cdr.Result[1] = subq->IndexNumber;
@@ -367,6 +338,7 @@ void cdrInterrupt() {
 				cdr.Result[0] = 1;
 				cdr.Result[1] = 1;
 
+				// NOTE: This only works for TRACK 01
 				cdr.Result[2] = btoi(cdr.Prev[0]);
 				cdr.Result[3] = btoi(cdr.Prev[1]) - 2;
 				cdr.Result[4] = cdr.Prev[2];
@@ -387,6 +359,9 @@ void cdrInterrupt() {
 			break;
 
     	case CdlGetTN:
+			StopReading();
+			StopCdda();
+
 			cdr.CmdProcess = 0;
 			SetResultSize(3);
 			cdr.StatP |= 0x2;
@@ -589,6 +564,27 @@ void cdrInterrupt() {
 		default:
 			cdr.Stat = Complete;
 			break;
+	}
+
+	// check case open/close
+	i = stat.Status;
+	if (CDR_getStatus(&stat) != -1) {
+		if (stat.Type == 0xff) cdr.Stat = DiskError;
+
+		// case now open
+		if (stat.Status & 0x10) {
+			cdr.Stat = DiskError;
+
+			cdr.Result[0] |= 0x11;
+			cdr.Result[0] &= ~0x02;
+		}
+		// case now closed
+		else if (i & 0x10) {
+			cdr.StatP &= ~0x11;
+			cdr.Result[0] |= 0x2;
+
+			CheckCdrom();
+		}
 	}
 
 	if (cdr.Stat != NoIntr && cdr.Reg2 != 0x18) {

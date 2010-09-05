@@ -31,6 +31,9 @@
 #include <sys/time.h>
 #endif
 
+#define btoi(b)			((b) / 16 * 10 + (b) % 16) /* BCD to u_char */
+#define itob(i)     ((i)/10*16 + (i)%10)    /* u_char to BCD */
+
 static FILE *cdHandle = NULL;
 static FILE *cddaHandle = NULL;
 static FILE *subHandle = NULL;
@@ -172,12 +175,16 @@ static void *playthread(void *param)
 
 				s += d;
 
-				// skip the subchannel data
-				fseek(cddaHandle, SUB_FRAMESIZE, SEEK_CUR);
+				fread( subbuffer, 1, SUB_FRAMESIZE, cddaHandle );
 			}
 		}
 		else {
 			s = fread(sndbuffer, 1, sizeof(sndbuffer), cddaHandle);
+
+			if (subHandle != NULL) {
+				fseek(subHandle, sec * SUB_FRAMESIZE, SEEK_SET);
+				fread(subbuffer, 1, SUB_FRAMESIZE, subHandle);
+			}
 		}
 
 		if (s == 0) {
@@ -740,7 +747,26 @@ static long CALLBACK ISOgetTN(unsigned char *buffer) {
 //  byte 1 - second
 //  byte 2 - minute
 static long CALLBACK ISOgetTD(unsigned char track, unsigned char *buffer) {
-	if (numtracks > 0 && track <= numtracks) {
+	if( track == 0 ) {
+		unsigned int pos, size;
+		unsigned char time[3];
+
+		// Vib Ribbon: return size of CD
+		// - ex. 20 min, 22 sec, 66 fra
+		pos = ftell( cdHandle );
+		fseek( cdHandle, 0, SEEK_END );
+		size = ftell( cdHandle );
+		fseek( cdHandle, pos, SEEK_SET );
+
+		// relative -> absolute time (+2 seconds)
+		size += 150 * 2352;
+
+		sec2msf( size / 2352, time );
+		buffer[2] = time[0];
+		buffer[1] = time[1];
+		buffer[0] = time[2];
+	}
+	else if (numtracks > 0 && track <= numtracks) {
 		buffer[2] = ti[track].start[0];
 		buffer[1] = ti[track].start[1];
 		buffer[0] = ti[track].start[2];
