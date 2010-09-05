@@ -62,6 +62,7 @@ static unsigned int parp;
 static unsigned int mcdst, rdwr;
 static unsigned char adrH, adrL;
 static unsigned int padst;
+static unsigned int gsdonglest;
 
 char Mcd1Data[MCD_SIZE], Mcd2Data[MCD_SIZE];
 
@@ -77,6 +78,27 @@ char Mcd1Data[MCD_SIZE], Mcd2Data[MCD_SIZE];
 // 4us * 8bits = (PSXCLK / 1000000) * 32; (linuzappz)
 // TODO: add SioModePrescaler and BaudReg
 #define SIO_CYCLES		535
+
+// ePSXe 1.7.0
+//#define SIO_CYCLES 635
+
+unsigned char reverse_8( unsigned char bits )
+{
+	unsigned char tmp;
+	int lcv;
+
+	tmp = 0;
+	for( lcv = 0; lcv < 8; lcv++ )
+	{
+		tmp >>= 1;
+		tmp |= (bits & 0x80);
+
+		bits <<= 1;
+	}
+
+	return tmp;
+}
+
 
 void sioWrite8(unsigned char value) {
 #ifdef PAD_LOG
@@ -210,6 +232,282 @@ void sioWrite8(unsigned char value) {
 			return;
 	}
 
+
+	/*
+	GameShark CDX 3.3
+	
+	ae - be - ef - 04 + [00]
+	ae - be - ef - 01 + 00 + [00] * $1000
+	ae - be - ef - 01 + 42 + [00] * $1000
+	ae - be - ef - 03 + 01,01,1f,e3,85,ae,d1,28 + [00] * 4
+	*/
+	switch (gsdonglest) {
+		// main command loop
+		case 1:
+			SIO_INT( SIO_CYCLES );
+
+			// GS CDX 3.3
+			// - unknown output
+
+			// reset device when fail?
+			if( value == 0xae )
+			{
+				StatReg |= RX_RDY;
+
+				parp = 0;
+				bufcount = parp;
+			}
+
+
+			// GS CDX 3.3
+			else if( value == 0xbe )
+			{
+				StatReg |= RX_RDY;
+
+				parp = 0;
+				bufcount = parp;
+
+
+				buf[0] = reverse_8( 0xde );
+			}
+
+
+			// GS CDX 3.3
+			else if( value == 0xef )
+			{
+				StatReg |= RX_RDY;
+
+				parp = 0;
+				bufcount = parp;
+
+
+				buf[0] = reverse_8( 0xad );
+			}
+
+
+			// GS CDX 3.3 [1 in + $1000 out]
+			else if( value == 0x01 )
+			{
+				StatReg |= RX_RDY;
+
+				parp = 0;
+				bufcount = parp;
+
+
+				// $00 = 0000 0000
+				// - (reverse) 0000 0000
+				//buf[0] = 0x00;
+				//gsdonglest = 4;
+
+				// Free dongle - feature not supported
+				buf[0] = 0xff;
+
+				gsdonglest = 0;
+			}
+
+
+			// GS CDX 3.3 [1 in + $1000 in]
+			else if( value == 0x02 )
+			{
+				StatReg |= RX_RDY;
+
+				parp = 0;
+				bufcount = parp;
+
+
+				// $00 = 0000 0000
+				// - (reverse) 0000 0000
+				//buf[0] = 0x00;
+				//gsdonglest = 3;
+
+				// Free dongle - feature not supported
+				buf[0] = 0xff;
+
+				gsdonglest = 0;
+			}
+
+
+			// GS CDX 3.3 [8 in, 4 out]
+			else if( value == 0x03 )
+			{
+				StatReg |= RX_RDY;
+
+				parp = 0;
+				bufcount = parp;
+
+				// $00 = 0000 0000
+				// - (reverse) 0000 0000
+				buf[0] = 0x00;
+
+				gsdonglest = 2;
+			}
+
+
+			// GS CDX 3.3 [out 1]
+			else if( value == 0x04 )
+			{
+				StatReg |= RX_RDY;
+
+				parp = 0;
+				bufcount = parp;
+
+
+				// $00 = 0000 0000
+				// - (reverse) 0000 0000
+				//buf[0] = 0x00;
+				//gsdonglest = 5;
+
+				// Free dongle - feature not supported
+				buf[0] = 0xff;
+			}
+			else
+			{
+				// ERROR!!
+
+				StatReg |= RX_RDY;
+
+				parp = 0;
+				bufcount = parp;
+				buf[0] = 0xff;
+
+				gsdonglest = 0;
+			}
+
+			return;
+
+
+		// be - ef - 03
+		case 2:
+			SIO_INT( SIO_CYCLES );
+			StatReg |= RX_RDY;
+
+			// command start
+			if( parp < 8 )
+			{
+				// read 2 (?,?) + 4 (DATA?) + 2 (CRC?)
+				buf[ parp ] = value;
+				parp++;
+			}
+
+			if( parp == 8 )
+			{
+				// now write 4 bytes via -FOUR- $00 writes
+				parp = 8;
+				bufcount = 12;
+
+				// GS CDX [magic key]
+				if( buf[0] == 0x01 && buf[1] == 0x01 &&
+						buf[2] == 0x12 && buf[3] == 0x34 &&
+						buf[4] == 0x56 && buf[5] == 0x78 &&
+						buf[6] == 0xae && buf[7] == 0x0f )
+				{
+					buf[9] = reverse_8( 0x3e );
+					buf[10] = reverse_8( 0xa0 );
+					buf[11] = reverse_8( 0x40 );
+					buf[12] = reverse_8( 0x29 );
+				}
+				else
+				{
+					// dummy value
+					buf[9] = reverse_8( 0xfa );
+					buf[10] = reverse_8( 0xde );
+					buf[11] = reverse_8( 0x21 );
+					buf[12] = reverse_8( 0x97 );
+				}						
+
+				// flush bytes -> done
+				gsdonglest = 255;
+			}
+			return;
+
+
+		// be - ef - 02
+		case 3:
+			SIO_INT(1);
+			StatReg |= RX_RDY;
+
+			// command start
+			if( parp < 0x1000+1 )
+			{
+				// read 1 byte
+				buf[ parp % 256 ] = value;
+				parp++;
+			}
+
+			if( parp == 0x1001 )
+			{
+				// done
+				gsdonglest = 0;
+			}
+			return;
+
+
+		// be - ef - 01
+		case 4:
+			SIO_INT(1);
+			StatReg |= RX_RDY;
+
+
+			// read 1 byte
+			buf[ parp ] = value;
+
+			
+			// write 0x1000 bytes
+			bufcount = 0x1000;
+
+			gsdonglest = 255;
+			return;
+
+
+		// be - ef - 04
+		case 5:
+			if( value == 0x00 )
+			{
+				SIO_INT( SIO_CYCLES );
+				StatReg |= RX_RDY;
+
+
+				// read 1 byte
+				parp = 0;
+				bufcount = parp;
+
+				buf[ 0 ] = 10;
+
+
+				// done already
+				gsdonglest = 0;
+			}
+			return;
+
+
+		// flush bytes -> done
+		case 255:
+			if( value == 0x00 )
+			{
+				//SIO_INT( SIO_CYCLES );
+				SIO_INT(1);
+				StatReg |= RX_RDY;
+
+				parp++;
+				if( parp == bufcount )
+				{
+					gsdonglest = 0;
+				}
+			}
+			else
+			{
+				// ERROR!!
+				StatReg |= RX_RDY;
+
+				parp = 0;
+				bufcount = parp;
+				buf[0] = 0xff;
+
+				gsdonglest = 0;
+			}
+			return;
+	}
+
 	switch (value) {
 		case 0x01: // start pad
 			StatReg |= RX_RDY;		// Transfer is Ready
@@ -264,6 +562,19 @@ void sioWrite8(unsigned char value) {
 			mcdst = 1;
 			rdwr = 0;
 			SIO_INT(SIO_CYCLES);
+			return;
+		case 0xae: // GameShark CDX - start dongle
+			StatReg |= RX_RDY;
+			gsdonglest = 1;
+
+			parp = 0;
+			bufcount = parp;
+
+			SIO_INT( SIO_CYCLES );
+			return;
+
+		default: // no hardware found
+			StatReg |= RX_RDY;
 			return;
 	}
 }
