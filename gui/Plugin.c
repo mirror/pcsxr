@@ -35,6 +35,8 @@
 
 void OnFile_Exit();
 
+extern void LidInterrupt();
+
 unsigned long gpuDisp;
 
 int StatesC = 0;
@@ -255,9 +257,13 @@ void PADhandleKey(int key) {
 			break;
 		case XK_F9:
 			SetCdOpenCaseTime(-1);
+
+			LidInterrupt();
 			break;
 		case XK_F10:
 			SetCdOpenCaseTime(0);
+
+			LidInterrupt();
 			break;
 		case XK_Escape:
 			// TODO

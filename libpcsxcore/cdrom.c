@@ -1147,3 +1147,18 @@ int cdrFreeze(gzFile f, int Mode) {
 
 	return 0;
 }
+
+
+
+
+
+void LidInterrupt()
+{
+	// generate interrupt if none active - open or close
+	if( cdr.Irq == 0 || cdr.Irq == 0xff )
+	{
+		cdr.Ctrl |= 0x80;
+		cdr.Stat = NoIntr; 
+		AddIrqQueue(CdlNop, 0x800);
+	}
+}
