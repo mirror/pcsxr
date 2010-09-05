@@ -80,71 +80,6 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 	DMA_INTERRUPT(4);
 }
 
-void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
-	u32 *ptr;
-	u32 size;
-
-	switch(chcr) {
-		case 0x01000200: // vram2mem
-#ifdef PSXDMA_LOG
-			PSXDMA_LOG("*** DMA2 GPU - vram2mem *** %x addr = %x size = %x\n", chcr, madr, bcr);
-#endif
-			ptr = (u32 *)PSXM(madr);
-			if (ptr == NULL) {
-#ifdef CPU_LOG
-				CPU_LOG("*** DMA2 GPU - vram2mem *** NULL Pointer!!!\n");
-#endif
-				break;
-			}
-			size = (bcr >> 16) * (bcr & 0xffff);
-			GPU_readDataMem(ptr, size);
-			psxCpu->Clear(madr, size);
-
-		  GPUDMA_INT(size / 4);
-			return;
-
-		case 0x01000201: // mem2vram
-#ifdef PSXDMA_LOG
-			PSXDMA_LOG("*** DMA 2 - GPU mem2vram *** %x addr = %x size = %x\n", chcr, madr, bcr);
-#endif
-			ptr = (u32 *)PSXM(madr);
-			if (ptr == NULL) {
-#ifdef CPU_LOG
-				CPU_LOG("*** DMA2 GPU - mem2vram *** NULL Pointer!!!\n");
-#endif
-				break;
-			}
-			size = (bcr >> 16) * (bcr & 0xffff);
-			GPU_writeDataMem(ptr, size);
-			
-			GPUDMA_INT(size / 4);
-			return;
-
-		case 0x01000401: // dma chain
-#ifdef PSXDMA_LOG
-			PSXDMA_LOG("*** DMA 2 - GPU dma chain *** %x addr = %x size = %x\n", chcr, madr, bcr);
-#endif
-			GPU_dmaChain((u32 *)psxM, madr & 0x1fffff);
-
-			// FIXME!!! Walk through DMA chain and add the cycles
-			GPUDMA_INT( 0x4000 / 4 );
-			return;
-
-#ifdef PSXDMA_LOG
-		default:
-			PSXDMA_LOG("*** DMA 2 - GPU unknown *** %x addr = %x size = %x\n", chcr, madr, bcr);
-			break;
-#endif
-	}
-
-	HW_DMA2_CHCR &= SWAP32(~0x01000000);
-	DMA_INTERRUPT(2);
-}
-
-void gpuInterrupt() {
-	HW_DMA2_CHCR &= SWAP32(~0x01000000);
-	DMA_INTERRUPT(2);
-}
 
 void psxDma6(u32 madr, u32 bcr, u32 chcr) {
 	u32 *mem = (u32 *)PSXM(madr);
@@ -169,7 +104,7 @@ void psxDma6(u32 madr, u32 bcr, u32 chcr) {
 		}
 		mem++; *mem = 0xffffff;
 
-	  RAMDMA_INT( size / BIAS);
+	  RAMDMA_INT( size );
 		return;
 	}
 #ifdef PSXDMA_LOG

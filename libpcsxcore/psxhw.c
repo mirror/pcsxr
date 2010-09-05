@@ -24,6 +24,7 @@
 #include "psxhw.h"
 #include "mdec.h"
 #include "cdrom.h"
+#include "gpu.h"
 
 void psxHwReset() {
 	if (Config.Sio) psxHu32ref(0x1070) |= SWAP32(0x80);
@@ -235,7 +236,7 @@ u32 psxHwRead32(u32 add) {
 #endif
 			return hard;
 		case 0x1f801814:
-			hard = GPU_readStatus();
+			hard = gpuReadStatus();
 #ifdef PSXHW_LOG
 			PSXHW_LOG("GPU STATUS 32bit read %x\n", hard);
 #endif

@@ -75,7 +75,7 @@ static const s32 VerboseLevel     = 0;
 
 static Rcnt rcnts[ CounterQuantity ];
 
-static u32 hSyncCount = 0;
+u32 hSyncCount = 0;
 static u32 spuSyncCount = 0;
 
 u32 psxNextCounter = 0, psxNextsCounter = 0;

@@ -573,15 +573,23 @@ void cdrInterrupt() {
 
 		// case now open
 		if (stat.Status & 0x10) {
-			cdr.Stat = DiskError;
+			if( Irq != CdlNop )
+			{
+				cdr.Stat = DiskError;
+				cdr.Result[0] |= 0x01;
+			}
 
-			cdr.Result[0] |= 0x11;
+			// GameShark Lite: Wants -exactly- $10
+			cdr.Result[0] |= 0x10;
 			cdr.Result[0] &= ~0x02;
 		}
 		// case now closed
 		else if (i & 0x10) {
 			cdr.StatP &= ~0x11;
 			cdr.Result[0] |= 0x2;
+
+			// GameShark Lite: Wants -exactly- $42, then $02
+			cdr.Result[0] |= 0x40;
 
 			CheckCdrom();
 		}
