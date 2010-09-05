@@ -516,7 +516,7 @@ void mdec0Interrupt()
 void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 	int blk[DSIZE2 * 6];
 	unsigned short *image;
-	int size;
+	int size, dmacnt;
 
 #ifdef CDR_LOG
 	CDR_LOG("DMA1 %08x %08x %08x (cmd = %08x)\n", adr, bcr, chcr, mdec.reg0);

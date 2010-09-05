@@ -74,6 +74,7 @@ am__libpcsxcore_a_SOURCES_DIST =  \
 	$(top_builddir)/libpcsxcore/psxcounters.c \
 	$(top_builddir)/libpcsxcore/psxdma.c \
 	$(top_builddir)/libpcsxcore/disr3000a.c \
+	$(top_builddir)/libpcsxcore/gpu.c \
 	$(top_builddir)/libpcsxcore/spu.c \
 	$(top_builddir)/libpcsxcore/sio.c \
 	$(top_builddir)/libpcsxcore/psxhw.c \
@@ -141,7 +142,7 @@ am__libpcsxcore_a_SOURCES_DIST =  \
 @ARCH_PPC_TRUE@am__objects_3 = pR3000A.$(OBJEXT) ppc.$(OBJEXT) \
 @ARCH_PPC_TRUE@	reguse.$(OBJEXT) libpcsxcore_a-pasm.$(OBJEXT)
 am_libpcsxcore_a_OBJECTS = psxbios.$(OBJEXT) cdrom.$(OBJEXT) \
-	psxcounters.$(OBJEXT) psxdma.$(OBJEXT) disr3000a.$(OBJEXT) \
+	psxcounters.$(OBJEXT) psxdma.$(OBJEXT) disr3000a.$(OBJEXT) gpu.$(OBJEXT) \
 	spu.$(OBJEXT) sio.$(OBJEXT) psxhw.$(OBJEXT) mdec.$(OBJEXT) \
 	psxmem.$(OBJEXT) misc.$(OBJEXT) plugins.$(OBJEXT) \
 	decode_xa.$(OBJEXT) r3000a.$(OBJEXT) psxinterpreter.$(OBJEXT) \
@@ -333,6 +334,7 @@ libpcsxcore_a_SOURCES = $(top_builddir)/libpcsxcore/psxbios.c \
 	$(top_builddir)/libpcsxcore/psxcounters.c \
 	$(top_builddir)/libpcsxcore/psxdma.c \
 	$(top_builddir)/libpcsxcore/disr3000a.c \
+	$(top_builddir)/libpcsxcore/gpu.c \
 	$(top_builddir)/libpcsxcore/spu.c \
 	$(top_builddir)/libpcsxcore/sio.c \
 	$(top_builddir)/libpcsxcore/psxhw.c \
@@ -432,6 +434,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/debug.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/decode_xa.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/disr3000a.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gpu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gte.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/iR3000A-64.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/iR3000A.Po@am__quote@
@@ -552,6 +555,20 @@ disr3000a.obj: $(top_builddir)/libpcsxcore/disr3000a.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$(top_builddir)/libpcsxcore/disr3000a.c' object='disr3000a.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o disr3000a.obj `if test -f '$(top_builddir)/libpcsxcore/disr3000a.c'; then $(CYGPATH_W) '$(top_builddir)/libpcsxcore/disr3000a.c'; else $(CYGPATH_W) '$(srcdir)/$(top_builddir)/libpcsxcore/disr3000a.c'; fi`
+
+gpu.o: $(top_builddir)/libpcsxcore/gpu.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gpu.o -MD -MP -MF $(DEPDIR)/gpu.Tpo -c -o gpu.o `test -f '$(top_builddir)/libpcsxcore/gpu.c' || echo '$(srcdir)/'`$(top_builddir)/libpcsxcore/gpu.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/gpu.Tpo $(DEPDIR)/gpu.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$(top_builddir)/libpcsxcore/gpu.c' object='gpu.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gpu.o `test -f '$(top_builddir)/libpcsxcore/gpu.c' || echo '$(srcdir)/'`$(top_builddir)/libpcsxcore/gpu.c
+
+gpu.obj: $(top_builddir)/libpcsxcore/gpu.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gpu.obj -MD -MP -MF $(DEPDIR)/gpu.Tpo -c -o gpu.obj `if test -f '$(top_builddir)/libpcsxcore/gpu.c'; then $(CYGPATH_W) '$(top_builddir)/libpcsxcore/gpu.c'; else $(CYGPATH_W) '$(srcdir)/$(top_builddir)/libpcsxcore/gpu.c'; fi`
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/gpu.Tpo $(DEPDIR)/gpu.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$(top_builddir)/libpcsxcore/gpu.c' object='gpu.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gpu.obj `if test -f '$(top_builddir)/libpcsxcore/gpu.c'; then $(CYGPATH_W) '$(top_builddir)/libpcsxcore/gpu.c'; else $(CYGPATH_W) '$(srcdir)/$(top_builddir)/libpcsxcore/gpu.c'; fi`
 
 spu.o: $(top_builddir)/libpcsxcore/spu.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT spu.o -MD -MP -MF $(DEPDIR)/spu.Tpo -c -o spu.o `test -f '$(top_builddir)/libpcsxcore/spu.c' || echo '$(srcdir)/'`$(top_builddir)/libpcsxcore/spu.c

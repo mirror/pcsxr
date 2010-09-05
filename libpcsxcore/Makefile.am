@@ -9,6 +9,7 @@ libpcsxcore_a_SOURCES = \
 	$(top_builddir)/libpcsxcore/psxcounters.c	\
 	$(top_builddir)/libpcsxcore/psxdma.c	\
 	$(top_builddir)/libpcsxcore/disr3000a.c	\
+	$(top_builddir)/libpcsxcore/gpu.c	\
 	$(top_builddir)/libpcsxcore/spu.c	\
 	$(top_builddir)/libpcsxcore/sio.c	\
 	$(top_builddir)/libpcsxcore/psxhw.c	\

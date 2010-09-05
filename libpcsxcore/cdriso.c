@@ -182,8 +182,9 @@ static void *playthread(void *param)
 			s = fread(sndbuffer, 1, sizeof(sndbuffer), cddaHandle);
 
 			if (subHandle != NULL) {
-				fseek(subHandle, sec * SUB_FRAMESIZE, SEEK_SET);
-				fread(subbuffer, 1, SUB_FRAMESIZE, subHandle);
+                // FIXME: sec?
+				//fseek(subHandle, sec * SUB_FRAMESIZE, SEEK_SET);
+				//fread(subbuffer, 1, SUB_FRAMESIZE, subHandle);
 			}
 		}
 
