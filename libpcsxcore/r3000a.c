@@ -111,10 +111,22 @@ void psxException(u32 code, u32 bd) {
 }
 
 void psxBranchTest() {
+	if (psxHu32(0x1070) & psxHu32(0x1074)) {
+		if ((psxRegs.CP0.n.Status & 0x401) == 0x401) {
+#ifdef PSXCPU_LOG
+			PSXCPU_LOG("Interrupt: %x %x\n", psxHu32(0x1070), psxHu32(0x1074));
+#endif
+//			SysPrintf("Interrupt (%x): %x %x\n", psxRegs.cycle, psxHu32(0x1070), psxHu32(0x1074));
+			psxException(0x400, 0);
+		}
+	}
+
+	// Give Vsync ~2-15+ cycles before exception eats it
 	if ((psxRegs.cycle - psxNextsCounter) >= psxNextCounter)
 		psxRcntUpdate();
 
 	if (psxRegs.interrupt) {
+	//if (1) {
 		if ((psxRegs.interrupt & (1 << PSXINT_SIO)) && !Config.Sio) { // sio
 			if ((psxRegs.cycle - psxRegs.intCycle[PSXINT_SIO].sCycle) >= psxRegs.intCycle[PSXINT_SIO].cycle) {
 				psxRegs.interrupt &= ~(1 << PSXINT_SIO);
@@ -170,16 +182,6 @@ void psxBranchTest() {
 				psxRegs.interrupt &= ~(1 << PSXINT_GPUOTCDMA);
 				gpuotcInterrupt();
 			}
-		}
-	}
-
-	if (psxHu32(0x1070) & psxHu32(0x1074)) {
-		if ((psxRegs.CP0.n.Status & 0x401) == 0x401) {
-#ifdef PSXCPU_LOG
-			PSXCPU_LOG("Interrupt: %x %x\n", psxHu32(0x1070), psxHu32(0x1074));
-#endif
-//			SysPrintf("Interrupt (%x): %x %x\n", psxRegs.cycle, psxHu32(0x1070), psxHu32(0x1074));
-			psxException(0x400, 0);
 		}
 	}
 }
