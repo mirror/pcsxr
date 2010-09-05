@@ -686,10 +686,16 @@ void psxCOP0() {
 }
 
 void psxCOP2() {
+	if ((psxRegs.CP0.n.Status & 0x40000000) == 0 )
+		return;
+
 	psxCP2[_Funct_]();
 }
 
 void psxBASIC() {
+	if ((psxRegs.CP0.n.Status & 0x40000000) == 0 )
+		return;
+
 	psxCP2BSC[_Rs_]();
 }
 
