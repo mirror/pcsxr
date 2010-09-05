@@ -474,7 +474,10 @@ void psxDma0(u32 adr, u32 bcr, u32 chcr) {
 		case 0x3: // decode
 			mdec.rl = (u16 *)PSXM(adr);
 			mdec.rlsize = mdec.reg0 & MDEC0_SIZE_MASK;
-			break;
+
+			MDECINDMA_INT( size / 4 );
+      return;
+			
 
 		case 0x4: // quantization table upload
 			{
@@ -485,17 +488,27 @@ void psxDma0(u32 adr, u32 bcr, u32 chcr) {
 				iqtab_init(iq_y, p);
 				iqtab_init(iq_uv, p + 64);
 			}
-			break;
+
+			MDECINDMA_INT( size / 4 );
+      return;
 
 		case 0x6: // cosine table
 			// printf("mdec cosine table\n");
-			break;
+
+			MDECINDMA_INT( size / 4 );
+      return;
 
 		default:
 			// printf("mdec unknown command\n");
 			break;
 	}
 
+	HW_DMA0_CHCR &= SWAP32(~0x01000000);
+	DMA_INTERRUPT(0);
+}
+
+void mdec0Interrupt()
+{
 	HW_DMA0_CHCR &= SWAP32(~0x01000000);
 	DMA_INTERRUPT(0);
 }

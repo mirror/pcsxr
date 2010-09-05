@@ -65,7 +65,9 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 			size = (bcr >> 16) * (bcr & 0xffff) * 2;
 			SPU_readDMAMem(ptr, size);
 			psxCpu->Clear(madr, size);
-			break;
+
+			SPUDMA_INT((bcr >> 16) * (bcr & 0xffff) / 2);
+			return;
 
 #ifdef PSXDMA_LOG
 		default:
@@ -97,7 +99,9 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			size = (bcr >> 16) * (bcr & 0xffff);
 			GPU_readDataMem(ptr, size);
 			psxCpu->Clear(madr, size);
-			break;
+
+		  GPUDMA_INT(size / 4);
+			return;
 
 		case 0x01000201: // mem2vram
 #ifdef PSXDMA_LOG
@@ -112,6 +116,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			}
 			size = (bcr >> 16) * (bcr & 0xffff);
 			GPU_writeDataMem(ptr, size);
+			
 			GPUDMA_INT(size / 4);
 			return;
 
@@ -120,7 +125,10 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			PSXDMA_LOG("*** DMA 2 - GPU dma chain *** %x addr = %x size = %x\n", chcr, madr, bcr);
 #endif
 			GPU_dmaChain((u32 *)psxM, madr & 0x1fffff);
-			break;
+
+			// FIXME!!! Walk through DMA chain and add the cycles
+			GPUDMA_INT( 0x4000 / 4 );
+			return;
 
 #ifdef PSXDMA_LOG
 		default:
@@ -160,6 +168,9 @@ void psxDma6(u32 madr, u32 bcr, u32 chcr) {
 			madr -= 4;
 		}
 		mem++; *mem = 0xffffff;
+
+	  RAMDMA_INT( size / BIAS);
+		return;
 	}
 #ifdef PSXDMA_LOG
 	else {
@@ -172,3 +183,8 @@ void psxDma6(u32 madr, u32 bcr, u32 chcr) {
 	DMA_INTERRUPT(6);
 }
 
+void gpuotcInterrupt()
+{
+	HW_DMA6_CHCR &= SWAP32(~0x01000000);
+	DMA_INTERRUPT(6);
+}

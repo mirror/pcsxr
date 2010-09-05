@@ -72,17 +72,16 @@ typedef union {
 
 typedef union {
 	struct {
-		u32	Index,     Random,    EntryLo0,  EntryLo1,
-						Context,   PageMask,  Wired,     Reserved0,
-						BadVAddr,  Count,     EntryHi,   Compare,
-						Status,    Cause,     EPC,       PRid,
-						Config,    LLAddr,    WatchLO,   WatchHI,
-						XContext,  Reserved1, Reserved2, Reserved3,
-						Reserved4, Reserved5, ECC,       CacheErr,
-						TagLo,     TagHi,     ErrorEPC,  Reserved6;
+		u32	Index,     Random,    EntryLo0,  BPC,
+				Context,   BDA,       PIDMask,   DCIC,
+				BadVAddr,  BDAM,      EntryHi,   BPCM,
+				Status,    Cause,     EPC,       PRid,
+				Config,    LLAddr,    WatchLO,   WatchHI,
+				XContext,  Reserved1, Reserved2, Reserved3,
+				Reserved4, Reserved5, ECC,       CacheErr,
+				TagLo,     TagHi,     ErrorEPC,  Reserved6;
 	} n;
 	u32 r[32];
-	PAIR p[32];
 } psxCP0Regs;
 
 typedef struct {
@@ -152,7 +151,9 @@ enum {
 	PSXINT_GPUDMA,
 	PSXINT_MDECOUTDMA,
 	PSXINT_SPUDMA,
-	PSXINT_GPUBUSY
+	PSXINT_GPUBUSY,
+	PSXINT_MDECINDMA,
+	PSXINT_GPUOTCDMA
 };
 
 typedef struct {
@@ -160,11 +161,14 @@ typedef struct {
 	psxCP0Regs CP0;		/* Coprocessor0 Registers */
 	psxCP2Data CP2D; 	/* Cop2 data registers */
 	psxCP2Ctrl CP2C; 	/* Cop2 control registers */
-    u32 pc;				/* Program counter */
-    u32 code;			/* The instruction */
+  u32 pc;						/* Program counter */
+  u32 code;					/* The instruction */
 	u32 cycle;
 	u32 interrupt;
 	struct { u32 sCycle, cycle; } intCycle[32];
+	u8 ICache_Addr[0x1000];
+	u8 ICache_Code[0x1000];
+	u32 ICache_valid;
 } psxRegisters;
 
 extern psxRegisters psxRegs;
