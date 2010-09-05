@@ -82,6 +82,7 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 
 
 void psxDma6(u32 madr, u32 bcr, u32 chcr) {
+	u32 size;
 	u32 *mem = (u32 *)PSXM(madr);
 
 #ifdef PSXDMA_LOG
@@ -98,13 +99,16 @@ void psxDma6(u32 madr, u32 bcr, u32 chcr) {
 			return;
 		}
 
+		// already 32-bit size
+		size = bcr;
+
 		while (bcr--) {
 			*mem-- = SWAP32((madr - 4) & 0xffffff);
 			madr -= 4;
 		}
 		mem++; *mem = 0xffffff;
 
-	  RAMDMA_INT( size );
+	  GPUOTCDMA_INT( size );
 		return;
 	}
 #ifdef PSXDMA_LOG
