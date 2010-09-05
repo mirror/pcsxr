@@ -48,6 +48,102 @@ void (*psxCP0[32])();
 void (*psxCP2[64])();
 void (*psxCP2BSC[32])();
 
+/*
+Formula One 2001
+- Use old CPU cache code when the RAM location is
+  updated with new code (affects in-game racing)
+
+TODO:
+- I-cache / D-cache swapping
+- Isolate D-cache from RAM
+*/
+
+u32 *Read_ICache( u32 pc, u32 isolate )
+{
+#define U32_PTR(x) (SWAP32(* (u32 *)(x)))
+#define U32_PTR_REF(x) (* (u32 *)(x))
+
+
+	u32 pc_bank, pc_offset, pc_cache;
+	u8 *IAddr, *ICode;
+
+	pc_bank = pc >> 24;
+	pc_offset = pc & 0xffffff;
+	pc_cache = pc & 0xfff;
+
+	IAddr = psxRegs.ICache_Addr;
+	ICode = psxRegs.ICache_Code;
+
+
+	//return PSXM(pc);
+
+
+	
+	// clear I-cache
+	if( psxRegs.ICache_valid == 0 )
+	{
+		memset( psxRegs.ICache_Addr, 0xff, sizeof(psxRegs.ICache_Addr) );
+		memset( psxRegs.ICache_Code, 0xff, sizeof(psxRegs.ICache_Code) );
+
+		psxRegs.ICache_valid = 1;
+	}
+
+
+
+	// uncached
+	if( pc_bank >= 0xa0 )
+		return PSXM(pc);
+
+
+	// cached - RAM
+	if( pc_bank == 0x80 || pc_bank == 0x00 )
+	{
+		if( U32_PTR( IAddr + pc_cache ) == pc_offset )
+		{
+			// Cache hit - return last opcode used
+			return ICode + pc_cache;
+		}
+		else
+		{
+			// Cache miss - addresses don't match
+			// - default: 0xffffffff (not init)
+
+			if( isolate == 0 )
+			{
+				// cache line is 4 bytes wide
+				pc_offset &= ~0xf;
+				pc_cache &= ~0xf;
+
+				// address line
+				U32_PTR_REF( IAddr + pc_cache + 0x0 ) = pc_offset + 0x0;
+				U32_PTR_REF( IAddr + pc_cache + 0x4 ) = pc_offset + 0x4;
+				U32_PTR_REF( IAddr + pc_cache + 0x8 ) = pc_offset + 0x8;
+				U32_PTR_REF( IAddr + pc_cache + 0xc ) = pc_offset + 0xc;
+
+				// opcode line
+				pc_offset = pc & ~0xf;
+				U32_PTR_REF( ICode + pc_cache + 0x0 ) = psxMu32( pc_offset + 0x0 );
+				U32_PTR_REF( ICode + pc_cache + 0x4 ) = psxMu32( pc_offset + 0x4 );
+				U32_PTR_REF( ICode + pc_cache + 0x8 ) = psxMu32( pc_offset + 0x8 );
+				U32_PTR_REF( ICode + pc_cache + 0xc ) = psxMu32( pc_offset + 0xc );
+			}
+
+			// normal code
+			return PSXM(pc);
+		}
+	}
+
+
+	/*
+	TODO: Probably should add cached BIOS
+	*/
+
+
+	// default
+	return PSXM(pc);
+}
+
+
 static void delayRead(int reg, u32 bpc) {
 	u32 rold, rnew;
 
@@ -253,7 +349,10 @@ void psxDelayTest(int reg, u32 bpc) {
 	u32 *code;
 	u32 tmp;
 
-	code = (u32 *)PSXM(bpc);
+	// Don't execute yet - just peek
+	//code = (u32 *)PSXM(bpc);
+	code = Read_ICache(bpc,1);
+
 	tmp = ((code == NULL) ? 0 : SWAP32(*code));
 	branch = 1;
 
@@ -280,7 +379,10 @@ __inline void doBranch(u32 tar) {
 	branch2 = branch = 1;
 	branchPC = tar;
 
-	code = (u32 *)PSXM(psxRegs.pc);
+	// branch delay slot
+	//code = (u32 *)PSXM(psxRegs.pc);
+	code = Read_ICache( psxRegs.pc, 0 );
+
 	psxRegs.code = ((code == NULL) ? 0 : SWAP32(*code));
 
 	debugI();
@@ -767,6 +869,7 @@ static int intInit() {
 }
 
 static void intReset() {
+	psxRegs.ICache_valid = 0;
 }
 
 static void intExecute() {
@@ -787,7 +890,8 @@ static void intShutdown() {
 
 // interpreter execution
 inline void execI() { 
-	u32 *code = (u32 *)PSXM(psxRegs.pc);
+	//u32 *code = (u32 *)PSXM(psxRegs.pc); 
+	u32 *code = Read_ICache( psxRegs.pc,0 );
 	psxRegs.code = ((code == NULL) ? 0 : SWAP32(*code));
 
 	debugI();
