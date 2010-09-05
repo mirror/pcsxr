@@ -144,6 +144,7 @@ static void *playthread(void *param)
 {
 	long			d, t, i, s;
 	unsigned char	tmp;
+	int sec;
 
 	t = GetTickCount();
 
@@ -162,6 +163,8 @@ static void *playthread(void *param)
 #endif
 
 		t = GetTickCount() + CDDA_FRAMETIME;
+
+		sec = cddaCurOffset / CD_FRAMESIZE_RAW;
 
 		if (subChanMixed) {
 			s = 0;
@@ -182,9 +185,8 @@ static void *playthread(void *param)
 			s = fread(sndbuffer, 1, sizeof(sndbuffer), cddaHandle);
 
 			if (subHandle != NULL) {
-                // FIXME: sec?
-				//fseek(subHandle, sec * SUB_FRAMESIZE, SEEK_SET);
-				//fread(subbuffer, 1, SUB_FRAMESIZE, subHandle);
+				fseek(subHandle, sec * SUB_FRAMESIZE, SEEK_SET);
+				fread(subbuffer, 1, SUB_FRAMESIZE, subHandle);
 			}
 		}
 
