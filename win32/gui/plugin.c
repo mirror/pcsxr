@@ -33,6 +33,8 @@
 
 int ShowPic = 0;
 
+extern void LidInterrupt();
+
 void gpuShowPic() {
 	char Text[255];
 	gzFile f;
@@ -144,11 +146,13 @@ void PADhandleKey(int key) {
 		case VK_F9:
 			GPU_displayText(_("*PCSX*: CdRom Case Opened"));
 			SetCdOpenCaseTime(-1);
+			LidInterrupt();
 			break;
 
 		case VK_F10:
 			GPU_displayText(_("*PCSX*: CdRom Case Closed"));
 			SetCdOpenCaseTime(0);
+			LidInterrupt();
 			break;
 
 		case VK_F12:
