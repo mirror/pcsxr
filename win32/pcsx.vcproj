@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="gb2312"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="9.00"
 	Name="pcsx"
 	ProjectGUID="{9EEA62F5-46DC-4C07-AFE1-F72F9D6B9E3E}"
 	RootNamespace="pcsx"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -106,9 +107,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -201,9 +199,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -371,6 +366,14 @@
 						PreprocessorDefinitions=""
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\libpcsxcore\gpu.c"
+				>
+			</File>
+			<File
+				RelativePath="..\libpcsxcore\gpu.h"
+				>
 			</File>
 			<File
 				RelativePath="..\libpcsxcore\gte.c"

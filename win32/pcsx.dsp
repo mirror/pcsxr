@@ -160,6 +160,14 @@ SOURCE=..\libpcsxcore\disr3000a.c
 # End Source File
 # Begin Source File
 
+SOURCE=..\libpcsxcore\gpu.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\libpcsxcore\gpu.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\libpcsxcore\gte.c
 # End Source File
 # Begin Source File

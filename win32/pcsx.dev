@@ -9,7 +9,7 @@ CppCompiler=-D__GNUWIN32__ -march=pentiumpro -D_M_IX86=600 -W -finline-functions
 Includes=.;./zlib;../libpcsxcore;./glue;./gui;./intl
 Linker=-lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32 -lcomctl32 -lwsock32_@@_
 Libs=
-UnitCount=114
+UnitCount=116
 Folders=glue,glue/sys,gui,intl,libpcsxcore,libpcsxcore/ix86,zlib
 ObjFiles=
 PrivateResource=pcsx_private.rc
@@ -1179,6 +1179,26 @@ BuildCmd=
 
 [Unit114]
 FileName=..\libpcsxcore\sjisfont.h
+CompileCpp=1
+Folder=libpcsxcore
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit115]
+FileName=..\libpcsxcore\gpu.c
+CompileCpp=0
+Folder=libpcsxcore
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=$(CC) -c gpu.c -o gpu.o $(CFLAGS)
+
+[Unit116]
+FileName=..\libpcsxcore\gpu.h
 CompileCpp=1
 Folder=libpcsxcore
 Compile=1
