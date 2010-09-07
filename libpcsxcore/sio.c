@@ -395,20 +395,68 @@ void sioWrite8(unsigned char value) {
 				parp = 8;
 				bufcount = 12;
 
-				// GS CDX [magic key]
-				if( buf[0] == 0x01 && buf[1] == 0x01 &&
-						buf[2] == 0x12 && buf[3] == 0x34 &&
-						buf[4] == 0x56 && buf[5] == 0x78 &&
-						buf[6] == 0xae && buf[7] == 0x0f )
+
+				// TODO: Solve CDX algorithm
+
+
+				// GS CDX 3.3 [magic key]
+				if( buf[2] == 0x12 && buf[3] == 0x34 &&
+						buf[4] == 0x56 && buf[5] == 0x78 )
 				{
 					buf[9] = reverse_8( 0x3e );
 					buf[10] = reverse_8( 0xa0 );
 					buf[11] = reverse_8( 0x40 );
 					buf[12] = reverse_8( 0x29 );
 				}
+
+				// GS CDX 3.3 [address key #2 = 6ec]
+				else if( buf[2] == 0x1f && buf[3] == 0xe3 &&
+								 buf[4] == 0x45 && buf[5] == 0x60 )
+				{
+					buf[9] = reverse_8( 0xee );
+					buf[10] = reverse_8( 0xdd );
+					buf[11] = reverse_8( 0x71 );
+					buf[12] = reverse_8( 0xa8 );
+				}
+
+				// GS CDX 3.3 [address key #3 = ???]
+				else if( buf[2] == 0x1f && buf[3] == 0xe3 &&
+								 buf[4] == 0x72 && buf[5] == 0xe3 )
+				{
+					// unsolved!!
+
+					// Used here: 80090348 / 80090498
+
+					// dummy value - MSB
+					buf[9] = reverse_8( 0xfa );
+					buf[10] = reverse_8( 0xde );
+					buf[11] = reverse_8( 0x21 );
+					buf[12] = reverse_8( 0x97 );
+				}
+
+				// GS CDX 3.3 [address key #4 = a00]
+				else if( buf[2] == 0x1f && buf[3] == 0xe3 &&
+								 buf[4] == 0x85 && buf[5] == 0xae )
+				{
+					buf[9] = reverse_8( 0xee );
+					buf[10] = reverse_8( 0xdd );
+					buf[11] = reverse_8( 0x7d );
+					buf[12] = reverse_8( 0x44 );
+				}
+
+				// GS CDX 3.3 [address key #5 = 9ec]
+				else if( buf[2] == 0x17 && buf[3] == 0xe3 &&
+								 buf[4] == 0xb5 && buf[5] == 0x60 )
+				{
+					buf[9] = reverse_8( 0xee );
+					buf[10] = reverse_8( 0xdd );
+					buf[11] = reverse_8( 0x7e );
+					buf[12] = reverse_8( 0xa8 );
+				}
+
 				else
 				{
-					// dummy value
+					// dummy value - MSB
 					buf[9] = reverse_8( 0xfa );
 					buf[10] = reverse_8( 0xde );
 					buf[11] = reverse_8( 0x21 );
@@ -423,7 +471,7 @@ void sioWrite8(unsigned char value) {
 
 		// be - ef - 02
 		case 3:
-			SIO_INT(1);
+			SIO_INT( SIO_CYCLES );
 			StatReg |= RX_RDY;
 
 			// command start
@@ -444,7 +492,7 @@ void sioWrite8(unsigned char value) {
 
 		// be - ef - 01
 		case 4:
-			SIO_INT(1);
+			SIO_INT( SIO_CYCLES );
 			StatReg |= RX_RDY;
 
 
