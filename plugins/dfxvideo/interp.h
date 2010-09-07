@@ -271,7 +271,7 @@ __inline static int interp_32_diff(unsigned int  p1, unsigned int  p2)
   return 0;
 }
 
-static void interp_set(unsigned bits_per_pixel)
+__inline static void interp_set(unsigned bits_per_pixel)
 {
   interp_bits_per_pixel = bits_per_pixel;
 

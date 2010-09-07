@@ -143,9 +143,8 @@ fi
 
 AM_CONDITIONAL(ARCH_X86, false)
 AM_CONDITIONAL(ARCH_X86_64, false)
-AM_CONDITIONAL(ARCH_PPC, false)
 
-AC_ARG_ENABLE(dynarec, [  --enable-dynarec=...    force selection of dynamic recompiler platform (auto/no/x86/x86_64/ppc) (default: auto)],
+AC_ARG_ENABLE(dynarec, [  --enable-dynarec=...    force selection of dynamic recompiler platform (auto/no/x86/x86_64) (default: auto)],
 [ DYNAREC="$enableval" ],[ DYNAREC="auto" ])
 
 if test "x$DYNAREC" = xauto; then
@@ -154,14 +153,11 @@ else if test "x$DYNAREC" = xx86; then
 	DYNARECSEL="x86"
 else if test "x$DYNAREC" = xx86_64; then
 	DYNARECSEL="x86_64"
-else if test "x$DYNAREC" = xppc; then
-	DYNARECSEL="ppc"
 else if test "x$DYNAREC" = xno; then
 	DYNARECSEL="no"
 else
 	AC_MSG_WARN([Dynamic Recompiler "$DYNAREC" not found.  Autodetecting...])
 	DYNARECSEL="auto"
-fi
 fi
 fi
 fi
@@ -174,10 +170,6 @@ if test "x$DYNARECSEL" = xauto; then
 
 	if expr x"$target_cpu" : 'xx86_64' > /dev/null; then
 		DYNARECSEL="x86_64"
-	fi
-
-	if expr x"$target_cpu" : 'xpowerpc' > /dev/null; then
-		DYNARECSEL="ppc"
 	fi
 fi
 
@@ -198,12 +190,6 @@ if test "x$DYNARECSEL" = xx86_64; then
 	dnl CFLAGS+=" -m64 "
 	dnl AC_COMPILE_IFELSE(AC_LANG_PROGRAM,,AC_MSG_ERROR([Cannot compile with -m64])) 
 	AC_MSG_RESULT([Dynamic Recompiler selected: x86_64])
-fi
-
-if test "x$DYNARECSEL" = xppc; then
-        AC_DEFINE([__ppc__], [1], [Define if we are compiling for powerpc architectures.])
-        AM_CONDITIONAL(ARCH_PPC, true)
-	AC_MSG_RESULT([Dynamic Recompiler selected: ppc])
 fi
 
 AC_C_BIGENDIAN(AC_DEFINE([__BIGENDIAN__],[],[define on a big endian system]))

@@ -478,7 +478,13 @@ static void recCOP0() {
 
 //REC_SYS(COP2);
 static void recCOP2() {
+	MOV32MtoR(EAX, (u32)&psxRegs.CP0.n.Status);
+	AND32ItoR(EAX, 0x40000000);
+	j8Ptr[31] = JZ8(0);
+
 	recCP2[_Funct_]();
+
+	x86SetJ8(j8Ptr[31]);
 }
 
 static void recBASIC() {
