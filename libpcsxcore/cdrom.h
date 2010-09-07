@@ -56,7 +56,7 @@ typedef struct {
 
 	unsigned char Prev[4];
 	unsigned char Param[8];
-	unsigned char Result[8];
+	unsigned char Result[15];
 
 	unsigned char ParamC;
 	unsigned char ParamP;

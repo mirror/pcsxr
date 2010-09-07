@@ -1081,6 +1081,75 @@ void cdrWrite3(unsigned char rt) {
 				break;
 		}
 	}
+
+	/*
+	GameShark CDX 3.3
+
+	TODO: Can we relax the rules?
+	*/
+	if (rt == 0 && cdr.Ctrl == 0xd8 && cdr.Readed == 1) {
+		u32 i;
+
+
+		// low-level status access
+		SetResultSize(15);
+
+
+		i = stat.Status;
+		if (CDR_getStatus(&stat) != -1) {
+			// Hack: Fake CDROM seek / spin time
+			static int seek_time = 0;
+
+			if (stat.Type == 0xff) {
+			}
+			else if (stat.Status & 0x10) {
+				// unknown #1 - status?
+				// unknown #2 - case open?
+
+				cdr.Result[0] = 0x11;
+				cdr.Result[1] = 0x80;
+			}
+			else if ( i & 0x10 ) {
+				cdr.Result[0] = 0x13;
+				cdr.Result[1] = 0x80;
+
+				// minimum 50 tries for GS CDX 3.3
+				seek_time = 50;
+			}
+			else if ( seek_time ) {
+				cdr.Result[0] = 0x13;
+				cdr.Result[1] = 0x80;
+
+				seek_time--;
+			}
+			else
+			{
+				cdr.Result[0] = 0x01;
+				cdr.Result[1] = 0x00;
+			}
+
+			// unknown #3
+			cdr.Result[2] = 0;
+
+			// unknown #4 - error?
+			cdr.Result[3] = 0;
+
+			// unknown #5-14
+			cdr.Result[4] = 0;
+			cdr.Result[5] = 0;
+			cdr.Result[6] = 0;
+			cdr.Result[7] = 0;
+			cdr.Result[8] = 0;
+			cdr.Result[9] = 0;
+			cdr.Result[10] = 0;
+			cdr.Result[11] = 0;
+			cdr.Result[12] = 0;
+			cdr.Result[13] = 0;
+
+			// unknown #15 - error?
+			cdr.Result[14] = 0;
+		}
+	}
 }
 
 void psxDma3(u32 madr, u32 bcr, u32 chcr) {
