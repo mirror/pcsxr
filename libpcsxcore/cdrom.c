@@ -1179,7 +1179,24 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 #endif
 				break;
 			}
-			memcpy(ptr, cdr.pTransfer, cdsize);
+
+			/*
+			GS CDX: Enhancement CD crash
+			- Setloc 0:0:0
+			- CdlPlay
+			- Spams DMA3 and gets buffer overrun
+			*/
+
+			if( (cdr.pTransfer-cdr.Transfer) + cdsize > 2352 )
+			{
+				// avoid crash - probably should wrap here
+				//memcpy(ptr, cdr.pTransfer, cdsize);
+			}
+			else
+			{
+				memcpy(ptr, cdr.pTransfer, cdsize);
+			}
+
 			psxCpu->Clear(madr, cdsize / 4);
 			cdr.pTransfer += cdsize;
 			break;
