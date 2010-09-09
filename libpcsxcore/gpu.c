@@ -108,7 +108,7 @@ int gpuReadStatus()
 	// - Hot wheels turbo racing
 	// - Dukes of Hazzard
 
-#if 1
+#if 0
 	if( HW_DMA2_CHCR & 0x01000000 )
 	{
 		hard &= ~GPUSTATUS_IDLE;
