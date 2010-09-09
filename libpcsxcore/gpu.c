@@ -84,6 +84,7 @@ int gpuReadStatus()
 	hard = GPU_readStatus();
 
 
+#if 0
 	// ePSXe 1.7.0 - Chrono Cross interlace hack
 	if (hard & 0x400000) {
 		switch (Config.PsxType) {
@@ -96,6 +97,7 @@ int gpuReadStatus()
 				break;
 		}
 	}
+#endif
 
 
 	// NOTE:

@@ -795,9 +795,6 @@ void psxCOP2() {
 }
 
 void psxBASIC() {
-	if ((psxRegs.CP0.n.Status & 0x40000000) == 0 )
-		return;
-
 	psxCP2BSC[_Rs_]();
 }
 
