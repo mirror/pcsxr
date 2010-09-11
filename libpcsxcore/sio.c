@@ -1209,7 +1209,7 @@ void LoadDongle( char *str )
 
 		// create temp data
 		ptr[0] = (u32) 0x02015447;
-		ptr[1] = (u32) 0;
+		ptr[1] = (u32) 7;
 		ptr[2] = (u32) 1;
 		ptr[3] = (u32) 0;
 
