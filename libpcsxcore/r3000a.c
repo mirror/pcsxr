@@ -26,6 +26,10 @@
 #include "mdec.h"
 #include "gte.h"
 
+
+extern u32 *Read_ICache( u32 pc, u32 isolate );
+
+
 R3000Acpu *psxCpu = NULL;
 psxRegisters psxRegs;
 
@@ -102,31 +106,30 @@ void psxException(u32 code, u32 bd) {
 	psxRegs.CP0.n.Status = (psxRegs.CP0.n.Status &~0x3f) |
 						  ((psxRegs.CP0.n.Status & 0xf) << 2);
 
-	if (!Config.HLE && (((PSXMu32(psxRegs.CP0.n.EPC) >> 24) & 0xfe) == 0x4a)) {
-		// "hokuto no ken" / "Crash Bandicot 2" ... fix
-		PSXMu32ref(psxRegs.CP0.n.EPC)&= SWAPu32(~0x02000000);
-	}
-
 	if (Config.HLE) psxBiosException();
 }
 
 void psxBranchTest() {
+	// GameShark Sampler: Give VSync pin some delay before exception eats it
 	if (psxHu32(0x1070) & psxHu32(0x1074)) {
 		if ((psxRegs.CP0.n.Status & 0x401) == 0x401) {
+			u32 opcode;
+
+			// Crash Bandicoot 2: Don't run exceptions when GTE in pipeline
+			opcode = *Read_ICache( psxRegs.pc, 1 );
+			if( ((opcode >> 24) & 0xfe) != 0x4a ) {
 #ifdef PSXCPU_LOG
-			PSXCPU_LOG("Interrupt: %x %x\n", psxHu32(0x1070), psxHu32(0x1074));
+				PSXCPU_LOG("Interrupt: %x %x\n", psxHu32(0x1070), psxHu32(0x1074));
 #endif
-//			SysPrintf("Interrupt (%x): %x %x\n", psxRegs.cycle, psxHu32(0x1070), psxHu32(0x1074));
-			psxException(0x400, 0);
+				psxException(0x400, 0);
+			}
 		}
 	}
 
-	// Give Vsync ~2-15+ cycles before exception eats it
 	if ((psxRegs.cycle - psxNextsCounter) >= psxNextCounter)
 		psxRcntUpdate();
 
 	if (psxRegs.interrupt) {
-	//if (1) {
 		if ((psxRegs.interrupt & (1 << PSXINT_SIO)) && !Config.Sio) { // sio
 			if ((psxRegs.cycle - psxRegs.intCycle[PSXINT_SIO].sCycle) >= psxRegs.intCycle[PSXINT_SIO].cycle) {
 				psxRegs.interrupt &= ~(1 << PSXINT_SIO);
