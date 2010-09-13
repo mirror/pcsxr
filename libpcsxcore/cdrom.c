@@ -184,7 +184,7 @@ void cdrInterrupt() {
 			SetResultSize(1);
 			cdr.Result[0] = cdr.StatP;
 			cdr.Stat = Acknowledge;
-			cdr.LidCheck++;
+			if (cdr.LidCheck == 0) cdr.LidCheck = 1;
 			break;
 
 		case CdlSetloc:
@@ -236,7 +236,7 @@ void cdrInterrupt() {
 			cdr.Result[0] = cdr.StatP;
 			cdr.Stat = Complete;
 //			cdr.Stat = Acknowledge;
-			cdr.LidCheck++;
+			if (cdr.LidCheck == 0) cdr.LidCheck = 1;
 			break;
 
 		case CdlPause:
