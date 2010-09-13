@@ -42,7 +42,7 @@ extern unsigned int hSyncCount;
 // Taken from PEOPS SOFTGPU
 u32 lUsedAddr[3];
 
-static inline boolean CheckForEndlessLoop(unsigned long laddr) {
+static inline boolean CheckForEndlessLoop(u32 laddr) {
 	if (laddr == lUsedAddr[1]) return TRUE;
 	if (laddr == lUsedAddr[2]) return TRUE;
 
@@ -54,14 +54,11 @@ static inline boolean CheckForEndlessLoop(unsigned long laddr) {
 	return FALSE;
 }
 
-static u32 gpuDmaChainSize(u32 *baseAddrL, u32 addr) {
-	u8 *baseAddrB;
+static u32 gpuDmaChainSize(u32 addr) {
 	unsigned int DMACommandCounter = 0;
 	u32 size = 0;
 
 	lUsedAddr[0] = lUsedAddr[1] = lUsedAddr[2] = 0xffffff;
-
-	baseAddrB = (u8 *)baseAddrL;
 
 	do {
 		addr &= 0x1ffffc;
@@ -70,9 +67,9 @@ static u32 gpuDmaChainSize(u32 *baseAddrL, u32 addr) {
 		if (CheckForEndlessLoop(addr)) break;
 
 		size += 4;
-		size += baseAddrB[addr + 3];
+		size += psxMu8(addr + 3);
 
-		addr = baseAddrL[addr >> 2] & 0xffffff;
+		addr = psxMu32(addr & ~0x3) & 0xffffff;
 	} while (addr != 0xffffff);
 
 	return size;
@@ -173,7 +170,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 #endif
 			GPU_dmaChain((u32 *)psxM, madr & 0x1fffff);
 
-			size = gpuDmaChainSize((u32 *)psxM, madr & 0x1fffff);
+			size = gpuDmaChainSize(madr);
 			GPUDMA_INT(size / 4);
 			return;
 
