@@ -1,9 +1,26 @@
+/*  Copyright (c) 2010, shalma.
+ *  Portions Copyright (c) 2002, Pete Bernert.
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA
+ */
+
 #include "psxhw.h"
 #include "gpu.h"
 #include "psxdma.h"
 
 extern unsigned int hSyncCount;
-
 
 #define GPUSTATUS_ODDLINES            0x80000000
 #define GPUSTATUS_DMABITS             0x60000000 // Two bits
@@ -22,61 +39,46 @@ extern unsigned int hSyncCount;
 #define GPUSTATUS_DRAWINGALLOWED      0x00000400
 #define GPUSTATUS_DITHER              0x00000200
 
-
 // Taken from PEOPS SOFTGPU
-unsigned long lUsedAddr[3];
+u32 lUsedAddr[3];
 
-char CheckForEndlessLoop(unsigned long laddr)
-{
- if(laddr==lUsedAddr[1]) return 1;
- if(laddr==lUsedAddr[2]) return 1;
+static inline boolean CheckForEndlessLoop(unsigned long laddr) {
+	if (laddr == lUsedAddr[1]) return TRUE;
+	if (laddr == lUsedAddr[2]) return TRUE;
 
- if(laddr<lUsedAddr[0]) lUsedAddr[1]=laddr;
- else                   lUsedAddr[2]=laddr;
- lUsedAddr[0]=laddr;
- return 0;
+	if (laddr < lUsedAddr[0]) lUsedAddr[1] = laddr;
+	else lUsedAddr[2] = laddr;
+
+	lUsedAddr[0] = laddr;
+
+	return FALSE;
 }
 
-long gpuDmaChain(unsigned long *baseAddrL, unsigned long addr)
-{
- unsigned long dmaMem;
- unsigned char *baseAddrB;
- short count;unsigned int DMACommandCounter = 0;
- int size;
+static u32 gpuDmaChainSize(u32 *baseAddrL, u32 addr) {
+	u8 *baseAddrB;
+	unsigned int DMACommandCounter = 0;
+	u32 size = 0;
 
- size = 0;
- lUsedAddr[0]=lUsedAddr[1]=lUsedAddr[2]=0xffffff;
+	lUsedAddr[0] = lUsedAddr[1] = lUsedAddr[2] = 0xffffff;
 
- baseAddrB = (unsigned char*) baseAddrL;
+	baseAddrB = (u8 *)baseAddrL;
 
- do
- {
-	 // Only Zinc = 1024
-   //if(iGPUHeight==512) addr&=0x1FFFFC;
+	do {
+		addr &= 0x1ffffc;
 
-	 addr&=0x1FFFFC;
-   if(DMACommandCounter++ > 2000000) break;
-   if(CheckForEndlessLoop(addr)) break;
+		if (DMACommandCounter++ > 2000000) break;
+		if (CheckForEndlessLoop(addr)) break;
 
-   count = baseAddrB[addr+3];
-	 size += 4;
-	 size += count;
+		size += 4;
+		size += baseAddrB[addr + 3];
 
-   dmaMem=addr+4;
+		addr = baseAddrL[addr >> 2] & 0xffffff;
+	} while (addr != 0xffffff);
 
-   //if(count>0) GPUwriteDataMem(&baseAddrL[dmaMem>>2],count);
-
-   addr = baseAddrL[addr>>2]&0xffffff;
-  }
- while (addr != 0xffffff);
-
-
- return size;
+	return size;
 }
 
-
-int gpuReadStatus()
-{
+int gpuReadStatus() {
 	int hard;
 
 
@@ -125,13 +127,11 @@ int gpuReadStatus()
 	return hard;
 }
 
-
-
 void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 	u32 *ptr;
 	u32 size;
 
-	switch(chcr) {
+	switch (chcr) {
 		case 0x01000200: // vram2mem
 #ifdef PSXDMA_LOG
 			PSXDMA_LOG("*** DMA2 GPU - vram2mem *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
@@ -147,9 +147,8 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			GPU_readDataMem(ptr, size);
 			psxCpu->Clear(madr, size);
 
-			GPUDMA_INT( size / 4 );
+			GPUDMA_INT(size / 4);
 			return;
-
 
 		case 0x01000201: // mem2vram
 #ifdef PSXDMA_LOG
@@ -165,10 +164,8 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			size = (bcr >> 16) * (bcr & 0xffff);
 			GPU_writeDataMem(ptr, size);
 
-			GPUDMA_INT( size / 4 );
+			GPUDMA_INT(size / 4);
 			return;
-
-
 
 		case 0x01000401: // dma chain
 #ifdef PSXDMA_LOG
@@ -176,10 +173,9 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 #endif
 			GPU_dmaChain((u32 *)psxM, madr & 0x1fffff);
 
-			// FIXME!! GPU DMA chain walking
-			GPUDMA_INT( 0x4000 / 4 );
+			size = gpuDmaChainSize((u32 *)psxM, madr & 0x1fffff);
+			GPUDMA_INT(size / 4);
 			return;
-
 
 #ifdef PSXDMA_LOG
 		default:
@@ -191,8 +187,6 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 	HW_DMA2_CHCR &= SWAP32(~0x01000000);
 	DMA_INTERRUPT(2);
 }
-
-
 
 void gpuInterrupt() {
 	HW_DMA2_CHCR &= SWAP32(~0x01000000);

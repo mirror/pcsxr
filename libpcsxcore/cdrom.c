@@ -184,6 +184,7 @@ void cdrInterrupt() {
 			SetResultSize(1);
 			cdr.Result[0] = cdr.StatP;
 			cdr.Stat = Acknowledge;
+			cdr.LidCheck++;
 			break;
 
 		case CdlSetloc:
@@ -235,6 +236,7 @@ void cdrInterrupt() {
 			cdr.Result[0] = cdr.StatP;
 			cdr.Stat = Complete;
 //			cdr.Stat = Acknowledge;
+			cdr.LidCheck++;
 			break;
 
 		case CdlPause:
@@ -567,31 +569,51 @@ void cdrInterrupt() {
 	}
 
 	// check case open/close
-	i = stat.Status;
-	if (CDR_getStatus(&stat) != -1) {
-		if (stat.Type == 0xff) cdr.Stat = DiskError;
+	if (cdr.LidCheck > 0) {
+		cdr.LidCheck--;
 
-		// case now open
-		if (stat.Status & 0x10) {
-			if( Irq != CdlNop )
-			{
-				cdr.Stat = DiskError;
-				cdr.Result[0] |= 0x01;
+		i = stat.Status;
+		if (CDR_getStatus(&stat) != -1) {
+			if (stat.Type == 0xff) cdr.Stat = DiskError;
+
+			// case now open
+			if (stat.Status & 0x10) {
+				// GameShark Lite: Death if DiskError happens
+				//
+				// Vib Ribbon: Needs DiskError for CD swap
+
+				if (Irq != CdlNop) {
+					cdr.Stat = DiskError;
+
+					cdr.StatP |= 0x01;
+					cdr.Result[0] |= 0x01;
+				}
+
+				cdr.StatP |= 0x10;
+				cdr.StatP &= ~0x02;
+
+				// GameShark Lite: Wants -exactly- $10
+				cdr.Result[0] |= 0x10;
+				cdr.Result[0] &= ~0x02;
 			}
 
-			// GameShark Lite: Wants -exactly- $10
-			cdr.Result[0] |= 0x10;
-			cdr.Result[0] &= ~0x02;
-		}
-		// case now closed
-		else if (i & 0x10) {
-			cdr.StatP &= ~0x11;
-			cdr.Result[0] |= 0x2;
+			// case now closed
+			else if (i & 0x10) {
+				cdr.StatP &= ~0x11;
+				cdr.StatP |= 0x2;
+				cdr.StatP |= 0x40;
 
-			// GameShark Lite: Wants -exactly- $42, then $02
-			cdr.Result[0] |= 0x40;
+				// GameShark Lite: Wants -exactly- $42, then $02
+				cdr.Result[0] |= 0x2;
+				cdr.Result[0] |= 0x40;
 
-			CheckCdrom();
+				CheckCdrom();
+			}
+
+			else if (cdr.LidCheck == 0) {
+				// GameShark Lite: Seek detection done
+				cdr.StatP &= ~0x40;
+			}
 		}
 	}
 
@@ -1234,15 +1256,11 @@ int cdrFreeze(gzFile f, int Mode) {
 	return 0;
 }
 
+void LidInterrupt() {
+	cdr.LidCheck = 3; // this should be enough
 
-
-
-
-void LidInterrupt()
-{
 	// generate interrupt if none active - open or close
-	if( cdr.Irq == 0 || cdr.Irq == 0xff )
-	{
+	if (cdr.Irq == 0 || cdr.Irq == 0xff) {
 		cdr.Ctrl |= 0x80;
 		cdr.Stat = NoIntr; 
 		AddIrqQueue(CdlNop, 0x800);

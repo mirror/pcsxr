@@ -87,6 +87,8 @@ typedef struct {
 	u32 eCycle;
 
 	boolean Seeked;
+
+	u8 LidCheck;
 } cdrStruct;
 
 extern cdrStruct cdr;
