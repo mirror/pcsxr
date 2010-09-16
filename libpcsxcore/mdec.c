@@ -554,12 +554,12 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 		32-bit DMA per cycle
 
 
-	Note that FF9 Dali accepts 1-75~150
-	before slowdown occurs. No crash.
+	Cycle Voodoo List:
+	FF9 Dali = 1-75 ~ 150
+	Rebel 2 = 1-3 (stage 6)
 	*/
 
-	dmacnt = (image - (u16 *)PSXM(adr)) * 1;
-
+	dmacnt = ( (u8 *)image - (u8 *)PSXM(adr)) * 1;
 	MDECOUTDMA_INT( dmacnt / 4);
 
 

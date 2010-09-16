@@ -55,10 +55,13 @@ static inline boolean CheckForEndlessLoop(u32 laddr) {
 }
 
 static u32 gpuDmaChainSize(u32 addr) {
-	unsigned int DMACommandCounter = 0;
-	u32 size = 0;
+	u32 size;
+	u32 DMACommandCounter = 0;
 
 	lUsedAddr[0] = lUsedAddr[1] = lUsedAddr[2] = 0xffffff;
+
+	// initial linked list ptr (bytes)
+	size = 4;
 
 	do {
 		addr &= 0x1ffffc;
@@ -66,10 +69,12 @@ static u32 gpuDmaChainSize(u32 addr) {
 		if (DMACommandCounter++ > 2000000) break;
 		if (CheckForEndlessLoop(addr)) break;
 
-		size += 4;
-		size += psxMu8(addr + 3);
+		// # 32-bit blocks to transfer
+		size += psxMu8( addr + 3 ) * 4;
 
-		addr = psxMu32(addr & ~0x3) & 0xffffff;
+		// next 32-bit pointer
+		addr = psxMu32( addr & ~0x3 ) & 0xffffff;
+		size += 4;
 	} while (addr != 0xffffff);
 
 	return size;
@@ -140,11 +145,13 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 #endif
 				break;
 			}
+			// BA blocks * BS words (word = 32-bits)
 			size = (bcr >> 16) * (bcr & 0xffff);
 			GPU_readDataMem(ptr, size);
 			psxCpu->Clear(madr, size);
 
-			GPUDMA_INT(size / 4);
+			// already 32-bit word size ((size * 4) / 4)
+			GPUDMA_INT(size);
 			return;
 
 		case 0x01000201: // mem2vram
@@ -158,10 +165,12 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 #endif
 				break;
 			}
+			// BA blocks * BS words (word = 32-bits)
 			size = (bcr >> 16) * (bcr & 0xffff);
 			GPU_writeDataMem(ptr, size);
 
-			GPUDMA_INT(size / 4);
+			// already 32-bit word size ((size * 4) / 4)
+			GPUDMA_INT(size);
 			return;
 
 		case 0x01000401: // dma chain
@@ -170,7 +179,11 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 #endif
 			GPU_dmaChain((u32 *)psxM, madr & 0x1fffff);
 
-			size = gpuDmaChainSize(madr);
+			//size = gpuDmaChainSize(madr);
+
+			// HACK: Rebel Assault 2 wants longer time (stage 6)
+			size = gpuDmaChainSize(madr) * 1.5;
+			
 			GPUDMA_INT(size / 4);
 			return;
 
