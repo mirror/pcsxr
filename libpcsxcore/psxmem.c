@@ -21,8 +21,6 @@
 * PSX memory functions.
 */
 
-// TODO: Implement caches & cycle penalty.
-
 #include "psxmem.h"
 #include "r3000a.h"
 #include "psxhw.h"
@@ -114,6 +112,7 @@ void psxMemReset() {
 	memset(psxM, 0, 0x00200000);
 	memset(psxP, 0, 0x00010000);
 
+	// Load BIOS
 	if (strcmp(Config.Bios, "HLE") != 0) {
 		sprintf(bios, "%s/%s", Config.BiosDir, Config.Bios);
 		f = fopen(bios, "rb");
@@ -128,6 +127,16 @@ void psxMemReset() {
 			Config.HLE = FALSE;
 		}
 	} else Config.HLE = TRUE;
+
+	// Load Net Yaroze runtime library (if exists)
+	sprintf(bios, "%s/libps.exe", Config.BiosDir);
+	f = fopen(bios, "rb");
+
+	if (f != NULL) {
+		fseek(f, 0x800, SEEK_SET);
+		fread(psxM + 0x10000, 0x61000, 1, f);
+		fclose(f);
+	}
 }
 
 void psxMemShutdown() {
