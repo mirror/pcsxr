@@ -34,11 +34,28 @@ int EmuInit() {
 	return psxInit();
 }
 
+static void LoadLibPS() {
+	char buf[MAXPATHLEN];
+	FILE *f;
+
+	// Load Net Yaroze runtime library (if exists)
+	sprintf(buf, "%s/libps.exe", Config.BiosDir);
+	f = fopen(buf, "rb");
+
+	if (f != NULL) {
+		fseek(f, 0x800, SEEK_SET);
+		fread(psxM + 0x10000, 0x61000, 1, f);
+		fclose(f);
+	}
+}
+
 void EmuReset() {
 	FreeCheatSearchResults();
 	FreeCheatSearchMem();
 
 	psxReset();
+
+	LoadLibPS();
 }
 
 void EmuShutdown() {

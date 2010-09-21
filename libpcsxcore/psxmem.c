@@ -127,16 +127,6 @@ void psxMemReset() {
 			Config.HLE = FALSE;
 		}
 	} else Config.HLE = TRUE;
-
-	// Load Net Yaroze runtime library (if exists)
-	sprintf(bios, "%s/libps.exe", Config.BiosDir);
-	f = fopen(bios, "rb");
-
-	if (f != NULL) {
-		fseek(f, 0x800, SEEK_SET);
-		fread(psxM + 0x10000, 0x61000, 1, f);
-		fclose(f);
-	}
 }
 
 void psxMemShutdown() {
