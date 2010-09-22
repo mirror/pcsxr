@@ -63,11 +63,9 @@ extern "C" {
 DMA5 = N/A (PIO)
 */
 
-void psxDma2(u32 madr, u32 bcr, u32 chcr);
 void psxDma3(u32 madr, u32 bcr, u32 chcr);
 void psxDma4(u32 madr, u32 bcr, u32 chcr);
 void psxDma6(u32 madr, u32 bcr, u32 chcr);
-void gpuInterrupt();
 void spuInterrupt();
 void mdec0Interrupt();
 void gpuotcInterrupt();

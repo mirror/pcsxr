@@ -372,6 +372,21 @@ static int PSXGetFileType(FILE *f) {
 	return INVALID_EXE;
 }
 
+static void LoadLibPS() {
+	char buf[MAXPATHLEN];
+	FILE *f;
+
+	// Load Net Yaroze runtime library (if exists)
+	sprintf(buf, "%s/libps.exe", Config.BiosDir);
+	f = fopen(buf, "rb");
+
+	if (f != NULL) {
+		fseek(f, 0x800, SEEK_SET);
+		fread(psxM + 0x10000, 0x61000, 1, f);
+		fclose(f);
+	}
+}
+
 int Load(const char *ExePath) {
 	FILE *tmpFile;
 	EXE_HEADER tmpHead;
@@ -388,6 +403,8 @@ int Load(const char *ExePath) {
 		SysPrintf(_("Error opening file: %s.\n"), ExePath);
 		retval = -1;
 	} else {
+		LoadLibPS();
+
 		type = PSXGetFileType(tmpFile);
 		switch (type) {
 			case PSX_EXE:
