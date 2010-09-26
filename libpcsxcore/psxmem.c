@@ -325,6 +325,7 @@ void psxMemWrite32(u32 mem, u32 value) {
 			} else {
 				int i;
 
+				// a0-44: used for cache flushing
 				switch (value) {
 					case 0x800: case 0x804:
 						if (writeok == 0) break;
@@ -332,6 +333,8 @@ void psxMemWrite32(u32 mem, u32 value) {
 						memset(psxMemWLUT + 0x0000, 0, 0x80 * sizeof(void *));
 						memset(psxMemWLUT + 0x8000, 0, 0x80 * sizeof(void *));
 						memset(psxMemWLUT + 0xa000, 0, 0x80 * sizeof(void *));
+
+						psxRegs.ICache_valid = 0;
 						break;
 					case 0x00: case 0x1e988:
 						if (writeok == 1) break;
