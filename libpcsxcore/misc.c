@@ -390,7 +390,10 @@ static void LoadLibPS() {
 int Load(const char *ExePath) {
 	FILE *tmpFile;
 	EXE_HEADER tmpHead;
-	int type;
+	FILHDR coffHead;
+	AOUTHDR optHead;
+	SCNHDR section;
+	int type, i;
 	int retval = 0;
 	u8 opcode;
 	u32 section_address, section_size;
@@ -408,9 +411,9 @@ int Load(const char *ExePath) {
 		type = PSXGetFileType(tmpFile);
 		switch (type) {
 			case PSX_EXE:
-				fread(&tmpHead,sizeof(EXE_HEADER),1,tmpFile);
+				fread(&tmpHead, sizeof(EXE_HEADER), 1, tmpFile);
 				fseek(tmpFile, 0x800, SEEK_SET);		
-				fread((void *)PSXM(SWAP32(tmpHead.t_addr)), SWAP32(tmpHead.t_size),1,tmpFile);
+				fread(PSXM(SWAP32(tmpHead.t_addr)), SWAP32(tmpHead.t_size), 1, tmpFile);
 				fclose(tmpFile);
 				psxRegs.pc = SWAP32(tmpHead.pc0);
 				psxRegs.GPR.n.gp = SWAP32(tmpHead.gp0);
@@ -419,6 +422,7 @@ int Load(const char *ExePath) {
 					psxRegs.GPR.n.sp = 0x801fff00;
 				retval = 0;
 				break;
+
 			case CPE_EXE:
 				fseek(tmpFile, 6, SEEK_SET); /* Something tells me we should go to 4 and read the "08 00" here... */
 				do {
@@ -448,10 +452,27 @@ int Load(const char *ExePath) {
 					}
 				} while (opcode != 0 && retval == 0);
 				break;
+
 			case COFF_EXE:
-				SysPrintf(_("COFF files not supported.\n"));
-				retval = -1;
+				fread(&coffHead, sizeof(coffHead), 1, tmpFile);
+				fread(&optHead, sizeof(optHead), 1, tmpFile);
+
+				psxRegs.pc = SWAP32(optHead.entry);
+				psxRegs.GPR.n.sp = 0x801fff00;
+
+				for (i = 0; i < SWAP16(coffHead.f_nscns); i++) {
+					fseek(tmpFile, sizeof(FILHDR) + SWAP16(coffHead.f_opthdr) + sizeof(section) * i, SEEK_SET);
+					fread(&section, sizeof(section), 1, tmpFile);
+
+					if (section.s_scnptr != 0) {
+						fseek(tmpFile, SWAP32(section.s_scnptr), SEEK_SET);
+						fread(PSXM(SWAP32(section.s_paddr)), SWAP32(section.s_size), 1, tmpFile);
+					} else {
+						memset(PSXM(SWAP32(section.s_paddr)), 0, SWAP32(section.s_size));
+					}
+				}
 				break;
+
 			case INVALID_EXE:
 				SysPrintf(_("This file does not appear to be a valid PSX file.\n"));
 				retval = -1;
