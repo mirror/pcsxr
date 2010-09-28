@@ -56,7 +56,7 @@ typedef struct {
 
 	unsigned char Prev[4];
 	unsigned char Param[8];
-	unsigned char Result[15];
+	unsigned char Result[16];
 
 	unsigned char ParamC;
 	unsigned char ParamP;
@@ -89,6 +89,8 @@ typedef struct {
 	boolean Seeked;
 
 	u8 LidCheck;
+	u8 FastForward;
+	u8 FastBackward;
 } cdrStruct;
 
 extern cdrStruct cdr;

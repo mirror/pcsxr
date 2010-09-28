@@ -123,6 +123,8 @@ static struct SubQ *subq;
 		if (!Config.Cdda) CDR_stop(); \
 		cdr.StatP &= ~0x80; \
 		cdr.Play = FALSE; \
+		cdr.FastForward = 0; \
+		cdr.FastBackward = 0; \
 	} \
 }
 
@@ -130,6 +132,37 @@ static struct SubQ *subq;
     cdr.ResultP = 0; \
 	cdr.ResultC = size; \
 	cdr.ResultReady = 1; \
+}
+
+void Find_CurTrack() {
+	cdr.CurTrack = 0;
+
+	if (CDR_getTN(cdr.ResultTN) != -1) {
+		int lcv;
+
+		for( lcv = 1; lcv < cdr.ResultTN[1]; lcv++ ) {
+			if (CDR_getTD((u8)(lcv), cdr.ResultTD) != -1) {
+				u32 sect1, sect2;
+
+#ifdef CDR_LOG___0
+				CDR_LOG( "curtrack %d %d %d | %d %d %d | %d\n",
+					cdr.SetSector[0], cdr.SetSector[1], cdr.SetSector[2],
+					cdr.ResultTD[0], cdr.ResultTD[1], cdr.ResultTD[2],
+					cdr.CurTrack );
+#endif
+
+				// find next track boundary
+				sect1 = cdr.SetSector[0] * 60 * 75 + cdr.SetSector[1] * 75 + cdr.SetSector[2];
+				sect2 = cdr.ResultTD[2] * 60 * 75 + cdr.ResultTD[1] * 75 + cdr.ResultTD[0];
+				if( sect1 >= sect2 ) {
+					cdr.CurTrack++;
+					continue;
+				}
+			}
+
+			break;
+		}
+	}
 }
 
 static void ReadTrack() {
@@ -209,16 +242,30 @@ void cdrInterrupt() {
 			cdr.CmdProcess = 0;
 			SetResultSize(1);
 			cdr.StatP |= 0x2;
-        	cdr.Result[0] = cdr.StatP;
-        	cdr.Stat = Complete;
+     	cdr.Result[0] = cdr.StatP;
+     	cdr.Stat = Complete;
+
+
+			// GameShark CD Player: Calls 2x + Play 2x
+			if( cdr.FastForward == 0 ) cdr.FastForward = 2;
+			else cdr.FastForward++;
+
+			cdr.FastBackward = 0;
 			break;
 
     	case CdlBackward:
 			cdr.CmdProcess = 0;
 			SetResultSize(1);
 			cdr.StatP |= 0x2;
-        	cdr.Result[0] = cdr.StatP;
-        	cdr.Stat = Complete;
+      cdr.Result[0] = cdr.StatP;
+      cdr.Stat = Complete;
+
+
+			// GameShark CD Player: Calls 2x + Play 2x
+			if( cdr.FastBackward == 0 ) cdr.FastBackward = 2;
+			else cdr.FastBackward++;
+
+			cdr.FastForward = 0;
 			break;
 
     	case CdlStandby:
@@ -322,15 +369,22 @@ void cdrInterrupt() {
         	break;
 
 		case CdlGetlocP:
-			SetResultSize(8);
+			SetResultSize(17);
+			memset( cdr.Result, 0, 17 );
+
 			subq = (struct SubQ *)CDR_getBufferSub();
 
-			// DATA + AUDIO has subchannel data
 			if (subq != NULL) {
+				// Subchannel block #1
 				cdr.Result[0] = subq->TrackNumber;
 				cdr.Result[1] = subq->IndexNumber;
-				memcpy(cdr.Result + 2, subq->TrackRelativeAddress, 3);
-				memcpy(cdr.Result + 5, subq->AbsoluteAddress, 3);
+				memcpy(cdr.Result+2, subq->TrackRelativeAddress, 3);
+				memcpy(cdr.Result+5, subq->AbsoluteAddress, 3);
+
+
+				// GameShark CDX CD Player: Subchannel block #2
+				cdr.Result[16] = subq->TrackNumber;
+
 
 				// subQ integrity check
 				if (calcCrc((u8 *)subq + 12, 10) != (((u16)subq->CRC[0] << 8) | subq->CRC[1])) {
@@ -356,6 +410,55 @@ void cdrInterrupt() {
 
 				memcpy(cdr.Result + 5, cdr.Prev, 3);
 			}
+
+#if 1
+			// FIXME!!!
+			if( cdr.LidCheck ) {
+				memset( cdr.Result, 0, 17 );
+
+				// each state needs ~50 tries
+				if( cdr.LidCheck < 130 )
+					cdr.LidCheck++;
+				else
+					cdr.LidCheck = 0;
+
+				i = stat.Status;
+				if (CDR_getStatus(&stat) != -1) {
+					// Hack: Fake CDROM seek / spin time
+					static int seek_time = 0;
+
+					if (stat.Type == 0xff) {
+					}
+					else if (stat.Status & 0x10) {
+						// unknown #1 - status?
+						// unknown #2 - case open?
+
+						cdr.Result[0] = 0x11;
+						cdr.Result[1] = 0x80;
+					}
+					else if ( i & 0x10 ) {
+						cdr.Result[0] = 0x13;
+						cdr.Result[1] = 0x80;
+
+						// minimum tries for GS CDX 3.3
+						seek_time = 120;
+					}
+					else if ( seek_time > 60 ) {
+						cdr.Result[0] = 0x13;
+						cdr.Result[1] = 0x80;
+
+						seek_time--;
+					}
+					else if( seek_time ) {
+						// GameShark CDX swap
+						cdr.Result[0] = 0x01;
+						cdr.Result[1] = 0x00;
+
+						seek_time--;
+					}
+				}
+			}
+#endif
 
 			cdr.Stat = Acknowledge;
 			break;
@@ -458,20 +561,25 @@ void cdrInterrupt() {
 
 		case CdlID + 0x20:
 			SetResultSize(8);
-        	if (CDR_getStatus(&stat) == -1) {
-        		cdr.Result[0] = 0x00; // 0x08 and cdr.Result[1]|0x10 : audio cd, enters cd player
-                cdr.Result[1] = 0x00; // 0x80 leads to the menu in the bios, else loads CD
-        	}
-        	else {
-                if (stat.Type == 2) {
-                	cdr.Result[0] = 0x08;
-                    cdr.Result[1] = 0x10;
-	        	}
-	        	else {
-                    cdr.Result[0] = 0x00;
-                    cdr.Result[1] = 0x00;
-	        	}
-        	}
+			if (CDR_getStatus(&stat) == -1) {
+				cdr.Result[0] = 0x00; // 0x08 and cdr.Result[1]|0x10 : audio cd, enters cd player
+				cdr.Result[1] = 0x00; // 0x80 leads to the menu in the bios, else loads CD
+			}
+			else {
+				if (stat.Type == 2) {
+					// Music CD
+					cdr.Result[0] = 0x08;
+					cdr.Result[1] = 0x10;
+						
+					cdr.Result[1] |= 0x80;
+				}
+				else {
+					// Data CD
+					cdr.Result[0] = 0x08;
+					cdr.Result[1] = 0x00;
+				}
+			}
+
 			cdr.Result[1] |= 0x80;
 			cdr.Result[2] = 0x00;
 			cdr.Result[3] = 0x00;
@@ -540,20 +648,61 @@ void cdrInterrupt() {
 
 		case REPPLAY: 
 			if ((cdr.Mode & 5) != 5) break;
-			if (CDR_getStatus(&stat) == -1) {
-				cdr.Result[0] = 0;
-				cdr.Result[1] = 0;
-				cdr.Result[2] = 0;
-				cdr.Result[3] = 0;
-				cdr.Result[4] = 0;
-				cdr.Result[5] = 0;
-				cdr.Result[6] = 0;
-				cdr.Result[7] = 0;
+				
+			memset( cdr.Result, 0, 8 );
+			if( CDR_getStatus(&stat) != -1) {
+				// HACK: Switch between local / absolute times
+				static u8 report_time = 1;
+
+
+				subq = (struct SubQ *)CDR_getBufferSub();
+
+				if (subq != NULL ) {
+					/*
+					skip subQ integrity check (audio playback)
+					mainly useful for DATA LibCrypt checking
+					*/
+					//if( SWAP16(subq->CRC) != calcCrc((unsigned char *)subq + 12, 10) )
+
+					cdr.Result[0] = cdr.StatP;
+
+
+					// Rayman: audio pregap flag / track change
+					// - not all CDs will use PREGAPs, so we track it manually
+					if( cdr.CurTrack < btoi( subq->TrackNumber ) ) {
+						cdr.Result[0] |= 0x10;
+
+						cdr.CurTrack = btoi( subq->TrackNumber );
+					}
+
+
+					// BIOS CD Player: data already BCD format
+					cdr.Result[1] = subq->TrackNumber;
+					cdr.Result[2] = subq->IndexNumber;
+
+
+					// BIOS CD Player: switch between local / absolute times
+					if( report_time == 0 ) {
+						cdr.Result[3] = subq->AbsoluteAddress[0];
+						cdr.Result[4] = subq->AbsoluteAddress[1];
+						cdr.Result[5] = subq->AbsoluteAddress[2];
+							
+						report_time = 1;
+					}
+					else {
+						cdr.Result[3] = subq->TrackRelativeAddress[0];
+						cdr.Result[4] = subq->TrackRelativeAddress[1];
+						cdr.Result[5] = subq->TrackRelativeAddress[2];
+							
+						cdr.Result[4] |= 0x80;
+							
+						report_time = 0;
+					}
+				}
 			}
-			else
-				// FIXME!!
-				//memcpy(cdr.Result, &stat.Track, 8);
-				0;
+
+			// Rayman: Logo freeze
+			cdr.ResultReady = 1;
 
 			cdr.Stat = 1;
 			SetResultSize(8);
@@ -569,7 +718,8 @@ void cdrInterrupt() {
 	}
 
 	// check case open/close
-	if (cdr.LidCheck > 0) {
+	if( cdr.LidCheck > 0 && Irq != CdlGetlocP ) {
+	// if (cdr.LidCheck > 0) {
 		cdr.LidCheck--;
 
 		i = stat.Status;
@@ -815,55 +965,119 @@ void cdrWrite1(unsigned char rt) {
         	break;
 
     	case CdlSetloc:
-			StopReading();
-			cdr.Seeked = FALSE;
-        	for (i = 0; i < 3; i++)
-				cdr.SetSector[i] = btoi(cdr.Param[i]);
-        	cdr.SetSector[3] = 0;
-/*        	if ((cdr.SetSector[0] | cdr.SetSector[1] | cdr.SetSector[2]) == 0) {
-				*(u32 *)cdr.SetSector = *(u32 *)cdr.SetSectorSeek;
-			}*/
-			cdr.Ctrl |= 0x80;
-        	cdr.Stat = NoIntr;
+				StopReading();
+				cdr.Seeked = FALSE;
+        for (i = 0; i < 3; i++)
+					cdr.SetSector[i] = btoi(cdr.Param[i]);
+        cdr.SetSector[3] = 0;
+
+#ifdef DVD5_HACK
+				// PS1 DVD5 hack (shalma's disc combining kits)
+				dvd5_mode = cdr.Param[2] & 0x80;
+				
+				if( CDR__setDVD5 ) {
+					if( cdr.Param[2] & 0x80 )
+						CDR__setDVD5(1);
+					else if( cdr.Param[1] & 0x80 )
+						CDR__setDVD5(2);
+					else
+						CDR__setDVD5(0);
+				}
+
+				cdr.Param[1] &= 0x7f;
+				cdr.Param[2] &= 0x7f;
+#endif
+
+				/*
+				if ((cdr.SetSector[0] | cdr.SetSector[1] | cdr.SetSector[2]) == 0) {
+					*(u32 *)cdr.SetSector = *(u32 *)cdr.SetSectorSeek;
+				}*/
+				
+				cdr.Ctrl |= 0x80;
+        cdr.Stat = NoIntr;
     		AddIrqQueue(cdr.Cmd, 0x1000);
-        	break;
+        break;
 
     	case CdlPlay:
-        	if (!cdr.SetSector[0] & !cdr.SetSector[1] & !cdr.SetSector[2]) {
-            	if (CDR_getTN(cdr.ResultTN) != -1) {
-	                if (cdr.CurTrack > cdr.ResultTN[1])
-						cdr.CurTrack = cdr.ResultTN[1];
-                    if (CDR_getTD((unsigned char)(cdr.CurTrack), cdr.ResultTD) != -1) {
-		               	int tmp = cdr.ResultTD[2];
-                        cdr.ResultTD[2] = cdr.ResultTD[0];
-						cdr.ResultTD[0] = tmp;
-	                    if (!Config.Cdda) CDR_play(cdr.ResultTD);
+				// Rayman: detect track changes
+				Find_CurTrack();
+
+
+				// GameShark CD Player: Calls 2x + Play 2x
+				if( cdr.FastBackward || cdr.FastForward ) {
+					if( cdr.FastForward ) cdr.FastForward--;
+					if( cdr.FastBackward ) cdr.FastBackward--;
+
+					if( cdr.FastBackward == 0 && cdr.FastForward == 0 ) {
+						if( CDR_getStatus(&stat) != -1 ) {
+							cdr.SetSector[0] = stat.Time[0];
+							cdr.SetSector[1] = stat.Time[1];
+							cdr.SetSector[2] = stat.Time[2];
+						}
 					}
-                }
-			} else if (!Config.Cdda) {
-				CDR_play(cdr.SetSector);
-			}
-    		cdr.Play = TRUE;
-			cdr.Ctrl |= 0x80;
-    		cdr.Stat = NoIntr; 
-    		AddIrqQueue(cdr.Cmd, 0x1000);
-    		break;
+				}
+
+
+				if (!Config.Cdda) {
+					// BIOS CD Player
+					// - Pause player, hit Track 01/02/../xx (Setloc issued!!)
+
+					// GameShark CD Player: Resume play
+					if( cdr.ParamC == 0 ) {
+						CDR_play( cdr.SetSector );
+					}
+					else
+					{
+						// BIOS CD Player: Resume play
+						if( cdr.Param[0] == 0 ) {
+							CDR_play( cdr.SetSector );
+						}
+
+						else {
+							// BIOS CD Player: Allow track replaying
+							StopCdda();
+
+
+							cdr.CurTrack = btoi( cdr.Param[0] );
+
+							if (CDR_getTN(cdr.ResultTN) != -1) {
+								// check last track
+								if (cdr.CurTrack > cdr.ResultTN[1])
+									cdr.CurTrack = cdr.ResultTN[1];
+
+								if (CDR_getTD((u8)(cdr.CurTrack), cdr.ResultTD) != -1) {
+									cdr.SetSector[0] = cdr.ResultTD[2];
+									cdr.SetSector[1] = cdr.ResultTD[1];
+									cdr.SetSector[2] = cdr.ResultTD[0];
+
+									CDR_play(cdr.SetSector);
+								}
+							}
+						}
+					}
+				}
+
+				cdr.Play = TRUE;
+				cdr.Ctrl |= 0x80;
+				cdr.Stat = NoIntr; 
+				AddIrqQueue(cdr.Cmd, 0x1000);
+				break;
 
     	case CdlForward:
-        	if (cdr.CurTrack < 0xaa)
-				cdr.CurTrack++;
-			cdr.Ctrl |= 0x80;
+        //if (cdr.CurTrack < 0xaa)
+				//	cdr.CurTrack++;
+				cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr; 
     		AddIrqQueue(cdr.Cmd, 0x1000);
-        	break;
+        break;
 
     	case CdlBackward:
-        	if (cdr.CurTrack > 1)
-				cdr.CurTrack--;
-			cdr.Ctrl |= 0x80;
+        //if (cdr.CurTrack > 1)
+					//cdr.CurTrack--;
+				cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr; 
     		AddIrqQueue(cdr.Cmd, 0x1000);
-        	break;
+        break;
 
     	case CdlReadN:
 			cdr.Irq = 0;
@@ -882,20 +1096,45 @@ void cdrWrite1(unsigned char rt) {
         	break;
 
     	case CdlStop:
-			StopCdda();
-			StopReading();
-			cdr.Ctrl |= 0x80;
+				// GameShark CD Player: Reset CDDA to track start
+				if( CDR_getStatus(&stat) != -1 ) {
+					cdr.SetSector[0] = stat.Time[0];
+					cdr.SetSector[1] = stat.Time[1];
+					cdr.SetSector[2] = stat.Time[2];
+
+					Find_CurTrack();
+
+
+					// grab time for current track
+					CDR_getTD((u8)(cdr.CurTrack), cdr.ResultTD);
+
+					cdr.SetSector[0] = cdr.ResultTD[2];
+					cdr.SetSector[1] = cdr.ResultTD[1];
+					cdr.SetSector[2] = cdr.ResultTD[0];
+				}
+
+				StopCdda();
+				StopReading();
+
+				cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
     		AddIrqQueue(cdr.Cmd, 0x1000);
-        	break;
+       	break;
 
     	case CdlPause:
-			StopCdda();
-			StopReading();
-			cdr.Ctrl |= 0x80;
+				// GameShark CD Player: save time for resume
+				if( CDR_getStatus(&stat) != -1 ) {
+					cdr.SetSector[0] = stat.Time[0];
+					cdr.SetSector[1] = stat.Time[1];
+					cdr.SetSector[2] = stat.Time[2];
+				}
+
+				StopCdda();
+				StopReading();
+				cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
     		AddIrqQueue(cdr.Cmd, 0x80000);
-        	break;
+        break;
 
 		case CdlReset:
     	case CdlInit:
@@ -951,16 +1190,23 @@ void cdrWrite1(unsigned char rt) {
         	break;
 
     	case CdlGetlocP:
-			cdr.Ctrl |= 0x80;
-    		cdr.Stat = NoIntr; 
-			AddIrqQueue(cdr.Cmd, 0x1000);
-        	break;
+				cdr.Ctrl |= 0x80;
+	  		cdr.Stat = NoIntr; 
+				AddIrqQueue(cdr.Cmd, 0x1000);
+
+				// GameShark CDX / Lite Player: pretty narrow time window
+				// - doesn't always work due to time inprecision
+				//AddIrqQueue(cdr.Cmd, 0x28);
+       	break;
 
     	case CdlGetTN:
-			cdr.Ctrl |= 0x80;
+				cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr; 
-    		AddIrqQueue(cdr.Cmd, 0x1000);
-        	break;
+    		//AddIrqQueue(cdr.Cmd, 0x1000);
+
+				// GameShark CDX CD Player: very long time
+				AddIrqQueue(cdr.Cmd, 0x100000);
+        break;
 
     	case CdlGetTD:
 			cdr.Ctrl |= 0x80;
@@ -1076,20 +1322,38 @@ void cdrWrite3(unsigned char rt) {
 #ifdef CDR_LOG
 	CDR_LOG("cdrWrite3() Log: CD3 write: %x\n", rt);
 #endif
-    if (rt == 0x07 && cdr.Ctrl & 0x1) {
+
+	// GameShark CDX CD Player: Irq timing mania
+	if( rt == 0 &&
+			cdr.Irq != 0 && cdr.Irq != 0xff &&
+			cdr.ResultReady == 0 ) {
+
+		// GS CDX: ~0x28 cycle timing - way too precise
+		if( cdr.Irq == CdlGetlocP ) {
+			cdrInterrupt();
+
+			psxRegs.interrupt &= ~(1 << PSXINT_CDR);
+		}
+	}
+
+
+  if (rt == 0x07 && cdr.Ctrl & 0x1) {
 		cdr.Stat = 0;
 
 		if (cdr.Irq == 0xff) {
 			cdr.Irq = 0;
 			return;
 		}
+
 		if (cdr.Irq)
 			CDR_INT(cdr.eCycle);
+
 		if (cdr.Reading && !cdr.ResultReady) 
             CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
 
 		return;
 	}
+
 	if (rt == 0x80 && !(cdr.Ctrl & 0x1) && cdr.Readed == 0) {
 		cdr.Readed = 1;
 		cdr.pTransfer = cdr.Transfer;
@@ -1101,75 +1365,6 @@ void cdrWrite3(unsigned char rt) {
 				break;
 			default:
 				break;
-		}
-	}
-
-	/*
-	GameShark CDX 3.3
-
-	TODO: Can we relax the rules?
-	*/
-	if (rt == 0 && cdr.Ctrl == 0xd8 && cdr.Readed == 1) {
-		u32 i;
-
-
-		// low-level status access
-		SetResultSize(15);
-
-
-		i = stat.Status;
-		if (CDR_getStatus(&stat) != -1) {
-			// Hack: Fake CDROM seek / spin time
-			static int seek_time = 0;
-
-			if (stat.Type == 0xff) {
-			}
-			else if (stat.Status & 0x10) {
-				// unknown #1 - status?
-				// unknown #2 - case open?
-
-				cdr.Result[0] = 0x11;
-				cdr.Result[1] = 0x80;
-			}
-			else if ( i & 0x10 ) {
-				cdr.Result[0] = 0x13;
-				cdr.Result[1] = 0x80;
-
-				// minimum 50 tries for GS CDX 3.3
-				seek_time = 50;
-			}
-			else if ( seek_time ) {
-				cdr.Result[0] = 0x13;
-				cdr.Result[1] = 0x80;
-
-				seek_time--;
-			}
-			else
-			{
-				cdr.Result[0] = 0x01;
-				cdr.Result[1] = 0x00;
-			}
-
-			// unknown #3
-			cdr.Result[2] = 0;
-
-			// unknown #4 - error?
-			cdr.Result[3] = 0;
-
-			// unknown #5-14
-			cdr.Result[4] = 0;
-			cdr.Result[5] = 0;
-			cdr.Result[6] = 0;
-			cdr.Result[7] = 0;
-			cdr.Result[8] = 0;
-			cdr.Result[9] = 0;
-			cdr.Result[10] = 0;
-			cdr.Result[11] = 0;
-			cdr.Result[12] = 0;
-			cdr.Result[13] = 0;
-
-			// unknown #15 - error?
-			cdr.Result[14] = 0;
 		}
 	}
 }

@@ -66,8 +66,8 @@ extern void *hCDRDriver;
 
 struct trackinfo {
 	enum {DATA, CDDA} type;
-	char start[3];		// MSF-format
-	char length[3];		// MSF-format
+	u8 start[3];		// MSF-format
+	u8 length[3];		// MSF-format
 };
 
 #define MAXTRACKS 100 /* How many tracks can a CD hold? */
@@ -161,8 +161,6 @@ static void *playthread(void *param)
 
 		t = GetTickCount() + CDDA_FRAMETIME;
 
-		sec = cddaCurOffset / CD_FRAMESIZE_RAW;
-
 		if (subChanMixed) {
 			s = 0;
 
@@ -180,6 +178,8 @@ static void *playthread(void *param)
 		}
 		else {
 			s = fread(sndbuffer, 1, sizeof(sndbuffer), cddaHandle);
+
+			sec = cddaCurOffset / CD_FRAMESIZE_RAW;
 
 			if (subHandle != NULL) {
 				fseek(subHandle, sec * SUB_FRAMESIZE, SEEK_SET);
@@ -204,10 +204,53 @@ static void *playthread(void *param)
 				}
 			}
 
+			// wipe data track
+			if( subHandle || subChanInterleaved ) {
+				if( ti[ ((struct SubQ *) subbuffer)->TrackNumber ].type == DATA )
+					memset( sndbuffer, 0, s );
+			}
+
 			SPU_playCDDAchannel((short *)sndbuffer, s);
 		}
 
 		cddaCurOffset += s;
+
+	
+		// BIOS CD Player: Fast forward / reverse seek
+		if( cdr.FastForward ) {
+			// ~+0.25 sec
+			cddaCurOffset += CD_FRAMESIZE_RAW * 75/4;
+
+#if 0
+			// Bad idea: too much static
+			if( subChanInterleaved )
+				fseek( cddaHandle, s * (CD_FRAMESIZE_RAW + SUB_FRAMESIZE), SEEK_SET );
+			else
+				fseek( cddaHandle, s * CD_FRAMESIZE_RAW, SEEK_SET );
+#endif
+		}
+		else if( cdr.FastBackward ) {
+			// ~-0.25 sec
+			cddaCurOffset -= CD_FRAMESIZE_RAW * 75/4;
+			if( cddaCurOffset & 0x80000000 ) {
+				cddaCurOffset = 0;
+				cdr.FastBackward = 0;
+
+				playing = 0;
+				fclose(cddaHandle);
+				cddaHandle = NULL;
+				initial_offset = 0;
+				break;
+			}
+
+#if 0
+			// Bad idea: too much static
+			if( subChanInterleaved )
+				fseek( cddaHandle, s * (CD_FRAMESIZE_RAW + SUB_FRAMESIZE), SEEK_SET );
+			else
+				fseek( cddaHandle, s * CD_FRAMESIZE_RAW, SEEK_SET );
+#endif
+		}
 	}
 
 #ifdef _WIN32
@@ -862,20 +905,24 @@ static unsigned char* CALLBACK ISOgetBufferSub(void) {
 }
 
 static long CALLBACK ISOgetStatus(struct CdrStat *stat) {
-	int sec;
-
+	u32 sect;
+	
 	CDR__getStatus(stat);
-
+	
 	if (playing) {
-		stat->Type = 0x02;
 		stat->Status |= 0x80;
-		sec = cddaCurOffset / CD_FRAMESIZE_RAW;
-		sec2msf(sec, (char *)stat->Time);
 	}
-	else {
-		stat->Type = 0x01;
+	
+	// relative -> absolute time
+	sect = cddaCurOffset / CD_FRAMESIZE_RAW + 150;
+	sec2msf(sect, (u8 *)stat->Time);
+	
+	if (subHandle != NULL || subChanInterleaved) {
+		stat->Type = ti[ ((struct SubQ *) subbuffer)->TrackNumber ].type;
 	}
-
+	else
+		stat->Type = ti[ cdr.CurTrack ].type;
+	
 	return 0;
 }
 
