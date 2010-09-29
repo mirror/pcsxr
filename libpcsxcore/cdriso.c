@@ -205,7 +205,7 @@ static void *playthread(void *param)
 			}
 
 			// wipe data track
-			if( subHandle || subChanInterleaved ) {
+			if( subHandle || subChanMixed ) {
 				if( ti[ ((struct SubQ *) subbuffer)->TrackNumber ].type == DATA )
 					memset( sndbuffer, 0, s );
 			}
@@ -917,7 +917,7 @@ static long CALLBACK ISOgetStatus(struct CdrStat *stat) {
 	sect = cddaCurOffset / CD_FRAMESIZE_RAW + 150;
 	sec2msf(sect, (u8 *)stat->Time);
 	
-	if (subHandle != NULL || subChanInterleaved) {
+	if (subHandle != NULL || subChanMixed) {
 		stat->Type = ti[ ((struct SubQ *) subbuffer)->TrackNumber ].type;
 	}
 	else
