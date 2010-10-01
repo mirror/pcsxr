@@ -529,8 +529,11 @@ void cdrInterrupt() {
 			SetResultSize(1);
 			cdr.StatP |= 0x2;
 			cdr.StatP &= ~0x40;
-        	cdr.Result[0] = cdr.StatP;
-        	cdr.Stat = Complete;
+			cdr.Result[0] = cdr.StatP;
+			cdr.Stat = Complete;
+			
+			// Tomb Raider 2: must update read cursor for getlocp
+			ReadTrack();
 			break;
 
 		case CdlTest:
