@@ -115,6 +115,7 @@ BOOL              bChangeWinMode=FALSE;
 BOOL              bDoLazyUpdate=FALSE;
 uint32_t          lGPUInfoVals[16];
 static int        iFakePrimBusy=0;
+uint32_t          vBlank=0;
 
 #ifdef _WINDOWS
 
@@ -459,6 +460,7 @@ long CALLBACK GPUinit()                                // GPU INIT
  GPUIsIdle;
  GPUIsReadyForCommands;
  bDoVSyncUpdate = TRUE;
+ vBlank = 0;
 
  // Get a handle for kernel32.dll, and access the required export function
  LoadKernel32();
@@ -912,14 +914,15 @@ void CALLBACK GPUcursor(int iPlayer,int x,int y)
 
 void CALLBACK GPUupdateLace(void)                      // VSYNC
 {
- if(!(dwActFixes&1))
-  lGPUstatusRet^=0x80000000;                           // odd/even bit
+ //if(!(dwActFixes&1))
+  //lGPUstatusRet^=0x80000000;                           // odd/even bit
 
  if(!(dwActFixes&32))                                  // std fps limitation?
   CheckFrameRate();
 
  if(PSXDisplay.Interlaced)                             // interlaced mode?
   {
+   lGPUstatusRet^=0x80000000;
    if(bDoVSyncUpdate && PSXDisplay.DisplayMode.x>0 && PSXDisplay.DisplayMode.y>0)
     {
      updateDisplay();
@@ -985,7 +988,7 @@ uint32_t CALLBACK GPUreadStatus(void)             // READ STATUS
      GPUIsReadyForCommands;
     }
   }
- return lGPUstatusRet;
+ return lGPUstatusRet | (vBlank ? 0x80000000 : 0 );
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -2268,4 +2271,9 @@ void CALLBACK GPUshowScreenPic(unsigned char * pMem)
 void CALLBACK GPUsetfix(uint32_t dwFixBits)
 {
  dwEmuFixes=dwFixBits;
+}
+
+void CALLBACK GPUvBlank( int val )
+{
+    vBlank = val;
 }

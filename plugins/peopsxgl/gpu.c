@@ -152,6 +152,7 @@ uint32_t        ulGPUInfoVals[16];
 int             iFakePrimBusy = 0;
 int             iRumbleVal    = 0;
 int             iRumbleTime   = 0;
+uint32_t        vBlank=0;
 
 ////////////////////////////////////////////////////////////////////////
 // stuff to make this a true PDK module
@@ -548,6 +549,7 @@ long CALLBACK GPUinit()
  
  // device initialised already !
  //lGPUstatusRet = 0x74000000;
+ vBlank = 0;
 
  STATUSREG = 0x14802000;
  GPUIsIdle;
@@ -1934,8 +1936,8 @@ static unsigned short usFirstPos=2;
 
 void CALLBACK GPUupdateLace(void)
 {
- if(!(dwActFixes&0x1000))                               
-  STATUSREG^=0x80000000;                               // interlaced bit toggle, if the CC game fix is not active (see gpuReadStatus)
+ //if(!(dwActFixes&0x1000))                               
+ // STATUSREG^=0x80000000;                               // interlaced bit toggle, if the CC game fix is not active (see gpuReadStatus)
 
  if(!(dwActFixes&128))                                 // normal frame limit func
   CheckFrameRate();
@@ -1947,6 +1949,7 @@ void CALLBACK GPUupdateLace(void)
 
  if(PSXDisplay.Interlaced)                             // interlaced mode?
   {
+   STATUSREG^=0x80000000;
    if(PSXDisplay.DisplayMode.x>0 && PSXDisplay.DisplayMode.y>0)
     {
      updateDisplay();                                  // -> swap buffers (new frame)
@@ -1998,7 +2001,7 @@ uint32_t CALLBACK GPUreadStatus(void)
     }
   }
 
- return STATUSREG;
+ return STATUSREG | (vBlank ? 0x80000000 : 0 );;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -3478,4 +3481,9 @@ void CALLBACK GPUvisualVibration(uint32_t iSmall, uint32_t iBig)
 void CALLBACK GPUdisplayFlags(uint32_t dwFlags)
 {
  dwCoreFlags=dwFlags;
+}
+
+void CALLBACK GPUvBlank( int val )
+{
+    vBlank = val;
 }

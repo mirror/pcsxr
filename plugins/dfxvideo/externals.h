@@ -324,6 +324,7 @@ extern BOOL           bInitCap;
 extern DWORD          dwLaceCnt;
 extern uint32_t  lGPUInfoVals[];
 extern uint32_t  ulStatusControl[];
+extern uint32_t  vBlank;
 
 #endif
 

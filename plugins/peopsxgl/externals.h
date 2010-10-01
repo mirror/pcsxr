@@ -383,6 +383,7 @@ extern uint32_t       ulGPUInfoVals[];
 extern BOOL           bNeedInterlaceUpdate;
 extern BOOL           bNeedWriteUpload;
 extern BOOL           bSkipNextFrame;
+extern uint32_t       vBlank;
 
 extern int bFullScreen;
 
