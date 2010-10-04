@@ -827,6 +827,11 @@ void cdrReadInterrupt() {
 #endif
 
 	if ((!cdr.Muted) && (cdr.Mode & 0x40) && (!Config.Xa) && (cdr.FirstSector != -1)) { // CD-XA
+		// Firemen 2: Multi-XA files - briefings, cutscenes
+		if( cdr.FirstSector == 1 && (cdr.Mode & 0x8)==0 ) {
+			cdr.File = cdr.Transfer[4 + 0];
+		}
+
 		if ((cdr.Transfer[4 + 2] & 0x4) &&
 			((cdr.Mode & 0x8) ? (cdr.Transfer[4 + 1] == cdr.Channel) : 1) &&
 			(cdr.Transfer[4 + 0] == cdr.File)) {
