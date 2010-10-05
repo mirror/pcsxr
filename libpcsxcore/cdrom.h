@@ -71,6 +71,7 @@ typedef struct {
 	unsigned char ResultTD[4];
 	unsigned char SetSector[4];
 	unsigned char SetSectorSeek[4];
+	unsigned char SetSectorPlay[4];
 	unsigned char Track;
 	boolean Play, Muted;
 	int CurTrack;

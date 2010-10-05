@@ -146,13 +146,13 @@ void Find_CurTrack() {
 
 #ifdef CDR_LOG___0
 				CDR_LOG( "curtrack %d %d %d | %d %d %d | %d\n",
-					cdr.SetSector[0], cdr.SetSector[1], cdr.SetSector[2],
+					cdr.SetSectorPlay[0], cdr.SetSectorPlay[1], cdr.SetSectorPlay[2],
 					cdr.ResultTD[0], cdr.ResultTD[1], cdr.ResultTD[2],
 					cdr.CurTrack );
 #endif
 
 				// find next track boundary
-				sect1 = cdr.SetSector[0] * 60 * 75 + cdr.SetSector[1] * 75 + cdr.SetSector[2];
+				sect1 = cdr.SetSectorPlay[0] * 60 * 75 + cdr.SetSectorPlay[1] * 75 + cdr.SetSectorPlay[2];
 				sect2 = cdr.ResultTD[2] * 60 * 75 + cdr.ResultTD[1] * 75 + cdr.ResultTD[0];
 				if( sect1 >= sect2 ) {
 					cdr.CurTrack++;
@@ -996,6 +996,10 @@ void cdrWrite1(unsigned char rt) {
 				cdr.Param[2] &= 0x7f;
 #endif
 
+				// GameShark Music Player
+				memcpy( cdr.SetSectorPlay, cdr.SetSector, 4 );
+
+
 				/*
 				if ((cdr.SetSector[0] | cdr.SetSector[1] | cdr.SetSector[2]) == 0) {
 					*(u32 *)cdr.SetSector = *(u32 *)cdr.SetSectorSeek;
@@ -1017,10 +1021,10 @@ void cdrWrite1(unsigned char rt) {
 					if( cdr.FastBackward ) cdr.FastBackward--;
 
 					if( cdr.FastBackward == 0 && cdr.FastForward == 0 ) {
-						if( CDR_getStatus(&stat) != -1 ) {
-							cdr.SetSector[0] = stat.Time[0];
-							cdr.SetSector[1] = stat.Time[1];
-							cdr.SetSector[2] = stat.Time[2];
+						if( cdr.Play && CDR_getStatus(&stat) != -1 ) {
+							cdr.SetSectorPlay[0] = stat.Time[0];
+							cdr.SetSectorPlay[1] = stat.Time[1];
+							cdr.SetSectorPlay[2] = stat.Time[2];
 						}
 					}
 				}
@@ -1032,13 +1036,13 @@ void cdrWrite1(unsigned char rt) {
 
 					// GameShark CD Player: Resume play
 					if( cdr.ParamC == 0 ) {
-						CDR_play( cdr.SetSector );
+						CDR_play( cdr.SetSectorPlay );
 					}
 					else
 					{
 						// BIOS CD Player: Resume play
 						if( cdr.Param[0] == 0 ) {
-							CDR_play( cdr.SetSector );
+							CDR_play( cdr.SetSectorPlay );
 						}
 
 						else {
@@ -1054,11 +1058,11 @@ void cdrWrite1(unsigned char rt) {
 									cdr.CurTrack = cdr.ResultTN[1];
 
 								if (CDR_getTD((u8)(cdr.CurTrack), cdr.ResultTD) != -1) {
-									cdr.SetSector[0] = cdr.ResultTD[2];
-									cdr.SetSector[1] = cdr.ResultTD[1];
-									cdr.SetSector[2] = cdr.ResultTD[0];
+									cdr.SetSectorPlay[0] = cdr.ResultTD[2];
+									cdr.SetSectorPlay[1] = cdr.ResultTD[1];
+									cdr.SetSectorPlay[2] = cdr.ResultTD[0];
 
-									CDR_play(cdr.SetSector);
+									CDR_play(cdr.SetSectorPlay);
 								}
 							}
 						}
@@ -1105,10 +1109,10 @@ void cdrWrite1(unsigned char rt) {
 
     	case CdlStop:
 				// GameShark CD Player: Reset CDDA to track start
-				if( CDR_getStatus(&stat) != -1 ) {
-					cdr.SetSector[0] = stat.Time[0];
-					cdr.SetSector[1] = stat.Time[1];
-					cdr.SetSector[2] = stat.Time[2];
+				if( cdr.Play && CDR_getStatus(&stat) != -1 ) {
+					cdr.SetSectorPlay[0] = stat.Time[0];
+					cdr.SetSectorPlay[1] = stat.Time[1];
+					cdr.SetSectorPlay[2] = stat.Time[2];
 
 					Find_CurTrack();
 
@@ -1116,9 +1120,9 @@ void cdrWrite1(unsigned char rt) {
 					// grab time for current track
 					CDR_getTD((u8)(cdr.CurTrack), cdr.ResultTD);
 
-					cdr.SetSector[0] = cdr.ResultTD[2];
-					cdr.SetSector[1] = cdr.ResultTD[1];
-					cdr.SetSector[2] = cdr.ResultTD[0];
+					cdr.SetSectorPlay[0] = cdr.ResultTD[2];
+					cdr.SetSectorPlay[1] = cdr.ResultTD[1];
+					cdr.SetSectorPlay[2] = cdr.ResultTD[0];
 				}
 
 				StopCdda();
@@ -1130,11 +1134,16 @@ void cdrWrite1(unsigned char rt) {
        	break;
 
     	case CdlPause:
-				// GameShark CD Player: save time for resume
-				if( CDR_getStatus(&stat) != -1 ) {
-					cdr.SetSector[0] = stat.Time[0];
-					cdr.SetSector[1] = stat.Time[1];
-					cdr.SetSector[2] = stat.Time[2];
+				/*
+				GameShark CD Player: save time for resume
+				
+				Twisted Metal - World Tour: don't save times for DATA reads
+				- Only get 1 chance to do this right
+				*/
+				if( cdr.Play && CDR_getStatus(&stat) != -1 ) {
+					cdr.SetSectorPlay[0] = stat.Time[0];
+					cdr.SetSectorPlay[1] = stat.Time[1];
+					cdr.SetSectorPlay[2] = stat.Time[2];
 				}
 
 				StopCdda();
