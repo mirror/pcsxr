@@ -369,21 +369,17 @@ void cdrInterrupt() {
         	break;
 
 		case CdlGetlocP:
+			// GameShark CDX CD Player: uses 17 bytes output (wraps around)
 			SetResultSize(17);
-			memset( cdr.Result, 0, 17 );
+			memset( cdr.Result, 0, 16 );
 
 			subq = (struct SubQ *)CDR_getBufferSub();
 
 			if (subq != NULL) {
-				// Subchannel block #1
 				cdr.Result[0] = subq->TrackNumber;
 				cdr.Result[1] = subq->IndexNumber;
 				memcpy(cdr.Result+2, subq->TrackRelativeAddress, 3);
 				memcpy(cdr.Result+5, subq->AbsoluteAddress, 3);
-
-
-				// GameShark CDX CD Player: Subchannel block #2
-				cdr.Result[16] = subq->TrackNumber;
 
 
 				// subQ integrity check
@@ -413,8 +409,8 @@ void cdrInterrupt() {
 
 #if 1
 			// FIXME!!!
-			if( cdr.LidCheck ) {
-				memset( cdr.Result, 0, 17 );
+			if( cdr.LidCheck > 0 ) {
+				memset( cdr.Result, 0, 16 );
 
 				// each state needs ~50 tries
 				if( cdr.LidCheck < 130 )
@@ -922,8 +918,10 @@ void cdrWrite0(unsigned char rt) {
 }
 
 unsigned char cdrRead1(void) {
-    if (cdr.ResultReady) { // && cdr.Ctrl & 0x1) {
-		psxHu8(0x1801) = cdr.Result[cdr.ResultP++];
+  if (cdr.ResultReady) { // && cdr.Ctrl & 0x1) {
+		// GameShark CDX CD Player: uses 17 bytes output (wraps around)
+		psxHu8(0x1801) = cdr.Result[cdr.ResultP & 0xf];
+		cdr.ResultP++;
 		if (cdr.ResultP == cdr.ResultC)
 			cdr.ResultReady = 0;
 	} else {
