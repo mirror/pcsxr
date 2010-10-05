@@ -917,17 +917,8 @@ static long CALLBACK ISOgetStatus(struct CdrStat *stat) {
 	sect = cddaCurOffset / CD_FRAMESIZE_RAW + 150;
 	sec2msf(sect, (u8 *)stat->Time);
 	
-	if (subHandle != NULL || subChanMixed) {
-		int track_no;
-
-		// BIOS - boot ID
-		track_no = ((struct SubQ *) subbuffer)->TrackNumber;
-		if( track_no == 0 ) track_no = 1;
-		
-		stat->Type = ti[ track_no ].type;
-	}
-	else
-		stat->Type = ti[ cdr.CurTrack ].type;
+	// BIOS - boot ID (CD type)
+	stat->Type = ti[1].type;
 	
 	return 0;
 }
