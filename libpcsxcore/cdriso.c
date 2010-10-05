@@ -219,7 +219,7 @@ static void *playthread(void *param)
 		// BIOS CD Player: Fast forward / reverse seek
 		if( cdr.FastForward ) {
 			// ~+0.25 sec
-			cddaCurOffset += CD_FRAMESIZE_RAW * 75/4;
+			cddaCurOffset += CD_FRAMESIZE_RAW * 75 * 3;
 
 #if 0
 			// Bad idea: too much static
@@ -231,7 +231,7 @@ static void *playthread(void *param)
 		}
 		else if( cdr.FastBackward ) {
 			// ~-0.25 sec
-			cddaCurOffset -= CD_FRAMESIZE_RAW * 75/4;
+			cddaCurOffset -= CD_FRAMESIZE_RAW * 75 * 3;
 			if( cddaCurOffset & 0x80000000 ) {
 				cddaCurOffset = 0;
 				cdr.FastBackward = 0;
@@ -918,7 +918,13 @@ static long CALLBACK ISOgetStatus(struct CdrStat *stat) {
 	sec2msf(sect, (u8 *)stat->Time);
 	
 	if (subHandle != NULL || subChanMixed) {
-		stat->Type = ti[ ((struct SubQ *) subbuffer)->TrackNumber ].type;
+		int track_no;
+
+		// BIOS - boot ID
+		track_no = ((struct SubQ *) subbuffer)->TrackNumber;
+		if( track_no == 0 ) track_no = 1;
+		
+		stat->Type = ti[ track_no ].type;
 	}
 	else
 		stat->Type = ti[ cdr.CurTrack ].type;
