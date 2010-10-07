@@ -59,6 +59,12 @@ extern "C" {
 	psxRegs.intCycle[PSXINT_GPUOTCDMA].sCycle = psxRegs.cycle; \
 }
 
+#define CDRDMA_INT(eCycle) { \
+	psxRegs.interrupt |= (1 << PSXINT_CDRDMA); \
+	psxRegs.intCycle[PSXINT_CDRDMA].cycle = eCycle; \
+	psxRegs.intCycle[PSXINT_CDRDMA].sCycle = psxRegs.cycle; \
+}
+
 /*
 DMA5 = N/A (PIO)
 */
@@ -69,6 +75,7 @@ void psxDma6(u32 madr, u32 bcr, u32 chcr);
 void spuInterrupt();
 void mdec0Interrupt();
 void gpuotcInterrupt();
+void cdrDmaInterrupt();
 
 #ifdef __cplusplus
 }

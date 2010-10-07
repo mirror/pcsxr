@@ -103,6 +103,12 @@ static struct SubQ *subq;
 	psxRegs.intCycle[PSXINT_CDREAD].sCycle = psxRegs.cycle; \
 }
 
+#define CDREPPLAY_INT(eCycle) { \
+	psxRegs.interrupt |= (1 << PSXINT_CDREPPLAY); \
+	psxRegs.intCycle[PSXINT_CDREPPLAY].cycle = eCycle; \
+	psxRegs.intCycle[PSXINT_CDREPPLAY].sCycle = psxRegs.cycle; \
+}
+
 #define StartReading(type, eCycle) { \
    	cdr.Reading = type; \
   	cdr.FirstSector = 1; \
@@ -193,6 +199,94 @@ void AddIrqQueue(unsigned char irq, unsigned long ecycle) {
 	}
 }
 
+void cdrRepplayInterrupt()
+{
+	// Wait for IRQ to be acknowledged
+	if (cdr.Stat) {
+		CDREAD_INT(0x1000);
+		return;
+	}
+
+#ifdef CDR_LOG
+	CDR_LOG("cdrRepplayInterrupt() Log: KEY END\n");
+#endif
+
+	if ((cdr.Mode & 5) != 5) return;
+
+	memset( cdr.Result, 0, 8 );
+	if( CDR_getStatus(&stat) != -1) {
+		// BIOS - HACK: Switch between local / absolute times
+		static u8 report_time = 1;
+
+
+		subq = (struct SubQ *)CDR_getBufferSub();
+
+		if (subq != NULL ) {
+#ifdef CDR_LOG
+			CDR_LOG( "REPPLAY IRQ - %X:%X:%X\n", 
+				subq->AbsoluteAddress[0], subq->AbsoluteAddress[1], subq->AbsoluteAddress[2] );
+#endif
+				
+
+			/*
+			skip subQ integrity check (audio playback)
+			- mainly useful for DATA LibCrypt checking
+			*/
+			//if( SWAP16(subq->CRC) != calcCrc((unsigned char *)subq + 12, 10) )
+
+			cdr.Result[0] = cdr.StatP;
+
+
+			// Rayman: audio pregap flag / track change
+			// - not all CDs will use PREGAPs, so we track it manually
+			if( cdr.CurTrack < btoi( subq->TrackNumber ) ) {
+				cdr.Result[0] |= 0x10;
+
+				cdr.CurTrack = btoi( subq->TrackNumber );
+			}
+
+
+			// BIOS CD Player: data already BCD format
+			cdr.Result[1] = subq->TrackNumber;
+			cdr.Result[2] = subq->IndexNumber;
+
+
+			// BIOS CD Player: switch between local / absolute times
+			if( report_time == 0 ) {
+				cdr.Result[3] = subq->AbsoluteAddress[0];
+				cdr.Result[4] = subq->AbsoluteAddress[1];
+				cdr.Result[5] = subq->AbsoluteAddress[2];
+							
+				report_time = 1;
+			}
+			else {
+				cdr.Result[3] = subq->TrackRelativeAddress[0];
+				cdr.Result[4] = subq->TrackRelativeAddress[1];
+				cdr.Result[5] = subq->TrackRelativeAddress[2];
+							
+				cdr.Result[4] |= 0x80;
+							
+				report_time = 0;
+			}
+		}
+	}
+
+	// Rayman: Logo freeze
+	cdr.ResultReady = 1;
+
+	cdr.Stat = DataReady;
+	SetResultSize(8);
+
+
+	// Wild 9: Do not use REPPLAY_ACK
+	// - must use faster times for reporting
+	CDREPPLAY_INT(cdReadTime / 2);
+
+
+	psxHu32ref(0x1070) |= SWAP32((u32)0x4);
+	psxRegs.interrupt |= 0x80000000;
+}
+
 void cdrInterrupt() {
 	int i;
 	unsigned char Irq = cdr.Irq;
@@ -235,7 +329,11 @@ void cdrInterrupt() {
 			cdr.Result[0] = cdr.StatP;
 			cdr.Stat = Acknowledge;
 			cdr.StatP |= 0x80;
-			if ((cdr.Mode & 0x5) == 0x5) AddIrqQueue(REPPLAY, cdReadTime);
+			
+			// Lemmings: report play times
+			if ((cdr.Mode & 0x5) == 0x5) {
+				CDREPPLAY_INT( cdReadTime );
+			}
 			break;
 
     	case CdlForward:
@@ -636,76 +734,6 @@ void cdrInterrupt() {
 
 //			CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
 			CDREAD_INT(0x80000);
-			break;
-
-		case REPPLAY_ACK:
-			cdr.Stat = Acknowledge;
-			cdr.Result[0] = cdr.StatP;
-			SetResultSize(1);
-			AddIrqQueue(REPPLAY, cdReadTime);
-			break;
-
-		case REPPLAY: 
-			if ((cdr.Mode & 5) != 5) break;
-				
-			memset( cdr.Result, 0, 8 );
-			if( CDR_getStatus(&stat) != -1) {
-				// HACK: Switch between local / absolute times
-				static u8 report_time = 1;
-
-
-				subq = (struct SubQ *)CDR_getBufferSub();
-
-				if (subq != NULL ) {
-					/*
-					skip subQ integrity check (audio playback)
-					mainly useful for DATA LibCrypt checking
-					*/
-					//if( SWAP16(subq->CRC) != calcCrc((unsigned char *)subq + 12, 10) )
-
-					cdr.Result[0] = cdr.StatP;
-
-
-					// Rayman: audio pregap flag / track change
-					// - not all CDs will use PREGAPs, so we track it manually
-					if( cdr.CurTrack < btoi( subq->TrackNumber ) ) {
-						cdr.Result[0] |= 0x10;
-
-						cdr.CurTrack = btoi( subq->TrackNumber );
-					}
-
-
-					// BIOS CD Player: data already BCD format
-					cdr.Result[1] = subq->TrackNumber;
-					cdr.Result[2] = subq->IndexNumber;
-
-
-					// BIOS CD Player: switch between local / absolute times
-					if( report_time == 0 ) {
-						cdr.Result[3] = subq->AbsoluteAddress[0];
-						cdr.Result[4] = subq->AbsoluteAddress[1];
-						cdr.Result[5] = subq->AbsoluteAddress[2];
-							
-						report_time = 1;
-					}
-					else {
-						cdr.Result[3] = subq->TrackRelativeAddress[0];
-						cdr.Result[4] = subq->TrackRelativeAddress[1];
-						cdr.Result[5] = subq->TrackRelativeAddress[2];
-							
-						cdr.Result[4] |= 0x80;
-							
-						report_time = 0;
-					}
-				}
-			}
-
-			// Rayman: Logo freeze
-			cdr.ResultReady = 1;
-
-			cdr.Stat = 1;
-			SetResultSize(8);
-			AddIrqQueue(REPPLAY_ACK, cdReadTime);
 			break;
 
 		case 0xff:
@@ -1440,7 +1468,10 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 
 			psxCpu->Clear(madr, cdsize / 4);
 			cdr.pTransfer += cdsize;
-			break;
+
+			CDRDMA_INT( cdsize / 4 );
+			return;
+
 		default:
 #ifdef CDR_LOG
 			CDR_LOG("psxDma3() Log: Unknown cddma %x\n", chcr);
@@ -1448,6 +1479,12 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 			break;
 	}
 
+	HW_DMA3_CHCR &= SWAP32(~0x01000000);
+	DMA_INTERRUPT(3);
+}
+
+void cdrDmaInterrupt()
+{
 	HW_DMA3_CHCR &= SWAP32(~0x01000000);
 	DMA_INTERRUPT(3);
 }

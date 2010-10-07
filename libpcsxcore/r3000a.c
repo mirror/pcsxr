@@ -186,6 +186,20 @@ void psxBranchTest() {
 				gpuotcInterrupt();
 			}
 		}
+
+		if (psxRegs.interrupt & (1 << PSXINT_CDRDMA)) { // cdrom
+			if ((psxRegs.cycle - psxRegs.intCycle[PSXINT_CDRDMA].sCycle) >= psxRegs.intCycle[PSXINT_CDRDMA].cycle) {
+				psxRegs.interrupt &= ~(1 << PSXINT_CDRDMA);
+				cdrDmaInterrupt();
+			}
+		}
+
+		if (psxRegs.interrupt & (1 << PSXINT_CDREPPLAY)) { // cdr report play
+			if ((psxRegs.cycle - psxRegs.intCycle[PSXINT_CDREPPLAY].sCycle) >= psxRegs.intCycle[PSXINT_CDREPPLAY].cycle) {
+				psxRegs.interrupt &= ~(1 << PSXINT_CDREPPLAY);
+				cdrRepplayInterrupt();
+			}
+		}
 	}
 }
 

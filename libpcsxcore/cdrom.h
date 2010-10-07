@@ -99,6 +99,7 @@ extern cdrStruct cdr;
 void cdrReset();
 void cdrInterrupt();
 void cdrReadInterrupt();
+void cdrRepplayInterrupt();
 unsigned char cdrRead0(void);
 unsigned char cdrRead1(void);
 unsigned char cdrRead2(void);
