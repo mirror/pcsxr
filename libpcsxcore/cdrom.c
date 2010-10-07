@@ -23,6 +23,7 @@
 
 #include "cdrom.h"
 #include "ppf.h"
+#include "psxdma.h"
 
 cdrStruct cdr;
 
