@@ -863,8 +863,12 @@ void cdrReadInterrupt() {
 		CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
 	}
 
-	// Judge Dredd: don't return FORM2 during XA playback (movie playing)
-	if( (cdr.Mode & 0x40) == 0 || ( cdr.Transfer[4+3] == 0 )) {
+	/*
+	Judge Dredd: don't return FORM2 during ADPCM playback (movie playing)
+
+	Xenogears: use correct FORM2 ID ($64 / $E4 for movies)
+	*/
+	if( (cdr.Mode & 0x40) == 0 || (cdr.Transfer[4+2] & 0x64) != 0x64 ) {
 		cdr.Stat = DataReady;
 
 		psxHu32ref(0x1070) |= SWAP32((u32)0x4);
