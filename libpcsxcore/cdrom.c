@@ -864,6 +864,12 @@ void cdrReadInterrupt() {
 			if (!ret) {
 				SPU_playADPCMchannel(&cdr.Xa);
 				cdr.FirstSector = 0;
+
+
+				// Crash Team Racing: music, speech
+
+				// signal ADPCM data ready
+				psxHu32ref(0x1070) |= SWAP32((u32)0x200);
 			}
 			else cdr.FirstSector = -1;
 		}
