@@ -458,14 +458,12 @@ void cdrInterrupt() {
         	cdr.Stat = Acknowledge;
         	break;
 
-    	case CdlGetlocL:
+    case CdlGetlocL:
 			SetResultSize(8);
-//        	for (i = 0; i < 8; i++)
-//				cdr.Result[i] = itob(cdr.Transfer[i]);
-        	for (i = 0; i < 8; i++)
+     	for (i = 0; i < 8; i++)
 				cdr.Result[i] = cdr.Transfer[i];
-        	cdr.Stat = Acknowledge;
-        	break;
+			cdr.Stat = Acknowledge;
+      break;
 
 		case CdlGetlocP:
 			// GameShark CDX CD Player: uses 17 bytes output (wraps around)
@@ -887,7 +885,10 @@ void cdrReadInterrupt() {
 
     cdr.Readed = 0;
 
-	if ((cdr.Transfer[4 + 2] & 0x80) && (cdr.Mode & 0x2)) { // EOF
+	// G-Police: Don't autopause ADPCM even if mode set (music)
+	if ((cdr.Transfer[4 + 2] & 0x80) && (cdr.Mode & 0x2) &&
+			(cdr.Transfer[4 + 0] == cdr.File) && (cdr.Transfer[4 + 1] == cdr.Channel) &&
+			(cdr.Transfer[4 + 2] & 0x64) != 0x64 ) { // EOF
 #ifdef CDR_LOG
 		CDR_LOG("cdrReadInterrupt() Log: Autopausing read\n");
 #endif
@@ -903,7 +904,7 @@ void cdrReadInterrupt() {
 
 	Xenogears: use correct FORM2 ID ($64 / $E4 for movies)
 	*/
-	if( (cdr.Mode & 0x40) == 0 || (cdr.Transfer[4+2] & 0x64) != 0x64 ) {
+	if( (cdr.Transfer[4+2] & 0x64) != 0x64 ) {
 		cdr.Stat = DataReady;
 
 		psxHu32ref(0x1070) |= SWAP32((u32)0x4);
@@ -1243,10 +1244,12 @@ void cdrWrite1(unsigned char rt) {
         	break;
 
     	case CdlGetlocL:
-			cdr.Ctrl |= 0x80;
+				cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr; 
-    		AddIrqQueue(cdr.Cmd, 0x1000);
-        	break;
+
+				// G-Police: in-game music needs longer time
+				AddIrqQueue(cdr.Cmd, 0x4000);
+     		break;
 
     	case CdlGetlocP:
 				cdr.Ctrl |= 0x80;
