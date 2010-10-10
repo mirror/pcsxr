@@ -887,8 +887,7 @@ void cdrReadInterrupt() {
 
 	// G-Police: Don't autopause ADPCM even if mode set (music)
 	if ((cdr.Transfer[4 + 2] & 0x80) && (cdr.Mode & 0x2) &&
-			(cdr.Transfer[4 + 0] == cdr.File) && (cdr.Transfer[4 + 1] == cdr.Channel) &&
-			(cdr.Transfer[4 + 2] & 0x64) != 0x64 ) { // EOF
+			(cdr.Transfer[4 + 2] & 0x4) != 0x4 ) { // EOF
 #ifdef CDR_LOG
 		CDR_LOG("cdrReadInterrupt() Log: Autopausing read\n");
 #endif
@@ -900,11 +899,12 @@ void cdrReadInterrupt() {
 	}
 
 	/*
-	Judge Dredd: don't return FORM2 during ADPCM playback (movie playing)
-
-	Xenogears: use correct FORM2 ID ($64 / $E4 for movies)
+	Hokuto no Ken 2: $A0 - return FORM1 + FORM2
+	Judge Dredd: $C8 - only FORM1
+	Xenogears: $C8 - only FORM1
 	*/
-	if( (cdr.Transfer[4+2] & 0x64) != 0x64 ) {
+
+	if( (cdr.Mode & 0x40) == 0 || (cdr.Transfer[4+2] & 0x4) != 0x4 )
 		cdr.Stat = DataReady;
 
 		psxHu32ref(0x1070) |= SWAP32((u32)0x4);
