@@ -88,12 +88,21 @@ static int DongleInit;
 		psxRegs.intCycle[PSXINT_SIO].cycle = eCycle; \
 		psxRegs.intCycle[PSXINT_SIO].sCycle = psxRegs.cycle; \
 	} \
+	\
+	StatReg &= ~RX_RDY; \
+	StatReg &= ~TX_RDY; \
 }
+
+
+#define SIO_CYCLES (BaudReg * 8)
+
 
 // clk cycle byte
 // 4us * 8bits = (PSXCLK / 1000000) * 32; (linuzappz)
 // TODO: add SioModePrescaler and BaudReg
-#define SIO_CYCLES		535
+
+// ePSXe 1.6.0
+//#define SIO_CYCLES		535
 
 // ePSXe 1.7.0
 //#define SIO_CYCLES 635
@@ -775,6 +784,10 @@ void sioInterrupt() {
 //	SysPrintf("Sio Interrupt\n");
 	StatReg |= IRQ;
 	psxHu32ref(0x1070) |= SWAPu32(0x80);
+
+	// Rhapsody: fixes input problems
+	StatReg |= TX_RDY;
+	StatReg |= RX_RDY;
 }
 
 void LoadMcd(int mcd, char *str) {
