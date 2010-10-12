@@ -903,12 +903,20 @@ void cdrReadInterrupt() {
 	Judge Dredd: $C8 - only FORM1
 	Xenogears: $C8 - only FORM1
 	*/
-
-	if( (cdr.Mode & 0x40) == 0 || (cdr.Transfer[4+2] & 0x4) != 0x4 )
-		cdr.Stat = DataReady;
-
-		psxHu32ref(0x1070) |= SWAP32((u32)0x4);
-	}
+/*
+    if( (cdr.Mode & 0x40) == 0 || (cdr.Transfer[4+2] & 0x4) != 0x4 )
+    {
+#ifdef CDR_LOG
+        CDR_LOG( "DATA READY\n" );
+#endif
+*/
+        cdr.Stat = DataReady;
+/*
+    } else {
+        cdr.Stat = Acknowledge;
+    }
+*/
+    psxHu32ref(0x1070) |= SWAP32((u32)0x4);
 }
 
 /*
