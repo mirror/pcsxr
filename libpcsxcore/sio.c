@@ -94,12 +94,20 @@ static int DongleInit;
 }
 
 
-#define SIO_CYCLES (BaudReg * 8)
-
+//#define SIO_CYCLES (BaudReg * 8)
 
 // clk cycle byte
 // 4us * 8bits = (PSXCLK / 1000000) * 32; (linuzappz)
 // TODO: add SioModePrescaler and BaudReg
+
+// rely on this for now - someone's actual testing
+#define SIO_CYCLES (PSXCLK / 57600)
+
+//PCSX 1.9.91
+//#define SIO_CYCLES 200
+
+//PCSX 1.9.91
+//#define SIO_CYCLES 270
 
 // ePSXe 1.6.0
 //#define SIO_CYCLES		535
