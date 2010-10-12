@@ -388,8 +388,11 @@ void cdrInterrupt() {
 		case CdlPause:
 			SetResultSize(1);
 			cdr.Result[0] = cdr.StatP;
-        	cdr.Stat = Acknowledge;
-			AddIrqQueue(CdlPause + 0x20, 0x1000);
+			cdr.Stat = Acknowledge;
+
+			// Gundam Battle Assault 2: sync to next frame @ 0.5x speed
+			AddIrqQueue(CdlPause + 0x20, cdReadTime * 2);
+
 			cdr.Ctrl |= 0x80;
 			break;
 
@@ -1201,7 +1204,9 @@ void cdrWrite1(unsigned char rt) {
 				StopReading();
 				cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x80000);
+
+				// Gundam Battle Assault 2: sync to next frame @ 0.5x speed
+				AddIrqQueue(cdr.Cmd, cdReadTime * 2);
         break;
 
 		case CdlReset:
