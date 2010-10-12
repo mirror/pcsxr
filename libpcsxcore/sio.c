@@ -82,6 +82,8 @@ unsigned char DongleData[ DONGLE_SIZE ];
 static int DongleInit;
 
 
+#if 0
+// Breaks Twisted Metal 2 intro
 #define SIO_INT(eCycle) { \
 	if (!Config.Sio) { \
 		psxRegs.interrupt |= (1 << PSXINT_SIO); \
@@ -91,6 +93,15 @@ static int DongleInit;
 	\
 	StatReg &= ~RX_RDY; \
 	StatReg &= ~TX_RDY; \
+}
+#endif
+
+#define SIO_INT(eCycle) { \
+	if (!Config.Sio) { \
+		psxRegs.interrupt |= (1 << PSXINT_SIO); \
+		psxRegs.intCycle[PSXINT_SIO].cycle = eCycle; \
+		psxRegs.intCycle[PSXINT_SIO].sCycle = psxRegs.cycle; \
+	} \
 }
 
 
@@ -793,9 +804,12 @@ void sioInterrupt() {
 	StatReg |= IRQ;
 	psxHu32ref(0x1070) |= SWAPu32(0x80);
 
+#if 0
 	// Rhapsody: fixes input problems
+	// Twisted Metal 2: breaks intro
 	StatReg |= TX_RDY;
 	StatReg |= RX_RDY;
+#endif
 }
 
 void LoadMcd(int mcd, char *str) {
