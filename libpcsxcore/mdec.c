@@ -475,7 +475,8 @@ void psxDma0(u32 adr, u32 bcr, u32 chcr) {
 			mdec.rl = (u16 *)PSXM(adr);
 			mdec.rlsize = mdec.reg0 & MDEC0_SIZE_MASK;
 
-			MDECINDMA_INT( size / 4 );
+			// input data
+			MDECINDMA_INT( mdec.rlsize );
       return;
 			
 
@@ -517,6 +518,7 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 	int blk[DSIZE2 * 6];
 	unsigned short *image;
 	int size, dmacnt;
+	u8 *in_ptr;
 
 #ifdef CDR_LOG
 	CDR_LOG("DMA1 %08x %08x %08x (cmd = %08x)\n", adr, bcr, chcr, mdec.reg0);
@@ -524,6 +526,19 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 
 	if (chcr != 0x01000200) return;
 
+
+	// Fear Effect 2: check for infinite output stall
+	// - fixes art gallery corruption, auto-pause
+
+	if( mdec.rlsize < 0 ) {
+		// stall dma1 forever
+		MDECOUTDMA_INT( 0x7fffffff );
+		return;
+	}
+
+	in_ptr = mdec.rl;
+
+	
 	size = (bcr >> 16) * (bcr & 0xffff);
 
 	image = (u16 *)PSXM(adr);
@@ -555,6 +570,16 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 	}
 
 
+	// Fear Effect 2: check for infinite output stall
+	// - fixes art gallery corruption, auto-pause
+
+	mdec.rlsize -= ((u8 *) mdec.rl - in_ptr) / 4;
+	if( mdec.rlsize < 0 ) {
+		// stall dma1 forever
+		dmacnt = 0x7fffffff;
+	}
+
+	
 	MDECOUTDMA_INT( dmacnt );
 
 
@@ -566,6 +591,14 @@ void mdec1Interrupt() {
 	CDR_LOG("mdec1Interrupt\n");
 #endif
 	if (HW_DMA1_CHCR & SWAP32(0x01000000)) {
+		// stall forever
+		if( psxRegs.intCycle[PSXINT_MDECOUTDMA].cycle == 0x7fffffff )
+		{
+			MDECOUTDMA_INT( 0x7fffffff );
+			return;
+		}
+
+
 		// Set a fixed value totaly arbitrarie another sound value is
 		// PSXCLK / 60 or PSXCLK / 50 since the bug happened at end of frame.
 		// PSXCLK / 500 seems good for FF9.
