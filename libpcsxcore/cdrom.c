@@ -193,18 +193,18 @@ static void ReadTrack() {
 
 void AddIrqQueue(unsigned char irq, unsigned long ecycle) {
 	cdr.Irq = irq;
-	if (cdr.Stat) {
-		cdr.eCycle = ecycle;
-	} else {
-		CDR_INT(ecycle);
-	}
+	cdr.eCycle = ecycle;
+
+	// Doom: Force rescheduling
+	// - Fixes boot
+	CDR_INT(ecycle);
 }
 
 void cdrRepplayInterrupt()
 {
 	// Wait for IRQ to be acknowledged
 	if (cdr.Stat) {
-		CDREAD_INT(0x1000);
+		CDREAD_INT( cdReadTime );
 		return;
 	}
 
@@ -292,8 +292,9 @@ void cdrInterrupt() {
 	int i;
 	unsigned char Irq = cdr.Irq;
 
+	// Reschedule IRQ
 	if (cdr.Stat) {
-		CDR_INT(0x1000);
+		CDR_INT( cdr.eCycle );
 		return;
 	}
 
@@ -390,9 +391,7 @@ void cdrInterrupt() {
 			cdr.Result[0] = cdr.StatP;
 			cdr.Stat = Acknowledge;
 
-			// Gundam Battle Assault 2: sync to next frame @ 0.5x speed
-			AddIrqQueue(CdlPause + 0x20, cdReadTime * 2);
-
+			AddIrqQueue(CdlPause + 0x20, 0x1000);
 			cdr.Ctrl |= 0x80;
 			break;
 
@@ -1205,8 +1204,17 @@ void cdrWrite1(unsigned char rt) {
 				cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
 
-				// Gundam Battle Assault 2: sync to next frame @ 0.5x speed
-				AddIrqQueue(cdr.Cmd, cdReadTime * 2);
+				/*
+				Gundam Battle Assault 2: much slower (*)
+				- Fixes boot, gameplay
+				
+				Hokuto no Ken 2: slower
+				- Fixes intro + subtitles
+
+				InuYasha - Feudal Fairy Tale: slower
+				- Fixes battles
+				*/
+				AddIrqQueue(cdr.Cmd, cdReadTime * 3);
         break;
 
 		case CdlReset:
@@ -1420,11 +1428,11 @@ void cdrWrite3(unsigned char rt) {
 			return;
 		}
 
-		if (cdr.Irq)
-			CDR_INT(cdr.eCycle);
-
-		if (cdr.Reading && !cdr.ResultReady) 
-            CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
+		/*
+		Do not reset interrupts here
+		- Doom: fixes boot
+		- Judge Dredd: better gameplay, some dropped frames
+		*/
 
 		return;
 	}
