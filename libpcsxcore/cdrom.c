@@ -84,6 +84,14 @@ unsigned char Test20[] = { 0x98, 0x06, 0x10, 0xC3 };
 unsigned char Test22[] = { 0x66, 0x6F, 0x72, 0x20, 0x45, 0x75, 0x72, 0x6F };
 unsigned char Test23[] = { 0x43, 0x58, 0x44, 0x32, 0x39 ,0x34, 0x30, 0x51 };
 
+// cdr.Stat:
+#define NoIntr		0
+#define DataReady	1
+#define Complete	2
+#define Acknowledge	3
+#define DataEnd		4
+#define DiskError	5
+
 // 1x = 75 sectors per second
 // PSXCLK = 1 sec in the ps
 // so (PSXCLK / 75) = cdr read time (linuzappz)
@@ -438,14 +446,6 @@ static void ReadTrack( u8 *time ) {
 #endif
 	cdr.RErr = CDR_readTrack(cdr.Prev);
 }
-
-// cdr.Stat:
-#define NoIntr		0
-#define DataReady	1
-#define Complete	2
-#define Acknowledge	3
-#define DataEnd		4
-#define DiskError	5
 
 void AddIrqQueue(unsigned char irq, unsigned long ecycle) {
 	cdr.Irq = irq;

@@ -695,7 +695,7 @@ static int opensubfile(const char *isoname) {
 	return 0;
 }
 
-static long CALLBACK ISOinit(void) {
+long CALLBACK ISOinit(void) {
 	assert(cdHandle == NULL);
 	assert(subHandle == NULL);
 
