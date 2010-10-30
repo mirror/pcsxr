@@ -154,13 +154,13 @@ void Find_CurTrack() {
 #ifdef CDR_LOG___0
 				CDR_LOG( "curtrack %d %d %d | %d %d %d | %d\n",
 					cdr.SetSectorPlay[0], cdr.SetSectorPlay[1], cdr.SetSectorPlay[2],
-					cdr.ResultTD[0], cdr.ResultTD[1], cdr.ResultTD[2],
+					cdr.ResultTD[2], cdr.ResultTD[1], cdr.ResultTD[0],
 					cdr.CurTrack );
 #endif
 
-				// find next track boundary
-				sect1 = cdr.SetSectorPlay[0] * 60 * 75 + cdr.SetSectorPlay[1] * 75 + cdr.SetSectorPlay[2];
-				sect2 = cdr.ResultTD[2] * 60 * 75 + cdr.ResultTD[1] * 75 + cdr.ResultTD[0];
+				// find next track boundary - only need m:s accuracy
+				sect1 = cdr.SetSectorPlay[0] * 60 * 75 + cdr.SetSectorPlay[1] * 75;
+				sect2 = cdr.ResultTD[2] * 60 * 75 + cdr.ResultTD[1] * 75;
 				if( sect1 >= sect2 ) {
 					cdr.CurTrack++;
 					continue;
@@ -172,10 +172,10 @@ void Find_CurTrack() {
 	}
 }
 
-static void ReadTrack() {
-	cdr.Prev[0] = itob(cdr.SetSector[0]);
-	cdr.Prev[1] = itob(cdr.SetSector[1]);
-	cdr.Prev[2] = itob(cdr.SetSector[2]);
+static void ReadTrack( u8 *time ) {
+	cdr.Prev[0] = itob( time[0] );
+	cdr.Prev[1] = itob( time[1] );
+	cdr.Prev[2] = itob( time[2] );
 
 #ifdef CDR_LOG
 	CDR_LOG("ReadTrack() Log: KEY *** %x:%x:%x\n", cdr.Prev[0], cdr.Prev[1], cdr.Prev[2]);
@@ -199,6 +199,39 @@ void AddIrqQueue(unsigned char irq, unsigned long ecycle) {
 	// - Fixes boot
 	CDR_INT(ecycle);
 }
+
+
+void Set_Track()
+{
+	if (CDR_getTN(cdr.ResultTN) != -1) {
+		int lcv;
+
+		for( lcv = 1; lcv < cdr.ResultTN[1]; lcv++ ) {
+			if (CDR_getTD((u8)(lcv), cdr.ResultTD) != -1) {
+#ifdef CDR_LOG___0
+				CDR_LOG( "settrack %d %d %d | %d %d %d | %d\n",
+					cdr.SetSectorPlay[0], cdr.SetSectorPlay[1], cdr.SetSectorPlay[2],
+					cdr.ResultTD[2], cdr.ResultTD[1], cdr.ResultTD[0],
+					cdr.CurTrack );
+#endif
+
+				// check if time matches track start (only need min, sec accuracy)
+				// - m:s:f vs f:s:m
+				if( cdr.SetSectorPlay[0] == cdr.ResultTD[2] &&
+						cdr.SetSectorPlay[1] == cdr.ResultTD[1] ) {
+					// skip pregap frames
+					if( cdr.SetSectorPlay[2] < cdr.ResultTD[0] )
+						cdr.SetSectorPlay[2] = cdr.ResultTD[0];
+
+					break;
+				}
+				else if( cdr.SetSectorPlay[0] < cdr.ResultTD[2] )
+					break;
+			}
+		}
+	}
+}
+
 
 void cdrRepplayInterrupt()
 {
@@ -280,12 +313,10 @@ void cdrRepplayInterrupt()
 
 
 	// Wild 9: Do not use REPPLAY_ACK
-	// - must use faster times for reporting
-	CDREPPLAY_INT(cdReadTime / 2);
+	CDREPPLAY_INT(cdReadTime);
 
 
 	psxHu32ref(0x1070) |= SWAP32((u32)0x4);
-	psxRegs.interrupt |= 0x80000000;
 }
 
 void cdrInterrupt() {
@@ -631,7 +662,7 @@ void cdrInterrupt() {
 			cdr.Seeked = TRUE;
 			
 			// Tomb Raider 2: must update read cursor for getlocp
-			ReadTrack();
+			ReadTrack( cdr.SetSectorPlay );
 			break;
 
 		case CdlTest:
@@ -841,7 +872,7 @@ void cdrReadInterrupt() {
 	cdr.StatP &= ~0x40;
     cdr.Result[0] = cdr.StatP;
 
-	ReadTrack();
+	ReadTrack( cdr.SetSector );
 
 	buf = CDR_getBuffer();
 	if (buf == NULL)
@@ -1080,8 +1111,19 @@ void cdrWrite1(unsigned char rt) {
         break;
 
     	case CdlPlay:
-				// Rayman: detect track changes
+				/*
+				Rayman: detect track changes
+				- fixes logo freeze
+
+				Twisted Metal 2: skip PREGAP + starting accurate SubQ
+				- plays tracks without retry play
+
+				Wild 9: skip PREGAP + starting accurate SubQ
+				- plays tracks without retry play
+				*/
+				Set_Track();
 				Find_CurTrack();
+				ReadTrack( cdr.SetSectorPlay );
 
 
 				// GameShark CD Player: Calls 2x + Play 2x
