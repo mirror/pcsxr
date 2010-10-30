@@ -529,38 +529,33 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 	image = (u16 *)PSXM(adr);
 
 	if (mdec.reg0 & MDEC0_RGB24) { // 15-b decoding
+		dmacnt = 0;
 		size = size / ((16 * 16) / 2);
 		for (; size > 0; size--, image += (16 * 16)) {
 			mdec.rl = rl2blk(blk, mdec.rl);
 			yuv2rgb15(blk, image);
-		}
-	} else { // 24-b decoding
-		// Fear Effect 2 Artwork (4000+ = BIAS 1)
-		// Breaks: Lemmings
-		//MDECOUTDMA_INT( ((size / 4) / BIAS) * 4000);
 
+			dmacnt++;
+		}
+
+		// 300 blocks @ 30 fps
+		dmacnt = dmacnt * PSXCLK / (300 * 30);
+	} else { // 24-b decoding
+		dmacnt = 0;
 		size = size / ((24 * 16) / 2);
 		for (; size > 0; size--, image += (24 * 16)) {
 			mdec.rl = rl2blk(blk, mdec.rl);
 			yuv2rgb24(blk, (u8 *)image);
+
+			dmacnt++;
 		}
+
+		// 300 blocks @ 30 fps
+		dmacnt = dmacnt * PSXCLK / (300 * 30);
 	}
 
-	/*
-	Absolute minimum DMA time:
-			
-	# bytes written to memory *
-		average cycles to create byte	/
-		32-bit DMA per cycle
 
-
-	Cycle Voodoo List:
-	FF9 Dali = 1-75 ~ 150
-	Rebel 2 = 1-3 (stage 6)
-	*/
-
-	dmacnt = ( (u8 *)image - (u8 *)PSXM(adr)) * 1;
-	MDECOUTDMA_INT( dmacnt / 4);
+	MDECOUTDMA_INT( dmacnt );
 
 
 	mdec.reg1 |= MDEC1_BUSY;
@@ -575,7 +570,7 @@ void mdec1Interrupt() {
 		// PSXCLK / 60 or PSXCLK / 50 since the bug happened at end of frame.
 		// PSXCLK / 500 seems good for FF9.
 		// CAUTION: commented interrupt-handling may lead to problems, keep an eye ;-)
-		MDECOUTDMA_INT(PSXCLK / 500);
+		MDECOUTDMA_INT(PSXCLK / 400);
 //		MDECOUTDMA_INT(psxRegs.intCycle[PSXINT_MDECOUTDMA].cycle * 8);
 
 		HW_DMA1_CHCR &= SWAP32(~0x01000000);
