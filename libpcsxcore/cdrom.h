@@ -92,6 +92,8 @@ typedef struct {
 	u8 LidCheck;
 	u8 FastForward;
 	u8 FastBackward;
+
+	u32 LeftVol, RightVol;
 } cdrStruct;
 
 extern cdrStruct cdr;

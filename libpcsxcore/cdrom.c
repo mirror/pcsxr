@@ -1272,10 +1272,18 @@ void cdrWrite0(unsigned char rt) {
 #endif
 	cdr.Ctrl = rt | (cdr.Ctrl & ~0x3);
 
-    if (rt == 0) {
+	if (rt == 0) {
 		cdr.ParamP = 0;
 		cdr.ParamC = 0;
 		cdr.ResultReady = 0;
+	}
+
+	// Tekken: CDXA fade-out
+	else if( rt == 2 ) {
+		cdr.LeftVol = 0;
+	}
+	else if( rt == 3 ) {
+		cdr.RightVol = 0;
 	}
 }
 
@@ -1301,8 +1309,16 @@ void cdrWrite1(unsigned char rt) {
 #ifdef CDR_LOG
 	CDR_LOG("cdrWrite1() Log: CD1 write: %x (%s)\n", rt, CmdName[rt]);
 #endif
-//	psxHu8(0x1801) = rt;
-    cdr.Cmd = rt;
+
+	
+	// Tekken: CDXA fade-out
+	if( (cdr.Ctrl & 3) == 3 ) {
+		cdr.RightVol |= (rt << 8);
+	}
+
+  
+	//	psxHu8(0x1801) = rt;
+  cdr.Cmd = rt;
 	cdr.OCUP = 0;
 
 #ifdef CDRCMD_DEBUG
@@ -1637,6 +1653,18 @@ void cdrWrite2(unsigned char rt) {
 #ifdef CDR_LOG
 	CDR_LOG("cdrWrite2() Log: CD2 write: %x\n", rt);
 #endif
+
+	
+	// Tekken: CDXA fade-out
+	if( (cdr.Ctrl & 3) == 2 ) {
+		cdr.LeftVol |= (rt << 8);
+	}
+	else if( (cdr.Ctrl & 3) == 3 ) {
+		cdr.RightVol |= (rt << 0);
+	}
+
+  
+	
     if (cdr.Ctrl & 0x1) {
 		switch (rt) {
 			case 0x07:
@@ -1676,6 +1704,28 @@ void cdrWrite3(unsigned char rt) {
 	CDR_LOG("cdrWrite3() Log: CD3 write: %x\n", rt);
 #endif
 
+	// Tekken: CDXA fade-out
+	if( (cdr.Ctrl & 3) == 2 ) {
+		cdr.LeftVol |= (rt << 0);
+	}
+	else if( (cdr.Ctrl & 3) == 3 && rt == 0x20 ) {
+#ifdef CDR_LOG
+		CDR_LOG( "CD-XA Volume: %X %X\n", cdr.LeftVol, cdr.RightVol );
+#endif
+
+		if( !cdr.Muted ) {
+			/*
+			Eternal SPU: scale volume from [0-ffff] -> [0,8000]
+			- Destruction Derby Raw movies (ff00)
+			*/
+
+			// write CD-XA volumes
+			SPU_writeRegister( H_CDLeft, cdr.LeftVol / 2 );
+			SPU_writeRegister( H_CDRight, cdr.RightVol / 2 );
+		}
+	}
+
+	
 	// GameShark CDX CD Player: Irq timing mania
 	if( rt == 0 &&
 			cdr.Irq != 0 && cdr.Irq != 0xff &&
