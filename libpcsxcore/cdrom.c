@@ -1027,6 +1027,21 @@ void cdrInterrupt() {
         	cdr.Stat = Acknowledge;
 			break;
 
+		case CdlReadT:
+			SetResultSize(1);
+			cdr.StatP |= 0x2;
+			cdr.Result[0] = cdr.StatP;
+			cdr.Stat = Acknowledge;
+			AddIrqQueue(CdlReadT + 0x20, 0x1000);
+			break;
+
+		case CdlReadT + 0x20:
+			SetResultSize(1);
+			cdr.StatP |= 0x2;
+			cdr.Result[0] = cdr.StatP;
+			cdr.Stat = Complete;
+			break;
+
     	case CdlReadToc:
 			SetResultSize(1);
 			cdr.StatP |= 0x2;
@@ -1596,6 +1611,13 @@ void cdrWrite1(unsigned char rt) {
     		cdr.Stat = NoIntr; 
     		AddIrqQueue(cdr.Cmd, 0x1000);
         	break;
+
+		// Destruction Derby: read TOC? GetTD after this
+		case CdlReadT:
+			cdr.Ctrl |= 0x80;
+			cdr.Stat = NoIntr; 
+			AddIrqQueue(cdr.Cmd, 0x1000);
+			break;
 
     	case CdlTest:
 			cdr.Ctrl |= 0x80;
