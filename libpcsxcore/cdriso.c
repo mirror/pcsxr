@@ -744,17 +744,17 @@ static long CALLBACK ISOopen(void) {
 	subChanMixed = FALSE;
 	subChanRaw = FALSE;
 
-	if (parsecue(GetIsoFile()) == 0) {
-		SysPrintf("[+cue]");
-	}
-	else if (parsetoc(GetIsoFile()) == 0) {
-		SysPrintf("[+toc]");
-	}
-	else if (parseccd(GetIsoFile()) == 0) {
+	if (parseccd(GetIsoFile()) == 0) {
 		SysPrintf("[+ccd]");
 	}
 	else if (parsemds(GetIsoFile()) == 0) {
 		SysPrintf("[+mds]");
+	}
+	else if (parsecue(GetIsoFile()) == 0) {
+		SysPrintf("[+cue]");
+	}
+	else if (parsetoc(GetIsoFile()) == 0) {
+		SysPrintf("[+toc]");
 	}
 
 	if (!subChanMixed && opensubfile(GetIsoFile()) == 0) {
