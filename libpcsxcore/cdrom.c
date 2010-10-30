@@ -1557,6 +1557,11 @@ void cdrWrite1(unsigned char rt) {
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr; 
     		AddIrqQueue(cdr.Cmd, 0x1000);
+
+			// Squaresoft on PlayStation 1998 Collector's CD Vol. 1
+			// - fixes choppy movie sound
+			if( cdr.Play && (cdr.Mode & 1) == 0 )
+				StopCdda();
         	break;
 
     	case CdlGetmode:
