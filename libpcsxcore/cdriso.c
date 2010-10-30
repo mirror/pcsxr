@@ -132,6 +132,11 @@ static long GetTickCount(void) {
 }
 #endif
 
+
+u16 *iso_play_cdbuf;
+u16 iso_play_bufptr;
+
+
 // this thread plays audio data
 #ifdef _WIN32
 static void playthread(void *param)
@@ -144,6 +149,9 @@ static void *playthread(void *param)
 	int sec;
 
 	t = GetTickCount();
+
+	iso_play_cdbuf = 0;
+	iso_play_bufptr = 0;
 
 	while (playing) {
 		d = t - (long)GetTickCount();
@@ -213,6 +221,7 @@ static void *playthread(void *param)
 			SPU_playCDDAchannel((short *)sndbuffer, s);
 		}
 
+
 		cddaCurOffset += s;
 
 	
@@ -251,6 +260,11 @@ static void *playthread(void *param)
 				fseek( cddaHandle, s * CD_FRAMESIZE_RAW, SEEK_SET );
 #endif
 		}
+
+	
+		// Vib Ribbon: decoded buffer IRQ
+		iso_play_cdbuf = sndbuffer;
+		iso_play_bufptr = 0;
 	}
 
 #ifdef _WIN32

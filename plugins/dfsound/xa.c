@@ -418,14 +418,23 @@ INLINE void FeedCDDA(unsigned char *pcm, int nBytes)
    pcm+=4;
 
  
-   spuMem[ cdda_ptr ] = *pcm | (*(pcm+1)<<8);
-   spuMem[ cdda_ptr+0x400 ] = *(pcm+2) | (*(pcm+3)<<8);
+#if 0
+	 /*
+	 Vib Ribbon
+	 $00000-$003ff  CD audio left
+	 $00400-$007ff  CD audio right
+	 */
 
-   cdda_ptr++;
-   if( cdda_ptr >= 0x400 )
-   {
-     cdda_ptr &= 0x3ff;
-   }
+	 // TIMING: perform in PCSX-r
+	 // - gets data from reverb buffer, only update this at intervals (not real-time)
+
+	 // remember: 16-bit ptrs
+	 spuMem[ cdda_ptr ] = (l >> 0) & 0xffff;
+	 spuMem[ cdda_ptr+0x200 ] = (l >> 16) & 0xffff;
+
+	 cdda_ptr++;
+	 cdda_ptr &= 0x1ff;
+#endif
  }
 }
 
