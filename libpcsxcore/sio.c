@@ -766,7 +766,21 @@ unsigned char sioRead8() {
 }
 
 unsigned short sioReadStat16() {
-	return StatReg;
+	u16 hard;
+
+	hard = StatReg;
+
+#if 0
+	// wait for IRQ first
+	if( psxRegs.interrupt & (1 << PSXINT_SIO) )
+	{
+		hard &= ~TX_RDY;
+		hard &= ~RX_RDY;
+		hard &= ~TX_EMPTY;
+	}
+#endif
+
+	return hard;
 }
 
 unsigned short sioReadMode16() {
