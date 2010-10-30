@@ -1438,6 +1438,11 @@ void cdrWrite3(unsigned char rt) {
 			case 0x00:
 				cdr.pTransfer += 12;
 				break;
+
+			case 0x20:
+				cdr.pTransfer += 0;
+				break;
+
 			default:
 				break;
 		}
@@ -1492,7 +1497,14 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 			psxCpu->Clear(madr, cdsize / 4);
 			cdr.pTransfer += cdsize;
 
-			CDRDMA_INT( cdsize / 4 );
+
+			// burst vs normal
+			if( chcr == 0x11400100 ) {
+				CDRDMA_INT( (cdsize/4) / 4 );
+			}
+			else if( chcr == 0x11000000 ) {
+				CDRDMA_INT( (cdsize/4) * 1 );
+			}
 			return;
 
 		default:
