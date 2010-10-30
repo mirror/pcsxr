@@ -599,7 +599,6 @@ void cdrInterrupt() {
         	cdr.Result[0] = cdr.StatP;
 			cdr.StatP |= 0x40;
         	cdr.Stat = Acknowledge;
-			cdr.Seeked = TRUE;
 			AddIrqQueue(CdlSeekL + 0x20, 0x1000);
 			break;
 
@@ -608,6 +607,7 @@ void cdrInterrupt() {
 			cdr.StatP |= 0x2;
 			cdr.StatP &= ~0x40;
         	cdr.Result[0] = cdr.StatP;
+			cdr.Seeked = TRUE;
         	cdr.Stat = Complete;
 			break;
 
@@ -626,6 +626,7 @@ void cdrInterrupt() {
 			cdr.StatP &= ~0x40;
 			cdr.Result[0] = cdr.StatP;
 			cdr.Stat = Complete;
+			cdr.Seeked = TRUE;
 			
 			// Tomb Raider 2: must update read cursor for getlocp
 			ReadTrack();
@@ -723,18 +724,31 @@ void cdrInterrupt() {
 		case READ_ACK:
 			if (!cdr.Reading) return;
 
-			SetResultSize(1);
-			cdr.StatP |= 0x2;
-        	cdr.Result[0] = cdr.StatP;
+			// Duke Nukem: Land of the Babes - seek then read
+			// - fixes cutscenes
 			if (!cdr.Seeked) {
 				cdr.Seeked = TRUE;
-				cdr.StatP |= 0x40;
-			}
-			cdr.StatP |= 0x20;
-        	cdr.Stat = Acknowledge;
 
-//			CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
-			CDREAD_INT(0x80000);
+				cdr.StatP |= 0x40;
+				cdr.StatP &= ~0x20;
+			} else {
+				cdr.StatP |= 0x20;
+				cdr.StatP &= ~0x40;
+			}
+
+			/*
+			Duke Nukem: Land of the Babes - delay read for one frame
+			- fixes cutscenes
+
+			Judge Dredd - don't delay too long
+			- breaks gameplay movies
+			*/
+			CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
+
+			SetResultSize(1);
+			cdr.StatP |= 0x02;
+			cdr.Result[0] = cdr.StatP;
+			cdr.Stat = Acknowledge;
 			break;
 
 		case 0xff:
@@ -893,8 +907,8 @@ void cdrReadInterrupt() {
 #ifdef CDR_LOG
 		CDR_LOG("cdrReadInterrupt() Log: Autopausing read\n");
 #endif
-//		AddIrqQueue(AUTOPAUSE, 0x1000);
-		AddIrqQueue(CdlPause, 0x1000);
+//		AddIrqQueue(AUTOPAUSE, 0x2000);
+		AddIrqQueue(CdlPause, 0x2000);
 	}
 	else {
 		CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
