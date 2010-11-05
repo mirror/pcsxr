@@ -267,9 +267,11 @@ static inline void MTC2(u32 value, int reg) {
 
 		case 30:
 			{
+#if 1
 				int a;
 				gteLZCS = value;
 
+				// non-MAME code
 				a = gteLZCS;
 				if (a > 0) {
 					int i;
@@ -283,13 +285,40 @@ static inline void MTC2(u32 value, int reg) {
 				} else {
 					gteLZCR = 32;
 				}
+#else
+				// MAME
+				u32 lzcs = value;
+				u32 lzcr = 0;
+
+				gteLZCS = value;
+
+				if( ( lzcs & 0x80000000 ) == 0 )
+				{
+					lzcs = ~lzcs;
+				}
+				while( ( lzcs & 0x80000000 ) != 0 )
+				{
+					lzcr++;
+					lzcs <<= 1;
+				}
+				gteLZCR = lzcr;
+#endif
 			}
 			break;
 
+#if 1
+		// non-MAME
 		case 7:
 		case 29:
+			return;
+
 		case 31:
 			return;
+#else
+		case 31:
+			value = psxRegs.CP2D.r[reg];
+			break;
+#endif
 
 		default:
 			psxRegs.CP2D.r[reg] = value;
