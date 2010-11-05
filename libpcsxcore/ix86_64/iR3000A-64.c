@@ -1136,7 +1136,16 @@ static void recDIV() {
 //	iFlushRegs();
 
 	if (IsConst(_Rt_)) {
-		if (iRegs[_Rt_].k == 0) return;
+		if (iRegs[_Rt_].k == 0) {
+			MOV32ItoM((uptr)&psxRegs.GPR.n.lo, 0xffffffff);
+			if (IsConst(_Rs_)) {
+				MOV32ItoM((uptr)&psxRegs.GPR.n.hi, iRegs[_Rs_].k);
+			} else {
+				MOV32MtoR(EAX, (uptr)&psxRegs.GPR.r[_Rs_]);
+				MOV32RtoM((uptr)&psxRegs.GPR.n.hi, EAX);
+			}
+			return;
+		}
 		MOV32ItoR(ECX, iRegs[_Rt_].k);// printf("divrtk %x\n", iRegs[_Rt_].k);
 	} else {
 		MOV32MtoR(ECX, (uptr)&psxRegs.GPR.r[_Rt_]);
@@ -1153,7 +1162,19 @@ static void recDIV() {
 	MOV32RtoM((uptr)&psxRegs.GPR.n.lo, EAX);
 	MOV32RtoM((uptr)&psxRegs.GPR.n.hi, EDX);
 	if (!IsConst(_Rt_)) {
+		j8Ptr[1] = JMP8(1);
+
 		x86SetJ8(j8Ptr[0]);
+
+		MOV32ItoM((uptr)&psxRegs.GPR.n.lo, 0xffffffff);
+		if (IsConst(_Rs_)) {
+			MOV32ItoM((uptr)&psxRegs.GPR.n.hi, iRegs[_Rs_].k);
+		} else {
+			MOV32MtoR(EAX, (uptr)&psxRegs.GPR.r[_Rs_]);
+			MOV32RtoM((uptr)&psxRegs.GPR.n.hi, EAX);
+		}
+
+		x86SetJ8(j8Ptr[1]);
 	}
 }
 
@@ -1163,7 +1184,16 @@ static void recDIVU() {
 //	iFlushRegs();
 
 	if (IsConst(_Rt_)) {
-		if (iRegs[_Rt_].k == 0) return;
+		if (iRegs[_Rt_].k == 0) {
+			MOV32ItoM((uptr)&psxRegs.GPR.n.lo, 0xffffffff);
+			if (IsConst(_Rs_)) {
+				MOV32ItoM((uptr)&psxRegs.GPR.n.hi, iRegs[_Rs_].k);
+			} else {
+				MOV32MtoR(EAX, (uptr)&psxRegs.GPR.r[_Rs_]);
+				MOV32RtoM((uptr)&psxRegs.GPR.n.hi, EAX);
+			}
+			return;
+		}
 		MOV32ItoR(ECX, iRegs[_Rt_].k);// printf("divurtk %x\n", iRegs[_Rt_].k);
 	} else {
 		MOV32MtoR(ECX, (uptr)&psxRegs.GPR.r[_Rt_]);
@@ -1180,7 +1210,19 @@ static void recDIVU() {
 	MOV32RtoM((uptr)&psxRegs.GPR.n.lo, EAX);
 	MOV32RtoM((uptr)&psxRegs.GPR.n.hi, EDX);
 	if (!IsConst(_Rt_)) {
+		j8Ptr[1] = JMP8(1);
+
 		x86SetJ8(j8Ptr[0]);
+
+		MOV32ItoM((uptr)&psxRegs.GPR.n.lo, 0xffffffff);
+		if (IsConst(_Rs_)) {
+			MOV32ItoM((uptr)&psxRegs.GPR.n.hi, iRegs[_Rs_].k);
+		} else {
+			MOV32MtoR(EAX, (uptr)&psxRegs.GPR.r[_Rs_]);
+			MOV32RtoM((uptr)&psxRegs.GPR.n.hi, EAX);
+		}
+
+		x86SetJ8(j8Ptr[1]);
 	}
 }
 #endif

@@ -536,7 +536,7 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 		return;
 	}
 
-	in_ptr = mdec.rl;
+	in_ptr = (u8 *)mdec.rl;
 
 	
 	size = (bcr >> 16) * (bcr & 0xffff);
