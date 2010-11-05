@@ -240,9 +240,6 @@ static inline u32 MFC2(int reg) {
 			break;
 
 		case 28:
-		case 30:
-			return 0;
-
 		case 29:
 			psxRegs.CP2D.r[reg] = LIM(gteIR1 >> 7, 0x1f, 0, 0) |
 									(LIM(gteIR2 >> 7, 0x1f, 0, 0) << 5) |
