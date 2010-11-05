@@ -608,6 +608,53 @@ void mdec1Interrupt() {
 
 		HW_DMA1_CHCR &= SWAP32(~0x01000000);
 		DMA_INTERRUPT(1);
+
+
+#if 0
+		/*
+		Destruction Derby Raw: stall 4+ blocks
+		- Fixes boot movies
+
+		Final Fantasy 9: stall 4+ blocks
+		- Prevent Dali video from infinite stall, corruption
+
+		Rebel Assault 2: stall 8+ blocks
+		- Fixes boot movies, stage 6 play
+		*/
+
+		{
+			int blk[DSIZE2 * 6];
+			int lcv, size;
+			u16 *img;
+
+
+#define PRECACHE_STALL 8
+
+			img = mdec.rl;
+			size = mdec.rlsize * 4;
+			for( lcv = 0; lcv < PRECACHE_STALL; lcv++ ) {
+				u8 *old_img;
+
+				old_img = (u8 *) img;
+				img = rl2blk(blk, img);
+
+				size -= (u8 *) img - old_img;
+				if( size < 0 ) break;
+			}
+
+			// pre-cache input stall - turn off mdec
+			if( size < 0 )
+			{
+	#ifdef CDR_LOG
+			CDR_LOG( "BUSY STALL %X [IN = %X, SIZE = %X]\n",
+				lcv, ((u8 *)img - (u8 *)mdec.rl)/4, mdec.rlsize );
+	#endif
+
+				// drain input + wait before timing out
+				MDECOUTDMA_INT( (PRECACHE_STALL * 1) * (16 * 16 * 3) );
+			}
+		}
+#endif
 	} else {
 		mdec.reg1 &= ~MDEC1_BUSY;
 	}
