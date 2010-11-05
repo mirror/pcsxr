@@ -545,6 +545,8 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 
 	if (mdec.reg0 & MDEC0_RGB24) { // 15-b decoding
 		dmacnt = 0;
+
+
 		size = size / ((16 * 16) / 2);
 		for (; size > 0; size--, image += (16 * 16)) {
 			mdec.rl = rl2blk(blk, mdec.rl);
@@ -553,10 +555,16 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 			dmacnt++;
 		}
 
-		// 300 blocks @ 30 fps
-		dmacnt = dmacnt * PSXCLK / (300 * 30);
+
+		// macroblock size
+		dmacnt *= (16 * 16 * 2);
+
+		// macroblock cycles
+		dmacnt *= 1;
 	} else { // 24-b decoding
 		dmacnt = 0;
+
+
 		size = size / ((24 * 16) / 2);
 		for (; size > 0; size--, image += (24 * 16)) {
 			mdec.rl = rl2blk(blk, mdec.rl);
@@ -565,8 +573,11 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 			dmacnt++;
 		}
 
-		// 300 blocks @ 30 fps
-		dmacnt = dmacnt * PSXCLK / (300 * 30);
+		// macroblock size
+		dmacnt *= (16 * 16 * 3);
+
+		// macroblock cycles
+		dmacnt *= 1;
 	}
 
 
@@ -580,6 +591,20 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 	}
 
 	
+	/*
+	current mblock speed = 1 cycle / byte
+
+
+	Destruction Derby Raw = ~1-2 macroblock cycles
+	- no movie hang
+
+	Rebel Assault 2 = ~0-1 macroblock cycles
+	- no hangs, chopped movies
+
+	Shadow Madness = ~1-4 macroblock cycles
+	- smoother videos, fixes boot
+	*/
+
 	MDECOUTDMA_INT( dmacnt );
 
 
