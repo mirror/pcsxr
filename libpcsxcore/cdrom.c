@@ -1824,6 +1824,18 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 
 			cdsize = (bcr & 0xffff) * 4;
 
+			// Ape Escape: bcr = 0001 / 0000
+			// - fix boot
+			if( cdsize == 0 )
+			{
+				switch (cdr.Mode & 0x30) {
+					case 0x00: cdsize = 2048; break;
+					case 0x10: cdsize = 2328; break;
+					case 0x20: cdsize = 2340; break;
+				}
+			}
+
+
 			ptr = (u8 *)PSXM(madr);
 			if (ptr == NULL) {
 #ifdef CPU_LOG
