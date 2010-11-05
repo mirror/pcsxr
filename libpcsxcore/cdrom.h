@@ -98,6 +98,8 @@ typedef struct {
 
 extern cdrStruct cdr;
 
+void cdrDecodedBufferInterrupt();
+
 void cdrReset();
 void cdrInterrupt();
 void cdrReadInterrupt();

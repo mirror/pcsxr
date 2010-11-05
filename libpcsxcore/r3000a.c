@@ -24,8 +24,8 @@
 #include "r3000a.h"
 #include "cdrom.h"
 #include "mdec.h"
+#include "gpu.h"
 #include "gte.h"
-
 
 extern u32 *Read_ICache( u32 pc, u32 isolate );
 
