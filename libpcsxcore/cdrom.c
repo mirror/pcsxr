@@ -1073,8 +1073,20 @@ void cdrInterrupt() {
 		case READ_ACK:
 			if (!cdr.Reading) return;
 
-			// Duke Nukem: Land of the Babes - seek then read
-			// - fixes cutscenes
+			
+			// Fighting Force 2 - update subq time immediately
+			// - fixes new game
+			ReadTrack( cdr.SetSector );
+
+
+			/*
+			Duke Nukem: Land of the Babes - seek then delay read for one frame
+			- fixes cutscenes
+
+			Judge Dredd - don't delay too long
+			- breaks gameplay movies
+			*/
+
 			if (!cdr.Seeked) {
 				cdr.Seeked = TRUE;
 
@@ -1085,13 +1097,6 @@ void cdrInterrupt() {
 				cdr.StatP &= ~0x40;
 			}
 
-			/*
-			Duke Nukem: Land of the Babes - delay read for one frame
-			- fixes cutscenes
-
-			Judge Dredd - don't delay too long
-			- breaks gameplay movies
-			*/
 			CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
 
 			SetResultSize(1);
