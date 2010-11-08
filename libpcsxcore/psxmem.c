@@ -144,7 +144,7 @@ u8 psxMemRead8(u32 mem) {
 	u32 t;
 
 
-	psxRegs.cycle += 2;
+	psxRegs.cycle += 1;
 
 
 	t = mem >> 16;
@@ -173,7 +173,7 @@ u16 psxMemRead16(u32 mem) {
 	u32 t;
 
 
-	psxRegs.cycle += 2;
+	psxRegs.cycle += 1;
 
 	
 	t = mem >> 16;
