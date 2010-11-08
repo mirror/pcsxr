@@ -60,8 +60,8 @@ static u32 gpuDmaChainSize(u32 addr) {
 
 	lUsedAddr[0] = lUsedAddr[1] = lUsedAddr[2] = 0xffffff;
 
-	// initial linked list ptr (bytes)
-	size = 4;
+	// initial linked list ptr (word)
+	size = 1;
 
 	do {
 		addr &= 0x1ffffc;
@@ -70,11 +70,11 @@ static u32 gpuDmaChainSize(u32 addr) {
 		if (CheckForEndlessLoop(addr)) break;
 
 		// # 32-bit blocks to transfer
-		size += psxMu8( addr + 3 ) * 4;
+		size += psxMu8( addr + 3 );
 
 		// next 32-bit pointer
 		addr = psxMu32( addr & ~0x3 ) & 0xffffff;
-		size += 4;
+		size += 1;
 	} while (addr != 0xffffff);
 
 	return size;
@@ -86,22 +86,6 @@ int gpuReadStatus() {
 
 	// GPU plugin
 	hard = GPU_readStatus();
-
-
-#if 0
-	// ePSXe 1.7.0 - Chrono Cross interlace hack
-	if (hard & 0x400000) {
-		switch (Config.PsxType) {
-			case PSX_TYPE_NTSC:
-				if (hSyncCount > 262 - 240) hard ^= 0x80000000;
-				break;
-
-			case PSX_TYPE_PAL:
-				if (hSyncCount > 312 - 256) hard ^= 0x80000000;
-				break;
-		}
-	}
-#endif
 
 
 	// NOTE:
@@ -177,14 +161,11 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 #ifdef PSXDMA_LOG
 			PSXDMA_LOG("*** DMA 2 - GPU dma chain *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
 #endif
-			GPU_dmaChain((u32 *)psxM, madr & 0x1fffff);
 
-			//size = gpuDmaChainSize(madr);
-
-			// HACK: Rebel Assault 2 wants longer time (stage 6)
-			size = gpuDmaChainSize(madr) * 1.5;
+			// HACK: Vampire Hunter D (title screen)
+			size = gpuDmaChainSize(madr) * 2.5;
 			
-			GPUDMA_INT(size / 4);
+			GPUDMA_INT(size);
 			return;
 
 #ifdef PSXDMA_LOG
@@ -199,6 +180,23 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 }
 
 void gpuInterrupt() {
+	/*
+	GPU processing during DMA2 chains
+
+	1 - never updates linked list (99/100 games)
+	
+	2 - updates linked list -before- GPU gets to it
+	- Einhander: fixes art gallery images + post-gallery corruption (2+ cycles / 4 bytes)
+	- Vampire Hunter D: shows title screen (3+ cycles / 4 bytes)
+
+	3 - updates linked list -after- GPU reads it, -before- chain finishes
+	- ??? (display would fail this test)
+	*/
+
+	if( HW_DMA2_CHCR == 0x01000401 )
+		GPU_dmaChain((u32 *)psxM, HW_DMA2_MADR & 0x1fffff);
+
+
 	HW_DMA2_CHCR &= SWAP32(~0x01000000);
 	DMA_INTERRUPT(2);
 }
