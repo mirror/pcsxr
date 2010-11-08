@@ -477,6 +477,14 @@ void psxDma0(u32 adr, u32 bcr, u32 chcr) {
 
 			// input data
 			MDECINDMA_INT( mdec.rlsize );
+
+      
+			// Maximum Force: restart dma1 stall
+			// - fixes movies
+
+			if( HW_DMA1_CHCR & SWAP32(0x01000000) ) {
+				psxDma1( HW_DMA1_MADR, HW_DMA1_BCR, HW_DMA1_CHCR );
+			}
       return;
 			
 
@@ -527,19 +535,21 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 	if (chcr != 0x01000200) return;
 
 
-	// Fear Effect 2: check for infinite output stall
-	// - fixes art gallery corruption, auto-pause
+	in_ptr = (u8 *)mdec.rl;
 
-	if( mdec.rlsize < 0 ) {
-		// stall dma1 forever
-		MDECOUTDMA_INT( 0x7fffffff );
+	size = (bcr >> 16) * (bcr & 0xffff);
+
+
+	// Maximum Force: stall dma1 until dma0 sent
+	// - fixes movies
+
+	if( mdec.rlsize <= 0 )
+	{
+		// signal immediate stall
+		mdec.reg1 &= ~MDEC1_BUSY;
 		return;
 	}
 
-	in_ptr = (u8 *)mdec.rl;
-
-	
-	size = (bcr >> 16) * (bcr & 0xffff);
 
 	image = (u16 *)PSXM(adr);
 
@@ -581,14 +591,17 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 	}
 
 
-	// Fear Effect 2: check for infinite output stall
+	// Fear Effect 2: check for input drain, stalling output
 	// - fixes art gallery corruption, auto-pause
 
 	mdec.rlsize -= ((u8 *) mdec.rl - in_ptr) / 4;
-	if( mdec.rlsize < 0 ) {
-		// stall dma1 forever
-		dmacnt = 0x7fffffff;
+
+#ifdef CDR_LOG
+	if( mdec.rlsize < 0 )
+	{
+		CDR_LOG( "dma1 infinite stall - no input left!!\n" );
 	}
+#endif
 
 	
 	/*
@@ -616,10 +629,11 @@ void mdec1Interrupt() {
 	CDR_LOG("mdec1Interrupt\n");
 #endif
 	if (HW_DMA1_CHCR & SWAP32(0x01000000)) {
-		// stall forever
-		if( psxRegs.intCycle[PSXINT_MDECOUTDMA].cycle == 0x7fffffff )
+		// Fear Effect 2: stall dma1 forever
+		// - fixes art gallery
+		if( mdec.rlsize < 0 )
 		{
-			MDECOUTDMA_INT( 0x7fffffff );
+			mdec.reg1 &= ~MDEC1_BUSY;
 			return;
 		}
 
