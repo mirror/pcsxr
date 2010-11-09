@@ -65,7 +65,7 @@ long CALLBACK CDR__getStatus(struct CdrStat *stat);
 extern void *hCDRDriver;
 
 struct trackinfo {
-	enum {DATA, CDDA} type;
+	enum {DATA=1, CDDA} type;
 	u8 start[3];		// MSF-format
 	u8 length[3];		// MSF-format
 };
