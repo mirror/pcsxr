@@ -35,7 +35,7 @@ unsigned short sSetMask = 0;
 unsigned long  lSetMask = 0;
 int            iDesktopCol = 16;
 int            iShowFPS = 0;
-int            iWinSize; 
+int            iWinSize;
 int            iMaintainAspect = 0;
 int            iUseNoStretchBlt = 0;
 int            iFastFwd = 0;
@@ -87,21 +87,34 @@ static __inline int GetResult1(DWORD A, DWORD B, DWORD C, DWORD D, DWORD E)
  int r = 0;
  if (A == C) x+=1; else if (B == C) y+=1;
  if (A == D) x+=1; else if (B == D) y+=1;
- if (x <= 1) r+=1; 
+ if (x <= 1) r+=1;
  if (y <= 1) r-=1;
  return r;
 }
 
-static __inline int GetResult2(DWORD A, DWORD B, DWORD C, DWORD D, DWORD E) 
+static __inline int GetResult2(DWORD A, DWORD B, DWORD C, DWORD D, DWORD E)
 {
- int x = 0; 
+ int x = 0;
  int y = 0;
  int r = 0;
  if (A == C) x+=1; else if (B == C) y+=1;
  if (A == D) x+=1; else if (B == D) y+=1;
- if (x <= 1) r-=1; 
+ if (x <= 1) r-=1;
  if (y <= 1) r+=1;
  return r;
+}
+
+/* Convert RGB to YUV */
+__inline uint32_t rgb_to_yuv(uint8_t R, uint8_t G, uint8_t B) {
+    uint8_t Y = min(abs(R * 2104 + G * 4130 + B * 802 + 4096 + 131072) >> 13, 235);
+    uint8_t U = min(abs(R * -1214 + G * -2384 + B * 3598 + 4096 + 1048576) >> 13, 240);
+    uint8_t V = min(abs(R * 3598 + G * -3013 + B * -585 + 4096 + 1048576) >> 13, 240);
+
+#ifdef __BIG_ENDIAN__
+    return Y << 24 | U << 16 | Y << 8 | V;
+#else
+    return Y << 24 | V << 16 | Y << 8 | U;
+#endif
 }
 
 #define colorMask8     0x00FEFEFE
@@ -334,7 +347,7 @@ void Std2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
        if((colorA == colorD) && (colorB != colorC))
         {
          if(((colorA == colorE) && (colorB == colorL)) ||
-            ((colorA == colorC) && (colorA == colorF) && 
+            ((colorA == colorC) && (colorA == colorF) &&
              (colorB != colorE) && (colorB == colorJ)))
           {
            product = colorA;
@@ -345,7 +358,7 @@ void Std2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
           }
 
          if(((colorA == colorG) && (colorC == colorO)) ||
-            ((colorA == colorB) && (colorA == colorH) && 
+            ((colorA == colorB) && (colorA == colorH) &&
              (colorG != colorC) && (colorC == colorM)))
           {
            product1 = colorA;
@@ -360,7 +373,7 @@ void Std2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
        if((colorB == colorC) && (colorA != colorD))
         {
          if(((colorB == colorF) && (colorA == colorH)) ||
-            ((colorB == colorE) && (colorB == colorD) && 
+            ((colorB == colorE) && (colorB == colorD) &&
              (colorA != colorF) && (colorA == colorI)))
           {
            product = colorB;
@@ -371,7 +384,7 @@ void Std2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
           }
 
          if(((colorC == colorH) && (colorA == colorF)) ||
-            ((colorC == colorG) && (colorC == colorD) && 
+            ((colorC == colorG) && (colorC == colorD) &&
              (colorA != colorH) && (colorA == colorI)))
           {
            product1 = colorC;
@@ -417,7 +430,7 @@ void Std2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
         {
          product2 = Q_INTERPOLATE8(colorA, colorB, colorC, colorD);
 
-         if ((colorA == colorC) && (colorA == colorF) && 
+         if ((colorA == colorC) && (colorA == colorF) &&
              (colorB != colorE) && (colorB == colorJ))
           {
            product = colorA;
@@ -432,13 +445,13 @@ void Std2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
            product = INTERPOLATE8(colorA, colorB);
           }
 
-         if ((colorA == colorB) && (colorA == colorH) && 
+         if ((colorA == colorB) && (colorA == colorH) &&
              (colorG != colorC) && (colorC == colorM))
           {
            product1 = colorA;
           }
          else
-         if ((colorC == colorG) && (colorC == colorD) && 
+         if ((colorC == colorG) && (colorC == colorD) &&
              (colorA != colorH) && (colorA == colorI))
           {
            product1 = colorC;
@@ -480,7 +493,7 @@ void SuperEagle_ex8(unsigned char *srcPtr, DWORD srcPitch,
  int iXA,iXB,iXC,iYA,iYB,iYC,finish;
  DWORD color4, color5, color6;
  DWORD color1, color2, color3;
- DWORD colorA1, colorA2, 
+ DWORD colorA1, colorA2,
        colorB1, colorB2,
        colorS1, colorS2;
  DWORD product1a, product1b,
@@ -540,7 +553,7 @@ void SuperEagle_ex8(unsigned char *srcPtr, DWORD srcPitch,
           {
            product1a = INTERPOLATE8(color5, color6);
           }
- 
+
          if((color6 == colorS2) ||
             (color2 == colorA1))
           {
@@ -833,7 +846,7 @@ void Scale3x_ex8(unsigned char *srcPtr, DWORD srcPitch,
 	int count = height;
 
 	int dstPitch = srcPitch*3;
-	int dstRowPixels = dstPitch>>2;	
+	int dstRowPixels = dstPitch>>2;
 
 	finalw=width*3;
 	finalh=height*3;
@@ -889,9 +902,9 @@ static Colormap      colormap;
 Window        window;
 static GC            hGC;
 static XImage      * Ximage;
-static XvImage     * XCimage; 
-static XImage      * XFimage; 
-static XImage      * XPimage=0 ; 
+static XvImage     * XCimage;
+static XImage      * XFimage;
+static XImage      * XPimage=0 ;
 char *               Xpixels;
 char *               pCaptionText;
 
@@ -930,7 +943,7 @@ void DestroyDisplay(void)
  if(display)
   {
    XFreeColormap(display, colormap);
-   if(hGC) 
+   if(hGC)
     {
      XFreeGC(display,hGC);
      hGC = 0;
@@ -940,16 +953,16 @@ void DestroyDisplay(void)
      XDestroyImage(Ximage);
      Ximage=0;
     }
-   if(XCimage) 
-    { 
-     XFree(XCimage); 
-     XCimage=0; 
-    } 
-   if(XFimage) 
-    { 
+   if(XCimage)
+    {
+     XFree(XCimage);
+     XCimage=0;
+    }
+   if(XFimage)
+    {
      XDestroyImage(XFimage);
-     XFimage=0; 
-    } 
+     XFimage=0;
+    }
 
 	XShmDetach(display,&shminfo);
 	shmdt(shminfo.shmaddr);
@@ -1177,7 +1190,7 @@ if (!myvisual)
  colormap=XCreateColormap(display,root_window_id,
                           myvisual->visual,AllocNone);
 
- winattr.background_pixel=0;
+ winattr.background_pixel=BlackPixelOfScreen(screen);
  winattr.border_pixel=WhitePixelOfScreen(screen);
  winattr.bit_gravity=ForgetGravity;
  winattr.win_gravity=NorthWestGravity;
@@ -1224,7 +1237,7 @@ if (!myvisual)
 
  XDefineCursor(display,window,cursor);
 
- // hack to get rid of window title bar 
+ // hack to get rid of window title bar
  if (fx)
   {
    mwmhints.flags=MWM_HINTS_DECORATIONS;
@@ -1279,7 +1292,7 @@ if (!myvisual)
  gcv.graphics_exposures = False;
  hGC = XCreateGC(display,window,
                  GCGraphicsExposures, &gcv);
- if(!hGC) 
+ if(!hGC)
   {
    fprintf(stderr,"No gfx context!!!\n");
    DestroyDisplay();
@@ -1287,17 +1300,34 @@ if (!myvisual)
 
 
 
- Xpixels = (char *)malloc(220*15*4);
- memset(Xpixels,255,220*15*4);
- XFimage = XCreateImage(display,myvisual->visual, 
-                      depth, ZPixmap, 0, 
-                      (char *)Xpixels,  
-                      220, 15, 
-                      depth>16 ? 32 : 16,
-                      0); 
+ Xpixels = (char *)malloc(600*15*4);
+ int _i;
+
+ uint32_t color;
+ if(use_yuv)
+	 color = rgb_to_yuv(0x00, 0x00, 0xff);
+ else
+	 color = 255;
+
+ for(i = 0; i < 600*15; ++i)
+	 ((uint32_t *)Xpixels)[i] = color;
+
+ XFimage = XCreateImage(display,myvisual->visual,
+                      depth, ZPixmap, 0,
+                      (char *)Xpixels,
+                      600, 15,
+                      depth>16 ? 32 : 16, 0);
+
+ /* fix the green back ground in YUV mode */
+ if(use_yuv)
+	 color = rgb_to_yuv(0x00, 0x00, 0x00);
+ else
+	 color = 0;
 
  Xpixels = (char *)malloc(8*8*4);
- memset(Xpixels,0,8*8*4);
+ for(i = 0; i < 8*8; ++i)
+	 ((uint32_t *)Xpixels)[i] = color;
+
  XCimage = XvCreateImage(display,xv_port,xv_id,
                       (char *)Xpixels, 8, 8);
 
@@ -1312,10 +1342,16 @@ Big(est?) PSX res: 640x512
 shminfo.shmid = shmget(IPC_PRIVATE, 640*512*4*3*3, IPC_CREAT | 0777);
 shminfo.shmaddr = shmat(shminfo.shmid, 0, 0);
 shminfo.readOnly = 0;
- 
+
  if (!XShmAttach(display, &shminfo)) {
     printf("XShmAttach failed !\n");
     exit (-1);
+ }
+
+ {
+   uint32_t *pShmaddr = (uint32_t *)shminfo.shmaddr;
+   for(i = 0; i < 640*512*3*3; ++i)
+	 pShmaddr[i] = color;
  }
 }
 
@@ -1367,7 +1403,7 @@ void BlitScreen32(unsigned char *surf, int32_t x, int32_t y)
      for (row = 0; row < dx; row++)
       {
        lu = *((uint32_t *)pD);
-       destpix[row] = 
+       destpix[row] =
           0xff000000 | (RED(lu) << 16) | (GREEN(lu) << 8) | (BLUE(lu));
        pD += 3;
       }
@@ -1382,12 +1418,14 @@ void BlitScreen32(unsigned char *surf, int32_t x, int32_t y)
      for (row = 0; row < dx; row++)
       {
        s = GETLE16(&psxVuw[startxy++]);
-       destpix[row] = 
+       destpix[row] =
           (((s << 19) & 0xf80000) | ((s << 6) & 0xf800) | ((s >> 7) & 0xf8)) | 0xff000000;
       }
     }
   }
 }
+
+
 
 void BlitToYUV(unsigned char * surf,int32_t x,int32_t y)
 {
@@ -1454,15 +1492,8 @@ void BlitToYUV(unsigned char * surf,int32_t x,int32_t y)
        G = GREEN(lu);
        B = BLUE(lu);
 
-       Y = min(abs(R * 2104 + G * 4130 + B * 802 + 4096 + 131072) >> 13, 235);
-       U = min(abs(R * -1214 + G * -2384 + B * 3598 + 4096 + 1048576) >> 13, 240);
-       V = min(abs(R * 3598 + G * -3013 + B * -585 + 4096 + 1048576) >> 13, 240);
+       destpix[row] = rgb_to_yuv(R, G, B);
 
-#ifdef __BIG_ENDIAN__
-       destpix[row] = Y << 24 | U << 16 | Y << 8 | V;
-#else
-       destpix[row] = Y << 24 | V << 16 | Y << 8 | U;
-#endif
        pD += 3;
       }
     }
@@ -1481,15 +1512,8 @@ void BlitToYUV(unsigned char * surf,int32_t x,int32_t y)
        G = (s >> 2) &0xf8;
        B = (s >> 7) &0xf8;
 
-       Y = min(abs(R * 2104 + G * 4130 + B * 802 + 4096 + 131072) >> 13, 235);
-       U = min(abs(R * -1214 + G * -2384 + B * 3598 + 4096 + 1048576) >> 13, 240);
-       V = min(abs(R * 3598 + G * -3013 + B * -585 + 4096 + 1048576) >> 13, 240);
+       destpix[row] = rgb_to_yuv(R, G, B);
 
-#ifdef __BIG_ENDIAN__
-       destpix[row] = Y << 24 | U << 16 | Y << 8 | V;
-#else
-       destpix[row] = Y << 24 | V << 16 | Y << 8 | U;
-#endif
       }
     }
   }
@@ -1531,21 +1555,30 @@ void RGB2YUV(uint32_t *s, int width, int height, uint32_t *d)
 
 extern time_t tStart;
 
-//Note: dest x,y,w,h are both input and output variables
-inline void MaintainAspect(unsigned int *dx,unsigned int *dy,unsigned int *dw,unsigned int *dh)
+/* compute the position and the size of output screen
+ * The aspect of the psx output mode is preserved.
+ * Note: dest dx,dy,dw,dh are both input and output variables
+ */
+__inline void MaintainAspect(uint32_t * dx, uint32_t * dy, uint32_t * dw, uint32_t * dh)
 {
-	//Currently just 4/3 aspect ratio
-	int t;
 
-	if (*dw * 3 > *dh * 4) {
-		t = *dh * 4.0f / 3;	//new width aspect
-		*dx = (*dw - t) / 2;	//centering
-		*dw = t;
+	double ratio_x = ((double)*dw) / ((double)PSXDisplay.DisplayMode.x) ;
+	double ratio_y = ((double)*dh) / ((double)PSXDisplay.DisplayMode.y);
+
+	double ratio;
+	if (ratio_x < ratio_y) {
+		ratio = ratio_x;
 	} else {
-		t = *dw * 3.0f / 4;
-		*dy = (*dh - t) / 2;
-		*dh = t;
+		ratio = ratio_y;
 	}
+
+	uint32_t tw = (uint32_t) floor(PSXDisplay.DisplayMode.x * ratio);
+	uint32_t th = (uint32_t) floor(PSXDisplay.DisplayMode.y * ratio);
+
+	*dx = (uint32_t) floor((*dw - tw) / 2.0);
+	*dy = (uint32_t) floor((*dh - th) / 2.0);
+	*dw = tw;
+	*dh = th;
 }
 
 void DoBufferSwap(void)
@@ -1588,7 +1621,7 @@ void DoBufferSwap(void)
 
 	xvi->data = shminfo.shmaddr;
 
-	screen=DefaultScreenOfDisplay(display);	
+	screen=DefaultScreenOfDisplay(display);
 	//screennum = DefaultScreen(display);
 
 	if (!iWindowMode) {
@@ -1599,51 +1632,57 @@ void DoBufferSwap(void)
 	dstx = 0;
 	dsty = 0;
 
+	if (ulKeybits&KEY_SHOWFPS)
+	{
+		/* FPS output take 15 pxl at top */
+		_h -= 15;
+	}
+
 	if (iMaintainAspect)
 		MaintainAspect(&dstx, &dsty, &_w, &_h);
 
-	if (ulKeybits&KEY_SHOWFPS)	//to avoid flicker, don't paint overtop FPS bar
+	if (ulKeybits&KEY_SHOWFPS)
 	{
-		srcy = 15 * finalh / _h;
+		/* leave space for FPS output */
 		dsty += 15;
 	}
 
-	XvShmPutImage(display, xv_port, window, hGC, xvi, 
-		0,srcy,		//src x,y
+	XvShmPutImage(display, xv_port, window, hGC, xvi,
+		0,0,		//src x,y
 		finalw,finalh,	//src w,h
 		dstx,dsty,	//dst x,y
-		_w,_h,		//dst w,h
+		_w, _h,		//dst w,h
 		1
 		);
 
-	if(ulKeybits&KEY_SHOWFPS) //DisplayText();               // paint menu text 
+	if(ulKeybits&KEY_SHOWFPS) //DisplayText();               // paint menu text
 	{
 		if(szDebugText[0] && ((time(NULL) - tStart) < 2))
 		{
 			strcpy(szDispBuf,szDebugText);
 		}
-		else 
+		else
 		{
 			szDebugText[0]=0;
 			strcat(szDispBuf,szMenuBuf);
 		}
 
-		//XPutImage(display,window,hGC, XFimage, 
+		//XPutImage(display,window,hGC, XFimage,
 		//          0, 0, 0, 0, 220,15);
 		XFree(xvi);
-		xvi = XvCreateImage(display, xv_port, xv_id, XFimage->data, 220, 15);
-		XvPutImage(display, xv_port, window, hGC, xvi, 
+		xvi = XvCreateImage(display, xv_port, xv_id, XFimage->data, 600, 15);
+		XvPutImage(display, xv_port, window, hGC, xvi,
 			0,0,		//src x,y
-			220,15,		//src w,h
+			600,15,		//src w,h
 			0,0,		//dst x,y
-			220,15		//dst w,h
+			600,15		//dst w,h
 			);
 
 		XDrawString(display,window,hGC,2,13,szDispBuf,strlen(szDispBuf));
 	}
-	
+
 	//if(XPimage) DisplayPic();
-	
+
 
 	XFree(xvi);
 }
@@ -1737,7 +1776,7 @@ void Xcleanup()                                        // X CLEANUP
 {
  CloseMenu();
 
- if(iUseNoStretchBlt>0) 
+ if(iUseNoStretchBlt>0)
   {
    if(pBackBuffer)  free(pBackBuffer);
    pBackBuffer=0;
@@ -1816,7 +1855,7 @@ void CreatePic(unsigned char * pMem)
 
  XPimage = XCreateImage(display,myvisual->visual,
                         depth, ZPixmap, 0,
-                        (char *)p, 
+                        (char *)p,
                         128, 96,
                         depth>16 ? 32 : 16,
                         0);
@@ -1824,13 +1863,13 @@ void CreatePic(unsigned char * pMem)
 
 void DestroyPic(void)
 {
- if(XPimage) 
+ if(XPimage)
   { /*
    XPutImage(display,window,hGC, XCimage,
 	  0, 0, 0, 0, iResX, iResY);*/
    XDestroyImage(XPimage);
-   XPimage=0; 
-  } 
+   XPimage=0;
+  }
 }
 
 void DisplayPic(void)
@@ -1851,14 +1890,14 @@ static void hq2x_32_def(uint32_t * dst0, uint32_t * dst1, const uint32_t * src0,
 {
 	static unsigned char cache_vert_mask[640];
 	unsigned char cache_horiz_mask = 0;
-	
+
 	unsigned i;
 	unsigned char mask;
 	uint32_t  c[9];
 
 	if (src0 == src1)	//processing first row
-		memset(cache_vert_mask, 0, count);	
-	
+		memset(cache_vert_mask, 0, count);
+
 	for(i=0;i<count;++i) {
 		c[1] = src0[0];
 		c[4] = src1[0];
@@ -1998,7 +2037,7 @@ static void hq3x_32_def(uint32_t*  dst0, uint32_t*  dst1, uint32_t*  dst2, const
 	uint32_t  c[9];
 
 	if (src0 == src1)	//processing first row
-		memset(cache_vert_mask, 0, count);	
+		memset(cache_vert_mask, 0, count);
 
 	for(i=0;i<count;++i) {
 		c[1] = src0[0];
@@ -2026,7 +2065,7 @@ static void hq3x_32_def(uint32_t*  dst0, uint32_t*  dst1, uint32_t*  dst2, const
 		}
 
 		mask = 0;
-		
+
 		mask |= interp_32_diff(c[0], c[4]) << 0;
 		mask |= cache_vert_mask[i];
 		mask |= interp_32_diff(c[2], c[4]) << 2;
