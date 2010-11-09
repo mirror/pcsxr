@@ -589,10 +589,25 @@ static gchar *Open_Iso_Proc() {
 		gchar *path = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(chooser));
 		strcpy(current_folder, path);
 		g_free(path);
-		filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (chooser));
+		GSList * l = gtk_file_chooser_get_filenames(GTK_FILE_CHOOSER (chooser));
+		if(l) {
+		filename = l->data;
+		/* free useless data */
+		GSList * ll = l;
+		while(l->next) {
+			l = l->next;
+			g_free(l->data);
+		}
+		g_slist_free(ll);
+
 		gtk_widget_destroy(GTK_WIDGET(chooser));
 		while (gtk_events_pending()) gtk_main_iteration();
 		return filename;
+		} else {
+			gtk_widget_destroy (GTK_WIDGET(chooser));
+			while (gtk_events_pending()) gtk_main_iteration();
+			return NULL;
+		}
 	} else {
 		gtk_widget_destroy (GTK_WIDGET(chooser));
 		while (gtk_events_pending()) gtk_main_iteration();
