@@ -1921,6 +1921,7 @@ static void recSW() {
 #ifndef __WIN32__
 					resp+= 4;
 #endif
+					return;
 			}
 		}
 //		SysPrintf("unhandled w32 %x\n", addr);
