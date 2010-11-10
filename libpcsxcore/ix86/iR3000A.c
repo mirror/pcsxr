@@ -1756,6 +1756,8 @@ static void recSB() {
 		u32 addr = iRegs[_Rs_].k + _Imm_;
 		int t = addr >> 16;
 
+#if 0
+		// V-Rally 2 - no tree sprite corruption
 		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
 			if (IsConst(_Rt_)) {
 				MOV8ItoM((u32)&psxM[addr & 0x1fffff], (u8)iRegs[_Rt_].k);
@@ -1765,6 +1767,7 @@ static void recSB() {
 			}
 			return;
 		}
+#endif
 		if (t == 0x1f80 && addr < 0x1f801000) {
 			if (IsConst(_Rt_)) {
 				MOV8ItoM((u32)&psxH[addr & 0xfff], (u8)iRegs[_Rt_].k);
@@ -1797,6 +1800,8 @@ static void recSH() {
 		u32 addr = iRegs[_Rs_].k + _Imm_;
 		int t = addr >> 16;
 
+#if 0
+		// V-Rally 2 - no tree sprite corruption
 		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
 			if (IsConst(_Rt_)) {
 				MOV16ItoM((u32)&psxM[addr & 0x1fffff], (u16)iRegs[_Rt_].k);
@@ -1806,6 +1811,7 @@ static void recSH() {
 			}
 			return;
 		}
+#endif
 		if (t == 0x1f80 && addr < 0x1f801000) {
 			if (IsConst(_Rt_)) {
 				MOV16ItoM((u32)&psxH[addr & 0xfff], (u16)iRegs[_Rt_].k);
@@ -1853,6 +1859,8 @@ static void recSW() {
 		u32 addr = iRegs[_Rs_].k + _Imm_;
 		int t = addr >> 16;
 
+#if 0
+		// V-Rally 2 - no tree sprite corruption
 		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
 			if (IsConst(_Rt_)) {
 				MOV32ItoM((u32)&psxM[addr & 0x1fffff], iRegs[_Rt_].k);
@@ -1862,6 +1870,7 @@ static void recSW() {
 			}
 			return;
 		}
+#endif
 		if (t == 0x1f80 && addr < 0x1f801000) {
 			if (IsConst(_Rt_)) {
 				MOV32ItoM((u32)&psxH[addr & 0xfff], iRegs[_Rt_].k);
