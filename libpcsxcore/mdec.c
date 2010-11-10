@@ -588,7 +588,9 @@ void mdec1Interrupt() {
 #ifdef CDR_LOG
 	CDR_LOG("mdec1Interrupt\n");
 #endif
-	/* in that case we have done all decoding stuff
+	/* Author: gschwind
+	 * 
+	 * in that case we have done all decoding stuff
 	 * Note that : each block end with 0xfe00 flags
 	 * the list of blocks end with the same 0xfe00 flags
 	 * data loock like :
