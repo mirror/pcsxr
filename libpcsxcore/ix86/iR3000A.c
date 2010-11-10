@@ -2046,12 +2046,14 @@ void recSWL() {
 		u32 addr = iRegs[_Rs_].k + _Imm_;
 		int t = addr >> 16;
 
+#if 0
 		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
 			MOV32MtoR(EAX, (u32)&psxM[addr & 0x1ffffc]);
 			iSWLk(addr & 3);
 			MOV32RtoM((u32)&psxM[addr & 0x1ffffc], EAX);
 			return;
 		}
+#endif
 		if (t == 0x1f80 && addr < 0x1f801000) {
 			MOV32MtoR(EAX, (u32)&psxH[addr & 0xffc]);
 			iSWLk(addr & 3);
@@ -2126,12 +2128,14 @@ void recSWR() {
 		u32 addr = iRegs[_Rs_].k + _Imm_;
 		int t = addr >> 16;
 
+#if 0
 		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
 			MOV32MtoR(EAX, (u32)&psxM[addr & 0x1ffffc]);
 			iSWRk(addr & 3);
 			MOV32RtoM((u32)&psxM[addr & 0x1ffffc], EAX);
 			return;
 		}
+#endif
 		if (t == 0x1f80 && addr < 0x1f801000) {
 			MOV32MtoR(EAX, (u32)&psxH[addr & 0xffc]);
 			iSWRk(addr & 3);
