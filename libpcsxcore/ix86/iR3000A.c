@@ -451,6 +451,24 @@ static void recExecuteBlock() {
 }
 
 static void recClear(u32 Addr, u32 Size) {
+	u32 bank,offset;
+
+	bank = Addr >> 24;
+	offset = Addr & 0xffffff;
+
+
+	// Pitfall 3D - clear dynarec slots that contain 'stale' ram data
+	// - fixes stage 1 loading crash
+	if( bank == 0x80 || bank == 0xa0 || bank == 0x00 ) {
+		offset &= 0x1fffff;
+
+		if( offset >= 500 * 4 )
+			memset((void*)PC_REC(Addr - 500 * 4), 0, 500 * 4);
+		else
+			memset((void*)PC_REC(Addr - offset), 0, offset);
+	}
+	
+	
 	memset((void*)PC_REC(Addr), 0, Size * 4);
 }
 
