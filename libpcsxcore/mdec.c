@@ -642,14 +642,14 @@ void mdec1Interrupt() {
 		// PSXCLK / 60 or PSXCLK / 50 since the bug happened at end of frame.
 		// PSXCLK / 500 seems good for FF9.
 		// CAUTION: commented interrupt-handling may lead to problems, keep an eye ;-)
-		MDECOUTDMA_INT(PSXCLK / 400);
+		//MDECOUTDMA_INT(PSXCLK / 400);
 //		MDECOUTDMA_INT(psxRegs.intCycle[PSXINT_MDECOUTDMA].cycle * 8);
 
 		HW_DMA1_CHCR &= SWAP32(~0x01000000);
 		DMA_INTERRUPT(1);
 
 
-#if 0
+#if 1
 		/*
 		Destruction Derby Raw: stall 4+ blocks
 		- Fixes boot movies
