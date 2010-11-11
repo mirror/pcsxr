@@ -189,7 +189,7 @@ void idct(int *block,int used_col) {
 // mdec0: command register
 #define MDEC0_STP			0x02000000
 #define MDEC0_RGB24			0x08000000
-#define MDEC0_SIZE_MASK		0xFFFF
+#define MDEC0_SIZE_MASK		0x0000FFFF
 
 // mdec1: status register
 #define MDEC1_BUSY			0x20000000
@@ -199,11 +199,18 @@ void idct(int *block,int used_col) {
 #define MDEC1_STP			0x00800000
 #define MDEC1_RESET			0x80000000
 
+struct _pending_dma1 {
+	u32 adr;
+	u32 bcr;
+	u32 chcr;
+};
+
 struct {
-    u32 reg0;
-    u32 reg1;
-    unsigned short *rl;
-    int rlsize;
+	u32 reg0;
+	u32 reg1;
+	u16 * rl;
+	u16 * rl_end;
+	struct _pending_dma1 pending_dma1;
 } mdec;
 
 static int iq_y[DSIZE2], iq_uv[DSIZE2];
@@ -420,72 +427,60 @@ void mdecInit(void) {
 
 // command register
 void mdecWrite0(u32 data) {
-#ifdef CDR_LOG
-	CDR_LOG("mdec0 write %08x\n", data);
-#endif
 	mdec.reg0 = data;
 }
 
 u32 mdecRead0(void) {
-#ifdef CDR_LOG
-	CDR_LOG("mdec0 read %08x\n", mdec.reg0);
-#endif
-	// mame is returning 0
 	return mdec.reg0;
 }
 
 // status register
 void mdecWrite1(u32 data) {
-#ifdef CDR_LOG
-	CDR_LOG("mdec1 write %08x\n", data);
-#endif
 	if (data & MDEC1_RESET) { // mdec reset
 		mdec.reg0 = 0;
 		mdec.reg1 = 0;
+		mdec.pending_dma1.adr = 0;
 	}
 }
 
 u32 mdecRead1(void) {
 	u32 v = mdec.reg1;
-	v |= (mdec.reg0 & MDEC0_STP) ? MDEC1_STP : 0;
-	v |= (mdec.reg0 & MDEC0_RGB24) ? MDEC1_RGB24 : 0;
-#ifdef CDR_LOG
-	CDR_LOG("mdec1 read %08x\n", v);
-#endif
 	return v;
 }
 
 void psxDma0(u32 adr, u32 bcr, u32 chcr) {
 	int cmd = mdec.reg0;
 	int size;
-	
-#ifdef CDR_LOG
-	CDR_LOG("DMA0 %08x %08x %08x\n", adr, bcr, chcr);
-#endif
 
 	if (chcr != 0x01000201) {
-		// printf("chcr != 0x01000201\n");
 		return;
 	}
+
+	/* mdec is STP till dma0 is released */
+	mdec.reg1 |= MDEC1_STP;
 
 	size = (bcr >> 16) * (bcr & 0xffff);
 
 	switch (cmd >> 28) {
 		case 0x3: // decode
-			mdec.rl = (u16 *)PSXM(adr);
-			mdec.rlsize = mdec.reg0 & MDEC0_SIZE_MASK;
+			mdec.rl = (u16 *) PSXM(adr);
+			/* now the mdec is busy till all data are decoded */
+			mdec.reg1 |= MDEC1_BUSY;
+			/* detect the end of decoding */
+			mdec.rl_end = mdec.rl + (size * 2);
 
-			// input data
-			MDECINDMA_INT( mdec.rlsize );
-
-      
-			// Maximum Force: restart dma1 stall
-			// - fixes movies
-
-			if( HW_DMA1_CHCR & SWAP32(0x01000000) ) {
-				psxDma1( HW_DMA1_MADR, HW_DMA1_BCR, HW_DMA1_CHCR );
+			/* sanity check */
+			if(mdec.rl_end <= mdec.rl) {
+				MDECINDMA_INT( size / 4 );
+				return;
 			}
-      return;
+
+			/* process the pending dma1 */
+			if(mdec.pending_dma1.adr){
+				psxDma1(mdec.pending_dma1.adr, mdec.pending_dma1.bcr, mdec.pending_dma1.chcr);
+			}
+			mdec.pending_dma1.adr = 0;
+			return;
 			
 
 		case 0x4: // quantization table upload
@@ -526,177 +521,83 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 	int blk[DSIZE2 * 6];
 	unsigned short *image;
 	int size, dmacnt;
-	u8 *in_ptr;
-
-#ifdef CDR_LOG
-	CDR_LOG("DMA1 %08x %08x %08x (cmd = %08x)\n", adr, bcr, chcr, mdec.reg0);
-#endif
 
 	if (chcr != 0x01000200) return;
 
-
-	in_ptr = (u8 *)mdec.rl;
-
 	size = (bcr >> 16) * (bcr & 0xffff);
 
-
-	// Maximum Force: stall dma1 until dma0 sent
-	// - fixes movies
-
-	if( mdec.rlsize <= 0 )
-	{
-		// signal immediate stall
-		mdec.reg1 &= ~MDEC1_BUSY;
-		return;
-	}
-
+	if (!(mdec.reg1 & MDEC1_BUSY)) {
+		/* add to pending */
+		mdec.pending_dma1.adr = adr;
+		mdec.pending_dma1.bcr = bcr;
+		mdec.pending_dma1.chcr = chcr;
+		/* do not free the dma */
+	} else {
 
 	image = (u16 *)PSXM(adr);
 
 	if (mdec.reg0 & MDEC0_RGB24) { // 15-b decoding
-		dmacnt = 0;
-
-
 		size = size / ((16 * 16) / 2);
+		dmacnt = size * (16 * 16 * 2);
 		for (; size > 0; size--, image += (16 * 16)) {
 			mdec.rl = rl2blk(blk, mdec.rl);
 			yuv2rgb15(blk, image);
-
-			dmacnt++;
 		}
-
-
-		// macroblock size
-		dmacnt *= (16 * 16 * 2);
-
-		// macroblock cycles
-		dmacnt *= 1;
 	} else { // 24-b decoding
-		dmacnt = 0;
-
-
 		size = size / ((24 * 16) / 2);
+		dmacnt = size * (16 * 16 * 3);
 		for (; size > 0; size--, image += (24 * 16)) {
 			mdec.rl = rl2blk(blk, mdec.rl);
 			yuv2rgb24(blk, (u8 *)image);
-
-			dmacnt++;
 		}
-
-		// macroblock size
-		dmacnt *= (16 * 16 * 3);
-
-		// macroblock cycles
-		dmacnt *= 1;
 	}
-
-
-	// Fear Effect 2: check for input drain, stalling output
-	// - fixes art gallery corruption, auto-pause
-
-	mdec.rlsize -= ((u8 *) mdec.rl - in_ptr) / 4;
-
-#ifdef CDR_LOG
-	if( mdec.rlsize < 0 )
-	{
-		CDR_LOG( "dma1 infinite stall - no input left!!\n" );
-	}
-#endif
-
 	
-	/*
-	current mblock speed = 1 cycle / byte
-
-
-	Destruction Derby Raw = ~1-2 macroblock cycles
-	- no movie hang
-
-	Rebel Assault 2 = ~0-1 macroblock cycles
-	- no hangs, chopped movies
-
-	Shadow Madness = ~1-4 macroblock cycles
-	- smoother videos, fixes boot
-	*/
-
-	MDECOUTDMA_INT( dmacnt );
-
-
-	mdec.reg1 |= MDEC1_BUSY;
+	/* define the power of mdec */
+	MDECOUTDMA_INT(dmacnt);
+	}
 }
 
 void mdec1Interrupt() {
-#ifdef CDR_LOG
-	CDR_LOG("mdec1Interrupt\n");
-#endif
-	if (HW_DMA1_CHCR & SWAP32(0x01000000)) {
-		// Fear Effect 2: stall dma1 forever
-		// - fixes art gallery
-		if( mdec.rlsize < 0 )
-		{
-			mdec.reg1 &= ~MDEC1_BUSY;
-			return;
-		}
+	/* Author : gschwind
+	 *
+	 * in that case we have done all decoding stuff
+	 * Note that : each block end with 0xfe00 flags
+	 * the list of blocks end with the same 0xfe00 flags
+	 * data loock like :
+	 *
+	 *  data block ...
+	 *  0xfe00
+	 *  data block ...
+	 *  0xfe00
+	 *  a lost of block ..
+	 *
+	 *  0xfe00
+	 *  the last block
+	 *  0xfe00
+	 *  0xfe00
+	 *
+	 * OR
+	 *
+	 * if the 0xfe00 is not present the data size is important.
+	 *
+	 */
 
-
-		// Set a fixed value totaly arbitrarie another sound value is
-		// PSXCLK / 60 or PSXCLK / 50 since the bug happened at end of frame.
-		// PSXCLK / 500 seems good for FF9.
-		// CAUTION: commented interrupt-handling may lead to problems, keep an eye ;-)
-		//MDECOUTDMA_INT(PSXCLK / 400);
-//		MDECOUTDMA_INT(psxRegs.intCycle[PSXINT_MDECOUTDMA].cycle * 8);
-
-		HW_DMA1_CHCR &= SWAP32(~0x01000000);
-		DMA_INTERRUPT(1);
-
-
-#if 1
-		/*
-		Destruction Derby Raw: stall 4+ blocks
-		- Fixes boot movies
-
-		Final Fantasy 9: stall 4+ blocks
-		- Prevent Dali video from infinite stall, corruption
-
-		Rebel Assault 2: stall 8+ blocks
-		- Fixes boot movies, stage 6 play
-		*/
-
-		{
-			int blk[DSIZE2 * 6];
-			int lcv, size;
-			u16 *img;
-
-
-#define PRECACHE_STALL 8
-
-			img = mdec.rl;
-			size = mdec.rlsize * 4;
-			for( lcv = 0; lcv < PRECACHE_STALL; lcv++ ) {
-				u8 *old_img;
-
-				old_img = (u8 *) img;
-				img = rl2blk(blk, img);
-
-				size -= (u8 *) img - old_img;
-				if( size < 0 ) break;
-			}
-
-			// pre-cache input stall - turn off mdec
-			if( size < 0 )
-			{
-	#ifdef CDR_LOG
-			CDR_LOG( "BUSY STALL %X [IN = %X, SIZE = %X]\n",
-				lcv, ((u8 *)img - (u8 *)mdec.rl)/4, mdec.rlsize );
-	#endif
-
-				// drain input + wait before timing out
-				MDECOUTDMA_INT( (PRECACHE_STALL * 1) * (16 * 16 * 3) );
-			}
-		}
-#endif
-	} else {
+	/* this else if avoid to read outside memory */
+	if(mdec.rl >= mdec.rl_end) {
+		mdec.reg1 &= ~MDEC1_STP;
+		HW_DMA0_CHCR &= SWAP32(~0x01000000);
+		DMA_INTERRUPT(0);
+		mdec.reg1 &= ~MDEC1_BUSY;
+	} else if (SWAP16(*(mdec.rl)) == MDEC_END_OF_DATA) {
+		mdec.reg1 &= ~MDEC1_STP;
+		HW_DMA0_CHCR &= SWAP32(~0x01000000);
+		DMA_INTERRUPT(0);
 		mdec.reg1 &= ~MDEC1_BUSY;
 	}
+
+	HW_DMA1_CHCR &= SWAP32(~0x01000000);
+	DMA_INTERRUPT(1);
+	return;
 }
 
 int mdecFreeze(gzFile f, int Mode) {
