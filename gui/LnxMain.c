@@ -316,6 +316,7 @@ int main(int argc, char *argv[]) {
 
 			SetIsoFile(isofilename);
 			runcd = RUN_CD;
+            UseGui = FALSE;
 		}
 		else if (!strcmp(argv[i], "-h") ||
 			 !strcmp(argv[i], "-help") ||
