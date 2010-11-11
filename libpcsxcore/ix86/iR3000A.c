@@ -75,6 +75,8 @@ static void (*recCP0[32])();
 static void (*recCP2[64])();
 static void (*recCP2BSC[32])();
 
+#define DYNAREC_BLOCK 50
+
 static void MapConst(int reg, u32 _const) {
 	iRegs[reg].k = _const;
 	iRegs[reg].state = ST_CONST;
@@ -462,8 +464,8 @@ static void recClear(u32 Addr, u32 Size) {
 	if( bank == 0x80 || bank == 0xa0 || bank == 0x00 ) {
 		offset &= 0x1fffff;
 
-		if( offset >= 500 * 4 )
-			memset((void*)PC_REC(Addr - 500 * 4), 0, 500 * 4);
+		if( offset >= DYNAREC_BLOCK * 4 )
+			memset((void*)PC_REC(Addr - DYNAREC_BLOCK * 4), 0, DYNAREC_BLOCK * 4);
 		else
 			memset((void*)PC_REC(Addr - offset), 0, offset);
 	}
@@ -2908,7 +2910,7 @@ static void recRecompile() {
 	pc = psxRegs.pc;
 	pcold = pc;
 
-	for (count = 0; count < 500;) {
+	for (count = 0; count < DYNAREC_BLOCK;) {
 		p = (char *)PSXM(pc);
 		if (p == NULL) recError();
 		psxRegs.code = *(u32 *)p;
