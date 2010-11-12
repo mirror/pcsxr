@@ -39,6 +39,30 @@ extern unsigned int hSyncCount;
 #define GPUSTATUS_DRAWINGALLOWED      0x00000400
 #define GPUSTATUS_DITHER              0x00000200
 
+
+u32 chain_ptr_addr;
+u32 chain_ptr_mem;
+
+/*
+DMA2 Chain slicing
+	
+Let GPU run x bytes. Then let game edit linked lists.
+
+
+TODO:
+Have memory checks use chain_ptr_mem if that address read/write
+
+
+Einhander: 4000- (+ gpu chain multiplier ~2)
+- art gallery images
+
+Vampire Hunter D: 4000- (+ gpu chain multiplier ~2.5+)
+- opening menu visible
+*/
+
+#define DMA2_CHAIN_PAUSE 4000
+
+
 // Taken from PEOPS SOFTGPU
 u32 lUsedAddr[3];
 
@@ -66,8 +90,13 @@ static u32 gpuDmaChainSize(u32 addr) {
 	do {
 		addr &= 0x1ffffc;
 
-		if (DMACommandCounter++ > 2000000) break;
+		DMACommandCounter = size;
+		if (DMACommandCounter >= DMA2_CHAIN_PAUSE) break;
+
+
+		//if (DMACommandCounter++ > 2000000) break;
 		if (CheckForEndlessLoop(addr)) break;
+
 
 		// # 32-bit blocks to transfer
 		size += psxMu8( addr + 3 );
@@ -77,6 +106,19 @@ static u32 gpuDmaChainSize(u32 addr) {
 		size += 1;
 	} while (addr != 0xffffff);
 
+
+	chain_ptr_addr = addr;
+
+	if( addr != 0xffffff )
+	{
+		// save data at stop ptr
+		chain_ptr_mem = psxMu32( addr );
+
+		// insert stop ptr
+		psxMu32ref( addr ) = 0x00ffffff;
+	}
+
+	
 	return size;
 }
 
@@ -86,23 +128,6 @@ int gpuReadStatus() {
 
 	// GPU plugin
 	hard = GPU_readStatus();
-
-
-	// NOTE:
-	// Backup option when plugins fail to simulate 'busy gpu'
-
-	// TODO:
-	// Check this with
-	// - Hot wheels turbo racing
-	// - Dukes of Hazzard
-
-#if 0
-	if( HW_DMA2_CHCR & 0x01000000 )
-	{
-		hard &= ~GPUSTATUS_IDLE;
-		hard &= ~GPUSTATUS_READYFORCOMMANDS;
-	}
-#endif
 
 
 	// Gameshark Lite - wants to see VRAM busy
@@ -162,10 +187,11 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			PSXDMA_LOG("*** DMA 2 - GPU dma chain *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
 #endif
 
-			// HACK: Vampire Hunter D (title screen)
-			size = gpuDmaChainSize(madr) * 2.5;
+			size = gpuDmaChainSize(madr);
+			GPU_dmaChain((u32 *)psxM, madr & 0x1fffff);
 			
-			GPUDMA_INT(size);
+			// HACK: Vampire Hunter D (title screen)
+			GPUDMA_INT(size * 2.5);
 			return;
 
 #ifdef PSXDMA_LOG
@@ -190,11 +216,39 @@ void gpuInterrupt() {
 	- Vampire Hunter D: shows title screen (3+ cycles / 4 bytes)
 
 	3 - updates linked list -after- GPU reads it, -before- chain finishes
-	- ??? (display would fail this test)
+	- Skullmonkeys: fails to show menus
 	*/
 
 	if( HW_DMA2_CHCR == 0x01000401 )
-		GPU_dmaChain((u32 *)psxM, HW_DMA2_MADR & 0x1fffff);
+	{
+		u32 size,addr;
+
+
+#ifdef PSXDMA_LOG
+		PSXDMA_LOG( "dma2 chain check %X [%X]\n", chain_ptr_addr, psxMu32(chain_ptr_addr) );
+#endif
+
+
+		// check valid data left - no Tekken 3 check yet
+		if( chain_ptr_addr != 0xffffff )
+		{
+			// put back old value first
+			psxMu32ref( chain_ptr_addr ) = chain_ptr_mem;
+
+
+			addr = chain_ptr_addr;
+			size = gpuDmaChainSize( addr );
+			
+			GPU_dmaChain((u32 *)psxM, addr);
+
+
+			// HACK: Vampire Hunter D (title screen)
+			GPUDMA_INT(size * 2.5);
+
+			// continue chain
+			return;
+		}
+	}
 
 
 	HW_DMA2_CHCR &= SWAP32(~0x01000000);
