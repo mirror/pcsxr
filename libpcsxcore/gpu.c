@@ -42,6 +42,7 @@ extern unsigned int hSyncCount;
 
 u32 chain_ptr_addr;
 u32 chain_ptr_mem;
+u8 chain_infinite_loop;
 
 /*
 DMA2 Chain slicing
@@ -86,6 +87,7 @@ static u32 gpuDmaChainSize(u32 addr) {
 
 	// initial linked list ptr (word)
 	size = 1;
+	chain_infinite_loop = 0;
 
 	do {
 		addr &= 0x1ffffc;
@@ -95,7 +97,11 @@ static u32 gpuDmaChainSize(u32 addr) {
 
 
 		//if (DMACommandCounter++ > 2000000) break;
-		if (CheckForEndlessLoop(addr)) break;
+		if (CheckForEndlessLoop(addr))
+		{
+			chain_infinite_loop = 1;
+			break;
+		}
 
 
 		// # 32-bit blocks to transfer
@@ -109,7 +115,7 @@ static u32 gpuDmaChainSize(u32 addr) {
 
 	chain_ptr_addr = addr;
 
-	if( addr != 0xffffff )
+	if( !chain_infinite_loop && addr != 0xffffff )
 	{
 		// save data at stop ptr
 		chain_ptr_mem = psxMu32( addr );
@@ -229,8 +235,8 @@ void gpuInterrupt() {
 #endif
 
 
-		// check valid data left - no Tekken 3 check yet
-		if( chain_ptr_addr != 0xffffff )
+		// check valid data left
+		if( !chain_infinite_loop && chain_ptr_addr != 0xffffff )
 		{
 			// put back old value first
 			psxMu32ref( chain_ptr_addr ) = chain_ptr_mem;
