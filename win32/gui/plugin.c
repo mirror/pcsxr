@@ -157,7 +157,7 @@ void PADhandleKey(int key) {
 
 		case VK_F12:
 			SysPrintf("*PCSX*: CpuReset\n");
-			psxCpu->Reset();
+			psxReset();
 			break;
 
 		case VK_ESCAPE:
@@ -301,7 +301,7 @@ int OpenPlugins(HWND hWnd, int internaliso) {
 		LoadMcds(Config.Mcd1, Config.Mcd2);
 		if (LoadPlugins() == -1) return -1;
 	}
-	return ret;	
+	return ret;
 }
 
 void ClosePlugins() {
@@ -333,7 +333,7 @@ void ResetPlugins() {
 	SPU_shutdown();
 	PAD1_shutdown();
 	PAD2_shutdown();
-	if (Config.UseNet) NET_shutdown(); 
+	if (Config.UseNet) NET_shutdown();
 
 	ret = CDR_init();
 	if (ret != 0) { SysMessage (_("CDRinit error: %d"), ret); return; }

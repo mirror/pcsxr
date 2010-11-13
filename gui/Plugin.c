@@ -265,7 +265,10 @@ void PADhandleKey(int key) {
 
 			LidInterrupt();
 			break;
-		case XK_Escape:
+		case XK_F12:
+			psxReset();
+			break;
+        case XK_Escape:
 			// TODO
 			// the architecture is too broken to actually restart the GUI
 			// because SysUpdate is called from deep within the actual
@@ -289,7 +292,7 @@ void PADhandleKey(int key) {
 		default:
 			GPU_keypressed(key);
 			if (Config.UseNet) NET_keypressed(key);
-	}	
+	}
 }
 
 void OnFile_Exit();
