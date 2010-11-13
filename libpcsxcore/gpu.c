@@ -248,9 +248,9 @@ static __inline int prim48( u32 addr )
 	PSXDMA_LOG( "%X @ Chain 48 - mono 3-line [#_#]\n", addr );
 #endif
 
-	lcv = 0;
+	lcv = 1;
 
-	while( psxMu32( addr ) != 0x55555555 )
+	while( (psxMu32( addr ) & 0xF000F000) != 0x50005000  )
 	{
 		addr += 4;
 		lcv++;
@@ -268,9 +268,9 @@ static __inline int prim4C( u32 addr )
 	PSXDMA_LOG( "%X @ Chain 4c - mono 4-line [#_#]\n", addr );
 #endif
 
-	lcv = 0;
+	lcv = 1;
 
-	while( psxMu32( addr ) != 0x55555555 )
+	while( (psxMu32( addr ) & 0xF000F000) != 0x50005000  )
 	{
 		addr += 4;
 		lcv++;
@@ -298,9 +298,9 @@ static __inline int prim58( u32 addr )
 	PSXDMA_LOG( "%X @ Chain 58 - 3-point gradated [#__#]\n", addr );
 #endif
 
-	lcv = 0;
+	lcv = 1;
 
-	while( psxMu32( addr ) != 0x55555555 )
+	while( (psxMu32( addr ) & 0xF000F000) != 0x50005000  )
 	{
 		addr += 4;
 		lcv++;
@@ -318,9 +318,9 @@ static __inline int prim5C( u32 addr )
 	PSXDMA_LOG( "%X @ Chain 5c - 4-point gradated [#__#]\n", addr );
 #endif
 
-	lcv = 0;
+	lcv = 1;
 
-	while( psxMu32( addr ) != 0x55555555 )
+	while( (psxMu32( addr ) & 0xF000F000) != 0x50005000  )
 	{
 		addr += 4;
 		lcv++;
@@ -630,15 +630,41 @@ static u32 gpuDmaChainSize(u32 addr) {
 				*/
 				if( code == 0x80 )
 				{
-					s16 width, height;
+					s16 x0,x1,y0,y1,width, height;
 
+					// PEOPS
+					x0 = (psxMu32( lcv + 4*1 ) >> 0) & 0xffff;
+					y0 = (psxMu32( lcv + 4*1 ) >> 16) & 0xffff;
+					x1 = (psxMu32( lcv + 4*2 ) >> 0) & 0xffff;
+					y1 = (psxMu32( lcv + 4*2 ) >> 16) & 0xffff;
 					width = (psxMu32( lcv + 4*3 ) >> 0) & 0xffff;
 					height = (psxMu32( lcv + 4*3 ) >> 16) & 0xffff;
 
+					x0 &= 0x3ff;
+					x1 &= 0x3ff;
+					y0 &= 0x1ff;
+					y1 &= 0x1ff;
+
+					if( (x0 == x1) && (y0 == y1) ) break;
+
 					
-					// PEOPS - check width, height
-					if( width < 0 ) break;
-					if( height < 0 ) break;
+					// Xenogears - main menu cursor
+					if( width <= 0 ) break;
+					if( height <= 0 ) break;
+
+
+					/*
+					PEOPS
+
+					Final Fantasy 9: battles
+					Medievil: stage 1 opening
+
+					Intense hang, slowdown if we count as full-blown vram transfer
+					*/
+					if( (x0+width) > 1024 ||
+							(y0+height) > 512 ||
+							(x1+width) > 1024 ||
+							(y1+height) > 512 ) break;
 
 
 					size += (width * height) / 32;
