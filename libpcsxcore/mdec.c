@@ -20,6 +20,10 @@
 
 #include "mdec.h"
 
+
+#define MDEC_BIAS 2.0f
+
+
 #define DSIZE			8
 #define DSIZE2			(DSIZE * DSIZE)
 
@@ -553,7 +557,7 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 	}
 	
 	/* define the power of mdec */
-	MDECOUTDMA_INT(dmacnt);
+	MDECOUTDMA_INT((int) (dmacnt * MDEC_BIAS));
 	}
 }
 
