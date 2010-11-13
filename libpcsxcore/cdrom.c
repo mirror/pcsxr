@@ -1091,12 +1091,15 @@ void cdrInterrupt() {
 
 				cdr.StatP |= 0x40;
 				cdr.StatP &= ~0x20;
+
+				CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime * 4) : cdReadTime * 8);
 			} else {
 				cdr.StatP |= 0x20;
 				cdr.StatP &= ~0x40;
-			}
 
-			CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
+			
+				CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
+			}
 
 			SetResultSize(1);
 			cdr.StatP |= 0x02;
