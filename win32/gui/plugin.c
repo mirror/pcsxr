@@ -51,6 +51,8 @@ void gpuShowPic() {
 		f = gzopen(Text, "rb");
 		if (f != NULL) {
 			gzseek(f, 32, SEEK_SET); // skip header
+            gzseek(f, sizeof(u32), SEEK_CUR);
+            gzseek(f, sizeof(boolean), SEEK_CUR);
 			gzread(f, pMem, 128*96*3);
 			gzclose(f);
 		} else {
