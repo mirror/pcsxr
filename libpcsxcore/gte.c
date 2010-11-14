@@ -307,11 +307,6 @@ static inline void MTC2(u32 value, int reg) {
 			break;
 
 #if 1
-		// non-MAME
-		case 7:
-		case 29:
-			return;
-
 		case 31:
 			return;
 #else
