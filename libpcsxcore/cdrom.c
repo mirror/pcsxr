@@ -491,6 +491,9 @@ void Set_Track()
 
 void cdrRepplayInterrupt()
 {
+	if( !cdr.Play ) return;
+	
+	
 	// Wait for IRQ to be acknowledged
 	if (cdr.Stat) {
 		CDREAD_INT( cdReadTime );
