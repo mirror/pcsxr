@@ -1779,11 +1779,9 @@ void cdrWrite3(unsigned char rt) {
 			return;
 		}
 
-		/*
-		Do not reset interrupts here
-		- Doom: fixes boot
-		- Judge Dredd: better gameplay, some dropped frames
-		*/
+		if (cdr.Reading && !cdr.ResultReady) {
+      CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime);
+		}
 
 		return;
 	}
