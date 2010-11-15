@@ -105,6 +105,7 @@ void cdrInterrupt();
 void cdrReadInterrupt();
 void cdrRepplayInterrupt();
 void cdrLidSeekInterrupt();
+void cdrPlayInterrupt();
 unsigned char cdrRead0(void);
 unsigned char cdrRead1(void);
 unsigned char cdrRead2(void);

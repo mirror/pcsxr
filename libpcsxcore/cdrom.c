@@ -144,6 +144,12 @@ extern SPUregisterCallback SPU_registerCallback;
 	psxRegs.intCycle[PSXINT_CDRLID].sCycle = psxRegs.cycle; \
 }
 
+#define CDRPLAY_INT(eCycle) { \
+	psxRegs.interrupt |= (1 << PSXINT_CDRPLAY); \
+	psxRegs.intCycle[PSXINT_CDRPLAY].cycle = eCycle; \
+	psxRegs.intCycle[PSXINT_CDRPLAY].sCycle = psxRegs.cycle; \
+}
+
 #define StartReading(type, eCycle) { \
    	cdr.Reading = type; \
   	cdr.FirstSector = 1; \
@@ -489,6 +495,41 @@ void Set_Track()
 }
 
 
+void cdrPlayInterrupt()
+{
+	if( !cdr.Play ) return;
+
+
+	if( CDR_getStatus(&stat) != -1) {
+		subq = (struct SubQ *)CDR_getBufferSub();
+
+		if (subq != NULL ) {
+#ifdef CDR_LOG
+			CDR_LOG( "CDDA IRQ - %X:%X:%X\n", 
+				subq->AbsoluteAddress[0], subq->AbsoluteAddress[1], subq->AbsoluteAddress[2] );
+#endif
+
+			/*
+			CDDA Autopause
+
+			Silhouette Mirage ($3)
+			Tomb Raider 1 ($7)
+			*/
+
+			if( (cdr.Mode & 0x02) && cdr.CurTrack < btoi( subq->TrackNumber ) ) {
+				StopCdda();
+			}
+		}
+	}
+
+
+	CDRPLAY_INT( cdReadTime );
+
+
+	Check_Shell(0);
+}
+
+
 void cdrRepplayInterrupt()
 {
 	if( !cdr.Play ) return;
@@ -716,6 +757,11 @@ void cdrInterrupt() {
 			// Lemmings: report play times
 			if ((cdr.Mode & 0x5) == 0x5) {
 				CDREPPLAY_INT( cdReadTime );
+			}
+
+			// autopause cdda
+			if ((cdr.Mode & 0x3) == 0x3) {
+				CDRPLAY_INT( cdReadTime );
 			}
 			break;
 
@@ -1906,8 +1952,36 @@ void cdrReset() {
 int cdrFreeze(gzFile f, int Mode) {
 	uintptr_t tmp;
 
+
+	if( Mode == 0 ) {
+		StopCdda();
+	}
+	if( Mode == 1 ) {
+		// get restart time
+		if( cdr.Play && CDR_getStatus(&stat) != -1 ) {
+			cdr.SetSectorPlay[0] = stat.Time[0];
+			cdr.SetSectorPlay[1] = stat.Time[1];
+			cdr.SetSectorPlay[2] = stat.Time[2];
+		}
+	}
+	
+	
 	gzfreeze(&cdr, sizeof(cdr));
 
+
+	if( Mode == 0 ) {
+		// resume cdda
+		if( cdr.Play ) {
+			Set_Track();
+			Find_CurTrack();
+			ReadTrack( cdr.SetSectorPlay );
+
+			CDR_play( cdr.SetSectorPlay );
+		}
+	}
+
+
+	
 	if (Mode == 1)
 		tmp = cdr.pTransfer - cdr.Transfer;
 

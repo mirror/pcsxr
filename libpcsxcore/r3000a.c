@@ -214,6 +214,13 @@ void psxBranchTest() {
 				cdrLidSeekInterrupt();
 			}
 		}
+
+		if (psxRegs.interrupt & (1 << PSXINT_CDRPLAY)) { // cdr play timing
+			if ((psxRegs.cycle - psxRegs.intCycle[PSXINT_CDRPLAY].sCycle) >= psxRegs.intCycle[PSXINT_CDRPLAY].cycle) {
+				psxRegs.interrupt &= ~(1 << PSXINT_CDRPLAY);
+				cdrPlayInterrupt();
+			}
+		}
 	}
 }
 
