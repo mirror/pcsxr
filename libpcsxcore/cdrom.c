@@ -1269,29 +1269,16 @@ void cdrReadInterrupt() {
 	}
 
 	/*
-	Hokuto no Ken 2: $A0 - return FORM1 + FORM2
-	Judge Dredd: $C8 - only FORM1
-	Xenogears: $C8 - only FORM1
+	Croc 2: $40 - only FORM1 (*)
+	Judge Dredd: $C8 - only FORM1 (*)
 	*/
 
-	// To fix Judge Dredd movies: use first block
-#if 0
 	if( (cdr.Mode & 0x40) == 0 || (cdr.Transfer[4+2] & 0x4) != 0x4 ) {
     cdr.Stat = DataReady;
-    psxHu32ref(0x1070) |= SWAP32((u32)0x4);
-  }
-#elif 0
-	if( (cdr.Mode & 0x40) == 0 || (cdr.Transfer[4+2] & 0x4) != 0x4 ) {
-    cdr.Stat = DataReady;
-    psxHu32ref(0x1070) |= SWAP32((u32)0x4);
   } else {
     cdr.Stat = Acknowledge;
-    psxHu32ref(0x1070) |= SWAP32((u32)0x4);
   }
-#else
-    cdr.Stat = DataReady;
-    psxHu32ref(0x1070) |= SWAP32((u32)0x4);
-#endif
+  psxHu32ref(0x1070) |= SWAP32((u32)0x4);
 
 	Check_Shell(0);
 }
