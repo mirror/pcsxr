@@ -1276,7 +1276,7 @@ void cdrReadInterrupt() {
 	if( (cdr.Mode & 0x40) == 0 || (cdr.Transfer[4+2] & 0x4) != 0x4 ) {
     cdr.Stat = DataReady;
   } else {
-    cdr.Stat = Acknowledge;
+    cdr.Stat = NoIntr;
   }
   psxHu32ref(0x1070) |= SWAP32((u32)0x4);
 
