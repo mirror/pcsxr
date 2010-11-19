@@ -1276,7 +1276,7 @@ void cdrReadInterrupt() {
 	if( (cdr.Mode & 0x40) == 0 || (cdr.Transfer[4+2] & 0x4) != 0x4 ) {
     cdr.Stat = DataReady;
   } else {
-    cdr.Stat = NoIntr;
+    cdr.Stat = Acknowledge;
   }
   psxHu32ref(0x1070) |= SWAP32((u32)0x4);
 
@@ -1336,9 +1336,13 @@ void cdrWrite0(unsigned char rt) {
 	// Tekken: CDXA fade-out
 	else if( rt == 2 ) {
 		cdr.LeftVol = 0;
+
+		return;
 	}
 	else if( rt == 3 ) {
 		cdr.RightVol = 0;
+
+		return;
 	}
 }
 
@@ -1369,6 +1373,8 @@ void cdrWrite1(unsigned char rt) {
 	// Tekken: CDXA fade-out
 	if( (cdr.Ctrl & 3) == 3 ) {
 		cdr.RightVol |= (rt << 8);
+
+		return;
 	}
 
 
@@ -1725,9 +1731,13 @@ void cdrWrite2(unsigned char rt) {
 	// Tekken: CDXA fade-out
 	if( (cdr.Ctrl & 3) == 2 ) {
 		cdr.LeftVol |= (rt << 8);
+
+		return;
 	}
 	else if( (cdr.Ctrl & 3) == 3 ) {
 		cdr.RightVol |= (rt << 0);
+
+		return;
 	}
 
 
@@ -1790,6 +1800,8 @@ void cdrWrite3(unsigned char rt) {
 			SPU_writeRegister( H_CDLeft, cdr.LeftVol / 2 );
 			SPU_writeRegister( H_CDRight, cdr.RightVol / 2 );
 		}
+
+		return;
 	}
 
 
