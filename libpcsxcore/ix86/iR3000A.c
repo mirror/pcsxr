@@ -164,15 +164,15 @@ static void SetBranch() {
 	}
 
 	
-	switch( psxRegs.code >> 24 ) {
+	switch( psxRegs.code >> 26 ) {
 		// Lode Runner (jr - beq)
 
 		// bltz - bgez - bltzal - bgezal / beq - bne - blez - bgtz
+		case 0x01:
 		case 0x04:
-		case 0x10:
-		case 0x14:
-		case 0x18:
-		case 0x1c:
+		case 0x05:
+		case 0x06:
+		case 0x07:
 			break;
 
 		default:
