@@ -101,6 +101,10 @@ static struct CdrStat stat;
 static struct SubQ *subq;
 
 
+extern unsigned int msf2sec(char *msf);
+extern void sec2msf(unsigned int s, char *msf);
+
+
 extern u16 *iso_play_cdbuf;
 extern u16 iso_play_bufptr;
 extern long CALLBACK ISOinit(void);
