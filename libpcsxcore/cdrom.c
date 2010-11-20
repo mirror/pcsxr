@@ -1714,9 +1714,10 @@ void cdrWrite1(unsigned char rt) {
     		cdr.Stat = NoIntr;
     		AddIrqQueue(cdr.Cmd, 0x1000);
 
-			// cd-xa volume
-			SPU_writeRegister( H_CDLeft, 0x0000 );
-			SPU_writeRegister( H_CDRight, 0x0000 );
+			// Duke Nukem - Time to Kill
+			// - do not directly set cd-xa volume
+			//SPU_writeRegister( H_CDLeft, 0x0000 );
+			//SPU_writeRegister( H_CDRight, 0x0000 );
         	break;
 
     	case CdlDemute:
@@ -1725,10 +1726,10 @@ void cdrWrite1(unsigned char rt) {
     		cdr.Stat = NoIntr;
     		AddIrqQueue(cdr.Cmd, 0x1000);
 
-			// Vib Ribbon: get music to output volume
-			// cd-xa volume
-			SPU_writeRegister( H_CDLeft, 0x7f00 );
-			SPU_writeRegister( H_CDRight, 0x7f00 );
+			// Duke Nukem - Time to Kill
+			// - do not directly set cd-xa volume
+			//SPU_writeRegister( H_CDLeft, 0x7f00 );
+			//SPU_writeRegister( H_CDRight, 0x7f00 );
         	break;
 
     	case CdlSetfilter:
