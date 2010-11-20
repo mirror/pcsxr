@@ -499,6 +499,7 @@ void cdrPlayInterrupt()
 {
 	if( !cdr.Play ) return;
 
+	if( (cdr.Mode & 0x02) == 0 ) return;
 
 	if( CDR_getStatus(&stat) != -1) {
 		subq = (struct SubQ *)CDR_getBufferSub();
@@ -516,8 +517,30 @@ void cdrPlayInterrupt()
 			Tomb Raider 1 ($7)
 			*/
 
-			if( (cdr.Mode & 0x02) && cdr.CurTrack < btoi( subq->TrackNumber ) ) {
+			if( cdr.CurTrack < btoi( subq->TrackNumber ) ) {
 				StopCdda();
+			}
+		} else {
+			if (CDR_getTN(cdr.ResultTN) != -1) {
+				if( cdr.CurTrack+1 <= cdr.ResultTN[1] ) {
+					if( CDR_getTD(cdr.CurTrack+1, cdr.ResultTD) != -1 ) {
+						u8 temp_cur[3], temp_next[3];
+
+						temp_cur[0] = stat.Time[0];
+						temp_cur[1] = stat.Time[1];
+						temp_cur[2] = stat.Time[2];
+
+						temp_next[0] = cdr.ResultTD[2];
+						temp_next[1] = cdr.ResultTD[1];
+						temp_next[2] = cdr.ResultTD[0];
+
+						if( msf2sec(temp_cur) >= msf2sec( temp_next ) ) {
+							StopCdda();
+							
+							cdr.CurTrack++;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -602,6 +625,73 @@ void cdrRepplayInterrupt()
 
 				report_time = 0;
 			}
+		} else {
+			// Rayman: check track change
+			if (CDR_getTN(cdr.ResultTN) != -1) {
+				if( cdr.CurTrack+1 <= cdr.ResultTN[1] ) {
+					if( CDR_getTD(cdr.CurTrack+1, cdr.ResultTD) != -1 ) {
+						u8 temp_cur[3], temp_next[3];
+
+						temp_cur[0] = stat.Time[0];
+						temp_cur[1] = stat.Time[1];
+						temp_cur[2] = stat.Time[2];
+
+						temp_next[0] = cdr.ResultTD[2];
+						temp_next[1] = cdr.ResultTD[1];
+						temp_next[2] = cdr.ResultTD[0];
+
+						if( msf2sec(temp_cur) >= msf2sec( temp_next ) ) {
+							cdr.Result[0] |= 0x10;
+							
+							cdr.CurTrack++;
+						}
+					}
+				}
+			}
+
+			
+			// track # / index # (assume no pregaps)
+			cdr.Result[1] = cdr.CurTrack;
+			cdr.Result[2] = 1;
+
+			if( report_time == 0 ) {
+				// absolute
+				cdr.Result[3] = stat.Time[0];
+				cdr.Result[4] = stat.Time[1];
+				cdr.Result[5] = itob( stat.Time[2] );
+
+				// m:s adjustment
+				if ((s8)cdr.Result[4] < 0) {
+					cdr.Result[4] += 60;
+					cdr.Result[3] -= 1;
+				}
+
+				cdr.Result[4] = itob(cdr.Result[4]);
+				cdr.Result[5] = itob(cdr.Result[5]);
+
+				report_time = 1;
+			} else {
+				// local
+				cdr.Result[3] = stat.Time[0];
+				cdr.Result[4] = stat.Time[1] - 2;
+				cdr.Result[5] = itob( stat.Time[2] );
+
+				// m:s adjustment
+				if ((s8)cdr.Result[4] < 0) {
+					cdr.Result[4] += 60;
+					cdr.Result[3] -= 1;
+				}
+
+				cdr.Result[4] = itob(cdr.Result[4]);
+				cdr.Result[5] = itob(cdr.Result[5]);
+
+				cdr.Result[4] |= 0x80;
+
+				report_time = 0;
+			}
+
+			cdr.Result[6] = 0;
+			cdr.Result[7] = 0;
 		}
 	}
 
@@ -753,6 +843,7 @@ void cdrInterrupt() {
 			cdr.Stat = Acknowledge;
 
 			cdr.StatP |= 0x80;
+			cdr.Play = TRUE;
 
 			// Lemmings: report play times
 			if ((cdr.Mode & 0x5) == 0x5) {
@@ -916,24 +1007,73 @@ void cdrInterrupt() {
 					}
 				}
 			} else {
-				cdr.Result[0] = 1;
-				cdr.Result[1] = 1;
+				// check track change
+				if (CDR_getTN(cdr.ResultTN) != -1) {
+					if( cdr.CurTrack+1 <= cdr.ResultTN[1] ) {
+						if( CDR_getTD(cdr.CurTrack+1, cdr.ResultTD) != -1 ) {
+							u8 temp_cur[3], temp_next[3];
 
-				// NOTE: This only works for TRACK 01
-				cdr.Result[2] = btoi(cdr.Prev[0]);
-				cdr.Result[3] = btoi(cdr.Prev[1]) - 2;
-				cdr.Result[4] = cdr.Prev[2];
+							temp_cur[0] = btoi( stat.Time[0] );
+							temp_cur[1] = btoi( stat.Time[1] );
+							temp_cur[2] = btoi( stat.Time[2] );
 
-				// m:s adjustment
-				if ((s8)cdr.Result[3] < 0) {
-					cdr.Result[3] += 60;
-					cdr.Result[2] -= 1;
+							temp_next[0] = cdr.ResultTD[2];
+							temp_next[1] = cdr.ResultTD[1];
+							temp_next[2] = cdr.ResultTD[0];
+
+							if( msf2sec(temp_cur) >= msf2sec( temp_next ) ) {
+								cdr.CurTrack++;
+							}
+						}
+					}
 				}
 
-				cdr.Result[2] = itob(cdr.Result[2]);
-				cdr.Result[3] = itob(cdr.Result[3]);
 
-				memcpy(cdr.Result + 5, cdr.Prev, 3);
+				// assume no pregaps
+				cdr.Result[0] = cdr.CurTrack;
+				cdr.Result[1] = 1;
+
+
+				if( cdr.Play ) {
+					// NOTE: This only works for TRACK 01 (local)
+					cdr.Result[2] = stat.Time[0];
+					cdr.Result[3] = stat.Time[1]- 2;
+					cdr.Result[4] = itob( stat.Time[2] );
+
+					// m:s adjustment
+					if ((s8)cdr.Result[3] < 0) {
+						cdr.Result[3] += 60;
+						cdr.Result[2] -= 1;
+					}
+
+					cdr.Result[2] = itob(cdr.Result[2]);
+					cdr.Result[3] = itob(cdr.Result[3]);
+
+
+
+					// absolute time
+					cdr.Result[5] = itob( stat.Time[0] );
+					cdr.Result[6] = itob( stat.Time[1] );
+					cdr.Result[7] = itob( stat.Time[2] );
+				}
+				else {
+					// NOTE: This only works for TRACK 01 (local)
+					cdr.Result[2] = btoi(cdr.Prev[0]);
+					cdr.Result[3] = btoi(cdr.Prev[1]) - 2;
+					cdr.Result[4] = cdr.Prev[2];
+
+					// m:s adjustment
+					if ((s8)cdr.Result[3] < 0) {
+						cdr.Result[3] += 60;
+						cdr.Result[2] -= 1;
+					}
+
+					cdr.Result[2] = itob(cdr.Result[2]);
+					cdr.Result[3] = itob(cdr.Result[3]);
+
+
+					memcpy(cdr.Result + 5, cdr.Prev, 3);
+				}
 			}
 
 			cdr.Stat = Acknowledge;
@@ -1995,6 +2135,8 @@ int cdrFreeze(gzFile f, int Mode) {
 void LidInterrupt() {
 	cdr.LidCheck = 0x20; // start checker
 
+	CDRLID_INT( cdReadTime * 3 );
+	
 	// generate interrupt if none active - open or close
 	if (cdr.Irq == 0 || cdr.Irq == 0xff) {
 		cdr.Ctrl |= 0x80;
