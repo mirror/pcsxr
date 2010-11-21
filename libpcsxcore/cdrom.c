@@ -1414,10 +1414,12 @@ void cdrReadInterrupt() {
 
 	/*
 	Croc 2: $40 - only FORM1 (*)
+	Crusaders of Might and Magic: $E0 - FORM1 and FORM2-XA (*) - !!!
 	Judge Dredd: $C8 - only FORM1 (*)
 	*/
 
-	if( (cdr.Mode & 0x40) == 0 || (cdr.Transfer[4+2] & 0x4) != 0x4 ) {
+	if( (cdr.Mode & 0x40) == 0 || (cdr.Transfer[4+2] & 0x4) != 0x4 ||
+			(cdr.Mode & 0x20) ) {
     cdr.Stat = DataReady;
   } else {
     cdr.Stat = Acknowledge;
