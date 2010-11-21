@@ -561,9 +561,7 @@ void cdrRepplayInterrupt()
 {
 	if( !cdr.Play ) return;
 	
-	
-	// Wait for IRQ to be acknowledged
-	if (cdr.Stat) {
+	if (cdr.Irq || cdr.Stat) {
 		CDREAD_INT( cdReadTime );
 		return;
 	}
@@ -1322,7 +1320,7 @@ void cdrReadInterrupt() {
 	if (!cdr.Reading)
 		return;
 
-	if (cdr.Stat) {
+	if (cdr.Irq || cdr.Stat) {
 		CDREAD_INT(0x1000);
 		return;
 	}
