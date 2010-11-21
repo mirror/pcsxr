@@ -251,6 +251,10 @@ int psxTestLoadDelay(int reg, u32 tmp) {
 			switch (_tRt_) {
 				case 0x00: case 0x02:
 				case 0x10: case 0x12: // BLTZ/BGEZ...
+					// Xenogears - lbu v0 / beq v0
+					// - no load delay (fixes battle loading)
+					break;
+
 					if (_tRs_ == reg) return 2;
 					break;
 			}
@@ -262,10 +266,18 @@ int psxTestLoadDelay(int reg, u32 tmp) {
 			break;
 
 		case 0x04: case 0x05: // BEQ/BNE
+			// Xenogears - lbu v0 / beq v0
+			// - no load delay (fixes battle loading)
+			break;
+
 			if (_tRs_ == reg || _tRt_ == reg) return 2;
 			break;
 
 		case 0x06: case 0x07: // BLEZ/BGTZ
+			// Xenogears - lbu v0 / beq v0
+			// - no load delay (fixes battle loading)
+			break;
+
 			if (_tRs_ == reg) return 2;
 			break;
 
