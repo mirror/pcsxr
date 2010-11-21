@@ -1480,13 +1480,9 @@ void cdrWrite0(unsigned char rt) {
 	// Tekken: CDXA fade-out
 	else if( rt == 2 ) {
 		cdr.LeftVol = 0;
-
-		return;
 	}
 	else if( rt == 3 ) {
 		cdr.RightVol = 0;
-
-		return;
 	}
 }
 
@@ -1517,8 +1513,6 @@ void cdrWrite1(unsigned char rt) {
 	// Tekken: CDXA fade-out
 	if( (cdr.Ctrl & 3) == 3 ) {
 		cdr.RightVol |= (rt << 8);
-
-		return;
 	}
 
 
@@ -1876,13 +1870,9 @@ void cdrWrite2(unsigned char rt) {
 	// Tekken: CDXA fade-out
 	if( (cdr.Ctrl & 3) == 2 ) {
 		cdr.LeftVol |= (rt << 8);
-
-		return;
 	}
 	else if( (cdr.Ctrl & 3) == 3 ) {
 		cdr.RightVol |= (rt << 0);
-
-		return;
 	}
 
 
@@ -1935,18 +1925,14 @@ void cdrWrite3(unsigned char rt) {
 		CDR_LOG( "CD-XA Volume: %X %X\n", cdr.LeftVol, cdr.RightVol );
 #endif
 
-		if( !cdr.Muted ) {
-			/*
-			Eternal SPU: scale volume from [0-ffff] -> [0,8000]
-			- Destruction Derby Raw movies (ff00)
-			*/
+		/*
+		Eternal SPU: scale volume from [0-ffff] -> [0,8000]
+		- Destruction Derby Raw movies (ff00)
+		*/
 
-			// write CD-XA volumes
-			SPU_writeRegister( H_CDLeft, cdr.LeftVol / 2 );
-			SPU_writeRegister( H_CDRight, cdr.RightVol / 2 );
-		}
-
-		return;
+		// write CD-XA volumes
+		SPU_writeRegister( H_CDLeft, cdr.LeftVol / 2 );
+		SPU_writeRegister( H_CDRight, cdr.RightVol / 2 );
 	}
 
 
