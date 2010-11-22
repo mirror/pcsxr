@@ -668,8 +668,8 @@ void cdrRepplayInterrupt()
 					cdr.Result[3] -= 1;
 				}
 
+				cdr.Result[3] = itob(cdr.Result[3]);
 				cdr.Result[4] = itob(cdr.Result[4]);
-				cdr.Result[5] = itob(cdr.Result[5]);
 
 				report_time = 1;
 			} else {
@@ -684,8 +684,8 @@ void cdrRepplayInterrupt()
 					cdr.Result[3] -= 1;
 				}
 
+				cdr.Result[3] = itob(cdr.Result[3]);
 				cdr.Result[4] = itob(cdr.Result[4]);
-				cdr.Result[5] = itob(cdr.Result[5]);
 
 				cdr.Result[4] |= 0x80;
 
@@ -1037,7 +1037,6 @@ void cdrInterrupt() {
 
 
 				if( cdr.Play ) {
-					// NOTE: This only works for TRACK 01 (local)
 					cdr.Result[2] = stat.Time[0];
 					cdr.Result[3] = stat.Time[1]- 2;
 					cdr.Result[4] = itob( stat.Time[2] );
@@ -1059,7 +1058,6 @@ void cdrInterrupt() {
 					cdr.Result[7] = itob( stat.Time[2] );
 				}
 				else {
-					// NOTE: This only works for TRACK 01 (local)
 					cdr.Result[2] = btoi(cdr.Prev[0]);
 					cdr.Result[3] = btoi(cdr.Prev[1]) - 2;
 					cdr.Result[4] = cdr.Prev[2];
