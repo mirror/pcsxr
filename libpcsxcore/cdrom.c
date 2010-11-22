@@ -1362,11 +1362,12 @@ void cdrReadInterrupt() {
 		// Firemen 2: Multi-XA files - briefings, cutscenes
 		if( cdr.FirstSector == 1 && (cdr.Mode & 0x8)==0 ) {
 			cdr.File = cdr.Transfer[4 + 0];
+			cdr.Channel = cdr.Transfer[4 + 1];
 		}
 
-		if ((cdr.Transfer[4 + 2] & 0x4) &&
-			((cdr.Mode & 0x8) ? (cdr.Transfer[4 + 1] == cdr.Channel) : 1) &&
-			(cdr.Transfer[4 + 0] == cdr.File)) {
+		if((cdr.Transfer[4 + 2] & 0x4) &&
+			 (cdr.Transfer[4 + 1] == cdr.Channel) &&
+			 (cdr.Transfer[4 + 0] == cdr.File)) {
 			int ret = xa_decode_sector(&cdr.Xa, cdr.Transfer+4, cdr.FirstSector);
 
 			if (!ret) {
