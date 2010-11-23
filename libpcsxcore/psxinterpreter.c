@@ -249,8 +249,8 @@ int psxTestLoadDelay(int reg, u32 tmp) {
 
 		case 0x01: // REGIMM
 			switch (_tRt_) {
-				case 0x00: case 0x02:
-				case 0x10: case 0x12: // BLTZ/BGEZ...
+				case 0x00: case 0x01:
+				case 0x10: case 0x11: // BLTZ/BGEZ...
 					// Xenogears - lbu v0 / beq v0
 					// - no load delay (fixes battle loading)
 					break;
