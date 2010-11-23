@@ -73,3 +73,13 @@ libpcsxcore_a_SOURCES += \
 	$(top_builddir)/libpcsxcore/
 endif
 endif
+
+if ARCH_PPC
+libpcsxcore_a_SOURCES += \
+	$(top_builddir)/libpcsxcore/ppc/pR3000A.c	\
+	$(top_builddir)/libpcsxcore/ppc/ppc.c	\
+	$(top_builddir)/libpcsxcore/ppc/reguse.c	\
+	$(top_builddir)/libpcsxcore/ppc/pasm.s	\
+	$(top_builddir)/libpcsxcore/
+libpcsxcore_a_CCASFLAGS = -x assembler-with-cpp -mregnames
+endif
