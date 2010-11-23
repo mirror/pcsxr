@@ -421,7 +421,7 @@ void Find_CurTrack() {
 	if (CDR_getTN(cdr.ResultTN) != -1) {
 		int lcv;
 
-		for( lcv = 1; lcv < cdr.ResultTN[1]; lcv++ ) {
+		for( lcv = 1; lcv <= cdr.ResultTN[1]; lcv++ ) {
 			if (CDR_getTD((u8)(lcv), cdr.ResultTD) != -1) {
 				u32 sect1, sect2;
 
