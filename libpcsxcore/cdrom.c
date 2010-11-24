@@ -1122,7 +1122,7 @@ void cdrInterrupt() {
         	cdr.Result[0] = cdr.StatP;
 			cdr.StatP |= 0x40;
         	cdr.Stat = Acknowledge;
-			AddIrqQueue(CdlSeekL + 0x20, 0x1000);
+			AddIrqQueue(CdlSeekL + 0x20, cdReadTime * 1);
 			break;
 
     	case CdlSeekL + 0x20:
@@ -1140,7 +1140,7 @@ void cdrInterrupt() {
         	cdr.Result[0] = cdr.StatP;
 			cdr.StatP |= 0x40;
         	cdr.Stat = Acknowledge;
-			AddIrqQueue(CdlSeekP + 0x20, 0x1000);
+			AddIrqQueue(CdlSeekP + 0x20, cdReadTime * 1);
 			break;
 
     	case CdlSeekP + 0x20:
@@ -1267,12 +1267,17 @@ void cdrInterrupt() {
 			ReadTrack( cdr.SetSector );
 
 
+			// Crusaders of Might and Magic - update getlocl now
+			// - fixes cutscene speech
+			{
+				u8 *buf = CDR_getBuffer();
+				memcpy(cdr.Transfer, buf, 8);
+			}
+			
+			
 			/*
 			Duke Nukem: Land of the Babes - seek then delay read for one frame
 			- fixes cutscenes
-
-			Judge Dredd - don't delay too long
-			- breaks gameplay movies
 			*/
 
 			if (!cdr.Seeked) {
@@ -1280,12 +1285,18 @@ void cdrInterrupt() {
 
 				cdr.StatP |= 0x40;
 				cdr.StatP &= ~0x20;
+
+				// Crusaders of Might and Magic - use short time
+				// - fix cutscene speech (startup)
+
+				// ??? - use more accurate seek time later
+				CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime * 1);
 			} else {
 				cdr.StatP |= 0x20;
 				cdr.StatP &= ~0x40;
-			}
 
-			CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime * 4) : cdReadTime * 8);
+				CDREAD_INT((cdr.Mode & 0x80) ? (cdReadTime / 2) : cdReadTime * 1);
+			}
 
 			SetResultSize(1);
 			cdr.StatP |= 0x02;
@@ -1419,6 +1430,7 @@ void cdrReadInterrupt() {
 			(cdr.Mode & 0x20) ) {
     cdr.Stat = DataReady;
   } else {
+		// Rockman X5 - no music restart problem
     cdr.Stat = NoIntr;
   }
   psxHu32ref(0x1070) |= SWAP32((u32)0x4);
@@ -1758,8 +1770,8 @@ void cdrWrite1(unsigned char rt) {
 				cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
 
-				// G-Police: in-game music needs longer time
-				AddIrqQueue(cdr.Cmd, 0x4000);
+				// Crusaders of Might and Magic - cutscene speech
+				AddIrqQueue(cdr.Cmd, 0x800);
      		break;
 
     	case CdlGetlocP:
