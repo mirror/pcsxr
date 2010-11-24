@@ -45,6 +45,8 @@
 		713CB2E411FC49DA0033B6A8 /* DFCdrom.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71F93F6C11FB8E9D007A5A7C /* DFCdrom.psxplugin */; };
 		7161C2820FDED6D000225F97 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 7161C2810FDED6D000225F97 /* config.h */; };
 		7161C2980FDED75300225F97 /* ExtendedKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = 7161C2970FDED75300225F97 /* ExtendedKeys.h */; };
+		7192F42A129C412E0042D946 /* gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 7192F428129C412E0042D946 /* gpu.c */; };
+		7192F42B129C412E0042D946 /* gpu.h in Headers */ = {isa = PBXBuildFile; fileRef = 7192F429129C412E0042D946 /* gpu.h */; };
 		719594B111AEFE8C004AD686 /* gte_divider.h in Headers */ = {isa = PBXBuildFile; fileRef = 719594AF11AEFE8C004AD686 /* gte_divider.h */; };
 		719594B211AEFE8C004AD686 /* psxcommon.c in Sources */ = {isa = PBXBuildFile; fileRef = 719594B011AEFE8C004AD686 /* psxcommon.c */; };
 		71AD2DF410C3575300365243 /* PeopsSPU.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DD110C356FD00365243 /* PeopsSPU.psxplugin */; };
@@ -119,6 +121,23 @@
 			script = "as -o $(DERIVED_FILES_DIR)/$(INPUT_FILE_BASE).o $(INPUT_FILE_PATH)";
 		};
 /* End PBXBuildRule section */
+
+/* Begin PBXBuildStyle section */
+		7192F3FF129C410B0042D946 /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Development;
+		};
+		7192F400129C410B0042D946 /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
 
 /* Begin PBXContainerItemProxy section */
 		713CB2DD11FC49720033B6A8 /* PBXContainerItemProxy */ = {
@@ -224,7 +243,7 @@
 		2BA44360052DB2EA00E21DDD /* PcsxPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxPlugin.h; sourceTree = "<group>"; };
 		2BA44361052DB2EA00E21DDD /* PcsxPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxPlugin.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
 		2BB3D6CF05427FE200831ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
-		2BB3D6D105427FE200831ACB /* PCSX.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PCSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BB3D6D105427FE200831ACB /* PCSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PCSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBB1126051DC00500B84448 /* PluginList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginList.h; sourceTree = "<group>"; };
 		2BBB1127051DC00500B84448 /* PluginList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginList.m; sourceTree = "<group>"; };
 		2BBB1787051E0D9700B84448 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = Credits.rtf; sourceTree = "<group>"; };
@@ -239,6 +258,8 @@
 		713B530D110B75650002F164 /* ppf.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = ppf.h; path = ../libpcsxcore/ppf.h; sourceTree = SOURCE_ROOT; };
 		7161C2810FDED6D000225F97 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		7161C2970FDED75300225F97 /* ExtendedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedKeys.h; sourceTree = "<group>"; };
+		7192F428129C412E0042D946 /* gpu.c */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.c; name = gpu.c; path = ../libpcsxcore/gpu.c; sourceTree = SOURCE_ROOT; };
+		7192F429129C412E0042D946 /* gpu.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = gpu.h; path = ../libpcsxcore/gpu.h; sourceTree = SOURCE_ROOT; };
 		719594AF11AEFE8C004AD686 /* gte_divider.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = gte_divider.h; path = ../libpcsxcore/gte_divider.h; sourceTree = SOURCE_ROOT; };
 		719594B011AEFE8C004AD686 /* psxcommon.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = psxcommon.c; path = ../libpcsxcore/psxcommon.c; sourceTree = SOURCE_ROOT; };
 		71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PeopsSPU.xcodeproj; path = plugins/DFSound/PeopsSPU.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -416,6 +437,8 @@
 		2BCE23B204C6B52C007C2DA3 /* libpcsxcore */ = {
 			isa = PBXGroup;
 			children = (
+				7192F428129C412E0042D946 /* gpu.c */,
+				7192F429129C412E0042D946 /* gpu.h */,
 				71F4C5B30FDED15800529849 /* ix86 */,
 				71F4C5600FDED12800529849 /* cdriso.c */,
 				71F4C5610FDED12800529849 /* cdriso.h */,
@@ -557,6 +580,7 @@
 				713B530F110B75650002F164 /* ppf.h in Headers */,
 				719594B111AEFE8C004AD686 /* gte_divider.h in Headers */,
 				71F703A711B3A673007DD5C5 /* sjisfont.h in Headers */,
+				7192F42B129C412E0042D946 /* gpu.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,6 +620,12 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 71F353F80FD98DFE00CBEC28 /* Build configuration list for PBXProject "Pcsx" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				7192F3FF129C410B0042D946 /* Development */,
+				7192F400129C410B0042D946 /* Deployment */,
+			);
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* Pcsx */;
 			projectDirPath = "";
@@ -723,6 +753,7 @@
 				712FD1E91093096F00575A92 /* socket.c in Sources */,
 				713B530E110B75650002F164 /* ppf.c in Sources */,
 				719594B211AEFE8C004AD686 /* psxcommon.c in Sources */,
+				7192F42A129C412E0042D946 /* gpu.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
