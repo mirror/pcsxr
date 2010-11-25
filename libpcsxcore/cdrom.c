@@ -1122,7 +1122,21 @@ void cdrInterrupt() {
         	cdr.Result[0] = cdr.StatP;
 			cdr.StatP |= 0x40;
         	cdr.Stat = Acknowledge;
-			AddIrqQueue(CdlSeekL + 0x20, cdReadTime * 1);
+
+			/*
+			Crusaders of Might and Magic = 0.5x-4x
+			- fix cutscene speech start
+
+			Eggs of Steel = 2x-?
+			- fix new game
+
+			Medievil = ?-4x
+			- fix cutscene speech
+
+			Rockman X5 = 0.5-4x
+			- fix capcom logo
+			*/
+			AddIrqQueue(CdlSeekL + 0x20, cdReadTime * 4);
 			break;
 
     	case CdlSeekL + 0x20:
