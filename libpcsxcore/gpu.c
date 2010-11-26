@@ -153,7 +153,8 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			size = gpuDmaChainSize(madr);
 			GPU_dmaChain((u32 *)psxM, madr & 0x1fffff);
 			
-			GPUDMA_INT(size);
+			// rebel assault 2 - compatibility hack
+			GPUDMA_INT(size * 1.5);
 			return;
 
 #ifdef PSXDMA_LOG
