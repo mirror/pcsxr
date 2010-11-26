@@ -573,7 +573,7 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 			int n = mdec.block_buffer - mdec.block_buffer_pos + SIZE_OF_16B_BLOCK;
 			/* TODO: check if partial block do not  larger than size */
 			memcpy(image, mdec.block_buffer_pos, n);
-			image += n;
+			image += n / 2;
 			size -= n;
 			mdec.block_buffer_pos = 0;
 		}
@@ -581,7 +581,7 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 		while(size >= SIZE_OF_16B_BLOCK) {
 			mdec.rl = rl2blk(blk, mdec.rl);
 			yuv2rgb15(blk, (u16 *)image);
-			image += SIZE_OF_16B_BLOCK;
+			image += SIZE_OF_16B_BLOCK / 2;
 			size -= SIZE_OF_16B_BLOCK;
 		}
 
@@ -602,7 +602,7 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 			int n = mdec.block_buffer - mdec.block_buffer_pos + SIZE_OF_24B_BLOCK;
 			/* TODO: check if partial block do not  larger than size */
 			memcpy(image, mdec.block_buffer_pos, n);
-			image += n;
+			image += n / 2;
 			size -= n;
 			mdec.block_buffer_pos = 0;
 		}
@@ -610,7 +610,7 @@ void psxDma1(u32 adr, u32 bcr, u32 chcr) {
 		while(size >= SIZE_OF_24B_BLOCK) {
 			mdec.rl = rl2blk(blk, mdec.rl);
 			yuv2rgb24(blk, image);
-			image += SIZE_OF_24B_BLOCK;
+			image += SIZE_OF_24B_BLOCK / 2;
 			size -= SIZE_OF_24B_BLOCK;
 		}
 
