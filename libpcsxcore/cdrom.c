@@ -935,7 +935,7 @@ void cdrInterrupt() {
 			cdr.Result[0] = cdr.StatP;
 			cdr.Stat = Acknowledge;
 
-			AddIrqQueue(CdlPause + 0x20, 0x1000);
+			AddIrqQueue(CdlPause + 0x20, 0x800);
 			cdr.Ctrl |= 0x80;
 			break;
 
@@ -953,7 +953,7 @@ void cdrInterrupt() {
 			cdr.Result[0] = cdr.StatP;
         	cdr.Stat = Acknowledge;
 //			if (!cdr.Init) {
-				AddIrqQueue(CdlInit + 0x20, 0x1000);
+				AddIrqQueue(CdlInit + 0x20, 0x800);
 //			}
         	break;
 
@@ -1215,7 +1215,7 @@ void cdrInterrupt() {
 			cdr.StatP |= STATUS_ROTATING;
         	cdr.Result[0] = cdr.StatP;
         	cdr.Stat = Acknowledge;
-			AddIrqQueue(CdlID + 0x20, 0x1000);
+			AddIrqQueue(CdlID + 0x20, 0x800);
 			break;
 
 		case CdlID + 0x20:
@@ -1257,7 +1257,7 @@ void cdrInterrupt() {
 			cdr.StatP |= STATUS_ROTATING;
 			cdr.Result[0] = cdr.StatP;
 			cdr.Stat = Acknowledge;
-			AddIrqQueue(CdlReadT + 0x20, 0x1000);
+			AddIrqQueue(CdlReadT + 0x20, 0x800);
 			break;
 
 		case CdlReadT + 0x20:
@@ -1272,7 +1272,7 @@ void cdrInterrupt() {
 			cdr.StatP |= STATUS_ROTATING;
         	cdr.Result[0] = cdr.StatP;
         	cdr.Stat = Acknowledge;
-			AddIrqQueue(CdlReadToc + 0x20, 0x1000);
+			AddIrqQueue(CdlReadToc + 0x20, 0x800);
 			break;
 
     	case CdlReadToc + 0x20:
@@ -1367,7 +1367,7 @@ void cdrReadInterrupt() {
 		return;
 
 	if (cdr.Irq || cdr.Stat) {
-		CDREAD_INT(0x1000);
+		CDREAD_INT(0x800);
 		return;
 	}
 
@@ -1587,7 +1587,7 @@ void cdrWrite1(unsigned char rt) {
     	case CdlSync:
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
         	break;
 
     	case CdlNop:
@@ -1633,7 +1633,7 @@ void cdrWrite1(unsigned char rt) {
 
 				cdr.Ctrl |= 0x80;
         cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
         break;
 
 			case CdlPlay:
@@ -1652,7 +1652,7 @@ void cdrWrite1(unsigned char rt) {
 
 				cdr.Ctrl |= 0x80;
 				cdr.Stat = NoIntr;
-				AddIrqQueue(cdr.Cmd, 0x1000);
+				AddIrqQueue(cdr.Cmd, 0x800);
 				break;
 
     	case CdlForward:
@@ -1660,7 +1660,7 @@ void cdrWrite1(unsigned char rt) {
 				//	cdr.CurTrack++;
 				cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
         break;
 
     	case CdlBackward:
@@ -1668,7 +1668,7 @@ void cdrWrite1(unsigned char rt) {
 					//cdr.CurTrack--;
 				cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
         break;
 
     	case CdlReadN:
@@ -1676,7 +1676,7 @@ void cdrWrite1(unsigned char rt) {
 			StopReading();
 			cdr.Ctrl|= 0x80;
         	cdr.Stat = NoIntr;
-			StartReading(1, 0x1000);
+			StartReading(1, 0x800);
         	break;
 
     	case CdlStandby:
@@ -1684,7 +1684,7 @@ void cdrWrite1(unsigned char rt) {
 			StopReading();
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
         	break;
 
     	case CdlStop:
@@ -1710,7 +1710,7 @@ void cdrWrite1(unsigned char rt) {
 
 				cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
        	break;
 
     	case CdlPause:
@@ -1750,14 +1750,14 @@ void cdrWrite1(unsigned char rt) {
 			StopReading();
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
         	break;
 
     	case CdlMute:
         	cdr.Muted = TRUE;
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
 
 			// Duke Nukem - Time to Kill
 			// - do not directly set cd-xa volume
@@ -1769,7 +1769,7 @@ void cdrWrite1(unsigned char rt) {
         	cdr.Muted = FALSE;
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
 
 			// Duke Nukem - Time to Kill
 			// - do not directly set cd-xa volume
@@ -1782,7 +1782,7 @@ void cdrWrite1(unsigned char rt) {
         	cdr.Channel = cdr.Param[1];
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
         	break;
 
     	case CdlSetmode:
@@ -1792,7 +1792,7 @@ void cdrWrite1(unsigned char rt) {
         	cdr.Mode = cdr.Param[0];
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
 
 			// Squaresoft on PlayStation 1998 Collector's CD Vol. 1
 			// - fixes choppy movie sound
@@ -1803,7 +1803,7 @@ void cdrWrite1(unsigned char rt) {
     	case CdlGetmode:
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
         	break;
 
     	case CdlGetlocL:
@@ -1817,7 +1817,7 @@ void cdrWrite1(unsigned char rt) {
     	case CdlGetlocP:
 				cdr.Ctrl |= 0x80;
 	  		cdr.Stat = NoIntr;
-				AddIrqQueue(cdr.Cmd, 0x1000);
+				AddIrqQueue(cdr.Cmd, 0x800);
 
 				// GameShark CDX / Lite Player: pretty narrow time window
 				// - doesn't always work due to time inprecision
@@ -1827,7 +1827,7 @@ void cdrWrite1(unsigned char rt) {
     	case CdlGetTN:
 				cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		//AddIrqQueue(cdr.Cmd, 0x1000);
+    		//AddIrqQueue(cdr.Cmd, 0x800);
 
 				// GameShark CDX CD Player: very long time
 				AddIrqQueue(cdr.Cmd, 0x100000);
@@ -1836,40 +1836,40 @@ void cdrWrite1(unsigned char rt) {
     	case CdlGetTD:
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
         	break;
 
     	case CdlSeekL:
 //			((u32 *)cdr.SetSectorSeek)[0] = ((u32 *)cdr.SetSector)[0];
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
         	break;
 
     	case CdlSeekP:
 //        	((u32 *)cdr.SetSectorSeek)[0] = ((u32 *)cdr.SetSector)[0];
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
         	break;
 
 		// Destruction Derby: read TOC? GetTD after this
 		case CdlReadT:
 			cdr.Ctrl |= 0x80;
 			cdr.Stat = NoIntr;
-			AddIrqQueue(cdr.Cmd, 0x1000);
+			AddIrqQueue(cdr.Cmd, 0x800);
 			break;
 
     	case CdlTest:
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
         	break;
 
     	case CdlID:
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
         	break;
 
     	case CdlReadS:
@@ -1877,13 +1877,13 @@ void cdrWrite1(unsigned char rt) {
 			StopReading();
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-			StartReading(2, 0x1000);
+			StartReading(2, 0x800);
         	break;
 
     	case CdlReadToc:
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+    		AddIrqQueue(cdr.Cmd, 0x800);
         	break;
 
     	default:
