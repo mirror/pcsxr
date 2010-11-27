@@ -1593,7 +1593,9 @@ void cdrWrite1(unsigned char rt) {
     	case CdlNop:
 			cdr.Ctrl |= 0x80;
     		cdr.Stat = NoIntr;
-    		AddIrqQueue(cdr.Cmd, 0x1000);
+
+				// Twisted Metal 3 - fix music
+    		AddIrqQueue(cdr.Cmd, 0x800);
         	break;
 
     	case CdlSetloc:
