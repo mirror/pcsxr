@@ -458,6 +458,11 @@ void Find_CurTrack() {
 				// find next track boundary - only need m:s accuracy
 				sect1 = cdr.SetSectorPlay[0] * 60 * 75 + cdr.SetSectorPlay[1] * 75;
 				sect2 = cdr.ResultTD[2] * 60 * 75 + cdr.ResultTD[1] * 75;
+
+				// Twisted Metal 4 - psx cdda pregap (2-sec)
+				// - fix in-game music
+				sect2 -= 75 * 2;
+
 				if( sect1 >= sect2 ) {
 					cdr.CurTrack++;
 					continue;
