@@ -1464,12 +1464,11 @@ void cdrReadInterrupt() {
 
 	/*
 	Croc 2: $40 - only FORM1 (*)
-	Crusaders of Might and Magic: $E0 - FORM1 and FORM2-XA (*) - !!!
 	Judge Dredd: $C8 - only FORM1 (*)
+	Sim Theme Park - no adpcm at all (zero)
 	*/
 
-	if( (cdr.Mode & MODE_STRSND) == 0 || (cdr.Transfer[4+2] & 0x4) != 0x4 ||
-			(cdr.Mode & MODE_SIZE_2340) ) {
+	if( (cdr.Mode & MODE_STRSND) == 0 || (cdr.Transfer[4+2] & 0x4) != 0x4 )
     cdr.Stat = DataReady;
   } else {
 		// Breath of Fire 3 - fix inn sleeping
