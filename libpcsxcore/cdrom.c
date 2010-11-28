@@ -1977,18 +1977,42 @@ void cdrWrite3(unsigned char rt) {
 		cdr.LeftVol |= (rt << 0);
 	}
 	else if( (cdr.Ctrl & 3) == 3 && rt == 0x20 ) {
+		u16 cdleft, cdright;
+		u8 l1,l2,r1,r2;
+
 #ifdef CDR_LOG
 		CDR_LOG( "CD-XA Volume: %X %X\n", cdr.LeftVol, cdr.RightVol );
 #endif
 
+		// TODO: Use real attenuation (left - right mixer)
+
 		/*
 		Eternal SPU: scale volume from [0-ffff] -> [0,8000]
-		- Destruction Derby Raw movies (ff00)
+		- Destruction Derby Raw - movies (ff00 ff00)
+		- Smurf Racer - movies (00ff 00ff)
 		*/
 
+		// Fake attenuation volume hack for Eternal
+		l1 = (cdr.LeftVol >> 8) & 0xff;
+		l2 = (cdr.LeftVol >> 0) & 0xff;
+		r1 = (cdr.RightVol >> 8) & 0xff;
+		r2 = (cdr.RightVol >> 0) & 0xff;
+
+		if( l1 > 0x80 ) l1 = 0x80;
+		if( l2 > 0x80 ) l2 = 0x80;
+		if( r1 > 0x80 ) r1 = 0x80;
+		if( r2 > 0x80 ) r2 = 0x80;
+
+		// spu compatibility volume hack
+		if( l1 == 0 && l2 > 0 ) { l1 = l2; l2 = 0; }
+		if( r1 == 0 && r2 > 0 ) { r1 = r2; r2 = 0; }
+
+		cdleft = (l1 << 8) | l2;
+		cdright = (r1 << 8) | r2;
+
 		// write CD-XA volumes
-		SPU_writeRegister( H_CDLeft, cdr.LeftVol / 2 );
-		SPU_writeRegister( H_CDRight, cdr.RightVol / 2 );
+		SPU_writeRegister( H_CDLeft, cdleft );
+		SPU_writeRegister( H_CDRight, cdright );
 	}
 
 
