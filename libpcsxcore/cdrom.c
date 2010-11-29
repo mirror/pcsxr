@@ -1468,14 +1468,14 @@ void cdrReadInterrupt() {
 	Sim Theme Park - no adpcm at all (zero)
 	*/
 
-	if( (cdr.Mode & MODE_STRSND) == 0 || (cdr.Transfer[4+2] & 0x4) != 0x4 )
-    cdr.Stat = DataReady;
-  } else {
+	if( (cdr.Mode & MODE_STRSND) == 0 || (cdr.Transfer[4+2] & 0x4) != 0x4 ) {
+        cdr.Stat = DataReady;
+    } else {
 		// Breath of Fire 3 - fix inn sleeping
 		// Rockman X5 - no music restart problem
-    cdr.Stat = NoIntr;
-  }
-  psxHu32ref(0x1070) |= SWAP32((u32)0x4);
+        cdr.Stat = NoIntr;
+    }
+    psxHu32ref(0x1070) |= SWAP32((u32)0x4);
 
 	Check_Shell(0);
 }
