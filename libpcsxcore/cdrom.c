@@ -1977,7 +1977,7 @@ void cdrWrite3(unsigned char rt) {
 	}
 	else if( (cdr.Ctrl & 3) == 3 && rt == 0x20 ) {
 		u16 cdleft, cdright;
-		u8 l1,l2,r1,r2;
+		u8 l1,l2,r1,r2,tmp;
 
 #ifdef CDR_LOG
 		CDR_LOG( "CD-XA Volume: %X %X\n", cdr.LeftVol, cdr.RightVol );
@@ -2004,10 +2004,10 @@ void cdrWrite3(unsigned char rt) {
 		if( r2 > 0x80 ) r2 = 0x80;
 
 		// spu compatibility volume hack
-		if( l1 == 0 && l2 > 0 ) { l1 = l2; l2 = 0; }
-		if( r1 == 0 && r2 > 0 ) { r1 = r2; r2 = 0; }
-		if( l1 == 0x80 && l2 == 0x80 ) { l2 = 0; }
-		if( r1 == 0x80 && r2 == 0x80 ) { r2 = 0; }
+		if( l1 < l2 ) { tmp = l1; l1 = l2; l2 = tmp; }
+		if( r1 < r2 ) { tmp = r1; r1 = r2; r2 = tmp; }
+		if( l1 == 0x80 ) { l2 = 0; }
+		if( r1 == 0x80 ) { r2 = 0; }
 
 		cdleft = (l1 << 8) | l2;
 		cdright = (r1 << 8) | r2;
