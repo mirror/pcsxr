@@ -1989,6 +1989,7 @@ void cdrWrite3(unsigned char rt) {
 		Eternal SPU: scale volume from [0-ffff] -> [0,8000]
 		- Destruction Derby Raw - movies (ff00 ff00)
 		- Smurf Racer - movies (00ff 00ff)
+		- V-Rally 2 - movies (FC00 FC00)
 		*/
 
 		// Fake attenuation volume hack for Eternal
@@ -2005,6 +2006,8 @@ void cdrWrite3(unsigned char rt) {
 		// spu compatibility volume hack
 		if( l1 == 0 && l2 > 0 ) { l1 = l2; l2 = 0; }
 		if( r1 == 0 && r2 > 0 ) { r1 = r2; r2 = 0; }
+		if( l1 == 0x80 && l2 == 0x80 ) { l2 = 0; }
+		if( r1 == 0x80 && r2 == 0x80 ) { r2 = 0; }
 
 		cdleft = (l1 << 8) | l2;
 		cdright = (r1 << 8) | r2;
