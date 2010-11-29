@@ -393,7 +393,7 @@ __inline void doBranch(u32 tar) {
 
 	// branch delay slot
 	//code = (u32 *)PSXM(psxRegs.pc);
-	code = Read_ICache( psxRegs.pc, 0 );
+	code = Read_ICache( psxRegs.pc, 1 );
 
 	psxRegs.code = ((code == NULL) ? 0 : SWAP32(*code));
 
