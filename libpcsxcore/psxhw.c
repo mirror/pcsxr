@@ -359,13 +359,13 @@ void psxHwWrite8(u32 add, u8 value) {
 		case 0x1f801803: cdrWrite3(value); break;
 
 		default:
-			psxHu8(add) = value;
+			psxHu8ref(add) = value;
 #ifdef PSXHW_LOG
 			PSXHW_LOG("*Unknown 8bit write at address %x value %x\n", add, value);
 #endif
 			return;
 	}
-	psxHu8(add) = value;
+	psxHu8ref(add) = value;
 #ifdef PSXHW_LOG
 	PSXHW_LOG("*Known 8bit write at address %x value %x\n", add, value);
 #endif
