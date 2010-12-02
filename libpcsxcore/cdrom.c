@@ -485,6 +485,12 @@ static void ReadTrack( u8 *time ) {
 	cdr.RErr = CDR_readTrack(cdr.Prev);
 }
 
+
+extern int opensbifile(const char *isoname);
+extern int cdrIsoActive(void);
+extern int checkSBI(u8 *time);
+
+
 void AddIrqQueue(unsigned char irq, unsigned long ecycle) {
 	cdr.Irq = irq;
 	cdr.eCycle = ecycle;
@@ -1102,6 +1108,11 @@ void cdrInterrupt() {
 
 					memcpy(cdr.Result + 5, cdr.Prev, 3);
 				}
+			}
+
+			// redump.org - wipe time
+			if( !cdr.Play && checkSBI(cdr.Result+5) ) {
+				memset( cdr.Result+2, 0, 6 );
 			}
 
 			cdr.Stat = Acknowledge;
@@ -2159,6 +2170,10 @@ void cdrReset() {
 	cdr.CurTrack = 1;
 	cdr.File = 1;
 	cdr.Channel = 1;
+
+	if( !cdrIsoActive() ) {
+		opensbifile( "redump.sbi" );
+	}
 }
 
 int cdrFreeze(gzFile f, int Mode) {
