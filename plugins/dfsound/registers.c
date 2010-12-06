@@ -264,13 +264,17 @@ void CALLBACK SPUwriteRegister(unsigned long reg, unsigned short val)
       break;
     //-------------------------------------------------//
     case H_CDLeft:
-      iLeftXAVol=val  & 0x7fff;
-      if(cddavCallback) cddavCallback(0,val);
-      break;
+			// Fake attenuation hack: [$00-ff left][$00-ff right]
+			// - TODO: fixme later
+			iLeftXAVol = val > 0x7fff ? 0x7fff : val;
+			if(cddavCallback) cddavCallback(0,val);
+			break;
     case H_CDRight:
-      iRightXAVol=val & 0x7fff;
-      if(cddavCallback) cddavCallback(1,val);
-      break;
+			// Fake attenuation hack: [$00-ff right][$00-ff left]
+			// - TODO: fixme later
+			iRightXAVol = val > 0x7fff ? 0x7fff : val;
+			if(cddavCallback) cddavCallback(1,val);
+			break;
     //-------------------------------------------------//
     case H_FMod1:
       FModOn(0,16,val);
