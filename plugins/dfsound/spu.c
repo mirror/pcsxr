@@ -671,8 +671,10 @@ GOON: ;
 
          if(s_chan[ch].bFMod==2)                       // fmod freq channel
           iFMod[ns]=s_chan[ch].sval;                   // -> store 1T sample data, use that to do fmod on next channel
-         else                                          // no fmod freq channel
-          {
+
+				 // mix fmod channel into output
+				 // - Xenogears save icon (high pitch)
+				 {
            //////////////////////////////////////////////
            // ok, left/right sound volume (psx volume goes from 0 ... 0x3fff)
 
