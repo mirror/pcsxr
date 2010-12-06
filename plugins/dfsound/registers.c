@@ -428,6 +428,11 @@ void SoundOn(int start,int end,unsigned short val)     // SOUND ON PSX COMAND
     {
      s_chan[ch].bIgnoreLoop=0;
      s_chan[ch].bNew=1;
+
+		 // ..?
+		 //s_chan[ch].bStop=0;
+		 //s_chan[ch].pLoop=0;
+
      dwNewChannel|=(1<<ch);                            // bitfield for faster testing
     }
   }
@@ -445,7 +450,12 @@ void SoundOff(int start,int end,unsigned short val)    // SOUND OFF PSX COMMAND
    if(val&1)                                           // && s_chan[i].bOn)  mmm...
     {
      s_chan[ch].bStop=1;
-    }                                                  
+
+		 // Jungle Book - Rhythm 'n Groove
+		 // - turns off buzzing sound (loop hangs)
+		 s_chan[ch].bNew=0;
+		 dwNewChannel &= ~(1<<ch);
+		}                                                  
   }
 }
 

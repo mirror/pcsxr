@@ -604,22 +604,39 @@ static void *MAINThread(void *arg)
 
              //////////////////////////////////////////// flag handler
 
-             if((flags&4) && (!s_chan[ch].bIgnoreLoop))
-              s_chan[ch].pLoop=start-16;               // loop adress
+						/*
+						SPU2-X:
+						$4 = set loop to current block
+						$2 = keep envelope on (no mute)
+						$1 = jump to loop address
 
-             if(flags&1)                               // 1: stop/loop
-              {
-               // We play this block out first...
-               //if(!(flags&2))                          // 1+2: do loop... otherwise: stop
-               if(flags!=3 || s_chan[ch].pLoop==NULL)  // PETE: if we don't check exactly for 3, loop hang ups will happen (DQ4, for example)
-                {                                      // and checking if pLoop is set avoids crashes, yeah
-                 start = (unsigned char*)-1;
-                }
-               else
-                {
-                 start = s_chan[ch].pLoop;
-                }
-              }
+						silence means no volume (ADSR keeps playing!!)
+						*/
+
+						// Jungle Book - Rhythm 'n Groove - use external loop address
+						// - fixes music player (+IRQ generate)
+						if((flags&4) && (pChannel->bIgnoreLoop == 0))
+							pChannel->pLoop=start-16;
+
+						// Jungle Book - Rhythm 'n Groove - don't reset ignore status
+						// - fixes gameplay speed (IRQ hits)
+						//pChannel->bIgnoreLoop = 0;
+
+
+						if(flags&1)
+						{
+							start = pChannel->pLoop;
+
+							// Xenogears - 7 = menu sound + other missing sounds
+							// TODO: SILENCE flag + DQ4 check (loop hangs?)
+							if( (flags&2) == 0 )
+								start = (unsigned char *) -1;
+
+							// stop check?
+							if( pChannel->pLoop == 0 )
+								start = (unsigned char *) -1;
+						}
+
 
              s_chan[ch].pCurr=start;                   // store values for next cycle
              s_chan[ch].s_1=s_1;
