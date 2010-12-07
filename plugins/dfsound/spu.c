@@ -615,17 +615,17 @@ static void *MAINThread(void *arg)
 
 						// Jungle Book - Rhythm 'n Groove - use external loop address
 						// - fixes music player (+IRQ generate)
-						if((flags&4) && (pChannel->bIgnoreLoop == 0))
-							pChannel->pLoop=start-16;
+						if((flags&4) && (s_chan[ch].bIgnoreLoop == 0))
+							s_chan[ch].pLoop=start-16;
 
 						// Jungle Book - Rhythm 'n Groove - don't reset ignore status
 						// - fixes gameplay speed (IRQ hits)
-						//pChannel->bIgnoreLoop = 0;
+						//s_chan[ch].bIgnoreLoop = 0;
 
 
 						if(flags&1)
 						{
-							start = pChannel->pLoop;
+							start = s_chan[ch].pLoop;
 
 							// Xenogears - 7 = menu sound + other missing sounds
 							// TODO: SILENCE flag + DQ4 check (loop hangs?)
@@ -633,7 +633,7 @@ static void *MAINThread(void *arg)
 								start = (unsigned char *) -1;
 
 							// stop check?
-							if( pChannel->pLoop == 0 )
+							if( s_chan[ch].pLoop == 0 )
 								start = (unsigned char *) -1;
 						}
 
