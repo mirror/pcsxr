@@ -7,7 +7,9 @@ AM_MAINTAINER_MODE
 
 AC_CONFIG_HEADERS([include/config.h:include/config.h.in])
 
+
 AC_PROG_CC
+AM_PROG_CC_C_O
 AC_PROG_RANLIB
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
@@ -34,7 +36,7 @@ AC_SUBST(GTK2_LIBS)
 AC_SUBST(GLADE2_CFLAGS)
 AC_SUBST(GLADE2_LIBS)
 
-AC_CONFIG_FILES([Makefile data/Makefile doc/Makefile libpcsxcore/Makefile gui/Makefile plugins/dfinput/Makefile plugins/dfsound/Makefile plugins/dfxvideo/Makefile plugins/dfcdrom/Makefile plugins/dfnet/Makefile plugins/bladesio1/Makefile pixmaps/Makefile po/Makefile.in])
+AC_CONFIG_FILES([Makefile data/Makefile doc/Makefile libpcsxcore/Makefile gui/Makefile plugins/dfinput/Makefile plugins/dfsound/Makefile plugins/dfxvideo/Makefile plugins/gxvideo/Makefile plugins/dfcdrom/Makefile plugins/dfnet/Makefile plugins/bladesio1/Makefile pixmaps/Makefile po/Makefile.in])
 
 AC_CHECK_LIB(dl, dlsym, [LDFLAGS="$LDFLAGS -ldl"], [])
 AC_CHECK_LIB(socket, socket, [LDFLAGS="$LDFLAGS -lsocket"], [])
