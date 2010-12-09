@@ -855,6 +855,8 @@ void CALLBACK SPUasync(unsigned long cycle)
    iSpuAsyncWait++;
    if(iSpuAsyncWait<=64) return;
    iSpuAsyncWait=0;
+
+	 cpu_cycles = cycle;
   }
 
 #ifdef _WINDOWS
