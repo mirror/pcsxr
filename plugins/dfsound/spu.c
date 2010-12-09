@@ -447,8 +447,8 @@ INLINE int iGetInterpolationVal(int ch)
 // .. can be made smaller (smallest val: 1 ms), but bigger waits give
 // better performance
 
-#define PAUSE_W 5
-#define PAUSE_L 5000
+#define PAUSE_W 1
+#define PAUSE_L 1000
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -468,6 +468,7 @@ static void *MAINThread(void *arg)
  int ch,predict_nr,shift_factor,flags,d,s;
  int bIRQReturn=0;
 
+ bEndThread = 0;
  while(!bEndThread)                                    // until we are shutting down
   {
    // ok, at the beginning we are looking if there is
@@ -625,18 +626,22 @@ static void *MAINThread(void *arg)
 
 						if(flags&1)
 						{
+							// Xenogears - 7 = play missing sounds
 							start = s_chan[ch].pLoop;
 
-							// Xenogears - 7 = menu sound + other missing sounds
-							// TODO: SILENCE flag + DQ4 check (loop hangs?)
+							// (?) - silence flag (voice still plays)
 							if( (flags&2) == 0 )
-								start = (unsigned char *) -1;
-
-							// stop check?
-							if( s_chan[ch].pLoop == 0 )
-								start = (unsigned char *) -1;
+								s_chan[ch].iSilent = 1;
+								//start = (unsigned char *) -1;
 						}
 
+#if 0
+						// crash check
+						if( start == 0 )
+							start = (unsigned char *) -1;
+						if( start >= spuMemC + 0x80000 )
+							start = spuMemC - 0x80000;
+#endif
 
              s_chan[ch].pCurr=start;                   // store values for next cycle
              s_chan[ch].s_1=s_1;
@@ -695,7 +700,7 @@ GOON: ;
            //////////////////////////////////////////////
            // ok, left/right sound volume (psx volume goes from 0 ... 0x3fff)
 
-           if(s_chan[ch].iMute) 
+           if(s_chan[ch].iMute || s_chan[ch].iSilent) 
             s_chan[ch].sval=0;                         // debug mute
            else
             {
@@ -799,15 +804,21 @@ ENDX:   ;
 
   InitREVERB();
 
+  //////////////////////////////////////////////////////                   
   // feed the sound
-  // wanna have around 1/60 sec (16.666 ms) updates
-  if (iCycle++ > 16)
+  // latency = 20 ms (less pops, crackles, smoother)
+
+	if(iCycle++>=20)
    {
     SoundFeedStreamData((unsigned char *)pSpuBuffer,
                         ((unsigned char *)pS) - ((unsigned char *)pSpuBuffer));
     pS = (short *)pSpuBuffer;
     iCycle = 0;
    }
+
+	
+	if( iUseTimer == 2 )
+		bEndThread = 1;
  }
 
  // end of big main loop...
@@ -836,6 +847,7 @@ DWORD WINAPI MAINThreadEx(LPVOID lpParameter)
 // SPU ASYNC... even newer epsxe func
 //  1 time every 'cycle' cycles... harhar
 
+long cpu_cycles;
 void CALLBACK SPUasync(unsigned long cycle)
 {
  if(iSpuAsyncWait)
@@ -862,11 +874,17 @@ void CALLBACK SPUasync(unsigned long cycle)
   {
    if(!bSpuInit) return;                               // -> no init, no call
 
-#ifdef _WINDOWS
-   MAINProc(0,0,0,0,0);                                // -> experimental win mode... not really tested... don't like the drawbacks
-#else
-   MAINThread(0);                                      // -> linux high-compat mode
-#endif
+	 // 1 ms updates
+	 while( cpu_cycles >= 33868800 / 1000 )
+	 {
+	#ifdef _WINDOWS
+		 MAINProc(0,0,0,0,0);                                // -> experimental win mode... not really tested... don't like the drawbacks
+	#else
+		 MAINThread(0);                                      // -> linux high-compat mode
+	#endif
+
+		 cpu_cycles -= 33868800 / 1000;
+	 }
   }
 }
 

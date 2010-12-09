@@ -68,6 +68,8 @@ long CALLBACK SPUfreeze(uint32_t ulFreezeMode,SPUFreeze_t * pF)
 
  if(!pF) return 0;                                     // first check
 
+ if(!bSpuInit) return 0;
+
  if(ulFreezeMode)                                      // info or save?
   {//--------------------------------------------------//
    if(ulFreezeMode==1)                                 

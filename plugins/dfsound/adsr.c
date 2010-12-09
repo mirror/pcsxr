@@ -135,7 +135,10 @@ INLINE int MixADSR(int ch)                             // MIX ADSR
       }
 
      if(s_chan[ch].ADSRX.EnvelopeVol<0) s_chan[ch].ADSRX.EnvelopeVol=0;
-     if(((s_chan[ch].ADSRX.EnvelopeVol>>27)&0xF) <= s_chan[ch].ADSRX.SustainLevel)
+     //if(((s_chan[ch].ADSRX.EnvelopeVol>>27)&0xF) <= s_chan[ch].ADSRX.SustainLevel)
+
+		 // PEOPS DSound FF7 cursor fix (dfsound too?)
+		 if(s_chan[ch].ADSRX.EnvelopeVol <= s_chan[ch].ADSRX.SustainLevel * (0x7fffffff / 0xf) )
       {
        s_chan[ch].ADSRX.State=2;
       }
