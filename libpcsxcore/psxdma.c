@@ -48,7 +48,9 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 				break;
 			}
 			SPU_writeDMAMem(ptr, (bcr >> 16) * (bcr & 0xffff) * 2);
-			SPUDMA_INT((bcr >> 16) * (bcr & 0xffff) / 2);
+
+			// Jungle Book - 0-0.333x DMA
+			SPUDMA_INT((bcr >> 16) * (bcr & 0xffff) / 3);
 			return;
 
 		case 0x01000200: //spu to cpu transfer
