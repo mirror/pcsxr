@@ -331,8 +331,7 @@ int CheckCdrom() {
 	}
 
 	if (Config.PsxAuto) { // autodetect system (pal or ntsc)
-		if( (CdromId[2] == 'e' && CdromId[3] == 's') ||
-				(CdromId[2] == 'E' && CdromId[3] == 'S') )
+		if( CdromId[2] == 'e' || CdromId[2] == 'E' )
 			Config.PsxType = PSX_TYPE_PAL; // pal
 		else Config.PsxType = PSX_TYPE_NTSC; // ntsc
 	}
