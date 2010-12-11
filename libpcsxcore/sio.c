@@ -145,6 +145,23 @@ void sioWrite8(unsigned char value) {
 #endif
 	switch (padst) {
 		case 1: SIO_INT(SIO_CYCLES);
+			/*
+			$41-4F
+			$41 = Find bits in poll respones
+			$42 = Polling command
+			$43 = Config mode (Dual shock?)
+			$44 = Digital / Analog (after $F3)
+			$45 = Get status info (Dual shock?)
+
+			ID:
+			$41 = Digital
+			$73 = Analogue Red LED
+			$53 = Analogue Green LED
+
+			$23 = NegCon
+			$12 = Mouse
+			*/
+
 			if ((value & 0x40) == 0x40) {
 				padst = 2; parp = 1;
 				if (!Config.UseNet) {
@@ -165,11 +182,33 @@ void sioWrite8(unsigned char value) {
 				} else {
 					bufcount = 2 + (buf[parp] & 0x0f) * 2;
 				}
+
+
+				// Digital / Dual Shock Controller
 				if (buf[parp] == 0x41) {
 					switch (value) {
+						// enter config mode
 						case 0x43:
 							buf[1] = 0x43;
 							break;
+
+						// get status
+						case 0x45:
+							buf[1] = 0xf3;
+							break;
+					}
+				}
+
+
+				// NegCon - Wipeout 3
+				if( buf[parp] == 0x23 ) {
+					switch (value) {
+						// enter config mode
+						case 0x43:
+							buf[1] = 0x79;
+							break;
+
+						// get status
 						case 0x45:
 							buf[1] = 0xf3;
 							break;
