@@ -455,13 +455,16 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 						RestoreWindow();
 						return TRUE;
 					}
-					SysReset();
 					if (CheckCdrom() == -1) {
 						ClosePlugins();
 						RestoreWindow();
 						SysMessage(_("The CD does not appear to be a valid Playstation CD"));
 						return TRUE;
 					}
+					
+					// Auto-detect: region first, then rcnt reset
+					SysReset();
+
 					if (LoadCdrom() == -1) {
 						ClosePlugins();
 						RestoreWindow();
@@ -504,13 +507,16 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 						RestoreWindow();
 						return TRUE;
 					}
-					SysReset();
 					if (CheckCdrom() == -1) {
 						ClosePlugins();
 						RestoreWindow();
 						SysMessage(_("The CD does not appear to be a valid Playstation CD"));
 						return TRUE;
 					}
+
+					// Auto-detect: region first, then rcnt reset
+					SysReset();
+					
 					if (LoadCdrom() == -1) {
 						ClosePlugins();
 						RestoreWindow();
@@ -532,8 +538,11 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 						RestoreWindow();
 						return TRUE;
 					}
-					SysReset();
 					CheckCdrom();
+
+					// Auto-detect: region first, then rcnt reset
+					SysReset();
+					
 					Load(File);
 					Running = 1;
 					psxCpu->Execute();
@@ -569,13 +578,16 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 						RestoreWindow();
 						return TRUE;
 					}
-					SysReset();
 					if (CheckCdrom() == -1) {
 						fprintf(stderr, _("The CD does not appear to be a valid Playstation CD"));
 						ClosePlugins();
 						RestoreWindow();
 						return TRUE;
 					}
+
+					// Auto-detect: region first, then rcnt reset
+					SysReset();
+					
 					if (LoadCdrom() == -1) {
 						fprintf(stderr, _("Could not load CD-ROM!"));
 						ClosePlugins();
@@ -599,8 +611,11 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 				case ID_EMULATOR_RESET:
 					SetMenu(hWnd, NULL);
 					OpenPlugins(hWnd);
-					SysReset();
 					CheckCdrom();
+
+					// Auto-detect: region first, then rcnt reset
+					SysReset();
+					
 					LoadCdrom();
 					ShowCursor(FALSE);
 					Running = 1;

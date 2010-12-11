@@ -424,8 +424,10 @@ int main(int argc, char *argv[]) {
 			return 1;
 		}
 
-		SysReset();
 		CheckCdrom();
+
+		// Auto-detect: get region first, then rcnt-bios reset
+		SysReset();
 
 		if (file[0] != '\0') {
 			Load(file);

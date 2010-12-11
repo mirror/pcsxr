@@ -56,14 +56,15 @@ static pthread_mutex_t eventMutex;
 
 	setjmp(restartJmp);
 
-	EmuReset();
-
 	int res = CheckCdrom();
 	if (res == -1) {
 		ClosePlugins();
 		SysMessage(_("Could not check CD-ROM!\n"));
 		goto done;
 	}
+
+	// Auto-detect: region first, then rcnt reset
+	EmuReset();
 
 	LoadCdrom();
 

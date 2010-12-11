@@ -467,6 +467,7 @@ void OnFile_RunExe() {
 				g_free(file);
 				SysRunGui();
 			} else {
+				// Auto-detect: get region first, then rcnt-bios reset
 				SysReset();
 
 				if (Load(file) == 0) {
@@ -501,8 +502,6 @@ void OnFile_RunCd() {
 		return;
 	}
 
-	SysReset();
-
 	if (CheckCdrom() == -1) {
 		/* Only check the CD if we are starting the console with a CD */
 		ClosePlugins();
@@ -510,6 +509,9 @@ void OnFile_RunCd() {
 		SysRunGui();
 		return;
 	}
+
+	// Auto-detect: get region first, then rcnt-bios reset
+	SysReset();
 
 	// Read main executable directly from CDRom and start it
 	if (LoadCdrom() == -1) {
@@ -641,8 +643,6 @@ void OnFile_RunImage() {
 		return;
 	}
 
-	SysReset();
-
 	if (CheckCdrom() == -1) {
 		// Only check the CD if we are starting the console with a CD
 		ClosePlugins();
@@ -650,6 +650,9 @@ void OnFile_RunImage() {
 		SysRunGui();
 		return;
 	}
+
+	// Auto-detect: get region first, then rcnt-bios reset
+	SysReset();
 
 	// Read main executable directly from CDRom and start it
 	if (LoadCdrom() == -1) {
@@ -691,11 +694,12 @@ void OnEmu_Reset() {
 		return;
 	}
 
-	SysReset();
-
 	if (CheckCdrom() != -1) {
 		LoadCdrom();
 	}
+
+	// Auto-detect: get region first, then rcnt-bios reset
+	SysReset();
 
 	psxCpu->Execute();
 }
@@ -795,17 +799,16 @@ void state_load(gchar *state_filename) {
 	ret = CheckState(state_filename);
 
 	if (ret == 0) {
-		SysReset();
-		ret = LoadState(state_filename);
-	}
-
-	if (ret == 0) {
 		// Check the CD-ROM is valid
 		if (CheckCdrom() == -1) {
 			ClosePlugins();
 			SysRunGui();
 			return;
 		}
+
+		// Auto-detect: region first, then rcnt reset
+		SysReset();
+		ret = LoadState(state_filename);
 
 		sprintf(Text, _("Loaded state %s."), state_filename);
 		GPU_displayText(Text);
