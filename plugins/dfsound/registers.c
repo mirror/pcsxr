@@ -432,7 +432,6 @@ void SoundOn(int start,int end,unsigned short val)     // SOUND ON PSX COMAND
 		 // ..?
 		 s_chan[ch].iSilent=0;
 		 //s_chan[ch].bStop=0;
-		 //s_chan[ch].pLoop=0;
 
 		 // Final Fantasy 7 - don't do any of these
 		 //s_chan[ch].pLoop = spuMemC;

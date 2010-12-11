@@ -468,7 +468,6 @@ static void *MAINThread(void *arg)
  int ch,predict_nr,shift_factor,flags,d,s;
  int bIRQReturn=0;
 
- bEndThread = 0;
  while(!bEndThread)                                    // until we are shutting down
   {
    // ok, at the beginning we are looking if there is
@@ -818,7 +817,7 @@ ENDX:   ;
 
 	
 	if( iUseTimer == 2 )
-		bEndThread = 1;
+		break;
  }
 
  // end of big main loop...
@@ -978,7 +977,6 @@ void RemoveTimer(void)
  if(iUseTimer==1) timeEndPeriod(1);                    // windows timer? stop it
 
 #else
-
  if(!iUseTimer)                                        // linux tread?
   {
    int i=0;
