@@ -849,6 +849,8 @@ DWORD WINAPI MAINThreadEx(LPVOID lpParameter)
 long cpu_cycles;
 void CALLBACK SPUasync(unsigned long cycle)
 {
+	cpu_cycles += cycle;
+
  if(iSpuAsyncWait)
   {
    iSpuAsyncWait++;
