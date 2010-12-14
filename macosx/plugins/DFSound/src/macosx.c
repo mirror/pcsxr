@@ -99,11 +99,12 @@ void SetupSound(void)
 	sndHeader.baseFrequency = kMiddleC;
 	sndHeader.numFrames     = buffer_size;
 	sndHeader.sampleSize    = 16;
-#ifdef __POWERPC__
-    sndHeader.format        = k16BitBigEndianFormat;
-#else
-    sndHeader.format        = k16BitLittleEndianFormat;
-#endif
+//#ifdef __POWERPC__
+//    sndHeader.format        = k16BitBigEndianFormat;
+//#else
+//    sndHeader.format        = k16BitLittleEndianFormat;
+//#endif
+	sndHeader.format		= k16BitNativeEndianFormat;
     sndHeader.compressionID = fixedCompression;
    
 	if (soundBufferAt != -1)

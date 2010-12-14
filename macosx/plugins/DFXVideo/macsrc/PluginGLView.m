@@ -568,7 +568,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 
 				row = 0;
 				// make sure the reads are aligned
-				while ((int)pD & 0x3) {
+				while ((intptr_t)pD & 0x3) {
 					*((unsigned long *)((surf)+(column*lPitch)+(row<<2))) =
 						(*(pD+0)<<16)|(*(pD+1)<<8)|*(pD+2);
 
@@ -582,7 +582,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 					unsigned long lu2 = *((unsigned long *)pD+1);
 					unsigned long lu3 = *((unsigned long *)pD+2);
 					unsigned long *dst = ((unsigned long *)((surf)+(column*lPitch)+(row<<2)));
-#ifdef __POWERPC__
+#ifdef __BIG_ENDIAN__
 					*(dst)=
 						(((lu1>>24)&0xff)<<16)|(((lu1>>16)&0xff)<<8)|(((lu1>>8)&0xff));
 					*(dst+1)=
@@ -629,7 +629,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 			{
 				for(row=0;row<dx;row++)
 				{
-#ifdef __POWERPC__
+#ifdef __BIG_ENDIAN__
 					lu=GETLE16D(SRCPtr++);
 #else
 					lu=*SRCPtr++;

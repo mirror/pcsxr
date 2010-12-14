@@ -4,6 +4,8 @@
  *           alexey silinov
  */
 
+#if defined (__ppc__) || defined (__ppc64__)
+
 #include <stdio.h>
 #include <string.h>
 
@@ -30,3 +32,4 @@ void ppcAlign(int bytes) {
 void ppcShutdown() {
 }
 
+#endif

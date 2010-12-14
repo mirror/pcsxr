@@ -1,4 +1,11 @@
 
+#if defined (__ppc__) || defined (__ppc64__)
+
+#ifdef ELF
+#define C(label) label
+#else
+#define C(label) _##label
+#endif
 
 #define OLD_REGISTER_OFFSET	(19*4)
 #define SP_SIZE			(OLD_REGISTER_OFFSET+4+8)
@@ -6,8 +13,8 @@
 /*asm void recRun(register void (*func)(), register u32 hw1, register u32 hw2)*/
         .text
         .align  4
-        .globl  recRun
-recRun:
+        .globl  C(recRun)
+C(recRun):
 	/* prologue code */
 	mflr	r0
 	stmw	r13, -(32-13)*4(r1)
@@ -25,8 +32,8 @@ asm void returnPC()
 {*/
         .text
         .align  4
-        .globl  returnPC
-returnPC:
+        .globl  C(returnPC)
+C(returnPC):
 	// end code
 	lwz		r0, (32-13)*4+8+4(r1)
 	addi	r1, r1, (32-13)*4+8
@@ -39,15 +46,15 @@ returnPC:
 
         .text
         .align  4
-        .globl  dynMemRead8
-dynMemRead8:
+        .globl  C(dynMemRead8)
+C(dynMemRead8):
 // assumes that memory pointer is in r30
 	addis    r2,r3,-0x1f80
 	srwi.     r4,r2,16
 	bne+     .norm8
 	cmplwi   r2,0x1000
 	blt-     .norm8
-	b        psxHwRead8
+	b        C(psxHwRead8)
 .norm8:
 	clrlwi   r5,r3,3
 	lbzx     r3,r5,r30
@@ -55,15 +62,15 @@ dynMemRead8:
 
         .text
         .align  4
-        .globl  dynMemRead16
-dynMemRead16:
+        .globl  C(dynMemRead16)
+C(dynMemRead16):
 // assumes that memory pointer is in r30
 	addis    r2,r3,-0x1f80
 	srwi.     r4,r2,16
 	bne+     .norm16
 	cmplwi   r2,0x1000
 	blt-     .norm16
-	b        psxHwRead16
+	b        C(psxHwRead16)
 .norm16:
 	clrlwi   r5,r3,3
 	lhbrx    r3,r5,r30
@@ -71,15 +78,15 @@ dynMemRead16:
 
         .text
         .align  4
-        .globl  dynMemRead32
-dynMemRead32:
+        .globl  C(dynMemRead32)
+C(dynMemRead32):
 // assumes that memory pointer is in r30
 	addis    r2,r3,-0x1f80
 	srwi.     r4,r2,16
 	bne+     .norm32
 	cmplwi   r2,0x1000
 	blt-     .norm32
-	b        psxHwRead32
+	b        C(psxHwRead32)
 .norm32:
 	clrlwi   r5,r3,3
 	lwbrx    r3,r5,r30
@@ -98,15 +105,15 @@ P | !(N | !Z)
 
         .text
         .align  4
-        .globl  dynMemWrite32
-dynMemWrite32:
+        .globl  C(dynMemWrite32)
+C(dynMemWrite32):
 // assumes that memory pointer is in r30
 	addis    r2,r3,-0x1f80
 	srwi.    r5,r2,16
 	bne+     .normw32
 	cmplwi   r2,0x1000
 	blt      .normw32
-	b        psxHwWrite32
+	b        C(psxHwWrite32)
 .normw32:
 	mtcrf    0xFF, r3
 	clrlwi   r5,r3,3
@@ -122,3 +129,4 @@ dynMemWrite32:
 	stwbrx   r4,r5,r30
 	blr
 
+#endif

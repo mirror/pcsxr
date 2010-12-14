@@ -23,6 +23,8 @@
  *           alexey silinov
  */
 
+#ifdef __i386__
+
 #include "ix86.h"
 
 s8  *x86Ptr;
@@ -1721,3 +1723,5 @@ void PFMINRtoR(int to, int from) {
 	ModRM(3, to, from);
 	write8(0x94);
 }
+
+#endif

@@ -1,4 +1,7 @@
 // stop compiling if NORECBUILD build (only for Visual Studio)
+
+#ifdef __x86_64__
+
 #if !(defined(_MSC_VER) && defined(PCSX2_NORECBUILD))
 
 #include <stdio.h>
@@ -244,5 +247,7 @@ void FCMOVNB32( x86IntRegType from )    { FCMOV32( 0xDB, 0xC0 ); }
 void FCMOVNE32( x86IntRegType from )    { FCMOV32( 0xDB, 0xC8 ); }
 void FCMOVNBE32( x86IntRegType from )   { FCMOV32( 0xDB, 0xD0 ); }
 void FCMOVNU32( x86IntRegType from )    { FCMOV32( 0xDB, 0xD8 ); }
+
+#endif
 
 #endif

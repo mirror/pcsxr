@@ -76,6 +76,7 @@
 {
 	if (plugins) [plugins release];
 	if (defaultKey) [defaultKey release];
+	[super dealloc];
 }
 
 @end

@@ -1,4 +1,7 @@
 // stop compiling if NORECBUILD build (only for Visual Studio)
+
+#ifdef __x86_64__
+
 #if !(defined(_MSC_VER) && defined(PCSX2_NORECBUILD))
 
 #include "ix86-64.h"
@@ -642,5 +645,7 @@ void MASKMOVQRtoR(x86MMXRegType to, x86MMXRegType from)
 	write16(0xf70f);
 	ModRM( 3, to, from );
 }
+
+#endif
 
 #endif

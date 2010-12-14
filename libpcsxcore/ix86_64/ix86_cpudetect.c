@@ -15,6 +15,9 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA
  */
+
+#ifdef __x86_64__
+
 #if defined (_WIN32)
 #include <windows.h>
 #endif
@@ -142,7 +145,7 @@ u64 GetCPUTick( void )
 #endif
 }
 
-#if defined __LINUX__
+#if defined(__LINUX__) || defined(__APPLE__)
 
 #include <sys/time.h>
 #include <errno.h>
@@ -485,3 +488,5 @@ void cpudetectInit( void )
    cpucaps.has3DNOWInstructionExtensions                = ( cpuinfo.x86EFlags >> 31 ) & 1; //3dnow   
    cpuinfo.cpuspeed = (u32 )(CPUSpeedHz( 1000 ) / 1000000);
 }
+
+#endif

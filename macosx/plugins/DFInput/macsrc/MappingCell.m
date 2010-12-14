@@ -31,13 +31,13 @@
 	return self;
 }
 
-- (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(int)selStart length:(int)selLength
+- (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength
 {
 	[super selectWithFrame:aRect inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 
-	int whichPad = [ControllerList currentController];
+	NSInteger whichPad = [ControllerList currentController];
 	NSTableView *tableView = (NSTableView *)[self controlView];
-	int i, changed = 0, row;
+	NSInteger i, changed = 0, row;
 	NSEvent *endEvent;
 	NSPoint where = {0.0, 0.0};
 

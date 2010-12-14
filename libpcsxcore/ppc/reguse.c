@@ -1,4 +1,6 @@
 
+#if defined (__ppc__) || defined (__ppc64__)
+
 #include "../psxcommon.h"
 #include "reguse.h"
 
@@ -417,3 +419,5 @@ int isPsxRegUsed(u32 pc, int psxreg)
     else
         return 0; // the next use is a write, i.e. current value is not important
 }
+
+#endif

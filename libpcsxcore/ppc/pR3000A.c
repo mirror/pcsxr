@@ -16,6 +16,8 @@
  *  Foundation, Inc., 51 Franklin Steet, Fifth Floor, Boston, MA 02111-1307 USA
  */
 
+#if defined (__ppc__) || defined (__ppc64__)
+
 #ifdef _MSC_VER_
 #pragma warning(disable:4244)
 #pragma warning(disable:4761)
@@ -3538,3 +3540,4 @@ R3000Acpu psxRec = {
 	recShutdown
 };
 
+#endif

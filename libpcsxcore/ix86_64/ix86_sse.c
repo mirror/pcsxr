@@ -1,4 +1,7 @@
 // stop compiling if NORECBUILD build (only for Visual Studio)
+
+#ifdef __x86_64__
+
 #if !(defined(_MSC_VER) && defined(PCSX2_NORECBUILD))
 
 #include <assert.h>
@@ -1451,5 +1454,7 @@ void SSE2EMU_MOVD_R_to_XMM( x86SSERegType to, x86IntRegType from ) {
 	MOV32ItoM((uptr)p+12, 0);
 	SSE_MOVAPS_M128_to_XMM(to, (uptr)p);
 }
+
+#endif
 
 #endif

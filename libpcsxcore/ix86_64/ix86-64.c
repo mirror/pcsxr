@@ -6,6 +6,8 @@
  *			 zerofrog(@gmail.com)
  */
 
+#ifdef __x86_64__
+
 // stop compiling if NORECBUILD build (only for Visual Studio)
 #if !(defined(_MSC_VER) && defined(PCSX2_NORECBUILD))
 
@@ -3135,5 +3137,7 @@ void LEA32RStoR(x86IntRegType to, x86IntRegType from, u32 scale)
 		LEA32RStoR(to, to, scale);
 	}
 }
+
+#endif
 
 #endif

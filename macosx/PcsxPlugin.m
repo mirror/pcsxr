@@ -274,7 +274,7 @@
 	return path;
 }
 
-- (unsigned)hash
+- (NSUInteger)hash
 {
     return [path hash];
 }

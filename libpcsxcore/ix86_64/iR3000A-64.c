@@ -21,6 +21,8 @@
 * i386 assembly functions for R3000A core.
 */
 
+#ifdef __x86_64__
+
 #include "ix86-64.h"
 #include "../r3000a.h"
 #include "../psxhle.h"
@@ -3009,3 +3011,4 @@ R3000Acpu psxRec = {
 	recClear,
 	recShutdown
 };
+#endif
