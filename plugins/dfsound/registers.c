@@ -70,7 +70,8 @@ void CALLBACK SPUwriteRegister(unsigned long reg, unsigned short val)
        break;
      //------------------------------------------------// start
      case 6:      
-       s_chan[ch].pStart=spuMemC+((unsigned long) val<<3);
+			 // Brain Dead 13 - align to 16 boundary
+       s_chan[ch].pStart= spuMemC+(unsigned long)((val<<3)&~0xf);
        break;
      //------------------------------------------------// level with pre-calcs
      case 8:
@@ -429,13 +430,15 @@ void SoundOn(int start,int end,unsigned short val)     // SOUND ON PSX COMAND
      s_chan[ch].bIgnoreLoop=0;
      s_chan[ch].bNew=1;
 
-		 // ..?
+		 // do this here, not in StartSound
+		 // - fixes fussy timing issues
 		 s_chan[ch].iSilent=0;
-		 //s_chan[ch].bStop=0;
+		 s_chan[ch].bStop=0;
+		 s_chan[ch].bOn=1;
+		 s_chan[ch].pCurr=s_chan[ch].pStart;
 
 		 // Final Fantasy 7 - don't do any of these
-		 //s_chan[ch].pLoop = spuMemC;
-		 //s_chan[ch].pLoop = 0;
+		 // - sets loop address before VoiceOn
 		 //s_chan[ch].pLoop = s_chan[ch].pStart;
 
      dwNewChannel|=(1<<ch);                            // bitfield for faster testing

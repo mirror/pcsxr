@@ -259,15 +259,16 @@ INLINE void StartSound(int ch)
  StartADSR(ch);
  StartREVERB(ch);
 
- s_chan[ch].pCurr=s_chan[ch].pStart;                   // set sample start
+ // fussy timing issues - do in VoiceOn
+ //s_chan[ch].pCurr=s_chan[ch].pStart;                   // set sample start
+ //s_chan[ch].bStop=0;
+ //s_chan[ch].bOn=1;
 
  s_chan[ch].s_1=0;                                     // init mixing vars
  s_chan[ch].s_2=0;
  s_chan[ch].iSBPos=28;
 
  s_chan[ch].bNew=0;                                    // init channel flags
- s_chan[ch].bStop=0;
- s_chan[ch].bOn=1;
 
  s_chan[ch].SB[29]=0;                                  // init our interpolation helpers
  s_chan[ch].SB[30]=0;
@@ -628,10 +629,12 @@ static void *MAINThread(void *arg)
 							// Xenogears - 7 = play missing sounds
 							start = s_chan[ch].pLoop;
 
-							// (?) - silence flag (voice still plays)
-							if( (flags&2) == 0 )
+							// (?) - silence flag (voice still plays?)
+							if( (flags&2) == 0 ) {
 								s_chan[ch].iSilent = 1;
+								s_chan[ch].iStop = 1;
 								//start = (unsigned char *) -1;
+							}
 						}
 
 #if 0
@@ -699,7 +702,7 @@ GOON: ;
            //////////////////////////////////////////////
            // ok, left/right sound volume (psx volume goes from 0 ... 0x3fff)
 
-           if(s_chan[ch].iMute || s_chan[ch].iSilent) 
+           if(s_chan[ch].iMute)// || s_chan[ch].iSilent) 
             s_chan[ch].sval=0;                         // debug mute
            else
             {
