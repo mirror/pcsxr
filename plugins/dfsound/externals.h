@@ -64,8 +64,8 @@ typedef struct
  int            ReleaseModeExp;
  unsigned long  ReleaseVal;
  long           ReleaseTime;
- long           ReleaseStartTime; 
- long           ReleaseVol; 
+ long           ReleaseStartTime;
+ long           ReleaseVol;
  long           lTime;
  long           lVolume;
 } ADSRInfo;
@@ -87,7 +87,7 @@ typedef struct
  long           lDummy1;
  long           lDummy2;
 } ADSRInfoEx;
-              
+
 ///////////////////////////////////////////////////////////
 
 // Tmp Flags
@@ -129,6 +129,7 @@ typedef struct
  int               bIgnoreLoop;                        // ignore loop bit, if an external loop address is used
  int               iMute;                              // mute mode (debug)
  int               iSilent;                            // voice on - sound on/off
+ int               iStop;                              //
  int               iRightVolume;                       // right volume
  int               iRightVolRaw;                       // right psx volume value
  int               iRawPitch;                          // raw pitch (0...3fff)
@@ -141,7 +142,7 @@ typedef struct
  int               bNoise;                             // noise active flag
  int               bFMod;                              // freq mod (0=off, 1=sound channel, 2=freq channel)
  int               iRVBNum;                            // another reverb helper
- int               iOldNoise;                          // old noise val for this channel   
+ int               iOldNoise;                          // old noise val for this channel
  ADSRInfo          ADSR;                               // active ADSR settings
  ADSRInfoEx        ADSRX;                              // next ADSR settings (will be moved to active on sample start)
 } SPUCHAN;
@@ -207,7 +208,7 @@ extern HINSTANCE hInst;
 
 // psx buffers / addresses
 
-extern unsigned short  regArea[];                        
+extern unsigned short  regArea[];
 extern unsigned short  spuMem[];
 extern unsigned char * spuMemC;
 extern unsigned char * pSpuIrq;
@@ -236,7 +237,7 @@ extern unsigned short spuCtrl;
 extern unsigned short spuStat;
 extern unsigned short spuIrq;
 extern unsigned long  spuAddr;
-extern int      bEndThread; 
+extern int      bEndThread;
 extern int      bThreadEnded;
 extern int      bSpuInit;
 extern unsigned long dwNewChannel;
@@ -317,6 +318,6 @@ extern int *          sRVBEnd;
 extern int *          sRVBStart;
 extern int            iReverbOff;
 extern int            iReverbRepeat;
-extern int            iReverbNum;    
+extern int            iReverbNum;
 
 #endif
