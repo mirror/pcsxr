@@ -224,66 +224,66 @@
 		559366C712B694DF004ACC1E /* ix86_mmx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86_mmx.c; sourceTree = "<group>"; };
 		559366C812B694DF004ACC1E /* ix86_sse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86_sse.c; sourceTree = "<group>"; };
 		559366C912B694DF004ACC1E /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
-		712FD1E51093096F00575A92 /* debug.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = debug.c; path = ../libpcsxcore/debug.c; sourceTree = SOURCE_ROOT; };
-		712FD1E61093096F00575A92 /* socket.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = socket.c; path = ../libpcsxcore/socket.c; sourceTree = SOURCE_ROOT; };
-		712FD1E71093096F00575A92 /* socket.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = socket.h; path = ../libpcsxcore/socket.h; sourceTree = SOURCE_ROOT; };
-		713B530C110B75650002F164 /* ppf.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = ppf.c; path = ../libpcsxcore/ppf.c; sourceTree = SOURCE_ROOT; };
-		713B530D110B75650002F164 /* ppf.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = ppf.h; path = ../libpcsxcore/ppf.h; sourceTree = SOURCE_ROOT; };
+		712FD1E51093096F00575A92 /* debug.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = debug.c; sourceTree = "<group>"; };
+		712FD1E61093096F00575A92 /* socket.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = socket.c; sourceTree = "<group>"; };
+		712FD1E71093096F00575A92 /* socket.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
+		713B530C110B75650002F164 /* ppf.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = ppf.c; sourceTree = "<group>"; };
+		713B530D110B75650002F164 /* ppf.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = ppf.h; sourceTree = "<group>"; };
 		7161C2810FDED6D000225F97 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		7161C2970FDED75300225F97 /* ExtendedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedKeys.h; sourceTree = "<group>"; };
-		7192F428129C412E0042D946 /* gpu.c */ = {isa = PBXFileReference; fileEncoding = 18446744071562067968; lastKnownFileType = sourcecode.c.c; name = gpu.c; path = ../libpcsxcore/gpu.c; sourceTree = SOURCE_ROOT; };
-		7192F429129C412E0042D946 /* gpu.h */ = {isa = PBXFileReference; fileEncoding = 18446744071562067968; lastKnownFileType = sourcecode.c.h; name = gpu.h; path = ../libpcsxcore/gpu.h; sourceTree = SOURCE_ROOT; };
-		719594AF11AEFE8C004AD686 /* gte_divider.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = gte_divider.h; path = ../libpcsxcore/gte_divider.h; sourceTree = SOURCE_ROOT; };
-		719594B011AEFE8C004AD686 /* psxcommon.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = psxcommon.c; path = ../libpcsxcore/psxcommon.c; sourceTree = SOURCE_ROOT; };
+		7192F428129C412E0042D946 /* gpu.c */ = {isa = PBXFileReference; fileEncoding = 18446744071562067968; lastKnownFileType = sourcecode.c.c; path = gpu.c; sourceTree = "<group>"; };
+		7192F429129C412E0042D946 /* gpu.h */ = {isa = PBXFileReference; fileEncoding = 18446744071562067968; lastKnownFileType = sourcecode.c.h; path = gpu.h; sourceTree = "<group>"; };
+		719594AF11AEFE8C004AD686 /* gte_divider.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = gte_divider.h; sourceTree = "<group>"; };
+		719594B011AEFE8C004AD686 /* psxcommon.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = psxcommon.c; sourceTree = "<group>"; };
 		71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PeopsSPU.xcodeproj; path = plugins/DFSound/PeopsSPU.xcodeproj; sourceTree = SOURCE_ROOT; };
 		71AD2DD210C3570900365243 /* PeopsSoftGPU.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PeopsSoftGPU.xcodeproj; path = plugins/DFXVideo/PeopsSoftGPU.xcodeproj; sourceTree = SOURCE_ROOT; };
 		71F2C07E1200B69B00322AD9 /* DFInput.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DFInput.xcodeproj; path = plugins/DFInput/DFInput.xcodeproj; sourceTree = "<group>"; };
-		71F4C5600FDED12800529849 /* cdriso.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cdriso.c; path = ../libpcsxcore/cdriso.c; sourceTree = SOURCE_ROOT; };
-		71F4C5610FDED12800529849 /* cdriso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cdriso.h; path = ../libpcsxcore/cdriso.h; sourceTree = SOURCE_ROOT; };
-		71F4C5620FDED12800529849 /* cdrom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cdrom.c; path = ../libpcsxcore/cdrom.c; sourceTree = SOURCE_ROOT; };
-		71F4C5630FDED12800529849 /* cdrom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cdrom.h; path = ../libpcsxcore/cdrom.h; sourceTree = SOURCE_ROOT; };
-		71F4C5640FDED12800529849 /* cheat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cheat.c; path = ../libpcsxcore/cheat.c; sourceTree = SOURCE_ROOT; };
-		71F4C5650FDED12800529849 /* cheat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cheat.h; path = ../libpcsxcore/cheat.h; sourceTree = SOURCE_ROOT; };
-		71F4C5660FDED12800529849 /* coff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = coff.h; path = ../libpcsxcore/coff.h; sourceTree = SOURCE_ROOT; };
-		71F4C5670FDED12800529849 /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = debug.h; path = ../libpcsxcore/debug.h; sourceTree = SOURCE_ROOT; };
-		71F4C5680FDED12800529849 /* decode_xa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = decode_xa.c; path = ../libpcsxcore/decode_xa.c; sourceTree = SOURCE_ROOT; };
-		71F4C5690FDED12800529849 /* decode_xa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = decode_xa.h; path = ../libpcsxcore/decode_xa.h; sourceTree = SOURCE_ROOT; };
-		71F4C56A0FDED12800529849 /* disr3000a.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = disr3000a.c; path = ../libpcsxcore/disr3000a.c; sourceTree = SOURCE_ROOT; };
-		71F4C56B0FDED12800529849 /* gte.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gte.c; path = ../libpcsxcore/gte.c; sourceTree = SOURCE_ROOT; };
-		71F4C56C0FDED12800529849 /* gte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gte.h; path = ../libpcsxcore/gte.h; sourceTree = SOURCE_ROOT; };
-		71F4C56D0FDED12800529849 /* mdec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mdec.c; path = ../libpcsxcore/mdec.c; sourceTree = SOURCE_ROOT; };
-		71F4C56E0FDED12800529849 /* mdec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mdec.h; path = ../libpcsxcore/mdec.h; sourceTree = SOURCE_ROOT; };
-		71F4C56F0FDED12800529849 /* misc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = misc.c; path = ../libpcsxcore/misc.c; sourceTree = SOURCE_ROOT; };
-		71F4C5700FDED12800529849 /* misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = misc.h; path = ../libpcsxcore/misc.h; sourceTree = SOURCE_ROOT; };
-		71F4C5710FDED12800529849 /* plugins.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = plugins.c; path = ../libpcsxcore/plugins.c; sourceTree = SOURCE_ROOT; };
-		71F4C5720FDED12800529849 /* plugins.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = plugins.h; path = ../libpcsxcore/plugins.h; sourceTree = SOURCE_ROOT; };
-		71F4C5730FDED12800529849 /* psemu_plugin_defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = psemu_plugin_defs.h; path = ../libpcsxcore/psemu_plugin_defs.h; sourceTree = SOURCE_ROOT; };
-		71F4C5740FDED12800529849 /* psxbios.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psxbios.c; path = ../libpcsxcore/psxbios.c; sourceTree = SOURCE_ROOT; };
-		71F4C5750FDED12800529849 /* psxbios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = psxbios.h; path = ../libpcsxcore/psxbios.h; sourceTree = SOURCE_ROOT; };
-		71F4C5760FDED12800529849 /* psxcommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = psxcommon.h; path = ../libpcsxcore/psxcommon.h; sourceTree = SOURCE_ROOT; };
-		71F4C5770FDED12800529849 /* psxcounters.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psxcounters.c; path = ../libpcsxcore/psxcounters.c; sourceTree = SOURCE_ROOT; };
-		71F4C5780FDED12800529849 /* psxcounters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = psxcounters.h; path = ../libpcsxcore/psxcounters.h; sourceTree = SOURCE_ROOT; };
-		71F4C5790FDED12800529849 /* psxdma.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psxdma.c; path = ../libpcsxcore/psxdma.c; sourceTree = SOURCE_ROOT; };
-		71F4C57A0FDED12800529849 /* psxdma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = psxdma.h; path = ../libpcsxcore/psxdma.h; sourceTree = SOURCE_ROOT; };
-		71F4C57B0FDED12800529849 /* psxhle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psxhle.c; path = ../libpcsxcore/psxhle.c; sourceTree = SOURCE_ROOT; };
-		71F4C57C0FDED12800529849 /* psxhle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = psxhle.h; path = ../libpcsxcore/psxhle.h; sourceTree = SOURCE_ROOT; };
-		71F4C57D0FDED12800529849 /* psxhw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psxhw.c; path = ../libpcsxcore/psxhw.c; sourceTree = SOURCE_ROOT; };
-		71F4C57E0FDED12800529849 /* psxhw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = psxhw.h; path = ../libpcsxcore/psxhw.h; sourceTree = SOURCE_ROOT; };
-		71F4C57F0FDED12800529849 /* psxinterpreter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psxinterpreter.c; path = ../libpcsxcore/psxinterpreter.c; sourceTree = SOURCE_ROOT; };
-		71F4C5800FDED12800529849 /* psxmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psxmem.c; path = ../libpcsxcore/psxmem.c; sourceTree = SOURCE_ROOT; };
-		71F4C5810FDED12800529849 /* psxmem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = psxmem.h; path = ../libpcsxcore/psxmem.h; sourceTree = SOURCE_ROOT; };
-		71F4C5820FDED12800529849 /* r3000a.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = r3000a.c; path = ../libpcsxcore/r3000a.c; sourceTree = SOURCE_ROOT; };
-		71F4C5830FDED12800529849 /* r3000a.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = r3000a.h; path = ../libpcsxcore/r3000a.h; sourceTree = SOURCE_ROOT; };
-		71F4C5840FDED12800529849 /* sio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sio.c; path = ../libpcsxcore/sio.c; sourceTree = SOURCE_ROOT; };
-		71F4C5850FDED12800529849 /* sio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sio.h; path = ../libpcsxcore/sio.h; sourceTree = SOURCE_ROOT; };
-		71F4C5860FDED12800529849 /* spu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = spu.c; path = ../libpcsxcore/spu.c; sourceTree = SOURCE_ROOT; };
-		71F4C5870FDED12800529849 /* spu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spu.h; path = ../libpcsxcore/spu.h; sourceTree = SOURCE_ROOT; };
-		71F4C5880FDED12800529849 /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = system.h; path = ../libpcsxcore/system.h; sourceTree = SOURCE_ROOT; };
-		71F4C5B40FDED16D00529849 /* iGte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iGte.h; path = ../libpcsxcore/ix86/iGte.h; sourceTree = SOURCE_ROOT; };
-		71F4C5B50FDED16D00529849 /* iR3000A.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = iR3000A.c; path = ../libpcsxcore/ix86/iR3000A.c; sourceTree = SOURCE_ROOT; };
-		71F4C5B60FDED16D00529849 /* ix86.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ix86.c; path = ../libpcsxcore/ix86/ix86.c; sourceTree = SOURCE_ROOT; };
-		71F4C5B70FDED16D00529849 /* ix86.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ix86.h; path = ../libpcsxcore/ix86/ix86.h; sourceTree = SOURCE_ROOT; };
-		71F703A611B3A673007DD5C5 /* sjisfont.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = sjisfont.h; path = ../libpcsxcore/sjisfont.h; sourceTree = SOURCE_ROOT; };
+		71F4C5600FDED12800529849 /* cdriso.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cdriso.c; sourceTree = "<group>"; };
+		71F4C5610FDED12800529849 /* cdriso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cdriso.h; sourceTree = "<group>"; };
+		71F4C5620FDED12800529849 /* cdrom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cdrom.c; sourceTree = "<group>"; };
+		71F4C5630FDED12800529849 /* cdrom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cdrom.h; sourceTree = "<group>"; };
+		71F4C5640FDED12800529849 /* cheat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cheat.c; sourceTree = "<group>"; };
+		71F4C5650FDED12800529849 /* cheat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cheat.h; sourceTree = "<group>"; };
+		71F4C5660FDED12800529849 /* coff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = coff.h; sourceTree = "<group>"; };
+		71F4C5670FDED12800529849 /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
+		71F4C5680FDED12800529849 /* decode_xa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = decode_xa.c; sourceTree = "<group>"; };
+		71F4C5690FDED12800529849 /* decode_xa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = decode_xa.h; sourceTree = "<group>"; };
+		71F4C56A0FDED12800529849 /* disr3000a.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = disr3000a.c; sourceTree = "<group>"; };
+		71F4C56B0FDED12800529849 /* gte.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gte.c; sourceTree = "<group>"; };
+		71F4C56C0FDED12800529849 /* gte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gte.h; sourceTree = "<group>"; };
+		71F4C56D0FDED12800529849 /* mdec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mdec.c; sourceTree = "<group>"; };
+		71F4C56E0FDED12800529849 /* mdec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mdec.h; sourceTree = "<group>"; };
+		71F4C56F0FDED12800529849 /* misc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = misc.c; sourceTree = "<group>"; };
+		71F4C5700FDED12800529849 /* misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = misc.h; sourceTree = "<group>"; };
+		71F4C5710FDED12800529849 /* plugins.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = plugins.c; sourceTree = "<group>"; };
+		71F4C5720FDED12800529849 /* plugins.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plugins.h; sourceTree = "<group>"; };
+		71F4C5730FDED12800529849 /* psemu_plugin_defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psemu_plugin_defs.h; sourceTree = "<group>"; };
+		71F4C5740FDED12800529849 /* psxbios.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = psxbios.c; sourceTree = "<group>"; };
+		71F4C5750FDED12800529849 /* psxbios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psxbios.h; sourceTree = "<group>"; };
+		71F4C5760FDED12800529849 /* psxcommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psxcommon.h; sourceTree = "<group>"; };
+		71F4C5770FDED12800529849 /* psxcounters.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = psxcounters.c; sourceTree = "<group>"; };
+		71F4C5780FDED12800529849 /* psxcounters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psxcounters.h; sourceTree = "<group>"; };
+		71F4C5790FDED12800529849 /* psxdma.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = psxdma.c; sourceTree = "<group>"; };
+		71F4C57A0FDED12800529849 /* psxdma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psxdma.h; sourceTree = "<group>"; };
+		71F4C57B0FDED12800529849 /* psxhle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = psxhle.c; sourceTree = "<group>"; };
+		71F4C57C0FDED12800529849 /* psxhle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psxhle.h; sourceTree = "<group>"; };
+		71F4C57D0FDED12800529849 /* psxhw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = psxhw.c; sourceTree = "<group>"; };
+		71F4C57E0FDED12800529849 /* psxhw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psxhw.h; sourceTree = "<group>"; };
+		71F4C57F0FDED12800529849 /* psxinterpreter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = psxinterpreter.c; sourceTree = "<group>"; };
+		71F4C5800FDED12800529849 /* psxmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = psxmem.c; sourceTree = "<group>"; };
+		71F4C5810FDED12800529849 /* psxmem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psxmem.h; sourceTree = "<group>"; };
+		71F4C5820FDED12800529849 /* r3000a.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = r3000a.c; sourceTree = "<group>"; };
+		71F4C5830FDED12800529849 /* r3000a.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r3000a.h; sourceTree = "<group>"; };
+		71F4C5840FDED12800529849 /* sio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sio.c; sourceTree = "<group>"; };
+		71F4C5850FDED12800529849 /* sio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sio.h; sourceTree = "<group>"; };
+		71F4C5860FDED12800529849 /* spu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = spu.c; sourceTree = "<group>"; };
+		71F4C5870FDED12800529849 /* spu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spu.h; sourceTree = "<group>"; };
+		71F4C5880FDED12800529849 /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
+		71F4C5B40FDED16D00529849 /* iGte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGte.h; sourceTree = "<group>"; };
+		71F4C5B50FDED16D00529849 /* iR3000A.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iR3000A.c; sourceTree = "<group>"; };
+		71F4C5B60FDED16D00529849 /* ix86.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86.c; sourceTree = "<group>"; };
+		71F4C5B70FDED16D00529849 /* ix86.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ix86.h; sourceTree = "<group>"; };
+		71F703A611B3A673007DD5C5 /* sjisfont.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = sjisfont.h; sourceTree = "<group>"; };
 		71F93F6311FB8E9D007A5A7C /* DFCdrom.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DFCdrom.xcodeproj; path = plugins/DFCdrom/DFCdrom.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -357,7 +357,7 @@
 			path = icons;
 			sourceTree = "<group>";
 		};
-		2BA178AD0514CE260026D74D /* English.lproj */ = {
+		2BA178AD0514CE260026D74D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				2BBB1786051E0D9700B84448 /* Credits.rtf */,
@@ -366,6 +366,7 @@
 				2BA178B40514CE260026D74D /* PCSX.nib */,
 				2B3E35BA069384D100763C7D /* AddPluginSheet.nib */,
 			);
+			name = Resources;
 			path = English.lproj;
 			sourceTree = "<group>";
 		};
@@ -383,7 +384,7 @@
 		2BC4787804C7FDBD00CAB520 /* MacOSX */ = {
 			isa = PBXGroup;
 			children = (
-				2BA178AD0514CE260026D74D /* English.lproj */,
+				2BA178AD0514CE260026D74D /* Resources */,
 				2B143D00078A2CBD00AF745A /* icons */,
 				7161C2810FDED6D000225F97 /* config.h */,
 				2BA178A505148D9D0026D74D /* main.m */,
@@ -466,6 +467,7 @@
 				71F4C5880FDED12800529849 /* system.h */,
 			);
 			name = libpcsxcore;
+			path = ../libpcsxcore;
 			sourceTree = "<group>";
 		};
 		556A147A12B6DE1A007DE998 /* ppc */ = {
@@ -480,9 +482,8 @@
 				556A148112B6DE1A007DE998 /* reguse.c */,
 				556A148212B6DE1A007DE998 /* reguse.h */,
 			);
-			name = ppc;
-			path = ../libpcsxcore/ppc;
-			sourceTree = SOURCE_ROOT;
+			path = ppc;
+			sourceTree = "<group>";
 		};
 		559366BF12B694DF004ACC1E /* ix86_64 */ = {
 			isa = PBXGroup;
@@ -498,9 +499,8 @@
 				559366C812B694DF004ACC1E /* ix86_sse.c */,
 				559366C912B694DF004ACC1E /* README */,
 			);
-			name = ix86_64;
-			path = ../libpcsxcore/ix86_64;
-			sourceTree = SOURCE_ROOT;
+			path = ix86_64;
+			sourceTree = "<group>";
 		};
 		71AD2DCD10C356FD00365243 /* Products */ = {
 			isa = PBXGroup;
@@ -534,7 +534,7 @@
 				71F4C5B60FDED16D00529849 /* ix86.c */,
 				71F4C5B70FDED16D00529849 /* ix86.h */,
 			);
-			name = ix86;
+			path = ix86;
 			sourceTree = "<group>";
 		};
 		71F93F6411FB8E9D007A5A7C /* Products */ = {

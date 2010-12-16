@@ -84,7 +84,7 @@
 			children = (
 				71E9EBF0109F24B600E98D1D /* src */,
 				2BD2E2F40779F50B00657C69 /* macsrc */,
-				2BD2E818077AFB9F00657C69 /* English.lproj */,
+				2BD2E818077AFB9F00657C69 /* Resources */,
 				2B3E5DED062B36A0001D796E /* NetSfPeopsSoftGPUInterface.nib */,
 				2B038D2206918AA80082466B /* Info.plist */,
 				2B3E5A0B062AAC34001D796E /* Frameworks */,
@@ -126,14 +126,14 @@
 			name = macsrc;
 			sourceTree = "<group>";
 		};
-		2BD2E818077AFB9F00657C69 /* English.lproj */ = {
+		2BD2E818077AFB9F00657C69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				2BD2E828077AFC2C00657C69 /* NetSfPeopsSoftGPUConfig.nib */,
 				2BD2E767077AF53E00657C69 /* Credits.rtf */,
 				2B038C05069183300082466B /* InfoPlist.strings */,
 			);
-			name = English.lproj;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		71E9EBF0109F24B600E98D1D /* src */ = {

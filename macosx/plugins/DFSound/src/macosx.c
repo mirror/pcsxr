@@ -21,6 +21,8 @@
 #define _IN_MACOSX
 
 #ifdef _MACOSX
+//TODO: Move to CoreAudio; the Carbon Sound Manager isn't availabne
+//TODO: in 64-bit code
 
 #include <Carbon/Carbon.h>
 #include "externals.h"
