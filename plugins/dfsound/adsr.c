@@ -62,6 +62,13 @@ INLINE void StartADSR(int ch)                          // MIX ADSR
 
 INLINE int MixADSR(int ch)                             // MIX ADSR
 {    
+ // dead volume - voice on
+ if( s_chan[ch].iSilent == 2 ) {
+	 if( s_chan[ch].bStop ) s_chan[ch].bOn = 0;
+	 return 0;
+ }
+
+
  if(s_chan[ch].bStop)                                  // should be stopped:
   {                                                    // do release
    if(s_chan[ch].ADSRX.ReleaseModeExp)

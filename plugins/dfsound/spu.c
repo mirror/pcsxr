@@ -539,12 +539,15 @@ static void *MAINThread(void *arg)
             {
              start=s_chan[ch].pCurr;                   // set up the current pos
 
-             if (s_chan[ch].iSilent || start == (unsigned char*)-1)          // special "stop" sign
+             if (s_chan[ch].iSilent==1 || start == (unsigned char*)-1)          // special "stop" sign
               {
-               s_chan[ch].bOn=0;                       // -> turn everything off
+               // silence = let channel keep running (IRQs)
+							 //s_chan[ch].bOn=0;                       // -> turn everything off
+							 s_chan[ch].iSilent=2;
+
                s_chan[ch].ADSRX.lVolume=0;
                s_chan[ch].ADSRX.EnvelopeVol=0;
-               goto ENDX;                              // -> and done for this channel
+               //goto ENDX;                              // -> and done for this channel
               }
 
              s_chan[ch].iSBPos=0;
@@ -629,10 +632,13 @@ static void *MAINThread(void *arg)
 							// Xenogears - 7 = play missing sounds
 							start = s_chan[ch].pLoop;
 
-							// (?) - silence flag (voice still plays?)
+							// silence = keep playing..?
 							if( (flags&2) == 0 ) {
 								s_chan[ch].iSilent = 1;
-								s_chan[ch].bStop = 1;
+								
+								// silence = don't start release phase
+								//s_chan[ch].bStop = 1;
+
 								//start = (unsigned char *) -1;
 							}
 						}
@@ -702,7 +708,7 @@ GOON: ;
            //////////////////////////////////////////////
            // ok, left/right sound volume (psx volume goes from 0 ... 0x3fff)
 
-           if(s_chan[ch].iMute)// || s_chan[ch].iSilent) 
+           if(s_chan[ch].iMute)
             s_chan[ch].sval=0;                         // debug mute
            else
             {
