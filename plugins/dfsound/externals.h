@@ -129,7 +129,6 @@ typedef struct
  int               bIgnoreLoop;                        // ignore loop bit, if an external loop address is used
  int               iMute;                              // mute mode (debug)
  int               iSilent;                            // voice on - sound on/off
- int               iStop;                              //
  int               iRightVolume;                       // right volume
  int               iRightVolRaw;                       // right psx volume value
  int               iRawPitch;                          // raw pitch (0...3fff)

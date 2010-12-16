@@ -632,7 +632,7 @@ static void *MAINThread(void *arg)
 							// (?) - silence flag (voice still plays?)
 							if( (flags&2) == 0 ) {
 								s_chan[ch].iSilent = 1;
-								s_chan[ch].iStop = 1;
+								s_chan[ch].bStop = 1;
 								//start = (unsigned char *) -1;
 							}
 						}
