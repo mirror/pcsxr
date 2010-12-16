@@ -539,7 +539,7 @@ static void *MAINThread(void *arg)
             {
              start=s_chan[ch].pCurr;                   // set up the current pos
 
-             if (start == (unsigned char*)-1)          // special "stop" sign
+             if (s_chan[ch].iSilent || start == (unsigned char*)-1)          // special "stop" sign
               {
                s_chan[ch].bOn=0;                       // -> turn everything off
                s_chan[ch].ADSRX.lVolume=0;
