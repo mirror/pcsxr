@@ -806,6 +806,7 @@ static long CALLBACK ISOopen(void) {
 	cddaBigEndian = FALSE;
 	subChanMixed = FALSE;
 	subChanRaw = FALSE;
+	isMode1ISO = FALSE;
 
 	if (parseccd(GetIsoFile()) == 0) {
 		SysPrintf("[+ccd]");
@@ -945,17 +946,19 @@ static long CALLBACK ISOreadTrack(unsigned char *time) {
 
 		if (subChanRaw) DecodeRawSubData();
 	}
-	else if(isMode1ISO) {
-		fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * MODE1_DATA_SIZE, SEEK_SET);
-		fread(cdbuffer + 12, 1, MODE1_DATA_SIZE, cdHandle);
-		memset(cdbuffer, 0, 12); //not really necessary, fake mode 2 header
-		cdbuffer[0] = (time[0]);
-		cdbuffer[1] = (time[1]);
-		cdbuffer[2] = (time[2]);
-		cdbuffer[3] = 1; //mode 1
-	} else {
-		fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * CD_FRAMESIZE_RAW + 12, SEEK_SET);
-		fread(cdbuffer, 1, DATA_SIZE, cdHandle);
+	else {
+		if(isMode1ISO) {
+			fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * MODE1_DATA_SIZE, SEEK_SET);
+			fread(cdbuffer + 12, 1, MODE1_DATA_SIZE, cdHandle);
+			memset(cdbuffer, 0, 12); //not really necessary, fake mode 2 header
+			cdbuffer[0] = (time[0]);
+			cdbuffer[1] = (time[1]);
+			cdbuffer[2] = (time[2]);
+			cdbuffer[3] = 1; //mode 1
+		} else {
+			fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * CD_FRAMESIZE_RAW + 12, SEEK_SET);
+			fread(cdbuffer, 1, DATA_SIZE, cdHandle);
+		}
 
 		if (subHandle != NULL) {
 			fseek(subHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * SUB_FRAMESIZE, SEEK_SET);
