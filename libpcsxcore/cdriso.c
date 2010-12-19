@@ -45,6 +45,12 @@ static unsigned char sndbuffer[CD_FRAMESIZE_RAW * 10];
 
 #define CDDA_FRAMETIME			(1000 * (sizeof(sndbuffer) / CD_FRAMESIZE_RAW) / 75)
 
+
+#define MODE1_DATA_SIZE			2048
+
+static boolean isMode1ISO = FALSE;
+
+
 #ifdef _WIN32
 static HANDLE threadid;
 #else
@@ -784,6 +790,8 @@ static void PrintTracks(void) {
 // This function is invoked by the front-end when opening an ISO
 // file for playback
 static long CALLBACK ISOopen(void) {
+	u32 modeTest = 0;
+
 	if (cdHandle != NULL) {
 		return 0; // it's already open
 	}
@@ -810,7 +818,17 @@ static long CALLBACK ISOopen(void) {
 	}
 	else if (parsetoc(GetIsoFile()) == 0) {
 		SysPrintf("[+toc]");
+	} else {
+		//guess whether it is mode1/2048
+		fseek(cdHandle, 0, SEEK_END);
+		if(ftell(cdHandle) % 2048 == 0) {
+			fseek(cdHandle, 0, SEEK_SET);
+			fread(&modeTest, 4, 1, cdHandle);
+			if(modeTest!=0xffffff00) isMode1ISO = TRUE;
+		}
+		fseek(cdHandle, 0, SEEK_SET);
 	}
+
 
 	if (!subChanMixed && opensubfile(GetIsoFile()) == 0) {
 		SysPrintf("[+sub]");
@@ -927,7 +945,15 @@ static long CALLBACK ISOreadTrack(unsigned char *time) {
 
 		if (subChanRaw) DecodeRawSubData();
 	}
-	else {
+	else if(isMode1ISO) {
+		fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * MODE1_DATA_SIZE, SEEK_SET);
+		fread(cdbuffer + 12, 1, MODE1_DATA_SIZE, cdHandle);
+		memset(cdbuffer, 0, 12); //not really necessary, fake mode 2 header
+		cdbuffer[0] = (time[0]);
+		cdbuffer[1] = (time[1]);
+		cdbuffer[2] = (time[2]);
+		cdbuffer[3] = 1; //mode 1
+	} else {
 		fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * CD_FRAMESIZE_RAW + 12, SEEK_SET);
 		fread(cdbuffer, 1, DATA_SIZE, cdHandle);
 
