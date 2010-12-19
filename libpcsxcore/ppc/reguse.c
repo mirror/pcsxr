@@ -1,5 +1,5 @@
 
-#if defined (__ppc__) || defined (__ppc64__)
+#if defined (__ppc__) || defined (__ppc64__) || defined (__powerpc__) || (__powerpc64__)
 
 #include "../psxcommon.h"
 #include "reguse.h"

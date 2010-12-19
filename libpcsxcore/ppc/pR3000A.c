@@ -16,7 +16,7 @@
  *  Foundation, Inc., 51 Franklin Steet, Fifth Floor, Boston, MA 02111-1307 USA
  */
 
-#if defined (__ppc__) || defined (__ppc64__)
+#if defined (__ppc__) || defined (__ppc64__) || defined (__powerpc__) || (__powerpc64__)
 
 #ifdef _MSC_VER_
 #pragma warning(disable:4244)
