@@ -40,6 +40,7 @@
 		559366CE12B694DF004ACC1E /* ix86_fpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C612B694DF004ACC1E /* ix86_fpu.c */; };
 		559366CF12B694DF004ACC1E /* ix86_mmx.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C712B694DF004ACC1E /* ix86_mmx.c */; };
 		559366D012B694DF004ACC1E /* ix86_sse.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C812B694DF004ACC1E /* ix86_sse.c */; };
+		55F2632012B80F6500951DE7 /* NullSPU.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55F262EA12B8077D00951DE7 /* NullSPU.psxplugin */; };
 		712FD1E81093096F00575A92 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E51093096F00575A92 /* debug.c */; };
 		712FD1E91093096F00575A92 /* socket.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E61093096F00575A92 /* socket.c */; };
 		713B530E110B75650002F164 /* ppf.c in Sources */ = {isa = PBXBuildFile; fileRef = 713B530C110B75650002F164 /* ppf.c */; };
@@ -95,6 +96,20 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
+		55F262E912B8077D00951DE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55F262E612B8077D00951DE7;
+			remoteInfo = "PeopsSPU copy";
+		};
+		55F2631E12B80F5800951DE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 55F262D112B8077D00951DE7;
+			remoteInfo = NullSPU;
+		};
 		713CB2DD11FC49720033B6A8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 71F93F6311FB8E9D007A5A7C /* DFCdrom.xcodeproj */;
@@ -160,6 +175,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				55F2632012B80F6500951DE7 /* NullSPU.psxplugin in Copy PlugIns */,
 				71F2C0881200B6B000322AD9 /* DFInput.psxplugin in Copy PlugIns */,
 				713CB2E411FC49DA0033B6A8 /* DFCdrom.psxplugin in Copy PlugIns */,
 				71AD2DF510C3575C00365243 /* PeopsSoftGL.psxplugin in Copy PlugIns */,
@@ -506,6 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				71AD2DD110C356FD00365243 /* PeopsSPU.psxplugin */,
+				55F262EA12B8077D00951DE7 /* NullSPU.psxplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -566,6 +583,7 @@
 				71AD2DEB10C3572500365243 /* PBXTargetDependency */,
 				713CB2DE11FC49720033B6A8 /* PBXTargetDependency */,
 				71F2C0BC1200B75100322AD9 /* PBXTargetDependency */,
+				55F2631F12B80F5800951DE7 /* PBXTargetDependency */,
 			);
 			name = PCSX;
 			productInstallPath = "$(USER_APPS_DIR)";
@@ -616,6 +634,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		55F262EA12B8077D00951DE7 /* NullSPU.psxplugin */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NullSPU.psxplugin;
+			remoteRef = 55F262E912B8077D00951DE7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		71AD2DD110C356FD00365243 /* PeopsSPU.psxplugin */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
@@ -722,6 +747,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		55F2631F12B80F5800951DE7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NullSPU;
+			targetProxy = 55F2631E12B80F5800951DE7 /* PBXContainerItemProxy */;
+		};
 		713CB2DE11FC49720033B6A8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = DFCdrom;

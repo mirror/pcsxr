@@ -36,6 +36,20 @@
 
 #include <GL/gl.h>
 
+#elif defined(_MACGL)
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <OpenGL/gl.h>
+#include <math.h> 
+
+#define CALLBACK /* */
+
 #else
 
 #define __X11_C_

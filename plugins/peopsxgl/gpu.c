@@ -21,7 +21,7 @@
 
 #include "stdafx.h"
 
-#ifndef _WINDOWS
+#if !defined(_MACGL) && !defined(_WINDOWS)
 
 #include "config.h"
 
