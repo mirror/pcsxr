@@ -825,7 +825,7 @@ static long CALLBACK ISOopen(void) {
 		if(ftell(cdHandle) % 2048 == 0) {
 			fseek(cdHandle, 0, SEEK_SET);
 			fread(&modeTest, 4, 1, cdHandle);
-			if(modeTest!=0xffffff00) isMode1ISO = TRUE;
+			if(SWAP32(modeTest)!=0xffffff00) isMode1ISO = TRUE;
 		}
 		fseek(cdHandle, 0, SEEK_SET);
 	}
