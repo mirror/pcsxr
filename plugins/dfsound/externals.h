@@ -44,8 +44,28 @@
 // num of channels
 #define MAXCHAN     24
 
-// ~ 1 ms of data
-#define NSSIZE 45
+
+// ~ 1 ms of data - somewhat slower than Eternal
+//#define NSSIZE 45
+//#define INTERVAL_TIME 1000
+
+// ~ 0.5 ms of data - roughly Eternal maybe
+//#define NSSIZE 23
+//#define INTERVAL_TIME 2000
+
+// ~ 0.25 ms of data - seems a little bad..?
+//#define NSSIZE 12
+//#define INTERVAL_TIME 4000
+
+#define NSSIZE 10
+#define APU_CYCLES_UPDATE NSSIZE
+#define LATENCY 10
+
+// make sure this is bigger than cpu action - no glitchy
+#define INTERVAL_TIME 5000
+
+
+#define CPU_CLOCK 33868800
 
 ///////////////////////////////////////////////////////////
 // struct defines

@@ -347,9 +347,12 @@ INLINE int iGetNoiseVal(int ch)
 
 INLINE void StoreInterpolationVal(int ch,int fa)
 {
+	/*
+	// fmod channel = sound output
  if(s_chan[ch].bFMod==2)                               // fmod freq channel
   s_chan[ch].SB[29]=fa;
  else
+ */
   {
    if((spuCtrl&0x4000)==0) fa=0;                       // muted?
    else                                                // else adjust
@@ -384,7 +387,8 @@ INLINE int iGetInterpolationVal(int ch)
 {
  int fa;
 
- if(s_chan[ch].bFMod==2) return s_chan[ch].SB[29];
+ // fmod channel = sound output
+ //if(s_chan[ch].bFMod==2) return s_chan[ch].SB[29];
 
  switch(iUseInterpolation)
   {   
@@ -481,7 +485,7 @@ static void *MAINThread(void *arg)
    if(dwNewChannel)                                    // new channel should start immedately?
     {                                                  // (at least one bit 0 ... MAXCHANNEL is set?)
      iSecureStart++;                                   // -> set iSecure
-     if(iSecureStart>5) iSecureStart=0;                //    (if it is set 5 times - that means on 5 tries a new samples has been started - in a row, we will reset it, to give the sound update a chance)
+     if(iSecureStart>0) iSecureStart=0;                //    (if it is set 5 times - that means on 5 tries a new samples has been started - in a row, we will reset it, to give the sound update a chance)
     }
    else iSecureStart=0;                                // 0: no new channel should start
 
@@ -547,7 +551,6 @@ static void *MAINThread(void *arg)
 
                s_chan[ch].ADSRX.lVolume=0;
                s_chan[ch].ADSRX.EnvelopeVol=0;
-               //goto ENDX;                              // -> and done for this channel
               }
 
              s_chan[ch].iSBPos=0;
@@ -629,6 +632,9 @@ static void *MAINThread(void *arg)
 
 						if(flags&1)
 						{
+							// ...?
+							//s_chan[ch].bIgnoreLoop = 0;
+
 							// Xenogears - 7 = play missing sounds
 							start = s_chan[ch].pLoop;
 
@@ -727,9 +733,7 @@ GOON: ;
 
          ns++;
          s_chan[ch].spos += s_chan[ch].sinc;
-
         }
-ENDX:   ;
       }
     }
 
@@ -814,9 +818,11 @@ ENDX:   ;
 
   //////////////////////////////////////////////////////                   
   // feed the sound
-  // latency = 20 ms (less pops, crackles, smoother)
+  // latency = 25 ms (less pops, crackles, smoother)
 
-	if(iCycle++>=20)
+	//if(iCycle++>=20)
+	iCycle += APU_CYCLES_UPDATE;
+	if(iCycle > 44000/1000*LATENCY + 100*LATENCY/1000)
    {
     SoundFeedStreamData((unsigned char *)pSpuBuffer,
                         ((unsigned char *)pS) - ((unsigned char *)pSpuBuffer));
@@ -887,7 +893,7 @@ void CALLBACK SPUasync(unsigned long cycle)
    if(!bSpuInit) return;                               // -> no init, no call
 
 	 // 1 ms updates
-	 while( cpu_cycles >= 33868800 / 1000 )
+	 while( cpu_cycles >= CPU_CLOCK / INTERVAL_TIME )
 	 {
 	#ifdef _WINDOWS
 		 MAINProc(0,0,0,0,0);                                // -> experimental win mode... not really tested... don't like the drawbacks
@@ -895,7 +901,7 @@ void CALLBACK SPUasync(unsigned long cycle)
 		 MAINThread(0);                                      // -> linux high-compat mode
 	#endif
 
-		 cpu_cycles -= 33868800 / 1000;
+		 cpu_cycles -= CPU_CLOCK / INTERVAL_TIME;
 	 }
   }
 }
