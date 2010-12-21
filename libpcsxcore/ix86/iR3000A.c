@@ -36,7 +36,7 @@ u32 *psxRecLUT;
 #undef PC_REC8
 #undef PC_REC16
 #undef PC_REC32
-#define PC_REC(x)	(psxRecLUT[x >> 16] + (x & 0xffff))
+#define PC_REC(x)	(psxRecLUT[(x) >> 16] + ((x) & 0xffff))
 #define PC_REC8(x)	(*(u8 *)PC_REC(x))
 #define PC_REC16(x) (*(u16*)PC_REC(x))
 #define PC_REC32(x) (*(u32*)PC_REC(x))
@@ -1261,7 +1261,7 @@ static void recLB() {
 			MapConst(_Rt_, psxRs8(addr));
 			return;
 		}
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			if (!_Rt_) return;
 			iRegs[_Rt_].state = ST_UNK;
 
@@ -1306,7 +1306,7 @@ static void recLBU() {
 			MapConst(_Rt_, psxRu8(addr));
 			return;
 		}
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			if (!_Rt_) return;
 			iRegs[_Rt_].state = ST_UNK;
 
@@ -1351,7 +1351,7 @@ static void recLH() {
 			MapConst(_Rt_, psxRs16(addr));
 			return;
 		}
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			if (!_Rt_) return;
 			iRegs[_Rt_].state = ST_UNK;
 
@@ -1396,7 +1396,7 @@ static void recLHU() {
 			MapConst(_Rt_, psxRu16(addr));
 			return;
 		}
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			if (!_Rt_) return;
 			iRegs[_Rt_].state = ST_UNK;
 
@@ -1490,7 +1490,7 @@ static void recLW() {
 			MapConst(_Rt_, psxRu32(addr));
 			return;
 		}
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			if (!_Rt_) return;
 			iRegs[_Rt_].state = ST_UNK;
 
@@ -1575,7 +1575,7 @@ void recLWL() {
 		u32 addr = iRegs[_Rs_].k + _Imm_;
 		int t = addr >> 16;
 
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			MOV32MtoR(EAX, (u32)&psxM[addr & 0x1ffffc]);
 			iLWLk(addr & 3);
 
@@ -1651,7 +1651,7 @@ static void recLWBlock(int count) {
 			}
 			return;
 		}
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			for (i = 0; i < count; i++, code++, addr += 4) {
 				if (!_fRt_(*code))
 					return;
@@ -1727,7 +1727,7 @@ void recLWR() {
 		u32 addr = iRegs[_Rs_].k + _Imm_;
 		int t = addr >> 16;
 
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			MOV32MtoR(EAX, (u32)&psxM[addr & 0x1ffffc]);
 			iLWRk(addr & 3);
 
@@ -1794,8 +1794,6 @@ static void recSB() {
 		u32 addr = iRegs[_Rs_].k + _Imm_;
 		int t = addr >> 16;
 
-#if 0
-		// V-Rally 2 - no tree sprite corruption
 		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
 			if (IsConst(_Rt_)) {
 				MOV8ItoM((u32)&psxM[addr & 0x1fffff], (u8)iRegs[_Rt_].k);
@@ -1803,9 +1801,14 @@ static void recSB() {
 				MOV8MtoR(EAX, (u32)&psxRegs.GPR.r[_Rt_]);
 				MOV8RtoM((u32)&psxM[addr & 0x1fffff], EAX);
 			}
+
+			PUSH32I(1);
+			PUSH32I(addr & ~3);
+			CALLFunc((u32)&recClear);
+			resp += 8;
 			return;
 		}
-#endif
+
 		if (t == 0x1f80 && addr < 0x1f801000) {
 			if (IsConst(_Rt_)) {
 				MOV8ItoM((u32)&psxH[addr & 0xfff], (u8)iRegs[_Rt_].k);
@@ -1838,8 +1841,6 @@ static void recSH() {
 		u32 addr = iRegs[_Rs_].k + _Imm_;
 		int t = addr >> 16;
 
-#if 0
-		// V-Rally 2 - no tree sprite corruption
 		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
 			if (IsConst(_Rt_)) {
 				MOV16ItoM((u32)&psxM[addr & 0x1fffff], (u16)iRegs[_Rt_].k);
@@ -1847,9 +1848,14 @@ static void recSH() {
 				MOV16MtoR(EAX, (u32)&psxRegs.GPR.r[_Rt_]);
 				MOV16RtoM((u32)&psxM[addr & 0x1fffff], EAX);
 			}
+
+			PUSH32I(1);
+			PUSH32I(addr & ~3);
+			CALLFunc((u32)&recClear);
+			resp += 8;
 			return;
 		}
-#endif
+
 		if (t == 0x1f80 && addr < 0x1f801000) {
 			if (IsConst(_Rt_)) {
 				MOV16ItoM((u32)&psxH[addr & 0xfff], (u16)iRegs[_Rt_].k);
@@ -1897,8 +1903,6 @@ static void recSW() {
 		u32 addr = iRegs[_Rs_].k + _Imm_;
 		int t = addr >> 16;
 
-#if 0
-		// V-Rally 2 - no tree sprite corruption
 		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
 			if (IsConst(_Rt_)) {
 				MOV32ItoM((u32)&psxM[addr & 0x1fffff], iRegs[_Rt_].k);
@@ -1906,9 +1910,14 @@ static void recSW() {
 				MOV32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rt_]);
 				MOV32RtoM((u32)&psxM[addr & 0x1fffff], EAX);
 			}
+
+			PUSH32I(1);
+			PUSH32I(addr);
+			CALLFunc((u32)&recClear);
+			resp += 8;
 			return;
 		}
-#endif
+
 		if (t == 0x1f80 && addr < 0x1f801000) {
 			if (IsConst(_Rt_)) {
 				MOV32ItoM((u32)&psxH[addr & 0xfff], iRegs[_Rt_].k);

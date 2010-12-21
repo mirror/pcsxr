@@ -493,7 +493,7 @@ static void recExecuteBlock() {
 }
 
 static void recClear(u32 Addr, u32 Size) {
-	memset((void*)PC_REC(Addr), 0, Size * sizeof(uptr));
+	memset((void *)PC_REC(Addr), 0, Size * sizeof(uptr));
 }
 
 static void recNULL() {
@@ -1291,7 +1291,7 @@ static void recLB() {
 			MapConst(_Rt_, psxRs8(addr));
 			return;
 		}
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			if (!_Rt_) return;
 			iRegs[_Rt_].state = ST_UNK;
 
@@ -1335,7 +1335,7 @@ static void recLBU() {
 			MapConst(_Rt_, psxRu8(addr));
 			return;
 		}
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			if (!_Rt_) return;
 			iRegs[_Rt_].state = ST_UNK;
 
@@ -1379,7 +1379,7 @@ static void recLH() {
 			MapConst(_Rt_, psxRs16(addr));
 			return;
 		}
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			if (!_Rt_) return;
 			iRegs[_Rt_].state = ST_UNK;
 
@@ -1423,7 +1423,7 @@ static void recLHU() {
 			MapConst(_Rt_, psxRu16(addr));
 			return;
 		}
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			if (!_Rt_) return;
 			iRegs[_Rt_].state = ST_UNK;
 
@@ -1520,7 +1520,7 @@ static void recLW() {
 			MapConst(_Rt_, psxRu32(addr));
 			return;
 		}
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			if (!_Rt_) return;
 			iRegs[_Rt_].state = ST_UNK;
 
@@ -1604,7 +1604,7 @@ void recLWL() {
 		u32 addr = iRegs[_Rs_].k + _Imm_;
 		int t = addr >> 16;
 
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			MOV32MtoR(EAX, (uptr)&psxM[addr & 0x1ffffc]);
 			iLWLk(addr & 3);
 
@@ -1688,7 +1688,7 @@ static void recLWBlock(int count) {
 			}
 			return;
 		}
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			for (i=0; i<count; i++, code++, addr+=4) {
 				if (!_fRt_(*code)) return;
 				iRegs[_fRt_(*code)].state = ST_UNK;
@@ -1763,7 +1763,7 @@ void recLWR() {
 		u32 addr = iRegs[_Rs_].k + _Imm_;
 		int t = addr >> 16;
 
-		if ((t & 0x1fe0) == 0 && (t & 0x1fff) != 0) {
+		if ((t & 0x1fe0) == 0) {
 			MOV32MtoR(EAX, (uptr)&psxM[addr & 0x1ffffc]);
 			iLWRk(addr & 3);
 
@@ -1834,6 +1834,9 @@ static void recSB() {
 				MOV8MtoR(EAX, (uptr)&psxRegs.GPR.r[_Rt_]);
 				MOV8RtoM((uptr)&psxM[addr & 0x1fffff], EAX);
 			}
+			MOV32ItoR(X86ARG2, 1);
+			MOV32ItoR(X86ARG1, addr & ~3);
+			CALLFunc((uptr)&recClear);
 			return;
 		}
 		if (t == 0x1f80 && addr < 0x1f801000) {
@@ -1874,6 +1877,9 @@ static void recSH() {
 				MOV16MtoR(EAX, (uptr)&psxRegs.GPR.r[_Rt_]);
 				MOV16RtoM((uptr)&psxM[addr & 0x1fffff], EAX);
 			}
+			MOV32ItoR(X86ARG2, 1);
+			MOV32ItoR(X86ARG1, addr & ~3);
+			CALLFunc((uptr)&recClear);
 			return;
 		}
 		if (t == 0x1f80 && addr < 0x1f801000) {
@@ -1929,6 +1935,9 @@ static void recSW() {
 				MOV32MtoR(EAX, (uptr)&psxRegs.GPR.r[_Rt_]);
 				MOV32RtoM((uptr)&psxM[addr & 0x1fffff], EAX);
 			}
+			MOV32ItoR(X86ARG2, 1);
+			MOV32ItoR(X86ARG1, addr);
+			CALLFunc((uptr)&recClear);
 			return;
 		}
 		if (t == 0x1f80 && addr < 0x1f801000) {
