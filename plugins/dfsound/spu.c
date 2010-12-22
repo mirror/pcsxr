@@ -86,6 +86,8 @@ SPUCHAN         s_chan[MAXCHAN+1];                     // channel + 1 infos (1 i
 REVERBInfo      rvb;
 
 unsigned long   dwNoiseVal=1;                          // global noise generator
+unsigned long   dwNoiseCount;                          // global noise generator
+unsigned long   dwNoiseClock;                          // global noise generator
 int             iSpuAsyncWait=0;
 
 unsigned short  spuCtrl=0;                             // some vars to store psx reg infos
@@ -320,27 +322,110 @@ INLINE void FModChangeFrequency(int ch,int ns)
 // surely wrong... and no noise frequency (spuCtrl&0x3f00) will be used...
 // and sometimes the noise will be used as fmod modulation... pfff
 
+int INLINE GetNoiseValue()
+{
+#if 1
+	// Not great - works okay
+	return (-32767/4 + (rand() % 32767));
+#elif 0
+	// SPU2-X - doesn't seem to work here..?
+	static int Seed = 0x41595321;
+	int retval = 0x8000;
+	
+	if( Seed&0x100 )
+		retval = (Seed&0xff) << 8;
+	else if( Seed&0xffff )
+		retval = 0x7fff;
+
+	__asm {
+		MOV eax,Seed
+		ROR eax,5
+		XOR eax,0x9a
+		MOV ebx,eax
+		ROL eax,2
+		ADD eax,ebx
+		XOR eax,ebx
+		ROR eax,3
+		MOV Seed,eax
+	}
+
+	return retval;
+#endif
+}
+
+
+/*
+Eternal:
+- pitch somewhat comparable
+- texture less grainy
+- more loud and rich
+
+10 = similar
+12 = similar
+14 = similar
+16 = similar
+18 = similar
+20 = about right
+22 = about right
+24 = about right
+26 = about right
+28 = about right
+30 = about right (+)
+32 = about right
+34 = similar
+36 = about right (+)
+38 = about right
+40 = about right
+44 = similar
+46 = about right
+52 = similar
+56 = about right
+60 = about right
+
+very sensitive to change, might need fractions
+*/
+unsigned int NoiseClockFreq[64] = {
+-1,33400,16800,16800,16800,16800,8300,8300,	// 0-7
+8300,8300,4200,4200,4200,4200,2100,2100,		// 8-15
+2100,2100,1040,1040,1040,1040,510,510,			// 16-23
+510,510,253,253,252,252,128,128,						// 24-31
+127,127,65,65,64,64,32,32,									// 32-39
+32,32,20,20,16,16,12,12,										// 40-47
+10,10,6,6,4,4,3,3,													// 48-55
+2,2,2,2,1,1,1,1,														// 56-63
+};
+
+INLINE void NoiseClock()
+{
+	dwNoiseCount += 1;
+	if( dwNoiseCount >= NoiseClockFreq[ dwNoiseClock ] )
+	{
+		dwNoiseCount = 0;
+
+		if( dwNoiseVal >= 0 )
+			dwNoiseVal = -GetNoiseValue();
+		else
+			dwNoiseVal = +GetNoiseValue();
+	}
+}
+
 INLINE int iGetNoiseVal(int ch)
 {
  int fa;
 
- if((dwNoiseVal<<=1)&0x80000000L)
-  {
-   dwNoiseVal^=0x0040001L;
-   fa=((dwNoiseVal>>2)&0x7fff);
-   fa=-fa;
-  }
- else fa=(dwNoiseVal>>2)&0x7fff;
+ if( dwNoiseClock == 0 ) return 0;
 
- // mmm... depending on the noise freq we allow bigger/smaller changes to the previous val
- fa=s_chan[ch].iOldNoise+((fa-s_chan[ch].iOldNoise)/((0x001f-((spuCtrl&0x3f00)>>9))+1));
- if(fa>32767L)  fa=32767L;
- if(fa<-32767L) fa=-32767L;              
- s_chan[ch].iOldNoise=fa;
+ fa = (int) dwNoiseVal;
 
- if(iUseInterpolation<2)                               // no gauss/cubic interpolation?
- s_chan[ch].SB[29] = fa;                               // -> store noise val in "current sample" slot
- return fa;
+ //if(fa>32767L)  fa=32767L;
+ //if(fa<-32767L) fa=-32767L;              
+
+ // don't upset VAG decoder
+ //if(iUseInterpolation<2)                               // no gauss/cubic interpolation?
+  //pChannel->SB[29] = fa;                               // -> store noise val in "current sample" slot
+
+ // boost volume
+ return fa * 3 / 2;
 }                                 
 
 ////////////////////////////////////////////////////////////////////////
@@ -523,18 +608,20 @@ static void *MAINThread(void *arg)
    //- main channel loop                              -// 
    //--------------------------------------------------//
     {
-     for(ch=0;ch<MAXCHAN;ch++)                         // loop em all... we will collect 1 ms of sound of each playing channel
+     ns=0;
+     while(ns<NSSIZE)                                // loop until 1 ms of data is reached
       {
-       if(s_chan[ch].bNew) StartSound(ch);             // start new sound
-       if(!s_chan[ch].bOn) continue;                   // channel not playing? next
+				NoiseClock();
 
-       if(s_chan[ch].iActFreq!=s_chan[ch].iUsedFreq)   // new psx frequency?
-        VoiceChangeFrequency(ch);
-
-       ns=0;
-       while(ns<NSSIZE)                                // loop until 1 ms of data is reached
+				for(ch=0;ch<MAXCHAN;ch++)                         // loop em all... we will collect 1 ms of sound of each playing channel
         {
-         if(s_chan[ch].bFMod==1 && iFMod[ns])          // fmod freq channel
+				 if(s_chan[ch].bNew) StartSound(ch);             // start new sound
+				 if(!s_chan[ch].bOn) continue;                   // channel not playing? next
+
+				 if(s_chan[ch].iActFreq!=s_chan[ch].iUsedFreq)   // new psx frequency?
+					VoiceChangeFrequency(ch);
+
+				 if(s_chan[ch].bFMod==1 && iFMod[ns])          // fmod freq channel
           FModChangeFrequency(ch,ns);
 
          while(s_chan[ch].spos>=0x10000L)
@@ -727,14 +814,13 @@ GOON: ;
 
            if(s_chan[ch].bRVBActive) StoreREVERB(ch,ns);
           }
-
-         ////////////////////////////////////////////////
-         // ok, go on until 1 ms data of this channel is collected
-
-         ns++;
-         s_chan[ch].spos += s_chan[ch].sinc;
         }
-      }
+        ////////////////////////////////////////////////
+        // ok, go on until 1 ms data of this channel is collected
+
+        ns++;
+        s_chan[ch].spos += s_chan[ch].sinc;
+      } // end ns
     }
 
   //---------------------------------------------------//

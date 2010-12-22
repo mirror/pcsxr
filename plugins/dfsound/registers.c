@@ -192,6 +192,8 @@ void CALLBACK SPUwriteRegister(unsigned long reg, unsigned short val)
     //-------------------------------------------------//
     case H_SPUstat:
       spuStat=val & 0xf800;
+
+			dwNoiseClock = (spuCtrl&0x3f00)>>8;
       break;
     //-------------------------------------------------//
     case H_SPUReverbAddr:

@@ -252,6 +252,8 @@ extern SPUCHAN s_chan[];
 extern REVERBInfo rvb;
 
 extern unsigned long dwNoiseVal;
+extern unsigned long dwNoiseClock;
+extern unsigned long dwNoiseCount;
 extern unsigned short spuCtrl;
 extern unsigned short spuStat;
 extern unsigned short spuIrq;
