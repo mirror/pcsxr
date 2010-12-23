@@ -814,12 +814,13 @@ GOON: ;
 
            if(s_chan[ch].bRVBActive) StoreREVERB(ch,ns);
           }
+
+				 s_chan[ch].spos += s_chan[ch].sinc;
         }
         ////////////////////////////////////////////////
         // ok, go on until 1 ms data of this channel is collected
 
         ns++;
-        s_chan[ch].spos += s_chan[ch].sinc;
       } // end ns
     }
 
