@@ -1,29 +1,25 @@
+#ifdef HAVE_CONFIG_H
 #include "config.h"
+#endif
 
 #include <gtk/gtk.h>
 
-#include "interface.h"
-#include "support.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>  
 #include <string.h>
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#include <locale.h>
-#endif 
+#define SETCHECK(winame)  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object (wndMain,winame)), TRUE)
+#define SETEDITVAL(winame,v)  sprintf(t,"%d",v);gtk_entry_set_text(GTK_ENTRY(gtk_builder_get_object (wndMain,winame)), t)
+#define SETLIST(winame,v)  gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_builder_get_object(wndMain,winame)), v)
 
-#define SETCHECK(winame)  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON ((GtkWidget*) gtk_object_get_data (GTK_OBJECT (CfgWnd),winame)), TRUE)
-#define SETEDIT(winame,sz)  gtk_entry_set_text(GTK_ENTRY((GtkWidget*) gtk_object_get_data (GTK_OBJECT (CfgWnd),winame)), sz)
-#define SETEDITVAL(winame,v)  sprintf(t,"%d",v);gtk_entry_set_text(GTK_ENTRY((GtkWidget*) gtk_object_get_data (GTK_OBJECT (CfgWnd),winame)), t)
-#define SETLIST(winame,v)  gtk_list_select_item(GTK_LIST(GTK_COMBO((GtkWidget*) gtk_object_get_data (GTK_OBJECT (CfgWnd),winame))->list),v)
-
-static GtkWidget * wndMain=0;
+static GtkBuilder *wndMain;
+void SaveConfig(void);
 
 int main (int argc, char *argv[])
 {
-  GtkWidget *CfgWnd;
+  GtkWidget *main_win;
+  GError *error = NULL;
   FILE *in;char t[256];int len,val; 
   char * pB, * p; 
 
@@ -31,26 +27,27 @@ int main (int argc, char *argv[])
   if(strcmp(argv[1],"CFG")!=0 && strcmp(argv[1],"ABOUT")!=0)
    return 0;
 
-#ifdef ENABLE_NLS
-  setlocale (LC_ALL, "");
-  bindtextdomain (GETTEXT_PACKAGE, LOCALE_DIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
-#endif
-
   gtk_set_locale ();
   gtk_init (&argc, &argv);
 
+  wndMain = gtk_builder_new();
+  gtk_builder_set_translation_domain(wndMain, PACKAGE_NAME);
+  if (!gtk_builder_add_from_file (wndMain, DATADIR "gpucfg-newstyle2.glade", &error))
+    {
+     g_warning ("Couldn't load builder file: %s", error->message);
+     g_error_free (error);
+     return -1;
+    }
+
   if (strcmp(argv[1],"ABOUT") == 0)
    {
-    CfgWnd  = create_AboutWnd ();
-    gtk_widget_show (CfgWnd);
-    gtk_main ();
+    main_win  = GTK_WIDGET(gtk_builder_get_object(wndMain, "AboutWnd"));
+    gtk_widget_show_all (main_win);
+    gtk_dialog_run(GTK_DIALOG(main_win));
     return 0;
    }
 
-  CfgWnd  = create_CfgWnd ();
-  wndMain = CfgWnd;
+  main_win = GTK_WIDGET(gtk_builder_get_object(wndMain, "CfgWnd"));
 
   in = fopen("gpuPeopsMesaGL.cfg","rb");
   if(in)
@@ -321,7 +318,7 @@ int main (int argc, char *argv[])
    }
   if(val) SETCHECK("chkFastMdec");
 
-  val=0;
+  val=1;
   if(pB)
    {
     strcpy(t,"\nOGLExtensions");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
@@ -369,8 +366,8 @@ int main (int argc, char *argv[])
 
   if(pB) free(pB);
 
-  gtk_widget_show (CfgWnd);
-  gtk_main ();
+  gtk_widget_show_all (main_win);
+  if (gtk_dialog_run(GTK_DIALOG(main_win))==GTK_RESPONSE_OK) {SaveConfig();}
   return 0;
 }
 
@@ -409,9 +406,9 @@ void SetCfgVal(char * pB,char * pE,int val)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define GETEDITVAL(winame) atoi(gtk_entry_get_text(GTK_ENTRY((GtkWidget*) gtk_object_get_data (GTK_OBJECT (wndMain),winame))))
-#define GETCHECK(winame)  gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON ((GtkWidget*) gtk_object_get_data (GTK_OBJECT (wndMain),winame)))?1:0
-#define GETLIST(winame) atoi(gtk_entry_get_text(GTK_ENTRY(GTK_COMBO((GtkWidget*) gtk_object_get_data (GTK_OBJECT (wndMain),winame))->entry)))
+#define GETEDITVAL(winame) atoi(gtk_entry_get_text(GTK_ENTRY(gtk_builder_get_object (wndMain,winame))))
+#define GETCHECK(winame)  gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object (wndMain,winame)))
+#define GETLIST(winame)  gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_builder_get_object(wndMain,winame)))
 
 void SaveConfig(void)
 {
