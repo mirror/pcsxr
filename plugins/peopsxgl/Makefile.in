@@ -16,6 +16,7 @@
 @SET_MAKE@
 
 
+
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
@@ -68,9 +69,10 @@ am__nobase_list = $(am__nobase_strip_setup); \
 am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
-am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)"
+am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
+	"$(DESTDIR)$(gladedir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
-libpeopsxgl_la_LIBADD =
+libpeopsxgl_la_DEPENDENCIES =
 am_libpeopsxgl_la_OBJECTS = cfg.lo draw.lo fps.lo gpu.lo key.lo \
 	menu.lo prim.lo soft.lo texture.lo
 libpeopsxgl_la_OBJECTS = $(am_libpeopsxgl_la_OBJECTS)
@@ -78,11 +80,10 @@ libpeopsxgl_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(libpeopsxgl_la_LDFLAGS) $(LDFLAGS) -o $@
 PROGRAMS = $(bin_PROGRAMS)
-am_cfgpeopsxgl_OBJECTS = main.$(OBJEXT) callbacks.$(OBJEXT) \
-	interface.$(OBJEXT) support.$(OBJEXT)
+am_cfgpeopsxgl_OBJECTS = main.$(OBJEXT)
 cfgpeopsxgl_OBJECTS = $(am_cfgpeopsxgl_OBJECTS)
 am__DEPENDENCIES_1 =
-cfgpeopsxgl_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+cfgpeopsxgl_DEPENDENCIES = $(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/include
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -98,6 +99,7 @@ LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	$(LDFLAGS) -o $@
 SOURCES = $(libpeopsxgl_la_SOURCES) $(cfgpeopsxgl_SOURCES)
 DIST_SOURCES = $(libpeopsxgl_la_SOURCES) $(cfgpeopsxgl_SOURCES)
+DATA = $(glade_DATA)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -256,23 +258,22 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
+AM_CPPFLAGS = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 	-DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
-	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) -I/usr/X11R6/include \
-	-I../../libpcsxcore -I../../include -fPIC
+	$(GTK2_CFLAGS) \
+	-I../../libpcsxcore -I../../include
 
 lib_LTLIBRARIES = libpeopsxgl.la
 libpeopsxgl_la_SOURCES = cfg.c draw.c fps.c gpu.c key.c menu.c \
 	prim.c soft.c texture.c
 
-libpeopsxgl_la_LDFLAGS = -module -avoid-version \
-	-L/usr/X11R6/lib64 -L/usr/X11R6/lib -lX11 -lXxf86vm -lGL -lm
-
-cfgpeopsxgl_SOURCES = gpucfg/main.c gpucfg/callbacks.c gpucfg/interface.c \
-	gpucfg/support.c
-
-cfgpeopsxgl_LDADD = $(GTK2_LIBS) $(GLADE2_LIBS)
+libpeopsxgl_la_LDFLAGS = -module -avoid-version
+libpeopsxgl_la_LIBADD = -lX11 -lXxf86vm -lGL -lm
+cfgpeopsxgl_SOURCES = gpucfg/main.c
+cfgpeopsxgl_LDADD = $(GTK2_LIBS)
+glade_DATA = gpucfg/gpucfg-newstyle2.glade
+gladedir = $(datadir)/psemu/
 all: all-am
 
 .SUFFIXES:
@@ -393,18 +394,15 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/callbacks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cfg.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/draw.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fps.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gpu.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/interface.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/key.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/menu.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/prim.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/soft.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/support.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/texture.Plo@am__quote@
 
 .c.o:
@@ -442,53 +440,31 @@ main.obj: gpucfg/main.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o main.obj `if test -f 'gpucfg/main.c'; then $(CYGPATH_W) 'gpucfg/main.c'; else $(CYGPATH_W) '$(srcdir)/gpucfg/main.c'; fi`
 
-callbacks.o: gpucfg/callbacks.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT callbacks.o -MD -MP -MF $(DEPDIR)/callbacks.Tpo -c -o callbacks.o `test -f 'gpucfg/callbacks.c' || echo '$(srcdir)/'`gpucfg/callbacks.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/callbacks.Tpo $(DEPDIR)/callbacks.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gpucfg/callbacks.c' object='callbacks.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o callbacks.o `test -f 'gpucfg/callbacks.c' || echo '$(srcdir)/'`gpucfg/callbacks.c
-
-callbacks.obj: gpucfg/callbacks.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT callbacks.obj -MD -MP -MF $(DEPDIR)/callbacks.Tpo -c -o callbacks.obj `if test -f 'gpucfg/callbacks.c'; then $(CYGPATH_W) 'gpucfg/callbacks.c'; else $(CYGPATH_W) '$(srcdir)/gpucfg/callbacks.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/callbacks.Tpo $(DEPDIR)/callbacks.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gpucfg/callbacks.c' object='callbacks.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o callbacks.obj `if test -f 'gpucfg/callbacks.c'; then $(CYGPATH_W) 'gpucfg/callbacks.c'; else $(CYGPATH_W) '$(srcdir)/gpucfg/callbacks.c'; fi`
-
-interface.o: gpucfg/interface.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT interface.o -MD -MP -MF $(DEPDIR)/interface.Tpo -c -o interface.o `test -f 'gpucfg/interface.c' || echo '$(srcdir)/'`gpucfg/interface.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/interface.Tpo $(DEPDIR)/interface.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gpucfg/interface.c' object='interface.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o interface.o `test -f 'gpucfg/interface.c' || echo '$(srcdir)/'`gpucfg/interface.c
-
-interface.obj: gpucfg/interface.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT interface.obj -MD -MP -MF $(DEPDIR)/interface.Tpo -c -o interface.obj `if test -f 'gpucfg/interface.c'; then $(CYGPATH_W) 'gpucfg/interface.c'; else $(CYGPATH_W) '$(srcdir)/gpucfg/interface.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/interface.Tpo $(DEPDIR)/interface.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gpucfg/interface.c' object='interface.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o interface.obj `if test -f 'gpucfg/interface.c'; then $(CYGPATH_W) 'gpucfg/interface.c'; else $(CYGPATH_W) '$(srcdir)/gpucfg/interface.c'; fi`
-
-support.o: gpucfg/support.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT support.o -MD -MP -MF $(DEPDIR)/support.Tpo -c -o support.o `test -f 'gpucfg/support.c' || echo '$(srcdir)/'`gpucfg/support.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/support.Tpo $(DEPDIR)/support.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gpucfg/support.c' object='support.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o support.o `test -f 'gpucfg/support.c' || echo '$(srcdir)/'`gpucfg/support.c
-
-support.obj: gpucfg/support.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT support.obj -MD -MP -MF $(DEPDIR)/support.Tpo -c -o support.obj `if test -f 'gpucfg/support.c'; then $(CYGPATH_W) 'gpucfg/support.c'; else $(CYGPATH_W) '$(srcdir)/gpucfg/support.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/support.Tpo $(DEPDIR)/support.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gpucfg/support.c' object='support.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o support.obj `if test -f 'gpucfg/support.c'; then $(CYGPATH_W) 'gpucfg/support.c'; else $(CYGPATH_W) '$(srcdir)/gpucfg/support.c'; fi`
-
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
+install-gladeDATA: $(glade_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(gladedir)" || $(MKDIR_P) "$(DESTDIR)$(gladedir)"
+	@list='$(glade_DATA)'; test -n "$(gladedir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(gladedir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(gladedir)" || exit $$?; \
+	done
+
+uninstall-gladeDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(glade_DATA)'; test -n "$(gladedir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(gladedir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(gladedir)" && rm -f $$files
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
@@ -574,11 +550,11 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(LTLIBRARIES) $(PROGRAMS)
+all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(DATA)
 install-binPROGRAMS: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(gladedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -629,7 +605,7 @@ info: info-am
 
 info-am:
 
-install-data-am:
+install-data-am: install-gladeDATA
 
 install-dvi: install-dvi-am
 
@@ -675,7 +651,8 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-binPROGRAMS uninstall-libLTLIBRARIES
+uninstall-am: uninstall-binPROGRAMS uninstall-gladeDATA \
+	uninstall-libLTLIBRARIES
 
 .MAKE: install-am install-strip
 
@@ -685,18 +662,16 @@ uninstall-am: uninstall-binPROGRAMS uninstall-libLTLIBRARIES
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
 	html-am info info-am install install-am install-binPROGRAMS \
 	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-libLTLIBRARIES \
-	install-man install-pdf install-pdf-am install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags uninstall \
-	uninstall-am uninstall-binPROGRAMS uninstall-libLTLIBRARIES
+	install-exec install-exec-am install-gladeDATA install-html \
+	install-html-am install-info install-info-am \
+	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags uninstall uninstall-am uninstall-binPROGRAMS \
+	uninstall-gladeDATA uninstall-libLTLIBRARIES
 
-
-#glade_DATA = gpucfg-0.1df/peopsxgl.glade2
-#gladedir = $(datadir)/psemu/
 #EXTRA_DIST = $(glade_DATA)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
