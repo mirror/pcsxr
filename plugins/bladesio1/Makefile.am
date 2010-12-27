@@ -6,8 +6,7 @@ lib_LTLIBRARIES = libBladeSio1.la
 libBladeSio1_la_SOURCES = sio1.c settings.c
 libBladeSio1_la_LDFLAGS = -module -avoid-version
 
-INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
-	-DLOCALE_DIR=\"${datadir}/locale/\" \
+AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
 	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) \
 	-I../../libpcsxcore -I../../include

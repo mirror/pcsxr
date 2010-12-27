@@ -1,4 +1,4 @@
-INCLUDES = -DLOCALE_DIR=\"${datadir}/locale/\" \
+AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-I$(top_srcdir)/include
 
 noinst_LIBRARIES = libpcsxcore.a

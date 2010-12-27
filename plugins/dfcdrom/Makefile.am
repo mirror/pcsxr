@@ -13,15 +13,15 @@ libDFCdrom_la_SOURCES = \
 	util.c
 
 libDFCdrom_la_CFLAGS =
-libDFCdrom_la_LDFLAGS = -module -avoid-version -lpthread
+libDFCdrom_la_LDFLAGS = -module -avoid-version 
+libDFCdrom_la_LIBADD = -lpthread
 
 if USE_LIBCDIO
 libDFCdrom_la_CFLAGS += -DUSE_LIBCDIO=1 $(LIBCDIO_CFLAGS)
-libDFCdrom_la_LDFLAGS += $(LIBCDIO_LIBS)
+libDFCdrom_la_LIBADD += $(LIBCDIO_LIBS)
 endif
 
-INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
-	-DLOCALE_DIR=\"${datadir}/locale/\" \
+AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
 	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) \
 	-I../../libpcsxcore -I../../include

@@ -56,10 +56,7 @@ void GPUkeypressed(int keycode)
 
    case VK_DEL:
        if(ulKeybits&KEY_SHOWFPS)
-        {
          ulKeybits&=~KEY_SHOWFPS;
-         DoClearScreenBuffer();
-        }
        else 
         {
          ulKeybits|=KEY_SHOWFPS;

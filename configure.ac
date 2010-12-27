@@ -1,8 +1,8 @@
 AC_INIT(pcsx, 1.9)
 
 AC_CANONICAL_HOST
-AC_CANONICAL_TARGET
-AM_INIT_AUTOMAKE(pcsx, 1.9)
+AC_CANONICAL_BUILD
+AM_INIT_AUTOMAKE(foreign)
 AM_MAINTAINER_MODE
 
 AC_CONFIG_HEADERS([include/config.h:include/config.h.in])
@@ -27,7 +27,7 @@ PKG_CHECK_MODULES(GLIB2, glib-2.0, [], AC_MSG_ERROR([*** glib2 not found!]))
 PKG_CHECK_MODULES(GTK2, gtk+-2.0, [], AC_MSG_ERROR([*** libgtk2 not found!]))
 PKG_CHECK_MODULES(GLADE2, libglade-2.0, [], AC_MSG_ERROR([*** libglade2 not found!]))
 
-AM_PATH_SDL(1.2.0, :, AC_MSG_ERROR([*** SDL not found!]))
+PKG_CHECK_MODULES(SDL, sdl >= 1.2.0, [], AC_MSG_ERROR([*** SDL not found!]))
 
 AC_SUBST(GLIB2_CFLAGS)
 AC_SUBST(GLIB2_LIBS)
@@ -38,10 +38,10 @@ AC_SUBST(GLADE2_LIBS)
 
 AC_CONFIG_FILES([Makefile data/Makefile doc/Makefile libpcsxcore/Makefile gui/Makefile plugins/dfinput/Makefile plugins/dfsound/Makefile plugins/dfxvideo/Makefile plugins/gxvideo/Makefile plugins/dfcdrom/Makefile plugins/dfnet/Makefile plugins/bladesio1/Makefile pixmaps/Makefile po/Makefile.in])
 
-AC_CHECK_LIB(dl, dlsym, [LDFLAGS="$LDFLAGS -ldl"], [])
-AC_CHECK_LIB(socket, socket, [LDFLAGS="$LDFLAGS -lsocket"], [])
-AC_CHECK_LIB(nsl, gethostbyname, [LDFLAGS="$LDFLAGS -lnsl"], [])
-AC_CHECK_LIB(umem, umem_alloc, [LDFLAGS="$LDFLAGS -lumem"], [])
+AC_CHECK_LIB(dl, dlsym, [LIBS="$LIBS -ldl"], [])
+AC_CHECK_LIB(socket, socket, [LIBS="$LIBS -lsocket"], [])
+AC_CHECK_LIB(nsl, gethostbyname, [LIBS="$LIBS -lnsl"], [])
+AC_CHECK_LIB(umem, umem_alloc, [LIBS="$LIBS -lumem"], [])
 
 AM_CONDITIONAL(SOUND_OSS, false)
 AM_CONDITIONAL(SOUND_SDL, false)
@@ -131,8 +131,8 @@ fi
 
 AM_CONDITIONAL(X86_NASM, false)
 
-if expr x"$target_cpu" : 'xi.86' > /dev/null; then
-	if expr x"$target_os" : 'x.*linux.*' > /dev/null; then
+if expr x"$build_cpu" : 'xi.86' > /dev/null; then
+	if expr x"$build_os" : 'x.*linux.*' > /dev/null; then
 		AC_PATH_PROG([NASM],[nasm],[missing])
 		if test "$NASM" = "missing"; then
 			AC_MSG_WARN([unable to find nasm, needed to build dfx11video])
@@ -170,15 +170,15 @@ fi
 fi
 
 if test "x$DYNARECSEL" = xauto; then
-	if expr x"$target_cpu" : 'xi.86' > /dev/null; then
+	if expr x"$build_cpu" : 'xi.86' > /dev/null; then
 		DYNARECSEL="x86"
 	fi
 
-	if expr x"$target_cpu" : 'xx86_64' > /dev/null; then
+	if expr x"$build_cpu" : 'xx86_64' > /dev/null; then
 		DYNARECSEL="x86_64"
 	fi
 
-	if expr x"$target_cpu" : 'xpowerpc' > /dev/null; then
+	if expr x"$build_cpu" : 'xpowerpc' > /dev/null; then
 		DYNARECSEL="ppc"
 	fi
 fi

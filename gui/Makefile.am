@@ -1,4 +1,4 @@
-INCLUDES = -DPACKAGE_DATA_DIR=\"${datadir}/pcsx/\" \
+AM_CPPFLAGS = -DPACKAGE_DATA_DIR=\"${datadir}/pcsx/\" \
 	-DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 	-DLOCALE_DIR=\"${datadir}/locale/\" \
 	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) \
@@ -20,5 +20,5 @@ pcsx_SOURCES = \
 	AboutDlg.c
 
 pcsx_LDADD = \
-	$(GTK2_LIBS) $(GLADE2_LIBS) -lpthread -lz -lm -lXext -lXtst \
-	../libpcsxcore/libpcsxcore.a
+	../libpcsxcore/libpcsxcore.a \
+	$(GTK2_LIBS) $(GLADE2_LIBS) -lpthread -lz -lm -lXext -lXtst

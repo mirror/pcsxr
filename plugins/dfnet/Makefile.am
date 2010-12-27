@@ -6,8 +6,7 @@ lib_LTLIBRARIES = libDFNet.la
 libDFNet_la_SOURCES = dfnet.c unix.c cfg.c
 libDFNet_la_LDFLAGS = -module -avoid-version
 
-INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
-	-DLOCALE_DIR=\"${datadir}/locale/\" \
+AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
 	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) \
 	-I../../libpcsxcore -I../../include

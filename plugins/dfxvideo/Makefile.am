@@ -6,10 +6,9 @@ SUFFIXES = .asm
 	$(LIBTOOL) --tag=CC --mode=compile \
 	$(STRIP_FPIC) $(NASM) -f elf -d ELF -I${srcdir}/ $<
 
-INCLUDES = -DPIXMAPDIR=\"${datadir}/pixmaps/\" \
-	-DLOCALE_DIR=\"${datadir}/locale/\" \
+AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
-	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) -I/usr/X11R6/include \
+	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) \
 	-I../../libpcsxcore \
 	-I../../include
 
@@ -21,15 +20,14 @@ lib_LTLIBRARIES = libDFXVideo.la
 libDFXVideo_la_SOURCES = gpu.c cfg.c draw.c fps.c key.c menu.c prim.c soft.c zn.c
 if X86_NASM
 libDFXVideo_la_SOURCES += i386.asm
-INCLUDES += -DUSE_NASM=1
+AM_CPPFLAGS += -DUSE_NASM=1
 endif
 libDFXVideo_la_LDFLAGS = -module -avoid-version
-libDFXVideo_la_LDFLAGS += -L/usr/X11R6/lib64 -L/usr/X11R6/lib \
-	-lX11 -lXv -lXext -lm
+libDFXVideo_la_LIBADD = -lX11 -lXv -lXext -lm
 
 bin_PROGRAMS = cfgDFXVideo
 cfgDFXVideo_SOURCES = gpucfg-0.1df/main.c
-cfgDFXVideo_LDADD = $(GTK2_LIBS) $(GLADE2_LIBS) -L/usr/X11R6/lib -lXext
+cfgDFXVideo_LDADD = $(GTK2_LIBS) $(GLADE2_LIBS) -lXext
 
 glade_DATA = gpucfg-0.1df/dfxvideo.glade2
 gladedir = $(datadir)/psemu/

@@ -903,8 +903,7 @@ Window        window;
 static GC            hGC;
 static XImage      * Ximage;
 static XvImage     * XCimage;
-static XImage      * XFimage;
-static XImage      * XPimage=0 ;
+static XImage      * XPimage=0;
 char *               Xpixels;
 char *               pCaptionText;
 
@@ -957,11 +956,6 @@ void DestroyDisplay(void)
     {
      XFree(XCimage);
      XCimage=0;
-    }
-   if(XFimage)
-    {
-     XDestroyImage(XFimage);
-     XFimage=0;
     }
 
 	XShmDetach(display,&shminfo);
@@ -1289,9 +1283,11 @@ if (!myvisual)
    }
   }
 
+ gcv.foreground = 0x0000FF00; // green letters for the FPS bar; do we need to take care of endianess?
+ gcv.background = 0x00000000;
  gcv.graphics_exposures = False;
  hGC = XCreateGC(display,window,
-                 GCGraphicsExposures, &gcv);
+                 GCGraphicsExposures | GCForeground | GCBackground, &gcv);
  if(!hGC)
   {
    fprintf(stderr,"No gfx context!!!\n");
@@ -1300,23 +1296,8 @@ if (!myvisual)
 
 
 
- Xpixels = (char *)malloc(600*15*4);
  int _i;
-
  uint32_t color;
- if(use_yuv)
-	 color = rgb_to_yuv(0x00, 0x00, 0xff);
- else
-	 color = 255;
-
- for(i = 0; i < 600*15; ++i)
-	 ((uint32_t *)Xpixels)[i] = color;
-
- XFimage = XCreateImage(display,myvisual->visual,
-                      depth, ZPixmap, 0,
-                      (char *)Xpixels,
-                      600, 15,
-                      depth>16 ? 32 : 16, 0);
 
  /* fix the green back ground in YUV mode */
  if(use_yuv)
@@ -1632,20 +1613,8 @@ void DoBufferSwap(void)
 	dstx = 0;
 	dsty = 0;
 
-	if (ulKeybits&KEY_SHOWFPS)
-	{
-		/* FPS output take 15 pxl at top */
-		_h -= 15;
-	}
-
 	if (iMaintainAspect)
 		MaintainAspect(&dstx, &dsty, &_w, &_h);
-
-	if (ulKeybits&KEY_SHOWFPS)
-	{
-		/* leave space for FPS output */
-		dsty += 15;
-	}
 
 	XvShmPutImage(display, xv_port, window, hGC, xvi,
 		0,0,		//src x,y
@@ -1669,20 +1638,11 @@ void DoBufferSwap(void)
 
 		//XPutImage(display,window,hGC, XFimage,
 		//          0, 0, 0, 0, 220,15);
-		XFree(xvi);
-		xvi = XvCreateImage(display, xv_port, xv_id, XFimage->data, 600, 15);
-		XvPutImage(display, xv_port, window, hGC, xvi,
-			0,0,		//src x,y
-			600,15,		//src w,h
-			0,0,		//dst x,y
-			600,15		//dst w,h
-			);
 
-		XDrawString(display,window,hGC,2,13,szDispBuf,strlen(szDispBuf));
+		XDrawImageString(display,window,hGC,2,13,szDispBuf,strlen(szDispBuf));
 	}
 
 	//if(XPimage) DisplayPic();
-
 
 	XFree(xvi);
 }
