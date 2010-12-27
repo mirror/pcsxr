@@ -162,6 +162,7 @@ void ReadConfig(void)
  iUseReverb=2;
  iUseInterpolation=2;
  iDisStereo=0;
+ iFreqResponse=0;
 
  ReadConfigFile();
 }

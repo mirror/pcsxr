@@ -42,8 +42,8 @@ uint32_t * CDDAPlay  = NULL;
 uint32_t * CDDAStart = NULL;
 uint32_t * CDDAEnd   = NULL;
 
-int             iLeftXAVol  = 32767;
-int             iRightXAVol = 32767;
+int             iLeftXAVol  = 0x8000;
+int             iRightXAVol = 0x8000;
 
 static int gauss_ptr = 0;
 static int gauss_window[8] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -53,26 +53,63 @@ static int gauss_window[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 #define gvalr0 gauss_window[4+gauss_ptr]
 #define gvalr(x) gauss_window[4+((gauss_ptr+x)&3)]
 
+long cdxa_dbuf_ptr;
+
 ////////////////////////////////////////////////////////////////////////
 // MIX XA & CDDA
 ////////////////////////////////////////////////////////////////////////
 
+/*
+Attenuation
+- Blade_Arma (edgbla) (PCSX-reloaded)
+- accurate (!)
+
+
+s32 lc = (spsound[i ] * attenuators.val0 + spsound[i+1] * attenuators.val3]) / 128;
+s32 rc = (spsound[i+1] * attenuators.val2 + spsound[i ] * attenuators.val1]) / 128;
+*/
+
 INLINE void MixXA(void)
 {
  int ns;
- uint32_t l;
+ unsigned char val0,val1,val2,val3;
+ short l,r;
+ int lc,rc;
+ unsigned long cdda_l;
+
+ val0 = (iLeftXAVol>>8)&0xff;
+ val1 = iLeftXAVol&0xff;
+ val2 = (iRightXAVol>>8)&0xff;
+ val3 = iRightXAVol&0xff;
+
+ lc = 0;
+ rc = 0;
 
  for(ns=0;ns<NSSIZE && XAPlay!=XAFeed;ns++)
   {
-   XALastVal=*XAPlay++;
+	 XALastVal=*XAPlay++;
    if(XAPlay==XAEnd) XAPlay=XAStart;
-#ifdef XA_HACK
-   SSumL[ns]+=(((short)(XALastVal&0xffff))       * iLeftXAVol)/32768;
-   SSumR[ns]+=(((short)((XALastVal>>16)&0xffff)) * iRightXAVol)/32768;
-#else
-   SSumL[ns]+=(((short)(XALastVal&0xffff))       * iLeftXAVol)/32767;
-   SSumR[ns]+=(((short)((XALastVal>>16)&0xffff)) * iRightXAVol)/32767;
-#endif
+
+	 l = XALastVal&0xffff;
+	 r = (XALastVal>>16) & 0xffff;
+
+   lc=(l * val0 + r * val3) / 128;
+   rc=(r * val2 + l * val1) / 128;
+
+	 if( lc < -32768 ) lc = -32768;
+	 if( rc < -32768 ) rc = -32768;
+	 if( lc > 32767 ) lc = 32767;
+	 if( rc > 32767 ) rc = 32767;
+
+	 SSumL[ns]+=lc;
+	 SSumR[ns]+=rc;
+
+
+	 // Tales of Phantasia - voice meter
+	 if( cdxa_dbuf_ptr >= 0x800 )
+		 cdxa_dbuf_ptr = 0;
+	 spuMem[ cdxa_dbuf_ptr++ ] = lc;
+	 spuMem[ cdxa_dbuf_ptr++ ] = rc;
   }
 
  if(XAPlay==XAFeed && XARepeat)
@@ -80,22 +117,36 @@ INLINE void MixXA(void)
    XARepeat--;
    for(;ns<NSSIZE;ns++)
     {
-#ifdef XA_HACK
-     SSumL[ns]+=(((short)(XALastVal&0xffff))       * iLeftXAVol)/32768;
-     SSumR[ns]+=(((short)((XALastVal>>16)&0xffff)) * iRightXAVol)/32768;
-#else
-     SSumL[ns]+=(((short)(XALastVal&0xffff))       * iLeftXAVol)/32767;
-     SSumR[ns]+=(((short)((XALastVal>>16)&0xffff)) * iRightXAVol)/32767;
-#endif
+		 SSumL[ns]+=lc;
+		 SSumR[ns]+=rc;
+
+
+		 // Tales of Phantasia - voice meter
+		 if( cdxa_dbuf_ptr >= 0x800 )
+			 cdxa_dbuf_ptr = 0;
+		 spuMem[ cdxa_dbuf_ptr++ ] = lc;
+		 spuMem[ cdxa_dbuf_ptr++ ] = rc;
     }
   }
 
  for(ns=0;ns<NSSIZE && CDDAPlay!=CDDAFeed && (CDDAPlay!=CDDAEnd-1||CDDAFeed!=CDDAStart);ns++)
   {
-   l=*CDDAPlay++;
+   cdda_l=*CDDAPlay++;
    if(CDDAPlay==CDDAEnd) CDDAPlay=CDDAStart;
-   SSumL[ns]+=(((short)(l&0xffff))       * iLeftXAVol)/32767;
-   SSumR[ns]+=(((short)((l>>16)&0xffff)) * iRightXAVol)/32767;
+
+	 l = cdda_l&0xffff;
+	 r = (cdda_l>>16) & 0xffff;
+
+   lc=(l * val0 + r * val3) / 128;
+   rc=(r * val2 + l * val1) / 128;
+
+	 if( lc < -32768 ) lc = -32768;
+	 if( rc < -32768 ) rc = -32768;
+	 if( lc > 32767 ) lc = 32767;
+	 if( rc > 32767 ) rc = 32767;
+
+	 SSumL[ns]+=lc;
+	 SSumR[ns]+=rc;
   }
 }
 

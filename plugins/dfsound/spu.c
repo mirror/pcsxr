@@ -79,6 +79,7 @@ int             iRecordMode=0;
 int             iUseReverb=2;
 int             iUseInterpolation=2;
 int             iDisStereo=0;
+int							iFreqResponse=0;
 
 // MAIN infos struct for each channel
 
@@ -318,94 +319,71 @@ INLINE void FModChangeFrequency(int ch,int ns)
 
 ////////////////////////////////////////////////////////////////////////
 
-// noise handler... just produces some noise data
-// surely wrong... and no noise frequency (spuCtrl&0x3f00) will be used...
-// and sometimes the noise will be used as fmod modulation... pfff
-
-int INLINE GetNoiseValue()
-{
-#if 1
-	// Not great - works okay
-	return (-32767/4 + (rand() % 32767));
-#elif 0
-	// SPU2-X - doesn't seem to work here..?
-	static int Seed = 0x41595321;
-	int retval = 0x8000;
-	
-	if( Seed&0x100 )
-		retval = (Seed&0xff) << 8;
-	else if( Seed&0xffff )
-		retval = 0x7fff;
-
-	__asm {
-		MOV eax,Seed
-		ROR eax,5
-		XOR eax,0x9a
-		MOV ebx,eax
-		ROL eax,2
-		ADD eax,ebx
-		XOR eax,ebx
-		ROR eax,3
-		MOV Seed,eax
-	}
-
-	return retval;
-#endif
-}
-
-
 /*
-Eternal:
-- pitch somewhat comparable
-- texture less grainy
-- more loud and rich
+Noise Algorithm
+- Dr.Hell (Xebra PS1 emu)
+- 100% accurate (waveform + frequency)
+- http://drhell.web.fc2.com
 
-10 = similar
-12 = similar
-14 = similar
-16 = similar
-18 = similar
-20 = about right
-22 = about right
-24 = about right
-26 = about right
-28 = about right
-30 = about right (+)
-32 = about right
-34 = similar
-36 = about right (+)
-38 = about right
-40 = about right
-44 = similar
-46 = about right
-52 = similar
-56 = about right
-60 = about right
 
-very sensitive to change, might need fractions
+Level change cycle
+Freq = 0x8000 >> (NoiseClock >> 2);
+
+Frequency of half cycle
+Half = ((NoiseClock & 3) * 2) / (4 + (NoiseClock & 3));
+- 0 = (0*2)/(4+0) = 0/4
+- 1 = (1*2)/(4+1) = 2/5
+- 2 = (2*2)/(4+2) = 4/6
+- 3 = (3*2)/(4+3) = 6/7
+
+-------------------------------
+
+5*6*7 = 210
+4 -  0*0 = 0
+5 - 42*2 = 84
+6 - 35*4 = 140
+7 - 30*6 = 180
 */
-unsigned int NoiseClockFreq[64] = {
--1,33400,16800,16800,16800,16800,8300,8300,	// 0-7
-8300,8300,4200,4200,4200,4200,2100,2100,		// 8-15
-2100,2100,1040,1040,1040,1040,510,510,			// 16-23
-510,510,253,253,252,252,128,128,						// 24-31
-127,127,65,65,64,64,32,32,									// 32-39
-32,32,20,20,16,16,12,12,										// 40-47
-10,10,6,6,4,4,3,3,													// 48-55
-2,2,2,2,1,1,1,1,														// 56-63
+
+// Noise Waveform - Dr. Hell (Xebra)
+char NoiseWaveAdd [64] = {
+	1, 0, 0, 1, 0, 1, 1, 0,
+	1, 0, 0, 1, 0, 1, 1, 0,
+	1, 0, 0, 1, 0, 1, 1, 0,
+	1, 0, 0, 1, 0, 1, 1, 0,
+	0, 1, 1, 0, 1, 0, 0, 1,
+	0, 1, 1, 0, 1, 0, 0, 1,
+	0, 1, 1, 0, 1, 0, 0, 1,
+	0, 1, 1, 0, 1, 0, 0, 1
+};
+
+unsigned short NoiseFreqAdd[5] = {
+	0, 84, 140, 180, 210
 };
 
 INLINE void NoiseClock()
 {
-	dwNoiseCount += 1;
-	if( dwNoiseCount >= NoiseClockFreq[ dwNoiseClock ] )
-	{
-		dwNoiseCount = 0;
+	unsigned int level;
 
-		if( dwNoiseVal >= 0 )
-			dwNoiseVal = -GetNoiseValue();
-		else
-			dwNoiseVal = +GetNoiseValue();
+	level = 0x8000 >> (dwNoiseClock >> 2);
+	level <<= 16;
+
+	dwNoiseCount += 0x10000;
+
+	// Dr. Hell - fraction
+	dwNoiseCount += NoiseFreqAdd[ dwNoiseClock & 3 ];
+	if( (dwNoiseCount&0xffff) >= NoiseFreqAdd[4] ) {
+		dwNoiseCount += 0x10000;
+		dwNoiseCount -= NoiseFreqAdd[ dwNoiseClock & 3 ];
+	}
+
+	if( dwNoiseCount >= level )
+	{
+		while( dwNoiseCount >= level )
+			dwNoiseCount -= level;
+
+		// Dr. Hell - form
+		dwNoiseVal = (dwNoiseVal<<1) | NoiseWaveAdd[ (dwNoiseVal>>10) & 63 ];
 	}
 }
 
@@ -413,10 +391,9 @@ INLINE int iGetNoiseVal(int ch)
 {
  int fa;
 
- if( dwNoiseClock == 0 ) return 0;
+ fa = (short) dwNoiseVal;
 
- fa = (int) dwNoiseVal;
-
+ // no clip need
  //if(fa>32767L)  fa=32767L;
  //if(fa<-32767L) fa=-32767L;              
 
@@ -424,8 +401,9 @@ INLINE int iGetNoiseVal(int ch)
  //if(iUseInterpolation<2)                               // no gauss/cubic interpolation?
   //pChannel->SB[29] = fa;                               // -> store noise val in "current sample" slot
 
- // boost volume
- return fa * 3 / 2;
+ // boost volume - no more!
+ //return fa * 3 / 2;
+ return fa;
 }                                 
 
 ////////////////////////////////////////////////////////////////////////
@@ -558,6 +536,11 @@ static void *MAINThread(void *arg)
  int ch,predict_nr,shift_factor,flags,d,s;
  int bIRQReturn=0;
 
+
+ // mute output
+ if( voldiv == 5 ) voldiv = 0x7fffffff;
+
+ 
  while(!bEndThread)                                    // until we are shutting down
   {
    // ok, at the beginning we are looking if there is
@@ -854,17 +837,60 @@ GOON: ;
   else                                                 // stereo:
   for (ns = 0; ns < NSSIZE; ns++)
    {
-    SSumL[ns] += MixREVERBLeft(ns);
+		static double _interpolation_coefficient = 3.759285613;
 
-    d = SSumL[ns] / voldiv; SSumL[ns] = 0;
-    if (d < -32767) d = -32767; if (d > 32767) d = 32767;
-    *pS++ = d;
+		if(iFreqResponse) {
+			int sl,sr;
+			double ldiff, rdiff, avg, tmp;
 
-    SSumR[ns] += MixREVERBRight();
+			SSumL[ns]+=MixREVERBLeft(ns);
+			SSumR[ns]+=MixREVERBRight();
 
-    d = SSumR[ns] / voldiv; SSumR[ns] = 0;
-    if(d < -32767) d = -32767; if(d > 32767) d = 32767;
-    *pS++ = d;
+			sl = SSumL[ns]; SSumL[ns]=0;
+			sr = SSumR[ns]; SSumR[ns]=0;
+
+
+			/*
+			Frequency Response
+			- William Pitcock (nenolod) (UPSE PSF player)
+			- accurate (!)
+			- http://nenolod.net
+			*/
+
+			avg = ((sl + sr) / 2);
+			ldiff = sl - avg;
+			rdiff = sr - avg;
+
+			tmp = avg + ldiff * _interpolation_coefficient;
+			if (tmp < -32768)
+				tmp = -32768;
+			if (tmp > 32767)
+				tmp = 32767;
+			sl = tmp;
+
+			tmp = avg + rdiff * _interpolation_coefficient;
+			if (tmp < -32768)
+				tmp = -32768;
+			if (tmp > 32767)
+				tmp = 32767;
+			sr = tmp;
+
+
+			*pS++=sl/voldiv;
+			*pS++=sr/voldiv;
+		} else {
+			SSumL[ns]+=MixREVERBLeft(ns);
+                                              
+			d=SSumL[ns]/voldiv;SSumL[ns]=0;
+			if(d<-32767) d=-32767;if(d>32767) d=32767;
+			*pS++=d;
+        
+			SSumR[ns]+=MixREVERBRight();
+
+			d=SSumR[ns]/voldiv;SSumR[ns]=0;
+			if(d<-32767) d=-32767;if(d>32767) d=32767;
+			*pS++=d;
+		}
    }
 
   //////////////////////////////////////////////////////                   
