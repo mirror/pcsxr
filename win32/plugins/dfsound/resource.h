@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by DFSound.rc
 //
 #define IDC_SETS1                       3
@@ -135,6 +135,7 @@
 #define IDC_XA5                         1135
 #define IDC_RECORD                      1135
 #define IDC_XA6                         1136
+#define IDC_FREQRESPONSE                1136
 
 // Next default values for new objects
 // 
@@ -142,7 +143,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        144
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1136
+#define _APS_NEXT_CONTROL_VALUE         1137
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

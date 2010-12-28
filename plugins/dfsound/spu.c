@@ -866,14 +866,14 @@ GOON: ;
 				tmp = -32768;
 			if (tmp > 32767)
 				tmp = 32767;
-			sl = tmp;
+			sl = (int)tmp;
 
 			tmp = avg + rdiff * _interpolation_coefficient;
 			if (tmp < -32768)
 				tmp = -32768;
 			if (tmp > 32767)
 				tmp = 32767;
-			sr = tmp;
+			sr = (int)tmp;
 
 
 			*pS++=sl/voldiv;

@@ -65,6 +65,7 @@ void ReadConfig(void)
  iUseReverb=2;
  iUseInterpolation=2;
  iDisStereo=0;
+ iFreqResponse=0;
 
  if (RegOpenKeyEx(HKEY_CURRENT_USER,"Software\\Vision Thing\\PSEmu Pro\\SPU\\DFSound",0,KEY_ALL_ACCESS,&myKey)==ERROR_SUCCESS)
   {
@@ -80,6 +81,9 @@ void ReadConfig(void)
    size = 4;
    if(RegQueryValueEx(myKey,"SPUIRQWait",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
     iSPUIRQWait=(int)temp;
+   size = 4;
+   if(RegQueryValueEx(myKey,"FreqResponse",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
+    iFreqResponse=(int)temp;
    size = 4;
    if(RegQueryValueEx(myKey,"DebugMode",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
     iDebugMode=(int)temp;
@@ -101,7 +105,7 @@ void ReadConfig(void)
 
  if(iUseTimer>2) iUseTimer=2;              // some checks
  if(iVolume<1) iVolume=1;
- if(iVolume>4) iVolume=4;
+ if(iVolume>5) iVolume=5;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -123,6 +127,8 @@ void WriteConfig(void)
  RegSetValueEx(myKey,"UseTimer",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=iSPUIRQWait;
  RegSetValueEx(myKey,"SPUIRQWait",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
+ temp=iFreqResponse;
+ RegSetValueEx(myKey,"FreqResponse",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=iDebugMode;
  RegSetValueEx(myKey,"DebugMode",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=iRecordMode;
@@ -150,37 +156,39 @@ BOOL OnInitDSoundDialog(HWND hW)
  if(iXAPitch)    CheckDlgButton(hW,IDC_XAPITCH,TRUE);
 
  hWC=GetDlgItem(hW,IDC_VOLUME);
- ComboBox_AddString(hWC, "0: low");
- ComboBox_AddString(hWC, "1: medium");
- ComboBox_AddString(hWC, "2: loud");
- ComboBox_AddString(hWC, "3: loudest");
- ComboBox_SetCurSel(hWC,4-iVolume);
+ ComboBox_AddString(hWC, "None");
+ ComboBox_AddString(hWC, "Low");
+ ComboBox_AddString(hWC, "Medium");
+ ComboBox_AddString(hWC, "Loud");
+ ComboBox_AddString(hWC, "Loudest");
+ ComboBox_SetCurSel(hWC,5-iVolume);
 
  if(iSPUIRQWait) CheckDlgButton(hW,IDC_IRQWAIT,TRUE);
  if(iDebugMode)  CheckDlgButton(hW,IDC_DEBUGMODE,TRUE);
  if(iRecordMode) CheckDlgButton(hW,IDC_RECORDMODE,TRUE);
  if(iDisStereo)  CheckDlgButton(hW,IDC_DISSTEREO,TRUE);
+ if(iFreqResponse) CheckDlgButton(hW,IDC_FREQRESPONSE,TRUE);
 
  hWC=GetDlgItem(hW,IDC_USETIMER);
- ComboBox_AddString(hWC, "0: Fast mode (thread, less compatible spu timing)");
- ComboBox_AddString(hWC, "1: High compatibility mode (timer event, slower)");
- ComboBox_AddString(hWC, "2: Use SPUasync (must be supported by the emu)");
+ ComboBox_AddString(hWC, "Fast mode (thread, less compatible spu timing)");
+ ComboBox_AddString(hWC, "High compatibility mode (timer event, slower)");
+ ComboBox_AddString(hWC, "Use SPUasync (must be supported by the emu)");
  ComboBox_SetCurSel(hWC,iUseTimer);
 
  hWC=GetDlgItem(hW,IDC_USEREVERB);
- ComboBox_AddString(hWC, "0: No reverb (fastest)");
- ComboBox_AddString(hWC, "1: Simple reverb (fakes the most common effects)");
- ComboBox_AddString(hWC, "2: PSX reverb (best quality)");
+ ComboBox_AddString(hWC, "No reverb (fastest)");
+ ComboBox_AddString(hWC, "Simple reverb (fakes the most common effects)");
+ ComboBox_AddString(hWC, "PSX reverb (best quality)");
  ComboBox_SetCurSel(hWC,iUseReverb);
 
  hWC=GetDlgItem(hW,IDC_INTERPOL);
- ComboBox_AddString(hWC, "0: None (fastest)");
- ComboBox_AddString(hWC, "1: Simple interpolation");
- ComboBox_AddString(hWC, "2: Gaussian interpolation (good quality)");
- ComboBox_AddString(hWC, "3: Cubic interpolation (better treble)");
+ ComboBox_AddString(hWC, "None (fastest)");
+ ComboBox_AddString(hWC, "Simple interpolation");
+ ComboBox_AddString(hWC, "Gaussian interpolation (good quality)");
+ ComboBox_AddString(hWC, "Cubic interpolation (better treble)");
  ComboBox_SetCurSel(hWC,iUseInterpolation);
 
- return TRUE;	                
+ return TRUE;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -195,7 +203,7 @@ void OnDSoundOK(HWND hW)
   iXAPitch=1; else iXAPitch=0;
 
  hWC=GetDlgItem(hW,IDC_VOLUME);
- iVolume=4-ComboBox_GetCurSel(hWC);
+ iVolume=5-ComboBox_GetCurSel(hWC);
 
  hWC=GetDlgItem(hW,IDC_USETIMER);
  iUseTimer=ComboBox_GetCurSel(hWC);
@@ -217,6 +225,9 @@ void OnDSoundOK(HWND hW)
 
  if(IsDlgButtonChecked(hW,IDC_DISSTEREO))
   iDisStereo=1; else iDisStereo=0;
+
+ if(IsDlgButtonChecked(hW,IDC_FREQRESPONSE))
+  iFreqResponse=1; else iFreqResponse=0;
 
  WriteConfig();                                        // write registry
 

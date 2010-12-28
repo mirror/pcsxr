@@ -1,4 +1,4 @@
-//Microsoft Developer Studio generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
 
@@ -27,9 +27,9 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 //
 
 IDD_ABOUT DIALOGEX 0, 0, 239, 175
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About"
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,98,155,44,14
     RTEXT           "Version :",IDC_STATIC,5,5,74,9
@@ -38,145 +38,105 @@ BEGIN
     RTEXT           "Pete's EMail :",IDC_STATIC,5,40,74,9
     RTEXT           "Pete's homepage :",IDC_STATIC,5,51,74,9
     LTEXT           "1.0",IDC_STATIC,82,5,154,9
-    LTEXT           "P.E.Op.S DSound PSX SPU Audio Driver",IDC_STATIC,81,16,
-                    154,9
-    LTEXT           "Pete Bernert and the P.E.Op.S. team",IDC_STATIC,81,27,
-                    154,9
+    LTEXT           "P.E.Op.S DSound PSX SPU Audio Driver",IDC_STATIC,81,16,154,9
+    LTEXT           "Pete Bernert and the P.E.Op.S. team",IDC_STATIC,81,27,154,9
     LTEXT           "BlackDove@addcom.de",IDC_STATIC,81,40,154,9
     LTEXT           "http://www.pbernert.com",IDC_STATIC,81,51,154,9
-    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDFRAME,9,107,218,41,
-                    WS_EX_DLGMODALFRAME
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDFRAME,9,107,218,41,WS_EX_DLGMODALFRAME
     RTEXT           "Greetings to:",IDC_STATIC,16,116,45,9
-    LTEXT           "_Demo_,  Null2, Iori, Andy, Ben, Bilgerat, linuzappz and everybody else who is trying to create nice psx emu sounds :)",
-                    IDC_STATIC,65,116,153,27
+    LTEXT           "_Demo_,  Null2, Iori, Andy, Ben, Bilgerat, linuzappz and everybody else who is trying to create nice psx emu sounds :)",IDC_STATIC,65,116,153,27
     RTEXT           "P.E.Op.S. homepage :",IDC_STATIC,5,91,74,9
-    LTEXT           "https://sourceforge.net/projects/peops/",IDC_STATIC,81,
-                    91,154,9
+    LTEXT           "https://sourceforge.net/projects/peops/",IDC_STATIC,81,91,154,9
     RTEXT           "linuzappz :",IDC_STATIC,10,63,69,10
     LTEXT           "http://www.pcsx.net",IDC_STATIC,81,63,142,10
     RTEXT           "kode54 :",IDC_STATIC,10,75,69,10
-    LTEXT           "http://home.earthlink.net/~kode54/",IDC_STATIC,81,75,
-                    142,10
+    LTEXT           "http://home.earthlink.net/~kode54/",IDC_STATIC,81,75,142,10
 END
 
-IDD_CFGDLG DIALOG DISCARDABLE  0, 0, 253, 207
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_CFGDLG DIALOGEX 0, 0, 253, 217
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Configure the P.E.Op.S. DSound PSX SPU Audio Driver..."
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    COMBOBOX        IDC_USETIMER,54,14,186,44,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    COMBOBOX        IDC_VOLUME,54,30,186,62,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    COMBOBOX        IDC_USEREVERB,54,46,186,44,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    COMBOBOX        IDC_INTERPOL,54,62,186,62,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    CONTROL         "Change XA speed, if it is played too fast (more cpu power needed)",
-                    IDC_XAPITCH,"Button",BS_AUTOCHECKBOX | BS_LEFT | 
-                    BS_VCENTER | WS_TABSTOP,14,97,225,10
-    CONTROL         "SPU IRQ - wait for CPU action (Valkyrie Profile && MGS + SPUasync)",
-                    IDC_IRQWAIT,"Button",BS_AUTOCHECKBOX | BS_LEFT | 
-                    BS_VCENTER | WS_TABSTOP,14,128,231,10
-    CONTROL         "Mono sound mode (for slower PCs/sound cards)",
-                    IDC_DISSTEREO,"Button",BS_AUTOCHECKBOX | BS_LEFT | 
-                    BS_VCENTER | WS_TABSTOP,14,140,229,10
-    CONTROL         "Enable developer debug mode",IDC_DEBUGMODE,"Button",
-                    BS_AUTOCHECKBOX | BS_LEFT | BS_VCENTER | WS_TABSTOP,14,
-                    152,229,10
-    CONTROL         "Enable sound recording window",IDC_RECORDMODE,"Button",
-                    BS_AUTOCHECKBOX | BS_LEFT | BS_VCENTER | WS_TABSTOP,14,
-                    164,229,10
-    DEFPUSHBUTTON   "OK",IDOK,51,186,45,14
-    PUSHBUTTON      "Cancel",IDCANCEL,157,186,45,14
+    COMBOBOX        IDC_USETIMER,54,14,186,44,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_VOLUME,54,30,186,62,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_USEREVERB,54,46,186,44,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_INTERPOL,54,62,186,62,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Change XA speed, if it is played too fast (more cpu power needed)",IDC_XAPITCH,
+                    "Button",BS_AUTOCHECKBOX | BS_LEFT | BS_VCENTER | WS_TABSTOP,13,97,225,10
+    CONTROL         "SPU IRQ - wait for CPU action (Valkyrie Profile && MGS + SPUasync)",IDC_IRQWAIT,
+                    "Button",BS_AUTOCHECKBOX | BS_LEFT | BS_VCENTER | WS_TABSTOP,13,128,231,10
+    CONTROL         "Mono sound mode (for slower PCs/sound cards)",IDC_DISSTEREO,
+                    "Button",BS_AUTOCHECKBOX | BS_LEFT | BS_VCENTER | WS_TABSTOP,13,140,229,10
+    CONTROL         "Enable developer debug mode",IDC_DEBUGMODE,"Button",BS_AUTOCHECKBOX | BS_LEFT | BS_VCENTER | WS_TABSTOP,13,164,229,10
+    CONTROL         "Enable sound recording window",IDC_RECORDMODE,"Button",BS_AUTOCHECKBOX | BS_LEFT | BS_VCENTER | WS_TABSTOP,13,177,229,10
+    DEFPUSHBUTTON   "OK",IDOK,51,196,45,14
+    PUSHBUTTON      "Cancel",IDCANCEL,157,196,45,14
     RTEXT           "Volume:",IDC_STATIC,22,32,29,10,SS_CENTERIMAGE
     GROUPBOX        "General settings",IDC_STATIC,4,2,245,81
     GROUPBOX        "XA music",IDC_STATIC,4,85,245,27
-    GROUPBOX        "Misc",IDC_STATIC,4,115,245,69
+    GROUPBOX        "Misc",IDC_STATIC,4,115,245,77
     RTEXT           "Reverb:",IDC_STATIC,22,48,29,10,SS_CENTERIMAGE
     RTEXT           "Mode:",IDC_STATIC,20,16,29,10,SS_CENTERIMAGE
     RTEXT           "Interpolation:",IDC_STATIC,8,64,43,10,SS_CENTERIMAGE
+    CONTROL         "Enable frequency response - output filter",IDC_FREQRESPONSE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,152,224,10
 END
 
-IDD_DEBUG DIALOG DISCARDABLE  0, 0, 397, 314
-STYLE DS_MODALFRAME | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | 
-    WS_CAPTION | WS_SYSMENU
+IDD_DEBUG DIALOG  0, 0, 397, 314
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 CAPTION "Sound debug screen"
 FONT 8, "MS Sans Serif"
 BEGIN
     GROUPBOX        "XA",IDC_STATIC,201,249,92,61
     LTEXT           "",IDC_SAREA,4,12,150,288,WS_BORDER
-    CONTROL         "",IDC_MUTE1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    14,9,9
+    CONTROL         "",IDC_MUTE1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,14,9,9
     CONTROL         "1",IDC_CHAN1,"Button",BS_AUTORADIOBUTTON,168,14,22,9
-    CONTROL         "",IDC_MUTE2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    26,9,9
+    CONTROL         "",IDC_MUTE2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,26,9,9
     CONTROL         "2",IDC_CHAN2,"Button",BS_AUTORADIOBUTTON,168,26,22,9
-    CONTROL         "",IDC_MUTE3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    38,9,9
+    CONTROL         "",IDC_MUTE3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,38,9,9
     CONTROL         "3",IDC_CHAN3,"Button",BS_AUTORADIOBUTTON,168,38,22,9
-    CONTROL         "",IDC_MUTE4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    50,9,9
+    CONTROL         "",IDC_MUTE4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,50,9,9
     CONTROL         "4",IDC_CHAN4,"Button",BS_AUTORADIOBUTTON,168,50,22,9
-    CONTROL         "",IDC_MUTE5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    62,9,9
+    CONTROL         "",IDC_MUTE5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,62,9,9
     CONTROL         "5",IDC_CHAN5,"Button",BS_AUTORADIOBUTTON,168,62,22,9
-    CONTROL         "",IDC_MUTE6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    74,9,9
+    CONTROL         "",IDC_MUTE6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,74,9,9
     CONTROL         "6",IDC_CHAN6,"Button",BS_AUTORADIOBUTTON,168,74,22,9
-    CONTROL         "",IDC_MUTE7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    86,9,9
+    CONTROL         "",IDC_MUTE7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,86,9,9
     CONTROL         "7",IDC_CHAN7,"Button",BS_AUTORADIOBUTTON,168,86,22,9
-    CONTROL         "",IDC_MUTE8,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    98,9,9
+    CONTROL         "",IDC_MUTE8,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,98,9,9
     CONTROL         "8",IDC_CHAN8,"Button",BS_AUTORADIOBUTTON,168,98,22,9
-    CONTROL         "",IDC_MUTE9,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    110,9,9
+    CONTROL         "",IDC_MUTE9,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,110,9,9
     CONTROL         "9",IDC_CHAN9,"Button",BS_AUTORADIOBUTTON,168,110,22,9
-    CONTROL         "",IDC_MUTE10,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    122,9,9
+    CONTROL         "",IDC_MUTE10,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,122,9,9
     CONTROL         "10",IDC_CHAN10,"Button",BS_AUTORADIOBUTTON,168,122,22,9
-    CONTROL         "",IDC_MUTE11,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    134,9,9
+    CONTROL         "",IDC_MUTE11,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,134,9,9
     CONTROL         "11",IDC_CHAN11,"Button",BS_AUTORADIOBUTTON,168,134,22,9
-    CONTROL         "",IDC_MUTE12,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    146,9,9
+    CONTROL         "",IDC_MUTE12,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,146,9,9
     CONTROL         "12",IDC_CHAN12,"Button",BS_AUTORADIOBUTTON,168,146,22,9
-    CONTROL         "",IDC_MUTE13,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    158,9,9
+    CONTROL         "",IDC_MUTE13,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,158,9,9
     CONTROL         "13",IDC_CHAN13,"Button",BS_AUTORADIOBUTTON,168,158,22,9
-    CONTROL         "",IDC_MUTE14,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    170,9,9
+    CONTROL         "",IDC_MUTE14,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,170,9,9
     CONTROL         "14",IDC_CHAN14,"Button",BS_AUTORADIOBUTTON,168,170,22,9
-    CONTROL         "",IDC_MUTE15,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    182,9,9
+    CONTROL         "",IDC_MUTE15,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,182,9,9
     CONTROL         "15",IDC_CHAN15,"Button",BS_AUTORADIOBUTTON,168,182,22,9
-    CONTROL         "",IDC_MUTE16,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    194,9,9
+    CONTROL         "",IDC_MUTE16,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,194,9,9
     CONTROL         "16",IDC_CHAN16,"Button",BS_AUTORADIOBUTTON,168,194,22,9
-    CONTROL         "",IDC_MUTE17,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    206,9,9
+    CONTROL         "",IDC_MUTE17,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,206,9,9
     CONTROL         "17",IDC_CHAN17,"Button",BS_AUTORADIOBUTTON,168,206,22,9
-    CONTROL         "",IDC_MUTE18,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    218,9,9
+    CONTROL         "",IDC_MUTE18,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,218,9,9
     CONTROL         "18",IDC_CHAN18,"Button",BS_AUTORADIOBUTTON,168,218,22,9
-    CONTROL         "",IDC_MUTE19,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    230,9,9
+    CONTROL         "",IDC_MUTE19,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,230,9,9
     CONTROL         "19",IDC_CHAN19,"Button",BS_AUTORADIOBUTTON,168,230,22,9
-    CONTROL         "",IDC_MUTE20,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    242,9,9
+    CONTROL         "",IDC_MUTE20,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,242,9,9
     CONTROL         "20",IDC_CHAN20,"Button",BS_AUTORADIOBUTTON,168,242,22,9
-    CONTROL         "",IDC_MUTE21,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    254,9,9
+    CONTROL         "",IDC_MUTE21,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,254,9,9
     CONTROL         "21",IDC_CHAN21,"Button",BS_AUTORADIOBUTTON,168,254,22,9
-    CONTROL         "",IDC_MUTE22,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    266,9,9
+    CONTROL         "",IDC_MUTE22,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,266,9,9
     CONTROL         "22",IDC_CHAN22,"Button",BS_AUTORADIOBUTTON,168,266,22,9
-    CONTROL         "",IDC_MUTE23,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    278,9,9
+    CONTROL         "",IDC_MUTE23,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,278,9,9
     CONTROL         "23",IDC_CHAN23,"Button",BS_AUTORADIOBUTTON,168,278,22,9
-    CONTROL         "",IDC_MUTE24,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,
-                    290,9,9
+    CONTROL         "",IDC_MUTE24,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,158,290,9,9
     CONTROL         "24",IDC_CHAN24,"Button",BS_AUTORADIOBUTTON,168,290,22,9
     LTEXT           "Streams",IDC_STATIC,6,2,55,8
     CTEXT           "Mute/Select",IDC_STATIC,144,2,55,8
@@ -196,16 +156,11 @@ BEGIN
     RTEXT           "Channel:",IDC_STATIC,204,2,30,8
     GROUPBOX        "ADSR channel info",IDC_STATIC,201,14,190,119
     LTEXT           "1",IDC_CHANNUM,238,2,33,8
-    CONTROL         136,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE | 
-                    SS_REALSIZEIMAGE,208,83,11,10
-    CONTROL         137,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE | 
-                    SS_REALSIZEIMAGE,208,94,11,10
-    CONTROL         138,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE | 
-                    SS_REALSIZEIMAGE,208,105,11,10
-    CONTROL         139,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE | 
-                    SS_REALSIZEIMAGE,208,116,11,10
-    CONTROL         140,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE,4,
-                    302,150,8
+    CONTROL         136,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE | SS_REALSIZEIMAGE,208,83,11,10
+    CONTROL         137,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE | SS_REALSIZEIMAGE,208,94,11,10
+    CONTROL         138,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE | SS_REALSIZEIMAGE,208,105,11,10
+    CONTROL         139,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE | SS_REALSIZEIMAGE,208,116,11,10
+    CONTROL         140,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE,4,302,150,8
     PUSHBUTTON      "M0",IDC_MUTEOFF,157,300,15,10
     PUSHBUTTON      "M1",IDC_MUTEON,174,300,15,10
     GROUPBOX        "Generic channel info",IDC_STATIC,201,134,190,114
@@ -269,9 +224,8 @@ BEGIN
     RTEXT           "Volume:",IDC_STATIC,204,298,31,9
 END
 
-IDD_RECORD DIALOG DISCARDABLE  0, 0, 248, 18
-STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
-    WS_SYSMENU
+IDD_RECORD DIALOG  0, 0, 248, 18
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 CAPTION "P.E.Op.S. sound recording"
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -287,7 +241,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO MOVEABLE PURE 
+GUIDELINES DESIGNINFO 
 BEGIN
     IDD_ABOUT, DIALOG
     BEGIN
@@ -302,7 +256,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 246
         TOPMARGIN, 7
-        BOTTOMMARGIN, 200
+        BOTTOMMARGIN, 210
     END
 
     IDD_DEBUG, DIALOG
@@ -324,7 +278,6 @@ END
 #endif    // APSTUDIO_INVOKED
 
 
-#ifndef _MAC
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
@@ -347,18 +300,13 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "Comments", "Based on P.E.Op.S. DSound PSX SPU Audio driver by Pete Bernert and the P.E.Op.S. team\0"
-            VALUE "CompanyName", "\0"
-            VALUE "FileDescription", "DFSound\0"
-            VALUE "FileVersion", "1, 0, 9, 0\0"
-            VALUE "InternalName", "DFSound\0"
-            VALUE "LegalCopyright", "\0"
-            VALUE "LegalTrademarks", "\0"
-            VALUE "OriginalFilename", "DFSound.DLL\0"
-            VALUE "PrivateBuild", "\0"
-            VALUE "ProductName", "DFSound\0"
-            VALUE "ProductVersion", "1, 0, 9, 0\0"
-            VALUE "SpecialBuild", "\0"
+            VALUE "Comments", "Based on P.E.Op.S. DSound PSX SPU Audio driver by Pete Bernert and the P.E.Op.S. team"
+            VALUE "FileDescription", "DFSound"
+            VALUE "FileVersion", "1, 0, 9, 0"
+            VALUE "InternalName", "DFSound"
+            VALUE "OriginalFilename", "DFSound.DLL"
+            VALUE "ProductName", "DFSound"
+            VALUE "ProductVersion", "1, 0, 9, 0"
         END
     END
     BLOCK "VarFileInfo"
@@ -366,8 +314,6 @@ BEGIN
         VALUE "Translation", 0x409, 1200
     END
 END
-
-#endif    // !_MAC
 
 #endif    // Neutral resources
 /////////////////////////////////////////////////////////////////////////////
@@ -388,18 +334,18 @@ LANGUAGE LANG_POLISH, SUBLANG_DEFAULT
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE MOVEABLE PURE 
+1 TEXTINCLUDE 
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE MOVEABLE PURE 
+2 TEXTINCLUDE 
 BEGIN
     "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE MOVEABLE PURE 
+3 TEXTINCLUDE 
 BEGIN
     "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
     "#define _AFX_NO_OLE_RESOURCES\r\n"
@@ -434,11 +380,11 @@ LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
 // Bitmap
 //
 
-IDB_BITMAP1             BITMAP  MOVEABLE PURE   "res\\bitmap1.bmp"
-IDB_BITMAP2             BITMAP  MOVEABLE PURE   "res\\bitmap2.bmp"
-IDB_BITMAP3             BITMAP  MOVEABLE PURE   "res\\bitmap3.bmp"
-IDB_BITMAP4             BITMAP  MOVEABLE PURE   "res\\bitmap4.bmp"
-IDB_BITMAP5             BITMAP  MOVEABLE PURE   "res\\bitmap5.bmp"
+IDB_BITMAP1             BITMAP                  "res\\bitmap1.bmp"
+IDB_BITMAP2             BITMAP                  "res\\bitmap2.bmp"
+IDB_BITMAP3             BITMAP                  "res\\bitmap3.bmp"
+IDB_BITMAP4             BITMAP                  "res\\bitmap4.bmp"
+IDB_BITMAP5             BITMAP                  "res\\bitmap5.bmp"
 #endif    // German (Germany) resources
 /////////////////////////////////////////////////////////////////////////////
 
