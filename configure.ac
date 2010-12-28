@@ -7,7 +7,6 @@ AM_MAINTAINER_MODE
 
 AC_CONFIG_HEADERS([include/config.h:include/config.h.in])
 
-
 AC_PROG_CC
 AM_PROG_CC_C_O
 AC_PROG_RANLIB
@@ -188,23 +187,23 @@ if test "x$DYNARECSEL" = xno; then
 fi
 
 if test "x$DYNARECSEL" = xx86; then
-        AC_DEFINE([__i386__], [1], [Define if we are compiling for x86 architectures.])
-        AM_CONDITIONAL(ARCH_X86, true)
+	AC_DEFINE([__i386__], [1], [Define if we are compiling for x86 architectures.])
+	AM_CONDITIONAL(ARCH_X86, true)
 
 	AC_MSG_RESULT([Dynamic Recompiler selected: x86])
 fi
 
 if test "x$DYNARECSEL" = xx86_64; then
-        AC_DEFINE([__x86_64__], [1], [Define if we are compiling for x86_64 architectures.])
-        AM_CONDITIONAL(ARCH_X86_64, true)
+	AC_DEFINE([__x86_64__], [1], [Define if we are compiling for x86_64 architectures.])
+	AM_CONDITIONAL(ARCH_X86_64, true)
 	dnl CFLAGS+=" -m64 "
 	dnl AC_COMPILE_IFELSE(AC_LANG_PROGRAM,,AC_MSG_ERROR([Cannot compile with -m64])) 
 	AC_MSG_RESULT([Dynamic Recompiler selected: x86_64])
 fi
 
 if test "x$DYNARECSEL" = xppc; then
-        AC_DEFINE([__ppc__], [1], [Define if we are compiling for powerpc architectures.])
-        AM_CONDITIONAL(ARCH_PPC, true)
+	AC_DEFINE([__ppc__], [1], [Define if we are compiling for powerpc architectures.])
+	AM_CONDITIONAL(ARCH_PPC, true)
 	AC_MSG_RESULT([Dynamic Recompiler selected: ppc])
 fi
 
