@@ -78,7 +78,8 @@
                     <child>
                       <widget class="GtkComboBox" id="cbVolume2">
                         <property name="visible">True</property>
-                        <property name="items" translatable="yes">Low
+                        <property name="items" translatable="yes">None
+Low
 Medium
 Loud
 Loudest</property>
@@ -256,6 +257,18 @@ Cubic</property>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
                         <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkCheckButton" id="chkFreqResponse">
+                        <property name="label" translatable="yes">Frequency Response - Output Filter</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="draw_indicator">True</property>
+                      </widget>
+                      <packing>
+                        <property name="position">3</property>
                       </packing>
                     </child>
                   </widget>

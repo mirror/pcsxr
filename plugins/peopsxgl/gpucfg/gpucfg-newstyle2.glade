@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <interface>
-  <requires lib="gtk+" version="2.20"/>
+  <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkListStore" id="liststore6">
     <columns>
@@ -141,10 +141,12 @@
     <property name="border_width">5</property>
     <property name="title" translatable="yes">P.E.Op.S. MesaGL PSX GPU configuration...</property>
     <property name="resizable">False</property>
+    <property name="modal">True</property>
     <property name="window_position">center</property>
     <property name="type_hint">normal</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="fixed1">
+        <property name="orientation">vertical</property>
         <child>
           <object class="GtkHBox" id="my_hbox0">
             <property name="spacing">5</property>
@@ -154,6 +156,7 @@
                 <child>
                   <object class="GtkVBox" id="fixed2">
                     <property name="border_width">5</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkTable" id="table1">
                         <property name="visible">True</property>
@@ -175,7 +178,7 @@
                           <object class="GtkEntry" id="edtXSize">
                             <property name="can_focus">True</property>
                             <property name="max_length">5</property>
-                            <property name="invisible_char">•</property>
+                            <property name="invisible_char">&#x2022;</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -185,7 +188,7 @@
                         <child>
                           <object class="GtkEntry" id="edtYSize">
                             <property name="can_focus">True</property>
-                            <property name="invisible_char">•</property>
+                            <property name="invisible_char">&#x2022;</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -228,6 +231,8 @@
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -239,6 +244,8 @@
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
@@ -260,12 +267,14 @@
                 <child>
                   <object class="GtkVBox" id="fixed3">
                     <property name="border_width">5</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkHBox" id="hbox3">
                         <property name="visible">True</property>
                         <child>
                           <object class="GtkVBox" id="vbox1">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">2</property>
                             <child>
                               <object class="GtkLabel" id="label5">
@@ -305,6 +314,7 @@
                         <child>
                           <object class="GtkVBox" id="vbox3">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">2</property>
                             <child>
                               <object class="GtkComboBox" id="cmbQuality">
@@ -375,6 +385,9 @@
                             <property name="can_focus">True</property>
                           </object>
                           <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="padding">5</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -410,6 +423,7 @@
                 <child>
                   <object class="GtkVBox" id="fixed4">
                     <property name="border_width">5</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkCheckButton" id="chkShowFPS">
                         <property name="label" translatable="yes">Show FPS display on startup</property>
@@ -418,6 +432,8 @@
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
@@ -429,6 +445,7 @@
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -440,6 +457,8 @@
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
@@ -452,6 +471,8 @@
                         <property name="group">rdbLimMan</property>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">3</property>
                       </packing>
                     </child>
@@ -466,6 +487,8 @@
                             <property name="draw_indicator">True</property>
                           </object>
                           <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -474,6 +497,9 @@
                             <property name="can_focus">True</property>
                           </object>
                           <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="padding">5</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -483,11 +509,15 @@
                             <property name="justify">center</property>
                           </object>
                           <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
                             <property name="position">2</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">4</property>
                       </packing>
                     </child>
@@ -509,18 +539,21 @@
                 <child>
                   <object class="GtkVBox" id="fixed5">
                     <property name="border_width">5</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkHBox" id="hbox1">
                         <property name="visible">True</property>
                         <child>
                           <object class="GtkVBox" id="vbox2">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkHBox" id="hbox4">
                                 <property name="visible">True</property>
                                 <child>
                                   <object class="GtkVBox" id="vbox4">
                                     <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
                                     <property name="spacing">2</property>
                                     <child>
                                       <object class="GtkLabel" id="label9">
@@ -560,6 +593,7 @@
                                 <child>
                                   <object class="GtkVBox" id="vbox5">
                                     <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
                                     <property name="spacing">2</property>
                                     <child>
                                       <object class="GtkComboBox" id="cmbOffscreen">
@@ -573,6 +607,8 @@
                                         </child>
                                       </object>
                                       <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
                                         <property name="position">0</property>
                                       </packing>
                                     </child>
@@ -587,6 +623,8 @@
                                         </child>
                                       </object>
                                       <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -683,6 +721,7 @@
                 <child>
                   <object class="GtkVBox" id="fixed6">
                     <property name="border_width">5</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkHBox" id="my_hbox4">
                         <child>
@@ -693,6 +732,8 @@
                             <property name="draw_indicator">True</property>
                           </object>
                           <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -703,6 +744,8 @@
                           </object>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="padding">13</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -711,11 +754,15 @@
                             <property name="can_focus">True</property>
                           </object>
                           <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
                             <property name="position">2</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
@@ -727,6 +774,8 @@
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -738,6 +787,8 @@
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
@@ -749,6 +800,8 @@
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">3</property>
                       </packing>
                     </child>
@@ -760,6 +813,8 @@
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">4</property>
                       </packing>
                     </child>
@@ -771,6 +826,8 @@
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">5</property>
                       </packing>
                     </child>
@@ -782,6 +839,8 @@
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">6</property>
                       </packing>
                     </child>
@@ -803,6 +862,7 @@
                 <child>
                   <object class="GtkVBox" id="fixed7">
                     <property name="border_width">5</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkCheckButton" id="chkGameFixes">
                         <property name="label" translatable="yes">Use game fixes</property>
@@ -1078,7 +1138,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -1093,7 +1152,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -1128,6 +1186,7 @@
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox3">
         <property name="visible">True</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <placeholder/>

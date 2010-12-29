@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
 		    p = strstr(p, "=");
 	    	len = 1;
 		}
-	    val = set_limit (p, len, 0, 4);
+	    val = set_limit (p, len, -1, 4) + 1;
     } else val = 2;
 
     gtk_combo_box_set_active(GTK_COMBO_BOX (glade_xml_get_widget(xml, "cbVolume2")), val);
@@ -194,6 +194,19 @@ int main(int argc, char *argv[])
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "chkDisStereo")), val);
 
     if (pB) {
+		strcpy(t, "\nFreqResponse");
+		p = strstr(pB, t);
+		if (p) {
+		    p = strstr(p, "=");
+		    len = 1;
+		}
+
+		val = set_limit (p, len, 0, 1);
+    } else val = 0;
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "chkFreqResponse")), val);
+
+	if (pB) {
 		strcpy(t, "\nUseReverb");
 		p = strstr(pB, t);
 		if (p) {
@@ -233,7 +246,7 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
 	}
 
 	val = gtk_combo_box_get_active(GTK_COMBO_BOX(glade_xml_get_widget(xml, "cbVolume2")));
-	fprintf(fp, "\nVolume = %d\n", val);
+	fprintf(fp, "\nVolume = %d\n", val - 1);
 
 	val = gtk_combo_box_get_active(GTK_COMBO_BOX(glade_xml_get_widget(xml, "cbInterpolation2")));
 	fprintf(fp, "\nUseInterpolation = %d\n", val);
@@ -249,6 +262,9 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
 
 	val = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "chkDisStereo")));
 	fprintf(fp, "\nDisStereo = %d\n", val);
+
+	val = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "chkFreqResponse")));
+	fprintf(fp, "\nFreqResponse = %d\n", val);
 
 	val = gtk_combo_box_get_active(GTK_COMBO_BOX(glade_xml_get_widget(xml, "cbReverb2")));
 	fprintf(fp, "\nUseReverb = %d\n", val);

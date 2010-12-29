@@ -36,7 +36,7 @@ char *LabelGreets = { N_(
 	"Ryan Schultz, Andrew Burton, Stephen Chao,\n"
 	"Marcus Comstedt, Stefan Sikora\n\n"
 	"PCSX-Reloaded By:\n"
-	"Blade_Arma, Wei Mingzhi, et al.\n\n"
+	"Blade_Arma, shalma, Wei Mingzhi, et al.\n\n"
 	"http://pcsxr.codeplex.com/")
 };
 

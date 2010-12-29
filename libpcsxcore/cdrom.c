@@ -1236,6 +1236,7 @@ void cdrInterrupt() {
 
 		case CdlID + 0x20:
 			SetResultSize(8);
+
 			if (CDR_getStatus(&stat) == -1) {
 				cdr.Result[0] = 0x00; // 0x08 and cdr.Result[1]|0x10 : audio cd, enters cd player
 				cdr.Result[1] = 0x00; // 0x80 leads to the menu in the bios, else loads CD
@@ -1255,6 +1256,7 @@ void cdrInterrupt() {
 				}
 			}
 
+			if (CdromId[0] == '\0') cdr.Result[1] |= 0x80;
 			cdr.Result[2] = 0x00;
 			cdr.Result[3] = 0x00;
 			strncpy((char *)&cdr.Result[4], "PCSX", 4);

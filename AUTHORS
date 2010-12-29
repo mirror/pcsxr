@@ -20,20 +20,23 @@ df Copyright:	(c) 2005 Ryan Schultz
 		(c) 2006 Marcus Comstedt
 
 PCSX-Reloaded Authors/Contributors: avlex (Help on xcode project)
+			    Benoît Gschwind (MDEC decoder improvements)
 			    Dario (Various bugfixes)
 			    edgbla (Root counters, various core/plugin fixes)
 			    Firnis (GTE code from PCSX-Revolution Project)
+			    Hopkat (Sound plugin improvements, core fixes)
 			    Gabriele Gorla (MDEC decoder)
 			    maggix (Snow Leopard compile fix)
 			    NeToU (Bugfix)
 			    Peter Collingbourne (Various core/psxbios fixes)
 			    siveritas (Bugfix)
-			    shalma (GTE Divider, various core fixes)
+			    shalma (GTE Divider, many core improvements, sound plugin fixes)
 			    Tristin Celestin (PulseAudio support)
+			    VoidMage (Build system cleanups)
 			    Wei Mingzhi (Maintainer, input plugin, iso/cheat support, misc stuff)
+			    (And others which I cannot keep track of)
 
 PCSX-Reloaded Translators: edgbla (Russian)
 			   Giovanni Scafora (Italian)
 			   Tibério Vítor (Brazilian Portuguese)
 			   Wei Mingzhi (Simplified & Traditional Chinese)
-

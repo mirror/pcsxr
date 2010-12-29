@@ -112,7 +112,7 @@ void ReadConfigFile(void)
  strcpy(t,"\nVolume");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
  if(p) iVolume=4-atoi(p+len);
  if(iVolume<1) iVolume=1;
- if(iVolume>4) iVolume=4;
+ if(iVolume>5) iVolume=5;
 
  strcpy(t,"\nXAPitch");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
  if(p) iXAPitch=atoi(p+len);
@@ -145,6 +145,11 @@ void ReadConfigFile(void)
  if(p)  iDisStereo=atoi(p+len); 
  if(iDisStereo<0) iDisStereo=0; 
  if(iDisStereo>1) iDisStereo=1; 
+
+ strcpy(t,"\nFreqResponse");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;} 
+ if(p)  iFreqResponse=atoi(p+len); 
+ if(iFreqResponse<0) iFreqResponse=0; 
+ if(iFreqResponse>1) iFreqResponse=1; 
 
  free(pB);
 }

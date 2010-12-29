@@ -1,7 +1,7 @@
 
 #if defined (__ppc__) || defined (__ppc64__) || defined (__powerpc__) || (__powerpc64__)
 
-#ifdef ELF
+#if defined (ELF) || defined (__linux__)
 #define C(label) label
 #else
 #define C(label) _##label

@@ -1294,9 +1294,6 @@ if (!myvisual)
    DestroyDisplay();
   }
 
-
-
- int _i;
  uint32_t color;
 
  /* fix the green back ground in YUV mode */
@@ -1416,7 +1413,7 @@ void BlitToYUV(unsigned char * surf,int32_t x,int32_t y)
  unsigned short row,column;
  unsigned short dx = PreviousPSXDisplay.Range.x1;
  unsigned short dy = PreviousPSXDisplay.DisplayMode.y;
- int Y,U,V, R,G,B;
+ int R,G,B;
 
  int32_t lPitch = PSXDisplay.DisplayMode.x << 2;
  uint32_t *destpix;
@@ -1567,7 +1564,7 @@ void DoBufferSwap(void)
 	Screen *screen;
 	Window _dw;
 	XvImage *xvi;
-	unsigned int dstx, dsty, srcy = 0;
+	unsigned int dstx, dsty;
 	unsigned int _d, _w, _h;	//don't care about _d
 
 	finalw = PSXDisplay.DisplayMode.x;

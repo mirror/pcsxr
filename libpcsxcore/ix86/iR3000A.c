@@ -164,8 +164,6 @@ static void SetBranch() {
 		RET();
 		return;
 	}
-
-	
 	switch( psxRegs.code >> 26 ) {
 		// Lode Runner (jr - beq)
 
@@ -181,7 +179,6 @@ static void SetBranch() {
 			recBSC[psxRegs.code>>26]();
 			break;
 	}
-
 
 	iFlushRegs();
 	MOV32MtoR(EAX, (u32)&target);

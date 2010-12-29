@@ -530,16 +530,14 @@ static void *MAINThread(void *arg)
 #ifndef _MACOSX
  int voldiv = iVolume;
 #else
- const int voldiv = 2;
+ int voldiv = 2;
 #endif
  unsigned char * start;unsigned int nSample;
  int ch,predict_nr,shift_factor,flags,d,s;
  int bIRQReturn=0;
 
-
  // mute output
  if( voldiv == 5 ) voldiv = 0x7fffffff;
-
  
  while(!bEndThread)                                    // until we are shutting down
   {
