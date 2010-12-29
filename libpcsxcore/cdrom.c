@@ -556,6 +556,16 @@ void cdrPlayInterrupt()
 			*/
 
 			if( cdr.CurTrack < btoi( subq->TrackNumber ) ) {
+				// Magic the Gathering
+				// - looping territory cdda
+
+				// ...?
+				//cdr.ResultReady = 1;
+				//cdr.Stat = DataReady;
+				cdr.Stat = DataEnd;
+				psxHu32ref(0x1070) |= SWAP32((u32)0x4);
+
+				
 				StopCdda();
 			}
 		} else {
@@ -573,6 +583,16 @@ void cdrPlayInterrupt()
 						temp_next[2] = cdr.ResultTD[0];
 
 						if( msf2sec(temp_cur) >= msf2sec( temp_next ) ) {
+							// Magic the Gathering
+							// - looping territory cdda
+
+							// ...?
+							//cdr.ResultReady = 1;
+							//cdr.Stat = DataReady;
+							cdr.Stat = DataEnd;
+							psxHu32ref(0x1070) |= SWAP32((u32)0x4);
+
+							
 							StopCdda();
 							
 							cdr.CurTrack++;
