@@ -103,6 +103,7 @@ typedef struct
  int            ReleaseModeExp;
  int            ReleaseRate;
  int            EnvelopeVol;
+ int            EnvelopeVol_f;			// fraction
  long           lVolume;
  long           lDummy1;
  long           lDummy2;
