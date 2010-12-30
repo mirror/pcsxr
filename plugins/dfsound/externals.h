@@ -59,7 +59,20 @@
 
 #define NSSIZE 10
 #define APU_CYCLES_UPDATE NSSIZE
+
+
+// update times
+#if 0
+// PEOPS DSound 1.09a - good sound cards
 #define LATENCY 10
+#elif defined (_WINDOWS)
+// work on most cards
+#define LATENCY 25
+#else
+// work on most cards
+#define LATENCY 25
+#endif
+
 
 // make sure this is bigger than cpu action - no glitchy
 #define INTERVAL_TIME 5000
