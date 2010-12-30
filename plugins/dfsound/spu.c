@@ -1140,10 +1140,10 @@ void SetupStreams(void)
  XAFeed  = XAStart;
 
  CDDAStart =                                           // alloc cdda buffer
-  (uint32_t *)malloc(16384 * sizeof(uint32_t));
- CDDAEnd   = CDDAStart + 16384;
+  (uint32_t *)malloc(44100 * sizeof(uint32_t));
+ CDDAEnd   = CDDAStart + 44100;
  CDDAPlay  = CDDAStart;
- CDDAFeed  = CDDAStart + 1;
+ CDDAFeed  = CDDAStart;
 
  for(i=0;i<MAXCHAN;i++)                                // loop sound channels
   {

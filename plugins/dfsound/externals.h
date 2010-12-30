@@ -75,7 +75,7 @@
 
 
 // make sure this is bigger than cpu action - no glitchy
-#define INTERVAL_TIME 5000
+#define INTERVAL_TIME 4500
 
 
 #define CPU_CLOCK 33868800

@@ -1664,6 +1664,7 @@ void cdrWrite1(unsigned char rt) {
 
 
 				// Tomb Raider 2 - new game
+				// - no set_track (seekp - getlocp interfere)
 				//Set_Track();
 				Find_CurTrack();
 

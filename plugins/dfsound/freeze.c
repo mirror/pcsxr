@@ -160,6 +160,19 @@ long CALLBACK SPUfreeze(uint32_t ulFreezeMode,SPUFreeze_t * pF)
 
  SetupTimer();                                         // start sound processing again
 
+ // stop load crackling
+ //cpu_cycles = 0;
+ //iCycle = 0;
+
+ // fix movie lag
+ CDDAEnd   = CDDAStart + 44100;
+ CDDAPlay  = CDDAStart;
+ CDDAFeed  = CDDAStart;
+
+ XAPlay  = XAStart;
+ XAFeed  = XAStart;
+ XAEnd   = XAStart + 44100;
+
  return 1;
 }
 
