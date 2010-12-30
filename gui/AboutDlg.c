@@ -35,6 +35,7 @@ void RunAboutDialog(void) {
 		"Wei Mingzhi <whistler_wmz@users.sf.net>",
 		"",
 		"Contributors:",
+		"Benoît Gschwind",
 		"Dario",
 		"Firnis",
 		"Gabriele Gorla",

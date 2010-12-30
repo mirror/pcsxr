@@ -18,6 +18,6 @@ bin_PROGRAMS = cfgpeopsxgl
 cfgpeopsxgl_SOURCES = gpucfg/main.c
 cfgpeopsxgl_LDADD = $(GTK2_LIBS)
 
-glade_DATA = gpucfg/gpucfg-newstyle2.glade
+glade_DATA = gpucfg/peopsxgl.ui
 gladedir = $(datadir)/psemu/
 #EXTRA_DIST = $(glade_DATA)

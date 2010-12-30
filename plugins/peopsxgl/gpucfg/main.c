@@ -32,7 +32,7 @@ int main (int argc, char *argv[])
 
   wndMain = gtk_builder_new();
   gtk_builder_set_translation_domain(wndMain, PACKAGE_NAME);
-  if (!gtk_builder_add_from_file (wndMain, DATADIR "gpucfg-newstyle2.glade", &error))
+  if (!gtk_builder_add_from_file (wndMain, DATADIR "peopsxgl.ui", &error))
     {
      g_warning ("Couldn't load builder file: %s", error->message);
      g_error_free (error);

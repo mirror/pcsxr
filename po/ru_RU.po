@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: schultz.ryan@gmail.com\n"
-"POT-Creation-Date: 2010-12-28 23:38+0800\n"
+"POT-Creation-Date: 2010-12-29 23:29+0800\n"
 "PO-Revision-Date: 2010-08-28 16:44+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -17,374 +17,7 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: data/pcsx.glade2:7
-msgid "PCSX"
-msgstr "PCSX"
-
-#: data/pcsx.glade2:22
-msgid "_File"
-msgstr "Файл(_F)"
-
-#: data/pcsx.glade2:28
-msgid "Run _CD"
-msgstr "Запустить _CD"
-
-#: data/pcsx.glade2:46
-msgid "Run _ISO..."
-msgstr "Запустить _ISO"
-
-#: data/pcsx.glade2:63
-msgid "Run _BIOS"
-msgstr "Запустить _BIOS"
-
-#: data/pcsx.glade2:80
-msgid "Run _EXE..."
-msgstr "Запустить _EXE"
-
-#: data/pcsx.glade2:102
-msgid "E_xit"
-msgstr "Выход"
-
-#: data/pcsx.glade2:124
-msgid "_Emulator"
-msgstr "Эмулятор(_E)"
-
-#: data/pcsx.glade2:130
-msgid "_Continue"
-msgstr "Продолжить(_C)"
-
-#: data/pcsx.glade2:147
-msgid "_Reset"
-msgstr "Сброс(_R)"
-
-#: data/pcsx.glade2:169
-msgid "S_witch ISO..."
-msgstr "Сменить ISO..."
-
-#: data/pcsx.glade2:191
-msgid "_Save State"
-msgstr "Сохранить состояние"
-
-#: data/pcsx.glade2:200 data/pcsx.glade2:313
-msgid "Slot _1"
-msgstr "Слот _1"
-
-#: data/pcsx.glade2:209 data/pcsx.glade2:322
-msgid "Slot _2"
-msgstr "Слот _2"
-
-#: data/pcsx.glade2:218 data/pcsx.glade2:331
-msgid "Slot _3"
-msgstr "Слот _3"
-
-#: data/pcsx.glade2:227 data/pcsx.glade2:340
-msgid "Slot _4"
-msgstr "Слот _4"
-
-#: data/pcsx.glade2:236 data/pcsx.glade2:349
-msgid "Slot _5"
-msgstr "Слот _5"
-
-#: data/pcsx.glade2:245 data/pcsx.glade2:358
-msgid "Slot _6"
-msgstr "Слот _6"
-
-#: data/pcsx.glade2:253 data/pcsx.glade2:366
-msgid "Slot _7"
-msgstr "Слот _7"
-
-#: data/pcsx.glade2:261 data/pcsx.glade2:374
-msgid "Slot _8"
-msgstr "Слот _8"
-
-#: data/pcsx.glade2:269 data/pcsx.glade2:382
-msgid "Slot _9"
-msgstr "Слот _9"
-
-#: data/pcsx.glade2:276 data/pcsx.glade2:389
-msgid "_Other..."
-msgstr "Другой..."
-
-#: data/pcsx.glade2:304
-msgid "_Load State"
-msgstr "Загрузить состояние(_L)"
-
-#: data/pcsx.glade2:422
-msgid "_Configuration"
-msgstr "Настройка(_C)"
-
-#: data/pcsx.glade2:428
-msgid "_Plugins & BIOS..."
-msgstr "Плагины и биос..."
-
-#: data/pcsx.glade2:450
-msgid "_Graphics..."
-msgstr "Графика..."
-
-#: data/pcsx.glade2:465
-msgid "_Sound..."
-msgstr "Звук..."
-
-#: data/pcsx.glade2:480
-msgid "CD-_ROM..."
-msgstr "CD-привод..."
-
-#: data/pcsx.glade2:495
-msgid "C_ontrollers..."
-msgstr "Управление..."
-
-#: data/pcsx.glade2:515
-msgid "_CPU..."
-msgstr "ЦПУ..."
-
-#: data/pcsx.glade2:531
-msgid "_Memory Cards..."
-msgstr "Карты памяти..."
-
-#: data/pcsx.glade2:548
-msgid "_Netplay..."
-msgstr "Сетевая игра..."
-
-#: data/pcsx.glade2:569
-msgid "Chea_t"
-msgstr "Читы"
-
-#: data/pcsx.glade2:578
-msgid "_Browse..."
-msgstr "Обзор..."
-
-#: data/pcsx.glade2:593
-msgid "_Search..."
-msgstr "Поиск..."
-
-#: data/pcsx.glade2:619
-msgid "Memory _Dump"
-msgstr "Дамп памяти"
-
-#: data/pcsx.glade2:639
-msgid "_Help"
-msgstr "Помошь(_H)"
-
-#: data/pcsx.glade2:645
-msgid "_About PCSX..."
-msgstr "О PCSX..."
-
-#: data/pcsx.glade2:678 data/pcsx.glade2:679
-msgid "Run CD"
-msgstr "Запустить CD"
-
-#: data/pcsx.glade2:691
-msgid "Run ISO Image"
-msgstr "Запустить образ ISO"
-
-#: data/pcsx.glade2:692
-msgid "Run ISO..."
-msgstr "Запустить ISO..."
-
-#: data/pcsx.glade2:713
-msgid "Continue Emulation"
-msgstr "Продолжить эмуляцию"
-
-#: data/pcsx.glade2:714
-msgid "Continue..."
-msgstr "Продолжить..."
-
-#: data/pcsx.glade2:726
-msgid "Switch ISO Image"
-msgstr "Сменить образ ISO"
-
-#: data/pcsx.glade2:727
-msgid "Switch ISO..."
-msgstr "Сменить ISO..."
-
-#: data/pcsx.glade2:748 data/pcsx.glade2:1875
-msgid "Configure Memory Cards"
-msgstr "Настройка карт памяти"
-
-#: data/pcsx.glade2:749
-msgid "Memcards..."
-msgstr "Карты памяти..."
-
-#: data/pcsx.glade2:761
-msgid "Configure Graphics"
-msgstr "Настройка видео"
-
-#: data/pcsx.glade2:762
-msgid "Graphics..."
-msgstr "Графика..."
-
-#: data/pcsx.glade2:774 plugins/dfsound/spucfg-0.1df/dfsound.glade2:8
-msgid "Configure Sound"
-msgstr "Настройка звука"
-
-#: data/pcsx.glade2:775
-msgid "Sound..."
-msgstr "Звук..."
-
-#: data/pcsx.glade2:787
-msgid "Configure CD-ROM"
-msgstr "Настройка CD-привода"
-
-#: data/pcsx.glade2:788
-msgid "CD-ROM..."
-msgstr "CD-привод..."
-
-#: data/pcsx.glade2:800
-msgid "Configure Controllers"
-msgstr "Настройка управления"
-
-#: data/pcsx.glade2:801
-msgid "Controllers..."
-msgstr "Контроллеры..."
-
-#: data/pcsx.glade2:843 gui/ConfDlg.c:112
-msgid "Configure PCSX"
-msgstr "Настройка PCSX"
-
-#: data/pcsx.glade2:944
-msgid "Select Folder to Search"
-msgstr "Выберите каталог для поиска"
-
-#: data/pcsx.glade2:960
-msgid "Search in:"
-msgstr "Каталог с плагинами:"
-
-#: data/pcsx.glade2:1233
-msgid "Graphics:"
-msgstr "Графика:"
-
-#: data/pcsx.glade2:1246
-msgid "Sound:"
-msgstr "Звук:"
-
-#: data/pcsx.glade2:1261
-msgid "Controller 1:   "
-msgstr "Контроллер 1:"
-
-#: data/pcsx.glade2:1276
-msgid "Controller 2:"
-msgstr "Контроллер 2:"
-
-#: data/pcsx.glade2:1291
-msgid "CD-ROM:"
-msgstr "CD-привод:"
-
-#: data/pcsx.glade2:1329
-msgid "<b>Plugins</b>"
-msgstr "<b>Плагины</b>"
-
-#: data/pcsx.glade2:1390
-msgid "<b>BIOS</b>"
-msgstr "<b>Биос</b>"
-
-#: data/pcsx.glade2:1440
-msgid "Configure CPU"
-msgstr "Настройка ЦПУ"
-
-#: data/pcsx.glade2:1466 win32/gui/WndMain.c:1302
-msgid "Enable Debugger"
-msgstr "Включить отладчик"
-
-#: data/pcsx.glade2:1484
-msgid "SPU IRQ Always Enabled"
-msgstr "Удерживание линии прерывания SPU"
-
-#: data/pcsx.glade2:1500
-msgid "Black & White Movies"
-msgstr "Чёрно-белые видео заставки"
-
-#: data/pcsx.glade2:1516 win32/gui/WndMain.c:1301
-msgid "Enable Console Output"
-msgstr "Включить вывод в консоль"
-
-#: data/pcsx.glade2:1534
-msgid "Enable Interpreter CPU"
-msgstr "Включить интерпретатор ЦПУ"
-
-#: data/pcsx.glade2:1552 gui/Plugin.c:239
-#, c-format
-msgid "SIO IRQ Always Enabled"
-msgstr "Удерживание линии прерывания SIO"
-
-#: data/pcsx.glade2:1568
-msgid "Disable CD Audio"
-msgstr "Выключить CD музыку"
-
-#: data/pcsx.glade2:1584
-msgid "Disable XA Decoding"
-msgstr "Выключить декодирование XA"
-
-#: data/pcsx.glade2:1603 win32/gui/WndMain.c:1304
-msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
-msgstr "Исправление для Parasite Eve 2 и Vandal Hearts"
-
-#: data/pcsx.glade2:1618 win32/gui/WndMain.c:1305
-msgid "InuYasha Sengoku Battle Fix"
-msgstr "Исправление для InuYasha Sengoku Battle"
-
-#: data/pcsx.glade2:1636
-msgid "<b>Options</b>"
-msgstr "<b>Опции</b>"
-
-#: data/pcsx.glade2:1660 win32/gui/WndMain.c:1299
-msgid "Autodetect"
-msgstr "Авто-определение"
-
-#: data/pcsx.glade2:1677
-msgid ""
-"NTSC\n"
-"PAL"
-msgstr ""
-
-#: data/pcsx.glade2:1691
-msgid "<b>System Type</b>"
-msgstr "<b>Тип системы</b>"
-
-#: data/pcsx.glade2:1739
-msgid "Configure NetPlay"
-msgstr "Настройка сетевой игры"
-
-#: data/pcsx.glade2:1825
-msgid "<b>NetPlay</b>"
-msgstr "<b>Сетевая игра</b>"
-
-#: data/pcsx.glade2:1951 data/pcsx.glade2:2348
-msgid "New"
-msgstr "Создать"
-
-#: data/pcsx.glade2:2001 data/pcsx.glade2:2398
-msgid "Format"
-msgstr "Форматировать"
-
-#: data/pcsx.glade2:2051 data/pcsx.glade2:2448
-msgid "Un/Delete"
-msgstr "Восстановить блок"
-
-#: data/pcsx.glade2:2144
-msgid "<b>Memory Card 1</b>"
-msgstr "<b>Карта памяти 1</b>"
-
-#: data/pcsx.glade2:2204 data/pcsx.glade2:2254 data/pcsx.glade2:3067
-msgid "Copy"
-msgstr "Копировать"
-
-#: data/pcsx.glade2:2541
-msgid "<b>Memory Card 2</b>"
-msgstr "<b>Карта памяти 2</b>"
-
-#: data/pcsx.glade2:2599 win32/gui/CheatDlg.c:166
-msgid "Edit Cheat Codes"
-msgstr "Редактировать чит код"
-
-#: data/pcsx.glade2:2637
-msgid "<b>Cheat Codes</b>"
-msgstr "<b>Чит коды</b>"
-
-#: data/pcsx.glade2:2768 gui/Cheat.c:1129 win32/gui/CheatDlg.c:678
-msgid "Cheat Search"
-msgstr "Поиск читов"
-
-#: data/pcsx.glade2:2801
+#: ../data/pcsx.glade2.h:1
 msgid ""
 "8-bit\n"
 "16-bit\n"
@@ -394,24 +27,179 @@ msgstr ""
 "16-бит\n"
 "32-бита"
 
-#: data/pcsx.glade2:2816 win32/gui/CheatDlg.c:680
-msgid "Search For:"
-msgstr "Искать для:"
+#: ../data/pcsx.glade2.h:4
+msgid "<b>BIOS</b>"
+msgstr "<b>Биос</b>"
 
-#: data/pcsx.glade2:2826 win32/gui/CheatDlg.c:681
-msgid "Data Type:"
-msgstr "Тип данных:"
+#: ../data/pcsx.glade2.h:5
+msgid "<b>Cheat Codes</b>"
+msgstr "<b>Чит коды</b>"
 
-#: data/pcsx.glade2:2838 gui/Cheat.c:647 win32/gui/CheatDlg.c:506
-#: win32/gui/CheatDlg.c:597 win32/gui/CheatDlg.c:682
-msgid "Value:"
-msgstr "Значение:"
+#: ../data/pcsx.glade2.h:6
+msgid "<b>Cheat Search</b>"
+msgstr "<b>Поиск читов</b>"
 
-#: data/pcsx.glade2:2850 win32/gui/CheatDlg.c:683
+#: ../data/pcsx.glade2.h:7
+msgid "<b>Memory Card 1</b>"
+msgstr "<b>Карта памяти 1</b>"
+
+#: ../data/pcsx.glade2.h:8
+msgid "<b>Memory Card 2</b>"
+msgstr "<b>Карта памяти 2</b>"
+
+#: ../data/pcsx.glade2.h:9
+msgid "<b>NetPlay</b>"
+msgstr "<b>Сетевая игра</b>"
+
+#: ../data/pcsx.glade2.h:10
+msgid "<b>Options</b>"
+msgstr "<b>Опции</b>"
+
+#: ../data/pcsx.glade2.h:11
+msgid "<b>Plugins</b>"
+msgstr "<b>Плагины</b>"
+
+#: ../data/pcsx.glade2.h:12
+msgid "<b>System Type</b>"
+msgstr "<b>Тип системы</b>"
+
+#: ../data/pcsx.glade2.h:13 ../gui/DebugMemory.c:188
+msgid "Address (Hexadecimal):"
+msgstr "Адрес (шестнадцатиричный):"
+
+#: ../data/pcsx.glade2.h:14 ../win32/gui/WndMain.c:1299
+msgid "Autodetect"
+msgstr "Авто-определение"
+
+#: ../data/pcsx.glade2.h:15
+msgid "Black & White Movies"
+msgstr "Чёрно-белые видео заставки"
+
+#: ../data/pcsx.glade2.h:16
+msgid "CD-ROM..."
+msgstr "CD-привод..."
+
+#: ../data/pcsx.glade2.h:17
+msgid "CD-ROM:"
+msgstr "CD-привод:"
+
+#: ../data/pcsx.glade2.h:18
+msgid "CD-_ROM..."
+msgstr "CD-привод..."
+
+#: ../data/pcsx.glade2.h:19
+msgid "C_ontrollers..."
+msgstr "Управление..."
+
+#: ../data/pcsx.glade2.h:20
+msgid "Chea_t"
+msgstr "Читы"
+
+#: ../data/pcsx.glade2.h:21 ../gui/Cheat.c:1129 ../win32/gui/CheatDlg.c:678
+msgid "Cheat Search"
+msgstr "Поиск читов"
+
+#: ../data/pcsx.glade2.h:22
+msgid "Configure CD-ROM"
+msgstr "Настройка CD-привода"
+
+#: ../data/pcsx.glade2.h:23
+msgid "Configure CPU"
+msgstr "Настройка ЦПУ"
+
+#: ../data/pcsx.glade2.h:24
+msgid "Configure Controllers"
+msgstr "Настройка управления"
+
+#: ../data/pcsx.glade2.h:25
+msgid "Configure Graphics"
+msgstr "Настройка видео"
+
+#: ../data/pcsx.glade2.h:26
+msgid "Configure Memory Cards"
+msgstr "Настройка карт памяти"
+
+#: ../data/pcsx.glade2.h:27
+msgid "Configure NetPlay"
+msgstr "Настройка сетевой игры"
+
+#: ../data/pcsx.glade2.h:28 ../gui/ConfDlg.c:112
+msgid "Configure PCSX"
+msgstr "Настройка PCSX"
+
+#: ../data/pcsx.glade2.h:29 ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:6
+msgid "Configure Sound"
+msgstr "Настройка звука"
+
+#: ../data/pcsx.glade2.h:30
+msgid "Continue Emulation"
+msgstr "Продолжить эмуляцию"
+
+#: ../data/pcsx.glade2.h:31
+msgid "Continue..."
+msgstr "Продолжить..."
+
+#: ../data/pcsx.glade2.h:32
+msgid "Controller 1:   "
+msgstr "Контроллер 1:"
+
+#: ../data/pcsx.glade2.h:33
+msgid "Controller 2:"
+msgstr "Контроллер 2:"
+
+#: ../data/pcsx.glade2.h:34
+msgid "Controllers..."
+msgstr "Контроллеры..."
+
+#: ../data/pcsx.glade2.h:35
+msgid "Copy"
+msgstr "Копировать"
+
+#: ../data/pcsx.glade2.h:36 ../win32/gui/CheatDlg.c:683
 msgid "Data Base:"
 msgstr "Основание:"
 
-#: data/pcsx.glade2:2864
+#: ../data/pcsx.glade2.h:37 ../win32/gui/CheatDlg.c:681
+msgid "Data Type:"
+msgstr "Тип данных:"
+
+#: ../data/pcsx.glade2.h:38
+msgid ""
+"Decimal\n"
+"Hexadecimal"
+msgstr ""
+"Десятичное\n"
+"Шестнадцатиричное"
+
+#: ../data/pcsx.glade2.h:40
+msgid "Disable CD Audio"
+msgstr "Выключить CD музыку"
+
+#: ../data/pcsx.glade2.h:41
+msgid "Disable XA Decoding"
+msgstr "Выключить декодирование XA"
+
+#: ../data/pcsx.glade2.h:42
+msgid "E_xit"
+msgstr "Выход"
+
+#: ../data/pcsx.glade2.h:43 ../win32/gui/CheatDlg.c:166
+msgid "Edit Cheat Codes"
+msgstr "Редактировать чит код"
+
+#: ../data/pcsx.glade2.h:44 ../win32/gui/WndMain.c:1301
+msgid "Enable Console Output"
+msgstr "Включить вывод в консоль"
+
+#: ../data/pcsx.glade2.h:45 ../win32/gui/WndMain.c:1302
+msgid "Enable Debugger"
+msgstr "Включить отладчик"
+
+#: ../data/pcsx.glade2.h:46
+msgid "Enable Interpreter CPU"
+msgstr "Включить интерпретатор ЦПУ"
+
+#: ../data/pcsx.glade2.h:47
 msgid ""
 "Equal Value\n"
 "Not Equal Value\n"
@@ -433,66 +221,278 @@ msgstr ""
 "Изменилось\n"
 "Не изменилось"
 
-#: data/pcsx.glade2:2896
-msgid ""
-"Decimal\n"
-"Hexadecimal"
-msgstr ""
-"Десятичное\n"
-"Шестнадцатиричное"
+#: ../data/pcsx.glade2.h:56
+msgid "Format"
+msgstr "Форматировать"
 
-#: data/pcsx.glade2:2910 win32/gui/CheatDlg.c:684
-msgid "To:"
-msgstr "До:"
-
-#: data/pcsx.glade2:2995 win32/gui/CheatDlg.c:504
+#: ../data/pcsx.glade2.h:57 ../win32/gui/CheatDlg.c:504
 msgid "Freeze"
 msgstr "Заморозить"
 
-#: data/pcsx.glade2:3031 win32/gui/CheatDlg.c:595
-msgid "Modify"
-msgstr "Изменить"
+#: ../data/pcsx.glade2.h:58
+msgid "Graphics..."
+msgstr "Графика..."
 
-#: data/pcsx.glade2:3100
-msgid "label_resultsfound"
-msgstr ""
+#: ../data/pcsx.glade2.h:59
+msgid "Graphics:"
+msgstr "Графика:"
 
-#: data/pcsx.glade2:3135
-msgid "Search"
-msgstr "Поиск"
+#: ../data/pcsx.glade2.h:60 ../win32/gui/WndMain.c:1305
+msgid "InuYasha Sengoku Battle Fix"
+msgstr "Исправление для InuYasha Sengoku Battle"
 
-#: data/pcsx.glade2:3171
-msgid "Restart"
-msgstr "Рестарт"
+#: ../data/pcsx.glade2.h:61
+msgid "Memcards..."
+msgstr "Карты памяти..."
 
-#: data/pcsx.glade2:3200
-msgid "<b>Cheat Search</b>"
-msgstr "<b>Поиск читов</b>"
-
-#: data/pcsx.glade2:3243 gui/DebugMemory.c:103
+#: ../data/pcsx.glade2.h:62 ../gui/DebugMemory.c:103
 msgid "Memory Dump"
 msgstr "Дамп памяти"
 
-#: data/pcsx.glade2:3264 gui/DebugMemory.c:188
-msgid "Address (Hexadecimal):"
-msgstr "Адрес (шестнадцатиричный):"
+#: ../data/pcsx.glade2.h:63
+msgid "Memory _Dump"
+msgstr "Дамп памяти"
 
-#: data/pcsx.glade2:3356
-msgid "Raw Dump..."
-msgstr "\"Сырой\" дамп"
+#: ../data/pcsx.glade2.h:64 ../win32/gui/CheatDlg.c:595
+msgid "Modify"
+msgstr "Изменить"
 
-#: data/pcsx.glade2:3391
+#: ../data/pcsx.glade2.h:65
+msgid ""
+"NTSC\n"
+"PAL"
+msgstr ""
+
+#: ../data/pcsx.glade2.h:67
+msgid "New"
+msgstr "Создать"
+
+#: ../data/pcsx.glade2.h:68
+msgid "PCSX"
+msgstr "PCSX"
+
+#: ../data/pcsx.glade2.h:69 ../win32/gui/WndMain.c:1304
+msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
+msgstr "Исправление для Parasite Eve 2 и Vandal Hearts"
+
+#: ../data/pcsx.glade2.h:70
 msgid "Patch Memory..."
 msgstr "Патч памяти..."
 
-#: gui/AboutDlg.c:76
+#: ../data/pcsx.glade2.h:71
+msgid "Raw Dump..."
+msgstr "\"Сырой\" дамп"
+
+#: ../data/pcsx.glade2.h:72
+msgid "Restart"
+msgstr "Рестарт"
+
+#: ../data/pcsx.glade2.h:73
+msgid "Run CD"
+msgstr "Запустить CD"
+
+#: ../data/pcsx.glade2.h:74
+msgid "Run ISO Image"
+msgstr "Запустить образ ISO"
+
+#: ../data/pcsx.glade2.h:75
+msgid "Run ISO..."
+msgstr "Запустить ISO..."
+
+#: ../data/pcsx.glade2.h:76
+msgid "Run _BIOS"
+msgstr "Запустить _BIOS"
+
+#: ../data/pcsx.glade2.h:77
+msgid "Run _CD"
+msgstr "Запустить _CD"
+
+#: ../data/pcsx.glade2.h:78
+msgid "Run _EXE..."
+msgstr "Запустить _EXE"
+
+#: ../data/pcsx.glade2.h:79
+msgid "Run _ISO..."
+msgstr "Запустить _ISO"
+
+#: ../data/pcsx.glade2.h:80 ../gui/Plugin.c:239
+#, c-format
+msgid "SIO IRQ Always Enabled"
+msgstr "Удерживание линии прерывания SIO"
+
+#: ../data/pcsx.glade2.h:81
+msgid "SPU IRQ Always Enabled"
+msgstr "Удерживание линии прерывания SPU"
+
+#: ../data/pcsx.glade2.h:82
+msgid "S_witch ISO..."
+msgstr "Сменить ISO..."
+
+#: ../data/pcsx.glade2.h:83
+msgid "Search"
+msgstr "Поиск"
+
+#: ../data/pcsx.glade2.h:84 ../win32/gui/CheatDlg.c:680
+msgid "Search For:"
+msgstr "Искать для:"
+
+#: ../data/pcsx.glade2.h:85
+msgid "Search in:"
+msgstr "Каталог с плагинами:"
+
+#: ../data/pcsx.glade2.h:86
+msgid "Select Folder to Search"
+msgstr "Выберите каталог для поиска"
+
+#: ../data/pcsx.glade2.h:87
+msgid "Slot _1"
+msgstr "Слот _1"
+
+#: ../data/pcsx.glade2.h:88
+msgid "Slot _2"
+msgstr "Слот _2"
+
+#: ../data/pcsx.glade2.h:89
+msgid "Slot _3"
+msgstr "Слот _3"
+
+#: ../data/pcsx.glade2.h:90
+msgid "Slot _4"
+msgstr "Слот _4"
+
+#: ../data/pcsx.glade2.h:91
+msgid "Slot _5"
+msgstr "Слот _5"
+
+#: ../data/pcsx.glade2.h:92
+msgid "Slot _6"
+msgstr "Слот _6"
+
+#: ../data/pcsx.glade2.h:93
+msgid "Slot _7"
+msgstr "Слот _7"
+
+#: ../data/pcsx.glade2.h:94
+msgid "Slot _8"
+msgstr "Слот _8"
+
+#: ../data/pcsx.glade2.h:95
+msgid "Slot _9"
+msgstr "Слот _9"
+
+#: ../data/pcsx.glade2.h:96
+msgid "Sound..."
+msgstr "Звук..."
+
+#: ../data/pcsx.glade2.h:97
+msgid "Sound:"
+msgstr "Звук:"
+
+#: ../data/pcsx.glade2.h:98
+msgid "Switch ISO Image"
+msgstr "Сменить образ ISO"
+
+#: ../data/pcsx.glade2.h:99
+msgid "Switch ISO..."
+msgstr "Сменить ISO..."
+
+#: ../data/pcsx.glade2.h:100 ../win32/gui/CheatDlg.c:684
+msgid "To:"
+msgstr "До:"
+
+#: ../data/pcsx.glade2.h:101
+msgid "Un/Delete"
+msgstr "Восстановить блок"
+
+#: ../data/pcsx.glade2.h:102 ../gui/Cheat.c:647 ../win32/gui/CheatDlg.c:506
+#: ../win32/gui/CheatDlg.c:597 ../win32/gui/CheatDlg.c:682
+msgid "Value:"
+msgstr "Значение:"
+
+#: ../data/pcsx.glade2.h:103
+msgid "_About PCSX..."
+msgstr "О PCSX..."
+
+#: ../data/pcsx.glade2.h:104
+msgid "_Browse..."
+msgstr "Обзор..."
+
+#: ../data/pcsx.glade2.h:105
+msgid "_CPU..."
+msgstr "ЦПУ..."
+
+#: ../data/pcsx.glade2.h:106
+msgid "_Configuration"
+msgstr "Настройка(_C)"
+
+#: ../data/pcsx.glade2.h:107
+msgid "_Continue"
+msgstr "Продолжить(_C)"
+
+#: ../data/pcsx.glade2.h:108
+msgid "_Emulator"
+msgstr "Эмулятор(_E)"
+
+#: ../data/pcsx.glade2.h:109
+msgid "_File"
+msgstr "Файл(_F)"
+
+#: ../data/pcsx.glade2.h:110
+msgid "_Graphics..."
+msgstr "Графика..."
+
+#: ../data/pcsx.glade2.h:111
+msgid "_Help"
+msgstr "Помошь(_H)"
+
+#: ../data/pcsx.glade2.h:112
+msgid "_Load State"
+msgstr "Загрузить состояние(_L)"
+
+#: ../data/pcsx.glade2.h:113
+msgid "_Memory Cards..."
+msgstr "Карты памяти..."
+
+#: ../data/pcsx.glade2.h:114
+msgid "_Netplay..."
+msgstr "Сетевая игра..."
+
+#: ../data/pcsx.glade2.h:115
+msgid "_Other..."
+msgstr "Другой..."
+
+#: ../data/pcsx.glade2.h:116
+msgid "_Plugins & BIOS..."
+msgstr "Плагины и биос..."
+
+#: ../data/pcsx.glade2.h:117
+msgid "_Reset"
+msgstr "Сброс(_R)"
+
+#: ../data/pcsx.glade2.h:118
+msgid "_Save State"
+msgstr "Сохранить состояние"
+
+#: ../data/pcsx.glade2.h:119
+msgid "_Search..."
+msgstr "Поиск..."
+
+#: ../data/pcsx.glade2.h:120
+msgid "_Sound..."
+msgstr "Звук..."
+
+#: ../data/pcsx.glade2.h:121
+msgid "label_resultsfound"
+msgstr ""
+
+#: ../gui/AboutDlg.c:76
 msgid ""
 "(C) 1999-2003 PCSX Team\n"
 "(C) 2005-2009 PCSX-df Team\n"
 "(C) 2009-2010 PCSX-Reloaded Team"
 msgstr ""
 
-#: gui/AboutDlg.c:81
+#: ../gui/AboutDlg.c:81
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -509,284 +509,290 @@ msgid ""
 "Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
 msgstr ""
 
-#: gui/AboutDlg.c:104
+#: ../gui/AboutDlg.c:104
 msgid "translator-credits"
 msgstr "edgbla"
 
-#: gui/AboutDlg.c:105
+#: ../gui/AboutDlg.c:105
 msgid "A PlayStation emulator."
 msgstr "Эмулятор PlayStation."
 
-#: gui/Cheat.c:109 win32/gui/CheatDlg.c:116
+#: ../gui/Cheat.c:109 ../win32/gui/CheatDlg.c:116
 msgid "Add New Cheat"
 msgstr "Добавить новый чит"
 
-#: gui/Cheat.c:117 gui/Cheat.c:202
+#: ../gui/Cheat.c:117 ../gui/Cheat.c:202
 msgid "Cheat Description:"
 msgstr "Описание чита:"
 
-#: gui/Cheat.c:125 gui/Cheat.c:211 win32/gui/CheatDlg.c:68
-#: win32/gui/CheatDlg.c:118
+#: ../gui/Cheat.c:125 ../gui/Cheat.c:211 ../win32/gui/CheatDlg.c:68
+#: ../win32/gui/CheatDlg.c:118
 msgid "Cheat Code:"
 msgstr "Чит код:"
 
-#: gui/Cheat.c:155 gui/Cheat.c:251 gui/LnxMain.c:419
-#: win32/gui/ConfigurePlugins.c:305
+#: ../gui/Cheat.c:155 ../gui/Cheat.c:251 ../gui/LnxMain.c:419
+#: ../win32/gui/ConfigurePlugins.c:305
 msgid "Error"
 msgstr "Ошибка"
 
-#: gui/Cheat.c:155 gui/Cheat.c:251 win32/gui/CheatDlg.c:91
-#: win32/gui/CheatDlg.c:132
+#: ../gui/Cheat.c:155 ../gui/Cheat.c:251 ../win32/gui/CheatDlg.c:91
+#: ../win32/gui/CheatDlg.c:132
 msgid "Invalid cheat code!"
 msgstr "Неверный чит код!"
 
-#: gui/Cheat.c:194 win32/gui/CheatDlg.c:66
+#: ../gui/Cheat.c:194 ../win32/gui/CheatDlg.c:66
 msgid "Edit Cheat"
 msgstr "Редактирование чита"
 
-#: gui/Cheat.c:306
+#: ../gui/Cheat.c:306
 msgid "Open Cheat File"
 msgstr "Открыть файл чита"
 
-#: gui/Cheat.c:316 gui/Cheat.c:356
+#: ../gui/Cheat.c:316 ../gui/Cheat.c:356
 msgid "PCSX Cheat Code Files (*.cht)"
 msgstr "Файлы читов PCSX (*.cht)"
 
-#: gui/Cheat.c:321 gui/Gtk2Gui.c:446 gui/Gtk2Gui.c:587
-#: win32/gui/WndMain.c:1442 win32/gui/WndMain.c:1523
+#: ../gui/Cheat.c:321 ../gui/Gtk2Gui.c:446 ../gui/Gtk2Gui.c:587
+#: ../win32/gui/WndMain.c:1442 ../win32/gui/WndMain.c:1523
 msgid "All Files"
 msgstr "Все файлы"
 
-#: gui/Cheat.c:346
+#: ../gui/Cheat.c:346
 msgid "Save Cheat File"
 msgstr "Сохранить чит файл"
 
-#: gui/Cheat.c:361
+#: ../gui/Cheat.c:361
 msgid "All Files (*.*)"
 msgstr "Все файлы (*.*)"
 
-#: gui/Cheat.c:394 gui/Cheat.c:1124 gui/ConfDlg.c:104 gui/ConfDlg.c:200
-#: gui/DebugMemory.c:259
+#: ../gui/Cheat.c:394 ../gui/Cheat.c:1124 ../gui/ConfDlg.c:104
+#: ../gui/ConfDlg.c:200 ../gui/DebugMemory.c:259
 msgid "Error: Glade interface could not be loaded!"
 msgstr "Ошибка: интерфейс Glade не может быть загружен!"
 
-#: gui/Cheat.c:399
+#: ../gui/Cheat.c:399
 msgid "Cheat Codes"
 msgstr "Чит коды"
 
-#: gui/Cheat.c:405
+#: ../gui/Cheat.c:405
 msgid "Enable"
 msgstr "Включить"
 
-#: gui/Cheat.c:413 win32/gui/CheatDlg.c:185
+#: ../gui/Cheat.c:413 ../win32/gui/CheatDlg.c:185
 msgid "Description"
 msgstr "Описание"
 
-#: gui/Cheat.c:543 win32/gui/CheatDlg.c:457
+#: ../gui/Cheat.c:543 ../win32/gui/CheatDlg.c:457
 msgid "Too many addresses found."
 msgstr "Слишком много адресов найдено."
 
-#: gui/Cheat.c:552 win32/gui/CheatDlg.c:466
+#: ../gui/Cheat.c:552 ../win32/gui/CheatDlg.c:466
 #, c-format
 msgid "%.8X    Current: %u (%.2X), Previous: %u (%.2X)"
 msgstr "%.8X    Текущее: %u (%.2X), Предыдущее: %u (%.2X)"
 
-#: gui/Cheat.c:557 win32/gui/CheatDlg.c:471
+#: ../gui/Cheat.c:557 ../win32/gui/CheatDlg.c:471
 #, c-format
 msgid "%.8X    Current: %u (%.4X), Previous: %u (%.4X)"
 msgstr "%.8X    Текущее: %u (%.4X), Предыдущее: %u (%.4X)"
 
-#: gui/Cheat.c:562 win32/gui/CheatDlg.c:476
+#: ../gui/Cheat.c:562 ../win32/gui/CheatDlg.c:476
 #, c-format
 msgid "%.8X    Current: %u (%.8X), Previous: %u (%.8X)"
 msgstr "%.8X    Текущее: %u (%.8X), Предыдущее: %u (%.8X)"
 
-#: gui/Cheat.c:577 win32/gui/CheatDlg.c:492
+#: ../gui/Cheat.c:577 ../win32/gui/CheatDlg.c:492
 #, c-format
 msgid "Founded Addresses: %d"
 msgstr "Найденные адреса: %d"
 
-#: gui/Cheat.c:585 win32/gui/CheatDlg.c:448
+#: ../gui/Cheat.c:585 ../win32/gui/CheatDlg.c:448
 msgid "Enter the values and start your search."
 msgstr "Введите значение и начните поиск."
 
-#: gui/Cheat.c:630
+#: ../gui/Cheat.c:630
 msgid "Freeze value"
 msgstr "Заморозить значение"
 
-#: gui/Cheat.c:636 win32/gui/CheatDlg.c:67 win32/gui/CheatDlg.c:117
+#: ../gui/Cheat.c:636 ../win32/gui/CheatDlg.c:67 ../win32/gui/CheatDlg.c:117
 msgid "Description:"
 msgstr "Описание:"
 
-#: gui/Cheat.c:729
+#: ../gui/Cheat.c:729
 msgid "Modify value"
 msgstr "Изменить значение"
 
-#: gui/Cheat.c:737
+#: ../gui/Cheat.c:737
 msgid "New value:"
 msgstr "Новое значение:"
 
-#: gui/Cheat.c:1134
+#: ../gui/Cheat.c:1134
 msgid "Search Results"
 msgstr "Результат поиска"
 
-#: gui/ConfDlg.c:237 gui/ConfDlg.c:258 gui/ConfDlg.c:279 gui/ConfDlg.c:300
-#: gui/ConfDlg.c:355
+#. TODO Check whether configuration is required when we choose the plugin, and set the state of the
+#. button appropriately. New gtk tooltip API should allow us to put a tooltip explanation for
+#. disabled widgets
+#. TODO If combo screen hasn't been opened and the user chooses the menu config option, confs.Combo will be null and cause a segfault
+#. printf("Configuring plugin %s\n", filename);
+#: ../gui/ConfDlg.c:237 ../gui/ConfDlg.c:258 ../gui/ConfDlg.c:279
+#: ../gui/ConfDlg.c:300 ../gui/ConfDlg.c:355
 msgid "No configuration required"
 msgstr "Настройка не требуется"
 
-#: gui/ConfDlg.c:237 gui/ConfDlg.c:258 gui/ConfDlg.c:279 gui/ConfDlg.c:300
-#: gui/ConfDlg.c:355
+#: ../gui/ConfDlg.c:237 ../gui/ConfDlg.c:258 ../gui/ConfDlg.c:279
+#: ../gui/ConfDlg.c:300 ../gui/ConfDlg.c:355
 msgid "This plugin doesn't need to be configured."
 msgstr "Плагин не нуждается в настройке."
 
-#: gui/ConfDlg.c:581
+#: ../gui/ConfDlg.c:581
 #, c-format
 msgid "Could not open BIOS directory: '%s'\n"
 msgstr "Не удалось открыть каталог с биосами BIOS: \"%s\"\n"
 
-#: gui/ConfDlg.c:611 gui/ConfDlg.c:704 gui/LnxMain.c:168
+#: ../gui/ConfDlg.c:611 ../gui/ConfDlg.c:704 ../gui/LnxMain.c:168
 #, c-format
 msgid "Could not open directory: '%s'\n"
 msgstr "Не удалось открыть каталог: '%s'\n"
 
-#: gui/ConfDlg.c:675
+#. The BIOS list always contains the PCSX internal BIOS
+#: ../gui/ConfDlg.c:675
 msgid "Simulate PSX BIOS"
 msgstr "Симулировать биос psx"
 
-#: gui/DebugMemory.c:111
+#: ../gui/DebugMemory.c:111
 msgid "Start Address (Hexadecimal):"
 msgstr "Начальный адрес (шестнадцатиричный):"
 
-#: gui/DebugMemory.c:121
+#: ../gui/DebugMemory.c:121
 msgid "Length (Decimal):"
 msgstr "Длина (десятичный):"
 
-#: gui/DebugMemory.c:147
+#: ../gui/DebugMemory.c:147
 msgid "Dump to File"
 msgstr "Дамп в файл"
 
-#: gui/DebugMemory.c:162
+#: ../gui/DebugMemory.c:162
 #, c-format
 msgid "Error writing to %s!"
 msgstr "Ошибка записи в %s!"
 
-#: gui/DebugMemory.c:180
+#: ../gui/DebugMemory.c:180
 msgid "Memory Patch"
 msgstr "Патч памяти"
 
-#: gui/DebugMemory.c:198
+#: ../gui/DebugMemory.c:198
 msgid "Value (Hexa string):"
 msgstr "Значение (Hexa string):"
 
-#: gui/DebugMemory.c:264
+#: ../gui/DebugMemory.c:264
 msgid "Memory Viewer"
 msgstr "Просмотр памяти"
 
-#: gui/DebugMemory.c:269
+#: ../gui/DebugMemory.c:269
 msgid "Address"
 msgstr "Адрес"
 
-#: gui/DebugMemory.c:287
+#: ../gui/DebugMemory.c:287
 msgid "Text"
 msgstr "Текст"
 
-#: gui/Gtk2Gui.c:113
+#: ../gui/Gtk2Gui.c:113
 msgid "Ready"
 msgstr "Готово"
 
-#: gui/Gtk2Gui.c:154
+#: ../gui/Gtk2Gui.c:154
 msgid "Emulation Paused."
 msgstr "Эмуляция приостановлена."
 
-#: gui/Gtk2Gui.c:429
+#: ../gui/Gtk2Gui.c:429
 msgid "Select PSX EXE File"
 msgstr "Выберите PSX EXE файл"
 
-#: gui/Gtk2Gui.c:442
+#: ../gui/Gtk2Gui.c:442
 msgid "PlayStation Executable Files"
 msgstr "Выполняемые файлы PlayStation"
 
-#: gui/Gtk2Gui.c:479
+#: ../gui/Gtk2Gui.c:479
 msgid "Not a valid PSX file"
 msgstr "Недопустимый формат файла"
 
-#: gui/Gtk2Gui.c:479
+#: ../gui/Gtk2Gui.c:479
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "Файл не является запускным файлом PlayStation"
 
-#: gui/Gtk2Gui.c:508 gui/Gtk2Gui.c:649
+#: ../gui/Gtk2Gui.c:508 ../gui/Gtk2Gui.c:649
 msgid "CD ROM failed"
 msgstr "Ошибка CD-привода"
 
-#: gui/Gtk2Gui.c:508 gui/Gtk2Gui.c:649 win32/gui/WndMain.c:461
-#: win32/gui/WndMain.c:513 win32/gui/WndMain.c:582
+#: ../gui/Gtk2Gui.c:508 ../gui/Gtk2Gui.c:649 ../win32/gui/WndMain.c:461
+#: ../win32/gui/WndMain.c:513 ../win32/gui/WndMain.c:582
 #, c-format
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "Установленный CD-диск не является диском PlayStation"
 
-#: gui/Gtk2Gui.c:519 gui/Gtk2Gui.c:660 win32/gui/WndMain.c:471
-#: win32/gui/WndMain.c:523 win32/gui/WndMain.c:592
+#: ../gui/Gtk2Gui.c:519 ../gui/Gtk2Gui.c:660 ../win32/gui/WndMain.c:471
+#: ../win32/gui/WndMain.c:523 ../win32/gui/WndMain.c:592
 #, c-format
 msgid "Could not load CD-ROM!"
 msgstr "Не удалось загрузить CD-ROM!"
 
-#: gui/Gtk2Gui.c:519 gui/Gtk2Gui.c:660
+#: ../gui/Gtk2Gui.c:519 ../gui/Gtk2Gui.c:660
 msgid "The CD-ROM could not be loaded"
 msgstr "Не удалось загрузить CD-ROM"
 
-#: gui/Gtk2Gui.c:533
+#: ../gui/Gtk2Gui.c:533
 msgid "Could not run BIOS"
 msgstr "Не удалось запустить биос"
 
-#: gui/Gtk2Gui.c:533
+#: ../gui/Gtk2Gui.c:533
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr ""
 "Стандартная оболочка, позволяющая управлять картами памяти и проигрывать DA "
 "музыку, при использовании HLE-биоса недоступна."
 
-#: gui/Gtk2Gui.c:562
+#: ../gui/Gtk2Gui.c:562
 msgid "Open PSX Disc Image File"
 msgstr "Открыть образ PSX диска"
 
-#: gui/Gtk2Gui.c:582
+#: ../gui/Gtk2Gui.c:582
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr "Образы PSX дисков (*.bin, *.img, *.mdf, *.iso)"
 
-#: gui/Gtk2Gui.c:813
+#: ../gui/Gtk2Gui.c:813
 #, c-format
 msgid "Loaded state %s."
 msgstr "Состояние загружено %s."
 
-#: gui/Gtk2Gui.c:816
+#: ../gui/Gtk2Gui.c:816
 #, c-format
 msgid "Error loading state %s!"
 msgstr "Ошибка загрузки состояния %s!"
 
-#: gui/Gtk2Gui.c:827
+#: ../gui/Gtk2Gui.c:827
 #, c-format
 msgid "Saved state %s."
 msgstr "Состояние сохранено %s."
 
-#: gui/Gtk2Gui.c:829
+#: ../gui/Gtk2Gui.c:829
 #, c-format
 msgid "Error saving state %s!"
 msgstr "Ошибка сохранения состояния %s!"
 
-#: gui/Gtk2Gui.c:864 gui/Gtk2Gui.c:892
+#: ../gui/Gtk2Gui.c:864 ../gui/Gtk2Gui.c:892
 msgid "Select State File"
 msgstr "Выберите файл состояния"
 
-#: gui/Gtk2Gui.c:935
+#: ../gui/Gtk2Gui.c:935
 msgid "Notice"
 msgstr "Сообщение"
 
-#: gui/LnxMain.c:62
+#: ../gui/LnxMain.c:62
 #, c-format
 msgid "Creating memory card: %s\n"
 msgstr "Создание карты памяти: %s\n"
 
-#: gui/LnxMain.c:326
+#: ../gui/LnxMain.c:326
 msgid ""
 " pcsx [options] [file]\n"
 "\toptions:\n"
@@ -810,7 +816,7 @@ msgstr ""
 "\t-h -help\tПоказать это сообщение\n"
 "\tfile\t\tЗагрузить файл\n"
 
-#: gui/LnxMain.c:363
+#: ../gui/LnxMain.c:363
 #, c-format
 msgid ""
 "PCSX cannot be configured without using the GUI -- you should restart "
@@ -819,398 +825,387 @@ msgstr ""
 "PCSX не может быть настроен без использования графического интерфейса -- "
 "необходимо перезапустить эмулятор без опции -nogui.\n"
 
-#: gui/LnxMain.c:419
+#: ../gui/LnxMain.c:419
 msgid "Failed loading plugins!"
 msgstr "Ошибка загрузки плагинов!"
 
-#: gui/LnxMain.c:438
+#: ../gui/LnxMain.c:438
 #, c-format
 msgid "Could not load CD-ROM!\n"
 msgstr "Не удалось загрузить CD-ROM!\n"
 
-#: gui/LnxMain.c:469
+#: ../gui/LnxMain.c:469
 #, c-format
 msgid "PSX emulator couldn't be initialized.\n"
 msgstr "Ошибка инициализации эмулятора.\n"
 
-#: gui/MemcardDlg.c:56
+#: ../gui/MemcardDlg.c:56
 msgid "Icon"
 msgstr "Иконка"
 
-#: gui/MemcardDlg.c:62 win32/gui/WndMain.c:746
+#: ../gui/MemcardDlg.c:62 ../win32/gui/WndMain.c:746
 msgid "Title"
 msgstr "Название"
 
-#: gui/MemcardDlg.c:68 win32/gui/WndMain.c:752
+#: ../gui/MemcardDlg.c:68 ../win32/gui/WndMain.c:752
 msgid "Status"
 msgstr "Статус"
 
-#: gui/MemcardDlg.c:74
+#: ../gui/MemcardDlg.c:74
 msgid "ID"
 msgstr "Идентификатор"
 
-#: gui/MemcardDlg.c:80
+#: ../gui/MemcardDlg.c:80
 msgid "Name"
 msgstr "Название"
 
-#: gui/MemcardDlg.c:155 gui/MemcardDlg.c:260 win32/gui/WndMain.c:957
+#: ../gui/MemcardDlg.c:155 ../gui/MemcardDlg.c:260 ../win32/gui/WndMain.c:957
 msgid "Deleted"
 msgstr "Удалено"
 
-#: gui/MemcardDlg.c:157 gui/MemcardDlg.c:161 gui/MemcardDlg.c:262
-#: gui/MemcardDlg.c:266 win32/gui/WndMain.c:958 win32/gui/WndMain.c:961
+#: ../gui/MemcardDlg.c:157 ../gui/MemcardDlg.c:161 ../gui/MemcardDlg.c:262
+#: ../gui/MemcardDlg.c:266 ../win32/gui/WndMain.c:958
+#: ../win32/gui/WndMain.c:961
 msgid "Free"
 msgstr "Свободно"
 
-#: gui/MemcardDlg.c:159 gui/MemcardDlg.c:264 win32/gui/WndMain.c:960
+#: ../gui/MemcardDlg.c:159 ../gui/MemcardDlg.c:264 ../win32/gui/WndMain.c:960
 msgid "Used"
 msgstr "Использовано"
 
-#: gui/MemcardDlg.c:323
+#. Ask for name of memory card
+#: ../gui/MemcardDlg.c:323
 msgid "Select A File"
 msgstr "Выберите файл"
 
-#: gui/MemcardDlg.c:364
+#: ../gui/MemcardDlg.c:364
 msgid "Format this Memory Card?"
 msgstr "Отформатировать карту памяти?"
 
-#: gui/MemcardDlg.c:366
+#: ../gui/MemcardDlg.c:366
 msgid ""
 "If you format the memory card, the card will be empty, and any existing data "
 "overwritten."
 msgstr ""
 "При форматировании все данные на карте памяти будут безвозвратно утеряны."
 
-#: gui/MemcardDlg.c:369
+#: ../gui/MemcardDlg.c:369
 msgid "Format card"
 msgstr "Отформатировать карту памяти"
 
-#: gui/MemcardDlg.c:393
+#. Ask for name of new memory card
+#: ../gui/MemcardDlg.c:393
 msgid "Create a new Memory Card"
 msgstr "Создать новую карту памяти"
 
-#: gui/MemcardDlg.c:402
+#: ../gui/MemcardDlg.c:402
 msgid "New Memory Card.mcd"
 msgstr ""
 
-#: gui/MemcardDlg.c:503
+#. No free slots available on the destination card
+#: ../gui/MemcardDlg.c:503
 msgid "No free space on memory card"
 msgstr "Недостаточно места на карте памяти"
 
-#: gui/MemcardDlg.c:504
+#: ../gui/MemcardDlg.c:504
 msgid ""
 "There are no free slots available on the target memory card. Please delete a "
 "slot first."
 msgstr "Недостаточно свободных блоков на карте памяти."
 
-#: gui/MemcardDlg.c:667
+#: ../gui/MemcardDlg.c:667
 msgid "Memory Card Manager"
 msgstr "Менеджер карт памяти"
 
-#: gui/Plugin.c:240
+#: ../gui/Plugin.c:240
 #, c-format
 msgid "SIO IRQ Not Always Enabled"
 msgstr "Удерживание линии прерывания SIO выключено"
 
-#: gui/Plugin.c:246
+#: ../gui/Plugin.c:246
 #, c-format
 msgid "Black & White Mdecs Only Enabled"
 msgstr "Режим чёрно-белых видео вставок (Mdecs) включен"
 
-#: gui/Plugin.c:247
+#: ../gui/Plugin.c:247
 #, c-format
 msgid "Black & White Mdecs Only Disabled"
 msgstr "Режим чёрно-белых видео вставок (Mdecs) выключен"
 
-#: gui/Plugin.c:253
+#: ../gui/Plugin.c:253
 #, c-format
 msgid "XA Enabled"
 msgstr "XA включено"
 
-#: gui/Plugin.c:254
+#: ../gui/Plugin.c:254
 #, c-format
 msgid "XA Disabled"
 msgstr "XA выключено"
 
-#: gui/Plugin.c:323
+#: ../gui/Plugin.c:323
 msgid "Error opening CD-ROM plugin!"
 msgstr "Ошибка открытия CD-ROM плагина!"
 
-#: gui/Plugin.c:325
+#: ../gui/Plugin.c:325
 msgid "Error opening SPU plugin!"
 msgstr "Ошибка открытия SPU плагина!"
 
-#: gui/Plugin.c:328
+#: ../gui/Plugin.c:328
 msgid "Error opening GPU plugin!"
 msgstr "Ошибка открытия GPU плагина!"
 
-#: gui/Plugin.c:331
+#: ../gui/Plugin.c:331
 msgid "Error opening Controller 1 plugin!"
 msgstr "Ошибка открытия PAD1 плагина!"
 
-#: gui/Plugin.c:333
+#: ../gui/Plugin.c:333
 msgid "Error opening Controller 2 plugin!"
 msgstr "Ошибка открытия PAD2 плагина!"
 
-#: gui/Plugin.c:413
+#: ../gui/Plugin.c:413
 msgid "Error closing CD-ROM plugin!"
 msgstr "Ошибка при закрытии CD-ROM плагина!"
 
-#: gui/Plugin.c:415
+#: ../gui/Plugin.c:415
 msgid "Error closing SPU plugin!"
 msgstr "Ошибка при закрытии SPU плагина!"
 
-#: gui/Plugin.c:417
+#: ../gui/Plugin.c:417
 msgid "Error closing Controller 1 Plugin!"
 msgstr "Ошибка при закрытии PAD1 плагина!"
 
-#: gui/Plugin.c:419
+#: ../gui/Plugin.c:419
 msgid "Error closing Controller 2 plugin!"
 msgstr "Ошибка при закрытии PAD2 плагина!"
 
-#: gui/Plugin.c:421
+#: ../gui/Plugin.c:421
 msgid "Error closing GPU plugin!"
 msgstr "Ошибка при закрытии GPU плагина!"
 
-#: libpcsxcore/cdriso.c:783
+#: ../libpcsxcore/cdriso.c:783
 #, c-format
 msgid "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"
 msgstr "Трек %.2d (%s) - Начало %.2d:%.2d:%.2d, Длина %.2d:%.2d:%.2d\n"
 
-#: libpcsxcore/cdriso.c:804
+#: ../libpcsxcore/cdriso.c:804
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr "Загружен образ CD: %s"
 
-#: libpcsxcore/cheat.c:147
+#: ../libpcsxcore/cheat.c:147
 #, c-format
 msgid "Cheats loaded from: %s\n"
 msgstr "Чит загружен из: %s\n"
 
-#: libpcsxcore/cheat.c:179
+#: ../libpcsxcore/cheat.c:179
 #, c-format
 msgid "Cheats saved to: %s\n"
 msgstr "Чит сохранён в: %s\n"
 
-#: libpcsxcore/cheat.c:322 libpcsxcore/cheat.c:443
+#: ../libpcsxcore/cheat.c:322 ../libpcsxcore/cheat.c:443
 msgid "(Untitled)"
 msgstr "(без названия)"
 
-#: libpcsxcore/debug.c:317
+#: ../libpcsxcore/debug.c:317
 msgid "Error allocating memory"
 msgstr "Ошибка выделения памяти"
 
-#: libpcsxcore/debug.c:322
+#: ../libpcsxcore/debug.c:322
 msgid "Unable to start debug server.\n"
 msgstr "Не удалось запустить сервер отладки.\n"
 
-#: libpcsxcore/debug.c:326
+#: ../libpcsxcore/debug.c:326
 msgid "Debugger started.\n"
 msgstr "Дебаггер запущен.\n"
 
-#: libpcsxcore/debug.c:333
+#: ../libpcsxcore/debug.c:333
 msgid "Debugger stopped.\n"
 msgstr "Дебаггер остановлен.\n"
 
-#: libpcsxcore/misc.c:345
+#: ../libpcsxcore/misc.c:345
 #, c-format
 msgid "CD-ROM Label: %.32s\n"
 msgstr "Метка CD диска: %.32s\n"
 
-#: libpcsxcore/misc.c:346
+#: ../libpcsxcore/misc.c:346
 #, c-format
 msgid "CD-ROM ID: %.9s\n"
 msgstr "Идентификатор CD диска: %.9s\n"
 
-#: libpcsxcore/misc.c:409
+#: ../libpcsxcore/misc.c:409
 #, c-format
 msgid "Error opening file: %s.\n"
 msgstr "Ошибка открытия файла: %s.\n"
 
-#: libpcsxcore/misc.c:452
+#: ../libpcsxcore/misc.c:452
 #, c-format
 msgid "Unknown CPE opcode %02x at position %08x.\n"
 msgstr "Неизвестный опкод CPE %02x по адресу %08x.\n"
 
-#: libpcsxcore/misc.c:480
+#: ../libpcsxcore/misc.c:480
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "This file does not appear to be a valid PSX file.\n"
 
-#: libpcsxcore/plugins.c:183
+#: ../libpcsxcore/plugins.c:183
 #, c-format
 msgid "Error loading %s: %s"
 msgstr "Ошибка загрузки %s: %s"
 
-#: libpcsxcore/plugins.c:235
+#: ../libpcsxcore/plugins.c:235
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "Не удалось загрузить GPU плагин %s!"
 
-#: libpcsxcore/plugins.c:308
+#: ../libpcsxcore/plugins.c:308
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "Не удалось загрузить CD-ROM плагин %s!"
 
-#: libpcsxcore/plugins.c:356
+#: ../libpcsxcore/plugins.c:356
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "Не удалось загрузить SPU плагин %s!"
 
-#: libpcsxcore/plugins.c:493
+#: ../libpcsxcore/plugins.c:493
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "Не удалось загрузить PAD1 плагин %s!"
 
-#: libpcsxcore/plugins.c:547
+#: ../libpcsxcore/plugins.c:547
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "Не удалось загрузить PAD2 плагин %s!"
 
-#: libpcsxcore/plugins.c:590
+#: ../libpcsxcore/plugins.c:590
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "Не удалось загрузить NetPlay плагин %s!"
 
-#: libpcsxcore/plugins.c:670
+#: ../libpcsxcore/plugins.c:670
 #, c-format
 msgid "Could not load SIO1 plugin %s!"
 msgstr "Не удалось загрузить SIO1 плагин %s!"
 
-#: libpcsxcore/plugins.c:755
+#: ../libpcsxcore/plugins.c:755
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr "Ошибка инициализации CD-ROM плагина: %d"
 
-#: libpcsxcore/plugins.c:757
+#: ../libpcsxcore/plugins.c:757
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr "Ошибка инициализации GPU плагина: %d"
 
-#: libpcsxcore/plugins.c:759
+#: ../libpcsxcore/plugins.c:759
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr "Ошибка инициализации SPU плагина: %d"
 
-#: libpcsxcore/plugins.c:761
+#: ../libpcsxcore/plugins.c:761
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr "Ошибка инициализации PAD1 плагина: %d"
 
-#: libpcsxcore/plugins.c:763
+#: ../libpcsxcore/plugins.c:763
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr "Ошибка инициализации PAD2 плагина: %d"
 
-#: libpcsxcore/plugins.c:767
+#: ../libpcsxcore/plugins.c:767
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr "Ошибка инициализации NetPlay плагина: %d"
 
-#: libpcsxcore/plugins.c:772
+#: ../libpcsxcore/plugins.c:772
 #, c-format
 msgid "Error initializing SIO1 plugin: %d"
 msgstr "Ошибка инициализации SIO1 плагина: %d"
 
-#: libpcsxcore/plugins.c:775
+#: ../libpcsxcore/plugins.c:775
 msgid "Plugins loaded.\n"
 msgstr "Плагины загружены.\n"
 
-#: libpcsxcore/ppf.c:216
+#: ../libpcsxcore/ppf.c:216
 #, c-format
 msgid "Invalid PPF patch: %s.\n"
 msgstr "Неверный PPF патч: %s。\n"
 
-#: libpcsxcore/ppf.c:292
+#: ../libpcsxcore/ppf.c:292
 #, c-format
 msgid "Unsupported PPF version (%d).\n"
 msgstr "Неподдерживаемая версия PPF(%d).\n"
 
-#: libpcsxcore/ppf.c:331
+#. build address array
+#: ../libpcsxcore/ppf.c:331
 #, c-format
 msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr "Загружен PPF %d.0 патч: %s。\n"
 
-#: libpcsxcore/psxmem.c:78
+#: ../libpcsxcore/psxmem.c:78
 msgid "Error allocating memory!"
 msgstr "Ошибка выделения памяти!"
 
-#: libpcsxcore/psxmem.c:121
+#: ../libpcsxcore/psxmem.c:121
 #, c-format
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 
-#: libpcsxcore/r3000a.c:37
+#: ../libpcsxcore/r3000a.c:37
 #, c-format
 msgid "Running PCSX Version %s (%s).\n"
 msgstr "Запуск PCSX версии %s (%s) 執行中。\n"
 
-#: libpcsxcore/sio.c:839
+#: ../libpcsxcore/sio.c:839
 msgid "Connection closed!\n"
 msgstr "Соединение закрыто!\n"
 
-#: libpcsxcore/sio.c:872
+#: ../libpcsxcore/sio.c:872
 #, c-format
 msgid "No memory card value was specified - creating a default card %s\n"
 msgstr "Карта памяти не указана - создана новая карта %s\n"
 
-#: libpcsxcore/sio.c:876
+#: ../libpcsxcore/sio.c:876
 #, c-format
 msgid "The memory card %s doesn't exist - creating it\n"
 msgstr "Карта памяти %s не существует - создана новая\n"
 
-#: libpcsxcore/sio.c:892
+#: ../libpcsxcore/sio.c:892
 #, c-format
 msgid "Memory card %s failed to load!\n"
 msgstr "Ошибка загрузки карты памяти %s!\n"
 
-#: libpcsxcore/sio.c:896
+#: ../libpcsxcore/sio.c:896
 #, c-format
 msgid "Loading memory card %s\n"
 msgstr "Загрузка карты памяти %s\n"
 
-#: plugins/dfcdrom/cdr.c:25
+#: ../plugins/dfcdrom/cdr.c:25
 msgid "CD-ROM Drive Reader"
 msgstr ""
 
-#: plugins/dfcdrom/cdr.c:27
+#: ../plugins/dfcdrom/cdr.c:27
 msgid "CDR NULL Plugin"
 msgstr ""
 
-#: plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:8
-#: plugins/dfcdrom/cdrcfg-0.1df/main.c:219
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:1
+#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:219
 msgid "CDR configuration"
 msgstr "Настройка CDR"
 
-#: plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:33
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:2
+msgid "Cache Size (Def. 64):"
+msgstr "Размер кеша (по умолчанию 64):"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:3
+msgid "Cdrom Speed (Def. 0 = MAX):"
+msgstr "Скорость вращения диска (по умолчанию 0 = максимальная):"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:4
 msgid "Choose your CD-ROM device or type its path if it's not listed"
 msgstr ""
 "Выберите CD-привод или введите свой путь, если устройства нету в списке"
 
-#: plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:44
-msgid "Select CD-ROM device"
-msgstr "Выберите CD-привод"
-
-#: plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:72
-msgid "Select read mode:"
-msgstr "Режим чтения:"
-
-#: plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:83
-msgid ""
-"Normal (No Cache)\n"
-"Threaded - Faster (With Cache)"
-msgstr ""
-"Обычный (Кеширование недоступно)\n"
-"В отдельном потоке - (Кеширование)"
-
-#: plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:114
-msgid "Cache Size (Def. 64):"
-msgstr "Размер кеша (по умолчанию 64):"
-
-#: plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:159
-msgid "Spindown Time:"
-msgstr "Время до остановки шпинделя cd-привода"
-
-#: plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:170
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:5
 msgid ""
 "Default\n"
 "125ms\n"
@@ -1246,203 +1241,227 @@ msgstr ""
 "16мин\n"
 "32мин"
 
-#: plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:216
-msgid "Cdrom Speed (Def. 0 = MAX):"
-msgstr "Скорость вращения диска (по умолчанию 0 = максимальная):"
-
-#: plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:248
-msgid "hseparator"
-msgstr ""
-
-#: plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:258
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:21
 msgid "Enable subchannel read"
 msgstr "Включить чтение субканальных данных"
 
-#: plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2:277
-#: plugins/dfinput/dfinput.glade2:448 win32/gui/WndMain.c:1307
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:22
+msgid ""
+"Normal (No Cache)\n"
+"Threaded - Faster (With Cache)"
+msgstr ""
+"Обычный (Кеширование недоступно)\n"
+"В отдельном потоке - (Кеширование)"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:24
+#: ../plugins/dfinput/dfinput.glade2.h:8 ../win32/gui/WndMain.c:1307
 msgid "Options"
 msgstr "Опции"
 
-#: plugins/dfinput/cfg-gtk2.c:48
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:25
+msgid "Select CD-ROM device"
+msgstr "Выберите CD-привод"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:26
+msgid "Select read mode:"
+msgstr "Режим чтения:"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:27
+msgid "Spindown Time:"
+msgstr "Время до остановки шпинделя cd-привода"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:28
+msgid "hseparator"
+msgstr ""
+
+#: ../plugins/dfinput/cfg-gtk2.c:48
 msgid "D-Pad Up"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:49
+#: ../plugins/dfinput/cfg-gtk2.c:49
 msgid "D-Pad Down"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:50
+#: ../plugins/dfinput/cfg-gtk2.c:50
 msgid "D-Pad Left"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:51
+#: ../plugins/dfinput/cfg-gtk2.c:51
 msgid "D-Pad Right"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:52
+#: ../plugins/dfinput/cfg-gtk2.c:52
 msgid "Cross"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:53
+#: ../plugins/dfinput/cfg-gtk2.c:53
 msgid "Circle"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:54
+#: ../plugins/dfinput/cfg-gtk2.c:54
 msgid "Square"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:55
+#: ../plugins/dfinput/cfg-gtk2.c:55
 msgid "Triangle"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:56
+#: ../plugins/dfinput/cfg-gtk2.c:56
 msgid "L1"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:57
+#: ../plugins/dfinput/cfg-gtk2.c:57
 msgid "R1"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:58
+#: ../plugins/dfinput/cfg-gtk2.c:58
 msgid "L2"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:59
+#: ../plugins/dfinput/cfg-gtk2.c:59
 msgid "R2"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:60
+#: ../plugins/dfinput/cfg-gtk2.c:60
 msgid "Select"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:61
+#: ../plugins/dfinput/cfg-gtk2.c:61
 msgid "Start"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:62
+#: ../plugins/dfinput/cfg-gtk2.c:62
 msgid "L3"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:63
+#: ../plugins/dfinput/cfg-gtk2.c:63
 msgid "R3"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:67
+#: ../plugins/dfinput/cfg-gtk2.c:67
 msgid "L-Stick Right"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:68
+#: ../plugins/dfinput/cfg-gtk2.c:68
 msgid "L-Stick Left"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:69
+#: ../plugins/dfinput/cfg-gtk2.c:69
 msgid "L-Stick Down"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:70
+#: ../plugins/dfinput/cfg-gtk2.c:70
 msgid "L-Stick Up"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:71
+#: ../plugins/dfinput/cfg-gtk2.c:71
 msgid "R-Stick Right"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:72
+#: ../plugins/dfinput/cfg-gtk2.c:72
 msgid "R-Stick Left"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:73
+#: ../plugins/dfinput/cfg-gtk2.c:73
 msgid "R-Stick Down"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:74
+#: ../plugins/dfinput/cfg-gtk2.c:74
 msgid "R-Stick Up"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:103 plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
 msgid "Centered"
 msgstr "Отцентровано"
 
-#: plugins/dfinput/cfg-gtk2.c:103 plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
 msgid "Up"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:103 plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
 msgid "Right"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:103 plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
 msgid "Rightup"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:104 plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
 msgid "Down"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:104 plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
 msgid "Rightdown"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:104 plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
 msgid "Left"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:104 plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
 msgid "Leftup"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:105 plugins/dfinput/cfg-gtk2.c:144
+#: ../plugins/dfinput/cfg-gtk2.c:105 ../plugins/dfinput/cfg-gtk2.c:144
 msgid "Leftdown"
 msgstr ""
 
-#: plugins/dfinput/cfg-gtk2.c:109 plugins/dfinput/cfg-gtk2.c:148
+#: ../plugins/dfinput/cfg-gtk2.c:109 ../plugins/dfinput/cfg-gtk2.c:148
 #, c-format
 msgid "Joystick: Button %d"
 msgstr "Джойстик: Кнопка %d"
 
-#: plugins/dfinput/cfg-gtk2.c:113 plugins/dfinput/cfg-gtk2.c:152
+#: ../plugins/dfinput/cfg-gtk2.c:113 ../plugins/dfinput/cfg-gtk2.c:152
 #, c-format
 msgid "Joystick: Axis %d%c"
 msgstr "Джойстик: Ось %d%c"
 
-#: plugins/dfinput/cfg-gtk2.c:118 plugins/dfinput/cfg-gtk2.c:157
+#: ../plugins/dfinput/cfg-gtk2.c:118 ../plugins/dfinput/cfg-gtk2.c:157
 #, c-format
 msgid "Joystick: Hat %d %s"
 msgstr "Джойстик: Крестовина %d %s"
 
-#: plugins/dfinput/cfg-gtk2.c:133 plugins/dfinput/cfg-gtk2.c:172
+#: ../plugins/dfinput/cfg-gtk2.c:133 ../plugins/dfinput/cfg-gtk2.c:172
 msgid "Keyboard:"
 msgstr "Клавиатура:"
 
-#: plugins/dfinput/cfg-gtk2.c:137 plugins/dfinput/cfg-gtk2.c:176
+#: ../plugins/dfinput/cfg-gtk2.c:137 ../plugins/dfinput/cfg-gtk2.c:176
 msgid "(Not Set)"
 msgstr "(Не установлено)"
 
-#: plugins/dfinput/cfg-gtk2.c:559
+#: ../plugins/dfinput/cfg-gtk2.c:559
 msgid "None"
 msgstr "Нету"
 
-#: plugins/dfinput/cfg-gtk2.c:601
+#: ../plugins/dfinput/cfg-gtk2.c:601
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr "Настройка Gamepad/Keyboard"
 
-#: plugins/dfinput/cfg-gtk2.c:607 plugins/dfinput/cfg-gtk2.c:627
+#: ../plugins/dfinput/cfg-gtk2.c:607 ../plugins/dfinput/cfg-gtk2.c:627
 msgid "Key"
 msgstr "Клавиша"
 
-#: plugins/dfinput/cfg-gtk2.c:613 plugins/dfinput/cfg-gtk2.c:633
+#: ../plugins/dfinput/cfg-gtk2.c:613 ../plugins/dfinput/cfg-gtk2.c:633
 msgid "Button"
 msgstr "Кнопка"
 
-#: plugins/dfinput/dfinput.glade2:35 plugins/dfinput/dfinput.glade2:232
+#: ../plugins/dfinput/dfinput.glade2.h:1
+msgid "Change"
+msgstr "Изменить"
+
+#: ../plugins/dfinput/dfinput.glade2.h:2
+msgid "Controller 1"
+msgstr "Контроллер 1"
+
+#: ../plugins/dfinput/dfinput.glade2.h:3
+msgid "Controller 2"
+msgstr "Контроллер 2"
+
+#: ../plugins/dfinput/dfinput.glade2.h:4
 msgid "Device:"
 msgstr "Устройство:"
 
-#: plugins/dfinput/dfinput.glade2:66 plugins/dfinput/dfinput.glade2:263
-msgid "Type:"
-msgstr "Тип:"
-
-#: plugins/dfinput/dfinput.glade2:78 plugins/dfinput/dfinput.glade2:275
+#: ../plugins/dfinput/dfinput.glade2.h:5
 msgid ""
 "Digital Pad\n"
 "Analog Pad"
@@ -1450,44 +1469,60 @@ msgstr ""
 "Стандартный контроллер\n"
 "Аналоговый контроллер"
 
-#: plugins/dfinput/dfinput.glade2:149 plugins/dfinput/dfinput.glade2:346
-msgid "Change"
-msgstr "Изменить"
-
-#: plugins/dfinput/dfinput.glade2:185 plugins/dfinput/dfinput.glade2:382
-msgid "Reset"
-msgstr "Сброс"
-
-#: plugins/dfinput/dfinput.glade2:210
-msgid "Controller 1"
-msgstr "Контроллер 1"
-
-#: plugins/dfinput/dfinput.glade2:412
-msgid "Controller 2"
-msgstr "Контроллер 2"
-
-#: plugins/dfinput/dfinput.glade2:427
+#: ../plugins/dfinput/dfinput.glade2.h:7
 msgid "Multi-Threaded (Recommended)"
 msgstr "В отдельном потоке (Рекомендуется)"
 
-#: plugins/dfinput/pad.c:22
+#: ../plugins/dfinput/dfinput.glade2.h:9
+msgid "Reset"
+msgstr "Сброс"
+
+#: ../plugins/dfinput/dfinput.glade2.h:10
+msgid "Type:"
+msgstr "Тип:"
+
+#: ../plugins/dfinput/pad.c:22
 msgid "Gamepad/Keyboard Input"
 msgstr ""
 
-#: plugins/dfnet/dfnet.c:23
+#. increase that with each version
+#: ../plugins/dfnet/dfnet.c:23
 msgid "Socket Driver"
 msgstr ""
 
-#: plugins/dfnet/dfnet.c:161
+#: ../plugins/dfnet/dfnet.c:161
 #, c-format
 msgid "error connecting to %s: %s\n"
 msgstr "Ошибка соединения с %s: %s\n"
 
-#: plugins/dfnet/dfnet.c:186
+#: ../plugins/dfnet/dfnet.c:186
 msgid "Error allocating memory!\n"
 msgstr "Ошибка выделения памяти!\n"
 
-#: plugins/dfnet/dfnet.glade2:23
+#: ../plugins/dfnet/dfnet.glade2.h:1
+msgid "Client (Player2)"
+msgstr "Клиент (Игрок 2)"
+
+#: ../plugins/dfnet/dfnet.glade2.h:2
+msgid "Copy PC IP to Clipboard"
+msgstr "Скопировать IP адрес в буфер обмена"
+
+#: ../plugins/dfnet/dfnet.glade2.h:3
+msgid ""
+"Do not change if not necessary (remember it must be changed on both sides)."
+msgstr ""
+"Не меняйте без особой необходимости (помните что порты должны быть одинаковы "
+"для обеих сторон)"
+
+#: ../plugins/dfnet/dfnet.glade2.h:4
+msgid "Play Offline"
+msgstr "Начать без использования сети"
+
+#: ../plugins/dfnet/dfnet.glade2.h:5
+msgid "Port Number"
+msgstr "Номер порта"
+
+#: ../plugins/dfnet/dfnet.glade2.h:6
 msgid ""
 "Select here if you'll be Server (Player1) or Client (Player2).\n"
 "\n"
@@ -1505,106 +1540,104 @@ msgstr ""
 "Если вы выбрали Клиента - введите полученный IP адрес Сервера в "
 "соответствующее поле."
 
-#: plugins/dfnet/dfnet.glade2:63
-msgid "Copy PC IP to Clipboard"
-msgstr "Скопировать IP адрес в буфер обмена"
-
-#: plugins/dfnet/dfnet.glade2:94
+#: ../plugins/dfnet/dfnet.glade2.h:11
 msgid "Server (Player1)"
 msgstr "Сервер (Игрок 1)"
 
-#: plugins/dfnet/dfnet.glade2:104
-msgid "Client (Player2)"
-msgstr "Клиент (Игрок 2)"
-
-#: plugins/dfnet/dfnet.glade2:130
-msgid ""
-"Do not change if not necessary (remember it must be changed on both sides)."
-msgstr ""
-"Не меняйте без особой необходимости (помните что порты должны быть одинаковы "
-"для обеих сторон)"
-
-#: plugins/dfnet/dfnet.glade2:143
-msgid "Port Number"
-msgstr "Номер порта"
-
-#: plugins/dfnet/dfnet.glade2:202
+#: ../plugins/dfnet/dfnet.glade2.h:12
 msgid "Start Game"
 msgstr "Начать сетевую игру"
 
-#: plugins/dfnet/dfnet.glade2:240
-msgid "Play Offline"
-msgstr "Начать без использования сети"
-
-#: plugins/dfnet/gui.c:31 plugins/dfnet/gui.c:112
-#: win32/gui/ConfigurePlugins.c:616
+#: ../plugins/dfnet/gui.c:31 ../plugins/dfnet/gui.c:112
+#: ../win32/gui/ConfigurePlugins.c:616
 msgid "NetPlay"
 msgstr "Сетевая игра"
 
-#: plugins/dfnet/gui.c:39
+#: ../plugins/dfnet/gui.c:39
 msgid "Nothing to configure"
 msgstr "Не подлежит настройке"
 
-#: plugins/dfnet/gui.c:95
+#: ../plugins/dfnet/gui.c:95
 #, c-format
 msgid "IP %s"
 msgstr ""
 
-#: plugins/dfnet/gui.c:165
+#: ../plugins/dfnet/gui.c:165
 msgid "Waiting for connection..."
 msgstr "Ожидание соединения..."
 
-#: plugins/dfnet/gui.c:168
+#: ../plugins/dfnet/gui.c:168
 msgid "The Client should now Start a Connection, waiting..."
 msgstr "Ожидание соединения с клиентом..."
 
-#: plugins/dfsound/spu.c:43
+#: ../plugins/dfsound/spu.c:43
 msgid "DirectSound Driver"
 msgstr ""
 
-#: plugins/dfsound/spu.c:45
+#: ../plugins/dfsound/spu.c:45
 msgid "Mac OS X Sound"
 msgstr ""
 
-#: plugins/dfsound/spu.c:47
+#: ../plugins/dfsound/spu.c:47
 msgid "ALSA Sound"
 msgstr ""
 
-#: plugins/dfsound/spu.c:49
+#: ../plugins/dfsound/spu.c:49
 msgid "OSS Sound"
 msgstr ""
 
-#: plugins/dfsound/spu.c:51
+#: ../plugins/dfsound/spu.c:51
 msgid "SDL Sound"
 msgstr ""
 
-#: plugins/dfsound/spu.c:53
+#: ../plugins/dfsound/spu.c:53
 msgid "PulseAudio Sound"
 msgstr ""
 
-#: plugins/dfsound/spu.c:55
+#: ../plugins/dfsound/spu.c:55
 msgid "NULL Sound"
 msgstr ""
 
-#: plugins/dfsound/spu.c:58
+#: ../plugins/dfsound/spu.c:58
 msgid ""
 "P.E.Op.S. Sound Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
 
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:42
-msgid "Volume:"
-msgstr "Громкость:"
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:1
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:20
+msgid "<b>Compatibility</b>"
+msgstr "<b>Совместимость</b>"
 
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:54
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:2
+msgid "<b>General</b>"
+msgstr "<b>Главные</b>"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:3
+msgid "<b>XA Music</b>"
+msgstr "<b>XA музыка</b>"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:4
+msgid "Adjust XA speed"
+msgstr "Корректировка скорости проигрывания XA"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:5
+msgid "Choose this if XA music is played too quickly."
+msgstr "Установить в том случае, когда XA музыка играет слишком быстро."
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:7
+msgid "Frequency Response - Output Filter"
+msgstr ""
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:8
+msgid "High compatibility mode"
+msgstr "Режим повышенной совместимости"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:9
 msgid "Interpolation:"
 msgstr "Интерполяция:"
 
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:68
-msgid "Reverb:"
-msgstr "Реверберация:"
-
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:81
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:10
 #, fuzzy
 msgid ""
 "None\n"
@@ -1618,17 +1651,7 @@ msgstr ""
 "Сильная\n"
 "Максимальная"
 
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:96
-msgid ""
-"Off\n"
-"Simple\n"
-"Playstation"
-msgstr ""
-"Выключена\n"
-"Простая\n"
-"Playstation"
-
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:112
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:15
 msgid ""
 "None\n"
 "Simple\n"
@@ -1640,106 +1663,79 @@ msgstr ""
 "Гаусса\n"
 "Кубическая"
 
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:133
-msgid "<b>General</b>"
-msgstr "<b>Главные</b>"
-
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:164
-msgid "Adjust XA speed"
-msgstr "Корректировка скорости проигрывания XA"
-
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:168
-msgid "Choose this if XA music is played too quickly."
-msgstr "Установить в том случае, когда XA музыка играет слишком быстро."
-
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:185
-msgid "<b>XA Music</b>"
-msgstr "<b>XA музыка</b>"
-
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:216
-msgid "High compatibility mode"
-msgstr "Режим повышенной совместимости"
-
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:220
-msgid "Use the asynchronous SPU interface."
-msgstr "Использовать асинхронный интерфейс SPU"
-
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:232
-msgid "SPU IRQ Wait"
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:19
+msgid ""
+"Off\n"
+"Simple\n"
+"Playstation"
 msgstr ""
+"Выключена\n"
+"Простая\n"
+"Playstation"
 
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:236
-msgid "Wait for CPU; only useful for some games."
-msgstr "Ожидать CPU; имеет смысл только для некоторых игр."
-
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:248
-msgid "Single channel sound"
-msgstr "Одноканальный звук"
-
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:252
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:22
 msgid "Play only one channel for a performance boost."
 msgstr "Проигрывать только один канал, для прироста производительности"
 
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:264
-msgid "Frequency Response - Output Filter"
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:23
+msgid "Reverb:"
+msgstr "Реверберация:"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:24
+msgid "SPU IRQ Wait"
 msgstr ""
 
-#: plugins/dfsound/spucfg-0.1df/dfsound.glade2:281
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:585
-msgid "<b>Compatibility</b>"
-msgstr "<b>Совместимость</b>"
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:25
+msgid "Single channel sound"
+msgstr "Одноканальный звук"
 
-#: plugins/dfxvideo/gpu.c:60
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:26
+msgid "Use the asynchronous SPU interface."
+msgstr "Использовать асинхронный интерфейс SPU"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:27
+msgid "Volume:"
+msgstr "Громкость:"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:28
+msgid "Wait for CPU; only useful for some games."
+msgstr "Ожидать CPU; имеет смысл только для некоторых игр."
+
+#: ../plugins/dfxvideo/gpu.c:60
 msgid "Soft Driver"
 msgstr ""
 
-#: plugins/dfxvideo/gpu.c:61
+#: ../plugins/dfxvideo/gpu.c:61
 msgid ""
 "P.E.Op.S. Soft Driver V1.17\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
 
-#: plugins/dfxvideo/gpu.c:63
+#: ../plugins/dfxvideo/gpu.c:63
 msgid "SoftGL Driver"
 msgstr ""
 
-#: plugins/dfxvideo/gpu.c:64
+#: ../plugins/dfxvideo/gpu.c:64
 msgid ""
 "P.E.Op.S. SoftGL Driver V1.17\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
 
-#: plugins/dfxvideo/gpu.c:66
+#: ../plugins/dfxvideo/gpu.c:66
 msgid "XVideo Driver"
 msgstr ""
 
-#: plugins/dfxvideo/gpu.c:67
+#: ../plugins/dfxvideo/gpu.c:67
 msgid ""
 "P.E.Op.S. Xvideo Driver V1.17\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
 
-#: plugins/dfxvideo/gpu.c:70
+#: ../plugins/dfxvideo/gpu.c:70
 msgid "Pete Bernert and the P.E.Op.S. team"
 msgstr ""
 
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:8
-msgid "Configure X11 Video"
-msgstr "Настройка X11 Video"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:45
-msgid "Initial Window Size:"
-msgstr "Размер окна:"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:56
-msgid "Stretching:"
-msgstr "Растяжение:"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:69
-msgid "Dithering:"
-msgstr "Дизеринг:"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:82
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:1
 msgid ""
 "0: None\n"
 "1: 2xSai\n"
@@ -1759,7 +1755,7 @@ msgstr ""
 "6: HQ2X\n"
 "7: HQ3X"
 
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:104
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:9
 msgid ""
 "0: Off (fastest)\n"
 "1: Game dependant\n"
@@ -1769,7 +1765,11 @@ msgstr ""
 "1: Устанавливается игрой\n"
 "2: Включен всегда"
 
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:125
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:12
+msgid "200.0"
+msgstr "200.0"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:13
 msgid ""
 "320x240\n"
 "640x480\n"
@@ -1780,411 +1780,541 @@ msgid ""
 "1600x1200"
 msgstr ""
 
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:139
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:167
-msgid "Fullscreen"
-msgstr "Полноэкранный режим"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:21
+msgid "<b>Framerate</b>"
+msgstr "<b>Частота кадров</b>"
 
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:144
-msgid "Toggle windowed/fullscreen mode."
-msgstr "Переключение между оконным/полноэкранным режимами."
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:170
-msgid "Maintain 4:3 Aspect Ratio"
-msgstr "Сохранять соотношение сторон 4:3"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:195
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:22
 msgid "<b>Screen</b>"
 msgstr "<b>Экран</b>"
 
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:224
-msgid "Show FPS"
-msgstr "Отображать FPS"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:23
+msgid "Autodetect FPS limit"
+msgstr "Авто-определение FPS"
 
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:228
-msgid "Toggle whether the FPS will be shown."
-msgstr "Отображать FPS при старте эмуляции."
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:24
+msgid "Better FPS limit in some"
+msgstr "Возможно более точное ограничение FPS"
 
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:240
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:25
+msgid "Black screens in Lunar"
+msgstr "Чёрный экран в LunarSSSC"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:26
+msgid "Capcom fighting games"
+msgstr "Файтинги от Capcom"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:27
+msgid "Chrono Cross"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:28
+msgid "Compatibility mode"
+msgstr "Режим совместимости"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:29
+msgid "Configure X11 Video"
+msgstr "Настройка X11 Video"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:30
+msgid "Disable CPU Saving"
+msgstr "Выключить экономию ресурсов ЦПУ"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:31
+msgid "Disable coordinate check"
+msgstr "Выключить проверку координат"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:32
+msgid "Dithering:"
+msgstr "Дизеринг:"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:33
+msgid "Draw quads with triangles"
+msgstr "Рисовать четырёхугольники треугольниками"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:34
 msgid "Enable frame skipping"
 msgstr "Включить пропуск кадров"
 
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:244
-msgid "Skip frames when rendering."
-msgstr "Пропуск кадров при отрисовке."
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:261
-msgid "Set FPS"
-msgstr "Установить FPS"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:265
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:35
 msgid "Enable this if games display too quickly."
 msgstr ""
 "Следует включить для автоматического определения и ограничения скорости игры."
 
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:279
-msgid "200.0"
-msgstr "200.0"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:290
-msgid "Autodetect FPS limit"
-msgstr "Авто-определение FPS"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:318
-msgid "<b>Framerate</b>"
-msgstr "<b>Частота кадров</b>"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:347
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:868
-msgid "Use game fixes"
-msgstr "Исправления для некоторых игр"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:372
-msgid "Disable CPU Saving"
-msgstr "Выключить экономию ресурсов ЦПУ"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:376
-msgid "For precise framerate"
-msgstr "Для повышения точности частоты смены кадров"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:389
-msgid "Odd/even bit hack"
-msgstr "Хак бита ODE"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:393
-msgid "Chrono Cross"
-msgstr ""
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:404
-msgid "PC FPS calculation"
-msgstr ""
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:408
-msgid "Better FPS limit in some"
-msgstr "Возможно более точное ограничение FPS"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:421
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:36
 msgid "Expand screen width"
 msgstr "Увеличить ширину экрана"
 
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:425
-msgid "Capcom fighting games"
-msgstr "Файтинги от Capcom"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:438
-msgid "Ignore brightness color"
-msgstr "Игнорировать яркость цвета"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:442
-msgid "Black screens in Lunar"
-msgstr "Чёрный экран в LunarSSSC"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:455
-msgid "Disable coordinate check"
-msgstr "Выключить проверку координат"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:459
-msgid "Compatibility mode"
-msgstr "Режим совместимости"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:472
-msgid "Lazy screen update"
-msgstr "\"Ленивое\" обновление экрана"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:477
-msgid "Pandemonium 2"
-msgstr ""
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:490
-msgid "Old frame skipping"
-msgstr "Старый режим пропуска кадров"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:495
-msgid "Skip every second frame"
-msgstr "Пропускать каждый второй кадр"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:510
-msgid "Repeated flat tex triangles"
-msgstr ""
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:515
-msgid "Needed by Dark Forces"
-msgstr "Необходимо для Dark Forces"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:530
-msgid "Draw quads with triangles"
-msgstr "Рисовать четырёхугольники треугольниками"
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:535
-msgid "better g-colors, worse textures"
-msgstr ""
-
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:550
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:37
 msgid "Fake 'gpu busy' states"
 msgstr "Имитация 'занятости' gpu "
 
-#: plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2:555
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:38
+msgid "For precise framerate"
+msgstr "Для повышения точности частоты смены кадров"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:39
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:62
+msgid "Fullscreen"
+msgstr "Полноэкранный режим"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:40
+msgid "Ignore brightness color"
+msgstr "Игнорировать яркость цвета"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:41
+msgid "Initial Window Size:"
+msgstr "Размер окна:"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:42
+msgid "Lazy screen update"
+msgstr "\"Ленивое\" обновление экрана"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:43
+msgid "Maintain 4:3 Aspect Ratio"
+msgstr "Сохранять соотношение сторон 4:3"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:44
+msgid "Needed by Dark Forces"
+msgstr "Необходимо для Dark Forces"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:45
+msgid "Odd/even bit hack"
+msgstr "Хак бита ODE"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:46
+msgid "Old frame skipping"
+msgstr "Старый режим пропуска кадров"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:47
+msgid "PC FPS calculation"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:48
+msgid "Pandemonium 2"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:49
+msgid "Repeated flat tex triangles"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:50
+msgid "Set FPS"
+msgstr "Установить FPS"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:51
+msgid "Show FPS"
+msgstr "Отображать FPS"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:52
+msgid "Skip every second frame"
+msgstr "Пропускать каждый второй кадр"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:53
+msgid "Skip frames when rendering."
+msgstr "Пропуск кадров при отрисовке."
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:54
+msgid "Stretching:"
+msgstr "Растяжение:"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:55
 msgid "Toggle busy flags after drawing"
 msgstr "Переключить флаг занятости после отрисовки"
 
-#: plugins/peopsxgl/gpu.c:70
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:56
+msgid "Toggle whether the FPS will be shown."
+msgstr "Отображать FPS при старте эмуляции."
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:57
+msgid "Toggle windowed/fullscreen mode."
+msgstr "Переключение между оконным/полноэкранным режимами."
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:58
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:83
+msgid "Use game fixes"
+msgstr "Исправления для некоторых игр"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:59
+msgid "better g-colors, worse textures"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpu.c:70
 msgid "OpenGL Driver"
 msgstr ""
 
-#: plugins/peopsxgl/gpu.c:72
+#: ../plugins/peopsxgl/gpu.c:72
 msgid "Pete Bernert"
 msgstr ""
 
-#: plugins/peopsxgl/gpu.c:73
+#: ../plugins/peopsxgl/gpu.c:73
 msgid ""
 "Based on P.E.Op.S. MesaGL Driver V1.78\n"
 "Coded by Pete Bernert\n"
 msgstr ""
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:142
-msgid "P.E.Op.S. MesaGL PSX GPU configuration..."
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:1
+#, fuzzy
+msgid "01: Battle cursor (FF7)"
+msgstr "Курсор в режиме боя (FF7)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:2
+msgid "02: Direct FB updates"
 msgstr ""
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:203
-msgid "Width:"
-msgstr "Ширина:"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:3
+#, fuzzy
+msgid "04: Black brightness (Lunar)"
+msgstr "Чёрный экран в LunarSSSC"
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:210
-msgid "Height:"
-msgstr "Высота:"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:228
-msgid "Dithering"
-msgstr "Дизеринг"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:241
-msgid "Keep psx aspect ratio"
-msgstr "Сохранять пропорции картинки psx"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:256
-msgid "Window options"
-msgstr "Опции окна"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:282
-msgid "Quality:"
-msgstr "Качество:"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:292
-msgid "Filtering:"
-msgstr "Фильтрация:"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:302
-msgid "HiRes Tex:"
-msgstr "HiRes текстуры:"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:375
-msgid "VRam size in MBytes (0..1024, 0=auto):"
-msgstr "Размер видеопамяти в мегабайтах (0..1024, 0=авто):"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:403
-msgid "Textures"
-msgstr "Текстуры"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:429
-msgid "Show FPS display on startup"
-msgstr "Отображать FPS дисплей при старте"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:442
-msgid "Use FPS limit"
-msgstr "Включить ограничение FPS"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:454
-msgid "Use Frame skipping"
-msgstr "Пропуск кадров"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:467
-msgid "FPS limit auto-detection"
-msgstr "Авто-определение FPS"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:483
-msgid "FPS limit manual"
-msgstr "Ручное ограничение FPS"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:508
-msgid "FPS"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:4
+msgid "08: Swap front detection"
 msgstr ""
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:528
-msgid "Framerate"
-msgstr "Частота кадров"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:561
-msgid "Offscreen Drawing:"
-msgstr "Внеэкранная отрисовка:"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:571
-msgid "Framebuffer textures:"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:5
+msgid "0: Emulated vram - Needs FVP"
 msgstr ""
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:581
-msgid "Framebuffer access:"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:6
+msgid "0: Emulated vram - ok most times"
 msgstr ""
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:657
-msgid "Mask bit detection (needed by a few games, zbuffer)"
-msgstr "Эмуляция маскирования (используется в нескольких играх, zbuffer)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:7
+#, fuzzy
+msgid "0: None"
+msgstr "Нету"
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:668
-msgid "Alpha Multipass (correct opaque texture areas)"
-msgstr "Многопроходная отрисовка текстур с прозрачностью"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:8
+msgid "0: None (standard)"
+msgstr "0: None (стандартный)"
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:679
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:9
+msgid "0: None - Fastest, most glitches"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:10
+msgid "0: don't care - Use driver's default textures"
+msgstr "0: Использовать формат текстур по-умолчанию"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:11
+#, fuzzy
+msgid "10000: unused"
+msgstr "не используется"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:12
+#, fuzzy
+msgid "1000: Odd/even hack"
+msgstr "Хак бита ODE"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:13
+#, fuzzy
+msgid "100: Old frame skipping"
+msgstr "Старый режим пропуска кадров"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:14
+#, fuzzy
+msgid "10: Disable coord check"
+msgstr "Выключить проверку координат"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:15
+msgid "1: 2xSaI (much vram needed)"
+msgstr "1: 2xSaI (требуется много видеопамяти)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:16
+msgid "1: 4444 - Fast, but less colorful"
+msgstr "1: 4444 - Быстро, плохая цветопередача"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:17
+msgid "1: Black - Fast, no effects"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:18
+msgid "1: Gfx card buffer reads"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:19
+msgid "1: Minimum - Missing screens"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:20
+msgid "1: Standard - Glitches will happen"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:21
+#, fuzzy
+msgid "20000: fake 'gpu busy'"
+msgstr "Имитация 'занятости' gpu"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:22
+#, fuzzy
+msgid "2000: Adjust screen width"
+msgstr "Корректировка ширины экрана"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:23
+msgid "200: Yellow rect (FF9)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:24
+msgid "20: No blue glitches (LoD)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:25
+msgid "2: 5551 - Nice colors, bad transparency"
+msgstr "2: 5551 - Хорошая цветопередача, проблемы с прозрачностью"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:26
+msgid "2: Extended - No black borders"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:27
+msgid "2: Gfx card buffer - Can be slow"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:28
+msgid "2: Gfx card buffer moves"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:29
+msgid "2: Scaled (needs tex filtering)"
+msgstr "2: Scaled (используется совместно с текстурной фильтрацией)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:30
+msgid "2: Standard - OK for most games"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:31
+msgid "3: 8888 - Best colors, more ram needed"
+msgstr "3: 8888 - Лучшая цветопередача, требует много памяти"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:32
+msgid "3: Enhanced - Shows more stuff"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:33
+msgid "3: Gfx buffer reads "
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:34
+msgid "3: Gfx card "
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:35
+msgid "3: Standard without sprites - unfiltered 2D"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:36
+#, fuzzy
+msgid "4000: Old texture filtering"
+msgstr "Старый режим текстурной фильтрации"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:37
+#, fuzzy
+msgid "400: No subtr. blending"
+msgstr "Отключить вычитающее смешивание"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:38
+msgid "40: Soft FB access"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
+msgid "4: BGR8888 - Faster on some cards"
+msgstr "4: BGR8888 - Быстрее на некоторых видеокартах"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:40
+msgid "4: Extended - Causing garbage"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:41
+msgid "4: Extended without sprites - unfiltered 2D"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:42
+msgid "4: Full Software (FVP)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:43
+msgid "5: Standard + smoothed sprites"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:44
+msgid "6: Extended + smoothed sprites"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:45
+msgid "8000: Additional uploads"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:46
+#, fuzzy
+msgid "800: Lazy upload (DW7)"
+msgstr "\"Ленивая\" загрузка (DW7)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:47
+msgid "80: PC fps calculation"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:48
 msgid "Advanced blending (Accurate psx color emulation)"
 msgstr "Улучшенное смешивание (более точная эмуляция цветов psx)"
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:702
-msgid "Compatibility"
-msgstr "Совместимость"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:49
+msgid "Alpha Multipass (correct opaque texture areas)"
+msgstr "Многопроходная отрисовка текстур с прозрачностью"
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:729
-msgid "Scanlines"
-msgstr "Скан-линии"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:742
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:50
 #, fuzzy
 msgid "Blending (0..255,-1=dot):"
 msgstr "Смешивание (0..255, -1=точка):"
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:771
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:51
+msgid "Coded by: Pete Bernert"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:52
+msgid "Compatibility"
+msgstr "Совместимость"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:53
+msgid "Dithering"
+msgstr "Дизеринг"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:54
+msgid "FPS"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:55
+msgid "FPS limit auto-detection"
+msgstr "Авто-определение FPS"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:56
+msgid "FPS limit manual"
+msgstr "Ручное ограничение FPS"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:57
+msgid "Filtering:"
+msgstr "Фильтрация:"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:58
+msgid "Force 15 bit framebuffer updates (faster movies)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:59
+msgid "Framebuffer access:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
+msgid "Framebuffer textures:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:61
+msgid "Framerate"
+msgstr "Частота кадров"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
+msgid "Height:"
+msgstr "Высота:"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:64
+msgid "HiRes Tex:"
+msgstr "HiRes текстуры:"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:65
+msgid "Keep psx aspect ratio"
+msgstr "Сохранять пропорции картинки psx"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:66
+msgid "Line mode (polygons will not get filled)"
+msgstr "Режим линий (отрисовываются только края полигонов)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:67
+msgid "Mask bit detection (needed by a few games, zbuffer)"
+msgstr "Эмуляция маскирования (используется в нескольких играх, zbuffer)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:68
+msgid "Misc"
+msgstr "Разное"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:69
+msgid "Offscreen Drawing:"
+msgstr "Внеэкранная отрисовка:"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:70
+msgid "P.E.Op.S. MesaGL PSX GPU configuration..."
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:71
+msgid "Polygon anti-aliasing (slow with most cards)"
+msgstr "Антиалиясинг полигонов (медленно на большинстве карт)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:72
+msgid "Quality:"
+msgstr "Качество:"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:73
+msgid "Release date: 01.04.2009"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:74
+msgid "Scanlines"
+msgstr "Скан-линии"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:75
+msgid "Screen smoothing (can be slow or unsupported)"
+msgstr "Полноэкранное сглаживание (может быть медленно или неподдерживатся)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:76
+msgid "Show FPS display on startup"
+msgstr "Отображать FPS дисплей при старте"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:77
+msgid "Special game fixes"
+msgstr "Исправления для некоторых игр"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:78
+msgid "Textures"
+msgstr "Текстуры"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:79
 msgid "Unfiltered MDECs (small movie speedup)"
 msgstr ""
 "Не фильтровать MDECs (некоторый прирост скорости при проигрывании "
 "видеовставок)"
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:784
-msgid "Force 15 bit framebuffer updates (faster movies)"
-msgstr ""
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:80
+msgid "Use FPS limit"
+msgstr "Включить ограничение FPS"
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:797
-msgid "Line mode (polygons will not get filled)"
-msgstr "Режим линий (отрисовываются только края полигонов)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:81
+msgid "Use Frame skipping"
+msgstr "Пропуск кадров"
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:810
-msgid "Polygon anti-aliasing (slow with most cards)"
-msgstr "Антиалиясинг полигонов (медленно на большинстве карт)"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:823
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:82
 msgid "Use OpenGL extensions (recommended)"
 msgstr "Использовать расширения OpenGL (рекомендуется)"
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:836
-msgid "Screen smoothing (can be slow or unsupported)"
-msgstr "Полноэкранное сглаживание (может быть медленно или неподдерживатся)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:84
+msgid "VRam size in MBytes (0..1024, 0=auto):"
+msgstr "Размер видеопамяти в мегабайтах (0..1024, 0=авто):"
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:851
-msgid "Misc"
-msgstr "Разное"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:85
+msgid "Width:"
+msgstr "Ширина:"
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:884
-#, fuzzy
-msgid "01: Battle cursor (FF7)"
-msgstr "Курсор в режиме боя (FF7)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:86
+msgid "Window options"
+msgstr "Опции окна"
 
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:892
-msgid "02: Direct FB updates"
-msgstr ""
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:904
-#, fuzzy
-msgid "04: Black brightness (Lunar)"
-msgstr "Чёрный экран в LunarSSSC"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:916
-msgid "08: Swap front detection"
-msgstr ""
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:928
-#, fuzzy
-msgid "10: Disable coord check"
-msgstr "Выключить проверку координат"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:940
-msgid "20: No blue glitches (LoD)"
-msgstr ""
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:952
-msgid "40: Soft FB access"
-msgstr ""
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:964
-msgid "80: PC fps calculation"
-msgstr ""
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:976
-#, fuzzy
-msgid "100: Old frame skipping"
-msgstr "Старый режим пропуска кадров"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:988
-msgid "200: Yellow rect (FF9)"
-msgstr ""
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:1000
-#, fuzzy
-msgid "400: No subtr. blending"
-msgstr "Отключить вычитающее смешивание"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:1014
-#, fuzzy
-msgid "800: Lazy upload (DW7)"
-msgstr "\"Ленивая\" загрузка (DW7)"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:1028
-#, fuzzy
-msgid "1000: Odd/even hack"
-msgstr "Хак бита ODE"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:1042
-#, fuzzy
-msgid "2000: Adjust screen width"
-msgstr "Корректировка ширины экрана"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:1056
-#, fuzzy
-msgid "4000: Old texture filtering"
-msgstr "Старый режим текстурной фильтрации"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:1070
-msgid "8000: Additional uploads"
-msgstr ""
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:1084
-#, fuzzy
-msgid "10000: unused"
-msgstr "не используется"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:1098
-#, fuzzy
-msgid "20000: fake 'gpu busy'"
-msgstr "Имитация 'занятости' gpu"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:1119
-msgid "Special game fixes"
-msgstr "Исправления для некоторых игр"
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:1182
-msgid "Coded by: Pete Bernert"
-msgstr ""
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:1183
-msgid "Release date: 01.04.2009"
-msgstr ""
-
-#: plugins/peopsxgl/gpucfg/gpucfg-newstyle2.glade:1185
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:87
 #, fuzzy
 msgid "http://www.pbernert.com"
 msgstr "Домашняя страница: http://www.pbernert.com"
 
-#: plugins/bladesio1/sio1.c:29
+#. ****************************************************************************
+#: ../plugins/bladesio1/sio1.c:29
 msgid "Sio1 Driver"
 msgstr ""
 
-#: win32/gui/AboutDlg.c:26
+#: ../win32/gui/AboutDlg.c:26
 msgid ""
 "PCSX - A PlayStation Emulator\n"
 "\n"
@@ -2195,7 +2325,7 @@ msgid ""
 "Webmaster: AkumaX"
 msgstr ""
 
-#: win32/gui/AboutDlg.c:35
+#: ../win32/gui/AboutDlg.c:35
 msgid ""
 "PCSX-df Authors:\n"
 "Ryan Schultz, Andrew Burton, Stephen Chao,\n"
@@ -2207,451 +2337,454 @@ msgid ""
 "http://pcsxr.codeplex.com/"
 msgstr ""
 
-#: win32/gui/AboutDlg.c:46
+#: ../win32/gui/AboutDlg.c:46
 msgid "About"
 msgstr "О PCSX"
 
-#: win32/gui/AboutDlg.c:48 win32/gui/AboutDlg.c:52 win32/gui/CheatDlg.c:69
-#: win32/gui/CheatDlg.c:119 win32/gui/ConfigurePlugins.c:483
-#: win32/gui/ConfigurePlugins.c:614 win32/gui/WndMain.c:1056
-#: win32/gui/WndMain.c:1292
+#: ../win32/gui/AboutDlg.c:48 ../win32/gui/AboutDlg.c:52
+#: ../win32/gui/CheatDlg.c:69 ../win32/gui/CheatDlg.c:119
+#: ../win32/gui/ConfigurePlugins.c:483 ../win32/gui/ConfigurePlugins.c:614
+#: ../win32/gui/WndMain.c:1056 ../win32/gui/WndMain.c:1292
 msgid "OK"
 msgstr "Ок"
 
-#: win32/gui/AboutDlg.c:49
+#: ../win32/gui/AboutDlg.c:49
 msgid "PCSX EMU\n"
 msgstr "PCSX EMU\n"
 
-#: win32/gui/CheatDlg.c:51 win32/gui/CheatDlg.c:223 win32/gui/CheatDlg.c:270
+#: ../win32/gui/CheatDlg.c:51 ../win32/gui/CheatDlg.c:223
+#: ../win32/gui/CheatDlg.c:270
 msgid "Yes"
 msgstr "Да"
 
-#: win32/gui/CheatDlg.c:51 win32/gui/CheatDlg.c:223 win32/gui/CheatDlg.c:270
+#: ../win32/gui/CheatDlg.c:51 ../win32/gui/CheatDlg.c:223
+#: ../win32/gui/CheatDlg.c:270
 msgid "No"
 msgstr "Нет"
 
-#: win32/gui/CheatDlg.c:70 win32/gui/CheatDlg.c:120
-#: win32/gui/ConfigurePlugins.c:484 win32/gui/ConfigurePlugins.c:615
-#: win32/gui/WndMain.c:1057 win32/gui/WndMain.c:1293
+#: ../win32/gui/CheatDlg.c:70 ../win32/gui/CheatDlg.c:120
+#: ../win32/gui/ConfigurePlugins.c:484 ../win32/gui/ConfigurePlugins.c:615
+#: ../win32/gui/WndMain.c:1057 ../win32/gui/WndMain.c:1293
 msgid "Cancel"
 msgstr "Отмена"
 
-#: win32/gui/CheatDlg.c:168
+#: ../win32/gui/CheatDlg.c:168
 msgid "&Add Code"
 msgstr "Добавить код(&A)"
 
-#: win32/gui/CheatDlg.c:169
+#: ../win32/gui/CheatDlg.c:169
 msgid "&Edit Code"
 msgstr "Редактировать код(&E):"
 
-#: win32/gui/CheatDlg.c:170
+#: ../win32/gui/CheatDlg.c:170
 msgid "&Remove Code"
 msgstr "Удалить код(&R)"
 
-#: win32/gui/CheatDlg.c:171
+#: ../win32/gui/CheatDlg.c:171
 msgid "&Enable/Disable"
 msgstr "Включить/Выключить(&E)"
 
-#: win32/gui/CheatDlg.c:172
+#: ../win32/gui/CheatDlg.c:172
 msgid "&Load..."
 msgstr "Загрузить(&L)..."
 
-#: win32/gui/CheatDlg.c:173
+#: ../win32/gui/CheatDlg.c:173
 msgid "&Save As..."
 msgstr "Сохранить как(&S)..."
 
-#: win32/gui/CheatDlg.c:174
+#: ../win32/gui/CheatDlg.c:174
 msgid "&Close"
 msgstr "Закрыть(&C)"
 
-#: win32/gui/CheatDlg.c:190
+#: ../win32/gui/CheatDlg.c:190
 msgid "Enabled"
 msgstr "Включено"
 
-#: win32/gui/CheatDlg.c:282 win32/gui/CheatDlg.c:311
+#: ../win32/gui/CheatDlg.c:282 ../win32/gui/CheatDlg.c:311
 msgid "PCSX Cheat Code Files"
 msgstr "Файл чит кодов PCSX (*.cht)"
 
-#: win32/gui/CheatDlg.c:402
+#: ../win32/gui/CheatDlg.c:402
 msgid "Equal Value"
 msgstr "Равно значению"
 
-#: win32/gui/CheatDlg.c:403
+#: ../win32/gui/CheatDlg.c:403
 msgid "Not Equal Value"
 msgstr "Не равно значению"
 
-#: win32/gui/CheatDlg.c:404
+#: ../win32/gui/CheatDlg.c:404
 msgid "Range"
 msgstr "Диапазон"
 
-#: win32/gui/CheatDlg.c:407
+#: ../win32/gui/CheatDlg.c:407
 msgid "Increased By"
 msgstr "Увеличилось на"
 
-#: win32/gui/CheatDlg.c:408
+#: ../win32/gui/CheatDlg.c:408
 msgid "Decreased By"
 msgstr "Уменьшилось на"
 
-#: win32/gui/CheatDlg.c:409
+#: ../win32/gui/CheatDlg.c:409
 msgid "Increased"
 msgstr "Увеличилось"
 
-#: win32/gui/CheatDlg.c:410
+#: ../win32/gui/CheatDlg.c:410
 msgid "Decreased"
 msgstr "Уменьшилось"
 
-#: win32/gui/CheatDlg.c:411
+#: ../win32/gui/CheatDlg.c:411
 msgid "Different"
 msgstr "Изменилось"
 
-#: win32/gui/CheatDlg.c:412
+#: ../win32/gui/CheatDlg.c:412
 msgid "No Change"
 msgstr "Не изменилось"
 
-#: win32/gui/CheatDlg.c:453
+#: ../win32/gui/CheatDlg.c:453
 msgid "No addresses found."
 msgstr "Адреса не найдены."
 
-#: win32/gui/CheatDlg.c:505 win32/gui/CheatDlg.c:596
+#: ../win32/gui/CheatDlg.c:505 ../win32/gui/CheatDlg.c:596
 msgid "Address:"
 msgstr "Адрес:"
 
-#: win32/gui/CheatDlg.c:566
+#: ../win32/gui/CheatDlg.c:566
 #, c-format
 msgid "Freeze %.8X"
 msgstr "Заморозить %.8X"
 
-#: win32/gui/CheatDlg.c:685
+#: ../win32/gui/CheatDlg.c:685
 msgid "&Freeze"
 msgstr "Заморозить"
 
-#: win32/gui/CheatDlg.c:686
+#: ../win32/gui/CheatDlg.c:686
 msgid "&Modify"
 msgstr "Изменить"
 
-#: win32/gui/CheatDlg.c:687
+#: ../win32/gui/CheatDlg.c:687
 msgid "&Copy"
 msgstr "Копировать"
 
-#: win32/gui/CheatDlg.c:688
+#: ../win32/gui/CheatDlg.c:688
 msgid "&Search"
 msgstr "Поиск"
 
-#: win32/gui/CheatDlg.c:689
+#: ../win32/gui/CheatDlg.c:689
 msgid "&New Search"
 msgstr "Новый поиск"
 
-#: win32/gui/CheatDlg.c:690
+#: ../win32/gui/CheatDlg.c:690
 msgid "C&lose"
 msgstr "Закрыть"
 
-#: win32/gui/CheatDlg.c:692
+#: ../win32/gui/CheatDlg.c:692
 msgid "8-bit"
 msgstr "8-бит"
 
-#: win32/gui/CheatDlg.c:693
+#: ../win32/gui/CheatDlg.c:693
 msgid "16-bit"
 msgstr "16-бит"
 
-#: win32/gui/CheatDlg.c:694
+#: ../win32/gui/CheatDlg.c:694
 msgid "32-bit"
 msgstr "32-бита"
 
-#: win32/gui/CheatDlg.c:695
+#: ../win32/gui/CheatDlg.c:695
 msgid "Decimal"
 msgstr "Десятичное"
 
-#: win32/gui/CheatDlg.c:696
+#: ../win32/gui/CheatDlg.c:696
 msgid "Hexadecimal"
 msgstr "Шестнадцатеричное"
 
-#: win32/gui/ConfigurePlugins.c:219
+#: ../win32/gui/ConfigurePlugins.c:219
 msgid "Simulate Psx Bios"
 msgstr "Симулировать биос psx"
 
-#: win32/gui/ConfigurePlugins.c:305
+#: ../win32/gui/ConfigurePlugins.c:305
 msgid "Configuration not OK!"
 msgstr "Настройка не завершена!"
 
-#: win32/gui/ConfigurePlugins.c:406
+#: ../win32/gui/ConfigurePlugins.c:406
 msgid "This plugin reports that should work correctly"
 msgstr "Плагин готов к работе"
 
-#: win32/gui/ConfigurePlugins.c:407
+#: ../win32/gui/ConfigurePlugins.c:407
 msgid "This plugin reports that should not work correctly"
 msgstr "Плагин вернул сообщение об ошибке"
 
-#: win32/gui/ConfigurePlugins.c:463
+#: ../win32/gui/ConfigurePlugins.c:463
 msgid "Select Plugins Directory"
 msgstr "Каталог с плагинами"
 
-#: win32/gui/ConfigurePlugins.c:472
+#: ../win32/gui/ConfigurePlugins.c:472
 msgid "Select Bios Directory"
 msgstr "Каталог с биосами"
 
-#: win32/gui/ConfigurePlugins.c:481
+#: ../win32/gui/ConfigurePlugins.c:481
 msgid "Configuration"
 msgstr "Настройка"
 
-#: win32/gui/ConfigurePlugins.c:485
+#: ../win32/gui/ConfigurePlugins.c:485
 msgid "Graphics"
 msgstr "Графика"
 
-#: win32/gui/ConfigurePlugins.c:486
+#: ../win32/gui/ConfigurePlugins.c:486
 msgid "First Controller"
 msgstr "Первый контроллер"
 
-#: win32/gui/ConfigurePlugins.c:487
+#: ../win32/gui/ConfigurePlugins.c:487
 msgid "Second Controller"
 msgstr "Второй контроллер"
 
-#: win32/gui/ConfigurePlugins.c:488
+#: ../win32/gui/ConfigurePlugins.c:488
 msgid "Sound"
 msgstr "Звук"
 
-#: win32/gui/ConfigurePlugins.c:489
+#: ../win32/gui/ConfigurePlugins.c:489
 msgid "Cdrom"
 msgstr "CD-привод"
 
-#: win32/gui/ConfigurePlugins.c:490
+#: ../win32/gui/ConfigurePlugins.c:490
 msgid "Bios"
 msgstr "Биос"
 
-#: win32/gui/ConfigurePlugins.c:491
+#: ../win32/gui/ConfigurePlugins.c:491
 msgid "Set Bios Directory"
 msgstr "Выберите каталог с биосами"
 
-#: win32/gui/ConfigurePlugins.c:492
+#: ../win32/gui/ConfigurePlugins.c:492
 msgid "Set Plugins Directory"
 msgstr "Выберите каталог с плагинами"
 
-#: win32/gui/ConfigurePlugins.c:493 win32/gui/ConfigurePlugins.c:496
-#: win32/gui/ConfigurePlugins.c:499 win32/gui/ConfigurePlugins.c:502
-#: win32/gui/ConfigurePlugins.c:505 win32/gui/ConfigurePlugins.c:617
+#: ../win32/gui/ConfigurePlugins.c:493 ../win32/gui/ConfigurePlugins.c:496
+#: ../win32/gui/ConfigurePlugins.c:499 ../win32/gui/ConfigurePlugins.c:502
+#: ../win32/gui/ConfigurePlugins.c:505 ../win32/gui/ConfigurePlugins.c:617
 msgid "Configure..."
 msgstr "Настройка..."
 
-#: win32/gui/ConfigurePlugins.c:494 win32/gui/ConfigurePlugins.c:497
-#: win32/gui/ConfigurePlugins.c:500 win32/gui/ConfigurePlugins.c:503
-#: win32/gui/ConfigurePlugins.c:506 win32/gui/ConfigurePlugins.c:618
+#: ../win32/gui/ConfigurePlugins.c:494 ../win32/gui/ConfigurePlugins.c:497
+#: ../win32/gui/ConfigurePlugins.c:500 ../win32/gui/ConfigurePlugins.c:503
+#: ../win32/gui/ConfigurePlugins.c:506 ../win32/gui/ConfigurePlugins.c:618
 msgid "Test..."
 msgstr "Тест..."
 
-#: win32/gui/ConfigurePlugins.c:495 win32/gui/ConfigurePlugins.c:498
-#: win32/gui/ConfigurePlugins.c:501 win32/gui/ConfigurePlugins.c:504
-#: win32/gui/ConfigurePlugins.c:507 win32/gui/ConfigurePlugins.c:619
+#: ../win32/gui/ConfigurePlugins.c:495 ../win32/gui/ConfigurePlugins.c:498
+#: ../win32/gui/ConfigurePlugins.c:501 ../win32/gui/ConfigurePlugins.c:504
+#: ../win32/gui/ConfigurePlugins.c:507 ../win32/gui/ConfigurePlugins.c:619
 msgid "About..."
 msgstr "О..."
 
-#: win32/gui/ConfigurePlugins.c:612
+#: ../win32/gui/ConfigurePlugins.c:612
 msgid "NetPlay Configuration"
 msgstr "Настройка сетевой игры"
 
-#: win32/gui/ConfigurePlugins.c:620
+#: ../win32/gui/ConfigurePlugins.c:620
 msgid ""
 "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
 msgstr ""
 "Внимание! NetPlay плагин должен находится в том же каталоге что и остальные "
 "плагины."
 
-#: win32/gui/plugin.c:94 win32/gui/WndMain.c:320
+#: ../win32/gui/plugin.c:94 ../win32/gui/WndMain.c:320
 #, c-format
 msgid "*PCSX*: Saved State %d"
 msgstr "*PCSX*: Состояние сохранено %d"
 
-#: win32/gui/plugin.c:95 win32/gui/WndMain.c:321
+#: ../win32/gui/plugin.c:95 ../win32/gui/WndMain.c:321
 #, c-format
 msgid "*PCSX*: Error Saving State %d"
 msgstr "*PCSX*: Ошибка сохранения состояния %d"
 
-#: win32/gui/plugin.c:111 win32/gui/WndMain.c:298
+#: ../win32/gui/plugin.c:111 ../win32/gui/WndMain.c:298
 #, c-format
 msgid "*PCSX*: Loaded State %d"
 msgstr "PCSX*: Состояние загружено %d"
 
-#: win32/gui/plugin.c:112 win32/gui/WndMain.c:299
+#: ../win32/gui/plugin.c:112 ../win32/gui/WndMain.c:299
 #, c-format
 msgid "*PCSX*: Error Loading State %d"
 msgstr "*PCSX*: Ошибка загрузки состояния %d"
 
-#: win32/gui/plugin.c:123
+#: ../win32/gui/plugin.c:123
 #, c-format
 msgid "*PCSX*: Sio Irq Always Enabled"
 msgstr "*PCSX*: Удерживание линии прерывания SIO включено"
 
-#: win32/gui/plugin.c:124
+#: ../win32/gui/plugin.c:124
 #, c-format
 msgid "*PCSX*: Sio Irq Not Always Enabled"
 msgstr "*PCSX*: Удерживание линии прерывания SIO выключено"
 
-#: win32/gui/plugin.c:131
+#: ../win32/gui/plugin.c:131
 #, c-format
 msgid "*PCSX*: Black&White Mdecs Only Enabled"
 msgstr "*PCSX*: Режим чёрно-белых видео вставок (Mdecs) включен"
 
-#: win32/gui/plugin.c:132
+#: ../win32/gui/plugin.c:132
 #, c-format
 msgid "*PCSX*: Black&White Mdecs Only Disabled"
 msgstr "*PCSX*: Режим чёрно-белых видео вставок (Mdecs) выключен"
 
-#: win32/gui/plugin.c:139
+#: ../win32/gui/plugin.c:139
 #, c-format
 msgid "*PCSX*: Xa Enabled"
 msgstr "*PCSX*: Xa включено"
 
-#: win32/gui/plugin.c:140
+#: ../win32/gui/plugin.c:140
 #, c-format
 msgid "*PCSX*: Xa Disabled"
 msgstr "*PCSX*: Xa выключено"
 
-#: win32/gui/plugin.c:149
+#: ../win32/gui/plugin.c:149
 msgid "*PCSX*: CdRom Case Opened"
 msgstr "*PCSX*: крышка CD-привода открыта"
 
-#: win32/gui/plugin.c:155
+#: ../win32/gui/plugin.c:155
 msgid "*PCSX*: CdRom Case Closed"
 msgstr "*PCSX*: крышка CD-привода закрыта"
 
-#: win32/gui/plugin.c:183
+#: ../win32/gui/plugin.c:183
 msgid "Connecting..."
 msgstr "Соединение..."
 
-#: win32/gui/plugin.c:185 win32/gui/plugin.c:192
+#: ../win32/gui/plugin.c:185 ../win32/gui/plugin.c:192
 #, c-format
 msgid "Please wait while connecting... %c\n"
 msgstr "Идёт соединение, подождите... %c\n"
 
-#: win32/gui/plugin.c:220
+#: ../win32/gui/plugin.c:220
 msgid "Error Opening CDR Plugin"
 msgstr "Ошибка открытия CDR плагина"
 
-#: win32/gui/plugin.c:283
+#: ../win32/gui/plugin.c:283
 #, c-format
 msgid "Error Opening GPU Plugin (%d)"
 msgstr "Ошибка открытия GPU плагина (%d)"
 
-#: win32/gui/plugin.c:286
+#: ../win32/gui/plugin.c:286
 #, c-format
 msgid "Error Opening SPU Plugin (%d)"
 msgstr "Ошибка открытия SPU плагина (%d)"
 
-#: win32/gui/plugin.c:289
+#: ../win32/gui/plugin.c:289
 #, c-format
 msgid "Error Opening PAD1 Plugin (%d)"
 msgstr "Ошибка открытия PAD1 плагина (%d)"
 
-#: win32/gui/plugin.c:291
+#: ../win32/gui/plugin.c:291
 #, c-format
 msgid "Error Opening PAD2 Plugin (%d)"
 msgstr "Ошибка открытия PAD2 плагина (%d)"
 
-#: win32/gui/plugin.c:319
+#: ../win32/gui/plugin.c:319
 msgid "Error Closing CDR Plugin"
 msgstr "Ошибка при закрытии CD-ROM плагина (%d)"
 
-#: win32/gui/plugin.c:321
+#: ../win32/gui/plugin.c:321
 msgid "Error Closing GPU Plugin"
 msgstr "Ошибка при закрытии GPU плагина"
 
-#: win32/gui/plugin.c:323
+#: ../win32/gui/plugin.c:323
 msgid "Error Closing SPU Plugin"
 msgstr "Ошибка при закрытии SPU плагина"
 
-#: win32/gui/plugin.c:341
+#: ../win32/gui/plugin.c:341
 #, c-format
 msgid "CDRinit error: %d"
 msgstr "Ошибка в CDRinit: %d"
 
-#: win32/gui/plugin.c:343
+#: ../win32/gui/plugin.c:343
 #, c-format
 msgid "GPUinit error: %d"
 msgstr "Ошибка в GPUinit: %d"
 
-#: win32/gui/plugin.c:345
+#: ../win32/gui/plugin.c:345
 #, c-format
 msgid "SPUinit error: %d"
 msgstr "Ошибка в SPUinit: %d"
 
-#: win32/gui/plugin.c:347
+#: ../win32/gui/plugin.c:347
 #, c-format
 msgid "PAD1init error: %d"
 msgstr "Ошибка в PAD1init: %d"
 
-#: win32/gui/plugin.c:349
+#: ../win32/gui/plugin.c:349
 #, c-format
 msgid "PAD2init error: %d"
 msgstr "Ошибка в PAD2init: %d"
 
-#: win32/gui/plugin.c:352
+#: ../win32/gui/plugin.c:352
 #, c-format
 msgid "NETinit error: %d"
 msgstr "Ошибка в NETinit: %d"
 
-#: win32/gui/WndMain.c:77
+#: ../win32/gui/WndMain.c:77
 msgid "Arabic"
 msgstr "Арабский"
 
-#: win32/gui/WndMain.c:78
+#: ../win32/gui/WndMain.c:78
 msgid "Catalan"
 msgstr "Каталанский"
 
-#: win32/gui/WndMain.c:79
+#: ../win32/gui/WndMain.c:79
 msgid "German"
 msgstr "Немецкий"
 
-#: win32/gui/WndMain.c:80
+#: ../win32/gui/WndMain.c:80
 msgid "Greek"
 msgstr "Греческий"
 
-#: win32/gui/WndMain.c:81 win32/gui/WndMain.c:1656 win32/gui/WndMain.c:1658
+#: ../win32/gui/WndMain.c:81 ../win32/gui/WndMain.c:1656
+#: ../win32/gui/WndMain.c:1658
 msgid "English"
 msgstr "Английский"
 
-#: win32/gui/WndMain.c:82
+#: ../win32/gui/WndMain.c:82
 msgid "Spanish"
 msgstr "Испанский"
 
-#: win32/gui/WndMain.c:83
+#: ../win32/gui/WndMain.c:83
 msgid "French"
 msgstr "Французский"
 
-#: win32/gui/WndMain.c:84
+#: ../win32/gui/WndMain.c:84
 msgid "Italian"
 msgstr "Итальянский"
 
-#: win32/gui/WndMain.c:85
+#: ../win32/gui/WndMain.c:85
 msgid "Portuguese"
 msgstr "Португальский"
 
-#: win32/gui/WndMain.c:86
+#: ../win32/gui/WndMain.c:86
 msgid "Portuguese (Brazilian)"
 msgstr "Португальский (Бразильский)"
 
-#: win32/gui/WndMain.c:87
+#: ../win32/gui/WndMain.c:87
 msgid "Romanian"
 msgstr "Румынский"
 
-#: win32/gui/WndMain.c:88
+#: ../win32/gui/WndMain.c:88
 msgid "Russian"
 msgstr "Русский"
 
-#: win32/gui/WndMain.c:89
+#: ../win32/gui/WndMain.c:89
 msgid "Simplified Chinese"
 msgstr "Китайский упрощенный"
 
-#: win32/gui/WndMain.c:90
+#: ../win32/gui/WndMain.c:90
 msgid "Traditional Chinese"
 msgstr "Китайский традиционный "
 
-#: win32/gui/WndMain.c:91
+#: ../win32/gui/WndMain.c:91
 msgid "Japanese"
 msgstr "Японский"
 
-#: win32/gui/WndMain.c:92
+#: ../win32/gui/WndMain.c:92
 msgid "Korean"
 msgstr "Корейский"
 
-#: win32/gui/WndMain.c:213
+#: ../win32/gui/WndMain.c:213
 msgid ""
 "Usage: pcsx [options]\n"
 "\toptions:\n"
@@ -2662,325 +2795,326 @@ msgid ""
 "\t-help\t\tDisplay this message"
 msgstr ""
 
-#: win32/gui/WndMain.c:339 win32/gui/WndMain.c:385
+#: ../win32/gui/WndMain.c:339 ../win32/gui/WndMain.c:385
 msgid "PCSX State Format"
 msgstr "Формат состояния PCSX"
 
-#: win32/gui/WndMain.c:366
+#: ../win32/gui/WndMain.c:366
 #, c-format
 msgid "*PCSX*: Loaded State %s"
 msgstr "*PCSX*: Состояние загружено %s"
 
-#: win32/gui/WndMain.c:367
+#: ../win32/gui/WndMain.c:367
 #, c-format
 msgid "*PCSX*: Error Loading State %s"
 msgstr "*PCSX*: Ошибка загрузки состояния %s"
 
-#: win32/gui/WndMain.c:412
+#: ../win32/gui/WndMain.c:412
 #, c-format
 msgid "*PCSX*: Saved State %s"
 msgstr "*PCSX*: Состояние сохранено %s"
 
-#: win32/gui/WndMain.c:413
+#: ../win32/gui/WndMain.c:413
 #, c-format
 msgid "*PCSX*: Error Saving State %s"
 msgstr "*PCSX*: Ошибка сохранения состояния %s"
 
-#: win32/gui/WndMain.c:481
+#: ../win32/gui/WndMain.c:481
 msgid "Running BIOS is not supported with Internal HLE Bios."
 msgstr ""
 "Стандартная оболочка, позволяющая управлять картами памяти и проигрывать DA "
 "музыку, при использовании HLE-биоса недоступна."
 
-#: win32/gui/WndMain.c:758
+#: ../win32/gui/WndMain.c:758
 msgid "Game ID"
 msgstr "Идентификатор игры"
 
-#: win32/gui/WndMain.c:764
+#: ../win32/gui/WndMain.c:764
 msgid "Game"
 msgstr "Игра"
 
-#: win32/gui/WndMain.c:946
+#: ../win32/gui/WndMain.c:946
 msgid "mid link block"
 msgstr "соединительный блок"
 
-#: win32/gui/WndMain.c:949
+#: ../win32/gui/WndMain.c:949
 msgid "terminiting link block"
 msgstr "завершающий соединительный блок"
 
-#: win32/gui/WndMain.c:1054
+#: ../win32/gui/WndMain.c:1054
 msgid "Memcard Manager"
 msgstr "Менеджер карт памяти"
 
-#: win32/gui/WndMain.c:1058 win32/gui/WndMain.c:1061
+#: ../win32/gui/WndMain.c:1058 ../win32/gui/WndMain.c:1061
 msgid "Select Mcd"
 msgstr "Выбрать"
 
-#: win32/gui/WndMain.c:1059 win32/gui/WndMain.c:1062
+#: ../win32/gui/WndMain.c:1059 ../win32/gui/WndMain.c:1062
 msgid "Format Mcd"
 msgstr "Форматировать"
 
-#: win32/gui/WndMain.c:1060 win32/gui/WndMain.c:1063
+#: ../win32/gui/WndMain.c:1060 ../win32/gui/WndMain.c:1063
 msgid "Reload Mcd"
 msgstr "Перезагрузить"
 
-#: win32/gui/WndMain.c:1064
+#: ../win32/gui/WndMain.c:1064
 msgid "-> Copy ->"
 msgstr "-> Копировать ->"
 
-#: win32/gui/WndMain.c:1065
+#: ../win32/gui/WndMain.c:1065
 msgid "<- Copy <-"
 msgstr "<- Копировать <-"
 
-#: win32/gui/WndMain.c:1066
+#: ../win32/gui/WndMain.c:1066
 msgid "Paste"
 msgstr "Вставить"
 
-#: win32/gui/WndMain.c:1067
+#: ../win32/gui/WndMain.c:1067
 msgid "<- Un/Delete"
 msgstr "<- Восстановить блок"
 
-#: win32/gui/WndMain.c:1068
+#: ../win32/gui/WndMain.c:1068
 msgid "Un/Delete ->"
 msgstr "Восстановить блок ->"
 
-#: win32/gui/WndMain.c:1070
+#: ../win32/gui/WndMain.c:1070
 msgid "Memory Card 1"
 msgstr "Карта памяти 1"
 
-#: win32/gui/WndMain.c:1071
+#: ../win32/gui/WndMain.c:1071
 msgid "Memory Card 2"
 msgstr "Карта памяти 2"
 
-#: win32/gui/WndMain.c:1126
+#: ../win32/gui/WndMain.c:1126
 msgid "Are you sure you want to paste this selection?"
 msgstr "Вы уверены в том, что хотите вставить выделенное?"
 
-#: win32/gui/WndMain.c:1126 win32/gui/WndMain.c:1237 win32/gui/WndMain.c:1244
+#: ../win32/gui/WndMain.c:1126 ../win32/gui/WndMain.c:1237
+#: ../win32/gui/WndMain.c:1244
 msgid "Confirmation"
 msgstr "Подтверждение"
 
-#: win32/gui/WndMain.c:1237 win32/gui/WndMain.c:1244
+#: ../win32/gui/WndMain.c:1237 ../win32/gui/WndMain.c:1244
 msgid "Are you sure you want to format this Memory Card?"
 msgstr "Вы уверены в том, что хотите отформатировать карту памяти?"
 
-#: win32/gui/WndMain.c:1290
+#: ../win32/gui/WndMain.c:1290
 msgid "Cpu Config"
 msgstr "Настройка ЦПУ"
 
-#: win32/gui/WndMain.c:1295
+#: ../win32/gui/WndMain.c:1295
 msgid "Disable Xa Decoding"
 msgstr "Отключить декодирование XA"
 
-#: win32/gui/WndMain.c:1296
+#: ../win32/gui/WndMain.c:1296
 msgid "Sio Irq Always Enabled"
 msgstr "Удерживание линии прерывания SIO"
 
-#: win32/gui/WndMain.c:1297
+#: ../win32/gui/WndMain.c:1297
 msgid "Black && White Movies"
 msgstr "Чёрно-белые заставки"
 
-#: win32/gui/WndMain.c:1298
+#: ../win32/gui/WndMain.c:1298
 msgid "Disable Cd audio"
 msgstr "Выключить CD музыку"
 
-#: win32/gui/WndMain.c:1300
+#: ../win32/gui/WndMain.c:1300
 msgid "Enable Interpreter Cpu"
 msgstr "Включить интерпретатор ЦПУ"
 
-#: win32/gui/WndMain.c:1303
+#: ../win32/gui/WndMain.c:1303
 msgid "Spu Irq Always Enabled"
 msgstr "Удерживание линии прерывания SPU"
 
-#: win32/gui/WndMain.c:1308
+#: ../win32/gui/WndMain.c:1308
 msgid "Psx System Type"
 msgstr "Тип системы psx"
 
-#: win32/gui/WndMain.c:1412
+#: ../win32/gui/WndMain.c:1412
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 msgstr "Форматы карт памяти psx (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 
-#: win32/gui/WndMain.c:1417
+#: ../win32/gui/WndMain.c:1417
 msgid "Psx Memory Card (*.mcr;*.mc)"
 msgstr "Карта памяти psx (*.mcr;*.mc)"
 
-#: win32/gui/WndMain.c:1422
+#: ../win32/gui/WndMain.c:1422
 msgid "CVGS Memory Card (*.mem;*.vgs)"
 msgstr "Карта памяти CVGS (*.mem;*.vgs)"
 
-#: win32/gui/WndMain.c:1427
+#: ../win32/gui/WndMain.c:1427
 msgid "Bleem Memory Card (*.mcd)"
 msgstr "Карта памяти Bleem (*.mcd)"
 
-#: win32/gui/WndMain.c:1432
+#: ../win32/gui/WndMain.c:1432
 msgid "DexDrive Memory Card (*.gme)"
 msgstr "Карта памяти DexDrive (*.gme)"
 
-#: win32/gui/WndMain.c:1437
+#: ../win32/gui/WndMain.c:1437
 msgid "DataDeck Memory Card (*.ddf)"
 msgstr "Карта памяти DataDeck (*.ddf)"
 
-#: win32/gui/WndMain.c:1481
+#: ../win32/gui/WndMain.c:1481
 msgid "Psx Exe Format"
 msgstr "Psx exe формат"
 
-#: win32/gui/WndMain.c:1518
+#: ../win32/gui/WndMain.c:1518
 msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin)"
 msgstr "Образы диска psx (*.iso;*.mdf;*.img;*.bin)"
 
-#: win32/gui/WndMain.c:1594
+#: ../win32/gui/WndMain.c:1594
 msgid "&File"
 msgstr "Файл(&F)"
 
-#: win32/gui/WndMain.c:1595
+#: ../win32/gui/WndMain.c:1595
 msgid "E&xit"
 msgstr "Выход(&X)"
 
-#: win32/gui/WndMain.c:1597
+#: ../win32/gui/WndMain.c:1597
 msgid "Run &EXE..."
 msgstr "Запустить EXE"
 
-#: win32/gui/WndMain.c:1598
+#: ../win32/gui/WndMain.c:1598
 msgid "Run &BIOS"
 msgstr "Запустить BIOS"
 
-#: win32/gui/WndMain.c:1599
+#: ../win32/gui/WndMain.c:1599
 msgid "Run &ISO..."
 msgstr "Запустить ISO"
 
-#: win32/gui/WndMain.c:1600
+#: ../win32/gui/WndMain.c:1600
 msgid "Run &CD"
 msgstr "Запустить CD"
 
-#: win32/gui/WndMain.c:1602
+#: ../win32/gui/WndMain.c:1602
 msgid "&Emulator"
 msgstr "Эмулятор(&E)"
 
-#: win32/gui/WndMain.c:1603
+#: ../win32/gui/WndMain.c:1603
 msgid "&States"
 msgstr "Состояния(&S)"
 
-#: win32/gui/WndMain.c:1605
+#: ../win32/gui/WndMain.c:1605
 msgid "S&witch ISO..."
 msgstr "Изменить ISO(&W)..."
 
-#: win32/gui/WndMain.c:1607
+#: ../win32/gui/WndMain.c:1607
 msgid "Re&set"
 msgstr "Сброс(&S)"
 
-#: win32/gui/WndMain.c:1608
+#: ../win32/gui/WndMain.c:1608
 msgid "&Run"
 msgstr "Старт(&R)"
 
-#: win32/gui/WndMain.c:1609
+#: ../win32/gui/WndMain.c:1609
 msgid "&Save"
 msgstr "Сохранить(&S)"
 
-#: win32/gui/WndMain.c:1610
+#: ../win32/gui/WndMain.c:1610
 msgid "&Load"
 msgstr "Загрузить(&L)"
 
-#: win32/gui/WndMain.c:1611 win32/gui/WndMain.c:1621
+#: ../win32/gui/WndMain.c:1611 ../win32/gui/WndMain.c:1621
 msgid "&Other..."
 msgstr "Другой(&O)..."
 
-#: win32/gui/WndMain.c:1612 win32/gui/WndMain.c:1622
+#: ../win32/gui/WndMain.c:1612 ../win32/gui/WndMain.c:1622
 msgid "Slot &9"
 msgstr "Слот &9"
 
-#: win32/gui/WndMain.c:1613 win32/gui/WndMain.c:1623
+#: ../win32/gui/WndMain.c:1613 ../win32/gui/WndMain.c:1623
 msgid "Slot &8"
 msgstr "Слот &8"
 
-#: win32/gui/WndMain.c:1614 win32/gui/WndMain.c:1624
+#: ../win32/gui/WndMain.c:1614 ../win32/gui/WndMain.c:1624
 msgid "Slot &7"
 msgstr "Слот &7"
 
-#: win32/gui/WndMain.c:1615 win32/gui/WndMain.c:1625
+#: ../win32/gui/WndMain.c:1615 ../win32/gui/WndMain.c:1625
 msgid "Slot &6"
 msgstr "Слот &6"
 
-#: win32/gui/WndMain.c:1616 win32/gui/WndMain.c:1626
+#: ../win32/gui/WndMain.c:1616 ../win32/gui/WndMain.c:1626
 msgid "Slot &5"
 msgstr "Слот 5(&5)"
 
-#: win32/gui/WndMain.c:1617 win32/gui/WndMain.c:1627
+#: ../win32/gui/WndMain.c:1617 ../win32/gui/WndMain.c:1627
 msgid "Slot &4"
 msgstr "Слот 4(&4)"
 
-#: win32/gui/WndMain.c:1618 win32/gui/WndMain.c:1628
+#: ../win32/gui/WndMain.c:1618 ../win32/gui/WndMain.c:1628
 msgid "Slot &3"
 msgstr "Слот 3(&3)"
 
-#: win32/gui/WndMain.c:1619 win32/gui/WndMain.c:1629
+#: ../win32/gui/WndMain.c:1619 ../win32/gui/WndMain.c:1629
 msgid "Slot &2"
 msgstr "Слот 2(&2)"
 
-#: win32/gui/WndMain.c:1620 win32/gui/WndMain.c:1630
+#: ../win32/gui/WndMain.c:1620 ../win32/gui/WndMain.c:1630
 msgid "Slot &1"
 msgstr "Слот 1(&1)"
 
-#: win32/gui/WndMain.c:1632
+#: ../win32/gui/WndMain.c:1632
 msgid "&Configuration"
 msgstr "Настройка(&C)"
 
-#: win32/gui/WndMain.c:1633
+#: ../win32/gui/WndMain.c:1633
 msgid "Cheat &Search..."
 msgstr "Поиск читов...(&S)"
 
-#: win32/gui/WndMain.c:1634
+#: ../win32/gui/WndMain.c:1634
 msgid "Ch&eat Code..."
 msgstr "Чит код...(&E)"
 
-#: win32/gui/WndMain.c:1637
+#: ../win32/gui/WndMain.c:1637
 msgid "&Language"
 msgstr "Язык(&L)"
 
-#: win32/gui/WndMain.c:1662
+#: ../win32/gui/WndMain.c:1662
 msgid "&Memory cards..."
 msgstr "Карты памяти(&M)..."
 
-#: win32/gui/WndMain.c:1663
+#: ../win32/gui/WndMain.c:1663
 msgid "C&PU..."
 msgstr "ЦПУ(&P)..."
 
-#: win32/gui/WndMain.c:1665
+#: ../win32/gui/WndMain.c:1665
 msgid "&NetPlay..."
 msgstr "Сетевая игра..."
 
-#: win32/gui/WndMain.c:1667
+#: ../win32/gui/WndMain.c:1667
 msgid "&Controllers..."
 msgstr "Управление..."
 
-#: win32/gui/WndMain.c:1668
+#: ../win32/gui/WndMain.c:1668
 msgid "CD-&ROM..."
 msgstr "CD-привод(&R)..."
 
-#: win32/gui/WndMain.c:1669
+#: ../win32/gui/WndMain.c:1669
 msgid "&Sound..."
 msgstr "Звук..."
 
-#: win32/gui/WndMain.c:1670
+#: ../win32/gui/WndMain.c:1670
 msgid "&Graphics..."
 msgstr "Графика..."
 
-#: win32/gui/WndMain.c:1672
+#: ../win32/gui/WndMain.c:1672
 msgid "&Plugins && Bios..."
 msgstr "Плагины и биос(&P)..."
 
-#: win32/gui/WndMain.c:1674
+#: ../win32/gui/WndMain.c:1674
 msgid "&Help"
 msgstr "Помощь(&H)"
 
-#: win32/gui/WndMain.c:1675
+#: ../win32/gui/WndMain.c:1675
 msgid "&About..."
 msgstr "О(&A)..."
 
-#: win32/gui/WndMain.c:1863
+#: ../win32/gui/WndMain.c:1863
 msgid "Pcsx Msg"
 msgstr "Сообщение pcsx"
 
-#: win32/gui/WndMain.c:1866
+#: ../win32/gui/WndMain.c:1866
 msgid "Error Loading Symbol"
 msgstr "Ошибка загрузки символа"
 
@@ -2989,30 +3123,6 @@ msgstr "Ошибка загрузки символа"
 
 #~ msgid "OpenGL Driver configuration"
 #~ msgstr "Настройка OpenGL Driver"
-
-#~ msgid "0: don't care - Use driver's default textures"
-#~ msgstr "0: Использовать формат текстур по-умолчанию"
-
-#~ msgid "1: 4444 - Fast, but less colorful"
-#~ msgstr "1: 4444 - Быстро, плохая цветопередача"
-
-#~ msgid "2: 5551 - Nice colors, bad transparency"
-#~ msgstr "2: 5551 - Хорошая цветопередача, проблемы с прозрачностью"
-
-#~ msgid "3: 8888 - Best colors, more ram needed"
-#~ msgstr "3: 8888 - Лучшая цветопередача, требует много памяти"
-
-#~ msgid "4: BGR8888 - Faster on some cards"
-#~ msgstr "4: BGR8888 - Быстрее на некоторых видеокартах"
-
-#~ msgid "0: None (standard)"
-#~ msgstr "0: None (стандартный)"
-
-#~ msgid "1: 2xSaI (much vram needed)"
-#~ msgstr "1: 2xSaI (требуется много видеопамяти)"
-
-#~ msgid "2: Scaled (needs tex filtering)"
-#~ msgstr "2: Scaled (используется совместно с текстурной фильтрацией)"
 
 #~ msgid "Adapted from P.E.Op.S OpenGL GPU by Pete Bernert"
 #~ msgstr "Адаптированно из \"P.E.Op.S OpenGL GPU\" от Pete Bernert"

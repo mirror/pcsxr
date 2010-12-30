@@ -9,7 +9,6 @@ AC_CONFIG_HEADERS([include/config.h:include/config.h.in])
 
 AC_PROG_CC
 AM_PROG_CC_C_O
-AC_PROG_RANLIB
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
 AC_PROG_INSTALL
@@ -17,13 +16,14 @@ AC_STDC_HEADERS
 AM_PROG_AS
 
 AM_GNU_GETTEXT([external])
+AC_PROG_INTLTOOL
 
 GETTEXT_PACKAGE=pcsx
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["${GETTEXT_PACKAGE}"], [gettext domain])
 
 PKG_CHECK_MODULES(GLIB2, glib-2.0, [], AC_MSG_ERROR([*** glib2 not found!]))
-PKG_CHECK_MODULES(GTK2, gtk+-2.0, [], AC_MSG_ERROR([*** libgtk2 not found!]))
+PKG_CHECK_MODULES(GTK2, gtk+-2.0 >= 2.16, [], AC_MSG_ERROR([*** libgtk2 not found!]))
 PKG_CHECK_MODULES(GLADE2, libglade-2.0, [], AC_MSG_ERROR([*** libglade2 not found!]))
 
 PKG_CHECK_MODULES(SDL, sdl >= 1.2.0, [], AC_MSG_ERROR([*** SDL not found!]))
