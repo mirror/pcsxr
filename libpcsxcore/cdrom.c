@@ -707,7 +707,7 @@ void cdrRepplayInterrupt()
 
 			
 			// track # / index # (assume no pregaps)
-			cdr.Result[1] = cdr.CurTrack;
+			cdr.Result[1] = itob( cdr.CurTrack );
 			cdr.Result[2] = 1;
 
 			if( report_time == 0 ) {
@@ -1086,7 +1086,7 @@ void cdrInterrupt() {
 
 
 				// assume no pregaps
-				cdr.Result[0] = cdr.CurTrack;
+				cdr.Result[0] = itob( cdr.CurTrack );
 				cdr.Result[1] = 1;
 
 
@@ -1663,6 +1663,11 @@ void cdrWrite1(unsigned char rt) {
 				memcpy( cdr.SetSectorPlay, cdr.SetSector, 4 );
 
 
+				// Tomb Raider 2 - new game
+				//Set_Track();
+				Find_CurTrack();
+
+
 				/*
 				if ((cdr.SetSector[0] | cdr.SetSector[1] | cdr.SetSector[2]) == 0) {
 					*(u32 *)cdr.SetSector = *(u32 *)cdr.SetSectorSeek;
@@ -1854,11 +1859,13 @@ void cdrWrite1(unsigned char rt) {
     	case CdlGetlocP:
 				cdr.Ctrl |= 0x80;
 	  		cdr.Stat = NoIntr;
-				AddIrqQueue(cdr.Cmd, 0x800);
-
+				
 				// GameShark CDX / Lite Player: pretty narrow time window
 				// - doesn't always work due to time inprecision
 				//AddIrqQueue(cdr.Cmd, 0x28);
+
+				// Tomb Raider 2 - cdda
+				AddIrqQueue(cdr.Cmd, 0x40);
        	break;
 
     	case CdlGetTN:
