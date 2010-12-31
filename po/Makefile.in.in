@@ -159,9 +159,6 @@ distclean: clean
 	rm -f *.mo *.msg *.cat *.cat.m *.gmo
 
 maintainer-clean: distclean
-	@echo "This command is intended for maintainers to use;"
-	@echo "it deletes files that may require special tools to rebuild."
-	rm -f Makefile.in.in
 
 distdir = ../$(PACKAGE)-$(VERSION)/$(subdir)
 dist distdir: $(DISTFILES)

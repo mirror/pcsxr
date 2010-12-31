@@ -16,8 +16,8 @@ AM_PROG_AS
 LT_PREREQ([2.2.6])
 LT_INIT([disable-static])
 
-IT_PROG_INTLTOOL([0.35.0])
 AM_GLIB_GNU_GETTEXT
+IT_PROG_INTLTOOL([0.35.0])
 
 GETTEXT_PACKAGE=pcsx
 AC_SUBST(GETTEXT_PACKAGE)
@@ -165,57 +165,43 @@ AC_ARG_ENABLE(dynarec, [  --enable-dynarec=...    force selection of dynamic rec
 
 if test "x$DYNAREC" = xauto; then
 	DYNARECSEL="auto"
-else if test "x$DYNAREC" = xx86; then
+elif test "x$DYNAREC" = xx86; then
 	DYNARECSEL="x86"
-else if test "x$DYNAREC" = xx86_64; then
+elif test "x$DYNAREC" = xx86_64; then
 	DYNARECSEL="x86_64"
-else if test "x$DYNAREC" = xppc; then
+elif test "x$DYNAREC" = xppc; then
 	DYNARECSEL="ppc"
-else if test "x$DYNAREC" = xno; then
+elif test "x$DYNAREC" = xno; then
 	DYNARECSEL="no"
 else
 	AC_MSG_WARN([Dynamic Recompiler "$DYNAREC" not found.  Autodetecting...])
 	DYNARECSEL="auto"
 fi
-fi
-fi
-fi
-fi
 
 if test "x$DYNARECSEL" = xauto; then
 	if expr x"$build_cpu" : 'xi.86' > /dev/null; then
 		DYNARECSEL="x86"
-	fi
-
-	if expr x"$build_cpu" : 'xx86_64' > /dev/null; then
+	elif expr x"$build_cpu" : 'xx86_64' > /dev/null; then
 		DYNARECSEL="x86_64"
-	fi
-
-	if expr x"$build_cpu" : 'xpowerpc' > /dev/null; then
+	elif expr x"$build_cpu" : 'xpowerpc' > /dev/null; then
 		DYNARECSEL="ppc"
 	fi
 fi
 
 if test "x$DYNARECSEL" = xno; then
         AC_DEFINE([NOPSXREC], [1], [Define if we are compiling without dynamic recompiler.])
-fi
-
-if test "x$DYNARECSEL" = xx86; then
+elif test "x$DYNARECSEL" = xx86; then
 	AC_DEFINE([__i386__], [1], [Define if we are compiling for x86 architectures.])
 	AM_CONDITIONAL(ARCH_X86, true)
 
 	AC_MSG_RESULT([Dynamic Recompiler selected: x86])
-fi
-
-if test "x$DYNARECSEL" = xx86_64; then
+elif test "x$DYNARECSEL" = xx86_64; then
 	AC_DEFINE([__x86_64__], [1], [Define if we are compiling for x86_64 architectures.])
 	AM_CONDITIONAL(ARCH_X86_64, true)
 	dnl CFLAGS+=" -m64 "
 	dnl AC_COMPILE_IFELSE(AC_LANG_PROGRAM,,AC_MSG_ERROR([Cannot compile with -m64])) 
 	AC_MSG_RESULT([Dynamic Recompiler selected: x86_64])
-fi
-
-if test "x$DYNARECSEL" = xppc; then
+elif test "x$DYNARECSEL" = xppc; then
 	AC_DEFINE([__ppc__], [1], [Define if we are compiling for powerpc architectures.])
 	AM_CONDITIONAL(ARCH_PPC, true)
 	AC_MSG_RESULT([Dynamic Recompiler selected: ppc])
