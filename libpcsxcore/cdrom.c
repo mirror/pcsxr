@@ -626,7 +626,7 @@ void cdrPlayInterrupt_Autopause()
 	}
 	
 
-	if( CDR_getStatus(&stat) != -1) return;
+	if( CDR_getStatus(&stat) == -1) return;
 
 	subq = (struct SubQ *)CDR_getBufferSub();
 
