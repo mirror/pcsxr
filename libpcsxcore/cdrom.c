@@ -867,7 +867,10 @@ void cdrPlayInterrupt()
 	//////////////////////////////////////////
 	//////////////////////////////////////////
 
-	Create_Fake_Subq();
+	subq = (struct SubQ *)CDR_getBufferSub();
+	if (subq == NULL )
+		Create_Fake_Subq();
+
 	cdrPlayInterrupt_Autopause();
 	cdrPlayInterrupt_Repplay();
 
