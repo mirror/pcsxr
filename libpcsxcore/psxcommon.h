@@ -121,6 +121,7 @@ typedef struct {
 	boolean PsxAuto;
 	boolean Cdda;
 	boolean HLE;
+	boolean SlowBoot;
 	boolean Debug;
 	boolean PsxOut;
 	boolean SpuIrq;

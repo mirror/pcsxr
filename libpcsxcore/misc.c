@@ -147,7 +147,7 @@ int LoadCdrom() {
 	s8 exename[256];
 
 	if (!Config.HLE) {
-		psxRegs.pc = psxRegs.GPR.n.ra;
+		if (!Config.SlowBoot) psxRegs.pc = psxRegs.GPR.n.ra;
 		return 0;
 	}
 
