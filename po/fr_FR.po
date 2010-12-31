@@ -1176,7 +1176,7 @@ msgstr "La carte mémoire %s n'existe pas - création de la carte mémoire\n"
 #: ../libpcsxcore/sio.c:892
 #, c-format
 msgid "Memory card %s failed to load!\n"
-msgstr "Problème lors du chargement de la carte mémoire %s !"
+msgstr "Problème lors du chargement de la carte mémoire %s!\n"
 
 #: ../libpcsxcore/sio.c:896
 #, c-format
@@ -2367,7 +2367,7 @@ msgstr "OK"
 
 #: ../win32/gui/AboutDlg.c:49
 msgid "PCSX EMU\n"
-msgstr "PCSX EMU"
+msgstr "PCSX EMU\n"
 
 #: ../win32/gui/CheatDlg.c:51 ../win32/gui/CheatDlg.c:223
 #: ../win32/gui/CheatDlg.c:270
@@ -2816,7 +2816,7 @@ msgstr ""
 "\t-psxout\t\tActiver la sortie PSX\n"
 "\t-runcd\t\tLancer à partir du CD-ROM (requière -nogui)\n"
 "\t-cdfile FILE\tLance une image CD (requière -nogui)\n"
-"\t-help\tAffiche ce message\n"
+"\t-help\tAffiche ce message"
 
 #: ../win32/gui/WndMain.c:339 ../win32/gui/WndMain.c:385
 msgid "PCSX State Format"
