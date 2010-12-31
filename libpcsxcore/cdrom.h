@@ -103,7 +103,6 @@ void cdrDecodedBufferInterrupt();
 void cdrReset();
 void cdrInterrupt();
 void cdrReadInterrupt();
-void cdrRepplayInterrupt();
 void cdrLidSeekInterrupt();
 void cdrPlayInterrupt();
 unsigned char cdrRead0(void);

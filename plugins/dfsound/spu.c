@@ -551,7 +551,7 @@ static void *MAINThread(void *arg)
    if(dwNewChannel)                                    // new channel should start immedately?
     {                                                  // (at least one bit 0 ... MAXCHANNEL is set?)
      iSecureStart++;                                   // -> set iSecure
-     if(iSecureStart>0) iSecureStart=0;                //    (if it is set 5 times - that means on 5 tries a new samples has been started - in a row, we will reset it, to give the sound update a chance)
+     if(iSecureStart>1) iSecureStart=0;                //    (if it is set 5 times - that means on 5 tries a new samples has been started - in a row, we will reset it, to give the sound update a chance)
     }
    else iSecureStart=0;                                // 0: no new channel should start
 

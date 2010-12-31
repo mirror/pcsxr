@@ -194,10 +194,10 @@ void psxBranchTest() {
 			}
 		}
 
-		if (psxRegs.interrupt & (1 << PSXINT_CDREPPLAY)) { // cdr report play
-			if ((psxRegs.cycle - psxRegs.intCycle[PSXINT_CDREPPLAY].sCycle) >= psxRegs.intCycle[PSXINT_CDREPPLAY].cycle) {
-				psxRegs.interrupt &= ~(1 << PSXINT_CDREPPLAY);
-				cdrRepplayInterrupt();
+		if (psxRegs.interrupt & (1 << PSXINT_CDRPLAY)) { // cdr play timing
+			if ((psxRegs.cycle - psxRegs.intCycle[PSXINT_CDRPLAY].sCycle) >= psxRegs.intCycle[PSXINT_CDRPLAY].cycle) {
+				psxRegs.interrupt &= ~(1 << PSXINT_CDRPLAY);
+				cdrPlayInterrupt();
 			}
 		}
 
@@ -212,13 +212,6 @@ void psxBranchTest() {
 			if ((psxRegs.cycle - psxRegs.intCycle[PSXINT_CDRLID].sCycle) >= psxRegs.intCycle[PSXINT_CDRLID].cycle) {
 				psxRegs.interrupt &= ~(1 << PSXINT_CDRLID);
 				cdrLidSeekInterrupt();
-			}
-		}
-
-		if (psxRegs.interrupt & (1 << PSXINT_CDRPLAY)) { // cdr play timing
-			if ((psxRegs.cycle - psxRegs.intCycle[PSXINT_CDRPLAY].sCycle) >= psxRegs.intCycle[PSXINT_CDRPLAY].cycle) {
-				psxRegs.interrupt &= ~(1 << PSXINT_CDRPLAY);
-				cdrPlayInterrupt();
 			}
 		}
 	}

@@ -38,7 +38,7 @@ static FILE *subHandle = NULL;
 static boolean subChanMixed = FALSE;
 static boolean subChanRaw = FALSE;
 
-static unsigned char cdbuffer[DATA_SIZE];
+static unsigned char cdbuffer[CD_FRAMESIZE_RAW];
 static unsigned char subbuffer[SUB_FRAMESIZE];
 
 static unsigned char sndbuffer[CD_FRAMESIZE_RAW * 10];
@@ -940,8 +940,8 @@ static long CALLBACK ISOreadTrack(unsigned char *time) {
 	}
 
 	if (subChanMixed) {
-		fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * (CD_FRAMESIZE_RAW + SUB_FRAMESIZE) + 12, SEEK_SET);
-		fread(cdbuffer, 1, DATA_SIZE, cdHandle);
+		fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * (CD_FRAMESIZE_RAW + SUB_FRAMESIZE), SEEK_SET);
+		fread(cdbuffer, 1, CD_FRAMESIZE_RAW, cdHandle);
 		fread(subbuffer, 1, SUB_FRAMESIZE, cdHandle);
 
 		if (subChanRaw) DecodeRawSubData();
@@ -956,8 +956,8 @@ static long CALLBACK ISOreadTrack(unsigned char *time) {
 			cdbuffer[2] = (time[2]);
 			cdbuffer[3] = 1; //mode 1
 		} else {
-			fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * CD_FRAMESIZE_RAW + 12, SEEK_SET);
-			fread(cdbuffer, 1, DATA_SIZE, cdHandle);
+			fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * CD_FRAMESIZE_RAW, SEEK_SET);
+			fread(cdbuffer, 1, CD_FRAMESIZE_RAW, cdHandle);
 		}
 
 		if (subHandle != NULL) {
@@ -973,7 +973,7 @@ static long CALLBACK ISOreadTrack(unsigned char *time) {
 
 // return readed track
 static unsigned char * CALLBACK ISOgetBuffer(void) {
-	return cdbuffer;
+	return cdbuffer+12;
 }
 
 // plays cdda audio
@@ -1025,6 +1025,24 @@ static long CALLBACK ISOgetStatus(struct CdrStat *stat) {
 	return 0;
 }
 
+// read CDDA sector into buffer
+long CALLBACK ISOreadCDDA(unsigned char m, unsigned char s, unsigned char f, unsigned char *buffer) {
+	unsigned char msf[3] = {m, s, f};
+	unsigned char *p;
+
+	msf[0] = itob(msf[0]);
+	msf[1] = itob(msf[1]);
+	msf[2] = itob(msf[2]);
+
+	if (ISOreadTrack(msf) != 0) return -1;
+
+	p = ISOgetBuffer();
+	if (p == NULL) return -1;
+
+	memcpy(buffer, p - 12, CD_FRAMESIZE_RAW); // copy from the beginning of the sector
+	return 0;
+}
+
 void cdrIsoInit(void) {
 	CDR_init = ISOinit;
 	CDR_shutdown = ISOshutdown;
@@ -1038,6 +1056,7 @@ void cdrIsoInit(void) {
 	CDR_stop = ISOstop;
 	CDR_getBufferSub = ISOgetBufferSub;
 	CDR_getStatus = ISOgetStatus;
+	CDR_readCDDA = ISOreadCDDA;
 
 	CDR_getDriveLetter = CDR__getDriveLetter;
 	CDR_configure = CDR__configure;
