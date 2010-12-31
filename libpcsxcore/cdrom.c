@@ -527,6 +527,90 @@ void Set_Track()
 }
 
 
+static u8 fake_subq_local[3], fake_subq_real[3], fake_subq_index, fake_subq_change;
+void Create_Fake_Subq()
+{
+	u8 temp_cur[3], temp_next[3], temp_start[3], pregap;
+	int diff;
+
+	if (CDR_getTN(cdr.ResultTN) == -1) return;
+	if( cdr.CurTrack+1 <= cdr.ResultTN[1] ) {
+		pregap = 150;
+		if( CDR_getTD(cdr.CurTrack+1, cdr.ResultTD) == -1 ) return;
+	} else {
+		// last track - cd size
+		pregap = 0;
+		if( CDR_getTD(0, cdr.ResultTD) == -1 ) return;
+	}
+
+	if( cdr.Play == TRUE ) {
+		temp_cur[0] = cdr.SetSectorPlay[0];
+		temp_cur[1] = cdr.SetSectorPlay[1];
+		temp_cur[2] = cdr.SetSectorPlay[2];
+	} else {
+		temp_cur[0] = btoi( cdr.Prev[0] );
+		temp_cur[1] = btoi( cdr.Prev[1] );
+		temp_cur[2] = btoi( cdr.Prev[2] );
+	}
+
+	fake_subq_real[0] = temp_cur[0];
+	fake_subq_real[1] = temp_cur[1];
+	fake_subq_real[2] = temp_cur[2];
+
+	temp_next[0] = cdr.ResultTD[2];
+	temp_next[1] = cdr.ResultTD[1];
+	temp_next[2] = cdr.ResultTD[0];
+
+
+	// flag- next track
+	if( msf2sec(temp_cur) >= msf2sec( temp_next )-pregap ) {
+		fake_subq_change = 1;
+
+		cdr.CurTrack++;
+
+		// end cd
+		if( pregap == 0 ) StopCdda();
+	}
+
+	//////////////////////////////////////////////////
+	//////////////////////////////////////////////////
+
+	// repair
+	if( cdr.CurTrack <= cdr.ResultTN[1] ) {
+		if( CDR_getTD(cdr.CurTrack, cdr.ResultTD) == -1 ) return;
+	} else {
+		// last track - cd size
+		if( CDR_getTD(0, cdr.ResultTD) == -1 ) return;
+	}
+	
+	temp_start[0] = cdr.ResultTD[2];
+	temp_start[1] = cdr.ResultTD[1];
+	temp_start[2] = cdr.ResultTD[0];
+
+
+#ifdef CDR_LOG
+	CDR_LOG( "CDDA FAKE SUB - %d:%d:%d / %d:%d:%d / %d:%d:%d\n",
+		temp_cur[0], temp_cur[1], temp_cur[2],
+		temp_start[0], temp_start[1], temp_start[2],
+		temp_next[0], temp_next[1], temp_next[2]);
+#endif
+
+
+
+	// local time - pregap / real
+	diff = msf2sec(temp_cur) - msf2sec( temp_start );
+	if( diff < 0 ) {
+		fake_subq_index = 0;
+
+		sec2msf( -diff, fake_subq_local );
+	} else {
+		fake_subq_index = 1;
+
+		sec2msf( diff, fake_subq_local );
+	}
+}
+
+
 void cdrPlayInterrupt_Autopause()
 {
 	if ((cdr.Mode & (MODE_AUTOPAUSE|MODE_CDDA)) != (MODE_AUTOPAUSE|MODE_CDDA)) return;
@@ -577,32 +661,17 @@ void cdrPlayInterrupt_Autopause()
 			StopCdda();
 		}
 	} else {
-		u8 temp_cur[3], temp_next[3];
-
-		if (CDR_getTN(cdr.ResultTN) == -1) return;
-		if( cdr.CurTrack+1 > cdr.ResultTN[1] ) return;
-		if( CDR_getTD(cdr.CurTrack+1, cdr.ResultTD) == -1 ) return;
-
-		temp_cur[0] = cdr.SetSectorPlay[0];
-		temp_cur[1] = cdr.SetSectorPlay[1];
-		temp_cur[2] = cdr.SetSectorPlay[2];
-
-		temp_next[0] = cdr.ResultTD[2];
-		temp_next[1] = cdr.ResultTD[1];
-		temp_next[2] = cdr.ResultTD[0];
-
-
-#ifdef CDR_LOG
+#ifdef CDR_LOG___0
 		CDR_LOG( "CDDA FAKE SUB - %d:%d:%d\n", 
 			temp_cur[0], temp_cur[1], temp_cur[2] );
 #endif
-
 									
-		if( msf2sec(temp_cur) >= msf2sec( temp_next ) ) {
+		//if( msf2sec(temp_cur) >= msf2sec( temp_next ) ) {
+		if( fake_subq_change ) {
 #ifdef CDR_LOG
 			CDR_LOG( "CDDA STOP\n" );
 #endif
-
+			
 			// Magic the Gathering
 			// - looping territory cdda
 
@@ -615,7 +684,7 @@ void cdrPlayInterrupt_Autopause()
 
 			StopCdda();
 									
-			cdr.CurTrack++;
+			fake_subq_change = 0;
 		}
 	}
 }
@@ -686,7 +755,7 @@ void cdrPlayInterrupt_Repplay()
 			cdr.Result[3] = subq->AbsoluteAddress[0];
 			cdr.Result[4] = subq->AbsoluteAddress[1];
 			cdr.Result[5] = subq->AbsoluteAddress[2];
-									
+
 			report_time = 1;
 		}	else {
 			cdr.Result[3] = subq->TrackRelativeAddress[0];
@@ -698,30 +767,14 @@ void cdrPlayInterrupt_Repplay()
 			report_time = 0;
 		}
 	} else {
-		u8 temp_cur[3], temp_next[3];
-
-		if (CDR_getTN(cdr.ResultTN) == -1) return;
-		if( cdr.CurTrack+1 > cdr.ResultTN[1] ) return;
-		if( CDR_getTD(cdr.CurTrack+1, cdr.ResultTD) == -1 ) return;
-
-
-		temp_cur[0] = cdr.SetSectorPlay[0];
-		temp_cur[1] = cdr.SetSectorPlay[1];
-		temp_cur[2] = cdr.SetSectorPlay[2];
-
-		temp_next[0] = cdr.ResultTD[2];
-		temp_next[1] = cdr.ResultTD[1];
-		temp_next[2] = cdr.ResultTD[0];
-
-
-#ifdef CDR_LOG
+#ifdef CDR_LOG___0
 		CDR_LOG( "REPPLAY FAKE - %d:%d:%d\n", 
 			temp_cur[0], temp_cur[1], temp_cur[2] );
 #endif
 
-
 		// Rayman: check track change
-		if( msf2sec(temp_cur) >= msf2sec( temp_next ) ) {
+		//if( msf2sec(temp_cur) >= msf2sec( temp_next ) ) {
+		if( fake_subq_change ) {
 #ifdef CDR_LOG___0
 			CDR_LOG( "TRACK CHANGE %d - %d %d %d ==> %d %d %d\n",
 				cdr.CurTrack,
@@ -731,44 +784,26 @@ void cdrPlayInterrupt_Repplay()
 
 			cdr.Result[0] |= 0x10;
 									
-			cdr.CurTrack++;
+			fake_subq_change = 0;
 		}
 
 
-		// track # / index # (assume no pregaps)
+		// track # / index #
 		cdr.Result[1] = itob(cdr.CurTrack);
-		cdr.Result[2] = 1;
+		cdr.Result[2] = itob(fake_subq_index);
 
 		if( report_time == 0 ) {
 			// absolute
-			cdr.Result[3] = temp_cur[0];
-			cdr.Result[4] = temp_cur[1];
-			cdr.Result[5] = itob(temp_cur[2]);
-
-			// m:s adjustment
-			if ((s8)cdr.Result[4] < 0) {
-				cdr.Result[4] += 60;
-				cdr.Result[3] -= 1;
-			}
-
-			cdr.Result[3] = itob(cdr.Result[3]);
-			cdr.Result[4] = itob(cdr.Result[4]);
+			cdr.Result[3] = itob( fake_subq_real[0] );
+			cdr.Result[4] = itob( fake_subq_real[1] );
+			cdr.Result[5] = itob( fake_subq_real[2] );
 
 			report_time = 1;
 		} else {
 			// local
-			cdr.Result[3] = temp_cur[0];
-			cdr.Result[4] = temp_cur[1] - 2;
-			cdr.Result[5] = itob( temp_cur[2] );
-
-			// m:s adjustment
-			if ((s8)cdr.Result[4] < 0) {
-				cdr.Result[4] += 60;
-				cdr.Result[3] -= 1;
-			}
-
-			cdr.Result[3] = itob(cdr.Result[3]);
-			cdr.Result[4] = itob(cdr.Result[4]);
+			cdr.Result[3] = itob( fake_subq_local[0] );
+			cdr.Result[4] = itob( fake_subq_local[1] );
+			cdr.Result[5] = itob( fake_subq_local[2] );
 
 			cdr.Result[4] |= 0x80;
 
@@ -816,6 +851,29 @@ void cdrPlayInterrupt()
 	if( CDR_readCDDA )
 		CDR_readCDDA( cdr.SetSectorPlay[0], cdr.SetSectorPlay[1], cdr.SetSectorPlay[2], cdr.Transfer );
 
+
+
+	// TODO: mute data track cdplay
+
+	// mute
+	if (Config.Cdda) memset( cdr.Transfer, 0, CD_FRAMESIZE_RAW );
+
+
+	if( cdr.Play )
+		SPU_playCDDAchannel((short *)cdr.Transfer, CD_FRAMESIZE_RAW);
+
+	CDRPLAY_INT( cdReadTime );
+
+	//////////////////////////////////////////
+	//////////////////////////////////////////
+
+	Create_Fake_Subq();
+	cdrPlayInterrupt_Autopause();
+	cdrPlayInterrupt_Repplay();
+
+	//////////////////////////////////////////
+	//////////////////////////////////////////
+
 	cdr.SetSectorPlay[2]++;
 	if (cdr.SetSectorPlay[2] == 75) {
 		cdr.SetSectorPlay[2] = 0;
@@ -826,22 +884,6 @@ void cdrPlayInterrupt()
 		}
 	}
 
-
-	// TODO: mute data track cdplay
-
-	// mute
-	if (Config.Cdda) memset( cdr.Transfer, 0, CD_FRAMESIZE_RAW );
-
-
-	SPU_playCDDAchannel((short *)cdr.Transfer, CD_FRAMESIZE_RAW);
-
-	CDRPLAY_INT( cdReadTime );
-
-	//////////////////////////////////////////
-	//////////////////////////////////////////
-
-	cdrPlayInterrupt_Autopause();
-	cdrPlayInterrupt_Repplay();
 
 	Check_Shell(0);
 }
@@ -885,6 +927,13 @@ void cdrInterrupt() {
 			break;
 
 		case CdlPlay:
+			fake_subq_change = 0;
+
+			if( cdr.Seeked == FALSE ) {
+				memcpy( cdr.SetSectorPlay, cdr.SetSector, 4 );
+				cdr.Seeked = TRUE;
+			}
+
 			/*
 			Rayman: detect track changes
 			- fixes logo freeze
@@ -1139,71 +1188,22 @@ void cdrInterrupt() {
 					}
 				}
 			} else {
-				// check track change
-				if (CDR_getTN(cdr.ResultTN) != -1) {
-					if( cdr.CurTrack+1 <= cdr.ResultTN[1] ) {
-						if( CDR_getTD(cdr.CurTrack+1, cdr.ResultTD) != -1 ) {
-							u8 temp_cur[3], temp_next[3];
-
-							temp_cur[0] = btoi( stat.Time[0] );
-							temp_cur[1] = btoi( stat.Time[1] );
-							temp_cur[2] = btoi( stat.Time[2] );
-
-							temp_next[0] = cdr.ResultTD[2];
-							temp_next[1] = cdr.ResultTD[1];
-							temp_next[2] = cdr.ResultTD[0];
-
-							if( msf2sec(temp_cur) >= msf2sec( temp_next ) ) {
-								cdr.CurTrack++;
-							}
-						}
-					}
-				}
+				if( cdr.Play == FALSE ) Create_Fake_Subq();
 
 
-				// assume no pregaps
-				cdr.Result[0] = itob( cdr.CurTrack );
-				cdr.Result[1] = 1;
+				// track # / index #
+				cdr.Result[0] = itob(cdr.CurTrack);
+				cdr.Result[1] = itob(fake_subq_index);
 
+				// local
+				cdr.Result[3] = itob( fake_subq_local[0] );
+				cdr.Result[4] = itob( fake_subq_local[1] );
+				cdr.Result[5] = itob( fake_subq_local[2] );
 
-				if( cdr.Play ) {
-					cdr.Result[2] = stat.Time[0];
-					cdr.Result[3] = stat.Time[1]- 2;
-					cdr.Result[4] = itob( stat.Time[2] );
-
-					// m:s adjustment
-					if ((s8)cdr.Result[3] < 0) {
-						cdr.Result[3] += 60;
-						cdr.Result[2] -= 1;
-					}
-
-					cdr.Result[2] = itob(cdr.Result[2]);
-					cdr.Result[3] = itob(cdr.Result[3]);
-
-
-
-					// absolute time
-					cdr.Result[5] = itob( stat.Time[0] );
-					cdr.Result[6] = itob( stat.Time[1] );
-					cdr.Result[7] = itob( stat.Time[2] );
-				}
-				else {
-					cdr.Result[2] = btoi(cdr.Prev[0]);
-					cdr.Result[3] = btoi(cdr.Prev[1]) - 2;
-					cdr.Result[4] = cdr.Prev[2];
-
-					// m:s adjustment
-					if ((s8)cdr.Result[3] < 0) {
-						cdr.Result[3] += 60;
-						cdr.Result[2] -= 1;
-					}
-
-					cdr.Result[2] = itob(cdr.Result[2]);
-					cdr.Result[3] = itob(cdr.Result[3]);
-
-
-					memcpy(cdr.Result + 5, cdr.Prev, 3);
-				}
+				// absolute
+				cdr.Result[5] = itob( fake_subq_real[0] );
+				cdr.Result[6] = itob( fake_subq_real[1] );
+				cdr.Result[7] = itob( fake_subq_real[2] );
 			}
 
 			// redump.org - wipe time
@@ -1300,7 +1300,11 @@ void cdrInterrupt() {
 			cdr.Stat = Complete;
 			cdr.Seeked = TRUE;
 
+			// GameShark Music Player
+			memcpy( cdr.SetSectorPlay, cdr.SetSector, 4 );
+
 			// Tomb Raider 2: must update read cursor for getlocp
+			Find_CurTrack();
 			ReadTrack( cdr.SetSectorPlay );
 			break;
 
@@ -1734,10 +1738,6 @@ void cdrWrite1(unsigned char rt) {
 				cdr.Param[1] &= 0x7f;
 				cdr.Param[2] &= 0x7f;
 #endif
-
-				// GameShark Music Player
-				memcpy( cdr.SetSectorPlay, cdr.SetSector, 4 );
-
 
 				/*
 				if ((cdr.SetSector[0] | cdr.SetSector[1] | cdr.SetSector[2]) == 0) {
