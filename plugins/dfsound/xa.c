@@ -355,31 +355,12 @@ INLINE void FeedXA(xa_decode_t *xap)
      int32_t l1;
      for(i=0;i<iSize;i++)
       {
-       if(iUseInterpolation==2) 
+       while(spos>=0x10000L)
         {
-         while(spos>=0x10000L)
-          {
-           gauss_window[gauss_ptr] = (short)*pS++;
-           gauss_ptr = (gauss_ptr+1) & 3;
-           spos -= 0x10000L;
-          }
-         vl = (spos >> 6) & ~3;
-         vr=(gauss[vl]*gvall0)&~2047;
-         vr+=(gauss[vl+1]*gvall(1))&~2047;
-         vr+=(gauss[vl+2]*gvall(2))&~2047;
-         vr+=(gauss[vl+3]*gvall(3))&~2047;
-         l1=s= vr >> 11;
-         l1 &= 0xffff;
+         s = *pS++;
+         spos -= 0x10000L;
         }
-       else
-        {
-         while(spos>=0x10000L)
-          {
-           s = *pS++;
-           spos -= 0x10000L;
-          }
-         l1=s;
-        }
+       l1=s;
 
        l1=(l1*iPlace)/iSize;
        if(l1<-32767) l1=-32767;
@@ -401,31 +382,12 @@ INLINE void FeedXA(xa_decode_t *xap)
     {
      for(i=0;i<iSize;i++)
       {
-       if(iUseInterpolation==2) 
+       while(spos>=0x10000L)
         {
-         while(spos>=0x10000L)
-          {
-           gauss_window[gauss_ptr] = (short)*pS++;
-           gauss_ptr = (gauss_ptr+1) & 3;
-           spos -= 0x10000L;
-          }
-         vl = (spos >> 6) & ~3;
-         vr=(gauss[vl]*gvall0)&~2047;
-         vr+=(gauss[vl+1]*gvall(1))&~2047;
-         vr+=(gauss[vl+2]*gvall(2))&~2047;
-         vr+=(gauss[vl+3]*gvall(3))&~2047;
-         l=s= vr >> 11;
-         l &= 0xffff;
+         s = *pS++;
+         spos -= 0x10000L;
         }
-       else
-        {
-         while(spos>=0x10000L)
-          {
-           s = *pS++;
-           spos -= 0x10000L;
-          }
-         l=s;
-        }
+       l=s;
 
        *XAFeed++=(l|(l<<16));
 
