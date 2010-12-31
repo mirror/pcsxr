@@ -1010,6 +1010,11 @@ void cdrInterrupt() {
 								cdr.SetSectorPlay[1] = cdr.ResultTD[1];
 								cdr.SetSectorPlay[2] = cdr.ResultTD[0];
 
+								// reset data
+								Set_Track();
+								Find_CurTrack();
+								ReadTrack( cdr.SetSectorPlay );
+
 								//CDR_play(cdr.SetSectorPlay);
 							}
 						}
@@ -1196,9 +1201,9 @@ void cdrInterrupt() {
 				cdr.Result[1] = itob(fake_subq_index);
 
 				// local
-				cdr.Result[3] = itob( fake_subq_local[0] );
-				cdr.Result[4] = itob( fake_subq_local[1] );
-				cdr.Result[5] = itob( fake_subq_local[2] );
+				cdr.Result[2] = itob( fake_subq_local[0] );
+				cdr.Result[3] = itob( fake_subq_local[1] );
+				cdr.Result[4] = itob( fake_subq_local[2] );
 
 				// absolute
 				cdr.Result[5] = itob( fake_subq_real[0] );
