@@ -32,6 +32,18 @@ static char *disRNameGPR[] = {
 	"s0", "s1", "s2", "s3", "s4", "s5","s6", "s7",
 	"t8", "t9", "k0", "k1", "gp", "sp","fp", "ra"};
 
+static char *disRNameCP2D[] = {
+	"r0", "r1", "r2", "r3", "r4", "r5","r6", "r7",
+	"r8", "r9", "r10", "r11", "r12", "r13","r14", "r15",
+	"r16", "r17", "r18", "r19", "r20", "r21","r22", "r23",
+	"r24", "r25", "r26", "r27", "r28", "r29","r30", "r31"};
+
+static char *disRNameCP2C[] = {
+	"r0", "r1", "r2", "r3", "r4", "r5","r6", "r7",
+	"r8", "r9", "r10", "r11", "r12", "r13","r14", "r15",
+	"r16", "r17", "r18", "r19", "r20", "r21","r22", "r23",
+	"r24", "r25", "r26", "r27", "r28", "r29","r30", "r31"};
+
 char *disRNameCP0[] = {
 	"Index"     , "Random"    , "EntryLo0", "EntryLo1", "Context" , "PageMask"  , "Wired"     , "*Check me*",
 	"BadVAddr"  , "Count"     , "EntryHi" , "Compare" , "Status"  , "Cause"     , "ExceptPC"  , "PRevID"    ,
@@ -76,6 +88,8 @@ typedef char* (*TdisR3000AF)(u32 code, u32 pc);
 #define dName(i)	sprintf(ostr, "%s %-7s,", ostr, i)
 #define dGPR(i)		sprintf(ostr, "%s %8.8x (%s),", ostr, psxRegs.GPR.r[i], disRNameGPR[i])
 #define dCP0(i)		sprintf(ostr, "%s %8.8x (%s),", ostr, psxRegs.CP0.r[i], disRNameCP0[i])
+#define dCP2D(i)	sprintf(ostr, "%s %8.8x (%s),", ostr, psxRegs.CP2D.r[i], disRNameCP2D[i])
+#define dCP2C(i)	sprintf(ostr, "%s %8.8x (%s),", ostr, psxRegs.CP2C.r[i], disRNameCP2C[i])
 #define dHI()		sprintf(ostr, "%s %8.8x (%s),", ostr, psxRegs.GPR.n.hi, "hi")
 #define dLO()		sprintf(ostr, "%s %8.8x (%s),", ostr, psxRegs.GPR.n.lo, "lo")
 #define dImm()		sprintf(ostr, "%s %4.4x (%d),", ostr, _Im_, _Im_)
@@ -201,10 +215,10 @@ MakeDisF(disGPF  ,		dName("GPF"))
 MakeDisF(disGPL  ,		dName("GPL"))
 MakeDisF(disNCCT ,		dName("NCCT"))
 
-MakeDisF(disMFC2,		dName("MFC2"); dGPR(_Rt_);)
-MakeDisF(disCFC2,		dName("CFC2"); dGPR(_Rt_);)
-MakeDisF(disMTC2,		dName("MTC2"); dGPR(_Rt_);)
-MakeDisF(disCTC2,		dName("CTC2"); dGPR(_Rt_);)
+MakeDisF(disMFC2,		dName("MFC2"); dGPR(_Rt_);	dCP2C(_Rd_);)
+MakeDisF(disMTC2,		dName("MTC2"); dCP2C(_Rd_); dGPR(_Rt_);)
+MakeDisF(disCFC2,		dName("CFC2"); dGPR(_Rt_);	dCP2C(_Rd_);)
+MakeDisF(disCTC2,		dName("CTC2"); dCP2C(_Rd_); dGPR(_Rt_);)
 
 /*********************************************************
 * Register branch logic                                  *
@@ -238,13 +252,13 @@ MakeDisF(disLHU,		dName("LHU");   dGPR(_Rt_);  dOfB();)
 MakeDisF(disLW,			dName("LW");    dGPR(_Rt_);  dOfB();)
 MakeDisF(disLWL,		dName("LWL");   dGPR(_Rt_);  dOfB();)
 MakeDisF(disLWR,		dName("LWR");   dGPR(_Rt_);  dOfB();)
-MakeDisF(disLWC2,		dName("LWC2");  dGPR(_Rt_);  dOfB();)
+MakeDisF(disLWC2,		dName("LWC2");  dCP2D(_Rt_);  dOfB();)
 MakeDisF(disSB,			dName("SB");    dGPR(_Rt_);  dOfB();)
 MakeDisF(disSH,			dName("SH");    dGPR(_Rt_);  dOfB();)
 MakeDisF(disSW,			dName("SW");    dGPR(_Rt_);  dOfB();)
 MakeDisF(disSWL,		dName("SWL");   dGPR(_Rt_);  dOfB();)
 MakeDisF(disSWR,		dName("SWR");   dGPR(_Rt_);  dOfB();)
-MakeDisF(disSWC2,		dName("SWC2");  dGPR(_Rt_);  dOfB();)
+MakeDisF(disSWC2,		dName("SWC2");  dCP2D(_Rt_);  dOfB();)
 
 /*********************************************************
 * Moves between GPR and COPx                             *
