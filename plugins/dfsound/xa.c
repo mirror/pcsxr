@@ -69,6 +69,9 @@ s32 lc = (spsound[i ] * attenuators.val0 + spsound[i+1] * attenuators.val3]) / 1
 s32 rc = (spsound[i+1] * attenuators.val2 + spsound[i ] * attenuators.val1]) / 128;
 */
 
+static int lastxa_lc, lastxa_rc;
+static int lastcd_lc, lastcd_rc;
+
 INLINE void MixXA(void)
 {
  int ns;
@@ -104,6 +107,11 @@ INLINE void MixXA(void)
 	 SSumL[ns]+=lc;
 	 SSumR[ns]+=rc;
 
+	 // improve crackle - buffer under
+	 // - not update fast enough
+	 lastxa_lc = lc;
+	 lastxa_rc = rc;
+
 
 	 // Tales of Phantasia - voice meter
 	 if( cdxa_dbuf_ptr >= 0x800 )
@@ -114,18 +122,18 @@ INLINE void MixXA(void)
 
  if(XAPlay==XAFeed && XARepeat)
   {
-   XARepeat--;
+   //XARepeat--;
    for(;ns<NSSIZE;ns++)
     {
-		 SSumL[ns]+=lc;
-		 SSumR[ns]+=rc;
+		 SSumL[ns]+=lastxa_rc;
+		 SSumR[ns]+=lastxa_rc;
 
 
 		 // Tales of Phantasia - voice meter
 		 if( cdxa_dbuf_ptr >= 0x800 )
 			 cdxa_dbuf_ptr = 0;
-		 spuMem[ cdxa_dbuf_ptr++ ] = lc;
-		 spuMem[ cdxa_dbuf_ptr++ ] = rc;
+		 spuMem[ cdxa_dbuf_ptr++ ] = lastxa_rc;
+		 spuMem[ cdxa_dbuf_ptr++ ] = lastxa_rc;
     }
   }
 
@@ -147,6 +155,22 @@ INLINE void MixXA(void)
 
 	 SSumL[ns]+=lc;
 	 SSumR[ns]+=rc;
+
+	 // improve crackle - buffer under
+	 // - not update fast enough
+	 lastcd_lc = lc;
+	 lastcd_rc = rc;
+	}
+
+
+ if(CDDAPlay==CDDAFeed && XARepeat)
+  {
+   //XARepeat--;
+   for(;ns<NSSIZE;ns++)
+    {
+		 SSumL[ns]+=lastcd_lc;
+		 SSumR[ns]+=lastcd_rc;
+    }
   }
 }
 
@@ -242,35 +266,10 @@ INLINE void FeedXA(xa_decode_t *xap)
      int32_t l1,l2;short s;
      for(i=0;i<iSize;i++)
       {
-       if(iUseInterpolation==2) 
+       while(spos>=0x10000L)
         {
-         while(spos>=0x10000L)
-          {
-           l = *pS++;
-           gauss_window[gauss_ptr] = (short)LOWORD(l);
-           gauss_window[4+gauss_ptr] = (short)HIWORD(l);
-           gauss_ptr = (gauss_ptr+1) & 3;
-           spos -= 0x10000L;
-          }
-         vl = (spos >> 6) & ~3;
-         vr=(gauss[vl]*gvall0)&~2047;
-         vr+=(gauss[vl+1]*gvall(1))&~2047;
-         vr+=(gauss[vl+2]*gvall(2))&~2047;
-         vr+=(gauss[vl+3]*gvall(3))&~2047;
-         l= (vr >> 11) & 0xffff;
-         vr=(gauss[vl]*gvalr0)&~2047;
-         vr+=(gauss[vl+1]*gvalr(1))&~2047;
-         vr+=(gauss[vl+2]*gvalr(2))&~2047;
-         vr+=(gauss[vl+3]*gvalr(3))&~2047;
-         l |= vr << 5;
-        }
-       else
-        {
-         while(spos>=0x10000L)
-          {
-           l = *pS++;
-           spos -= 0x10000L;
-          }
+         l = *pS++;
+         spos -= 0x10000L;
         }
 
        s=(short)LOWORD(l);
@@ -301,35 +300,10 @@ INLINE void FeedXA(xa_decode_t *xap)
     {
      for(i=0;i<iSize;i++)
       {
-       if(iUseInterpolation==2) 
+       while(spos>=0x10000L)
         {
-         while(spos>=0x10000L)
-          {
-           l = *pS++;
-           gauss_window[gauss_ptr] = (short)LOWORD(l);
-           gauss_window[4+gauss_ptr] = (short)HIWORD(l);
-           gauss_ptr = (gauss_ptr+1) & 3;
-           spos -= 0x10000L;
-          }
-         vl = (spos >> 6) & ~3;
-         vr=(gauss[vl]*gvall0)&~2047;
-         vr+=(gauss[vl+1]*gvall(1))&~2047;
-         vr+=(gauss[vl+2]*gvall(2))&~2047;
-         vr+=(gauss[vl+3]*gvall(3))&~2047;
-         l= (vr >> 11) & 0xffff;
-         vr=(gauss[vl]*gvalr0)&~2047;
-         vr+=(gauss[vl+1]*gvalr(1))&~2047;
-         vr+=(gauss[vl+2]*gvalr(2))&~2047;
-         vr+=(gauss[vl+3]*gvalr(3))&~2047;
-         l |= vr << 5;
-        }
-       else
-        {
-         while(spos>=0x10000L)
-          {
-           l = *pS++;
-           spos -= 0x10000L;
-          }
+         l = *pS++;
+         spos -= 0x10000L;
         }
 
        *XAFeed++=l;
