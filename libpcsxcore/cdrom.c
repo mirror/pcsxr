@@ -2112,7 +2112,11 @@ void cdrWrite3(unsigned char rt) {
 #endif
 
 		// TODO: Use real attenuation (left - right mixer)
-
+#if 0
+		// write CD-XA volumes
+		SPU_writeRegister( H_CDLeft, cdleft );
+		SPU_writeRegister( H_CDRight, cdright );
+#else
 		/*
 		Eternal SPU: scale volume from [0-ffff] -> [0,8000]
 		- Destruction Derby Raw - movies (ff00 ff00)
@@ -2137,12 +2141,17 @@ void cdrWrite3(unsigned char rt) {
 		if( l1 == 0x80 ) { l2 = 0; }
 		if( r1 == 0x80 ) { r2 = 0; }
 
+		// spu compat hack #2
+		if( l1 >= 0x80 ) { l1 = 0x7f; }
+		if( r1 >= 0x80 ) { r1 = 0x7f; }
+
 		cdleft = (l1 << 8) | l2;
 		cdright = (r1 << 8) | r2;
 
 		// write CD-XA volumes
 		SPU_writeRegister( H_CDLeft, cdleft );
 		SPU_writeRegister( H_CDRight, cdright );
+#endif
 	}
 
 
