@@ -287,8 +287,10 @@ int _OpenPlugins(HWND hWnd) {
 	SPU_registerCallback(SPUirq);
 	ret = PAD1_open(hWnd);
 	if (ret < 0) { SysMessage (_("Error Opening PAD1 Plugin (%d)"), ret); return -1; }
+    PAD1_registerVibration(GPU_visualVibration);
 	ret = PAD2_open(hWnd);
 	if (ret < 0) { SysMessage (_("Error Opening PAD2 Plugin (%d)"), ret); return -1; }
+    PAD2_registerVibration(GPU_visualVibration);
 
 	SetCurrentDirectory(PcsxDir);
 	ShowCursor(FALSE);

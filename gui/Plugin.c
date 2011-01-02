@@ -329,8 +329,10 @@ int _OpenPlugins() {
 	GPU_registerCallback(GPUbusy);
 	ret = PAD1_open(&gpuDisp);
 	if (ret < 0) { SysMessage(_("Error opening Controller 1 plugin!")); return -1; }
+    PAD1_registerVibration(GPU_visualVibration);
 	ret = PAD2_open(&gpuDisp);
 	if (ret < 0) { SysMessage(_("Error opening Controller 2 plugin!")); return -1; }
+    PAD2_registerVibration(GPU_visualVibration);
 
 	if (Config.UseNet && !NetOpened) {
 		netInfo info;

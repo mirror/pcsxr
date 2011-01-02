@@ -77,11 +77,11 @@ int _OpenPlugins() {
 	//signal(SIGPIPE, SignalExit);
 
 	GPU_clearDynarec(clearDynarec);
-	
+
 	pathUrl = CFBundleCopyResourceURL(CFBundleGetMainBundle(), CFSTR("gpuPeopsSoftX.cfg"), NULL, NULL);
 	if (pathUrl)
 		CFURLGetFileSystemRepresentation(pathUrl, true, path, 1024);
-	
+
 	ret = CDR_open();
 	if (ret < 0) { SysMessage(_("Error Opening CDR Plugin")); return -1; }
 	ret = SPU_open();
@@ -92,8 +92,10 @@ int _OpenPlugins() {
 	GPU_registerCallback(GPUbusy);
 	ret = PAD1_open(&gpuDisp);
 	if (ret < 0) { SysMessage(_("Error Opening PAD1 Plugin")); return -1; }
+    PAD1_registerVibration(GPU_visualVibration);
 	ret = PAD2_open(&gpuDisp);
 	if (ret < 0) { SysMessage(_("Error Opening PAD2 Plugin")); return -1; }
+    PAD2_registerVibration(GPU_visualVibration);
 
 	return 0;
 }
@@ -106,7 +108,7 @@ int OpenPlugins() {
 		LoadMcds(Config.Mcd1, Config.Mcd2);
 		if (LoadPlugins() == -1) return -1;
 	}
-	return ret;	
+	return ret;
 }
 
 void ClosePlugins() {
