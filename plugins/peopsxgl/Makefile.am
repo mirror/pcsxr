@@ -20,4 +20,4 @@ cfgpeopsxgl_LDADD = $(GTK2_LIBS)
 
 glade_DATA = gpucfg/peopsxgl.ui
 gladedir = $(datadir)/psemu/
-#EXTRA_DIST = $(glade_DATA)
+EXTRA_DIST = $(glade_DATA)

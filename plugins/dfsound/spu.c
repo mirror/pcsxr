@@ -109,7 +109,7 @@ static HANDLE   hMainThread;
 static pthread_t thread = (pthread_t)-1;               // thread id (linux)
 #endif
 
-unsigned long dwNewChannel=0;                          // flags for faster testing, if new channel starts
+uint32_t dwNewChannel=0;                          // flags for faster testing, if new channel starts
 
 void (CALLBACK *irqCallback)(void)=0;                  // func of main emu, called on spu irq
 void (CALLBACK *cddavCallback)(unsigned short,unsigned short)=0;
@@ -596,7 +596,10 @@ static void *MAINThread(void *arg)
 
 				for(ch=0;ch<MAXCHAN;ch++)                         // loop em all... we will collect 1 ms of sound of each playing channel
         {
-				 if(s_chan[ch].bNew) StartSound(ch);             // start new sound
+					if(s_chan[ch].bNew) {
+						StartSound(ch);             // start new sound
+						dwNewChannel&=~(1<<ch);                       // clear new channel bit
+					}
 				 if(!s_chan[ch].bOn) continue;                   // channel not playing? next
 
 				 if(s_chan[ch].iActFreq!=s_chan[ch].iUsedFreq)   // new psx frequency?

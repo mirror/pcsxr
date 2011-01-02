@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
-"Report-Msgid-Bugs-To: schultz.ryan@gmail.com\n"
-"POT-Creation-Date: 2010-12-29 23:29+0800\n"
+"Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
+"POT-Creation-Date: 2011-01-02 13:15+0800\n"
 "PO-Revision-Date: 2010-03-15 16:00+0200\n"
 "Last-Translator: Giovanni Scafora <giovanni@archlinux.org>\n"
 "Language-Team: Arch Linux Italian Team <giovanni@archlinux.org>\n"
@@ -490,14 +490,14 @@ msgstr "_Audio..."
 msgid "label_resultsfound"
 msgstr "etichetta_risultatitrovati"
 
-#: ../gui/AboutDlg.c:76
+#: ../gui/AboutDlg.c:72
 msgid ""
 "(C) 1999-2003 PCSX Team\n"
 "(C) 2005-2009 PCSX-df Team\n"
 "(C) 2009-2010 PCSX-Reloaded Team"
 msgstr ""
 
-#: ../gui/AboutDlg.c:81
+#: ../gui/AboutDlg.c:77
 #, fuzzy
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
@@ -530,12 +530,12 @@ msgstr ""
 "Public License along with this program; if not, write to\n"
 "the Free Software Foundation, Inc."
 
-#: ../gui/AboutDlg.c:104
+#: ../gui/AboutDlg.c:100
 msgid "translator-credits"
 msgstr ""
 "Traduzione italiana a cura di Giovanni Scafora <giovanni@archlinux.org>"
 
-#: ../gui/AboutDlg.c:105
+#: ../gui/AboutDlg.c:101
 msgid "A PlayStation emulator."
 msgstr "Un emulatore della PlayStation."
 
@@ -1478,6 +1478,7 @@ msgid "(Not Set)"
 msgstr "(Nessuna impostazione)"
 
 #: ../plugins/dfinput/cfg-gtk2.c:559
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:55
 msgid "None"
 msgstr "Nessuno"
 
@@ -1917,7 +1918,7 @@ msgid "For precise framerate"
 msgstr "Per framerate preciso"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:39
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:62
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
 msgid "Fullscreen"
 msgstr "Schermo intero"
 
@@ -1946,10 +1947,12 @@ msgid "Odd/even bit hack"
 msgstr "Hack del bit dispari/pari"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:46
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
 msgid "Old frame skipping"
 msgstr "Vecchio salto del frame"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:47
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
 msgid "PC FPS calculation"
 msgstr "Calcolo degli FPS del PC"
 
@@ -2020,337 +2023,356 @@ msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:1
 #, fuzzy
-msgid "01: Battle cursor (FF7)"
-msgstr "Cursore della battaglia (Final Fantasy 7)"
+msgid "2xSaI (Much vram needed)"
+msgstr "1: 2xSaI (richiede più vram)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:2
 #, fuzzy
-msgid "02: Direct FB updates"
-msgstr "Aggiornamenti del Direct FB"
+msgid "4444 - Fast, but less colorful"
+msgstr "1: 4444, veloce, ma meno colorito"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:3
 #, fuzzy
-msgid "04: Black brightness (Lunar)"
-msgstr "Luminosità bassa (Lunar)"
+msgid "5551 - Nice colors, bad transparency"
+msgstr "2: 5551, colori piacevoli, cattiva trasparenza"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:4
 #, fuzzy
-msgid "08: Swap front detection"
-msgstr "Rilevamento dell'inversione frontale"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:5
-msgid "0: Emulated vram - Needs FVP"
-msgstr "0: Vram emulata, richiede FVP"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:6
-msgid "0: Emulated vram - ok most times"
-msgstr "0: Vram emulata, funziona quasi sempre bene"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:7
-msgid "0: None"
-msgstr "0: Nessuno"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:8
-msgid "0: None (standard)"
-msgstr "0: Nessuno (standard)"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:9
-msgid "0: None - Fastest, most glitches"
-msgstr "0: Nessuno, velocissimo, più disturbi"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:10
-msgid "0: don't care - Use driver's default textures"
-msgstr "0: non se ne preoccupa, usa le strutture di default del driver"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:11
-#, fuzzy
-msgid "10000: unused"
-msgstr "Inutilizzato"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:12
-#, fuzzy
-msgid "1000: Odd/even hack"
-msgstr "Hack del dispari/pari"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:13
-#, fuzzy
-msgid "100: Old frame skipping"
-msgstr "Vecchio salto del frame"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:14
-#, fuzzy
-msgid "10: Disable coord check"
-msgstr "Disabilita il controllo della coordinata"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:15
-msgid "1: 2xSaI (much vram needed)"
-msgstr "1: 2xSaI (richiede più vram)"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:16
-msgid "1: 4444 - Fast, but less colorful"
-msgstr "1: 4444, veloce, ma meno colorito"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:17
-msgid "1: Black - Fast, no effects"
-msgstr "1: Nero, veloce, nessun effetto"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:18
-msgid "1: Gfx card buffer reads"
-msgstr "1: Legge il buffer Gfx della scheda"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:19
-msgid "1: Minimum - Missing screens"
-msgstr "1: Minimo, schermi mancanti"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:20
-msgid "1: Standard - Glitches will happen"
-msgstr "1: Standard, si verificheranno dei disturbi"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:21
-#, fuzzy
-msgid "20000: fake 'gpu busy'"
-msgstr "Simula lo stato di 'gpu occupata'"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:22
-#, fuzzy
-msgid "2000: Adjust screen width"
-msgstr "Aggiusta la larghezza dello schermo"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:23
-#, fuzzy
-msgid "200: Yellow rect (FF9)"
-msgstr "Rettangolo giallo (Final Fantasy 9)"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:24
-#, fuzzy
-msgid "20: No blue glitches (LoD)"
-msgstr "Senza spurie blu (Legend of Dragoon)"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:25
-msgid "2: 5551 - Nice colors, bad transparency"
-msgstr "2: 5551, colori piacevoli, cattiva trasparenza"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:26
-msgid "2: Extended - No black borders"
-msgstr "2: Esteso, senza bordi neri"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:27
-msgid "2: Gfx card buffer - Can be slow"
-msgstr "2: Gfx card buffer, può essere lento"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:28
-msgid "2: Gfx card buffer moves"
-msgstr "2: Sposta il buffer Gfx della scheda"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:29
-msgid "2: Scaled (needs tex filtering)"
-msgstr "2: Scalato (necessita del filtraggio della struttura)"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:30
-msgid "2: Standard - OK for most games"
-msgstr "2: Standard, va bene per la maggior parte dei giochi"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:31
-msgid "3: 8888 - Best colors, more ram needed"
+msgid "8888 - Best colors, more ram needed"
 msgstr "3: 8888, colori migliori, richiede più ram"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:32
-msgid "3: Enhanced - Shows more stuff"
-msgstr "3: Migliorato, visualizza più cose"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:33
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:5
 #, fuzzy
-msgid "3: Gfx buffer reads "
-msgstr "3: Legge e sposta il buffer Gfx"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:34
-#, fuzzy
-msgid "3: Gfx card "
-msgstr "3: Gfx card e soft, lento"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:35
-msgid "3: Standard without sprites - unfiltered 2D"
-msgstr "3: Standard senza immagini, 2D non filtrato"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:36
-#, fuzzy
-msgid "4000: Old texture filtering"
-msgstr "Filtraggio della struttura vecchia"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:37
-#, fuzzy
-msgid "400: No subtr. blending"
-msgstr "Senza sottrazione nella fusione"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:38
-#, fuzzy
-msgid "40: Soft FB access"
-msgstr "Accesso al FB via software"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
-msgid "4: BGR8888 - Faster on some cards"
-msgstr "4: BGR8888, velocissimo su alcune schede"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:40
-msgid "4: Extended - Causing garbage"
-msgstr "4: Esteso, produce risultati poco apprezzabili"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:41
-msgid "4: Extended without sprites - unfiltered 2D"
-msgstr "4: Esteso senza immagini, 2D non filtrato"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:42
-msgid "4: Full Software (FVP)"
-msgstr "4: Software completo (FVP)"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:43
-msgid "5: Standard + smoothed sprites"
-msgstr "5: Standard + immagini uniformi"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:44
-msgid "6: Extended + smoothed sprites"
-msgstr "6: Esteso + immagini uniformi"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:45
-#, fuzzy
-msgid "8000: Additional uploads"
+msgid "Additional uploads"
 msgstr "Invio di dati addizionali"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:46
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:6
 #, fuzzy
-msgid "800: Lazy upload (DW7)"
-msgstr "Upload pigro (Dragon Warrior 7)"
+msgid "Adjust screen width"
+msgstr "Aggiusta la larghezza dello schermo"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:47
-#, fuzzy
-msgid "80: PC fps calculation"
-msgstr "Calcolo degli fps del PC"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:48
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:7
 msgid "Advanced blending (Accurate psx color emulation)"
 msgstr "Mescolamento avanzato (emulazione accurata del colore della psx)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:49
-msgid "Alpha Multipass (correct opaque texture areas)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:8
+#, fuzzy
+msgid "Alpha multipass (Correct opaque texture areas)"
 msgstr "Alpha Multipass (corregge le aree opache della struttura)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:50
-#, fuzzy
-msgid "Blending (0..255,-1=dot):"
-msgstr "Fusione (0..255, -1=punto):"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:9
+msgid "Auto configure for beautiful display"
+msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:51
-#, fuzzy
-msgid "Coded by: Pete Bernert"
-msgstr "Pete Bernert"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:10
+msgid "Autoconfigure for fast display"
+msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:52
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:11
+#, fuzzy
+msgid "BGR8888 - Faster on some cards"
+msgstr "4: BGR8888, velocissimo su alcune schede"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:12
+#, fuzzy
+msgid "Battle cursor (FF7)"
+msgstr "Cursore della battaglia (Final Fantasy 7)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:13
+msgid "Beautiful"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:14
+#, fuzzy
+msgid "Black - Fast, no effects"
+msgstr "1: Nero, veloce, nessun effetto"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:15
+#, fuzzy
+msgid "Black brightness (Lunar)"
+msgstr "Luminosità bassa (Lunar)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:16
 msgid "Compatibility"
 msgstr "Compatibilità"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:53
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:17
+#, fuzzy
+msgid "Direct FB updates"
+msgstr "Aggiornamenti del Direct FB"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:18
+#, fuzzy
+msgid "Disable coord check"
+msgstr "Disabilita il controllo della coordinata"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:19
 msgid "Dithering"
 msgstr "Retinatura"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:54
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:20
+#, fuzzy
+msgid "Don't care - Use driver's default textures"
+msgstr "0: non se ne preoccupa, usa le strutture di default del driver"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:21
+#, fuzzy
+msgid "Emulated VRam - Needs FVP"
+msgstr "0: Vram emulata, richiede FVP"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:22
+#, fuzzy
+msgid "Emulated VRam - Ok most times"
+msgstr "0: Vram emulata, funziona quasi sempre bene"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:23
+#, fuzzy
+msgid "Enhanced - Shows more stuff"
+msgstr "3: Migliorato, visualizza più cose"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:24
+#, fuzzy
+msgid "Extended + smoothed sprites"
+msgstr "6: Esteso + immagini uniformi"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:25
+#, fuzzy
+msgid "Extended - Causing garbage"
+msgstr "4: Esteso, produce risultati poco apprezzabili"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:26
+#, fuzzy
+msgid "Extended - No black borders"
+msgstr "2: Esteso, senza bordi neri"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:27
+#, fuzzy
+msgid "Extended without sprites - Unfiltered 2D"
+msgstr "4: Esteso senza immagini, 2D non filtrato"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:28
 msgid "FPS"
 msgstr "FPS"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:55
-msgid "FPS limit auto-detection"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:29
+#, fuzzy
+msgid "FPS limit auto-detector"
 msgstr "Autorilevamento del limite degli FPS"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:56
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:30
 msgid "FPS limit manual"
 msgstr "Limite manuale degli FPS"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:57
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:31
+#, fuzzy
+msgid "Fake 'GPU busy'"
+msgstr "Simula lo stato di 'gpu occupata'"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:32
+#, fuzzy
+msgid "Fast"
+msgstr "Incolla"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:33
 msgid "Filtering:"
 msgstr "Filtraggio:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:58
-msgid "Force 15 bit framebuffer updates (faster movies)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:34
+#, fuzzy
+msgid "Force 15 bit framebuffer updates (Faster movies)"
 msgstr "Forza a 15 bit gli aggiornamenti del framebuffer (filmati velocissimi)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:59
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:35
 msgid "Framebuffer access:"
 msgstr "Accesso del framebuffer:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:36
 msgid "Framebuffer textures:"
 msgstr "Strutture del framebuffer:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:61
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:37
 msgid "Framerate"
 msgstr "Framerate"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:38
+#, fuzzy
+msgid "Full Software (FVP)"
+msgstr "4: Software completo (FVP)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:40
+msgid "Gfx card and soft - Slow"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:41
+#, fuzzy
+msgid "Gfx card buffer - Can be slow"
+msgstr "2: Gfx card buffer, può essere lento"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:42
+#, fuzzy
+msgid "Gfx card buffer moves"
+msgstr "2: Sposta il buffer Gfx della scheda"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:43
+#, fuzzy
+msgid "Gfx card buffer reads"
+msgstr "1: Legge il buffer Gfx della scheda"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:44
+#, fuzzy
+msgid "Gfx card buffer reads and moves"
+msgstr "1: Legge il buffer Gfx della scheda"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:45
 msgid "Height:"
 msgstr "Altezza:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:64
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:46
 msgid "HiRes Tex:"
 msgstr "Struttura ad alta risoluzione:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:65
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:47
 msgid "Keep psx aspect ratio"
 msgstr "Mantiene la proporzione dell'aspetto della psx"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:66
-msgid "Line mode (polygons will not get filled)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:48
+#, fuzzy
+msgid "Lazy upload (DW7)"
+msgstr "Upload pigro (Dragon Warrior 7)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:49
+#, fuzzy
+msgid "Line mode (Polygons will not get filled)"
 msgstr "Modalità linea (i poligoni non saranno riempiti)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:67
-msgid "Mask bit detection (needed by a few games, zbuffer)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:50
+#, fuzzy
+msgid "Mask bit detection (Needed by a few games, zbuffer)"
 msgstr "Rilevazione del bit mask (richiesto da pochi giochi, zbuffer)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:68
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:51
+#, fuzzy
+msgid "Minimum - Missing screens"
+msgstr "1: Minimo, schermi mancanti"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:52
 msgid "Misc"
 msgstr "Varie"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:69
-msgid "Offscreen Drawing:"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:53
+#, fuzzy
+msgid "No blue glitches (LoD)"
+msgstr "Senza spurie blu (Legend of Dragoon)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:54
+#, fuzzy
+msgid "No subtr. blending"
+msgstr "Senza sottrazione nella fusione"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:56
+#, fuzzy
+msgid "None (Standard)"
+msgstr "0: Nessuno (standard)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:57
+#, fuzzy
+msgid "None - Fastest, most glitches"
+msgstr "0: Nessuno, velocissimo, più disturbi"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:58
+#, fuzzy
+msgid "Odd/even hack"
+msgstr "Hack del bit dispari/pari"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:59
+#, fuzzy
+msgid "Offscreen drawing:"
 msgstr "Disegno fuori schermo:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:70
-msgid "P.E.Op.S. MesaGL PSX GPU configuration..."
-msgstr ""
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:61
+#, fuzzy
+msgid "Old texture filtering"
+msgstr "Filtraggio della struttura vecchia"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:71
-msgid "Polygon anti-aliasing (slow with most cards)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:62
+msgid "OpenGL Driver configuration"
+msgstr "Configurazione del driver OpenGL"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:64
+#, fuzzy
+msgid "Polygon anti-aliasing (Slow with most cards)"
 msgstr "Poligono anti-aliasing (lento con la maggior parte delle schede)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:72
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:65
 msgid "Quality:"
 msgstr "Qualità"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:73
-msgid "Release date: 01.04.2009"
-msgstr ""
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:66
+#, fuzzy
+msgid "Scaled (Needs tex filtering)"
+msgstr "2: Scalato (necessita del filtraggio della struttura)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:74
-msgid "Scanlines"
-msgstr "Scanlines"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:67
+#, fuzzy
+msgid "Scanlines Blending (0..255, -1=dot):"
+msgstr "Fusione (0..255, -1=punto):"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:75
-msgid "Screen smoothing (can be slow or unsupported)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:68
+#, fuzzy
+msgid "Screen smoothing (Can be slow or unsupported)"
 msgstr "Schermo uniforme (può essere lento o non supportato)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:76
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:69
 msgid "Show FPS display on startup"
 msgstr "Visualizza gli FPS all'avvio"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:77
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:70
+#, fuzzy
+msgid "Soft FB access"
+msgstr "Accesso al FB via software"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:71
 msgid "Special game fixes"
 msgstr "Attiva il gioco speciale"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:78
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:72
+#, fuzzy
+msgid "Standard + smoothed sprites"
+msgstr "5: Standard + immagini uniformi"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:73
+#, fuzzy
+msgid "Standard - Glitches will happen"
+msgstr "1: Standard, si verificheranno dei disturbi"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:74
+#, fuzzy
+msgid "Standard - OK for most games"
+msgstr "2: Standard, va bene per la maggior parte dei giochi"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:75
+#, fuzzy
+msgid "Standard without sprites - Unfiltered 2D"
+msgstr "3: Standard senza immagini, 2D non filtrato"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:76
+#, fuzzy
+msgid "Swap front detection"
+msgstr "Rilevamento dell'inversione frontale"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:77
 msgid "Textures"
 msgstr "Strutture"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:79
-msgid "Unfiltered MDECs (small movie speedup)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:78
+#, fuzzy
+msgid "Unfiltered MDECs (Small movie speedup)"
 msgstr "MDECs non filtrati (basso guadagno di velocità nei filmati)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:79
+#, fuzzy
+msgid "Unused"
+msgstr "Usato"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:80
 msgid "Use FPS limit"
@@ -2361,7 +2383,8 @@ msgid "Use Frame skipping"
 msgstr "Usa il salto dei frame"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:82
-msgid "Use OpenGL extensions (recommended)"
+#, fuzzy
+msgid "Use OpenGL extensions (Recommended)"
 msgstr "Usa le estensioni OpenGL (consigliato)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:84
@@ -2378,8 +2401,8 @@ msgstr "Opzioni della finestra"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:87
 #, fuzzy
-msgid "http://www.pbernert.com"
-msgstr "Homepage: http://www.pbernert.com"
+msgid "Yellow rect (FF9)"
+msgstr "Rettangolo giallo (Final Fantasy 9)"
 
 #. ****************************************************************************
 #: ../plugins/bladesio1/sio1.c:29
@@ -3214,11 +3237,50 @@ msgstr "Messaggio di pcsx"
 msgid "Error Loading Symbol"
 msgstr "Si è verificato un errore durante il caricamento del simbolo"
 
+#~ msgid "0: None"
+#~ msgstr "0: Nessuno"
+
+#, fuzzy
+#~ msgid "10000: unused"
+#~ msgstr "Inutilizzato"
+
+#, fuzzy
+#~ msgid "1000: Odd/even hack"
+#~ msgstr "Hack del dispari/pari"
+
+#, fuzzy
+#~ msgid "100: Old frame skipping"
+#~ msgstr "Vecchio salto del frame"
+
+#, fuzzy
+#~ msgid "20000: fake 'gpu busy'"
+#~ msgstr "Simula lo stato di 'gpu occupata'"
+
+#, fuzzy
+#~ msgid "3: Gfx buffer reads "
+#~ msgstr "3: Legge e sposta il buffer Gfx"
+
+#, fuzzy
+#~ msgid "3: Gfx card "
+#~ msgstr "3: Gfx card e soft, lento"
+
+#, fuzzy
+#~ msgid "80: PC fps calculation"
+#~ msgstr "Calcolo degli fps del PC"
+
+#, fuzzy
+#~ msgid "Coded by: Pete Bernert"
+#~ msgstr "Pete Bernert"
+
+#~ msgid "Scanlines"
+#~ msgstr "Scanlines"
+
+#, fuzzy
+#~ msgid "http://www.pbernert.com"
+#~ msgstr "Homepage: http://www.pbernert.com"
+
 #~ msgid "COFF files not supported.\n"
 #~ msgstr "File COFF non supportato.\n"
-
-#~ msgid "OpenGL Driver configuration"
-#~ msgstr "Configurazione del driver OpenGL"
 
 #~ msgid "Adapted from P.E.Op.S OpenGL GPU by Pete Bernert"
 #~ msgstr "Adattato da P.E.Op.S OpenGL GPU da Pete Bernert"

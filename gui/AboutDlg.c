@@ -19,10 +19,6 @@
 #include "Linux.h"
 #include <gtk/gtk.h>
 
-#if GTK_MAJOR_VERSION <= 2 && GTK_MINOR_VERSION < 12
-#define gtk_about_dialog_set_program_name gtk_about_dialog_set_name
-#endif
-
 #define ABOUT_VERSION "svn"
 
 void RunAboutDialog(void) {

@@ -276,7 +276,7 @@ extern unsigned long  spuAddr;
 extern int      bEndThread;
 extern int      bThreadEnded;
 extern int      bSpuInit;
-extern unsigned long dwNewChannel;
+extern uint32_t dwNewChannel;
 
 extern int      SSumR[];
 extern int      SSumL[];

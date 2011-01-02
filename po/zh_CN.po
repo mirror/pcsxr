@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
-"Report-Msgid-Bugs-To: schultz.ryan@gmail.com\n"
-"POT-Creation-Date: 2010-12-29 23:29+0800\n"
-"PO-Revision-Date: 2010-12-29 23:30+0700\n"
+"Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
+"POT-Creation-Date: 2011-01-02 13:15+0800\n"
+"PO-Revision-Date: 2011-01-02 13:16+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
 "MIME-Version: 1.0\n"
@@ -507,7 +507,7 @@ msgstr "声音(_S)..."
 msgid "label_resultsfound"
 msgstr "label_resultsfound"
 
-#: ../gui/AboutDlg.c:76
+#: ../gui/AboutDlg.c:72
 msgid ""
 "(C) 1999-2003 PCSX Team\n"
 "(C) 2005-2009 PCSX-df Team\n"
@@ -517,7 +517,7 @@ msgstr ""
 "(C) 2005-2009 PCSX-df 开发组\n"
 "(C) 2009-2010 PCSX-Reloaded 开发组"
 
-#: ../gui/AboutDlg.c:81
+#: ../gui/AboutDlg.c:77
 msgid ""
 "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.\n"
 "\n"
@@ -531,11 +531,11 @@ msgstr ""
 "\n"
 "You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
 
-#: ../gui/AboutDlg.c:104
+#: ../gui/AboutDlg.c:100
 msgid "translator-credits"
 msgstr "Wei Mingzhi <whistler@openoffice.org>"
 
-#: ../gui/AboutDlg.c:105
+#: ../gui/AboutDlg.c:101
 msgid "A PlayStation emulator."
 msgstr "一个 PlayStation 模拟器。"
 
@@ -1507,6 +1507,7 @@ msgid "(Not Set)"
 msgstr "(未设定)"
 
 #: ../plugins/dfinput/cfg-gtk2.c:559
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:55
 msgid "None"
 msgstr "无"
 
@@ -1941,7 +1942,7 @@ msgid "For precise framerate"
 msgstr "精确帧率"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:39
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:62
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
 msgid "Fullscreen"
 msgstr "全屏"
 
@@ -1970,10 +1971,12 @@ msgid "Odd/even bit hack"
 msgstr "奇/偶位 hack"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:46
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
 msgid "Old frame skipping"
 msgstr "旧的跳帧方式"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:47
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
 msgid "PC FPS calculation"
 msgstr "PC FPS 计算"
 
@@ -2043,316 +2046,304 @@ msgstr ""
 "作者: Pete Bernert\n"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:1
-msgid "01: Battle cursor (FF7)"
-msgstr "01: 战斗光标 (FF7)"
+msgid "2xSaI (Much vram needed)"
+msgstr "2xSaI (需较多显存)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:2
-msgid "02: Direct FB updates"
-msgstr "02: 直接 FB 更新"
+msgid "4444 - Fast, but less colorful"
+msgstr "4444 - 较快，较少颜色"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:3
-msgid "04: Black brightness (Lunar)"
-msgstr "04: 黑色亮度 (Lunar)"
+msgid "5551 - Nice colors, bad transparency"
+msgstr "5551 - 较好的颜色，较差的透明效果"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:4
-msgid "08: Swap front detection"
-msgstr "08: Swap front 检测"
+msgid "8888 - Best colors, more ram needed"
+msgstr "8888 - 最佳的颜色，需更多内存"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:5
-msgid "0: Emulated vram - Needs FVP"
-msgstr "0: 模拟 vram - 需 FVP"
+msgid "Additional uploads"
+msgstr "附加上传"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:6
-msgid "0: Emulated vram - ok most times"
-msgstr "0: 模拟 vram - 大多数情况运行良好"
+msgid "Adjust screen width"
+msgstr "调整屏幕宽度"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:7
-msgid "0: None"
-msgstr "0: 无"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:8
-msgid "0: None (standard)"
-msgstr "0: 无 (标准)"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:9
-msgid "0: None - Fastest, most glitches"
-msgstr "0: 无 - 最快，问题较多"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:10
-msgid "0: don't care - Use driver's default textures"
-msgstr "0: 使用驱动程序的默认纹理"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:11
-msgid "10000: unused"
-msgstr "10000: 未使用"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:12
-msgid "1000: Odd/even hack"
-msgstr "1000: 奇/偶位 hack"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:13
-msgid "100: Old frame skipping"
-msgstr "100: 旧的跳帧方式"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:14
-msgid "10: Disable coord check"
-msgstr "10: 禁用坐标检查"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:15
-msgid "1: 2xSaI (much vram needed)"
-msgstr "1: 2xSaI (需较多显存)"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:16
-msgid "1: 4444 - Fast, but less colorful"
-msgstr "1: 4444 - 较快，较少颜色"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:17
-msgid "1: Black - Fast, no effects"
-msgstr "1: 黑色 - 快，无特效"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:18
-msgid "1: Gfx card buffer reads"
-msgstr "1: Gfx 卡缓存读取"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:19
-msgid "1: Minimum - Missing screens"
-msgstr "1: 最小 - 丢失屏幕元素"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:20
-msgid "1: Standard - Glitches will happen"
-msgstr "1: 标准 - 可能会发生问题"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:21
-msgid "20000: fake 'gpu busy'"
-msgstr "20000: 欺骗 'gpu 忙' 状态"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:22
-msgid "2000: Adjust screen width"
-msgstr "2000: 调整屏幕宽度"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:23
-msgid "200: Yellow rect (FF9)"
-msgstr "200: 黄色方块 (FF9)"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:24
-msgid "20: No blue glitches (LoD)"
-msgstr "20: 去除蓝色干扰 (LoD)"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:25
-msgid "2: 5551 - Nice colors, bad transparency"
-msgstr "2: 5551 - 较好的颜色，较差的透明效果"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:26
-msgid "2: Extended - No black borders"
-msgstr "2: 增强 - 去除黑框"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:27
-msgid "2: Gfx card buffer - Can be slow"
-msgstr "2: Gfx 卡缓存 - 可能较慢"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:28
-msgid "2: Gfx card buffer moves"
-msgstr "2: Gfx 卡缓存移动"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:29
-msgid "2: Scaled (needs tex filtering)"
-msgstr "2: 拉伸 (需要纹理过滤)"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:30
-msgid "2: Standard - OK for most games"
-msgstr "2: 标准 - 大多数游戏运行良好"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:31
-msgid "3: 8888 - Best colors, more ram needed"
-msgstr "3: 8888 - 最佳的颜色，需更多内存"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:32
-msgid "3: Enhanced - Shows more stuff"
-msgstr "3: 增强 - 显示更多的东西"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:33
-msgid "3: Gfx buffer reads "
-msgstr "3: Gfx 缓存读取"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:34
-msgid "3: Gfx card "
-msgstr "3: Gfx 卡"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:35
-msgid "3: Standard without sprites - unfiltered 2D"
-msgstr "3: 标准，不含贴图 - 未过滤的 2D"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:36
-msgid "4000: Old texture filtering"
-msgstr "4000: 旧的纹理过滤"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:37
-msgid "400: No subtr. blending"
-msgstr "400: 无 subtr. 混合"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:38
-msgid "40: Soft FB access"
-msgstr "40: 软件 FB 访问"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
-msgid "4: BGR8888 - Faster on some cards"
-msgstr "4: BGR8888 - 某些显卡较快"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:40
-msgid "4: Extended - Causing garbage"
-msgstr "4: 增强 - 可能导致错误"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:41
-msgid "4: Extended without sprites - unfiltered 2D"
-msgstr "4: 增强，不含贴图 - 未过滤的 2D"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:42
-msgid "4: Full Software (FVP)"
-msgstr "4: 纯软件 (FVP)"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:43
-msgid "5: Standard + smoothed sprites"
-msgstr "5: 标准 + 平滑贴图"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:44
-msgid "6: Extended + smoothed sprites"
-msgstr "6: 增强 + 平滑贴图"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:45
-msgid "8000: Additional uploads"
-msgstr "8000: 附加上传"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:46
-msgid "800: Lazy upload (DW7)"
-msgstr "800: 懒惰上传 (DW7)"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:47
-msgid "80: PC fps calculation"
-msgstr "80: PC FPS 计算"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:48
 msgid "Advanced blending (Accurate psx color emulation)"
 msgstr "高级混合 (精确的 psx 色彩模拟)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:49
-msgid "Alpha Multipass (correct opaque texture areas)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:8
+msgid "Alpha multipass (Correct opaque texture areas)"
 msgstr "半透明多通道 (更正不透明的纹理区域)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:50
-msgid "Blending (0..255,-1=dot):"
-msgstr "混合 (0..255, -1=点阵):"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:9
+msgid "Auto configure for beautiful display"
+msgstr "自动配置为最佳外观"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:51
-msgid "Coded by: Pete Bernert"
-msgstr "编写者: Pete Bernert"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:10
+msgid "Autoconfigure for fast display"
+msgstr "自动配置为最佳性能"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:52
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:11
+msgid "BGR8888 - Faster on some cards"
+msgstr "BGR8888 - 某些显卡较快"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:12
+msgid "Battle cursor (FF7)"
+msgstr "战斗光标 (FF7)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:13
+msgid "Beautiful"
+msgstr "最佳外观"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:14
+msgid "Black - Fast, no effects"
+msgstr "黑色 - 快，无特效"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:15
+msgid "Black brightness (Lunar)"
+msgstr "黑色亮度 (Lunar)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:16
 msgid "Compatibility"
 msgstr "兼容性"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:53
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:17
+msgid "Direct FB updates"
+msgstr "直接 FB 更新"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:18
+msgid "Disable coord check"
+msgstr "禁用坐标检查"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:19
 msgid "Dithering"
 msgstr "抖动"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:54
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:20
+msgid "Don't care - Use driver's default textures"
+msgstr "使用驱动程序的默认纹理"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:21
+msgid "Emulated VRam - Needs FVP"
+msgstr "模拟 vram - 需 FVP"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:22
+msgid "Emulated VRam - Ok most times"
+msgstr "模拟 vram - 大多数情况运行良好"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:23
+msgid "Enhanced - Shows more stuff"
+msgstr "增强 - 显示更多的东西"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:24
+msgid "Extended + smoothed sprites"
+msgstr "增强 + 平滑贴图"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:25
+msgid "Extended - Causing garbage"
+msgstr "增强 - 可能导致错误"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:26
+msgid "Extended - No black borders"
+msgstr "增强 - 去除黑框"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:27
+msgid "Extended without sprites - Unfiltered 2D"
+msgstr "增强，不含贴图 - 未过滤的 2D"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:28
 msgid "FPS"
 msgstr "FPS"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:55
-msgid "FPS limit auto-detection"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:29
+msgid "FPS limit auto-detector"
 msgstr "FPS 界限自动检测"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:56
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:30
 msgid "FPS limit manual"
 msgstr "手动设置 FPS 界限"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:57
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:31
+msgid "Fake 'GPU busy'"
+msgstr "欺骗 'gpu 忙' 状态"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:32
+msgid "Fast"
+msgstr "最佳速度"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:33
 msgid "Filtering:"
 msgstr "过滤:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:58
-msgid "Force 15 bit framebuffer updates (faster movies)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:34
+msgid "Force 15 bit framebuffer updates (Faster movies)"
 msgstr "强制 15 位帧缓冲更新 (影片较快)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:59
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:35
 msgid "Framebuffer access:"
 msgstr "帧缓冲访问:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:36
 msgid "Framebuffer textures:"
 msgstr "帧缓冲纹理:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:61
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:37
 msgid "Framerate"
 msgstr "帧率"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:38
+msgid "Full Software (FVP)"
+msgstr "纯软件 (FVP)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:40
+msgid "Gfx card and soft - Slow"
+msgstr "Gfx 卡及软件 - 慢"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:41
+msgid "Gfx card buffer - Can be slow"
+msgstr "Gfx 卡缓存 - 可能较慢"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:42
+msgid "Gfx card buffer moves"
+msgstr "Gfx 卡缓存移动"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:43
+msgid "Gfx card buffer reads"
+msgstr "Gfx 卡缓存读取"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:44
+msgid "Gfx card buffer reads and moves"
+msgstr "Gfx 卡缓存读取及移动"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:45
 msgid "Height:"
 msgstr "高度"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:64
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:46
 msgid "HiRes Tex:"
 msgstr "高分纹理:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:65
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:47
 msgid "Keep psx aspect ratio"
 msgstr "保持 psx 纵横比"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:66
-msgid "Line mode (polygons will not get filled)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:48
+msgid "Lazy upload (DW7)"
+msgstr "懒惰上传 (DW7)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:49
+msgid "Line mode (Polygons will not get filled)"
 msgstr "框架模式 (不填充多边形)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:67
-msgid "Mask bit detection (needed by a few games, zbuffer)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:50
+msgid "Mask bit detection (Needed by a few games, zbuffer)"
 msgstr "屏蔽位检测 (某些游戏需要)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:68
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:51
+msgid "Minimum - Missing screens"
+msgstr "最小 - 丢失屏幕元素"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:52
 msgid "Misc"
 msgstr "杂项"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:69
-msgid "Offscreen Drawing:"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:53
+msgid "No blue glitches (LoD)"
+msgstr "去除蓝色干扰 (LoD)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:54
+msgid "No subtr. blending"
+msgstr "无 subtr. 混合"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:56
+msgid "None (Standard)"
+msgstr "无 (标准)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:57
+msgid "None - Fastest, most glitches"
+msgstr "无 - 最快，问题较多"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:58
+msgid "Odd/even hack"
+msgstr "奇/偶位 hack"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:59
+msgid "Offscreen drawing:"
 msgstr "离屏描绘:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:70
-msgid "P.E.Op.S. MesaGL PSX GPU configuration..."
-msgstr "P.E.Op.S MesaGL PSX GPU 配置..."
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:61
+msgid "Old texture filtering"
+msgstr "旧的纹理过滤"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:71
-msgid "Polygon anti-aliasing (slow with most cards)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:62
+msgid "OpenGL Driver configuration"
+msgstr "OpenGL 驱动程序配置"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:64
+msgid "Polygon anti-aliasing (Slow with most cards)"
 msgstr "多边形抗锯齿 (对大多数显卡较慢)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:72
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:65
 msgid "Quality:"
 msgstr "质量:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:73
-msgid "Release date: 01.04.2009"
-msgstr "发布日期: 01.04.2009"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:66
+msgid "Scaled (Needs tex filtering)"
+msgstr "拉伸 (需要纹理过滤)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:74
-msgid "Scanlines"
-msgstr "扫描线"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:67
+msgid "Scanlines Blending (0..255, -1=dot):"
+msgstr "混合 (0..255, -1=点阵):"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:75
-msgid "Screen smoothing (can be slow or unsupported)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:68
+msgid "Screen smoothing (Can be slow or unsupported)"
 msgstr "屏幕平滑 (可能较慢或不被支持)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:76
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:69
 msgid "Show FPS display on startup"
 msgstr "启动时显示 FPS"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:77
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:70
+msgid "Soft FB access"
+msgstr "软件 FB 访问"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:71
 msgid "Special game fixes"
 msgstr "特定游戏修正"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:78
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:72
+msgid "Standard + smoothed sprites"
+msgstr "标准 + 平滑贴图"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:73
+msgid "Standard - Glitches will happen"
+msgstr "标准 - 可能会发生问题"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:74
+msgid "Standard - OK for most games"
+msgstr "标准 - 大多数游戏运行良好"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:75
+msgid "Standard without sprites - Unfiltered 2D"
+msgstr "标准，不含贴图 - 未过滤的 2D"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:76
+msgid "Swap front detection"
+msgstr "Swap front 检测"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:77
 msgid "Textures"
 msgstr "纹理"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:79
-msgid "Unfiltered MDECs (small movie speedup)"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:78
+msgid "Unfiltered MDECs (Small movie speedup)"
 msgstr "非过滤 MDEC (微小的影片加速)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:79
+msgid "Unused"
+msgstr "未使用"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:80
 msgid "Use FPS limit"
@@ -2363,7 +2354,7 @@ msgid "Use Frame skipping"
 msgstr "启用跳帧"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:82
-msgid "Use OpenGL extensions (recommended)"
+msgid "Use OpenGL extensions (Recommended)"
 msgstr "使用 OpenGL 扩展 (推荐)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:84
@@ -2379,8 +2370,8 @@ msgid "Window options"
 msgstr "窗口选项"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:87
-msgid "http://www.pbernert.com"
-msgstr "http://www.pbernert.com"
+msgid "Yellow rect (FF9)"
+msgstr "黄色方块 (FF9)"
 
 #. ****************************************************************************
 #: ../plugins/bladesio1/sio1.c:29
@@ -3250,10 +3241,34 @@ msgstr "PCSX 消息"
 msgid "Error Loading Symbol"
 msgstr "无法加载符号"
 
+#~ msgid "0: None"
+#~ msgstr "0: 无"
+#~ msgid "10000: unused"
+#~ msgstr "10000: 未使用"
+#~ msgid "1000: Odd/even hack"
+#~ msgstr "1000: 奇/偶位 hack"
+#~ msgid "100: Old frame skipping"
+#~ msgstr "100: 旧的跳帧方式"
+#~ msgid "20000: fake 'gpu busy'"
+#~ msgstr "20000: 欺骗 'gpu 忙' 状态"
+#~ msgid "3: Gfx buffer reads "
+#~ msgstr "3: Gfx 缓存读取"
+#~ msgid "3: Gfx card "
+#~ msgstr "3: Gfx 卡"
+#~ msgid "80: PC fps calculation"
+#~ msgstr "80: PC FPS 计算"
+#~ msgid "Coded by: Pete Bernert"
+#~ msgstr "编写者: Pete Bernert"
+#~ msgid "P.E.Op.S. MesaGL PSX GPU configuration..."
+#~ msgstr "P.E.Op.S MesaGL PSX GPU 配置..."
+#~ msgid "Release date: 01.04.2009"
+#~ msgstr "发布日期: 01.04.2009"
+#~ msgid "Scanlines"
+#~ msgstr "扫描线"
+#~ msgid "http://www.pbernert.com"
+#~ msgstr "http://www.pbernert.com"
 #~ msgid "COFF files not supported.\n"
 #~ msgstr "COFF 文件尚未支持。\n"
-#~ msgid "OpenGL Driver configuration"
-#~ msgstr "OpenGL 驱动程序配置"
 #~ msgid "Adapted from P.E.Op.S OpenGL GPU by Pete Bernert"
 #~ msgstr "基于 Pete Bernert 的 P.E.Op.S OpenGL GPU"
 #~ msgid "Version: 1.78"
