@@ -859,7 +859,7 @@ void cdrPlayInterrupt()
 	if (Config.Cdda) memset( cdr.Transfer, 0, CD_FRAMESIZE_RAW );
 
 
-	if( cdr.Play )
+	if( cdr.Play && SPU_playCDDAchannel)
 		SPU_playCDDAchannel((short *)cdr.Transfer, CD_FRAMESIZE_RAW);
 
 	CDRPLAY_INT( cdReadTime );
