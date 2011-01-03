@@ -288,9 +288,11 @@ int _OpenPlugins(HWND hWnd) {
 	ret = PAD1_open(hWnd);
 	if (ret < 0) { SysMessage (_("Error Opening PAD1 Plugin (%d)"), ret); return -1; }
     PAD1_registerVibration(GPU_visualVibration);
+    PAD1_registerCursor(GPU_cursor);
 	ret = PAD2_open(hWnd);
 	if (ret < 0) { SysMessage (_("Error Opening PAD2 Plugin (%d)"), ret); return -1; }
     PAD2_registerVibration(GPU_visualVibration);
+    PAD2_registerCursor(GPU_cursor);
 
 	SetCurrentDirectory(PcsxDir);
 	ShowCursor(FALSE);

@@ -53,6 +53,7 @@ GPUvBlank             GPU_vBlank;
 GPUregisterCallback   GPU_registerCallback;
 GPUidle               GPU_idle;
 GPUvisualVibration    GPU_visualVibration;
+GPUcursor             GPU_cursor;
 
 CDRinit               CDR_init;
 CDRshutdown           CDR_shutdown;
@@ -108,6 +109,7 @@ PADstartPoll          PAD1_startPoll;
 PADpoll               PAD1_poll;
 PADsetSensitive       PAD1_setSensitive;
 PADregisterVibration  PAD1_registerVibration;
+PADregisterCursor     PAD1_registerCursor;
 
 PADconfigure          PAD2_configure;
 PADabout              PAD2_about;
@@ -123,6 +125,7 @@ PADstartPoll          PAD2_startPoll;
 PADpoll               PAD2_poll;
 PADsetSensitive       PAD2_setSensitive;
 PADregisterVibration  PAD2_registerVibration;
+PADregisterCursor     PAD2_registerCursor;
 
 NETinit               NET_init;
 NETshutdown           NET_shutdown;
@@ -219,6 +222,7 @@ void CALLBACK GPU__vBlank(int val) {}
 void CALLBACK GPU__registerCallback(void (CALLBACK *callback)(int)) {}
 void CALLBACK GPU__idle(void) {}
 void CALLBACK GPU__visualVibration(unsigned long iSmall, unsigned long iBig) {}
+void CALLBACK GPU__cursor(int player, int x, int y) {}
 
 #define LoadGpuSym1(dest, name) \
 	LoadSym(GPU_##dest, GPU##dest, name, TRUE);
@@ -262,6 +266,7 @@ static int LoadGPUplugin(const char *GPUdll) {
     LoadGpuSym0(registerCallback, "GPUregisterCallback");
     LoadGpuSym0(idle, "GPUidle");
     LoadGpuSym0(visualVibration, "GPUvisualVibration");
+    LoadGpuSym0(cursor, "GPUcursor");
 	LoadGpuSym0(configure, "GPUconfigure");
 	LoadGpuSym0(test, "GPUtest");
 	LoadGpuSym0(about, "GPUabout");
@@ -479,6 +484,7 @@ long CALLBACK PAD1__test(void) { return 0; }
 long CALLBACK PAD1__query(void) { return 3; }
 long CALLBACK PAD1__keypressed() { return 0; }
 void CALLBACK PAD1__registerVibration(void (CALLBACK *callback)(unsigned long, unsigned long)) {}
+void CALLBACK PAD1__registerCursor(void (CALLBACK *callback)(int, int, int)) {}
 
 #define LoadPad1Sym1(dest, name) \
 	LoadSym(PAD1_##dest, PAD##dest, name, TRUE);
@@ -513,6 +519,7 @@ static int LoadPAD1plugin(const char *PAD1dll) {
 	LoadPad1Sym0(poll, "PADpoll");
 	LoadPad1SymN(setSensitive, "PADsetSensitive");
     LoadPad1Sym0(registerVibration, "PADregisterVibration");
+    LoadPad1Sym0(registerCursor, "PADregisterCursor");
 
 	return 0;
 }
@@ -535,6 +542,7 @@ long CALLBACK PAD2__test(void) { return 0; }
 long CALLBACK PAD2__query(void) { return PSE_PAD_USE_PORT1 | PSE_PAD_USE_PORT2; }
 long CALLBACK PAD2__keypressed() { return 0; }
 void CALLBACK PAD2__registerVibration(void (CALLBACK *callback)(unsigned long, unsigned long)) {}
+void CALLBACK PAD2__registerCursor(void (CALLBACK *callback)(int, int, int)) {}
 
 #define LoadPad2Sym1(dest, name) \
 	LoadSym(PAD2_##dest, PAD##dest, name, TRUE);
@@ -569,6 +577,7 @@ static int LoadPAD2plugin(const char *PAD2dll) {
 	LoadPad2Sym0(poll, "PADpoll");
 	LoadPad2SymN(setSensitive, "PADsetSensitive");
     LoadPad2Sym0(registerVibration, "PADregisterVibration");
+    LoadPad2Sym0(registerCursor, "PADregisterCursor");
 
 	return 0;
 }

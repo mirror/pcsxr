@@ -97,6 +97,7 @@ typedef void (CALLBACK* GPUvBlank)(int);
 typedef void (CALLBACK* GPUregisterCallback)(void (CALLBACK *callback)(int));
 typedef void (CALLBACK* GPUidle)(void);
 typedef void (CALLBACK* GPUvisualVibration)(unsigned long, unsigned long);
+typedef void (CALLBACK* GPUcursor)(int, int, int);
 
 // GPU function pointers
 extern GPUupdateLace    GPU_updateLace;
@@ -125,6 +126,7 @@ extern GPUvBlank        GPU_vBlank;
 extern GPUregisterCallback GPU_registerCallback;
 extern GPUidle          GPU_idle;
 extern GPUvisualVibration GPU_visualVibration;
+extern GPUcursor        GPU_cursor;
 
 // CD-ROM Functions
 typedef long (CALLBACK* CDRinit)(void);
@@ -249,6 +251,7 @@ typedef unsigned char (CALLBACK* PADstartPoll)(int);
 typedef unsigned char (CALLBACK* PADpoll)(unsigned char);
 typedef void (CALLBACK* PADsetSensitive)(int);
 typedef void (CALLBACK* PADregisterVibration)(void (CALLBACK *callback)(unsigned long, unsigned long));
+typedef void (CALLBACK* PADregisterCursor)(void (CALLBACK *callback)(int, int, int));
 
 // PAD function pointers
 extern PADconfigure        PAD1_configure;
@@ -265,7 +268,7 @@ extern PADstartPoll        PAD1_startPoll;
 extern PADpoll             PAD1_poll;
 extern PADsetSensitive     PAD1_setSensitive;
 extern PADregisterVibration PAD1_registerVibration;
-
+extern PADregisterCursor   PAD1_registerCursor;
 extern PADconfigure        PAD2_configure;
 extern PADabout            PAD2_about;
 extern PADinit             PAD2_init;
@@ -280,6 +283,7 @@ extern PADstartPoll        PAD2_startPoll;
 extern PADpoll             PAD2_poll;
 extern PADsetSensitive     PAD2_setSensitive;
 extern PADregisterVibration PAD2_registerVibration;
+extern PADregisterCursor   PAD2_registerCursor;
 
 // NET Functions
 typedef long (CALLBACK* NETinit)(void);

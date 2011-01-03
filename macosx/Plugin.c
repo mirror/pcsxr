@@ -93,9 +93,11 @@ int _OpenPlugins() {
 	ret = PAD1_open(&gpuDisp);
 	if (ret < 0) { SysMessage(_("Error Opening PAD1 Plugin")); return -1; }
     PAD1_registerVibration(GPU_visualVibration);
+    PAD1_registerCursor(GPU_cursor);
 	ret = PAD2_open(&gpuDisp);
 	if (ret < 0) { SysMessage(_("Error Opening PAD2 Plugin")); return -1; }
     PAD2_registerVibration(GPU_visualVibration);
+    PAD2_registerCursor(GPU_cursor);
 
 	return 0;
 }
