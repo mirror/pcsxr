@@ -188,12 +188,11 @@ void CALLBACK SPUwriteRegister(unsigned long reg, unsigned short val)
     //-------------------------------------------------//
     case H_SPUctrl:
       spuCtrl=val;
+	  dwNoiseClock = (spuCtrl&0x3f00)>>8;
       break;
     //-------------------------------------------------//
     case H_SPUstat:
       spuStat=val & 0xf800;
-
-			dwNoiseClock = (spuCtrl&0x3f00)>>8;
       break;
     //-------------------------------------------------//
     case H_SPUReverbAddr:
@@ -370,7 +369,7 @@ unsigned short CALLBACK SPUreadRegister(unsigned long reg)
        if(s_chan[ch].ADSRX.lVolume &&                  // same here... we haven't decoded one sample yet, so no envelope yet. return 1 as well
           !s_chan[ch].ADSRX.EnvelopeVol)                   
         return 1;
-       return (unsigned short)(s_chan[ch].ADSRX.EnvelopeVol>>16);
+       return (unsigned short)(s_chan[ch].ADSRX.EnvelopeVol);
       }
 
      case 14:                                          // get loop address
