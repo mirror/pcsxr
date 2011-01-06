@@ -165,7 +165,7 @@ typedef struct SDXTAG
 #define max(a,b)            (((a) > (b)) ? (a) : (b))
 #define min(a,b)            (((a) < (b)) ? (a) : (b))
 #define DWORD uint32_t
-#define __int64 long long int 
+#define __int64 long long int
 
 typedef struct RECTTAG
 {
@@ -192,7 +192,7 @@ typedef struct PSXDISPLAYTAG
  PSXPoint_t  DisplayMode;
  PSXPoint_t  DisplayPosition;
  PSXPoint_t  DisplayEnd;
- 
+
  int32_t        Double;
  int32_t        Height;
  int32_t        PAL;
@@ -219,8 +219,8 @@ extern HMODULE hDDrawDLL;
 
 #ifdef _WINDOWS
 extern sDX            DX;
-extern HWND           hWGPU; 
-extern GUID           guiDev; 
+extern HWND           hWGPU;
+extern GUID           guiDev;
 extern int            iRefreshRate;
 extern BOOL           bVsync;
 extern BOOL           bVsync_Key;
@@ -325,6 +325,8 @@ extern DWORD          dwLaceCnt;
 extern uint32_t  lGPUInfoVals[];
 extern uint32_t  ulStatusControl[];
 extern uint32_t  vBlank;
+extern int            iRumbleVal;
+extern int            iRumbleTime;
 
 #endif
 

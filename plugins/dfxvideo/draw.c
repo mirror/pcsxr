@@ -1613,6 +1613,15 @@ void DoBufferSwap(void)
 	if (iMaintainAspect)
 		MaintainAspect(&dstx, &dsty, &_w, &_h);
 
+    if(iRumbleTime)
+    {
+       dstx+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2);
+       _w-=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal);
+       dsty+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2);
+       _h-=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2);
+       iRumbleTime--;
+    }
+
 	XvShmPutImage(display, xv_port, window, hGC, xvi,
 		0,0,		//src x,y
 		finalw,finalh,	//src w,h
@@ -1621,7 +1630,7 @@ void DoBufferSwap(void)
 		1
 		);
 
-	if(ulKeybits&KEY_SHOWFPS) //DisplayText();               // paint menu text
+	if(ulKeybits&KEY_SHOWFPS) //DisplayText();   c            // paint menu text
 	{
 		if(szDebugText[0] && ((time(NULL) - tStart) < 2))
 		{
