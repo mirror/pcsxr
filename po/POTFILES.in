@@ -47,13 +47,13 @@ plugins/dfcdrom/cfg.c
 plugins/dfinput/analog.c
 plugins/dfinput/cfg.c
 plugins/dfinput/cfg-gtk2.c
-[type: gettext/glade]plugins/dfinput/dfinput.glade2
+[type: gettext/glade]plugins/dfinput/dfinput.ui
 plugins/dfinput/pad.c
 plugins/dfinput/sdljoy.c
 plugins/dfinput/xkb.c
 plugins/dfnet/cfg.c
 plugins/dfnet/dfnet.c
-[type: gettext/glade]plugins/dfnet/dfnet.glade2
+[type: gettext/glade]plugins/dfnet/dfnet.ui
 plugins/dfnet/dfnet.h
 plugins/dfnet/gui.c
 plugins/dfnet/unix.c

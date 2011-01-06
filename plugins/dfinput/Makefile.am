@@ -16,6 +16,6 @@ bin_PROGRAMS = cfgDFInput
 cfgDFInput_SOURCES = cfg-gtk2.c pad.h
 cfgDFInput_LDADD = $(GTK2_LIBS) $(GLADE2_LIBS) $(SDL_LIBS) -lX11
 
-glade_DATA = dfinput.glade2
+glade_DATA = dfinput.ui
 gladedir = $(datadir)/psemu/
 EXTRA_DIST = $(glade_DATA)

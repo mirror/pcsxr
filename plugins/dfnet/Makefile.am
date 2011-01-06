@@ -15,6 +15,6 @@ bin_PROGRAMS = cfgDFNet
 cfgDFNet_SOURCES = gui.c
 cfgDFNet_LDADD = $(GTK2_LIBS) $(GLADE2_LIBS)
 
-glade_DATA = dfnet.glade2
+glade_DATA = dfnet.ui
 gladedir = $(datadir)/psemu/
 EXTRA_DIST = $(glade_DATA)

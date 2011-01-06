@@ -11,7 +11,6 @@
 
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <signal.h>
 
 #include "cfg.c"
@@ -96,48 +95,49 @@ void OnCopyIP(GtkWidget *widget, gpointer user_data) {
 }
 
 long CFGopen() {
-	GladeXML *xml;
+	GtkBuilder *builder;
 	GtkWidget *widget, *MainWindow;
 	char buf[256];
 
 	LoadConf();
 
-	xml = glade_xml_new(DATADIR "dfnet.glade2", "dlgStart", NULL);
-	if (xml == NULL) {
+	builder = gtk_builder_new();
+
+	if (!gtk_builder_add_from_file(builder, DATADIR "dfnet.ui", NULL)) {
 		g_warning("We could not load the interface!");
 		return 0;
 	}
 
-	MainWindow = glade_xml_get_widget(xml, "dlgStart");
+	MainWindow = gtk_builder_get_object(builder, "dlgStart");
 	gtk_window_set_title(GTK_WINDOW(MainWindow), _("NetPlay"));
 
-	widget = glade_xml_get_widget(xml, "btnCopyIP");
+	widget = gtk_builder_get_object(builder, "btnCopyIP");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 		GTK_SIGNAL_FUNC(OnCopyIP), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "tbServerIP");
+	widget = gtk_builder_get_object(builder, "tbServerIP");
 	gtk_entry_set_text(GTK_ENTRY(widget), conf.ipAddress);
 
-	widget = glade_xml_get_widget(xml, "tbPort");
+	widget = gtk_builder_get_object(builder, "tbPort");
 	sprintf(buf, "%d", conf.PortNum);
 	gtk_entry_set_text(GTK_ENTRY(widget), buf);
 
 	if (conf.PlayerNum == 1) {
-		widget = glade_xml_get_widget(xml, "rbServer");
+		widget = gtk_builder_get_object(builder, "rbServer");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
 	} else {
-		widget = glade_xml_get_widget(xml, "rbClient");
+		widget = gtk_builder_get_object(builder, "rbClient");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
 	}
 
 	if (gtk_dialog_run(GTK_DIALOG(MainWindow)) == GTK_RESPONSE_OK) {
-		widget = glade_xml_get_widget(xml, "tbServerIP");
+		widget = gtk_builder_get_object(builder, "tbServerIP");
 		strcpy(conf.ipAddress, gtk_entry_get_text(GTK_ENTRY(widget)));
 
-		widget = glade_xml_get_widget(xml, "tbPort");
+		widget = gtk_builder_get_object(builder, "tbPort");
 		conf.PortNum = atoi(gtk_entry_get_text(GTK_ENTRY(widget)));
 
-		widget = glade_xml_get_widget(xml, "rbServer");
+		widget = gtk_builder_get_object(builder, "rbServer");
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget))) {
 			conf.PlayerNum = 1;
 		} else {
