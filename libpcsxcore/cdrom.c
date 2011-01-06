@@ -1289,6 +1289,10 @@ void cdrInterrupt() {
         	cdr.Result[0] = cdr.StatP;
 			cdr.Seeked = TRUE;
         	cdr.Stat = Complete;
+
+			
+			// Mega Man Legends 2: must update read cursor for getlocp
+			ReadTrack( cdr.SetSector );
 			break;
 
     	case CdlSeekP:
