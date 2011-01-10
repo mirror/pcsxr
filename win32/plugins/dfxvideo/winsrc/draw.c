@@ -3488,6 +3488,15 @@ void DoBufferSwap(void)                                // SWAP BUFFERS
     {
      ViewportRect.right  = PreviousPSXDisplay.DisplayMode.x;
      ViewportRect.bottom = PreviousPSXDisplay.DisplayMode.y;
+
+     if(iRumbleTime) 
+      {
+       ScreenRect.left+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2); 
+       ScreenRect.right+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2); 
+       ScreenRect.top+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2); 
+       ScreenRect.bottom+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2); 
+       iRumbleTime--;
+      }
     }
 
    if(iUseScanLines==2)                                // stupid nvidia scanline mode
@@ -3518,6 +3527,17 @@ void DoBufferSwap(void)                                // SWAP BUFFERS
     {
      ViewportRect.right=1024;
      ViewportRect.bottom=iGPUHeight;
+    }
+   else
+    {
+     if(iRumbleTime) 
+      {
+       ScreenRect.left+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2); 
+       ScreenRect.right+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2); 
+       ScreenRect.top+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2); 
+       ScreenRect.bottom+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2); 
+       iRumbleTime--;
+      }
     }
 
    if(iUseScanLines==2)                                // stupid nvidia scanline mode
