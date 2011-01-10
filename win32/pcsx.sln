@@ -1,6 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DFSound", "plugins\dfsound\DFSound.vcproj", "{DB25BF63-9B9E-4A40-A45E-BBBA49AD6F22}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DFXVideo", "plugins\dfxvideo\DFXVideo.vcproj", "{30F06328-DD64-4030-AF7A-19FBC74CF298}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SSSPSXpad", "plugins\PadSSSPSX\PadSSSPSX.vcproj", "{0639CDF3-8C1F-47F4-A760-F5568194A083}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gpuPeopsOpenGL", "plugins\peopsxgl\gpuPeopsOpenGL.vcproj", "{726BDE88-F2AD-4666-A4BC-5858F973976E}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pcsx", "pcsx.vcproj", "{9EEA62F5-46DC-4C07-AFE1-F72F9D6B9E3E}"
 EndProject
 Global
@@ -9,6 +17,22 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB25BF63-9B9E-4A40-A45E-BBBA49AD6F22}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DB25BF63-9B9E-4A40-A45E-BBBA49AD6F22}.Debug|Win32.Build.0 = Debug|Win32
+		{DB25BF63-9B9E-4A40-A45E-BBBA49AD6F22}.Release|Win32.ActiveCfg = Release|Win32
+		{DB25BF63-9B9E-4A40-A45E-BBBA49AD6F22}.Release|Win32.Build.0 = Release|Win32
+		{30F06328-DD64-4030-AF7A-19FBC74CF298}.Debug|Win32.ActiveCfg = Debug|Win32
+		{30F06328-DD64-4030-AF7A-19FBC74CF298}.Debug|Win32.Build.0 = Debug|Win32
+		{30F06328-DD64-4030-AF7A-19FBC74CF298}.Release|Win32.ActiveCfg = Release|Win32
+		{30F06328-DD64-4030-AF7A-19FBC74CF298}.Release|Win32.Build.0 = Release|Win32
+		{0639CDF3-8C1F-47F4-A760-F5568194A083}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0639CDF3-8C1F-47F4-A760-F5568194A083}.Debug|Win32.Build.0 = Debug|Win32
+		{0639CDF3-8C1F-47F4-A760-F5568194A083}.Release|Win32.ActiveCfg = Release|Win32
+		{0639CDF3-8C1F-47F4-A760-F5568194A083}.Release|Win32.Build.0 = Release|Win32
+		{726BDE88-F2AD-4666-A4BC-5858F973976E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{726BDE88-F2AD-4666-A4BC-5858F973976E}.Debug|Win32.Build.0 = Debug|Win32
+		{726BDE88-F2AD-4666-A4BC-5858F973976E}.Release|Win32.ActiveCfg = Release|Win32
+		{726BDE88-F2AD-4666-A4BC-5858F973976E}.Release|Win32.Build.0 = Release|Win32
 		{9EEA62F5-46DC-4C07-AFE1-F72F9D6B9E3E}.Debug|Win32.ActiveCfg = Debug|Win32
 		{9EEA62F5-46DC-4C07-AFE1-F72F9D6B9E3E}.Debug|Win32.Build.0 = Debug|Win32
 		{9EEA62F5-46DC-4C07-AFE1-F72F9D6B9E3E}.Release|Win32.ActiveCfg = Release|Win32
