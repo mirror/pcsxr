@@ -96,7 +96,7 @@ typedef void (CALLBACK* GPUclearDynarec)(void (CALLBACK *callback)(void));
 typedef void (CALLBACK* GPUvBlank)(int);
 typedef void (CALLBACK* GPUregisterCallback)(void (CALLBACK *callback)(int));
 typedef void (CALLBACK* GPUidle)(void);
-typedef void (CALLBACK* GPUvisualVibration)(unsigned long, unsigned long);
+typedef void (CALLBACK* GPUvisualVibration)(uint32_t, uint32_t);
 typedef void (CALLBACK* GPUcursor)(int, int, int);
 
 // GPU function pointers
@@ -250,7 +250,7 @@ typedef long (CALLBACK* PADkeypressed)(void);
 typedef unsigned char (CALLBACK* PADstartPoll)(int);
 typedef unsigned char (CALLBACK* PADpoll)(unsigned char);
 typedef void (CALLBACK* PADsetSensitive)(int);
-typedef void (CALLBACK* PADregisterVibration)(void (CALLBACK *callback)(unsigned long, unsigned long));
+typedef void (CALLBACK* PADregisterVibration)(void (CALLBACK *callback)(uint32_t, uint32_t));
 typedef void (CALLBACK* PADregisterCursor)(void (CALLBACK *callback)(int, int, int));
 
 // PAD function pointers
