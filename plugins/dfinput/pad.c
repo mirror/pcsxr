@@ -18,6 +18,8 @@
 
 #include "pad.h"
 
+static void (*gpuVisualVibration)(uint32_t, uint32_t) = NULL;
+
 char *PSEgetLibName(void) {
 	return _("Gamepad/Keyboard Input");
 }
@@ -30,13 +32,23 @@ uint32_t PSEgetLibVersion(void) {
 	return (1 << 16) | (1 << 8);
 }
 
+void PADsetMode(const int pad, const int mode) {
+	g.PadState[pad].PadMode = mode;
+	g.PadState[pad].PadID = mode ? 0x73 : 0x41;
+
+	g.PadState[pad].Vib0 = 0;
+	g.PadState[pad].Vib1 = 0;
+	g.PadState[pad].VibF[0] = 0;
+	g.PadState[pad].VibF[1] = 0;
+}
+
 long PADinit(long flags) {
 	LoadPADConfig();
 
-	g.PadState[0].PadMode = 0;
-	g.PadState[0].PadID = 0x41;
-	g.PadState[1].PadMode = 0;
-	g.PadState[1].PadID = 0x41;
+	PADsetMode(0, 0);
+	PADsetMode(1, 0);
+
+	gpuVisualVibration = NULL;
 
 	return PSE_PAD_ERR_SUCCESS;
 }
@@ -263,6 +275,26 @@ unsigned char PADpoll(unsigned char value) {
 	}
 
 	switch (CurCmd) {
+		case CMD_READ_DATA_AND_VIBRATE:
+			if (g.cfg.PadDef[CurPad].Type == PSE_PAD_TYPE_ANALOGPAD) {
+				if (CurByte == g.PadState[CurPad].Vib0) {
+					g.PadState[CurPad].VibF[0] = value;
+
+					if (gpuVisualVibration != NULL && (g.PadState[CurPad].VibF[0] != 0 || g.PadState[CurPad].VibF[1] != 0)) {
+						gpuVisualVibration(g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]);
+					}
+				}
+
+				if (CurByte == g.PadState[CurPad].Vib1) {
+					g.PadState[CurPad].VibF[1] = value;
+
+					if (gpuVisualVibration != NULL && (g.PadState[CurPad].VibF[0] != 0 || g.PadState[CurPad].VibF[1] != 0)) {
+						gpuVisualVibration(g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]);
+					}
+				}
+			}
+			break;
+
 		case CMD_CONFIG_MODE:
 			if (CurByte == 2) {
 				switch (value) {
@@ -281,8 +313,7 @@ unsigned char PADpoll(unsigned char value) {
 
 		case CMD_SET_MODE_AND_LOCK:
 			if (CurByte == 2) {
-				g.PadState[CurPad].PadMode = value;
-				g.PadState[CurPad].PadID = value ? 0x73 : 0x41;
+				PADsetMode(CurPad, value);
 			}
 			break;
 
@@ -314,6 +345,29 @@ unsigned char PADpoll(unsigned char value) {
 					case 1: // mode 1 - analog mode
 						buf[5] = PSE_PAD_TYPE_ANALOGPAD;
 						break;
+				}
+			}
+			break;
+
+		case CMD_VIBRATION_TOGGLE:
+			if (CurByte >= 2 && CurByte < CmdLen) {
+				if (CurByte == g.PadState[CurPad].Vib0) {
+					buf[CurByte] = 0;
+				}
+				if (CurByte == g.PadState[CurPad].Vib1) {
+					buf[CurByte] = 1;
+				}
+
+				if (value == 0) {
+					g.PadState[CurPad].Vib0 = CurByte;
+					if ((g.PadState[CurPad].PadID & 0x0f) < (CurByte - 1) / 2) {
+						g.PadState[CurPad].PadID = (g.PadState[CurPad].PadID & 0xf0) + (CurByte - 1) / 2;
+					}
+				} else if (value == 1) {
+					g.PadState[CurPad].Vib1 = CurByte;
+					if ((g.PadState[CurPad].PadID & 0x0f) < (CurByte - 1) / 2) {
+						g.PadState[CurPad].PadID = (g.PadState[CurPad].PadID & 0xf0) + (CurByte - 1) / 2;
+					}
 				}
 			}
 			break;
@@ -366,6 +420,10 @@ long PADkeypressed(void) {
 	g.KeyLeftOver = 0;
 
 	return s;
+}
+
+void PADregisterVibration(void (*callback)(uint32_t, uint32_t)) {
+	gpuVisualVibration = callback;
 }
 
 #ifndef _MACOSX

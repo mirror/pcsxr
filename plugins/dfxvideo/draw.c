@@ -1613,15 +1613,16 @@ void DoBufferSwap(void)
 	if (iMaintainAspect)
 		MaintainAspect(&dstx, &dsty, &_w, &_h);
 
+/*Whistler: too slow/laggy so commented out for now
     if(iRumbleTime)
     {
-       dstx+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2);
-       _w-=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal);
-       dsty+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2);
-       _h-=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2);
+       dstx += (rand() % iRumbleVal) - iRumbleVal / 2;
+       _w -= (rand() % iRumbleVal) - iRumbleVal / 2;
+       dsty += (rand() % iRumbleVal) - iRumbleVal / 2;
+       _h -= (rand() % iRumbleVal) - iRumbleVal / 2;
        iRumbleTime--;
     }
-
+*/
 	XvShmPutImage(display, xv_port, window, hGC, xvi,
 		0,0,		//src x,y
 		finalw,finalh,	//src w,h

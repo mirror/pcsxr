@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2011-01-02 17:37+0800\n"
+"POT-Creation-Date: 2011-01-09 15:27+0800\n"
 "PO-Revision-Date: 2010-08-28 16:44+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -959,27 +959,27 @@ msgstr "Ошибка открытия GPU плагина!"
 msgid "Error opening Controller 1 plugin!"
 msgstr "Ошибка открытия PAD1 плагина!"
 
-#: ../gui/Plugin.c:333
+#: ../gui/Plugin.c:335
 msgid "Error opening Controller 2 plugin!"
 msgstr "Ошибка открытия PAD2 плагина!"
 
-#: ../gui/Plugin.c:413
+#: ../gui/Plugin.c:417
 msgid "Error closing CD-ROM plugin!"
 msgstr "Ошибка при закрытии CD-ROM плагина!"
 
-#: ../gui/Plugin.c:415
+#: ../gui/Plugin.c:419
 msgid "Error closing SPU plugin!"
 msgstr "Ошибка при закрытии SPU плагина!"
 
-#: ../gui/Plugin.c:417
+#: ../gui/Plugin.c:421
 msgid "Error closing Controller 1 Plugin!"
 msgstr "Ошибка при закрытии PAD1 плагина!"
 
-#: ../gui/Plugin.c:419
+#: ../gui/Plugin.c:423
 msgid "Error closing Controller 2 plugin!"
 msgstr "Ошибка при закрытии PAD2 плагина!"
 
-#: ../gui/Plugin.c:421
+#: ../gui/Plugin.c:425
 msgid "Error closing GPU plugin!"
 msgstr "Ошибка при закрытии GPU плагина!"
 
@@ -1047,82 +1047,82 @@ msgstr "Неизвестный опкод CPE %02x по адресу %08x.\n"
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "This file does not appear to be a valid PSX file.\n"
 
-#: ../libpcsxcore/plugins.c:183
+#: ../libpcsxcore/plugins.c:189
 #, c-format
 msgid "Error loading %s: %s"
 msgstr "Ошибка загрузки %s: %s"
 
-#: ../libpcsxcore/plugins.c:235
+#: ../libpcsxcore/plugins.c:243
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "Не удалось загрузить GPU плагин %s!"
 
-#: ../libpcsxcore/plugins.c:308
+#: ../libpcsxcore/plugins.c:318
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "Не удалось загрузить CD-ROM плагин %s!"
 
-#: ../libpcsxcore/plugins.c:356
+#: ../libpcsxcore/plugins.c:366
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "Не удалось загрузить SPU плагин %s!"
 
-#: ../libpcsxcore/plugins.c:493
+#: ../libpcsxcore/plugins.c:505
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "Не удалось загрузить PAD1 плагин %s!"
 
-#: ../libpcsxcore/plugins.c:547
+#: ../libpcsxcore/plugins.c:563
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "Не удалось загрузить PAD2 плагин %s!"
 
-#: ../libpcsxcore/plugins.c:590
+#: ../libpcsxcore/plugins.c:608
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "Не удалось загрузить NetPlay плагин %s!"
 
-#: ../libpcsxcore/plugins.c:670
+#: ../libpcsxcore/plugins.c:688
 #, c-format
 msgid "Could not load SIO1 plugin %s!"
 msgstr "Не удалось загрузить SIO1 плагин %s!"
 
-#: ../libpcsxcore/plugins.c:755
+#: ../libpcsxcore/plugins.c:773
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr "Ошибка инициализации CD-ROM плагина: %d"
 
-#: ../libpcsxcore/plugins.c:757
+#: ../libpcsxcore/plugins.c:775
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr "Ошибка инициализации GPU плагина: %d"
 
-#: ../libpcsxcore/plugins.c:759
+#: ../libpcsxcore/plugins.c:777
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr "Ошибка инициализации SPU плагина: %d"
 
-#: ../libpcsxcore/plugins.c:761
+#: ../libpcsxcore/plugins.c:779
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr "Ошибка инициализации PAD1 плагина: %d"
 
-#: ../libpcsxcore/plugins.c:763
+#: ../libpcsxcore/plugins.c:781
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr "Ошибка инициализации PAD2 плагина: %d"
 
-#: ../libpcsxcore/plugins.c:767
+#: ../libpcsxcore/plugins.c:785
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr "Ошибка инициализации NetPlay плагина: %d"
 
-#: ../libpcsxcore/plugins.c:772
+#: ../libpcsxcore/plugins.c:790
 #, c-format
 msgid "Error initializing SIO1 plugin: %d"
 msgstr "Ошибка инициализации SIO1 плагина: %d"
 
-#: ../libpcsxcore/plugins.c:775
+#: ../libpcsxcore/plugins.c:793
 msgid "Plugins loaded.\n"
 msgstr "Плагины загружены.\n"
 
@@ -1255,7 +1255,7 @@ msgstr ""
 "В отдельном потоке - (Кеширование)"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:24
-#: ../plugins/dfinput/dfinput.glade2.h:8 ../win32/gui/WndMain.c:1307
+#: ../plugins/dfinput/dfinput.ui.h:8 ../win32/gui/WndMain.c:1307
 msgid "Options"
 msgstr "Опции"
 
@@ -1371,119 +1371,125 @@ msgstr ""
 msgid "R-Stick Up"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Centered"
 msgstr "Отцентровано"
 
-#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Up"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Right"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Rightup"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Down"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Rightdown"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Left"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Leftup"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:105 ../plugins/dfinput/cfg-gtk2.c:144
+#: ../plugins/dfinput/cfg-gtk2.c:102 ../plugins/dfinput/cfg-gtk2.c:141
 msgid "Leftdown"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:109 ../plugins/dfinput/cfg-gtk2.c:148
+#: ../plugins/dfinput/cfg-gtk2.c:106 ../plugins/dfinput/cfg-gtk2.c:145
 #, c-format
 msgid "Joystick: Button %d"
 msgstr "Джойстик: Кнопка %d"
 
-#: ../plugins/dfinput/cfg-gtk2.c:113 ../plugins/dfinput/cfg-gtk2.c:152
+#: ../plugins/dfinput/cfg-gtk2.c:110 ../plugins/dfinput/cfg-gtk2.c:149
 #, c-format
 msgid "Joystick: Axis %d%c"
 msgstr "Джойстик: Ось %d%c"
 
-#: ../plugins/dfinput/cfg-gtk2.c:118 ../plugins/dfinput/cfg-gtk2.c:157
+#: ../plugins/dfinput/cfg-gtk2.c:115 ../plugins/dfinput/cfg-gtk2.c:154
 #, c-format
 msgid "Joystick: Hat %d %s"
 msgstr "Джойстик: Крестовина %d %s"
 
-#: ../plugins/dfinput/cfg-gtk2.c:133 ../plugins/dfinput/cfg-gtk2.c:172
+#: ../plugins/dfinput/cfg-gtk2.c:130 ../plugins/dfinput/cfg-gtk2.c:169
 msgid "Keyboard:"
 msgstr "Клавиатура:"
 
-#: ../plugins/dfinput/cfg-gtk2.c:137 ../plugins/dfinput/cfg-gtk2.c:176
+#: ../plugins/dfinput/cfg-gtk2.c:134 ../plugins/dfinput/cfg-gtk2.c:173
 msgid "(Not Set)"
 msgstr "(Не установлено)"
 
-#: ../plugins/dfinput/cfg-gtk2.c:559
+#: ../plugins/dfinput/cfg-gtk2.c:542
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:55
 msgid "None"
 msgstr "Нету"
 
-#: ../plugins/dfinput/cfg-gtk2.c:601
+#: ../plugins/dfinput/cfg-gtk2.c:584
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr "Настройка Gamepad/Keyboard"
 
-#: ../plugins/dfinput/cfg-gtk2.c:607 ../plugins/dfinput/cfg-gtk2.c:627
+#: ../plugins/dfinput/cfg-gtk2.c:590 ../plugins/dfinput/cfg-gtk2.c:610
 msgid "Key"
 msgstr "Клавиша"
 
-#: ../plugins/dfinput/cfg-gtk2.c:613 ../plugins/dfinput/cfg-gtk2.c:633
+#: ../plugins/dfinput/cfg-gtk2.c:596 ../plugins/dfinput/cfg-gtk2.c:616
 msgid "Button"
 msgstr "Кнопка"
 
-#: ../plugins/dfinput/dfinput.glade2.h:1
-msgid "Change"
-msgstr "Изменить"
-
-#: ../plugins/dfinput/dfinput.glade2.h:2
-msgid "Controller 1"
-msgstr "Контроллер 1"
-
-#: ../plugins/dfinput/dfinput.glade2.h:3
-msgid "Controller 2"
-msgstr "Контроллер 2"
-
-#: ../plugins/dfinput/dfinput.glade2.h:4
-msgid "Device:"
-msgstr "Устройство:"
-
-#: ../plugins/dfinput/dfinput.glade2.h:5
-msgid ""
-"Digital Pad\n"
-"Analog Pad"
+#: ../plugins/dfinput/dfinput.ui.h:1
+#, fuzzy
+msgid "Analog Pad"
 msgstr ""
 "Стандартный контроллер\n"
 "Аналоговый контроллер"
 
-#: ../plugins/dfinput/dfinput.glade2.h:7
+#: ../plugins/dfinput/dfinput.ui.h:2
+msgid "Change"
+msgstr "Изменить"
+
+#: ../plugins/dfinput/dfinput.ui.h:3
+msgid "Controller 1"
+msgstr "Контроллер 1"
+
+#: ../plugins/dfinput/dfinput.ui.h:4
+msgid "Controller 2"
+msgstr "Контроллер 2"
+
+#: ../plugins/dfinput/dfinput.ui.h:5
+msgid "Device:"
+msgstr "Устройство:"
+
+#: ../plugins/dfinput/dfinput.ui.h:6
+#, fuzzy
+msgid "Digital Pad"
+msgstr ""
+"Стандартный контроллер\n"
+"Аналоговый контроллер"
+
+#: ../plugins/dfinput/dfinput.ui.h:7
 msgid "Multi-Threaded (Recommended)"
 msgstr "В отдельном потоке (Рекомендуется)"
 
-#: ../plugins/dfinput/dfinput.glade2.h:9
+#: ../plugins/dfinput/dfinput.ui.h:9
 msgid "Reset"
 msgstr "Сброс"
 
-#: ../plugins/dfinput/dfinput.glade2.h:10
+#: ../plugins/dfinput/dfinput.ui.h:10
 msgid "Type:"
 msgstr "Тип:"
 
-#: ../plugins/dfinput/pad.c:22
+#: ../plugins/dfinput/pad.c:24
 msgid "Gamepad/Keyboard Input"
 msgstr ""
 
@@ -1501,30 +1507,30 @@ msgstr "Ошибка соединения с %s: %s\n"
 msgid "Error allocating memory!\n"
 msgstr "Ошибка выделения памяти!\n"
 
-#: ../plugins/dfnet/dfnet.glade2.h:1
+#: ../plugins/dfnet/dfnet.ui.h:1
 msgid "Client (Player2)"
 msgstr "Клиент (Игрок 2)"
 
-#: ../plugins/dfnet/dfnet.glade2.h:2
+#: ../plugins/dfnet/dfnet.ui.h:2
 msgid "Copy PC IP to Clipboard"
 msgstr "Скопировать IP адрес в буфер обмена"
 
-#: ../plugins/dfnet/dfnet.glade2.h:3
+#: ../plugins/dfnet/dfnet.ui.h:3
 msgid ""
 "Do not change if not necessary (remember it must be changed on both sides)."
 msgstr ""
 "Не меняйте без особой необходимости (помните что порты должны быть одинаковы "
 "для обеих сторон)"
 
-#: ../plugins/dfnet/dfnet.glade2.h:4
+#: ../plugins/dfnet/dfnet.ui.h:4
 msgid "Play Offline"
 msgstr "Начать без использования сети"
 
-#: ../plugins/dfnet/dfnet.glade2.h:5
+#: ../plugins/dfnet/dfnet.ui.h:5
 msgid "Port Number"
 msgstr "Номер порта"
 
-#: ../plugins/dfnet/dfnet.glade2.h:6
+#: ../plugins/dfnet/dfnet.ui.h:6
 msgid ""
 "Select here if you'll be Server (Player1) or Client (Player2).\n"
 "\n"
@@ -1542,24 +1548,24 @@ msgstr ""
 "Если вы выбрали Клиента - введите полученный IP адрес Сервера в "
 "соответствующее поле."
 
-#: ../plugins/dfnet/dfnet.glade2.h:11
+#: ../plugins/dfnet/dfnet.ui.h:11
 msgid "Server (Player1)"
 msgstr "Сервер (Игрок 1)"
 
-#: ../plugins/dfnet/dfnet.glade2.h:12
+#: ../plugins/dfnet/dfnet.ui.h:12
 msgid "Start Game"
 msgstr "Начать сетевую игру"
 
-#: ../plugins/dfnet/gui.c:31 ../plugins/dfnet/gui.c:112
+#: ../plugins/dfnet/gui.c:30 ../plugins/dfnet/gui.c:112
 #: ../win32/gui/ConfigurePlugins.c:616
 msgid "NetPlay"
 msgstr "Сетевая игра"
 
-#: ../plugins/dfnet/gui.c:39
+#: ../plugins/dfnet/gui.c:38
 msgid "Nothing to configure"
 msgstr "Не подлежит настройке"
 
-#: ../plugins/dfnet/gui.c:95
+#: ../plugins/dfnet/gui.c:94
 #, c-format
 msgid "IP %s"
 msgstr ""
@@ -2679,49 +2685,49 @@ msgstr "Ошибка открытия SPU плагина (%d)"
 msgid "Error Opening PAD1 Plugin (%d)"
 msgstr "Ошибка открытия PAD1 плагина (%d)"
 
-#: ../win32/gui/plugin.c:291
+#: ../win32/gui/plugin.c:293
 #, c-format
 msgid "Error Opening PAD2 Plugin (%d)"
 msgstr "Ошибка открытия PAD2 плагина (%d)"
 
-#: ../win32/gui/plugin.c:319
+#: ../win32/gui/plugin.c:323
 msgid "Error Closing CDR Plugin"
 msgstr "Ошибка при закрытии CD-ROM плагина (%d)"
 
-#: ../win32/gui/plugin.c:321
+#: ../win32/gui/plugin.c:325
 msgid "Error Closing GPU Plugin"
 msgstr "Ошибка при закрытии GPU плагина"
 
-#: ../win32/gui/plugin.c:323
+#: ../win32/gui/plugin.c:327
 msgid "Error Closing SPU Plugin"
 msgstr "Ошибка при закрытии SPU плагина"
 
-#: ../win32/gui/plugin.c:341
+#: ../win32/gui/plugin.c:345
 #, c-format
 msgid "CDRinit error: %d"
 msgstr "Ошибка в CDRinit: %d"
 
-#: ../win32/gui/plugin.c:343
+#: ../win32/gui/plugin.c:347
 #, c-format
 msgid "GPUinit error: %d"
 msgstr "Ошибка в GPUinit: %d"
 
-#: ../win32/gui/plugin.c:345
+#: ../win32/gui/plugin.c:349
 #, c-format
 msgid "SPUinit error: %d"
 msgstr "Ошибка в SPUinit: %d"
 
-#: ../win32/gui/plugin.c:347
+#: ../win32/gui/plugin.c:351
 #, c-format
 msgid "PAD1init error: %d"
 msgstr "Ошибка в PAD1init: %d"
 
-#: ../win32/gui/plugin.c:349
+#: ../win32/gui/plugin.c:353
 #, c-format
 msgid "PAD2init error: %d"
 msgstr "Ошибка в PAD2init: %d"
 
-#: ../win32/gui/plugin.c:352
+#: ../win32/gui/plugin.c:356
 #, c-format
 msgid "NETinit error: %d"
 msgstr "Ошибка в NETinit: %d"

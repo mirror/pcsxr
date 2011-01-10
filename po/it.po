@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2011-01-02 17:37+0800\n"
+"POT-Creation-Date: 2011-01-09 15:27+0800\n"
 "PO-Revision-Date: 2010-03-15 16:00+0200\n"
 "Last-Translator: Giovanni Scafora <giovanni@archlinux.org>\n"
 "Language-Team: Arch Linux Italian Team <giovanni@archlinux.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 #: ../data/pcsx.glade2.h:1
 msgid ""
@@ -991,30 +991,30 @@ msgid "Error opening Controller 1 plugin!"
 msgstr ""
 "Si è verificato un errore durante l'apertura del plugin del controller 1!"
 
-#: ../gui/Plugin.c:333
+#: ../gui/Plugin.c:335
 msgid "Error opening Controller 2 plugin!"
 msgstr ""
 "Si è verificato un errore durante l'apertura del plugin del controller 2!"
 
-#: ../gui/Plugin.c:413
+#: ../gui/Plugin.c:417
 msgid "Error closing CD-ROM plugin!"
 msgstr "Si è verificato un errore durante la chiusura del plugin del CD-ROM!"
 
-#: ../gui/Plugin.c:415
+#: ../gui/Plugin.c:419
 msgid "Error closing SPU plugin!"
 msgstr "Si è verificato un errore durante la chiusura del plugin della SPU!"
 
-#: ../gui/Plugin.c:417
+#: ../gui/Plugin.c:421
 msgid "Error closing Controller 1 Plugin!"
 msgstr ""
 "Si è verificato un errore durante la chiusura del plugin del controller 1!"
 
-#: ../gui/Plugin.c:419
+#: ../gui/Plugin.c:423
 msgid "Error closing Controller 2 plugin!"
 msgstr ""
 "Si è verificato un errore durante la chiusura del plugin del controller 2!"
 
-#: ../gui/Plugin.c:421
+#: ../gui/Plugin.c:425
 msgid "Error closing GPU plugin!"
 msgstr "Si è verificato un errore durante la chiusura del plugin della GPU!"
 
@@ -1082,93 +1082,93 @@ msgstr "Opcode CPE sconosciuto %02x alla posizione %08x.\n"
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "Questo file non sembra essere un file valido di PSX.\n"
 
-#: ../libpcsxcore/plugins.c:183
+#: ../libpcsxcore/plugins.c:189
 #, c-format
 msgid "Error loading %s: %s"
 msgstr "Si è verificato un errore durante il caricamento di %s: %s"
 
-#: ../libpcsxcore/plugins.c:235
+#: ../libpcsxcore/plugins.c:243
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "Impossibile caricare il plugin %s della GPU!"
 
-#: ../libpcsxcore/plugins.c:308
+#: ../libpcsxcore/plugins.c:318
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "Impossibile caricare il plugin %s del CD-ROM!"
 
-#: ../libpcsxcore/plugins.c:356
+#: ../libpcsxcore/plugins.c:366
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "Impossibile caricare il plugin %s della SPU!"
 
-#: ../libpcsxcore/plugins.c:493
+#: ../libpcsxcore/plugins.c:505
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "Impossibile caricare il plugin %s del controller 1!"
 
-#: ../libpcsxcore/plugins.c:547
+#: ../libpcsxcore/plugins.c:563
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "Impossibile caricare il plugin %s del controller 2!"
 
-#: ../libpcsxcore/plugins.c:590
+#: ../libpcsxcore/plugins.c:608
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "Impossibile caricare il plugin %s di NetPlay!"
 
-#: ../libpcsxcore/plugins.c:670
+#: ../libpcsxcore/plugins.c:688
 #, fuzzy, c-format
 msgid "Could not load SIO1 plugin %s!"
 msgstr "Impossibile caricare il plugin %s della SPU!"
 
-#: ../libpcsxcore/plugins.c:755
+#: ../libpcsxcore/plugins.c:773
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr ""
-"Si è verificato un errore durante l'inizializzazione del plugin del CD-ROM: "
-"%d"
+"Si è verificato un errore durante l'inizializzazione del plugin del CD-ROM: %"
+"d"
 
-#: ../libpcsxcore/plugins.c:757
+#: ../libpcsxcore/plugins.c:775
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin della GPU: %d"
 
-#: ../libpcsxcore/plugins.c:759
+#: ../libpcsxcore/plugins.c:777
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin della SPU: %d"
 
-#: ../libpcsxcore/plugins.c:761
+#: ../libpcsxcore/plugins.c:779
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin del "
 "controller 1: %d"
 
-#: ../libpcsxcore/plugins.c:763
+#: ../libpcsxcore/plugins.c:781
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin del "
 "controller 2: %d"
 
-#: ../libpcsxcore/plugins.c:767
+#: ../libpcsxcore/plugins.c:785
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr ""
-"Si è verificato un errore durante l'inizializzazione del plugin di NetPlay: "
-"%d"
+"Si è verificato un errore durante l'inizializzazione del plugin di NetPlay: %"
+"d"
 
-#: ../libpcsxcore/plugins.c:772
+#: ../libpcsxcore/plugins.c:790
 #, fuzzy, c-format
 msgid "Error initializing SIO1 plugin: %d"
 msgstr ""
 "Si è verificato un errore durante l'inizializzazione del plugin della SPU: %d"
 
-#: ../libpcsxcore/plugins.c:775
+#: ../libpcsxcore/plugins.c:793
 msgid "Plugins loaded.\n"
 msgstr "Plugin caricati.\n"
 
@@ -1303,7 +1303,7 @@ msgstr ""
 "Threaded, veloce (con la cache)"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:24
-#: ../plugins/dfinput/dfinput.glade2.h:8 ../win32/gui/WndMain.c:1307
+#: ../plugins/dfinput/dfinput.ui.h:8 ../win32/gui/WndMain.c:1307
 msgid "Options"
 msgstr "Opzioni"
 
@@ -1419,119 +1419,125 @@ msgstr "R-Stick Giù"
 msgid "R-Stick Up"
 msgstr "R-Stick Su"
 
-#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Centered"
 msgstr "Centrato"
 
-#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Up"
 msgstr "Su"
 
-#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Right"
 msgstr "Destra"
 
-#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Rightup"
 msgstr "In alto a destra"
 
-#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Down"
 msgstr "Giù"
 
-#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Rightdown"
 msgstr "In basso a destra"
 
-#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Left"
 msgstr "Sinistra"
 
-#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Leftup"
 msgstr "In alto a sinistra"
 
-#: ../plugins/dfinput/cfg-gtk2.c:105 ../plugins/dfinput/cfg-gtk2.c:144
+#: ../plugins/dfinput/cfg-gtk2.c:102 ../plugins/dfinput/cfg-gtk2.c:141
 msgid "Leftdown"
 msgstr "In basso a sinistra"
 
-#: ../plugins/dfinput/cfg-gtk2.c:109 ../plugins/dfinput/cfg-gtk2.c:148
+#: ../plugins/dfinput/cfg-gtk2.c:106 ../plugins/dfinput/cfg-gtk2.c:145
 #, c-format
 msgid "Joystick: Button %d"
 msgstr "Joystick: Pulsante %d"
 
-#: ../plugins/dfinput/cfg-gtk2.c:113 ../plugins/dfinput/cfg-gtk2.c:152
+#: ../plugins/dfinput/cfg-gtk2.c:110 ../plugins/dfinput/cfg-gtk2.c:149
 #, c-format
 msgid "Joystick: Axis %d%c"
 msgstr "Joystick: Asse %d%c"
 
-#: ../plugins/dfinput/cfg-gtk2.c:118 ../plugins/dfinput/cfg-gtk2.c:157
+#: ../plugins/dfinput/cfg-gtk2.c:115 ../plugins/dfinput/cfg-gtk2.c:154
 #, c-format
 msgid "Joystick: Hat %d %s"
 msgstr "Joystick: hat %d %s"
 
-#: ../plugins/dfinput/cfg-gtk2.c:133 ../plugins/dfinput/cfg-gtk2.c:172
+#: ../plugins/dfinput/cfg-gtk2.c:130 ../plugins/dfinput/cfg-gtk2.c:169
 msgid "Keyboard:"
 msgstr "Tastiera:"
 
-#: ../plugins/dfinput/cfg-gtk2.c:137 ../plugins/dfinput/cfg-gtk2.c:176
+#: ../plugins/dfinput/cfg-gtk2.c:134 ../plugins/dfinput/cfg-gtk2.c:173
 msgid "(Not Set)"
 msgstr "(Nessuna impostazione)"
 
-#: ../plugins/dfinput/cfg-gtk2.c:559
+#: ../plugins/dfinput/cfg-gtk2.c:542
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:55
 msgid "None"
 msgstr "Nessuno"
 
-#: ../plugins/dfinput/cfg-gtk2.c:601
+#: ../plugins/dfinput/cfg-gtk2.c:584
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr "Configurazione input del gamepad/tastiera"
 
-#: ../plugins/dfinput/cfg-gtk2.c:607 ../plugins/dfinput/cfg-gtk2.c:627
+#: ../plugins/dfinput/cfg-gtk2.c:590 ../plugins/dfinput/cfg-gtk2.c:610
 msgid "Key"
 msgstr "Tasto"
 
-#: ../plugins/dfinput/cfg-gtk2.c:613 ../plugins/dfinput/cfg-gtk2.c:633
+#: ../plugins/dfinput/cfg-gtk2.c:596 ../plugins/dfinput/cfg-gtk2.c:616
 msgid "Button"
 msgstr "Pulsante"
 
-#: ../plugins/dfinput/dfinput.glade2.h:1
-msgid "Change"
-msgstr "Cambia"
-
-#: ../plugins/dfinput/dfinput.glade2.h:2
-msgid "Controller 1"
-msgstr "Controller 1"
-
-#: ../plugins/dfinput/dfinput.glade2.h:3
-msgid "Controller 2"
-msgstr "Controller 2"
-
-#: ../plugins/dfinput/dfinput.glade2.h:4
-msgid "Device:"
-msgstr "Dispositivo:"
-
-#: ../plugins/dfinput/dfinput.glade2.h:5
-msgid ""
-"Digital Pad\n"
-"Analog Pad"
+#: ../plugins/dfinput/dfinput.ui.h:1
+#, fuzzy
+msgid "Analog Pad"
 msgstr ""
 "Pad digitale\n"
 "Pad analogico"
 
-#: ../plugins/dfinput/dfinput.glade2.h:7
+#: ../plugins/dfinput/dfinput.ui.h:2
+msgid "Change"
+msgstr "Cambia"
+
+#: ../plugins/dfinput/dfinput.ui.h:3
+msgid "Controller 1"
+msgstr "Controller 1"
+
+#: ../plugins/dfinput/dfinput.ui.h:4
+msgid "Controller 2"
+msgstr "Controller 2"
+
+#: ../plugins/dfinput/dfinput.ui.h:5
+msgid "Device:"
+msgstr "Dispositivo:"
+
+#: ../plugins/dfinput/dfinput.ui.h:6
+#, fuzzy
+msgid "Digital Pad"
+msgstr ""
+"Pad digitale\n"
+"Pad analogico"
+
+#: ../plugins/dfinput/dfinput.ui.h:7
 msgid "Multi-Threaded (Recommended)"
 msgstr "Multi-Threaded (consigliato)"
 
-#: ../plugins/dfinput/dfinput.glade2.h:9
+#: ../plugins/dfinput/dfinput.ui.h:9
 msgid "Reset"
 msgstr "Resetta"
 
-#: ../plugins/dfinput/dfinput.glade2.h:10
+#: ../plugins/dfinput/dfinput.ui.h:10
 msgid "Type:"
 msgstr "Tipo:"
 
-#: ../plugins/dfinput/pad.c:22
+#: ../plugins/dfinput/pad.c:24
 msgid "Gamepad/Keyboard Input"
 msgstr "Input del gamepad/tastiera"
 
@@ -1551,28 +1557,28 @@ msgstr "Si è verificato un errore durante il caricamento di %s: %s"
 msgid "Error allocating memory!\n"
 msgstr "Si è verificato un errore durante l'allocazione della memoria!"
 
-#: ../plugins/dfnet/dfnet.glade2.h:1
+#: ../plugins/dfnet/dfnet.ui.h:1
 msgid "Client (Player2)"
 msgstr ""
 
-#: ../plugins/dfnet/dfnet.glade2.h:2
+#: ../plugins/dfnet/dfnet.ui.h:2
 msgid "Copy PC IP to Clipboard"
 msgstr ""
 
-#: ../plugins/dfnet/dfnet.glade2.h:3
+#: ../plugins/dfnet/dfnet.ui.h:3
 msgid ""
 "Do not change if not necessary (remember it must be changed on both sides)."
 msgstr ""
 
-#: ../plugins/dfnet/dfnet.glade2.h:4
+#: ../plugins/dfnet/dfnet.ui.h:4
 msgid "Play Offline"
 msgstr ""
 
-#: ../plugins/dfnet/dfnet.glade2.h:5
+#: ../plugins/dfnet/dfnet.ui.h:5
 msgid "Port Number"
 msgstr ""
 
-#: ../plugins/dfnet/dfnet.glade2.h:6
+#: ../plugins/dfnet/dfnet.ui.h:6
 msgid ""
 "Select here if you'll be Server (Player1) or Client (Player2).\n"
 "\n"
@@ -1583,25 +1589,25 @@ msgid ""
 "the IP Address Control."
 msgstr ""
 
-#: ../plugins/dfnet/dfnet.glade2.h:11
+#: ../plugins/dfnet/dfnet.ui.h:11
 msgid "Server (Player1)"
 msgstr ""
 
-#: ../plugins/dfnet/dfnet.glade2.h:12
+#: ../plugins/dfnet/dfnet.ui.h:12
 #, fuzzy
 msgid "Start Game"
 msgstr "Tasto Start"
 
-#: ../plugins/dfnet/gui.c:31 ../plugins/dfnet/gui.c:112
+#: ../plugins/dfnet/gui.c:30 ../plugins/dfnet/gui.c:112
 #: ../win32/gui/ConfigurePlugins.c:616
 msgid "NetPlay"
 msgstr "NetPlay"
 
-#: ../plugins/dfnet/gui.c:39
+#: ../plugins/dfnet/gui.c:38
 msgid "Nothing to configure"
 msgstr ""
 
-#: ../plugins/dfnet/gui.c:95
+#: ../plugins/dfnet/gui.c:94
 #, c-format
 msgid "IP %s"
 msgstr ""
@@ -2787,49 +2793,49 @@ msgstr "Si è verificato un errore durante l'apertura del plugin della SPU (%d)"
 msgid "Error Opening PAD1 Plugin (%d)"
 msgstr "Si è verificato un errore durante l'apertura del plugin del PAD1 (%d)"
 
-#: ../win32/gui/plugin.c:291
+#: ../win32/gui/plugin.c:293
 #, c-format
 msgid "Error Opening PAD2 Plugin (%d)"
 msgstr "Si è verificato un errore durante l'apertura del plugin del PAD2 (%d)"
 
-#: ../win32/gui/plugin.c:319
+#: ../win32/gui/plugin.c:323
 msgid "Error Closing CDR Plugin"
 msgstr "Si è verificato un errore durante la chiusura del plugin del CD-ROM"
 
-#: ../win32/gui/plugin.c:321
+#: ../win32/gui/plugin.c:325
 msgid "Error Closing GPU Plugin"
 msgstr "Si è verificato un errore durante la chiusura del plugin della GPU"
 
-#: ../win32/gui/plugin.c:323
+#: ../win32/gui/plugin.c:327
 msgid "Error Closing SPU Plugin"
 msgstr "Si è verificato un errore durante la chiusura del plugin della SPU"
 
-#: ../win32/gui/plugin.c:341
+#: ../win32/gui/plugin.c:345
 #, c-format
 msgid "CDRinit error: %d"
 msgstr "CDRinit errore: %d"
 
-#: ../win32/gui/plugin.c:343
+#: ../win32/gui/plugin.c:347
 #, c-format
 msgid "GPUinit error: %d"
 msgstr "GPUinit errore: %d"
 
-#: ../win32/gui/plugin.c:345
+#: ../win32/gui/plugin.c:349
 #, c-format
 msgid "SPUinit error: %d"
 msgstr "SPUinit errore: %d"
 
-#: ../win32/gui/plugin.c:347
+#: ../win32/gui/plugin.c:351
 #, c-format
 msgid "PAD1init error: %d"
 msgstr "PAD1init errore: %d"
 
-#: ../win32/gui/plugin.c:349
+#: ../win32/gui/plugin.c:353
 #, c-format
 msgid "PAD2init error: %d"
 msgstr "PAD2init errore: %d"
 
-#: ../win32/gui/plugin.c:352
+#: ../win32/gui/plugin.c:356
 #, c-format
 msgid "NETinit error: %d"
 msgstr "NETinit errore: %d"

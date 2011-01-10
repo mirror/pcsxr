@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2011-01-02 17:37+0800\n"
+"POT-Creation-Date: 2011-01-09 15:27+0800\n"
 "PO-Revision-Date: 2010-12-29 11:28+0800\n"
 "Last-Translator: Wei Mingzhi <whistler_wmz@users.sf.net>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 #: ../data/pcsx.glade2.h:1
 msgid ""
@@ -960,27 +960,27 @@ msgstr "無法開啟 GPU 外掛!"
 msgid "Error opening Controller 1 plugin!"
 msgstr "無法開啟 \"控制器 1\" 外掛!"
 
-#: ../gui/Plugin.c:333
+#: ../gui/Plugin.c:335
 msgid "Error opening Controller 2 plugin!"
 msgstr "無法開啟 \"控制器 2\" 外掛!"
 
-#: ../gui/Plugin.c:413
+#: ../gui/Plugin.c:417
 msgid "Error closing CD-ROM plugin!"
 msgstr "無法關閉 CD-ROM 外掛!"
 
-#: ../gui/Plugin.c:415
+#: ../gui/Plugin.c:419
 msgid "Error closing SPU plugin!"
 msgstr "無法關閉 SPU 外掛!"
 
-#: ../gui/Plugin.c:417
+#: ../gui/Plugin.c:421
 msgid "Error closing Controller 1 Plugin!"
 msgstr "無法關閉 \"控制器 1\" 外掛!"
 
-#: ../gui/Plugin.c:419
+#: ../gui/Plugin.c:423
 msgid "Error closing Controller 2 plugin!"
 msgstr "無法關閉 \"控制器 2\" 外掛!"
 
-#: ../gui/Plugin.c:421
+#: ../gui/Plugin.c:425
 msgid "Error closing GPU plugin!"
 msgstr "無法關閉 GPU 外掛!"
 
@@ -1048,82 +1048,82 @@ msgstr "未知 CPE opcode %02x 位於 %08x.\n"
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "此檔案不是一個合法的 PSX 檔案。\n"
 
-#: ../libpcsxcore/plugins.c:183
+#: ../libpcsxcore/plugins.c:189
 #, c-format
 msgid "Error loading %s: %s"
 msgstr "無法加載 %s: %s"
 
-#: ../libpcsxcore/plugins.c:235
+#: ../libpcsxcore/plugins.c:243
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr "無法加載 GPU 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:308
+#: ../libpcsxcore/plugins.c:318
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr "無法加載 CD-ROM 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:356
+#: ../libpcsxcore/plugins.c:366
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr "無法加載 SPU 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:493
+#: ../libpcsxcore/plugins.c:505
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr "無法加載 \"控制器1\" 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:547
+#: ../libpcsxcore/plugins.c:563
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr "無法加載 \"控制器2\" 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:590
+#: ../libpcsxcore/plugins.c:608
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr "無法加載聯線遊戲外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:670
+#: ../libpcsxcore/plugins.c:688
 #, c-format
 msgid "Could not load SIO1 plugin %s!"
 msgstr "無法加載 SIO1 外掛 %s!"
 
-#: ../libpcsxcore/plugins.c:755
+#: ../libpcsxcore/plugins.c:773
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr "CD-ROM 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:757
+#: ../libpcsxcore/plugins.c:775
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr "GPU 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:759
+#: ../libpcsxcore/plugins.c:777
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr "SPU 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:761
+#: ../libpcsxcore/plugins.c:779
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr "\"控制器1\" 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:763
+#: ../libpcsxcore/plugins.c:781
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr "\"控制器2\" 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:767
+#: ../libpcsxcore/plugins.c:785
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr "聯線遊戲外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:772
+#: ../libpcsxcore/plugins.c:790
 #, c-format
 msgid "Error initializing SIO1 plugin: %d"
 msgstr "SIO1 外掛初始化錯誤: %d"
 
-#: ../libpcsxcore/plugins.c:775
+#: ../libpcsxcore/plugins.c:793
 msgid "Plugins loaded.\n"
 msgstr "外掛已加載。\n"
 
@@ -1255,7 +1255,7 @@ msgstr ""
 "多執行緒 - 較快 (使用快取)"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:24
-#: ../plugins/dfinput/dfinput.glade2.h:8 ../win32/gui/WndMain.c:1307
+#: ../plugins/dfinput/dfinput.ui.h:8 ../win32/gui/WndMain.c:1307
 msgid "Options"
 msgstr "選項"
 
@@ -1371,119 +1371,125 @@ msgstr "右搖桿下方向"
 msgid "R-Stick Up"
 msgstr "右搖桿上方向"
 
-#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Centered"
 msgstr "居中"
 
-#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Up"
 msgstr "上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Right"
 msgstr "右"
 
-#: ../plugins/dfinput/cfg-gtk2.c:103 ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Rightup"
 msgstr "右上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Down"
 msgstr "下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Rightdown"
 msgstr "右下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Left"
 msgstr "左"
 
-#: ../plugins/dfinput/cfg-gtk2.c:104 ../plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Leftup"
 msgstr "左上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:105 ../plugins/dfinput/cfg-gtk2.c:144
+#: ../plugins/dfinput/cfg-gtk2.c:102 ../plugins/dfinput/cfg-gtk2.c:141
 msgid "Leftdown"
 msgstr "左下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:109 ../plugins/dfinput/cfg-gtk2.c:148
+#: ../plugins/dfinput/cfg-gtk2.c:106 ../plugins/dfinput/cfg-gtk2.c:145
 #, c-format
 msgid "Joystick: Button %d"
 msgstr "手把: 按鈕 %d"
 
-#: ../plugins/dfinput/cfg-gtk2.c:113 ../plugins/dfinput/cfg-gtk2.c:152
+#: ../plugins/dfinput/cfg-gtk2.c:110 ../plugins/dfinput/cfg-gtk2.c:149
 #, c-format
 msgid "Joystick: Axis %d%c"
 msgstr "手把: 軸 %d%c"
 
-#: ../plugins/dfinput/cfg-gtk2.c:118 ../plugins/dfinput/cfg-gtk2.c:157
+#: ../plugins/dfinput/cfg-gtk2.c:115 ../plugins/dfinput/cfg-gtk2.c:154
 #, c-format
 msgid "Joystick: Hat %d %s"
 msgstr "手把: Hat %d %s"
 
-#: ../plugins/dfinput/cfg-gtk2.c:133 ../plugins/dfinput/cfg-gtk2.c:172
+#: ../plugins/dfinput/cfg-gtk2.c:130 ../plugins/dfinput/cfg-gtk2.c:169
 msgid "Keyboard:"
 msgstr "鍵盤:"
 
-#: ../plugins/dfinput/cfg-gtk2.c:137 ../plugins/dfinput/cfg-gtk2.c:176
+#: ../plugins/dfinput/cfg-gtk2.c:134 ../plugins/dfinput/cfg-gtk2.c:173
 msgid "(Not Set)"
 msgstr "(未設定)"
 
-#: ../plugins/dfinput/cfg-gtk2.c:559
+#: ../plugins/dfinput/cfg-gtk2.c:542
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:55
 msgid "None"
 msgstr "無"
 
-#: ../plugins/dfinput/cfg-gtk2.c:601
+#: ../plugins/dfinput/cfg-gtk2.c:584
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr "手把/鍵盤輸入設定"
 
-#: ../plugins/dfinput/cfg-gtk2.c:607 ../plugins/dfinput/cfg-gtk2.c:627
+#: ../plugins/dfinput/cfg-gtk2.c:590 ../plugins/dfinput/cfg-gtk2.c:610
 msgid "Key"
 msgstr "按鍵"
 
-#: ../plugins/dfinput/cfg-gtk2.c:613 ../plugins/dfinput/cfg-gtk2.c:633
+#: ../plugins/dfinput/cfg-gtk2.c:596 ../plugins/dfinput/cfg-gtk2.c:616
 msgid "Button"
 msgstr "按鈕"
 
-#: ../plugins/dfinput/dfinput.glade2.h:1
-msgid "Change"
-msgstr "更改"
-
-#: ../plugins/dfinput/dfinput.glade2.h:2
-msgid "Controller 1"
-msgstr "控制器 1"
-
-#: ../plugins/dfinput/dfinput.glade2.h:3
-msgid "Controller 2"
-msgstr "控制器 2"
-
-#: ../plugins/dfinput/dfinput.glade2.h:4
-msgid "Device:"
-msgstr "裝置:"
-
-#: ../plugins/dfinput/dfinput.glade2.h:5
-msgid ""
-"Digital Pad\n"
-"Analog Pad"
+#: ../plugins/dfinput/dfinput.ui.h:1
+#, fuzzy
+msgid "Analog Pad"
 msgstr ""
 "普通手把\n"
 "類比手把"
 
-#: ../plugins/dfinput/dfinput.glade2.h:7
+#: ../plugins/dfinput/dfinput.ui.h:2
+msgid "Change"
+msgstr "更改"
+
+#: ../plugins/dfinput/dfinput.ui.h:3
+msgid "Controller 1"
+msgstr "控制器 1"
+
+#: ../plugins/dfinput/dfinput.ui.h:4
+msgid "Controller 2"
+msgstr "控制器 2"
+
+#: ../plugins/dfinput/dfinput.ui.h:5
+msgid "Device:"
+msgstr "裝置:"
+
+#: ../plugins/dfinput/dfinput.ui.h:6
+#, fuzzy
+msgid "Digital Pad"
+msgstr ""
+"普通手把\n"
+"類比手把"
+
+#: ../plugins/dfinput/dfinput.ui.h:7
 msgid "Multi-Threaded (Recommended)"
 msgstr "多執行緒 (建議使用)"
 
-#: ../plugins/dfinput/dfinput.glade2.h:9
+#: ../plugins/dfinput/dfinput.ui.h:9
 msgid "Reset"
 msgstr "重置"
 
-#: ../plugins/dfinput/dfinput.glade2.h:10
+#: ../plugins/dfinput/dfinput.ui.h:10
 msgid "Type:"
 msgstr "類型:"
 
-#: ../plugins/dfinput/pad.c:22
+#: ../plugins/dfinput/pad.c:24
 msgid "Gamepad/Keyboard Input"
 msgstr "手把/鍵盤輸入"
 
@@ -1501,28 +1507,28 @@ msgstr "無法連線至 %s: %s\n"
 msgid "Error allocating memory!\n"
 msgstr "分配記憶體錯誤!\n"
 
-#: ../plugins/dfnet/dfnet.glade2.h:1
+#: ../plugins/dfnet/dfnet.ui.h:1
 msgid "Client (Player2)"
 msgstr "客戶端 (玩家 2)"
 
-#: ../plugins/dfnet/dfnet.glade2.h:2
+#: ../plugins/dfnet/dfnet.ui.h:2
 msgid "Copy PC IP to Clipboard"
 msgstr "將本機 IP 複制到剪貼板"
 
-#: ../plugins/dfnet/dfnet.glade2.h:3
+#: ../plugins/dfnet/dfnet.ui.h:3
 msgid ""
 "Do not change if not necessary (remember it must be changed on both sides)."
 msgstr "如非必要請勿更改 (必須在兩端都要更改)。"
 
-#: ../plugins/dfnet/dfnet.glade2.h:4
+#: ../plugins/dfnet/dfnet.ui.h:4
 msgid "Play Offline"
 msgstr "離線遊戲"
 
-#: ../plugins/dfnet/dfnet.glade2.h:5
+#: ../plugins/dfnet/dfnet.ui.h:5
 msgid "Port Number"
 msgstr "Port 號"
 
-#: ../plugins/dfnet/dfnet.glade2.h:6
+#: ../plugins/dfnet/dfnet.ui.h:6
 msgid ""
 "Select here if you'll be Server (Player1) or Client (Player2).\n"
 "\n"
@@ -1538,24 +1544,24 @@ msgstr ""
 "\n"
 "如果您選擇客戶端，請輸入伺服器端提供給您的 IP 地址。"
 
-#: ../plugins/dfnet/dfnet.glade2.h:11
+#: ../plugins/dfnet/dfnet.ui.h:11
 msgid "Server (Player1)"
 msgstr "伺服器 (玩家 1)"
 
-#: ../plugins/dfnet/dfnet.glade2.h:12
+#: ../plugins/dfnet/dfnet.ui.h:12
 msgid "Start Game"
 msgstr "開始遊戲"
 
-#: ../plugins/dfnet/gui.c:31 ../plugins/dfnet/gui.c:112
+#: ../plugins/dfnet/gui.c:30 ../plugins/dfnet/gui.c:112
 #: ../win32/gui/ConfigurePlugins.c:616
 msgid "NetPlay"
 msgstr "聯線遊戲"
 
-#: ../plugins/dfnet/gui.c:39
+#: ../plugins/dfnet/gui.c:38
 msgid "Nothing to configure"
 msgstr "沒有可以配置的內容"
 
-#: ../plugins/dfnet/gui.c:95
+#: ../plugins/dfnet/gui.c:94
 #, c-format
 msgid "IP %s"
 msgstr "IP %s"
@@ -2704,49 +2710,49 @@ msgstr "無法開啟 SPU 外掛 (%d)"
 msgid "Error Opening PAD1 Plugin (%d)"
 msgstr "無法開啟 PAD1 外掛 (%d)"
 
-#: ../win32/gui/plugin.c:291
+#: ../win32/gui/plugin.c:293
 #, c-format
 msgid "Error Opening PAD2 Plugin (%d)"
 msgstr "無法開啟 PAD2 外掛 (%d)"
 
-#: ../win32/gui/plugin.c:319
+#: ../win32/gui/plugin.c:323
 msgid "Error Closing CDR Plugin"
 msgstr "無法關閉 CD-ROM 外掛 (%d)"
 
-#: ../win32/gui/plugin.c:321
+#: ../win32/gui/plugin.c:325
 msgid "Error Closing GPU Plugin"
 msgstr "無法關閉 GPU 外掛"
 
-#: ../win32/gui/plugin.c:323
+#: ../win32/gui/plugin.c:327
 msgid "Error Closing SPU Plugin"
 msgstr "無法關閉 SPU 外掛"
 
-#: ../win32/gui/plugin.c:341
+#: ../win32/gui/plugin.c:345
 #, c-format
 msgid "CDRinit error: %d"
 msgstr "CDRinit 錯誤: %d"
 
-#: ../win32/gui/plugin.c:343
+#: ../win32/gui/plugin.c:347
 #, c-format
 msgid "GPUinit error: %d"
 msgstr "GPUinit 錯誤: %d"
 
-#: ../win32/gui/plugin.c:345
+#: ../win32/gui/plugin.c:349
 #, c-format
 msgid "SPUinit error: %d"
 msgstr "SPUinit 錯誤: %d"
 
-#: ../win32/gui/plugin.c:347
+#: ../win32/gui/plugin.c:351
 #, c-format
 msgid "PAD1init error: %d"
 msgstr "PAD1init 錯誤: %d"
 
-#: ../win32/gui/plugin.c:349
+#: ../win32/gui/plugin.c:353
 #, c-format
 msgid "PAD2init error: %d"
 msgstr "PAD2init 錯誤: %d"
 
-#: ../win32/gui/plugin.c:352
+#: ../win32/gui/plugin.c:356
 #, c-format
 msgid "NETinit error: %d"
 msgstr "NETinit 錯誤: %d"
@@ -3147,4 +3153,3 @@ msgstr "Pcsx 消息"
 #: ../win32/gui/WndMain.c:1866
 msgid "Error Loading Symbol"
 msgstr "無法加載符號"
-

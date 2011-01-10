@@ -123,6 +123,8 @@ typedef struct tagPadState {
 	volatile uint16_t	JoyKeyStatus;
 	volatile uint8_t	AnalogStatus[ANALOG_TOTAL][2]; // 0-255 where 127 is center position
 	volatile uint8_t	AnalogKeyStatus[ANALOG_TOTAL][4];
+	uint8_t				Vib0, Vib1;
+	volatile uint8_t	VibF[2];
 } PADSTATE;
 
 typedef struct tagGlobalData {
