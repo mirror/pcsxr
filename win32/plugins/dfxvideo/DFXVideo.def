@@ -54,3 +54,5 @@ EXPORTS
     ZN_GPUfreeze		@47
     ZN_GPUgetScreenPic	@48
     ZN_GPUshowScreenPic	@49
+
+    GPUvisualVibration	@50
