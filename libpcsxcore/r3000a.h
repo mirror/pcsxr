@@ -233,10 +233,10 @@ static inline u32 *Read_ICache(u32 pc, boolean isolate) {
 
 				// opcode line
 				pc_offset = pc & ~0xf;
-				*(u32 *)(ICode + pc_cache + 0x0) = psxMu32(pc_offset + 0x0);
-				*(u32 *)(ICode + pc_cache + 0x4) = psxMu32(pc_offset + 0x4);
-				*(u32 *)(ICode + pc_cache + 0x8) = psxMu32(pc_offset + 0x8);
-				*(u32 *)(ICode + pc_cache + 0xc) = psxMu32(pc_offset + 0xc);
+				*(u32 *)(ICode + pc_cache + 0x0) = psxMu32ref(pc_offset + 0x0);
+				*(u32 *)(ICode + pc_cache + 0x4) = psxMu32ref(pc_offset + 0x4);
+				*(u32 *)(ICode + pc_cache + 0x8) = psxMu32ref(pc_offset + 0x8);
+				*(u32 *)(ICode + pc_cache + 0xc) = psxMu32ref(pc_offset + 0xc);
 			}
 
 			// normal code
