@@ -209,13 +209,13 @@ static inline u32 *Read_ICache(u32 pc, boolean isolate) {
 
 	// uncached
 	if (pc_bank >= 0xa0)
-		return PSXM(pc);
+		return (u32 *)PSXM(pc);
 
 	// cached - RAM
 	if (pc_bank == 0x80 || pc_bank == 0x00) {
 		if (SWAP32(*(u32 *)(IAddr + pc_cache)) == pc_offset) {
 			// Cache hit - return last opcode used
-			return ICode + pc_cache;
+			return (u32 *)(ICode + pc_cache);
 		} else {
 			// Cache miss - addresses don't match
 			// - default: 0xffffffff (not init)
@@ -240,7 +240,7 @@ static inline u32 *Read_ICache(u32 pc, boolean isolate) {
 			}
 
 			// normal code
-			return PSXM(pc);
+			return (u32 *)PSXM(pc);
 		}
 	}
 
@@ -249,7 +249,7 @@ static inline u32 *Read_ICache(u32 pc, boolean isolate) {
 	*/
 
 	// default
-	return PSXM(pc);
+	return (u32 *)PSXM(pc);
 }
 
 #if defined(__BIGENDIAN__)

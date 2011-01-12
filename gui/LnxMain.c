@@ -284,6 +284,8 @@ int main(int argc, char *argv[]) {
 	textdomain (GETTEXT_PACKAGE);
 #endif
 
+	memset(&Config, 0, sizeof(PcsxConfig));
+
 	// what is the name of the config file?
 	// it may be redefined by -cfg on the command line
 	strcpy(cfgfile_basename, "pcsx.cfg");
@@ -349,7 +351,6 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	memset(&Config, 0, sizeof(PcsxConfig));
 	strcpy(Config.Net, "Disabled");
 
 	if (UseGui) gtk_init(NULL, NULL);

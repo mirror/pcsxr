@@ -128,7 +128,7 @@ int LoadConfig(PcsxConfig *Conf) {
 	Config.PsxAuto = GetValueb(data, "PsxAuto");
 	Config.Cdda    = GetValueb(data, "Cdda");
 	Config.Debug   = GetValueb(data, "Dbg");
-	Config.PsxOut  = GetValueb(data, "PsxOut");
+	Config.PsxOut  = (Config.PsxOut || GetValueb(data, "PsxOut"));
 	Config.SpuIrq  = GetValueb(data, "SpuIrq");
 	Config.RCntFix = GetValueb(data, "RCntFix");
 	Config.VSyncWA = GetValueb(data, "VSyncWA");
