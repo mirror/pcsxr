@@ -4,6 +4,7 @@
 	Version="9.00"
 	Name="gpuPeopsOpenGL"
 	ProjectGUID="{726BDE88-F2AD-4666-A4BC-5858F973976E}"
+	RootNamespace="gpuPeopsOpenGL"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -58,7 +59,7 @@
 				ProgramDataBaseFileName=".\Debug/"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -73,8 +74,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="opengl32.lib winmm.lib"
 				OutputFile=".\Debug/gpuPeopsOpenGL.dll"
-				LinkIncremental="2"
+				LinkIncremental="1"
 				SuppressStartupBanner="true"
 				ModuleDefinitionFile=".\gpuPeopsOpenGL.def"
 				GenerateDebugInformation="true"

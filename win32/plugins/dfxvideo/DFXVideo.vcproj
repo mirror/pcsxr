@@ -4,6 +4,7 @@
 	Version="9.00"
 	Name="DFXVideo"
 	ProjectGUID="{30F06328-DD64-4030-AF7A-19FBC74CF298}"
+	RootNamespace="DFXVideo"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -155,7 +156,7 @@
 				ProgramDataBaseFileName=".\Debug/"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -172,7 +173,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="winmm.lib vfw32.lib"
 				OutputFile=".\Debug/DFXVideo.dll"
-				LinkIncremental="2"
+				LinkIncremental="1"
 				SuppressStartupBanner="true"
 				ModuleDefinitionFile=".\DFXVideo.def"
 				GenerateDebugInformation="true"

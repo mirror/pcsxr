@@ -4,6 +4,7 @@
 	Version="9.00"
 	Name="SSSPSXpad"
 	ProjectGUID="{0639CDF3-8C1F-47F4-A760-F5568194A083}"
+	RootNamespace="SSSPSXpad"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -58,7 +59,7 @@
 				ProgramDataBaseFileName=".\Debug/"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -75,7 +76,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="odbc32.lib odbccp32.lib dinput8.lib dxguid.lib"
 				OutputFile=".\Debug/PadSSSPSX.dll"
-				LinkIncremental="2"
+				LinkIncremental="1"
 				SuppressStartupBanner="true"
 				ModuleDefinitionFile=".\PadSSSPSX.def"
 				GenerateDebugInformation="true"

@@ -4,6 +4,7 @@
 	Version="9.00"
 	Name="DFSound"
 	ProjectGUID="{DB25BF63-9B9E-4A40-A45E-BBBA49AD6F22}"
+	RootNamespace="DFSound"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -154,7 +155,7 @@
 				ProgramDataBaseFileName=".\Debug/"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -171,7 +172,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="dsound.lib winmm.lib"
 				OutputFile=".\Debug/DFSound.dll"
-				LinkIncremental="2"
+				LinkIncremental="1"
 				SuppressStartupBanner="true"
 				ModuleDefinitionFile=".\DFSound.def"
 				GenerateDebugInformation="true"
