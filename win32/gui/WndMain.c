@@ -208,6 +208,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			}
 		} else if (strcmp(arg, "-psxout") == 0) {
 			Config.PsxOut = TRUE;
+		} else if (strcmp(arg, "-slowboot") == 0) {
+			Config.SlowBoot = TRUE;
 		} else if (strcmp(arg, "-help") == 0) {
 			MessageBox(gApp.hWnd, _(
 				"Usage: pcsx [options]\n"

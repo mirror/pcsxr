@@ -27,9 +27,6 @@
 #include "gpu.h"
 #include "gte.h"
 
-extern u32 *Read_ICache( u32 pc, u32 isolate );
-
-
 R3000Acpu *psxCpu = NULL;
 psxRegisters psxRegs;
 
@@ -116,7 +113,7 @@ void psxBranchTest() {
 			u32 opcode;
 
 			// Crash Bandicoot 2: Don't run exceptions when GTE in pipeline
-			opcode = *Read_ICache( psxRegs.pc, 1 );
+			opcode = SWAP32(*Read_ICache(psxRegs.pc, TRUE));
 			if( ((opcode >> 24) & 0xfe) != 0x4a ) {
 #ifdef PSXCPU_LOG
 				PSXCPU_LOG("Interrupt: %x %x\n", psxHu32(0x1070), psxHu32(0x1074));

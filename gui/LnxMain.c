@@ -292,7 +292,8 @@ int main(int argc, char *argv[]) {
 	for (i = 1; i < argc; i++) {
 		if (!strcmp(argv[i], "-runcd")) runcd = RUN_CD;
 		else if (!strcmp(argv[i], "-nogui")) UseGui = FALSE;
-		else if (!strcmp(argv[i], "-psxout")) Config.PsxOut = 1;
+		else if (!strcmp(argv[i], "-psxout")) Config.PsxOut = TRUE;
+		else if (!strcmp(argv[i], "-slowboot")) Config.SlowBoot = TRUE;
 		else if (!strcmp(argv[i], "-load")) loadst = atol(argv[++i]);
 		else if (!strcmp(argv[i], "-cfg")) {
 			if (i+1 >= argc) break;

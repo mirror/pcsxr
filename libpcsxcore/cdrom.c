@@ -480,11 +480,6 @@ static void ReadTrack( u8 *time ) {
 }
 
 
-extern int opensbifile(const char *isoname);
-extern int cdrIsoActive(void);
-extern int checkSBI(u8 *time);
-
-
 void AddIrqQueue(unsigned char irq, unsigned long ecycle) {
 	cdr.Irq = irq;
 	cdr.eCycle = ecycle;
@@ -1215,7 +1210,7 @@ void cdrInterrupt() {
 			}
 
 			// redump.org - wipe time
-			if( !cdr.Play && checkSBI(cdr.Result+5) ) {
+			if( !cdr.Play && CheckSBI(cdr.Result+5) ) {
 				memset( cdr.Result+2, 0, 6 );
 			}
 
@@ -1351,7 +1346,7 @@ void cdrInterrupt() {
 
 			if (CDR_getStatus(&stat) == -1) {
 				cdr.Result[0] = 0x00; // 0x08 and cdr.Result[1]|0x10 : audio cd, enters cd player
-				cdr.Result[1] = 0x00; // 0x80 leads to the menu in the bios, else loads CD
+				cdr.Result[1] = 0x80; // 0x80 leads to the menu in the bios, else loads CD
 			}
 			else {
 				if (stat.Type == 2) {
@@ -1363,12 +1358,17 @@ void cdrInterrupt() {
 				}
 				else {
 					// Data CD
-					cdr.Result[0] = 0x08;
-					cdr.Result[1] = 0x00;
+					if (CdromId[0] == '\0') {
+						cdr.Result[0] = 0x00;
+						cdr.Result[1] = 0x80;
+					}
+					else {
+						cdr.Result[0] = 0x08;
+						cdr.Result[1] = 0x00;
+					}
 				}
 			}
 
-			if (CdromId[0] == '\0') cdr.Result[1] |= 0x80;
 			cdr.Result[2] = 0x00;
 			cdr.Result[3] = 0x00;
 			strncpy((char *)&cdr.Result[4], "PCSX", 4);
@@ -2300,10 +2300,6 @@ void cdrReset() {
 	cdr.CurTrack = 1;
 	cdr.File = 1;
 	cdr.Channel = 1;
-
-	if( !cdrIsoActive() ) {
-		opensbifile( "redump.sbi" );
-	}
 }
 
 int cdrFreeze(gzFile f, int Mode) {
