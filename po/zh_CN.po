@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2011-01-10 11:12+0800\n"
-"PO-Revision-Date: 2011-01-09 15:28+0700\n"
+"POT-Creation-Date: 2011-01-12 23:37+0800\n"
+"PO-Revision-Date: 2011-01-12 23:38+0700\n"
 "Last-Translator: Wei Mingzhi <whistler@openoffice.org>\n"
 "Language-Team: Simplified Chinese <whistler@openoffice.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 #: ../data/pcsx.glade2.h:1
 msgid ""
@@ -62,11 +62,13 @@ msgstr "<b>插件</b>"
 msgid "<b>System Type</b>"
 msgstr "<b>系统类型</b>"
 
-#: ../data/pcsx.glade2.h:13 ../gui/DebugMemory.c:188
+#: ../data/pcsx.glade2.h:13
+#: ../gui/DebugMemory.c:188
 msgid "Address (Hexadecimal):"
 msgstr "地址 (十六进制):"
 
-#: ../data/pcsx.glade2.h:14 ../win32/gui/WndMain.c:1299
+#: ../data/pcsx.glade2.h:14
+#: ../win32/gui/WndMain.c:1301
 msgid "Autodetect"
 msgstr "自动检测"
 
@@ -94,7 +96,9 @@ msgstr "控制器(_O)..."
 msgid "Chea_t"
 msgstr "作弊码(_T)"
 
-#: ../data/pcsx.glade2.h:21 ../gui/Cheat.c:1129 ../win32/gui/CheatDlg.c:678
+#: ../data/pcsx.glade2.h:21
+#: ../gui/Cheat.c:1129
+#: ../win32/gui/CheatDlg.c:678
 msgid "Cheat Search"
 msgstr "查找作弊码"
 
@@ -122,11 +126,13 @@ msgstr "配置记忆卡"
 msgid "Configure NetPlay"
 msgstr "配置联网游戏"
 
-#: ../data/pcsx.glade2.h:28 ../gui/ConfDlg.c:112
+#: ../data/pcsx.glade2.h:28
+#: ../gui/ConfDlg.c:112
 msgid "Configure PCSX"
 msgstr "配置 PCSX"
 
-#: ../data/pcsx.glade2.h:29 ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:6
+#: ../data/pcsx.glade2.h:29
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:6
 msgid "Configure Sound"
 msgstr "配置音频"
 
@@ -154,11 +160,13 @@ msgstr "控制器..."
 msgid "Copy"
 msgstr "复制"
 
-#: ../data/pcsx.glade2.h:36 ../win32/gui/CheatDlg.c:683
+#: ../data/pcsx.glade2.h:36
+#: ../win32/gui/CheatDlg.c:683
 msgid "Data Base:"
 msgstr "数据基:"
 
-#: ../data/pcsx.glade2.h:37 ../win32/gui/CheatDlg.c:681
+#: ../data/pcsx.glade2.h:37
+#: ../win32/gui/CheatDlg.c:681
 msgid "Data Type:"
 msgstr "数据类型:"
 
@@ -182,15 +190,18 @@ msgstr "禁用 XA 解码"
 msgid "E_xit"
 msgstr "退出(_X)"
 
-#: ../data/pcsx.glade2.h:43 ../win32/gui/CheatDlg.c:166
+#: ../data/pcsx.glade2.h:43
+#: ../win32/gui/CheatDlg.c:166
 msgid "Edit Cheat Codes"
 msgstr "编辑作弊码"
 
-#: ../data/pcsx.glade2.h:44 ../win32/gui/WndMain.c:1301
+#: ../data/pcsx.glade2.h:44
+#: ../win32/gui/WndMain.c:1303
 msgid "Enable Console Output"
 msgstr "启用控制台输出"
 
-#: ../data/pcsx.glade2.h:45 ../win32/gui/WndMain.c:1302
+#: ../data/pcsx.glade2.h:45
+#: ../win32/gui/WndMain.c:1304
 msgid "Enable Debugger"
 msgstr "启用调试器"
 
@@ -224,7 +235,8 @@ msgstr ""
 msgid "Format"
 msgstr "格式化"
 
-#: ../data/pcsx.glade2.h:57 ../win32/gui/CheatDlg.c:504
+#: ../data/pcsx.glade2.h:57
+#: ../win32/gui/CheatDlg.c:504
 msgid "Freeze"
 msgstr "固定"
 
@@ -236,7 +248,8 @@ msgstr "图像..."
 msgid "Graphics:"
 msgstr "图像:"
 
-#: ../data/pcsx.glade2.h:60 ../win32/gui/WndMain.c:1305
+#: ../data/pcsx.glade2.h:60
+#: ../win32/gui/WndMain.c:1307
 msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku Battle 修正"
 
@@ -244,7 +257,8 @@ msgstr "InuYasha Sengoku Battle 修正"
 msgid "Memcards..."
 msgstr "记忆卡..."
 
-#: ../data/pcsx.glade2.h:62 ../gui/DebugMemory.c:103
+#: ../data/pcsx.glade2.h:62
+#: ../gui/DebugMemory.c:103
 msgid "Memory Dump"
 msgstr "内存转储"
 
@@ -252,7 +266,8 @@ msgstr "内存转储"
 msgid "Memory _Dump"
 msgstr "内存转储(_D)"
 
-#: ../data/pcsx.glade2.h:64 ../win32/gui/CheatDlg.c:595
+#: ../data/pcsx.glade2.h:64
+#: ../win32/gui/CheatDlg.c:595
 msgid "Modify"
 msgstr "修改"
 
@@ -272,7 +287,8 @@ msgstr "新建"
 msgid "PCSX"
 msgstr "PCSX"
 
-#: ../data/pcsx.glade2.h:69 ../win32/gui/WndMain.c:1304
+#: ../data/pcsx.glade2.h:69
+#: ../win32/gui/WndMain.c:1306
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr "Parasite Eve 2, Vandal Hearts 1/2 修正"
 
@@ -316,7 +332,8 @@ msgstr "运行 _EXE..."
 msgid "Run _ISO..."
 msgstr "运行 _ISO..."
 
-#: ../data/pcsx.glade2.h:80 ../gui/Plugin.c:239
+#: ../data/pcsx.glade2.h:80
+#: ../gui/Plugin.c:239
 #, c-format
 msgid "SIO IRQ Always Enabled"
 msgstr "SIO IRQ 总是启用"
@@ -333,7 +350,8 @@ msgstr "更换 ISO(_W)..."
 msgid "Search"
 msgstr "查找"
 
-#: ../data/pcsx.glade2.h:84 ../win32/gui/CheatDlg.c:680
+#: ../data/pcsx.glade2.h:84
+#: ../win32/gui/CheatDlg.c:680
 msgid "Search For:"
 msgstr "查找:"
 
@@ -397,7 +415,8 @@ msgstr "更换 ISO 光盘镜像"
 msgid "Switch ISO..."
 msgstr "更换 ISO..."
 
-#: ../data/pcsx.glade2.h:100 ../win32/gui/CheatDlg.c:684
+#: ../data/pcsx.glade2.h:100
+#: ../win32/gui/CheatDlg.c:684
 msgid "To:"
 msgstr "到:"
 
@@ -405,8 +424,11 @@ msgstr "到:"
 msgid "Un/Delete"
 msgstr "删除/恢复"
 
-#: ../data/pcsx.glade2.h:102 ../gui/Cheat.c:647 ../win32/gui/CheatDlg.c:506
-#: ../win32/gui/CheatDlg.c:597 ../win32/gui/CheatDlg.c:682
+#: ../data/pcsx.glade2.h:102
+#: ../gui/Cheat.c:647
+#: ../win32/gui/CheatDlg.c:506
+#: ../win32/gui/CheatDlg.c:597
+#: ../win32/gui/CheatDlg.c:682
 msgid "Value:"
 msgstr "值:"
 
@@ -498,33 +520,17 @@ msgstr ""
 
 #: ../gui/AboutDlg.c:77
 msgid ""
-"This program is free software; you can redistribute it and/or modify it "
-"under the terms of the GNU General Public License as published by the Free "
-"Software Foundation; either version 2 of the License, or (at your option) "
-"any later version.\n"
+"This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.\n"
 "\n"
-"This program is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-"more details.\n"
+"This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
 "\n"
-"You should have received a copy of the GNU General Public License along with "
-"this program; if not, write to the Free Software Foundation, Inc., 51 "
-"Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
+"You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
 msgstr ""
-"This program is free software; you can redistribute it and/or modify it "
-"under the terms of the GNU General Public License as published by the Free "
-"Software Foundation; either version 2 of the License, or (at your option) "
-"any later version.\n"
+"This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.\n"
 "\n"
-"This program is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-"more details.\n"
+"This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
 "\n"
-"You should have received a copy of the GNU General Public License along with "
-"this program; if not, write to the Free Software Foundation, Inc., 51 "
-"Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
+"You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
 
 #: ../gui/AboutDlg.c:100
 msgid "translator-credits"
@@ -534,30 +540,39 @@ msgstr "Wei Mingzhi <whistler@openoffice.org>"
 msgid "A PlayStation emulator."
 msgstr "一个 PlayStation 模拟器。"
 
-#: ../gui/Cheat.c:109 ../win32/gui/CheatDlg.c:116
+#: ../gui/Cheat.c:109
+#: ../win32/gui/CheatDlg.c:116
 msgid "Add New Cheat"
 msgstr "添加新作弊码"
 
-#: ../gui/Cheat.c:117 ../gui/Cheat.c:202
+#: ../gui/Cheat.c:117
+#: ../gui/Cheat.c:202
 msgid "Cheat Description:"
 msgstr "作弊码描述:"
 
-#: ../gui/Cheat.c:125 ../gui/Cheat.c:211 ../win32/gui/CheatDlg.c:68
+#: ../gui/Cheat.c:125
+#: ../gui/Cheat.c:211
+#: ../win32/gui/CheatDlg.c:68
 #: ../win32/gui/CheatDlg.c:118
 msgid "Cheat Code:"
 msgstr "作弊码:"
 
-#: ../gui/Cheat.c:155 ../gui/Cheat.c:251 ../gui/LnxMain.c:419
+#: ../gui/Cheat.c:155
+#: ../gui/Cheat.c:251
+#: ../gui/LnxMain.c:421
 #: ../win32/gui/ConfigurePlugins.c:305
 msgid "Error"
 msgstr "错误"
 
-#: ../gui/Cheat.c:155 ../gui/Cheat.c:251 ../win32/gui/CheatDlg.c:91
+#: ../gui/Cheat.c:155
+#: ../gui/Cheat.c:251
+#: ../win32/gui/CheatDlg.c:91
 #: ../win32/gui/CheatDlg.c:132
 msgid "Invalid cheat code!"
 msgstr "非法作弊码!"
 
-#: ../gui/Cheat.c:194 ../win32/gui/CheatDlg.c:66
+#: ../gui/Cheat.c:194
+#: ../win32/gui/CheatDlg.c:66
 msgid "Edit Cheat"
 msgstr "编辑作弊码"
 
@@ -565,12 +580,16 @@ msgstr "编辑作弊码"
 msgid "Open Cheat File"
 msgstr "打开作弊码文件"
 
-#: ../gui/Cheat.c:316 ../gui/Cheat.c:356
+#: ../gui/Cheat.c:316
+#: ../gui/Cheat.c:356
 msgid "PCSX Cheat Code Files (*.cht)"
 msgstr "PCSX 作弊码文件 (*.cht)"
 
-#: ../gui/Cheat.c:321 ../gui/Gtk2Gui.c:446 ../gui/Gtk2Gui.c:587
-#: ../win32/gui/WndMain.c:1442 ../win32/gui/WndMain.c:1523
+#: ../gui/Cheat.c:321
+#: ../gui/Gtk2Gui.c:446
+#: ../gui/Gtk2Gui.c:587
+#: ../win32/gui/WndMain.c:1444
+#: ../win32/gui/WndMain.c:1525
 msgid "All Files"
 msgstr "所有文件"
 
@@ -582,8 +601,11 @@ msgstr "保存作弊码文件"
 msgid "All Files (*.*)"
 msgstr "所有文件 (*.*)"
 
-#: ../gui/Cheat.c:394 ../gui/Cheat.c:1124 ../gui/ConfDlg.c:104
-#: ../gui/ConfDlg.c:200 ../gui/DebugMemory.c:259
+#: ../gui/Cheat.c:394
+#: ../gui/Cheat.c:1124
+#: ../gui/ConfDlg.c:104
+#: ../gui/ConfDlg.c:200
+#: ../gui/DebugMemory.c:259
 msgid "Error: Glade interface could not be loaded!"
 msgstr "错误：无法加载 Glade 界面!"
 
@@ -595,35 +617,42 @@ msgstr "作弊码"
 msgid "Enable"
 msgstr "启用"
 
-#: ../gui/Cheat.c:413 ../win32/gui/CheatDlg.c:185
+#: ../gui/Cheat.c:413
+#: ../win32/gui/CheatDlg.c:185
 msgid "Description"
 msgstr "描述"
 
-#: ../gui/Cheat.c:543 ../win32/gui/CheatDlg.c:457
+#: ../gui/Cheat.c:543
+#: ../win32/gui/CheatDlg.c:457
 msgid "Too many addresses found."
 msgstr "找到过多的地址。"
 
-#: ../gui/Cheat.c:552 ../win32/gui/CheatDlg.c:466
+#: ../gui/Cheat.c:552
+#: ../win32/gui/CheatDlg.c:466
 #, c-format
 msgid "%.8X    Current: %u (%.2X), Previous: %u (%.2X)"
 msgstr "%.8X    当前值: %u (%.2X), 前次值: %u (%.2X)"
 
-#: ../gui/Cheat.c:557 ../win32/gui/CheatDlg.c:471
+#: ../gui/Cheat.c:557
+#: ../win32/gui/CheatDlg.c:471
 #, c-format
 msgid "%.8X    Current: %u (%.4X), Previous: %u (%.4X)"
 msgstr "%.8X    当前值: %u (%.4X), 前次值: %u (%.4X)"
 
-#: ../gui/Cheat.c:562 ../win32/gui/CheatDlg.c:476
+#: ../gui/Cheat.c:562
+#: ../win32/gui/CheatDlg.c:476
 #, c-format
 msgid "%.8X    Current: %u (%.8X), Previous: %u (%.8X)"
 msgstr "%.8X    当前值: %u (%.8X), 前次值: %u (%.8X)"
 
-#: ../gui/Cheat.c:577 ../win32/gui/CheatDlg.c:492
+#: ../gui/Cheat.c:577
+#: ../win32/gui/CheatDlg.c:492
 #, c-format
 msgid "Founded Addresses: %d"
 msgstr "找到地址个数: %d"
 
-#: ../gui/Cheat.c:585 ../win32/gui/CheatDlg.c:448
+#: ../gui/Cheat.c:585
+#: ../win32/gui/CheatDlg.c:448
 msgid "Enter the values and start your search."
 msgstr "输入数值并开始查找。"
 
@@ -631,7 +660,9 @@ msgstr "输入数值并开始查找。"
 msgid "Freeze value"
 msgstr "固定数值"
 
-#: ../gui/Cheat.c:636 ../win32/gui/CheatDlg.c:67 ../win32/gui/CheatDlg.c:117
+#: ../gui/Cheat.c:636
+#: ../win32/gui/CheatDlg.c:67
+#: ../win32/gui/CheatDlg.c:117
 msgid "Description:"
 msgstr "描述:"
 
@@ -652,13 +683,19 @@ msgstr "查找结果"
 #. disabled widgets
 #. TODO If combo screen hasn't been opened and the user chooses the menu config option, confs.Combo will be null and cause a segfault
 #. printf("Configuring plugin %s\n", filename);
-#: ../gui/ConfDlg.c:237 ../gui/ConfDlg.c:258 ../gui/ConfDlg.c:279
-#: ../gui/ConfDlg.c:300 ../gui/ConfDlg.c:355
+#: ../gui/ConfDlg.c:237
+#: ../gui/ConfDlg.c:258
+#: ../gui/ConfDlg.c:279
+#: ../gui/ConfDlg.c:300
+#: ../gui/ConfDlg.c:355
 msgid "No configuration required"
 msgstr "不需要配置"
 
-#: ../gui/ConfDlg.c:237 ../gui/ConfDlg.c:258 ../gui/ConfDlg.c:279
-#: ../gui/ConfDlg.c:300 ../gui/ConfDlg.c:355
+#: ../gui/ConfDlg.c:237
+#: ../gui/ConfDlg.c:258
+#: ../gui/ConfDlg.c:279
+#: ../gui/ConfDlg.c:300
+#: ../gui/ConfDlg.c:355
 msgid "This plugin doesn't need to be configured."
 msgstr "此插件需要被配置。"
 
@@ -667,7 +704,9 @@ msgstr "此插件需要被配置。"
 msgid "Could not open BIOS directory: '%s'\n"
 msgstr "无法打开 BIOS 目录: \"%s\"\n"
 
-#: ../gui/ConfDlg.c:611 ../gui/ConfDlg.c:704 ../gui/LnxMain.c:168
+#: ../gui/ConfDlg.c:611
+#: ../gui/ConfDlg.c:704
+#: ../gui/LnxMain.c:168
 #, c-format
 msgid "Could not open directory: '%s'\n"
 msgstr "无法打开目录: \"%s\"\n"
@@ -738,23 +777,31 @@ msgstr "不是一个合法的 PSX 文件"
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "此文件不是一个合法的 PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:508 ../gui/Gtk2Gui.c:649
+#: ../gui/Gtk2Gui.c:508
+#: ../gui/Gtk2Gui.c:649
 msgid "CD ROM failed"
 msgstr "CD-ROM 失败"
 
-#: ../gui/Gtk2Gui.c:508 ../gui/Gtk2Gui.c:649 ../win32/gui/WndMain.c:461
-#: ../win32/gui/WndMain.c:513 ../win32/gui/WndMain.c:582
+#: ../gui/Gtk2Gui.c:508
+#: ../gui/Gtk2Gui.c:649
+#: ../win32/gui/WndMain.c:463
+#: ../win32/gui/WndMain.c:515
+#: ../win32/gui/WndMain.c:584
 #, c-format
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "此光盘不是一张合法的 PlayStation 光盘。"
 
-#: ../gui/Gtk2Gui.c:519 ../gui/Gtk2Gui.c:660 ../win32/gui/WndMain.c:471
-#: ../win32/gui/WndMain.c:523 ../win32/gui/WndMain.c:592
+#: ../gui/Gtk2Gui.c:519
+#: ../gui/Gtk2Gui.c:660
+#: ../win32/gui/WndMain.c:473
+#: ../win32/gui/WndMain.c:525
+#: ../win32/gui/WndMain.c:594
 #, c-format
 msgid "Could not load CD-ROM!"
 msgstr "无法加载光盘!"
 
-#: ../gui/Gtk2Gui.c:519 ../gui/Gtk2Gui.c:660
+#: ../gui/Gtk2Gui.c:519
+#: ../gui/Gtk2Gui.c:660
 msgid "The CD-ROM could not be loaded"
 msgstr "无法加载 CD-ROM"
 
@@ -794,7 +841,8 @@ msgstr "已保存存档 %s"
 msgid "Error saving state %s!"
 msgstr "保存存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:864 ../gui/Gtk2Gui.c:892
+#: ../gui/Gtk2Gui.c:864
+#: ../gui/Gtk2Gui.c:892
 msgid "Select State File"
 msgstr "选择存档文件"
 
@@ -807,7 +855,7 @@ msgstr "警告"
 msgid "Creating memory card: %s\n"
 msgstr "建立记忆卡: %s\n"
 
-#: ../gui/LnxMain.c:326
+#: ../gui/LnxMain.c:329
 msgid ""
 " pcsx [options] [file]\n"
 "\toptions:\n"
@@ -831,23 +879,21 @@ msgstr ""
 "\t-h -help\t显示此信息\n"
 "\t文件\t\t加载文件\n"
 
-#: ../gui/LnxMain.c:363
+#: ../gui/LnxMain.c:365
 #, c-format
-msgid ""
-"PCSX cannot be configured without using the GUI -- you should restart "
-"without -nogui.\n"
+msgid "PCSX cannot be configured without using the GUI -- you should restart without -nogui.\n"
 msgstr "PCSX 不能在字符界面下配置 -- 请不使用 -nogui 参数重新启动程序\n"
 
-#: ../gui/LnxMain.c:419
+#: ../gui/LnxMain.c:421
 msgid "Failed loading plugins!"
 msgstr "加载插件失败!"
 
-#: ../gui/LnxMain.c:438
+#: ../gui/LnxMain.c:440
 #, c-format
 msgid "Could not load CD-ROM!\n"
 msgstr "无法加载光盘。\n"
 
-#: ../gui/LnxMain.c:469
+#: ../gui/LnxMain.c:471
 #, c-format
 msgid "PSX emulator couldn't be initialized.\n"
 msgstr "无法初始化 PS 模拟器。\n"
@@ -856,11 +902,13 @@ msgstr "无法初始化 PS 模拟器。\n"
 msgid "Icon"
 msgstr "图标"
 
-#: ../gui/MemcardDlg.c:62 ../win32/gui/WndMain.c:746
+#: ../gui/MemcardDlg.c:62
+#: ../win32/gui/WndMain.c:748
 msgid "Title"
 msgstr "标题"
 
-#: ../gui/MemcardDlg.c:68 ../win32/gui/WndMain.c:752
+#: ../gui/MemcardDlg.c:68
+#: ../win32/gui/WndMain.c:754
 msgid "Status"
 msgstr "状态"
 
@@ -872,17 +920,24 @@ msgstr "ID"
 msgid "Name"
 msgstr "名称"
 
-#: ../gui/MemcardDlg.c:155 ../gui/MemcardDlg.c:260 ../win32/gui/WndMain.c:957
+#: ../gui/MemcardDlg.c:155
+#: ../gui/MemcardDlg.c:260
+#: ../win32/gui/WndMain.c:959
 msgid "Deleted"
 msgstr "已删除"
 
-#: ../gui/MemcardDlg.c:157 ../gui/MemcardDlg.c:161 ../gui/MemcardDlg.c:262
-#: ../gui/MemcardDlg.c:266 ../win32/gui/WndMain.c:958
-#: ../win32/gui/WndMain.c:961
+#: ../gui/MemcardDlg.c:157
+#: ../gui/MemcardDlg.c:161
+#: ../gui/MemcardDlg.c:262
+#: ../gui/MemcardDlg.c:266
+#: ../win32/gui/WndMain.c:960
+#: ../win32/gui/WndMain.c:963
 msgid "Free"
 msgstr "空闲"
 
-#: ../gui/MemcardDlg.c:159 ../gui/MemcardDlg.c:264 ../win32/gui/WndMain.c:960
+#: ../gui/MemcardDlg.c:159
+#: ../gui/MemcardDlg.c:264
+#: ../win32/gui/WndMain.c:962
 msgid "Used"
 msgstr "已使用"
 
@@ -896,9 +951,7 @@ msgid "Format this Memory Card?"
 msgstr "格式化此记忆卡?"
 
 #: ../gui/MemcardDlg.c:366
-msgid ""
-"If you format the memory card, the card will be empty, and any existing data "
-"overwritten."
+msgid "If you format the memory card, the card will be empty, and any existing data overwritten."
 msgstr "如果您选择格式化记忆卡，记忆卡将被清空，并且任何现有数据都将被覆盖。"
 
 #: ../gui/MemcardDlg.c:369
@@ -920,9 +973,7 @@ msgid "No free space on memory card"
 msgstr "记忆卡无空余位置"
 
 #: ../gui/MemcardDlg.c:504
-msgid ""
-"There are no free slots available on the target memory card. Please delete a "
-"slot first."
+msgid "There are no free slots available on the target memory card. Please delete a slot first."
 msgstr "目标记忆卡上无空余位置。请先删除一个存档。"
 
 #: ../gui/MemcardDlg.c:667
@@ -994,12 +1045,12 @@ msgstr "无法关闭 \"控制器 2\" 插件!"
 msgid "Error closing GPU plugin!"
 msgstr "无法关闭 GPU 插件!"
 
-#: ../libpcsxcore/cdriso.c:783
+#: ../libpcsxcore/cdriso.c:728
 #, c-format
 msgid "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"
 msgstr "音轨 %.2d (%s) - 起始位置 %.2d:%.2d:%.2d, 长度 %.2d:%.2d:%.2d\n"
 
-#: ../libpcsxcore/cdriso.c:804
+#: ../libpcsxcore/cdriso.c:749
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr "已加载 CD 镜像: %s"
@@ -1014,7 +1065,8 @@ msgstr "作弊码已加载: %s\n"
 msgid "Cheats saved to: %s\n"
 msgstr "作弊码己保存: %s\n"
 
-#: ../libpcsxcore/cheat.c:322 ../libpcsxcore/cheat.c:443
+#: ../libpcsxcore/cheat.c:322
+#: ../libpcsxcore/cheat.c:443
 msgid "(Untitled)"
 msgstr "(未命名)"
 
@@ -1044,17 +1096,17 @@ msgstr "CD-ROM 卷标: %.32s\n"
 msgid "CD-ROM ID: %.9s\n"
 msgstr "CD-ROM ID: %.9s\n"
 
-#: ../libpcsxcore/misc.c:409
+#: ../libpcsxcore/misc.c:410
 #, c-format
 msgid "Error opening file: %s.\n"
 msgstr "打开文件错误: %s。\n"
 
-#: ../libpcsxcore/misc.c:452
+#: ../libpcsxcore/misc.c:453
 #, c-format
 msgid "Unknown CPE opcode %02x at position %08x.\n"
 msgstr "未知 CPE 指令码 %02x 位于 %08x。\n"
 
-#: ../libpcsxcore/misc.c:480
+#: ../libpcsxcore/misc.c:481
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "此文件不是一个合法的 PSX 文件。\n"
 
@@ -1137,21 +1189,26 @@ msgstr "SIO1 插件初始化错误: %d"
 msgid "Plugins loaded.\n"
 msgstr "插件已加载。\n"
 
-#: ../libpcsxcore/ppf.c:216
+#: ../libpcsxcore/ppf.c:217
 #, c-format
 msgid "Invalid PPF patch: %s.\n"
 msgstr "非法 PPF 补丁: %s。\n"
 
-#: ../libpcsxcore/ppf.c:292
+#: ../libpcsxcore/ppf.c:293
 #, c-format
 msgid "Unsupported PPF version (%d).\n"
 msgstr "不支持的 PPF 补丁版本 (%d)。\n"
 
 #. build address array
-#: ../libpcsxcore/ppf.c:331
+#: ../libpcsxcore/ppf.c:332
 #, c-format
 msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr "已加载 PPF %d.0 补丁文件: %s。\n"
+
+#: ../libpcsxcore/ppf.c:375
+#, c-format
+msgid "Loaded SBI file: %s.\n"
+msgstr "已加载 SBI 文件: %s。\n"
 
 #: ../libpcsxcore/psxmem.c:78
 msgid "Error allocating memory!"
@@ -1162,7 +1219,7 @@ msgstr "分配内存错误!"
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
 msgstr "无法打开 BIOS: \"%s\"。使用内部 HLE Bios。\n"
 
-#: ../libpcsxcore/r3000a.c:37
+#: ../libpcsxcore/r3000a.c:34
 #, c-format
 msgid "Running PCSX Version %s (%s).\n"
 msgstr "正在运行 PCSX 版本 %s (%s)。\n"
@@ -1265,7 +1322,8 @@ msgstr ""
 "多线程 - 较快 (使用缓存)"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:24
-#: ../plugins/dfinput/dfinput.ui.h:8 ../win32/gui/WndMain.c:1307
+#: ../plugins/dfinput/dfinput.ui.h:8
+#: ../win32/gui/WndMain.c:1309
 msgid "Options"
 msgstr "选项"
 
@@ -1381,62 +1439,76 @@ msgstr "右摇杆下方向"
 msgid "R-Stick Up"
 msgstr "右摇杆上方向"
 
-#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
+#: ../plugins/dfinput/cfg-gtk2.c:100
+#: ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Centered"
 msgstr "居中"
 
-#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
+#: ../plugins/dfinput/cfg-gtk2.c:100
+#: ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Up"
 msgstr "上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
+#: ../plugins/dfinput/cfg-gtk2.c:100
+#: ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Right"
 msgstr "右方向键"
 
-#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
+#: ../plugins/dfinput/cfg-gtk2.c:100
+#: ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Rightup"
 msgstr "右上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
+#: ../plugins/dfinput/cfg-gtk2.c:101
+#: ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Down"
 msgstr "下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
+#: ../plugins/dfinput/cfg-gtk2.c:101
+#: ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Rightdown"
 msgstr "右下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
+#: ../plugins/dfinput/cfg-gtk2.c:101
+#: ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Left"
 msgstr "左"
 
-#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
+#: ../plugins/dfinput/cfg-gtk2.c:101
+#: ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Leftup"
 msgstr "左上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:102 ../plugins/dfinput/cfg-gtk2.c:141
+#: ../plugins/dfinput/cfg-gtk2.c:102
+#: ../plugins/dfinput/cfg-gtk2.c:141
 msgid "Leftdown"
 msgstr "左下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:106 ../plugins/dfinput/cfg-gtk2.c:145
+#: ../plugins/dfinput/cfg-gtk2.c:106
+#: ../plugins/dfinput/cfg-gtk2.c:145
 #, c-format
 msgid "Joystick: Button %d"
 msgstr "手柄: 按钮 %d"
 
-#: ../plugins/dfinput/cfg-gtk2.c:110 ../plugins/dfinput/cfg-gtk2.c:149
+#: ../plugins/dfinput/cfg-gtk2.c:110
+#: ../plugins/dfinput/cfg-gtk2.c:149
 #, c-format
 msgid "Joystick: Axis %d%c"
 msgstr "手柄: 轴 %d%c"
 
-#: ../plugins/dfinput/cfg-gtk2.c:115 ../plugins/dfinput/cfg-gtk2.c:154
+#: ../plugins/dfinput/cfg-gtk2.c:115
+#: ../plugins/dfinput/cfg-gtk2.c:154
 #, c-format
 msgid "Joystick: Hat %d %s"
 msgstr "Joystick: 操纵杆 %d %s"
 
-#: ../plugins/dfinput/cfg-gtk2.c:130 ../plugins/dfinput/cfg-gtk2.c:169
+#: ../plugins/dfinput/cfg-gtk2.c:130
+#: ../plugins/dfinput/cfg-gtk2.c:169
 msgid "Keyboard:"
 msgstr "键盘:"
 
-#: ../plugins/dfinput/cfg-gtk2.c:134 ../plugins/dfinput/cfg-gtk2.c:173
+#: ../plugins/dfinput/cfg-gtk2.c:134
+#: ../plugins/dfinput/cfg-gtk2.c:173
 msgid "(Not Set)"
 msgstr "(未设定)"
 
@@ -1449,11 +1521,13 @@ msgstr "无"
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr "手柄/键盘输入配置"
 
-#: ../plugins/dfinput/cfg-gtk2.c:590 ../plugins/dfinput/cfg-gtk2.c:610
+#: ../plugins/dfinput/cfg-gtk2.c:590
+#: ../plugins/dfinput/cfg-gtk2.c:610
 msgid "Key"
 msgstr "按钮"
 
-#: ../plugins/dfinput/cfg-gtk2.c:596 ../plugins/dfinput/cfg-gtk2.c:616
+#: ../plugins/dfinput/cfg-gtk2.c:596
+#: ../plugins/dfinput/cfg-gtk2.c:616
 msgid "Button"
 msgstr "按键"
 
@@ -1520,8 +1594,7 @@ msgid "Copy PC IP to Clipboard"
 msgstr "将本机 IP 复制到剪贴板"
 
 #: ../plugins/dfnet/dfnet.ui.h:3
-msgid ""
-"Do not change if not necessary (remember it must be changed on both sides)."
+msgid "Do not change if not necessary (remember it must be changed on both sides)."
 msgstr "如非必要，请勿改动 (必须在两端都要改动)。"
 
 #: ../plugins/dfnet/dfnet.ui.h:4
@@ -1536,11 +1609,9 @@ msgstr "端口号"
 msgid ""
 "Select here if you'll be Server (Player1) or Client (Player2).\n"
 "\n"
-"If you select Server you must Copy your IP address to the Clipboard and "
-"paste if (Ctrl+V) wherever the Client can see it.\n"
+"If you select Server you must Copy your IP address to the Clipboard and paste if (Ctrl+V) wherever the Client can see it.\n"
 "\n"
-"If you selected Client please enter the IP address the Server gave to you in "
-"the IP Address Control."
+"If you selected Client please enter the IP address the Server gave to you in the IP Address Control."
 msgstr ""
 "请在此选择作为服务器 (玩家 1) 还是作为客户端 (玩家 2) 来运行。\n"
 "\n"
@@ -1556,7 +1627,8 @@ msgstr "服务器 (玩家 1)"
 msgid "Start Game"
 msgstr "开始游戏"
 
-#: ../plugins/dfnet/gui.c:30 ../plugins/dfnet/gui.c:112
+#: ../plugins/dfnet/gui.c:30
+#: ../plugins/dfnet/gui.c:112
 #: ../win32/gui/ConfigurePlugins.c:616
 msgid "NetPlay"
 msgstr "联网游戏"
@@ -2354,10 +2426,14 @@ msgstr ""
 msgid "About"
 msgstr "关于 PCSX"
 
-#: ../win32/gui/AboutDlg.c:48 ../win32/gui/AboutDlg.c:52
-#: ../win32/gui/CheatDlg.c:69 ../win32/gui/CheatDlg.c:119
-#: ../win32/gui/ConfigurePlugins.c:483 ../win32/gui/ConfigurePlugins.c:614
-#: ../win32/gui/WndMain.c:1056 ../win32/gui/WndMain.c:1292
+#: ../win32/gui/AboutDlg.c:48
+#: ../win32/gui/AboutDlg.c:52
+#: ../win32/gui/CheatDlg.c:69
+#: ../win32/gui/CheatDlg.c:119
+#: ../win32/gui/ConfigurePlugins.c:483
+#: ../win32/gui/ConfigurePlugins.c:614
+#: ../win32/gui/WndMain.c:1058
+#: ../win32/gui/WndMain.c:1294
 msgid "OK"
 msgstr "确定"
 
@@ -2365,19 +2441,24 @@ msgstr "确定"
 msgid "PCSX EMU\n"
 msgstr "PCSX 模拟器\n"
 
-#: ../win32/gui/CheatDlg.c:51 ../win32/gui/CheatDlg.c:223
+#: ../win32/gui/CheatDlg.c:51
+#: ../win32/gui/CheatDlg.c:223
 #: ../win32/gui/CheatDlg.c:270
 msgid "Yes"
 msgstr "是"
 
-#: ../win32/gui/CheatDlg.c:51 ../win32/gui/CheatDlg.c:223
+#: ../win32/gui/CheatDlg.c:51
+#: ../win32/gui/CheatDlg.c:223
 #: ../win32/gui/CheatDlg.c:270
 msgid "No"
 msgstr "否"
 
-#: ../win32/gui/CheatDlg.c:70 ../win32/gui/CheatDlg.c:120
-#: ../win32/gui/ConfigurePlugins.c:484 ../win32/gui/ConfigurePlugins.c:615
-#: ../win32/gui/WndMain.c:1057 ../win32/gui/WndMain.c:1293
+#: ../win32/gui/CheatDlg.c:70
+#: ../win32/gui/CheatDlg.c:120
+#: ../win32/gui/ConfigurePlugins.c:484
+#: ../win32/gui/ConfigurePlugins.c:615
+#: ../win32/gui/WndMain.c:1059
+#: ../win32/gui/WndMain.c:1295
 msgid "Cancel"
 msgstr "取消"
 
@@ -2413,7 +2494,8 @@ msgstr "关闭(&C)"
 msgid "Enabled"
 msgstr "启用"
 
-#: ../win32/gui/CheatDlg.c:282 ../win32/gui/CheatDlg.c:311
+#: ../win32/gui/CheatDlg.c:282
+#: ../win32/gui/CheatDlg.c:311
 msgid "PCSX Cheat Code Files"
 msgstr "PCSX 作弊码文件"
 
@@ -2457,7 +2539,8 @@ msgstr "无改变"
 msgid "No addresses found."
 msgstr "未找到地址。"
 
-#: ../win32/gui/CheatDlg.c:505 ../win32/gui/CheatDlg.c:596
+#: ../win32/gui/CheatDlg.c:505
+#: ../win32/gui/CheatDlg.c:596
 msgid "Address:"
 msgstr "地址:"
 
@@ -2570,21 +2653,30 @@ msgstr "设置 BIOS 目录"
 msgid "Set Plugins Directory"
 msgstr "设置插件目录"
 
-#: ../win32/gui/ConfigurePlugins.c:493 ../win32/gui/ConfigurePlugins.c:496
-#: ../win32/gui/ConfigurePlugins.c:499 ../win32/gui/ConfigurePlugins.c:502
-#: ../win32/gui/ConfigurePlugins.c:505 ../win32/gui/ConfigurePlugins.c:617
+#: ../win32/gui/ConfigurePlugins.c:493
+#: ../win32/gui/ConfigurePlugins.c:496
+#: ../win32/gui/ConfigurePlugins.c:499
+#: ../win32/gui/ConfigurePlugins.c:502
+#: ../win32/gui/ConfigurePlugins.c:505
+#: ../win32/gui/ConfigurePlugins.c:617
 msgid "Configure..."
 msgstr "配置..."
 
-#: ../win32/gui/ConfigurePlugins.c:494 ../win32/gui/ConfigurePlugins.c:497
-#: ../win32/gui/ConfigurePlugins.c:500 ../win32/gui/ConfigurePlugins.c:503
-#: ../win32/gui/ConfigurePlugins.c:506 ../win32/gui/ConfigurePlugins.c:618
+#: ../win32/gui/ConfigurePlugins.c:494
+#: ../win32/gui/ConfigurePlugins.c:497
+#: ../win32/gui/ConfigurePlugins.c:500
+#: ../win32/gui/ConfigurePlugins.c:503
+#: ../win32/gui/ConfigurePlugins.c:506
+#: ../win32/gui/ConfigurePlugins.c:618
 msgid "Test..."
 msgstr "测试..."
 
-#: ../win32/gui/ConfigurePlugins.c:495 ../win32/gui/ConfigurePlugins.c:498
-#: ../win32/gui/ConfigurePlugins.c:501 ../win32/gui/ConfigurePlugins.c:504
-#: ../win32/gui/ConfigurePlugins.c:507 ../win32/gui/ConfigurePlugins.c:619
+#: ../win32/gui/ConfigurePlugins.c:495
+#: ../win32/gui/ConfigurePlugins.c:498
+#: ../win32/gui/ConfigurePlugins.c:501
+#: ../win32/gui/ConfigurePlugins.c:504
+#: ../win32/gui/ConfigurePlugins.c:507
+#: ../win32/gui/ConfigurePlugins.c:619
 msgid "About..."
 msgstr "关于..."
 
@@ -2593,26 +2685,29 @@ msgid "NetPlay Configuration"
 msgstr "联网游戏配置"
 
 #: ../win32/gui/ConfigurePlugins.c:620
-msgid ""
-"Note: The NetPlay Plugin Directory should be the same as the other Plugins."
+msgid "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
 msgstr "注意: 联网游戏插件应和其它插件放在同一目录中。"
 
-#: ../win32/gui/plugin.c:94 ../win32/gui/WndMain.c:320
+#: ../win32/gui/plugin.c:94
+#: ../win32/gui/WndMain.c:322
 #, c-format
 msgid "*PCSX*: Saved State %d"
 msgstr "*PCSX*: Saved State %d"
 
-#: ../win32/gui/plugin.c:95 ../win32/gui/WndMain.c:321
+#: ../win32/gui/plugin.c:95
+#: ../win32/gui/WndMain.c:323
 #, c-format
 msgid "*PCSX*: Error Saving State %d"
 msgstr "*PCSX*: Error Saving State %d"
 
-#: ../win32/gui/plugin.c:111 ../win32/gui/WndMain.c:298
+#: ../win32/gui/plugin.c:111
+#: ../win32/gui/WndMain.c:300
 #, c-format
 msgid "*PCSX*: Loaded State %d"
 msgstr "*PCSX*: Loaded State %d"
 
-#: ../win32/gui/plugin.c:112 ../win32/gui/WndMain.c:299
+#: ../win32/gui/plugin.c:112
+#: ../win32/gui/WndMain.c:301
 #, c-format
 msgid "*PCSX*: Error Loading State %d"
 msgstr "*PCSX*: Error Loading State %d"
@@ -2659,7 +2754,8 @@ msgstr "*PCSX*: CdRom Case Closed"
 msgid "Connecting..."
 msgstr "正在连接..."
 
-#: ../win32/gui/plugin.c:185 ../win32/gui/plugin.c:192
+#: ../win32/gui/plugin.c:185
+#: ../win32/gui/plugin.c:192
 #, c-format
 msgid "Please wait while connecting... %c\n"
 msgstr "请稍候，正在连接... %c\n"
@@ -2746,8 +2842,9 @@ msgstr "德语"
 msgid "Greek"
 msgstr "希腊语"
 
-#: ../win32/gui/WndMain.c:81 ../win32/gui/WndMain.c:1656
+#: ../win32/gui/WndMain.c:81
 #: ../win32/gui/WndMain.c:1658
+#: ../win32/gui/WndMain.c:1660
 msgid "English"
 msgstr "英语"
 
@@ -2795,7 +2892,7 @@ msgstr "日语"
 msgid "Korean"
 msgstr "朝鲜语"
 
-#: ../win32/gui/WndMain.c:213
+#: ../win32/gui/WndMain.c:215
 msgid ""
 "Usage: pcsx [options]\n"
 "\toptions:\n"
@@ -2813,323 +2910,340 @@ msgstr ""
 "\t-cdfile FILE\t运行 CD 镜像文件 (需要 -nogui)\n"
 "\t-help\t\t显示此信息"
 
-#: ../win32/gui/WndMain.c:339 ../win32/gui/WndMain.c:385
+#: ../win32/gui/WndMain.c:341
+#: ../win32/gui/WndMain.c:387
 msgid "PCSX State Format"
 msgstr "PCSX 即时存档格式"
 
-#: ../win32/gui/WndMain.c:366
+#: ../win32/gui/WndMain.c:368
 #, c-format
 msgid "*PCSX*: Loaded State %s"
 msgstr "*PCSX*: Loaded State %s"
 
-#: ../win32/gui/WndMain.c:367
+#: ../win32/gui/WndMain.c:369
 #, c-format
 msgid "*PCSX*: Error Loading State %s"
 msgstr "*PCSX*: Error Loading State %s"
 
-#: ../win32/gui/WndMain.c:412
+#: ../win32/gui/WndMain.c:414
 #, c-format
 msgid "*PCSX*: Saved State %s"
 msgstr "*PCSX*: Saved State %s"
 
-#: ../win32/gui/WndMain.c:413
+#: ../win32/gui/WndMain.c:415
 #, c-format
 msgid "*PCSX*: Error Saving State %s"
 msgstr "*PCSX*: Error Saving State %s"
 
-#: ../win32/gui/WndMain.c:481
+#: ../win32/gui/WndMain.c:483
 msgid "Running BIOS is not supported with Internal HLE Bios."
 msgstr "内部 HLE BIOS 不支持直接运行。"
 
-#: ../win32/gui/WndMain.c:758
+#: ../win32/gui/WndMain.c:760
 msgid "Game ID"
 msgstr "游戏 ID"
 
-#: ../win32/gui/WndMain.c:764
+#: ../win32/gui/WndMain.c:766
 msgid "Game"
 msgstr "游戏"
 
-#: ../win32/gui/WndMain.c:946
+#: ../win32/gui/WndMain.c:948
 msgid "mid link block"
 msgstr "中间链接块"
 
-#: ../win32/gui/WndMain.c:949
+#: ../win32/gui/WndMain.c:951
 msgid "terminiting link block"
 msgstr "终止链接块"
 
-#: ../win32/gui/WndMain.c:1054
+#: ../win32/gui/WndMain.c:1056
 msgid "Memcard Manager"
 msgstr "记忆卡管理器"
 
-#: ../win32/gui/WndMain.c:1058 ../win32/gui/WndMain.c:1061
+#: ../win32/gui/WndMain.c:1060
+#: ../win32/gui/WndMain.c:1063
 msgid "Select Mcd"
 msgstr "选择"
 
-#: ../win32/gui/WndMain.c:1059 ../win32/gui/WndMain.c:1062
+#: ../win32/gui/WndMain.c:1061
+#: ../win32/gui/WndMain.c:1064
 msgid "Format Mcd"
 msgstr "格式化"
 
-#: ../win32/gui/WndMain.c:1060 ../win32/gui/WndMain.c:1063
+#: ../win32/gui/WndMain.c:1062
+#: ../win32/gui/WndMain.c:1065
 msgid "Reload Mcd"
 msgstr "重新加载"
 
-#: ../win32/gui/WndMain.c:1064
+#: ../win32/gui/WndMain.c:1066
 msgid "-> Copy ->"
 msgstr "-> 复制 ->"
 
-#: ../win32/gui/WndMain.c:1065
+#: ../win32/gui/WndMain.c:1067
 msgid "<- Copy <-"
 msgstr "<- 复制 <-"
 
-#: ../win32/gui/WndMain.c:1066
+#: ../win32/gui/WndMain.c:1068
 msgid "Paste"
 msgstr "粘贴"
 
-#: ../win32/gui/WndMain.c:1067
+#: ../win32/gui/WndMain.c:1069
 msgid "<- Un/Delete"
 msgstr "<- 删除/恢复"
 
-#: ../win32/gui/WndMain.c:1068
+#: ../win32/gui/WndMain.c:1070
 msgid "Un/Delete ->"
 msgstr "删除/恢复 ->"
 
-#: ../win32/gui/WndMain.c:1070
+#: ../win32/gui/WndMain.c:1072
 msgid "Memory Card 1"
 msgstr "记忆卡 1"
 
-#: ../win32/gui/WndMain.c:1071
+#: ../win32/gui/WndMain.c:1073
 msgid "Memory Card 2"
 msgstr "记忆卡 2"
 
-#: ../win32/gui/WndMain.c:1126
+#: ../win32/gui/WndMain.c:1128
 msgid "Are you sure you want to paste this selection?"
 msgstr "是否确认粘贴此选中内容?"
 
-#: ../win32/gui/WndMain.c:1126 ../win32/gui/WndMain.c:1237
-#: ../win32/gui/WndMain.c:1244
+#: ../win32/gui/WndMain.c:1128
+#: ../win32/gui/WndMain.c:1239
+#: ../win32/gui/WndMain.c:1246
 msgid "Confirmation"
 msgstr "确认"
 
-#: ../win32/gui/WndMain.c:1237 ../win32/gui/WndMain.c:1244
+#: ../win32/gui/WndMain.c:1239
+#: ../win32/gui/WndMain.c:1246
 msgid "Are you sure you want to format this Memory Card?"
 msgstr "是否确认格式化此记忆卡?"
 
-#: ../win32/gui/WndMain.c:1290
+#: ../win32/gui/WndMain.c:1292
 msgid "Cpu Config"
 msgstr "CPU 配置"
 
-#: ../win32/gui/WndMain.c:1295
+#: ../win32/gui/WndMain.c:1297
 msgid "Disable Xa Decoding"
 msgstr "禁用 XA 解码"
 
-#: ../win32/gui/WndMain.c:1296
+#: ../win32/gui/WndMain.c:1298
 msgid "Sio Irq Always Enabled"
 msgstr "SIO IRQ 总是启用"
 
-#: ../win32/gui/WndMain.c:1297
+#: ../win32/gui/WndMain.c:1299
 msgid "Black && White Movies"
 msgstr "黑白电影"
 
-#: ../win32/gui/WndMain.c:1298
+#: ../win32/gui/WndMain.c:1300
 msgid "Disable Cd audio"
 msgstr "禁用 CD 音频"
 
-#: ../win32/gui/WndMain.c:1300
+#: ../win32/gui/WndMain.c:1302
 msgid "Enable Interpreter Cpu"
 msgstr "启用解释执行 CPU"
 
-#: ../win32/gui/WndMain.c:1303
+#: ../win32/gui/WndMain.c:1305
 msgid "Spu Irq Always Enabled"
 msgstr "SPU IRQ 总是启用"
 
-#: ../win32/gui/WndMain.c:1308
+#: ../win32/gui/WndMain.c:1310
 msgid "Psx System Type"
 msgstr "PS 系统类型"
 
-#: ../win32/gui/WndMain.c:1412
+#: ../win32/gui/WndMain.c:1414
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 msgstr "PS 记忆卡格式 (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 
-#: ../win32/gui/WndMain.c:1417
+#: ../win32/gui/WndMain.c:1419
 msgid "Psx Memory Card (*.mcr;*.mc)"
 msgstr "PS 记忆卡 (*.mcr;*.mc)"
 
-#: ../win32/gui/WndMain.c:1422
+#: ../win32/gui/WndMain.c:1424
 msgid "CVGS Memory Card (*.mem;*.vgs)"
 msgstr "VGS 记忆卡 (*.mem;*.vgs)"
 
-#: ../win32/gui/WndMain.c:1427
+#: ../win32/gui/WndMain.c:1429
 msgid "Bleem Memory Card (*.mcd)"
 msgstr "Bleem 记忆卡 (*.mcd)"
 
-#: ../win32/gui/WndMain.c:1432
+#: ../win32/gui/WndMain.c:1434
 msgid "DexDrive Memory Card (*.gme)"
 msgstr "DexDrive 记忆卡 (*.gme)"
 
-#: ../win32/gui/WndMain.c:1437
+#: ../win32/gui/WndMain.c:1439
 msgid "DataDeck Memory Card (*.ddf)"
 msgstr "DataDeck 记忆卡 (*.ddl)"
 
-#: ../win32/gui/WndMain.c:1481
+#: ../win32/gui/WndMain.c:1483
 msgid "Psx Exe Format"
 msgstr "PS EXE 格式"
 
-#: ../win32/gui/WndMain.c:1518
+#: ../win32/gui/WndMain.c:1520
 msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin)"
 msgstr "PS 光盘镜像 (*.iso;*.mdf;*.img;*.bin)"
 
-#: ../win32/gui/WndMain.c:1594
+#: ../win32/gui/WndMain.c:1596
 msgid "&File"
 msgstr "文件(&F)"
 
-#: ../win32/gui/WndMain.c:1595
+#: ../win32/gui/WndMain.c:1597
 msgid "E&xit"
 msgstr "退出(&X)"
 
-#: ../win32/gui/WndMain.c:1597
+#: ../win32/gui/WndMain.c:1599
 msgid "Run &EXE..."
 msgstr "运行 &EXE..."
 
-#: ../win32/gui/WndMain.c:1598
+#: ../win32/gui/WndMain.c:1600
 msgid "Run &BIOS"
 msgstr "运行 BIOS(&B)"
 
-#: ../win32/gui/WndMain.c:1599
+#: ../win32/gui/WndMain.c:1601
 msgid "Run &ISO..."
 msgstr "运行 &ISO..."
 
-#: ../win32/gui/WndMain.c:1600
+#: ../win32/gui/WndMain.c:1602
 msgid "Run &CD"
 msgstr "运行光碟(&C)"
 
-#: ../win32/gui/WndMain.c:1602
+#: ../win32/gui/WndMain.c:1604
 msgid "&Emulator"
 msgstr "模拟器(&E)"
 
-#: ../win32/gui/WndMain.c:1603
+#: ../win32/gui/WndMain.c:1605
 msgid "&States"
 msgstr "存档(&S)"
 
-#: ../win32/gui/WndMain.c:1605
+#: ../win32/gui/WndMain.c:1607
 msgid "S&witch ISO..."
 msgstr "更换 ISO(&W)..."
 
-#: ../win32/gui/WndMain.c:1607
+#: ../win32/gui/WndMain.c:1609
 msgid "Re&set"
 msgstr "复位(&S)"
 
-#: ../win32/gui/WndMain.c:1608
+#: ../win32/gui/WndMain.c:1610
 msgid "&Run"
 msgstr "运行(&R)"
 
-#: ../win32/gui/WndMain.c:1609
+#: ../win32/gui/WndMain.c:1611
 msgid "&Save"
 msgstr "保存(&S)"
 
-#: ../win32/gui/WndMain.c:1610
+#: ../win32/gui/WndMain.c:1612
 msgid "&Load"
 msgstr "读取(&L)"
 
-#: ../win32/gui/WndMain.c:1611 ../win32/gui/WndMain.c:1621
+#: ../win32/gui/WndMain.c:1613
+#: ../win32/gui/WndMain.c:1623
 msgid "&Other..."
 msgstr "其它(&O)..."
 
-#: ../win32/gui/WndMain.c:1612 ../win32/gui/WndMain.c:1622
+#: ../win32/gui/WndMain.c:1614
+#: ../win32/gui/WndMain.c:1624
 msgid "Slot &9"
 msgstr "存档 9(&9)"
 
-#: ../win32/gui/WndMain.c:1613 ../win32/gui/WndMain.c:1623
+#: ../win32/gui/WndMain.c:1615
+#: ../win32/gui/WndMain.c:1625
 msgid "Slot &8"
 msgstr "存档 8(&8)"
 
-#: ../win32/gui/WndMain.c:1614 ../win32/gui/WndMain.c:1624
+#: ../win32/gui/WndMain.c:1616
+#: ../win32/gui/WndMain.c:1626
 msgid "Slot &7"
 msgstr "存档 7(&7)"
 
-#: ../win32/gui/WndMain.c:1615 ../win32/gui/WndMain.c:1625
+#: ../win32/gui/WndMain.c:1617
+#: ../win32/gui/WndMain.c:1627
 msgid "Slot &6"
 msgstr "存档 6(&6)"
 
-#: ../win32/gui/WndMain.c:1616 ../win32/gui/WndMain.c:1626
+#: ../win32/gui/WndMain.c:1618
+#: ../win32/gui/WndMain.c:1628
 msgid "Slot &5"
 msgstr "存档 5(&5)"
 
-#: ../win32/gui/WndMain.c:1617 ../win32/gui/WndMain.c:1627
+#: ../win32/gui/WndMain.c:1619
+#: ../win32/gui/WndMain.c:1629
 msgid "Slot &4"
 msgstr "存档 4(&4)"
 
-#: ../win32/gui/WndMain.c:1618 ../win32/gui/WndMain.c:1628
+#: ../win32/gui/WndMain.c:1620
+#: ../win32/gui/WndMain.c:1630
 msgid "Slot &3"
 msgstr "存档 3(&3)"
 
-#: ../win32/gui/WndMain.c:1619 ../win32/gui/WndMain.c:1629
+#: ../win32/gui/WndMain.c:1621
+#: ../win32/gui/WndMain.c:1631
 msgid "Slot &2"
 msgstr "存档 2(&2)"
 
-#: ../win32/gui/WndMain.c:1620 ../win32/gui/WndMain.c:1630
+#: ../win32/gui/WndMain.c:1622
+#: ../win32/gui/WndMain.c:1632
 msgid "Slot &1"
 msgstr "存档 1(&1)"
 
-#: ../win32/gui/WndMain.c:1632
+#: ../win32/gui/WndMain.c:1634
 msgid "&Configuration"
 msgstr "配置(&C)"
 
-#: ../win32/gui/WndMain.c:1633
+#: ../win32/gui/WndMain.c:1635
 msgid "Cheat &Search..."
 msgstr "查找作弊码(&S)..."
 
-#: ../win32/gui/WndMain.c:1634
+#: ../win32/gui/WndMain.c:1636
 msgid "Ch&eat Code..."
 msgstr "作弊码(&E)..."
 
-#: ../win32/gui/WndMain.c:1637
+#: ../win32/gui/WndMain.c:1639
 msgid "&Language"
 msgstr "语言(&L)"
 
-#: ../win32/gui/WndMain.c:1662
+#: ../win32/gui/WndMain.c:1664
 msgid "&Memory cards..."
 msgstr "记忆卡(&M)..."
 
-#: ../win32/gui/WndMain.c:1663
+#: ../win32/gui/WndMain.c:1665
 msgid "C&PU..."
 msgstr "C&PU..."
 
-#: ../win32/gui/WndMain.c:1665
+#: ../win32/gui/WndMain.c:1667
 msgid "&NetPlay..."
 msgstr "联网游戏(&N)..."
 
-#: ../win32/gui/WndMain.c:1667
+#: ../win32/gui/WndMain.c:1669
 msgid "&Controllers..."
 msgstr "控制器(&C)..."
 
-#: ../win32/gui/WndMain.c:1668
+#: ../win32/gui/WndMain.c:1670
 msgid "CD-&ROM..."
 msgstr "CD-&ROM..."
 
-#: ../win32/gui/WndMain.c:1669
+#: ../win32/gui/WndMain.c:1671
 msgid "&Sound..."
 msgstr "声音(&S)..."
 
-#: ../win32/gui/WndMain.c:1670
+#: ../win32/gui/WndMain.c:1672
 msgid "&Graphics..."
 msgstr "图像(&G)..."
 
-#: ../win32/gui/WndMain.c:1672
+#: ../win32/gui/WndMain.c:1674
 msgid "&Plugins && Bios..."
 msgstr "插件及 BIOS(&P)..."
 
-#: ../win32/gui/WndMain.c:1674
+#: ../win32/gui/WndMain.c:1676
 msgid "&Help"
 msgstr "帮助(&H)"
 
-#: ../win32/gui/WndMain.c:1675
+#: ../win32/gui/WndMain.c:1677
 msgid "&About..."
 msgstr "关于(&A)..."
 
-#: ../win32/gui/WndMain.c:1863
+#: ../win32/gui/WndMain.c:1865
 msgid "Pcsx Msg"
 msgstr "PCSX 消息"
 
-#: ../win32/gui/WndMain.c:1866
+#: ../win32/gui/WndMain.c:1868
 msgid "Error Loading Symbol"
 msgstr "无法加载符号"
+

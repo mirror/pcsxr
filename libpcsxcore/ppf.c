@@ -366,11 +366,13 @@ void LoadSBI() {
 	if (sbihandle == NULL) return;
 
 	// 4-byte SBI header
-	fseek(sbihandle, 4, SEEK_SET);
+	fread(buffer, 1, 4, sbihandle);
 	while (!feof(sbihandle)) {
 		fread(sbitime[sbicount++], 1, 3, sbihandle);
-		fseek(sbihandle, 11, SEEK_CUR);
+		fread(buffer, 1, 11, sbihandle);
 	}
+
+	fclose(sbihandle);
 
 	SysPrintf(_("Loaded SBI file: %s.\n"), sbifile);
 }
