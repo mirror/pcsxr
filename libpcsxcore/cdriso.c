@@ -980,6 +980,18 @@ long CALLBACK ISOreadCDDA(unsigned char m, unsigned char s, unsigned char f, uns
 	if (p == NULL) return -1;
 
 	memcpy(buffer, p - 12, CD_FRAMESIZE_RAW); // copy from the beginning of the sector
+
+	if (cddaBigEndian) {
+		int i;
+		unsigned char tmp;
+
+		for (i = 0; i < CD_FRAMESIZE_RAW / 2; i++) {
+			tmp = buffer[i * 2];
+			buffer[i * 2] = buffer[i * 2 + 1];
+			buffer[i * 2 + 1] = tmp;
+		}
+	}
+
 	return 0;
 }
 
