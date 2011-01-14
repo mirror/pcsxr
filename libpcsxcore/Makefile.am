@@ -81,5 +81,5 @@ libpcsxcore_a_SOURCES += \
 	$(top_builddir)/libpcsxcore/ppc/reguse.c	\
 	$(top_builddir)/libpcsxcore/ppc/pasm.s	\
 	$(top_builddir)/libpcsxcore/
-libpcsxcore_a_CCASFLAGS = -x assembler-with-cpp -mregnames
+libpcsxcore_a_CCASFLAGS = -x assembler-with-cpp -mregnames -D__POWERPC__
 endif
