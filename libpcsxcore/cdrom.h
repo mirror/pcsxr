@@ -93,7 +93,7 @@ typedef struct {
 	u8 FastForward;
 	u8 FastBackward;
 
-	u32 LeftVol, RightVol;
+	u8 AttenuatorLeft[2], AttenuatorRight[2];
 } cdrStruct;
 
 extern cdrStruct cdr;

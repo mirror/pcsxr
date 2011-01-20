@@ -480,6 +480,30 @@ static void ReadTrack( u8 *time ) {
 }
 
 
+void CDXA_Attenuation( s16 *buf, int size )
+{
+	s16 *spsound;
+	s32 lc,rc;
+	int i;
+
+	spsound = buf;
+
+	for( i = 0; i < size / 2; i += 2 )
+	{
+		lc = (spsound[i+0] * cdr.AttenuatorLeft[0]  + spsound[i+1] * cdr.AttenuatorRight[1]) / 128;
+		rc = (spsound[i+1] * cdr.AttenuatorRight[0] + spsound[i+0] * cdr.AttenuatorLeft[1]) / 128;
+
+		if( lc < -32768 ) lc = -32768;
+		if( rc < -32768 ) rc = -32768;
+		if( lc > 32767 ) lc = 32767;
+		if( rc > 32767 ) rc = 32767;
+
+		spsound[i + 0] = lc;
+		spsound[i + 1] = rc;
+	}
+}
+
+
 void AddIrqQueue(unsigned char irq, unsigned long ecycle) {
 	cdr.Irq = irq;
 	cdr.eCycle = ecycle;
@@ -843,8 +867,11 @@ void cdrPlayInterrupt()
 		CDR_readTrack( temp );
 	}
 
-	if( CDR_readCDDA )
+	if( CDR_readCDDA ) {
 		CDR_readCDDA( cdr.SetSectorPlay[0], cdr.SetSectorPlay[1], cdr.SetSectorPlay[2], cdr.Transfer );
+		
+		CDXA_Attenuation( (short *) cdr.Transfer, 2352/2 );
+	}
 
 
 
@@ -1657,10 +1684,13 @@ void cdrWrite0(unsigned char rt) {
 
 	// Tekken: CDXA fade-out
 	else if( rt == 2 ) {
-		cdr.LeftVol = 0;
+		//cdr.AttenuatorLeft[0] = 0;
+		//cdr.AttenuatorLeft[1] = 0;
 	}
 	else if( rt == 3 ) {
-		cdr.RightVol = 0;
+		// Tekken 3 - character menu (don't do this!)
+		//cdr.AttenuatorRight[0] = 0;
+		//cdr.AttenuatorRight[1] = 0;
 	}
 }
 
@@ -1690,7 +1720,7 @@ void cdrWrite1(unsigned char rt) {
 
 	// Tekken: CDXA fade-out
 	if( (cdr.Ctrl & 3) == 3 ) {
-		cdr.RightVol |= (rt << 8);
+		cdr.AttenuatorRight[0] = rt;
 	}
 
 
@@ -2056,10 +2086,10 @@ void cdrWrite2(unsigned char rt) {
 
 	// Tekken: CDXA fade-out
 	if( (cdr.Ctrl & 3) == 2 ) {
-		cdr.LeftVol |= (rt << 8);
+		cdr.AttenuatorLeft[0] = rt;
 	}
 	else if( (cdr.Ctrl & 3) == 3 ) {
-		cdr.RightVol |= (rt << 0);
+		cdr.AttenuatorRight[1] = rt;
 	}
 
 
@@ -2105,56 +2135,13 @@ void cdrWrite3(unsigned char rt) {
 
 	// Tekken: CDXA fade-out
 	if( (cdr.Ctrl & 3) == 2 ) {
-		cdr.LeftVol |= (rt << 0);
+		cdr.AttenuatorLeft[1] = rt;
 	}
 	else if( (cdr.Ctrl & 3) == 3 && rt == 0x20 ) {
-		u16 cdleft, cdright;
-		u8 l1,l2,r1,r2,tmp;
-
 #ifdef CDR_LOG
-		CDR_LOG( "CD-XA Volume: %X %X\n", cdr.LeftVol, cdr.RightVol );
-#endif
-
-		// TODO: Use real attenuation (left - right mixer)
-#if 0
-		// write CD-XA volumes
-		SPU_writeRegister( H_CDLeft, cdleft );
-		SPU_writeRegister( H_CDRight, cdright );
-#else
-		/*
-		Eternal SPU: scale volume from [0-ffff] -> [0,8000]
-		- Destruction Derby Raw - movies (ff00 ff00)
-		- Smurf Racer - movies (00ff 00ff)
-		- V-Rally 2 - movies (FC00 FC00)
-		*/
-
-		// Fake attenuation volume hack for Eternal
-		l1 = (cdr.LeftVol >> 8) & 0xff;
-		l2 = (cdr.LeftVol >> 0) & 0xff;
-		r1 = (cdr.RightVol >> 8) & 0xff;
-		r2 = (cdr.RightVol >> 0) & 0xff;
-
-		if( l1 > 0x80 ) l1 = 0x80;
-		if( l2 > 0x80 ) l2 = 0x80;
-		if( r1 > 0x80 ) r1 = 0x80;
-		if( r2 > 0x80 ) r2 = 0x80;
-
-		// spu compatibility volume hack
-		if( l1 < l2 ) { tmp = l1; l1 = l2; l2 = tmp; }
-		if( r1 < r2 ) { tmp = r1; r1 = r2; r2 = tmp; }
-		if( l1 == 0x80 ) { l2 = 0; }
-		if( r1 == 0x80 ) { r2 = 0; }
-
-		// spu compat hack #2
-		if( l1 >= 0x80 ) { l1 = 0x7f; }
-		if( r1 >= 0x80 ) { r1 = 0x7f; }
-
-		cdleft = (l1 << 8) | l2;
-		cdright = (r1 << 8) | r2;
-
-		// write CD-XA volumes
-		SPU_writeRegister( H_CDLeft, cdleft );
-		SPU_writeRegister( H_CDRight, cdright );
+		CDR_LOG( "CD-XA Volume: %X %X | %X %X\n",
+			cdr.AttenuatorLeft[0], cdr.AttenuatorLeft[1],
+			cdr.AttenuatorRight[0], cdr.AttenuatorRight[1] );
 #endif
 	}
 

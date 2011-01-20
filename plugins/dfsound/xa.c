@@ -75,15 +75,8 @@ static int lastcd_lc, lastcd_rc;
 INLINE void MixXA(void)
 {
  int ns;
- unsigned char val0,val1,val2,val3;
- short l,r;
  int lc,rc;
  unsigned long cdda_l;
-
- val0 = (iLeftXAVol>>8)&0xff;
- val1 = iLeftXAVol&0xff;
- val2 = (iRightXAVol>>8)&0xff;
- val3 = iRightXAVol&0xff;
 
  lc = 0;
  rc = 0;
@@ -93,11 +86,8 @@ INLINE void MixXA(void)
 	 XALastVal=*XAPlay++;
    if(XAPlay==XAEnd) XAPlay=XAStart;
 
-	 l = XALastVal&0xffff;
-	 r = (XALastVal>>16) & 0xffff;
-
-   lc=(l * val0 + r * val3) / 128;
-   rc=(r * val2 + l * val1) / 128;
+	 lc = (short)(XALastVal&0xffff);
+	 rc = (short)((XALastVal>>16) & 0xffff);
 
 	 if( lc < -32768 ) lc = -32768;
 	 if( rc < -32768 ) rc = -32768;
@@ -142,11 +132,8 @@ INLINE void MixXA(void)
    cdda_l=*CDDAPlay++;
    if(CDDAPlay==CDDAEnd) CDDAPlay=CDDAStart;
 
-	 l = cdda_l&0xffff;
-	 r = (cdda_l>>16) & 0xffff;
-
-   lc=(l * val0 + r * val3) / 128;
-   rc=(r * val2 + l * val1) / 128;
+	 lc = (short)(cdda_l&0xffff);
+	 rc = (short)((cdda_l>>16) & 0xffff);
 
 	 if( lc < -32768 ) lc = -32768;
 	 if( rc < -32768 ) rc = -32768;

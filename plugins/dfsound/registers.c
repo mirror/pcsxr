@@ -266,12 +266,10 @@ void CALLBACK SPUwriteRegister(unsigned long reg, unsigned short val)
       break;
     //-------------------------------------------------//
     case H_CDLeft:
-			// Attenuation: [$00-ff left][$00-ff right]
 			iLeftXAVol = val;
 			if(cddavCallback) cddavCallback(0,val);
 			break;
     case H_CDRight:
-			// Attenuation: [$00-ff right][$00-ff left]
 			iRightXAVol = val;
 			if(cddavCallback) cddavCallback(1,val);
 			break;
