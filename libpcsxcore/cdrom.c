@@ -875,10 +875,10 @@ void cdrPlayInterrupt()
 
 
 
-	// TODO: mute data track cdplay
-
-	// mute
-	if (Config.Cdda) memset( cdr.Transfer, 0, CD_FRAMESIZE_RAW );
+	// mute data track
+	if( (Config.Cdda) ||
+			(CDR_getStatus(&stat) != -1 && stat.Type == 1 && cdr.CurTrack == 1) ) 
+		memset( cdr.Transfer, 0, CD_FRAMESIZE_RAW );
 
 
 	if( cdr.Play && SPU_playCDDAchannel)
@@ -1872,14 +1872,8 @@ void cdrWrite1(unsigned char rt) {
 				/*
 				GameShark CD Player: save time for resume
 
-				Twisted Metal - World Tour: don't save times for DATA reads
-				- Only get 1 chance to do this right
+				Twisted Metal - World Tour: don't mix Setloc / CdlPlay cursors
 				*/
-				if( cdr.Play && CDR_getStatus(&stat) != -1 ) {
-					cdr.SetSectorPlay[0] = stat.Time[0];
-					cdr.SetSectorPlay[1] = stat.Time[1];
-					cdr.SetSectorPlay[2] = stat.Time[2];
-				}
 
 				StopCdda();
 				StopReading();
