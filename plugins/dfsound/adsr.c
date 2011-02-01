@@ -182,7 +182,9 @@ INLINE int MixADSR(int ch)                             // MIX ADSR
     {
      EnvelopeVol=0;
 		 EnvelopeVol_f=0;
-     s_chan[ch].bOn=0;
+     // don't stop if this chan can still cause irqs
+     if(!(spuCtrl&0x40) || (s_chan[ch].pCurr > pSpuIrq && s_chan[ch].pLoop > pSpuIrq))
+       s_chan[ch].bOn=0;
 		}
 
    
