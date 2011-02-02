@@ -71,7 +71,7 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 #if 1
 			SPUDMA_INT((bcr >> 16) * (bcr & 0xffff) / 2);
 #else
-			// Experimental DMA timing
+			// Experimental burst dma transfer (0.333x max)
 			SPUDMA_INT((bcr >> 16) * (bcr & 0xffff) / 3);
 #endif
 			return;
@@ -118,7 +118,7 @@ void psxDma6(u32 madr, u32 bcr, u32 chcr) {
 #if 1
 	  GPUOTCDMA_INT( size );
 #else
-		// Experimental DMA timing
+		// Experimental burst dma transfer (0.333x max)
 	  GPUOTCDMA_INT( size/3 );
 #endif
 		return;

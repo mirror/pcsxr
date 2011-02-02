@@ -126,7 +126,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			// already 32-bit word size ((size * 4) / 4)
 			GPUDMA_INT(size);
 #else
-			// Possible DMA burst + overhead
+			// Experimental burst dma transfer (0.333x max)
 			GPUDMA_INT(size/3);
 #endif
 			return;
@@ -150,7 +150,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			// already 32-bit word size ((size * 4) / 4)
 			GPUDMA_INT(size);
 #else
-			// Possible DMA burst + overhead
+			// Experimental burst dma transfer
 			// - X-Files = 0.333333x max for videos
 			GPUDMA_INT( size / 3 );
 #endif

@@ -481,7 +481,7 @@ static void ReadTrack( u8 *time ) {
 }
 
 
-void CDXA_Attenuation( s16 *buf, int size )
+void CDXA_Attenuation( s16 *buf, int size, int stereo )
 {
 	s16 *spsound;
 	s32 lc,rc;
@@ -496,17 +496,13 @@ void CDXA_Attenuation( s16 *buf, int size )
 		s16 temp[32768];
 		int dst;
 
-		// TODO: do later
-		return;
-
 		dst = 0;
-		for( i = 0; i < size / 2; i++, dst+=2 ) {
+		for( i = 0; i < size; i++, dst+=2 ) {
 			temp[dst+0] = spsound[i];
 			temp[dst+1] = spsound[i];
 		}
 
-		size <<= 1;
-		memcpy( spsound, temp, size*2 );
+		memcpy( spsound, temp, (size*2)*2 );
 	}
 #endif
 
@@ -892,7 +888,7 @@ void cdrPlayInterrupt()
 	if( CDR_readCDDA ) {
 		CDR_readCDDA( cdr.SetSectorPlay[0], cdr.SetSectorPlay[1], cdr.SetSectorPlay[2], cdr.Transfer );
 		
-		CDXA_Attenuation( (short *) cdr.Transfer, 2352 );
+		CDXA_Attenuation( (short *) cdr.Transfer, 2352, 1 );
 	}
 
 
@@ -1598,14 +1594,28 @@ void cdrReadInterrupt() {
 			int ret = xa_decode_sector(&cdr.Xa, cdr.Transfer+4, cdr.FirstSector);
 
 			if (!ret) {
+				int xa_type;
+
 #if 0
+				// save - set only for FirstSector
+				xa_type = cdr.Xa.stereo;
+
+
 				// Duke Nukem - Time to Kill - speech, music volume control
 				// Tekken 3 - post-match fade out
 				CDXA_Attenuation( cdr.Xa.pcm, cdr.Xa.nsamples, cdr.Xa.stereo );
+
+				// fix mono xa attenuation
+				if( cdr.Xa.stereo == 0 ) cdr.Xa.stereo = 1;
 #endif
 
 				SPU_playADPCMchannel(&cdr.Xa);
 				cdr.FirstSector = 0;
+
+
+#if 0
+				cdr.Xa.stereo = xa_type;
+#endif
 
 
 				// Crash Team Racing: music, speech
@@ -2337,7 +2347,12 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 
 			// burst vs normal
 			if( chcr == 0x11400100 ) {
+#if 1
 				CDRDMA_INT( (cdsize/4) / 4 );
+#else
+				// Experimental burst dma transfer (0.333x max)
+				CDRDMA_INT( (cdsize/4) / 3 );
+#endif
 			}
 			else if( chcr == 0x11000000 ) {
 				CDRDMA_INT( (cdsize/4) * 1 );
