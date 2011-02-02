@@ -68,7 +68,12 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 			SPU_readDMAMem(ptr, size);
 			psxCpu->Clear(madr, size);
 
+#if 1
 			SPUDMA_INT((bcr >> 16) * (bcr & 0xffff) / 2);
+#else
+			// Experimental DMA timing
+			SPUDMA_INT((bcr >> 16) * (bcr & 0xffff) / 3);
+#endif
 			return;
 
 #ifdef PSXDMA_LOG
@@ -110,7 +115,12 @@ void psxDma6(u32 madr, u32 bcr, u32 chcr) {
 		}
 		mem++; *mem = 0xffffff;
 
+#if 1
 	  GPUOTCDMA_INT( size );
+#else
+		// Experimental DMA timing
+	  GPUOTCDMA_INT( size/3 );
+#endif
 		return;
 	}
 #ifdef PSXDMA_LOG
