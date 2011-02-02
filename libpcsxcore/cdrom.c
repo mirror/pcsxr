@@ -488,6 +488,27 @@ void CDXA_Attenuation( s16 *buf, int size )
 
 	spsound = buf;
 
+#if 0
+	// mono xa attenuation
+	// - Tales of Phantasia (voice meter)
+	if( stereo == 0 ) {
+		s16 temp[32768];
+		int dst;
+
+		// TODO: do later
+		return;
+
+		dst = 0;
+		for( i = 0; i < size / 2; i++, dst+=2 ) {
+			temp[dst+0] = spsound[i];
+			temp[dst+1] = spsound[i];
+		}
+
+		size <<= 1;
+		memcpy( spsound, temp, size*2 );
+	}
+#endif
+
 	for( i = 0; i < size / 2; i += 2 )
 	{
 		lc = (spsound[i+0] * cdr.AttenuatorLeft[0]  + spsound[i+1] * cdr.AttenuatorRight[1]) / 128;
@@ -1576,6 +1597,12 @@ void cdrReadInterrupt() {
 			int ret = xa_decode_sector(&cdr.Xa, cdr.Transfer+4, cdr.FirstSector);
 
 			if (!ret) {
+#if 0
+				// Duke Nukem - Time to Kill - speech, music volume control
+				// Tekken 3 - post-match fade out
+				CDXA_Attenuation( cdr.Xa.pcm, cdr.Xa.nsamples, cdr.Xa.stereo );
+#endif
+
 				SPU_playADPCMchannel(&cdr.Xa);
 				cdr.FirstSector = 0;
 
@@ -2229,6 +2256,8 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 				break;
 			}
 
+
+#if 1
 			/*
 			GS CDX: Enhancement CD crash
 			- Setloc 0:0:0
@@ -2248,6 +2277,51 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 
 			psxCpu->Clear(madr, cdsize / 4);
 			cdr.pTransfer += cdsize;
+#else
+			// fast copy - no wrap
+			if( cdr.pTransfer + cdsize <= cdr.Transfer + 2352 ) {
+				memcpy(ptr, cdr.pTransfer, cdsize);
+
+				psxCpu->Clear(madr, cdsize / 4);
+				cdr.pTransfer += cdsize;
+			} else {
+				int lcv;
+
+				/*
+				CDROM wrapping
+
+				Ape Escape - used several times
+				Gameshark Lite - opening movie
+
+				Gameshark CDX: enhancement CD patcher
+				- calls CdlPlay @ 0:2:0
+				- spams DMA3 and overruns buffer
+				*/
+
+				for( lcv = 0; lcv < cdsize; lcv++ )
+				{
+					*(ptr+lcv) = *cdr.pTransfer;
+	
+					cdr.pTransfer++;
+					if( cdr.pTransfer == cdr.Transfer + 2352 ) {
+						// wrap cdrom ptr
+						switch (cdr.Mode & (MODE_SIZE_2340|MODE_SIZE_2328)) {
+							case MODE_SIZE_2328:
+							case 0x00:
+								cdr.pTransfer += 12;
+								break;
+
+							case MODE_SIZE_2340:
+								cdr.pTransfer += 0;
+								break;
+						}
+					}
+				}
+
+
+				psxCpu->Clear(madr, cdsize / 4);
+			}
+#endif
 
 
 			// burst vs normal

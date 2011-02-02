@@ -122,8 +122,13 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			GPU_readDataMem(ptr, size);
 			psxCpu->Clear(madr, size);
 
+#if 1
 			// already 32-bit word size ((size * 4) / 4)
 			GPUDMA_INT(size);
+#else
+			// NOTE: no bus conflicts emulated - speed this up
+			GPUDMA_INT(size/4);
+#endif
 			return;
 
 		case 0x01000201: // mem2vram
@@ -141,8 +146,14 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			size = (bcr >> 16) * (bcr & 0xffff);
 			GPU_writeDataMem(ptr, size);
 
+#if 1
 			// already 32-bit word size ((size * 4) / 4)
 			GPUDMA_INT(size);
+#else
+			// X-Files: use very fast time for movies
+			// - we don't simulate bus conflicts
+			GPUDMA_INT( size / 4 );
+#endif
 			return;
 
 		case 0x01000401: // dma chain
