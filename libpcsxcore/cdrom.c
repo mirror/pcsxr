@@ -502,7 +502,8 @@ void CDXA_Attenuation( s16 *buf, int size, int stereo )
 			temp[dst+1] = spsound[i];
 		}
 
-		memcpy( spsound, temp, (size*2)*2 );
+		size *= 2*2;
+		memcpy( spsound, temp, size );
 	}
 #endif
 
