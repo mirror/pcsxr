@@ -892,7 +892,7 @@ void cdrPlayInterrupt()
 	if( CDR_readCDDA ) {
 		CDR_readCDDA( cdr.SetSectorPlay[0], cdr.SetSectorPlay[1], cdr.SetSectorPlay[2], cdr.Transfer );
 		
-		CDXA_Attenuation( (short *) cdr.Transfer, 2352/2 );
+		CDXA_Attenuation( (short *) cdr.Transfer, 2352 );
 	}
 
 
@@ -903,7 +903,7 @@ void cdrPlayInterrupt()
 		memset( cdr.Transfer, 0, CD_FRAMESIZE_RAW );
 
 
-	if( cdr.Play && SPU_playCDDAchannel)
+	if( SPU_playCDDAchannel)
 		SPU_playCDDAchannel((short *)cdr.Transfer, CD_FRAMESIZE_RAW);
 
 	CDRPLAY_INT( cdReadTime );
