@@ -97,6 +97,7 @@ unsigned char Test23[] = { 0x43, 0x58, 0x44, 0x32, 0x39 ,0x34, 0x30, 0x51 };
 #define MODE_STRSND      (1<<6) // 0x40 ADPCM on/off
 #define MODE_SIZE_2340   (1<<5) // 0x20
 #define MODE_SIZE_2328   (1<<4) // 0x10
+#define MODE_SIZE_2048   (0<<4) // 0x00
 #define MODE_SF          (1<<3) // 0x08 channel on/off
 #define MODE_REPORT      (1<<2) // 0x04
 #define MODE_AUTOPAUSE   (1<<1) // 0x02
@@ -2200,9 +2201,9 @@ void cdrWrite3(unsigned char rt) {
 		cdr.Readed = 1;
 		cdr.pTransfer = cdr.Transfer;
 
-		switch (cdr.Mode & 0x30) {
+		switch (cdr.Mode & (MODE_SIZE_2340|MODE_SIZE_2328)) {
 			case MODE_SIZE_2328:
-			case 0x00:
+			case MODE_SIZE_2048:
 				cdr.pTransfer += 12;
 				break;
 
@@ -2218,7 +2219,7 @@ void cdrWrite3(unsigned char rt) {
 
 void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 	u32 cdsize;
-	u8 *ptr;
+	u8 *ptr, *cdwrap_ptr;
 
 #ifdef CDR_LOG
 	CDR_LOG("psxDma3() Log: *** DMA 3 *** %x addr = %x size = %x\n", chcr, madr, bcr);
@@ -2240,10 +2241,10 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 			// - fix boot
 			if( cdsize == 0 )
 			{
-				switch (cdr.Mode & 0x30) {
-					case 0x00: cdsize = 2048; break;
-					case MODE_SIZE_2328: cdsize = 2328; break;
+				switch (cdr.Mode & (MODE_SIZE_2340|MODE_SIZE_2328)) {
 					case MODE_SIZE_2340: cdsize = 2340; break;
+					case MODE_SIZE_2328: cdsize = 2328; break;
+					case MODE_SIZE_2048: cdsize = 2048; break;
 				}
 			}
 
@@ -2278,8 +2279,16 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 			psxCpu->Clear(madr, cdsize / 4);
 			cdr.pTransfer += cdsize;
 #else
+			cdwrap_ptr = cdr.Transfer;
+			switch (cdr.Mode & (MODE_SIZE_2340|MODE_SIZE_2328)) {
+				case MODE_SIZE_2340: cdwrap_ptr += 2340; break;
+				case MODE_SIZE_2328: cdwrap_ptr += 12 + 2328; break;
+				case MODE_SIZE_2048: cdwrap_ptr += 12 + 2048; break;
+			}
+
+
 			// fast copy - no wrap
-			if( cdr.pTransfer + cdsize <= cdr.Transfer + 2352 ) {
+			if( cdr.pTransfer + cdsize <= cdwrap_ptr ) {
 				memcpy(ptr, cdr.pTransfer, cdsize);
 
 				psxCpu->Clear(madr, cdsize / 4);
@@ -2300,22 +2309,24 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 
 				for( lcv = 0; lcv < cdsize; lcv++ )
 				{
-					*(ptr+lcv) = *cdr.pTransfer;
-	
-					cdr.pTransfer++;
-					if( cdr.pTransfer == cdr.Transfer + 2352 ) {
-						// wrap cdrom ptr
+					// wrap cdrom ptr
+					if( cdr.pTransfer == cdwrap_ptr ) {
 						switch (cdr.Mode & (MODE_SIZE_2340|MODE_SIZE_2328)) {
 							case MODE_SIZE_2328:
-							case 0x00:
-								cdr.pTransfer += 12;
+							case MODE_SIZE_2048:
+								cdr.pTransfer = cdr.Transfer + 12;
 								break;
 
 							case MODE_SIZE_2340:
-								cdr.pTransfer += 0;
+								cdr.pTransfer = cdr.Transfer + 0;
 								break;
 						}
 					}
+
+
+					*(ptr+lcv) = *cdr.pTransfer;
+	
+					cdr.pTransfer++;
 				}
 
 

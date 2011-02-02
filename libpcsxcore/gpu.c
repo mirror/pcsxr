@@ -126,8 +126,8 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			// already 32-bit word size ((size * 4) / 4)
 			GPUDMA_INT(size);
 #else
-			// NOTE: no bus conflicts emulated - speed this up
-			GPUDMA_INT(size/4);
+			// Possible DMA burst + overhead
+			GPUDMA_INT(size/3);
 #endif
 			return;
 
@@ -150,9 +150,9 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			// already 32-bit word size ((size * 4) / 4)
 			GPUDMA_INT(size);
 #else
-			// X-Files: use very fast time for movies
-			// - we don't simulate bus conflicts
-			GPUDMA_INT( size / 4 );
+			// Possible DMA burst + overhead
+			// - X-Files = 0.333333x max for videos
+			GPUDMA_INT( size / 3 );
 #endif
 			return;
 
