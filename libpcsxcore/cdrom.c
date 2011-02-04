@@ -1604,7 +1604,11 @@ void cdrReadInterrupt() {
 
 				// Duke Nukem - Time to Kill - speech, music volume control
 				// Tekken 3 - post-match fade out
-				CDXA_Attenuation( cdr.Xa.pcm, cdr.Xa.nsamples, cdr.Xa.stereo );
+				if( cdr.Xa.stereo == 0 )
+					CDXA_Attenuation( cdr.Xa.pcm, cdr.Xa.nsamples * 2, cdr.Xa.stereo );
+				else
+					CDXA_Attenuation( cdr.Xa.pcm, cdr.Xa.nsamples * 4, cdr.Xa.stereo );
+
 
 				// fix mono xa attenuation
 				if( cdr.Xa.stereo == 0 ) cdr.Xa.stereo = 1;
