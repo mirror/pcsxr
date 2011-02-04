@@ -2201,9 +2201,21 @@ void cdrWrite3(unsigned char rt) {
 			return;
 		}
 
+#if 1
 		if (cdr.Reading && !cdr.ResultReady) {
       CDREAD_INT((cdr.Mode & MODE_SPEED) ? (cdReadTime / 2) : cdReadTime);
 		}
+#else
+		// XA streaming - incorrect timing because of this reschedule
+		// - Final Fantasy Tactics
+		// - various other games
+
+		/*
+		if (cdr.Reading && !cdr.ResultReady) {
+      CDREAD_INT((cdr.Mode & MODE_SPEED) ? (cdReadTime / 2) : cdReadTime);
+		}
+		*/
+#endif
 
 		return;
 	}
@@ -2382,6 +2394,14 @@ void cdrReset() {
 	cdr.CurTrack = 1;
 	cdr.File = 1;
 	cdr.Channel = 1;
+
+#if 0
+	// BIOS player - default values
+	cdr.AttenuatorLeft[0] = 0x80;
+	cdr.AttenuatorLeft[1] = 0x00;
+	cdr.AttenuatorRight[0] = 0x80;
+	cdr.AttenuatorRight[1] = 0x00;
+#endif
 }
 
 int cdrFreeze(gzFile f, int Mode) {

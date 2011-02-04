@@ -123,6 +123,29 @@ void psxBranchTest() {
 		}
 	}
 
+#if 0
+	if( SPU_async )
+	{
+		static int init;
+		int elapsed;
+
+		if( init == 0 ) {
+			// 10 apu cycles
+			// - Final Fantasy Tactics (distorted - dropped sound effects)
+			psxRegs.intCycle[PSXINT_SPUASYNC].cycle = PSXCLK / 44100 * 10;
+
+			init = 1;
+		}
+
+		elapsed = psxRegs.cycle - psxRegs.intCycle[PSXINT_SPUASYNC].sCycle;
+		if (elapsed >= psxRegs.intCycle[PSXINT_SPUASYNC].cycle) {
+			SPU_async( elapsed );
+
+			psxRegs.intCycle[PSXINT_SPUASYNC].sCycle = psxRegs.cycle;
+		}
+	}
+#endif
+
 	if ((psxRegs.cycle - psxNextsCounter) >= psxNextCounter)
 		psxRcntUpdate();
 
