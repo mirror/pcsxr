@@ -228,9 +228,9 @@ INLINE int MixADSR(int ch)                             // MIX ADSR
    //--------------------------------------------------//
    if(s_chan[ch].ADSRX.State==1)                       // -> decay
     {
-		 EnvelopeVol += ( RateTableSub[ s_chan[ch].ADSRX.ReleaseRate * 4 ] * EnvelopeVol ) >> 15;
+		 EnvelopeVol += ( RateTableSub[ s_chan[ch].ADSRX.DecayRate * 4 ] * EnvelopeVol ) >> 15;
 		 
-		 EnvelopeVol_f += RateTableSub_f[ s_chan[ch].ADSRX.ReleaseRate * 4 ];
+		 EnvelopeVol_f += RateTableSub_f[ s_chan[ch].ADSRX.DecayRate * 4 ];
 		 if( EnvelopeVol_f < 0 ) {
 			 EnvelopeVol_f += RateTable_denom;
 			 EnvelopeVol--;
@@ -268,7 +268,7 @@ INLINE int MixADSR(int ch)                             // MIX ADSR
 			 else
 				EnvelopeVol+=RateTableAdd[s_chan[ch].ADSRX.SustainRate + 0];
 
-			 EnvelopeVol_f += RateTableAdd_f[ s_chan[ch].ADSRX.AttackRate ];
+			 EnvelopeVol_f += RateTableAdd_f[ s_chan[ch].ADSRX.SustainRate ];
 			 if( EnvelopeVol_f >= RateTable_denom ) {
 				 EnvelopeVol_f -= RateTable_denom;
 				 EnvelopeVol++;
