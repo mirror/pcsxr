@@ -350,7 +350,7 @@ INLINE void FeedXA(xa_decode_t *xap)
         }
        l=s;
 
-       *XAFeed++=(l|(l<<16));
+       *XAFeed++=((l&0xffff)|(l<<16));
 
        if(XAFeed==XAEnd) XAFeed=XAStart;
        if(XAFeed==XAPlay) 
