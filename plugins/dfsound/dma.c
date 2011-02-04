@@ -46,7 +46,18 @@ void CALLBACK SPUreadDMAMem(unsigned short * pusPSXMem,int iSize)
 
  for(i=0;i<iSize;i++)
   {
-   *pusPSXMem++=spuMem[spuAddr>>1];                    // spu addr got by writeregister
+#if 0
+		if(irqCallback && (spuCtrl&0x40))         // some callback and irq active?
+		{
+			// SPU2-X
+			if(pSpuIrq == spuMemC+spuAddr) {
+				irqCallback();                        // -> call main emu
+			}
+		}
+#endif
+
+		
+	 *pusPSXMem++=spuMem[spuAddr>>1];                    // spu addr got by writeregister
    spuAddr+=2;                                         // inc spu addr
    if(spuAddr>0x7ffff) spuAddr=0;                      // wrap
   }
@@ -86,7 +97,17 @@ void CALLBACK SPUwriteDMAMem(unsigned short * pusPSXMem,int iSize)
 
  for(i=0;i<iSize;i++)
   {
-   spuMem[spuAddr>>1] = *pusPSXMem++;                  // spu addr got by writeregister
+#if 0
+		if(irqCallback && (spuCtrl&0x40))         // some callback and irq active?
+		{
+			// SPU2-X
+			if(pSpuIrq == spuMemC+spuAddr) {
+				irqCallback();                        // -> call main emu
+			}
+		}
+#endif
+
+	 spuMem[spuAddr>>1] = *pusPSXMem++;                  // spu addr got by writeregister
    spuAddr+=2;                                         // inc spu addr
    if(spuAddr>0x7ffff) spuAddr=0;                      // wrap
   }

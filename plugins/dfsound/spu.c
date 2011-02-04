@@ -1006,8 +1006,8 @@ void CALLBACK SPUasync(unsigned long cycle)
   {
    if(!bSpuInit) return;                               // -> no init, no call
 
-	 // 1 ms updates
-	 while( cpu_cycles >= CPU_CLOCK / INTERVAL_TIME )
+	 // note: usable precision difference (not using interval_time)
+	 while( cpu_cycles >= CPU_CLOCK / 44100 * NSSIZE )
 	 {
 	#ifdef _WINDOWS
 		 MAINProc(0,0,0,0,0);                                // -> experimental win mode... not really tested... don't like the drawbacks
@@ -1015,7 +1015,7 @@ void CALLBACK SPUasync(unsigned long cycle)
 		 MAINThread(0);                                      // -> linux high-compat mode
 	#endif
 
-		 cpu_cycles -= CPU_CLOCK / INTERVAL_TIME;
+		 cpu_cycles -= CPU_CLOCK / 44100 * NSSIZE;
 	 }
   }
 }
