@@ -199,15 +199,20 @@ INLINE int MixADSR(int ch)                             // MIX ADSR
     {
      if(s_chan[ch].ADSRX.AttackModeExp)
       {
-       if(EnvelopeVol>=0x6000)
-				EnvelopeVol+=RateTableAdd[s_chan[ch].ADSRX.AttackRate + 8];
-			 else
-				EnvelopeVol+=RateTableAdd[s_chan[ch].ADSRX.AttackRate + 0];
+       if(EnvelopeVol>=0x6000) {
+				EnvelopeVol+=RateTableAdd[ch->ADSRX.AttackRate + 8];
+				EnvelopeVol_f += RateTableAdd_f[ ch->ADSRX.AttackRate + 8];
+			 }
+			 else {
+				EnvelopeVol+=RateTableAdd[ch->ADSRX.AttackRate + 0];
+				EnvelopeVol_f += RateTableAdd_f[ ch->ADSRX.AttackRate + 0];
+			 }
       }
-		 else
-			EnvelopeVol+=RateTableAdd[s_chan[ch].ADSRX.AttackRate + 0];
+		 else {
+			EnvelopeVol+=RateTableAdd[ch->ADSRX.AttackRate + 0];
+			EnvelopeVol_f += RateTableAdd_f[ ch->ADSRX.AttackRate + 0];
+		 }
 
-		 EnvelopeVol_f += RateTableAdd_f[ s_chan[ch].ADSRX.AttackRate ];
 		 if( EnvelopeVol_f >= RateTable_denom ) {
 			 EnvelopeVol_f -= RateTable_denom;
 			 EnvelopeVol++;
@@ -260,15 +265,20 @@ INLINE int MixADSR(int ch)                             // MIX ADSR
       {
        if(s_chan[ch].ADSRX.SustainModeExp)
         {
-				 if(EnvelopeVol>=0x6000)
-					EnvelopeVol+=RateTableAdd[s_chan[ch].ADSRX.SustainRate + 8];
-				 else
-					EnvelopeVol+=RateTableAdd[s_chan[ch].ADSRX.SustainRate + 0];
+				 if(EnvelopeVol>=0x6000) {
+					EnvelopeVol+=RateTableAdd[ch->ADSRX.SustainRate + 8];
+					EnvelopeVol_f += RateTableAdd_f[ ch->ADSRX.SustainRate + 8];
+				 }
+				 else {
+					EnvelopeVol+=RateTableAdd[ch->ADSRX.SustainRate + 0];
+					EnvelopeVol_f += RateTableAdd_f[ ch->ADSRX.SustainRate + 0];
+				 }
 				}
-			 else
-				EnvelopeVol+=RateTableAdd[s_chan[ch].ADSRX.SustainRate + 0];
+			 else {
+				EnvelopeVol+=RateTableAdd[ch->ADSRX.SustainRate + 0];
+				EnvelopeVol_f += RateTableAdd_f[ ch->ADSRX.SustainRate + 0];
+			 }
 
-			 EnvelopeVol_f += RateTableAdd_f[ s_chan[ch].ADSRX.SustainRate ];
 			 if( EnvelopeVol_f >= RateTable_denom ) {
 				 EnvelopeVol_f -= RateTable_denom;
 				 EnvelopeVol++;
