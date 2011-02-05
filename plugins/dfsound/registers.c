@@ -434,6 +434,11 @@ void SoundOn(int start,int end,unsigned short val)     // SOUND ON PSX COMAND
 		 s_chan[ch].bOn=1;
 		 s_chan[ch].pCurr=s_chan[ch].pStart;
 
+#if 0
+		 // ADSR init time (guess to # apu cycles)
+		 s_chan[ch].ADSRX.StartDelay = 20;
+#endif
+
 		 // Final Fantasy 7 - don't do any of these
 		 // - sets loop address before VoiceOn
 		 //s_chan[ch].pLoop = s_chan[ch].pStart;

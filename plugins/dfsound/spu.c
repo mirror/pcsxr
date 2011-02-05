@@ -597,8 +597,17 @@ static void *MAINThread(void *arg)
 				for(ch=0;ch<MAXCHAN;ch++)                         // loop em all... we will collect 1 ms of sound of each playing channel
         {
 					if(s_chan[ch].bNew) {
-						StartSound(ch);             // start new sound
+#if 1
+						StartSound(ch);																 // start new sound
 						dwNewChannel&=~(1<<ch);                       // clear new channel bit
+#else
+						if( s_chan[ch].ADSRX.StartDelay == 0 ) {
+							StartSound(ch);															// start new sound
+							dwNewChannel&=~(1<<ch);                     // clear new channel bit
+						} else {
+							s_chan[ch].ADSRX.StartDelay--;
+						}
+#endif
 					}
 				 if(!s_chan[ch].bOn) continue;                   // channel not playing? next
 
@@ -789,8 +798,8 @@ GOON: ;
             s_chan[ch].sval=0;                         // debug mute
            else
             {
-             SSumL[ns]+=(s_chan[ch].sval*s_chan[ch].iLeftVolume)/0x8000L;
-             SSumR[ns]+=(s_chan[ch].sval*s_chan[ch].iRightVolume)/0x8000L;
+             SSumL[ns]+=(s_chan[ch].sval*s_chan[ch].iLeftVolume)/0x4000L;
+             SSumR[ns]+=(s_chan[ch].sval*s_chan[ch].iRightVolume)/0x4000L;
             }
 
            //////////////////////////////////////////////
