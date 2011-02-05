@@ -221,7 +221,7 @@ INLINE int MixADSR(int ch)                             // MIX ADSR
      if(EnvelopeVol>=0x8000) 
       {
        EnvelopeVol=0x7FFF;
-			 EnvelopeVol_f=0;
+			 EnvelopeVol_f=RateTable_denom;
        s_chan[ch].ADSRX.State=1;
 		 }
 
@@ -287,7 +287,7 @@ INLINE int MixADSR(int ch)                             // MIX ADSR
        if(EnvelopeVol >= 0x8000) 
         {
          EnvelopeVol=0x7FFF;
-				 EnvelopeVol_f=0;
+				 EnvelopeVol_f=RateTable_denom;
         }
       }
      else
