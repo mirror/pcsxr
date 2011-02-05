@@ -789,8 +789,8 @@ GOON: ;
             s_chan[ch].sval=0;                         // debug mute
            else
             {
-             SSumL[ns]+=(s_chan[ch].sval*s_chan[ch].iLeftVolume)/0x4000L;
-             SSumR[ns]+=(s_chan[ch].sval*s_chan[ch].iRightVolume)/0x4000L;
+             SSumL[ns]+=(s_chan[ch].sval*s_chan[ch].iLeftVolume)/0x8000L;
+             SSumR[ns]+=(s_chan[ch].sval*s_chan[ch].iRightVolume)/0x8000L;
             }
 
            //////////////////////////////////////////////
