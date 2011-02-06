@@ -341,11 +341,12 @@ void Check_Shell( int Irq )
 			i = stat.Status;
 			if (CDR_getStatus(&stat) != -1)
 			{
-				if (stat.Type == 0xff)
-					cdr.Stat = DiskError;
+				// BIOS hangs + BIOS error messages
+				//if (stat.Type == 0xff)
+					//cdr.Stat = DiskError;
 
 				// case now open
-				else if (stat.Status & STATUS_SHELLOPEN)
+				if (stat.Status & STATUS_SHELLOPEN)
 				{
 					// Vib Ribbon: pre-CD swap
 					StopCdda();
