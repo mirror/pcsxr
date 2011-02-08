@@ -217,9 +217,8 @@ void LoadStateUnknown(SPUFreeze_t * pF)
    s_chan[i].bNew=0;
    s_chan[i].bStop=0;
    s_chan[i].ADSR.lVolume=0;
-   s_chan[i].pLoop=spuMemC;
-   s_chan[i].pStart=spuMemC;
-   s_chan[i].pLoop=spuMemC;
+   s_chan[i].pLoop=(unsigned char *)((int)spuMemC+4096);
+   s_chan[i].pStart=(unsigned char *)((int)spuMemC+4096);
    s_chan[i].iMute=0;
    s_chan[i].iIrqDone=0;
   }
