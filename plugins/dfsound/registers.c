@@ -436,7 +436,7 @@ void SoundOn(int start,int end,unsigned short val)     // SOUND ON PSX COMAND
 
 #if 0
 		 // ADSR init time (guess to # apu cycles)
-		 s_chan[ch].ADSRX.StartDelay = 20;
+		 s_chan[ch].ADSRX.StartDelay = 0;
 #endif
 
 		 // Final Fantasy 7 - don't do any of these

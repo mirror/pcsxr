@@ -645,6 +645,15 @@ static void *MAINThread(void *arg)
              predict_nr >>= 4;
              flags=(int)*start;start++;
 
+
+#if 0
+							// Jungle Book - Rhythm 'n Groove - use external loop address
+							// - fixes music player (+IRQ generate)
+							if( flags&4 )
+								s_chan[ch].pLoop=start-2;
+#endif
+
+
              // -------------------------------------- // 
 
              for (nSample=0;nSample<28;start++)      
@@ -700,10 +709,12 @@ static void *MAINThread(void *arg)
 						silence means no volume (ADSR keeps playing!!)
 						*/
 
+#if 1
 						// Jungle Book - Rhythm 'n Groove - use external loop address
 						// - fixes music player (+IRQ generate)
 						if((flags&4) && (s_chan[ch].bIgnoreLoop == 0))
 							s_chan[ch].pLoop=start-16;
+#endif
 
 						// Jungle Book - Rhythm 'n Groove - don't reset ignore status
 						// - fixes gameplay speed (IRQ hits)
