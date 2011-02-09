@@ -1,0 +1,3304 @@
+# Italian translation of pcsxr
+# Copyright (C) 2010 Giovanni Scafora
+# This file is distributed under the same license as the pcsxr package.
+# Giovanni Scafora <giovanni@archlinux.org>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pcsxr 1.0\n"
+"Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
+"POT-Creation-Date: 2011-01-12 23:37+0800\n"
+"PO-Revision-Date: 2011-02-08 15:14+0100\n"
+"Last-Translator: Delirious <delirious@freemail.hu>\n"
+"Language-Team: Delirious <delirious@freemail.hu>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Hungarian\n"
+
+#: ../data/pcsx.glade2.h:1
+msgid ""
+"8-bit\n"
+"16-bit\n"
+"32-bit"
+msgstr ""
+"8-bit\n"
+"16-bit\n"
+"32-bit"
+
+#: ../data/pcsx.glade2.h:4
+msgid "<b>BIOS</b>"
+msgstr "<b>BIOS</b>"
+
+#: ../data/pcsx.glade2.h:5
+msgid "<b>Cheat Codes</b>"
+msgstr "<b>Csalás kódok</b>"
+
+#: ../data/pcsx.glade2.h:6
+msgid "<b>Cheat Search</b>"
+msgstr "<b>Csalás keresés</b>"
+
+#: ../data/pcsx.glade2.h:7
+msgid "<b>Memory Card 1</b>"
+msgstr "<b>Memória kártya 1</b>"
+
+#: ../data/pcsx.glade2.h:8
+msgid "<b>Memory Card 2</b>"
+msgstr "<b>Memória kártya 2</b>"
+
+#: ../data/pcsx.glade2.h:9
+msgid "<b>NetPlay</b>"
+msgstr "<b>Internetes játék</b>"
+
+#: ../data/pcsx.glade2.h:10
+msgid "<b>Options</b>"
+msgstr "<b>Beállítások</b>"
+
+#: ../data/pcsx.glade2.h:11
+msgid "<b>Plugins</b>"
+msgstr "<b>Plugin</b>"
+
+#: ../data/pcsx.glade2.h:12
+msgid "<b>System Type</b>"
+msgstr "<b>Rendszer típus</b>"
+
+#: ../data/pcsx.glade2.h:13
+#: ../gui/DebugMemory.c:188
+msgid "Address (Hexadecimal):"
+msgstr "Címzés (hexadecimális):"
+
+#: ../data/pcsx.glade2.h:14
+#: ../win32/gui/WndMain.c:1301
+msgid "Autodetect"
+msgstr "Automatikus észlelés"
+
+#: ../data/pcsx.glade2.h:15
+msgid "Black & White Movies"
+msgstr "Fekete-fehér videók"
+
+#: ../data/pcsx.glade2.h:16
+msgid "CD-ROM..."
+msgstr "CD-ROM..."
+
+#: ../data/pcsx.glade2.h:17
+msgid "CD-ROM:"
+msgstr "CD-ROM:"
+
+#: ../data/pcsx.glade2.h:18
+msgid "CD-_ROM..."
+msgstr "CD-_ROM..."
+
+#: ../data/pcsx.glade2.h:19
+msgid "C_ontrollers..."
+msgstr "C_ontrollers..."
+
+#: ../data/pcsx.glade2.h:20
+msgid "Chea_t"
+msgstr "Chea_t"
+
+#: ../data/pcsx.glade2.h:21
+#: ../gui/Cheat.c:1129
+#: ../win32/gui/CheatDlg.c:678
+msgid "Cheat Search"
+msgstr "Csalás keresés"
+
+#: ../data/pcsx.glade2.h:22
+msgid "Configure CD-ROM"
+msgstr "CD-ROM beállítás"
+
+#: ../data/pcsx.glade2.h:23
+msgid "Configure CPU"
+msgstr "Processzor beállítások"
+
+#: ../data/pcsx.glade2.h:24
+msgid "Configure Controllers"
+msgstr "Irányítók beállítása"
+
+#: ../data/pcsx.glade2.h:25
+msgid "Configure Graphics"
+msgstr "Grafikai beállítások"
+
+#: ../data/pcsx.glade2.h:26
+msgid "Configure Memory Cards"
+msgstr "Memóriakártyák beállításai"
+
+#: ../data/pcsx.glade2.h:27
+msgid "Configure NetPlay"
+msgstr "Internetes játék beállításai"
+
+#: ../data/pcsx.glade2.h:28
+#: ../gui/ConfDlg.c:112
+msgid "Configure PCSX"
+msgstr "PCSX beállítása"
+
+#: ../data/pcsx.glade2.h:29
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:6
+msgid "Configure Sound"
+msgstr "Hang beállítások"
+
+#: ../data/pcsx.glade2.h:30
+msgid "Continue Emulation"
+msgstr "Emuláció folytatása"
+
+#: ../data/pcsx.glade2.h:31
+msgid "Continue..."
+msgstr "Folytatása..."
+
+#: ../data/pcsx.glade2.h:32
+msgid "Controller 1:   "
+msgstr "1. irányító:   "
+
+#: ../data/pcsx.glade2.h:33
+msgid "Controller 2:"
+msgstr "2. irányító:"
+
+#: ../data/pcsx.glade2.h:34
+msgid "Controllers..."
+msgstr "Irányítók..."
+
+#: ../data/pcsx.glade2.h:35
+msgid "Copy"
+msgstr "Másolás"
+
+#: ../data/pcsx.glade2.h:36
+#: ../win32/gui/CheatDlg.c:683
+msgid "Data Base:"
+msgstr "Adatbázis:"
+
+#: ../data/pcsx.glade2.h:37
+#: ../win32/gui/CheatDlg.c:681
+msgid "Data Type:"
+msgstr "Adat fajta:"
+
+#: ../data/pcsx.glade2.h:38
+msgid ""
+"Decimal\n"
+"Hexadecimal"
+msgstr ""
+"Decimális\n"
+"Hexadecimális"
+
+#: ../data/pcsx.glade2.h:40
+msgid "Disable CD Audio"
+msgstr "CD hang kikapcsolása"
+
+#: ../data/pcsx.glade2.h:41
+msgid "Disable XA Decoding"
+msgstr "XA kódolás kikapcsolása"
+
+#: ../data/pcsx.glade2.h:42
+msgid "E_xit"
+msgstr "E_xit"
+
+#: ../data/pcsx.glade2.h:43
+#: ../win32/gui/CheatDlg.c:166
+msgid "Edit Cheat Codes"
+msgstr "Csalás kódok szerkesztése"
+
+#: ../data/pcsx.glade2.h:44
+#: ../win32/gui/WndMain.c:1303
+msgid "Enable Console Output"
+msgstr "Konzol kimenet bekapcsolása"
+
+#: ../data/pcsx.glade2.h:45
+#: ../win32/gui/WndMain.c:1304
+msgid "Enable Debugger"
+msgstr "Hibakereső bekapcsolása"
+
+#: ../data/pcsx.glade2.h:46
+msgid "Enable Interpreter CPU"
+msgstr "Processzor interpreter használata"
+
+#: ../data/pcsx.glade2.h:47
+msgid ""
+"Equal Value\n"
+"Not Equal Value\n"
+"Range\n"
+"Increased By\n"
+"Decreased By\n"
+"Increased\n"
+"Decreased\n"
+"Different\n"
+"No Change"
+msgstr ""
+"Equal Value\n"
+"Egyenlő érték\n"
+"Nem egyenlő érték\n"
+"Hatótáv\n"
+"Növelve ennyivel\n"
+"Csökkentve ennyivel\n"
+"Növelve\n"
+"Csökkentve\n"
+"Különböző\n"
+"Változatlan"
+
+#: ../data/pcsx.glade2.h:56
+msgid "Format"
+msgstr "Formátum"
+
+#: ../data/pcsx.glade2.h:57
+#: ../win32/gui/CheatDlg.c:504
+msgid "Freeze"
+msgstr "Fagyasztás"
+
+#: ../data/pcsx.glade2.h:58
+msgid "Graphics..."
+msgstr "Kép..."
+
+#: ../data/pcsx.glade2.h:59
+msgid "Graphics:"
+msgstr "Kép:"
+
+#: ../data/pcsx.glade2.h:60
+#: ../win32/gui/WndMain.c:1307
+msgid "InuYasha Sengoku Battle Fix"
+msgstr "InuYasha Sengoku Battle javítás"
+
+#: ../data/pcsx.glade2.h:61
+msgid "Memcards..."
+msgstr "Memória kártyák..."
+
+#: ../data/pcsx.glade2.h:62
+#: ../gui/DebugMemory.c:103
+msgid "Memory Dump"
+msgstr "Mentett memóriatartalom"
+
+#: ../data/pcsx.glade2.h:63
+msgid "Memory _Dump"
+msgstr "Memória _mentés"
+
+#: ../data/pcsx.glade2.h:64
+#: ../win32/gui/CheatDlg.c:595
+msgid "Modify"
+msgstr "Módosítás"
+
+#: ../data/pcsx.glade2.h:65
+msgid ""
+"NTSC\n"
+"PAL"
+msgstr ""
+"NTSC\n"
+"PAL"
+
+#: ../data/pcsx.glade2.h:67
+msgid "New"
+msgstr "Új"
+
+#: ../data/pcsx.glade2.h:68
+msgid "PCSX"
+msgstr "PCSX"
+
+#: ../data/pcsx.glade2.h:69
+#: ../win32/gui/WndMain.c:1306
+msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
+msgstr "Parasite Eve 2, Vandal Hearts 1/2 javítás"
+
+#: ../data/pcsx.glade2.h:70
+msgid "Patch Memory..."
+msgstr "Memória hibajavítás..."
+
+#: ../data/pcsx.glade2.h:71
+msgid "Raw Dump..."
+msgstr "Nyers mentés..."
+
+#: ../data/pcsx.glade2.h:72
+msgid "Restart"
+msgstr "Újraindítás"
+
+#: ../data/pcsx.glade2.h:73
+msgid "Run CD"
+msgstr "CD indítása"
+
+#: ../data/pcsx.glade2.h:74
+msgid "Run ISO Image"
+msgstr "ISO képfájl futtatása"
+
+#: ../data/pcsx.glade2.h:75
+msgid "Run ISO..."
+msgstr "ISO futtatása..."
+
+#: ../data/pcsx.glade2.h:76
+msgid "Run _BIOS"
+msgstr "BIOS _futtatása"
+
+#: ../data/pcsx.glade2.h:77
+msgid "Run _CD"
+msgstr "CD _indítása"
+
+#: ../data/pcsx.glade2.h:78
+msgid "Run _EXE..."
+msgstr "EXE _futtatása..."
+
+#: ../data/pcsx.glade2.h:79
+msgid "Run _ISO..."
+msgstr "ISO _futtatása......"
+
+#: ../data/pcsx.glade2.h:80
+#: ../gui/Plugin.c:239
+#, c-format
+msgid "SIO IRQ Always Enabled"
+msgstr "SIO IRQ mindig bekapcsolva"
+
+#: ../data/pcsx.glade2.h:81
+msgid "SPU IRQ Always Enabled"
+msgstr "Hang IRQ mindig bekacsolva"
+
+#: ../data/pcsx.glade2.h:82
+msgid "S_witch ISO..."
+msgstr "S_ami ISO..."
+
+#: ../data/pcsx.glade2.h:83
+msgid "Search"
+msgstr "Keresés"
+
+#: ../data/pcsx.glade2.h:84
+#: ../win32/gui/CheatDlg.c:680
+msgid "Search For:"
+msgstr "A következő keresése:"
+
+#: ../data/pcsx.glade2.h:85
+msgid "Search in:"
+msgstr "Keresés itt:"
+
+#: ../data/pcsx.glade2.h:86
+msgid "Select Folder to Search"
+msgstr "Keresési mappa kiválasztása"
+
+#: ../data/pcsx.glade2.h:87
+msgid "Slot _1"
+msgstr "Slot _1"
+
+#: ../data/pcsx.glade2.h:88
+msgid "Slot _2"
+msgstr "Slot _2"
+
+#: ../data/pcsx.glade2.h:89
+msgid "Slot _3"
+msgstr "Slot _3"
+
+#: ../data/pcsx.glade2.h:90
+msgid "Slot _4"
+msgstr "Slot _4"
+
+#: ../data/pcsx.glade2.h:91
+msgid "Slot _5"
+msgstr "Slot _5"
+
+#: ../data/pcsx.glade2.h:92
+msgid "Slot _6"
+msgstr "Slot _6"
+
+#: ../data/pcsx.glade2.h:93
+msgid "Slot _7"
+msgstr "Slot _7"
+
+#: ../data/pcsx.glade2.h:94
+msgid "Slot _8"
+msgstr "Slot _8"
+
+#: ../data/pcsx.glade2.h:95
+msgid "Slot _9"
+msgstr "Slot _9"
+
+#: ../data/pcsx.glade2.h:96
+msgid "Sound..."
+msgstr "Hang..."
+
+#: ../data/pcsx.glade2.h:97
+msgid "Sound:"
+msgstr "Hang:"
+
+#: ../data/pcsx.glade2.h:98
+msgid "Switch ISO Image"
+msgstr "ISO képfájl csere"
+
+#: ../data/pcsx.glade2.h:99
+msgid "Switch ISO..."
+msgstr "ISO váltás..."
+
+#: ../data/pcsx.glade2.h:100
+#: ../win32/gui/CheatDlg.c:684
+msgid "To:"
+msgstr "Ide:"
+
+#: ../data/pcsx.glade2.h:101
+msgid "Un/Delete"
+msgstr "Nem/törlés"
+
+#: ../data/pcsx.glade2.h:102
+#: ../gui/Cheat.c:647
+#: ../win32/gui/CheatDlg.c:506
+#: ../win32/gui/CheatDlg.c:597
+#: ../win32/gui/CheatDlg.c:682
+msgid "Value:"
+msgstr "Érték:"
+
+#: ../data/pcsx.glade2.h:103
+msgid "_About PCSX..."
+msgstr "_A PCSX névjegye..."
+
+#: ../data/pcsx.glade2.h:104
+msgid "_Browse..."
+msgstr "_Tallózás..."
+
+#: ../data/pcsx.glade2.h:105
+msgid "_CPU..."
+msgstr "_Processzor..."
+
+#: ../data/pcsx.glade2.h:106
+msgid "_Configuration"
+msgstr "_Beállítások"
+
+#: ../data/pcsx.glade2.h:107
+msgid "_Continue"
+msgstr "_Folytatás"
+
+#: ../data/pcsx.glade2.h:108
+msgid "_Emulator"
+msgstr "_Emulátor"
+
+#: ../data/pcsx.glade2.h:109
+msgid "_File"
+msgstr "_Fájl"
+
+#: ../data/pcsx.glade2.h:110
+msgid "_Graphics..."
+msgstr "_Kép..."
+
+#: ../data/pcsx.glade2.h:111
+msgid "_Help"
+msgstr "_Súgó"
+
+#: ../data/pcsx.glade2.h:112
+msgid "_Load State"
+msgstr "_Állás betöltése"
+
+#: ../data/pcsx.glade2.h:113
+msgid "_Memory Cards..."
+msgstr "_Memória kártyák..."
+
+#: ../data/pcsx.glade2.h:114
+msgid "_Netplay..."
+msgstr "_Netplay..."
+
+#: ../data/pcsx.glade2.h:115
+msgid "_Other..."
+msgstr "_Egyebek..."
+
+#: ../data/pcsx.glade2.h:116
+msgid "_Plugins & BIOS..."
+msgstr "_Pluginok és BIOS..."
+
+#: ../data/pcsx.glade2.h:117
+msgid "_Reset"
+msgstr "_Alapra állítás"
+
+#: ../data/pcsx.glade2.h:118
+msgid "_Save State"
+msgstr "_Állás mentés"
+
+#: ../data/pcsx.glade2.h:119
+msgid "_Search..."
+msgstr "_Keresés..."
+
+#: ../data/pcsx.glade2.h:120
+msgid "_Sound..."
+msgstr "_Hang..."
+
+#: ../data/pcsx.glade2.h:121
+msgid "label_resultsfound"
+msgstr "címke_eredmény találva"
+
+#: ../gui/AboutDlg.c:72
+msgid ""
+"(C) 1999-2003 PCSX Team\n"
+"(C) 2005-2009 PCSX-df Team\n"
+"(C) 2009-2010 PCSX-Reloaded Team"
+msgstr ""
+"(C) 1999-2003 PCSX Team\n"
+"(C) 2005-2009 PCSX-df Team\n"
+"(C) 2009-2010 PCSX-Reloaded Team"
+
+#: ../gui/AboutDlg.c:77
+msgid ""
+"This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
+msgstr ""
+"Ez a program szabad szoftver; terjeszthető illetve módosítható a Free Software Foundation által kiadott GNU General Public License dokumentumában leírtak; akár a licenc 2-es, akár (tetszőleges) későbbi változata szerint.\n"
+"\n"
+"Ez a program abban a reményben kerül közreadásra, hogy hasznos lesz, de minden egyéb GARANCIA NÉLKÜL, az ELADHATÓSÁGRA vagy VALAMELY CÉLRA VALÓ ALKALMAZHATÓSÁGRA való származtatott garanciát is beleértve. További részleteket a GNU General Public License tartalmaz.\n"
+"\n"
+"A felhasználónak a programmal együtt meg kell kapnia a GNU General Public License egy példányát; ha mégsem kapta meg, akkor írjon a következő címre: Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
+
+#: ../gui/AboutDlg.c:100
+msgid "translator-credits"
+msgstr "Magyarítást Delirious készítette <delirious@freemail.hu>"
+
+#: ../gui/AboutDlg.c:101
+msgid "A PlayStation emulator."
+msgstr "A PlayStation emulátor."
+
+#: ../gui/Cheat.c:109
+#: ../win32/gui/CheatDlg.c:116
+msgid "Add New Cheat"
+msgstr "Új csalás felvétele"
+
+#: ../gui/Cheat.c:117
+#: ../gui/Cheat.c:202
+msgid "Cheat Description:"
+msgstr "Csalás leírás:"
+
+#: ../gui/Cheat.c:125
+#: ../gui/Cheat.c:211
+#: ../win32/gui/CheatDlg.c:68
+#: ../win32/gui/CheatDlg.c:118
+msgid "Cheat Code:"
+msgstr "Csalás kód:"
+
+#: ../gui/Cheat.c:155
+#: ../gui/Cheat.c:251
+#: ../gui/LnxMain.c:421
+#: ../win32/gui/ConfigurePlugins.c:305
+msgid "Error"
+msgstr "Hiba"
+
+#: ../gui/Cheat.c:155
+#: ../gui/Cheat.c:251
+#: ../win32/gui/CheatDlg.c:91
+#: ../win32/gui/CheatDlg.c:132
+msgid "Invalid cheat code!"
+msgstr "Érvénytelen csalás kód!"
+
+#: ../gui/Cheat.c:194
+#: ../win32/gui/CheatDlg.c:66
+msgid "Edit Cheat"
+msgstr "Csalás szerkesztése"
+
+#: ../gui/Cheat.c:306
+msgid "Open Cheat File"
+msgstr "Csalás fájl megnyitása"
+
+#: ../gui/Cheat.c:316
+#: ../gui/Cheat.c:356
+msgid "PCSX Cheat Code Files (*.cht)"
+msgstr "PCSX csalás kód fájlok (*.cht)"
+
+#: ../gui/Cheat.c:321
+#: ../gui/Gtk2Gui.c:446
+#: ../gui/Gtk2Gui.c:587
+#: ../win32/gui/WndMain.c:1444
+#: ../win32/gui/WndMain.c:1525
+msgid "All Files"
+msgstr "Minden fájl"
+
+#: ../gui/Cheat.c:346
+msgid "Save Cheat File"
+msgstr "Csalás fájl mentése"
+
+#: ../gui/Cheat.c:361
+msgid "All Files (*.*)"
+msgstr "Minden fájl (*.*)"
+
+#: ../gui/Cheat.c:394
+#: ../gui/Cheat.c:1124
+#: ../gui/ConfDlg.c:104
+#: ../gui/ConfDlg.c:200
+#: ../gui/DebugMemory.c:259
+msgid "Error: Glade interface could not be loaded!"
+msgstr "Hiba: Glade interfész nem tölthető be!"
+
+#: ../gui/Cheat.c:399
+msgid "Cheat Codes"
+msgstr "Csalás kódok"
+
+#: ../gui/Cheat.c:405
+msgid "Enable"
+msgstr "Bekapcsolás"
+
+#: ../gui/Cheat.c:413
+#: ../win32/gui/CheatDlg.c:185
+msgid "Description"
+msgstr "Ismertető"
+
+#: ../gui/Cheat.c:543
+#: ../win32/gui/CheatDlg.c:457
+msgid "Too many addresses found."
+msgstr "Túl sok cím található."
+
+#: ../gui/Cheat.c:552
+#: ../win32/gui/CheatDlg.c:466
+#, c-format
+msgid "%.8X    Current: %u (%.2X), Previous: %u (%.2X)"
+msgstr "%.8X    Jelenlegi: %u (%.2X), Előző: %u (%.2X)"
+
+#: ../gui/Cheat.c:557
+#: ../win32/gui/CheatDlg.c:471
+#, c-format
+msgid "%.8X    Current: %u (%.4X), Previous: %u (%.4X)"
+msgstr "%.8X    Jelenlegi: %u (%.4X), Előző: %u (%.4X)"
+
+#: ../gui/Cheat.c:562
+#: ../win32/gui/CheatDlg.c:476
+#, c-format
+msgid "%.8X    Current: %u (%.8X), Previous: %u (%.8X)"
+msgstr "%.8X    Jelenlegi: %u (%.8X), Előző: %u (%.8X)"
+
+#: ../gui/Cheat.c:577
+#: ../win32/gui/CheatDlg.c:492
+#, c-format
+msgid "Founded Addresses: %d"
+msgstr "Cím találatok: %d"
+
+#: ../gui/Cheat.c:585
+#: ../win32/gui/CheatDlg.c:448
+msgid "Enter the values and start your search."
+msgstr "Gépeld be a kívánt értékeket és indítsd el a keresést."
+
+#: ../gui/Cheat.c:630
+msgid "Freeze value"
+msgstr "Érték fagyasztása"
+
+#: ../gui/Cheat.c:636
+#: ../win32/gui/CheatDlg.c:67
+#: ../win32/gui/CheatDlg.c:117
+msgid "Description:"
+msgstr "Ismertető:"
+
+#: ../gui/Cheat.c:729
+msgid "Modify value"
+msgstr "Érték módosítása"
+
+#: ../gui/Cheat.c:737
+msgid "New value:"
+msgstr "Új érték:"
+
+#: ../gui/Cheat.c:1134
+msgid "Search Results"
+msgstr "Keresési találatok"
+
+#. TODO Check whether configuration is required when we choose the plugin, and set the state of the
+#. button appropriately. New gtk tooltip API should allow us to put a tooltip explanation for
+#. disabled widgets
+#. TODO If combo screen hasn't been opened and the user chooses the menu config option, confs.Combo will be null and cause a segfault
+#. printf("Configuring plugin %s\n", filename);
+#: ../gui/ConfDlg.c:237
+#: ../gui/ConfDlg.c:258
+#: ../gui/ConfDlg.c:279
+#: ../gui/ConfDlg.c:300
+#: ../gui/ConfDlg.c:355
+msgid "No configuration required"
+msgstr "Beállítás nem szükséges"
+
+#: ../gui/ConfDlg.c:237
+#: ../gui/ConfDlg.c:258
+#: ../gui/ConfDlg.c:279
+#: ../gui/ConfDlg.c:300
+#: ../gui/ConfDlg.c:355
+msgid "This plugin doesn't need to be configured."
+msgstr "Ezt a plugint nem kell beállítani."
+
+#: ../gui/ConfDlg.c:581
+#, c-format
+msgid "Could not open BIOS directory: '%s'\n"
+msgstr "A BIOS könyvtár nem nyitható meg: '%s'\n"
+
+#: ../gui/ConfDlg.c:611
+#: ../gui/ConfDlg.c:704
+#: ../gui/LnxMain.c:168
+#, c-format
+msgid "Could not open directory: '%s'\n"
+msgstr "A könyvtár nem nyitható meg: '%s'\n"
+
+#. The BIOS list always contains the PCSX internal BIOS
+#: ../gui/ConfDlg.c:675
+msgid "Simulate PSX BIOS"
+msgstr "PSX BIOS szimulálása"
+
+#: ../gui/DebugMemory.c:111
+msgid "Start Address (Hexadecimal):"
+msgstr "Címzés kezdése (hexadecimális): "
+
+#: ../gui/DebugMemory.c:121
+msgid "Length (Decimal):"
+msgstr "Hossz (tizedes):"
+
+#: ../gui/DebugMemory.c:147
+msgid "Dump to File"
+msgstr "Mentés fájlba"
+
+#: ../gui/DebugMemory.c:162
+#, c-format
+msgid "Error writing to %s!"
+msgstr "%s írása közben hiba lépett fel!"
+
+#: ../gui/DebugMemory.c:180
+msgid "Memory Patch"
+msgstr "Memória hibajavítás"
+
+#: ../gui/DebugMemory.c:198
+msgid "Value (Hexa string):"
+msgstr "Érték (hexa sztring):"
+
+#: ../gui/DebugMemory.c:264
+msgid "Memory Viewer"
+msgstr "Memória betekintő"
+
+#: ../gui/DebugMemory.c:269
+msgid "Address"
+msgstr "Címzés"
+
+#: ../gui/DebugMemory.c:287
+msgid "Text"
+msgstr "Szöveg"
+
+#: ../gui/Gtk2Gui.c:113
+msgid "Ready"
+msgstr "Kész"
+
+#: ../gui/Gtk2Gui.c:154
+msgid "Emulation Paused."
+msgstr "Emuláció szüneteltetve."
+
+#: ../gui/Gtk2Gui.c:429
+msgid "Select PSX EXE File"
+msgstr "PSX EXE fájl választás"
+
+#: ../gui/Gtk2Gui.c:442
+msgid "PlayStation Executable Files"
+msgstr "PlayStation futtatható fájlok"
+
+#: ../gui/Gtk2Gui.c:479
+msgid "Not a valid PSX file"
+msgstr "Nem megfelelő PSX fájl"
+
+#: ../gui/Gtk2Gui.c:479
+msgid "The file does not appear to be a valid Playstation executable"
+msgstr "A fájl nem tűnik PlayStation futtatható fájlnak"
+
+#: ../gui/Gtk2Gui.c:508
+#: ../gui/Gtk2Gui.c:649
+msgid "CD ROM failed"
+msgstr "CD ROM hiba"
+
+#: ../gui/Gtk2Gui.c:508
+#: ../gui/Gtk2Gui.c:649
+#: ../win32/gui/WndMain.c:463
+#: ../win32/gui/WndMain.c:515
+#: ../win32/gui/WndMain.c:584
+#, c-format
+msgid "The CD does not appear to be a valid Playstation CD"
+msgstr "Úgy tűnik a CD lemez nem PlayStation CD formátum"
+
+#: ../gui/Gtk2Gui.c:519
+#: ../gui/Gtk2Gui.c:660
+#: ../win32/gui/WndMain.c:473
+#: ../win32/gui/WndMain.c:525
+#: ../win32/gui/WndMain.c:594
+#, c-format
+msgid "Could not load CD-ROM!"
+msgstr "CD-ROM betöltése sikertelen!"
+
+#: ../gui/Gtk2Gui.c:519
+#: ../gui/Gtk2Gui.c:660
+msgid "The CD-ROM could not be loaded"
+msgstr "CD-ROM nem tölthető be"
+
+#: ../gui/Gtk2Gui.c:533
+msgid "Could not run BIOS"
+msgstr "BIOS nem futtatható"
+
+#: ../gui/Gtk2Gui.c:533
+msgid "Running BIOS is not supported with Internal HLE BIOS."
+msgstr "BIOS használata nem támogatott belső HLE BIOS esetén."
+
+#: ../gui/Gtk2Gui.c:562
+msgid "Open PSX Disc Image File"
+msgstr "PSX lemez képfájl megnyitása"
+
+#: ../gui/Gtk2Gui.c:582
+msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
+msgstr "PSX képfájlok (*.bin, *.img, *.mdf, *.iso)"
+
+#: ../gui/Gtk2Gui.c:813
+#, c-format
+msgid "Loaded state %s."
+msgstr "Betöltött állás %s."
+
+#: ../gui/Gtk2Gui.c:816
+#, c-format
+msgid "Error loading state %s!"
+msgstr "Hiba a mentett állás betöltése közben %s!"
+
+#: ../gui/Gtk2Gui.c:827
+#, c-format
+msgid "Saved state %s."
+msgstr "Mentett állás %s."
+
+#: ../gui/Gtk2Gui.c:829
+#, c-format
+msgid "Error saving state %s!"
+msgstr "Hiba az állás mentése közben %s!"
+
+#: ../gui/Gtk2Gui.c:864
+#: ../gui/Gtk2Gui.c:892
+msgid "Select State File"
+msgstr "Állás mentés választás"
+
+#: ../gui/Gtk2Gui.c:935
+msgid "Notice"
+msgstr "Megjegyzés"
+
+#: ../gui/LnxMain.c:62
+#, c-format
+msgid "Creating memory card: %s\n"
+msgstr "Memória kártya létrehozása: %s\n"
+
+#: ../gui/LnxMain.c:329
+msgid ""
+" pcsx [options] [file]\n"
+"\toptions:\n"
+"\t-runcd\t\tRuns CD-ROM\n"
+"\t-cdfile FILE\tRuns a CD image file\n"
+"\t-nogui\t\tDon't open the GTK GUI\n"
+"\t-cfg FILE\tLoads desired configuration file (default: ~/.pcsx/pcsx.cfg)\n"
+"\t-psxout\t\tEnable PSX output\n"
+"\t-load STATENUM\tLoads savestate STATENUM (1-9)\n"
+"\t-h -help\tDisplay this message\n"
+"\tfile\t\tLoads file\n"
+msgstr ""
+" pcsx [beállítások] [fájl]\n"
+"\toptions:\n"
+"\t-runcd\t\tCD-ROM futtatása\n"
+"\t-cdfile FILE\tCD képfájl futtatása\n"
+"\t-nogui\t\tNe nyíljon meg a GTK GUI\n"
+"\t-cfg FILE\tA kívánt konfigurációs fájl betöltése (alap: ~/.pcsx/pcsx.cfg)\n"
+"\t-psxout\t\tPSX kimenet bekapcsolása\n"
+"\t-load STATENUM\tÁllásmentés betöltése STATENUM (1-9)\n"
+"\t-h -help\tAz üzenet megjelenítése\n"
+"\tfile\t\tFájl betöltése\n"
+
+#: ../gui/LnxMain.c:365
+#, c-format
+msgid "PCSX cannot be configured without using the GUI -- you should restart without -nogui.\n"
+msgstr "PCSX nem konfigurálható a GUI használata nélkül -- újraindítás szükséges -nogui nélkül.\n"
+
+#: ../gui/LnxMain.c:421
+msgid "Failed loading plugins!"
+msgstr "Pluginok betöltése sikertelen!"
+
+#: ../gui/LnxMain.c:440
+#, c-format
+msgid "Could not load CD-ROM!\n"
+msgstr "CD-ROM nem tölthető be!\n"
+
+#: ../gui/LnxMain.c:471
+#, c-format
+msgid "PSX emulator couldn't be initialized.\n"
+msgstr "PSX emulátor incializálása sikertelen.\n"
+
+#: ../gui/MemcardDlg.c:56
+msgid "Icon"
+msgstr "Ikon"
+
+#: ../gui/MemcardDlg.c:62
+#: ../win32/gui/WndMain.c:748
+msgid "Title"
+msgstr "Cím"
+
+#: ../gui/MemcardDlg.c:68
+#: ../win32/gui/WndMain.c:754
+msgid "Status"
+msgstr "Állapot"
+
+#: ../gui/MemcardDlg.c:74
+msgid "ID"
+msgstr "Azonosító"
+
+#: ../gui/MemcardDlg.c:80
+msgid "Name"
+msgstr "Név"
+
+#: ../gui/MemcardDlg.c:155
+#: ../gui/MemcardDlg.c:260
+#: ../win32/gui/WndMain.c:959
+msgid "Deleted"
+msgstr "Törölve"
+
+#: ../gui/MemcardDlg.c:157
+#: ../gui/MemcardDlg.c:161
+#: ../gui/MemcardDlg.c:262
+#: ../gui/MemcardDlg.c:266
+#: ../win32/gui/WndMain.c:960
+#: ../win32/gui/WndMain.c:963
+msgid "Free"
+msgstr "Üres"
+
+#: ../gui/MemcardDlg.c:159
+#: ../gui/MemcardDlg.c:264
+#: ../win32/gui/WndMain.c:962
+msgid "Used"
+msgstr "Foglalt"
+
+#. Ask for name of memory card
+#: ../gui/MemcardDlg.c:323
+msgid "Select A File"
+msgstr "Fájl választás"
+
+#: ../gui/MemcardDlg.c:364
+msgid "Format this Memory Card?"
+msgstr "Formázod a memória kártyát?"
+
+#: ../gui/MemcardDlg.c:366
+msgid "If you format the memory card, the card will be empty, and any existing data overwritten."
+msgstr "Ha leformázod a memória kártyát, akkor a kártya üres lesz és minden meglévő adat el fog veszni."
+
+#: ../gui/MemcardDlg.c:369
+msgid "Format card"
+msgstr "Kártya formázása"
+
+#. Ask for name of new memory card
+#: ../gui/MemcardDlg.c:393
+msgid "Create a new Memory Card"
+msgstr "Új memória kártya létrehozása"
+
+#: ../gui/MemcardDlg.c:402
+msgid "New Memory Card.mcd"
+msgstr "Új memória kártya.mcd"
+
+#. No free slots available on the destination card
+#: ../gui/MemcardDlg.c:503
+msgid "No free space on memory card"
+msgstr "Nincs szabad hely a memória kártyán"
+
+#: ../gui/MemcardDlg.c:504
+msgid "There are no free slots available on the target memory card. Please delete a slot first."
+msgstr "Nincs szabad mentési blokk a cél memória kártyán. Először törölj egy blokkot."
+
+#: ../gui/MemcardDlg.c:667
+msgid "Memory Card Manager"
+msgstr "Memória kártya intéző"
+
+#: ../gui/Plugin.c:240
+#, c-format
+msgid "SIO IRQ Not Always Enabled"
+msgstr "SIO IRQ nincs mindig bekapcsolva"
+
+#: ../gui/Plugin.c:246
+#, c-format
+msgid "Black & White Mdecs Only Enabled"
+msgstr "Csak fekete és fehér Mdecs használata"
+
+#: ../gui/Plugin.c:247
+#, c-format
+msgid "Black & White Mdecs Only Disabled"
+msgstr "Csak fekete és fehér Mdecs kikapcsolva"
+
+#: ../gui/Plugin.c:253
+#, c-format
+msgid "XA Enabled"
+msgstr "XA bekapcsolva"
+
+#: ../gui/Plugin.c:254
+#, c-format
+msgid "XA Disabled"
+msgstr "XA kikapcsolva"
+
+#: ../gui/Plugin.c:323
+msgid "Error opening CD-ROM plugin!"
+msgstr "Hiba a CD-ROM plugin megnyitásakor!"
+
+#: ../gui/Plugin.c:325
+msgid "Error opening SPU plugin!"
+msgstr "Hiba a hang plugin megnyitásakor!"
+
+#: ../gui/Plugin.c:328
+msgid "Error opening GPU plugin!"
+msgstr "Hiba a kép plugin megnyitásakor!"
+
+#: ../gui/Plugin.c:331
+msgid "Error opening Controller 1 plugin!"
+msgstr "Hiba az egyes irányító plugin megnyitásakor!"
+
+#: ../gui/Plugin.c:335
+msgid "Error opening Controller 2 plugin!"
+msgstr "Hiba a kettes irányító plugin megnyitásakor!"
+
+#: ../gui/Plugin.c:417
+msgid "Error closing CD-ROM plugin!"
+msgstr "Hiba a CD-ROM plugin bezárásakor!"
+
+#: ../gui/Plugin.c:419
+msgid "Error closing SPU plugin!"
+msgstr "Hiba a hang plugin bezárásakor!"
+
+#: ../gui/Plugin.c:421
+msgid "Error closing Controller 1 Plugin!"
+msgstr "Hiba az egyes irányító plugin bezárásakor!"
+
+#: ../gui/Plugin.c:423
+msgid "Error closing Controller 2 plugin!"
+msgstr "Hiba a kettes irányító plugin bezárásakor!"
+
+#: ../gui/Plugin.c:425
+msgid "Error closing GPU plugin!"
+msgstr "Hiba a kép plugin bezárásakor!"
+
+#: ../libpcsxcore/cdriso.c:728
+#, c-format
+msgid "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"
+msgstr "Sáv %.2d (%s) - Kezdet %.2d:%.2d:%.2d, Hosszúság %.2d:%.2d:%.2d\n"
+
+#: ../libpcsxcore/cdriso.c:749
+#, c-format
+msgid "Loaded CD Image: %s"
+msgstr "Betöltött CD képfájl: %s"
+
+#: ../libpcsxcore/cheat.c:147
+#, c-format
+msgid "Cheats loaded from: %s\n"
+msgstr "Csalások betöltve innen: %s\n"
+
+#: ../libpcsxcore/cheat.c:179
+#, c-format
+msgid "Cheats saved to: %s\n"
+msgstr "Csalások mentve ide: %s\n"
+
+#: ../libpcsxcore/cheat.c:322
+#: ../libpcsxcore/cheat.c:443
+msgid "(Untitled)"
+msgstr "(Cím nélküli)"
+
+#: ../libpcsxcore/debug.c:317
+msgid "Error allocating memory"
+msgstr "Memóriafoglalási hiba"
+
+#: ../libpcsxcore/debug.c:322
+msgid "Unable to start debug server.\n"
+msgstr "Hibakereső szervert nem lehetett elindítani.\n"
+
+#: ../libpcsxcore/debug.c:326
+msgid "Debugger started.\n"
+msgstr "Hibakereső elindítva.\n"
+
+#: ../libpcsxcore/debug.c:333
+msgid "Debugger stopped.\n"
+msgstr "Hibakereső leállítva.\n"
+
+#: ../libpcsxcore/misc.c:345
+#, c-format
+msgid "CD-ROM Label: %.32s\n"
+msgstr "CD-ROM címke: %.32s\n"
+
+#: ../libpcsxcore/misc.c:346
+#, c-format
+msgid "CD-ROM ID: %.9s\n"
+msgstr "CD-ROM azonosító: %.9s\n"
+
+#: ../libpcsxcore/misc.c:410
+#, c-format
+msgid "Error opening file: %s.\n"
+msgstr "Hiba a fájl megnyitása közben: %s.\n"
+
+#: ../libpcsxcore/misc.c:453
+#, c-format
+msgid "Unknown CPE opcode %02x at position %08x.\n"
+msgstr "Ismeretlen CPE művelet-kód: %02x ezen a helyen: %08x.\n"
+
+#: ../libpcsxcore/misc.c:481
+msgid "This file does not appear to be a valid PSX file.\n"
+msgstr "A fájl nem tűnik érvényes PSX fájlnak.\n"
+
+#: ../libpcsxcore/plugins.c:189
+#, c-format
+msgid "Error loading %s: %s"
+msgstr "Hiba a(z) %s: %s betöltése közben"
+
+#: ../libpcsxcore/plugins.c:243
+#, c-format
+msgid "Could not load GPU plugin %s!"
+msgstr "%s grafikai plugin nem tölthető be!"
+
+#: ../libpcsxcore/plugins.c:318
+#, c-format
+msgid "Could not load CD-ROM plugin %s!"
+msgstr "%s CD-ROM plugin nem tölthető be!"
+
+#: ../libpcsxcore/plugins.c:366
+#, c-format
+msgid "Could not load SPU plugin %s!"
+msgstr "%s hang plugin nem tölthető be!"
+
+#: ../libpcsxcore/plugins.c:505
+#, c-format
+msgid "Could not load Controller 1 plugin %s!"
+msgstr "Az egyes irányító plugin: %s nem tölthető be!"
+
+#: ../libpcsxcore/plugins.c:563
+#, c-format
+msgid "Could not load Controller 2 plugin %s!"
+msgstr "A kettes irányító plugin: %s nem tölthető be!"
+
+#: ../libpcsxcore/plugins.c:608
+#, c-format
+msgid "Could not load NetPlay plugin %s!"
+msgstr "%s NetPlay plugin nem tölthető be!"
+
+#: ../libpcsxcore/plugins.c:688
+#, c-format
+msgid "Could not load SIO1 plugin %s!"
+msgstr "%s SIO1 plugin nem tölthető be!"
+
+#: ../libpcsxcore/plugins.c:773
+#, c-format
+msgid "Error initializing CD-ROM plugin: %d"
+msgstr "Hiba a CD-ROM plugin iniciálásakor: %d"
+
+#: ../libpcsxcore/plugins.c:775
+#, c-format
+msgid "Error initializing GPU plugin: %d"
+msgstr "Error initializing GPU plugin: %d"
+
+#: ../libpcsxcore/plugins.c:777
+#, c-format
+msgid "Error initializing SPU plugin: %d"
+msgstr "Hiba a hang plugin iniciálásakor: %d"
+
+#: ../libpcsxcore/plugins.c:779
+#, c-format
+msgid "Error initializing Controller 1 plugin: %d"
+msgstr "Hiba az egyes irányító plugin iniciálásakor: %d"
+
+#: ../libpcsxcore/plugins.c:781
+#, c-format
+msgid "Error initializing Controller 2 plugin: %d"
+msgstr "Hiba a kettes irányító plugin iniciálásakor: %d"
+
+#: ../libpcsxcore/plugins.c:785
+#, c-format
+msgid "Error initializing NetPlay plugin: %d"
+msgstr "Hiba a NetPlay plugin iniciálásakor: %d"
+
+#: ../libpcsxcore/plugins.c:790
+#, c-format
+msgid "Error initializing SIO1 plugin: %d"
+msgstr "Hiba a SIO1 plugin iniciálásakor: %d"
+
+#: ../libpcsxcore/plugins.c:793
+msgid "Plugins loaded.\n"
+msgstr "Pluginok betöltve.\n"
+
+#: ../libpcsxcore/ppf.c:217
+#, c-format
+msgid "Invalid PPF patch: %s.\n"
+msgstr "Érvénytelen PPF patch: %s.\n"
+
+#: ../libpcsxcore/ppf.c:293
+#, c-format
+msgid "Unsupported PPF version (%d).\n"
+msgstr "Nem támogatott PPF verzió (%d).\n"
+
+#. build address array
+#: ../libpcsxcore/ppf.c:332
+#, c-format
+msgid "Loaded PPF %d.0 patch: %s.\n"
+msgstr "PPF %d.0 patch betöltve: %s.\n"
+
+#: ../libpcsxcore/ppf.c:375
+#, c-format
+msgid "Loaded SBI file: %s.\n"
+msgstr "SBI fájl betöltve: %s.\n"
+
+#: ../libpcsxcore/psxmem.c:78
+msgid "Error allocating memory!"
+msgstr "Memóriafoglalási hiba!"
+
+#: ../libpcsxcore/psxmem.c:121
+#, c-format
+msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
+msgstr "BIOS nem nyitható meg:\"%s\". HLE Bios használata!\n"
+
+#: ../libpcsxcore/r3000a.c:34
+#, c-format
+msgid "Running PCSX Version %s (%s).\n"
+msgstr "PCSX %s (%s) verzió fut.\n"
+
+#: ../libpcsxcore/sio.c:839
+msgid "Connection closed!\n"
+msgstr "Kapcsolat lezárva!\n"
+
+#: ../libpcsxcore/sio.c:872
+#, c-format
+msgid "No memory card value was specified - creating a default card %s\n"
+msgstr "Nincs megadva memóriakártyához tartozó érték - alapértelmezett kártya létrehozása %s\n"
+
+#: ../libpcsxcore/sio.c:876
+#, c-format
+msgid "The memory card %s doesn't exist - creating it\n"
+msgstr "Nincs %s. memóriakártya - létrehozása folyamatban\n"
+
+#: ../libpcsxcore/sio.c:892
+#, c-format
+msgid "Memory card %s failed to load!\n"
+msgstr "%s. memóriakártya betöltése sikertelen!\n"
+
+#: ../libpcsxcore/sio.c:896
+#, c-format
+msgid "Loading memory card %s\n"
+msgstr "%s. memóriakártya betöltése\n"
+
+#: ../plugins/dfcdrom/cdr.c:25
+msgid "CD-ROM Drive Reader"
+msgstr "CD-ROM olvasó"
+
+#: ../plugins/dfcdrom/cdr.c:27
+msgid "CDR NULL Plugin"
+msgstr "CDR NULL plugin"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:1
+#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:219
+msgid "CDR configuration"
+msgstr "CD-ROM beállítások"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:2
+msgid "Cache Size (Def. 64):"
+msgstr "Gyorsítótár mérete (Def. 64):"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:3
+msgid "Cdrom Speed (Def. 0 = MAX):"
+msgstr "CD-ROM sebessége (alap. 0 = MAX):"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:4
+msgid "Choose your CD-ROM device or type its path if it's not listed"
+msgstr "Válassz CD-ROM eszközt vagy gépeld be az elérési útját ha nincs a felsoroltak közt"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:5
+msgid ""
+"Default\n"
+"125ms\n"
+"250ms\n"
+"500ms\n"
+"1s\n"
+"2s\n"
+"4s\n"
+"8s\n"
+"16s\n"
+"32s\n"
+"1min\n"
+"2min\n"
+"4min\n"
+"8min\n"
+"16min\n"
+"32min"
+msgstr ""
+"Alapérték\n"
+"125 ms\n"
+"250 ms\n"
+"500 ms\n"
+"1 s\n"
+"2 s\n"
+"4 s\n"
+"8 s\n"
+"16 s\n"
+"32 s\n"
+"1 perc\n"
+"2 perc\n"
+"4 perc\n"
+"8 perc\n"
+"16 perc\n"
+"32 perc"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:21
+msgid "Enable subchannel read"
+msgstr "Segéd csatorna olvasás használata"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:22
+msgid ""
+"Normal (No Cache)\n"
+"Threaded - Faster (With Cache)"
+msgstr ""
+"Normál (gyorsítótár nélkül)\n"
+"Szálanként - Gyorsabb (gyorsítótárral)"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:24
+#: ../plugins/dfinput/dfinput.ui.h:8
+#: ../win32/gui/WndMain.c:1309
+msgid "Options"
+msgstr "Lehetőségek"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:25
+msgid "Select CD-ROM device"
+msgstr "Válassz CD-ROM eszközt"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:26
+msgid "Select read mode:"
+msgstr "Válassz olvasási módot:"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:27
+msgid "Spindown Time:"
+msgstr "Lelassulási idő:"
+
+#: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:28
+msgid "hseparator"
+msgstr "hseparator"
+
+#: ../plugins/dfinput/cfg-gtk2.c:48
+msgid "D-Pad Up"
+msgstr "Digitális FEL"
+
+#: ../plugins/dfinput/cfg-gtk2.c:49
+msgid "D-Pad Down"
+msgstr "Digitális LE"
+
+#: ../plugins/dfinput/cfg-gtk2.c:50
+msgid "D-Pad Left"
+msgstr "Digitális BALRA"
+
+#: ../plugins/dfinput/cfg-gtk2.c:51
+msgid "D-Pad Right"
+msgstr "Digitális JOBBRA"
+
+#: ../plugins/dfinput/cfg-gtk2.c:52
+msgid "Cross"
+msgstr "KERESZT"
+
+#: ../plugins/dfinput/cfg-gtk2.c:53
+msgid "Circle"
+msgstr "KÖR"
+
+#: ../plugins/dfinput/cfg-gtk2.c:54
+msgid "Square"
+msgstr "NÉGYSZÖG"
+
+#: ../plugins/dfinput/cfg-gtk2.c:55
+msgid "Triangle"
+msgstr "HÁROMSZÖG"
+
+#: ../plugins/dfinput/cfg-gtk2.c:56
+msgid "L1"
+msgstr "L1"
+
+#: ../plugins/dfinput/cfg-gtk2.c:57
+msgid "R1"
+msgstr "R1"
+
+#: ../plugins/dfinput/cfg-gtk2.c:58
+msgid "L2"
+msgstr "L2"
+
+#: ../plugins/dfinput/cfg-gtk2.c:59
+msgid "R2"
+msgstr "R2"
+
+#: ../plugins/dfinput/cfg-gtk2.c:60
+msgid "Select"
+msgstr "Select"
+
+#: ../plugins/dfinput/cfg-gtk2.c:61
+msgid "Start"
+msgstr "Start"
+
+#: ../plugins/dfinput/cfg-gtk2.c:62
+msgid "L3"
+msgstr "L3"
+
+#: ../plugins/dfinput/cfg-gtk2.c:63
+msgid "R3"
+msgstr "R3"
+
+#: ../plugins/dfinput/cfg-gtk2.c:67
+msgid "L-Stick Right"
+msgstr "Bal kar jobbra"
+
+#: ../plugins/dfinput/cfg-gtk2.c:68
+msgid "L-Stick Left"
+msgstr "Bal kar jobbra"
+
+#: ../plugins/dfinput/cfg-gtk2.c:69
+msgid "L-Stick Down"
+msgstr "Bal kar le"
+
+#: ../plugins/dfinput/cfg-gtk2.c:70
+msgid "L-Stick Up"
+msgstr "Bal kar fel"
+
+#: ../plugins/dfinput/cfg-gtk2.c:71
+msgid "R-Stick Right"
+msgstr "Jobb kar jobbra"
+
+#: ../plugins/dfinput/cfg-gtk2.c:72
+msgid "R-Stick Left"
+msgstr "Jobb kar balra"
+
+#: ../plugins/dfinput/cfg-gtk2.c:73
+msgid "R-Stick Down"
+msgstr "Jobb kar le"
+
+#: ../plugins/dfinput/cfg-gtk2.c:74
+msgid "R-Stick Up"
+msgstr "Jobb kar fel"
+
+#: ../plugins/dfinput/cfg-gtk2.c:100
+#: ../plugins/dfinput/cfg-gtk2.c:139
+msgid "Centered"
+msgstr "Középen"
+
+#: ../plugins/dfinput/cfg-gtk2.c:100
+#: ../plugins/dfinput/cfg-gtk2.c:139
+msgid "Up"
+msgstr "Fel"
+
+#: ../plugins/dfinput/cfg-gtk2.c:100
+#: ../plugins/dfinput/cfg-gtk2.c:139
+msgid "Right"
+msgstr "Jobbra"
+
+#: ../plugins/dfinput/cfg-gtk2.c:100
+#: ../plugins/dfinput/cfg-gtk2.c:139
+msgid "Rightup"
+msgstr "Jobbra fel"
+
+#: ../plugins/dfinput/cfg-gtk2.c:101
+#: ../plugins/dfinput/cfg-gtk2.c:140
+msgid "Down"
+msgstr "Le"
+
+#: ../plugins/dfinput/cfg-gtk2.c:101
+#: ../plugins/dfinput/cfg-gtk2.c:140
+msgid "Rightdown"
+msgstr "Jobbra le"
+
+#: ../plugins/dfinput/cfg-gtk2.c:101
+#: ../plugins/dfinput/cfg-gtk2.c:140
+msgid "Left"
+msgstr "Balra"
+
+#: ../plugins/dfinput/cfg-gtk2.c:101
+#: ../plugins/dfinput/cfg-gtk2.c:140
+msgid "Leftup"
+msgstr "Balra fel"
+
+#: ../plugins/dfinput/cfg-gtk2.c:102
+#: ../plugins/dfinput/cfg-gtk2.c:141
+msgid "Leftdown"
+msgstr "Balra le"
+
+#: ../plugins/dfinput/cfg-gtk2.c:106
+#: ../plugins/dfinput/cfg-gtk2.c:145
+#, c-format
+msgid "Joystick: Button %d"
+msgstr "Joystick: %d gomb"
+
+#: ../plugins/dfinput/cfg-gtk2.c:110
+#: ../plugins/dfinput/cfg-gtk2.c:149
+#, c-format
+msgid "Joystick: Axis %d%c"
+msgstr "Joystick: %d%c irány"
+
+#: ../plugins/dfinput/cfg-gtk2.c:115
+#: ../plugins/dfinput/cfg-gtk2.c:154
+#, c-format
+msgid "Joystick: Hat %d %s"
+msgstr "Joystick: %d %s hat"
+
+#: ../plugins/dfinput/cfg-gtk2.c:130
+#: ../plugins/dfinput/cfg-gtk2.c:169
+msgid "Keyboard:"
+msgstr "Billentyűzet:"
+
+#: ../plugins/dfinput/cfg-gtk2.c:134
+#: ../plugins/dfinput/cfg-gtk2.c:173
+msgid "(Not Set)"
+msgstr "(Nincs beállítva)"
+
+#: ../plugins/dfinput/cfg-gtk2.c:542
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:55
+msgid "None"
+msgstr "Nincs"
+
+#: ../plugins/dfinput/cfg-gtk2.c:584
+msgid "Gamepad/Keyboard Input Configuration"
+msgstr "Játékirányító/Billentyűzet bemeneti beállítás"
+
+#: ../plugins/dfinput/cfg-gtk2.c:590
+#: ../plugins/dfinput/cfg-gtk2.c:610
+msgid "Key"
+msgstr "Billentyű"
+
+#: ../plugins/dfinput/cfg-gtk2.c:596
+#: ../plugins/dfinput/cfg-gtk2.c:616
+msgid "Button"
+msgstr "Gomb"
+
+#: ../plugins/dfinput/dfinput.ui.h:1
+msgid "Analog Pad"
+msgstr "Analóg irányító"
+
+#: ../plugins/dfinput/dfinput.ui.h:2
+msgid "Change"
+msgstr "Változtatás"
+
+#: ../plugins/dfinput/dfinput.ui.h:3
+msgid "Controller 1"
+msgstr "Egyes irányító"
+
+#: ../plugins/dfinput/dfinput.ui.h:4
+msgid "Controller 2"
+msgstr "Kettes irányító"
+
+#: ../plugins/dfinput/dfinput.ui.h:5
+msgid "Device:"
+msgstr "Eszköz:"
+
+#: ../plugins/dfinput/dfinput.ui.h:6
+msgid "Digital Pad"
+msgstr "Digitális irányító"
+
+#: ../plugins/dfinput/dfinput.ui.h:7
+msgid "Multi-Threaded (Recommended)"
+msgstr "Többszálas (ajánlott)"
+
+#: ../plugins/dfinput/dfinput.ui.h:9
+msgid "Reset"
+msgstr "Alapra állítás"
+
+#: ../plugins/dfinput/dfinput.ui.h:10
+msgid "Type:"
+msgstr "Típus:"
+
+#: ../plugins/dfinput/pad.c:24
+msgid "Gamepad/Keyboard Input"
+msgstr "Játékirányító/Billentyűzet bemenet"
+
+#. increase that with each version
+#: ../plugins/dfnet/dfnet.c:23
+msgid "Socket Driver"
+msgstr "Socket illesztőprogram"
+
+#: ../plugins/dfnet/dfnet.c:161
+#, c-format
+msgid "error connecting to %s: %s\n"
+msgstr "hiba a következőhöz történő kapcsolódáskor: %s: %s\n"
+
+#: ../plugins/dfnet/dfnet.c:186
+msgid "Error allocating memory!\n"
+msgstr "Memória kiosztási hiba!\n"
+
+#: ../plugins/dfnet/dfnet.ui.h:1
+msgid "Client (Player2)"
+msgstr "Kliens (2. játékos)"
+
+#: ../plugins/dfnet/dfnet.ui.h:2
+msgid "Copy PC IP to Clipboard"
+msgstr "A számítógép IP címének másolása vágólapra"
+
+#: ../plugins/dfnet/dfnet.ui.h:3
+msgid "Do not change if not necessary (remember it must be changed on both sides)."
+msgstr "Ne változtasd ha nem muszály (ne feledd, mindkét oldalon módosítani kell)."
+
+#: ../plugins/dfnet/dfnet.ui.h:4
+msgid "Play Offline"
+msgstr "Offline játék"
+
+#: ../plugins/dfnet/dfnet.ui.h:5
+msgid "Port Number"
+msgstr "Port száma"
+
+#: ../plugins/dfnet/dfnet.ui.h:6
+msgid ""
+"Select here if you'll be Server (Player1) or Client (Player2).\n"
+"\n"
+"If you select Server you must Copy your IP address to the Clipboard and paste if (Ctrl+V) wherever the Client can see it.\n"
+"\n"
+"If you selected Client please enter the IP address the Server gave to you in the IP Address Control."
+msgstr ""
+"Válaszd ezt ha te létesítesz szervert (1. játékos) vagy ha kliens leszel (2. játékos).\n"
+"\n"
+"Ha szervert választasz, másold az IP címedet a vágólapra és szúrd be (Ctrl+V) bárhová, ahol a kliens látni fogja.\n"
+"\n"
+"Ha klienset választottál, írd be az IP címedet amit a szerver adott az IP cím vezérlőnél."
+
+#: ../plugins/dfnet/dfnet.ui.h:11
+msgid "Server (Player1)"
+msgstr "Szerver (1. játékos)"
+
+#: ../plugins/dfnet/dfnet.ui.h:12
+msgid "Start Game"
+msgstr "Játék indítása"
+
+#: ../plugins/dfnet/gui.c:30
+#: ../plugins/dfnet/gui.c:112
+#: ../win32/gui/ConfigurePlugins.c:616
+msgid "NetPlay"
+msgstr "Internetes játék"
+
+#: ../plugins/dfnet/gui.c:38
+msgid "Nothing to configure"
+msgstr "Nincs mit beállítani"
+
+#: ../plugins/dfnet/gui.c:94
+#, c-format
+msgid "IP %s"
+msgstr "IP %s"
+
+#: ../plugins/dfnet/gui.c:165
+msgid "Waiting for connection..."
+msgstr "Várakozás a csatlakozásra..."
+
+#: ../plugins/dfnet/gui.c:168
+msgid "The Client should now Start a Connection, waiting..."
+msgstr "A kliens kapcsolatot kezdeményez, várjon..."
+
+#: ../plugins/dfsound/spu.c:43
+msgid "DirectSound Driver"
+msgstr "DirectSound driver"
+
+#: ../plugins/dfsound/spu.c:45
+msgid "Mac OS X Sound"
+msgstr "Mac OS X hang"
+
+#: ../plugins/dfsound/spu.c:47
+msgid "ALSA Sound"
+msgstr "ALSA hang"
+
+#: ../plugins/dfsound/spu.c:49
+msgid "OSS Sound"
+msgstr "OSS hang"
+
+#: ../plugins/dfsound/spu.c:51
+msgid "SDL Sound"
+msgstr "SDL hang"
+
+#: ../plugins/dfsound/spu.c:53
+msgid "PulseAudio Sound"
+msgstr "PulseAudio hang"
+
+#: ../plugins/dfsound/spu.c:55
+msgid "NULL Sound"
+msgstr "NULL hang"
+
+#: ../plugins/dfsound/spu.c:58
+msgid ""
+"P.E.Op.S. Sound Driver V1.7\n"
+"Coded by Pete Bernert and the P.E.Op.S. team\n"
+msgstr ""
+"P.E.Op.S. Sound Driver V1.7\n"
+"Fejlesztő Pete Bernert és a P.E.Op.S. team\n"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:1
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:20
+msgid "<b>Compatibility</b>"
+msgstr "<b>Kompatibilitás</b>"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:2
+msgid "<b>General</b>"
+msgstr "<b>Általános</b>"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:3
+msgid "<b>XA Music</b>"
+msgstr "<b>XA zene</b>"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:4
+msgid "Adjust XA speed"
+msgstr "XA sebesség beállítása"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:5
+msgid "Choose this if XA music is played too quickly."
+msgstr "Válaszd ezt, ha az XA zene túl gyors."
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:7
+msgid "Frequency Response - Output Filter"
+msgstr "Frekvencia reakció - Kimeneti szűrő"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:8
+msgid "High compatibility mode"
+msgstr "Magas kompatibilitási mód"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:9
+msgid "Interpolation:"
+msgstr "Interpoláció:"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:10
+msgid ""
+"None\n"
+"Low\n"
+"Medium\n"
+"Loud\n"
+"Loudest"
+msgstr ""
+"Nincs\n"
+"Halk\n"
+"Közepes\n"
+"Hangos\n"
+"Leghangosabb"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:15
+msgid ""
+"None\n"
+"Simple\n"
+"Gaussian\n"
+"Cubic"
+msgstr ""
+"Nincs\n"
+"Egyszerű\n"
+"Gauss\n"
+"Köbös"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:19
+msgid ""
+"Off\n"
+"Simple\n"
+"Playstation"
+msgstr ""
+"Ki\n"
+"Egyszerű\n"
+"PlayStation"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:22
+msgid "Play only one channel for a performance boost."
+msgstr "Csupán egy csatorna lejátszása a teljesítmény növelés érdekében."
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:23
+msgid "Reverb:"
+msgstr "Utózengés:"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:24
+msgid "SPU IRQ Wait"
+msgstr "Hang IRQ várakozás"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:25
+msgid "Single channel sound"
+msgstr "Egycsatornás hang"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:26
+msgid "Use the asynchronous SPU interface."
+msgstr "Aszinkron hang interfész használata."
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:27
+msgid "Volume:"
+msgstr "Hangerő:"
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:28
+msgid "Wait for CPU; only useful for some games."
+msgstr "Processzorra várás; csak néhány játéknál hasznos."
+
+#: ../plugins/dfxvideo/gpu.c:60
+msgid "Soft Driver"
+msgstr "Soft driver"
+
+#: ../plugins/dfxvideo/gpu.c:61
+msgid ""
+"P.E.Op.S. Soft Driver V1.17\n"
+"Coded by Pete Bernert and the P.E.Op.S. team\n"
+msgstr ""
+"P.E.Op.S. Soft Driver V1.17\n"
+"Fejlesztő Pete Bernert és a  P.E.Op.S. team\n"
+
+#: ../plugins/dfxvideo/gpu.c:63
+msgid "SoftGL Driver"
+msgstr "SoftGL Driver"
+
+#: ../plugins/dfxvideo/gpu.c:64
+msgid ""
+"P.E.Op.S. SoftGL Driver V1.17\n"
+"Coded by Pete Bernert and the P.E.Op.S. team\n"
+msgstr ""
+"P.E.Op.S. SoftGL Driver V1.17\n"
+"Fejlesztő Pete Bernert és a  P.E.Op.S. team\n"
+
+#: ../plugins/dfxvideo/gpu.c:66
+msgid "XVideo Driver"
+msgstr "XVideo driver"
+
+#: ../plugins/dfxvideo/gpu.c:67
+msgid ""
+"P.E.Op.S. Xvideo Driver V1.17\n"
+"Coded by Pete Bernert and the P.E.Op.S. team\n"
+msgstr ""
+"P.E.Op.S. Xvideo driver V1.17\n"
+"Fejlesztő Pete Bernert és a  P.E.Op.S. team\n"
+
+#: ../plugins/dfxvideo/gpu.c:70
+msgid "Pete Bernert and the P.E.Op.S. team"
+msgstr "Fejlesztő Pete Bernert és a  P.E.Op.S. team"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:1
+msgid ""
+"0: None\n"
+"1: 2xSai\n"
+"2: 2xSuperSai\n"
+"3: SuperEagle\n"
+"4: Scale2x\n"
+"5: Scale3x\n"
+"6: HQ2X\n"
+"7: HQ3X"
+msgstr ""
+"0: Nincs\n"
+"1: 2xSai\n"
+"2: 2xSuperSai\n"
+"3: SuperEagle\n"
+"4: Scale2x\n"
+"5: Scale3x\n"
+"6: HQ2X\n"
+"7: HQ3X"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:9
+msgid ""
+"0: Off (fastest)\n"
+"1: Game dependant\n"
+"2: Always"
+msgstr ""
+"0: Ki (leggyorsabb)\n"
+"1: Játék alárendelt\n"
+"2: Mindig"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:12
+msgid "200.0"
+msgstr "200.0"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:13
+msgid ""
+"320x240\n"
+"640x480\n"
+"800x600\n"
+"1024x768\n"
+"1152x864\n"
+"1280x1024\n"
+"1600x1200"
+msgstr ""
+"320x240\n"
+"640x480\n"
+"800x600\n"
+"1024x768\n"
+"1152x864\n"
+"1280x1024\n"
+"1600x1200"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:21
+msgid "<b>Framerate</b>"
+msgstr "<b>Képfrissítési frekvencia</b>"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:22
+msgid "<b>Screen</b>"
+msgstr "<b>Képernyő</b>"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:23
+msgid "Autodetect FPS limit"
+msgstr "FPS korlát automatikus észlelése"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:24
+msgid "Better FPS limit in some"
+msgstr "Jobb FPS korlátozás némelyikben"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:25
+msgid "Black screens in Lunar"
+msgstr "Lunar fekete képernyője"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:26
+msgid "Capcom fighting games"
+msgstr "Capcom verekedős játékok"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:27
+msgid "Chrono Cross"
+msgstr "Chrono Cross"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:28
+msgid "Compatibility mode"
+msgstr "Kompatibilitási mód"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:29
+msgid "Configure X11 Video"
+msgstr "X11 Video beállítása"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:30
+msgid "Disable CPU Saving"
+msgstr "Processzor mentés kikapcsolása"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:31
+msgid "Disable coordinate check"
+msgstr "Helyzeti ellenőrzés kikapcsolása"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:32
+msgid "Dithering:"
+msgstr "Szürkeárnyalás:"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:33
+msgid "Draw quads with triangles"
+msgstr "Négyszögek megrajzolása háromszögekkel"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:34
+msgid "Enable frame skipping"
+msgstr "Képkocka kihagyás használata"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:35
+msgid "Enable this if games display too quickly."
+msgstr "Kapcsold be ezt, ha a játékok megjelenítése túl gyors"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:36
+msgid "Expand screen width"
+msgstr "Képernyő szélesség nyújtása"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:37
+msgid "Fake 'gpu busy' states"
+msgstr "Hamis 'gpu foglalt' állapot"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:38
+msgid "For precise framerate"
+msgstr "A pontos képfrissítéshez"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:39
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
+msgid "Fullscreen"
+msgstr "Teljes képernyő"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:40
+msgid "Ignore brightness color"
+msgstr "Világos szín kihagyása"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:41
+msgid "Initial Window Size:"
+msgstr "Induló ablak mérete:"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:42
+msgid "Lazy screen update"
+msgstr "Lassú képernyő frissítése"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:43
+msgid "Maintain 4:3 Aspect Ratio"
+msgstr "4:3 méretarány megtartása"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:44
+msgid "Needed by Dark Forces"
+msgstr "Dark Forces játékhoz szükséges"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:45
+msgid "Odd/even bit hack"
+msgstr "Páratlan/páros bit hack"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:46
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
+msgid "Old frame skipping"
+msgstr "Régi képkocka kihagyás"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:47
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
+msgid "PC FPS calculation"
+msgstr "PC FPS kalkuláció"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:48
+msgid "Pandemonium 2"
+msgstr "Pandemonium 2"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:49
+msgid "Repeated flat tex triangles"
+msgstr "Ismétlődő lapos textúra háromszögek"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:50
+msgid "Set FPS"
+msgstr "FPS megadás"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:51
+msgid "Show FPS"
+msgstr "FPS megjelenítése"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:52
+msgid "Skip every second frame"
+msgstr "Minden második képkocka kihagyása"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:53
+msgid "Skip frames when rendering."
+msgstr "Képkockák kihagyása rendereléskor."
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:54
+msgid "Stretching:"
+msgstr "Nyújtás:"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:55
+msgid "Toggle busy flags after drawing"
+msgstr "Foglalt jelzés elhelyezése megrajzolás után"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:56
+msgid "Toggle whether the FPS will be shown."
+msgstr "Váltás az FPS megjelenítéstől függően."
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:57
+msgid "Toggle windowed/fullscreen mode."
+msgstr "Váltás ablakos/teljes képernyős mód között."
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:58
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:83
+msgid "Use game fixes"
+msgstr "Játék javítások használata"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:59
+msgid "better g-colors, worse textures"
+msgstr "Jobb G-színek, roszabb textúrák"
+
+#: ../plugins/peopsxgl/gpu.c:70
+msgid "OpenGL Driver"
+msgstr "OpenGL driver"
+
+#: ../plugins/peopsxgl/gpu.c:72
+msgid "Pete Bernert"
+msgstr "Pete Bernert"
+
+#: ../plugins/peopsxgl/gpu.c:73
+msgid ""
+"Based on P.E.Op.S. MesaGL Driver V1.78\n"
+"Coded by Pete Bernert\n"
+msgstr ""
+"P.E.Op.S. MesaGL driver V1.78 alapján\n"
+"Fejlesztő Pete Bernert\n"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:1
+msgid "2xSaI (Much vram needed)"
+msgstr "2xSaI (Sok videó memória szükséges)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:2
+msgid "4444 - Fast, but less colorful"
+msgstr "4444 - Gyors, de kevesebb a szín"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:3
+msgid "5551 - Nice colors, bad transparency"
+msgstr "5551 - Szép színek, rossz átlátszóság"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:4
+msgid "8888 - Best colors, more ram needed"
+msgstr "8888 - Legszebb színek, több memóriát igényel"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:5
+msgid "Additional uploads"
+msgstr "További feltöltések"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:6
+msgid "Adjust screen width"
+msgstr "Kép szélesség beállítása"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:7
+msgid "Advanced blending (Accurate psx color emulation)"
+msgstr "Fejlett keverés (pontos psx szín emuláció)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:8
+msgid "Alpha multipass (Correct opaque texture areas)"
+msgstr "Alpha multipass (megfelelő nem áttetsző textúra területek)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:9
+msgid "Auto configure for beautiful display"
+msgstr "Automatikus beállítás a szép megjelenítéshez"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:10
+msgid "Autoconfigure for fast display"
+msgstr "Automatikus beállítás a gyors megjelenítéshez"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:11
+msgid "BGR8888 - Faster on some cards"
+msgstr "BGR8888 - Gyorsabb néhány kártyán"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:12
+msgid "Battle cursor (FF7)"
+msgstr "Csata kurzor (Final Fantasy 7)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:13
+msgid "Beautiful"
+msgstr "Szép"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:14
+msgid "Black - Fast, no effects"
+msgstr "Fekete - Gyors, nincs effektus"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:15
+msgid "Black brightness (Lunar)"
+msgstr "Fekete fényesség (Lunar)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:16
+msgid "Compatibility"
+msgstr "Kompatibilitás"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:17
+msgid "Direct FB updates"
+msgstr "Közvetlen FB frissítések"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:18
+msgid "Disable coord check"
+msgstr "Koordináció ellenőrzés kikapcsolása"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:19
+msgid "Dithering"
+msgstr "Remegés"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:20
+msgid "Don't care - Use driver's default textures"
+msgstr "Mindegy - A driver alapértelmezett textúráinak használata"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:21
+msgid "Emulated VRam - Needs FVP"
+msgstr "Emulált VRam - FVP szükséges"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:22
+msgid "Emulated VRam - Ok most times"
+msgstr "Emulált VRam - Többnyire megfelelő"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:23
+msgid "Enhanced - Shows more stuff"
+msgstr "Fokozott - Több dolog jelenik meg"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:24
+msgid "Extended + smoothed sprites"
+msgstr "Kiterjesztett + mosott sprite-ok"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:25
+msgid "Extended - Causing garbage"
+msgstr "Kibővített - Hibákat okozhat"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:26
+msgid "Extended - No black borders"
+msgstr "Kibővített - Nincsenek fekete szélek"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:27
+msgid "Extended without sprites - Unfiltered 2D"
+msgstr "Kibővített sprite-ok nélkül - Szűrés nélküli 2D"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:28
+msgid "FPS"
+msgstr "FPS"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:29
+msgid "FPS limit auto-detector"
+msgstr "FPS korlát automatikus észlelő"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:30
+msgid "FPS limit manual"
+msgstr "FPS korlát kezelő"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:31
+msgid "Fake 'GPU busy'"
+msgstr "Hamis 'gpu foglalt'"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:32
+msgid "Fast"
+msgstr "Gyors"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:33
+msgid "Filtering:"
+msgstr "Szűrés:"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:34
+msgid "Force 15 bit framebuffer updates (Faster movies)"
+msgstr "15 bites kényszerített képkocka-puffer frissítés (gyorsabb videók)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:35
+msgid "Framebuffer access:"
+msgstr "Képkocka-puffer hozzáférés:"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:36
+msgid "Framebuffer textures:"
+msgstr "Képkocka-puffer textúrák:"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:37
+msgid "Framerate"
+msgstr "Képfrissítési frekvencia"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:38
+msgid "Full Software (FVP)"
+msgstr "Teljes szoftveres (FVP)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:40
+msgid "Gfx card and soft - Slow"
+msgstr "Videókártya és szoftveres - Lassú"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:41
+msgid "Gfx card buffer - Can be slow"
+msgstr "Videókártya puffer - Lassú lehet"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:42
+msgid "Gfx card buffer moves"
+msgstr "Videókártya puffer áthelyezés"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:43
+msgid "Gfx card buffer reads"
+msgstr "Videókártya puffer olvasás"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:44
+msgid "Gfx card buffer reads and moves"
+msgstr "Videókártya puffer olvasás és áthelyezés"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:45
+msgid "Height:"
+msgstr "Magasság:"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:46
+msgid "HiRes Tex:"
+msgstr "Nagyfelbontású textúrák:"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:47
+msgid "Keep psx aspect ratio"
+msgstr "PSX képarány megtartása"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:48
+msgid "Lazy upload (DW7)"
+msgstr "Lassú feltöltés (Dragon Warrior 7)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:49
+msgid "Line mode (Polygons will not get filled)"
+msgstr "Vonal mód (Poligonok nem lesznek kitöltve)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:50
+msgid "Mask bit detection (Needed by a few games, zbuffer)"
+msgstr "Maszk bit észlelés (Szükséges néhány játékhoz, zbuffer)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:51
+msgid "Minimum - Missing screens"
+msgstr "Minimum - Hiányzó képrészletek"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:52
+msgid "Misc"
+msgstr "Egyebek"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:53
+msgid "No blue glitches (LoD)"
+msgstr "Nincsenek kék képhibák (Legend of Dragoon)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:54
+msgid "No subtr. blending"
+msgstr "Keverés kiszűrése nélkül"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:56
+msgid "None (Standard)"
+msgstr "Nincs (Általános)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:57
+msgid "None - Fastest, most glitches"
+msgstr "Nincs - Leggyorsabb, legtöbb képhiba"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:58
+msgid "Odd/even hack"
+msgstr "Páratlan/páros hack"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:59
+msgid "Offscreen drawing:"
+msgstr "Képernyőn kívülre helyezés:"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:61
+msgid "Old texture filtering"
+msgstr "Régi textúra szűrő"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:62
+msgid "OpenGL Driver configuration"
+msgstr "OpenGL driver beállítás"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:64
+msgid "Polygon anti-aliasing (Slow with most cards)"
+msgstr "Poligon élsímítás (Lassú a legtöbb kártyával)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:65
+msgid "Quality:"
+msgstr "Minőség:"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:66
+msgid "Scaled (Needs tex filtering)"
+msgstr "Méretarányos (Textúra szűrés szükséges)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:67
+msgid "Scanlines Blending (0..255, -1=dot):"
+msgstr "Képsorok keverése (0..255, -1=pont):"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:68
+msgid "Screen smoothing (Can be slow or unsupported)"
+msgstr "Kép finomítás (Lassú lehet, vagy nincs támogatva)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:69
+msgid "Show FPS display on startup"
+msgstr "FPS megjelenítése indításkor"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:70
+msgid "Soft FB access"
+msgstr "Szoftveres FB hozzáférés"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:71
+msgid "Special game fixes"
+msgstr "Speciális játék javítások"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:72
+msgid "Standard + smoothed sprites"
+msgstr "Általános + finom sprite-ok"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:73
+msgid "Standard - Glitches will happen"
+msgstr "Általános - Képhibák lehetnek"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:74
+msgid "Standard - OK for most games"
+msgstr "Általános - Jó a legtöbb játékhoz"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:75
+msgid "Standard without sprites - Unfiltered 2D"
+msgstr "Általános sprite-ok nélkül - Szűrés nélküli 2D"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:76
+msgid "Swap front detection"
+msgstr "Felcserélt előtér észlelés"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:77
+msgid "Textures"
+msgstr "Textúrák"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:78
+msgid "Unfiltered MDECs (Small movie speedup)"
+msgstr "Szűretlen MDEC-ek (Kisebb videó gyorsulás)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:79
+msgid "Unused"
+msgstr "Használatlan"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:80
+msgid "Use FPS limit"
+msgstr "FPS korlátozás használata"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:81
+msgid "Use Frame skipping"
+msgstr "Képkocka kihagyás"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:82
+msgid "Use OpenGL extensions (Recommended)"
+msgstr "OpenGL kiterjesztés használata (Ajánlott)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:84
+msgid "VRam size in MBytes (0..1024, 0=auto):"
+msgstr "Videómemória mérete MB értékben (0..1024, 0=auto):"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:85
+msgid "Width:"
+msgstr "Szélesség:"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:86
+msgid "Window options"
+msgstr "Ablak beállítások"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:87
+msgid "Yellow rect (FF9)"
+msgstr "Sárga háromszögek (Final Fantasy 9)"
+
+#. ****************************************************************************
+#: ../plugins/bladesio1/sio1.c:29
+msgid "Sio1 Driver"
+msgstr "Sio1 Driver"
+
+#: ../win32/gui/AboutDlg.c:26
+msgid ""
+"PCSX - A PlayStation Emulator\n"
+"\n"
+"Original Authors:\n"
+"main coder: linuzappz\n"
+"co-coders: shadow\n"
+"ex-coders: Nocomp, Pete Bernett, nik3d\n"
+"Webmaster: AkumaX"
+msgstr ""
+"PCSX - A PlayStation Emulátor\n"
+"\n"
+"Eredeti fejlesztők:\n"
+"Vezető programozó: linuzappz\n"
+"Segéd programozók: shadow\n"
+"Előző programozók: Nocomp, Pete Bernett, nik3d\n"
+"Webmester: AkumaX"
+
+#: ../win32/gui/AboutDlg.c:35
+msgid ""
+"PCSX-df Authors:\n"
+"Ryan Schultz, Andrew Burton, Stephen Chao,\n"
+"Marcus Comstedt, Stefan Sikora\n"
+"\n"
+"PCSX-Reloaded By:\n"
+"Blade_Arma, shalma, Wei Mingzhi, et al.\n"
+"\n"
+"http://pcsxr.codeplex.com/"
+msgstr ""
+"PCSX-df fejlesztők:\n"
+"Ryan Schultz, Andrew Burton, Stephen Chao,\n"
+"Marcus Comstedt, Stefan Sikora\n"
+"\n"
+"PCSX-Reloaded fejlesztők:\n"
+"Blade_Arma, Wei Mingzhi, et al.\n"
+"http://pcsxr.codeplex.com/\n"
+"Magyar fordítás: Delirious"
+
+#: ../win32/gui/AboutDlg.c:46
+msgid "About"
+msgstr "A program névjegye"
+
+#: ../win32/gui/AboutDlg.c:48
+#: ../win32/gui/AboutDlg.c:52
+#: ../win32/gui/CheatDlg.c:69
+#: ../win32/gui/CheatDlg.c:119
+#: ../win32/gui/ConfigurePlugins.c:483
+#: ../win32/gui/ConfigurePlugins.c:614
+#: ../win32/gui/WndMain.c:1058
+#: ../win32/gui/WndMain.c:1294
+msgid "OK"
+msgstr "Rendben"
+
+#: ../win32/gui/AboutDlg.c:49
+msgid "PCSX EMU\n"
+msgstr "PCSX EMULÁTOR\n"
+
+#: ../win32/gui/CheatDlg.c:51
+#: ../win32/gui/CheatDlg.c:223
+#: ../win32/gui/CheatDlg.c:270
+msgid "Yes"
+msgstr "Igen"
+
+#: ../win32/gui/CheatDlg.c:51
+#: ../win32/gui/CheatDlg.c:223
+#: ../win32/gui/CheatDlg.c:270
+msgid "No"
+msgstr "Nem"
+
+#: ../win32/gui/CheatDlg.c:70
+#: ../win32/gui/CheatDlg.c:120
+#: ../win32/gui/ConfigurePlugins.c:484
+#: ../win32/gui/ConfigurePlugins.c:615
+#: ../win32/gui/WndMain.c:1059
+#: ../win32/gui/WndMain.c:1295
+msgid "Cancel"
+msgstr "Mégsem"
+
+#: ../win32/gui/CheatDlg.c:168
+msgid "&Add Code"
+msgstr "&Kód felvétele"
+
+#: ../win32/gui/CheatDlg.c:169
+msgid "&Edit Code"
+msgstr "&Kód szerkesztése"
+
+#: ../win32/gui/CheatDlg.c:170
+msgid "&Remove Code"
+msgstr "&Kód eltávolítása"
+
+#: ../win32/gui/CheatDlg.c:171
+msgid "&Enable/Disable"
+msgstr "&Bekapcsolás/Kikapcsolás"
+
+#: ../win32/gui/CheatDlg.c:172
+msgid "&Load..."
+msgstr "&Betöltés..."
+
+#: ../win32/gui/CheatDlg.c:173
+msgid "&Save As..."
+msgstr "&Mentés másként..."
+
+#: ../win32/gui/CheatDlg.c:174
+msgid "&Close"
+msgstr "&Bezárás"
+
+#: ../win32/gui/CheatDlg.c:190
+msgid "Enabled"
+msgstr "Bekapcsolva"
+
+#: ../win32/gui/CheatDlg.c:282
+#: ../win32/gui/CheatDlg.c:311
+msgid "PCSX Cheat Code Files"
+msgstr "PCSX csalás kód fájlok"
+
+#: ../win32/gui/CheatDlg.c:402
+msgid "Equal Value"
+msgstr "Azonos érték"
+
+#: ../win32/gui/CheatDlg.c:403
+msgid "Not Equal Value"
+msgstr "Eltérő érték"
+
+#: ../win32/gui/CheatDlg.c:404
+msgid "Range"
+msgstr "Tartomány"
+
+#: ../win32/gui/CheatDlg.c:407
+msgid "Increased By"
+msgstr "Megnövelve"
+
+#: ../win32/gui/CheatDlg.c:408
+msgid "Decreased By"
+msgstr "Csökkentve"
+
+#: ../win32/gui/CheatDlg.c:409
+msgid "Increased"
+msgstr "Növelve"
+
+#: ../win32/gui/CheatDlg.c:410
+msgid "Decreased"
+msgstr "Csökkentve"
+
+#: ../win32/gui/CheatDlg.c:411
+msgid "Different"
+msgstr "Különböző"
+
+#: ../win32/gui/CheatDlg.c:412
+msgid "No Change"
+msgstr "Nincs változtatás"
+
+#: ../win32/gui/CheatDlg.c:453
+msgid "No addresses found."
+msgstr "Nem találhatóak címek."
+
+#: ../win32/gui/CheatDlg.c:505
+#: ../win32/gui/CheatDlg.c:596
+msgid "Address:"
+msgstr "Cím:"
+
+#: ../win32/gui/CheatDlg.c:566
+#, c-format
+msgid "Freeze %.8X"
+msgstr "Fagyasztás %.8x"
+
+#: ../win32/gui/CheatDlg.c:685
+msgid "&Freeze"
+msgstr "&Fagyasztás"
+
+#: ../win32/gui/CheatDlg.c:686
+msgid "&Modify"
+msgstr "&Módosítás"
+
+#: ../win32/gui/CheatDlg.c:687
+msgid "&Copy"
+msgstr "&Másolás"
+
+#: ../win32/gui/CheatDlg.c:688
+msgid "&Search"
+msgstr "&Keresés"
+
+#: ../win32/gui/CheatDlg.c:689
+msgid "&New Search"
+msgstr "&Új keresés"
+
+#: ../win32/gui/CheatDlg.c:690
+msgid "C&lose"
+msgstr "B&ezárás"
+
+#: ../win32/gui/CheatDlg.c:692
+msgid "8-bit"
+msgstr "8 bit"
+
+#: ../win32/gui/CheatDlg.c:693
+msgid "16-bit"
+msgstr "16 bit"
+
+#: ../win32/gui/CheatDlg.c:694
+msgid "32-bit"
+msgstr "32 bit"
+
+#: ../win32/gui/CheatDlg.c:695
+msgid "Decimal"
+msgstr "Decimális"
+
+#: ../win32/gui/CheatDlg.c:696
+msgid "Hexadecimal"
+msgstr "Hexadecimális"
+
+#: ../win32/gui/ConfigurePlugins.c:219
+msgid "Simulate Psx Bios"
+msgstr "PSX BIOS szimulálása"
+
+#: ../win32/gui/ConfigurePlugins.c:305
+msgid "Configuration not OK!"
+msgstr "Nem megfelelő beállítás!"
+
+#: ../win32/gui/ConfigurePlugins.c:406
+msgid "This plugin reports that should work correctly"
+msgstr "Ez a plugin megfelelően fog működni"
+
+#: ../win32/gui/ConfigurePlugins.c:407
+msgid "This plugin reports that should not work correctly"
+msgstr "Ez a plugin nem fog megfelelően működni"
+
+#: ../win32/gui/ConfigurePlugins.c:463
+msgid "Select Plugins Directory"
+msgstr "Plugin könyvtár megadása"
+
+#: ../win32/gui/ConfigurePlugins.c:472
+msgid "Select Bios Directory"
+msgstr "BIOS könyvtár megadása"
+
+#: ../win32/gui/ConfigurePlugins.c:481
+msgid "Configuration"
+msgstr "Beállítás"
+
+#: ../win32/gui/ConfigurePlugins.c:485
+msgid "Graphics"
+msgstr "Kép"
+
+#: ../win32/gui/ConfigurePlugins.c:486
+msgid "First Controller"
+msgstr "Egyes irányító"
+
+#: ../win32/gui/ConfigurePlugins.c:487
+msgid "Second Controller"
+msgstr "Kettes irányító"
+
+#: ../win32/gui/ConfigurePlugins.c:488
+msgid "Sound"
+msgstr "Hang"
+
+#: ../win32/gui/ConfigurePlugins.c:489
+msgid "Cdrom"
+msgstr "CD-ROM"
+
+#: ../win32/gui/ConfigurePlugins.c:490
+msgid "Bios"
+msgstr "BIOS"
+
+#: ../win32/gui/ConfigurePlugins.c:491
+msgid "Set Bios Directory"
+msgstr "BIOS könyvtára"
+
+#: ../win32/gui/ConfigurePlugins.c:492
+msgid "Set Plugins Directory"
+msgstr "Pluginok könyvtára"
+
+#: ../win32/gui/ConfigurePlugins.c:493
+#: ../win32/gui/ConfigurePlugins.c:496
+#: ../win32/gui/ConfigurePlugins.c:499
+#: ../win32/gui/ConfigurePlugins.c:502
+#: ../win32/gui/ConfigurePlugins.c:505
+#: ../win32/gui/ConfigurePlugins.c:617
+msgid "Configure..."
+msgstr "Beállítás..."
+
+#: ../win32/gui/ConfigurePlugins.c:494
+#: ../win32/gui/ConfigurePlugins.c:497
+#: ../win32/gui/ConfigurePlugins.c:500
+#: ../win32/gui/ConfigurePlugins.c:503
+#: ../win32/gui/ConfigurePlugins.c:506
+#: ../win32/gui/ConfigurePlugins.c:618
+msgid "Test..."
+msgstr "Tesztelés..."
+
+#: ../win32/gui/ConfigurePlugins.c:495
+#: ../win32/gui/ConfigurePlugins.c:498
+#: ../win32/gui/ConfigurePlugins.c:501
+#: ../win32/gui/ConfigurePlugins.c:504
+#: ../win32/gui/ConfigurePlugins.c:507
+#: ../win32/gui/ConfigurePlugins.c:619
+msgid "About..."
+msgstr "Névjegy..."
+
+#: ../win32/gui/ConfigurePlugins.c:612
+msgid "NetPlay Configuration"
+msgstr "Internetes játék beállítása"
+
+#: ../win32/gui/ConfigurePlugins.c:620
+msgid "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
+msgstr "Megjegyzés: A NetPlay plugin könyvtár azonos a többi plugin könyvtárával."
+
+#: ../win32/gui/plugin.c:94
+#: ../win32/gui/WndMain.c:322
+#, c-format
+msgid "*PCSX*: Saved State %d"
+msgstr "*PCSX*: Elmentett állás %d"
+
+#: ../win32/gui/plugin.c:95
+#: ../win32/gui/WndMain.c:323
+#, c-format
+msgid "*PCSX*: Error Saving State %d"
+msgstr "*PCSX*: Hiba az állás mentése közben %d"
+
+#: ../win32/gui/plugin.c:111
+#: ../win32/gui/WndMain.c:300
+#, c-format
+msgid "*PCSX*: Loaded State %d"
+msgstr "*PCSX*: Betöltött elmentett állás %d"
+
+#: ../win32/gui/plugin.c:112
+#: ../win32/gui/WndMain.c:301
+#, c-format
+msgid "*PCSX*: Error Loading State %d"
+msgstr "*PCSX*: Hiba a mentett állás betöltése közben %d"
+
+#: ../win32/gui/plugin.c:123
+#, c-format
+msgid "*PCSX*: Sio Irq Always Enabled"
+msgstr "*PCSX*: Sio IRQ mindig bekapcsolva"
+
+#: ../win32/gui/plugin.c:124
+#, c-format
+msgid "*PCSX*: Sio Irq Not Always Enabled"
+msgstr "*PCSX*: Sio IRQ nincs mindig bekapcsolva"
+
+#: ../win32/gui/plugin.c:131
+#, c-format
+msgid "*PCSX*: Black&White Mdecs Only Enabled"
+msgstr "*PCSX*: Csak fekete és fehér Mdecs használata"
+
+#: ../win32/gui/plugin.c:132
+#, c-format
+msgid "*PCSX*: Black&White Mdecs Only Disabled"
+msgstr "*PCSX*: Csak fekete és fehér Mdecs nincs használva"
+
+#: ../win32/gui/plugin.c:139
+#, c-format
+msgid "*PCSX*: Xa Enabled"
+msgstr "*PCSX*: Xa bekapcsolva"
+
+#: ../win32/gui/plugin.c:140
+#, c-format
+msgid "*PCSX*: Xa Disabled"
+msgstr "*PCSX*: Xa kikapcsolva"
+
+#: ../win32/gui/plugin.c:149
+msgid "*PCSX*: CdRom Case Opened"
+msgstr "*PCSX*: CD-ROM tálca nyitva"
+
+#: ../win32/gui/plugin.c:155
+msgid "*PCSX*: CdRom Case Closed"
+msgstr "*PCSX*: CD-ROM tálca zárva"
+
+#: ../win32/gui/plugin.c:183
+msgid "Connecting..."
+msgstr "Csatlakozás..."
+
+#: ../win32/gui/plugin.c:185
+#: ../win32/gui/plugin.c:192
+#, c-format
+msgid "Please wait while connecting... %c\n"
+msgstr "Kis türelem, csatlakozás folyamatban... %c\n"
+
+#: ../win32/gui/plugin.c:220
+msgid "Error Opening CDR Plugin"
+msgstr "Hiba a CD-ROM plugin megnyitásakor"
+
+#: ../win32/gui/plugin.c:283
+#, c-format
+msgid "Error Opening GPU Plugin (%d)"
+msgstr "Hiba a kép plugin megnyitáskor (%d)"
+
+#: ../win32/gui/plugin.c:286
+#, c-format
+msgid "Error Opening SPU Plugin (%d)"
+msgstr "Hiba a hang plugin megnyitáskor (%d)"
+
+#: ../win32/gui/plugin.c:289
+#, c-format
+msgid "Error Opening PAD1 Plugin (%d)"
+msgstr "Hiba az egyes irányító plugin megnyitásakor (%d)"
+
+#: ../win32/gui/plugin.c:293
+#, c-format
+msgid "Error Opening PAD2 Plugin (%d)"
+msgstr "Hiba a kettes irányító plugin megnyitásakor (%d)"
+
+#: ../win32/gui/plugin.c:323
+msgid "Error Closing CDR Plugin"
+msgstr "Hiba a CD-ROM plugin bezárásakor"
+
+#: ../win32/gui/plugin.c:325
+msgid "Error Closing GPU Plugin"
+msgstr "Hiba a kép plugin bezárásakor"
+
+#: ../win32/gui/plugin.c:327
+msgid "Error Closing SPU Plugin"
+msgstr "Hiba a hang plugin bezárásakor"
+
+#: ../win32/gui/plugin.c:345
+#, c-format
+msgid "CDRinit error: %d"
+msgstr "CD-ROM inicializálási hiba: %d"
+
+#: ../win32/gui/plugin.c:347
+#, c-format
+msgid "GPUinit error: %d"
+msgstr "Kép plugin inicializálási hiba: %d"
+
+#: ../win32/gui/plugin.c:349
+#, c-format
+msgid "SPUinit error: %d"
+msgstr "Hang plugin inicializálási hiba: %d"
+
+#: ../win32/gui/plugin.c:351
+#, c-format
+msgid "PAD1init error: %d"
+msgstr "Egyes irányító plugin inicializálási hiba: %d"
+
+#: ../win32/gui/plugin.c:353
+#, c-format
+msgid "PAD2init error: %d"
+msgstr "Kettes irányító plugin inicializálási hiba: %d"
+
+#: ../win32/gui/plugin.c:356
+#, c-format
+msgid "NETinit error: %d"
+msgstr "Internetes plugin inicializálási hiba: %d"
+
+#: ../win32/gui/WndMain.c:77
+msgid "Arabic"
+msgstr "Arab"
+
+#: ../win32/gui/WndMain.c:78
+msgid "Catalan"
+msgstr "Katalán"
+
+#: ../win32/gui/WndMain.c:79
+msgid "German"
+msgstr "Német"
+
+#: ../win32/gui/WndMain.c:80
+msgid "Greek"
+msgstr "Görög"
+
+#: ../win32/gui/WndMain.c:81
+#: ../win32/gui/WndMain.c:1658
+#: ../win32/gui/WndMain.c:1660
+msgid "English"
+msgstr "Angol"
+
+#: ../win32/gui/WndMain.c:82
+msgid "Spanish"
+msgstr "Spanyol"
+
+#: ../win32/gui/WndMain.c:83
+msgid "French"
+msgstr "Francia"
+
+#: ../win32/gui/WndMain.c:84
+msgid "Italian"
+msgstr "Olasz"
+
+#: ../win32/gui/WndMain.c:85
+msgid "Portuguese"
+msgstr "Portugál"
+
+#: ../win32/gui/WndMain.c:86
+msgid "Portuguese (Brazilian)"
+msgstr "Portugál (brazil)"
+
+#: ../win32/gui/WndMain.c:87
+msgid "Romanian"
+msgstr "Román"
+
+#: ../win32/gui/WndMain.c:88
+msgid "Russian"
+msgstr "Orosz"
+
+#: ../win32/gui/WndMain.c:89
+msgid "Simplified Chinese"
+msgstr "Egyszerűsített kínai"
+
+#: ../win32/gui/WndMain.c:90
+msgid "Traditional Chinese"
+msgstr "Hagyományos kínai"
+
+#: ../win32/gui/WndMain.c:91
+msgid "Japanese"
+msgstr "Japán"
+
+#: ../win32/gui/WndMain.c:92
+msgid "Korean"
+msgstr "Koreai"
+
+#: ../win32/gui/WndMain.c:215
+msgid ""
+"Usage: pcsx [options]\n"
+"\toptions:\n"
+"\t-nogui\t\tDon't open the GUI\n"
+"\t-psxout\t\tEnable PSX output\n"
+"\t-runcd\t\tRuns CD-ROM (requires -nogui)\n"
+"\t-cdfile FILE\tRuns a CD image file (requires -nogui)\n"
+"\t-help\t\tDisplay this message"
+msgstr ""
+"Használat: pcsx [beállítások]\n"
+"\toptions:\n"
+"\t-nogui\t\tNe nyíljon meg a GUI\n"
+"\t-psxout\t\tPSX kimenet bekapcsolása\n"
+"\t-runcd\t\tCD-ROM futtatása (-nogui szükséges)\n"
+"\t-cdfile FILE\tCD képfájl futtatása (-nogui szükséges)\n"
+"\t-help\t\tAz üzenet megjelenítése"
+
+#: ../win32/gui/WndMain.c:341
+#: ../win32/gui/WndMain.c:387
+msgid "PCSX State Format"
+msgstr "PCSX állás mentés formátum"
+
+#: ../win32/gui/WndMain.c:368
+#, c-format
+msgid "*PCSX*: Loaded State %s"
+msgstr "*PCSX*: Betöltött állás %s"
+
+#: ../win32/gui/WndMain.c:369
+#, c-format
+msgid "*PCSX*: Error Loading State %s"
+msgstr "*PCSX*: Hiba a mentett állás betöltése közben %s"
+
+#: ../win32/gui/WndMain.c:414
+#, c-format
+msgid "*PCSX*: Saved State %s"
+msgstr "*PCSX*: Mentett állás %s"
+
+#: ../win32/gui/WndMain.c:415
+#, c-format
+msgid "*PCSX*: Error Saving State %s"
+msgstr "*PCSX*: Hiba az állás mentése közben %s"
+
+#: ../win32/gui/WndMain.c:483
+msgid "Running BIOS is not supported with Internal HLE Bios."
+msgstr "BIOS használata nem támogatott belső HLE Bios esetén."
+
+#: ../win32/gui/WndMain.c:760
+msgid "Game ID"
+msgstr "Játék azonosító"
+
+#: ../win32/gui/WndMain.c:766
+msgid "Game"
+msgstr "Játék"
+
+#: ../win32/gui/WndMain.c:948
+msgid "mid link block"
+msgstr "mid link block"
+
+#: ../win32/gui/WndMain.c:951
+msgid "terminiting link block"
+msgstr "link block megszakítása"
+
+#: ../win32/gui/WndMain.c:1056
+msgid "Memcard Manager"
+msgstr "Memória kártya kezelő"
+
+#: ../win32/gui/WndMain.c:1060
+#: ../win32/gui/WndMain.c:1063
+msgid "Select Mcd"
+msgstr "Választás"
+
+#: ../win32/gui/WndMain.c:1061
+#: ../win32/gui/WndMain.c:1064
+msgid "Format Mcd"
+msgstr "Formázás"
+
+#: ../win32/gui/WndMain.c:1062
+#: ../win32/gui/WndMain.c:1065
+msgid "Reload Mcd"
+msgstr "Újratöltés"
+
+#: ../win32/gui/WndMain.c:1066
+msgid "-> Copy ->"
+msgstr "-> Másolás ->"
+
+#: ../win32/gui/WndMain.c:1067
+msgid "<- Copy <-"
+msgstr "<- Másolás <-"
+
+#: ../win32/gui/WndMain.c:1068
+msgid "Paste"
+msgstr "Beszúrás"
+
+#: ../win32/gui/WndMain.c:1069
+msgid "<- Un/Delete"
+msgstr "<- Nem/törlés"
+
+#: ../win32/gui/WndMain.c:1070
+msgid "Un/Delete ->"
+msgstr "Nem/törlés ->"
+
+#: ../win32/gui/WndMain.c:1072
+msgid "Memory Card 1"
+msgstr "Memória kártya 1"
+
+#: ../win32/gui/WndMain.c:1073
+msgid "Memory Card 2"
+msgstr "Memória kártya 2"
+
+#: ../win32/gui/WndMain.c:1128
+msgid "Are you sure you want to paste this selection?"
+msgstr "Valóban be akarod szúrni a kijelölést?"
+
+#: ../win32/gui/WndMain.c:1128
+#: ../win32/gui/WndMain.c:1239
+#: ../win32/gui/WndMain.c:1246
+msgid "Confirmation"
+msgstr "Megerősítés"
+
+#: ../win32/gui/WndMain.c:1239
+#: ../win32/gui/WndMain.c:1246
+msgid "Are you sure you want to format this Memory Card?"
+msgstr "Valóban le kívánod formázni ezt a Memória kártyát?"
+
+#: ../win32/gui/WndMain.c:1292
+msgid "Cpu Config"
+msgstr "Processzor beállítás"
+
+#: ../win32/gui/WndMain.c:1297
+msgid "Disable Xa Decoding"
+msgstr "Xa kódolás kikapcsolása"
+
+#: ../win32/gui/WndMain.c:1298
+msgid "Sio Irq Always Enabled"
+msgstr "Sio IRQ mindig bekapcsolva"
+
+#: ../win32/gui/WndMain.c:1299
+msgid "Black && White Movies"
+msgstr "Fekete &fehér videók"
+
+#: ../win32/gui/WndMain.c:1300
+msgid "Disable Cd audio"
+msgstr "CD hang kikapcsolása"
+
+#: ../win32/gui/WndMain.c:1302
+msgid "Enable Interpreter Cpu"
+msgstr "Processzor interpretáló rutin bekapcsolása"
+
+#: ../win32/gui/WndMain.c:1305
+msgid "Spu Irq Always Enabled"
+msgstr "Hang IRQ mindig bekapcsolva"
+
+#: ../win32/gui/WndMain.c:1310
+msgid "Psx System Type"
+msgstr "PSX régió"
+
+#: ../win32/gui/WndMain.c:1414
+msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
+msgstr "Psx memória kártya formátum (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
+
+#: ../win32/gui/WndMain.c:1419
+msgid "Psx Memory Card (*.mcr;*.mc)"
+msgstr "Psx memória kártya (*.mcr;*.mc)"
+
+#: ../win32/gui/WndMain.c:1424
+msgid "CVGS Memory Card (*.mem;*.vgs)"
+msgstr "CVSG memória kártya (*.mem;*.vgs)"
+
+#: ../win32/gui/WndMain.c:1429
+msgid "Bleem Memory Card (*.mcd)"
+msgstr "Bleem memória kártya (*.mcd)"
+
+#: ../win32/gui/WndMain.c:1434
+msgid "DexDrive Memory Card (*.gme)"
+msgstr "DexDrive memória kártya (*.gme)"
+
+#: ../win32/gui/WndMain.c:1439
+msgid "DataDeck Memory Card (*.ddf)"
+msgstr "DataDeck memória kártya (*.ddf)"
+
+#: ../win32/gui/WndMain.c:1483
+msgid "Psx Exe Format"
+msgstr "Psx exe formátum"
+
+#: ../win32/gui/WndMain.c:1520
+msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin)"
+msgstr "Psx képfájlok (*.iso;*.mdf;*.img;*.bin)"
+
+#: ../win32/gui/WndMain.c:1596
+msgid "&File"
+msgstr "&Fájl"
+
+#: ../win32/gui/WndMain.c:1597
+msgid "E&xit"
+msgstr "K&ilépés"
+
+#: ../win32/gui/WndMain.c:1599
+msgid "Run &EXE..."
+msgstr "&EXE indítása..."
+
+#: ../win32/gui/WndMain.c:1600
+msgid "Run &BIOS"
+msgstr "&BIOS indítása"
+
+#: ../win32/gui/WndMain.c:1601
+msgid "Run &ISO..."
+msgstr "&ISO megnyitása..."
+
+#: ../win32/gui/WndMain.c:1602
+msgid "Run &CD"
+msgstr "&CD indítása"
+
+#: ../win32/gui/WndMain.c:1604
+msgid "&Emulator"
+msgstr "&Emulátor"
+
+#: ../win32/gui/WndMain.c:1605
+msgid "&States"
+msgstr "&Állapot"
+
+#: ../win32/gui/WndMain.c:1607
+msgid "S&witch ISO..."
+msgstr "ISO v&áltás..."
+
+#: ../win32/gui/WndMain.c:1609
+msgid "Re&set"
+msgstr "Al&apra állítás"
+
+#: ../win32/gui/WndMain.c:1610
+msgid "&Run"
+msgstr "&Indítás"
+
+#: ../win32/gui/WndMain.c:1611
+msgid "&Save"
+msgstr "&Mentés"
+
+#: ../win32/gui/WndMain.c:1612
+msgid "&Load"
+msgstr "&Betöltés"
+
+#: ../win32/gui/WndMain.c:1613
+#: ../win32/gui/WndMain.c:1623
+msgid "&Other..."
+msgstr "&Más..."
+
+#: ../win32/gui/WndMain.c:1614
+#: ../win32/gui/WndMain.c:1624
+msgid "Slot &9"
+msgstr "&Kilencedik hely"
+
+#: ../win32/gui/WndMain.c:1615
+#: ../win32/gui/WndMain.c:1625
+msgid "Slot &8"
+msgstr "&Nyolcadik hely"
+
+#: ../win32/gui/WndMain.c:1616
+#: ../win32/gui/WndMain.c:1626
+msgid "Slot &7"
+msgstr "&Hetedik hely"
+
+#: ../win32/gui/WndMain.c:1617
+#: ../win32/gui/WndMain.c:1627
+msgid "Slot &6"
+msgstr "&Hatodik hely"
+
+#: ../win32/gui/WndMain.c:1618
+#: ../win32/gui/WndMain.c:1628
+msgid "Slot &5"
+msgstr "&Ötödik hely"
+
+#: ../win32/gui/WndMain.c:1619
+#: ../win32/gui/WndMain.c:1629
+msgid "Slot &4"
+msgstr "&Negyedik hely"
+
+#: ../win32/gui/WndMain.c:1620
+#: ../win32/gui/WndMain.c:1630
+msgid "Slot &3"
+msgstr "&Harmadik hely"
+
+#: ../win32/gui/WndMain.c:1621
+#: ../win32/gui/WndMain.c:1631
+msgid "Slot &2"
+msgstr "&Második hely"
+
+#: ../win32/gui/WndMain.c:1622
+#: ../win32/gui/WndMain.c:1632
+msgid "Slot &1"
+msgstr "&Első hely"
+
+#: ../win32/gui/WndMain.c:1634
+msgid "&Configuration"
+msgstr "&Beállítások"
+
+#: ../win32/gui/WndMain.c:1635
+msgid "Cheat &Search..."
+msgstr "Csalás &keresése..."
+
+#: ../win32/gui/WndMain.c:1636
+msgid "Ch&eat Code..."
+msgstr "Cs&alás kód..."
+
+#: ../win32/gui/WndMain.c:1639
+msgid "&Language"
+msgstr "&Nyelv"
+
+#: ../win32/gui/WndMain.c:1664
+msgid "&Memory cards..."
+msgstr "&Memória kártyák..."
+
+#: ../win32/gui/WndMain.c:1665
+msgid "C&PU..."
+msgstr "P&rocesszor..."
+
+#: ../win32/gui/WndMain.c:1667
+msgid "&NetPlay..."
+msgstr "&Internetes játék..."
+
+#: ../win32/gui/WndMain.c:1669
+msgid "&Controllers..."
+msgstr "&Irányítók..."
+
+#: ../win32/gui/WndMain.c:1670
+msgid "CD-&ROM..."
+msgstr "CD-&ROM..."
+
+#: ../win32/gui/WndMain.c:1671
+msgid "&Sound..."
+msgstr "&Hang..."
+
+#: ../win32/gui/WndMain.c:1672
+msgid "&Graphics..."
+msgstr "&Kép..."
+
+#: ../win32/gui/WndMain.c:1674
+msgid "&Plugins && Bios..."
+msgstr "&Pluginok és BIOS..."
+
+#: ../win32/gui/WndMain.c:1676
+msgid "&Help"
+msgstr "&Súgó"
+
+#: ../win32/gui/WndMain.c:1677
+msgid "&About..."
+msgstr "&A program névjegye..."
+
+#: ../win32/gui/WndMain.c:1865
+msgid "Pcsx Msg"
+msgstr "Pcsx üzenet"
+
+#: ../win32/gui/WndMain.c:1868
+msgid "Error Loading Symbol"
+msgstr "Hiba a szimbólum betöltése közben"
+
+#, fuzzy
+#~ msgid "COFF files not supported.\n"
+#~ msgstr "File COFF non supportato.\n"
+
+#, fuzzy
+#~ msgid "0: None"
+#~ msgstr "0: Nessuno"
+
+#, fuzzy
+#~ msgid "PC fps calculation"
+#~ msgstr "Calcolo degli fps del PC"
+
+#, fuzzy
+#~ msgid "Scanlines"
+#~ msgstr "Scanlines"
+
+#, fuzzy
+#~ msgid "Adapted from P.E.Op.S OpenGL GPU by Pete Bernert"
+#~ msgstr "Adattato da P.E.Op.S OpenGL GPU da Pete Bernert"
+
+#, fuzzy
+#~ msgid "Homepage: http://www.pbernert.com"
+#~ msgstr "Homepage: http://www.pbernert.com"
+
+#, fuzzy
+#~ msgid "Version: 1.78"
+#~ msgstr "Versione: 1.78"
+
+#~ msgid "Error Closing PAD1 Plugin"
+#~ msgstr "Hiba az egyes irányító plugin bezárásakor"
+
+#~ msgid "Error Closing PAD2 Plugin"
+#~ msgstr "Hiba a kettes irányító plugin bezárásakor"
+
+#~ msgid "Internal HLE Bios"
+#~ msgstr "Bios HLE interno"
+
+#, fuzzy
+#~ msgid "Dump Memory..."
+#~ msgstr "&Memory card..."
+
+#~ msgid ""
+#~ "(C) 1999-2003  PCSX Team\n"
+#~ "(C) 2005-2006 Ryan Schultz\n"
+#~ "(C) 2005-2006 Andrew Burton\n"
+#~ "(C) 2008-2009 Wei Mingzhi"
+#~ msgstr ""
+#~ "(C) 1999-2003  PCSX Team\n"
+#~ "(C) 2005-2006 Ryan Schultz\n"
+#~ "(C) 2005-2006 Andrew Burton\n"
+#~ "(C) 2008-2009 Wei Mingzhi"
+
+#~ msgid "PulseAudio Simple Sound"
+#~ msgstr "Audio PulseAudio semplice"
