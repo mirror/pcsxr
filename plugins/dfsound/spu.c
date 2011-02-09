@@ -621,7 +621,16 @@ static void *MAINThread(void *arg)
           {
            if(s_chan[ch].iSBPos==28)                   // 28 reached?
             {
-             start=s_chan[ch].pCurr;                   // set up the current pos
+#if 0
+						 // Xenogears - Anima Relic dungeon (exp gain)
+						 if( s_chan[ch].bLoopJump == 1 )
+							 s_chan[ch].pCurr = s_chan[ch].pLoop;
+
+						 s_chan[ch].bLoopJump = 0;
+#endif
+
+             
+						 start=s_chan[ch].pCurr;                   // set up the current pos
 
              if (s_chan[ch].iSilent==1 || start == (unsigned char*)-1)          // special "stop" sign
               {
@@ -644,15 +653,6 @@ static void *MAINThread(void *arg)
              shift_factor=predict_nr&0xf;
              predict_nr >>= 4;
              flags=(int)*start;start++;
-
-
-#if 0
-							// Jungle Book - Rhythm 'n Groove - use external loop address
-							// - fixes music player (+IRQ generate)
-							if( flags&4 )
-								s_chan[ch].pLoop=start-2;
-#endif
-
 
              // -------------------------------------- // 
 
@@ -709,7 +709,10 @@ static void *MAINThread(void *arg)
 						silence means no volume (ADSR keeps playing!!)
 						*/
 
-#if 1
+#if 0
+						if(flags&4)
+							s_chan[ch].pLoop=start-16;
+#else
 						// Jungle Book - Rhythm 'n Groove - use external loop address
 						// - fixes music player (+IRQ generate)
 						if((flags&4) && (s_chan[ch].bIgnoreLoop == 0))
@@ -727,7 +730,12 @@ static void *MAINThread(void *arg)
 							//s_chan[ch].bIgnoreLoop = 0;
 
 							// Xenogears - 7 = play missing sounds
+#if 0
+							// set jump flag
+							pChannel->bLoopJump = 1;
+#else
 							start = s_chan[ch].pLoop;
+#endif
 
 							// silence = keep playing..?
 							if( (flags&2) == 0 ) {

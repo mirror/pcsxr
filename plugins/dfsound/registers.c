@@ -424,7 +424,11 @@ void SoundOn(int start,int end,unsigned short val)     // SOUND ON PSX COMAND
   {
    if((val&1) && s_chan[ch].pStart)                    // mmm... start has to be set before key on !?!
     {
+#if 0
+		 s_chan[ch].bLoopJump = 0;
+#else
      s_chan[ch].bIgnoreLoop=0;
+#endif
      s_chan[ch].bNew=1;
 
 		 // do this here, not in StartSound
