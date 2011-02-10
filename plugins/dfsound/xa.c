@@ -59,16 +59,6 @@ long cdxa_dbuf_ptr;
 // MIX XA & CDDA
 ////////////////////////////////////////////////////////////////////////
 
-/*
-Attenuation
-- Blade_Arma (edgbla) (PCSX-reloaded)
-- accurate (!)
-
-
-s32 lc = (spsound[i ] * attenuators.val0 + spsound[i+1] * attenuators.val3]) / 128;
-s32 rc = (spsound[i+1] * attenuators.val2 + spsound[i ] * attenuators.val1]) / 128;
-*/
-
 static int lastxa_lc, lastxa_rc;
 static int lastcd_lc, lastcd_rc;
 
@@ -103,11 +93,13 @@ INLINE void MixXA(void)
 	 lastxa_rc = rc;
 
 
-	 // Tales of Phantasia - voice meter
-	 if( cdxa_dbuf_ptr >= 0x800 )
+#if 0
+	 if( cdxa_dbuf_ptr >= 0x400 )
 		 cdxa_dbuf_ptr = 0;
-	 spuMem[ cdxa_dbuf_ptr++ ] = lc;
-	 spuMem[ cdxa_dbuf_ptr++ ] = rc;
+	 spuMem[ (cdxa_dbuf_ptr + 0)/2 ] = lc;
+	 spuMem[ (cdxa_dbuf_ptr + 0x400)/2 ] = rc;
+	 cdxa_dbuf_ptr += 2;
+#endif
   }
 
  if(XAPlay==XAFeed && XARepeat)
@@ -118,12 +110,14 @@ INLINE void MixXA(void)
 		 SSumL[ns]+=lastxa_rc;
 		 SSumR[ns]+=lastxa_rc;
 
-
+#if 0
 		 // Tales of Phantasia - voice meter
-		 if( cdxa_dbuf_ptr >= 0x800 )
+		 if( cdxa_dbuf_ptr >= 0x400 )
 			 cdxa_dbuf_ptr = 0;
-		 spuMem[ cdxa_dbuf_ptr++ ] = lastxa_rc;
-		 spuMem[ cdxa_dbuf_ptr++ ] = lastxa_rc;
+		 spuMem[ (cdxa_dbuf_ptr + 0)/2 ] = lastxa_rc;
+		 spuMem[ (cdxa_dbuf_ptr + 0x400)/2 ] = lastxa_rc;
+		 cdxa_dbuf_ptr += 2;
+#endif
     }
   }
 
@@ -143,6 +137,15 @@ INLINE void MixXA(void)
 	 SSumL[ns]+=lc;
 	 SSumR[ns]+=rc;
 
+#if 0
+	 // Vib Ribbon - playback
+	 if( cdxa_dbuf_ptr >= 0x400 )
+		 cdxa_dbuf_ptr = 0;
+		 spuMem[ (cdxa_dbuf_ptr + 0)/2 ] = lc;
+		 spuMem[ (cdxa_dbuf_ptr + 0x400)/2 ] = rc;
+	 cdxa_dbuf_ptr += 2;
+#endif
+
 	 // improve crackle - buffer under
 	 // - not update fast enough
 	 lastcd_lc = lc;
@@ -155,6 +158,15 @@ INLINE void MixXA(void)
    //XARepeat--;
    for(;ns<NSSIZE;ns++)
     {
+#if 0
+	 // Vib Ribbon - playback
+	 if( cdxa_dbuf_ptr >= 0x400 )
+		 cdxa_dbuf_ptr = 0;
+		 spuMem[ (cdxa_dbuf_ptr + 0)/2 ] = lastcd_lc;
+		 spuMem[ (cdxa_dbuf_ptr + 0x400)/2 ] = lastcd_rc;
+	 cdxa_dbuf_ptr += 2;
+#endif
+
 		 SSumL[ns]+=lastcd_lc;
 		 SSumR[ns]+=lastcd_rc;
     }
@@ -390,25 +402,6 @@ INLINE void FeedCDDA(unsigned char *pcm, int nBytes)
    *CDDAFeed++=(*pcm | (*(pcm+1)<<8) | (*(pcm+2)<<16) | (*(pcm+3)<<24));
    nBytes-=4;
    pcm+=4;
-
- 
-#if 0
-	 /*
-	 Vib Ribbon
-	 $00000-$003ff  CD audio left
-	 $00400-$007ff  CD audio right
-	 */
-
-	 // TIMING: perform in PCSX-r
-	 // - gets data from reverb buffer, only update this at intervals (not real-time)
-
-	 // remember: 16-bit ptrs
-	 spuMem[ cdda_ptr ] = (l >> 0) & 0xffff;
-	 spuMem[ cdda_ptr+0x200 ] = (l >> 16) & 0xffff;
-
-	 cdda_ptr++;
-	 cdda_ptr &= 0x1ff;
-#endif
  }
 }
 

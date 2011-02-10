@@ -208,6 +208,11 @@ void cdrDecodedBufferInterrupt()
 {
 	u16 buf_ptr[0x400], lcv;
 
+#if 0
+	return;
+#endif
+
+
 	// ISO reader only
 	if( CDR_init != ISOinit ) return;
 
@@ -1624,10 +1629,14 @@ void cdrReadInterrupt() {
 #endif
 
 
+#if 0
 				// Crash Team Racing: music, speech
+				// - done using cdda decoded buffer (spu irq)
+				// - don't do here
 
 				// signal ADPCM data ready
 				psxHu32ref(0x1070) |= SWAP32((u32)0x200);
+#endif
 			}
 			else cdr.FirstSector = -1;
 		}

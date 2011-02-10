@@ -802,6 +802,17 @@ GOON: ;
               fa=iGetNoiseVal(ch);                     // get noise val
          else fa=iGetInterpolationVal(ch);             // get sample val
 
+
+#if 0
+				 // Voice 1/3 decoded buffer
+				 if( ch == 0 ) {
+					 spuMem[ (0x800 + voice_dbuf_ptr) / 2 ] = (short) fa;
+				 } else if( ch == 2 ) {
+					 spuMem[ (0xc00 + voice_dbuf_ptr) / 2 ] = (short) fa;
+				 }
+#endif
+
+
          s_chan[ch].sval = (MixADSR(ch) * fa) / 1023;  // mix adsr
 
          if(s_chan[ch].bFMod==2)                       // fmod freq channel
