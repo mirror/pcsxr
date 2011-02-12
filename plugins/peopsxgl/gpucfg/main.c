@@ -667,6 +667,18 @@ int main( int argc, char **argv ) {
 
     val = 0;
     if ( pB ) {
+        strcpy( t, "\nUseFixes" );
+        p = strstr( pB, t );
+        if ( p ) {
+            p = strstr( p, "=" );
+            len = 1;
+            val = atoi( p + len );
+        }
+    }
+    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkUseGameFixes ), val );
+
+    val = 0;
+    if ( pB ) {
         strcpy( t, "\nCfgFixes" );
         p = strstr( pB, t );
         if ( p ) {
