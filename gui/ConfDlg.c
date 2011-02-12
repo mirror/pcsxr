@@ -127,55 +127,55 @@ void ConfigurePlugins() {
 
 	widget = glade_xml_get_widget(xml, "btn_ConfGpu");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_configure_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_ConfSpu");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_configure_plugin), (gpointer) PSE_LT_SPU, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_SPU, NULL, G_CONNECT_AFTER);
 
 	/* ADB TODO Does pad 1 and 2 need to be different? */
 	widget = glade_xml_get_widget(xml, "btn_ConfPad1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-						  GTK_SIGNAL_FUNC(OnConfConf_Pad1Conf), xml, NULL, G_CONNECT_AFTER);
+						  G_CALLBACK(OnConfConf_Pad1Conf), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_ConfPad2");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnConfConf_Pad2Conf), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConfConf_Pad2Conf), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_ConfCdr");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_configure_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_AboutGpu");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_about_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_AboutSpu");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_about_plugin), (gpointer) PSE_LT_SPU, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_SPU, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_AboutPad1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnConfConf_Pad1About), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConfConf_Pad1About), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_AboutPad2");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnConfConf_Pad2About), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConfConf_Pad2About), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_AboutCdr");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_about_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "GtkFileChooser_Bios");
 	g_signal_connect_data(GTK_OBJECT(widget), "current_folder_changed",
-			GTK_SIGNAL_FUNC(OnBiosPath_Changed), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnBiosPath_Changed), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "GtkFileChooser_Plugin");
 	g_signal_connect_data(GTK_OBJECT(widget), "current_folder_changed",
-			GTK_SIGNAL_FUNC(OnPluginPath_Changed), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnPluginPath_Changed), xml, NULL, G_CONNECT_AFTER);
 
 	g_signal_connect_data(GTK_OBJECT(ConfDlg), "response",
-			GTK_SIGNAL_FUNC(OnConf_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+			G_CALLBACK(OnConf_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }
 
 void OnNet_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
@@ -207,15 +207,15 @@ void OnConf_Net() {
 
 	/* Setup a handler for when Close or Cancel is clicked */
 	g_signal_connect_data(GTK_OBJECT(NetDlg), "response",
-			GTK_SIGNAL_FUNC(OnNet_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+			G_CALLBACK(OnNet_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_ConfNet");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnNet_Conf), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnNet_Conf), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_AboutNet");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnNet_About), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnNet_About), xml, NULL, G_CONNECT_AFTER);
 }
 
 void OnConf_Graphics() {
@@ -854,36 +854,36 @@ void OnConf_Cpu() {
 	gtk_combo_box_set_active(GTK_COMBO_BOX (PsxCombo), Config.PsxType);
 	gtk_widget_set_sensitive(GTK_WIDGET (PsxCombo), !Config.PsxAuto);
 
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Xa")), Config.Xa);
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Sio")), Config.Sio);
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Mdec")), Config.Mdec);
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_CDDA")), Config.Cdda);
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxAuto")), Config.PsxAuto);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Xa")), Config.Xa);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Sio")), Config.Sio);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Mdec")), Config.Mdec);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_CDDA")), Config.Cdda);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxAuto")), Config.PsxAuto);
 
 	g_signal_connect_data(GTK_OBJECT(glade_xml_get_widget(xml, "GtkCheckButton_PsxAuto")), "toggled",
-			GTK_SIGNAL_FUNC(OnCpu_PsxAutoClicked), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnCpu_PsxAutoClicked), xml, NULL, G_CONNECT_AFTER);
 
 #ifdef PSXREC
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), Config.Cpu);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), Config.Cpu);
 
 	g_signal_connect_data(GTK_OBJECT(glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), "toggled",
-			GTK_SIGNAL_FUNC(OnCpu_CpuClicked), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnCpu_CpuClicked), xml, NULL, G_CONNECT_AFTER);
 #else
 	Config.Cpu = CPU_INTERPRETER;
 
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), TRUE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), TRUE);
 	gtk_widget_set_sensitive(GTK_WIDGET (glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), FALSE);
 #endif
 
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Dbg")), Config.Cpu && Config.Debug);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Dbg")), Config.Cpu && Config.Debug);
 	gtk_widget_set_sensitive(GTK_WIDGET (glade_xml_get_widget(xml, "GtkCheckButton_Dbg")), Config.Cpu);
 
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxOut")), Config.PsxOut);
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_SpuIrq")), Config.SpuIrq);
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_RCntFix")), Config.RCntFix);
-	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_VSyncWA")), Config.VSyncWA);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxOut")), Config.PsxOut);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_SpuIrq")), Config.SpuIrq);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_RCntFix")), Config.RCntFix);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_VSyncWA")), Config.VSyncWA);
 
 	// Setup a handler for when Close or Cancel is clicked
 	g_signal_connect_data(GTK_OBJECT(CpuDlg), "response",
-			GTK_SIGNAL_FUNC(OnCpu_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+			G_CALLBACK(OnCpu_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }

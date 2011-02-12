@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
 		gtk_about_dialog_set_website (GTK_ABOUT_DIALOG (widget), "http://pcsx-df.sourceforge.net/");
 
 		g_signal_connect_data(GTK_OBJECT(widget), "response",
-			GTK_SIGNAL_FUNC(on_about_clicked), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_about_clicked), NULL, NULL, G_CONNECT_AFTER);
 
 		gtk_widget_show (widget);
 		gtk_main();
@@ -223,11 +223,11 @@ int main(int argc, char *argv[])
 
 	widget = glade_xml_get_widget(xml, "CfgWnd");
 	g_signal_connect_data(GTK_OBJECT(widget), "destroy",
-		GTK_SIGNAL_FUNC(SaveConfig), xml, NULL, 0);
+		G_CALLBACK(SaveConfig), xml, NULL, 0);
 
 	widget = glade_xml_get_widget(xml, "btn_close");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnConfigClose), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnConfigClose), xml, NULL, G_CONNECT_AFTER);
 
     gtk_main();
     return 0;

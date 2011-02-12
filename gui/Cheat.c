@@ -112,7 +112,7 @@ static void OnCheatListDlg_AddClicked(GtkWidget *widget, gpointer user_data) {
 
 	gtk_window_set_default_size(GTK_WINDOW(dlg), 350, 350);
 
-	box = GTK_WIDGET(GTK_DIALOG(dlg)->vbox);
+	box = GTK_WIDGET(gtk_dialog_get_content_area(GTK_DIALOG(dlg)));
 
 	label = gtk_label_new(_("Cheat Description:"));
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, 5);
@@ -197,7 +197,7 @@ static void OnCheatListDlg_EditClicked(GtkWidget *widget, gpointer user_data) {
 
 	gtk_window_set_default_size(GTK_WINDOW(dlg), 350, 350);
 
-	box = GTK_WIDGET(GTK_DIALOG(dlg)->vbox);
+	box = GTK_WIDGET(gtk_dialog_get_content_area(GTK_DIALOG(dlg)));
 
 	label = gtk_label_new(_("Cheat Description:"));
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, 5);
@@ -424,27 +424,27 @@ void RunCheatListDialog() {
 
 	widget = glade_xml_get_widget(xml, "addbutton1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnCheatListDlg_AddClicked), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnCheatListDlg_AddClicked), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "editbutton1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnCheatListDlg_EditClicked), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnCheatListDlg_EditClicked), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "delbutton1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnCheatListDlg_DelClicked), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnCheatListDlg_DelClicked), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "loadbutton1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnCheatListDlg_OpenClicked), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnCheatListDlg_OpenClicked), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "savebutton1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnCheatListDlg_SaveClicked), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnCheatListDlg_SaveClicked), xml, NULL, G_CONNECT_AFTER);
 
 	// Setup a handler for when Close or Cancel is clicked
 	g_signal_connect_data(GTK_OBJECT(CheatListDlg), "response",
-			GTK_SIGNAL_FUNC(OnCheatListDlg_CloseClicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+			G_CALLBACK(OnCheatListDlg_CloseClicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
 	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "savebutton1")), NumCheats);
 	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "editbutton1")), FALSE);
@@ -631,7 +631,7 @@ static void OnCheatSearchDlg_FreezeClicked(GtkWidget *widget, gpointer user_data
 		GTK_DIALOG_MODAL, GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
 
-	box = GTK_WIDGET(GTK_DIALOG(dlg)->vbox);
+	box = GTK_WIDGET(gtk_dialog_get_content_area(GTK_DIALOG(dlg)));
 
 	label = gtk_label_new(_("Description:"));
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, 5);
@@ -730,7 +730,7 @@ static void OnCheatSearchDlg_ModifyClicked(GtkWidget *widget, gpointer user_data
 		GTK_DIALOG_MODAL, GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
 
-	box = GTK_WIDGET(GTK_DIALOG(dlg)->vbox);
+	box = GTK_WIDGET(gtk_dialog_get_content_area(GTK_DIALOG(dlg)));
 	hbox = gtk_hbox_new(FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(box), hbox, FALSE, FALSE, 5);
 
@@ -1145,32 +1145,32 @@ void RunCheatSearchDialog() {
 
 	widget = glade_xml_get_widget(xml, "btn_freeze");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnCheatSearchDlg_FreezeClicked), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_FreezeClicked), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_modify");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnCheatSearchDlg_ModifyClicked), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_ModifyClicked), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_copy");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnCheatSearchDlg_CopyClicked), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_CopyClicked), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_start");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnCheatSearchDlg_SearchClicked), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_SearchClicked), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_restart");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnCheatSearchDlg_RestartClicked), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_RestartClicked), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "combo_searchfor");
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
-		GTK_SIGNAL_FUNC(OnCheatSearchDlg_SearchForChanged), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_SearchForChanged), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "combo_database");
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
-		GTK_SIGNAL_FUNC(OnCheatSearchDlg_DataBaseChanged), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_DataBaseChanged), xml, NULL, G_CONNECT_AFTER);
 
 	g_signal_connect_data(GTK_OBJECT(CheatSearchDlg), "response",
-		GTK_SIGNAL_FUNC(OnCheatSearchDlg_CloseClicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_CloseClicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }

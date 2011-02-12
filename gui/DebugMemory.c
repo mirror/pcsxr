@@ -104,7 +104,7 @@ static void MemView_Dump() {
 		GTK_DIALOG_MODAL, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
 
-	box = GTK_WIDGET(GTK_DIALOG(dlg)->vbox);
+	box = GTK_WIDGET(gtk_dialog_get_content_area(GTK_DIALOG(dlg)));
 
 	table = gtk_table_new(2, 2, FALSE);
 
@@ -181,7 +181,7 @@ static void MemView_Patch() {
 		GTK_DIALOG_MODAL, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
 
-	box = GTK_WIDGET(GTK_DIALOG(dlg)->vbox);
+	box = GTK_WIDGET(gtk_dialog_get_content_area(GTK_DIALOG(dlg)));
 
 	table = gtk_table_new(2, 2, FALSE);
 
@@ -297,16 +297,16 @@ void RunDebugMemoryDialog() {
 
 	widget = glade_xml_get_widget(xml, "btn_dump");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(MemView_Dump), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(MemView_Dump), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_patch");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(MemView_Patch), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(MemView_Patch), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "btn_go");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(MemView_Go), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(MemView_Go), xml, NULL, G_CONNECT_AFTER);
 
 	g_signal_connect_data(GTK_OBJECT(MemViewDlg), "response",
-		GTK_SIGNAL_FUNC(MemView_Close), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+		G_CALLBACK(MemView_Close), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }

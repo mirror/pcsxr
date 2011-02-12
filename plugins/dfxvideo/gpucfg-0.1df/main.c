@@ -150,7 +150,7 @@ main (int argc, char *argv[])
 		gtk_about_dialog_set_website (GTK_ABOUT_DIALOG (widget), "http://pcsx-df.sourceforge.net/");
 
 	g_signal_connect_data(GTK_OBJECT(widget), "response",
-			GTK_SIGNAL_FUNC(on_about_clicked), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_about_clicked), NULL, NULL, G_CONNECT_AFTER);
 
 		gtk_widget_show (widget);
 		gtk_main();
@@ -312,27 +312,27 @@ main (int argc, char *argv[])
 
 	widget = glade_xml_get_widget(xml, "CfgWnd");
 	g_signal_connect_data(GTK_OBJECT(widget), "destroy",
-			GTK_SIGNAL_FUNC(SaveConfig), xml, NULL, 0);
+			G_CALLBACK(SaveConfig), xml, NULL, 0);
 
 	widget = glade_xml_get_widget(xml, "btn_close");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnConfigClose), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConfigClose), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "checkFullscreen");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_fullscreen_toggled), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_fullscreen_toggled), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "checkUseFixes");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_use_fixes_toggled), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_use_fixes_toggled), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "checkSetFPS");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_fps_toggled), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_fps_toggled), xml, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "checkAutoFPSLimit");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(on_fps_toggled), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_fps_toggled), xml, NULL, G_CONNECT_AFTER);
 
 	on_fullscreen_toggled(widget, (gpointer) xml);
 	on_fps_toggled(widget, (gpointer) xml);

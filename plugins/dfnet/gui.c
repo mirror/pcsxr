@@ -113,7 +113,7 @@ long CFGopen() {
 
 	widget = gtk_builder_get_object(builder, "btnCopyIP");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnCopyIP), NULL, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCopyIP), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "tbServerIP");
 	gtk_entry_set_text(GTK_ENTRY(widget), conf.ipAddress);

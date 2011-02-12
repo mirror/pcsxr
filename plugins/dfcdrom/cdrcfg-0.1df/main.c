@@ -179,7 +179,7 @@ static void OnConfigExit(GtkWidget *widget, gpointer user_data) {
 	xml = glade_get_widget_tree(MainWindow);
 
 	widget = glade_xml_get_widget(xml, "cddev_comboboxentry");
-	strncpy(CdromDev, gtk_entry_get_text(GTK_ENTRY(GTK_BIN(widget)->child)), 255);
+	strncpy(CdromDev, gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(widget)))), 255);
 	CdromDev[255] = '\0';
 
 	widget = glade_xml_get_widget(xml, "readmode_combobox");
@@ -220,15 +220,15 @@ long CDRconfigure() {
 
 	widget = glade_xml_get_widget(xml, "CfgWnd");
 	g_signal_connect_data(GTK_OBJECT(widget), "delete_event",
-		GTK_SIGNAL_FUNC(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "cfg_closebutton");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "cddev_comboboxentry");
 	fill_drives_list(widget);
-	gtk_entry_set_text(GTK_ENTRY(GTK_BIN(widget)->child), CdromDev);
+	gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(widget))), CdromDev);
 
 	widget = glade_xml_get_widget(xml, "readmode_combobox");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget), ReadMode);

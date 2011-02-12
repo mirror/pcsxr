@@ -90,7 +90,7 @@ static GdkPixbuf *SetIcon(GtkWidget *dialog, short *icon, int i) {
 	GdkGC     *gc;
 	int x, y, c;
 
-	visual = gdk_window_get_visual(dialog->window);
+	visual = gdk_window_get_visual(gtk_widget_get_window(dialog));
 
 	if (visual->depth == 8) return NULL;
 
@@ -109,7 +109,7 @@ static GdkPixbuf *SetIcon(GtkWidget *dialog, short *icon, int i) {
 		}
 	}
 
-	pixmap = gdk_pixmap_new(dialog->window, 32, 32, visual->depth);
+	pixmap = gdk_pixmap_new(gtk_widget_get_window(dialog), 32, 32, visual->depth);
 
 	gc = gdk_gc_new(pixmap);
 	gdk_draw_image(pixmap, gc, image, 0, 0, 0, 0, 32, 32);
@@ -700,50 +700,50 @@ void OnConf_Mcds() {
 
 	// Setup a handler for when Close or Cancel is clicked
 	g_signal_connect_data(GTK_OBJECT(dialog), "response",
-			GTK_SIGNAL_FUNC(OnMcd_Close), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_Close), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "GtkButton_Format1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnMcd_Format), (gpointer)1, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_Format), (gpointer)1, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "GtkButton_Format2");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnMcd_Format), (gpointer)2, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_Format), (gpointer)2, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "Mcd1Button");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnMcd_FileChange), (gpointer)1, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_FileChange), (gpointer)1, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "Mcd2Button");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnMcd_FileChange), (gpointer)2, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_FileChange), (gpointer)2, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "GtkButton_New1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnMcd_New), (gpointer)1, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_New), (gpointer)1, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "GtkButton_New2");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnMcd_New), (gpointer)2, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_New), (gpointer)2, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "GtkButton_CopyTo1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnMcd_CopyTo), (gpointer)1, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_CopyTo), (gpointer)1, NULL, G_CONNECT_AFTER);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), FALSE);
 
 	widget = glade_xml_get_widget(xml, "GtkButton_CopyTo2");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnMcd_CopyTo), (gpointer)2, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_CopyTo), (gpointer)2, NULL, G_CONNECT_AFTER);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), FALSE);
 
 	widget = glade_xml_get_widget(xml, "GtkButton_Delete1");
 	g_signal_connect_data (GTK_OBJECT (widget), "clicked",
-			GTK_SIGNAL_FUNC(OnMemcardDelete), (gpointer)1, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMemcardDelete), (gpointer)1, NULL, G_CONNECT_AFTER);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), FALSE);
 
 	widget = glade_xml_get_widget(xml, "GtkButton_Delete2");
 	g_signal_connect_data (GTK_OBJECT (widget), "clicked",
-			GTK_SIGNAL_FUNC(OnMemcardDelete), (gpointer)2, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMemcardDelete), (gpointer)2, NULL, G_CONNECT_AFTER);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), FALSE);
 
 	quit = FALSE;

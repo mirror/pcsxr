@@ -172,7 +172,7 @@ int main(int argc, char *argv[]) {
 				"http://pcsx-df.sourceforge.net/");
 
 		g_signal_connect_data(GTK_OBJECT(widget), "response",
-				GTK_SIGNAL_FUNC(on_about_clicked), NULL, NULL, G_CONNECT_AFTER);
+				G_CALLBACK(on_about_clicked), NULL, NULL, G_CONNECT_AFTER);
 
 		gtk_widget_show(widget);
 		gtk_main();
@@ -266,22 +266,22 @@ int main(int argc, char *argv[]) {
 	}
 
 	g_signal_connect_data(GTK_OBJECT(w->config_window), "destroy",
-			GTK_SIGNAL_FUNC(on_destroy_window), w, NULL, 0);
+			G_CALLBACK(on_destroy_window), w, NULL, 0);
 	g_signal_connect_data(GTK_OBJECT(w->save_button), "clicked",
-			GTK_SIGNAL_FUNC(on_click_save_button), w, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_click_save_button), w, NULL, G_CONNECT_AFTER);
 	g_signal_connect_data(GTK_OBJECT(w->cancel_button), "clicked",
-			GTK_SIGNAL_FUNC(on_click_cancel_button), w, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_click_cancel_button), w, NULL, G_CONNECT_AFTER);
 
 	g_signal_connect_data(GTK_OBJECT(w->fullscreen_checkbutton), "clicked",
-			GTK_SIGNAL_FUNC(on_fullscreen_toggled), w, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_fullscreen_toggled), w, NULL, G_CONNECT_AFTER);
 
 	g_signal_connect_data(GTK_OBJECT(w->use_game_fixes_checkbutton), "clicked",
-			GTK_SIGNAL_FUNC(on_use_fixes_toggled), w, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_use_fixes_toggled), w, NULL, G_CONNECT_AFTER);
 	g_signal_connect_data(GTK_OBJECT(w->set_fps_checkbutton), "clicked",
-			GTK_SIGNAL_FUNC(on_fps_toggled), w, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_fps_toggled), w, NULL, G_CONNECT_AFTER);
 
 	g_signal_connect_data(GTK_OBJECT(w->auto_fps_limit_checkbutton), "clicked",
-			GTK_SIGNAL_FUNC(on_fps_toggled), w, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_fps_toggled), w, NULL, G_CONNECT_AFTER);
 
 	on_fullscreen_toggled(0, w);
 	on_fps_toggled(0, w);

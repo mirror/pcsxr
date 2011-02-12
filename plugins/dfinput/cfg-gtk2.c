@@ -625,11 +625,11 @@ long PADconfigure() {
 
 	widget = gtk_builder_get_object(xml, "CfgWnd");
 	g_signal_connect_data(GTK_OBJECT(widget), "delete_event",
-		GTK_SIGNAL_FUNC(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "btnclose");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
 	PopulateDevList();
 	UpdateKeyList();
@@ -637,47 +637,47 @@ long PADconfigure() {
 	widget = gtk_builder_get_object(xml, "checkmt");
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.Threaded);
 	g_signal_connect_data(GTK_OBJECT(widget), "toggled",
-		GTK_SIGNAL_FUNC(OnThreadedToggled), NULL, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnThreadedToggled), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "combodev1");
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
-		GTK_SIGNAL_FUNC(OnDeviceChanged), (gpointer)0, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnDeviceChanged), (gpointer)0, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "combodev2");
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
-		GTK_SIGNAL_FUNC(OnDeviceChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnDeviceChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "combotype1");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget),
 		g.cfg.PadDef[0].Type == PSE_PAD_TYPE_ANALOGPAD ? 1 : 0);
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
-		GTK_SIGNAL_FUNC(OnTypeChanged), (gpointer)0, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnTypeChanged), (gpointer)0, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "combotype2");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget),
 		g.cfg.PadDef[1].Type == PSE_PAD_TYPE_ANALOGPAD ? 1 : 0);
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
-		GTK_SIGNAL_FUNC(OnTypeChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnTypeChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "btnchange1");
 	gtk_widget_set_sensitive(widget, FALSE);
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnChangeClicked), (gpointer)0, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnChangeClicked), (gpointer)0, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "btnreset1");
 	gtk_widget_set_sensitive(widget, FALSE);
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnResetClicked), (gpointer)0, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnResetClicked), (gpointer)0, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "btnchange2");
 	gtk_widget_set_sensitive(widget, FALSE);
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnChangeClicked), (gpointer)1, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnChangeClicked), (gpointer)1, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "btnreset2");
 	gtk_widget_set_sensitive(widget, FALSE);
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		GTK_SIGNAL_FUNC(OnResetClicked), (gpointer)1, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnResetClicked), (gpointer)1, NULL, G_CONNECT_AFTER);
 
 	gtk_widget_show(MainWindow);
 	gtk_main();

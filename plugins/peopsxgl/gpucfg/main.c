@@ -711,15 +711,15 @@ int main( int argc, char **argv ) {
     g_object_unref( G_OBJECT( builder ) );
 
     // Connect callbacks to signals
-    gtk_signal_connect( GTK_OBJECT( window ),            "destroy", GTK_SIGNAL_FUNC( gtk_main_quit ),                NULL );
-    gtk_signal_connect( GTK_OBJECT( btnCancel ),         "clicked", GTK_SIGNAL_FUNC( gtk_main_quit ),                NULL );
-    gtk_signal_connect( GTK_OBJECT( btnSave ),           "clicked", GTK_SIGNAL_FUNC( on_btnSave_clicked ),           NULL );
-    gtk_signal_connect( GTK_OBJECT( chkUseGameFixes ),   "toggled", GTK_SIGNAL_FUNC( on_chkUseGameFixes_toggled ),   NULL );
-    gtk_signal_connect( GTK_OBJECT( chkUseFPSLimit ),    "toggled", GTK_SIGNAL_FUNC( on_chkUseFPSLimit_toggled ),    NULL );
-    gtk_signal_connect( GTK_OBJECT( radFPSLimitManual ), "toggled", GTK_SIGNAL_FUNC( on_radFPSLimitManual_toggled ), NULL );
-    gtk_signal_connect( GTK_OBJECT( chkScanLines ),      "toggled", GTK_SIGNAL_FUNC( on_chkScanLines_toggled ),      NULL );
-    gtk_signal_connect( GTK_OBJECT( btnFast ),           "clicked", GTK_SIGNAL_FUNC( on_btnFast_clicked ),           NULL );
-    gtk_signal_connect( GTK_OBJECT( btnBeautiful ),      "clicked", GTK_SIGNAL_FUNC( on_btnBeautiful_clicked ),      NULL );
+    gtk_signal_connect( GTK_OBJECT( window ),            "destroy", G_CALLBACK( gtk_main_quit ),                NULL );
+    gtk_signal_connect( GTK_OBJECT( btnCancel ),         "clicked", G_CALLBACK( gtk_main_quit ),                NULL );
+    gtk_signal_connect( GTK_OBJECT( btnSave ),           "clicked", G_CALLBACK( on_btnSave_clicked ),           NULL );
+    gtk_signal_connect( GTK_OBJECT( chkUseGameFixes ),   "toggled", G_CALLBACK( on_chkUseGameFixes_toggled ),   NULL );
+    gtk_signal_connect( GTK_OBJECT( chkUseFPSLimit ),    "toggled", G_CALLBACK( on_chkUseFPSLimit_toggled ),    NULL );
+    gtk_signal_connect( GTK_OBJECT( radFPSLimitManual ), "toggled", G_CALLBACK( on_radFPSLimitManual_toggled ), NULL );
+    gtk_signal_connect( GTK_OBJECT( chkScanLines ),      "toggled", G_CALLBACK( on_chkScanLines_toggled ),      NULL );
+    gtk_signal_connect( GTK_OBJECT( btnFast ),           "clicked", G_CALLBACK( on_btnFast_clicked ),           NULL );
+    gtk_signal_connect( GTK_OBJECT( btnBeautiful ),      "clicked", G_CALLBACK( on_btnBeautiful_clicked ),      NULL );
 
     // Call some callbacks to ensure widget state consistency
     on_chkUseGameFixes_toggled(   GTK_OBJECT( chkUseGameFixes   ), NULL );

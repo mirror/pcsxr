@@ -228,181 +228,181 @@ void StartGui() {
 
 	// Set up callbacks
 	g_signal_connect_data(GTK_OBJECT(Window), "delete-event",
-			GTK_SIGNAL_FUNC(OnDestroy), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+			G_CALLBACK(OnDestroy), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
 	// File menu
 	widget = glade_xml_get_widget(xml, "RunCd");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnFile_RunCd), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnFile_RunCd), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "RunBios");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnFile_RunBios), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnFile_RunBios), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "RunExe");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnFile_RunExe), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnFile_RunExe), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "RunImage");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnFile_RunImage), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnFile_RunImage), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "exit2");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnFile_Exit), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnFile_Exit), NULL, NULL, G_CONNECT_AFTER);
 
 	// States
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 0, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_load), (gpointer) 0, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot2");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 1, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_load), (gpointer) 1, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot3");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 2, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_load), (gpointer) 2, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot4");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 3, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_load), (gpointer) 3, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot5");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 4, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_load), (gpointer) 4, NULL, G_CONNECT_AFTER);	
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot6");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 5, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_load), (gpointer) 5, NULL, G_CONNECT_AFTER);	
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot7");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 6, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_load), (gpointer) 6, NULL, G_CONNECT_AFTER);	
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot8");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 7, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_load), (gpointer) 7, NULL, G_CONNECT_AFTER);	
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_LoadSlot9");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_load), (gpointer) 8, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_load), (gpointer) 8, NULL, G_CONNECT_AFTER);	
 	widget = glade_xml_get_widget(xml, "other1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_load_other), NULL, NULL, G_CONNECT_AFTER);			
+			G_CALLBACK(on_states_load_other), NULL, NULL, G_CONNECT_AFTER);			
 
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_SaveSlot1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_save), (gpointer) 0, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_save), (gpointer) 0, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_SaveSlot2");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_save), (gpointer) 1, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_save), (gpointer) 1, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_SaveSlot3");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_save), (gpointer) 2, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_save), (gpointer) 2, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_SaveSlot4");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_save), (gpointer) 3, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_save), (gpointer) 3, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_SaveSlot5");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_save), (gpointer) 4, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_save), (gpointer) 4, NULL, G_CONNECT_AFTER);	
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_SaveSlot6");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_save), (gpointer) 5, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_save), (gpointer) 5, NULL, G_CONNECT_AFTER);	
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_SaveSlot7");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_save), (gpointer) 6, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_save), (gpointer) 6, NULL, G_CONNECT_AFTER);	
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_SaveSlot8");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_save), (gpointer) 7, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_save), (gpointer) 7, NULL, G_CONNECT_AFTER);	
 	widget = glade_xml_get_widget(xml, "GtkMenuItem_SaveSlot9");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_save), (gpointer) 8, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_save), (gpointer) 8, NULL, G_CONNECT_AFTER);	
 	widget = glade_xml_get_widget(xml, "other2");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(on_states_save_other), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_save_other), NULL, NULL, G_CONNECT_AFTER);
 
 	// Emulation menu
 	widget = glade_xml_get_widget(xml, "run1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnEmu_Run), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnEmu_Run), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "reset1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnEmu_Reset), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnEmu_Reset), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "SwitchImage");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnEmu_SwitchImage), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnEmu_SwitchImage), NULL, NULL, G_CONNECT_AFTER);
 
 	// Configuration menu
 	widget = glade_xml_get_widget(xml, "plugins_bios");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(ConfigurePlugins), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(ConfigurePlugins), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "graphics1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnConf_Graphics), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConf_Graphics), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "sound1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnConf_Sound), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConf_Sound), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "cdrom1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnConf_CdRom), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConf_CdRom), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "pad1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnConf_Pad), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConf_Pad), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "cpu1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnConf_Cpu), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConf_Cpu), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "memory_cards1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnConf_Mcds), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConf_Mcds), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "net1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnConf_Net), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConf_Net), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "memorydump1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(RunDebugMemoryDialog), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(RunDebugMemoryDialog), NULL, NULL, G_CONNECT_AFTER);
 
 	// Cheat menu
 	widget = glade_xml_get_widget(xml, "browse1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(RunCheatListDialog), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(RunCheatListDialog), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "search1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(RunCheatSearchDialog), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(RunCheatSearchDialog), NULL, NULL, G_CONNECT_AFTER);
 
 	// Help menu
 	widget = glade_xml_get_widget(xml, "about_pcsx1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
-			GTK_SIGNAL_FUNC(OnHelp_About), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnHelp_About), NULL, NULL, G_CONNECT_AFTER);
 
 	// Toolbar
 	widget = glade_xml_get_widget(xml, "toolbutton_runcd");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnFile_RunCd), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnFile_RunCd), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "toolbutton_runimage");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnFile_RunImage), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnFile_RunImage), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "toolbutton_run");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnEmu_Run), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnEmu_Run), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "toolbutton_switchimage");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnEmu_SwitchImage), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnEmu_SwitchImage), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "toolbutton_memcards");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnConf_Mcds), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConf_Mcds), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "toolbutton_graphics");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnConf_Graphics), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConf_Graphics), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "toolbutton_sound");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnConf_Sound), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConf_Sound), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "toolbutton_cdrom");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnConf_CdRom), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConf_CdRom), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = glade_xml_get_widget(xml, "toolbutton_controllers");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			GTK_SIGNAL_FUNC(OnConf_Pad), NULL, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConf_Pad), NULL, NULL, G_CONNECT_AFTER);
 
 	gtk_main();
 }
@@ -939,7 +939,7 @@ void SysMessage(const char *fmt, ...) {
 
 	Txt = gtk_label_new (msg);
 	gtk_label_set_line_wrap(GTK_LABEL(Txt), TRUE);
-	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(MsgDlg)->vbox), Txt);
+	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area(GTK_DIALOG(MsgDlg))), Txt);
 
 	gtk_widget_show (Txt);
 	gtk_widget_show_all (MsgDlg);
