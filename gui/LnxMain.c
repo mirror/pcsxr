@@ -333,6 +333,7 @@ int main(int argc, char *argv[]) {
 							"\t-nogui\t\tDon't open the GTK GUI\n"
 							"\t-cfg FILE\tLoads desired configuration file (default: ~/.pcsx/pcsx.cfg)\n"
 							"\t-psxout\t\tEnable PSX output\n"
+							"\t-slowboot\t\tEnable BIOS Logo\n"
 							"\t-load STATENUM\tLoads savestate STATENUM (1-9)\n"
 							"\t-h -help\tDisplay this message\n"
 							"\tfile\t\tLoads file\n"));

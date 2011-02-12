@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2011-01-12 23:37+0800\n"
+"POT-Creation-Date: 2011-02-12 12:56+0800\n"
 "PO-Revision-Date: 2011-02-08 15:14+0100\n"
 "Last-Translator: Delirious <delirious@freemail.hu>\n"
 "Language-Team: Delirious <delirious@freemail.hu>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -62,13 +63,11 @@ msgstr "<b>Plugin</b>"
 msgid "<b>System Type</b>"
 msgstr "<b>Rendszer típus</b>"
 
-#: ../data/pcsx.glade2.h:13
-#: ../gui/DebugMemory.c:188
+#: ../data/pcsx.glade2.h:13 ../gui/DebugMemory.c:188
 msgid "Address (Hexadecimal):"
 msgstr "Címzés (hexadecimális):"
 
-#: ../data/pcsx.glade2.h:14
-#: ../win32/gui/WndMain.c:1301
+#: ../data/pcsx.glade2.h:14 ../win32/gui/WndMain.c:1301
 msgid "Autodetect"
 msgstr "Automatikus észlelés"
 
@@ -96,9 +95,7 @@ msgstr "C_ontrollers..."
 msgid "Chea_t"
 msgstr "Chea_t"
 
-#: ../data/pcsx.glade2.h:21
-#: ../gui/Cheat.c:1129
-#: ../win32/gui/CheatDlg.c:678
+#: ../data/pcsx.glade2.h:21 ../gui/Cheat.c:1129 ../win32/gui/CheatDlg.c:678
 msgid "Cheat Search"
 msgstr "Csalás keresés"
 
@@ -126,13 +123,11 @@ msgstr "Memóriakártyák beállításai"
 msgid "Configure NetPlay"
 msgstr "Internetes játék beállításai"
 
-#: ../data/pcsx.glade2.h:28
-#: ../gui/ConfDlg.c:112
+#: ../data/pcsx.glade2.h:28 ../gui/ConfDlg.c:112
 msgid "Configure PCSX"
 msgstr "PCSX beállítása"
 
-#: ../data/pcsx.glade2.h:29
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:6
+#: ../data/pcsx.glade2.h:29 ../plugins/dfsound/spucfg-0.1df/dfsound.glade2.h:6
 msgid "Configure Sound"
 msgstr "Hang beállítások"
 
@@ -160,13 +155,11 @@ msgstr "Irányítók..."
 msgid "Copy"
 msgstr "Másolás"
 
-#: ../data/pcsx.glade2.h:36
-#: ../win32/gui/CheatDlg.c:683
+#: ../data/pcsx.glade2.h:36 ../win32/gui/CheatDlg.c:683
 msgid "Data Base:"
 msgstr "Adatbázis:"
 
-#: ../data/pcsx.glade2.h:37
-#: ../win32/gui/CheatDlg.c:681
+#: ../data/pcsx.glade2.h:37 ../win32/gui/CheatDlg.c:681
 msgid "Data Type:"
 msgstr "Adat fajta:"
 
@@ -190,18 +183,15 @@ msgstr "XA kódolás kikapcsolása"
 msgid "E_xit"
 msgstr "E_xit"
 
-#: ../data/pcsx.glade2.h:43
-#: ../win32/gui/CheatDlg.c:166
+#: ../data/pcsx.glade2.h:43 ../win32/gui/CheatDlg.c:166
 msgid "Edit Cheat Codes"
 msgstr "Csalás kódok szerkesztése"
 
-#: ../data/pcsx.glade2.h:44
-#: ../win32/gui/WndMain.c:1303
+#: ../data/pcsx.glade2.h:44 ../win32/gui/WndMain.c:1303
 msgid "Enable Console Output"
 msgstr "Konzol kimenet bekapcsolása"
 
-#: ../data/pcsx.glade2.h:45
-#: ../win32/gui/WndMain.c:1304
+#: ../data/pcsx.glade2.h:45 ../win32/gui/WndMain.c:1304
 msgid "Enable Debugger"
 msgstr "Hibakereső bekapcsolása"
 
@@ -236,8 +226,7 @@ msgstr ""
 msgid "Format"
 msgstr "Formátum"
 
-#: ../data/pcsx.glade2.h:57
-#: ../win32/gui/CheatDlg.c:504
+#: ../data/pcsx.glade2.h:57 ../win32/gui/CheatDlg.c:504
 msgid "Freeze"
 msgstr "Fagyasztás"
 
@@ -249,8 +238,7 @@ msgstr "Kép..."
 msgid "Graphics:"
 msgstr "Kép:"
 
-#: ../data/pcsx.glade2.h:60
-#: ../win32/gui/WndMain.c:1307
+#: ../data/pcsx.glade2.h:60 ../win32/gui/WndMain.c:1307
 msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku Battle javítás"
 
@@ -258,8 +246,7 @@ msgstr "InuYasha Sengoku Battle javítás"
 msgid "Memcards..."
 msgstr "Memória kártyák..."
 
-#: ../data/pcsx.glade2.h:62
-#: ../gui/DebugMemory.c:103
+#: ../data/pcsx.glade2.h:62 ../gui/DebugMemory.c:103
 msgid "Memory Dump"
 msgstr "Mentett memóriatartalom"
 
@@ -267,8 +254,7 @@ msgstr "Mentett memóriatartalom"
 msgid "Memory _Dump"
 msgstr "Memória _mentés"
 
-#: ../data/pcsx.glade2.h:64
-#: ../win32/gui/CheatDlg.c:595
+#: ../data/pcsx.glade2.h:64 ../win32/gui/CheatDlg.c:595
 msgid "Modify"
 msgstr "Módosítás"
 
@@ -288,8 +274,7 @@ msgstr "Új"
 msgid "PCSX"
 msgstr "PCSX"
 
-#: ../data/pcsx.glade2.h:69
-#: ../win32/gui/WndMain.c:1306
+#: ../data/pcsx.glade2.h:69 ../win32/gui/WndMain.c:1306
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr "Parasite Eve 2, Vandal Hearts 1/2 javítás"
 
@@ -333,8 +318,7 @@ msgstr "EXE _futtatása..."
 msgid "Run _ISO..."
 msgstr "ISO _futtatása......"
 
-#: ../data/pcsx.glade2.h:80
-#: ../gui/Plugin.c:239
+#: ../data/pcsx.glade2.h:80 ../gui/Plugin.c:239
 #, c-format
 msgid "SIO IRQ Always Enabled"
 msgstr "SIO IRQ mindig bekapcsolva"
@@ -351,8 +335,7 @@ msgstr "S_ami ISO..."
 msgid "Search"
 msgstr "Keresés"
 
-#: ../data/pcsx.glade2.h:84
-#: ../win32/gui/CheatDlg.c:680
+#: ../data/pcsx.glade2.h:84 ../win32/gui/CheatDlg.c:680
 msgid "Search For:"
 msgstr "A következő keresése:"
 
@@ -416,8 +399,7 @@ msgstr "ISO képfájl csere"
 msgid "Switch ISO..."
 msgstr "ISO váltás..."
 
-#: ../data/pcsx.glade2.h:100
-#: ../win32/gui/CheatDlg.c:684
+#: ../data/pcsx.glade2.h:100 ../win32/gui/CheatDlg.c:684
 msgid "To:"
 msgstr "Ide:"
 
@@ -425,11 +407,8 @@ msgstr "Ide:"
 msgid "Un/Delete"
 msgstr "Nem/törlés"
 
-#: ../data/pcsx.glade2.h:102
-#: ../gui/Cheat.c:647
-#: ../win32/gui/CheatDlg.c:506
-#: ../win32/gui/CheatDlg.c:597
-#: ../win32/gui/CheatDlg.c:682
+#: ../data/pcsx.glade2.h:102 ../gui/Cheat.c:647 ../win32/gui/CheatDlg.c:506
+#: ../win32/gui/CheatDlg.c:597 ../win32/gui/CheatDlg.c:682
 msgid "Value:"
 msgstr "Érték:"
 
@@ -521,17 +500,33 @@ msgstr ""
 
 #: ../gui/AboutDlg.c:77
 msgid ""
-"This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.\n"
+"This program is free software; you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation; either version 2 of the License, or (at your option) "
+"any later version.\n"
 "\n"
-"This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details.\n"
 "\n"
-"You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
+"You should have received a copy of the GNU General Public License along with "
+"this program; if not, write to the Free Software Foundation, Inc., 51 "
+"Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
 msgstr ""
-"Ez a program szabad szoftver; terjeszthető illetve módosítható a Free Software Foundation által kiadott GNU General Public License dokumentumában leírtak; akár a licenc 2-es, akár (tetszőleges) későbbi változata szerint.\n"
+"Ez a program szabad szoftver; terjeszthető illetve módosítható a Free "
+"Software Foundation által kiadott GNU General Public License dokumentumában "
+"leírtak; akár a licenc 2-es, akár (tetszőleges) későbbi változata szerint.\n"
 "\n"
-"Ez a program abban a reményben kerül közreadásra, hogy hasznos lesz, de minden egyéb GARANCIA NÉLKÜL, az ELADHATÓSÁGRA vagy VALAMELY CÉLRA VALÓ ALKALMAZHATÓSÁGRA való származtatott garanciát is beleértve. További részleteket a GNU General Public License tartalmaz.\n"
+"Ez a program abban a reményben kerül közreadásra, hogy hasznos lesz, de "
+"minden egyéb GARANCIA NÉLKÜL, az ELADHATÓSÁGRA vagy VALAMELY CÉLRA VALÓ "
+"ALKALMAZHATÓSÁGRA való származtatott garanciát is beleértve. További "
+"részleteket a GNU General Public License tartalmaz.\n"
 "\n"
-"A felhasználónak a programmal együtt meg kell kapnia a GNU General Public License egy példányát; ha mégsem kapta meg, akkor írjon a következő címre: Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
+"A felhasználónak a programmal együtt meg kell kapnia a GNU General Public "
+"License egy példányát; ha mégsem kapta meg, akkor írjon a következő címre: "
+"Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA "
+"02111-1307 USA."
 
 #: ../gui/AboutDlg.c:100
 msgid "translator-credits"
@@ -541,39 +536,30 @@ msgstr "Magyarítást Delirious készítette <delirious@freemail.hu>"
 msgid "A PlayStation emulator."
 msgstr "A PlayStation emulátor."
 
-#: ../gui/Cheat.c:109
-#: ../win32/gui/CheatDlg.c:116
+#: ../gui/Cheat.c:109 ../win32/gui/CheatDlg.c:116
 msgid "Add New Cheat"
 msgstr "Új csalás felvétele"
 
-#: ../gui/Cheat.c:117
-#: ../gui/Cheat.c:202
+#: ../gui/Cheat.c:117 ../gui/Cheat.c:202
 msgid "Cheat Description:"
 msgstr "Csalás leírás:"
 
-#: ../gui/Cheat.c:125
-#: ../gui/Cheat.c:211
-#: ../win32/gui/CheatDlg.c:68
+#: ../gui/Cheat.c:125 ../gui/Cheat.c:211 ../win32/gui/CheatDlg.c:68
 #: ../win32/gui/CheatDlg.c:118
 msgid "Cheat Code:"
 msgstr "Csalás kód:"
 
-#: ../gui/Cheat.c:155
-#: ../gui/Cheat.c:251
-#: ../gui/LnxMain.c:421
+#: ../gui/Cheat.c:155 ../gui/Cheat.c:251 ../gui/LnxMain.c:422
 #: ../win32/gui/ConfigurePlugins.c:305
 msgid "Error"
 msgstr "Hiba"
 
-#: ../gui/Cheat.c:155
-#: ../gui/Cheat.c:251
-#: ../win32/gui/CheatDlg.c:91
+#: ../gui/Cheat.c:155 ../gui/Cheat.c:251 ../win32/gui/CheatDlg.c:91
 #: ../win32/gui/CheatDlg.c:132
 msgid "Invalid cheat code!"
 msgstr "Érvénytelen csalás kód!"
 
-#: ../gui/Cheat.c:194
-#: ../win32/gui/CheatDlg.c:66
+#: ../gui/Cheat.c:194 ../win32/gui/CheatDlg.c:66
 msgid "Edit Cheat"
 msgstr "Csalás szerkesztése"
 
@@ -581,16 +567,12 @@ msgstr "Csalás szerkesztése"
 msgid "Open Cheat File"
 msgstr "Csalás fájl megnyitása"
 
-#: ../gui/Cheat.c:316
-#: ../gui/Cheat.c:356
+#: ../gui/Cheat.c:316 ../gui/Cheat.c:356
 msgid "PCSX Cheat Code Files (*.cht)"
 msgstr "PCSX csalás kód fájlok (*.cht)"
 
-#: ../gui/Cheat.c:321
-#: ../gui/Gtk2Gui.c:446
-#: ../gui/Gtk2Gui.c:587
-#: ../win32/gui/WndMain.c:1444
-#: ../win32/gui/WndMain.c:1525
+#: ../gui/Cheat.c:321 ../gui/Gtk2Gui.c:446 ../gui/Gtk2Gui.c:587
+#: ../win32/gui/WndMain.c:1444 ../win32/gui/WndMain.c:1525
 msgid "All Files"
 msgstr "Minden fájl"
 
@@ -602,11 +584,8 @@ msgstr "Csalás fájl mentése"
 msgid "All Files (*.*)"
 msgstr "Minden fájl (*.*)"
 
-#: ../gui/Cheat.c:394
-#: ../gui/Cheat.c:1124
-#: ../gui/ConfDlg.c:104
-#: ../gui/ConfDlg.c:200
-#: ../gui/DebugMemory.c:259
+#: ../gui/Cheat.c:394 ../gui/Cheat.c:1124 ../gui/ConfDlg.c:104
+#: ../gui/ConfDlg.c:200 ../gui/DebugMemory.c:259
 msgid "Error: Glade interface could not be loaded!"
 msgstr "Hiba: Glade interfész nem tölthető be!"
 
@@ -618,42 +597,35 @@ msgstr "Csalás kódok"
 msgid "Enable"
 msgstr "Bekapcsolás"
 
-#: ../gui/Cheat.c:413
-#: ../win32/gui/CheatDlg.c:185
+#: ../gui/Cheat.c:413 ../win32/gui/CheatDlg.c:185
 msgid "Description"
 msgstr "Ismertető"
 
-#: ../gui/Cheat.c:543
-#: ../win32/gui/CheatDlg.c:457
+#: ../gui/Cheat.c:543 ../win32/gui/CheatDlg.c:457
 msgid "Too many addresses found."
 msgstr "Túl sok cím található."
 
-#: ../gui/Cheat.c:552
-#: ../win32/gui/CheatDlg.c:466
+#: ../gui/Cheat.c:552 ../win32/gui/CheatDlg.c:466
 #, c-format
 msgid "%.8X    Current: %u (%.2X), Previous: %u (%.2X)"
 msgstr "%.8X    Jelenlegi: %u (%.2X), Előző: %u (%.2X)"
 
-#: ../gui/Cheat.c:557
-#: ../win32/gui/CheatDlg.c:471
+#: ../gui/Cheat.c:557 ../win32/gui/CheatDlg.c:471
 #, c-format
 msgid "%.8X    Current: %u (%.4X), Previous: %u (%.4X)"
 msgstr "%.8X    Jelenlegi: %u (%.4X), Előző: %u (%.4X)"
 
-#: ../gui/Cheat.c:562
-#: ../win32/gui/CheatDlg.c:476
+#: ../gui/Cheat.c:562 ../win32/gui/CheatDlg.c:476
 #, c-format
 msgid "%.8X    Current: %u (%.8X), Previous: %u (%.8X)"
 msgstr "%.8X    Jelenlegi: %u (%.8X), Előző: %u (%.8X)"
 
-#: ../gui/Cheat.c:577
-#: ../win32/gui/CheatDlg.c:492
+#: ../gui/Cheat.c:577 ../win32/gui/CheatDlg.c:492
 #, c-format
 msgid "Founded Addresses: %d"
 msgstr "Cím találatok: %d"
 
-#: ../gui/Cheat.c:585
-#: ../win32/gui/CheatDlg.c:448
+#: ../gui/Cheat.c:585 ../win32/gui/CheatDlg.c:448
 msgid "Enter the values and start your search."
 msgstr "Gépeld be a kívánt értékeket és indítsd el a keresést."
 
@@ -661,9 +633,7 @@ msgstr "Gépeld be a kívánt értékeket és indítsd el a keresést."
 msgid "Freeze value"
 msgstr "Érték fagyasztása"
 
-#: ../gui/Cheat.c:636
-#: ../win32/gui/CheatDlg.c:67
-#: ../win32/gui/CheatDlg.c:117
+#: ../gui/Cheat.c:636 ../win32/gui/CheatDlg.c:67 ../win32/gui/CheatDlg.c:117
 msgid "Description:"
 msgstr "Ismertető:"
 
@@ -684,19 +654,13 @@ msgstr "Keresési találatok"
 #. disabled widgets
 #. TODO If combo screen hasn't been opened and the user chooses the menu config option, confs.Combo will be null and cause a segfault
 #. printf("Configuring plugin %s\n", filename);
-#: ../gui/ConfDlg.c:237
-#: ../gui/ConfDlg.c:258
-#: ../gui/ConfDlg.c:279
-#: ../gui/ConfDlg.c:300
-#: ../gui/ConfDlg.c:355
+#: ../gui/ConfDlg.c:237 ../gui/ConfDlg.c:258 ../gui/ConfDlg.c:279
+#: ../gui/ConfDlg.c:300 ../gui/ConfDlg.c:355
 msgid "No configuration required"
 msgstr "Beállítás nem szükséges"
 
-#: ../gui/ConfDlg.c:237
-#: ../gui/ConfDlg.c:258
-#: ../gui/ConfDlg.c:279
-#: ../gui/ConfDlg.c:300
-#: ../gui/ConfDlg.c:355
+#: ../gui/ConfDlg.c:237 ../gui/ConfDlg.c:258 ../gui/ConfDlg.c:279
+#: ../gui/ConfDlg.c:300 ../gui/ConfDlg.c:355
 msgid "This plugin doesn't need to be configured."
 msgstr "Ezt a plugint nem kell beállítani."
 
@@ -705,9 +669,7 @@ msgstr "Ezt a plugint nem kell beállítani."
 msgid "Could not open BIOS directory: '%s'\n"
 msgstr "A BIOS könyvtár nem nyitható meg: '%s'\n"
 
-#: ../gui/ConfDlg.c:611
-#: ../gui/ConfDlg.c:704
-#: ../gui/LnxMain.c:168
+#: ../gui/ConfDlg.c:611 ../gui/ConfDlg.c:704 ../gui/LnxMain.c:168
 #, c-format
 msgid "Could not open directory: '%s'\n"
 msgstr "A könyvtár nem nyitható meg: '%s'\n"
@@ -778,31 +740,23 @@ msgstr "Nem megfelelő PSX fájl"
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "A fájl nem tűnik PlayStation futtatható fájlnak"
 
-#: ../gui/Gtk2Gui.c:508
-#: ../gui/Gtk2Gui.c:649
+#: ../gui/Gtk2Gui.c:508 ../gui/Gtk2Gui.c:649
 msgid "CD ROM failed"
 msgstr "CD ROM hiba"
 
-#: ../gui/Gtk2Gui.c:508
-#: ../gui/Gtk2Gui.c:649
-#: ../win32/gui/WndMain.c:463
-#: ../win32/gui/WndMain.c:515
-#: ../win32/gui/WndMain.c:584
+#: ../gui/Gtk2Gui.c:508 ../gui/Gtk2Gui.c:649 ../win32/gui/WndMain.c:463
+#: ../win32/gui/WndMain.c:515 ../win32/gui/WndMain.c:584
 #, c-format
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "Úgy tűnik a CD lemez nem PlayStation CD formátum"
 
-#: ../gui/Gtk2Gui.c:519
-#: ../gui/Gtk2Gui.c:660
-#: ../win32/gui/WndMain.c:473
-#: ../win32/gui/WndMain.c:525
-#: ../win32/gui/WndMain.c:594
+#: ../gui/Gtk2Gui.c:519 ../gui/Gtk2Gui.c:660 ../win32/gui/WndMain.c:473
+#: ../win32/gui/WndMain.c:525 ../win32/gui/WndMain.c:594
 #, c-format
 msgid "Could not load CD-ROM!"
 msgstr "CD-ROM betöltése sikertelen!"
 
-#: ../gui/Gtk2Gui.c:519
-#: ../gui/Gtk2Gui.c:660
+#: ../gui/Gtk2Gui.c:519 ../gui/Gtk2Gui.c:660
 msgid "The CD-ROM could not be loaded"
 msgstr "CD-ROM nem tölthető be"
 
@@ -842,8 +796,7 @@ msgstr "Mentett állás %s."
 msgid "Error saving state %s!"
 msgstr "Hiba az állás mentése közben %s!"
 
-#: ../gui/Gtk2Gui.c:864
-#: ../gui/Gtk2Gui.c:892
+#: ../gui/Gtk2Gui.c:864 ../gui/Gtk2Gui.c:892
 msgid "Select State File"
 msgstr "Állás mentés választás"
 
@@ -857,6 +810,7 @@ msgid "Creating memory card: %s\n"
 msgstr "Memória kártya létrehozása: %s\n"
 
 #: ../gui/LnxMain.c:329
+#, fuzzy
 msgid ""
 " pcsx [options] [file]\n"
 "\toptions:\n"
@@ -865,6 +819,7 @@ msgid ""
 "\t-nogui\t\tDon't open the GTK GUI\n"
 "\t-cfg FILE\tLoads desired configuration file (default: ~/.pcsx/pcsx.cfg)\n"
 "\t-psxout\t\tEnable PSX output\n"
+"\t-slowboot\t\tEnable BIOS Logo\n"
 "\t-load STATENUM\tLoads savestate STATENUM (1-9)\n"
 "\t-h -help\tDisplay this message\n"
 "\tfile\t\tLoads file\n"
@@ -880,21 +835,25 @@ msgstr ""
 "\t-h -help\tAz üzenet megjelenítése\n"
 "\tfile\t\tFájl betöltése\n"
 
-#: ../gui/LnxMain.c:365
+#: ../gui/LnxMain.c:366
 #, c-format
-msgid "PCSX cannot be configured without using the GUI -- you should restart without -nogui.\n"
-msgstr "PCSX nem konfigurálható a GUI használata nélkül -- újraindítás szükséges -nogui nélkül.\n"
+msgid ""
+"PCSX cannot be configured without using the GUI -- you should restart "
+"without -nogui.\n"
+msgstr ""
+"PCSX nem konfigurálható a GUI használata nélkül -- újraindítás szükséges -"
+"nogui nélkül.\n"
 
-#: ../gui/LnxMain.c:421
+#: ../gui/LnxMain.c:422
 msgid "Failed loading plugins!"
 msgstr "Pluginok betöltése sikertelen!"
 
-#: ../gui/LnxMain.c:440
+#: ../gui/LnxMain.c:441
 #, c-format
 msgid "Could not load CD-ROM!\n"
 msgstr "CD-ROM nem tölthető be!\n"
 
-#: ../gui/LnxMain.c:471
+#: ../gui/LnxMain.c:472
 #, c-format
 msgid "PSX emulator couldn't be initialized.\n"
 msgstr "PSX emulátor incializálása sikertelen.\n"
@@ -903,13 +862,11 @@ msgstr "PSX emulátor incializálása sikertelen.\n"
 msgid "Icon"
 msgstr "Ikon"
 
-#: ../gui/MemcardDlg.c:62
-#: ../win32/gui/WndMain.c:748
+#: ../gui/MemcardDlg.c:62 ../win32/gui/WndMain.c:748
 msgid "Title"
 msgstr "Cím"
 
-#: ../gui/MemcardDlg.c:68
-#: ../win32/gui/WndMain.c:754
+#: ../gui/MemcardDlg.c:68 ../win32/gui/WndMain.c:754
 msgid "Status"
 msgstr "Állapot"
 
@@ -921,24 +878,17 @@ msgstr "Azonosító"
 msgid "Name"
 msgstr "Név"
 
-#: ../gui/MemcardDlg.c:155
-#: ../gui/MemcardDlg.c:260
-#: ../win32/gui/WndMain.c:959
+#: ../gui/MemcardDlg.c:155 ../gui/MemcardDlg.c:260 ../win32/gui/WndMain.c:959
 msgid "Deleted"
 msgstr "Törölve"
 
-#: ../gui/MemcardDlg.c:157
-#: ../gui/MemcardDlg.c:161
-#: ../gui/MemcardDlg.c:262
-#: ../gui/MemcardDlg.c:266
-#: ../win32/gui/WndMain.c:960
+#: ../gui/MemcardDlg.c:157 ../gui/MemcardDlg.c:161 ../gui/MemcardDlg.c:262
+#: ../gui/MemcardDlg.c:266 ../win32/gui/WndMain.c:960
 #: ../win32/gui/WndMain.c:963
 msgid "Free"
 msgstr "Üres"
 
-#: ../gui/MemcardDlg.c:159
-#: ../gui/MemcardDlg.c:264
-#: ../win32/gui/WndMain.c:962
+#: ../gui/MemcardDlg.c:159 ../gui/MemcardDlg.c:264 ../win32/gui/WndMain.c:962
 msgid "Used"
 msgstr "Foglalt"
 
@@ -952,8 +902,12 @@ msgid "Format this Memory Card?"
 msgstr "Formázod a memória kártyát?"
 
 #: ../gui/MemcardDlg.c:366
-msgid "If you format the memory card, the card will be empty, and any existing data overwritten."
-msgstr "Ha leformázod a memória kártyát, akkor a kártya üres lesz és minden meglévő adat el fog veszni."
+msgid ""
+"If you format the memory card, the card will be empty, and any existing data "
+"overwritten."
+msgstr ""
+"Ha leformázod a memória kártyát, akkor a kártya üres lesz és minden meglévő "
+"adat el fog veszni."
 
 #: ../gui/MemcardDlg.c:369
 msgid "Format card"
@@ -974,8 +928,11 @@ msgid "No free space on memory card"
 msgstr "Nincs szabad hely a memória kártyán"
 
 #: ../gui/MemcardDlg.c:504
-msgid "There are no free slots available on the target memory card. Please delete a slot first."
-msgstr "Nincs szabad mentési blokk a cél memória kártyán. Először törölj egy blokkot."
+msgid ""
+"There are no free slots available on the target memory card. Please delete a "
+"slot first."
+msgstr ""
+"Nincs szabad mentési blokk a cél memória kártyán. Először törölj egy blokkot."
 
 #: ../gui/MemcardDlg.c:667
 msgid "Memory Card Manager"
@@ -1066,8 +1023,7 @@ msgstr "Csalások betöltve innen: %s\n"
 msgid "Cheats saved to: %s\n"
 msgstr "Csalások mentve ide: %s\n"
 
-#: ../libpcsxcore/cheat.c:322
-#: ../libpcsxcore/cheat.c:443
+#: ../libpcsxcore/cheat.c:322 ../libpcsxcore/cheat.c:443
 msgid "(Untitled)"
 msgstr "(Cím nélküli)"
 
@@ -1206,7 +1162,7 @@ msgstr "Nem támogatott PPF verzió (%d).\n"
 msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr "PPF %d.0 patch betöltve: %s.\n"
 
-#: ../libpcsxcore/ppf.c:375
+#: ../libpcsxcore/ppf.c:377
 #, c-format
 msgid "Loaded SBI file: %s.\n"
 msgstr "SBI fájl betöltve: %s.\n"
@@ -1232,7 +1188,9 @@ msgstr "Kapcsolat lezárva!\n"
 #: ../libpcsxcore/sio.c:872
 #, c-format
 msgid "No memory card value was specified - creating a default card %s\n"
-msgstr "Nincs megadva memóriakártyához tartozó érték - alapértelmezett kártya létrehozása %s\n"
+msgstr ""
+"Nincs megadva memóriakártyához tartozó érték - alapértelmezett kártya "
+"létrehozása %s\n"
 
 #: ../libpcsxcore/sio.c:876
 #, c-format
@@ -1272,7 +1230,9 @@ msgstr "CD-ROM sebessége (alap. 0 = MAX):"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:4
 msgid "Choose your CD-ROM device or type its path if it's not listed"
-msgstr "Válassz CD-ROM eszközt vagy gépeld be az elérési útját ha nincs a felsoroltak közt"
+msgstr ""
+"Válassz CD-ROM eszközt vagy gépeld be az elérési útját ha nincs a "
+"felsoroltak közt"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:5
 msgid ""
@@ -1323,8 +1283,7 @@ msgstr ""
 "Szálanként - Gyorsabb (gyorsítótárral)"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2.h:24
-#: ../plugins/dfinput/dfinput.ui.h:8
-#: ../win32/gui/WndMain.c:1309
+#: ../plugins/dfinput/dfinput.ui.h:8 ../win32/gui/WndMain.c:1309
 msgid "Options"
 msgstr "Lehetőségek"
 
@@ -1440,76 +1399,62 @@ msgstr "Jobb kar le"
 msgid "R-Stick Up"
 msgstr "Jobb kar fel"
 
-#: ../plugins/dfinput/cfg-gtk2.c:100
-#: ../plugins/dfinput/cfg-gtk2.c:139
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Centered"
 msgstr "Középen"
 
-#: ../plugins/dfinput/cfg-gtk2.c:100
-#: ../plugins/dfinput/cfg-gtk2.c:139
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Up"
 msgstr "Fel"
 
-#: ../plugins/dfinput/cfg-gtk2.c:100
-#: ../plugins/dfinput/cfg-gtk2.c:139
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Right"
 msgstr "Jobbra"
 
-#: ../plugins/dfinput/cfg-gtk2.c:100
-#: ../plugins/dfinput/cfg-gtk2.c:139
+#: ../plugins/dfinput/cfg-gtk2.c:100 ../plugins/dfinput/cfg-gtk2.c:139
 msgid "Rightup"
 msgstr "Jobbra fel"
 
-#: ../plugins/dfinput/cfg-gtk2.c:101
-#: ../plugins/dfinput/cfg-gtk2.c:140
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Down"
 msgstr "Le"
 
-#: ../plugins/dfinput/cfg-gtk2.c:101
-#: ../plugins/dfinput/cfg-gtk2.c:140
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Rightdown"
 msgstr "Jobbra le"
 
-#: ../plugins/dfinput/cfg-gtk2.c:101
-#: ../plugins/dfinput/cfg-gtk2.c:140
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Left"
 msgstr "Balra"
 
-#: ../plugins/dfinput/cfg-gtk2.c:101
-#: ../plugins/dfinput/cfg-gtk2.c:140
+#: ../plugins/dfinput/cfg-gtk2.c:101 ../plugins/dfinput/cfg-gtk2.c:140
 msgid "Leftup"
 msgstr "Balra fel"
 
-#: ../plugins/dfinput/cfg-gtk2.c:102
-#: ../plugins/dfinput/cfg-gtk2.c:141
+#: ../plugins/dfinput/cfg-gtk2.c:102 ../plugins/dfinput/cfg-gtk2.c:141
 msgid "Leftdown"
 msgstr "Balra le"
 
-#: ../plugins/dfinput/cfg-gtk2.c:106
-#: ../plugins/dfinput/cfg-gtk2.c:145
+#: ../plugins/dfinput/cfg-gtk2.c:106 ../plugins/dfinput/cfg-gtk2.c:145
 #, c-format
 msgid "Joystick: Button %d"
 msgstr "Joystick: %d gomb"
 
-#: ../plugins/dfinput/cfg-gtk2.c:110
-#: ../plugins/dfinput/cfg-gtk2.c:149
+#: ../plugins/dfinput/cfg-gtk2.c:110 ../plugins/dfinput/cfg-gtk2.c:149
 #, c-format
 msgid "Joystick: Axis %d%c"
 msgstr "Joystick: %d%c irány"
 
-#: ../plugins/dfinput/cfg-gtk2.c:115
-#: ../plugins/dfinput/cfg-gtk2.c:154
+#: ../plugins/dfinput/cfg-gtk2.c:115 ../plugins/dfinput/cfg-gtk2.c:154
 #, c-format
 msgid "Joystick: Hat %d %s"
 msgstr "Joystick: %d %s hat"
 
-#: ../plugins/dfinput/cfg-gtk2.c:130
-#: ../plugins/dfinput/cfg-gtk2.c:169
+#: ../plugins/dfinput/cfg-gtk2.c:130 ../plugins/dfinput/cfg-gtk2.c:169
 msgid "Keyboard:"
 msgstr "Billentyűzet:"
 
-#: ../plugins/dfinput/cfg-gtk2.c:134
-#: ../plugins/dfinput/cfg-gtk2.c:173
+#: ../plugins/dfinput/cfg-gtk2.c:134 ../plugins/dfinput/cfg-gtk2.c:173
 msgid "(Not Set)"
 msgstr "(Nincs beállítva)"
 
@@ -1522,13 +1467,11 @@ msgstr "Nincs"
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr "Játékirányító/Billentyűzet bemeneti beállítás"
 
-#: ../plugins/dfinput/cfg-gtk2.c:590
-#: ../plugins/dfinput/cfg-gtk2.c:610
+#: ../plugins/dfinput/cfg-gtk2.c:590 ../plugins/dfinput/cfg-gtk2.c:610
 msgid "Key"
 msgstr "Billentyű"
 
-#: ../plugins/dfinput/cfg-gtk2.c:596
-#: ../plugins/dfinput/cfg-gtk2.c:616
+#: ../plugins/dfinput/cfg-gtk2.c:596 ../plugins/dfinput/cfg-gtk2.c:616
 msgid "Button"
 msgstr "Gomb"
 
@@ -1595,8 +1538,10 @@ msgid "Copy PC IP to Clipboard"
 msgstr "A számítógép IP címének másolása vágólapra"
 
 #: ../plugins/dfnet/dfnet.ui.h:3
-msgid "Do not change if not necessary (remember it must be changed on both sides)."
-msgstr "Ne változtasd ha nem muszály (ne feledd, mindkét oldalon módosítani kell)."
+msgid ""
+"Do not change if not necessary (remember it must be changed on both sides)."
+msgstr ""
+"Ne változtasd ha nem muszály (ne feledd, mindkét oldalon módosítani kell)."
 
 #: ../plugins/dfnet/dfnet.ui.h:4
 msgid "Play Offline"
@@ -1610,15 +1555,20 @@ msgstr "Port száma"
 msgid ""
 "Select here if you'll be Server (Player1) or Client (Player2).\n"
 "\n"
-"If you select Server you must Copy your IP address to the Clipboard and paste if (Ctrl+V) wherever the Client can see it.\n"
+"If you select Server you must Copy your IP address to the Clipboard and "
+"paste if (Ctrl+V) wherever the Client can see it.\n"
 "\n"
-"If you selected Client please enter the IP address the Server gave to you in the IP Address Control."
+"If you selected Client please enter the IP address the Server gave to you in "
+"the IP Address Control."
 msgstr ""
-"Válaszd ezt ha te létesítesz szervert (1. játékos) vagy ha kliens leszel (2. játékos).\n"
+"Válaszd ezt ha te létesítesz szervert (1. játékos) vagy ha kliens leszel (2. "
+"játékos).\n"
 "\n"
-"Ha szervert választasz, másold az IP címedet a vágólapra és szúrd be (Ctrl+V) bárhová, ahol a kliens látni fogja.\n"
+"Ha szervert választasz, másold az IP címedet a vágólapra és szúrd be (Ctrl"
+"+V) bárhová, ahol a kliens látni fogja.\n"
 "\n"
-"Ha klienset választottál, írd be az IP címedet amit a szerver adott az IP cím vezérlőnél."
+"Ha klienset választottál, írd be az IP címedet amit a szerver adott az IP "
+"cím vezérlőnél."
 
 #: ../plugins/dfnet/dfnet.ui.h:11
 msgid "Server (Player1)"
@@ -1628,8 +1578,7 @@ msgstr "Szerver (1. játékos)"
 msgid "Start Game"
 msgstr "Játék indítása"
 
-#: ../plugins/dfnet/gui.c:30
-#: ../plugins/dfnet/gui.c:112
+#: ../plugins/dfnet/gui.c:30 ../plugins/dfnet/gui.c:112
 #: ../win32/gui/ConfigurePlugins.c:616
 msgid "NetPlay"
 msgstr "Internetes játék"
@@ -2427,14 +2376,10 @@ msgstr ""
 msgid "About"
 msgstr "A program névjegye"
 
-#: ../win32/gui/AboutDlg.c:48
-#: ../win32/gui/AboutDlg.c:52
-#: ../win32/gui/CheatDlg.c:69
-#: ../win32/gui/CheatDlg.c:119
-#: ../win32/gui/ConfigurePlugins.c:483
-#: ../win32/gui/ConfigurePlugins.c:614
-#: ../win32/gui/WndMain.c:1058
-#: ../win32/gui/WndMain.c:1294
+#: ../win32/gui/AboutDlg.c:48 ../win32/gui/AboutDlg.c:52
+#: ../win32/gui/CheatDlg.c:69 ../win32/gui/CheatDlg.c:119
+#: ../win32/gui/ConfigurePlugins.c:483 ../win32/gui/ConfigurePlugins.c:614
+#: ../win32/gui/WndMain.c:1058 ../win32/gui/WndMain.c:1294
 msgid "OK"
 msgstr "Rendben"
 
@@ -2442,24 +2387,19 @@ msgstr "Rendben"
 msgid "PCSX EMU\n"
 msgstr "PCSX EMULÁTOR\n"
 
-#: ../win32/gui/CheatDlg.c:51
-#: ../win32/gui/CheatDlg.c:223
+#: ../win32/gui/CheatDlg.c:51 ../win32/gui/CheatDlg.c:223
 #: ../win32/gui/CheatDlg.c:270
 msgid "Yes"
 msgstr "Igen"
 
-#: ../win32/gui/CheatDlg.c:51
-#: ../win32/gui/CheatDlg.c:223
+#: ../win32/gui/CheatDlg.c:51 ../win32/gui/CheatDlg.c:223
 #: ../win32/gui/CheatDlg.c:270
 msgid "No"
 msgstr "Nem"
 
-#: ../win32/gui/CheatDlg.c:70
-#: ../win32/gui/CheatDlg.c:120
-#: ../win32/gui/ConfigurePlugins.c:484
-#: ../win32/gui/ConfigurePlugins.c:615
-#: ../win32/gui/WndMain.c:1059
-#: ../win32/gui/WndMain.c:1295
+#: ../win32/gui/CheatDlg.c:70 ../win32/gui/CheatDlg.c:120
+#: ../win32/gui/ConfigurePlugins.c:484 ../win32/gui/ConfigurePlugins.c:615
+#: ../win32/gui/WndMain.c:1059 ../win32/gui/WndMain.c:1295
 msgid "Cancel"
 msgstr "Mégsem"
 
@@ -2495,8 +2435,7 @@ msgstr "&Bezárás"
 msgid "Enabled"
 msgstr "Bekapcsolva"
 
-#: ../win32/gui/CheatDlg.c:282
-#: ../win32/gui/CheatDlg.c:311
+#: ../win32/gui/CheatDlg.c:282 ../win32/gui/CheatDlg.c:311
 msgid "PCSX Cheat Code Files"
 msgstr "PCSX csalás kód fájlok"
 
@@ -2540,8 +2479,7 @@ msgstr "Nincs változtatás"
 msgid "No addresses found."
 msgstr "Nem találhatóak címek."
 
-#: ../win32/gui/CheatDlg.c:505
-#: ../win32/gui/CheatDlg.c:596
+#: ../win32/gui/CheatDlg.c:505 ../win32/gui/CheatDlg.c:596
 msgid "Address:"
 msgstr "Cím:"
 
@@ -2654,30 +2592,21 @@ msgstr "BIOS könyvtára"
 msgid "Set Plugins Directory"
 msgstr "Pluginok könyvtára"
 
-#: ../win32/gui/ConfigurePlugins.c:493
-#: ../win32/gui/ConfigurePlugins.c:496
-#: ../win32/gui/ConfigurePlugins.c:499
-#: ../win32/gui/ConfigurePlugins.c:502
-#: ../win32/gui/ConfigurePlugins.c:505
-#: ../win32/gui/ConfigurePlugins.c:617
+#: ../win32/gui/ConfigurePlugins.c:493 ../win32/gui/ConfigurePlugins.c:496
+#: ../win32/gui/ConfigurePlugins.c:499 ../win32/gui/ConfigurePlugins.c:502
+#: ../win32/gui/ConfigurePlugins.c:505 ../win32/gui/ConfigurePlugins.c:617
 msgid "Configure..."
 msgstr "Beállítás..."
 
-#: ../win32/gui/ConfigurePlugins.c:494
-#: ../win32/gui/ConfigurePlugins.c:497
-#: ../win32/gui/ConfigurePlugins.c:500
-#: ../win32/gui/ConfigurePlugins.c:503
-#: ../win32/gui/ConfigurePlugins.c:506
-#: ../win32/gui/ConfigurePlugins.c:618
+#: ../win32/gui/ConfigurePlugins.c:494 ../win32/gui/ConfigurePlugins.c:497
+#: ../win32/gui/ConfigurePlugins.c:500 ../win32/gui/ConfigurePlugins.c:503
+#: ../win32/gui/ConfigurePlugins.c:506 ../win32/gui/ConfigurePlugins.c:618
 msgid "Test..."
 msgstr "Tesztelés..."
 
-#: ../win32/gui/ConfigurePlugins.c:495
-#: ../win32/gui/ConfigurePlugins.c:498
-#: ../win32/gui/ConfigurePlugins.c:501
-#: ../win32/gui/ConfigurePlugins.c:504
-#: ../win32/gui/ConfigurePlugins.c:507
-#: ../win32/gui/ConfigurePlugins.c:619
+#: ../win32/gui/ConfigurePlugins.c:495 ../win32/gui/ConfigurePlugins.c:498
+#: ../win32/gui/ConfigurePlugins.c:501 ../win32/gui/ConfigurePlugins.c:504
+#: ../win32/gui/ConfigurePlugins.c:507 ../win32/gui/ConfigurePlugins.c:619
 msgid "About..."
 msgstr "Névjegy..."
 
@@ -2686,29 +2615,27 @@ msgid "NetPlay Configuration"
 msgstr "Internetes játék beállítása"
 
 #: ../win32/gui/ConfigurePlugins.c:620
-msgid "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
-msgstr "Megjegyzés: A NetPlay plugin könyvtár azonos a többi plugin könyvtárával."
+msgid ""
+"Note: The NetPlay Plugin Directory should be the same as the other Plugins."
+msgstr ""
+"Megjegyzés: A NetPlay plugin könyvtár azonos a többi plugin könyvtárával."
 
-#: ../win32/gui/plugin.c:94
-#: ../win32/gui/WndMain.c:322
+#: ../win32/gui/plugin.c:94 ../win32/gui/WndMain.c:322
 #, c-format
 msgid "*PCSX*: Saved State %d"
 msgstr "*PCSX*: Elmentett állás %d"
 
-#: ../win32/gui/plugin.c:95
-#: ../win32/gui/WndMain.c:323
+#: ../win32/gui/plugin.c:95 ../win32/gui/WndMain.c:323
 #, c-format
 msgid "*PCSX*: Error Saving State %d"
 msgstr "*PCSX*: Hiba az állás mentése közben %d"
 
-#: ../win32/gui/plugin.c:111
-#: ../win32/gui/WndMain.c:300
+#: ../win32/gui/plugin.c:111 ../win32/gui/WndMain.c:300
 #, c-format
 msgid "*PCSX*: Loaded State %d"
 msgstr "*PCSX*: Betöltött elmentett állás %d"
 
-#: ../win32/gui/plugin.c:112
-#: ../win32/gui/WndMain.c:301
+#: ../win32/gui/plugin.c:112 ../win32/gui/WndMain.c:301
 #, c-format
 msgid "*PCSX*: Error Loading State %d"
 msgstr "*PCSX*: Hiba a mentett állás betöltése közben %d"
@@ -2755,8 +2682,7 @@ msgstr "*PCSX*: CD-ROM tálca zárva"
 msgid "Connecting..."
 msgstr "Csatlakozás..."
 
-#: ../win32/gui/plugin.c:185
-#: ../win32/gui/plugin.c:192
+#: ../win32/gui/plugin.c:185 ../win32/gui/plugin.c:192
 #, c-format
 msgid "Please wait while connecting... %c\n"
 msgstr "Kis türelem, csatlakozás folyamatban... %c\n"
@@ -2843,8 +2769,7 @@ msgstr "Német"
 msgid "Greek"
 msgstr "Görög"
 
-#: ../win32/gui/WndMain.c:81
-#: ../win32/gui/WndMain.c:1658
+#: ../win32/gui/WndMain.c:81 ../win32/gui/WndMain.c:1658
 #: ../win32/gui/WndMain.c:1660
 msgid "English"
 msgstr "Angol"
@@ -2911,8 +2836,7 @@ msgstr ""
 "\t-cdfile FILE\tCD képfájl futtatása (-nogui szükséges)\n"
 "\t-help\t\tAz üzenet megjelenítése"
 
-#: ../win32/gui/WndMain.c:341
-#: ../win32/gui/WndMain.c:387
+#: ../win32/gui/WndMain.c:341 ../win32/gui/WndMain.c:387
 msgid "PCSX State Format"
 msgstr "PCSX állás mentés formátum"
 
@@ -2960,18 +2884,15 @@ msgstr "link block megszakítása"
 msgid "Memcard Manager"
 msgstr "Memória kártya kezelő"
 
-#: ../win32/gui/WndMain.c:1060
-#: ../win32/gui/WndMain.c:1063
+#: ../win32/gui/WndMain.c:1060 ../win32/gui/WndMain.c:1063
 msgid "Select Mcd"
 msgstr "Választás"
 
-#: ../win32/gui/WndMain.c:1061
-#: ../win32/gui/WndMain.c:1064
+#: ../win32/gui/WndMain.c:1061 ../win32/gui/WndMain.c:1064
 msgid "Format Mcd"
 msgstr "Formázás"
 
-#: ../win32/gui/WndMain.c:1062
-#: ../win32/gui/WndMain.c:1065
+#: ../win32/gui/WndMain.c:1062 ../win32/gui/WndMain.c:1065
 msgid "Reload Mcd"
 msgstr "Újratöltés"
 
@@ -3007,14 +2928,12 @@ msgstr "Memória kártya 2"
 msgid "Are you sure you want to paste this selection?"
 msgstr "Valóban be akarod szúrni a kijelölést?"
 
-#: ../win32/gui/WndMain.c:1128
-#: ../win32/gui/WndMain.c:1239
+#: ../win32/gui/WndMain.c:1128 ../win32/gui/WndMain.c:1239
 #: ../win32/gui/WndMain.c:1246
 msgid "Confirmation"
 msgstr "Megerősítés"
 
-#: ../win32/gui/WndMain.c:1239
-#: ../win32/gui/WndMain.c:1246
+#: ../win32/gui/WndMain.c:1239 ../win32/gui/WndMain.c:1246
 msgid "Are you sure you want to format this Memory Card?"
 msgstr "Valóban le kívánod formázni ezt a Memória kártyát?"
 
@@ -3134,53 +3053,43 @@ msgstr "&Mentés"
 msgid "&Load"
 msgstr "&Betöltés"
 
-#: ../win32/gui/WndMain.c:1613
-#: ../win32/gui/WndMain.c:1623
+#: ../win32/gui/WndMain.c:1613 ../win32/gui/WndMain.c:1623
 msgid "&Other..."
 msgstr "&Más..."
 
-#: ../win32/gui/WndMain.c:1614
-#: ../win32/gui/WndMain.c:1624
+#: ../win32/gui/WndMain.c:1614 ../win32/gui/WndMain.c:1624
 msgid "Slot &9"
 msgstr "&Kilencedik hely"
 
-#: ../win32/gui/WndMain.c:1615
-#: ../win32/gui/WndMain.c:1625
+#: ../win32/gui/WndMain.c:1615 ../win32/gui/WndMain.c:1625
 msgid "Slot &8"
 msgstr "&Nyolcadik hely"
 
-#: ../win32/gui/WndMain.c:1616
-#: ../win32/gui/WndMain.c:1626
+#: ../win32/gui/WndMain.c:1616 ../win32/gui/WndMain.c:1626
 msgid "Slot &7"
 msgstr "&Hetedik hely"
 
-#: ../win32/gui/WndMain.c:1617
-#: ../win32/gui/WndMain.c:1627
+#: ../win32/gui/WndMain.c:1617 ../win32/gui/WndMain.c:1627
 msgid "Slot &6"
 msgstr "&Hatodik hely"
 
-#: ../win32/gui/WndMain.c:1618
-#: ../win32/gui/WndMain.c:1628
+#: ../win32/gui/WndMain.c:1618 ../win32/gui/WndMain.c:1628
 msgid "Slot &5"
 msgstr "&Ötödik hely"
 
-#: ../win32/gui/WndMain.c:1619
-#: ../win32/gui/WndMain.c:1629
+#: ../win32/gui/WndMain.c:1619 ../win32/gui/WndMain.c:1629
 msgid "Slot &4"
 msgstr "&Negyedik hely"
 
-#: ../win32/gui/WndMain.c:1620
-#: ../win32/gui/WndMain.c:1630
+#: ../win32/gui/WndMain.c:1620 ../win32/gui/WndMain.c:1630
 msgid "Slot &3"
 msgstr "&Harmadik hely"
 
-#: ../win32/gui/WndMain.c:1621
-#: ../win32/gui/WndMain.c:1631
+#: ../win32/gui/WndMain.c:1621 ../win32/gui/WndMain.c:1631
 msgid "Slot &2"
 msgstr "&Második hely"
 
-#: ../win32/gui/WndMain.c:1622
-#: ../win32/gui/WndMain.c:1632
+#: ../win32/gui/WndMain.c:1622 ../win32/gui/WndMain.c:1632
 msgid "Slot &1"
 msgstr "&Első hely"
 

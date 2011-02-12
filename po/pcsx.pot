@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2011-01-12 23:37+0800\n"
+"POT-Creation-Date: 2011-02-12 12:56+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -515,7 +516,7 @@ msgstr ""
 msgid "Cheat Code:"
 msgstr ""
 
-#: ../gui/Cheat.c:155 ../gui/Cheat.c:251 ../gui/LnxMain.c:421
+#: ../gui/Cheat.c:155 ../gui/Cheat.c:251 ../gui/LnxMain.c:422
 #: ../win32/gui/ConfigurePlugins.c:305
 msgid "Error"
 msgstr ""
@@ -784,28 +785,29 @@ msgid ""
 "\t-nogui\t\tDon't open the GTK GUI\n"
 "\t-cfg FILE\tLoads desired configuration file (default: ~/.pcsx/pcsx.cfg)\n"
 "\t-psxout\t\tEnable PSX output\n"
+"\t-slowboot\t\tEnable BIOS Logo\n"
 "\t-load STATENUM\tLoads savestate STATENUM (1-9)\n"
 "\t-h -help\tDisplay this message\n"
 "\tfile\t\tLoads file\n"
 msgstr ""
 
-#: ../gui/LnxMain.c:365
+#: ../gui/LnxMain.c:366
 #, c-format
 msgid ""
 "PCSX cannot be configured without using the GUI -- you should restart "
 "without -nogui.\n"
 msgstr ""
 
-#: ../gui/LnxMain.c:421
+#: ../gui/LnxMain.c:422
 msgid "Failed loading plugins!"
 msgstr ""
 
-#: ../gui/LnxMain.c:440
+#: ../gui/LnxMain.c:441
 #, c-format
 msgid "Could not load CD-ROM!\n"
 msgstr ""
 
-#: ../gui/LnxMain.c:471
+#: ../gui/LnxMain.c:472
 #, c-format
 msgid "PSX emulator couldn't be initialized.\n"
 msgstr ""
@@ -1111,7 +1113,7 @@ msgstr ""
 msgid "Loaded PPF %d.0 patch: %s.\n"
 msgstr ""
 
-#: ../libpcsxcore/ppf.c:375
+#: ../libpcsxcore/ppf.c:377
 #, c-format
 msgid "Loaded SBI file: %s.\n"
 msgstr ""
