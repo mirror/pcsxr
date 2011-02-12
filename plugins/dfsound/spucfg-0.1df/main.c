@@ -163,7 +163,7 @@ int main(int argc, char *argv[])
 	    	len = 1;
 		}
 		val = set_limit (p, len, 0, 1);
-    } else val = 0;
+    } else val = 1;
 
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "chkHiCompat")), val);
 
