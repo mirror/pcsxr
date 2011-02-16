@@ -29,6 +29,10 @@
 #include "Linux.h"
 #include "../libpcsxcore/sio.h"
 
+#if GTK_CHECK_VERSION(2, 20, 0) && !GTK_CHECK_VERSION(3, 0, 0)
+#include "gdk-compat.h"
+#endif
+
 #define MAX_MEMCARD_BLOCKS 15
 
 static gboolean quit;
@@ -82,6 +86,38 @@ static void AddColumns(GtkTreeView *treeview) {
 	gtk_tree_view_append_column(treeview, column);
 }
 
+#if GTK_CHECK_VERSION(2, 20, 0)
+static GdkPixbuf *SetIcon(GtkWidget *dialog, short *icon, int scale) {
+	GdkPixbuf *pixbuf;
+	cairo_surface_t *s;
+	cairo_t *cr;
+	int x, y, c, i, r, g, b;
+	int size = 16 * scale;
+	s = cairo_image_surface_create(CAIRO_FORMAT_RGB24, size, size);
+	cr = cairo_create(s);
+	cairo_scale(cr, scale, scale);
+	for (i=0; i< 256; i++) {
+		x = (i % 16);
+		y = (i / 16);
+		c = icon[i];
+		r = (c & 0x001f) << 3;
+		g = ((c & 0x03e0) >> 5) << 3;
+		b = ((c & 0x7c00) >> 10) << 3;
+		cairo_rectangle(cr, x, y, 1, 1);
+		cairo_set_source_rgb(cr, r/255.0, g/255.0, b/255.0);
+		cairo_fill(cr);
+	}
+	cairo_destroy(cr);
+#if GTK_CHECK_VERSION(3, 0, 0)
+	pixbuf = gdk_pixbuf_get_from_surface(s, 0, 0, size, size);
+#else
+	pixbuf = compat_gdk_pixbuf_get_from_surface(s, 0, 0, size, size);
+#endif
+	cairo_surface_destroy(s);
+	return pixbuf;
+}
+
+#else
 static GdkPixbuf *SetIcon(GtkWidget *dialog, short *icon, int i) {
 	GdkPixmap *pixmap;
 	GdkImage  *image;
@@ -122,6 +158,7 @@ static GdkPixbuf *SetIcon(GtkWidget *dialog, short *icon, int i) {
 	
 	return pixbuf;
 }
+#endif
 
 static void LoadListItems(int mcd, GtkWidget *widget) {
 	int i;
@@ -160,7 +197,7 @@ static void LoadListItems(int mcd, GtkWidget *widget) {
 		else
 			state = _("Free");
 
-		pixbuf = SetIcon(dialog, Info->Icon, i + 1);
+		pixbuf = SetIcon(dialog, Info->Icon, 2);
 
 		gtk_list_store_append(store, &iter);
 
@@ -271,7 +308,7 @@ static void UpdateListItems(int mcd, GtkWidget *widget) {
 			pIcon = Info->Icon;
 		}
 
-		pixbuf = SetIcon(dialog, pIcon, i + 1);
+		pixbuf = SetIcon(dialog, pIcon, 2);
 		title = g_convert(Info->sTitle, strlen(Info->sTitle), "UTF-8",
 			"Shift-JIS", NULL, NULL, NULL);
 

@@ -290,7 +290,11 @@ void RunDebugMemoryDialog() {
 
 	pfd = pango_font_description_from_string("Bitstream Vera Sans Mono, "
 		"DejaVu Sans Mono, Liberation Mono, FreeMono, Sans Mono 9");
+#if GTK_CHECK_VERSION(3, 0, 0)
+	gtk_widget_override_font(widget, pfd);
+#else
 	gtk_widget_modify_font(widget, pfd);
+#endif
 	pango_font_description_free(pfd);
 
 	UpdateMemViewDlg();
