@@ -1,0 +1,42 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {"" = id; }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {cancel = id; hackToggle = id; ok = id; reset = id; }; 
+            CLASS = NetSfPeopsOpenGLPluginConfigController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                advancedBlending = NSControl; 
+                autoFullScreen = NSControl; 
+                blurEffect = NSControl; 
+                ditherMode = NSPopUpButton; 
+                drawScanlines = NSControl; 
+                fpsCounter = NSControl; 
+                frameBufferEffects = NSPopUpButton; 
+                frameSkipping = NSControl; 
+                fullscreenSize = NSPopUpButton; 
+                hackEnable = NSControl; 
+                hacksView = NSView; 
+                mjpegDecoder = NSControl; 
+                mjpegDecoder15bit = NSControl; 
+                offscreenDrawing = NSPopUpButton; 
+                opaquePass = NSControl; 
+                proportionalResize = NSControl; 
+                texColorDepth = NSPopUpButton; 
+                texEnhancment = NSSlider; 
+                texFiltering = NSSlider; 
+                vSync = NSControl; 
+                windowSize = NSPopUpButton; 
+                wireframeOnly = NSControl; 
+                zMaskClipping = NSControl; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

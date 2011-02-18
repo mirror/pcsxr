@@ -46,6 +46,7 @@ uint32_t   ulKeybits = 0;
 
 void GPUkeypressed(int keycode)
 {
+/* arrives via the input plugin, so who knows what thread you're in */
     switch(keycode)
      {
       case VK_F5:
@@ -78,6 +79,9 @@ void GPUkeypressed(int keycode)
       case VK_NEXT:  BuildDispMenu( 1);            break;
       case VK_END:   SwitchDispMenu( 1);           break;
       case VK_HOME:  SwitchDispMenu(-1);           break;
+#if defined (_MACGL)
+      default: { void HandleKey(int keycode); HandleKey(keycode); };
+#endif
      }
 
 }

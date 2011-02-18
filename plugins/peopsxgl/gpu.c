@@ -142,6 +142,7 @@ short           imageY0,imageY1;
 BOOL            bDisplayNotSet = TRUE;
 GLuint          uiScanLine=0;
 int             iUseScanLines=0;
+float           iScanlineColor[] = {0,0,0, 0.3}; // easy on the eyes.
 int             lSelectedSlot=0;
 unsigned char * pGfxCardScreen=0;
 int             iBlurBuffer=0;
@@ -694,7 +695,7 @@ long CALLBACK GPUopen(HWND hwndGPU)
  return 0;
 }
 
-#else
+#elif !defined (_MACGL)
 
 ////////////////////////////////////////////////////////////////////////
 // LINUX GPU OPEN: func to open up the gpu display (X stuff)
@@ -999,6 +1000,14 @@ void sysdep_create_display(void)                       // create display
   }
 }
 
+#endif // !defined(_MACGL)
+
+#ifndef _WINDOWS
+
+#if defined(_MACGL)
+extern char * pCaptionText;
+#endif
+
 ////////////////////////////////////////////////////////////////////////
 
 long GPUopen(unsigned long * disp,char * CapText,char * CfgFile)
@@ -1012,8 +1021,12 @@ long GPUopen(unsigned long * disp,char * CapText,char * CfgFile)
 
  bIsFirstFrame = TRUE;                                 // we have to init later (well, no really... in Linux we do all in GPUopen)
 
+ #if defined (_MACGL)
+ unsigned long display = ulInitDisplay();
+ #else
  sysdep_create_display();                              // create display
-
+ #endif 
+ 
  InitializeTextureStore();                             // init texture mem
 
  rRatioRect.left   = rRatioRect.top=0;
@@ -1024,14 +1037,20 @@ long GPUopen(unsigned long * disp,char * CapText,char * CfgFile)
 
  if(disp)
   {
+  #if defined (_MACGL)
+  *disp = display;
+  #else
    *disp=(unsigned long *)display;                       // return display ID to main emu
+  #endif
   }
 
  if(display) return 0;
  return -1;
 }
 
-#endif
+#endif // ndef _WINDOWS
+
+
 
 ////////////////////////////////////////////////////////////////////////
 // close
@@ -1067,9 +1086,11 @@ long GPUclose()                                        // LINUX CLOSE
 
  if(pGfxCardScreen) free(pGfxCardScreen);              // free helper memory
  pGfxCardScreen=0;
-
+ #if defined (_MACGL)
+ CloseDisplay();
+ #else
  osd_close_display();                                  // destroy display
-
+ #endif
  return 0;
 }
 
@@ -1399,7 +1420,9 @@ void updateDisplay(void)                               // UPDATE DISPLAY
  HDC hdc=GetDC(hWWindow);                              // windows:
  wglMakeCurrent(hdc,GLCONTEXT);                        // -> make context current again
 #endif
-
+#if defined (_MACGL)
+    BringContextForward();
+#endif
  bFakeFrontBuffer=FALSE;
  bRenderFrontBuffer=FALSE;
 
@@ -1489,6 +1512,8 @@ void updateDisplay(void)                               // UPDATE DISPLAY
      if(iDrawnSomething)
 #ifdef _WINDOWS
       SwapBuffers(wglGetCurrentDC());                  // -> to skip or not to skip
+#elif defined(_MACGL)
+        DoBufferSwap();
 #else
       glXSwapBuffers(display,window);
 #endif
@@ -1506,6 +1531,8 @@ void updateDisplay(void)                               // UPDATE DISPLAY
    if(iDrawnSomething)
 #ifdef _WINDOWS
     SwapBuffers(wglGetCurrentDC());                    // -> swap
+#elif defined(_MACGL)
+    DoBufferSwap();
 #else
     glXSwapBuffers(display,window);
 #endif
@@ -1630,6 +1657,10 @@ void updateFrontDisplay(void)
     SwapBuffers(wglGetCurrentDC());                    // -> swap
    ReleaseDC(hWWindow,hdc);                            // -> ! important !
   }
+#elif defined (_MACGL)
+if (iDrawnSomething){
+    DoBufferSwap();
+    }
 #else
  if(iDrawnSomething)                                   // linux:
   glXSwapBuffers(display,window);
@@ -1964,7 +1995,7 @@ void CALLBACK GPUupdateLace(void)
    updateDisplay();
   }
 
-#ifdef _WINDOWS
+#if defined(_WINDOWS) || defined(_MACGL)
  if(bChangeWinMode) ChangeWindowMode();
 #endif
 }
@@ -2906,7 +2937,24 @@ void CALLBACK GPUwriteData(uint32_t gdata)
 // call config dlg
 ////////////////////////////////////////////////////////////////////////
 
-#ifndef _WINDOWS
+#ifdef _WINDOWS
+
+long CALLBACK GPUconfigure(void)
+{
+ HWND hWP=GetActiveWindow();
+ DialogBox(hInst,MAKEINTRESOURCE(IDD_CFGDLG),
+           hWP,(DLGPROC)CfgDlgProc);
+
+ return 0;
+}
+
+#elif defined(_MACGL)
+long CALLBACK GPUconfigure(void)
+{
+ DlgProc();
+   return 0;
+}
+#else
 
 void StartCfgTool(char *arg) // linux: start external cfg tool
 {
@@ -2949,18 +2997,7 @@ long CALLBACK GPUconfigure(void)
  return 0;
 }
 
-#else
-
-long CALLBACK GPUconfigure(void)
-{
- HWND hWP=GetActiveWindow();
- DialogBox(hInst,MAKEINTRESOURCE(IDD_CFGDLG),
-           hWP,(DLGPROC)CfgDlgProc);
-
- return 0;
-}
-
-#endif
+#endif // def _WINDOWS / _MACGL
 
 ////////////////////////////////////////////////////////////////////////
 // sets all kind of act fixes
@@ -3042,6 +3079,9 @@ void CALLBACK GPUabout(void)
  HWND hWP=GetActiveWindow();                           // to be sure
  DialogBox(hInst,MAKEINTRESOURCE(IDD_DIALOG_ABOUT),
            hWP,(DLGPROC)AboutDlgProc);
+#elif defined(_MACGL)
+
+    AboutDlgProc();
 #else
 
  StartCfgTool("ABOUT");

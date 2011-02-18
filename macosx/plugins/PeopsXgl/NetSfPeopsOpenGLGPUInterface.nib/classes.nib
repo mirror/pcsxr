@@ -1,0 +1,22 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = NetSfPeopsOpenGLGPUPluginGLView; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSOpenGLView; 
+        }, 
+        {
+            CLASS = NetSfPeopsOpenGLGPUPluginWindow; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSWindow; 
+        }, 
+        {
+            CLASS = NetSfPeopsSoftGPUPluginWindowController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {glView = NSOpenGLView; }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

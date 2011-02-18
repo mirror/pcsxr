@@ -1,0 +1,421 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2B038C07069183300082466B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2B038C05069183300082466B /* InfoPlist.strings */; };
+		2B959E4406342D32000F2A2D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B959E4306342D32000F2A2D /* OpenGL.framework */; };
+		2BD2E769077AF53E00657C69 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E767077AF53E00657C69 /* Credits.rtf */; };
+		2BD7C777076E1FAB000F05ED /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B51949E06B3D2D200744730 /* GLUT.framework */; };
+		3F31AF741302D4B600CBB551 /* drawgl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F31AF6A1302D4B600CBB551 /* drawgl.m */; };
+		3F31AF761302D4B600CBB551 /* PluginGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F31AF6F1302D4B600CBB551 /* PluginGLView.m */; };
+		3F31AF771302D4B600CBB551 /* PluginWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F31AF711302D4B600CBB551 /* PluginWindow.m */; };
+		3F31AF781302D4B600CBB551 /* PluginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F31AF731302D4B600CBB551 /* PluginWindowController.m */; };
+		3F7F38011307996100556C34 /* NetSfPeopsOpenGLGPUInterface.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F38001307996100556C34 /* NetSfPeopsOpenGLGPUInterface.nib */; };
+		3F7F38041307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F38031307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.m */; };
+		3F7F3808130799CA00556C34 /* NetSfPeopsOpenGLConfig.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F3806130799CA00556C34 /* NetSfPeopsOpenGLConfig.nib */; };
+		3F7F384813079BFD00556C34 /* texture.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F383613079BFD00556C34 /* texture.c */; };
+		3F7F384913079BFD00556C34 /* menu.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F383913079BFD00556C34 /* menu.c */; };
+		3F7F384A13079BFD00556C34 /* prim.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F383B13079BFD00556C34 /* prim.c */; };
+		3F7F384B13079BFD00556C34 /* key.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F383C13079BFD00556C34 /* key.c */; };
+		3F7F384C13079BFD00556C34 /* fps.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F383D13079BFD00556C34 /* fps.c */; };
+		3F7F384E13079BFD00556C34 /* gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F384113079BFD00556C34 /* gpu.c */; };
+		3F7F384F13079BFD00556C34 /* soft.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F384313079BFD00556C34 /* soft.c */; };
+		3F7F385013079BFD00556C34 /* draw.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F384713079BFD00556C34 /* draw.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2B038C06069183300082466B /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2B038D2206918AA80082466B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B51949E06B3D2D200744730 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		2B959E4306342D32000F2A2D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		2BAF50930632BB1A00DB9A16 /* PeopsXGL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopsXGL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BD2E768077AF53E00657C69 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
+		3F31AF6A1302D4B600CBB551 /* drawgl.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = drawgl.m; path = macsrc/drawgl.m; sourceTree = SOURCE_ROOT; };
+		3F31AF6B1302D4B600CBB551 /* ExtendedKeys.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ExtendedKeys.h; path = macsrc/ExtendedKeys.h; sourceTree = SOURCE_ROOT; };
+		3F31AF6E1302D4B600CBB551 /* PluginGLView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginGLView.h; path = macsrc/PluginGLView.h; sourceTree = SOURCE_ROOT; };
+		3F31AF6F1302D4B600CBB551 /* PluginGLView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PluginGLView.m; path = macsrc/PluginGLView.m; sourceTree = SOURCE_ROOT; };
+		3F31AF701302D4B600CBB551 /* PluginWindow.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginWindow.h; path = macsrc/PluginWindow.h; sourceTree = SOURCE_ROOT; };
+		3F31AF711302D4B600CBB551 /* PluginWindow.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PluginWindow.m; path = macsrc/PluginWindow.m; sourceTree = SOURCE_ROOT; };
+		3F31AF721302D4B600CBB551 /* PluginWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginWindowController.h; path = macsrc/PluginWindowController.h; sourceTree = SOURCE_ROOT; };
+		3F31AF731302D4B600CBB551 /* PluginWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PluginWindowController.m; path = macsrc/PluginWindowController.m; sourceTree = SOURCE_ROOT; };
+		3F7F38001307996100556C34 /* NetSfPeopsOpenGLGPUInterface.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = NetSfPeopsOpenGLGPUInterface.nib; sourceTree = SOURCE_ROOT; };
+		3F7F38021307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = NetSfPeopsOpenGLPluginConfigController.h; path = macsrc/NetSfPeopsOpenGLPluginConfigController.h; sourceTree = SOURCE_ROOT; };
+		3F7F38031307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = NetSfPeopsOpenGLPluginConfigController.m; path = macsrc/NetSfPeopsOpenGLPluginConfigController.m; sourceTree = SOURCE_ROOT; };
+		3F7F3807130799CA00556C34 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/NetSfPeopsOpenGLConfig.nib; sourceTree = "<group>"; };
+		3F7F383313079BFD00556C34 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; lineEnding = 2; name = stdafx.h; path = ../../../plugins/peopsxgl/stdafx.h; sourceTree = SOURCE_ROOT; };
+		3F7F383513079BFD00556C34 /* texture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = texture.h; path = ../../../plugins/peopsxgl/texture.h; sourceTree = SOURCE_ROOT; };
+		3F7F383613079BFD00556C34 /* texture.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = texture.c; path = ../../../plugins/peopsxgl/texture.c; sourceTree = SOURCE_ROOT; };
+		3F7F383713079BFD00556C34 /* key.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = key.h; path = ../../../plugins/peopsxgl/key.h; sourceTree = SOURCE_ROOT; };
+		3F7F383813079BFD00556C34 /* menu.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = menu.h; path = ../../../plugins/peopsxgl/menu.h; sourceTree = SOURCE_ROOT; };
+		3F7F383913079BFD00556C34 /* menu.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = menu.c; path = ../../../plugins/peopsxgl/menu.c; sourceTree = SOURCE_ROOT; };
+		3F7F383A13079BFD00556C34 /* gpu.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = gpu.h; path = ../../../plugins/peopsxgl/gpu.h; sourceTree = SOURCE_ROOT; };
+		3F7F383B13079BFD00556C34 /* prim.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = prim.c; path = ../../../plugins/peopsxgl/prim.c; sourceTree = SOURCE_ROOT; };
+		3F7F383C13079BFD00556C34 /* key.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = key.c; path = ../../../plugins/peopsxgl/key.c; sourceTree = SOURCE_ROOT; };
+		3F7F383D13079BFD00556C34 /* fps.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = fps.c; path = ../../../plugins/peopsxgl/fps.c; sourceTree = SOURCE_ROOT; };
+		3F7F383F13079BFD00556C34 /* gl_ext.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = gl_ext.h; path = ../../../plugins/peopsxgl/gl_ext.h; sourceTree = SOURCE_ROOT; };
+		3F7F384013079BFD00556C34 /* fps.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = fps.h; path = ../../../plugins/peopsxgl/fps.h; sourceTree = SOURCE_ROOT; };
+		3F7F384113079BFD00556C34 /* gpu.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = gpu.c; path = ../../../plugins/peopsxgl/gpu.c; sourceTree = SOURCE_ROOT; };
+		3F7F384213079BFD00556C34 /* soft.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = soft.h; path = ../../../plugins/peopsxgl/soft.h; sourceTree = SOURCE_ROOT; };
+		3F7F384313079BFD00556C34 /* soft.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = soft.c; path = ../../../plugins/peopsxgl/soft.c; sourceTree = SOURCE_ROOT; };
+		3F7F384413079BFD00556C34 /* prim.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = prim.h; path = ../../../plugins/peopsxgl/prim.h; sourceTree = SOURCE_ROOT; };
+		3F7F384513079BFD00556C34 /* externals.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; lineEnding = 2; name = externals.h; path = ../../../plugins/peopsxgl/externals.h; sourceTree = SOURCE_ROOT; };
+		3F7F384613079BFD00556C34 /* draw.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = draw.h; path = ../../../plugins/peopsxgl/draw.h; sourceTree = SOURCE_ROOT; };
+		3F7F384713079BFD00556C34 /* draw.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = draw.c; path = ../../../plugins/peopsxgl/draw.c; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2BAF50910632BB1A00DB9A16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B959E4406342D32000F2A2D /* OpenGL.framework in Frameworks */,
+				2BD7C777076E1FAB000F05ED /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2B3E59FF062AAC1A001D796E = {
+			isa = PBXGroup;
+			children = (
+				3F7F38001307996100556C34 /* NetSfPeopsOpenGLGPUInterface.nib */,
+				71E9EBF0109F24B600E98D1D /* src */,
+				2BD2E2F40779F50B00657C69 /* macsrc */,
+				2BD2E818077AFB9F00657C69 /* Resources */,
+				2B038D2206918AA80082466B /* Info.plist */,
+				2B3E5A0B062AAC34001D796E /* Frameworks */,
+				2B3E5A46062AACF3001D796E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2B3E5A0B062AAC34001D796E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2B959E4306342D32000F2A2D /* OpenGL.framework */,
+				2B51949E06B3D2D200744730 /* GLUT.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2B3E5A46062AACF3001D796E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2BAF50930632BB1A00DB9A16 /* PeopsXGL.psxplugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2BD2E2F40779F50B00657C69 /* macsrc */ = {
+			isa = PBXGroup;
+			children = (
+				3F7F38021307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.h */,
+				3F7F38031307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.m */,
+				3F31AF6A1302D4B600CBB551 /* drawgl.m */,
+				3F31AF6B1302D4B600CBB551 /* ExtendedKeys.h */,
+				3F31AF6E1302D4B600CBB551 /* PluginGLView.h */,
+				3F31AF6F1302D4B600CBB551 /* PluginGLView.m */,
+				3F31AF701302D4B600CBB551 /* PluginWindow.h */,
+				3F31AF711302D4B600CBB551 /* PluginWindow.m */,
+				3F31AF721302D4B600CBB551 /* PluginWindowController.h */,
+				3F31AF731302D4B600CBB551 /* PluginWindowController.m */,
+			);
+			name = macsrc;
+			sourceTree = "<group>";
+		};
+		2BD2E818077AFB9F00657C69 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3F7F3806130799CA00556C34 /* NetSfPeopsOpenGLConfig.nib */,
+				2BD2E767077AF53E00657C69 /* Credits.rtf */,
+				2B038C05069183300082466B /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		71E9EBF0109F24B600E98D1D /* src */ = {
+			isa = PBXGroup;
+			children = (
+				3F7F383313079BFD00556C34 /* stdafx.h */,
+				3F7F383513079BFD00556C34 /* texture.h */,
+				3F7F383613079BFD00556C34 /* texture.c */,
+				3F7F383713079BFD00556C34 /* key.h */,
+				3F7F383813079BFD00556C34 /* menu.h */,
+				3F7F383913079BFD00556C34 /* menu.c */,
+				3F7F383A13079BFD00556C34 /* gpu.h */,
+				3F7F383B13079BFD00556C34 /* prim.c */,
+				3F7F383C13079BFD00556C34 /* key.c */,
+				3F7F383D13079BFD00556C34 /* fps.c */,
+				3F7F383F13079BFD00556C34 /* gl_ext.h */,
+				3F7F384013079BFD00556C34 /* fps.h */,
+				3F7F384113079BFD00556C34 /* gpu.c */,
+				3F7F384213079BFD00556C34 /* soft.h */,
+				3F7F384313079BFD00556C34 /* soft.c */,
+				3F7F384413079BFD00556C34 /* prim.h */,
+				3F7F384513079BFD00556C34 /* externals.h */,
+				3F7F384613079BFD00556C34 /* draw.h */,
+				3F7F384713079BFD00556C34 /* draw.c */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2BAF50920632BB1A00DB9A16 /* gpuPeopsXGL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7170842C0FDFD328004F3EB4 /* Build configuration list for PBXNativeTarget "gpuPeopsXGL" */;
+			buildPhases = (
+				2BAF508F0632BB1A00DB9A16 /* Resources */,
+				2BAF50900632BB1A00DB9A16 /* Sources */,
+				2BAF50910632BB1A00DB9A16 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = gpuPeopsXGL;
+			productName = gpuPeopsSoftGL;
+			productReference = 2BAF50930632BB1A00DB9A16 /* PeopsXGL.psxplugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2B3E5A03062AAC1A001D796E /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 717084310FDFD328004F3EB4 /* Build configuration list for PBXProject "PeopsXGL" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 2B3E59FF062AAC1A001D796E;
+			productRefGroup = 2B3E5A46062AACF3001D796E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2BAF50920632BB1A00DB9A16 /* gpuPeopsXGL */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2BAF508F0632BB1A00DB9A16 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B038C07069183300082466B /* InfoPlist.strings in Resources */,
+				2BD2E769077AF53E00657C69 /* Credits.rtf in Resources */,
+				3F7F38011307996100556C34 /* NetSfPeopsOpenGLGPUInterface.nib in Resources */,
+				3F7F3808130799CA00556C34 /* NetSfPeopsOpenGLConfig.nib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2BAF50900632BB1A00DB9A16 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F31AF741302D4B600CBB551 /* drawgl.m in Sources */,
+				3F31AF761302D4B600CBB551 /* PluginGLView.m in Sources */,
+				3F31AF771302D4B600CBB551 /* PluginWindow.m in Sources */,
+				3F31AF781302D4B600CBB551 /* PluginWindowController.m in Sources */,
+				3F7F38041307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.m in Sources */,
+				3F7F384813079BFD00556C34 /* texture.c in Sources */,
+				3F7F384913079BFD00556C34 /* menu.c in Sources */,
+				3F7F384A13079BFD00556C34 /* prim.c in Sources */,
+				3F7F384B13079BFD00556C34 /* key.c in Sources */,
+				3F7F384C13079BFD00556C34 /* fps.c in Sources */,
+				3F7F384E13079BFD00556C34 /* gpu.c in Sources */,
+				3F7F384F13079BFD00556C34 /* soft.c in Sources */,
+				3F7F385013079BFD00556C34 /* draw.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2B038C05069183300082466B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2B038C06069183300082466B /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2BD2E767077AF53E00657C69 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2BD2E768077AF53E00657C69 /* English */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		3F7F3806130799CA00556C34 /* NetSfPeopsOpenGLConfig.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F7F3807130799CA00556C34 /* English */,
+			);
+			name = NetSfPeopsOpenGLConfig.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7170842D0FDFD328004F3EB4 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MACGL,
+					_DARWIN,
+				);
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				LIBRARY_STYLE = BUNDLE;
+				OPTIMIZATION_CFLAGS = "-finline-functions -finline-limit=1600 -fomit-frame-pointer -fno-exceptions -funroll-loops -falign-loops=16 -ffast-math";
+				OTHER_CFLAGS = "-finline-functions";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = PeopsXGL;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../../build;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = psxplugin;
+			};
+			name = Development;
+		};
+		7170842E0FDFD328004F3EB4 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUGGING_SYMBOLS = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MACGL,
+					_DARWIN,
+				);
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				LIBRARY_STYLE = BUNDLE;
+				OPTIMIZATION_CFLAGS = "-finline-functions -finline-limit=1600 -fomit-frame-pointer -fno-exceptions -funroll-loops -falign-loops=16 -ffast-math";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = PeopsXGL;
+				SECTORDER_FLAGS = "";
+				SYMROOT = ../../build;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = psxplugin;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		717084320FDFD328004F3EB4 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
+				GCC_MODEL_TUNING = "";
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				HEADER_SEARCH_PATHS = (
+					../../../plugins/dfxvideo,
+					../../../libpcsxcore,
+				);
+				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH_ACTUAL)";
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Development;
+		};
+		717084330FDFD328004F3EB4 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					ppc,
+				);
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = i386;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				HEADER_SEARCH_PATHS = (
+					../../../plugins/dfxvideo,
+					../../../libpcsxcore,
+				);
+				OTHER_CFLAGS = "-fomit-frame-pointer";
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Deployment;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7170842C0FDFD328004F3EB4 /* Build configuration list for PBXNativeTarget "gpuPeopsXGL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7170842D0FDFD328004F3EB4 /* Development */,
+				7170842E0FDFD328004F3EB4 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		717084310FDFD328004F3EB4 /* Build configuration list for PBXProject "PeopsXGL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				717084320FDFD328004F3EB4 /* Development */,
+				717084330FDFD328004F3EB4 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2B3E5A03062AAC1A001D796E /* Project object */;
+}

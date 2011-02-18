@@ -27,6 +27,11 @@
 #include "texture.h"
 #include "menu.h"
 
+#if defined(_MACGL)
+// if you use it, you must include it
+#include <OpenGL/gl.h>
+#include <OpenGL/glext.h>
+#endif
 ////////////////////////////////////////////////////////////////////////////////////
 // defines
 
@@ -125,9 +130,13 @@ BOOL               bGLExt;
 BOOL               bGLFastMovie=FALSE;
 BOOL               bGLSoft;
 BOOL               bGLBlend;
+#if defined (_MACGL) // always supported on OSX > 10.4.3
+#define glBlendEquationEXTEx glBlendEquationEXT
+#define glColorTableEXTEx glColorTableEXT
+#else
 PFNGLBLENDEQU      glBlendEquationEXTEx=NULL;
 PFNGLCOLORTABLEEXT glColorTableEXTEx=NULL;
-
+#endif
 // gfx card buffer infos
 
 int            iDepthFunc=0;
@@ -215,7 +224,9 @@ void GetExtInfos(void)
       iClampType=GL_TO_EDGE_CLAMP;
  else iClampType=GL_CLAMP;
 
+#if !defined (_MACGL) // OSX > 10.4.3 defines this
  glColorTableEXTEx=(PFNGLCOLORTABLEEXT)NULL;           // init ogl palette func pointer
+#endif
 
 #ifndef __sun
  if(iGPUHeight!=1024 &&                                // no pal textures in ZN mode (height=1024)! 
@@ -226,11 +237,14 @@ void GetExtInfos(void)
 
 #ifdef _WINDOWS
    glColorTableEXTEx=(PFNGLCOLORTABLEEXT)wglGetProcAddress("glColorTableEXT");
+#elif defined (_MACGL)
+    // no prob, done already in OSX > 10.4.3
 #else
    glColorTableEXTEx=(PFNGLCOLORTABLEEXT)glXGetProcAddress("glColorTableEXT");
 #endif
 
    if(glColorTableEXTEx==NULL) iUsePalTextures=0;      // -> ha, cheater... no func, no support
+
   }
  else iUsePalTextures=0;
 #else
@@ -261,13 +275,17 @@ void SetExtGLFuncs(void)
    if(wglSwapIntervalEXT) wglSwapIntervalEXT(iForceVSync);
   }
 #endif
-
+#ifdef _MACGL
+    SetVSync(iForceVSync);
+#endif
  if(iUseExts && !(dwActFixes&1024) &&                  // extensions wanted? and not turned off by game fix?
     strstr((char *)glGetString(GL_EXTENSIONS),         // and blend_subtract available?
     "GL_EXT_blend_subtract"))
      {                                                 // -> get ogl blend function pointer
 #ifdef _WINDOWS
       glBlendEquationEXTEx=(PFNGLBLENDEQU)wglGetProcAddress("glBlendEquationEXT");
+#elif defined(_MACGL)
+    // no prob, OSX > 10.4.3 has this
 #else
       glBlendEquationEXTEx=(PFNGLBLENDEQU)glXGetProcAddress("glBlendEquationEXT");
 #endif
@@ -276,7 +294,9 @@ void SetExtGLFuncs(void)
   {
    if(glBlendEquationEXTEx)                            // -> change to additive blending (if subract was active)
     glBlendEquationEXTEx(FUNC_ADD_EXT);
+#if !defined(_MACGL) // BTW, why set to null? strange...
    glBlendEquationEXTEx=(PFNGLBLENDEQU)NULL;           // -> no more blend function pointer
+#endif
   }
 
  //----------------------------------------------------//
@@ -501,8 +521,24 @@ void CreateScanLines(void)
     {
      uiScanLine=glGenLists(1);
      glNewList(uiScanLine,GL_COMPILE);
-
-     for(y=0;y<iResY;y+=2)
+     #ifdef _MACGL
+     	// not mac specific, just commenting out to be friendly
+     	// use it if you like
+     	// this draws anti-aliased lines with user-chosen color
+         glPushAttrib(GL_ENABLE_BIT | GL_COLOR_BUFFER_BIT | GL_CURRENT_BIT);
+             glEnable(GL_BLEND | GL_LINE_SMOOTH);
+             glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+             glColor4f(iScanlineColor[0],iScanlineColor[1],iScanlineColor[2],iScanlineColor[3]);
+             glBegin(GL_LINES);
+                 for(y=0;y<iResY;y+=2)
+                  {
+                    glVertex2f(0,y);
+                    glVertex2f(iResX,y);
+                  }
+             glEnd();
+         glPopAttrib();
+	 #else
+	      for(y=0;y<iResY;y+=2)
       {
        glBegin(GL_QUADS);
          glVertex2f(0,y);
@@ -511,7 +547,9 @@ void CreateScanLines(void)
          glVertex2f(0,y+1);
        glEnd();
       }
-     glEndList();
+     
+    #endif
+    glEndList();
     }
   }
 }
@@ -536,7 +574,9 @@ int GLinitialize()
  // CheckWGLExtensions(dcGlobal);
  if(bWindowMode) ReleaseDC(hWWindow,dcGlobal);         // win mode: release dc again
 #endif
-
+#if defined (_MACGL)
+    BringContextForward();
+#endif
  glViewport(rRatioRect.left,                           // init viewport by ratio rect
             iResY-(rRatioRect.top+rRatioRect.bottom),
             rRatioRect.right, 

@@ -16,6 +16,12 @@
  *                                                                         *
  ***************************************************************************/
 
+#if defined (_MACGL)
+// if you use it, you must include it.
+#include <OpenGL/gl.h>
+#include <OpenGL/glext.h>
+#endif
+
 #define MIRROR_TEST 1
 #define SCISSOR_TEST 1
 
@@ -84,6 +90,7 @@
 #define TRUE  1
 #define BOOL unsigned short
 #define bool unsigned short
+
 #define LOWORD(l)           ((unsigned short)(l))
 #define HIWORD(l)           ((unsigned short)(((uint32_t)(l) >> 16) & 0xFFFF))
 #define max(a,b)            (((a) > (b)) ? (a) : (b))
@@ -222,8 +229,13 @@ extern BOOL           bGLFastMovie;
 extern BOOL           bGLSoft;
 extern BOOL           bGLBlend;
 
+#if !defined(_MACGL)
 extern PFNGLBLENDEQU      glBlendEquationEXTEx;
 extern PFNGLCOLORTABLEEXT glColorTableEXTEx;
+#else // no pointers for mac (OSX >= 10.4.3)
+#define glBlendEquationEXTEx glBlendEquationEXT
+#define glColorTableEXTEx glColorTableEXT
+#endif
 
 extern unsigned char  gl_ux[8];
 extern unsigned char  gl_vy[8];
@@ -372,6 +384,7 @@ extern BOOL           bNeedRGB24Update;
 extern BOOL           bChangeWinMode;
 extern GLuint         uiScanLine;
 extern int            iUseScanLines;
+extern float        iScanlineColor[]; /* 4 element array of RGBA float */
 extern int            lSelectedSlot;
 extern int            iScanBlend;
 extern BOOL           bInitCap;
