@@ -216,7 +216,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				"\toptions:\n"
 				"\t-nogui\t\tDon't open the GUI\n"
 				"\t-psxout\t\tEnable PSX output\n"
-				"\t-slowboot\t\tEnable BIOS logo\n"
+				"\t-slowboot\tEnable BIOS logo\n"
 				"\t-runcd\t\tRuns CD-ROM (requires -nogui)\n"
 				"\t-cdfile FILE\tRuns a CD image file (requires -nogui)\n"
 				"\t-help\t\tDisplay this message"),

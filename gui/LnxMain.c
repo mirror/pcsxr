@@ -319,7 +319,6 @@ int main(int argc, char *argv[]) {
 
 			SetIsoFile(isofilename);
 			runcd = RUN_CD;
-            UseGui = FALSE;
 		}
 		else if (!strcmp(argv[i], "-h") ||
 			 !strcmp(argv[i], "-help") ||
@@ -333,7 +332,7 @@ int main(int argc, char *argv[]) {
 							"\t-nogui\t\tDon't open the GTK GUI\n"
 							"\t-cfg FILE\tLoads desired configuration file (default: ~/.pcsx/pcsx.cfg)\n"
 							"\t-psxout\t\tEnable PSX output\n"
-							"\t-slowboot\t\tEnable BIOS Logo\n"
+							"\t-slowboot\tEnable BIOS Logo\n"
 							"\t-load STATENUM\tLoads savestate STATENUM (1-9)\n"
 							"\t-h -help\tDisplay this message\n"
 							"\tfile\t\tLoads file\n"));
@@ -410,11 +409,11 @@ int main(int argc, char *argv[]) {
 	chdir(plugin_default_dir);
 	g_free(plugin_default_dir);
 
-	if (UseGui) SetIsoFile(NULL);
+	if (UseGui && runcd != RUN_CD) SetIsoFile(NULL);
 
 	if (SysInit() == -1) return 1;
 
-	if (UseGui) {
+	if (UseGui && runcd != RUN_CD) {
 		StartGui();
 	} else {
 		// the following only occurs if the gui isn't started
