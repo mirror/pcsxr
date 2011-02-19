@@ -32,6 +32,34 @@ PluginWindowController *gameController;
 NSRect windowFrame;
 NSRect windowDefaultRect; // default window size (needed to go back into window mode)
 
+NSRect FitRectInRect(NSRect source, NSRect destination)
+{
+    NSRect newRect;
+    
+    if (NSContainsRect(destination,source))
+        return source;
+    
+    if (source.size.width > destination.size.width || source.size.height > destination.size.height){
+        // have to rescale
+        float ratio = source.size.width/source.size.height;
+        if (ratio > destination.size.width/destination.size.height){
+            source.size.width = destination.size.width;
+            source.size.height = source.size.width / ratio ;
+        }
+        else{
+            source.size.height = destination.size.height;
+            source.size.width = source.size.height * ratio;
+        }
+    }
+    // center horizontally and take top vertical
+    newRect.origin.x = destination.origin.x + (destination.size.width - source.size.width)/2;
+    newRect.origin.y = destination.origin.y + destination.size.height - source.size.height;
+    newRect.size = source.size;
+    
+    return newRect;
+}
+
+
 @implementation PluginWindowController
 
 + (id)openGameView
@@ -76,6 +104,68 @@ NSRect windowDefaultRect; // default window size (needed to go back into window 
 	}
 	
 	return gameController;
+}
+
+- (void)subscribeToEvents
+{
+ NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  [nc addObserver:self selector:@selector(applicationDidChangeScreenParameters:) 
+    name:NSApplicationDidChangeScreenParametersNotification object:NSApp];
+
+/* not used ATM:  
+  [nc addObserver:self selector:@selector(applicationWillResignActive:) name:NSApplicationWillResignActiveNotification object:NSApp];
+  [nc addObserver:self selector:@selector(applicationWillBecomeActive:) name:NSApplicationWillBecomeActiveNotification object:NSApp];
+  [nc addObserver:self selector:@selector(applicationWillTerminate:) name:NSApplicationWillTerminateNotification object:NSApp];
+*/
+
+
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+
+  self = [super initWithCoder:aDecoder];
+
+
+  [self subscribeToEvents];
+  return self;
+}
+
+- (id)initWithWindow:(NSWindow*)theWindow {
+  self = [super initWithWindow:theWindow];
+
+  [self subscribeToEvents];
+  return self;
+}
+
+- (NSRect) screenFrame
+{
+    NSWindow* wind = [self window];
+	CGDirectDisplayID display = (CGDirectDisplayID)[[[[wind screen] deviceDescription] objectForKey:@"NSScreenNumber"] longValue];
+
+    return NSMakeRect (0,0,CGDisplayPixelsWide(display), CGDisplayPixelsHigh(display));
+}
+
+- (void) applicationDidChangeScreenParameters:(NSNotification*)aNotice
+{
+    // TODO: There could be issues with more drastic things like 
+    // openGL pixel format, etc. when screen changes...
+
+    // if fullscreen, conform to new size.
+    if ([self fullscreen]){
+        if (NSEqualRects([[self window] frame], [self screenFrame])){
+            return;
+        }
+
+        [self adaptToFrame: [self screenFrame]];
+        
+    }
+    else {
+    // if windowed, recenter.
+    // TODO: scale window if screen size is too small
+        [[self window] center];
+
+    }
+    
 }
 
 - (PluginGLView *)getOpenGLView
@@ -128,8 +218,11 @@ NSRect windowDefaultRect; // default window size (needed to go back into window 
 
 - (void)dealloc
 {
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 
-	windowFrame = [[self window] frame];
+  [nc removeObserver:self];
+  windowFrame = [[self window] frame]; // huh?
+
 	
 	[super dealloc];
 }
@@ -189,9 +282,9 @@ NSRect windowDefaultRect; // default window size (needed to go back into window 
     
     if (flag){
         [window setLevel: NSScreenSaverWindowLevel];
-        newPlace = NSMakeRect(0,0,CGDisplayPixelsWide(display), CGDisplayPixelsHigh(display));
+        newPlace = [self screenFrame] ; 
 		CGDisplayHideCursor(display);
-		CGAssociateMouseAndMouseCursorPosition(NO);
+		CGAssociateMouseAndMouseCursorPosition(NO); // this could be bad since it disables mouse somewhat
     }
     else{
         [window setLevel: NSNormalWindowLevel];
@@ -199,35 +292,14 @@ NSRect windowDefaultRect; // default window size (needed to go back into window 
 		CGDisplayShowCursor(display);
 		CGAssociateMouseAndMouseCursorPosition(YES);
     }
-    
-    
-    int proportionalWidth, proportionalHeight;
-    
-    [window setFrame:newPlace display:true];
-    
-    // assume square pixel ratio on the monitor
-    if ((newPlace.size.width*3)/4 <= newPlace.size.height) { // is window skinnier than it needs to be?
-        proportionalHeight = (newPlace.size.width*3)/4; // then shrink the content height (letterbox)
-        proportionalWidth = newPlace.size.width;        // and conform to width
-    } else {
-        proportionalWidth = (newPlace.size.height*4)/3;
-        proportionalHeight = newPlace.size.height;
-    }
-    NSRect fitToWindow = NSMakeRect(
-        (newPlace.size.width - proportionalWidth)/2, 
-        (newPlace.size.height - proportionalHeight)/2, 
-        proportionalWidth, proportionalHeight);
-        
-    [glView setFrame:fitToWindow];
-    [glView reshape];
-    iResX = proportionalWidth;
-    iResY = proportionalHeight;
-        
+
     if (flag) inFullscreen = TRUE;
     else inFullscreen = FALSE;
-
-    [self cureAllIlls]; // do some fixin'
-    return;
+    
+    if (!inFullscreen)
+        newPlace = FitRectInRect(newPlace, NSMakeRect(0,0,CGDisplayPixelsWide(display),CGDisplayPixelsHigh(display)-24)); // with menu bar room
+    
+    [self adaptToFrame: newPlace];
 
 }
 
@@ -270,27 +342,82 @@ NSRect windowDefaultRect; // default window size (needed to go back into window 
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"emuWindowWantResume" object:self];
 }
 
-//- (void)windowDidBecomeMain:(NSNotification *)aNotification
-/*- (void)windowDidBecomeKey:(NSNotification *)aNotification
-{
-	if (iWindowMode==0) {
-		[self setFullscreen:YES];
-	}
-}*/
-
 - (BOOL)windowShouldClose:(id)sender
 {
-/*	if (fullWindow) {
-		return NO;
-	}
-*/
-//    NSLog(@"windowShouldClose: We're closing the window");
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"emuWindowDidClose" object:self];
 	[gameController autorelease];
 	gameController = nil;
 	gameWindow = nil;
-	
+    CGReleaseAllDisplays();
 	return YES;
+}
+
+// these two funcs should be handled by the window class but
+// since we do fullscreen tweaking (hiding mouse, etc), 
+// the controller must do it ATM...
+- (void)windowDidBecomeKey:(NSNotification*)aNotice
+{
+    // if in fullscreen, we must restore level and mouse hiding.
+    // it might be cooler if window goes to "window" size or hides
+    // instead of taking up full screen in background.
+    
+	NSWindow *window = [self window];
+  	NSScreen *screen = [window screen];
+
+    CGDirectDisplayID display = (CGDirectDisplayID)[[[screen deviceDescription] objectForKey:@"NSScreenNumber"] longValue];
+
+    if ([self fullscreen]){
+        [window setLevel: NSScreenSaverWindowLevel];
+		CGDisplayHideCursor(display);
+    }
+}
+
+- (void)windowDidResignKey:(NSNotification*)aNotice
+{
+    // if in fullscreen, we must abdicate mouse hiding and level.
+	NSWindow *window = [self window];
+	NSScreen *screen = [window screen];
+    CGDirectDisplayID display = (CGDirectDisplayID)[[[screen deviceDescription] objectForKey:@"NSScreenNumber"] longValue];
+
+    if ([self fullscreen]){
+        [window setLevel: NSNormalWindowLevel];
+		CGDisplayShowCursor(display);
+    }
+}
+
+- (void) adaptToFrame:(NSRect)aFrame
+{
+    // do magic so everything goes as planned
+    // when the window area changes
+
+    int proportionalWidth, proportionalHeight;
+    
+    NSWindow* window = [self window];
+    
+    [window setFrame:aFrame display:NO];
+    
+    // assume square pixel ratio on the monitor
+    if ((aFrame.size.width*3)/4 <= aFrame.size.height) { // is window skinnier than it needs to be?
+        proportionalHeight = (aFrame.size.width*3)/4; // then shrink the content height (letterbox)
+        proportionalWidth = aFrame.size.width;        // and conform to width
+    } else {
+        proportionalWidth = (aFrame.size.height*4)/3;
+        proportionalHeight = aFrame.size.height;
+    }
+    
+    NSRect fitToWindow = NSMakeRect(
+        roundf((aFrame.size.width - proportionalWidth)/2.0), 
+        roundf((aFrame.size.height - proportionalHeight)/2.0), 
+        roundf(proportionalWidth), roundf(proportionalHeight));
+        
+    [glView setFrame:fitToWindow];
+    [glView reshape];
+    iResX = roundf(proportionalWidth);
+    iResY = roundf(proportionalHeight);
+        
+    [self cureAllIlls]; // do some fixin'
+    return;
+    
 }
 
 @end

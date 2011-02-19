@@ -131,6 +131,13 @@
 
 - (void)mouseDragged:(NSEvent *)theEvent {
 
+    if ([self level] == NSScreenSaverWindowLevel)
+    // we don't drag when in fullscreen
+    // note that it is only because a quirk in the ordering of events
+    // and the time that NSScreenSaverWindowLevel is set
+    // that we'll never be dragged while in the background
+        return; 
+        
     NSRect screenVisibleFrame = [[NSScreen mainScreen] visibleFrame];
     NSRect windowFrame = [self frame];
     NSPoint newOrigin = windowFrame.origin;

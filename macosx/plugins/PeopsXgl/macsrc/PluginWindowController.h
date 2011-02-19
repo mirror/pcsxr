@@ -49,4 +49,14 @@ extern PluginWindowController *gameController;
 - (void)setFullscreen:(BOOL)flag;
 - (void)performFullscreenSwap;
 - (void)cureAllIlls;
+- (void) adaptToFrame:(NSRect)aFrame;
+- (NSRect) screenFrame;
+- (void)subscribeToEvents;
+
+
+- (id)initWithCoder:(NSCoder *)aDecoder ;
+- (id)initWithWindow:(NSWindow*)theWindow;
+
+- (void)windowDidBecomeKey:(NSNotification*)aNotice;
+- (void)windowDidResignKey:(NSNotification*)aNotice;
 @end
