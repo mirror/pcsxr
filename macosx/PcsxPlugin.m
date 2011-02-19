@@ -274,7 +274,7 @@
 	return path;
 }
 
-- (unsigned int)hash
+- (unsigned long)hash
 {
     return [path hash];
 }
