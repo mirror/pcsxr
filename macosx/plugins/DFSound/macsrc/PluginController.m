@@ -63,7 +63,7 @@ void ReadConfig(void)
 	NSDictionary *keyValues;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-			[[NSMutableDictionary alloc] initWithObjectsAndKeys:
+			[NSMutableDictionary dictionaryWithObjectsAndKeys:
 					[NSNumber numberWithBool:YES], @"High Compatibility Mode",
 					[NSNumber numberWithBool:YES], @"SPU IRQ Wait",
 					[NSNumber numberWithBool:NO], @"XA Pitch",

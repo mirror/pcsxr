@@ -47,8 +47,10 @@ int main(int argc, const char *argv[]) {
     return NSApplicationMain(argc, argv);
 }
 
+#ifdef USE_POWER_ASSERTION
 #import <IOKit/pwr_mgt/IOPMLib.h>
 static IOPMAssertionID powerAssertion= 0;
+#endif
 
 int SysInit() {
 	if (!sysInited) {
@@ -72,11 +74,12 @@ int SysInit() {
 	}
 
 	LoadMcds(Config.Mcd1, Config.Mcd2);
+#ifdef USE_POWER_ASSERTION
 	IOReturn success= IOPMAssertionCreate(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, &powerAssertion);
 	if (success != kIOReturnSuccess) {
 		NSLog(@"Unable to stop sleep, error code %d", success);
 	}
-
+#endif
 	return 0;
 }
 
@@ -145,20 +148,24 @@ void SysUpdate() {
 
 // Returns to the Gui
 void SysRunGui() {
+#ifdef USE_POWER_ASSERTION
 	if (powerAssertion != 0) {
 		IOPMAssertionRelease(powerAssertion);
 		powerAssertion = 0;
 	}
+#endif
 }
 
 // Close mem and plugins
 void SysClose() {
     EmuShutdown();
     ReleasePlugins();
-	
+
+#ifdef USE_POWER_ASSERTION
 	if (powerAssertion != 0) {
 		IOPMAssertionRelease(powerAssertion);
 	}
+#endif
 
     if (emuLog != NULL) fclose(emuLog);
 

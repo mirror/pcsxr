@@ -63,7 +63,7 @@ void ReadConfig(void)
 	NSDictionary *keyValues;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-			[[NSMutableDictionary alloc] initWithObjectsAndKeys:
+			[NSMutableDictionary dictionaryWithObjectsAndKeys:
 					[NSNumber numberWithBool:NO], @"FPS Counter",
 					[NSNumber numberWithBool:NO], @"Auto Full Screen",
 					[NSNumber numberWithBool:NO], @"Frame Skipping",

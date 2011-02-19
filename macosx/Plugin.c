@@ -80,7 +80,10 @@ int _OpenPlugins() {
 
 	pathUrl = CFBundleCopyResourceURL(CFBundleGetMainBundle(), CFSTR("gpuPeopsSoftX.cfg"), NULL, NULL);
 	if (pathUrl)
+	{
 		CFURLGetFileSystemRepresentation(pathUrl, true, path, 1024);
+		CFRelease(pathUrl);
+	}
 
 	ret = CDR_open();
 	if (ret < 0) { SysMessage(_("Error Opening CDR Plugin")); return -1; }

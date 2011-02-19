@@ -9,30 +9,6 @@
 /* Begin PBXBuildFile section */
 		2B679862069193F300E2BD4F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B679860069193F300E2BD4F /* Cocoa.framework */; };
 		2B679863069193F300E2BD4F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B679861069193F300E2BD4F /* IOKit.framework */; };
-		71054DC51204A20900AC2CCB /* begin_code.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DA11204A20900AC2CCB /* begin_code.h */; };
-		71054DC61204A20900AC2CCB /* close_code.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DA21204A20900AC2CCB /* close_code.h */; };
-		71054DC71204A20900AC2CCB /* SDL.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DA31204A20900AC2CCB /* SDL.h */; };
-		71054DC81204A20900AC2CCB /* SDL_assert.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DA41204A20900AC2CCB /* SDL_assert.h */; };
-		71054DC91204A20900AC2CCB /* SDL_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DA51204A20900AC2CCB /* SDL_config.h */; };
-		71054DCA1204A20900AC2CCB /* SDL_endian.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DA61204A20900AC2CCB /* SDL_endian.h */; };
-		71054DCB1204A20900AC2CCB /* SDL_error.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DA71204A20900AC2CCB /* SDL_error.h */; };
-		71054DCC1204A20900AC2CCB /* SDL_haptic.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DA81204A20900AC2CCB /* SDL_haptic.h */; };
-		71054DCD1204A20900AC2CCB /* SDL_joystick.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DA91204A20900AC2CCB /* SDL_joystick.h */; };
-		71054DCE1204A20900AC2CCB /* SDL_main.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DAA1204A20900AC2CCB /* SDL_main.h */; };
-		71054DD01204A20900AC2CCB /* SDL_platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DAC1204A20900AC2CCB /* SDL_platform.h */; };
-		71054DD31204A20900AC2CCB /* SDL_stdinc.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DAF1204A20900AC2CCB /* SDL_stdinc.h */; };
-		71054DD61204A20900AC2CCB /* SDL_syshaptic.c in Sources */ = {isa = PBXBuildFile; fileRef = 71054DB51204A20900AC2CCB /* SDL_syshaptic.c */; };
-		71054DD71204A20900AC2CCB /* SDL_haptic.c in Sources */ = {isa = PBXBuildFile; fileRef = 71054DB61204A20900AC2CCB /* SDL_haptic.c */; };
-		71054DD81204A20900AC2CCB /* SDL_haptic_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DB71204A20900AC2CCB /* SDL_haptic_c.h */; };
-		71054DD91204A20900AC2CCB /* SDL_syshaptic.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DB81204A20900AC2CCB /* SDL_syshaptic.h */; };
-		71054DDA1204A20900AC2CCB /* SDL_sysjoystick.c in Sources */ = {isa = PBXBuildFile; fileRef = 71054DBB1204A20900AC2CCB /* SDL_sysjoystick.c */; };
-		71054DDB1204A20900AC2CCB /* SDL_sysjoystick_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DBC1204A20900AC2CCB /* SDL_sysjoystick_c.h */; };
-		71054DDC1204A20900AC2CCB /* SDL_joystick.c in Sources */ = {isa = PBXBuildFile; fileRef = 71054DBD1204A20900AC2CCB /* SDL_joystick.c */; };
-		71054DDD1204A20900AC2CCB /* SDL_joystick_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DBE1204A20900AC2CCB /* SDL_joystick_c.h */; };
-		71054DDE1204A20900AC2CCB /* SDL_sysjoystick.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DBF1204A20900AC2CCB /* SDL_sysjoystick.h */; };
-		71054DDF1204A20900AC2CCB /* SDL.c in Sources */ = {isa = PBXBuildFile; fileRef = 71054DC01204A20900AC2CCB /* SDL.c */; };
-		71054DE21204A20900AC2CCB /* SDL_error.c in Sources */ = {isa = PBXBuildFile; fileRef = 71054DC31204A20900AC2CCB /* SDL_error.c */; };
-		71054DE31204A20900AC2CCB /* SDL_error_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 71054DC41204A20900AC2CCB /* SDL_error_c.h */; };
 		71054E211204A49F00AC2CCB /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71054E201204A49F00AC2CCB /* ForceFeedback.framework */; };
 		7136F1DA1200E163001973D9 /* ControllerList.h in Headers */ = {isa = PBXBuildFile; fileRef = 71E861A411FF75AC001C1826 /* ControllerList.h */; };
 		7136F1DB1200E163001973D9 /* ControllerList.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E861A511FF75AC001C1826 /* ControllerList.m */; };
@@ -49,6 +25,42 @@
 		714FA8FA11FC863500517F47 /* cfg.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA8F811FC863500517F47 /* cfg.c */; };
 		714FA8FB11FC863500517F47 /* xkb.c in Sources */ = {isa = PBXBuildFile; fileRef = 714FA8F911FC863500517F47 /* xkb.c */; };
 		7192EAAE1200D54500038B92 /* cfg.h in Headers */ = {isa = PBXBuildFile; fileRef = 7192EAAB1200D54500038B92 /* cfg.h */; };
+		71C7B25B130F3904004BF975 /* SDL_syscond.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B252130F3904004BF975 /* SDL_syscond.c */; };
+		71C7B25C130F3904004BF975 /* SDL_sysmutex.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B253130F3904004BF975 /* SDL_sysmutex.c */; };
+		71C7B25D130F3904004BF975 /* SDL_sysmutex_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 71C7B254130F3904004BF975 /* SDL_sysmutex_c.h */; };
+		71C7B25E130F3904004BF975 /* SDL_syssem.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B255130F3904004BF975 /* SDL_syssem.c */; };
+		71C7B25F130F3904004BF975 /* SDL_systhread.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B256130F3904004BF975 /* SDL_systhread.c */; };
+		71C7B260130F3904004BF975 /* SDL_systhread_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 71C7B257130F3904004BF975 /* SDL_systhread_c.h */; };
+		71C7B261130F3904004BF975 /* SDL_systhread.h in Headers */ = {isa = PBXBuildFile; fileRef = 71C7B258130F3904004BF975 /* SDL_systhread.h */; };
+		71C7B262130F3904004BF975 /* SDL_thread.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B259130F3904004BF975 /* SDL_thread.c */; };
+		71C7B263130F3904004BF975 /* SDL_thread_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 71C7B25A130F3904004BF975 /* SDL_thread_c.h */; };
+		71D88838130F032700F150FF /* begin_code.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D887F9130F032700F150FF /* begin_code.h */; };
+		71D88839130F032700F150FF /* close_code.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D887FA130F032700F150FF /* close_code.h */; };
+		71D8883A130F032700F150FF /* SDL.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D887FB130F032700F150FF /* SDL.h */; };
+		71D8883B130F032700F150FF /* SDL_audio.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D887FC130F032700F150FF /* SDL_audio.h */; };
+		71D8883C130F032700F150FF /* SDL_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D887FD130F032700F150FF /* SDL_config.h */; };
+		71D8883D130F032700F150FF /* SDL_endian.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D887FE130F032700F150FF /* SDL_endian.h */; };
+		71D8883E130F032700F150FF /* SDL_error.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D887FF130F032700F150FF /* SDL_error.h */; };
+		71D8883F130F032700F150FF /* SDL_haptic.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D88800130F032700F150FF /* SDL_haptic.h */; };
+		71D88840130F032700F150FF /* SDL_joystick.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D88801130F032700F150FF /* SDL_joystick.h */; };
+		71D88841130F032700F150FF /* SDL_main.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D88802130F032700F150FF /* SDL_main.h */; };
+		71D88842130F032700F150FF /* SDL_mutex.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D88803130F032700F150FF /* SDL_mutex.h */; };
+		71D88843130F032700F150FF /* SDL_platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D88804130F032700F150FF /* SDL_platform.h */; };
+		71D88844130F032700F150FF /* SDL_rwops.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D88805130F032700F150FF /* SDL_rwops.h */; };
+		71D88845130F032700F150FF /* SDL_stdinc.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D88806130F032700F150FF /* SDL_stdinc.h */; };
+		71D88846130F032700F150FF /* SDL_thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D88807130F032700F150FF /* SDL_thread.h */; };
+		71D88857130F032700F150FF /* SDL_syshaptic.c in Sources */ = {isa = PBXBuildFile; fileRef = 71D8881F130F032700F150FF /* SDL_syshaptic.c */; };
+		71D88858130F032700F150FF /* SDL_haptic.c in Sources */ = {isa = PBXBuildFile; fileRef = 71D88820130F032700F150FF /* SDL_haptic.c */; };
+		71D88859130F032700F150FF /* SDL_haptic_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D88821130F032700F150FF /* SDL_haptic_c.h */; };
+		71D8885A130F032700F150FF /* SDL_syshaptic.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D88822130F032700F150FF /* SDL_syshaptic.h */; };
+		71D8885B130F032700F150FF /* SDL_sysjoystick.c in Sources */ = {isa = PBXBuildFile; fileRef = 71D88825130F032700F150FF /* SDL_sysjoystick.c */; };
+		71D8885C130F032700F150FF /* SDL_sysjoystick_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D88826130F032700F150FF /* SDL_sysjoystick_c.h */; };
+		71D8885D130F032700F150FF /* SDL_joystick.c in Sources */ = {isa = PBXBuildFile; fileRef = 71D88827130F032700F150FF /* SDL_joystick.c */; };
+		71D8885E130F032700F150FF /* SDL_joystick_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D88828130F032700F150FF /* SDL_joystick_c.h */; };
+		71D8885F130F032700F150FF /* SDL_sysjoystick.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D88829130F032700F150FF /* SDL_sysjoystick.h */; };
+		71D88860130F032700F150FF /* SDL.c in Sources */ = {isa = PBXBuildFile; fileRef = 71D8882A130F032700F150FF /* SDL.c */; };
+		71D88861130F032700F150FF /* SDL_error.c in Sources */ = {isa = PBXBuildFile; fileRef = 71D8882B130F032700F150FF /* SDL_error.c */; };
+		71D88862130F032700F150FF /* SDL_error_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D8882C130F032700F150FF /* SDL_error_c.h */; };
 		71E861B611FF75AC001C1826 /* PadView.h in Headers */ = {isa = PBXBuildFile; fileRef = 71E861AC11FF75AC001C1826 /* PadView.h */; };
 		71E861B711FF75AC001C1826 /* PadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E861AD11FF75AC001C1826 /* PadView.m */; };
 		71E861BC11FF75BA001C1826 /* NetPcsxHIDInputPluginMain.nib in Resources */ = {isa = PBXBuildFile; fileRef = 71E861BA11FF75BA001C1826 /* NetPcsxHIDInputPluginMain.nib */; };
@@ -56,35 +68,28 @@
 		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildStyle section */
+		71D887E8130F031800F150FF /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Development;
+		};
+		71D887E9130F031800F150FF /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
+
 /* Begin PBXFileReference section */
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		2B679860069193F300E2BD4F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		2B679861069193F300E2BD4F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
-		71054DA11204A20900AC2CCB /* begin_code.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = begin_code.h; sourceTree = "<group>"; };
-		71054DA21204A20900AC2CCB /* close_code.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = close_code.h; sourceTree = "<group>"; };
-		71054DA31204A20900AC2CCB /* SDL.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL.h; sourceTree = "<group>"; };
-		71054DA41204A20900AC2CCB /* SDL_assert.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_assert.h; sourceTree = "<group>"; };
-		71054DA51204A20900AC2CCB /* SDL_config.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_config.h; sourceTree = "<group>"; };
-		71054DA61204A20900AC2CCB /* SDL_endian.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_endian.h; sourceTree = "<group>"; };
-		71054DA71204A20900AC2CCB /* SDL_error.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_error.h; sourceTree = "<group>"; };
-		71054DA81204A20900AC2CCB /* SDL_haptic.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_haptic.h; sourceTree = "<group>"; };
-		71054DA91204A20900AC2CCB /* SDL_joystick.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_joystick.h; sourceTree = "<group>"; };
-		71054DAA1204A20900AC2CCB /* SDL_main.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_main.h; sourceTree = "<group>"; };
-		71054DAC1204A20900AC2CCB /* SDL_platform.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_platform.h; sourceTree = "<group>"; };
-		71054DAF1204A20900AC2CCB /* SDL_stdinc.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_stdinc.h; sourceTree = "<group>"; };
-		71054DB51204A20900AC2CCB /* SDL_syshaptic.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = SDL_syshaptic.c; sourceTree = "<group>"; };
-		71054DB61204A20900AC2CCB /* SDL_haptic.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = SDL_haptic.c; sourceTree = "<group>"; };
-		71054DB71204A20900AC2CCB /* SDL_haptic_c.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_haptic_c.h; sourceTree = "<group>"; };
-		71054DB81204A20900AC2CCB /* SDL_syshaptic.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_syshaptic.h; sourceTree = "<group>"; };
-		71054DBB1204A20900AC2CCB /* SDL_sysjoystick.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = SDL_sysjoystick.c; sourceTree = "<group>"; };
-		71054DBC1204A20900AC2CCB /* SDL_sysjoystick_c.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_sysjoystick_c.h; sourceTree = "<group>"; };
-		71054DBD1204A20900AC2CCB /* SDL_joystick.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = SDL_joystick.c; sourceTree = "<group>"; };
-		71054DBE1204A20900AC2CCB /* SDL_joystick_c.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_joystick_c.h; sourceTree = "<group>"; };
-		71054DBF1204A20900AC2CCB /* SDL_sysjoystick.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_sysjoystick.h; sourceTree = "<group>"; };
-		71054DC01204A20900AC2CCB /* SDL.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = SDL.c; sourceTree = "<group>"; };
-		71054DC31204A20900AC2CCB /* SDL_error.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = SDL_error.c; sourceTree = "<group>"; };
-		71054DC41204A20900AC2CCB /* SDL_error_c.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = SDL_error_c.h; sourceTree = "<group>"; };
 		71054E201204A49F00AC2CCB /* ForceFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForceFeedback.framework; path = /System/Library/Frameworks/ForceFeedback.framework; sourceTree = "<absolute>"; };
 		7136F51912011BB4001973D9 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		714FA82A11FC822A00517F47 /* analog.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = analog.c; path = ../../../plugins/dfinput/analog.c; sourceTree = SOURCE_ROOT; };
@@ -95,6 +100,42 @@
 		714FA8F811FC863500517F47 /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = cfg.c; path = macsrc/cfg.c; sourceTree = "<group>"; };
 		714FA8F911FC863500517F47 /* xkb.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = xkb.c; path = macsrc/xkb.c; sourceTree = "<group>"; };
 		7192EAAB1200D54500038B92 /* cfg.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = cfg.h; path = macsrc/cfg.h; sourceTree = "<group>"; };
+		71C7B252130F3904004BF975 /* SDL_syscond.c */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.c; name = SDL_syscond.c; path = ../Common/SDL/src/thread/pthread/SDL_syscond.c; sourceTree = SOURCE_ROOT; };
+		71C7B253130F3904004BF975 /* SDL_sysmutex.c */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.c; name = SDL_sysmutex.c; path = ../Common/SDL/src/thread/pthread/SDL_sysmutex.c; sourceTree = SOURCE_ROOT; };
+		71C7B254130F3904004BF975 /* SDL_sysmutex_c.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_sysmutex_c.h; path = ../Common/SDL/src/thread/pthread/SDL_sysmutex_c.h; sourceTree = SOURCE_ROOT; };
+		71C7B255130F3904004BF975 /* SDL_syssem.c */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.c; name = SDL_syssem.c; path = ../Common/SDL/src/thread/pthread/SDL_syssem.c; sourceTree = SOURCE_ROOT; };
+		71C7B256130F3904004BF975 /* SDL_systhread.c */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.c; name = SDL_systhread.c; path = ../Common/SDL/src/thread/pthread/SDL_systhread.c; sourceTree = SOURCE_ROOT; };
+		71C7B257130F3904004BF975 /* SDL_systhread_c.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_systhread_c.h; path = ../Common/SDL/src/thread/pthread/SDL_systhread_c.h; sourceTree = SOURCE_ROOT; };
+		71C7B258130F3904004BF975 /* SDL_systhread.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_systhread.h; path = ../Common/SDL/src/thread/SDL_systhread.h; sourceTree = SOURCE_ROOT; };
+		71C7B259130F3904004BF975 /* SDL_thread.c */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.c; name = SDL_thread.c; path = ../Common/SDL/src/thread/SDL_thread.c; sourceTree = SOURCE_ROOT; };
+		71C7B25A130F3904004BF975 /* SDL_thread_c.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_thread_c.h; path = ../Common/SDL/src/thread/SDL_thread_c.h; sourceTree = SOURCE_ROOT; };
+		71D887F9130F032700F150FF /* begin_code.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = begin_code.h; path = ../Common/SDL/include/begin_code.h; sourceTree = SOURCE_ROOT; };
+		71D887FA130F032700F150FF /* close_code.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = close_code.h; path = ../Common/SDL/include/close_code.h; sourceTree = SOURCE_ROOT; };
+		71D887FB130F032700F150FF /* SDL.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL.h; path = ../Common/SDL/include/SDL.h; sourceTree = SOURCE_ROOT; };
+		71D887FC130F032700F150FF /* SDL_audio.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_audio.h; path = ../Common/SDL/include/SDL_audio.h; sourceTree = SOURCE_ROOT; };
+		71D887FD130F032700F150FF /* SDL_config.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_config.h; path = ../Common/SDL/include/SDL_config.h; sourceTree = SOURCE_ROOT; };
+		71D887FE130F032700F150FF /* SDL_endian.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_endian.h; path = ../Common/SDL/include/SDL_endian.h; sourceTree = SOURCE_ROOT; };
+		71D887FF130F032700F150FF /* SDL_error.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_error.h; path = ../Common/SDL/include/SDL_error.h; sourceTree = SOURCE_ROOT; };
+		71D88800130F032700F150FF /* SDL_haptic.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_haptic.h; path = ../Common/SDL/include/SDL_haptic.h; sourceTree = SOURCE_ROOT; };
+		71D88801130F032700F150FF /* SDL_joystick.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_joystick.h; path = ../Common/SDL/include/SDL_joystick.h; sourceTree = SOURCE_ROOT; };
+		71D88802130F032700F150FF /* SDL_main.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_main.h; path = ../Common/SDL/include/SDL_main.h; sourceTree = SOURCE_ROOT; };
+		71D88803130F032700F150FF /* SDL_mutex.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_mutex.h; path = ../Common/SDL/include/SDL_mutex.h; sourceTree = SOURCE_ROOT; };
+		71D88804130F032700F150FF /* SDL_platform.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_platform.h; path = ../Common/SDL/include/SDL_platform.h; sourceTree = SOURCE_ROOT; };
+		71D88805130F032700F150FF /* SDL_rwops.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_rwops.h; path = ../Common/SDL/include/SDL_rwops.h; sourceTree = SOURCE_ROOT; };
+		71D88806130F032700F150FF /* SDL_stdinc.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_stdinc.h; path = ../Common/SDL/include/SDL_stdinc.h; sourceTree = SOURCE_ROOT; };
+		71D88807130F032700F150FF /* SDL_thread.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_thread.h; path = ../Common/SDL/include/SDL_thread.h; sourceTree = SOURCE_ROOT; };
+		71D8881F130F032700F150FF /* SDL_syshaptic.c */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.c; name = SDL_syshaptic.c; path = ../Common/SDL/src/haptic/darwin/SDL_syshaptic.c; sourceTree = SOURCE_ROOT; };
+		71D88820130F032700F150FF /* SDL_haptic.c */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.c; name = SDL_haptic.c; path = ../Common/SDL/src/haptic/SDL_haptic.c; sourceTree = SOURCE_ROOT; };
+		71D88821130F032700F150FF /* SDL_haptic_c.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_haptic_c.h; path = ../Common/SDL/src/haptic/SDL_haptic_c.h; sourceTree = SOURCE_ROOT; };
+		71D88822130F032700F150FF /* SDL_syshaptic.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_syshaptic.h; path = ../Common/SDL/src/haptic/SDL_syshaptic.h; sourceTree = SOURCE_ROOT; };
+		71D88825130F032700F150FF /* SDL_sysjoystick.c */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.c; name = SDL_sysjoystick.c; path = ../Common/SDL/src/joystick/darwin/SDL_sysjoystick.c; sourceTree = SOURCE_ROOT; };
+		71D88826130F032700F150FF /* SDL_sysjoystick_c.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_sysjoystick_c.h; path = ../Common/SDL/src/joystick/darwin/SDL_sysjoystick_c.h; sourceTree = SOURCE_ROOT; };
+		71D88827130F032700F150FF /* SDL_joystick.c */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.c; name = SDL_joystick.c; path = ../Common/SDL/src/joystick/SDL_joystick.c; sourceTree = SOURCE_ROOT; };
+		71D88828130F032700F150FF /* SDL_joystick_c.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_joystick_c.h; path = ../Common/SDL/src/joystick/SDL_joystick_c.h; sourceTree = SOURCE_ROOT; };
+		71D88829130F032700F150FF /* SDL_sysjoystick.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_sysjoystick.h; path = ../Common/SDL/src/joystick/SDL_sysjoystick.h; sourceTree = SOURCE_ROOT; };
+		71D8882A130F032700F150FF /* SDL.c */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.c; name = SDL.c; path = ../Common/SDL/src/SDL.c; sourceTree = SOURCE_ROOT; };
+		71D8882B130F032700F150FF /* SDL_error.c */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.c; name = SDL_error.c; path = ../Common/SDL/src/SDL_error.c; sourceTree = SOURCE_ROOT; };
+		71D8882C130F032700F150FF /* SDL_error_c.h */ = {isa = PBXFileReference; fileEncoding = "-2147483623"; lastKnownFileType = sourcecode.c.h; name = SDL_error_c.h; path = ../Common/SDL/src/SDL_error_c.h; sourceTree = SOURCE_ROOT; };
 		71E861A411FF75AC001C1826 /* ControllerList.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = ControllerList.h; path = macsrc/ControllerList.h; sourceTree = "<group>"; };
 		71E861A511FF75AC001C1826 /* ControllerList.m */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.objc; name = ControllerList.m; path = macsrc/ControllerList.m; sourceTree = "<group>"; };
 		71E861A811FF75AC001C1826 /* MappingCell.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = MappingCell.h; path = macsrc/MappingCell.h; sourceTree = "<group>"; };
@@ -129,7 +170,7 @@
 			children = (
 				714FA82911FC820D00517F47 /* macsrc */,
 				714FA82811FC820900517F47 /* src */,
-				71054D9F1204A20900AC2CCB /* SDL */,
+				71D887F7130F032700F150FF /* SDL */,
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB6FE9D52B211CA2CBB /* Products */,
@@ -168,85 +209,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		71054D9F1204A20900AC2CCB /* SDL */ = {
-			isa = PBXGroup;
-			children = (
-				71054DA01204A20900AC2CCB /* include */,
-				71054DB21204A20900AC2CCB /* src */,
-			);
-			path = SDL;
-			sourceTree = "<group>";
-		};
-		71054DA01204A20900AC2CCB /* include */ = {
-			isa = PBXGroup;
-			children = (
-				71054DA11204A20900AC2CCB /* begin_code.h */,
-				71054DA21204A20900AC2CCB /* close_code.h */,
-				71054DA31204A20900AC2CCB /* SDL.h */,
-				71054DA41204A20900AC2CCB /* SDL_assert.h */,
-				71054DA51204A20900AC2CCB /* SDL_config.h */,
-				71054DA61204A20900AC2CCB /* SDL_endian.h */,
-				71054DA71204A20900AC2CCB /* SDL_error.h */,
-				71054DA81204A20900AC2CCB /* SDL_haptic.h */,
-				71054DA91204A20900AC2CCB /* SDL_joystick.h */,
-				71054DAA1204A20900AC2CCB /* SDL_main.h */,
-				71054DAC1204A20900AC2CCB /* SDL_platform.h */,
-				71054DAF1204A20900AC2CCB /* SDL_stdinc.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		71054DB21204A20900AC2CCB /* src */ = {
-			isa = PBXGroup;
-			children = (
-				71054DB31204A20900AC2CCB /* haptic */,
-				71054DB91204A20900AC2CCB /* joystick */,
-				71054DC01204A20900AC2CCB /* SDL.c */,
-				71054DC31204A20900AC2CCB /* SDL_error.c */,
-				71054DC41204A20900AC2CCB /* SDL_error_c.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		71054DB31204A20900AC2CCB /* haptic */ = {
-			isa = PBXGroup;
-			children = (
-				71054DB41204A20900AC2CCB /* darwin */,
-				71054DB61204A20900AC2CCB /* SDL_haptic.c */,
-				71054DB71204A20900AC2CCB /* SDL_haptic_c.h */,
-				71054DB81204A20900AC2CCB /* SDL_syshaptic.h */,
-			);
-			path = haptic;
-			sourceTree = "<group>";
-		};
-		71054DB41204A20900AC2CCB /* darwin */ = {
-			isa = PBXGroup;
-			children = (
-				71054DB51204A20900AC2CCB /* SDL_syshaptic.c */,
-			);
-			path = darwin;
-			sourceTree = "<group>";
-		};
-		71054DB91204A20900AC2CCB /* joystick */ = {
-			isa = PBXGroup;
-			children = (
-				71054DBA1204A20900AC2CCB /* darwin */,
-				71054DBD1204A20900AC2CCB /* SDL_joystick.c */,
-				71054DBE1204A20900AC2CCB /* SDL_joystick_c.h */,
-				71054DBF1204A20900AC2CCB /* SDL_sysjoystick.h */,
-			);
-			path = joystick;
-			sourceTree = "<group>";
-		};
-		71054DBA1204A20900AC2CCB /* darwin */ = {
-			isa = PBXGroup;
-			children = (
-				71054DBB1204A20900AC2CCB /* SDL_sysjoystick.c */,
-				71054DBC1204A20900AC2CCB /* SDL_sysjoystick_c.h */,
-			);
-			path = darwin;
-			sourceTree = "<group>";
-		};
 		714FA82811FC820900517F47 /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,6 +238,122 @@
 			name = macsrc;
 			sourceTree = "<group>";
 		};
+		71C7B250130F3904004BF975 /* thread */ = {
+			isa = PBXGroup;
+			children = (
+				71C7B251130F3904004BF975 /* pthread */,
+				71C7B258130F3904004BF975 /* SDL_systhread.h */,
+				71C7B259130F3904004BF975 /* SDL_thread.c */,
+				71C7B25A130F3904004BF975 /* SDL_thread_c.h */,
+			);
+			name = thread;
+			path = ../Common/SDL/src/thread;
+			sourceTree = SOURCE_ROOT;
+		};
+		71C7B251130F3904004BF975 /* pthread */ = {
+			isa = PBXGroup;
+			children = (
+				71C7B252130F3904004BF975 /* SDL_syscond.c */,
+				71C7B253130F3904004BF975 /* SDL_sysmutex.c */,
+				71C7B254130F3904004BF975 /* SDL_sysmutex_c.h */,
+				71C7B255130F3904004BF975 /* SDL_syssem.c */,
+				71C7B256130F3904004BF975 /* SDL_systhread.c */,
+				71C7B257130F3904004BF975 /* SDL_systhread_c.h */,
+			);
+			name = pthread;
+			path = ../Common/SDL/src/thread/pthread;
+			sourceTree = SOURCE_ROOT;
+		};
+		71D887F7130F032700F150FF /* SDL */ = {
+			isa = PBXGroup;
+			children = (
+				71D887F8130F032700F150FF /* include */,
+				71D88808130F032700F150FF /* src */,
+			);
+			name = SDL;
+			path = ../Common/SDL;
+			sourceTree = SOURCE_ROOT;
+		};
+		71D887F8130F032700F150FF /* include */ = {
+			isa = PBXGroup;
+			children = (
+				71D887F9130F032700F150FF /* begin_code.h */,
+				71D887FA130F032700F150FF /* close_code.h */,
+				71D887FB130F032700F150FF /* SDL.h */,
+				71D887FC130F032700F150FF /* SDL_audio.h */,
+				71D887FD130F032700F150FF /* SDL_config.h */,
+				71D887FE130F032700F150FF /* SDL_endian.h */,
+				71D887FF130F032700F150FF /* SDL_error.h */,
+				71D88800130F032700F150FF /* SDL_haptic.h */,
+				71D88801130F032700F150FF /* SDL_joystick.h */,
+				71D88802130F032700F150FF /* SDL_main.h */,
+				71D88803130F032700F150FF /* SDL_mutex.h */,
+				71D88804130F032700F150FF /* SDL_platform.h */,
+				71D88805130F032700F150FF /* SDL_rwops.h */,
+				71D88806130F032700F150FF /* SDL_stdinc.h */,
+				71D88807130F032700F150FF /* SDL_thread.h */,
+			);
+			name = include;
+			path = ../Common/SDL/include;
+			sourceTree = SOURCE_ROOT;
+		};
+		71D88808130F032700F150FF /* src */ = {
+			isa = PBXGroup;
+			children = (
+				71D8881D130F032700F150FF /* haptic */,
+				71D88823130F032700F150FF /* joystick */,
+				71C7B250130F3904004BF975 /* thread */,
+				71D8882A130F032700F150FF /* SDL.c */,
+				71D8882B130F032700F150FF /* SDL_error.c */,
+				71D8882C130F032700F150FF /* SDL_error_c.h */,
+			);
+			name = src;
+			path = ../Common/SDL/src;
+			sourceTree = SOURCE_ROOT;
+		};
+		71D8881D130F032700F150FF /* haptic */ = {
+			isa = PBXGroup;
+			children = (
+				71D8881E130F032700F150FF /* darwin */,
+				71D88820130F032700F150FF /* SDL_haptic.c */,
+				71D88821130F032700F150FF /* SDL_haptic_c.h */,
+				71D88822130F032700F150FF /* SDL_syshaptic.h */,
+			);
+			name = haptic;
+			path = ../Common/SDL/src/haptic;
+			sourceTree = SOURCE_ROOT;
+		};
+		71D8881E130F032700F150FF /* darwin */ = {
+			isa = PBXGroup;
+			children = (
+				71D8881F130F032700F150FF /* SDL_syshaptic.c */,
+			);
+			name = darwin;
+			path = ../Common/SDL/src/haptic/darwin;
+			sourceTree = SOURCE_ROOT;
+		};
+		71D88823130F032700F150FF /* joystick */ = {
+			isa = PBXGroup;
+			children = (
+				71D88824130F032700F150FF /* darwin */,
+				71D88827130F032700F150FF /* SDL_joystick.c */,
+				71D88828130F032700F150FF /* SDL_joystick_c.h */,
+				71D88829130F032700F150FF /* SDL_sysjoystick.h */,
+			);
+			name = joystick;
+			path = ../Common/SDL/src/joystick;
+			sourceTree = SOURCE_ROOT;
+		};
+		71D88824130F032700F150FF /* darwin */ = {
+			isa = PBXGroup;
+			children = (
+				71D88825130F032700F150FF /* SDL_sysjoystick.c */,
+				71D88826130F032700F150FF /* SDL_sysjoystick_c.h */,
+			);
+			name = darwin;
+			path = ../Common/SDL/src/joystick/darwin;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -289,24 +367,31 @@
 				7136F1DA1200E163001973D9 /* ControllerList.h in Headers */,
 				7136F1DC1200E164001973D9 /* MappingCell.h in Headers */,
 				7136F1DF1200E165001973D9 /* PadController.h in Headers */,
-				71054DC51204A20900AC2CCB /* begin_code.h in Headers */,
-				71054DC61204A20900AC2CCB /* close_code.h in Headers */,
-				71054DC71204A20900AC2CCB /* SDL.h in Headers */,
-				71054DC81204A20900AC2CCB /* SDL_assert.h in Headers */,
-				71054DC91204A20900AC2CCB /* SDL_config.h in Headers */,
-				71054DCA1204A20900AC2CCB /* SDL_endian.h in Headers */,
-				71054DCB1204A20900AC2CCB /* SDL_error.h in Headers */,
-				71054DCC1204A20900AC2CCB /* SDL_haptic.h in Headers */,
-				71054DCD1204A20900AC2CCB /* SDL_joystick.h in Headers */,
-				71054DCE1204A20900AC2CCB /* SDL_main.h in Headers */,
-				71054DD01204A20900AC2CCB /* SDL_platform.h in Headers */,
-				71054DD31204A20900AC2CCB /* SDL_stdinc.h in Headers */,
-				71054DD81204A20900AC2CCB /* SDL_haptic_c.h in Headers */,
-				71054DD91204A20900AC2CCB /* SDL_syshaptic.h in Headers */,
-				71054DDB1204A20900AC2CCB /* SDL_sysjoystick_c.h in Headers */,
-				71054DDD1204A20900AC2CCB /* SDL_joystick_c.h in Headers */,
-				71054DDE1204A20900AC2CCB /* SDL_sysjoystick.h in Headers */,
-				71054DE31204A20900AC2CCB /* SDL_error_c.h in Headers */,
+				71D88838130F032700F150FF /* begin_code.h in Headers */,
+				71D88839130F032700F150FF /* close_code.h in Headers */,
+				71D8883A130F032700F150FF /* SDL.h in Headers */,
+				71D8883B130F032700F150FF /* SDL_audio.h in Headers */,
+				71D8883C130F032700F150FF /* SDL_config.h in Headers */,
+				71D8883D130F032700F150FF /* SDL_endian.h in Headers */,
+				71D8883E130F032700F150FF /* SDL_error.h in Headers */,
+				71D8883F130F032700F150FF /* SDL_haptic.h in Headers */,
+				71D88840130F032700F150FF /* SDL_joystick.h in Headers */,
+				71D88841130F032700F150FF /* SDL_main.h in Headers */,
+				71D88842130F032700F150FF /* SDL_mutex.h in Headers */,
+				71D88843130F032700F150FF /* SDL_platform.h in Headers */,
+				71D88844130F032700F150FF /* SDL_rwops.h in Headers */,
+				71D88845130F032700F150FF /* SDL_stdinc.h in Headers */,
+				71D88846130F032700F150FF /* SDL_thread.h in Headers */,
+				71D88859130F032700F150FF /* SDL_haptic_c.h in Headers */,
+				71D8885A130F032700F150FF /* SDL_syshaptic.h in Headers */,
+				71D8885C130F032700F150FF /* SDL_sysjoystick_c.h in Headers */,
+				71D8885E130F032700F150FF /* SDL_joystick_c.h in Headers */,
+				71D8885F130F032700F150FF /* SDL_sysjoystick.h in Headers */,
+				71D88862130F032700F150FF /* SDL_error_c.h in Headers */,
+				71C7B25D130F3904004BF975 /* SDL_sysmutex_c.h in Headers */,
+				71C7B260130F3904004BF975 /* SDL_systhread_c.h in Headers */,
+				71C7B261130F3904004BF975 /* SDL_systhread.h in Headers */,
+				71C7B263130F3904004BF975 /* SDL_thread_c.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,18 +424,15 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 71155B110FDFA2DE00EC0BC5 /* Build configuration list for PBXProject "DFInput" */;
-			compatibilityVersion = "Xcode 2.4";
-			developmentRegion = English;
-			hasScannedForEncodings = 1;
-			knownRegions = (
-				English,
-				Japanese,
-				French,
-				German,
+			buildSettings = {
+			};
+			buildStyles = (
+				71D887E8130F031800F150FF /* Development */,
+				71D887E9130F031800F150FF /* Deployment */,
 			);
+			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* DFInput */;
 			projectDirPath = "";
-			projectRoot = "";
 			targets = (
 				8D57630D048677EA00EA77CD /* DFInput */,
 			);
@@ -394,12 +476,17 @@
 				7136F1DB1200E163001973D9 /* ControllerList.m in Sources */,
 				7136F1DD1200E164001973D9 /* MappingCell.m in Sources */,
 				7136F1DE1200E165001973D9 /* PadController.m in Sources */,
-				71054DD61204A20900AC2CCB /* SDL_syshaptic.c in Sources */,
-				71054DD71204A20900AC2CCB /* SDL_haptic.c in Sources */,
-				71054DDA1204A20900AC2CCB /* SDL_sysjoystick.c in Sources */,
-				71054DDC1204A20900AC2CCB /* SDL_joystick.c in Sources */,
-				71054DDF1204A20900AC2CCB /* SDL.c in Sources */,
-				71054DE21204A20900AC2CCB /* SDL_error.c in Sources */,
+				71D88857130F032700F150FF /* SDL_syshaptic.c in Sources */,
+				71D88858130F032700F150FF /* SDL_haptic.c in Sources */,
+				71D8885B130F032700F150FF /* SDL_sysjoystick.c in Sources */,
+				71D8885D130F032700F150FF /* SDL_joystick.c in Sources */,
+				71D88860130F032700F150FF /* SDL.c in Sources */,
+				71D88861130F032700F150FF /* SDL_error.c in Sources */,
+				71C7B25B130F3904004BF975 /* SDL_syscond.c in Sources */,
+				71C7B25C130F3904004BF975 /* SDL_sysmutex.c in Sources */,
+				71C7B25E130F3904004BF975 /* SDL_syssem.c in Sources */,
+				71C7B25F130F3904004BF975 /* SDL_systhread.c in Sources */,
+				71C7B262130F3904004BF975 /* SDL_thread.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,16 +530,15 @@
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					SDL_AUDIO_DISABLED,
+				);
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				HEADER_SEARCH_PATHS = (
 					../../../libpcsxcore,
-					../HID,
-					Utilities,
-					Source,
-					./HID,
-					Utilities,
-					Source,
+					../Common/SDL/include,
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -484,16 +570,15 @@
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					SDL_AUDIO_DISABLED,
+				);
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				HEADER_SEARCH_PATHS = (
 					../../../libpcsxcore,
-					../HID,
-					Utilities,
-					Source,
-					./HID,
-					Utilities,
-					Source,
+					../Common/SDL/include,
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -518,7 +603,6 @@
 		71155B120FDFA2DE00EC0BC5 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
@@ -528,32 +612,37 @@
 					../../../plugins/dfinput,
 					../../../plugins/dfinput,
 					../../../../plugins/dfinput,
-					./SDL,
-					./SDL/include,
+					../Common/SDL/include,
 				);
-				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH_ACTUAL)";
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_CFLAGS = "";
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = ../../build;
 			};
 			name = Development;
 		};
 		71155B130FDFA2DE00EC0BC5 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = (
+					i386,
+					ppc,
+				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
 				HEADER_SEARCH_PATHS = (
 					../../../libpcsxcore,
 					../..,
 					../../../plugins/dfinput,
+					../../../plugins/dfinput,
 					../../../../plugins/dfinput,
-					./SDL,
-					./SDL/include,
-					../include,
+					../Common/SDL/include,
 				);
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_CFLAGS = "";
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SYMROOT = ../../build;
 			};
 			name = Deployment;
 		};

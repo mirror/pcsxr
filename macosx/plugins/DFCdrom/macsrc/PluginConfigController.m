@@ -78,7 +78,7 @@ void ReadConfig()
 	NSDictionary *keyValues;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-		[[NSMutableDictionary alloc] initWithObjectsAndKeys:
+		[NSMutableDictionary dictionaryWithObjectsAndKeys:
 			[NSNumber numberWithBool:YES], @"Threaded",
 			[NSNumber numberWithInt:64], @"Cache Size",
 			[NSNumber numberWithInt:0], @"Speed",

@@ -28,6 +28,23 @@
 		3F7F385013079BFD00556C34 /* draw.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F384713079BFD00556C34 /* draw.c */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildStyle section */
+		71D88576130EF91000F150FF /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Development;
+		};
+		71D88577130EF91000F150FF /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
+
 /* Begin PBXFileReference section */
 		2B038C06069183300082466B /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2B038D2206918AA80082466B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -190,7 +207,12 @@
 		2B3E5A03062AAC1A001D796E /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 717084310FDFD328004F3EB4 /* Build configuration list for PBXProject "PeopsXGL" */;
-			compatibilityVersion = "Xcode 2.4";
+			buildSettings = {
+			};
+			buildStyles = (
+				71D88576130EF91000F150FF /* Development */,
+				71D88577130EF91000F150FF /* Deployment */,
+			);
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -201,7 +223,6 @@
 			mainGroup = 2B3E59FF062AAC1A001D796E;
 			productRefGroup = 2B3E5A46062AACF3001D796E /* Products */;
 			projectDirPath = "";
-			projectRoot = "";
 			targets = (
 				2BAF50920632BB1A00DB9A16 /* gpuPeopsXGL */,
 			);
@@ -359,15 +380,16 @@
 		717084320FDFD328004F3EB4 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
+				ARCHS = "$(NATIVE_ARCH)";
 				GCC_MODEL_TUNING = "";
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				HEADER_SEARCH_PATHS = (
-					../../../plugins/dfxvideo,
+					../../../plugins/peopsxgl,
 					../../../libpcsxcore,
 				);
-				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH_ACTUAL)";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SYMROOT = ../../build;
 			};
 			name = Development;
 		};
@@ -378,7 +400,6 @@
 					i386,
 					ppc,
 				);
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = i386;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = "";
@@ -386,11 +407,13 @@
 				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				HEADER_SEARCH_PATHS = (
-					../../../plugins/dfxvideo,
+					../../../plugins/peopsxgl,
 					../../../libpcsxcore,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_CFLAGS = "-fomit-frame-pointer";
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SYMROOT = ../../build;
 			};
 			name = Deployment;
 		};
