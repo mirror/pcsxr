@@ -17,6 +17,10 @@
 static BOOL sysInited = NO;
 //#define EMU_LOG
 
+#ifdef __x86_64__
+#define USE_POWER_ASSERTION 1
+#endif
+
 int main(int argc, const char *argv[]) {
     if ( argc >= 2 && strncmp (argv[1], "-psn", 4) == 0 ) {
         char parentdir[MAXPATHLEN];
@@ -141,8 +145,9 @@ void SysCloseLibrary(void *lib) {
 
 // Called periodically from the emu thread
 void SysUpdate() {
-//	UpdateSystemActivity(UsrActivity);
-
+#ifndef USE_POWER_ASSERTION
+	UpdateSystemActivity(UsrActivity);
+#endif
 	[emuThread handleEvents];
 }
 
