@@ -527,11 +527,8 @@ static void *MAINThread(void *arg)
 #endif
 {
  int s_1,s_2,fa,ns;
-#ifndef _MACOSX
  int voldiv = iVolume;
-#else
- int voldiv = 2;
-#endif
+
  unsigned char * start;unsigned int nSample;
  int ch,predict_nr,shift_factor,flags,d,s;
  int bIRQReturn=0;

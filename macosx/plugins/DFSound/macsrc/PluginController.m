@@ -48,13 +48,13 @@ long DoConfiguration()
 		pluginController = [[PluginController alloc] initWithWindowNibName:@"NetSfPeopsSpuPluginMain"];
 	}
 	window = [pluginController window];
-	
+
 	/* load values */
 	[pluginController loadValues];
-	
+
 	[window center];
 	[window makeKeyAndOrderFront:nil];
-	
+
 	return 0;
 }
 
@@ -69,6 +69,7 @@ void ReadConfig(void)
 					[NSNumber numberWithBool:NO], @"XA Pitch",
 					[NSNumber numberWithInt:0], @"Interpolation Quality",
 					[NSNumber numberWithInt:1], @"Reverb Quality",
+					[NSNumber numberWithInt:3], @"Volume",
 					nil], PrefsKey,
 			nil]];
 
@@ -82,7 +83,7 @@ void ReadConfig(void)
 	iUseInterpolation = [[keyValues objectForKey:@"Interpolation Quality"] intValue];
 	iUseReverb = [[keyValues objectForKey:@"Reverb Quality"] intValue];
 
-	iVolume=1; 
+	iVolume = 5 - [[keyValues objectForKey:@"Volume"] intValue];
 }
 
 @implementation PluginController
@@ -95,7 +96,7 @@ void ReadConfig(void)
 - (IBAction)ok:(id)sender
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
+
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
 	[writeDic setObject:[NSNumber numberWithInt:[hiCompBox intValue]] forKey:@"High Compatibility Mode"];
 	[writeDic setObject:[NSNumber numberWithInt:[irqWaitBox intValue]] forKey:@"SPU IRQ Wait"];
@@ -104,14 +105,16 @@ void ReadConfig(void)
 
 	[writeDic setObject:[NSNumber numberWithInt:[interpolValue intValue]] forKey:@"Interpolation Quality"];
 	[writeDic setObject:[NSNumber numberWithInt:[reverbValue intValue]] forKey:@"Reverb Quality"];
-	
+
+	[writeDic setObject:[NSNumber numberWithInt:[volumeValue intValue]] forKey:@"Volume"];
+
 	// write to defaults
 	[defaults setObject:writeDic forKey:PrefsKey];
 	[defaults synchronize];
-	
+
 	// and set global values accordingly
 	ReadConfig();
-	
+
 	[self close];
 }
 
@@ -125,13 +128,13 @@ void ReadConfig(void)
 - (void)loadValues
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
+
 	ReadConfig();
-	
+
 	/* load from preferences */
 	[keyValues release];
 	keyValues = [[defaults dictionaryForKey:PrefsKey] retain];
-	
+
 	[hiCompBox setIntValue:[[keyValues objectForKey:@"High Compatibility Mode"] intValue]];
 	[irqWaitBox setIntValue:[[keyValues objectForKey:@"SPU IRQ Wait"] intValue]];
 	[monoSoundBox setIntValue:[[keyValues objectForKey:@"Mono Sound Output"] intValue]];
@@ -139,6 +142,7 @@ void ReadConfig(void)
 
 	[interpolValue setIntValue:[[keyValues objectForKey:@"Interpolation Quality"] intValue]];
 	[reverbValue setIntValue:[[keyValues objectForKey:@"Reverb Quality"] intValue]];
+	[volumeValue setIntValue:[[keyValues objectForKey:@"Volume"] intValue]];
 }
 
 - (void)awakeFromNib
@@ -154,6 +158,14 @@ void ReadConfig(void)
 		@"(No Reverb)",
 		@"(Simple Reverb)",
 		@"(PSX Reverb)",
+		nil]];
+
+	[volumeValue setStrings:[NSArray arrayWithObjects:
+		@"(Muted)",
+		@"(Low)",
+		@"(Medium)",
+		@"(Loud)",
+		@"(Loudest)",
 		nil]];
 }
 

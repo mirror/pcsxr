@@ -69,28 +69,16 @@ void SPUirq(void);
 	}
 
 int _OpenPlugins() {
-	static char path[1024];
-	CFURLRef pathUrl;
 	int ret;
 
-	//signal(SIGINT, SignalExit);
-	//signal(SIGPIPE, SignalExit);
-
 	GPU_clearDynarec(clearDynarec);
-
-	pathUrl = CFBundleCopyResourceURL(CFBundleGetMainBundle(), CFSTR("gpuPeopsSoftX.cfg"), NULL, NULL);
-	if (pathUrl)
-	{
-		CFURLGetFileSystemRepresentation(pathUrl, true, path, 1024);
-		CFRelease(pathUrl);
-	}
 
 	ret = CDR_open();
 	if (ret < 0) { SysMessage(_("Error Opening CDR Plugin")); return -1; }
 	ret = SPU_open();
 	if (ret < 0) { SysMessage(_("Error Opening SPU Plugin")); return -1; }
 	SPU_registerCallback(SPUirq);
-	ret = GPU_open(&gpuDisp, "PCSX", /*pathUrl ? path :*/ NULL);
+	ret = GPU_open(&gpuDisp, "PCSX", NULL);
 	if (ret < 0) { SysMessage(_("Error Opening GPU Plugin")); return -1; }
 	GPU_registerCallback(GPUbusy);
 	ret = PAD1_open(&gpuDisp);

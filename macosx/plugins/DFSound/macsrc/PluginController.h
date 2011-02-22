@@ -18,8 +18,9 @@ void LoadConfiguration();
     IBOutlet NetSfPeopsSPUPluginNamedSlider *reverbValue;
     IBOutlet NSControl *xaEnableBox;
     IBOutlet NSControl *xaSpeedBox;
-	 
-	 NSMutableDictionary *keyValues;
+    IBOutlet NetSfPeopsSPUPluginNamedSlider *volumeValue;
+
+	NSMutableDictionary *keyValues;
 }
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;

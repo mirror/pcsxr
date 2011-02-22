@@ -17,10 +17,10 @@
 - (NSString *)stringValue
 {
 	int index = [self intValue];
-	
+
 	if (index >= 0 && index < [strings count])
 		return [strings objectAtIndex:index];
-	
+
 	return @"(Unknown)";
 }
 
