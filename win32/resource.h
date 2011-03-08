@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by pcsx.rc
 //
 #define IDS_TITLE                       1
@@ -70,6 +70,7 @@
 #define IDC_ASMCHECK3                   1017
 #define IDC_MDEC2                       1017
 #define IDC_CDTIMING                    1017
+#define IDC_SLOWBOOT                    1017
 #define IDC_ASMCHECK4                   1018
 #define IDC_ASMCHECK5                   1019
 #define IDC_RELOAD1                     1019
@@ -299,7 +300,6 @@
 #define ID_HELP_ABOUT                   40002
 #define ID_FILE_RUN_CD                  40003
 #define ID_FILE_RUN_EXE                 40004
-#define ID_FILE_RUN_NOGUI               40016
 #define ID_EMULATOR_PAUSE               40005
 #define ID_EMULATOR_RESET               40006
 #define ID_FILE_RUN_ISO                 40007
@@ -312,9 +312,14 @@
 #define ID_EMULATOR_RUN                 40014
 #define ID_DEBUGREG                     40015
 #define ID_DEBUG_MESSAGES               40015
+#define ID_FILE_RUN_NOGUI               40016
 #define ID_CONFIGURATION_CONTROLLERS    40017
 #define ID_CONFIGURATION                40018
 #define ID_FILE_RUNBIOS                 40026
+#define ID_CONFIGURATION_NETPLAY        40043
+#define ID_EMULATOR_SWITCH_ISO          40044
+#define ID_CONFIGURATION_CHEATLIST      40045
+#define ID_CONFIGURATION_CHEATSEARCH    40046
 #define ID_FILE_STATES_LOAD_SLOT1       40048
 #define ID_FILE_STATES_LOAD_SLOT2       40049
 #define ID_FILE_STATES_LOAD_SLOT3       40050
@@ -335,10 +340,6 @@
 #define ID_FILE_STATES_SAVE_SLOT8       40065
 #define ID_FILE_STATES_SAVE_SLOT9       40066
 #define ID_FILE_STATES_SAVE_OTHER       40067
-#define ID_CONFIGURATION_NETPLAY        40043
-#define ID_EMULATOR_SWITCH_ISO          40044
-#define ID_CONFIGURATION_CHEATLIST      40045
-#define ID_CONFIGURATION_CHEATSEARCH    40046
 #define ID_LANGS                        50000
 
 // Next default values for new objects

@@ -113,39 +113,41 @@ BEGIN
     GROUPBOX        "",IDC_STATIC,43,100,234,79
 END
 
-IDD_CPUCONF DIALOG DISCARDABLE  0, 0, 232, 175
+IDD_CPUCONF DIALOG DISCARDABLE 0, 0, 232, 194
 STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Cpu Config"
 FONT 8, "MS Sans Serif"
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,50,155,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,120,155,50,14
+    DEFPUSHBUTTON   "OK",IDOK,50,166,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,120,166,50,14
     CONTROL         "Disable Xa Decoding",IDC_XA,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,10,15,91,10
+	                WS_TABSTOP,10,15,91,10
     CONTROL         "Sio Irq Always Enabled",IDC_SIO,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,10,30,92,10
+	                BS_AUTOCHECKBOX | WS_TABSTOP,10,30,92,10
     CONTROL         "Black && White Movies",IDC_MDEC,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,10,60,100,10
-    CONTROL         "Autodetect",IDC_PSXAUTO,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,10,126,83,10
-    GROUPBOX        "Misc Options",IDC_MISCOPT,5,5,220,100
-    COMBOBOX        IDC_PSXTYPES,105,126,53,50,CBS_DROPDOWNLIST | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
-    GROUPBOX        "Select Psx System Type",IDC_SELPSX,5,110,220,35
-    CONTROL         "Disable Cd Audio",IDC_CDDA,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,112,15,113,10
+	                BS_AUTOCHECKBOX | WS_TABSTOP,10,60,100,10
+    CONTROL         "Autodetect",IDC_PSXAUTO,"Button",BS_AUTOCHECKBOX |
+	                WS_TABSTOP,10,137,83,10
+    GROUPBOX        "Misc Options",IDC_MISCOPT,5,5,220,114
+    COMBOBOX        IDC_PSXTYPES,105,137,53,50,CBS_DROPDOWNLIST | CBS_SORT |
+	                WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Select Psx System Type",IDC_SELPSX,5,123,220,35
+    CONTROL         "Disable Cd Audio",IDC_CDDA,"Button",BS_AUTOCHECKBOX |
+	                WS_TABSTOP,112,15,113,10
     CONTROL         "Enable Console Output",IDC_PSXOUT,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,112,30,113,10
+	                BS_AUTOCHECKBOX | WS_TABSTOP,112,30,113,10
     CONTROL         "Enable Interpreter Cpu",IDC_CPU,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,112,45,113,10
+	                BS_AUTOCHECKBOX | WS_TABSTOP,112,45,113,10
     CONTROL         "Spu Irq Always Enabled",IDC_SPUIRQ,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,10,45,91,10
+	                BS_AUTOCHECKBOX | WS_TABSTOP,10,45,91,10
     CONTROL         "Parasite Eve 2, Vandal Hearts 1/2 Fix",IDC_RCNTFIX,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,75,205,10
     CONTROL         "InuYasha Sengoku Battle Fix",IDC_VSYNCWA,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,10,90,205,10
-    CONTROL         "Enable Debugger",IDC_DEBUG,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,112,60,76,10
+	                BS_AUTOCHECKBOX | WS_TABSTOP,10,90,205,10
+    CONTROL         "Enable Debugger",IDC_DEBUG,"Button",BS_AUTOCHECKBOX |
+	                WS_TABSTOP,112,60,76,10
+    CONTROL         "Slow Boot",IDC_SLOWBOOT,"Button",BS_AUTOCHECKBOX |
+	                WS_TABSTOP,10,104,113,10
 END
 
 IDD_NETPLAY DIALOG DISCARDABLE  0, 0, 165, 95

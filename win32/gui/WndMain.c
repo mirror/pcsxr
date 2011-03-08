@@ -1299,6 +1299,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Button_SetText(GetDlgItem(hW,IDC_SIO),     _("Sio Irq Always Enabled"));
 			Button_SetText(GetDlgItem(hW,IDC_MDEC),    _("Black && White Movies"));
 			Button_SetText(GetDlgItem(hW,IDC_CDDA),    _("Disable Cd audio"));
+			Button_SetText(GetDlgItem(hW,IDC_SLOWBOOT),_("Slow Boot"));
 			Button_SetText(GetDlgItem(hW,IDC_PSXAUTO), _("Autodetect"));
 			Button_SetText(GetDlgItem(hW,IDC_CPU),     _("Enable Interpreter Cpu"));
 			Button_SetText(GetDlgItem(hW,IDC_PSXOUT),  _("Enable Console Output"));
@@ -1314,6 +1315,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Button_SetCheck(GetDlgItem(hW,IDC_SIO),     Config.Sio);
 			Button_SetCheck(GetDlgItem(hW,IDC_MDEC),    Config.Mdec);
 			Button_SetCheck(GetDlgItem(hW,IDC_CDDA),    Config.Cdda);
+			Button_SetCheck(GetDlgItem(hW,IDC_SLOWBOOT),Config.SlowBoot);
 	   		Button_SetCheck(GetDlgItem(hW,IDC_PSXAUTO), Config.PsxAuto);
 	   		Button_SetCheck(GetDlgItem(hW,IDC_CPU),     (Config.Cpu == CPU_INTERPRETER));
 	   		Button_SetCheck(GetDlgItem(hW,IDC_PSXOUT),  Config.PsxOut);
@@ -1346,6 +1348,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					Config.Sio     = Button_GetCheck(GetDlgItem(hW,IDC_SIO));
 					Config.Mdec    = Button_GetCheck(GetDlgItem(hW,IDC_MDEC));
 					Config.Cdda    = Button_GetCheck(GetDlgItem(hW,IDC_CDDA));
+					Config.SlowBoot= Button_GetCheck(GetDlgItem(hW,IDC_SLOWBOOT));
 					Config.PsxAuto = Button_GetCheck(GetDlgItem(hW,IDC_PSXAUTO));
 					tmp = Config.Cpu;
 					Config.Cpu     = (Button_GetCheck(GetDlgItem(hW,IDC_CPU)) ? CPU_INTERPRETER : CPU_DYNAREC);

@@ -127,6 +127,7 @@ int LoadConfig(PcsxConfig *Conf) {
 	Config.Mdec    = GetValueb(data, "Mdec");
 	Config.PsxAuto = GetValueb(data, "PsxAuto");
 	Config.Cdda    = GetValueb(data, "Cdda");
+	Config.SlowBoot= GetValueb(data, "SlowBoot");
 	Config.Debug   = GetValueb(data, "Dbg");
 	Config.PsxOut  = (Config.PsxOut || GetValueb(data, "PsxOut"));
 	Config.SpuIrq  = GetValueb(data, "SpuIrq");
@@ -167,6 +168,7 @@ void SaveConfig() {
 	SetValueb("Mdec",    Config.Mdec);
 	SetValueb("PsxAuto", Config.PsxAuto);
 	SetValueb("Cdda",    Config.Cdda);
+	SetValueb("SlowBoot",Config.SlowBoot);
 	SetValueb("Dbg",     Config.Debug);
 	SetValueb("PsxOut",  Config.PsxOut);
 	SetValueb("SpuIrq",  Config.SpuIrq);

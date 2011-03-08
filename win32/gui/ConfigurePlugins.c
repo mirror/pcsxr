@@ -72,6 +72,7 @@ int LoadConfig() {
 	QueryKeyV("Mdec",     Conf->Mdec);
 	QueryKeyV("PsxAuto",  Conf->PsxAuto);
 	QueryKeyV("Cdda",     Conf->Cdda);
+	QueryKeyV("SlowBoot", Conf->SlowBoot);
 	QueryKeyV("Debug",    Conf->Debug);
 	QueryKeyV("PsxOut",   Conf->PsxOut);
 	QueryKeyV("SpuIrq",   Conf->SpuIrq);
@@ -122,6 +123,7 @@ void SaveConfig() {
 	SetKeyV("Mdec",    Conf->Mdec);
 	SetKeyV("PsxAuto", Conf->PsxAuto);
 	SetKeyV("Cdda",    Conf->Cdda);
+	SetKeyV("SlowBoot",Conf->SlowBoot);
 	SetKeyV("Debug",   Conf->Debug);
 	SetKeyV("PsxOut",  Conf->PsxOut);
 	SetKeyV("SpuIrq",  Conf->SpuIrq);
