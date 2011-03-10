@@ -41,7 +41,8 @@ const int DPad[DKEY_TOTAL] = {
 	DKEY_SELECT,
 	DKEY_START,
 	DKEY_L3,
-	DKEY_R3
+	DKEY_R3,
+	DKEY_ANALOG
 };
 
 const char *DPadText[DKEY_TOTAL] = {
@@ -60,7 +61,8 @@ const char *DPadText[DKEY_TOTAL] = {
 	N_("Select"),
 	N_("Start"),
 	N_("L3"),
-	N_("R3")
+	N_("R3"),
+	N_("Analog")
 };
 
 const char *AnalogText[] = {
@@ -189,7 +191,7 @@ static void UpdateKeyList() {
 		if (g.cfg.PadDef[i].Type == PSE_PAD_TYPE_ANALOGPAD) {
 			total = DKEY_TOTAL;
 		} else {
-			total = DKEY_TOTAL - 2;
+			total = DKEY_TOTAL - 3;
 		}
 
 		widget = gtk_builder_get_object(xml, widgetname[i]);

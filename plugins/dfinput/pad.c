@@ -129,7 +129,14 @@ long PADquery(void) {
 }
 
 static void UpdateInput(void) {
+	int pad;
 	if (!g.cfg.Threaded) CheckJoy();
+	for(pad = 0; pad < 2; pad++) {
+		if(g.PadState[pad].PadModeSwitch) {
+			g.PadState[pad].PadModeSwitch = 0;
+			PADsetMode(pad, 1 - g.PadState[pad].PadMode);
+		}
+	}
 	CheckKeyboard();
 }
 

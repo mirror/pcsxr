@@ -77,6 +77,7 @@ enum {
 	DKEY_CIRCLE,
 	DKEY_CROSS,
 	DKEY_SQUARE,
+	DKEY_ANALOG,
 
 	DKEY_TOTAL
 };
@@ -119,6 +120,8 @@ typedef struct tagPadState {
 	SDL_Joystick		*JoyDev;
 	uint8_t				PadMode;
 	uint8_t				PadID;
+	uint8_t			PadModeKey;
+	volatile uint8_t	PadModeSwitch;
 	volatile uint16_t	KeyStatus;
 	volatile uint16_t	JoyKeyStatus;
 	volatile uint8_t	AnalogStatus[ANALOG_TOTAL][2]; // 0-255 where 127 is center position

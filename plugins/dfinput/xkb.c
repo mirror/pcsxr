@@ -34,6 +34,20 @@ void DestroyKeyboard() {
 	XkbSetDetectableAutoRepeat(g.Disp, 0, NULL);
 }
 
+static void bdown(int pad, int bit)
+{
+	if(bit < 16)
+		g.PadState[pad].KeyStatus &= ~(1 << bit);
+	else if(bit == DKEY_ANALOG)
+		g.PadState[pad].PadModeSwitch = 1;
+}
+
+static void bup(int pad, int bit)
+{
+	if(bit < 16)
+		g.PadState[pad].KeyStatus |= (1 << bit);
+}
+
 void CheckKeyboard() {
 	uint8_t					i, j, found;
 	XEvent					evt;
@@ -50,7 +64,7 @@ void CheckKeyboard() {
 					for (j = 0; j < DKEY_TOTAL; j++) {
 						if (g.cfg.PadDef[i].KeyDef[j].Key == Key) {
 							found = 1;
-							g.PadState[i].KeyStatus &= ~(1 << j);
+							bdown(i, j);
 						}
 					}
 				}
@@ -66,7 +80,7 @@ void CheckKeyboard() {
 					for (j = 0; j < DKEY_TOTAL; j++) {
 						if (g.cfg.PadDef[i].KeyDef[j].Key == Key) {
 							found = 1;
-							g.PadState[i].KeyStatus |= (1 << j);
+							bup(i, j);
 						}
 					}
 				}
