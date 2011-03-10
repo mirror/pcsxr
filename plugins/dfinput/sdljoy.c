@@ -53,6 +53,26 @@ void DestroySDLJoy() {
 	}
 }
 
+static void bdown(int pad, int bit)
+{
+	if(bit < 16)
+		g.PadState[pad].JoyKeyStatus &= ~(1 << bit);
+	else if(bit == DKEY_ANALOG) {
+		if(++g.PadState[pad].PadModeKey == 10)
+			g.PadState[pad].PadModeSwitch = 1;
+		else if(g.PadState[pad].PadModeKey > 10)
+			g.PadState[pad].PadModeKey = 11;
+	}
+}
+
+static void bup(int pad, int bit)
+{
+	if(bit < 16)
+		g.PadState[pad].JoyKeyStatus |= (1 << bit);
+	else if(bit == DKEY_ANALOG)
+		g.PadState[pad].PadModeKey = 0;
+}
+
 void CheckJoy() {
 	uint8_t				i, j, n;
 
@@ -70,15 +90,15 @@ void CheckJoy() {
 
 					if (g.cfg.PadDef[i].KeyDef[j].J.Axis > 0) {
 						if (SDL_JoystickGetAxis(g.PadState[i].JoyDev, n) > 16383) {
-							g.PadState[i].JoyKeyStatus &= ~(1 << j);
+							bdown(i, j);
 						} else {
-							g.PadState[i].JoyKeyStatus |= (1 << j);
+							bup(i, j);
 						}
 					} else if (g.cfg.PadDef[i].KeyDef[j].J.Axis < 0) {
 						if (SDL_JoystickGetAxis(g.PadState[i].JoyDev, n) < -16383) {
-							g.PadState[i].JoyKeyStatus &= ~(1 << j);
+							bdown(i, j);
 						} else {
-							g.PadState[i].JoyKeyStatus |= (1 << j);
+							bup(i, j);
 						}
 					}
 					break;
@@ -87,17 +107,17 @@ void CheckJoy() {
 					n = (g.cfg.PadDef[i].KeyDef[j].J.Hat >> 8);
 
 					if (SDL_JoystickGetHat(g.PadState[i].JoyDev, n) & (g.cfg.PadDef[i].KeyDef[j].J.Hat & 0xFF)) {
-						g.PadState[i].JoyKeyStatus &= ~(1 << j);
+						bdown(i, j);
 					} else {
-						g.PadState[i].JoyKeyStatus |= (1 << j);
+						bup(i, j);
 					}
 					break;
 
 				case BUTTON:
 					if (SDL_JoystickGetButton(g.PadState[i].JoyDev, g.cfg.PadDef[i].KeyDef[j].J.Button)) {
-						g.PadState[i].JoyKeyStatus &= ~(1 << j);
+						bdown(i, j);
 					} else {
-						g.PadState[i].JoyKeyStatus |= (1 << j);
+						bup(i, j);
 					}
 					break;
 
