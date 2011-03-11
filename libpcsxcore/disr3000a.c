@@ -27,22 +27,22 @@ char ostr[256];
 
 // Names of registers
 static char *disRNameGPR[] = {
-	"r0", "at", "v0", "v1", "a0", "a1","a2", "a3",
-	"t0", "t1", "t2", "t3", "t4", "t5","t6", "t7",
-	"s0", "s1", "s2", "s3", "s4", "s5","s6", "s7",
-	"t8", "t9", "k0", "k1", "gp", "sp","fp", "ra"};
+	"r0", "at", "v0", "v1", "a0", "a1", "a2", "a3",
+	"t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7",
+	"s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7",
+	"t8", "t9", "k0", "k1", "gp", "sp", "fp", "ra"};
 
 static char *disRNameCP2D[] = {
-	"r0", "r1", "r2", "r3", "r4", "r5","r6", "r7",
-	"r8", "r9", "r10", "r11", "r12", "r13","r14", "r15",
-	"r16", "r17", "r18", "r19", "r20", "r21","r22", "r23",
-	"r24", "r25", "r26", "r27", "r28", "r29","r30", "r31"};
+	"VXY0", "VZ0", "VXY1", "VZ1", "VXY2", "VZ2", "RGB", "OTZ",
+	"IR0", "IR1", "IR2", "IR3", "SXY0", "SXY1", "SXY2", "SXYP",
+	"SZ0", "SZ1", "SZ2", "SZ3", "RGB0", "RGB1", "RGB2", "RES1",
+	"MAC0", "MAC1", "MAC2", "MAC3", "IRGB", "ORGB", "LZCS", "LZCR"};
 
 static char *disRNameCP2C[] = {
-	"r0", "r1", "r2", "r3", "r4", "r5","r6", "r7",
-	"r8", "r9", "r10", "r11", "r12", "r13","r14", "r15",
-	"r16", "r17", "r18", "r19", "r20", "r21","r22", "r23",
-	"r24", "r25", "r26", "r27", "r28", "r29","r30", "r31"};
+	"R11R12", "R13R21", "R22R23", "R31R32", "R33", "TRX", "TRY", "TRZ",
+	"L11L12", "L13L21", "L22L23", "L31L32", "L33", "RBK", "BBK", "GBK",
+	"LR1LR2", "LR3LG1", "LG2LG3", "LB1LB2", "LB3", "RFC", "GFC", "BFC",
+	"OFX", "OFY", "H", "DQA", "DQB", "ZSF3", "ZSF4", "FLAG"};
 
 char *disRNameCP0[] = {
 	"Index"     , "Random"    , "EntryLo0", "EntryLo1", "Context" , "PageMask"  , "Wired"     , "*Check me*",
