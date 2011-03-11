@@ -20,6 +20,9 @@ function. These can all be found at Configuration -> CPU.
 * Enable Console Output:
     Dumps the PSX emulator output to the console.
 
+* Slow Boot:
+    Enable BIOS Logo.
+
 * Enable Interpreter CPU:
     Enables interpretive emulation.
     This is often more compatible, but at the price of emulation speed.

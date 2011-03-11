@@ -12,6 +12,7 @@ F5: Toggle SIO IRQ
 F6: Toggle Black & White decoders
 F7: Toggle XA
 F8: Take a game screenshot
+F12: Reset 
 ESC: Return to the main window
 
 Ctrl 1 to 5: Save state 1 to 5

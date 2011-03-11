@@ -76,7 +76,7 @@ static const s32 VerboseLevel     = 0;
 
 static Rcnt rcnts[ CounterQuantity ];
 
-u32 hSyncCount = 0;
+static u32 hSyncCount = 0;
 static u32 spuSyncCount = 0;
 
 u32 psxNextCounter = 0, psxNextsCounter = 0;
@@ -283,16 +283,16 @@ void psxRcntUpdate()
                 SPU_async( SpuUpdInterval[Config.PsxType] * rcnts[3].target );
             }
         }
-        
+
         // VSync irq.
         if( hSyncCount == VBlankStart[Config.PsxType] )
         {
             GPU_vBlank( 1 );
-            
+
             // For the best times. :D
             //setIrq( 0x01 );
         }
-        
+
         // Update lace. (with InuYasha fix)
         if( hSyncCount >= (Config.VSyncWA ? HSyncTotal[Config.PsxType] / BIAS : HSyncTotal[Config.PsxType]) )
         {

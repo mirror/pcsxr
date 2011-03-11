@@ -20,8 +20,6 @@
 #include "gpu.h"
 #include "psxdma.h"
 
-extern unsigned int hSyncCount;
-
 #define GPUSTATUS_ODDLINES            0x80000000
 #define GPUSTATUS_DMABITS             0x60000000 // Two bits
 #define GPUSTATUS_READYFORCOMMANDS    0x10000000
@@ -38,8 +36,6 @@ extern unsigned int hSyncCount;
 #define GPUSTATUS_MASKDRAWN           0x00000800
 #define GPUSTATUS_DRAWINGALLOWED      0x00000400
 #define GPUSTATUS_DITHER              0x00000200
-
-
 
 // Taken from PEOPS SOFTGPU
 u32 lUsedAddr[3];
@@ -75,13 +71,13 @@ static u32 gpuDmaChainSize(u32 addr) {
 		// # 32-bit blocks to transfer
 		size += psxMu8( addr + 3 );
 
-		
+
 		// next 32-bit pointer
 		addr = psxMu32( addr & ~0x3 ) & 0xffffff;
 		size += 1;
 	} while (addr != 0xffffff);
 
-	
+
 	return size;
 }
 
@@ -163,7 +159,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 
 			size = gpuDmaChainSize(madr);
 			GPU_dmaChain((u32 *)psxM, madr & 0x1fffff);
-			
+
 			// Tekken 3 = use 1.0 only (not 1.5x)
 
 			// Einhander = parse linked list in pieces (todo)
