@@ -38,7 +38,7 @@ enum {
 gxv_blit_t available_port[GXV_MAX_PORT];
 
 /* Convert RGB to YUV */
-inline uint32_t rgb_to_yuv(uint8_t R, uint8_t G, uint8_t B) {
+static inline uint32_t rgb_to_yuv(uint8_t R, uint8_t G, uint8_t B) {
 	uint8_t Y, U, V;
 	Y = abs(R * 2104 + G * 4130 + B * 802 + 4096 + 131072) >> 13;
 	Y = MIN(Y, 235);
@@ -49,7 +49,7 @@ inline uint32_t rgb_to_yuv(uint8_t R, uint8_t G, uint8_t B) {
 	return Y << 24 | V << 16 | Y << 8 | U;
 }
 
-inline uint32_t rgb_to_yuv2(uint8_t R0, uint8_t G0, uint8_t B0, uint8_t R1,
+static inline uint32_t rgb_to_yuv2(uint8_t R0, uint8_t G0, uint8_t B0, uint8_t R1,
 		uint8_t G1, uint8_t B1) {
 	int32_t Y0, U0, V0;
 	int32_t Y1, U1, V1;
@@ -97,7 +97,7 @@ static Atom xv_intern_atom_if_exists(Display *display, char const * atom_name) {
 
 // close display
 
-void DestroyDisplay(void) {
+static void DestroyDisplay(void) {
 	if (g_draw.display) {
 		XFreeColormap(g_draw.display, g_draw.colormap);
 		if (g_draw.hGC) {
@@ -136,7 +136,7 @@ void DestroyDisplay(void) {
 
 // Create display
 
-void create_display(void) {
+static void create_display(void) {
 	//fprintf(stderr, "Entering %s\n", __FUNCTION__);
 	XSetWindowAttributes winattr;
 	int myscreen;
@@ -427,15 +427,17 @@ void create_display(void) {
 	return;
 }
 
-int rgb_check_port(XvImageFormatValues const * fo) {
+#if 0
+static int rgb_check_port(XvImageFormatValues const * fo) {
 	if (fo->type == XvRGB && fo->bits_per_pixel == 32) {
 		g_draw.xv_id = fo->id;
 		return 1;
 	}
 	return 0;
 }
+#endif
 
-void rgb_blit_16(int8_t * buff, int32_t x, int32_t y, int32_t w, int32_t h) {
+static void rgb_blit_16(int8_t * buff, int32_t x, int32_t y, int32_t w, int32_t h) {
 	//fprintf(stderr, "BlitToYUV\n");
 	int16_t * src_pxl;
 	int8_t * dst_pxl;
@@ -457,7 +459,7 @@ void rgb_blit_16(int8_t * buff, int32_t x, int32_t y, int32_t w, int32_t h) {
 	}
 }
 
-void rgb_blit_24(int8_t * buff, int32_t x, int32_t y, int32_t w, int32_t h) {
+static void rgb_blit_24(int8_t * buff, int32_t x, int32_t y, int32_t w, int32_t h) {
 	//fprintf(stderr, "BlitToYUV\n");
 	int8_t * src_pxl;
 	int8_t * dst_pxl;
@@ -479,7 +481,8 @@ void rgb_blit_24(int8_t * buff, int32_t x, int32_t y, int32_t w, int32_t h) {
 	}
 }
 
-int yuyv_check_port(XvImageFormatValues * fo) {
+#if 0
+static int yuyv_check_port(XvImageFormatValues * fo) {
 	if (fo->type == XvYUV && fo->bits_per_pixel == 16 && fo->format == XvPacked
 			&& strncmp("UYVY", fo->component_order, 4) == 0) {
 		g_draw.xv_id = fo->id;
@@ -487,8 +490,9 @@ int yuyv_check_port(XvImageFormatValues * fo) {
 	}
 	return 0;
 }
+#endif
 
-void yuyv_blit_24(int8_t * buff, int32_t x, int32_t y, int32_t w, int32_t h) {
+static void yuyv_blit_24(int8_t * buff, int32_t x, int32_t y, int32_t w, int32_t h) {
 	//fprintf(stderr, "yuyv_blit_24 %d %d %d %d\n", x, y, w, h);
 	uint8_t * src_pxl;
 	int8_t R0, G0, B0;
@@ -516,7 +520,7 @@ void yuyv_blit_24(int8_t * buff, int32_t x, int32_t y, int32_t w, int32_t h) {
 	}
 }
 
-void yuyv_blit_16(int8_t * buff, int32_t x, int32_t y, int32_t w, int32_t h) {
+static void yuyv_blit_16(int8_t * buff, int32_t x, int32_t y, int32_t w, int32_t h) {
 	//fprintf(stderr, "yuyv_blit_16 %d %d %d %d\n", x, y, w, h);
 	int8_t R0, G0, B0;
 	int8_t R1, G1, B1;
@@ -552,7 +556,7 @@ void yuyv_blit_16(int8_t * buff, int32_t x, int32_t y, int32_t w, int32_t h) {
  * The aspect of the psx output mode is preserved.
  * Note: dest dx,dy,dw,dh are both input and output variables
  */
-inline void maintain_aspect(uint32_t * dx, uint32_t * dy, uint32_t * dw,
+static inline void maintain_aspect(uint32_t * dx, uint32_t * dy, uint32_t * dw,
 		uint32_t * dh, int32_t w, int32_t h) {
 
 	double ratio_x = ((double) *dw) / ((double) w);
@@ -667,7 +671,7 @@ void do_clear_screen_buffer(void) // CLEAR DX BUFFER
 	XClearWindow(g_draw.display, g_draw.window);
 }
 
-void Xcleanup() // X CLEANUP
+static void Xcleanup() // X CLEANUP
 {
 	//CloseMenu();
 }

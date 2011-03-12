@@ -31,11 +31,11 @@
 
 #include "nopic.h"
 
+#include "cdrom.h"
+
 #define MAX_SLOTS 9	/* ADB TODO Same as Gtk2Gui.c */
 
 void OnFile_Exit();
-
-extern void LidInterrupt();
 
 unsigned long gpuDisp;
 
@@ -43,7 +43,7 @@ int StatesC = 0;
 extern int UseGui;
 int ShowPic = 0;
 
-void gpuShowPic() {
+static void gpuShowPic() {
 	gchar *state_filename;
 	gzFile f;
 
@@ -79,7 +79,7 @@ void gpuShowPic() {
 	}
 }
 
-void KeyStateSave(int i) {
+static void KeyStateSave(int i) {
 	gchar *state_filename;
 
 	state_filename = get_state_filename (i);
@@ -88,7 +88,7 @@ void KeyStateSave(int i) {
 	g_free (state_filename);
 }
 
-void KeyStateLoad(int i) {
+static void KeyStateLoad(int i) {
 	gchar *state_filename;
 
 	state_filename = get_state_filename (i);
@@ -299,7 +299,7 @@ void PADhandleKey(int key) {
 
 void OnFile_Exit();
 
-void SignalExit(int sig) {
+static void SignalExit(int sig) {
 	ClosePlugins();
 	OnFile_Exit();
 }
@@ -311,7 +311,7 @@ void SignalExit(int sig) {
 		strcpy(dst, ptr+1); \
 	}
 
-int _OpenPlugins() {
+static int _OpenPlugins() {
 	int ret;
 
 	signal(SIGINT, SignalExit);

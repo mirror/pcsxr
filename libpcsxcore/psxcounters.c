@@ -95,13 +95,11 @@ void verboseLog( s32 level, const char *str, ... )
     if( level <= VerboseLevel )
     {
         va_list va;
-        char buf[ 4096 ];
 
         va_start( va, str );
-        vsprintf( buf, str, va );
+        vprintf( str, va );
         va_end( va );
 
-        printf( buf );
         fflush( stdout );
     }
 }

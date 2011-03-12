@@ -80,7 +80,7 @@ char * pConfigFile = NULL;
   size+=sprintf(pB+size, "%s = %.1f\n", name, (double)var); \
  }
 
-void ReadConfigFile()
+static void ReadConfigFile()
 {
  struct stat buf;
  FILE *in;char t[256];int len, size;
@@ -166,7 +166,7 @@ void ReadConfigFile()
  free(pB);
 }
 
-void ExecCfg(char *arg) {
+static void ExecCfg(char *arg) {
 	char cfg[256];
 	struct stat buf;
 

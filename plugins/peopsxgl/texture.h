@@ -64,5 +64,6 @@ unsigned short XP4RGBA_0 (unsigned short BGR);
 unsigned short XP4RGBA_1 (unsigned short BGR);
 unsigned short P4RGBA (unsigned short BGR);
 unsigned short CP4RGBA_0 (unsigned short BGR);
+unsigned char * LoadDirectMovieFast(void);
 
 #endif // _TEXTURE_H_

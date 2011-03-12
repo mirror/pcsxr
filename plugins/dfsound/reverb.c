@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include "stdafx.h"
+#include "reverb.h"
 
 #define _IN_REVERB
 
@@ -83,7 +84,7 @@ INLINE void StartREVERB(int ch)
 // HELPER FOR NEILL'S REVERB: re-inits our reverb mixing buf
 ////////////////////////////////////////////////////////////////////////
 
-INLINE void InitREVERB(void)
+static INLINE void InitREVERB(void)
 {
  if(iUseReverb==2)
   {memset(sRVBStart,0,NSSIZE*2*4);}
@@ -130,7 +131,7 @@ INLINE void StoreREVERB(int ch,int ns)
 
 ////////////////////////////////////////////////////////////////////////
 
-INLINE int g_buffer(int iOff)                          // get_buffer content helper: takes care about wraps
+static INLINE int g_buffer(int iOff)                          // get_buffer content helper: takes care about wraps
 {
  short * p=(short *)spuMem;
  iOff=(iOff*4)+rvb.CurrAddr;
@@ -141,7 +142,7 @@ INLINE int g_buffer(int iOff)                          // get_buffer content hel
 
 ////////////////////////////////////////////////////////////////////////
 
-INLINE void s_buffer(int iOff,int iVal)                // set_buffer content helper: takes care about wraps and clipping
+static INLINE void s_buffer(int iOff,int iVal)                // set_buffer content helper: takes care about wraps and clipping
 {
  short * p=(short *)spuMem;
  iOff=(iOff*4)+rvb.CurrAddr;
@@ -153,7 +154,7 @@ INLINE void s_buffer(int iOff,int iVal)                // set_buffer content hel
 
 ////////////////////////////////////////////////////////////////////////
 
-INLINE void s_buffer1(int iOff,int iVal)                // set_buffer (+1 sample) content helper: takes care about wraps and clipping
+static INLINE void s_buffer1(int iOff,int iVal)                // set_buffer (+1 sample) content helper: takes care about wraps and clipping
 {
  short * p=(short *)spuMem;
  iOff=(iOff*4)+rvb.CurrAddr+1;
@@ -165,7 +166,7 @@ INLINE void s_buffer1(int iOff,int iVal)                // set_buffer (+1 sample
 
 ////////////////////////////////////////////////////////////////////////
 
-INLINE int MixREVERBLeft(int ns)
+static INLINE int MixREVERBLeft(int ns)
 {
  if(iUseReverb==0) return 0;
  else
@@ -261,7 +262,7 @@ INLINE int MixREVERBLeft(int ns)
 
 ////////////////////////////////////////////////////////////////////////
 
-INLINE int MixREVERBRight(void)
+static INLINE int MixREVERBRight(void)
 {
  if(iUseReverb==0) return 0;
  else

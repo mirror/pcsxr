@@ -29,6 +29,7 @@
 #define _IN_FPS
 
 #include "externals.h"
+#include "fps.h"
 
 ////////////////////////////////////////////////////////////////////////
 // FPS stuff
@@ -60,7 +61,7 @@ unsigned long timeGetTime()
  return tv.tv_sec * 100000 + tv.tv_usec/10;           // to do that in linux, but at least it works
 }
 
-void FrameCap(void)
+static void FrameCap(void)
 {
  static unsigned long curticks, lastticks, _ticks_since_last_update;
  static unsigned long TicksToWait = 0;
@@ -205,7 +206,7 @@ void FrameSkip(void)
  dwLaceCnt=0;                                          // init lace counter
 }
 
-void calcfps(void) 
+static void calcfps(void) 
 { 
  static unsigned long curticks,_ticks_since_last_update,lastticks; 
  static long   fps_cnt = 0;
@@ -380,6 +381,7 @@ void CheckFrameRate(void)                              // called in updatelace (
   }
 }
 
+#if 0 /* unused by pcsx */
 void CALLBACK GPUsetframelimit(unsigned long option)   // new EPSXE interface func: main emu can enable/disable fps limitation this way
 {
  bInitCap = TRUE;
@@ -394,3 +396,4 @@ void CALLBACK GPUsetframelimit(unsigned long option)   // new EPSXE interface fu
    bUseFrameLimit=FALSE;
   }
 }
+#endif

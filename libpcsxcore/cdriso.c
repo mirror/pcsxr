@@ -61,15 +61,6 @@ static volatile boolean playing = FALSE;
 static boolean cddaBigEndian = FALSE;
 static volatile unsigned int cddaCurOffset = 0;
 
-char* CALLBACK CDR__getDriveLetter(void);
-long CALLBACK CDR__configure(void);
-long CALLBACK CDR__test(void);
-void CALLBACK CDR__about(void);
-long CALLBACK CDR__setfilename(char *filename);
-long CALLBACK CDR__getStatus(struct CdrStat *stat);
-
-extern void *hCDRDriver;
-
 struct trackinfo {
 	enum {DATA=1, CDDA} type;
 	u8 start[3];		// MSF-format
@@ -82,11 +73,11 @@ static int numtracks = 0;
 static struct trackinfo ti[MAXTRACKS];
 
 // get a sector from a msf-array
-unsigned int msf2sec(char *msf) {
+unsigned int msf2sec(u8 *msf) {
 	return ((msf[0] * 60 + msf[1]) * 75) + msf[2];
 }
 
-void sec2msf(unsigned int s, char *msf) {
+void sec2msf(unsigned int s, u8 *msf) {
 	msf[0] = s / 75 / 60;
 	s = s - msf[0] * 75 * 60;
 	msf[1] = s / 75;
@@ -95,7 +86,7 @@ void sec2msf(unsigned int s, char *msf) {
 }
 
 // divide a string of xx:yy:zz into m, s, f
-static void tok2msf(char *time, char *msf) {
+static void tok2msf(char *time, u8 *msf) {
 	char *token;
 
 	token = strtok(time, ":");
@@ -187,7 +178,8 @@ static void *playthread(void *param)
 
 				s += d;
 
-				fread( subbuffer, 1, SUB_FRAMESIZE, cddaHandle );
+				if(fread( subbuffer, SUB_FRAMESIZE, 1, cddaHandle ) != 1)
+					perror("cdr sub read");
 			}
 		}
 		else {
@@ -195,9 +187,10 @@ static void *playthread(void *param)
 
 			sec = cddaCurOffset / CD_FRAMESIZE_RAW;
 
-			if (subHandle != NULL) {
-				fseek(subHandle, sec * SUB_FRAMESIZE, SEEK_SET);
-				fread(subbuffer, 1, SUB_FRAMESIZE, subHandle);
+			if (s && subHandle != NULL) {
+				if(fseek(subHandle, sec * SUB_FRAMESIZE, SEEK_SET) < 0 ||
+				   fread(subbuffer, SUB_FRAMESIZE, 1, subHandle) != 1)
+					perror("cdr sub read");
 			}
 		}
 
@@ -269,7 +262,7 @@ static void *playthread(void *param)
 
 	
 		// Vib Ribbon: decoded buffer IRQ
-		iso_play_cdbuf = sndbuffer;
+		iso_play_cdbuf = (u16 *)sndbuffer;
 		iso_play_bufptr = 0;
 	}
 
@@ -406,21 +399,21 @@ static int parsetoc(const char *isofile) {
 				sscanf(linebuf, "DATAFILE \"%[^\"]\" #%d %8s", name, &t, time2);
 				t /= CD_FRAMESIZE_RAW + (subChanMixed ? SUB_FRAMESIZE : 0);
 				t += 2 * 75;
-				sec2msf(t, (char *)&ti[numtracks].start);
-				tok2msf((char *)&time2, (char *)&ti[numtracks].length);
+				sec2msf(t, (u8 *)&ti[numtracks].start);
+				tok2msf((char *)&time2, (u8 *)&ti[numtracks].length);
 			}
 			else {
 				sscanf(linebuf, "DATAFILE \"%[^\"]\" %8s", name, time);
-				tok2msf((char *)&time, (char *)&ti[numtracks].length);
+				tok2msf((char *)&time, (u8 *)&ti[numtracks].length);
 			}
 		}
 		else if (!strcmp(token, "FILE")) {
 			sscanf(linebuf, "FILE \"%[^\"]\" #%d %8s %8s", name, &t, time, time2);
-			tok2msf((char *)&time, (char *)&ti[numtracks].start);
+			tok2msf((char *)&time, (u8 *)&ti[numtracks].start);
 			t /= CD_FRAMESIZE_RAW + (subChanMixed ? SUB_FRAMESIZE : 0);
-			t += msf2sec(ti[numtracks].start) + 2 * 75;
-			sec2msf(t, (char *)&ti[numtracks].start);
-			tok2msf((char *)&time2, (char *)&ti[numtracks].length);
+			t += msf2sec((u8 *)&ti[numtracks].start) + 2 * 75;
+			sec2msf(t, (u8 *)&ti[numtracks].start);
+			tok2msf((char *)&time2, (u8 *)&ti[numtracks].length);
 		}
 	}
 
@@ -497,10 +490,10 @@ static int parsecue(const char *isofile) {
 				if (*tmp != '\n') sscanf(tmp, "%8s", time);
 			}
 
-			tok2msf((char *)&time, (char *)&ti[numtracks].start);
+			tok2msf((char *)&time, (u8 *)&ti[numtracks].start);
 
-			t = msf2sec(ti[numtracks].start) + 2 * 75;
-			sec2msf(t, ti[numtracks].start);
+			t = msf2sec((u8 *)&ti[numtracks].start) + 2 * 75;
+			sec2msf(t, (u8 *)&ti[numtracks].start);
 
 			// If we've already seen another track, this is its end
 			if (numtracks > 1) {
@@ -607,29 +600,37 @@ static int parsemds(const char *isofile) {
 	memset(&ti, 0, sizeof(ti));
 
 	// check if it's a valid mds file
-	fread(&i, 1, sizeof(unsigned int), fi);
-	i = SWAP32(i);
-	if (i != 0x4944454D) {
+	if(fread(&i, sizeof(unsigned int), 1, fi) != 1 ||
+	   SWAP32(i) != 0x4944454D) {
 		// not an valid mds file
 		fclose(fi);
 		return -1;
 	}
 
 	// get offset to session block
-	fseek(fi, 0x50, SEEK_SET);
-	fread(&offset, 1, sizeof(unsigned int), fi);
+	if(fseek(fi, 0x50, SEEK_SET) < 0 ||
+	   fread(&offset, sizeof(unsigned int), 1, fi) != 1) {
+		fclose(fi);
+		return -1;
+	}
 	offset = SWAP32(offset);
 
 	// get total number of tracks
 	offset += 14;
-	fseek(fi, offset, SEEK_SET);
-	fread(&s, 1, sizeof(unsigned short), fi);
+	if(fseek(fi, offset, SEEK_SET) < 0 ||
+	   fread(&s, sizeof(unsigned short), 1, fi) != 1) {
+		fclose(fi);
+		return -1;
+	}
 	s = SWAP16(s);
 	numtracks = s;
 
 	// get offset to track blocks
-	fseek(fi, 4, SEEK_CUR);
-	fread(&offset, 1, sizeof(unsigned int), fi);
+	if(fseek(fi, 4, SEEK_CUR) < 0 ||
+	   fread(&offset, sizeof(unsigned int), 1, fi) != 1) {
+		fclose(fi);
+		return -1;
+	}
 	offset = SWAP32(offset);
 
 	// skip lead-in data
@@ -664,11 +665,17 @@ static int parsemds(const char *isofile) {
 		}
 
 		// get the track length
-		fread(&extra_offset, 1, sizeof(unsigned int), fi);
+		if(fread(&extra_offset, sizeof(unsigned int), 1, fi) != 1) {
+			fclose(fi);
+			return -1;
+		}
 		extra_offset = SWAP32(extra_offset);
 
-		fseek(fi, extra_offset + 4, SEEK_SET);
-		fread(&l, 1, sizeof(unsigned int), fi);
+		if(fseek(fi, extra_offset + 4, SEEK_SET) < 0 ||
+		   fread(&l, sizeof(unsigned int), 1, fi)) {
+			fclose(fi);
+			return -1;
+		}
 		l = SWAP32(l);
 		sec2msf(l, ti[i].length);
 
@@ -768,9 +775,9 @@ static long CALLBACK ISOopen(void) {
 		//guess whether it is mode1/2048
 		fseek(cdHandle, 0, SEEK_END);
 		if(ftell(cdHandle) % 2048 == 0) {
-			fseek(cdHandle, 0, SEEK_SET);
-			fread(&modeTest, 4, 1, cdHandle);
-			if(SWAP32(modeTest)!=0xffffff00) isMode1ISO = TRUE;
+			if(fseek(cdHandle, 0, SEEK_SET) >= 0 &&
+			   fread(&modeTest, 4, 1, cdHandle) == 1 &&
+			   SWAP32(modeTest)!=0xffffff00) isMode1ISO = TRUE;
 		}
 		fseek(cdHandle, 0, SEEK_SET);
 	}
@@ -880,29 +887,33 @@ static long CALLBACK ISOreadTrack(unsigned char *time) {
 	}
 
 	if (subChanMixed) {
-		fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * (CD_FRAMESIZE_RAW + SUB_FRAMESIZE), SEEK_SET);
-		fread(cdbuffer, 1, CD_FRAMESIZE_RAW, cdHandle);
-		fread(subbuffer, 1, SUB_FRAMESIZE, cdHandle);
+		if(fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * (CD_FRAMESIZE_RAW + SUB_FRAMESIZE), SEEK_SET) < 0 ||
+		   fread(cdbuffer, CD_FRAMESIZE_RAW, 1, cdHandle) != 1 ||
+		   fread(subbuffer, SUB_FRAMESIZE, 1, cdHandle) != 1)
+			return -1;
 
 		if (subChanRaw) DecodeRawSubData();
 	}
 	else {
 		if(isMode1ISO) {
-			fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * MODE1_DATA_SIZE, SEEK_SET);
-			fread(cdbuffer + 12, 1, MODE1_DATA_SIZE, cdHandle);
+			if(fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * MODE1_DATA_SIZE, SEEK_SET) < 0 ||
+			   fread(cdbuffer + 12, MODE1_DATA_SIZE, 1, cdHandle) != 1)
+				return -1;
 			memset(cdbuffer, 0, 12); //not really necessary, fake mode 2 header
 			cdbuffer[0] = (time[0]);
 			cdbuffer[1] = (time[1]);
 			cdbuffer[2] = (time[2]);
 			cdbuffer[3] = 1; //mode 1
 		} else {
-			fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * CD_FRAMESIZE_RAW, SEEK_SET);
-			fread(cdbuffer, 1, CD_FRAMESIZE_RAW, cdHandle);
+			if(fseek(cdHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * CD_FRAMESIZE_RAW, SEEK_SET) < 0 ||
+			   fread(cdbuffer, CD_FRAMESIZE_RAW, 1, cdHandle) != 1)
+				return -1;
 		}
 
 		if (subHandle != NULL) {
-			fseek(subHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * SUB_FRAMESIZE, SEEK_SET);
-			fread(subbuffer, 1, SUB_FRAMESIZE, subHandle);
+			if(fseek(subHandle, MSF2SECT(btoi(time[0]), btoi(time[1]), btoi(time[2])) * SUB_FRAMESIZE, SEEK_SET) < 0 ||
+			   fread(subbuffer, SUB_FRAMESIZE, 1, subHandle) != 1)
+				return -1;
 
 			if (subChanRaw) DecodeRawSubData();
 		}
@@ -966,7 +977,7 @@ static long CALLBACK ISOgetStatus(struct CdrStat *stat) {
 }
 
 // read CDDA sector into buffer
-long CALLBACK ISOreadCDDA(unsigned char m, unsigned char s, unsigned char f, unsigned char *buffer) {
+static long CALLBACK ISOreadCDDA(unsigned char m, unsigned char s, unsigned char f, unsigned char *buffer) {
 	unsigned char msf[3] = {m, s, f};
 	unsigned char *p;
 

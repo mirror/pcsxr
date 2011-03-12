@@ -18,7 +18,8 @@ void SaveConf() {
 
 	f = fopen(CFG_FILENAME, "w");
 	if (f == NULL) return;
-	fwrite(&conf, 1, sizeof(conf), f);
+	if(fwrite(&conf, sizeof(conf), 1, f) != 1)
+		perror(CFG_FILENAME);
 	fclose(f);
 }
 
@@ -33,6 +34,7 @@ void LoadConf() {
 		return;
 	}
 
-	fread(&conf, 1, sizeof(conf), f);
+	if(fread(&conf, sizeof(conf), 1, f) != 1)
+		perror(CFG_FILENAME);
 	fclose(f);
 }

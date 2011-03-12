@@ -262,7 +262,7 @@ static void ScanAllPlugins (void) {
 }
 
 // Set the default plugin name
-void set_default_plugin(char *plugin_name, char *conf_plugin_name) {
+static void set_default_plugin(char *plugin_name, char *conf_plugin_name) {
 	if (strlen(plugin_name) != 0) {
 		strcpy(conf_plugin_name, plugin_name);
 		printf("Picking default plugin: %s\n", plugin_name);
@@ -308,8 +308,8 @@ int main(int argc, char *argv[]) {
 			if (i+1 >= argc) break;
 			strncpy(isofilename, argv[++i], MAXPATHLEN);
 			if (isofilename[0] != '/') {
-				getcwd(path, MAXPATHLEN);
-				if (strlen(path) + strlen(isofilename) + 1 < MAXPATHLEN) {
+				if (getcwd(path, MAXPATHLEN) != NULL &&
+				    strlen(path) + strlen(isofilename) + 1 < MAXPATHLEN) {
 					strcat(path, "/");
 					strcat(path, isofilename);
 					strcpy(isofilename, path);
@@ -340,8 +340,8 @@ int main(int argc, char *argv[]) {
 		} else {
 			strncpy(file, argv[i], MAXPATHLEN);
 			if (file[0] != '/') {
-				getcwd(path, MAXPATHLEN);
-				if (strlen(path) + strlen(file) + 1 < MAXPATHLEN) {
+				if (getcwd(path, MAXPATHLEN) != NULL &&
+				    strlen(path) + strlen(file) + 1 < MAXPATHLEN) {
 					strcat(path, "/");
 					strcat(path, file);
 					strcpy(file, path);
@@ -406,7 +406,8 @@ int main(int argc, char *argv[]) {
 	// switch to plugin dotdir
 	// this lets plugins work without modification!
 	gchar *plugin_default_dir = g_build_filename(getenv("HOME"), PLUGINS_DIR, NULL);
-	chdir(plugin_default_dir);
+	if(chdir(Config.PluginsDir) < 0)
+		perror(Config.PluginsDir);
 	g_free(plugin_default_dir);
 
 	if (UseGui && runcd != RUN_CD) SetIsoFile(NULL);
@@ -542,7 +543,6 @@ static void SysDisableScreenSaver() {
 	static time_t fake_key_timer = 0;
 	static char first_time = 1, has_test_ext = 0, t = 1;
 	Display *display;
-	extern unsigned long gpuDisp;
 
 	display = (Display *)gpuDisp;
 

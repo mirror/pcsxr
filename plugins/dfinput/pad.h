@@ -50,16 +50,6 @@ typedef void *Display;
 
 #include "psemu_plugin_defs.h"
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#include <locale.h>
-#define _(x)  gettext(x)
-#define N_(x) (x)
-#else
-#define _(x)  (x)
-#define N_(x) (x)
-#endif
-
 enum {
 	DKEY_SELECT = 0,
 	DKEY_L3,
@@ -173,23 +163,7 @@ void CheckAnalog();
 int AnalogKeyPressed(uint16_t Key);
 int AnalogKeyReleased(uint16_t Key);
 
-// pad.c functions...
-char *PSEgetLibName(void);
-uint32_t PSEgetLibType(void);
-uint32_t PSEgetLibVersion(void);
-long PADinit(long flags);
-long PADshutdown(void);
-long PADopen(unsigned long *Disp);
-long PADclose(void);
-long PADquery(void);
-unsigned char PADstartPoll(int pad);
-unsigned char PADpoll(unsigned char value);
-long PADreadPort1(PadDataS *pad);
-long PADreadPort2(PadDataS *pad);
-long PADkeypressed(void);
-long PADconfigure(void);
-void PADabout(void);
-long PADtest(void);
+#include "psemu_plugin_defs.h"
 
 #ifdef __cplusplus
 }

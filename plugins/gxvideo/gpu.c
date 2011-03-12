@@ -27,6 +27,7 @@
 #include "globals.h"
 #include "gpu.h"
 #include "swap.h"
+#include "psemu_plugin_defs.h"
 
 #define CALLBACK
 
@@ -47,16 +48,6 @@
 #define MIN(a,b) ((a) > (b) ? (b) : (a))
 #define MAX(a,b) ((a) < (b) ? (b) : (a))
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#include <locale.h>
-#define _(x)  gettext(x)
-#define N_(x) (x)
-#else
-#define _(x)  (x)
-#define N_(x) (x)
-#endif
-
 ////////////////////////////////////////////////////////////////////////
 // PPDK developer must change libraryName field and can change revision and build
 ////////////////////////////////////////////////////////////////////////
@@ -66,7 +57,9 @@ unsigned char const revision = 0;
 unsigned char const build = 0; // increase that with each version
 
 static char const * libraryName = N_("GXVideo Driver");
+#if 0
 static char const * libraryInfo = N_("GXvideo Driver v1.00");
+#endif
 //static char const * PluginAuthor =
 //		N_("gschwind (rewrite from Pete Bernert and the P.E.Op.S. team)");
 
@@ -105,9 +98,11 @@ unsigned long CALLBACK PSEgetLibVersion(void) {
 	return version << 16 | revision << 8 | build;
 }
 
+#if 0
 char * GPUgetLibInfos(void) {
 	return _(libraryInfo);
 }
+#endif
 
 ////////////////////////////////////////////////////////////////////////
 // Snapshot func
@@ -785,7 +780,7 @@ void CALLBACK GPUwriteStatus(uint32_t gdata) {
 // vram read/write helpers, needed by LEWPY's optimized vram read/write :)
 ////////////////////////////////////////////////////////////////////////
 
-inline void FinishedVRAMWrite(void) {
+static inline void FinishedVRAMWrite(void) {
 	// Set register to NORMAL operation
 	g_gpu.DataWriteMode = DR_NORMAL;
 	// Reset transfer values, to prevent mis-transfer of data
@@ -797,7 +792,7 @@ inline void FinishedVRAMWrite(void) {
 	g_gpu.VRAMWrite.RowsRemaining = 0;
 }
 
-inline void FinishedVRAMRead(void) {
+static inline void FinishedVRAMRead(void) {
 	// Set register to NORMAL operation
 	g_gpu.DataReadMode = DR_NORMAL;
 	// Reset transfer values, to prevent mis-transfer of data
@@ -1100,6 +1095,7 @@ void CALLBACK GPUwriteData(uint32_t gdata) {
 // this functions will be removed soon (or 'soonish')... not really needed, but some emus want them
 ////////////////////////////////////////////////////////////////////////
 
+#if 0
 void CALLBACK GPUsetMode(unsigned long gdata) {
 	// Peops does nothing here...
 	// DataWriteMode=(gdata&1)?DR_VRAMTRANSFER:DR_NORMAL;
@@ -1115,6 +1111,7 @@ long CALLBACK GPUgetMode(void) {
 		iT |= 0x2;
 	return iT;
 }
+#endif
 
 ////////////////////////////////////////////////////////////////////////
 // call config dlg
@@ -1129,9 +1126,11 @@ long CALLBACK GPUconfigure(void) {
 // sets all kind of act fixes
 ////////////////////////////////////////////////////////////////////////
 
+#if 0
 void SetFixes(void) {
 
 }
+#endif
 
 ////////////////////////////////////////////////////////////////////////
 // process gpu commands
@@ -1139,7 +1138,7 @@ void SetFixes(void) {
 
 unsigned long lUsedAddr[3];
 
-inline char CheckForEndlessLoop(unsigned long laddr) {
+static inline char CheckForEndlessLoop(unsigned long laddr) {
 	if (laddr == lUsedAddr[1])
 		return 1;
 	if (laddr == lUsedAddr[2])
@@ -1210,15 +1209,6 @@ long CALLBACK GPUtest(void) {
 
 ////////////////////////////////////////////////////////////////////////
 // Freeze
-////////////////////////////////////////////////////////////////////////
-
-typedef struct GPUFREEZETAG {
-	uint32_t ulFreezeVersion; // should be always 1 for now (set by main emu)
-	uint32_t ulStatus; // current gpu status
-	uint32_t ulControl[256]; // latest control register values
-	unsigned char psxVRam[1024 * 1024 * 2]; // current VRam image (full 2 MB for ZN)
-} GPUFreeze_t;
-
 ////////////////////////////////////////////////////////////////////////
 
 long CALLBACK GPUfreeze(uint32_t ulGetFreezeData, GPUFreeze_t * pF) {
@@ -1422,7 +1412,8 @@ unsigned char cFont[10][120] = {
 
 ////////////////////////////////////////////////////////////////////////
 
-void PaintPicDot(unsigned char * p, unsigned char c) {
+#if 0
+static void PaintPicDot(unsigned char * p, unsigned char c) {
 
 	if (c == 0) {
 		*p++ = 0x00;
@@ -1444,6 +1435,7 @@ void PaintPicDot(unsigned char * p, unsigned char c) {
 	} // red
 	// transparent
 }
+#endif
 
 ////////////////////////////////////////////////////////////////////////
 // the main emu allocs 128x96x3 bytes, and passes a ptr
@@ -1455,9 +1447,7 @@ void PaintPicDot(unsigned char * p, unsigned char c) {
 // rendered picture
 // LINUX version:
 
-//extern char * Xpixels;
-
-void GPUgetScreenPic(unsigned char * pMem) {
+long GPUgetScreenPic(unsigned char * pMem) {
 	/*
 	 unsigned short c;unsigned char * pf;int x,y;
 
@@ -1525,6 +1515,7 @@ void GPUgetScreenPic(unsigned char * pMem) {
 	 pf+=127*3;                                          // offset to next line
 	 }
 	 */
+	return -1;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -1535,16 +1526,19 @@ void GPUgetScreenPic(unsigned char * pMem) {
 // release your picture data and stop displaying
 // the screen pic
 
-void CALLBACK GPUshowScreenPic(unsigned char * pMem) {
+long CALLBACK GPUshowScreenPic(unsigned char * pMem) {
 	DestroyPic(); // destroy old pic data
 	if (pMem == 0)
-		return; // done
+		return 0; // done
 	CreatePic(pMem); // create new pic... don't free pMem or something like that... just read from it
+	return 0;
 }
 
+#if 0
 void CALLBACK GPUsetfix(uint32_t dwFixBits) {
 	g_prim.dwEmuFixes = dwFixBits;
 }
+#endif
 
 void CALLBACK GPUvBlank(int val) {
 	//fprintf(stderr, "Vblanc %d\n", val);

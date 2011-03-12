@@ -344,6 +344,7 @@ static void iDumpRegs() {
 void iDumpBlock(char *ptr) {
 	FILE *f;
 	u32 i;
+	char buf[100];
 
 	SysPrintf("dump1 %x:%x, %x\n", psxRegs.pc, pc, psxRegs.cycle);
 
@@ -354,8 +355,8 @@ void iDumpBlock(char *ptr) {
 	f = fopen("dump1", "w");
 	fwrite(ptr, 1, (u32)x86Ptr - (u32)ptr, f);
 	fclose(f);
-	system("ndisasmw -u dump1");
-	fflush(stdout);
+	sprintf(buf, "objdump -m i386 -M i386 -D -b binary --adjust-vma=0x%lx dump1", (unsigned long)ptr);
+	system(buf);
 }
 
 #define REC_FUNC(f) \
@@ -1551,9 +1552,6 @@ static void recLW() {
 	resp+= 4;
 }
 
-extern u32 LWL_MASK[4];
-extern u32 LWL_SHIFT[4];
-
 void iLWLk(u32 shift) {
 	if (IsConst(_Rt_)) {
 		MOV32ItoR(ECX, iRegs[_Rt_].k);
@@ -1702,9 +1700,6 @@ static void recLWBlock(int count) {
 	x86SetJ32(j32Ptr[5]);
 	resp = respsave;
 }
-
-extern u32 LWR_MASK[4];
-extern u32 LWR_SHIFT[4];
 
 void iLWRk(u32 shift) {
 	if (IsConst(_Rt_)) {
@@ -2051,9 +2046,6 @@ static void recSWBlock(int count) {
 	resp = respsave;
 }
 
-extern u32 SWL_MASK[4];
-extern u32 SWL_SHIFT[4];
-
 void iSWLk(u32 shift) {
 	if (IsConst(_Rt_)) {
 		MOV32ItoR(ECX, iRegs[_Rt_].k);
@@ -2132,9 +2124,6 @@ void recSWL() {
 //	ADD32ItoR(ESP, 8);
 	resp+= 8;
 }
-
-extern u32 SWR_MASK[4];
-extern u32 SWR_SHIFT[4];
 
 void iSWRk(u32 shift) {
 	if (IsConst(_Rt_)) {

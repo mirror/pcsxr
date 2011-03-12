@@ -2130,9 +2130,7 @@ REC_FUNC(LWL);
 REC_FUNC(LWR);
 REC_FUNC(SWL);
 REC_FUNC(SWR);
-/*extern u32 LWL_MASK[4];
-extern u32 LWL_SHIFT[4];
-
+/*
 void iLWLk(u32 shift) {
 	if (IsConst(_Rt_)) {
 		MOV32ItoR(ECX, iRegs[_Rt_].k);
@@ -2278,9 +2276,6 @@ static void recLWBlock(int count) {
 	x86SetJ32(j32Ptr[5]);
 	resp = respsave;
 }
-
-extern u32 LWR_MASK[4];
-extern u32 LWR_SHIFT[4];
 
 void iLWRk(u32 shift) {
 	if (IsConst(_Rt_)) {
@@ -2580,9 +2575,6 @@ static void recSWBlock(int count) {
 	resp = respsave;
 }
 
-extern u32 SWL_MASK[4];
-extern u32 SWL_SHIFT[4];
-
 void iSWLk(u32 shift) {
 	if (IsConst(_Rt_)) {
 		MOV32ItoR(ECX, iRegs[_Rt_].k);
@@ -2658,9 +2650,6 @@ void recSWL() {
 //	ADD32ItoR(ESP, 8);
 	resp+= 8;
 }
-
-extern u32 SWR_MASK[4];
-extern u32 SWR_SHIFT[4];
 
 void iSWRk(u32 shift) {
 	if (IsConst(_Rt_)) {

@@ -192,7 +192,7 @@ void offsetPSX4(void) {
 uint8_t const dithertable[16] = { 7, 0, 6, 1, 2, 5, 3, 4, 1, 6, 0, 7, 4, 3, 5,
 		2 };
 
-void Dither16(uint16_t * pdest, uint32_t r, uint32_t g, uint32_t b, uint16_t sM) {
+static void Dither16(uint16_t * pdest, uint32_t r, uint32_t g, uint32_t b, uint16_t sM) {
 	uint8_t coeff;
 	uint8_t rlow, glow, blow;
 	int x, y;
@@ -225,7 +225,7 @@ void Dither16(uint16_t * pdest, uint32_t r, uint32_t g, uint32_t b, uint16_t sM)
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 
-inline void GetShadeTransCol_Dither(uint16_t * pdest, int32_t m1,
+static inline void GetShadeTransCol_Dither(uint16_t * pdest, int32_t m1,
 		int32_t m2, int32_t m3) {
 	int32_t r, g, b;
 
@@ -284,7 +284,7 @@ inline void GetShadeTransCol_Dither(uint16_t * pdest, int32_t m1,
 
 ////////////////////////////////////////////////////////////////////////
 
-inline void GetShadeTransCol(unsigned short * pdest, unsigned short color) {
+static inline void GetShadeTransCol(unsigned short * pdest, unsigned short color) {
 	if (g_draw.bCheckMask && (*pdest & HOST2LE16(0x8000)))
 		return;
 
@@ -339,7 +339,7 @@ else		PUTLE16(pdest, color|g_draw.sSetMask);
 
 	////////////////////////////////////////////////////////////////////////
 
-inline void GetShadeTransCol32(uint32_t * pdest, uint32_t color) {
+static inline void GetShadeTransCol32(uint32_t * pdest, uint32_t color) {
 	if (g_soft.DrawSemiTrans) {
 		int32_t r, g, b;
 
@@ -438,7 +438,7 @@ inline void GetShadeTransCol32(uint32_t * pdest, uint32_t color) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline void GetTextureTransColG(unsigned short * pdest, unsigned short color) {
+static inline void GetTextureTransColG(unsigned short * pdest, unsigned short color) {
 	int32_t r, g, b;
 	unsigned short l;
 
@@ -516,7 +516,7 @@ inline void GetTextureTransColG(unsigned short * pdest, unsigned short color) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline void GetTextureTransColG_S(unsigned short * pdest, unsigned short color) {
+static inline void GetTextureTransColG_S(unsigned short * pdest, unsigned short color) {
 	int32_t r, g, b;
 	unsigned short l;
 
@@ -541,7 +541,7 @@ inline void GetTextureTransColG_S(unsigned short * pdest, unsigned short color) 
 
 ////////////////////////////////////////////////////////////////////////
 
-inline void GetTextureTransColG_SPR(unsigned short * pdest,
+static inline void GetTextureTransColG_SPR(unsigned short * pdest,
 		unsigned short color) {
 	int32_t r, g, b;
 	unsigned short l;
@@ -620,7 +620,7 @@ inline void GetTextureTransColG_SPR(unsigned short * pdest,
 
 ////////////////////////////////////////////////////////////////////////
 
-inline void GetTextureTransColG32(uint32_t * pdest, uint32_t color) {
+static inline void GetTextureTransColG32(uint32_t * pdest, uint32_t color) {
 	int32_t r, g, b, l;
 
 	if (color == 0)
@@ -752,7 +752,7 @@ inline void GetTextureTransColG32(uint32_t * pdest, uint32_t color) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline void GetTextureTransColG32_S(uint32_t * pdest, uint32_t color) {
+static inline void GetTextureTransColG32_S(uint32_t * pdest, uint32_t color) {
 	int32_t r, g, b;
 
 	if (color == 0)
@@ -789,7 +789,7 @@ inline void GetTextureTransColG32_S(uint32_t * pdest, uint32_t color) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline void GetTextureTransColG32_SPR(uint32_t * pdest, uint32_t color) {
+static inline void GetTextureTransColG32_SPR(uint32_t * pdest, uint32_t color) {
 	int32_t r, g, b;
 
 	if (color == 0)
@@ -919,7 +919,7 @@ inline void GetTextureTransColG32_SPR(uint32_t * pdest, uint32_t color) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline void GetTextureTransColGX_Dither(unsigned short * pdest,
+static inline void GetTextureTransColGX_Dither(unsigned short * pdest,
 		unsigned short color, int32_t m1, int32_t m2, int32_t m3) {
 	int32_t r, g, b;
 
@@ -986,7 +986,7 @@ inline void GetTextureTransColGX_Dither(unsigned short * pdest,
 
 ////////////////////////////////////////////////////////////////////////
 
-inline void GetTextureTransColGX(unsigned short * pdest, unsigned short color,
+static inline void GetTextureTransColGX(unsigned short * pdest, unsigned short color,
 		short m1, short m2, short m3) {
 	int32_t r, g, b;
 	unsigned short l;
@@ -1055,7 +1055,7 @@ inline void GetTextureTransColGX(unsigned short * pdest, unsigned short color,
 
 ////////////////////////////////////////////////////////////////////////
 
-inline void GetTextureTransColGX_S(unsigned short * pdest,
+static inline void GetTextureTransColGX_S(unsigned short * pdest,
 		unsigned short color, short m1, short m2, short m3) {
 	int32_t r, g, b;
 
@@ -1078,7 +1078,7 @@ inline void GetTextureTransColGX_S(unsigned short * pdest,
 
 ////////////////////////////////////////////////////////////////////////
 
-inline void GetTextureTransColGX32_S(uint32_t * pdest, uint32_t color,
+static inline void GetTextureTransColGX32_S(uint32_t * pdest, uint32_t color,
 		short m1, short m2, short m3) {
 	int32_t r, g, b;
 
@@ -1301,11 +1301,11 @@ static int left_B, delta_left_B, right_B, delta_right_B;
 // NASM version (external):
 #define shl10idiv i386_shl10idiv
 
-inline int shl10idiv(int x, int y);
+static inline int shl10idiv(int x, int y);
 
 #else
 
-inline int shl10idiv(int x, int y) {
+static inline int shl10idiv(int x, int y) {
 	int64_t bi = x;
 	bi <<= 10;
 	return bi / y;
@@ -1317,7 +1317,7 @@ inline int shl10idiv(int x, int y) {
 
 // GNUC long long int version:
 
-inline int shl10idiv(int x, int y)
+static inline int shl10idiv(int x, int y)
 {
 	long long int bi=x;
 	bi<<=10;
@@ -1330,7 +1330,7 @@ inline int shl10idiv(int x, int y)
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-inline int RightSection_F(void) {
+static inline int RightSection_F(void) {
 	soft_vertex * v1 = right_array[right_section];
 	soft_vertex * v2 = right_array[right_section - 1];
 
@@ -1346,7 +1346,7 @@ inline int RightSection_F(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline int LeftSection_F(void) {
+static inline int LeftSection_F(void) {
 	soft_vertex * v1 = left_array[left_section];
 	soft_vertex * v2 = left_array[left_section - 1];
 
@@ -1362,7 +1362,7 @@ inline int LeftSection_F(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline char NextRow_F(void) {
+static inline char NextRow_F(void) {
 	if (--left_section_height <= 0) {
 		if (--left_section <= 0) {
 			return 1;
@@ -1389,7 +1389,7 @@ inline char NextRow_F(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline char SetupSections_F(short x1, short y1, short x2, short y2, short x3,
+static inline char SetupSections_F(short x1, short y1, short x2, short y2, short x3,
 		short y3) {
 	soft_vertex * v1, *v2, *v3;
 	int height, longest;
@@ -1473,7 +1473,7 @@ inline char SetupSections_F(short x1, short y1, short x2, short y2, short x3,
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-inline int RightSection_G(void) {
+static inline int RightSection_G(void) {
 	soft_vertex * v1 = right_array[right_section];
 	soft_vertex * v2 = right_array[right_section - 1];
 
@@ -1489,7 +1489,7 @@ inline int RightSection_G(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline int LeftSection_G(void) {
+static inline int LeftSection_G(void) {
 	soft_vertex * v1 = left_array[left_section];
 	soft_vertex * v2 = left_array[left_section - 1];
 
@@ -1512,7 +1512,7 @@ inline int LeftSection_G(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline char NextRow_G(void) {
+static inline char NextRow_G(void) {
 	if (--left_section_height <= 0) {
 		if (--left_section <= 0) {
 			return 1;
@@ -1542,7 +1542,7 @@ inline char NextRow_G(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline char SetupSections_G(short x1, short y1, short x2, short y2, short x3,
+static inline char SetupSections_G(short x1, short y1, short x2, short y2, short x3,
 		short y3, int32_t rgb1, int32_t rgb2, int32_t rgb3) {
 	soft_vertex * v1, *v2, *v3;
 	int height, longest, temp;
@@ -1646,7 +1646,7 @@ inline char SetupSections_G(short x1, short y1, short x2, short y2, short x3,
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-inline int RightSection_FT(void) {
+static inline int RightSection_FT(void) {
 	soft_vertex * v1 = right_array[right_section];
 	soft_vertex * v2 = right_array[right_section - 1];
 
@@ -1662,7 +1662,7 @@ inline int RightSection_FT(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline int LeftSection_FT(void) {
+static inline int LeftSection_FT(void) {
 	soft_vertex * v1 = left_array[left_section];
 	soft_vertex * v2 = left_array[left_section - 1];
 
@@ -1683,7 +1683,7 @@ inline int LeftSection_FT(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline char NextRow_FT(void) {
+static inline char NextRow_FT(void) {
 	if (--left_section_height <= 0) {
 		if (--left_section <= 0) {
 			return 1;
@@ -1712,7 +1712,7 @@ inline char NextRow_FT(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline char SetupSections_FT(short x1, short y1, short x2, short y2, short x3,
+static inline char SetupSections_FT(short x1, short y1, short x2, short y2, short x3,
 		short y3, short tx1, short ty1, short tx2, short ty2, short tx3,
 		short ty3) {
 	soft_vertex * v1, *v2, *v3;
@@ -1829,7 +1829,7 @@ inline char SetupSections_FT(short x1, short y1, short x2, short y2, short x3,
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-inline int RightSection_GT(void) {
+static inline int RightSection_GT(void) {
 	soft_vertex * v1 = right_array[right_section];
 	soft_vertex * v2 = right_array[right_section - 1];
 
@@ -1845,7 +1845,7 @@ inline int RightSection_GT(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline int LeftSection_GT(void) {
+static inline int LeftSection_GT(void) {
 	soft_vertex * v1 = left_array[left_section];
 	soft_vertex * v2 = left_array[left_section - 1];
 
@@ -1873,7 +1873,7 @@ inline int LeftSection_GT(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline char NextRow_GT(void) {
+static inline char NextRow_GT(void) {
 	if (--left_section_height <= 0) {
 		if (--left_section <= 0) {
 			return 1;
@@ -1905,7 +1905,7 @@ inline char NextRow_GT(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline char SetupSections_GT(short x1, short y1, short x2, short y2, short x3,
+static inline char SetupSections_GT(short x1, short y1, short x2, short y2, short x3,
 		short y3, short tx1, short ty1, short tx2, short ty2, short tx3,
 		short ty3, int32_t rgb1, int32_t rgb2, int32_t rgb3) {
 	soft_vertex * v1, *v2, *v3;
@@ -2040,7 +2040,7 @@ inline char SetupSections_GT(short x1, short y1, short x2, short y2, short x3,
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-inline int RightSection_F4(void) {
+static inline int RightSection_F4(void) {
 	soft_vertex * v1 = right_array[right_section];
 	soft_vertex * v2 = right_array[right_section - 1];
 
@@ -2057,7 +2057,7 @@ inline int RightSection_F4(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline int LeftSection_F4(void) {
+static inline int LeftSection_F4(void) {
 	soft_vertex * v1 = left_array[left_section];
 	soft_vertex * v2 = left_array[left_section - 1];
 
@@ -2074,7 +2074,7 @@ inline int LeftSection_F4(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline char NextRow_F4(void) {
+static inline char NextRow_F4(void) {
 	if (--left_section_height <= 0) {
 		if (--left_section > 0)
 			while (LeftSection_F4() <= 0) {
@@ -2099,7 +2099,7 @@ inline char NextRow_F4(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline char SetupSections_F4(short x1, short y1, short x2, short y2, short x3,
+static inline char SetupSections_F4(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4) {
 	soft_vertex * v1, *v2, *v3, *v4;
 	int height, width, longest1, longest2;
@@ -2268,7 +2268,7 @@ inline char SetupSections_F4(short x1, short y1, short x2, short y2, short x3,
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-inline int RightSection_FT4(void) {
+static inline int RightSection_FT4(void) {
 	soft_vertex * v1 = right_array[right_section];
 	soft_vertex * v2 = right_array[right_section - 1];
 
@@ -2289,7 +2289,7 @@ inline int RightSection_FT4(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline int LeftSection_FT4(void) {
+static inline int LeftSection_FT4(void) {
 	soft_vertex * v1 = left_array[left_section];
 	soft_vertex * v2 = left_array[left_section - 1];
 
@@ -2310,7 +2310,7 @@ inline int LeftSection_FT4(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline char NextRow_FT4(void) {
+static inline char NextRow_FT4(void) {
 	if (--left_section_height <= 0) {
 		if (--left_section > 0)
 			while (LeftSection_FT4() <= 0) {
@@ -2339,7 +2339,7 @@ inline char NextRow_FT4(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline char SetupSections_FT4(short x1, short y1, short x2, short y2, short x3,
+static inline char SetupSections_FT4(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4) {
 	soft_vertex * v1, *v2, *v3, *v4;
@@ -2520,7 +2520,7 @@ inline char SetupSections_FT4(short x1, short y1, short x2, short y2, short x3,
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-inline int RightSection_GT4(void) {
+static inline int RightSection_GT4(void) {
 	soft_vertex * v1 = right_array[right_section];
 	soft_vertex * v2 = right_array[right_section - 1];
 
@@ -2548,7 +2548,7 @@ inline int RightSection_GT4(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline int LeftSection_GT4(void) {
+static inline int LeftSection_GT4(void) {
 	soft_vertex * v1 = left_array[left_section];
 	soft_vertex * v2 = left_array[left_section - 1];
 
@@ -2576,7 +2576,7 @@ inline int LeftSection_GT4(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline char NextRow_GT4(void) {
+static inline char NextRow_GT4(void) {
 	if (--left_section_height <= 0) {
 		if (--left_section > 0)
 			while (LeftSection_GT4() <= 0) {
@@ -2611,7 +2611,7 @@ inline char NextRow_GT4(void) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline char SetupSections_GT4(short x1, short y1, short x2, short y2, short x3,
+static inline char SetupSections_GT4(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, int32_t rgb1,
 		int32_t rgb2, int32_t rgb3, int32_t rgb4) {
@@ -2814,7 +2814,7 @@ inline char SetupSections_GT4(short x1, short y1, short x2, short y2, short x3,
 // POLY 3/4 FLAT SHADED
 ////////////////////////////////////////////////////////////////////////
 
-inline void drawPoly3Fi(short x1, short y1, short x2, short y2, short x3,
+static inline void drawPoly3Fi(short x1, short y1, short x2, short y2, short x3,
 		short y3, int32_t rgb) {
 	int i, j, xmin, xmax, ymin, ymax;
 	unsigned short color;
@@ -2997,7 +2997,7 @@ void drawPoly4F(int32_t rgb) {
 // POLY 3/4 F-SHADED TEX PAL 4
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TEx4(short x1, short y1, short x2, short y2, short x3, short y3,
+static void drawPoly3TEx4(short x1, short y1, short x2, short y2, short x3, short y3,
 		short tx1, short ty1, short tx2, short ty2, short tx3, short ty3,
 		short clX, short clY) {
 	int i, j, xmin, xmax, ymin, ymax;
@@ -3151,7 +3151,7 @@ void drawPoly3TEx4(short x1, short y1, short x2, short y2, short x3, short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TEx4_IL(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly3TEx4_IL(short x1, short y1, short x2, short y2, short x3,
 		short y3, short tx1, short ty1, short tx2, short ty2, short tx3,
 		short ty3, short clX, short clY) {
 	int i, j, xmin, xmax, ymin, ymax, n_xi, n_yi, TXV;
@@ -3332,7 +3332,7 @@ void drawPoly3TEx4_IL(short x1, short y1, short x2, short y2, short x3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TEx4_TW(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly3TEx4_TW(short x1, short y1, short x2, short y2, short x3,
 		short y3, short tx1, short ty1, short tx2, short ty2, short tx3,
 		short ty3, short clX, short clY) {
 	int i, j, xmin, xmax, ymin, ymax;
@@ -3494,7 +3494,7 @@ void drawPoly3TEx4_TW(short x1, short y1, short x2, short y2, short x3,
 
 #ifdef POLYQUAD3
 
-void drawPoly4TEx4_TRI(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TEx4_TRI(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, short clX,
 		short clY) {
@@ -3508,7 +3508,7 @@ void drawPoly4TEx4_TRI(short x1, short y1, short x2, short y2, short x3,
 
 // more exact:
 
-void drawPoly4TEx4(short x1, short y1, short x2, short y2, short x3, short y3,
+static void drawPoly4TEx4(short x1, short y1, short x2, short y2, short x3, short y3,
 		short x4, short y4, short tx1, short ty1, short tx2, short ty2,
 		short tx3, short ty3, short tx4, short ty4, short clX, short clY) {
 	int32_t num;
@@ -3677,7 +3677,7 @@ void drawPoly4TEx4(short x1, short y1, short x2, short y2, short x3, short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly4TEx4_IL(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TEx4_IL(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, short clX,
 		short clY) {
@@ -3872,7 +3872,7 @@ void drawPoly4TEx4_IL(short x1, short y1, short x2, short y2, short x3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly4TEx4_TW(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TEx4_TW(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, short clX,
 		short clY) {
@@ -4044,7 +4044,7 @@ void drawPoly4TEx4_TW(short x1, short y1, short x2, short y2, short x3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly4TEx4_TW_S(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TEx4_TW_S(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, short clX,
 		short clY) {
@@ -4216,7 +4216,7 @@ void drawPoly4TEx4_TW_S(short x1, short y1, short x2, short y2, short x3,
 // POLY 3 F-SHADED TEX PAL 8
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TEx8(short x1, short y1, short x2, short y2, short x3, short y3,
+static void drawPoly3TEx8(short x1, short y1, short x2, short y2, short x3, short y3,
 		short tx1, short ty1, short tx2, short ty2, short tx3, short ty3,
 		short clX, short clY) {
 	int i, j, xmin, xmax, ymin, ymax;
@@ -4358,7 +4358,7 @@ void drawPoly3TEx8(short x1, short y1, short x2, short y2, short x3, short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TEx8_IL(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly3TEx8_IL(short x1, short y1, short x2, short y2, short x3,
 		short y3, short tx1, short ty1, short tx2, short ty2, short tx3,
 		short ty3, short clX, short clY) {
 	int i, j, xmin, xmax, ymin, ymax, n_xi, n_yi, TXV, TXU;
@@ -4539,7 +4539,7 @@ void drawPoly3TEx8_IL(short x1, short y1, short x2, short y2, short x3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TEx8_TW(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly3TEx8_TW(short x1, short y1, short x2, short y2, short x3,
 		short y3, short tx1, short ty1, short tx2, short ty2, short tx3,
 		short ty3, short clX, short clY) {
 	int i, j, xmin, xmax, ymin, ymax;
@@ -4689,7 +4689,7 @@ void drawPoly3TEx8_TW(short x1, short y1, short x2, short y2, short x3,
 
 #ifdef POLYQUAD3
 
-void drawPoly4TEx8_TRI(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TEx8_TRI(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, short clX,
 		short clY) {
@@ -4704,7 +4704,7 @@ void drawPoly4TEx8_TRI(short x1, short y1, short x2, short y2, short x3,
 
 // more exact:
 
-void drawPoly4TEx8(short x1, short y1, short x2, short y2, short x3, short y3,
+static void drawPoly4TEx8(short x1, short y1, short x2, short y2, short x3, short y3,
 		short x4, short y4, short tx1, short ty1, short tx2, short ty2,
 		short tx3, short ty3, short tx4, short ty4, short clX, short clY) {
 	int32_t num;
@@ -4860,7 +4860,7 @@ void drawPoly4TEx8(short x1, short y1, short x2, short y2, short x3, short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly4TEx8_IL(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TEx8_IL(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, short clX,
 		short clY) {
@@ -5054,7 +5054,7 @@ void drawPoly4TEx8_IL(short x1, short y1, short x2, short y2, short x3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly4TEx8_TW(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TEx8_TW(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, short clX,
 		short clY) {
@@ -5214,7 +5214,7 @@ void drawPoly4TEx8_TW(short x1, short y1, short x2, short y2, short x3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly4TEx8_TW_S(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TEx8_TW_S(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, short clX,
 		short clY) {
@@ -5375,7 +5375,7 @@ void drawPoly4TEx8_TW_S(short x1, short y1, short x2, short y2, short x3,
 // POLY 3 F-SHADED TEX 15 BIT
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TD(short x1, short y1, short x2, short y2, short x3, short y3,
+static void drawPoly3TD(short x1, short y1, short x2, short y2, short x3, short y3,
 		short tx1, short ty1, short tx2, short ty2, short tx3, short ty3) {
 	int i, j, xmin, xmax, ymin, ymax;
 	int32_t difX, difY, difX2, difY2;
@@ -5492,7 +5492,7 @@ void drawPoly3TD(short x1, short y1, short x2, short y2, short x3, short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TD_TW(short x1, short y1, short x2, short y2, short x3, short y3,
+static void drawPoly3TD_TW(short x1, short y1, short x2, short y2, short x3, short y3,
 		short tx1, short ty1, short tx2, short ty2, short tx3, short ty3) {
 	int i, j, xmin, xmax, ymin, ymax;
 	int32_t difX, difY, difX2, difY2;
@@ -5617,7 +5617,7 @@ void drawPoly3TD_TW(short x1, short y1, short x2, short y2, short x3, short y3,
 
 #ifdef POLYQUAD3
 
-void drawPoly4TD_TRI(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TD_TRI(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4) {
 	drawPoly3TD(x2, y2, x3, y3, x4, y4, tx2, ty2, tx3, ty3, tx4, ty4);
@@ -5628,7 +5628,7 @@ void drawPoly4TD_TRI(short x1, short y1, short x2, short y2, short x3,
 
 // more exact:
 
-void drawPoly4TD(short x1, short y1, short x2, short y2, short x3, short y3,
+static void drawPoly4TD(short x1, short y1, short x2, short y2, short x3, short y3,
 		short x4, short y4, short tx1, short ty1, short tx2, short ty2,
 		short tx3, short ty3, short tx4, short ty4) {
 	int32_t num;
@@ -5763,7 +5763,7 @@ void drawPoly4TD(short x1, short y1, short x2, short y2, short x3, short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly4TD_TW(short x1, short y1, short x2, short y2, short x3, short y3,
+static void drawPoly4TD_TW(short x1, short y1, short x2, short y2, short x3, short y3,
 		short x4, short y4, short tx1, short ty1, short tx2, short ty2,
 		short tx3, short ty3, short tx4, short ty4) {
 	int32_t num;
@@ -5904,7 +5904,7 @@ void drawPoly4TD_TW(short x1, short y1, short x2, short y2, short x3, short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly4TD_TW_S(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TD_TW_S(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4) {
 	int32_t num;
@@ -6047,7 +6047,7 @@ void drawPoly4TD_TW_S(short x1, short y1, short x2, short y2, short x3,
 // POLY 3/4 G-SHADED
 ////////////////////////////////////////////////////////////////////////
 
-inline void drawPoly3Gi(short x1, short y1, short x2, short y2, short x3,
+static inline void drawPoly3Gi(short x1, short y1, short x2, short y2, short x3,
 		short y3, int32_t rgb1, int32_t rgb2, int32_t rgb3) {
 	int i, j, xmin, xmax, ymin, ymax;
 	int32_t cR1, cG1, cB1;
@@ -6212,7 +6212,7 @@ void drawPoly4G(int32_t rgb1, int32_t rgb2, int32_t rgb3, int32_t rgb4) {
 // POLY 3/4 G-SHADED TEX PAL4
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGEx4(short x1, short y1, short x2, short y2, short x3, short y3,
+static void drawPoly3TGEx4(short x1, short y1, short x2, short y2, short x3, short y3,
 		short tx1, short ty1, short tx2, short ty2, short tx3, short ty3,
 		short clX, short clY, int32_t col1, int32_t col2, int32_t col3) {
 	int i, j, xmin, xmax, ymin, ymax;
@@ -6383,7 +6383,7 @@ void drawPoly3TGEx4(short x1, short y1, short x2, short y2, short x3, short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGEx4_IL(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly3TGEx4_IL(short x1, short y1, short x2, short y2, short x3,
 		short y3, short tx1, short ty1, short tx2, short ty2, short tx3,
 		short ty3, short clX, short clY, int32_t col1, int32_t col2,
 		int32_t col3) {
@@ -6575,7 +6575,7 @@ void drawPoly3TGEx4_IL(short x1, short y1, short x2, short y2, short x3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGEx4_TW(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly3TGEx4_TW(short x1, short y1, short x2, short y2, short x3,
 		short y3, short tx1, short ty1, short tx2, short ty2, short tx3,
 		short ty3, short clX, short clY, int32_t col1, int32_t col2,
 		int32_t col3) {
@@ -6754,7 +6754,7 @@ void drawPoly3TGEx4_TW(short x1, short y1, short x2, short y2, short x3,
 // correct that way, so small texture distortions can 
 // happen... 
 
-void drawPoly4TGEx4_TRI_IL(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TGEx4_TRI_IL(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, short clX,
 		short clY, int32_t col1, int32_t col2, int32_t col3, int32_t col4) {
@@ -6766,7 +6766,7 @@ void drawPoly4TGEx4_TRI_IL(short x1, short y1, short x2, short y2, short x3,
 
 #ifdef POLYQUAD3GT
 
-void drawPoly4TGEx4_TRI(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TGEx4_TRI(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, short clX,
 		short clY, int32_t col1, int32_t col2, int32_t col3, int32_t col4) {
@@ -6780,7 +6780,7 @@ void drawPoly4TGEx4_TRI(short x1, short y1, short x2, short y2, short x3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly4TGEx4(short x1, short y1, short x2, short y2, short x3, short y3,
+static void drawPoly4TGEx4(short x1, short y1, short x2, short y2, short x3, short y3,
 		short x4, short y4, short tx1, short ty1, short tx2, short ty2,
 		short tx3, short ty3, short tx4, short ty4, short clX, short clY,
 		int32_t col1, int32_t col2, int32_t col4, int32_t col3) {
@@ -6978,7 +6978,7 @@ void drawPoly4TGEx4(short x1, short y1, short x2, short y2, short x3, short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly4TGEx4_TW(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TGEx4_TW(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, short clX,
 		short clY, int32_t col1, int32_t col2, int32_t col3, int32_t col4) {
@@ -6993,7 +6993,7 @@ void drawPoly4TGEx4_TW(short x1, short y1, short x2, short y2, short x3,
 // POLY 3/4 G-SHADED TEX PAL8
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGEx8(short x1, short y1, short x2, short y2, short x3, short y3,
+static void drawPoly3TGEx8(short x1, short y1, short x2, short y2, short x3, short y3,
 		short tx1, short ty1, short tx2, short ty2, short tx3, short ty3,
 		short clX, short clY, int32_t col1, int32_t col2, int32_t col3) {
 	int i, j, xmin, xmax, ymin, ymax;
@@ -7157,7 +7157,7 @@ void drawPoly3TGEx8(short x1, short y1, short x2, short y2, short x3, short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGEx8_IL(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly3TGEx8_IL(short x1, short y1, short x2, short y2, short x3,
 		short y3, short tx1, short ty1, short tx2, short ty2, short tx3,
 		short ty3, short clX, short clY, int32_t col1, int32_t col2,
 		int32_t col3) {
@@ -7348,7 +7348,7 @@ void drawPoly3TGEx8_IL(short x1, short y1, short x2, short y2, short x3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGEx8_TW(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly3TGEx8_TW(short x1, short y1, short x2, short y2, short x3,
 		short y3, short tx1, short ty1, short tx2, short ty2, short tx3,
 		short ty3, short clX, short clY, int32_t col1, int32_t col2,
 		int32_t col3) {
@@ -7518,7 +7518,7 @@ void drawPoly3TGEx8_TW(short x1, short y1, short x2, short y2, short x3,
 
 // note: two g-shaded tris: small texture distortions can happen
 
-void drawPoly4TGEx8_TRI_IL(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TGEx8_TRI_IL(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, short clX,
 		short clY, int32_t col1, int32_t col2, int32_t col3, int32_t col4) {
@@ -7530,7 +7530,7 @@ void drawPoly4TGEx8_TRI_IL(short x1, short y1, short x2, short y2, short x3,
 
 #ifdef POLYQUAD3GT
 
-void drawPoly4TGEx8_TRI(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TGEx8_TRI(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, short clX,
 		short clY, int32_t col1, int32_t col2, int32_t col3, int32_t col4) {
@@ -7542,7 +7542,7 @@ void drawPoly4TGEx8_TRI(short x1, short y1, short x2, short y2, short x3,
 
 #endif
 
-void drawPoly4TGEx8(short x1, short y1, short x2, short y2, short x3, short y3,
+static void drawPoly4TGEx8(short x1, short y1, short x2, short y2, short x3, short y3,
 		short x4, short y4, short tx1, short ty1, short tx2, short ty2,
 		short tx3, short ty3, short tx4, short ty4, short clX, short clY,
 		int32_t col1, int32_t col2, int32_t col4, int32_t col3) {
@@ -7732,7 +7732,7 @@ void drawPoly4TGEx8(short x1, short y1, short x2, short y2, short x3, short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly4TGEx8_TW(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TGEx8_TW(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, short clX,
 		short clY, int32_t col1, int32_t col2, int32_t col3, int32_t col4) {
@@ -7746,7 +7746,7 @@ void drawPoly4TGEx8_TW(short x1, short y1, short x2, short y2, short x3,
 // POLY 3 G-SHADED TEX 15 BIT
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGD(short x1, short y1, short x2, short y2, short x3, short y3,
+static void drawPoly3TGD(short x1, short y1, short x2, short y2, short x3, short y3,
 		short tx1, short ty1, short tx2, short ty2, short tx3, short ty3,
 		int32_t col1, int32_t col2, int32_t col3) {
 	int i, j, xmin, xmax, ymin, ymax;
@@ -7894,7 +7894,7 @@ void drawPoly3TGD(short x1, short y1, short x2, short y2, short x3, short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly3TGD_TW(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly3TGD_TW(short x1, short y1, short x2, short y2, short x3,
 		short y3, short tx1, short ty1, short tx2, short ty2, short tx3,
 		short ty3, int32_t col1, int32_t col2, int32_t col3) {
 	int i, j, xmin, xmax, ymin, ymax;
@@ -8051,7 +8051,7 @@ void drawPoly3TGD_TW(short x1, short y1, short x2, short y2, short x3,
 
 #ifdef POLYQUAD3GT
 
-void drawPoly4TGD_TRI(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TGD_TRI(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, int32_t col1,
 		int32_t col2, int32_t col3, int32_t col4) {
@@ -8063,7 +8063,7 @@ void drawPoly4TGD_TRI(short x1, short y1, short x2, short y2, short x3,
 
 #endif
 
-void drawPoly4TGD(short x1, short y1, short x2, short y2, short x3, short y3,
+static void drawPoly4TGD(short x1, short y1, short x2, short y2, short x3, short y3,
 		short x4, short y4, short tx1, short ty1, short tx2, short ty2,
 		short tx3, short ty3, short tx4, short ty4, int32_t col1, int32_t col2,
 		int32_t col4, int32_t col3) {
@@ -8236,7 +8236,7 @@ void drawPoly4TGD(short x1, short y1, short x2, short y2, short x3, short y3,
 
 ////////////////////////////////////////////////////////////////////////
 
-void drawPoly4TGD_TW(short x1, short y1, short x2, short y2, short x3,
+static void drawPoly4TGD_TW(short x1, short y1, short x2, short y2, short x3,
 		short y3, short x4, short y4, short tx1, short ty1, short tx2,
 		short ty2, short tx3, short ty3, short tx4, short ty4, int32_t col1,
 		int32_t col2, int32_t col3, int32_t col4) {
@@ -8266,7 +8266,7 @@ void drawPoly4TGD_TW(short x1, short y1, short x2, short y2, short x3,
  */
 
 // real rect test
-inline char IsNoRect(void) {
+static inline char IsNoRect(void) {
 	if (!(g_prim.dwActFixes & 0x200))
 		return 0;
 
@@ -9022,7 +9022,7 @@ void DrawSoftwareSpriteMirror(unsigned char * baseAddr, int32_t w, int32_t h) {
 
 ////////////////////////////////////////////////////////////////////////
 
-void DrawSoftwareSprite_IL(unsigned char * baseAddr, short w, short h,
+static void DrawSoftwareSprite_IL(unsigned char * baseAddr, short w, short h,
 		int32_t tx, int32_t ty) {
 	int32_t sprtY, sprtX, sprtW, sprtH, tdx, tdy;
 	uint32_t *gpuData = (uint32_t *) baseAddr;
@@ -9317,7 +9317,7 @@ void DrawSoftwareSprite(unsigned char * baseAddr, short w, short h, int32_t tx,
 
 ///////////////////////////////////////////////////////////////////////
 
-void Line_E_SE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0,
+static void Line_E_SE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0,
 		uint32_t rgb1) {
 	int dx, dy, incrE, incrSE, d;
 	uint32_t r0, g0, b0, r1, g1, b1;
@@ -9375,7 +9375,7 @@ void Line_E_SE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0,
 
 ///////////////////////////////////////////////////////////////////////
 
-void Line_S_SE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0,
+static void Line_S_SE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0,
 		uint32_t rgb1) {
 	int dx, dy, incrS, incrSE, d;
 	uint32_t r0, g0, b0, r1, g1, b1;
@@ -9433,7 +9433,7 @@ void Line_S_SE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0,
 
 ///////////////////////////////////////////////////////////////////////
 
-void Line_N_NE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0,
+static void Line_N_NE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0,
 		uint32_t rgb1) {
 	int dx, dy, incrN, incrNE, d;
 	uint32_t r0, g0, b0, r1, g1, b1;
@@ -9491,7 +9491,7 @@ void Line_N_NE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0,
 
 ///////////////////////////////////////////////////////////////////////
 
-void Line_E_NE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0,
+static void Line_E_NE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0,
 		uint32_t rgb1) {
 	int dx, dy, incrE, incrNE, d;
 	uint32_t r0, g0, b0, r1, g1, b1;
@@ -9549,7 +9549,7 @@ void Line_E_NE_Shade(int x0, int y0, int x1, int y1, uint32_t rgb0,
 
 ///////////////////////////////////////////////////////////////////////
 
-void VertLineShade(int x, int y0, int y1, uint32_t rgb0, uint32_t rgb1) {
+static void VertLineShade(int x, int y0, int y1, uint32_t rgb0, uint32_t rgb1) {
 	int y, dy;
 	uint32_t r0, g0, b0, r1, g1, b1;
 	int32_t dr, dg, db;
@@ -9595,7 +9595,7 @@ void VertLineShade(int x, int y0, int y1, uint32_t rgb0, uint32_t rgb1) {
 
 ///////////////////////////////////////////////////////////////////////
 
-void HorzLineShade(int y, int x0, int x1, uint32_t rgb0, uint32_t rgb1) {
+static void HorzLineShade(int y, int x0, int x1, uint32_t rgb0, uint32_t rgb1) {
 	int x, dx;
 	uint32_t r0, g0, b0, r1, g1, b1;
 	int32_t dr, dg, db;
@@ -9641,7 +9641,7 @@ void HorzLineShade(int y, int x0, int x1, uint32_t rgb0, uint32_t rgb1) {
 
 ///////////////////////////////////////////////////////////////////////
 
-void Line_E_SE_Flat(int x0, int y0, int x1, int y1, unsigned short colour) {
+static void Line_E_SE_Flat(int x0, int y0, int x1, int y1, unsigned short colour) {
 	int dx, dy, incrE, incrSE, d, x, y;
 
 	dx = x1 - x0;
@@ -9671,7 +9671,7 @@ void Line_E_SE_Flat(int x0, int y0, int x1, int y1, unsigned short colour) {
 
 ///////////////////////////////////////////////////////////////////////
 
-void Line_S_SE_Flat(int x0, int y0, int x1, int y1, unsigned short colour) {
+static void Line_S_SE_Flat(int x0, int y0, int x1, int y1, unsigned short colour) {
 	int dx, dy, incrS, incrSE, d, x, y;
 
 	dx = x1 - x0;
@@ -9701,7 +9701,7 @@ void Line_S_SE_Flat(int x0, int y0, int x1, int y1, unsigned short colour) {
 
 ///////////////////////////////////////////////////////////////////////
 
-void Line_N_NE_Flat(int x0, int y0, int x1, int y1, unsigned short colour) {
+static void Line_N_NE_Flat(int x0, int y0, int x1, int y1, unsigned short colour) {
 	int dx, dy, incrN, incrNE, d, x, y;
 
 	dx = x1 - x0;
@@ -9731,7 +9731,7 @@ void Line_N_NE_Flat(int x0, int y0, int x1, int y1, unsigned short colour) {
 
 ///////////////////////////////////////////////////////////////////////
 
-void Line_E_NE_Flat(int x0, int y0, int x1, int y1, unsigned short colour) {
+static void Line_E_NE_Flat(int x0, int y0, int x1, int y1, unsigned short colour) {
 	int dx, dy, incrE, incrNE, d, x, y;
 
 	dx = x1 - x0;
@@ -9761,7 +9761,7 @@ void Line_E_NE_Flat(int x0, int y0, int x1, int y1, unsigned short colour) {
 
 ///////////////////////////////////////////////////////////////////////
 
-void VertLineFlat(int x, int y0, int y1, unsigned short colour) {
+static void VertLineFlat(int x, int y0, int y1, unsigned short colour) {
 	int y;
 
 	if (y0 < g_prim.drawY)
@@ -9776,7 +9776,7 @@ void VertLineFlat(int x, int y0, int y1, unsigned short colour) {
 
 ///////////////////////////////////////////////////////////////////////
 
-void HorzLineFlat(int y, int x0, int x1, unsigned short colour) {
+static void HorzLineFlat(int y, int x0, int x1, unsigned short colour) {
 	int x;
 
 	if (x0 < g_prim.drawX)

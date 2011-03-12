@@ -27,7 +27,7 @@
 
 #define TIMEBASE 100000
 
-unsigned long time_get_time() {
+static unsigned long time_get_time() {
 	struct timeval tv;
 	gettimeofday(&tv, 0); // well, maybe there are better ways
 	return tv.tv_sec * 100000 + tv.tv_usec / 10; // to do that, but at least it works

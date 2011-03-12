@@ -68,7 +68,7 @@ static int K1[4] = {
 #define BLKSIZ 28       /* block size (32 - 4 nibbles) */
 
 //===========================================
-void ADPCM_InitDecode(ADPCM_Decode_t *decp) {
+static void ADPCM_InitDecode(ADPCM_Decode_t *decp) {
 	decp->y0 = 0;
 	decp->y1 = 0;
 }

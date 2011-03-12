@@ -56,11 +56,11 @@ char *disRNameCP0[] = {
 typedef char* (*TdisR3000AF)(u32 code, u32 pc);
 
 // These macros are used to assemble the disassembler functions
-#define MakeDisFg(fn, b) char* fn(u32 code, u32 pc) { b; return ostr; }
+#define MakeDisFg(fn, b) char* fn(u32 code, u32 pc) { return b; }
 #define MakeDisF(fn, b) \
 	static char* fn(u32 code, u32 pc) { \
-		sprintf (ostr, "%8.8x %8.8x:", pc, code); \
-		b; /*ostr[(strlen(ostr) - 1)] = 0;*/ return ostr; \
+		char *s = ostr+sprintf (ostr, "%8.8x %8.8x:", pc, code); \
+		b; s[-1] = 0; return ostr; \
 	}
 
 
@@ -85,19 +85,19 @@ typedef char* (*TdisR3000AF)(u32 code, u32 pc);
 #define _Branch_  (pc + 4 + ((short)_Im_ * 4))
 #define _OfB_     _Im_, _nRs_
 
-#define dName(i)	sprintf(ostr, "%s %-7s,", ostr, i)
-#define dGPR(i)		sprintf(ostr, "%s %8.8x (%s),", ostr, psxRegs.GPR.r[i], disRNameGPR[i])
-#define dCP0(i)		sprintf(ostr, "%s %8.8x (%s),", ostr, psxRegs.CP0.r[i], disRNameCP0[i])
-#define dCP2D(i)	sprintf(ostr, "%s %8.8x (%s),", ostr, psxRegs.CP2D.r[i], disRNameCP2D[i])
-#define dCP2C(i)	sprintf(ostr, "%s %8.8x (%s),", ostr, psxRegs.CP2C.r[i], disRNameCP2C[i])
-#define dHI()		sprintf(ostr, "%s %8.8x (%s),", ostr, psxRegs.GPR.n.hi, "hi")
-#define dLO()		sprintf(ostr, "%s %8.8x (%s),", ostr, psxRegs.GPR.n.lo, "lo")
-#define dImm()		sprintf(ostr, "%s %4.4x (%d),", ostr, _Im_, _Im_)
-#define dTarget()	sprintf(ostr, "%s %8.8x,", ostr, _Target_)
-#define dSa()		sprintf(ostr, "%s %2.2x (%d),", ostr, _Sa_, _Sa_)
-#define dOfB()		sprintf(ostr, "%s %4.4x (%8.8x (%s)),", ostr, _Im_, psxRegs.GPR.r[_Rs_], disRNameGPR[_Rs_])
-#define dOffset()	sprintf(ostr, "%s %8.8x,", ostr, _Branch_)
-#define dCode()		sprintf(ostr, "%s %8.8x,", ostr, (code >> 6) & 0xffffff)
+#define dName(i)	s+=sprintf(s, " %-7s ", i)
+#define dGPR(i)		s+=sprintf(s, " %8.8x (%d/%s),", psxRegs.GPR.r[i], i, disRNameGPR[i])
+#define dCP0(i)		s+=sprintf(s, " %8.8x (%d/%s),", psxRegs.CP0.r[i], i, disRNameCP0[i])
+#define dCP2D(i)	s+=sprintf(s, " %8.8x (%d/%s),", psxRegs.CP2D.r[i], i, disRNameCP2D[i])
+#define dCP2C(i)	s+=sprintf(s, " %8.8x (%d/%s),", psxRegs.CP2C.r[i], i, disRNameCP2C[i])
+#define dHI()		s+=sprintf(s, " %8.8x (hi),", psxRegs.GPR.n.hi)
+#define dLO()		s+=sprintf(s, " %8.8x (lo),", psxRegs.GPR.n.lo)
+#define dImm()		s+=sprintf(s, " %4.4x (%d),", _Im_, _Im_)
+#define dTarget()	s+=sprintf(s, " %8.8x,", _Target_)
+#define dSa()		s+=sprintf(s, " %2.2x (%d),", _Sa_, _Sa_)
+#define dOfB()		s+=sprintf(s, " %4.4x (%8.8x (%d/%s)),", _Im_, psxRegs.GPR.r[_Rs_], _Rs_, disRNameGPR[_Rs_])
+#define dOffset()	s+=sprintf(s, " %8.8x,", _Branch_)
+#define dCode()		s+=sprintf(s, " %8.8x,", (code >> 6) & 0xffffff)
 
 /*********************************************************
 * Arithmetic with immediate operand                      *
@@ -286,7 +286,7 @@ TdisR3000AF disR3000A_SPECIAL[] = { // Subset of disSPECIAL
 	disNULL, disNULL , disNULL, disNULL, disNULL   , disNULL  , disNULL   , disNULL ,
 	disNULL, disNULL , disNULL, disNULL, disNULL   , disNULL  , disNULL  , disNULL};
 
-MakeDisF(disSPECIAL,	disR3000A_SPECIAL[_Funct_](code, pc))
+static MakeDisFg(disSPECIAL,	disR3000A_SPECIAL[_Funct_](code, pc))
 
 TdisR3000AF disR3000A_BCOND[] = { // Subset of disBCOND
 	disBLTZ  , disBGEZ  , disNULL, disNULL, disNULL, disNULL, disNULL, disNULL,
@@ -294,7 +294,7 @@ TdisR3000AF disR3000A_BCOND[] = { // Subset of disBCOND
 	disBLTZAL, disBGEZAL, disNULL, disNULL, disNULL, disNULL, disNULL, disNULL,
 	disNULL  , disNULL  , disNULL, disNULL, disNULL, disNULL, disNULL, disNULL};
 
-MakeDisF(disBCOND,	disR3000A_BCOND[_Rt_](code, pc))
+static MakeDisFg(disBCOND,	disR3000A_BCOND[_Rt_](code, pc))
 
 TdisR3000AF disR3000A_COP0[] = { // Subset of disCOP0
 	disMFC0, disNULL, disCFC0, disNULL, disMTC0, disNULL, disCTC0, disNULL,
@@ -302,7 +302,7 @@ TdisR3000AF disR3000A_COP0[] = { // Subset of disCOP0
 	disRFE , disNULL, disNULL, disNULL, disNULL, disNULL, disNULL, disNULL,
 	disNULL, disNULL, disNULL, disNULL, disNULL, disNULL, disNULL, disNULL};
 
-MakeDisF(disCOP0,		disR3000A_COP0[_Rs_](code, pc))
+static MakeDisFg(disCOP0,		disR3000A_COP0[_Rs_](code, pc))
 
 TdisR3000AF disR3000A_BASIC[] = { // Subset of disBASIC (based on rs)
 	disMFC2, disNULL, disCFC2, disNULL, disMTC2, disNULL, disCTC2, disNULL,
@@ -310,7 +310,7 @@ TdisR3000AF disR3000A_BASIC[] = { // Subset of disBASIC (based on rs)
 	disNULL, disNULL, disNULL, disNULL, disNULL, disNULL, disNULL, disNULL,
 	disNULL, disNULL, disNULL, disNULL, disNULL, disNULL, disNULL, disNULL};
 
-MakeDisF(disBASIC,		disR3000A_BASIC[_Rs_](code, pc))
+static MakeDisFg(disBASIC,		disR3000A_BASIC[_Rs_](code, pc))
 
 TdisR3000AF disR3000A_COP2[] = { // Subset of disR3000F_COP2 (based on funct)
 	disBASIC, disRTPS , disNULL , disNULL , disNULL, disNULL , disNCLIP, disNULL,
@@ -322,7 +322,7 @@ TdisR3000AF disR3000A_COP2[] = { // Subset of disR3000F_COP2 (based on funct)
 	disRTPT , disNULL , disNULL , disNULL , disNULL, disNULL , disNULL , disNULL,
 	disNULL , disNULL , disNULL , disNULL , disNULL, disGPF  , disGPL  , disNCCT   };
 
-MakeDisF(disCOP2,		disR3000A_COP2[_Funct_](code, pc))
+static MakeDisFg(disCOP2,		disR3000A_COP2[_Funct_](code, pc))
 
 TdisR3000AF disR3000A[] = {
 	disSPECIAL    , disBCOND     , disJ       , disJAL  , disBEQ , disBNE , disBLEZ , disBGTZ ,

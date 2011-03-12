@@ -1,4 +1,4 @@
-AM_CPPFLAGS = -I../../include
+AM_CPPFLAGS = -I../../include -I../../libpcsxcore
 
 bindir = @libdir@/games/psemu/
 libdir = @libdir@/games/psemu/

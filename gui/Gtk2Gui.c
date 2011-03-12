@@ -67,7 +67,7 @@ int destroy = 0;
 /* TODO - If MAX_SLOTS changes, need to find a way to automatically set all positions */
 int Slots[MAX_SLOTS] = { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 
-void ResetMenuSlots(GladeXML *xml) {
+static void ResetMenuSlots(GladeXML *xml) {
 	GtkWidget *widget;
 	gchar *str;
 	int i;
@@ -411,7 +411,7 @@ void OnDestroy() {
 	if (!destroy) OnFile_Exit();
 }
 
-void destroy_main_window () {
+static void destroy_main_window () {
 	destroy = 1;
 	gtk_widget_destroy(Window);
 	Window = NULL;
@@ -833,7 +833,7 @@ void state_save(gchar *state_filename) {
 
 void on_states_load (GtkWidget *widget, gpointer user_data) {
 	gchar *state_filename;
-	gint state = (int)user_data;
+	gint state = (int)(long)user_data;
 
 	state_filename = get_state_filename(state);
 
@@ -846,7 +846,7 @@ void on_states_load (GtkWidget *widget, gpointer user_data) {
 
 void on_states_save (GtkWidget *widget, gpointer user_data) {
 	gchar *state_filename;
-	gint state = (int)user_data;
+	gint state = (int)(long)user_data;
 
 	state_filename = get_state_filename(state);
 
@@ -959,7 +959,7 @@ void SysErrorMessage(gchar *primary, gchar *secondary) {
 				primary,
 				NULL);
 		gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(message_dialog),
-				secondary);
+				"%s", secondary);
 
 		gtk_dialog_run(GTK_DIALOG(message_dialog));
 		gtk_widget_destroy(message_dialog);
@@ -978,7 +978,7 @@ void SysInfoMessage(gchar *primary, gchar *secondary) {
 				primary,
 				NULL);
 		gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(message_dialog),
-				secondary);
+				"%s", secondary);
 
 		gtk_dialog_run(GTK_DIALOG(message_dialog));
 		gtk_widget_destroy(message_dialog);

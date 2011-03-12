@@ -31,9 +31,9 @@
 #endif
 
 s8 *psxM = NULL; // Kernel & User Memory (2 Meg)
-s8 *psxP = NULL; // Parallel Port (64K)
 s8 *psxR = NULL; // BIOS ROM (512K)
-s8 *psxH = NULL; // Scratch Pad (1K) & Hardware Registers (8K)
+// Parallel Port (64K) is attached to psxM
+// Scratch Pad (1K) & Hardware Registers (8K) are attached to psxM
 
 u8 **psxMemWLUT = NULL;
 u8 **psxMemRLUT = NULL;
@@ -65,13 +65,10 @@ int psxMemInit() {
 	memset(psxMemRLUT, 0, 0x10000 * sizeof(void *));
 	memset(psxMemWLUT, 0, 0x10000 * sizeof(void *));
 
-	psxM = mmap(0, 0x00220000,
+	psxM = mmap(0, PSXM_SIZE + PSXP_SIZE + PSXH_SIZE,
 		PROT_WRITE | PROT_READ, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 
-	psxP = &psxM[0x200000];
-	psxH = &psxM[0x210000];
-
-	psxR = (s8 *)malloc(0x00080000);
+	psxR = (s8 *)malloc(PSXR_SIZE);
 
 	if (psxMemRLUT == NULL || psxMemWLUT == NULL || 
 		psxM == NULL || psxP == NULL || psxH == NULL) {
@@ -109,8 +106,8 @@ void psxMemReset() {
 	FILE *f = NULL;
 	char bios[1024];
 
-	memset(psxM, 0, 0x00200000);
-	memset(psxP, 0, 0x00010000);
+	memset(psxM, 0, PSXM_SIZE);
+	memset(psxP, 0, PSXP_SIZE);
 
 	// Load BIOS
 	if (strcmp(Config.Bios, "HLE") != 0) {
@@ -119,10 +116,11 @@ void psxMemReset() {
 
 		if (f == NULL) {
 			SysMessage(_("Could not open BIOS:\"%s\". Enabling HLE Bios!\n"), bios);
-			memset(psxR, 0, 0x80000);
+			memset(psxR, 0, PSXR_SIZE);
 			Config.HLE = TRUE;
 		} else {
-			fread(psxR, 1, 0x80000, f);
+			if(fread(psxR, PSXR_SIZE, 1, f) != 1)
+				perror(bios);
 			fclose(f);
 			Config.HLE = FALSE;
 		}
@@ -130,7 +128,7 @@ void psxMemReset() {
 }
 
 void psxMemShutdown() {
-	munmap(psxM, 0x00220000);
+	munmap(psxM, PSXM_SIZE + PSXP_SIZE + PSXH_SIZE);
 
 	free(psxR);
 	free(psxMemRLUT);

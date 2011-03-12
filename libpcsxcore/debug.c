@@ -256,7 +256,7 @@ typedef struct breakpoint_s {
 
 static breakpoint_t *first = NULL;
 
-int add_breakpoint(int type, u32 address) {
+static int add_breakpoint(int type, u32 address) {
     breakpoint_t *bp = (breakpoint_t *)malloc(sizeof(breakpoint_t));
 
     bp->type = type;
@@ -278,7 +278,7 @@ int add_breakpoint(int type, u32 address) {
     return bp->number;
 }
 
-void delete_breakpoint(breakpoint_t * bp) {
+static void delete_breakpoint(breakpoint_t * bp) {
     if (bp == first) {
         if (bp->next == bp) {
             first = NULL;
@@ -293,11 +293,11 @@ void delete_breakpoint(breakpoint_t * bp) {
     free(bp);
 }
 
-breakpoint_t *next_breakpoint(breakpoint_t *bp) {
+static breakpoint_t *next_breakpoint(breakpoint_t *bp) {
     return bp->next != first ? bp->next : 0;
 }
 
-breakpoint_t *find_breakpoint(int number) {
+static breakpoint_t *find_breakpoint(int number) {
     breakpoint_t *p;
 
     for (p = first; p; p = next_breakpoint(p)) {
@@ -371,12 +371,12 @@ void DebugVSync() {
     ProcessCommands();
 }
 
-void MarkMap(u32 address, int mask) {
+static void MarkMap(u32 address, int mask) {
     if ((address & 0xff000000) != 0x80000000) return;
     MemoryMap[address & 0x001fffff] |= mask;
 }
 
-int IsMapMarked(u32 address, int mask) {
+static int IsMapMarked(u32 address, int mask) {
     return (MemoryMap[address & 0x001fffff] & mask) != 0;
 }
 

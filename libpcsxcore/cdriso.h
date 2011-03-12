@@ -28,6 +28,14 @@ extern "C" {
 void cdrIsoInit(void);
 int cdrIsoActive(void);
 
+unsigned int msf2sec(u8 *msf);
+void sec2msf(unsigned int s, u8 *msf);
+
+extern u16 *iso_play_cdbuf;
+extern u16 iso_play_bufptr;
+
+long CALLBACK ISOinit(void);
+
 #ifdef __cplusplus
 }
 #endif

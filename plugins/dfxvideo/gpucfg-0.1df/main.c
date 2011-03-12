@@ -34,7 +34,7 @@ enum {
 
 /*	This function checks for the value being outside the accepted range,
 	and returns the appropriate boundary value */
-int set_limit (char *p, int len, int lower, int upper)
+static int set_limit (char *p, int len, int lower, int upper)
 {
 	int val = 0;
 
@@ -49,18 +49,18 @@ int set_limit (char *p, int len, int lower, int upper)
     return val;
 }
 
-void on_about_clicked(GtkWidget *widget, gpointer user_data)
+static void on_about_clicked(GtkWidget *widget, gpointer user_data)
 {
 	gtk_widget_destroy (widget);
 	exit (0);
 }
 
-void set_widget_sensitive(GtkWidget *widget, gpointer user_data)
+static void set_widget_sensitive(GtkWidget *widget, gpointer user_data)
 {
-	gtk_widget_set_sensitive (widget, (int)user_data);
+	gtk_widget_set_sensitive (widget, (int)(long)user_data);
 }
 
-void on_fullscreen_toggled(GtkWidget *widget, gpointer user_data)
+static void on_fullscreen_toggled(GtkWidget *widget, gpointer user_data)
 {
 	GtkWidget *check, *resCombo2;
 	GladeXML *xml;
@@ -69,10 +69,10 @@ void on_fullscreen_toggled(GtkWidget *widget, gpointer user_data)
 	check = glade_xml_get_widget(xml, "checkFullscreen");
 	resCombo2 = glade_xml_get_widget(xml, "resCombo2");
 
-	set_widget_sensitive(resCombo2, !gtk_toggle_button_get_active(check));
+	gtk_widget_set_sensitive(resCombo2, !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(check)));
 }
 
-void on_use_fixes_toggled(GtkWidget *widget, gpointer user_data)
+static void on_use_fixes_toggled(GtkWidget *widget, gpointer user_data)
 {
 	GtkWidget *check, *table_fixes;
 	GladeXML *xml;
@@ -83,25 +83,26 @@ void on_use_fixes_toggled(GtkWidget *widget, gpointer user_data)
 
 	/* Set the state of each of the fixes to the value of the use fixes toggle */
 	gtk_container_foreach (GTK_CONTAINER (table_fixes), (GtkCallback) set_widget_sensitive,
-		(void *)gtk_toggle_button_get_active (check));
+		(gpointer)(long)gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(check)));
 }
 
-void on_fps_toggled(GtkWidget *widget, gpointer user_data)
+static void on_fps_toggled(GtkWidget *widget, gpointer user_data)
 {
-	GtkWidget *checkSetFPS, *checkAutoFPSLimit, *entryFPS;
+	GtkWidget *entryFPS, *checkAutoFPSLimit;
+	GtkToggleButton *checkSetFPS;
 	GladeXML *xml;
 
 	xml = (GladeXML*) user_data;
-	checkSetFPS = glade_xml_get_widget(xml, "checkSetFPS");
+	checkSetFPS = GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "checkSetFPS"));
 	checkAutoFPSLimit = glade_xml_get_widget(xml, "checkAutoFPSLimit");
 	entryFPS = glade_xml_get_widget(xml, "entryFPS");
 
-	set_widget_sensitive(entryFPS,
-		gtk_toggle_button_get_active(checkSetFPS) && !gtk_toggle_button_get_active(checkAutoFPSLimit));
-	set_widget_sensitive(checkAutoFPSLimit, gtk_toggle_button_get_active(checkSetFPS));
+	gtk_widget_set_sensitive(entryFPS,
+		gtk_toggle_button_get_active(checkSetFPS) && !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(checkAutoFPSLimit)));
+	gtk_widget_set_sensitive(checkAutoFPSLimit, gtk_toggle_button_get_active(checkSetFPS));
 }
 
-void OnConfigClose(GtkWidget *widget, gpointer user_data)
+static void OnConfigClose(GtkWidget *widget, gpointer user_data)
 {
 	GladeXML *xml = (GladeXML *)user_data;
 
@@ -112,9 +113,9 @@ void OnConfigClose(GtkWidget *widget, gpointer user_data)
 int
 main (int argc, char *argv[])
 {
-  GtkWidget *CfgWnd, *widget;
+  GtkWidget *widget;
   GladeXML *xml;
-  FILE *in;char t[256];int len,val; 
+  FILE *in;char t[256];int len = 0,val; 
   float valf;
   char * pB, * p;
   char cfg[255];
@@ -282,7 +283,7 @@ main (int argc, char *argv[])
     if(valf>500) valf=500;
    }
   sprintf(tempstr,"%.1f",valf);
-  gtk_entry_set_text(glade_xml_get_widget(xml, "entryFPS"),tempstr);
+  gtk_entry_set_text(GTK_ENTRY(glade_xml_get_widget(xml, "entryFPS")),tempstr);
 
   val=0;
   if(pB)
@@ -343,7 +344,7 @@ main (int argc, char *argv[])
 }
 
 
-void SetCfgVal(char * pB,char * pE,int val)
+static void SetCfgVal(char * pB,char * pE,int val)
 {
  char * p, *ps, *pC;char t[32];
 
@@ -381,7 +382,6 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
   char cfg[255];
   char tempstr[50];
   int i;
-  struct stat buf;
 
   pB=(char *)malloc(32767);
   memset(pB,0,32767);
@@ -432,7 +432,7 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
  SetCfgVal(pB,"\nUseFrameSkip",val);
 
  //Framerate stored *10
- val = atof(gtk_entry_get_text(glade_xml_get_widget(xml, "entryFPS"))) * 10;
+ val = atof(gtk_entry_get_text(GTK_ENTRY(glade_xml_get_widget(xml, "entryFPS")))) * 10;
  SetCfgVal(pB,"\nFrameRate",val);
 
  val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "checkUseFixes")));
@@ -453,7 +453,8 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
 
  if((in=fopen(cfg, WRITEBINARY))!=NULL)
   {
-   fwrite(pB,strlen(pB),1,in);
+   if(fwrite(pB,strlen(pB),1,in) != 1)
+      perror(cfg);
    fclose(in);
   }
 

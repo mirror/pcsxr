@@ -178,7 +178,7 @@ void ConfigurePlugins() {
 			G_CALLBACK(OnConf_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }
 
-void OnNet_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
+static void OnNet_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 	GetComboText(NetConfS.Combo, NetConfS.plist, Config.Net);
 	SaveConfig();
 	gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -358,7 +358,7 @@ static int all_config_set() {
 }
 
 static void on_configure_plugin(GtkWidget *widget, gpointer user_data) {
-	gint plugin_type = (int) user_data;
+	gint plugin_type = (int)(long) user_data;
 
 	while (gtk_events_pending())
 		gtk_main_iteration();
@@ -379,7 +379,7 @@ static void on_configure_plugin(GtkWidget *widget, gpointer user_data) {
 }
 
 static void on_about_plugin(GtkWidget *widget, gpointer user_data) {
-	gint plugin_type = (int) user_data;
+	gint plugin_type = (int)(long) user_data;
 
 	while (gtk_events_pending())
 		gtk_main_iteration();
@@ -467,7 +467,7 @@ void OnConf_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 	type##ConfS.glist = g_list_append(type##ConfS.glist, type##ConfS.plist[type##ConfS.plugins-1]); \
 }
 
-void populate_combo_box(GtkWidget *widget, GList *list) {
+static void populate_combo_box(GtkWidget *widget, GList *list) {
 	GtkListStore *store;
 	GtkCellRenderer *renderer;
 	store = gtk_list_store_new(1, G_TYPE_STRING);
@@ -515,7 +515,7 @@ void populate_combo_box(GtkWidget *widget, GList *list) {
 		} \
 	}
 
-int plugin_is_available(gchar *plugin) {
+static int plugin_is_available(gchar *plugin) {
 	int retval;
 	gchar *pluginfile;
 	struct stat stbuf;
@@ -549,7 +549,7 @@ int plugins_configured() {
 	return TRUE;
 }
 
-int is_valid_bios_file(gchar *filename) {
+static int is_valid_bios_file(gchar *filename) {
 	int valid;
 	struct stat buf;
 
@@ -564,14 +564,14 @@ int is_valid_bios_file(gchar *filename) {
 
 // Add the name of the BIOS file to the drop-down list. This will
 // be the filename, not the full path to the file
-void add_bios_to_list(gchar *bios_name, gchar *internal_name) {
+static void add_bios_to_list(gchar *bios_name, gchar *internal_name) {
 	BiosConfS.plugins += 2;
 	strcpy(BiosConfS.plist[BiosConfS.plugins - 1], bios_name);
 	strcpy(BiosConfS.plist[BiosConfS.plugins - 2], internal_name);
 	BiosConfS.glist = g_list_append(BiosConfS.glist, BiosConfS.plist[BiosConfS.plugins - 1]);
 }
 
-void scan_bios_dir(gchar *dirname) {
+static void scan_bios_dir(gchar *dirname) {
 	DIR *dir;
 	struct dirent *ent;
 	gchar *filename;
@@ -777,7 +777,7 @@ static void OnCpu_CpuClicked(GtkWidget *widget, gpointer user_data) {
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
 }
 
-void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
+static void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 	GtkWidget *widget;
 	GladeXML *xml = user_data;
 	int tmp;

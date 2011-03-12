@@ -19,6 +19,6 @@
 #ifndef MEMCARDDLG_H
 #define MEMCARDDLG_H
 
-void OnConf_Mcds();
+void OnConf_Mcds(void);
 
 #endif

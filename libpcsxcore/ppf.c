@@ -210,10 +210,8 @@ void BuildPPFCache() {
 	ppffile = fopen(szPPF, "rb");
 	if (ppffile == NULL) return;
 
-	memset(buffer, 0, 5);
-	fread(buffer, 3, 1, ppffile);
-
-	if (strcmp(buffer, "PPF") != 0) {
+	if (fread(buffer, 3, 1, ppffile) != 1 ||
+	    strcmp(buffer, "PPF") != 0) {
 		SysPrintf(_("Invalid PPF patch: %s.\n"), szPPF);
 		fclose(ppffile);
 		return;
@@ -233,13 +231,21 @@ void BuildPPFCache() {
 		case 1: // ppf2
 			fseek(ppffile, -8, SEEK_END);
 
-			memset(buffer, 0, 5);
-			fread(buffer, 4, 1, ppffile);
+			if(fread(buffer, 4, 1, ppffile) != 1) {
+				SysPrintf(_("Invalid PPF patch: %s.\n"), szPPF);
+				fclose(ppffile);
+				return;
+			}
 
 			if (strcmp(".DIZ", buffer) != 0) {
 				dizyn = 0;
 			} else {
-				fread(&dizlen, 4, 1, ppffile);
+				if(fread(&dizlen, 4, 1, ppffile) != 1) {
+					SysPrintf(_("Invalid PPF patch: %s.\n"), szPPF);
+					fclose(ppffile);
+					return;
+				}
+
 				dizlen = SWAP32(dizlen);
 				dizyn = 1;
 			}
@@ -265,12 +271,20 @@ void BuildPPFCache() {
 
 			fseek(ppffile, -6, SEEK_END);
 			memset(buffer, 0, 5);
-			fread(buffer, 4, 1, ppffile);
+			if(fread(buffer, 4, 1, ppffile) != 1) {
+				SysPrintf(_("Invalid PPF patch: %s.\n"), szPPF);
+				fclose(ppffile);
+				return;
+			}
 			dizlen = 0;
 
 			if (strcmp(".DIZ", buffer) == 0) {
 				fseek(ppffile, -2, SEEK_END);
-				fread(&dizlen, 2, 1, ppffile);
+				if(fread(&dizlen, 4, 1, ppffile) != 1) {
+					SysPrintf(_("Invalid PPF patch: %s.\n"), szPPF);
+					fclose(ppffile);
+					return;
+				}
 				dizlen = SWAP32(dizlen);
 				dizlen += 36;
 			}
@@ -297,13 +311,21 @@ void BuildPPFCache() {
 	// now do the data reading
 	do {                                                
 		fseek(ppffile, seekpos, SEEK_SET);
-		fread(&pos, 4, 1, ppffile);
+		if(fread(&pos, 4, 1, ppffile) != 1) {
+			SysPrintf(_("Invalid PPF patch: %s.\n"), szPPF);
+			fclose(ppffile);
+			return;
+		}
 		pos = SWAP32(pos);
 
-		if (method == 2) fread(buffer, 4, 1, ppffile); // skip 4 bytes on ppf3 (no int64 support here)
+		if (method == 2) fseek(ppffile, 4, SEEK_CUR); // skip 4 bytes on ppf3 (no int64 support here)
 
 		anz = fgetc(ppffile);
-		fread(ppfmem, anz, 1, ppffile);   
+		if(fread(ppfmem, anz, 1, ppffile) != 1) {
+			SysPrintf(_("Invalid PPF patch: %s.\n"), szPPF);
+			fclose(ppffile);
+			return;
+		}
 
 		ladr = pos / CD_FRAMESIZE_RAW;
 		off = pos % CD_FRAMESIZE_RAW;
@@ -366,10 +388,15 @@ void LoadSBI() {
 	if (sbihandle == NULL) return;
 
 	// 4-byte SBI header
-	fread(buffer, 1, 4, sbihandle);
+	if(fread(buffer, 4, 1, sbihandle) != 1) {
+		fclose(sbihandle);
+		return;
+	}
 	while (!feof(sbihandle)) {
-		fread(sbitime[sbicount++], 1, 3, sbihandle);
-		fread(buffer, 1, 11, sbihandle);
+		if(fread(sbitime[sbicount], 3, 1, sbihandle) != 1 ||
+		   fread(buffer, 11, 1, sbihandle) != 1)
+			break;
+		sbicount++;
 	}
 
 	fclose(sbihandle);

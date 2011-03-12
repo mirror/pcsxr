@@ -38,7 +38,8 @@ void settingsRead()
     file = fopen( configName, "rb" );
     if( file )
     {
-        fread( &settings, 1, sizeof(settings), file );
+        if(fread( &settings, sizeof(settings), 1, file ) != 1)
+		    perror(configName);
         fclose( file );
     }
     else
@@ -56,7 +57,8 @@ void settingsWrite()
 	file = fopen( configName, "wb" );
 	if( file )
     {
-        fwrite( &settings, 1, sizeof(settings), file );
+        if(fwrite( &settings, sizeof(settings), 1, file ) != 1)
+		    perror(configName);
         fclose( file );
     }
 }

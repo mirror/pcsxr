@@ -196,7 +196,7 @@ static const char *err;
 
 void *hGPUDriver = NULL;
 
-void CALLBACK GPU__displayText(char *pText) {
+static void CALLBACK GPU__displayText(char *pText) {
 	SysPrintf("%s\n", pText);
 }
 
@@ -210,19 +210,19 @@ void CALLBACK GPUbusy( int ticks )
     psxRegs.intCycle[PSXINT_GPUBUSY].sCycle = psxRegs.cycle;
 }
 
-long CALLBACK GPU__configure(void) { return 0; }
-long CALLBACK GPU__test(void) { return 0; }
-void CALLBACK GPU__about(void) {}
-void CALLBACK GPU__makeSnapshot(void) {}
-void CALLBACK GPU__keypressed(int key) {}
-long CALLBACK GPU__getScreenPic(unsigned char *pMem) { return -1; }
-long CALLBACK GPU__showScreenPic(unsigned char *pMem) { return -1; }
-void CALLBACK GPU__clearDynarec(void (CALLBACK *callback)(void)) {}
-void CALLBACK GPU__vBlank(int val) {}
-void CALLBACK GPU__registerCallback(void (CALLBACK *callback)(int)) {}
-void CALLBACK GPU__idle(void) {}
-void CALLBACK GPU__visualVibration(unsigned long iSmall, unsigned long iBig) {}
-void CALLBACK GPU__cursor(int player, int x, int y) {}
+static long CALLBACK GPU__configure(void) { return 0; }
+static long CALLBACK GPU__test(void) { return 0; }
+static void CALLBACK GPU__about(void) {}
+static void CALLBACK GPU__makeSnapshot(void) {}
+static void CALLBACK GPU__keypressed(int key) {}
+static long CALLBACK GPU__getScreenPic(unsigned char *pMem) { return -1; }
+static long CALLBACK GPU__showScreenPic(unsigned char *pMem) { return -1; }
+static void CALLBACK GPU__clearDynarec(void (CALLBACK *callback)(void)) {}
+static void CALLBACK GPU__vBlank(int val) {}
+static void CALLBACK GPU__registerCallback(void (CALLBACK *callback)(int)) {}
+static void CALLBACK GPU__idle(void) {}
+static void CALLBACK GPU__visualVibration(unsigned long iSmall, unsigned long iBig) {}
+static void CALLBACK GPU__cursor(int player, int x, int y) {}
 
 #define LoadGpuSym1(dest, name) \
 	LoadSym(GPU_##dest, GPU##dest, name, TRUE);
@@ -276,8 +276,8 @@ static int LoadGPUplugin(const char *GPUdll) {
 
 void *hCDRDriver = NULL;
 
-long CALLBACK CDR__play(unsigned char *sector) { return 0; }
-long CALLBACK CDR__stop(void) { return 0; }
+static long CALLBACK CDR__play(unsigned char *sector) { return 0; }
+static long CALLBACK CDR__stop(void) { return 0; }
 
 long CALLBACK CDR__getStatus(struct CdrStat *stat) {
 	if (cdOpenCaseTime < 0 || cdOpenCaseTime > (s64)time(NULL))
@@ -343,9 +343,9 @@ static int LoadCDRplugin(const char *CDRdll) {
 
 void *hSPUDriver = NULL;
 
-long CALLBACK SPU__configure(void) { return 0; }
-void CALLBACK SPU__about(void) {}
-long CALLBACK SPU__test(void) { return 0; }
+static long CALLBACK SPU__configure(void) { return 0; }
+static void CALLBACK SPU__about(void) {}
+static long CALLBACK SPU__test(void) { return 0; }
 
 #define LoadSpuSym1(dest, name) \
 	LoadSym(SPU_##dest, SPU##dest, name, TRUE);
@@ -400,7 +400,7 @@ static int bufcount, bufc;
 
 PadDataS padd1, padd2;
 
-unsigned char _PADstartPoll(PadDataS *pad) {
+static unsigned char _PADstartPoll(PadDataS *pad) {
     bufc = 0;
 
     switch (pad->controllerType) {
@@ -461,12 +461,12 @@ unsigned char _PADstartPoll(PadDataS *pad) {
     return buf[bufc++];
 }
 
-unsigned char _PADpoll(unsigned char value) {
+static unsigned char _PADpoll(unsigned char value) {
     if (bufc > bufcount) return 0;
     return buf[bufc++];
 }
 
-unsigned char CALLBACK PAD1__startPoll(int pad) {
+static unsigned char CALLBACK PAD1__startPoll(int pad) {
     PadDataS padd;
 
     PAD1_readPort1(&padd);
@@ -474,17 +474,17 @@ unsigned char CALLBACK PAD1__startPoll(int pad) {
     return _PADstartPoll(&padd);
 }
 
-unsigned char CALLBACK PAD1__poll(unsigned char value) {
+static unsigned char CALLBACK PAD1__poll(unsigned char value) {
     return _PADpoll(value);
 }
 
-long CALLBACK PAD1__configure(void) { return 0; }
-void CALLBACK PAD1__about(void) {}
-long CALLBACK PAD1__test(void) { return 0; }
-long CALLBACK PAD1__query(void) { return 3; }
-long CALLBACK PAD1__keypressed() { return 0; }
-void CALLBACK PAD1__registerVibration(void (CALLBACK *callback)(unsigned long, unsigned long)) {}
-void CALLBACK PAD1__registerCursor(void (CALLBACK *callback)(int, int, int)) {}
+static long CALLBACK PAD1__configure(void) { return 0; }
+static void CALLBACK PAD1__about(void) {}
+static long CALLBACK PAD1__test(void) { return 0; }
+static long CALLBACK PAD1__query(void) { return 3; }
+static long CALLBACK PAD1__keypressed() { return 0; }
+static void CALLBACK PAD1__registerVibration(void (CALLBACK *callback)(unsigned long, unsigned long)) {}
+static void CALLBACK PAD1__registerCursor(void (CALLBACK *callback)(int, int, int)) {}
 
 #define LoadPad1Sym1(dest, name) \
 	LoadSym(PAD1_##dest, PAD##dest, name, TRUE);
@@ -524,7 +524,7 @@ static int LoadPAD1plugin(const char *PAD1dll) {
 	return 0;
 }
 
-unsigned char CALLBACK PAD2__startPoll(int pad) {
+static unsigned char CALLBACK PAD2__startPoll(int pad) {
 	PadDataS padd;
 
 	PAD2_readPort2(&padd);
@@ -532,17 +532,17 @@ unsigned char CALLBACK PAD2__startPoll(int pad) {
 	return _PADstartPoll(&padd);
 }
 
-unsigned char CALLBACK PAD2__poll(unsigned char value) {
+static unsigned char CALLBACK PAD2__poll(unsigned char value) {
 	return _PADpoll(value);
 }
 
-long CALLBACK PAD2__configure(void) { return 0; }
-void CALLBACK PAD2__about(void) {}
-long CALLBACK PAD2__test(void) { return 0; }
-long CALLBACK PAD2__query(void) { return PSE_PAD_USE_PORT1 | PSE_PAD_USE_PORT2; }
-long CALLBACK PAD2__keypressed() { return 0; }
-void CALLBACK PAD2__registerVibration(void (CALLBACK *callback)(unsigned long, unsigned long)) {}
-void CALLBACK PAD2__registerCursor(void (CALLBACK *callback)(int, int, int)) {}
+static long CALLBACK PAD2__configure(void) { return 0; }
+static void CALLBACK PAD2__about(void) {}
+static long CALLBACK PAD2__test(void) { return 0; }
+static long CALLBACK PAD2__query(void) { return PSE_PAD_USE_PORT1 | PSE_PAD_USE_PORT2; }
+static long CALLBACK PAD2__keypressed() { return 0; }
+static void CALLBACK PAD2__registerVibration(void (CALLBACK *callback)(unsigned long, unsigned long)) {}
+static void CALLBACK PAD2__registerCursor(void (CALLBACK *callback)(int, int, int)) {}
 
 #define LoadPad2Sym1(dest, name) \
 	LoadSym(PAD2_##dest, PAD##dest, name, TRUE);
@@ -584,11 +584,11 @@ static int LoadPAD2plugin(const char *PAD2dll) {
 
 void *hNETDriver = NULL;
 
-void CALLBACK NET__setInfo(netInfo *info) {}
-void CALLBACK NET__keypressed(int key) {}
-long CALLBACK NET__configure(void) { return 0; }
-long CALLBACK NET__test(void) { return 0; }
-void CALLBACK NET__about(void) {}
+static void CALLBACK NET__setInfo(netInfo *info) {}
+static void CALLBACK NET__keypressed(int key) {}
+static long CALLBACK NET__configure(void) { return 0; }
+static long CALLBACK NET__test(void) { return 0; }
+static void CALLBACK NET__about(void) {}
 
 #define LoadNetSym1(dest, name) \
 	LoadSym(NET_##dest, NET##dest, name, TRUE);
@@ -632,43 +632,45 @@ static int LoadNETplugin(const char *NETdll) {
 
 void *hSIO1Driver = NULL;
 
-long CALLBACK SIO1__init(void) { return 0; }
-long CALLBACK SIO1__shutdown(void) { return 0; }
-long CALLBACK SIO1__open(void) { return 0; }
-long CALLBACK SIO1__close(void) { return 0; }
-long CALLBACK SIO1__configure(void) { return 0; }
-long CALLBACK SIO1__test(void) { return 0; }
-void CALLBACK SIO1__about(void) {}
-void CALLBACK SIO1__pause(void) {}
-void CALLBACK SIO1__resume(void) {}
-long CALLBACK SIO1__keypressed(int key) { return 0; }
-void CALLBACK SIO1__writeData8(unsigned char val) {}
-void CALLBACK SIO1__writeData16(unsigned short val) {}
-void CALLBACK SIO1__writeData32(unsigned long val) {}
-void CALLBACK SIO1__writeStat16(unsigned short val) {}
-void CALLBACK SIO1__writeStat32(unsigned long val) {}
-void CALLBACK SIO1__writeMode16(unsigned short val) {}
-void CALLBACK SIO1__writeMode32(unsigned long val) {}
-void CALLBACK SIO1__writeCtrl16(unsigned short val) {}
-void CALLBACK SIO1__writeCtrl32(unsigned long val) {}
-void CALLBACK SIO1__writeBaud16(unsigned short val) {}
-void CALLBACK SIO1__writeBaud32(unsigned long val) {}
-unsigned char CALLBACK SIO1__readData8(void) { return 0; }
-unsigned short CALLBACK SIO1__readData16(void) { return 0; }
-unsigned long CALLBACK SIO1__readData32(void) { return 0; }
-unsigned short CALLBACK SIO1__readStat16(void) { return 0; }
-unsigned long CALLBACK SIO1__readStat32(void) { return 0; }
-unsigned short CALLBACK SIO1__readMode16(void) { return 0; }
-unsigned long CALLBACK SIO1__readMode32(void) { return 0; }
-unsigned short CALLBACK SIO1__readCtrl16(void) { return 0; }
-unsigned long CALLBACK SIO1__readCtrl32(void) { return 0; }
-unsigned short CALLBACK SIO1__readBaud16(void) { return 0; }
-unsigned long CALLBACK SIO1__readBaud32(void) { return 0; }
-void CALLBACK SIO1__registerCallback(void (CALLBACK *callback)(void)) {};
+static long CALLBACK SIO1__init(void) { return 0; }
+static long CALLBACK SIO1__shutdown(void) { return 0; }
+static long CALLBACK SIO1__open(void) { return 0; }
+static long CALLBACK SIO1__close(void) { return 0; }
+static long CALLBACK SIO1__configure(void) { return 0; }
+static long CALLBACK SIO1__test(void) { return 0; }
+static void CALLBACK SIO1__about(void) {}
+static void CALLBACK SIO1__pause(void) {}
+static void CALLBACK SIO1__resume(void) {}
+static long CALLBACK SIO1__keypressed(int key) { return 0; }
+static void CALLBACK SIO1__writeData8(unsigned char val) {}
+static void CALLBACK SIO1__writeData16(unsigned short val) {}
+static void CALLBACK SIO1__writeData32(unsigned long val) {}
+static void CALLBACK SIO1__writeStat16(unsigned short val) {}
+static void CALLBACK SIO1__writeStat32(unsigned long val) {}
+static void CALLBACK SIO1__writeMode16(unsigned short val) {}
+static void CALLBACK SIO1__writeMode32(unsigned long val) {}
+static void CALLBACK SIO1__writeCtrl16(unsigned short val) {}
+static void CALLBACK SIO1__writeCtrl32(unsigned long val) {}
+static void CALLBACK SIO1__writeBaud16(unsigned short val) {}
+static void CALLBACK SIO1__writeBaud32(unsigned long val) {}
+static unsigned char CALLBACK SIO1__readData8(void) { return 0; }
+static unsigned short CALLBACK SIO1__readData16(void) { return 0; }
+static unsigned long CALLBACK SIO1__readData32(void) { return 0; }
+static unsigned short CALLBACK SIO1__readStat16(void) { return 0; }
+static unsigned long CALLBACK SIO1__readStat32(void) { return 0; }
+static unsigned short CALLBACK SIO1__readMode16(void) { return 0; }
+static unsigned long CALLBACK SIO1__readMode32(void) { return 0; }
+static unsigned short CALLBACK SIO1__readCtrl16(void) { return 0; }
+static unsigned long CALLBACK SIO1__readCtrl32(void) { return 0; }
+static unsigned short CALLBACK SIO1__readBaud16(void) { return 0; }
+static unsigned long CALLBACK SIO1__readBaud32(void) { return 0; }
+static void CALLBACK SIO1__registerCallback(void (CALLBACK *callback)(void)) {};
 
+#if 0 // unused by pcsxr
 void CALLBACK SIO1irq(void) {
     psxHu32ref(0x1070) |= SWAPu32(0x100);
 }
+#endif
 
 #define LoadSio1Sym1(dest, name) \
     LoadSym(SIO1_##dest, SIO1##dest, name, TRUE);
@@ -710,6 +712,7 @@ static int LoadSIO1plugin(const char *SIO1dll) {
     LoadSio1Sym0(writeCtrl32, "SIO1writeCtrl32");
     LoadSio1Sym0(writeBaud16, "SIO1writeBaud16");
     LoadSio1Sym0(writeBaud32, "SIO1writeBaud32");
+    LoadSio1Sym0(readData8, "SIO1readData8");
     LoadSio1Sym0(readData16, "SIO1readData16");
     LoadSio1Sym0(readData32, "SIO1readData32");
     LoadSio1Sym0(readStat16, "SIO1readStat16");

@@ -25,6 +25,7 @@
 #include "draw.h"
 #include "soft.h"
 #include "texture.h"
+#include "prim.h"
 
 ////////////////////////////////////////////////////////////////////////                                          
 // defines
@@ -84,7 +85,7 @@ short         sxmin,sxmax,symin,symax;
 // Update global TP infos
 ////////////////////////////////////////////////////////////////////////
 
-void UpdateGlobalTP(unsigned short gdata)
+static void UpdateGlobalTP(unsigned short gdata)
 {
  GlobalTextAddrX = (gdata << 6) & 0x3c0;
 
@@ -121,7 +122,7 @@ void UpdateGlobalTP(unsigned short gdata)
  STATUSREG|=(gdata & 0x07ff);                          // set the necessary bits
 }
 
-unsigned int DoubleBGR2RGB (unsigned int BGR)
+static unsigned int DoubleBGR2RGB (unsigned int BGR)
 {
  unsigned int ebx,eax,edx;
 
@@ -137,7 +138,7 @@ unsigned int DoubleBGR2RGB (unsigned int BGR)
  return (ebx|eax|edx);
 }
 
-unsigned short BGR24to16 (uint32_t BGR)
+static unsigned short BGR24to16 (uint32_t BGR)
 {
  return ((BGR>>3)&0x1f)|((BGR&0xf80000)>>9)|((BGR&0xf800)>>6);
 }
@@ -146,7 +147,7 @@ unsigned short BGR24to16 (uint32_t BGR)
 // OpenGL primitive drawing commands
 ////////////////////////////////////////////////////////////////////////
 
-__inline void PRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
                                    OGLVertex* vertex3, OGLVertex* vertex4) 
 {
  glBegin(GL_TRIANGLE_STRIP);
@@ -166,7 +167,7 @@ __inline void PRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex2,
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawTexturedTri(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawTexturedTri(OGLVertex* vertex1, OGLVertex* vertex2, 
                                   OGLVertex* vertex3) 
 {
  glBegin(GL_TRIANGLES);
@@ -183,7 +184,7 @@ __inline void PRIMdrawTexturedTri(OGLVertex* vertex1, OGLVertex* vertex2,
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawTexGouraudTriColor(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawTexGouraudTriColor(OGLVertex* vertex1, OGLVertex* vertex2, 
                                          OGLVertex* vertex3) 
 {
  glBegin(GL_TRIANGLES);
@@ -204,7 +205,7 @@ __inline void PRIMdrawTexGouraudTriColor(OGLVertex* vertex1, OGLVertex* vertex2,
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawTexGouraudTriColorQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawTexGouraudTriColorQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
                                              OGLVertex* vertex3, OGLVertex* vertex4) 
 {
  glBegin(GL_TRIANGLE_STRIP);
@@ -228,7 +229,7 @@ __inline void PRIMdrawTexGouraudTriColorQuad(OGLVertex* vertex1, OGLVertex* vert
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3) 
+static __inline void PRIMdrawTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3) 
 {
  glBegin(GL_TRIANGLES);
   glVertex3fv(&vertex1->x);
@@ -239,7 +240,7 @@ __inline void PRIMdrawTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* ver
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawTri2(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawTri2(OGLVertex* vertex1, OGLVertex* vertex2, 
                            OGLVertex* vertex3, OGLVertex* vertex4) 
 {
  glBegin(GL_TRIANGLE_STRIP);                           
@@ -252,7 +253,7 @@ __inline void PRIMdrawTri2(OGLVertex* vertex1, OGLVertex* vertex2,
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawGouraudTriColor(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawGouraudTriColor(OGLVertex* vertex1, OGLVertex* vertex2, 
                                       OGLVertex* vertex3) 
 {
  glBegin(GL_TRIANGLES);                           
@@ -269,7 +270,7 @@ __inline void PRIMdrawGouraudTriColor(OGLVertex* vertex1, OGLVertex* vertex2,
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawGouraudTri2Color(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawGouraudTri2Color(OGLVertex* vertex1, OGLVertex* vertex2, 
                                        OGLVertex* vertex3, OGLVertex* vertex4) 
 {
  glBegin(GL_TRIANGLE_STRIP);                           
@@ -289,7 +290,7 @@ __inline void PRIMdrawGouraudTri2Color(OGLVertex* vertex1, OGLVertex* vertex2,
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawFlatLine(OGLVertex* vertex1, OGLVertex* vertex2,OGLVertex* vertex3, OGLVertex* vertex4)
+static __inline void PRIMdrawFlatLine(OGLVertex* vertex1, OGLVertex* vertex2,OGLVertex* vertex3, OGLVertex* vertex4)
 {
  glBegin(GL_QUADS);
 
@@ -304,7 +305,7 @@ __inline void PRIMdrawFlatLine(OGLVertex* vertex1, OGLVertex* vertex2,OGLVertex*
 
 ///////////////////////////////////////////////////////// 
      
-__inline void PRIMdrawGouraudLine(OGLVertex* vertex1, OGLVertex* vertex2,OGLVertex* vertex3, OGLVertex* vertex4)
+static __inline void PRIMdrawGouraudLine(OGLVertex* vertex1, OGLVertex* vertex2,OGLVertex* vertex3, OGLVertex* vertex4)
 {
  glBegin(GL_QUADS);
 
@@ -324,7 +325,7 @@ __inline void PRIMdrawGouraudLine(OGLVertex* vertex1, OGLVertex* vertex2,OGLVert
 
 ///////////////////////////////////////////////////////// 
              
-__inline void PRIMdrawQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
                            OGLVertex* vertex3, OGLVertex* vertex4) 
 {
  glBegin(GL_QUADS);
@@ -359,7 +360,7 @@ SemiTransParams TransSets[4]=
 
 ////////////////////////////////////////////////////////////////////////
 
-void SetSemiTrans(void)
+static void SetSemiTrans(void)
 {
 /*
 * 0.5 x B + 0.5 x F
@@ -471,7 +472,7 @@ SemiTransParams MultiColTransSets[4]=
 
 ////////////////////////////////////////////////////////////////////////                                          
 
-void SetSemiTransMulti(int Pass)
+static void SetSemiTransMulti(int Pass)
 {
  static GLenum bm1=GL_ZERO;
  static GLenum bm2=GL_ONE;
@@ -525,7 +526,7 @@ void SetSemiTransMulti(int Pass)
 // Set several rendering stuff including blending 
 ////////////////////////////////////////////////////////////////////////
 
-__inline void SetZMask3O(void)
+static __inline void SetZMask3O(void)
 {
  if(iUseMask && DrawSemiTrans && !iSetMask)
   {
@@ -534,7 +535,7 @@ __inline void SetZMask3O(void)
   }
 }
 
-__inline void SetZMask3(void)
+static __inline void SetZMask3(void)
 {
  if(iUseMask)
   {
@@ -548,7 +549,7 @@ __inline void SetZMask3(void)
   }
 }
 
-__inline void SetZMask3NT(void)
+static __inline void SetZMask3NT(void)
 {
  if(iUseMask)
   {
@@ -564,7 +565,7 @@ __inline void SetZMask3NT(void)
 
 ////////////////////////////////////////////////////////////////////////
 
-__inline void SetZMask4O(void)
+static __inline void SetZMask4O(void)
 {
  if(iUseMask && DrawSemiTrans && !iSetMask)
   {
@@ -573,7 +574,7 @@ __inline void SetZMask4O(void)
   }
 }
 
-__inline void SetZMask4(void)
+static __inline void SetZMask4(void)
 {
  if(iUseMask)
   {
@@ -587,7 +588,7 @@ __inline void SetZMask4(void)
   }
 }
 
-__inline void SetZMask4NT(void)
+static __inline void SetZMask4NT(void)
 {
  if(iUseMask)
   {
@@ -601,7 +602,7 @@ __inline void SetZMask4NT(void)
   }
 }
 
-__inline void SetZMask4SP(void)
+static __inline void SetZMask4SP(void)
 {
  if(iUseMask)
   {
@@ -622,7 +623,7 @@ __inline void SetZMask4SP(void)
 
 ////////////////////////////////////////////////////////////////////////
 
-__inline void SetRenderState(uint32_t DrawAttributes)
+static __inline void SetRenderState(uint32_t DrawAttributes)
 {
  bDrawNonShaded = (SHADETEXBIT(DrawAttributes)) ? TRUE : FALSE;
  DrawSemiTrans = (SEMITRANSBIT(DrawAttributes)) ? TRUE : FALSE;
@@ -630,7 +631,7 @@ __inline void SetRenderState(uint32_t DrawAttributes)
 
 ////////////////////////////////////////////////////////////////////////                                          
 
-__inline void SetRenderColor(uint32_t DrawAttributes)
+static __inline void SetRenderColor(uint32_t DrawAttributes)
 {
  if(bDrawNonShaded) {g_m1=g_m2=g_m3=128;}
  else
@@ -643,7 +644,7 @@ __inline void SetRenderColor(uint32_t DrawAttributes)
 
 ////////////////////////////////////////////////////////////////////////                                          
                                
-void SetRenderMode(uint32_t DrawAttributes, BOOL bSCol)
+static void SetRenderMode(uint32_t DrawAttributes, BOOL bSCol)
 {
  if((bUseMultiPass) && (bDrawTextured) && !(bDrawNonShaded))
       {bDrawMultiPass = TRUE; SetSemiTransMulti(0);}
@@ -698,7 +699,7 @@ void SetRenderMode(uint32_t DrawAttributes, BOOL bSCol)
 // Set Opaque multipass color
 ////////////////////////////////////////////////////////////////////////
 
-void SetOpaqueColor(uint32_t DrawAttributes)
+static void SetOpaqueColor(uint32_t DrawAttributes)
 {
  if(bDrawNonShaded) return;                            // no shading? bye
   
@@ -711,7 +712,7 @@ void SetOpaqueColor(uint32_t DrawAttributes)
 // Fucking stupid screen coord checking
 ////////////////////////////////////////////////////////////////////////
 
-BOOL ClipVertexListScreen(void)
+static BOOL ClipVertexListScreen(void)
 {
  if (lx0 >= PSXDisplay.DisplayEnd.x)      goto NEXTSCRTEST;
  if (ly0 >= PSXDisplay.DisplayEnd.y)      goto NEXTSCRTEST;
@@ -733,7 +734,7 @@ NEXTSCRTEST:
 
 ////////////////////////////////////////////////////////////////////////
 
-BOOL bDrawOffscreenFront(void)
+static BOOL bDrawOffscreenFront(void)
 {
  if(sxmin < PSXDisplay.DisplayPosition.x) return FALSE;   // must be complete in front
  if(symin < PSXDisplay.DisplayPosition.y) return FALSE;
@@ -742,7 +743,7 @@ BOOL bDrawOffscreenFront(void)
  return TRUE;
 }
 
-BOOL bOnePointInFront(void)
+static BOOL bOnePointInFront(void)
 {
  if(sxmax< PSXDisplay.DisplayPosition.x)
   return FALSE;
@@ -760,7 +761,7 @@ BOOL bOnePointInFront(void)
 }
  
 
-BOOL bOnePointInBack(void)
+static BOOL bOnePointInBack(void)
 {
  if(sxmax< PreviousPSXDisplay.DisplayPosition.x)
   return FALSE;
@@ -777,7 +778,7 @@ BOOL bOnePointInBack(void)
  return TRUE;
 }
  
-BOOL bDrawOffscreen4(void)
+static BOOL bDrawOffscreen4(void)
 {
  BOOL bFront;short sW,sH;
 
@@ -845,7 +846,7 @@ BOOL bDrawOffscreen4(void)
 
 ////////////////////////////////////////////////////////////////////////
  
-BOOL bDrawOffscreen3(void)
+static BOOL bDrawOffscreen3(void)
 {
  BOOL bFront;short sW,sH;
 
@@ -1153,9 +1154,7 @@ void PrepareFullScreenUpload (int Position)
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-unsigned char * LoadDirectMovieFast(void);
-
-void UploadScreenEx(int Position)
+static void UploadScreenEx(int Position)
 {
  short ya,yb,xa,xb,x, y, YStep, XStep, U, UStep,ux[4],vy[4];
 
@@ -1339,7 +1338,7 @@ void UploadScreen(int Position)
 // Detect next screen
 ////////////////////////////////////////////////////////////////////////
 
-BOOL IsCompleteInsideNextScreen(short x, short y, short xoff, short yoff)
+static BOOL IsCompleteInsideNextScreen(short x, short y, short xoff, short yoff)
 {        
  if (x > PSXDisplay.DisplayPosition.x+1)     return FALSE;
  if ((x + xoff) < PSXDisplay.DisplayEnd.x-1) return FALSE;
@@ -1355,7 +1354,7 @@ BOOL IsCompleteInsideNextScreen(short x, short y, short xoff, short yoff)
  return TRUE;
 }
 
-BOOL IsPrimCompleteInsideNextScreen(short x, short y, short xoff, short yoff)
+static BOOL IsPrimCompleteInsideNextScreen(short x, short y, short xoff, short yoff)
 {
  x+=PSXDisplay.DrawOffset.x;
  if (x > PSXDisplay.DisplayPosition.x+1) return FALSE;
@@ -1368,7 +1367,8 @@ BOOL IsPrimCompleteInsideNextScreen(short x, short y, short xoff, short yoff)
  return TRUE;
 }
 
-BOOL IsInsideNextScreen(short x, short y, short xoff, short yoff)
+#if 0
+static BOOL IsInsideNextScreen(short x, short y, short xoff, short yoff)
 {                    
  if (x > PSXDisplay.DisplayEnd.x) return FALSE;
  if (y > PSXDisplay.DisplayEnd.y) return FALSE;
@@ -1376,6 +1376,7 @@ BOOL IsInsideNextScreen(short x, short y, short xoff, short yoff)
  if ((y + yoff) < PSXDisplay.DisplayPosition.y) return FALSE;
  return TRUE;
 }
+#endif
 
 ////////////////////////////////////////////////////////////////////////
 // mask stuff...
@@ -1384,7 +1385,7 @@ BOOL IsInsideNextScreen(short x, short y, short xoff, short yoff)
 //Mask1    Set mask bit while drawing. 1 = on
 //Mask2    Do not draw to mask areas. 1= on
 
-void cmdSTP(unsigned char * baseAddr)
+static void cmdSTP(unsigned char * baseAddr)
 {
  uint32_t gdata = ((uint32_t*)baseAddr)[0];
 
@@ -1417,7 +1418,7 @@ void cmdSTP(unsigned char * baseAddr)
 // cmd: Set texture page infos
 ////////////////////////////////////////////////////////////////////////
 
-void cmdTexturePage(unsigned char * baseAddr)
+static void cmdTexturePage(unsigned char * baseAddr)
 {
  uint32_t gdata = ((uint32_t *)baseAddr)[0];
  UpdateGlobalTP((unsigned short)gdata);
@@ -1428,7 +1429,7 @@ void cmdTexturePage(unsigned char * baseAddr)
 // cmd: turn on/off texture window
 ////////////////////////////////////////////////////////////////////////
 
-void cmdTextureWindow(unsigned char *baseAddr)
+static void cmdTextureWindow(unsigned char *baseAddr)
 {
  uint32_t gdata = ((uint32_t *)baseAddr)[0];
  uint32_t YAlign,XAlign;
@@ -1586,7 +1587,7 @@ void ClampToPSXDrawAreaOffset(short *x0, short *y0, short *x1, short *y1)
 // Check draw area dimensions
 ////////////////////////////////////////////////////////////////////////
 
-void ClampToPSXScreen(short *x0, short *y0, short *x1, short *y1)
+static void ClampToPSXScreen(short *x0, short *y0, short *x1, short *y1)
 {
  if (*x0 < 0)               *x0 = 0;
  else
@@ -1609,7 +1610,7 @@ void ClampToPSXScreen(short *x0, short *y0, short *x1, short *y1)
 // Used in Load Image and Blk Fill
 ////////////////////////////////////////////////////////////////////////
 
-void ClampToPSXScreenOffset(short *x0, short *y0, short *x1, short *y1)
+static void ClampToPSXScreenOffset(short *x0, short *y0, short *x1, short *y1)
 {
  if (*x0 < 0)
   { *x1 += *x0;  *x0 = 0; }
@@ -1636,7 +1637,7 @@ void ClampToPSXScreenOffset(short *x0, short *y0, short *x1, short *y1)
 // cmd: start of drawing area... primitives will be clipped inside
 ////////////////////////////////////////////////////////////////////////
 
-void cmdDrawAreaStart(unsigned char * baseAddr)
+static void cmdDrawAreaStart(unsigned char * baseAddr)
 {
  uint32_t gdata = ((uint32_t *)baseAddr)[0];
 
@@ -1667,7 +1668,7 @@ void cmdDrawAreaStart(unsigned char * baseAddr)
 // cmd: end of drawing area... primitives will be clipped inside
 ////////////////////////////////////////////////////////////////////////
 
-void cmdDrawAreaEnd(unsigned char * baseAddr)
+static void cmdDrawAreaEnd(unsigned char * baseAddr)
 {
  uint32_t gdata = ((uint32_t *)baseAddr)[0];
 
@@ -1702,7 +1703,7 @@ void cmdDrawAreaEnd(unsigned char * baseAddr)
 // cmd: draw offset... will be added to prim coords
 ////////////////////////////////////////////////////////////////////////
 
-void cmdDrawOffset(unsigned char * baseAddr)
+static void cmdDrawOffset(unsigned char * baseAddr)
 {
  uint32_t gdata = ((uint32_t *)baseAddr)[0];
 
@@ -1733,7 +1734,7 @@ void cmdDrawOffset(unsigned char * baseAddr)
 // cmd: load image to vram
 ////////////////////////////////////////////////////////////////////////
 
-void primLoadImage(unsigned char * baseAddr)
+static void primLoadImage(unsigned char * baseAddr)
 {
  unsigned short *sgpuData = ((unsigned short *) baseAddr);
 
@@ -1752,7 +1753,7 @@ void primLoadImage(unsigned char * baseAddr)
 
 ////////////////////////////////////////////////////////////////////////
 
-void PrepareRGB24Upload(void)
+static void PrepareRGB24Upload(void)
 {
  VRAMWrite.x=(VRAMWrite.x*2)/3;
  VRAMWrite.Width=(VRAMWrite.Width*2)/3;
@@ -1890,7 +1891,7 @@ void CheckWriteUpdate()
 // cmd: vram -> psx mem
 ////////////////////////////////////////////////////////////////////////
 
-void primStoreImage(unsigned char * baseAddr)
+static void primStoreImage(unsigned char * baseAddr)
 {
  unsigned short *sgpuData = ((unsigned short *) baseAddr);
 
@@ -1912,7 +1913,7 @@ void primStoreImage(unsigned char * baseAddr)
 // cmd: blkfill - NO primitive! Doesn't care about draw areas...
 ////////////////////////////////////////////////////////////////////////
 
-void primBlkFill(unsigned char * baseAddr)
+static void primBlkFill(unsigned char * baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -2029,7 +2030,7 @@ void primBlkFill(unsigned char * baseAddr)
 // cmd: move image vram -> vram
 ////////////////////////////////////////////////////////////////////////
 
-void MoveImageWrapped(short imageX0,short imageY0,
+static void MoveImageWrapped(short imageX0,short imageY0,
                       short imageX1,short imageY1,
                       short imageSX,short imageSY)
 {
@@ -2109,7 +2110,7 @@ void MoveImageWrapped(short imageX0,short imageY0,
 
 ////////////////////////////////////////////////////////////////////////
 
-void primMoveImage(unsigned char * baseAddr)
+static void primMoveImage(unsigned char * baseAddr)
 {
  short *sgpuData = ((short *) baseAddr);
  short imageY0,imageX0,imageY1,imageX1,imageSX,imageSY,i,j;
@@ -2268,7 +2269,7 @@ void primMoveImage(unsigned char * baseAddr)
 // cmd: draw free-size Tile 
 ////////////////////////////////////////////////////////////////////////
 
-void primTileS(unsigned char * baseAddr)
+static void primTileS(unsigned char * baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *)baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -2333,7 +2334,7 @@ void primTileS(unsigned char * baseAddr)
 // cmd: draw 1 dot Tile (point)
 ////////////////////////////////////////////////////////////////////////
 
-void primTile1(unsigned char * baseAddr)
+static void primTile1(unsigned char * baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *)baseAddr);
  short *sgpuData = ((short *)baseAddr);
@@ -2380,7 +2381,7 @@ void primTile1(unsigned char * baseAddr)
 // cmd: draw 8 dot Tile (small rect)
 ////////////////////////////////////////////////////////////////////////
 
-void primTile8(unsigned char * baseAddr)
+static void primTile8(unsigned char * baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *)baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -2427,7 +2428,7 @@ void primTile8(unsigned char * baseAddr)
 // cmd: draw 16 dot Tile (medium rect)
 ////////////////////////////////////////////////////////////////////////
 
-void primTile16(unsigned char * baseAddr)
+static void primTile16(unsigned char * baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *)baseAddr);
  short *sgpuData = ((short *)baseAddr);
@@ -2508,7 +2509,7 @@ void DrawMultiBlur(void)
 
 #define   POFF 0.375f
 
-void DrawMultiFilterSprite(void)
+static void DrawMultiFilterSprite(void)
 {
  int lABR,lDST;
 
@@ -2539,7 +2540,7 @@ void DrawMultiFilterSprite(void)
 // cmd: small sprite (textured rect)
 ////////////////////////////////////////////////////////////////////////
 
-void primSprt8(unsigned char * baseAddr)
+static void primSprt8(unsigned char * baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -2660,7 +2661,7 @@ void primSprt8(unsigned char * baseAddr)
 // cmd: medium sprite (textured rect)
 ////////////////////////////////////////////////////////////////////////
 
-void primSprt16(unsigned char * baseAddr)
+static void primSprt16(unsigned char * baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -2780,7 +2781,7 @@ void primSprt16(unsigned char * baseAddr)
 // cmd: free-size sprite (textured rect)
 ////////////////////////////////////////////////////////////////////////
  
-void primSprtSRest(unsigned char * baseAddr,unsigned short type)
+static void primSprtSRest(unsigned char * baseAddr,unsigned short type)
 {
  uint32_t *gpuData = ((uint32_t *)baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -2951,7 +2952,7 @@ void primSprtSRest(unsigned char * baseAddr,unsigned short type)
   }
 }
 
-void primSprtS(unsigned char * baseAddr)
+static void primSprtS(unsigned char * baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -3091,7 +3092,7 @@ void primSprtS(unsigned char * baseAddr)
 // cmd: flat shaded Poly4
 ////////////////////////////////////////////////////////////////////////
 
-void primPolyF4(unsigned char *baseAddr)
+static void primPolyF4(unsigned char *baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -3138,7 +3139,7 @@ void primPolyF4(unsigned char *baseAddr)
 
 void primPolyG4(unsigned char * baseAddr);
 
-BOOL bDrawOffscreenFrontFF9G4(void)
+static BOOL bDrawOffscreenFrontFF9G4(void)
 {
  if(lx0< PSXDisplay.DisplayPosition.x) return FALSE;   // must be complete in front
  if(lx0> PSXDisplay.DisplayEnd.x)      return FALSE;
@@ -3253,7 +3254,7 @@ void primPolyG4(unsigned char * baseAddr)
 // cmd: flat shaded Texture3
 ////////////////////////////////////////////////////////////////////////
 
-BOOL DoLineCheck(uint32_t *gpuData)
+static BOOL DoLineCheck(uint32_t *gpuData)
 {
  BOOL bQuad=FALSE;short dx,dy;
 
@@ -3418,7 +3419,7 @@ BOOL DoLineCheck(uint32_t *gpuData)
 
 ////////////////////////////////////////////////////////////////////////
 
-void primPolyFT3(unsigned char * baseAddr)
+static void primPolyFT3(unsigned char * baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -3494,7 +3495,7 @@ void primPolyFT3(unsigned char * baseAddr)
 
 #define ST_FAC             255.99f
 
-void RectTexAlign(void)
+static void RectTexAlign(void)
 {
  int UFlipped = FALSE;
  int VFlipped = FALSE;
@@ -3854,7 +3855,7 @@ void RectTexAlign(void)
 
 }
 
-void primPolyFT4(unsigned char * baseAddr)
+static void primPolyFT4(unsigned char * baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *)baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -3941,7 +3942,7 @@ void primPolyFT4(unsigned char * baseAddr)
 // cmd: smooth shaded Texture3
 ////////////////////////////////////////////////////////////////////////
 
-void primPolyGT3(unsigned char *baseAddr)
+static void primPolyGT3(unsigned char *baseAddr)
 {    
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -4050,7 +4051,7 @@ void primPolyGT3(unsigned char *baseAddr)
 // cmd: smooth shaded Poly3
 ////////////////////////////////////////////////////////////////////////
 
-void primPolyG3(unsigned char *baseAddr)
+static void primPolyG3(unsigned char *baseAddr)
 {    
  uint32_t *gpuData = ((uint32_t *)baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -4095,7 +4096,7 @@ void primPolyG3(unsigned char *baseAddr)
 // cmd: smooth shaded Texture4
 ////////////////////////////////////////////////////////////////////////
 
-void primPolyGT4(unsigned char *baseAddr)
+static void primPolyGT4(unsigned char *baseAddr)
 { 
  uint32_t *gpuData = ((uint32_t *)baseAddr);
  short *sgpuData = ((short *)baseAddr);
@@ -4215,7 +4216,7 @@ void primPolyGT4(unsigned char *baseAddr)
 // cmd: smooth shaded Poly3
 ////////////////////////////////////////////////////////////////////////
 
-void primPolyF3(unsigned char *baseAddr)
+static void primPolyF3(unsigned char *baseAddr)
 {    
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -4259,7 +4260,7 @@ void primPolyF3(unsigned char *baseAddr)
 // cmd: skipping shaded polylines
 ////////////////////////////////////////////////////////////////////////
 
-void primLineGSkip(unsigned char *baseAddr)
+static void primLineGSkip(unsigned char *baseAddr)
 {    
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -4284,7 +4285,7 @@ void primLineGSkip(unsigned char *baseAddr)
 // cmd: shaded polylines
 ////////////////////////////////////////////////////////////////////////
 
-void primLineGEx(unsigned char *baseAddr)
+static void primLineGEx(unsigned char *baseAddr)
 {    
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  int iMax=255;
@@ -4348,7 +4349,7 @@ void primLineGEx(unsigned char *baseAddr)
 // cmd: shaded polyline2
 ////////////////////////////////////////////////////////////////////////
 
-void primLineG2(unsigned char *baseAddr)
+static void primLineG2(unsigned char *baseAddr)
 {    
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -4393,7 +4394,7 @@ void primLineG2(unsigned char *baseAddr)
 // cmd: skipping flat polylines
 ////////////////////////////////////////////////////////////////////////
 
-void primLineFSkip(unsigned char *baseAddr)
+static void primLineFSkip(unsigned char *baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  int i=2,iMax=255;
@@ -4413,7 +4414,7 @@ void primLineFSkip(unsigned char *baseAddr)
 // cmd: drawing flat polylines
 ////////////////////////////////////////////////////////////////////////
 
-void primLineFEx(unsigned char *baseAddr)
+static void primLineFEx(unsigned char *baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  int iMax;
@@ -4471,7 +4472,7 @@ void primLineFEx(unsigned char *baseAddr)
 // cmd: drawing flat polyline2
 ////////////////////////////////////////////////////////////////////////
 
-void primLineF2(unsigned char *baseAddr)
+static void primLineF2(unsigned char *baseAddr)
 {
  uint32_t *gpuData = ((uint32_t *) baseAddr);
  short *sgpuData = ((short *) baseAddr);
@@ -4512,7 +4513,7 @@ void primLineF2(unsigned char *baseAddr)
 // cmd: well, easiest command... not implemented
 ////////////////////////////////////////////////////////////////////////
 
-void primNI(unsigned char *bA)
+static void primNI(unsigned char *bA)
 {
 }
 

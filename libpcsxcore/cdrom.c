@@ -22,8 +22,10 @@
 */
 
 #include "cdrom.h"
+#include "cdriso.h"
 #include "ppf.h"
 #include "psxdma.h"
+#include "spu.h"
 
 cdrStruct cdr;
 
@@ -123,20 +125,11 @@ unsigned char Test23[] = { 0x43, 0x58, 0x44, 0x32, 0x39 ,0x34, 0x30, 0x51 };
 static struct CdrStat stat;
 static struct SubQ *subq;
 
-
-extern unsigned int msf2sec(char *msf);
-extern void sec2msf(unsigned int s, char *msf);
-
-
-extern u16 *iso_play_cdbuf;
-extern u16 iso_play_bufptr;
-extern long CALLBACK ISOinit(void);
-extern void CALLBACK SPUirq(void);
-extern SPUregisterCallback SPU_registerCallback;
-
+#ifndef H_SPUirqAddr
 #define H_SPUirqAddr		0x1f801da4
 #define H_SPUaddr				0x1f801da6
 #define H_SPUctrl				0x1f801daa
+#endif
 #define H_CDLeft				0x1f801db0
 #define H_CDRight				0x1f801db2
 
@@ -329,7 +322,7 @@ void cdrLidSeekInterrupt()
 }
 
 
-void Check_Shell( int Irq )
+static void Check_Shell( int Irq )
 {
 	// check case open/close
 	if (cdr.LidCheck > 0)
@@ -439,7 +432,7 @@ void Check_Shell( int Irq )
 }
 
 
-void Find_CurTrack() {
+static void Find_CurTrack() {
 	cdr.CurTrack = 0;
 
 	if (CDR_getTN(cdr.ResultTN) != -1) {
@@ -487,7 +480,7 @@ static void ReadTrack( u8 *time ) {
 }
 
 
-void CDXA_Attenuation( s16 *buf, int size, int stereo )
+static void CDXA_Attenuation( s16 *buf, int size, int stereo )
 {
 	s16 *spsound;
 	s32 lc,rc;
@@ -529,7 +522,7 @@ void CDXA_Attenuation( s16 *buf, int size, int stereo )
 }
 
 
-void AddIrqQueue(unsigned char irq, unsigned long ecycle) {
+static void AddIrqQueue(unsigned char irq, unsigned long ecycle) {
 	cdr.Irq = irq;
 	cdr.eCycle = ecycle;
 
@@ -539,7 +532,7 @@ void AddIrqQueue(unsigned char irq, unsigned long ecycle) {
 }
 
 
-void Set_Track()
+static void Set_Track()
 {
 	if (CDR_getTN(cdr.ResultTN) != -1) {
 		int lcv;
@@ -572,7 +565,7 @@ void Set_Track()
 
 
 static u8 fake_subq_local[3], fake_subq_real[3], fake_subq_index, fake_subq_change;
-void Create_Fake_Subq()
+static void Create_Fake_Subq()
 {
 	u8 temp_cur[3], temp_next[3], temp_start[3], pregap;
 	int diff;
@@ -655,7 +648,7 @@ void Create_Fake_Subq()
 }
 
 
-void cdrPlayInterrupt_Autopause()
+static void cdrPlayInterrupt_Autopause()
 {
 	if ((cdr.Mode & (MODE_AUTOPAUSE|MODE_CDDA)) != (MODE_AUTOPAUSE|MODE_CDDA)) return;
 
@@ -734,7 +727,7 @@ void cdrPlayInterrupt_Autopause()
 }
 
 
-void cdrPlayInterrupt_Repplay()
+static void cdrPlayInterrupt_Repplay()
 {
 	// BIOS - HACK: Switch between local / absolute times
 	static u8 report_time = 1;
@@ -1610,9 +1603,9 @@ void cdrReadInterrupt() {
 			int ret = xa_decode_sector(&cdr.Xa, cdr.Transfer+4, cdr.FirstSector);
 
 			if (!ret) {
+#if 0
 				int xa_type;
 
-#if 0
 				// save - set only for FirstSector
 				xa_type = cdr.Xa.stereo;
 
@@ -2254,7 +2247,7 @@ void cdrWrite3(unsigned char rt) {
 
 void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 	u32 cdsize;
-	u8 *ptr, *cdwrap_ptr;
+	u8 *ptr;
 
 #ifdef CDR_LOG
 	CDR_LOG("psxDma3() Log: *** DMA 3 *** %x addr = %x size = %x\n", chcr, madr, bcr);
@@ -2314,7 +2307,7 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 			psxCpu->Clear(madr, cdsize / 4);
 			cdr.pTransfer += cdsize;
 #else
-			cdwrap_ptr = cdr.Transfer;
+			u8 *cdwrap_ptr = cdr.Transfer;
 			switch (cdr.Mode & (MODE_SIZE_2340|MODE_SIZE_2328)) {
 				case MODE_SIZE_2340: cdwrap_ptr += 2340; break;
 				case MODE_SIZE_2328: cdwrap_ptr += 12 + 2328; break;

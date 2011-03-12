@@ -18,6 +18,7 @@
 
 #include "Linux.h"
 #include <gtk/gtk.h>
+#include "AboutDlg.h"
 
 #define ABOUT_VERSION "svn"
 

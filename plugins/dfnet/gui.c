@@ -14,8 +14,9 @@
 #include <signal.h>
 
 #include "cfg.c"
+#include "psemu_plugin_defs.h"
 
-void cfgSysMessage(const char *fmt, ...) {
+static void cfgSysMessage(const char *fmt, ...) {
 	GtkWidget *MsgDlg;
 	va_list list;
 	char msg[512];
@@ -34,7 +35,7 @@ void cfgSysMessage(const char *fmt, ...) {
 	gtk_widget_destroy(MsgDlg);
 }
 
-void CFGconfigure() {
+static void CFGconfigure() {
 	cfgSysMessage(_("Nothing to configure"));
 }
 
@@ -45,7 +46,7 @@ void CFGconfigure() {
 
 #define MAXINTERFACES 16
 
-void sockGetIP(char *IPAddress) {
+static void sockGetIP(char *IPAddress) {
 	int fd, intrface;
 	struct ifreq buf[MAXINTERFACES];
 	struct ifconf ifc;
@@ -86,7 +87,7 @@ void sockGetIP(char *IPAddress) {
 
 #endif
 
-void OnCopyIP(GtkWidget *widget, gpointer user_data) {
+static void OnCopyIP(GtkWidget *widget, gpointer user_data) {
 	char str[256];
 
 	sockGetIP(str);
@@ -94,7 +95,7 @@ void OnCopyIP(GtkWidget *widget, gpointer user_data) {
 	cfgSysMessage(_("IP %s"), str);
 }
 
-long CFGopen() {
+static long CFGopen() {
 	GtkBuilder *builder;
 	GtkWidget *widget, *MainWindow;
 	char buf[256];
@@ -108,36 +109,36 @@ long CFGopen() {
 		return 0;
 	}
 
-	MainWindow = gtk_builder_get_object(builder, "dlgStart");
+	MainWindow = GTK_WIDGET(gtk_builder_get_object(builder, "dlgStart"));
 	gtk_window_set_title(GTK_WINDOW(MainWindow), _("NetPlay"));
 
-	widget = gtk_builder_get_object(builder, "btnCopyIP");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btnCopyIP"));
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 		G_CALLBACK(OnCopyIP), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "tbServerIP");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "tbServerIP"));
 	gtk_entry_set_text(GTK_ENTRY(widget), conf.ipAddress);
 
-	widget = gtk_builder_get_object(builder, "tbPort");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "tbPort"));
 	sprintf(buf, "%d", conf.PortNum);
 	gtk_entry_set_text(GTK_ENTRY(widget), buf);
 
 	if (conf.PlayerNum == 1) {
-		widget = gtk_builder_get_object(builder, "rbServer");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "rbServer"));
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
 	} else {
-		widget = gtk_builder_get_object(builder, "rbClient");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "rbClient"));
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
 	}
 
 	if (gtk_dialog_run(GTK_DIALOG(MainWindow)) == GTK_RESPONSE_OK) {
-		widget = gtk_builder_get_object(builder, "tbServerIP");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "tbServerIP"));
 		strcpy(conf.ipAddress, gtk_entry_get_text(GTK_ENTRY(widget)));
 
-		widget = gtk_builder_get_object(builder, "tbPort");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "tbPort"));
 		conf.PortNum = atoi(gtk_entry_get_text(GTK_ENTRY(widget)));
 
-		widget = gtk_builder_get_object(builder, "rbServer");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "rbServer"));
 		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget))) {
 			conf.PlayerNum = 1;
 		} else {
@@ -154,11 +155,11 @@ long CFGopen() {
 	return 0;
 }
 
-void OnWaitDialog_Abort() {
+static void OnWaitDialog_Abort() {
 	kill(getppid(), SIGUSR2);
 }
 
-void CFGwait() {
+static void CFGwait() {
 	GtkWidget *WaitDlg;
 
 	WaitDlg = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO,
@@ -173,11 +174,11 @@ void CFGwait() {
 	OnWaitDialog_Abort();
 }
 
-long CFGpause() {
+static long CFGpause() {
 	return 0;
 }
 
-void CFGabout() {
+static void CFGabout() {
 	const char *authors[]= {"linuzappz <linuzappz@hotmail.com>", "Wei Mingzhi <whistler_wmz@users.sf.net>", NULL};
 	GtkWidget *widget;
 
@@ -191,7 +192,7 @@ void CFGabout() {
 	gtk_widget_destroy(widget);
 }
 
-long CFGmessage(char *args[], int num) {
+static long CFGmessage(char *args[], int num) {
 	char msg[512];
 
 	memset(msg, 0, sizeof(msg));

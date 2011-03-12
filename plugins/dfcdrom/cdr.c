@@ -468,7 +468,7 @@ long CDRgetTE(unsigned char track, unsigned char *m, unsigned char *s, unsigned 
 
 #ifndef _MACOSX
 
-void ExecCfg(char *arg) {
+static void ExecCfg(char *arg) {
 	char cfg[256];
 	struct stat buf;
 

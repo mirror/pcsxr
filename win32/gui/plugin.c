@@ -33,8 +33,6 @@
 
 int ShowPic = 0;
 
-extern void LidInterrupt();
-
 void gpuShowPic() {
 	char Text[255];
 	gzFile f;

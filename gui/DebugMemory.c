@@ -19,6 +19,7 @@
 #include "Linux.h"
 #include "../libpcsxcore/psxmem.h"
 #include <glade/glade.h>
+#include "DebugMemory.h"
 
 #define MEMVIEW_MAX_LINES 256
 
@@ -156,7 +157,8 @@ static void MemView_Dump() {
 				FILE *fp = fopen(file, "wb");
 
 				if (fp != NULL) {
-					fwrite(&psxM[start], 1, length, fp);
+					if(fwrite(&psxM[start], length, 1, fp) != 1)
+						SysMessage(_("Error writing to %s!"), file);
 					fclose(fp);
 				} else {
 					SysMessage(_("Error writing to %s!"), file);

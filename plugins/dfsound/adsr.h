@@ -17,3 +17,4 @@
 
 INLINE void StartADSR(int ch);
 INLINE int  MixADSR(int ch);
+void InitADSR(void);

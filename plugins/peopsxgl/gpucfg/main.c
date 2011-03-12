@@ -67,7 +67,7 @@ GtkWidget *window,
           *btnBeautiful;
 
 // Save values to the config file
-void on_btnSave_clicked( GtkObject *object, gpointer user_data ) {
+static void on_btnSave_clicked( GtkObject *object, gpointer user_data ) {
     FILE *out;
     out = fopen( "gpuPeopsMesaGL.cfg", "w+" );
 
@@ -134,7 +134,7 @@ void on_btnSave_clicked( GtkObject *object, gpointer user_data ) {
 
 // Autoconfiguration callbacks
 
-void on_btnFast_clicked( GtkObject *object, gpointer user_data ) {
+static void on_btnFast_clicked( GtkObject *object, gpointer user_data ) {
     gtk_spin_button_set_value(    GTK_SPIN_BUTTON(   spinXSize ),           640 );
     gtk_spin_button_set_value(    GTK_SPIN_BUTTON(   spinYSize ),           480 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkKeepRatio ),          0 );
@@ -165,7 +165,7 @@ void on_btnFast_clicked( GtkObject *object, gpointer user_data ) {
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkScreenSmoothing ),    0 );
 }
 
-void on_btnBeautiful_clicked( GtkObject *object, gpointer user_data ) {
+static void on_btnBeautiful_clicked( GtkObject *object, gpointer user_data ) {
     gtk_spin_button_set_value(    GTK_SPIN_BUTTON(   spinXSize ),           640 );
     gtk_spin_button_set_value(    GTK_SPIN_BUTTON(   spinYSize ),           480 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkKeepRatio ),          0 );
@@ -198,19 +198,19 @@ void on_btnBeautiful_clicked( GtkObject *object, gpointer user_data ) {
 
 // Callbacks used to toggle the sensitivity of some parts of the GUI
 
-void on_chkUseGameFixes_toggled( GtkObject *object, gpointer user_data ) {
+static void on_chkUseGameFixes_toggled( GtkObject *object, gpointer user_data ) {
     gtk_widget_set_sensitive( tblGameFixes, gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( chkUseGameFixes ) ) );
 }
 
-void on_chkUseFPSLimit_toggled( GtkObject *object, gpointer user_data ) {
+static void on_chkUseFPSLimit_toggled( GtkObject *object, gpointer user_data ) {
     gtk_widget_set_sensitive( vboxFPSLimit, gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( chkUseFPSLimit ) ) );
 }
 
-void on_radFPSLimitManual_toggled( GtkObject *object, gpointer user_data ) {
+static void on_radFPSLimitManual_toggled( GtkObject *object, gpointer user_data ) {
     gtk_widget_set_sensitive( spinFPSLimit, gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( radFPSLimitManual ) ) );
 }
 
-void on_chkScanLines_toggled( GtkObject *object, gpointer user_data ) {
+static void on_chkScanLines_toggled( GtkObject *object, gpointer user_data ) {
     gtk_widget_set_sensitive( spinScanLinesBlend, gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( chkScanLines ) ) );
 }
 

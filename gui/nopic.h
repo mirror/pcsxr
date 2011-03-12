@@ -234,7 +234,7 @@ unsigned char cFont[10][120]=
 
 ////////////////////////////////////////////////////////////////////////
 
-void PaintPicDot(unsigned char * p,unsigned char c)
+static void PaintPicDot(unsigned char * p,unsigned char c)
 {
 
  if(c==0) {*p++=0x00;*p++=0x00;*p=0x00;return;}        // black
@@ -246,7 +246,7 @@ void PaintPicDot(unsigned char * p,unsigned char c)
  /////////////////////////////////////////////////////////////////////
  // generic number/border painter
 
-void DrawNumBorPic(unsigned char *pMem, int lSelectedSlot)
+static void DrawNumBorPic(unsigned char *pMem, int lSelectedSlot)
 {
  unsigned char *pf;
  int x,y;

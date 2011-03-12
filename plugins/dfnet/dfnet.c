@@ -12,9 +12,9 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include <errno.h>
-extern int errno;
 
 #include "dfnet.h"
+#include "psemu_plugin_defs.h"
 
 const unsigned char version  = 2;    // NET library v2
 const unsigned char revision = 0;

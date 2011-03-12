@@ -39,7 +39,7 @@ __inline unsigned short BGR24to16 (uint32_t BGR);
 
 #else
 
-inline unsigned short BGR24to16(uint32_t BGR) {
+static inline unsigned short BGR24to16(uint32_t BGR) {
 	return (unsigned short) (((BGR >> 3) & 0x1f) | ((BGR & 0xf80000) >> 9)
 			| ((BGR & 0xf800) >> 6));
 }
@@ -50,7 +50,7 @@ inline unsigned short BGR24to16(uint32_t BGR) {
 // Update global TP infos
 ////////////////////////////////////////////////////////////////////////
 
-inline void UpdateGlobalTP(unsigned short gdata) {
+static inline void UpdateGlobalTP(unsigned short gdata) {
 	g_soft.GlobalTextAddrX = (gdata << 6) & 0x3c0; // texture addr
 
 	if (512 == 1024) {
@@ -107,7 +107,7 @@ inline void UpdateGlobalTP(unsigned short gdata) {
 
 ////////////////////////////////////////////////////////////////////////
 
-inline void SetRenderMode(uint32_t DrawAttributes) {
+static inline void SetRenderMode(uint32_t DrawAttributes) {
 	g_soft.DrawSemiTrans = (SEMITRANSBIT(DrawAttributes)) ? 1 : 0;
 
 	if (SHADETEXBIT(DrawAttributes)) {
@@ -141,7 +141,7 @@ inline void SetRenderMode(uint32_t DrawAttributes) {
 #define CHKMAX_X 1024
 #define CHKMAX_Y 512
 
-void AdjustCoord4() {
+static void AdjustCoord4() {
 	g_soft.lx0 = (short) (((int) g_soft.lx0 << SIGNSHIFT) >> SIGNSHIFT);
 	g_soft.lx1 = (short) (((int) g_soft.lx1 << SIGNSHIFT) >> SIGNSHIFT);
 	g_soft.lx2 = (short) (((int) g_soft.lx2 << SIGNSHIFT) >> SIGNSHIFT);
@@ -152,7 +152,7 @@ void AdjustCoord4() {
 	g_soft.ly3 = (short) (((int) g_soft.ly3 << SIGNSHIFT) >> SIGNSHIFT);
 }
 
-void AdjustCoord3() {
+static void AdjustCoord3() {
 	g_soft.lx0 = (short) (((int) g_soft.lx0 << SIGNSHIFT) >> SIGNSHIFT);
 	g_soft.lx1 = (short) (((int) g_soft.lx1 << SIGNSHIFT) >> SIGNSHIFT);
 	g_soft.lx2 = (short) (((int) g_soft.lx2 << SIGNSHIFT) >> SIGNSHIFT);
@@ -161,14 +161,14 @@ void AdjustCoord3() {
 	g_soft.ly2 = (short) (((int) g_soft.ly2 << SIGNSHIFT) >> SIGNSHIFT);
 }
 
-void AdjustCoord2() {
+static void AdjustCoord2() {
 	g_soft.lx0 = (short) (((int) g_soft.lx0 << SIGNSHIFT) >> SIGNSHIFT);
 	g_soft.lx1 = (short) (((int) g_soft.lx1 << SIGNSHIFT) >> SIGNSHIFT);
 	g_soft.ly0 = (short) (((int) g_soft.ly0 << SIGNSHIFT) >> SIGNSHIFT);
 	g_soft.ly1 = (short) (((int) g_soft.ly1 << SIGNSHIFT) >> SIGNSHIFT);
 }
 
-void AdjustCoord1() {
+static void AdjustCoord1() {
 	g_soft.lx0 = (short) (((int) g_soft.lx0 << SIGNSHIFT) >> SIGNSHIFT);
 	g_soft.ly0 = (short) (((int) g_soft.ly0 << SIGNSHIFT) >> SIGNSHIFT);
 
@@ -194,7 +194,7 @@ void AdjustCoord1() {
  //  \ / \
  //   2___3
  */
-inline char CheckCoord4() {
+static inline char CheckCoord4() {
 	if (g_soft.lx0 < 0) {
 		if (((g_soft.lx1 - g_soft.lx0) > CHKMAX_X)
 				|| ((g_soft.lx2 - g_soft.lx0) > CHKMAX_X)) {
@@ -266,7 +266,7 @@ inline char CheckCoord4() {
 	return 0;
 }
 
-inline char CheckCoord3() {
+static inline char CheckCoord3() {
 	if (g_soft.lx0 < 0) {
 		if ((g_soft.lx1 - g_soft.lx0) > CHKMAX_X)
 			return 1;
@@ -307,7 +307,7 @@ inline char CheckCoord3() {
 	return 0;
 }
 
-inline char CheckCoord2() {
+static inline char CheckCoord2() {
 	if (g_soft.lx0 < 0) {
 		if ((g_soft.lx1 - g_soft.lx0) > CHKMAX_X)
 			return 1;
@@ -328,7 +328,7 @@ inline char CheckCoord2() {
 	return 0;
 }
 
-inline char CheckCoordL(short slx0, short sly0, short slx1, short sly1) {
+static inline char CheckCoordL(short slx0, short sly0, short slx1, short sly1) {
 	if (slx0 < 0) {
 		if ((slx1 - slx0) > CHKMAX_X)
 			return 1;
@@ -353,7 +353,7 @@ inline char CheckCoordL(short slx0, short sly0, short slx1, short sly1) {
 // mask stuff... used in silent hill
 ////////////////////////////////////////////////////////////////////////
 
-void cmdSTP(unsigned char * baseAddr) {
+static void cmdSTP(unsigned char * baseAddr) {
 	uint32_t gdata = GETLE32(&((uint32_t*)baseAddr)[0]);
 
 	g_gpu.status_reg &= ~0x1800; // Clear the necessary bits
@@ -377,7 +377,7 @@ void cmdSTP(unsigned char * baseAddr) {
 // cmd: Set texture page infos
 ////////////////////////////////////////////////////////////////////////
 
-void cmdTexturePage(unsigned char * baseAddr) {
+static void cmdTexturePage(unsigned char * baseAddr) {
 	uint32_t gdata = GETLE32(&((uint32_t*)baseAddr)[0]);
 
 	g_gpu.status_reg &= ~0x000007ff;
@@ -393,7 +393,7 @@ void cmdTexturePage(unsigned char * baseAddr) {
 // cmd: turn on/off texture window
 ////////////////////////////////////////////////////////////////////////
 
-void cmdTextureWindow(unsigned char *baseAddr) {
+static void cmdTextureWindow(unsigned char *baseAddr) {
 	uint32_t gdata = GETLE32(&((uint32_t*)baseAddr)[0]);
 
 	uint32_t YAlign, XAlign;
@@ -455,7 +455,7 @@ void cmdTextureWindow(unsigned char *baseAddr) {
 ////////////////////////////////////////////////////////////////////////
 
 
-void cmdDrawAreaStart(unsigned char * baseAddr) {
+static void cmdDrawAreaStart(unsigned char * baseAddr) {
 	uint32_t gdata = GETLE32(&((uint32_t*)baseAddr)[0]);
 	g_prim.drawX = gdata & 0x3ff; // for soft drawing
 	g_gpu.lGPUInfoVals[INFO_DRAWSTART] = gdata & 0xFFFFF;
@@ -468,7 +468,7 @@ void cmdDrawAreaStart(unsigned char * baseAddr) {
 // cmd: end of drawing area... primitives will be clipped inside
 ////////////////////////////////////////////////////////////////////////
 
-void cmdDrawAreaEnd(unsigned char * baseAddr) {
+static void cmdDrawAreaEnd(unsigned char * baseAddr) {
 	uint32_t gdata = GETLE32(&((uint32_t*)baseAddr)[0]);
 
 	g_prim.drawW = gdata & 0x3ff; // for soft drawing
@@ -483,7 +483,7 @@ void cmdDrawAreaEnd(unsigned char * baseAddr) {
 // cmd: draw offset... will be added to prim coords
 ////////////////////////////////////////////////////////////////////////
 
-void cmdDrawOffset(unsigned char * baseAddr) {
+static void cmdDrawOffset(unsigned char * baseAddr) {
 	uint32_t gdata = GETLE32(&((uint32_t*)baseAddr)[0]);
 
 	g_gpu.dsp.DrawOffset.x = (short) (gdata & 0x7ff);
@@ -501,7 +501,7 @@ void cmdDrawOffset(unsigned char * baseAddr) {
 // cmd: load image to vram
 ////////////////////////////////////////////////////////////////////////
 
-void primLoadImage(unsigned char * baseAddr) {
+static void primLoadImage(unsigned char * baseAddr) {
 	unsigned short *sgpuData = ((unsigned short *) baseAddr);
 
 	g_gpu.VRAMWrite.x = GETLEs16(&sgpuData[2]) & 0x3ff;
@@ -521,7 +521,7 @@ void primLoadImage(unsigned char * baseAddr) {
 // cmd: vram -> psx mem
 ////////////////////////////////////////////////////////////////////////
 
-void primStoreImage(unsigned char * baseAddr) {
+static void primStoreImage(unsigned char * baseAddr) {
 	unsigned short *sgpuData = ((unsigned short *) baseAddr);
 
 	g_gpu.VRAMRead.x = GETLEs16(&sgpuData[2]) & 0x03ff;
@@ -543,7 +543,7 @@ void primStoreImage(unsigned char * baseAddr) {
 // cmd: blkfill - NO primitive! Doesn't care about draw areas...
 ////////////////////////////////////////////////////////////////////////
 
-void primBlkFill(unsigned char * baseAddr) {
+static void primBlkFill(unsigned char * baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 
@@ -572,7 +572,7 @@ void primBlkFill(unsigned char * baseAddr) {
 // cmd: move image vram -> vram
 ////////////////////////////////////////////////////////////////////////
 
-void primMoveImage(unsigned char * baseAddr) {
+static void primMoveImage(unsigned char * baseAddr) {
 	short *sgpuData = ((short *) baseAddr);
 
 	short imageY0, imageX0, imageY1, imageX1, imageSX, imageSY, i, j;
@@ -646,7 +646,7 @@ void primMoveImage(unsigned char * baseAddr) {
 ////////////////////////////////////////////////////////////////////////
 // cmd: draw free-size Tile 
 ////////////////////////////////////////////////////////////////////////
-void primTileS(unsigned char * baseAddr) {
+static void primTileS(unsigned char * baseAddr) {
 	uint32_t *gpuData = ((uint32_t*) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 	short sW = GETLEs16(&sgpuData[4]) & 0x3ff;
@@ -676,7 +676,7 @@ void primTileS(unsigned char * baseAddr) {
 // cmd: draw 1 dot Tile (point)
 ////////////////////////////////////////////////////////////////////////
 
-void primTile1(unsigned char * baseAddr) {
+static void primTile1(unsigned char * baseAddr) {
 	uint32_t *gpuData = ((uint32_t*) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 	short sH = 1;
@@ -705,7 +705,7 @@ void primTile1(unsigned char * baseAddr) {
 // cmd: draw 8 dot Tile (small rect)
 ////////////////////////////////////////////////////////////////////////
 
-void primTile8(unsigned char * baseAddr) {
+static void primTile8(unsigned char * baseAddr) {
 	uint32_t *gpuData = ((uint32_t*) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 	short sH = 8;
@@ -734,7 +734,7 @@ void primTile8(unsigned char * baseAddr) {
 // cmd: draw 16 dot Tile (medium rect)
 ////////////////////////////////////////////////////////////////////////
 
-void primTile16(unsigned char * baseAddr) {
+static void primTile16(unsigned char * baseAddr) {
 	uint32_t *gpuData = ((uint32_t*) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 	short sH = 16;
@@ -763,7 +763,7 @@ void primTile16(unsigned char * baseAddr) {
 // cmd: small sprite (textured rect)
 ////////////////////////////////////////////////////////////////////////
 
-void primSprt8(unsigned char * baseAddr) {
+static void primSprt8(unsigned char * baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 
@@ -788,7 +788,7 @@ void primSprt8(unsigned char * baseAddr) {
 // cmd: medium sprite (textured rect)
 ////////////////////////////////////////////////////////////////////////
 
-void primSprt16(unsigned char * baseAddr) {
+static void primSprt16(unsigned char * baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 
@@ -814,7 +814,7 @@ void primSprt16(unsigned char * baseAddr) {
 ////////////////////////////////////////////////////////////////////////
 
 // func used on texture coord wrap
-void primSprtSRest(unsigned char * baseAddr, unsigned short type) {
+static void primSprtSRest(unsigned char * baseAddr, unsigned short type) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 	unsigned short sTypeRest = 0;
@@ -906,7 +906,7 @@ void primSprtSRest(unsigned char * baseAddr, unsigned short type) {
 
 ////////////////////////////////////////////////////////////////////////
 
-void primSprtS(unsigned char * baseAddr) {
+static void primSprtS(unsigned char * baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 	short sW, sH;
@@ -959,7 +959,7 @@ void primSprtS(unsigned char * baseAddr) {
 // cmd: flat shaded Poly4
 ////////////////////////////////////////////////////////////////////////
 
-void primPolyF4(unsigned char *baseAddr) {
+static void primPolyF4(unsigned char *baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 
@@ -989,7 +989,7 @@ void primPolyF4(unsigned char *baseAddr) {
 // cmd: smooth shaded Poly4
 ////////////////////////////////////////////////////////////////////////
 
-void primPolyG4(unsigned char * baseAddr) {
+static void primPolyG4(unsigned char * baseAddr) {
 	uint32_t *gpuData = (uint32_t *) baseAddr;
 	short *sgpuData = ((short *) baseAddr);
 
@@ -1020,7 +1020,7 @@ void primPolyG4(unsigned char * baseAddr) {
 // cmd: flat shaded Texture3
 ////////////////////////////////////////////////////////////////////////
 
-void primPolyFT3(unsigned char * baseAddr) {
+static void primPolyFT3(unsigned char * baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 
@@ -1051,7 +1051,7 @@ void primPolyFT3(unsigned char * baseAddr) {
 // cmd: flat shaded Texture4
 ////////////////////////////////////////////////////////////////////////
 
-void primPolyFT4(unsigned char * baseAddr) {
+static void primPolyFT4(unsigned char * baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 
@@ -1085,7 +1085,7 @@ void primPolyFT4(unsigned char * baseAddr) {
 // cmd: smooth shaded Texture3
 ////////////////////////////////////////////////////////////////////////
 
-void primPolyGT3(unsigned char *baseAddr) {
+static void primPolyGT3(unsigned char *baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 
@@ -1125,7 +1125,7 @@ void primPolyGT3(unsigned char *baseAddr) {
 // cmd: smooth shaded Poly3
 ////////////////////////////////////////////////////////////////////////
 
-void primPolyG3(unsigned char *baseAddr) {
+static void primPolyG3(unsigned char *baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 
@@ -1153,7 +1153,7 @@ void primPolyG3(unsigned char *baseAddr) {
 // cmd: smooth shaded Texture4
 ////////////////////////////////////////////////////////////////////////
 
-void primPolyGT4(unsigned char *baseAddr) {
+static void primPolyGT4(unsigned char *baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 
@@ -1197,7 +1197,7 @@ void primPolyGT4(unsigned char *baseAddr) {
 // cmd: smooth shaded Poly3
 ////////////////////////////////////////////////////////////////////////
 
-void primPolyF3(unsigned char *baseAddr) {
+static void primPolyF3(unsigned char *baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 
@@ -1225,7 +1225,8 @@ void primPolyF3(unsigned char *baseAddr) {
 // cmd: skipping shaded polylines
 ////////////////////////////////////////////////////////////////////////
 
-void primLineGSkip(unsigned char *baseAddr) {
+#if 0
+static void primLineGSkip(unsigned char *baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	int iMax = 255;
 	int i = 2;
@@ -1242,12 +1243,13 @@ void primLineGSkip(unsigned char *baseAddr) {
 			break;
 	}
 }
+#endif
 
 ////////////////////////////////////////////////////////////////////////
 // cmd: shaded polylines
 ////////////////////////////////////////////////////////////////////////
 
-void primLineGEx(unsigned char *baseAddr) {
+static void primLineGEx(unsigned char *baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	int iMax = 255;
 	uint32_t lc0, lc1;
@@ -1311,7 +1313,7 @@ void primLineGEx(unsigned char *baseAddr) {
 // cmd: shaded polyline2
 ////////////////////////////////////////////////////////////////////////
 
-void primLineG2(unsigned char *baseAddr) {
+static void primLineG2(unsigned char *baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 
@@ -1341,7 +1343,8 @@ void primLineG2(unsigned char *baseAddr) {
 // cmd: skipping flat polylines
 ////////////////////////////////////////////////////////////////////////
 
-void primLineFSkip(unsigned char *baseAddr) {
+#if 0
+static void primLineFSkip(unsigned char *baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	int i = 2, iMax = 255;
 
@@ -1356,12 +1359,13 @@ void primLineFSkip(unsigned char *baseAddr) {
 			break;
 	}
 }
+#endif
 
 ////////////////////////////////////////////////////////////////////////
 // cmd: drawing flat polylines
 ////////////////////////////////////////////////////////////////////////
 
-void primLineFEx(unsigned char *baseAddr) {
+static void primLineFEx(unsigned char *baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	int iMax;
 	short slx0, slx1, sly0, sly1;
@@ -1414,7 +1418,7 @@ void primLineFEx(unsigned char *baseAddr) {
 // cmd: drawing flat polyline2
 ////////////////////////////////////////////////////////////////////////
 
-void primLineF2(unsigned char *baseAddr) {
+static void primLineF2(unsigned char *baseAddr) {
 	uint32_t *gpuData = ((uint32_t *) baseAddr);
 	short *sgpuData = ((short *) baseAddr);
 
@@ -1445,7 +1449,7 @@ void primLineF2(unsigned char *baseAddr) {
 // cmd: well, easiest command... not implemented
 ////////////////////////////////////////////////////////////////////////
 
-void primNI(unsigned char *bA) {
+static void primNI(unsigned char *bA) {
 	fprintf(stderr, "Unknow GPU func \n");
 }
 

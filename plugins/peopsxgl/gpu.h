@@ -37,4 +37,7 @@ void           CheckVRamRead(int x, int y, int dx, int dy,BOOL bFront);
 void           CheckVRamReadEx(int x, int y, int dx, int dy);
 void           SetFixes(void);
 
+#ifdef _WINDOWS    
+extern HGLRC GLCONTEXT;
+#endif
 #endif // _GPU_INTERNALS_H

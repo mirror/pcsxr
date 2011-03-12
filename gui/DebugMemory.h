@@ -19,6 +19,6 @@
 #ifndef DEBUGMEMORY_H
 #define DEBUGMEMORY_H
 
-void RunDebugMemoryDialog();
+void RunDebugMemoryDialog(void);
 
 #endif

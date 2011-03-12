@@ -51,7 +51,7 @@ struct iso_directory_record {
 	char name			[1];
 };
 
-void mmssdd( char *b, char *p )
+static void mmssdd( char *b, char *p )
 {
 	int m, s, d;
 #if defined(__BIGENDIAN__)
@@ -101,9 +101,9 @@ void mmssdd( char *b, char *p )
 	READTRACK(); \
 	memcpy(_dir + 2048, buf + 12, 2048);
 
-int GetCdromFile(u8 *mdir, u8 *time, s8 *filename) {
+static int GetCdromFile(u8 *mdir, u8 *time, char *filename) {
 	struct iso_directory_record *dir;
-	char ddir[4096];
+	u8 ddir[4096];
 	u8 *buf;
 	int i;
 
@@ -144,7 +144,7 @@ int LoadCdrom() {
 	struct iso_directory_record *dir;
 	u8 time[4], *buf;
 	u8 mdir[4096];
-	s8 exename[256];
+	char exename[256];
 
 	if (!Config.HLE) {
 		if (!Config.SlowBoot) psxRegs.pc = psxRegs.GPR.n.ra;
@@ -177,7 +177,7 @@ int LoadCdrom() {
 		if (GetCdromFile(mdir, time, exename) == -1) {
 			sscanf((char *)buf + 12, "BOOT = cdrom:%256s", exename);
 			if (GetCdromFile(mdir, time, exename) == -1) {
-				char *ptr = strstr(buf + 12, "cdrom:");
+				char *ptr = strstr((char *)buf + 12, "cdrom:");
 				if (ptr != NULL) {
 					ptr += 6;
 					while (*ptr == '\\' || *ptr == '/') ptr++;
@@ -226,7 +226,8 @@ int LoadCdrom() {
 int LoadCdromFile(const char *filename, EXE_HEADER *head) {
 	struct iso_directory_record *dir;
 	u8 time[4],*buf;
-	u8 mdir[4096], exename[256];
+	u8 mdir[4096];
+	char exename[256];
 	u32 size, addr;
 
 	sscanf(filename, "cdrom:\\%256s", exename);
@@ -281,7 +282,7 @@ int CheckCdrom() {
 	CdromLabel[0] = '\0';
 	CdromId[0] = '\0';
 
-	strncpy(CdromLabel, buf + 52, 32);
+	strncpy(CdromLabel, (char *)buf + 52, 32);
 
 	// skip head and sub, and go to the root directory record
 	dir = (struct iso_directory_record *)&buf[12 + 156]; 
@@ -297,7 +298,7 @@ int CheckCdrom() {
 		if (GetCdromFile(mdir, time, exename) == -1) {
 			sscanf((char *)buf + 12, "BOOT = cdrom:%256s", exename);
 			if (GetCdromFile(mdir, time, exename) == -1) {
-				char *ptr = strstr(buf + 12, "cdrom:");			// possibly the executable is in some subdir
+				char *ptr = strstr((char *)buf + 12, "cdrom:");			// possibly the executable is in some subdir
 				if (ptr != NULL) {
 					ptr += 6;
 					while (*ptr == '\\' || *ptr == '/') ptr++;
@@ -359,7 +360,8 @@ static int PSXGetFileType(FILE *f) {
 
 	current = ftell(f);
 	fseek(f, 0L, SEEK_SET);
-	fread(mybuf, 2048, 1, f);
+	if(fread(mybuf, 2048, 1, f) != 1)
+		return INVALID_EXE;
 	fseek(f, current, SEEK_SET);
 
 	exe_hdr = (EXE_HEADER *)mybuf;
@@ -386,7 +388,8 @@ static void LoadLibPS() {
 
 	if (f != NULL) {
 		fseek(f, 0x800, SEEK_SET);
-		fread(psxM + 0x10000, 0x61000, 1, f);
+		if(fread(psxM + 0x10000, 0x61000, 1, f) != 1)
+			perror(buf);
 		fclose(f);
 	}
 }
@@ -415,10 +418,14 @@ int Load(const char *ExePath) {
 		type = PSXGetFileType(tmpFile);
 		switch (type) {
 			case PSX_EXE:
-				fread(&tmpHead, sizeof(EXE_HEADER), 1, tmpFile);
-				fseek(tmpFile, 0x800, SEEK_SET);		
-				fread(PSXM(SWAP32(tmpHead.t_addr)), SWAP32(tmpHead.t_size), 1, tmpFile);
+				if(fread(&tmpHead, sizeof(EXE_HEADER), 1, tmpFile) != 1 ||
+				   fseek(tmpFile, 0x800, SEEK_SET) < 0 ||
+				   fread(PSXM(SWAP32(tmpHead.t_addr)), SWAP32(tmpHead.t_size), 1, tmpFile) != 1) {
+					retval = -1;
+					perror(ExePath);
+				}
 				fclose(tmpFile);
+				if(retval == -1) break;
 				psxRegs.pc = SWAP32(tmpHead.pc0);
 				psxRegs.GPR.n.gp = SWAP32(tmpHead.gp0);
 				psxRegs.GPR.n.sp = SWAP32(tmpHead.s_addr); 
@@ -430,21 +437,36 @@ int Load(const char *ExePath) {
 			case CPE_EXE:
 				fseek(tmpFile, 6, SEEK_SET); /* Something tells me we should go to 4 and read the "08 00" here... */
 				do {
-					fread(&opcode, 1, 1, tmpFile);
+					if(fread(&opcode, 1, 1, tmpFile) != 1) {
+						perror(ExePath);
+						retval = -1;
+						break;
+					}
 					switch (opcode) {
 						case 1: /* Section loading */
-							fread(&section_address, 4, 1, tmpFile);
-							fread(&section_size, 4, 1, tmpFile);
+							if(fread(&section_address, 4, 1, tmpFile) != 1 ||
+							   fread(&section_size, 4, 1, tmpFile) != 1) {
+								retval = -1;
+								perror(ExePath);
+								break;
+							}
 							section_address = SWAPu32(section_address);
 							section_size = SWAPu32(section_size);
 #ifdef EMU_LOG
 							EMU_LOG("Loading %08X bytes from %08X to %08X\n", section_size, ftell(tmpFile), section_address);
 #endif
-							fread(PSXM(section_address), section_size, 1, tmpFile);
+							if(fread(PSXM(section_address), section_size, 1, tmpFile) != 1) {
+								retval = -1;
+								perror(ExePath);
+							}
 							break;
 						case 3: /* register loading (PC only?) */
-							fseek(tmpFile, 2, SEEK_CUR); /* unknown field */
-							fread(&psxRegs.pc, 4, 1, tmpFile);
+							if(fseek(tmpFile, 2, SEEK_CUR) < 0 || /* unknown field */
+							   fread(&psxRegs.pc, 4, 1, tmpFile) != 1) {
+								retval = -1;
+								perror(ExePath);
+								break;
+							}
 							psxRegs.pc = SWAPu32(psxRegs.pc);
 							break;
 						case 0: /* End of file */
@@ -458,19 +480,31 @@ int Load(const char *ExePath) {
 				break;
 
 			case COFF_EXE:
-				fread(&coffHead, sizeof(coffHead), 1, tmpFile);
-				fread(&optHead, sizeof(optHead), 1, tmpFile);
+				if(fread(&coffHead, sizeof(coffHead), 1, tmpFile) != 1 ||
+				   fread(&optHead, sizeof(optHead), 1, tmpFile) != 1) {
+					retval = -1;
+					perror(ExePath);
+					break;
+				}
 
 				psxRegs.pc = SWAP32(optHead.entry);
 				psxRegs.GPR.n.sp = 0x801fff00;
 
 				for (i = 0; i < SWAP16(coffHead.f_nscns); i++) {
-					fseek(tmpFile, sizeof(FILHDR) + SWAP16(coffHead.f_opthdr) + sizeof(section) * i, SEEK_SET);
-					fread(&section, sizeof(section), 1, tmpFile);
+					if(fseek(tmpFile, sizeof(FILHDR) + SWAP16(coffHead.f_opthdr) + sizeof(section) * i, SEEK_SET) < 0 ||
+					   fread(&section, sizeof(section), 1, tmpFile) != 1) {
+						retval = -1;
+						perror(ExePath);
+						break;
+					}
 
 					if (section.s_scnptr != 0) {
-						fseek(tmpFile, SWAP32(section.s_scnptr), SEEK_SET);
-						fread(PSXM(SWAP32(section.s_paddr)), SWAP32(section.s_size), 1, tmpFile);
+						if(fseek(tmpFile, SWAP32(section.s_scnptr), SEEK_SET) < 0 ||
+						   fread(PSXM(SWAP32(section.s_paddr)), SWAP32(section.s_size), 1, tmpFile) != 1) {
+							retval = -1;
+							perror(ExePath);
+							break;
+						}
 					} else {
 						memset(PSXM(SWAP32(section.s_paddr)), 0, SWAP32(section.s_size));
 					}

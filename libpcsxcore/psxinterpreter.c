@@ -409,7 +409,7 @@ static int psxDelayBranchTest(u32 tar1) {
 	return psxDelayBranchExec(tmp2);
 }
 
-__inline void doBranch(u32 tar) {
+static __inline void doBranch(u32 tar) {
 	u32 *code;
 	u32 tmp;
 

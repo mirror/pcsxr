@@ -196,7 +196,7 @@ BOOL bSetupPixelFormat(HDC hDC)
 // Get extension infos (f.e. pal textures / packed pixels)
 ////////////////////////////////////////////////////////////////////////
 
-void GetExtInfos(void)                              
+static void GetExtInfos(void)                              
 {
  BOOL bPacked=FALSE;                                   // default: no packed pixel support
 
@@ -240,7 +240,7 @@ void GetExtInfos(void)
 #elif defined (_MACGL)
     // no prob, done already in OSX > 10.4.3
 #else
-   glColorTableEXTEx=(PFNGLCOLORTABLEEXT)glXGetProcAddress("glColorTableEXT");
+   glColorTableEXTEx=(PFNGLCOLORTABLEEXT)glXGetProcAddress((GLubyte *)"glColorTableEXT");
 #endif
 
    if(glColorTableEXTEx==NULL) iUsePalTextures=0;      // -> ha, cheater... no func, no support
@@ -287,7 +287,7 @@ void SetExtGLFuncs(void)
 #elif defined(_MACGL)
     // no prob, OSX > 10.4.3 has this
 #else
-      glBlendEquationEXTEx=(PFNGLBLENDEQU)glXGetProcAddress("glBlendEquationEXT");
+      glBlendEquationEXTEx=(PFNGLBLENDEQU)glXGetProcAddress((GLubyte *)"glBlendEquationEXT");
 #endif
      }
  else                                                  // no subtract blending?
@@ -501,7 +501,7 @@ GLubyte texscan[4][16]=
 {O_TSP, N_TSP, O_TSP, N_TSP}
 };
 
-void CreateScanLines(void)
+static void CreateScanLines(void)
 {
  if(iUseScanLines)
   {
@@ -748,7 +748,7 @@ void GLcleanup()
 //              real psx polygon coord mapping right... the following
 //              works not to bad with many games, though
 
-__inline BOOL CheckCoord4()
+static __inline BOOL CheckCoord4()
 {
  if(lx0<0)
   {
@@ -814,7 +814,7 @@ __inline BOOL CheckCoord4()
  return FALSE;
 }
 
-__inline BOOL CheckCoord3()
+static __inline BOOL CheckCoord3()
 {
  if(lx0<0)
   {
@@ -851,7 +851,7 @@ __inline BOOL CheckCoord3()
 }
 
 
-__inline BOOL CheckCoord2()
+static __inline BOOL CheckCoord2()
 {
  if(lx0<0)
   {

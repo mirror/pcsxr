@@ -41,6 +41,18 @@ typedef struct {
 void          MoveScanLineArea(HWND hwnd);
 #endif
 
+#if !defined(_WINDOWS) &&  !defined (_MACGL)
+extern Display         *display;
+extern Window        window;
+extern int           root_window_id;
+#endif
+
+#ifndef _WINDOWS
+extern char * Xpixels;
+#endif
+
+#include <time.h>
+extern time_t tStart;
 ///////////////////////////////////////////////////////////////////////
 
 #endif // _GPU_DRAW_H_

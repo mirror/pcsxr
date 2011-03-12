@@ -77,6 +77,7 @@ typedef uint8_t boolean;
 #define __inline inline
 
 // Enables NLS/internationalization if active
+#include <locale.h>
 #ifdef ENABLE_NLS
 
 #include <libintl.h>
