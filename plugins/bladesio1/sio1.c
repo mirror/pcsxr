@@ -48,10 +48,10 @@ long CALLBACK SIO1shutdown()
 
 /******************************************************************************/
 
-long CALLBACK SIOopen( unsigned long *gpuDisp )
+long CALLBACK SIO1open( unsigned long *gpuDisp )
 {
     settingsRead();
-    
+
 	return 0;
 }
 
