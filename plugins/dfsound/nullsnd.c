@@ -2,8 +2,6 @@
 #define _IN_OSS
 #include "externals.h"
 
-#include "dsoundoss.h"
-
 // SETUP SOUND
 void SetupSound(void)
 {

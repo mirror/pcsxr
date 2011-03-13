@@ -100,12 +100,11 @@ extern cdrStruct cdr;
 
 void cdrDecodedBufferInterrupt();
 
-void cdrReset(void);
-void cdrInterrupt(void);
-void cdrReadInterrupt(void);
-void cdrLidSeekInterrupt(void);
-void cdrPlayInterrupt(void);
-void LidInterrupt(void);
+void cdrReset();
+void cdrInterrupt();
+void cdrReadInterrupt();
+void cdrLidSeekInterrupt();
+void cdrPlayInterrupt();
 unsigned char cdrRead0(void);
 unsigned char cdrRead1(void);
 unsigned char cdrRead2(void);

@@ -67,14 +67,12 @@ void LoadConf() {
 	f = fopen("dfcdrom.cfg", "r");
 	if (f == NULL) return;
 
-	if(fscanf(f, "CdromDev = %s\n", CdromDev) != 1 ||
-	   fscanf(f, "ReadMode = %ld\n", &ReadMode) != 1 ||
-	   fscanf(f, "UseSubQ = %ld\n", &UseSubQ) != 1 ||
-	   fscanf(f, "CacheSize = %ld\n", &CacheSize) != 1 ||
-	   fscanf(f, "CdrSpeed = %ld\n", &CdrSpeed) != 1 ||
-	   fscanf(f, "SpinDown = %ld\n", &SpinDown) != 1) {
-	  perror("syntax error in dfcdrom.cfg");
-	}
+	fscanf(f, "CdromDev = %s\n", CdromDev);
+	fscanf(f, "ReadMode = %ld\n", &ReadMode);
+	fscanf(f, "UseSubQ = %ld\n", &UseSubQ);
+	fscanf(f, "CacheSize = %ld\n", &CacheSize);
+	fscanf(f, "CdrSpeed = %ld\n", &CdrSpeed);
+	fscanf(f, "SpinDown = %ld\n", &SpinDown);
 	fclose(f);
 
 	if (ReadMode >= READ_MODES) ReadMode = THREADED;

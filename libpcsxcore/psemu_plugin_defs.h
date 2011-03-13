@@ -1,12 +1,6 @@
 #ifndef _PSEMU_PLUGIN_DEFS_H
 #define _PSEMU_PLUGIN_DEFS_H
 
-#include <stdint.h>
-
-#include "psxcommon.h"
-
-#include "plugin_common.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -16,23 +10,12 @@ extern "C" {
 
 #define PLUGIN_VERSION				1
 
-#ifndef PLUGINCALL
-#define PLUGINCALL(x) CALLBACK x
-#endif
-#ifndef PLUGINEXTERN
-#define PLUGINEXTERN
-#endif
-
 // plugin type returned by PSEgetLibType (types can be merged if plugin is multi type!)
 #define PSE_LT_CDR					1
 #define PSE_LT_GPU					2
 #define PSE_LT_SPU					4
 #define PSE_LT_PAD					8
 #define PSE_LT_NET					16
-
-PLUGINEXTERN unsigned long PLUGINCALL(PSEgetLibType)(void);
-PLUGINEXTERN unsigned long PLUGINCALL(PSEgetLibVersion)(void);
-PLUGINEXTERN char *PLUGINCALL(PSEgetLibName)(void);
 
 // DLL function return codes
 #define PSE_ERR_SUCCESS				0	// every function in DLL if completed sucessfully should return this value
@@ -45,24 +28,6 @@ PLUGINEXTERN char *PLUGINCALL(PSEgetLibName)(void);
 #define PSE_INIT_ERR_SUCCESS		0	// initialization went OK
 #define PSE_INIT_ERR_NOTCONFIGURED	-2	// this driver is not configured
 #define PSE_INIT_ERR_NOHARDWARE		-3	// this driver can not operate properly on this hardware or hardware is not detected
-
-#ifndef _WIN32
-
-PLUGINEXTERN long PLUGINCALL(GPUopen)(unsigned long *, char *, char *);
-PLUGINEXTERN long PLUGINCALL(SPUopen)(void);
-PLUGINEXTERN long PLUGINCALL(PADopen)(unsigned long *);
-PLUGINEXTERN long PLUGINCALL(NETopen)(unsigned long *);
-PLUGINEXTERN long PLUGINCALL(SIO1open)(unsigned long *);
-
-#else
-
-PLUGINEXTERN long PLUGINCALL(GPUopen)(HWND);
-PLUGINEXTERN long PLUGINCALL(SPUopen)(HWND);
-PLUGINEXTERN long PLUGINCALL(PADopen)(HWND);
-PLUGINEXTERN long PLUGINCALL(NETopen)(HWND);
-PLUGINEXTERN long PLUGINCALL(SIO1open)(HWND);
-
-#endif
 
 /*         GPU PlugIn          */
 
@@ -105,34 +70,6 @@ typedef struct
 
 //  GPU_Query	End	- will be implemented in v2
 
-// GPU Functions
-PLUGINEXTERN long PLUGINCALL(GPUinit)(void);
-PLUGINEXTERN long PLUGINCALL(GPUshutdown)(void);
-PLUGINEXTERN long PLUGINCALL(GPUclose)(void);
-PLUGINEXTERN void PLUGINCALL(GPUwriteStatus)(uint32_t);
-PLUGINEXTERN void PLUGINCALL(GPUwriteData)(uint32_t);
-PLUGINEXTERN void PLUGINCALL(GPUwriteDataMem)(uint32_t *, int);
-PLUGINEXTERN uint32_t PLUGINCALL(GPUreadStatus)(void);
-PLUGINEXTERN uint32_t PLUGINCALL(GPUreadData)(void);
-PLUGINEXTERN void PLUGINCALL(GPUreadDataMem)(uint32_t *, int);
-PLUGINEXTERN long PLUGINCALL(GPUdmaChain)(uint32_t *,uint32_t);
-PLUGINEXTERN void PLUGINCALL(GPUupdateLace)(void);
-PLUGINEXTERN long PLUGINCALL(GPUconfigure)(void);
-PLUGINEXTERN long PLUGINCALL(GPUtest)(void);
-PLUGINEXTERN void PLUGINCALL(GPUabout)(void);
-PLUGINEXTERN void PLUGINCALL(GPUmakeSnapshot)(void);
-PLUGINEXTERN void PLUGINCALL(GPUkeypressed)(int);
-PLUGINEXTERN void PLUGINCALL(GPUdisplayText)(char *);
-PLUGINEXTERN long PLUGINCALL(GPUfreeze)(uint32_t, GPUFreeze_t *);
-PLUGINEXTERN long PLUGINCALL(GPUgetScreenPic)(unsigned char *);
-PLUGINEXTERN long PLUGINCALL(GPUshowScreenPic)(unsigned char *);
-PLUGINEXTERN void PLUGINCALL(GPUclearDynarec)(void (CALLBACK *callback)(void));
-PLUGINEXTERN void PLUGINCALL(GPUvBlank)(int);
-PLUGINEXTERN void PLUGINCALL(GPUregisterCallback)(void (CALLBACK *callback)(int));
-PLUGINEXTERN void PLUGINCALL(GPUidle)(void);
-PLUGINEXTERN void PLUGINCALL(GPUvisualVibration)(uint32_t, uint32_t);
-PLUGINEXTERN void PLUGINCALL(GPUcursor)(int, int, int);
-
 
 /*         CDR PlugIn          */
 
@@ -157,26 +94,6 @@ PLUGINEXTERN void PLUGINCALL(GPUcursor)(int, int, int);
 // this might happen to CDROMS that do not support RAW mode reading - surelly it will kill many games
 #define PSE_CDR_WARN_LAMECD			PSE_CDR_WARN + 0
 
-// CD-ROM Functions
-PLUGINEXTERN long PLUGINCALL(CDRinit)(void);
-PLUGINEXTERN long PLUGINCALL(CDRshutdown)(void);
-PLUGINEXTERN long PLUGINCALL(CDRopen)(void);
-PLUGINEXTERN long PLUGINCALL(CDRclose)(void);
-PLUGINEXTERN long PLUGINCALL(CDRgetTN)(unsigned char *);
-PLUGINEXTERN long PLUGINCALL(CDRgetTD)(unsigned char, unsigned char *);
-PLUGINEXTERN long PLUGINCALL(CDRreadTrack)(unsigned char *);
-PLUGINEXTERN unsigned char* PLUGINCALL(CDRgetBuffer)(void);
-PLUGINEXTERN unsigned char* PLUGINCALL(CDRgetBufferSub)(void);
-PLUGINEXTERN long PLUGINCALL(CDRconfigure)(void);
-PLUGINEXTERN long PLUGINCALL(CDRtest)(void);
-PLUGINEXTERN void PLUGINCALL(CDRabout)(void);
-PLUGINEXTERN long PLUGINCALL(CDRplay)(unsigned char *);
-PLUGINEXTERN long PLUGINCALL(CDRstop)(void);
-PLUGINEXTERN long PLUGINCALL(CDRsetfilename)(char *);
-PLUGINEXTERN long PLUGINCALL(CDRgetStatus)(struct CdrStat *);
-PLUGINEXTERN char* PLUGINCALL(CDRgetDriveLetter)(void);
-PLUGINEXTERN long PLUGINCALL(CDRreadCDDA)(unsigned char, unsigned char, unsigned char, unsigned char *);
-PLUGINEXTERN long PLUGINCALL(CDRgetTE)(unsigned char, unsigned char *, unsigned char *, unsigned char *);
 
 
 
@@ -202,25 +119,6 @@ PLUGINEXTERN long PLUGINCALL(CDRgetTE)(unsigned char, unsigned char *, unsigned 
 #define PSE_SPU_WARN				60
 
 
-// SPU Functions
-PLUGINEXTERN long PLUGINCALL(SPUinit)(void);
-PLUGINEXTERN long PLUGINCALL(SPUshutdown)(void);
-PLUGINEXTERN long PLUGINCALL(SPUclose)(void);
-PLUGINEXTERN void PLUGINCALL(SPUplaySample)(unsigned char);
-PLUGINEXTERN void PLUGINCALL(SPUwriteRegister)(unsigned long, unsigned short);
-PLUGINEXTERN unsigned short PLUGINCALL(SPUreadRegister)(unsigned long);
-PLUGINEXTERN void PLUGINCALL(SPUwriteDMA)(unsigned short);
-PLUGINEXTERN unsigned short PLUGINCALL(SPUreadDMA)(void);
-PLUGINEXTERN void PLUGINCALL(SPUwriteDMAMem)(unsigned short *, int);
-PLUGINEXTERN void PLUGINCALL(SPUreadDMAMem)(unsigned short *, int);
-PLUGINEXTERN void PLUGINCALL(SPUplayADPCMchannel)(xa_decode_t *);
-PLUGINEXTERN void PLUGINCALL(SPUregisterCallback)(void (CALLBACK *callback)(void));
-PLUGINEXTERN long PLUGINCALL(SPUconfigure)(void);
-PLUGINEXTERN long PLUGINCALL(SPUtest)(void);
-PLUGINEXTERN void PLUGINCALL(SPUabout)(void);
-PLUGINEXTERN long PLUGINCALL(SPUfreeze)(uint32_t, SPUFreeze_t *);
-PLUGINEXTERN void PLUGINCALL(SPUasync)(uint32_t);
-PLUGINEXTERN void PLUGINCALL(SPUplayCDDAchannel)(short *, int);
 
 
 /*         PAD PlugIn          */
@@ -228,7 +126,6 @@ PLUGINEXTERN void PLUGINCALL(SPUplayCDDAchannel)(short *, int);
 /*
 
   functions that must be exported from PAD Plugin
-  (see below for actual prototypes)
 
   long	PADinit(long flags);	// called only once when PSEmu Starts
   void	PADshutdown(void);		// called when PSEmu exits
@@ -312,24 +209,6 @@ typedef struct
 
 } PadDataS;
 
-// PAD Functions
-PLUGINEXTERN long PLUGINCALL(PADconfigure)(void);
-PLUGINEXTERN void PLUGINCALL(PADabout)(void);
-PLUGINEXTERN long PLUGINCALL(PADinit)(long);
-PLUGINEXTERN long PLUGINCALL(PADshutdown)(void);
-PLUGINEXTERN long PLUGINCALL(PADtest)(void);
-PLUGINEXTERN long PLUGINCALL(PADclose)(void);
-PLUGINEXTERN long PLUGINCALL(PADquery)(void);
-PLUGINEXTERN long PLUGINCALL(PADreadPort1)(PadDataS*);
-PLUGINEXTERN long PLUGINCALL(PADreadPort2)(PadDataS*);
-PLUGINEXTERN long PLUGINCALL(PADkeypressed)(void);
-PLUGINEXTERN unsigned char PLUGINCALL(PADstartPoll)(int);
-PLUGINEXTERN unsigned char PLUGINCALL(PADpoll)(unsigned char);
-PLUGINEXTERN void PLUGINCALL(PADsetSensitive)(int);
-PLUGINEXTERN void PLUGINCALL(PADregisterVibration)(void (CALLBACK *callback)(uint32_t, uint32_t));
-PLUGINEXTERN void PLUGINCALL(PADregisterCursor)(void (CALLBACK *callback)(int, int, int));
-
-
 /*         NET PlugIn v2       */
 /* Added by linuzappz@pcsx.net */
 
@@ -399,60 +278,6 @@ typedef struct {
    void NETkeypressed(int key) (linux only)
     key is a XK_?? (X11) keycode.
 */
-// NET Functions
-PLUGINEXTERN long PLUGINCALL(NETinit)(void);
-PLUGINEXTERN long PLUGINCALL(NETshutdown)(void);
-PLUGINEXTERN long PLUGINCALL(NETclose)(void);
-PLUGINEXTERN long PLUGINCALL(NETconfigure)(void);
-PLUGINEXTERN long PLUGINCALL(NETtest)(void);
-PLUGINEXTERN void PLUGINCALL(NETabout)(void);
-PLUGINEXTERN void PLUGINCALL(NETpause)(void);
-PLUGINEXTERN void PLUGINCALL(NETresume)(void);
-PLUGINEXTERN long PLUGINCALL(NETqueryPlayer)(void);
-PLUGINEXTERN long PLUGINCALL(NETsendData)(void *, int, int);
-PLUGINEXTERN long PLUGINCALL(NETrecvData)(void *, int, int);
-PLUGINEXTERN long PLUGINCALL(NETsendPadData)(void *, int);
-PLUGINEXTERN long PLUGINCALL(NETrecvPadData)(void *, int);
-PLUGINEXTERN long PLUGINCALL(NETsetInfo)(netInfo *);
-PLUGINEXTERN long PLUGINCALL(NETkeypressed)(int);
-
-#ifdef ENABLE_SIO1API
-
-// SIO1 Functions (link cable)
-PLUGINEXTERN long PLUGINCALL(SIO1init)(void);
-PLUGINEXTERN long PLUGINCALL(SIO1shutdown)(void);
-PLUGINEXTERN long PLUGINCALL(SIO1close)(void);
-PLUGINEXTERN long PLUGINCALL(SIO1configure)(void);
-PLUGINEXTERN long PLUGINCALL(SIO1test)(void);
-PLUGINEXTERN void PLUGINCALL(SIO1about)(void);
-PLUGINEXTERN void PLUGINCALL(SIO1pause)(void);
-PLUGINEXTERN void PLUGINCALL(SIO1resume)(void);
-PLUGINEXTERN long PLUGINCALL(SIO1keypressed)(int);
-PLUGINEXTERN void PLUGINCALL(SIO1writeData8)(unsigned char);
-PLUGINEXTERN void PLUGINCALL(SIO1writeData16)(unsigned short);
-PLUGINEXTERN void PLUGINCALL(SIO1writeData32)(unsigned long);
-PLUGINEXTERN void PLUGINCALL(SIO1writeStat16)(unsigned short);
-PLUGINEXTERN void PLUGINCALL(SIO1writeStat32)(unsigned long);
-PLUGINEXTERN void PLUGINCALL(SIO1writeMode16)(unsigned short);
-PLUGINEXTERN void PLUGINCALL(SIO1writeMode32)(unsigned long);
-PLUGINEXTERN void PLUGINCALL(SIO1writeCtrl16)(unsigned short);
-PLUGINEXTERN void PLUGINCALL(SIO1writeCtrl32)(unsigned long);
-PLUGINEXTERN void PLUGINCALL(SIO1writeBaud16)(unsigned short);
-PLUGINEXTERN void PLUGINCALL(SIO1writeBaud32)(unsigned long);
-PLUGINEXTERN unsigned char PLUGINCALL(SIO1readData8)(void);
-PLUGINEXTERN unsigned short PLUGINCALL(SIO1readData16)(void);
-PLUGINEXTERN unsigned long PLUGINCALL(SIO1readData32)(void);
-PLUGINEXTERN unsigned short PLUGINCALL(SIO1readStat16)(void);
-PLUGINEXTERN unsigned long PLUGINCALL(SIO1readStat32)(void);
-PLUGINEXTERN unsigned short PLUGINCALL(SIO1readMode16)(void);
-PLUGINEXTERN unsigned long PLUGINCALL(SIO1readMode32)(void);
-PLUGINEXTERN unsigned short PLUGINCALL(SIO1readCtrl16)(void);
-PLUGINEXTERN unsigned long PLUGINCALL(SIO1readCtrl32)(void);
-PLUGINEXTERN unsigned short PLUGINCALL(SIO1readBaud16)(void);
-PLUGINEXTERN unsigned long PLUGINCALL(SIO1readBaud32)(void);
-PLUGINEXTERN void PLUGINCALL(SIO1registerCallback)(void (CALLBACK *callback)(void));
-
-#endif
 
 #ifdef __cplusplus
 }

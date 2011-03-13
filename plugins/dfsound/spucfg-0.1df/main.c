@@ -22,7 +22,7 @@ void SaveConfig(GtkWidget *widget, gpointer user_datal);
 
 /*	This function checks for the value being outside the accepted range,
 	and returns the appropriate boundary value */
-static int set_limit (char *p, int len, int lower, int upper)
+int set_limit (char *p, int len, int lower, int upper)
 {
 	int val = 0;
 
@@ -37,13 +37,13 @@ static int set_limit (char *p, int len, int lower, int upper)
     return val;
 }
 
-static void on_about_clicked (GtkWidget *widget, gpointer user_data)
+void on_about_clicked (GtkWidget *widget, gpointer user_data)
 {
 	gtk_widget_destroy (widget);
 	exit (0);
 }
 
-static void OnConfigClose(GtkWidget *widget, gpointer user_data)
+void OnConfigClose(GtkWidget *widget, gpointer user_data)
 {
 	GladeXML *xml = (GladeXML *)user_data;
 

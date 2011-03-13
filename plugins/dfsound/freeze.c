@@ -30,6 +30,16 @@
 
 typedef struct
 {
+ char          szSPUName[8];
+ uint32_t ulFreezeVersion;
+ uint32_t ulFreezeSize;
+ unsigned char cSPUPort[0x200];
+ unsigned char cSPURam[0x80000];
+ xa_decode_t   xaS;     
+} SPUFreeze_t;
+
+typedef struct
+{
  unsigned short  spuIrq;
  uint32_t   pSpuIrq;
  uint32_t   spuAddr;
@@ -45,6 +55,8 @@ typedef struct
 
 void LoadStateV5(SPUFreeze_t * pF);                    // newest version
 void LoadStateUnknown(SPUFreeze_t * pF);               // unknown format
+
+extern int lastch;
 
 ////////////////////////////////////////////////////////////////////////
 // SPUFREEZE: called by main emu on savestate load/save
@@ -63,23 +75,23 @@ long CALLBACK SPUfreeze(uint32_t ulFreezeMode,SPUFreeze_t * pF)
    if(ulFreezeMode==1)                                 
     memset(pF,0,sizeof(SPUFreeze_t)+sizeof(SPUOSSFreeze_t));
 
-   strcpy(pF->PluginName,"PBOSS");
-   pF->PluginVersion=5;
-   pF->Size=sizeof(SPUFreeze_t)+sizeof(SPUOSSFreeze_t);
+   strcpy(pF->szSPUName,"PBOSS");
+   pF->ulFreezeVersion=5;
+   pF->ulFreezeSize=sizeof(SPUFreeze_t)+sizeof(SPUOSSFreeze_t);
 
    if(ulFreezeMode==2) return 1;                       // info mode? ok, bye
                                                        // save mode:
    RemoveTimer();                                      // stop timer
 
-   memcpy(pF->SPURam,spuMem,0x80000);                 // copy common infos
-   memcpy(pF->SPUPorts,regArea,0x200);
+   memcpy(pF->cSPURam,spuMem,0x80000);                 // copy common infos
+   memcpy(pF->cSPUPort,regArea,0x200);
 
    if(xapGlobal && XAPlay!=XAFeed)                     // some xa
     {
-     pF->xa=*xapGlobal;     
+     pF->xaS=*xapGlobal;     
     }
    else 
-   memset(&pF->xa,0,sizeof(xa_decode_t));             // or clean xa
+   memset(&pF->xaS,0,sizeof(xa_decode_t));             // or clean xa
 
    pFO=(SPUOSSFreeze_t *)(pF+1);                       // store special stuff
 
@@ -117,15 +129,15 @@ long CALLBACK SPUfreeze(uint32_t ulFreezeMode,SPUFreeze_t * pF)
 
  RemoveTimer();                                        // we stop processing while doing the save!
 
- memcpy(spuMem,pF->SPURam,0x80000);                   // get ram
- memcpy(regArea,pF->SPUPorts,0x200);
+ memcpy(spuMem,pF->cSPURam,0x80000);                   // get ram
+ memcpy(regArea,pF->cSPUPort,0x200);
 
- if(pF->xa.nsamples<=4032)                            // start xa again
-  SPUplayADPCMchannel(&pF->xa);
+ if(pF->xaS.nsamples<=4032)                            // start xa again
+  SPUplayADPCMchannel(&pF->xaS);
 
  xapGlobal=0;
 
- if(!strcmp(pF->PluginName,"PBOSS") && pF->PluginVersion==5)
+ if(!strcmp(pF->szSPUName,"PBOSS") && pF->ulFreezeVersion==5)
    LoadStateV5(pF);
  else LoadStateUnknown(pF);
 
@@ -205,8 +217,8 @@ void LoadStateUnknown(SPUFreeze_t * pF)
    s_chan[i].bNew=0;
    s_chan[i].bStop=0;
    s_chan[i].ADSR.lVolume=0;
-   s_chan[i].pLoop=(unsigned char *)((unsigned long)spuMemC+4096);
-   s_chan[i].pStart=(unsigned char *)((unsigned long)spuMemC+4096);
+   s_chan[i].pLoop=(unsigned char *)((int)spuMemC+4096);
+   s_chan[i].pStart=(unsigned char *)((int)spuMemC+4096);
    s_chan[i].iMute=0;
    s_chan[i].iIrqDone=0;
   }

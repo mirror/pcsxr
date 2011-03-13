@@ -64,6 +64,4 @@ void UpdatePluginsBIOS();
 void SysErrorMessage(gchar *primary, gchar *secondary);
 void SysInfoMessage(gchar *primary, gchar *secondary);
 
-extern unsigned long gpuDisp;
-
 #endif /* __LINUX_H__ */

@@ -17,8 +17,6 @@
 
 #include "stdafx.h"
 
-#include "xa.h"
-
 #define _IN_XA
 #include <stdint.h>
 
@@ -47,7 +45,6 @@ uint32_t * CDDAEnd   = NULL;
 int             iLeftXAVol  = 0x8000;
 int             iRightXAVol = 0x8000;
 
-#if 0
 static int gauss_ptr = 0;
 static int gauss_window[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -55,7 +52,6 @@ static int gauss_window[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 #define gvall(x) gauss_window[(gauss_ptr+x)&3]
 #define gvalr0 gauss_window[4+gauss_ptr]
 #define gvalr(x) gauss_window[4+((gauss_ptr+x)&3)]
-#endif
 
 long cdxa_dbuf_ptr;
 
@@ -198,7 +194,7 @@ unsigned long timeGetTime_spu()
 
 INLINE void FeedXA(xa_decode_t *xap)
 {
- int sinc,spos,i,iSize,iPlace;
+ int sinc,spos,i,iSize,iPlace,vl,vr;
 
  if(!bSPUIsOpen) return;
 

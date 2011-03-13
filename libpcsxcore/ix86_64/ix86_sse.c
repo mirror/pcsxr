@@ -89,6 +89,9 @@ XMMSSEType g_xmmtypes[XMMREGS] = {0};
 
 
 
+void WriteRmOffset(x86IntRegType to, int offset);
+void WriteRmOffsetFrom(x86IntRegType to, x86IntRegType from, int offset);
+
 /* movups [r32][r32*scale] to xmm1 */
 void SSE_MOVUPSRmStoR( x86SSERegType to, x86IntRegType from, x86IntRegType from2, int scale )
 {
@@ -1323,6 +1326,24 @@ void SSE2EMU_MOVD_XMM_to_RmOffset(x86IntRegType to, x86SSERegType from, int offs
 	MOV32RtoRmOffset(to, EAX, offset);
 }
 
+#ifndef __x86_64__
+extern void SetMMXstate();
+
+void SSE2EMU_MOVDQ2Q_XMM_to_MM( x86MMXRegType to, x86SSERegType from)
+{
+	SSE_MOVLPS_XMM_to_M64(p, from);
+	MOVQMtoR(to, p);
+	SetMMXstate();
+}
+
+void SSE2EMU_MOVQ2DQ_MM_to_XMM( x86SSERegType to, x86MMXRegType from)
+{
+	MOVQRtoM(p, from);
+	SSE_MOVLPS_M64_to_XMM(to, p);
+	SetMMXstate();
+}
+#endif
+
 /****************************************************************************/
 /*  SSE2 Emulated functions for SSE CPU's by kekko							*/
 /****************************************************************************/
@@ -1377,7 +1398,16 @@ void SSE2EMU_MOVD_XMM_to_R( x86IntRegType to, x86SSERegType from ) {
 	MOV32RmtoR(to, to);
 }
 
+#ifndef __x86_64__
+extern void SetFPUstate();
+extern void _freeMMXreg(int mmxreg);
+#endif
+
 void SSE2EMU_CVTPS2DQ_XMM_to_XMM( x86SSERegType to, x86SSERegType from ) {
+#ifndef __x86_64__
+    SetFPUstate();
+	_freeMMXreg(7);
+#endif
 	SSE_MOVAPS_XMM_to_M128((uptr)f, from);
 	
 	FLD32((uptr)&f[0]);
@@ -1393,6 +1423,10 @@ void SSE2EMU_CVTPS2DQ_XMM_to_XMM( x86SSERegType to, x86SSERegType from ) {
 }
 
 void SSE2EMU_CVTDQ2PS_M128_to_XMM( x86SSERegType to, uptr from ) {
+#ifndef __x86_64__
+    SetFPUstate();
+	_freeMMXreg(7);
+#endif
 	FILD32(from);
 	FSTP32((uptr)&f[0]);
 	FILD32(from+4);

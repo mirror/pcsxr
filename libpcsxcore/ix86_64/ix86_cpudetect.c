@@ -150,7 +150,7 @@ u64 GetCPUTick( void )
 #include <sys/time.h>
 #include <errno.h>
 //*
-static unsigned long timeGetTime2()
+unsigned long timeGetTime2()
 {
  struct timeval tv;
  gettimeofday(&tv, 0);                                 // well, maybe there are better ways
@@ -159,7 +159,7 @@ static unsigned long timeGetTime2()
 //*/
 #endif
 
-static s64 CPUSpeedHz( unsigned int time )
+s64 CPUSpeedHz( unsigned int time )
 {
    s64 timeStart, 
             timeStop;
@@ -209,11 +209,11 @@ void cpudetectInit( void )
    u32 regs[ 4 ];
    u32 cmds;
    u32 AMDspeed;
-   char AMDspeedString[10];
+   s8 AMDspeedString[10];
    int cputype=0;            // Cpu type
    //AMD 64 STUFF
-   u32 x86_64_8BITBRANDID = 0;
-   u32 x86_64_12BITBRANDID = 0;
+   u32 x86_64_8BITBRANDID;
+   u32 x86_64_12BITBRANDID; 
    memset( cpuinfo.x86ID, 0, sizeof( cpuinfo.x86ID ) );
    cpuinfo.x86Family = 0;
    cpuinfo.x86Model  = 0;
@@ -292,7 +292,7 @@ void cpudetectInit( void )
                switch( cpuinfo.x86Model )
                {
                case 4:
-               case 8:     // 0.25 ï¿½m
+               case 8:     // 0.25 µm
                   strcpy( cpuinfo.x86Fam, "Intel Pentium (MMX)");
                   break;
                default:
@@ -308,7 +308,7 @@ void cpudetectInit( void )
                   break;
 
                case 2:     // 66 MHz FSB
-               case 5:     // Xeon/Celeron (0.25 ï¿½m)
+               case 5:     // Xeon/Celeron (0.25 µm)
                case 6:     // Internal L2 cache
                   strcpy( cpuinfo.x86Fam, "Intel Pentium II" );
                   break;
@@ -432,7 +432,7 @@ void cpudetectInit( void )
                   break;
 
                case 6:     
-               case 7:     // (0.25 ï¿½m)
+               case 7:     // (0.25 µm)
                case 8:     // K6-2
                case 9:     // K6-III
                case 14:    // K6-2+ / K6-III+

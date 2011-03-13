@@ -15,11 +15,11 @@
 #include <errno.h>
 #include <signal.h>
 #include <sys/wait.h>
+extern int errno;
 
 #include "dfnet.h"
-#include "psemu_plugin_defs.h"
 
-static int ExecCfg(const char *arg, int f) {
+int ExecCfg(const char *arg, int f) {
 	char cfg[512];
 
 	strcpy(cfg, "cfg/cfgDFNet");
@@ -27,7 +27,7 @@ static int ExecCfg(const char *arg, int f) {
 	strcat(cfg, arg);
 
 	if (f) {
-		if (fork() == 0) { exit(system(cfg)); }
+		if (fork() == 0) { system(cfg); exit(0); }
 		return 0;
 	}
 
@@ -82,9 +82,8 @@ int sockPing() {
 		   (tvn.tv_usec - tv.tv_usec) / 1000;
 }
 
-long CALLBACK NETconfigure() {
+void CALLBACK NETconfigure() {
 	ExecCfg("configure", 1);
-	return 0;
 }
 
 void CALLBACK NETabout() {
@@ -93,7 +92,7 @@ void CALLBACK NETabout() {
 
 pid_t cfgpid = 0;
 
-static void OnWaitDlg_Abort(int num) {
+void OnWaitDlg_Abort(int num) {
 	WaitCancel = 1;
 	cfgpid = 0;
 }

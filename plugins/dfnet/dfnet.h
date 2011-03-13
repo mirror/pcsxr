@@ -18,7 +18,21 @@
 #include <netdb.h>
 #include <unistd.h>
 
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#include <locale.h>
+#define _(x)  gettext(x)
+#define N_(x) (x)
+#else
+#define _(x)  (x)
+#define N_(x) (x)
+#endif
+
+typedef void* HWND;
+
 struct timeval tm;
+
+#define CALLBACK
 
 long timeGetTime();
 
@@ -28,9 +42,9 @@ typedef struct {
 	int PlayerNum;
 	unsigned short PortNum;
 	char ipAddress[32];
-} NetConfig;
+} Config;
 
-NetConfig conf;
+Config conf;
 
 void LoadConf();
 void SaveConf();

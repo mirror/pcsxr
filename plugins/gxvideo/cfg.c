@@ -29,7 +29,7 @@
 
 #define DEFAULT_CFG_NAME "gxvideo.cfg"
 
-static int get_int_value (char const * file_buffer, char const * name, int dflt) {
+int get_int_value (char const * file_buffer, char const * name, int dflt) {
 	char * p = strstr(file_buffer, name);
 	if (p != NULL) {
 		p += strlen(name);
@@ -41,7 +41,7 @@ static int get_int_value (char const * file_buffer, char const * name, int dflt)
 	return dflt;
 }
 
-static double get_double_value(char const * file_buffer, char const * name,
+double get_double_value(char const * file_buffer, char const * name,
 		double dflt) {
 	char * p = strstr(file_buffer, name);
 	if (p != NULL) {
@@ -54,15 +54,15 @@ static double get_double_value(char const * file_buffer, char const * name,
 	return dflt;
 }
 
-static void write_int_value (FILE * f, char const * name, int val) {
+void write_int_value (FILE * f, char const * name, int val) {
 	fprintf(f, "%s = %d\n", name, val);
 }
 
-static void write_double_value (FILE * f, char const * name, double val) {
+void write_double_value (FILE * f, char const * name, double val) {
 	fprintf(f, "%s = %.1f\n", name, val);
 }
 
-static void ReadConfigFile() {
+void ReadConfigFile() {
 	struct stat buf;
 	FILE * f_in;
 	char cfg_file_name[256];
@@ -153,7 +153,7 @@ static void ReadConfigFile() {
 	free(file_buffer);
 }
 
-static void ExecCfg(char const * arg) {
+void ExecCfg(char const * arg) {
 	char cfg[256];
 	struct stat buf;
 

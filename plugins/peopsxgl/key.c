@@ -25,8 +25,6 @@
 #include "texture.h"
 #include "draw.h"
 #include "fps.h"
-#include "key.h"
-#include "psemu_plugin_defs.h"
 
 ////////////////////////////////////////////////////////////////////////
 // KeyBoard handler stuff

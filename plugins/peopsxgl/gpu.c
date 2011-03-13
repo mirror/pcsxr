@@ -36,7 +36,6 @@ static int iOldMode=0;
 #define _IN_GPU
 
 #include "externals.h"
-#include "psemu_plugin_defs.h"
 #include "gpu.h"
 #include "draw.h"
 #include "cfg.h"
@@ -50,6 +49,15 @@ static int iOldMode=0;
 #include "resource.h"
 #include "ssave.h"
 #endif
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#include <locale.h>
+#define _(x)  gettext(x)
+#define N_(x) (x)
+#else
+#define _(x)  (x)
+#define N_(x) (x)
+#endif
 
 ////////////////////////////////////////////////////////////////////////
 // PPDK developer must change libraryName field and can change revision and build
@@ -62,9 +70,7 @@ const  unsigned char build    = 78;
 static char *libraryName     = N_("OpenGL Driver");
 
 static char *PluginAuthor    = N_("Pete Bernert");
-#if 0
 static char *libraryInfo     = N_("Based on P.E.Op.S. MesaGL Driver V1.78\nCoded by Pete Bernert\n");
-#endif
 
 ////////////////////////////////////////////////////////////////////////
 // memory image of the PSX vram
@@ -86,6 +92,10 @@ GLfloat         gl_z=0.0f;
 BOOL            bNeedInterlaceUpdate=FALSE;
 BOOL            bNeedRGB24Update=FALSE;
 BOOL            bChangeWinMode=FALSE;
+
+#ifdef _WINDOWS
+extern HGLRC    GLCONTEXT;
+#endif
 
 uint32_t        ulStatusControl[256];
 
@@ -164,21 +174,19 @@ unsigned long CALLBACK PSEgetLibVersion(void)
  return version<<16|revision<<8|build;
 }
 
-#if 0
 char * GPUgetLibInfos(void)
 {
  return _(libraryInfo);
 }
-#endif
 
 ////////////////////////////////////////////////////////////////////////
 // snapshot funcs (saves screen to bitmap / text infos into file)
 ////////////////////////////////////////////////////////////////////////
 
 #ifdef _WINDOWS
-static char * GetConfigInfos(HWND hW)
+char * GetConfigInfos(HWND hW)
 #else
-static char * GetConfigInfos(int hW)
+char * GetConfigInfos(int hW)
 #endif
 {
 #ifdef _WINDOWS
@@ -358,7 +366,7 @@ static char * GetConfigInfos(int hW)
 // save text infos to file
 ////////////////////////////////////////////////////////////////////////
 
-static void DoTextSnapShot(int iNum)
+void DoTextSnapShot(int iNum)
 {
  FILE *txtfile;char szTxt[256];char * pB;
 
@@ -374,12 +382,7 @@ static void DoTextSnapShot(int iNum)
  pB=GetConfigInfos(0);
  if(pB)
   {
-   if(fwrite(pB,strlen(pB),1,txtfile) != 1) {
-    free(pB);
-    fclose(txtfile);
-    remove(szTxt);
-    return;
-   }
+   fwrite(pB,strlen(pB),1,txtfile);
    free(pB);
   }
  fclose(txtfile); 
@@ -452,12 +455,7 @@ void DoSnapShot(void)
  if((bmpfile=fopen(filename,"wb"))==NULL)
   {free(snapshotdumpmem);return;}
 
- if(fwrite(header,0x36,1,bmpfile) != 1) {
-  free(snapshotdumpmem);
-  fclose(bmpfile);
-  remove(filename);
-  return;
- }
+ fwrite(header,0x36,1,bmpfile);
 
  glReadPixels(0,0,SnapWidth,SnapHeigth,GL_RGB,
                GL_UNSIGNED_BYTE,snapshotdumpmem);
@@ -467,13 +465,8 @@ void DoSnapShot(void)
  for(i=0;i<size;i++,p+=3)
   {c=*p;*p=*(p+2);*(p+2)=c;}
 
- if(fwrite(snapshotdumpmem,size*3,1,bmpfile) != 1 ||
-    fwrite(empty,0x2,1,bmpfile) != 1) {
-  free(snapshotdumpmem);
-  fclose(bmpfile);
-  remove(filename);
-  return;
- }
+ fwrite(snapshotdumpmem,size*3,1,bmpfile);
+ fwrite(empty,0x2,1,bmpfile);
  fclose(bmpfile); 
  free(snapshotdumpmem);
 
@@ -738,7 +731,7 @@ static int fx=0;
 
 ////////////////////////////////////////////////////////////////////////
 
-static void osd_close_display (void)                          // close display
+void osd_close_display (void)                          // close display
 {
  if(display)                                           // display exists?
   {
@@ -764,7 +757,7 @@ static void osd_close_display (void)                          // close display
 
 ////////////////////////////////////////////////////////////////////////
 
-static void sysdep_create_display(void)                       // create display
+void sysdep_create_display(void)                       // create display
 {
  XSetWindowAttributes winattr;float fxgamma=2;
  int myscreen;char gammastr[14];
@@ -878,7 +871,7 @@ static void sysdep_create_display(void)                       // create display
    p2=XCreatePixmap(display,RootWindow(display,myvisual->screen),8,8,1);
 
    img = XCreateImage(display,myvisual->visual,
-                      1,XYBitmap,0,(char *)idata,8,8,8,1);
+                      1,XYBitmap,0,idata,8,8,8,1);
 
    GCv.function   = GXcopy;
    GCv.foreground = ~0;
@@ -1044,7 +1037,11 @@ long GPUopen(unsigned long * disp,char * CapText,char * CfgFile)
 
  if(disp)
   {
+  #if defined (_MACGL)
   *disp = display;
+  #else
+   *disp=(unsigned long *)display;                       // return display ID to main emu
+  #endif
   }
 
  if(display) return 0;
@@ -1115,7 +1112,7 @@ long CALLBACK GPUshutdown()
 // paint it black: simple func to clean up optical border garbage
 ////////////////////////////////////////////////////////////////////////
 
-static void PaintBlackBorders(void)
+void PaintBlackBorders(void)
 {
  short s;
 
@@ -1165,7 +1162,7 @@ static void PaintBlackBorders(void)
 // helper to draw scanlines
 ////////////////////////////////////////////////////////////////////////
 
-static __inline void XPRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
+__inline void XPRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
                                     OGLVertex* vertex3, OGLVertex* vertex4) 
 {
 
@@ -1188,7 +1185,7 @@ static __inline void XPRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex
 // scanlines
 ////////////////////////////////////////////////////////////////////////
 
-static void SetScanLines(void)
+void SetScanLines(void)
 {
  glLoadIdentity();
  glOrtho(0,iResX,iResY, 0, -1, 1);
@@ -1280,7 +1277,7 @@ static void SetScanLines(void)
 // blur, babe, blur (heavy performance hit for a so-so fullscreen effect)
 ////////////////////////////////////////////////////////////////////////
 
-static void BlurBackBuffer(void)
+void BlurBackBuffer(void)
 {
  if(!gTexBlurName) return;
 
@@ -1349,7 +1346,7 @@ static void BlurBackBuffer(void)
 ////////////////////////////////////////////////////////////////////////
 // "unblur" repairs the backbuffer after a blur
 
-static void UnBlurBackBuffer(void)
+void UnBlurBackBuffer(void)
 {
  if(!gTexBlurName) return;
 
@@ -1676,7 +1673,7 @@ if (iDrawnSomething){
 // check if update needed
 ////////////////////////////////////////////////////////////////////////
 
-static void ChangeDispOffsetsX(void)                          // CENTER X
+void ChangeDispOffsetsX(void)                          // CENTER X
 {
  int lx,l;short sO;
 
@@ -1722,7 +1719,7 @@ static void ChangeDispOffsetsX(void)                          // CENTER X
 
 ////////////////////////////////////////////////////////////////////////
 
-static void ChangeDispOffsetsY(void)                          // CENTER Y
+void ChangeDispOffsetsY(void)                          // CENTER Y
 {
  int iT;short sO;                                      // store previous y size
 
@@ -1821,7 +1818,7 @@ void SetAspectRatio(void)
 // big ass check, if an ogl swap buffer is needed
 ////////////////////////////////////////////////////////////////////////
 
-static void updateDisplayIfChanged(void)
+void updateDisplayIfChanged(void)
 {
  BOOL bUp;
 
@@ -1889,7 +1886,7 @@ void ChangeWindowMode(void)
 // swap update check (called by psx vsync function)
 ////////////////////////////////////////////////////////////////////////
 
-static BOOL bSwapCheck(void)
+BOOL bSwapCheck(void)
 {
  static int iPosCheck=0;
  static PSXPoint_t pO;
@@ -2325,7 +2322,7 @@ void CALLBACK GPUwriteStatus(uint32_t gdata)
 
 BOOL bNeedWriteUpload=FALSE;
 
-static __inline void FinishedVRAMWrite(void)
+__inline void FinishedVRAMWrite(void)
 {
  if(bNeedWriteUpload)
   {
@@ -2341,7 +2338,7 @@ static __inline void FinishedVRAMWrite(void)
  VRAMWrite.RowsRemaining = 0;
 }
 
-static __inline void FinishedVRAMRead(void)
+__inline void FinishedVRAMRead(void)
 {
  // set register to NORMAL operation
  iDataReadMode = DR_NORMAL;
@@ -2959,7 +2956,7 @@ long CALLBACK GPUconfigure(void)
 }
 #else
 
-static void StartCfgTool(char *arg) // linux: start external cfg tool
+void StartCfgTool(char *arg) // linux: start external cfg tool
 {
 	char cfg[256];
 	struct stat buf;
@@ -3021,7 +3018,7 @@ void SetFixes(void)
 
 uint32_t lUsedAddr[3];
 
-static __inline BOOL CheckForEndlessLoop(uint32_t laddr)
+__inline BOOL CheckForEndlessLoop(uint32_t laddr)
 {
  if(laddr==lUsedAddr[1]) return TRUE;
  if(laddr==lUsedAddr[2]) return TRUE;
@@ -3106,6 +3103,16 @@ long CALLBACK GPUtest(void)
 
 ////////////////////////////////////////////////////////////////////////
 // save state funcs
+////////////////////////////////////////////////////////////////////////
+
+typedef struct GPUFREEZETAG
+{
+ uint32_t ulFreezeVersion;      // should be always 1 for now (set by main emu)
+ uint32_t ulStatus;             // current gpu status
+ uint32_t ulControl[256];       // latest control register values
+ unsigned char psxVRam[1024*1024*2]; // current VRam image (full 2 MB for ZN)
+} GPUFreeze_t;
+
 ////////////////////////////////////////////////////////////////////////
 
 long CALLBACK GPUfreeze(uint32_t ulGetFreezeData,GPUFreeze_t * pF)
@@ -3387,7 +3394,7 @@ unsigned char cFont[10][120]=
 
 ////////////////////////////////////////////////////////////////////////
 
-static void PaintPicDot(unsigned char * p,unsigned char c)
+void PaintPicDot(unsigned char * p,unsigned char c)
 {
  if(c==0) {*p++=0x00;*p++=0x00;*p=0x00;return;}
  if(c==1) {*p++=0xff;*p++=0xff;*p=0xff;return;}
@@ -3396,7 +3403,7 @@ static void PaintPicDot(unsigned char * p,unsigned char c)
 
 ////////////////////////////////////////////////////////////////////////
 
-long CALLBACK GPUgetScreenPic(unsigned char * pMem)
+void CALLBACK GPUgetScreenPic(unsigned char * pMem)
 {
  float XS,YS;int x,y,v;
  unsigned char * ps, * px, * pf;
@@ -3470,27 +3477,24 @@ long CALLBACK GPUgetScreenPic(unsigned char * pMem)
    *(pf+(127*3))=0xff;*pf++=0xff;
    pf+=127*3;
   }
-  return 0;
+
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-long CALLBACK GPUshowScreenPic(unsigned char * pMem)
+void CALLBACK GPUshowScreenPic(unsigned char * pMem)
 {
  DestroyPic();
- if(pMem==0) return 0;
+ if(pMem==0) return;
  CreatePic(pMem);
- return 0;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-#if 0
 void CALLBACK GPUsetfix(uint32_t dwFixBits)
 {
  dwEmuFixes=dwFixBits;
 }
-#endif
 
 ////////////////////////////////////////////////////////////////////////
  
@@ -3514,12 +3518,10 @@ void CALLBACK GPUvisualVibration(uint32_t iSmall, uint32_t iBig)
 // main emu can set display infos (A/M/G/D) 
 ////////////////////////////////////////////////////////////////////////
 
-#if 0
 void CALLBACK GPUdisplayFlags(uint32_t dwFlags)
 {
  dwCoreFlags=dwFlags;
 }
-#endif
 
 void CALLBACK GPUvBlank( int val )
 {

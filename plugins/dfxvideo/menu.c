@@ -61,6 +61,9 @@ void CloseMenu(void)
 
 // DISPLAY FPS/MENU TEXT
 
+#include <time.h>
+extern time_t tStart;
+
 int iMPos=0;                                           // menu arrow pos
 
 void DisplayText(void)                                 // DISPLAY TEXT

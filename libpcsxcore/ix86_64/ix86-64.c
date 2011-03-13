@@ -119,7 +119,7 @@ void CheckX86Ptr( void )
 {
 }
 
-static void writeVAROP(unsigned opl, u64 op)
+void writeVAROP(unsigned opl, u64 op)
 {
 	while (opl--)
 	{
@@ -177,14 +177,14 @@ void SET8R( int cc, int to )
 	write8( 0xC0 | ( to ) );
 }
 
-u8* J8Rel( int cc, u8 to )
+u8* J8Rel( int cc, int to )
 {
 	write8( cc );
     write8( to );
-    return (u8 *)x86Ptr - 1;
+    return x86Ptr - 1;
 }
 
-u16* J16Rel( int cc, u16 to )
+u16* J16Rel( int cc, u32 to )
 {
 	write16( 0x0F66 );
 	write8( cc );
@@ -214,7 +214,7 @@ void CMOV32MtoR( int cc, x86IntRegType to, uptr from )
 }
 
 ////////////////////////////////////////////////////
-void x86SetPtr( s8* ptr )
+void x86SetPtr( char* ptr ) 
 {
 	x86Ptr = ptr;
 }
@@ -2364,7 +2364,7 @@ u8* JMP8( u8 to )
 {
 	write8( 0xEB ); 
 	write8( to );
-	return (u8 *)x86Ptr - 1;
+	return x86Ptr - 1;
 }
 
 /* jmp rel32 */
@@ -2687,7 +2687,7 @@ void CMP64I32toR( x86IntRegType to, u32 from )
 /* cmp m64 to r64 */
 void CMP64MtoR( x86IntRegType to, uptr from ) 
 {
-	MEMADDR_OP(1, VAROP1(0x3B), true, to, from, 0);
+	MEMADDR_OP(1, VAROP1(0x3B), true, 2, from, 0);
 }
 
 // cmp r64 to r64 
@@ -2935,7 +2935,7 @@ void SETG8R( x86IntRegType to ) { SET8R(0x9f, to); }
 // seta r8 
 void SETA8R( x86IntRegType to ) { SET8R(0x97, to); }
 // setae r8 
-void SETAE8R( x86IntRegType to ) { SET8R(0x93, to); }
+void SETAE8R( x86IntRegType to ) { SET8R(0x99, to); }
 /* setb r8 */
 void SETB8R( x86IntRegType to ) { SET8R( 0x92, to ); }
 /* setb r8 */

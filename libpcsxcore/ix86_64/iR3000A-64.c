@@ -354,10 +354,9 @@ static void iDumpRegs() {
 	}
 }
 
-static void iDumpBlock(s8 *ptr) {
+void iDumpBlock(char *ptr) {
 	FILE *f;
 	u32 i;
-	char buf[200];
 
 	SysPrintf("dump1 %x:%x, %x\n", psxRegs.pc, pc, psxRegs.cycle);
 
@@ -365,31 +364,11 @@ static void iDumpBlock(s8 *ptr) {
 		SysPrintf("%s\n", disR3000AF(PSXMu32(i), i));
 
 	fflush(stdout);
-#if 1
 	f = fopen("dump1", "w");
-	if(f) {
-		/* errors don't really matter, but gcc complains if ignored */
-		int err;
-		err = fwrite(ptr, (uptr)x86Ptr - (uptr)ptr, 1, f) != 1;
-		err = fclose(f) != 0 || err;
-		if(!err) {
-			sprintf(buf, "objdump -m i386 -M x86-64 -D -b binary --adjust-vma=0x%lx dump1", (unsigned long)ptr);
-			err = system(buf);
-		} else
-			perror("dump1");
-		remove("dump1");
-	}
-#else
-	/* probably pointless; branch targets are still not symbols */
-	sprintf(buf,
-		"gdb --batch --quiet"
-		" -ex 'set verbose 0'"
-		" -ex 'set confirm 0'"
-		" -ex 'attach %d'"
-		" -ex 'disas/r %p,%p'"
-		, getpid(), ptr, x86Ptr - 1);
-	system(buf);
-#endif
+	fwrite(ptr, 1, (uptr)x86Ptr - (uptr)ptr, f);
+	fclose(f);
+	//system("ndisasm -b64 dump1");
+	fflush(stdout);
 }
 
 #define REC_FUNC(f) \

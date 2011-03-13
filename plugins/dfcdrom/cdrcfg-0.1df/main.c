@@ -27,7 +27,7 @@
 GtkWidget *MainWindow;
 
 // function to check if the device is a cdrom
-static int is_cdrom(const char *device) {
+int is_cdrom(const char *device) {
 	struct stat st;
 	int fd = -1;
 
@@ -78,7 +78,7 @@ static int is_cdrom(const char *device) {
 // Are there any other common entry to add to the list? (especially scsi, I
 // deliberately ignored old non standard cdroms... )
 // If you come up with a better method let me know!!
-static void fill_drives_list(GtkWidget *widget) {
+void fill_drives_list(GtkWidget *widget) {
 	int i;
 	GtkListStore *store;
 	GtkTreeIter iter;

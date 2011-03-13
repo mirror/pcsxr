@@ -1,7 +1,6 @@
 // stop compiling if NORECBUILD build (only for Visual Studio)
 
-/* note that ix86-64.h disables all MMX, so no point in compiling this, ever */
-#ifndef __x86_64__
+#ifdef __x86_64__
 
 #if !(defined(_MSC_VER) && defined(PCSX2_NORECBUILD))
 

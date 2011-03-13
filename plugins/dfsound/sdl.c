@@ -18,8 +18,6 @@
 
 #include "stdafx.h"
 
-#include "dsoundoss.h"
-
 #include "externals.h"
 #include <SDL.h>
 

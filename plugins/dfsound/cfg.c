@@ -19,8 +19,6 @@
 
 #define _IN_CFG
 
-#include "cfg.h"
-
 #include "externals.h"
 
 ////////////////////////////////////////////////////////////////////////
@@ -58,8 +56,7 @@ void StartCfgTool(char * pCmdLine)
      fclose(cf);
      if(fork()==0)
       {
-       if(chdir("cfg") != 0)
-	  perror("cfg");
+       chdir("cfg");
        execl("./cfgDFSound","cfgDFSound",pCmdLine,NULL);
        exit(0);
       }
@@ -73,8 +70,7 @@ void StartCfgTool(char * pCmdLine)
        fclose(cf);
        if(fork()==0)
        {
-	if(chdir(getenv("HOME")) != 0)
-	   perror("HOME");
+        chdir(getenv("HOME"));
         execl("./cfgDFSound","cfgDFSound",pCmdLine,NULL);
         exit(0);
        }
@@ -88,7 +84,7 @@ void StartCfgTool(char * pCmdLine)
 // READ LINUX CONFIG FILE
 /////////////////////////////////////////////////////////
 
-static void ReadConfigFile(void)
+void ReadConfigFile(void)
 {
  FILE *in;char t[256];int len;
  char * pB, * p;

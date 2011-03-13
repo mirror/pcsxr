@@ -38,16 +38,12 @@
 
 // Control Flags
 #define TX_PERM		0x0001
-#define DTR_PERM	0x0002
+#define DTR			0x0002
 #define RX_PERM		0x0004
 #define BREAK		0x0008
 #define RESET_ERR	0x0010
 #define RTS			0x0020
 #define SIO_RESET	0x0040
-#define TX_INTEN	0x0400
-#define RX_INTEN	0x0800
-#define DSR_INTEN	0x1000
-#define DTR		0x2000
 
 // *** FOR WORKS ON PADS AND MEMORY CARDS *****
 
@@ -125,12 +121,21 @@ static int DongleInit;
 // ePSXe 1.7.0
 //#define SIO_CYCLES 635
 
-static unsigned char reverse_8( unsigned char bits )
+unsigned char reverse_8( unsigned char bits )
 {
-	bits = ((bits & 0xaa) >> 1) | ((bits & 0x55) << 1);
-	bits = ((bits & 0xcc) >> 2) | ((bits & 0x33) << 2);
-	bits = ((bits & 0xf0) >> 4) | ((bits & 0x0f) << 4);
-	return bits;
+	unsigned char tmp;
+	int lcv;
+
+	tmp = 0;
+	for( lcv = 0; lcv < 8; lcv++ )
+	{
+		tmp >>= 1;
+		tmp |= (bits & 0x80);
+
+		bits <<= 1;
+	}
+
+	return tmp;
 }
 
 
@@ -160,16 +165,16 @@ void sioWrite8(unsigned char value) {
 			if ((value & 0x40) == 0x40) {
 				padst = 2; parp = 1;
 				if (!Config.UseNet) {
-					switch (CtrlReg & (DTR_PERM|DTR)) {
-						case DTR_PERM:
+					switch (CtrlReg & 0x2002) {
+						case 0x0002:
 							buf[parp] = PAD1_poll(value);
 							break;
-						case (DTR_PERM|DTR):
+						case 0x2002:
 							buf[parp] = PAD2_poll(value);
 							break;
 					}
 				}/* else {
-//					SysPrintf("%x: %x, %x, %x, %x\n", CtrlReg&(DTR_PERM|DTR), buf[2], buf[3], buf[4], buf[5]);
+//					SysPrintf("%x: %x, %x, %x, %x\n", CtrlReg&0x2002, buf[2], buf[3], buf[4], buf[5]);
 				}*/
 
 				if (!(buf[parp] & 0x0f)) {
@@ -220,9 +225,9 @@ void sioWrite8(unsigned char value) {
 				return;
 			}*/
 			if (!Config.UseNet) {
-				switch (CtrlReg & (DTR_PERM|DTR)) {
-					case DTR_PERM: buf[parp] = PAD1_poll(value); break;
-					case (DTR_PERM|DTR): buf[parp] = PAD2_poll(value); break;
+				switch (CtrlReg & 0x2002) {
+					case 0x0002: buf[parp] = PAD1_poll(value); break;
+					case 0x2002: buf[parp] = PAD2_poll(value); break;
 				}
 			}
 
@@ -267,11 +272,11 @@ void sioWrite8(unsigned char value) {
 					buf[1] = 0x5d;
 					buf[2] = adrH;
 					buf[3] = adrL;
-					switch (CtrlReg & (DTR_PERM|DTR)) {
-						case DTR_PERM:
+					switch (CtrlReg & 0x2002) {
+						case 0x0002:
 							memcpy(&buf[4], Mcd1Data + (adrL | (adrH << 8)) * 128, 128);
 							break;
-						case (DTR_PERM|DTR):
+						case 0x2002:
 							memcpy(&buf[4], Mcd2Data + (adrL | (adrH << 8)) * 128, 128);
 							break;
 					}
@@ -667,12 +672,12 @@ void sioWrite8(unsigned char value) {
 			StatReg |= RX_RDY;		// Transfer is Ready
 
 			if (!Config.UseNet) {
-				switch (CtrlReg & (DTR_PERM|DTR)) {
-					case DTR_PERM: buf[0] = PAD1_startPoll(1); break;
-					case (DTR_PERM|DTR): buf[0] = PAD2_startPoll(2); break;
+				switch (CtrlReg & 0x2002) {
+					case 0x0002: buf[0] = PAD1_startPoll(1); break;
+					case 0x2002: buf[0] = PAD2_startPoll(2); break;
 				}
 			} else {
-				if ((CtrlReg & (DTR_PERM|DTR)) == DTR_PERM) {
+				if ((CtrlReg & 0x2002) == 0x0002) {
 					int i, j;
 
 					PAD1_startPoll(1);
@@ -777,12 +782,12 @@ unsigned char sioRead8() {
 			if (mcdst == 5) {
 				mcdst = 0;
 				if (rdwr == 2) {
-					switch (CtrlReg & (DTR_PERM|DTR)) {
-						case DTR_PERM:
+					switch (CtrlReg & 0x2002) {
+						case 0x0002:
 							memcpy(Mcd1Data + (adrL | (adrH << 8)) * 128, &buf[1], 128);
 							SaveMcd(Config.Mcd1, Mcd1Data, (adrL | (adrH << 8)) * 128, 128);
 							break;
-						case (DTR_PERM|DTR):
+						case 0x2002:
 							memcpy(Mcd2Data + (adrL | (adrH << 8)) * 128, &buf[1], 128);
 							SaveMcd(Config.Mcd2, Mcd2Data, (adrL | (adrH << 8)) * 128, 128);
 							break;
@@ -884,8 +889,7 @@ void LoadMcd(int mcd, char *str) {
 				else if(buf.st_size == MCD_SIZE + 3904)
 					fseek(f, 3904, SEEK_SET);
 			}
-			if(fread(data, 1, MCD_SIZE, f) != MCD_SIZE)
-				perror(str);
+			fread(data, 1, MCD_SIZE, f);
 			fclose(f);
 		}
 		else
@@ -900,8 +904,7 @@ void LoadMcd(int mcd, char *str) {
 			else if(buf.st_size == MCD_SIZE + 3904)
 				fseek(f, 3904, SEEK_SET);
 		}
-		if(fread(data, 1, MCD_SIZE, f) != MCD_SIZE)
-			perror(str);
+		fread(data, 1, MCD_SIZE, f);
 		fclose(f);
 	}
 }
@@ -928,10 +931,8 @@ void SaveMcd(char *mcd, char *data, uint32_t adr, int size) {
 		} else
 			fseek(f, adr, SEEK_SET);
 
-		if(fwrite(data + adr, 1, size, f) != size)
-			perror(mcd);
-		if(fclose(f) != 0)
-			perror(mcd);
+		fwrite(data + adr, 1, size, f);
+		fclose(f);
 		return;
 	}
 
@@ -1111,8 +1112,7 @@ void ConvertMcd(char *mcd, char *data) {
 	if (strstr(mcd, ".gme")) {
 		f = fopen(mcd, "wb");
 		if (f != NULL) {
-			if(fwrite(data - 3904, MCD_SIZE + 3904, 1, f) != 1)
-				perror(mcd);
+			fwrite(data - 3904, 1, MCD_SIZE + 3904, f);
 			fclose(f);
 		}
 		f = fopen(mcd, "r+");
@@ -1146,10 +1146,8 @@ void ConvertMcd(char *mcd, char *data) {
 	} else if(strstr(mcd, ".mem") || strstr(mcd,".vgs")) {
 		f = fopen(mcd, "wb");
 		if (f != NULL) {
-			if(fwrite(data-64, MCD_SIZE+64, 1, f) != 1)
-				perror(mcd);
-			if(fclose(f) != 0)
-				perror(mcd);;
+			fwrite(data-64, 1, MCD_SIZE+64, f);
+			fclose(f);
 		}
 		f = fopen(mcd, "r+");
 		s = s + 64;
@@ -1170,16 +1168,14 @@ void ConvertMcd(char *mcd, char *data) {
 	} else {
 		f = fopen(mcd, "wb");
 		if (f != NULL) {
-			if(fwrite(data, 1, MCD_SIZE, f) != MCD_SIZE)
-				perror(mcd);
-			if(fclose(f) != 0)
-				perror(mcd);
+			fwrite(data, 1, MCD_SIZE, f);
+			fclose(f);
 		}
 	}
 }
 
 void GetMcdBlockInfo(int mcd, int block, McdBlock *Info) {
-	char *data = NULL, *ptr, *str, *sstr;
+	unsigned char *data = NULL, *ptr, *str, *sstr;
 	unsigned short clut[16];
 	unsigned short c;
 	int i, x;
@@ -1290,8 +1286,7 @@ void LoadDongle( char *str )
 	
 	f = fopen(str, "r+b");
 	if (f != NULL) {
-		if(fread( DongleData, 1, DONGLE_SIZE, f ) != DONGLE_SIZE)
-			perror(str);
+		fread( DongleData, 1, DONGLE_SIZE, f );
 		fclose( f );
 	}
 	else {
@@ -1327,9 +1322,7 @@ void SaveDongle( char *str )
 	
 	f = fopen(str, "wb");
 	if (f != NULL) {
-		if(fwrite( DongleData, 1, DONGLE_SIZE, f ) != DONGLE_SIZE)
-			perror(str);
-		if(fclose( f ) != 0)
-			perror(str);
+		fwrite( DongleData, 1, DONGLE_SIZE, f );
+		fclose( f );
 	}
 }

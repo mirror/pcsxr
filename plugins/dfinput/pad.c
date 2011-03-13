@@ -24,15 +24,15 @@ char *PSEgetLibName(void) {
 	return _("Gamepad/Keyboard Input");
 }
 
-unsigned long CALLBACK PSEgetLibType(void) {
+uint32_t PSEgetLibType(void) {
 	return PSE_LT_PAD;
 }
 
-unsigned long CALLBACK PSEgetLibVersion(void) {
+uint32_t PSEgetLibVersion(void) {
 	return (1 << 16) | (1 << 8);
 }
 
-static void PADsetMode(const int pad, const int mode) {
+void PADsetMode(const int pad, const int mode) {
 	g.PadState[pad].PadMode = mode;
 	g.PadState[pad].PadID = mode ? 0x73 : 0x41;
 

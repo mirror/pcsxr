@@ -67,29 +67,49 @@ typedef struct {
 
 void save_config(cfg_window_t *);
 
-static void on_about_clicked(GtkWidget * widget, gpointer user_data) {
+/*	This function checks for the value being outside the accepted range,
+ and returns the appropriate boundary value */
+int set_limit(char *p, int len, int lower, int upper) {
+	int val = 0;
+
+	if (p)
+		val = atoi(p + len);
+	/* printf("Checking for val %d greater than %d and lower than %d, ", val, lower, upper);*/
+	if (val < lower)
+		val = lower;
+	if (val > upper)
+		val = upper;
+	/* printf ("val is now %d\n", val);*/
+	return val;
+}
+
+void on_about_clicked(GtkWidget * widget, gpointer user_data) {
 	gtk_widget_destroy(widget);
 	exit(0);
 }
 
-static void on_fullscreen_toggled(GtkWidget * widget, cfg_window_t * w) {
+void set_widget_sensitive(GtkWidget * widget, gboolean * state) {
+	gtk_widget_set_sensitive(widget, *state);
+}
+
+void on_fullscreen_toggled(GtkWidget * widget, cfg_window_t * w) {
 	gtk_widget_set_sensitive(w->resolution_combobox,
 			!gtk_toggle_button_get_active(
 					GTK_TOGGLE_BUTTON(w->fullscreen_checkbutton)));
 }
 
-static void update_fixes_stase(GtkWidget * ths, GtkWidget * w) {
+void update_fixes_stase(GtkWidget * ths, GtkWidget * w) {
 	gtk_widget_set_sensitive(ths, gtk_toggle_button_get_active(
 			GTK_TOGGLE_BUTTON(w)));
 }
 
-static void on_use_fixes_toggled(GtkWidget * widget, cfg_window_t * w) {
+void on_use_fixes_toggled(GtkWidget * widget, cfg_window_t * w) {
 	/* Set the state of each of the fixes to the value of the use fixes toggle */
 	gtk_container_foreach(GTK_CONTAINER (w->fixes_table),
 			(GtkCallback) update_fixes_stase, w->use_game_fixes_checkbutton);
 }
 
-static void on_fps_toggled(GtkWidget * widget, cfg_window_t * w) {
+void on_fps_toggled(GtkWidget * widget, cfg_window_t * w) {
 	gboolean state_set_fps = gtk_toggle_button_get_active(
 			GTK_TOGGLE_BUTTON(w->set_fps_checkbutton));
 	gboolean state_auto_fps_limit = gtk_toggle_button_get_active(
@@ -99,17 +119,17 @@ static void on_fps_toggled(GtkWidget * widget, cfg_window_t * w) {
 	gtk_widget_set_sensitive(w->auto_fps_limit_checkbutton, state_set_fps);
 }
 
-static void on_destroy_window(GtkWidget * widget, cfg_window_t * w) {
+void on_destroy_window(GtkWidget * widget, cfg_window_t * w) {
 	free(w);
 }
 
-static void on_click_save_button(GtkWidget * widget, cfg_window_t * w) {
+void on_click_save_button(GtkWidget * widget, cfg_window_t * w) {
 	save_config(w);
 	gtk_widget_destroy(GTK_WIDGET(w->config_window));
 	gtk_exit(0);
 }
 
-static void on_click_cancel_button(GtkWidget * widget, cfg_window_t * w) {
+void on_click_cancel_button(GtkWidget * widget, cfg_window_t * w) {
 	gtk_widget_destroy(GTK_WIDGET(w->config_window));
 	gtk_exit(0);
 }

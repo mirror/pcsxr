@@ -19,4 +19,3 @@ void SetupTimer(void);
 void RemoveTimer(void);
 void CALLBACK SPUplayADPCMchannel(xa_decode_t *xap);
 void CALLBACK SPUplayCDDAchannel(short *pcm, int bytes);
-extern int lastch;

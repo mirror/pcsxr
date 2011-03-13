@@ -63,7 +63,7 @@ void CheckFrameRate(void)
 
 #define TIMEBASE 100000
 
-static unsigned long timeGetTime()
+unsigned long timeGetTime()
 {
  struct timeval tv;
  gettimeofday(&tv, 0);                                 // well, maybe there are better ways

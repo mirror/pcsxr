@@ -26,6 +26,16 @@
 
 #include "config.h"
 
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#include <locale.h>
+#define _(x)  gettext(x)
+#define N_(x) (x)
+#else
+#define _(x)  (x)
+#define N_(x) (x)
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -141,6 +151,24 @@ typedef struct _MMC_READ_CD {
 #define itob(i)		((i)/10*16 + (i)%10)	/* u_char to BCD */
 #define btoi(b)		((b)/16*10 + (b)%16)	/* BCD to u_char */
 
+struct CdrStat {
+	unsigned long Type;
+	unsigned long Status;
+	unsigned char Time[3];		// current playing time
+};
+
+struct SubQ {
+	char res0[12];
+	unsigned char ControlAndADR;
+	unsigned char TrackNumber;
+	unsigned char IndexNumber;
+	unsigned char TrackRelativeAddress[3];
+	unsigned char Filler;
+	unsigned char AbsoluteAddress[3];
+	unsigned char CRC[2];
+	char res1[72];
+};
+
 typedef union {
 	struct cdrom_msf msf;
 	unsigned char buf[CD_FRAMESIZE_RAW];
@@ -182,7 +210,6 @@ long GetTE(unsigned char track, unsigned char *m, unsigned char *s, unsigned cha
 long ReadSector(crdata *cr);
 long PlayCDDA(unsigned char *sector);
 long StopCDDA();
-#include "psemu_plugin_defs.h"
 long GetStatus(int playing, struct CdrStat *stat);
 unsigned char *ReadSub(const unsigned char *time);
 

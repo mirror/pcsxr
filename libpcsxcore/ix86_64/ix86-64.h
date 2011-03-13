@@ -191,9 +191,9 @@ typedef struct {
    u32 x86Flags;	   // Feature Flags
    u32 x86EFlags;	   // Extended Feature Flags
    //all the above returns hex values
-   char x86ID[16];	   // Vendor ID  //the vendor creator (in %s)
-   char x86Type[20];   //cpu type in char format //the cpu type (in %s)
-   char x86Fam[50];    // family in char format //the original cpu name string (in %s)
+   s8  x86ID[16];	   // Vendor ID  //the vendor creator (in %s)
+   s8  x86Type[20];   //cpu type in char format //the cpu type (in %s)
+   s8  x86Fam[50];    // family in char format //the original cpu name string (in %s)
    u32 cpuspeed;      // speed of cpu //this will give cpu speed (in %d)
 } CPUINFO;
 
@@ -228,7 +228,7 @@ extern u32 *j32Ptr[32];
 #define RexB(w, base) RexRXB(w, 0, 0, base)
 #define RexRB(w, reg, base) RexRXB(w, reg, 0, base)
 
-void x86SetPtr( s8 *ptr );
+void x86SetPtr( char *ptr );
 void x86Shutdown( void );
 
 void x86SetJ8( u8 *j8 );
@@ -245,8 +245,7 @@ u64 GetCPUTick( void );
 #define ModRM(mod, rm, reg) write8( ( mod << 6 ) | ( (rm & 7) << 3 ) | ( reg & 7 ) )
 #define SibSB(ss, rm, index) write8( ( ss << 6 ) | ( rm << 3 ) | ( index ) )
 void SET8R( int cc, int to );
-u8* J8Rel( int cc, u8 to );
-u16* J16Rel( int cc, u16 to );
+u8* J8Rel( int cc, int to );
 u32* J32Rel( int cc, u32 to );
 void CMOV32RtoR( int cc, int to, int from );
 void CMOV32MtoR( int cc, int to, uptr from );
@@ -479,8 +478,6 @@ void CMOVLE32MtoR( x86IntRegType to, uptr from );
 void ADD64ItoR( x86IntRegType to, u32 from );
 // add m64 to r64 
 void ADD64MtoR( x86IntRegType to, uptr from );
-// add r64 to r64
-void ADD64RtoR( x86IntRegType to, x86IntRegType from );
 
 // add imm32 to r32 
 void ADD32ItoR( x86IntRegType to, u32 from );
@@ -532,7 +529,6 @@ void INC16M( uptr to );
 // sub m64 to r64 
 void SUB64MtoR( x86IntRegType to, uptr from );
 void SUB64ItoR( x86IntRegType to, u32 from );
-void SUB64RtoR( x86IntRegType to, x86IntRegType from );
 
 // sub imm32 to r32 
 void SUB32ItoR( x86IntRegType to, u32 from );
@@ -799,10 +795,6 @@ u8*  JMP8( u8 to );
 
 // jmp rel32 
 u32* JMP32( uptr to );
-
-// jump rel8/rel32 (back jump only)
-u8* JMP( uptr to );
-
 // jmp r32 (r64 if __x86_64__)
 void JMPR( x86IntRegType to );
 // jmp m32 
@@ -1759,7 +1751,6 @@ void SSE2EMU_MOVD_XMM_to_M32( uptr to, x86SSERegType from );
 void SSE2EMU_MOVD_R_to_XMM( x86SSERegType to, x86IntRegType from );
 
 ////////////////////////////////////////////////////
-void CheckX86Ptr(void);
 #ifdef _DEBUG
 #define WRITECHECK() CheckX86Ptr()
 #else
@@ -1777,9 +1768,6 @@ void CheckX86Ptr(void);
 #define write16(val ) writeVAL((u16)(val))
 #define write32( val ) writeVAL((u32)(val))
 #define write64( val ) writeVAL((u64)(val))
-
-void WriteRmOffset(x86IntRegType to, int offset);
-void WriteRmOffsetFrom(x86IntRegType to, x86IntRegType from, int offset);
 
 #ifdef __cplusplus
 }

@@ -105,10 +105,7 @@ int LoadConfig(PcsxConfig *Conf) {
 	data = (char *)malloc(size + 1);
 	if (data == NULL) return -1;
 
-	if(fread(data, buf.st_size, 1, f) != 1) {
-		fclose(f);
-		return -1;
-	}
+	fread(data, 1, buf.st_size, f);
 	fclose(f);
 
 	data[size] = '\0';

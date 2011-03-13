@@ -707,7 +707,7 @@ void ResetTextureArea(BOOL bDelTex)
 // Invalidate tex windows
 ////////////////////////////////////////////////////////////////////////
 
-static void InvalidateWndTextureArea(int X, int Y, int W, int H)
+void InvalidateWndTextureArea(int X, int Y, int W, int H)
 {
  int i,px1,px2,py1,py2,iYM=1;
  textureWndCacheEntry * tsw=wcWndtexStore;
@@ -769,7 +769,7 @@ static void InvalidateWndTextureArea(int X, int Y, int W, int H)
 // same for sort textures
 ////////////////////////////////////////////////////////////////////////
 
-static void MarkFree(textureSubCacheEntryS * tsx)
+void MarkFree(textureSubCacheEntryS * tsx)
 {
  EXLong * ul, * uls;
  int j,iMax;unsigned char x1,y1,dx,dy;
@@ -798,7 +798,7 @@ static void MarkFree(textureSubCacheEntryS * tsx)
   }
 }
 
-static void InvalidateSubSTextureArea(int X, int Y, int W, int H)
+void InvalidateSubSTextureArea(int X, int Y, int W, int H)
 {
  int i,j,k,iMax,px,py,px1,px2,py1,py2,iYM = 1;
  EXLong npos;
@@ -917,7 +917,7 @@ void InvalidateTextureArea(int X, int Y, int W, int H)
 // tex window: define
 ////////////////////////////////////////////////////////////////////////
 
-static void DefineTextureWnd(void)
+void DefineTextureWnd(void)
 {
  if (gTexName == 0)
   glGenTextures(1, &gTexName);
@@ -948,7 +948,7 @@ static void DefineTextureWnd(void)
 // tex window: load packed stretch
 ////////////////////////////////////////////////////////////////////////
 
-static void LoadStretchPackedWndTexturePage(int pageid, int mode, short cx, short cy)
+void LoadStretchPackedWndTexturePage(int pageid, int mode, short cx, short cy)
 {
  uint32_t        start, row, column, j, sxh, sxm, ldx, ldy, ldxo;
  unsigned int    palstart;
@@ -1001,8 +1001,8 @@ static void LoadStretchPackedWndTexturePage(int pageid, int mode, short cx, shor
 
         if(ldy) 
          {ldy--;
-          for(TXU=g_x1;TXU<=g_x2;TXU++,ta++)
-           *ta=*(ta-(g_x2-g_x1));
+          for(TXU=g_x1;TXU<=g_x2;TXU++)
+           *ta++=*(ta-(g_x2-g_x1));
          }
        }
 
@@ -1078,8 +1078,8 @@ static void LoadStretchPackedWndTexturePage(int pageid, int mode, short cx, shor
 
         if(ldy) 
          {ldy--;
-          for(TXU=g_x1;TXU<=g_x2;TXU++,ta++)
-           *ta=*(ta-(g_x2-g_x1));
+          for(TXU=g_x1;TXU<=g_x2;TXU++)
+           *ta++=*(ta-(g_x2-g_x1));
          }
 
        }
@@ -1141,7 +1141,7 @@ static void LoadStretchPackedWndTexturePage(int pageid, int mode, short cx, shor
 // tex window: load stretched
 ////////////////////////////////////////////////////////////////////////
 
-static void LoadStretchWndTexturePage(int pageid, int mode, short cx, short cy)
+void LoadStretchWndTexturePage(int pageid, int mode, short cx, short cy)
 {
  uint32_t       start,row,column,j,sxh,sxm,ldx,ldy,ldxo,s;
  unsigned int   palstart;
@@ -1203,8 +1203,8 @@ static void LoadStretchWndTexturePage(int pageid, int mode, short cx, short cy)
 
         if(ldy) 
          {ldy--;
-          for(TXU=g_x1;TXU<=g_x2;TXU++,ta++)
-           *ta=*(ta-(g_x2-g_x1));
+          for(TXU=g_x1;TXU<=g_x2;TXU++)
+           *ta++=*(ta-(g_x2-g_x1));
          }
        }
 
@@ -1287,8 +1287,8 @@ static void LoadStretchWndTexturePage(int pageid, int mode, short cx, short cy)
 
         if(ldy) 
          {ldy--;
-          for(TXU=g_x1;TXU<=g_x2;TXU++,ta++)
-           *ta=*(ta-(g_x2-g_x1));
+          for(TXU=g_x1;TXU<=g_x2;TXU++)
+           *ta++=*(ta-(g_x2-g_x1));
          }
 
        }
@@ -1352,7 +1352,7 @@ static void LoadStretchWndTexturePage(int pageid, int mode, short cx, short cy)
 // tex window: load packed simple
 ////////////////////////////////////////////////////////////////////////
 
-static void LoadPackedWndTexturePage(int pageid, int mode, short cx, short cy)
+void LoadPackedWndTexturePage(int pageid, int mode, short cx, short cy)
 {
  uint32_t       start,row,column,j,sxh,sxm;
  unsigned int   palstart;
@@ -1494,7 +1494,7 @@ static void LoadPackedWndTexturePage(int pageid, int mode, short cx, short cy)
 // tex window: load simple
 ////////////////////////////////////////////////////////////////////////
 
-static void LoadWndTexturePage(int pageid, int mode, short cx, short cy)
+void LoadWndTexturePage(int pageid, int mode, short cx, short cy)
 {
  uint32_t       start,row,column,j,sxh,sxm;
  unsigned int   palstart;
@@ -1654,7 +1654,7 @@ static void LoadWndTexturePage(int pageid, int mode, short cx, short cy)
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-static void UploadTexWndPal(int mode,short cx,short cy)
+void UploadTexWndPal(int mode,short cx,short cy)
 {
  unsigned int i,iSize;
  unsigned short *wSrcPtr;
@@ -1681,7 +1681,7 @@ static void UploadTexWndPal(int mode,short cx,short cy)
 
 ////////////////////////////////////////////////////////////////////////
 
-static void DefinePalTextureWnd(void)
+void DefinePalTextureWnd(void)
 {
  if(gTexName==0)
   glGenTextures(1, &gTexName);
@@ -1710,7 +1710,7 @@ static void DefinePalTextureWnd(void)
 
 ///////////////////////////////////////////////////////
 
-static void LoadPalWndTexturePage(int pageid, int mode, short cx, short cy)
+void LoadPalWndTexturePage(int pageid, int mode, short cx, short cy)
 {
  uint32_t       start,row,column,j,sxh,sxm;
  unsigned char  *ta;
@@ -1770,7 +1770,7 @@ static void LoadPalWndTexturePage(int pageid, int mode, short cx, short cy)
 
 ////////////////////////////////////////////////////////////////////////
 
-static void LoadStretchPalWndTexturePage(int pageid, int mode, short cx, short cy)
+void LoadStretchPalWndTexturePage(int pageid, int mode, short cx, short cy)
 {
  uint32_t       start,row,column,j,sxh,sxm,ldx,ldy,ldxo;
  unsigned char  *ta,s;
@@ -1974,7 +1974,7 @@ GLuint LoadTextureWnd(int pageid, int TextureMode, uint32_t GivenClutId)
 // movie texture: define
 ////////////////////////////////////////////////////////////////////////
 
-static void DefinePackedTextureMovie(void)
+void DefinePackedTextureMovie(void)
 {
  if(gTexMovieName==0)
   {
@@ -2015,7 +2015,7 @@ static void DefinePackedTextureMovie(void)
 
 ////////////////////////////////////////////////////////////////////////
 
-static void DefineTextureMovie(void)
+void DefineTextureMovie(void)
 {
  if(gTexMovieName==0)
   {
@@ -2110,7 +2110,7 @@ unsigned char * LoadDirectMovieFast(void)
 
 ////////////////////////////////////////////////////////////////////////
 
-static GLuint LoadTextureMovieFast(void)
+GLuint LoadTextureMovieFast(void)
 {
  int row,column;
  unsigned int start,startxy;
@@ -2247,16 +2247,14 @@ GLuint LoadTextureMovie(void)
            lu=*((uint32_t *)pD);pD+=3;
            *ta++=XMBLUE(lu)|XMGREEN(lu)|XMRED(lu)|1;
          }
-         *ta=*(ta-1);
-	 ta++;
+         *ta++=*(ta-1);
         }
        if(b_Y)
         {
          dx=xrMovieArea.x1-xrMovieArea.x0+1;
-         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++,ta++)
-          *ta=*(ta-dx);
-         *ta=*(ta-1);
-	 ta++;
+         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++)
+          *ta++=*(ta-dx);
+         *ta++=*(ta-1);
         }
       }
      else
@@ -2274,8 +2272,8 @@ GLuint LoadTextureMovie(void)
        if(b_Y)
         {
          dx=xrMovieArea.x1-xrMovieArea.x0;
-         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++,ta++)
-          *ta=*(ta-dx);
+         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++)
+          *ta++=*(ta-dx);
         }
       }
     }
@@ -2298,16 +2296,14 @@ GLuint LoadTextureMovie(void)
            *ta++=((c&0x1f)<<11)|((c&0x3e0)<<1)|((c&0x7c00)>>9)|1;
           }
 
-         *ta=*(ta-1);
-	 ta++;
+         *ta++=*(ta-1);
         }
        if(b_Y)
         {
          dx=xrMovieArea.x1-xrMovieArea.x0+1;
-         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++,ta++)
-          *ta=*(ta-dx);
-         *ta=*(ta-1);
-	 ta++;
+         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++)
+          *ta++=*(ta-dx);
+         *ta++=*(ta-1);
         }
       }
      else
@@ -2324,8 +2320,8 @@ GLuint LoadTextureMovie(void)
        if(b_Y)
         {
          dx=xrMovieArea.x1-xrMovieArea.x0;
-         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++,ta++)
-          *ta=*(ta-dx);
+         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++)
+          *ta++=*(ta-dx);
         }
       }
     }
@@ -2351,16 +2347,14 @@ GLuint LoadTextureMovie(void)
            *ta++=*((uint32_t *)pD)|0xff000000;
            pD+=3;
           }
-         *ta=*(ta-1);
-	 ta++;
+         *ta++=*(ta-1);
         }
        if(b_Y)
         {
          dx=xrMovieArea.x1-xrMovieArea.x0+1;
-         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++,ta++)
-          *ta=*(ta-dx);
-         *ta=*(ta-1);
-	 ta++;
+         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++)
+          *ta++=*(ta-dx);
+         *ta++=*(ta-1);
         }
       }
      else
@@ -2378,8 +2372,8 @@ GLuint LoadTextureMovie(void)
        if(b_Y)
         {
          dx=xrMovieArea.x1-xrMovieArea.x0;
-         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++,ta++)
-          *ta=*(ta-dx);
+         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++)
+          *ta++=*(ta-dx);
         }
       }
     }
@@ -2398,19 +2392,17 @@ GLuint LoadTextureMovie(void)
        for(column=xrMovieArea.y0;column<xrMovieArea.y1;column++)
         {
          startxy=((1024)*column)+xrMovieArea.x0;
-         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++,ta++)
-          *ta=LTCOL(psxVuw[startxy++]|0x8000);
-         *ta=*(ta-1);
-	 ta++;
+         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++)
+          *ta++=LTCOL(psxVuw[startxy++]|0x8000);
+         *ta++=*(ta-1);
         }
 
        if(b_Y)
         {
          dx=xrMovieArea.x1-xrMovieArea.x0+1;
-         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++,ta++)
-          *ta=*(ta-dx);
-         *ta=*(ta-1);
-	 ta++;
+         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++)
+          *ta++=*(ta-dx);
+         *ta++=*(ta-1);
         }
       }
      else
@@ -2425,8 +2417,8 @@ GLuint LoadTextureMovie(void)
        if(b_Y)
         {
          dx=xrMovieArea.x1-xrMovieArea.x0;
-         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++,ta++)
-          *ta=*(ta-dx);
+         for(row=xrMovieArea.x0;row<xrMovieArea.x1;row++)
+          *ta++=*(ta-dx);
         }
       }
     }
@@ -2442,7 +2434,7 @@ GLuint LoadTextureMovie(void)
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-static GLuint BlackFake15BitTexture(void)
+GLuint BlackFake15BitTexture(void)
 {
  int pmult;short x1,x2,y1,y2;
 
@@ -2519,7 +2511,7 @@ BOOL bIgnoreNextTile =FALSE;
 
 int iFTex=512;
 
-static GLuint Fake15BitTexture(void)
+GLuint Fake15BitTexture(void)
 {
  int pmult;short x1,x2,y1,y2;int iYAdjust;
  float ScaleX,ScaleY;RECT rSrc;
@@ -3471,7 +3463,7 @@ void LoadPackedSubTexturePageSort(int pageid, int mode, short cx, short cy)
 
 #define Q_INTERPOLATE8(A, B, C, D) (((((A & qcolorMask8) >> 2) + ((B & qcolorMask8) >> 2) + ((C & qcolorMask8) >> 2) + ((D & qcolorMask8) >> 2) + ((((A & qlowpixelMask8) + (B & qlowpixelMask8) + (C & qlowpixelMask8) + (D & qlowpixelMask8)) >> 2) & qlowpixelMask8))|((((A&0xFF000000)==0x50000000)?0x50000000:(((B&0xFF000000)==0x50000000)?0x50000000:(((C&0xFF000000)==0x50000000)?0x50000000:(((D&0xFF000000)==0x50000000)?0x50000000:(((A&0xFF000000)==0x00000000)?0x00000000:(((B&0xFF000000)==0x00000000)?0x00000000:(((C&0xFF000000)==0x00000000)?0x00000000:(((D&0xFF000000)==0x00000000)?0x00000000:0xFF000000)))))))))))
 
-static void Super2xSaI_ex8_Ex(unsigned char *srcPtr, DWORD srcPitch,
+void Super2xSaI_ex8_Ex(unsigned char *srcPtr, DWORD srcPitch,
 	            unsigned char  *dstBitmap, int width, int height)
 {
  DWORD dstPitch = srcPitch * 2;
@@ -3616,7 +3608,7 @@ static void Super2xSaI_ex8_Ex(unsigned char *srcPtr, DWORD srcPitch,
 }
 
 
-static void Super2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
+void Super2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
 	            unsigned char  *dstBitmap, int width, int height)
 {
  DWORD dstPitch = srcPitch * 2;
@@ -3770,7 +3762,7 @@ static void Super2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
 
 #define Q_INTERPOLATE4(A, B, C, D) ((((A & qcolorMask4) >> 2) + ((B & qcolorMask4) >> 2) + ((C & qcolorMask4) >> 2) + ((D & qcolorMask4) >> 2) + ((((A & qlowpixelMask4) + (B & qlowpixelMask4) + (C & qlowpixelMask4) + (D & qlowpixelMask4)) >> 2) & qlowpixelMask4))| ((((A&0x0000000F)==0x00000006)?0x00000006:(((B&0x0000000F)==0x00000006)?0x00000006:(((C&0x0000000F)==0x00000006)?0x00000006:(((D&0x0000000F)==0x00000006)?0x00000006:(((A&0x0000000F)==0x00000000)?0x00000000:(((B&0x0000000F)==0x00000000)?0x00000000:(((C&0x0000000F)==0x00000000)?0x00000000:(((D&0x0000000F)==0x00000000)?0x00000000:0x0000000F))))))))))
 
-static void Super2xSaI_ex4(unsigned char *srcPtr, DWORD srcPitch,
+void Super2xSaI_ex4(unsigned char *srcPtr, DWORD srcPitch,
 	            unsigned char  *dstBitmap, int width, int height)
 {
  DWORD dstPitch = srcPitch * 2;
@@ -3925,7 +3917,7 @@ static void Super2xSaI_ex4(unsigned char *srcPtr, DWORD srcPitch,
 
 #define Q_INTERPOLATE5(A, B, C, D) ((((A & qcolorMask5) >> 2) + ((B & qcolorMask5) >> 2) + ((C & qcolorMask5) >> 2) + ((D & qcolorMask5) >> 2) + ((((A & qlowpixelMask5) + (B & qlowpixelMask5) + (C & qlowpixelMask5) + (D & qlowpixelMask5)) >> 2) & qlowpixelMask5))| ((((A&0x00000001)==0x00000000)?0x00000000:(((B&0x00000001)==0x00000000)?0x00000000:(((C&0x00000001)==0x00000000)?0x00000000:(((D&0x00000001)==0x00000000)?0x00000000:0x00000001))))))
 
-static void Super2xSaI_ex5(unsigned char *srcPtr, DWORD srcPitch,
+void Super2xSaI_ex5(unsigned char *srcPtr, DWORD srcPitch,
 	            unsigned char  *dstBitmap, int width, int height)
 {
  DWORD dstPitch = srcPitch * 2;
@@ -4079,7 +4071,7 @@ static void Super2xSaI_ex5(unsigned char *srcPtr, DWORD srcPitch,
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-static void DefineSubTextureSortHiRes(void)
+void DefineSubTextureSortHiRes(void)
 {
  int x,y,dx2;
 
@@ -4220,7 +4212,7 @@ void DefineSubTextureSort(void)
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-static void DoTexGarbageCollection(void)
+void DoTexGarbageCollection(void)
 {
  static unsigned short LRUCleaned=0;
  unsigned short iC,iC1,iC2;
@@ -4574,7 +4566,7 @@ ENDLOOP:
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-static BOOL GetCompressTexturePlace(textureSubCacheEntryS * tsx)
+BOOL GetCompressTexturePlace(textureSubCacheEntryS * tsx)
 {
  int i,j,k,iMax,iC;uint32_t rx,ry,mx,my;
  EXLong * ul=0, * uls, rfree;
@@ -4709,7 +4701,7 @@ TENDLOOP:
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-static void CompressTextureSpace(void)
+void CompressTextureSpace(void)
 {
  textureSubCacheEntryS * tsx, * tsg, * tsb;
  int i,j,k,m,n,iMax;EXLong * ul, r,opos;

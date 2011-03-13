@@ -80,7 +80,7 @@ static inline void fillrow(int *blk, int val) {
 		= blk[4] = blk[5] = blk[6] = blk[7] = val;
 }
 
-static void idct(int *block,int used_col) {
+void idct(int *block,int used_col) {
 	int tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
 	int z5, z10, z11, z12, z13;
 	int *ptr;
@@ -263,7 +263,7 @@ static void iqtab_init(int *iqtab, unsigned char *iq_y) {
 
 #define	MDEC_END_OF_DATA	0xfe00
 
-static unsigned short *rl2blk(int *blk, unsigned short *mdec_rl) {
+unsigned short *rl2blk(int *blk, unsigned short *mdec_rl) {
 	int i, k, q_scale, rl, used_col;
  	int *iqtab;
 
@@ -324,7 +324,7 @@ static unsigned short *rl2blk(int *blk, unsigned short *mdec_rl) {
 #define CLAMP_SCALE8(a)   (CLAMP8(SCALE8(a)))
 #define CLAMP_SCALE5(a)   (CLAMP5(SCALE5(a)))
 
-static inline void putlinebw15(u16 *image, int *Yblk) {
+inline void putlinebw15(u16 *image, int *Yblk) {
 	int i;
 	int A = (mdec.reg0 & MDEC0_STP) ? 0x8000 : 0;
 
@@ -335,7 +335,7 @@ static inline void putlinebw15(u16 *image, int *Yblk) {
 	}
 }
 
-static inline void putquadrgb15(u16 *image, int *Yblk, int Cr, int Cb) {
+inline void putquadrgb15(u16 *image, int *Yblk, int Cr, int Cb) {
 	int Y, R, G, B;
 	int A = (mdec.reg0 & MDEC0_STP) ? 0x8000 : 0;
 	R = MULR(Cr);
@@ -353,7 +353,7 @@ static inline void putquadrgb15(u16 *image, int *Yblk, int Cr, int Cb) {
 	image[17] = MAKERGB15(CLAMP_SCALE5(Y + R), CLAMP_SCALE5(Y + G), CLAMP_SCALE5(Y + B), A);
 }
 
-static inline void yuv2rgb15(int *blk, unsigned short *image) {
+inline void yuv2rgb15(int *blk, unsigned short *image) {
 	int x, y;
 	int *Yblk = blk + DSIZE2 * 2;
 	int *Crblk = blk;
@@ -376,7 +376,7 @@ static inline void yuv2rgb15(int *blk, unsigned short *image) {
 	}
 }
 
-static inline void putlinebw24(u8 * image, int *Yblk) {
+inline void putlinebw24(u8 * image, int *Yblk) {
 	int i;
 	unsigned char Y;
 	for (i = 0; i < 8 * 3; i += 3, Yblk++) {
@@ -387,7 +387,7 @@ static inline void putlinebw24(u8 * image, int *Yblk) {
 	}
 }
 
-static inline void putquadrgb24(u8 * image, int *Yblk, int Cr, int Cb) {
+inline void putquadrgb24(u8 * image, int *Yblk, int Cr, int Cb) {
 	int Y, R, G, B;
 
 	R = MULR(Cr);

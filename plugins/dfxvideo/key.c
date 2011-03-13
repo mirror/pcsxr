@@ -22,7 +22,6 @@
 #include "gpu.h"
 #include "draw.h"
 #include "key.h"
-#include "psemu_plugin_defs.h"
 
 #define VK_INSERT      65379
 #define VK_HOME        65360

@@ -194,7 +194,7 @@ static void UpdateKeyList() {
 			total = DKEY_TOTAL - 3;
 		}
 
-		widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname[i]));
+		widget = gtk_builder_get_object(xml, widgetname[i]);
 
 		store = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
 
@@ -232,7 +232,7 @@ static void UpdateKey() {
 		index = GetSelectedKeyIndex(i);
 		if (index == -1) continue;
 
-		widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname[i]));
+		widget = gtk_builder_get_object(xml, widgetname[i]);
 		gtk_tree_selection_get_selected(gtk_tree_view_get_selection(GTK_TREE_VIEW(widget)), &model, &iter);
 
 		if (index < DKEY_TOTAL) {
@@ -273,7 +273,7 @@ static void TreeSelectionChanged(GtkTreeSelection *selection, gpointer user_data
 
 		// If a row was selected, and the row is not blank, we can now enable
 		// some of the disabled widgets
-		if ((int)(long)user_data == 0) {
+		if ((int)user_data == 0) {
 			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, "btnchange1")), TRUE);
 			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, "btnreset1")), TRUE);
 		} else {
@@ -281,7 +281,7 @@ static void TreeSelectionChanged(GtkTreeSelection *selection, gpointer user_data
 			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, "btnreset2")), TRUE);
 		}
 	} else {
-		if ((int)(long)user_data == 0) {
+		if ((int)user_data == 0) {
 			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, "btnchange1")), FALSE);
 			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, "btnreset1")), FALSE);
 		} else {
@@ -292,13 +292,13 @@ static void TreeSelectionChanged(GtkTreeSelection *selection, gpointer user_data
 }
 
 static void OnDeviceChanged(GtkWidget *widget, gpointer user_data) {
-	int n = (int)(long)user_data, current = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
+	int n = (int)user_data, current = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
 	current--;
 	g.cfg.PadDef[n].DevNum = current;
 }
 
 static void OnTypeChanged(GtkWidget *widget, gpointer user_data) {
-	int n = (int)(long)user_data, current = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
+	int n = (int)user_data, current = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
 	g.cfg.PadDef[n].Type = (current == 0 ? PSE_PAD_TYPE_STANDARD : PSE_PAD_TYPE_ANALOGPAD);
 
 	UpdateKeyList();
@@ -487,7 +487,7 @@ end:
 }
 
 static void OnChangeClicked(GtkWidget *widget, gpointer user_data) {
-	int pad = (int)(long)user_data;
+	int pad = (int)user_data;
 	int index = GetSelectedKeyIndex(pad);
 
 	if (index == -1) return;
@@ -503,7 +503,7 @@ static void OnChangeClicked(GtkWidget *widget, gpointer user_data) {
 }
 
 static void OnResetClicked(GtkWidget *widget, gpointer user_data) {
-	int pad = (int)(long)user_data;
+	int pad = (int)user_data;
 	int index = GetSelectedKeyIndex(pad);
 
 	if (index == -1) return;
@@ -532,7 +532,7 @@ static void PopulateDevList() {
 	char buf[256];
 
 	for (i = 0; i < 2; i++) {
-		widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname[i]));
+		widget = gtk_builder_get_object(xml, widgetname[i]);
 
 		renderer = gtk_cell_renderer_text_new();
 		gtk_cell_layout_pack_start(GTK_CELL_LAYOUT(widget), renderer, FALSE);
@@ -582,10 +582,10 @@ long PADconfigure() {
 		return -1;
 	}
 
-	MainWindow = GTK_WIDGET(gtk_builder_get_object(xml, "CfgWnd"));
+	MainWindow = gtk_builder_get_object(xml, "CfgWnd");
 	gtk_window_set_title(GTK_WINDOW(MainWindow), _("Gamepad/Keyboard Input Configuration"));
 
-	widget = GTK_WIDGET(gtk_builder_get_object(xml, "treeview1"));
+	widget = gtk_builder_get_object(xml, "treeview1");
 
 	// column for key
 	renderer = gtk_cell_renderer_text_new();
@@ -605,7 +605,7 @@ long PADconfigure() {
 	g_signal_connect_data(G_OBJECT(treesel), "changed",
 		G_CALLBACK(TreeSelectionChanged), (gpointer)0, NULL, G_CONNECT_AFTER);
 
-	widget = GTK_WIDGET(gtk_builder_get_object(xml, "treeview2"));
+	widget = gtk_builder_get_object(xml, "treeview2");
 
 	// column for key
 	renderer = gtk_cell_renderer_text_new();
@@ -625,58 +625,58 @@ long PADconfigure() {
 	g_signal_connect_data(G_OBJECT(treesel), "changed",
 		G_CALLBACK(TreeSelectionChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
 
-	widget = GTK_WIDGET(gtk_builder_get_object(xml, "CfgWnd"));
+	widget = gtk_builder_get_object(xml, "CfgWnd");
 	g_signal_connect_data(GTK_OBJECT(widget), "delete_event",
 		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = GTK_WIDGET(gtk_builder_get_object(xml, "btnclose"));
+	widget = gtk_builder_get_object(xml, "btnclose");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
 	PopulateDevList();
 	UpdateKeyList();
 
-	widget = GTK_WIDGET(gtk_builder_get_object(xml, "checkmt"));
+	widget = gtk_builder_get_object(xml, "checkmt");
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.Threaded);
 	g_signal_connect_data(GTK_OBJECT(widget), "toggled",
 		G_CALLBACK(OnThreadedToggled), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = GTK_WIDGET(gtk_builder_get_object(xml, "combodev1"));
+	widget = gtk_builder_get_object(xml, "combodev1");
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
 		G_CALLBACK(OnDeviceChanged), (gpointer)0, NULL, G_CONNECT_AFTER);
 
-	widget = GTK_WIDGET(gtk_builder_get_object(xml, "combodev2"));
+	widget = gtk_builder_get_object(xml, "combodev2");
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
 		G_CALLBACK(OnDeviceChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
 
-	widget = GTK_WIDGET(gtk_builder_get_object(xml, "combotype1"));
+	widget = gtk_builder_get_object(xml, "combotype1");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget),
 		g.cfg.PadDef[0].Type == PSE_PAD_TYPE_ANALOGPAD ? 1 : 0);
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
 		G_CALLBACK(OnTypeChanged), (gpointer)0, NULL, G_CONNECT_AFTER);
 
-	widget = GTK_WIDGET(gtk_builder_get_object(xml, "combotype2"));
+	widget = gtk_builder_get_object(xml, "combotype2");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget),
 		g.cfg.PadDef[1].Type == PSE_PAD_TYPE_ANALOGPAD ? 1 : 0);
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
 		G_CALLBACK(OnTypeChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
 
-	widget = GTK_WIDGET(gtk_builder_get_object(xml, "btnchange1"));
+	widget = gtk_builder_get_object(xml, "btnchange1");
 	gtk_widget_set_sensitive(widget, FALSE);
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 		G_CALLBACK(OnChangeClicked), (gpointer)0, NULL, G_CONNECT_AFTER);
 
-	widget = GTK_WIDGET(gtk_builder_get_object(xml, "btnreset1"));
+	widget = gtk_builder_get_object(xml, "btnreset1");
 	gtk_widget_set_sensitive(widget, FALSE);
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 		G_CALLBACK(OnResetClicked), (gpointer)0, NULL, G_CONNECT_AFTER);
 
-	widget = GTK_WIDGET(gtk_builder_get_object(xml, "btnchange2"));
+	widget = gtk_builder_get_object(xml, "btnchange2");
 	gtk_widget_set_sensitive(widget, FALSE);
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 		G_CALLBACK(OnChangeClicked), (gpointer)1, NULL, G_CONNECT_AFTER);
 
-	widget = GTK_WIDGET(gtk_builder_get_object(xml, "btnreset2"));
+	widget = gtk_builder_get_object(xml, "btnreset2");
 	gtk_widget_set_sensitive(widget, FALSE);
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 		G_CALLBACK(OnResetClicked), (gpointer)1, NULL, G_CONNECT_AFTER);

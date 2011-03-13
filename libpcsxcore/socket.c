@@ -190,7 +190,7 @@ int ReadSocket(char * buffer, int len) {
 }
 
 int RawReadSocket(char * buffer, int len) {
-    int r = 0;
+    int r;
     int mlen = len < ptr ? len : ptr;
 
     if (!client_socket)

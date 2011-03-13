@@ -24,7 +24,17 @@
 
 /******************************************************************************/
 
-#include "psemu_plugin_defs.h"
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#include <locale.h>
+#define  _(x) gettext(x)
+#define N_(x) (x)
+#else
+#define  _(x) (x)
+#define N_(x) (x)
+#endif
+
+#define CALLBACK
 
 extern Settings settings;
 

@@ -28,7 +28,6 @@
 
 #include "Linux.h"
 #include "../libpcsxcore/sio.h"
-#include "MemcardDlg.h"
 
 #if GTK_CHECK_VERSION(2, 20, 0) && !GTK_CHECK_VERSION(3, 0, 0)
 #include "gdk-compat.h"
@@ -329,7 +328,7 @@ static void UpdateListItems(int mcd, GtkWidget *widget) {
 
 	gtk_widget_show(List);
 
-	OnTreeSelectionChanged(gtk_tree_view_get_selection(GTK_TREE_VIEW(List)), (gpointer)(long)mcd);
+	OnTreeSelectionChanged(gtk_tree_view_get_selection(GTK_TREE_VIEW(List)), (gpointer)mcd);
 }
 
 static void UpdateMcdDlg(GtkWidget *widget) {
@@ -353,7 +352,7 @@ static void OnMcd_Close(GtkDialog *dialog, gint arg1, gpointer user_data) {
 }
 
 static void OnMcd_FileChange(GtkWidget *widget, gpointer user_data) {
-	gint memcard = (int)(long)user_data;
+	gint memcard = (int)user_data;
 	gchar *filename;
 	GtkWidget *chooser;
 
@@ -395,7 +394,7 @@ static void OnMcd_Format(GtkWidget *widget, gpointer user_data) {
 	gint result;
 	char *str;
 
-	gint memcard = (int)(long)user_data;
+	gint memcard = (int)user_data;
 
 	message_dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL,
 		GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
@@ -448,10 +447,10 @@ static void OnMcd_New(GtkWidget *widget, gpointer user_data) {
 
 		CreateMcd(name);
 
-		if ((int)(long)user_data == 1) strncpy(Config.Mcd1, name, MAXPATHLEN);
+		if ((int)user_data == 1) strncpy(Config.Mcd1, name, MAXPATHLEN);
 		else strncpy(Config.Mcd2, name, MAXPATHLEN);
 
-		LoadMcd((int)(long)user_data, name);
+		LoadMcd((int)user_data, name);
 		LoadMcdDlg(widget);
 
 		g_free(name);
@@ -505,7 +504,7 @@ static void CopyMemcardData(char *from, char *to, gint *i, gchar *str) {
 }
 
 static void OnMcd_CopyTo(GtkWidget *widget, gpointer user_data) {
-	gint mcd = (gint)(long)user_data;
+	gint mcd = (gint)user_data;
 
 	GtkTreeIter iter;
 	GtkTreeModel *model;
@@ -572,7 +571,7 @@ static void OnMemcardDelete(GtkWidget *widget, gpointer user_data) {
 	GtkWidget *tree;
 	GtkTreeSelection *sel;
 
-	gint memcard = (int)(long)user_data;
+	gint memcard = (int)user_data;
 
 	xml = glade_get_widget_tree(widget);
 
@@ -625,7 +624,7 @@ static void OnTreeSelectionChanged(GtkTreeSelection *selection, gpointer user_da
 	int i;
 	McdBlock b;
 
-	gint memcard = (int)(long)user_data;
+	gint memcard = (int)user_data;
 
 	xml = glade_get_widget_tree(GtkCList_McdList1);
 	selected = gtk_tree_selection_get_selected(selection, &model, &iter);
@@ -677,7 +676,7 @@ static void OnTreeSelectionChanged(GtkTreeSelection *selection, gpointer user_da
 	}
 }
 
-static gboolean updateFunc(gpointer data) {
+gboolean updateFunc(gpointer data) {
 	if (quit) return FALSE;
 	currentIcon++;
 	UpdateListItems(1, GtkCList_McdList1);

@@ -23,7 +23,37 @@
 // - psx gpu plugin interface prototypes-------------- //
 // --------------------------------------------------- //
 
-#include "psemu_plugin_defs.h"
+#ifdef _WINDOWS
+long CALLBACK GPUopen(HWND hwndGPU);
+#else
+long GPUopen(unsigned long * disp,const char * CapText,const char * CfgFile);
+#endif
+void CALLBACK GPUdisplayText(char * pText);
+void CALLBACK GPUdisplayFlags(uint32_t dwFlags);
+void CALLBACK GPUmakeSnapshot(void);
+long CALLBACK GPUinit();
+long CALLBACK GPUclose();
+long CALLBACK GPUshutdown();
+void CALLBACK GPUcursor(int iPlayer,int x,int y);
+void CALLBACK GPUupdateLace(void);
+uint32_t CALLBACK GPUreadStatus(void);
+void CALLBACK GPUwriteStatus(uint32_t gdata);
+void CALLBACK GPUreadDataMem(uint32_t * pMem, int iSize);
+uint32_t CALLBACK GPUreadData(void);
+void CALLBACK GPUwriteDataMem(uint32_t * pMem, int iSize);
+void CALLBACK GPUwriteData(uint32_t gdata);
+void CALLBACK GPUsetMode(uint32_t gdata);
+long CALLBACK GPUgetMode(void);
+long CALLBACK GPUdmaChain(uint32_t * baseAddrL, uint32_t addr);
+long CALLBACK GPUconfigure(void);
+void CALLBACK GPUabout(void);
+long CALLBACK GPUtest(void);
+long CALLBACK GPUfreeze(uint32_t ulGetFreezeData,void * pF);
+void CALLBACK GPUgetScreenPic(unsigned char * pMem);
+void CALLBACK GPUshowScreenPic(unsigned char * pMem);
+#ifndef _WINDOWS
+void CALLBACK GPUkeypressed(int keycode);
+#endif
 
 // --------------------------------------------------- // 
 // - zn gpu interface -------------------------------- // 
@@ -49,7 +79,6 @@ typedef struct GPUOTAG
   const char*    CfgFile;        // NULL terminated string
  } GPUConfiguration_t;
 
-#if 0 // ZN_* functions: wtf?  not supported by pcsx
 // --------------------------------------------------- // 
 // --------------------------------------------------- // 
 // --------------------------------------------------- // 
@@ -232,5 +261,4 @@ void CALLBACK ZN_GPUkeypressed(int keycode)
  GPUkeypressed(keycode);
 }
 
-#endif
 #endif

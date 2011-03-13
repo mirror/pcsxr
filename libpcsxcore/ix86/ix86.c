@@ -54,7 +54,7 @@ void x86SetJ32(u32 *j32) {
 
 void x86Align(int bytes) {
 	// fordward align
-	x86Ptr = (s8*)(((u32)x86Ptr + bytes - 1) & ~(bytes - 1));
+	x86Ptr = (s8*)(((u32)x86Ptr + bytes) & ~(bytes - 1));
 }
 
 #define SIB 4

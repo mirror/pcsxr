@@ -23,11 +23,20 @@
 #include "cfg.h"
 #include "dsoundoss.h"
 #include "regs.h"
-#include "spu.h"
 
 #ifdef _WINDOWS
 #include "debug.h"
 #include "record.h"
+#endif
+
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#include <locale.h>
+#define _(x)  gettext(x)
+#define N_(x) (x)
+#else
+#define _(x)  (x)
+#define N_(x) (x)
 #endif
 
 #if defined (_WINDOWS)
@@ -45,9 +54,8 @@ static char * libraryName     = N_("PulseAudio Sound");
 #else
 static char * libraryName     = N_("NULL Sound");
 #endif
-#if 0
+
 static char * libraryInfo     = N_("P.E.Op.S. Sound Driver V1.7\nCoded by Pete Bernert and the P.E.Op.S. team\n");
-#endif
 
 // globals
 
@@ -175,7 +183,7 @@ static int iSecureStart=0; // secure start counter
 //
 
 
-static INLINE void InterpolateUp(int ch)
+INLINE void InterpolateUp(int ch)
 {
  if(s_chan[ch].SB[32]==1)                              // flag == 1? calc step and set flag... and don't change the value in this pass
   {
@@ -223,7 +231,7 @@ static INLINE void InterpolateUp(int ch)
 // even easier interpolation on downsampling, also no special filter, again just "Pete's common sense" tm
 //
 
-static INLINE void InterpolateDown(int ch)
+INLINE void InterpolateDown(int ch)
 {
  if(s_chan[ch].sinc>=0x20000L)                                 // we would skip at least one val?
   {
@@ -249,7 +257,7 @@ static INLINE void InterpolateDown(int ch)
 // START SOUND... called by main thread to setup a new sound on a channel
 ////////////////////////////////////////////////////////////////////////
 
-static INLINE void StartSound(int ch)
+INLINE void StartSound(int ch)
 {
  StartADSR(ch);
  StartREVERB(ch);
@@ -279,7 +287,7 @@ static INLINE void StartSound(int ch)
 // ALL KIND OF HELPERS
 ////////////////////////////////////////////////////////////////////////
 
-static INLINE void VoiceChangeFrequency(int ch)
+INLINE void VoiceChangeFrequency(int ch)
 {
  s_chan[ch].iUsedFreq=s_chan[ch].iActFreq;             // -> take it and calc steps
  s_chan[ch].sinc=s_chan[ch].iRawPitch<<4;
@@ -289,7 +297,7 @@ static INLINE void VoiceChangeFrequency(int ch)
 
 ////////////////////////////////////////////////////////////////////////
 
-static INLINE void FModChangeFrequency(int ch,int ns)
+INLINE void FModChangeFrequency(int ch,int ns)
 {
  int NP=s_chan[ch].iRawPitch;
 
@@ -353,7 +361,7 @@ unsigned short NoiseFreqAdd[5] = {
 	0, 84, 140, 180, 210
 };
 
-static INLINE void NoiseClock()
+INLINE void NoiseClock()
 {
 	unsigned int level;
 
@@ -379,7 +387,7 @@ static INLINE void NoiseClock()
 	}
 }
 
-static INLINE int iGetNoiseVal(int ch)
+INLINE int iGetNoiseVal(int ch)
 {
  int fa;
 
@@ -400,7 +408,7 @@ static INLINE int iGetNoiseVal(int ch)
 
 ////////////////////////////////////////////////////////////////////////
 
-static INLINE void StoreInterpolationVal(int ch,int fa)
+INLINE void StoreInterpolationVal(int ch,int fa)
 {
 	/*
 	// fmod channel = sound output
@@ -438,7 +446,7 @@ static INLINE void StoreInterpolationVal(int ch,int fa)
 
 ////////////////////////////////////////////////////////////////////////
 
-static INLINE int iGetInterpolationVal(int ch)
+INLINE int iGetInterpolationVal(int ch)
 {
  int fa;
 
@@ -1004,7 +1012,7 @@ DWORD WINAPI MAINThreadEx(LPVOID lpParameter)
 //  1 time every 'cycle' cycles... harhar
 
 long cpu_cycles;
-void CALLBACK SPUasync(uint32_t cycle)
+void CALLBACK SPUasync(unsigned long cycle)
 {
 	cpu_cycles += cycle;
 
@@ -1057,12 +1065,10 @@ void CALLBACK SPUasync(uint32_t cycle)
 // leave that func in the linux port, until epsxe linux is using
 // the async function as well
 
-#if 0
 void CALLBACK SPUupdate(void)
 {
  SPUasync(0);
 }
-#endif
 
 // XA AUDIO
 
@@ -1152,7 +1158,7 @@ void RemoveTimer(void)
 }
 
 // SETUPSTREAMS: init most of the spu buffers
-static void SetupStreams(void)
+void SetupStreams(void)
 { 
  int i;
 
@@ -1195,7 +1201,7 @@ static void SetupStreams(void)
 }
 
 // REMOVESTREAMS: free most buffer
-static void RemoveStreams(void)
+void RemoveStreams(void)
 { 
  free(pSpuBuffer);                                     // free mixing buffer
  pSpuBuffer = NULL;
@@ -1349,12 +1355,10 @@ void CALLBACK SPUregisterCallback(void (CALLBACK *callback)(void))
  irqCallback = callback;
 }
 
-#if 0
 void CALLBACK SPUregisterCDDAVolume(void (CALLBACK *CDDAVcallback)(unsigned short,unsigned short))
 {
  cddavCallback = CDDAVcallback;
 }
-#endif
 
 // COMMON PLUGIN INFO FUNCS
 char * CALLBACK PSEgetLibName(void)
@@ -1372,9 +1376,7 @@ unsigned long CALLBACK PSEgetLibVersion(void)
  return (1 << 16) | (1 << 8);
 }
 
-#if 0
 char * SPUgetLibInfos(void)
 {
  return _(libraryInfo);
 }
-#endif

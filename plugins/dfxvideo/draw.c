@@ -63,6 +63,8 @@ int xv_vsync = 0;
 XShmSegmentInfo shminfo;
 int finalw,finalh;
 
+extern XvImage  *XvShmCreateImage(Display*, XvPortID, int, char*, int, int, XShmSegmentInfo*);
+
 #include <time.h>
 
 // prototypes
@@ -103,7 +105,7 @@ static __inline int GetResult2(DWORD A, DWORD B, DWORD C, DWORD D, DWORD E)
 }
 
 /* Convert RGB to YUV */
-static __inline uint32_t rgb_to_yuv(uint8_t R, uint8_t G, uint8_t B) {
+__inline uint32_t rgb_to_yuv(uint8_t R, uint8_t G, uint8_t B) {
     uint8_t Y = min(abs(R * 2104 + G * 4130 + B * 802 + 4096 + 131072) >> 13, 235);
     uint8_t U = min(abs(R * -1214 + G * -2384 + B * 3598 + 4096 + 1048576) >> 13, 240);
     uint8_t V = min(abs(R * 3598 + G * -3013 + B * -585 + 4096 + 1048576) >> 13, 240);
@@ -125,7 +127,7 @@ static __inline uint32_t rgb_to_yuv(uint8_t R, uint8_t G, uint8_t B) {
 	+ ((((A & qlowpixelMask8) + (B & qlowpixelMask8) + (C & qlowpixelMask8) + (D & qlowpixelMask8)) >> 2) & qlowpixelMask8))))
 
 
-static void Super2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
+void Super2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
 	            unsigned char  *dstBitmap, int width, int height)
 {
  DWORD dstPitch        = srcPitch<<1;
@@ -273,7 +275,7 @@ static void Super2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
 
 ////////////////////////////////////////////////////////////////////////
 
-static void Std2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
+void Std2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
                   unsigned char *dstBitmap, int width, int height)
 {
  DWORD dstPitch        = srcPitch<<1;
@@ -479,7 +481,7 @@ static void Std2xSaI_ex8(unsigned char *srcPtr, DWORD srcPitch,
 
 ////////////////////////////////////////////////////////////////////////
 
-static void SuperEagle_ex8(unsigned char *srcPtr, DWORD srcPitch,
+void SuperEagle_ex8(unsigned char *srcPtr, DWORD srcPitch,
 	                unsigned char  *dstBitmap, int width, int height)
 {
  DWORD dstPitch        = srcPitch<<1;
@@ -709,7 +711,7 @@ static __inline void scale2x_32_def_whole(uint32_t*  dst0, uint32_t* dst1, const
 	}
 }
 
-static void Scale2x_ex8(unsigned char *srcPtr, DWORD srcPitch,
+void Scale2x_ex8(unsigned char *srcPtr, DWORD srcPitch,
 				 unsigned char  *dstPtr, int width, int height)
 {
 	//const int srcpitch = srcPitch;
@@ -838,7 +840,7 @@ static __inline void scale3x_32_def_whole(uint32_t* dst0, uint32_t* dst1, uint32
 }
 
 
-static void Scale3x_ex8(unsigned char *srcPtr, DWORD srcPitch,
+void Scale3x_ex8(unsigned char *srcPtr, DWORD srcPitch,
 				 unsigned char  *dstPtr, int width, int height)
 {
 	int count = height;
@@ -935,7 +937,7 @@ static Atom xv_intern_atom_if_exists( Display *display, char const * atom_name )
 
 // close display
 
-static void DestroyDisplay(void)
+void DestroyDisplay(void)
 {
  if(display)
   {
@@ -977,7 +979,7 @@ int root_window_id=0;
 
 // Create display
 
-static void CreateDisplay(void)
+void CreateDisplay(void)
 {
  XSetWindowAttributes winattr;
  int                  myscreen;
@@ -1334,7 +1336,7 @@ shminfo.readOnly = 0;
 void (*p2XSaIFunc) (unsigned char *, DWORD, unsigned char *, int, int);
 unsigned char *pBackBuffer = 0;
 
-static void BlitScreen32(unsigned char *surf, int32_t x, int32_t y)
+void BlitScreen32(unsigned char *surf, int32_t x, int32_t y)
 {
  unsigned char *pD;
  unsigned int startxy;
@@ -1403,7 +1405,7 @@ static void BlitScreen32(unsigned char *surf, int32_t x, int32_t y)
 
 
 
-static void BlitToYUV(unsigned char * surf,int32_t x,int32_t y)
+void BlitToYUV(unsigned char * surf,int32_t x,int32_t y)
 {
  unsigned char * pD;
  unsigned int startxy;
@@ -1496,7 +1498,7 @@ static void BlitToYUV(unsigned char * surf,int32_t x,int32_t y)
 }
 
 //dst will have half the pitch (32bit to 16bit)
-static void RGB2YUV(uint32_t *s, int width, int height, uint32_t *d)
+void RGB2YUV(uint32_t *s, int width, int height, uint32_t *d)
 {
 	int x,y;
 	int R,G,B, Y1,Y2,U,V;
@@ -1529,11 +1531,13 @@ static void RGB2YUV(uint32_t *s, int width, int height, uint32_t *d)
 	}
 }
 
+extern time_t tStart;
+
 /* compute the position and the size of output screen
  * The aspect of the psx output mode is preserved.
  * Note: dest dx,dy,dw,dh are both input and output variables
  */
-static __inline void MaintainAspect(uint32_t * dx, uint32_t * dy, uint32_t * dw, uint32_t * dh)
+__inline void MaintainAspect(uint32_t * dx, uint32_t * dy, uint32_t * dw, uint32_t * dh)
 {
 
 	double ratio_x = ((double)*dw) / ((double)PSXDisplay.DisplayMode.x) ;
@@ -1669,7 +1673,7 @@ void DoClearFrontBuffer(void)                          // CLEAR DX BUFFER
  XSync(display,False);*/
 }
 
-static int Xinitialize()
+int Xinitialize()
 {
    iDesktopCol=32;
 
@@ -1735,7 +1739,7 @@ static int Xinitialize()
  return 0;
 }
 
-static void Xcleanup()                                        // X CLEANUP
+void Xcleanup()                                        // X CLEANUP
 {
  CloseMenu();
 
