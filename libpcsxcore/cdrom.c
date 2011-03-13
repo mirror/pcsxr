@@ -115,7 +115,8 @@ unsigned char Test23[] = { 0x43, 0x58, 0x44, 0x32, 0x39 ,0x34, 0x30, 0x51 };
 #define STATUS_ROTATING  (1<<1) // 0x02
 #define STATUS_ERROR     (1<<0) // 0x01
 
-
+#define XA_ATTENUATE 0
+#define CDDA_ATTENUATE 1
 
 // 1x = 75 sectors per second
 // PSXCLK = 1 sec in the ps
@@ -480,7 +481,7 @@ static void ReadTrack( u8 *time ) {
 }
 
 
-static void CDXA_Attenuation( s16 *buf, int size, int stereo )
+static CDXA_Attenuation( s16 *buf, int size, int stereo, int attenuate_type )
 {
 	s16 *spsound;
 	s32 lc,rc;
@@ -508,8 +509,14 @@ static void CDXA_Attenuation( s16 *buf, int size, int stereo )
 
 	for( i = 0; i < size / 2; i += 2 )
 	{
-		lc = (spsound[i+0] * cdr.AttenuatorLeft[0]  + spsound[i+1] * cdr.AttenuatorRight[1]) / 128;
-		rc = (spsound[i+1] * cdr.AttenuatorRight[0] + spsound[i+0] * cdr.AttenuatorLeft[1]) / 128;
+		// Chronicles of the Sword - cutscene (xa), speech (cdda)
+		if( attenuate_type == XA_ATTENUATE ) {
+			lc = (spsound[i+0] * cdr.AttenuatorLeft[0]  + spsound[i+1] * cdr.AttenuatorLeft[1]) / 128;
+			rc = (spsound[i+1] * cdr.AttenuatorRight[0] + spsound[i+0] * cdr.AttenuatorRight[1]) / 128;
+		} else if( attenuate_type == CDDA_ATTENUATE ) {
+			lc = (spsound[i+0] * cdr.AttenuatorLeft[0]  + spsound[i+1] * cdr.AttenuatorRight[1]) / 128;
+			rc = (spsound[i+1] * cdr.AttenuatorRight[0] + spsound[i+0] * cdr.AttenuatorLeft[1]) / 128;
+		}
 
 		if( lc < -32768 ) lc = -32768;
 		if( rc < -32768 ) rc = -32768;
@@ -887,8 +894,8 @@ void cdrPlayInterrupt()
 
 	if( CDR_readCDDA ) {
 		CDR_readCDDA( cdr.SetSectorPlay[0], cdr.SetSectorPlay[1], cdr.SetSectorPlay[2], cdr.Transfer );
-		
-		CDXA_Attenuation( (short *) cdr.Transfer, 2352, 1 );
+
+		CDXA_Attenuation( (short *) cdr.Transfer, 2352, 1, CDDA_ATTENUATE );
 	}
 
 
@@ -991,6 +998,8 @@ void cdrInterrupt() {
 			Find_CurTrack();
 			ReadTrack( cdr.SetSectorPlay );
 
+            // Chronicles of the Sword - getlocp timing
+            Create_Fake_Subq();
 
 			// GameShark CD Player: Calls 2x + Play 2x
 			if( cdr.FastBackward || cdr.FastForward ) {
@@ -1613,9 +1622,9 @@ void cdrReadInterrupt() {
 				// Duke Nukem - Time to Kill - speech, music volume control
 				// Tekken 3 - post-match fade out
 				if( cdr.Xa.stereo == 0 )
-					CDXA_Attenuation( cdr.Xa.pcm, cdr.Xa.nsamples * 2, cdr.Xa.stereo );
+					CDXA_Attenuation( cdr.Xa.pcm, cdr.Xa.nsamples * 2, cdr.Xa.stereo, XA_ATTENUATE );
 				else
-					CDXA_Attenuation( cdr.Xa.pcm, cdr.Xa.nsamples * 4, cdr.Xa.stereo );
+					CDXA_Attenuation( cdr.Xa.pcm, cdr.Xa.nsamples * 4, cdr.Xa.stereo, XA_ATTENUATE );
 
 
 				// fix mono xa attenuation

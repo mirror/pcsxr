@@ -710,6 +710,10 @@ void sioWrite8(unsigned char value) {
 			return;
 		case 0x81: // start memcard
 			StatReg |= RX_RDY;
+#if 0
+			// Chronicles of the Sword - no memcard = password options
+			if( Config.Memcard == 1 ) return;
+#endif
 			memcpy(buf, cardh, 4);
 			parp = 0;
 			bufcount = 3;
