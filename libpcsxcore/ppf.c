@@ -191,6 +191,8 @@ void BuildPPFCache() {
 
 	FreePPFCache();
 
+    if (CdromId[0] == '\0') return;
+
 	// Generate filename in the format of SLUS_123.45
 	buffer[0] = toupper(CdromId[0]);
 	buffer[1] = toupper(CdromId[1]);
@@ -338,6 +340,8 @@ static u8 sbitime[256][3], sbicount;
 void LoadSBI() {
 	FILE *sbihandle;
 	char buffer[16], sbifile[MAXPATHLEN];
+
+    if (CdromId[0] == '\0') return;
 
 	// Generate filename in the format of SLUS_123.45.sbi
 	buffer[0] = toupper(CdromId[0]);
