@@ -70,6 +70,8 @@ INLINE void MixXA(void)
  int decoded_xa;
  int decoded_cdda;
 
+ decoded_xa = decoded_ptr;
+
  lc = 0;
  rc = 0;
 
@@ -87,11 +89,11 @@ INLINE void MixXA(void)
 	 lastxa_lc = lc;
 	 lastxa_rc = rc;
 
-/*
+
 	 // Tales of Phantasia - voice meter
 	 spuMem[ (decoded_xa + 0x000)/2 ] = (short) lc;
 	 spuMem[ (decoded_xa + 0x400)/2 ] = (short) rc;
-*/
+
 	 decoded_xa += 2;
 	 if( decoded_xa >= 0x400 )
 		 decoded_xa = 0;
@@ -124,11 +126,11 @@ INLINE void MixXA(void)
 		 lc = lastxa_lc;
 		 rc = lastxa_rc;
 
-/*
+
 		 // Tales of Phantasia - voice meter
 		 spuMem[ (decoded_xa + 0x000)/2 ] = (short) lc;
 		 spuMem[ (decoded_xa + 0x400)/2 ] = (short) rc;
-*/
+
 		 decoded_xa += 2;
 		 if( decoded_xa >= 0x400 )
 			 decoded_xa = 0;
@@ -170,11 +172,11 @@ INLINE void MixXA(void)
 	 lastcd_lc = lc;
 	 lastcd_rc = rc;
 
-/*
+
 	 // Vib Ribbon - playback
 	 spuMem[ (decoded_cdda + 0x000)/2 ] = (short) lc;
 	 spuMem[ (decoded_cdda + 0x400)/2 ] = (short) rc;
-*/
+
 	 decoded_cdda += 2;
 	 if( decoded_cdda >= 0x400 )
 		 decoded_cdda = 0;
@@ -209,11 +211,11 @@ INLINE void MixXA(void)
 		 lc = lastcd_lc;
 		 rc = lastcd_rc;
 
-/*
+
 		 // Vib Ribbon - playback
 		 spuMem[ (decoded_cdda + 0x000)/2 ] = (short) lc;
 		 spuMem[ (decoded_cdda + 0x400)/2 ] = (short) rc;
-*/
+
 		 decoded_cdda += 2;
 		 if( decoded_cdda >= 0x400 )
 			 decoded_cdda = 0;
