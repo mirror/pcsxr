@@ -18,7 +18,7 @@
 #include <stdint.h>
 
 // 15-bit value + 1-sign
-int CLAMP16(x) {
+int CLAMP16(int x) {
 	if(x > 32767) x = 32767;
 	else if(x < -32768) x = -32768;
 
