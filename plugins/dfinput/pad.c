@@ -17,6 +17,11 @@
  */
 
 #include "pad.h"
+#if !SDL_VERSION_ATLEAST(1,3,0) && defined(__linux__)
+#include <linux/input.h>
+#include <sys/file.h>
+#include <time.h>
+#endif
 
 static void (*gpuVisualVibration)(uint32_t, uint32_t) = NULL;
 
@@ -81,6 +86,12 @@ long PADopen(unsigned long *Disp) {
 		} else if (SDL_Init(SDL_INIT_JOYSTICK | SDL_INIT_NOPARACHUTE) == -1) {
 			return PSE_PAD_ERR_FAILURE;
 		}
+ 
+#if SDL_VERSION_ATLEAST(1,3,0)
+    has_haptic = 0;
+    if (SDL_InitSubSystem(SDL_INIT_HAPTIC) == 0)
+      has_haptic = 1;
+#endif
 
 		InitSDLJoy();
 		InitKeyboard();
@@ -193,6 +204,152 @@ static uint8_t stdmodel[2][8] = {
 	 0x01,
 	 0x00}
 };
+ 
+#if !SDL_VERSION_ATLEAST(1,3,0) && defined(__linux__)
+/* lifted from SDL; but it's GPL as well */
+/* added ffbit, though */
+#define test_bit(nr, addr) \
+	(((1UL << ((nr) % (sizeof(long) * 8))) & ((addr)[(nr) / (sizeof(long) * 8)])) != 0)
+#define NBITS(x) ((((x)-1)/(sizeof(long) * 8))+1)
+static int EV_IsJoystick(int fd)
+{
+	unsigned long evbit[NBITS(EV_MAX)] = { 0 };
+	unsigned long keybit[NBITS(KEY_MAX)] = { 0 };
+	unsigned long absbit[NBITS(ABS_MAX)] = { 0 };
+	unsigned long ffbit[NBITS(FF_MAX)] = { 0 };
+
+	if ( (ioctl(fd, EVIOCGBIT(0, sizeof(evbit)), evbit) < 0) ||
+	     (ioctl(fd, EVIOCGBIT(EV_KEY, sizeof(keybit)), keybit) < 0) ||
+	     (ioctl(fd, EVIOCGBIT(EV_ABS, sizeof(absbit)), absbit) < 0) ) {
+		return(0);
+	}
+	if (!(test_bit(EV_KEY, evbit) && test_bit(EV_ABS, evbit) &&
+	      test_bit(ABS_X, absbit) && test_bit(ABS_Y, absbit) &&
+	     (test_bit(BTN_TRIGGER, keybit) || test_bit(BTN_A, keybit) || test_bit(BTN_1, keybit)))) return 0;
+	if ( (ioctl(fd, EVIOCGBIT(EV_FF, sizeof(ffbit)), ffbit) < 0) ||
+	     !test_bit(FF_RUMBLE, ffbit) )
+		return(1);
+	return(2);
+}
+
+static void linux_set_vibrate(int pad)
+{
+	int jno = 0, devno, dev;
+	const char *sdlj;
+	int tjno = g.cfg.PadDef[pad].DevNum;
+
+	g.PadState[pad].VibrateDev = -2;
+	/* simulate SDL device opening; probably not very accurate */
+	/* works for me, though */
+	sdlj = getenv("SDL_JOYSTICK_DEVICE");
+	if(sdlj) {
+		dev = open(sdlj, O_RDONLY);
+		if(dev >= 0) {
+			if(!tjno) {
+				close(dev);
+				dev = open(sdlj, O_RDWR);
+				if(dev < 0) {
+					printf("%s has no permission to rumble\n", sdlj);
+					return;
+				}
+				if(EV_IsJoystick(dev) != 2) {
+					printf("%s has no rumble\n", sdlj);
+					close(dev);
+					return;
+				}
+				g.PadState[pad].VibrateDev = dev;
+				return;
+			}
+			close(dev);
+			jno++;
+		} else
+			perror(sdlj);
+	}
+	for(devno = 0; devno < 32; devno++) {
+		char buf[20];
+
+		sprintf(buf, "/dev/input/event%d", devno);
+		dev = open(buf, O_RDONLY);
+		if(dev >= 0) {
+			int isj = EV_IsJoystick(dev);
+			if(isj) {
+				if(tjno == jno) {
+					close(dev);
+					if(isj != 2) {
+						printf("%s has no rumble\n", buf);
+						return;
+					}
+					dev = open(buf, O_RDWR);
+					if(dev < 0) {
+						printf("%s has no permission to rumble\n", buf);
+						return;
+					}
+					g.PadState[pad].VibrateDev = dev;
+					return;
+				}
+				jno++;
+			}
+			close(dev);
+		}
+	}
+}
+
+static int linux_vibrate(PADSTATE *pad)
+{
+	struct ff_effect ffe = { 0 };
+	struct input_event ev = { { 0 } };
+	struct timespec t;
+	uint32_t stime;
+
+	if(pad->VibrateDev < 0)
+		return 0;
+	ev.type = EV_FF;
+	if(!pad->VibF[0] && !pad->VibF[1] && pad->VibrateEffect < 0) {
+		return 1;
+	}
+	clock_gettime(CLOCK_REALTIME, &t);
+	stime = (uint32_t)(t.tv_sec * 1000 + t.tv_nsec / 1000000);
+	if(pad->VibrateEffect >= 0 &&
+	   pad->VibrLow == pad->VibF[0] && pad->VibrHigh == pad->VibF[1]) {
+		if(stime - pad->VibrSetTime < 300)
+			return 1;
+	}
+	if(pad->VibrateEffect < 0 || pad->VibrLow != pad->VibF[0] ||
+	   pad->VibrHigh != pad->VibF[1]) {
+		if(pad->VibrateEffect >= 0) {
+			ev.code = pad->VibrateEffect;
+			ev.value = 0;
+			if(write(pad->VibrateDev, &ev, sizeof(ev)) < 0)
+				perror("ev write");
+		}
+		ffe.type = FF_RUMBLE;
+		ffe.id = pad->VibrateEffect;
+		/* DG says refresh 1/vsync = 166, but add for delays/etc. */
+		ffe.replay.length = 500;
+		ffe.replay.delay = 0;
+		ffe.u.rumble.strong_magnitude = pad->VibF[1] * 256;
+		ffe.u.rumble.weak_magnitude = pad->VibF[0] * 256;
+		pad->VibrLow = pad->VibF[0];
+		pad->VibrHigh = pad->VibF[1];
+		if(ioctl(pad->VibrateDev, EVIOCSFF,&ffe) < 0) {
+			perror("SFF ioctl");
+			close(pad->VibrateDev);
+			pad->VibrateDev = -2;
+			return 0;
+		}
+	}
+	pad->VibrSetTime = stime;
+	ev.code = pad->VibrateEffect = ffe.id;
+	ev.value = 1;
+	if(write(pad->VibrateDev, &ev, sizeof(ev)) != sizeof(ev)) {
+		close(pad->VibrateDev);
+		pad->VibrateDev = -2;
+		perror("ev write");
+		return 0;
+	}
+	return 1;
+}
+#endif
 
 static uint8_t CurPad = 0, CurByte = 0, CurCmd = 0, CmdLen = 0;
 
@@ -287,16 +444,34 @@ unsigned char PADpoll(unsigned char value) {
 				if (CurByte == g.PadState[CurPad].Vib0) {
 					g.PadState[CurPad].VibF[0] = value;
 
-					if (gpuVisualVibration != NULL && (g.PadState[CurPad].VibF[0] != 0 || g.PadState[CurPad].VibF[1] != 0)) {
-						gpuVisualVibration(g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]);
+					if (g.PadState[CurPad].VibF[0] != 0 || g.PadState[CurPad].VibF[1] != 0) {
+#if !SDL_VERSION_ATLEAST(1,3,0) && defined(__linux__)
+					if (g.PadState[CurPad].VibrateDev == -1 &&
+					    g.PadState[CurPad].JoyDev != NULL) {
+						linux_set_vibrate(CurPad);
+					}
+					if (!linux_vibrate(&g.PadState[CurPad]))
+							/* only do visual if joy fails */
+#endif
+            if (!JoyHapticRumble(CurPad, g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]) && gpuVisualVibration != NULL)
+						  gpuVisualVibration(g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]);
 					}
 				}
 
 				if (CurByte == g.PadState[CurPad].Vib1) {
 					g.PadState[CurPad].VibF[1] = value;
 
-					if (gpuVisualVibration != NULL && (g.PadState[CurPad].VibF[0] != 0 || g.PadState[CurPad].VibF[1] != 0)) {
-						gpuVisualVibration(g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]);
+					if (g.PadState[CurPad].VibF[0] != 0 || g.PadState[CurPad].VibF[1] != 0) {
+#if !SDL_VERSION_ATLEAST(1,3,0) && defined(__linux__)
+					if (g.PadState[CurPad].VibrateDev == -1 &&
+					    g.PadState[CurPad].JoyDev != NULL) {
+						linux_set_vibrate(CurPad);
+					}
+					if (!linux_vibrate(&g.PadState[CurPad]))
+							/* only do visual if joy fails */
+#endif
+            if (!JoyHapticRumble(CurPad, g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]) && gpuVisualVibration != NULL)
+						  gpuVisualVibration(g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]);
 					}
 				}
 			}

@@ -18,6 +18,70 @@
 
 #include "pad.h"
 
+#if SDL_VERSION_ATLEAST(1,3,0)
+static SDL_HapticEffect haptic_rumbleEffect;
+#endif
+
+void JoyInitHaptic()
+{
+#if SDL_VERSION_ATLEAST(1,3,0)
+  uint8_t i;
+  unsigned int haptic_query = 0;
+  for (i = 0; i < 2; i++)
+  {
+    if (g.PadState[i].JoyDev && SDL_JoystickIsHaptic(g.PadState[i].JoyDev))
+    {
+      if (g.PadState[i].haptic != NULL)
+      {
+        SDL_HapticClose(g.PadState[i].haptic);
+        g.PadState[i].haptic = NULL;
+      }
+
+      g.PadState[i].haptic = SDL_HapticOpenFromJoystick(g.PadState[i].JoyDev);
+      if (g.PadState[i].haptic == NULL)
+        continue;
+
+      if (SDL_HapticRumbleSupported(g.PadState[i].haptic) == SDL_FALSE)
+      {
+        printf("\nRumble not supported\n");
+        g.PadState[i].haptic = NULL;
+        continue;
+      }
+
+      if (SDL_HapticRumbleInit(g.PadState[i].haptic) != 0)
+      {
+        printf("\nFailed to initialize rumble: %s\n", SDL_GetError());
+        g.PadState[i].haptic = NULL;
+        continue;
+      }
+    }
+  }
+#endif
+}
+
+int JoyHapticRumble(int pad, uint32_t low, uint32_t high)
+{
+#if SDL_VERSION_ATLEAST(1,3,0)
+  float mag;
+
+  if (g.PadState[pad].haptic) {
+
+    /* Stop the effect if it was playing. */
+    SDL_HapticRumbleStop(g.PadState[pad].haptic);
+
+    mag = ((high * 2 + low) / 6) / 127.5;
+    //printf("low: %d high: %d mag: %f\n", low, high, mag);
+
+    if(SDL_HapticRumblePlay(g.PadState[pad].haptic, mag, 500) != 0)
+    {
+      printf("\nFailed to play rumble: %s\n", SDL_GetError());
+      return 1;
+    }
+  }
+#endif
+  return 0;
+}
+
 void InitSDLJoy() {
 	uint8_t				i;
 
@@ -30,7 +94,18 @@ void InitSDLJoy() {
 		} else {
 			g.PadState[i].JoyDev = NULL;
 		}
+#if !SDL_VERSION_ATLEAST(1,3,0) && defined(__linux__)
+		g.PadState[i].VibrateDev = -1;
+		g.PadState[i].VibrateEffect = -1;
+#endif
 	}
+
+#if SDL_VERSION_ATLEAST(1,3,0)
+  if (has_haptic)
+  {
+    JoyInitHaptic();
+  }
+#endif
 
 	SDL_JoystickEventState(SDL_IGNORE);
 
@@ -43,6 +118,13 @@ void DestroySDLJoy() {
 	if (SDL_WasInit(SDL_INIT_JOYSTICK)) {
 		for (i = 0; i < 2; i++) {
 			if (g.PadState[i].JoyDev != NULL) {
+#if SDL_VERSION_ATLEAST(1,3,0)
+        if (g.PadState[i].haptic != NULL)
+        {
+          SDL_HapticClose(g.PadState[i].haptic);
+          g.PadState[i].haptic = NULL;
+        }
+#endif
 				SDL_JoystickClose(g.PadState[i].JoyDev);
 			}
 		}

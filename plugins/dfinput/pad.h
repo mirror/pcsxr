@@ -36,6 +36,9 @@ extern "C" {
 
 #include <SDL.h>
 #include <SDL_joystick.h>
+#if SDL_VERSION_ATLEAST(1,3,0)
+#include <SDL_haptic.h>
+#endif
 
 #ifdef _MACOSX
 #include <Carbon/Carbon.h>
@@ -59,6 +62,11 @@ typedef void *Display;
 #define _(x)  (x)
 #define N_(x) (x)
 #endif
+ 
+#if SDL_VERSION_ATLEAST(1,3,0)
+int has_haptic;
+#endif
+int JoyHapticRumble(int pad, uint32_t low, uint32_t high);
 
 enum {
 	DKEY_SELECT = 0,
@@ -128,6 +136,16 @@ typedef struct tagPadState {
 	volatile uint8_t	AnalogKeyStatus[ANALOG_TOTAL][4];
 	uint8_t				Vib0, Vib1;
 	volatile uint8_t	VibF[2];
+#if SDL_VERSION_ATLEAST(1,3,0)
+  SDL_Haptic      *haptic;
+#else
+#ifdef __linux__
+	int			VibrateDev;
+	int			VibrateEffect;
+	uint8_t			VibrLow, VibrHigh;
+	uint32_t		VibrSetTime;
+#endif
+#endif
 } PADSTATE;
 
 typedef struct tagGlobalData {
