@@ -31,6 +31,12 @@
 #define min(a,b)            (((a) < (b)) ? (a) : (b))
 #endif
 
+
+
+// 15-bit value + 1-sign
+extern int CLAMP16(x);
+
+
 ////////////////////////////////////////////////////////////////////////
 // spu defines
 ////////////////////////////////////////////////////////////////////////
@@ -160,7 +166,7 @@ typedef struct
  int               iUsedFreq;                          // current pc pitch
  int               iLeftVolume;                        // left volume
  int               iLeftVolRaw;                        // left psx volume value
- int               bIgnoreLoop;                        // ignore loop bit, if an external loop address is used
+ int               bLoopJump;													 // ignore loop bit, if an external loop address is used
  int               iMute;                              // mute mode (debug)
  int               iSilent;                            // voice on - sound on/off
  int               iRightVolume;                       // right volume
@@ -277,6 +283,7 @@ extern int      bEndThread;
 extern int      bThreadEnded;
 extern int      bSpuInit;
 extern uint32_t dwNewChannel;
+extern int bIrqHit;
 
 extern int      SSumR[];
 extern int      SSumL[];
@@ -289,6 +296,7 @@ extern HWND    hWDebug;
 #endif
 
 extern void (CALLBACK *cddavCallback)(unsigned short,unsigned short);
+extern void (CALLBACK *irqCallback)(void);                  // func of main emu, called on spu irq
 
 #endif
 

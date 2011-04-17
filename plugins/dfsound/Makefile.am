@@ -5,7 +5,7 @@ libdir = @libdir@/games/psemu/
 
 lib_LTLIBRARIES = libDFSound.la
 
-libDFSound_la_SOURCES = spu.c cfg.c dma.c freeze.c registers.c
+libDFSound_la_SOURCES = spu.c cfg.c dma.c freeze.c registers.c externals.c
 
 libDFSound_la_CPPFLAGS = $(AM_CPPFLAGS)
 libDFSound_la_LDFLAGS = -module -avoid-version 

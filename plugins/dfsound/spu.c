@@ -91,6 +91,9 @@ unsigned long   dwNoiseCount;                          // global noise generator
 unsigned long   dwNoiseClock;                          // global noise generator
 int             iSpuAsyncWait=0;
 
+int							decoded_ptr = 0;
+int							bIrqHit = 0;
+
 unsigned short  spuCtrl=0;                             // some vars to store psx reg infos
 unsigned short  spuStat=0;
 unsigned short  spuIrq=0;
@@ -532,6 +535,7 @@ static void *MAINThread(void *arg)
  unsigned char * start;unsigned int nSample;
  int ch,predict_nr,shift_factor,flags,d,s;
  int bIRQReturn=0;
+ int decoded_voice;
 
  // mute output
  if( voldiv == 5 ) voldiv = 0x7fffffff;
@@ -587,8 +591,21 @@ static void *MAINThread(void *arg)
    //--------------------------------------------------//
     {
      ns=0;
-     while(ns<NSSIZE)                                // loop until 1 ms of data is reached
+		 decoded_voice = decoded_ptr;
+
+		 while(ns<NSSIZE)                                // loop until 1 ms of data is reached
       {
+				SSumL[ns]=0;
+				SSumR[ns]=0;
+
+
+				// decoded buffer values - dummy
+				spuMem[ (0x000 + decoded_voice) / 2 ] = (short) 0;
+				spuMem[ (0x400 + decoded_voice) / 2 ] = (short) 0;
+				spuMem[ (0x800 + decoded_voice) / 2 ] = (short) 0;
+				spuMem[ (0xc00 + decoded_voice) / 2 ] = (short) 0;
+
+				
 				NoiseClock();
 
 				for(ch=0;ch<MAXCHAN;ch++)                         // loop em all... we will collect 1 ms of sound of each playing channel
@@ -618,13 +635,11 @@ static void *MAINThread(void *arg)
           {
            if(s_chan[ch].iSBPos==28)                   // 28 reached?
             {
-#if 0
 						 // Xenogears - Anima Relic dungeon (exp gain)
 						 if( s_chan[ch].bLoopJump == 1 )
 							 s_chan[ch].pCurr = s_chan[ch].pLoop;
 
 						 s_chan[ch].bLoopJump = 0;
-#endif
 
              
 						 start=s_chan[ch].pCurr;                   // set up the current pos
@@ -651,6 +666,9 @@ static void *MAINThread(void *arg)
              predict_nr >>= 4;
              flags=(int)*start;start++;
 
+						 // Silhouette Mirage - Serah fight
+						 if( predict_nr > 4 ) predict_nr = 0;
+
              // -------------------------------------- // 
 
              for (nSample=0;nSample<28;start++)      
@@ -661,14 +679,23 @@ static void *MAINThread(void *arg)
 
                fa=(s >> shift_factor);
                fa=fa + ((s_1 * f[predict_nr][0])>>6) + ((s_2 * f[predict_nr][1])>>6);
+
+							 // snes brr clamps
+							 fa = CLAMP16(fa);
+
                s_2=s_1;s_1=fa;
                s=((d & 0xf0) << 8);
 
                s_chan[ch].SB[nSample++]=fa;
 
+
                if(s&0x8000) s|=0xffff0000;
                fa=(s>>shift_factor);
                fa=fa + ((s_1 * f[predict_nr][0])>>6) + ((s_2 * f[predict_nr][1])>>6);
+
+							 // snes brr clamps
+							 fa = CLAMP16(fa);
+
                s_2=s_1;s_1=fa;
 
                s_chan[ch].SB[nSample++]=fa;
@@ -676,6 +703,12 @@ static void *MAINThread(void *arg)
 
              //////////////////////////////////////////// irq check
 
+#if 1
+						// ?? (-8)
+						if( Check_IRQ( (start-spuMemC)-8, 0 ) ||
+								Check_IRQ( (start-spuMemC)-0, 0 ) )
+						{
+#else
              if(irqCallback && (spuCtrl&0x40))         // some callback and irq active?
               {
                if((pSpuIrq >  start-16 &&              // irq address reached?
@@ -683,6 +716,7 @@ static void *MAINThread(void *arg)
                   ((flags&1) &&                        // special: irq on looping addr, when stop/loop flag is set 
                    (pSpuIrq >  s_chan[ch].pLoop-16 &&
                     pSpuIrq <= s_chan[ch].pLoop)))
+#endif
                {
                  s_chan[ch].iIrqDone=1;                // -> debug flag
                  irqCallback();                        // -> call main emu
@@ -706,15 +740,9 @@ static void *MAINThread(void *arg)
 						silence means no volume (ADSR keeps playing!!)
 						*/
 
-#if 0
 						if(flags&4)
 							s_chan[ch].pLoop=start-16;
-#else
-						// Jungle Book - Rhythm 'n Groove - use external loop address
-						// - fixes music player (+IRQ generate)
-						if((flags&4) && (s_chan[ch].bIgnoreLoop == 0))
-							s_chan[ch].pLoop=start-16;
-#endif
+
 
 						// Jungle Book - Rhythm 'n Groove - don't reset ignore status
 						// - fixes gameplay speed (IRQ hits)
@@ -727,12 +755,9 @@ static void *MAINThread(void *arg)
 							//s_chan[ch].bIgnoreLoop = 0;
 
 							// Xenogears - 7 = play missing sounds
-#if 0
 							// set jump flag
-							pChannel->bLoopJump = 1;
-#else
-							start = s_chan[ch].pLoop;
-#endif
+							s_chan[ch].bLoopJump = 1;
+
 
 							// silence = keep playing..?
 							if( (flags&2) == 0 ) {
@@ -752,6 +777,18 @@ static void *MAINThread(void *arg)
 						if( start >= spuMemC + 0x80000 )
 							start = spuMemC - 0x80000;
 #endif
+
+
+						// Silhouette Mirage - ending mini-game
+
+						// ??
+						if( start - spuMemC >= 0x80000 ) {
+							start -= 16;
+
+							s_chan[ch].iSilent = 1;
+							s_chan[ch].bStop = 1;
+						}
+
 
              s_chan[ch].pCurr=start;                   // store values for next cycle
              s_chan[ch].s_1=s_1;
@@ -800,14 +837,12 @@ GOON: ;
          else fa=iGetInterpolationVal(ch);             // get sample val
 
 
-#if 0
 				 // Voice 1/3 decoded buffer
 				 if( ch == 0 ) {
-					 spuMem[ (0x800 + voice_dbuf_ptr) / 2 ] = (short) fa;
+					 spuMem[ (0x800 + decoded_voice) / 2 ] = (short) fa;
 				 } else if( ch == 2 ) {
-					 spuMem[ (0xc00 + voice_dbuf_ptr) / 2 ] = (short) fa;
+					 spuMem[ (0xc00 + decoded_voice) / 2 ] = (short) fa;
 				 }
-#endif
 
 
          s_chan[ch].sval = (MixADSR(ch) * fa) / 1023;  // mix adsr
@@ -837,12 +872,55 @@ GOON: ;
 
 				 s_chan[ch].spos += s_chan[ch].sinc;
         }
+
         ////////////////////////////////////////////////
         // ok, go on until 1 ms data of this channel is collected
+
+				// decoded buffer - voice
+				decoded_voice += 2;
+				if( decoded_voice >= 0x400 ) {
+					decoded_voice = 0;
+				}
+
+
+				// status flag
+				if( decoded_voice >= 0x200 ) {
+					spuStat |= STAT_DECODED;
+				} else {
+					spuStat &= ~STAT_DECODED;
+				}
+
+
+				// IRQ work
+				{
+					unsigned char *old_irq;
+					int old_ptr;
+
+					old_irq = pSpuIrq;
+					old_ptr = decoded_voice;
+
+
+#if 0
+					// align to boundaries ($0, $200, $400, $600)
+					pSpuIrq = ((pSpuIrq - spuMemC) & (~0x1ff)) + spuMemC;
+					decoded_voice = decoded_voice & (~0x1ff);
+#endif
+					
+					// check all decoded buffer IRQs - timing issue
+					Check_IRQ( decoded_voice + 0x000, 0 );
+					Check_IRQ( decoded_voice + 0x400, 0 );
+					Check_IRQ( decoded_voice + 0x800, 0 );
+					Check_IRQ( decoded_voice + 0xc00, 0 );
+
+					pSpuIrq = old_irq;
+					decoded_voice = old_ptr;
+				}
+
 
         ns++;
       } // end ns
     }
+
 
   //---------------------------------------------------//
   //- here we have another 1 ms of sound data
@@ -851,6 +929,12 @@ GOON: ;
 
   MixXA();
   
+
+	// now safe to update deocded buffer ptr
+	decoded_ptr += ns * 2;
+	if( decoded_ptr >= 0x400 ) decoded_ptr -= 0x400;
+
+
   ///////////////////////////////////////////////////////
   // mix all channels (including reverb) into one buffer
 
@@ -948,6 +1032,7 @@ GOON: ;
   // an IRQ. Only problem: the "wait for cpu" option is kinda hard to do here
   // in some of Peops timer modes. So: we ignore this option here (for now).
 
+#if 0
   if(pMixIrq && irqCallback)
    {
     for(ns=0;ns<NSSIZE;ns++)
@@ -963,6 +1048,7 @@ GOON: ;
       pMixIrq+=2;if(pMixIrq>spuMemC+0x3ff) pMixIrq=spuMemC;
      }
    }
+#endif
 
   InitREVERB();
 

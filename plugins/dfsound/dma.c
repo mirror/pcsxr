@@ -20,6 +20,7 @@
 #define _IN_DMA
 
 #include "externals.h"
+#include "registers.h"
 
 ////////////////////////////////////////////////////////////////////////
 // READ DMA (one value)
@@ -44,25 +45,26 @@ void CALLBACK SPUreadDMAMem(unsigned short * pusPSXMem,int iSize)
 {
  int i;
 
+ spuStat |= STAT_DATA_BUSY;
+
  for(i=0;i<iSize;i++)
   {
-#if 0
-		if(irqCallback && (spuCtrl&0x40))         // some callback and irq active?
-		{
-			// SPU2-X
-			if(pSpuIrq == spuMemC+spuAddr) {
-				irqCallback();                        // -> call main emu
-			}
-		}
-#endif
+	 Check_IRQ( spuAddr, 0 );
 
 		
 	 *pusPSXMem++=spuMem[spuAddr>>1];                    // spu addr got by writeregister
    spuAddr+=2;                                         // inc spu addr
-   if(spuAddr>0x7ffff) spuAddr=0;                      // wrap
+
+	 // guess based on Vib Ribbon (below)
+   if(spuAddr>0x7ffff) break;
   }
 
  iSpuAsyncWait=0;
+
+ spuStat &= ~STAT_DATA_BUSY;
+ spuStat &= ~STAT_DMA_NON;
+ spuStat &= ~STAT_DMA_W;
+ spuStat |= STAT_DMA_R;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -95,24 +97,26 @@ void CALLBACK SPUwriteDMAMem(unsigned short * pusPSXMem,int iSize)
 {
  int i;
 
+ spuStat |= STAT_DATA_BUSY;
+
  for(i=0;i<iSize;i++)
   {
-#if 0
-		if(irqCallback && (spuCtrl&0x40))         // some callback and irq active?
-		{
-			// SPU2-X
-			if(pSpuIrq == spuMemC+spuAddr) {
-				irqCallback();                        // -> call main emu
-			}
-		}
-#endif
+	 Check_IRQ( spuAddr, 0 );
 
 	 spuMem[spuAddr>>1] = *pusPSXMem++;                  // spu addr got by writeregister
    spuAddr+=2;                                         // inc spu addr
-   if(spuAddr>0x7ffff) spuAddr=0;                      // wrap
+
+	 // Vib Ribbon - stop transfer (reverb playback)
+   if(spuAddr>0x7ffff) break;
   }
  
  iSpuAsyncWait=0;
+
+
+ spuStat &= ~STAT_DATA_BUSY;
+ spuStat &= ~STAT_DMA_NON;
+ spuStat &= ~STAT_DMA_R;
+ spuStat |= STAT_DMA_W;
 }
 
 ////////////////////////////////////////////////////////////////////////

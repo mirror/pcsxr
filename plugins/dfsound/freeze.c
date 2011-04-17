@@ -43,8 +43,8 @@ typedef struct
  unsigned short  spuIrq;
  uint32_t   pSpuIrq;
  uint32_t   spuAddr;
- uint32_t   dummy1;
- uint32_t   dummy2;
+ uint32_t   bIrqHit;
+ uint32_t   decoded_ptr;
  uint32_t   dummy3;
 
  SPUCHAN  s_chan[MAXCHAN];   

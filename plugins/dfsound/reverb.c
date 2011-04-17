@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include "stdafx.h"
+#include "registers.h"
 
 #define _IN_REVERB
 
@@ -92,6 +93,24 @@ INLINE void InitREVERB(void)
 ////////////////////////////////////////////////////////////////////////
 // STORE REVERB
 ////////////////////////////////////////////////////////////////////////
+
+INLINE void StoreREVERB_CD(int left, int right,int ns)
+{
+ if(iUseReverb==0) return;
+ else
+ if(iUseReverb==2) // -------------------------------- // Neil's reverb
+  {
+   const int iRxl=left;
+   const int iRxr=right;
+
+   ns<<=1;
+
+   // -> we mix all active reverb channels into an extra buffer
+	 *(sRVBStart+ns)   += CLAMP16( *(sRVBStart+ns+0) + ( iRxl ) );
+   *(sRVBStart+ns+1) += CLAMP16( *(sRVBStart+ns+1) + ( iRxr ) );
+  }
+}
+ 
 
 INLINE void StoreREVERB(int ch,int ns)
 {
@@ -241,8 +260,19 @@ INLINE int MixREVERBLeft(int ns)
       }
      else                                              // -> reverb off
       {
-       rvb.iLastRVBLeft=rvb.iLastRVBRight=rvb.iRVBLeft=rvb.iRVBRight=0;
+			 // Vib Ribbon - grab current reverb sample (cdda data)
+			 // - mono data
+
+			 rvb.iRVBLeft = (short) spuMem[ rvb.CurrAddr ];
+			 rvb.iRVBRight = rvb.iRVBLeft;
+			 rvb.iLastRVBLeft  = (rvb.iRVBLeft  * rvb.VolLeft)  / 0x4000;
+			 rvb.iLastRVBRight = (rvb.iRVBRight * rvb.VolRight) / 0x4000;
+
+			 //rvb.iLastRVBLeft=rvb.iLastRVBRight=rvb.iRVBLeft=rvb.iRVBRight=0;
       }
+
+
+		 Check_IRQ( rvb.CurrAddr*2, 0 );
 
      rvb.CurrAddr++;
      if(rvb.CurrAddr>0x3ffff) rvb.CurrAddr=rvb.StartAddr;
@@ -267,9 +297,16 @@ INLINE int MixREVERBRight(void)
  else
  if(iUseReverb==2)                                     // Neill's reverb:
   {
-   int i=rvb.iLastRVBRight+(rvb.iRVBRight-rvb.iLastRVBRight)/2;
-   rvb.iLastRVBRight=rvb.iRVBRight;
-   return i;                                           // -> just return the last right reverb val (little bit scaled by the previous right val)
+	 // Vib Ribbon - reverb always on (!), reverb write flag
+   if(spuCtrl & CTRL_REVERB)                         // -> reverb on? oki
+	 {
+		 int i=rvb.iLastRVBRight+(rvb.iRVBRight-rvb.iLastRVBRight)/2;
+		 rvb.iLastRVBRight=rvb.iRVBRight;
+		 return i;                                           // -> just return the last right reverb val (little bit scaled by the previous right val)
+	 } else {
+		 // Vib Ribbon - return reverb buffer (cdda data)
+		 return CLAMP16(rvb.iLastRVBRight);
+	 }
   }
  else                                                  // easy fake reverb:
   {

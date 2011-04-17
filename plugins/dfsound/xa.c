@@ -67,6 +67,8 @@ INLINE void MixXA(void)
  int ns;
  int lc,rc;
  unsigned long cdda_l;
+ int decoded_xa;
+ int decoded_cdda;
 
  lc = 0;
  rc = 0;
@@ -79,13 +81,6 @@ INLINE void MixXA(void)
 	 lc = (short)(XALastVal&0xffff);
 	 rc = (short)((XALastVal>>16) & 0xffff);
 
-	 if( lc < -32768 ) lc = -32768;
-	 if( rc < -32768 ) rc = -32768;
-	 if( lc > 32767 ) lc = 32767;
-	 if( rc > 32767 ) rc = 32767;
-
-	 SSumL[ns]+=lc;
-	 SSumR[ns]+=rc;
 
 	 // improve crackle - buffer under
 	 // - not update fast enough
@@ -93,33 +88,73 @@ INLINE void MixXA(void)
 	 lastxa_rc = rc;
 
 
-#if 0
-	 if( cdxa_dbuf_ptr >= 0x400 )
-		 cdxa_dbuf_ptr = 0;
-	 spuMem[ (cdxa_dbuf_ptr + 0)/2 ] = lc;
-	 spuMem[ (cdxa_dbuf_ptr + 0x400)/2 ] = rc;
-	 cdxa_dbuf_ptr += 2;
-#endif
-  }
+	 // Tales of Phantasia - voice meter
+	 spuMem[ (decoded_xa + 0x000)/2 ] = (short) lc;
+	 spuMem[ (decoded_xa + 0x400)/2 ] = (short) rc;
+
+	 decoded_xa += 2;
+	 if( decoded_xa >= 0x400 )
+		 decoded_xa = 0;
+
+ 
+	 lc = CLAMP16( (lc * iLeftXAVol) / 0x8000 );
+	 rc = CLAMP16( (rc * iRightXAVol) / 0x8000 );
+
+
+	 // reverb write flag
+	 if( spuCtrl & CTRL_CD_REVERB ) {
+		StoreREVERB_CD( lc, rc, ns );
+	 }
+
+
+	 // play flag
+	 if( spuCtrl & CTRL_CD_PLAY ) {
+		 SSumL[ns]+=lc;
+		 SSumR[ns]+=rc;
+	 }
+ }
 
  if(XAPlay==XAFeed && XARepeat)
   {
    //XARepeat--;
    for(;ns<NSSIZE;ns++)
     {
-		 SSumL[ns]+=lastxa_rc;
-		 SSumR[ns]+=lastxa_rc;
+		 // improve crackle - buffer under
+		 // - not update fast enough
+		 lc = lastxa_lc;
+		 rc = lastxa_rc;
 
-#if 0
+
 		 // Tales of Phantasia - voice meter
-		 if( cdxa_dbuf_ptr >= 0x400 )
-			 cdxa_dbuf_ptr = 0;
-		 spuMem[ (cdxa_dbuf_ptr + 0)/2 ] = lastxa_rc;
-		 spuMem[ (cdxa_dbuf_ptr + 0x400)/2 ] = lastxa_rc;
-		 cdxa_dbuf_ptr += 2;
-#endif
+		 spuMem[ (decoded_xa + 0x000)/2 ] = (short) lc;
+		 spuMem[ (decoded_xa + 0x400)/2 ] = (short) rc;
+
+		 decoded_xa += 2;
+		 if( decoded_xa >= 0x400 )
+			 decoded_xa = 0;
+
+
+		 lc = CLAMP16( (lc * iLeftXAVol) / 0x8000 );
+		 rc = CLAMP16( (rc * iRightXAVol) / 0x8000 );
+
+
+		 // reverb write flags
+		 if( spuCtrl & CTRL_CD_REVERB ) {
+			StoreREVERB_CD( lc, rc, ns );
+		 }
+
+
+		 // play flag
+		 if( spuCtrl & CTRL_CD_PLAY ) {
+			 SSumL[ns]+=lc;
+			 SSumR[ns]+=rc;
+		 }
     }
   }
+
+
+
+ decoded_cdda = decoded_ptr;
 
  for(ns=0;ns<NSSIZE && CDDAPlay!=CDDAFeed && (CDDAPlay!=CDDAEnd-1||CDDAFeed!=CDDAStart);ns++)
   {
@@ -129,27 +164,38 @@ INLINE void MixXA(void)
 	 lc = (short)(cdda_l&0xffff);
 	 rc = (short)((cdda_l>>16) & 0xffff);
 
-	 if( lc < -32768 ) lc = -32768;
-	 if( rc < -32768 ) rc = -32768;
-	 if( lc > 32767 ) lc = 32767;
-	 if( rc > 32767 ) rc = 32767;
-
-	 SSumL[ns]+=lc;
-	 SSumR[ns]+=rc;
-
-#if 0
-	 // Vib Ribbon - playback
-	 if( cdxa_dbuf_ptr >= 0x400 )
-		 cdxa_dbuf_ptr = 0;
-		 spuMem[ (cdxa_dbuf_ptr + 0)/2 ] = lc;
-		 spuMem[ (cdxa_dbuf_ptr + 0x400)/2 ] = rc;
-	 cdxa_dbuf_ptr += 2;
-#endif
 
 	 // improve crackle - buffer under
 	 // - not update fast enough
 	 lastcd_lc = lc;
 	 lastcd_rc = rc;
+
+
+	 // Vib Ribbon - playback
+	 spuMem[ (decoded_cdda + 0x000)/2 ] = (short) lc;
+	 spuMem[ (decoded_cdda + 0x400)/2 ] = (short) rc;
+
+	 decoded_cdda += 2;
+	 if( decoded_cdda >= 0x400 )
+		 decoded_cdda = 0;
+
+
+	 // Rayman - stage end fadeout
+	 lc = CLAMP16( (lc * iLeftXAVol) / 0x8000 );
+	 rc = CLAMP16( (rc * iRightXAVol) / 0x8000 );
+
+
+	 // reverb write flag
+	 if( spuCtrl & CTRL_CD_REVERB ) {
+		StoreREVERB_CD( lc, rc, ns );
+	 }
+
+
+	 // play flag
+	 if( spuCtrl & CTRL_CD_PLAY ) {
+		 SSumL[ns]+=lc;
+		 SSumR[ns]+=rc;
+	 }
 	}
 
 
@@ -158,18 +204,38 @@ INLINE void MixXA(void)
    //XARepeat--;
    for(;ns<NSSIZE;ns++)
     {
-#if 0
-	 // Vib Ribbon - playback
-	 if( cdxa_dbuf_ptr >= 0x400 )
-		 cdxa_dbuf_ptr = 0;
-		 spuMem[ (cdxa_dbuf_ptr + 0)/2 ] = lastcd_lc;
-		 spuMem[ (cdxa_dbuf_ptr + 0x400)/2 ] = lastcd_rc;
-	 cdxa_dbuf_ptr += 2;
-#endif
+		 // improve crackle - buffer under
+		 // - not update fast enough
+		 lc = lastcd_lc;
+		 rc = lastcd_rc;
 
-		 SSumL[ns]+=lastcd_lc;
-		 SSumR[ns]+=lastcd_rc;
-    }
+
+		 // Vib Ribbon - playback
+		 spuMem[ (decoded_cdda + 0x000)/2 ] = (short) lc;
+		 spuMem[ (decoded_cdda + 0x400)/2 ] = (short) rc;
+
+		 decoded_cdda += 2;
+		 if( decoded_cdda >= 0x400 )
+			 decoded_cdda = 0;
+
+
+		 // Rayman - stage end fadeout
+		 lc = CLAMP16( (lc * iLeftXAVol) / 0x8000 );
+		 rc = CLAMP16( (rc * iRightXAVol) / 0x8000 );
+
+
+		 // reverb write flag
+		 if( spuCtrl & CTRL_CD_REVERB ) {
+			StoreREVERB_CD( lc, rc, ns );
+		 }
+
+
+		 // play flag
+		 if( spuCtrl & CTRL_CD_PLAY ) {
+			 SSumL[ns]+=lc;
+			 SSumR[ns]+=rc;
+		 }
+	 }
   }
 }
 
@@ -194,7 +260,7 @@ unsigned long timeGetTime_spu()
 
 INLINE void FeedXA(xa_decode_t *xap)
 {
- int sinc,spos,i,iSize,iPlace,vl,vr;
+ int sinc,spos,i,iSize,iPlace;
 
  if(!bSPUIsOpen) return;
 
