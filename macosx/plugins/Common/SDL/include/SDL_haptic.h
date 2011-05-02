@@ -1,23 +1,22 @@
 /*
-    SDL - Simple DirectMedia Layer
-    Copyright (C) 2008 Edgar Simo
+  Simple DirectMedia Layer
+  Copyright (C) 1997-2011 Sam Lantinga <slouken@libsdl.org>
 
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
+  This software is provided 'as-is', without any express or implied
+  warranty.  In no event will the authors be held liable for any damages
+  arising from the use of this software.
 
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
+  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the following restrictions:
 
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Sam Lantinga
-    slouken@libsdl.org
+  1. The origin of this software must not be misrepresented; you must not
+     claim that you wrote the original software. If you use this software
+     in a product, an acknowledgment in the product documentation would be
+     appreciated but is not required.
+  2. Altered source versions must be plainly marked as such, and must not be
+     misrepresented as being the original software.
+  3. This notice may not be removed or altered from any source distribution.
 */
 
 /**
@@ -25,7 +24,7 @@
  *  
  *  \brief The SDL Haptic subsystem allows you to control haptic (force feedback)
  *         devices.
- *  
+ * 
  *  The basic usage is as follows:
  *   - Initialize the Subsystem (::SDL_INIT_HAPTIC).
  *   - Open a Haptic Device.
@@ -37,7 +36,29 @@
  *   - (optional) Free the effect with SDL_HapticDestroyEffect().
  *   - Close the haptic device with SDL_HapticClose().
  *
- * \par Example:
+ * \par Simple rumble example:
+ * \code
+ *    SDL_Haptic *haptic;
+ *
+ *    // Open the device
+ *    haptic = SDL_HapticOpen( 0 );
+ *    if (haptic == NULL)
+ *       return -1;
+ *
+ *    // Initialize simple rumble
+ *    if (SDL_HapticRumbleInit( haptic ) != 0)
+ *       return -1;
+ *
+ *    // Play effect at 50% strength for 2 seconds
+ *    if (SDL_HapticRumblePlay( haptic, 0.5, 2000 ) != 0)
+ *       return -1;
+ *    SDL_Delay( 2000 );
+ *
+ *    // Clean up
+ *    SDL_HapticClose( haptic );
+ * \endcode
+ *
+ * \par Complete example:
  * \code
  * int test_haptic( SDL_Joystick * joystick ) {
  *    SDL_Haptic *haptic;
@@ -81,6 +102,10 @@
  *    return 0; // Success
  * }
  * \endcode
+ *
+ * You can also find out more information on my blog:
+ * http://bobbens.dyndns.org/journal/2010/sdl_haptic/
+ *
  * \author Edgar Simo Serra
  */
 
@@ -929,7 +954,7 @@ extern DECLSPEC int SDLCALL SDL_HapticNumAxes(SDL_Haptic * haptic);
  *  
  *  \param haptic Haptic device to check on.
  *  \param effect Effect to check to see if it is supported.
- *  \return 1 if effect is supported, 0 if it isn't or -1 on error.
+ *  \return SDL_TRUE if effect is supported, SDL_FALSE if it isn't or -1 on error.
  *  
  *  \sa SDL_HapticQuery
  *  \sa SDL_HapticNewEffect
@@ -1108,6 +1133,58 @@ extern DECLSPEC int SDLCALL SDL_HapticUnpause(SDL_Haptic * haptic);
  *  \return 0 on success or -1 on error.
  */
 extern DECLSPEC int SDLCALL SDL_HapticStopAll(SDL_Haptic * haptic);
+
+/**
+ *  \brief Checks to see if rumble is supported on a haptic device..
+ *
+ *  \param haptic Haptic device to check to see if it supports rumble.
+ *  \return SDL_TRUE if effect is supported, SDL_FALSE if it isn't or -1 on error.
+ *
+ *  \sa SDL_HapticRumbleInit
+ *  \sa SDL_HapticRumblePlay
+ *  \sa SDL_HapticRumbleStop
+ */
+extern DECLSPEC int SDLCALL SDL_HapticRumbleSupported(SDL_Haptic * haptic);
+
+/**
+ *  \brief Initializes the haptic device for simple rumble playback.
+ *
+ *  \param haptic Haptic device to initialize for simple rumble playback.
+ *  \return 0 on success or -1 on error.
+ *
+ *  \sa SDL_HapticOpen
+ *  \sa SDL_HapticRumbleSupported
+ *  \sa SDL_HapticRumblePlay
+ *  \sa SDL_HapticRumbleStop
+ */
+extern DECLSPEC int SDLCALL SDL_HapticRumbleInit(SDL_Haptic * haptic);
+
+/**
+ *  \brief Runs simple rumble on a haptic device
+ *
+ *  \param haptic Haptic device to play rumble effect on.
+ *  \param strength Strength of the rumble to play as a 0-1 float value.
+ *  \param length Length of the rumble to play in miliseconds.
+ *  \return 0 on success or -1 on error.
+ *
+ *  \sa SDL_HapticRumbleSupported
+ *  \sa SDL_HapticRumbleInit
+ *  \sa SDL_HapticRumbleStop
+ */
+extern DECLSPEC int SDLCALL SDL_HapticRumblePlay(SDL_Haptic * haptic, float strength, Uint32 length );
+
+/**
+ *  \brief Stops the simple rumble on a haptic device.
+ *
+ *  \param haptic Haptic to stop the rumble on.
+ *  \return 0 on success or -1 on error.
+ *
+ *  \sa SDL_HapticRumbleSupported
+ *  \sa SDL_HapticRumbleInit
+ *  \sa SDL_HapticRumblePlay
+ */
+extern DECLSPEC int SDLCALL SDL_HapticRumbleStop(SDL_Haptic * haptic);
+
 
 
 /* Ends C function definitions when using C++ */

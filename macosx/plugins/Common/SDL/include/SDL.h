@@ -84,6 +84,7 @@
 #include "SDL_mutex.h"
 #include "SDL_rwops.h"
 #include "SDL_thread.h"
+#include "SDL_version.h"
 
 #ifndef SDL_IGNORE
 #define SDL_IGNORE 0
