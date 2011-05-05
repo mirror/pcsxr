@@ -98,7 +98,7 @@ void verboseLog( s32 level, const char *str, ... )
         char buf[ 4096 ];
 
         va_start( va, str );
-        vsprintf( buf, str, va );
+        vsnprintf( buf, sizeof(buf), str, va );
         va_end( va );
 
         printf( buf );
