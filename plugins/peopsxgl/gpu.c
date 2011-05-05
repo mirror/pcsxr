@@ -854,7 +854,7 @@ void sysdep_create_display(void)                       // create display
   }
 
  // pffff... much work for a simple blank cursor... oh, well...
- if(!bFullScreen) cursor=XCreateFontCursor(display,XC_trek);
+ if(!bFullScreen) cursor=XCreateFontCursor(display,XC_left_ptr);
  else
   {
    Pixmap p1,p2;XImage * img;
@@ -902,7 +902,12 @@ void sysdep_create_display(void)                       // create display
  winattr.backing_store=NotUseful;
  winattr.override_redirect=False;
  winattr.save_under=False;
- winattr.event_mask=0;
+ winattr.event_mask=ExposureMask |
+                    VisibilityChangeMask |
+                    FocusChangeMask |
+                    KeyPressMask | KeyReleaseMask |
+                    ButtonPressMask | ButtonReleaseMask |
+                    PointerMotionMask;
  winattr.do_not_propagate_mask=0;
  winattr.colormap=colormap;
  winattr.cursor=None;
@@ -914,7 +919,7 @@ void sysdep_create_display(void)                       // create display
              InputOutput,myvisual->visual,
              CWBorderPixel | CWBackPixel |
              CWEventMask | CWDontPropagate |
-             CWColormap | CWCursor,
+             CWColormap | CWCursor | CWEventMask,
              &winattr);
 
  if(!window)                                           // no window?
@@ -953,10 +958,6 @@ void sysdep_create_display(void)                       // create display
    XChangeProperty(display,window,mwmatom,mwmatom,32,
                    PropModeReplace,(unsigned char *)&mwmhints,4);
   }
-
- XSelectInput(display,window,                          // input setup
-              FocusChangeMask | ExposureMask |
-              KeyPressMask | KeyReleaseMask);
 
  XMapRaised(display,window);
  XClearWindow(display,window);

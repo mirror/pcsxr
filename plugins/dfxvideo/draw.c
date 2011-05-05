@@ -1142,7 +1142,7 @@ if (!myvisual)
   }
 
  // pffff... much work for a simple blank cursor... oh, well...
- if(iWindowMode) cursor=XCreateFontCursor(display,XC_trek);
+ if(iWindowMode) cursor=XCreateFontCursor(display,XC_left_ptr);
  else
   {
    Pixmap p1,p2;
@@ -1192,7 +1192,12 @@ if (!myvisual)
 
  winattr.override_redirect=False;
  winattr.save_under=False;
- winattr.event_mask=0;
+ winattr.event_mask=ExposureMask |
+                    VisibilityChangeMask |
+                    FocusChangeMask |
+                    KeyPressMask | KeyReleaseMask |
+                    ButtonPressMask | ButtonReleaseMask |
+                    PointerMotionMask;
  winattr.do_not_propagate_mask=0;
  winattr.colormap=colormap;
  winattr.cursor=None;
@@ -1203,7 +1208,7 @@ if (!myvisual)
                       InputOutput,myvisual->visual,
                       CWBorderPixel | CWBackPixel |
                       CWEventMask | CWDontPropagate |
-                      CWColormap | CWCursor,
+                      CWColormap | CWCursor | CWEventMask,
                       &winattr);
 
  if(!window)
@@ -1240,13 +1245,6 @@ if (!myvisual)
    XChangeProperty(display,window,mwmatom,mwmatom,32,
                    PropModeReplace,(unsigned char *)&mwmhints,4);
   }
-
- // key stuff
- XSelectInput(display,
-              window,
-              FocusChangeMask | ExposureMask |
-              KeyPressMask | KeyReleaseMask
-             );
 
  XMapRaised(display,window);
  XClearWindow(display,window);
