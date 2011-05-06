@@ -157,7 +157,7 @@ u8 psxMemRead8(u32 mem) {
 		p = (char *)(psxMemRLUT[t]);
 		if (p != NULL) {
 			if (Config.Debug)
-				DebugCheckBP((mem & 0xffffff) | 0x80000000, R1);
+				DebugCheckBP((mem & 0xffffff) | 0x80000000, BR1);
 			return *(u8 *)(p + (mem & 0xffff));
 		} else {
 #ifdef PSXMEM_LOG
@@ -186,7 +186,7 @@ u16 psxMemRead16(u32 mem) {
 		p = (char *)(psxMemRLUT[t]);
 		if (p != NULL) {
 			if (Config.Debug)
-				DebugCheckBP((mem & 0xffffff) | 0x80000000, R2);
+				DebugCheckBP((mem & 0xffffff) | 0x80000000, BR2);
 			return SWAPu16(*(u16 *)(p + (mem & 0xffff)));
 		} else {
 #ifdef PSXMEM_LOG
@@ -215,7 +215,7 @@ u32 psxMemRead32(u32 mem) {
 		p = (char *)(psxMemRLUT[t]);
 		if (p != NULL) {
 			if (Config.Debug)
-				DebugCheckBP((mem & 0xffffff) | 0x80000000, R4);
+				DebugCheckBP((mem & 0xffffff) | 0x80000000, BR4);
 			return SWAPu32(*(u32 *)(p + (mem & 0xffff)));
 		} else {
 #ifdef PSXMEM_LOG
@@ -244,7 +244,7 @@ void psxMemWrite8(u32 mem, u8 value) {
 		p = (char *)(psxMemWLUT[t]);
 		if (p != NULL) {
 			if (Config.Debug)
-				DebugCheckBP((mem & 0xffffff) | 0x80000000, W1);
+				DebugCheckBP((mem & 0xffffff) | 0x80000000, BW1);
 			*(u8 *)(p + (mem & 0xffff)) = value;
 #ifdef PSXREC
 			psxCpu->Clear((mem & (~3)), 1);
@@ -275,7 +275,7 @@ void psxMemWrite16(u32 mem, u16 value) {
 		p = (char *)(psxMemWLUT[t]);
 		if (p != NULL) {
 			if (Config.Debug)
-				DebugCheckBP((mem & 0xffffff) | 0x80000000, W2);
+				DebugCheckBP((mem & 0xffffff) | 0x80000000, BW2);
 			*(u16 *)(p + (mem & 0xffff)) = SWAPu16(value);
 #ifdef PSXREC
 			psxCpu->Clear((mem & (~3)), 1);
@@ -307,7 +307,7 @@ void psxMemWrite32(u32 mem, u32 value) {
 		p = (char *)(psxMemWLUT[t]);
 		if (p != NULL) {
 			if (Config.Debug)
-				DebugCheckBP((mem & 0xffffff) | 0x80000000, W4);
+				DebugCheckBP((mem & 0xffffff) | 0x80000000, BW4);
 			*(u32 *)(p + (mem & 0xffff)) = SWAPu32(value);
 #ifdef PSXREC
 			psxCpu->Clear(mem, 1);

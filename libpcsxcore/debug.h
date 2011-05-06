@@ -25,7 +25,7 @@ extern "C" {
 #endif
 
 enum breakpoint_types {
-	E, R1, R2, R4, W1, W2, W4
+	BE, BR1, BR2, BR4, BW1, BW2, BW4
 };
 
 void StartDebugger();
