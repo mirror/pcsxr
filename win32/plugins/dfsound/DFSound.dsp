@@ -165,6 +165,10 @@ SOURCE=..\..\..\plugins\dfsound\externals.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\..\plugins\dfsound\externals.c
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\plugins\dfsound\freeze.c
 # End Source File
 # Begin Source File

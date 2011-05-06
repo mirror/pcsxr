@@ -420,6 +420,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\plugins\dfsound\externals.c"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\plugins\dfsound\externals.h"
 				>
 			</File>

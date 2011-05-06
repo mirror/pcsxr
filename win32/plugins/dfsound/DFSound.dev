@@ -180,6 +180,16 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit16]
+FileName=..\..\..\plugins\dfsound\externals.c
+Folder=dfsound
+Compile=1
+CompileCpp=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit17]
 FileName=..\..\..\plugins\dfsound\freeze.c
 Folder=dfsound
 Compile=1
@@ -189,7 +199,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit17]
+[Unit18]
 FileName=..\..\..\plugins\dfsound\gauss_i.h
 Folder=dfsound
 Compile=1
@@ -199,7 +209,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit18]
+[Unit19]
 FileName=..\..\..\plugins\dfsound\psemuxa.h
 Folder=dfsound
 Compile=1
@@ -209,7 +219,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit19]
+[Unit20]
 FileName=..\..\..\plugins\dfsound\registers.c
 Folder=dfsound
 Compile=1
@@ -219,7 +229,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit20]
+[Unit21]
 FileName=..\..\..\plugins\dfsound\registers.h
 Folder=dfsound
 Compile=1
@@ -229,7 +239,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit21]
+[Unit22]
 FileName=..\..\..\plugins\dfsound\regs.h
 Folder=dfsound
 Compile=1
@@ -239,7 +249,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit22]
+[Unit23]
 FileName=..\..\..\plugins\dfsound\reverb.c
 Folder=dfsound
 Compile=0
@@ -249,7 +259,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=$(CC) -c reverb.c -o reverb.o $(CFLAGS)
 
-[Unit23]
+[Unit24]
 FileName=..\..\..\plugins\dfsound\reverb.h
 Folder=dfsound
 Compile=1
@@ -259,7 +269,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit24]
+[Unit25]
 FileName=..\..\..\plugins\dfsound\spu.c
 Folder=dfsound
 Compile=1
@@ -269,7 +279,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit25]
+[Unit26]
 FileName=..\..\..\plugins\dfsound\spu.h
 Folder=dfsound
 Compile=1
@@ -279,7 +289,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit26]
+[Unit27]
 FileName=..\..\..\plugins\dfsound\stdafx.h
 Folder=dfsound
 Compile=1
@@ -289,7 +299,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit27]
+[Unit28]
 FileName=..\..\..\plugins\dfsound\xa.c
 Folder=dfsound
 Compile=0
@@ -299,7 +309,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=$(CC) -c xa.c -o xa.o $(CFLAGS)
 
-[Unit28]
+[Unit29]
 FileName=..\..\..\plugins\dfsound\xa.h
 Folder=dfsound
 Compile=1
@@ -309,7 +319,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit29]
+[Unit30]
 FileName=DFSound.def
 Folder=
 Compile=0
@@ -319,7 +329,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit30]
+[Unit31]
 FileName=DFSound.rc
 Folder=Resources
 Compile=1
@@ -329,7 +339,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit31]
+[Unit32]
 FileName=resource.h
 Folder=
 Compile=1
