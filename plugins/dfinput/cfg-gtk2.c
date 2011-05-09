@@ -188,11 +188,18 @@ static void UpdateKeyList() {
 	for (i = 0; i < 2; i++) {
 		int total;
 
-		if (g.cfg.PadDef[i].Type == PSE_PAD_TYPE_ANALOGPAD) {
-			total = DKEY_TOTAL;
-		} else {
-			total = DKEY_TOTAL - 3;
-		}
+        switch(g.cfg.PadDef[i].Type)
+        {
+            case PSE_PAD_TYPE_MOUSE:
+                total = 0;
+                break;
+            case PSE_PAD_TYPE_STANDARD:
+                total = DKEY_TOTAL - 3;
+                break;
+            case PSE_PAD_TYPE_ANALOGPAD:
+                total = DKEY_TOTAL;
+                break;
+        }
 
 		widget = gtk_builder_get_object(xml, widgetname[i]);
 
@@ -299,13 +306,24 @@ static void OnDeviceChanged(GtkWidget *widget, gpointer user_data) {
 
 static void OnTypeChanged(GtkWidget *widget, gpointer user_data) {
 	int n = (int)user_data, current = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
-	g.cfg.PadDef[n].Type = (current == 0 ? PSE_PAD_TYPE_STANDARD : PSE_PAD_TYPE_ANALOGPAD);
+    
+    int padTypeList[] = {
+        PSE_PAD_TYPE_STANDARD,
+        PSE_PAD_TYPE_ANALOGPAD,
+        PSE_PAD_TYPE_MOUSE
+    };
+    
+	g.cfg.PadDef[n].Type = padTypeList[current];
 
 	UpdateKeyList();
 }
 
 static void OnThreadedToggled(GtkWidget *widget, gpointer user_data) {
 	g.cfg.Threaded = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+}
+
+static void OnHideCursorToggled(GtkWidget *widget, gpointer user_data) {
+    g.cfg.HideCursor = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 }
 
 static void ReadDKeyEvent(int padnum, int key) {
@@ -641,6 +659,11 @@ long PADconfigure() {
 	g_signal_connect_data(GTK_OBJECT(widget), "toggled",
 		G_CALLBACK(OnThreadedToggled), NULL, NULL, G_CONNECT_AFTER);
 
+    widget = gtk_builder_get_object(xml, "checkcg");
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.HideCursor);
+    g_signal_connect_data(GTK_OBJECT(widget), "toggled",
+        G_CALLBACK(OnHideCursorToggled), NULL, NULL, G_CONNECT_AFTER);
+    
 	widget = gtk_builder_get_object(xml, "combodev1");
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
 		G_CALLBACK(OnDeviceChanged), (gpointer)0, NULL, G_CONNECT_AFTER);
@@ -649,15 +672,26 @@ long PADconfigure() {
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
 		G_CALLBACK(OnDeviceChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
 
+    int padTypeList[] = {
+        0,
+        2, // PSE_PAD_TYPE_MOUSE
+        0, // PSE_PAD_TYPE_NEGCON
+        0, // PSE_PAD_TYPE_GUN
+        0, // PSE_PAD_TYPE_STANDARD
+        1, // PSE_PAD_TYPE_ANALOGJOY
+        0, // PSE_PAD_TYPE_GUNCON
+        1, //PSE_PAD_TYPE_ANALOGPAD
+    };
+    
 	widget = gtk_builder_get_object(xml, "combotype1");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget),
-		g.cfg.PadDef[0].Type == PSE_PAD_TYPE_ANALOGPAD ? 1 : 0);
+		padTypeList[g.cfg.PadDef[0].Type]);
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
 		G_CALLBACK(OnTypeChanged), (gpointer)0, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "combotype2");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget),
-		g.cfg.PadDef[1].Type == PSE_PAD_TYPE_ANALOGPAD ? 1 : 0);
+		padTypeList[g.cfg.PadDef[1].Type]);
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
 		G_CALLBACK(OnTypeChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
 

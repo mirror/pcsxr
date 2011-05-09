@@ -4,7 +4,7 @@
   <!-- interface-naming-policy project-wide -->
   <object class="GtkListStore" id="liststore1">
     <columns>
-      <!-- column-name item text -->
+      <!-- column-name item -->
       <column type="gchararray"/>
     </columns>
     <data>
@@ -13,12 +13,15 @@
       </row>
       <row>
         <col id="0" translatable="yes">Analog Pad</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Mouse</col>
       </row>
     </data>
   </object>
   <object class="GtkListStore" id="liststore2">
     <columns>
-      <!-- column-name item text -->
+      <!-- column-name item -->
       <column type="gchararray"/>
     </columns>
     <data>
@@ -27,6 +30,9 @@
       </row>
       <row>
         <col id="0" translatable="yes">Analog Pad</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Mouse</col>
       </row>
     </data>
   </object>
@@ -35,7 +41,6 @@
     <property name="resizable">False</property>
     <property name="window_position">center</property>
     <property name="type_hint">normal</property>
-    <property name="has_separator">False</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
@@ -456,8 +461,9 @@
             <child>
               <object class="GtkVBox" id="vbox3">
                 <property name="visible">True</property>
+                <property name="border_width">5</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">20</property>
+                <property name="spacing">5</property>
                 <child>
                   <object class="GtkCheckButton" id="checkmt">
                     <property name="label" translatable="yes">Multi-Threaded (Recommended)</property>
@@ -468,9 +474,22 @@
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="padding">16</property>
                     <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="checkcg">
+                    <property name="label" translatable="yes">Hide cursor</property>
+                    <property name="visible">True</property>
+                    <property name="sensitive">False</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="draw_indicator">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
               </object>

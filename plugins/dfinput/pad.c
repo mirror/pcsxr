@@ -26,7 +26,7 @@
 static void (*gpuVisualVibration)(uint32_t, uint32_t) = NULL;
 
 char *PSEgetLibName(void) {
-	return _("Gamepad/Keyboard Input");
+	return _("Gamepad/Keyboard/Mouse Input");
 }
 
 uint32_t PSEgetLibType(void) {
@@ -34,13 +34,21 @@ uint32_t PSEgetLibType(void) {
 }
 
 uint32_t PSEgetLibVersion(void) {
-	return (1 << 16) | (1 << 8);
+	return (1 << 16) | (2 << 8);
 }
 
+static int padDataLenght[] = {0, 2, 3, 1, 1, 3, 3, 3};
 void PADsetMode(const int pad, const int mode) {
 	g.PadState[pad].PadMode = mode;
-	g.PadState[pad].PadID = mode ? 0x73 : 0x41;
-
+    
+    if (g.cfg.PadDef[pad].Type == PSE_PAD_TYPE_ANALOGPAD) {
+        g.PadState[pad].PadID = mode ? 0x73 : 0x41;
+    }
+    else {
+        g.PadState[pad].PadID = (g.cfg.PadDef[pad].Type << 4) |
+                                 padDataLenght[g.cfg.PadDef[pad].Type];
+    }
+    
 	g.PadState[pad].Vib0 = 0;
 	g.PadState[pad].Vib1 = 0;
 	g.PadState[pad].VibF[0] = 0;
@@ -414,8 +422,6 @@ unsigned char PADpoll(unsigned char value) {
 
 			case CMD_READ_DATA_AND_VIBRATE:
 			default:
-				UpdateInput();
-
 				n = g.PadState[CurPad].KeyStatus;
 				n &= g.PadState[CurPad].JoyKeyStatus;
 
@@ -429,7 +435,15 @@ unsigned char PADpoll(unsigned char value) {
 					stdpar[CurPad][5] = g.PadState[CurPad].AnalogStatus[ANALOG_RIGHT][1];
 					stdpar[CurPad][6] = g.PadState[CurPad].AnalogStatus[ANALOG_LEFT][0];
 					stdpar[CurPad][7] = g.PadState[CurPad].AnalogStatus[ANALOG_LEFT][1];
-				} else {
+				}
+				else if(g.PadState[CurPad].PadID == 0x12)
+                {
+                    CmdLen = 6;
+                    
+                    stdpar[CurPad][4] = g.PadState[0].MouseAxis[0][0];
+                    stdpar[CurPad][5] = g.PadState[0].MouseAxis[0][1];
+                }
+                else {
 					CmdLen = 4;
 				}
 
@@ -595,8 +609,11 @@ long PADreadPort2(PadDataS *pad) {
 
 long PADkeypressed(void) {
 	long s;
-
-	CheckKeyboard();
+    
+    static int frame = 0;
+    if( !frame )
+        UpdateInput();
+    frame ^= 1;
 
 	s = g.KeyLeftOver;
 	g.KeyLeftOver = 0;

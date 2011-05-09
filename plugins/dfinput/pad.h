@@ -121,6 +121,7 @@ typedef struct tagPadDef {
 
 typedef struct tagConfig {
 	uint8_t			Threaded;
+    uint8_t         HideCursor;
 	PADDEF			PadDef[2];
 } CONFIG;
 
@@ -134,6 +135,7 @@ typedef struct tagPadState {
 	volatile uint16_t	JoyKeyStatus;
 	volatile uint8_t	AnalogStatus[ANALOG_TOTAL][2]; // 0-255 where 127 is center position
 	volatile uint8_t	AnalogKeyStatus[ANALOG_TOTAL][4];
+    volatile int8_t     MouseAxis[2][2];
 	uint8_t				Vib0, Vib1;
 	volatile uint8_t	VibF[2];
 #if SDL_VERSION_ATLEAST(1,3,0)

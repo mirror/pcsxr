@@ -19,6 +19,9 @@
 #include "pad.h"
 
 static Atom wmprotocols, wmdelwindow;
+static int g_currentMouse_X;
+static int g_currentMouse_Y;
+static Window window;
 
 void InitKeyboard() {
 	wmprotocols = XInternAtom(g.Disp, "WM_PROTOCOLS", 0);
@@ -26,12 +29,27 @@ void InitKeyboard() {
 
 	XkbSetDetectableAutoRepeat(g.Disp, 1, NULL);
 
+    if (g.cfg.PadDef[0].Type == PSE_PAD_TYPE_MOUSE ||
+        g.cfg.PadDef[1].Type == PSE_PAD_TYPE_MOUSE) {
+        int revert_to;
+        XGetInputFocus(g.Disp, &window, &revert_to);
+        XGrabPointer(g.Disp, window, True, ButtonPressMask, GrabModeAsync, GrabModeAsync, window, None, CurrentTime);
+    }
+    
+    g_currentMouse_X = 0;
+    g_currentMouse_Y = 0;
+    
 	g.PadState[0].KeyStatus = 0xFFFF;
 	g.PadState[1].KeyStatus = 0xFFFF;
 }
 
 void DestroyKeyboard() {
 	XkbSetDetectableAutoRepeat(g.Disp, 0, NULL);
+    
+    if (g.cfg.PadDef[0].Type == PSE_PAD_TYPE_MOUSE ||
+        g.cfg.PadDef[1].Type == PSE_PAD_TYPE_MOUSE) {
+        XUngrabPointer(g.Disp, CurrentTime);
+    }
 }
 
 static void bdown(int pad, int bit)
@@ -53,10 +71,46 @@ void CheckKeyboard() {
 	XEvent					evt;
 	XClientMessageEvent		*xce;
 	uint16_t				Key;
-
+    
 	while (XPending(g.Disp)) {
 		XNextEvent(g.Disp, &evt);
 		switch (evt.type) {
+            case ButtonPress:
+                for(i = 0; i < 2; ++i) {
+                    if(g.cfg.PadDef[i].Type == PSE_PAD_TYPE_MOUSE) {
+                            switch(evt.xbutton.button) {
+                                case 1:
+                                    bdown(i, 11);
+                                    break;
+                                case 3:
+                                    bdown(i, 10);
+                                    break;
+                            }
+                        }
+                    }
+                break;
+            case ButtonRelease:
+                for(i = 0; i < 2; ++i) {
+                    if(g.cfg.PadDef[i].Type == PSE_PAD_TYPE_MOUSE) {
+                            switch(evt.xbutton.button) {
+                                case 1:
+                                    bup(i, 11);
+                                    break;
+                                case 3:
+                                    bup(i, 10);
+                                    break;
+                            }
+                        }
+                    }
+                break;
+            case MotionNotify:
+                g_currentMouse_X = evt.xmotion.x - 160;
+                g_currentMouse_Y = evt.xmotion.y - 120;
+                if( g_currentMouse_X < -128) g_currentMouse_X = -128;
+                if( g_currentMouse_X > 127) g_currentMouse_X = 127;
+                if( g_currentMouse_Y < -128) g_currentMouse_Y = -128;
+                if( g_currentMouse_Y > 127) g_currentMouse_Y = 127;
+                break;
 			case KeyPress:
 				Key = XLookupKeysym((XKeyEvent *)&evt, 0);
 				found = 0;
@@ -71,8 +125,7 @@ void CheckKeyboard() {
 				if (!found && !AnalogKeyPressed(Key)) {
 					g.KeyLeftOver = Key;
 				}
-				return;
-
+				break;
 			case KeyRelease:
 				Key = XLookupKeysym((XKeyEvent *)&evt, 0);
 				found = 0;
@@ -88,7 +141,6 @@ void CheckKeyboard() {
 					g.KeyLeftOver = ((long)Key | 0x40000000);
 				}
 				break;
-
 			case ClientMessage:
 				xce = (XClientMessageEvent *)&evt;
 				if (xce->message_type == wmprotocols && (Atom)xce->data.l[0] == wmdelwindow) {
@@ -98,5 +150,15 @@ void CheckKeyboard() {
 				}
 				break;
 		}
-	}
+    }
+    
+	g.PadState[0].MouseAxis[0][0] = g_currentMouse_X;
+    g.PadState[0].MouseAxis[0][1] = g_currentMouse_Y;
+    g_currentMouse_X *= 0.7;
+    g_currentMouse_Y *= 0.7;
+    
+    if (g.cfg.PadDef[0].Type == PSE_PAD_TYPE_MOUSE ||
+        g.cfg.PadDef[1].Type == PSE_PAD_TYPE_MOUSE) {
+        XWarpPointer(g.Disp, None, window, 0, 0, 0, 0, 160, 120);
+    }
 }
