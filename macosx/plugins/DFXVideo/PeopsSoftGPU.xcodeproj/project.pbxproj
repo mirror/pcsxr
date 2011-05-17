@@ -27,26 +27,9 @@
 		71E9EC14109F24E700E98D1D /* zn.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E9EC02109F24E700E98D1D /* zn.c */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildStyle section */
-		71D886A3130F01E200F150FF /* Development */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-			};
-			name = Development;
-		};
-		71D886A4130F01E200F150FF /* Deployment */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-			};
-			name = Deployment;
-		};
-/* End PBXBuildStyle section */
-
 /* Begin PBXFileReference section */
 		2B038C06069183300082466B /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2B038D2206918AA80082466B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B038D2206918AA80082466B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B371FBB0773859200B1DC0B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/NetSfPeopsSoftGPUConfig.nib; sourceTree = "<group>"; };
 		2B3E5D64062B2CC1001D796E /* drawgl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = drawgl.m; path = macsrc/drawgl.m; sourceTree = SOURCE_ROOT; };
 		2B3E5DED062B36A0001D796E /* NetSfPeopsSoftGPUInterface.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = NetSfPeopsSoftGPUInterface.nib; sourceTree = "<group>"; };
@@ -204,12 +187,8 @@
 		2B3E5A03062AAC1A001D796E /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 717084310FDFD328004F3EB4 /* Build configuration list for PBXProject "PeopsSoftGPU" */;
-			buildSettings = {
-			};
-			buildStyles = (
-				71D886A3130F01E200F150FF /* Development */,
-				71D886A4130F01E200F150FF /* Deployment */,
-			);
+			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -220,6 +199,7 @@
 			mainGroup = 2B3E59FF062AAC1A001D796E;
 			productRefGroup = 2B3E5A46062AACF3001D796E /* Products */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				2BAF50920632BB1A00DB9A16 /* gpuPeopsSoftGL */,
 			);
@@ -384,7 +364,7 @@
 					../../../libpcsxcore,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "";
 				SYMROOT = ../../build;
 			};
 			name = Development;

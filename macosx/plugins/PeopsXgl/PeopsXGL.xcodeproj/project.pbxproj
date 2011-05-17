@@ -28,26 +28,9 @@
 		3F7F385013079BFD00556C34 /* draw.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F384713079BFD00556C34 /* draw.c */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildStyle section */
-		71D88576130EF91000F150FF /* Development */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-			};
-			name = Development;
-		};
-		71D88577130EF91000F150FF /* Deployment */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-			};
-			name = Deployment;
-		};
-/* End PBXBuildStyle section */
-
 /* Begin PBXFileReference section */
 		2B038C06069183300082466B /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2B038D2206918AA80082466B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B038D2206918AA80082466B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B51949E06B3D2D200744730 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
 		2B959E4306342D32000F2A2D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		2BAF50930632BB1A00DB9A16 /* PeopsXGL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopsXGL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,12 +190,8 @@
 		2B3E5A03062AAC1A001D796E /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 717084310FDFD328004F3EB4 /* Build configuration list for PBXProject "PeopsXGL" */;
-			buildSettings = {
-			};
-			buildStyles = (
-				71D88576130EF91000F150FF /* Development */,
-				71D88577130EF91000F150FF /* Deployment */,
-			);
+			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -223,6 +202,7 @@
 			mainGroup = 2B3E59FF062AAC1A001D796E;
 			productRefGroup = 2B3E5A46062AACF3001D796E /* Products */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				2BAF50920632BB1A00DB9A16 /* gpuPeopsXGL */,
 			);
@@ -388,7 +368,7 @@
 					../../../libpcsxcore,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "";
 				SYMROOT = ../../build;
 			};
 			name = Development;

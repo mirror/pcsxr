@@ -95,23 +95,6 @@
 		};
 /* End PBXBuildRule section */
 
-/* Begin PBXBuildStyle section */
-		71D8865B130F00F700F150FF /* Development */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-			};
-			name = Development;
-		};
-		71D8865C130F00F700F150FF /* Deployment */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-			};
-			name = Deployment;
-		};
-/* End PBXBuildStyle section */
-
 /* Begin PBXContainerItemProxy section */
 		713CB2DD11FC49720033B6A8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -230,7 +213,7 @@
 		2BA178B50514CE260026D74D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = PCSX.nib; sourceTree = "<group>"; };
 		2BA44360052DB2EA00E21DDD /* PcsxPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxPlugin.h; sourceTree = "<group>"; };
 		2BA44361052DB2EA00E21DDD /* PcsxPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxPlugin.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
-		2BB3D6CF05427FE200831ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		2BB3D6CF05427FE200831ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BB3D6D105427FE200831ACB /* PCSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PCSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBB1126051DC00500B84448 /* PluginList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginList.h; sourceTree = "<group>"; };
 		2BBB1127051DC00500B84448 /* PluginList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginList.m; sourceTree = "<group>"; };
@@ -621,12 +604,8 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 71F353F80FD98DFE00CBEC28 /* Build configuration list for PBXProject "Pcsx" */;
-			buildSettings = {
-			};
-			buildStyles = (
-				71D8865B130F00F700F150FF /* Development */,
-				71D8865C130F00F700F150FF /* Deployment */,
-			);
+			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -658,6 +637,7 @@
 					ProjectRef = 71D888CE130F04DC00F150FF /* PeopsXGL.xcodeproj */;
 				},
 			);
+			projectRoot = "";
 			targets = (
 				2BB3D68205427FE200831ACB /* PCSX */,
 			);
@@ -934,7 +914,7 @@
 					"-lz",
 					"-lSystemStubs",
 				);
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "";
 			};
 			name = Development;
 		};

@@ -20,6 +20,12 @@
 // if you use it, you must include it.
 #include <OpenGL/gl.h>
 #include <OpenGL/glext.h>
+#ifndef GL_COLOR_INDEX8_EXT
+#define GL_COLOR_INDEX8_EXT 0x80E5
+#endif
+#ifndef glColorTableEXT
+#define glColorTableEXT glColorTable
+#endif
 #endif
 
 #define MIRROR_TEST 1
