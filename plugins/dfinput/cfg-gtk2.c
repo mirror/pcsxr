@@ -658,12 +658,12 @@ long PADconfigure() {
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.Threaded);
 	g_signal_connect_data(GTK_OBJECT(widget), "toggled",
 		G_CALLBACK(OnThreadedToggled), NULL, NULL, G_CONNECT_AFTER);
-
+/*
     widget = gtk_builder_get_object(xml, "checkcg");
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.HideCursor);
     g_signal_connect_data(GTK_OBJECT(widget), "toggled",
         G_CALLBACK(OnHideCursorToggled), NULL, NULL, G_CONNECT_AFTER);
-    
+*/
 	widget = gtk_builder_get_object(xml, "combodev1");
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
 		G_CALLBACK(OnDeviceChanged), (gpointer)0, NULL, G_CONNECT_AFTER);

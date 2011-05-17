@@ -17,6 +17,7 @@
  */
 
 #include "pad.h"
+#include "util.h"
 
 static Atom wmprotocols, wmdelwindow;
 static int g_currentMouse_X;
@@ -33,7 +34,8 @@ void InitKeyboard() {
         g.cfg.PadDef[1].Type == PSE_PAD_TYPE_MOUSE) {
         int revert_to;
         XGetInputFocus(g.Disp, &window, &revert_to);
-        XGrabPointer(g.Disp, window, True, ButtonPressMask, GrabModeAsync, GrabModeAsync, window, None, CurrentTime);
+        grabCursor(g.Disp, window, 1);
+        showCursor(g.Disp, window, 0);
     }
     
     g_currentMouse_X = 0;
@@ -48,7 +50,8 @@ void DestroyKeyboard() {
     
     if (g.cfg.PadDef[0].Type == PSE_PAD_TYPE_MOUSE ||
         g.cfg.PadDef[1].Type == PSE_PAD_TYPE_MOUSE) {
-        XUngrabPointer(g.Disp, CurrentTime);
+        grabCursor(g.Disp, window, 0);
+        showCursor(g.Disp, window, 1);
     }
 }
 
