@@ -52,7 +52,7 @@ typedef struct {
 	unsigned char StatP;
 
 	unsigned char Transfer[CD_FRAMESIZE_RAW];
-	unsigned char *pTransfer;
+	unsigned int  transferIndex;
 
 	unsigned char Prev[4];
 	unsigned char Param[8];

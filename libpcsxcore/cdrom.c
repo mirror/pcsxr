@@ -204,6 +204,18 @@ extern SPUregisterCallback SPU_registerCallback;
 	cdr.ResultReady = 1; \
 }
 
+void adjustTransferIndex()
+{
+	unsigned int bufSize;
+	
+	switch (cdr.Mode & (MODE_SIZE_2340|MODE_SIZE_2328)) {
+		case MODE_SIZE_2340: bufSize = 2340; break;
+		case MODE_SIZE_2328: bufSize = 12 + 2328; break;
+		case MODE_SIZE_2048: bufSize = 12 + 2048; break;
+	}
+	
+	cdr.transferIndex %= bufSize;
+}
 
 void cdrDecodedBufferInterrupt()
 {
@@ -2123,7 +2135,9 @@ unsigned char cdrRead2(void) {
 	if (cdr.Readed == 0) {
 		ret = 0;
 	} else {
-		ret = *cdr.pTransfer++;
+		ret = cdr.Transfer[cdr.transferIndex];
+		cdr.transferIndex++;
+		adjustTransferIndex();
 	}
 
 #ifdef CDR_LOG
@@ -2243,16 +2257,16 @@ void cdrWrite3(unsigned char rt) {
 
 	if (rt == 0x80 && !(cdr.Ctrl & 0x1) && cdr.Readed == 0) {
 		cdr.Readed = 1;
-		cdr.pTransfer = cdr.Transfer;
+		cdr.transferIndex = 0;
 
 		switch (cdr.Mode & (MODE_SIZE_2340|MODE_SIZE_2328)) {
 			case MODE_SIZE_2328:
 			case MODE_SIZE_2048:
-				cdr.pTransfer += 12;
+				cdr.transferIndex += 12;
 				break;
 
 			case MODE_SIZE_2340:
-				cdr.pTransfer += 0;
+				cdr.transferIndex += 0;
 				break;
 
 			default:
@@ -2263,7 +2277,7 @@ void cdrWrite3(unsigned char rt) {
 
 void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 	u32 cdsize;
-	u8 *ptr, *cdwrap_ptr;
+	u8 *ptr/*, *cdwrap_ptr*/;
 
 #ifdef CDR_LOG
 	CDR_LOG("psxDma3() Log: *** DMA 3 *** %x addr = %x size = %x\n", chcr, madr, bcr);
@@ -2301,7 +2315,7 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 				break;
 			}
 
-
+/*
 #if 1
 			/*
 			GS CDX: Enhancement CD crash
@@ -2309,7 +2323,7 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 			- CdlPlay
 			- Spams DMA3 and gets buffer overrun
 			*/
-
+/*
 			if( (cdr.pTransfer-cdr.Transfer) + cdsize > 2352 )
 			{
 				// avoid crash - probably should wrap here
@@ -2350,7 +2364,7 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 				- calls CdlPlay @ 0:2:0
 				- spams DMA3 and overruns buffer
 				*/
-
+/*
 				for( lcv = 0; lcv < cdsize; lcv++ )
 				{
 					// wrap cdrom ptr
@@ -2373,11 +2387,22 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 					cdr.pTransfer++;
 				}
 
-
 				psxCpu->Clear(madr, cdsize / 4);
 			}
 #endif
-
+*/
+			{
+				int i;
+				
+				for(i = 0; i < cdsize; ++i)
+				{
+					ptr[i] = cdr.Transfer[cdr.transferIndex];
+					cdr.transferIndex++;
+					adjustTransferIndex();
+				}
+				
+				psxCpu->Clear(madr, cdsize / 4);
+			}
 
 			// burst vs normal
 			if( chcr == 0x11400100 ) {
@@ -2439,12 +2464,12 @@ int cdrFreeze(gzFile f, int Mode) {
 
 	
 	if (Mode == 1)
-		tmp = cdr.pTransfer - cdr.Transfer;
+		tmp = cdr.transferIndex;
 
 	gzfreeze(&tmp, sizeof(tmp));
 
 	if (Mode == 0)
-		cdr.pTransfer = cdr.Transfer + tmp;
+		cdr.transferIndex = tmp;
 
 	return 0;
 }
