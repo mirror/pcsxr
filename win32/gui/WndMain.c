@@ -248,6 +248,11 @@ void RunGui() {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+		else
+		{
+			// Avoid 100% cpu usage.
+			Sleep(10);
+		}
 	}
 }
 
