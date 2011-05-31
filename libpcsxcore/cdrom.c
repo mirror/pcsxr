@@ -214,7 +214,8 @@ void adjustTransferIndex()
 		case MODE_SIZE_2048: bufSize = 12 + 2048; break;
 	}
 	
-	cdr.transferIndex %= bufSize;
+	if (cdr.transferIndex >= bufSize)
+		cdr.transferIndex %= bufSize;
 }
 
 void cdrDecodedBufferInterrupt()
@@ -2394,8 +2395,7 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 			{
 				int i;
 				
-				for(i = 0; i < cdsize; ++i)
-				{
+				for(i = 0; i < cdsize; ++i) {
 					ptr[i] = cdr.Transfer[cdr.transferIndex];
 					cdr.transferIndex++;
 					adjustTransferIndex();
