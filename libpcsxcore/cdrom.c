@@ -2451,7 +2451,7 @@ void cdrReset() {
 }
 
 int cdrFreeze(gzFile f, int Mode) {
-	uintptr_t tmp;
+	unsigned int tmp;
 
 
 	if( Mode == 0 ) {
