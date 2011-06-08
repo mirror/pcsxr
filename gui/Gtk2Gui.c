@@ -213,7 +213,7 @@ void StartGui() {
 		return;
 	}*/
 
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "MainWindow", NULL);
+	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "MainWindow", NULL);
 
 	if (!xml) {
 		g_warning("We could not load the interface!");
@@ -221,9 +221,9 @@ void StartGui() {
 	}
 
 	Window = glade_xml_get_widget(xml, "MainWindow");
-	gtk_window_set_title(GTK_WINDOW(Window), "PCSX");
-	gtk_window_set_icon_from_file(GTK_WINDOW(Window), PIXMAPDIR "pcsx-icon.png", NULL);
-	gtk_window_set_default_icon_from_file(PIXMAPDIR "pcsx-icon.png", NULL);
+	gtk_window_set_title(GTK_WINDOW(Window), "PCSXR");
+	gtk_window_set_icon_from_file(GTK_WINDOW(Window), PIXMAPDIR "pcsxr-icon.png", NULL);
+	gtk_window_set_default_icon_from_file(PIXMAPDIR "pcsxr-icon.png", NULL);
 	ResetMenuSlots(xml);
 
 	// Set up callbacks
@@ -363,7 +363,7 @@ void StartGui() {
 			G_CALLBACK(RunCheatSearchDialog), NULL, NULL, G_CONNECT_AFTER);
 
 	// Help menu
-	widget = glade_xml_get_widget(xml, "about_pcsx1");
+	widget = glade_xml_get_widget(xml, "about_pcsxr1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			G_CALLBACK(OnHelp_About), NULL, NULL, G_CONNECT_AFTER);
 
@@ -786,7 +786,7 @@ void state_load(gchar *state_filename) {
 	fclose(fp);
 
 	// If the window exists, then we are loading the state from within
-	// within the PCSX GUI. We need to initialise the plugins first
+	// within the PCSXR GUI. We need to initialise the plugins first
 	if (Window) {
 		destroy_main_window();
 

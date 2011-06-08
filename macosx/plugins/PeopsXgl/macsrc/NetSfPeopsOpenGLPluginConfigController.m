@@ -1,7 +1,7 @@
 
 /* All the various stuff needed for configuration is done here, 
    including reading the Config file and displaying a dialog box
-   AboutDlgProc() is a plug-in function called from the PCSX app, as is
+   AboutDlgProc() is a plug-in function called from the PCSXR app, as is
    DlgProc()
 */
 
@@ -74,7 +74,7 @@ void PrepFactoryDefaultPreferences(void)
     // THE place to find the names of settings.
     // If it's not here, you can't set it.
 
-    // create or read a sub-dictionary beneath the main PCSX app prefs.
+    // create or read a sub-dictionary beneath the main PCSXR app prefs.
     // dictionary is named "net.sf.GpuOpenGLPlugin Settings"
     // and contains all our key/values
     // the prefs .plist will store this dictionary ("net.sf...") as an object
@@ -125,12 +125,12 @@ void PrepFactoryDefaultPreferences(void)
 
 void ReadConfig(void)
 {
-    // set up PCSX GPU plug's global variables according to user preferences.
-    // this is called from the PCSX GPU plugin thread via GPUOpen.
+    // set up PCSXR GPU plug's global variables according to user preferences.
+    // this is called from the PCSXR GPU plugin thread via GPUOpen.
     
     // has nothing to do with the Configuration dialog box, btw., other than the
     // fact that the config dialog writes to user prefs. This only reads, which
-    // is important because PCSX will change its globals on the fly
+    // is important because PCSXR will change its globals on the fly
     // and saving those new ad hoc changes is Bad for the user.
     
     PrepFactoryDefaultPreferences(); // in case user deletes, or on new startup
@@ -139,7 +139,7 @@ void ReadConfig(void)
     NSDictionary* keyValues = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey];
 
 
-    // bind all prefs settings to their PCSX counterparts
+    // bind all prefs settings to their PCSXR counterparts
     // with a little finagling to make it work as expected
 	iShowFPS = [[keyValues objectForKey:@"FPS Counter"] boolValue];
     

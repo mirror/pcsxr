@@ -1,5 +1,5 @@
 #import <Cocoa/Cocoa.h>
-#import "PcsxController.h"
+#import "PcsxrController.h"
 #import "ConfigurationController.h"
 #import "EmuThread.h"
 #include "psxcommon.h"
@@ -12,7 +12,7 @@ NSDictionary *prefByteKeys;
 NSMutableArray *biosList;
 NSString *saveStatePath;
 
-@implementation PcsxController
+@implementation PcsxrController
 
 - (IBAction)ejectCD:(id)sender
 {
@@ -124,14 +124,14 @@ NSString *saveStatePath;
 - (IBAction)freeze:(id)sender
 {
 	int num = [sender tag];
-	NSString *path = [NSString stringWithFormat:@"%@/%s-%3.3d.pcsxstate", saveStatePath, CdromId, num];
+	NSString *path = [NSString stringWithFormat:@"%@/%s-%3.3d.pcsxrstate", saveStatePath, CdromId, num];
 
 	[EmuThread freezeAt:path which:num-1];
 }
 
 - (IBAction)defrost:(id)sender
 {
-	NSString *path = [NSString stringWithFormat:@"%@/%s-%3.3d.pcsxstate", saveStatePath, CdromId, [sender tag]];
+	NSString *path = [NSString stringWithFormat:@"%@/%s-%3.3d.pcsxrstate", saveStatePath, CdromId, [sender tag]];
 	[EmuThread defrostAt:path];
 }
 
@@ -169,7 +169,7 @@ NSString *saveStatePath;
 		if (![EmuThread active] || [EmuThread isRunBios])
 			return NO;
 
-		NSString *path = [NSString stringWithFormat:@"%@/%s-%3.3d.pcsxstate", saveStatePath, CdromId, [menuItem tag]];
+		NSString *path = [NSString stringWithFormat:@"%@/%s-%3.3d.pcsxrstate", saveStatePath, CdromId, [menuItem tag]];
 		return (CheckState((char *)[path fileSystemRepresentation]) == 0);
 	}
 
@@ -203,14 +203,14 @@ NSString *saveStatePath;
 		[self preferences:nil];
 
 		NSRunCriticalAlertPanel(NSLocalizedString(@"Missing plugins!", nil),
-				NSLocalizedString(@"Pcsx is missing one or more critical plugins. You will need to install these in order to play games.", nil), 
+				NSLocalizedString(@"Pcsxr is missing one or more critical plugins. You will need to install these in order to play games.", nil), 
 				nil, nil, nil);
 	}
 
-	if (![PcsxController biosAvailable]) {
+	if (![PcsxrController biosAvailable]) {
 		NSRunInformationalAlertPanel(NSLocalizedString(@"Missing BIOS!", nil),
-				NSLocalizedString(@"Pcsx wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\n"
-										@"If you have a BIOS available, please copy it to\n~/Library/Application Support/Pcsx/Bios/", nil), 
+				NSLocalizedString(@"Pcsxr wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\n"
+										@"If you have a BIOS available, please copy it to\n~/Library/Application Support/Pcsxr/Bios/", nil), 
 				nil, nil, nil);
 	}
 
@@ -351,39 +351,39 @@ NSString *saveStatePath;
 		if (![dfm fileExistsAtPath:supportPath isDirectory:&dir])
 			[dfm createDirectoryAtPath:supportPath attributes:nil];
 
-		path = [NSString stringWithFormat:@"%@/Pcsx", supportPath];
+		path = [NSString stringWithFormat:@"%@/Pcsxr", supportPath];
 		if (![dfm fileExistsAtPath:path isDirectory:&dir])
 			[dfm createDirectoryAtPath:path attributes:nil];
 
-		path = [NSString stringWithFormat:@"%@/Pcsx/Bios", supportPath];
+		path = [NSString stringWithFormat:@"%@/Pcsxr/Bios", supportPath];
 		if (![dfm fileExistsAtPath:path isDirectory:&dir])
 			[dfm createDirectoryAtPath:path attributes:nil];
 
-		path = [NSString stringWithFormat:@"%@/Pcsx/Memory Cards", supportPath];
+		path = [NSString stringWithFormat:@"%@/Pcsxr/Memory Cards", supportPath];
 		if (![dfm fileExistsAtPath:path isDirectory:&dir])
 			[dfm createDirectoryAtPath:path attributes:nil];
 
-		path = [NSString stringWithFormat:@"%@/Pcsx/Patches", supportPath];
+		path = [NSString stringWithFormat:@"%@/Pcsxr/Patches", supportPath];
 		if (![dfm fileExistsAtPath:path isDirectory:&dir])
 			[dfm createDirectoryAtPath:path attributes:nil];
 
-		saveStatePath = [[NSString stringWithFormat:@"%@/Pcsx/Save States", supportPath] retain];
+		saveStatePath = [[NSString stringWithFormat:@"%@/Pcsxr/Save States", supportPath] retain];
 		if (![dfm fileExistsAtPath:saveStatePath isDirectory:&dir])
 			[dfm createDirectoryAtPath:saveStatePath attributes:nil];
 
-		path = [NSString stringWithFormat:@"%@/Pcsx/Memory Cards/Mcd001.mcr", supportPath];
+		path = [NSString stringWithFormat:@"%@/Pcsxr/Memory Cards/Mcd001.mcr", supportPath];
 		str = [path fileSystemRepresentation];
 		if (str != nil) strncpy(Config.Mcd1, str, 255);
 
-		path = [NSString stringWithFormat:@"%@/Pcsx/Memory Cards/Mcd002.mcr", supportPath];
+		path = [NSString stringWithFormat:@"%@/Pcsxr/Memory Cards/Mcd002.mcr", supportPath];
 		str = [path fileSystemRepresentation];
 		if (str != nil) strncpy(Config.Mcd2, str, 255);
 
-		path = [NSString stringWithFormat:@"%@/Pcsx/Bios/", supportPath];
+		path = [NSString stringWithFormat:@"%@/Pcsxr/Bios/", supportPath];
 		str = [path fileSystemRepresentation];
 		if (str != nil) strncpy(Config.BiosDir, str, 255);
 
-		path = [NSString stringWithFormat:@"%@/Pcsx/Patches/", supportPath];
+		path = [NSString stringWithFormat:@"%@/Pcsxr/Patches/", supportPath];
 		str = [path fileSystemRepresentation];
 		if (str != nil) strncpy(Config.PatchesDir, str, 255);
 	} else {
@@ -418,7 +418,7 @@ NSString *saveStatePath;
 		}
 	}
 
-	[PcsxController setConfigFromDefaults];
+	[PcsxrController setConfigFromDefaults];
 }
 
 

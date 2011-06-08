@@ -150,7 +150,7 @@ void SetupSound (void)
 
      // Acquire context ////////////////////////////////////////////////////////
      device.api = pa_threaded_mainloop_get_api (device.mainloop);
-     device.context = pa_context_new (device.api, "PCSX");
+     device.context = pa_context_new (device.api, "PCSXR");
      pa_context_set_state_callback (device.context, context_state_cb, &device);
 
      if (device.context == NULL)
@@ -214,7 +214,7 @@ void SetupSound (void)
      //fprintf (stderr, "Target buffer size: %lu\n", buffer_attributes.tlength);
 
      // Acquire new stream using spec //////////////////////////////////////////
-     device.stream = pa_stream_new (device.context, "PCSX", &device.spec, NULL);
+     device.stream = pa_stream_new (device.context, "PCSXR", &device.spec, NULL);
      if (device.stream == NULL)
      {
 	  error_number = pa_context_errno (device.context);

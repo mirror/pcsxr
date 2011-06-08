@@ -1,13 +1,13 @@
 //
 //  PluginList.h
-//  Pcsx
+//  Pcsxr
 //
 //  Created by Gil Pedersen on Sun Sep 21 2003.
 //  Copyright (c) 2003 __MyCompanyName__. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PcsxPlugin.h"
+#import "PcsxrPlugin.h"
 
 //extern NSMutableArray *plugins;
 
@@ -16,10 +16,10 @@
     @private
     NSMutableArray *pluginList;
 	 
-	 PcsxPlugin *activeGpuPlugin;
-	 PcsxPlugin *activeSpuPlugin;
-	 PcsxPlugin *activeCdrPlugin;
-	 PcsxPlugin *activePadPlugin;
+	 PcsxrPlugin *activeGpuPlugin;
+	 PcsxrPlugin *activeSpuPlugin;
+	 PcsxrPlugin *activeCdrPlugin;
+	 PcsxrPlugin *activePadPlugin;
 	 
 	 BOOL missingPlugins;
 }
@@ -30,7 +30,7 @@
 - (NSArray *)pluginsForType:(int)typeMask;
 - (BOOL)hasPluginAtPath:(NSString *)path;
 - (BOOL)configured;
-- (PcsxPlugin *)activePluginForType:(int)type;
-- (BOOL)setActivePlugin:(PcsxPlugin *)plugin forType:(int)type;
+- (PcsxrPlugin *)activePluginForType:(int)type;
+- (BOOL)setActivePlugin:(PcsxrPlugin *)plugin forType:(int)type;
 
 @end

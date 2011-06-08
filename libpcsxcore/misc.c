@@ -494,7 +494,7 @@ int Load(const char *ExePath) {
 
 // STATES
 
-static const char PcsxHeader[32] = "STv4 PCSX v" PACKAGE_VERSION;
+static const char PcsxrHeader[32] = "STv4 PCSXR v" PACKAGE_VERSION;
 
 // Savestate Versioning!
 // If you make changes to the savestate version, please increment the value below.
@@ -510,7 +510,7 @@ int SaveState(const char *file) {
 	f = gzopen(file, "wb");
 	if (f == NULL) return -1;
 
-	gzwrite(f, (void *)PcsxHeader, 32);
+	gzwrite(f, (void *)PcsxrHeader, 32);
 	gzwrite(f, (void *)&SaveVersion, sizeof(u32));
 	gzwrite(f, (void *)&Config.HLE, sizeof(boolean));
 
@@ -572,7 +572,7 @@ int LoadState(const char *file) {
 	gzread(f, &version, sizeof(u32));
 	gzread(f, &hle, sizeof(boolean));
 
-	if (strncmp("STv4 PCSX", header, 9) != 0 || version != SaveVersion || hle != Config.HLE) {
+	if (strncmp("STv4 PCSXR", header, 10) != 0 || version != SaveVersion || hle != Config.HLE) {
 		gzclose(f);
 		return -1;
 	}
@@ -627,7 +627,7 @@ int CheckState(const char *file) {
 
 	gzclose(f);
 
-	if (strncmp("STv4 PCSX", header, 9) != 0 || version != SaveVersion || hle != Config.HLE)
+	if (strncmp("STv4 PCSXR", header, 10) != 0 || version != SaveVersion || hle != Config.HLE)
 		return -1;
 
 	return 0;

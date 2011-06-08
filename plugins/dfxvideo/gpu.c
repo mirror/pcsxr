@@ -294,9 +294,9 @@ static void DoTextSnapShot(int iNum)
  char *pB;
 
 #ifdef _WINDOWS
- sprintf(szTxt,"snap\\pcsx%04d.txt",iNum);
+ sprintf(szTxt,"snap\\pcsxr%04d.txt",iNum);
 #else
- sprintf(szTxt,"%s/pcsx%04d.txt",getenv("HOME"),iNum);
+ sprintf(szTxt,"%s/pcsxr%04d.txt",getenv("HOME"),iNum);
 #endif
 
  if ((txtfile = fopen(szTxt, "wb")) == NULL)
@@ -356,9 +356,9 @@ void CALLBACK GPUmakeSnapshot(void)
   {
    snapshotnr++;
 #ifdef _WINDOWS
-   sprintf(filename,"snap\\pcsx%04ld.bmp",snapshotnr);
+   sprintf(filename,"snap\\pcsxr%04ld.bmp",snapshotnr);
 #else
-   sprintf(filename, "%s/pcsx%04ld.bmp", getenv("HOME"), snapshotnr);
+   sprintf(filename, "%s/pcsxr%04ld.bmp", getenv("HOME"), snapshotnr);
 #endif
 
    bmpfile = fopen(filename,"rb");

@@ -371,9 +371,9 @@ void DoTextSnapShot(int iNum)
  FILE *txtfile;char szTxt[256];char * pB;
 
 #ifdef _WINDOWS
- sprintf(szTxt,"snap\\pcsx%04d.txt",iNum);
+ sprintf(szTxt,"snap\\pcsxr%04d.txt",iNum);
 #else
- sprintf(szTxt,"%s/pcsx%04d.txt",getenv("HOME"),iNum);
+ sprintf(szTxt,"%s/pcsxr%04d.txt",getenv("HOME"),iNum);
 #endif
 
  if((txtfile=fopen(szTxt,"wb"))==NULL)
@@ -440,9 +440,9 @@ void DoSnapShot(void)
   {
    snapshotnr++;
 #ifdef _WINDOWS
-   sprintf(filename,"snap/pcsx%04d.bmp",snapshotnr);
+   sprintf(filename,"snap/pcsxr%04d.bmp",snapshotnr);
 #else
-   sprintf(filename,"%s/pcsx%04d.bmp",getenv("HOME"),snapshotnr);
+   sprintf(filename,"%s/pcsxr%04d.bmp",getenv("HOME"),snapshotnr);
 #endif
    bmpfile=fopen(filename,"rb");
    if(bmpfile==NULL)break;
@@ -2980,7 +2980,7 @@ void StartCfgTool(char *arg) // linux: start external cfg tool
 		return;
 	}
 
-	sprintf(cfg, "%s/.pcsx/plugins/cfg/cfgpeopsxgl", getenv("HOME"));
+	sprintf(cfg, "%s/.pcsxr/plugins/cfg/cfgpeopsxgl", getenv("HOME"));
 	if (stat(cfg, &buf) != -1) {
 		if (fork() == 0) {
 			execl(cfg, "cfgpeopsxgl", arg, NULL);

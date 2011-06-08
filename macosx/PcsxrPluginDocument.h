@@ -1,6 +1,6 @@
 //
-//  PcsxPluginDocument.h
-//  Pcsx
+//  PcsxrPluginDocument.h
+//  Pcsxr
 //
 //  Created by Gil Pedersen on Thu Jul 01 2004.
 //  Copyright (c) 2004 __MyCompanyName__. All rights reserved.
@@ -9,7 +9,7 @@
 #import <AppKit/AppKit.h>
 
 
-@interface PcsxPluginDocument : NSDocument {
+@interface PcsxrPluginDocument : NSDocument {
 	IBOutlet NSWindow *addPluginSheet;
 	IBOutlet NSTextField *pluginName;
 	

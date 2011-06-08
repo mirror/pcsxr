@@ -6,4 +6,4 @@ SUBDIRS += plugins/bladesio1 plugins/gxvideo
 
 SUBDIRS += $(PEOPSXGL)
 
-EXTRA_DIST = AUTHORS COPYING INSTALL NEWS README ChangeLog ChangeLog.df
+EXTRA_DIST = AUTHORS COPYING INSTALL NEWS README ChangeLog ChangeLog.df strip_fPIC.sh

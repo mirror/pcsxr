@@ -51,7 +51,7 @@ int CancelQuit = 0;
 char cfgfile[256];
 int Running = 0;
 boolean UseGui = TRUE;
-char PcsxDir[256];
+char PcsxrDir[256];
 
 static HDC          hDC;
 static HDC          hdcmem;
@@ -135,7 +135,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	char cdfile[MAXPATHLEN] = "", buf[4096];
 	int loadstatenum = -1;
 
-	strcpy(cfgfile, "Software\\Pcsx");
+	strcpy(cfgfile, "Software\\Pcsxr");
 
 	gApp.hInstance = hInstance;
 
@@ -146,7 +146,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	Running = 0;
 
-	GetCurrentDirectory(256, PcsxDir);
+	GetCurrentDirectory(256, PcsxrDir);
 
 	memset(&Config, 0, sizeof(PcsxConfig));
 	strcpy(Config.Net, "Disabled");
@@ -212,7 +212,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			Config.SlowBoot = TRUE;
 		} else if (strcmp(arg, "-help") == 0) {
 			MessageBox(gApp.hWnd, _(
-				"Usage: pcsx [options]\n"
+				"Usage: pcsxr [options]\n"
 				"\toptions:\n"
 				"\t-nogui\t\tDon't open the GUI\n"
 				"\t-psxout\t\tEnable PSX output\n"
@@ -220,7 +220,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				"\t-runcd\t\tRuns CD-ROM (requires -nogui)\n"
 				"\t-cdfile FILE\tRuns a CD image file (requires -nogui)\n"
 				"\t-help\t\tDisplay this message"),
-				"PCSX", 0);
+				"PCSXR", 0);
 
 			return 0;
 		}
@@ -303,8 +303,8 @@ void States_Load(int num) {
 
 	ret = LoadState(Text);
 	if (ret == 0)
-		 sprintf(Text, _("*PCSX*: Loaded State %d"), num+1);
-	else sprintf(Text, _("*PCSX*: Error Loading State %d"), num+1);
+		 sprintf(Text, _("*PCSXR*: Loaded State %d"), num+1);
+	else sprintf(Text, _("*PCSXR*: Error Loading State %d"), num+1);
 	GPU_displayText(Text);
 
 	Running = 1;
@@ -325,8 +325,8 @@ void States_Save(int num) {
 	GPU_freeze(2, (GPUFreeze_t *)&num);
 	ret = SaveState(Text);
 	if (ret == 0)
-		 sprintf(Text, _("*PCSX*: Saved State %d"), num+1);
-	else sprintf(Text, _("*PCSX*: Error Saving State %d"), num+1);
+		 sprintf(Text, _("*PCSXR*: Saved State %d"), num+1);
+	else sprintf(Text, _("*PCSXR*: Error Saving State %d"), num+1);
 	GPU_displayText(Text);
 
 	Running = 1;
@@ -344,7 +344,7 @@ void OnStates_LoadOther() {
 	memset(&szFileTitle, 0, sizeof(szFileTitle));
 	memset(&szFilter,    0, sizeof(szFilter));
 
-	strcpy(szFilter, _("PCSX State Format"));
+	strcpy(szFilter, _("PCSXR State Format"));
 	strcatz(szFilter, "*.*");
 
 	ofn.lStructSize			= sizeof(OPENFILENAME);
@@ -371,8 +371,8 @@ void OnStates_LoadOther() {
 
 		ret = LoadState(szFileName);
 		if (ret == 0)
-			 sprintf(Text, _("*PCSX*: Loaded State %s"), szFileName);
-		else sprintf(Text, _("*PCSX*: Error Loading State %s"), szFileName);
+			 sprintf(Text, _("*PCSXR*: Loaded State %s"), szFileName);
+		else sprintf(Text, _("*PCSXR*: Error Loading State %s"), szFileName);
 		GPU_displayText(Text);
 
 		Running = 1;
@@ -390,7 +390,7 @@ void OnStates_SaveOther() {
 	memset(&szFileTitle, 0, sizeof(szFileTitle));
 	memset(&szFilter,    0, sizeof(szFilter));
 
-	strcpy(szFilter, _("PCSX State Format"));
+	strcpy(szFilter, _("PCSXR State Format"));
 	strcatz(szFilter, "*.*");
 
 	ofn.lStructSize			= sizeof(OPENFILENAME);
@@ -417,8 +417,8 @@ void OnStates_SaveOther() {
 
 		ret = SaveState(szFileName);
 		if (ret == 0)
-			 sprintf(Text, _("*PCSX*: Saved State %s"), szFileName);
-		else sprintf(Text, _("*PCSX*: Error Saving State %s"), szFileName);
+			 sprintf(Text, _("*PCSXR*: Saved State %s"), szFileName);
+		else sprintf(Text, _("*PCSXR*: Error Saving State %s"), szFileName);
 		GPU_displayText(Text);
 
 		Running = 1;
@@ -1729,7 +1729,7 @@ void CreateMainWindow(int nCmdShow) {
 	WNDCLASS wc;
 	HWND hWnd;
 
-	wc.lpszClassName = "PCSX Main";
+	wc.lpszClassName = "PCSXR Main";
 	wc.lpfnWndProc = MainWndProc;
 	wc.style = 0;
 	wc.hInstance = gApp.hInstance;
@@ -1742,8 +1742,8 @@ void CreateMainWindow(int nCmdShow) {
 
 	RegisterClass(&wc);
 
-	hWnd = CreateWindow("PCSX Main",
-						"PCSX",
+	hWnd = CreateWindow("PCSXR Main",
+						"PCSXR",
 						WS_CAPTION | WS_POPUPWINDOW | WS_MINIMIZEBOX,
 						CW_USEDEFAULT,
 						0,
@@ -1871,7 +1871,7 @@ void SysMessage(const char *fmt, ...) {
 	va_start(list,fmt);
 	vsprintf(tmp,fmt,list);
 	va_end(list);
-	MessageBox(0, tmp, _("Pcsx Msg"), 0);
+	MessageBox(0, tmp, _("Pcsxr Msg"), 0);
 }
 
 static char *err = N_("Error Loading Symbol");

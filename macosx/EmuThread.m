@@ -1,6 +1,6 @@
 //
 //  EmuThread.m
-//  Pcsx
+//  Pcsxr
 //
 //  Created by Gil Pedersen on Sun Sep 21 2003.
 //  Copyright (c) 2003 __MyCompanyName__. All rights reserved.
@@ -374,8 +374,8 @@ done:
 
 	GPU_freeze(2, (GPUFreeze_t *)&num);
 	int ret = SaveState([path fileSystemRepresentation]);
-	if (ret == 0) sprintf (Text, _("*PCSX*: Saved State %d"), num+1);
-	else sprintf (Text, _("*PCSX*: Error Saving State %d"), num+1);
+	if (ret == 0) sprintf (Text, _("*PCSXR*: Saved State %d"), num+1);
+	else sprintf (Text, _("*PCSXR*: Error Saving State %d"), num+1);
 	GPU_displayText(Text);
 
 	if (!emuWasPaused) {
@@ -392,7 +392,7 @@ done:
 	defrostPath = [path retain];
 	[EmuThread reset];
 
-	GPU_displayText(_("*PCSX*: Loaded State"));
+	GPU_displayText(_("*PCSXR*: Loaded State"));
 	return YES;
 }
 

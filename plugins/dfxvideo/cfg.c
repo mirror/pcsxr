@@ -96,7 +96,7 @@ void ReadConfigFile()
     {
      strcpy(t,"cfg/dfxvideo.cfg");
      in = fopen(t,"rb");
-     if(!in) sprintf(t,"%s/.pcsx/plugins/dfxvideo.cfg",getenv("HOME"));
+     if(!in) sprintf(t,"%s/.pcsxr/plugins/dfxvideo.cfg",getenv("HOME"));
      else    fclose(in);
     }
    else     fclose(in);
@@ -188,7 +188,7 @@ void ExecCfg(char *arg) {
 		return;
 	}
 
-	sprintf(cfg, "%s/.pcsx/plugins/cfg/cfgDFXVideo", getenv("HOME"));
+	sprintf(cfg, "%s/.pcsxr/plugins/cfg/cfgDFXVideo", getenv("HOME"));
 	if (stat(cfg, &buf) != -1) {
 		if (fork() == 0) {
 			execl(cfg, "cfgDFXVideo", arg, NULL);
@@ -256,7 +256,7 @@ void WriteConfig(void) {
     {
      strcpy(t,"cfg/dfxvideo.cfg");
      out = fopen(t,"rb");
-     if(!out) sprintf(t,"%s/.pcsx/plugins/dfxvideo.cfg",getenv("HOME"));
+     if(!out) sprintf(t,"%s/.pcsxr/plugins/dfxvideo.cfg",getenv("HOME"));
      else     fclose(out);
     }
    else     fclose(out);

@@ -3,7 +3,7 @@ libdir = @libdir@/games/psemu/
 
 lib_LTLIBRARIES = libDFNet.la
 
-libDFNet_la_SOURCES = dfnet.c unix.c cfg.c
+libDFNet_la_SOURCES = dfnet.c dfnet.h unix.c cfg.c
 libDFNet_la_LDFLAGS = -module -avoid-version
 
 AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \

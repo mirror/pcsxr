@@ -22,9 +22,9 @@
 #include "../cfg.c"
 
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 
-GtkWidget *MainWindow;
+GtkBuilder *builder;
+GtkWidget *widget, *MainWindow;
 
 // function to check if the device is a cdrom
 int is_cdrom(const char *device) {
@@ -174,27 +174,23 @@ void fill_drives_list(GtkWidget *widget) {
 }
 
 static void OnConfigExit(GtkWidget *widget, gpointer user_data) {
-	GladeXML *xml;
-
-	xml = glade_get_widget_tree(MainWindow);
-
-	widget = glade_xml_get_widget(xml, "cddev_comboboxentry");
+	widget = gtk_builder_get_object(builder, "cddev_comboboxentry");
 	strncpy(CdromDev, gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(widget)))), 255);
 	CdromDev[255] = '\0';
 
-	widget = glade_xml_get_widget(xml, "readmode_combobox");
+	widget = gtk_builder_get_object(builder, "readmode_combobox");
 	ReadMode = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
 
-	widget = glade_xml_get_widget(xml, "subQ_button");
+	widget = gtk_builder_get_object(builder, "subQ_button");
 	UseSubQ = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 
-	widget = glade_xml_get_widget(xml, "spinCacheSize");
+	widget = gtk_builder_get_object(builder, "spinCacheSize");
 	CacheSize = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
 
-	widget = glade_xml_get_widget(xml, "spinCdrSpeed");
+	widget = gtk_builder_get_object(builder, "spinCdrSpeed");
 	CdrSpeed = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
 
-	widget = glade_xml_get_widget(xml, "comboSpinDown");
+	widget = gtk_builder_get_object(builder, "comboSpinDown");
 	SpinDown = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
 
 	SaveConf();
@@ -204,45 +200,36 @@ static void OnConfigExit(GtkWidget *widget, gpointer user_data) {
 }
 
 long CDRconfigure() {
-	GladeXML *xml;
-	GtkWidget *widget;
-
 	LoadConf();
 
-	xml = glade_xml_new(DATADIR "dfcdrom.glade2", "CfgWnd", NULL);
-	if (xml == NULL) {
-		g_warning("We could not load the interface!");
-		return -1;
-	}
-
-	MainWindow = glade_xml_get_widget(xml, "CfgWnd");
+	MainWindow = gtk_builder_get_object(builder, "CfgWnd");
 	gtk_window_set_title(GTK_WINDOW(MainWindow), _("CDR configuration"));
 
-	widget = glade_xml_get_widget(xml, "CfgWnd");
+	widget = gtk_builder_get_object(builder, "CfgWnd");
 	g_signal_connect_data(GTK_OBJECT(widget), "delete_event",
 		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "cfg_closebutton");
+	widget = gtk_builder_get_object(builder, "cfg_closebutton");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "cddev_comboboxentry");
+	widget = gtk_builder_get_object(builder, "cddev_comboboxentry");
 	fill_drives_list(widget);
 	gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(widget))), CdromDev);
 
-	widget = glade_xml_get_widget(xml, "readmode_combobox");
+	widget = gtk_builder_get_object(builder, "readmode_combobox");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget), ReadMode);
 
-	widget = glade_xml_get_widget(xml, "subQ_button");
+	widget = gtk_builder_get_object(builder, "subQ_button");
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), UseSubQ);
 
-	widget = glade_xml_get_widget(xml, "spinCacheSize");
+	widget = gtk_builder_get_object(builder, "spinCacheSize");
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), (float)CacheSize);
 
-	widget = glade_xml_get_widget(xml, "spinCdrSpeed");
+	widget = gtk_builder_get_object(builder, "spinCdrSpeed");
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), (float)CdrSpeed);
 
-	widget = glade_xml_get_widget(xml, "comboSpinDown");
+	widget = gtk_builder_get_object(builder, "comboSpinDown");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget), SpinDown);
 
 	gtk_widget_show(MainWindow);
@@ -279,8 +266,15 @@ int main(int argc, char *argv[]) {
 	gtk_init(&argc, &argv);
 
 	if (argc != 2) return 0;
-
+	
 	if (strcmp(argv[1], "configure") == 0) {
+		builder = gtk_builder_new();
+		
+		if (!gtk_builder_add_from_file(builder, DATADIR "dfcdrom.ui", NULL)) {
+			g_warning("We could not load the interface!");
+			return 0;
+		}
+		
 		CDRconfigure();
 	} else {
 		CDRabout();

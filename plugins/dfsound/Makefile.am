@@ -5,7 +5,7 @@ libdir = @libdir@/games/psemu/
 
 lib_LTLIBRARIES = libDFSound.la
 
-libDFSound_la_SOURCES = spu.c cfg.c dma.c freeze.c registers.c externals.c
+libDFSound_la_SOURCES = adsr.c adsr.h spu.c spu.h cfg.c cfg.h dma.c dma.h gauss_i.h freeze.c reverb.c reverb.h registers.c registers.h externals.c externals.h dsoundoss.h psemuxa.h regs.h xa.c xa.h stdafx.h
 
 libDFSound_la_CPPFLAGS = $(AM_CPPFLAGS)
 libDFSound_la_LDFLAGS = -module -avoid-version 
@@ -42,10 +42,10 @@ endif
 bin_PROGRAMS = cfgDFSound
 cfgDFSound_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
-	$(GTK2_CFLAGS) $(GLADE2_CFLAGS) $(AM_CPPFLAGS)
+	$(GTK2_CFLAGS) $(AM_CPPFLAGS)
 cfgDFSound_SOURCES = spucfg-0.1df/main.c
-cfgDFSound_LDADD = $(GTK2_LIBS) $(GLADE2_LIBS)
+cfgDFSound_LDADD = $(GTK2_LIBS)
 
-glade_DATA = spucfg-0.1df/dfsound.glade2
+glade_DATA = spucfg-0.1df/dfsound.ui
 gladedir = $(datadir)/psemu/
 EXTRA_DIST = $(glade_DATA)

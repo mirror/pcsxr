@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by pcsx.rc
+// Used by pcsxr.rc
 //
 #define IDS_TITLE                       1
 #define IDC_SEARCHFOR                   100
@@ -61,7 +61,7 @@
 #define IDC_DESCR                       1013
 #define IDC_ADDRESS                     1013
 #define IDC_CLOSE                       1014
-#define IDC_PCSX_ABOUT_TEXT             1014
+#define IDC_PCSXR_ABOUT_TEXT            1014
 #define IDC_PSXOUT                      1014
 #define IDC_ASM_SCROLL                  1015
 #define IDC_CPU                         1015
@@ -101,9 +101,9 @@
 #define IDC_LIST2                       1028
 #define IDC_CONNECTSTR                  1028
 #define IDC_ASMCHECK15                  1029
-#define IDC_PCSX_ABOUT_AUTHORS          1029
+#define IDC_PCSXR_ABOUT_AUTHORS         1029
 #define IDC_ASMCHECK16                  1030
-#define IDC_PCSX_ABOUT_GREETS           1030
+#define IDC_PCSXR_ABOUT_GREETS          1030
 #define IDC_ASMCHECK17                  1031
 #define IDC_SELPSX                      1031
 #define IDC_ASMCHECK18                  1032

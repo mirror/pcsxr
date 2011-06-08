@@ -10,6 +10,7 @@ libpcsxcore_a_SOURCES = \
 	$(top_builddir)/libpcsxcore/psxdma.c	\
 	$(top_builddir)/libpcsxcore/disr3000a.c	\
 	$(top_builddir)/libpcsxcore/gpu.c	\
+	$(top_builddir)/libpcsxcore/gpu.h	\
 	$(top_builddir)/libpcsxcore/spu.c	\
 	$(top_builddir)/libpcsxcore/sio.c	\
 	$(top_builddir)/libpcsxcore/psxhw.c	\
@@ -68,8 +69,10 @@ libpcsxcore_a_SOURCES += \
 else		
 if ARCH_X86
 libpcsxcore_a_SOURCES += \
+	$(top_builddir)/libpcsxcore/ix86/iGte.h	\
 	$(top_builddir)/libpcsxcore/ix86/iR3000A.c	\
 	$(top_builddir)/libpcsxcore/ix86/ix86.c	\
+	$(top_builddir)/libpcsxcore/ix86/ix86.h	\
 	$(top_builddir)/libpcsxcore/
 endif
 endif

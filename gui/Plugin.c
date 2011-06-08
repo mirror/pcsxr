@@ -324,7 +324,7 @@ int _OpenPlugins() {
 	ret = SPU_open();
 	if (ret < 0) { SysMessage(_("Error opening SPU plugin!")); return -1; }
 	SPU_registerCallback(SPUirq);
-	ret = GPU_open(&gpuDisp, "PCSX", NULL);
+	ret = GPU_open(&gpuDisp, "PCSXR", NULL);
 	if (ret < 0) { SysMessage(_("Error opening GPU plugin!")); return -1; }
 	GPU_registerCallback(GPUbusy);
 	ret = PAD1_open(&gpuDisp);
@@ -342,9 +342,9 @@ int _OpenPlugins() {
 		char dotdir[MAXPATHLEN];
 
 		strncpy(dotdir, getenv("HOME"), MAXPATHLEN-100);
-		strcat(dotdir, "/.pcsx/plugins/");
+		strcat(dotdir, "/.pcsxr/plugins/");
 
-		strcpy(info.EmuName, "PCSX " PACKAGE_VERSION);
+		strcpy(info.EmuName, "PCSXR " PACKAGE_VERSION);
 		strncpy(info.CdromID, CdromId, 9);
 		strncpy(info.CdromLabel, CdromLabel, 9);
 		info.psxMem = psxM;

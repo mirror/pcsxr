@@ -1,17 +1,17 @@
 //
-//  PcsxPlugin.m
-//  Pcsx
+//  PcsxrPlugin.m
+//  Pcsxr
 //
 //  Created by Gil Pedersen on Fri Oct 03 2003.
 //  Copyright (c) 2003 __MyCompanyName__. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PcsxPlugin.h"
+#import "PcsxrPlugin.h"
 #include "psxcommon.h"
 #include "plugins.h"
 
-@implementation PcsxPlugin
+@implementation PcsxrPlugin
 
 + (NSString *)getPrefixForType:(int)aType
 {
@@ -28,7 +28,7 @@
 
 + (NSString *)getDefaultKeyForType:(int)aType
 {
-    //return @"Plugin" [PcsxPlugin getPrefixForType:aType];
+    //return @"Plugin" [PcsxrPlugin getPrefixForType:aType];
     switch (aType) {
         case PSE_LT_GPU: return @"PluginGPU";
         case PSE_LT_CDR: return @"PluginCDR";
@@ -173,7 +173,7 @@
         return 0;
     }
 
-    sprintf(symbol, "%sinit", [[PcsxPlugin getPrefixForType:aType] lossyCString]);
+    sprintf(symbol, "%sinit", [[PcsxrPlugin getPrefixForType:aType] lossyCString]);
     init = initArg = SysLoadSym(pluginRef, symbol);
     if (SysLibError() == nil) {
         if (aType != PSE_LT_PAD)
@@ -186,7 +186,7 @@
         active |= aType;
     } else {
         NSRunCriticalAlertPanel(NSLocalizedString(@"Plugin Initialization Failed!", nil),
-            [NSString stringWithFormat:NSLocalizedString(@"Pcsx failed to initialize the selected %s plugin (error=%i).\nThe plugin might not work with your system.", nil), [PcsxPlugin getPrefixForType:aType], res], 
+            [NSString stringWithFormat:NSLocalizedString(@"Pcsxr failed to initialize the selected %s plugin (error=%i).\nThe plugin might not work with your system.", nil), [PcsxrPlugin getPrefixForType:aType], res], 
 			nil, nil, nil);
     }
     
@@ -198,7 +198,7 @@
     char symbol[255];
     long (*shutdown)(void);
 
-    sprintf(symbol, "%sshutdown", [[PcsxPlugin getPrefixForType:aType] lossyCString]);
+    sprintf(symbol, "%sshutdown", [[PcsxrPlugin getPrefixForType:aType] lossyCString]);
     shutdown = SysLoadSym(pluginRef, symbol);
     if (SysLibError() == nil) {
         active &= ~aType;
@@ -212,7 +212,7 @@
 {
     char symbol[255];
 
-    sprintf(symbol, "%sabout", [[PcsxPlugin getPrefixForType:aType] lossyCString]);
+    sprintf(symbol, "%sabout", [[PcsxrPlugin getPrefixForType:aType] lossyCString]);
     SysLoadSym(pluginRef, symbol);
     
     return (SysLibError() == nil);
@@ -222,7 +222,7 @@
 {
     char symbol[255];
 
-    sprintf(symbol, "%sconfigure", [[PcsxPlugin getPrefixForType:aType] lossyCString]);
+    sprintf(symbol, "%sconfigure", [[PcsxrPlugin getPrefixForType:aType] lossyCString]);
     SysLoadSym(pluginRef, symbol);
     
     return (SysLibError() == nil);
@@ -233,7 +233,7 @@
     NSArray *arg;
     char symbol[255];
 
-    sprintf(symbol, "%sabout", [[PcsxPlugin getPrefixForType:aType] lossyCString]);
+    sprintf(symbol, "%sabout", [[PcsxrPlugin getPrefixForType:aType] lossyCString]);
     arg = [[NSArray alloc] initWithObjects:[NSString stringWithCString:symbol], 
                     [NSNumber numberWithInt:0], nil];
     
@@ -247,7 +247,7 @@
     NSArray *arg;
     char symbol[255];
     
-    sprintf(symbol, "%sconfigure", [[PcsxPlugin getPrefixForType:aType] lossyCString]);
+    sprintf(symbol, "%sconfigure", [[PcsxrPlugin getPrefixForType:aType] lossyCString]);
     arg = [[NSArray alloc] initWithObjects:[NSString stringWithCString:symbol], 
                     [NSNumber numberWithInt:1], nil];
     

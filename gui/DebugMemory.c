@@ -254,7 +254,7 @@ void RunDebugMemoryDialog() {
 	PangoFontDescription *pfd;
 	int i;
 
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "MemViewDlg", NULL);
+	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "MemViewDlg", NULL);
 	if (!xml) {
 		g_warning(_("Error: Glade interface could not be loaded!"));
 		return;

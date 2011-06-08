@@ -35,7 +35,7 @@ extern int CancelQuit;
 extern char cfgfile[256];
 extern int Running;
 extern boolean UseGui;
-extern char PcsxDir[256];
+extern char PcsxrDir[256];
 
 void strcatz(char *dst, char *src);
 

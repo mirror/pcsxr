@@ -17,9 +17,9 @@ libdir = @libdir@/games/psemu/
 
 lib_LTLIBRARIES = libDFXVideo.la
 
-libDFXVideo_la_SOURCES = gpu.c cfg.c draw.c fps.c key.c menu.c prim.c soft.c zn.c
+libDFXVideo_la_SOURCES = gpu.c gpu.h cfg.c cfg.h draw.c draw.h fps.c fps.h key.c key.h menu.c menu.h prim.c prim.h soft.c soft.h zn.c swap.h externals.h hq2x.h hq3x.h interp.h
 if X86_NASM
-libDFXVideo_la_SOURCES += i386.asm
+libDFXVideo_la_SOURCES += i386.asm macros.inc
 AM_CPPFLAGS += -DUSE_NASM=1
 endif
 libDFXVideo_la_LDFLAGS = -module -avoid-version

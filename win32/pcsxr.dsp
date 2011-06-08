@@ -1,24 +1,24 @@
-# Microsoft Developer Studio Project File - Name="pcsx" - Package Owner=<4>
+# Microsoft Developer Studio Project File - Name="pcsxr" - Package Owner=<4>
 # Microsoft Developer Studio Generated Build File, Format Version 6.00
 # ** DO NOT EDIT **
 
 # TARGTYPE "Win32 (x86) Application" 0x0101
 
-CFG=PCSX - WIN32 RELEASE
+CFG=PCSXR - WIN32 RELEASE
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
 !MESSAGE 
-!MESSAGE NMAKE /f "pcsx.mak".
+!MESSAGE NMAKE /f "pcsxr.mak".
 !MESSAGE 
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE 
-!MESSAGE NMAKE /f "pcsx.mak" CFG="PCSX - WIN32 RELEASE"
+!MESSAGE NMAKE /f "pcsxr.mak" CFG="PCSXR - WIN32 RELEASE"
 !MESSAGE 
 !MESSAGE Possible choices for configuration are:
 !MESSAGE 
-!MESSAGE "pcsx - Win32 Release" (based on "Win32 (x86) Application")
-!MESSAGE "pcsx - Win32 Debug" (based on "Win32 (x86) Application")
+!MESSAGE "pcsxr - Win32 Release" (based on "Win32 (x86) Application")
+!MESSAGE "pcsxr - Win32 Debug" (based on "Win32 (x86) Application")
 !MESSAGE 
 
 # Begin Project
@@ -29,7 +29,7 @@ CPP=cl.exe
 MTL=midl.exe
 RSC=rc.exe
 
-!IF  "$(CFG)" == "pcsx - Win32 Release"
+!IF  "$(CFG)" == "pcsxr - Win32 Release"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 0
@@ -43,7 +43,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /YX /FD /c
-# ADD CPP /nologo /G6 /Zp16 /MT /W3 /GX /O2 /Op /Ob2 /I "../" /I "./zlib" /I "../libpcsxcore" /I "./glue" /I "./" /I "./gui" /I "./intl" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "__WIN32__" /D "_MSC_VER_" /D PCSX_VERSION=\"1.5\" /D "__i386__" /D "ENABLE_NLS" /D PACKAGE=\"pcsx\" /D inline=__forceinline /FR /FD /Zm200 /c
+# ADD CPP /nologo /G6 /Zp16 /MT /W3 /GX /O2 /Op /Ob2 /I "../" /I "./zlib" /I "../libpcsxcore" /I "./glue" /I "./" /I "./gui" /I "./intl" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "__WIN32__" /D "_MSC_VER_" /D PCSX_VERSION=\"1.5\" /D "__i386__" /D "ENABLE_NLS" /D PACKAGE=\"pcsxr\" /D inline=__forceinline /FR /FD /Zm200 /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x408 /d "NDEBUG"
@@ -55,7 +55,7 @@ LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /machine:I386
 # ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib comctl32.lib wsock32.lib /nologo /subsystem:windows /pdb:none /machine:I386
 
-!ELSEIF  "$(CFG)" == "pcsx - Win32 Debug"
+!ELSEIF  "$(CFG)" == "pcsxr - Win32 Debug"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 1
@@ -68,8 +68,8 @@ LINK32=link.exe
 # PROP Intermediate_Dir "Debug"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D PCSX_VERSION=\"1.3\" /YX /FD /GZ /c
-# ADD CPP /nologo /MTd /W3 /GX /Zi /Od /I "../" /I "./zlib" /I "../libpcsxcore" /I "./glue" /I "./" /I "./gui" /I "./intl" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "__WIN32__" /D "__i386__" /D PCSX_VERSION=\"1.5\" /D "ENABLE_NLS" /D PACKAGE=\"pcsx\" /D inline= /FR /FD /GZ /Zm200 /c
+# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D PCSXR_VERSION=\"1.3\" /YX /FD /GZ /c
+# ADD CPP /nologo /MTd /W3 /GX /Zi /Od /I "../" /I "./zlib" /I "../libpcsxcore" /I "./glue" /I "./" /I "./gui" /I "./intl" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "__WIN32__" /D "__i386__" /D PCSXR_VERSION=\"1.5\" /D "ENABLE_NLS" /D PACKAGE=\"pcsxr\" /D inline= /FR /FD /GZ /Zm200 /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x408 /d "_DEBUG"
@@ -85,8 +85,8 @@ LINK32=link.exe
 
 # Begin Target
 
-# Name "pcsx - Win32 Release"
-# Name "pcsx - Win32 Debug"
+# Name "pcsxr - Win32 Release"
+# Name "pcsxr - Win32 Debug"
 # Begin Group "libpcsxcore"
 
 # PROP Default_Filter ""
@@ -348,11 +348,11 @@ SOURCE=.\gui\NoPic.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\gui\pcsx.bmp
+SOURCE=.\gui\pcsxr.bmp
 # End Source File
 # Begin Source File
 
-SOURCE=.\gui\pcsx.exe.manifest
+SOURCE=.\gui\pcsxr.exe.manifest
 # End Source File
 # Begin Source File
 
@@ -573,7 +573,7 @@ SOURCE=.\config.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\pcsx.rc
+SOURCE=.\pcsxr.rc
 # End Source File
 # Begin Source File
 

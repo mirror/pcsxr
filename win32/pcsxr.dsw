@@ -51,7 +51,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "pcsx"=.\pcsx.dsp - Package Owner=<4>
+Project: "pcsxr"=.\pcsxr.dsp - Package Owner=<4>
 
 Package=<5>
 {{{

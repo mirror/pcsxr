@@ -78,7 +78,7 @@ void ReadConfigFile() {
 			strcpy(cfg_file_name, "cfg/" DEFAULT_CFG_NAME);
 			f_in = fopen(cfg_file_name, "rb");
 			if (!f_in)
-				snprintf(cfg_file_name, 255, "%s/.pcsx/plugins/" DEFAULT_CFG_NAME, getenv("HOME"));
+				snprintf(cfg_file_name, 255, "%s/.pcsxr/plugins/" DEFAULT_CFG_NAME, getenv("HOME"));
 			else
 				fclose(f_in);
 		} else
@@ -175,7 +175,7 @@ void ExecCfg(char const * arg) {
 		return;
 	}
 
-	sprintf(cfg, "%s/.pcsx/plugins/cfg/cfgGXVideo", getenv("HOME"));
+	sprintf(cfg, "%s/.pcsxr/plugins/cfg/cfgGXVideo", getenv("HOME"));
 	if (stat(cfg, &buf) != -1) {
 		if (fork() == 0) {
 			execl(cfg, "cfgGXVideo", arg, NULL);
@@ -230,7 +230,7 @@ void WriteConfig(void) {
 			strcpy(cfg_file_name, "cfg/" DEFAULT_CFG_NAME);
 			f_out = fopen(cfg_file_name, "rb");
 			if (!f_out)
-				snprintf(cfg_file_name, 255, "%s/.pcsx/plugins/" DEFAULT_CFG_NAME, getenv("HOME"));
+				snprintf(cfg_file_name, 255, "%s/.pcsxr/plugins/" DEFAULT_CFG_NAME, getenv("HOME"));
 			else
 				fclose(f_out);
 		} else

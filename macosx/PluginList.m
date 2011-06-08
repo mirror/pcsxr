@@ -1,6 +1,6 @@
 //
 //  PluginList.m
-//  Pcsx
+//  Pcsxr
 //
 //  Created by Gil Pedersen on Sun Sep 21 2003.
 //  Copyright (c) 2003 __MyCompanyName__. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "EmuThread.h"
 #import "PluginList.h"
-#import "PcsxPlugin.h"
+#import "PcsxrPlugin.h"
 #include "psxcommon.h"
 #include "plugins.h"
 
@@ -44,7 +44,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
             [dirEnum skipDescendents]; /* don't enumerate this
                                             directory */
             
-            PcsxPlugin *plugin = [[PcsxPlugin alloc] initWithPath:pname];
+            PcsxrPlugin *plugin = [[PcsxrPlugin alloc] initWithPath:pname];
             if (plugin != nil) {
                 [plugins addObject:plugin];
             }
@@ -63,7 +63,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
     
     type = typeMask;
     for (i=0; i<[plugins count]; i++) {
-        PcsxPlugin *plugin = [plugins objectAtIndex:i];
+        PcsxrPlugin *plugin = [plugins objectAtIndex:i];
         if ([plugin getType] == type) {
             [list addObject:plugin];
         }
@@ -99,7 +99,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 	
 	missingPlugins = NO;
 	for (i=0; i<sizeof(*typeList); i++) {
-		NSString *path = [defaults stringForKey:[PcsxPlugin getDefaultKeyForType:typeList[i]]];
+		NSString *path = [defaults stringForKey:[PcsxrPlugin getDefaultKeyForType:typeList[i]]];
 		if (nil == path) {
 			missingPlugins = YES;
 			continue;
@@ -108,7 +108,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 			continue;
 		
 		if (![self hasPluginAtPath:path]) {
-			PcsxPlugin *plugin = [[PcsxPlugin alloc] initWithPath:path];
+			PcsxrPlugin *plugin = [[PcsxrPlugin alloc] initWithPath:path];
 			if (plugin) {
 				[pluginList addObject:plugin];
 				if (![self setActivePlugin:plugin forType:typeList[i]])
@@ -167,7 +167,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 														directory */
 			
 			if (![self hasPluginAtPath:pname]) {
-				PcsxPlugin *plugin = [[PcsxPlugin alloc] initWithPath:pname];
+				PcsxrPlugin *plugin = [[PcsxrPlugin alloc] initWithPath:pname];
 				if (plugin != nil) {
 					[pluginList addObject:plugin];
 				}
@@ -178,7 +178,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 	// check the we have the needed plugins
 	missingPlugins = NO;
 	for (i=0; i<sizeof(*typeList); i++) {
-		PcsxPlugin *plugin = [self activePluginForType:typeList[i]];
+		PcsxrPlugin *plugin = [self activePluginForType:typeList[i]];
 		if (nil == plugin) {
 			NSArray *list = [self pluginsForType:typeList[i]];
 			int j;
@@ -199,7 +199,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 	int i;
 	
 	for (i=0; i<[pluginList count]; i++) {
-		PcsxPlugin *plugin = [pluginList objectAtIndex:i];
+		PcsxrPlugin *plugin = [pluginList objectAtIndex:i];
 		
 		if ([plugin getType] & typeMask) {
 			[types addObject:plugin];
@@ -241,7 +241,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 	return !bad;
 }
 
-- (PcsxPlugin *)activePluginForType:(int)type
+- (PcsxrPlugin *)activePluginForType:(int)type
 {
 	switch (type) {
 		case PSE_LT_GPU: return activeGpuPlugin;
@@ -254,9 +254,9 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 	return nil;
 }
 
-- (BOOL)setActivePlugin:(PcsxPlugin *)plugin forType:(int)type
+- (BOOL)setActivePlugin:(PcsxrPlugin *)plugin forType:(int)type
 {
-	PcsxPlugin **pluginPtr;
+	PcsxrPlugin **pluginPtr;
 	switch (type) {
 		case PSE_LT_GPU: pluginPtr = &activeGpuPlugin; break;
 		case PSE_LT_CDR: pluginPtr = &activeCdrPlugin; break;
@@ -303,7 +303,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 		str = "Invalid Plugin";
 	}
 	
-	char **dst = [PcsxPlugin getConfigEntriesForType:type];
+	char **dst = [PcsxrPlugin getConfigEntriesForType:type];
 	while (*dst) {
 		strncpy(*dst, str, 255);
 		dst++;

@@ -217,9 +217,9 @@ void CALLBACK GPUmakeSnapshot(void) {
 	//	do {
 	//		snapshotnr++;
 	//#ifdef _WINDOWS
-	//		sprintf(filename,"snap\\pcsx%04ld.bmp",snapshotnr);
+	//		sprintf(filename,"snap\\pcsxr%04ld.bmp",snapshotnr);
 	//#else
-	//		sprintf(filename, "%s/pcsx%04ld.bmp", getenv("HOME"), snapshotnr);
+	//		sprintf(filename, "%s/pcsxr%04ld.bmp", getenv("HOME"), snapshotnr);
 	//#endif
 	//
 	//		bmpfile = fopen(filename, "rb");

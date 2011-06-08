@@ -1,18 +1,18 @@
 #import "PluginController.h"
-#import "PcsxPlugin.h"
-#import "PcsxController.h"
+#import "PcsxrPlugin.h"
+#import "PcsxrController.h"
 
 @implementation PluginController
 
 - (IBAction)doAbout:(id)sender
 {
-	 PcsxPlugin *plugin = [plugins objectAtIndex:[pluginMenu indexOfSelectedItem]];
+	 PcsxrPlugin *plugin = [plugins objectAtIndex:[pluginMenu indexOfSelectedItem]];
 	 [plugin aboutAs:pluginType];
 }
 
 - (IBAction)doConfigure:(id)sender
 {
-	 PcsxPlugin *plugin = [plugins objectAtIndex:[pluginMenu indexOfSelectedItem]];
+	 PcsxrPlugin *plugin = [plugins objectAtIndex:[pluginMenu indexOfSelectedItem]];
 
 	 [plugin configureAs:pluginType];
 }
@@ -22,7 +22,7 @@
 	if (sender==pluginMenu) {
 		int index = [pluginMenu indexOfSelectedItem];
 		if (index != -1) {
-			PcsxPlugin *plugin = [plugins objectAtIndex:index];
+			PcsxrPlugin *plugin = [plugins objectAtIndex:index];
 
 			if (![[PluginList list] setActivePlugin:plugin forType:pluginType]) {
 				/* plugin won't initialize */
@@ -51,7 +51,7 @@
 	// remember the list
 	pluginType = type;
 	plugins = [list retain];
-	defaultKey = [[PcsxPlugin getDefaultKeyForType:pluginType] retain];
+	defaultKey = [[PcsxrPlugin getDefaultKeyForType:pluginType] retain];
 
 	// clear the previous menu items
 	[pluginMenu removeAllItems];

@@ -1,4 +1,4 @@
-There are several toggles in PCSX to allow you to modify emulation
+There are several toggles in PCSXR to allow you to modify emulation
 behavior; this may allow certain games to work that would not otherwise
 function. These can all be found at Configuration -> CPU.
 

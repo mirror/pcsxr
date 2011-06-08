@@ -82,13 +82,13 @@ int LoadConfig(PcsxConfig *Conf) {
 	// Ryan says: use dotdir, dotdir is GOOD
 	// No giant homedir names
 	strncpy(cfgfile, getenv("HOME"), 200);
-	strcat(cfgfile, PCSX_DOT_DIR);
+	strcat(cfgfile, PCSXR_DOT_DIR);
 
 	// proceed to load the cfg file
 	// append its name
 	strcat(cfgfile, cfgfile_basename);
 
-	// file is  now ~/.pcsx/pcsx.cfg (or whatever cfgfile_basename is)
+	// file is  now ~/.pcsxr/pcsxr.cfg (or whatever cfgfile_basename is)
 	if (stat(cfgfile, &buf) == -1) {
 		// the config file doesn't exist!
 		/* TODO Error checking? */

@@ -144,7 +144,7 @@ main (int argc, char *argv[])
        if (strcmp(argv[1], "ABOUT") == 0) {
 		const char *authors[]= {"Pete Bernert and the P.E.Op.S. team", "Ryan Schultz", "Andrew Burton", NULL};
 		widget = gtk_about_dialog_new ();
-		gtk_about_dialog_set_name (GTK_ABOUT_DIALOG (widget), "P.E.Op.S PCSX Video Plugin");
+		gtk_about_dialog_set_name (GTK_ABOUT_DIALOG (widget), "P.E.Op.S PCSXR Video Plugin");
 		gtk_about_dialog_set_version (GTK_ABOUT_DIALOG (widget), "1.17");
 		gtk_about_dialog_set_authors (GTK_ABOUT_DIALOG (widget), authors);
 		gtk_about_dialog_set_website (GTK_ABOUT_DIALOG (widget), "http://pcsx-df.sourceforge.net/");
@@ -178,7 +178,7 @@ main (int argc, char *argv[])
     fclose(in);
    }
   else{ pB=0;printf("Couldn't find config file %s\n", cfg);}
-/* ADB TODO Parse this like we parse the config file in PCSX - use common functions! */
+/* ADB TODO Parse this like we parse the config file in PCSXR - use common functions! */
   val=1;
   if(pB)
    {

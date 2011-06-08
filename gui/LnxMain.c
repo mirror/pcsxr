@@ -78,8 +78,8 @@ static void CreateHomeConfigDir(char *directory) {
 }
 
 static void CheckSubDir() {
-	// make sure that ~/.pcsx exists
-	CreateHomeConfigDir(PCSX_DOT_DIR);
+	// make sure that ~/.pcsxr exists
+	CreateHomeConfigDir(PCSXR_DOT_DIR);
 
 	CreateHomeConfigDir(BIOS_DIR);
 	CreateHomeConfigDir(MEMCARD_DIR);
@@ -109,7 +109,7 @@ static void ScanPlugins(gchar* scandir) {
 				match(filename, "cfg.*") == 0) {
 				continue;	/* Skip this file */
 			} else {
-				/* Create a symlink from this file to the directory ~/.pcsx/plugin */
+				/* Create a symlink from this file to the directory ~/.pcsxr/plugin */
 				linkname = g_build_filename (getenv("HOME"), PLUGINS_DIR, ent->d_name, NULL);
 				symlink(filename, linkname);
 
@@ -145,7 +145,7 @@ static void ScanBios(gchar* scandir) {
 				match(filename, ".*\\.BIN$") == 0) {
 				continue;	/* Skip this file */
 			} else {
-				/* Create a symlink from this file to the directory ~/.pcsx/plugin */
+				/* Create a symlink from this file to the directory ~/.pcsxr/plugin */
 				linkname = g_build_filename(getenv("HOME"), BIOS_DIR, ent->d_name, NULL);
 				symlink(filename, linkname);
 
@@ -220,8 +220,8 @@ static void ScanAllPlugins (void) {
 	ScanBios("/usr/lib32/games/psemu/bios");
 	ScanBios("/usr/share/psemu");
 	ScanBios("/usr/share/psemu/bios");
-	ScanBios("/usr/share/pcsx");
-	ScanBios("/usr/share/pcsx/bios");
+	ScanBios("/usr/share/pcsxr");
+	ScanBios("/usr/share/pcsxr/bios");
 	ScanBios("/usr/local/lib/games/psemu");
 	ScanBios("/usr/local/lib/games/psemu/bios");
 	ScanBios("/usr/local/lib64/games/psemu");
@@ -230,8 +230,8 @@ static void ScanAllPlugins (void) {
 	ScanBios("/usr/local/lib32/games/psemu/bios");
 	ScanBios("/usr/local/share/psemu");
 	ScanBios("/usr/local/share/psemu/bios");
-	ScanBios("/usr/local/share/pcsx");
-	ScanBios("/usr/local/share/pcsx/bios");
+	ScanBios("/usr/local/share/pcsxr");
+	ScanBios("/usr/local/share/pcsxr/bios");
 	ScanBios(PACKAGE_DATA_DIR);
 	ScanBios(PSEMU_DATA_DIR);
 	ScanBios(PACKAGE_DATA_DIR "/bios");
@@ -245,17 +245,17 @@ static void ScanAllPlugins (void) {
 	ScanPlugins(currentdir);
 	g_free(currentdir);
 
-	// Check for bad links in ~/.pcsx/plugins/
+	// Check for bad links in ~/.pcsxr/plugins/
 	currentdir = g_build_filename(getenv("HOME"), PLUGINS_DIR, NULL);
 	CheckSymlinksInPath(currentdir);
 	g_free(currentdir);
 
-	// Check for bad links in ~/.pcsx/plugins/cfg
+	// Check for bad links in ~/.pcsxr/plugins/cfg
 	currentdir = g_build_filename(getenv("HOME"), PLUGINS_CFG_DIR, NULL);
 	CheckSymlinksInPath(currentdir);
 	g_free(currentdir);
 
-	// Check for bad links in ~/.pcsx/bios
+	// Check for bad links in ~/.pcsxr/bios
 	currentdir = g_build_filename(getenv("HOME"), BIOS_DIR, NULL);
 	CheckSymlinksInPath(currentdir);
 	g_free(currentdir);
@@ -288,7 +288,7 @@ int main(int argc, char *argv[]) {
 
 	// what is the name of the config file?
 	// it may be redefined by -cfg on the command line
-	strcpy(cfgfile_basename, "pcsx.cfg");
+	strcpy(cfgfile_basename, "pcsxr.cfg");
 
 	// read command line options
 	for (i = 1; i < argc; i++) {
@@ -325,12 +325,12 @@ int main(int argc, char *argv[]) {
 			 !strcmp(argv[i], "--help")) {
 			 printf(PACKAGE_STRING "\n");
 			 printf("%s\n", _(
-							" pcsx [options] [file]\n"
+							" pcsxr [options] [file]\n"
 							"\toptions:\n"
 							"\t-runcd\t\tRuns CD-ROM\n"
 							"\t-cdfile FILE\tRuns a CD image file\n"
 							"\t-nogui\t\tDon't open the GTK GUI\n"
-							"\t-cfg FILE\tLoads desired configuration file (default: ~/.pcsx/pcsx.cfg)\n"
+							"\t-cfg FILE\tLoads desired configuration file (default: ~/.pcsxr/pcsxr.cfg)\n"
 							"\t-psxout\t\tEnable PSX output\n"
 							"\t-slowboot\tEnable BIOS Logo\n"
 							"\t-load STATENUM\tLoads savestate STATENUM (1-9)\n"
@@ -362,7 +362,7 @@ int main(int argc, char *argv[]) {
 	// if the config file doesn't exist
 	if (LoadConfig() == -1) {
 		if (!UseGui) {
-			printf(_("PCSX cannot be configured without using the GUI -- you should restart without -nogui.\n"));
+			printf(_("PCSXR cannot be configured without using the GUI -- you should restart without -nogui.\n"));
 			return 1;
 		}
 

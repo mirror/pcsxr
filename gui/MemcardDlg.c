@@ -433,8 +433,8 @@ static void OnMcd_New(GtkWidget *widget, gpointer user_data) {
 	    GTK_STOCK_SAVE, GTK_RESPONSE_OK,
 	    NULL);
 
-	// Card should be put into $HOME/.pcsx/memcards
-	path = g_build_filename(g_get_home_dir(), ".pcsx", "memcards", NULL);
+	// Card should be put into $HOME/.pcsxr/memcards
+	path = g_build_filename(g_get_home_dir(), ".pcsxr", "memcards", NULL);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(chooser), path);
 	gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(chooser), _("New Memory Card.mcd"));
 	gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(chooser), TRUE);
@@ -692,7 +692,7 @@ void OnConf_Mcds() {
 	GtkTreeSelection *treesel1, *treesel2;
 	gchar *str;
 
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "McdsDlg", NULL);
+	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "McdsDlg", NULL);
 
 	if (!xml) {
 		g_warning("We could not load the interface!");

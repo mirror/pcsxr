@@ -279,7 +279,7 @@ LRESULT WINAPI CheatDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 					memset(&szFileTitle, 0, sizeof(szFileTitle));
 					memset(&szFilter,    0, sizeof(szFilter));
 
-					strcpy(szFilter, _("PCSX Cheat Code Files"));
+					strcpy(szFilter, _("PCSXR Cheat Code Files"));
 					strcatz(szFilter, "*.*");
 
 					ofn.lStructSize			= sizeof(OPENFILENAME);
@@ -308,7 +308,7 @@ LRESULT WINAPI CheatDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 					memset(&szFileTitle, 0, sizeof(szFileTitle));
 					memset(&szFilter,    0, sizeof(szFilter));
 
-					strcpy(szFilter, _("PCSX Cheat Code Files"));
+					strcpy(szFilter, _("PCSXR Cheat Code Files"));
 					strcatz(szFilter, "*.*");
 
 					ofn.lStructSize			= sizeof(OPENFILENAME);

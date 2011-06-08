@@ -22,7 +22,7 @@
 #import "PluginConfigController.h"
 #include "cdr.h"
 
-#define APP_ID @"net.pcsx.DFCdrom"
+#define APP_ID @"net.pcsxr.DFCdrom"
 #define PrefsKey APP_ID @" Settings"
 
 static PluginConfigController *windowController;

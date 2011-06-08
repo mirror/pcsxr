@@ -3,7 +3,7 @@ libdir = @libdir@/games/psemu/
 
 lib_LTLIBRARIES = libDFInput.la
 
-libDFInput_la_SOURCES = cfg.c pad.c pad.h sdljoy.c xkb.c analog.c util.c
+libDFInput_la_SOURCES = cfg.c pad.c pad.h sdljoy.c xkb.c analog.c util.c util.h
 libDFInput_la_LDFLAGS = -module -avoid-version 
 libDFInput_la_LIBADD = -lpthread -lX11 $(SDL_LIBS)
 

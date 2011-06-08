@@ -1,10 +1,10 @@
-/* PcsxController */
+/* PcsxrController */
 
 #import <Cocoa/Cocoa.h>
 #import "EmuThread.h"
 #import "PluginList.h"
 
-@interface PcsxController : NSObject
+@interface PcsxrController : NSObject
 {
     NSWindowController *preferencesController;
     NSWindowController *memCardController;

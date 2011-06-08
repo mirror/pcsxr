@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="pcsx"
+	Name="pcsxr"
 	ProjectGUID="{9EEA62F5-46DC-4C07-AFE1-F72F9D6B9E3E}"
-	RootNamespace="pcsx"
+	RootNamespace="pcsxr"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -43,7 +43,7 @@
 				MkTypLibCompatible="true"
 				SuppressStartupBanner="true"
 				TargetEnvironment="1"
-				TypeLibraryName=".\Debug/pcsx.tlb"
+				TypeLibraryName=".\Debug/pcsxr.tlb"
 				HeaderFileName=""
 			/>
 			<Tool
@@ -51,10 +51,10 @@
 				AdditionalOptions="/Zm200 "
 				Optimization="0"
 				AdditionalIncludeDirectories="../,./zlib,../libpcsxcore,./glue,./,./gui,./intl"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;__WIN32__;__i386__;PCSX_VERSION=\&quot;1.5\&quot;;ENABLE_NLS;PACKAGE=\&quot;pcsx\&quot;;inline="
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;__WIN32__;__i386__;PCSXR_VERSION=\&quot;1.5\&quot;;ENABLE_NLS;PACKAGE=\&quot;pcsxr\&quot;;inline="
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
-				PrecompiledHeaderFile=".\Debug/pcsx.pch"
+				PrecompiledHeaderFile=".\Debug/pcsxr.pch"
 				AssemblerListingLocation=".\Debug/"
 				ObjectFile=".\Debug/"
 				ProgramDataBaseFileName=".\Debug/"
@@ -77,11 +77,11 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="odbc32.lib odbccp32.lib comctl32.lib wsock32.lib"
-				OutputFile=".\Debug/pcsx.exe"
+				OutputFile=".\Debug/pcsxr.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
 				GenerateDebugInformation="true"
-				ProgramDatabaseFile=".\Debug/pcsx.pdb"
+				ProgramDatabaseFile=".\Debug/pcsxr.pdb"
 				SubSystem="2"
 				TargetMachine="1"
 			/>
@@ -98,7 +98,7 @@
 			<Tool
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
-				OutputFile=".\Debug/pcsx.bsc"
+				OutputFile=".\Debug/pcsxr.bsc"
 			/>
 			<Tool
 				Name="VCFxCopTool"
@@ -138,7 +138,7 @@
 				MkTypLibCompatible="true"
 				SuppressStartupBanner="true"
 				TargetEnvironment="1"
-				TypeLibraryName=".\Release/pcsx.tlb"
+				TypeLibraryName=".\Release/pcsxr.tlb"
 				HeaderFileName=""
 			/>
 			<Tool
@@ -147,12 +147,12 @@
 				Optimization="2"
 				InlineFunctionExpansion="2"
 				AdditionalIncludeDirectories="../,./zlib,../libpcsxcore,./glue,./,./gui,./intl"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;__WIN32__;_MSC_VER_;PCSX_VERSION=\&quot;1.5\&quot;;__i386__;ENABLE_NLS;PACKAGE=\&quot;pcsx\&quot;;inline=__forceinline"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;__WIN32__;_MSC_VER_;PCSXR_VERSION=\&quot;1.5\&quot;;__i386__;ENABLE_NLS;PACKAGE=\&quot;pcsxr\&quot;;inline=__forceinline"
 				StringPooling="true"
 				RuntimeLibrary="0"
 				StructMemberAlignment="5"
 				EnableFunctionLevelLinking="true"
-				PrecompiledHeaderFile=".\Release/pcsx.pch"
+				PrecompiledHeaderFile=".\Release/pcsxr.pch"
 				AssemblerListingLocation=".\Release/"
 				ObjectFile=".\Release/"
 				ProgramDataBaseFileName=".\Release/"
@@ -174,7 +174,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="odbc32.lib odbccp32.lib comctl32.lib wsock32.lib"
-				OutputFile=".\Release/pcsx.exe"
+				OutputFile=".\Release/pcsxr.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
 				SubSystem="2"
@@ -192,7 +192,7 @@
 			<Tool
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
-				OutputFile=".\Release/pcsx.bsc"
+				OutputFile=".\Release/pcsxr.bsc"
 			/>
 			<Tool
 				Name="VCFxCopTool"
@@ -972,11 +972,11 @@
 				>
 			</File>
 			<File
-				RelativePath="gui\pcsx.bmp"
+				RelativePath="gui\pcsxr.bmp"
 				>
 			</File>
 			<File
-				RelativePath="gui\pcsx.exe.manifest"
+				RelativePath="gui\pcsxr.exe.manifest"
 				>
 			</File>
 			<File
@@ -1683,7 +1683,7 @@
 			>
 		</File>
 		<File
-			RelativePath="pcsx.rc"
+			RelativePath="pcsxr.rc"
 			>
 			<FileConfiguration
 				Name="Debug|Win32"

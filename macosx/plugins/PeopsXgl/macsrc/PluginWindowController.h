@@ -1,7 +1,7 @@
 /***************************************************************************
     PluginWindowController.h
     The big bad boy that controls/creates the game window, the openGLView, and
-    communicates with PCSX itself
+    communicates with PCSXR itself
     PeopsOpenGPU
   
     Created by Gil Pedersen on Mon April 11 2004.
@@ -20,7 +20,7 @@
 
 /*
     In truth, this controller should be the ONLY place that glues between the 
-    running PCSX gpu and the mac interface. 
+    running PCSXR gpu and the mac interface. 
     ATM, some of the glue is here, some of it in drawgl.m, and a couple
     of bits are in the config controller...
 */

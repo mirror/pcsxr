@@ -578,7 +578,7 @@ static long PADreadPort(int num, PadDataS *pad) {
 
 	pad->buttonStatus = (g.PadState[num].KeyStatus & g.PadState[num].JoyKeyStatus);
 
-	// ePSXe different from pcsx, swap bytes
+	// ePSXe different from pcsxr, swap bytes
 	pad->buttonStatus = (pad->buttonStatus >> 8) | (pad->buttonStatus << 8);
 
 	switch (g.cfg.PadDef[num].Type) {

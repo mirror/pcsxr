@@ -19,7 +19,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-#define ControllerList NetPcsxHIDInputPluginControllerList
+#define ControllerList NetPcsxrHIDInputPluginControllerList
 
 #import <Foundation/Foundation.h>
 #import <AppKit/NSTableView.h>

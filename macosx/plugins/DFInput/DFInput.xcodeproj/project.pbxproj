@@ -63,7 +63,7 @@
 		71D88862130F032700F150FF /* SDL_error_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D8882C130F032700F150FF /* SDL_error_c.h */; };
 		71E861B611FF75AC001C1826 /* PadView.h in Headers */ = {isa = PBXBuildFile; fileRef = 71E861AC11FF75AC001C1826 /* PadView.h */; };
 		71E861B711FF75AC001C1826 /* PadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E861AD11FF75AC001C1826 /* PadView.m */; };
-		71E861BC11FF75BA001C1826 /* NetPcsxHIDInputPluginMain.nib in Resources */ = {isa = PBXBuildFile; fileRef = 71E861BA11FF75BA001C1826 /* NetPcsxHIDInputPluginMain.nib */; };
+		71E861BC11FF75BA001C1826 /* NetPcsxrHIDInputPluginMain.nib in Resources */ = {isa = PBXBuildFile; fileRef = 71E861BA11FF75BA001C1826 /* NetPcsxrHIDInputPluginMain.nib */; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
 		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
@@ -127,7 +127,7 @@
 		71E861AB11FF75AC001C1826 /* PadController.m */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.objc; name = PadController.m; path = macsrc/PadController.m; sourceTree = "<group>"; };
 		71E861AC11FF75AC001C1826 /* PadView.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = PadView.h; path = macsrc/PadView.h; sourceTree = "<group>"; };
 		71E861AD11FF75AC001C1826 /* PadView.m */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.objc; name = PadView.m; path = macsrc/PadView.m; sourceTree = "<group>"; };
-		71E861BB11FF75BA001C1826 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/NetPcsxHIDInputPluginMain.nib; sourceTree = "<group>"; };
+		71E861BB11FF75BA001C1826 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/NetPcsxrHIDInputPluginMain.nib; sourceTree = "<group>"; };
 		8D576316048677EA00EA77CD /* DFInput.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DFInput.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,7 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				7136F51812011BB4001973D9 /* Credits.rtf */,
-				71E861BA11FF75BA001C1826 /* NetPcsxHIDInputPluginMain.nib */,
+				71E861BA11FF75BA001C1826 /* NetPcsxrHIDInputPluginMain.nib */,
 				8D576317048677EA00EA77CD /* Info.plist */,
 				8D5B49A704867FD3000E48DA /* InfoPlist.strings */,
 			);
@@ -431,7 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */,
-				71E861BC11FF75BA001C1826 /* NetPcsxHIDInputPluginMain.nib in Resources */,
+				71E861BC11FF75BA001C1826 /* NetPcsxrHIDInputPluginMain.nib in Resources */,
 				7136F51A12011BB4001973D9 /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,12 +487,12 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		71E861BA11FF75BA001C1826 /* NetPcsxHIDInputPluginMain.nib */ = {
+		71E861BA11FF75BA001C1826 /* NetPcsxrHIDInputPluginMain.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				71E861BB11FF75BA001C1826 /* English */,
 			);
-			name = NetPcsxHIDInputPluginMain.nib;
+			name = NetPcsxrHIDInputPluginMain.nib;
 			sourceTree = "<group>";
 		};
 		8D5B49A704867FD3000E48DA /* InfoPlist.strings */ = {

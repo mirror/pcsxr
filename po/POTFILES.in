@@ -1,4 +1,4 @@
-[type: gettext/glade]data/pcsx.glade2
+[type: gettext/glade]data/pcsxr.glade2
 gui/AboutDlg.c
 gui/AboutDlg.h
 gui/Cheat.c
@@ -39,7 +39,7 @@ libpcsxcore/sio.c
 libpcsxcore/socket.c
 libpcsxcore/spu.c
 plugins/dfcdrom/cdr.c
-[type: gettext/glade]plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.glade2
+[type: gettext/glade]plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui
 plugins/dfcdrom/cdrcfg-0.1df/main.c
 plugins/dfcdrom/cdr-linux.c
 plugins/dfcdrom/cdr-null.c
@@ -68,7 +68,7 @@ plugins/dfsound/pulseaudio.c
 plugins/dfsound/registers.c
 plugins/dfsound/reverb.c
 plugins/dfsound/spu.c
-[type: gettext/glade]plugins/dfsound/spucfg-0.1df/dfsound.glade2
+[type: gettext/glade]plugins/dfsound/spucfg-0.1df/dfsound.ui
 plugins/dfsound/xa.c
 plugins/dfxvideo/cfg.c
 plugins/dfxvideo/draw.c
@@ -95,7 +95,7 @@ plugins/bladesio1/gui.c
 plugins/bladesio1/settings.c
 plugins/bladesio1/settings.h
 plugins/bladesio1/sio1.c
-[type: gettext/glade]plugins/bladesio1/sio1.glade2
+[type: gettext/glade]plugins/bladesio1/sio1.ui
 plugins/bladesio1/sio1.h
 win32/gui/AboutDlg.c
 win32/gui/CheatDlg.c

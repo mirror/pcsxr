@@ -19,7 +19,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-#define MappingCell NetPcsxHIDInputPluginMappingCell
+#define MappingCell NetPcsxrHIDInputPluginMappingCell
 
 #import <AppKit/AppKit.h>
 

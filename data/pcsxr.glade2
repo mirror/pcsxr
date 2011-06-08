@@ -4,10 +4,10 @@
   <!-- interface-naming-policy project-wide -->
   <widget class="GtkWindow" id="MainWindow">
     <property name="visible">True</property>
-    <property name="title" translatable="yes">PCSX</property>
+    <property name="title" translatable="yes">PCSXR</property>
     <property name="resizable">False</property>
     <property name="window_position">center</property>
-    <property name="icon_name">pcsx-icon.png</property>
+    <property name="icon_name">pcsxr-icon.png</property>
     <signal name="destroy" handler="OnDestroy"/>
     <child>
       <widget class="GtkVBox" id="vbox18">
@@ -641,8 +641,8 @@
                 <child>
                   <widget class="GtkMenu" id="help1_menu">
                     <child>
-                      <widget class="GtkImageMenuItem" id="about_pcsx1">
-                        <property name="label" translatable="yes">_About PCSX...</property>
+                      <widget class="GtkImageMenuItem" id="about_pcsxr1">
+                        <property name="label" translatable="yes">_About PCSXR...</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>
@@ -818,7 +818,7 @@
             <property name="width_request">354</property>
             <property name="height_request">174</property>
             <property name="visible">True</property>
-            <property name="pixbuf">pcsx.jpg</property>
+            <property name="pixbuf">pcsxr.jpg</property>
           </widget>
           <packing>
             <property name="position">2</property>
@@ -840,7 +840,7 @@
   </widget>
   <widget class="GtkDialog" id="ConfDlg">
     <property name="visible">True</property>
-    <property name="title" translatable="yes">Configure PCSX</property>
+    <property name="title" translatable="yes">Configure PCSXR</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="type_hint">dialog</property>

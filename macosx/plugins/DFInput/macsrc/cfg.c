@@ -118,7 +118,7 @@ void LoadPADConfig() {
 
 	SetDefaultConfig();
 
-	sprintf(buf, "%s/Library/Preferences/net.pcsx.DFInput.plist", getenv("HOME"));
+	sprintf(buf, "%s/Library/Preferences/net.pcsxr.DFInput.plist", getenv("HOME"));
 
 	fp = fopen(buf, "r");
 	if (fp == NULL) {
@@ -272,7 +272,7 @@ void SavePADConfig() {
 	int			i;
 	char		buf[256];
 
-	sprintf(buf, "%s/Library/Preferences/net.pcsx.DFInput.plist", getenv("HOME"));
+	sprintf(buf, "%s/Library/Preferences/net.pcsxr.DFInput.plist", getenv("HOME"));
 
 	fp = fopen(buf, "w");
 	if (fp == NULL) {

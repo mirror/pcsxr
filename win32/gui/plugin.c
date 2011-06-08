@@ -91,8 +91,8 @@ void PADhandleKey(int key) {
 			GPU_freeze(2, (GPUFreeze_t *)&StatesC);
 			ret = SaveState(Text);
 			if (ret == 0)
-				 sprintf(Text, _("*PCSX*: Saved State %d"), StatesC+1);
-			else sprintf(Text, _("*PCSX*: Error Saving State %d"), StatesC+1);
+				 sprintf(Text, _("*PCSXR*: Saved State %d"), StatesC+1);
+			else sprintf(Text, _("*PCSXR*: Error Saving State %d"), StatesC+1);
 			GPU_displayText(Text);
 			if (ShowPic) { ShowPic = 0; gpuShowPic(); }
 			break;
@@ -108,8 +108,8 @@ void PADhandleKey(int key) {
 			GetStateFilename(Text, StatesC);
 			ret = LoadState(Text);
 			if (ret == 0)
-				 sprintf(Text, _("*PCSX*: Loaded State %d"), StatesC+1);
-			else sprintf(Text, _("*PCSX*: Error Loading State %d"), StatesC+1);
+				 sprintf(Text, _("*PCSXR*: Loaded State %d"), StatesC+1);
+			else sprintf(Text, _("*PCSXR*: Error Loading State %d"), StatesC+1);
 			GPU_displayText(Text);
 			break;
 
@@ -120,24 +120,24 @@ void PADhandleKey(int key) {
 		case VK_F5:
 			Config.Sio ^= 0x1;
 			if (Config.Sio)
-				 sprintf(Text, _("*PCSX*: Sio Irq Always Enabled"));
-			else sprintf(Text, _("*PCSX*: Sio Irq Not Always Enabled"));
+				 sprintf(Text, _("*PCSXR*: Sio Irq Always Enabled"));
+			else sprintf(Text, _("*PCSXR*: Sio Irq Not Always Enabled"));
 			GPU_displayText(Text);
 			break;
 
 		case VK_F6:
 			Config.Mdec ^= 0x1;
 			if (Config.Mdec)
-				 sprintf(Text, _("*PCSX*: Black&White Mdecs Only Enabled"));
-			else sprintf(Text, _("*PCSX*: Black&White Mdecs Only Disabled"));
+				 sprintf(Text, _("*PCSXR*: Black&White Mdecs Only Enabled"));
+			else sprintf(Text, _("*PCSXR*: Black&White Mdecs Only Disabled"));
 			GPU_displayText(Text);
 			break;
 
 		case VK_F7:
 			Config.Xa ^= 0x1;
 			if (Config.Xa == 0)
-				 sprintf (Text, _("*PCSX*: Xa Enabled"));
-			else sprintf (Text, _("*PCSX*: Xa Disabled"));
+				 sprintf (Text, _("*PCSXR*: Xa Enabled"));
+			else sprintf (Text, _("*PCSXR*: Xa Disabled"));
 			GPU_displayText(Text);
 			break;
 
@@ -146,19 +146,19 @@ void PADhandleKey(int key) {
 			return;
 
 		case VK_F9:
-			GPU_displayText(_("*PCSX*: CdRom Case Opened"));
+			GPU_displayText(_("*PCSXR*: CdRom Case Opened"));
 			SetCdOpenCaseTime(-1);
 			LidInterrupt();
 			break;
 
 		case VK_F10:
-			GPU_displayText(_("*PCSX*: CdRom Case Closed"));
+			GPU_displayText(_("*PCSXR*: CdRom Case Closed"));
 			SetCdOpenCaseTime(0);
 			LidInterrupt();
 			break;
 
 		case VK_F12:
-			SysPrintf("*PCSX*: CpuReset\n");
+			SysPrintf("*PCSXR*: CpuReset\n");
 			psxReset();
 			break;
 
@@ -219,12 +219,12 @@ int _OpenPlugins(HWND hWnd) {
 	ret = CDR_open();
 	if (ret < 0) { SysMessage (_("Error Opening CDR Plugin")); return -1; }
 
-	SetCurrentDirectory(PcsxDir);
+	SetCurrentDirectory(PcsxrDir);
 	if (Config.UseNet && !NetOpened) {
 		netInfo info;
 		char path[256];
 
-		strcpy(info.EmuName, "PCSX " PACKAGE_VERSION);
+		strcpy(info.EmuName, "PCSXR " PACKAGE_VERSION);
 		strncpy(info.CdromID, CdromId, 9);
 		strncpy(info.CdromLabel, CdromLabel, 9);
 		info.psxMem = psxM;
@@ -294,7 +294,7 @@ int _OpenPlugins(HWND hWnd) {
     PAD2_registerVibration(GPU_visualVibration);
     PAD2_registerCursor(GPU_cursor);
 
-	SetCurrentDirectory(PcsxDir);
+	SetCurrentDirectory(PcsxrDir);
 	ShowCursor(FALSE);
 	return 0;
 }

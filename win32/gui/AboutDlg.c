@@ -23,7 +23,7 @@
 #include "psxcommon.h"
 
 char *LabelAuthors = { N_(
-	"PCSX - A PlayStation Emulator\n\n"
+	"PCSXR - A PlayStation Emulator\n\n"
 	"Original Authors:\n"
 	"main coder: linuzappz\n"
 	"co-coders: shadow\n"
@@ -46,9 +46,9 @@ LRESULT WINAPI AboutDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 			SetWindowText(hDlg, _("About"));
 
 			Button_SetText(GetDlgItem(hDlg, IDOK), _("OK"));
-			Static_SetText(GetDlgItem(hDlg, IDC_PCSX_ABOUT_TEXT), _("PCSX EMU\n"));
-			Static_SetText(GetDlgItem(hDlg, IDC_PCSX_ABOUT_AUTHORS), _(LabelAuthors));
-			Static_SetText(GetDlgItem(hDlg, IDC_PCSX_ABOUT_GREETS), _(LabelGreets));
+			Static_SetText(GetDlgItem(hDlg, IDC_PCSXR_ABOUT_TEXT), _("PCSXR EMU\n"));
+			Static_SetText(GetDlgItem(hDlg, IDC_PCSXR_ABOUT_AUTHORS), _(LabelAuthors));
+			Static_SetText(GetDlgItem(hDlg, IDC_PCSXR_ABOUT_GREETS), _(LabelGreets));
 			Button_SetText(GetDlgItem(hDlg,IDOK), _("OK"));
 			return TRUE;
 

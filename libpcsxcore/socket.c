@@ -119,7 +119,7 @@ void GetClient() {
     }
 #endif
 
-    sprintf(hello, "000 PCSX Version %s - Debug console\r\n", PACKAGE_VERSION);
+    sprintf(hello, "000 PCSXR Version %s - Debug console\r\n", PACKAGE_VERSION);
     WriteSocket(hello, strlen(hello));
     ptr = 0;
 }

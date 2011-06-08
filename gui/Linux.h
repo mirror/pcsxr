@@ -26,16 +26,16 @@
 
 #include "Cheat.h"
 
-#define DEFAULT_MEM_CARD_1 "/.pcsx/memcards/card1.mcd"
-#define DEFAULT_MEM_CARD_2 "/.pcsx/memcards/card2.mcd"
-#define MEMCARD_DIR "/.pcsx/memcards/"
-#define PLUGINS_DIR "/.pcsx/plugins/"
-#define PLUGINS_CFG_DIR "/.pcsx/plugins/cfg/"
-#define PCSX_DOT_DIR "/.pcsx/"
-#define BIOS_DIR "/.pcsx/bios/"
-#define STATES_DIR "/.pcsx/sstates/"
-#define CHEATS_DIR "/.pcsx/cheats/"
-#define PATCHES_DIR "/.pcsx/patches/"
+#define DEFAULT_MEM_CARD_1 "/.pcsxr/memcards/card1.mcd"
+#define DEFAULT_MEM_CARD_2 "/.pcsxr/memcards/card2.mcd"
+#define MEMCARD_DIR "/.pcsxr/memcards/"
+#define PLUGINS_DIR "/.pcsxr/plugins/"
+#define PLUGINS_CFG_DIR "/.pcsxr/plugins/cfg/"
+#define PCSXR_DOT_DIR "/.pcsxr/"
+#define BIOS_DIR "/.pcsxr/bios/"
+#define STATES_DIR "/.pcsxr/sstates/"
+#define CHEATS_DIR "/.pcsxr/cheats/"
+#define PATCHES_DIR "/.pcsxr/patches/"
 
 extern gboolean UseGui;
 extern int StatesC;

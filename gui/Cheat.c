@@ -313,7 +313,7 @@ static void OnCheatListDlg_OpenClicked(GtkWidget *widget, gpointer user_data) {
 
 	filter = gtk_file_filter_new ();
 	gtk_file_filter_add_pattern (filter, "*.cht");
-	gtk_file_filter_set_name (filter, _("PCSX Cheat Code Files (*.cht)"));
+	gtk_file_filter_set_name (filter, _("PCSXR Cheat Code Files (*.cht)"));
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser), filter);
 
 	filter = gtk_file_filter_new ();
@@ -353,7 +353,7 @@ static void OnCheatListDlg_SaveClicked(GtkWidget *widget, gpointer user_data) {
 
 	filter = gtk_file_filter_new();
 	gtk_file_filter_add_pattern(filter, "*.cht");
-	gtk_file_filter_set_name(filter, _("PCSX Cheat Code Files (*.cht)"));
+	gtk_file_filter_set_name(filter, _("PCSXR Cheat Code Files (*.cht)"));
 	gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(chooser), filter);
 
 	filter = gtk_file_filter_new();
@@ -389,7 +389,7 @@ void RunCheatListDialog() {
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
 
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "CheatListDlg", NULL);
+	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "CheatListDlg", NULL);
 	if (!xml) {
 		g_warning(_("Error: Glade interface could not be loaded!"));
 		return;
@@ -1119,7 +1119,7 @@ void RunCheatSearchDialog() {
 	GtkTreeSelection *treesel;
 	GtkTreeViewColumn *column;
 
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "CheatSearchDlg", NULL);
+	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "CheatSearchDlg", NULL);
 	if (!xml) {
 		g_warning(_("Error: Glade interface could not be loaded!"));
 		return;

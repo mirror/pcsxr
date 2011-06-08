@@ -3,7 +3,7 @@
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
             ACTIONS = {closeAddPluginSheet = id; }; 
-            CLASS = PcsxPluginDocument; 
+            CLASS = PcsxrPluginDocument; 
             LANGUAGE = ObjC; 
             OUTLETS = {addPluginSheet = NSWindow; pluginName = NSTextField; }; 
             SUPERCLASS = NSDocument; 

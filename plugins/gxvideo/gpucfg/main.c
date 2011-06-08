@@ -165,7 +165,7 @@ int main(int argc, char *argv[]) {
 				"Ryan Schultz", "Andrew Burton", NULL };
 		widget = gtk_about_dialog_new();
 		gtk_about_dialog_set_name(GTK_ABOUT_DIALOG (widget),
-				"P.E.Op.S PCSX Video Plugin");
+				"P.E.Op.S PCSXR Video Plugin");
 		gtk_about_dialog_set_version(GTK_ABOUT_DIALOG (widget), "1.17");
 		gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG (widget), authors);
 		gtk_about_dialog_set_website(GTK_ABOUT_DIALOG (widget),

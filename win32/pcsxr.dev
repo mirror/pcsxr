@@ -1,25 +1,25 @@
 [Project]
-FileName=pcsx.dev
-Name=pcsx
+FileName=pcsxr.dev
+Name=pcsxr
 Ver=1
 IsCpp=1
 Type=0
-Compiler=-D__GNUWIN32__ -march=pentiumpro -D_M_IX86=600 -W -finline-functions -fomit-frame-pointer -DWIN32 -DNDEBUG -D_WINDOWS -D_MBCS -D__WIN32__ -DPCSX_VERSION=\"1.5\" -D__i386__ -DENABLE_NLS -DPACKAGE=\"pcsx\"  -Dinline=__inline___@@_
-CppCompiler=-D__GNUWIN32__ -march=pentiumpro -D_M_IX86=600 -W -finline-functions -DWIN32 -DNDEBUG -D_WINDOWS -D_MBCS -D__WIN32__ -D_MSC_VER_ -DPCSX_VERSION=\"1.5\" -D__i386__ -DENABLE_NLS -DPACKAGE=\"pcsx\"_@@_
+Compiler=-D__GNUWIN32__ -march=pentiumpro -D_M_IX86=600 -W -finline-functions -fomit-frame-pointer -DWIN32 -DNDEBUG -D_WINDOWS -D_MBCS -D__WIN32__ -DPCSXR_VERSION=\"1.5\" -D__i386__ -DENABLE_NLS -DPACKAGE=\"pcsxr\"  -Dinline=__inline___@@_
+CppCompiler=-D__GNUWIN32__ -march=pentiumpro -D_M_IX86=600 -W -finline-functions -DWIN32 -DNDEBUG -D_WINDOWS -D_MBCS -D__WIN32__ -D_MSC_VER_ -DPCSXR_VERSION=\"1.5\" -D__i386__ -DENABLE_NLS -DPACKAGE=\"pcsxr\"_@@_
 Includes=.;./zlib;../libpcsxcore;./glue;./gui;./intl
 Linker=-lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32 -lcomctl32 -lwsock32_@@_
 Libs=
 UnitCount=116
 Folders=glue,glue/sys,gui,intl,libpcsxcore,libpcsxcore/ix86,zlib
 ObjFiles=
-PrivateResource=pcsx_private.rc
+PrivateResource=pcsxr_private.rc
 ResourceIncludes=
 MakeIncludes=
 Icon=
 ExeOutput=
 ObjectOutput=
 OverrideOutput=0
-OverrideOutputName=pcsx.exe
+OverrideOutputName=pcsxr.exe
 HostApplication=
 CommandLine=
 UseCustomMakefile=0
@@ -500,7 +500,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit48]
-FileName=gui\pcsx.bmp
+FileName=gui\pcsxr.bmp
 Folder=gui
 Compile=0
 CompileCpp=0
@@ -510,7 +510,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit49]
-FileName=gui\pcsx.exe.manifest
+FileName=gui\pcsxr.exe.manifest
 Folder=gui
 Compile=0
 CompileCpp=0
@@ -1022,8 +1022,8 @@ FileDescription=Developed using the Dev-C++ IDE
 InternalName=
 LegalCopyright=
 LegalTrademarks=
-OriginalFilename=pcsx.exe
-ProductName=pcsx
+OriginalFilename=pcsxr.exe
+ProductName=pcsxr
 ProductVersion=0.1
 AutoIncBuildNr=0
 
@@ -1048,9 +1048,9 @@ BuildCmd=
 CompileCpp=1
 
 [Unit101]
-FileName=pcsx.rc
+FileName=pcsxr.rc
 CompileCpp=1
-Folder=pcsx
+Folder=pcsxr
 Compile=1
 Link=0
 Priority=1000
@@ -1060,7 +1060,7 @@ BuildCmd=
 [Unit100]
 FileName=resource.h
 CompileCpp=1
-Folder=pcsx
+Folder=pcsxr
 Compile=1
 Link=1
 Priority=1000

@@ -3,7 +3,7 @@ libdir = @libdir@/games/psemu/
 
 lib_LTLIBRARIES = libBladeSio1.la
 
-libBladeSio1_la_SOURCES = sio1.c settings.c
+libBladeSio1_la_SOURCES = sio1.c sio1.h settings.c settings.h
 libBladeSio1_la_LDFLAGS = -module -avoid-version
 
 AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \

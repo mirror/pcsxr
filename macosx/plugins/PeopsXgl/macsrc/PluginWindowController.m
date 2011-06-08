@@ -1,7 +1,7 @@
 /***************************************************************************
     PluginWindowController.m
     The big bad boy that controls/creates the game window, the openGLView, and
-    communicates with PCSX itself
+    communicates with PCSXR itself
     
     PeopsOpenGPU
   

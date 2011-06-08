@@ -1,6 +1,6 @@
 //
-//  PcsxPlugin.h
-//  Pcsx
+//  PcsxrPlugin.h
+//  Pcsxr
 //
 //  Created by Gil Pedersen on Fri Oct 03 2003.
 //  Copyright (c) 2003 __MyCompanyName__. All rights reserved.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface PcsxPlugin : NSObject {
+@interface PcsxrPlugin : NSObject {
     CFBundleRef pluginRef;
     
     NSString *path;

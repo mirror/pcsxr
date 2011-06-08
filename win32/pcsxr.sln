@@ -9,7 +9,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SSSPSXpad", "plugins\PadSSS
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gpuPeopsOpenGL", "plugins\peopsxgl\gpuPeopsOpenGL.vcproj", "{726BDE88-F2AD-4666-A4BC-5858F973976E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pcsx", "pcsx.vcproj", "{9EEA62F5-46DC-4C07-AFE1-F72F9D6B9E3E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pcsxr", "pcsxr.vcproj", "{9EEA62F5-46DC-4C07-AFE1-F72F9D6B9E3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

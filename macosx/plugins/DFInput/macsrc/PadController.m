@@ -26,7 +26,7 @@
 static NSWindow *padWindow;
 static PadController *padController;
 
-#define APP_ID @"net.pcsx.DFInputPlugin"
+#define APP_ID @"net.pcsxr.DFInputPlugin"
 
 void DoAbout() {
 	// Get parent application instance
@@ -63,7 +63,7 @@ long DoConfiguration() {
 
 	if (padWindow == nil) {
 		if (padController == nil) {
-			padController = [[PadController alloc] initWithWindowNibName:@"NetPcsxHIDInputPluginMain"];
+			padController = [[PadController alloc] initWithWindowNibName:@"NetPcsxrHIDInputPluginMain"];
 		}
 		padWindow = [padController window];
 	}

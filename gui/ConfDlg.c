@@ -98,7 +98,7 @@ void ConfigurePlugins() {
 
 	UpdatePluginsBIOS();
 
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "ConfDlg", NULL);
+	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "ConfDlg", NULL);
 
 	if (!xml) {
 		g_warning(_("Error: Glade interface could not be loaded!"));
@@ -109,7 +109,7 @@ void ConfigurePlugins() {
 
 	ConfDlg = glade_xml_get_widget(xml, "ConfDlg");
 
-	gtk_window_set_title(GTK_WINDOW(ConfDlg), _("Configure PCSX"));
+	gtk_window_set_title(GTK_WINDOW(ConfDlg), _("Configure PCSXR"));
 
 	/* Set the paths in the file choosers to be based on the saved configurations */
 	widget = glade_xml_get_widget(xml, "GtkFileChooser_Bios");
@@ -194,7 +194,7 @@ void OnConf_Net() {
 		return;
 	}
 
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "NetDlg", NULL);
+	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "NetDlg", NULL);
 
 	if (!xml) {
 		g_warning(_("Error: Glade interface could not be loaded!"));
@@ -671,7 +671,7 @@ void UpdatePluginsBIOS() {
 
 	scan_bios_dir(Config.BiosDir);
 
-	// The BIOS list always contains the PCSX internal BIOS
+	// The BIOS list always contains the PCSXR internal BIOS
 	add_bios_to_list(_("Simulate PSX BIOS"), "HLE");
 }
 
@@ -842,7 +842,7 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 void OnConf_Cpu() {
 	GladeXML *xml;
 
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsx.glade2", "CpuDlg", NULL);
+	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "CpuDlg", NULL);
 
 	if (!xml) {
 		g_warning("We could not load the interface!");

@@ -19,7 +19,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-#define PadView NetPcsxHIDInputPluginPadView
+#define PadView NetPcsxrHIDInputPluginPadView
 
 #import <Cocoa/Cocoa.h>
 #import "ControllerList.h"

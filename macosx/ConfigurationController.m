@@ -1,7 +1,7 @@
 #import "ConfigurationController.h"
-#import "PcsxController.h"
+#import "PcsxrController.h"
 #import "PluginList.h"
-#import "PcsxPlugin.h"
+#import "PcsxrPlugin.h"
 #include "psxcommon.h"
 #include "plugins.h"
 
@@ -16,7 +16,7 @@
 	NSString *key = [self keyForSender:sender];
 	if (key) {
 		[[NSUserDefaults standardUserDefaults] setInteger:[sender intValue] forKey:key];
-		[PcsxController setConfigFromDefaults];
+		[PcsxrController setConfigFromDefaults];
 	}
 }
 
@@ -29,7 +29,7 @@
 	NSString *key = [self keyForSender:sender];
 	if (key) {
 		[[NSUserDefaults standardUserDefaults] setInteger:![sender intValue] forKey:key];
-		[PcsxController setConfigFromDefaults];
+		[PcsxrController setConfigFromDefaults];
 	}
 }
 
@@ -101,7 +101,7 @@
 	} else {
 		return;
 	}
-	[PcsxController setConfigFromDefaults];
+	[PcsxrController setConfigFromDefaults];
 
 	if ([sender pullsDown]) {
 		NSArray *items = [sender itemArray];
@@ -148,7 +148,7 @@
 	}
 
 	// special cases
-	if (![PcsxController biosAvailable]) {
+	if (![PcsxrController biosAvailable]) {
 		// no bios means always use HLE
 		[usesHleCell setState:NSOnState];
 		[usesHleCell setEnabled:NO];

@@ -1,15 +1,15 @@
 //
-//  PcsxPluginDocument.m
-//  Pcsx
+//  PcsxrPluginDocument.m
+//  Pcsxr
 //
 //  Created by Gil Pedersen on Thu Jul 01 2004.
 //  Copyright (c) 2004 __MyCompanyName__. All rights reserved.
 //
 
-#import "PcsxPluginDocument.h"
+#import "PcsxrPluginDocument.h"
 
 
-@implementation PcsxPluginDocument
+@implementation PcsxrPluginDocument
 
 - (BOOL)showAddPluginSheet:(NSWindow *)window forName:(NSString *)name
 // User has asked to see the custom display. Display it.
@@ -79,7 +79,7 @@
 
 - (NSString *)windowNibName {
     // Implement this to return a nib to load OR implement -makeWindowControllers to manually create your controllers.
-    return @"PcsxPluginDocument";
+    return @"PcsxrPluginDocument";
 }
 
 - (NSData *)dataRepresentationOfType:(NSString *)type {

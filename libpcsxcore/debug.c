@@ -21,7 +21,7 @@
 #include "socket.h"
 
 /*
-PCSX Debug console protocol description, version 1.0
+PCSXR Debug console protocol description, version 1.0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Commands number are formatted using %03X (yes)
@@ -37,7 +37,7 @@ Basic commands (1xx):
 100 <message>
     Sends a dumb message. Will be replied with a 200 reply, followed by the message.
 101
-    Gets PCSX version.
+    Gets PCSXR version.
 102
     Gets protocol version.
 103
@@ -143,14 +143,14 @@ Spontaneous messages (0xx):
 010 / 011 / 012 / 013 / 014 / 015 / 016
     Execution hit mapping flow automatic breakpoint.
 030 <number>@<PC>
-    Execution hit breakpoint, PCSX is paused. Displays PC's value.
+    Execution hit breakpoint, PCSXR is paused. Displays PC's value.
 
 Basic commands acknowledge (2xx):
 --------------------------------
 200 <message>
     Sends a dumb message.
 201 <message>
-    Returns PCSX version.
+    Returns PCSXR version.
 202 <message>
     Returns protocol version.
 203 <status>

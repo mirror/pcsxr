@@ -47,9 +47,9 @@ BEGIN
             VALUE "CompanyName", "http://pcsxr.codeplex.com/\0"
             VALUE "FileDescription", "Playstation Emulator based on PCSX-df\0"
             VALUE "FileVersion", "1, 9, 1, 1\0"
-            VALUE "InternalName", "pcsx\0"
+            VALUE "InternalName", "pcsxr\0"
             VALUE "LegalCopyright", "Copyright (c) 2010\0"
-            VALUE "OriginalFilename", "pcsx.exe\0"
+            VALUE "OriginalFilename", "pcsxr.exe\0"
             VALUE "ProductName", "PCSX-Reloaded\0"
             VALUE "ProductVersion", "1, 9, 1, 1\0"
         END
@@ -102,11 +102,11 @@ CAPTION "About"
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,134,187,50,14
-    CTEXT           "PCSX EMU\nVersion x.x",IDC_PCSX_ABOUT_TEXT,22,10,112,15,
+    CTEXT           "PCSXR EMU\nVersion x.x",IDC_PCSXR_ABOUT_TEXT,22,10,112,15,
                     0,WS_EX_TRANSPARENT
-    CTEXT           "PCSX a psx emulator...",IDC_PCSX_ABOUT_AUTHORS,10,35,
+    CTEXT           "PCSXR a psx emulator...",IDC_PCSXR_ABOUT_AUTHORS,10,35,
                     135,63,0,WS_EX_TRANSPARENT
-    CTEXT           "Greets to...",IDC_PCSX_ABOUT_GREETS,45,110,232,65
+    CTEXT           "Greets to...",IDC_PCSXR_ABOUT_GREETS,45,110,232,65
     CONTROL         113,IDC_STATIC,"Static",SS_BITMAP | WS_BORDER,155,10,171,
                     101
     GROUPBOX        "",IDC_STATIC,5,25,145,77
@@ -379,14 +379,14 @@ IDI_APP_ICON            ICON    DISCARDABLE     "gui\\cdrom02.ico"
 //
 
 SPLASH_LOGO             BITMAP  MOVEABLE PURE   "gui\\about.bmp"
-MAIN_LOGO               BITMAP  MOVEABLE PURE   "gui\\pcsx.bmp"
+MAIN_LOGO               BITMAP  MOVEABLE PURE   "gui\\pcsxr.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // 24
 //
 
-1                       24      MOVEABLE PURE   "gui\\pcsx.exe.manifest"
+1                       24      MOVEABLE PURE   "gui\\pcsxr.exe.manifest"
 #endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////
 

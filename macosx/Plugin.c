@@ -1,4 +1,4 @@
-/*  Pcsx - Pc Psx Emulator
+/*  Pcsxr - Pc Psx Emulator
  *  Copyright (C) 1999-2002  Pcsx Team
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -78,7 +78,7 @@ int _OpenPlugins() {
 	ret = SPU_open();
 	if (ret < 0) { SysMessage(_("Error Opening SPU Plugin")); return -1; }
 	SPU_registerCallback(SPUirq);
-	ret = GPU_open(&gpuDisp, "PCSX", NULL);
+	ret = GPU_open(&gpuDisp, "PCSXR", NULL);
 	if (ret < 0) { SysMessage(_("Error Opening GPU Plugin")); return -1; }
 	GPU_registerCallback(GPUbusy);
 	ret = PAD1_open(&gpuDisp);
