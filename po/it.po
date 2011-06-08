@@ -1837,7 +1837,7 @@ msgstr ""
 msgid "Pete Bernert and the P.E.Op.S. team"
 msgstr "Pete Bernert ed il team P.E.Op.S."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:1
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:1
 msgid ""
 "0: None\n"
 "1: 2xSai\n"
@@ -1857,7 +1857,7 @@ msgstr ""
 "6: HQ2X\n"
 "7: HQ3X"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:9
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:9
 msgid ""
 "0: Off (fastest)\n"
 "1: Game dependant\n"
@@ -1867,11 +1867,11 @@ msgstr ""
 "1: Dipendente dal gioco\n"
 "2: Sempre"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:12
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:12
 msgid "200.0"
 msgstr "200.0"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:13
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:13
 msgid ""
 "320x240\n"
 "640x480\n"
@@ -1889,168 +1889,168 @@ msgstr ""
 "1280x1024\n"
 "1600x1200"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:20
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:20
 msgid "<b>Compatibility</b>"
 msgstr "<b>Compatibilità</b>"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:21
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:21
 msgid "<b>Framerate</b>"
 msgstr "<b>Framerate</b>"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:22
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:22
 msgid "<b>Screen</b>"
 msgstr "<b>Schermo</b>"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:23
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:23
 msgid "Autodetect FPS limit"
 msgstr "Rileva automaticamente il limite degli FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:24
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:24
 msgid "Better FPS limit in some"
 msgstr "Miglior limite degli FPS in qualche"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:25
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:25
 msgid "Black screens in Lunar"
 msgstr "Schermi neri in Lunar"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:26
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:26
 msgid "Capcom fighting games"
 msgstr "Giochi di combattimento della Capcom"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:27
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:27
 msgid "Chrono Cross"
 msgstr "Chrono Cross"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:28
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:28
 msgid "Compatibility mode"
 msgstr "Modo di compatibilità"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:29
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:29
 msgid "Configure X11 Video"
 msgstr "Configura X11 Video"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:30
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:30
 msgid "Disable CPU Saving"
 msgstr "Disabilita il salvataggio della CPU"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:31
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:31
 msgid "Disable coordinate check"
 msgstr "Disabilita il controllo della coordinata"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:32
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:32
 msgid "Dithering:"
 msgstr "Retinatura:"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:33
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:33
 msgid "Draw quads with triangles"
 msgstr "Disegna quadrati con trinagoli"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:34
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:34
 msgid "Enable frame skipping"
 msgstr "Abilita il salto dei frame"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:35
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:35
 msgid "Enable this if games display too quickly."
 msgstr "Abilita se i giochi sono visualizzati troppo rapidamente."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:36
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:36
 msgid "Expand screen width"
 msgstr "Espandi la larghezza dello schermo"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:37
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:37
 #, fuzzy
 msgid "Fake 'gpu busy' states"
 msgstr "Simula lo stato di 'gpu occupata'"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:38
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:38
 msgid "For precise framerate"
 msgstr "Per framerate preciso"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:39
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:39
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
 msgid "Fullscreen"
 msgstr "Schermo intero"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:40
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:40
 msgid "Ignore brightness color"
 msgstr "Ignora il colore della luminosità"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:41
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:41
 msgid "Initial Window Size:"
 msgstr "Dimensione iniziale della finestra:"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:42
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:42
 msgid "Lazy screen update"
 msgstr "Aggiorna schermo pigro"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:43
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:43
 msgid "Maintain 4:3 Aspect Ratio"
 msgstr "Mantiene la proporzione dell'aspetto a 4:3"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:44
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:44
 msgid "Needed by Dark Forces"
 msgstr "Richiesto da Dark Forces"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:45
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:45
 msgid "Odd/even bit hack"
 msgstr "Hack del bit dispari/pari"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:46
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:46
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
 msgid "Old frame skipping"
 msgstr "Vecchio salto del frame"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:47
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:47
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
 msgid "PC FPS calculation"
 msgstr "Calcolo degli FPS del PC"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:48
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:48
 msgid "Pandemonium 2"
 msgstr "Pandemonium 2"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:49
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:49
 msgid "Repeated flat tex triangles"
 msgstr "Triangoli della struttura piana ripetuti"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:50
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:50
 msgid "Set FPS"
 msgstr "Imposta gli FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:51
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:51
 msgid "Show FPS"
 msgstr "Visualizza gli FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:52
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:52
 msgid "Skip every second frame"
 msgstr "Salta ogni secondo frame"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:53
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:53
 msgid "Skip frames when rendering."
 msgstr "Salta i frame durante il rendering."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:54
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:54
 msgid "Stretching:"
 msgstr "Allungamento:"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:55
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:55
 msgid "Toggle busy flags after drawing"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:56
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:56
 msgid "Toggle whether the FPS will be shown."
 msgstr "Commuta quando saranno visualizzati gli FPS."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:57
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:57
 msgid "Toggle windowed/fullscreen mode."
 msgstr "Commuta modo finestra/schermo intero."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:58
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:58
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:83
 msgid "Use game fixes"
 msgstr "Usa le difficoltà del gioco"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:59
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:59
 msgid "better g-colors, worse textures"
 msgstr "Miglior g-color, strutture poco definite"
 

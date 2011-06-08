@@ -74,7 +74,7 @@ plugins/dfxvideo/cfg.c
 plugins/dfxvideo/draw.c
 plugins/dfxvideo/fps.c
 plugins/dfxvideo/gpu.c
-[type: gettext/glade]plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2
+[type: gettext/glade]plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui
 plugins/dfxvideo/key.c
 plugins/dfxvideo/menu.c
 plugins/dfxvideo/prim.c

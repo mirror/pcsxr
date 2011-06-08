@@ -1,5 +1,4 @@
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 
 #include "config.h"
 
@@ -13,6 +12,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+
+GtkBuilder *builder;
+GtkWidget *widget, *MainWindow;
 
 void SaveConfig(GtkWidget *widget, gpointer user_datal);
 
@@ -63,11 +65,9 @@ void set_widget_sensitive(GtkWidget *widget, gpointer user_data)
 void on_fullscreen_toggled(GtkWidget *widget, gpointer user_data)
 {
 	GtkWidget *check, *resCombo2;
-	GladeXML *xml;
-	xml = (GladeXML*) user_data;
 
-	check = glade_xml_get_widget(xml, "checkFullscreen");
-	resCombo2 = glade_xml_get_widget(xml, "resCombo2");
+	check = gtk_builder_get_object(builder, "checkFullscreen");
+	resCombo2 = gtk_builder_get_object(builder, "resCombo2");
 
 	set_widget_sensitive(resCombo2, !gtk_toggle_button_get_active(check));
 }
@@ -75,11 +75,9 @@ void on_fullscreen_toggled(GtkWidget *widget, gpointer user_data)
 void on_use_fixes_toggled(GtkWidget *widget, gpointer user_data)
 {
 	GtkWidget *check, *table_fixes;
-	GladeXML *xml;
-	xml = (GladeXML*) user_data;
-	check = glade_xml_get_widget (xml, "checkUseFixes");
+	check = gtk_builder_get_object(builder,"checkUseFixes");
 
-	table_fixes = glade_xml_get_widget (xml, "table_fixes");
+	table_fixes = gtk_builder_get_object(builder,"table_fixes");
 
 	/* Set the state of each of the fixes to the value of the use fixes toggle */
 	gtk_container_foreach (GTK_CONTAINER (table_fixes), (GtkCallback) set_widget_sensitive,
@@ -89,12 +87,10 @@ void on_use_fixes_toggled(GtkWidget *widget, gpointer user_data)
 void on_fps_toggled(GtkWidget *widget, gpointer user_data)
 {
 	GtkWidget *checkSetFPS, *checkAutoFPSLimit, *entryFPS;
-	GladeXML *xml;
 
-	xml = (GladeXML*) user_data;
-	checkSetFPS = glade_xml_get_widget(xml, "checkSetFPS");
-	checkAutoFPSLimit = glade_xml_get_widget(xml, "checkAutoFPSLimit");
-	entryFPS = glade_xml_get_widget(xml, "entryFPS");
+	checkSetFPS = gtk_builder_get_object(builder, "checkSetFPS");
+	checkAutoFPSLimit = gtk_builder_get_object(builder, "checkAutoFPSLimit");
+	entryFPS = gtk_builder_get_object(builder, "entryFPS");
 
 	set_widget_sensitive(entryFPS,
 		gtk_toggle_button_get_active(checkSetFPS) && !gtk_toggle_button_get_active(checkAutoFPSLimit));
@@ -103,9 +99,7 @@ void on_fps_toggled(GtkWidget *widget, gpointer user_data)
 
 void OnConfigClose(GtkWidget *widget, gpointer user_data)
 {
-	GladeXML *xml = (GladeXML *)user_data;
-
-	gtk_widget_destroy(glade_xml_get_widget(xml, "CfgWnd"));
+	gtk_widget_destroy(gtk_builder_get_object(builder, "CfgWnd"));
 	gtk_exit(0);
 }
 
@@ -113,7 +107,6 @@ int
 main (int argc, char *argv[])
 {
   GtkWidget *CfgWnd, *widget;
-  GladeXML *xml;
   FILE *in;char t[256];int len,val; 
   float valf;
   char * pB, * p;
@@ -158,13 +151,14 @@ main (int argc, char *argv[])
 		return 0;
     }
 
-    xml = glade_xml_new(DATADIR "dfxvideo.glade2", "CfgWnd", NULL);
-    if (!xml) {
+	builder = gtk_builder_new();
+	
+	if (!gtk_builder_add_from_file(builder, DATADIR "dfxvideo.ui", NULL)) {
 		g_warning("We could not load the interface!");
 		return -1;
-    }
+	}
 
-    /*ADB wndMain = glade_xml_get_widget(xml, "CfgWnd");*/
+    /*ADB wndMain = gtk_builder_get_object(builder, "CfgWnd");*/
 
   strcpy(cfg, CONFIG_FILENAME);
 
@@ -194,7 +188,7 @@ main (int argc, char *argv[])
   else if (val == 640) val = VIDMODE_640x480;
   else if (val == 320) val = VIDMODE_320x200;
 
-  gtk_combo_box_set_active(GTK_COMBO_BOX (glade_xml_get_widget(xml, "resCombo2")), val);
+  gtk_combo_box_set_active(GTK_COMBO_BOX (gtk_builder_get_object(builder, "resCombo2")), val);
 
   val=0;
   if(pB)
@@ -204,7 +198,7 @@ main (int argc, char *argv[])
     val = set_limit (p, len, 0, 9);
    }
 
-  gtk_combo_box_set_active(GTK_COMBO_BOX (glade_xml_get_widget(xml, "stretchCombo2")), val);
+  gtk_combo_box_set_active(GTK_COMBO_BOX (gtk_builder_get_object(builder, "stretchCombo2")), val);
 
   val=0;
   if(pB)
@@ -214,7 +208,7 @@ main (int argc, char *argv[])
            val = set_limit (p, len, 0, 2);
    }
 
-   gtk_combo_box_set_active(GTK_COMBO_BOX (glade_xml_get_widget(xml, "ditherCombo2")), val);
+   gtk_combo_box_set_active(GTK_COMBO_BOX (gtk_builder_get_object(builder, "ditherCombo2")), val);
 
  val=0;
   if(pB)
@@ -224,7 +218,7 @@ main (int argc, char *argv[])
     val = set_limit (p, len, 0, 1);
    }
 
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "maintain43")), val);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "maintain43")), val);
   
   val=0; //ADB Leave - these are default values
   if(pB)
@@ -234,7 +228,7 @@ main (int argc, char *argv[])
         val = set_limit (p, len, 0, 1);
    }
 
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "checkFullscreen")), val);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkFullscreen")), val);
 
   val=0;
   if(pB)
@@ -244,7 +238,7 @@ main (int argc, char *argv[])
         val = set_limit (p, len, 0, 1);
    }
 
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "checkShowFPS")), val);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkShowFPS")), val);
 
   val=1;
   if(pB)
@@ -253,7 +247,7 @@ main (int argc, char *argv[])
 
         val = set_limit (p, len, 0, 1);
    }
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "checkSetFPS")), val);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkSetFPS")), val);
 
   val=0;
   if(pB)
@@ -262,7 +256,7 @@ main (int argc, char *argv[])
 
         val = set_limit (p, len, 1, 2);
    }
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "checkAutoFPSLimit")), (val-1));
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkAutoFPSLimit")), (val-1));
 
  val=0;
   if(pB)
@@ -271,7 +265,7 @@ main (int argc, char *argv[])
         val = set_limit (p, len, 0, 1);
    }
 
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "checkFrameSkip")), val);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkFrameSkip")), val);
 
  valf=200;
   if(pB)
@@ -282,7 +276,7 @@ main (int argc, char *argv[])
     if(valf>500) valf=500;
    }
   sprintf(tempstr,"%.1f",valf);
-  gtk_entry_set_text(glade_xml_get_widget(xml, "entryFPS"),tempstr);
+  gtk_entry_set_text(gtk_builder_get_object(builder, "entryFPS"),tempstr);
 
   val=0;
   if(pB)
@@ -291,7 +285,7 @@ main (int argc, char *argv[])
 
         val = set_limit (p, len, 0, 1);
    }
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "checkUseFixes")), val);
+  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkUseFixes")), val);
 
    
 	if(pB)
@@ -304,39 +298,39 @@ main (int argc, char *argv[])
 	for (i=0; i<11; i++)
 	{
 		sprintf(tempstr, "checkFix%d", i+1);
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, tempstr)), (val>>i)&1 );
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder,tempstr)), (val>>i)&1 );
 	}
 
 
   if(pB) free(pB);
 
-	widget = glade_xml_get_widget(xml, "CfgWnd");
+	widget = gtk_builder_get_object(builder, "CfgWnd");
 	g_signal_connect_data(GTK_OBJECT(widget), "destroy",
-			G_CALLBACK(SaveConfig), xml, NULL, 0);
+			G_CALLBACK(SaveConfig), NULL, NULL, 0);
 
-	widget = glade_xml_get_widget(xml, "btn_close");
+	widget = gtk_builder_get_object(builder, "btn_close");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(OnConfigClose), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConfigClose), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "checkFullscreen");
+	widget = gtk_builder_get_object(builder, "checkFullscreen");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(on_fullscreen_toggled), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_fullscreen_toggled), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "checkUseFixes");
+	widget = gtk_builder_get_object(builder, "checkUseFixes");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(on_use_fixes_toggled), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_use_fixes_toggled), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "checkSetFPS");
+	widget = gtk_builder_get_object(builder, "checkSetFPS");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(on_fps_toggled), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_fps_toggled), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "checkAutoFPSLimit");
+	widget = gtk_builder_get_object(builder, "checkAutoFPSLimit");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(on_fps_toggled), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_fps_toggled), NULL, NULL, G_CONNECT_AFTER);
 
-	on_fullscreen_toggled(widget, (gpointer) xml);
-	on_fps_toggled(widget, (gpointer) xml);
-	on_use_fixes_toggled(widget, (gpointer) xml);
+	on_fullscreen_toggled(widget, NULL);
+	on_fps_toggled(widget, NULL);
+	on_use_fixes_toggled(widget, NULL);
 
   gtk_main ();
   return 0;
@@ -377,7 +371,6 @@ void SetCfgVal(char * pB,char * pE,int val)
 void SaveConfig(GtkWidget *widget, gpointer user_data)
 {
   FILE *in;int len,val;char * pB;
-	GladeXML *xml;
   char cfg[255];
   char tempstr[50];
   int i;
@@ -395,9 +388,8 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
     len = fread(pB, 1, 32767, in);
     fclose(in);
    }
-   xml = (GladeXML*) user_data;
 
-  val = gtk_combo_box_get_active (GTK_COMBO_BOX (glade_xml_get_widget (xml, "resCombo2")));
+  val = gtk_combo_box_get_active (GTK_COMBO_BOX (gtk_builder_get_object(builder,"resCombo2")));
 
  if (val == VIDMODE_320x200) { SetCfgVal(pB,"\nResX",320); SetCfgVal(pB,"\nResY",240); }
  else if (val == VIDMODE_640x480) { SetCfgVal(pB,"\nResX",640); SetCfgVal(pB,"\nResY",480); }
@@ -407,35 +399,35 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
  else if (val == VIDMODE_1280x1024) { SetCfgVal(pB,"\nResX",1280); SetCfgVal(pB,"\nResY",1024); }
  else if (val == VIDMODE_1600x1200) { SetCfgVal(pB,"\nResX",1600); SetCfgVal(pB,"\nResY",1200); }
 
- val = gtk_combo_box_get_active (GTK_COMBO_BOX (glade_xml_get_widget (xml, "stretchCombo2")));
+ val = gtk_combo_box_get_active (GTK_COMBO_BOX (gtk_builder_get_object(builder,"stretchCombo2")));
  SetCfgVal(pB,"\nNoStretch",val);
 
- val = gtk_combo_box_get_active (GTK_COMBO_BOX (glade_xml_get_widget (xml, "ditherCombo2")));
+ val = gtk_combo_box_get_active (GTK_COMBO_BOX (gtk_builder_get_object(builder,"ditherCombo2")));
  SetCfgVal(pB,"\nDithering",val);
 
-    val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "maintain43")));
+    val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder,"maintain43")));
  SetCfgVal(pB,"\nMaintain43",val);
 
-     val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "checkFullscreen")));
+     val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder,"checkFullscreen")));
  SetCfgVal(pB,"\nFullScreen",val);
 
-     val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "checkShowFPS")));
+     val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder,"checkShowFPS")));
  SetCfgVal(pB,"\nShowFPS",val);
 
-     val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "checkSetFPS")));
+     val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder,"checkSetFPS")));
  SetCfgVal(pB,"\nUseFrameLimit",val);
 
- val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "checkAutoFPSLimit")));
+ val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder,"checkAutoFPSLimit")));
  SetCfgVal(pB,"\nFPSDetection",val+1);
 
-  val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "checkFrameSkip")));
+  val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder,"checkFrameSkip")));
  SetCfgVal(pB,"\nUseFrameSkip",val);
 
  //Framerate stored *10
- val = atof(gtk_entry_get_text(glade_xml_get_widget(xml, "entryFPS"))) * 10;
+ val = atof(gtk_entry_get_text(gtk_builder_get_object(builder, "entryFPS"))) * 10;
  SetCfgVal(pB,"\nFrameRate",val);
 
- val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "checkUseFixes")));
+ val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder,"checkUseFixes")));
  SetCfgVal(pB,"\nUseFixes",val);
 
 
@@ -443,7 +435,7 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
 	for (i=0; i<11; i++)
 	{
 		sprintf(tempstr, "checkFix%d", i+1);
-		if( gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, tempstr))) )
+		if( gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder,tempstr))) )
 			val |= 1 << i;
 	}
 

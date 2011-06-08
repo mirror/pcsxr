@@ -1764,7 +1764,7 @@ msgstr ""
 msgid "Pete Bernert and the P.E.Op.S. team"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:1
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:1
 msgid ""
 "0: None\n"
 "1: 2xSai\n"
@@ -1784,7 +1784,7 @@ msgstr ""
 "6: HQ2X\n"
 "7: HQ3X"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:9
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:9
 msgid ""
 "0: Off (fastest)\n"
 "1: Game dependant\n"
@@ -1794,11 +1794,11 @@ msgstr ""
 "1: Устанавливается игрой\n"
 "2: Включен всегда"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:12
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:12
 msgid "200.0"
 msgstr "200.0"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:13
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:13
 msgid ""
 "320x240\n"
 "640x480\n"
@@ -1809,168 +1809,168 @@ msgid ""
 "1600x1200"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:20
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:20
 msgid "<b>Compatibility</b>"
 msgstr "<b>Совместимость</b>"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:21
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:21
 msgid "<b>Framerate</b>"
 msgstr "<b>Частота кадров</b>"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:22
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:22
 msgid "<b>Screen</b>"
 msgstr "<b>Экран</b>"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:23
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:23
 msgid "Autodetect FPS limit"
 msgstr "Авто-определение FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:24
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:24
 msgid "Better FPS limit in some"
 msgstr "Возможно более точное ограничение FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:25
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:25
 msgid "Black screens in Lunar"
 msgstr "Чёрный экран в LunarSSSC"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:26
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:26
 msgid "Capcom fighting games"
 msgstr "Файтинги от Capcom"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:27
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:27
 msgid "Chrono Cross"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:28
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:28
 msgid "Compatibility mode"
 msgstr "Режим совместимости"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:29
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:29
 msgid "Configure X11 Video"
 msgstr "Настройка X11 Video"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:30
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:30
 msgid "Disable CPU Saving"
 msgstr "Выключить экономию ресурсов ЦПУ"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:31
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:31
 msgid "Disable coordinate check"
 msgstr "Выключить проверку координат"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:32
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:32
 msgid "Dithering:"
 msgstr "Дизеринг:"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:33
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:33
 msgid "Draw quads with triangles"
 msgstr "Рисовать четырёхугольники треугольниками"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:34
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:34
 msgid "Enable frame skipping"
 msgstr "Включить пропуск кадров"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:35
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:35
 msgid "Enable this if games display too quickly."
 msgstr ""
 "Следует включить для автоматического определения и ограничения скорости игры."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:36
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:36
 msgid "Expand screen width"
 msgstr "Увеличить ширину экрана"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:37
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:37
 msgid "Fake 'gpu busy' states"
 msgstr "Имитация 'занятости' gpu "
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:38
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:38
 msgid "For precise framerate"
 msgstr "Для повышения точности частоты смены кадров"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:39
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:39
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
 msgid "Fullscreen"
 msgstr "Полноэкранный режим"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:40
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:40
 msgid "Ignore brightness color"
 msgstr "Игнорировать яркость цвета"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:41
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:41
 msgid "Initial Window Size:"
 msgstr "Размер окна:"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:42
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:42
 msgid "Lazy screen update"
 msgstr "\"Ленивое\" обновление экрана"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:43
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:43
 msgid "Maintain 4:3 Aspect Ratio"
 msgstr "Сохранять соотношение сторон 4:3"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:44
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:44
 msgid "Needed by Dark Forces"
 msgstr "Необходимо для Dark Forces"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:45
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:45
 msgid "Odd/even bit hack"
 msgstr "Хак бита ODE"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:46
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:46
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
 msgid "Old frame skipping"
 msgstr "Старый режим пропуска кадров"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:47
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:47
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
 msgid "PC FPS calculation"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:48
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:48
 msgid "Pandemonium 2"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:49
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:49
 msgid "Repeated flat tex triangles"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:50
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:50
 msgid "Set FPS"
 msgstr "Установить FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:51
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:51
 msgid "Show FPS"
 msgstr "Отображать FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:52
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:52
 msgid "Skip every second frame"
 msgstr "Пропускать каждый второй кадр"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:53
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:53
 msgid "Skip frames when rendering."
 msgstr "Пропуск кадров при отрисовке."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:54
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:54
 msgid "Stretching:"
 msgstr "Растяжение:"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:55
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:55
 msgid "Toggle busy flags after drawing"
 msgstr "Переключить флаг занятости после отрисовки"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:56
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:56
 msgid "Toggle whether the FPS will be shown."
 msgstr "Отображать FPS при старте эмуляции."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:57
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:57
 msgid "Toggle windowed/fullscreen mode."
 msgstr "Переключение между оконным/полноэкранным режимами."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:58
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:58
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:83
 msgid "Use game fixes"
 msgstr "Исправления для некоторых игр"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:59
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:59
 msgid "better g-colors, worse textures"
 msgstr "Улучшенное затенение, худшее текстурирование"
 
