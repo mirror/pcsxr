@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2011-06-04 23:04+0400\n"
+"POT-Creation-Date: 2011-06-08 19:52+0400\n"
 "PO-Revision-Date: 2011-06-04 13:44+0400\n"
 "Last-Translator: Jean-André Santoni <jean.andre.santoni@gmail.com>\n"
 "Language-Team: French <jean.andre.santoni@gmail.com>\n"
@@ -1796,219 +1796,231 @@ msgstr ""
 msgid "Pete Bernert and the P.E.Op.S. team"
 msgstr "Pete Bernert et l'équipe P.E.Op.S."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:1
-msgid ""
-"0: None\n"
-"1: 2xSai\n"
-"2: 2xSuperSai\n"
-"3: SuperEagle\n"
-"4: Scale2x\n"
-"5: Scale3x\n"
-"6: HQ2X\n"
-"7: HQ3X"
-msgstr ""
-"0: Aucun\n"
-"1: 2xSai\n"
-"2: 2xSuperSai\n"
-"3: SuperEagle\n"
-"4: Scale2x\n"
-"5: Scale3x\n"
-"6: HQ2X\n"
-"7: HQ3X"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:1
+msgid "0: None"
+msgstr "0: Aucun"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:9
-msgid ""
-"0: Off (fastest)\n"
-"1: Game dependant\n"
-"2: Always"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:2
+msgid "0: Off (fastest)"
 msgstr ""
-"0: Désactivé (rapide)\n"
-"1: Selon le jeu\n"
-"2: Toujours"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:12
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:3
+msgid "1024x768"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:4
+msgid "1152x864"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:5
+msgid "1280x1024"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:6
+msgid "1600x1200"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:7
+msgid "1: 2xSai"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:8
+msgid "1: Game dependant"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:9
 msgid "200.0"
 msgstr "200.0"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:13
-msgid ""
-"320x240\n"
-"640x480\n"
-"800x600\n"
-"1024x768\n"
-"1152x864\n"
-"1280x1024\n"
-"1600x1200"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:10
+msgid "2: 2xSuperSai"
 msgstr ""
-"320x240\n"
-"640x480\n"
-"800x600\n"
-"1024x768\n"
-"1152x864\n"
-"1280x1024\n"
-"1600x1200"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:20
-msgid "<b>Compatibility</b>"
-msgstr "<b>Compatibilité</b>"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:11
+msgid "2: Always"
+msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:21
-msgid "<b>Framerate</b>"
-msgstr "<b>Taux de rafraichissement</b>"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:12
+msgid "320x240"
+msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:22
-msgid "<b>Screen</b>"
-msgstr "<b>Écran</b>"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:13
+msgid "3: SuperEagle"
+msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:23
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:14
+msgid "4: Scale2x"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:15
+msgid "5: Scale3x"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:16
+msgid "640x480"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:17
+msgid "6: HQ2X"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:18
+msgid "7: HQ3X"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:19
+msgid "800x600"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:20
 msgid "Autodetect FPS limit"
 msgstr "Autodétection de la limite FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:24
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:21
 msgid "Better FPS limit in some"
 msgstr "Meilleure limite FPS dans certains"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:25
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:22
 msgid "Black screens in Lunar"
 msgstr "Écrans noirs dans Lunar"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:26
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:23
 msgid "Capcom fighting games"
 msgstr "Jeux de combat Capcom"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:27
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:24
 msgid "Chrono Cross"
 msgstr "Chrono Cross"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:28
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:25
 msgid "Compatibility mode"
 msgstr "Mode compatibilité"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:29
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:26
 msgid "Configure X11 Video"
 msgstr "Configuration Video X11"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:30
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:27
 msgid "Disable CPU Saving"
 msgstr "Désactiver la sauvegarde CPU"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:31
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:28
 msgid "Disable coordinate check"
 msgstr "Désactiver la vérification des coordonnées"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:32
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:29
 msgid "Dithering:"
 msgstr "Tramage :"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:33
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:30
 msgid "Draw quads with triangles"
 msgstr "Dessiner les quads avec des triangles"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:34
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:31
 msgid "Enable frame skipping"
 msgstr "Activer le saut d'images"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:35
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:32
 msgid "Enable this if games display too quickly."
 msgstr "À activer si les jeux s'affichent trop rapidement."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:36
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:33
 msgid "Expand screen width"
 msgstr "Étendre la largeur d'écran"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:37
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:34
 msgid "Fake 'gpu busy' states"
 msgstr "Faux états 'GPU occupé'"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:38
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:35
 msgid "For precise framerate"
 msgstr "Pour un taux de rafraichissement précis"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:39
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:36
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
 msgid "Fullscreen"
 msgstr "Plein écran"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:40
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:37
 msgid "Ignore brightness color"
 msgstr "Ignorer la luminance"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:41
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:38
 msgid "Initial Window Size:"
 msgstr "Taille de fenêtre initiale :"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:42
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:39
 msgid "Lazy screen update"
 msgstr "Rafraichissement paresseux"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:43
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:40
 msgid "Maintain 4:3 Aspect Ratio"
 msgstr "Maintenir le rapport 4:3"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:44
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:41
 msgid "Needed by Dark Forces"
 msgstr "Requis pour Dark Froces"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:45
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:42
 msgid "Odd/even bit hack"
 msgstr "Hack des bits pairs/impairs"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:46
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:43
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
 msgid "Old frame skipping"
 msgstr "Ancien saut d'image"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:47
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:44
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
 msgid "PC FPS calculation"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:48
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:45
 msgid "Pandemonium 2"
 msgstr "Pandemonium 2"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:49
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:46
 msgid "Repeated flat tex triangles"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:50
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:47
 msgid "Set FPS"
 msgstr "Dénifir le FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:51
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:48
 msgid "Show FPS"
 msgstr "Afficher le FPS"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:52
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:49
 msgid "Skip every second frame"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:53
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:50
 msgid "Skip frames when rendering."
 msgstr "Sauter des images au rendu."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:54
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:51
 msgid "Stretching:"
 msgstr "Étirement :"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:55
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:52
 msgid "Toggle busy flags after drawing"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:56
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:53
 msgid "Toggle whether the FPS will be shown."
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:57
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:54
 msgid "Toggle windowed/fullscreen mode."
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:58
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:55
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:83
 msgid "Use game fixes"
 msgstr "Activer les correctifs de jeu"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.glade2.h:59
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:56
 msgid "better g-colors, worse textures"
 msgstr ""
 
@@ -3208,6 +3220,60 @@ msgstr "Message PCSXR"
 msgid "Error Loading Symbol"
 msgstr "Erreur au chargement du symbole"
 
+#~ msgid ""
+#~ "0: None\n"
+#~ "1: 2xSai\n"
+#~ "2: 2xSuperSai\n"
+#~ "3: SuperEagle\n"
+#~ "4: Scale2x\n"
+#~ "5: Scale3x\n"
+#~ "6: HQ2X\n"
+#~ "7: HQ3X"
+#~ msgstr ""
+#~ "0: Aucun\n"
+#~ "1: 2xSai\n"
+#~ "2: 2xSuperSai\n"
+#~ "3: SuperEagle\n"
+#~ "4: Scale2x\n"
+#~ "5: Scale3x\n"
+#~ "6: HQ2X\n"
+#~ "7: HQ3X"
+
+#~ msgid ""
+#~ "0: Off (fastest)\n"
+#~ "1: Game dependant\n"
+#~ "2: Always"
+#~ msgstr ""
+#~ "0: Désactivé (rapide)\n"
+#~ "1: Selon le jeu\n"
+#~ "2: Toujours"
+
+#~ msgid ""
+#~ "320x240\n"
+#~ "640x480\n"
+#~ "800x600\n"
+#~ "1024x768\n"
+#~ "1152x864\n"
+#~ "1280x1024\n"
+#~ "1600x1200"
+#~ msgstr ""
+#~ "320x240\n"
+#~ "640x480\n"
+#~ "800x600\n"
+#~ "1024x768\n"
+#~ "1152x864\n"
+#~ "1280x1024\n"
+#~ "1600x1200"
+
+#~ msgid "<b>Compatibility</b>"
+#~ msgstr "<b>Compatibilité</b>"
+
+#~ msgid "<b>Framerate</b>"
+#~ msgstr "<b>Taux de rafraichissement</b>"
+
+#~ msgid "<b>Screen</b>"
+#~ msgstr "<b>Écran</b>"
+
 #~ msgid "<b>General</b>"
 #~ msgstr "<b>Général</b>"
 
@@ -3275,9 +3341,6 @@ msgstr "Erreur au chargement du symbole"
 
 #~ msgid "Select CD-ROM device"
 #~ msgstr "Sélectionner un lecteur CD-ROM"
-
-#~ msgid "0: None"
-#~ msgstr "0: Aucun"
 
 #~ msgid "10000: unused"
 #~ msgstr "10000: Inutilisé"

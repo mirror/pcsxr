@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2011-06-04 23:04+0400\n"
+"POT-Creation-Date: 2011-06-08 19:52+0400\n"
 "PO-Revision-Date: 2011-06-04 13:43+0400\n"
 "Last-Translator: Delirious <delirious@freemail.hu>\n"
 "Language-Team: Delirious <delirious@freemail.hu>\n"
@@ -1805,218 +1805,231 @@ msgid "Pete Bernert and the P.E.Op.S. team"
 msgstr "Fejlesztő Pete Bernert és a  P.E.Op.S. team"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:1
-msgid ""
-"0: None\n"
-"1: 2xSai\n"
-"2: 2xSuperSai\n"
-"3: SuperEagle\n"
-"4: Scale2x\n"
-"5: Scale3x\n"
-"6: HQ2X\n"
-"7: HQ3X"
+#, fuzzy
+msgid "0: None"
+msgstr "0: Nessuno"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:2
+msgid "0: Off (fastest)"
 msgstr ""
-"0: Nincs\n"
-"1: 2xSai\n"
-"2: 2xSuperSai\n"
-"3: SuperEagle\n"
-"4: Scale2x\n"
-"5: Scale3x\n"
-"6: HQ2X\n"
-"7: HQ3X"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:3
+msgid "1024x768"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:4
+msgid "1152x864"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:5
+msgid "1280x1024"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:6
+msgid "1600x1200"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:7
+msgid "1: 2xSai"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:8
+msgid "1: Game dependant"
+msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:9
-msgid ""
-"0: Off (fastest)\n"
-"1: Game dependant\n"
-"2: Always"
-msgstr ""
-"0: Ki (leggyorsabb)\n"
-"1: Játék alárendelt\n"
-"2: Mindig"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:12
 msgid "200.0"
 msgstr "200.0"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:13
-msgid ""
-"320x240\n"
-"640x480\n"
-"800x600\n"
-"1024x768\n"
-"1152x864\n"
-"1280x1024\n"
-"1600x1200"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:10
+msgid "2: 2xSuperSai"
 msgstr ""
-"320x240\n"
-"640x480\n"
-"800x600\n"
-"1024x768\n"
-"1152x864\n"
-"1280x1024\n"
-"1600x1200"
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:11
+msgid "2: Always"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:12
+msgid "320x240"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:13
+msgid "3: SuperEagle"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:14
+msgid "4: Scale2x"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:15
+msgid "5: Scale3x"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:16
+msgid "640x480"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:17
+msgid "6: HQ2X"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:18
+msgid "7: HQ3X"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:19
+msgid "800x600"
+msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:20
-msgid "<b>Compatibility</b>"
-msgstr "<b>Kompatibilitás</b>"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:21
-msgid "<b>Framerate</b>"
-msgstr "<b>Képfrissítési frekvencia</b>"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:22
-msgid "<b>Screen</b>"
-msgstr "<b>Képernyő</b>"
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:23
 msgid "Autodetect FPS limit"
 msgstr "FPS korlát automatikus észlelése"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:24
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:21
 msgid "Better FPS limit in some"
 msgstr "Jobb FPS korlátozás némelyikben"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:25
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:22
 msgid "Black screens in Lunar"
 msgstr "Lunar fekete képernyője"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:26
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:23
 msgid "Capcom fighting games"
 msgstr "Capcom verekedős játékok"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:27
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:24
 msgid "Chrono Cross"
 msgstr "Chrono Cross"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:28
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:25
 msgid "Compatibility mode"
 msgstr "Kompatibilitási mód"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:29
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:26
 msgid "Configure X11 Video"
 msgstr "X11 Video beállítása"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:30
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:27
 msgid "Disable CPU Saving"
 msgstr "Processzor mentés kikapcsolása"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:31
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:28
 msgid "Disable coordinate check"
 msgstr "Helyzeti ellenőrzés kikapcsolása"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:32
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:29
 msgid "Dithering:"
 msgstr "Szürkeárnyalás:"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:33
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:30
 msgid "Draw quads with triangles"
 msgstr "Négyszögek megrajzolása háromszögekkel"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:34
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:31
 msgid "Enable frame skipping"
 msgstr "Képkocka kihagyás használata"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:35
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:32
 msgid "Enable this if games display too quickly."
 msgstr "Kapcsold be ezt, ha a játékok megjelenítése túl gyors"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:36
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:33
 msgid "Expand screen width"
 msgstr "Képernyő szélesség nyújtása"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:37
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:34
 msgid "Fake 'gpu busy' states"
 msgstr "Hamis 'gpu foglalt' állapot"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:38
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:35
 msgid "For precise framerate"
 msgstr "A pontos képfrissítéshez"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:39
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:36
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
 msgid "Fullscreen"
 msgstr "Teljes képernyő"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:40
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:37
 msgid "Ignore brightness color"
 msgstr "Világos szín kihagyása"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:41
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:38
 msgid "Initial Window Size:"
 msgstr "Induló ablak mérete:"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:42
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:39
 msgid "Lazy screen update"
 msgstr "Lassú képernyő frissítése"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:43
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:40
 msgid "Maintain 4:3 Aspect Ratio"
 msgstr "4:3 méretarány megtartása"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:44
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:41
 msgid "Needed by Dark Forces"
 msgstr "Dark Forces játékhoz szükséges"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:45
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:42
 msgid "Odd/even bit hack"
 msgstr "Páratlan/páros bit hack"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:46
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:43
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
 msgid "Old frame skipping"
 msgstr "Régi képkocka kihagyás"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:47
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:44
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
 msgid "PC FPS calculation"
 msgstr "PC FPS kalkuláció"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:48
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:45
 msgid "Pandemonium 2"
 msgstr "Pandemonium 2"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:49
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:46
 msgid "Repeated flat tex triangles"
 msgstr "Ismétlődő lapos textúra háromszögek"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:50
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:47
 msgid "Set FPS"
 msgstr "FPS megadás"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:51
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:48
 msgid "Show FPS"
 msgstr "FPS megjelenítése"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:52
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:49
 msgid "Skip every second frame"
 msgstr "Minden második képkocka kihagyása"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:53
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:50
 msgid "Skip frames when rendering."
 msgstr "Képkockák kihagyása rendereléskor."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:54
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:51
 msgid "Stretching:"
 msgstr "Nyújtás:"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:55
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:52
 msgid "Toggle busy flags after drawing"
 msgstr "Foglalt jelzés elhelyezése megrajzolás után"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:56
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:53
 msgid "Toggle whether the FPS will be shown."
 msgstr "Váltás az FPS megjelenítéstől függően."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:57
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:54
 msgid "Toggle windowed/fullscreen mode."
 msgstr "Váltás ablakos/teljes képernyős mód között."
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:58
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:55
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:83
 msgid "Use game fixes"
 msgstr "Játék javítások használata"
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:59
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:56
 msgid "better g-colors, worse textures"
 msgstr "Jobb G-színek, roszabb textúrák"
 
@@ -3199,6 +3212,60 @@ msgstr "Pcsxr üzenet"
 msgid "Error Loading Symbol"
 msgstr "Hiba a szimbólum betöltése közben"
 
+#~ msgid ""
+#~ "0: None\n"
+#~ "1: 2xSai\n"
+#~ "2: 2xSuperSai\n"
+#~ "3: SuperEagle\n"
+#~ "4: Scale2x\n"
+#~ "5: Scale3x\n"
+#~ "6: HQ2X\n"
+#~ "7: HQ3X"
+#~ msgstr ""
+#~ "0: Nincs\n"
+#~ "1: 2xSai\n"
+#~ "2: 2xSuperSai\n"
+#~ "3: SuperEagle\n"
+#~ "4: Scale2x\n"
+#~ "5: Scale3x\n"
+#~ "6: HQ2X\n"
+#~ "7: HQ3X"
+
+#~ msgid ""
+#~ "0: Off (fastest)\n"
+#~ "1: Game dependant\n"
+#~ "2: Always"
+#~ msgstr ""
+#~ "0: Ki (leggyorsabb)\n"
+#~ "1: Játék alárendelt\n"
+#~ "2: Mindig"
+
+#~ msgid ""
+#~ "320x240\n"
+#~ "640x480\n"
+#~ "800x600\n"
+#~ "1024x768\n"
+#~ "1152x864\n"
+#~ "1280x1024\n"
+#~ "1600x1200"
+#~ msgstr ""
+#~ "320x240\n"
+#~ "640x480\n"
+#~ "800x600\n"
+#~ "1024x768\n"
+#~ "1152x864\n"
+#~ "1280x1024\n"
+#~ "1600x1200"
+
+#~ msgid "<b>Compatibility</b>"
+#~ msgstr "<b>Kompatibilitás</b>"
+
+#~ msgid "<b>Framerate</b>"
+#~ msgstr "<b>Képfrissítési frekvencia</b>"
+
+#~ msgid "<b>Screen</b>"
+#~ msgstr "<b>Képernyő</b>"
+
 #~ msgid "<b>General</b>"
 #~ msgstr "<b>Általános</b>"
 
@@ -3273,10 +3340,6 @@ msgstr "Hiba a szimbólum betöltése közben"
 #, fuzzy
 #~ msgid "COFF files not supported.\n"
 #~ msgstr "File COFF non supportato.\n"
-
-#, fuzzy
-#~ msgid "0: None"
-#~ msgstr "0: Nessuno"
 
 #, fuzzy
 #~ msgid "PC fps calculation"
