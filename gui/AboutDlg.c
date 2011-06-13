@@ -60,6 +60,7 @@ void RunAboutDialog(void) {
 		"",
 		"Icon Design:",
 		"Romain Lafourcade",
+		"perchibald",
 		NULL
 	};
 

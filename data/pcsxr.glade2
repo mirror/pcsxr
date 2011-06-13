@@ -815,10 +815,8 @@
         </child>
         <child>
           <widget class="GtkImage" id="image160">
-            <property name="width_request">354</property>
-            <property name="height_request">174</property>
             <property name="visible">True</property>
-            <property name="pixbuf">pcsxr.jpg</property>
+            <property name="pixbuf">pcsxr.png</property>
           </widget>
           <packing>
             <property name="position">2</property>
@@ -1594,9 +1592,6 @@
                           </packing>
                         </child>
                         <child>
-                          <placeholder/>
-                        </child>
-                        <child>
                           <widget class="GtkCheckButton" id="GtkCheckButton_SlowBoot">
                             <property name="label" translatable="yes">Slow Boot</property>
                             <property name="visible">True</property>
@@ -1613,6 +1608,9 @@
                             <property name="x_options">GTK_FILL</property>
                             <property name="y_options"></property>
                           </packing>
+                        </child>
+                        <child>
+                          <placeholder/>
                         </child>
                       </widget>
                       <packing>

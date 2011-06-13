@@ -470,7 +470,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit45]
-FileName=gui\cdrom02.ico
+FileName=gui\pcsxr.ico
 Folder=gui
 Compile=0
 CompileCpp=0

@@ -348,7 +348,7 @@
 					../../../plugins/dfcdrom,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "";
 				SYMROOT = ../../build;
 			};
 			name = Deployment;

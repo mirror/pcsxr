@@ -332,7 +332,7 @@ SOURCE=.\gui\AboutDlg.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\gui\cdrom02.ico
+SOURCE=.\gui\pcsxr.ico
 # End Source File
 # Begin Source File
 

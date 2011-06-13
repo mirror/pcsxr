@@ -389,7 +389,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_CFLAGS = "-fomit-frame-pointer";
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "";
 				SYMROOT = ../../build;
 			};
 			name = Deployment;

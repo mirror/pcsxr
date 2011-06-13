@@ -945,7 +945,7 @@
 					"-lz",
 					"-lSystemStubs",
 				);
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "";
 			};
 			name = Deployment;
 		};
