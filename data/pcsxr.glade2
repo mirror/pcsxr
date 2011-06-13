@@ -668,34 +668,30 @@
           </packing>
         </child>
         <child>
-          <widget class="GtkToolbar" id="toolbar1">
+          <widget class="GtkTable" id="tableToolbox">
             <property name="visible">True</property>
-            <property name="toolbar_style">icons</property>
-            <property name="icon_size_set">True</property>
+            <property name="border_width">5</property>
+            <property name="n_columns">11</property>
             <child>
               <widget class="GtkToolButton" id="toolbutton_runcd">
                 <property name="visible">True</property>
+                <property name="has_tooltip">True</property>
                 <property name="tooltip" translatable="yes">Run CD</property>
-                <property name="label" translatable="yes">Run CD</property>
                 <property name="use_underline">True</property>
-                <property name="stock_id">gtk-cdrom</property>
+                <property name="icon">cd.png</property>
               </widget>
-              <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
-              </packing>
             </child>
             <child>
               <widget class="GtkToolButton" id="toolbutton_runimage">
                 <property name="visible">True</property>
+                <property name="has_tooltip">True</property>
                 <property name="tooltip" translatable="yes">Run ISO Image</property>
-                <property name="label" translatable="yes">Run ISO...</property>
                 <property name="use_underline">True</property>
-                <property name="stock_id">gtk-open</property>
+                <property name="icon">iso-open.png</property>
               </widget>
               <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
               </packing>
             </child>
             <child>
@@ -703,34 +699,34 @@
                 <property name="visible">True</property>
               </widget>
               <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
+                <property name="left_attach">2</property>
+                <property name="right_attach">3</property>
               </packing>
             </child>
             <child>
               <widget class="GtkToolButton" id="toolbutton_run">
                 <property name="visible">True</property>
+                <property name="has_tooltip">True</property>
                 <property name="tooltip" translatable="yes">Continue Emulation</property>
-                <property name="label" translatable="yes">Continue...</property>
                 <property name="use_underline">True</property>
-                <property name="stock_id">gtk-go-forward</property>
+                <property name="icon">play.png</property>
               </widget>
               <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
+                <property name="left_attach">3</property>
+                <property name="right_attach">4</property>
               </packing>
             </child>
             <child>
               <widget class="GtkToolButton" id="toolbutton_switchimage">
                 <property name="visible">True</property>
+                <property name="has_tooltip">True</property>
                 <property name="tooltip" translatable="yes">Switch ISO Image</property>
-                <property name="label" translatable="yes">Switch ISO...</property>
                 <property name="use_underline">True</property>
-                <property name="stock_id">gtk-undo</property>
+                <property name="icon">cd-load.png</property>
               </widget>
               <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
+                <property name="left_attach">4</property>
+                <property name="right_attach">5</property>
               </packing>
             </child>
             <child>
@@ -738,78 +734,79 @@
                 <property name="visible">True</property>
               </widget>
               <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
+                <property name="left_attach">5</property>
+                <property name="right_attach">6</property>
               </packing>
             </child>
             <child>
               <widget class="GtkToolButton" id="toolbutton_memcards">
                 <property name="visible">True</property>
+                <property name="has_tooltip">True</property>
                 <property name="tooltip" translatable="yes">Configure Memory Cards</property>
-                <property name="label" translatable="yes">Memcards...</property>
                 <property name="use_underline">True</property>
-                <property name="stock_id">gtk-floppy</property>
+                <property name="icon">memcard.png</property>
               </widget>
               <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
+                <property name="left_attach">6</property>
+                <property name="right_attach">7</property>
               </packing>
             </child>
             <child>
               <widget class="GtkToolButton" id="toolbutton_graphics">
                 <property name="visible">True</property>
+                <property name="has_tooltip">True</property>
                 <property name="tooltip" translatable="yes">Configure Graphics</property>
-                <property name="label" translatable="yes">Graphics...</property>
                 <property name="use_underline">True</property>
-                <property name="stock_id">gtk-select-color</property>
+                <property name="icon">gpu.png</property>
               </widget>
               <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
+                <property name="left_attach">7</property>
+                <property name="right_attach">8</property>
               </packing>
             </child>
             <child>
               <widget class="GtkToolButton" id="toolbutton_sound">
                 <property name="visible">True</property>
+                <property name="has_tooltip">True</property>
                 <property name="tooltip" translatable="yes">Configure Sound</property>
-                <property name="label" translatable="yes">Sound...</property>
                 <property name="use_underline">True</property>
-                <property name="stock_id">gtk-convert</property>
+                <property name="icon">spu.png</property>
               </widget>
               <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
+                <property name="left_attach">8</property>
+                <property name="right_attach">9</property>
               </packing>
             </child>
             <child>
               <widget class="GtkToolButton" id="toolbutton_cdrom">
                 <property name="visible">True</property>
+                <property name="has_tooltip">True</property>
                 <property name="tooltip" translatable="yes">Configure CD-ROM</property>
-                <property name="label" translatable="yes">CD-ROM...</property>
                 <property name="use_underline">True</property>
-                <property name="stock_id">gtk-cdrom</property>
+                <property name="icon">cdr.png</property>
               </widget>
               <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
+                <property name="left_attach">9</property>
+                <property name="right_attach">10</property>
               </packing>
             </child>
             <child>
               <widget class="GtkToolButton" id="toolbutton_controllers">
                 <property name="visible">True</property>
+                <property name="has_tooltip">True</property>
                 <property name="tooltip" translatable="yes">Configure Controllers</property>
-                <property name="label" translatable="yes">Controllers...</property>
                 <property name="use_underline">True</property>
-                <property name="stock_id">gtk-execute</property>
+                <property name="icon">pad.png</property>
               </widget>
               <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
+                <property name="left_attach">10</property>
+                <property name="right_attach">11</property>
               </packing>
             </child>
           </widget>
           <packing>
             <property name="expand">False</property>
+            <property name="fill">False</property>
             <property name="position">1</property>
           </packing>
         </child>

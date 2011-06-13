@@ -57,8 +57,6 @@ void RunAboutDialog(void) {
 
 	const gchar *artists[] = {
 		"Ryan Schultz <schultz.ryan@gmail.com>",
-		"",
-		"Icon Design:",
 		"Romain Lafourcade",
 		"perchibald",
 		NULL
