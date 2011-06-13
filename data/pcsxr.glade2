@@ -722,7 +722,7 @@
                 <property name="has_tooltip">True</property>
                 <property name="tooltip" translatable="yes">Switch ISO Image</property>
                 <property name="use_underline">True</property>
-                <property name="icon">cd-load.png</property>
+                <property name="icon">iso-reopen.png</property>
               </widget>
               <packing>
                 <property name="left_attach">4</property>
