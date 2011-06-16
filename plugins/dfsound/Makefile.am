@@ -34,6 +34,12 @@ libDFSound_la_CPPFLAGS += -DUSESDL=1 $(SDL_CFLAGS)
 libDFSound_la_LIBADD += $(SDL_LIBS)
 endif
 
+if SOUND_OPENAL
+libDFSound_la_SOURCES += openal.c
+libDFSound_la_CPPFLAGS += -DUSEOPENAL=1
+libDFSound_la_LIBADD += $(OPENAL_LIBS)
+endif
+
 if SOUND_NULL
 libDFSound_la_SOURCES += nullsnd.c
 libDFSound_la_CPPFLAGS += -DUSENULL=1

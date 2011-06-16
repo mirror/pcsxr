@@ -49,6 +49,8 @@ static char * libraryName     = N_("ALSA Sound");
 static char * libraryName     = N_("OSS Sound");
 #elif defined (USESDL)
 static char * libraryName     = N_("SDL Sound");
+#elif defined (USEOPENAL)
+static char * libraryName     = N_("OpenAL Sound");
 #elif defined (USEPULSEAUDIO)
 static char * libraryName     = N_("PulseAudio Sound");
 #else

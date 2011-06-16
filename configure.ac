@@ -58,11 +58,12 @@ AC_CHECK_LIB(umem, umem_alloc, [LIBS="$LIBS -lumem"], [])
 
 AM_CONDITIONAL(SOUND_OSS, false)
 AM_CONDITIONAL(SOUND_SDL, false)
+AM_CONDITIONAL(SOUND_OPENAL, false)
 AM_CONDITIONAL(SOUND_NULL, false)
 
-dnl Check for ALSA 1.x, OSS, or PulseAudio
+dnl Check for ALSA 1.x, OSS, OpenAL or PulseAudio
 
-AC_ARG_ENABLE(sound, [  --enable-sound=...      force selection of sound backend (alsa/null/oss/pulseaudio/sdl) (default: sdl)],
+AC_ARG_ENABLE(sound, [  --enable-sound=...      force selection of sound backend (alsa/null/oss/pulseaudio/sdl/openal) (default: sdl)],
 [ SOUND="$enableval" ],[ SOUND="sdl" ])
 
 if test "x$SOUND" = xalsa; then
@@ -76,6 +77,8 @@ elif test "x$SOUND" = xoss; then
 	else
 		AM_CONDITIONAL(SOUND_OSS, true)
 	fi
+elif test "x$SOUND" = xopenal; then
+	PKG_CHECK_MODULES(OPENAL, openal >= 1.0.0, have_openal=yes)
 elif test "x$SOUND" = xno; then
 	AM_CONDITIONAL(SOUND_NULL, true)
 elif test "x$SOUND" = xnull; then
@@ -86,6 +89,8 @@ fi
 
 AM_CONDITIONAL(SOUND_ALSA, test "x$have_alsa" = xyes)
 AC_SUBST(ALSA_LIBS)
+AM_CONDITIONAL(SOUND_OPENAL, test "x$have_openal" = xyes)
+AC_SUBST(OPENAL_LIBS)
 AM_CONDITIONAL(SOUND_PULSEAUDIO, test "x$have_pulseaudio" = xyes)
 AC_SUBST(PULSEAUDIO_CFLAGS)
 AC_SUBST(PULSEAUDIO_LIBS)
