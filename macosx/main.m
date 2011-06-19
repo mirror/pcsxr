@@ -148,6 +148,8 @@ void SysUpdate() {
 #ifndef USE_POWER_ASSERTION
 	UpdateSystemActivity(UsrActivity);
 #endif
+	PAD1_keypressed();
+	PAD2_keypressed();
 	[emuThread handleEvents];
 }
 
