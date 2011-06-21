@@ -7,7 +7,11 @@ void DoAbout();
 long DoConfiguration();
 void LoadConfiguration();
 
+#ifdef USEOPENAL
+#define PluginController NetSfPeopsALPluginController
+#else
 #define PluginController NetSfPeopsSPUPluginController
+#endif
 
 @interface PluginController : NSWindowController
 {

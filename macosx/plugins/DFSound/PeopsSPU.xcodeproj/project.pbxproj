@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 44;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,22 +13,37 @@
 		2B7B2BD1072DAE5D007F0C35 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7B2BD0072DAE5D007F0C35 /* AppKit.framework */; };
 		2B7B2BE9072DB1B6007F0C35 /* NamedSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B2BE7072DB1B6007F0C35 /* NamedSlider.m */; };
 		2BFF7F3E0715D2E00061278A /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BFF7F3D0715D2E00061278A /* Carbon.framework */; };
-		71C7B201130F340E004BF975 /* SDL_coreaudio.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1D4130F340E004BF975 /* SDL_coreaudio.c */; };
-		71C7B202130F340E004BF975 /* SDL_audio.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1D6130F340E004BF975 /* SDL_audio.c */; };
-		71C7B203130F340E004BF975 /* SDL_audiocvt.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1D8130F340E004BF975 /* SDL_audiocvt.c */; };
-		71C7B205130F340E004BF975 /* SDL_audiotypecvt.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1DC130F340E004BF975 /* SDL_audiotypecvt.c */; };
+		5599693813AFCD2900B0216B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
+		5599693913AFCD2900B0216B /* NetSfPeopsSpuPluginMain.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2B4F9961077B042E004E36BA /* NetSfPeopsSpuPluginMain.nib */; };
+		5599693A13AFCD2900B0216B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2B4F99F7077B0CE4004E36BA /* Credits.rtf */; };
+		5599693C13AFCD2900B0216B /* PluginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B2B92072D9BE6007F0C35 /* PluginController.m */; };
+		5599693D13AFCD2900B0216B /* NamedSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B2BE7072DB1B6007F0C35 /* NamedSlider.m */; };
+		5599693E13AFCD2900B0216B /* dma.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E797109DC529003BB7AC /* dma.c */; };
+		5599693F13AFCD2900B0216B /* freeze.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E79B109DC529003BB7AC /* freeze.c */; };
+		5599694013AFCD2900B0216B /* registers.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E79F109DC529003BB7AC /* registers.c */; };
+		5599694113AFCD2900B0216B /* spu.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E7A4109DC529003BB7AC /* spu.c */; };
+		5599694213AFCD2900B0216B /* xa.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E7A7109DC529003BB7AC /* xa.c */; };
+		5599695313AFCD2900B0216B /* externals.c in Sources */ = {isa = PBXBuildFile; fileRef = A1A2073D13816B1D005EE84C /* externals.c */; };
+		5599695513AFCD2900B0216B /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
+		5599695713AFCD2900B0216B /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7B2BD0072DAE5D007F0C35 /* AppKit.framework */; };
+		5599696613AFCD7F00B0216B /* SDL_error.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1F4130F340E004BF975 /* SDL_error.c */; };
+		5599696713AFCD7F00B0216B /* SDL_coreaudio.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1D4130F340E004BF975 /* SDL_coreaudio.c */; };
+		5599696813AFCD8000B0216B /* SDL_audiotypecvt.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1DC130F340E004BF975 /* SDL_audiotypecvt.c */; };
+		5599696913AFCD8100B0216B /* SDL_audiocvt.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1D8130F340E004BF975 /* SDL_audiocvt.c */; };
+		5599696A13AFCD8100B0216B /* SDL_audio.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1D6130F340E004BF975 /* SDL_audio.c */; };
+		5599696B13AFCD8300B0216B /* SDL.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1F3130F340E004BF975 /* SDL.c */; };
+		5599696C13AFCD8B00B0216B /* openal.c in Sources */ = {isa = PBXBuildFile; fileRef = 5599692713AFCCC600B0216B /* openal.c */; };
+		5599696D13AFCD9300B0216B /* sdl.c in Sources */ = {isa = PBXBuildFile; fileRef = 71D88523130EF83900F150FF /* sdl.c */; };
+		5599696F13AFCE1D00B0216B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5599696E13AFCE1D00B0216B /* OpenAL.framework */; };
 		71C7B206130F340E004BF975 /* SDL_mixer.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1DD130F340E004BF975 /* SDL_mixer.c */; };
 		71C7B207130F340E004BF975 /* SDL_wave.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1DF130F340E004BF975 /* SDL_wave.c */; };
 		71C7B208130F340E004BF975 /* SDL_rwopsbundlesupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1E4130F340E004BF975 /* SDL_rwopsbundlesupport.m */; };
 		71C7B209130F340E004BF975 /* SDL_rwops.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1E5130F340E004BF975 /* SDL_rwops.c */; };
-		71C7B20E130F340E004BF975 /* SDL.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1F3130F340E004BF975 /* SDL.c */; };
-		71C7B20F130F340E004BF975 /* SDL_error.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1F4130F340E004BF975 /* SDL_error.c */; };
 		71C7B210130F340E004BF975 /* SDL_syscond.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1F8130F340E004BF975 /* SDL_syscond.c */; };
 		71C7B211130F340E004BF975 /* SDL_sysmutex.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1F9130F340E004BF975 /* SDL_sysmutex.c */; };
 		71C7B212130F340E004BF975 /* SDL_syssem.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1FB130F340E004BF975 /* SDL_syssem.c */; };
 		71C7B213130F340E004BF975 /* SDL_systhread.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1FC130F340E004BF975 /* SDL_systhread.c */; };
 		71C7B214130F340E004BF975 /* SDL_thread.c in Sources */ = {isa = PBXBuildFile; fileRef = 71C7B1FF130F340E004BF975 /* SDL_thread.c */; };
-		71D88524130EF83900F150FF /* sdl.c in Sources */ = {isa = PBXBuildFile; fileRef = 71D88523130EF83900F150FF /* sdl.c */; };
 		71D88636130EFFB500F150FF /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71D88634130EFFB500F150FF /* CoreAudio.framework */; };
 		71D8864F130F009E00F150FF /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71D8864E130F009D00F150FF /* IOKit.framework */; };
 		71D88654130F00B400F150FF /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71D88653130F00B400F150FF /* AudioUnit.framework */; };
@@ -53,48 +68,53 @@
 		2B7B2BE6072DB1B6007F0C35 /* NamedSlider.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = NamedSlider.h; path = macsrc/NamedSlider.h; sourceTree = "<group>"; };
 		2B7B2BE7072DB1B6007F0C35 /* NamedSlider.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = NamedSlider.m; path = macsrc/NamedSlider.m; sourceTree = "<group>"; };
 		2BFF7F3D0715D2E00061278A /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
-		71C7B1C2130F340E004BF975 /* begin_code.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = begin_code.h; path = ../Common/SDL/include/begin_code.h; sourceTree = SOURCE_ROOT; };
-		71C7B1C3130F340E004BF975 /* close_code.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = close_code.h; path = ../Common/SDL/include/close_code.h; sourceTree = SOURCE_ROOT; };
-		71C7B1C4130F340E004BF975 /* SDL.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL.h; path = ../Common/SDL/include/SDL.h; sourceTree = SOURCE_ROOT; };
-		71C7B1C5130F340E004BF975 /* SDL_audio.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_audio.h; path = ../Common/SDL/include/SDL_audio.h; sourceTree = SOURCE_ROOT; };
-		71C7B1C6130F340E004BF975 /* SDL_config.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_config.h; path = ../Common/SDL/include/SDL_config.h; sourceTree = SOURCE_ROOT; };
-		71C7B1C7130F340E004BF975 /* SDL_endian.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_endian.h; path = ../Common/SDL/include/SDL_endian.h; sourceTree = SOURCE_ROOT; };
-		71C7B1C8130F340E004BF975 /* SDL_error.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_error.h; path = ../Common/SDL/include/SDL_error.h; sourceTree = SOURCE_ROOT; };
-		71C7B1C9130F340E004BF975 /* SDL_haptic.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_haptic.h; path = ../Common/SDL/include/SDL_haptic.h; sourceTree = SOURCE_ROOT; };
-		71C7B1CA130F340E004BF975 /* SDL_joystick.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_joystick.h; path = ../Common/SDL/include/SDL_joystick.h; sourceTree = SOURCE_ROOT; };
-		71C7B1CB130F340E004BF975 /* SDL_main.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_main.h; path = ../Common/SDL/include/SDL_main.h; sourceTree = SOURCE_ROOT; };
-		71C7B1CC130F340E004BF975 /* SDL_mutex.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_mutex.h; path = ../Common/SDL/include/SDL_mutex.h; sourceTree = SOURCE_ROOT; };
-		71C7B1CD130F340E004BF975 /* SDL_platform.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_platform.h; path = ../Common/SDL/include/SDL_platform.h; sourceTree = SOURCE_ROOT; };
-		71C7B1CE130F340E004BF975 /* SDL_rwops.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_rwops.h; path = ../Common/SDL/include/SDL_rwops.h; sourceTree = SOURCE_ROOT; };
-		71C7B1CF130F340E004BF975 /* SDL_stdinc.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_stdinc.h; path = ../Common/SDL/include/SDL_stdinc.h; sourceTree = SOURCE_ROOT; };
-		71C7B1D0130F340E004BF975 /* SDL_thread.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_thread.h; path = ../Common/SDL/include/SDL_thread.h; sourceTree = SOURCE_ROOT; };
-		71C7B1D4130F340E004BF975 /* SDL_coreaudio.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_coreaudio.c; path = ../Common/SDL/src/audio/macosx/SDL_coreaudio.c; sourceTree = SOURCE_ROOT; };
-		71C7B1D5130F340E004BF975 /* SDL_coreaudio.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_coreaudio.h; path = ../Common/SDL/src/audio/macosx/SDL_coreaudio.h; sourceTree = SOURCE_ROOT; };
-		71C7B1D6130F340E004BF975 /* SDL_audio.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_audio.c; path = ../Common/SDL/src/audio/SDL_audio.c; sourceTree = SOURCE_ROOT; };
-		71C7B1D7130F340E004BF975 /* SDL_audio_c.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_audio_c.h; path = ../Common/SDL/src/audio/SDL_audio_c.h; sourceTree = SOURCE_ROOT; };
-		71C7B1D8130F340E004BF975 /* SDL_audiocvt.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_audiocvt.c; path = ../Common/SDL/src/audio/SDL_audiocvt.c; sourceTree = SOURCE_ROOT; };
-		71C7B1DB130F340E004BF975 /* SDL_audiomem.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_audiomem.h; path = ../Common/SDL/src/audio/SDL_audiomem.h; sourceTree = SOURCE_ROOT; };
-		71C7B1DC130F340E004BF975 /* SDL_audiotypecvt.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_audiotypecvt.c; path = ../Common/SDL/src/audio/SDL_audiotypecvt.c; sourceTree = SOURCE_ROOT; };
-		71C7B1DD130F340E004BF975 /* SDL_mixer.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_mixer.c; path = ../Common/SDL/src/audio/SDL_mixer.c; sourceTree = SOURCE_ROOT; };
-		71C7B1DE130F340E004BF975 /* SDL_sysaudio.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_sysaudio.h; path = ../Common/SDL/src/audio/SDL_sysaudio.h; sourceTree = SOURCE_ROOT; };
-		71C7B1DF130F340E004BF975 /* SDL_wave.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_wave.c; path = ../Common/SDL/src/audio/SDL_wave.c; sourceTree = SOURCE_ROOT; };
-		71C7B1E0130F340E004BF975 /* SDL_wave.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_wave.h; path = ../Common/SDL/src/audio/SDL_wave.h; sourceTree = SOURCE_ROOT; };
-		71C7B1E3130F340E004BF975 /* SDL_rwopsbundlesupport.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_rwopsbundlesupport.h; path = ../Common/SDL/src/file/cocoa/SDL_rwopsbundlesupport.h; sourceTree = SOURCE_ROOT; };
-		71C7B1E4130F340E004BF975 /* SDL_rwopsbundlesupport.m */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.objc; name = SDL_rwopsbundlesupport.m; path = ../Common/SDL/src/file/cocoa/SDL_rwopsbundlesupport.m; sourceTree = SOURCE_ROOT; };
-		71C7B1E5130F340E004BF975 /* SDL_rwops.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_rwops.c; path = ../Common/SDL/src/file/SDL_rwops.c; sourceTree = SOURCE_ROOT; };
-		71C7B1F3130F340E004BF975 /* SDL.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL.c; path = ../Common/SDL/src/SDL.c; sourceTree = SOURCE_ROOT; };
-		71C7B1F4130F340E004BF975 /* SDL_error.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_error.c; path = ../Common/SDL/src/SDL_error.c; sourceTree = SOURCE_ROOT; };
-		71C7B1F5130F340E004BF975 /* SDL_error_c.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_error_c.h; path = ../Common/SDL/src/SDL_error_c.h; sourceTree = SOURCE_ROOT; };
-		71C7B1F8130F340E004BF975 /* SDL_syscond.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_syscond.c; path = ../Common/SDL/src/thread/pthread/SDL_syscond.c; sourceTree = SOURCE_ROOT; };
-		71C7B1F9130F340E004BF975 /* SDL_sysmutex.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_sysmutex.c; path = ../Common/SDL/src/thread/pthread/SDL_sysmutex.c; sourceTree = SOURCE_ROOT; };
-		71C7B1FA130F340E004BF975 /* SDL_sysmutex_c.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_sysmutex_c.h; path = ../Common/SDL/src/thread/pthread/SDL_sysmutex_c.h; sourceTree = SOURCE_ROOT; };
-		71C7B1FB130F340E004BF975 /* SDL_syssem.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_syssem.c; path = ../Common/SDL/src/thread/pthread/SDL_syssem.c; sourceTree = SOURCE_ROOT; };
-		71C7B1FC130F340E004BF975 /* SDL_systhread.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_systhread.c; path = ../Common/SDL/src/thread/pthread/SDL_systhread.c; sourceTree = SOURCE_ROOT; };
-		71C7B1FD130F340E004BF975 /* SDL_systhread_c.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_systhread_c.h; path = ../Common/SDL/src/thread/pthread/SDL_systhread_c.h; sourceTree = SOURCE_ROOT; };
-		71C7B1FE130F340E004BF975 /* SDL_systhread.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_systhread.h; path = ../Common/SDL/src/thread/SDL_systhread.h; sourceTree = SOURCE_ROOT; };
-		71C7B1FF130F340E004BF975 /* SDL_thread.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_thread.c; path = ../Common/SDL/src/thread/SDL_thread.c; sourceTree = SOURCE_ROOT; };
-		71C7B200130F340E004BF975 /* SDL_thread_c.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_thread_c.h; path = ../Common/SDL/src/thread/SDL_thread_c.h; sourceTree = SOURCE_ROOT; };
-		71D88523130EF83900F150FF /* sdl.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = sdl.c; path = ../../../plugins/dfsound/sdl.c; sourceTree = SOURCE_ROOT; };
+		5517C065136217DE00706CCF /* externals.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = externals.c; path = ../../../plugins/dfsound/externals.c; sourceTree = SOURCE_ROOT; };
+		5599692713AFCCC600B0216B /* openal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = openal.c; path = ../../../plugins/dfsound/openal.c; sourceTree = SOURCE_ROOT; };
+		5599695E13AFCD2900B0216B /* PeopsAL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopsAL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		5599695F13AFCD2900B0216B /* Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info copy.plist"; sourceTree = "<group>"; };
+		5599696E13AFCE1D00B0216B /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		71C7B1C2130F340E004BF975 /* begin_code.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = begin_code.h; path = ../Common/SDL/include/begin_code.h; sourceTree = SOURCE_ROOT; };
+		71C7B1C3130F340E004BF975 /* close_code.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = close_code.h; path = ../Common/SDL/include/close_code.h; sourceTree = SOURCE_ROOT; };
+		71C7B1C4130F340E004BF975 /* SDL.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL.h; path = ../Common/SDL/include/SDL.h; sourceTree = SOURCE_ROOT; };
+		71C7B1C5130F340E004BF975 /* SDL_audio.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_audio.h; path = ../Common/SDL/include/SDL_audio.h; sourceTree = SOURCE_ROOT; };
+		71C7B1C6130F340E004BF975 /* SDL_config.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_config.h; path = ../Common/SDL/include/SDL_config.h; sourceTree = SOURCE_ROOT; };
+		71C7B1C7130F340E004BF975 /* SDL_endian.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_endian.h; path = ../Common/SDL/include/SDL_endian.h; sourceTree = SOURCE_ROOT; };
+		71C7B1C8130F340E004BF975 /* SDL_error.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_error.h; path = ../Common/SDL/include/SDL_error.h; sourceTree = SOURCE_ROOT; };
+		71C7B1C9130F340E004BF975 /* SDL_haptic.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_haptic.h; path = ../Common/SDL/include/SDL_haptic.h; sourceTree = SOURCE_ROOT; };
+		71C7B1CA130F340E004BF975 /* SDL_joystick.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_joystick.h; path = ../Common/SDL/include/SDL_joystick.h; sourceTree = SOURCE_ROOT; };
+		71C7B1CB130F340E004BF975 /* SDL_main.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_main.h; path = ../Common/SDL/include/SDL_main.h; sourceTree = SOURCE_ROOT; };
+		71C7B1CC130F340E004BF975 /* SDL_mutex.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_mutex.h; path = ../Common/SDL/include/SDL_mutex.h; sourceTree = SOURCE_ROOT; };
+		71C7B1CD130F340E004BF975 /* SDL_platform.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_platform.h; path = ../Common/SDL/include/SDL_platform.h; sourceTree = SOURCE_ROOT; };
+		71C7B1CE130F340E004BF975 /* SDL_rwops.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_rwops.h; path = ../Common/SDL/include/SDL_rwops.h; sourceTree = SOURCE_ROOT; };
+		71C7B1CF130F340E004BF975 /* SDL_stdinc.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_stdinc.h; path = ../Common/SDL/include/SDL_stdinc.h; sourceTree = SOURCE_ROOT; };
+		71C7B1D0130F340E004BF975 /* SDL_thread.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_thread.h; path = ../Common/SDL/include/SDL_thread.h; sourceTree = SOURCE_ROOT; };
+		71C7B1D4130F340E004BF975 /* SDL_coreaudio.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = SDL_coreaudio.c; path = ../Common/SDL/src/audio/macosx/SDL_coreaudio.c; sourceTree = SOURCE_ROOT; };
+		71C7B1D5130F340E004BF975 /* SDL_coreaudio.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_coreaudio.h; path = ../Common/SDL/src/audio/macosx/SDL_coreaudio.h; sourceTree = SOURCE_ROOT; };
+		71C7B1D6130F340E004BF975 /* SDL_audio.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = SDL_audio.c; path = ../Common/SDL/src/audio/SDL_audio.c; sourceTree = SOURCE_ROOT; };
+		71C7B1D7130F340E004BF975 /* SDL_audio_c.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_audio_c.h; path = ../Common/SDL/src/audio/SDL_audio_c.h; sourceTree = SOURCE_ROOT; };
+		71C7B1D8130F340E004BF975 /* SDL_audiocvt.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = SDL_audiocvt.c; path = ../Common/SDL/src/audio/SDL_audiocvt.c; sourceTree = SOURCE_ROOT; };
+		71C7B1DB130F340E004BF975 /* SDL_audiomem.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_audiomem.h; path = ../Common/SDL/src/audio/SDL_audiomem.h; sourceTree = SOURCE_ROOT; };
+		71C7B1DC130F340E004BF975 /* SDL_audiotypecvt.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = SDL_audiotypecvt.c; path = ../Common/SDL/src/audio/SDL_audiotypecvt.c; sourceTree = SOURCE_ROOT; };
+		71C7B1DD130F340E004BF975 /* SDL_mixer.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = SDL_mixer.c; path = ../Common/SDL/src/audio/SDL_mixer.c; sourceTree = SOURCE_ROOT; };
+		71C7B1DE130F340E004BF975 /* SDL_sysaudio.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_sysaudio.h; path = ../Common/SDL/src/audio/SDL_sysaudio.h; sourceTree = SOURCE_ROOT; };
+		71C7B1DF130F340E004BF975 /* SDL_wave.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = SDL_wave.c; path = ../Common/SDL/src/audio/SDL_wave.c; sourceTree = SOURCE_ROOT; };
+		71C7B1E0130F340E004BF975 /* SDL_wave.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_wave.h; path = ../Common/SDL/src/audio/SDL_wave.h; sourceTree = SOURCE_ROOT; };
+		71C7B1E3130F340E004BF975 /* SDL_rwopsbundlesupport.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_rwopsbundlesupport.h; path = ../Common/SDL/src/file/cocoa/SDL_rwopsbundlesupport.h; sourceTree = SOURCE_ROOT; };
+		71C7B1E4130F340E004BF975 /* SDL_rwopsbundlesupport.m */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.objc; name = SDL_rwopsbundlesupport.m; path = ../Common/SDL/src/file/cocoa/SDL_rwopsbundlesupport.m; sourceTree = SOURCE_ROOT; };
+		71C7B1E5130F340E004BF975 /* SDL_rwops.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = SDL_rwops.c; path = ../Common/SDL/src/file/SDL_rwops.c; sourceTree = SOURCE_ROOT; };
+		71C7B1F3130F340E004BF975 /* SDL.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = SDL.c; path = ../Common/SDL/src/SDL.c; sourceTree = SOURCE_ROOT; };
+		71C7B1F4130F340E004BF975 /* SDL_error.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = SDL_error.c; path = ../Common/SDL/src/SDL_error.c; sourceTree = SOURCE_ROOT; };
+		71C7B1F5130F340E004BF975 /* SDL_error_c.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_error_c.h; path = ../Common/SDL/src/SDL_error_c.h; sourceTree = SOURCE_ROOT; };
+		71C7B1F8130F340E004BF975 /* SDL_syscond.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = SDL_syscond.c; path = ../Common/SDL/src/thread/pthread/SDL_syscond.c; sourceTree = SOURCE_ROOT; };
+		71C7B1F9130F340E004BF975 /* SDL_sysmutex.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = SDL_sysmutex.c; path = ../Common/SDL/src/thread/pthread/SDL_sysmutex.c; sourceTree = SOURCE_ROOT; };
+		71C7B1FA130F340E004BF975 /* SDL_sysmutex_c.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_sysmutex_c.h; path = ../Common/SDL/src/thread/pthread/SDL_sysmutex_c.h; sourceTree = SOURCE_ROOT; };
+		71C7B1FB130F340E004BF975 /* SDL_syssem.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = SDL_syssem.c; path = ../Common/SDL/src/thread/pthread/SDL_syssem.c; sourceTree = SOURCE_ROOT; };
+		71C7B1FC130F340E004BF975 /* SDL_systhread.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = SDL_systhread.c; path = ../Common/SDL/src/thread/pthread/SDL_systhread.c; sourceTree = SOURCE_ROOT; };
+		71C7B1FD130F340E004BF975 /* SDL_systhread_c.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_systhread_c.h; path = ../Common/SDL/src/thread/pthread/SDL_systhread_c.h; sourceTree = SOURCE_ROOT; };
+		71C7B1FE130F340E004BF975 /* SDL_systhread.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_systhread.h; path = ../Common/SDL/src/thread/SDL_systhread.h; sourceTree = SOURCE_ROOT; };
+		71C7B1FF130F340E004BF975 /* SDL_thread.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = SDL_thread.c; path = ../Common/SDL/src/thread/SDL_thread.c; sourceTree = SOURCE_ROOT; };
+		71C7B200130F340E004BF975 /* SDL_thread_c.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL_thread_c.h; path = ../Common/SDL/src/thread/SDL_thread_c.h; sourceTree = SOURCE_ROOT; };
+		71D88523130EF83900F150FF /* sdl.c */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.c; name = sdl.c; path = ../../../plugins/dfsound/sdl.c; sourceTree = SOURCE_ROOT; };
 		71D88634130EFFB500F150FF /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
 		71D8864E130F009D00F150FF /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		71D88653130F00B400F150FF /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = /System/Library/Frameworks/AudioUnit.framework; sourceTree = "<absolute>"; };
@@ -124,6 +144,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5599695413AFCD2900B0216B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5599695513AFCD2900B0216B /* CoreFoundation.framework in Frameworks */,
+				5599695713AFCD2900B0216B /* AppKit.framework in Frameworks */,
+				5599696F13AFCE1D00B0216B /* OpenAL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D576313048677EA00EA77CD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -162,6 +192,7 @@
 				2B7B2BD0072DAE5D007F0C35 /* AppKit.framework */,
 				2BFF7F3D0715D2E00061278A /* Carbon.framework */,
 				0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */,
+				5599696E13AFCE1D00B0216B /* OpenAL.framework */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -173,6 +204,7 @@
 				2B4F99F7077B0CE4004E36BA /* Credits.rtf */,
 				8D5B49A704867FD3000E48DA /* InfoPlist.strings */,
 				2B4F9961077B042E004E36BA /* NetSfPeopsSpuPluginMain.nib */,
+				5599695F13AFCD2900B0216B /* Info copy.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -187,6 +219,7 @@
 				71E4E797109DC529003BB7AC /* dma.c */,
 				71E4E798109DC529003BB7AC /* dma.h */,
 				71E4E799109DC529003BB7AC /* dsoundoss.h */,
+				5517C065136217DE00706CCF /* externals.c */,
 				71E4E79A109DC529003BB7AC /* externals.h */,
 				71E4E79B109DC529003BB7AC /* freeze.c */,
 				71E4E79C109DC529003BB7AC /* gauss_i.h */,
@@ -200,6 +233,7 @@
 				71E4E7A4109DC529003BB7AC /* spu.c */,
 				71E4E7A5109DC529003BB7AC /* spu.h */,
 				71E4E7A6109DC529003BB7AC /* stdafx.h */,
+				5599692713AFCCC600B0216B /* openal.c */,
 				71E4E7A7109DC529003BB7AC /* xa.c */,
 				71E4E7A8109DC529003BB7AC /* xa.h */,
 			);
@@ -210,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				8D576316048677EA00EA77CD /* PeopsSPU.psxplugin */,
+				5599695E13AFCD2900B0216B /* PeopsAL.psxplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -349,6 +384,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5599693613AFCD2900B0216B /* PeopsAL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5599695B13AFCD2900B0216B /* Build configuration list for PBXNativeTarget "PeopsAL" */;
+			buildPhases = (
+				5599693713AFCD2900B0216B /* Resources */,
+				5599693B13AFCD2900B0216B /* Sources */,
+				5599695413AFCD2900B0216B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PeopsAL;
+			productInstallPath = "$(HOME)/Library/Bundles";
+			productName = "PSX Plugin";
+			productReference = 5599695E13AFCD2900B0216B /* PeopsAL.psxplugin */;
+			productType = "com.apple.product-type.bundle";
+		};
 		8D57630D048677EA00EA77CD /* PeopsSPU */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 71155B260FDFA2EB00EC0BC5 /* Build configuration list for PBXNativeTarget "PeopsSPU" */;
@@ -373,7 +426,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 71155B2B0FDFA2EB00EC0BC5 /* Build configuration list for PBXProject "PeopsSPU" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -387,11 +440,22 @@
 			projectRoot = "";
 			targets = (
 				8D57630D048677EA00EA77CD /* PeopsSPU */,
+				5599693613AFCD2900B0216B /* PeopsAL */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5599693713AFCD2900B0216B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5599693813AFCD2900B0216B /* InfoPlist.strings in Resources */,
+				5599693913AFCD2900B0216B /* NetSfPeopsSpuPluginMain.nib in Resources */,
+				5599693A13AFCD2900B0216B /* Credits.rtf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D57630F048677EA00EA77CD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -405,6 +469,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5599693B13AFCD2900B0216B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5599693C13AFCD2900B0216B /* PluginController.m in Sources */,
+				5599693D13AFCD2900B0216B /* NamedSlider.m in Sources */,
+				5599693E13AFCD2900B0216B /* dma.c in Sources */,
+				5599693F13AFCD2900B0216B /* freeze.c in Sources */,
+				5599694013AFCD2900B0216B /* registers.c in Sources */,
+				5599694113AFCD2900B0216B /* spu.c in Sources */,
+				5599694213AFCD2900B0216B /* xa.c in Sources */,
+				5599695313AFCD2900B0216B /* externals.c in Sources */,
+				5599696C13AFCD8B00B0216B /* openal.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D576311048677EA00EA77CD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -416,23 +496,23 @@
 				71E4E7AE109DC529003BB7AC /* registers.c in Sources */,
 				71E4E7B0109DC529003BB7AC /* spu.c in Sources */,
 				71E4E7B1109DC529003BB7AC /* xa.c in Sources */,
-				71D88524130EF83900F150FF /* sdl.c in Sources */,
-				71C7B201130F340E004BF975 /* SDL_coreaudio.c in Sources */,
-				71C7B202130F340E004BF975 /* SDL_audio.c in Sources */,
-				71C7B203130F340E004BF975 /* SDL_audiocvt.c in Sources */,
-				71C7B205130F340E004BF975 /* SDL_audiotypecvt.c in Sources */,
 				71C7B206130F340E004BF975 /* SDL_mixer.c in Sources */,
 				71C7B207130F340E004BF975 /* SDL_wave.c in Sources */,
 				71C7B208130F340E004BF975 /* SDL_rwopsbundlesupport.m in Sources */,
 				71C7B209130F340E004BF975 /* SDL_rwops.c in Sources */,
-				71C7B20E130F340E004BF975 /* SDL.c in Sources */,
-				71C7B20F130F340E004BF975 /* SDL_error.c in Sources */,
 				71C7B210130F340E004BF975 /* SDL_syscond.c in Sources */,
 				71C7B211130F340E004BF975 /* SDL_sysmutex.c in Sources */,
 				71C7B212130F340E004BF975 /* SDL_syssem.c in Sources */,
 				71C7B213130F340E004BF975 /* SDL_systhread.c in Sources */,
 				71C7B214130F340E004BF975 /* SDL_thread.c in Sources */,
 				A1A2073E13816B1D005EE84C /* externals.c in Sources */,
+				5599696613AFCD7F00B0216B /* SDL_error.c in Sources */,
+				5599696713AFCD7F00B0216B /* SDL_coreaudio.c in Sources */,
+				5599696813AFCD8000B0216B /* SDL_audiotypecvt.c in Sources */,
+				5599696913AFCD8100B0216B /* SDL_audiocvt.c in Sources */,
+				5599696A13AFCD8100B0216B /* SDL_audio.c in Sources */,
+				5599696B13AFCD8300B0216B /* SDL.c in Sources */,
+				5599696D13AFCD9300B0216B /* sdl.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +546,65 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5599695C13AFCD2900B0216B /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MACOSX,
+					USEOPENAL,
+					SDL_JOYSTICK_DISABLED,
+				);
+				HEADER_SEARCH_PATHS = (
+					src/,
+					../../../plugins/dfsound,
+					../Common/SDL/include,
+				);
+				INFOPLIST_FILE = "Info copy.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				LIBRARY_STYLE = BUNDLE;
+				PRODUCT_NAME = PeopsAL;
+				SYMROOT = ../../build;
+				WRAPPER_EXTENSION = psxplugin;
+				ZERO_LINK = NO;
+			};
+			name = Development;
+		};
+		5599695D13AFCD2900B0216B /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUGGING_SYMBOLS = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MACOSX,
+					USEOPENAL,
+					SDL_JOYSTICK_DISABLED,
+				);
+				HEADER_SEARCH_PATHS = (
+					src/,
+					../../../plugins/dfsound,
+					../Common/SDL/include,
+				);
+				INFOPLIST_FILE = "Info copy.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				LIBRARY_STYLE = BUNDLE;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				PRODUCT_NAME = PeopsAL;
+				SYMROOT = ../../build;
+				WRAPPER_EXTENSION = psxplugin;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
 		71155B270FDFA2EB00EC0BC5 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -476,7 +615,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACOSX,
-					USEMACOSX,
+					USESDL,
 					SDL_JOYSTICK_DISABLED,
 				);
 				HEADER_SEARCH_PATHS = (
@@ -505,7 +644,7 @@
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACOSX,
-					USEMACOSX,
+					USESDL,
 					SDL_JOYSTICK_DISABLED,
 				);
 				HEADER_SEARCH_PATHS = (
@@ -528,7 +667,8 @@
 		71155B2C0FDFA2EB00EC0BC5 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				SDKROOT = "";
 				SYMROOT = ../../build;
@@ -538,11 +678,9 @@
 		71155B2E0FDFA2EB00EC0BC5 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					i386,
-					ppc,
-				);
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				OTHER_CFLAGS = "";
+				SDKROOT = "";
 				SYMROOT = ../../build;
 			};
 			name = Deployment;
@@ -550,6 +688,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5599695B13AFCD2900B0216B /* Build configuration list for PBXNativeTarget "PeopsAL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5599695C13AFCD2900B0216B /* Development */,
+				5599695D13AFCD2900B0216B /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
 		71155B260FDFA2EB00EC0BC5 /* Build configuration list for PBXNativeTarget "PeopsSPU" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

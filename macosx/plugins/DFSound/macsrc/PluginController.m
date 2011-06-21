@@ -2,7 +2,11 @@
 #include "stdafx.h"
 #include "externals.h"
 
+#ifdef USEOPENAL
+#define APP_ID @"net.sf.peops.ALPlugin"
+#else
 #define APP_ID @"net.sf.peops.SPUPlugin"
+#endif
 #define PrefsKey APP_ID @" Settings"
 
 static PluginController *pluginController;
