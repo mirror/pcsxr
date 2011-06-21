@@ -168,51 +168,51 @@ BOOL OnConfigurePluginsDialog(HWND hW) {
 	strcat(tmpStr, "*.dll");
 	Find = FindFirstFile(tmpStr, &FindData);
 
-	do {
-		if (Find == INVALID_HANDLE_VALUE) break;
-		sprintf(tmpStr,"%s%s", Config.PluginsDir, FindData.cFileName);
-		Lib = LoadLibrary(tmpStr);
-		if (Lib != NULL) {
-			PSE_GetLibType = (PSEgetLibType) GetProcAddress((HMODULE)Lib,"PSEgetLibType");
-			PSE_GetLibName = (PSEgetLibName) GetProcAddress((HMODULE)Lib,"PSEgetLibName");
-			PSE_GetLibVersion = (PSEgetLibVersion) GetProcAddress((HMODULE)Lib,"PSEgetLibVersion");
+	if (Find != INVALID_HANDLE_VALUE) {
+		do {
+			sprintf(tmpStr,"%s%s", Config.PluginsDir, FindData.cFileName);
+			Lib = LoadLibrary(tmpStr);
+			if (Lib != NULL) {
+				PSE_GetLibType = (PSEgetLibType) GetProcAddress((HMODULE)Lib,"PSEgetLibType");
+				PSE_GetLibName = (PSEgetLibName) GetProcAddress((HMODULE)Lib,"PSEgetLibName");
+				PSE_GetLibVersion = (PSEgetLibVersion) GetProcAddress((HMODULE)Lib,"PSEgetLibVersion");
 
-			if (PSE_GetLibType != NULL && PSE_GetLibName != NULL && PSE_GetLibVersion != NULL) {
-				unsigned long version = PSE_GetLibVersion();
-				long type;
+				if (PSE_GetLibType != NULL && PSE_GetLibName != NULL && PSE_GetLibVersion != NULL) {
+					unsigned long version = PSE_GetLibVersion();
+					long type;
 
-				sprintf(tmpStr, "%s %d.%d", PSE_GetLibName(), (int)(version>>8)&0xff, (int)version&0xff);
-				type = PSE_GetLibType();
-				if (type & PSE_LT_CDR) {
-					ComboAddPlugin(hWC_CDR, Config.Cdr);
-				}
+					sprintf(tmpStr, "%s %d.%d", PSE_GetLibName(), (int)(version>>8)&0xff, (int)version&0xff);
+					type = PSE_GetLibType();
+					if (type & PSE_LT_CDR) {
+						ComboAddPlugin(hWC_CDR, Config.Cdr);
+					}
 
-				if (type & PSE_LT_SPU) {
-					ComboAddPlugin(hWC_SPU, Config.Spu);
-				}
+					if (type & PSE_LT_SPU) {
+						ComboAddPlugin(hWC_SPU, Config.Spu);
+					}
 
-				if (type & PSE_LT_GPU) {
-					ComboAddPlugin(hWC_GPU, Config.Gpu);
-				}
+					if (type & PSE_LT_GPU) {
+						ComboAddPlugin(hWC_GPU, Config.Gpu);
+					}
 
-				if (type & PSE_LT_PAD) {
-					PADquery query;
+					if (type & PSE_LT_PAD) {
+						PADquery query;
 
-					query = (PADquery)GetProcAddress((HMODULE)Lib, "PADquery");
-					if (query != NULL) {
-						if (query() & 0x1)
+						query = (PADquery)GetProcAddress((HMODULE)Lib, "PADquery");
+						if (query != NULL) {
+							if (query() & 0x1)
+								ComboAddPlugin(hWC_PAD1, Config.Pad1);
+							if (query() & 0x2)
+								ComboAddPlugin(hWC_PAD2, Config.Pad2);
+						} else { // just a guess
 							ComboAddPlugin(hWC_PAD1, Config.Pad1);
-						if (query() & 0x2)
-							ComboAddPlugin(hWC_PAD2, Config.Pad2);
-					} else { // just a guess
-						ComboAddPlugin(hWC_PAD1, Config.Pad1);
+						}
 					}
 				}
 			}
-		}
-	} while (FindNextFile(Find,&FindData));
-
-	if (Find != INVALID_HANDLE_VALUE) FindClose(Find);
+		} while (FindNextFile(Find,&FindData));
+		FindClose(Find);
+	}
 
 // BIOS
 
@@ -227,23 +227,23 @@ BOOL OnConfigurePluginsDialog(HWND hW) {
 	strcat(tmpStr, "*");
 	Find=FindFirstFile(tmpStr, &FindData);
 
-	do {
-		if (Find==INVALID_HANDLE_VALUE) break;
-		if (!strcmp(FindData.cFileName, ".")) continue;
-		if (!strcmp(FindData.cFileName, "..")) continue;
-		if (FindData.nFileSizeLow != 1024 * 512) continue;
-		lp = (char *)malloc(strlen(FindData.cFileName)+8);
-		sprintf(lp, "%s", (char *)FindData.cFileName);
-		i = ComboBox_AddString(hWC_BIOS, FindData.cFileName);
-		ComboBox_SetItemData(hWC_BIOS, i, lp);
-		if (Config.Bios[0]=='\0') {
-			ComboBox_SetCurSel(hWC_BIOS, i);
-			strcpy(Config.Bios, FindData.cFileName);
-		} else if (stricmp(Config.Bios, FindData.cFileName)==0)
-			ComboBox_SetCurSel(hWC_BIOS, i);
-	} while (FindNextFile(Find,&FindData));
-
-	if (Find!=INVALID_HANDLE_VALUE) FindClose(Find);
+	if (Find != INVALID_HANDLE_VALUE) {
+		do {
+			if (!strcmp(FindData.cFileName, ".")) continue;
+			if (!strcmp(FindData.cFileName, "..")) continue;
+			if (FindData.nFileSizeLow != 1024 * 512) continue;
+			lp = (char *)malloc(strlen(FindData.cFileName)+8);
+			sprintf(lp, "%s", (char *)FindData.cFileName);
+			i = ComboBox_AddString(hWC_BIOS, FindData.cFileName);
+			ComboBox_SetItemData(hWC_BIOS, i, lp);
+			if (Config.Bios[0]=='\0') {
+				ComboBox_SetCurSel(hWC_BIOS, i);
+				strcpy(Config.Bios, FindData.cFileName);
+			} else if (stricmp(Config.Bios, FindData.cFileName)==0)
+				ComboBox_SetCurSel(hWC_BIOS, i);
+		} while (FindNextFile(Find,&FindData));
+		FindClose(Find);
+	}
 
 	if (ComboBox_GetCurSel(hWC_CDR ) == -1)
 		ComboBox_SetCurSel(hWC_CDR,  0);
@@ -579,30 +579,30 @@ BOOL OnConfigureNetPlayDialog(HWND hW) {
 	ComboBox_SetItemData(hWC_NET, i, lp);
 	ComboBox_SetCurSel(hWC_NET,  0);
 
-	do {
-		if (Find==INVALID_HANDLE_VALUE) break;
-		sprintf(tmpStr,"%s%s", Config.PluginsDir, FindData.cFileName);
-		Lib = LoadLibrary(tmpStr);
-		if (Lib!=NULL) {
-			PSE_GetLibType = (PSEgetLibType) GetProcAddress((HMODULE)Lib,"PSEgetLibType");
-			PSE_GetLibName = (PSEgetLibName) GetProcAddress((HMODULE)Lib,"PSEgetLibName");
-			PSE_GetLibVersion = (PSEgetLibVersion) GetProcAddress((HMODULE)Lib,"PSEgetLibVersion");
+	if (Find != INVALID_HANDLE_VALUE) {
+		do {
+			sprintf(tmpStr,"%s%s", Config.PluginsDir, FindData.cFileName);
+			Lib = LoadLibrary(tmpStr);
+			if (Lib!=NULL) {
+				PSE_GetLibType = (PSEgetLibType) GetProcAddress((HMODULE)Lib,"PSEgetLibType");
+				PSE_GetLibName = (PSEgetLibName) GetProcAddress((HMODULE)Lib,"PSEgetLibName");
+				PSE_GetLibVersion = (PSEgetLibVersion) GetProcAddress((HMODULE)Lib,"PSEgetLibVersion");
 
-			if (PSE_GetLibType != NULL && PSE_GetLibName != NULL && PSE_GetLibVersion != NULL) {
-				unsigned long version = PSE_GetLibVersion();
-				long type;
+				if (PSE_GetLibType != NULL && PSE_GetLibName != NULL && PSE_GetLibVersion != NULL) {
+					unsigned long version = PSE_GetLibVersion();
+					long type;
 
-				sprintf(tmpStr, "%s %d.%d", PSE_GetLibName(), (int)(version>>8)&0xff, (int)version&0xff);
-				type = PSE_GetLibType();
-				if (type & PSE_LT_NET  && ((version >> 16) == 2)) {
-					ComboAddPlugin(hWC_NET, Config.Net);
+					sprintf(tmpStr, "%s %d.%d", PSE_GetLibName(), (int)(version>>8)&0xff, (int)version&0xff);
+					type = PSE_GetLibType();
+					if (type & PSE_LT_NET  && ((version >> 16) == 2)) {
+						ComboAddPlugin(hWC_NET, Config.Net);
+					}
 				}
 			}
-		}
-	} while (FindNextFile(Find,&FindData));
-
-	if (Find!=INVALID_HANDLE_VALUE) FindClose(Find);
-
+		} while (FindNextFile(Find,&FindData));
+		FindClose(Find);
+	}
+	
 	return TRUE;
 }
 
