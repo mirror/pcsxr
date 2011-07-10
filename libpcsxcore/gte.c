@@ -208,10 +208,21 @@ static inline u32 limE(u32 result) {
 	return result;
 }
 
+static inline float flimE(float result) {
+	if (result > 0x1ffff) {
+		gteFLAG |= (1 << 31) | (1 << 17);
+		return 0x1ffff;
+	}
+	return result;
+}
+
 #define F(a) BOUNDS((a), 0x7fffffff, (1 << 31) | (1 << 16), -(s64)0x80000000, (1 << 31) | (1 << 15))
 #define limG1(a) LIM((a), 0x3ff, -0x400, (1 << 31) | (1 << 14))
 #define limG2(a) LIM((a), 0x3ff, -0x400, (1 << 31) | (1 << 13))
 #define limH(a) LIM((a), 0x1000, 0x0000, (1 << 12))
+
+#define limG1_ia(a) LIM((a), 0x3ffffff, -0x4000000, (1 << 31) | (1 << 14))
+#define limG2_ia(a) LIM((a), 0x3ffffff, -0x4000000, (1 << 31) | (1 << 13))
 
 #include "gte_divider.h"
 
@@ -371,6 +382,7 @@ void gteSWC2() {
 
 void gteRTPS() {
 	int quotient;
+    float fquotient;
 
 #ifdef GTE_LOG
 	GTE_LOG("GTE RTPS\n");
@@ -393,12 +405,20 @@ void gteRTPS() {
 	gteSX2 = limG1(F((s64)gteOFX + ((s64)gteIR1 * quotient)) >> 16);
 	gteSY2 = limG2(F((s64)gteOFY + ((s64)gteIR2 * quotient)) >> 16);
 
+    fquotient = flimE((float)(gteH << 16) / (float)gteSZ3);
+    GPU_addVertex(gteSX2,
+                  gteSY2,
+                  limG1_ia((s64)gteOFX + (s64)(gteIR1 * fquotient)), // TODO: MAC1 calc instead of IR1.
+                  limG2_ia((s64)gteOFY + (s64)(gteIR2 * fquotient)), // TODO: MAC2 calc instead of IR2.
+				  ((s64)gteSZ3));                                    // TODO: MAC3 calc instead of SZ3.
+
 	gteMAC0 = F((s64)gteDQB + ((s64)gteDQA * quotient));
 	gteIR0 = limH(gteMAC0 >> 12);
 }
 
 void gteRTPT() {
 	int quotient;
+    float fquotient;
 	int v;
 	s32 vx, vy, vz;
 
@@ -422,6 +442,13 @@ void gteRTPT() {
 		quotient = limE(DIVIDE(gteH, fSZ(v)));
 		fSX(v) = limG1(F((s64)gteOFX + ((s64)gteIR1 * quotient)) >> 16);
 		fSY(v) = limG2(F((s64)gteOFY + ((s64)gteIR2 * quotient)) >> 16);
+
+        fquotient = flimE((float)(gteH << 16) / (float)fSZ(v));
+		GPU_addVertex(fSX(v),
+                      fSY(v),
+                      limG1_ia((s64)gteOFX + (s64)(gteIR1 * fquotient)), // TODO: MAC1 calc instead of IR1.
+                      limG2_ia((s64)gteOFY + (s64)(gteIR2 * fquotient)), // TODO: MAC2 calc instead of IR2.
+					  ((s64)fSZ(v)));                                    // TODO: MAC3 calc instead of fSZ(v).
 	}
 	gteMAC0 = F((s64)gteDQB + ((s64)gteDQA * quotient));
 	gteIR0 = limH(gteMAC0 >> 12);

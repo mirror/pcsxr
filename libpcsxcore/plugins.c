@@ -54,6 +54,7 @@ GPUregisterCallback   GPU_registerCallback;
 GPUidle               GPU_idle;
 GPUvisualVibration    GPU_visualVibration;
 GPUcursor             GPU_cursor;
+GPUaddVertex          GPU_addVertex;
 
 CDRinit               CDR_init;
 CDRshutdown           CDR_shutdown;
@@ -223,6 +224,7 @@ void CALLBACK GPU__registerCallback(void (CALLBACK *callback)(int)) {}
 void CALLBACK GPU__idle(void) {}
 void CALLBACK GPU__visualVibration(unsigned long iSmall, unsigned long iBig) {}
 void CALLBACK GPU__cursor(int player, int x, int y) {}
+void CALLBACK GPU__addVertex(short sx,short sy,s64 fx,s64 fy,s64 fz) {}
 
 #define LoadGpuSym1(dest, name) \
 	LoadSym(GPU_##dest, GPU##dest, name, TRUE);
@@ -267,6 +269,7 @@ static int LoadGPUplugin(const char *GPUdll) {
     LoadGpuSym0(idle, "GPUidle");
     LoadGpuSym0(visualVibration, "GPUvisualVibration");
     LoadGpuSym0(cursor, "GPUcursor");
+	LoadGpuSym0(addVertex, "GPUaddVertex");
 	LoadGpuSym0(configure, "GPUconfigure");
 	LoadGpuSym0(test, "GPUtest");
 	LoadGpuSym0(about, "GPUabout");
