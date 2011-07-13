@@ -12,7 +12,7 @@
 				<string>psxplugin</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>psxplugin.icns</string>
+			<string>psxplugin</string>
 			<key>CFBundleTypeName</key>
 			<string>Playstation Emulator Plug-in</string>
 			<key>CFBundleTypeOSTypes</key>
@@ -21,6 +21,10 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.codeplex.pcsxr.plugin</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<true/>
 			<key>NSDocumentClass</key>
@@ -32,7 +36,7 @@
 				<string>bin</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>psxbios.icns</string>
+			<string>psxbios</string>
 			<key>CFBundleTypeName</key>
 			<string>Playstation BIOS Image</string>
 			<key>CFBundleTypeOSTypes</key>
@@ -59,6 +63,10 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.codeplex.pcsxr.memcard</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
 		</dict>
@@ -77,6 +85,10 @@
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.codeplex.pcsxr.freeze</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
 		</dict>
@@ -96,12 +108,98 @@
 	<key>CFBundleShortVersionString</key>
 	<string>PCSX-Reloaded SVN</string>
 	<key>CFBundleSignature</key>
-	<string>Pcsxr</string>
+	<string>Pcsx</string>
+	<key>CFBundleURLTypes</key>
+	<array/>
 	<key>CFBundleVersion</key>
 	<string>SVN</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.games</string>
 	<key>NSMainNibFile</key>
 	<string>PCSXR</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSServices</key>
+	<array/>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.application-​bundle</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Playstation Emulator Plug-in</string>
+			<key>UTTypeIconFile</key>
+			<string>psxbios</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.codeplex.pcsxr.plugin</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://pcsxr.codeplex.com/</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>PsxP</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>psxplugin</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>PCSXR Memory Card</string>
+			<key>UTTypeIconFile</key>
+			<string>pcsxrmemcard</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.codeplex.pcsxr.memcard</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://pcsxr.codeplex.com/</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>Pmcr</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>mcr</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>PCSXR Freeze State</string>
+			<key>UTTypeIconFile</key>
+			<string>pcsxrfreeze</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.codeplex.pcsxr.freeze</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://pcsxr.codeplex.com/</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>Pfrz</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>pcsxrstate</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array/>
 </dict>
 </plist>
