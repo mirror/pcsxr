@@ -10,7 +10,7 @@ libdir = @libdir@/games/psemu/
 lib_LTLIBRARIES = libpeopsxgl.la
 
 libpeopsxgl_la_SOURCES = cfg.c draw.c fps.c gpu.c key.c menu.c \
-	prim.c soft.c texture.c
+	prim.c soft.c texture.c gte_accuracy.c
 libpeopsxgl_la_LDFLAGS = -module -avoid-version
 libpeopsxgl_la_LIBADD = -lX11 -lXxf86vm -lGL -lm
 

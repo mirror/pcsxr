@@ -197,6 +197,10 @@ void ReadConfigFile()
  strcpy(t,"\nOGLExtensions");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
  if(p) iUseExts=atoi(p+len);
  if(iUseExts>1) iUseExts=1;
+ 
+ strcpy(t,"\nGteAccuracy");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+ if(p) bGteAccuracy=atoi(p+len);
+ if(bGteAccuracy>1) bGteAccuracy=1;
 
  free(pB);
 }
@@ -232,6 +236,7 @@ void ReadConfig(void)                                  // read config (linux fil
  iFrameReadType=0;
  bUse15bitMdec=FALSE;
  iShowFPS=0;
+ bGteAccuracy=0;
  bKeepRatio=FALSE;
  iScanBlend=0;
  iVRamSize=0;

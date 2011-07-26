@@ -45,6 +45,7 @@ static int iOldMode=0;
 #include "menu.h"
 #include "fps.h"
 #include "key.h"
+#include "gte_accuracy.h"
 #ifdef _WINDOWS
 #include "resource.h"
 #include "ssave.h"
@@ -687,6 +688,8 @@ long CALLBACK GPUopen(HWND hwndGPU)
 
  InitializeTextureStore();                             // init texture mem
 
+ resetGteVertices();
+ 
 // lGPUstatusRet = 0x74000000;
 
 // with some emus, we could do the OGL init right here... oh my

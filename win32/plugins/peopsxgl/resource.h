@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by gpuPeopsOpenGL.rc
 //
 #define IDS_INFO0                       1
@@ -84,6 +84,8 @@
 #define IDC_T14_STATIC2                 1061
 #define IDC_FASTMDEC2                   1062
 #define IDC_QUALTXT4                    1063
+#define IDC_GAMEFIX2                    1064
+#define IDC_GTEACCURACY                 1065
 #define IDC_F14_STATIC3                 1083
 #define IDC_F14_STATIC4                 1084
 #define IDC_F14_STATIC5                 1085

@@ -33,4 +33,4 @@ EXPORTS
     GPUsetfix           @26
 	GPUsetframelimit    @27
 	GPUvisualVibration  @28
-
+	GPUaddVertex        @29

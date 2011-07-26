@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="gb2312"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="gpuPeopsOpenGL"
 	ProjectGUID="{726BDE88-F2AD-4666-A4BC-5858F973976E}"
 	RootNamespace="gpuPeopsOpenGL"
@@ -402,6 +402,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\plugins\peopsxgl\gte_accuracy.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\plugins\peopsxgl\gte_accuracy.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\plugins\peopsxgl\key.h"
 				>
 			</File>
@@ -514,6 +522,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\res\gpu.bmp"
+			>
+		</File>
 		<File
 			RelativePath="gpuPeopsOpenGL.def"
 			>

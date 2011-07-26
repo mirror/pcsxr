@@ -263,6 +263,7 @@ extern BOOL           bCheckMask;
 extern unsigned short sSetMask;
 extern uint32_t       lSetMask;
 extern int            iShowFPS;
+extern BOOL           bGteAccuracy;
 extern BOOL           bSetClip;
 extern int            iForceVSync;
 extern int            iUseExts;

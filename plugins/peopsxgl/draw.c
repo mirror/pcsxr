@@ -27,6 +27,8 @@
 #include "texture.h"
 #include "menu.h"
 
+#include "gte_accuracy.h"
+
 #if defined(_MACGL)
 // if you use it, you must include it
 #include <OpenGL/gl.h>
@@ -121,6 +123,7 @@ int            iUsePalTextures=1;
 BOOL           bSnapShot=FALSE;
 BOOL           bSmallAlpha=FALSE;
 int            iShowFPS=0;
+BOOL           bGteAccuracy;
 
 // OGL extension support
 
@@ -1050,10 +1053,21 @@ BOOL offset2(void)
    if(CheckCoord2()) return TRUE;
   }
 
- vertex[0].x=lx0+PSXDisplay.CumulOffset.x;
- vertex[1].x=lx1+PSXDisplay.CumulOffset.x;
- vertex[0].y=ly0+PSXDisplay.CumulOffset.y;
- vertex[1].y=ly1+PSXDisplay.CumulOffset.y;
+ if(!getGteVertex(lx0, ly0, &vertex[0].x, &vertex[0].y))
+ {
+	vertex[0].x=lx0;
+	vertex[0].y=ly0;
+ }
+ if(!getGteVertex(lx1, ly1, &vertex[1].x, &vertex[1].y))
+ {
+	vertex[1].x=lx1;
+	vertex[1].y=ly1;
+ }
+
+ vertex[0].x+=PSXDisplay.CumulOffset.x;
+ vertex[1].x+=PSXDisplay.CumulOffset.x;
+ vertex[0].y+=PSXDisplay.CumulOffset.y;
+ vertex[1].y+=PSXDisplay.CumulOffset.y;
 
  return FALSE;
 }
@@ -1076,13 +1090,29 @@ BOOL offset3(void)
 
    if(CheckCoord3()) return TRUE;
   }
+  
+ if(!getGteVertex(lx0, ly0, &vertex[0].x, &vertex[0].y))
+ {
+	vertex[0].x=lx0;
+	vertex[0].y=ly0;
+ }
+ if(!getGteVertex(lx1, ly1, &vertex[1].x, &vertex[1].y))
+ {
+	vertex[1].x=lx1;
+	vertex[1].y=ly1;
+ }
+ if(!getGteVertex(lx2, ly2, &vertex[2].x, &vertex[2].y))
+ {
+	vertex[2].x=lx2;
+	vertex[2].y=ly2;
+ }
 
- vertex[0].x=lx0+PSXDisplay.CumulOffset.x;
- vertex[1].x=lx1+PSXDisplay.CumulOffset.x;
- vertex[2].x=lx2+PSXDisplay.CumulOffset.x;
- vertex[0].y=ly0+PSXDisplay.CumulOffset.y;
- vertex[1].y=ly1+PSXDisplay.CumulOffset.y;
- vertex[2].y=ly2+PSXDisplay.CumulOffset.y;
+ vertex[0].x+=PSXDisplay.CumulOffset.x;
+ vertex[1].x+=PSXDisplay.CumulOffset.x;
+ vertex[2].x+=PSXDisplay.CumulOffset.x;
+ vertex[0].y+=PSXDisplay.CumulOffset.y;
+ vertex[1].y+=PSXDisplay.CumulOffset.y;
+ vertex[2].y+=PSXDisplay.CumulOffset.y;
 
  return FALSE;
 }
@@ -1108,14 +1138,35 @@ BOOL offset4(void)
    if(CheckCoord4()) return TRUE;
   }
 
- vertex[0].x=lx0+PSXDisplay.CumulOffset.x;
- vertex[1].x=lx1+PSXDisplay.CumulOffset.x;
- vertex[2].x=lx2+PSXDisplay.CumulOffset.x;
- vertex[3].x=lx3+PSXDisplay.CumulOffset.x;
- vertex[0].y=ly0+PSXDisplay.CumulOffset.y;
- vertex[1].y=ly1+PSXDisplay.CumulOffset.y;
- vertex[2].y=ly2+PSXDisplay.CumulOffset.y;
- vertex[3].y=ly3+PSXDisplay.CumulOffset.y;
+ if(!getGteVertex(lx0, ly0, &vertex[0].x, &vertex[0].y))
+ {
+	vertex[0].x=lx0;
+	vertex[0].y=ly0;
+ }
+ if(!getGteVertex(lx1, ly1, &vertex[1].x, &vertex[1].y))
+ {
+	vertex[1].x=lx1;
+	vertex[1].y=ly1;
+ }
+ if(!getGteVertex(lx2, ly2, &vertex[2].x, &vertex[2].y))
+ {
+	vertex[2].x=lx2;
+	vertex[2].y=ly2;
+ }
+ if(!getGteVertex(lx3, ly3, &vertex[3].x, &vertex[3].y))
+ {
+	vertex[3].x=lx3;
+	vertex[3].y=ly3;
+ }
+ 
+ vertex[0].x+=PSXDisplay.CumulOffset.x;
+ vertex[1].x+=PSXDisplay.CumulOffset.x;
+ vertex[2].x+=PSXDisplay.CumulOffset.x;
+ vertex[3].x+=PSXDisplay.CumulOffset.x;
+ vertex[0].y+=PSXDisplay.CumulOffset.y;
+ vertex[1].y+=PSXDisplay.CumulOffset.y;
+ vertex[2].y+=PSXDisplay.CumulOffset.y;
+ vertex[3].y+=PSXDisplay.CumulOffset.y;
 
  return FALSE;
 }

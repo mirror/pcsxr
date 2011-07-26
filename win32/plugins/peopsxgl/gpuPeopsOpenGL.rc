@@ -154,81 +154,53 @@ BEGIN
                     159,10
 END
 
-IDD_CFGDLG DIALOGEX 0, 0, 413, 295
+IDD_CFGDLG DIALOGEX 0, 0, 413, 306
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Configure P.E.Op.S. PSX OpenGL Renderer ..."
 FONT 8, "MS Sans Serif"
 BEGIN
-    CONTROL         "Fullscreen mode",IDC_DISPMODE1,"Button",
-                    BS_AUTORADIOBUTTON,11,11,73,10
-    CONTROL         "Window mode",IDC_DISPMODE2,"Button",BS_AUTORADIOBUTTON,
-                    11,25,63,10
-    COMBOBOX        IDC_RESOLUTION,150,10,63,64,CBS_DROPDOWNLIST | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
-    COMBOBOX        IDC_COLORDEPTH,261,10,36,64,CBS_DROPDOWNLIST | 
-                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Fullscreen mode",IDC_DISPMODE1,"Button",BS_AUTORADIOBUTTON,11,11,73,10
+    CONTROL         "Window mode",IDC_DISPMODE2,"Button",BS_AUTORADIOBUTTON,11,25,63,10
+    COMBOBOX        IDC_RESOLUTION,150,10,63,64,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COLORDEPTH,261,10,36,64,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     EDITTEXT        IDC_WINX,150,24,26,12,ES_AUTOHSCROLL
     EDITTEXT        IDC_WINY,187,24,26,12,ES_AUTOHSCROLL
-    CONTROL         "Keep psx aspect ratio",IDC_ARATIO,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,306,17,95,12
-    COMBOBOX        IDC_TEXQUALITY,61,50,159,64,CBS_DROPDOWNLIST | 
-                    WS_VSCROLL | WS_TABSTOP
-    COMBOBOX        IDC_FILTERTYPE,61,63,159,83,CBS_DROPDOWNLIST | 
-                    WS_VSCROLL | WS_TABSTOP
-    COMBOBOX        IDC_HIRESTEX,275,50,129,64,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    COMBOBOX        IDC_VRAMSIZE,275,63,62,88,CBS_DROPDOWN | WS_VSCROLL | 
-                    WS_TABSTOP
-    CONTROL         "Show FPS display on startup",IDC_SHOWFPS,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,12,94,107,10
+    CONTROL         "Keep psx aspect ratio",IDC_ARATIO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,306,17,95,12
+    COMBOBOX        IDC_TEXQUALITY,61,50,159,64,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_FILTERTYPE,61,63,159,83,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_HIRESTEX,275,50,129,64,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_VRAMSIZE,275,63,62,88,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Show FPS display on startup",IDC_SHOWFPS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,94,107,10
     PUSHBUTTON      "...",IDC_KEYCONFIG,119,94,11,10,0,WS_EX_STATICEDGE
-    CONTROL         "Use FPS limit",IDC_USELIMIT,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,149,89,73,10
-    CONTROL         "Use Frame skipping",IDC_USESKIP,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,149,101,78,10
+    CONTROL         "Use FPS limit",IDC_USELIMIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,149,89,73,10
+    CONTROL         "Use Frame skipping",IDC_USESKIP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,149,101,78,10
     CONTROL         "Auto-detect FPS/Frame skipping limit",IDC_FRAMEAUTO,
                     "Button",BS_AUTORADIOBUTTON | WS_GROUP,258,89,131,9
-    CONTROL         "FPS limit (10-200) :",IDC_FRAMEMANUELL,"Button",
-                    BS_AUTORADIOBUTTON,258,100,72,10
+    CONTROL         "FPS limit (10-200) :",IDC_FRAMEMANUELL,"Button",BS_AUTORADIOBUTTON,258,100,72,10
     EDITTEXT        IDC_FRAMELIMIT,334,99,29,12,ES_AUTOHSCROLL
-    COMBOBOX        IDC_OFFSCREEN,78,123,130,64,CBS_DROPDOWNLIST | 
-                    WS_VSCROLL | WS_TABSTOP
-    COMBOBOX        IDC_FRAMETEX,78,136,130,64,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    COMBOBOX        IDC_FRAMEREAD,78,149,130,64,CBS_DROPDOWNLIST | 
-                    WS_VSCROLL | WS_TABSTOP
-    CONTROL         "Alpha MultiPass",IDC_OPAQUE,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,219,127,66,10
-    CONTROL         "Mask bit",IDC_USEMASK,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,219,138,47,10
-    CONTROL         "Advanced blending",IDC_ADVBLEND,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,219,149,76,10
-    CONTROL         "Scanlines",IDC_USESCANLINES,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,11,176,46,10
+    COMBOBOX        IDC_OFFSCREEN,78,123,130,64,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_FRAMETEX,78,136,130,64,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_FRAMEREAD,78,149,130,64,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Alpha MultiPass",IDC_OPAQUE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,219,127,66,10
+    CONTROL         "Mask bit",IDC_USEMASK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,219,138,47,10
+    CONTROL         "Advanced blending",IDC_ADVBLEND,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,219,149,76,10
+    CONTROL         "Scanlines",IDC_USESCANLINES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,176,46,10
     EDITTEXT        IDC_SCANBLEND,375,175,29,12,ES_AUTOHSCROLL
-    CONTROL         "Line mode",IDC_USELINES,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,11,186,48,10
-    CONTROL         "Unfiltered framebuffer updates",IDC_FASTMDEC,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,11,196,113,10
-    CONTROL         "Force 15 bit framebuffer updates",IDC_FASTMDEC2,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,11,206,121,10
-    CONTROL         "Color dithering",IDC_DRAWDITHER,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,11,216,81,10
-    CONTROL         "Screen smoothing",IDC_BLUR,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,11,226,81,10
-    CONTROL         "Disable screensaver",IDC_SSAVE,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,11,236,81,10
-    CONTROL         "Special game fixes",IDC_GAMEFIX,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,11,246,75,10
+    CONTROL         "Line mode",IDC_USELINES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,186,48,10
+    CONTROL         "Unfiltered framebuffer updates",IDC_FASTMDEC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,196,113,10
+    CONTROL         "Force 15 bit framebuffer updates",IDC_FASTMDEC2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,206,121,10
+    CONTROL         "Color dithering",IDC_DRAWDITHER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,216,81,10
+    CONTROL         "Screen smoothing",IDC_BLUR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,226,81,10
+    CONTROL         "Disable screensaver",IDC_SSAVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,236,81,10
+    CONTROL         "Special game fixes",IDC_GAMEFIX,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,246,75,10
     PUSHBUTTON      "...",IDC_SELFIX,89,246,11,10,0,WS_EX_STATICEDGE
-    PUSHBUTTON      "Fast",IDC_DEF1,10,272,34,14
-    PUSHBUTTON      "Nice",IDC_DEF2,49,272,34,14
-    DEFPUSHBUTTON   "OK",IDOK,113,272,84,14
-    PUSHBUTTON      "Cancel",IDCANCEL,215,272,84,14
-    PUSHBUTTON      "Copy settings\n to clipboard",IDC_CLIPBOARD,322,266,87,
-                    25,BS_MULTILINE,WS_EX_STATICEDGE
-    GROUPBOX        "Misc",IDC_STATIC,3,166,406,95
-    GROUPBOX        "Default settings",IDC_STATIC,3,262,88,30
+    PUSHBUTTON      "Fast",IDC_DEF1,10,282,34,14
+    PUSHBUTTON      "Nice",IDC_DEF2,49,282,34,14
+    DEFPUSHBUTTON   "OK",IDOK,113,282,84,14
+    PUSHBUTTON      "Cancel",IDCANCEL,215,282,84,14
+    PUSHBUTTON      "Copy settings\n to clipboard",IDC_CLIPBOARD,322,276,87,25,BS_MULTILINE,WS_EX_STATICEDGE
+    GROUPBOX        "Misc",IDC_STATIC,3,166,406,104
+    GROUPBOX        "Default settings",IDC_STATIC,3,272,88,30
     GROUPBOX        "Textures",IDC_STATIC,3,41,406,40
     RTEXT           "Desktop resolution:",IDC_STATIC,81,12,65,9
     GROUPBOX        "Resolution && Colors",IDC_STATIC,3,1,406,40
@@ -240,44 +212,28 @@ BEGIN
     RTEXT           "Window size:",IDC_STATIC,85,26,61,9
     CTEXT           "x",IDC_STATIC,177,26,8,9
     RTEXT           "Gfx card vram:",IDC_QUALTXT2,225,65,48,9
-    RTEXT           "Off-Screen drawing:",IDC_STATIC,11,124,64,10,
-                    SS_CENTERIMAGE
+    RTEXT           "Off-Screen drawing:",IDC_STATIC,11,124,64,10,SS_CENTERIMAGE
     RTEXT           "Texture filtering:",IDC_STATIC,6,65,52,10
-    RTEXT           "Framebuffer textures:",IDC_STATIC,7,137,68,10,
-                    SS_CENTERIMAGE
-    LTEXT           "Some games will need certain special options to work without glitches",
-                    IDC_STATIC,135,246,242,9,SS_CENTERIMAGE
-    LTEXT           "Smoother shading in 16 bit color depth",IDC_STATIC,135,
-                    216,242,9,SS_CENTERIMAGE
-    LTEXT           "Small speed up with mdecs",IDC_STATIC,135,196,242,9,
-                    SS_CENTERIMAGE
-    LTEXT           "Polygons will not get filled",IDC_STATIC,135,186,89,9,
-                    SS_CENTERIMAGE
-    LTEXT           "TV screen alike lines",IDC_STATIC,135,176,69,9,
-                    SS_CENTERIMAGE
-    LTEXT           "Accurate psx color emulation",IDC_STATIC,303,149,97,9,
-                    SS_CENTERIMAGE
-    LTEXT           "Correct opaque texture areas",IDC_STATIC,302,127,97,9,
-                    SS_CENTERIMAGE
-    LTEXT           "Needed by a few games",IDC_STATIC,302,138,97,9,
-                    SS_CENTERIMAGE
-    RTEXT           "Scanline brightness (0...255, -1=Monitor dot matrix):",
-                    IDC_STATIC,210,176,162,9,SS_CENTERIMAGE
-    EDITTEXT        IDC_CLPEDIT,314,283,6,12,ES_MULTILINE | ES_AUTOVSCROLL | 
-                    ES_AUTOHSCROLL | NOT WS_VISIBLE
+    RTEXT           "Framebuffer textures:",IDC_STATIC,7,137,68,10,SS_CENTERIMAGE
+    LTEXT           "Some games will need certain special options to work without glitches",IDC_STATIC,135,246,242,9,SS_CENTERIMAGE
+    LTEXT           "Smoother shading in 16 bit color depth",IDC_STATIC,135,216,242,9,SS_CENTERIMAGE
+    LTEXT           "Small speed up with mdecs",IDC_STATIC,135,196,242,9,SS_CENTERIMAGE
+    LTEXT           "Polygons will not get filled",IDC_STATIC,135,186,89,9,SS_CENTERIMAGE
+    LTEXT           "TV screen alike lines",IDC_STATIC,135,176,69,9,SS_CENTERIMAGE
+    LTEXT           "Accurate psx color emulation",IDC_STATIC,303,149,97,9,SS_CENTERIMAGE
+    LTEXT           "Correct opaque texture areas",IDC_STATIC,302,127,97,9,SS_CENTERIMAGE
+    LTEXT           "Needed by a few games",IDC_STATIC,302,138,97,9,SS_CENTERIMAGE
+    RTEXT           "Scanline brightness (0...255, -1=Monitor dot matrix):",IDC_STATIC,210,176,162,9,SS_CENTERIMAGE
+    EDITTEXT        IDC_CLPEDIT,314,293,6,12,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | NOT WS_VISIBLE
     LTEXT           "MBytes",IDC_QUALTXT3,340,65,27,9
-    LTEXT           "The complete screen will get smoothed. Very slow on some cards, lotta vram needed",
-                    IDC_STATIC,135,226,269,9,SS_CENTERIMAGE
-    RTEXT           "Framebuffer access:",IDC_STATIC,7,150,68,10,
-                    SS_CENTERIMAGE
-    LTEXT           "Disable screensavers and power saving modes. Not available in Win95/WinNT",
-                    IDC_STATIC,135,236,269,9,SS_CENTERIMAGE
-    LTEXT           "Speed up with mdecs in 32 bit color depth, but less colorful",
-                    IDC_T14_STATIC2,135,206,268,9,SS_CENTERIMAGE
+    LTEXT           "The complete screen will get smoothed. Very slow on some cards, lotta vram needed",IDC_STATIC,135,226,269,9,SS_CENTERIMAGE
+    RTEXT           "Framebuffer access:",IDC_STATIC,7,150,68,10,SS_CENTERIMAGE
+    LTEXT           "Disable screensavers and power saving modes. Not available in Win95/WinNT",IDC_STATIC,135,236,269,9,SS_CENTERIMAGE
+    LTEXT           "Speed up with mdecs in 32 bit color depth, but less colorful",IDC_T14_STATIC2,135,206,268,9,SS_CENTERIMAGE
     RTEXT           "Hi-Res textures:",IDC_QUALTXT4,223,52,50,9
-    COMBOBOX        IDC_VSYNC,261,24,36,64,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
+    COMBOBOX        IDC_VSYNC,261,24,36,64,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     RTEXT           "V-Sync:",IDC_STATIC,219,26,39,9,SS_CENTERIMAGE
+    CONTROL         "Gte accuracy",IDC_GTEACCURACY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,256,59,10
 END
 
 IDD_FIXES DIALOG DISCARDABLE  0, 0, 316, 322

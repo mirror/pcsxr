@@ -43,6 +43,7 @@ GtkWidget *window,
           *chkAntiAlias,
           *chkOGLExtensions,
           *chkScreenSmoothing,
+		  *chkGteAccuracy,
           *chkUseGameFixes,
           *tblGameFixes,
           *chkCfgFix1,
@@ -125,6 +126,7 @@ void on_btnSave_clicked( GtkObject *object, gpointer user_data ) {
         fprintf( out, "\nScreenSmoothing  = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkScreenSmoothing  ) ) );
         fprintf( out, "\nUseFixes         = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkUseGameFixes     ) ) );
         fprintf( out, "\nCfgFixes         = %i", cfgFixes );
+		fprintf( out, "\nGteAccuracy      = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkGteAccuracy      ) ) );
 
         fclose( out );
     }
@@ -163,6 +165,7 @@ void on_btnFast_clicked( GtkObject *object, gpointer user_data ) {
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkAntiAlias ),          0 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkOGLExtensions ),      1 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkScreenSmoothing ),    0 );
+	gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkGteAccuracy ),        0 );
 }
 
 void on_btnBeautiful_clicked( GtkObject *object, gpointer user_data ) {
@@ -194,6 +197,7 @@ void on_btnBeautiful_clicked( GtkObject *object, gpointer user_data ) {
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkAntiAlias ),          0 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkOGLExtensions ),      1 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkScreenSmoothing ),    0 );   
+	gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkGteAccuracy ),        0 );   
 }
 
 // Callbacks used to toggle the sensitivity of some parts of the GUI
@@ -296,6 +300,7 @@ int main( int argc, char **argv ) {
     chkAntiAlias        = GTK_WIDGET( gtk_builder_get_object( builder, "chkAntiAlias"        ) );
     chkOGLExtensions    = GTK_WIDGET( gtk_builder_get_object( builder, "chkOGLExtensions"    ) );
     chkScreenSmoothing  = GTK_WIDGET( gtk_builder_get_object( builder, "chkScreenSmoothing"  ) );
+	chkGteAccuracy      = GTK_WIDGET( gtk_builder_get_object( builder, "chkGteAccuracy"      ) );
     chkUseGameFixes     = GTK_WIDGET( gtk_builder_get_object( builder, "chkUseGameFixes"     ) );
     tblGameFixes        = GTK_WIDGET( gtk_builder_get_object( builder, "tblGameFixes"        ) );
     chkCfgFix1          = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix1"          ) );
@@ -665,6 +670,18 @@ int main( int argc, char **argv ) {
     }
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkScreenSmoothing ), val );
 
+    val = 0;
+    if ( pB ) {
+        strcpy( t, "\nGteAccuracy" );
+        p = strstr( pB, t );
+        if ( p ) {
+            p = strstr( p, "=" );
+            len = 1;
+            val = atoi( p + len );
+        }
+    }
+    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkGteAccuracy ), val );
+	
     val = 0;
     if ( pB ) {
         strcpy( t, "\nUseFixes" );

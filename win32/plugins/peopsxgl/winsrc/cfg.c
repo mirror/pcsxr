@@ -178,6 +178,7 @@ BOOL OnInitCfgDialog(HWND hW)                          // INIT CONFIG DIALOG
  if(bUseFastMdec)     CheckDlgButton(hW,IDC_FASTMDEC,TRUE);
  if(bUse15bitMdec)    CheckDlgButton(hW,IDC_FASTMDEC2,TRUE);
  if(bUseFixes)        CheckDlgButton(hW,IDC_GAMEFIX,TRUE);
+ if(bGteAccuracy)     CheckDlgButton(hW,IDC_GTEACCURACY,TRUE);
  if(iUseScanLines)    CheckDlgButton(hW,IDC_USESCANLINES,TRUE);
  if(iShowFPS)         CheckDlgButton(hW,IDC_SHOWFPS,TRUE);
  if(bKeepRatio)       CheckDlgButton(hW,IDC_ARATIO,TRUE);
@@ -325,6 +326,9 @@ void GetSettings(HWND hW)
 
  if(IsDlgButtonChecked(hW,IDC_GAMEFIX))
   bUseFixes=TRUE; else bUseFixes=FALSE;
+
+ if(IsDlgButtonChecked(hW,IDC_GTEACCURACY))
+  bGteAccuracy=TRUE; else bGteAccuracy=FALSE;
 
  if(IsDlgButtonChecked(hW,IDC_USESCANLINES))
   iUseScanLines=1; else iUseScanLines=0;
@@ -607,6 +611,7 @@ void ReadConfig(void)                                  // read all config vals
  bUse15bitMdec=FALSE;
  dwCfgFixes=0;
  bUseFixes=FALSE;
+ bGteAccuracy=FALSE;
  iUseScanLines=0;
  iFrameTexType=0;
  iFrameReadType=0;
@@ -706,6 +711,9 @@ void ReadConfig(void)                                  // read all config vals
    if(RegQueryValueEx(myKey,"UseFixes",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
     bUseFixes=(BOOL)temp;
    size = 4;
+   if(RegQueryValueEx(myKey,"GteAccuracy",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
+    bGteAccuracy=(BOOL)temp;
+   size = 4;
    if(RegQueryValueEx(myKey,"UseMask",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
     iUseMask=(int)temp;
    size = 4;
@@ -741,6 +749,7 @@ void ReadConfig(void)                                  // read all config vals
    size = 4;
    if(RegQueryValueEx(myKey,"NoScreenSaver",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
     iNoScreenSaver=(int)temp;
+   
    size=7;
    RegQueryValueEx(myKey,"GPUKeys",0,&type,(LPBYTE)&szGPUKeys,&size);
 
@@ -847,6 +856,8 @@ void WriteConfig(void)
  RegSetValueEx(myKey,"CfgFixes",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=bUseFixes;
  RegSetValueEx(myKey,"UseFixes",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
+ temp=bGteAccuracy;
+ RegSetValueEx(myKey,"GteAccuracy",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=iUseMask;
  RegSetValueEx(myKey,"UseMask",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=bUseFastMdec;
