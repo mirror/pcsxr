@@ -1002,6 +1002,8 @@ void CreateDisplay(void)
  XvAdaptorInfo		*ai;
  XvImageFormatValues	*fo;
 
+ XClassHint* classHint;
+
  // Open display
  display = XOpenDisplay(NULL);
 
@@ -1230,9 +1232,25 @@ if (!myvisual)
 
  XSetWMHints(display,window,&wm_hints);
  XSetWMNormalHints(display,window,&hints);
- if(pCaptionText)
-      XStoreName(display,window,pCaptionText);
- else XStoreName(display,window,"P.E.Op.S SoftX PSX Gpu");
+
+ if(!pCaptionText)
+     pCaptionText = "P.E.Op.S SoftX PSX Gpu";
+
+ // set the WM_NAME and WM_CLASS of the window
+
+ // set the titlebar name
+ XStoreName(display, window, pCaptionText);
+
+ // set the name and class hints for the window manager to use
+ classHint = XAllocClassHint();
+ if(classHint)
+ {
+   classHint->res_name = pCaptionText;
+   classHint->res_class = pCaptionText;
+ }
+
+ XSetClassHint(display, window, classHint);
+ XFree(classHint);
 
  XDefineCursor(display,window,cursor);
 

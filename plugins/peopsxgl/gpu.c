@@ -763,7 +763,10 @@ void sysdep_create_display(void)                       // create display
  int myscreen;char gammastr[14];
  Screen * screen;XEvent event;
  XSizeHints hints;XWMHints wm_hints;
- MotifWmHints mwmhints;Atom mwmatom;Atom delwindow;
+ MotifWmHints mwmhints;
+ Atom mwmatom;
+ Atom delwindow;
+ XClassHint* classHint;
  char *glxfx;
 
  glxfx=getenv("MESA_GLX_FX");                          // 3dfx mesa fullscreen flag
@@ -944,9 +947,25 @@ void sysdep_create_display(void)                       // create display
 
  XSetWMHints(display,window,&wm_hints);
  XSetWMNormalHints(display,window,&hints);
- if(pCaptionText)                                      // caption
-      XStoreName(display,window,pCaptionText);
- else XStoreName(display,window,"Pete MesaGL PSX Gpu");
+
+ if(!pCaptionText)
+     pCaptionText = "Pete MesaGL PSX Gpu";
+
+ // set the WM_NAME and WM_CLASS of the window
+
+ // set the titlebar name
+ XStoreName(display, window, pCaptionText);
+
+ // set the name and class hints for the window manager to use
+ classHint = XAllocClassHint();
+ if(classHint)
+ {
+   classHint->res_name = pCaptionText;
+   classHint->res_class = pCaptionText;
+ }
+
+ XSetClassHint(display, window, classHint);
+ XFree(classHint);
 
  XDefineCursor(display,window,cursor);                 // cursor
 
