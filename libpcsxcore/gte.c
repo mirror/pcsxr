@@ -412,8 +412,8 @@ void gteRTPS() {
                   limG2_ia((s64)gteOFY + (s64)(gteIR2 * fquotient)), // TODO: MAC2 calc instead of IR2.
 				  ((s64)gteSZ3));                                    // TODO: MAC3 calc instead of SZ3.
 
-	gteMAC0 = F((s64)gteDQB + ((s64)gteDQA * quotient));
-	gteIR0 = limH(gteMAC0 >> 12);
+	gteMAC0 = F((s64)(gteDQB + ((s64)gteDQA * quotient)) >> 12);
+	gteIR0 = limH(gteMAC0);
 }
 
 void gteRTPT() {
@@ -450,8 +450,8 @@ void gteRTPT() {
                       limG2_ia((s64)gteOFY + (s64)(gteIR2 * fquotient)), // TODO: MAC2 calc instead of IR2.
 					  ((s64)fSZ(v)));                                    // TODO: MAC3 calc instead of fSZ(v).
 	}
-	gteMAC0 = F((s64)gteDQB + ((s64)gteDQA * quotient));
-	gteIR0 = limH(gteMAC0 >> 12);
+	gteMAC0 = F((s64)(gteDQB + ((s64)gteDQA * quotient)) >> 12);
+	gteIR0 = limH(gteMAC0);
 }
 
 void gteMVMVA() {
