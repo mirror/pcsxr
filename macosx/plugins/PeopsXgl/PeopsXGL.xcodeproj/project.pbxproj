@@ -26,6 +26,7 @@
 		3F7F384E13079BFD00556C34 /* gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F384113079BFD00556C34 /* gpu.c */; };
 		3F7F384F13079BFD00556C34 /* soft.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F384313079BFD00556C34 /* soft.c */; };
 		3F7F385013079BFD00556C34 /* draw.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F384713079BFD00556C34 /* draw.c */; };
+		A191B90713F6741300D0971F /* gte_accuracy.c in Sources */ = {isa = PBXBuildFile; fileRef = A191B90513F6741300D0971F /* gte_accuracy.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,8 @@
 		3F7F384513079BFD00556C34 /* externals.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; lineEnding = 2; name = externals.h; path = ../../../plugins/peopsxgl/externals.h; sourceTree = SOURCE_ROOT; };
 		3F7F384613079BFD00556C34 /* draw.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = draw.h; path = ../../../plugins/peopsxgl/draw.h; sourceTree = SOURCE_ROOT; };
 		3F7F384713079BFD00556C34 /* draw.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = draw.c; path = ../../../plugins/peopsxgl/draw.c; sourceTree = SOURCE_ROOT; };
+		A191B90513F6741300D0971F /* gte_accuracy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gte_accuracy.c; path = ../../../plugins/peopsxgl/gte_accuracy.c; sourceTree = SOURCE_ROOT; };
+		A191B90613F6741300D0971F /* gte_accuracy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gte_accuracy.h; path = ../../../plugins/peopsxgl/gte_accuracy.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +144,8 @@
 		71E9EBF0109F24B600E98D1D /* src */ = {
 			isa = PBXGroup;
 			children = (
+				A191B90513F6741300D0971F /* gte_accuracy.c */,
+				A191B90613F6741300D0971F /* gte_accuracy.h */,
 				3F7F383313079BFD00556C34 /* stdafx.h */,
 				3F7F383513079BFD00556C34 /* texture.h */,
 				3F7F383613079BFD00556C34 /* texture.c */,
@@ -241,6 +246,7 @@
 				3F7F384E13079BFD00556C34 /* gpu.c in Sources */,
 				3F7F384F13079BFD00556C34 /* soft.c in Sources */,
 				3F7F385013079BFD00556C34 /* draw.c in Sources */,
+				A191B90713F6741300D0971F /* gte_accuracy.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
