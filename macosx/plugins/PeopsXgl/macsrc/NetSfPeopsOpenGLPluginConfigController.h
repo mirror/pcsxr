@@ -42,8 +42,8 @@
     IBOutlet NSControl *blurEffect;
     IBOutlet NSControl *mjpegDecoder;
     IBOutlet NSControl *mjpegDecoder15bit;
-
-
+	IBOutlet NSControl *gteAccuracy;
+	
       
 	 NSMutableDictionary *keyValues;
 }

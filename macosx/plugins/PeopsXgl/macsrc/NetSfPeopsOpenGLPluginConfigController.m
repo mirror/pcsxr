@@ -207,7 +207,7 @@ void ReadConfig(void)
     
     bUseFastMdec = [[keyValues objectForKey:@"Emulate mjpeg decoder"] boolValue];
     bUse15bitMdec = [[keyValues objectForKey:@"Fast mjpeg decoder"] boolValue];
-    
+    bGteAccuracy = [[keyValues objectForKey:@"GteAccuracy"] boolValue];
 	
 	if (iShowFPS)
 		ulKeybits|=KEY_SHOWFPS;

@@ -23,7 +23,8 @@
                 hackEnable = NSControl; 
                 hacksView = NSView; 
                 mjpegDecoder = NSControl; 
-                mjpegDecoder15bit = NSControl; 
+                mjpegDecoder15bit = NSControl;
+                gteAccuracy = NSControl; 
                 offscreenDrawing = NSPopUpButton; 
                 opaquePass = NSControl; 
                 proportionalResize = NSControl; 

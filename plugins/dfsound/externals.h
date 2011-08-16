@@ -283,7 +283,7 @@ extern int      bEndThread;
 extern int      bThreadEnded;
 extern int      bSpuInit;
 extern uint32_t dwNewChannel;
-extern int bIrqHit;
+extern unsigned int bIrqHit;
 
 extern int      SSumR[];
 extern int      SSumL[];
