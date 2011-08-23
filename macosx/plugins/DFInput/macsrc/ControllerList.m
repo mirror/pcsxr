@@ -52,7 +52,7 @@ static int currentController;
 /* NSDataSource */
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	return DKEY_TOTAL + (g.cfg.PadDef[currentController].Type == PSE_PAD_TYPE_ANALOGPAD ? 8 : -2);
+	return DKEY_TOTAL + (g.cfg.PadDef[currentController].Type == PSE_PAD_TYPE_ANALOGPAD ? 8 : -3);
 }
 
 static const NSString *LabelText[DKEY_TOTAL + 8] = {
@@ -72,6 +72,7 @@ static const NSString *LabelText[DKEY_TOTAL + 8] = {
 	@"Start",
 	@"L3",
 	@"R3",
+	@"Analog",
 	@"L-Stick Right",
 	@"L-Stick Left",
 	@"L-Stick Down",
@@ -98,7 +99,8 @@ static const int DPad[DKEY_TOTAL] = {
 	DKEY_SELECT,
 	DKEY_START,
 	DKEY_L3,
-	DKEY_R3
+	DKEY_R3,
+	DKEY_ANALOG
 };
 
 + (int)getButtonOfRow:(int)row

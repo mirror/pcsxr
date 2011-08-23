@@ -26,6 +26,20 @@ void InitKeyboard() {
 void DestroyKeyboard() {
 }
 
+static void bdown(int pad, int bit)
+{
+	if(bit < 16)
+		g.PadState[pad].KeyStatus &= ~(1 << bit);
+	else if(bit == DKEY_ANALOG)
+		g.PadState[pad].PadModeSwitch = 1;
+}
+
+static void bup(int pad, int bit)
+{
+	if(bit < 16)
+		g.PadState[pad].KeyStatus |= (1 << bit);
+}
+
 void CheckKeyboard() {
 	int i, j, k;
 	uint16_t key;
@@ -48,7 +62,8 @@ void CheckKeyboard() {
 			key = g.cfg.PadDef[i].KeyDef[j].Key;
 			if (key == 0) continue;
 
-			if (KeyDown(key)) g.PadState[i].KeyStatus &= ~(1 << j);
+			if (KeyDown(key)) bdown(i, j);
+			else bup(i, j);
 		}
 
 		if (g.cfg.PadDef[i].Type != PSE_PAD_TYPE_ANALOGPAD) continue;

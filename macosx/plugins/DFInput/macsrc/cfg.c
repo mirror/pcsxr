@@ -49,6 +49,7 @@ static void SetDefaultConfig() {
 	g.cfg.PadDef[0].KeyDef[DKEY_CIRCLE].Key = 8;
 	g.cfg.PadDef[0].KeyDef[DKEY_CROSS].Key = 7;
 	g.cfg.PadDef[0].KeyDef[DKEY_SQUARE].Key = 2;
+	g.cfg.PadDef[0].KeyDef[DKEY_ANALOG].Key = 12;
 
 	// Pad1 joystick
 	g.cfg.PadDef[0].KeyDef[DKEY_SELECT].JoyEvType = BUTTON;
@@ -156,6 +157,11 @@ void LoadPADConfig() {
 			g.cfg.PadDef[current].KeyDef[DKEY_R3].Key = a;
 			g.cfg.PadDef[current].KeyDef[DKEY_R3].JoyEvType = b;
 			g.cfg.PadDef[current].KeyDef[DKEY_R3].J.d = c;
+		} else if (strncmp(buf, "Analog=", 7) == 0) {
+			sscanf(buf, "Analog=%d,%d,%d", &a, &b, &c);
+			g.cfg.PadDef[current].KeyDef[DKEY_ANALOG].Key = a;
+			g.cfg.PadDef[current].KeyDef[DKEY_ANALOG].JoyEvType = b;
+			g.cfg.PadDef[current].KeyDef[DKEY_ANALOG].J.d = c;
 		} else if (strncmp(buf, "Start=", 6) == 0) {
 			sscanf(buf, "Start=%d,%d,%d", &a, &b, &c);
 			g.cfg.PadDef[current].KeyDef[DKEY_START].Key = a;
@@ -294,6 +300,8 @@ void SavePADConfig() {
 			g.cfg.PadDef[i].KeyDef[DKEY_L3].JoyEvType, g.cfg.PadDef[i].KeyDef[DKEY_L3].J.d);
 		fprintf(fp, "R3=%d,%d,%d\n", g.cfg.PadDef[i].KeyDef[DKEY_R3].Key,
 			g.cfg.PadDef[i].KeyDef[DKEY_R3].JoyEvType, g.cfg.PadDef[i].KeyDef[DKEY_R3].J.d);
+		fprintf(fp, "Analog=%d,%d,%d\n", g.cfg.PadDef[i].KeyDef[DKEY_ANALOG].Key,
+				g.cfg.PadDef[i].KeyDef[DKEY_ANALOG].JoyEvType, g.cfg.PadDef[i].KeyDef[DKEY_ANALOG].J.d);
 		fprintf(fp, "Start=%d,%d,%d\n", g.cfg.PadDef[i].KeyDef[DKEY_START].Key,
 			g.cfg.PadDef[i].KeyDef[DKEY_START].JoyEvType, g.cfg.PadDef[i].KeyDef[DKEY_START].J.d);
 		fprintf(fp, "Up=%d,%d,%d\n", g.cfg.PadDef[i].KeyDef[DKEY_UP].Key,
