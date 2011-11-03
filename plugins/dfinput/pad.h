@@ -115,6 +115,7 @@ enum { ANALOG_XP = 0, ANALOG_XM, ANALOG_YP, ANALOG_YM };
 typedef struct tagPadDef {
 	int8_t			DevNum;
 	uint16_t		Type;
+	uint8_t			VisualVibration;
 	KEYDEF			KeyDef[DKEY_TOTAL];
 	KEYDEF			AnalogDef[ANALOG_TOTAL][4];
 } PADDEF;

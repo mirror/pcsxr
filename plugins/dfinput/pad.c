@@ -460,15 +460,21 @@ unsigned char PADpoll(unsigned char value) {
 
 					if (g.PadState[CurPad].VibF[0] != 0 || g.PadState[CurPad].VibF[1] != 0) {
 #if !SDL_VERSION_ATLEAST(1,3,0) && defined(__linux__)
-					if (g.PadState[CurPad].VibrateDev == -1 &&
-					    g.PadState[CurPad].JoyDev != NULL) {
-						linux_set_vibrate(CurPad);
-					}
-					if (!linux_vibrate(&g.PadState[CurPad]))
-							/* only do visual if joy fails */
+						if (g.PadState[CurPad].VibrateDev == -1 &&
+							g.PadState[CurPad].JoyDev != NULL) {
+							linux_set_vibrate(CurPad);
+						}
+						if (!linux_vibrate(&g.PadState[CurPad]))
+						/* only do visual if joy fails */
 #endif
-            if (!JoyHapticRumble(CurPad, g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]) && gpuVisualVibration != NULL)
-						  gpuVisualVibration(g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]);
+							if (!JoyHapticRumble(CurPad, g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1])) {
+								//gpuVisualVibration(g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]);
+							}
+							
+						if(gpuVisualVibration != NULL &&
+						   g.cfg.PadDef[CurPad].VisualVibration) {
+							gpuVisualVibration(g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]);
+						}
 					}
 				}
 
@@ -477,15 +483,21 @@ unsigned char PADpoll(unsigned char value) {
 
 					if (g.PadState[CurPad].VibF[0] != 0 || g.PadState[CurPad].VibF[1] != 0) {
 #if !SDL_VERSION_ATLEAST(1,3,0) && defined(__linux__)
-					if (g.PadState[CurPad].VibrateDev == -1 &&
-					    g.PadState[CurPad].JoyDev != NULL) {
-						linux_set_vibrate(CurPad);
-					}
-					if (!linux_vibrate(&g.PadState[CurPad]))
+						if (g.PadState[CurPad].VibrateDev == -1 &&
+							g.PadState[CurPad].JoyDev != NULL) {
+							linux_set_vibrate(CurPad);
+						}
+						if (!linux_vibrate(&g.PadState[CurPad]))
 							/* only do visual if joy fails */
 #endif
-            if (!JoyHapticRumble(CurPad, g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]) && gpuVisualVibration != NULL)
-						  gpuVisualVibration(g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]);
+							if (!JoyHapticRumble(CurPad, g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1])) {
+								//gpuVisualVibration(g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]);
+							}
+						
+						if(gpuVisualVibration != NULL &&
+						   g.cfg.PadDef[CurPad].VisualVibration) {
+							gpuVisualVibration(g.PadState[CurPad].VibF[0], g.PadState[CurPad].VibF[1]);
+						}
 					}
 				}
 			}

@@ -322,6 +322,14 @@ static void OnThreadedToggled(GtkWidget *widget, gpointer user_data) {
 	g.cfg.Threaded = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 }
 
+static void OnVisualVibration1Toggled(GtkWidget *widget, gpointer user_data) {
+    g.cfg.PadDef[0].VisualVibration = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+}
+
+static void OnVisualVibration2Toggled(GtkWidget *widget, gpointer user_data) {
+    g.cfg.PadDef[1].VisualVibration = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+}
+
 static void OnHideCursorToggled(GtkWidget *widget, gpointer user_data) {
     g.cfg.HideCursor = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 }
@@ -658,6 +666,7 @@ long PADconfigure() {
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.Threaded);
 	g_signal_connect_data(GTK_OBJECT(widget), "toggled",
 		G_CALLBACK(OnThreadedToggled), NULL, NULL, G_CONNECT_AFTER);
+
 /*
     widget = gtk_builder_get_object(xml, "checkcg");
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.HideCursor);
@@ -694,7 +703,17 @@ long PADconfigure() {
 		padTypeList[g.cfg.PadDef[1].Type]);
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
 		G_CALLBACK(OnTypeChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
+	
+	widget = gtk_builder_get_object(xml, "checkvv1");
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.PadDef[0].VisualVibration);
+	g_signal_connect_data(GTK_OBJECT(widget), "toggled",
+		G_CALLBACK(OnVisualVibration1Toggled), NULL, NULL, G_CONNECT_AFTER);
 
+	widget = gtk_builder_get_object(xml, "checkvv2");
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.PadDef[1].VisualVibration);
+	g_signal_connect_data(GTK_OBJECT(widget), "toggled",
+		G_CALLBACK(OnVisualVibration2Toggled), NULL, NULL, G_CONNECT_AFTER);
+	
 	widget = gtk_builder_get_object(xml, "btnchange1");
 	gtk_widget_set_sensitive(widget, FALSE);
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",

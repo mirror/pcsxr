@@ -34,6 +34,9 @@ static void SetDefaultConfig() {
 	g.cfg.PadDef[0].Type = PSE_PAD_TYPE_STANDARD;
 	g.cfg.PadDef[1].Type = PSE_PAD_TYPE_STANDARD;
 
+	g.cfg.PadDef[0].VisualVibration = 0;
+	g.cfg.PadDef[1].VisualVibration = 0;
+	
 	// Pad1 keyboard
 	g.cfg.PadDef[0].KeyDef[DKEY_SELECT].Key = XK_c;
 	g.cfg.PadDef[0].KeyDef[DKEY_START].Key = XK_v;
@@ -142,6 +145,8 @@ void LoadPADConfig() {
 			g.cfg.PadDef[current].DevNum = atoi(&buf[7]);
 		} else if (strncmp(buf, "Type=", 5) == 0) {
 			g.cfg.PadDef[current].Type = atoi(&buf[5]);
+		} else if (strncmp(buf, "VisualVibration=", 16) == 0) {
+			g.cfg.PadDef[current].VisualVibration = atoi(&buf[16]);
 		} else if (strncmp(buf, "Select=", 7) == 0) {
 			sscanf(buf, "Select=%d,%d,%d", &a, &b, &c);
 			g.cfg.PadDef[current].KeyDef[DKEY_SELECT].Key = a;
@@ -291,7 +296,8 @@ void SavePADConfig() {
 		fprintf(fp, "[PAD%d]\n", i + 1);
 		fprintf(fp, "DevNum=%d\n", g.cfg.PadDef[i].DevNum);
 		fprintf(fp, "Type=%d\n", g.cfg.PadDef[i].Type);
-
+		fprintf(fp, "VisualVibration=%d\n", g.cfg.PadDef[i].VisualVibration);
+		
 		fprintf(fp, "Select=%d,%d,%d\n", g.cfg.PadDef[i].KeyDef[DKEY_SELECT].Key,
 			g.cfg.PadDef[i].KeyDef[DKEY_SELECT].JoyEvType, g.cfg.PadDef[i].KeyDef[DKEY_SELECT].J.d);
 		fprintf(fp, "L3=%d,%d,%d\n", g.cfg.PadDef[i].KeyDef[DKEY_L3].Key,
