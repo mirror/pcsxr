@@ -563,6 +563,7 @@ static BOOL CALLBACK ConfigureDlgProc (const HWND hWnd, const UINT msg, const WP
 		tcI.pszText = "PAD2";
 		TabCtrl_InsertItem (hTabWnd, 1, &tcI);
 		CheckDlgButton(hWnd, IDC_DS2, global.config.dualshock);
+		CheckDlgButton(hWnd, IDC_VV3, global.config.visualvibration[0]);
 		EnableWindow(GetDlgItem(hWnd, IDC_BMODE), global.config.dualshock);
 		EnableWindow(GetDlgItem(hWnd, IDC_BLAX), global.config.dualshock);
 		EnableWindow(GetDlgItem(hWnd, IDC_BLAY), global.config.dualshock);
@@ -590,6 +591,7 @@ static BOOL CALLBACK ConfigureDlgProc (const HWND hWnd, const UINT msg, const WP
 			pad = TabCtrl_GetCurSel (hTabWnd);
 			for (cnt1 = 21; cnt1--; )
 				set_label (hWnd, pad, cnt1);
+			CheckDlgButton(hWnd, IDC_VV3, global.config.visualvibration[pad]);
 		}
 		break;
 	case WM_COMMAND:
@@ -628,6 +630,10 @@ static BOOL CALLBACK ConfigureDlgProc (const HWND hWnd, const UINT msg, const WP
 			EnableWindow(GetDlgItem(hWnd, IDC_ERAY), global.config.dualshock);
 			EnableWindow(GetDlgItem(hWnd, IDC_EL3), global.config.dualshock);
 			EnableWindow(GetDlgItem(hWnd, IDC_ER3), global.config.dualshock);
+		}
+		else if (LOWORD (wParam) == IDC_VV3)
+		{
+			global.config.visualvibration[pad] ^= 1;
 		}
 		break;
 	case WM_TIMER:
@@ -954,7 +960,8 @@ u8 CALLBACK PADpoll (u8 value)
 			{
 				global.padVibF[pad][0] = value;
 
-				if (gpuVisualVibration != NULL && (global.padVibF[pad][0] || global.padVibF[pad][1]))
+				if (gpuVisualVibration != NULL && (global.padVibF[pad][0] || global.padVibF[pad][1]) &&
+					global.config.visualvibration[pad])
 					gpuVisualVibration(global.padVibF[pad][0], global.padVibF[pad][1]);
 			}
 
@@ -962,7 +969,8 @@ u8 CALLBACK PADpoll (u8 value)
 			{
 				global.padVibF[pad][1] = value;
 
-				if (gpuVisualVibration != NULL && (global.padVibF[pad][0] || global.padVibF[pad][1]))
+				if (gpuVisualVibration != NULL && (global.padVibF[pad][0] || global.padVibF[pad][1]) &&
+					global.config.visualvibration[pad])
 					gpuVisualVibration(global.padVibF[pad][0], global.padVibF[pad][1]);
 			}
 		}

@@ -47,6 +47,7 @@
 #define IDC_ERAY                        1050
 #define IDC_TABC                        1060
 #define IDC_DS2                         1070
+#define IDC_VV3                         1071
 
 // Next default values for new objects
 // 
