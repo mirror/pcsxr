@@ -165,6 +165,7 @@ void CheckJoy() {
 			continue;
 		}
 
+		g.PadState[i].JoyKeyStatus = ~0;
 		for (j = 0; j < DKEY_TOTAL; j++) {
 			switch (g.cfg.PadDef[i].KeyDef[j].JoyEvType) {
 				case AXIS:
@@ -210,4 +211,17 @@ void CheckJoy() {
 	}
 
 	CheckAnalog();
+
+	for (i = 0; i < 2; i++) {
+		if(!g.PadState[i].PadMode) {
+			if(g.PadState[i].AnalogStatus[ANALOG_LEFT][0] < 64)
+				bdown(i, DKEY_LEFT);
+			else if(g.PadState[i].AnalogStatus[ANALOG_LEFT][0] > 127 + 64)
+				bdown(i, DKEY_RIGHT);
+			if(g.PadState[i].AnalogStatus[ANALOG_LEFT][1] < 64)
+				bdown(i, DKEY_UP);
+			else if(g.PadState[i].AnalogStatus[ANALOG_LEFT][1] > 127 + 64)
+				bdown(i, DKEY_DOWN);
+		}
+	}
 }
