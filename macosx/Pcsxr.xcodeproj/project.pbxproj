@@ -3,22 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28F0C3C6146521A700A90285 /* Configuration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F0C3C4146521A700A90285 /* Configuration.xib */; };
+		28F0C3C9146521B000A90285 /* PCSXR.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F0C3C7146521B000A90285 /* PCSXR.xib */; };
+		28F0C3CC146521B700A90285 /* AddPluginSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F0C3CA146521B700A90285 /* AddPluginSheet.xib */; };
 		2B143D06078A2CBD00AF745A /* PCSXR.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2B143D01078A2CBD00AF745A /* PCSXR.icns */; };
 		2B143D07078A2CBD00AF745A /* pcsxrfreeze.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2B143D02078A2CBD00AF745A /* pcsxrfreeze.icns */; };
 		2B143D08078A2CBD00AF745A /* pcsxrmemcard.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2B143D03078A2CBD00AF745A /* pcsxrmemcard.icns */; };
 		2B143D09078A2CBD00AF745A /* psxbios.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2B143D04078A2CBD00AF745A /* psxbios.icns */; };
 		2B143D0A078A2CBD00AF745A /* psxplugin.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2B143D05078A2CBD00AF745A /* psxplugin.icns */; };
 		2B3E356D06937D1C00763C7D /* PcsxrPluginDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E356B06937D1C00763C7D /* PcsxrPluginDocument.m */; };
-		2B3E35BC069384D100763C7D /* AddPluginSheet.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2B3E35BA069384D100763C7D /* AddPluginSheet.nib */; };
 		2B400D910789F58A00BA271E /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B02C04304E145D000880C5B /* Carbon.framework */; };
 		2B4DE99205FF9307003EFEF0 /* PluginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4DE98E05FF9307003EFEF0 /* PluginController.m */; };
-		2BB3D6A305427FE200831ACB /* Configuration.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2BA178B00514CE260026D74D /* Configuration.nib */; };
 		2BB3D6A405427FE200831ACB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2BA178B20514CE260026D74D /* InfoPlist.strings */; };
-		2BB3D6A505427FE200831ACB /* PCSXR.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2BA178B40514CE260026D74D /* PCSXR.nib */; };
 		2BB3D6A705427FE200831ACB /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2BBB1786051E0D9700B84448 /* Credits.rtf */; };
 		2BB3D6BE05427FE200831ACB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA178A505148D9D0026D74D /* main.m */; };
 		2BB3D6BF05427FE200831ACB /* PcsxrController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B75FD3D051C56D200D12034 /* PcsxrController.m */; };
@@ -96,6 +96,13 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
+		28B467F01463D0020083F129 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5599695E13AFCD2900B0216B;
+			remoteInfo = PeopsAL;
+		};
 		713CB2DD11FC49720033B6A8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 71F93F6311FB8E9D007A5A7C /* DFCdrom.xcodeproj */;
@@ -187,6 +194,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		28F0C3C5146521A700A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Configuration.xib; sourceTree = "<group>"; };
+		28F0C3C8146521B000A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = PCSXR.xib; sourceTree = "<group>"; };
+		28F0C3CB146521B700A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = AddPluginSheet.xib; sourceTree = "<group>"; };
 		2B02C04304E145D000880C5B /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		2B143D01078A2CBD00AF745A /* PCSXR.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PCSXR.icns; sourceTree = "<group>"; };
 		2B143D02078A2CBD00AF745A /* pcsxrfreeze.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = pcsxrfreeze.icns; sourceTree = "<group>"; };
@@ -196,27 +206,24 @@
 		2B2189D204D96C7A00179945 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		2B3E356A06937D1C00763C7D /* PcsxrPluginDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrPluginDocument.h; sourceTree = "<group>"; };
 		2B3E356B06937D1C00763C7D /* PcsxrPluginDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrPluginDocument.m; sourceTree = "<group>"; };
-		2B3E35BB069384D100763C7D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = AddPluginSheet.nib; sourceTree = "<group>"; };
 		2B4DE98D05FF9307003EFEF0 /* PluginController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PluginController.h; sourceTree = "<group>"; };
 		2B4DE98E05FF9307003EFEF0 /* PluginController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PluginController.m; sourceTree = "<group>"; };
 		2B690C760635C65C00CDA575 /* ExceptionHandling.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExceptionHandling.framework; path = /System/Library/Frameworks/ExceptionHandling.framework; sourceTree = "<absolute>"; };
 		2B6E8AAE04C832040017A3B1 /* System.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = System.framework; path = /System/Library/Frameworks/System.framework; sourceTree = "<absolute>"; };
 		2B6E8AB404C8327C0017A3B1 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		2B75FD3C051C56D200D12034 /* PcsxrController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PcsxrController.h; sourceTree = "<group>"; };
-		2B75FD3D051C56D200D12034 /* PcsxrController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PcsxrController.m; sourceTree = "<group>"; };
+		2B75FD3D051C56D200D12034 /* PcsxrController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PcsxrController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2B75FD4A051C8A7400D12034 /* ConfigurationController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ConfigurationController.h; sourceTree = "<group>"; };
-		2B75FD4B051C8A7400D12034 /* ConfigurationController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ConfigurationController.m; sourceTree = "<group>"; };
+		2B75FD4B051C8A7400D12034 /* ConfigurationController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ConfigurationController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2B976C00074C14B4007C050A /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = /System/Library/Frameworks/Kernel.framework; sourceTree = "<absolute>"; };
-		2BA178A505148D9D0026D74D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2BA178B10514CE260026D74D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Configuration.nib; sourceTree = "<group>"; };
+		2BA178A505148D9D0026D74D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2BA178B30514CE260026D74D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InfoPlist.strings; sourceTree = "<group>"; };
-		2BA178B50514CE260026D74D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = PCSXR.nib; sourceTree = "<group>"; };
 		2BA44360052DB2EA00E21DDD /* PcsxrPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrPlugin.h; sourceTree = "<group>"; };
-		2BA44361052DB2EA00E21DDD /* PcsxrPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrPlugin.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
+		2BA44361052DB2EA00E21DDD /* PcsxrPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PcsxrPlugin.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2BB3D6CF05427FE200831ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BB3D6D105427FE200831ACB /* PCSXR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PCSXR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBB1126051DC00500B84448 /* PluginList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginList.h; sourceTree = "<group>"; };
-		2BBB1127051DC00500B84448 /* PluginList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginList.m; sourceTree = "<group>"; };
+		2BBB1127051DC00500B84448 /* PluginList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PluginList.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2BBB1787051E0D9700B84448 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = Credits.rtf; sourceTree = "<group>"; };
 		2BBB1791051E113B00B84448 /* EmuThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmuThread.h; sourceTree = "<group>"; };
 		2BBB1792051E113B00B84448 /* EmuThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmuThread.m; sourceTree = "<group>"; };
@@ -254,9 +261,9 @@
 		71AD2DD210C3570900365243 /* PeopsSoftGPU.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PeopsSoftGPU.xcodeproj; path = plugins/DFXVideo/PeopsSoftGPU.xcodeproj; sourceTree = SOURCE_ROOT; };
 		71D888CE130F04DC00F150FF /* PeopsXGL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PeopsXGL.xcodeproj; path = plugins/PeopsXgl/PeopsXGL.xcodeproj; sourceTree = "<group>"; };
 		71F2C07E1200B69B00322AD9 /* DFInput.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DFInput.xcodeproj; path = plugins/DFInput/DFInput.xcodeproj; sourceTree = "<group>"; };
-		71F4C5600FDED12800529849 /* cdriso.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cdriso.c; sourceTree = "<group>"; };
+		71F4C5600FDED12800529849 /* cdriso.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 2; path = cdriso.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		71F4C5610FDED12800529849 /* cdriso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cdriso.h; sourceTree = "<group>"; };
-		71F4C5620FDED12800529849 /* cdrom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cdrom.c; sourceTree = "<group>"; };
+		71F4C5620FDED12800529849 /* cdrom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 2; path = cdrom.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		71F4C5630FDED12800529849 /* cdrom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cdrom.h; sourceTree = "<group>"; };
 		71F4C5640FDED12800529849 /* cheat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cheat.c; sourceTree = "<group>"; };
 		71F4C5650FDED12800529849 /* cheat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cheat.h; sourceTree = "<group>"; };
@@ -377,10 +384,10 @@
 			isa = PBXGroup;
 			children = (
 				2BBB1786051E0D9700B84448 /* Credits.rtf */,
-				2BA178B00514CE260026D74D /* Configuration.nib */,
+				28F0C3C4146521A700A90285 /* Configuration.xib */,
 				2BA178B20514CE260026D74D /* InfoPlist.strings */,
-				2BA178B40514CE260026D74D /* PCSXR.nib */,
-				2B3E35BA069384D100763C7D /* AddPluginSheet.nib */,
+				28F0C3C7146521B000A90285 /* PCSXR.xib */,
+				28F0C3CA146521B700A90285 /* AddPluginSheet.xib */,
 			);
 			name = Resources;
 			path = English.lproj;
@@ -522,6 +529,7 @@
 			isa = PBXGroup;
 			children = (
 				71AD2DD110C356FD00365243 /* PeopsSPU.psxplugin */,
+				28B467F11463D0020083F129 /* PeopsAL.psxplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -603,8 +611,11 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 71F353F80FD98DFE00CBEC28 /* Build configuration list for PBXProject "Pcsxr" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -645,6 +656,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		28B467F11463D0020083F129 /* PeopsAL.psxplugin */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PeopsAL.psxplugin;
+			remoteRef = 28B467F01463D0020083F129 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		71AD2DD110C356FD00365243 /* PeopsSPU.psxplugin */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
@@ -687,16 +705,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BB3D6A305427FE200831ACB /* Configuration.nib in Resources */,
 				2BB3D6A405427FE200831ACB /* InfoPlist.strings in Resources */,
-				2BB3D6A505427FE200831ACB /* PCSXR.nib in Resources */,
 				2BB3D6A705427FE200831ACB /* Credits.rtf in Resources */,
-				2B3E35BC069384D100763C7D /* AddPluginSheet.nib in Resources */,
 				2B143D06078A2CBD00AF745A /* PCSXR.icns in Resources */,
 				2B143D07078A2CBD00AF745A /* pcsxrfreeze.icns in Resources */,
 				2B143D08078A2CBD00AF745A /* pcsxrmemcard.icns in Resources */,
 				2B143D09078A2CBD00AF745A /* psxbios.icns in Resources */,
 				2B143D0A078A2CBD00AF745A /* psxplugin.icns in Resources */,
+				28F0C3C6146521A700A90285 /* Configuration.xib in Resources */,
+				28F0C3C9146521B000A90285 /* PCSXR.xib in Resources */,
+				28F0C3CC146521B700A90285 /* AddPluginSheet.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -786,20 +804,28 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		2B3E35BA069384D100763C7D /* AddPluginSheet.nib */ = {
+		28F0C3C4146521A700A90285 /* Configuration.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2B3E35BB069384D100763C7D /* English */,
+				28F0C3C5146521A700A90285 /* English */,
 			);
-			name = AddPluginSheet.nib;
+			name = Configuration.xib;
 			sourceTree = "<group>";
 		};
-		2BA178B00514CE260026D74D /* Configuration.nib */ = {
+		28F0C3C7146521B000A90285 /* PCSXR.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2BA178B10514CE260026D74D /* English */,
+				28F0C3C8146521B000A90285 /* English */,
 			);
-			name = Configuration.nib;
+			name = PCSXR.xib;
+			sourceTree = "<group>";
+		};
+		28F0C3CA146521B700A90285 /* AddPluginSheet.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28F0C3CB146521B700A90285 /* English */,
+			);
+			name = AddPluginSheet.xib;
 			sourceTree = "<group>";
 		};
 		2BA178B20514CE260026D74D /* InfoPlist.strings */ = {
@@ -808,14 +834,6 @@
 				2BA178B30514CE260026D74D /* English */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		2BA178B40514CE260026D74D /* PCSXR.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2BA178B50514CE260026D74D /* English */,
-			);
-			name = PCSXR.nib;
 			sourceTree = "<group>";
 		};
 		2BBB1786051E0D9700B84448 /* Credits.rtf */ = {
@@ -829,7 +847,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		71F353F40FD98DFE00CBEC28 /* Development */ = {
+		71F353F40FD98DFE00CBEC28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
@@ -837,7 +855,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_ASM_KEYWORD = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = G3;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -857,13 +874,12 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = PCSXR;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = "-Wmost";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
-			name = Development;
+			name = Debug;
 		};
-		71F353F50FD98DFE00CBEC28 /* Deployment */ = {
+		71F353F50FD98DFE00CBEC28 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
@@ -871,7 +887,6 @@
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_ASM_KEYWORD = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_CPU = "";
 				GCC_MODEL_TUNING = "";
@@ -892,38 +907,41 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = PCSXR;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = "-Wmost";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
-			name = Deployment;
+			name = Release;
 		};
-		71F353F90FD98DFE00CBEC28 /* Development */ = {
+		71F353F90FD98DFE00CBEC28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					x86_64,
+					i386,
+				);
 				GCC_MODEL_TUNING = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../libpcsxcore,
 					../macosx,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
 				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH_ACTUAL)";
-				OTHER_LDFLAGS = (
-					"-lz",
-					"-lSystemStubs",
-				);
-				SDKROOT = "";
+				OTHER_LDFLAGS = "-lz";
+				SDKROOT = macosx10.6;
+				WARNING_CFLAGS = "-Wall";
 			};
-			name = Development;
+			name = Debug;
 		};
-		71F353FA0FD98DFE00CBEC28 /* Deployment */ = {
+		71F353FA0FD98DFE00CBEC28 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
+					x86_64,
 					i386,
-					ppc,
 				);
 				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				GCC_DYNAMIC_NO_PIC = YES;
@@ -933,21 +951,20 @@
 				GCC_OPTIMIZATION_LEVEL = 2;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_UNROLL_LOOPS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../libpcsxcore,
 					../macosx,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "-fomit-frame-pointer";
-				OTHER_LDFLAGS = (
-					"-lz",
-					"-lSystemStubs",
-				);
-				SDKROOT = "";
+				OTHER_LDFLAGS = "-lz";
+				SDKROOT = macosx10.6;
+				WARNING_CFLAGS = "-Wall";
 			};
-			name = Deployment;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -955,20 +972,20 @@
 		71F353F30FD98DFE00CBEC28 /* Build configuration list for PBXNativeTarget "PCSXR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				71F353F40FD98DFE00CBEC28 /* Development */,
-				71F353F50FD98DFE00CBEC28 /* Deployment */,
+				71F353F40FD98DFE00CBEC28 /* Debug */,
+				71F353F50FD98DFE00CBEC28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 		71F353F80FD98DFE00CBEC28 /* Build configuration list for PBXProject "Pcsxr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				71F353F90FD98DFE00CBEC28 /* Development */,
-				71F353FA0FD98DFE00CBEC28 /* Deployment */,
+				71F353F90FD98DFE00CBEC28 /* Debug */,
+				71F353FA0FD98DFE00CBEC28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

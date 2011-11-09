@@ -1,6 +1,7 @@
 #import "PluginController.h"
 #include "stdafx.h"
 #include "externals.h"
+#include "maccfg.h"
 
 #ifdef USEOPENAL
 #define APP_ID @"net.sf.peops.ALPlugin"
@@ -137,7 +138,7 @@ void ReadConfig(void)
 
 	/* load from preferences */
 	[keyValues release];
-	keyValues = [[defaults dictionaryForKey:PrefsKey] retain];
+	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 
 	[hiCompBox setIntValue:[[keyValues objectForKey:@"High Compatibility Mode"] intValue]];
 	[irqWaitBox setIntValue:[[keyValues objectForKey:@"SPU IRQ Wait"] intValue]];

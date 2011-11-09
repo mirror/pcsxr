@@ -24,6 +24,7 @@
 #import "Carbon/Carbon.h"
 #include <OpenGL/gl.h> // OpenGL needed for "externals.h"
 #include "externals.h"
+#include "draw.h" // for CreateScanLines()
 #undef BOOL
 
 // not sure why these aren't class or instance variables...
@@ -425,5 +426,5 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
 void ChangeWindowMode(void)
 {
     // glue from PSX thread. Globals are already set
-   [ gameController performFullscreenSwap];
+    [ gameController performFullscreenSwap];
 }

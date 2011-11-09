@@ -29,6 +29,7 @@
 #else
 #include <pthread.h>
 #include <sys/time.h>
+#include <unistd.h>
 #endif
 
 static FILE *cdHandle = NULL;
@@ -269,7 +270,7 @@ static void *playthread(void *param)
 
 	
 		// Vib Ribbon: decoded buffer IRQ
-		iso_play_cdbuf = sndbuffer;
+		iso_play_cdbuf = (u16 *)sndbuffer;
 		iso_play_bufptr = 0;
 	}
 

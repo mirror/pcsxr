@@ -188,7 +188,7 @@ static int iSecureStart=0; // secure start counter
 //
 
 
-INLINE void InterpolateUp(int ch)
+static INLINE void InterpolateUp(int ch)
 {
  if(s_chan[ch].SB[32]==1)                              // flag == 1? calc step and set flag... and don't change the value in this pass
   {
@@ -236,7 +236,7 @@ INLINE void InterpolateUp(int ch)
 // even easier interpolation on downsampling, also no special filter, again just "Pete's common sense" tm
 //
 
-INLINE void InterpolateDown(int ch)
+static INLINE void InterpolateDown(int ch)
 {
  if(s_chan[ch].sinc>=0x20000L)                                 // we would skip at least one val?
   {
@@ -262,7 +262,7 @@ INLINE void InterpolateDown(int ch)
 // START SOUND... called by main thread to setup a new sound on a channel
 ////////////////////////////////////////////////////////////////////////
 
-INLINE void StartSound(int ch)
+static INLINE void StartSound(int ch)
 {
  StartADSR(ch);
  StartREVERB(ch);
@@ -292,7 +292,7 @@ INLINE void StartSound(int ch)
 // ALL KIND OF HELPERS
 ////////////////////////////////////////////////////////////////////////
 
-INLINE void VoiceChangeFrequency(int ch)
+static INLINE void VoiceChangeFrequency(int ch)
 {
  s_chan[ch].iUsedFreq=s_chan[ch].iActFreq;             // -> take it and calc steps
  s_chan[ch].sinc=s_chan[ch].iRawPitch<<4;
@@ -302,7 +302,7 @@ INLINE void VoiceChangeFrequency(int ch)
 
 ////////////////////////////////////////////////////////////////////////
 
-INLINE void FModChangeFrequency(int ch,int ns)
+static INLINE void FModChangeFrequency(int ch,int ns)
 {
  int NP=s_chan[ch].iRawPitch;
 
@@ -366,7 +366,7 @@ unsigned short NoiseFreqAdd[5] = {
 	0, 84, 140, 180, 210
 };
 
-INLINE void NoiseClock()
+static INLINE void NoiseClock()
 {
 	unsigned int level;
 
@@ -392,7 +392,7 @@ INLINE void NoiseClock()
 	}
 }
 
-INLINE int iGetNoiseVal(int ch)
+static INLINE int iGetNoiseVal(int ch)
 {
  int fa;
 
@@ -413,7 +413,7 @@ INLINE int iGetNoiseVal(int ch)
 
 ////////////////////////////////////////////////////////////////////////
 
-INLINE void StoreInterpolationVal(int ch,int fa)
+static INLINE void StoreInterpolationVal(int ch,int fa)
 {
 	/*
 	// fmod channel = sound output
@@ -451,7 +451,7 @@ INLINE void StoreInterpolationVal(int ch,int fa)
 
 ////////////////////////////////////////////////////////////////////////
 
-INLINE int iGetInterpolationVal(int ch)
+static INLINE int iGetInterpolationVal(int ch)
 {
  int fa;
 

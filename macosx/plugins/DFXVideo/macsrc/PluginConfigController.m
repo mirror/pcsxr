@@ -184,7 +184,7 @@ void ReadConfig(void)
 	
 	/* load from preferences */
 	[keyValues release];
-	keyValues = [[defaults dictionaryForKey:PrefsKey] retain];
+	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 	
 	[fpsCounter setIntValue:[[keyValues objectForKey:@"FPS Counter"] intValue]];
 	[autoFullScreen setIntValue:[[keyValues objectForKey:@"Auto Full Screen"] intValue]];

@@ -324,7 +324,7 @@ unsigned short *rl2blk(int *blk, unsigned short *mdec_rl) {
 #define CLAMP_SCALE8(a)   (CLAMP8(SCALE8(a)))
 #define CLAMP_SCALE5(a)   (CLAMP5(SCALE5(a)))
 
-inline void putlinebw15(u16 *image, int *Yblk) {
+static inline void putlinebw15(u16 *image, int *Yblk) {
 	int i;
 	int A = (mdec.reg0 & MDEC0_STP) ? 0x8000 : 0;
 
@@ -335,7 +335,7 @@ inline void putlinebw15(u16 *image, int *Yblk) {
 	}
 }
 
-inline void putquadrgb15(u16 *image, int *Yblk, int Cr, int Cb) {
+static inline void putquadrgb15(u16 *image, int *Yblk, int Cr, int Cb) {
 	int Y, R, G, B;
 	int A = (mdec.reg0 & MDEC0_STP) ? 0x8000 : 0;
 	R = MULR(Cr);
@@ -353,7 +353,7 @@ inline void putquadrgb15(u16 *image, int *Yblk, int Cr, int Cb) {
 	image[17] = MAKERGB15(CLAMP_SCALE5(Y + R), CLAMP_SCALE5(Y + G), CLAMP_SCALE5(Y + B), A);
 }
 
-inline void yuv2rgb15(int *blk, unsigned short *image) {
+static inline void yuv2rgb15(int *blk, unsigned short *image) {
 	int x, y;
 	int *Yblk = blk + DSIZE2 * 2;
 	int *Crblk = blk;
@@ -376,7 +376,7 @@ inline void yuv2rgb15(int *blk, unsigned short *image) {
 	}
 }
 
-inline void putlinebw24(u8 * image, int *Yblk) {
+static inline void putlinebw24(u8 * image, int *Yblk) {
 	int i;
 	unsigned char Y;
 	for (i = 0; i < 8 * 3; i += 3, Yblk++) {
@@ -387,7 +387,7 @@ inline void putlinebw24(u8 * image, int *Yblk) {
 	}
 }
 
-inline void putquadrgb24(u8 * image, int *Yblk, int Cr, int Cb) {
+static inline void putquadrgb24(u8 * image, int *Yblk, int Cr, int Cb) {
 	int Y, R, G, B;
 
 	R = MULR(Cr);

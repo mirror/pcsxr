@@ -1240,7 +1240,7 @@ void CALLBACK GPUwriteStatus(uint32_t gdata)      // WRITE STATUS
 // vram read/write helpers, needed by LEWPY's optimized vram read/write :)
 ////////////////////////////////////////////////////////////////////////
 
-__inline void FinishedVRAMWrite(void)
+static __inline void FinishedVRAMWrite(void)
 {
 /*
 // NEWX
@@ -1267,7 +1267,7 @@ __inline void FinishedVRAMWrite(void)
  VRAMWrite.RowsRemaining = 0;
 }
 
-__inline void FinishedVRAMRead(void)
+static __inline void FinishedVRAMRead(void)
 {
  // Set register to NORMAL operation
  DataReadMode = DR_NORMAL;
@@ -1629,7 +1629,7 @@ void SetFixes(void)
 
 unsigned long lUsedAddr[3];
 
-__inline BOOL CheckForEndlessLoop(unsigned long laddr)
+static __inline BOOL CheckForEndlessLoop(unsigned long laddr)
 {
  if(laddr==lUsedAddr[1]) return TRUE;
  if(laddr==lUsedAddr[2]) return TRUE;

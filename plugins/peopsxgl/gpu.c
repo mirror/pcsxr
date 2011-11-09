@@ -21,7 +21,9 @@
 
 #include "stdafx.h"
 
-#if !defined(_MACGL) && !defined(_WINDOWS)
+#if defined (_MACGL)
+#include "drawgl.h"
+#elif !defined(_MACGL) && !defined(_WINDOWS)
 
 #include "config.h"
 
@@ -1185,7 +1187,7 @@ void PaintBlackBorders(void)
 // helper to draw scanlines
 ////////////////////////////////////////////////////////////////////////
 
-__inline void XPRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void XPRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
                                     OGLVertex* vertex3, OGLVertex* vertex4) 
 {
 
@@ -2345,7 +2347,7 @@ void CALLBACK GPUwriteStatus(uint32_t gdata)
 
 BOOL bNeedWriteUpload=FALSE;
 
-__inline void FinishedVRAMWrite(void)
+static __inline void FinishedVRAMWrite(void)
 {
  if(bNeedWriteUpload)
   {
@@ -2361,7 +2363,7 @@ __inline void FinishedVRAMWrite(void)
  VRAMWrite.RowsRemaining = 0;
 }
 
-__inline void FinishedVRAMRead(void)
+static __inline void FinishedVRAMRead(void)
 {
  // set register to NORMAL operation
  iDataReadMode = DR_NORMAL;
@@ -3041,7 +3043,7 @@ void SetFixes(void)
 
 uint32_t lUsedAddr[3];
 
-__inline BOOL CheckForEndlessLoop(uint32_t laddr)
+static __inline BOOL CheckForEndlessLoop(uint32_t laddr)
 {
  if(laddr==lUsedAddr[1]) return TRUE;
  if(laddr==lUsedAddr[2]) return TRUE;

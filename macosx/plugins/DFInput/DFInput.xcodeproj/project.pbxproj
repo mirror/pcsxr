@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28586CC314651E730082B8EC /* NetPcsxrHIDInputPluginMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28586CC114651E730082B8EC /* NetPcsxrHIDInputPluginMain.xib */; };
 		2B679862069193F300E2BD4F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B679860069193F300E2BD4F /* Cocoa.framework */; };
 		2B679863069193F300E2BD4F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B679861069193F300E2BD4F /* IOKit.framework */; };
 		71054E211204A49F00AC2CCB /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71054E201204A49F00AC2CCB /* ForceFeedback.framework */; };
@@ -63,7 +64,6 @@
 		71D88862130F032700F150FF /* SDL_error_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D8882C130F032700F150FF /* SDL_error_c.h */; };
 		71E861B611FF75AC001C1826 /* PadView.h in Headers */ = {isa = PBXBuildFile; fileRef = 71E861AC11FF75AC001C1826 /* PadView.h */; };
 		71E861B711FF75AC001C1826 /* PadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E861AD11FF75AC001C1826 /* PadView.m */; };
-		71E861BC11FF75BA001C1826 /* NetPcsxrHIDInputPluginMain.nib in Resources */ = {isa = PBXBuildFile; fileRef = 71E861BA11FF75BA001C1826 /* NetPcsxrHIDInputPluginMain.nib */; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
 		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
@@ -71,16 +71,17 @@
 /* Begin PBXFileReference section */
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
+		28586CC214651E730082B8EC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetPcsxrHIDInputPluginMain.xib; sourceTree = "<group>"; };
 		2B679860069193F300E2BD4F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		2B679861069193F300E2BD4F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		71054E201204A49F00AC2CCB /* ForceFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForceFeedback.framework; path = /System/Library/Frameworks/ForceFeedback.framework; sourceTree = "<absolute>"; };
 		7136F51912011BB4001973D9 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
-		714FA82A11FC822A00517F47 /* analog.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = analog.c; path = ../../../plugins/dfinput/analog.c; sourceTree = SOURCE_ROOT; };
+		714FA82A11FC822A00517F47 /* analog.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = analog.c; path = ../../../plugins/dfinput/analog.c; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		714FA82B11FC822A00517F47 /* pad.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = pad.c; path = ../../../plugins/dfinput/pad.c; sourceTree = SOURCE_ROOT; };
 		714FA82C11FC822A00517F47 /* pad.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = pad.h; path = ../../../plugins/dfinput/pad.h; sourceTree = SOURCE_ROOT; };
 		714FA82D11FC822A00517F47 /* sdljoy.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = sdljoy.c; path = ../../../plugins/dfinput/sdljoy.c; sourceTree = SOURCE_ROOT; };
 		714FA89F11FC846800517F47 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
-		714FA8F811FC863500517F47 /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = cfg.c; path = macsrc/cfg.c; sourceTree = "<group>"; };
+		714FA8F811FC863500517F47 /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = cfg.c; path = macsrc/cfg.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		714FA8F911FC863500517F47 /* xkb.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = xkb.c; path = macsrc/xkb.c; sourceTree = "<group>"; };
 		7192EAAB1200D54500038B92 /* cfg.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = cfg.h; path = macsrc/cfg.h; sourceTree = "<group>"; };
 		71C7B252130F3904004BF975 /* SDL_syscond.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_syscond.c; path = ../Common/SDL/src/thread/pthread/SDL_syscond.c; sourceTree = SOURCE_ROOT; };
@@ -108,7 +109,7 @@
 		71D88806130F032700F150FF /* SDL_stdinc.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_stdinc.h; path = ../Common/SDL/include/SDL_stdinc.h; sourceTree = SOURCE_ROOT; };
 		71D88807130F032700F150FF /* SDL_thread.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_thread.h; path = ../Common/SDL/include/SDL_thread.h; sourceTree = SOURCE_ROOT; };
 		71D8881F130F032700F150FF /* SDL_syshaptic.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_syshaptic.c; path = ../Common/SDL/src/haptic/darwin/SDL_syshaptic.c; sourceTree = SOURCE_ROOT; };
-		71D88820130F032700F150FF /* SDL_haptic.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_haptic.c; path = ../Common/SDL/src/haptic/SDL_haptic.c; sourceTree = SOURCE_ROOT; };
+		71D88820130F032700F150FF /* SDL_haptic.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = SDL_haptic.c; path = ../Common/SDL/src/haptic/SDL_haptic.c; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		71D88821130F032700F150FF /* SDL_haptic_c.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_haptic_c.h; path = ../Common/SDL/src/haptic/SDL_haptic_c.h; sourceTree = SOURCE_ROOT; };
 		71D88822130F032700F150FF /* SDL_syshaptic.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = SDL_syshaptic.h; path = ../Common/SDL/src/haptic/SDL_syshaptic.h; sourceTree = SOURCE_ROOT; };
 		71D88825130F032700F150FF /* SDL_sysjoystick.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = SDL_sysjoystick.c; path = ../Common/SDL/src/joystick/darwin/SDL_sysjoystick.c; sourceTree = SOURCE_ROOT; };
@@ -127,7 +128,6 @@
 		71E861AB11FF75AC001C1826 /* PadController.m */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.objc; name = PadController.m; path = macsrc/PadController.m; sourceTree = "<group>"; };
 		71E861AC11FF75AC001C1826 /* PadView.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = PadView.h; path = macsrc/PadView.h; sourceTree = "<group>"; };
 		71E861AD11FF75AC001C1826 /* PadView.m */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.objc; name = PadView.m; path = macsrc/PadView.m; sourceTree = "<group>"; };
-		71E861BB11FF75BA001C1826 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/NetPcsxrHIDInputPluginMain.nib; sourceTree = "<group>"; };
 		8D576316048677EA00EA77CD /* DFInput.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DFInput.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,7 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				7136F51812011BB4001973D9 /* Credits.rtf */,
-				71E861BA11FF75BA001C1826 /* NetPcsxrHIDInputPluginMain.nib */,
+				28586CC114651E730082B8EC /* NetPcsxrHIDInputPluginMain.xib */,
 				8D576317048677EA00EA77CD /* Info.plist */,
 				8D5B49A704867FD3000E48DA /* InfoPlist.strings */,
 			);
@@ -406,8 +406,11 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 71155B110FDFA2DE00EC0BC5 /* Build configuration list for PBXProject "DFInput" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -431,8 +434,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */,
-				71E861BC11FF75BA001C1826 /* NetPcsxrHIDInputPluginMain.nib in Resources */,
 				7136F51A12011BB4001973D9 /* Credits.rtf in Resources */,
+				28586CC314651E730082B8EC /* NetPcsxrHIDInputPluginMain.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,20 +482,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		28586CC114651E730082B8EC /* NetPcsxrHIDInputPluginMain.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28586CC214651E730082B8EC /* English */,
+			);
+			name = NetPcsxrHIDInputPluginMain.xib;
+			sourceTree = "<group>";
+		};
 		7136F51812011BB4001973D9 /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7136F51912011BB4001973D9 /* English */,
 			);
 			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		71E861BA11FF75BA001C1826 /* NetPcsxrHIDInputPluginMain.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				71E861BB11FF75BA001C1826 /* English */,
-			);
-			name = NetPcsxrHIDInputPluginMain.nib;
 			sourceTree = "<group>";
 		};
 		8D5B49A704867FD3000E48DA /* InfoPlist.strings */ = {
@@ -506,7 +509,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		71155B0D0FDFA2DE00EC0BC5 /* Development */ = {
+		71155B0D0FDFA2DE00EC0BC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
@@ -543,15 +546,14 @@
 				);
 				WRAPPER_EXTENSION = psxplugin;
 			};
-			name = Development;
+			name = Debug;
 		};
-		71155B0E0FDFA2DE00EC0BC5 /* Deployment */ = {
+		71155B0E0FDFA2DE00EC0BC5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUGGING_SYMBOLS = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -584,39 +586,19 @@
 				WRAPPER_EXTENSION = psxplugin;
 				ZERO_LINK = NO;
 			};
-			name = Deployment;
+			name = Release;
 		};
-		71155B120FDFA2DE00EC0BC5 /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_MODEL_TUNING = "";
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
-				HEADER_SEARCH_PATHS = (
-					../../../libpcsxcore,
-					../..,
-					../../../plugins/dfinput,
-					../../../plugins/dfinput,
-					../../../../plugins/dfinput,
-					../Common/SDL/include,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				OTHER_CFLAGS = "";
-				SDKROOT = "";
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = ../../build;
-			};
-			name = Development;
-		};
-		71155B130FDFA2DE00EC0BC5 /* Deployment */ = {
+		71155B120FDFA2DE00EC0BC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
 					i386,
-					ppc,
+					x86_64,
 				);
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					../../../libpcsxcore,
 					../..,
@@ -625,12 +607,41 @@
 					../../../../plugins/dfinput,
 					../Common/SDL/include,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
-				SDKROOT = "";
+				SDKROOT = macosx10.6;
+				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = ../../build;
+				WARNING_CFLAGS = "-Wall";
 			};
-			name = Deployment;
+			name = Debug;
+		};
+		71155B130FDFA2DE00EC0BC5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					x86_64,
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					../../../libpcsxcore,
+					../..,
+					../../../plugins/dfinput,
+					../../../plugins/dfinput,
+					../../../../plugins/dfinput,
+					../Common/SDL/include,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_CFLAGS = "";
+				SDKROOT = macosx10.6;
+				SYMROOT = ../../build;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -638,20 +649,20 @@
 		71155B0C0FDFA2DE00EC0BC5 /* Build configuration list for PBXNativeTarget "DFInput" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				71155B0D0FDFA2DE00EC0BC5 /* Development */,
-				71155B0E0FDFA2DE00EC0BC5 /* Deployment */,
+				71155B0D0FDFA2DE00EC0BC5 /* Debug */,
+				71155B0E0FDFA2DE00EC0BC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 		71155B110FDFA2DE00EC0BC5 /* Build configuration list for PBXProject "DFInput" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				71155B120FDFA2DE00EC0BC5 /* Development */,
-				71155B130FDFA2DE00EC0BC5 /* Deployment */,
+				71155B120FDFA2DE00EC0BC5 /* Debug */,
+				71155B130FDFA2DE00EC0BC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

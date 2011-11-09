@@ -31,7 +31,7 @@
 	return self;
 }
 
-- (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(long)selStart length:(long)selLength
+- (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength
 {
 	[super selectWithFrame:aRect inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 
@@ -74,7 +74,7 @@
 			[tableView deselectAll:self];
 			return;
 		}
-		[tableView selectRow:nextRow byExtendingSelection:NO];
+		[tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:nextRow] byExtendingSelection:NO];
 
 		/* discard any events we have received while waiting for the button press */
 		endEvent = [NSEvent otherEventWithType:NSApplicationDefined location:where 

@@ -8,13 +8,13 @@
 {
     NSWindowController *preferencesController;
     NSWindowController *memCardController;
-	 PluginList *pluginList;
-	 
+    PluginList *pluginList;
+    
     IBOutlet NSWindow *memCardWindow;
     IBOutlet NSWindow *preferenceWindow;
-	 
-	 BOOL sleepInBackground;
-	 BOOL wasPausedBeforeBGSwitch;
+    
+    BOOL sleepInBackground;
+    BOOL wasPausedBeforeBGSwitch;
 }
 - (IBAction)ejectCD:(id)sender;
 - (IBAction)pause:(id)sender;

@@ -47,18 +47,22 @@
 	[openDlg setCanChooseFiles:YES];
 	[openDlg setCanChooseDirectories:NO];
 
-	path = [NSString stringWithCString:mcd];
+	path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
+    
+    [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent]]];
+    [openDlg setNameFieldStringValue:[path lastPathComponent]];
 
-	if ([openDlg runModalForDirectory:[path stringByDeletingLastPathComponent] file:[path lastPathComponent]] == NSOKButton) {
-		NSArray* files = [openDlg filenames];
-		strcpy(mcd, (const char *)[[files objectAtIndex:0] fileSystemRepresentation]);
-
-		[label setTitleWithMnemonic:[NSString stringWithCString:mcd]];
+	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
+		NSArray* urls = [openDlg URLs];
+        NSString *mcdPath = [[urls objectAtIndex:0] path];
+        strcpy(mcd, (const char *)[mcdPath fileSystemRepresentation]);
+        
+		[label setTitleWithMnemonic:mcdPath];
 
 		if (tag == 1)
-			[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithCString:mcd] forKey:@"Mcd1"];
+			[[NSUserDefaults standardUserDefaults] setObject:mcdPath forKey:@"Mcd1"];
 		else
-			[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithCString:mcd] forKey:@"Mcd2"];
+			[[NSUserDefaults standardUserDefaults] setObject:mcdPath forKey:@"Mcd2"];
     }
 }
 
@@ -73,17 +77,21 @@
 	if (tag == 1) { mcd = Config.Mcd1; label = mcd1Label; }
 	else { mcd = Config.Mcd2; label = mcd2Label; }
 
-	path = [NSString stringWithCString:mcd];
+    path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
 
-	if ([openDlg runModalForDirectory:[path stringByDeletingLastPathComponent] file:@"New Memory Card File.mcr"] == NSOKButton) {
-		strcpy(mcd, (const char *)[[openDlg filename] fileSystemRepresentation]);
+    [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent]]];
+    [openDlg setNameFieldStringValue:@"New Memory Card File.mcr"];
+    
+	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
+        NSString *mcdPath = [[openDlg URL] path];
+        strcpy(mcd, (const char *)[mcdPath fileSystemRepresentation]);
 
-		[label setTitleWithMnemonic:[NSString stringWithCString:mcd]];
+		[label setTitleWithMnemonic:mcdPath];
 
 		if (tag == 1)
-			[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithCString:mcd] forKey:@"Mcd1"];
+			[[NSUserDefaults standardUserDefaults] setObject:mcdPath forKey:@"Mcd1"];
 		else
-			[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithCString:mcd] forKey:@"Mcd2"];
+			[[NSUserDefaults standardUserDefaults] setObject:mcdPath forKey:@"Mcd2"];
 
 		CreateMcd(mcd);
     }
@@ -105,9 +113,9 @@
 
 	if ([sender pullsDown]) {
 		NSArray *items = [sender itemArray];
-		int i;
+		NSUInteger i;
 		
-		for (i=0; i<[items count]; i++)
+		for (i = 0; i < [items count]; i++)
 			[[items objectAtIndex:i] setState:NSOffState];
 		
 		[[sender selectedItem] setState:NSOnState];
@@ -155,8 +163,8 @@
 	}
 
 	// setup labels
-	[mcd1Label setTitleWithMnemonic:[NSString stringWithCString:Config.Mcd1]];
-	[mcd2Label setTitleWithMnemonic:[NSString stringWithCString:Config.Mcd2]];
+	[mcd1Label setTitleWithMnemonic:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.Mcd1 length:strlen(Config.Mcd1)]];
+	[mcd2Label setTitleWithMnemonic:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.Mcd2 length:strlen(Config.Mcd2)]];
 
 	int tag = [defaults integerForKey:@"AutoDetectVideoType"];
 	if (tag)

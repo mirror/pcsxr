@@ -672,7 +672,7 @@ int ReadDKeyEvent(int padnum, int key) {
 		}
 
 		// check mouse events
-		if (Button()) {
+		if (GetCurrentButtonState()) {
 			changed = 2;
 			goto end;
 		}
@@ -755,7 +755,7 @@ int ReadAnalogEvent(int padnum, int analognum, int analogdir) {
 		}
 
 		// check mouse events
-		if (Button()) {
+		if (GetCurrentButtonState()) {
 			changed = 2;
 			goto end;
 		}

@@ -72,7 +72,7 @@
     pluginRef = nil;
     name = nil;
     path = [aPath retain];
-    NSString *fullPath = [[NSString stringWithCString:Config.PluginsDir] stringByAppendingPathComponent:path];
+    NSString *fullPath = [[[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)] stringByAppendingPathComponent:path];
     
     pluginRef = SysLoadLibrary([fullPath fileSystemRepresentation]);
     if (pluginRef == nil) {
@@ -105,7 +105,7 @@
     
     PSE_getLibName = (PSEgetLibName) SysLoadSym(pluginRef, "PSEgetLibName");
     if (SysLibError() == nil) {
-        name = [[NSString alloc] initWithCString:PSE_getLibName()];
+        name = [[NSString alloc] initWithCString:PSE_getLibName() encoding:NSUTF8StringEncoding];
     }
     
     PSE_getLibVersion = (PSEgetLibVersion) SysLoadSym(pluginRef, "PSEgetLibVersion");
@@ -117,7 +117,7 @@
     }
     
     // save the current modification date
-    NSDictionary *fattrs = [[NSFileManager defaultManager] fileAttributesAtPath:fullPath traverseLink:YES];
+    NSDictionary *fattrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[fullPath stringByResolvingSymlinksInPath] error:NULL];
     modDate = [[fattrs fileModificationDate] retain];
     
     active = 0;
@@ -150,7 +150,7 @@
     NSString *funcName = [arg objectAtIndex:0];
     long (*func)(void);
     
-    func = SysLoadSym(pluginRef, [funcName lossyCString]);
+    func = SysLoadSym(pluginRef, [funcName cStringUsingEncoding:NSUTF8StringEncoding]);
     if (SysLibError() == nil) {
         func();
     } else {
@@ -165,7 +165,7 @@
 - (long)initAs:(int)aType
 {
     char symbol[255];
-    long (*init)(void);
+    long (*init)();
     long (*initArg)(long arg);
     int res = PSE_ERR_FATAL;
     
@@ -173,7 +173,7 @@
         return 0;
     }
 
-    sprintf(symbol, "%sinit", [[PcsxrPlugin getPrefixForType:aType] lossyCString]);
+    sprintf(symbol, "%sinit", [[PcsxrPlugin getPrefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
     init = initArg = SysLoadSym(pluginRef, symbol);
     if (SysLibError() == nil) {
         if (aType != PSE_LT_PAD)
@@ -198,7 +198,7 @@
     char symbol[255];
     long (*shutdown)(void);
 
-    sprintf(symbol, "%sshutdown", [[PcsxrPlugin getPrefixForType:aType] lossyCString]);
+    sprintf(symbol, "%sshutdown", [[PcsxrPlugin getPrefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
     shutdown = SysLoadSym(pluginRef, symbol);
     if (SysLibError() == nil) {
         active &= ~aType;
@@ -212,7 +212,7 @@
 {
     char symbol[255];
 
-    sprintf(symbol, "%sabout", [[PcsxrPlugin getPrefixForType:aType] lossyCString]);
+    sprintf(symbol, "%sabout", [[PcsxrPlugin getPrefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
     SysLoadSym(pluginRef, symbol);
     
     return (SysLibError() == nil);
@@ -222,7 +222,7 @@
 {
     char symbol[255];
 
-    sprintf(symbol, "%sconfigure", [[PcsxrPlugin getPrefixForType:aType] lossyCString]);
+    sprintf(symbol, "%sconfigure", [[PcsxrPlugin getPrefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
     SysLoadSym(pluginRef, symbol);
     
     return (SysLibError() == nil);
@@ -233,8 +233,8 @@
     NSArray *arg;
     char symbol[255];
 
-    sprintf(symbol, "%sabout", [[PcsxrPlugin getPrefixForType:aType] lossyCString]);
-    arg = [[NSArray alloc] initWithObjects:[NSString stringWithCString:symbol], 
+    sprintf(symbol, "%sabout", [[PcsxrPlugin getPrefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
+    arg = [[NSArray alloc] initWithObjects:[NSString stringWithCString:symbol encoding:NSUTF8StringEncoding], 
                     [NSNumber numberWithInt:0], nil];
     
     // detach a new thread
@@ -247,8 +247,8 @@
     NSArray *arg;
     char symbol[255];
     
-    sprintf(symbol, "%sconfigure", [[PcsxrPlugin getPrefixForType:aType] lossyCString]);
-    arg = [[NSArray alloc] initWithObjects:[NSString stringWithCString:symbol], 
+    sprintf(symbol, "%sconfigure", [[PcsxrPlugin getPrefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
+    arg = [[NSArray alloc] initWithObjects:[NSString stringWithCString:symbol encoding:NSUTF8StringEncoding], 
                     [NSNumber numberWithInt:1], nil];
     
     // detach a new thread
@@ -292,11 +292,11 @@
 {
     // check that the file is still there with the same modification date
     NSFileManager *dfm = [NSFileManager defaultManager];
-    NSString *fullPath = [[NSString stringWithCString:Config.PluginsDir] stringByAppendingPathComponent:path];
+    NSString *fullPath = [[dfm stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)] stringByAppendingPathComponent:path];
     if (![dfm fileExistsAtPath:fullPath])
         return NO;
     
-    NSDictionary *fattrs = [dfm fileAttributesAtPath:fullPath traverseLink:YES];
+    NSDictionary *fattrs = [dfm attributesOfItemAtPath:[fullPath stringByResolvingSymlinksInPath] error:NULL];
     return [[fattrs fileModificationDate] isEqualToDate:modDate];
 }
 

@@ -129,7 +129,19 @@
     // actually not much to do here.
 	[[self openGLContext] flushBuffer];
     return;
- }
+}
 
+// don't know what this does, pasted it in from PeopsSoftGPU's PluginGLView because something was calling it
+- (void)clearBuffer:(BOOL)display
+{
+	if (display == NO) {
+		//[[self openGLContext] makeCurrentContext];
+		//glClear(GL_COLOR_BUFFER_BIT);
+		//[self loadTextures:NO];
+	} else {
+		noDisplay = YES;
+        //		[self setNeedsDisplay:true];
+	}
+}
 
 @end

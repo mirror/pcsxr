@@ -343,6 +343,7 @@ void iLogM32(u32 mem) {
 	ADD32ItoR(ESP, 8*2);
 }
 
+#if 0
 static void iDumpRegs() {
 	int i, j;
 
@@ -353,6 +354,7 @@ static void iDumpRegs() {
 		printf("\n");
 	}
 }
+#endif
 
 void iDumpBlock(char *ptr) {
 	FILE *f;
@@ -2942,7 +2944,7 @@ static void recRecompile() {
 	x86Align(32);
 	ptr = x86Ptr;
 
-	PC_RECP(psxRegs.pc) = x86Ptr;
+	PC_RECP(psxRegs.pc) = (uptr)x86Ptr;
 	pc = psxRegs.pc;
 	pcold = pc;
 

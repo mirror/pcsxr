@@ -33,14 +33,16 @@ NSString *saveStatePath;
 		[openDlg setCanChooseFiles:YES];
 		[openDlg setCanChooseDirectories:NO];
 
-		if ([openDlg runModal] == NSOKButton) {
+		if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 			NSArray* files = [openDlg filenames];
 			SetCdOpenCaseTime(time(NULL) + 2);
 			SetIsoFile((const char *)[[files objectAtIndex:0] fileSystemRepresentation]);
 		}
 	} else {
-		if (CDR_getDriveLetter() != nil) {
-			deviceName = [NSMutableString stringWithCString:CDR_getDriveLetter()];
+        char *driveLetter = CDR_getDriveLetter();
+        
+		if (driveLetter != nil) {
+			deviceName = [NSMutableString stringWithString:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:driveLetter length:strlen(driveLetter)]];
 
 			// delete the 'r' in 'rdisk'
 			rdiskRange = [deviceName rangeOfString:@"rdisk"];
@@ -108,9 +110,9 @@ NSString *saveStatePath;
 	[openDlg setCanChooseFiles:YES];
 	[openDlg setCanChooseDirectories:NO];
 
-	if ([openDlg runModalForDirectory:nil file:nil] == NSOKButton) {
-		NSArray* files = [openDlg filenames];
-		SetIsoFile((const char *)[[files objectAtIndex:0] fileSystemRepresentation]);
+	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
+		NSArray* urls = [openDlg URLs];
+		SetIsoFile((const char *)[[[urls objectAtIndex:0] path] fileSystemRepresentation]);
 		[EmuThread run];
     }
 }
@@ -124,14 +126,14 @@ NSString *saveStatePath;
 - (IBAction)freeze:(id)sender
 {
 	int num = [sender tag];
-	NSString *path = [NSString stringWithFormat:@"%@/%s-%3.3d.pcsxrstate", saveStatePath, CdromId, num];
+    NSString *path = [saveStatePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%s-%3.3d.pcsxrstate", CdromId, num]];
 
 	[EmuThread freezeAt:path which:num-1];
 }
 
 - (IBAction)defrost:(id)sender
 {
-	NSString *path = [NSString stringWithFormat:@"%@/%s-%3.3d.pcsxrstate", saveStatePath, CdromId, [sender tag]];
+	NSString *path = [saveStatePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%s-%3.3d.pcsxrstate", CdromId, [sender tag]]];
 	[EmuThread defrostAt:path];
 }
 
@@ -140,7 +142,7 @@ NSString *saveStatePath;
 	GPU_keypressed(GPU_FULLSCREEN_KEY);
 }
 
-- (BOOL)validateMenuItem:(id <NSMenuItem>)menuItem
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
 	if ([menuItem action] == @selector(pause:)) {
 		[menuItem setState:([EmuThread isPaused] ? NSOnState : NSOffState)];
@@ -169,7 +171,7 @@ NSString *saveStatePath;
 		if (![EmuThread active] || [EmuThread isRunBios])
 			return NO;
 
-		NSString *path = [NSString stringWithFormat:@"%@/%s-%3.3d.pcsxrstate", saveStatePath, CdromId, [menuItem tag]];
+		NSString *path = [saveStatePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%s-%3.3d.pcsxrstate", CdromId, [menuItem tag]]];
 		return (CheckState((char *)[path fileSystemRepresentation]) == 0);
 	}
 
@@ -284,7 +286,7 @@ NSString *saveStatePath;
 
 	char *str = (char *)[[prefStringKeys objectForKey:defaultKey] pointerValue];
 	if (str) {
-		[defaults setObject:[NSString stringWithCString:str] forKey:defaultKey];
+		[defaults setObject:[NSString stringWithCString:str encoding:NSUTF8StringEncoding] forKey:defaultKey];
 		return;
 	}
 
@@ -340,51 +342,44 @@ NSString *saveStatePath;
 		nil];
 
 	// setup application support paths
-	NSArray *libPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-	if ([libPaths count] > 0) {
-		NSString *path;
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSURL *supportURL = [manager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+    
+    if(supportURL != nil) {
+		NSURL *url;
 		BOOL dir;
 
 		// create them if needed
-		NSFileManager *dfm = [NSFileManager defaultManager];
-		NSString *supportPath = [NSString stringWithFormat:@"%@/Application Support", [libPaths objectAtIndex:0]];
-		if (![dfm fileExistsAtPath:supportPath isDirectory:&dir])
-			[dfm createDirectoryAtPath:supportPath attributes:nil];
+        url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Bios"];
+		if (![url checkResourceIsReachableAndReturnError:NULL])
+			[manager createDirectoryAtPath:[url path] withIntermediateDirectories:YES attributes:nil error:NULL];
 
-		path = [NSString stringWithFormat:@"%@/Pcsxr", supportPath];
-		if (![dfm fileExistsAtPath:path isDirectory:&dir])
-			[dfm createDirectoryAtPath:path attributes:nil];
+        url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Memory Cards"];
+		if (![url checkResourceIsReachableAndReturnError:NULL])
+            [manager createDirectoryAtPath:[url path] withIntermediateDirectories:YES attributes:nil error:NULL];
 
-		path = [NSString stringWithFormat:@"%@/Pcsxr/Bios", supportPath];
-		if (![dfm fileExistsAtPath:path isDirectory:&dir])
-			[dfm createDirectoryAtPath:path attributes:nil];
+        url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Patches"];
+		if (![url checkResourceIsReachableAndReturnError:NULL])
+            [manager createDirectoryAtPath:[url path] withIntermediateDirectories:YES attributes:nil error:NULL];
+        
+        saveStatePath = [[[supportURL URLByAppendingPathComponent:@"Pcsxr/Save States"] path] copy];
+		if (![manager fileExistsAtPath:saveStatePath isDirectory:&dir])
+			[manager createDirectoryAtPath:saveStatePath withIntermediateDirectories:YES attributes:nil error:NULL];
 
-		path = [NSString stringWithFormat:@"%@/Pcsxr/Memory Cards", supportPath];
-		if (![dfm fileExistsAtPath:path isDirectory:&dir])
-			[dfm createDirectoryAtPath:path attributes:nil];
-
-		path = [NSString stringWithFormat:@"%@/Pcsxr/Patches", supportPath];
-		if (![dfm fileExistsAtPath:path isDirectory:&dir])
-			[dfm createDirectoryAtPath:path attributes:nil];
-
-		saveStatePath = [[NSString stringWithFormat:@"%@/Pcsxr/Save States", supportPath] retain];
-		if (![dfm fileExistsAtPath:saveStatePath isDirectory:&dir])
-			[dfm createDirectoryAtPath:saveStatePath attributes:nil];
-
-		path = [NSString stringWithFormat:@"%@/Pcsxr/Memory Cards/Mcd001.mcr", supportPath];
-		str = [path fileSystemRepresentation];
+        url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Memory Cards/Mcd001.mcr"];
+		str = [[url path] fileSystemRepresentation];
 		if (str != nil) strncpy(Config.Mcd1, str, 255);
 
-		path = [NSString stringWithFormat:@"%@/Pcsxr/Memory Cards/Mcd002.mcr", supportPath];
-		str = [path fileSystemRepresentation];
+		url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Memory Cards/Mcd002.mcr"];
+		str = [[url path] fileSystemRepresentation];
 		if (str != nil) strncpy(Config.Mcd2, str, 255);
 
-		path = [NSString stringWithFormat:@"%@/Pcsxr/Bios/", supportPath];
-		str = [path fileSystemRepresentation];
+		url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Bios"];
+		str = [[url path] fileSystemRepresentation];
 		if (str != nil) strncpy(Config.BiosDir, str, 255);
 
-		path = [NSString stringWithFormat:@"%@/Pcsxr/Patches/", supportPath];
-		str = [path fileSystemRepresentation];
+		url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Patches"];
+		str = [[url path] fileSystemRepresentation];
 		if (str != nil) strncpy(Config.PatchesDir, str, 255);
 	} else {
 		strcpy(Config.BiosDir, "Bios/");
@@ -395,19 +390,20 @@ NSString *saveStatePath;
 	}
 
 	// set plugin path
-	path = [[[NSBundle mainBundle] builtInPlugInsPath] stringByAppendingString:@"/"];
+	path = [[NSBundle mainBundle] builtInPlugInsPath];
 	str = [path fileSystemRepresentation];
 	if (str != nil) strncpy(Config.PluginsDir, str, 255);
 
 	// locate a bios
 	biosList = [[NSMutableArray alloc] init];
-	NSFileManager *manager = [NSFileManager defaultManager];
-	NSArray *bioses = [manager directoryContentsAtPath:[NSString stringWithCString:Config.BiosDir]];
+	
+    NSString *biosDir = [manager stringWithFileSystemRepresentation:Config.BiosDir length:strlen(Config.BiosDir)];
+    NSArray *bioses = [manager contentsOfDirectoryAtPath:biosDir error:NULL];
 	if (bioses) {
-		int i;
+		NSUInteger i;
 		for (i = 0; i < [bioses count]; i++) {
 			NSString *file = [bioses objectAtIndex:i];
-			NSDictionary *attrib = [manager fileAttributesAtPath:[NSString stringWithFormat:@"%s%@", Config.BiosDir, file] traverseLink:YES];
+            NSDictionary *attrib = [manager attributesOfItemAtPath:[[biosDir stringByAppendingPathComponent:file] stringByResolvingSymlinksInPath] error:NULL];
 
 			if ([[attrib fileType] isEqualToString:NSFileTypeRegular]) {
 				unsigned long long size = [attrib fileSize];

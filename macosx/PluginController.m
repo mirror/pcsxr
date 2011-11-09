@@ -46,7 +46,7 @@
 - (void)setPluginsTo:(NSArray *)list withType:(int)type
 {
 	NSString *sel;
-	int i;
+	NSUInteger i;
 
 	// remember the list
 	pluginType = type;

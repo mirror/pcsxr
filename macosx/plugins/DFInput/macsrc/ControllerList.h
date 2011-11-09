@@ -21,13 +21,12 @@
 
 #define ControllerList NetPcsxrHIDInputPluginControllerList
 
-#import <Foundation/Foundation.h>
-#import <AppKit/NSTableView.h>
+#import <Cocoa/Cocoa.h>
 #include "cfg.h"
 
 @class KeyConfig;
 
-@interface ControllerList : NSObject {
+@interface ControllerList : NSObject <NSTableViewDataSource> {
 }
 
 - (id)initWithConfig;

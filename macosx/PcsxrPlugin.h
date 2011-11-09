@@ -10,7 +10,7 @@
 
 
 @interface PcsxrPlugin : NSObject {
-    CFBundleRef pluginRef;
+    void *pluginRef;
     
     NSString *path;
 	 NSDate *modDate;

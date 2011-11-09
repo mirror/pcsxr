@@ -3,20 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28586CC914651E9B0082B8EC /* NetSfPeopsSoftGPUConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28586CC714651E9B0082B8EC /* NetSfPeopsSoftGPUConfig.xib */; };
+		28586CCB14651EAB0082B8EC /* NetSfPeopsSoftGPUInterface.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28586CCA14651EAB0082B8EC /* NetSfPeopsSoftGPUInterface.xib */; };
 		2B038C07069183300082466B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2B038C05069183300082466B /* InfoPlist.strings */; };
 		2B957EB10635DFE400543905 /* PluginWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B957EAF0635DFE400543905 /* PluginWindow.m */; };
 		2B959DC106342C22000F2A2D /* drawgl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E5D64062B2CC1001D796E /* drawgl.m */; };
 		2B959DCD06342C24000F2A2D /* PluginGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BAF4FCA0632967A00DB9A16 /* PluginGLView.m */; };
 		2B959DD506342C25000F2A2D /* PluginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E5DF1062B36FB001D796E /* PluginWindowController.m */; };
-		2B959DE106342C31000F2A2D /* NetSfPeopsSoftGPUInterface.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2B3E5DED062B36A0001D796E /* NetSfPeopsSoftGPUInterface.nib */; };
 		2B959E4406342D32000F2A2D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B959E4306342D32000F2A2D /* OpenGL.framework */; };
 		2BB260A90777462E00F6854C /* PluginConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB260A70777462E00F6854C /* PluginConfigController.m */; };
 		2BD2E769077AF53E00657C69 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E767077AF53E00657C69 /* Credits.rtf */; };
-		2BD2E829077AFC2C00657C69 /* NetSfPeopsSoftGPUConfig.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E828077AFC2C00657C69 /* NetSfPeopsSoftGPUConfig.nib */; };
 		2BD7C777076E1FAB000F05ED /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B51949E06B3D2D200744730 /* GLUT.framework */; };
 		71E9EC06109F24E700E98D1D /* fps.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E9EBF4109F24E600E98D1D /* fps.c */; };
 		71E9EC08109F24E700E98D1D /* gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E9EBF6109F24E600E98D1D /* gpu.c */; };
@@ -28,11 +28,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28586CC814651E9B0082B8EC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsSoftGPUConfig.xib; sourceTree = "<group>"; };
+		28586CCA14651EAB0082B8EC /* NetSfPeopsSoftGPUInterface.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetSfPeopsSoftGPUInterface.xib; sourceTree = "<group>"; };
 		2B038C06069183300082466B /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2B038D2206918AA80082466B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2B371FBB0773859200B1DC0B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/NetSfPeopsSoftGPUConfig.nib; sourceTree = "<group>"; };
 		2B3E5D64062B2CC1001D796E /* drawgl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = drawgl.m; path = macsrc/drawgl.m; sourceTree = SOURCE_ROOT; };
-		2B3E5DED062B36A0001D796E /* NetSfPeopsSoftGPUInterface.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = NetSfPeopsSoftGPUInterface.nib; sourceTree = "<group>"; };
 		2B3E5DF0062B36FB001D796E /* PluginWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginWindowController.h; path = macsrc/PluginWindowController.h; sourceTree = SOURCE_ROOT; };
 		2B3E5DF1062B36FB001D796E /* PluginWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PluginWindowController.m; path = macsrc/PluginWindowController.m; sourceTree = SOURCE_ROOT; };
 		2B51949E06B3D2D200744730 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
@@ -85,7 +85,6 @@
 				71E9EBF0109F24B600E98D1D /* src */,
 				2BD2E2F40779F50B00657C69 /* macsrc */,
 				2BD2E818077AFB9F00657C69 /* Resources */,
-				2B3E5DED062B36A0001D796E /* NetSfPeopsSoftGPUInterface.nib */,
 				2B038D2206918AA80082466B /* Info.plist */,
 				2B3E5A0B062AAC34001D796E /* Frameworks */,
 				2B3E5A46062AACF3001D796E /* Products */,
@@ -129,7 +128,8 @@
 		2BD2E818077AFB9F00657C69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2BD2E828077AFC2C00657C69 /* NetSfPeopsSoftGPUConfig.nib */,
+				28586CC714651E9B0082B8EC /* NetSfPeopsSoftGPUConfig.xib */,
+				28586CCA14651EAB0082B8EC /* NetSfPeopsSoftGPUInterface.xib */,
 				2BD2E767077AF53E00657C69 /* Credits.rtf */,
 				2B038C05069183300082466B /* InfoPlist.strings */,
 			);
@@ -186,8 +186,11 @@
 /* Begin PBXProject section */
 		2B3E5A03062AAC1A001D796E /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 717084310FDFD328004F3EB4 /* Build configuration list for PBXProject "PeopsSoftGPU" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -211,10 +214,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B959DE106342C31000F2A2D /* NetSfPeopsSoftGPUInterface.nib in Resources */,
 				2B038C07069183300082466B /* InfoPlist.strings in Resources */,
-				2BD2E829077AFC2C00657C69 /* NetSfPeopsSoftGPUConfig.nib in Resources */,
 				2BD2E769077AF53E00657C69 /* Credits.rtf in Resources */,
+				28586CC914651E9B0082B8EC /* NetSfPeopsSoftGPUConfig.xib in Resources */,
+				28586CCB14651EAB0082B8EC /* NetSfPeopsSoftGPUInterface.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +246,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		28586CC714651E9B0082B8EC /* NetSfPeopsSoftGPUConfig.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28586CC814651E9B0082B8EC /* English */,
+			);
+			name = NetSfPeopsSoftGPUConfig.xib;
+			sourceTree = "<group>";
+		};
 		2B038C05069183300082466B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -259,18 +270,10 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		2BD2E828077AFC2C00657C69 /* NetSfPeopsSoftGPUConfig.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2B371FBB0773859200B1DC0B /* English */,
-			);
-			name = NetSfPeopsSoftGPUConfig.nib;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7170842D0FDFD328004F3EB4 /* Development */ = {
+		7170842D0FDFD328004F3EB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
@@ -310,15 +313,14 @@
 				);
 				WRAPPER_EXTENSION = psxplugin;
 			};
-			name = Development;
+			name = Debug;
 		};
-		7170842E0FDFD328004F3EB4 /* Deployment */ = {
+		7170842E0FDFD328004F3EB4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUGGING_SYMBOLS = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 3;
@@ -352,40 +354,48 @@
 				WRAPPER_EXTENSION = psxplugin;
 				ZERO_LINK = NO;
 			};
-			name = Deployment;
+			name = Release;
 		};
-		717084320FDFD328004F3EB4 /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
-				GCC_MODEL_TUNING = "";
-				HEADER_SEARCH_PATHS = (
-					../../../plugins/dfxvideo,
-					../../../libpcsxcore,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = "";
-				SYMROOT = ../../build;
-			};
-			name = Development;
-		};
-		717084330FDFD328004F3EB4 /* Deployment */ = {
+		717084320FDFD328004F3EB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
 					i386,
-					ppc,
+					x86_64,
 				);
 				GCC_MODEL_TUNING = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					../../../plugins/dfxvideo,
 					../../../libpcsxcore,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.6;
 				SYMROOT = ../../build;
+				WARNING_CFLAGS = "-Wall";
 			};
-			name = Deployment;
+			name = Debug;
+		};
+		717084330FDFD328004F3EB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					x86_64,
+				);
+				GCC_MODEL_TUNING = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					../../../plugins/dfxvideo,
+					../../../libpcsxcore,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx10.6;
+				SYMROOT = ../../build;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -393,20 +403,20 @@
 		7170842C0FDFD328004F3EB4 /* Build configuration list for PBXNativeTarget "gpuPeopsSoftGL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7170842D0FDFD328004F3EB4 /* Development */,
-				7170842E0FDFD328004F3EB4 /* Deployment */,
+				7170842D0FDFD328004F3EB4 /* Debug */,
+				7170842E0FDFD328004F3EB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 		717084310FDFD328004F3EB4 /* Build configuration list for PBXProject "PeopsSoftGPU" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				717084320FDFD328004F3EB4 /* Development */,
-				717084330FDFD328004F3EB4 /* Deployment */,
+				717084320FDFD328004F3EB4 /* Debug */,
+				717084330FDFD328004F3EB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

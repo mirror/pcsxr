@@ -330,6 +330,7 @@ void iLogM32(u32 mem) {
 	ADD32ItoR(ESP, 4*2);
 }
 
+#if 0
 static void iDumpRegs() {
 	int i, j;
 
@@ -340,6 +341,7 @@ static void iDumpRegs() {
 		printf("\n");
 	}
 }
+#endif
 
 void iDumpBlock(char *ptr) {
 	FILE *f;
@@ -1628,6 +1630,7 @@ void recLWL() {
 	}
 }
 
+#if 0
 static void recLWBlock(int count) {
 	u32 *code = (u32 *)PSXM(pc);
 	int i, respsave;
@@ -1702,6 +1705,7 @@ static void recLWBlock(int count) {
 	x86SetJ32(j32Ptr[5]);
 	resp = respsave;
 }
+#endif
 
 extern u32 LWR_MASK[4];
 extern u32 LWR_SHIFT[4];
@@ -1983,6 +1987,7 @@ static void recSW() {
 }
 //#endif
 
+#if 0
 static void recSWBlock(int count) {
 	u32 *code;
 	int i, respsave;
@@ -2050,6 +2055,7 @@ static void recSWBlock(int count) {
 	x86SetJ32(j32Ptr[5]);
 	resp = respsave;
 }
+#endif
 
 extern u32 SWL_MASK[4];
 extern u32 SWL_SHIFT[4];

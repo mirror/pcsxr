@@ -351,9 +351,8 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 			else 
 			{
 				szDebugText[0]=0;
-				if (szMenuBuf) {
-					strncat(szDispBuf, szMenuBuf, 63 - strlen(szDispBuf));
-				}
+
+                strncat(szDispBuf, szMenuBuf, 63 - strlen(szDispBuf));
 			}
 			
 			NSRect rect = [[[self openGLContext] view] bounds];

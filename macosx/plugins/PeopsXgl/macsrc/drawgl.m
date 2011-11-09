@@ -149,10 +149,15 @@ unsigned long ulInitDisplay(void)	// OPEN GAME WINDOW
 		BuildDispMenu(0);
 	}
 	
-	PluginWindowController *windowController = [PluginWindowController openGameView];
-	glView = [windowController getOpenGLView];
+    __block PluginWindowController *windowController;
+    
+    // this causes a runtime error if it's done on a thread other than the main thread
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        windowController = [PluginWindowController openGameView];
+        glView = [windowController getOpenGLView];
 	
-	[[windowController window] setTitle:[NSString stringWithCString:pCaptionText]];
+        [[windowController window] setTitle:[NSString stringWithCString:pCaptionText encoding:NSUTF8StringEncoding]];
+    });
 	
 	return (unsigned long)[windowController window];
 }
@@ -182,7 +187,7 @@ void SendContextBack(void)
 
 void SetVSync(long myValue)
 {
-    long DoItMyFriend = myValue;
+    GLint DoItMyFriend = myValue;
    [[glView openGLContext] setValues: &DoItMyFriend forParameter: NSOpenGLCPSwapInterval];
 
 }

@@ -3,10 +3,6 @@
 #import <Cocoa/Cocoa.h>
 #import "NamedSlider.h"
 
-void DoAbout();
-long DoConfiguration();
-void LoadConfiguration();
-
 #ifdef USEOPENAL
 #define PluginController NetSfPeopsALPluginController
 #else

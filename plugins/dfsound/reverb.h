@@ -16,6 +16,6 @@
  ***************************************************************************/
 
 void SetREVERB(unsigned short val);
-INLINE void StartREVERB(int ch);
-INLINE void StoreREVERB(int ch,int ns);
+void StartREVERB(int ch);
+void StoreREVERB(int ch,int ns);
 

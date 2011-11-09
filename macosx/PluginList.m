@@ -35,7 +35,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
     
     plugins = [[NSMutableArray alloc] initWithCapacity: 20];
 
-    dir = [NSString stringWithCString:Config.PluginsDir];
+    dir = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)];
     dirEnum = [[NSFileManager defaultManager] enumeratorAtPath:dir];
     
     while (pname = [dirEnum nextObject]) {
@@ -87,7 +87,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 
 - (id)init
 {
-	int i;
+	NSUInteger i;
 	
 	if (!(self = [super init]))
 		return nil;
@@ -98,7 +98,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 	activeGpuPlugin = activeSpuPlugin = activeCdrPlugin = activePadPlugin = nil;
 	
 	missingPlugins = NO;
-	for (i=0; i<sizeof(*typeList); i++) {
+	for (i = 0; i < sizeof(*typeList); i++) {
 		NSString *path = [defaults stringForKey:[PcsxrPlugin getDefaultKeyForType:typeList[i]]];
 		if (nil == path) {
 			missingPlugins = YES;
@@ -147,7 +147,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 {
 	NSDirectoryEnumerator *dirEnum;
 	NSString *pname, *dir;
-	int i;
+	NSUInteger i;
 	
 	// verify that the ones that are in list still works
 	for (i=0; i<[pluginList count]; i++) {
@@ -157,10 +157,10 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 	}
 	
 	// look for new ones in the plugin directory
-	dir = [NSString stringWithCString:Config.PluginsDir];
+	dir = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)];
 	dirEnum = [[NSFileManager defaultManager] enumeratorAtPath:dir];
 	
-	while (pname = [dirEnum nextObject]) {
+	while ((pname = [dirEnum nextObject])) {
 		if ([[pname pathExtension] isEqualToString:@"psxplugin"] || 
 			[[pname pathExtension] isEqualToString:@"so"]) {
 			[dirEnum skipDescendents]; /* don't enumerate this
@@ -181,7 +181,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 		PcsxrPlugin *plugin = [self activePluginForType:typeList[i]];
 		if (nil == plugin) {
 			NSArray *list = [self pluginsForType:typeList[i]];
-			int j;
+			NSUInteger j;
 			
 			for (j=0; j<[list count]; j++) {
 				if ([self setActivePlugin:[list objectAtIndex:j] forType:typeList[i]])
@@ -196,7 +196,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 - (NSArray *)pluginsForType:(int)typeMask
 {
 	NSMutableArray *types = [NSMutableArray array];
-	int i;
+	NSUInteger i;
 	
 	for (i=0; i<[pluginList count]; i++) {
 		PcsxrPlugin *plugin = [pluginList objectAtIndex:i];
@@ -214,7 +214,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 	if (nil == path)
 		return NO;
 	
-	int i;
+	NSUInteger i;
 	for (i=0; i<[pluginList count]; i++) {
 		if ([[[pluginList objectAtIndex:i] path] isEqualToString:path])
 			return YES;

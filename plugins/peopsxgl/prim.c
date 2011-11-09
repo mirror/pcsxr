@@ -146,7 +146,7 @@ unsigned short BGR24to16 (uint32_t BGR)
 // OpenGL primitive drawing commands
 ////////////////////////////////////////////////////////////////////////
 
-__inline void PRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
                                    OGLVertex* vertex3, OGLVertex* vertex4) 
 {
  glBegin(GL_TRIANGLE_STRIP);
@@ -166,7 +166,7 @@ __inline void PRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex2,
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawTexturedTri(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawTexturedTri(OGLVertex* vertex1, OGLVertex* vertex2, 
                                   OGLVertex* vertex3) 
 {
  glBegin(GL_TRIANGLES);
@@ -183,7 +183,7 @@ __inline void PRIMdrawTexturedTri(OGLVertex* vertex1, OGLVertex* vertex2,
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawTexGouraudTriColor(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawTexGouraudTriColor(OGLVertex* vertex1, OGLVertex* vertex2, 
                                          OGLVertex* vertex3) 
 {
  glBegin(GL_TRIANGLES);
@@ -204,7 +204,7 @@ __inline void PRIMdrawTexGouraudTriColor(OGLVertex* vertex1, OGLVertex* vertex2,
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawTexGouraudTriColorQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawTexGouraudTriColorQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
                                              OGLVertex* vertex3, OGLVertex* vertex4) 
 {
  glBegin(GL_TRIANGLE_STRIP);
@@ -228,7 +228,7 @@ __inline void PRIMdrawTexGouraudTriColorQuad(OGLVertex* vertex1, OGLVertex* vert
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3) 
+static __inline void PRIMdrawTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3) 
 {
  glBegin(GL_TRIANGLES);
   glVertex3fv(&vertex1->x);
@@ -239,7 +239,7 @@ __inline void PRIMdrawTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* ver
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawTri2(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawTri2(OGLVertex* vertex1, OGLVertex* vertex2, 
                            OGLVertex* vertex3, OGLVertex* vertex4) 
 {
  glBegin(GL_TRIANGLE_STRIP);                           
@@ -252,7 +252,7 @@ __inline void PRIMdrawTri2(OGLVertex* vertex1, OGLVertex* vertex2,
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawGouraudTriColor(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawGouraudTriColor(OGLVertex* vertex1, OGLVertex* vertex2, 
                                       OGLVertex* vertex3) 
 {
  glBegin(GL_TRIANGLES);                           
@@ -269,7 +269,7 @@ __inline void PRIMdrawGouraudTriColor(OGLVertex* vertex1, OGLVertex* vertex2,
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawGouraudTri2Color(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawGouraudTri2Color(OGLVertex* vertex1, OGLVertex* vertex2, 
                                        OGLVertex* vertex3, OGLVertex* vertex4) 
 {
  glBegin(GL_TRIANGLE_STRIP);                           
@@ -289,7 +289,7 @@ __inline void PRIMdrawGouraudTri2Color(OGLVertex* vertex1, OGLVertex* vertex2,
 
 ///////////////////////////////////////////////////////// 
 
-__inline void PRIMdrawFlatLine(OGLVertex* vertex1, OGLVertex* vertex2,OGLVertex* vertex3, OGLVertex* vertex4)
+static __inline void PRIMdrawFlatLine(OGLVertex* vertex1, OGLVertex* vertex2,OGLVertex* vertex3, OGLVertex* vertex4)
 {
  glBegin(GL_QUADS);
 
@@ -304,7 +304,7 @@ __inline void PRIMdrawFlatLine(OGLVertex* vertex1, OGLVertex* vertex2,OGLVertex*
 
 ///////////////////////////////////////////////////////// 
      
-__inline void PRIMdrawGouraudLine(OGLVertex* vertex1, OGLVertex* vertex2,OGLVertex* vertex3, OGLVertex* vertex4)
+static __inline void PRIMdrawGouraudLine(OGLVertex* vertex1, OGLVertex* vertex2,OGLVertex* vertex3, OGLVertex* vertex4)
 {
  glBegin(GL_QUADS);
 
@@ -324,7 +324,7 @@ __inline void PRIMdrawGouraudLine(OGLVertex* vertex1, OGLVertex* vertex2,OGLVert
 
 ///////////////////////////////////////////////////////// 
              
-__inline void PRIMdrawQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
+static __inline void PRIMdrawQuad(OGLVertex* vertex1, OGLVertex* vertex2, 
                            OGLVertex* vertex3, OGLVertex* vertex4) 
 {
  glBegin(GL_QUADS);
@@ -525,7 +525,7 @@ void SetSemiTransMulti(int Pass)
 // Set several rendering stuff including blending 
 ////////////////////////////////////////////////////////////////////////
 
-__inline void SetZMask3O(void)
+static __inline void SetZMask3O(void)
 {
  if(iUseMask && DrawSemiTrans && !iSetMask)
   {
@@ -534,7 +534,7 @@ __inline void SetZMask3O(void)
   }
 }
 
-__inline void SetZMask3(void)
+static __inline void SetZMask3(void)
 {
  if(iUseMask)
   {
@@ -548,7 +548,7 @@ __inline void SetZMask3(void)
   }
 }
 
-__inline void SetZMask3NT(void)
+static __inline void SetZMask3NT(void)
 {
  if(iUseMask)
   {
@@ -564,7 +564,7 @@ __inline void SetZMask3NT(void)
 
 ////////////////////////////////////////////////////////////////////////
 
-__inline void SetZMask4O(void)
+static __inline void SetZMask4O(void)
 {
  if(iUseMask && DrawSemiTrans && !iSetMask)
   {
@@ -573,7 +573,7 @@ __inline void SetZMask4O(void)
   }
 }
 
-__inline void SetZMask4(void)
+static __inline void SetZMask4(void)
 {
  if(iUseMask)
   {
@@ -587,7 +587,7 @@ __inline void SetZMask4(void)
   }
 }
 
-__inline void SetZMask4NT(void)
+static __inline void SetZMask4NT(void)
 {
  if(iUseMask)
   {
@@ -601,7 +601,7 @@ __inline void SetZMask4NT(void)
   }
 }
 
-__inline void SetZMask4SP(void)
+static __inline void SetZMask4SP(void)
 {
  if(iUseMask)
   {
@@ -622,7 +622,7 @@ __inline void SetZMask4SP(void)
 
 ////////////////////////////////////////////////////////////////////////
 
-__inline void SetRenderState(uint32_t DrawAttributes)
+static __inline void SetRenderState(uint32_t DrawAttributes)
 {
  bDrawNonShaded = (SHADETEXBIT(DrawAttributes)) ? TRUE : FALSE;
  DrawSemiTrans = (SEMITRANSBIT(DrawAttributes)) ? TRUE : FALSE;
@@ -630,7 +630,7 @@ __inline void SetRenderState(uint32_t DrawAttributes)
 
 ////////////////////////////////////////////////////////////////////////                                          
 
-__inline void SetRenderColor(uint32_t DrawAttributes)
+static __inline void SetRenderColor(uint32_t DrawAttributes)
 {
  if(bDrawNonShaded) {g_m1=g_m2=g_m3=128;}
  else

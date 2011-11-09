@@ -26,7 +26,7 @@
 extern NSWindow *gameWindow;
 extern PluginWindowController *gameController;
 
-@interface PluginWindowController : NSWindowController
+@interface PluginWindowController : NSWindowController <NSWindowDelegate>
 {
     IBOutlet NSOpenGLView *glView;
 	 

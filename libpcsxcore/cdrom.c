@@ -501,7 +501,7 @@ static void ReadTrack( u8 *time ) {
 }
 
 
-static CDXA_Attenuation( s16 *buf, int size, int stereo, int attenuate_type )
+static void CDXA_Attenuation( s16 *buf, int size, int stereo, int attenuate_type )
 {
 	s16 *spsound;
 	s32 lc,rc;
@@ -1632,9 +1632,9 @@ void cdrReadInterrupt() {
 			int ret = xa_decode_sector(&cdr.Xa, cdr.Transfer+4, cdr.FirstSector);
 
 			if (!ret) {
+#if 0
 				int xa_type;
 
-#if 0
 				// save - set only for FirstSector
 				xa_type = cdr.Xa.stereo;
 

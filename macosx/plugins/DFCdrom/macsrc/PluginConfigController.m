@@ -135,7 +135,7 @@ void ReadConfig()
 
 	// load from preferences
 	[keyValues release];
-	keyValues = [[defaults dictionaryForKey:PrefsKey] retain];
+	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 
 	[Cached setIntValue:[[keyValues objectForKey:@"Threaded"] intValue]];
 	[CacheSize setIntValue:[[keyValues objectForKey:@"Cache Size"] intValue]];

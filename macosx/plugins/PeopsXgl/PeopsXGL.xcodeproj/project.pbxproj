@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28586CBE14651D960082B8EC /* NetSfPeopsOpenGLConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28586CBC14651D960082B8EC /* NetSfPeopsOpenGLConfig.xib */; };
+		28586CC014651E560082B8EC /* NetSfPeopsOpenGLGPUInterface.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28586CBF14651E560082B8EC /* NetSfPeopsOpenGLGPUInterface.xib */; };
 		2B038C07069183300082466B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2B038C05069183300082466B /* InfoPlist.strings */; };
 		2B959E4406342D32000F2A2D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B959E4306342D32000F2A2D /* OpenGL.framework */; };
 		2BD2E769077AF53E00657C69 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E767077AF53E00657C69 /* Credits.rtf */; };
@@ -15,9 +17,7 @@
 		3F31AF761302D4B600CBB551 /* PluginGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F31AF6F1302D4B600CBB551 /* PluginGLView.m */; };
 		3F31AF771302D4B600CBB551 /* PluginWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F31AF711302D4B600CBB551 /* PluginWindow.m */; };
 		3F31AF781302D4B600CBB551 /* PluginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F31AF731302D4B600CBB551 /* PluginWindowController.m */; };
-		3F7F38011307996100556C34 /* NetSfPeopsOpenGLGPUInterface.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F38001307996100556C34 /* NetSfPeopsOpenGLGPUInterface.nib */; };
 		3F7F38041307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F38031307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.m */; };
-		3F7F3808130799CA00556C34 /* NetSfPeopsOpenGLConfig.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F3806130799CA00556C34 /* NetSfPeopsOpenGLConfig.nib */; };
 		3F7F384813079BFD00556C34 /* texture.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F383613079BFD00556C34 /* texture.c */; };
 		3F7F384913079BFD00556C34 /* menu.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F383913079BFD00556C34 /* menu.c */; };
 		3F7F384A13079BFD00556C34 /* prim.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F383B13079BFD00556C34 /* prim.c */; };
@@ -30,6 +30,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28586CBD14651D960082B8EC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = plugins/PeopsXgl/English.lproj/NetSfPeopsOpenGLConfig.xib; sourceTree = "<group>"; };
+		28586CBF14651E560082B8EC /* NetSfPeopsOpenGLGPUInterface.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetSfPeopsOpenGLGPUInterface.xib; sourceTree = "<group>"; };
+		28B467F91463DA5B0083F129 /* drawgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = drawgl.h; path = macsrc/drawgl.h; sourceTree = "<group>"; };
 		2B038C06069183300082466B /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2B038D2206918AA80082466B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B51949E06B3D2D200744730 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
@@ -44,23 +47,21 @@
 		3F31AF711302D4B600CBB551 /* PluginWindow.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PluginWindow.m; path = macsrc/PluginWindow.m; sourceTree = SOURCE_ROOT; };
 		3F31AF721302D4B600CBB551 /* PluginWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginWindowController.h; path = macsrc/PluginWindowController.h; sourceTree = SOURCE_ROOT; };
 		3F31AF731302D4B600CBB551 /* PluginWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PluginWindowController.m; path = macsrc/PluginWindowController.m; sourceTree = SOURCE_ROOT; };
-		3F7F38001307996100556C34 /* NetSfPeopsOpenGLGPUInterface.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = NetSfPeopsOpenGLGPUInterface.nib; sourceTree = SOURCE_ROOT; };
 		3F7F38021307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = NetSfPeopsOpenGLPluginConfigController.h; path = macsrc/NetSfPeopsOpenGLPluginConfigController.h; sourceTree = SOURCE_ROOT; };
 		3F7F38031307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = NetSfPeopsOpenGLPluginConfigController.m; path = macsrc/NetSfPeopsOpenGLPluginConfigController.m; sourceTree = SOURCE_ROOT; };
-		3F7F3807130799CA00556C34 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/NetSfPeopsOpenGLConfig.nib; sourceTree = "<group>"; };
 		3F7F383313079BFD00556C34 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; lineEnding = 2; name = stdafx.h; path = ../../../plugins/peopsxgl/stdafx.h; sourceTree = SOURCE_ROOT; };
 		3F7F383513079BFD00556C34 /* texture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = texture.h; path = ../../../plugins/peopsxgl/texture.h; sourceTree = SOURCE_ROOT; };
-		3F7F383613079BFD00556C34 /* texture.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = texture.c; path = ../../../plugins/peopsxgl/texture.c; sourceTree = SOURCE_ROOT; };
+		3F7F383613079BFD00556C34 /* texture.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = texture.c; path = ../../../plugins/peopsxgl/texture.c; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		3F7F383713079BFD00556C34 /* key.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = key.h; path = ../../../plugins/peopsxgl/key.h; sourceTree = SOURCE_ROOT; };
 		3F7F383813079BFD00556C34 /* menu.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = menu.h; path = ../../../plugins/peopsxgl/menu.h; sourceTree = SOURCE_ROOT; };
-		3F7F383913079BFD00556C34 /* menu.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = menu.c; path = ../../../plugins/peopsxgl/menu.c; sourceTree = SOURCE_ROOT; };
+		3F7F383913079BFD00556C34 /* menu.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = menu.c; path = ../../../plugins/peopsxgl/menu.c; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		3F7F383A13079BFD00556C34 /* gpu.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = gpu.h; path = ../../../plugins/peopsxgl/gpu.h; sourceTree = SOURCE_ROOT; };
 		3F7F383B13079BFD00556C34 /* prim.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = prim.c; path = ../../../plugins/peopsxgl/prim.c; sourceTree = SOURCE_ROOT; };
 		3F7F383C13079BFD00556C34 /* key.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = key.c; path = ../../../plugins/peopsxgl/key.c; sourceTree = SOURCE_ROOT; };
 		3F7F383D13079BFD00556C34 /* fps.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = fps.c; path = ../../../plugins/peopsxgl/fps.c; sourceTree = SOURCE_ROOT; };
 		3F7F383F13079BFD00556C34 /* gl_ext.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = gl_ext.h; path = ../../../plugins/peopsxgl/gl_ext.h; sourceTree = SOURCE_ROOT; };
 		3F7F384013079BFD00556C34 /* fps.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = fps.h; path = ../../../plugins/peopsxgl/fps.h; sourceTree = SOURCE_ROOT; };
-		3F7F384113079BFD00556C34 /* gpu.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = gpu.c; path = ../../../plugins/peopsxgl/gpu.c; sourceTree = SOURCE_ROOT; };
+		3F7F384113079BFD00556C34 /* gpu.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = gpu.c; path = ../../../plugins/peopsxgl/gpu.c; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		3F7F384213079BFD00556C34 /* soft.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = soft.h; path = ../../../plugins/peopsxgl/soft.h; sourceTree = SOURCE_ROOT; };
 		3F7F384313079BFD00556C34 /* soft.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = soft.c; path = ../../../plugins/peopsxgl/soft.c; sourceTree = SOURCE_ROOT; };
 		3F7F384413079BFD00556C34 /* prim.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = prim.h; path = ../../../plugins/peopsxgl/prim.h; sourceTree = SOURCE_ROOT; };
@@ -87,7 +88,6 @@
 		2B3E59FF062AAC1A001D796E = {
 			isa = PBXGroup;
 			children = (
-				3F7F38001307996100556C34 /* NetSfPeopsOpenGLGPUInterface.nib */,
 				71E9EBF0109F24B600E98D1D /* src */,
 				2BD2E2F40779F50B00657C69 /* macsrc */,
 				2BD2E818077AFB9F00657C69 /* Resources */,
@@ -119,6 +119,7 @@
 			children = (
 				3F7F38021307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.h */,
 				3F7F38031307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.m */,
+				28B467F91463DA5B0083F129 /* drawgl.h */,
 				3F31AF6A1302D4B600CBB551 /* drawgl.m */,
 				3F31AF6B1302D4B600CBB551 /* ExtendedKeys.h */,
 				3F31AF6E1302D4B600CBB551 /* PluginGLView.h */,
@@ -134,7 +135,8 @@
 		2BD2E818077AFB9F00657C69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3F7F3806130799CA00556C34 /* NetSfPeopsOpenGLConfig.nib */,
+				28586CBC14651D960082B8EC /* NetSfPeopsOpenGLConfig.xib */,
+				28586CBF14651E560082B8EC /* NetSfPeopsOpenGLGPUInterface.xib */,
 				2BD2E767077AF53E00657C69 /* Credits.rtf */,
 				2B038C05069183300082466B /* InfoPlist.strings */,
 			);
@@ -194,8 +196,11 @@
 /* Begin PBXProject section */
 		2B3E5A03062AAC1A001D796E /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 717084310FDFD328004F3EB4 /* Build configuration list for PBXProject "PeopsXGL" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -221,8 +226,8 @@
 			files = (
 				2B038C07069183300082466B /* InfoPlist.strings in Resources */,
 				2BD2E769077AF53E00657C69 /* Credits.rtf in Resources */,
-				3F7F38011307996100556C34 /* NetSfPeopsOpenGLGPUInterface.nib in Resources */,
-				3F7F3808130799CA00556C34 /* NetSfPeopsOpenGLConfig.nib in Resources */,
+				28586CBE14651D960082B8EC /* NetSfPeopsOpenGLConfig.xib in Resources */,
+				28586CC014651E560082B8EC /* NetSfPeopsOpenGLGPUInterface.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +258,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		28586CBC14651D960082B8EC /* NetSfPeopsOpenGLConfig.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28586CBD14651D960082B8EC /* English */,
+			);
+			name = NetSfPeopsOpenGLConfig.xib;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 		2B038C05069183300082466B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -269,18 +283,10 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		3F7F3806130799CA00556C34 /* NetSfPeopsOpenGLConfig.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3F7F3807130799CA00556C34 /* English */,
-			);
-			name = NetSfPeopsOpenGLConfig.nib;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7170842D0FDFD328004F3EB4 /* Development */ = {
+		7170842D0FDFD328004F3EB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
@@ -319,15 +325,14 @@
 				);
 				WRAPPER_EXTENSION = psxplugin;
 			};
-			name = Development;
+			name = Debug;
 		};
-		7170842E0FDFD328004F3EB4 /* Deployment */ = {
+		7170842E0FDFD328004F3EB4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUGGING_SYMBOLS = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 3;
@@ -361,44 +366,55 @@
 				WRAPPER_EXTENSION = psxplugin;
 				ZERO_LINK = NO;
 			};
-			name = Deployment;
+			name = Release;
 		};
-		717084320FDFD328004F3EB4 /* Development */ = {
+		717084320FDFD328004F3EB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = (
+					x86_64,
+					i386,
+				);
 				GCC_MODEL_TUNING = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				HEADER_SEARCH_PATHS = (
 					../../../plugins/peopsxgl,
 					../../../libpcsxcore,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.6;
 				SYMROOT = ../../build;
+				WARNING_CFLAGS = "-Wall";
 			};
-			name = Development;
+			name = Debug;
 		};
-		717084330FDFD328004F3EB4 /* Deployment */ = {
+		717084330FDFD328004F3EB4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = i386;
+				ARCHS = (
+					x86_64,
+					i386,
+				);
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_UNROLL_LOOPS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				HEADER_SEARCH_PATHS = (
 					../../../plugins/peopsxgl,
 					../../../libpcsxcore,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "-fomit-frame-pointer";
-				SDKROOT = "";
+				SDKROOT = macosx10.6;
 				SYMROOT = ../../build;
+				WARNING_CFLAGS = "-Wall";
 			};
-			name = Deployment;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -406,20 +422,20 @@
 		7170842C0FDFD328004F3EB4 /* Build configuration list for PBXNativeTarget "gpuPeopsXGL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7170842D0FDFD328004F3EB4 /* Development */,
-				7170842E0FDFD328004F3EB4 /* Deployment */,
+				7170842D0FDFD328004F3EB4 /* Debug */,
+				7170842E0FDFD328004F3EB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 		717084310FDFD328004F3EB4 /* Build configuration list for PBXProject "PeopsXGL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				717084320FDFD328004F3EB4 /* Development */,
-				717084330FDFD328004F3EB4 /* Deployment */,
+				717084320FDFD328004F3EB4 /* Debug */,
+				717084330FDFD328004F3EB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

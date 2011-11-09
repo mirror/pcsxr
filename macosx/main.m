@@ -79,7 +79,7 @@ int SysInit() {
 
 	LoadMcds(Config.Mcd1, Config.Mcd2);
 #ifdef USE_POWER_ASSERTION
-	IOReturn success= IOPMAssertionCreate(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, &powerAssertion);
+	IOReturn success= IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, CFSTR("SysInit()"), &powerAssertion);
 	if (success != kIOReturnSuccess) {
 		NSLog(@"Unable to stop sleep, error code %d", success);
 	}
@@ -110,21 +110,21 @@ void SysPrintf(const char *fmt, ...) {
 
 void SysMessage(const char *fmt, ...) {
 	va_list list;
-	char msg[512];
 
-	NSString *locFmtString = NSLocalizedString([NSString stringWithCString:fmt], nil);
+	NSString *locFmtString = NSLocalizedString([NSString stringWithCString:fmt encoding:NSUTF8StringEncoding], nil);
 
 	va_start(list, fmt);
-	vsprintf(msg, [locFmtString lossyCString], list);
+    NSString *msg = [[NSString alloc] initWithFormat:locFmtString arguments:list];
 	va_end(list);
-
-	NSRunAlertPanel(NSLocalizedString(@"Error!", nil),
-		[NSString stringWithCString:msg], 
-		nil, nil, nil);
+    
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedFailureReasonErrorKey];
+    [NSApp presentError:[NSError errorWithDomain:@"Unknown Domain" code:-1 userInfo:userInfo]];
+    
+    [msg release];
 }
 
 void *SysLoadLibrary(const char *lib) {
-	NSBundle *bundle = [NSBundle bundleWithPath:[NSString stringWithCString:lib]];
+	NSBundle *bundle = [NSBundle bundleWithPath:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:lib length:strlen(lib)]];
 	if (bundle != nil) {
 		return dlopen([[bundle executablePath] fileSystemRepresentation], RTLD_LAZY /*RTLD_NOW*/);
 	}

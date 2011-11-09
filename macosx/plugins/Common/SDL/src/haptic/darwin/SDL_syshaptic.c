@@ -90,48 +90,48 @@ static const char *
 FFStrError(HRESULT err)
 {
     switch (err) {
-    case FFERR_DEVICEFULL:
+    case (HRESULT)FFERR_DEVICEFULL:
         return "device full";
         /* This should be valid, but for some reason isn't defined... */
         /*case FFERR_DEVICENOTREG:
            return "device not registered"; */
-    case FFERR_DEVICEPAUSED:
+    case (HRESULT)FFERR_DEVICEPAUSED:
         return "device paused";
-    case FFERR_DEVICERELEASED:
+    case (HRESULT)FFERR_DEVICERELEASED:
         return "device released";
-    case FFERR_EFFECTPLAYING:
+    case (HRESULT)FFERR_EFFECTPLAYING:
         return "effect playing";
-    case FFERR_EFFECTTYPEMISMATCH:
+    case (HRESULT)FFERR_EFFECTTYPEMISMATCH:
         return "effect type mismatch";
-    case FFERR_EFFECTTYPENOTSUPPORTED:
+    case (HRESULT)FFERR_EFFECTTYPENOTSUPPORTED:
         return "effect type not supported";
-    case FFERR_GENERIC:
+    case (HRESULT)FFERR_GENERIC:
         return "undetermined error";
-    case FFERR_HASEFFECTS:
+    case (HRESULT)FFERR_HASEFFECTS:
         return "device has effects";
-    case FFERR_INCOMPLETEEFFECT:
+    case (HRESULT)FFERR_INCOMPLETEEFFECT:
         return "incomplete effect";
-    case FFERR_INTERNAL:
+    case (HRESULT)FFERR_INTERNAL:
         return "internal fault";
-    case FFERR_INVALIDDOWNLOADID:
+    case (HRESULT)FFERR_INVALIDDOWNLOADID:
         return "invalid download id";
-    case FFERR_INVALIDPARAM:
+    case (HRESULT)FFERR_INVALIDPARAM:
         return "invalid parameter";
-    case FFERR_MOREDATA:
+    case (HRESULT)FFERR_MOREDATA:
         return "more data";
-    case FFERR_NOINTERFACE:
+    case (HRESULT)FFERR_NOINTERFACE:
         return "interface not supported";
-    case FFERR_NOTDOWNLOADED:
+    case (HRESULT)FFERR_NOTDOWNLOADED:
         return "effect is not downloaded";
-    case FFERR_NOTINITIALIZED:
+    case (HRESULT)FFERR_NOTINITIALIZED:
         return "object has not been initialized";
-    case FFERR_OUTOFMEMORY:
+    case (HRESULT)FFERR_OUTOFMEMORY:
         return "out of memory";
-    case FFERR_UNPLUGGED:
+    case (HRESULT)FFERR_UNPLUGGED:
         return "device is unplugged";
-    case FFERR_UNSUPPORTED:
+    case (HRESULT)FFERR_UNSUPPORTED:
         return "function call unsupported";
-    case FFERR_UNSUPPORTEDAXIS:
+    case (HRESULT)FFERR_UNSUPPORTEDAXIS:
         return "axis unsupported";
 
     default:
@@ -426,7 +426,7 @@ SDL_SYS_HapticOpenFromService(SDL_Haptic * haptic, io_service_t service)
 
     /* Get supported features. */
     ret2 = GetSupportedFeatures(haptic);
-    if (haptic->supported < 0) {
+    if (ret2 < 0) {
         goto open_err;
     }
 

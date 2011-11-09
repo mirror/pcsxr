@@ -19,14 +19,14 @@
 #include "pad.h"
 
 #if SDL_VERSION_ATLEAST(1,3,0)
-static SDL_HapticEffect haptic_rumbleEffect;
+//static SDL_HapticEffect haptic_rumbleEffect;
 #endif
 
 void JoyInitHaptic()
 {
 #if SDL_VERSION_ATLEAST(1,3,0)
   uint8_t i;
-  unsigned int haptic_query = 0;
+    //unsigned int haptic_query = 0;
   for (i = 0; i < 2; i++)
   {
     if (g.PadState[i].JoyDev && SDL_JoystickIsHaptic(g.PadState[i].JoyDev))

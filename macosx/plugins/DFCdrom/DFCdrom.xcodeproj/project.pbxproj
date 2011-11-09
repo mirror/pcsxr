@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28586CC614651E870082B8EC /* DFCdromPluginConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28586CC414651E870082B8EC /* DFCdromPluginConfig.xib */; };
 		2BD707180555997500CB5D9B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD707170555997500CB5D9B /* IOKit.framework */; };
 		713DB2E811F113C30001BDD4 /* cdr.c in Sources */ = {isa = PBXBuildFile; fileRef = 713DB2E311F113C30001BDD4 /* cdr.c */; };
 		713DB2E911F113C30001BDD4 /* cdr.h in Headers */ = {isa = PBXBuildFile; fileRef = 713DB2E411F113C30001BDD4 /* cdr.h */; };
@@ -18,7 +19,6 @@
 		71F3C38611F3CFED007B9F12 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71F3C38511F3CFED007B9F12 /* AppKit.framework */; };
 		71F3C38811F3CFF7007B9F12 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71F3C38711F3CFF7007B9F12 /* Carbon.framework */; };
 		71F3C47A11F3D108007B9F12 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71F3C47811F3D108007B9F12 /* Credits.rtf */; };
-		71F3C49D11F3D2B3007B9F12 /* DFCdromPluginConfig.nib in Resources */ = {isa = PBXBuildFile; fileRef = 71F3C49B11F3D2B3007B9F12 /* DFCdromPluginConfig.nib */; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
 		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
@@ -26,18 +26,18 @@
 /* Begin PBXFileReference section */
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
+		28586CC514651E870082B8EC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/DFCdromPluginConfig.xib; sourceTree = "<group>"; };
 		2BD707170555997500CB5D9B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
-		713DB2E311F113C30001BDD4 /* cdr.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = cdr.c; path = ../../../plugins/dfcdrom/cdr.c; sourceTree = SOURCE_ROOT; };
+		713DB2E311F113C30001BDD4 /* cdr.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = cdr.c; path = ../../../plugins/dfcdrom/cdr.c; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		713DB2E411F113C30001BDD4 /* cdr.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = cdr.h; path = ../../../plugins/dfcdrom/cdr.h; sourceTree = SOURCE_ROOT; };
-		713DB2E611F113C30001BDD4 /* util.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = util.c; path = ../../../plugins/dfcdrom/util.c; sourceTree = SOURCE_ROOT; };
-		71F3C32411F3CD0B007B9F12 /* cdr-macosx.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = "cdr-macosx.c"; path = "macsrc/cdr-macosx.c"; sourceTree = "<group>"; };
+		713DB2E611F113C30001BDD4 /* util.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = util.c; path = ../../../plugins/dfcdrom/util.c; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.c; };
+		71F3C32411F3CD0B007B9F12 /* cdr-macosx.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = "cdr-macosx.c"; path = "macsrc/cdr-macosx.c"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		71F3C32511F3CD0B007B9F12 /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = cfg.c; path = macsrc/cfg.c; sourceTree = "<group>"; };
 		71F3C32611F3CD0B007B9F12 /* PluginConfigController.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = PluginConfigController.h; path = macsrc/PluginConfigController.h; sourceTree = "<group>"; };
 		71F3C32711F3CD0B007B9F12 /* PluginConfigController.m */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.objc; name = PluginConfigController.m; path = macsrc/PluginConfigController.m; sourceTree = "<group>"; };
 		71F3C38511F3CFED007B9F12 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		71F3C38711F3CFF7007B9F12 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		71F3C47911F3D108007B9F12 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
-		71F3C49C11F3D2B3007B9F12 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/DFCdromPluginConfig.nib; sourceTree = "<group>"; };
 		8D576316048677EA00EA77CD /* DFCdrom.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DFCdrom.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,7 +82,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				71F3C49B11F3D2B3007B9F12 /* DFCdromPluginConfig.nib */,
+				28586CC414651E870082B8EC /* DFCdromPluginConfig.xib */,
 				71F3C47811F3D108007B9F12 /* Credits.rtf */,
 				8D576317048677EA00EA77CD /* Info.plist */,
 				8D5B49A704867FD3000E48DA /* InfoPlist.strings */,
@@ -168,8 +168,11 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 7107359E0FDEED75004AD098 /* Build configuration list for PBXProject "DFCdrom" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -194,7 +197,7 @@
 			files = (
 				8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */,
 				71F3C47A11F3D108007B9F12 /* Credits.rtf in Resources */,
-				71F3C49D11F3D2B3007B9F12 /* DFCdromPluginConfig.nib in Resources */,
+				28586CC614651E870082B8EC /* DFCdromPluginConfig.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,20 +229,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		28586CC414651E870082B8EC /* DFCdromPluginConfig.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28586CC514651E870082B8EC /* English */,
+			);
+			name = DFCdromPluginConfig.xib;
+			sourceTree = "<group>";
+		};
 		71F3C47811F3D108007B9F12 /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
 				71F3C47911F3D108007B9F12 /* English */,
 			);
 			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		71F3C49B11F3D2B3007B9F12 /* DFCdromPluginConfig.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				71F3C49C11F3D2B3007B9F12 /* English */,
-			);
-			name = DFCdromPluginConfig.nib;
 			sourceTree = "<group>";
 		};
 		8D5B49A704867FD3000E48DA /* InfoPlist.strings */ = {
@@ -253,7 +256,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7107359A0FDEED75004AD098 /* Development */ = {
+		7107359A0FDEED75004AD098 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
@@ -280,15 +283,14 @@
 				);
 				WRAPPER_EXTENSION = psxplugin;
 			};
-			name = Development;
+			name = Debug;
 		};
-		7107359B0FDEED75004AD098 /* Deployment */ = {
+		7107359B0FDEED75004AD098 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUGGING_SYMBOLS = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -312,46 +314,54 @@
 				WRAPPER_EXTENSION = psxplugin;
 				ZERO_LINK = NO;
 			};
-			name = Deployment;
+			name = Release;
 		};
-		7107359F0FDEED75004AD098 /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
-				GCC_MODEL_TUNING = "";
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
-				HEADER_SEARCH_PATHS = (
-					../../../libpcsxcore,
-					../..,
-					../../../plugins/dfcdrom,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = "";
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = ../../build;
-			};
-			name = Development;
-		};
-		710735A00FDEED75004AD098 /* Deployment */ = {
+		7107359F0FDEED75004AD098 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
 					i386,
-					ppc,
+					x86_64,
 				);
 				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					../../../libpcsxcore,
 					../..,
 					../../../plugins/dfcdrom,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.6;
+				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = ../../build;
+				WARNING_CFLAGS = "-Wall";
 			};
-			name = Deployment;
+			name = Debug;
+		};
+		710735A00FDEED75004AD098 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					x86_64,
+				);
+				GCC_MODEL_TUNING = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					../../../libpcsxcore,
+					../..,
+					../../../plugins/dfcdrom,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx10.6;
+				SYMROOT = ../../build;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -359,20 +369,20 @@
 		710735990FDEED75004AD098 /* Build configuration list for PBXNativeTarget "DFCdrom" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7107359A0FDEED75004AD098 /* Development */,
-				7107359B0FDEED75004AD098 /* Deployment */,
+				7107359A0FDEED75004AD098 /* Debug */,
+				7107359B0FDEED75004AD098 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 		7107359E0FDEED75004AD098 /* Build configuration list for PBXProject "DFCdrom" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7107359F0FDEED75004AD098 /* Development */,
-				710735A00FDEED75004AD098 /* Deployment */,
+				7107359F0FDEED75004AD098 /* Debug */,
+				710735A00FDEED75004AD098 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

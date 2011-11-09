@@ -28,8 +28,8 @@ void InitAnalog() {
 	g.PadState[1].AnalogStatus[ANALOG_RIGHT][0] = 127;
 	g.PadState[1].AnalogStatus[ANALOG_RIGHT][1] = 127;
 
-	memset(g.PadState[0].AnalogKeyStatus, 0, sizeof(g.PadState[0].AnalogKeyStatus));
-	memset(g.PadState[1].AnalogKeyStatus, 0, sizeof(g.PadState[1].AnalogKeyStatus));
+	memset((void *)g.PadState[0].AnalogKeyStatus, 0, sizeof(g.PadState[0].AnalogKeyStatus));
+	memset((void *)g.PadState[1].AnalogKeyStatus, 0, sizeof(g.PadState[1].AnalogKeyStatus));
 }
 
 void CheckAnalog() {
