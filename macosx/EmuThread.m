@@ -33,7 +33,7 @@ static pthread_mutex_t eventMutex;
 
 - (void)EmuThreadRun:(id)anObject
 {
-	pool = [[NSAutoreleasePool alloc] init];
+	NSAutoreleasePool *pool = [NSAutoreleasePool new];
 
 	[[NSNotificationCenter defaultCenter] addObserver:self
         selector:@selector(emuWindowDidClose:)
@@ -76,7 +76,7 @@ static pthread_mutex_t eventMutex;
 	psxCpu->Execute();
 
 done:
-	[pool release]; pool = nil;
+	[pool drain];
 	emuThread = nil;
 
 	return;
@@ -84,7 +84,7 @@ done:
 
 - (void)EmuThreadRunBios:(id)anObject
 {
-	pool = [[NSAutoreleasePool alloc] init];
+	NSAutoreleasePool *pool = [NSAutoreleasePool new];
 
 	[[NSNotificationCenter defaultCenter] addObserver:self
         selector:@selector(emuWindowDidClose:)
@@ -110,7 +110,7 @@ done:
 	psxCpu->Execute();
 
 done:
-	[pool release]; pool = nil;
+	[pool drain];
 	emuThread = nil;
 	
 	return;
@@ -120,9 +120,6 @@ done:
 {
 	// remove all registered observers
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:nil object:nil];
-
-	if (pool)
-		[pool release];
 
 	[super dealloc];
 }
@@ -152,6 +149,7 @@ done:
 	   and we can just handle events next time round */
 	if (pthread_mutex_trylock(&eventMutex) == 0) {
 		while (safeEvent) {
+			NSAutoreleasePool *pool = [NSAutoreleasePool new];
 			if (safeEvent & EMUEVENT_STOP) {
 				/* signify that the emulation has stopped */
 				[emuThread autorelease];
@@ -199,6 +197,7 @@ done:
 				/* wait until we're signalled */
 				pthread_cond_wait(&eventCond, &eventMutex);
 			}
+			[pool drain];
 		}
 		pthread_mutex_unlock(&eventMutex);
 	}

@@ -527,7 +527,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	unsigned char * surf;
 	long x = PSXDisplay.DisplayPosition.x;
 	long y = PSXDisplay.DisplayPosition.y;
-	unsigned long lu;
+	GLuint lu;
 	unsigned short row,column;
 	unsigned short dx=(unsigned short)PSXDisplay.DisplayEnd.x;//PreviousPSXDisplay.Range.x1;
 	unsigned short dy=(unsigned short)PSXDisplay.DisplayEnd.y;//PreviousPSXDisplay.DisplayMode.y;
@@ -577,10 +577,10 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 
 				for(;row<dx;row+=4)
 				{
-					unsigned long lu1 = *((unsigned long *)pD);
-					unsigned long lu2 = *((unsigned long *)pD+1);
-					unsigned long lu3 = *((unsigned long *)pD+2);
-					unsigned long *dst = ((unsigned long *)((surf)+(column*lPitch)+(row<<2)));
+					GLuint lu1 = *((GLuint *)pD);
+					GLuint lu2 = *((GLuint *)pD+1);
+					GLuint lu3 = *((GLuint *)pD+2);
+					GLuint *dst = ((GLuint *)((surf)+(column*lPitch)+(row<<2)));
 #ifdef __BIG_ENDIAN__
 					*(dst)=
 						(((lu1>>24)&0xff)<<16)|(((lu1>>16)&0xff)<<8)|(((lu1>>8)&0xff));
@@ -615,9 +615,9 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 		else
 		{
 			int LineOffset,SurfOffset;
-			unsigned long * SRCPtr = (unsigned long *)(psxVuw + (y << 10) + x);
-			unsigned long * DSTPtr =
-				((unsigned long *)surf) + (PreviousPSXDisplay.Range.x0 >> 1);
+			GLuint * SRCPtr = (GLuint *)(psxVuw + (y << 10) + x);
+			GLuint * DSTPtr =
+				((GLuint *)surf) + (PreviousPSXDisplay.Range.x0 >> 1);
 
 			dx >>= 1;
 

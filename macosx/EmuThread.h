@@ -10,7 +10,6 @@
 #include <setjmp.h>
 
 @interface EmuThread : NSObject {
-	NSAutoreleasePool *pool;
 	jmp_buf  restartJmp;
 	BOOL wasPaused;
 }
