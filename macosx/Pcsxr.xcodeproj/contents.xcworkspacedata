@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "container:Pcsxr.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:plugins/PeopsXgl/PeopsXGL.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:plugins/DFInput/DFInput.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:plugins/DFCdrom/DFCdrom.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:plugins/DFXVideo/PeopsSoftGPU.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:plugins/DFSound/PeopsSPU.xcodeproj">
+   </FileRef>
+</Workspace>
