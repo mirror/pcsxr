@@ -15,10 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-extern void SetREVERB(unsigned short val);
-extern void InitREVERB(void);
-extern void StartREVERB(int ch);
-extern void StoreREVERB(int ch,int ns);
-extern void StoreREVERB_CD(int left, int right,int ns);
-extern int  MixREVERBLeft(int ns);
-extern int  MixREVERBRight(void);
+void SetREVERB(unsigned short val);
+extern INLINE void StartREVERB(int ch);
+extern INLINE void StoreREVERB(int ch,int ns);
+

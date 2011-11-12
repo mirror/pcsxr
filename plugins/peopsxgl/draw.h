@@ -51,8 +51,6 @@ void ReadConfig(void);
 void WriteConfig(void);
 void SetExtGLFuncs(void);
 
-void CreateScanLines(void);
-
 ///////////////////////////////////////////////////////////////////////
 
 #endif // _GL_DRAW_H_

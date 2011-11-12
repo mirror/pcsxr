@@ -50,7 +50,7 @@ BOOL           bDoVSyncUpdate=FALSE;
 #ifdef USE_NASM
 
 #define BGR24to16 i386_BGR24to16
-static __inline unsigned short BGR24to16 (uint32_t BGR);
+extern __inline unsigned short BGR24to16 (uint32_t BGR);
 
 #else
 

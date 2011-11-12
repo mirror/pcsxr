@@ -1205,7 +1205,7 @@ static int left_B, delta_left_B, right_B, delta_right_B;
 // NASM version (external):
 #define shl10idiv i386_shl10idiv
 
-static __inline int shl10idiv(int x, int y);
+extern __inline int shl10idiv(int x, int y);
 
 #else
 

@@ -63,7 +63,7 @@ void SetREVERB(unsigned short val)
 // START REVERB
 ////////////////////////////////////////////////////////////////////////
 
-void StartREVERB(int ch)
+extern INLINE void StartREVERB(int ch)
 {
  if(s_chan[ch].bReverb && (spuCtrl&0x80))              // reverb possible?
   {
@@ -84,7 +84,7 @@ void StartREVERB(int ch)
 // HELPER FOR NEILL'S REVERB: re-inits our reverb mixing buf
 ////////////////////////////////////////////////////////////////////////
 
-void InitREVERB(void)
+static INLINE void InitREVERB(void)
 {
  if(iUseReverb==2)
   {memset(sRVBStart,0,NSSIZE*2*4);}
@@ -94,7 +94,7 @@ void InitREVERB(void)
 // STORE REVERB
 ////////////////////////////////////////////////////////////////////////
 
-void StoreREVERB_CD(int left, int right,int ns)
+static INLINE void StoreREVERB_CD(int left, int right,int ns)
 {
  if(iUseReverb==0) return;
  else
@@ -112,7 +112,7 @@ void StoreREVERB_CD(int left, int right,int ns)
 }
  
 
-void StoreREVERB(int ch,int ns)
+extern INLINE void StoreREVERB(int ch,int ns)
 {
  if(iUseReverb==0) return;
  else
@@ -184,7 +184,7 @@ static INLINE void s_buffer1(int iOff,int iVal)                // set_buffer (+1
 
 ////////////////////////////////////////////////////////////////////////
 
-int MixREVERBLeft(int ns)
+static INLINE int MixREVERBLeft(int ns)
 {
  if(iUseReverb==0) return 0;
  else
@@ -291,7 +291,7 @@ int MixREVERBLeft(int ns)
 
 ////////////////////////////////////////////////////////////////////////
 
-int MixREVERBRight(void)
+static INLINE int MixREVERBRight(void)
 {
  if(iUseReverb==0) return 0;
  else

@@ -45,7 +45,6 @@ uint32_t * CDDAEnd   = NULL;
 int             iLeftXAVol  = 0x8000;
 int             iRightXAVol = 0x8000;
 
-#if 0
 static int gauss_ptr = 0;
 static int gauss_window[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -53,7 +52,6 @@ static int gauss_window[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 #define gvall(x) gauss_window[(gauss_ptr+x)&3]
 #define gvalr0 gauss_window[4+gauss_ptr]
 #define gvalr(x) gauss_window[4+((gauss_ptr+x)&3)]
-#endif
 
 long cdxa_dbuf_ptr;
 
@@ -64,7 +62,7 @@ long cdxa_dbuf_ptr;
 static int lastxa_lc, lastxa_rc;
 static int lastcd_lc, lastcd_rc;
 
-void MixXA(void)
+extern INLINE void MixXA(void)
 {
  int ns;
  int lc,rc;
@@ -262,7 +260,7 @@ unsigned long timeGetTime_spu()
 // FEED XA 
 ////////////////////////////////////////////////////////////////////////
 
-void FeedXA(xa_decode_t *xap)
+extern INLINE void FeedXA(xa_decode_t *xap)
 {
  int sinc,spos,i,iSize,iPlace;
 
@@ -453,7 +451,7 @@ void FeedXA(xa_decode_t *xap)
 
 unsigned int cdda_ptr;
 
-void FeedCDDA(unsigned char *pcm, int nBytes)
+extern INLINE void FeedCDDA(unsigned char *pcm, int nBytes)
 {
  while(nBytes>0)
   {

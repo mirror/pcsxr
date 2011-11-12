@@ -142,7 +142,7 @@ void InitADSR(void)                                    // INIT ADSR
 
 ////////////////////////////////////////////////////////////////////////
 
-void StartADSR(int ch)                          // MIX ADSR
+extern INLINE void StartADSR(int ch)                          // MIX ADSR
 {
  s_chan[ch].ADSRX.lVolume=1;                           // and init some adsr vars
  s_chan[ch].ADSRX.State=0;
@@ -152,7 +152,7 @@ void StartADSR(int ch)                          // MIX ADSR
 
 ////////////////////////////////////////////////////////////////////////
 
-int MixADSR(int ch)                             // MIX ADSR
+extern INLINE int MixADSR(int ch)                             // MIX ADSR
 {    
  int EnvelopeVol = s_chan[ch].ADSRX.EnvelopeVol;
  int EnvelopeVol_f = s_chan[ch].ADSRX.EnvelopeVol_f;
