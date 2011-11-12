@@ -13,13 +13,11 @@
 #import <unistd.h>
 #include "psxcommon.h"
 #include "sio.h"
+#import <IOKit/pwr_mgt/IOPMLib.h>
 
 static BOOL sysInited = NO;
 //#define EMU_LOG
-
-#ifdef __x86_64__
-#define USE_POWER_ASSERTION 1
-#endif
+static IOPMAssertionID powerAssertion = kIOPMNullAssertionID;
 
 int main(int argc, const char *argv[]) {
     if ( argc >= 2 && strncmp (argv[1], "-psn", 4) == 0 ) {
@@ -51,11 +49,6 @@ int main(int argc, const char *argv[]) {
     return NSApplicationMain(argc, argv);
 }
 
-#ifdef USE_POWER_ASSERTION
-#import <IOKit/pwr_mgt/IOPMLib.h>
-static IOPMAssertionID powerAssertion = kIOPMNullAssertionID;
-#endif
-
 int SysInit() {
 	if (!sysInited) {
 #ifdef EMU_LOG
@@ -78,12 +71,12 @@ int SysInit() {
 	}
 
 	LoadMcds(Config.Mcd1, Config.Mcd2);
-#ifdef USE_POWER_ASSERTION
+
 	IOReturn success= IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, CFSTR("PSX Emu Running"), &powerAssertion);
 	if (success != kIOReturnSuccess) {
 		NSLog(@"Unable to stop sleep, error code %d", success);
 	}
-#endif
+
 	return 0;
 }
 
@@ -145,9 +138,6 @@ void SysCloseLibrary(void *lib) {
 
 // Called periodically from the emu thread
 void SysUpdate() {
-#ifndef USE_POWER_ASSERTION
-	UpdateSystemActivity(UsrActivity);
-#endif
 	PAD1_keypressed();
 	PAD2_keypressed();
 	[emuThread handleEvents];
@@ -155,12 +145,10 @@ void SysUpdate() {
 
 // Returns to the Gui
 void SysRunGui() {
-#ifdef USE_POWER_ASSERTION
 	if (powerAssertion != kIOPMNullAssertionID) {
 		IOPMAssertionRelease(powerAssertion);
 		powerAssertion = kIOPMNullAssertionID;
 	}
-#endif
 }
 
 // Close mem and plugins
@@ -168,12 +156,10 @@ void SysClose() {
     EmuShutdown();
     ReleasePlugins();
 
-#ifdef USE_POWER_ASSERTION
 	if (powerAssertion != kIOPMNullAssertionID) {
 		IOPMAssertionRelease(powerAssertion);
 		powerAssertion = kIOPMNullAssertionID;
 	}
-#endif
 
     if (emuLog != NULL) fclose(emuLog);
 
