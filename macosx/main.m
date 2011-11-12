@@ -53,7 +53,7 @@ int main(int argc, const char *argv[]) {
 
 #ifdef USE_POWER_ASSERTION
 #import <IOKit/pwr_mgt/IOPMLib.h>
-static IOPMAssertionID powerAssertion= 0;
+static IOPMAssertionID powerAssertion = kIOPMNullAssertionID;
 #endif
 
 int SysInit() {
@@ -79,7 +79,7 @@ int SysInit() {
 
 	LoadMcds(Config.Mcd1, Config.Mcd2);
 #ifdef USE_POWER_ASSERTION
-	IOReturn success= IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, CFSTR("SysInit()"), &powerAssertion);
+	IOReturn success= IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, CFSTR("PSX Emu Running"), &powerAssertion);
 	if (success != kIOReturnSuccess) {
 		NSLog(@"Unable to stop sleep, error code %d", success);
 	}
@@ -156,9 +156,9 @@ void SysUpdate() {
 // Returns to the Gui
 void SysRunGui() {
 #ifdef USE_POWER_ASSERTION
-	if (powerAssertion != 0) {
+	if (powerAssertion != kIOPMNullAssertionID) {
 		IOPMAssertionRelease(powerAssertion);
-		powerAssertion = 0;
+		powerAssertion = kIOPMNullAssertionID;
 	}
 #endif
 }
@@ -169,8 +169,9 @@ void SysClose() {
     ReleasePlugins();
 
 #ifdef USE_POWER_ASSERTION
-	if (powerAssertion != 0) {
+	if (powerAssertion != kIOPMNullAssertionID) {
 		IOPMAssertionRelease(powerAssertion);
+		powerAssertion = kIOPMNullAssertionID;
 	}
 #endif
 

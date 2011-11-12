@@ -84,7 +84,7 @@ void StartREVERB(int ch)
 // HELPER FOR NEILL'S REVERB: re-inits our reverb mixing buf
 ////////////////////////////////////////////////////////////////////////
 
-static INLINE void InitREVERB(void)
+void InitREVERB(void)
 {
  if(iUseReverb==2)
   {memset(sRVBStart,0,NSSIZE*2*4);}
@@ -94,7 +94,7 @@ static INLINE void InitREVERB(void)
 // STORE REVERB
 ////////////////////////////////////////////////////////////////////////
 
-static INLINE void StoreREVERB_CD(int left, int right,int ns)
+void StoreREVERB_CD(int left, int right,int ns)
 {
  if(iUseReverb==0) return;
  else
@@ -184,7 +184,7 @@ static INLINE void s_buffer1(int iOff,int iVal)                // set_buffer (+1
 
 ////////////////////////////////////////////////////////////////////////
 
-static INLINE int MixREVERBLeft(int ns)
+int MixREVERBLeft(int ns)
 {
  if(iUseReverb==0) return 0;
  else
@@ -291,7 +291,7 @@ static INLINE int MixREVERBLeft(int ns)
 
 ////////////////////////////////////////////////////////////////////////
 
-static INLINE int MixREVERBRight(void)
+int MixREVERBRight(void)
 {
  if(iUseReverb==0) return 0;
  else

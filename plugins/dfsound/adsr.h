@@ -15,5 +15,5 @@
  *                                                                         *
  ***************************************************************************/
 
-void StartADSR(int ch);
-int  MixADSR(int ch);
+extern void StartADSR(int ch);
+extern int  MixADSR(int ch);

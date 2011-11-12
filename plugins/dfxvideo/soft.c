@@ -211,7 +211,7 @@ unsigned char dithertable[16] =
     4, 3, 5, 2
 };
 
-void Dither16(unsigned short * pdest,uint32_t r,uint32_t g,uint32_t b,unsigned short sM)
+static void Dither16(unsigned short * pdest,uint32_t r,uint32_t g,uint32_t b,unsigned short sM)
 {
  unsigned char coeff;
  unsigned char rlow, glow, blow;

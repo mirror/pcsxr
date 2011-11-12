@@ -155,7 +155,7 @@ static __inline void SetRenderMode(uint32_t DrawAttributes)
 #define CHKMAX_X 1024
 #define CHKMAX_Y 512
 
-void AdjustCoord4()
+static void AdjustCoord4()
 {
  lx0=(short)(((int)lx0<<SIGNSHIFT)>>SIGNSHIFT);
  lx1=(short)(((int)lx1<<SIGNSHIFT)>>SIGNSHIFT);
@@ -167,7 +167,7 @@ void AdjustCoord4()
  ly3=(short)(((int)ly3<<SIGNSHIFT)>>SIGNSHIFT);
 }
 
-void AdjustCoord3()
+static void AdjustCoord3()
 {
  lx0=(short)(((int)lx0<<SIGNSHIFT)>>SIGNSHIFT);
  lx1=(short)(((int)lx1<<SIGNSHIFT)>>SIGNSHIFT);
@@ -177,7 +177,7 @@ void AdjustCoord3()
  ly2=(short)(((int)ly2<<SIGNSHIFT)>>SIGNSHIFT);
 }
 
-void AdjustCoord2()
+static void AdjustCoord2()
 {
  lx0=(short)(((int)lx0<<SIGNSHIFT)>>SIGNSHIFT);
  lx1=(short)(((int)lx1<<SIGNSHIFT)>>SIGNSHIFT);
@@ -185,7 +185,7 @@ void AdjustCoord2()
  ly1=(short)(((int)ly1<<SIGNSHIFT)>>SIGNSHIFT);
 }
 
-void AdjustCoord1()
+static void AdjustCoord1()
 {
  lx0=(short)(((int)lx0<<SIGNSHIFT)>>SIGNSHIFT);
  ly0=(short)(((int)ly0<<SIGNSHIFT)>>SIGNSHIFT);
