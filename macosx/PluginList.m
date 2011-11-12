@@ -64,7 +64,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
     type = typeMask;
     for (i=0; i<[plugins count]; i++) {
         PcsxrPlugin *plugin = [plugins objectAtIndex:i];
-        if ([plugin getType] == type) {
+        if ([plugin type] == type) {
             [list addObject:plugin];
         }
     }
@@ -102,7 +102,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 	
 	missingPlugins = NO;
 	for (i = 0; i < sizeof(*typeList); i++) {
-		NSString *path = [defaults stringForKey:[PcsxrPlugin getDefaultKeyForType:typeList[i]]];
+		NSString *path = [defaults stringForKey:[PcsxrPlugin defaultKeyForType:typeList[i]]];
 		if (nil == path) {
 			missingPlugins = YES;
 			continue;
@@ -204,7 +204,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 	for (i=0; i<[pluginList count]; i++) {
 		PcsxrPlugin *plugin = [pluginList objectAtIndex:i];
 		
-		if ([plugin getType] & typeMask) {
+		if ([plugin type] & typeMask) {
 			[types addObject:plugin];
 		}
 	}
@@ -306,7 +306,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 		str = "Invalid Plugin";
 	}
 	
-	char **dst = [PcsxrPlugin getConfigEntriesForType:type];
+	char **dst = [PcsxrPlugin configEntriesForType:type];
 	while (*dst) {
 		strncpy(*dst, str, 255);
 		dst++;

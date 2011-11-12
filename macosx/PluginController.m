@@ -51,7 +51,7 @@
 	// remember the list
 	pluginType = type;
 	plugins = [list retain];
-	defaultKey = [[PcsxrPlugin getDefaultKeyForType:pluginType] retain];
+	defaultKey = [[PcsxrPlugin defaultKeyForType:pluginType] retain];
 
 	// clear the previous menu items
 	[pluginMenu removeAllItems];

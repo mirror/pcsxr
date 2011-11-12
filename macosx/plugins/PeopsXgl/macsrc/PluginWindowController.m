@@ -94,12 +94,12 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
 
 	[gameWindow makeKeyAndOrderFront:nil];
 	[gameController showWindow:nil];
-    NSOpenGLView*  glInstance = [gameController getOpenGLView];
+    NSOpenGLView*  glInstance = [gameController openGLView];
     [glInstance setFrameSize: windowDefaultRect.size];
     [glInstance reshape];
 //    [glView update];
    
-	CGDirectDisplayID display = (CGDirectDisplayID)[[[[gameWindow screen] deviceDescription] objectForKey:@"NSScreenNumber"] longValue];
+	CGDirectDisplayID display = (CGDirectDisplayID)[[[[gameWindow screen] deviceDescription] objectForKey:@"NSScreenNumber"] unsignedIntValue];
 	if (CGDisplayIsCaptured(display)) {
 		[gameController setFullscreen:YES];
 	}
@@ -141,7 +141,7 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
 - (NSRect) screenFrame
 {
     NSWindow* wind = [self window];
-	CGDirectDisplayID display = (CGDirectDisplayID)[[[[wind screen] deviceDescription] objectForKey:@"NSScreenNumber"] longValue];
+	CGDirectDisplayID display = (CGDirectDisplayID)[[[[wind screen] deviceDescription] objectForKey:@"NSScreenNumber"] unsignedIntValue];
 
     return NSMakeRect (0,0,CGDisplayPixelsWide(display), CGDisplayPixelsHigh(display));
 }
@@ -169,7 +169,7 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
     
 }
 
-- (PluginGLView *)getOpenGLView
+- (PluginGLView *)openGLView
 {
 	return (PluginGLView *)glView;
 }
@@ -277,7 +277,7 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
 	NSWindow *window = [self window];
 	NSScreen *screen = [window screen];
 
-    CGDirectDisplayID display = (CGDirectDisplayID)[[[screen deviceDescription] objectForKey:@"NSScreenNumber"] longValue];
+    CGDirectDisplayID display = (CGDirectDisplayID)[[[screen deviceDescription] objectForKey:@"NSScreenNumber"] unsignedIntValue];
 
     NSRect newPlace;
     
@@ -365,7 +365,7 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
 	NSWindow *window = [self window];
   	NSScreen *screen = [window screen];
 
-    CGDirectDisplayID display = (CGDirectDisplayID)[[[screen deviceDescription] objectForKey:@"NSScreenNumber"] longValue];
+    CGDirectDisplayID display = (CGDirectDisplayID)[[[screen deviceDescription] objectForKey:@"NSScreenNumber"] unsignedIntValue];
 
     if ([self fullscreen]){
         [window setLevel: NSScreenSaverWindowLevel];
@@ -378,7 +378,7 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
     // if in fullscreen, we must abdicate mouse hiding and level.
 	NSWindow *window = [self window];
 	NSScreen *screen = [window screen];
-    CGDirectDisplayID display = (CGDirectDisplayID)[[[screen deviceDescription] objectForKey:@"NSScreenNumber"] longValue];
+    CGDirectDisplayID display = (CGDirectDisplayID)[[[screen deviceDescription] objectForKey:@"NSScreenNumber"] unsignedIntValue];
 
     if ([self fullscreen]){
         [window setLevel: NSNormalWindowLevel];

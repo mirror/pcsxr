@@ -20,14 +20,14 @@
 	 int active;
 }
 
-+ (NSString *)getPrefixForType:(int)type;
-+ (NSString *)getDefaultKeyForType:(int)type;
-+ (char **)getConfigEntriesForType:(int)type;
++ (NSString *)prefixForType:(int)type;
++ (NSString *)defaultKeyForType:(int)type;
++ (char **)configEntriesForType:(int)type;
 
 - (id)initWithPath:(NSString *)aPath;
 
-- (NSString *)getDisplayVersion;
-- (int)getType;
+- (NSString *)displayVersion;
+- (int)type;
 - (NSString *)path;
 - (NSUInteger)hash;
 - (NSString *)description;

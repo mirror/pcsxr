@@ -46,7 +46,7 @@ NSRect windowFrame;
 	[gameWindow makeKeyAndOrderFront:nil];
 	[gameController showWindow:nil];
 	
-	CGDirectDisplayID display = (CGDirectDisplayID)[[[[gameWindow screen] deviceDescription] objectForKey:@"NSScreenNumber"] longValue];
+	CGDirectDisplayID display = (CGDirectDisplayID)[[[[gameWindow screen] deviceDescription] objectForKey:@"NSScreenNumber"] unsignedIntValue];
 	if (CGDisplayIsCaptured(display)) {
 		[gameController setFullscreen:YES];
 	}
@@ -54,7 +54,7 @@ NSRect windowFrame;
 	return gameController;
 }
 
-- (PluginGLView *)getOpenGLView
+- (PluginGLView *)openGLView
 {
 	return (PluginGLView *)glView;
 }
@@ -94,7 +94,7 @@ NSRect windowFrame;
 {
 	NSWindow *window = [self window];
 	NSScreen *screen = [window screen];
-	CGDirectDisplayID display = (CGDirectDisplayID)[[[screen deviceDescription] objectForKey:@"NSScreenNumber"] longValue];
+	CGDirectDisplayID display = (CGDirectDisplayID)[[[screen deviceDescription] objectForKey:@"NSScreenNumber"] unsignedIntValue];
 	
 	NSDisableScreenUpdates();
 	

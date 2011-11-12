@@ -55,7 +55,7 @@
 		[NSApp runModalSession:session];
 		row = [tableView selectedRow];
 		if (row < DKEY_TOTAL) {
-			changed = ReadDKeyEvent(whichPad, [ControllerList getButtonOfRow:row]);
+			changed = ReadDKeyEvent(whichPad, [ControllerList buttonOfRow:row]);
 		} else {
 			row -= DKEY_TOTAL;
 			changed = ReadAnalogEvent(whichPad, row / 4, row % 4);

@@ -155,7 +155,7 @@ unsigned long ulInitDisplay(void)	// OPEN GAME WINDOW
     // this causes a runtime error if it's done on a thread other than the main thread
     dispatch_sync(dispatch_get_main_queue(), ^{
         windowController = [PluginWindowController openGameView];
-        glView = [windowController getOpenGLView];
+        glView = [windowController openGLView];
 	
         [[windowController window] setTitle:[NSString stringWithCString:pCaptionText encoding:NSUTF8StringEncoding]];
     });

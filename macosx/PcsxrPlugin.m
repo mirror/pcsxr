@@ -13,7 +13,7 @@
 
 @implementation PcsxrPlugin
 
-+ (NSString *)getPrefixForType:(int)aType
++ (NSString *)prefixForType:(int)aType
 {
     switch (aType) {
         case PSE_LT_GPU: return @"GPU";
@@ -26,9 +26,9 @@
     return @"";
 }
 
-+ (NSString *)getDefaultKeyForType:(int)aType
++ (NSString *)defaultKeyForType:(int)aType
 {
-    //return @"Plugin" [PcsxrPlugin getPrefixForType:aType];
+    //return @"Plugin" [PcsxrPlugin prefixForType:aType];
     switch (aType) {
         case PSE_LT_GPU: return @"PluginGPU";
         case PSE_LT_CDR: return @"PluginCDR";
@@ -40,7 +40,7 @@
     return @"";
 }
 
-+ (char **)getConfigEntriesForType:(int)aType
++ (char **)configEntriesForType:(int)aType
 {
 	static char *gpu[2] = {(char *)&Config.Gpu, NULL};
 	static char *cdr[2] = {(char *)&Config.Cdr, NULL};
@@ -175,7 +175,7 @@
         return 0;
     }
 
-    sprintf(symbol, "%sinit", [[PcsxrPlugin getPrefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
+    sprintf(symbol, "%sinit", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
     init = initArg = SysLoadSym(pluginRef, symbol);
     if (SysLibError() == nil) {
         if (aType != PSE_LT_PAD)
@@ -188,7 +188,7 @@
         active |= aType;
     } else {
         NSRunCriticalAlertPanel(NSLocalizedString(@"Plugin Initialization Failed!", nil),
-            [NSString stringWithFormat:NSLocalizedString(@"Pcsxr failed to initialize the selected %s plugin (error=%i).\nThe plugin might not work with your system.", nil), [PcsxrPlugin getPrefixForType:aType], res], 
+            [NSString stringWithFormat:NSLocalizedString(@"Pcsxr failed to initialize the selected %s plugin (error=%i).\nThe plugin might not work with your system.", nil), [PcsxrPlugin prefixForType:aType], res], 
 			nil, nil, nil);
     }
     
@@ -200,7 +200,7 @@
     char symbol[255];
     long (*shutdown)(void);
 
-    sprintf(symbol, "%sshutdown", [[PcsxrPlugin getPrefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
+    sprintf(symbol, "%sshutdown", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
     shutdown = SysLoadSym(pluginRef, symbol);
     if (SysLibError() == nil) {
         active &= ~aType;
@@ -214,7 +214,7 @@
 {
     char symbol[255];
 
-    sprintf(symbol, "%sabout", [[PcsxrPlugin getPrefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
+    sprintf(symbol, "%sabout", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
     SysLoadSym(pluginRef, symbol);
     
     return (SysLibError() == nil);
@@ -224,7 +224,7 @@
 {
     char symbol[255];
 
-    sprintf(symbol, "%sconfigure", [[PcsxrPlugin getPrefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
+    sprintf(symbol, "%sconfigure", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
     SysLoadSym(pluginRef, symbol);
     
     return (SysLibError() == nil);
@@ -235,7 +235,7 @@
     NSArray *arg;
     char symbol[255];
 
-    sprintf(symbol, "%sabout", [[PcsxrPlugin getPrefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
+    sprintf(symbol, "%sabout", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
     arg = [[NSArray alloc] initWithObjects:[NSString stringWithCString:symbol encoding:NSUTF8StringEncoding], 
                     [NSNumber numberWithInt:0], nil];
     
@@ -249,7 +249,7 @@
     NSArray *arg;
     char symbol[255];
     
-    sprintf(symbol, "%sconfigure", [[PcsxrPlugin getPrefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
+    sprintf(symbol, "%sconfigure", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
     arg = [[NSArray alloc] initWithObjects:[NSString stringWithCString:symbol encoding:NSUTF8StringEncoding], 
                     [NSNumber numberWithInt:1], nil];
     
@@ -258,7 +258,7 @@
             withObject:arg];
 }
 
-- (NSString *)getDisplayVersion
+- (NSString *)displayVersion
 {
     if (version == -1)
         return @"";
@@ -266,7 +266,7 @@
 	 return [NSString stringWithFormat:@"v%ld.%ld.%ld", version>>16,(version>>8)&0xff,version&0xff];
 }
 
-- (int)getType
+- (int)type
 {
     return type;
 }
@@ -286,7 +286,7 @@
     if (name == nil)
         return [path lastPathComponent];
     
-    return [NSString stringWithFormat:@"%@ %@ [%@]", name, [self getDisplayVersion], [path lastPathComponent]];
+    return [NSString stringWithFormat:@"%@ %@ [%@]", name, [self displayVersion], [path lastPathComponent]];
 }
 
 // the plugin will check if it's still valid and return the status

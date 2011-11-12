@@ -103,7 +103,7 @@ static const int DPad[DKEY_TOTAL] = {
 	DKEY_ANALOG
 };
 
-+ (int)getButtonOfRow:(int)row
++ (int)buttonOfRow:(int)row
 {
 	return DPad[row];
 }

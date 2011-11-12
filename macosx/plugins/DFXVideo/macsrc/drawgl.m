@@ -114,7 +114,7 @@ unsigned long ulInitDisplay(void)	// OPEN GAME WINDOW
 	}
 	
 	PluginWindowController *windowController = [PluginWindowController openGameView];
-	glView = [windowController getOpenGLView];
+	glView = [windowController openGLView];
 	
     NSString *title = [NSString stringWithCString:pCaptionText encoding:NSUTF8StringEncoding];
 	[[windowController window] setTitle:title];

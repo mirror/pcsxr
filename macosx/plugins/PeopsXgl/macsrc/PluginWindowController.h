@@ -44,7 +44,7 @@ extern PluginWindowController *gameController;
 }
 
 + (id)openGameView;
-- (PluginGLView *)getOpenGLView;
+- (PluginGLView *)openGLView;
 - (BOOL)fullscreen;
 - (void)setFullscreen:(BOOL)flag;
 - (void)performFullscreenSwap;
