@@ -4,7 +4,7 @@
  *           alexey silinov
  */
 
-#if defined (__ppc__) || defined (__ppc64__) || defined (__powerpc__) || (__powerpc64__)
+#if defined (__ppc__) || defined (__ppc64__) || defined (__powerpc__) || defined (__powerpc64__) || defined (__POWERPC__)
 
 #include <stdio.h>
 #include <string.h>

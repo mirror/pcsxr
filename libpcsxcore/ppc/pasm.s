@@ -1,5 +1,5 @@
 
-#if defined (__ppc__) || defined (__ppc64__) || defined (__powerpc__) || (__powerpc64__) || defined __POWERPC__
+#if defined (__ppc__) || defined (__ppc64__) || defined (__powerpc__) || defined (__powerpc64__) || defined (__POWERPC__)
 
 #if defined (ELF) || defined (__linux__)
 #define C(label) label
