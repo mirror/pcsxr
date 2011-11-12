@@ -24,8 +24,6 @@
 #import <Cocoa/Cocoa.h>
 #import "ControllerList.h"
 
-@class ControllerList;
-
 @interface PadView : NSView
 {
 	IBOutlet NSTableView *tableView;

@@ -60,7 +60,6 @@
 /* Begin PBXFileReference section */
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
-		28E9406D146480AC00BA2A2F /* maccfg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = maccfg.h; path = macsrc/maccfg.h; sourceTree = "<group>"; };
 		28F0C3A114651EFA00A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsSpuPluginMain.xib; sourceTree = "<group>"; };
 		2B4F99F8077B0CE4004E36BA /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		2B7B2B91072D9BE6007F0C35 /* PluginController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginController.h; path = macsrc/PluginController.h; sourceTree = "<group>"; };
@@ -73,6 +72,8 @@
 		5599692713AFCCC600B0216B /* openal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = openal.c; path = ../../../plugins/dfsound/openal.c; sourceTree = SOURCE_ROOT; };
 		5599695E13AFCD2900B0216B /* PeopsAL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopsAL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		5599696E13AFCE1D00B0216B /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		55C8AB0C146DCD0E005ACCCB /* Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info copy.plist"; sourceTree = "<group>"; };
+		55F36E4B146CA0A900718DE6 /* maccfg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = maccfg.h; path = macsrc/maccfg.h; sourceTree = "<group>"; };
 		71C7B1C2130F340E004BF975 /* begin_code.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = begin_code.h; path = ../Common/SDL/include/begin_code.h; sourceTree = SOURCE_ROOT; };
 		71C7B1C3130F340E004BF975 /* close_code.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = close_code.h; path = ../Common/SDL/include/close_code.h; sourceTree = SOURCE_ROOT; };
 		71C7B1C4130F340E004BF975 /* SDL.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = SDL.h; path = ../Common/SDL/include/SDL.h; sourceTree = SOURCE_ROOT; };
@@ -201,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				8D576317048677EA00EA77CD /* Info.plist */,
+				55C8AB0C146DCD0E005ACCCB /* Info copy.plist */,
 				2B4F99F7077B0CE4004E36BA /* Credits.rtf */,
 				8D5B49A704867FD3000E48DA /* InfoPlist.strings */,
 				28F0C3A014651EFA00A90285 /* NetSfPeopsSpuPluginMain.xib */,
@@ -251,7 +253,7 @@
 		2B7B2B8E072D9BD6007F0C35 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
-				28E9406D146480AC00BA2A2F /* maccfg.h */,
+				55F36E4B146CA0A900718DE6 /* maccfg.h */,
 				2B7B2B91072D9BE6007F0C35 /* PluginController.h */,
 				2B7B2B92072D9BE6007F0C35 /* PluginController.m */,
 				2B7B2BE6072DB1B6007F0C35 /* NamedSlider.h */,
@@ -555,12 +557,10 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACOSX,
 					USEOPENAL,
-					SDL_JOYSTICK_DISABLED,
 				);
 				HEADER_SEARCH_PATHS = (
 					src/,
@@ -569,11 +569,9 @@
 				);
 				INFOPLIST_FILE = "Info copy.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				LIBRARY_STYLE = BUNDLE;
 				PRODUCT_NAME = PeopsAL;
 				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
-				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
@@ -581,14 +579,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				DEBUGGING_SYMBOLS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACOSX,
 					USEOPENAL,
-					SDL_JOYSTICK_DISABLED,
 				);
 				HEADER_SEARCH_PATHS = (
 					src/,
@@ -597,13 +592,11 @@
 				);
 				INFOPLIST_FILE = "Info copy.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				LIBRARY_STYLE = BUNDLE;
 				OTHER_CFLAGS = "";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = PeopsAL;
 				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -613,7 +606,6 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACOSX,
@@ -627,11 +619,9 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				LIBRARY_STYLE = BUNDLE;
 				PRODUCT_NAME = PeopsSPU;
 				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
-				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
@@ -641,7 +631,6 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUGGING_SYMBOLS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACOSX,
@@ -655,26 +644,20 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				LIBRARY_STYLE = BUNDLE;
-				OTHER_CFLAGS = "";
-				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = PeopsSPU;
 				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
 		71155B2C0FDFA2EB00EC0BC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					x86_64,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "";
 				SDKROOT = macosx10.6;
 				SYMROOT = ../../build;
 				WARNING_CFLAGS = "-Wall";
@@ -684,12 +667,9 @@
 		71155B2E0FDFA2EB00EC0BC5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					x86_64,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				OTHER_CFLAGS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx10.6;
 				SYMROOT = ../../build;
 				WARNING_CFLAGS = "-Wall";
@@ -706,7 +686,7 @@
 				5599695D13AFCD2900B0216B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		71155B260FDFA2EB00EC0BC5 /* Build configuration list for PBXNativeTarget "PeopsSPU" */ = {
 			isa = XCConfigurationList;
@@ -715,7 +695,7 @@
 				71155B290FDFA2EB00EC0BC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		71155B2B0FDFA2EB00EC0BC5 /* Build configuration list for PBXProject "PeopsSPU" */ = {
 			isa = XCConfigurationList;
@@ -724,7 +704,7 @@
 				71155B2E0FDFA2EB00EC0BC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

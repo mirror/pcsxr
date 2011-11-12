@@ -319,11 +319,7 @@
 		7107359F0FDEED75004AD098 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					i386,
-					x86_64,
-				);
-				GCC_MODEL_TUNING = "";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -344,11 +340,7 @@
 		710735A00FDEED75004AD098 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					i386,
-					x86_64,
-				);
-				GCC_MODEL_TUNING = "";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
@@ -373,7 +365,7 @@
 				7107359B0FDEED75004AD098 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		7107359E0FDEED75004AD098 /* Build configuration list for PBXProject "DFCdrom" */ = {
 			isa = XCConfigurationList;
@@ -382,7 +374,7 @@
 				710735A00FDEED75004AD098 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

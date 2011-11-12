@@ -28,6 +28,7 @@
 #include "draw.h"
 #include "gpu.h"
 #include "menu.h"
+#include "drawgl.h"
 
 ////////////////////////////////////////////////////////////////////////////////////
 // misc globals
@@ -185,7 +186,7 @@ void SendContextBack(void)
     [NSOpenGLContext clearCurrentContext];
 }
 
-void SetVSync(long myValue)
+void SetVSync(GLint myValue)
 {
     GLint DoItMyFriend = myValue;
    [[glView openGLContext] setValues: &DoItMyFriend forParameter: NSOpenGLCPSwapInterval];

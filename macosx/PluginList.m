@@ -90,7 +90,10 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 	NSUInteger i;
 	
 	if (!(self = [super init]))
+	{
+		[self autorelease];
 		return nil;
+	}
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	pluginList = [[NSMutableArray alloc] initWithCapacity:20];

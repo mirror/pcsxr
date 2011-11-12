@@ -28,7 +28,7 @@
 
 - (void)sendEvent:(NSEvent *)theEvent
 {
-	int type = [theEvent type];
+	NSEventType type = [theEvent type];
 	if (type == NSKeyDown || type == NSKeyUp) {
 		if (type == NSKeyDown && [theEvent keyCode] == 53 /* escape */) {
 			// reroute to menu event
@@ -43,7 +43,7 @@
 }
 
 - (id) initWithContentRect: (NSRect) contentRect
-                 styleMask: (unsigned int) aStyle
+                 styleMask: (NSUInteger) aStyle
                    backing: (NSBackingStoreType) bufferingType
                      defer: (BOOL) flag
 {

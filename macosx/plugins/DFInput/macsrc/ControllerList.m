@@ -50,7 +50,7 @@ static int currentController;
 }
 
 /* NSDataSource */
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
 	return DKEY_TOTAL + (g.cfg.PadDef[currentController].Type == PSE_PAD_TYPE_ANALOGPAD ? 8 : -3);
 }
@@ -109,7 +109,7 @@ static const int DPad[DKEY_TOTAL] = {
 }
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn 
-		row:(int)rowIndex
+		row:(NSInteger)rowIndex
 {
 	char buf[256];
 
@@ -128,7 +128,7 @@ static const int DPad[DKEY_TOTAL] = {
 	}
 }
 
-- (void)deleteRow:(int)which
+- (void)deleteRow:(NSInteger)which
 {
 	if (which < DKEY_TOTAL) {
 		g.cfg.PadDef[currentController].KeyDef[DPad[which]].Key = 0;

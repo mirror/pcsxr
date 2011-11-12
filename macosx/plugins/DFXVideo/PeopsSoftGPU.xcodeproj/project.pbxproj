@@ -280,7 +280,6 @@
 				DEBUGGING_SYMBOLS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
@@ -293,7 +292,6 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LIBRARY_STYLE = BUNDLE;
-				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH_ACTUAL)";
 				OPTIMIZATION_CFLAGS = "-finline-functions -finline-limit=1600 -fomit-frame-pointer -fno-exceptions -funroll-loops -falign-loops=16 -ffast-math";
 				OTHER_CFLAGS = "-finline-functions";
 				OTHER_LDFLAGS = (
@@ -302,7 +300,6 @@
 					"-framework",
 					AppKit,
 				);
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = PeopsSoftGL;
 				SECTORDER_FLAGS = "";
 				SYMROOT = ../../build;
@@ -322,7 +319,6 @@
 				DEBUGGING_SYMBOLS = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
@@ -342,7 +338,6 @@
 					"-framework",
 					AppKit,
 				);
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = PeopsSoftGL;
 				SECTORDER_FLAGS = "";
 				SYMROOT = ../../build;
@@ -352,18 +347,14 @@
 					"-Wno-unknown-pragmas",
 				);
 				WRAPPER_EXTENSION = psxplugin;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
 		717084320FDFD328004F3EB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					i386,
-					x86_64,
-				);
-				GCC_MODEL_TUNING = "";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					../../../plugins/dfxvideo,
@@ -380,11 +371,7 @@
 		717084330FDFD328004F3EB4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					i386,
-					x86_64,
-				);
-				GCC_MODEL_TUNING = "";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					../../../plugins/dfxvideo,
@@ -407,7 +394,7 @@
 				7170842E0FDFD328004F3EB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		717084310FDFD328004F3EB4 /* Build configuration list for PBXProject "PeopsSoftGPU" */ = {
 			isa = XCConfigurationList;
@@ -416,7 +403,7 @@
 				717084330FDFD328004F3EB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

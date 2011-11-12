@@ -29,7 +29,7 @@
 - (NSString *)getDisplayVersion;
 - (int)getType;
 - (NSString *)path;
-- (unsigned long)hash;
+- (NSUInteger)hash;
 - (NSString *)description;
 - (BOOL)hasAboutAs:(int)type;
 - (BOOL)hasConfigureAs:(int)type;

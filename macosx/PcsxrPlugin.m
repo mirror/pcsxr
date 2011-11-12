@@ -62,6 +62,7 @@
 - (id)initWithPath:(NSString *)aPath 
 {
     if (!(self = [super init])) {
+        [self autorelease];
         return nil;
     }
     
@@ -138,6 +139,7 @@
     
     if (pluginRef) SysCloseLibrary(pluginRef);
     
+    [modDate release];    
     [path release];
     [name release];
     
@@ -158,7 +160,7 @@
     }
     
     [arg release];
-    [pool release];
+    [pool drain];
     return;
 }
 
@@ -274,7 +276,7 @@
 	return path;
 }
 
-- (unsigned long)hash
+- (NSUInteger)hash
 {
     return [path hash];
 }

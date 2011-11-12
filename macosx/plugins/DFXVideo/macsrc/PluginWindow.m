@@ -29,7 +29,7 @@
 
 - (void)sendEvent:(NSEvent *)theEvent
 {
-	int type = [theEvent type];
+	NSEventType type = [theEvent type];
 	if (type == NSKeyDown || type == NSKeyUp) {
 		if (type == NSKeyDown && [theEvent keyCode] == 53 /* escape */) {
 			// reroute to menu event

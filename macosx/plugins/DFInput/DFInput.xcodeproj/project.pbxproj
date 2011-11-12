@@ -591,11 +591,7 @@
 		71155B120FDFA2DE00EC0BC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					i386,
-					x86_64,
-				);
-				GCC_MODEL_TUNING = "";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -620,10 +616,7 @@
 		71155B130FDFA2DE00EC0BC5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					i386,
-					x86_64,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -653,7 +646,7 @@
 				71155B0E0FDFA2DE00EC0BC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		71155B110FDFA2DE00EC0BC5 /* Build configuration list for PBXProject "DFInput" */ = {
 			isa = XCConfigurationList;
@@ -662,7 +655,7 @@
 				71155B130FDFA2DE00EC0BC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

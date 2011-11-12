@@ -10,13 +10,14 @@
 
 - (void)setStrings:(NSArray *)theStrings
 {
+	[theStrings retain];
 	[strings release];
-	strings = [theStrings retain];
+	strings = theStrings;
 }
 
 - (NSString *)stringValue
 {
-	int index = [self intValue];
+	NSInteger index = [self integerValue];
 
 	if (index >= 0 && index < [strings count])
 		return [strings objectAtIndex:index];

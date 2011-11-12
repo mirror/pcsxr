@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  Pcsx
+
+  Created by C.W. Betts on 4/23/11.
+  Copyright 2011 __MyCompanyName__. All rights reserved.
+*/
+"Plugin Initialization Failed!" = "Plugin Initialization Failed!";
+"Pcsx failed to initialize the selected %s plugin (error=%i).\nThe plugin might not work with your system." = "Pcsx failed to initialize the selected %s plugin (error=%i).\nThe plugin might not work with your system.";
+"Error!" = "Error!";
+"Installation Succesfull" = "Installation Succesfull";
+"Installation Failed!" = "Installation Failed!";
+"The installation of the specified plugin was succesfull. In order to use it, please restart the application." = "The installation of the specified plugin was succesfull. In order to use it, please restart the application.";
+"The installation of the specified plugin failed. Please try again, or make a manual install." ="The installation of the specified plugin failed. Please try again, or make a manual install.";
+"Missing plugins!" = "Missing plugins!";
+"Pcsx is missing one or more critical plugins. You will need to install these in order to play games." = "Pcsx is missing one or more critical plugins. You will need to install these in order to play games.";
+"Missing BIOS!" = "Missing BIOS!";
+"Pcsx wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\n" = "Pcsx wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\n";
+"If you have a BIOS available, please copy it to\n~/Library/Application Support/Pcsx/Bios/" = "If you have a BIOS available, please copy it to\n~/Library/Application Support/Pcsx/Bios/";

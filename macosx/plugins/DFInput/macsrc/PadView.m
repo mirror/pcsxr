@@ -89,7 +89,7 @@
 /* handles key events on the pad list */
 - (void)keyDown:(NSEvent *)theEvent
 {
-	int key = [theEvent keyCode];
+	NSEventType key = [theEvent keyCode];
 
 	if ([[theEvent window] firstResponder] == tableView) {
 		if (key == 51 || key == 117) {

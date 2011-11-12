@@ -40,6 +40,8 @@
 		559366CE12B694DF004ACC1E /* ix86_fpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C612B694DF004ACC1E /* ix86_fpu.c */; };
 		559366CF12B694DF004ACC1E /* ix86_mmx.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C712B694DF004ACC1E /* ix86_mmx.c */; };
 		559366D012B694DF004ACC1E /* ix86_sse.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C812B694DF004ACC1E /* ix86_sse.c */; };
+		559DAC47146BA61F00C5DF71 /* PeopsAL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 28B467F11463D0020083F129 /* PeopsAL.psxplugin */; };
+		559DACEE146C72FF00C5DF71 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 559DACEC146C72FF00C5DF71 /* Localizable.strings */; };
 		712FD1E81093096F00575A92 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E51093096F00575A92 /* debug.c */; };
 		712FD1E91093096F00575A92 /* socket.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E61093096F00575A92 /* socket.c */; };
 		713B530E110B75650002F164 /* ppf.c in Sources */ = {isa = PBXBuildFile; fileRef = 713B530C110B75650002F164 /* ppf.c */; };
@@ -101,6 +103,13 @@
 			containerPortal = 71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5599695E13AFCD2900B0216B;
+			remoteInfo = PeopsAL;
+		};
+		559DAC45146BA61400C5DF71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5599693613AFCD2900B0216B;
 			remoteInfo = PeopsAL;
 		};
 		713CB2DD11FC49720033B6A8 /* PBXContainerItemProxy */ = {
@@ -182,6 +191,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				559DAC47146BA61F00C5DF71 /* PeopsAL.psxplugin in Copy PlugIns */,
 				71D888D6130F04F100F150FF /* PeopsXGL.psxplugin in Copy PlugIns */,
 				71F2C0881200B6B000322AD9 /* DFInput.psxplugin in Copy PlugIns */,
 				713CB2E411FC49DA0033B6A8 /* DFCdrom.psxplugin in Copy PlugIns */,
@@ -206,8 +216,8 @@
 		2B2189D204D96C7A00179945 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		2B3E356A06937D1C00763C7D /* PcsxrPluginDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrPluginDocument.h; sourceTree = "<group>"; };
 		2B3E356B06937D1C00763C7D /* PcsxrPluginDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrPluginDocument.m; sourceTree = "<group>"; };
-		2B4DE98D05FF9307003EFEF0 /* PluginController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PluginController.h; sourceTree = "<group>"; };
-		2B4DE98E05FF9307003EFEF0 /* PluginController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PluginController.m; sourceTree = "<group>"; };
+		2B4DE98D05FF9307003EFEF0 /* PluginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginController.h; sourceTree = "<group>"; };
+		2B4DE98E05FF9307003EFEF0 /* PluginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginController.m; sourceTree = "<group>"; };
 		2B690C760635C65C00CDA575 /* ExceptionHandling.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExceptionHandling.framework; path = /System/Library/Frameworks/ExceptionHandling.framework; sourceTree = "<absolute>"; };
 		2B6E8AAE04C832040017A3B1 /* System.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = System.framework; path = /System/Library/Frameworks/System.framework; sourceTree = "<absolute>"; };
 		2B6E8AB404C8327C0017A3B1 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
@@ -226,8 +236,8 @@
 		2BBB1127051DC00500B84448 /* PluginList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PluginList.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2BBB1787051E0D9700B84448 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = Credits.rtf; sourceTree = "<group>"; };
 		2BBB1791051E113B00B84448 /* EmuThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmuThread.h; sourceTree = "<group>"; };
-		2BBB1792051E113B00B84448 /* EmuThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmuThread.m; sourceTree = "<group>"; };
-		2BBB17DA051E4D0F00B84448 /* Plugin.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = Plugin.c; sourceTree = SOURCE_ROOT; };
+		2BBB1792051E113B00B84448 /* EmuThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 2; path = EmuThread.m; sourceTree = "<group>"; };
+		2BBB17DA051E4D0F00B84448 /* Plugin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Plugin.c; sourceTree = SOURCE_ROOT; };
 		2BC4786204C7FD3600CAB520 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		556A147B12B6DE1A007DE998 /* pasm.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = pasm.s; sourceTree = "<group>"; };
 		556A147C12B6DE1A007DE998 /* pGte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pGte.h; sourceTree = "<group>"; };
@@ -246,6 +256,7 @@
 		559366C612B694DF004ACC1E /* ix86_fpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86_fpu.c; sourceTree = "<group>"; };
 		559366C712B694DF004ACC1E /* ix86_mmx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86_mmx.c; sourceTree = "<group>"; };
 		559366C812B694DF004ACC1E /* ix86_sse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86_sse.c; sourceTree = "<group>"; };
+		559DACED146C72FF00C5DF71 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = Localizable.strings; sourceTree = "<group>"; };
 		712FD1E51093096F00575A92 /* debug.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = debug.c; sourceTree = "<group>"; };
 		712FD1E61093096F00575A92 /* socket.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = socket.c; sourceTree = "<group>"; };
 		712FD1E71093096F00575A92 /* socket.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
@@ -383,6 +394,7 @@
 		2BA178AD0514CE260026D74D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				559DACEC146C72FF00C5DF71 /* Localizable.strings */,
 				2BBB1786051E0D9700B84448 /* Credits.rtf */,
 				28F0C3C4146521A700A90285 /* Configuration.xib */,
 				2BA178B20514CE260026D74D /* InfoPlist.strings */,
@@ -594,6 +606,7 @@
 				2BB3D6D005427FE200831ACB /* PBXBuildRule */,
 			);
 			dependencies = (
+				559DAC46146BA61400C5DF71 /* PBXTargetDependency */,
 				71AD2DE910C3572200365243 /* PBXTargetDependency */,
 				71AD2DEB10C3572500365243 /* PBXTargetDependency */,
 				713CB2DE11FC49720033B6A8 /* PBXTargetDependency */,
@@ -715,6 +728,7 @@
 				28F0C3C6146521A700A90285 /* Configuration.xib in Resources */,
 				28F0C3C9146521B000A90285 /* PCSXR.xib in Resources */,
 				28F0C3CC146521B700A90285 /* AddPluginSheet.xib in Resources */,
+				559DACEE146C72FF00C5DF71 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,6 +790,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		559DAC46146BA61400C5DF71 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PeopsAL;
+			targetProxy = 559DAC45146BA61400C5DF71 /* PBXContainerItemProxy */;
+		};
 		713CB2DE11FC49720033B6A8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = DFCdrom;
@@ -844,6 +863,14 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
+		559DACEC146C72FF00C5DF71 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				559DACED146C72FF00C5DF71 /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -856,7 +883,6 @@
 				GCC_ENABLE_ASM_KEYWORD = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = G3;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_1)",
@@ -871,11 +897,9 @@
 					"-funroll-loops",
 					"-falign-loops=16",
 				);
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = PCSXR;
 				SECTORDER_FLAGS = "";
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
@@ -888,8 +912,6 @@
 				GCC_ENABLE_ASM_KEYWORD = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_CPU = "";
-				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_1)",
@@ -904,22 +926,17 @@
 					"-funroll-loops",
 					"-falign-loops=16",
 				);
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = PCSXR;
 				SECTORDER_FLAGS = "";
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
 		71F353F90FD98DFE00CBEC28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					x86_64,
-					i386,
-				);
-				GCC_MODEL_TUNING = "";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				HEADER_SEARCH_PATHS = (
@@ -929,7 +946,6 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH_ACTUAL)";
 				OTHER_LDFLAGS = "-lz";
 				SDKROOT = macosx10.6;
 				WARNING_CFLAGS = "-Wall";
@@ -939,15 +955,10 @@
 		71F353FA0FD98DFE00CBEC28 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					x86_64,
-					i386,
-				);
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 2;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_UNROLL_LOOPS = YES;
@@ -976,7 +987,7 @@
 				71F353F50FD98DFE00CBEC28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		71F353F80FD98DFE00CBEC28 /* Build configuration list for PBXProject "Pcsxr" */ = {
 			isa = XCConfigurationList;
@@ -985,7 +996,7 @@
 				71F353FA0FD98DFE00CBEC28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
