@@ -109,18 +109,21 @@
 	<string>PCSX-Reloaded SVN</string>
 	<key>CFBundleSignature</key>
 	<string>Pcsx</string>
-	<key>CFBundleURLTypes</key>
-	<array/>
 	<key>CFBundleVersion</key>
 	<string>SVN</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.games</string>
+	<key>LSMinimumSystemVersionByArchitecture</key>
+	<dict>
+		<key>i386</key>
+		<string>10.6.0</string>
+		<key>x86_64</key>
+		<string>10.6.0</string>
+	</dict>
 	<key>NSMainNibFile</key>
 	<string>PCSXR</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>NSServices</key>
-	<array/>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -131,7 +134,7 @@
 			<key>UTTypeDescription</key>
 			<string>Playstation Emulator Plug-in</string>
 			<key>UTTypeIconFile</key>
-			<string>psxbios</string>
+			<string>psxplugin</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.codeplex.pcsxr.plugin</string>
 			<key>UTTypeReferenceURL</key>
@@ -199,14 +202,5 @@
 			</dict>
 		</dict>
 	</array>
-	<key>UTImportedTypeDeclarations</key>
-	<array/>
-	<key>LSMinimumSystemVersionByArchitecture</key>
-	<dict>
-		<key>i386</key>
-		<string>10.6.0</string>
-		<key>x86_64</key>
-		<string>10.6.0</string>
-	</dict>
 </dict>
 </plist>

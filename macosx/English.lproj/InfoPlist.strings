@@ -3,4 +3,8 @@
 CFBundleName = "PCSXR";
 CFBundleShortVersionString = "PCSX-Reloaded";
 CFBundleGetInfoString = "PlayStation Emulator based on PCSX-df Project.";
-NSHumanReadableCopyright = "Copyright (c) 2003-2005 PCSX Team, Gil Pedersen.\nCopyright (c) 2009-2010 PCSX-Reloaded Team.";
+NSHumanReadableCopyright = "Copyright (c) 2003-2005 PCSX Team, Gil Pedersen.\nCopyright (c) 2009-2011 PCSX-Reloaded Team.";
+"Playstation Emulator Plug-in" = "Playstation Emulator Plug-in";
+"Playstation BIOS Image" = "Playstation BIOS Image";
+"PCSXR Memory Card" = "PCSXR Memory Card";
+"PCSXR Freeze State" = "PCSXR Freeze State";
