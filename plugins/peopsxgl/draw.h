@@ -50,6 +50,7 @@ void SetOGLDisplaySettings (BOOL DisplaySet);
 void ReadConfig(void);
 void WriteConfig(void);
 void SetExtGLFuncs(void);
+void CreateScanLines(void);
 
 ///////////////////////////////////////////////////////////////////////
 

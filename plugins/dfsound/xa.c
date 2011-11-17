@@ -45,8 +45,8 @@ uint32_t * CDDAEnd   = NULL;
 int             iLeftXAVol  = 0x8000;
 int             iRightXAVol = 0x8000;
 
-static int gauss_ptr = 0;
-static int gauss_window[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+static int UNUSED_VARIABLE gauss_ptr = 0;
+static int UNUSED_VARIABLE gauss_window[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
 #define gvall0 gauss_window[gauss_ptr]
 #define gvall(x) gauss_window[(gauss_ptr+x)&3]

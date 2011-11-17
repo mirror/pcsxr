@@ -27,6 +27,8 @@
 #ifdef _WINDOWS
 #include "debug.h"
 #include "record.h"
+#elif defined(_MACOSX)
+#include "maccfg.h"
 #endif
 
 #ifdef ENABLE_NLS

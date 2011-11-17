@@ -72,8 +72,9 @@ static ALfloat ListenerOri[] = {0.0, 0.0, -1.0,  0.0, 1.0, 0.0};
 
 static ALenum format         = AL_FORMAT_STEREO16;
 static ALuint sampleRate     = 44100;
-static ALuint sampleQuality  = 16;
-static ALuint channels       = 2;
+ 
+static ALuint UNUSED_VARIABLE sampleQuality  = 16;
+static ALuint UNUSED_VARIABLE channels       = 2;
 
 /******************************************************************************/
 /* Error handling.
@@ -161,10 +162,10 @@ void SetupSound()
     }
     
     // ALC info.
-    const ALCubyte* deviceName = (ALCubyte*)alcGetString(pDevice, ALC_DEVICE_SPECIFIER);
+    const ALCubyte* UNUSED_VARIABLE deviceName = (ALCubyte*)alcGetString(pDevice, ALC_DEVICE_SPECIFIER);
     //printf("[SPU] ALC_DEVICE_SPECIFIER = %s.\n", deviceName);
     
-    const ALCubyte* extensionList = (ALCubyte*)alcGetString(pDevice, ALC_EXTENSIONS);
+    const ALCubyte* UNUSED_VARIABLE extensionList = (ALCubyte*)alcGetString(pDevice, ALC_EXTENSIONS);
     //printf("[SPU] ALC_EXTENSIONS = %s.\n", extensionList);
     
     // Create audio context.
@@ -184,13 +185,13 @@ void SetupSound()
     }
     
     // AL info.
-    const ALubyte* version = (ALubyte*)alGetString(AL_VERSION);
+    const ALubyte* UNUSED_VARIABLE version = (ALubyte*)alGetString(AL_VERSION);
     //printf("[SPU] AL_VERSION = %s.\n", version);
     
-    const ALubyte* renderer = (ALubyte*)alGetString(AL_RENDERER);
+    const ALubyte* UNUSED_VARIABLE renderer = (ALubyte*)alGetString(AL_RENDERER);
     //printf("[SPU] AL_RENDERER = %s.\n", renderer);
 
-    const ALubyte* vendor = (ALubyte*)alGetString(AL_VENDOR);
+    const ALubyte* UNUSED_VARIABLE vendor = (ALubyte*)alGetString(AL_VENDOR);
     //printf("[SPU] AL_VENDOR = %s.\n", vendor);
     
     // Create buffers.

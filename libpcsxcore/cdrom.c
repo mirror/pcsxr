@@ -135,6 +135,20 @@ extern long CALLBACK ISOinit(void);
 extern void CALLBACK SPUirq(void);
 extern SPUregisterCallback SPU_registerCallback;
 
+// A bit of a kludge, but it will get rid of the "macro redefined" warnings
+
+#ifdef H_SPUirqAddr
+#undef H_SPUirqAddr
+#endif
+
+#ifdef H_SPUaddr
+#undef H_SPUaddr
+#endif
+
+#ifdef H_SPUctrl
+#undef H_SPUctrl
+#endif
+
 #define H_SPUirqAddr		0x1f801da4
 #define H_SPUaddr				0x1f801da6
 #define H_SPUctrl				0x1f801daa
@@ -2318,13 +2332,12 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 
 /*
 #if 1
-			/*
-			GS CDX: Enhancement CD crash
-			- Setloc 0:0:0
-			- CdlPlay
-			- Spams DMA3 and gets buffer overrun
-			*/
-/*
+ 
+			// GS CDX: Enhancement CD crash
+			// - Setloc 0:0:0
+			// - CdlPlay
+			// - Spams DMA3 and gets buffer overrun
+			
 			if( (cdr.pTransfer-cdr.Transfer) + cdsize > 2352 )
 			{
 				// avoid crash - probably should wrap here
@@ -2355,17 +2368,15 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 			} else {
 				int lcv;
 
-				/*
-				CDROM wrapping
-
-				Ape Escape - used several times
-				Gameshark Lite - opening movie
-
-				Gameshark CDX: enhancement CD patcher
-				- calls CdlPlay @ 0:2:0
-				- spams DMA3 and overruns buffer
-				*/
-/*
+				// CDROM wrapping
+				//
+				// Ape Escape - used several times
+				// Gameshark Lite - opening movie
+				//
+				// Gameshark CDX: enhancement CD patcher
+				// - calls CdlPlay @ 0:2:0
+				// - spams DMA3 and overruns buffer
+				
 				for( lcv = 0; lcv < cdsize; lcv++ )
 				{
 					// wrap cdrom ptr
