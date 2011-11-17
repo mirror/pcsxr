@@ -88,7 +88,7 @@ void PrepFactoryDefaultPreferences(void)
     // just create default preferences and save them.
 
     NSDictionary* defaultPrefs = 
-            [[NSDictionary alloc] initWithObjectsAndKeys:
+            [NSDictionary dictionaryWithObjectsAndKeys:
 					[NSNumber numberWithBool:NO], @"FPS Counter",
 					[NSNumber numberWithBool:NO], @"Auto Full Screen",
 					[NSNumber numberWithBool:NO], @"Frame Skipping",
