@@ -23,6 +23,10 @@
 #include <time.h>
 #endif
 
+#if SDL_VERSION_ATLEAST(1,3,0)
+int has_haptic;
+#endif
+
 static void (*gpuVisualVibration)(uint32_t, uint32_t) = NULL;
 
 char *PSEgetLibName(void) {

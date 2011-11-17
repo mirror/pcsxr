@@ -89,6 +89,26 @@ typedef uint8_t boolean;
 #  define N_(String) (String)
 #endif
 
+//If running under Mac OS X, use the Localizable.strings file instead.
+#elif defined(__MACOSX__)
+
+#ifdef PCSXRCORE
+
+extern char* Pcsxr_locale_text(char* toloc);
+#define _(String) Pcsxr_locale_text(String)
+#define N_(String) String
+#else
+#ifndef PCSXRPLUG
+#warning please define the plug being built to use Mac OS X localization!
+#define _(msgid) msgid
+#define N_(msgid) msgid
+#endif
+#define PLUGLOC PCSXRPLUG##_locale_text
+extern char* PLUGLOC(char* toloc);
+#define _(String) PLUGLOC(String)
+#define N_(String) String
+#endif
+		
 #else
 
 #define _(msgid) msgid

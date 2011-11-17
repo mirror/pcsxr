@@ -16,5 +16,7 @@
 	<string>PSGl</string>
 	<key>CFBundleVersion</key>
 	<string>1.16</string>
+	<key>NSPrincipalClass</key>
+	<string>NetSfPeopsSoftGPUPluginConfigController</string>
 </dict>
 </plist>

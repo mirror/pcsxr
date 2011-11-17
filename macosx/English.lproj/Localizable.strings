@@ -5,6 +5,7 @@
   Created by C.W. Betts on 4/23/11.
   Copyright 2011 __MyCompanyName__. All rights reserved.
 */
+
 "Plugin Initialization Failed!" = "Plugin Initialization Failed!";
 "Pcsx failed to initialize the selected %s plugin (error=%i).\nThe plugin might not work with your system." = "Pcsx failed to initialize the selected %s plugin (error=%i).\nThe plugin might not work with your system.";
 "Error!" = "Error!";
@@ -17,3 +18,27 @@
 "Missing BIOS!" = "Missing BIOS!";
 "Pcsx wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\n" = "Pcsx wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\n";
 "If you have a BIOS available, please copy it to\n~/Library/Application Support/Pcsx/Bios/" = "If you have a BIOS available, please copy it to\n~/Library/Application Support/Pcsx/Bios/";
+"Error Opening CDR Plugin" = "Error Opening CDR Plugin";
+"Error Opening SPU Plugin" = "Error Opening SPU Plugin";
+"Error Opening GPU Plugin" = "Error Opening GPU Plugin";
+"Error Opening PAD1 Plugin" = "Error Opening PAD1 Plugin";
+"Error Opening PAD2 Plugin" = "Error Opening PAD2 Plugin";
+"Could not open BIOS:\"%s\". Enabling HLE Bios!\n" = "Could not open BIOS:\"%s\". Enabling HLE Bios!\n";
+"Error allocating memory!" = "Error allocating memory!";
+"Running PCSXR Version %s (%s).\n" = "Running PCSXR Version %s (%s).\n";
+"No memory card value was specified - creating a default card %s\n" = "No memory card value was specified - creating a default card %s\n";
+"Memory card %s failed to load!\n" = "Memory card %s failed to load!\n";
+"Loading memory card %s\n" = "Loading memory card %s\n";
+"Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n" = "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n";
+"Loaded CD Image: %s" = "Loaded CD Image: %s";
+"(Untitled)" = "(Untitled)";
+"Cheats saved to: %s\n" = "Cheats saved to: %s\n";
+"Cheats loaded from: %s\n" = "Cheats loaded from: %s\n";
+"Error allocating memory" = "Error allocating memory";
+"Unable to start debug server.\n" = "Unable to start debug server.\n";
+"Debugger started.\n" = "Debugger started.\n";
+"Debugger stopped.\n" = "Debugger stopped.\n";
+"CD-ROM Label: %.32s\n" = "CD-ROM Label: %.32s\n";
+"CD-ROM ID: %.9s\n" = "CD-ROM ID: %.9s\n";
+"Error opening file: %s.\n" = "Error opening file: %s.\n";
+"Unknown CPE opcode %02x at position %08x.\n" = "Unknown CPE opcode %02x at position %08x.\n";

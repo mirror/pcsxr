@@ -18,6 +18,7 @@
 		2BB260A90777462E00F6854C /* PluginConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB260A70777462E00F6854C /* PluginConfigController.m */; };
 		2BD2E769077AF53E00657C69 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2BD2E767077AF53E00657C69 /* Credits.rtf */; };
 		2BD7C777076E1FAB000F05ED /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B51949E06B3D2D200744730 /* GLUT.framework */; };
+		552E4CAE1474730B00FB231F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 552E4CB01474730B00FB231F /* Localizable.strings */; };
 		71E9EC06109F24E700E98D1D /* fps.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E9EBF4109F24E600E98D1D /* fps.c */; };
 		71E9EC08109F24E700E98D1D /* gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E9EBF6109F24E600E98D1D /* gpu.c */; };
 		71E9EC0B109F24E700E98D1D /* key.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E9EBF9109F24E600E98D1D /* key.c */; };
@@ -46,6 +47,7 @@
 		2BB260A60777462E00F6854C /* PluginConfigController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginConfigController.h; path = macsrc/PluginConfigController.h; sourceTree = SOURCE_ROOT; };
 		2BB260A70777462E00F6854C /* PluginConfigController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PluginConfigController.m; path = macsrc/PluginConfigController.m; sourceTree = SOURCE_ROOT; };
 		2BD2E768077AF53E00657C69 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
+		552E4CAF1474730B00FB231F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		71E9EBF1109F24E600E98D1D /* cfg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cfg.h; path = ../../../plugins/dfxvideo/cfg.h; sourceTree = SOURCE_ROOT; };
 		71E9EBF2109F24E600E98D1D /* draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = draw.h; path = ../../../plugins/dfxvideo/draw.h; sourceTree = SOURCE_ROOT; };
 		71E9EBF3109F24E600E98D1D /* externals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = externals.h; path = ../../../plugins/dfxvideo/externals.h; sourceTree = SOURCE_ROOT; };
@@ -131,6 +133,7 @@
 				28586CC714651E9B0082B8EC /* NetSfPeopsSoftGPUConfig.xib */,
 				28586CCA14651EAB0082B8EC /* NetSfPeopsSoftGPUInterface.xib */,
 				2BD2E767077AF53E00657C69 /* Credits.rtf */,
+				552E4CB01474730B00FB231F /* Localizable.strings */,
 				2B038C05069183300082466B /* InfoPlist.strings */,
 			);
 			name = Resources;
@@ -218,6 +221,7 @@
 				2BD2E769077AF53E00657C69 /* Credits.rtf in Resources */,
 				28586CC914651E9B0082B8EC /* NetSfPeopsSoftGPUConfig.xib in Resources */,
 				28586CCB14651EAB0082B8EC /* NetSfPeopsSoftGPUInterface.xib in Resources */,
+				552E4CAE1474730B00FB231F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +274,14 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
+		552E4CB01474730B00FB231F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				552E4CAF1474730B00FB231F /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -277,13 +289,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				DEBUGGING_SYMBOLS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PCSXRPLUG=SoftGL",
 					_MACGL,
 					_DARWIN,
 				);
@@ -291,7 +303,6 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				LIBRARY_STYLE = BUNDLE;
 				OPTIMIZATION_CFLAGS = "-finline-functions -finline-limit=1600 -fomit-frame-pointer -fno-exceptions -funroll-loops -falign-loops=16 -ffast-math";
 				OTHER_CFLAGS = "-finline-functions";
 				OTHER_LDFLAGS = (
@@ -303,11 +314,6 @@
 				PRODUCT_NAME = PeopsSoftGL;
 				SECTORDER_FLAGS = "";
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -316,13 +322,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				DEBUGGING_SYMBOLS = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PCSXRPLUG=SoftGL",
 					_MACGL,
 					_DARWIN,
 				);
@@ -330,7 +336,6 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				LIBRARY_STYLE = BUNDLE;
 				OPTIMIZATION_CFLAGS = "-finline-functions -finline-limit=1600 -fomit-frame-pointer -fno-exceptions -funroll-loops -falign-loops=16 -ffast-math";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -341,11 +346,6 @@
 				PRODUCT_NAME = PeopsSoftGL;
 				SECTORDER_FLAGS = "";
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -364,7 +364,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx10.6;
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
 		};
@@ -380,7 +379,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx10.6;
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
 		};

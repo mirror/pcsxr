@@ -152,6 +152,7 @@ void ReadConfig(void)
 
 - (void)awakeFromNib
 {
+	//TODO: localize these, probably in their own table
 	[interpolValue setStrings:[NSArray arrayWithObjects:
 		@"(No Interpolation)",
 		@"(Simple Interpolation)",
@@ -175,3 +176,12 @@ void ReadConfig(void)
 }
 
 @end
+
+char* PLUGLOC(char *toloc)
+{
+	NSBundle *mainBundle = [NSBundle bundleForClass:[PluginController class]];
+	NSString *origString = nil, *transString = nil;
+	origString = [NSString stringWithCString:toloc encoding:NSUTF8StringEncoding];
+	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
+	return [transString cStringUsingEncoding:NSUTF8StringEncoding];
+}

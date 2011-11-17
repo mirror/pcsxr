@@ -24,8 +24,6 @@
 #import <Cocoa/Cocoa.h>
 #import "PadView.h"
 
-@class PadView;
-
 @interface PadController : NSWindowController
 {
     IBOutlet PadView *controllerView;

@@ -9,6 +9,7 @@ AC_CONFIG_HEADERS([include/config.h:include/config.h.in])
 
 AC_PROG_CC
 AM_PROG_CC_C_O
+AC_PROG_CC_STDC
 AC_PROG_INSTALL
 AC_STDC_HEADERS
 AM_PROG_AS

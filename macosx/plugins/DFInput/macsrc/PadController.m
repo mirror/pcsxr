@@ -136,3 +136,12 @@ long DoConfiguration() {
 }
 
 @end
+
+char* PLUGLOC(char *toloc)
+{
+	NSBundle *mainBundle = [NSBundle bundleForClass:[PadController class]];
+	NSString *origString = nil, *transString = nil;
+	origString = [NSString stringWithCString:toloc encoding:NSUTF8StringEncoding];
+	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
+	return [transString cStringUsingEncoding:NSUTF8StringEncoding];
+}

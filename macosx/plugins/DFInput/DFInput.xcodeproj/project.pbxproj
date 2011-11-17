@@ -10,6 +10,7 @@
 		28586CC314651E730082B8EC /* NetPcsxrHIDInputPluginMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28586CC114651E730082B8EC /* NetPcsxrHIDInputPluginMain.xib */; };
 		2B679862069193F300E2BD4F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B679860069193F300E2BD4F /* Cocoa.framework */; };
 		2B679863069193F300E2BD4F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B679861069193F300E2BD4F /* IOKit.framework */; };
+		552E4CBF1474739200FB231F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 552E4CC11474739200FB231F /* Localizable.strings */; };
 		71054E211204A49F00AC2CCB /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71054E201204A49F00AC2CCB /* ForceFeedback.framework */; };
 		7136F1DA1200E163001973D9 /* ControllerList.h in Headers */ = {isa = PBXBuildFile; fileRef = 71E861A411FF75AC001C1826 /* ControllerList.h */; };
 		7136F1DB1200E163001973D9 /* ControllerList.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E861A511FF75AC001C1826 /* ControllerList.m */; };
@@ -74,12 +75,13 @@
 		28586CC214651E730082B8EC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetPcsxrHIDInputPluginMain.xib; sourceTree = "<group>"; };
 		2B679860069193F300E2BD4F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		2B679861069193F300E2BD4F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		552E4CC01474739200FB231F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		71054E201204A49F00AC2CCB /* ForceFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForceFeedback.framework; path = /System/Library/Frameworks/ForceFeedback.framework; sourceTree = "<absolute>"; };
 		7136F51912011BB4001973D9 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
-		714FA82A11FC822A00517F47 /* analog.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = analog.c; path = ../../../plugins/dfinput/analog.c; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.c; };
-		714FA82B11FC822A00517F47 /* pad.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = pad.c; path = ../../../plugins/dfinput/pad.c; sourceTree = SOURCE_ROOT; };
-		714FA82C11FC822A00517F47 /* pad.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = pad.h; path = ../../../plugins/dfinput/pad.h; sourceTree = SOURCE_ROOT; };
-		714FA82D11FC822A00517F47 /* sdljoy.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = sdljoy.c; path = ../../../plugins/dfinput/sdljoy.c; sourceTree = SOURCE_ROOT; };
+		714FA82A11FC822A00517F47 /* analog.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = analog.c; path = ../../../plugins/dfinput/analog.c; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.c; };
+		714FA82B11FC822A00517F47 /* pad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pad.c; path = ../../../plugins/dfinput/pad.c; sourceTree = SOURCE_ROOT; };
+		714FA82C11FC822A00517F47 /* pad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pad.h; path = ../../../plugins/dfinput/pad.h; sourceTree = SOURCE_ROOT; };
+		714FA82D11FC822A00517F47 /* sdljoy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sdljoy.c; path = ../../../plugins/dfinput/sdljoy.c; sourceTree = SOURCE_ROOT; };
 		714FA89F11FC846800517F47 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		714FA8F811FC863500517F47 /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = cfg.c; path = macsrc/cfg.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		714FA8F911FC863500517F47 /* xkb.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; name = xkb.c; path = macsrc/xkb.c; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				28586CC114651E730082B8EC /* NetPcsxrHIDInputPluginMain.xib */,
 				8D576317048677EA00EA77CD /* Info.plist */,
 				8D5B49A704867FD3000E48DA /* InfoPlist.strings */,
+				552E4CC11474739200FB231F /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */,
 				7136F51A12011BB4001973D9 /* Credits.rtf in Resources */,
 				28586CC314651E730082B8EC /* NetPcsxrHIDInputPluginMain.xib in Resources */,
+				552E4CBF1474739200FB231F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +494,14 @@
 			name = NetPcsxrHIDInputPluginMain.xib;
 			sourceTree = "<group>";
 		};
+		552E4CC11474739200FB231F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				552E4CC01474739200FB231F /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		7136F51812011BB4001973D9 /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -513,13 +525,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				DEBUGGING_SYMBOLS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PCSXRPLUG=DFInput",
 					"_MACOSX=1",
 					SDL_AUDIO_DISABLED,
 				);
@@ -532,18 +543,8 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LIBRARY_SEARCH_PATHS = .;
-				LIBRARY_STYLE = BUNDLE;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = DFInput;
-				SECTORDER_FLAGS = "";
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -552,13 +553,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				DEBUGGING_SYMBOLS = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PCSXRPLUG=DFInput",
 					"_MACOSX=1",
 					SDL_AUDIO_DISABLED,
 				);
@@ -571,20 +571,9 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LIBRARY_SEARCH_PATHS = .;
-				LIBRARY_STYLE = BUNDLE;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = DFInput;
-				SECTORDER_FLAGS = "";
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = psxplugin;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -609,7 +598,6 @@
 				SDKROOT = macosx10.6;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
 		};
@@ -632,7 +620,6 @@
 				OTHER_CFLAGS = "";
 				SDKROOT = macosx10.6;
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
 		};

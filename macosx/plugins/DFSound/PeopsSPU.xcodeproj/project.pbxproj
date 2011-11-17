@@ -14,6 +14,8 @@
 		2B7B2BD1072DAE5D007F0C35 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7B2BD0072DAE5D007F0C35 /* AppKit.framework */; };
 		2B7B2BE9072DB1B6007F0C35 /* NamedSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B2BE7072DB1B6007F0C35 /* NamedSlider.m */; };
 		2BFF7F3E0715D2E00061278A /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BFF7F3D0715D2E00061278A /* Carbon.framework */; };
+		552E4CB41474735100FB231F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 552E4CB71474735100FB231F /* Localizable.strings */; };
+		552E4CB51474735100FB231F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 552E4CB71474735100FB231F /* Localizable.strings */; };
 		5599693813AFCD2900B0216B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
 		5599693A13AFCD2900B0216B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2B4F99F7077B0CE4004E36BA /* Credits.rtf */; };
 		5599693C13AFCD2900B0216B /* PluginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B2B92072D9BE6007F0C35 /* PluginController.m */; };
@@ -69,6 +71,7 @@
 		2B7B2BE7072DB1B6007F0C35 /* NamedSlider.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = NamedSlider.m; path = macsrc/NamedSlider.m; sourceTree = "<group>"; };
 		2BFF7F3D0715D2E00061278A /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		5517C065136217DE00706CCF /* externals.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = externals.c; path = ../../../plugins/dfsound/externals.c; sourceTree = SOURCE_ROOT; };
+		552E4CB61474735100FB231F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5599692713AFCCC600B0216B /* openal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = openal.c; path = ../../../plugins/dfsound/openal.c; sourceTree = SOURCE_ROOT; };
 		5599695E13AFCD2900B0216B /* PeopsAL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopsAL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		5599696E13AFCE1D00B0216B /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -205,6 +208,7 @@
 				55C8AB0C146DCD0E005ACCCB /* Info copy.plist */,
 				2B4F99F7077B0CE4004E36BA /* Credits.rtf */,
 				8D5B49A704867FD3000E48DA /* InfoPlist.strings */,
+				552E4CB71474735100FB231F /* Localizable.strings */,
 				28F0C3A014651EFA00A90285 /* NetSfPeopsSpuPluginMain.xib */,
 			);
 			name = Resources;
@@ -458,6 +462,7 @@
 				5599693813AFCD2900B0216B /* InfoPlist.strings in Resources */,
 				5599693A13AFCD2900B0216B /* Credits.rtf in Resources */,
 				28F0C3A314651EFA00A90285 /* NetSfPeopsSpuPluginMain.xib in Resources */,
+				552E4CB51474735100FB231F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +473,7 @@
 				8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */,
 				2B4F99F9077B0CE4004E36BA /* Credits.rtf in Resources */,
 				28F0C3A214651EFA00A90285 /* NetSfPeopsSpuPluginMain.xib in Resources */,
+				552E4CB41474735100FB231F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,6 +546,14 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
+		552E4CB71474735100FB231F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				552E4CB61474735100FB231F /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		8D5B49A704867FD3000E48DA /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -559,13 +573,13 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PCSXRPLUG=ALsound",
 					_MACOSX,
 					USEOPENAL,
 				);
 				HEADER_SEARCH_PATHS = (
 					src/,
 					../../../plugins/dfsound,
-					../Common/SDL/include,
 				);
 				INFOPLIST_FILE = "Info copy.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -582,18 +596,16 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PCSXRPLUG=ALsound",
 					_MACOSX,
 					USEOPENAL,
 				);
 				HEADER_SEARCH_PATHS = (
 					src/,
 					../../../plugins/dfsound,
-					../Common/SDL/include,
 				);
 				INFOPLIST_FILE = "Info copy.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				OTHER_CFLAGS = "";
-				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = PeopsAL;
 				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
@@ -608,6 +620,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PCSXRPLUG=SPUSound",
 					_MACOSX,
 					USESDL,
 					SDL_JOYSTICK_DISABLED,
@@ -629,10 +642,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				DEBUGGING_SYMBOLS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PCSXRPLUG=SPUSound",
 					_MACOSX,
 					USESDL,
 					SDL_JOYSTICK_DISABLED,
@@ -660,7 +673,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx10.6;
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
 		};
@@ -672,7 +684,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx10.6;
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
 		};

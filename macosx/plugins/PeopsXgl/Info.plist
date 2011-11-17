@@ -16,5 +16,7 @@
 	<string>POGl</string>
 	<key>CFBundleVersion</key>
 	<string>1.16</string>
+	<key>NSPrincipalClass</key>
+	<string>NetSfPeopsOpenGLPluginConfigController</string>
 </dict>
 </plist>

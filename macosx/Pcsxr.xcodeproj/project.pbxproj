@@ -394,10 +394,10 @@
 		2BA178AD0514CE260026D74D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				559DACEC146C72FF00C5DF71 /* Localizable.strings */,
 				2BBB1786051E0D9700B84448 /* Credits.rtf */,
 				28F0C3C4146521A700A90285 /* Configuration.xib */,
 				2BA178B20514CE260026D74D /* InfoPlist.strings */,
+				559DACEC146C72FF00C5DF71 /* Localizable.strings */,
 				28F0C3C7146521B000A90285 /* PCSXR.xib */,
 				28F0C3CA146521B700A90285 /* AddPluginSheet.xib */,
 			);
@@ -878,13 +878,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				DEBUGGING_SYMBOLS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_ASM_KEYWORD = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					PCSXRCORE,
 					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_1)",
 					__MACOSX__,
 				);
@@ -907,13 +907,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				DEBUGGING_SYMBOLS = NO;
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_ASM_KEYWORD = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					PCSXRCORE,
 					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_1)",
 					__MACOSX__,
 				);
@@ -948,7 +948,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lz";
 				SDKROOT = macosx10.6;
-				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
 		};
@@ -973,7 +972,6 @@
 				OTHER_CFLAGS = "-fomit-frame-pointer";
 				OTHER_LDFLAGS = "-lz";
 				SDKROOT = macosx10.6;
-				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
 		};

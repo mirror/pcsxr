@@ -52,6 +52,12 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>mcr</string>
+				<string>mc</string>
+				<string>mem</string>
+				<string>vgs</string>
+				<string>mcd</string>
+				<string>gme</string>
+				<string>ddf</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>pcsxrmemcard</string>
@@ -173,6 +179,12 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>mcr</string>
+					<string>mc</string>
+					<string>mem</string>
+					<string>vgs</string>
+					<string>mcd</string>
+					<string>gme</string>
+					<string>ddf</string>
 				</array>
 			</dict>
 		</dict>

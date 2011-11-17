@@ -26,6 +26,7 @@
 		3F7F384E13079BFD00556C34 /* gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F384113079BFD00556C34 /* gpu.c */; };
 		3F7F384F13079BFD00556C34 /* soft.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F384313079BFD00556C34 /* soft.c */; };
 		3F7F385013079BFD00556C34 /* draw.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F7F384713079BFD00556C34 /* draw.c */; };
+		552E4CC91474742F00FB231F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 552E4CCB1474742F00FB231F /* Localizable.strings */; };
 		A191B90713F6741300D0971F /* gte_accuracy.c in Sources */ = {isa = PBXBuildFile; fileRef = A191B90513F6741300D0971F /* gte_accuracy.c */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		3F7F384513079BFD00556C34 /* externals.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; lineEnding = 2; name = externals.h; path = ../../../plugins/peopsxgl/externals.h; sourceTree = SOURCE_ROOT; };
 		3F7F384613079BFD00556C34 /* draw.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = draw.h; path = ../../../plugins/peopsxgl/draw.h; sourceTree = SOURCE_ROOT; };
 		3F7F384713079BFD00556C34 /* draw.c */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = draw.c; path = ../../../plugins/peopsxgl/draw.c; sourceTree = SOURCE_ROOT; };
+		552E4CCA1474742F00FB231F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55F36E4A146C9F9900718DE6 /* drawgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = drawgl.h; path = macsrc/drawgl.h; sourceTree = "<group>"; };
 		A191B90513F6741300D0971F /* gte_accuracy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gte_accuracy.c; path = ../../../plugins/peopsxgl/gte_accuracy.c; sourceTree = SOURCE_ROOT; };
 		A191B90613F6741300D0971F /* gte_accuracy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gte_accuracy.h; path = ../../../plugins/peopsxgl/gte_accuracy.h; sourceTree = SOURCE_ROOT; };
@@ -139,6 +141,7 @@
 				28586CBF14651E560082B8EC /* NetSfPeopsOpenGLGPUInterface.xib */,
 				2BD2E767077AF53E00657C69 /* Credits.rtf */,
 				2B038C05069183300082466B /* InfoPlist.strings */,
+				552E4CCB1474742F00FB231F /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				2BD2E769077AF53E00657C69 /* Credits.rtf in Resources */,
 				28586CBE14651D960082B8EC /* NetSfPeopsOpenGLConfig.xib in Resources */,
 				28586CC014651E560082B8EC /* NetSfPeopsOpenGLGPUInterface.xib in Resources */,
+				552E4CC91474742F00FB231F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +287,14 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
+		552E4CCB1474742F00FB231F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				552E4CCA1474742F00FB231F /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -290,13 +302,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				DEBUGGING_SYMBOLS = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 1;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PCSXRPLUG=PeopsXGL",
 					_MACGL,
 					_DARWIN,
 				);
@@ -315,11 +326,6 @@
 				PRODUCT_NAME = PeopsXGL;
 				SECTORDER_FLAGS = "";
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -328,13 +334,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				DEBUGGING_SYMBOLS = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PCSXRPLUG=PeopsXGL",
 					_MACGL,
 					_DARWIN,
 				);
@@ -352,11 +357,6 @@
 				PRODUCT_NAME = PeopsXGL;
 				SECTORDER_FLAGS = "";
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;

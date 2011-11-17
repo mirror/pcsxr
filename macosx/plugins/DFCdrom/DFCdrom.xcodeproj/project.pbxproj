@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		28586CC614651E870082B8EC /* DFCdromPluginConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28586CC414651E870082B8EC /* DFCdromPluginConfig.xib */; };
 		2BD707180555997500CB5D9B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD707170555997500CB5D9B /* IOKit.framework */; };
+		552E4CBA1474737A00FB231F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 552E4CBC1474737A00FB231F /* Localizable.strings */; };
 		713DB2E811F113C30001BDD4 /* cdr.c in Sources */ = {isa = PBXBuildFile; fileRef = 713DB2E311F113C30001BDD4 /* cdr.c */; };
 		713DB2E911F113C30001BDD4 /* cdr.h in Headers */ = {isa = PBXBuildFile; fileRef = 713DB2E411F113C30001BDD4 /* cdr.h */; };
 		713DB2EB11F113C30001BDD4 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 713DB2E611F113C30001BDD4 /* util.c */; };
@@ -28,6 +29,7 @@
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		28586CC514651E870082B8EC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/DFCdromPluginConfig.xib; sourceTree = "<group>"; };
 		2BD707170555997500CB5D9B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		552E4CBB1474737A00FB231F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		713DB2E311F113C30001BDD4 /* cdr.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = cdr.c; path = ../../../plugins/dfcdrom/cdr.c; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		713DB2E411F113C30001BDD4 /* cdr.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = cdr.h; path = ../../../plugins/dfcdrom/cdr.h; sourceTree = SOURCE_ROOT; };
 		713DB2E611F113C30001BDD4 /* util.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = util.c; path = ../../../plugins/dfcdrom/util.c; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.c; };
@@ -86,6 +88,7 @@
 				71F3C47811F3D108007B9F12 /* Credits.rtf */,
 				8D576317048677EA00EA77CD /* Info.plist */,
 				8D5B49A704867FD3000E48DA /* InfoPlist.strings */,
+				552E4CBC1474737A00FB231F /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */,
 				71F3C47A11F3D108007B9F12 /* Credits.rtf in Resources */,
 				28586CC614651E870082B8EC /* DFCdromPluginConfig.xib in Resources */,
+				552E4CBA1474737A00FB231F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +241,14 @@
 			name = DFCdromPluginConfig.xib;
 			sourceTree = "<group>";
 		};
+		552E4CBC1474737A00FB231F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				552E4CBB1474737A00FB231F /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		71F3C47811F3D108007B9F12 /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -262,25 +274,21 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PCSXRPLUG=DFCdrom",
+					"_MACOSX=1",
+				);
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				LIBRARY_STYLE = BUNDLE;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = DFCdrom;
 				SECTORDER_FLAGS = "";
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -289,30 +297,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				DEBUGGING_SYMBOLS = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PCSXRPLUG=DFCdrom",
+					"_MACOSX=1",
+				);
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				LIBRARY_STYLE = BUNDLE;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = DFCdrom;
 				SECTORDER_FLAGS = "";
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = psxplugin;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -333,7 +335,6 @@
 				SDKROOT = macosx10.6;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
 		};
@@ -351,7 +352,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx10.6;
 				SYMROOT = ../../build;
-				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
 		};
