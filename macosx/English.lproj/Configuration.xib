@@ -49,7 +49,7 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{55, 345}, {552, 268}}</string>
 				<int key="NSWTFlags">807927808</int>
-				<string key="NSWindowTitle">PCSX Preferences</string>
+				<string key="NSWindowTitle">PCSXR Preferences</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<object class="NSMutableString" key="NSViewClass">
 					<characters key="NS.bytes">View</characters>
@@ -67,6 +67,7 @@
 							<string key="NSFrame">{{13, 10}, {526, 252}}</string>
 							<reference key="NSSuperview" ref="644483536"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="309207255"/>
 							<array class="NSMutableArray" key="NSTabViewItems">
 								<object class="NSTabViewItem" id="150404821">
 									<object class="NSMutableString" key="NSIdentifier">
@@ -547,6 +548,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 																<string key="NSFrame">{{18, 16}, {232, 40}}</string>
 																<reference key="NSSuperview" ref="584348218"/>
 																<reference key="NSWindow"/>
+																<reference key="NSNextKeyView"/>
 																<bool key="NSEnabled">YES</bool>
 																<int key="NSNumRows">2</int>
 																<int key="NSNumCols">1</int>
