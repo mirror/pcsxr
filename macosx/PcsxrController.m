@@ -368,19 +368,19 @@ NSString *saveStatePath;
 
         url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Memory Cards/Mcd001.mcr"];
 		str = [[url path] fileSystemRepresentation];
-		if (str != nil) strncpy(Config.Mcd1, str, 255);
+		if (str != nil) strncpy(Config.Mcd1, str, MAXPATHLEN);
 
 		url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Memory Cards/Mcd002.mcr"];
 		str = [[url path] fileSystemRepresentation];
-		if (str != nil) strncpy(Config.Mcd2, str, 255);
+		if (str != nil) strncpy(Config.Mcd2, str, MAXPATHLEN);
 
 		url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Bios"];
 		str = [[url path] fileSystemRepresentation];
-		if (str != nil) strncpy(Config.BiosDir, str, 255);
+		if (str != nil) strncpy(Config.BiosDir, str, MAXPATHLEN);
 
 		url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Patches"];
 		str = [[url path] fileSystemRepresentation];
-		if (str != nil) strncpy(Config.PatchesDir, str, 255);
+		if (str != nil) strncpy(Config.PatchesDir, str, MAXPATHLEN);
 	} else {
 		strcpy(Config.BiosDir, "Bios/");
 		strcpy(Config.PatchesDir, "Patches/");
@@ -392,7 +392,7 @@ NSString *saveStatePath;
 	// set plugin path
 	path = [[NSBundle mainBundle] builtInPlugInsPath];
 	str = [path fileSystemRepresentation];
-	if (str != nil) strncpy(Config.PluginsDir, str, 255);
+	if (str != nil) strncpy(Config.PluginsDir, str, MAXPATHLEN);
 
 	// locate a bios
 	biosList = [[NSMutableArray alloc] init];
