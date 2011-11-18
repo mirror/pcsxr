@@ -90,6 +90,62 @@ int _OpenPlugins() {
     PAD2_registerVibration(GPU_visualVibration);
     PAD2_registerCursor(GPU_cursor);
 
+	if (Config.UseNet && !NetOpened) {
+		netInfo info;
+		char path[MAXPATHLEN];
+		
+		strcpy(info.EmuName, "PCSX " PACKAGE_VERSION);
+		strncpy(info.CdromID, CdromId, 9);
+		strncpy(info.CdromLabel, CdromLabel, 9);
+		info.psxMem = psxM;
+		info.GPU_showScreenPic = GPU_showScreenPic;
+		info.GPU_displayText = GPU_displayText;
+		info.GPU_showScreenPic = GPU_showScreenPic;
+		info.PAD_setSensitive = PAD1_setSensitive;
+		sprintf(path, "%s%s", Config.BiosDir, Config.Bios);
+		strcpy(info.BIOSpath, path);
+		strcpy(info.MCD1path, Config.Mcd1);
+		strcpy(info.MCD2path, Config.Mcd2);
+		sprintf(path, "%s%s", Config.PluginsDir, Config.Gpu);
+		strcpy(info.GPUpath, path);
+		sprintf(path, "%s%s", Config.PluginsDir, Config.Spu);
+		strcpy(info.SPUpath, path);
+		sprintf(path, "%s%s", Config.PluginsDir, Config.Cdr);
+		strcpy(info.CDRpath, path);
+		NET_setInfo(&info);
+		
+		ret = NET_open(&gpuDisp);
+		if (ret < 0) {
+			if (ret == -2) {
+				// -2 is returned when something in the info
+				// changed and needs to be synced
+				char *ptr;
+				
+				PARSEPATH(Config.Bios, info.BIOSpath);
+				PARSEPATH(Config.Gpu,  info.GPUpath);
+				PARSEPATH(Config.Spu,  info.SPUpath);
+				PARSEPATH(Config.Cdr,  info.CDRpath);
+				
+				strcpy(Config.Mcd1, info.MCD1path);
+				strcpy(Config.Mcd2, info.MCD2path);
+				return -2;
+			} else {
+				Config.UseNet = FALSE;
+			}
+		} else {
+			
+			if (NET_queryPlayer() == 1) {
+				if (SendPcsxInfo() == -1) Config.UseNet = FALSE;
+			} else {
+				if (RecvPcsxInfo() == -1) Config.UseNet = FALSE;
+			}
+			
+		}
+		NetOpened = TRUE;
+	} else if (Config.UseNet) {
+		NET_resume();
+	}
+	
 	return 0;
 }
 
@@ -119,6 +175,10 @@ void ClosePlugins() {
 	if (ret < 0) { SysMessage(_("Error Closing PAD2 Plugin")); return; }
 	ret = GPU_close();
 	if (ret < 0) { SysMessage(_("Error Closing GPU Plugin")); return; }
+
+	if (Config.UseNet) {
+		NET_pause();
+	}
 }
 
 void ResetPlugins() {
@@ -129,7 +189,8 @@ void ResetPlugins() {
 	SPU_shutdown();
 	PAD1_shutdown();
 	PAD2_shutdown();
-
+	if (Config.UseNet) NET_shutdown();
+	
 	ret = CDR_init();
 	if (ret < 0) { SysMessage(_("CDRinit error: %d"), ret); return; }
 	ret = GPU_init();
@@ -140,6 +201,10 @@ void ResetPlugins() {
 	if (ret < 0) { SysMessage(_("PAD1init error: %d"), ret); return; }
 	ret = PAD2_init(2);
 	if (ret < 0) { SysMessage(_("PAD2init error: %d"), ret); return; }
+	if (Config.UseNet) {
+		ret = NET_init();
+		if (ret < 0) { SysMessage(_("NETinit error: %d"), ret); return; }
+	}
 
 	NetOpened = FALSE;
 }

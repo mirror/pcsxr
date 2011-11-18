@@ -10,6 +10,7 @@
     IBOutlet PluginController *graphicsPlugin;
     IBOutlet PluginController *padPlugin;
     IBOutlet PluginController *soundPlugin;
+	IBOutlet PluginController *netPlugin;
 
 	IBOutlet id noXaAudioCell;
 	IBOutlet id sioIrqAlwaysCell;
@@ -24,6 +25,7 @@
 	IBOutlet id rCountFixCell;
 	IBOutlet id vSyncWAFixCell;
 	IBOutlet id noFastBootCell;
+	IBOutlet id enableNetPlayCell;
 
 	IBOutlet NSTextField *mcd1Label;
 	IBOutlet NSTextField *mcd2Label;

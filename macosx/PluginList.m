@@ -14,7 +14,7 @@
 
 //NSMutableArray *plugins;
 static PluginList *sPluginList = nil;
-const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
+const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, PSE_LT_NET};
 
 @implementation PluginList
 
@@ -98,7 +98,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	pluginList = [[NSMutableArray alloc] initWithCapacity:20];
 
-	activeGpuPlugin = activeSpuPlugin = activeCdrPlugin = activePadPlugin = nil;
+	activeGpuPlugin = activeSpuPlugin = activeCdrPlugin = activePadPlugin = activeNetPlugin = nil;
 	
 	missingPlugins = NO;
 	for (i = 0; i < sizeof(*typeList); i++) {
@@ -137,6 +137,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 	[activeSpuPlugin release];
 	[activeCdrPlugin release];
 	[activePadPlugin release];
+	[activeNetPlugin release];
 	
 	[pluginList release];
 	
@@ -240,6 +241,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 	if ([activeSpuPlugin initAs:PSE_LT_SPU] != 0) bad = YES;
 	if ([activeCdrPlugin initAs:PSE_LT_CDR] != 0) bad = YES;
 	if ([activePadPlugin initAs:PSE_LT_PAD] != 0) bad = YES;
+	if ([activeNetPlugin initAs:PSE_LT_NET] != 0) bad = YES;
 	
 	return !bad;
 }
@@ -251,7 +253,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 		case PSE_LT_CDR: return activeCdrPlugin;
 		case PSE_LT_SPU: return activeSpuPlugin;
 		case PSE_LT_PAD: return activePadPlugin;
-//		case PSE_LT_NET: return activeNetPlugin;
+		case PSE_LT_NET: return activeNetPlugin;
 	}
 	
 	return nil;
@@ -265,7 +267,7 @@ const static int typeList[4] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD};
 		case PSE_LT_CDR: pluginPtr = &activeCdrPlugin; break;
 		case PSE_LT_SPU: pluginPtr = &activeSpuPlugin; break;
 		case PSE_LT_PAD: pluginPtr = &activePadPlugin; break;
-//		case PSE_LT_NET: pluginPtr = &activeNetPlugin; break;
+		case PSE_LT_NET: pluginPtr = &activeNetPlugin; break;
 		default: return NO;
 	}
 	

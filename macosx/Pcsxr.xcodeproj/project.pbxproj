@@ -41,6 +41,7 @@
 		559366CF12B694DF004ACC1E /* ix86_mmx.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C712B694DF004ACC1E /* ix86_mmx.c */; };
 		559366D012B694DF004ACC1E /* ix86_sse.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C812B694DF004ACC1E /* ix86_sse.c */; };
 		559DAC47146BA61F00C5DF71 /* PeopsAL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 28B467F11463D0020083F129 /* PeopsAL.psxplugin */; };
+		559DACBB146C68C500C5DF71 /* DFNet.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 559DACAE146C647E00C5DF71 /* DFNet.psxplugin */; };
 		559DACEE146C72FF00C5DF71 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 559DACEC146C72FF00C5DF71 /* Localizable.strings */; };
 		712FD1E81093096F00575A92 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E51093096F00575A92 /* debug.c */; };
 		712FD1E91093096F00575A92 /* socket.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E61093096F00575A92 /* socket.c */; };
@@ -111,6 +112,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 5599693613AFCD2900B0216B;
 			remoteInfo = PeopsAL;
+		};
+		559DACAD146C647E00C5DF71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 559DACA3146C647E00C5DF71 /* DFNet.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D576316048677EA00EA77CD;
+			remoteInfo = DFNet;
+		};
+		559DACB9146C68B700C5DF71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 559DACA3146C647E00C5DF71 /* DFNet.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D57630D048677EA00EA77CD;
+			remoteInfo = DFNet;
 		};
 		713CB2DD11FC49720033B6A8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -191,6 +206,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				559DACBB146C68C500C5DF71 /* DFNet.psxplugin in Copy PlugIns */,
 				559DAC47146BA61F00C5DF71 /* PeopsAL.psxplugin in Copy PlugIns */,
 				71D888D6130F04F100F150FF /* PeopsXGL.psxplugin in Copy PlugIns */,
 				71F2C0881200B6B000322AD9 /* DFInput.psxplugin in Copy PlugIns */,
@@ -256,6 +272,7 @@
 		559366C612B694DF004ACC1E /* ix86_fpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86_fpu.c; sourceTree = "<group>"; };
 		559366C712B694DF004ACC1E /* ix86_mmx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86_mmx.c; sourceTree = "<group>"; };
 		559366C812B694DF004ACC1E /* ix86_sse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86_sse.c; sourceTree = "<group>"; };
+		559DACA3146C647E00C5DF71 /* DFNet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DFNet.xcodeproj; path = plugins/DFNet/DFNet.xcodeproj; sourceTree = "<group>"; };
 		559DACED146C72FF00C5DF71 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = Localizable.strings; sourceTree = "<group>"; };
 		712FD1E51093096F00575A92 /* debug.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = debug.c; sourceTree = "<group>"; };
 		712FD1E61093096F00575A92 /* socket.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = socket.c; sourceTree = "<group>"; };
@@ -408,6 +425,7 @@
 		2BBD6C1D04C893F500A83E33 /* PlugIns */ = {
 			isa = PBXGroup;
 			children = (
+				559DACA3146C647E00C5DF71 /* DFNet.xcodeproj */,
 				71D888CE130F04DC00F150FF /* PeopsXGL.xcodeproj */,
 				71F2C07E1200B69B00322AD9 /* DFInput.xcodeproj */,
 				71F93F6311FB8E9D007A5A7C /* DFCdrom.xcodeproj */,
@@ -537,6 +555,14 @@
 			path = ix86_64;
 			sourceTree = "<group>";
 		};
+		559DACA4146C647E00C5DF71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				559DACAE146C647E00C5DF71 /* DFNet.psxplugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		71AD2DCD10C356FD00365243 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -606,6 +632,7 @@
 				2BB3D6D005427FE200831ACB /* PBXBuildRule */,
 			);
 			dependencies = (
+				559DACBA146C68B700C5DF71 /* PBXTargetDependency */,
 				559DAC46146BA61400C5DF71 /* PBXTargetDependency */,
 				71AD2DE910C3572200365243 /* PBXTargetDependency */,
 				71AD2DEB10C3572500365243 /* PBXTargetDependency */,
@@ -649,6 +676,10 @@
 					ProjectRef = 71F2C07E1200B69B00322AD9 /* DFInput.xcodeproj */;
 				},
 				{
+					ProductGroup = 559DACA4146C647E00C5DF71 /* Products */;
+					ProjectRef = 559DACA3146C647E00C5DF71 /* DFNet.xcodeproj */;
+				},
+				{
 					ProductGroup = 71AD2DD810C3570900365243 /* Products */;
 					ProjectRef = 71AD2DD210C3570900365243 /* PeopsSoftGPU.xcodeproj */;
 				},
@@ -674,6 +705,13 @@
 			fileType = wrapper.cfbundle;
 			path = PeopsAL.psxplugin;
 			remoteRef = 28B467F01463D0020083F129 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		559DACAE146C647E00C5DF71 /* DFNet.psxplugin */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DFNet.psxplugin;
+			remoteRef = 559DACAD146C647E00C5DF71 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		71AD2DD110C356FD00365243 /* PeopsSPU.psxplugin */ = {
@@ -794,6 +832,11 @@
 			isa = PBXTargetDependency;
 			name = PeopsAL;
 			targetProxy = 559DAC45146BA61400C5DF71 /* PBXContainerItemProxy */;
+		};
+		559DACBA146C68B700C5DF71 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DFNet;
+			targetProxy = 559DACB9146C68B700C5DF71 /* PBXContainerItemProxy */;
 		};
 		713CB2DE11FC49720033B6A8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

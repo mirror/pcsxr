@@ -34,19 +34,6 @@ int ExecCfg(const char *arg, int f) {
 	return system(cfg);
 }
 
-void SysMessage(const char *fmt, ...) {
-	va_list list;
-	char msg[512];
-	char cmd[512];
-
-	va_start(list, fmt);
-	vsprintf(msg, fmt, list);
-	va_end(list);
-
-	sprintf(cmd, "message %s\n", msg);
-	ExecCfg(cmd, 1);
-}
-
 long sockInit() {
 	conf.PlayerNum = 0;
 	tm.tv_sec = 0;
@@ -56,14 +43,6 @@ long sockInit() {
 }
 
 long sockShutdown() {
-	return 0;
-}
-
-long sockOpen() {
-	if (ExecCfg("open", 0) == 0) return -1;
-
-	LoadConf();
-
 	return 0;
 }
 
@@ -80,6 +59,29 @@ int sockPing() {
 
 	return (tvn.tv_sec - tv.tv_sec) * 1000 +
 		   (tvn.tv_usec - tv.tv_usec) / 1000;
+}
+
+#ifndef _MACOSX
+void SysMessage(const char *fmt, ...) {
+	va_list list;
+	char msg[512];
+	char cmd[512];
+
+	va_start(list, fmt);
+	vsprintf(msg, fmt, list);
+	va_end(list);
+
+	sprintf(cmd, "message %s\n", msg);
+	ExecCfg(cmd, 1);
+}
+
+
+long sockOpen() {
+	if (ExecCfg("open", 0) == 0) return -1;
+
+	LoadConf();
+
+	return 0;
 }
 
 void CALLBACK NETconfigure() {
@@ -116,6 +118,7 @@ void sockDestroyWaitDlg() {
 		cfgpid = 0;
 	}
 }
+#endif
 
 long timeGetTime() {
 	struct timeval tv;

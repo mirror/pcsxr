@@ -16,12 +16,13 @@
     @private
     NSMutableArray *pluginList;
 	 
-	 PcsxrPlugin *activeGpuPlugin;
-	 PcsxrPlugin *activeSpuPlugin;
-	 PcsxrPlugin *activeCdrPlugin;
-	 PcsxrPlugin *activePadPlugin;
+	PcsxrPlugin *activeGpuPlugin;
+	PcsxrPlugin *activeSpuPlugin;
+	PcsxrPlugin *activeCdrPlugin;
+	PcsxrPlugin *activePadPlugin;
+	PcsxrPlugin *activeNetPlugin;
 	 
-	 BOOL missingPlugins;
+	BOOL missingPlugins;
 }
 
 + (PluginList *)list;

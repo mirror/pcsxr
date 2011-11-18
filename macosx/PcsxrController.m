@@ -276,8 +276,11 @@ NSString *saveStatePath;
 		else strcpy(Config.Bios, "HLE");
 	}
 
-	// FIXME: hack
-	strcpy(Config.Net, "Disabled");
+	str = [[defaults stringForKey:@"Net"] fileSystemRepresentation];
+	if (str) strncpy(Config.Net, str, MAXPATHLEN);
+	else {
+			strcpy(Config.Net, "Disabled");
+	}
 }
 
 + (void)setDefaultFromConfig:(NSString *)defaultKey
@@ -309,7 +312,6 @@ NSString *saveStatePath;
 	const char *str;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
-		@"Disabled", @"PluginNET",
 		[NSNumber numberWithInt:1], @"NoDynarec",
 		[NSNumber numberWithInt:1], @"AutoDetectVideoType",
 		[NSNumber numberWithInt:0], @"UseHLE",
@@ -329,6 +331,7 @@ NSString *saveStatePath;
 
 	prefByteKeys = [[NSDictionary alloc] initWithObjectsAndKeys:
 		[NSValue valueWithPointer:&Config.Xa], @"NoXaAudio",
+		[NSValue valueWithPointer:&Config.UseNet], @"NetPlay",
 		[NSValue valueWithPointer:&Config.Sio], @"SioIrqAlways",
 		[NSValue valueWithPointer:&Config.Mdec], @"BlackAndWhiteMDECVideo",
 		[NSValue valueWithPointer:&Config.PsxAuto], @"AutoDetectVideoType",
