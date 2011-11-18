@@ -23,6 +23,17 @@
 "Error Opening GPU Plugin" = "Error Opening GPU Plugin";
 "Error Opening PAD1 Plugin" = "Error Opening PAD1 Plugin";
 "Error Opening PAD2 Plugin" = "Error Opening PAD2 Plugin";
+"Error Closing CDR Plugin" = "Error Closing CDR Plugin";
+"Error Closing SPU Plugin" = "Error Closing SPU Plugin";
+"Error Closing PAD1 Plugin" = "Error Closing PAD1 Plugin";
+"Error Closing PAD2 Plugin" = "Error Closing PAD2 Plugin";
+"Error Closing GPU Plugin" = "Error Closing GPU Plugin";
+"CDRinit error: %d" = "CDRinit error: %d";
+"GPUinit error: %d" = "GPUinit error: %d";
+"SPUinit error: %d" = "SPUinit error: %d";
+"PAD1init error: %d" = "PAD1init error: %d";
+"PAD2init error: %d" = "PAD2init error: %d";
+"NETinit error: %d" = "NETinit error: %d";
 "Could not open BIOS:\"%s\". Enabling HLE Bios!\n" = "Could not open BIOS:\"%s\". Enabling HLE Bios!\n";
 "Error allocating memory!" = "Error allocating memory!";
 "Running PCSXR Version %s (%s).\n" = "Running PCSXR Version %s (%s).\n";
@@ -41,4 +52,4 @@
 "CD-ROM Label: %.32s\n" = "CD-ROM Label: %.32s\n";
 "CD-ROM ID: %.9s\n" = "CD-ROM ID: %.9s\n";
 "Error opening file: %s.\n" = "Error opening file: %s.\n";
-"Unknown CPE opcode %02x at position %08x.\n" = "Unknown CPE opcode %02x at position %08x.\n";
+"Unknown CPE opcode %02x at poiition %08x.\n" = "Unknown CPE opcode %02x at position %08x.\n";
