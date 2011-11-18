@@ -135,7 +135,8 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>com.apple.application-​bundle</string>
+				<string>com.apple.package</string>
+				<string>com.apple.bundle</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>Playstation Emulator Plug-in</string>
