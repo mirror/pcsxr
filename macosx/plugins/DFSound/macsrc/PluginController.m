@@ -183,26 +183,27 @@ void ReadConfig(void)
 
 - (void)awakeFromNib
 {
-	//TODO: localize these, probably in their own table
+	NSBundle *mainBundle = [NSBundle bundleForClass:[self class]];
+
 	[interpolValue setStrings:[NSArray arrayWithObjects:
-		@"(No Interpolation)",
-		@"(Simple Interpolation)",
-		@"(Gaussian Interpolation)",
-		@"(Cubic Interpolation)",
+		[mainBundle localizedStringForKey:@"(No Interpolation)" value:nil table:nil],
+		[mainBundle localizedStringForKey:@"(Simple Interpolation)" value:nil table:nil],
+		[mainBundle localizedStringForKey:@"(Gaussian Interpolation)" value:nil table:nil],
+		[mainBundle localizedStringForKey:@"(Cubic Interpolation)" value:nil table:nil],
 		nil]];
 
 	[reverbValue setStrings:[NSArray arrayWithObjects:
-		@"(No Reverb)",
-		@"(Simple Reverb)",
-		@"(PSX Reverb)",
+		[mainBundle localizedStringForKey:@"(No Reverb)" value:nil table:nil],
+		[mainBundle localizedStringForKey:@"(Simple Reverb)" value:nil table:nil],
+		[mainBundle localizedStringForKey:@"(PSX Reverb)" value:nil table:nil],
 		nil]];
 
 	[volumeValue setStrings:[NSArray arrayWithObjects:
-		@"(Muted)",
-		@"(Low)",
-		@"(Medium)",
-		@"(Loud)",
-		@"(Loudest)",
+		[mainBundle localizedStringForKey:@"(Muted)" value:nil table:nil],
+		[mainBundle localizedStringForKey:@"(Low)" value:nil table:nil],
+		[mainBundle localizedStringForKey:@"(Medium)" value:nil table:nil],
+		[mainBundle localizedStringForKey:@"(Loud)" value:nil table:nil],
+		[mainBundle localizedStringForKey:@"(Loudest)" value:nil table:nil],
 		nil]];
 }
 
