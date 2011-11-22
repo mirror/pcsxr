@@ -61,6 +61,7 @@
 							<reference key="NSSuperview" ref="802729152"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="55702062"/>
+							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="17339299">
 								<int key="NSCellFlags">67239424</int>
@@ -92,6 +93,7 @@
 							<reference key="NSSuperview" ref="802729152"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView"/>
+							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="970797641">
 								<int key="NSCellFlags">67239424</int>
@@ -130,6 +132,7 @@
 							<reference key="NSSuperview" ref="802729152"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="478793345"/>
+							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSImageCell" key="NSCell" id="782440341">
 								<int key="NSCellFlags">130560</int>
@@ -152,6 +155,7 @@
 							<reference key="NSSuperview" ref="802729152"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="748030488"/>
+							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="913120470">
 								<int key="NSCellFlags">67239424</int>
@@ -190,11 +194,12 @@
 							<reference key="NSSuperview" ref="802729152"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="106264949"/>
+							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="947003098">
 								<int key="NSCellFlags">69336577</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Do you want to install this plugin into PCSX?</string>
+								<string key="NSContents">Do you want to install this plugin into PCSXR?</string>
 								<object class="NSFont" key="NSSupport">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">11</double>
@@ -217,6 +222,7 @@
 							<reference key="NSSuperview" ref="802729152"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="227277173"/>
+							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="724352047">
 								<int key="NSCellFlags">-2072904127</int>
@@ -251,8 +257,9 @@
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="246336878"/>
+					<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1024, 746}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
 				<string key="NSMinSize">{94, 29}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
@@ -464,6 +471,10 @@
 				<string key="43.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="44.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="47.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<real value="0.0" key="47.IBViewIntegration.shadowBlurRadius"/>
+				<reference key="47.IBViewIntegration.shadowColor" ref="448300209"/>
+				<real value="0.0" key="47.IBViewIntegration.shadowOffsetHeight"/>
+				<real value="0.0" key="47.IBViewIntegration.shadowOffsetWidth"/>
 				<string key="55.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
