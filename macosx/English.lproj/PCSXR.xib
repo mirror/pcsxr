@@ -240,6 +240,14 @@
 									<reference key="NSOnImage" ref="926047672"/>
 									<reference key="NSMixedImage" ref="645484985"/>
 								</object>
+								<object class="NSMenuItem" id="927940433">
+									<reference key="NSMenu" ref="164090988"/>
+									<string key="NSTitle">Pause When Inactive</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="926047672"/>
+									<reference key="NSMixedImage" ref="645484985"/>
+								</object>
 								<object class="NSMenuItem" id="705784993">
 									<reference key="NSMenu" ref="164090988"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -752,6 +760,14 @@
 					</object>
 					<int key="connectionID">316</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">pauseInBackground:</string>
+						<reference key="source" ref="113826207"/>
+						<reference key="destination" ref="927940433"/>
+					</object>
+					<int key="connectionID">319</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -949,6 +965,7 @@
 							<reference ref="81274320"/>
 							<reference ref="471681869"/>
 							<reference ref="74319449"/>
+							<reference ref="927940433"/>
 						</object>
 						<reference key="parent" ref="622845102"/>
 					</object>
@@ -1136,6 +1153,11 @@
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Application</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">318</int>
+						<reference key="object" ref="927940433"/>
+						<reference key="parent" ref="164090988"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1190,6 +1212,7 @@
 					<string>310.IBPluginDependency</string>
 					<string>311.IBPluginDependency</string>
 					<string>312.IBPluginDependency</string>
+					<string>318.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>56.IBPluginDependency</string>
 					<string>57.IBPluginDependency</string>
@@ -1200,6 +1223,7 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1269,7 +1293,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">317</int>
+			<int key="maxID">319</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1286,6 +1310,7 @@
 							<string>freeze:</string>
 							<string>fullscreen:</string>
 							<string>pause:</string>
+							<string>pauseInBackground:</string>
 							<string>preferences:</string>
 							<string>reset:</string>
 							<string>runBios:</string>
@@ -1294,6 +1319,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1315,6 +1341,7 @@
 							<string>freeze:</string>
 							<string>fullscreen:</string>
 							<string>pause:</string>
+							<string>pauseInBackground:</string>
 							<string>preferences:</string>
 							<string>reset:</string>
 							<string>runBios:</string>
@@ -1344,6 +1371,10 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">pauseInBackground:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">preferences:</string>
 								<string key="candidateClassName">id</string>
 							</object>
@@ -1366,35 +1397,14 @@
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>memCardWindow</string>
-							<string>preferenceWindow</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>NSWindow</string>
-							<string>NSWindow</string>
-						</object>
+						<string key="NS.key.0">preferenceWindow</string>
+						<string key="NS.object.0">NSWindow</string>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>memCardWindow</string>
-							<string>preferenceWindow</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">memCardWindow</string>
-								<string key="candidateClassName">NSWindow</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">preferenceWindow</string>
-								<string key="candidateClassName">NSWindow</string>
-							</object>
+						<string key="NS.key.0">preferenceWindow</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">preferenceWindow</string>
+							<string key="candidateClassName">NSWindow</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

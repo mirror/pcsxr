@@ -10,7 +10,6 @@
     NSWindowController *memCardController;
     PluginList *pluginList;
     
-    IBOutlet NSWindow *memCardWindow;
     IBOutlet NSWindow *preferenceWindow;
     
     BOOL sleepInBackground;
@@ -26,6 +25,7 @@
 - (IBAction)freeze:(id)sender;
 - (IBAction)defrost:(id)sender;
 - (IBAction)fullscreen:(id)sender;
+- (IBAction)pauseInBackground:(id)sender;
 
 + (void)setConfigFromDefaults;
 + (void)setDefaultFromConfig:(NSString *)defaultKey;

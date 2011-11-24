@@ -142,6 +142,11 @@ NSString *saveStatePath;
 	GPU_keypressed(GPU_FULLSCREEN_KEY);
 }
 
+- (IBAction)pauseInBackground:(id)sender
+{
+	sleepInBackground = !sleepInBackground;
+}
+
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
 	if ([menuItem action] == @selector(pause:)) {
@@ -178,6 +183,11 @@ NSString *saveStatePath;
 	if ([menuItem action] == @selector(preferences:))
 		return ![EmuThread active];
 
+	if ([menuItem action] == @selector(pauseInBackground:)) {
+		[menuItem setState:(sleepInBackground ? NSOnState : NSOffState)];
+		return YES;
+	}
+	
 	return YES;
 }
 
