@@ -52,3 +52,10 @@
 "CD-ROM ID: %.9s\n" = "CD-ROM ID: %.9s\n";
 "Error opening file: %s.\n" = "Error opening file: %s.\n";
 "Unknown CPE opcode %02x at poiition %08x.\n" = "Unknown CPE opcode %02x at position %08x.\n";
+"Format Card" = "Format Card";
+"Cancel" = "Cancel";
+"Format" = "Format";
+"Formatting a memory card will remove all data on it.\n\nThis cannot be undone." = "Formatting a memory card will remove all data on it.\n\nThis cannot be undone.";
+"Delete Block" = "Delete Block";
+"Deleting a block will remove all saved data on that block.\n\nThis cannot be undone." = "Deleting a block will remove all saved data on that block.\n\nThis cannot be undone.";
+"Delete" = "Delete";

@@ -15,8 +15,6 @@
 static inline NSImage *imageFromMcd(short * icon)
 {
 	NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:16 pixelsHigh:16 bitsPerSample:8 samplesPerPixel:3 hasAlpha:NO isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:0 bitsPerPixel:0];
-	//[imageRep setSize:NSMakeSize(32, 32)];
-	//[imageRep setBitsPerSample:32];
 	
 #if 0
 	int x, y, c;
@@ -45,6 +43,8 @@ static inline NSImage *imageFromMcd(short * icon)
 #endif
 	NSImage *theImage = [[NSImage alloc] init];
 	[theImage addRepresentation:imageRep];
+	[theImage setScalesWhenResized:YES];
+	[theImage setSize:NSMakeSize(32, 32)];
 	[imageRep release];
 	return [theImage autorelease];
 }
@@ -162,24 +162,30 @@ static inline NSImage *imageFromMcd(short * icon)
 
 - (IBAction)formatCard:(id)sender
 {
-	NSInteger memCardSelect = [sender tag];
-	if (memCardSelect == 1) {
-		CreateMcd(Config.Mcd1);
-		[self loadMemoryCardInfoForCard:1];
-	} else {
-		CreateMcd(Config.Mcd2);
-		[self loadMemoryCardInfoForCard:2];
+	NSInteger formatOkay = NSRunAlertPanel(NSLocalizedString(@"Format Card", nil), NSLocalizedString(@"Formatting a memory card will remove all data on it.\n\nThis cannot be undone.", nil), NSLocalizedString(@"Cancel", nil), NSLocalizedString(@"Format", nil), nil);
+	if (formatOkay == NSAlertAlternateReturn) {
+		NSInteger memCardSelect = [sender tag];
+		if (memCardSelect == 1) {
+			CreateMcd(Config.Mcd1);
+			[self loadMemoryCardInfoForCard:1];
+		} else {
+			CreateMcd(Config.Mcd2);
+			[self loadMemoryCardInfoForCard:2];
+		}
 	}
 }
 
 - (IBAction)deleteMemoryObject:(id)sender {
-	NSInteger memCardSelect = [sender tag];
-	if (memCardSelect == 1) {
+	NSInteger deleteOkay = NSRunAlertPanel(NSLocalizedString(@"Delete Block", nil), NSLocalizedString(@"Deleting a block will remove all saved data on that block.\n\nThis cannot be undone.", nil), NSLocalizedString(@"Cancel", nil), NSLocalizedString(@"Delete", nil), nil);
+	if (deleteOkay == NSAlertAlternateReturn) {
+		NSInteger memCardSelect = [sender tag];
+		if (memCardSelect == 1) {
 		
-		[self loadMemoryCardInfoForCard:1];
-	} else {
+			[self loadMemoryCardInfoForCard:1];
+		} else {
 		
-		[self loadMemoryCardInfoForCard:2];
+			[self loadMemoryCardInfoForCard:2];
+		}
 	}
 }
 @end
