@@ -4,6 +4,8 @@
 #import "PluginController.h"
 #import "PluginList.h"
 
+@class PcsxrMemCardController;
+
 @interface ConfigurationController : NSWindowController
 {
     IBOutlet PluginController *cdromPlugin;
@@ -30,6 +32,8 @@
 	IBOutlet NSTextField *mcd1Label;
 	IBOutlet NSTextField *mcd2Label;
 
+	PcsxrMemCardController *memCardEdit;
+	
 	NSMutableDictionary *checkBoxDefaults;
 }
 - (IBAction)setCheckbox:(id)sender;
@@ -37,6 +41,7 @@
 - (IBAction)setVideoType:(id)sender;
 - (IBAction)mcdChangeClicked:(id)sender;
 - (IBAction)mcdNewClicked:(id)sender;
+- (IBAction)mcdEditClicked:(id)sender;
 
 - (NSString *)keyForSender:(id)sender;
 

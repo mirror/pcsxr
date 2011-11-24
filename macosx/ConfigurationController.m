@@ -2,6 +2,7 @@
 #import "PcsxrController.h"
 #import "PluginList.h"
 #import "PcsxrPlugin.h"
+#import "PcsxrMemCardController.h"
 #include "psxcommon.h"
 #include "plugins.h"
 
@@ -195,6 +196,9 @@
 - (void)dealloc
 {
 	[checkBoxDefaults release];
+	if (memCardEdit) {
+		[memCardEdit release];
+	}
 	[super dealloc];
 }
 
@@ -209,6 +213,14 @@
 	}
 
 	return nil;
+}
+
+- (IBAction)mcdEditClicked:(id)sender
+{
+	if (!memCardEdit) {
+		memCardEdit = [[PcsxrMemCardController alloc] init];
+	}
+	[memCardEdit showWindow:nil];
 }
 
 @end
