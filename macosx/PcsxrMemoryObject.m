@@ -14,6 +14,7 @@
 @synthesize sjisName;
 @synthesize memImage;
 @synthesize memNumber;
+@synthesize memFlags;
 
 - (void)dealloc
 {

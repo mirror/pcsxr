@@ -19,8 +19,7 @@
 	NSMutableArray *memCard2Array;
 }
 
-- (IBAction)moveToLeft:(id)sender;
-- (IBAction)moveToRight:(id)sender;
+- (IBAction)moveBlock:(id)sender;
 - (IBAction)formatCard:(id)sender;
 - (IBAction)deleteMemoryObject:(id)sender;
 - (void)loadMemoryCardInfoForCard:(int)theCard;

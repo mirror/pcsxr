@@ -12,7 +12,7 @@
 
 #define MAX_MEMCARD_BLOCKS 15
 
-static inline NSImage *imageFromMcd(short * icon)
+static NSImage *imageFromMcd(short * icon)
 {
 	NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:16 pixelsHigh:16 bitsPerSample:8 samplesPerPixel:3 hasAlpha:NO isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:0 bitsPerPixel:0];
 	
@@ -47,6 +47,13 @@ static inline NSImage *imageFromMcd(short * icon)
 	[theImage setSize:NSMakeSize(32, 32)];
 	[imageRep release];
 	return [theImage autorelease];
+}
+
+static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int copy) {
+	memcpy(to + (*i + 1) * 128, from + (copy + 1) * 128, 128);
+	SaveMcd(str, to, (*i + 1) * 128, 128);
+	memcpy(to + (*i + 1) * 1024 * 8, from + (copy + 1) * 1024 * 8, 1024 * 8);
+	SaveMcd(str, to, (*i + 1) * 1024 * 8, 1024 * 8);
 }
 
 @implementation PcsxrMemCardController
@@ -125,11 +132,11 @@ static inline NSImage *imageFromMcd(short * icon)
 	for (i = 0; i < MAX_MEMCARD_BLOCKS; i++) {
 		GetMcdBlockInfo(theCard, i, &info);
 		PcsxrMemoryObject *ob = [[PcsxrMemoryObject alloc] init];
-		NSString *engDes = nil, *japDes = nil;
 		ob.englishName = [NSString stringWithCString:info.Title encoding:NSASCIIStringEncoding];
 		ob.sjisName = [NSString stringWithCString:info.sTitle encoding:NSShiftJISStringEncoding];
 		ob.memImage = imageFromMcd(info.Icon);
 		ob.memNumber = i;
+		ob.memFlags = info.Flags;
 		[newArray insertObject:ob atIndex:i];
 		[ob release];
 	}
@@ -150,14 +157,91 @@ static inline NSImage *imageFromMcd(short * icon)
 	[self loadMemoryCardInfoForCard:2];
 }
 
-- (IBAction)moveToLeft:(id)sender
+- (int)findFreeMemCardSlot:(int)target_card
 {
+	BOOL found = NO;
+	NSString *blockName;
+	NSArray *cardArray;
+	if (target_card == 1) {
+		cardArray = [self memCard1Array];
+	}else {
+		cardArray = [self memCard2Array];
+	}
 	
+	int i = 0;
+	while (i < 15 && found == NO) {
+		blockName = [[cardArray objectAtIndex:i] englishName];
+		if ([blockName isEqualToString:@""]) {
+			found = YES;
+		} else {
+			i++;
+		}
+	}
+	if (found == YES)
+		return i;
+	
+	// no free slots, try to find a deleted one
+	i = 0;
+	while (i < 15 && found == NO) {
+		unsigned char flags = [[cardArray objectAtIndex:i] memFlags];
+		if ((flags & 0xF0) != 0x50) {
+			found = YES;
+		} else {
+			i++;
+		}
+	}
+	if (found == YES)
+		return i;
+	
+	return -1;
 }
 
-- (IBAction)moveToRight:(id)sender
+- (IBAction)moveBlock:(id)sender
 {
+	NSInteger memCardSelect = [sender tag];
+	NSCollectionView *cardView;
+	NSIndexSet *selection;
+	int toCard, fromCard, freeSlot;
+	char *str, *source, *destination;
+	if (memCardSelect == 1) {
+		str = Config.Mcd1;
+		source = Mcd2Data;
+		destination = Mcd1Data;
+		cardView = memCard2view;
+		toCard = 1;
+		fromCard = 2;
+	} else {
+		str = Config.Mcd2;
+		source = Mcd1Data;
+		destination = Mcd2Data;
+		cardView = memCard1view;
+		toCard = 2;
+		fromCard = 1;
+	}
+	selection = [cardView selectionIndexes];
+	if (!selection || [selection count] == 0) {
+		NSBeep();
+		return;
+	}
 	
+	NSInteger selectedIndex = [selection firstIndex];
+	
+	freeSlot = [self findFreeMemCardSlot:toCard];
+	if (freeSlot == -1) {
+		NSRunCriticalAlertPanel(NSLocalizedString(@"No Free Space", nil), [NSString stringWithFormat:NSLocalizedString(@"Memory card %d doesn't have a free block on it. Please remove some blocks on that card to continue", nil), toCard], NSLocalizedString(@"Okay", nil), nil, nil);
+		return;
+	}
+	
+	CopyMemcardData(source, destination, &freeSlot, str, selectedIndex);
+
+	
+	
+	if (toCard == 1) {
+		LoadMcd(1, Config.Mcd1);
+	} else {
+		LoadMcd(2, Config.Mcd2);
+	}
+	[self loadMemoryCardInfoForCard:toCard];
 }
 
 - (IBAction)formatCard:(id)sender
@@ -167,25 +251,83 @@ static inline NSImage *imageFromMcd(short * icon)
 		NSInteger memCardSelect = [sender tag];
 		if (memCardSelect == 1) {
 			CreateMcd(Config.Mcd1);
+			LoadMcd(1, Config.Mcd1);
 			[self loadMemoryCardInfoForCard:1];
 		} else {
 			CreateMcd(Config.Mcd2);
+			LoadMcd(2, Config.Mcd2);
 			[self loadMemoryCardInfoForCard:2];
 		}
 	}
+}
+
+- (void)deleteMemoryObjectAtSlot:(int)slotnum card:(int)cardNum
+{
+	int xor = 0, i, j;
+	char *data, *ptr, *filename;
+	NSArray *cardArray;
+	PcsxrMemoryObject *memObject;
+	if (cardNum == 1) {
+		filename = Config.Mcd1;
+		data = Mcd1Data;
+		cardArray = [self memCard1Array];
+	} else {
+		filename = Config.Mcd2;
+		data = Mcd2Data;
+		cardArray = [self memCard2Array];
+	}
+	memObject = [cardArray objectAtIndex:slotnum];
+	unsigned char flags = [memObject memFlags];
+	i = slotnum;
+	i++;
+	ptr = data + i * 128;
+	
+	if ((flags & 0xF0) == 0xA0) {
+		if ((flags & 0xF) >= 1 &&
+			(flags & 0xF) <= 3) { // deleted
+			*ptr = 0x50 | (flags & 0xF);
+		} else return;
+	} else if ((flags & 0xF0) == 0x50) { // used
+		*ptr = 0xA0 | (flags & 0xF);
+	} else { return; }
+	
+	for (j = 0; j < 127; j++) xor ^= *ptr++;
+	*ptr = xor;
+	
+	SaveMcd(filename, data, i * 128, 128);
+
 }
 
 - (IBAction)deleteMemoryObject:(id)sender {
 	NSInteger deleteOkay = NSRunAlertPanel(NSLocalizedString(@"Delete Block", nil), NSLocalizedString(@"Deleting a block will remove all saved data on that block.\n\nThis cannot be undone.", nil), NSLocalizedString(@"Cancel", nil), NSLocalizedString(@"Delete", nil), nil);
 	if (deleteOkay == NSAlertAlternateReturn) {
 		NSInteger memCardSelect = [sender tag];
+		NSIndexSet *selected;
+		NSArray *cardArray;
 		if (memCardSelect == 1) {
+			selected = [memCard1view selectionIndexes];
+			cardArray = [self memCard1Array];
+		} else {
+			selected = [memCard2view selectionIndexes];
+			cardArray = [self memCard2Array];
+		}
 		
+		if (!selected || [selected count] == 0) {
+			NSBeep();
+			return;
+		}
+		
+		NSInteger selectedIndex = [selected firstIndex];
+		[self deleteMemoryObjectAtSlot:selectedIndex card:memCardSelect];
+		
+		if (memCardSelect == 1) {
+			LoadMcd(1, Config.Mcd1);
 			[self loadMemoryCardInfoForCard:1];
 		} else {
-		
+			LoadMcd(2, Config.Mcd2);
 			[self loadMemoryCardInfoForCard:2];
 		}
 	}
 }
+
 @end

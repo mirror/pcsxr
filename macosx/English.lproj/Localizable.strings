@@ -59,3 +59,6 @@
 "Delete Block" = "Delete Block";
 "Deleting a block will remove all saved data on that block.\n\nThis cannot be undone." = "Deleting a block will remove all saved data on that block.\n\nThis cannot be undone.";
 "Delete" = "Delete";
+"No Free Space" = "No Free Space";
+"Memory card %d doesn't have a free block on it. Please remove some blocks on that card to continue" = "Memory card %d doesn't have a free block on it. Please remove some blocks on that card to continue";
+"Okay" = "Okay";
