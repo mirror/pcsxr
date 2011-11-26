@@ -130,13 +130,24 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 	NSMutableArray *newArray = [[NSMutableArray alloc] initWithCapacity:MAX_MEMCARD_BLOCKS];
 	
 	for (i = 0; i < MAX_MEMCARD_BLOCKS; i++) {
-		GetMcdBlockInfo(theCard, i, &info);
+		GetMcdBlockInfo(theCard, i + 1, &info);
 		PcsxrMemoryObject *ob = [[PcsxrMemoryObject alloc] init];
 		ob.englishName = [NSString stringWithCString:info.Title encoding:NSASCIIStringEncoding];
 		ob.sjisName = [NSString stringWithCString:info.sTitle encoding:NSShiftJISStringEncoding];
 		ob.memImage = imageFromMcd(info.Icon);
 		ob.memNumber = i;
 		ob.memFlags = info.Flags;
+		if ((info.Flags & 0xF0) == 0xA0) {
+			if ((info.Flags & 0xF) >= 1 &&
+				(info.Flags & 0xF) <= 3) {
+				ob.deleted = YES;
+			} else
+				ob.deleted = YES;
+		} else if ((info.Flags & 0xF0) == 0x50)
+			ob.deleted = NO;
+		else
+			ob.deleted = YES;
+
 		[newArray insertObject:ob atIndex:i];
 		[ob release];
 	}

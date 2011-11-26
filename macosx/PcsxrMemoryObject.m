@@ -13,6 +13,7 @@
 @synthesize englishName;
 @synthesize sjisName;
 @synthesize memImage;
+@synthesize deleted;
 @synthesize memNumber;
 @synthesize memFlags;
 
