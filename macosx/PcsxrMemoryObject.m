@@ -22,6 +22,8 @@
 	[englishName release];
 	[sjisName release];
 	[memImage release];
+	
+	[super dealloc];
 }
 
 @end

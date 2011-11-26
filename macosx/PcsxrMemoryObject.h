@@ -19,9 +19,9 @@
 	unsigned char memFlags;
 }
 
-@property(copy, readwrite) NSString * englishName;
-@property(copy, readwrite) NSString * sjisName;
-@property(retain, readwrite) NSImage * memImage;
+@property(copy, readwrite) NSString *englishName;
+@property(copy, readwrite) NSString *sjisName;
+@property(retain, readwrite) NSImage *memImage;
 @property(readwrite) BOOL deleted;
 @property(readwrite) short memNumber;
 @property(readwrite) unsigned char memFlags;
