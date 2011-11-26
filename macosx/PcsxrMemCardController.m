@@ -140,13 +140,13 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 		if ((info.Flags & 0xF0) == 0xA0) {
 			if ((info.Flags & 0xF) >= 1 &&
 				(info.Flags & 0xF) <= 3) {
-				ob.deleted = YES;
+				ob.notDeleted = NO;
 			} else
-				ob.deleted = YES;
+				ob.notDeleted = NO;
 		} else if ((info.Flags & 0xF0) == 0x50)
-			ob.deleted = NO;
+			ob.notDeleted = YES;
 		else
-			ob.deleted = YES;
+			ob.notDeleted = NO;
 
 		[newArray insertObject:ob atIndex:i];
 		[ob release];

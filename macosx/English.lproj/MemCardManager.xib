@@ -425,7 +425,7 @@
 												<string>NeXT TIFF v4.0 pasteboard type</string>
 											</object>
 										</object>
-										<string key="NSFrame">{{74, 80}, {32, 32}}</string>
+										<string key="NSFrame">{{72, 80}, {32, 32}}</string>
 										<reference key="NSSuperview" ref="729211047"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="953575115"/>
@@ -445,7 +445,7 @@
 									<object class="NSTextField" id="953575115">
 										<reference key="NSNextResponder" ref="729211047"/>
 										<int key="NSvFlags">266</int>
-										<string key="NSFrame">{{0, 55}, {181, 17}}</string>
+										<string key="NSFrame">{{0, 55}, {177, 17}}</string>
 										<reference key="NSSuperview" ref="729211047"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="923740855"/>
@@ -473,7 +473,7 @@
 									<object class="NSTextField" id="923740855">
 										<reference key="NSNextResponder" ref="729211047"/>
 										<int key="NSvFlags">266</int>
-										<string key="NSFrame">{{0, 30}, {181, 17}}</string>
+										<string key="NSFrame">{{0, 30}, {177, 17}}</string>
 										<reference key="NSSuperview" ref="729211047"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="552567303"/>
@@ -492,8 +492,8 @@
 									</object>
 									<object class="NSTextField" id="552567303">
 										<reference key="NSNextResponder" ref="729211047"/>
-										<int key="NSvFlags">268</int>
-										<string key="NSFrame">{{0, 5}, {181, 17}}</string>
+										<int key="NSvFlags">266</int>
+										<string key="NSFrame">{{0, 5}, {177, 17}}</string>
 										<reference key="NSSuperview" ref="729211047"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView"/>
@@ -514,14 +514,14 @@
 										</object>
 									</object>
 								</object>
-								<string key="NSFrameSize">{180, 115}</string>
+								<string key="NSFrameSize">{178, 115}</string>
 								<reference key="NSSuperview" ref="1010857926"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="521369065"/>
 								<string key="NSReuseIdentifierKey">_NS:11</string>
 							</object>
 						</object>
-						<string key="NSFrame">{{1, 0}, {180, 115}}</string>
+						<string key="NSFrame">{{1, 0}, {178, 115}}</string>
 						<reference key="NSSuperview" ref="31895823"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="729211047"/>
@@ -563,7 +563,7 @@
 						</object>
 					</object>
 				</object>
-				<string key="NSFrameSize">{181, 115}</string>
+				<string key="NSFrameSize">{179, 115}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="1010857926"/>
@@ -850,34 +850,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">hidden: representedObject.deleted</string>
+						<string key="label">hidden: representedObject.notDeleted</string>
 						<reference key="source" ref="552567303"/>
 						<reference key="destination" ref="613808531"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="552567303"/>
 							<reference key="NSDestination" ref="613808531"/>
-							<string key="NSLabel">hidden: representedObject.deleted</string>
+							<string key="NSLabel">hidden: representedObject.notDeleted</string>
 							<string key="NSBinding">hidden</string>
-							<string key="NSKeyPath">representedObject.deleted</string>
-							<object class="NSDictionary" key="NSOptions">
-								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSArray" key="dict.sortedKeys">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<string>NSMultipleValuesPlaceholder</string>
-									<string>NSNotApplicablePlaceholder</string>
-									<string>NSNullPlaceholder</string>
-								</object>
-								<object class="NSMutableArray" key="dict.values">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<integer value="0"/>
-									<integer value="0"/>
-									<integer value="0"/>
-								</object>
-							</object>
+							<string key="NSKeyPath">representedObject.notDeleted</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">86</int>
+					<int key="connectionID">91</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1045,10 +1030,10 @@
 						<reference key="object" ref="1010857926"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="521369065"/>
 							<reference ref="953575115"/>
 							<reference ref="923740855"/>
 							<reference ref="552567303"/>
+							<reference ref="521369065"/>
 						</object>
 						<reference key="parent" ref="31895823"/>
 					</object>
@@ -1267,7 +1252,7 @@
 				<reference key="dict.values" ref="1002"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">87</int>
+			<int key="maxID">91</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
