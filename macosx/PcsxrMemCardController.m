@@ -12,6 +12,8 @@
 
 #define MAX_MEMCARD_BLOCKS 15
 
+//FIXME: This code uses similar code to the GTK memory card manager, and both don't recognize saves that span multiple blocks.
+
 static NSImage *imageFromMcd(short * icon)
 {
 	NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:16 pixelsHigh:16 bitsPerSample:8 samplesPerPixel:3 hasAlpha:NO isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:0 bitsPerPixel:0];
@@ -266,12 +268,11 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 		if (memCardSelect == 1) {
 			CreateMcd(Config.Mcd1);
 			LoadMcd(1, Config.Mcd1);
-			[self loadMemoryCardInfoForCard:1];
 		} else {
 			CreateMcd(Config.Mcd2);
 			LoadMcd(2, Config.Mcd2);
-			[self loadMemoryCardInfoForCard:2];
 		}
+		[self loadMemoryCardInfoForCard:memCardSelect];
 	}
 }
 
@@ -336,11 +337,10 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 		
 		if (memCardSelect == 1) {
 			LoadMcd(1, Config.Mcd1);
-			[self loadMemoryCardInfoForCard:1];
 		} else {
 			LoadMcd(2, Config.Mcd2);
-			[self loadMemoryCardInfoForCard:2];
 		}
+		[self loadMemoryCardInfoForCard:memCardSelect];
 	}
 }
 
