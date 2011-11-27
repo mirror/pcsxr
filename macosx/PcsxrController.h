@@ -4,10 +4,11 @@
 #import "EmuThread.h"
 #import "PluginList.h"
 
+@class ConfigurationController;
+
 @interface PcsxrController : NSObject
 {
-    NSWindowController *preferencesController;
-    NSWindowController *memCardController;
+    ConfigurationController *preferencesController;
     PluginList *pluginList;
     
     IBOutlet NSWindow *preferenceWindow;

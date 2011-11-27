@@ -220,7 +220,17 @@
 	if (!memCardEdit) {
 		memCardEdit = [[PcsxrMemCardController alloc] init];
 	}
+	[[memCardEdit window] center];
 	[memCardEdit showWindow:nil];
+}
+
+- (BOOL)memoryCardWindowIsVisible
+{
+	if (!memCardEdit) {
+		return NO;
+	} else {
+		return [[memCardEdit window] isVisible];
+	}
 }
 
 @end

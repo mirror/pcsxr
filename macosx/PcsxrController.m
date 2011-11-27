@@ -166,6 +166,11 @@ NSString *saveStatePath;
 			if ([preferenceWindow isVisible])
 				return NO;
 
+		if (preferencesController != nil) {
+			if ([preferencesController memoryCardWindowIsVisible] == YES)
+				return NO;
+		}
+		
 		if ([menuItem action] == @selector(runBios:) && strcmp(Config.Bios, "HLE") == 0)
 			return NO;
 

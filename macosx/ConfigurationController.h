@@ -42,6 +42,7 @@
 - (IBAction)mcdChangeClicked:(id)sender;
 - (IBAction)mcdNewClicked:(id)sender;
 - (IBAction)mcdEditClicked:(id)sender;
+- (BOOL)memoryCardWindowIsVisible;
 
 - (NSString *)keyForSender:(id)sender;
 

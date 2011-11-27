@@ -164,11 +164,16 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+	[[self window] setDelegate:self];
+}
+
+- (void)windowDidBecomeKey:(NSNotification *)notification
+{
 	[self loadMemoryCardInfoForCard:1];
 	[self loadMemoryCardInfoForCard:2];
 }
 
-- (int)findFreeMemCardSlot:(int)target_card
+- (int)findFreeMemCardSlotInCard:(int)target_card
 {
 	BOOL found = NO;
 	NSString *blockName;
@@ -237,15 +242,13 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 	
 	NSInteger selectedIndex = [selection firstIndex];
 	
-	freeSlot = [self findFreeMemCardSlot:toCard];
+	freeSlot = [self findFreeMemCardSlotInCard:toCard];
 	if (freeSlot == -1) {
 		NSRunCriticalAlertPanel(NSLocalizedString(@"No Free Space", nil), [NSString stringWithFormat:NSLocalizedString(@"Memory card %d doesn't have a free block on it. Please remove some blocks on that card to continue", nil), toCard], NSLocalizedString(@"Okay", nil), nil, nil);
 		return;
 	}
 	
 	CopyMemcardData(source, destination, &freeSlot, str, selectedIndex);
-
-	
 	
 	if (toCard == 1) {
 		LoadMcd(1, Config.Mcd1);

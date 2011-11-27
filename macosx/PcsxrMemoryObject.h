@@ -22,7 +22,7 @@
 @property(copy, readwrite) NSString *englishName;
 @property(copy, readwrite) NSString *sjisName;
 @property(retain, readwrite) NSImage *memImage;
-@property(readwrite) BOOL notDeleted;
+@property(readwrite, getter = isNotDeleted) BOOL notDeleted;
 @property(readwrite) short memNumber;
 @property(readwrite) unsigned char memFlags;
 
