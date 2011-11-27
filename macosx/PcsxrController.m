@@ -145,6 +145,7 @@ NSString *saveStatePath;
 - (IBAction)pauseInBackground:(id)sender
 {
 	sleepInBackground = !sleepInBackground;
+	[[NSUserDefaults standardUserDefaults] setBool:sleepInBackground forKey:@"PauseInBackground"];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
@@ -230,7 +231,7 @@ NSString *saveStatePath;
 				nil, nil, nil);
 	}
 
-	sleepInBackground = YES;
+	sleepInBackground = [[NSUserDefaults standardUserDefaults] boolForKey:@"PauseInBackground"];
 }
 
 - (void)dealloc
@@ -329,6 +330,7 @@ NSString *saveStatePath;
 		[NSNumber numberWithInt:1], @"NoDynarec",
 		[NSNumber numberWithInt:1], @"AutoDetectVideoType",
 		[NSNumber numberWithInt:0], @"UseHLE",
+		[NSNumber numberWithBool:YES], @"PauseInBackground",
 		nil];
 
 	[defaults registerDefaults:appDefaults];
