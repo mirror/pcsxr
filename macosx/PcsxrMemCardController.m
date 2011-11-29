@@ -45,9 +45,9 @@ static NSImage *imageFromMcd(short * icon)
 #endif
 	NSImage *theImage = [[NSImage alloc] init];
 	[theImage addRepresentation:imageRep];
+	[imageRep release];
 	[theImage setScalesWhenResized:YES];
 	[theImage setSize:NSMakeSize(32, 32)];
-	[imageRep release];
 	return [theImage autorelease];
 }
 

@@ -13,8 +13,6 @@
 {
 	IBOutlet NSCollectionView *memCard1view;
 	IBOutlet NSCollectionView *memCard2view;
-	IBOutlet NSButton *leftMove;
-	IBOutlet NSButton *rightMove;
 	NSMutableArray *memCard1Array;
 	NSMutableArray *memCard2Array;
 }

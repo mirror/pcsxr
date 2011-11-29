@@ -607,22 +607,6 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">leftMove</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="146799775"/>
-					</object>
-					<int key="connectionID">13</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">rightMove</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="589069415"/>
-					</object>
-					<int key="connectionID">14</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">memCard1view</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="311112059"/>
@@ -963,6 +947,7 @@
 						<int key="objectID">16</int>
 						<reference key="object" ref="810056114"/>
 						<reference key="parent" ref="3271293"/>
+						<string key="objectName">Memory Card 2 view</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">17</int>
@@ -987,6 +972,7 @@
 							<reference ref="1010857926"/>
 						</object>
 						<reference key="parent" ref="1002"/>
+						<string key="objectName">MemCardObjectView</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">23</int>
@@ -1013,6 +999,7 @@
 						<int key="objectID">26</int>
 						<reference key="object" ref="311112059"/>
 						<reference key="parent" ref="61726387"/>
+						<string key="objectName">Memory Card 1 view</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">36</int>
@@ -1304,34 +1291,24 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>leftMove</string>
 							<string>memCard1view</string>
 							<string>memCard2view</string>
-							<string>rightMove</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>NSButton</string>
 							<string>NSCollectionView</string>
 							<string>NSCollectionView</string>
-							<string>NSButton</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>leftMove</string>
 							<string>memCard1view</string>
 							<string>memCard2view</string>
-							<string>rightMove</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">leftMove</string>
-								<string key="candidateClassName">NSButton</string>
-							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">memCard1view</string>
 								<string key="candidateClassName">NSCollectionView</string>
@@ -1339,10 +1316,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">memCard2view</string>
 								<string key="candidateClassName">NSCollectionView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">rightMove</string>
-								<string key="candidateClassName">NSButton</string>
 							</object>
 						</object>
 					</object>
