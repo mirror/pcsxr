@@ -92,13 +92,15 @@
             type = PSE_LT_SPU;
         else if (([path rangeOfString: @"pad" options:NSCaseInsensitiveSearch]).length != 0)
             type = PSE_LT_PAD;
+        else if (([path rangeOfString: @"net" options:NSCaseInsensitiveSearch]).length != 0)
+            type = PSE_LT_NET;
         else {
             [self release];
             return nil;
         }
     } else {
         type = (int)PSE_getLibType();
-        if (type != PSE_LT_GPU && type != PSE_LT_CDR && type != PSE_LT_SPU && type != PSE_LT_PAD) {
+        if (type != PSE_LT_GPU && type != PSE_LT_CDR && type != PSE_LT_SPU && type != PSE_LT_PAD && type != PSE_LT_NET) {
             [self release];
             return nil;
         }
