@@ -93,12 +93,11 @@ typedef long (CALLBACK* GPUfreeze)(uint32_t, GPUFreeze_t *);
 typedef long (CALLBACK* GPUgetScreenPic)(unsigned char *);
 typedef long (CALLBACK* GPUshowScreenPic)(unsigned char *);
 typedef void (CALLBACK* GPUclearDynarec)(void (CALLBACK *callback)(void));
+typedef void (CALLBACK* GPUhSync)(int);
 typedef void (CALLBACK* GPUvBlank)(int);
-typedef void (CALLBACK* GPUregisterCallback)(void (CALLBACK *callback)(int));
-typedef void (CALLBACK* GPUidle)(void);
 typedef void (CALLBACK* GPUvisualVibration)(uint32_t, uint32_t);
 typedef void (CALLBACK* GPUcursor)(int, int, int);
-    typedef void (CALLBACK* GPUaddVertex)(short,short,s64,s64,s64);
+typedef void (CALLBACK* GPUaddVertex)(short,short,s64,s64,s64);
 
 // GPU function pointers
 extern GPUupdateLace    GPU_updateLace;
@@ -123,9 +122,8 @@ extern GPUfreeze        GPU_freeze;
 extern GPUgetScreenPic  GPU_getScreenPic;
 extern GPUshowScreenPic GPU_showScreenPic;
 extern GPUclearDynarec  GPU_clearDynarec;
+extern GPUhSync         GPU_hSync;
 extern GPUvBlank        GPU_vBlank;
-extern GPUregisterCallback GPU_registerCallback;
-extern GPUidle          GPU_idle;
 extern GPUvisualVibration GPU_visualVibration;
 extern GPUcursor        GPU_cursor;
 extern GPUaddVertex     GPU_addVertex;
@@ -414,8 +412,6 @@ extern SIO1registerCallback   SIO1_registerCallback;
 #endif
 
 void CALLBACK clearDynarec(void);
-
-void CALLBACK GPUbusy( int ticks );
 
 void SetIsoFile(const char *filename);
 const char *GetIsoFile(void);

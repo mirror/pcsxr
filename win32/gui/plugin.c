@@ -281,7 +281,6 @@ int _OpenPlugins(HWND hWnd) {
 
 	ret = GPU_open(hWnd);
 	if (ret < 0) { SysMessage (_("Error Opening GPU Plugin (%d)"), ret); return -1; }
-	GPU_registerCallback(GPUbusy);
 	ret = SPU_open(hWnd);
 	if (ret < 0) { SysMessage (_("Error Opening SPU Plugin (%d)"), ret); return -1; }
 	SPU_registerCallback(SPUirq);

@@ -80,7 +80,6 @@ int _OpenPlugins() {
 	SPU_registerCallback(SPUirq);
 	ret = GPU_open(&gpuDisp, "PCSXR", NULL);
 	if (ret < 0) { SysMessage(_("Error Opening GPU Plugin")); return -1; }
-	GPU_registerCallback(GPUbusy);
 	ret = PAD1_open(&gpuDisp);
 	if (ret < 0) { SysMessage(_("Error Opening PAD1 Plugin")); return -1; }
     PAD1_registerVibration(GPU_visualVibration);
@@ -93,7 +92,7 @@ int _OpenPlugins() {
 	if (Config.UseNet && !NetOpened) {
 		netInfo info;
 		char path[MAXPATHLEN];
-		
+
 		strcpy(info.EmuName, "PCSX " PACKAGE_VERSION);
 		strncpy(info.CdromID, CdromId, 9);
 		strncpy(info.CdromLabel, CdromLabel, 9);
@@ -113,19 +112,19 @@ int _OpenPlugins() {
 		sprintf(path, "%s%s", Config.PluginsDir, Config.Cdr);
 		strcpy(info.CDRpath, path);
 		NET_setInfo(&info);
-		
+
 		ret = NET_open(&gpuDisp);
 		if (ret < 0) {
 			if (ret == -2) {
 				// -2 is returned when something in the info
 				// changed and needs to be synced
 				char *ptr;
-				
+
 				PARSEPATH(Config.Bios, info.BIOSpath);
 				PARSEPATH(Config.Gpu,  info.GPUpath);
 				PARSEPATH(Config.Spu,  info.SPUpath);
 				PARSEPATH(Config.Cdr,  info.CDRpath);
-				
+
 				strcpy(Config.Mcd1, info.MCD1path);
 				strcpy(Config.Mcd2, info.MCD2path);
 				return -2;
@@ -133,19 +132,19 @@ int _OpenPlugins() {
 				Config.UseNet = FALSE;
 			}
 		} else {
-			
+
 			if (NET_queryPlayer() == 1) {
 				if (SendPcsxInfo() == -1) Config.UseNet = FALSE;
 			} else {
 				if (RecvPcsxInfo() == -1) Config.UseNet = FALSE;
 			}
-			
+
 		}
 		NetOpened = TRUE;
 	} else if (Config.UseNet) {
 		NET_resume();
 	}
-	
+
 	return 0;
 }
 
@@ -190,7 +189,7 @@ void ResetPlugins() {
 	PAD1_shutdown();
 	PAD2_shutdown();
 	if (Config.UseNet) NET_shutdown();
-	
+
 	ret = CDR_init();
 	if (ret < 0) { SysMessage(_("CDRinit error: %d"), ret); return; }
 	ret = GPU_init();
@@ -208,4 +207,3 @@ void ResetPlugins() {
 
 	NetOpened = FALSE;
 }
-

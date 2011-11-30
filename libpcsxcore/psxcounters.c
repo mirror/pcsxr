@@ -270,6 +270,8 @@ void psxRcntUpdate()
     {
         psxRcntReset( 3 );
 
+        GPU_hSync(hSyncCount);
+
         spuSyncCount++;
         hSyncCount++;
 
