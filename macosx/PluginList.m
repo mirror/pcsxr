@@ -310,7 +310,7 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	
 	char **dst = [PcsxrPlugin configEntriesForType:type];
 	while (*dst) {
-		strncpy(*dst, str, 255);
+		strncpy(*dst, str, MAXPATHLEN);
 		dst++;
 	}
 	
