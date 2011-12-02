@@ -598,6 +598,7 @@
 				SDKROOT = macosx10.6;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = ../../build;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
 		};
@@ -620,6 +621,7 @@
 				OTHER_CFLAGS = "";
 				SDKROOT = macosx10.6;
 				SYMROOT = ../../build;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
 		};

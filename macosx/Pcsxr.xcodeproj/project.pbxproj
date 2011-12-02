@@ -30,10 +30,6 @@
 		2BB3D6C605427FE200831ACB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC4786204C7FD3600CAB520 /* Cocoa.framework */; };
 		2BB3D6C705427FE200831ACB /* System.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6E8AAE04C832040017A3B1 /* System.framework */; };
 		2BB3D6C805427FE200831ACB /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6E8AB404C8327C0017A3B1 /* IOKit.framework */; };
-		556A148312B6DE1A007DE998 /* pasm.s in Sources */ = {isa = PBXBuildFile; fileRef = 556A147B12B6DE1A007DE998 /* pasm.s */; };
-		556A148412B6DE1A007DE998 /* ppc.c in Sources */ = {isa = PBXBuildFile; fileRef = 556A147D12B6DE1A007DE998 /* ppc.c */; };
-		556A148512B6DE1A007DE998 /* pR3000A.c in Sources */ = {isa = PBXBuildFile; fileRef = 556A148012B6DE1A007DE998 /* pR3000A.c */; };
-		556A148612B6DE1A007DE998 /* reguse.c in Sources */ = {isa = PBXBuildFile; fileRef = 556A148112B6DE1A007DE998 /* reguse.c */; };
 		559366CA12B694DF004ACC1E /* iR3000A-64.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C112B694DF004ACC1E /* iR3000A-64.c */; };
 		559366CB12B694DF004ACC1E /* ix86-64.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C212B694DF004ACC1E /* ix86-64.c */; };
 		559366CD12B694DF004ACC1E /* ix86_cpudetect.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C512B694DF004ACC1E /* ix86_cpudetect.c */; };
@@ -258,14 +254,6 @@
 		2BBB1792051E113B00B84448 /* EmuThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 2; path = EmuThread.m; sourceTree = "<group>"; };
 		2BBB17DA051E4D0F00B84448 /* Plugin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Plugin.c; sourceTree = SOURCE_ROOT; };
 		2BC4786204C7FD3600CAB520 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		556A147B12B6DE1A007DE998 /* pasm.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = pasm.s; sourceTree = "<group>"; };
-		556A147C12B6DE1A007DE998 /* pGte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pGte.h; sourceTree = "<group>"; };
-		556A147D12B6DE1A007DE998 /* ppc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ppc.c; sourceTree = "<group>"; };
-		556A147E12B6DE1A007DE998 /* ppc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ppc.h; sourceTree = "<group>"; };
-		556A147F12B6DE1A007DE998 /* ppc_mnemonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ppc_mnemonics.h; sourceTree = "<group>"; };
-		556A148012B6DE1A007DE998 /* pR3000A.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pR3000A.c; sourceTree = "<group>"; };
-		556A148112B6DE1A007DE998 /* reguse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = reguse.c; sourceTree = "<group>"; };
-		556A148212B6DE1A007DE998 /* reguse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reguse.h; sourceTree = "<group>"; };
 		559366C012B694DF004ACC1E /* iGte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGte.h; sourceTree = "<group>"; };
 		559366C112B694DF004ACC1E /* iR3000A-64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "iR3000A-64.c"; sourceTree = "<group>"; };
 		559366C212B694DF004ACC1E /* ix86-64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "ix86-64.c"; sourceTree = "<group>"; };
@@ -480,7 +468,6 @@
 			children = (
 				71F4C5B30FDED15800529849 /* ix86 */,
 				559366BF12B694DF004ACC1E /* ix86_64 */,
-				556A147A12B6DE1A007DE998 /* ppc */,
 				71F4C5600FDED12800529849 /* cdriso.c */,
 				71F4C5610FDED12800529849 /* cdriso.h */,
 				71F4C5620FDED12800529849 /* cdrom.c */,
@@ -535,21 +522,6 @@
 			);
 			name = libpcsxcore;
 			path = ../libpcsxcore;
-			sourceTree = "<group>";
-		};
-		556A147A12B6DE1A007DE998 /* ppc */ = {
-			isa = PBXGroup;
-			children = (
-				556A147B12B6DE1A007DE998 /* pasm.s */,
-				556A147C12B6DE1A007DE998 /* pGte.h */,
-				556A147D12B6DE1A007DE998 /* ppc.c */,
-				556A147E12B6DE1A007DE998 /* ppc.h */,
-				556A147F12B6DE1A007DE998 /* ppc_mnemonics.h */,
-				556A148012B6DE1A007DE998 /* pR3000A.c */,
-				556A148112B6DE1A007DE998 /* reguse.c */,
-				556A148212B6DE1A007DE998 /* reguse.h */,
-			);
-			path = ppc;
 			sourceTree = "<group>";
 		};
 		559366BF12B694DF004ACC1E /* ix86_64 */ = {
@@ -832,10 +804,6 @@
 				559366CE12B694DF004ACC1E /* ix86_fpu.c in Sources */,
 				559366CF12B694DF004ACC1E /* ix86_mmx.c in Sources */,
 				559366D012B694DF004ACC1E /* ix86_sse.c in Sources */,
-				556A148312B6DE1A007DE998 /* pasm.s in Sources */,
-				556A148412B6DE1A007DE998 /* ppc.c in Sources */,
-				556A148512B6DE1A007DE998 /* pR3000A.c in Sources */,
-				556A148612B6DE1A007DE998 /* reguse.c in Sources */,
 				55A90220147D7C380037E18F /* PcsxrMemCardController.m in Sources */,
 				55A90229147D89380037E18F /* PcsxrMemoryObject.m in Sources */,
 			);
@@ -1014,6 +982,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lz";
 				SDKROOT = macosx10.6;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
 		};
@@ -1038,6 +1007,7 @@
 				OTHER_CFLAGS = "-fomit-frame-pointer";
 				OTHER_LDFLAGS = "-lz";
 				SDKROOT = macosx10.6;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
 		};
