@@ -38,9 +38,9 @@ void sockCreateWaitDlg() {
 	if (globalSock == nil) {
 		globalSock = [[SockDialog alloc] init];
 	}
-	[globalSock showWindow:nil];
 	NSWindow *tempWindow = [globalSock window];
 	[tempWindow center];
+	[globalSock showWindow:nil];
 	[tempWindow makeKeyAndOrderFront:nil];
 
 }
@@ -51,6 +51,8 @@ void sockDlgUpdate() {
 
 long sockOpen()
 {
+	LoadConf();
+	
 	return 0;
 }
 

@@ -92,7 +92,7 @@ void ReadConfig()
 
 	conf.PortNum = [[keyValues objectForKey:kIPPORT] intValue];
 	conf.PlayerNum = [[keyValues objectForKey:kPLAYERNUM] intValue];
-	strcpy(conf.ipAddress, [[keyValues objectForKey:kIPADDRKEY] cString]);
+	strcpy(conf.ipAddress, [[keyValues objectForKey:kIPADDRKEY] cStringUsingEncoding:NSASCIIStringEncoding]);
 }
 
 @implementation PluginConfigController

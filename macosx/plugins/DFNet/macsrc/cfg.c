@@ -15,6 +15,7 @@
 
 void AboutDlgProc();
 void ConfDlgProc();
+void ReadConfig();
 
 void NETabout() {
 	AboutDlgProc();
@@ -36,16 +37,5 @@ void SaveConf() {
 }
 
 void LoadConf() {
-	FILE *f;
-
-	f = fopen(CFG_FILENAME, "r");
-	if (f == NULL) {
-		conf.PlayerNum = 1;
-		conf.PortNum = 33306;
-		strcpy(conf.ipAddress, "127.0.0.1");
-		return;
-	}
-
-	fread(&conf, 1, sizeof(conf), f);
-	fclose(f);
+	ReadConfig();
 }
