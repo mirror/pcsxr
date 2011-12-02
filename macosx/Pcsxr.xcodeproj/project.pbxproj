@@ -961,12 +961,10 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
 				OTHER_CFLAGS = (
-					"-fomit-frame-pointer",
 					"-funroll-loops",
 					"-falign-loops=16",
 				);
 				PRODUCT_NAME = PCSXR;
-				SECTORDER_FLAGS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -996,7 +994,6 @@
 					"-falign-loops=16",
 				);
 				PRODUCT_NAME = PCSXR;
-				SECTORDER_FLAGS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
