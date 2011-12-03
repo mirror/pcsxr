@@ -586,6 +586,7 @@ unsigned char PADpoll(unsigned char value) {
 	}
 
 	if (CurByte >= CmdLen) return 0;
+	if (buf == NULL) return 0;
 	return buf[CurByte++];
 }
 
