@@ -40,6 +40,7 @@
 	char *mcd;
 	NSTextField *label;
 	NSOpenPanel *openDlg = [NSOpenPanel openPanel];
+	[openDlg retain];
 	NSString *path;
 
 	if (tag == 1) { mcd = Config.Mcd1; label = mcd1Label; }
@@ -47,6 +48,7 @@
 
 	[openDlg setCanChooseFiles:YES];
 	[openDlg setCanChooseDirectories:NO];
+	[openDlg setAllowedFileTypes:[NSArray arrayWithObject:@"com.codeplex.pcsxr.memcard"]];
 
 	path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
     
@@ -65,6 +67,7 @@
 		else
 			[[NSUserDefaults standardUserDefaults] setObject:mcdPath forKey:@"Mcd2"];
     }
+	[openDlg release];
 }
 
 - (IBAction)mcdNewClicked:(id)sender
@@ -73,6 +76,7 @@
 	char *mcd;
 	NSTextField *label;
 	NSSavePanel *openDlg = [NSSavePanel savePanel];
+	[openDlg retain];
 	NSString *path;
 
 	if (tag == 1) { mcd = Config.Mcd1; label = mcd1Label; }
@@ -82,6 +86,7 @@
 
     [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent]]];
     [openDlg setNameFieldStringValue:@"New Memory Card File.mcr"];
+	[openDlg setAllowedFileTypes:[NSArray arrayWithObject:@"com.codeplex.pcsxr.memcard"]];
     
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
         NSString *mcdPath = [[openDlg URL] path];
@@ -96,6 +101,7 @@
 
 		CreateMcd(mcd);
     }
+	[openDlg release];
 }
 
 - (IBAction)setVideoType:(id)sender

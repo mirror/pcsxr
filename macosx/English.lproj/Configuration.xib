@@ -562,7 +562,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 																<string key="NSFrame">{{18, 16}, {232, 40}}</string>
 																<reference key="NSSuperview" ref="584348218"/>
 																<reference key="NSWindow"/>
-																<reference key="NSNextKeyView" ref="145760790"/>
+																<reference key="NSNextKeyView"/>
 																<bool key="NSEnabled">YES</bool>
 																<int key="NSNumRows">2</int>
 																<int key="NSNumCols">1</int>
@@ -1947,20 +1947,28 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">621</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">enableNetPlayCell</string>
-						<reference key="source" ref="974938689"/>
-						<reference key="destination" ref="322742106"/>
-					</object>
-					<int key="connectionID">641</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">mcdEditClicked:</string>
 						<reference key="source" ref="974938689"/>
 						<reference key="destination" ref="753962594"/>
 					</object>
 					<int key="connectionID">644</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">setCheckbox:</string>
+						<reference key="source" ref="974938689"/>
+						<reference key="destination" ref="322742106"/>
+					</object>
+					<int key="connectionID">650</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">enableNetPlayCell</string>
+						<reference key="source" ref="974938689"/>
+						<reference key="destination" ref="322742106"/>
+					</object>
+					<int key="connectionID">651</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3134,7 +3142,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">644</int>
+			<int key="maxID">651</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3291,68 +3299,43 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">PluginController</string>
-					<string key="superclassName">NSWindowController</string>
+					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="cancel:">id</string>
-						<string key="ok:">id</string>
-						<string key="reset:">id</string>
+						<string key="doAbout:">id</string>
+						<string key="doConfigure:">id</string>
+						<string key="selectPlugin:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="cancel:">
-							<string key="name">cancel:</string>
+						<object class="IBActionInfo" key="doAbout:">
+							<string key="name">doAbout:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="ok:">
-							<string key="name">ok:</string>
+						<object class="IBActionInfo" key="doConfigure:">
+							<string key="name">doConfigure:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="reset:">
-							<string key="name">reset:</string>
+						<object class="IBActionInfo" key="selectPlugin:">
+							<string key="name">selectPlugin:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="hiCompBox">NSControl</string>
-						<string key="interpolValue">NetSfPeopsSPUPluginNamedSlider</string>
-						<string key="irqWaitBox">NSControl</string>
-						<string key="monoSoundBox">NSControl</string>
-						<string key="reverbValue">NetSfPeopsSPUPluginNamedSlider</string>
-						<string key="volumeValue">NetSfPeopsSPUPluginNamedSlider</string>
-						<string key="xaEnableBox">NSControl</string>
-						<string key="xaSpeedBox">NSControl</string>
+						<string key="aboutButton">NSButton</string>
+						<string key="configureButton">NSButton</string>
+						<string key="pluginMenu">NSPopUpButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="hiCompBox">
-							<string key="name">hiCompBox</string>
-							<string key="candidateClassName">NSControl</string>
+						<object class="IBToOneOutletInfo" key="aboutButton">
+							<string key="name">aboutButton</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="interpolValue">
-							<string key="name">interpolValue</string>
-							<string key="candidateClassName">NetSfPeopsSPUPluginNamedSlider</string>
+						<object class="IBToOneOutletInfo" key="configureButton">
+							<string key="name">configureButton</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="irqWaitBox">
-							<string key="name">irqWaitBox</string>
-							<string key="candidateClassName">NSControl</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="monoSoundBox">
-							<string key="name">monoSoundBox</string>
-							<string key="candidateClassName">NSControl</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="reverbValue">
-							<string key="name">reverbValue</string>
-							<string key="candidateClassName">NetSfPeopsSPUPluginNamedSlider</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="volumeValue">
-							<string key="name">volumeValue</string>
-							<string key="candidateClassName">NetSfPeopsSPUPluginNamedSlider</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="xaEnableBox">
-							<string key="name">xaEnableBox</string>
-							<string key="candidateClassName">NSControl</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="xaSpeedBox">
-							<string key="name">xaSpeedBox</string>
-							<string key="candidateClassName">NSControl</string>
+						<object class="IBToOneOutletInfo" key="pluginMenu">
+							<string key="name">pluginMenu</string>
+							<string key="candidateClassName">NSPopUpButton</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

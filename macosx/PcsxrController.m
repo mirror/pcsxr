@@ -29,15 +29,18 @@ NSString *saveStatePath;
 	// switch to another ISO if using internal image reader, otherwise eject the CD
 	if (UsingIso()) {
 		NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+		[openDlg retain];
 
 		[openDlg setCanChooseFiles:YES];
 		[openDlg setCanChooseDirectories:NO];
+		[openDlg setAllowedFileTypes:[NSArray arrayWithObject:@"com.codeplex.pcsxr.psxdiscfile"]];
 
 		if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
-			NSArray* files = [openDlg filenames];
+			NSArray* files = [openDlg URLs];
 			SetCdOpenCaseTime(time(NULL) + 2);
-			SetIsoFile((const char *)[[files objectAtIndex:0] fileSystemRepresentation]);
+			SetIsoFile((const char *)[[[files objectAtIndex:0] path] fileSystemRepresentation]);
 		}
+		[openDlg release];
 	} else {
         char *driveLetter = CDR_getDriveLetter();
         
@@ -106,15 +109,18 @@ NSString *saveStatePath;
 - (IBAction)runIso:(id)sender
 {
 	NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+	[openDlg retain];
 
 	[openDlg setCanChooseFiles:YES];
 	[openDlg setCanChooseDirectories:NO];
+	[openDlg setAllowedFileTypes:[NSArray arrayWithObject:@"com.codeplex.pcsxr.psxdiscfile"]];
 
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 		NSArray* urls = [openDlg URLs];
 		SetIsoFile((const char *)[[[urls objectAtIndex:0] path] fileSystemRepresentation]);
 		[EmuThread run];
     }
+	[openDlg release];
 }
 
 - (IBAction)runBios:(id)sender

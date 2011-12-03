@@ -215,5 +215,30 @@
 			</dict>
 		</dict>
 	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.disk-image</string>
+				<string>public.content</string>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>PlayStation Disc</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.codeplex.pcsxr.psxdiscfile</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>bin</string>
+					<string>img</string>
+					<string>mdf</string>
+					<string>iso</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>
