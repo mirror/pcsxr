@@ -163,6 +163,7 @@ done:
 				SysClose();
 				
 				//[[NSThread currentThread] autorelease];
+				[pool drain];
 				[NSThread exit];
 				return;
 			}

@@ -118,8 +118,6 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
     self = [super initWithWindow:window];
     if (self) {
         LoadMcds(Config.Mcd1, Config.Mcd2);
-		[self setMemCard1Array:[[NSMutableArray alloc] initWithCapacity:MAX_MEMCARD_BLOCKS]];
-		[self setMemCard2Array:[[NSMutableArray alloc] initWithCapacity:MAX_MEMCARD_BLOCKS]];
     }
     
     return self;
@@ -219,7 +217,7 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 	NSInteger memCardSelect = [sender tag];
 	NSCollectionView *cardView;
 	NSIndexSet *selection;
-	int toCard, fromCard, freeSlot;
+	int toCard, freeSlot;
 	char *str, *source, *destination;
 	if (memCardSelect == 1) {
 		str = Config.Mcd1;
@@ -227,14 +225,12 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 		destination = Mcd1Data;
 		cardView = memCard2view;
 		toCard = 1;
-		fromCard = 2;
 	} else {
 		str = Config.Mcd2;
 		source = Mcd1Data;
 		destination = Mcd2Data;
 		cardView = memCard1view;
 		toCard = 2;
-		fromCard = 1;
 	}
 	selection = [cardView selectionIndexes];
 	if (!selection || [selection count] == 0) {
@@ -318,13 +314,10 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 	if (deleteOkay == NSAlertAlternateReturn) {
 		NSInteger memCardSelect = [sender tag];
 		NSIndexSet *selected;
-		NSArray *cardArray;
 		if (memCardSelect == 1) {
 			selected = [memCard1view selectionIndexes];
-			cardArray = [self memCard1Array];
 		} else {
 			selected = [memCard2view selectionIndexes];
-			cardArray = [self memCard2Array];
 		}
 		
 		if (!selected || [selected count] == 0) {

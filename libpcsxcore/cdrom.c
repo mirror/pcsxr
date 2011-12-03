@@ -220,7 +220,7 @@ extern SPUregisterCallback SPU_registerCallback;
 
 void adjustTransferIndex()
 {
-	unsigned int bufSize;
+	unsigned int bufSize = 0;
 	
 	switch (cdr.Mode & (MODE_SIZE_2340|MODE_SIZE_2328)) {
 		case MODE_SIZE_2340: bufSize = 2340; break;
@@ -518,7 +518,7 @@ static void ReadTrack( u8 *time ) {
 static void CDXA_Attenuation( s16 *buf, int size, int stereo, int attenuate_type )
 {
 	s16 *spsound;
-	s32 lc,rc;
+	s32 lc = 0,rc;
 	int i;
 
 	spsound = buf;
