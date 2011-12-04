@@ -45,5 +45,6 @@
 - (BOOL)memoryCardWindowIsVisible;
 
 - (NSString *)keyForSender:(id)sender;
++ (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile;
 
 @end

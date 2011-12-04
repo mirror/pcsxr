@@ -75,6 +75,8 @@
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
+			<key>NSDocumentClass</key>
+			<string>PcsxrMemCardDocument</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>

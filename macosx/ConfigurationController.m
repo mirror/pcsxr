@@ -6,7 +6,23 @@
 #include "psxcommon.h"
 #include "plugins.h"
 
+NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
+
+
 @implementation ConfigurationController
+
++ (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile
+{
+	if (theCard == 1) {
+		[[NSUserDefaults standardUserDefaults] setObject:theFile forKey:@"Mcd1"];
+		strcpy(Config.Mcd1, [theFile fileSystemRepresentation] );
+	} else {
+		[[NSUserDefaults standardUserDefaults] setObject:theFile forKey:@"Mcd2"];
+		strcpy(Config.Mcd2, [theFile fileSystemRepresentation] );
+	}
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil];
+}
 
 - (IBAction)setCheckbox:(id)sender
 {
@@ -58,14 +74,9 @@
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 		NSArray* urls = [openDlg URLs];
         NSString *mcdPath = [[urls objectAtIndex:0] path];
-        strcpy(mcd, (const char *)[mcdPath fileSystemRepresentation]);
         
+		[ConfigurationController setMemoryCard:tag toPath:mcdPath];
 		[label setTitleWithMnemonic:mcdPath];
-
-		if (tag == 1)
-			[[NSUserDefaults standardUserDefaults] setObject:mcdPath forKey:@"Mcd1"];
-		else
-			[[NSUserDefaults standardUserDefaults] setObject:mcdPath forKey:@"Mcd2"];
     }
 	[openDlg release];
 }
@@ -90,14 +101,9 @@
     
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
         NSString *mcdPath = [[openDlg URL] path];
-        strcpy(mcd, (const char *)[mcdPath fileSystemRepresentation]);
 
+		[ConfigurationController setMemoryCard:tag toPath:mcdPath];
 		[label setTitleWithMnemonic:mcdPath];
-
-		if (tag == 1)
-			[[NSUserDefaults standardUserDefaults] setObject:mcdPath forKey:@"Mcd1"];
-		else
-			[[NSUserDefaults standardUserDefaults] setObject:mcdPath forKey:@"Mcd2"];
 
 		CreateMcd(mcd);
     }
@@ -129,12 +135,22 @@
 	}
 }
 
+- (void)memoryCardDidChangeNotification:(NSNotification *)aNote
+{
+	NSString *path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.Mcd1 length:strlen(Config.Mcd1)];
+	[mcd1Label setTitleWithMnemonic:path];
+	path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.Mcd2 length:strlen(Config.Mcd2)];
+	[mcd2Label setTitleWithMnemonic:path];
+}
+
 - (void)awakeFromNib
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	[[self window] center];
 
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(memoryCardDidChangeNotification:) name:memChangeNotifier object:nil];
+	
 	// setup checkboxes
 	checkBoxDefaults = [[NSMutableDictionary alloc] init];
 
@@ -201,6 +217,7 @@
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[checkBoxDefaults release];
 	if (memCardEdit) {
 		[memCardEdit release];
