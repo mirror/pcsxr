@@ -8,7 +8,6 @@
 
 NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 
-
 @implementation ConfigurationController
 
 + (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile
@@ -76,7 +75,6 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
         NSString *mcdPath = [[urls objectAtIndex:0] path];
         
 		[ConfigurationController setMemoryCard:tag toPath:mcdPath];
-		[label setTitleWithMnemonic:mcdPath];
     }
 	[openDlg release];
 }
@@ -103,7 +101,6 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
         NSString *mcdPath = [[openDlg URL] path];
 
 		[ConfigurationController setMemoryCard:tag toPath:mcdPath];
-		[label setTitleWithMnemonic:mcdPath];
 
 		CreateMcd(mcd);
     }

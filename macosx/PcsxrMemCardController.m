@@ -8,6 +8,7 @@
 
 #import "PcsxrMemCardController.h"
 #import "PcsxrMemoryObject.h"
+#import "ConfigurationController.h"
 #include "sio.h"
 
 #define MAX_MEMCARD_BLOCKS 15
@@ -159,12 +160,20 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 	[newArray release];
 }
 
+- (void)memoryCardDidChangeNotification:(NSNotification *)aNote
+{
+	[self loadMemoryCardInfoForCard:1];
+	[self loadMemoryCardInfoForCard:2];
+}
+
 - (void)windowDidLoad
 {
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 	[[self window] setDelegate:self];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(memoryCardDidChangeNotification:) name:memChangeNotifier object:nil];
+
 }
 
 - (void)windowDidBecomeKey:(NSNotification *)notification
@@ -335,6 +344,13 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 		}
 		[self loadMemoryCardInfoForCard:memCardSelect];
 	}
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+
+	[super dealloc];
 }
 
 @end

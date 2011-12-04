@@ -4,6 +4,8 @@
 #import "PluginController.h"
 #import "PluginList.h"
 
+extern NSString *memChangeNotifier;
+
 @class PcsxrMemCardController;
 
 @interface ConfigurationController : NSWindowController
