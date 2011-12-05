@@ -68,7 +68,7 @@
 				<string>Pmcr</string>
 			</array>
 			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
+			<string>Editor</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.codeplex.pcsxr.memcard</string>
