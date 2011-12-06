@@ -442,5 +442,9 @@ NSString *saveStatePath;
 	[PcsxrController setConfigFromDefaults];
 }
 
+- (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender
+{
+	return NO;
+}
 
 @end
