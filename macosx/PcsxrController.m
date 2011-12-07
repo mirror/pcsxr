@@ -33,7 +33,7 @@ NSString *saveStatePath;
 
 		[openDlg setCanChooseFiles:YES];
 		[openDlg setCanChooseDirectories:NO];
-		[openDlg setAllowedFileTypes:[NSArray arrayWithObjects:@"com.codeplex.pcsxr.psxdiscfile", @"bin", @"img", @"mdf", @"iso", nil]];
+		[openDlg setAllowedFileTypes:[NSArray arrayWithObjects:@"com.codeplex.pcsxr.mdfdisc", @"bin", @"com.apple.disk-image-ndif", @"public.iso-image", nil]];
 
 		if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 			NSArray* files = [openDlg URLs];
@@ -113,7 +113,7 @@ NSString *saveStatePath;
 
 	[openDlg setCanChooseFiles:YES];
 	[openDlg setCanChooseDirectories:NO];
-	[openDlg setAllowedFileTypes:[NSArray arrayWithObjects:@"com.codeplex.pcsxr.psxdiscfile", @"bin", @"img", @"mdf", @"iso", nil]];
+	[openDlg setAllowedFileTypes:[NSArray arrayWithObjects:@"com.codeplex.pcsxr.mdfdisc", @"bin", @"com.apple.disk-image-ndif", @"public.iso-image", nil]];
 
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 		NSArray* urls = [openDlg URLs];

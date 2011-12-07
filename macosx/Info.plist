@@ -229,15 +229,12 @@
 			<key>UTTypeDescription</key>
 			<string>PlayStation Disc</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.codeplex.pcsxr.psxdiscfile</string>
+			<string>com.codeplex.pcsxr.mdfdisc</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
-					<string>bin</string>
-					<string>img</string>
 					<string>mdf</string>
-					<string>iso</string>
 				</array>
 			</dict>
 		</dict>
