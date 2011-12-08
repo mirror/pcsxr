@@ -99,10 +99,13 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
     
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
         NSString *mcdPath = [[openDlg URL] path];
+		
+		//Workaround/kludge to make sure we create a memory card before posting a notification
+		strcpy(mcd, [mcdPath fileSystemRepresentation]);
+		
+		CreateMcd(mcd);
 
 		[ConfigurationController setMemoryCard:tag toPath:mcdPath];
-
-		CreateMcd(mcd);
     }
 	[openDlg release];
 }
