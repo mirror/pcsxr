@@ -21,4 +21,6 @@
 - (IBAction)formatCard:(id)sender;
 - (IBAction)deleteMemoryObject:(id)sender;
 - (void)loadMemoryCardInfoForCard:(int)theCard;
+- (BOOL)isMemoryBlockEmptyOnCard:(int)aCard block:(int)aBlock;
+- (int)countFreeBlocksOnCard:(int)aCard;
 @end

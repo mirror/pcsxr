@@ -15,43 +15,6 @@
 
 //FIXME: This code uses similar code to the GTK memory card manager, and both don't recognize saves that span multiple blocks.
 
-static NSImage *imageFromMcd(short * icon)
-{
-	NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:16 pixelsHigh:16 bitsPerSample:8 samplesPerPixel:3 hasAlpha:NO isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:0 bitsPerPixel:0];
-	
-#if 0
-	int x, y, c;
-	for (y = 0; y < 32; y++) {
-		for (x = 0; x < 32; x++) {
-			c = icon[(y>>1) * 16 + (x>>1)];
-			c = ((c & 0x001f) << 10) | ((c & 0x7c00) >> 10) | (c & 0x03e0);
-			c = ((c & 0x001f) << 3) | ((c & 0x03e0) << 6) | ((c & 0x7c00) << 9);
-			
-			NSUInteger NSc = c;
-			
-			[imageRep setPixel:&NSc atX:x y:y];
-		}
-	}
-#else
-	int x, y, c, i, r, g, b;
-	for (i = 0; i < 256; i++) {
-		x = (i % 16);
-		y = (i / 16);
-		c = icon[i];
-		r = (c & 0x001f) << 3;
-		g = ((c & 0x03e0) >> 5) << 3;
-		b = ((c & 0x7c00) >> 10) << 3;
-		[imageRep setColor:[NSColor colorWithCalibratedRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0] atX:x y:y];
-	}
-#endif
-	NSImage *theImage = [[NSImage alloc] init];
-	[theImage addRepresentation:imageRep];
-	[imageRep release];
-	[theImage setScalesWhenResized:YES];
-	[theImage setSize:NSMakeSize(32, 32)];
-	return [theImage autorelease];
-}
-
 static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int copy) {
 	memcpy(to + (*i + 1) * 128, from + (copy + 1) * 128, 128);
 	SaveMcd(str, to, (*i + 1) * 128, 128);
@@ -132,22 +95,7 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 	
 	for (i = 0; i < MAX_MEMCARD_BLOCKS; i++) {
 		GetMcdBlockInfo(theCard, i + 1, &info);
-		PcsxrMemoryObject *ob = [[PcsxrMemoryObject alloc] init];
-		ob.englishName = [NSString stringWithCString:info.Title encoding:NSASCIIStringEncoding];
-		ob.sjisName = [NSString stringWithCString:info.sTitle encoding:NSShiftJISStringEncoding];
-		ob.memImage = imageFromMcd(info.Icon);
-		ob.memNumber = i;
-		ob.memFlags = info.Flags;
-		if ((info.Flags & 0xF0) == 0xA0) {
-			if ((info.Flags & 0xF) >= 1 &&
-				(info.Flags & 0xF) <= 3) {
-				ob.notDeleted = NO;
-			} else
-				ob.notDeleted = NO;
-		} else if ((info.Flags & 0xF0) == 0x50)
-			ob.notDeleted = YES;
-		else
-			ob.notDeleted = NO;
+		PcsxrMemoryObject *ob = [[PcsxrMemoryObject alloc] initWithMcdBlock:&info];
 
 		[newArray insertObject:ob atIndex:i];
 		[ob release];
@@ -162,7 +110,9 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 
 - (void)memoryCardDidChangeNotification:(NSNotification *)aNote
 {
+	LoadMcd(1, Config.Mcd1);
 	[self loadMemoryCardInfoForCard:1];
+	LoadMcd(2, Config.Mcd2);
 	[self loadMemoryCardInfoForCard:2];
 }
 
@@ -178,12 +128,15 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 
 - (void)windowDidBecomeKey:(NSNotification *)notification
 {
+	LoadMcd(1, Config.Mcd1);
 	[self loadMemoryCardInfoForCard:1];
+	LoadMcd(2, Config.Mcd2);
 	[self loadMemoryCardInfoForCard:2];
 }
 
-- (int)findFreeMemCardSlotInCard:(int)target_card
+- (int)findFreeMemCardBlockInCard:(int)target_card
 {
+#if 0
 	BOOL found = NO;
 	NSString *blockName;
 	NSArray *cardArray;
@@ -194,8 +147,9 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 	}
 	
 	int i = 0;
-	while (i < 15 && found == NO) {
+	while (i < MAX_MEMCARD_BLOCKS && found == NO) {
 		blockName = [[cardArray objectAtIndex:i] englishName];
+		//FIXME: Does this properly handle saves that span more than one block?
 		if ([blockName isEqualToString:@""]) {
 			found = YES;
 		} else {
@@ -207,7 +161,7 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 	
 	// no free slots, try to find a deleted one
 	i = 0;
-	while (i < 15 && found == NO) {
+	while (i < MAX_MEMCARD_BLOCKS && found == NO) {
 		unsigned char flags = [[cardArray objectAtIndex:i] memFlags];
 		if ((flags & 0xF0) != 0x50) {
 			found = YES;
@@ -217,6 +171,14 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 	}
 	if (found == YES)
 		return i;
+#else
+	int i;
+	for (i = 0; i < MAX_MEMCARD_BLOCKS; i++) {
+		if ([self isMemoryBlockEmptyOnCard:target_card block:i]) {
+			return i;
+		}
+	}
+#endif
 	
 	return -1;
 }
@@ -249,7 +211,7 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 	
 	NSInteger selectedIndex = [selection firstIndex];
 	
-	freeSlot = [self findFreeMemCardSlotInCard:toCard];
+	freeSlot = [self findFreeMemCardBlockInCard:toCard];
 	if (freeSlot == -1) {
 		NSRunCriticalAlertPanel(NSLocalizedString(@"No Free Space", nil), [NSString stringWithFormat:NSLocalizedString(@"Memory card %d doesn't have a free block on it. Please remove some blocks on that card to continue", nil), toCard], NSLocalizedString(@"Okay", nil), nil, nil);
 		return;
@@ -281,7 +243,7 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 	}
 }
 
-- (void)deleteMemoryObjectAtSlot:(int)slotnum card:(int)cardNum
+- (void)deleteMemoryBlockAtSlot:(int)slotnum card:(int)cardNum
 {
 	int xor = 0, i, j;
 	char *data, *ptr, *filename;
@@ -335,7 +297,7 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 		}
 		
 		NSInteger selectedIndex = [selected firstIndex];
-		[self deleteMemoryObjectAtSlot:selectedIndex card:memCardSelect];
+		[self deleteMemoryBlockAtSlot:selectedIndex card:memCardSelect];
 		
 		if (memCardSelect == 1) {
 			LoadMcd(1, Config.Mcd1);
@@ -351,6 +313,44 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 
 	[super dealloc];
+}
+
+- (BOOL)isMemoryBlockEmptyOnCard:(int)aCard block:(int)aBlock
+{
+	NSArray *memArray;
+	PcsxrMemoryObject *obj;
+	if (aCard == 1) {
+		memArray = [self memCard1Array];
+	} else {
+		memArray = [self memCard2Array];
+	}
+	obj = [memArray objectAtIndex:aBlock];
+#if 0
+	if (([obj memFlags] & 0xF0) != 0x50)
+		return YES;
+	
+	//FIXME: Does this properly handle saves that span more than one block?
+	if ([[obj englishName] isEqualToString:@""]) {
+		return YES;
+	}
+#else
+	if (![obj isNotDeleted]) {
+		return YES;
+	} 
+#endif
+	
+	return NO;
+}
+
+- (int)countFreeBlocksOnCard:(int)aCard
+{
+	int i, count = 0;
+	for (i = 0; i < MAX_MEMCARD_BLOCKS; i++) {
+		if ([self isMemoryBlockEmptyOnCard:aCard block:i]) {
+			count++;
+		}
+	}
+	return count;
 }
 
 @end
