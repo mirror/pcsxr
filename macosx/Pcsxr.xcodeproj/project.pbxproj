@@ -947,10 +947,7 @@
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
-				OTHER_CFLAGS = (
-					"-mstackrealign",
-					"-falign-loops=16",
-				);
+				OTHER_CFLAGS = "-falign-loops=16";
 				PRODUCT_NAME = PCSXR;
 				WRAPPER_EXTENSION = app;
 			};
@@ -976,7 +973,6 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
 				OTHER_CFLAGS = (
-					"-mstackrealign",
 					"-fomit-frame-pointer",
 					"-funroll-loops",
 					"-falign-loops=16",
