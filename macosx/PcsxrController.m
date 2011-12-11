@@ -2,6 +2,8 @@
 #import "PcsxrController.h"
 #import "ConfigurationController.h"
 #import "EmuThread.h"
+#import "PcsxrMemCardHandler.h"
+#import "PcsxrPluginHandler.h"
 #include "psxcommon.h"
 #include "plugins.h"
 #include "misc.h"
@@ -445,6 +447,30 @@ NSString *saveStatePath;
 - (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender
 {
 	return NO;
+}
+
+- (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
+{
+	NSString *utiFile = [[NSWorkspace sharedWorkspace] typeOfFile:filename error:nil];
+	if(UTTypeEqual((CFStringRef)@"com.codeplex.pcsxr.plugin", (CFStringRef)utiFile)) {
+		PcsxrPluginHandler *hand = [[PcsxrPluginHandler alloc] init];
+		BOOL isHandled = [hand handleFile:filename];
+		[hand release];
+		return isHandled;
+	} else if(UTTypeEqual((CFStringRef)@"com.codeplex.pcsxr.memcard", (CFStringRef)utiFile)) {
+		PcsxrMemCardHandler *hand = [[PcsxrMemCardHandler alloc] init];
+		BOOL isHandled = [hand handleFile:filename];
+		[hand release];
+		return isHandled;
+	} else if(UTTypeEqual((CFStringRef)@"com.codeplex.pcsxr.freeze", (CFStringRef)utiFile)) {
+		//TODO: handle freeze states
+		return NO;
+	} else if(UTTypeEqual((CFStringRef)@"com.codeplex.pcsxr.mdfdisc", (CFStringRef)utiFile) || UTTypeEqual((CFStringRef)@"com.apple.disk-image-ndif", (CFStringRef)utiFile) || UTTypeEqual((CFStringRef)@"public.iso-image", (CFStringRef)utiFile)) {
+		//TODO: handle ISOs and family
+		return NO;
+	} else {
+		return NO;
+	}
 }
 
 @end

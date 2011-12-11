@@ -6,7 +6,7 @@
 
 @class ConfigurationController;
 
-@interface PcsxrController : NSObject
+@interface PcsxrController : NSObject <NSApplicationDelegate>
 {
     ConfigurationController *preferencesController;
     PluginList *pluginList;

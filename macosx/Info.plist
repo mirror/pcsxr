@@ -27,8 +27,6 @@
 			</array>
 			<key>LSTypeIsPackage</key>
 			<true/>
-			<key>NSDocumentClass</key>
-			<string>PcsxrPluginDocument</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -75,8 +73,6 @@
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
-			<key>NSDocumentClass</key>
-			<string>PcsxrMemCardDocument</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -99,6 +95,25 @@
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>iso</string>
+				<string>bin</string>
+				<string>mdf</string>
+				<string>img</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>PlayStation Disc</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.codeplex.pcsxr.mdfdisc</string>
+				<string>com.apple.disk-image-ndif</string>
+				<string>public.iso-image</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -134,6 +149,25 @@
 	<string>NSApplication</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.disk-image</string>
+				<string>public.content</string>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>PlayStation Disc</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.codeplex.pcsxr.mdfdisc</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>mdf</string>
+				</array>
+			</dict>
+		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
@@ -213,28 +247,6 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>pcsxrstate</string>
-				</array>
-			</dict>
-		</dict>
-	</array>
-	<key>UTImportedTypeDeclarations</key>
-	<array>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.disk-image</string>
-				<string>public.content</string>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>PlayStation Disc</string>
-			<key>UTTypeIdentifier</key>
-			<string>com.codeplex.pcsxr.mdfdisc</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>mdf</string>
 				</array>
 			</dict>
 		</dict>
