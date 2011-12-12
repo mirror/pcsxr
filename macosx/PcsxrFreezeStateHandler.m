@@ -17,7 +17,7 @@
 	if (CheckState([theFile fileSystemRepresentation]) != 0) {
 		return NO;
 	}
-	if ([EmuThread active]) {
+	if (![EmuThread active]) {
 		[EmuThread run];
 	}
 	[EmuThread defrostAt:theFile];
