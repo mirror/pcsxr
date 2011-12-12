@@ -20,7 +20,7 @@
 	if (![EmuThread active]) {
 		[EmuThread run];
 	}
-	[EmuThread defrostAt:theFile];
+	return [EmuThread defrostAt:theFile];
 }
 
 @end
