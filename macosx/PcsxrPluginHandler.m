@@ -14,7 +14,7 @@
 {
     self = [super initWithWindow:window];
     if (self) {
-        // Initialization code here.
+        moveOK = NO;
     }
     
     return self;
@@ -22,9 +22,7 @@
 
 - (id)init
 {
-	if (self = [super initWithWindowNibName:@"AddPluginSheet"]) {
-		moveOK = NO;
-	}
+	self = [super initWithWindowNibName:@"AddPluginSheet"];
 	return self;
 }
 
@@ -53,8 +51,7 @@
 	[pluginName setObjectValue:[[NSURL fileURLWithPath:theFile] lastPathComponent]];
 	
 	[NSApp runModalForWindow:[self window]];
-	// Sheet is up here.
-	[NSApp endSheet:[self window]];
+
 	[[self window] orderOut:self];
 	if (moveOK == YES) {
 		NSFileWrapper *wrapper = [[NSFileWrapper alloc] initWithPath:theFile];

@@ -15,17 +15,15 @@
 {
     self = [super initWithWindow:window];
     if (self) {
-        // Initialization code here.
-    }
+		memChosen = 0;
+	}
     
     return self;
 }
 
 - (id)init
 {
-	if (self = [super initWithWindowNibName:@"PcsxrMemCardDocument"]) {
-		memChosen = 0;
-	}
+	self = [super initWithWindowNibName:@"PcsxrMemCardDocument"];
 	return self;
 }
 
@@ -53,7 +51,6 @@
 	
 	[NSApp runModalForWindow:[self window]];
 	
-	[NSApp endSheet:[self window]];
 	[[self window] orderOut:self];
 	
 	if (memChosen != 0) {

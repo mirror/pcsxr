@@ -4,6 +4,8 @@
 #import "EmuThread.h"
 #import "PcsxrMemCardHandler.h"
 #import "PcsxrPluginHandler.h"
+#import "PcsxrDiscHandler.h"
+#import "PcsxrFreezeStateHandler.h"
 #include "psxcommon.h"
 #include "plugins.h"
 #include "misc.h"
@@ -13,6 +15,20 @@ NSDictionary *prefStringKeys;
 NSDictionary *prefByteKeys;
 NSMutableArray *biosList;
 NSString *saveStatePath;
+
+static NSString *HandleBinCue(NSString *toHandle)
+{
+	NSURL *tempURL = [[NSURL alloc] initWithString:toHandle];
+	NSString *extension = [tempURL pathExtension];
+	NSString *newName = toHandle;
+	if ([extension caseInsensitiveCompare:@"cue"] == NSOrderedSame) {
+		NSURL *temp1 = [tempURL URLByDeletingPathExtension];
+		//TODO: handle case-sensitive filesystems
+		NSURL *temp2 = [tempURL URLByAppendingPathExtension:@"bin"];
+		newName = [temp2 path];
+	}
+	return newName;
+}
 
 @implementation PcsxrController
 
@@ -35,12 +51,12 @@ NSString *saveStatePath;
 
 		[openDlg setCanChooseFiles:YES];
 		[openDlg setCanChooseDirectories:NO];
-		[openDlg setAllowedFileTypes:[NSArray arrayWithObjects:@"com.codeplex.pcsxr.mdfdisc", @"bin", @"com.apple.disk-image-ndif", @"public.iso-image", nil]];
+		[openDlg setAllowedFileTypes:[NSArray arrayWithObjects:@"com.alcohol-soft.mdfdisc", @"com.codeplex.pcsxr.cuefile", @"com.apple.disk-image-ndif", @"public.iso-image", nil]];
 
 		if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 			NSArray* files = [openDlg URLs];
 			SetCdOpenCaseTime(time(NULL) + 2);
-			SetIsoFile((const char *)[[[files objectAtIndex:0] path] fileSystemRepresentation]);
+			SetIsoFile((const char *)[HandleBinCue([[files objectAtIndex:0] path]) fileSystemRepresentation]);
 		}
 		[openDlg release];
 	} else {
@@ -115,11 +131,11 @@ NSString *saveStatePath;
 
 	[openDlg setCanChooseFiles:YES];
 	[openDlg setCanChooseDirectories:NO];
-	[openDlg setAllowedFileTypes:[NSArray arrayWithObjects:@"com.codeplex.pcsxr.mdfdisc", @"bin", @"com.apple.disk-image-ndif", @"public.iso-image", nil]];
+	[openDlg setAllowedFileTypes:[NSArray arrayWithObjects:@"com.alcohol-soft.mdfdisc", @"com.codeplex.pcsxr.cuefile", @"com.apple.disk-image-ndif", @"public.iso-image", nil]];
 
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 		NSArray* urls = [openDlg URLs];
-		SetIsoFile((const char *)[[[urls objectAtIndex:0] path] fileSystemRepresentation]);
+		SetIsoFile((const char *)[HandleBinCue([[urls objectAtIndex:0] path]) fileSystemRepresentation]);
 		[EmuThread run];
     }
 	[openDlg release];
@@ -463,11 +479,15 @@ NSString *saveStatePath;
 		[hand release];
 		return isHandled;
 	} else if(UTTypeEqual((CFStringRef)@"com.codeplex.pcsxr.freeze", (CFStringRef)utiFile)) {
-		//TODO: handle freeze states
-		return NO;
-	} else if(UTTypeEqual((CFStringRef)@"com.codeplex.pcsxr.mdfdisc", (CFStringRef)utiFile) || UTTypeEqual((CFStringRef)@"com.apple.disk-image-ndif", (CFStringRef)utiFile) || UTTypeEqual((CFStringRef)@"public.iso-image", (CFStringRef)utiFile)) {
-		//TODO: handle ISOs and family
-		return NO;
+		PcsxrFreezeStateHandler *hand = [[PcsxrFreezeStateHandler alloc] init];
+		BOOL isHandled = [hand handleFile:filename];
+		[hand release];
+		return isHandled;
+	} else if(UTTypeEqual(CFSTR("com.alcohol-soft.mdfdisc"), (CFStringRef)utiFile) || UTTypeEqual(CFSTR("com.apple.disk-image-ndif"), (CFStringRef)utiFile) || UTTypeEqual(CFSTR("public.iso-image"), (CFStringRef)utiFile) || UTTypeEqual(CFSTR("com.codeplex.pcsxr.cuefile"), (CFStringRef)utiFile)) {
+		PcsxrDiscHandler *hand = [[PcsxrDiscHandler alloc] init];
+		BOOL isHandled = [hand handleFile:HandleBinCue(filename)];
+		[hand release];
+		return isHandled;
 	} else {
 		return NO;
 	}

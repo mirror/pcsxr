@@ -110,8 +110,9 @@
 			<string>Viewer</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.codeplex.pcsxr.mdfdisc</string>
+				<string>com.alcohol-soft.mdfdisc</string>
 				<string>com.apple.disk-image-ndif</string>
+				<string>com.codeplex.pcsxr.cuefile</string>
 				<string>public.iso-image</string>
 			</array>
 		</dict>
@@ -147,8 +148,25 @@
 	<string>PCSXR</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>UTExportedTypeDeclarations</key>
+	<key>UTImportedTypeDeclarations</key>
 	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string></string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<string>com.codeplex.pcsxr.cuefile</string>
+			<key>UTTypeDescription</key>
+			<string>bin/cue Disc Image</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cue</string>
+				</array>
+			</dict>
+		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
@@ -157,9 +175,9 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>PlayStation Disc</string>
+			<string>Alcohol Disc Image</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.codeplex.pcsxr.mdfdisc</string>
+			<string>com.alcohol-soft.mdfdisc</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -168,6 +186,9 @@
 				</array>
 			</dict>
 		</dict>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
