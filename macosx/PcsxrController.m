@@ -23,10 +23,14 @@ static NSString *HandleBinCue(NSString *toHandle)
 	NSString *newName = toHandle;
 	if ([extension caseInsensitiveCompare:@"cue"] == NSOrderedSame) {
 		NSURL *temp1 = [tempURL URLByDeletingPathExtension];
-		//TODO: handle case-sensitive filesystems
-		NSURL *temp2 = [tempURL URLByAppendingPathExtension:@"bin"];
+		//TODO: handle case-sensitive filesystems better
+		NSURL *temp2 = [temp1 URLByAppendingPathExtension:@"bin"];
+		if (![[NSFileManager defaultManager] fileExistsAtPath:[temp2 path]]) {
+			temp2 = [temp1 URLByAppendingPathExtension:@"BIN"];
+		}
 		newName = [temp2 path];
 	}
+	[tempURL release];
 	return newName;
 }
 
