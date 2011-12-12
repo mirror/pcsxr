@@ -101,6 +101,7 @@
 			<array>
 				<string>iso</string>
 				<string>bin</string>
+				<string>cue</string>
 				<string>mdf</string>
 				<string>img</string>
 			</array>
@@ -153,7 +154,8 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string></string>
+				<string>public.plain-text</string>
+				<string>public.disk-image</string>
 			</array>
 			<key>UTTypeIdentifier</key>
 			<string>com.codeplex.pcsxr.cuefile</string>
@@ -171,11 +173,12 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.disk-image</string>
-				<string>public.content</string>
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>Alcohol Disc Image</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://www.alcohol-soft.com</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.alcohol-soft.mdfdisc</string>
 			<key>UTTypeTagSpecification</key>
@@ -219,6 +222,7 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
+				<string>public.content</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>PCSXR Memory Card</string>
@@ -250,6 +254,7 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
+				<string>public.content</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>PCSXR Freeze State</string>
