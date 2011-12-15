@@ -62,3 +62,5 @@
 "No Free Space" = "No Free Space";
 "Memory card %d doesn't have a free block on it. Please remove some blocks on that card to continue" = "Memory card %d doesn't have a free block on it. Please remove some blocks on that card to continue";
 "Okay" = "Okay";
+"Error opening file" = "Error opening file";
+"Unable to open %@: %@" = "Unable to open %@: %@";

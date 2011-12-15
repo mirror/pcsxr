@@ -464,25 +464,25 @@ static NSString *HandleBinCue(NSString *toHandle)
 	[PcsxrController setConfigFromDefaults];
 }
 
-- (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender
-{
-	return NO;
-}
-
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
-	NSString *utiFile = [[NSWorkspace sharedWorkspace] typeOfFile:filename error:nil];
-	if(UTTypeEqual((CFStringRef)@"com.codeplex.pcsxr.plugin", (CFStringRef)utiFile)) {
+	NSError *err = nil;
+	NSString *utiFile = [[NSWorkspace sharedWorkspace] typeOfFile:filename error:&err];
+	if (err) {
+		NSRunAlertPanel(NSLocalizedString(@"Error opening file",nil), [NSString stringWithFormat:NSLocalizedString(@"Unable to open %@: %@", nil), [filename lastPathComponent], [err localizedFailureReason]], nil, nil, nil);
+		return NO;
+	}
+	if(UTTypeEqual(CFSTR("com.codeplex.pcsxr.plugin"), (CFStringRef)utiFile)) {
 		PcsxrPluginHandler *hand = [[PcsxrPluginHandler alloc] init];
 		BOOL isHandled = [hand handleFile:filename];
 		[hand release];
 		return isHandled;
-	} else if(UTTypeEqual((CFStringRef)@"com.codeplex.pcsxr.memcard", (CFStringRef)utiFile)) {
+	} else if(UTTypeEqual(CFSTR("com.codeplex.pcsxr.memcard"), (CFStringRef)utiFile)) {
 		PcsxrMemCardHandler *hand = [[PcsxrMemCardHandler alloc] init];
 		BOOL isHandled = [hand handleFile:filename];
 		[hand release];
 		return isHandled;
-	} else if(UTTypeEqual((CFStringRef)@"com.codeplex.pcsxr.freeze", (CFStringRef)utiFile)) {
+	} else if(UTTypeEqual(CFSTR("com.codeplex.pcsxr.freeze"), (CFStringRef)utiFile)) {
 		PcsxrFreezeStateHandler *hand = [[PcsxrFreezeStateHandler alloc] init];
 		BOOL isHandled = [hand handleFile:filename];
 		[hand release];
