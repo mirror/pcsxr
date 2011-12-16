@@ -62,7 +62,7 @@ long cdxa_dbuf_ptr;
 static int lastxa_lc, lastxa_rc;
 static int lastcd_lc, lastcd_rc;
 
-extern INLINE void MixXA(void)
+static INLINE void MixXA(void)
 {
  int ns;
  int lc,rc;
@@ -260,7 +260,7 @@ unsigned long timeGetTime_spu()
 // FEED XA 
 ////////////////////////////////////////////////////////////////////////
 
-extern INLINE void FeedXA(xa_decode_t *xap)
+static INLINE void FeedXA(xa_decode_t *xap)
 {
  int sinc,spos,i,iSize,iPlace;
 
@@ -451,7 +451,7 @@ extern INLINE void FeedXA(xa_decode_t *xap)
 
 unsigned int cdda_ptr;
 
-extern INLINE void FeedCDDA(unsigned char *pcm, int nBytes)
+static INLINE void FeedCDDA(unsigned char *pcm, int nBytes)
 {
  while(nBytes>0)
   {

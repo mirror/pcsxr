@@ -16,6 +16,6 @@
  ***************************************************************************/
 
 void SetREVERB(unsigned short val);
-extern INLINE void StartREVERB(int ch);
-extern INLINE void StoreREVERB(int ch,int ns);
+static INLINE void StartREVERB(int ch);
+static INLINE void StoreREVERB(int ch,int ns);
 

@@ -63,7 +63,7 @@ void SetREVERB(unsigned short val)
 // START REVERB
 ////////////////////////////////////////////////////////////////////////
 
-extern INLINE void StartREVERB(int ch)
+static INLINE void StartREVERB(int ch)
 {
  if(s_chan[ch].bReverb && (spuCtrl&0x80))              // reverb possible?
   {
@@ -112,7 +112,7 @@ static INLINE void StoreREVERB_CD(int left, int right,int ns)
 }
  
 
-extern INLINE void StoreREVERB(int ch,int ns)
+static INLINE void StoreREVERB(int ch,int ns)
 {
  if(iUseReverb==0) return;
  else
