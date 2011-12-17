@@ -56,12 +56,15 @@
 	[pluginName setObjectValue:[[NSURL fileURLWithPath:theFile] lastPathComponent]];
 	
 	[NSApp runModalForWindow:[self window]];
-
+	
 	[[self window] orderOut:self];
 	if (moveOK == YES) {
+		NSURL *supportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+		NSURL *url = [supportURL URLByAppendingPathComponent:@"Pcsxr/PlugIns"];
+
 		NSFileWrapper *wrapper = [[NSFileWrapper alloc] initWithPath:theFile];
 		NSString *dst = [NSString stringWithFormat:@"%@/%@", 
-						 [[NSBundle mainBundle] builtInPlugInsPath],
+						 [url path],
 						 [wrapper filename]];
 		if ([wrapper writeToFile:dst atomically:NO updateFilenames:NO]) {
 			[[NSWorkspace sharedWorkspace] noteFileSystemChanged:[[NSBundle mainBundle] builtInPlugInsPath]];

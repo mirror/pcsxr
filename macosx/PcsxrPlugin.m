@@ -59,6 +59,31 @@
     return nil;
 }
 
++ (NSArray *)pluginsPaths
+{
+    NSURL *supportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+    NSURL *libraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+    NSURL *localSupportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:YES error:NULL];
+    NSURL *localLibraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:YES error:NULL];
+    
+    NSMutableArray *mutArray = [NSMutableArray arrayWithCapacity:5];
+    
+    [mutArray addObject:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)]];
+    NSURL *url = [localLibraryURL URLByAppendingPathComponent:@"Playstation Emulator Plugins"];
+    if ([url checkResourceIsReachableAndReturnError:NULL])
+        [mutArray addObject:[url path]];
+    url = [localSupportURL URLByAppendingPathComponent:@"Pcsxr/PlugIns"];
+    if ([url checkResourceIsReachableAndReturnError:NULL])
+        [mutArray addObject:[url path]];
+    url = [libraryURL URLByAppendingPathComponent:@"Playstation Emulator Plugins"];
+    if ([url checkResourceIsReachableAndReturnError:NULL])
+        [mutArray addObject:[url path]];
+    url = [supportURL URLByAppendingPathComponent:@"Pcsxr/PlugIns"];
+    if ([url checkResourceIsReachableAndReturnError:NULL])
+        [mutArray addObject:[url path]];
+    return [NSArray arrayWithArray:mutArray];
+}
+
 - (id)initWithPath:(NSString *)aPath 
 {
     if (!(self = [super init])) {
@@ -73,14 +98,21 @@
     pluginRef = nil;
     name = nil;
     path = [aPath retain];
-    NSString *fullPath = [[[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)] stringByAppendingPathComponent:path];
+    NSString *goodPath = nil;
+    for (NSString *plugDir in [PcsxrPlugin pluginsPaths]) 
+    {
+        NSString *fullPath = [plugDir stringByAppendingPathComponent:path];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath]) {
+            goodPath = fullPath;
+        }
     
-    pluginRef = SysLoadLibrary([fullPath fileSystemRepresentation]);
-    if (pluginRef == nil) {
-        [self release];
-        return nil;
     }
-    
+    pluginRef = SysLoadLibrary([goodPath fileSystemRepresentation]);
+        if (pluginRef == nil) {
+            [self release];
+            return nil;
+        }
+
     // TODO: add support for plugins with multiple functionalities???
     PSE_getLibType = (PSEgetLibType) SysLoadSym(pluginRef, "PSEgetLibType");
     if (SysLibError() != nil) {
@@ -120,7 +152,7 @@
     }
     
     // save the current modification date
-    NSDictionary *fattrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[fullPath stringByResolvingSymlinksInPath] error:NULL];
+    NSDictionary *fattrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[goodPath stringByResolvingSymlinksInPath] error:NULL];
     modDate = [[fattrs fileModificationDate] retain];
     
     active = 0;

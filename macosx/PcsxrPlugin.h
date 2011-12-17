@@ -23,6 +23,7 @@
 + (NSString *)prefixForType:(int)type;
 + (NSString *)defaultKeyForType:(int)type;
 + (char **)configEntriesForType:(int)type;
++ (NSArray *)pluginsPaths;
 
 - (id)initWithPath:(NSString *)aPath;
 

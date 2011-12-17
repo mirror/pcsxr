@@ -160,20 +160,22 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 		}
 	}
 	
-	// look for new ones in the plugin directory
-	dir = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)];
-	dirEnum = [[NSFileManager defaultManager] enumeratorAtPath:dir];
-	
-	while ((pname = [dirEnum nextObject])) {
-		if ([[pname pathExtension] isEqualToString:@"psxplugin"] || 
-			[[pname pathExtension] isEqualToString:@"so"]) {
-			[dirEnum skipDescendents]; /* don't enumerate this
-														directory */
-			
-			if (![self hasPluginAtPath:pname]) {
-				PcsxrPlugin *plugin = [[PcsxrPlugin alloc] initWithPath:pname];
-				if (plugin != nil) {
-					[pluginList addObject:plugin];
+	for (NSString *plugDir in [PcsxrPlugin pluginsPaths])
+	{
+		// look for new ones in the plugin directory
+		dirEnum = [[NSFileManager defaultManager] enumeratorAtPath:plugDir];
+		
+		while ((pname = [dirEnum nextObject])) {
+			if ([[pname pathExtension] isEqualToString:@"psxplugin"] || 
+				[[pname pathExtension] isEqualToString:@"so"]) {
+				[dirEnum skipDescendents]; /* don't enumerate this
+											directory */
+				
+				if (![self hasPluginAtPath:pname]) {
+					PcsxrPlugin *plugin = [[PcsxrPlugin alloc] initWithPath:pname];
+					if (plugin != nil) {
+						[pluginList addObject:plugin];
+					}
 				}
 			}
 		}

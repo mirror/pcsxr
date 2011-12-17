@@ -408,6 +408,10 @@ static NSString *HandleBinCue(NSString *toHandle)
         url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Patches"];
 		if (![url checkResourceIsReachableAndReturnError:NULL])
             [manager createDirectoryAtPath:[url path] withIntermediateDirectories:YES attributes:nil error:NULL];
+		
+		url = [supportURL URLByAppendingPathComponent:@"Pcsxr/PlugIns"];
+		if (![url checkResourceIsReachableAndReturnError:NULL])
+            [manager createDirectoryAtPath:[url path] withIntermediateDirectories:YES attributes:nil error:NULL];
         
         saveStatePath = [[[supportURL URLByAppendingPathComponent:@"Pcsxr/Save States"] path] copy];
 		if (![manager fileExistsAtPath:saveStatePath isDirectory:&dir])
