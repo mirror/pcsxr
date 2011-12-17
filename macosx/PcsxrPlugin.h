@@ -15,6 +15,7 @@
     NSString *path;
 	 NSDate *modDate;
     NSString *name;
+	NSString *fullPlugPath;
     long version;
     int type;
 	 int active;

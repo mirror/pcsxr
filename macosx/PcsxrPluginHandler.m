@@ -67,7 +67,7 @@
 						 [url path],
 						 [wrapper filename]];
 		if ([wrapper writeToFile:dst atomically:NO updateFilenames:NO]) {
-			[[NSWorkspace sharedWorkspace] noteFileSystemChanged:[[NSBundle mainBundle] builtInPlugInsPath]];
+			[[NSWorkspace sharedWorkspace] noteFileSystemChanged:[url path]];
 			NSRunInformationalAlertPanel(NSLocalizedString(@"Installation Succesfull", nil),
 										 NSLocalizedString(@"The installation of the specified plugin was succesfull. In order to use it, please restart the application.", nil), 
 										 nil, nil, nil);

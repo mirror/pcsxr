@@ -154,6 +154,7 @@
     // save the current modification date
     NSDictionary *fattrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[goodPath stringByResolvingSymlinksInPath] error:NULL];
     modDate = [[fattrs fileModificationDate] retain];
+    fullPlugPath = [goodPath retain];
     
     active = 0;
     
@@ -176,6 +177,7 @@
     [modDate release];    
     [path release];
     [name release];
+    [fullPlugPath release];
     
     [super dealloc];
 }
@@ -328,11 +330,10 @@
 {
     // check that the file is still there with the same modification date
     NSFileManager *dfm = [NSFileManager defaultManager];
-    NSString *fullPath = [[dfm stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)] stringByAppendingPathComponent:path];
-    if (![dfm fileExistsAtPath:fullPath])
+    if (![dfm fileExistsAtPath:fullPlugPath])
         return NO;
     
-    NSDictionary *fattrs = [dfm attributesOfItemAtPath:[fullPath stringByResolvingSymlinksInPath] error:NULL];
+    NSDictionary *fattrs = [dfm attributesOfItemAtPath:[fullPlugPath stringByResolvingSymlinksInPath] error:NULL];
     return [[fattrs fileModificationDate] isEqualToDate:modDate];
 }
 
