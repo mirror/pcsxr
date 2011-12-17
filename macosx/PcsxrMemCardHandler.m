@@ -11,6 +11,11 @@
 
 @implementation PcsxrMemCardHandler
 
++ (NSArray *)utisCanHandle
+{
+	return [NSArray arrayWithObject:@"com.codeplex.pcsxr.memcard"];
+}
+
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];

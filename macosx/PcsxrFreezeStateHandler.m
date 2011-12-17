@@ -12,6 +12,11 @@
 
 @implementation PcsxrFreezeStateHandler
 
++ (NSArray *)utisCanHandle
+{
+	return [NSArray arrayWithObject:@"com.codeplex.pcsxr.freeze"];
+}
+
 - (BOOL)handleFile:(NSString *)theFile
 {
 	if (CheckState([theFile fileSystemRepresentation]) != 0) {

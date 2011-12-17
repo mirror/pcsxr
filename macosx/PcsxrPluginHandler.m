@@ -10,6 +10,11 @@
 
 @implementation PcsxrPluginHandler
 
++ (NSArray *)utisCanHandle
+{
+	return [NSArray arrayWithObject:@"com.codeplex.pcsxr.plugin"];
+}
+
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];

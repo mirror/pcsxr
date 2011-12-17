@@ -13,6 +13,11 @@
 
 @implementation PcsxrDiscHandler
 
++ (NSArray *)utisCanHandle
+{
+	return [NSArray arrayWithObjects:@"com.alcohol-soft.mdfdisc", @"com.codeplex.pcsxr.cuefile", @"com.apple.disk-image-ndif", @"public.iso-image", nil];
+}
+
 - (BOOL)handleFile:(NSString *)theFile
 {
 	SetIsoFile([theFile fileSystemRepresentation]);

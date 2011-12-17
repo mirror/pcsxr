@@ -55,7 +55,7 @@ static NSString *HandleBinCue(NSString *toHandle)
 
 		[openDlg setCanChooseFiles:YES];
 		[openDlg setCanChooseDirectories:NO];
-		[openDlg setAllowedFileTypes:[NSArray arrayWithObjects:@"com.alcohol-soft.mdfdisc", @"com.codeplex.pcsxr.cuefile", @"com.apple.disk-image-ndif", @"public.iso-image", nil]];
+		[openDlg setAllowedFileTypes:[PcsxrDiscHandler utisCanHandle]];
 
 		if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 			NSArray* files = [openDlg URLs];
@@ -135,7 +135,7 @@ static NSString *HandleBinCue(NSString *toHandle)
 
 	[openDlg setCanChooseFiles:YES];
 	[openDlg setCanChooseDirectories:NO];
-	[openDlg setAllowedFileTypes:[NSArray arrayWithObjects:@"com.alcohol-soft.mdfdisc", @"com.codeplex.pcsxr.cuefile", @"com.apple.disk-image-ndif", @"public.iso-image", nil]];
+	[openDlg setAllowedFileTypes:[PcsxrDiscHandler utisCanHandle]];
 
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 		NSArray* urls = [openDlg URLs];
@@ -472,29 +472,23 @@ static NSString *HandleBinCue(NSString *toHandle)
 		NSRunAlertPanel(NSLocalizedString(@"Error opening file",nil), [NSString stringWithFormat:NSLocalizedString(@"Unable to open %@: %@", nil), [filename lastPathComponent], [err localizedFailureReason]], nil, nil, nil);
 		return NO;
 	}
+	NSObject<PcsxrFileHandle> *hand = nil;
+	BOOL isHandled = NO;
 	if(UTTypeEqual(CFSTR("com.codeplex.pcsxr.plugin"), (CFStringRef)utiFile)) {
-		PcsxrPluginHandler *hand = [[PcsxrPluginHandler alloc] init];
-		BOOL isHandled = [hand handleFile:filename];
-		[hand release];
-		return isHandled;
+		hand = [[PcsxrPluginHandler alloc] init];
+		isHandled = [hand handleFile:filename];
 	} else if(UTTypeEqual(CFSTR("com.codeplex.pcsxr.memcard"), (CFStringRef)utiFile)) {
-		PcsxrMemCardHandler *hand = [[PcsxrMemCardHandler alloc] init];
-		BOOL isHandled = [hand handleFile:filename];
-		[hand release];
-		return isHandled;
+		hand = [[PcsxrMemCardHandler alloc] init];
+		isHandled = [hand handleFile:filename];
 	} else if(UTTypeEqual(CFSTR("com.codeplex.pcsxr.freeze"), (CFStringRef)utiFile)) {
-		PcsxrFreezeStateHandler *hand = [[PcsxrFreezeStateHandler alloc] init];
-		BOOL isHandled = [hand handleFile:filename];
-		[hand release];
-		return isHandled;
+		hand = [[PcsxrFreezeStateHandler alloc] init];
+		isHandled = [hand handleFile:filename];
 	} else if(UTTypeEqual(CFSTR("com.alcohol-soft.mdfdisc"), (CFStringRef)utiFile) || UTTypeEqual(CFSTR("com.apple.disk-image-ndif"), (CFStringRef)utiFile) || UTTypeEqual(CFSTR("public.iso-image"), (CFStringRef)utiFile) || UTTypeEqual(CFSTR("com.codeplex.pcsxr.cuefile"), (CFStringRef)utiFile)) {
-		PcsxrDiscHandler *hand = [[PcsxrDiscHandler alloc] init];
-		BOOL isHandled = [hand handleFile:HandleBinCue(filename)];
-		[hand release];
-		return isHandled;
-	} else {
-		return NO;
+		hand = [[PcsxrDiscHandler alloc] init];
+		isHandled = [hand handleFile:HandleBinCue(filename)];
 	}
+	if (hand) [hand release];
+	return isHandled;
 }
 
 @end

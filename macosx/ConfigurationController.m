@@ -3,6 +3,7 @@
 #import "PluginList.h"
 #import "PcsxrPlugin.h"
 #import "PcsxrMemCardController.h"
+#import "PcsxrMemCardHandler.h"
 #include "psxcommon.h"
 #include "plugins.h"
 
@@ -63,7 +64,7 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 
 	[openDlg setCanChooseFiles:YES];
 	[openDlg setCanChooseDirectories:NO];
-	[openDlg setAllowedFileTypes:[NSArray arrayWithObject:@"com.codeplex.pcsxr.memcard"]];
+	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler utisCanHandle]];
 
 	path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
     
@@ -95,7 +96,7 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 
     [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent]]];
     [openDlg setNameFieldStringValue:@"New Memory Card File.mcr"];
-	[openDlg setAllowedFileTypes:[NSArray arrayWithObject:@"com.codeplex.pcsxr.memcard"]];
+	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler utisCanHandle]];
     
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
         NSString *mcdPath = [[openDlg URL] path];
@@ -244,7 +245,7 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 		memCardEdit = [[PcsxrMemCardController alloc] init];
 	}
 	[[memCardEdit window] center];
-	[memCardEdit showWindow:nil];
+	[memCardEdit showWindow:sender];
 }
 
 - (BOOL)memoryCardWindowIsVisible
