@@ -98,12 +98,20 @@
     pluginRef = nil;
     name = nil;
     path = [aPath retain];
+    long tempVers = 0;
     NSString *goodPath = nil;
     for (NSString *plugDir in [PcsxrPlugin pluginsPaths]) 
     {
         NSString *fullPath = [plugDir stringByAppendingPathComponent:path];
         if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath]) {
-            goodPath = fullPath;
+            void *tempHandle = SysLoadLibrary([fullPath fileSystemRepresentation]);
+            PSEgetLibVersion tempLibVersion = SysLoadSym(tempHandle, "PSEgetLibVersion");
+            long tempVers2 = tempLibVersion();
+            if (tempVers <= tempVers2 ){
+                goodPath = fullPath;
+                tempVers = tempVers2;
+            }
+            SysCloseLibrary(tempHandle);
         }
     
     }
