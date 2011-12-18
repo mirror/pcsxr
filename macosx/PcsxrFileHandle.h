@@ -10,7 +10,7 @@
 
 @protocol PcsxrFileHandle <NSObject>
 
-+ (NSArray *)utisCanHandle;
++ (NSArray *)supportedUTIs;
 - (BOOL)handleFile:(NSString *)theFile;
 
 @end

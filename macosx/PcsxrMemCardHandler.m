@@ -11,7 +11,7 @@
 
 @implementation PcsxrMemCardHandler
 
-+ (NSArray *)utisCanHandle
++ (NSArray *)supportedUTIs
 {
 	return [NSArray arrayWithObject:@"com.codeplex.pcsxr.memcard"];
 }
@@ -28,7 +28,7 @@
 
 - (id)init
 {
-	self = [super initWithWindowNibName:@"PcsxrMemCardDocument"];
+	self = [self initWithWindowNibName:@"PcsxrMemCardDocument"];
 	return self;
 }
 

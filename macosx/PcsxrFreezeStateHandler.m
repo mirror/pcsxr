@@ -12,7 +12,7 @@
 
 @implementation PcsxrFreezeStateHandler
 
-+ (NSArray *)utisCanHandle
++ (NSArray *)supportedUTIs
 {
 	return [NSArray arrayWithObject:@"com.codeplex.pcsxr.freeze"];
 }

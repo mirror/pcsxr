@@ -10,7 +10,7 @@
 
 @implementation PcsxrPluginHandler
 
-+ (NSArray *)utisCanHandle
++ (NSArray *)supportedUTIs
 {
 	return [NSArray arrayWithObject:@"com.codeplex.pcsxr.plugin"];
 }
@@ -27,7 +27,7 @@
 
 - (id)init
 {
-	self = [super initWithWindowNibName:@"AddPluginSheet"];
+	self = [self initWithWindowNibName:@"AddPluginSheet"];
 	return self;
 }
 

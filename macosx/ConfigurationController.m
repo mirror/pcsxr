@@ -64,7 +64,7 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 
 	[openDlg setCanChooseFiles:YES];
 	[openDlg setCanChooseDirectories:NO];
-	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler utisCanHandle]];
+	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler supportedUTIs]];
 
 	path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
     
@@ -96,7 +96,7 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 
     [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent]]];
     [openDlg setNameFieldStringValue:@"New Memory Card File.mcr"];
-	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler utisCanHandle]];
+	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler supportedUTIs]];
     
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
         NSString *mcdPath = [[openDlg URL] path];

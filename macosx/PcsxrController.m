@@ -55,7 +55,7 @@ static NSString *HandleBinCue(NSString *toHandle)
 
 		[openDlg setCanChooseFiles:YES];
 		[openDlg setCanChooseDirectories:NO];
-		[openDlg setAllowedFileTypes:[PcsxrDiscHandler utisCanHandle]];
+		[openDlg setAllowedFileTypes:[PcsxrDiscHandler supportedUTIs]];
 
 		if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 			NSArray* files = [openDlg URLs];
@@ -135,7 +135,7 @@ static NSString *HandleBinCue(NSString *toHandle)
 
 	[openDlg setCanChooseFiles:YES];
 	[openDlg setCanChooseDirectories:NO];
-	[openDlg setAllowedFileTypes:[PcsxrDiscHandler utisCanHandle]];
+	[openDlg setAllowedFileTypes:[PcsxrDiscHandler supportedUTIs]];
 
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 		NSArray* urls = [openDlg URLs];
@@ -476,22 +476,22 @@ static NSString *HandleBinCue(NSString *toHandle)
 		NSRunAlertPanel(NSLocalizedString(@"Error opening file",nil), [NSString stringWithFormat:NSLocalizedString(@"Unable to open %@: %@", nil), [filename lastPathComponent], [err localizedFailureReason]], nil, nil, nil);
 		return NO;
 	}
-	NSObject<PcsxrFileHandle> *hand = nil;
+	NSArray *handlers = [NSArray arrayWithObjects:[PcsxrPluginHandler class], [PcsxrMemCardHandler class], [PcsxrFreezeStateHandler class], [PcsxrDiscHandler class], nil];
 	BOOL isHandled = NO;
-	if(UTTypeEqual(CFSTR("com.codeplex.pcsxr.plugin"), (CFStringRef)utiFile)) {
-		hand = [[PcsxrPluginHandler alloc] init];
-		isHandled = [hand handleFile:filename];
-	} else if(UTTypeEqual(CFSTR("com.codeplex.pcsxr.memcard"), (CFStringRef)utiFile)) {
-		hand = [[PcsxrMemCardHandler alloc] init];
-		isHandled = [hand handleFile:filename];
-	} else if(UTTypeEqual(CFSTR("com.codeplex.pcsxr.freeze"), (CFStringRef)utiFile)) {
-		hand = [[PcsxrFreezeStateHandler alloc] init];
-		isHandled = [hand handleFile:filename];
-	} else if(UTTypeEqual(CFSTR("com.alcohol-soft.mdfdisc"), (CFStringRef)utiFile) || UTTypeEqual(CFSTR("com.apple.disk-image-ndif"), (CFStringRef)utiFile) || UTTypeEqual(CFSTR("public.iso-image"), (CFStringRef)utiFile) || UTTypeEqual(CFSTR("com.codeplex.pcsxr.cuefile"), (CFStringRef)utiFile)) {
-		hand = [[PcsxrDiscHandler alloc] init];
-		isHandled = [hand handleFile:HandleBinCue(filename)];
+	for (Class fileHandler in handlers) {
+		NSObject<PcsxrFileHandle> *hand = [[fileHandler alloc] init];
+		BOOL canHandle = NO;
+		for (NSString *uti in [fileHandler supportedUTIs]) {
+			if ([[NSWorkspace sharedWorkspace] type:utiFile  conformsToType:uti]) {
+				canHandle = YES;
+			}
+		}			
+		if (canHandle) {
+			isHandled = [hand handleFile:HandleBinCue(filename)];
+		}
+		[hand release];
+
 	}
-	if (hand) [hand release];
 	return isHandled;
 }
 
