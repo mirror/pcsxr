@@ -105,15 +105,20 @@
         NSString *fullPath = [plugDir stringByAppendingPathComponent:path];
         if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath]) {
             void *tempHandle = SysLoadLibrary([fullPath fileSystemRepresentation]);
-            PSEgetLibVersion tempLibVersion = SysLoadSym(tempHandle, "PSEgetLibVersion");
-            long tempVers2 = tempLibVersion();
-            if (tempVers <= tempVers2 ){
-                goodPath = fullPath;
-                tempVers = tempVers2;
+            if (tempHandle != NULL)
+            {
+                PSEgetLibVersion tempLibVersion = SysLoadSym(tempHandle, "PSEgetLibVersion");
+                if (SysLibError() == NULL)
+                {
+                    long tempVers2 = tempLibVersion();
+                    if (tempVers <= tempVers2 ){
+                        goodPath = fullPath;
+                        tempVers = tempVers2;
+                    }
+                }
+                SysCloseLibrary(tempHandle);
             }
-            SysCloseLibrary(tempHandle);
         }
-    
     }
     pluginRef = SysLoadLibrary([goodPath fileSystemRepresentation]);
         if (pluginRef == nil) {
