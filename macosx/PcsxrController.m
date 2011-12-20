@@ -18,7 +18,7 @@ NSString *saveStatePath;
 
 static NSString *HandleBinCue(NSString *toHandle)
 {
-	NSURL *tempURL = [[NSURL alloc] initWithString:toHandle];
+	NSURL *tempURL = [[NSURL alloc] initFileURLWithPath:toHandle];
 	NSString *extension = [tempURL pathExtension];
 	NSString *newName = toHandle;
 	if ([extension caseInsensitiveCompare:@"cue"] == NSOrderedSame) {
