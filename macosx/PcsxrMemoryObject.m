@@ -51,23 +51,23 @@
 - (id)initWithMcdBlock:(McdBlock *)infoBlock
 {
 	if (self = [super init]) {
-		self.englishName = [NSString stringWithCString:infoBlock->Title encoding:NSASCIIStringEncoding];
-		self.sjisName = [NSString stringWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
-		self.memImage = [PcsxrMemoryObject imageFromMcd:infoBlock->Icon];
-		self.memName = [NSString stringWithCString:infoBlock->Name encoding:NSASCIIStringEncoding];
-		self.memID = [NSString stringWithCString:infoBlock->ID encoding:NSASCIIStringEncoding];
-		self.memIconCount = infoBlock->IconCount;
-		self.memFlags = infoBlock->Flags;
+		englishName = [[NSString alloc] initWithCString:infoBlock->Title encoding:NSASCIIStringEncoding];
+		sjisName = [[NSString alloc] initWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
+		memImage = [[PcsxrMemoryObject imageFromMcd:infoBlock->Icon] retain];
+		memName = [[NSString alloc] initWithCString:infoBlock->Name encoding:NSASCIIStringEncoding];
+		memID = [[NSString alloc] initWithCString:infoBlock->ID encoding:NSASCIIStringEncoding];
+		memIconCount = infoBlock->IconCount;
+		memFlags = infoBlock->Flags;
 		if ((infoBlock->Flags & 0xF0) == 0xA0) {
 			if ((infoBlock->Flags & 0xF) >= 1 &&
 				(infoBlock->Flags & 0xF) <= 3) {
-				self.notDeleted = NO;
+				notDeleted = NO;
 			} else
-				self.notDeleted = NO;
+				notDeleted = NO;
 		} else if ((infoBlock->Flags & 0xF0) == 0x50)
-			self.notDeleted = YES;
+			notDeleted = YES;
 		else
-			self.notDeleted = NO;
+			notDeleted = NO;
 
 	}
 	return self;
