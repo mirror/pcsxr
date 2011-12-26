@@ -6,9 +6,11 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/NSString.h>
-#import <AppKit/NSImage.h>
+#import <Foundation/NSObject.h>
 #include "sio.h"
+
+@class NSImage;
+@class NSString;
 
 @interface PcsxrMemoryObject : NSObject
 {
@@ -25,14 +27,14 @@
 
 - (id)initWithMcdBlock:(McdBlock *)infoBlock;
 
-@property(copy, readwrite) NSString *englishName;
-@property(copy, readwrite) NSString *sjisName;
-@property(copy, readwrite) NSString *memName;
-@property(copy, readwrite) NSString *memID;
-@property(retain, readwrite) NSImage *memImage;
-@property(readwrite) int memIconCount;
-@property(readwrite, getter = isNotDeleted) BOOL notDeleted;
-@property(readwrite) unsigned char memFlags;
+@property(readonly) NSString *englishName;
+@property(readonly) NSString *sjisName;
+@property(readonly) NSString *memName;
+@property(readonly) NSString *memID;
+@property(readonly) NSImage *memImage;
+@property(readonly) int memIconCount;
+@property(readonly, getter = isNotDeleted) BOOL notDeleted;
+@property(readonly) unsigned char memFlags;
 
 
 @end

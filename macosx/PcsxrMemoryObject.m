@@ -7,7 +7,9 @@
 //
 
 #import "PcsxrMemoryObject.h"
+#import <Foundation/NSString.h>
 #import <AppKit/NSColor.h>
+#import <AppKit/NSImage.h>
 
 @implementation PcsxrMemoryObject
 
