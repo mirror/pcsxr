@@ -154,7 +154,7 @@ void CloseCdHandle() {
 }
 
 int IsCdHandleOpen() {
-	return 1;
+	return (cdHandle != -1);
 }
 
 long GetTN(unsigned char *buffer) {
