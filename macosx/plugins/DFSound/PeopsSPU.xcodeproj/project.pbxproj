@@ -14,11 +14,11 @@
 		5506636A14AB91C100C7C565 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5506635814AB91C100C7C565 /* Credits.rtf */; };
 		5506636C14AB91C100C7C565 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5506635A14AB91C100C7C565 /* InfoPlist.strings */; };
 		5506636E14AB91C100C7C565 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5506635C14AB91C100C7C565 /* Localizable.strings */; };
-		5506637014AB91C100C7C565 /* NetSfPeopsSpuALPluginMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5506635E14AB91C100C7C565 /* NetSfPeopsSpuALPluginMain.xib */; };
 		5506637114AB91C100C7C565 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5506636114AB91C100C7C565 /* Credits.rtf */; };
 		5506637314AB91C100C7C565 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5506636314AB91C100C7C565 /* InfoPlist.strings */; };
 		5506637514AB91C100C7C565 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5506636514AB91C100C7C565 /* Localizable.strings */; };
 		5506637714AB91C100C7C565 /* NetSfPeopsSpuSDLPluginMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5506636714AB91C100C7C565 /* NetSfPeopsSpuSDLPluginMain.xib */; };
+		5506639A14AB9E0300C7C565 /* NetSfPeopsSpuALPluginMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5506639814AB9E0300C7C565 /* NetSfPeopsSpuALPluginMain.xib */; };
 		5599693C13AFCD2900B0216B /* PluginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B2B92072D9BE6007F0C35 /* PluginController.m */; };
 		5599693D13AFCD2900B0216B /* NamedSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B2BE7072DB1B6007F0C35 /* NamedSlider.m */; };
 		5599693E13AFCD2900B0216B /* dma.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E797109DC529003BB7AC /* dma.c */; };
@@ -70,14 +70,14 @@
 		5506635914AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		5506635B14AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5506635D14AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		5506635F14AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsSPUALPluginMain.xib; sourceTree = "<group>"; };
 		5506636214AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		5506636414AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5506636614AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5506636814AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsSpuSDLPluginMain.xib; sourceTree = "<group>"; };
+		5506639914AB9E0300C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsSpuALPluginMain.xib; sourceTree = "<group>"; };
 		5517C065136217DE00706CCF /* externals.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = externals.c; path = ../../../plugins/dfsound/externals.c; sourceTree = SOURCE_ROOT; };
 		5599692713AFCCC600B0216B /* openal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = openal.c; path = ../../../plugins/dfsound/openal.c; sourceTree = SOURCE_ROOT; };
-		5599695E13AFCD2900B0216B /* PeopsAL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopsAL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		5599695E13AFCD2900B0216B /* PeopsAL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = PeopsAL.psxplugin; path = PeopsSpuAL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		5599696E13AFCE1D00B0216B /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		55C8AB0C146DCD0E005ACCCB /* Info-AL.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-AL.plist"; sourceTree = "<group>"; };
 		55F36E4B146CA0A900718DE6 /* maccfg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = maccfg.h; path = macsrc/maccfg.h; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		71E4E7A6109DC529003BB7AC /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdafx.h; path = ../../../plugins/dfsound/stdafx.h; sourceTree = SOURCE_ROOT; };
 		71E4E7A7109DC529003BB7AC /* xa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xa.c; path = ../../../plugins/dfsound/xa.c; sourceTree = SOURCE_ROOT; };
 		71E4E7A8109DC529003BB7AC /* xa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xa.h; path = ../../../plugins/dfsound/xa.h; sourceTree = SOURCE_ROOT; };
-		8D576316048677EA00EA77CD /* PeopsSPU.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopsSPU.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D576316048677EA00EA77CD /* PeopsSPU.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = PeopsSPU.psxplugin; path = PeopsSpuSDL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info-SDL.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-SDL.plist"; sourceTree = "<group>"; };
 		A1A2073D13816B1D005EE84C /* externals.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = externals.c; path = ../../../plugins/dfsound/externals.c; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -275,7 +275,7 @@
 				5506635814AB91C100C7C565 /* Credits.rtf */,
 				5506635A14AB91C100C7C565 /* InfoPlist.strings */,
 				5506635C14AB91C100C7C565 /* Localizable.strings */,
-				5506635E14AB91C100C7C565 /* NetSfPeopsSpuALPluginMain.xib */,
+				5506639814AB9E0300C7C565 /* NetSfPeopsSpuALPluginMain.xib */,
 			);
 			path = OpenAL;
 			sourceTree = "<group>";
@@ -487,7 +487,7 @@
 				5506636A14AB91C100C7C565 /* Credits.rtf in Resources */,
 				5506636C14AB91C100C7C565 /* InfoPlist.strings in Resources */,
 				5506636E14AB91C100C7C565 /* Localizable.strings in Resources */,
-				5506637014AB91C100C7C565 /* NetSfPeopsSpuALPluginMain.xib in Resources */,
+				5506639A14AB9E0300C7C565 /* NetSfPeopsSpuALPluginMain.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,14 +579,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		5506635E14AB91C100C7C565 /* NetSfPeopsSpuALPluginMain.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5506635F14AB91C100C7C565 /* English */,
-			);
-			name = NetSfPeopsSpuALPluginMain.xib;
-			sourceTree = "<group>";
-		};
 		5506636114AB91C100C7C565 /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -617,6 +609,14 @@
 				5506636814AB91C100C7C565 /* English */,
 			);
 			name = NetSfPeopsSpuSDLPluginMain.xib;
+			sourceTree = "<group>";
+		};
+		5506639814AB9E0300C7C565 /* NetSfPeopsSpuALPluginMain.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5506639914AB9E0300C7C565 /* English */,
+			);
+			name = NetSfPeopsSpuALPluginMain.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
