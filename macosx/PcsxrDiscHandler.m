@@ -15,7 +15,7 @@
 
 + (NSArray *)supportedUTIs
 {
-	return [NSArray arrayWithObjects:@"com.alcohol-soft.mdfdisc", @"com.codeplex.pcsxr.cuefile", @"com.apple.disk-image-ndif", @"public.iso-image", nil];
+	return [NSArray arrayWithObjects:@"com.alcohol-soft.mdfdisc", @"com.goldenhawk.cdrwin-cuesheet", @"com.apple.disk-image-ndif", @"public.iso-image", nil];
 }
 
 - (BOOL)handleFile:(NSString *)theFile

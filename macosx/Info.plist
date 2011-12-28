@@ -113,7 +113,7 @@
 			<array>
 				<string>com.alcohol-soft.mdfdisc</string>
 				<string>com.apple.disk-image-ndif</string>
-				<string>com.codeplex.pcsxr.cuefile</string>
+				<string>com.goldenhawk.cdrwin-cuesheet</string>
 				<string>public.iso-image</string>
 			</array>
 		</dict>
@@ -158,14 +158,17 @@
 				<string>public.disk-image</string>
 			</array>
 			<key>UTTypeIdentifier</key>
-			<string>com.codeplex.pcsxr.cuefile</string>
+			<string>com.goldenhawk.cdrwin-cuesheet</string>
 			<key>UTTypeDescription</key>
 			<string>bin/cue Disc Image</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
+				<key>public.mime-type</key>
+				<string>application/x-cue</string>
 				<key>public.filename-extension</key>
 				<array>
 					<string>cue</string>
+					<string>inst</string>
 				</array>
 			</dict>
 		</dict>
