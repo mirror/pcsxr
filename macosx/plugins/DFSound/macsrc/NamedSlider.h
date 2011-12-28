@@ -2,7 +2,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-#define NamedSlider NetSfPeopsSPUPluginNamedSlider
+#ifdef USEOPENAL
+#define NamedSlider NetSfPeopsSPUALPluginNamedSlider
+#else
+#define NamedSlider NetSfPeopsSPUSDLPluginNamedSlider
+#endif
 
 @interface NamedSlider : NSSlider
 {

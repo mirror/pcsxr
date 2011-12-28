@@ -4,21 +4,21 @@
 #import "NamedSlider.h"
 
 #ifdef USEOPENAL
-#define PluginController NetSfPeopsALPluginController
+#define PluginController NetSfPeopsSPUALPluginController
 #else
-#define PluginController NetSfPeopsSPUPluginController
+#define PluginController NetSfPeopsSPUSDLPluginController
 #endif
 
 @interface PluginController : NSWindowController
 {
     IBOutlet NSControl *hiCompBox;
-    IBOutlet NetSfPeopsSPUPluginNamedSlider *interpolValue;
+    IBOutlet NamedSlider *interpolValue;
     IBOutlet NSControl *irqWaitBox;
     IBOutlet NSControl *monoSoundBox;
-    IBOutlet NetSfPeopsSPUPluginNamedSlider *reverbValue;
+    IBOutlet NamedSlider *reverbValue;
     IBOutlet NSControl *xaEnableBox;
     IBOutlet NSControl *xaSpeedBox;
-    IBOutlet NetSfPeopsSPUPluginNamedSlider *volumeValue;
+    IBOutlet NamedSlider *volumeValue;
 
 	NSMutableDictionary *keyValues;
 }

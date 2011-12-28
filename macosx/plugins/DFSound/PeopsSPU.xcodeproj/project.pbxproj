@@ -7,17 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		28F0C3A214651EFA00A90285 /* NetSfPeopsSpuPluginMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F0C3A014651EFA00A90285 /* NetSfPeopsSpuPluginMain.xib */; };
-		28F0C3A314651EFA00A90285 /* NetSfPeopsSpuPluginMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F0C3A014651EFA00A90285 /* NetSfPeopsSpuPluginMain.xib */; };
-		2B4F99F9077B0CE4004E36BA /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2B4F99F7077B0CE4004E36BA /* Credits.rtf */; };
 		2B7B2B94072D9BE6007F0C35 /* PluginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B2B92072D9BE6007F0C35 /* PluginController.m */; };
 		2B7B2BD1072DAE5D007F0C35 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7B2BD0072DAE5D007F0C35 /* AppKit.framework */; };
 		2B7B2BE9072DB1B6007F0C35 /* NamedSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B2BE7072DB1B6007F0C35 /* NamedSlider.m */; };
 		2BFF7F3E0715D2E00061278A /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BFF7F3D0715D2E00061278A /* Carbon.framework */; };
-		552E4CB41474735100FB231F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 552E4CB71474735100FB231F /* Localizable.strings */; };
-		552E4CB51474735100FB231F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 552E4CB71474735100FB231F /* Localizable.strings */; };
-		5599693813AFCD2900B0216B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
-		5599693A13AFCD2900B0216B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2B4F99F7077B0CE4004E36BA /* Credits.rtf */; };
+		5506636A14AB91C100C7C565 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5506635814AB91C100C7C565 /* Credits.rtf */; };
+		5506636C14AB91C100C7C565 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5506635A14AB91C100C7C565 /* InfoPlist.strings */; };
+		5506636E14AB91C100C7C565 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5506635C14AB91C100C7C565 /* Localizable.strings */; };
+		5506637014AB91C100C7C565 /* NetSfPeopsSpuALPluginMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5506635E14AB91C100C7C565 /* NetSfPeopsSpuALPluginMain.xib */; };
+		5506637114AB91C100C7C565 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5506636114AB91C100C7C565 /* Credits.rtf */; };
+		5506637314AB91C100C7C565 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5506636314AB91C100C7C565 /* InfoPlist.strings */; };
+		5506637514AB91C100C7C565 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5506636514AB91C100C7C565 /* Localizable.strings */; };
+		5506637714AB91C100C7C565 /* NetSfPeopsSpuSDLPluginMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5506636714AB91C100C7C565 /* NetSfPeopsSpuSDLPluginMain.xib */; };
 		5599693C13AFCD2900B0216B /* PluginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B2B92072D9BE6007F0C35 /* PluginController.m */; };
 		5599693D13AFCD2900B0216B /* NamedSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B2BE7072DB1B6007F0C35 /* NamedSlider.m */; };
 		5599693E13AFCD2900B0216B /* dma.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E797109DC529003BB7AC /* dma.c */; };
@@ -55,27 +56,30 @@
 		71E4E7B0109DC529003BB7AC /* spu.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E7A4109DC529003BB7AC /* spu.c */; };
 		71E4E7B1109DC529003BB7AC /* xa.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E7A7109DC529003BB7AC /* xa.c */; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
-		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
 		A1A2073E13816B1D005EE84C /* externals.c in Sources */ = {isa = PBXBuildFile; fileRef = A1A2073D13816B1D005EE84C /* externals.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
-		28F0C3A114651EFA00A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsSpuPluginMain.xib; sourceTree = "<group>"; };
-		2B4F99F8077B0CE4004E36BA /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		2B7B2B91072D9BE6007F0C35 /* PluginController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginController.h; path = macsrc/PluginController.h; sourceTree = "<group>"; };
 		2B7B2B92072D9BE6007F0C35 /* PluginController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PluginController.m; path = macsrc/PluginController.m; sourceTree = "<group>"; };
 		2B7B2BD0072DAE5D007F0C35 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2B7B2BE6072DB1B6007F0C35 /* NamedSlider.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = NamedSlider.h; path = macsrc/NamedSlider.h; sourceTree = "<group>"; };
 		2B7B2BE7072DB1B6007F0C35 /* NamedSlider.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = NamedSlider.m; path = macsrc/NamedSlider.m; sourceTree = "<group>"; };
 		2BFF7F3D0715D2E00061278A /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		5506635914AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
+		5506635B14AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5506635D14AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5506635F14AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsSPUALPluginMain.xib; sourceTree = "<group>"; };
+		5506636214AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
+		5506636414AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5506636614AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5506636814AB91C100C7C565 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsSpuSDLPluginMain.xib; sourceTree = "<group>"; };
 		5517C065136217DE00706CCF /* externals.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = externals.c; path = ../../../plugins/dfsound/externals.c; sourceTree = SOURCE_ROOT; };
-		552E4CB61474735100FB231F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5599692713AFCCC600B0216B /* openal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = openal.c; path = ../../../plugins/dfsound/openal.c; sourceTree = SOURCE_ROOT; };
 		5599695E13AFCD2900B0216B /* PeopsAL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopsAL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		5599696E13AFCE1D00B0216B /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
-		55C8AB0C146DCD0E005ACCCB /* Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info copy.plist"; sourceTree = "<group>"; };
+		55C8AB0C146DCD0E005ACCCB /* Info-AL.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-AL.plist"; sourceTree = "<group>"; };
 		55F36E4B146CA0A900718DE6 /* maccfg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = maccfg.h; path = macsrc/maccfg.h; sourceTree = "<group>"; };
 		71C7B1C2130F340E004BF975 /* begin_code.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = begin_code.h; path = ../Common/SDL/include/begin_code.h; sourceTree = SOURCE_ROOT; };
 		71C7B1C3130F340E004BF975 /* close_code.h */ = {isa = PBXFileReference; fileEncoding = 4294967295; lastKnownFileType = sourcecode.c.h; name = close_code.h; path = ../Common/SDL/include/close_code.h; sourceTree = SOURCE_ROOT; };
@@ -143,7 +147,7 @@
 		71E4E7A7109DC529003BB7AC /* xa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xa.c; path = ../../../plugins/dfsound/xa.c; sourceTree = SOURCE_ROOT; };
 		71E4E7A8109DC529003BB7AC /* xa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xa.h; path = ../../../plugins/dfsound/xa.h; sourceTree = SOURCE_ROOT; };
 		8D576316048677EA00EA77CD /* PeopsSPU.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopsSPU.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D576317048677EA00EA77CD /* Info-SDL.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-SDL.plist"; sourceTree = "<group>"; };
 		A1A2073D13816B1D005EE84C /* externals.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = externals.c; path = ../../../plugins/dfsound/externals.c; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -183,6 +187,8 @@
 				71C7B1C0130F340E004BF975 /* SDL */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB6FE9D52B211CA2CBB /* Products */,
+				8D576317048677EA00EA77CD /* Info-SDL.plist */,
+				55C8AB0C146DCD0E005ACCCB /* Info-AL.plist */,
 			);
 			name = "PSX Plugin";
 			sourceTree = "<group>";
@@ -204,14 +210,11 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8D576317048677EA00EA77CD /* Info.plist */,
-				55C8AB0C146DCD0E005ACCCB /* Info copy.plist */,
-				2B4F99F7077B0CE4004E36BA /* Credits.rtf */,
-				8D5B49A704867FD3000E48DA /* InfoPlist.strings */,
-				552E4CB71474735100FB231F /* Localizable.strings */,
-				28F0C3A014651EFA00A90285 /* NetSfPeopsSpuPluginMain.xib */,
+				5506635714AB91C100C7C565 /* OpenAL */,
+				5506636014AB91C100C7C565 /* SDL */,
 			);
 			name = Resources;
+			path = Resorces;
 			sourceTree = "<group>";
 		};
 		08FB77AFFE84173DC02AAC07 /* Source */ = {
@@ -264,6 +267,28 @@
 				2B7B2BE7072DB1B6007F0C35 /* NamedSlider.m */,
 			);
 			name = macsrc;
+			sourceTree = "<group>";
+		};
+		5506635714AB91C100C7C565 /* OpenAL */ = {
+			isa = PBXGroup;
+			children = (
+				5506635814AB91C100C7C565 /* Credits.rtf */,
+				5506635A14AB91C100C7C565 /* InfoPlist.strings */,
+				5506635C14AB91C100C7C565 /* Localizable.strings */,
+				5506635E14AB91C100C7C565 /* NetSfPeopsSpuALPluginMain.xib */,
+			);
+			path = OpenAL;
+			sourceTree = "<group>";
+		};
+		5506636014AB91C100C7C565 /* SDL */ = {
+			isa = PBXGroup;
+			children = (
+				5506636114AB91C100C7C565 /* Credits.rtf */,
+				5506636314AB91C100C7C565 /* InfoPlist.strings */,
+				5506636514AB91C100C7C565 /* Localizable.strings */,
+				5506636714AB91C100C7C565 /* NetSfPeopsSpuSDLPluginMain.xib */,
+			);
+			path = SDL;
 			sourceTree = "<group>";
 		};
 		71C7B1C0130F340E004BF975 /* SDL */ = {
@@ -390,9 +415,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5599693613AFCD2900B0216B /* PeopsAL */ = {
+		5599693613AFCD2900B0216B /* PeopsSpuAL */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5599695B13AFCD2900B0216B /* Build configuration list for PBXNativeTarget "PeopsAL" */;
+			buildConfigurationList = 5599695B13AFCD2900B0216B /* Build configuration list for PBXNativeTarget "PeopsSpuAL" */;
 			buildPhases = (
 				5599693713AFCD2900B0216B /* Resources */,
 				5599693B13AFCD2900B0216B /* Sources */,
@@ -402,15 +427,15 @@
 			);
 			dependencies = (
 			);
-			name = PeopsAL;
+			name = PeopsSpuAL;
 			productInstallPath = "$(HOME)/Library/Bundles";
 			productName = "PSX Plugin";
 			productReference = 5599695E13AFCD2900B0216B /* PeopsAL.psxplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
-		8D57630D048677EA00EA77CD /* PeopsSPU */ = {
+		8D57630D048677EA00EA77CD /* PeopsSpuSDL */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 71155B260FDFA2EB00EC0BC5 /* Build configuration list for PBXNativeTarget "PeopsSPU" */;
+			buildConfigurationList = 71155B260FDFA2EB00EC0BC5 /* Build configuration list for PBXNativeTarget "PeopsSpuSDL" */;
 			buildPhases = (
 				8D57630F048677EA00EA77CD /* Resources */,
 				8D576311048677EA00EA77CD /* Sources */,
@@ -420,7 +445,7 @@
 			);
 			dependencies = (
 			);
-			name = PeopsSPU;
+			name = PeopsSpuSDL;
 			productInstallPath = "$(HOME)/Library/Bundles";
 			productName = "PSX Plugin";
 			productReference = 8D576316048677EA00EA77CD /* PeopsSPU.psxplugin */;
@@ -448,8 +473,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D57630D048677EA00EA77CD /* PeopsSPU */,
-				5599693613AFCD2900B0216B /* PeopsAL */,
+				8D57630D048677EA00EA77CD /* PeopsSpuSDL */,
+				5599693613AFCD2900B0216B /* PeopsSpuAL */,
 			);
 		};
 /* End PBXProject section */
@@ -459,10 +484,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5599693813AFCD2900B0216B /* InfoPlist.strings in Resources */,
-				5599693A13AFCD2900B0216B /* Credits.rtf in Resources */,
-				28F0C3A314651EFA00A90285 /* NetSfPeopsSpuPluginMain.xib in Resources */,
-				552E4CB51474735100FB231F /* Localizable.strings in Resources */,
+				5506636A14AB91C100C7C565 /* Credits.rtf in Resources */,
+				5506636C14AB91C100C7C565 /* InfoPlist.strings in Resources */,
+				5506636E14AB91C100C7C565 /* Localizable.strings in Resources */,
+				5506637014AB91C100C7C565 /* NetSfPeopsSpuALPluginMain.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,10 +495,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */,
-				2B4F99F9077B0CE4004E36BA /* Credits.rtf in Resources */,
-				28F0C3A214651EFA00A90285 /* NetSfPeopsSpuPluginMain.xib in Resources */,
-				552E4CB41474735100FB231F /* Localizable.strings in Resources */,
+				5506637114AB91C100C7C565 /* Credits.rtf in Resources */,
+				5506637314AB91C100C7C565 /* InfoPlist.strings in Resources */,
+				5506637514AB91C100C7C565 /* Localizable.strings in Resources */,
+				5506637714AB91C100C7C565 /* NetSfPeopsSpuSDLPluginMain.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,36 +555,68 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		28F0C3A014651EFA00A90285 /* NetSfPeopsSpuPluginMain.xib */ = {
+		5506635814AB91C100C7C565 /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
-				28F0C3A114651EFA00A90285 /* English */,
-			);
-			name = NetSfPeopsSpuPluginMain.xib;
-			sourceTree = "<group>";
-		};
-		2B4F99F7077B0CE4004E36BA /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2B4F99F8077B0CE4004E36BA /* English */,
+				5506635914AB91C100C7C565 /* English */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		552E4CB71474735100FB231F /* Localizable.strings */ = {
+		5506635A14AB91C100C7C565 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				552E4CB61474735100FB231F /* English */,
+				5506635B14AB91C100C7C565 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5506635C14AB91C100C7C565 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5506635D14AB91C100C7C565 /* English */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		8D5B49A704867FD3000E48DA /* InfoPlist.strings */ = {
+		5506635E14AB91C100C7C565 /* NetSfPeopsSpuALPluginMain.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				089C167EFE841241C02AAC07 /* English */,
+				5506635F14AB91C100C7C565 /* English */,
+			);
+			name = NetSfPeopsSpuALPluginMain.xib;
+			sourceTree = "<group>";
+		};
+		5506636114AB91C100C7C565 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5506636214AB91C100C7C565 /* English */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		5506636314AB91C100C7C565 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5506636414AB91C100C7C565 /* English */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5506636514AB91C100C7C565 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5506636614AB91C100C7C565 /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		5506636714AB91C100C7C565 /* NetSfPeopsSpuSDLPluginMain.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5506636814AB91C100C7C565 /* English */,
+			);
+			name = NetSfPeopsSpuSDLPluginMain.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -581,9 +638,9 @@
 					src/,
 					../../../plugins/dfsound,
 				);
-				INFOPLIST_FILE = "Info copy.plist";
+				INFOPLIST_FILE = "Info-AL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				PRODUCT_NAME = PeopsAL;
+				PRODUCT_NAME = PeopsSpuAL;
 				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 			};
@@ -604,9 +661,9 @@
 					src/,
 					../../../plugins/dfsound,
 				);
-				INFOPLIST_FILE = "Info copy.plist";
+				INFOPLIST_FILE = "Info-AL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				PRODUCT_NAME = PeopsAL;
+				PRODUCT_NAME = PeopsSpuAL;
 				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 			};
@@ -630,9 +687,9 @@
 					../../../plugins/dfsound,
 					../Common/SDL/include,
 				);
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = "Info-SDL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				PRODUCT_NAME = PeopsSPU;
+				PRODUCT_NAME = PeopsSpuSDL;
 				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 			};
@@ -655,9 +712,9 @@
 					../../../plugins/dfsound,
 					../Common/SDL/include,
 				);
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = "Info-SDL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				PRODUCT_NAME = PeopsSPU;
+				PRODUCT_NAME = PeopsSpuSDL;
 				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 			};
@@ -692,7 +749,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5599695B13AFCD2900B0216B /* Build configuration list for PBXNativeTarget "PeopsAL" */ = {
+		5599695B13AFCD2900B0216B /* Build configuration list for PBXNativeTarget "PeopsSpuAL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5599695C13AFCD2900B0216B /* Debug */,
@@ -701,7 +758,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		71155B260FDFA2EB00EC0BC5 /* Build configuration list for PBXNativeTarget "PeopsSPU" */ = {
+		71155B260FDFA2EB00EC0BC5 /* Build configuration list for PBXNativeTarget "PeopsSpuSDL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				71155B270FDFA2EB00EC0BC5 /* Debug */,

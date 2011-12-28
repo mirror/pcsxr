@@ -81,7 +81,11 @@ long DoConfiguration()
 	NSWindow *window;
 	
 	if (pluginController == nil) {
-		pluginController = [[PluginController alloc] initWithWindowNibName:@"NetSfPeopsSpuPluginMain"];
+#ifdef USEOPENAL
+		pluginController = [[PluginController alloc] initWithWindowNibName:@"NetSfPeopsSpuALPluginMain"];
+#else
+		pluginController = [[PluginController alloc] initWithWindowNibName:@"NetSfPeopsSpuSDLPluginMain"];
+#endif
 	}
 	window = [pluginController window];
 
