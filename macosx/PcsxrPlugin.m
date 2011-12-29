@@ -120,6 +120,12 @@
             }
         }
     }
+	
+    if (goodPath == nil) {
+        [self autorelease];
+        return nil;
+    }
+	
     pluginRef = SysLoadLibrary([goodPath fileSystemRepresentation]);
         if (pluginRef == nil) {
             [self release];
