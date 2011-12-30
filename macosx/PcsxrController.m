@@ -22,12 +22,43 @@ static NSString *HandleBinCue(NSString *toHandle)
 	NSString *extension = [tempURL pathExtension];
 	NSString *newName = toHandle;
 	if ([extension caseInsensitiveCompare:@"cue"] == NSOrderedSame) {
-		NSURL *temp1 = [tempURL URLByDeletingPathExtension];
+		NSURL *temp1 = [tempURL URLByDeletingLastPathComponent];
+		NSURL *temp2 = nil;
+		//Get the bin file name from the cue.
+		NSString *cueFile = [NSString stringWithContentsOfURL:tempURL encoding:NSUTF8StringEncoding error:nil];
+		if (!cueFile) {
+			cueFile = [NSString stringWithContentsOfURL:tempURL encoding:NSASCIIStringEncoding error:nil];
+			if (!cueFile) {
+				goto badCue;
+			}
+		}
+		
+		NSRange firstQuote, lastQuote, filePath;
+		firstQuote = [cueFile rangeOfString:@"\""];
+		if (firstQuote.location == NSNotFound) {
+			goto badCue;
+		}
+		lastQuote = [cueFile rangeOfString:@".bin\"" options:NSCaseInsensitiveSearch];
+		if (lastQuote.location == NSNotFound) {
+			goto badCue;
+		}
+		
+		filePath.location = firstQuote.location + 1; //Don't include the quote symbol
+		filePath.length = (lastQuote.location + 4) - (firstQuote.location + 1 ); //Include the .bin but not the first quote symbol
+		temp2 = [temp1 URLByAppendingPathComponent:[cueFile substringWithRange:filePath]];
+
+		goto goodCue;
+		
+	badCue:
+		//Fallback if the cue couldn't be loaded
+		temp1 = [tempURL URLByDeletingPathExtension];
 		//TODO: handle case-sensitive filesystems better
-		NSURL *temp2 = [temp1 URLByAppendingPathExtension:@"bin"];
+		temp2 = [temp1 URLByAppendingPathExtension:@"bin"];
 		if (![[NSFileManager defaultManager] fileExistsAtPath:[temp2 path]]) {
 			temp2 = [temp1 URLByAppendingPathExtension:@"BIN"];
 		}
+		
+	goodCue:
 		newName = [temp2 path];
 	}
 	[tempURL release];
