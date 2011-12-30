@@ -46,6 +46,8 @@ static NSString *HandleBinCue(NSString *toHandle)
 		filePath.location = firstQuote.location + 1; //Don't include the quote symbol
 		filePath.length = (lastQuote.location + 4) - (firstQuote.location + 1 ); //Include the .bin but not the first quote symbol
 		temp2 = [temp1 URLByAppendingPathComponent:[cueFile substringWithRange:filePath]];
+		if (![[NSFileManager defaultManager] fileExistsAtPath:[temp2 path]])
+			goto badCue;
 
 		goto goodCue;
 		
