@@ -311,6 +311,8 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[memCard1Array release];
+	[memCard2Array release];
 
 	[super dealloc];
 }
