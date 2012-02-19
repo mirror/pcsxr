@@ -13,7 +13,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
 #include "Linux.h"
@@ -85,7 +85,7 @@ void RunAboutDialog(void) {
 		"\n"
 		"You should have received a copy of the GNU General Public License "
 		"along with this program; if not, write to the Free Software "
-		"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA.");
+		"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.");
 
 	AboutDlg = gtk_about_dialog_new();
 	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(AboutDlg), "PCSX-Reloaded");

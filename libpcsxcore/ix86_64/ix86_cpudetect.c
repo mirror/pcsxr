@@ -13,7 +13,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
 #ifdef __x86_64__
@@ -292,7 +292,7 @@ void cpudetectInit( void )
                switch( cpuinfo.x86Model )
                {
                case 4:
-               case 8:     // 0.25 µm
+               case 8:     // 0.25 ï¿½m
                   strcpy( cpuinfo.x86Fam, "Intel Pentium (MMX)");
                   break;
                default:
@@ -308,7 +308,7 @@ void cpudetectInit( void )
                   break;
 
                case 2:     // 66 MHz FSB
-               case 5:     // Xeon/Celeron (0.25 µm)
+               case 5:     // Xeon/Celeron (0.25 ï¿½m)
                case 6:     // Internal L2 cache
                   strcpy( cpuinfo.x86Fam, "Intel Pentium II" );
                   break;
@@ -432,7 +432,7 @@ void cpudetectInit( void )
                   break;
 
                case 6:     
-               case 7:     // (0.25 µm)
+               case 7:     // (0.25 ï¿½m)
                case 8:     // K6-2
                case 9:     // K6-III
                case 14:    // K6-2+ / K6-III+

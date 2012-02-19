@@ -13,7 +13,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software Foundation,
-   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA.  */
+   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.  */
 
 #include "intlconfig.h"
 
@@ -262,7 +262,7 @@ DCGETTEXT (domainname, msgid, category)
 
   if (binding == NULL)
     dirname = (char *) _nl_default_dirname;
-  else if (binding->dirname[0] == '/' || binding->dirname[1] == ':' ) /*FRANCO für win32*/
+  else if (binding->dirname[0] == '/' || binding->dirname[1] == ':' ) /*FRANCO fï¿½r win32*/
     dirname = binding->dirname;
   else
     {

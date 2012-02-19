@@ -14,7 +14,7 @@
 
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Sam Lantinga
     slouken@libsdl.org
@@ -149,7 +149,7 @@ HIDCreateOpenDeviceInterface(io_object_t hidDevice, recDevice * pDevice)
                                                      &(pDevice->interface));
             if (S_OK != plugInResult)
                 HIDReportErrorNum
-                    ("CouldnÕt query HID class device interface from plugInInterface",
+                    ("Couldnï¿½t query HID class device interface from plugInInterface",
                      plugInResult);
             (*ppPlugInInterface)->Release(ppPlugInInterface);
         } else
