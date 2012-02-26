@@ -2,7 +2,9 @@ SUBDIRS = data doc po libpcsxcore gui pixmaps
 SUBDIRS += plugins/dfinput plugins/dfsound
 SUBDIRS += plugins/dfxvideo plugins/dfcdrom plugins/dfnet
 
-SUBDIRS += plugins/bladesio1 plugins/gxvideo
+SUBDIRS += plugins/bladesio1
+
+SUBDIRS += $(GXVIDEO)
 
 SUBDIRS += $(PEOPSXGL)
 

@@ -44,7 +44,6 @@ gui/Makefile
 plugins/dfinput/Makefile
 plugins/dfsound/Makefile
 plugins/dfxvideo/Makefile
-plugins/gxvideo/Makefile
 plugins/dfcdrom/Makefile
 plugins/dfnet/Makefile
 plugins/bladesio1/Makefile
@@ -145,6 +144,17 @@ if test "$BUILD_OPENGL" = "yes"; then
 	PEOPSXGL="plugins/peopsxgl"
 	AC_SUBST(PEOPSXGL)
 	AC_CONFIG_FILES([plugins/peopsxgl/Makefile])
+fi
+
+AC_ARG_ENABLE(gxvideo, [  --enable-gxvideo         build gxvideo plugin (default=no)],
+[ BUILD_GXVIDEO="$enableval" ],[ BUILD_GXVIDEO="no" ])
+
+GXVIDEO=""
+
+if test "$BUILD_GXVIDEO" = "yes"; then
+	GXVIDEO="plugins/gxvideo"
+	AC_SUBST(GXVIDEO)
+	AC_CONFIG_FILES([plugins/gxvideo/Makefile])
 fi
 
 AM_CONDITIONAL(X86_NASM, false)
