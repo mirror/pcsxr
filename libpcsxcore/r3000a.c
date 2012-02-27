@@ -123,7 +123,7 @@ void psxBranchTest() {
 		}
 	}
 
-#if 0
+#if 1
 	if( SPU_async )
 	{
 		static int init;

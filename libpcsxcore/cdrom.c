@@ -523,7 +523,7 @@ static void CDXA_Attenuation( s16 *buf, int size, int stereo, int attenuate_type
 
 	spsound = buf;
 
-#if 0
+#if 1
 	// mono xa attenuation
 	// - Tales of Phantasia (voice meter)
 	if( stereo == 0 ) {
@@ -1646,7 +1646,7 @@ void cdrReadInterrupt() {
 			int ret = xa_decode_sector(&cdr.Xa, cdr.Transfer+4, cdr.FirstSector);
 
 			if (!ret) {
-#if 0
+#if 1
 				int xa_type;
 
 				// save - set only for FirstSector
@@ -2251,7 +2251,7 @@ void cdrWrite3(unsigned char rt) {
 			return;
 		}
 
-#if 1
+#if 0
 		if (cdr.Reading && !cdr.ResultReady) {
       CDREAD_INT((cdr.Mode & MODE_SPEED) ? (cdReadTime / 2) : cdReadTime);
 		}
@@ -2452,7 +2452,7 @@ void cdrReset() {
 	cdr.File = 1;
 	cdr.Channel = 1;
 
-#if 0
+#if 1
 	// BIOS player - default values
 	cdr.AttenuatorLeft[0] = 0x80;
 	cdr.AttenuatorLeft[1] = 0x00;
