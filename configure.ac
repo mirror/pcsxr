@@ -146,17 +146,6 @@ if test "$BUILD_OPENGL" = "yes"; then
 	AC_CONFIG_FILES([plugins/peopsxgl/Makefile])
 fi
 
-AC_ARG_ENABLE(gxvideo, [  --enable-gxvideo         build gxvideo plugin (default=no)],
-[ BUILD_GXVIDEO="$enableval" ],[ BUILD_GXVIDEO="no" ])
-
-GXVIDEO=""
-
-if test "$BUILD_GXVIDEO" = "yes"; then
-	GXVIDEO="plugins/gxvideo"
-	AC_SUBST(GXVIDEO)
-	AC_CONFIG_FILES([plugins/gxvideo/Makefile])
-fi
-
 AM_CONDITIONAL(X86_NASM, false)
 
 if expr x"$build_cpu" : 'xi.86' > /dev/null; then
