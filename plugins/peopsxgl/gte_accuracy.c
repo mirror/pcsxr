@@ -20,6 +20,8 @@
 #include "stdafx.h"
 #include "externals.h"
 
+#include <math.h>
+
 // TODO: use malloc and pointer to the array's center.
 float gteCoords[0x800 * 2][0x800 * 2][2];
 
@@ -51,8 +53,8 @@ int getGteVertex(short sx, short sy, float *fx, float *fy)
 		if(sx >= -0x800 && sx <= 0x7ff &&
 		   sy >= -0x800 && sy <= 0x7ff)
 		{
-			if(((int)gteCoords[sy + 0x800][sx + 0x800][0]) == sx &&
-			((int)gteCoords[sy + 0x800][sx + 0x800][1]) == sy)
+			if((fabsf(gteCoords[sy + 0x800][sx + 0x800][0] - sx) < 1.0) &&
+			   (fabsf(gteCoords[sy + 0x800][sx + 0x800][1] - sy) < 1.0))
 			{
 				*fx = gteCoords[sy + 0x800][sx + 0x800][0];
 				*fy = gteCoords[sy + 0x800][sx + 0x800][1];
