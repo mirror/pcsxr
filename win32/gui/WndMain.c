@@ -1312,6 +1312,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Button_SetText(GetDlgItem(hW,IDC_SPUIRQ),  _("Spu Irq Always Enabled"));
 			Button_SetText(GetDlgItem(hW,IDC_RCNTFIX), _("Parasite Eve 2, Vandal Hearts 1/2 Fix"));
 			Button_SetText(GetDlgItem(hW,IDC_VSYNCWA), _("InuYasha Sengoku Battle Fix"));
+			Button_SetText(GetDlgItem(hW,IDC_WIDESCREEN), _("Widescreen (GTE Hack)"));
 
 			Static_SetText(GetDlgItem(hW,IDC_MISCOPT), _("Options"));
 			Static_SetText(GetDlgItem(hW,IDC_SELPSX),  _("Psx System Type"));
@@ -1328,6 +1329,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 	   		Button_SetCheck(GetDlgItem(hW,IDC_SPUIRQ),  Config.SpuIrq);
 	   		Button_SetCheck(GetDlgItem(hW,IDC_RCNTFIX), Config.RCntFix);
 	   		Button_SetCheck(GetDlgItem(hW,IDC_VSYNCWA), Config.VSyncWA);
+			Button_SetCheck(GetDlgItem(hW,IDC_WIDESCREEN), Config.Widescreen);
 	   		ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "NTSC");
 	   		ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "PAL");
 	   		ComboBox_SetCurSel(GetDlgItem(hW,IDC_PSXTYPES),Config.PsxType);
@@ -1371,6 +1373,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					Config.SpuIrq  = Button_GetCheck(GetDlgItem(hW,IDC_SPUIRQ));
 					Config.RCntFix = Button_GetCheck(GetDlgItem(hW,IDC_RCNTFIX));
 					Config.VSyncWA = Button_GetCheck(GetDlgItem(hW,IDC_VSYNCWA));
+					Config.Widescreen = Button_GetCheck(GetDlgItem(hW,IDC_WIDESCREEN));
 					tmp = Config.Debug;
 					Config.Debug   = Button_GetCheck(GetDlgItem(hW,IDC_DEBUG));
 					if (tmp != Config.Debug) {

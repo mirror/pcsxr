@@ -71,6 +71,7 @@
 #define IDC_MDEC2                       1017
 #define IDC_CDTIMING                    1017
 #define IDC_SLOWBOOT                    1017
+#define IDC_WIDESCREEN                  1264
 #define IDC_ASMCHECK4                   1018
 #define IDC_ASMCHECK5                   1019
 #define IDC_RELOAD1                     1019

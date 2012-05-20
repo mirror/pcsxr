@@ -402,13 +402,13 @@ void gteRTPS() {
 	quotient = limE(DIVIDE(gteH, gteSZ3));
 	gteSXY0 = gteSXY1;
 	gteSXY1 = gteSXY2;
-	gteSX2 = limG1(F((s64)gteOFX + ((s64)gteIR1 * quotient)) >> 16);
+	gteSX2 = limG1(F((s64)gteOFX + ((s64)gteIR1 * quotient) * (Config.Widescreen ? 0.75 : 1)) >> 16);
 	gteSY2 = limG2(F((s64)gteOFY + ((s64)gteIR2 * quotient)) >> 16);
 
     fquotient = flimE((float)(gteH << 16) / (float)gteSZ3);
     GPU_addVertex(gteSX2,
                   gteSY2,
-                  limG1_ia((s64)gteOFX + (s64)(gteIR1 * fquotient)), // TODO: MAC1 calc instead of IR1.
+                  limG1_ia((s64)gteOFX + (s64)(gteIR1 * fquotient) * (Config.Widescreen ? 0.75 : 1)), // TODO: MAC1 calc instead of IR1.
                   limG2_ia((s64)gteOFY + (s64)(gteIR2 * fquotient)), // TODO: MAC2 calc instead of IR2.
 				  ((s64)gteSZ3));                                    // TODO: MAC3 calc instead of SZ3.
 
@@ -440,13 +440,13 @@ void gteRTPT() {
 		gteIR3 = limB3(gteMAC3, 0);
 		fSZ(v) = limD(gteMAC3);
 		quotient = limE(DIVIDE(gteH, fSZ(v)));
-		fSX(v) = limG1(F((s64)gteOFX + ((s64)gteIR1 * quotient)) >> 16);
+		fSX(v) = limG1(F((s64)gteOFX + ((s64)gteIR1 * quotient) * (Config.Widescreen ? 0.75 : 1)) >> 16);
 		fSY(v) = limG2(F((s64)gteOFY + ((s64)gteIR2 * quotient)) >> 16);
 
         fquotient = flimE((float)(gteH << 16) / (float)fSZ(v));
 		GPU_addVertex(fSX(v),
                       fSY(v),
-                      limG1_ia((s64)gteOFX + (s64)(gteIR1 * fquotient)), // TODO: MAC1 calc instead of IR1.
+                      limG1_ia((s64)gteOFX + (s64)(gteIR1 * fquotient) * (Config.Widescreen ? 0.75 : 1)), // TODO: MAC1 calc instead of IR1.
                       limG2_ia((s64)gteOFY + (s64)(gteIR2 * fquotient)), // TODO: MAC2 calc instead of IR2.
 					  ((s64)fSZ(v)));                                    // TODO: MAC3 calc instead of fSZ(v).
 	}

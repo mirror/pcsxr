@@ -133,6 +133,7 @@ int LoadConfig(PcsxConfig *Conf) {
 	Config.SpuIrq  = GetValueb(data, "SpuIrq");
 	Config.RCntFix = GetValueb(data, "RCntFix");
 	Config.VSyncWA = GetValueb(data, "VSyncWA");
+	Config.Widescreen = GetValueb(data, "Widescreen");
 
 	Config.Cpu     = GetValuel(data, "Cpu");
 	Config.PsxType = GetValuel(data, "PsxType");
@@ -174,6 +175,7 @@ void SaveConfig() {
 	SetValueb("SpuIrq",  Config.SpuIrq);
 	SetValueb("RCntFix", Config.RCntFix);
 	SetValueb("VSyncWA", Config.VSyncWA);
+	SetValueb("Widescreen", Config.Widescreen);
 
 	SetValuel("Cpu",     Config.Cpu);
 	SetValuel("PsxType", Config.PsxType);

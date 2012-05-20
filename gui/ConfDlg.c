@@ -832,6 +832,7 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 	Config.SpuIrq = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_SpuIrq")));
 	Config.RCntFix = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_RCntFix")));
 	Config.VSyncWA = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_VSyncWA")));
+	Config.Widescreen = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Widescreen")));
 
 	SaveConfig();
 
@@ -884,6 +885,7 @@ void OnConf_Cpu() {
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_SpuIrq")), Config.SpuIrq);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_RCntFix")), Config.RCntFix);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_VSyncWA")), Config.VSyncWA);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Widescreen")), Config.Widescreen);
 
 	// Setup a handler for when Close or Cancel is clicked
 	g_signal_connect_data(GTK_OBJECT(CpuDlg), "response",

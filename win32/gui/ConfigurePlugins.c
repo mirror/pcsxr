@@ -78,6 +78,7 @@ int LoadConfig() {
 	QueryKeyV("SpuIrq",   Conf->SpuIrq);
 	QueryKeyV("RCntFix",  Conf->RCntFix);
 	QueryKeyV("VSyncWA",  Conf->VSyncWA);
+	QueryKeyV("Widescreen",  Conf->Widescreen);
 
 	QueryKeyV("Cpu",      Conf->Cpu);
 	QueryKeyV("PsxType",  Conf->PsxType);
@@ -129,6 +130,7 @@ void SaveConfig() {
 	SetKeyV("SpuIrq",  Conf->SpuIrq);
 	SetKeyV("RCntFix", Conf->RCntFix);
 	SetKeyV("VSyncWA", Conf->VSyncWA);
+	SetKeyV("Widescreen", Conf->Widescreen);
 
 	SetKeyV("Cpu",     Conf->Cpu);
 	SetKeyV("PsxType", Conf->PsxType);
