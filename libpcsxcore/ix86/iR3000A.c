@@ -67,8 +67,8 @@ static iRegisters iRegsS[32];
 #define ST_CONST  1
 #define ST_MAPPED 2
 
-#define IsConst(reg)  iRegs[reg].state == ST_CONST
-#define IsMapped(reg) iRegs[reg].state == ST_MAPPED
+#define IsConst(reg)  (iRegs[reg].state == ST_CONST)
+#define IsMapped(reg) (iRegs[reg].state == ST_MAPPED)
 
 static void (*recBSC[64])();
 static void (*recSPC[64])();
