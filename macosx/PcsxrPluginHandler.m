@@ -12,7 +12,11 @@
 
 + (NSArray *)supportedUTIs
 {
-	return [NSArray arrayWithObject:@"com.codeplex.pcsxr.plugin"];
+	static NSArray *utisupport = nil;
+	if (utisupport == nil) {
+		utisupport = [[NSArray alloc] initWithObjects:@"com.codeplex.pcsxr.plugin", nil];
+	}
+	return utisupport;
 }
 
 - (id)initWithWindow:(NSWindow *)window

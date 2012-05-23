@@ -15,7 +15,11 @@
 
 + (NSArray *)supportedUTIs
 {
-	return [NSArray arrayWithObjects:@"com.alcohol-soft.mdfdisc", @"com.goldenhawk.cdrwin-cuesheet", @"com.apple.disk-image-ndif", @"public.iso-image", nil];
+	static NSArray *utisupport = nil;
+	if (utisupport == nil) {
+		utisupport = [[NSArray alloc] initWithObjects:@"com.alcohol-soft.mdfdisc", @"com.goldenhawk.cdrwin-cuesheet", @"com.apple.disk-image-ndif", @"public.iso-image", nil];
+	}
+	return utisupport;
 }
 
 - (BOOL)handleFile:(NSString *)theFile

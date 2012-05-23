@@ -511,7 +511,10 @@ static NSString *HandleBinCue(NSString *toHandle)
 		NSRunAlertPanel(NSLocalizedString(@"Error opening file",nil), [NSString stringWithFormat:NSLocalizedString(@"Unable to open %@: %@", nil), [filename lastPathComponent], [err localizedFailureReason]], nil, nil, nil);
 		return NO;
 	}
-	NSArray *handlers = [NSArray arrayWithObjects:[PcsxrPluginHandler class], [PcsxrMemCardHandler class], [PcsxrFreezeStateHandler class], [PcsxrDiscHandler class], nil];
+	static NSArray *handlers = nil;
+	if (handlers == nil) {
+		handlers = [[NSArray alloc] initWithObjects:[PcsxrPluginHandler class], [PcsxrMemCardHandler class], [PcsxrFreezeStateHandler class], [PcsxrDiscHandler class], nil];
+	}
 	BOOL isHandled = NO;
 	for (Class fileHandler in handlers) {
 		NSObject<PcsxrFileHandle> *hand = [[fileHandler alloc] init];
