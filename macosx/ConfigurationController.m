@@ -170,6 +170,7 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 	if (rCountFixCell) [checkBoxDefaults setObject:rCountFixCell forKey:@"RootCounterFix"];
 	if (vSyncWAFixCell) [checkBoxDefaults setObject:vSyncWAFixCell forKey:@"VideoSyncWAFix"];
 	if (noFastBootCell) [checkBoxDefaults setObject:noFastBootCell forKey:@"NoFastBoot"];
+	if (widescreen) [checkBoxDefaults setObject:widescreen forKey:@"Widescreen"];
 
 	// make the visuals match the defaults
 	NSEnumerator *enumerator= [checkBoxDefaults keyEnumerator];
@@ -248,7 +249,7 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 	[memCardEdit showWindow:sender];
 }
 
-- (BOOL)memoryCardWindowIsVisible
+- (BOOL)isMemoryCardWindowVisible
 {
 	if (!memCardEdit) {
 		return NO;

@@ -229,7 +229,7 @@ static NSString *HandleBinCue(NSString *toHandle)
 				return NO;
 
 		if (preferencesController != nil) {
-			if ([preferencesController memoryCardWindowIsVisible] == YES)
+			if ([preferencesController isMemoryCardWindowVisible] == YES)
 				return NO;
 		}
 		
@@ -388,10 +388,11 @@ static NSString *HandleBinCue(NSString *toHandle)
 	const char *str;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
-		[NSNumber numberWithInt:1], @"NoDynarec",
-		[NSNumber numberWithInt:1], @"AutoDetectVideoType",
-		[NSNumber numberWithInt:0], @"UseHLE",
+		[NSNumber numberWithBool:YES], @"NoDynarec",
+		[NSNumber numberWithBool:YES], @"AutoDetectVideoType",
+		[NSNumber numberWithBool:NO], @"UseHLE",
 		[NSNumber numberWithBool:YES], @"PauseInBackground",
+		[NSNumber numberWithBool:NO], @"Widescreen",
 		nil];
 
 	[defaults registerDefaults:appDefaults];
@@ -419,6 +420,7 @@ static NSString *HandleBinCue(NSString *toHandle)
 		[NSValue valueWithPointer:&Config.SpuIrq], @"SpuIrqAlways",
 		[NSValue valueWithPointer:&Config.RCntFix], @"RootCounterFix",
 		[NSValue valueWithPointer:&Config.VSyncWA], @"VideoSyncWAFix",
+		[NSValue valueWithPointer:&Config.Widescreen], @"Widescreen",
 		nil];
 
 	// setup application support paths

@@ -30,6 +30,7 @@ extern NSString *memChangeNotifier;
 	IBOutlet id vSyncWAFixCell;
 	IBOutlet id noFastBootCell;
 	IBOutlet id enableNetPlayCell;
+	IBOutlet id widescreen;
 
 	IBOutlet NSTextField *mcd1Label;
 	IBOutlet NSTextField *mcd2Label;
@@ -44,7 +45,7 @@ extern NSString *memChangeNotifier;
 - (IBAction)mcdChangeClicked:(id)sender;
 - (IBAction)mcdNewClicked:(id)sender;
 - (IBAction)mcdEditClicked:(id)sender;
-- (BOOL)memoryCardWindowIsVisible;
+- (BOOL)isMemoryCardWindowVisible;
 
 - (NSString *)keyForSender:(id)sender;
 + (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile;
