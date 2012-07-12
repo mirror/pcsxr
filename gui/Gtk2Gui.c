@@ -47,6 +47,7 @@ void OnFile_RunExe();
 void OnFile_RunImage();
 void OnEmu_Run();
 void OnEmu_Reset();
+void OnEmu_Shutdown();
 void OnEmu_SwitchImage();
 void OnHelp_Help();
 void OnHelp_About();
@@ -97,6 +98,8 @@ void ResetMenuSlots(GladeXML *xml) {
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget(xml, "reset1");
 		gtk_widget_set_sensitive(widget, FALSE);
+		widget = glade_xml_get_widget(xml, "shutdown1");
+		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget(xml, "search1");
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget(xml, "SwitchImage");
@@ -107,6 +110,18 @@ void ResetMenuSlots(GladeXML *xml) {
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = glade_xml_get_widget(xml, "toolbutton_switchimage");
 		gtk_widget_set_sensitive(widget, FALSE);
+		widget = glade_xml_get_widget(xml, "plugins_bios");
+		gtk_widget_set_sensitive(widget, TRUE);
+		widget = glade_xml_get_widget(xml, "graphics1");
+		gtk_widget_set_sensitive(widget, TRUE);
+		widget = glade_xml_get_widget(xml, "sound1");
+		gtk_widget_set_sensitive(widget, TRUE);
+		widget = glade_xml_get_widget(xml, "cdrom1");
+		gtk_widget_set_sensitive(widget, TRUE);
+		widget = glade_xml_get_widget(xml, "pad1");
+		gtk_widget_set_sensitive(widget, TRUE);
+		widget = glade_xml_get_widget(xml, "net1");
+		gtk_widget_set_sensitive(widget, TRUE);
 
 		widget = glade_xml_get_widget(xml, "statusbar");
 		gtk_statusbar_pop(GTK_STATUSBAR(widget), 1);
@@ -212,7 +227,6 @@ void StartGui() {
 		gtk_window_present (GTK_WINDOW (Window));
 		return;
 	}*/
-
 	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "MainWindow", NULL);
 
 	if (!xml) {
@@ -321,6 +335,9 @@ void StartGui() {
 	widget = glade_xml_get_widget(xml, "reset1");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			G_CALLBACK(OnEmu_Reset), NULL, NULL, G_CONNECT_AFTER);
+	widget = glade_xml_get_widget(xml, "shutdown1");
+	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+			G_CALLBACK(OnEmu_Shutdown), NULL, NULL, G_CONNECT_AFTER);
 	widget = glade_xml_get_widget(xml, "SwitchImage");
 	g_signal_connect_data(GTK_OBJECT(widget), "activate",
 			G_CALLBACK(OnEmu_SwitchImage), NULL, NULL, G_CONNECT_AFTER);
@@ -702,6 +719,14 @@ void OnEmu_Reset() {
 	SysReset();
 
 	psxCpu->Execute();
+}
+
+void OnEmu_Shutdown() {
+	ReleasePlugins();
+	SetIsoFile(NULL);
+	CdromId[0] = '\0';
+	CdromLabel[0] = '\0';
+	ResetMenuSlots(glade_get_widget_tree(Window));
 }
 
 void OnEmu_SwitchImage() {
