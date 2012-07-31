@@ -606,11 +606,25 @@ static gchar *Open_Iso_Proc() {
 
 	if (gtk_dialog_run(GTK_DIALOG(chooser)) == GTK_RESPONSE_OK) {
 		gchar *path = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(chooser));
-		strcpy(current_folder, path);
-		g_free(path);
+		
+		/* Workaround:
+		for some reasons gtk_file_chooser_get_current_folder return NULL
+		if a file is selected from "Recently Used" or "Searsh"*/
+		if(path != NULL) {
+		  strcpy(current_folder, path);
+		  g_free(path);
+		}
+		
 		GSList * l = gtk_file_chooser_get_filenames(GTK_FILE_CHOOSER (chooser));
 		if(l) {
 		filename = l->data;
+		
+		/* if the file was selected from "Recently Used" or "Searsh"
+		we need to extract the path from the filename to set it to current_folder*/
+		if(path == NULL) {
+		  strncpy(current_folder, filename, strrchr(filename, '/') - filename);
+		}
+		  
 		/* free useless data */
 		GSList * ll = l;
 		while(l->next) {
