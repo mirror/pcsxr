@@ -60,6 +60,7 @@ int  LoadConfig();
 void SaveConfig();
 
 void ResetMenuSlots();
+void UpdateMenuItems();
 
 void InitLanguages();
 char *GetLanguageNext();

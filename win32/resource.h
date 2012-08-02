@@ -71,7 +71,6 @@
 #define IDC_MDEC2                       1017
 #define IDC_CDTIMING                    1017
 #define IDC_SLOWBOOT                    1017
-#define IDC_WIDESCREEN                  1264
 #define IDC_ASMCHECK4                   1018
 #define IDC_ASMCHECK5                   1019
 #define IDC_RELOAD1                     1019
@@ -297,6 +296,7 @@
 #define IDC_LABEL_SEARCHFOR             1261
 #define IDC_LABEL_VALUE                 1262
 #define IDC_LABEL_DATABASE              1263
+#define IDC_WIDESCREEN                  1264
 #define ID_FILE_EXIT                    40001
 #define ID_HELP_ABOUT                   40002
 #define ID_FILE_RUN_CD                  40003
@@ -313,6 +313,7 @@
 #define ID_EMULATOR_RUN                 40014
 #define ID_DEBUGREG                     40015
 #define ID_DEBUG_MESSAGES               40015
+#define ID_EMULATOR_SHUTDOWN            40015
 #define ID_FILE_RUN_NOGUI               40016
 #define ID_CONFIGURATION_CONTROLLERS    40017
 #define ID_CONFIGURATION                40018
@@ -350,6 +351,6 @@
 #define _APS_NEXT_RESOURCE_VALUE        116
 #define _APS_NEXT_COMMAND_VALUE         40047
 #define _APS_NEXT_CONTROL_VALUE         1054
-#define _APS_NEXT_SYMED_VALUE           101
+#define _APS_NEXT_SYMED_VALUE           102
 #endif
 #endif

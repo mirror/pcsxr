@@ -630,6 +630,14 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 					psxCpu->Execute();
 					return TRUE;
 
+				case ID_EMULATOR_SHUTDOWN:
+					ReleasePlugins();
+					SetIsoFile(NULL);
+					CdromId[0] = '\0';
+					CdromLabel[0] = '\0';
+					UpdateMenuItems();
+					return TRUE;
+
 				case ID_EMULATOR_SWITCH_ISO:
 					if (!Open_Iso_Proc(File)) return TRUE;
 					SetIsoFile(File);
@@ -1618,6 +1626,7 @@ void CreateMainMenu() {
 	ADDSEPARATOR(0);
 	ADDMENUITEM(0, _("S&witch ISO..."), ID_EMULATOR_SWITCH_ISO);
 	ADDSEPARATOR(0);
+	ADDMENUITEM(0, _("S&hutdown"), ID_EMULATOR_SHUTDOWN);
 	ADDMENUITEM(0, _("Re&set"), ID_EMULATOR_RESET);
 	ADDMENUITEM(0, _("&Run"), ID_EMULATOR_RUN);
 	ADDSUBMENUS(1, 3, _("&Save"));
@@ -1688,44 +1697,7 @@ void CreateMainMenu() {
 	ADDSUBMENU(0, _("&Help"));
 	ADDMENUITEM(0, _("&About..."), ID_HELP_ABOUT);
 
-	if (CdromId[0] != '\0') {
-		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_NETPLAY, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CONTROLLERS, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CDROM, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_SOUND, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_GRAPHICS, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION, MF_BYCOMMAND | MF_GRAYED);
-		if (!UsingIso()) {
-			EnableMenuItem(gApp.hMenu, ID_EMULATOR_SWITCH_ISO, MF_BYCOMMAND | MF_GRAYED);
-		}
-
-		ResetMenuSlots();
-	} else {
-		EnableMenuItem(gApp.hMenu, ID_EMULATOR_RESET, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_EMULATOR_RUN, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_EMULATOR_SWITCH_ISO, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT1, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT2, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT3, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT4, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT5, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT6, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT7, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT8, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT9, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_OTHER, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT1, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT2, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT3, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT4, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT5, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT6, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT7, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT8, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT9, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_OTHER, MF_BYCOMMAND | MF_GRAYED);
-		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CHEATSEARCH, MF_BYCOMMAND | MF_GRAYED);
-	}
+	UpdateMenuItems();
 }
 
 void CreateMainWindow(int nCmdShow) {
@@ -1912,4 +1884,52 @@ void SysUpdate() {
 void SysRunGui() {
 	RestoreWindow();
 	RunGui();
+}
+
+void UpdateMenuItems() {
+	if (CdromId[0] != '\0') {
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_NETPLAY, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CONTROLLERS, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CDROM, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_SOUND, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_GRAPHICS, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION, MF_BYCOMMAND | MF_GRAYED);
+		if (!UsingIso()) {
+			EnableMenuItem(gApp.hMenu, ID_EMULATOR_SWITCH_ISO, MF_BYCOMMAND | MF_GRAYED);
+		}
+
+		ResetMenuSlots();
+	} else {
+		EnableMenuItem(gApp.hMenu, ID_EMULATOR_RESET, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_EMULATOR_RUN, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_EMULATOR_SHUTDOWN, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_EMULATOR_SWITCH_ISO, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT1, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT2, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT3, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT4, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT5, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT6, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT7, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT8, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_SLOT9, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_LOAD_OTHER, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT1, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT2, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT3, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT4, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT5, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT6, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT7, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT8, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_SLOT9, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_OTHER, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CHEATSEARCH, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_NETPLAY, MF_BYCOMMAND | MF_ENABLED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CONTROLLERS, MF_BYCOMMAND | MF_ENABLED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CDROM, MF_BYCOMMAND | MF_ENABLED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_SOUND, MF_BYCOMMAND | MF_ENABLED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_GRAPHICS, MF_BYCOMMAND | MF_ENABLED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION, MF_BYCOMMAND | MF_ENABLED);
+	}
 }
