@@ -98,9 +98,9 @@
 #ifndef _MACGL
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
+#include <X11/cursorfont.h>
 #endif
 #include <math.h>
-#include <X11/cursorfont.h>
 #include <stdint.h>
 
 #endif
