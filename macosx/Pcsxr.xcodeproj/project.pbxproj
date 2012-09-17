@@ -29,8 +29,8 @@
 		2BB3D6C605427FE200831ACB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC4786204C7FD3600CAB520 /* Cocoa.framework */; };
 		2BB3D6C705427FE200831ACB /* System.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6E8AAE04C832040017A3B1 /* System.framework */; };
 		2BB3D6C805427FE200831ACB /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6E8AB404C8327C0017A3B1 /* IOKit.framework */; };
-		5586CD9714AFADD9008EF4EE /* PeopsSPU.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DD110C356FD00365243 /* PeopsSPU.psxplugin */; };
-		5586CD9814AFADD9008EF4EE /* PeopsAL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 28B467F11463D0020083F129 /* PeopsAL.psxplugin */; };
+		5586CD9714AFADD9008EF4EE /* PeopsSpuSDL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DD110C356FD00365243 /* PeopsSpuSDL.psxplugin */; };
+		5586CD9814AFADD9008EF4EE /* PeopsSpuAL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 28B467F11463D0020083F129 /* PeopsSpuAL.psxplugin */; };
 		559366CA12B694DF004ACC1E /* iR3000A-64.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C112B694DF004ACC1E /* iR3000A-64.c */; };
 		559366CB12B694DF004ACC1E /* ix86-64.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C212B694DF004ACC1E /* ix86-64.c */; };
 		559366CD12B694DF004ACC1E /* ix86_cpudetect.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C512B694DF004ACC1E /* ix86_cpudetect.c */; };
@@ -209,8 +209,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				5586CD9714AFADD9008EF4EE /* PeopsSPU.psxplugin in Copy PlugIns */,
-				5586CD9814AFADD9008EF4EE /* PeopsAL.psxplugin in Copy PlugIns */,
+				5586CD9714AFADD9008EF4EE /* PeopsSpuSDL.psxplugin in Copy PlugIns */,
+				5586CD9814AFADD9008EF4EE /* PeopsSpuAL.psxplugin in Copy PlugIns */,
 				559DACBB146C68C500C5DF71 /* DFNet.psxplugin in Copy PlugIns */,
 				71D888D6130F04F100F150FF /* PeopsXGL.psxplugin in Copy PlugIns */,
 				71F2C0881200B6B000322AD9 /* DFInput.psxplugin in Copy PlugIns */,
@@ -571,8 +571,8 @@
 		71AD2DCD10C356FD00365243 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				71AD2DD110C356FD00365243 /* PeopsSPU.psxplugin */,
-				28B467F11463D0020083F129 /* PeopsAL.psxplugin */,
+				71AD2DD110C356FD00365243 /* PeopsSpuSDL.psxplugin */,
+				28B467F11463D0020083F129 /* PeopsSpuAL.psxplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -705,10 +705,9 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		28B467F11463D0020083F129 /* PeopsAL.psxplugin */ = {
+		28B467F11463D0020083F129 /* PeopsSpuAL.psxplugin */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			name = PeopsAL.psxplugin;
 			path = PeopsSpuAL.psxplugin;
 			remoteRef = 28B467F01463D0020083F129 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -720,10 +719,9 @@
 			remoteRef = 559DACAD146C647E00C5DF71 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		71AD2DD110C356FD00365243 /* PeopsSPU.psxplugin */ = {
+		71AD2DD110C356FD00365243 /* PeopsSpuSDL.psxplugin */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			name = PeopsSPU.psxplugin;
 			path = PeopsSpuSDL.psxplugin;
 			remoteRef = 71AD2DD010C356FD00365243 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;

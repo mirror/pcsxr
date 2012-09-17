@@ -9,7 +9,8 @@
 #import "SockDialog.h"
 #include "dfnet.h"
 
-void SysMessage(const char *fmt, ...) {
+void SysMessage(const char *fmt, ...)
+{
 	va_list list;
 	char msg[512];
 	//char cmd[512];
@@ -21,7 +22,7 @@ void SysMessage(const char *fmt, ...) {
 	//sprintf(cmd, "message %s\n", msg);
 	NSString *errString = [NSString stringWithUTF8String:msg];
 	fprintf(stderr, "%s", msg);
-	NSAlert *alert = [NSAlert alertWithMessageText:nil defaultButton:@"Exit" alternateButton:nil otherButton:nil informativeTextWithFormat:errString];
+	NSAlert *alert = [NSAlert alertWithMessageText:nil defaultButton:@"Exit" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@", errString];
 	[alert setAlertStyle:NSCriticalAlertStyle];
 	//NSInteger result = NSRunAlertPanel(errString, nil, @"Okay", nil, nil);
 	NSInteger result = [alert runModal];
@@ -34,7 +35,8 @@ void SysMessage(const char *fmt, ...) {
 
 static SockDialog *globalSock = nil;
 
-void sockCreateWaitDlg() {
+void sockCreateWaitDlg()
+{
 	if (globalSock == nil) {
 		globalSock = [[SockDialog alloc] init];
 	}
@@ -45,7 +47,8 @@ void sockCreateWaitDlg() {
 
 }
 
-void sockDlgUpdate() {
+void sockDlgUpdate()
+{
 	
 }
 
@@ -56,7 +59,8 @@ long sockOpen()
 	return 0;
 }
 
-void sockDestroyWaitDlg() {
+void sockDestroyWaitDlg()
+{
 	if (globalSock != nil) {
 		[globalSock close];
 		[globalSock release];
@@ -70,16 +74,17 @@ void sockDestroyWaitDlg() {
 
 }
 
-- (id)init {
+- (id)init
+{
 	if ((self = [super initWithWindowNibName:@"SockDialog"])) {
 		return self;
 	} else {
-		[self autorelease];
 		return nil;
 	}
 }
 
--(void)dealloc {
+-(void)dealloc
+{
 	
 	[super dealloc];
 }
