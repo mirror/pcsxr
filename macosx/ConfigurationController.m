@@ -15,10 +15,10 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 {
 	if (theCard == 1) {
 		[[NSUserDefaults standardUserDefaults] setObject:theFile forKey:@"Mcd1"];
-		strcpy(Config.Mcd1, [theFile fileSystemRepresentation] );
+		strlcpy(Config.Mcd1, [theFile fileSystemRepresentation], MAXPATHLEN );
 	} else {
 		[[NSUserDefaults standardUserDefaults] setObject:theFile forKey:@"Mcd2"];
-		strcpy(Config.Mcd2, [theFile fileSystemRepresentation] );
+		strlcpy(Config.Mcd2, [theFile fileSystemRepresentation], MAXPATHLEN );
 	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil];
@@ -222,6 +222,7 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[checkBoxDefaults release];
 	if (memCardEdit) {
+		[memCardEdit close];
 		[memCardEdit release];
 	}
 	[super dealloc];

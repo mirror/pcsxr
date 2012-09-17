@@ -20,8 +20,8 @@
 #import <OpenGL/glext.h>
 #import <OpenGL/glu.h>
 #import <GLUT/glut.h>
-#import <Carbon/Carbon.h>
 #import "PluginGLView.h"
+#import "SGPUPreferences.h"
 #include "externals.h"
 #undef BOOL
 #include "gpu.h"
@@ -141,7 +141,8 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	texture_range  = gluCheckExtension ((const unsigned char *)"GL_APPLE_texture_range", strExt) ? GL_TRUE : GL_FALSE;
 	texture_hint   = GL_STORAGE_SHARED_APPLE ;
 	client_storage = gluCheckExtension ((const unsigned char *)"GL_APPLE_client_storage", strExt) ? GL_TRUE : GL_FALSE;
-	rect_texture   = gluCheckExtension((const unsigned char *)"GL_EXT_texture_rectangle", strExt) ? GL_TRUE : GL_FALSE;
+	//rect_texture   = gluCheckExtension((const unsigned char *)"GL_EXT_texture_rectangle", strExt) ? GL_TRUE : GL_FALSE;
+	rect_texture = GL_FALSE;
 
 	// Setup some basic OpenGL stuff
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -149,7 +150,27 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
+	
+	// Loads the shaders
 
+	if(isShaderEnabled()){
+		// --- Params ---
+		shaderQuality = 4.0;
+		//vertexShader = LoadShader(GL_VERTEX_SHADER,"/Users/you/shader/gpuPeteOGL2.slv");
+		vertexShader = [self loadShader:GL_VERTEX_SHADER location:PSXVertexShader()];
+		//fragmentShader = LoadShader(GL_FRAGMENT_SHADER,"/Users/you/shader/gpuPeteOGL2.slf");
+		fragmentShader = [self loadShader:GL_FRAGMENT_SHADER location:PSXFragmentShader()];
+		
+		//--- shader loading ---
+		program = glCreateProgram();
+		glAttachShader(program, vertexShader);
+		glAttachShader(program, fragmentShader);
+		glLinkProgram(program);
+		glUseProgram(program);
+	}
+	 
+	
+	
 	[NSOpenGLContext clearCurrentContext];
 	[glLock unlock];
 
@@ -292,19 +313,36 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 - (void)renderScreen
 {
 	int bufferIndex = whichImage;
-
+	
 	if (1/*[glLock tryLock]*/) {
 		// Make this context current
 		[[self openGLContext] makeCurrentContext];
+		
+		// Loads the shaders
+		//shader=LoadShader(GL_VERTEX_SHADER,"/Users/alexandremathieu/vertex.c");
+		//program=glCreateProgram();
+		//glAttachShader(program, shader);
+		//glLinkProgram(program);
+		//if(program == 0){
+		//	printf("Program invalide bourdel\n");
+		//}
+		
 		if (PSXDisplay.Disabled) {
 			glClear(GL_COLOR_BUFFER_BIT);
 		} else {
 			// Bind, update and draw new image
-			if(rect_texture)
+			if(rect_texture && isShaderEnabled() == NO) // cant go in there if we use shaders
 			{
+				//printf("Texture Rectangle\n");
+				//glActiveTexture(bufferIndex+1);
+				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_RECTANGLE_EXT, bufferIndex+1);
-
+				
+				
+				
 				glTexSubImage2D(GL_TEXTURE_RECTANGLE_EXT, 0, 0, 0, image_width, image_height, GL_BGRA, image_type, image[bufferIndex]);
+				
+				
 				glBegin(GL_QUADS);
 					glTexCoord2f(0.0f, 0.0f);
 					glVertex2f(-1.0f, 1.0f);
@@ -321,9 +359,45 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 			}
 			else
 			{
+				NSRect rect = [[[self openGLContext] view] bounds];
+				//printf("Texture 2D normale de taille : %d, %d sur un ecran : %f x %f \n",image_width,image_height,rect.size.width,rect.size.height);
+				//glActiveTexture(whichImage+1);
 				glBindTexture(GL_TEXTURE_2D, whichImage+1);
 				
 				glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, image_width2, image_height2, GL_BGRA, image_type, image[bufferIndex]);
+				
+				
+				if(isShaderEnabled()){
+					glUseProgram(program);
+					
+					int loc=glGetUniformLocation(program, "OGL2Texture");
+					glUniform1i(loc,0);
+					int loc2=glGetUniformLocation(program, "OGL2Param");
+					float param[4];
+					param[2]=shaderQuality;
+					param[0]=param[2]/image_width;
+					param[1]=param[2]/image_height;
+					//param[2]=2.0;
+					param[3]=0.0;
+					int loc3=glGetUniformLocation(program, "OGL2Size");
+					float size[4];
+					//NSRect rect = [[[self openGLContext] view] bounds];
+					size[0]=image_width;
+					size[1]=image_height;
+					size[2]=rect.size.width;
+					size[3]=rect.size.height;
+					int loc4=glGetUniformLocation(program, "OGL2InvSize");
+					float invSize[4];
+					invSize[0]=1.0/size[0];
+					invSize[1]=1.0/size[1];
+					invSize[2]=1.0/size[2];
+					invSize[3]=1.0/size[3];
+					//invSize[4]=1.0/size[4]; //Did we goof here?
+					glUniform4fv(loc2,1,param);
+					glUniform4fv(loc3,1,size);
+					glUniform4fv(loc4,1,invSize);
+				}
+				
 				glBegin(GL_QUADS);
 					glTexCoord2f(0.0f, 0.0f);
 					glVertex2f(-1.0f, 1.0f);
@@ -351,8 +425,9 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 			else 
 			{
 				szDebugText[0]=0;
-
-                strncat(szDispBuf, szMenuBuf, 63 - strlen(szDispBuf));
+				if (szMenuBuf) {
+					strncat(szDispBuf, szMenuBuf, 63 - strlen(szDispBuf));
+				}
 			}
 			
 			NSRect rect = [[[self openGLContext] view] bounds];
@@ -381,6 +456,8 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 			glPopMatrix();
 		}
 	
+		//printProgramInfoLog(program);
+		//printf("\n\n\n");
 		[[self openGLContext] flushBuffer];
 		[NSOpenGLContext clearCurrentContext];
 		//[glLock unlock];
@@ -390,7 +467,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 - (void)loadTextures:(GLboolean)first
 {
 	GLint i;
-	
+	printf("Loading texture\n");
 	//[glLock lock];
 	[[self openGLContext] makeCurrentContext];
 	
@@ -464,9 +541,11 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 			}
 
 			glDisable(GL_TEXTURE_2D);
+			glActiveTexture(GL_TEXTURE0);
 			glEnable(GL_TEXTURE_RECTANGLE_EXT);
 			glBindTexture(GL_TEXTURE_RECTANGLE_EXT, i+1);
-
+			
+			
 			glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_STORAGE_HINT_APPLE , texture_hint);
 			glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE, client_storage);
 			glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -504,7 +583,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 
 			//if(texture_range) glTextureRangeAPPLE(GL_TEXTURE_2D, IMAGE_COUNT * image_width2 * image_height2 * (image_depth >> 3), image_base);
 			//else              glTextureRangeAPPLE(GL_TEXTURE_2D, 0, NULL);
-
+			
 			glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_STORAGE_HINT_APPLE , texture_hint);
 			glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE, client_storage);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -581,7 +660,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 					GLuint lu2 = *((GLuint *)pD+1);
 					GLuint lu3 = *((GLuint *)pD+2);
 					GLuint *dst = ((GLuint *)((surf)+(column*lPitch)+(row<<2)));
-#ifdef __BIG_ENDIAN__
+#ifdef __POWERPC__
 					*(dst)=
 						(((lu1>>24)&0xff)<<16)|(((lu1>>16)&0xff)<<8)|(((lu1>>8)&0xff));
 					*(dst+1)=
@@ -687,5 +766,155 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	
 	lastTime = time;
 }*/
+
+- (GLuint)loadShader:(GLenum)type location:(NSURL*)filename
+{
+    GLuint myShader = 0;
+    GLsizei logsize = 0;
+    GLint compile_status = GL_TRUE;
+    char *log = NULL;
+    char *src = NULL;
+    
+    /* creation d'un shader de sommet */
+    myShader = glCreateShader(type);
+    if(myShader == 0)
+    {
+        fprintf(stderr, "impossible de creer le shader\n");
+        return 0;
+    }
+    
+    /* chargement du code source */
+    src = [self loadSource:filename];
+    if(src == NULL)
+    {
+        /* theoriquement, la fonction LoadSource a deja affiche un message
+		 d'erreur, nous nous contenterons de supprimer notre shader
+		 et de retourner 0 */
+        
+        glDeleteShader(myShader);
+        return 0;
+    }
+    
+    /* assignation du code source */
+    glShaderSource(myShader, 1, (const GLchar**)&src, NULL);
+    
+    /* compilation du shader */
+    glCompileShader(myShader);
+    
+    /* liberation de la memoire du code source */
+    free(src);
+    src = NULL;
+    
+    /* verification du succes de la compilation */
+    glGetShaderiv(myShader, GL_COMPILE_STATUS, &compile_status);
+    if(compile_status != GL_TRUE)
+    {
+        /* erreur a la compilation recuperation du log d'erreur */
+        
+        /* on recupere la taille du message d'erreur */
+        glGetShaderiv(myShader, GL_INFO_LOG_LENGTH, &logsize);
+        
+        /* on alloue un espace memoire dans lequel OpenGL ecrira le message */
+        log = malloc(logsize + 1);
+        if(log == NULL)
+        {
+            fprintf(stderr, "impossible d'allouer de la memoire !\n");
+            return 0;
+        }
+        /* initialisation du contenu */
+        memset(log, '\0', logsize + 1);
+        
+        glGetShaderInfoLog(myShader, logsize, &logsize, log);
+        fprintf(stderr, "impossible de compiler le shader '%s' :\n%s",
+                [[filename path] UTF8String], log);
+        
+        /* ne pas oublier de liberer la memoire et notre shader */
+        free(log);
+        glDeleteShader(myShader);
+        
+        return 0;
+    }
+    
+    return myShader;
+}
+
+- (char*)loadSource:(NSURL *)filename
+{
+    /*char *src = NULL;
+    FILE *fp = NULL;    
+    long size;          
+    long i;             
+    
+    
+    // Open the file 
+    fp = fopen(filename, "r");
+    // Check if its OK
+    if(fp == NULL)
+    {
+        fprintf(stderr, "Impossible to open the file '%s'\n", filename);
+        return NULL;
+    }
+    
+    // Get the file size 
+    fseek(fp, 0, SEEK_END);
+    size = ftell(fp);
+    
+    // Go back to the beginning 
+    rewind(fp);
+    
+    // Allocate memory 
+    src = malloc(size+1); // +1 for '\0' 
+    if(src == NULL)
+    {
+        fclose(fp);
+        fprintf(stderr, "Memory allocation error!\n");
+        return NULL;
+    }
+    
+    // The the file 
+    for(i=0; i<size; i++)
+        src[i] = fgetc(fp);
+    
+    // Put the last char as '\0' 
+    src[size] = '\0';
+    
+    fclose(fp);
+    
+    return src;*/
+	//NSURL *actualFile = [filename filePathURL];
+	//Since we're passing Cocoa NSURLs, let's use Cocoa's methods
+	NSNumber *filesizeAsNS = nil;
+	long long filesize = 0;
+	[filename getResourceValue:&filesizeAsNS forKey:NSURLFileSizeKey error:nil];
+	if (filesizeAsNS == nil) {
+		return NULL;
+	}
+	filesize = [filesizeAsNS longLongValue];
+	if (filesize == 0) {
+		return NULL;
+	}
+	NSMutableData *shaderData = [NSMutableData dataWithContentsOfURL:filename];
+	[shaderData appendBytes:"\0" length:1];
+	char *shaderText = malloc(filesize + 1);
+	memcpy(shaderText, [shaderData bytes], filesize + 1);
+	return shaderText;
+}
+
+void printProgramInfoLog(GLuint obj)
+{
+	int infologLength = 0;
+	int charsWritten  = 0;
+	char *infoLog;
+	
+	glGetProgramiv(obj, GL_INFO_LOG_LENGTH, &infologLength);
+	
+	if (infologLength > 0)
+	{
+		infoLog = (char *)malloc(infologLength);
+		glGetProgramInfoLog(obj, infologLength, &charsWritten, infoLog);
+		printf("%s\n",infoLog);
+		free(infoLog);
+	}
+}
 
 @end

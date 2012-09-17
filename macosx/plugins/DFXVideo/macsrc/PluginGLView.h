@@ -29,7 +29,12 @@
 	GLubyte  *image_base;
 	GLubyte  *image[IMAGE_COUNT];
 	
+	GLboolean useShader;
+	float	  shaderQuality;
 	GLint     buffers;
+	GLuint    vertexShader;
+	GLuint    fragmentShader;
+	GLuint	  program;
 	//GLint     frame_rate;
 	
 	GLenum    texture_hint;
@@ -59,5 +64,8 @@
 - (void)swapBuffer;
 - (void)clearBuffer:(BOOL)display;
 - (void)loadTextures: (GLboolean)first;
+- (GLuint)loadShader:(GLenum)type location:(NSURL*)filename;
+- (char*)loadSource:(NSURL *)filename;
+void printProgramInfoLog(GLuint obj);
 
 @end

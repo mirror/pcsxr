@@ -410,7 +410,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 71155B110FDFA2DE00EC0BC5 /* Build configuration list for PBXProject "DFInput" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -524,6 +524,7 @@
 		71155B0D0FDFA2DE00EC0BC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -552,6 +553,7 @@
 		71155B0E0FDFA2DE00EC0BC5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -595,7 +597,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = ../../build;
 				VALID_ARCHS = "i386 x86_64";
@@ -619,7 +621,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "";
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 				SYMROOT = ../../build;
 				VALID_ARCHS = "i386 x86_64";
 			};

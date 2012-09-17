@@ -3,6 +3,7 @@
 #include "cfg.h"
 #include "menu.h"
 #include "externals.h"
+#include "SGPUPreferences.h"
 
 #ifdef ENABLE_NLS
 #include <libintl.h>
@@ -89,9 +90,32 @@ void SoftDlgProc()
 	[window makeKeyAndOrderFront:nil];
 }
 
+BOOL isShaderEnabled()
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSDictionary *keyValues = [defaults dictionaryForKey:PrefsKey];
+	return [[keyValues objectForKey:@"UseShader"] boolValue];
+}
+
+NSURL *PSXVertexShader()
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSDictionary *keyValues = [defaults dictionaryForKey:PrefsKey];
+	return [keyValues objectForKey:@"VertexShader"];
+}
+
+NSURL *PSXFragmentShader()
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSDictionary *keyValues = [defaults dictionaryForKey:PrefsKey];
+	return [keyValues objectForKey:@"FragmentShader"];
+}
+
+
 void ReadConfig(void)
 {
 	NSDictionary *keyValues;
+	NSBundle *selfBundle = [NSBundle bundleWithIdentifier:APP_ID];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 			[NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -103,6 +127,9 @@ void ReadConfig(void)
 					[NSNumber numberWithBool:NO], @"Enable Hacks",
 					[NSNumber numberWithInt:1], @"Dither Mode",
 					[NSNumber numberWithLong:0], @"Hacks",
+					[[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"] fileReferenceURL], @"VertexShader",
+					[[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"] fileReferenceURL], @"FragmentShader",
+					[NSNumber numberWithBool:NO], @"UseShader",
 					nil], PrefsKey,
 			nil]];
 	
@@ -143,7 +170,7 @@ void ReadConfig(void)
  BuildDispMenu(0);
 }
 
-@implementation PluginConfigController
+@implementation NetSfPeopsSoftGPUPluginConfigController
 
 - (IBAction)cancel:(id)sender
 {
@@ -161,20 +188,22 @@ void ReadConfig(void)
 	//[writeDic setObject:[NSNumber numberWithInt:[frameLimit intValue]] forKey:@"Frame Limit"];
 	[writeDic setObject:[NSNumber numberWithInt:[vSync intValue]] forKey:@"VSync"];
 	[writeDic setObject:[NSNumber numberWithInt:[hackEnable intValue]] forKey:@"Enable Hacks"];
+	[writeDic setObject:[NSNumber numberWithInt:[shaders intValue]] forKey:@"UseShader"];
 
 	[writeDic setObject:[NSNumber numberWithInt:[ditherMode indexOfSelectedItem]] forKey:@"Dither Mode"];
 	
 	unsigned long hackValues = 0;
-	int i;
 	NSArray *views = [hacksView subviews];
-	for (i=0; i<[views count]; i++) {
-	   NSView *control = [views objectAtIndex:i];
+	for (NSView *control in views) {
 		if ([control isKindOfClass:[NSButton class]]) {
 			hackValues |= [(NSControl *)control intValue] << ([control tag] - 1);
 		}
 	}
 	
-	[writeDic setObject:[NSNumber numberWithLong:hackValues] forKey:@"Hacks"];
+	[writeDic setObject:[NSNumber numberWithUnsignedLong:hackValues] forKey:@"Hacks"];
+
+	[writeDic setObject:[vertexPath fileReferenceURL] forKey:@"VertexShader"];
+	[writeDic setObject:[fragmentPath fileReferenceURL] forKey:@"FragmentShader"];
 	
 	// write to defaults
 	[defaults setObject:writeDic forKey:PrefsKey];
@@ -196,15 +225,47 @@ void ReadConfig(void)
 - (IBAction)hackToggle:(id)sender
 {
 	BOOL enable = [sender intValue] ? YES : NO;
-	int i;
 	NSArray *views = [hacksView subviews];
 
-	for (i=0; i<[views count]; i++) {
-	   NSView *control = [views objectAtIndex:i];
+	for (NSView *control in views) {
 		if ([control isKindOfClass:[NSButton class]]) {
 			[(NSControl *)control setEnabled:enable];
 		}
 	}
+}
+
+- (IBAction)toggleShader:(id)sender {
+	BOOL enable = [sender intValue] ? YES : NO;
+	NSArray *views = [shadersView subviews];
+	
+	for (NSView *control in views) {
+		[(NSControl *)control setEnabled:enable];
+	}
+}
+
+- (IBAction)selectShader:(id)sender {
+	NSOpenPanel *openPanel = [[NSOpenPanel openPanel] retain];
+	[openPanel setAllowsMultipleSelection:NO];
+	[openPanel setCanChooseDirectories:NO];
+	[openPanel setCanChooseFiles:YES];
+	if ([openPanel runModal] == NSFileHandlingPanelOKButton)
+	{
+		if ([sender tag] == 1) {
+			[vertexPath release];
+			vertexPath = [[openPanel URL] copy];
+			[vertexShaderViewablePath setTitleWithMnemonic:[vertexPath path]];
+
+		} else {
+			[fragmentPath release];
+			fragmentPath = [[openPanel URL] copy];
+			[fragmentShaderViewablePath setTitleWithMnemonic:[fragmentPath path]];
+
+		}
+	}
+	
+	
+	
+	[openPanel release];
 }
 
 - (void)loadValues
@@ -225,12 +286,14 @@ void ReadConfig(void)
 
 	[ditherMode selectItemAtIndex:[[keyValues objectForKey:@"Dither Mode"] intValue]];
 
+	vertexPath = [[keyValues objectForKey:@"VertexShader"] copy];
+	fragmentPath = [[keyValues objectForKey:@"FragmentShader"] copy];
+	[vertexShaderViewablePath setTitleWithMnemonic:[vertexPath path]];
+	[fragmentShaderViewablePath setTitleWithMnemonic:[fragmentPath path]];
 	unsigned long hackValues = [[keyValues objectForKey:@"Hacks"] longValue];
 	
-	int i;
 	NSArray *views = [hacksView subviews];
-	for (i=0; i<[views count]; i++) {
-	   NSView *control = [views objectAtIndex:i];
+	for (NSView *control in views) {
 		if ([control isKindOfClass:[NSButton class]]) {
 			[(NSControl *)control setIntValue:(hackValues >> ([control tag] - 1)) & 1];
 		}
@@ -241,7 +304,17 @@ void ReadConfig(void)
 
 - (void)awakeFromNib
 {
+	//I don't know why we need to do this...
 	hacksView = [[hacksView subviews] objectAtIndex:0];
+	shadersView = [[shadersView subviews] objectAtIndex:0];
+}
+
+- (void)dealloc
+{
+	[vertexPath release];
+	[fragmentPath release];
+	
+	[super dealloc];
 }
 
 @end
