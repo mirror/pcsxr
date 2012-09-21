@@ -194,7 +194,7 @@ static NSString *HandleBinCue(NSString *toHandle)
 
 - (IBAction)defrost:(id)sender
 {
-	NSString *path = [saveStatePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%s-%3.3d.pcsxrstate", CdromId, [sender tag]]];
+	NSString *path = [saveStatePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%s-%3.3ld.pcsxrstate", CdromId, (long)[sender tag]]];
 	[EmuThread defrostAt:path];
 }
 
@@ -243,7 +243,7 @@ static NSString *HandleBinCue(NSString *toHandle)
 		if (![EmuThread active] || [EmuThread isRunBios])
 			return NO;
 
-		NSString *path = [saveStatePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%s-%3.3d.pcsxrstate", CdromId, [menuItem tag]]];
+		NSString *path = [saveStatePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%s-%3.3ld.pcsxrstate", CdromId, (long)[menuItem tag]]];
 		return (CheckState((char *)[path fileSystemRepresentation]) == 0);
 	}
 
