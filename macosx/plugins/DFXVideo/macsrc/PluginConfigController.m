@@ -13,7 +13,7 @@
 //If running under Mac OS X, use the Localizable.strings file instead.
 #elif defined(_MACOSX)
 #ifdef PCSXRCORE
-extern char* Pcsxr_locale_text(char* toloc);
+extern const char* Pcsxr_locale_text(char* toloc);
 #define _(String) Pcsxr_locale_text(String)
 #define N_(String) String
 #else
@@ -26,7 +26,7 @@ extern char* Pcsxr_locale_text(char* toloc);
 #define PLUGLOC_x(x,y) x ## y
 #define PLUGLOC_y(x,y) PLUGLOC_x(x,y)
 #define PLUGLOC PLUGLOC_y(PCSXRPLUG,_locale_text)
-extern char* PLUGLOC(char* toloc);
+extern const char* PLUGLOC(char* toloc);
 #define _(String) PLUGLOC(String)
 #define N_(String) String
 #endif
@@ -111,6 +111,13 @@ NSURL *PSXFragmentShader()
 	return [keyValues objectForKey:@"FragmentShader"];
 }
 
+float PSXShaderQuality()
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSDictionary *keyValues = [defaults dictionaryForKey:PrefsKey];
+	return (float)[[keyValues objectForKey:@"ShaderQuality"] intValue];
+}
+
 
 void ReadConfig(void)
 {
@@ -126,10 +133,11 @@ void ReadConfig(void)
 					[NSNumber numberWithBool:NO], @"VSync",
 					[NSNumber numberWithBool:NO], @"Enable Hacks",
 					[NSNumber numberWithInt:1], @"Dither Mode",
-					[NSNumber numberWithLong:0], @"Hacks",
+					[NSNumber numberWithUnsignedInt:0], @"Hacks",
 					[[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"] fileReferenceURL], @"VertexShader",
 					[[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"] fileReferenceURL], @"FragmentShader",
 					[NSNumber numberWithBool:NO], @"UseShader",
+					[NSNumber numberWithInt:4], @"ShaderQuality",
 					nil], PrefsKey,
 			nil]];
 	
@@ -143,7 +151,7 @@ void ReadConfig(void)
 	iUseFixes = [[keyValues objectForKey:@"Enable Hacks"] boolValue];
 
 	iUseDither = [[keyValues objectForKey:@"Dither Mode"] intValue];
-	dwCfgFixes = [[keyValues objectForKey:@"Hacks"] longValue];
+	dwCfgFixes = [[keyValues objectForKey:@"Hacks"] unsignedIntValue];
 	
 	iResX = 640;
 	iResY = 480;
@@ -189,10 +197,10 @@ void ReadConfig(void)
 	[writeDic setObject:[NSNumber numberWithInt:[vSync intValue]] forKey:@"VSync"];
 	[writeDic setObject:[NSNumber numberWithInt:[hackEnable intValue]] forKey:@"Enable Hacks"];
 	[writeDic setObject:[NSNumber numberWithInt:[shaders intValue]] forKey:@"UseShader"];
-
+	[writeDic setObject:[NSNumber numberWithInt:[shaderQualitySelector indexOfSelectedItem]] forKey:@"ShaderQuality"];
 	[writeDic setObject:[NSNumber numberWithInt:[ditherMode indexOfSelectedItem]] forKey:@"Dither Mode"];
 	
-	unsigned long hackValues = 0;
+	unsigned int hackValues = 0;
 	NSArray *views = [hacksView subviews];
 	for (NSView *control in views) {
 		if ([control isKindOfClass:[NSButton class]]) {
@@ -254,16 +262,12 @@ void ReadConfig(void)
 			[vertexPath release];
 			vertexPath = [[openPanel URL] copy];
 			[vertexShaderViewablePath setTitleWithMnemonic:[vertexPath path]];
-
 		} else {
 			[fragmentPath release];
 			fragmentPath = [[openPanel URL] copy];
 			[fragmentShaderViewablePath setTitleWithMnemonic:[fragmentPath path]];
-
 		}
 	}
-	
-	
 	
 	[openPanel release];
 }
@@ -283,14 +287,17 @@ void ReadConfig(void)
 	[frameSkipping setIntValue:[[keyValues objectForKey:@"Frame Skipping"] intValue]];
 	[vSync setIntValue:[[keyValues objectForKey:@"VSync"] intValue]];
 	[hackEnable setIntValue:[[keyValues objectForKey:@"Enable Hacks"] intValue]];
+	[shaders setIntValue:[[keyValues objectForKey:@"UseShader"] intValue]];
 
 	[ditherMode selectItemAtIndex:[[keyValues objectForKey:@"Dither Mode"] intValue]];
-
+	[shaderQualitySelector selectItemAtIndex:[[keyValues objectForKey:@"ShaderQuality"] intValue]];
+	
 	vertexPath = [[keyValues objectForKey:@"VertexShader"] copy];
 	fragmentPath = [[keyValues objectForKey:@"FragmentShader"] copy];
 	[vertexShaderViewablePath setTitleWithMnemonic:[vertexPath path]];
 	[fragmentShaderViewablePath setTitleWithMnemonic:[fragmentPath path]];
-	unsigned long hackValues = [[keyValues objectForKey:@"Hacks"] longValue];
+	unsigned int hackValues = [[keyValues objectForKey:@"Hacks"] unsignedIntValue];
+	
 	
 	NSArray *views = [hacksView subviews];
 	for (NSView *control in views) {
@@ -300,6 +307,7 @@ void ReadConfig(void)
 	}
 	
 	[self hackToggle:hackEnable];
+	[self toggleShader:shaders];
 }
 
 - (void)awakeFromNib
@@ -319,7 +327,7 @@ void ReadConfig(void)
 
 @end
 
-char* PLUGLOC(char *toloc)
+const char* PLUGLOC(char *toloc)
 {
 	NSBundle *mainBundle = [NSBundle bundleForClass:[PluginConfigController class]];
 	NSString *origString = nil, *transString = nil;

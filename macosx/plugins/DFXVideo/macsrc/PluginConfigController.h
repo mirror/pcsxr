@@ -19,6 +19,7 @@
 	IBOutlet NSControl *vertexChooser;
 	IBOutlet NSControl *fragmentChooser;
 	IBOutlet NSView *shadersView;
+	IBOutlet NSPopUpButton *shaderQualitySelector;
 	
 	NSURL *vertexPath;
 	NSURL *fragmentPath;

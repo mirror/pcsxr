@@ -134,7 +134,7 @@ void ReadConfig()
 
 @end
 
-char* PLUGLOC(char *toloc)
+const char* PLUGLOC(char *toloc)
 {
 	NSBundle *mainBundle = [NSBundle bundleForClass:[PluginConfigController class]];
 	NSString *origString = nil, *transString = nil;

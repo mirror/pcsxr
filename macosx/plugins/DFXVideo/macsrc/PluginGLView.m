@@ -155,10 +155,8 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 
 	if(isShaderEnabled()){
 		// --- Params ---
-		shaderQuality = 4.0;
-		//vertexShader = LoadShader(GL_VERTEX_SHADER,"/Users/you/shader/gpuPeteOGL2.slv");
+		shaderQuality = PSXShaderQuality();
 		vertexShader = [self loadShader:GL_VERTEX_SHADER location:PSXVertexShader()];
-		//fragmentShader = LoadShader(GL_FRAGMENT_SHADER,"/Users/you/shader/gpuPeteOGL2.slf");
 		fragmentShader = [self loadShader:GL_FRAGMENT_SHADER location:PSXFragmentShader()];
 		
 		//--- shader loading ---
@@ -660,7 +658,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 					GLuint lu2 = *((GLuint *)pD+1);
 					GLuint lu3 = *((GLuint *)pD+2);
 					GLuint *dst = ((GLuint *)((surf)+(column*lPitch)+(row<<2)));
-#ifdef __POWERPC__
+#ifdef __BIG_ENDIAN__
 					*(dst)=
 						(((lu1>>24)&0xff)<<16)|(((lu1>>16)&0xff)<<8)|(((lu1>>8)&0xff));
 					*(dst+1)=

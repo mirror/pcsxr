@@ -20,7 +20,7 @@
 //If running under Mac OS X, use the Localizable.strings file instead.
 #elif defined(_MACOSX)
 #ifdef PCSXRCORE
-extern char* Pcsxr_locale_text(char* toloc);
+extern const char* Pcsxr_locale_text(char* toloc);
 #define _(String) Pcsxr_locale_text(String)
 #define N_(String) String
 #else
@@ -33,7 +33,7 @@ extern char* Pcsxr_locale_text(char* toloc);
 #define PLUGLOC_x(x,y) x ## y
 #define PLUGLOC_y(x,y) PLUGLOC_x(x,y)
 #define PLUGLOC PLUGLOC_y(PCSXRPLUG,_locale_text)
-extern char* PLUGLOC(char* toloc);
+extern const char* PLUGLOC(char* toloc);
 #define _(String) PLUGLOC(String)
 #define N_(String) String
 #endif
@@ -127,7 +127,7 @@ void PrepFactoryDefaultPreferences(void)
 					[NSNumber numberWithBool:NO], @"VSync",
 					[NSNumber numberWithBool:NO], @"Enable Hacks",
 					[NSNumber numberWithInt:0], @"Dither Mode",
-					[NSNumber numberWithLong:0], @"Hacks",
+					[NSNumber numberWithUnsignedInt:0], @"Hacks",
                     
                     [NSNumber numberWithBool:YES], @"Proportional Resize",
 //                    [NSSize stringWithCString: @"default"], @"Fullscreen Resolution",
@@ -187,7 +187,7 @@ void ReadConfig(void)
 	bUseFrameSkip = [[keyValues objectForKey:@"Frame Skipping"] boolValue];
 
 	bUseFixes = [[keyValues objectForKey:@"Enable Hacks"] boolValue];
-	dwCfgFixes = [[keyValues objectForKey:@"Hacks"] longValue];
+	dwCfgFixes = [[keyValues objectForKey:@"Hacks"] unsignedIntValue];
     
 
 // we always start out at 800x600 (at least until resizing the window is implemented)
@@ -291,7 +291,7 @@ void ReadConfig(void)
 
 // treat hacks specially:
 
-	unsigned long hackValues = 0;
+	unsigned int hackValues = 0;
 	NSArray *views = [hacksView subviews];
 
 	for (NSView *control in views) {
@@ -303,7 +303,7 @@ void ReadConfig(void)
 	keyValues = [NSMutableDictionary dictionaryWithDictionary: [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey]];
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
-	[writeDic setObject:[NSNumber numberWithUnsignedLong:hackValues] forKey:@"Hacks"];
+	[writeDic setObject:[NSNumber numberWithUnsignedInt:hackValues] forKey:@"Hacks"];
 	
 	// write the preferences with Hacks adjustments
 	[defaults setObject:writeDic forKey:PrefsKey];
@@ -352,7 +352,7 @@ void ReadConfig(void)
 	/* load from preferences */
 	keyValues = [NSMutableDictionary dictionaryWithDictionary: [defaults dictionaryForKey:PrefsKey]];
 
-	unsigned long hackValues = [[keyValues objectForKey:@"Hacks"] unsignedLongValue];
+	unsigned int hackValues = [[keyValues objectForKey:@"Hacks"] unsignedIntValue];
 
     // build refs to hacks checkboxes
 	NSArray *views = [hacksView subviews];
@@ -373,7 +373,7 @@ void ReadConfig(void)
 
 @end
 
-char* PLUGLOC(char *toloc)
+const char* PLUGLOC(char *toloc)
 {
 	NSBundle *mainBundle = [NSBundle bundleForClass:[PluginConfigController class]];
 	NSString *origString = nil, *transString = nil;

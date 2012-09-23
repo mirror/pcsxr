@@ -14,5 +14,6 @@
 BOOL isShaderEnabled();
 NSURL *PSXFragmentShader();
 NSURL *PSXVertexShader();
+float PSXShaderQuality();
 
 #endif

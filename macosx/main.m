@@ -171,7 +171,7 @@ void OnFile_Exit() {
     exit(0);
 }
 
-char* Pcsxr_locale_text(char* toloc){
+const char* Pcsxr_locale_text(char* toloc){
 	NSBundle *mainBundle = [NSBundle mainBundle];
 	NSString *origString = nil, *transString = nil;
 	origString = [NSString stringWithCString:toloc encoding:NSUTF8StringEncoding];
