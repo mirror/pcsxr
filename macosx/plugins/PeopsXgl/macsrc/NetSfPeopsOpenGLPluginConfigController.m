@@ -241,9 +241,9 @@ void ReadConfig(void)
     bGteAccuracy = [[keyValues objectForKey:@"GteAccuracy"] boolValue];
 	
 	if (iShowFPS)
-		ulKeybits|=KEY_SHOWFPS;
+		ulKeybits |= KEY_SHOWFPS;
 	else
-		ulKeybits&=~KEY_SHOWFPS;
+		ulKeybits &=~ KEY_SHOWFPS;
 
  // additional checks
  if(!iColDepth)       iColDepth=32;
@@ -251,7 +251,7 @@ void ReadConfig(void)
  if(iUseFixes)        dwActFixes=dwCfgFixes;
  else						 dwActFixes=0;
 #else
-    dwActFixes=0; // for now... TODO
+    dwActFixes = 0; // for now... TODO
 #endif
 
 
@@ -261,7 +261,7 @@ void ReadConfig(void)
  if(iFrameLimit==2) SetAutoFrameCap();
  bSkipNextFrame = FALSE;
  
- szDispBuf[0]=0;
+ szDispBuf[0] = 0;
  BuildDispMenu(0);
 }
 
@@ -292,10 +292,9 @@ void ReadConfig(void)
 // treat hacks specially:
 
 	unsigned long hackValues = 0;
-	int i;
 	NSArray *views = [hacksView subviews];
-	for (i=0; i<[views count]; i++) {
-	   NSView *control = [views objectAtIndex:i];
+
+	for (NSView *control in views) {
 		if ([control isKindOfClass:[NSButton class]]) {
 			hackValues |= [(NSControl *)control intValue] << ([control tag] - 1);
 		}
@@ -304,7 +303,7 @@ void ReadConfig(void)
 	keyValues = [NSMutableDictionary dictionaryWithDictionary: [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey]];
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
-	[writeDic setObject:[NSNumber numberWithLong:hackValues] forKey:@"Hacks"];
+	[writeDic setObject:[NSNumber numberWithUnsignedLong:hackValues] forKey:@"Hacks"];
 	
 	// write the preferences with Hacks adjustments
 	[defaults setObject:writeDic forKey:PrefsKey];
@@ -324,11 +323,9 @@ void ReadConfig(void)
 {
     // enable the "hacks" checkboxes 
 	BOOL enable = [sender intValue] ? YES : NO;
-	int i;
 	NSArray *views = [hacksView subviews];
 
-	for (i=0; i<[views count]; i++) {
-	   NSView *control = [views objectAtIndex:i];
+	for (NSView *control in views) {
 		if ([control isKindOfClass:[NSButton class]]) {
 			[(NSControl *)control setEnabled:enable];
 		}
@@ -355,13 +352,11 @@ void ReadConfig(void)
 	/* load from preferences */
 	keyValues = [NSMutableDictionary dictionaryWithDictionary: [defaults dictionaryForKey:PrefsKey]];
 
-	unsigned long hackValues = [[keyValues objectForKey:@"Hacks"] longValue];
+	unsigned long hackValues = [[keyValues objectForKey:@"Hacks"] unsignedLongValue];
 
     // build refs to hacks checkboxes
-	int i;
 	NSArray *views = [hacksView subviews];
-	for (i=0; i<[views count]; i++) {
-	   NSView *control = [views objectAtIndex:i];
+	for (NSView *control in views) {
 		if ([control isKindOfClass:[NSButton class]]) {
 			[(NSControl *)control setIntValue:(hackValues >> ([control tag] - 1)) & 1];
 		}
