@@ -223,13 +223,21 @@ void adjustTransferIndex()
 	unsigned int bufSize = 0;
 	
 	switch (cdr.Mode & (MODE_SIZE_2340|MODE_SIZE_2328)) {
+			//Do we need a default case in this switch?
 		case MODE_SIZE_2340: bufSize = 2340; break;
 		case MODE_SIZE_2328: bufSize = 12 + 2328; break;
 		case MODE_SIZE_2048: bufSize = 12 + 2048; break;
 	}
 	
 	if (cdr.transferIndex >= bufSize)
-		cdr.transferIndex %= bufSize;
+	{
+		if (bufSize == 0) {
+			//Make sure we don't divide by zero
+			//Do nothing
+		} else {
+			cdr.transferIndex %= bufSize;
+		}
+	}
 }
 
 void cdrDecodedBufferInterrupt()
@@ -518,7 +526,7 @@ static void ReadTrack( u8 *time ) {
 static void CDXA_Attenuation( s16 *buf, int size, int stereo, int attenuate_type )
 {
 	s16 *spsound;
-	s32 lc = 0,rc;
+	s32 lc = 0, rc = 0;
 	int i;
 
 	spsound = buf;

@@ -212,8 +212,8 @@ void cpudetectInit( void )
    s8 AMDspeedString[10];
    int cputype=0;            // Cpu type
    //AMD 64 STUFF
-   u32 x86_64_8BITBRANDID;
-   u32 x86_64_12BITBRANDID; 
+   u32 x86_64_8BITBRANDID = 0;
+   u32 x86_64_12BITBRANDID = 0;
    memset( cpuinfo.x86ID, 0, sizeof( cpuinfo.x86ID ) );
    cpuinfo.x86Family = 0;
    cpuinfo.x86Model  = 0;
