@@ -91,7 +91,6 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	
 	if (!(self = [super init]))
 	{
-		[self autorelease];
 		return nil;
 	}
 	
@@ -175,6 +174,7 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 					PcsxrPlugin *plugin = [[PcsxrPlugin alloc] initWithPath:pname];
 					if (plugin != nil) {
 						[pluginList addObject:plugin];
+						[plugin release];
 					}
 				}
 			}
@@ -202,16 +202,13 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 - (NSArray *)pluginsForType:(int)typeMask
 {
 	NSMutableArray *types = [NSMutableArray array];
-	NSUInteger i;
 	
-	for (i=0; i<[pluginList count]; i++) {
-		PcsxrPlugin *plugin = [pluginList objectAtIndex:i];
-		
+	for (PcsxrPlugin *plugin in pluginList) {
 		if ([plugin type] & typeMask) {
 			[types addObject:plugin];
 		}
 	}
-	
+		
 	return types;
 }
 
@@ -220,12 +217,11 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	if (nil == path)
 		return NO;
 	
-	NSUInteger i;
-	for (i=0; i<[pluginList count]; i++) {
-		if ([[[pluginList objectAtIndex:i] path] isEqualToString:path])
+	for (PcsxrPlugin *plugin in pluginList) {
+		if ([[plugin path] isEqualToString:path])
 			return YES;
 	}
-	
+		
 	return NO;
 }
 

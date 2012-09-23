@@ -127,10 +127,9 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 
 	if ([sender pullsDown]) {
 		NSArray *items = [sender itemArray];
-		NSUInteger i;
-		
-		for (i = 0; i < [items count]; i++)
-			[[items objectAtIndex:i] setState:NSOffState];
+		for (id object in items) {
+			[object setState:NSOffState];
+		}
 		
 		[[sender selectedItem] setState:NSOnState];
 	}

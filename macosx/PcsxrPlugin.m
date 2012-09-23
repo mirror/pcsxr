@@ -30,14 +30,17 @@
 {
     //return @"Plugin" [PcsxrPlugin prefixForType:aType];
     switch (aType) {
-        case PSE_LT_GPU: return @"PluginGPU";
-        case PSE_LT_CDR: return @"PluginCDR";
-        case PSE_LT_SPU: return @"PluginSPU";
-        case PSE_LT_PAD: return @"PluginPAD";
-        case PSE_LT_NET: return @"PluginNET";
+        case PSE_LT_GPU:
+        case PSE_LT_CDR:
+        case PSE_LT_SPU:
+        case PSE_LT_PAD:
+        case PSE_LT_NET:
+            [NSString stringWithFormat:@"Plugin%@", [PcsxrPlugin prefixForType:aType]];
+            break;
+        default:
+            return @"";
+            break;
     }
-    
-    return @"";
 }
 
 + (char **)configEntriesForType:(int)aType
@@ -61,33 +64,37 @@
 
 + (NSArray *)pluginsPaths
 {
-    NSURL *supportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
-    NSURL *libraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
-    NSURL *localSupportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:YES error:NULL];
-    NSURL *localLibraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:YES error:NULL];
+    static NSArray *returnArray = nil;
+    if (returnArray == nil)
+    {
+        NSURL *supportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+        NSURL *libraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+        NSURL *localSupportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:YES error:NULL];
+        NSURL *localLibraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:YES error:NULL];
     
-    NSMutableArray *mutArray = [NSMutableArray arrayWithCapacity:5];
+        NSMutableArray *mutArray = [NSMutableArray arrayWithCapacity:5];
     
-    [mutArray addObject:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)]];
-    NSURL *url = [localLibraryURL URLByAppendingPathComponent:@"Playstation Emulator Plugins"];
-    if ([url checkResourceIsReachableAndReturnError:NULL])
-        [mutArray addObject:[url path]];
-    url = [localSupportURL URLByAppendingPathComponent:@"Pcsxr/PlugIns"];
-    if ([url checkResourceIsReachableAndReturnError:NULL])
-        [mutArray addObject:[url path]];
-    url = [libraryURL URLByAppendingPathComponent:@"Playstation Emulator Plugins"];
-    if ([url checkResourceIsReachableAndReturnError:NULL])
-        [mutArray addObject:[url path]];
-    url = [supportURL URLByAppendingPathComponent:@"Pcsxr/PlugIns"];
-    if ([url checkResourceIsReachableAndReturnError:NULL])
-        [mutArray addObject:[url path]];
-    return [NSArray arrayWithArray:mutArray];
+        [mutArray addObject:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)]];
+        NSURL *url = [localLibraryURL URLByAppendingPathComponent:@"Playstation Emulator Plugins"];
+        if ([url checkResourceIsReachableAndReturnError:NULL])
+            [mutArray addObject:[url path]];
+        url = [[localSupportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"PlugIns"];
+        if ([url checkResourceIsReachableAndReturnError:NULL])
+            [mutArray addObject:[url path]];
+        url = [libraryURL URLByAppendingPathComponent:@"Playstation Emulator Plugins"];
+        if ([url checkResourceIsReachableAndReturnError:NULL])
+            [mutArray addObject:[url path]];
+        url = [[supportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"PlugIns"];
+        if ([url checkResourceIsReachableAndReturnError:NULL])
+            [mutArray addObject:[url path]];
+        returnArray = [[NSArray alloc] initWithArray:mutArray];
+    }
+    return returnArray;
 }
 
 - (id)initWithPath:(NSString *)aPath 
 {
     if (!(self = [super init])) {
-        [self autorelease];
         return nil;
     }
     
@@ -122,7 +129,7 @@
     }
 	
     if (goodPath == nil) {
-        [self autorelease];
+        [self release];
         return nil;
     }
 	
@@ -203,11 +210,11 @@
 
 - (void)runCommand:(id)arg
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    NSAutoreleasePool *pool = [NSAutoreleasePool new];
     NSString *funcName = [arg objectAtIndex:0];
     long (*func)(void);
     
-    func = SysLoadSym(pluginRef, [funcName cStringUsingEncoding:NSUTF8StringEncoding]);
+    func = SysLoadSym(pluginRef, [funcName cStringUsingEncoding:NSASCIIStringEncoding]);
     if (SysLibError() == nil) {
         func();
     } else {
@@ -230,7 +237,7 @@
         return 0;
     }
 
-    sprintf(symbol, "%sinit", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
+    sprintf(symbol, "%sinit", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSASCIIStringEncoding]);
     init = initArg = SysLoadSym(pluginRef, symbol);
     if (SysLibError() == nil) {
         if (aType != PSE_LT_PAD)
@@ -255,7 +262,7 @@
     char symbol[255];
     long (*shutdown)(void);
 
-    sprintf(symbol, "%sshutdown", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
+    sprintf(symbol, "%sshutdown", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSASCIIStringEncoding]);
     shutdown = SysLoadSym(pluginRef, symbol);
     if (SysLibError() == nil) {
         active &= ~aType;
@@ -269,7 +276,7 @@
 {
     char symbol[255];
 
-    sprintf(symbol, "%sabout", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
+    sprintf(symbol, "%sabout", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSASCIIStringEncoding]);
     SysLoadSym(pluginRef, symbol);
     
     return (SysLibError() == nil);
@@ -279,7 +286,7 @@
 {
     char symbol[255];
 
-    sprintf(symbol, "%sconfigure", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
+    sprintf(symbol, "%sconfigure", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSASCIIStringEncoding]);
     SysLoadSym(pluginRef, symbol);
     
     return (SysLibError() == nil);
@@ -290,13 +297,14 @@
     NSArray *arg;
     char symbol[255];
 
-    sprintf(symbol, "%sabout", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
-    arg = [[NSArray alloc] initWithObjects:[NSString stringWithCString:symbol encoding:NSUTF8StringEncoding], 
+    sprintf(symbol, "%sabout", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSASCIIStringEncoding]);
+    arg = [[NSArray alloc] initWithObjects:[NSString stringWithCString:symbol encoding:NSASCIIStringEncoding], 
                     [NSNumber numberWithInt:0], nil];
     
     // detach a new thread
     [NSThread detachNewThreadSelector:@selector(runCommand:) toTarget:self 
             withObject:arg];
+    //NOTE: the runCommand releases the arg command. Probably not the best way to do it...
 }
 
 - (void)configureAs:(int)aType
@@ -304,13 +312,14 @@
     NSArray *arg;
     char symbol[255];
     
-    sprintf(symbol, "%sconfigure", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSUTF8StringEncoding]);
-    arg = [[NSArray alloc] initWithObjects:[NSString stringWithCString:symbol encoding:NSUTF8StringEncoding], 
+    sprintf(symbol, "%sconfigure", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSASCIIStringEncoding]);
+    arg = [[NSArray alloc] initWithObjects:[NSString stringWithCString:symbol encoding:NSASCIIStringEncoding], 
                     [NSNumber numberWithInt:1], nil];
     
     // detach a new thread
     [NSThread detachNewThreadSelector:@selector(runCommand:) toTarget:self 
             withObject:arg];
+    //NOTE: the runCommand releases the arg command. Probably not the best way to do it...
 }
 
 - (NSString *)displayVersion

@@ -20,7 +20,7 @@
 - (IBAction)selectPlugin:(id)sender
 {
 	if (sender==pluginMenu) {
-		int index = [pluginMenu indexOfSelectedItem];
+		NSInteger index = [pluginMenu indexOfSelectedItem];
 		if (index != -1) {
 			PcsxrPlugin *plugin = [plugins objectAtIndex:index];
 

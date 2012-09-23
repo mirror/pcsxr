@@ -16,14 +16,41 @@ NSDictionary *prefByteKeys;
 NSMutableArray *biosList;
 NSString *saveStatePath;
 
+static NSString *GetBin(NSString *toHandle)
+{
+    NSString *extension = [toHandle pathExtension];
+    BOOL getBin = NO;
+    if ([extension caseInsensitiveCompare:@"cue"] == NSOrderedSame)
+        getBin = YES;
+    if ([extension caseInsensitiveCompare:@"toc"] == NSOrderedSame)
+        getBin = YES;
+
+	if (getBin == YES)
+	{
+		NSString *returnPath = nil;
+		NSString *rawPath = [toHandle stringByDeletingPathExtension];
+		returnPath = [rawPath stringByAppendingPathExtension:@"bin"];
+		if(![[NSFileManager defaultManager] fileExistsAtPath:returnPath])
+		{
+			//TODO: handle case-sensitive filesystems better
+			returnPath = [rawPath stringByAppendingPathExtension:@"BIN"];
+		}
+		return returnPath;
+	} else {
+		return toHandle;
+	}
+
+}
+
 static NSString *HandleBinCue(NSString *toHandle)
 {
 	NSURL *tempURL = [[NSURL alloc] initFileURLWithPath:toHandle];
+	BOOL gotBin = NO;
 	NSString *extension = [tempURL pathExtension];
 	NSString *newName = toHandle;
+	NSURL *temp1 = [tempURL URLByDeletingLastPathComponent];
+	NSURL *temp2 = nil;
 	if ([extension caseInsensitiveCompare:@"cue"] == NSOrderedSame) {
-		NSURL *temp1 = [tempURL URLByDeletingLastPathComponent];
-		NSURL *temp2 = nil;
 		//Get the bin file name from the cue.
 		NSString *cueFile = [NSString stringWithContentsOfURL:tempURL encoding:NSUTF8StringEncoding error:nil];
 		if (!cueFile) {
@@ -49,19 +76,16 @@ static NSString *HandleBinCue(NSString *toHandle)
 		if (![[NSFileManager defaultManager] fileExistsAtPath:[temp2 path]])
 			goto badCue;
 
-		goto goodCue;
+		gotBin = YES;
 		
 	badCue:
-		//Fallback if the cue couldn't be loaded
-		temp1 = [tempURL URLByDeletingPathExtension];
-		//TODO: handle case-sensitive filesystems better
-		temp2 = [temp1 URLByAppendingPathExtension:@"bin"];
-		if (![[NSFileManager defaultManager] fileExistsAtPath:[temp2 path]]) {
-			temp2 = [temp1 URLByAppendingPathExtension:@"BIN"];
-		}
-		
-	goodCue:
+		;
+	}
+	if (gotBin == YES)
+	{
 		newName = [temp2 path];
+	} else {
+		newName = GetBin(toHandle);
 	}
 	[tempURL release];
 	return newName;
@@ -186,8 +210,8 @@ static NSString *HandleBinCue(NSString *toHandle)
 
 - (IBAction)freeze:(id)sender
 {
-	int num = [sender tag];
-    NSString *path = [saveStatePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%s-%3.3d.pcsxrstate", CdromId, num]];
+	NSInteger num = [sender tag];
+    NSString *path = [saveStatePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%s-%3.3ld.pcsxrstate", CdromId, (long)num]];
 
 	[EmuThread freezeAt:path which:num-1];
 }
@@ -508,7 +532,7 @@ static NSString *HandleBinCue(NSString *toHandle)
 	NSError *err = nil;
 	NSString *utiFile = [[NSWorkspace sharedWorkspace] typeOfFile:filename error:&err];
 	if (err) {
-		NSRunAlertPanel(NSLocalizedString(@"Error opening file",nil), [NSString stringWithFormat:NSLocalizedString(@"Unable to open %@: %@", nil), [filename lastPathComponent], [err localizedFailureReason]], nil, nil, nil);
+		NSRunAlertPanel(NSLocalizedString(@"Error opening file", nil), [NSString stringWithFormat:NSLocalizedString(@"Unable to open %@: %@", nil), [filename lastPathComponent], [err localizedFailureReason]], nil, nil, nil);
 		return NO;
 	}
 	static NSArray *handlers = nil;
