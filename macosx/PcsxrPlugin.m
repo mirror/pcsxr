@@ -35,7 +35,7 @@
         case PSE_LT_SPU:
         case PSE_LT_PAD:
         case PSE_LT_NET:
-            [NSString stringWithFormat:@"Plugin%@", [PcsxrPlugin prefixForType:aType]];
+            return [NSString stringWithFormat:@"Plugin%@", [PcsxrPlugin prefixForType:aType]];
             break;
         default:
             return @"";
