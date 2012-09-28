@@ -13,12 +13,12 @@
     void *pluginRef;
     
     NSString *path;
-	 NSDate *modDate;
+	NSDate *modDate;
     NSString *name;
 	NSString *fullPlugPath;
     long version;
     int type;
-	 int active;
+	int active;
 }
 
 + (NSString *)prefixForType:(int)type;
