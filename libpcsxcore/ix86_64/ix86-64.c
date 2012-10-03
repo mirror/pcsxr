@@ -230,8 +230,8 @@ void x86SetJ8( u8* j8 )
 	u32 jump = ( x86Ptr - (s8*)j8 ) - 1;
 
 	if ( jump > 0x7f ) {
-		assert(0);
 		SysPrintf( "j8 greater than 0x7f!!\n" );
+		//assert(0);
 	}
 	*j8 = (u8)jump;
 }
@@ -241,8 +241,8 @@ void x86SetJ8A( u8* j8 )
 	u32 jump = ( x86Ptr - (s8*)j8 ) - 1;
 
 	if ( jump > 0x7f ) {
-		assert(0);
 		SysPrintf( "j8 greater than 0x7f!!\n" );
+		//assert(0);
 	}
 
 	if( ((uptr)x86Ptr&0xf) > 4 ) {
@@ -263,8 +263,8 @@ void x86SetJ16( u16 *j16 )
 	u32 jump = ( x86Ptr - (s8*)j16 ) - 2;
 
 	if ( jump > 0x7fff ) {
-		assert(0);
 		SysPrintf( "j16 greater than 0x7fff!!\n" );
+		//assert(0);
 	}
 	*j16 = (u16)jump;
 }
