@@ -170,8 +170,11 @@ void ReadConfig(void)
 	
 	// additional checks
 	if(!iColDepth)       iColDepth=32;
-	if(iUseFixes){        dwActFixes=dwCfgFixes;
-	else						 dwActFixes=0;
+	if(iUseFixes) {
+		dwActFixes=dwCfgFixes;
+	} else {
+		dwActFixes=0;
+	}
 	SetFixes();
 	
 	if(iFrameLimit==2) SetAutoFrameCap();
