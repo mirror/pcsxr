@@ -101,14 +101,17 @@ NSURL *PSXVertexShader()
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *keyValues = [defaults dictionaryForKey:PrefsKey];
-	return [keyValues objectForKey:@"VertexShader"];
+	NSURL *returnURL = [NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"VertexShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil];
+	return returnURL;
 }
 
 NSURL *PSXFragmentShader()
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *keyValues = [defaults dictionaryForKey:PrefsKey];
-	return [keyValues objectForKey:@"FragmentShader"];
+	NSURL *returnURL = [NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"FragmentShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil];
+	return returnURL;
+
 }
 
 float PSXShaderQuality()
@@ -125,21 +128,21 @@ void ReadConfig(void)
 	NSBundle *selfBundle = [NSBundle bundleWithIdentifier:APP_ID];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-			[NSMutableDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithBool:NO], @"FPS Counter",
-					[NSNumber numberWithBool:NO], @"Auto Full Screen",
-					[NSNumber numberWithBool:NO], @"Frame Skipping",
-					[NSNumber numberWithBool:YES], @"Frame Limit",
-					[NSNumber numberWithBool:NO], @"VSync",
-					[NSNumber numberWithBool:NO], @"Enable Hacks",
-					[NSNumber numberWithInt:1], @"Dither Mode",
-					[NSNumber numberWithUnsignedInt:0], @"Hacks",
-					[[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"] fileReferenceURL], @"VertexShader",
-					[[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"] fileReferenceURL], @"FragmentShader",
-					[NSNumber numberWithBool:NO], @"UseShader",
-					[NSNumber numberWithInt:4], @"ShaderQuality",
-					nil], PrefsKey,
-			nil]];
+								[NSMutableDictionary dictionaryWithObjectsAndKeys:
+								 [NSNumber numberWithBool:NO], @"FPS Counter",
+								 [NSNumber numberWithBool:NO], @"Auto Full Screen",
+								 [NSNumber numberWithBool:NO], @"Frame Skipping",
+								 [NSNumber numberWithBool:YES], @"Frame Limit",
+								 [NSNumber numberWithBool:NO], @"VSync",
+								 [NSNumber numberWithBool:NO], @"Enable Hacks",
+								 [NSNumber numberWithInt:1], @"Dither Mode",
+								 [NSNumber numberWithUnsignedInt:0], @"Hacks",
+								 [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"] bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil], @"VertexShader",
+								 [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"] bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil], @"FragmentShader",
+								 [NSNumber numberWithBool:NO], @"UseShader",
+								 [NSNumber numberWithInt:4], @"ShaderQuality",
+								 nil], PrefsKey,
+								nil]];
 	
 	keyValues = [defaults dictionaryForKey:PrefsKey];
 
@@ -164,18 +167,18 @@ void ReadConfig(void)
 		ulKeybits|=KEY_SHOWFPS;
 	else
 		ulKeybits&=~KEY_SHOWFPS;
-
- // additional checks
- if(!iColDepth)       iColDepth=32;
- if(iUseFixes)        dwActFixes=dwCfgFixes;
- else						 dwActFixes=0;
- SetFixes();
- 
- if(iFrameLimit==2) SetAutoFrameCap();
- bSkipNextFrame = FALSE;
- 
- szDispBuf[0]=0;
- BuildDispMenu(0);
+	
+	// additional checks
+	if(!iColDepth)       iColDepth=32;
+	if(iUseFixes){        dwActFixes=dwCfgFixes;
+	else						 dwActFixes=0;
+	SetFixes();
+	
+	if(iFrameLimit==2) SetAutoFrameCap();
+	bSkipNextFrame = FALSE;
+	
+	szDispBuf[0]=0;
+	BuildDispMenu(0);
 }
 
 @implementation NetSfPeopsSoftGPUPluginConfigController
@@ -208,10 +211,10 @@ void ReadConfig(void)
 		}
 	}
 	
-	[writeDic setObject:[NSNumber numberWithUnsignedLong:hackValues] forKey:@"Hacks"];
+	[writeDic setObject:[NSNumber numberWithUnsignedInt:hackValues] forKey:@"Hacks"];
 
-	[writeDic setObject:[vertexPath fileReferenceURL] forKey:@"VertexShader"];
-	[writeDic setObject:[fragmentPath fileReferenceURL] forKey:@"FragmentShader"];
+	[writeDic setObject:[vertexPath bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil] forKey:@"VertexShader"];
+	[writeDic setObject:[fragmentPath bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil] forKey:@"FragmentShader"];
 	
 	// write to defaults
 	[defaults setObject:writeDic forKey:PrefsKey];
@@ -292,8 +295,8 @@ void ReadConfig(void)
 	[ditherMode selectItemAtIndex:[[keyValues objectForKey:@"Dither Mode"] intValue]];
 	[shaderQualitySelector selectItemAtIndex:[[keyValues objectForKey:@"ShaderQuality"] intValue]];
 	
-	vertexPath = [[keyValues objectForKey:@"VertexShader"] copy];
-	fragmentPath = [[keyValues objectForKey:@"FragmentShader"] copy];
+	vertexPath = [[NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"VertexShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil] retain];
+	fragmentPath = [[NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"FragmentShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil] retain];
 	[vertexShaderViewablePath setTitleWithMnemonic:[vertexPath path]];
 	[fragmentShaderViewablePath setTitleWithMnemonic:[fragmentPath path]];
 	unsigned int hackValues = [[keyValues objectForKey:@"Hacks"] unsignedIntValue];
