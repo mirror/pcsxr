@@ -24,7 +24,7 @@
 	NSURL *vertexPath;
 	NSURL *fragmentPath;
 	 
-	 NSMutableDictionary *keyValues;
+	NSMutableDictionary *keyValues;
 }
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;
