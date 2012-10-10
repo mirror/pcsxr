@@ -9,7 +9,7 @@
 #define CONFIG_H
 
 #ifndef MAXPATHLEN
-//match PAX_MAX in <sys/param.h>
+//match PATH_MAX in <sys/param.h>
 #define MAXPATHLEN 1024
 #endif
 

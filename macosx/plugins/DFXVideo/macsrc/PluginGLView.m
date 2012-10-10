@@ -237,18 +237,18 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 {
 	// Check if an update has occured to the buffer
 	if ([self lockFocusIfCanDraw]) {
-
-	// Make this context current
-	if (drawBG) {
-		[[NSColor blackColor] setFill];
-		[NSBezierPath fillRect:[self visibleRect]];
-	}
-
-	//glFinish() ;
-	// Swap buffer to screen
-	//[[self openGLContext] flushBuffer];
-
-	[self unlockFocus];
+		
+		// Make this context current
+		if (drawBG) {
+			[[NSColor blackColor] setFill];
+			[NSBezierPath fillRect:[self visibleRect]];
+		}
+		
+		//glFinish() ;
+		// Swap buffer to screen
+		//[[self openGLContext] flushBuffer];
+		
+		[self unlockFocus];
 	}
 }
 

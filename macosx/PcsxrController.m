@@ -452,43 +452,48 @@ static NSString *HandleBinCue(NSString *toHandle)
     NSURL *supportURL = [manager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
     
     if(supportURL != nil) {
+		NSURL *PcsxrAppSupport;
+		NSURL *MemCardPath;
 		NSURL *url;
 		BOOL dir;
+		
+		PcsxrAppSupport = [supportURL URLByAppendingPathComponent:@"Pcsxr"];
 
 		// create them if needed
-        url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Bios"];
+        url = [PcsxrAppSupport URLByAppendingPathComponent:@"Bios"];
 		if (![url checkResourceIsReachableAndReturnError:NULL])
 			[manager createDirectoryAtPath:[url path] withIntermediateDirectories:YES attributes:nil error:NULL];
 
-        url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Memory Cards"];
+        MemCardPath = [PcsxrAppSupport URLByAppendingPathComponent:@"Memory Cards"];
+		url = MemCardPath;
 		if (![url checkResourceIsReachableAndReturnError:NULL])
             [manager createDirectoryAtPath:[url path] withIntermediateDirectories:YES attributes:nil error:NULL];
 
-        url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Patches"];
+        url = [PcsxrAppSupport URLByAppendingPathComponent:@"Patches"];
 		if (![url checkResourceIsReachableAndReturnError:NULL])
             [manager createDirectoryAtPath:[url path] withIntermediateDirectories:YES attributes:nil error:NULL];
 		
-		url = [supportURL URLByAppendingPathComponent:@"Pcsxr/PlugIns"];
+		url = [PcsxrAppSupport URLByAppendingPathComponent:@"PlugIns"];
 		if (![url checkResourceIsReachableAndReturnError:NULL])
             [manager createDirectoryAtPath:[url path] withIntermediateDirectories:YES attributes:nil error:NULL];
         
-        saveStatePath = [[[supportURL URLByAppendingPathComponent:@"Pcsxr/Save States"] path] copy];
+        saveStatePath = [[[PcsxrAppSupport URLByAppendingPathComponent:@"Save States"] path] copy];
 		if (![manager fileExistsAtPath:saveStatePath isDirectory:&dir])
 			[manager createDirectoryAtPath:saveStatePath withIntermediateDirectories:YES attributes:nil error:NULL];
 
-        url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Memory Cards/Mcd001.mcr"];
+        url = [MemCardPath URLByAppendingPathComponent:@"Mcd001.mcr"];
 		str = [[url path] fileSystemRepresentation];
 		if (str != nil) strncpy(Config.Mcd1, str, MAXPATHLEN);
 
-		url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Memory Cards/Mcd002.mcr"];
+		url = [MemCardPath URLByAppendingPathComponent:@"Mcd002.mcr"];
 		str = [[url path] fileSystemRepresentation];
 		if (str != nil) strncpy(Config.Mcd2, str, MAXPATHLEN);
 
-		url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Bios"];
+		url = [PcsxrAppSupport URLByAppendingPathComponent:@"Bios"];
 		str = [[url path] fileSystemRepresentation];
 		if (str != nil) strncpy(Config.BiosDir, str, MAXPATHLEN);
 
-		url = [supportURL URLByAppendingPathComponent:@"Pcsxr/Patches"];
+		url = [PcsxrAppSupport URLByAppendingPathComponent:@"Patches"];
 		str = [[url path] fileSystemRepresentation];
 		if (str != nil) strncpy(Config.PatchesDir, str, MAXPATHLEN);
 	} else {

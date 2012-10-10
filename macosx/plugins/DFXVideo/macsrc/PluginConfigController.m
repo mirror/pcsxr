@@ -101,17 +101,14 @@ NSURL *PSXVertexShader()
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *keyValues = [defaults dictionaryForKey:PrefsKey];
-	NSURL *returnURL = [NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"VertexShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil];
-	return returnURL;
+	return [NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"VertexShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil];
 }
 
 NSURL *PSXFragmentShader()
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *keyValues = [defaults dictionaryForKey:PrefsKey];
-	NSURL *returnURL = [NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"FragmentShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil];
-	return returnURL;
-
+	return [NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"FragmentShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil];
 }
 
 float PSXShaderQuality()
@@ -120,7 +117,6 @@ float PSXShaderQuality()
 	NSDictionary *keyValues = [defaults dictionaryForKey:PrefsKey];
 	return (float)[[keyValues objectForKey:@"ShaderQuality"] intValue];
 }
-
 
 void ReadConfig(void)
 {
@@ -164,23 +160,23 @@ void ReadConfig(void)
 	iFrameLimit = 2;
 	
 	if (iShowFPS)
-		ulKeybits|=KEY_SHOWFPS;
+		ulKeybits |= KEY_SHOWFPS;
 	else
-		ulKeybits&=~KEY_SHOWFPS;
+		ulKeybits &= ~KEY_SHOWFPS;
 	
 	// additional checks
-	if(!iColDepth)       iColDepth=32;
+	if(!iColDepth)       iColDepth = 32;
 	if(iUseFixes) {
-		dwActFixes=dwCfgFixes;
+		dwActFixes = dwCfgFixes;
 	} else {
-		dwActFixes=0;
+		dwActFixes = 0;
 	}
 	SetFixes();
 	
-	if(iFrameLimit==2) SetAutoFrameCap();
+	if(iFrameLimit == 2) SetAutoFrameCap();
 	bSkipNextFrame = FALSE;
 	
-	szDispBuf[0]=0;
+	szDispBuf[0] = 0;
 	BuildDispMenu(0);
 }
 
@@ -327,6 +323,7 @@ void ReadConfig(void)
 {
 	[vertexPath release];
 	[fragmentPath release];
+	[keyValues release];
 	
 	[super dealloc];
 }
