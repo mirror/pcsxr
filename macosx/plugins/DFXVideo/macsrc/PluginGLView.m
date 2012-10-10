@@ -881,6 +881,9 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
     return src;*/
 	//NSURL *actualFile = [filename filePathURL];
 	//Since we're passing Cocoa NSURLs, let's use Cocoa's methods
+	if (filename == nil) {
+		return NULL;
+	}
 	NSNumber *filesizeAsNS = nil;
 	long long filesize = 0;
 	[filename getResourceValue:&filesizeAsNS forKey:NSURLFileSizeKey error:nil];

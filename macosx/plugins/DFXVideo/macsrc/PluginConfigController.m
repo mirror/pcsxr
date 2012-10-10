@@ -284,6 +284,26 @@ void ReadConfig(void)
 	[keyValues release];
 	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 	
+	{
+		BOOL resetPrefs = NO;
+		vertexPath = [NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"VertexShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil];
+		if (vertexPath) {
+			[vertexPath retain];
+		} else {
+			resetPrefs = YES;
+		}
+		fragmentPath = [NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"FragmentShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil];
+		if (fragmentPath) {
+			[fragmentPath retain];
+		} else {
+			resetPrefs = YES;
+		}
+		if (resetPrefs) {
+			NSBundle *selfBundle = [NSBundle bundleWithIdentifier:APP_ID];
+			vertexPath = [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"] retain];
+			fragmentPath = [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"] retain];
+		}
+	}
 	[fpsCounter setIntValue:[[keyValues objectForKey:@"FPS Counter"] intValue]];
 	[autoFullScreen setIntValue:[[keyValues objectForKey:@"Auto Full Screen"] intValue]];
 	[frameSkipping setIntValue:[[keyValues objectForKey:@"Frame Skipping"] intValue]];
@@ -294,8 +314,6 @@ void ReadConfig(void)
 	[ditherMode selectItemAtIndex:[[keyValues objectForKey:@"Dither Mode"] intValue]];
 	[shaderQualitySelector selectItemAtIndex:[[keyValues objectForKey:@"ShaderQuality"] intValue]];
 	
-	vertexPath = [[NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"VertexShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil] retain];
-	fragmentPath = [[NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"FragmentShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil] retain];
 	[vertexShaderViewablePath setTitleWithMnemonic:[vertexPath path]];
 	[fragmentShaderViewablePath setTitleWithMnemonic:[fragmentPath path]];
 	unsigned int hackValues = [[keyValues objectForKey:@"Hacks"] unsignedIntValue];
