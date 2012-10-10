@@ -456,6 +456,12 @@ unsigned char PADpoll(unsigned char value) {
 		}
 	}
 
+	//makes it so that the following switch doesn't try to dereference a null pointer
+	//quiets a warning in the Clang static analyzer.
+	if (buf == NULL) {
+		return 0;
+	}
+	
 	switch (CurCmd) {
 		case CMD_READ_DATA_AND_VIBRATE:
 			if (g.cfg.PadDef[CurPad].Type == PSE_PAD_TYPE_ANALOGPAD) {

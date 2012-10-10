@@ -300,6 +300,8 @@ void ReadConfig(void)
 		}
 		if (resetPrefs) {
 			NSBundle *selfBundle = [NSBundle bundleWithIdentifier:APP_ID];
+			[vertexPath release];
+			[fragmentPath release];
 			vertexPath = [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"] retain];
 			fragmentPath = [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"] retain];
 		}

@@ -15,7 +15,6 @@
 		2B143D08078A2CBD00AF745A /* pcsxrmemcard.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2B143D03078A2CBD00AF745A /* pcsxrmemcard.icns */; };
 		2B143D09078A2CBD00AF745A /* psxbios.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2B143D04078A2CBD00AF745A /* psxbios.icns */; };
 		2B143D0A078A2CBD00AF745A /* psxplugin.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2B143D05078A2CBD00AF745A /* psxplugin.icns */; };
-		2B400D910789F58A00BA271E /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B02C04304E145D000880C5B /* Carbon.framework */; };
 		2B4DE99205FF9307003EFEF0 /* PluginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4DE98E05FF9307003EFEF0 /* PluginController.m */; };
 		2BB3D6A405427FE200831ACB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2BA178B20514CE260026D74D /* InfoPlist.strings */; };
 		2BB3D6A705427FE200831ACB /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2BBB1786051E0D9700B84448 /* Credits.rtf */; };
@@ -27,7 +26,6 @@
 		2BB3D6C305427FE200831ACB /* Plugin.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BBB17DA051E4D0F00B84448 /* Plugin.c */; };
 		2BB3D6C405427FE200831ACB /* PcsxrPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA44361052DB2EA00E21DDD /* PcsxrPlugin.m */; };
 		2BB3D6C605427FE200831ACB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC4786204C7FD3600CAB520 /* Cocoa.framework */; };
-		2BB3D6C705427FE200831ACB /* System.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6E8AAE04C832040017A3B1 /* System.framework */; };
 		2BB3D6C805427FE200831ACB /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6E8AB404C8327C0017A3B1 /* IOKit.framework */; };
 		5586CD9714AFADD9008EF4EE /* PeopsSpuSDL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DD110C356FD00365243 /* PeopsSpuSDL.psxplugin */; };
 		5586CD9814AFADD9008EF4EE /* PeopsSpuAL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 28B467F11463D0020083F129 /* PeopsSpuAL.psxplugin */; };
@@ -226,7 +224,6 @@
 		28F0C3C5146521A700A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Configuration.xib; sourceTree = "<group>"; };
 		28F0C3C8146521B000A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = PCSXR.xib; sourceTree = "<group>"; };
 		28F0C3CB146521B700A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = AddPluginSheet.xib; sourceTree = "<group>"; };
-		2B02C04304E145D000880C5B /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		2B143D01078A2CBD00AF745A /* PCSXR.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PCSXR.icns; sourceTree = "<group>"; };
 		2B143D02078A2CBD00AF745A /* pcsxrfreeze.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = pcsxrfreeze.icns; sourceTree = "<group>"; };
 		2B143D03078A2CBD00AF745A /* pcsxrmemcard.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = pcsxrmemcard.icns; sourceTree = "<group>"; };
@@ -236,7 +233,6 @@
 		2B4DE98D05FF9307003EFEF0 /* PluginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginController.h; sourceTree = "<group>"; };
 		2B4DE98E05FF9307003EFEF0 /* PluginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginController.m; sourceTree = "<group>"; };
 		2B690C760635C65C00CDA575 /* ExceptionHandling.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExceptionHandling.framework; path = /System/Library/Frameworks/ExceptionHandling.framework; sourceTree = "<absolute>"; };
-		2B6E8AAE04C832040017A3B1 /* System.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = System.framework; path = /System/Library/Frameworks/System.framework; sourceTree = "<absolute>"; };
 		2B6E8AB404C8327C0017A3B1 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		2B75FD3C051C56D200D12034 /* PcsxrController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PcsxrController.h; sourceTree = "<group>"; };
 		2B75FD3D051C56D200D12034 /* PcsxrController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PcsxrController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -354,9 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BB3D6C605427FE200831ACB /* Cocoa.framework in Frameworks */,
-				2BB3D6C705427FE200831ACB /* System.framework in Frameworks */,
 				2BB3D6C805427FE200831ACB /* IOKit.framework in Frameworks */,
-				2B400D910789F58A00BA271E /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,9 +363,7 @@
 				55AD382A160C200000E9EA20 /* AppKit.framework */,
 				55AD382B160C200000E9EA20 /* Foundation.framework */,
 				2B976C00074C14B4007C050A /* Kernel.framework */,
-				2B02C04304E145D000880C5B /* Carbon.framework */,
 				2BC4786204C7FD3600CAB520 /* Cocoa.framework */,
-				2B6E8AAE04C832040017A3B1 /* System.framework */,
 				2B6E8AB404C8327C0017A3B1 /* IOKit.framework */,
 				2B2189D204D96C7A00179945 /* CoreFoundation.framework */,
 				2B690C760635C65C00CDA575 /* ExceptionHandling.framework */,
