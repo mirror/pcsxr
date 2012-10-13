@@ -54,13 +54,12 @@ void AboutDlgProc()
 	// Get parent application instance
 	NSApplication *app = [NSApplication sharedApplication];
 	NSBundle *bundle = [NSBundle bundleWithIdentifier:APP_ID];
-
+	
 	// Get Credits.rtf
 	NSString *path = [bundle pathForResource:@"Credits" ofType:@"rtf"];
 	NSAttributedString *credits;
 	if (path) {
-		credits = [[[NSAttributedString alloc] initWithPath: path
-				documentAttributes:NULL] autorelease];
+		credits = [[[NSAttributedString alloc] initWithPath: path documentAttributes:NULL] autorelease];
 	} else {
 		credits = [[[NSAttributedString alloc] initWithString:@""] autorelease];
 	}
@@ -69,15 +68,15 @@ void AboutDlgProc()
 	NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[bundle bundlePath]];
 	NSSize size = NSMakeSize(64, 64);
 	[icon setSize:size];
-		
+	
 	[app orderFrontStandardAboutPanelWithOptions:[NSDictionary dictionaryWithObjectsAndKeys:
-			[bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
-			icon, @"ApplicationIcon",
-			[bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
-			[bundle objectForInfoDictionaryKey:@"CFBundleVersion"], @"Version",
-			[bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"], @"Copyright",
-			credits, @"Credits",
-			nil]];
+												  [bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
+												  icon, @"ApplicationIcon",
+												  [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
+												  [bundle objectForInfoDictionaryKey:@"CFBundleVersion"], @"Version",
+												  [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"], @"Copyright",
+												  credits, @"Credits",
+												  nil]];
 }
 
 
@@ -112,46 +111,35 @@ void PrepFactoryDefaultPreferences(void)
     
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-    //tired of wasting time hacking around the "convenience" function
-    // of registerDefaults, so:
-    if ([defaults objectForKey:PrefsKey] == nil)
-    {
-    // just create default preferences and save them.
-
-    NSDictionary* defaultPrefs = 
-            [NSDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithBool:NO], @"FPS Counter",
-					[NSNumber numberWithBool:NO], @"Auto Full Screen",
-					[NSNumber numberWithBool:NO], @"Frame Skipping",
-					[NSNumber numberWithBool:YES], @"Frame Limit",
-					[NSNumber numberWithBool:NO], @"VSync",
-					[NSNumber numberWithBool:NO], @"Enable Hacks",
-					[NSNumber numberWithInt:0], @"Dither Mode",
-					[NSNumber numberWithUnsignedInt:0], @"Hacks",
-                    
-                    [NSNumber numberWithBool:YES], @"Proportional Resize",
-//                    [NSSize stringWithCString: @"default"], @"Fullscreen Resolution",
-                    [NSNumber numberWithInt:2], @"Offscreen Drawing Level",
-                    [NSNumber numberWithInt:0], @"Texture Color Depth Level",
-                    [NSNumber numberWithInt:0], @"Texture Enhancement Level",
-                    [NSNumber numberWithInt:0], @"Texture Filter Level",
-                    [NSNumber numberWithInt:0], @"Frame Buffer Level",
-                    [NSNumber numberWithBool:NO], @"Draw Scanlines",
-                    // nasty:
-                    [NSArchiver archivedDataWithRootObject: [NSColor colorWithCalibratedRed:0  green:0 blue:0 alpha:0.25]], @"Scanline Color",
-                    [NSNumber numberWithBool:NO], @"Advanced Blending",
-                    [NSNumber numberWithBool:NO], @"Opaque Pass",
-                    [NSNumber numberWithBool:NO], @"Blur",
-                    [NSNumber numberWithBool:YES], @"Z Mask Clipping",
-                    [NSNumber numberWithBool:NO], @"Wireframe Mode",
-                    [NSNumber numberWithBool:YES], @"Emulate mjpeg decoder", // helps remove unsightly vertical line in movies
-                    [NSNumber numberWithBool:NO], @"Fast mjpeg decoder",
-					nil];
-            
-    [defaults setObject: defaultPrefs forKey:PrefsKey];
-    [defaults synchronize];
-    }
-    return;
+	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
+								 [NSDictionary dictionaryWithObjectsAndKeys:
+								  [NSNumber numberWithBool:NO], @"FPS Counter",
+								  [NSNumber numberWithBool:NO], @"Auto Full Screen",
+								  [NSNumber numberWithBool:NO], @"Frame Skipping",
+								  [NSNumber numberWithBool:YES], @"Frame Limit",
+								  [NSNumber numberWithBool:NO], @"VSync",
+								  [NSNumber numberWithBool:NO], @"Enable Hacks",
+								  [NSNumber numberWithInt:0], @"Dither Mode",
+								  [NSNumber numberWithUnsignedInt:0], @"Hacks",
+								  
+								  [NSNumber numberWithBool:YES], @"Proportional Resize",
+								  //[NSSize stringWithCString: @"default"], @"Fullscreen Resolution",
+								  [NSNumber numberWithInt:2], @"Offscreen Drawing Level",
+								  [NSNumber numberWithInt:0], @"Texture Color Depth Level",
+								  [NSNumber numberWithInt:0], @"Texture Enhancement Level",
+								  [NSNumber numberWithInt:0], @"Texture Filter Level",
+								  [NSNumber numberWithInt:0], @"Frame Buffer Level",
+								  [NSNumber numberWithBool:NO], @"Draw Scanlines",
+								  // nasty:
+								  [NSArchiver archivedDataWithRootObject: [NSColor colorWithCalibratedRed:0  green:0 blue:0 alpha:0.25]], @"Scanline Color",
+								  [NSNumber numberWithBool:NO], @"Advanced Blending",
+								  [NSNumber numberWithBool:NO], @"Opaque Pass",
+								  [NSNumber numberWithBool:NO], @"Blur",
+								  [NSNumber numberWithBool:YES], @"Z Mask Clipping",
+								  [NSNumber numberWithBool:NO], @"Wireframe Mode",
+								  [NSNumber numberWithBool:YES], @"Emulate mjpeg decoder", // helps remove unsightly vertical line in movies
+								  [NSNumber numberWithBool:NO], @"Fast mjpeg decoder",
+								  nil],  PrefsKey, nil]];
 }
 
 void ReadConfig(void)
@@ -165,11 +153,11 @@ void ReadConfig(void)
     // and saving those new ad hoc changes is Bad for the user.
     
     PrepFactoryDefaultPreferences(); // in case user deletes, or on new startup
-
-//NOTE this is NOT the "keyValues" member of the controller. Just sayin.	
+	
+	//NOTE this is NOT the "keyValues" member of the controller. Just sayin.
     NSDictionary* keyValues = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey];
-
-
+	
+	
     // bind all prefs settings to their PCSXR counterparts
     // with a little finagling to make it work as expected
 	iShowFPS = [[keyValues objectForKey:@"FPS Counter"] boolValue];
@@ -179,21 +167,21 @@ void ReadConfig(void)
         iFrameLimit = 2; // required
         fFrameRate = 60; // required (some number, 60 seems ok)
     }
-
-// Dithering is either on or off in OpenGL plug, but hey
+	
+	// Dithering is either on or off in OpenGL plug, but hey
 	bDrawDither = [[keyValues objectForKey:@"Dither Mode"] intValue];
-
+	
 	bChangeWinMode = [[keyValues objectForKey:@"Auto Full Screen"] boolValue] ? 2 : 1;
 	bUseFrameSkip = [[keyValues objectForKey:@"Frame Skipping"] boolValue];
-
+	
 	bUseFixes = [[keyValues objectForKey:@"Enable Hacks"] boolValue];
 	dwCfgFixes = [[keyValues objectForKey:@"Hacks"] unsignedIntValue];
     
-
-// we always start out at 800x600 (at least until resizing the window is implemented)
+	
+	// we always start out at 800x600 (at least until resizing the window is implemented)
 	iResX = 800;
 	iResY = 600;
-
+	
     iBlurBuffer = [[keyValues objectForKey:@"Blur"] boolValue]; // not noticeable, but doesn't harm
     iUseScanLines = [[keyValues objectForKey:@"Draw Scanlines"] boolValue]; // works
     NSColor* scanColor = [NSUnarchiver unarchiveObjectWithData: [keyValues objectForKey:@"Scanline Color"]];
@@ -209,8 +197,8 @@ void ReadConfig(void)
     if (iOffscreenDrawing > 4) iOffscreenDrawing = 4;
     if (iOffscreenDrawing < 0) iOffscreenDrawing = 0;
     
-
-// texture quality, whatever that means (doesn't hurt), more like "texture handling" or "texture performance"
+	
+	// texture quality, whatever that means (doesn't hurt), more like "texture handling" or "texture performance"
     iFrameTexType = [[keyValues objectForKey:@"Frame Buffer Level"] intValue];
     if (iFrameTexType > 3) iFrameTexType = 3;
     if (iFrameTexType < 0) iFrameTexType = 0;
@@ -218,13 +206,13 @@ void ReadConfig(void)
     iTexQuality = [[keyValues objectForKey:@"Texture Color Depth Level"] intValue];
     if (iTexQuality > 4) iTexQuality = 4;
     if (iTexQuality < 0) iTexQuality = 0;
-
-// MAG_FILTER = LINEAR, etc.
+	
+	// MAG_FILTER = LINEAR, etc.
     iFilterType = [[keyValues objectForKey:@"Texture Filter Level"] intValue];
     if (iFilterType > 2) iFilterType = 2;
     if (iFilterType < 0) iFilterType = 0;
     
-// stretches textures (more detail). You'd think it would look great, but it's not massively better. NEEDS iFilterType to be of any use.
+	// stretches textures (more detail). You'd think it would look great, but it's not massively better. NEEDS iFilterType to be of any use.
     iHiResTextures = [[keyValues objectForKey:@"Texture Enhancement Level"] intValue];
     if (iHiResTextures > 2) iHiResTextures = 2;
     if (iHiResTextures < 0) iHiResTextures = 0;
@@ -244,25 +232,25 @@ void ReadConfig(void)
 		ulKeybits |= KEY_SHOWFPS;
 	else
 		ulKeybits &=~ KEY_SHOWFPS;
-
- // additional checks
- if(!iColDepth)       iColDepth=32;
+	
+	// additional checks
+	if(!iColDepth)       iColDepth=32;
 #if 0 // was in SoftGPU, not in OpenGL
- if(iUseFixes)        dwActFixes=dwCfgFixes;
- else						 dwActFixes=0;
+	if(iUseFixes)        dwActFixes=dwCfgFixes;
+	else						 dwActFixes=0;
 #else
     dwActFixes = 0; // for now... TODO
 #endif
-
-
- SetFixes();
- 
- // need this or you'll be playing at light speed:
- if(iFrameLimit==2) SetAutoFrameCap();
- bSkipNextFrame = FALSE;
- 
- szDispBuf[0] = 0;
- BuildDispMenu(0);
+	
+	
+	SetFixes();
+	
+	// need this or you'll be playing at light speed:
+	if(iFrameLimit == 2) SetAutoFrameCap();
+	bSkipNextFrame = FALSE;
+	
+	szDispBuf[0] = 0;
+	BuildDispMenu(0);
 }
 
 @implementation PluginConfigController

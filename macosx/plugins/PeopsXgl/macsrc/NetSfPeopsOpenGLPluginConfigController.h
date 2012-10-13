@@ -45,7 +45,7 @@
 	IBOutlet NSControl *gteAccuracy;
 	
       
-	 NSMutableDictionary *keyValues;
+	NSMutableDictionary *keyValues;
 }
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;

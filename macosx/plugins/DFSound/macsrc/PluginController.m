@@ -35,9 +35,9 @@ extern const char* PLUGLOC(char* toloc);
 #endif
 
 #ifdef USEOPENAL
-#define APP_ID @"net.sf.peops.ALPlugin"
+#define APP_ID @"net.sf.peops.SPUALPlugin"
 #else
-#define APP_ID @"net.sf.peops.SPUPlugin"
+#define APP_ID @"net.sf.peops.SPUSDLPlugin"
 #endif
 #define PrefsKey APP_ID @" Settings"
 
@@ -54,8 +54,7 @@ void DoAbout()
 	NSString *path = [bundle pathForResource:@"Credits" ofType:@"rtf"];
 	NSAttributedString *credits;
 	if (path) {
-		credits = [[[NSAttributedString alloc] initWithPath: path
-				documentAttributes:NULL] autorelease];
+		credits = [[[NSAttributedString alloc] initWithPath: path documentAttributes:NULL] autorelease];
 	} else {
 		credits = [[[NSAttributedString alloc] initWithString:@""] autorelease];
 	}
@@ -66,13 +65,13 @@ void DoAbout()
 	[icon setSize:size];
 		
 	[app orderFrontStandardAboutPanelWithOptions:[NSDictionary dictionaryWithObjectsAndKeys:
-			[bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
-			icon, @"ApplicationIcon",
-			[bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
-			[bundle objectForInfoDictionaryKey:@"CFBundleVersion"], @"Version",
-			[bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"], @"Copyright",
-			credits, @"Credits",
-			nil]];
+												  [bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
+												  icon, @"ApplicationIcon",
+												  [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
+												  [bundle objectForInfoDictionaryKey:@"CFBundleVersion"], @"Version",
+												  [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"], @"Copyright",
+												  credits, @"Credits",
+												  nil]];
 }
 
 
@@ -103,15 +102,16 @@ void ReadConfig(void)
 	NSDictionary *keyValues;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-			[NSMutableDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithBool:YES], @"High Compatibility Mode",
-					[NSNumber numberWithBool:YES], @"SPU IRQ Wait",
-					[NSNumber numberWithBool:NO], @"XA Pitch",
-					[NSNumber numberWithInt:0], @"Interpolation Quality",
-					[NSNumber numberWithInt:1], @"Reverb Quality",
-					[NSNumber numberWithInt:3], @"Volume",
-					nil], PrefsKey,
-			nil]];
+								[NSDictionary dictionaryWithObjectsAndKeys:
+								 [NSNumber numberWithBool:YES], @"High Compatibility Mode",
+								 [NSNumber numberWithBool:YES], @"SPU IRQ Wait",
+								 [NSNumber numberWithBool:NO], @"XA Pitch",
+								 [NSNumber numberWithBool:NO], @"Mono Sound Output",
+								 [NSNumber numberWithInt:0], @"Interpolation Quality",
+								 [NSNumber numberWithInt:1], @"Reverb Quality",
+								 [NSNumber numberWithInt:3], @"Volume",
+								 nil], PrefsKey,
+								nil]];
 
 	keyValues = [defaults dictionaryForKey:PrefsKey];
 
@@ -138,10 +138,10 @@ void ReadConfig(void)
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
-	[writeDic setObject:[NSNumber numberWithInt:[hiCompBox intValue]] forKey:@"High Compatibility Mode"];
-	[writeDic setObject:[NSNumber numberWithInt:[irqWaitBox intValue]] forKey:@"SPU IRQ Wait"];
-	[writeDic setObject:[NSNumber numberWithInt:[monoSoundBox intValue]] forKey:@"Mono Sound Output"];
-	[writeDic setObject:[NSNumber numberWithInt:[xaSpeedBox intValue]] forKey:@"XA Pitch"];
+	[writeDic setObject:[NSNumber numberWithBool:[hiCompBox intValue]] forKey:@"High Compatibility Mode"];
+	[writeDic setObject:[NSNumber numberWithBool:[irqWaitBox intValue]] forKey:@"SPU IRQ Wait"];
+	[writeDic setObject:[NSNumber numberWithBool:[monoSoundBox intValue]] forKey:@"Mono Sound Output"];
+	[writeDic setObject:[NSNumber numberWithBool:[xaSpeedBox intValue]] forKey:@"XA Pitch"];
 
 	[writeDic setObject:[NSNumber numberWithInt:[interpolValue intValue]] forKey:@"Interpolation Quality"];
 	[writeDic setObject:[NSNumber numberWithInt:[reverbValue intValue]] forKey:@"Reverb Quality"];
@@ -175,10 +175,10 @@ void ReadConfig(void)
 	[keyValues release];
 	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 
-	[hiCompBox setIntValue:[[keyValues objectForKey:@"High Compatibility Mode"] intValue]];
-	[irqWaitBox setIntValue:[[keyValues objectForKey:@"SPU IRQ Wait"] intValue]];
-	[monoSoundBox setIntValue:[[keyValues objectForKey:@"Mono Sound Output"] intValue]];
-	[xaSpeedBox setIntValue:[[keyValues objectForKey:@"XA Pitch"] intValue]];
+	[hiCompBox setIntValue:[[keyValues objectForKey:@"High Compatibility Mode"] boolValue]];
+	[irqWaitBox setIntValue:[[keyValues objectForKey:@"SPU IRQ Wait"] boolValue]];
+	[monoSoundBox setIntValue:[[keyValues objectForKey:@"Mono Sound Output"] boolValue]];
+	[xaSpeedBox setIntValue:[[keyValues objectForKey:@"XA Pitch"] boolValue]];
 
 	[interpolValue setIntValue:[[keyValues objectForKey:@"Interpolation Quality"] intValue]];
 	[reverbValue setIntValue:[[keyValues objectForKey:@"Reverb Quality"] intValue]];

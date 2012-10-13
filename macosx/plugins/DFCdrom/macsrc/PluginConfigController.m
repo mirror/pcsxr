@@ -78,7 +78,7 @@ void ReadConfig()
 	NSDictionary *keyValues;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-		[NSMutableDictionary dictionaryWithObjectsAndKeys:
+		[NSDictionary dictionaryWithObjectsAndKeys:
 			[NSNumber numberWithBool:YES], @"Threaded",
 			[NSNumber numberWithInt:64], @"Cache Size",
 			[NSNumber numberWithInt:0], @"Speed",
@@ -104,7 +104,7 @@ void ReadConfig()
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
 
-	[writeDic setObject:[NSNumber numberWithInt:[Cached intValue]] forKey:@"Threaded"];
+	[writeDic setObject:[NSNumber numberWithBool:[Cached intValue]] forKey:@"Threaded"];
 	[writeDic setObject:[NSNumber numberWithInt:[CacheSize intValue]] forKey:@"Cache Size"];
 
 	switch ([CdSpeed indexOfSelectedItem]) {

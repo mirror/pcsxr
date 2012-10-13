@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>net.sf.peops.SPUPlugin</string>
+	<string>net.sf.peops.SPUSDLPlugin</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -19,6 +19,6 @@
 	<key>CFBundleVersion</key>
 	<string>1.19</string>
 	<key>NSPrincipalClass</key>
-	<string>NetSfPeopsSPUPluginController</string>
+	<string>NetSfPeopsSPUSDLPluginController</string>
 </dict>
 </plist>

@@ -124,7 +124,7 @@ void ReadConfig(void)
 	NSBundle *selfBundle = [NSBundle bundleWithIdentifier:APP_ID];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-								[NSMutableDictionary dictionaryWithObjectsAndKeys:
+								[NSDictionary dictionaryWithObjectsAndKeys:
 								 [NSNumber numberWithBool:NO], @"FPS Counter",
 								 [NSNumber numberWithBool:NO], @"Auto Full Screen",
 								 [NSNumber numberWithBool:NO], @"Frame Skipping",
@@ -192,13 +192,13 @@ void ReadConfig(void)
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
-	[writeDic setObject:[NSNumber numberWithInt:[fpsCounter intValue]] forKey:@"FPS Counter"];
-	[writeDic setObject:[NSNumber numberWithInt:[autoFullScreen intValue]] forKey:@"Auto Full Screen"];
-	[writeDic setObject:[NSNumber numberWithInt:[frameSkipping intValue]] forKey:@"Frame Skipping"];
+	[writeDic setObject:[NSNumber numberWithBool:[fpsCounter intValue]] forKey:@"FPS Counter"];
+	[writeDic setObject:[NSNumber numberWithBool:[autoFullScreen intValue]] forKey:@"Auto Full Screen"];
+	[writeDic setObject:[NSNumber numberWithBool:[frameSkipping intValue]] forKey:@"Frame Skipping"];
 	//[writeDic setObject:[NSNumber numberWithInt:[frameLimit intValue]] forKey:@"Frame Limit"];
-	[writeDic setObject:[NSNumber numberWithInt:[vSync intValue]] forKey:@"VSync"];
-	[writeDic setObject:[NSNumber numberWithInt:[hackEnable intValue]] forKey:@"Enable Hacks"];
-	[writeDic setObject:[NSNumber numberWithInt:[shaders intValue]] forKey:@"UseShader"];
+	[writeDic setObject:[NSNumber numberWithBool:[vSync intValue]] forKey:@"VSync"];
+	[writeDic setObject:[NSNumber numberWithBool:[hackEnable intValue]] forKey:@"Enable Hacks"];
+	[writeDic setObject:[NSNumber numberWithBool:[shaders intValue]] forKey:@"UseShader"];
 	[writeDic setObject:[NSNumber numberWithInt:[shaderQualitySelector indexOfSelectedItem]] forKey:@"ShaderQuality"];
 	[writeDic setObject:[NSNumber numberWithInt:[ditherMode indexOfSelectedItem]] forKey:@"Dither Mode"];
 	
