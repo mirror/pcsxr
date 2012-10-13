@@ -141,9 +141,8 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	texture_range  = gluCheckExtension ((const unsigned char *)"GL_APPLE_texture_range", strExt) ? GL_TRUE : GL_FALSE;
 	texture_hint   = GL_STORAGE_SHARED_APPLE ;
 	client_storage = gluCheckExtension ((const unsigned char *)"GL_APPLE_client_storage", strExt) ? GL_TRUE : GL_FALSE;
-	//rect_texture   = gluCheckExtension((const unsigned char *)"GL_EXT_texture_rectangle", strExt) ? GL_TRUE : GL_FALSE;
-	rect_texture = GL_FALSE;
-
+	rect_texture   = gluCheckExtension((const unsigned char *)"GL_EXT_texture_rectangle", strExt) ? GL_TRUE : GL_FALSE;
+	
 	// Setup some basic OpenGL stuff
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
@@ -154,6 +153,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	// Loads the shaders
 
 	if(isShaderEnabled()){
+		rect_texture = GL_FALSE;
 		// --- Params ---
 		shaderQuality = PSXShaderQuality();
 		vertexShader = [self loadShader:GL_VERTEX_SHADER location:PSXVertexShader()];
@@ -368,32 +368,32 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 				if(isShaderEnabled()){
 					glUseProgram(program);
 					
-					int loc=glGetUniformLocation(program, "OGL2Texture");
+					int loc = glGetUniformLocation(program, "OGL2Texture");
 					glUniform1i(loc,0);
-					int loc2=glGetUniformLocation(program, "OGL2Param");
+					int loc2 = glGetUniformLocation(program, "OGL2Param");
 					float param[4];
-					param[2]=shaderQuality;
-					param[0]=param[2]/image_width;
-					param[1]=param[2]/image_height;
+					param[2] = shaderQuality;
+					param[0] = param[2] / image_width;
+					param[1] = param[2] / image_height;
 					//param[2]=2.0;
-					param[3]=0.0;
-					int loc3=glGetUniformLocation(program, "OGL2Size");
+					param[3] = 0.0;
+					int loc3 = glGetUniformLocation(program, "OGL2Size");
 					float size[4];
 					//NSRect rect = [[[self openGLContext] view] bounds];
-					size[0]=image_width;
-					size[1]=image_height;
-					size[2]=rect.size.width;
-					size[3]=rect.size.height;
-					int loc4=glGetUniformLocation(program, "OGL2InvSize");
+					size[0] = image_width;
+					size[1] = image_height;
+					size[2] = rect.size.width;
+					size[3] = rect.size.height;
+					int loc4 = glGetUniformLocation(program, "OGL2InvSize");
 					float invSize[4];
-					invSize[0]=1.0/size[0];
-					invSize[1]=1.0/size[1];
-					invSize[2]=1.0/size[2];
-					invSize[3]=1.0/size[3];
+					invSize[0] = 1.0/size[0];
+					invSize[1] = 1.0/size[1];
+					invSize[2] = 1.0/size[2];
+					invSize[3] = 1.0/size[3];
 					//invSize[4]=1.0/size[4]; //Did we goof here?
-					glUniform4fv(loc2,1,param);
-					glUniform4fv(loc3,1,size);
-					glUniform4fv(loc4,1,invSize);
+					glUniform4fv(loc2, 1, param);
+					glUniform4fv(loc3, 1, size);
+					glUniform4fv(loc4, 1, invSize);
 				}
 				
 				glBegin(GL_QUADS);
