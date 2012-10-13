@@ -199,7 +199,7 @@ void ReadConfig(void)
 	[writeDic setObject:[NSNumber numberWithBool:[vSync intValue]] forKey:@"VSync"];
 	[writeDic setObject:[NSNumber numberWithBool:[hackEnable intValue]] forKey:@"Enable Hacks"];
 	[writeDic setObject:[NSNumber numberWithBool:[shaders intValue]] forKey:@"UseShader"];
-	[writeDic setObject:[NSNumber numberWithInt:[shaderQualitySelector indexOfSelectedItem]] forKey:@"ShaderQuality"];
+	[writeDic setObject:[NSNumber numberWithInt:[shaderQualitySelector indexOfSelectedItem] + 1] forKey:@"ShaderQuality"];
 	[writeDic setObject:[NSNumber numberWithInt:[ditherMode indexOfSelectedItem]] forKey:@"Dither Mode"];
 	
 	unsigned int hackValues = 0;
@@ -314,7 +314,7 @@ void ReadConfig(void)
 	[shaders setIntValue:[[keyValues objectForKey:@"UseShader"] intValue]];
 
 	[ditherMode selectItemAtIndex:[[keyValues objectForKey:@"Dither Mode"] intValue]];
-	[shaderQualitySelector selectItemAtIndex:[[keyValues objectForKey:@"ShaderQuality"] intValue]];
+	[shaderQualitySelector selectItemAtIndex:[[keyValues objectForKey:@"ShaderQuality"] intValue] - 1];
 	
 	[vertexShaderViewablePath setTitleWithMnemonic:[vertexPath path]];
 	[fragmentShaderViewablePath setTitleWithMnemonic:[fragmentPath path]];
