@@ -12,7 +12,6 @@
 //extern NSMutableArray *plugins;
 
 @interface PluginList : NSObject {
-    
     @private
     NSMutableArray *pluginList;
 	 

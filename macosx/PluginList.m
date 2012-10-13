@@ -153,7 +153,7 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	NSUInteger i;
 	
 	// verify that the ones that are in list still works
-	for (i=0; i<[pluginList count]; i++) {
+	for (i=0; i < [pluginList count]; i++) {
 		if (![[pluginList objectAtIndex:i] verifyOK]) {
 			[pluginList removeObjectAtIndex:i]; i--;
 		}
@@ -183,13 +183,13 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	
 	// check the we have the needed plugins
 	missingPlugins = NO;
-	for (i=0; i<sizeof(*typeList); i++) {
+	for (i=0; i < sizeof(*typeList); i++) {
 		PcsxrPlugin *plugin = [self activePluginForType:typeList[i]];
 		if (nil == plugin) {
 			NSArray *list = [self pluginsForType:typeList[i]];
 			NSUInteger j;
 			
-			for (j=0; j<[list count]; j++) {
+			for (j=0; j < [list count]; j++) {
 				if ([self setActivePlugin:[list objectAtIndex:j] forType:typeList[i]])
 					break;
 			}
@@ -235,11 +235,11 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 {
 	BOOL bad = NO;
 	
-	if ([activeGpuPlugin initAs:PSE_LT_GPU] != 0) bad = YES;
-	if ([activeSpuPlugin initAs:PSE_LT_SPU] != 0) bad = YES;
-	if ([activeCdrPlugin initAs:PSE_LT_CDR] != 0) bad = YES;
-	if ([activePadPlugin initAs:PSE_LT_PAD] != 0) bad = YES;
-	if ([activeNetPlugin initAs:PSE_LT_NET] != 0) bad = YES;
+	if ([activeGpuPlugin runAs:PSE_LT_GPU] != 0) bad = YES;
+	if ([activeSpuPlugin runAs:PSE_LT_SPU] != 0) bad = YES;
+	if ([activeCdrPlugin runAs:PSE_LT_CDR] != 0) bad = YES;
+	if ([activePadPlugin runAs:PSE_LT_PAD] != 0) bad = YES;
+	if ([activeNetPlugin runAs:PSE_LT_NET] != 0) bad = YES;
 	
 	return !bad;
 }
@@ -289,7 +289,7 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	}
 	*pluginPtr = [plugin retain];
 	if (*pluginPtr) {
-		if ([*pluginPtr initAs:type] != 0) {
+		if ([*pluginPtr runAs:type] != 0) {
 			[*pluginPtr release];
 			*pluginPtr = nil;
 		}

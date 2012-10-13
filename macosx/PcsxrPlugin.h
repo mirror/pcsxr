@@ -35,7 +35,7 @@
 - (NSString *)description;
 - (BOOL)hasAboutAs:(int)type;
 - (BOOL)hasConfigureAs:(int)type;
-- (long)initAs:(int)aType;
+- (long)runAs:(int)aType;
 - (long)shutdownAs:(int)aType;
 - (void)aboutAs:(int)type;
 - (void)configureAs:(int)type;

@@ -104,7 +104,7 @@
     
     pluginRef = nil;
     name = nil;
-    path = [aPath retain];
+    path = [aPath copy];
     long tempVers = 0;
     NSString *goodPath = nil;
     for (NSString *plugDir in [PcsxrPlugin pluginsPaths]) 
@@ -134,10 +134,10 @@
     }
 	
     pluginRef = SysLoadLibrary([goodPath fileSystemRepresentation]);
-        if (pluginRef == nil) {
-            [self release];
-            return nil;
-        }
+    if (pluginRef == nil) {
+        [self release];
+        return nil;
+    }
 
     // TODO: add support for plugins with multiple functionalities???
     PSE_getLibType = (PSEgetLibType) SysLoadSym(pluginRef, "PSEgetLibType");
@@ -172,8 +172,7 @@
     PSE_getLibVersion = (PSEgetLibVersion) SysLoadSym(pluginRef, "PSEgetLibVersion");
     if (SysLibError() == nil) {
         version = PSE_getLibVersion();
-    }
-    else {
+    } else {
         version = -1;
     }
     
@@ -226,7 +225,7 @@
     return;
 }
 
-- (long)initAs:(int)aType
+- (long)runAs:(int)aType
 {
     char symbol[255];
     long (*init)();
@@ -240,17 +239,18 @@
     sprintf(symbol, "%sinit", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSASCIIStringEncoding]);
     init = initArg = SysLoadSym(pluginRef, symbol);
     if (SysLibError() == nil) {
-        if (aType != PSE_LT_PAD)
+        if (aType != PSE_LT_PAD) {
             res = init();
-        else
+        } else {
             res = initArg(1|2);
+        }
     }
     
     if (0 == res) {
         active |= aType;
     } else {
         NSRunCriticalAlertPanel(NSLocalizedString(@"Plugin Initialization Failed!", nil),
-            [NSString stringWithFormat:NSLocalizedString(@"Pcsxr failed to initialize the selected %s plugin (error=%i).\nThe plugin might not work with your system.", nil), [PcsxrPlugin prefixForType:aType], res], 
+            [NSString stringWithFormat:NSLocalizedString(@"Pcsxr failed to initialize the selected %@ plugin (error=%i).\nThe plugin might not work with your system.", nil), [PcsxrPlugin prefixForType:aType], res], 
 			nil, nil, nil);
     }
     
