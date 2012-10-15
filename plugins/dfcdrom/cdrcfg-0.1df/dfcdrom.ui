@@ -58,7 +58,7 @@
                   <object class="GtkHBox" id="hbox5">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="border_width">10</property>
+                    <property name="border_width">5</property>
                     <child>
                       <object class="GtkComboBoxEntry" id="cddev_comboboxentry">
                         <property name="visible">True</property>
@@ -321,7 +321,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
-                        <property name="border_width">10</property>
+                        <property name="border_width">5</property>
                         <property name="use_underline">True</property>
                         <property name="draw_indicator">True</property>
                       </object>
