@@ -57,11 +57,6 @@ void on_about_clicked(GtkWidget *widget, gpointer user_data)
 	exit (0);
 }
 
-void set_widget_sensitive(GtkWidget *widget, gpointer user_data)
-{
-	gtk_widget_set_sensitive (widget, (int)user_data);
-}
-
 void on_fullscreen_toggled(GtkWidget *widget, gpointer user_data)
 {
 	GtkWidget *check, *resCombo2;
@@ -69,7 +64,7 @@ void on_fullscreen_toggled(GtkWidget *widget, gpointer user_data)
 	check = gtk_builder_get_object(builder, "checkFullscreen");
 	resCombo2 = gtk_builder_get_object(builder, "resCombo2");
 
-	set_widget_sensitive(resCombo2, !gtk_toggle_button_get_active(check));
+	gtk_widget_set_sensitive(resCombo2, !gtk_toggle_button_get_active(check));
 }
 
 void on_use_fixes_toggled(GtkWidget *widget, gpointer user_data)
@@ -80,8 +75,8 @@ void on_use_fixes_toggled(GtkWidget *widget, gpointer user_data)
 	table_fixes = gtk_builder_get_object(builder,"table_fixes");
 
 	/* Set the state of each of the fixes to the value of the use fixes toggle */
-	gtk_container_foreach (GTK_CONTAINER (table_fixes), (GtkCallback) set_widget_sensitive,
-		(void *)gtk_toggle_button_get_active (check));
+	gtk_container_foreach (GTK_CONTAINER (table_fixes), (GtkCallback) gtk_widget_set_sensitive,
+		(gpointer)gtk_toggle_button_get_active (check));
 }
 
 void on_fps_toggled(GtkWidget *widget, gpointer user_data)
@@ -92,9 +87,10 @@ void on_fps_toggled(GtkWidget *widget, gpointer user_data)
 	checkAutoFPSLimit = gtk_builder_get_object(builder, "checkAutoFPSLimit");
 	entryFPS = gtk_builder_get_object(builder, "entryFPS");
 
-	set_widget_sensitive(entryFPS,
-		gtk_toggle_button_get_active(checkSetFPS) && !gtk_toggle_button_get_active(checkAutoFPSLimit));
-	set_widget_sensitive(checkAutoFPSLimit, gtk_toggle_button_get_active(checkSetFPS));
+	gtk_widget_set_sensitive(entryFPS, 
+							 gtk_toggle_button_get_active(checkSetFPS) && 
+							 !gtk_toggle_button_get_active(checkAutoFPSLimit));
+	gtk_widget_set_sensitive(checkAutoFPSLimit, gtk_toggle_button_get_active(checkSetFPS));
 }
 
 void OnConfigClose(GtkWidget *widget, gpointer user_data)
