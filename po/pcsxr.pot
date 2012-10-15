@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2011-06-08 19:52+0400\n"
+"POT-Creation-Date: 2012-10-15 19:23+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,472 +17,480 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../data/pcsxr.ui.h:1
-msgid ""
-"8-bit\n"
-"16-bit\n"
-"32-bit"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:4
-msgid "<b>BIOS</b>"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:5
-msgid "<b>Cheat Codes</b>"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:6
-msgid "<b>Cheat Search</b>"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:7
-msgid "<b>Memory Card 1</b>"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:8
-msgid "<b>Memory Card 2</b>"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:9
-msgid "<b>NetPlay</b>"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:10
-msgid "<b>Options</b>"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:11
-msgid "<b>Plugins</b>"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:12
-msgid "<b>System Type</b>"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:13 ../gui/DebugMemory.c:188
-msgid "Address (Hexadecimal):"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:14 ../win32/gui/WndMain.c:1308
-msgid "Autodetect"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:15
-msgid "Black & White Movies"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:16
-msgid "CD-ROM..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:17
-msgid "CD-ROM:"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:18
-msgid "CD-_ROM..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:19
-msgid "C_ontrollers..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:20
-msgid "Chea_t"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:21 ../gui/Cheat.c:1129 ../win32/gui/CheatDlg.c:678
-msgid "Cheat Search"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:22
-msgid "Configure CD-ROM"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:23
-msgid "Configure CPU"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:24
-msgid "Configure Controllers"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:25
-msgid "Configure Graphics"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:26
-msgid "Configure Memory Cards"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:27
-msgid "Configure NetPlay"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:28 ../gui/ConfDlg.c:112
-msgid "Configure PCSXR"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:29 ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:3
-msgid "Configure Sound"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:30
-msgid "Continue Emulation"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:31
-msgid "Continue..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:32
-msgid "Controller 1:   "
-msgstr ""
-
-#: ../data/pcsxr.ui.h:33
-msgid "Controller 2:"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:34
-msgid "Controllers..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:35
-msgid "Copy"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:36 ../win32/gui/CheatDlg.c:683
-msgid "Data Base:"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:37 ../win32/gui/CheatDlg.c:681
-msgid "Data Type:"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:38
-msgid ""
-"Decimal\n"
-"Hexadecimal"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:40
-msgid "Disable CD Audio"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:41
-msgid "Disable XA Decoding"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:42
-msgid "E_xit"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:43 ../win32/gui/CheatDlg.c:166
+#: ../data/pcsxr.ui.h:1 ../win32/gui/CheatDlg.c:166
 msgid "Edit Cheat Codes"
 msgstr ""
 
-#: ../data/pcsxr.ui.h:44 ../win32/gui/WndMain.c:1310
-msgid "Enable Console Output"
+#: ../data/pcsxr.ui.h:2
+msgid "<b>Cheat Codes</b>"
 msgstr ""
 
-#: ../data/pcsxr.ui.h:45 ../win32/gui/WndMain.c:1311
-msgid "Enable Debugger"
+#: ../data/pcsxr.ui.h:3 ../gui/Cheat.c:1099 ../win32/gui/CheatDlg.c:678
+msgid "Cheat Search"
 msgstr ""
 
-#: ../data/pcsxr.ui.h:46
-msgid "Enable Interpreter CPU"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:47
-msgid ""
-"Equal Value\n"
-"Not Equal Value\n"
-"Range\n"
-"Increased By\n"
-"Decreased By\n"
-"Increased\n"
-"Decreased\n"
-"Different\n"
-"No Change"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:56
-msgid "Format"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:57 ../win32/gui/CheatDlg.c:504
-msgid "Freeze"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:58
-msgid "Graphics..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:59
-msgid "Graphics:"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:60 ../win32/gui/WndMain.c:1314
-msgid "InuYasha Sengoku Battle Fix"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:61
-msgid "Memcards..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:62 ../gui/DebugMemory.c:103
-msgid "Memory Dump"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:63
-msgid "Memory _Dump"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:64 ../win32/gui/CheatDlg.c:595
-msgid "Modify"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:65
-msgid ""
-"NTSC\n"
-"PAL"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:67
-msgid "New"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:68
-msgid "PCSXR"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:69 ../win32/gui/WndMain.c:1313
-msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:70
-msgid "Patch Memory..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:71
-msgid "Raw Dump..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:72
-msgid "Restart"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:73
-msgid "Run CD"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:74
-msgid "Run ISO Image"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:75
-msgid "Run ISO..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:76
-msgid "Run _BIOS"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:77
-msgid "Run _CD"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:78
-msgid "Run _EXE..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:79
-msgid "Run _ISO..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:80 ../gui/Plugin.c:239
-#, c-format
-msgid "SIO IRQ Always Enabled"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:81
-msgid "SPU IRQ Always Enabled"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:82
-msgid "S_witch ISO..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:83
-msgid "Search"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:84 ../win32/gui/CheatDlg.c:680
+#: ../data/pcsxr.ui.h:4 ../win32/gui/CheatDlg.c:680
 msgid "Search For:"
 msgstr ""
 
-#: ../data/pcsxr.ui.h:85
-msgid "Search in:"
+#: ../data/pcsxr.ui.h:5 ../win32/gui/CheatDlg.c:681
+msgid "Data Type:"
 msgstr ""
 
-#: ../data/pcsxr.ui.h:86
-msgid "Select Folder to Search"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:87
-msgid "Slot _1"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:88
-msgid "Slot _2"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:89
-msgid "Slot _3"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:90
-msgid "Slot _4"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:91
-msgid "Slot _5"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:92
-msgid "Slot _6"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:93
-msgid "Slot _7"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:94
-msgid "Slot _8"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:95
-msgid "Slot _9"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:96 ../win32/gui/WndMain.c:1307
-msgid "Slow Boot"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:97
-msgid "Sound..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:98
-msgid "Sound:"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:99
-msgid "Switch ISO Image"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:100
-msgid "Switch ISO..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:101 ../win32/gui/CheatDlg.c:684
-msgid "To:"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:102
-msgid "Un/Delete"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:103 ../gui/Cheat.c:647 ../win32/gui/CheatDlg.c:506
+#: ../data/pcsxr.ui.h:6 ../gui/Cheat.c:631 ../win32/gui/CheatDlg.c:506
 #: ../win32/gui/CheatDlg.c:597 ../win32/gui/CheatDlg.c:682
 msgid "Value:"
 msgstr ""
 
-#: ../data/pcsxr.ui.h:104
-msgid "_About PCSXR..."
+#: ../data/pcsxr.ui.h:7 ../win32/gui/CheatDlg.c:683
+msgid "Data Base:"
 msgstr ""
 
-#: ../data/pcsxr.ui.h:105
-msgid "_Browse..."
+#: ../data/pcsxr.ui.h:8 ../win32/gui/CheatDlg.c:684
+msgid "To:"
 msgstr ""
 
-#: ../data/pcsxr.ui.h:106
-msgid "_CPU..."
+#: ../data/pcsxr.ui.h:9 ../win32/gui/CheatDlg.c:504
+msgid "Freeze"
 msgstr ""
 
-#: ../data/pcsxr.ui.h:107
-msgid "_Configuration"
+#: ../data/pcsxr.ui.h:10 ../win32/gui/CheatDlg.c:595
+msgid "Modify"
 msgstr ""
 
-#: ../data/pcsxr.ui.h:108
-msgid "_Continue"
+#: ../data/pcsxr.ui.h:11
+msgid "Copy"
 msgstr ""
 
-#: ../data/pcsxr.ui.h:109
-msgid "_Emulator"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:110
-msgid "_File"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:111
-msgid "_Graphics..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:112
-msgid "_Help"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:113
-msgid "_Load State"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:114
-msgid "_Memory Cards..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:115
-msgid "_Netplay..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:116
-msgid "_Other..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:117
-msgid "_Plugins & BIOS..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:118
-msgid "_Reset"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:119
-msgid "_Save State"
-msgstr ""
-
-#: ../data/pcsxr.ui.h:120
-msgid "_Search..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:121
-msgid "_Sound..."
-msgstr ""
-
-#: ../data/pcsxr.ui.h:122
+#: ../data/pcsxr.ui.h:12
 msgid "label_resultsfound"
 msgstr ""
 
-#: ../gui/AboutDlg.c:72
+#: ../data/pcsxr.ui.h:13
+msgid "Search"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:14
+msgid "Restart"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:15
+msgid "<b>Cheat Search</b>"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:16 ../gui/ConfDlg.c:110
+msgid "Configure PCSXR"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:17
+msgid "Select Folder to Search"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:18
+msgid "Search in:"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:19
+msgid "Graphics:"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:20
+msgid "Sound:"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:21
+msgid "Controller 1:   "
+msgstr ""
+
+#: ../data/pcsxr.ui.h:22
+msgid "Controller 2:"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:23
+msgid "CD-ROM:"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:24
+msgid "<b>Plugins</b>"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:25
+msgid "<b>BIOS</b>"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:26
+msgid "Configure CPU"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:27 ../win32/gui/WndMain.c:1319
+msgid "Enable Debugger"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:28
+msgid "SPU IRQ Always Enabled"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:29
+msgid "Black & White Movies"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:30 ../win32/gui/WndMain.c:1318
+msgid "Enable Console Output"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:31
+msgid "Enable Interpreter CPU"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:32 ../gui/Plugin.c:239
+#, c-format
+msgid "SIO IRQ Always Enabled"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:33
+msgid "Disable CD Audio"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:34
+msgid "Disable XA Decoding"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:35 ../win32/gui/WndMain.c:1315
+msgid "Slow Boot"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:36 ../win32/gui/WndMain.c:1321
+msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:37 ../win32/gui/WndMain.c:1322
+msgid "InuYasha Sengoku Battle Fix"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:38 ../win32/gui/WndMain.c:1323
+msgid "Widescreen (GTE Hack)"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:39
+msgid "<b>Options</b>"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:40 ../win32/gui/WndMain.c:1316
+msgid "Autodetect"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:41
+msgid "<b>System Type</b>"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:42
+msgid "PCSXR"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:43
+msgid "_File"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:44
+msgid "Run _CD"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:45
+msgid "Run _ISO..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:46
+msgid "Run _BIOS"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:47
+msgid "Run _EXE..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:48
+msgid "E_xit"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:49
+msgid "_Emulator"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:50
+msgid "_Continue"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:51
+msgid "_Reset"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:52
+msgid "_Shutdown"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:53
+msgid "S_witch ISO..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:54
+msgid "_Save State"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:55
+msgid "Slot _1"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:56
+msgid "Slot _2"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:57
+msgid "Slot _3"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:58
+msgid "Slot _4"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:59
+msgid "Slot _5"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:60
+msgid "Slot _6"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:61
+msgid "Slot _7"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:62
+msgid "Slot _8"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:63
+msgid "Slot _9"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:64
+msgid "_Other..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:65
+msgid "_Load State"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:66
+msgid "_Configuration"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:67
+msgid "_Plugins & BIOS..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:68
+msgid "_Graphics..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:69
+msgid "_Sound..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:70
+msgid "CD-_ROM..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:71
+msgid "C_ontrollers..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:72
+msgid "_CPU..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:73
+msgid "_Memory Cards..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:74
+msgid "_Netplay..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:75
+msgid "Chea_t"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:76
+msgid "_Browse..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:77
+msgid "_Search..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:78
+msgid "Memory _Dump"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:79
+msgid "_Help"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:80
+msgid "_About PCSXR..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:81
+msgid "Run CD"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:82
+msgid "Run ISO Image"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:83
+msgid "Continue Emulation"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:84
+msgid "Switch ISO Image"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:85
+msgid "Configure Memory Cards"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:86
+msgid "Configure Graphics"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:87 ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:1
+msgid "Configure Sound"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:88
+msgid "Configure CD-ROM"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:89
+msgid "Configure Controllers"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:90
+msgid "New"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:91
+msgid "Format"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:92
+msgid "Un/Delete"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:93
+msgid "<b>Memory Card 1</b>"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:94
+msgid "<b>Memory Card 2</b>"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:95 ../gui/DebugMemory.c:99
+msgid "Memory Dump"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:96 ../gui/DebugMemory.c:184
+msgid "Address (Hexadecimal):"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:97
+msgid "Raw Dump..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:98
+msgid "Patch Memory..."
+msgstr ""
+
+#: ../data/pcsxr.ui.h:99
+msgid "Configure NetPlay"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:100
+msgid "<b>NetPlay</b>"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:101
+msgid "NTSC"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:102
+msgid "PAL"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:103 ../win32/gui/CheatDlg.c:692
+msgid "8-bit"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:104 ../win32/gui/CheatDlg.c:693
+msgid "16-bit"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:105 ../win32/gui/CheatDlg.c:694
+msgid "32-bit"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:106 ../win32/gui/CheatDlg.c:402
+msgid "Equal Value"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:107 ../win32/gui/CheatDlg.c:403
+msgid "Not Equal Value"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:108 ../win32/gui/CheatDlg.c:404
+msgid "Range"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:109 ../win32/gui/CheatDlg.c:407
+msgid "Increased By"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:110 ../win32/gui/CheatDlg.c:408
+msgid "Decreased By"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:111 ../win32/gui/CheatDlg.c:409
+msgid "Increased"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:112 ../win32/gui/CheatDlg.c:410
+msgid "Decreased"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:113 ../win32/gui/CheatDlg.c:411
+msgid "Different"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:114 ../win32/gui/CheatDlg.c:412
+msgid "No Change"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:115 ../win32/gui/CheatDlg.c:695
+msgid "Decimal"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:116 ../win32/gui/CheatDlg.c:696
+msgid "Hexadecimal"
+msgstr ""
+
+#: ../gui/AboutDlg.c:71
 msgid ""
 "(C) 1999-2003 PCSX Team\n"
 "(C) 2005-2009 PCSX-df Team\n"
 "(C) 2009-2011 PCSX-Reloaded Team"
 msgstr ""
 
-#: ../gui/AboutDlg.c:77
+#: ../gui/AboutDlg.c:76
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -499,124 +507,119 @@ msgid ""
 "Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA."
 msgstr ""
 
-#: ../gui/AboutDlg.c:100
+#: ../gui/AboutDlg.c:99
 msgid "translator-credits"
 msgstr ""
 
-#: ../gui/AboutDlg.c:101
+#: ../gui/AboutDlg.c:100
 msgid "A PlayStation emulator."
 msgstr ""
 
-#: ../gui/Cheat.c:109 ../win32/gui/CheatDlg.c:116
+#: ../gui/Cheat.c:100 ../win32/gui/CheatDlg.c:116
 msgid "Add New Cheat"
 msgstr ""
 
-#: ../gui/Cheat.c:117 ../gui/Cheat.c:202
+#: ../gui/Cheat.c:108 ../gui/Cheat.c:191
 msgid "Cheat Description:"
 msgstr ""
 
-#: ../gui/Cheat.c:125 ../gui/Cheat.c:211 ../win32/gui/CheatDlg.c:68
+#: ../gui/Cheat.c:116 ../gui/Cheat.c:200 ../win32/gui/CheatDlg.c:68
 #: ../win32/gui/CheatDlg.c:118
 msgid "Cheat Code:"
 msgstr ""
 
-#: ../gui/Cheat.c:155 ../gui/Cheat.c:251 ../gui/LnxMain.c:421
-#: ../win32/gui/ConfigurePlugins.c:307
+#: ../gui/Cheat.c:146 ../gui/Cheat.c:240 ../gui/LnxMain.c:421
+#: ../win32/gui/ConfigurePlugins.c:309
 msgid "Error"
 msgstr ""
 
-#: ../gui/Cheat.c:155 ../gui/Cheat.c:251 ../win32/gui/CheatDlg.c:91
+#: ../gui/Cheat.c:146 ../gui/Cheat.c:240 ../win32/gui/CheatDlg.c:91
 #: ../win32/gui/CheatDlg.c:132
 msgid "Invalid cheat code!"
 msgstr ""
 
-#: ../gui/Cheat.c:194 ../win32/gui/CheatDlg.c:66
+#: ../gui/Cheat.c:183 ../win32/gui/CheatDlg.c:66
 msgid "Edit Cheat"
 msgstr ""
 
-#: ../gui/Cheat.c:306
+#: ../gui/Cheat.c:293
 msgid "Open Cheat File"
 msgstr ""
 
-#: ../gui/Cheat.c:316 ../gui/Cheat.c:356
+#: ../gui/Cheat.c:303 ../gui/Cheat.c:343
 msgid "PCSXR Cheat Code Files (*.cht)"
 msgstr ""
 
-#: ../gui/Cheat.c:321 ../gui/Gtk2Gui.c:446 ../gui/Gtk2Gui.c:587
-#: ../win32/gui/WndMain.c:1453 ../win32/gui/WndMain.c:1534
+#: ../gui/Cheat.c:308 ../gui/Gtk2Gui.c:464 ../gui/Gtk2Gui.c:605
+#: ../win32/gui/WndMain.c:1464 ../win32/gui/WndMain.c:1545
 msgid "All Files"
 msgstr ""
 
-#: ../gui/Cheat.c:346
+#: ../gui/Cheat.c:333
 msgid "Save Cheat File"
 msgstr ""
 
-#: ../gui/Cheat.c:361
+#: ../gui/Cheat.c:348
 msgid "All Files (*.*)"
 msgstr ""
 
-#: ../gui/Cheat.c:394 ../gui/Cheat.c:1124 ../gui/ConfDlg.c:104
-#: ../gui/ConfDlg.c:200 ../gui/DebugMemory.c:259
-msgid "Error: Glade interface could not be loaded!"
-msgstr ""
-
-#: ../gui/Cheat.c:399
+#: ../gui/Cheat.c:387
 msgid "Cheat Codes"
 msgstr ""
 
-#: ../gui/Cheat.c:405
+#: ../gui/Cheat.c:394
 msgid "Enable"
 msgstr ""
 
-#: ../gui/Cheat.c:413 ../win32/gui/CheatDlg.c:185
+#: ../gui/Cheat.c:402 ../win32/gui/CheatDlg.c:185
 msgid "Description"
 msgstr ""
 
-#: ../gui/Cheat.c:543 ../win32/gui/CheatDlg.c:457
+#: ../gui/Cheat.c:530 ../win32/gui/CheatDlg.c:457
 msgid "Too many addresses found."
 msgstr ""
 
-#: ../gui/Cheat.c:552 ../win32/gui/CheatDlg.c:466
+#: ../gui/Cheat.c:539 ../win32/gui/CheatDlg.c:466
 #, c-format
 msgid "%.8X    Current: %u (%.2X), Previous: %u (%.2X)"
 msgstr ""
 
-#: ../gui/Cheat.c:557 ../win32/gui/CheatDlg.c:471
+#: ../gui/Cheat.c:544 ../win32/gui/CheatDlg.c:471
 #, c-format
 msgid "%.8X    Current: %u (%.4X), Previous: %u (%.4X)"
 msgstr ""
 
-#: ../gui/Cheat.c:562 ../win32/gui/CheatDlg.c:476
+#: ../gui/Cheat.c:549 ../win32/gui/CheatDlg.c:476
 #, c-format
 msgid "%.8X    Current: %u (%.8X), Previous: %u (%.8X)"
 msgstr ""
 
-#: ../gui/Cheat.c:577 ../win32/gui/CheatDlg.c:492
+#: ../gui/Cheat.c:564 ../win32/gui/CheatDlg.c:492
 #, c-format
 msgid "Founded Addresses: %d"
 msgstr ""
 
-#: ../gui/Cheat.c:585 ../win32/gui/CheatDlg.c:448
+#: ../gui/Cheat.c:572 ../win32/gui/CheatDlg.c:448
 msgid "Enter the values and start your search."
 msgstr ""
 
-#: ../gui/Cheat.c:630
+#: ../gui/Cheat.c:614
 msgid "Freeze value"
 msgstr ""
 
-#: ../gui/Cheat.c:636 ../win32/gui/CheatDlg.c:67 ../win32/gui/CheatDlg.c:117
+#: ../gui/Cheat.c:620 ../win32/gui/CheatDlg.c:67 ../win32/gui/CheatDlg.c:117
 msgid "Description:"
 msgstr ""
 
-#: ../gui/Cheat.c:729
+#: ../gui/Cheat.c:713
 msgid "Modify value"
 msgstr ""
 
-#: ../gui/Cheat.c:737
+#: ../gui/Cheat.c:721
 msgid "New value:"
 msgstr ""
 
-#: ../gui/Cheat.c:1134
+#: ../gui/Cheat.c:1105
 msgid "Search Results"
 msgstr ""
 
@@ -625,153 +628,153 @@ msgstr ""
 #. disabled widgets
 #. TODO If combo screen hasn't been opened and the user chooses the menu config option, confs.Combo will be null and cause a segfault
 #. printf("Configuring plugin %s\n", filename);
-#: ../gui/ConfDlg.c:237 ../gui/ConfDlg.c:258 ../gui/ConfDlg.c:279
-#: ../gui/ConfDlg.c:300 ../gui/ConfDlg.c:355
+#: ../gui/ConfDlg.c:236 ../gui/ConfDlg.c:257 ../gui/ConfDlg.c:278
+#: ../gui/ConfDlg.c:299 ../gui/ConfDlg.c:354
 msgid "No configuration required"
 msgstr ""
 
-#: ../gui/ConfDlg.c:237 ../gui/ConfDlg.c:258 ../gui/ConfDlg.c:279
-#: ../gui/ConfDlg.c:300 ../gui/ConfDlg.c:355
+#: ../gui/ConfDlg.c:236 ../gui/ConfDlg.c:257 ../gui/ConfDlg.c:278
+#: ../gui/ConfDlg.c:299 ../gui/ConfDlg.c:354
 msgid "This plugin doesn't need to be configured."
 msgstr ""
 
-#: ../gui/ConfDlg.c:581
+#: ../gui/ConfDlg.c:580
 #, c-format
 msgid "Could not open BIOS directory: '%s'\n"
 msgstr ""
 
-#: ../gui/ConfDlg.c:611 ../gui/ConfDlg.c:704 ../gui/LnxMain.c:168
+#: ../gui/ConfDlg.c:610 ../gui/ConfDlg.c:703 ../gui/LnxMain.c:168
 #, c-format
 msgid "Could not open directory: '%s'\n"
 msgstr ""
 
 #. The BIOS list always contains the PCSXR internal BIOS
-#: ../gui/ConfDlg.c:675
+#: ../gui/ConfDlg.c:674
 msgid "Simulate PSX BIOS"
 msgstr ""
 
-#: ../gui/DebugMemory.c:111
+#: ../gui/DebugMemory.c:107
 msgid "Start Address (Hexadecimal):"
 msgstr ""
 
-#: ../gui/DebugMemory.c:121
+#: ../gui/DebugMemory.c:117
 msgid "Length (Decimal):"
 msgstr ""
 
-#: ../gui/DebugMemory.c:147
+#: ../gui/DebugMemory.c:143
 msgid "Dump to File"
 msgstr ""
 
-#: ../gui/DebugMemory.c:162
+#: ../gui/DebugMemory.c:158
 #, c-format
 msgid "Error writing to %s!"
 msgstr ""
 
-#: ../gui/DebugMemory.c:180
+#: ../gui/DebugMemory.c:176
 msgid "Memory Patch"
 msgstr ""
 
-#: ../gui/DebugMemory.c:198
+#: ../gui/DebugMemory.c:194
 msgid "Value (Hexa string):"
 msgstr ""
 
-#: ../gui/DebugMemory.c:264
+#: ../gui/DebugMemory.c:261
 msgid "Memory Viewer"
 msgstr ""
 
-#: ../gui/DebugMemory.c:269
+#: ../gui/DebugMemory.c:267
 msgid "Address"
 msgstr ""
 
-#: ../gui/DebugMemory.c:287
+#: ../gui/DebugMemory.c:285
 msgid "Text"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:113
+#: ../gui/Gtk2Gui.c:128
 msgid "Ready"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:154
+#: ../gui/Gtk2Gui.c:169
 msgid "Emulation Paused."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:429
+#: ../gui/Gtk2Gui.c:447
 msgid "Select PSX EXE File"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:442
+#: ../gui/Gtk2Gui.c:460
 msgid "PlayStation Executable Files"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:479
+#: ../gui/Gtk2Gui.c:497
 msgid "Not a valid PSX file"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:479
+#: ../gui/Gtk2Gui.c:497
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:508 ../gui/Gtk2Gui.c:649
+#: ../gui/Gtk2Gui.c:526 ../gui/Gtk2Gui.c:681
 msgid "CD ROM failed"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:508 ../gui/Gtk2Gui.c:649 ../win32/gui/WndMain.c:469
+#: ../gui/Gtk2Gui.c:526 ../gui/Gtk2Gui.c:681 ../win32/gui/WndMain.c:469
 #: ../win32/gui/WndMain.c:521 ../win32/gui/WndMain.c:590
 #, c-format
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:519 ../gui/Gtk2Gui.c:660 ../win32/gui/WndMain.c:479
+#: ../gui/Gtk2Gui.c:537 ../gui/Gtk2Gui.c:692 ../win32/gui/WndMain.c:479
 #: ../win32/gui/WndMain.c:531 ../win32/gui/WndMain.c:600
 #, c-format
 msgid "Could not load CD-ROM!"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:519 ../gui/Gtk2Gui.c:660
+#: ../gui/Gtk2Gui.c:537 ../gui/Gtk2Gui.c:692
 msgid "The CD-ROM could not be loaded"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:533
+#: ../gui/Gtk2Gui.c:551
 msgid "Could not run BIOS"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:533
+#: ../gui/Gtk2Gui.c:551
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:562
+#: ../gui/Gtk2Gui.c:580
 msgid "Open PSX Disc Image File"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:582
+#: ../gui/Gtk2Gui.c:600
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:813
+#: ../gui/Gtk2Gui.c:853
 #, c-format
 msgid "Loaded state %s."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:816
+#: ../gui/Gtk2Gui.c:856
 #, c-format
 msgid "Error loading state %s!"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:827
+#: ../gui/Gtk2Gui.c:867
 #, c-format
 msgid "Saved state %s."
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:829
+#: ../gui/Gtk2Gui.c:869
 #, c-format
 msgid "Error saving state %s!"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:864 ../gui/Gtk2Gui.c:892
+#: ../gui/Gtk2Gui.c:904 ../gui/Gtk2Gui.c:932
 msgid "Select State File"
 msgstr ""
 
-#: ../gui/Gtk2Gui.c:935
+#: ../gui/Gtk2Gui.c:975
 msgid "Notice"
 msgstr ""
 
@@ -820,11 +823,11 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:66 ../win32/gui/WndMain.c:754
+#: ../gui/MemcardDlg.c:66 ../win32/gui/WndMain.c:762
 msgid "Title"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:72 ../win32/gui/WndMain.c:760
+#: ../gui/MemcardDlg.c:72 ../win32/gui/WndMain.c:768
 msgid "Status"
 msgstr ""
 
@@ -836,60 +839,60 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:192 ../gui/MemcardDlg.c:297 ../win32/gui/WndMain.c:965
+#: ../gui/MemcardDlg.c:190 ../gui/MemcardDlg.c:291 ../win32/gui/WndMain.c:973
 msgid "Deleted"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:194 ../gui/MemcardDlg.c:198 ../gui/MemcardDlg.c:299
-#: ../gui/MemcardDlg.c:303 ../win32/gui/WndMain.c:966
-#: ../win32/gui/WndMain.c:969
+#: ../gui/MemcardDlg.c:192 ../gui/MemcardDlg.c:196 ../gui/MemcardDlg.c:293
+#: ../gui/MemcardDlg.c:297 ../win32/gui/WndMain.c:974
+#: ../win32/gui/WndMain.c:977
 msgid "Free"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:196 ../gui/MemcardDlg.c:301 ../win32/gui/WndMain.c:968
+#: ../gui/MemcardDlg.c:194 ../gui/MemcardDlg.c:295 ../win32/gui/WndMain.c:976
 msgid "Used"
 msgstr ""
 
 #. Ask for name of memory card
-#: ../gui/MemcardDlg.c:360
+#: ../gui/MemcardDlg.c:354
 msgid "Select A File"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:401
+#: ../gui/MemcardDlg.c:394
 msgid "Format this Memory Card?"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:403
+#: ../gui/MemcardDlg.c:396
 msgid ""
 "If you format the memory card, the card will be empty, and any existing data "
 "overwritten."
 msgstr ""
 
-#: ../gui/MemcardDlg.c:406
+#: ../gui/MemcardDlg.c:399
 msgid "Format card"
 msgstr ""
 
 #. Ask for name of new memory card
-#: ../gui/MemcardDlg.c:430
+#: ../gui/MemcardDlg.c:421
 msgid "Create a new Memory Card"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:439
+#: ../gui/MemcardDlg.c:430
 msgid "New Memory Card.mcd"
 msgstr ""
 
 #. No free slots available on the destination card
-#: ../gui/MemcardDlg.c:540
+#: ../gui/MemcardDlg.c:528
 msgid "No free space on memory card"
 msgstr ""
 
-#: ../gui/MemcardDlg.c:541
+#: ../gui/MemcardDlg.c:529
 msgid ""
 "There are no free slots available on the target memory card. Please delete a "
 "slot first."
 msgstr ""
 
-#: ../gui/MemcardDlg.c:704
+#: ../gui/MemcardDlg.c:684
 msgid "Memory Card Manager"
 msgstr ""
 
@@ -930,40 +933,40 @@ msgstr ""
 msgid "Error opening GPU plugin!"
 msgstr ""
 
-#: ../gui/Plugin.c:331
+#: ../gui/Plugin.c:330
 msgid "Error opening Controller 1 plugin!"
 msgstr ""
 
-#: ../gui/Plugin.c:335
+#: ../gui/Plugin.c:334
 msgid "Error opening Controller 2 plugin!"
 msgstr ""
 
-#: ../gui/Plugin.c:417
+#: ../gui/Plugin.c:416
 msgid "Error closing CD-ROM plugin!"
 msgstr ""
 
-#: ../gui/Plugin.c:419
+#: ../gui/Plugin.c:418
 msgid "Error closing SPU plugin!"
 msgstr ""
 
-#: ../gui/Plugin.c:421
+#: ../gui/Plugin.c:420
 msgid "Error closing Controller 1 Plugin!"
 msgstr ""
 
-#: ../gui/Plugin.c:423
+#: ../gui/Plugin.c:422
 msgid "Error closing Controller 2 plugin!"
 msgstr ""
 
-#: ../gui/Plugin.c:425
+#: ../gui/Plugin.c:424
 msgid "Error closing GPU plugin!"
 msgstr ""
 
-#: ../libpcsxcore/cdriso.c:728
+#: ../libpcsxcore/cdriso.c:729
 #, c-format
 msgid "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"
 msgstr ""
 
-#: ../libpcsxcore/cdriso.c:749
+#: ../libpcsxcore/cdriso.c:750
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr ""
@@ -998,27 +1001,27 @@ msgstr ""
 msgid "Debugger stopped.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:345
+#: ../libpcsxcore/misc.c:346
 #, c-format
 msgid "CD-ROM Label: %.32s\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:346
+#: ../libpcsxcore/misc.c:347
 #, c-format
 msgid "CD-ROM ID: %.9s\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:410
+#: ../libpcsxcore/misc.c:411
 #, c-format
 msgid "Error opening file: %s.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:453
+#: ../libpcsxcore/misc.c:454
 #, c-format
 msgid "Unknown CPE opcode %02x at position %08x.\n"
 msgstr ""
 
-#: ../libpcsxcore/misc.c:481
+#: ../libpcsxcore/misc.c:482
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr ""
 
@@ -1027,77 +1030,77 @@ msgstr ""
 msgid "Error loading %s: %s"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:243
+#: ../libpcsxcore/plugins.c:233
 #, c-format
 msgid "Could not load GPU plugin %s!"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:318
+#: ../libpcsxcore/plugins.c:308
 #, c-format
 msgid "Could not load CD-ROM plugin %s!"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:366
+#: ../libpcsxcore/plugins.c:356
 #, c-format
 msgid "Could not load SPU plugin %s!"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:505
+#: ../libpcsxcore/plugins.c:495
 #, c-format
 msgid "Could not load Controller 1 plugin %s!"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:563
+#: ../libpcsxcore/plugins.c:553
 #, c-format
 msgid "Could not load Controller 2 plugin %s!"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:608
+#: ../libpcsxcore/plugins.c:598
 #, c-format
 msgid "Could not load NetPlay plugin %s!"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:688
+#: ../libpcsxcore/plugins.c:678
 #, c-format
 msgid "Could not load SIO1 plugin %s!"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:773
+#: ../libpcsxcore/plugins.c:763
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:775
+#: ../libpcsxcore/plugins.c:765
 #, c-format
 msgid "Error initializing GPU plugin: %d"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:777
+#: ../libpcsxcore/plugins.c:767
 #, c-format
 msgid "Error initializing SPU plugin: %d"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:779
+#: ../libpcsxcore/plugins.c:769
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:781
+#: ../libpcsxcore/plugins.c:771
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:785
+#: ../libpcsxcore/plugins.c:775
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:790
+#: ../libpcsxcore/plugins.c:780
 #, c-format
 msgid "Error initializing SIO1 plugin: %d"
 msgstr ""
 
-#: ../libpcsxcore/plugins.c:793
+#: ../libpcsxcore/plugins.c:783
 msgid "Plugins loaded.\n"
 msgstr ""
 
@@ -1169,51 +1172,52 @@ msgid "CDR NULL Plugin"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:1
-msgid "125ms"
+#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:206
+msgid "CDR configuration"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:2
-msgid "16min"
+msgid "Choose your CD-ROM device or type its path if it's not listed"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:3
-msgid "16s"
+msgid "Select read mode:"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:4
-msgid "1min"
+msgid "Cache Size (Def. 64):"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:5
-msgid "1s"
+msgid "Spindown Time:"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:6
-msgid "250ms"
+msgid "Cdrom Speed (Def. 0 = MAX):"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:7
-msgid "2min"
+msgid "Enable subchannel read"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:8
-msgid "2s"
+msgid "Normal (No Cache)"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:9
-msgid "32min"
+msgid "Threaded - Faster (With Cache)"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:10
-msgid "32s"
+msgid "Default"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:11
-msgid "4min"
+msgid "125ms"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:12
-msgid "4s"
+msgid "250ms"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:13
@@ -1221,52 +1225,51 @@ msgid "500ms"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:14
-msgid "8min"
+msgid "1s"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:15
-msgid "8s"
+msgid "2s"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:16
-#: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:206
-msgid "CDR configuration"
+msgid "4s"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:17
-msgid "Cache Size (Def. 64):"
+msgid "8s"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:18
-msgid "Cdrom Speed (Def. 0 = MAX):"
+msgid "16s"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:19
-msgid "Choose your CD-ROM device or type its path if it's not listed"
+msgid "32s"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:20
-msgid "Default"
+msgid "1min"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:21
-msgid "Enable subchannel read"
+msgid "2min"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:22
-msgid "Normal (No Cache)"
+msgid "4min"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:23
-msgid "Select read mode:"
+msgid "8min"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:24
-msgid "Spindown Time:"
+msgid "16min"
 msgstr ""
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:25
-msgid "Threaded - Faster (With Cache)"
+msgid "32min"
 msgstr ""
 
 #: ../plugins/dfinput/cfg-gtk2.c:49
@@ -1428,69 +1431,73 @@ msgstr ""
 msgid "(Not Set)"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:562
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:13
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:55
+#: ../plugins/dfinput/cfg-gtk2.c:570
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:14
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:77
 msgid "None"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:604
+#: ../plugins/dfinput/cfg-gtk2.c:612
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:610 ../plugins/dfinput/cfg-gtk2.c:630
+#: ../plugins/dfinput/cfg-gtk2.c:618 ../plugins/dfinput/cfg-gtk2.c:638
 msgid "Key"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk2.c:616 ../plugins/dfinput/cfg-gtk2.c:636
+#: ../plugins/dfinput/cfg-gtk2.c:624 ../plugins/dfinput/cfg-gtk2.c:644
 msgid "Button"
 msgstr ""
 
 #: ../plugins/dfinput/dfinput.ui.h:1
-msgid "Analog Pad"
-msgstr ""
-
-#: ../plugins/dfinput/dfinput.ui.h:2
-msgid "Change"
-msgstr ""
-
-#: ../plugins/dfinput/dfinput.ui.h:3
-msgid "Controller 1"
-msgstr ""
-
-#: ../plugins/dfinput/dfinput.ui.h:4
-msgid "Controller 2"
-msgstr ""
-
-#: ../plugins/dfinput/dfinput.ui.h:5
-msgid "Device:"
-msgstr ""
-
-#: ../plugins/dfinput/dfinput.ui.h:6
 msgid "Digital Pad"
 msgstr ""
 
-#: ../plugins/dfinput/dfinput.ui.h:7
+#: ../plugins/dfinput/dfinput.ui.h:2
+msgid "Analog Pad"
+msgstr ""
+
+#: ../plugins/dfinput/dfinput.ui.h:3
 msgid "Mouse"
 msgstr ""
 
-#: ../plugins/dfinput/dfinput.ui.h:8
-msgid "Multi-Threaded (Recommended)"
+#: ../plugins/dfinput/dfinput.ui.h:4
+msgid "Device:"
 msgstr ""
 
-#: ../plugins/dfinput/dfinput.ui.h:9 ../win32/gui/WndMain.c:1316
-msgid "Options"
-msgstr ""
-
-#: ../plugins/dfinput/dfinput.ui.h:10
-msgid "Reset"
-msgstr ""
-
-#: ../plugins/dfinput/dfinput.ui.h:11
+#: ../plugins/dfinput/dfinput.ui.h:5
 msgid "Type:"
 msgstr ""
 
-#: ../plugins/dfinput/pad.c:29
+#: ../plugins/dfinput/dfinput.ui.h:6
+msgid "Visual vibration"
+msgstr ""
+
+#: ../plugins/dfinput/dfinput.ui.h:7
+msgid "Change"
+msgstr ""
+
+#: ../plugins/dfinput/dfinput.ui.h:8
+msgid "Reset"
+msgstr ""
+
+#: ../plugins/dfinput/dfinput.ui.h:9
+msgid "Controller 1"
+msgstr ""
+
+#: ../plugins/dfinput/dfinput.ui.h:10
+msgid "Controller 2"
+msgstr ""
+
+#: ../plugins/dfinput/dfinput.ui.h:11
+msgid "Multi-Threaded (Recommended)"
+msgstr ""
+
+#: ../plugins/dfinput/dfinput.ui.h:12 ../win32/gui/WndMain.c:1325
+msgid "Options"
+msgstr ""
+
+#: ../plugins/dfinput/pad.c:33
 msgid "Gamepad/Keyboard/Mouse Input"
 msgstr ""
 
@@ -1510,27 +1517,6 @@ msgstr ""
 
 #. ****************************************************************************
 #: ../plugins/dfnet/dfnet.ui.h:1 ../plugins/bladesio1/sio1.ui.h:1
-msgid "Client (Player2)"
-msgstr ""
-
-#: ../plugins/dfnet/dfnet.ui.h:2 ../plugins/bladesio1/sio1.ui.h:2
-msgid "Copy PC IP to Clipboard"
-msgstr ""
-
-#: ../plugins/dfnet/dfnet.ui.h:3 ../plugins/bladesio1/sio1.ui.h:3
-msgid ""
-"Do not change if not necessary (remember it must be changed on both sides)."
-msgstr ""
-
-#: ../plugins/dfnet/dfnet.ui.h:4 ../plugins/bladesio1/sio1.ui.h:4
-msgid "Play Offline"
-msgstr ""
-
-#: ../plugins/dfnet/dfnet.ui.h:5 ../plugins/bladesio1/sio1.ui.h:5
-msgid "Port Number"
-msgstr ""
-
-#: ../plugins/dfnet/dfnet.ui.h:6 ../plugins/bladesio1/sio1.ui.h:6
 msgid ""
 "Select here if you'll be Server (Player1) or Client (Player2).\n"
 "\n"
@@ -1541,16 +1527,37 @@ msgid ""
 "the IP Address Control."
 msgstr ""
 
-#: ../plugins/dfnet/dfnet.ui.h:11 ../plugins/bladesio1/sio1.ui.h:11
+#: ../plugins/dfnet/dfnet.ui.h:6 ../plugins/bladesio1/sio1.ui.h:6
+msgid "Copy PC IP to Clipboard"
+msgstr ""
+
+#: ../plugins/dfnet/dfnet.ui.h:7 ../plugins/bladesio1/sio1.ui.h:7
 msgid "Server (Player1)"
 msgstr ""
 
-#: ../plugins/dfnet/dfnet.ui.h:12 ../plugins/bladesio1/sio1.ui.h:12
+#: ../plugins/dfnet/dfnet.ui.h:8 ../plugins/bladesio1/sio1.ui.h:8
+msgid "Client (Player2)"
+msgstr ""
+
+#: ../plugins/dfnet/dfnet.ui.h:9 ../plugins/bladesio1/sio1.ui.h:9
+msgid ""
+"Do not change if not necessary (remember it must be changed on both sides)."
+msgstr ""
+
+#: ../plugins/dfnet/dfnet.ui.h:10 ../plugins/bladesio1/sio1.ui.h:10
+msgid "Port Number"
+msgstr ""
+
+#: ../plugins/dfnet/dfnet.ui.h:11 ../plugins/bladesio1/sio1.ui.h:11
 msgid "Start Game"
 msgstr ""
 
+#: ../plugins/dfnet/dfnet.ui.h:12 ../plugins/bladesio1/sio1.ui.h:12
+msgid "Play Offline"
+msgstr ""
+
 #: ../plugins/dfnet/gui.c:30 ../plugins/dfnet/gui.c:112
-#: ../win32/gui/ConfigurePlugins.c:618
+#: ../win32/gui/ConfigurePlugins.c:620
 msgid "NetPlay"
 msgstr ""
 
@@ -1571,58 +1578,62 @@ msgstr ""
 msgid "The Client should now Start a Connection, waiting..."
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:43
+#: ../plugins/dfsound/spu.c:66
 msgid "DirectSound Driver"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:45
+#: ../plugins/dfsound/spu.c:68
 msgid "Mac OS X Sound"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:47
+#: ../plugins/dfsound/spu.c:70
 msgid "ALSA Sound"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:49
+#: ../plugins/dfsound/spu.c:72
 msgid "OSS Sound"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:51
+#: ../plugins/dfsound/spu.c:74
 msgid "SDL Sound"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:53
+#: ../plugins/dfsound/spu.c:76
+msgid "OpenAL Sound"
+msgstr ""
+
+#: ../plugins/dfsound/spu.c:78
 msgid "PulseAudio Sound"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:55
+#: ../plugins/dfsound/spu.c:80
 msgid "NULL Sound"
 msgstr ""
 
-#: ../plugins/dfsound/spu.c:58
+#: ../plugins/dfsound/spu.c:83
 msgid ""
 "P.E.Op.S. Sound Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:1
-msgid "Adjust XA speed"
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:2
+msgid "Volume:"
 msgstr ""
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:2
-msgid "Choose this if XA music is played too quickly."
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:3
+msgid "Interpolation:"
 msgstr ""
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:4
-msgid "Cubic"
+msgid "Reverb:"
 msgstr ""
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:5
-msgid "Frequency Response - Output Filter"
+msgid "Adjust XA speed"
 msgstr ""
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:6
-msgid "Gaussian"
+msgid "Choose this if XA music is played too quickly."
 msgstr ""
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:7
@@ -1630,523 +1641,511 @@ msgid "High compatibility mode"
 msgstr ""
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:8
-msgid "Interpolation:"
-msgstr ""
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:9
-msgid "Loud"
-msgstr ""
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:10
-msgid "Loudest"
-msgstr ""
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:11
-msgid "Low"
-msgstr ""
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:12
-msgid "Medium"
-msgstr ""
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:14
-msgid "Off"
-msgstr ""
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:15
-msgid "Play only one channel for a performance boost."
-msgstr ""
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:16
-msgid "Playstation"
-msgstr ""
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:17
-msgid "Reverb:"
-msgstr ""
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:18
-msgid "SPU IRQ Wait"
-msgstr ""
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:19
-msgid "Simple"
-msgstr ""
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:20
-msgid "Single channel sound"
-msgstr ""
-
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:21
 msgid "Use the asynchronous SPU interface."
 msgstr ""
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:22
-msgid "Volume:"
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:9
+msgid "SPU IRQ Wait"
 msgstr ""
 
-#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:23
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:10
 msgid "Wait for CPU; only useful for some games."
 msgstr ""
 
-#: ../plugins/dfxvideo/gpu.c:60
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:11
+msgid "Single channel sound"
+msgstr ""
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:12
+msgid "Play only one channel for a performance boost."
+msgstr ""
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:13
+msgid "Frequency Response - Output Filter"
+msgstr ""
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:15
+msgid "Simple"
+msgstr ""
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:16
+msgid "Gaussian"
+msgstr ""
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:17
+msgid "Cubic"
+msgstr ""
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:18
+msgid "Off"
+msgstr ""
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:19
+msgid "Playstation"
+msgstr ""
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:20
+msgid "Low"
+msgstr ""
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:21
+msgid "Medium"
+msgstr ""
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:22
+msgid "Loud"
+msgstr ""
+
+#: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:23
+msgid "Loudest"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpu.c:82
 msgid "Soft Driver"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpu.c:61
+#: ../plugins/dfxvideo/gpu.c:83
 msgid ""
 "P.E.Op.S. Soft Driver V1.17\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpu.c:63
+#: ../plugins/dfxvideo/gpu.c:85
 msgid "SoftGL Driver"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpu.c:64
+#: ../plugins/dfxvideo/gpu.c:86
 msgid ""
 "P.E.Op.S. SoftGL Driver V1.17\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpu.c:66
+#: ../plugins/dfxvideo/gpu.c:88
 msgid "XVideo Driver"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpu.c:67
+#: ../plugins/dfxvideo/gpu.c:89
 msgid ""
 "P.E.Op.S. Xvideo Driver V1.17\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpu.c:70
+#: ../plugins/dfxvideo/gpu.c:92
 msgid "Pete Bernert and the P.E.Op.S. team"
 msgstr ""
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:1
-msgid "0: None"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:2
-msgid "0: Off (fastest)"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:3
-msgid "1024x768"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:4
-msgid "1152x864"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:5
-msgid "1280x1024"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:6
-msgid "1600x1200"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:7
-msgid "1: 2xSai"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:8
-msgid "1: Game dependant"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:9
-msgid "200.0"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:10
-msgid "2: 2xSuperSai"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:11
-msgid "2: Always"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:12
-msgid "320x240"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:13
-msgid "3: SuperEagle"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:14
-msgid "4: Scale2x"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:15
-msgid "5: Scale3x"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:16
-msgid "640x480"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:17
-msgid "6: HQ2X"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:18
-msgid "7: HQ3X"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:19
-msgid "800x600"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:20
-msgid "Autodetect FPS limit"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:21
-msgid "Better FPS limit in some"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:22
-msgid "Black screens in Lunar"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:23
-msgid "Capcom fighting games"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:24
-msgid "Chrono Cross"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:25
-msgid "Compatibility mode"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:26
 msgid "Configure X11 Video"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:27
-msgid "Disable CPU Saving"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:28
-msgid "Disable coordinate check"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:29
-msgid "Dithering:"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:30
-msgid "Draw quads with triangles"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:31
-msgid "Enable frame skipping"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:32
-msgid "Enable this if games display too quickly."
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:33
-msgid "Expand screen width"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:34
-msgid "Fake 'gpu busy' states"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:35
-msgid "For precise framerate"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:36
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
-msgid "Fullscreen"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:37
-msgid "Ignore brightness color"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:38
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:2
 msgid "Initial Window Size:"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:39
-msgid "Lazy screen update"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:40
-msgid "Maintain 4:3 Aspect Ratio"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:41
-msgid "Needed by Dark Forces"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:42
-msgid "Odd/even bit hack"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:43
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
-msgid "Old frame skipping"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:44
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
-msgid "PC FPS calculation"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:45
-msgid "Pandemonium 2"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:46
-msgid "Repeated flat tex triangles"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:47
-msgid "Set FPS"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:48
-msgid "Show FPS"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:49
-msgid "Skip every second frame"
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:50
-msgid "Skip frames when rendering."
-msgstr ""
-
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:51
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:3
 msgid "Stretching:"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:52
-msgid "Toggle busy flags after drawing"
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:4
+msgid "Dithering:"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:53
-msgid "Toggle whether the FPS will be shown."
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:5
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:4
+msgid "Fullscreen"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:54
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:6
 msgid "Toggle windowed/fullscreen mode."
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:55
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:83
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:7
+msgid "Maintain 4:3 Aspect Ratio"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:8
+msgid "Show FPS"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:9
+msgid "Toggle whether the FPS will be shown."
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:10
+msgid "Enable frame skipping"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:11
+msgid "Skip frames when rendering."
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:12
+msgid "Set FPS"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:13
+msgid "Enable this if games display too quickly."
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:14
+msgid "200.0"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:15
+msgid "Autodetect FPS limit"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:16
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:36
 msgid "Use game fixes"
 msgstr ""
 
-#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:56
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:17
+msgid "Disable CPU Saving"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:18
+msgid "For precise framerate"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:19
+msgid "Odd/even bit hack"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:20
+msgid "Chrono Cross"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:21
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:45
+msgid "PC FPS calculation"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:22
+msgid "Better FPS limit in some"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:23
+msgid "Expand screen width"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:24
+msgid "Capcom fighting games"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:25
+msgid "Ignore brightness color"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:26
+msgid "Black screens in Lunar"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:27
+msgid "Disable coordinate check"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:28
+msgid "Compatibility mode"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:29
+msgid "Lazy screen update"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:30
+msgid "Pandemonium 2"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:31
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:46
+msgid "Old frame skipping"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:32
+msgid "Skip every second frame"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:33
+msgid "Repeated flat tex triangles"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:34
+msgid "Needed by Dark Forces"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:35
+msgid "Draw quads with triangles"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:36
 msgid "better g-colors, worse textures"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpu.c:70
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:37
+msgid "Fake 'gpu busy' states"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:38
+msgid "Toggle busy flags after drawing"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:39
+msgid "0: None"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:40
+msgid "1: 2xSai"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:41
+msgid "2: 2xSuperSai"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:42
+msgid "3: SuperEagle"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:43
+msgid "4: Scale2x"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:44
+msgid "5: Scale3x"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:45
+msgid "6: HQ2X"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:46
+msgid "7: HQ3X"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:47
+msgid "0: Off (fastest)"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:48
+msgid "1: Game dependant"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:49
+msgid "2: Always"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:50
+msgid "320x240"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:51
+msgid "640x480"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:52
+msgid "800x600"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:53
+msgid "1024x768"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:54
+msgid "1152x864"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:55
+msgid "1280x1024"
+msgstr ""
+
+#: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:56
+msgid "1600x1200"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpu.c:97
 msgid "OpenGL Driver"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpu.c:72
+#: ../plugins/peopsxgl/gpu.c:99
 msgid "Pete Bernert"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpu.c:73
+#: ../plugins/peopsxgl/gpu.c:100
 msgid ""
 "Based on P.E.Op.S. MesaGL Driver V1.78\n"
 "Coded by Pete Bernert\n"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:1
-msgid "2xSaI (Much vram needed)"
+msgid "OpenGL Driver configuration"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:2
-msgid "4444 - Fast, but less colorful"
+msgid "Width:"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:3
-msgid "5551 - Nice colors, bad transparency"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:4
-msgid "8888 - Best colors, more ram needed"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:5
-msgid "Additional uploads"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:6
-msgid "Adjust screen width"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:7
-msgid "Advanced blending (Accurate psx color emulation)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:8
-msgid "Alpha multipass (Correct opaque texture areas)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:9
-msgid "Auto configure for beautiful display"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:10
-msgid "Autoconfigure for fast display"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:11
-msgid "BGR8888 - Faster on some cards"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:12
-msgid "Battle cursor (FF7)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:13
-msgid "Beautiful"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:14
-msgid "Black - Fast, no effects"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:15
-msgid "Black brightness (Lunar)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:16
-msgid "Compatibility"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:17
-msgid "Direct FB updates"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:18
-msgid "Disable coord check"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:19
-msgid "Dithering"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:20
-msgid "Don't care - Use driver's default textures"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:21
-msgid "Emulated VRam - Needs FVP"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:22
-msgid "Emulated VRam - Ok most times"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:23
-msgid "Enhanced - Shows more stuff"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:24
-msgid "Extended + smoothed sprites"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:25
-msgid "Extended - Causing garbage"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:26
-msgid "Extended - No black borders"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:27
-msgid "Extended without sprites - Unfiltered 2D"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:28
-msgid "FPS"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:29
-msgid "FPS limit auto-detector"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:30
-msgid "FPS limit manual"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:31
-msgid "Fake 'GPU busy'"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:32
-msgid "Fast"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:33
-msgid "Filtering:"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:34
-msgid "Force 15 bit framebuffer updates (Faster movies)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:35
-msgid "Framebuffer access:"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:36
-msgid "Framebuffer textures:"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:37
-msgid "Framerate"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:38
-msgid "Full Software (FVP)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:40
-msgid "Gfx card and soft - Slow"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:41
-msgid "Gfx card buffer - Can be slow"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:42
-msgid "Gfx card buffer moves"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:43
-msgid "Gfx card buffer reads"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:44
-msgid "Gfx card buffer reads and moves"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:45
 msgid "Height:"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:46
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:5
+msgid "Dithering"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:6
+msgid "Keep psx aspect ratio"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:7
+msgid "Window options"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:8
+msgid "Quality:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:9
+msgid "Filtering:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:10
 msgid "HiRes Tex:"
 msgstr ""
 
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:11
+msgid "VRam size in MBytes (0..1024, 0=auto):"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:12
+msgid "Textures"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:13
+msgid "Show FPS display on startup"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:14
+msgid "Use FPS limit"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:15
+msgid "FPS limit auto-detector"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:16
+msgid "FPS limit manual"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:17
+msgid "FPS"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:18
+msgid "Use Frame skipping"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:19
+msgid "Framerate"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:20
+msgid "Offscreen drawing:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:21
+msgid "Framebuffer textures:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:22
+msgid "Framebuffer access:"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:23
+msgid "Mask bit detection (Needed by a few games, zbuffer)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:24
+msgid "Alpha multipass (Correct opaque texture areas)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:25
+msgid "Advanced blending (Accurate psx color emulation)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:26
+msgid "Compatibility"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:27
+msgid "Scanlines Blending (0..255, -1=dot):"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:28
+msgid "Unfiltered MDECs (Small movie speedup)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:29
+msgid "Force 15 bit framebuffer updates (Faster movies)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:30
+msgid "Line mode (Polygons will not get filled)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:31
+msgid "Polygon anti-aliasing (Slow with most cards)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:32
+msgid "Use OpenGL extensions (Recommended)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:33
+msgid "Screen smoothing (Can be slow or unsupported)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:34
+msgid "Gte accuracy"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:35
+msgid "Misc"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:37
+msgid "Battle cursor (FF7)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:38
+msgid "Yellow rect (FF9)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
+msgid "Direct FB updates"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:40
+msgid "Black brightness (Lunar)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:41
+msgid "Swap front detection"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:42
+msgid "Disable coord check"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:43
+msgid "No blue glitches (LoD)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:44
+msgid "Soft FB access"
+msgstr ""
+
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:47
-msgid "Keep psx aspect ratio"
+msgid "No subtr. blending"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:48
@@ -2154,143 +2153,159 @@ msgid "Lazy upload (DW7)"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:49
-msgid "Line mode (Polygons will not get filled)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:50
-msgid "Mask bit detection (Needed by a few games, zbuffer)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:51
-msgid "Minimum - Missing screens"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:52
-msgid "Misc"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:53
-msgid "No blue glitches (LoD)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:54
-msgid "No subtr. blending"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:56
-msgid "None (Standard)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:57
-msgid "None - Fastest, most glitches"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:58
 msgid "Odd/even hack"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:59
-msgid "Offscreen drawing:"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:50
+msgid "Adjust screen width"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:61
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:51
 msgid "Old texture filtering"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:62
-msgid "OpenGL Driver configuration"
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:52
+msgid "Additional uploads"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:64
-msgid "Polygon anti-aliasing (Slow with most cards)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:65
-msgid "Quality:"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:66
-msgid "Scaled (Needs tex filtering)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:67
-msgid "Scanlines Blending (0..255, -1=dot):"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:68
-msgid "Screen smoothing (Can be slow or unsupported)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:69
-msgid "Show FPS display on startup"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:70
-msgid "Soft FB access"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:71
-msgid "Special game fixes"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:72
-msgid "Standard + smoothed sprites"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:73
-msgid "Standard - Glitches will happen"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:74
-msgid "Standard - OK for most games"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:75
-msgid "Standard without sprites - Unfiltered 2D"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:76
-msgid "Swap front detection"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:77
-msgid "Textures"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:78
-msgid "Unfiltered MDECs (Small movie speedup)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:79
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:53
 msgid "Unused"
 msgstr ""
 
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:54
+msgid "Fake 'GPU busy'"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:55
+msgid "Special game fixes"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:56
+msgid "Fast"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:57
+msgid "Autoconfigure for fast display"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:58
+msgid "Beautiful"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:59
+msgid "Auto configure for beautiful display"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
+msgid "Emulated VRam - Ok most times"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:61
+msgid "Gfx card buffer reads"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:62
+msgid "Gfx card buffer moves"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
+msgid "Gfx card buffer reads and moves"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:64
+msgid "Full Software (FVP)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:65
+msgid "Emulated VRam - Needs FVP"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:66
+msgid "Black - Fast, no effects"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:67
+msgid "Gfx card buffer - Can be slow"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:68
+msgid "Gfx card and soft - Slow"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:69
+msgid "None - Fastest, most glitches"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:70
+msgid "Minimum - Missing screens"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:71
+msgid "Standard - OK for most games"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:72
+msgid "Enhanced - Shows more stuff"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:73
+msgid "Extended - Causing garbage"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:74
+msgid "None (Standard)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:75
+msgid "2xSaI (Much vram needed)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:76
+msgid "Scaled (Needs tex filtering)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:78
+msgid "Standard - Glitches will happen"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:79
+msgid "Extended - No black borders"
+msgstr ""
+
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:80
-msgid "Use FPS limit"
+msgid "Standard without sprites - Unfiltered 2D"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:81
-msgid "Use Frame skipping"
+msgid "Extended without sprites - Unfiltered 2D"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:82
-msgid "Use OpenGL extensions (Recommended)"
+msgid "Standard + smoothed sprites"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:83
+msgid "Extended + smoothed sprites"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:84
-msgid "VRam size in MBytes (0..1024, 0=auto):"
+msgid "Don't care - Use driver's default textures"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:85
-msgid "Width:"
+msgid "4444 - Fast, but less colorful"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:86
-msgid "Window options"
+msgid "5551 - Nice colors, bad transparency"
 msgstr ""
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:87
-msgid "Yellow rect (FF9)"
+msgid "8888 - Best colors, more ram needed"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:88
+msgid "BGR8888 - Faster on some cards"
 msgstr ""
 
 #: ../plugins/bladesio1/gui.c:32
@@ -2331,8 +2346,8 @@ msgstr ""
 
 #: ../win32/gui/AboutDlg.c:48 ../win32/gui/AboutDlg.c:52
 #: ../win32/gui/CheatDlg.c:69 ../win32/gui/CheatDlg.c:119
-#: ../win32/gui/ConfigurePlugins.c:485 ../win32/gui/ConfigurePlugins.c:616
-#: ../win32/gui/WndMain.c:1064 ../win32/gui/WndMain.c:1300
+#: ../win32/gui/ConfigurePlugins.c:487 ../win32/gui/ConfigurePlugins.c:618
+#: ../win32/gui/WndMain.c:1072 ../win32/gui/WndMain.c:1308
 msgid "OK"
 msgstr ""
 
@@ -2351,8 +2366,8 @@ msgid "No"
 msgstr ""
 
 #: ../win32/gui/CheatDlg.c:70 ../win32/gui/CheatDlg.c:120
-#: ../win32/gui/ConfigurePlugins.c:486 ../win32/gui/ConfigurePlugins.c:617
-#: ../win32/gui/WndMain.c:1065 ../win32/gui/WndMain.c:1301
+#: ../win32/gui/ConfigurePlugins.c:488 ../win32/gui/ConfigurePlugins.c:619
+#: ../win32/gui/WndMain.c:1073 ../win32/gui/WndMain.c:1309
 msgid "Cancel"
 msgstr ""
 
@@ -2392,42 +2407,6 @@ msgstr ""
 msgid "PCSXR Cheat Code Files"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:402
-msgid "Equal Value"
-msgstr ""
-
-#: ../win32/gui/CheatDlg.c:403
-msgid "Not Equal Value"
-msgstr ""
-
-#: ../win32/gui/CheatDlg.c:404
-msgid "Range"
-msgstr ""
-
-#: ../win32/gui/CheatDlg.c:407
-msgid "Increased By"
-msgstr ""
-
-#: ../win32/gui/CheatDlg.c:408
-msgid "Decreased By"
-msgstr ""
-
-#: ../win32/gui/CheatDlg.c:409
-msgid "Increased"
-msgstr ""
-
-#: ../win32/gui/CheatDlg.c:410
-msgid "Decreased"
-msgstr ""
-
-#: ../win32/gui/CheatDlg.c:411
-msgid "Different"
-msgstr ""
-
-#: ../win32/gui/CheatDlg.c:412
-msgid "No Change"
-msgstr ""
-
 #: ../win32/gui/CheatDlg.c:453
 msgid "No addresses found."
 msgstr ""
@@ -2465,109 +2444,89 @@ msgstr ""
 msgid "C&lose"
 msgstr ""
 
-#: ../win32/gui/CheatDlg.c:692
-msgid "8-bit"
-msgstr ""
-
-#: ../win32/gui/CheatDlg.c:693
-msgid "16-bit"
-msgstr ""
-
-#: ../win32/gui/CheatDlg.c:694
-msgid "32-bit"
-msgstr ""
-
-#: ../win32/gui/CheatDlg.c:695
-msgid "Decimal"
-msgstr ""
-
-#: ../win32/gui/CheatDlg.c:696
-msgid "Hexadecimal"
-msgstr ""
-
-#: ../win32/gui/ConfigurePlugins.c:221
+#: ../win32/gui/ConfigurePlugins.c:223
 msgid "Simulate Psx Bios"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:307
+#: ../win32/gui/ConfigurePlugins.c:309
 msgid "Configuration not OK!"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:408
+#: ../win32/gui/ConfigurePlugins.c:410
 msgid "This plugin reports that should work correctly"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:409
+#: ../win32/gui/ConfigurePlugins.c:411
 msgid "This plugin reports that should not work correctly"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:465
+#: ../win32/gui/ConfigurePlugins.c:467
 msgid "Select Plugins Directory"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:474
+#: ../win32/gui/ConfigurePlugins.c:476
 msgid "Select Bios Directory"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:483
+#: ../win32/gui/ConfigurePlugins.c:485
 msgid "Configuration"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:487
+#: ../win32/gui/ConfigurePlugins.c:489
 msgid "Graphics"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:488
+#: ../win32/gui/ConfigurePlugins.c:490
 msgid "First Controller"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:489
+#: ../win32/gui/ConfigurePlugins.c:491
 msgid "Second Controller"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:490
+#: ../win32/gui/ConfigurePlugins.c:492
 msgid "Sound"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:491
+#: ../win32/gui/ConfigurePlugins.c:493
 msgid "Cdrom"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:492
+#: ../win32/gui/ConfigurePlugins.c:494
 msgid "Bios"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:493
+#: ../win32/gui/ConfigurePlugins.c:495
 msgid "Set Bios Directory"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:494
+#: ../win32/gui/ConfigurePlugins.c:496
 msgid "Set Plugins Directory"
-msgstr ""
-
-#: ../win32/gui/ConfigurePlugins.c:495 ../win32/gui/ConfigurePlugins.c:498
-#: ../win32/gui/ConfigurePlugins.c:501 ../win32/gui/ConfigurePlugins.c:504
-#: ../win32/gui/ConfigurePlugins.c:507 ../win32/gui/ConfigurePlugins.c:619
-msgid "Configure..."
-msgstr ""
-
-#: ../win32/gui/ConfigurePlugins.c:496 ../win32/gui/ConfigurePlugins.c:499
-#: ../win32/gui/ConfigurePlugins.c:502 ../win32/gui/ConfigurePlugins.c:505
-#: ../win32/gui/ConfigurePlugins.c:508 ../win32/gui/ConfigurePlugins.c:620
-msgid "Test..."
 msgstr ""
 
 #: ../win32/gui/ConfigurePlugins.c:497 ../win32/gui/ConfigurePlugins.c:500
 #: ../win32/gui/ConfigurePlugins.c:503 ../win32/gui/ConfigurePlugins.c:506
 #: ../win32/gui/ConfigurePlugins.c:509 ../win32/gui/ConfigurePlugins.c:621
+msgid "Configure..."
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:498 ../win32/gui/ConfigurePlugins.c:501
+#: ../win32/gui/ConfigurePlugins.c:504 ../win32/gui/ConfigurePlugins.c:507
+#: ../win32/gui/ConfigurePlugins.c:510 ../win32/gui/ConfigurePlugins.c:622
+msgid "Test..."
+msgstr ""
+
+#: ../win32/gui/ConfigurePlugins.c:499 ../win32/gui/ConfigurePlugins.c:502
+#: ../win32/gui/ConfigurePlugins.c:505 ../win32/gui/ConfigurePlugins.c:508
+#: ../win32/gui/ConfigurePlugins.c:511 ../win32/gui/ConfigurePlugins.c:623
 msgid "About..."
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:614
+#: ../win32/gui/ConfigurePlugins.c:616
 msgid "NetPlay Configuration"
 msgstr ""
 
-#: ../win32/gui/ConfigurePlugins.c:622
+#: ../win32/gui/ConfigurePlugins.c:624
 msgid ""
 "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
 msgstr ""
@@ -2648,59 +2607,59 @@ msgstr ""
 msgid "Error Opening GPU Plugin (%d)"
 msgstr ""
 
-#: ../win32/gui/plugin.c:286
+#: ../win32/gui/plugin.c:285
 #, c-format
 msgid "Error Opening SPU Plugin (%d)"
 msgstr ""
 
-#: ../win32/gui/plugin.c:289
+#: ../win32/gui/plugin.c:288
 #, c-format
 msgid "Error Opening PAD1 Plugin (%d)"
 msgstr ""
 
-#: ../win32/gui/plugin.c:293
+#: ../win32/gui/plugin.c:292
 #, c-format
 msgid "Error Opening PAD2 Plugin (%d)"
 msgstr ""
 
-#: ../win32/gui/plugin.c:323
+#: ../win32/gui/plugin.c:322
 msgid "Error Closing CDR Plugin"
 msgstr ""
 
-#: ../win32/gui/plugin.c:325
+#: ../win32/gui/plugin.c:324
 msgid "Error Closing GPU Plugin"
 msgstr ""
 
-#: ../win32/gui/plugin.c:327
+#: ../win32/gui/plugin.c:326
 msgid "Error Closing SPU Plugin"
 msgstr ""
 
-#: ../win32/gui/plugin.c:345
+#: ../win32/gui/plugin.c:344
 #, c-format
 msgid "CDRinit error: %d"
 msgstr ""
 
-#: ../win32/gui/plugin.c:347
+#: ../win32/gui/plugin.c:346
 #, c-format
 msgid "GPUinit error: %d"
 msgstr ""
 
-#: ../win32/gui/plugin.c:349
+#: ../win32/gui/plugin.c:348
 #, c-format
 msgid "SPUinit error: %d"
 msgstr ""
 
-#: ../win32/gui/plugin.c:351
+#: ../win32/gui/plugin.c:350
 #, c-format
 msgid "PAD1init error: %d"
 msgstr ""
 
-#: ../win32/gui/plugin.c:353
+#: ../win32/gui/plugin.c:352
 #, c-format
 msgid "PAD2init error: %d"
 msgstr ""
 
-#: ../win32/gui/plugin.c:356
+#: ../win32/gui/plugin.c:355
 #, c-format
 msgid "NETinit error: %d"
 msgstr ""
@@ -2721,8 +2680,8 @@ msgstr ""
 msgid "Greek"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:81 ../win32/gui/WndMain.c:1667
-#: ../win32/gui/WndMain.c:1669
+#: ../win32/gui/WndMain.c:81 ../win32/gui/WndMain.c:1679
+#: ../win32/gui/WndMain.c:1681
 msgid "English"
 msgstr ""
 
@@ -2810,295 +2769,299 @@ msgstr ""
 msgid "Running BIOS is not supported with Internal HLE Bios."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:766
+#: ../win32/gui/WndMain.c:774
 msgid "Game ID"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:772
+#: ../win32/gui/WndMain.c:780
 msgid "Game"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:954
+#: ../win32/gui/WndMain.c:962
 msgid "mid link block"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:957
+#: ../win32/gui/WndMain.c:965
 msgid "terminiting link block"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1062
+#: ../win32/gui/WndMain.c:1070
 msgid "Memcard Manager"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1066 ../win32/gui/WndMain.c:1069
+#: ../win32/gui/WndMain.c:1074 ../win32/gui/WndMain.c:1077
 msgid "Select Mcd"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1067 ../win32/gui/WndMain.c:1070
+#: ../win32/gui/WndMain.c:1075 ../win32/gui/WndMain.c:1078
 msgid "Format Mcd"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1068 ../win32/gui/WndMain.c:1071
+#: ../win32/gui/WndMain.c:1076 ../win32/gui/WndMain.c:1079
 msgid "Reload Mcd"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1072
+#: ../win32/gui/WndMain.c:1080
 msgid "-> Copy ->"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1073
+#: ../win32/gui/WndMain.c:1081
 msgid "<- Copy <-"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1074
+#: ../win32/gui/WndMain.c:1082
 msgid "Paste"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1075
+#: ../win32/gui/WndMain.c:1083
 msgid "<- Un/Delete"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1076
+#: ../win32/gui/WndMain.c:1084
 msgid "Un/Delete ->"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1078
+#: ../win32/gui/WndMain.c:1086
 msgid "Memory Card 1"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1079
+#: ../win32/gui/WndMain.c:1087
 msgid "Memory Card 2"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1134
+#: ../win32/gui/WndMain.c:1142
 msgid "Are you sure you want to paste this selection?"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1134 ../win32/gui/WndMain.c:1245
-#: ../win32/gui/WndMain.c:1252
+#: ../win32/gui/WndMain.c:1142 ../win32/gui/WndMain.c:1253
+#: ../win32/gui/WndMain.c:1260
 msgid "Confirmation"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1245 ../win32/gui/WndMain.c:1252
+#: ../win32/gui/WndMain.c:1253 ../win32/gui/WndMain.c:1260
 msgid "Are you sure you want to format this Memory Card?"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1298
+#: ../win32/gui/WndMain.c:1306
 msgid "Cpu Config"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1303
+#: ../win32/gui/WndMain.c:1311
 msgid "Disable Xa Decoding"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1304
+#: ../win32/gui/WndMain.c:1312
 msgid "Sio Irq Always Enabled"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1305
+#: ../win32/gui/WndMain.c:1313
 msgid "Black && White Movies"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1306
+#: ../win32/gui/WndMain.c:1314
 msgid "Disable Cd audio"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1309
+#: ../win32/gui/WndMain.c:1317
 msgid "Enable Interpreter Cpu"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1312
+#: ../win32/gui/WndMain.c:1320
 msgid "Spu Irq Always Enabled"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1317
+#: ../win32/gui/WndMain.c:1326
 msgid "Psx System Type"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1423
+#: ../win32/gui/WndMain.c:1434
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1428
+#: ../win32/gui/WndMain.c:1439
 msgid "Psx Memory Card (*.mcr;*.mc)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1433
+#: ../win32/gui/WndMain.c:1444
 msgid "CVGS Memory Card (*.mem;*.vgs)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1438
+#: ../win32/gui/WndMain.c:1449
 msgid "Bleem Memory Card (*.mcd)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1443
+#: ../win32/gui/WndMain.c:1454
 msgid "DexDrive Memory Card (*.gme)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1448
+#: ../win32/gui/WndMain.c:1459
 msgid "DataDeck Memory Card (*.ddf)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1492
+#: ../win32/gui/WndMain.c:1503
 msgid "Psx Exe Format"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1529
+#: ../win32/gui/WndMain.c:1540
 msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin)"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1605
+#: ../win32/gui/WndMain.c:1616
 msgid "&File"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1606
+#: ../win32/gui/WndMain.c:1617
 msgid "E&xit"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1608
+#: ../win32/gui/WndMain.c:1619
 msgid "Run &EXE..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1609
+#: ../win32/gui/WndMain.c:1620
 msgid "Run &BIOS"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1610
+#: ../win32/gui/WndMain.c:1621
 msgid "Run &ISO..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1611
+#: ../win32/gui/WndMain.c:1622
 msgid "Run &CD"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1613
+#: ../win32/gui/WndMain.c:1624
 msgid "&Emulator"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1614
+#: ../win32/gui/WndMain.c:1625
 msgid "&States"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1616
+#: ../win32/gui/WndMain.c:1627
 msgid "S&witch ISO..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1618
+#: ../win32/gui/WndMain.c:1629
+msgid "S&hutdown"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1630
 msgid "Re&set"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1619
+#: ../win32/gui/WndMain.c:1631
 msgid "&Run"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1620
+#: ../win32/gui/WndMain.c:1632
 msgid "&Save"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1621
+#: ../win32/gui/WndMain.c:1633
 msgid "&Load"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1622 ../win32/gui/WndMain.c:1632
+#: ../win32/gui/WndMain.c:1634 ../win32/gui/WndMain.c:1644
 msgid "&Other..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1623 ../win32/gui/WndMain.c:1633
+#: ../win32/gui/WndMain.c:1635 ../win32/gui/WndMain.c:1645
 msgid "Slot &9"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1624 ../win32/gui/WndMain.c:1634
+#: ../win32/gui/WndMain.c:1636 ../win32/gui/WndMain.c:1646
 msgid "Slot &8"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1625 ../win32/gui/WndMain.c:1635
+#: ../win32/gui/WndMain.c:1637 ../win32/gui/WndMain.c:1647
 msgid "Slot &7"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1626 ../win32/gui/WndMain.c:1636
+#: ../win32/gui/WndMain.c:1638 ../win32/gui/WndMain.c:1648
 msgid "Slot &6"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1627 ../win32/gui/WndMain.c:1637
+#: ../win32/gui/WndMain.c:1639 ../win32/gui/WndMain.c:1649
 msgid "Slot &5"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1628 ../win32/gui/WndMain.c:1638
+#: ../win32/gui/WndMain.c:1640 ../win32/gui/WndMain.c:1650
 msgid "Slot &4"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1629 ../win32/gui/WndMain.c:1639
+#: ../win32/gui/WndMain.c:1641 ../win32/gui/WndMain.c:1651
 msgid "Slot &3"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1630 ../win32/gui/WndMain.c:1640
+#: ../win32/gui/WndMain.c:1642 ../win32/gui/WndMain.c:1652
 msgid "Slot &2"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1631 ../win32/gui/WndMain.c:1641
+#: ../win32/gui/WndMain.c:1643 ../win32/gui/WndMain.c:1653
 msgid "Slot &1"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1643
+#: ../win32/gui/WndMain.c:1655
 msgid "&Configuration"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1644
+#: ../win32/gui/WndMain.c:1656
 msgid "Cheat &Search..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1645
+#: ../win32/gui/WndMain.c:1657
 msgid "Ch&eat Code..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1648
+#: ../win32/gui/WndMain.c:1660
 msgid "&Language"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1673
+#: ../win32/gui/WndMain.c:1685
 msgid "&Memory cards..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1674
+#: ../win32/gui/WndMain.c:1686
 msgid "C&PU..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1676
+#: ../win32/gui/WndMain.c:1688
 msgid "&NetPlay..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1678
+#: ../win32/gui/WndMain.c:1690
 msgid "&Controllers..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1679
+#: ../win32/gui/WndMain.c:1691
 msgid "CD-&ROM..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1680
+#: ../win32/gui/WndMain.c:1692
 msgid "&Sound..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1681
+#: ../win32/gui/WndMain.c:1693
 msgid "&Graphics..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1683
+#: ../win32/gui/WndMain.c:1695
 msgid "&Plugins && Bios..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1685
+#: ../win32/gui/WndMain.c:1697
 msgid "&Help"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1686
+#: ../win32/gui/WndMain.c:1698
 msgid "&About..."
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1874
+#: ../win32/gui/WndMain.c:1849
 msgid "Pcsxr Msg"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1877
+#: ../win32/gui/WndMain.c:1852
 msgid "Error Loading Symbol"
 msgstr ""
