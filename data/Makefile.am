@@ -1,4 +1,4 @@
-glade_DATA = pcsxr.glade2
+glade_DATA = pcsxr.ui
 gladedir = $(datadir)/pcsxr
 
 desktopdir = $(datadir)/applications

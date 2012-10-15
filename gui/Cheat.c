@@ -23,13 +23,13 @@
 
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 
 #include "Linux.h"
 
 #include "../libpcsxcore/cheat.h"
 #include "../libpcsxcore/psxmem.h"
 
+static GtkBuilder *builder;
 GtkWidget *CheatListDlg = NULL;
 GtkWidget *CheatSearchDlg = NULL;
 
@@ -37,12 +37,10 @@ static void LoadCheatListItems(int index) {
 	GtkListStore *store = gtk_list_store_new(2, G_TYPE_BOOLEAN, G_TYPE_STRING);
 	GtkTreeIter iter;
 	GtkWidget *widget;
-	GladeXML *xml;
 
 	int i;
 
-	xml = glade_get_widget_tree(CheatListDlg);
-	widget = glade_xml_get_widget(xml, "GtkCList_Cheat");
+	widget = gtk_builder_get_object(builder, "GtkCList_Cheat");
 
 	for (i = 0; i < NumCheats; i++) {
 		gtk_list_store_append(store, &iter);
@@ -71,7 +69,6 @@ static void LoadCheatListItems(int index) {
 }
 
 static void CheatList_TreeSelectionChanged(GtkTreeSelection *selection, gpointer user_data) {
-	GladeXML *xml;
 	GtkTreeIter iter;
 	GtkTreeModel *model;
 	GtkTreePath *path;
@@ -86,20 +83,14 @@ static void CheatList_TreeSelectionChanged(GtkTreeSelection *selection, gpointer
 		i = *gtk_tree_path_get_indices(path);
 		gtk_tree_path_free(path);
 
-		// If a row was selected, and the row is not blank, we can now enable
-		// some of the disabled widgets
-		xml = glade_get_widget_tree(CheatListDlg);
-
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "editbutton1")), TRUE);
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "delbutton1")), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "editbutton1")), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "delbutton1")), TRUE);
 	} else {
-		xml = glade_get_widget_tree(CheatListDlg);
-
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "editbutton1")), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "delbutton1")), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "editbutton1")), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "delbutton1")), FALSE);
 	}
 
-	gtk_widget_set_sensitive (GTK_WIDGET(glade_xml_get_widget(xml, "savebutton1")), NumCheats);
+	gtk_widget_set_sensitive (GTK_WIDGET(gtk_builder_get_object(builder, "savebutton1")), NumCheats);
 }
 
 static void OnCheatListDlg_AddClicked(GtkWidget *widget, gpointer user_data) {
@@ -166,7 +157,6 @@ static void OnCheatListDlg_AddClicked(GtkWidget *widget, gpointer user_data) {
 static void OnCheatListDlg_EditClicked(GtkWidget *widget, gpointer user_data) {
 	GtkWidget *dlg;
 	GtkWidget *box, *scroll, *label, *descr_edit, *code_edit;
-	GladeXML *xml;
 	GtkTreeIter iter;
 	GtkTreeModel *model;
 	GtkTreePath *path;
@@ -176,8 +166,7 @@ static void OnCheatListDlg_EditClicked(GtkWidget *widget, gpointer user_data) {
 	char buf[8192];
 	char *p = buf;
 
-	xml = glade_get_widget_tree(CheatListDlg);
-	widget = glade_xml_get_widget(xml, "GtkCList_Cheat");
+	widget = gtk_builder_get_object(builder, "GtkCList_Cheat");
 
 	selected = gtk_tree_selection_get_selected(
 		gtk_tree_view_get_selection(GTK_TREE_VIEW(widget)),
@@ -260,7 +249,6 @@ static void OnCheatListDlg_EditClicked(GtkWidget *widget, gpointer user_data) {
 }
 
 static void OnCheatListDlg_DelClicked(GtkWidget *widget, gpointer user_data) {
-	GladeXML *xml;
 	GtkTreeIter iter;
 	GtkTreeModel *model;
 	GtkTreePath *path;
@@ -268,8 +256,7 @@ static void OnCheatListDlg_DelClicked(GtkWidget *widget, gpointer user_data) {
 	gboolean selected;
 	int i = -1;
 
-	xml = glade_get_widget_tree(CheatListDlg);
-	widget = glade_xml_get_widget(xml, "GtkCList_Cheat");
+	widget = gtk_builder_get_object(builder, "GtkCList_Cheat");
 
 	selected = gtk_tree_selection_get_selected(
 		gtk_tree_view_get_selection(GTK_TREE_VIEW(widget)),
@@ -383,22 +370,24 @@ static void OnCheatListDlg_CloseClicked() {
 
 // run the cheat list dialog
 void RunCheatListDialog() {
-	GladeXML *xml;
 	GtkWidget *widget;
 	GtkTreeSelection *treesel;
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
 
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "CheatListDlg", NULL);
-	if (!xml) {
-		g_warning(_("Error: Glade interface could not be loaded!"));
+	builder = gtk_builder_new();
+	
+	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+		g_warning("Error: interface could not be loaded!");
 		return;
 	}
 
-	CheatListDlg = glade_xml_get_widget(xml, "CheatListDlg");
+	CheatListDlg = gtk_builder_get_object(builder, "CheatListDlg");
+	
 	gtk_window_set_title(GTK_WINDOW(CheatListDlg), _("Cheat Codes"));
+	gtk_widget_show (CheatListDlg);
 
-	widget = glade_xml_get_widget(xml, "GtkCList_Cheat");
+	widget = gtk_builder_get_object(builder, "GtkCList_Cheat");
 
 	// column for enable
 	renderer = gtk_cell_renderer_toggle_new();
@@ -422,34 +411,34 @@ void RunCheatListDialog() {
 						  G_CALLBACK (CheatList_TreeSelectionChanged),
 						  NULL, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "addbutton1");
+	widget = gtk_builder_get_object(builder, "addbutton1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(OnCheatListDlg_AddClicked), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnCheatListDlg_AddClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "editbutton1");
+	widget = gtk_builder_get_object(builder, "editbutton1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(OnCheatListDlg_EditClicked), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnCheatListDlg_EditClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "delbutton1");
+	widget = gtk_builder_get_object(builder, "delbutton1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(OnCheatListDlg_DelClicked), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnCheatListDlg_DelClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "loadbutton1");
+	widget = gtk_builder_get_object(builder, "loadbutton1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(OnCheatListDlg_OpenClicked), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnCheatListDlg_OpenClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "savebutton1");
+	widget = gtk_builder_get_object(builder, "savebutton1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(OnCheatListDlg_SaveClicked), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnCheatListDlg_SaveClicked), builder, NULL, G_CONNECT_AFTER);
 
 	// Setup a handler for when Close or Cancel is clicked
 	g_signal_connect_data(GTK_OBJECT(CheatListDlg), "response",
-			G_CALLBACK(OnCheatListDlg_CloseClicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+			G_CALLBACK(OnCheatListDlg_CloseClicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
-	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "savebutton1")), NumCheats);
-	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "editbutton1")), FALSE);
-	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "delbutton1")), FALSE);
-	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "editbutton1")), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "savebutton1")), NumCheats);
+	gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "editbutton1")), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "delbutton1")), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "editbutton1")), FALSE);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -479,7 +468,6 @@ static uint32_t current_valueto		= 0;
 
 // update the cheat search dialog
 static void UpdateCheatSearchDialog() {
-	GladeXML		*xml;
 	char			buf[256];
 	int				i;
 	u32				addr;
@@ -487,55 +475,54 @@ static void UpdateCheatSearchDialog() {
 	GtkTreeIter		iter;
 	GtkWidget		*widget;
 
-	xml = glade_get_widget_tree(CheatSearchDlg);
-	widget = glade_xml_get_widget(xml, "GtkCList_Result");
+	widget = gtk_builder_get_object(builder, "GtkCList_Result");
 
-	gtk_combo_box_set_active(GTK_COMBO_BOX(glade_xml_get_widget(xml, "combo_searchfor")), current_search);
-	gtk_combo_box_set_active(GTK_COMBO_BOX(glade_xml_get_widget(xml, "combo_datatype")), current_searchtype);
-	gtk_combo_box_set_active(GTK_COMBO_BOX(glade_xml_get_widget(xml, "combo_database")), current_searchbase);
+	gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_builder_get_object(builder, "combo_searchfor")), current_search);
+	gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_builder_get_object(builder, "combo_datatype")), current_searchtype);
+	gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_builder_get_object(builder, "combo_database")), current_searchbase);
 
 	if (current_searchbase == SEARCHBASE_DEC) {
 		sprintf(buf, "%u", current_valuefrom);
-		gtk_entry_set_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_value")), buf);
+		gtk_entry_set_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_value")), buf);
 		sprintf(buf, "%u", current_valueto);
-		gtk_entry_set_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_valueto")), buf);
+		gtk_entry_set_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_valueto")), buf);
 	}
 	else {
 		sprintf(buf, "%X", current_valuefrom);
-		gtk_entry_set_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_value")), buf);
+		gtk_entry_set_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_value")), buf);
 		sprintf(buf, "%X", current_valueto);
-		gtk_entry_set_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_valueto")), buf);
+		gtk_entry_set_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_valueto")), buf);
 	}
 
 	if (current_search == SEARCH_RANGE) {
-		gtk_widget_show(GTK_WIDGET(glade_xml_get_widget(xml, "label_valueto")));
-		gtk_widget_show(GTK_WIDGET(glade_xml_get_widget(xml, "entry_valueto")));
+		gtk_widget_show(GTK_WIDGET(gtk_builder_get_object(builder, "label_valueto")));
+		gtk_widget_show(GTK_WIDGET(gtk_builder_get_object(builder, "entry_valueto")));
 	}
 	else {
-		gtk_widget_hide(GTK_WIDGET(glade_xml_get_widget(xml, "label_valueto")));
-		gtk_widget_hide(GTK_WIDGET(glade_xml_get_widget(xml, "entry_valueto")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder, "label_valueto")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder, "entry_valueto")));
 	}
 
 	if (current_search >= SEARCH_INC) {
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "entry_value")), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "entry_value")), FALSE);
 	}
 	else {
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "entry_value")), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "entry_value")), TRUE);
 	}
 
 	if (current_search >= SEARCH_INCBY && prevM == NULL) {
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "btn_start")), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "btn_start")), FALSE);
 	}
 	else {
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "btn_start")), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "btn_start")), TRUE);
 	}
 
-	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "btn_freeze")), FALSE);
-	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "btn_modify")), FALSE);
-	gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "btn_copy")), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "btn_freeze")), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "btn_modify")), FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "btn_copy")), FALSE);
 
 	if (prevM != NULL) {
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "combo_datatype")), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "combo_datatype")), FALSE);
 
 		if (NumSearchResults > 100) {
 			// too many results to be shown
@@ -575,13 +562,13 @@ static void UpdateCheatSearchDialog() {
 		}
 
 		sprintf(buf, _("Founded Addresses: %d"), NumSearchResults);
-		gtk_label_set_text(GTK_LABEL(glade_xml_get_widget(xml, "label_resultsfound")), buf);
+		gtk_label_set_text(GTK_LABEL(gtk_builder_get_object(builder, "label_resultsfound")), buf);
 	}
 	else {
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "combo_datatype")), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "combo_datatype")), TRUE);
 		gtk_widget_set_sensitive(widget, FALSE);
 
-		gtk_label_set_text(GTK_LABEL(glade_xml_get_widget(xml, "label_resultsfound")),
+		gtk_label_set_text(GTK_LABEL(gtk_builder_get_object(builder, "label_resultsfound")),
 			_("Enter the values and start your search."));
 	}
 
@@ -593,7 +580,6 @@ static void UpdateCheatSearchDialog() {
 
 // get the current selected result index in the list
 static int GetSelectedResultIndex() {
-	GladeXML			*xml;
 	GtkTreeSelection	*selection;
 	GtkTreeIter			iter;
 	GtkTreeModel		*model;
@@ -601,9 +587,7 @@ static int GetSelectedResultIndex() {
 	gboolean			selected;
 	int					i;
 
-	xml = glade_get_widget_tree(CheatSearchDlg);
-
-	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(glade_xml_get_widget(xml, "GtkCList_Result")));
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(gtk_builder_get_object(builder, "GtkCList_Result")));
 	selected = gtk_tree_selection_get_selected(selection, &model, &iter);
 
 	if (!selected) {
@@ -816,23 +800,19 @@ static void OnCheatSearchDlg_CopyClicked(GtkWidget *widget, gpointer user_data) 
 
 // preform the search
 static void OnCheatSearchDlg_SearchClicked(GtkWidget *widget, gpointer user_data) {
-	GladeXML		*xml;
-
-	xml = glade_get_widget_tree(CheatSearchDlg);
-
-	current_search = gtk_combo_box_get_active(GTK_COMBO_BOX(glade_xml_get_widget(xml, "combo_searchfor")));
-	current_searchtype = gtk_combo_box_get_active(GTK_COMBO_BOX(glade_xml_get_widget(xml, "combo_datatype")));
-	current_searchbase = gtk_combo_box_get_active(GTK_COMBO_BOX(glade_xml_get_widget(xml, "combo_database")));
+	current_search = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_builder_get_object(builder, "combo_searchfor")));
+	current_searchtype = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_builder_get_object(builder, "combo_datatype")));
+	current_searchbase = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_builder_get_object(builder, "combo_database")));
 	current_valuefrom = 0;
 	current_valueto = 0;
 
 	if (current_searchbase == SEARCHBASE_DEC) {
-		sscanf(gtk_entry_get_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_value"))), "%u", &current_valuefrom);
-		sscanf(gtk_entry_get_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_valueto"))), "%u", &current_valueto);
+		sscanf(gtk_entry_get_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_value"))), "%u", &current_valuefrom);
+		sscanf(gtk_entry_get_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_valueto"))), "%u", &current_valueto);
 	}
 	else {
-		sscanf(gtk_entry_get_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_value"))), "%x", &current_valuefrom);
-		sscanf(gtk_entry_get_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_valueto"))), "%x", &current_valueto);
+		sscanf(gtk_entry_get_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_value"))), "%x", &current_valuefrom);
+		sscanf(gtk_entry_get_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_valueto"))), "%x", &current_valueto);
 	}
 
 	switch (current_searchtype) {
@@ -1035,100 +1015,91 @@ static void OnCheatSearchDlg_CloseClicked(GtkWidget *widget, gpointer user_data)
 }
 
 static void OnCheatSearchDlg_SearchForChanged(GtkWidget *widget, gpointer user_data) {
-	GladeXML *xml;
-
-	xml = glade_get_widget_tree(CheatSearchDlg);
-
 	if (gtk_combo_box_get_active(GTK_COMBO_BOX(widget)) == SEARCH_RANGE) {
-		gtk_widget_show(GTK_WIDGET(glade_xml_get_widget(xml, "label_valueto")));
-		gtk_widget_show(GTK_WIDGET(glade_xml_get_widget(xml, "entry_valueto")));
+		gtk_widget_show(GTK_WIDGET(gtk_builder_get_object(builder, "label_valueto")));
+		gtk_widget_show(GTK_WIDGET(gtk_builder_get_object(builder, "entry_valueto")));
 	}
 	else {
-		gtk_widget_hide(GTK_WIDGET(glade_xml_get_widget(xml, "label_valueto")));
-		gtk_widget_hide(GTK_WIDGET(glade_xml_get_widget(xml, "entry_valueto")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder, "label_valueto")));
+		gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder, "entry_valueto")));
 	}
 
 	if (gtk_combo_box_get_active(GTK_COMBO_BOX(widget)) >= SEARCH_INC) {
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "entry_value")), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "entry_value")), FALSE);
 	}
 	else {
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "entry_value")), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "entry_value")), TRUE);
 	}
 
 	if (gtk_combo_box_get_active(GTK_COMBO_BOX(widget)) >= SEARCH_INCBY && prevM == NULL) {
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "btn_start")), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "btn_start")), FALSE);
 	}
 	else {
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "btn_start")), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "btn_start")), TRUE);
 	}
 }
 
 static void OnCheatSearchDlg_DataBaseChanged(GtkWidget *widget, gpointer user_data) {
 	u32				val;
 	char			buf[256];
-	GladeXML		*xml;
-
-	xml = glade_get_widget_tree(CheatSearchDlg);
-
+	
 	if (gtk_combo_box_get_active(GTK_COMBO_BOX(widget)) == SEARCHBASE_DEC) {
 		val = 0;
-		sscanf(gtk_entry_get_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_value"))), "%x", &val);
+		sscanf(gtk_entry_get_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_value"))), "%x", &val);
 		sprintf(buf, "%u", val);
-		gtk_entry_set_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_value")), buf);
+		gtk_entry_set_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_value")), buf);
 
 		val = 0;
-		sscanf(gtk_entry_get_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_valueto"))), "%x", &val);
+		sscanf(gtk_entry_get_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_valueto"))), "%x", &val);
 		sprintf(buf, "%u", val);
-		gtk_entry_set_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_valueto")), buf);
+		gtk_entry_set_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_valueto")), buf);
 	}
 	else {
 		val = 0;
-		sscanf(gtk_entry_get_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_value"))), "%u", &val);
+		sscanf(gtk_entry_get_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_value"))), "%u", &val);
 		sprintf(buf, "%X", val);
-		gtk_entry_set_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_value")), buf);
+		gtk_entry_set_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_value")), buf);
 
 		val = 0;
-		sscanf(gtk_entry_get_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_valueto"))), "%u", &val);
+		sscanf(gtk_entry_get_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_valueto"))), "%u", &val);
 		sprintf(buf, "%X", val);
-		gtk_entry_set_text(GTK_ENTRY(glade_xml_get_widget(xml, "entry_valueto")), buf);
+		gtk_entry_set_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_valueto")), buf);
 	}
 }
 
 static void CheatSearch_TreeSelectionChanged(GtkTreeSelection *selection, gpointer user_data) {
-	GladeXML			*xml;
-
-	xml = glade_get_widget_tree(CheatSearchDlg);
-
 	if (GetSelectedResultIndex() != -1) {
 		// If a row was selected, we can now enable some of the disabled widgets
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "btn_freeze")), TRUE);
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "btn_modify")), TRUE);
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "btn_copy")), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "btn_freeze")), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "btn_modify")), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "btn_copy")), TRUE);
 	} else {
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "btn_freeze")), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "btn_modify")), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(glade_xml_get_widget(xml, "btn_copy")), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "btn_freeze")), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "btn_modify")), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "btn_copy")), FALSE);
 	}
 }
 
 // run the cheat search dialog
 void RunCheatSearchDialog() {
-	GladeXML *xml;
 	GtkWidget *widget;
 	GtkCellRenderer *renderer;
 	GtkTreeSelection *treesel;
 	GtkTreeViewColumn *column;
 
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "CheatSearchDlg", NULL);
-	if (!xml) {
-		g_warning(_("Error: Glade interface could not be loaded!"));
+	builder = gtk_builder_new();
+	
+	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+		g_warning("Error: interface could not be loaded!");
 		return;
 	}
 
-	CheatSearchDlg = glade_xml_get_widget(xml, "CheatSearchDlg");
+	CheatSearchDlg = gtk_builder_get_object(builder, "CheatSearchDlg");
+	
 	gtk_window_set_title(GTK_WINDOW(CheatSearchDlg), _("Cheat Search"));
+	gtk_widget_show (CheatSearchDlg);
 
-	widget = glade_xml_get_widget(xml, "GtkCList_Result");
+	widget = gtk_builder_get_object(builder, "GtkCList_Result");
 
 	renderer = gtk_cell_renderer_text_new ();
 	column = gtk_tree_view_column_new_with_attributes(_("Search Results"),
@@ -1143,34 +1114,34 @@ void RunCheatSearchDialog() {
 
 	UpdateCheatSearchDialog();
 
-	widget = glade_xml_get_widget(xml, "btn_freeze");
+	widget = gtk_builder_get_object(builder, "btn_freeze");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		G_CALLBACK(OnCheatSearchDlg_FreezeClicked), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_FreezeClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_modify");
+	widget = gtk_builder_get_object(builder, "btn_modify");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		G_CALLBACK(OnCheatSearchDlg_ModifyClicked), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_ModifyClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_copy");
+	widget = gtk_builder_get_object(builder, "btn_copy");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		G_CALLBACK(OnCheatSearchDlg_CopyClicked), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_CopyClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_start");
+	widget = gtk_builder_get_object(builder, "btn_start");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		G_CALLBACK(OnCheatSearchDlg_SearchClicked), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_SearchClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_restart");
+	widget = gtk_builder_get_object(builder, "btn_restart");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		G_CALLBACK(OnCheatSearchDlg_RestartClicked), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_RestartClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "combo_searchfor");
+	widget = gtk_builder_get_object(builder, "combo_searchfor");
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
-		G_CALLBACK(OnCheatSearchDlg_SearchForChanged), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_SearchForChanged), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "combo_database");
+	widget = gtk_builder_get_object(builder, "combo_database");
 	g_signal_connect_data(GTK_OBJECT(widget), "changed",
-		G_CALLBACK(OnCheatSearchDlg_DataBaseChanged), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_DataBaseChanged), builder, NULL, G_CONNECT_AFTER);
 
 	g_signal_connect_data(GTK_OBJECT(CheatSearchDlg), "response",
-		G_CALLBACK(OnCheatSearchDlg_CloseClicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+		G_CALLBACK(OnCheatSearchDlg_CloseClicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }

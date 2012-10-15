@@ -1,43 +1,44 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkWindow" id="CfgWnd">
     <property name="visible">True</property>
+    <property name="can_focus">False</property>
     <property name="border_width">10</property>
     <property name="title" translatable="yes">Configure Sound</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center</property>
     <property name="type_hint">dialog</property>
-    <signal name="destroy" handler="on_CfgWnd_destroy"/>
+    <signal name="destroy" handler="on_CfgWnd_destroy" swapped="no"/>
     <child>
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
+        <property name="can_focus">False</property>
         <property name="spacing">6</property>
         <child>
           <object class="GtkFrame" id="frame1">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="label_xalign">0</property>
             <child>
               <object class="GtkAlignment" id="alignment4">
                 <property name="visible">True</property>
-                <property name="top_padding">6</property>
-                <property name="bottom_padding">6</property>
-                <property name="left_padding">12</property>
-                <property name="right_padding">12</property>
+                <property name="can_focus">False</property>
+                <property name="border_width">5</property>
                 <child>
                   <object class="GtkTable" id="table1">
                     <property name="visible">True</property>
-                    <property name="border_width">6</property>
+                    <property name="can_focus">False</property>
                     <property name="n_rows">3</property>
                     <property name="n_columns">2</property>
-                    <property name="column_spacing">6</property>
-                    <property name="row_spacing">6</property>
+                    <property name="column_spacing">5</property>
+                    <property name="row_spacing">5</property>
                     <child>
                       <object class="GtkLabel" id="label1v">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Volume:</property>
                         <property name="justify">right</property>
@@ -50,6 +51,7 @@
                     <child>
                       <object class="GtkLabel" id="label9">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Interpolation:</property>
                         <property name="justify">right</property>
@@ -64,6 +66,7 @@
                     <child>
                       <object class="GtkLabel" id="label8">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Reverb:</property>
                         <property name="justify">right</property>
@@ -78,6 +81,7 @@
                     <child>
                       <object class="GtkComboBox" id="cbVolume2">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="model">liststoreVolume</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertextVolume"/>
@@ -95,6 +99,7 @@
                     <child>
                       <object class="GtkComboBox" id="cbReverb2">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="model">liststoreReverb</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertextReverb"/>
@@ -115,6 +120,7 @@
                     <child>
                       <object class="GtkComboBox" id="cbInterpolation2">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="model">liststoreInterpolation</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertextInterpolation"/>
@@ -138,29 +144,30 @@
             </child>
           </object>
           <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
         </child>
         <child>
           <object class="GtkFrame" id="frame2">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="label_xalign">0</property>
             <child>
               <object class="GtkAlignment" id="alignment2">
                 <property name="visible">True</property>
-                <property name="top_padding">6</property>
-                <property name="bottom_padding">6</property>
-                <property name="left_padding">12</property>
-                <property name="right_padding">12</property>
+                <property name="can_focus">False</property>
+                <property name="border_width">5</property>
                 <child>
                   <object class="GtkVBox" id="vbox3">
                     <property name="visible">True</property>
-                    <property name="border_width">6</property>
-                    <property name="orientation">vertical</property>
+                    <property name="can_focus">False</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkCheckButton" id="chkXASpeed">
                         <property name="label" translatable="yes">Adjust XA speed</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
@@ -180,29 +187,30 @@
             </child>
           </object>
           <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
             <property name="position">1</property>
           </packing>
         </child>
         <child>
           <object class="GtkFrame" id="frame3">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="label_xalign">0</property>
             <child>
               <object class="GtkAlignment" id="alignment3">
                 <property name="visible">True</property>
-                <property name="top_padding">6</property>
-                <property name="bottom_padding">6</property>
-                <property name="left_padding">12</property>
-                <property name="right_padding">12</property>
+                <property name="can_focus">False</property>
+                <property name="border_width">5</property>
                 <child>
                   <object class="GtkVBox" id="vbox4">
                     <property name="visible">True</property>
-                    <property name="border_width">6</property>
-                    <property name="orientation">vertical</property>
+                    <property name="can_focus">False</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkCheckButton" id="chkHiCompat">
                         <property name="label" translatable="yes">High compatibility mode</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
@@ -219,6 +227,7 @@
                     <child>
                       <object class="GtkCheckButton" id="chkIRQWait">
                         <property name="label" translatable="yes">SPU IRQ Wait</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
@@ -235,6 +244,7 @@
                     <child>
                       <object class="GtkCheckButton" id="chkDisStereo">
                         <property name="label" translatable="yes">Single channel sound</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
@@ -251,12 +261,15 @@
                     <child>
                       <object class="GtkCheckButton" id="chkFreqResponse">
                         <property name="label" translatable="yes">Frequency Response - Output Filter</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
                         <property name="position">3</property>
                       </packing>
                     </child>
@@ -266,17 +279,21 @@
             </child>
           </object>
           <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
             <property name="position">2</property>
           </packing>
         </child>
         <child>
           <object class="GtkHButtonBox" id="hbuttonbox1">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="spacing">12</property>
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="btn_close">
                 <property name="label">gtk-close</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
@@ -291,11 +308,50 @@
             </child>
           </object>
           <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
             <property name="position">3</property>
           </packing>
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkListStore" id="liststoreInterpolation">
+    <columns>
+      <!-- column-name Item -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">None</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Simple</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Gaussian</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Cubic</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="liststoreReverb">
+    <columns>
+      <!-- column-name Item -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Off</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Simple</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Playstation</col>
+      </row>
+    </data>
   </object>
   <object class="GtkListStore" id="liststoreVolume">
     <columns>
@@ -317,43 +373,6 @@
       </row>
       <row>
         <col id="0" translatable="yes">Loudest</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="liststoreReverb">
-    <columns>
-      <!-- column-name Item -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Off</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Simple</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Playstation</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="liststoreInterpolation">
-    <columns>
-      <!-- column-name Item -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">None</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Simple</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Gaussian</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Cubic</col>
       </row>
     </data>
   </object>

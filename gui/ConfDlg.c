@@ -25,7 +25,6 @@
 #include <sys/stat.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include <signal.h>
 #include <sys/time.h>
 #include <regex.h>
@@ -45,13 +44,14 @@ static void OnNet_Conf(GtkWidget *widget, gpointer user_data);
 static void OnNet_About(GtkWidget *widget, gpointer user_data);
 static void on_configure_plugin(GtkWidget *widget, gpointer user_data);
 static void on_about_plugin(GtkWidget *widget, gpointer user_data);
-static void UpdatePluginsBIOS_UpdateGUI(GladeXML *xml);
-static void FindNetPlugin(GladeXML *xml);
+static void UpdatePluginsBIOS_UpdateGUI();
+static void FindNetPlugin();
 
 PSEgetLibType		PSE_getLibType = NULL;
 PSEgetLibVersion	PSE_getLibVersion = NULL;
 PSEgetLibName		PSE_getLibName = NULL;
 
+static GtkBuilder *builder;
 GtkWidget *ConfDlg = NULL;
 GtkWidget *NetDlg = NULL;
 GtkWidget *controlwidget = NULL;
@@ -91,31 +91,30 @@ void ConfigurePlugins() {
 		return;
 	}
 
-	GladeXML *xml;
 	GtkWidget *widget;
 
 	gchar *path;
 
 	UpdatePluginsBIOS();
 
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "ConfDlg", NULL);
-
-	if (!xml) {
-		g_warning(_("Error: Glade interface could not be loaded!"));
+	builder = gtk_builder_new();
+	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+		g_warning("Error: interface could not be loaded!");
 		return;
 	}
 
-	UpdatePluginsBIOS_UpdateGUI(xml);
+	UpdatePluginsBIOS_UpdateGUI(builder);
 
-	ConfDlg = glade_xml_get_widget(xml, "ConfDlg");
-
+	ConfDlg = gtk_builder_get_object(builder, "ConfDlg");
+	
 	gtk_window_set_title(GTK_WINDOW(ConfDlg), _("Configure PCSXR"));
+	gtk_widget_show (ConfDlg);
 
 	/* Set the paths in the file choosers to be based on the saved configurations */
-	widget = glade_xml_get_widget(xml, "GtkFileChooser_Bios");
+	widget = gtk_builder_get_object(builder, "GtkFileChooser_Bios");
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (widget), Config.BiosDir);
 
-	widget = glade_xml_get_widget(xml, "GtkFileChooser_Plugin");
+	widget = gtk_builder_get_object(builder, "GtkFileChooser_Plugin");
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (widget), Config.PluginsDir);
 
 	if (strlen(Config.PluginsDir) == 0) {
@@ -125,57 +124,57 @@ void ConfigurePlugins() {
 		}
 	}
 
-	widget = glade_xml_get_widget(xml, "btn_ConfGpu");
+	widget = gtk_builder_get_object(builder, "btn_ConfGpu");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_ConfSpu");
+	widget = gtk_builder_get_object(builder, "btn_ConfSpu");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_SPU, NULL, G_CONNECT_AFTER);
 
 	/* ADB TODO Does pad 1 and 2 need to be different? */
-	widget = glade_xml_get_widget(xml, "btn_ConfPad1");
+	widget = gtk_builder_get_object(builder, "btn_ConfPad1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-						  G_CALLBACK(OnConfConf_Pad1Conf), xml, NULL, G_CONNECT_AFTER);
+						  G_CALLBACK(OnConfConf_Pad1Conf), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_ConfPad2");
+	widget = gtk_builder_get_object(builder, "btn_ConfPad2");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(OnConfConf_Pad2Conf), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConfConf_Pad2Conf), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_ConfCdr");
+	widget = gtk_builder_get_object(builder, "btn_ConfCdr");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_AboutGpu");
+	widget = gtk_builder_get_object(builder, "btn_AboutGpu");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_AboutSpu");
+	widget = gtk_builder_get_object(builder, "btn_AboutSpu");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_SPU, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_AboutPad1");
+	widget = gtk_builder_get_object(builder, "btn_AboutPad1");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(OnConfConf_Pad1About), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConfConf_Pad1About), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_AboutPad2");
+	widget = gtk_builder_get_object(builder, "btn_AboutPad2");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(OnConfConf_Pad2About), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnConfConf_Pad2About), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_AboutCdr");
+	widget = gtk_builder_get_object(builder, "btn_AboutCdr");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
 			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "GtkFileChooser_Bios");
+	widget = gtk_builder_get_object(builder, "GtkFileChooser_Bios");
 	g_signal_connect_data(GTK_OBJECT(widget), "current_folder_changed",
-			G_CALLBACK(OnBiosPath_Changed), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnBiosPath_Changed), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "GtkFileChooser_Plugin");
+	widget = gtk_builder_get_object(builder, "GtkFileChooser_Plugin");
 	g_signal_connect_data(GTK_OBJECT(widget), "current_folder_changed",
-			G_CALLBACK(OnPluginPath_Changed), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnPluginPath_Changed), builder, NULL, G_CONNECT_AFTER);
 
 	g_signal_connect_data(GTK_OBJECT(ConfDlg), "response",
-			G_CALLBACK(OnConf_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+			G_CALLBACK(OnConf_Clicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }
 
 void OnNet_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
@@ -186,7 +185,6 @@ void OnNet_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 }
 
 void OnConf_Net() {
-	GladeXML *xml;
 	GtkWidget *widget;
 
 	if (NetDlg != NULL) {
@@ -194,28 +192,29 @@ void OnConf_Net() {
 		return;
 	}
 
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "NetDlg", NULL);
-
-	if (!xml) {
-		g_warning(_("Error: Glade interface could not be loaded!"));
+	builder = gtk_builder_new();
+	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+		g_warning("Error: interface could not be loaded!");
 		return;
 	}
 
-	NetDlg = glade_xml_get_widget(xml, "NetDlg");
+	NetDlg = gtk_builder_get_object(builder, "NetDlg");
+	
+	gtk_widget_show (NetDlg);
 
-	FindNetPlugin(xml);
+	FindNetPlugin(builder);
 
 	/* Setup a handler for when Close or Cancel is clicked */
 	g_signal_connect_data(GTK_OBJECT(NetDlg), "response",
-			G_CALLBACK(OnNet_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+			G_CALLBACK(OnNet_Clicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_ConfNet");
+	widget = gtk_builder_get_object(builder, "btn_ConfNet");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(OnNet_Conf), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnNet_Conf), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_AboutNet");
+	widget = gtk_builder_get_object(builder, "btn_AboutNet");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-			G_CALLBACK(OnNet_About), xml, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnNet_About), builder, NULL, G_CONNECT_AFTER);
 }
 
 void OnConf_Graphics() {
@@ -493,24 +492,24 @@ void populate_combo_box(GtkWidget *widget, GList *list) {
 	/* Populate the relevant combo widget with the list of plugins. \
 	   If no plugins available, disable the combo and its controls. \
 	   Note that the Bios plugin has no About/Conf control. */ \
-	type##ConfS.Combo = glade_xml_get_widget(xml, "GtkCombo_" name); \
+	type##ConfS.Combo = gtk_builder_get_object(builder, "GtkCombo_" name); \
 	if (type##ConfS.glist != NULL) { \
 		populate_combo_box (type##ConfS.Combo, type##ConfS.glist); \
 		FindComboText(type##ConfS.Combo, type##ConfS.plist, Config.type); \
 		gtk_widget_set_sensitive (type##ConfS.Combo, TRUE); \
 		if (g_ascii_strcasecmp (name, "Bios") != 0) { \
-			controlwidget = glade_xml_get_widget(xml, "btn_Conf" name); \
+			controlwidget = gtk_builder_get_object(builder, "btn_Conf" name); \
 			gtk_widget_set_sensitive (controlwidget, TRUE); \
-			controlwidget = glade_xml_get_widget(xml, "btn_About" name); \
+			controlwidget = gtk_builder_get_object(builder, "btn_About" name); \
 			gtk_widget_set_sensitive (controlwidget, TRUE); \
 		} \
 	} else { \
 		if (g_ascii_strcasecmp (name, "Bios") != 0) { \
 			gtk_cell_layout_clear (GTK_CELL_LAYOUT (type##ConfS.Combo)); \
 			gtk_widget_set_sensitive (type##ConfS.Combo, FALSE); \
-			controlwidget = glade_xml_get_widget(xml, "btn_Conf" name); \
+			controlwidget = gtk_builder_get_object(builder, "btn_Conf" name); \
 			gtk_widget_set_sensitive (controlwidget, FALSE); \
-			controlwidget = glade_xml_get_widget(xml, "btn_About" name); \
+			controlwidget = gtk_builder_get_object(builder, "btn_About" name); \
 			gtk_widget_set_sensitive (controlwidget, FALSE); \
 		} \
 	}
@@ -675,7 +674,7 @@ void UpdatePluginsBIOS() {
 	add_bios_to_list(_("Simulate PSX BIOS"), "HLE");
 }
 
-static void UpdatePluginsBIOS_UpdateGUI(GladeXML *xml) {
+static void UpdatePluginsBIOS_UpdateGUI() {
 	// Populate the plugin combo boxes
 	ConfCreatePConf("Gpu", Gpu);
 	ConfCreatePConf("Spu", Spu);
@@ -685,7 +684,7 @@ static void UpdatePluginsBIOS_UpdateGUI(GladeXML *xml) {
 	ConfCreatePConf("Bios", Bios);
 }
 
-static void FindNetPlugin(GladeXML *xml) {
+static void FindNetPlugin() {
 	DIR *dir;
 	struct dirent *ent;
 	void *Handle;
@@ -756,8 +755,7 @@ char *psxtypes[] = {
 // When the auto-detect CPU type is selected, disable the NTSC/PAL selection
 static void OnCpu_PsxAutoClicked (GtkWidget *widget, gpointer user_data) {
 	GtkWidget *combo;
-	GladeXML *xml = user_data;
-	combo = glade_xml_get_widget(xml, "GtkCombo_PsxType");
+	combo = gtk_builder_get_object(builder, "GtkCombo_PsxType");
 
 	gtk_widget_set_sensitive (combo,
 			!(gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))));
@@ -766,8 +764,7 @@ static void OnCpu_PsxAutoClicked (GtkWidget *widget, gpointer user_data) {
 // When the interpreter core is deselected, disable the debugger checkbox
 static void OnCpu_CpuClicked(GtkWidget *widget, gpointer user_data) {
 	GtkWidget *check;
-	GladeXML *xml = user_data;
-	check = glade_xml_get_widget(xml, "GtkCheckButton_Dbg");
+	check = gtk_builder_get_object(builder, "GtkCheckButton_Dbg");
 
 	// Debugger is only working with interpreter not recompiler, so let's set it
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
@@ -779,11 +776,10 @@ static void OnCpu_CpuClicked(GtkWidget *widget, gpointer user_data) {
 
 void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 	GtkWidget *widget;
-	GladeXML *xml = user_data;
 	int tmp;
 	long t;
 
-	widget = glade_xml_get_widget(xml, "GtkCombo_PsxType");
+	widget = gtk_builder_get_object(builder, "GtkCombo_PsxType");
 
 	// If nothing chosen, default to NTSC
 	tmp = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
@@ -795,22 +791,22 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 	else
 		Config.PsxType = PSX_TYPE_PAL;
 
-	Config.Xa = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Xa")));
-	Config.Sio = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Sio")));
-	Config.Mdec = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Mdec")));
-	Config.Cdda = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_CDDA")));
-	Config.SlowBoot = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_SlowBoot")));
-	Config.PsxAuto = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxAuto")));
+	Config.Xa = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Xa")));
+	Config.Sio = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Sio")));
+	Config.Mdec = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Mdec")));
+	Config.Cdda = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_CDDA")));
+	Config.SlowBoot = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_SlowBoot")));
+	Config.PsxAuto = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_PsxAuto")));
 
 	t = Config.Debug;
-	Config.Debug = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Dbg")));
+	Config.Debug = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Dbg")));
 	if (t != Config.Debug) {
 		if (Config.Debug) StartDebugger();
 		else StopDebugger();
 	}
 
 	t = Config.Cpu;
-	Config.Cpu = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Cpu")));
+	Config.Cpu = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Cpu")));
 	if (t != Config.Cpu) {
 		psxCpu->Shutdown();
 #ifdef PSXREC
@@ -828,11 +824,11 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 		psxCpu->Reset();
 	}
 
-	Config.PsxOut = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxOut")));
-	Config.SpuIrq = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_SpuIrq")));
-	Config.RCntFix = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_RCntFix")));
-	Config.VSyncWA = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_VSyncWA")));
-	Config.Widescreen = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Widescreen")));
+	Config.PsxOut = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_PsxOut")));
+	Config.SpuIrq = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_SpuIrq")));
+	Config.RCntFix = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_RCntFix")));
+	Config.VSyncWA = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_VSyncWA")));
+	Config.Widescreen = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Widescreen")));
 
 	SaveConfig();
 
@@ -841,53 +837,55 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 }
 
 void OnConf_Cpu() {
-	GladeXML *xml;
+	
 
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "CpuDlg", NULL);
-
-	if (!xml) {
-		g_warning("We could not load the interface!");
+	builder = gtk_builder_new();
+	
+	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+		g_warning("Error: interface could not be loaded!");
 		return;
 	}
 
-	CpuDlg = glade_xml_get_widget(xml, "CpuDlg");
+	CpuDlg = gtk_builder_get_object(builder, "CpuDlg");
 
-	PsxCombo = glade_xml_get_widget(xml, "GtkCombo_PsxType");
+	gtk_widget_show (CpuDlg);
+
+	PsxCombo = gtk_builder_get_object(builder, "GtkCombo_PsxType");
 	gtk_combo_box_set_active(GTK_COMBO_BOX (PsxCombo), Config.PsxType);
 	gtk_widget_set_sensitive(GTK_WIDGET (PsxCombo), !Config.PsxAuto);
 
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Xa")), Config.Xa);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Sio")), Config.Sio);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Mdec")), Config.Mdec);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_CDDA")), Config.Cdda);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_SlowBoot")), Config.SlowBoot);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxAuto")), Config.PsxAuto);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Xa")), Config.Xa);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Sio")), Config.Sio);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Mdec")), Config.Mdec);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_CDDA")), Config.Cdda);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_SlowBoot")), Config.SlowBoot);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_PsxAuto")), Config.PsxAuto);
 
-	g_signal_connect_data(GTK_OBJECT(glade_xml_get_widget(xml, "GtkCheckButton_PsxAuto")), "toggled",
-			G_CALLBACK(OnCpu_PsxAutoClicked), xml, NULL, G_CONNECT_AFTER);
+	g_signal_connect_data(GTK_OBJECT(gtk_builder_get_object(builder, "GtkCheckButton_PsxAuto")), "toggled",
+			G_CALLBACK(OnCpu_PsxAutoClicked), builder, NULL, G_CONNECT_AFTER);
 
 #ifdef PSXREC
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), Config.Cpu);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "GtkCheckButton_Cpu")), Config.Cpu);
 
-	g_signal_connect_data(GTK_OBJECT(glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), "toggled",
-			G_CALLBACK(OnCpu_CpuClicked), xml, NULL, G_CONNECT_AFTER);
+	g_signal_connect_data(GTK_OBJECT(gtk_builder_get_object(builder, "GtkCheckButton_Cpu")), "toggled",
+			G_CALLBACK(OnCpu_CpuClicked), builder, NULL, G_CONNECT_AFTER);
 #else
 	Config.Cpu = CPU_INTERPRETER;
 
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), TRUE);
-	gtk_widget_set_sensitive(GTK_WIDGET (glade_xml_get_widget(xml, "GtkCheckButton_Cpu")), FALSE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "GtkCheckButton_Cpu")), TRUE);
+	gtk_widget_set_sensitive(GTK_WIDGET (gtk_builder_get_object(builder, "GtkCheckButton_Cpu")), FALSE);
 #endif
 
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (glade_xml_get_widget(xml, "GtkCheckButton_Dbg")), Config.Cpu && Config.Debug);
-	gtk_widget_set_sensitive(GTK_WIDGET (glade_xml_get_widget(xml, "GtkCheckButton_Dbg")), Config.Cpu);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "GtkCheckButton_Dbg")), Config.Cpu && Config.Debug);
+	gtk_widget_set_sensitive(GTK_WIDGET (gtk_builder_get_object(builder, "GtkCheckButton_Dbg")), Config.Cpu);
 
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_PsxOut")), Config.PsxOut);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_SpuIrq")), Config.SpuIrq);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_RCntFix")), Config.RCntFix);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_VSyncWA")), Config.VSyncWA);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(glade_xml_get_widget(xml, "GtkCheckButton_Widescreen")), Config.Widescreen);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_PsxOut")), Config.PsxOut);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_SpuIrq")), Config.SpuIrq);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_RCntFix")), Config.RCntFix);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_VSyncWA")), Config.VSyncWA);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Widescreen")), Config.Widescreen);
 
 	// Setup a handler for when Close or Cancel is clicked
 	g_signal_connect_data(GTK_OBJECT(CpuDlg), "response",
-			G_CALLBACK(OnCpu_Clicked), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+			G_CALLBACK(OnCpu_Clicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }

@@ -1,4 +1,4 @@
-[type: gettext/glade]data/pcsxr.glade2
+[type: gettext/glade]data/pcsxr.ui
 gui/AboutDlg.c
 gui/AboutDlg.h
 gui/Cheat.c

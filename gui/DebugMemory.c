@@ -18,10 +18,11 @@
 
 #include "Linux.h"
 #include "../libpcsxcore/psxmem.h"
-#include <glade/glade.h>
+#include <gtk/gtk.h>
 
 #define MEMVIEW_MAX_LINES 256
 
+static GtkBuilder *builder;
 static GtkWidget *MemViewDlg = NULL;
 static u32 MemViewAddress = 0;
 
@@ -38,14 +39,11 @@ static void UpdateMemViewDlg() {
 
 	GtkTreeIter iter;
 	GtkWidget *widget;
-	GladeXML *xml;
-
-	xml = glade_get_widget_tree(MemViewDlg);
 
 	MemViewAddress &= 0x1fffff;
 
 	sprintf(buftext, "%.8X", MemViewAddress | 0x80000000);
-	widget = glade_xml_get_widget(xml, "entry_address");
+	widget = gtk_builder_get_object(builder, "entry_address");
 	gtk_entry_set_text(GTK_ENTRY(widget), buftext);
 
 	start = MemViewAddress & 0x1ffff0;
@@ -53,7 +51,7 @@ static void UpdateMemViewDlg() {
 
 	if (end > 0x1fffff) end = 0x1fffff;
 
-	widget = glade_xml_get_widget(xml, "GtkCList_MemView");
+	widget = gtk_builder_get_object(builder, "GtkCList_MemView");
 
 	buftext[16] = '\0';
 
@@ -85,10 +83,8 @@ static void UpdateMemViewDlg() {
 
 static void MemView_Go() {
 	GtkWidget *widget;
-	GladeXML *xml;
 
-	xml = glade_get_widget_tree(MemViewDlg);
-	widget = glade_xml_get_widget(xml, "entry_address");
+	widget = gtk_builder_get_object(builder, "entry_address");
 
 	sscanf(gtk_entry_get_text(GTK_ENTRY(widget)), "%x", &MemViewAddress);
 
@@ -247,23 +243,25 @@ static void MemView_Close(GtkWidget *widget, gpointer user_data) {
 }
 
 void RunDebugMemoryDialog() {
-	GladeXML *xml;
 	GtkWidget *widget;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 	PangoFontDescription *pfd;
 	int i;
-
-	xml = glade_xml_new(PACKAGE_DATA_DIR "pcsxr.glade2", "MemViewDlg", NULL);
-	if (!xml) {
-		g_warning(_("Error: Glade interface could not be loaded!"));
+	
+	builder = gtk_builder_new();
+	
+	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+		g_warning("Error: interface could not be loaded!");
 		return;
 	}
-
-	MemViewDlg = glade_xml_get_widget(xml, "MemViewDlg");
+	
+	MemViewDlg = gtk_builder_get_object(builder, "MemViewDlg");
+	
 	gtk_window_set_title(GTK_WINDOW(MemViewDlg), _("Memory Viewer"));
-
-	widget = glade_xml_get_widget(xml, "GtkCList_MemView");
+	gtk_widget_show (MemViewDlg);
+	
+	widget = gtk_builder_get_object(builder, "GtkCList_MemView");
 
 	renderer = gtk_cell_renderer_text_new();
 	column = gtk_tree_view_column_new_with_attributes(_("Address"),
@@ -299,18 +297,18 @@ void RunDebugMemoryDialog() {
 
 	UpdateMemViewDlg();
 
-	widget = glade_xml_get_widget(xml, "btn_dump");
+	widget = gtk_builder_get_object(builder, "btn_dump");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		G_CALLBACK(MemView_Dump), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(MemView_Dump), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_patch");
+	widget = gtk_builder_get_object(builder, "btn_patch");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		G_CALLBACK(MemView_Patch), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(MemView_Patch), builder, NULL, G_CONNECT_AFTER);
 
-	widget = glade_xml_get_widget(xml, "btn_go");
+	widget = gtk_builder_get_object(builder, "btn_go");
 	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
-		G_CALLBACK(MemView_Go), xml, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(MemView_Go), builder, NULL, G_CONNECT_AFTER);
 
 	g_signal_connect_data(GTK_OBJECT(MemViewDlg), "response",
-		G_CALLBACK(MemView_Close), xml, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+		G_CALLBACK(MemView_Close), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }

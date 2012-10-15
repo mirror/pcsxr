@@ -17,184 +17,184 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../data/pcsxr.glade2.h:1
+#: ../data/pcsxr.ui.h:1
 msgid ""
 "8-bit\n"
 "16-bit\n"
 "32-bit"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:4
+#: ../data/pcsxr.ui.h:4
 msgid "<b>BIOS</b>"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:5
+#: ../data/pcsxr.ui.h:5
 msgid "<b>Cheat Codes</b>"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:6
+#: ../data/pcsxr.ui.h:6
 msgid "<b>Cheat Search</b>"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:7
+#: ../data/pcsxr.ui.h:7
 msgid "<b>Memory Card 1</b>"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:8
+#: ../data/pcsxr.ui.h:8
 msgid "<b>Memory Card 2</b>"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:9
+#: ../data/pcsxr.ui.h:9
 msgid "<b>NetPlay</b>"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:10
+#: ../data/pcsxr.ui.h:10
 msgid "<b>Options</b>"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:11
+#: ../data/pcsxr.ui.h:11
 msgid "<b>Plugins</b>"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:12
+#: ../data/pcsxr.ui.h:12
 msgid "<b>System Type</b>"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:13 ../gui/DebugMemory.c:188
+#: ../data/pcsxr.ui.h:13 ../gui/DebugMemory.c:188
 msgid "Address (Hexadecimal):"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:14 ../win32/gui/WndMain.c:1308
+#: ../data/pcsxr.ui.h:14 ../win32/gui/WndMain.c:1308
 msgid "Autodetect"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:15
+#: ../data/pcsxr.ui.h:15
 msgid "Black & White Movies"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:16
+#: ../data/pcsxr.ui.h:16
 msgid "CD-ROM..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:17
+#: ../data/pcsxr.ui.h:17
 msgid "CD-ROM:"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:18
+#: ../data/pcsxr.ui.h:18
 msgid "CD-_ROM..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:19
+#: ../data/pcsxr.ui.h:19
 msgid "C_ontrollers..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:20
+#: ../data/pcsxr.ui.h:20
 msgid "Chea_t"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:21 ../gui/Cheat.c:1129 ../win32/gui/CheatDlg.c:678
+#: ../data/pcsxr.ui.h:21 ../gui/Cheat.c:1129 ../win32/gui/CheatDlg.c:678
 msgid "Cheat Search"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:22
+#: ../data/pcsxr.ui.h:22
 msgid "Configure CD-ROM"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:23
+#: ../data/pcsxr.ui.h:23
 msgid "Configure CPU"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:24
+#: ../data/pcsxr.ui.h:24
 msgid "Configure Controllers"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:25
+#: ../data/pcsxr.ui.h:25
 msgid "Configure Graphics"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:26
+#: ../data/pcsxr.ui.h:26
 msgid "Configure Memory Cards"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:27
+#: ../data/pcsxr.ui.h:27
 msgid "Configure NetPlay"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:28 ../gui/ConfDlg.c:112
+#: ../data/pcsxr.ui.h:28 ../gui/ConfDlg.c:112
 msgid "Configure PCSXR"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:29 ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:3
+#: ../data/pcsxr.ui.h:29 ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:3
 msgid "Configure Sound"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:30
+#: ../data/pcsxr.ui.h:30
 msgid "Continue Emulation"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:31
+#: ../data/pcsxr.ui.h:31
 msgid "Continue..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:32
+#: ../data/pcsxr.ui.h:32
 msgid "Controller 1:   "
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:33
+#: ../data/pcsxr.ui.h:33
 msgid "Controller 2:"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:34
+#: ../data/pcsxr.ui.h:34
 msgid "Controllers..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:35
+#: ../data/pcsxr.ui.h:35
 msgid "Copy"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:36 ../win32/gui/CheatDlg.c:683
+#: ../data/pcsxr.ui.h:36 ../win32/gui/CheatDlg.c:683
 msgid "Data Base:"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:37 ../win32/gui/CheatDlg.c:681
+#: ../data/pcsxr.ui.h:37 ../win32/gui/CheatDlg.c:681
 msgid "Data Type:"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:38
+#: ../data/pcsxr.ui.h:38
 msgid ""
 "Decimal\n"
 "Hexadecimal"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:40
+#: ../data/pcsxr.ui.h:40
 msgid "Disable CD Audio"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:41
+#: ../data/pcsxr.ui.h:41
 msgid "Disable XA Decoding"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:42
+#: ../data/pcsxr.ui.h:42
 msgid "E_xit"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:43 ../win32/gui/CheatDlg.c:166
+#: ../data/pcsxr.ui.h:43 ../win32/gui/CheatDlg.c:166
 msgid "Edit Cheat Codes"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:44 ../win32/gui/WndMain.c:1310
+#: ../data/pcsxr.ui.h:44 ../win32/gui/WndMain.c:1310
 msgid "Enable Console Output"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:45 ../win32/gui/WndMain.c:1311
+#: ../data/pcsxr.ui.h:45 ../win32/gui/WndMain.c:1311
 msgid "Enable Debugger"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:46
+#: ../data/pcsxr.ui.h:46
 msgid "Enable Interpreter CPU"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:47
+#: ../data/pcsxr.ui.h:47
 msgid ""
 "Equal Value\n"
 "Not Equal Value\n"
@@ -207,271 +207,271 @@ msgid ""
 "No Change"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:56
+#: ../data/pcsxr.ui.h:56
 msgid "Format"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:57 ../win32/gui/CheatDlg.c:504
+#: ../data/pcsxr.ui.h:57 ../win32/gui/CheatDlg.c:504
 msgid "Freeze"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:58
+#: ../data/pcsxr.ui.h:58
 msgid "Graphics..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:59
+#: ../data/pcsxr.ui.h:59
 msgid "Graphics:"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:60 ../win32/gui/WndMain.c:1314
+#: ../data/pcsxr.ui.h:60 ../win32/gui/WndMain.c:1314
 msgid "InuYasha Sengoku Battle Fix"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:61
+#: ../data/pcsxr.ui.h:61
 msgid "Memcards..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:62 ../gui/DebugMemory.c:103
+#: ../data/pcsxr.ui.h:62 ../gui/DebugMemory.c:103
 msgid "Memory Dump"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:63
+#: ../data/pcsxr.ui.h:63
 msgid "Memory _Dump"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:64 ../win32/gui/CheatDlg.c:595
+#: ../data/pcsxr.ui.h:64 ../win32/gui/CheatDlg.c:595
 msgid "Modify"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:65
+#: ../data/pcsxr.ui.h:65
 msgid ""
 "NTSC\n"
 "PAL"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:67
+#: ../data/pcsxr.ui.h:67
 msgid "New"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:68
+#: ../data/pcsxr.ui.h:68
 msgid "PCSXR"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:69 ../win32/gui/WndMain.c:1313
+#: ../data/pcsxr.ui.h:69 ../win32/gui/WndMain.c:1313
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:70
+#: ../data/pcsxr.ui.h:70
 msgid "Patch Memory..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:71
+#: ../data/pcsxr.ui.h:71
 msgid "Raw Dump..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:72
+#: ../data/pcsxr.ui.h:72
 msgid "Restart"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:73
+#: ../data/pcsxr.ui.h:73
 msgid "Run CD"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:74
+#: ../data/pcsxr.ui.h:74
 msgid "Run ISO Image"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:75
+#: ../data/pcsxr.ui.h:75
 msgid "Run ISO..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:76
+#: ../data/pcsxr.ui.h:76
 msgid "Run _BIOS"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:77
+#: ../data/pcsxr.ui.h:77
 msgid "Run _CD"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:78
+#: ../data/pcsxr.ui.h:78
 msgid "Run _EXE..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:79
+#: ../data/pcsxr.ui.h:79
 msgid "Run _ISO..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:80 ../gui/Plugin.c:239
+#: ../data/pcsxr.ui.h:80 ../gui/Plugin.c:239
 #, c-format
 msgid "SIO IRQ Always Enabled"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:81
+#: ../data/pcsxr.ui.h:81
 msgid "SPU IRQ Always Enabled"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:82
+#: ../data/pcsxr.ui.h:82
 msgid "S_witch ISO..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:83
+#: ../data/pcsxr.ui.h:83
 msgid "Search"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:84 ../win32/gui/CheatDlg.c:680
+#: ../data/pcsxr.ui.h:84 ../win32/gui/CheatDlg.c:680
 msgid "Search For:"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:85
+#: ../data/pcsxr.ui.h:85
 msgid "Search in:"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:86
+#: ../data/pcsxr.ui.h:86
 msgid "Select Folder to Search"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:87
+#: ../data/pcsxr.ui.h:87
 msgid "Slot _1"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:88
+#: ../data/pcsxr.ui.h:88
 msgid "Slot _2"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:89
+#: ../data/pcsxr.ui.h:89
 msgid "Slot _3"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:90
+#: ../data/pcsxr.ui.h:90
 msgid "Slot _4"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:91
+#: ../data/pcsxr.ui.h:91
 msgid "Slot _5"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:92
+#: ../data/pcsxr.ui.h:92
 msgid "Slot _6"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:93
+#: ../data/pcsxr.ui.h:93
 msgid "Slot _7"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:94
+#: ../data/pcsxr.ui.h:94
 msgid "Slot _8"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:95
+#: ../data/pcsxr.ui.h:95
 msgid "Slot _9"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:96 ../win32/gui/WndMain.c:1307
+#: ../data/pcsxr.ui.h:96 ../win32/gui/WndMain.c:1307
 msgid "Slow Boot"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:97
+#: ../data/pcsxr.ui.h:97
 msgid "Sound..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:98
+#: ../data/pcsxr.ui.h:98
 msgid "Sound:"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:99
+#: ../data/pcsxr.ui.h:99
 msgid "Switch ISO Image"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:100
+#: ../data/pcsxr.ui.h:100
 msgid "Switch ISO..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:101 ../win32/gui/CheatDlg.c:684
+#: ../data/pcsxr.ui.h:101 ../win32/gui/CheatDlg.c:684
 msgid "To:"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:102
+#: ../data/pcsxr.ui.h:102
 msgid "Un/Delete"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:103 ../gui/Cheat.c:647 ../win32/gui/CheatDlg.c:506
+#: ../data/pcsxr.ui.h:103 ../gui/Cheat.c:647 ../win32/gui/CheatDlg.c:506
 #: ../win32/gui/CheatDlg.c:597 ../win32/gui/CheatDlg.c:682
 msgid "Value:"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:104
+#: ../data/pcsxr.ui.h:104
 msgid "_About PCSXR..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:105
+#: ../data/pcsxr.ui.h:105
 msgid "_Browse..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:106
+#: ../data/pcsxr.ui.h:106
 msgid "_CPU..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:107
+#: ../data/pcsxr.ui.h:107
 msgid "_Configuration"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:108
+#: ../data/pcsxr.ui.h:108
 msgid "_Continue"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:109
+#: ../data/pcsxr.ui.h:109
 msgid "_Emulator"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:110
+#: ../data/pcsxr.ui.h:110
 msgid "_File"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:111
+#: ../data/pcsxr.ui.h:111
 msgid "_Graphics..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:112
+#: ../data/pcsxr.ui.h:112
 msgid "_Help"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:113
+#: ../data/pcsxr.ui.h:113
 msgid "_Load State"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:114
+#: ../data/pcsxr.ui.h:114
 msgid "_Memory Cards..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:115
+#: ../data/pcsxr.ui.h:115
 msgid "_Netplay..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:116
+#: ../data/pcsxr.ui.h:116
 msgid "_Other..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:117
+#: ../data/pcsxr.ui.h:117
 msgid "_Plugins & BIOS..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:118
+#: ../data/pcsxr.ui.h:118
 msgid "_Reset"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:119
+#: ../data/pcsxr.ui.h:119
 msgid "_Save State"
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:120
+#: ../data/pcsxr.ui.h:120
 msgid "_Search..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:121
+#: ../data/pcsxr.ui.h:121
 msgid "_Sound..."
 msgstr ""
 
-#: ../data/pcsxr.glade2.h:122
+#: ../data/pcsxr.ui.h:122
 msgid "label_resultsfound"
 msgstr ""
 
