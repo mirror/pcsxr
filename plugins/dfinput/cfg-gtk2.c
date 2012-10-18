@@ -259,6 +259,7 @@ static void OnConfigExit(GtkWidget *widget, gpointer user_data) {
 
 	gtk_widget_destroy(widget);
 	SDL_Quit();
+	XCloseDisplay(g.Disp);
 
 	gtk_exit(0);
 }
@@ -340,6 +341,8 @@ static void ReadDKeyEvent(int padnum, int key) {
 	GdkEvent *ge;
 	int i;
 	Sint16 axis, numAxes = 0, InitAxisPos[256], PrevAxisPos[256];
+	unsigned char buttons[32];
+	uint16_t Key;
 
 	if (g.cfg.PadDef[padnum].DevNum >= 0) {
 		js = SDL_JoystickOpen(g.cfg.PadDef[padnum].DevNum);
@@ -403,15 +406,15 @@ static void ReadDKeyEvent(int padnum, int key) {
 		}
 
 		// check keyboard events
-		while ((ge = gdk_event_get()) != NULL) {
-			if (ge->type == GDK_KEY_PRESS) {
-				if (ge->key.keyval != XK_Escape) {
-					g.cfg.PadDef[padnum].KeyDef[key].Key = ge->key.keyval;
+		XQueryKeymap(g.Disp, buttons);
+		for (i = 0; i < 256; ++i) {
+			if(buttons[i >> 3] & (1 << (i & 7))) {
+				Key = XkbKeycodeToKeysym(g.Disp, i, 0, 0);
+				if(Key != XK_Escape) {
+					g.cfg.PadDef[padnum].KeyDef[key].Key = Key;
 				}
-				gdk_event_free(ge);
 				goto end;
 			}
-			gdk_event_free(ge);
 		}
 
 		usleep(5000);
@@ -429,6 +432,8 @@ static void ReadAnalogEvent(int padnum, int analognum, int analogdir) {
 	GdkEvent *ge;
 	int i;
 	Sint16 axis, numAxes = 0, InitAxisPos[256], PrevAxisPos[256];
+	unsigned char buttons[32];
+	uint16_t Key;
 
 	if (g.cfg.PadDef[padnum].DevNum >= 0) {
 		js = SDL_JoystickOpen(g.cfg.PadDef[padnum].DevNum);
@@ -492,15 +497,15 @@ static void ReadAnalogEvent(int padnum, int analognum, int analogdir) {
 		}
 
 		// check keyboard events
-		while ((ge = gdk_event_get()) != NULL) {
-			if (ge->type == GDK_KEY_PRESS) {
-				if (ge->key.keyval != XK_Escape) {
-					g.cfg.PadDef[padnum].AnalogDef[analognum][analogdir].Key = ge->key.keyval;
+		XQueryKeymap(g.Disp, buttons);
+		for (i = 0; i < 256; ++i) {
+			if(buttons[i >> 3] & (1 << (i & 7))) {
+				Key = XkbKeycodeToKeysym(g.Disp, i, 0, 0);
+				if(Key != XK_Escape) {
+					g.cfg.PadDef[padnum].AnalogDef[analognum][analogdir].Key = Key;
 				}
-				gdk_event_free(ge);
 				goto end;
 			}
-			gdk_event_free(ge);
 		}
 
 		usleep(5000);
@@ -596,6 +601,12 @@ long PADconfigure() {
 
 	if (SDL_Init(SDL_INIT_JOYSTICK) == -1) {
 		fprintf(stderr, "Failed to initialize SDL!\n");
+		return -1;
+	}
+	
+	g.Disp = XOpenDisplay(NULL);
+	if (!g.Disp) {
+		fprintf(stderr, "XOpenDisplay failed!\n");
 		return -1;
 	}
 
