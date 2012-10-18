@@ -123,6 +123,17 @@ void ResetMenuSlots() {
 		widget = gtk_builder_get_object(builder, "net1");
 		gtk_widget_set_sensitive(widget, TRUE);
 
+		widget = gtk_builder_get_object(builder, "toolbutton_switchimage");
+		gtk_widget_set_sensitive(widget, UsingIso());
+		widget = gtk_builder_get_object(builder, "toolbutton_graphics");
+		gtk_widget_set_sensitive(widget, TRUE);
+		widget = gtk_builder_get_object(builder, "toolbutton_sound");
+		gtk_widget_set_sensitive(widget, TRUE);
+		widget = gtk_builder_get_object(builder, "toolbutton_cdrom");
+		gtk_widget_set_sensitive(widget, TRUE);
+		widget = gtk_builder_get_object(builder, "toolbutton_controllers");
+		gtk_widget_set_sensitive(widget, TRUE);
+		
 		widget = gtk_builder_get_object(builder, "statusbar");
 		gtk_statusbar_pop(GTK_STATUSBAR(widget), 1);
 		gtk_statusbar_push(GTK_STATUSBAR(widget), 1, _("Ready"));
