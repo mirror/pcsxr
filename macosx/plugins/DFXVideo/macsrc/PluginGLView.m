@@ -838,66 +838,14 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 
 - (char*)loadSource:(NSURL *)filename
 {
-    /*char *src = NULL;
-    FILE *fp = NULL;    
-    long size;          
-    long i;             
-    
-    
-    // Open the file 
-    fp = fopen(filename, "r");
-    // Check if its OK
-    if(fp == NULL)
-    {
-        fprintf(stderr, "Impossible to open the file '%s'\n", filename);
-        return NULL;
-    }
-    
-    // Get the file size 
-    fseek(fp, 0, SEEK_END);
-    size = ftell(fp);
-    
-    // Go back to the beginning 
-    rewind(fp);
-    
-    // Allocate memory 
-    src = malloc(size+1); // +1 for '\0' 
-    if(src == NULL)
-    {
-        fclose(fp);
-        fprintf(stderr, "Memory allocation error!\n");
-        return NULL;
-    }
-    
-    // The the file 
-    for(i=0; i<size; i++)
-        src[i] = fgetc(fp);
-    
-    // Put the last char as '\0' 
-    src[size] = '\0';
-    
-    fclose(fp);
-    
-    return src;*/
-	//NSURL *actualFile = [filename filePathURL];
 	//Since we're passing Cocoa NSURLs, let's use Cocoa's methods
 	if (filename == nil) {
 		return NULL;
 	}
-	NSNumber *filesizeAsNS = nil;
-	long long filesize = 0;
-	[filename getResourceValue:&filesizeAsNS forKey:NSURLFileSizeKey error:nil];
-	if (filesizeAsNS == nil) {
-		return NULL;
-	}
-	filesize = [filesizeAsNS longLongValue];
-	if (filesize == 0) {
-		return NULL;
-	}
 	NSMutableData *shaderData = [NSMutableData dataWithContentsOfURL:filename];
 	[shaderData appendBytes:"\0" length:1];
-	char *shaderText = malloc(filesize + 1);
-	memcpy(shaderText, [shaderData bytes], filesize + 1);
+	char *shaderText = malloc([shaderData length]);
+	memcpy(shaderText, [shaderData bytes], [shaderData length]);
 	return shaderText;
 }
 
