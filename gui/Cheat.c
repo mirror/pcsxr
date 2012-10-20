@@ -50,6 +50,7 @@ static void LoadCheatListItems(int index) {
 	gtk_tree_view_set_model(GTK_TREE_VIEW(widget), GTK_TREE_MODEL(store));
 	g_object_unref(G_OBJECT(store));
 	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(widget), TRUE);
+	gtk_tree_view_set_search_column(GTK_TREE_VIEW(widget), 1);
 	gtk_widget_show(widget);
 
 	if (index >= NumCheats) {
