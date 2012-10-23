@@ -1,5 +1,5 @@
 /*  Cheat Support for PCSX-Reloaded
- *  Copyright (C) 2009, Wei Mingzhi <whistler@openoffice.org>.
+ *  Copyright (C) 2009, Wei Mingzhi <whistler_wmz@users.sf.net>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

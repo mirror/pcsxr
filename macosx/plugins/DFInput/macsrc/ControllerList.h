@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, Wei Mingzhi <whistler@openoffice.org>.
+ * Copyright (c) 2010, Wei Mingzhi <whistler_wmz@users.sf.net>.
  * All Rights Reserved.
  *
  * Based on HIDInput by Gil Pedersen.

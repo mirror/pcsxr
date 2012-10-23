@@ -1,7 +1,7 @@
 Source: pcsxr
 Section: otherosfs
 Priority: extra
-Maintainer: Wei Mingzhi <whistler@openoffice.org>
+Maintainer: Wei Mingzhi <whistler_wmz@users.sf.net>
 Build-Depends: debhelper (>= 5), libgtk2.0-dev, zlib1g-dev | libz-dev, libxv-dev, libxtst-dev, nasm, libgl1-mesa-dev, libxxf86vm-dev, libsdl1.2-dev, intltool
 Standards-Version: 3.7.3
 
