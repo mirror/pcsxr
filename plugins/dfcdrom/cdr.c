@@ -474,18 +474,28 @@ void ExecCfg(char *arg) {
 
 	strcpy(cfg, "./cfgDFCdrom");
 	if (stat(cfg, &buf) != -1) {
-		if (fork() == 0) {
-			execl(cfg, "cfgDFCdrom", arg, NULL);
+		int pid = fork();
+		if (pid == 0) {
+			if (fork() == 0) {
+				execl(cfg, "cfgDFCdrom", arg, NULL);
+			}
 			exit(0);
+		} else if (pid > 0) {
+			waitpid(pid, NULL, 0);
 		}
 		return;
 	}
 
-	strcpy(cfg, "./cfg/DFCdrom");
+	strcpy(cfg, "./cfg/cfgDFCdrom");
 	if (stat(cfg, &buf) != -1) {
-		if (fork() == 0) {
-			execl(cfg, "cfgDFCdrom", arg, NULL);
+		int pid = fork();
+		if (pid == 0) {
+			if (fork() == 0) {
+				execl(cfg, "cfgDFCdrom", arg, NULL);
+			}
 			exit(0);
+		} else if (pid > 0) {
+			waitpid(pid, NULL, 0);
 		}
 		return;
 	}

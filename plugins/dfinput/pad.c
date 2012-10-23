@@ -651,18 +651,33 @@ void PADregisterVibration(void (*callback)(uint32_t, uint32_t)) {
 #ifndef _MACOSX
 
 long PADconfigure(void) {
-	if (fork() == 0) {
-		execl("cfg/cfgDFInput", "cfgDFInput", NULL);
+	int pid = fork();
+
+	if (pid == 0) {
+		if (fork() == 0) {
+			execl("cfg/cfgDFInput", "cfgDFInput", NULL);
+		}
 		exit(0);
+	} else if (pid > 0) {
+		waitpid(pid, NULL, 0);
 	}
+
 	return PSE_PAD_ERR_SUCCESS;
 }
 
 void PADabout(void) {
-	if (fork() == 0) {
-		execl("cfg/cfgDFInput", "cfgDFInput", "-about", NULL);
+	int pid = fork();
+
+	if (pid == 0) {
+		if (fork() == 0) {
+			execl("cfg/cfgDFInput", "cfgDFInput", "-about", NULL);
+		}
 		exit(0);
+	} else if (pid > 0) {
+		waitpid(pid, NULL, 0);
 	}
+
+	return PSE_PAD_ERR_SUCCESS;
 }
 
 #endif

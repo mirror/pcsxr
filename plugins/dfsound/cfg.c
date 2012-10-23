@@ -40,42 +40,20 @@ void StartCfgTool(char * pCmdLine)
  cf=fopen(filename,"rb");
  if(cf!=NULL)
   {
+   int pid;
    fclose(cf);
-   if(fork()==0)
+   pid=fork();
+   if(pid==0)
     {
-     execl("./cfgDFSound","cfgDFSound",pCmdLine,NULL);
-     exit(0);
-    }
-  }
- else
-  {
-   strcpy(filename,"cfg/cfgDFSound");
-   cf=fopen(filename,"rb");
-   if(cf!=NULL)
-    {
-     fclose(cf);
      if(fork()==0)
       {
-       chdir("cfg");
        execl("./cfgDFSound","cfgDFSound",pCmdLine,NULL);
-       exit(0);
       }
+     exit(0);
     }
-   else
+   else if(pid>0)
     {
-     sprintf(filename,"%s/cfgDFSound",getenv("HOME"));
-     cf=fopen(filename,"rb");
-     if(cf!=NULL)
-      {
-       fclose(cf);
-       if(fork()==0)
-       {
-        chdir(getenv("HOME"));
-        execl("./cfgDFSound","cfgDFSound",pCmdLine,NULL);
-        exit(0);
-       }
-      }
-     else printf("Sound error: cfgDFSound not found!\n");
+     waitpid(pid,NULL,0);
     }
   }
 }

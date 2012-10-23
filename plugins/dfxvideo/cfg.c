@@ -172,27 +172,42 @@ void ExecCfg(char *arg) {
 
 	strcpy(cfg, "./cfgDFXVideo");
 	if (stat(cfg, &buf) != -1) {
-		if (fork() == 0) {
-			execl(cfg, "cfgDFXVideo", arg, NULL);
+		int pid = fork();
+		if (pid == 0) {
+			if (fork() == 0) {
+				execl(cfg, "cfgDFXVideo", arg, NULL);
+			}
 			exit(0);
+		} else if (pid > 0) {
+			waitpid(pid, NULL, 0);
 		}
 		return;
 	}
 
 	strcpy(cfg, "./cfg/cfgDFXVideo");
 	if (stat(cfg, &buf) != -1) {
-		if (fork() == 0) {
-			execl(cfg, "cfgDFXVideo", arg, NULL);
+		int pid = fork();
+		if (pid == 0) {
+			if (fork() == 0) {
+				execl(cfg, "cfgDFXVideo", arg, NULL);
+			}
 			exit(0);
+		} else if (pid > 0) {
+			waitpid(pid, NULL, 0);
 		}
 		return;
 	}
 
 	sprintf(cfg, "%s/.pcsxr/plugins/cfg/cfgDFXVideo", getenv("HOME"));
 	if (stat(cfg, &buf) != -1) {
-		if (fork() == 0) {
-			execl(cfg, "cfgDFXVideo", arg, NULL);
+		int pid = fork();
+		if (pid == 0) {
+			if (fork() == 0) {
+				execl(cfg, "cfgDFXVideo", arg, NULL);
+			}
 			exit(0);
+		} else if (pid > 0) {
+			waitpid(pid, NULL, 0);
 		}
 		return;
 	}

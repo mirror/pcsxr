@@ -3012,27 +3012,42 @@ void StartCfgTool(char *arg) // linux: start external cfg tool
 
 	strcpy(cfg, "./cfgpeopsxgl");
 	if (stat(cfg, &buf) != -1) {
-		if (fork() == 0) {
-			execl(cfg, "cfgpeopsxgl", arg, NULL);
+		int pid = fork();
+		if (pid == 0) {
+			if (fork() == 0) {
+				execl(cfg, "cfgpeopsxgl", arg, NULL);
+			}
 			exit(0);
+		} else {
+			waitpid(pid, NULL, 0);
 		}
 		return;
 	}
 
 	strcpy(cfg, "./cfg/cfgpeopsxgl");
 	if (stat(cfg, &buf) != -1) {
-		if (fork() == 0) {
-			execl(cfg, "cfgpeopsxgl", arg, NULL);
+		int pid = fork();
+		if (pid == 0) {
+			if (fork() == 0) {
+				execl(cfg, "cfgpeopsxgl", arg, NULL);
+			}
 			exit(0);
+		} else {
+			waitpid(pid, NULL, 0);
 		}
 		return;
 	}
 
 	sprintf(cfg, "%s/.pcsxr/plugins/cfg/cfgpeopsxgl", getenv("HOME"));
 	if (stat(cfg, &buf) != -1) {
-		if (fork() == 0) {
-			execl(cfg, "cfgpeopsxgl", arg, NULL);
+		int pid = fork();
+		if (pid == 0) {
+			if (fork() == 0) {
+				execl(cfg, "cfgpeopsxgl", arg, NULL);
+			}
 			exit(0);
+		} else {
+			waitpid(pid, NULL, 0);
 		}
 		return;
 	}
