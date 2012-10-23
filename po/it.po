@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2012-10-15 19:23+0400\n"
+"POT-Creation-Date: 2012-10-23 17:27+0800\n"
 "PO-Revision-Date: 2011-06-04 13:45+0400\n"
 "Last-Translator: Giovanni Scafora <giovanni@archlinux.org>\n"
 "Language-Team: Arch Linux Italian Team <giovanni@archlinux.org>\n"
@@ -27,7 +27,7 @@ msgstr "Modifica i codici dei cheat"
 msgid "<b>Cheat Codes</b>"
 msgstr "<b>Codici cheat</b>"
 
-#: ../data/pcsxr.ui.h:3 ../gui/Cheat.c:1099 ../win32/gui/CheatDlg.c:678
+#: ../data/pcsxr.ui.h:3 ../gui/Cheat.c:1100 ../win32/gui/CheatDlg.c:678
 msgid "Cheat Search"
 msgstr "Cerca cheat"
 
@@ -39,7 +39,7 @@ msgstr "Cerca per:"
 msgid "Data Type:"
 msgstr "Tipo di dato:"
 
-#: ../data/pcsxr.ui.h:6 ../gui/Cheat.c:631 ../win32/gui/CheatDlg.c:506
+#: ../data/pcsxr.ui.h:6 ../gui/Cheat.c:632 ../win32/gui/CheatDlg.c:506
 #: ../win32/gui/CheatDlg.c:597 ../win32/gui/CheatDlg.c:682
 msgid "Value:"
 msgstr "Valore:"
@@ -124,42 +124,42 @@ msgstr "<b>BIOS</b>"
 msgid "Configure CPU"
 msgstr "Configura la CPU"
 
-#: ../data/pcsxr.ui.h:27 ../win32/gui/WndMain.c:1319
-msgid "Enable Debugger"
-msgstr "Abilita il debugger"
-
-#: ../data/pcsxr.ui.h:28
+#: ../data/pcsxr.ui.h:27
 msgid "SPU IRQ Always Enabled"
 msgstr "SPU IRQ sempre abilitato"
 
-#: ../data/pcsxr.ui.h:29
+#: ../data/pcsxr.ui.h:28
 msgid "Black & White Movies"
 msgstr "Filmati in bianco e nero"
 
-#: ../data/pcsxr.ui.h:30 ../win32/gui/WndMain.c:1318
-msgid "Enable Console Output"
-msgstr "Abilita l'output sulla console"
-
-#: ../data/pcsxr.ui.h:31
-msgid "Enable Interpreter CPU"
-msgstr "Abilita l'interprete della CPU"
-
-#: ../data/pcsxr.ui.h:32 ../gui/Plugin.c:239
+#: ../data/pcsxr.ui.h:29 ../gui/Plugin.c:239
 #, c-format
 msgid "SIO IRQ Always Enabled"
 msgstr "SIO IRQ sempre abilitato"
 
-#: ../data/pcsxr.ui.h:33
-msgid "Disable CD Audio"
-msgstr "Disabilita CD audio"
-
-#: ../data/pcsxr.ui.h:34
+#: ../data/pcsxr.ui.h:30
 msgid "Disable XA Decoding"
 msgstr "Disabilita il decoding XA"
 
-#: ../data/pcsxr.ui.h:35 ../win32/gui/WndMain.c:1315
+#: ../data/pcsxr.ui.h:31
+msgid "Disable CD Audio"
+msgstr "Disabilita CD audio"
+
+#: ../data/pcsxr.ui.h:32 ../win32/gui/WndMain.c:1315
 msgid "Slow Boot"
 msgstr ""
+
+#: ../data/pcsxr.ui.h:33
+msgid "Enable Interpreter CPU"
+msgstr "Abilita l'interprete della CPU"
+
+#: ../data/pcsxr.ui.h:34 ../win32/gui/WndMain.c:1318
+msgid "Enable Console Output"
+msgstr "Abilita l'output sulla console"
+
+#: ../data/pcsxr.ui.h:35 ../win32/gui/WndMain.c:1319
+msgid "Enable Debugger"
+msgstr "Abilita il debugger"
 
 #: ../data/pcsxr.ui.h:36 ../win32/gui/WndMain.c:1321
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
@@ -539,111 +539,111 @@ msgstr ""
 msgid "A PlayStation emulator."
 msgstr "Un emulatore della PlayStation."
 
-#: ../gui/Cheat.c:100 ../win32/gui/CheatDlg.c:116
+#: ../gui/Cheat.c:101 ../win32/gui/CheatDlg.c:116
 msgid "Add New Cheat"
 msgstr "Aggiungi un nuovo cheat"
 
-#: ../gui/Cheat.c:108 ../gui/Cheat.c:191
+#: ../gui/Cheat.c:109 ../gui/Cheat.c:192
 msgid "Cheat Description:"
 msgstr "Descrizione del cheat:"
 
-#: ../gui/Cheat.c:116 ../gui/Cheat.c:200 ../win32/gui/CheatDlg.c:68
+#: ../gui/Cheat.c:117 ../gui/Cheat.c:201 ../win32/gui/CheatDlg.c:68
 #: ../win32/gui/CheatDlg.c:118
 msgid "Cheat Code:"
 msgstr "Codice cheat:"
 
-#: ../gui/Cheat.c:146 ../gui/Cheat.c:240 ../gui/LnxMain.c:421
+#: ../gui/Cheat.c:147 ../gui/Cheat.c:241 ../gui/LnxMain.c:421
 #: ../win32/gui/ConfigurePlugins.c:309
 msgid "Error"
 msgstr "Errore"
 
-#: ../gui/Cheat.c:146 ../gui/Cheat.c:240 ../win32/gui/CheatDlg.c:91
+#: ../gui/Cheat.c:147 ../gui/Cheat.c:241 ../win32/gui/CheatDlg.c:91
 #: ../win32/gui/CheatDlg.c:132
 msgid "Invalid cheat code!"
 msgstr "Codice del cheat non valido!"
 
-#: ../gui/Cheat.c:183 ../win32/gui/CheatDlg.c:66
+#: ../gui/Cheat.c:184 ../win32/gui/CheatDlg.c:66
 msgid "Edit Cheat"
 msgstr "Modifica cheat"
 
-#: ../gui/Cheat.c:293
+#: ../gui/Cheat.c:294
 msgid "Open Cheat File"
 msgstr "Apri il file del cheat"
 
-#: ../gui/Cheat.c:303 ../gui/Cheat.c:343
+#: ../gui/Cheat.c:304 ../gui/Cheat.c:344
 msgid "PCSXR Cheat Code Files (*.cht)"
 msgstr "File cheat di PCSXR (*.cht)"
 
-#: ../gui/Cheat.c:308 ../gui/Gtk2Gui.c:464 ../gui/Gtk2Gui.c:605
+#: ../gui/Cheat.c:309 ../gui/Gtk2Gui.c:475 ../gui/Gtk2Gui.c:616
 #: ../win32/gui/WndMain.c:1464 ../win32/gui/WndMain.c:1545
 msgid "All Files"
 msgstr "Tutti i file"
 
-#: ../gui/Cheat.c:333
+#: ../gui/Cheat.c:334
 msgid "Save Cheat File"
 msgstr "Salva il file del cheat"
 
-#: ../gui/Cheat.c:348
+#: ../gui/Cheat.c:349
 msgid "All Files (*.*)"
 msgstr "Tutti i file (*.*)"
 
-#: ../gui/Cheat.c:387
+#: ../gui/Cheat.c:388
 msgid "Cheat Codes"
 msgstr "Codici cheat"
 
-#: ../gui/Cheat.c:394
+#: ../gui/Cheat.c:395
 msgid "Enable"
 msgstr "Abilita"
 
-#: ../gui/Cheat.c:402 ../win32/gui/CheatDlg.c:185
+#: ../gui/Cheat.c:403 ../win32/gui/CheatDlg.c:185
 msgid "Description"
 msgstr "Descrizione"
 
-#: ../gui/Cheat.c:530 ../win32/gui/CheatDlg.c:457
+#: ../gui/Cheat.c:531 ../win32/gui/CheatDlg.c:457
 msgid "Too many addresses found."
 msgstr "Sono stati trovati troppi indirizzi."
 
-#: ../gui/Cheat.c:539 ../win32/gui/CheatDlg.c:466
+#: ../gui/Cheat.c:540 ../win32/gui/CheatDlg.c:466
 #, c-format
 msgid "%.8X    Current: %u (%.2X), Previous: %u (%.2X)"
 msgstr "%.8X    Attuale: %u (%.2X), Precedente: %u (%.2X)"
 
-#: ../gui/Cheat.c:544 ../win32/gui/CheatDlg.c:471
+#: ../gui/Cheat.c:545 ../win32/gui/CheatDlg.c:471
 #, c-format
 msgid "%.8X    Current: %u (%.4X), Previous: %u (%.4X)"
 msgstr "%.8X    Attuale: %u (%.4X), Precedente: %u (%.4X)"
 
-#: ../gui/Cheat.c:549 ../win32/gui/CheatDlg.c:476
+#: ../gui/Cheat.c:550 ../win32/gui/CheatDlg.c:476
 #, c-format
 msgid "%.8X    Current: %u (%.8X), Previous: %u (%.8X)"
 msgstr "%.8X    Attuale: %u (%.8X), Precedente: %u (%.8X)"
 
-#: ../gui/Cheat.c:564 ../win32/gui/CheatDlg.c:492
+#: ../gui/Cheat.c:565 ../win32/gui/CheatDlg.c:492
 #, c-format
 msgid "Founded Addresses: %d"
 msgstr "Indirizzi trovati: %d"
 
-#: ../gui/Cheat.c:572 ../win32/gui/CheatDlg.c:448
+#: ../gui/Cheat.c:573 ../win32/gui/CheatDlg.c:448
 msgid "Enter the values and start your search."
 msgstr "Digita i valori ed inizia la tua ricerca."
 
-#: ../gui/Cheat.c:614
+#: ../gui/Cheat.c:615
 msgid "Freeze value"
 msgstr "Blocca valore"
 
-#: ../gui/Cheat.c:620 ../win32/gui/CheatDlg.c:67 ../win32/gui/CheatDlg.c:117
+#: ../gui/Cheat.c:621 ../win32/gui/CheatDlg.c:67 ../win32/gui/CheatDlg.c:117
 msgid "Description:"
 msgstr "Descrizione:"
 
-#: ../gui/Cheat.c:713
+#: ../gui/Cheat.c:714
 msgid "Modify value"
 msgstr "Modifica il valore"
 
-#: ../gui/Cheat.c:721
+#: ../gui/Cheat.c:722
 msgid "New value:"
 msgstr "Nuovo valore:"
 
-#: ../gui/Cheat.c:1105
+#: ../gui/Cheat.c:1106
 msgid "Search Results"
 msgstr "Risultati della ricerca"
 
@@ -720,91 +720,91 @@ msgstr "Indirizzo:"
 msgid "Text"
 msgstr "Strutture"
 
-#: ../gui/Gtk2Gui.c:128
+#: ../gui/Gtk2Gui.c:139
 msgid "Ready"
 msgstr "Pronto"
 
-#: ../gui/Gtk2Gui.c:169
+#: ../gui/Gtk2Gui.c:180
 msgid "Emulation Paused."
 msgstr "L'emulazione è stata messa in pausa."
 
-#: ../gui/Gtk2Gui.c:447
+#: ../gui/Gtk2Gui.c:458
 msgid "Select PSX EXE File"
 msgstr "Seleziona un file EXE della PSX"
 
-#: ../gui/Gtk2Gui.c:460
+#: ../gui/Gtk2Gui.c:471
 msgid "PlayStation Executable Files"
 msgstr "File eseguibili della PlayStation"
 
-#: ../gui/Gtk2Gui.c:497
+#: ../gui/Gtk2Gui.c:508
 msgid "Not a valid PSX file"
 msgstr "Non è un file valido della PSX"
 
-#: ../gui/Gtk2Gui.c:497
+#: ../gui/Gtk2Gui.c:508
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "Il file non sembra essere un eseguibile valido della Playstation"
 
-#: ../gui/Gtk2Gui.c:526 ../gui/Gtk2Gui.c:681
+#: ../gui/Gtk2Gui.c:537 ../gui/Gtk2Gui.c:692
 msgid "CD ROM failed"
 msgstr "Si è verificato un problema con il CD ROM"
 
-#: ../gui/Gtk2Gui.c:526 ../gui/Gtk2Gui.c:681 ../win32/gui/WndMain.c:469
+#: ../gui/Gtk2Gui.c:537 ../gui/Gtk2Gui.c:692 ../win32/gui/WndMain.c:469
 #: ../win32/gui/WndMain.c:521 ../win32/gui/WndMain.c:590
 #, c-format
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "Il CD inserito non sembra essere un valido CD della Playstation"
 
-#: ../gui/Gtk2Gui.c:537 ../gui/Gtk2Gui.c:692 ../win32/gui/WndMain.c:479
+#: ../gui/Gtk2Gui.c:548 ../gui/Gtk2Gui.c:703 ../win32/gui/WndMain.c:479
 #: ../win32/gui/WndMain.c:531 ../win32/gui/WndMain.c:600
 #, c-format
 msgid "Could not load CD-ROM!"
 msgstr "Impossibile caricare il CD-ROM!"
 
-#: ../gui/Gtk2Gui.c:537 ../gui/Gtk2Gui.c:692
+#: ../gui/Gtk2Gui.c:548 ../gui/Gtk2Gui.c:703
 msgid "The CD-ROM could not be loaded"
 msgstr "Impossibile caricare il CD-ROM"
 
-#: ../gui/Gtk2Gui.c:551
+#: ../gui/Gtk2Gui.c:562
 msgid "Could not run BIOS"
 msgstr "Impossibile avviare il BIOS"
 
-#: ../gui/Gtk2Gui.c:551
+#: ../gui/Gtk2Gui.c:562
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr "L'avvio del BIOS non è supportato con il BIOS HLE interno."
 
-#: ../gui/Gtk2Gui.c:580
+#: ../gui/Gtk2Gui.c:591
 msgid "Open PSX Disc Image File"
 msgstr "Apri il file immagine del disco PSX"
 
-#: ../gui/Gtk2Gui.c:600
+#: ../gui/Gtk2Gui.c:611
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr "File immagine PSX (*.bin, *.img, *.mdf, *.iso)"
 
-#: ../gui/Gtk2Gui.c:853
+#: ../gui/Gtk2Gui.c:864
 #, c-format
 msgid "Loaded state %s."
 msgstr "È stato caricato lo stato %s."
 
-#: ../gui/Gtk2Gui.c:856
+#: ../gui/Gtk2Gui.c:867
 #, c-format
 msgid "Error loading state %s!"
 msgstr "Si è verificato un errore durante il caricamento dello stato %s!"
 
-#: ../gui/Gtk2Gui.c:867
+#: ../gui/Gtk2Gui.c:878
 #, c-format
 msgid "Saved state %s."
 msgstr "È stato salvato lo stato %s."
 
-#: ../gui/Gtk2Gui.c:869
+#: ../gui/Gtk2Gui.c:880
 #, c-format
 msgid "Error saving state %s!"
 msgstr "Si è verificato un errore durante il salvataggio dello stato %s!"
 
-#: ../gui/Gtk2Gui.c:904 ../gui/Gtk2Gui.c:932
+#: ../gui/Gtk2Gui.c:915 ../gui/Gtk2Gui.c:943
 msgid "Select State File"
 msgstr "Seleziona il file dello stato"
 
-#: ../gui/Gtk2Gui.c:975
+#: ../gui/Gtk2Gui.c:986
 msgid "Notice"
 msgstr "Avviso"
 
@@ -1504,21 +1504,21 @@ msgstr "Tastiera:"
 msgid "(Not Set)"
 msgstr "(Nessuna impostazione)"
 
-#: ../plugins/dfinput/cfg-gtk2.c:570
+#: ../plugins/dfinput/cfg-gtk2.c:575
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:14
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:77
 msgid "None"
 msgstr "Nessuno"
 
-#: ../plugins/dfinput/cfg-gtk2.c:612
+#: ../plugins/dfinput/cfg-gtk2.c:623
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr "Configurazione input del gamepad/tastiera"
 
-#: ../plugins/dfinput/cfg-gtk2.c:618 ../plugins/dfinput/cfg-gtk2.c:638
+#: ../plugins/dfinput/cfg-gtk2.c:629 ../plugins/dfinput/cfg-gtk2.c:649
 msgid "Key"
 msgstr "Tasto"
 
-#: ../plugins/dfinput/cfg-gtk2.c:624 ../plugins/dfinput/cfg-gtk2.c:644
+#: ../plugins/dfinput/cfg-gtk2.c:635 ../plugins/dfinput/cfg-gtk2.c:655
 msgid "Button"
 msgstr "Pulsante"
 
