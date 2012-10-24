@@ -527,11 +527,11 @@ static void recCOP0() {
 static void recCOP2() {
 	MOV32MtoR(EAX, (uptr)&psxRegs.CP0.n.Status);
 	AND32ItoR(EAX, 0x40000000);
-	j8Ptr[31] = JZ8(0);
+	j32Ptr[31] = JZ32(0);
 
 	recCP2[_Funct_]();
 
-	x86SetJ8(j8Ptr[31]);
+	x86SetJ32(j32Ptr[31]);
 }
 #endif
 

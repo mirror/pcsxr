@@ -230,8 +230,8 @@ void x86SetJ8( u8* j8 )
 	u32 jump = ( x86Ptr - (s8*)j8 ) - 1;
 
 	if ( jump > 0x7f ) {
+		assert(0);
 		SysPrintf( "j8 greater than 0x7f!!\n" );
-		//assert(0);
 	}
 	*j8 = (u8)jump;
 }
