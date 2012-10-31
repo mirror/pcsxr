@@ -662,7 +662,7 @@ gboolean updateFunc(gpointer data) {
 	currentIcon++;
 	UpdateListItems(1, GtkCList_McdList1);
 	UpdateListItems(2, GtkCList_McdList2);
-	g_timeout_add(333, updateFunc, 0);
+	g_timeout_add(200, updateFunc, 0);
 	return FALSE;
 }
 
