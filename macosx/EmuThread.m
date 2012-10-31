@@ -29,12 +29,16 @@ static pthread_mutex_t eventMutex;
 #define EMUEVENT_RESET		(1<<1)
 #define EMUEVENT_STOP		(1<<2)
 
+static NSString *ThreadInfo = @"PSX Emu Background thread";
+
 @implementation EmuThread
 
 - (void)EmuThreadRun:(id)anObject
 {
 	NSAutoreleasePool *pool = [NSAutoreleasePool new];
 
+	[[NSThread currentThread] setName:ThreadInfo];
+	
 	[[NSNotificationCenter defaultCenter] addObserver:self
         selector:@selector(emuWindowDidClose:)
         name:@"emuWindowDidClose" object:nil];
@@ -86,6 +90,8 @@ done:
 {
 	NSAutoreleasePool *pool = [NSAutoreleasePool new];
 
+	[[NSThread currentThread] setName:ThreadInfo];
+	
 	[[NSNotificationCenter defaultCenter] addObserver:self
         selector:@selector(emuWindowDidClose:)
         name:@"emuWindowDidClose" object:nil];
