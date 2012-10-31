@@ -24,8 +24,14 @@
 
 - (BOOL)handleFile:(NSString *)theFile
 {
-	SetIsoFile([theFile fileSystemRepresentation]);
-	[EmuThread run];
+	if ([EmuThread active] == TRUE) {
+		SetCdOpenCaseTime(time(NULL) + 2);
+		SetIsoFile([theFile fileSystemRepresentation]);
+		//[EmuThread reset];
+	} else {
+		SetIsoFile([theFile fileSystemRepresentation]);
+		[EmuThread run];
+	}
 	return YES;
 }
 

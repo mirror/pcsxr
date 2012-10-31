@@ -555,6 +555,8 @@ static NSString *HandleBinCue(NSString *toHandle)
 		}			
 		if (canHandle) {
 			isHandled = [hand handleFile:HandleBinCue(filename)];
+			[hand release];
+			break;
 		}
 		[hand release];
 
