@@ -287,24 +287,20 @@ void ReadConfig(void)
 	{
 		BOOL resetPrefs = NO;
 		vertexPath = [NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"VertexShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil];
-		if (vertexPath) {
-			[vertexPath retain];
-		} else {
+		if (!vertexPath) {
 			resetPrefs = YES;
 		}
 		fragmentPath = [NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"FragmentShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil];
-		if (fragmentPath) {
-			[fragmentPath retain];
-		} else {
+		if (!fragmentPath) {
 			resetPrefs = YES;
 		}
 		if (resetPrefs) {
-			NSBundle *selfBundle = [NSBundle bundleWithIdentifier:APP_ID];
-			[vertexPath release];
-			[fragmentPath release];
-			vertexPath = [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"] retain];
-			fragmentPath = [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"] retain];
+			NSBundle *selfBundle = [NSBundle bundleForClass:[self class]];
+			vertexPath = [selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"];
+			fragmentPath = [selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"];
 		}
+		[vertexPath retain];
+		[fragmentPath retain];
 	}
 	[fpsCounter setIntValue:[[keyValues objectForKey:@"FPS Counter"] intValue]];
 	[autoFullScreen setIntValue:[[keyValues objectForKey:@"Auto Full Screen"] intValue]];
