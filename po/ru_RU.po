@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
 "POT-Creation-Date: 2012-10-23 17:27+0800\n"
-"PO-Revision-Date: 2012-10-15 19:37+0400\n"
+"PO-Revision-Date: 2012-10-24 19:57+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "Language: \n"
@@ -490,6 +490,9 @@ msgid ""
 "(C) 2005-2009 PCSX-df Team\n"
 "(C) 2009-2011 PCSX-Reloaded Team"
 msgstr ""
+"(C) 1999-2003 Команда PCSX\n"
+"(C) 2005-2009 Команда PCSX-df\n"
+"(C) 2009-2011 Команда PCSX-Reloaded"
 
 #: ../gui/AboutDlg.c:76
 msgid ""
@@ -1232,63 +1235,63 @@ msgstr "По умолчанию"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:11
 msgid "125ms"
-msgstr ""
+msgstr "125мс"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:12
 msgid "250ms"
-msgstr ""
+msgstr "250мс"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:13
 msgid "500ms"
-msgstr ""
+msgstr "500мс"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:14
 msgid "1s"
-msgstr ""
+msgstr "1с"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:15
 msgid "2s"
-msgstr ""
+msgstr "2с"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:16
 msgid "4s"
-msgstr ""
+msgstr "4с"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:17
 msgid "8s"
-msgstr ""
+msgstr "8с"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:18
 msgid "16s"
-msgstr ""
+msgstr "16с"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:19
 msgid "32s"
-msgstr ""
+msgstr "32с"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:20
 msgid "1min"
-msgstr ""
+msgstr "1мин"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:21
 msgid "2min"
-msgstr ""
+msgstr "2мин"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:22
 msgid "4min"
-msgstr ""
+msgstr "4мин"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:23
 msgid "8min"
-msgstr ""
+msgstr "8мин"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:24
 msgid "16min"
-msgstr ""
+msgstr "16мин"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:25
 msgid "32min"
-msgstr ""
+msgstr "32мин"
 
 #: ../plugins/dfinput/cfg-gtk2.c:49
 msgid "D-Pad Up"
@@ -1673,7 +1676,7 @@ msgstr "Использовать асинхронный интерфейс SPU"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:9
 msgid "SPU IRQ Wait"
-msgstr ""
+msgstr "Ожидать SPU IRQ"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:10
 msgid "Wait for CPU; only useful for some games."
@@ -3107,217 +3110,3 @@ msgstr "Сообщение pcsxr"
 #: ../win32/gui/WndMain.c:1852
 msgid "Error Loading Symbol"
 msgstr "Ошибка загрузки символа"
-
-#~ msgid ""
-#~ "8-bit\n"
-#~ "16-bit\n"
-#~ "32-bit"
-#~ msgstr ""
-#~ "8-бит\n"
-#~ "16-бит\n"
-#~ "32-бита"
-
-#~ msgid "CD-ROM..."
-#~ msgstr "CD-привод..."
-
-#~ msgid "Continue..."
-#~ msgstr "Продолжить..."
-
-#~ msgid "Controllers..."
-#~ msgstr "Контроллеры..."
-
-#~ msgid ""
-#~ "Decimal\n"
-#~ "Hexadecimal"
-#~ msgstr ""
-#~ "Десятичное\n"
-#~ "Шестнадцатиричное"
-
-#~ msgid ""
-#~ "Equal Value\n"
-#~ "Not Equal Value\n"
-#~ "Range\n"
-#~ "Increased By\n"
-#~ "Decreased By\n"
-#~ "Increased\n"
-#~ "Decreased\n"
-#~ "Different\n"
-#~ "No Change"
-#~ msgstr ""
-#~ "Равно значению\n"
-#~ "Не равно значению\n"
-#~ "Диапазон\n"
-#~ "Увеличилось на\n"
-#~ "Уменьшилось на\n"
-#~ "Увеличилось\n"
-#~ "Уменьшилось\n"
-#~ "Изменилось\n"
-#~ "Не изменилось"
-
-#~ msgid "Graphics..."
-#~ msgstr "Графика..."
-
-#~ msgid "Memcards..."
-#~ msgstr "Карты памяти..."
-
-#~ msgid "Run ISO..."
-#~ msgstr "Запустить ISO..."
-
-#~ msgid "Sound..."
-#~ msgstr "Звук..."
-
-#~ msgid "Switch ISO..."
-#~ msgstr "Сменить ISO..."
-
-#~ msgid "Error: Glade interface could not be loaded!"
-#~ msgstr "Ошибка: интерфейс Glade не может быть загружен!"
-
-#~ msgid ""
-#~ "0: None\n"
-#~ "1: 2xSai\n"
-#~ "2: 2xSuperSai\n"
-#~ "3: SuperEagle\n"
-#~ "4: Scale2x\n"
-#~ "5: Scale3x\n"
-#~ "6: HQ2X\n"
-#~ "7: HQ3X"
-#~ msgstr ""
-#~ "0: Выключено\n"
-#~ "1: 2xSai\n"
-#~ "2: 2xSuperSai\n"
-#~ "3: SuperEagle\n"
-#~ "4: Scale2x\n"
-#~ "5: Scale3x\n"
-#~ "6: HQ2X\n"
-#~ "7: HQ3X"
-
-#~ msgid ""
-#~ "0: Off (fastest)\n"
-#~ "1: Game dependant\n"
-#~ "2: Always"
-#~ msgstr ""
-#~ "0: Выключен (быстрейший режим)\n"
-#~ "1: Устанавливается игрой\n"
-#~ "2: Включен всегда"
-
-#~ msgid "<b>Compatibility</b>"
-#~ msgstr "<b>Совместимость</b>"
-
-#~ msgid "<b>Framerate</b>"
-#~ msgstr "<b>Частота кадров</b>"
-
-#~ msgid "<b>Screen</b>"
-#~ msgstr "<b>Экран</b>"
-
-#~ msgid "<b>General</b>"
-#~ msgstr "<b>Главные</b>"
-
-#~ msgid "<b>XA Music</b>"
-#~ msgstr "<b>XA музыка</b>"
-
-#~ msgid ""
-#~ "None\n"
-#~ "Low\n"
-#~ "Medium\n"
-#~ "Loud\n"
-#~ "Loudest"
-#~ msgstr ""
-#~ "Выключено\n"
-#~ "Минимальная\n"
-#~ "Средняя\n"
-#~ "Сильная\n"
-#~ "Максимальная"
-
-#~ msgid ""
-#~ "None\n"
-#~ "Simple\n"
-#~ "Gaussian\n"
-#~ "Cubic"
-#~ msgstr ""
-#~ "Выключена\n"
-#~ "Линейная\n"
-#~ "Гаусса\n"
-#~ "Кубическая"
-
-#~ msgid ""
-#~ "Default\n"
-#~ "125ms\n"
-#~ "250ms\n"
-#~ "500ms\n"
-#~ "1s\n"
-#~ "2s\n"
-#~ "4s\n"
-#~ "8s\n"
-#~ "16s\n"
-#~ "32s\n"
-#~ "1min\n"
-#~ "2min\n"
-#~ "4min\n"
-#~ "8min\n"
-#~ "16min\n"
-#~ "32min"
-#~ msgstr ""
-#~ "По умолчанию\n"
-#~ "125мс\n"
-#~ "250мс\n"
-#~ "500мс\n"
-#~ "1с\n"
-#~ "2с\n"
-#~ "4с\n"
-#~ "8с\n"
-#~ "16с\n"
-#~ "32с\n"
-#~ "1мин\n"
-#~ "2мин\n"
-#~ "4мин\n"
-#~ "8мин\n"
-#~ "16мин\n"
-#~ "32мин"
-
-#~ msgid "Select CD-ROM device"
-#~ msgstr "Выберите CD-привод"
-
-#, fuzzy
-#~ msgid "10000: unused"
-#~ msgstr "не используется"
-
-#, fuzzy
-#~ msgid "1000: Odd/even hack"
-#~ msgstr "Хак бита ODE"
-
-#, fuzzy
-#~ msgid "100: Old frame skipping"
-#~ msgstr "Старый режим пропуска кадров"
-
-#, fuzzy
-#~ msgid "20000: fake 'gpu busy'"
-#~ msgstr "Имитация 'занятости' gpu"
-
-#~ msgid "Scanlines"
-#~ msgstr "Скан-линии"
-
-#, fuzzy
-#~ msgid "http://www.pbernert.com"
-#~ msgstr "Домашняя страница: http://www.pbernert.com"
-
-#~ msgid "COFF files not supported.\n"
-#~ msgstr "Формат COFF не поддерживается.\n"
-
-#~ msgid "Adapted from P.E.Op.S OpenGL GPU by Pete Bernert"
-#~ msgstr "Адаптированно из \"P.E.Op.S OpenGL GPU\" от Pete Bernert"
-
-#~ msgid "Version: 1.78"
-#~ msgstr "Версия: 1.78"
-
-#, fuzzy
-#~ msgid "CD-ROM Device Reader"
-#~ msgstr "Выберите CD-привод"
-
-#~ msgid "Error Closing PAD1 Plugin"
-#~ msgstr "Ошибка при закрытии PAD1 плагина"
-
-#~ msgid "Error Closing PAD2 Plugin"
-#~ msgstr "Ошибка при закрытии PAD2 плагина"
-
-#~ msgid "Internal HLE Bios"
-#~ msgstr "Внутренний HLE-биос"
