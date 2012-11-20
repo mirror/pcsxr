@@ -261,7 +261,7 @@ static void OnConfigExit(GtkWidget *widget, gpointer user_data) {
 	SDL_Quit();
 	XCloseDisplay(g.Disp);
 
-	gtk_exit(0);
+	exit(0);
 }
 
 static void TreeSelectionChanged(GtkTreeSelection *selection, gpointer user_data) {
@@ -663,11 +663,11 @@ long PADconfigure() {
 		G_CALLBACK(TreeSelectionChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "CfgWnd");
-	g_signal_connect_data(GTK_OBJECT(widget), "delete_event",
+	g_signal_connect_data(G_OBJECT(widget), "delete_event",
 		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "btnclose");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
 	PopulateDevList();
@@ -675,7 +675,7 @@ long PADconfigure() {
 
 	widget = gtk_builder_get_object(xml, "checkmt");
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.Threaded);
-	g_signal_connect_data(GTK_OBJECT(widget), "toggled",
+	g_signal_connect_data(G_OBJECT(widget), "toggled",
 		G_CALLBACK(OnThreadedToggled), NULL, NULL, G_CONNECT_AFTER);
 
 /*
@@ -685,11 +685,11 @@ long PADconfigure() {
         G_CALLBACK(OnHideCursorToggled), NULL, NULL, G_CONNECT_AFTER);
 */
 	widget = gtk_builder_get_object(xml, "combodev1");
-	g_signal_connect_data(GTK_OBJECT(widget), "changed",
+	g_signal_connect_data(G_OBJECT(widget), "changed",
 		G_CALLBACK(OnDeviceChanged), (gpointer)0, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "combodev2");
-	g_signal_connect_data(GTK_OBJECT(widget), "changed",
+	g_signal_connect_data(G_OBJECT(widget), "changed",
 		G_CALLBACK(OnDeviceChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
 
     int padTypeList[] = {
@@ -706,43 +706,43 @@ long PADconfigure() {
 	widget = gtk_builder_get_object(xml, "combotype1");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget),
 		padTypeList[g.cfg.PadDef[0].Type]);
-	g_signal_connect_data(GTK_OBJECT(widget), "changed",
+	g_signal_connect_data(G_OBJECT(widget), "changed",
 		G_CALLBACK(OnTypeChanged), (gpointer)0, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "combotype2");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget),
 		padTypeList[g.cfg.PadDef[1].Type]);
-	g_signal_connect_data(GTK_OBJECT(widget), "changed",
+	g_signal_connect_data(G_OBJECT(widget), "changed",
 		G_CALLBACK(OnTypeChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
 	
 	widget = gtk_builder_get_object(xml, "checkvv1");
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.PadDef[0].VisualVibration);
-	g_signal_connect_data(GTK_OBJECT(widget), "toggled",
+	g_signal_connect_data(G_OBJECT(widget), "toggled",
 		G_CALLBACK(OnVisualVibration1Toggled), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "checkvv2");
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.PadDef[1].VisualVibration);
-	g_signal_connect_data(GTK_OBJECT(widget), "toggled",
+	g_signal_connect_data(G_OBJECT(widget), "toggled",
 		G_CALLBACK(OnVisualVibration2Toggled), NULL, NULL, G_CONNECT_AFTER);
 	
 	widget = gtk_builder_get_object(xml, "btnchange1");
 	gtk_widget_set_sensitive(widget, FALSE);
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnChangeClicked), (gpointer)0, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "btnreset1");
 	gtk_widget_set_sensitive(widget, FALSE);
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnResetClicked), (gpointer)0, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "btnchange2");
 	gtk_widget_set_sensitive(widget, FALSE);
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnChangeClicked), (gpointer)1, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(xml, "btnreset2");
 	gtk_widget_set_sensitive(widget, FALSE);
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnResetClicked), (gpointer)1, NULL, G_CONNECT_AFTER);
 
 	gtk_widget_show(MainWindow);
@@ -756,7 +756,7 @@ void PADabout() {
 	GtkWidget *widget;
 
 	widget = gtk_about_dialog_new();
-	gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(widget), "Gamepad/Keyboard Input");
+	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(widget), "Gamepad/Keyboard Input");
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(widget), "1.1");
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(widget), authors);
 	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(widget), "http://www.codeplex.com/pcsxr/");
@@ -773,7 +773,6 @@ int main(int argc, char *argv[]) {
 	textdomain(GETTEXT_PACKAGE);
 #endif
 
-	gtk_set_locale();
 	gtk_init(&argc, &argv);
 
 	if (argc > 1 && !strcmp(argv[1], "-about")) {
@@ -782,6 +781,5 @@ int main(int argc, char *argv[]) {
 		PADconfigure();
 	}
 
-	gtk_exit(0);
 	return 0;
 }

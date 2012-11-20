@@ -73,7 +73,6 @@ int main( int argc, char *argv[] )
 	textdomain( GETTEXT_PACKAGE );
 #endif
 
-	gtk_set_locale();
 	gtk_init( &argc, &argv );
 
 	if( argc > 1 )

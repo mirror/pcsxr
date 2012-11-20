@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.16"/>
-  <!-- interface-naming-policy project-wide -->
+  <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkWindow" id="CfgWnd">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -167,12 +166,12 @@
                     <child>
                       <object class="GtkCheckButton" id="chkXASpeed">
                         <property name="label" translatable="yes">Adjust XA speed</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="tooltip_text" translatable="yes">Choose this if XA music is played too quickly.</property>
                         <property name="use_underline">True</property>
+                        <property name="xalign">0</property>
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
@@ -210,12 +209,12 @@
                     <child>
                       <object class="GtkCheckButton" id="chkHiCompat">
                         <property name="label" translatable="yes">High compatibility mode</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="tooltip_text" translatable="yes">Use the asynchronous SPU interface.</property>
                         <property name="use_underline">True</property>
+                        <property name="xalign">0</property>
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
@@ -227,12 +226,12 @@
                     <child>
                       <object class="GtkCheckButton" id="chkIRQWait">
                         <property name="label" translatable="yes">SPU IRQ Wait</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="tooltip_text" translatable="yes">Wait for CPU; only useful for some games.</property>
                         <property name="use_underline">True</property>
+                        <property name="xalign">0</property>
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
@@ -244,12 +243,12 @@
                     <child>
                       <object class="GtkCheckButton" id="chkDisStereo">
                         <property name="label" translatable="yes">Single channel sound</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="tooltip_text" translatable="yes">Play only one channel for a performance boost.</property>
                         <property name="use_underline">True</property>
+                        <property name="xalign">0</property>
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
@@ -261,10 +260,10 @@
                     <child>
                       <object class="GtkCheckButton" id="chkFreqResponse">
                         <property name="label" translatable="yes">Frequency Response - Output Filter</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
+                        <property name="xalign">0</property>
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
@@ -293,7 +292,6 @@
             <child>
               <object class="GtkButton" id="btn_close">
                 <property name="label">gtk-close</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>

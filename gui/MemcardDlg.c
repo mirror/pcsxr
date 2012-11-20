@@ -717,50 +717,50 @@ void OnConf_Mcds() {
 	LoadMcdDlg(dialog);
 
 	// Setup a handler for when Close or Cancel is clicked
-	g_signal_connect_data(GTK_OBJECT(dialog), "response",
+	g_signal_connect_data(G_OBJECT(dialog), "response",
 			G_CALLBACK(OnMcd_Close), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "GtkButton_Format1");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnMcd_Format), (gpointer)1, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "GtkButton_Format2");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnMcd_Format), (gpointer)2, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "Mcd1Button");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnMcd_FileChange), (gpointer)1, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "Mcd2Button");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnMcd_FileChange), (gpointer)2, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "GtkButton_New1");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnMcd_New), (gpointer)1, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "GtkButton_New2");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnMcd_New), (gpointer)2, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "GtkButton_CopyTo1");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnMcd_CopyTo), (gpointer)1, NULL, G_CONNECT_AFTER);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), FALSE);
 
 	widget = gtk_builder_get_object(builder, "GtkButton_CopyTo2");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnMcd_CopyTo), (gpointer)2, NULL, G_CONNECT_AFTER);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), FALSE);
 
 	widget = gtk_builder_get_object(builder, "GtkButton_Delete1");
-	g_signal_connect_data (GTK_OBJECT (widget), "clicked",
+	g_signal_connect_data (G_OBJECT (widget), "clicked",
 			G_CALLBACK(OnMemcardDelete), (gpointer)1, NULL, G_CONNECT_AFTER);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), FALSE);
 
 	widget = gtk_builder_get_object(builder, "GtkButton_Delete2");
-	g_signal_connect_data (GTK_OBJECT (widget), "clicked",
+	g_signal_connect_data (G_OBJECT (widget), "clicked",
 			G_CALLBACK(OnMemcardDelete), (gpointer)2, NULL, G_CONNECT_AFTER);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), FALSE);
 

@@ -31,7 +31,7 @@
 
 #include "nopic.h"
 
-#define MAX_SLOTS 9	/* ADB TODO Same as Gtk2Gui.c */
+#define MAX_SLOTS 9	/* ADB TODO Same as GtkGui.c */
 
 void OnFile_Exit();
 

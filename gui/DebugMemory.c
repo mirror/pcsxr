@@ -108,7 +108,8 @@ static void MemView_Dump() {
 	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 0, 1, 0, 0, 5, 5);
 	gtk_widget_show(label);
 
-	start_edit = gtk_entry_new_with_max_length(8);
+	start_edit = gtk_entry_new();
+	gtk_entry_set_max_length(GTK_ENTRY(start_edit), 8);
 	sprintf(buf, "%.8X", MemViewAddress | 0x80000000);
 	gtk_entry_set_text(GTK_ENTRY(start_edit), buf);
 	gtk_table_attach(GTK_TABLE(table), start_edit, 1, 2, 0, 1, 0, 0, 5, 5);
@@ -185,7 +186,8 @@ static void MemView_Patch() {
 	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 0, 1, 0, 0, 5, 5);
 	gtk_widget_show(label);
 
-	addr_edit = gtk_entry_new_with_max_length(8);
+	addr_edit = gtk_entry_new();
+	gtk_entry_set_max_length(GTK_ENTRY(addr_edit), 8);
 	sprintf(buf, "%.8X", MemViewAddress | 0x80000000);
 	gtk_entry_set_text(GTK_ENTRY(addr_edit), buf);
 	gtk_table_attach(GTK_TABLE(table), addr_edit, 1, 2, 0, 1, 0, 0, 5, 5);
@@ -298,17 +300,17 @@ void RunDebugMemoryDialog() {
 	UpdateMemViewDlg();
 
 	widget = gtk_builder_get_object(builder, "btn_dump");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(MemView_Dump), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_patch");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(MemView_Patch), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_go");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(MemView_Go), builder, NULL, G_CONNECT_AFTER);
 
-	g_signal_connect_data(GTK_OBJECT(MemViewDlg), "response",
+	g_signal_connect_data(G_OBJECT(MemViewDlg), "response",
 		G_CALLBACK(MemView_Close), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }

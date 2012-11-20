@@ -68,7 +68,7 @@ GtkWidget *window,
           *btnBeautiful;
 
 // Save values to the config file
-void on_btnSave_clicked( GtkObject *object, gpointer user_data ) {
+void on_btnSave_clicked( GObject *object, gpointer user_data ) {
     FILE *out;
     out = fopen( "gpuPeopsMesaGL.cfg", "w+" );
 
@@ -136,7 +136,7 @@ void on_btnSave_clicked( GtkObject *object, gpointer user_data ) {
 
 // Autoconfiguration callbacks
 
-void on_btnFast_clicked( GtkObject *object, gpointer user_data ) {
+void on_btnFast_clicked( GObject *object, gpointer user_data ) {
     gtk_spin_button_set_value(    GTK_SPIN_BUTTON(   spinXSize ),           640 );
     gtk_spin_button_set_value(    GTK_SPIN_BUTTON(   spinYSize ),           480 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkKeepRatio ),          0 );
@@ -168,7 +168,7 @@ void on_btnFast_clicked( GtkObject *object, gpointer user_data ) {
 	gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkGteAccuracy ),        0 );
 }
 
-void on_btnBeautiful_clicked( GtkObject *object, gpointer user_data ) {
+void on_btnBeautiful_clicked( GObject *object, gpointer user_data ) {
     gtk_spin_button_set_value(    GTK_SPIN_BUTTON(   spinXSize ),           640 );
     gtk_spin_button_set_value(    GTK_SPIN_BUTTON(   spinYSize ),           480 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkKeepRatio ),          0 );
@@ -202,19 +202,19 @@ void on_btnBeautiful_clicked( GtkObject *object, gpointer user_data ) {
 
 // Callbacks used to toggle the sensitivity of some parts of the GUI
 
-void on_chkUseGameFixes_toggled( GtkObject *object, gpointer user_data ) {
+void on_chkUseGameFixes_toggled( GObject *object, gpointer user_data ) {
     gtk_widget_set_sensitive( tblGameFixes, gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( chkUseGameFixes ) ) );
 }
 
-void on_chkUseFPSLimit_toggled( GtkObject *object, gpointer user_data ) {
+void on_chkUseFPSLimit_toggled( GObject *object, gpointer user_data ) {
     gtk_widget_set_sensitive( vboxFPSLimit, gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( chkUseFPSLimit ) ) );
 }
 
-void on_radFPSLimitManual_toggled( GtkObject *object, gpointer user_data ) {
+void on_radFPSLimitManual_toggled( GObject *object, gpointer user_data ) {
     gtk_widget_set_sensitive( spinFPSLimit, gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( radFPSLimitManual ) ) );
 }
 
-void on_chkScanLines_toggled( GtkObject *object, gpointer user_data ) {
+void on_chkScanLines_toggled( GObject *object, gpointer user_data ) {
     gtk_widget_set_sensitive( spinScanLinesBlend, gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( chkScanLines ) ) );
 }
 
@@ -237,7 +237,6 @@ int main( int argc, char **argv ) {
     textdomain (GETTEXT_PACKAGE);
 #endif
 
-    gtk_set_locale();
     gtk_init( &argc, &argv );
 
     builder = gtk_builder_new();
@@ -255,7 +254,7 @@ int main( int argc, char **argv ) {
         const char *authors[]= {"Adapted from P.E.Op.S OpenGL GPU by Pete Bernert", NULL};
 
         widget = gtk_about_dialog_new();
-        gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(widget), "OpenGL GPU Driver");
+        gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(widget), "OpenGL GPU Driver");
         gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(widget), "1.18");
         gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(widget), authors);
         gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(widget), "http://pcsxr.codeplex.com/");
@@ -728,21 +727,21 @@ int main( int argc, char **argv ) {
     g_object_unref( G_OBJECT( builder ) );
 
     // Connect callbacks to signals
-    gtk_signal_connect( GTK_OBJECT( window ),            "destroy", G_CALLBACK( gtk_main_quit ),                NULL );
-    gtk_signal_connect( GTK_OBJECT( btnCancel ),         "clicked", G_CALLBACK( gtk_main_quit ),                NULL );
-    gtk_signal_connect( GTK_OBJECT( btnSave ),           "clicked", G_CALLBACK( on_btnSave_clicked ),           NULL );
-    gtk_signal_connect( GTK_OBJECT( chkUseGameFixes ),   "toggled", G_CALLBACK( on_chkUseGameFixes_toggled ),   NULL );
-    gtk_signal_connect( GTK_OBJECT( chkUseFPSLimit ),    "toggled", G_CALLBACK( on_chkUseFPSLimit_toggled ),    NULL );
-    gtk_signal_connect( GTK_OBJECT( radFPSLimitManual ), "toggled", G_CALLBACK( on_radFPSLimitManual_toggled ), NULL );
-    gtk_signal_connect( GTK_OBJECT( chkScanLines ),      "toggled", G_CALLBACK( on_chkScanLines_toggled ),      NULL );
-    gtk_signal_connect( GTK_OBJECT( btnFast ),           "clicked", G_CALLBACK( on_btnFast_clicked ),           NULL );
-    gtk_signal_connect( GTK_OBJECT( btnBeautiful ),      "clicked", G_CALLBACK( on_btnBeautiful_clicked ),      NULL );
+    g_signal_connect(G_OBJECT( window ),            "destroy", G_CALLBACK( gtk_main_quit ),                NULL );
+    g_signal_connect(G_OBJECT( btnCancel ),         "clicked", G_CALLBACK( gtk_main_quit ),                NULL );
+    g_signal_connect(G_OBJECT( btnSave ),           "clicked", G_CALLBACK( on_btnSave_clicked ),           NULL );
+    g_signal_connect(G_OBJECT( chkUseGameFixes ),   "toggled", G_CALLBACK( on_chkUseGameFixes_toggled ),   NULL );
+    g_signal_connect(G_OBJECT( chkUseFPSLimit ),    "toggled", G_CALLBACK( on_chkUseFPSLimit_toggled ),    NULL );
+    g_signal_connect(G_OBJECT( radFPSLimitManual ), "toggled", G_CALLBACK( on_radFPSLimitManual_toggled ), NULL );
+    g_signal_connect(G_OBJECT( chkScanLines ),      "toggled", G_CALLBACK( on_chkScanLines_toggled ),      NULL );
+    g_signal_connect(G_OBJECT( btnFast ),           "clicked", G_CALLBACK( on_btnFast_clicked ),           NULL );
+    g_signal_connect(G_OBJECT( btnBeautiful ),      "clicked", G_CALLBACK( on_btnBeautiful_clicked ),      NULL );
 
     // Call some callbacks to ensure widget state consistency
-    on_chkUseGameFixes_toggled(   GTK_OBJECT( chkUseGameFixes   ), NULL );
-    on_chkUseFPSLimit_toggled(    GTK_OBJECT( chkUseFPSLimit    ), NULL );
-    on_radFPSLimitManual_toggled( GTK_OBJECT( radFPSLimitManual ), NULL );
-    on_chkScanLines_toggled(      GTK_OBJECT( chkScanLines      ), NULL );
+    on_chkUseGameFixes_toggled(   G_OBJECT( chkUseGameFixes   ), NULL );
+    on_chkUseFPSLimit_toggled(    G_OBJECT( chkUseFPSLimit    ), NULL );
+    on_radFPSLimitManual_toggled( G_OBJECT( radFPSLimitManual ), NULL );
+    on_chkScanLines_toggled(      G_OBJECT( chkScanLines      ), NULL );
 
     gtk_widget_show( window );
 

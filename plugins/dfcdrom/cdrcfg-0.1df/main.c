@@ -170,7 +170,7 @@ void fill_drives_list(GtkWidget *widget) {
 	}
 
 	gtk_combo_box_set_model(GTK_COMBO_BOX(widget), GTK_TREE_MODEL(store));
-	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(widget), 0);
+	gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(widget), 0);
 }
 
 static void OnConfigExit(GtkWidget *widget, gpointer user_data) {
@@ -196,7 +196,7 @@ static void OnConfigExit(GtkWidget *widget, gpointer user_data) {
 	SaveConf();
 
 	gtk_widget_destroy(widget);
-	gtk_exit(0);
+	exit(0);
 }
 
 long CDRconfigure() {
@@ -206,11 +206,11 @@ long CDRconfigure() {
 	gtk_window_set_title(GTK_WINDOW(MainWindow), _("CDR configuration"));
 
 	widget = gtk_builder_get_object(builder, "CfgWnd");
-	g_signal_connect_data(GTK_OBJECT(widget), "delete_event",
+	g_signal_connect_data(G_OBJECT(widget), "delete_event",
 		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "cfg_closebutton");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "cddev_comboboxentry");
@@ -245,7 +245,7 @@ void CDRabout() {
 							"Wei Mingzhi <whistler_wmz@users.sf.net>", NULL};
 
 	widget = gtk_about_dialog_new();
-	gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(widget), "CD-ROM Device Reader");
+	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(widget), "CD-ROM Device Reader");
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(widget), "1.0");
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(widget), authors);
 	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(widget), "http://pcsxr.codeplex.com/");
@@ -262,7 +262,6 @@ int main(int argc, char *argv[]) {
 	textdomain(GETTEXT_PACKAGE);
 #endif
 
-	gtk_set_locale();
 	gtk_init(&argc, &argv);
 
 	if (argc != 2) return 0;

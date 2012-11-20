@@ -112,7 +112,7 @@ long CFGopen() {
 	gtk_window_set_title(GTK_WINDOW(MainWindow), _("NetPlay"));
 
 	widget = gtk_builder_get_object(builder, "btnCopyIP");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnCopyIP), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "tbServerIP");
@@ -182,7 +182,7 @@ void CFGabout() {
 	GtkWidget *widget;
 
 	widget = gtk_about_dialog_new();
-	gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(widget), "Socket NetPlay Driver");
+	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(widget), "Socket NetPlay Driver");
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(widget), "0.21");
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(widget), authors);
 	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(widget), "http://www.codeplex.com/pcsxr/");
@@ -212,7 +212,6 @@ int main(int argc, char *argv[]) {
 	textdomain(GETTEXT_PACKAGE);
 #endif
 
-	gtk_set_locale();
 	gtk_init(&argc, &argv);
 
 	if (!strcmp(argv[1], "configure")) {

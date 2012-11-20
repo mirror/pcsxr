@@ -8,12 +8,12 @@ libBladeSio1_la_LDFLAGS = -module -avoid-version
 
 AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
-	$(GTK2_CFLAGS) \
+	$(GTK3_CFLAGS) \
 	-I../../libpcsxcore -I../../include
 
 bin_PROGRAMS = cfgBladeSio1
 cfgBladeSio1_SOURCES = gui.c
-cfgBladeSio1_LDADD = $(GTK2_LIBS)
+cfgBladeSio1_LDADD = $(GTK3_LIBS)
 
 glade_DATA = sio1.ui
 gladedir = $(datadir)/psemu/

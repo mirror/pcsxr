@@ -48,9 +48,9 @@ endif
 bin_PROGRAMS = cfgDFSound
 cfgDFSound_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
-	$(GTK2_CFLAGS) $(AM_CPPFLAGS)
+	$(GTK3_CFLAGS) $(AM_CPPFLAGS)
 cfgDFSound_SOURCES = spucfg-0.1df/main.c
-cfgDFSound_LDADD = $(GTK2_LIBS)
+cfgDFSound_LDADD = $(GTK3_LIBS)
 
 glade_DATA = spucfg-0.1df/dfsound.ui
 gladedir = $(datadir)/psemu/

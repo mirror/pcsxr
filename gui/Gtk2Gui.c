@@ -253,184 +253,184 @@ void StartGui() {
 	ResetMenuSlots();
 
 	// Set up callbacks
-	g_signal_connect_data(GTK_OBJECT(Window), "delete-event",
+	g_signal_connect_data(G_OBJECT(Window), "delete-event",
 			G_CALLBACK(OnDestroy), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
 	// File menu
 	widget = gtk_builder_get_object(builder, "RunCd");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnFile_RunCd), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "RunBios");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnFile_RunBios), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "RunExe");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnFile_RunExe), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "RunImage");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnFile_RunImage), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "exit2");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnFile_Exit), NULL, NULL, G_CONNECT_AFTER);
 
 	// States
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 0, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot2");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 1, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot3");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 2, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot4");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 3, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot5");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 4, NULL, G_CONNECT_AFTER);	
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot6");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 5, NULL, G_CONNECT_AFTER);	
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot7");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 6, NULL, G_CONNECT_AFTER);	
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot8");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 7, NULL, G_CONNECT_AFTER);	
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot9");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 8, NULL, G_CONNECT_AFTER);	
 	widget = gtk_builder_get_object(builder, "other1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load_other), NULL, NULL, G_CONNECT_AFTER);			
 
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 0, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot2");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 1, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot3");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 2, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot4");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 3, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot5");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 4, NULL, G_CONNECT_AFTER);	
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot6");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 5, NULL, G_CONNECT_AFTER);	
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot7");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 6, NULL, G_CONNECT_AFTER);	
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot8");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 7, NULL, G_CONNECT_AFTER);	
 	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot9");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 8, NULL, G_CONNECT_AFTER);	
 	widget = gtk_builder_get_object(builder, "other2");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save_other), NULL, NULL, G_CONNECT_AFTER);
 
 	// Emulation menu
 	widget = gtk_builder_get_object(builder, "run1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnEmu_Run), NULL, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "reset1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnEmu_Reset), NULL, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "shutdown1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnEmu_Shutdown), NULL, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "SwitchImage");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnEmu_SwitchImage), NULL, NULL, G_CONNECT_AFTER);
 
 	// Configuration menu
 	widget = gtk_builder_get_object(builder, "plugins_bios");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(ConfigurePlugins), NULL, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "graphics1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Graphics), NULL, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "sound1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Sound), NULL, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "cdrom1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_CdRom), NULL, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "pad1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Pad), NULL, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "cpu1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Cpu), NULL, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "memory_cards1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Mcds), NULL, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "net1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Net), NULL, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "memorydump1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(RunDebugMemoryDialog), NULL, NULL, G_CONNECT_AFTER);
 
 	// Cheat menu
 	widget = gtk_builder_get_object(builder, "browse1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(RunCheatListDialog), NULL, NULL, G_CONNECT_AFTER);
 	widget = gtk_builder_get_object(builder, "search1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(RunCheatSearchDialog), NULL, NULL, G_CONNECT_AFTER);
 
 	// Help menu
 	widget = gtk_builder_get_object(builder, "about_pcsxr1");
-	g_signal_connect_data(GTK_OBJECT(widget), "activate",
+	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnHelp_About), NULL, NULL, G_CONNECT_AFTER);
 
 	// Toolbar
 	widget = gtk_builder_get_object(builder, "toolbutton_runcd");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnFile_RunCd), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "toolbutton_runimage");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnFile_RunImage), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "toolbutton_run");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnEmu_Run), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "toolbutton_switchimage");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnEmu_SwitchImage), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "toolbutton_memcards");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConf_Mcds), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "toolbutton_graphics");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConf_Graphics), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "toolbutton_sound");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConf_Sound), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "toolbutton_cdrom");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConf_CdRom), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "toolbutton_controllers");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConf_Pad), NULL, NULL, G_CONNECT_AFTER);
 
 	gtk_main();
@@ -816,10 +816,7 @@ void OnFile_Exit() {
 	if (UseGui)
 		gtk_main_quit();
 	SysClose();
-	if (UseGui)
-		gtk_exit (0);
-	else
-		exit(0);
+	exit(0);
 }
 
 void state_load(gchar *state_filename) {

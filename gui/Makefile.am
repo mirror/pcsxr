@@ -1,7 +1,7 @@
 AM_CPPFLAGS = -DPACKAGE_DATA_DIR=\"${datadir}/pcsxr/\" \
 	-DPIXMAPDIR=\"${datadir}/pixmaps/\" \
 	-DLOCALE_DIR=\"${datadir}/locale/\" \
-	$(GTK2_CFLAGS) \
+	$(GTK3_CFLAGS) \
 	-I$(top_srcdir)/libpcsxcore -I$(top_srcdir)/include \
 	-DPSEMU_DATA_DIR=\"${datadir}/psemu\" \
 	-DDEF_PLUGIN_DIR=\"${libdir}/games/psemu\"
@@ -29,4 +29,4 @@ pcsxr_SOURCES = \
 
 pcsxr_LDADD = \
 	../libpcsxcore/libpcsxcore.a \
-	$(GTK2_LIBS) -lpthread -lz -lm -lXext -lXtst
+	$(GTK3_LIBS) -lpthread -lz -lm -lXext -lXtst

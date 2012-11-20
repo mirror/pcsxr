@@ -413,27 +413,27 @@ void RunCheatListDialog() {
 						  NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "addbutton1");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnCheatListDlg_AddClicked), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "editbutton1");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnCheatListDlg_EditClicked), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "delbutton1");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnCheatListDlg_DelClicked), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "loadbutton1");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnCheatListDlg_OpenClicked), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "savebutton1");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnCheatListDlg_SaveClicked), builder, NULL, G_CONNECT_AFTER);
 
 	// Setup a handler for when Close or Cancel is clicked
-	g_signal_connect_data(GTK_OBJECT(CheatListDlg), "response",
+	g_signal_connect_data(G_OBJECT(CheatListDlg), "response",
 			G_CALLBACK(OnCheatListDlg_CloseClicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
 	gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "savebutton1")), NumCheats);
@@ -1116,33 +1116,33 @@ void RunCheatSearchDialog() {
 	UpdateCheatSearchDialog();
 
 	widget = gtk_builder_get_object(builder, "btn_freeze");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnCheatSearchDlg_FreezeClicked), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_modify");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnCheatSearchDlg_ModifyClicked), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_copy");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnCheatSearchDlg_CopyClicked), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_start");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnCheatSearchDlg_SearchClicked), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_restart");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnCheatSearchDlg_RestartClicked), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "combo_searchfor");
-	g_signal_connect_data(GTK_OBJECT(widget), "changed",
+	g_signal_connect_data(G_OBJECT(widget), "changed",
 		G_CALLBACK(OnCheatSearchDlg_SearchForChanged), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "combo_database");
-	g_signal_connect_data(GTK_OBJECT(widget), "changed",
+	g_signal_connect_data(G_OBJECT(widget), "changed",
 		G_CALLBACK(OnCheatSearchDlg_DataBaseChanged), builder, NULL, G_CONNECT_AFTER);
 
-	g_signal_connect_data(GTK_OBJECT(CheatSearchDlg), "response",
+	g_signal_connect_data(G_OBJECT(CheatSearchDlg), "response",
 		G_CALLBACK(OnCheatSearchDlg_CloseClicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }

@@ -88,6 +88,7 @@ void RunAboutDialog(void) {
 		"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.");
 
 	AboutDlg = gtk_about_dialog_new();
+	gtk_window_set_resizable(GTK_WINDOW(AboutDlg), TRUE);
 	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(AboutDlg), "PCSX-Reloaded");
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(AboutDlg), ABOUT_VERSION);
 	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(AboutDlg), "http://pcsxr.codeplex.com/");

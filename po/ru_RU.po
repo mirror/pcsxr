@@ -89,7 +89,7 @@ msgstr "Выберите каталог для поиска"
 
 #: ../data/pcsxr.ui.h:18
 msgid "Search in:"
-msgstr "Каталог с плагинами:"
+msgstr "Искать в:"
 
 #: ../data/pcsxr.ui.h:19
 msgid "Graphics:"

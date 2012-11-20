@@ -96,7 +96,7 @@ void on_fps_toggled(GtkWidget *widget, gpointer user_data)
 void OnConfigClose(GtkWidget *widget, gpointer user_data)
 {
 	gtk_widget_destroy(gtk_builder_get_object(builder, "CfgWnd"));
-	gtk_exit(0);
+	exit(0);
 }
 
 int
@@ -126,19 +126,18 @@ main (int argc, char *argv[])
     return 0;
   }
 
-  gtk_set_locale ();
   gtk_init (&argc, &argv);
 
 
        if (strcmp(argv[1], "ABOUT") == 0) {
 		const char *authors[]= {"Pete Bernert and the P.E.Op.S. team", "Ryan Schultz", "Andrew Burton", NULL};
 		widget = gtk_about_dialog_new ();
-		gtk_about_dialog_set_name (GTK_ABOUT_DIALOG (widget), "P.E.Op.S PCSXR Video Plugin");
+		gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG (widget), "P.E.Op.S PCSXR Video Plugin");
 		gtk_about_dialog_set_version (GTK_ABOUT_DIALOG (widget), "1.17");
 		gtk_about_dialog_set_authors (GTK_ABOUT_DIALOG (widget), authors);
 		gtk_about_dialog_set_website (GTK_ABOUT_DIALOG (widget), "http://pcsx-df.sourceforge.net/");
 
-	g_signal_connect_data(GTK_OBJECT(widget), "response",
+	g_signal_connect_data(G_OBJECT(widget), "response",
 			G_CALLBACK(on_about_clicked), NULL, NULL, G_CONNECT_AFTER);
 
 		gtk_widget_show (widget);
@@ -301,27 +300,27 @@ main (int argc, char *argv[])
   if(pB) free(pB);
 
 	widget = gtk_builder_get_object(builder, "CfgWnd");
-	g_signal_connect_data(GTK_OBJECT(widget), "destroy",
+	g_signal_connect_data(G_OBJECT(widget), "destroy",
 			G_CALLBACK(SaveConfig), NULL, NULL, 0);
 
 	widget = gtk_builder_get_object(builder, "btn_close");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConfigClose), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "checkFullscreen");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_fullscreen_toggled), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "checkUseFixes");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_use_fixes_toggled), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "checkSetFPS");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_fps_toggled), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "checkAutoFPSLimit");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_fps_toggled), NULL, NULL, G_CONNECT_AFTER);
 
 	on_fullscreen_toggled(widget, NULL);
@@ -448,5 +447,5 @@ void SaveConfig(GtkWidget *widget, gpointer user_data)
  free(pB);
  
 	// Close the window and exit control from the plugin
-	gtk_exit (0); 
+	exit (0); 
 }

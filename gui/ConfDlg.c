@@ -125,55 +125,55 @@ void ConfigurePlugins() {
 	}
 
 	widget = gtk_builder_get_object(builder, "btn_ConfGpu");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_ConfSpu");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_SPU, NULL, G_CONNECT_AFTER);
 
 	/* ADB TODO Does pad 1 and 2 need to be different? */
 	widget = gtk_builder_get_object(builder, "btn_ConfPad1");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 						  G_CALLBACK(OnConfConf_Pad1Conf), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_ConfPad2");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConfConf_Pad2Conf), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_ConfCdr");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_AboutGpu");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_AboutSpu");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_SPU, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_AboutPad1");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConfConf_Pad1About), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_AboutPad2");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConfConf_Pad2About), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_AboutCdr");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "GtkFileChooser_Bios");
-	g_signal_connect_data(GTK_OBJECT(widget), "current_folder_changed",
+	g_signal_connect_data(G_OBJECT(widget), "current_folder_changed",
 			G_CALLBACK(OnBiosPath_Changed), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "GtkFileChooser_Plugin");
-	g_signal_connect_data(GTK_OBJECT(widget), "current_folder_changed",
+	g_signal_connect_data(G_OBJECT(widget), "current_folder_changed",
 			G_CALLBACK(OnPluginPath_Changed), builder, NULL, G_CONNECT_AFTER);
 
-	g_signal_connect_data(GTK_OBJECT(ConfDlg), "response",
+	g_signal_connect_data(G_OBJECT(ConfDlg), "response",
 			G_CALLBACK(OnConf_Clicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }
 
@@ -205,15 +205,15 @@ void OnConf_Net() {
 	FindNetPlugin(builder);
 
 	/* Setup a handler for when Close or Cancel is clicked */
-	g_signal_connect_data(GTK_OBJECT(NetDlg), "response",
+	g_signal_connect_data(G_OBJECT(NetDlg), "response",
 			G_CALLBACK(OnNet_Clicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_ConfNet");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnNet_Conf), builder, NULL, G_CONNECT_AFTER);
 
 	widget = gtk_builder_get_object(builder, "btn_AboutNet");
-	g_signal_connect_data(GTK_OBJECT(widget), "clicked",
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnNet_About), builder, NULL, G_CONNECT_AFTER);
 }
 
@@ -861,13 +861,13 @@ void OnConf_Cpu() {
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_SlowBoot")), Config.SlowBoot);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_PsxAuto")), Config.PsxAuto);
 
-	g_signal_connect_data(GTK_OBJECT(gtk_builder_get_object(builder, "GtkCheckButton_PsxAuto")), "toggled",
+	g_signal_connect_data(G_OBJECT(gtk_builder_get_object(builder, "GtkCheckButton_PsxAuto")), "toggled",
 			G_CALLBACK(OnCpu_PsxAutoClicked), builder, NULL, G_CONNECT_AFTER);
 
 #ifdef PSXREC
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "GtkCheckButton_Cpu")), Config.Cpu);
 
-	g_signal_connect_data(GTK_OBJECT(gtk_builder_get_object(builder, "GtkCheckButton_Cpu")), "toggled",
+	g_signal_connect_data(G_OBJECT(gtk_builder_get_object(builder, "GtkCheckButton_Cpu")), "toggled",
 			G_CALLBACK(OnCpu_CpuClicked), builder, NULL, G_CONNECT_AFTER);
 #else
 	Config.Cpu = CPU_INTERPRETER;
@@ -886,6 +886,6 @@ void OnConf_Cpu() {
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Widescreen")), Config.Widescreen);
 
 	// Setup a handler for when Close or Cancel is clicked
-	g_signal_connect_data(GTK_OBJECT(CpuDlg), "response",
+	g_signal_connect_data(G_OBJECT(CpuDlg), "response",
 			G_CALLBACK(OnCpu_Clicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }

@@ -8,7 +8,7 @@ SUFFIXES = .asm
 
 AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
-	$(GTK2_CFLAGS)\
+	$(GTK3_CFLAGS)\
 	-I../../libpcsxcore \
 	-I../../include
 
@@ -27,7 +27,7 @@ libDFXVideo_la_LIBADD = -lX11 -lXv -lXext -lm
 
 bin_PROGRAMS = cfgDFXVideo
 cfgDFXVideo_SOURCES = gpucfg-0.1df/main.c
-cfgDFXVideo_LDADD = $(GTK2_LIBS) -lXext
+cfgDFXVideo_LDADD = $(GTK3_LIBS) -lXext
 
 glade_DATA = gpucfg-0.1df/dfxvideo.ui
 gladedir = $(datadir)/psemu/
