@@ -14,7 +14,7 @@ pcsxr_SOURCES = \
 	nopic.h		\
 	Plugin.c	\
 	Config.c	\
-	Gtk2Gui.c	\
+	GtkGui.c	\
 	MemcardDlg.c	\
 	MemcardDlg.h	\
 	ConfDlg.c	\

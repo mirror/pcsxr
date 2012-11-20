@@ -8,7 +8,7 @@ gui/ConfDlg.h
 gui/Config.c
 gui/DebugMemory.c
 gui/DebugMemory.h
-gui/Gtk2Gui.c
+gui/GtkGui.c
 gui/Linux.h
 gui/LnxMain.c
 gui/MemcardDlg.c
@@ -46,7 +46,7 @@ plugins/dfcdrom/cdr-null.c
 plugins/dfcdrom/cfg.c
 plugins/dfinput/analog.c
 plugins/dfinput/cfg.c
-plugins/dfinput/cfg-gtk2.c
+plugins/dfinput/cfg-gtk.c
 [type: gettext/glade]plugins/dfinput/dfinput.ui
 plugins/dfinput/pad.c
 plugins/dfinput/sdljoy.c

@@ -600,8 +600,8 @@ msgid "PCSXR Cheat Code Files (*.cht)"
 msgstr "PCSXR 作弊码文件 (*.cht)"
 
 #: ../gui/Cheat.c:309
-#: ../gui/Gtk2Gui.c:475
-#: ../gui/Gtk2Gui.c:616
+#: ../gui/GtkGui.c:475
+#: ../gui/GtkGui.c:616
 #: ../win32/gui/WndMain.c:1464
 #: ../win32/gui/WndMain.c:1545
 msgid "All Files"
@@ -759,37 +759,37 @@ msgstr "地址"
 msgid "Text"
 msgstr "文本"
 
-#: ../gui/Gtk2Gui.c:139
+#: ../gui/GtkGui.c:139
 msgid "Ready"
 msgstr "就绪"
 
-#: ../gui/Gtk2Gui.c:180
+#: ../gui/GtkGui.c:180
 msgid "Emulation Paused."
 msgstr "模拟器已暂停。"
 
-#: ../gui/Gtk2Gui.c:458
+#: ../gui/GtkGui.c:458
 msgid "Select PSX EXE File"
 msgstr "选择 PS EXE 文件"
 
-#: ../gui/Gtk2Gui.c:471
+#: ../gui/GtkGui.c:471
 msgid "PlayStation Executable Files"
 msgstr "PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:508
+#: ../gui/GtkGui.c:508
 msgid "Not a valid PSX file"
 msgstr "不是一个合法的 PSX 文件"
 
-#: ../gui/Gtk2Gui.c:508
+#: ../gui/GtkGui.c:508
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "此文件不是一个合法的 PlayStation 可执行文件"
 
-#: ../gui/Gtk2Gui.c:537
-#: ../gui/Gtk2Gui.c:692
+#: ../gui/GtkGui.c:537
+#: ../gui/GtkGui.c:692
 msgid "CD ROM failed"
 msgstr "CD-ROM 失败"
 
-#: ../gui/Gtk2Gui.c:537
-#: ../gui/Gtk2Gui.c:692
+#: ../gui/GtkGui.c:537
+#: ../gui/GtkGui.c:692
 #: ../win32/gui/WndMain.c:469
 #: ../win32/gui/WndMain.c:521
 #: ../win32/gui/WndMain.c:590
@@ -797,8 +797,8 @@ msgstr "CD-ROM 失败"
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "此光盘不是一张合法的 PlayStation 光盘。"
 
-#: ../gui/Gtk2Gui.c:548
-#: ../gui/Gtk2Gui.c:703
+#: ../gui/GtkGui.c:548
+#: ../gui/GtkGui.c:703
 #: ../win32/gui/WndMain.c:479
 #: ../win32/gui/WndMain.c:531
 #: ../win32/gui/WndMain.c:600
@@ -806,53 +806,53 @@ msgstr "此光盘不是一张合法的 PlayStation 光盘。"
 msgid "Could not load CD-ROM!"
 msgstr "无法加载光盘!"
 
-#: ../gui/Gtk2Gui.c:548
-#: ../gui/Gtk2Gui.c:703
+#: ../gui/GtkGui.c:548
+#: ../gui/GtkGui.c:703
 msgid "The CD-ROM could not be loaded"
 msgstr "无法加载 CD-ROM"
 
-#: ../gui/Gtk2Gui.c:562
+#: ../gui/GtkGui.c:562
 msgid "Could not run BIOS"
 msgstr "无法运行 BIOS"
 
-#: ../gui/Gtk2Gui.c:562
+#: ../gui/GtkGui.c:562
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr "内部 HLE BIOS 不支持直接运行。"
 
-#: ../gui/Gtk2Gui.c:591
+#: ../gui/GtkGui.c:591
 msgid "Open PSX Disc Image File"
 msgstr "打开 PS 光盘镜像文件"
 
-#: ../gui/Gtk2Gui.c:611
+#: ../gui/GtkGui.c:611
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso)"
 msgstr "PS 镜像文件 (*.bin, *.img, *.mdf, *.iso)"
 
-#: ../gui/Gtk2Gui.c:864
+#: ../gui/GtkGui.c:864
 #, c-format
 msgid "Loaded state %s."
 msgstr "已读取存档 %s。"
 
-#: ../gui/Gtk2Gui.c:867
+#: ../gui/GtkGui.c:867
 #, c-format
 msgid "Error loading state %s!"
 msgstr "读取存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:878
+#: ../gui/GtkGui.c:878
 #, c-format
 msgid "Saved state %s."
 msgstr "已保存存档 %s"
 
-#: ../gui/Gtk2Gui.c:880
+#: ../gui/GtkGui.c:880
 #, c-format
 msgid "Error saving state %s!"
 msgstr "保存存档 %s 时出错。"
 
-#: ../gui/Gtk2Gui.c:915
-#: ../gui/Gtk2Gui.c:943
+#: ../gui/GtkGui.c:915
+#: ../gui/GtkGui.c:943
 msgid "Select State File"
 msgstr "选择存档文件"
 
-#: ../gui/Gtk2Gui.c:986
+#: ../gui/GtkGui.c:986
 msgid "Notice"
 msgstr "警告"
 
@@ -1365,196 +1365,196 @@ msgstr "16分钟"
 msgid "32min"
 msgstr "32分钟"
 
-#: ../plugins/dfinput/cfg-gtk2.c:49
+#: ../plugins/dfinput/cfg-gtk.c:49
 msgid "D-Pad Up"
 msgstr "方向键上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:50
+#: ../plugins/dfinput/cfg-gtk.c:50
 msgid "D-Pad Down"
 msgstr "方向键下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:51
+#: ../plugins/dfinput/cfg-gtk.c:51
 msgid "D-Pad Left"
 msgstr "方向键左"
 
-#: ../plugins/dfinput/cfg-gtk2.c:52
+#: ../plugins/dfinput/cfg-gtk.c:52
 msgid "D-Pad Right"
 msgstr "方向键右"
 
-#: ../plugins/dfinput/cfg-gtk2.c:53
+#: ../plugins/dfinput/cfg-gtk.c:53
 msgid "Cross"
 msgstr "叉号键"
 
-#: ../plugins/dfinput/cfg-gtk2.c:54
+#: ../plugins/dfinput/cfg-gtk.c:54
 msgid "Circle"
 msgstr "圆圈键"
 
-#: ../plugins/dfinput/cfg-gtk2.c:55
+#: ../plugins/dfinput/cfg-gtk.c:55
 msgid "Square"
 msgstr "方块键"
 
-#: ../plugins/dfinput/cfg-gtk2.c:56
+#: ../plugins/dfinput/cfg-gtk.c:56
 msgid "Triangle"
 msgstr "三角键"
 
-#: ../plugins/dfinput/cfg-gtk2.c:57
+#: ../plugins/dfinput/cfg-gtk.c:57
 msgid "L1"
 msgstr "L1"
 
-#: ../plugins/dfinput/cfg-gtk2.c:58
+#: ../plugins/dfinput/cfg-gtk.c:58
 msgid "R1"
 msgstr "R1"
 
-#: ../plugins/dfinput/cfg-gtk2.c:59
+#: ../plugins/dfinput/cfg-gtk.c:59
 msgid "L2"
 msgstr "L2"
 
-#: ../plugins/dfinput/cfg-gtk2.c:60
+#: ../plugins/dfinput/cfg-gtk.c:60
 msgid "R2"
 msgstr "R2"
 
-#: ../plugins/dfinput/cfg-gtk2.c:61
+#: ../plugins/dfinput/cfg-gtk.c:61
 msgid "Select"
 msgstr "选择键"
 
-#: ../plugins/dfinput/cfg-gtk2.c:62
+#: ../plugins/dfinput/cfg-gtk.c:62
 msgid "Start"
 msgstr "开始键"
 
-#: ../plugins/dfinput/cfg-gtk2.c:63
+#: ../plugins/dfinput/cfg-gtk.c:63
 msgid "L3"
 msgstr "L3"
 
-#: ../plugins/dfinput/cfg-gtk2.c:64
+#: ../plugins/dfinput/cfg-gtk.c:64
 msgid "R3"
 msgstr "R3"
 
-#: ../plugins/dfinput/cfg-gtk2.c:65
+#: ../plugins/dfinput/cfg-gtk.c:65
 msgid "Analog"
 msgstr "摇杆手柄"
 
-#: ../plugins/dfinput/cfg-gtk2.c:69
+#: ../plugins/dfinput/cfg-gtk.c:69
 msgid "L-Stick Right"
 msgstr "左摇杆右方向"
 
-#: ../plugins/dfinput/cfg-gtk2.c:70
+#: ../plugins/dfinput/cfg-gtk.c:70
 msgid "L-Stick Left"
 msgstr "左摇杆左方向"
 
-#: ../plugins/dfinput/cfg-gtk2.c:71
+#: ../plugins/dfinput/cfg-gtk.c:71
 msgid "L-Stick Down"
 msgstr "左摇杆下方向"
 
-#: ../plugins/dfinput/cfg-gtk2.c:72
+#: ../plugins/dfinput/cfg-gtk.c:72
 msgid "L-Stick Up"
 msgstr "左摇杆上方向"
 
-#: ../plugins/dfinput/cfg-gtk2.c:73
+#: ../plugins/dfinput/cfg-gtk.c:73
 msgid "R-Stick Right"
 msgstr "右摇杆右方向"
 
-#: ../plugins/dfinput/cfg-gtk2.c:74
+#: ../plugins/dfinput/cfg-gtk.c:74
 msgid "R-Stick Left"
 msgstr "右摇杆左方向"
 
-#: ../plugins/dfinput/cfg-gtk2.c:75
+#: ../plugins/dfinput/cfg-gtk.c:75
 msgid "R-Stick Down"
 msgstr "右摇杆下方向"
 
-#: ../plugins/dfinput/cfg-gtk2.c:76
+#: ../plugins/dfinput/cfg-gtk.c:76
 msgid "R-Stick Up"
 msgstr "右摇杆上方向"
 
-#: ../plugins/dfinput/cfg-gtk2.c:102
-#: ../plugins/dfinput/cfg-gtk2.c:141
+#: ../plugins/dfinput/cfg-gtk.c:102
+#: ../plugins/dfinput/cfg-gtk.c:141
 msgid "Centered"
 msgstr "居中"
 
-#: ../plugins/dfinput/cfg-gtk2.c:102
-#: ../plugins/dfinput/cfg-gtk2.c:141
+#: ../plugins/dfinput/cfg-gtk.c:102
+#: ../plugins/dfinput/cfg-gtk.c:141
 msgid "Up"
 msgstr "上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:102
-#: ../plugins/dfinput/cfg-gtk2.c:141
+#: ../plugins/dfinput/cfg-gtk.c:102
+#: ../plugins/dfinput/cfg-gtk.c:141
 msgid "Right"
 msgstr "右方向键"
 
-#: ../plugins/dfinput/cfg-gtk2.c:102
-#: ../plugins/dfinput/cfg-gtk2.c:141
+#: ../plugins/dfinput/cfg-gtk.c:102
+#: ../plugins/dfinput/cfg-gtk.c:141
 msgid "Rightup"
 msgstr "右上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:103
-#: ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk.c:103
+#: ../plugins/dfinput/cfg-gtk.c:142
 msgid "Down"
 msgstr "下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:103
-#: ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk.c:103
+#: ../plugins/dfinput/cfg-gtk.c:142
 msgid "Rightdown"
 msgstr "右下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:103
-#: ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk.c:103
+#: ../plugins/dfinput/cfg-gtk.c:142
 msgid "Left"
 msgstr "左"
 
-#: ../plugins/dfinput/cfg-gtk2.c:103
-#: ../plugins/dfinput/cfg-gtk2.c:142
+#: ../plugins/dfinput/cfg-gtk.c:103
+#: ../plugins/dfinput/cfg-gtk.c:142
 msgid "Leftup"
 msgstr "左上"
 
-#: ../plugins/dfinput/cfg-gtk2.c:104
-#: ../plugins/dfinput/cfg-gtk2.c:143
+#: ../plugins/dfinput/cfg-gtk.c:104
+#: ../plugins/dfinput/cfg-gtk.c:143
 msgid "Leftdown"
 msgstr "左下"
 
-#: ../plugins/dfinput/cfg-gtk2.c:108
-#: ../plugins/dfinput/cfg-gtk2.c:147
+#: ../plugins/dfinput/cfg-gtk.c:108
+#: ../plugins/dfinput/cfg-gtk.c:147
 #, c-format
 msgid "Joystick: Button %d"
 msgstr "手柄: 按钮 %d"
 
-#: ../plugins/dfinput/cfg-gtk2.c:112
-#: ../plugins/dfinput/cfg-gtk2.c:151
+#: ../plugins/dfinput/cfg-gtk.c:112
+#: ../plugins/dfinput/cfg-gtk.c:151
 #, c-format
 msgid "Joystick: Axis %d%c"
 msgstr "手柄: 轴 %d%c"
 
-#: ../plugins/dfinput/cfg-gtk2.c:117
-#: ../plugins/dfinput/cfg-gtk2.c:156
+#: ../plugins/dfinput/cfg-gtk.c:117
+#: ../plugins/dfinput/cfg-gtk.c:156
 #, c-format
 msgid "Joystick: Hat %d %s"
 msgstr "Joystick: 操纵杆 %d %s"
 
-#: ../plugins/dfinput/cfg-gtk2.c:132
-#: ../plugins/dfinput/cfg-gtk2.c:171
+#: ../plugins/dfinput/cfg-gtk.c:132
+#: ../plugins/dfinput/cfg-gtk.c:171
 msgid "Keyboard:"
 msgstr "键盘:"
 
-#: ../plugins/dfinput/cfg-gtk2.c:136
-#: ../plugins/dfinput/cfg-gtk2.c:175
+#: ../plugins/dfinput/cfg-gtk.c:136
+#: ../plugins/dfinput/cfg-gtk.c:175
 msgid "(Not Set)"
 msgstr "(未设定)"
 
-#: ../plugins/dfinput/cfg-gtk2.c:575
+#: ../plugins/dfinput/cfg-gtk.c:575
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:14
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:77
 msgid "None"
 msgstr "无"
 
-#: ../plugins/dfinput/cfg-gtk2.c:623
+#: ../plugins/dfinput/cfg-gtk.c:623
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr "手柄/键盘输入配置"
 
-#: ../plugins/dfinput/cfg-gtk2.c:629
-#: ../plugins/dfinput/cfg-gtk2.c:649
+#: ../plugins/dfinput/cfg-gtk.c:629
+#: ../plugins/dfinput/cfg-gtk.c:649
 msgid "Key"
 msgstr "按钮"
 
-#: ../plugins/dfinput/cfg-gtk2.c:635
-#: ../plugins/dfinput/cfg-gtk2.c:655
+#: ../plugins/dfinput/cfg-gtk.c:635
+#: ../plugins/dfinput/cfg-gtk.c:655
 msgid "Button"
 msgstr "按键"
 

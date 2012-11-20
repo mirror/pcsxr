@@ -13,7 +13,7 @@ AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-I../../include -I../../libpcsxcore $(SDL_CFLAGS)
 
 bin_PROGRAMS = cfgDFInput
-cfgDFInput_SOURCES = cfg-gtk2.c pad.h
+cfgDFInput_SOURCES = cfg-gtk.c pad.h
 cfgDFInput_LDADD = $(GTK3_LIBS) $(SDL_LIBS) -lX11
 
 glade_DATA = dfinput.ui
