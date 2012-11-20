@@ -229,6 +229,7 @@ int main(int argc, char *argv[])
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnConfigClose), builder, NULL, G_CONNECT_AFTER);
 
+	gtk_widget_show(MainWindow);
     gtk_main();
     return 0;
 }
