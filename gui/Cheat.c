@@ -275,14 +275,29 @@ static void OnCheatListDlg_DelClicked(GtkWidget *widget, gpointer user_data) {
 	                       // rather than regenerating the whole list
 }
 
-static void OnCheatListDlg_EnableToggled(GtkWidget *widget, gchar *path, gpointer user_data) {
-	int i = atoi(path);
+static void OnCheatListDlg_EnableToggled(GtkCellRendererToggle *cell, gchar *path_str, gpointer user_data) {
+	GtkWidget *widget;
+	GtkTreeModel *model;
+	GtkTreePath *path;
+	GtkTreeIter  iter;
+	gboolean fixed;
 
+	widget = gtk_builder_get_object (builder, "GtkCList_Cheat");
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW(widget));
+	path = gtk_tree_path_new_from_string (path_str);
+  
+	gtk_tree_model_get_iter (model, &iter, path);
+	gtk_tree_model_get (model, &iter, 0, &fixed, -1);
+
+	fixed ^= 1;
+	
+	int i = atoi(path_str);
 	assert(i >= 0 && i < NumCheats);
-	Cheats[i].Enabled ^= 1;
+	
+	Cheats[i].Enabled = fixed;
 
-	LoadCheatListItems(i); // FIXME: should modify it in the list directly
-	                       // rather than regenerating the whole list
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, fixed, -1);
+	gtk_tree_path_free (path);
 }
 
 static void OnCheatListDlg_OpenClicked(GtkWidget *widget, gpointer user_data) {
