@@ -266,13 +266,11 @@ static void OnCheatListDlg_DelClicked(GtkWidget *widget, gpointer user_data) {
 	if (selected) {
 		path = gtk_tree_model_get_path(model, &iter);
 		i = *gtk_tree_path_get_indices(path);
+		gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 		gtk_tree_path_free(path);
 
 		RemoveCheat(i);
 	}
-
-	LoadCheatListItems(i); // FIXME: should remove it from the list directly
-	                       // rather than regenerating the whole list
 }
 
 static void OnCheatListDlg_EnableToggled(GtkCellRendererToggle *cell, gchar *path_str, gpointer user_data) {
