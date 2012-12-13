@@ -593,8 +593,12 @@ static gchar *Open_Iso_Proc() {
 		GTK_STOCK_OK, GTK_RESPONSE_OK,
 		NULL);
 
-	if (current_folder[0] == '\0') {
+	if (current_folder[0] == '\0' && Config.IsoImgDir[0] != '\0') {
+		strcpy(current_folder, Config.IsoImgDir);
+	} else if (current_folder[0] == '\0' && Config.IsoImgDir[0] == '\0') {
 		strcpy(current_folder, getenv("HOME"));
+	} else {
+		/* Using static (recent) PATH */
 	}
 
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER (chooser), current_folder);
@@ -636,7 +640,13 @@ static gchar *Open_Iso_Proc() {
 		if(path == NULL) {
 		  strncpy(current_folder, filename, strrchr(filename, '/') - filename);
 		}
-		  
+
+		/* If ISO path is NULL save current path. */
+		if (Config.IsoImgDir[0] == '\0') {
+		  strcpy(Config.IsoImgDir, current_folder);
+		  SaveConfig();
+		}
+
 		/* free useless data */
 		GSList * ll = l;
 		while(l->next) {

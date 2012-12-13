@@ -26,6 +26,16 @@ static GtkBuilder *builder;
 static GtkWidget *MemViewDlg = NULL;
 static u32 MemViewAddress = 0;
 
+/* Copy value of MemViewAddress as text of entry_address */
+static void sync_update_address_text() {
+	char buftext[20];
+	GtkWidget *widget;
+
+	sprintf(buftext, "%.8X", MemViewAddress | 0x80000000);
+	widget = gtk_builder_get_object(builder, "entry_address");
+	gtk_entry_set_text(GTK_ENTRY(widget), buftext);
+}
+
 static void UpdateMemViewDlg() {
 	s32 start, end;
 	int i;
@@ -42,9 +52,7 @@ static void UpdateMemViewDlg() {
 
 	MemViewAddress &= 0x1fffff;
 
-	sprintf(buftext, "%.8X", MemViewAddress | 0x80000000);
-	widget = gtk_builder_get_object(builder, "entry_address");
-	gtk_entry_set_text(GTK_ENTRY(widget), buftext);
+	sync_update_address_text();
 
 	start = MemViewAddress & 0x1ffff0;
 	end = start + MEMVIEW_MAX_LINES * 16;
@@ -79,6 +87,18 @@ static void UpdateMemViewDlg() {
 	g_object_unref(G_OBJECT(store));
 	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(widget), TRUE);
 	gtk_widget_show(widget);
+}
+
+static void MemView_Prev() {
+	MemViewAddress -= MEMVIEW_MAX_LINES;
+	sync_update_address_text();
+	UpdateMemViewDlg();
+}
+
+static void MemView_Next() {
+	MemViewAddress += MEMVIEW_MAX_LINES;
+	sync_update_address_text();
+	UpdateMemViewDlg();
 }
 
 static void MemView_Go() {
@@ -310,6 +330,14 @@ void RunDebugMemoryDialog() {
 	widget = gtk_builder_get_object(builder, "btn_go");
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(MemView_Go), builder, NULL, G_CONNECT_AFTER);
+
+	widget = gtk_builder_get_object(builder, "btn_prev");
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
+		G_CALLBACK(MemView_Prev), builder, NULL, G_CONNECT_AFTER);
+
+	widget = gtk_builder_get_object(builder, "btn_next");
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
+		G_CALLBACK(MemView_Next), builder, NULL, G_CONNECT_AFTER);
 
 	g_signal_connect_data(G_OBJECT(MemViewDlg), "response",
 		G_CALLBACK(MemView_Close), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);

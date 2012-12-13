@@ -121,6 +121,7 @@ int LoadConfig(PcsxConfig *Conf) {
 	GetValue(data, "Mcd2", Config.Mcd2);
 	GetValue(data, "BiosDir",    Config.BiosDir);
 	GetValue(data, "PluginsDir",    Config.PluginsDir);
+	GetValue(data, "IsoImgDir",  Config.IsoImgDir);
 
 	Config.Xa      = GetValueb(data, "Xa");
 	Config.Sio     = GetValueb(data, "Sio");
@@ -163,6 +164,7 @@ void SaveConfig() {
 	SetValue("Mcd2", Config.Mcd2);
 	SetValue("BiosDir",    Config.BiosDir);
 	SetValue("PluginsDir",    Config.PluginsDir);
+	SetValue("IsoImgDir",  Config.IsoImgDir);
 
 	SetValueb("Xa",      Config.Xa);
 	SetValueb("Sio",     Config.Sio);
