@@ -31,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0271796D1678A778004AED62 /* ExtendedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExtendedKeys.h; path = ../../ExtendedKeys.h; sourceTree = "<group>"; };
 		28586CBD14651D960082B8EC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = plugins/PeopsXgl/English.lproj/NetSfPeopsOpenGLConfig.xib; sourceTree = "<group>"; };
 		28586CBF14651E560082B8EC /* NetSfPeopsOpenGLGPUInterface.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetSfPeopsOpenGLGPUInterface.xib; sourceTree = "<group>"; };
 		2B038C06069183300082466B /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -40,7 +41,6 @@
 		2BAF50930632BB1A00DB9A16 /* PeopsXGL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopsXGL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BD2E768077AF53E00657C69 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		3F31AF6A1302D4B600CBB551 /* drawgl.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = drawgl.m; path = macsrc/drawgl.m; sourceTree = SOURCE_ROOT; };
-		3F31AF6B1302D4B600CBB551 /* ExtendedKeys.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ExtendedKeys.h; path = macsrc/ExtendedKeys.h; sourceTree = SOURCE_ROOT; };
 		3F31AF6E1302D4B600CBB551 /* PluginGLView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginGLView.h; path = macsrc/PluginGLView.h; sourceTree = SOURCE_ROOT; };
 		3F31AF6F1302D4B600CBB551 /* PluginGLView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PluginGLView.m; path = macsrc/PluginGLView.m; sourceTree = SOURCE_ROOT; };
 		3F31AF701302D4B600CBB551 /* PluginWindow.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginWindow.h; path = macsrc/PluginWindow.h; sourceTree = SOURCE_ROOT; };
@@ -119,11 +119,11 @@
 		2BD2E2F40779F50B00657C69 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
+				0271796D1678A778004AED62 /* ExtendedKeys.h */,
 				3F7F38021307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.h */,
 				3F7F38031307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.m */,
 				55F36E4A146C9F9900718DE6 /* drawgl.h */,
 				3F31AF6A1302D4B600CBB551 /* drawgl.m */,
-				3F31AF6B1302D4B600CBB551 /* ExtendedKeys.h */,
 				3F31AF6E1302D4B600CBB551 /* PluginGLView.h */,
 				3F31AF6F1302D4B600CBB551 /* PluginGLView.m */,
 				3F31AF701302D4B600CBB551 /* PluginWindow.h */,
@@ -305,7 +305,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 1;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=PeopsXGL",

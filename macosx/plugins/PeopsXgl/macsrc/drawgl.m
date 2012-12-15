@@ -233,6 +233,9 @@ void ShowTextGpuPic(void)
 void HandleKey(int keycode)
 {
 	switch (keycode) {
+        case GPU_FAST_FORWARD:
+            bUseFrameLimit = !bUseFrameLimit;
+            break;
 		case GPU_FULLSCREEN_KEY:
 			[gameController setFullscreen:![gameController fullscreen]];
 			break;

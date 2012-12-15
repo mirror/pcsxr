@@ -211,15 +211,23 @@ static NSString *HandleBinCue(NSString *toHandle)
 - (IBAction)freeze:(id)sender
 {
 	NSInteger num = [sender tag];
-    NSString *path = [saveStatePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%s-%3.3ld.pcsxrstate", CdromId, (long)num]];
+    [PcsxrController saveState:num];
+}
 
-	[EmuThread freezeAt:path which:num-1];
++ (void)saveState:(int)num
+{
+	[EmuThread freezeAt:[PcsxrController saveStatePath:num] which:num];
 }
 
 - (IBAction)defrost:(id)sender
 {
-	NSString *path = [saveStatePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%s-%3.3ld.pcsxrstate", CdromId, (long)[sender tag]]];
-	[EmuThread defrostAt:path];
+    NSInteger num = [sender tag];
+	[PcsxrController loadState:num];
+}
+
++ (void)loadState:(int)num
+{
+	[EmuThread defrostAt:[PcsxrController saveStatePath:num]];
 }
 
 - (IBAction)fullscreen:(id)sender
@@ -530,6 +538,15 @@ static NSString *HandleBinCue(NSString *toHandle)
 	}
 
 	[PcsxrController setConfigFromDefaults];
+}
+
++ (NSString*)saveStatePath:(int)slot
+{
+    if(slot >= 0) {
+        return [saveStatePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%s-%3.3ld.pcsxrstate", CdromId, (long)slot]];
+    }
+    
+    return saveStatePath;
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename

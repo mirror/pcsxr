@@ -17,7 +17,11 @@ enum {
 	PSX_STOP_KEY = 0xFF1B/*XK_Escape*/,
 	
 	GPU_FULLSCREEN_KEY = 0x0100,
-	GPU_FPS_DISPLAY_KEY = 0xFFFF/*XK_Delete*/
+	GPU_FPS_DISPLAY_KEY = 0xFFFF,/*XK_Delete*/
+    
+    // Fake HotKeys
+    GPU_HOTKEYS = 0x020,
+    GPU_FAST_FORWARD
 };
 
 #endif //__EXTENDED_KEYS_H__

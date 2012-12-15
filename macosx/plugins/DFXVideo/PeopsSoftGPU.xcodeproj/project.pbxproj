@@ -31,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0271796B1678A767004AED62 /* ExtendedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExtendedKeys.h; path = ../../ExtendedKeys.h; sourceTree = "<group>"; };
 		28586CC814651E9B0082B8EC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsSoftGPUConfig.xib; sourceTree = "<group>"; };
 		28586CCA14651EAB0082B8EC /* NetSfPeopsSoftGPUInterface.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetSfPeopsSoftGPUInterface.xib; sourceTree = "<group>"; };
 		2B038C06069183300082466B /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -39,7 +40,6 @@
 		2B3E5DF0062B36FB001D796E /* PluginWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginWindowController.h; path = macsrc/PluginWindowController.h; sourceTree = SOURCE_ROOT; };
 		2B3E5DF1062B36FB001D796E /* PluginWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PluginWindowController.m; path = macsrc/PluginWindowController.m; sourceTree = SOURCE_ROOT; };
 		2B51949E06B3D2D200744730 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
-		2B57868106BE7B3700BBA288 /* ExtendedKeys.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ExtendedKeys.h; path = macsrc/ExtendedKeys.h; sourceTree = SOURCE_ROOT; };
 		2B957EAE0635DFE400543905 /* PluginWindow.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginWindow.h; path = macsrc/PluginWindow.h; sourceTree = SOURCE_ROOT; };
 		2B957EAF0635DFE400543905 /* PluginWindow.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PluginWindow.m; path = macsrc/PluginWindow.m; sourceTree = SOURCE_ROOT; };
 		2B959E4306342D32000F2A2D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
@@ -118,6 +118,7 @@
 		2BD2E2F40779F50B00657C69 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
+				0271796B1678A767004AED62 /* ExtendedKeys.h */,
 				2BB260A60777462E00F6854C /* PluginConfigController.h */,
 				2BB260A70777462E00F6854C /* PluginConfigController.m */,
 				2B3E5DF0062B36FB001D796E /* PluginWindowController.h */,
@@ -127,7 +128,6 @@
 				2BAF4FC90632967A00DB9A16 /* PluginGLView.h */,
 				2BAF4FCA0632967A00DB9A16 /* PluginGLView.m */,
 				2B3E5D64062B2CC1001D796E /* drawgl.m */,
-				2B57868106BE7B3700BBA288 /* ExtendedKeys.h */,
 				5555E0CA160695BF00C0A310 /* SGPUPreferences.h */,
 			);
 			name = macsrc;

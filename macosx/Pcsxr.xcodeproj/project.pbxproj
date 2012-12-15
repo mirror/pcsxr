@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02717968167884C9004AED62 /* hotkeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 02717967167884C9004AED62 /* hotkeys.m */; };
+		0280B7AD16764CC5007B8001 /* HotkeyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280B7AC16764CC3007B8001 /* HotkeyController.m */; };
+		02FE55E816765F9400205CF2 /* KeyNames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02FE55E616765F9400205CF2 /* KeyNames.plist */; };
 		28F0C3C6146521A700A90285 /* Configuration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F0C3C4146521A700A90285 /* Configuration.xib */; };
 		28F0C3C9146521B000A90285 /* PCSXR.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F0C3C7146521B000A90285 /* PCSXR.xib */; };
 		28F0C3CC146521B700A90285 /* AddPluginSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F0C3CA146521B700A90285 /* AddPluginSheet.xib */; };
@@ -221,6 +224,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02717967167884C9004AED62 /* hotkeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hotkeys.m; sourceTree = "<group>"; };
+		02717969167884DF004AED62 /* hotkeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hotkeys.h; sourceTree = "<group>"; };
+		0280B7AB16764CC3007B8001 /* HotkeyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotkeyController.h; sourceTree = "<group>"; };
+		0280B7AC16764CC3007B8001 /* HotkeyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotkeyController.m; sourceTree = "<group>"; };
+		02FE55E716765F9400205CF2 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = English; path = KeyNames.plist; sourceTree = "<group>"; };
 		28F0C3C5146521A700A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Configuration.xib; sourceTree = "<group>"; };
 		28F0C3C8146521B000A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = PCSXR.xib; sourceTree = "<group>"; };
 		28F0C3CB146521B700A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = AddPluginSheet.xib; sourceTree = "<group>"; };
@@ -249,7 +257,7 @@
 		2BBB1127051DC00500B84448 /* PluginList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PluginList.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2BBB1787051E0D9700B84448 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = Credits.rtf; sourceTree = "<group>"; };
 		2BBB1791051E113B00B84448 /* EmuThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmuThread.h; sourceTree = "<group>"; };
-		2BBB1792051E113B00B84448 /* EmuThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 2; path = EmuThread.m; sourceTree = "<group>"; };
+		2BBB1792051E113B00B84448 /* EmuThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EmuThread.m; sourceTree = "<group>"; };
 		2BBB17DA051E4D0F00B84448 /* Plugin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Plugin.c; sourceTree = SOURCE_ROOT; };
 		2BC4786204C7FD3600CAB520 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		559366C012B694DF004ACC1E /* iGte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGte.h; sourceTree = "<group>"; };
@@ -415,6 +423,7 @@
 		2BA178AD0514CE260026D74D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				02FE55E616765F9400205CF2 /* KeyNames.plist */,
 				2BBB1786051E0D9700B84448 /* Credits.rtf */,
 				28F0C3C4146521A700A90285 /* Configuration.xib */,
 				2BA178B20514CE260026D74D /* InfoPlist.strings */,
@@ -475,6 +484,10 @@
 				55BBA69814953887003B2CEC /* PcsxrDiscHandler.m */,
 				55BBA69A14958399003B2CEC /* PcsxrFreezeStateHandler.h */,
 				55BBA69B1495839A003B2CEC /* PcsxrFreezeStateHandler.m */,
+				0280B7AB16764CC3007B8001 /* HotkeyController.h */,
+				0280B7AC16764CC3007B8001 /* HotkeyController.m */,
+				02717967167884C9004AED62 /* hotkeys.m */,
+				02717969167884DF004AED62 /* hotkeys.h */,
 			);
 			name = MacOSX;
 			sourceTree = "<group>";
@@ -770,6 +783,7 @@
 				559DACEE146C72FF00C5DF71 /* Localizable.strings in Resources */,
 				55A90223147D7C7A0037E18F /* MemCardManager.xib in Resources */,
 				55C7A214148B2B3800C22ABC /* PcsxrMemCardDocument.xib in Resources */,
+				02FE55E816765F9400205CF2 /* KeyNames.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,6 +840,8 @@
 				55BBA69614945628003B2CEC /* PcsxrPluginHandler.m in Sources */,
 				55BBA69914953887003B2CEC /* PcsxrDiscHandler.m in Sources */,
 				55BBA69C1495839A003B2CEC /* PcsxrFreezeStateHandler.m in Sources */,
+				0280B7AD16764CC5007B8001 /* HotkeyController.m in Sources */,
+				02717968167884C9004AED62 /* hotkeys.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -870,6 +886,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		02FE55E616765F9400205CF2 /* KeyNames.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				02FE55E716765F9400205CF2 /* English */,
+			);
+			name = KeyNames.plist;
+			sourceTree = "<group>";
+		};
 		28F0C3C4146521A700A90285 /* Configuration.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -972,7 +996,7 @@
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_ASM_KEYWORD = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					PCSXRCORE,

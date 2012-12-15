@@ -29,7 +29,7 @@ static pthread_mutex_t eventMutex;
 #define EMUEVENT_RESET		(1<<1)
 #define EMUEVENT_STOP		(1<<2)
 
-static NSString *ThreadInfo = @"PSX Emu Background thread";
+static NSString * const ThreadInfo = @"PSX Emu Background thread";
 
 @implementation EmuThread
 
@@ -380,8 +380,8 @@ done:
 
 	GPU_freeze(2, (GPUFreeze_t *)&num);
 	int ret = SaveState([path fileSystemRepresentation]);
-	if (ret == 0) sprintf (Text, _("*PCSXR*: Saved State %d"), num+1);
-	else sprintf (Text, _("*PCSXR*: Error Saving State %d"), num+1);
+	if (ret == 0) sprintf (Text, _("*PCSXR*: Saved State %d"), num);
+	else sprintf (Text, _("*PCSXR*: Error Saving State %d"), num);
 	GPU_displayText(Text);
 
 	if (!emuWasPaused) {

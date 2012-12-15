@@ -213,7 +213,9 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 	[padPlugin setPluginsTo:[list pluginsForType:PSE_LT_PAD] withType: PSE_LT_PAD];
 	[cdromPlugin setPluginsTo:[list pluginsForType:PSE_LT_CDR] withType: PSE_LT_CDR];
 	[netPlugin setPluginsTo:[list pluginsForType:PSE_LT_NET] withType: PSE_LT_NET];
-
+    
+    // Setup hotkey view
+    [hkController initialize];
 }
 
 - (void)dealloc
@@ -256,6 +258,17 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 	} else {
 		return [[memCardEdit window] isVisible];
 	}
+}
+
+- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
+{
+    NSWindow *window = [self window];
+    if(tabViewItem == hkTab) {
+        [window makeFirstResponder:(NSView*)hkController];
+    }
+    else if([window firstResponder] == (NSView*)hkController) {
+        [hkController resignFirstResponder];
+    }
 }
 
 @end

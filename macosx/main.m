@@ -14,6 +14,7 @@
 #include "psxcommon.h"
 #include "sio.h"
 #import <IOKit/pwr_mgt/IOPMLib.h>
+#import "hotkeys.h"
 
 static BOOL sysInited = NO;
 //#define EMU_LOG
@@ -76,6 +77,8 @@ int SysInit() {
 	if (success != kIOReturnSuccess) {
 		NSLog(@"Unable to stop sleep, error code %d", success);
 	}
+    
+    attachHotkeys();
 
 	return 0;
 }
@@ -164,6 +167,7 @@ void SysClose() {
     if (emuLog != NULL) fclose(emuLog);
 
     sysInited = NO;
+    detachHotkeys();
 }
 
 void OnFile_Exit() {

@@ -31,5 +31,8 @@
 + (void)setConfigFromDefaults;
 + (void)setDefaultFromConfig:(NSString *)defaultKey;
 + (BOOL)biosAvailable;
++ (NSString*)saveStatePath:(int)slot;
++ (void)saveState:(int)num;
++ (void)loadState:(int)num;
 
 @end

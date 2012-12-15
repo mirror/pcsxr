@@ -2,6 +2,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PluginController.h"
+#import "HotkeyController.h"
 #import "PluginList.h"
 
 extern NSString *memChangeNotifier;
@@ -31,6 +32,10 @@ extern NSString *memChangeNotifier;
 	IBOutlet id noFastBootCell;
 	IBOutlet id enableNetPlayCell;
 	IBOutlet id widescreen;
+    
+    // Hotkeys
+    IBOutlet HotkeyController *hkController;
+    IBOutlet NSTabViewItem *hkTab;
 
 	IBOutlet NSTextField *mcd1Label;
 	IBOutlet NSTextField *mcd2Label;
@@ -49,5 +54,7 @@ extern NSString *memChangeNotifier;
 
 - (NSString *)keyForSender:(id)sender;
 + (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile;
+
+- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 
 @end
