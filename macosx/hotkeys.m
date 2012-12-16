@@ -82,7 +82,6 @@ void setupHotkey(int hk, NSString *label, NSDictionary *binding) {
 }
 
 void setupHotkeys() {
-    if(hotkeys) [hotkeys release];
     NSDictionary *bindings = [[NSUserDefaults standardUserDefaults] objectForKey:@"HotkeyBindings"];
     hotkeys = [[NSMutableDictionary alloc] initWithCapacity:[bindings count]];
     
