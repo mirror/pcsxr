@@ -160,6 +160,25 @@ static GdkPixbuf *SetIcon(GtkWidget *dialog, short *icon, int i) {
 }
 #endif
 
+static gchar* MCDStatusToChar(McdBlock *Info) {
+	gchar *state;
+	if ((Info->Flags & 0xF0) == 0xA0) {
+		if ((Info->Flags & 0xF) >= 1 && (Info->Flags & 0xF) <= 3)
+			state = _("Deleted");
+		else
+			state = _("Free");
+	} else if ((Info->Flags & 0xF0) == 0x50) {
+		if ((Info->Flags & 0xF) == 0x1)
+			state = _("Used");
+		else if ((Info->Flags & 0xF) == 0x2)
+			state = _("Link");
+		else if ((Info->Flags & 0xF) == 0x3)
+			state = _("End link");
+        } else
+		state = _("Free");
+	return state;
+}
+
 static void LoadListItems(int mcd, GtkWidget *widget) {
 	int i;
 	GtkWidget *List;
@@ -183,17 +202,7 @@ static void LoadListItems(int mcd, GtkWidget *widget) {
 
 		Info = &Blocks[mcd - 1][i];
 		IconC[mcd - 1][i] = 0;
-
-		if ((Info->Flags & 0xF0) == 0xA0) {
-			if ((Info->Flags & 0xF) >= 1 &&
-				(Info->Flags & 0xF) <= 3) {
-				state = _("Deleted");
-			} else
-				state = _("Free");
-		} else if ((Info->Flags & 0xF0) == 0x50)
-			state = _("Used");
-		else
-			state = _("Free");
+		state = MCDStatusToChar(Info);
 
 		pixbuf = SetIcon(dialog, Info->Icon, 2);
 
@@ -285,16 +294,7 @@ static void UpdateListItems(int mcd, GtkWidget *widget) {
 		Info = &Blocks[mcd - 1][i];
 		IconC[mcd - 1][i] = 0;
 
-		if ((Info->Flags & 0xF0) == 0xA0) {
-			if ((Info->Flags & 0xF) >= 1 &&
-				(Info->Flags & 0xF) <= 3) {
-				state = _("Deleted");
-			} else
-				state = _("Free");
-		} else if ((Info->Flags & 0xF0) == 0x50)
-			state = _("Used");
-		else
-			state = _("Free");
+		state = MCDStatusToChar(Info);
 
 		if (Info->IconCount > 0) {
 			pIcon = &Info->Icon[(currentIcon % Info->IconCount) * 16 * 16];
@@ -451,78 +451,110 @@ static void OnMcd_New(GtkWidget *widget, gpointer user_data) {
 	g_free(path);
 }
 
-static int copy = 0, copymcd = 0;
-
-static int GetFreeMemcardSlot(int target_card) {
+static int GetFreeMemcardSlot(gint target_card, gint count) {
 	McdBlock *Info;
-	gboolean found = FALSE;
+	gint foundcount=0, i=-1;
 
-	int i = 0;
-	while (i < 15 && found == FALSE) {
-		Info = &Blocks[target_card][i];
-		if (g_ascii_strcasecmp(Info->Title, "") == 0) {
-			found = TRUE;
+	// search for empty (formatted) blocks first
+	while (i < MAX_MEMCARD_BLOCKS && foundcount < count) {
+		Info = &Blocks[target_card][++i];
+		if ((Info->Flags & 0xFF) == 0xA0) { // if A0 but not A1
+			foundcount++;
+		} else if (foundcount >= 1) { // need to find n count consecutive blocks
+			foundcount=0;
 		} else {
-			i++;
 		}
+		//printf("formatstatus=%x\n", Info->Flags);
 	}
 
-	if (found == TRUE)
-		return i;
+	if (foundcount == count)
+		return (i-foundcount+1);
 
-	// no free slots, try to find a deleted one
-	i = 0;
-	while (i < 15 && found == FALSE) {
-		Info = &Blocks[target_card][i];
-		if ((Info->Flags & 0xF0) != 0x50) {
-			found = TRUE;
+	// no free formatted slots, try to find a deleted one
+	foundcount=0;
+	i = -1;
+	while (i < MAX_MEMCARD_BLOCKS && foundcount < count) {
+		Info = &Blocks[target_card][++i];
+		if ((Info->Flags & 0xF0) == 0xA0) { // A2 or A6 f.e.
+			foundcount++;
+		} else if (foundcount >= 1) { // need to find n count consecutive blocks
+			foundcount=0;
 		} else {
-			i++;
 		}
+		//printf("delstatus=%x\n", Info->Flags);
 	}
 
-	if (found == TRUE)
-		return i;
+	if (foundcount == count)
+		return (i-foundcount+1);
 
 	return -1;
 }
 
-static void CopyMemcardData(char *from, char *to, gint *i, gchar *str) {
-	memcpy(to + (*i + 1) * 128, from + (copy + 1) * 128, 128);
-	SaveMcd((char *)str, to, (*i + 1) * 128, 128);
-	memcpy(to + (*i + 1) * 1024 * 8, from + (copy+1) * 1024 * 8, 1024 * 8);
-	SaveMcd((char *)str, to, (*i + 1) * 1024 * 8, 1024 * 8);
+static void CopyMemcardData(char *from, char *to, gint srci, gint dsti, gchar *str) {
+	// header	
+	memcpy(to + (dsti + 1) * 128, from + (srci + 1) * 128, 128);
+	SaveMcd((char *)str, to, (dsti + 1) * 128, 128);
+
+	// data	
+	memcpy(to + (dsti + 1) * 1024 * 8, from + (srci+1) * 1024 * 8, 1024 * 8);
+	SaveMcd((char *)str, to, (dsti + 1) * 1024 * 8, 1024 * 8);
+
+	//printf("data = %s\n", from + (srci+1) * 128);
+}
+
+gint GetMcdBlockCount(gint mcd, gint startblock) {
+	McdBlock b;
+	gint i;
+
+	// check status on startblock+1...n
+	for (i=1; i <= (MAX_MEMCARD_BLOCKS-startblock); i++) {
+		GetMcdBlockInfo(mcd, startblock+i, &b);
+		//printf("i=%i, mcd=%i, startblock=%i, diff=%i, flags=%x\n", i, mcd, startblock, (MAX_MEMCARD_BLOCKS-startblock), b.Flags);
+		if ((b.Flags & 0x3) == 0x3) {
+			return i+1;
+		} else if ((b.Flags & 0x2) == 0x2) {
+			//i++
+		} else {
+			return i;
+		}
+	}
+	return i; // startblock was the last block so count = 1
 }
 
 static void OnMcd_CopyTo(GtkWidget *widget, gpointer user_data) {
-	gint mcd = (gint)user_data;
+	gint dstmcd = (gint)user_data;
+	gint srcmcd;
 
 	GtkTreeIter iter;
 	GtkTreeModel *model;
 	GtkTreePath *path;
-	gint *i;
+	gint *i, j, count, srci, first_free_slot;
 	GtkTreeSelection *treesel;
 	gchar *str;
 	char *source, *destination;
 
-	int first_free_slot;
-
-	if (mcd == 1)
+	if (dstmcd == 1) {
 		treesel = gtk_tree_view_get_selection(GTK_TREE_VIEW(GtkCList_McdList2));
-	else
+		srcmcd = 2;
+	} else {
 		treesel = gtk_tree_view_get_selection(GTK_TREE_VIEW(GtkCList_McdList1));
+		srcmcd = 1;
+	}
+	//printf("src=%i and dst=%i\n", srcmcd, dstmcd);
 
 	// If the item selected is not reported as a 'Free' slot
 	if (gtk_tree_selection_get_selected(treesel, &model, &iter)) {
 		path = gtk_tree_model_get_path(model, &iter);
 		i = gtk_tree_path_get_indices(path);
-		copy    = *i;
-		copymcd = mcd;
+		srci    = *i;
 		gtk_tree_path_free(path);
 	}
 
+	// get how many blocks there are including linked blocks
+	count = GetMcdBlockCount(srcmcd, (srci+1));
+
 	// Determine the first free slot in the target memory card
-	first_free_slot = GetFreeMemcardSlot(mcd - 1);
+	first_free_slot = GetFreeMemcardSlot((dstmcd - 1), count);
 	if (first_free_slot == -1) {
 		// No free slots available on the destination card
 		SysErrorMessage(_("No free space on memory card"),
@@ -530,7 +562,7 @@ static void OnMcd_CopyTo(GtkWidget *widget, gpointer user_data) {
 		return;
 	}
 
-	if (mcd == 1) {
+	if (dstmcd == 1) {
 		str = Config.Mcd1;
 		source = Mcd2Data;
 		destination = Mcd1Data;
@@ -540,7 +572,11 @@ static void OnMcd_CopyTo(GtkWidget *widget, gpointer user_data) {
 		destination = Mcd2Data;
 	}
 
-	CopyMemcardData(source, destination, &first_free_slot, str);
+	for (j=0; j < count; j++) {
+		CopyMemcardData(source, destination, (srci+j), (first_free_slot+j), str);
+		printf("count = %i, firstfree=%i, i=%i\n", count, first_free_slot, j);
+	}
+
 	UpdateMcdDlg(widget);
 }
 
@@ -626,7 +662,7 @@ static void OnTreeSelectionChanged(GtkTreeSelection *selection, gpointer user_da
 				gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_Delete1"), FALSE);
 			}
 
-			if ((b.Flags & 0xF0) == 0x50) {
+			if ((b.Flags & 0xF3) == 0x51) {
 				gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_CopyTo2"), TRUE);
 			} else {
 				gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_CopyTo2"), FALSE);
@@ -640,7 +676,7 @@ static void OnTreeSelectionChanged(GtkTreeSelection *selection, gpointer user_da
 				gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_Delete2"), FALSE);
 			}
 
-			if ((b.Flags & 0xF0) == 0x50) {
+			if ((b.Flags & 0xF3) == 0x51) {
 				gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_CopyTo1"), TRUE);
 			} else {
 				gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_CopyTo1"), FALSE);
@@ -767,7 +803,7 @@ void OnConf_Mcds() {
 	quit = FALSE;
 	currentIcon = 0;
 
-    g_timeout_add(1, updateFunc, 0);
+	g_timeout_add(1, updateFunc, 0);
 
 	while (gtk_events_pending()) {  gtk_main_iteration(); }
 }
