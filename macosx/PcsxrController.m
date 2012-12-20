@@ -195,9 +195,9 @@ static NSString *HandleBinCue(NSString *toHandle)
 	[openDlg setAllowedFileTypes:[PcsxrDiscHandler supportedUTIs]];
 
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
-		NSArray* urls = [openDlg URLs];
-		SetIsoFile((const char *)[HandleBinCue([[urls objectAtIndex:0] path]) fileSystemRepresentation]);
-		[EmuThread run];
+        NSURL *url = [[openDlg URLs] objectAtIndex:0];
+        [recentItems addRecentItem:url];
+		[self runURL:url];
     }
 	[openDlg release];
 }
@@ -206,6 +206,12 @@ static NSString *HandleBinCue(NSString *toHandle)
 {
 	SetIsoFile(NULL);
 	[EmuThread runBios];
+}
+
+- (void)runURL:(NSURL*)url
+{
+    SetIsoFile((const char *)[HandleBinCue([url path]) fileSystemRepresentation]);
+    [EmuThread run];
 }
 
 - (IBAction)freeze:(id)sender
