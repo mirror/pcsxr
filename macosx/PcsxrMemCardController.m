@@ -13,14 +13,19 @@
 
 #define MAX_MEMCARD_BLOCKS 15
 
-//FIXME: This code uses similar code to the GTK memory card manager, and both don't recognize saves that span multiple blocks.
 
-static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int copy) {
-	memcpy(to + (*i + 1) * 128, from + (copy + 1) * 128, 128);
-	SaveMcd(str, to, (*i + 1) * 128, 128);
-	memcpy(to + (*i + 1) * 1024 * 8, from + (copy + 1) * 1024 * 8, 1024 * 8);
-	SaveMcd(str, to, (*i + 1) * 1024 * 8, 1024 * 8);
+static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, char *str) {
+		// header
+		memcpy(to + (dsti + 1) * 128, from + (srci + 1) * 128, 128);
+		SaveMcd(str, to, (dsti + 1) * 128, 128);
+	
+		// data
+		memcpy(to + (dsti + 1) * 1024 * 8, from + (srci+1) * 1024 * 8, 1024 * 8);
+		SaveMcd(str, to, (dsti + 1) * 1024 * 8, 1024 * 8);
+	
+		//printf("data = %s\n", from + (srci+1) * 128);
 }
+
 
 @implementation PcsxrMemCardController
 
@@ -87,6 +92,32 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
     return self;
 }
 
+- (int)blockCount:(int)card fromIndex:(int)idx
+{
+	int i = 0;
+	NSArray *memArray = nil;
+	if (card == 1) {
+		memArray = [self memCard1Array];
+	} else {
+		memArray = [self memCard2Array];
+	}
+
+	for (i = 0; i <= (MAX_MEMCARD_BLOCKS-idx); i++) {
+		PcsxrMemoryObject *obj = [memArray objectAtIndex:i];
+		
+		//GetMcdBlockInfo(mcd, idx+i, &b);
+		//printf("i=%i, mcd=%i, startblock=%i, diff=%i, flags=%x\n", i, mcd, startblock, (MAX_MEMCARD_BLOCKS-startblock), b.Flags);
+		if ((obj.memFlags & 0x3) == 0x3) {
+			return i+1;
+		} else if ((obj.memFlags & 0x2) == 0x2) {
+			//i++
+		} else {
+			return i;
+		}
+	}
+	return i; // startblock was the last block so count = 1
+}
+
 - (void)loadMemoryCardInfoForCard:(int)theCard
 {
 	NSInteger i;
@@ -128,10 +159,59 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 
 - (void)windowDidBecomeKey:(NSNotification *)notification
 {
-	LoadMcd(1, Config.Mcd1);
+	LoadMcds(Config.Mcd1, Config.Mcd2);
 	[self loadMemoryCardInfoForCard:1];
-	LoadMcd(2, Config.Mcd2);
 	[self loadMemoryCardInfoForCard:2];
+}
+
+- (int)findFreeMemCardBlockInCard:(int)target_card length:(int)len
+{
+	int foundcount = 0, i = 0;
+	
+	NSArray *cardArray;
+	if (target_card == 1) {
+		cardArray = [self memCard1Array];
+	}else {
+		cardArray = [self memCard2Array];
+	}
+
+	
+	// search for empty (formatted) blocks first
+	while (i < MAX_MEMCARD_BLOCKS && foundcount < len) {
+		PcsxrMemoryObject *obj = [cardArray objectAtIndex:i++]; //&Blocks[target_card][++i];
+		if ((obj.memFlags & 0xFF) == 0xA0) { // if A0 but not A1
+			foundcount++;
+		} else if (foundcount >= 1) { // need to find n count consecutive blocks
+			foundcount = 0;
+		} else {
+			i++;
+		}
+		//printf("formatstatus=%x\n", Info->Flags);
+ 	}
+	
+	if (foundcount == len)
+		return (i-foundcount);
+	
+	// no free formatted slots, try to find a deleted one
+	foundcount=0;
+	i = 0;
+	while (i < MAX_MEMCARD_BLOCKS && foundcount < len) {
+		PcsxrMemoryObject *obj = [cardArray objectAtIndex:i++];
+		if ((obj.memFlags & 0xF0) == 0xA0) { // A2 or A6 f.e.
+			foundcount++;
+		} else if (foundcount >= 1) { // need to find n count consecutive blocks
+			foundcount = 0;
+		} else {
+			i++;
+		}
+		//printf("delstatus=%x\n", Info->Flags);
+ 	}
+	
+	if (foundcount == len)
+		return (i-foundcount);
+	
+ 	return -1;
+	
 }
 
 - (int)findFreeMemCardBlockInCard:(int)target_card
@@ -188,7 +268,9 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 	NSInteger memCardSelect = [sender tag];
 	NSCollectionView *cardView;
 	NSIndexSet *selection;
-	int toCard, freeSlot;
+	int toCard, fromCard, freeSlot;
+	int count;
+	int j = 0;
 	char *str, *source, *destination;
 	if (memCardSelect == 1) {
 		str = Config.Mcd1;
@@ -196,12 +278,14 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 		destination = Mcd1Data;
 		cardView = memCard2view;
 		toCard = 1;
+		fromCard = 2;
 	} else {
 		str = Config.Mcd2;
 		source = Mcd1Data;
 		destination = Mcd2Data;
 		cardView = memCard1view;
 		toCard = 2;
+		fromCard = 1;
 	}
 	selection = [cardView selectionIndexes];
 	if (!selection || [selection count] == 0) {
@@ -211,13 +295,18 @@ static inline void CopyMemcardData(char *from, char *to, int *i, char *str, int 
 	
 	NSInteger selectedIndex = [selection firstIndex];
 	
-	freeSlot = [self findFreeMemCardBlockInCard:toCard];
+	count = [self blockCount:fromCard fromIndex:selectedIndex];
+	
+	freeSlot = [self findFreeMemCardBlockInCard:toCard length:count];
 	if (freeSlot == -1) {
 		NSRunCriticalAlertPanel(NSLocalizedString(@"No Free Space", nil), [NSString stringWithFormat:NSLocalizedString(@"Memory card %d doesn't have a free block on it. Please remove some blocks on that card to continue", nil), toCard], NSLocalizedString(@"Okay", nil), nil, nil);
 		return;
 	}
 	
-	CopyMemcardData(source, destination, &freeSlot, str, selectedIndex);
+	for (j=0; j < count; j++) {
+		CopyMemcardData(source, destination, (selectedIndex+j), (freeSlot+j), str);
+		//printf("count = %i, firstfree=%i, i=%i\n", count, first_free_slot, j);
+	}
 	
 	if (toCard == 1) {
 		LoadMcd(1, Config.Mcd1);
