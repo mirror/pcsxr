@@ -33,9 +33,17 @@
 uint32_t   ulKeybits = 0;                     
 
 ////////////////////////////////////////////////////////////////////////
-// keyboard handler (LINUX)
+// keyboard handler (UNIX)
 ////////////////////////////////////////////////////////////////////////
-
+#ifdef _MACGL
+#define VK_INSERT      114
+#define VK_HOME        115
+#define VK_PRIOR       116
+#define VK_NEXT        121
+#define VK_END         119
+#define VK_DEL         117
+#define VK_F5          96
+#else
 #define VK_INSERT      65379
 #define VK_HOME        65360
 #define VK_PRIOR       65365
@@ -43,6 +51,7 @@ uint32_t   ulKeybits = 0;
 #define VK_END         65367
 #define VK_DEL         65535
 #define VK_F5          65474
+#endif
 
 void GPUkeypressed(int keycode)
 {
