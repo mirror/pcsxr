@@ -18,6 +18,7 @@
     IBOutlet NSTextField *LoadState;
     IBOutlet NSTextField *NextState;
     IBOutlet NSTextField *PrevState;
+    IBOutlet NSTextField *FrameLimit;
 }
 
 @property (assign) NSInteger configInput;

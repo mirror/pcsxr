@@ -28,6 +28,7 @@
     [self mapOutletToIdentifier:LoadState forIdentifier:@"LoadState"];
     [self mapOutletToIdentifier:NextState forIdentifier:@"NextState"];
     [self mapOutletToIdentifier:PrevState forIdentifier:@"PrevState"];
+    [self mapOutletToIdentifier:FrameLimit forIdentifier:@"FrameLimit"];
 }
 
 - (void)dealloc

@@ -142,6 +142,8 @@
 	<string>/</string>
 	<key>49</key>
 	<string>Space</string>
+	<key>114</key>
+	<string>Insert</string>
 	<key>115</key>
 	<string>Home</string>
 	<key>119</key>

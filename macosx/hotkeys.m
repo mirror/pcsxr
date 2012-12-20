@@ -16,6 +16,7 @@
 
 #define HK_MAX_STATE 10
 static id monitor;
+static id gpuMonitor;
 static int currentState = 0;
 static NSMutableDictionary *hotkeys;
 enum {
@@ -23,7 +24,8 @@ enum {
     HK_SAVE_STATE,
     HK_LOAD_STATE,
     HK_NEXT_STATE,
-    HK_PREV_STATE
+    HK_PREV_STATE,
+    HK_FRAME_LIMIT
 };
 
 void nextState() {
@@ -50,6 +52,12 @@ bool handleHotkey(NSString* keyCode) {
                     // We ignore FastForward requests if the emulation is paused
                     if(![EmuThread isPaused]) {
                         GPU_keypressed(GPU_FAST_FORWARD);
+                    }
+                    break;
+                case HK_FRAME_LIMIT:
+                    // Ignore FrameLimit requests if paused
+                    if(![EmuThread isPaused]) {
+                        GPU_keypressed(GPU_FRAME_LIMIT);
                     }
                     break;
                 case HK_SAVE_STATE:
@@ -90,11 +98,13 @@ void setupHotkeys() {
     setupHotkey(HK_LOAD_STATE, @"LoadState", [bindings objectForKey:@"LoadState"]);
     setupHotkey(HK_NEXT_STATE, @"NextState", [bindings objectForKey:@"NextState"]);
     setupHotkey(HK_PREV_STATE, @"PrevState", [bindings objectForKey:@"PrevState"]);
+    setupHotkey(HK_FRAME_LIMIT, @"FrameLimit", [bindings objectForKey:@"FrameLimit"]);
     
     currentState = 0;
 }
 
 void attachHotkeys() {
+    // Configurable hotkeys
     NSEvent* (^handler)(NSEvent*) = ^(NSEvent *event) {
         if(handleHotkey([NSString stringWithFormat:@"%d", [event keyCode]])) {
             return (NSEvent*)nil; // handled
@@ -105,9 +115,19 @@ void attachHotkeys() {
     };
     setupHotkeys();
     monitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyUpMask handler:handler];
+    
+    // GPU key presses
+    NSEvent* (^gpuKeypress)(NSEvent*) = ^(NSEvent *event) {
+        GPU_keypressed([event keyCode]);
+        return (NSEvent*)nil;
+    };
+    gpuMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:(NSKeyUpMask | NSControlKeyMask) handler:gpuKeypress];
 }
 
 void detachHotkeys() {
-    if(hotkeys)[hotkeys release];
+    [hotkeys release];
     [NSEvent removeMonitor:monitor];
+    [NSEvent removeMonitor:gpuMonitor];
+    monitor = nil;
+    gpuMonitor = nil;
 }
