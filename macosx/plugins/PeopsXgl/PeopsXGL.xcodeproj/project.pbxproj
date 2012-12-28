@@ -31,7 +31,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0271796D1678A778004AED62 /* ExtendedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExtendedKeys.h; path = ../../ExtendedKeys.h; sourceTree = "<group>"; };
 		28586CBD14651D960082B8EC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = plugins/PeopsXgl/English.lproj/NetSfPeopsOpenGLConfig.xib; sourceTree = "<group>"; };
 		28586CBF14651E560082B8EC /* NetSfPeopsOpenGLGPUInterface.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetSfPeopsOpenGLGPUInterface.xib; sourceTree = "<group>"; };
 		2B038C06069183300082466B /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -69,6 +68,7 @@
 		3F7F384613079BFD00556C34 /* draw.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = draw.h; path = ../../../plugins/peopsxgl/draw.h; sourceTree = SOURCE_ROOT; };
 		3F7F384713079BFD00556C34 /* draw.c */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = draw.c; path = ../../../plugins/peopsxgl/draw.c; sourceTree = SOURCE_ROOT; };
 		552E4CCA1474742F00FB231F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		55D42F10168D9AAE0027EBF0 /* ExtendedKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ExtendedKeys.h; path = macsrc/ExtendedKeys.h; sourceTree = "<group>"; };
 		55F36E4A146C9F9900718DE6 /* drawgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = drawgl.h; path = macsrc/drawgl.h; sourceTree = "<group>"; };
 		A191B90513F6741300D0971F /* gte_accuracy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gte_accuracy.c; path = ../../../plugins/peopsxgl/gte_accuracy.c; sourceTree = SOURCE_ROOT; };
 		A191B90613F6741300D0971F /* gte_accuracy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gte_accuracy.h; path = ../../../plugins/peopsxgl/gte_accuracy.h; sourceTree = SOURCE_ROOT; };
@@ -119,7 +119,7 @@
 		2BD2E2F40779F50B00657C69 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
-				0271796D1678A778004AED62 /* ExtendedKeys.h */,
+				55D42F10168D9AAE0027EBF0 /* ExtendedKeys.h */,
 				3F7F38021307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.h */,
 				3F7F38031307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.m */,
 				55F36E4A146C9F9900718DE6 /* drawgl.h */,

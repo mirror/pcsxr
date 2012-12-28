@@ -21,7 +21,8 @@ enum {
     
     // Fake HotKeys
     GPU_HOTKEYS = 0x020,
-    GPU_FAST_FORWARD
+    GPU_FAST_FORWARD,
+    GPU_FRAME_LIMIT
 };
 
 #endif //__EXTENDED_KEYS_H__

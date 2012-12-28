@@ -31,7 +31,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0271796B1678A767004AED62 /* ExtendedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExtendedKeys.h; path = ../../ExtendedKeys.h; sourceTree = "<group>"; };
 		28586CC814651E9B0082B8EC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsSoftGPUConfig.xib; sourceTree = "<group>"; };
 		28586CCA14651EAB0082B8EC /* NetSfPeopsSoftGPUInterface.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetSfPeopsSoftGPUInterface.xib; sourceTree = "<group>"; };
 		2B038C06069183300082466B /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -53,6 +52,7 @@
 		5555E0C21606839300C0A310 /* gpuPeteOGL2.slf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gpuPeteOGL2.slf; sourceTree = "<group>"; };
 		5555E0C31606839300C0A310 /* gpuPeteOGL2.slv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gpuPeteOGL2.slv; sourceTree = "<group>"; };
 		5555E0CA160695BF00C0A310 /* SGPUPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPUPreferences.h; path = macsrc/SGPUPreferences.h; sourceTree = "<group>"; };
+		55D42F0E168D9A7F0027EBF0 /* ExtendedKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ExtendedKeys.h; path = macsrc/ExtendedKeys.h; sourceTree = "<group>"; };
 		71E9EBF1109F24E600E98D1D /* cfg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cfg.h; path = ../../../plugins/dfxvideo/cfg.h; sourceTree = SOURCE_ROOT; };
 		71E9EBF2109F24E600E98D1D /* draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = draw.h; path = ../../../plugins/dfxvideo/draw.h; sourceTree = SOURCE_ROOT; };
 		71E9EBF3109F24E600E98D1D /* externals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = externals.h; path = ../../../plugins/dfxvideo/externals.h; sourceTree = SOURCE_ROOT; };
@@ -118,7 +118,7 @@
 		2BD2E2F40779F50B00657C69 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
-				0271796B1678A767004AED62 /* ExtendedKeys.h */,
+				55D42F0E168D9A7F0027EBF0 /* ExtendedKeys.h */,
 				2BB260A60777462E00F6854C /* PluginConfigController.h */,
 				2BB260A70777462E00F6854C /* PluginConfigController.m */,
 				2B3E5DF0062B36FB001D796E /* PluginWindowController.h */,
