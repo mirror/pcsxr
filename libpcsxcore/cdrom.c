@@ -2259,7 +2259,8 @@ void cdrWrite3(unsigned char rt) {
 			return;
 		}
 
-#if 0
+#if 1
+		// Brave Fencer Musashi, Micro Machines V3, Parasite Eve 2, etc.
 		if (cdr.Reading && !cdr.ResultReady) {
       CDREAD_INT((cdr.Mode & MODE_SPEED) ? (cdReadTime / 2) : cdReadTime);
 		}
