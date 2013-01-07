@@ -454,6 +454,9 @@ unsigned short CALLBACK SPUreadRegister(unsigned long reg)
 
  switch(r)
   {
+	case H_SPUaddr:
+     return spuAddr>>3;
+
     case H_SPUctrl:
      return spuCtrl;
 

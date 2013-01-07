@@ -122,7 +122,7 @@ unsigned int	bIrqHit = 0;
 unsigned short  spuCtrl=0;                             // some vars to store psx reg infos
 unsigned short  spuStat=0;
 unsigned short  spuIrq=0;
-unsigned long   spuAddr=0xffffffff;                    // address into spu mem
+unsigned long   spuAddr=0x200;                         // address into spu mem
 int             bEndThread=0;                          // thread handlers
 int             bThreadEnded=0;
 int             bSpuInit=0;
@@ -1333,7 +1333,7 @@ long CALLBACK SPUinit(void)
  iVolume = 3;
  iReverbOff = -1;
  spuIrq = 0;
- spuAddr = 0xffffffff;
+ spuAddr = 0x200;
  bEndThread = 0;
  bThreadEnded = 0;
  spuMemC = (unsigned char *)spuMem;
