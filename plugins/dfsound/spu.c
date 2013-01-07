@@ -903,7 +903,7 @@ GOON: ;
 
 				// decoded buffer - voice
 				decoded_voice += 2;
-                decoded_voice &= 0x400;
+				decoded_voice &= 0x3ff;
 
 
 				// status flag
@@ -952,9 +952,9 @@ GOON: ;
   MixXA();
 
 
-	// now safe to update deocded buffer ptr
+	// now safe to update decoded buffer ptr
 	decoded_ptr += ns * 2;
-    decoded_ptr &= 0x400;
+	decoded_ptr &= 0x3ff;
 
 
   ///////////////////////////////////////////////////////
