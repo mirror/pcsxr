@@ -18,7 +18,7 @@
 static id monitor;
 static id gpuMonitor;
 static int currentState = 0;
-static NSMutableDictionary *hotkeys;
+static NSMutableDictionary *hotkeys = nil;
 enum {
     HK_FAST_FORWARD,
     HK_SAVE_STATE,
@@ -86,7 +86,8 @@ bool handleHotkey(NSString* keyCode) {
 }
 
 void setupHotkey(int hk, NSString *label, NSDictionary *binding) {
-    [hotkeys setObject:[NSNumber numberWithInt:hk] forKey:[binding objectForKey:@"keyCode"]];
+	if(binding != nil)
+		[hotkeys setObject:[NSNumber numberWithInt:hk] forKey:[binding objectForKey:@"keyCode"]];
 }
 
 void setupHotkeys() {
