@@ -129,8 +129,6 @@ extern unsigned int msf2sec(char *msf);
 extern void sec2msf(unsigned int s, char *msf);
 
 
-extern u16 *iso_play_cdbuf;
-extern u16 iso_play_bufptr;
 extern long CALLBACK ISOinit(void);
 extern void CALLBACK SPUirq(void);
 extern SPUregisterCallback SPU_registerCallback;
@@ -240,6 +238,7 @@ void adjustTransferIndex()
 	}
 }
 
+// FIXME: do this in SPU instead
 void cdrDecodedBufferInterrupt()
 {
 	u16 buf_ptr[0x400], lcv;
@@ -273,30 +272,6 @@ void cdrDecodedBufferInterrupt()
 
 	Assume IRQ every wrap
 	*/
-
-	if( iso_play_cdbuf )
-	{
-		for( lcv = 0; lcv < 0x200; lcv++ )
-		{
-			// left
-			buf_ptr[ lcv ] = iso_play_cdbuf[ iso_play_bufptr ];
-
-			// right
-			buf_ptr[ lcv+0x200 ] = iso_play_cdbuf[ iso_play_bufptr+1 ];
-
-			iso_play_bufptr += 2;
-		}
-	}
-	else
-	{
-		memset( buf_ptr, 0, sizeof(buf_ptr) );
-	}
-
-
-	// feed CDDA decoded buffer manually
-	SPU_writeRegister( H_SPUaddr,0 );
-	SPU_writeDMAMem( buf_ptr, 0x800 / 2 );
-
 
 	// signal CDDA data ready
 	psxHu32ref(0x1070) |= SWAP32((u32)0x200);

@@ -27,13 +27,11 @@
 #include <process.h>
 #include <windows.h>
 #else
-#include <pthread.h>
 #include <sys/time.h>
 #include <unistd.h>
 #endif
 
 static FILE *cdHandle = NULL;
-static FILE *cddaHandle = NULL;
 static FILE *subHandle = NULL;
 
 static boolean subChanMixed = FALSE;
@@ -42,25 +40,13 @@ static boolean subChanRaw = FALSE;
 static unsigned char cdbuffer[CD_FRAMESIZE_RAW];
 static unsigned char subbuffer[SUB_FRAMESIZE];
 
-static unsigned char sndbuffer[CD_FRAMESIZE_RAW * 10];
-
-#define CDDA_FRAMETIME			(1000 * (sizeof(sndbuffer) / CD_FRAMESIZE_RAW) / 75)
-
-
 #define MODE1_DATA_SIZE			2048
 
 static boolean isMode1ISO = FALSE;
 
-
-#ifdef _WIN32
-static HANDLE threadid;
-#else
-static pthread_t threadid;
-#endif
-static unsigned int initial_offset = 0;
-static volatile boolean playing = FALSE;
+static boolean playing = FALSE;
 static boolean cddaBigEndian = FALSE;
-static volatile unsigned int cddaCurOffset = 0;
+static unsigned int cddaCurPos = 0;
 
 char* CALLBACK CDR__getDriveLetter(void);
 long CALLBACK CDR__configure(void);
@@ -122,212 +108,6 @@ static void tok2msf(char *time, char *msf) {
 	else {
 		msf[2] = 0;
 	}
-}
-
-#ifndef _WIN32
-static long GetTickCount(void) {
-	static time_t		initial_time = 0;
-	struct timeval		now;
-
-	gettimeofday(&now, NULL);
-
-	if (initial_time == 0) {
-		initial_time = now.tv_sec;
-	}
-
-	return (now.tv_sec - initial_time) * 1000L + now.tv_usec / 1000L;
-}
-#endif
-
-
-u16 *iso_play_cdbuf;
-u16 iso_play_bufptr;
-
-
-// this thread plays audio data
-#ifdef _WIN32
-static void playthread(void *param)
-#else
-static void *playthread(void *param)
-#endif
-{
-	long			d, t, i, s;
-	unsigned char	tmp;
-	int sec;
-
-	t = GetTickCount();
-
-	iso_play_cdbuf = 0;
-	iso_play_bufptr = 0;
-
-	while (playing) {
-		d = t - (long)GetTickCount();
-		if (d <= 0) {
-			d = 1;
-		}
-		else if (d > CDDA_FRAMETIME) {
-			d = CDDA_FRAMETIME;
-		}
-#ifdef _WIN32
-		Sleep(d);
-#else
-		usleep(d * 1000);
-#endif
-
-		t = GetTickCount() + CDDA_FRAMETIME;
-
-		if (subChanMixed) {
-			s = 0;
-
-			for (i = 0; i < sizeof(sndbuffer) / CD_FRAMESIZE_RAW; i++) {
-				// read one sector
-				d = fread(sndbuffer + CD_FRAMESIZE_RAW * i, 1, CD_FRAMESIZE_RAW, cddaHandle);
-				if (d < CD_FRAMESIZE_RAW) {
-					break;
-				}
-
-				s += d;
-
-				fread( subbuffer, 1, SUB_FRAMESIZE, cddaHandle );
-			}
-		}
-		else {
-			s = fread(sndbuffer, 1, sizeof(sndbuffer), cddaHandle);
-
-			sec = cddaCurOffset / CD_FRAMESIZE_RAW;
-
-			if (subHandle != NULL) {
-				fseek(subHandle, sec * SUB_FRAMESIZE, SEEK_SET);
-				fread(subbuffer, 1, SUB_FRAMESIZE, subHandle);
-			}
-		}
-
-		if (s == 0) {
-			playing = FALSE;
-			fclose(cddaHandle);
-			cddaHandle = NULL;
-			initial_offset = 0;
-			break;
-		}
-
-		if (!cdr.Muted && playing) {
-			if (cddaBigEndian) {
-				for (i = 0; i < s / 2; i++) {
-					tmp = sndbuffer[i * 2];
-					sndbuffer[i * 2] = sndbuffer[i * 2 + 1];
-					sndbuffer[i * 2 + 1] = tmp;
-				}
-			}
-
-			// wipe data track
-			if( subHandle || subChanMixed ) {
-				if( ti[ ((struct SubQ *) subbuffer)->TrackNumber ].type == DATA )
-					memset( sndbuffer, 0, s );
-			}
-
-			SPU_playCDDAchannel((short *)sndbuffer, s);
-		}
-
-
-		cddaCurOffset += s;
-
-	
-		// BIOS CD Player: Fast forward / reverse seek
-		if( cdr.FastForward ) {
-			// ~+0.25 sec
-			cddaCurOffset += CD_FRAMESIZE_RAW * 75 * 3;
-
-#if 0
-			// Bad idea: too much static
-			if( subChanInterleaved )
-				fseek( cddaHandle, s * (CD_FRAMESIZE_RAW + SUB_FRAMESIZE), SEEK_SET );
-			else
-				fseek( cddaHandle, s * CD_FRAMESIZE_RAW, SEEK_SET );
-#endif
-		}
-		else if( cdr.FastBackward ) {
-			// ~-0.25 sec
-			cddaCurOffset -= CD_FRAMESIZE_RAW * 75 * 3;
-			if( cddaCurOffset & 0x80000000 ) {
-				cddaCurOffset = 0;
-				cdr.FastBackward = 0;
-
-				playing = 0;
-				fclose(cddaHandle);
-				cddaHandle = NULL;
-				initial_offset = 0;
-				break;
-			}
-
-#if 0
-			// Bad idea: too much static
-			if( subChanInterleaved )
-				fseek( cddaHandle, s * (CD_FRAMESIZE_RAW + SUB_FRAMESIZE), SEEK_SET );
-			else
-				fseek( cddaHandle, s * CD_FRAMESIZE_RAW, SEEK_SET );
-#endif
-		}
-
-	
-		// Vib Ribbon: decoded buffer IRQ
-		iso_play_cdbuf = (u16 *)sndbuffer;
-		iso_play_bufptr = 0;
-	}
-
-#ifdef _WIN32
-	_endthread();
-#else
-	pthread_exit(0);
-	return NULL;
-#endif
-}
-
-// stop the CDDA playback
-static void stopCDDA() {
-	if (!playing) {
-		return;
-	}
-
-	playing = FALSE;
-#ifdef _WIN32
-	WaitForSingleObject(threadid, INFINITE);
-#else
-	pthread_join(threadid, NULL);
-#endif
-
-	if (cddaHandle != NULL) {
-		fclose(cddaHandle);
-		cddaHandle = NULL;
-	}
-
-	initial_offset = 0;
-}
-
-// start the CDDA playback
-static void startCDDA(unsigned int offset) {
-	if (playing) {
-		if (initial_offset == offset) {
-			return;
-		}
-		stopCDDA();
-	}
-
-	cddaHandle = fopen(GetIsoFile(), "rb");
-	if (cddaHandle == NULL) {
-		return;
-	}
-
-	initial_offset = offset;
-	cddaCurOffset = initial_offset;
-	fseek(cddaHandle, initial_offset, SEEK_SET);
-
-	playing = TRUE;
-
-#ifdef _WIN32
-	threadid = (HANDLE)_beginthread(playthread, 0, NULL);
-#else
-	pthread_create(&threadid, NULL, playthread, NULL);
-#endif
 }
 
 // this function tries to get the .toc file of the given .bin
@@ -718,7 +498,7 @@ static long CALLBACK ISOshutdown(void) {
 		fclose(subHandle);
 		subHandle = NULL;
 	}
-	stopCDDA();
+	playing = FALSE;
 	return 0;
 }
 
@@ -796,7 +576,7 @@ static long CALLBACK ISOclose(void) {
 		fclose(subHandle);
 		subHandle = NULL;
 	}
-	stopCDDA();
+	playing = FALSE;
 	return 0;
 }
 
@@ -921,20 +701,13 @@ static unsigned char * CALLBACK ISOgetBuffer(void) {
 // sector: byte 0 - minute; byte 1 - second; byte 2 - frame
 // does NOT uses bcd format
 static long CALLBACK ISOplay(unsigned char *time) {
-	if (SPU_playCDDAchannel != NULL) {
-		if (subChanMixed) {
-			startCDDA(MSF2SECT(time[0], time[1], time[2]) * (CD_FRAMESIZE_RAW + SUB_FRAMESIZE));
-		}
-		else {
-			startCDDA(MSF2SECT(time[0], time[1], time[2]) * CD_FRAMESIZE_RAW);
-		}
-	}
+	playing = TRUE;
 	return 0;
 }
 
 // stops cdda audio
 static long CALLBACK ISOstop(void) {
-	stopCDDA();
+	playing = FALSE;
 	return 0;
 }
 
@@ -957,7 +730,7 @@ static long CALLBACK ISOgetStatus(struct CdrStat *stat) {
 	}
 	
 	// relative -> absolute time
-	sect = cddaCurOffset / CD_FRAMESIZE_RAW + 150;
+	sect = cddaCurPos;
 	sec2msf(sect, (u8 *)stat->Time);
 	
 	// BIOS - boot ID (CD type)
@@ -970,6 +743,8 @@ static long CALLBACK ISOgetStatus(struct CdrStat *stat) {
 long CALLBACK ISOreadCDDA(unsigned char m, unsigned char s, unsigned char f, unsigned char *buffer) {
 	unsigned char msf[3] = {m, s, f};
 	unsigned char *p;
+
+	cddaCurPos = msf2sec(msf);
 
 	msf[0] = itob(msf[0]);
 	msf[1] = itob(msf[1]);
