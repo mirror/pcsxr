@@ -1537,9 +1537,9 @@ int Open_Iso_Proc(char *file) {
     ofn.lStructSize			= sizeof(OPENFILENAME);
     ofn.hwndOwner			= gApp.hWnd;
 
-	strcpy(szFilter, _("Psx Isos (*.iso;*.mdf;*.img;*.bin)"));
+	strcpy(szFilter, _("Psx Isos (*.iso;*.mdf;*.img;*.bin;*.cue;*.pbp;*.cbn)"));
 	str = szFilter + strlen(szFilter) + 1; 
-	strcpy(str, "*.iso;*.mdf;*.img;*.bin");
+	strcpy(str, "*.iso;*.mdf;*.img;*.bin;*.cue;*.pbp;*.cbn");
 
 	str += strlen(str) + 1;
 	strcpy(str, _("All Files"));

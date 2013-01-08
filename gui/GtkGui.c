@@ -608,11 +608,17 @@ static gchar *Open_Iso_Proc() {
 	gtk_file_filter_add_pattern(psxfilter, "*.img");
 	gtk_file_filter_add_pattern(psxfilter, "*.mdf");
 	gtk_file_filter_add_pattern(psxfilter, "*.iso");
+	gtk_file_filter_add_pattern(psxfilter, "*.cue");
+	gtk_file_filter_add_pattern(psxfilter, "*.pbp");
+	gtk_file_filter_add_pattern(psxfilter, "*.cbn");
 	gtk_file_filter_add_pattern(psxfilter, "*.BIN");
 	gtk_file_filter_add_pattern(psxfilter, "*.IMG");
 	gtk_file_filter_add_pattern(psxfilter, "*.MDF");
 	gtk_file_filter_add_pattern(psxfilter, "*.ISO");
-	gtk_file_filter_set_name(psxfilter, _("PSX Image Files (*.bin, *.img, *.mdf, *.iso)"));
+	gtk_file_filter_add_pattern(psxfilter, "*.CUE");
+	gtk_file_filter_add_pattern(psxfilter, "*.PBP");
+	gtk_file_filter_add_pattern(psxfilter, "*.CBN");
+	gtk_file_filter_set_name(psxfilter, _("PSX Image Files (*.bin, *.img, *.mdf, *.iso, *.cue, *.pbp, *.cbn)"));
 	gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (chooser), psxfilter);
 
 	allfilter = gtk_file_filter_new();
