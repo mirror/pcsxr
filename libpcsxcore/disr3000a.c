@@ -26,19 +26,19 @@
 char ostr[256];
 
 // Names of registers
-static char *disRNameGPR[] = {
+char *disRNameGPR[] = {
 	"r0", "at", "v0", "v1", "a0", "a1", "a2", "a3",
 	"t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7",
 	"s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7",
 	"t8", "t9", "k0", "k1", "gp", "sp", "fp", "ra"};
 
-static char *disRNameCP2D[] = {
+char *disRNameCP2D[] = {
 	"VXY0", "VZ0", "VXY1", "VZ1", "VXY2", "VZ2", "RGB", "OTZ",
 	"IR0", "IR1", "IR2", "IR3", "SXY0", "SXY1", "SXY2", "SXYP",
 	"SZ0", "SZ1", "SZ2", "SZ3", "RGB0", "RGB1", "RGB2", "RES1",
 	"MAC0", "MAC1", "MAC2", "MAC3", "IRGB", "ORGB", "LZCS", "LZCR"};
 
-static char *disRNameCP2C[] = {
+char *disRNameCP2C[] = {
 	"R11R12", "R13R21", "R22R23", "R31R32", "R33", "TRX", "TRY", "TRZ",
 	"L11L12", "L13L21", "L22L23", "L31L32", "L33", "RBK", "BBK", "GBK",
 	"LR1LR2", "LR3LG1", "LG2LG3", "LB1LB2", "LB3", "RFC", "GFC", "BFC",

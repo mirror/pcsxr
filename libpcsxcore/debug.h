@@ -39,6 +39,9 @@ void DebugCheckBP(u32 address, enum breakpoint_types type);
 void PauseDebugger();
 void ResumeDebugger();
 
+extern char *disRNameGPR[];
+extern char *disRNameCP2D[];
+extern char *disRNameCP2C[];
 extern char *disRNameCP0[];
 
 char* disR3000AF(u32 code, u32 pc);

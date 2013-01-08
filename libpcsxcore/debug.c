@@ -127,7 +127,9 @@ Execution flow control commands (3xx):
 391
     Restarts execution.
 395 [number]
-    Traces execution, 1 instruction by default. Formatted using %i
+    Traces execution, 1 instruction by default. Formatted using %i.
+396 [number]
+    Disassemble and print current PC in trace mode.
 398
     Soft (quick) resets.
 399
@@ -204,6 +206,8 @@ Execution flow control commands acknowledge (4xx):
     Resuming.
 495 <message>
     Tracing.
+496 <message>
+    Printing.
 498 <message>
     Soft resetting.
 499 <message>
@@ -225,7 +229,7 @@ Error messages (5xx):
     Invalid breakpoint address.
 */
 
-static int debugger_active = 0, paused = 0, trace = 0, reset = 0, resetting = 0;
+static int debugger_active = 0, paused = 0, trace = 0, printpc = 0, reset = 0, resetting = 0;
 static int mapping_e = 0, mapping_r8 = 0, mapping_r16 = 0, mapping_r32 = 0, mapping_w8 = 0, mapping_w16 = 0, mapping_w32 = 0;
 static int breakmp_e = 0, breakmp_r8 = 0, breakmp_r16 = 0, breakmp_r32 = 0, breakmp_w8 = 0, breakmp_w16 = 0, breakmp_w32 = 0;
 
@@ -389,6 +393,13 @@ void ProcessDebug() {
         }
     }
     if (!paused) {
+		if(trace && printpc)
+		{
+			char reply[256];
+			sprintf(reply, "219 %s\r\n", disR3000AF(psxMemRead32(psxRegs.pc), psxRegs.pc));
+			WriteSocket(reply, strlen(reply));
+		}
+		
         DebugCheckBP(psxRegs.pc, BE);
     }
     if (mapping_e) {
@@ -466,11 +477,11 @@ static void ProcessCommands() {
             if (!arguments) {
                 reply[0] = 0;
                 for (i = 0; i < 32; i++) {
-                    sprintf(reply, "%s211 %02X=%08X\r\n", reply, i, psxRegs.GPR.r[i]);
+                    sprintf(reply, "%s211 %02X(%2.2s)=%08X\r\n", reply, i, disRNameGPR[i], psxRegs.GPR.r[i]);
                 }
             } else {
                 if ((code >= 0) && (code < 32)) {
-                    sprintf(reply, "211 %02X=%08X\r\n", code, psxRegs.GPR.r[code]);
+                    sprintf(reply, "211 %02X(%2.2s)=%08X\r\n", code, disRNameGPR[code], psxRegs.GPR.r[code]);
                 } else {
                     sprintf(reply, "511 Invalid GPR register: %X\r\n", code);
                 }
@@ -489,11 +500,11 @@ static void ProcessCommands() {
             if (!arguments) {
                 reply[0] = 0;
                 for (i = 0; i < 32; i++) {
-                    sprintf(reply, "%s213 %02X=%08X\r\n", reply, i, psxRegs.CP0.r[i]);
+                    sprintf(reply, "%s213 %02X(%8.8s)=%08X\r\n", reply, i, disRNameCP0[i], psxRegs.CP0.r[i]);
                 }
             } else {
                 if ((code >= 0) && (code < 32)) {
-                    sprintf(reply, "213 %02X=%08X\r\n", code, psxRegs.CP0.r[code]);
+                    sprintf(reply, "213 %02X(%8.8s)=%08X\r\n", code, disRNameCP0[code], psxRegs.CP0.r[code]);
                 } else {
                     sprintf(reply, "511 Invalid COP0 register: %X\r\n", code);
                 }
@@ -509,11 +520,11 @@ static void ProcessCommands() {
             if (!arguments) {
                 reply[0] = 0;
                 for (i = 0; i < 32; i++) {
-                    sprintf(reply, "%s214 %02X=%08X\r\n", reply, i, psxRegs.CP2C.r[i]);
+                    sprintf(reply, "%s214 %02X(%6.6s)=%08X\r\n", reply, i, disRNameCP2C[i], psxRegs.CP2C.r[i]);
                 }
             } else {
                 if ((code >= 0) && (code < 32)) {
-                    sprintf(reply, "214 %02X=%08X\r\n", code, psxRegs.CP2C.r[code]);
+                    sprintf(reply, "214 %02X(%6.6s)=%08X\r\n", code, disRNameCP2C[code], psxRegs.CP2C.r[code]);
                 } else {
                     sprintf(reply, "511 Invalid COP2C register: %X\r\n", code);
                 }
@@ -529,11 +540,11 @@ static void ProcessCommands() {
             if (!arguments) {
                 reply[0] = 0;
                 for (i = 0; i < 32; i++) {
-                    sprintf(reply, "%s215 %02X=%08X\r\n", reply, i, psxRegs.CP2D.r[i]);
+                    sprintf(reply, "%s215 %02X(%4.4s)=%08X\r\n", reply, i, disRNameCP2D[i], psxRegs.CP2D.r[i]);
                 }
             } else {
                 if ((code >= 0) && (code < 32)) {
-                    sprintf(reply, "215 %02X=%08X\r\n", code, psxRegs.CP2D.r[code]);
+                    sprintf(reply, "215 %02X(%4.4s)=%08X\r\n", code, disRNameCP2D[code], psxRegs.CP2D.r[code]);
                 } else {
                     sprintf(reply, "511 Invalid COP2D register: %X\r\n", code);
                 }
@@ -1044,6 +1055,16 @@ static void ProcessCommands() {
             }
             paused = 0;
             sprintf(reply, "495 Tracing\r\n");
+            break;
+        case 0x396:
+            p = arguments;
+            if (arguments) {
+                printpc = strtol(arguments, &p, 10);
+            }
+            if (p == arguments) {
+                printpc = !printpc;
+            }
+            sprintf(reply, "496 Printing %s\r\n", printpc ? "enabled" : "disabled");
             break;
         case 0x398:
             paused = 0;
