@@ -16,81 +16,6 @@ NSDictionary *prefByteKeys;
 NSMutableArray *biosList;
 NSString *saveStatePath;
 
-static NSString *GetBin(NSString *toHandle)
-{
-    NSString *extension = [toHandle pathExtension];
-    BOOL getBin = NO;
-    if ([extension caseInsensitiveCompare:@"cue"] == NSOrderedSame)
-        getBin = YES;
-    if ([extension caseInsensitiveCompare:@"toc"] == NSOrderedSame)
-        getBin = YES;
-
-	if (getBin == YES)
-	{
-		NSString *returnPath = nil;
-		NSString *rawPath = [toHandle stringByDeletingPathExtension];
-		returnPath = [rawPath stringByAppendingPathExtension:@"bin"];
-		if(![[NSFileManager defaultManager] fileExistsAtPath:returnPath])
-		{
-			//TODO: handle case-sensitive filesystems better
-			returnPath = [rawPath stringByAppendingPathExtension:@"BIN"];
-		}
-		return returnPath;
-	} else {
-		return toHandle;
-	}
-
-}
-
-static NSString *HandleBinCue(NSString *toHandle)
-{
-	NSURL *tempURL = [[NSURL alloc] initFileURLWithPath:toHandle];
-	BOOL gotBin = NO;
-	NSString *extension = [tempURL pathExtension];
-	NSString *newName = toHandle;
-	NSURL *temp1 = [tempURL URLByDeletingLastPathComponent];
-	NSURL *temp2 = nil;
-	if ([extension caseInsensitiveCompare:@"cue"] == NSOrderedSame) {
-		//Get the bin file name from the cue.
-		NSString *cueFile = [NSString stringWithContentsOfURL:tempURL encoding:NSUTF8StringEncoding error:nil];
-		if (!cueFile) {
-			cueFile = [NSString stringWithContentsOfURL:tempURL encoding:NSASCIIStringEncoding error:nil];
-			if (!cueFile) {
-				goto badCue;
-			}
-		}
-		
-		NSRange firstQuote, lastQuote, filePath;
-		firstQuote = [cueFile rangeOfString:@"\""];
-		if (firstQuote.location == NSNotFound) {
-			goto badCue;
-		}
-		lastQuote = [cueFile rangeOfString:@".bin\"" options:NSCaseInsensitiveSearch];
-		if (lastQuote.location == NSNotFound) {
-			goto badCue;
-		}
-		
-		filePath.location = firstQuote.location + 1; //Don't include the quote symbol
-		filePath.length = (lastQuote.location + 4) - (firstQuote.location + 1 ); //Include the .bin but not the first quote symbol
-		temp2 = [temp1 URLByAppendingPathComponent:[cueFile substringWithRange:filePath]];
-		if (![[NSFileManager defaultManager] fileExistsAtPath:[temp2 path]])
-			goto badCue;
-
-		gotBin = YES;
-		
-	badCue:
-		;
-	}
-	if (gotBin == YES)
-	{
-		newName = [temp2 path];
-	} else {
-		newName = GetBin(toHandle);
-	}
-	[tempURL release];
-	return newName;
-}
-
 @implementation PcsxrController
 
 - (IBAction)ejectCD:(id)sender
@@ -117,7 +42,7 @@ static NSString *HandleBinCue(NSString *toHandle)
 		if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 			NSArray* files = [openDlg URLs];
 			SetCdOpenCaseTime(time(NULL) + 2);
-			SetIsoFile((const char *)[HandleBinCue([[files objectAtIndex:0] path]) fileSystemRepresentation]);
+			SetIsoFile((const char *)[[[files objectAtIndex:0] path] fileSystemRepresentation]);
 		}
 		[openDlg release];
 	} else {
@@ -210,7 +135,7 @@ static NSString *HandleBinCue(NSString *toHandle)
 
 - (void)runURL:(NSURL*)url
 {
-    SetIsoFile((const char *)[HandleBinCue([url path]) fileSystemRepresentation]);
+    SetIsoFile((const char *)[[url path] fileSystemRepresentation]);
     [EmuThread run];
 }
 
@@ -577,7 +502,7 @@ static NSString *HandleBinCue(NSString *toHandle)
 			}
 		}			
 		if (canHandle) {
-			isHandled = [hand handleFile:HandleBinCue(filename)];
+			isHandled = [hand handleFile:filename];
 			[hand release];
 			break;
 		}

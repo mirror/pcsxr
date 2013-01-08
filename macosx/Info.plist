@@ -111,6 +111,8 @@
 			<string>Viewer</string>
 			<key>LSItemContentTypes</key>
 			<array>
+				<string>com.sony.psp.firmware</string>
+				<string>com.codeplex.pcsxr.compressed-bin-image</string>
 				<string>com.alcohol-soft.mdfdisc</string>
 				<string>com.apple.disk-image-ndif</string>
 				<string>com.goldenhawk.cdrwin-cuesheet</string>
@@ -149,50 +151,6 @@
 	<string>PCSXR</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>UTImportedTypeDeclarations</key>
-	<array>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.plain-text</string>
-				<string>public.disk-image</string>
-			</array>
-			<key>UTTypeIdentifier</key>
-			<string>com.goldenhawk.cdrwin-cuesheet</string>
-			<key>UTTypeDescription</key>
-			<string>bin/cue Disc Image</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.mime-type</key>
-				<string>application/x-cue</string>
-				<key>public.filename-extension</key>
-				<array>
-					<string>cue</string>
-					<string>inst</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.disk-image</string>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Alcohol Disc Image</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://www.alcohol-soft.com</string>
-			<key>UTTypeIdentifier</key>
-			<string>com.alcohol-soft.mdfdisc</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>mdf</string>
-				</array>
-			</dict>
-		</dict>
-	</array>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -276,6 +234,88 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>pcsxrstate</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.plain-text</string>
+				<string>public.disk-image</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>bin/cue Disc Image</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.goldenhawk.cdrwin-cuesheet</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cue</string>
+					<string>inst</string>
+				</array>
+				<key>public.mime-type</key>
+				<string>application/x-cue</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.disk-image</string>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Alcohol Disc Image</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.alcohol-soft.mdfdisc</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://www.alcohol-soft.com</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>mdf</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.disk-image</string>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>PSP firmware dump</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.sony.psp.firmware</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>pbp</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.disk-image</string>
+				<string>public.data</string>
+				<string>public.archive</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Compressed bin Disc Image</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.codeplex.pcsxr.compressed-bin-image</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cbin</string>
+					<string>cbn</string>
 				</array>
 			</dict>
 		</dict>
