@@ -70,7 +70,7 @@ typedef struct {
 	unsigned char ResultTN[6];
 	unsigned char ResultTD[4];
 	unsigned char SetSector[4];
-	unsigned char SetSectorSeek[4];
+	unsigned char SetSectorEnd[4];
 	unsigned char SetSectorPlay[4];
 	unsigned char Track;
 	boolean Play, Muted;
@@ -87,24 +87,38 @@ typedef struct {
 	unsigned char Irq;
 	u32 eCycle;
 
-	boolean Seeked;
+	u8 Seeked;
 
 	u8 LidCheck;
 	u8 FastForward;
 	u8 FastBackward;
 
-	u8 AttenuatorLeft[2], AttenuatorRight[2];
+	u8 AttenuatorLeftToLeft, AttenuatorLeftToRight;
+	u8 AttenuatorRightToRight, AttenuatorRightToLeft;
+	u8 AttenuatorLeftToLeftT, AttenuatorLeftToRightT;
+	u8 AttenuatorRightToRightT, AttenuatorRightToLeftT;
+
+	struct {
+		unsigned char Track;
+		unsigned char Index;
+		unsigned char Relative[3];
+		unsigned char Absolute[3];
+	} subq;
+	unsigned char TrackChanged;
 } cdrStruct;
 
 extern cdrStruct cdr;
 
-void cdrDecodedBufferInterrupt();
-
 void cdrReset();
+void cdrAttenuate(s16 *buf, int samples, int stereo);
+
 void cdrInterrupt();
 void cdrReadInterrupt();
+void cdrDecodedBufferInterrupt();
 void cdrLidSeekInterrupt();
 void cdrPlayInterrupt();
+void cdrDmaInterrupt();
+void LidInterrupt();
 unsigned char cdrRead0(void);
 unsigned char cdrRead1(void);
 unsigned char cdrRead2(void);
