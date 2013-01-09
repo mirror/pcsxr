@@ -56,7 +56,7 @@ typedef struct
 void LoadStateV5(SPUFreeze_t * pF);                    // newest version
 void LoadStateUnknown(SPUFreeze_t * pF);               // unknown format
 
-extern int lastch;
+extern int lastns;
 
 ////////////////////////////////////////////////////////////////////////
 // SPUFREEZE: called by main emu on savestate load/save
@@ -141,7 +141,7 @@ long CALLBACK SPUfreeze(uint32_t ulFreezeMode,SPUFreeze_t * pF)
    LoadStateV5(pF);
  else LoadStateUnknown(pF);
 
- lastch = -1;
+ lastns = 0;
 
  // repair some globals
  for(i=0;i<=62;i+=2)

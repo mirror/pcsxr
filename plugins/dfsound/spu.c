@@ -155,8 +155,7 @@ int iFMod[NSSIZE];
 int iCycle = 0;
 short * pS;
 
-int lastch=-1;             // last channel processed on spu irq in timer mode
-static int lastns=0;       // last ns pos
+int lastns=0;              // last ns pos
 static int iSecureStart=0; // secure start counter
 
 ////////////////////////////////////////////////////////////////////////
@@ -603,19 +602,20 @@ static void *MAINThread(void *arg)
      if(dwNewChannel) iSecureStart=1;                  // if a new channel kicks in (or, of course, sound buffer runs low), we will leave the loop
     }
 
+   ns=0;
+
    //--------------------------------------------------// continue from irq handling in timer mode?
 
-   if(lastch>=0)                                       // will be -1 if no continue is pending
+   if(lastns>0)                                        // will be 0 if no continue is pending
     {
-     ch=lastch; ns=lastns; lastch=-1;                  // -> setup all kind of vars to continue
-     goto GOON;                                        // -> directly jump to the continue point
+     ns=lastns;                                        // -> setup all kind of vars to continue
+     lastns=0;
     }
 
    //--------------------------------------------------//
    //- main channel loop                              -//
    //--------------------------------------------------//
     {
-     ns=0;
 		 decoded_voice = decoded_ptr;
 
 		 while(ns<NSSIZE)                                // loop until 1 ms of data is reached
@@ -818,36 +818,6 @@ static void *MAINThread(void *arg)
              s_chan[ch].pCurr=start;                   // store values for next cycle
              s_chan[ch].s_1=s_1;
              s_chan[ch].s_2=s_2;
-
-             if(bIRQReturn)                            // special return for "spu irq - wait for cpu action"
-              {
-               bIRQReturn=0;
-               if(iUseTimer!=2)
-                {
-                 DWORD dwWatchTime=timeGetTime_spu()+2500;
-
-                 while(iSpuAsyncWait && !bEndThread &&
-                       timeGetTime_spu()<dwWatchTime)
-#ifdef _WINDOWS
-                     Sleep(1);
-#else
-                     usleep(1000L);
-#endif
-                }
-               else
-                {
-                 lastch=ch;
-                 lastns=ns;
-
-#ifdef _WINDOWS
-                 return;
-#else
-                 return 0;
-#endif
-                }
-              }
-
-GOON: ;
             }
 
            fa=s_chan[ch].SB[s_chan[ch].iSBPos++];      // get sample data
@@ -938,6 +908,32 @@ GOON: ;
 					decoded_voice = old_ptr;
 				}
 
+         if(bIRQReturn)                            // special return for "spu irq - wait for cpu action"
+          {
+           bIRQReturn=0;
+           if(iUseTimer!=2)
+            {
+             DWORD dwWatchTime=timeGetTime_spu()+2500;
+
+             while(iSpuAsyncWait && !bEndThread &&
+                   timeGetTime_spu()<dwWatchTime)
+#ifdef _WINDOWS
+                 Sleep(1);
+#else
+                 usleep(1000L);
+#endif
+            }
+           else
+            {
+             lastns=ns+1;
+
+#ifdef _WINDOWS
+             return;
+#else
+             return 0;
+#endif
+           }
+         }
 
         ns++;
       } // end ns
@@ -1341,7 +1337,7 @@ long CALLBACK SPUinit(void)
  memset((void *)s_chan, 0, (MAXCHAN + 1) * sizeof(SPUCHAN));
  pSpuIrq = 0;
  iSPUIRQWait = 1;
- lastch = -1;
+ lastns = 0;
 
  ReadConfig();                                         // read user stuff
  SetupStreams();                                       // prepare streaming
