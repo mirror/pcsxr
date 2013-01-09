@@ -13,6 +13,7 @@
 #include "plugins.h"
 #include "ExtendedKeys.h"
 #import "PcsxrController.h"
+#import "ARCBridge.h"
 
 #define HK_MAX_STATE 10
 static id monitor;
@@ -42,7 +43,7 @@ void prevState() {
     }
 }
 
-bool handleHotkey(NSString* keyCode) {
+BOOL handleHotkey(NSString* keyCode) {
     if([EmuThread active]) { // Don't catch hotkeys if there is no emulation
         NSNumber *ident = [hotkeys objectForKey:keyCode];
 
@@ -78,11 +79,11 @@ bool handleHotkey(NSString* keyCode) {
                     NSLog(@"Invalid hotkey identifier.");
             }
         
-            return true;
+            return YES;
         }
     }
     
-    return false;
+    return NO;
 }
 
 void setupHotkey(int hk, NSString *label, NSDictionary *binding) {
@@ -126,7 +127,7 @@ void attachHotkeys() {
 }
 
 void detachHotkeys() {
-    [hotkeys release];
+	RELEASEOBJ(hotkeys); hotkeys = nil;
     [NSEvent removeMonitor:monitor];
     [NSEvent removeMonitor:gpuMonitor];
     monitor = nil;

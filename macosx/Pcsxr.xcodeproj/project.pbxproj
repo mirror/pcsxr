@@ -281,6 +281,7 @@
 		55A90228147D89380037E18F /* PcsxrMemoryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrMemoryObject.m; sourceTree = "<group>"; };
 		55AD382A160C200000E9EA20 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		55AD382B160C200000E9EA20 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		55BB3493169CD42500850200 /* ARCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		55BBA690149454DE003B2CEC /* PcsxrFileHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrFileHandle.h; sourceTree = "<group>"; };
 		55BBA691149455E1003B2CEC /* PcsxrMemCardHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrMemCardHandler.h; sourceTree = "<group>"; };
 		55BBA692149455E1003B2CEC /* PcsxrMemCardHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrMemCardHandler.m; sourceTree = "<group>"; };
@@ -458,6 +459,7 @@
 			children = (
 				2BA178AD0514CE260026D74D /* Resources */,
 				2B143D00078A2CBD00AF745A /* icons */,
+				55BB3493169CD42500850200 /* ARCBridge.h */,
 				7161C2810FDED6D000225F97 /* config.h */,
 				2BA178A505148D9D0026D74D /* main.m */,
 				2BBB17DA051E4D0F00B84448 /* Plugin.c */,
@@ -489,8 +491,8 @@
 				55BBA69B1495839A003B2CEC /* PcsxrFreezeStateHandler.m */,
 				0280B7AB16764CC3007B8001 /* HotkeyController.h */,
 				0280B7AC16764CC3007B8001 /* HotkeyController.m */,
-				02717967167884C9004AED62 /* hotkeys.m */,
 				02717969167884DF004AED62 /* hotkeys.h */,
+				02717967167884C9004AED62 /* hotkeys.m */,
 				5550D2711683C923006C56B5 /* RecentItemsMenu.h */,
 				5550D2721683C923006C56B5 /* RecentItemsMenu.m */,
 			);
@@ -971,6 +973,7 @@
 		71F353F40FD98DFE00CBEC28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -997,6 +1000,7 @@
 		71F353F50FD98DFE00CBEC28 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = YES;

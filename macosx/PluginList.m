@@ -11,6 +11,7 @@
 #import "PcsxrPlugin.h"
 #include "psxcommon.h"
 #include "plugins.h"
+#import "ARCBridge.h"
 
 //NSMutableArray *plugins;
 static PluginList *sPluginList = nil;
@@ -132,18 +133,18 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 
 - (void)dealloc
 {
-	[activeGpuPlugin release];
-	[activeSpuPlugin release];
-	[activeCdrPlugin release];
-	[activePadPlugin release];
-	[activeNetPlugin release];
+	RELEASEOBJ(activeGpuPlugin);
+	RELEASEOBJ(activeSpuPlugin);
+	RELEASEOBJ(activeCdrPlugin);
+	RELEASEOBJ(activePadPlugin);
+	RELEASEOBJ(activeNetPlugin);
 	
-	[pluginList release];
+	RELEASEOBJ(pluginList);
 	
 	if (sPluginList == self)
 		sPluginList = nil;
 	
-	[super dealloc];
+	SUPERDEALLOC;
 }
 
 - (void)refreshPlugins
@@ -174,7 +175,7 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 					PcsxrPlugin *plugin = [[PcsxrPlugin alloc] initWithPath:pname];
 					if (plugin != nil) {
 						[pluginList addObject:plugin];
-						[plugin release];
+						RELEASEOBJ(plugin);
 					}
 				}
 			}
@@ -259,7 +260,90 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 
 - (BOOL)setActivePlugin:(PcsxrPlugin *)plugin forType:(int)type
 {
-	PcsxrPlugin **pluginPtr;
+#if 1
+	
+	PcsxrPlugin *toCopy = plugin;
+	PcsxrPlugin *pluginPtr = nil;
+	
+	switch (type) {
+		case PSE_LT_GPU: pluginPtr = activeGpuPlugin; break;
+		case PSE_LT_CDR: pluginPtr = activeCdrPlugin; break;
+		case PSE_LT_SPU: pluginPtr = activeSpuPlugin; break;
+		case PSE_LT_PAD: pluginPtr = activePadPlugin; break;
+		case PSE_LT_NET: pluginPtr = activeNetPlugin; break;
+		default: return NO;
+	}
+	if (toCopy == pluginPtr) {
+		return YES;
+	}
+
+	
+	BOOL active = pluginPtr && [EmuThread active];
+	BOOL wasPaused = NO;
+	if (active) {
+		// TODO: temporary freeze?
+		wasPaused = [EmuThread pauseSafe];
+		ClosePlugins();
+		ReleasePlugins();
+	}
+
+	// stop the old plugin and start the new one
+	if (pluginPtr) {
+		[pluginPtr shutdownAs:type];
+		RELEASEOBJ(pluginPtr);
+	}
+	
+	if ([toCopy runAs:type] != 0) {
+		toCopy = nil;
+	}
+		switch (type) {
+			case PSE_LT_GPU:
+				activeGpuPlugin = RETAINOBJ(toCopy);
+				break;
+			case PSE_LT_CDR:
+				activeCdrPlugin = RETAINOBJ(toCopy);
+				break;
+			case PSE_LT_SPU:
+				activeSpuPlugin = RETAINOBJ(toCopy);
+				break;
+			case PSE_LT_PAD:
+				activePadPlugin = RETAINOBJ(toCopy);
+				break;
+			case PSE_LT_NET:
+				activeNetPlugin = RETAINOBJ(toCopy);
+				break;
+	}
+	
+	
+	// write path to the correct config entry
+	const char *str;
+	if (toCopy != nil) {
+		str = [[plugin path] fileSystemRepresentation];
+		if (str == nil) {
+			str = "Invalid Plugin";
+		}
+	} else {
+		str = "Invalid Plugin";
+	}
+	
+	char **dst = [PcsxrPlugin configEntriesForType:type];
+	while (*dst) {
+		strncpy(*dst, str, MAXPATHLEN);
+		dst++;
+	}
+	
+	if (active) {
+		LoadPlugins();
+		OpenPlugins();
+		
+		if (!wasPaused) {
+			[EmuThread resume];
+		}
+	}
+	
+	return toCopy != nil;
+#else
+	PcsxrPlugin *__strong*pluginPtr;
 	switch (type) {
 		case PSE_LT_GPU: pluginPtr = &activeGpuPlugin; break;
 		case PSE_LT_CDR: pluginPtr = &activeCdrPlugin; break;
@@ -284,13 +368,12 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	// stop the old plugin and start the new one
 	if (*pluginPtr) {
 		[*pluginPtr shutdownAs:type];
-		
-		[*pluginPtr release];
+		RELEASEOBJ(*pluginPtr);
 	}
-	*pluginPtr = [plugin retain];
+	*pluginPtr = RETAINOBJ(plugin);
 	if (*pluginPtr) {
 		if ([*pluginPtr runAs:type] != 0) {
-			[*pluginPtr release];
+			RELEASEOBJ(*pluginPtr);
 			*pluginPtr = nil;
 		}
 	}
@@ -322,6 +405,8 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	}
 	
 	return *pluginPtr != nil;
+
+#endif
 }
 
 @end

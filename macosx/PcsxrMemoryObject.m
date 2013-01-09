@@ -10,6 +10,7 @@
 #import <Foundation/NSString.h>
 #import <AppKit/NSColor.h>
 #import <AppKit/NSImage.h>
+#import "ARCBridge.h"
 
 @implementation PcsxrMemoryObject
 
@@ -44,10 +45,10 @@
 #endif
 	NSImage *theImage = [[NSImage alloc] init];
 	[theImage addRepresentation:imageRep];
-	[imageRep release];
+	RELEASEOBJ(imageRep);
 	[theImage setScalesWhenResized:YES];
 	[theImage setSize:NSMakeSize(32, 32)];
-	return [theImage autorelease];
+	return AUTORELEASEOBJ(theImage);
 }
 
 - (id)initWithMcdBlock:(McdBlock *)infoBlock
@@ -55,7 +56,7 @@
 	if (self = [super init]) {
 		englishName = [[NSString alloc] initWithCString:infoBlock->Title encoding:NSASCIIStringEncoding];
 		sjisName = [[NSString alloc] initWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
-		memImage = [[PcsxrMemoryObject imageFromMcd:infoBlock->Icon] retain];
+		memImage = RETAINOBJ([PcsxrMemoryObject imageFromMcd:infoBlock->Icon]);
 		memName = [[NSString alloc] initWithCString:infoBlock->Name encoding:NSASCIIStringEncoding];
 		memID = [[NSString alloc] initWithCString:infoBlock->ID encoding:NSASCIIStringEncoding];
 		memIconCount = infoBlock->IconCount;
@@ -84,6 +85,7 @@
 @synthesize memID;
 @synthesize memIconCount;
 
+#if !__has_feature(objc_arc)
 - (void)dealloc
 {
 	[englishName release];
@@ -94,6 +96,7 @@
 	
 	[super dealloc];
 }
+#endif
 
 - (NSString *)description
 {

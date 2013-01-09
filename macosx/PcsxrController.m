@@ -10,6 +10,7 @@
 #include "plugins.h"
 #include "misc.h"
 #include "ExtendedKeys.h"
+#import "ARCBridge.h"
 
 NSDictionary *prefStringKeys;
 NSDictionary *prefByteKeys;
@@ -17,6 +18,8 @@ NSMutableArray *biosList;
 NSString *saveStatePath;
 
 @implementation PcsxrController
+
+@synthesize recentItems;
 
 - (IBAction)ejectCD:(id)sender
 {
@@ -32,8 +35,7 @@ NSString *saveStatePath;
 
 	// switch to another ISO if using internal image reader, otherwise eject the CD
 	if (UsingIso()) {
-		NSOpenPanel* openDlg = [NSOpenPanel openPanel];
-		[openDlg retain];
+		NSOpenPanel* openDlg = RETAINOBJ([NSOpenPanel openPanel]);
 
 		[openDlg setCanChooseFiles:YES];
 		[openDlg setCanChooseDirectories:NO];
@@ -44,7 +46,7 @@ NSString *saveStatePath;
 			SetCdOpenCaseTime(time(NULL) + 2);
 			SetIsoFile((const char *)[[[files objectAtIndex:0] path] fileSystemRepresentation]);
 		}
-		[openDlg release];
+		RELEASEOBJ(openDlg);
 	} else {
         char *driveLetter = CDR_getDriveLetter();
         
@@ -112,8 +114,7 @@ NSString *saveStatePath;
 
 - (IBAction)runIso:(id)sender
 {
-	NSOpenPanel* openDlg = [NSOpenPanel openPanel];
-	[openDlg retain];
+	NSOpenPanel* openDlg = RETAINOBJ([NSOpenPanel openPanel]);
 
 	[openDlg setCanChooseFiles:YES];
 	[openDlg setCanChooseDirectories:NO];
@@ -124,7 +125,7 @@ NSString *saveStatePath;
         [recentItems addRecentItem:url];
 		[self runURL:url];
     }
-	[openDlg release];
+	RELEASEOBJ(openDlg);
 }
 
 - (IBAction)runBios:(id)sender
@@ -135,8 +136,13 @@ NSString *saveStatePath;
 
 - (void)runURL:(NSURL*)url
 {
-    SetIsoFile((const char *)[[url path] fileSystemRepresentation]);
-    [EmuThread run];
+    if ([EmuThread active] == YES) {
+		SetCdOpenCaseTime(time(NULL) + 2);
+		SetIsoFile([[url path] fileSystemRepresentation]);
+	} else {
+		SetIsoFile((const char *)[[url path] fileSystemRepresentation]);
+		[EmuThread run];
+	}
 }
 
 - (IBAction)freeze:(id)sender
@@ -258,11 +264,14 @@ NSString *saveStatePath;
 	sleepInBackground = [[NSUserDefaults standardUserDefaults] boolForKey:@"PauseInBackground"];
 }
 
+
+#if !__has_feature(objc_arc)
 - (void)dealloc
 {
 	[pluginList release];
 	[super dealloc];
 }
+#endif
 
 + (void)setConfigFromDefaults
 {
@@ -439,8 +448,7 @@ NSString *saveStatePath;
 		strcpy(Config.BiosDir, "Bios/");
 		strcpy(Config.PatchesDir, "Patches/");
 
-		saveStatePath = @"sstates";
-		[saveStatePath retain];
+		saveStatePath = RETAINOBJ(@"sstates");
 	}
 
 	// set plugin path
@@ -499,14 +507,15 @@ NSString *saveStatePath;
 		for (NSString *uti in [fileHandler supportedUTIs]) {
 			if ([[NSWorkspace sharedWorkspace] type:utiFile  conformsToType:uti]) {
 				canHandle = YES;
+				break;
 			}
 		}			
 		if (canHandle) {
 			isHandled = [hand handleFile:filename];
-			[hand release];
+			RELEASEOBJ(hand);
 			break;
 		}
-		[hand release];
+		RELEASEOBJ(hand);
 
 	}
 	return isHandled;

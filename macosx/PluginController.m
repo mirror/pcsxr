@@ -1,6 +1,7 @@
 #import "PluginController.h"
 #import "PcsxrPlugin.h"
 #import "PcsxrController.h"
+#import "ARCBridge.h"
 
 @implementation PluginController
 
@@ -50,8 +51,8 @@
 
 	// remember the list
 	pluginType = type;
-	plugins = [list retain];
-	defaultKey = [[PcsxrPlugin defaultKeyForType:pluginType] retain];
+	plugins = RETAINOBJ(list);
+	defaultKey = RETAINOBJ([PcsxrPlugin defaultKeyForType:pluginType]);
 
 	// clear the previous menu items
 	[pluginMenu removeAllItems];
@@ -72,11 +73,13 @@
 	[self selectPlugin:pluginMenu];
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc
 {
 	if (plugins) [plugins release];
 	if (defaultKey) [defaultKey release];
 	[super dealloc];
 }
+#endif
 
 @end

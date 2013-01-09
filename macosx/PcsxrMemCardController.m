@@ -10,6 +10,7 @@
 #import "PcsxrMemoryObject.h"
 #import "ConfigurationController.h"
 #include "sio.h"
+#import "ARCBridge.h"
 
 #define MAX_MEMCARD_BLOCKS 15
 
@@ -42,7 +43,9 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 - (void)setMemCard1Array:(NSMutableArray *)a
 {
 	if (memCard1Array != a) {
+#if !__has_feature(objc_arc)
 		[memCard1Array release];
+#endif
 		memCard1Array = [[NSMutableArray alloc] initWithArray:a];
 	}
 }
@@ -65,7 +68,9 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 - (void)setMemCard2Array:(NSMutableArray *)a
 {
 	if (memCard2Array != a) {
+#if !__has_feature(objc_arc)
 		[memCard2Array release];
+#endif
 		memCard2Array = [[NSMutableArray alloc] initWithArray:a];
 	}
 }
@@ -129,21 +134,20 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 		PcsxrMemoryObject *ob = [[PcsxrMemoryObject alloc] initWithMcdBlock:&info];
 
 		[newArray insertObject:ob atIndex:i];
-		[ob release];
+		RELEASEOBJ(ob);
 	}
 	if (theCard == 1) {
 		[self setMemCard1Array:newArray];
 	} else {
 		[self setMemCard2Array:newArray];
 	}
-	[newArray release];
+	RELEASEOBJ(newArray);
 }
 
 - (void)memoryCardDidChangeNotification:(NSNotification *)aNote
 {
-	LoadMcd(1, Config.Mcd1);
+	LoadMcds(Config.Mcd1, Config.Mcd2);
 	[self loadMemoryCardInfoForCard:1];
-	LoadMcd(2, Config.Mcd2);
 	[self loadMemoryCardInfoForCard:2];
 }
 
@@ -400,10 +404,10 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[memCard1Array release];
-	[memCard2Array release];
+	RELEASEOBJ(memCard1Array);
+	RELEASEOBJ(memCard2Array);
 
-	[super dealloc];
+	SUPERDEALLOC;
 }
 
 - (BOOL)isMemoryBlockEmptyOnCard:(int)aCard block:(int)aBlock

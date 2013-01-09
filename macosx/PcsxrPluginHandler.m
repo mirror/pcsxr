@@ -7,6 +7,7 @@
 //
 
 #import "PcsxrPluginHandler.h"
+#import "ARCBridge.h"
 
 @implementation PcsxrPluginHandler
 
@@ -80,7 +81,7 @@
 							NSLocalizedString(@"The installation of the specified plugin failed. Please try again, or make a manual install.", nil), 
 							nil, nil, nil);
 		}
-		[wrapper release];
+		RELEASEOBJ(wrapper);
 	}
 	return YES;
 }

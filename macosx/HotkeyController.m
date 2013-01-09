@@ -8,6 +8,7 @@
  */
 
 #import "HotkeyController.h"
+#import "ARCBridge.h"
 
 #define INPUT_HOLD_TIME		0.1
 
@@ -34,12 +35,14 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	
+
+#if !__has_feature(objc_arc)
 	[hotkeysList release];
 	[keyNameTable release];
     [hotkeyOutlets release];
 	
 	[super dealloc];
+#endif
 }
 
 - (void)mapOutletToIdentifier:(id)outlet forIdentifier:(NSString*)identifier

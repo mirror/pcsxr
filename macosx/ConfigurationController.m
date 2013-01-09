@@ -6,6 +6,7 @@
 #import "PcsxrMemCardHandler.h"
 #include "psxcommon.h"
 #include "plugins.h"
+#import "ARCBridge.h"
 
 NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 
@@ -55,8 +56,7 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 	int tag = [sender tag];
 	char *mcd;
 	NSTextField *label;
-	NSOpenPanel *openDlg = [NSOpenPanel openPanel];
-	[openDlg retain];
+	NSOpenPanel *openDlg = RETAINOBJ([NSOpenPanel openPanel]);
 	NSString *path;
 
 	if (tag == 1) { mcd = Config.Mcd1; label = mcd1Label; }
@@ -77,7 +77,7 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
         
 		[ConfigurationController setMemoryCard:tag toPath:mcdPath];
     }
-	[openDlg release];
+	RELEASEOBJ(openDlg);
 }
 
 - (IBAction)mcdNewClicked:(id)sender
@@ -85,8 +85,7 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 	int tag = [sender tag];
 	char *mcd;
 	NSTextField *label;
-	NSSavePanel *openDlg = [NSSavePanel savePanel];
-	[openDlg retain];
+	NSSavePanel *openDlg = RETAINOBJ([NSSavePanel savePanel]);
 	NSString *path;
 
 	if (tag == 1) { mcd = Config.Mcd1; label = mcd1Label; }
@@ -102,13 +101,13 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
         NSString *mcdPath = [[openDlg URL] path];
 		
 		//Workaround/kludge to make sure we create a memory card before posting a notification
-		strcpy(mcd, [mcdPath fileSystemRepresentation]);
+		strlcpy(mcd, [mcdPath fileSystemRepresentation], MAXPATHLEN);
 		
 		CreateMcd(mcd);
 
 		[ConfigurationController setMemoryCard:tag toPath:mcdPath];
     }
-	[openDlg release];
+	RELEASEOBJ(openDlg);
 }
 
 - (IBAction)setVideoType:(id)sender
@@ -221,12 +220,12 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[checkBoxDefaults release];
+	RELEASEOBJ(checkBoxDefaults);
 	if (memCardEdit) {
 		[memCardEdit close];
-		[memCardEdit release];
+		RELEASEOBJ(memCardEdit);
 	}
-	[super dealloc];
+	SUPERDEALLOC;
 }
 
 - (NSString *)keyForSender:(id)sender

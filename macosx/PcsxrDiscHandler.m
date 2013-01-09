@@ -10,6 +10,8 @@
 #import "EmuThread.h"
 #include "psxcommon.h"
 #include "plugins.h"
+#import "RecentItemsMenu.h"
+#import "PcsxrController.h"
 
 @implementation PcsxrDiscHandler
 
@@ -24,7 +26,9 @@
 
 - (BOOL)handleFile:(NSString *)theFile
 {
-	if ([EmuThread active] == TRUE) {
+	PcsxrController *appDelegate = [NSApp delegate];
+	[[appDelegate recentItems] addRecentItem:[NSURL fileURLWithPath:theFile]];
+	if ([EmuThread active] == YES) {
 		SetCdOpenCaseTime(time(NULL) + 2);
 		SetIsoFile([theFile fileSystemRepresentation]);
 		//[EmuThread reset];

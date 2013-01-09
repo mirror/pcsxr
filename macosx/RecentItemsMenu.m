@@ -7,6 +7,7 @@
 //
 
 #import "RecentItemsMenu.h"
+#import "ARCBridge.h"
 
 @implementation RecentItemsMenu
 
@@ -19,7 +20,9 @@
     NSArray* recentDocuments = [[NSDocumentController sharedDocumentController] recentDocumentURLs];
     NSInteger index = 0;
     for(NSURL* url in recentDocuments) {
-        [self addMenuItem:[self createMenuItem:url] atIndex:index];
+		NSMenuItem *tempItem = [self createMenuItem:url];
+        [self addMenuItem:tempItem atIndex:index];
+		RELEASEOBJ(tempItem);
         index++;
     }
 }
@@ -28,13 +31,16 @@
 {
     [[NSDocumentController sharedDocumentController] noteNewRecentDocumentURL:documentURL];
     
-    NSMenuItem* item = [self findMenuItemByURL:documentURL];
+    NSMenuItem* item = RETAINOBJ([self findMenuItemByURL:documentURL]);
     if(item != nil) {
         [self removeItem:item];
         [self insertItem:item atIndex:0];
+		RELEASEOBJ(item);
     }
     else {
-        [self addMenuItem:[self createMenuItem:documentURL]];
+		NSMenuItem *newitem = [self createMenuItem:documentURL];
+        [self addMenuItem:newitem];
+		RELEASEOBJ(newitem);
     }
 }
 
@@ -63,16 +69,14 @@
 - (void)addMenuItem:(NSMenuItem*)item atIndex:(NSInteger)index
 {
     [self insertItem:item atIndex:index]; // insert at the top
-    [item release];
 }
 
 - (NSMenuItem*)createMenuItem:(NSURL*)documentURL
 {
-    NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:[documentURL relativePath] action:@selector(openRecentItem:) keyEquivalent:@""];
+    NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:[documentURL lastPathComponent] action:@selector(openRecentItem:) keyEquivalent:@""];
     [newItem setRepresentedObject:documentURL];
-    [newItem setEnabled:YES];
+    //[newItem setEnabled:YES];
     [newItem setTarget:self];
-    [newItem setTag:0];
     
     return newItem;
 }

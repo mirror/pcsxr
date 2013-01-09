@@ -19,6 +19,8 @@
     BOOL sleepInBackground;
     BOOL wasPausedBeforeBGSwitch;
 }
+@property (readonly) RecentItemsMenu *recentItems;
+
 - (IBAction)ejectCD:(id)sender;
 - (IBAction)pause:(id)sender;
 - (IBAction)preferences:(id)sender;

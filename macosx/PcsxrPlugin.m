@@ -10,6 +10,7 @@
 #import "PcsxrPlugin.h"
 #include "psxcommon.h"
 #include "plugins.h"
+#import "ARCBridge.h"
 
 @implementation PcsxrPlugin
 
@@ -129,13 +130,13 @@
     }
 	
     if (goodPath == nil) {
-        [self release];
+        RELEASEOBJ(self);
         return nil;
     }
 	
     pluginRef = SysLoadLibrary([goodPath fileSystemRepresentation]);
     if (pluginRef == nil) {
-        [self release];
+        RELEASEOBJ(self);
         return nil;
     }
 
@@ -153,13 +154,13 @@
         else if (([path rangeOfString: @"net" options:NSCaseInsensitiveSearch]).length != 0)
             type = PSE_LT_NET;
         else {
-            [self release];
+            RELEASEOBJ(self);
             return nil;
         }
     } else {
         type = (int)PSE_getLibType();
         if (type != PSE_LT_GPU && type != PSE_LT_CDR && type != PSE_LT_SPU && type != PSE_LT_PAD && type != PSE_LT_NET) {
-            [self release];
+            RELEASEOBJ(self);
             return nil;
         }
     }
@@ -178,8 +179,8 @@
     
     // save the current modification date
     NSDictionary *fattrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[goodPath stringByResolvingSymlinksInPath] error:NULL];
-    modDate = [[fattrs fileModificationDate] retain];
-    fullPlugPath = [goodPath retain];
+    modDate = RETAINOBJ([fattrs fileModificationDate]);
+    fullPlugPath = RETAINOBJ(goodPath);
     
     active = 0;
     
@@ -199,30 +200,30 @@
     
     if (pluginRef) SysCloseLibrary(pluginRef);
     
-    [modDate release];    
-    [path release];
-    [name release];
-    [fullPlugPath release];
+    RELEASEOBJ(modDate);
+    RELEASEOBJ(path);
+    RELEASEOBJ(name);
+    RELEASEOBJ(fullPlugPath);
     
-    [super dealloc];
+    SUPERDEALLOC;
 }
 
 - (void)runCommand:(id)arg
 {
-    NSAutoreleasePool *pool = [NSAutoreleasePool new];
-    NSString *funcName = [arg objectAtIndex:0];
-    long (*func)(void);
-    
-    func = SysLoadSym(pluginRef, [funcName cStringUsingEncoding:NSASCIIStringEncoding]);
-    if (SysLibError() == nil) {
-        func();
-    } else {
-        NSBeep();
+    @autoreleasepool {
+        NSString *funcName = [arg objectAtIndex:0];
+        long (*func)(void);
+        
+        func = SysLoadSym(pluginRef, [funcName cStringUsingEncoding:NSASCIIStringEncoding]);
+        if (SysLibError() == nil) {
+            func();
+        } else {
+            NSBeep();
+        }
+        
+        RELEASEOBJ(arg);
+        return;
     }
-    
-    [arg release];
-    [pool drain];
-    return;
 }
 
 - (long)runAs:(int)aType

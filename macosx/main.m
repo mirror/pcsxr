@@ -13,8 +13,9 @@
 #import <unistd.h>
 #include "psxcommon.h"
 #include "sio.h"
-#import <IOKit/pwr_mgt/IOPMLib.h>
+#include <IOKit/pwr_mgt/IOPMLib.h>
 #import "hotkeys.h"
+#import "ARCBridge.h"
 
 static BOOL sysInited = NO;
 //#define EMU_LOG
@@ -116,7 +117,7 @@ void SysMessage(const char *fmt, ...) {
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedFailureReasonErrorKey];
     [NSApp presentError:[NSError errorWithDomain:@"Unknown Domain" code:-1 userInfo:userInfo]];
     
-    [msg release];
+	RELEASEOBJ(msg);
 }
 
 void *SysLoadLibrary(const char *lib) {
@@ -157,7 +158,7 @@ void SysRunGui() {
 // Close mem and plugins
 void SysClose() {
     EmuShutdown();
-    ReleasePlugins();
+    //ReleasePlugins();
 
 	if (powerAssertion != kIOPMNullAssertionID) {
 		IOPMAssertionRelease(powerAssertion);
