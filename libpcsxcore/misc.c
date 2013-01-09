@@ -499,7 +499,7 @@ static const char PcsxrHeader[32] = "STv4 PCSXR v" PACKAGE_VERSION;
 
 // Savestate Versioning!
 // If you make changes to the savestate version, please increment the value below.
-static const u32 SaveVersion = 0x8b410007;
+static const u32 SaveVersion = 0x8b410008;
 
 int SaveState(const char *file) {
 	gzFile f;
