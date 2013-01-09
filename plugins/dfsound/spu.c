@@ -669,7 +669,10 @@ static void *MAINThread(void *arg)
 
 						 start=s_chan[ch].pCurr;                   // set up the current pos
 
-             if (s_chan[ch].iSilent==1 || start == (unsigned char*)-1)          // special "stop" sign
+             if (start == spuMemC)
+              s_chan[ch].bOn = 0;
+
+             if (s_chan[ch].iSilent==1 )
               {
                // silence = let channel keep running (IRQs)
 							 //s_chan[ch].bOn=0;                       // -> turn everything off
