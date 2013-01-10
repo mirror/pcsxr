@@ -302,6 +302,13 @@ NSString *saveStatePath;
 	for (NSString *key in prefByteKeys) {
 		u8 *dst = (u8 *)[[prefByteKeys objectForKey:key] pointerValue];
 		if (dst != nil) *dst = [defaults integerForKey:key];
+#ifdef __i386__
+		//i386 on OS X doesn't like the dynarec core
+		if ([key isEqualToString:@"NoDynarec"]) {
+			*dst = 1;
+			[defaults setBool:YES forKey:key];
+		}
+#endif
 	}
 
 	// special cases
@@ -495,7 +502,7 @@ NSString *saveStatePath;
 + (NSString*)saveStatePath:(int)slot
 {
     if(slot >= 0) {
-        return [saveStatePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%s-%3.3ld.pcsxrstate", CdromId, (long)slot]];
+        return [saveStatePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%s-%3.3d.pcsxrstate", CdromId, slot]];
     }
     
     return saveStatePath;

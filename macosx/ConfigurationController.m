@@ -185,6 +185,12 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 		[usesHleCell setState:NSOnState];
 		[usesHleCell setEnabled:NO];
 	}
+	
+#ifdef __i386__
+	//i386 on OS X doesn't like the dynarec core
+	[usesDynarecCell setState:NSOffState];
+	[usesDynarecCell setEnabled:NO];
+#endif
 
 	// setup labels
 	[mcd1Label setTitleWithMnemonic:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.Mcd1 length:strlen(Config.Mcd1)]];
