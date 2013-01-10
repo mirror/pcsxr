@@ -100,8 +100,6 @@ void ReadConfig()
 - (IBAction)cancel:(id)sender
 {
 	[self close];
-	[windowController release];
-	windowController = nil;
 }
 
 - (IBAction)ok:(id)sender
@@ -121,8 +119,6 @@ void ReadConfig()
 	ReadConfig();
 
 	[self close];
-	[windowController release];
-	windowController = nil;
 }
 
 - (void)loadValues

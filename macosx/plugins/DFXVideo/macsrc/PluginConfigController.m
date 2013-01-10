@@ -39,7 +39,7 @@ extern const char* PLUGLOC(char* toloc);
 #define APP_ID @"net.sf.peops.SoftGpuGLPlugin"
 #define PrefsKey APP_ID @" Settings"
 
-static PluginConfigController *windowController;
+static PluginConfigController *windowController = nil;
 char * pConfigFile=NULL;
 
 void AboutDlgProc()

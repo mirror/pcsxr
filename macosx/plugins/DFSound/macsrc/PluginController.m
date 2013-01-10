@@ -41,7 +41,7 @@ extern const char* PLUGLOC(char* toloc);
 #endif
 #define PrefsKey APP_ID @" Settings"
 
-static PluginController *pluginController;
+static PluginController *pluginController = nil;
 char * pConfigFile=NULL;
 
 void DoAbout()

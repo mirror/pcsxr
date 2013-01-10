@@ -25,7 +25,7 @@
 #define APP_ID @"net.pcsxr.DFCdrom"
 #define PrefsKey APP_ID @" Settings"
 
-static PluginConfigController *windowController;
+static PluginConfigController *windowController = nil;
 
 void AboutDlgProc()
 {

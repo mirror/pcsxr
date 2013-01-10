@@ -23,8 +23,8 @@
 #import "PadController.h"
 #include "pad.h"
 
-static NSWindow *padWindow;
-static PadController *padController;
+static NSWindow *padWindow = nil;
+static PadController *padController = nil;
 
 #define APP_ID @"net.pcsxr.DFInputPlugin"
 

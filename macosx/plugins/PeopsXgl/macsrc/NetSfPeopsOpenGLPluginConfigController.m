@@ -46,7 +46,7 @@ extern const char* PLUGLOC(char* toloc);
 #define APP_ID @"net.sf.peops.GpuOpenGLPlugin"
 #define PrefsKey APP_ID @" Settings"
 
-static NetSfPeopsOpenGLPluginConfigController *windowController;
+static NetSfPeopsOpenGLPluginConfigController *windowController = nil;
 char * pConfigFile=NULL;
 
 void AboutDlgProc()
