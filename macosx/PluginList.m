@@ -248,11 +248,11 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 - (PcsxrPlugin *)activePluginForType:(int)type
 {
 	switch (type) {
-		case PSE_LT_GPU: return activeGpuPlugin;
-		case PSE_LT_CDR: return activeCdrPlugin;
-		case PSE_LT_SPU: return activeSpuPlugin;
-		case PSE_LT_PAD: return activePadPlugin;
-		case PSE_LT_NET: return activeNetPlugin;
+		case PSE_LT_GPU: return activeGpuPlugin; break;
+		case PSE_LT_CDR: return activeCdrPlugin; break;
+		case PSE_LT_SPU: return activeSpuPlugin; break;
+		case PSE_LT_PAD: return activePadPlugin; break;
+		case PSE_LT_NET: return activeNetPlugin; break;
 	}
 	
 	return nil;
@@ -260,24 +260,20 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 
 - (BOOL)setActivePlugin:(PcsxrPlugin *)plugin forType:(int)type
 {
-#if 1
-	
-	PcsxrPlugin *toCopy = plugin;
 	PcsxrPlugin *pluginPtr = nil;
 	
 	switch (type) {
-		case PSE_LT_GPU: pluginPtr = activeGpuPlugin; break;
-		case PSE_LT_CDR: pluginPtr = activeCdrPlugin; break;
-		case PSE_LT_SPU: pluginPtr = activeSpuPlugin; break;
-		case PSE_LT_PAD: pluginPtr = activePadPlugin; break;
-		case PSE_LT_NET: pluginPtr = activeNetPlugin; break;
-		default: return NO;
+		case PSE_LT_GPU: 
+		case PSE_LT_CDR: 
+		case PSE_LT_SPU: 
+		case PSE_LT_PAD: 
+		case PSE_LT_NET: pluginPtr = [self activePluginForType:type]; break;
+		default: return NO; break;
 	}
-	if (toCopy == pluginPtr) {
+	if (plugin == pluginPtr) {
 		return YES;
 	}
 
-	
 	BOOL active = pluginPtr && [EmuThread active];
 	BOOL wasPaused = NO;
 	if (active) {
@@ -293,31 +289,30 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 		RELEASEOBJ(pluginPtr);
 	}
 	
-	if ([toCopy runAs:type] != 0) {
-		toCopy = nil;
+	if ([plugin runAs:type] != 0) {
+		plugin = nil;
 	}
 		switch (type) {
 			case PSE_LT_GPU:
-				activeGpuPlugin = RETAINOBJ(toCopy);
+				activeGpuPlugin = RETAINOBJ(plugin);
 				break;
 			case PSE_LT_CDR:
-				activeCdrPlugin = RETAINOBJ(toCopy);
+				activeCdrPlugin = RETAINOBJ(plugin);
 				break;
 			case PSE_LT_SPU:
-				activeSpuPlugin = RETAINOBJ(toCopy);
+				activeSpuPlugin = RETAINOBJ(plugin);
 				break;
 			case PSE_LT_PAD:
-				activePadPlugin = RETAINOBJ(toCopy);
+				activePadPlugin = RETAINOBJ(plugin);
 				break;
 			case PSE_LT_NET:
-				activeNetPlugin = RETAINOBJ(toCopy);
+				activeNetPlugin = RETAINOBJ(plugin);
 				break;
 	}
 	
-	
 	// write path to the correct config entry
 	const char *str;
-	if (toCopy != nil) {
+	if (plugin != nil) {
 		str = [[plugin path] fileSystemRepresentation];
 		if (str == nil) {
 			str = "Invalid Plugin";
@@ -328,7 +323,7 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	
 	char **dst = [PcsxrPlugin configEntriesForType:type];
 	while (*dst) {
-		strncpy(*dst, str, MAXPATHLEN);
+		strlcpy(*dst, str, MAXPATHLEN);
 		dst++;
 	}
 	
@@ -341,72 +336,7 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 		}
 	}
 	
-	return toCopy != nil;
-#else
-	PcsxrPlugin *__strong*pluginPtr;
-	switch (type) {
-		case PSE_LT_GPU: pluginPtr = &activeGpuPlugin; break;
-		case PSE_LT_CDR: pluginPtr = &activeCdrPlugin; break;
-		case PSE_LT_SPU: pluginPtr = &activeSpuPlugin; break;
-		case PSE_LT_PAD: pluginPtr = &activePadPlugin; break;
-		case PSE_LT_NET: pluginPtr = &activeNetPlugin; break;
-		default: return NO;
-	}
-	
-	if (plugin == *pluginPtr)
-		return YES;
-	
-	BOOL active = (*pluginPtr) && [EmuThread active];
-	BOOL wasPaused = NO;
-	if (active) {
-		// TODO: temporary freeze?
-		wasPaused = [EmuThread pauseSafe];
-		ClosePlugins();
-		ReleasePlugins();
-	}
-	
-	// stop the old plugin and start the new one
-	if (*pluginPtr) {
-		[*pluginPtr shutdownAs:type];
-		RELEASEOBJ(*pluginPtr);
-	}
-	*pluginPtr = RETAINOBJ(plugin);
-	if (*pluginPtr) {
-		if ([*pluginPtr runAs:type] != 0) {
-			RELEASEOBJ(*pluginPtr);
-			*pluginPtr = nil;
-		}
-	}
-	
-	// write path to the correct config entry
-	const char *str;
-	if (*pluginPtr != nil) {
-		str = [[plugin path] fileSystemRepresentation];
-		if (str == nil) {
-			str = "Invalid Plugin";
-		}
-	} else {
-		str = "Invalid Plugin";
-	}
-	
-	char **dst = [PcsxrPlugin configEntriesForType:type];
-	while (*dst) {
-		strncpy(*dst, str, MAXPATHLEN);
-		dst++;
-	}
-	
-	if (active) {
-		LoadPlugins();
-		OpenPlugins();
-		
-		if (!wasPaused) {
-			[EmuThread resume];
-		}
-	}
-	
-	return *pluginPtr != nil;
-
-#endif
+	return plugin != nil;
 }
 
 @end

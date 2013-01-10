@@ -230,7 +230,7 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 
 - (NSString *)keyForSender:(id)sender
 {
-	NSEnumerator *enumerator= [checkBoxDefaults keyEnumerator];
+	NSEnumerator *enumerator = [checkBoxDefaults keyEnumerator];
 	id key;
 	while ((key = [enumerator nextObject])) {
 		id object = [checkBoxDefaults objectForKey:key];

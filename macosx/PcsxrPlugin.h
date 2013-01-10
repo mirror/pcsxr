@@ -21,6 +21,9 @@
 	int active;
 }
 
+@property (readonly) NSString *path;
+@property (readonly) NSString *name;
+
 + (NSString *)prefixForType:(int)type;
 + (NSString *)defaultKeyForType:(int)type;
 + (char **)configEntriesForType:(int)type;
@@ -30,7 +33,6 @@
 
 - (NSString *)displayVersion;
 - (int)type;
-- (NSString *)path;
 - (NSUInteger)hash;
 - (NSString *)description;
 - (BOOL)hasAboutAs:(int)type;

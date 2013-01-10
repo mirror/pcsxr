@@ -93,6 +93,9 @@
     return returnArray;
 }
 
+@synthesize path;
+@synthesize name;
+
 - (id)initWithPath:(NSString *)aPath 
 {
     if (!(self = [super init])) {
@@ -103,28 +106,38 @@
     PSEgetLibVersion PSE_getLibVersion = NULL;
     PSEgetLibName    PSE_getLibName = NULL;
     
+    NSFileManager *fm = [NSFileManager defaultManager];
+    
     pluginRef = nil;
     name = nil;
     path = [aPath copy];
-    long tempVers = 0;
     NSString *goodPath = nil;
-    for (NSString *plugDir in [PcsxrPlugin pluginsPaths]) 
-    {
-        NSString *fullPath = [plugDir stringByAppendingPathComponent:path];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath]) {
-            void *tempHandle = SysLoadLibrary([fullPath fileSystemRepresentation]);
-            if (tempHandle != NULL)
-            {
-                PSEgetLibVersion tempLibVersion = SysLoadSym(tempHandle, "PSEgetLibVersion");
-                if (SysLibError() == NULL)
+    if ([aPath isAbsolutePath]) {
+        goodPath = aPath;
+    } else {
+        long tempVers = 0;
+        for (NSString *plugDir in [PcsxrPlugin pluginsPaths])
+        {
+            NSString *fullPath = [plugDir stringByAppendingPathComponent:path];
+            if ([fm fileExistsAtPath:fullPath]) {
+                void *tempHandle = SysLoadLibrary([fullPath fileSystemRepresentation]);
+                if (tempHandle != NULL)
                 {
-                    long tempVers2 = tempLibVersion();
-                    if (tempVers <= tempVers2 ){
-                        goodPath = fullPath;
-                        tempVers = tempVers2;
+                    PSEgetLibVersion tempLibVersion = SysLoadSym(tempHandle, "PSEgetLibVersion");
+                    if (SysLibError() == NULL)
+                    {
+                        long tempVers2 = tempLibVersion();
+                        if (tempVers <= tempVers2 ){
+                            goodPath = fullPath;
+                            tempVers = tempVers2;
+                            if (![plugDir isEqualToString:[fm stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)]]) {
+                                RELEASEOBJ(path);
+                                path = [goodPath copy];
+                            }
+                        }
                     }
+                    SysCloseLibrary(tempHandle);
                 }
-                SysCloseLibrary(tempHandle);
             }
         }
     }
@@ -135,7 +148,7 @@
     }
 	
     pluginRef = SysLoadLibrary([goodPath fileSystemRepresentation]);
-    if (pluginRef == nil) {
+    if (pluginRef == NULL) {
         RELEASEOBJ(self);
         return nil;
     }
@@ -334,11 +347,6 @@
 - (int)type
 {
     return type;
-}
-
-- (NSString *)path
-{
-	return path;
 }
 
 - (NSUInteger)hash
