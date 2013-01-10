@@ -1288,7 +1288,7 @@ static long CALLBACK ISOgetStatus(struct CdrStat *stat) {
 // read CDDA sector into buffer
 long CALLBACK ISOreadCDDA(unsigned char m, unsigned char s, unsigned char f, unsigned char *buffer) {
 	unsigned char msf[3] = {m, s, f};
-	unsigned int file, track, track_start;
+	unsigned int file, track, track_start = 0;
 	int ret;
 
 	cddaCurPos = msf2sec(msf);
