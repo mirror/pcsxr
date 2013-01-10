@@ -6,7 +6,6 @@
 #import "RecentItemsMenu.h"
 
 @class ConfigurationController;
-@class RecentItemsMenu;
 
 @interface PcsxrController : NSObject <NSApplicationDelegate>
 {

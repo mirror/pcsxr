@@ -418,7 +418,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 			int len, i;
 			if(szDebugText[0] && ((time(NULL) - tStart) < 2))
 			{
-				strncpy(szDispBuf, szDebugText, 63);
+				strlcpy(szDispBuf, szDebugText, 63);
 			}
 			else 
 			{

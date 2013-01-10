@@ -33,4 +33,7 @@
 - (PcsxrPlugin *)activePluginForType:(int)type;
 - (BOOL)setActivePlugin:(PcsxrPlugin *)plugin forType:(int)type;
 
+- (void)disableNetPlug;
+- (void)enableNetPlug;
+
 @end

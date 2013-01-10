@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PcsxrController.h"
 
 @class PcsxrController;
 @interface RecentItemsMenu : NSMenu {

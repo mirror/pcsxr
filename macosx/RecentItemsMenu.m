@@ -7,6 +7,7 @@
 //
 
 #import "RecentItemsMenu.h"
+#import "PcsxrController.h"
 #import "ARCBridge.h"
 
 @implementation RecentItemsMenu

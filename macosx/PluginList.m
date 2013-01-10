@@ -101,7 +101,7 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	activeGpuPlugin = activeSpuPlugin = activeCdrPlugin = activePadPlugin = activeNetPlugin = nil;
 	
 	missingPlugins = NO;
-	for (i = 0; i < sizeof(*typeList); i++) {
+	for (i = 0; i < sizeof(typeList) / sizeof(typeList[0]); i++) {
 		NSString *path = [defaults stringForKey:[PcsxrPlugin defaultKeyForType:typeList[i]]];
 		if (nil == path) {
 			missingPlugins = YES;
@@ -121,7 +121,7 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 			}
 		}
 	}
-	
+		
 	if (missingPlugins) {
 		[self refreshPlugins];
 	}
@@ -314,7 +314,7 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	const char *str;
 	if (plugin != nil) {
 		str = [[plugin path] fileSystemRepresentation];
-		if (str == nil) {
+		if (str == NULL) {
 			str = "Invalid Plugin";
 		}
 	} else {
@@ -337,6 +337,33 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	}
 	
 	return plugin != nil;
+}
+
+- (void)disableNetPlug
+{
+	char **dst = [PcsxrPlugin configEntriesForType:PSE_LT_NET];
+	while (*dst) {
+		strcpy(*dst, "Disabled");
+		dst++;
+	}
+}
+
+- (void)enableNetPlug
+{
+	PcsxrPlugin *netPlug = [self activePluginForType:PSE_LT_NET];
+	
+	const char *str = NULL;
+	if (netPlug) {
+		str = [[netPlug path] fileSystemRepresentation];
+	}
+	if (str) {
+		char **dst = [PcsxrPlugin configEntriesForType:PSE_LT_NET];
+		while (*dst) {
+			strlcpy(*dst, str, MAXPATHLEN);
+			dst++;
+		}
+	}
+	
 }
 
 @end

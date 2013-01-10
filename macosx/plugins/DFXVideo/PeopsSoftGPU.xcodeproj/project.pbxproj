@@ -58,7 +58,7 @@
 		71E9EBF3109F24E600E98D1D /* externals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = externals.h; path = ../../../plugins/dfxvideo/externals.h; sourceTree = SOURCE_ROOT; };
 		71E9EBF4109F24E600E98D1D /* fps.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fps.c; path = ../../../plugins/dfxvideo/fps.c; sourceTree = SOURCE_ROOT; };
 		71E9EBF5109F24E600E98D1D /* fps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fps.h; path = ../../../plugins/dfxvideo/fps.h; sourceTree = SOURCE_ROOT; };
-		71E9EBF6109F24E600E98D1D /* gpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gpu.c; path = ../../../plugins/dfxvideo/gpu.c; sourceTree = SOURCE_ROOT; };
+		71E9EBF6109F24E600E98D1D /* gpu.c */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 1; lastKnownFileType = sourcecode.c.c; name = gpu.c; path = ../../../plugins/dfxvideo/gpu.c; sourceTree = SOURCE_ROOT; usesTabs = 0; };
 		71E9EBF7109F24E600E98D1D /* gpu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gpu.h; path = ../../../plugins/dfxvideo/gpu.h; sourceTree = SOURCE_ROOT; };
 		71E9EBF8109F24E600E98D1D /* interp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interp.h; path = ../../../plugins/dfxvideo/interp.h; sourceTree = SOURCE_ROOT; };
 		71E9EBF9109F24E600E98D1D /* key.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = key.c; path = ../../../plugins/dfxvideo/key.c; sourceTree = SOURCE_ROOT; };

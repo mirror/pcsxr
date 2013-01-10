@@ -80,6 +80,7 @@ static NSString * const ThreadInfo = @"PSX Emu Background thread";
 		psxCpu->Execute();
 		
 	done:
+		AUTORELEASEOBJNORETURN(emuThread);
 		emuThread = nil;
 		
 		return;
@@ -115,6 +116,7 @@ static NSString * const ThreadInfo = @"PSX Emu Background thread";
 		psxCpu->Execute();
 		
 	done:
+		AUTORELEASEOBJNORETURN(emuThread);
 		emuThread = nil;
 		
 		return;

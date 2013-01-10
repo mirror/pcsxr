@@ -6,6 +6,7 @@
 #import "PcsxrPluginHandler.h"
 #import "PcsxrDiscHandler.h"
 #import "PcsxrFreezeStateHandler.h"
+#import "PluginList.h"
 #include "psxcommon.h"
 #include "plugins.h"
 #include "misc.h"
@@ -109,6 +110,11 @@ NSString *saveStatePath;
 - (IBAction)runCD:(id)sender
 {
 	SetIsoFile(NULL);
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"NetPlay"]) {
+		[[PluginList list] enableNetPlug];
+	} else {
+		[[PluginList list] disableNetPlug];
+	}
 	[EmuThread run];
 }
 
@@ -131,6 +137,7 @@ NSString *saveStatePath;
 - (IBAction)runBios:(id)sender
 {
 	SetIsoFile(NULL);
+	[[PluginList list] disableNetPlug];
 	[EmuThread runBios];
 }
 
@@ -140,6 +147,11 @@ NSString *saveStatePath;
 		SetCdOpenCaseTime(time(NULL) + 2);
 		SetIsoFile([[url path] fileSystemRepresentation]);
 	} else {
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"NetPlay"]) {
+			[[PluginList list] enableNetPlug];
+		} else {
+			[[PluginList list] disableNetPlug];
+		}
 		SetIsoFile((const char *)[[url path] fileSystemRepresentation]);
 		[EmuThread run];
 	}
@@ -277,7 +289,6 @@ NSString *saveStatePath;
 {
 	NSEnumerator *enumerator;
 	const char *str;
-	NSString *key;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	/*
@@ -288,8 +299,7 @@ NSString *saveStatePath;
 		if (str != nil && dst != nil) strncpy(dst, str, 255);
 	}*/
 
-	enumerator = [prefByteKeys keyEnumerator];
-	while ((key = [enumerator nextObject])) {
+	for (NSString *key in prefByteKeys) {
 		u8 *dst = (u8 *)[[prefByteKeys objectForKey:key] pointerValue];
 		if (dst != nil) *dst = [defaults integerForKey:key];
 	}
@@ -311,21 +321,21 @@ NSString *saveStatePath;
 	}
 
 	str = [[defaults stringForKey:@"Mcd1"] fileSystemRepresentation];
-	if (str) strncpy(Config.Mcd1, str, MAXPATHLEN);
+	if (str) strlcpy(Config.Mcd1, str, MAXPATHLEN);
 
 	str = [[defaults stringForKey:@"Mcd2"] fileSystemRepresentation];
-	if (str) strncpy(Config.Mcd2, str, MAXPATHLEN);
+	if (str) strlcpy(Config.Mcd2, str, MAXPATHLEN);
 
 	if ([defaults boolForKey:@"UseHLE"] || 0 == [biosList count]) {
 		strcpy(Config.Bios, "HLE");
 	} else {
 		str = [(NSString *)[biosList objectAtIndex:0] fileSystemRepresentation];
-		if (str != nil) strncpy(Config.Bios, str, MAXPATHLEN);
+		if (str != nil) strlcpy(Config.Bios, str, MAXPATHLEN);
 		else strcpy(Config.Bios, "HLE");
 	}
 
 	str = [[defaults stringForKey:@"Net"] fileSystemRepresentation];
-	if (str) strncpy(Config.Net, str, MAXPATHLEN);
+	if (str) strlcpy(Config.Net, str, MAXPATHLEN);
 	else {
 			strcpy(Config.Net, "Disabled");
 	}
@@ -360,13 +370,14 @@ NSString *saveStatePath;
 	const char *str;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
-		[NSNumber numberWithBool:YES], @"NoDynarec",
-		[NSNumber numberWithBool:YES], @"AutoDetectVideoType",
-		[NSNumber numberWithBool:NO], @"UseHLE",
-		[NSNumber numberWithBool:YES], @"PauseInBackground",
-		[NSNumber numberWithBool:NO], @"Widescreen",
-		nil];
-
+								 [NSNumber numberWithBool:YES], @"NoDynarec",
+								 [NSNumber numberWithBool:YES], @"AutoDetectVideoType",
+								 [NSNumber numberWithBool:NO], @"UseHLE",
+								 [NSNumber numberWithBool:YES], @"PauseInBackground",
+								 [NSNumber numberWithBool:NO], @"Widescreen",
+								 [NSNumber numberWithBool:NO], @"NetPlay",
+								 nil];
+	
 	[defaults registerDefaults:appDefaults];
 
 	prefStringKeys = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -381,7 +392,7 @@ NSString *saveStatePath;
 
 	prefByteKeys = [[NSDictionary alloc] initWithObjectsAndKeys:
 		[NSValue valueWithPointer:&Config.Xa], @"NoXaAudio",
-		[NSValue valueWithPointer:&Config.UseNet], @"NetPlay",
+		//[NSValue valueWithPointer:&Config.UseNet], @"NetPlay",
 		[NSValue valueWithPointer:&Config.Sio], @"SioIrqAlways",
 		[NSValue valueWithPointer:&Config.Mdec], @"BlackAndWhiteMDECVideo",
 		[NSValue valueWithPointer:&Config.PsxAuto], @"AutoDetectVideoType",
@@ -431,19 +442,23 @@ NSString *saveStatePath;
 
         url = [MemCardPath URLByAppendingPathComponent:@"Mcd001.mcr"];
 		str = [[url path] fileSystemRepresentation];
-		if (str != nil) strncpy(Config.Mcd1, str, MAXPATHLEN);
+		if (str != nil) strlcpy(Config.Mcd1, str, MAXPATHLEN);
 
 		url = [MemCardPath URLByAppendingPathComponent:@"Mcd002.mcr"];
 		str = [[url path] fileSystemRepresentation];
-		if (str != nil) strncpy(Config.Mcd2, str, MAXPATHLEN);
+		if (str != nil) strlcpy(Config.Mcd2, str, MAXPATHLEN);
 
 		url = [PcsxrAppSupport URLByAppendingPathComponent:@"Bios"];
 		str = [[url path] fileSystemRepresentation];
-		if (str != nil) strncpy(Config.BiosDir, str, MAXPATHLEN);
+		if (str != nil) strlcpy(Config.BiosDir, str, MAXPATHLEN);
 
 		url = [PcsxrAppSupport URLByAppendingPathComponent:@"Patches"];
 		str = [[url path] fileSystemRepresentation];
-		if (str != nil) strncpy(Config.PatchesDir, str, MAXPATHLEN);
+		if (str != nil) {
+			strlcpy(Config.PatchesDir, str, MAXPATHLEN);
+			//workaround for the fact that the PCSXR core doesn't append a forward slash to the patches dir
+			strlcat(Config.PatchesDir, "/", MAXPATHLEN);
+		}
 	} else {
 		strcpy(Config.BiosDir, "Bios/");
 		strcpy(Config.PatchesDir, "Patches/");
@@ -454,7 +469,7 @@ NSString *saveStatePath;
 	// set plugin path
 	path = [[NSBundle mainBundle] builtInPlugInsPath];
 	str = [path fileSystemRepresentation];
-	if (str != nil) strncpy(Config.PluginsDir, str, MAXPATHLEN);
+	if (str != nil) strlcpy(Config.PluginsDir, str, MAXPATHLEN);
 
 	// locate a bios
 	biosList = [[NSMutableArray alloc] init];
@@ -462,14 +477,12 @@ NSString *saveStatePath;
     NSString *biosDir = [manager stringWithFileSystemRepresentation:Config.BiosDir length:strlen(Config.BiosDir)];
     NSArray *bioses = [manager contentsOfDirectoryAtPath:biosDir error:NULL];
 	if (bioses) {
-		NSUInteger i;
-		for (i = 0; i < [bioses count]; i++) {
-			NSString *file = [bioses objectAtIndex:i];
+		for (NSString *file in bioses) {
             NSDictionary *attrib = [manager attributesOfItemAtPath:[[biosDir stringByAppendingPathComponent:file] stringByResolvingSymlinksInPath] error:NULL];
 
 			if ([[attrib fileType] isEqualToString:NSFileTypeRegular]) {
 				unsigned long long size = [attrib fileSize];
-				if (([attrib fileSize] % (256 * 1024)) == 0 && size > 0) {
+				if ((size % (256 * 1024)) == 0 && size > 0) {
 					[biosList addObject:file];
 				}
 			}

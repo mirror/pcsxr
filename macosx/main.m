@@ -26,7 +26,7 @@ int main(int argc, const char *argv[]) {
         char parentdir[MAXPATHLEN];
         char *c;
 
-        strncpy ( parentdir, argv[0], sizeof(parentdir) );
+        strlcpy ( parentdir, argv[0], sizeof(parentdir) );
         c = (char*) parentdir;
 
         while (*c != '\0')     /* go to end */
@@ -74,7 +74,7 @@ int SysInit() {
 
 	LoadMcds(Config.Mcd1, Config.Mcd2);
 
-	IOReturn success= IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, CFSTR("PSX Emu Running"), &powerAssertion);
+	IOReturn success = IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, CFSTR("PSX Emu Running"), &powerAssertion);
 	if (success != kIOReturnSuccess) {
 		NSLog(@"Unable to stop sleep, error code %d", success);
 	}

@@ -17,11 +17,11 @@
 + (NSString *)prefixForType:(int)aType
 {
     switch (aType) {
-        case PSE_LT_GPU: return @"GPU";
-        case PSE_LT_CDR: return @"CDR";
-        case PSE_LT_SPU: return @"SPU";
-        case PSE_LT_PAD: return @"PAD";
-        case PSE_LT_NET: return @"NET";
+        case PSE_LT_GPU: return @"GPU"; break;
+        case PSE_LT_CDR: return @"CDR"; break;
+        case PSE_LT_SPU: return @"SPU"; break;
+        case PSE_LT_PAD: return @"PAD"; break;
+        case PSE_LT_NET: return @"NET"; break;
     }
     
     return @"";
@@ -127,7 +127,7 @@
                     if (SysLibError() == NULL)
                     {
                         long tempVers2 = tempLibVersion();
-                        if (tempVers <= tempVers2 ){
+                        if (tempVers < tempVers2 ){
                             goodPath = fullPath;
                             tempVers = tempVers2;
                             if (![plugDir isEqualToString:[fm stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)]]) {
@@ -362,6 +362,14 @@
         return [path lastPathComponent];
     
     return [NSString stringWithFormat:@"%@ %@ [%@]", name, [self displayVersion], [path lastPathComponent]];
+}
+
+- (NSString*)debugDescription
+{
+    if (name == nil) {
+        return fullPlugPath;
+    }
+    return [NSString stringWithFormat:@"%@ %@ [%@]", name, [self displayVersion], fullPlugPath];
 }
 
 // the plugin will check if it's still valid and return the status
