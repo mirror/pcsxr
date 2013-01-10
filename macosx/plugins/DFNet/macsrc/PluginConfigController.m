@@ -22,14 +22,14 @@
 #import "PluginConfigController.h"
 #include "dfnet.h"
 
-#define kIPADDRKEY @"IP Address"
-#define kIPPORT @"IP Port"
-#define kPLAYERNUM @"Player Number"
+NSString * const kIPADDRKEY = @"IP Address";
+NSString * const kIPPORT = @"IP Port";
+NSString * const kPLAYERNUM = @"Player Number";
 
 #define APP_ID @"net.codeplex.pcsxr.DFNet"
 #define PrefsKey APP_ID @" Settings"
 
-static PluginConfigController *windowController;
+static PluginConfigController *windowController = nil;
 
 void AboutDlgProc()
 {
@@ -82,7 +82,7 @@ void ReadConfig()
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-								[NSMutableDictionary dictionaryWithObjectsAndKeys:
+								[NSDictionary dictionaryWithObjectsAndKeys:
 								 @"127.0.0.1",kIPADDRKEY,
 								 [NSNumber numberWithInt:33306], kIPPORT,
 								 [NSNumber numberWithInt:1], kPLAYERNUM,
@@ -92,7 +92,7 @@ void ReadConfig()
 
 	conf.PortNum = [[keyValues objectForKey:kIPPORT] intValue];
 	conf.PlayerNum = [[keyValues objectForKey:kPLAYERNUM] intValue];
-	strcpy(conf.ipAddress, [[keyValues objectForKey:kIPADDRKEY] cStringUsingEncoding:NSASCIIStringEncoding]);
+	strlcpy(conf.ipAddress, [[keyValues objectForKey:kIPADDRKEY] cStringUsingEncoding:NSASCIIStringEncoding], sizeof(conf.ipAddress));
 }
 
 @implementation PluginConfigController
@@ -100,6 +100,8 @@ void ReadConfig()
 - (IBAction)cancel:(id)sender
 {
 	[self close];
+	[windowController release];
+	windowController = nil;
 }
 
 - (IBAction)ok:(id)sender
@@ -119,6 +121,8 @@ void ReadConfig()
 	ReadConfig();
 
 	[self close];
+	[windowController release];
+	windowController = nil;
 }
 
 - (void)loadValues
