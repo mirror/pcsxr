@@ -233,8 +233,7 @@ extern SPUregisterCallback SPU_registerCallback;
 
 static void setIrq(void)
 {
-	// to notaz: This case cause "Slow Boot" freeze. //edgbla
-	//if (cdr.Stat & cdr.Reg2)
+	if (cdr.Stat & cdr.Reg2)
 		psxHu32ref(0x1070) |= SWAP32((u32)0x4);
 }
 
