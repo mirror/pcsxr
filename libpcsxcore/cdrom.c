@@ -1204,6 +1204,15 @@ void cdrReadInterrupt() {
 		return;
 	}
 
+	if ((psxHu32ref(0x1070) & psxHu32ref(0x1074) & SWAP32((u32)0x4)) && !cdr.ReadRescheduled) {
+		// HACK: with BIAS 2, emulated CPU is often slower than real thing,
+		// game may be unfinished with prev data read, so reschedule
+		// (Brave Fencer Musashi)
+		CDREAD_INT(cdReadTime / 2);
+		cdr.ReadRescheduled = 1;
+		return;
+	}
+
 	cdr.OCUP = 1;
 	SetResultSize(1);
 	cdr.StatP |= STATUS_READ|STATUS_ROTATING;
@@ -1263,6 +1272,7 @@ void cdrReadInterrupt() {
 	}
 
 	cdr.Readed = 0;
+	cdr.ReadRescheduled = 0;
 
 	CDREAD_INT((cdr.Mode & MODE_SPEED) ? (cdReadTime / 2) : cdReadTime);
 
