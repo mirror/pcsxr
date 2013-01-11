@@ -36,91 +36,87 @@ static NSString * const ThreadInfo = @"PSX Emu Background thread";
 
 - (void)EmuThreadRun:(id)anObject
 {
-	@autoreleasepool {
-		[[NSThread currentThread] setName:ThreadInfo];
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(emuWindowDidClose:)
-													 name:@"emuWindowDidClose" object:nil];
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(emuWindowWantPause:)
-													 name:@"emuWindowWantPause" object:nil];
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(emuWindowWantResume:)
-													 name:@"emuWindowWantResume" object:nil];
-		
-		// we shouldn't change the priority, since we might depend on subthreads
-		//[NSThread setThreadPriority:1.0-((1.0-[NSThread threadPriority])/4.0)];
-		
-		// Do processing here
-		if (OpenPlugins() == -1)
-			goto done;
-		
-		setjmp(restartJmp);
-		
-		int res = CheckCdrom();
-		if (res == -1) {
-			ClosePlugins();
-			SysMessage(_("Could not check CD-ROM!\n"));
-			goto done;
-		}
-		
-		// Auto-detect: region first, then rcnt reset
-		EmuReset();
-		
-		LoadCdrom();
-		
-		if (defrostPath) {
-			LoadState([defrostPath fileSystemRepresentation]);
-			RELEASEOBJ(defrostPath); defrostPath = nil;
-		}
-		
-		psxCpu->Execute();
-		
-	done:
-		AUTORELEASEOBJNORETURN(emuThread);
-		emuThread = nil;
-		
-		return;
+	[[NSThread currentThread] setName:ThreadInfo];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(emuWindowDidClose:)
+												 name:@"emuWindowDidClose" object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(emuWindowWantPause:)
+												 name:@"emuWindowWantPause" object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(emuWindowWantResume:)
+												 name:@"emuWindowWantResume" object:nil];
+	
+	// we shouldn't change the priority, since we might depend on subthreads
+	//[NSThread setThreadPriority:1.0-((1.0-[NSThread threadPriority])/4.0)];
+	
+	// Do processing here
+	if (OpenPlugins() == -1)
+		goto done;
+	
+	setjmp(restartJmp);
+	
+	int res = CheckCdrom();
+	if (res == -1) {
+		ClosePlugins();
+		SysMessage(_("Could not check CD-ROM!\n"));
+		goto done;
 	}
+	
+	// Auto-detect: region first, then rcnt reset
+	EmuReset();
+	
+	LoadCdrom();
+	
+	if (defrostPath) {
+		LoadState([defrostPath fileSystemRepresentation]);
+		RELEASEOBJ(defrostPath); defrostPath = nil;
+	}
+	
+	psxCpu->Execute();
+	
+done:
+	AUTORELEASEOBJNORETURN(emuThread);
+	emuThread = nil;
+	
+	return;
 }
 
 - (void)EmuThreadRunBios:(id)anObject
 {
-	@autoreleasepool {
-		[[NSThread currentThread] setName:ThreadInfo];
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(emuWindowDidClose:)
-													 name:@"emuWindowDidClose" object:nil];
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(emuWindowWantPause:)
-													 name:@"emuWindowWantPause" object:nil];
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(emuWindowWantResume:)
-													 name:@"emuWindowWantResume" object:nil];
-		
-		// we shouldn't change the priority, since we might depend on subthreads
-		//[NSThread setThreadPriority:1.0-((1.0-[NSThread threadPriority])/4.0)];
-		
-		// Do processing here
-		if (OpenPlugins() == -1)
-			goto done;
-		
-		EmuReset();
-		
-		psxCpu->Execute();
-		
-	done:
-		AUTORELEASEOBJNORETURN(emuThread);
-		emuThread = nil;
-		
-		return;
-	}
+	[[NSThread currentThread] setName:ThreadInfo];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(emuWindowDidClose:)
+												 name:@"emuWindowDidClose" object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(emuWindowWantPause:)
+												 name:@"emuWindowWantPause" object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(emuWindowWantResume:)
+												 name:@"emuWindowWantResume" object:nil];
+	
+	// we shouldn't change the priority, since we might depend on subthreads
+	//[NSThread setThreadPriority:1.0-((1.0-[NSThread threadPriority])/4.0)];
+	
+	// Do processing here
+	if (OpenPlugins() == -1)
+		goto done;
+	
+	EmuReset();
+	
+	psxCpu->Execute();
+	
+done:
+	AUTORELEASEOBJNORETURN(emuThread);
+	emuThread = nil;
+	
+	return;
 }
 
 - (void)dealloc
@@ -152,58 +148,56 @@ static NSString * const ThreadInfo = @"PSX Emu Background thread";
 /* called periodically from the emulation thread */
 - (void)handleEvents
 {
-	/* only do a trylock here, since we're not interested in blocking, 
-	   and we can just handle events next time round */
+	/* only do a trylock here, since we're not interested in blocking,
+	 and we can just handle events next time round */
 	if (pthread_mutex_trylock(&eventMutex) == 0) {
 		while (safeEvent) {
-			@autoreleasepool {
-				if (safeEvent & EMUEVENT_STOP) {
-					/* signify that the emulation has stopped */
-					AUTORELEASEOBJNORETURN(emuThread);
-					emuThread = nil;
-					paused = NO;
-					
-					/* better unlock the mutex before killing ourself */
-					pthread_mutex_unlock(&eventMutex);
-					
-					ClosePlugins();
-					SysClose();
-					
-					//[[NSThread currentThread] autorelease];
-					[NSThread exit];
-					return;
-				}
+			if (safeEvent & EMUEVENT_STOP) {
+				/* signify that the emulation has stopped */
+				AUTORELEASEOBJNORETURN(emuThread);
+				emuThread = nil;
+				paused = NO;
 				
-				if (safeEvent & EMUEVENT_RESET) {
+				/* better unlock the mutex before killing ourself */
+				pthread_mutex_unlock(&eventMutex);
+				
+				ClosePlugins();
+				SysClose();
+				
+				//[[NSThread currentThread] autorelease];
+				[NSThread exit];
+				return;
+			}
+			
+			if (safeEvent & EMUEVENT_RESET) {
 #if 0
-					/* signify that the emulation has stopped */
-					[emuThread autorelease];
-					emuThread = nil;
-					
-					/* better unlock the mutex before killing ourself */
-					pthread_mutex_unlock(&eventMutex);
-					
-					ClosePlugins();
-					
-					// start a new emulation thread
-					[EmuThread run];
-					
-					//[[NSThread currentThread] autorelease];
-					[NSThread exit];
-					return;
-#else
-					safeEvent &= ~EMUEVENT_RESET;
-					pthread_mutex_unlock(&eventMutex);
-					
-					longjmp(restartJmp, 0);
-#endif
-				}
+				/* signify that the emulation has stopped */
+				[emuThread autorelease];
+				emuThread = nil;
 				
-				if (safeEvent & EMUEVENT_PAUSE) {
-					paused = 2;
-					/* wait until we're signalled */
-					pthread_cond_wait(&eventCond, &eventMutex);
-				}
+				/* better unlock the mutex before killing ourself */
+				pthread_mutex_unlock(&eventMutex);
+				
+				ClosePlugins();
+				
+				// start a new emulation thread
+				[EmuThread run];
+				
+				//[[NSThread currentThread] autorelease];
+				[NSThread exit];
+				return;
+#else
+				safeEvent &= ~EMUEVENT_RESET;
+				pthread_mutex_unlock(&eventMutex);
+				
+				longjmp(restartJmp, 0);
+#endif
+			}
+			
+			if (safeEvent & EMUEVENT_PAUSE) {
+				paused = 2;
+				/* wait until we're signalled */
+				pthread_cond_wait(&eventCond, &eventMutex);
 			}
 		}
 		pthread_mutex_unlock(&eventMutex);
