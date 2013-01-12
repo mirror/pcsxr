@@ -144,7 +144,7 @@ static int parsetoc(const char *isofile) {
 	char			linebuf[256], dummy[256], name[256];
 	char			*token;
 	char			time[20], time2[20];
-	unsigned int	t, sector_offs;
+	unsigned int	t, sector_offs, sector_size;
 
 	numtracks = 0;
 
@@ -180,6 +180,7 @@ static int parsetoc(const char *isofile) {
 	memset(&ti, 0, sizeof(ti));
 	cddaBigEndian = TRUE; // cdrdao uses big-endian for CD Audio
 
+	sector_size = CD_FRAMESIZE_RAW;
 	sector_offs = 2 * 75;
 
 	// parse the .toc file
@@ -204,6 +205,7 @@ static int parsetoc(const char *isofile) {
 				if (token != NULL && !strncmp(token, "RW_RAW", 6)) {
 					subChanMixed = TRUE;
 					subChanRaw = TRUE;
+					sector_size = CD_FRAMESIZE_RAW + SUB_FRAMESIZE;
 				}
 			}
 			else if (!strncmp(token, "AUDIO", 5)) {
@@ -214,8 +216,7 @@ static int parsetoc(const char *isofile) {
 			if (ti[numtracks].type == CDDA) {
 				sscanf(linebuf, "DATAFILE \"%[^\"]\" #%d %8s", name, &t, time2);
 				ti[numtracks].start_offset = t;
-				t /= CD_FRAMESIZE_RAW + (subChanMixed ? SUB_FRAMESIZE : 0);
-				t += sector_offs;
+				t = t / sector_size + sector_offs;
 				sec2msf(t, (char *)&ti[numtracks].start);
 				tok2msf((char *)&time2, (char *)&ti[numtracks].length);
 			}
@@ -227,9 +228,9 @@ static int parsetoc(const char *isofile) {
 		else if (!strcmp(token, "FILE")) {
 			sscanf(linebuf, "FILE \"%[^\"]\" #%d %8s %8s", name, &t, time, time2);
 			tok2msf((char *)&time, (char *)&ti[numtracks].start);
+			t += msf2sec(ti[numtracks].start) * sector_size;
 			ti[numtracks].start_offset = t;
-			t /= CD_FRAMESIZE_RAW + (subChanMixed ? SUB_FRAMESIZE : 0);
-			t += msf2sec(ti[numtracks].start) + sector_offs;
+			t = t / sector_size + sector_offs;
 			sec2msf(t, (char *)&ti[numtracks].start);
 			tok2msf((char *)&time2, (char *)&ti[numtracks].length);
 		}
@@ -239,7 +240,7 @@ static int parsetoc(const char *isofile) {
 			sector_offs += msf2sec(dummy);
 			if (numtracks > 1) {
 				t = ti[numtracks - 1].start_offset;
-				t /= CD_FRAMESIZE_RAW + (subChanMixed ? SUB_FRAMESIZE : 0);
+				t /= sector_size;
 				pregapOffset = t + msf2sec(ti[numtracks - 1].length);
 			}
 		}
