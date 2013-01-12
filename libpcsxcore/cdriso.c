@@ -1295,10 +1295,18 @@ long CALLBACK ISOreadCDDA(unsigned char m, unsigned char s, unsigned char f, uns
 	cddaCurPos = msf2sec(msf);
 
 	// find current track index
-	for (track = numtracks; track > 1; track--) {
+	for (track = numtracks; ; track--) {
 		track_start = msf2sec(ti[track].start);
 		if (track_start <= cddaCurPos)
 			break;
+		if (track == 1)
+			break;
+	}
+
+	// data tracks play silent
+	if (ti[track].type != CDDA) {
+		memset(buffer, 0, CD_FRAMESIZE_RAW);
+		return 0;
 	}
 
 	file = 1;

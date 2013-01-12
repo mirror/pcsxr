@@ -659,7 +659,7 @@ void cdrPlayInterrupt()
 
 	if (!cdr.Play) return;
 
-	if (CDR_readCDDA && !cdr.Muted && cdr.CurTrack > 1) {
+	if (CDR_readCDDA && !cdr.Muted) {
 		CDR_readCDDA(cdr.SetSectorPlay[0], cdr.SetSectorPlay[1],
 			cdr.SetSectorPlay[2], cdr.Transfer);
 
