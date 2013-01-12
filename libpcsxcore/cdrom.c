@@ -1718,6 +1718,8 @@ void cdrReset() {
 	cdr.File = 1;
 	cdr.Channel = 1;
 	cdr.transferIndex = 0;
+	cdr.Reg2 = 0x1f;
+	cdr.Stat = NoIntr;
 
 	// BIOS player - default values
 	cdr.AttenuatorLeftToLeft = 0x80;
