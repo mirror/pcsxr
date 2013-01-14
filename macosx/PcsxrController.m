@@ -6,7 +6,6 @@
 #import "PcsxrPluginHandler.h"
 #import "PcsxrDiscHandler.h"
 #import "PcsxrFreezeStateHandler.h"
-#import "PluginList.h"
 #include "psxcommon.h"
 #include "plugins.h"
 #include "misc.h"
@@ -111,9 +110,9 @@ NSString *saveStatePath;
 {
 	SetIsoFile(NULL);
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"NetPlay"]) {
-		[[PluginList list] enableNetPlug];
+		[pluginList enableNetPlug];
 	} else {
-		[[PluginList list] disableNetPlug];
+		[pluginList disableNetPlug];
 	}
 	[EmuThread run];
 }
@@ -137,7 +136,7 @@ NSString *saveStatePath;
 - (IBAction)runBios:(id)sender
 {
 	SetIsoFile(NULL);
-	[[PluginList list] disableNetPlug];
+	[pluginList disableNetPlug];
 	[EmuThread runBios];
 }
 
@@ -148,9 +147,9 @@ NSString *saveStatePath;
 		SetIsoFile([[url path] fileSystemRepresentation]);
 	} else {
 		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"NetPlay"]) {
-			[[PluginList list] enableNetPlug];
+			[pluginList enableNetPlug];
 		} else {
-			[[PluginList list] disableNetPlug];
+			[pluginList disableNetPlug];
 		}
 		SetIsoFile((const char *)[[url path] fileSystemRepresentation]);
 		[EmuThread run];
@@ -287,7 +286,6 @@ NSString *saveStatePath;
 
 + (void)setConfigFromDefaults
 {
-	NSEnumerator *enumerator;
 	const char *str;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 

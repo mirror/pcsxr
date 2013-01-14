@@ -36,7 +36,7 @@
         case PSE_LT_SPU:
         case PSE_LT_PAD:
         case PSE_LT_NET:
-            return [NSString stringWithFormat:@"Plugin%@", [PcsxrPlugin prefixForType:aType]];
+            return [NSString stringWithFormat:@"Plugin%@", [self prefixForType:aType]];
             break;
         default:
             return @"";
@@ -68,27 +68,29 @@
     static NSArray *returnArray = nil;
     if (returnArray == nil)
     {
-        NSURL *supportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
-        NSURL *libraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
-        NSURL *localSupportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:YES error:NULL];
-        NSURL *localLibraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:YES error:NULL];
-    
-        NSMutableArray *mutArray = [NSMutableArray arrayWithCapacity:5];
-    
-        [mutArray addObject:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)]];
-        NSURL *url = [localLibraryURL URLByAppendingPathComponent:@"Playstation Emulator Plugins"];
-        if ([url checkResourceIsReachableAndReturnError:NULL])
-            [mutArray addObject:[url path]];
-        url = [[localSupportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"PlugIns"];
-        if ([url checkResourceIsReachableAndReturnError:NULL])
-            [mutArray addObject:[url path]];
-        url = [libraryURL URLByAppendingPathComponent:@"Playstation Emulator Plugins"];
-        if ([url checkResourceIsReachableAndReturnError:NULL])
-            [mutArray addObject:[url path]];
-        url = [[supportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"PlugIns"];
-        if ([url checkResourceIsReachableAndReturnError:NULL])
-            [mutArray addObject:[url path]];
-        returnArray = [[NSArray alloc] initWithArray:mutArray];
+        @autoreleasepool {
+            NSURL *supportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+            NSURL *libraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+            NSURL *localSupportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:YES error:NULL];
+            NSURL *localLibraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:YES error:NULL];
+            
+            NSMutableArray *mutArray = [NSMutableArray arrayWithCapacity:5];
+            
+            [mutArray addObject:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)]];
+            NSURL *url = [localLibraryURL URLByAppendingPathComponent:@"Playstation Emulator Plugins"];
+            if ([url checkResourceIsReachableAndReturnError:NULL])
+                [mutArray addObject:[url path]];
+            url = [[localSupportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"PlugIns"];
+            if ([url checkResourceIsReachableAndReturnError:NULL])
+                [mutArray addObject:[url path]];
+            url = [libraryURL URLByAppendingPathComponent:@"Playstation Emulator Plugins"];
+            if ([url checkResourceIsReachableAndReturnError:NULL])
+                [mutArray addObject:[url path]];
+            url = [[supportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"PlugIns"];
+            if ([url checkResourceIsReachableAndReturnError:NULL])
+                [mutArray addObject:[url path]];
+            returnArray = [[NSArray alloc] initWithArray:mutArray];
+        }
     }
     return returnArray;
 }
@@ -191,7 +193,7 @@
     }
     
     // save the current modification date
-    NSDictionary *fattrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[goodPath stringByResolvingSymlinksInPath] error:NULL];
+    NSDictionary *fattrs = [fm attributesOfItemAtPath:[goodPath stringByResolvingSymlinksInPath] error:NULL];
     modDate = RETAINOBJ([fattrs fileModificationDate]);
     fullPlugPath = RETAINOBJ(goodPath);
     
@@ -213,12 +215,14 @@
     
     if (pluginRef) SysCloseLibrary(pluginRef);
     
-    RELEASEOBJ(modDate);
-    RELEASEOBJ(path);
-    RELEASEOBJ(name);
-    RELEASEOBJ(fullPlugPath);
+#if !__has_feature(objc_arc)
+    [modDate release];
+    [path release];
+    [name release];
+    [fullPlugPath release];
     
-    SUPERDEALLOC;
+    [super dealloc];
+#endif
 }
 
 - (void)runCommand:(id)arg
@@ -369,7 +373,7 @@
     if (name == nil) {
         return fullPlugPath;
     }
-    return [NSString stringWithFormat:@"%@ %@ [%@]", name, [self displayVersion], fullPlugPath];
+    return [NSString stringWithFormat:@"%@, %@ [%@]", name, [self displayVersion], fullPlugPath];
 }
 
 // the plugin will check if it's still valid and return the status
