@@ -99,10 +99,13 @@ static void iFlushRegs() {
 	}
 }
 
-static void iRet() {
-	/* store cycle */
+static void iStoreCycle() {
 	count = ((pc - pcold) / 4) * BIAS;
 	ADD32ItoM((u32)&psxRegs.cycle, count);
+}
+
+static void iRet() {
+	iStoreCycle();
 	if (resp) ADD32ItoR(ESP, resp);
 	RET();
 }
@@ -181,11 +184,13 @@ static void SetBranch() {
 	}
 
 	iFlushRegs();
+	iStoreCycle();
 	MOV32MtoR(EAX, (u32)&target);
 	MOV32RtoM((u32)&psxRegs.pc, EAX);
 	CALLFunc((u32)psxBranchTest);
 
-	iRet();
+	StackRes();
+	RET();
 }
 
 static void iJump(u32 branchPC) {
@@ -213,11 +218,10 @@ static void iJump(u32 branchPC) {
 	recBSC[psxRegs.code>>26]();
 
 	iFlushRegs();
+	iStoreCycle();
 	MOV32ItoM((u32)&psxRegs.pc, branchPC);
 	CALLFunc((u32)psxBranchTest);
-	/* store cycle */
-	count = ((pc - pcold) / 4) * BIAS;
-	ADD32ItoM((u32)&psxRegs.cycle, count);
+
 	if (resp) ADD32ItoR(ESP, resp);
 
 	// maybe just happened an interruption, check so
@@ -270,11 +274,10 @@ static void iBranch(u32 branchPC, int savectx) {
 	recBSC[psxRegs.code>>26]();
 
 	iFlushRegs();
+	iStoreCycle();
 	MOV32ItoM((u32)&psxRegs.pc, branchPC);
 	CALLFunc((u32)psxBranchTest);
-	/* store cycle */
-	count = ((pc - pcold) / 4) * BIAS;
-	ADD32ItoM((u32)&psxRegs.cycle, count);
+
 	if (resp) ADD32ItoR(ESP, resp);
 
 	// maybe just happened an interruption, check so
