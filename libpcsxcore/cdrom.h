@@ -90,7 +90,7 @@ typedef struct {
 	u8 Seeked;
 	u8 ReadRescheduled;
 
-	u8 LidCheck;
+	u8 DriveState;
 	u8 FastForward;
 	u8 FastBackward;
 
