@@ -14,7 +14,7 @@
 #import "ARCBridge.h"
 
 //NSMutableArray *plugins;
-static PluginList __unsafe_unretained *sPluginList = nil;
+static PluginList __weak *sPluginList = nil;
 const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, PSE_LT_NET};
 
 @implementation PluginList
@@ -131,12 +131,11 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	return self;
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc
 {
 	if (sPluginList == self)
 		sPluginList = nil;
-
-#if !__has_feature(objc_arc)
 
 	[activeGpuPlugin release];
 	[activeSpuPlugin release];
@@ -146,10 +145,9 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	
 	[pluginList release];
 	
-	
 	[super dealloc];
-#endif
 }
+#endif
 
 - (void)refreshPlugins
 {

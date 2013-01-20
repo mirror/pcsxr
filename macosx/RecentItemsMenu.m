@@ -37,8 +37,7 @@
         [self removeItem:item];
         [self insertItem:item atIndex:0];
 		RELEASEOBJ(item);
-    }
-    else {
+    } else {
 		NSMenuItem *newitem = [self createMenuItem:documentURL];
         [self addMenuItem:newitem];
 		RELEASEOBJ(newitem);
