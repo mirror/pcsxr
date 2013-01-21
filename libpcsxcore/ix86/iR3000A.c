@@ -189,7 +189,7 @@ static void SetBranch() {
 	MOV32RtoM((u32)&psxRegs.pc, EAX);
 	CALLFunc((u32)psxBranchTest);
 
-	StackRes();
+	if (resp) ADD32ItoR(ESP, resp);
 	RET();
 }
 
