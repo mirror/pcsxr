@@ -28,6 +28,7 @@
 #ifdef _WIN32
 #include <process.h>
 #include <windows.h>
+#define strcasecmp _stricmp
 #else
 #include <sys/time.h>
 #include <unistd.h>
