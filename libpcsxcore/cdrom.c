@@ -1536,6 +1536,7 @@ void cdrReset() {
 	cdr.Reg2 = 0x1f;
 	cdr.Stat = NoIntr;
 	cdr.DriveState = DRIVESTATE_STANDBY;
+	cdr.StatP = STATUS_ROTATING;
 
 	// BIOS player - default values
 	cdr.AttenuatorLeftToLeft = 0x80;
