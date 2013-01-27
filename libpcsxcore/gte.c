@@ -177,8 +177,8 @@ static inline s64 BOUNDS(s64 n_value, s64 n_max, int n_maxflag, s64 n_min, int n
 	return n_value;
 }
 
-static inline s32 LIM(s32 value, s32 max, s32 min, u32 flag) {
-	s32 ret = value;
+static inline s64 LIM(s64 value, s64 max, s64 min, u32 flag) {
+	s64 ret = value;
 	if (value > max) {
 		gteFLAG |= flag;
 		ret = max;
@@ -495,8 +495,9 @@ void gteAVSZ3() {
 #endif
 	gteFLAG = 0;
 
-	gteMAC0 = F((s64)(gteZSF3 * gteSZ1) + (gteZSF3 * gteSZ2) + (gteZSF3 * gteSZ3));
-	gteOTZ = limD(gteMAC0 >> 12);
+	s64 t = (s64)(gteZSF3  * (s64)(gteSZ1 + gteSZ2 + gteSZ3));
+	gteMAC0 = F(t);
+	gteOTZ = limD(t >> 12);
 }
 
 void gteAVSZ4() {
@@ -505,8 +506,9 @@ void gteAVSZ4() {
 #endif
 	gteFLAG = 0;
 
-	gteMAC0 = F((s64)(gteZSF4 * (gteSZ0 + gteSZ1 + gteSZ2 + gteSZ3)));
-	gteOTZ = limD(gteMAC0 >> 12);
+	s64 t = (s64)(gteZSF4 * (s64)(gteSZ0 + gteSZ1 + gteSZ2 + gteSZ3));
+	gteMAC0 = F(t);
+	gteOTZ = limD(t >> 12);
 }
 
 void gteSQR() {
