@@ -14,7 +14,7 @@
 #import "ARCBridge.h"
 
 //NSMutableArray *plugins;
-static PluginList __weak *sPluginList = nil;
+static PluginList __arcweak *sPluginList = nil;
 const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, PSE_LT_NET};
 
 @implementation PluginList
