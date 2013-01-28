@@ -58,14 +58,14 @@
 	if (![self window])
 		[NSBundle loadNibNamed:@"AddPluginSheet" owner:self];
 	
-	[pluginName setObjectValue:[[NSURL fileURLWithPath:theFile] lastPathComponent]];
+	[pluginName setObjectValue:[theFile lastPathComponent]];
 	
 	[NSApp runModalForWindow:[self window]];
 	
-	[[self window] orderOut:self];
+	[[self window] orderOut:nil];
 	if (moveOK == YES) {
 		NSURL *supportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
-		NSURL *url = [supportURL URLByAppendingPathComponent:@"Pcsxr/PlugIns"];
+		NSURL *url = [[supportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"PlugIns"];
 
 		NSFileWrapper *wrapper = [[NSFileWrapper alloc] initWithPath:theFile];
 		NSString *dst = [NSString stringWithFormat:@"%@/%@", 

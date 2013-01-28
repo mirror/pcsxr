@@ -39,7 +39,7 @@
 				<int key="NSWindowStyleMask">1</int>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{133, 235}, {416, 155}}</string>
-				<int key="NSWTFlags">1886912512</int>
+				<int key="NSWTFlags">1886913536</int>
 				<string key="NSWindowTitle">Memory Card</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<string key="NSViewClass">View</string>
@@ -101,7 +101,7 @@
 								<int key="NSButtonFlags2">1</int>
 								<reference key="NSAlternateImage" ref="265803471"/>
 								<string key="NSAlternateContents"/>
-								<string key="NSKeyEquivalent"/>
+								<string type="base64-UTF8" key="NSKeyEquivalent">DQ</string>
 								<int key="NSPeriodicDelay">200</int>
 								<int key="NSPeriodicInterval">25</int>
 							</object>
@@ -269,6 +269,8 @@
 				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
 				<string key="NSMinSize">{416, 108}</string>
 				<string key="NSMaxSize">{416, 177}</string>
+				<int key="NSWindowAnimationBehavior">5</int>
+				<int key="NSWindowCollectionBehavior">2</int>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
 			<object class="NSCustomObject" id="796877042">
@@ -328,10 +330,18 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">nextKeyView</string>
-						<reference key="source" ref="678958260"/>
-						<reference key="destination" ref="665473807"/>
+						<reference key="source" ref="665473807"/>
+						<reference key="destination" ref="678958260"/>
 					</object>
-					<int key="connectionID">100033</int>
+					<int key="connectionID">100047</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">nextKeyView</string>
+						<reference key="source" ref="678958260"/>
+						<reference key="destination" ref="128155738"/>
+					</object>
+					<int key="connectionID">100046</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -398,6 +408,7 @@
 							<reference ref="300791902"/>
 						</array>
 						<reference key="parent" ref="568628114"/>
+						<string key="objectName">Cancel Button</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">100022</int>
@@ -406,6 +417,7 @@
 							<reference ref="492161327"/>
 						</array>
 						<reference key="parent" ref="568628114"/>
+						<string key="objectName">Slot 1 Button</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">100023</int>
@@ -476,6 +488,7 @@
 							<reference ref="911160075"/>
 						</array>
 						<reference key="parent" ref="568628114"/>
+						<string key="objectName">Slot 2 Button</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">100037</int>
@@ -510,7 +523,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">100044</int>
+			<int key="maxID">100048</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

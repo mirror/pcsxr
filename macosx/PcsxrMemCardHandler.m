@@ -56,11 +56,11 @@
 	if (![self window]) {
 		[NSBundle loadNibNamed:@"PcsxrMemCardDocument" owner:self];
 	}
-	[cardPath setObjectValue:[[NSURL fileURLWithPath:theFile] lastPathComponent]];
+	[cardPath setObjectValue:[theFile lastPathComponent]];
 	
 	[NSApp runModalForWindow:[self window]];
 	
-	[[self window] orderOut:self];
+	[[self window] orderOut:nil];
 	
 	if (memChosen != 0) {
 		[ConfigurationController setMemoryCard:memChosen toPath:theFile];
