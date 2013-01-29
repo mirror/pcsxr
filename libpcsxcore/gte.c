@@ -156,6 +156,8 @@
 #define gteZSF4 (psxRegs.CP2C.p[30].sw.l)
 #define gteFLAG (psxRegs.CP2C.r[31])
 
+#define SUM_FLAG { if( gteFLAG & 0x7f87e000 ) gteFLAG |= 0x80000000; }
+
 #define GTE_OP(op) ((op >> 20) & 31)
 #define GTE_SF(op) ((op >> 19) & 1)
 #define GTE_MX(op) ((op >> 17) & 3)
@@ -189,20 +191,20 @@ static inline s64 LIM(s64 value, s64 max, s64 min, u32 flag) {
 	return ret;
 }
 
-#define A1(a) BOUNDS((a), 0x7fffffff, (1 << 30), -(s64)0x80000000, (1 << 31) | (1 << 27))
-#define A2(a) BOUNDS((a), 0x7fffffff, (1 << 29), -(s64)0x80000000, (1 << 31) | (1 << 26))
-#define A3(a) BOUNDS((a), 0x7fffffff, (1 << 28), -(s64)0x80000000, (1 << 31) | (1 << 25))
-#define limB1(a, l) LIM((a), 0x7fff, -0x8000 * !l, (1 << 31) | (1 << 24))
-#define limB2(a, l) LIM((a), 0x7fff, -0x8000 * !l, (1 << 31) | (1 << 23))
+#define A1(a) BOUNDS((a), 0x7fffffff, (1 << 30), -(s64)0x80000000, (1 << 27))
+#define A2(a) BOUNDS((a), 0x7fffffff, (1 << 29), -(s64)0x80000000, (1 << 26))
+#define A3(a) BOUNDS((a), 0x7fffffff, (1 << 28), -(s64)0x80000000, (1 << 25))
+#define limB1(a, l) LIM((a), 0x7fff, -0x8000 * !l, (1 << 24))
+#define limB2(a, l) LIM((a), 0x7fff, -0x8000 * !l, (1 << 23))
 #define limB3(a, l) LIM((a), 0x7fff, -0x8000 * !l, (1 << 22))
 #define limC1(a) LIM((a), 0x00ff, 0x0000, (1 << 21))
 #define limC2(a) LIM((a), 0x00ff, 0x0000, (1 << 20))
 #define limC3(a) LIM((a), 0x00ff, 0x0000, (1 << 19))
-#define limD(a) LIM((a), 0xffff, 0x0000, (1 << 31) | (1 << 18))
+#define limD(a) LIM((a), 0xffff, 0x0000, (1 << 18))
 
 static inline u32 limE(u32 result) {
 	if (result > 0x1ffff) {
-		gteFLAG |= (1 << 31) | (1 << 17);
+		gteFLAG |= (1 << 17);
 		return 0x1ffff;
 	}
 	return result;
@@ -210,19 +212,19 @@ static inline u32 limE(u32 result) {
 
 static inline float flimE(float result) {
 	if (result > 0x1ffff) {
-		gteFLAG |= (1 << 31) | (1 << 17);
+		gteFLAG |= (1 << 17);
 		return 0x1ffff;
 	}
 	return result;
 }
 
-#define F(a) BOUNDS((a), 0x7fffffff, (1 << 31) | (1 << 16), -(s64)0x80000000, (1 << 31) | (1 << 15))
-#define limG1(a) LIM((a), 0x3ff, -0x400, (1 << 31) | (1 << 14))
-#define limG2(a) LIM((a), 0x3ff, -0x400, (1 << 31) | (1 << 13))
+#define F(a) BOUNDS((a), 0x7fffffff, (1 << 16), -(s64)0x80000000, (1 << 15))
+#define limG1(a) LIM((a), 0x3ff, -0x400,(1 << 14))
+#define limG2(a) LIM((a), 0x3ff, -0x400, (1 << 13))
 #define limH(a) LIM((a), 0x1000, 0x0000, (1 << 12))
 
-#define limG1_ia(a) LIM((a), 0x3ffffff, -0x4000000, (1 << 31) | (1 << 14))
-#define limG2_ia(a) LIM((a), 0x3ffffff, -0x4000000, (1 << 31) | (1 << 13))
+#define limG1_ia(a) LIM((a), 0x3ffffff, -0x4000000, (1 << 14))
+#define limG2_ia(a) LIM((a), 0x3ffffff, -0x4000000, (1 << 13))
 
 #include "gte_divider.h"
 
@@ -345,7 +347,6 @@ static inline void CTC2(u32 value, int reg) {
 
 		case 31:
 			value = value & 0x7ffff000;
-			if (value & 0x7f87e000) value |= 0x80000000;
 			break;
 	}
 
@@ -359,6 +360,7 @@ void gteMFC2() {
 
 void gteCFC2() {
 	if (!_Rt_) return;
+	if (_Rd_ == 31) SUM_FLAG;
 	psxRegs.GPR.r[_Rt_] = psxRegs.CP2C.r[_Rd_];
 }
 
@@ -411,7 +413,7 @@ void gteRTPS() {
                   limG1_ia((s64)gteOFX + (s64)(gteIR1 * fquotient) * (Config.Widescreen ? 0.75 : 1)), // TODO: MAC1 calc instead of IR1.
                   limG2_ia((s64)gteOFY + (s64)(gteIR2 * fquotient)), // TODO: MAC2 calc instead of IR2.
 				  ((s64)gteSZ3));                                    // TODO: MAC3 calc instead of SZ3.
-
+	
 	gteMAC0 = F((s64)(gteDQB + ((s64)gteDQA * quotient)) >> 12);
 	gteIR0 = limH(gteMAC0);
 }
@@ -450,6 +452,7 @@ void gteRTPT() {
                       limG2_ia((s64)gteOFY + (s64)(gteIR2 * fquotient)), // TODO: MAC2 calc instead of IR2.
 					  ((s64)fSZ(v)));                                    // TODO: MAC3 calc instead of fSZ(v).
 	}
+	
 	gteMAC0 = F((s64)(gteDQB + ((s64)gteDQA * quotient)) >> 12);
 	gteIR0 = limH(gteMAC0);
 }
@@ -723,18 +726,19 @@ void gteDCPL() {
 
 void gteGPF() {
 	int shift = 12 * GTE_SF(gteop);
+	int lm = GTE_LM(gteop);
 
 #ifdef GTE_LOG
 	GTE_LOG("GTE GPF\n");
 #endif
 	gteFLAG = 0;
 
-	gteMAC1 = A1(((s64)gteIR0 * gteIR1) >> shift);
-	gteMAC2 = A2(((s64)gteIR0 * gteIR2) >> shift);
-	gteMAC3 = A3(((s64)gteIR0 * gteIR3) >> shift);
-	gteIR1 = limB1(gteMAC1, 0);
-	gteIR2 = limB2(gteMAC2, 0);
-	gteIR3 = limB3(gteMAC3, 0);
+	gteMAC1 = A1((s64)(gteIR0 * gteIR1)) >> shift;
+	gteMAC2 = A2((s64)(gteIR0 * gteIR2)) >> shift;
+	gteMAC3 = A3((s64)(gteIR0 * gteIR3)) >> shift;
+	gteIR1 = limB1(gteMAC1, lm);
+	gteIR2 = limB2(gteMAC2, lm);
+	gteIR3 = limB3(gteMAC3, lm);
 
 	gteRGB0 = gteRGB1;
 	gteRGB1 = gteRGB2;
@@ -918,6 +922,7 @@ void gteINTPL() {
 	gteIR1 = limB1(gteMAC1, lm);
 	gteIR2 = limB2(gteMAC2, lm);
 	gteIR3 = limB3(gteMAC3, lm);
+	
 	gteRGB0 = gteRGB1;
 	gteRGB1 = gteRGB2;
 	gteCODE2 = gteCODE;
