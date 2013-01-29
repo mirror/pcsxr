@@ -111,13 +111,16 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 			continue;
 		
 		if (![self hasPluginAtPath:path]) {
-			PcsxrPlugin *plugin = [[PcsxrPlugin alloc] initWithPath:path];
-			if (plugin) {
-				[pluginList addObject:plugin];
-				if (![self setActivePlugin:plugin forType:typeList[i]])
+			@autoreleasepool {
+				PcsxrPlugin *plugin = [[PcsxrPlugin alloc] initWithPath:path];
+				if (plugin) {
+					[pluginList addObject:plugin];
+					if (![self setActivePlugin:plugin forType:typeList[i]])
+						missingPlugins = YES;
+					RELEASEOBJ(plugin);
+				} else {
 					missingPlugins = YES;
-			} else {
-				missingPlugins = YES;
+				}
 			}
 		}
 	}
@@ -152,7 +155,7 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 - (void)refreshPlugins
 {
 	NSDirectoryEnumerator *dirEnum;
-	NSString *pname, *dir;
+	NSString *pname;
 	NSUInteger i;
 	
 	// verify that the ones that are in list still works
@@ -174,10 +177,12 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 											directory */
 				
 				if (![self hasPluginAtPath:pname]) {
-					PcsxrPlugin *plugin = [[PcsxrPlugin alloc] initWithPath:pname];
-					if (plugin != nil) {
-						[pluginList addObject:plugin];
-						RELEASEOBJ(plugin);
+					@autoreleasepool {
+						PcsxrPlugin *plugin = [[PcsxrPlugin alloc] initWithPath:pname];
+						if (plugin != nil) {
+							[pluginList addObject:plugin];
+							RELEASEOBJ(plugin);
+						}
 					}
 				}
 			}

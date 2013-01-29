@@ -20,8 +20,8 @@
     // Populate the menu
     NSArray* recentDocuments = [[NSDocumentController sharedDocumentController] recentDocumentURLs];
     NSInteger index = 0;
-    for(NSURL* url in recentDocuments) {
-		NSMenuItem *tempItem = [self createMenuItem:url];
+    for (NSURL* url in recentDocuments) {
+		NSMenuItem *tempItem = [self newMenuItem:url];
         [self addMenuItem:tempItem atIndex:index];
 		RELEASEOBJ(tempItem);
         index++;
@@ -33,12 +33,12 @@
     [[NSDocumentController sharedDocumentController] noteNewRecentDocumentURL:documentURL];
     
     NSMenuItem* item = RETAINOBJ([self findMenuItemByURL:documentURL]);
-    if(item != nil) {
+    if (item != nil) {
         [self removeItem:item];
         [self insertItem:item atIndex:0];
 		RELEASEOBJ(item);
     } else {
-		NSMenuItem *newitem = [self createMenuItem:documentURL];
+		NSMenuItem *newitem = [self newMenuItem:documentURL];
         [self addMenuItem:newitem];
 		RELEASEOBJ(newitem);
     }
@@ -50,7 +50,7 @@
     
     // Prevent menu from overflowing; the -2 accounts for the "Clear..." and the separator items
     NSInteger maxNumItems = [[NSDocumentController sharedDocumentController] maximumRecentDocumentCount];
-    if(([self numberOfItems]-2) > maxNumItems) {
+    if (([self numberOfItems] - 2) > maxNumItems) {
         [self removeItemAtIndex:maxNumItems];
     }
 }
@@ -71,7 +71,7 @@
     [self insertItem:item atIndex:index]; // insert at the top
 }
 
-- (NSMenuItem*)createMenuItem:(NSURL*)documentURL
+- (NSMenuItem*)newMenuItem:(NSURL*)documentURL
 {
     NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:[documentURL lastPathComponent] action:@selector(openRecentItem:) keyEquivalent:@""];
     [newItem setRepresentedObject:documentURL];
@@ -97,11 +97,15 @@
 // Document items are menu items with tag 0
 - (void)removeDocumentItems
 {
-    for(NSMenuItem* item in [self itemArray]) {
-        if([item tag] == 0) {
-            [self removeItem:item];
-        }
-    }
+	NSMutableArray *removeItemsArray = [NSMutableArray array];
+	for (NSMenuItem* item in [self itemArray]) {
+		if([item tag] == 0) {
+			[removeItemsArray addObject:item];
+		}
+	}
+	for (NSMenuItem *item in removeItemsArray) {
+		[self removeItem:item];
+	}
 }
 
 @end

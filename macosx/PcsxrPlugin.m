@@ -110,7 +110,7 @@
     
     NSFileManager *fm = [NSFileManager defaultManager];
     
-    pluginRef = nil;
+    pluginRef = NULL;
     name = nil;
     path = [aPath copy];
     NSString *goodPath = nil;
@@ -145,13 +145,13 @@
     }
 	
     if (goodPath == nil) {
-        RELEASEOBJ(self);
+        AUTORELEASEOBJNORETURN(self);
         return nil;
     }
 	
     pluginRef = SysLoadLibrary([goodPath fileSystemRepresentation]);
     if (pluginRef == NULL) {
-        RELEASEOBJ(self);
+        AUTORELEASEOBJNORETURN(self);
         return nil;
     }
 
@@ -169,13 +169,13 @@
         else if (([path rangeOfString: @"net" options:NSCaseInsensitiveSearch]).length != 0)
             type = PSE_LT_NET;
         else {
-            RELEASEOBJ(self);
+            AUTORELEASEOBJNORETURN(self);
             return nil;
         }
     } else {
         type = (int)PSE_getLibType();
         if (type != PSE_LT_GPU && type != PSE_LT_CDR && type != PSE_LT_SPU && type != PSE_LT_PAD && type != PSE_LT_NET) {
-            RELEASEOBJ(self);
+            AUTORELEASEOBJNORETURN(self);
             return nil;
         }
     }
