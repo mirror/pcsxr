@@ -99,27 +99,30 @@ void DoClearFrontBuffer(void)                          // CLEAR DX BUFFER
 
 unsigned long ulInitDisplay(void)	// OPEN GAME WINDOW
 {
-	bUsingTWin=FALSE;                          
+	bUsingTWin = FALSE;
 
-	InitMenu();                
+	InitMenu();
 
 	bIsFirstFrame = FALSE;
 
 	if(iShowFPS)
 	{
-		//iShowFPS=0;
-		ulKeybits|=KEY_SHOWFPS;
-		szDispBuf[0]=0;
+		//iShowFPS = 0;
+		ulKeybits |= KEY_SHOWFPS;
+		szDispBuf[0] = 0;
 		BuildDispMenu(0);
 	}
+	__block NSWindow *window = nil;
+	dispatch_sync(dispatch_get_main_queue(), ^{
+		PluginWindowController *windowController = [PluginWindowController openGameView];
+		glView = [windowController openGLView];
+		
+		NSString *title = [NSString stringWithCString:pCaptionText encoding:NSUTF8StringEncoding];
+		[[windowController window] setTitle:title];
+		window = [windowController window];
+	});
 	
-	PluginWindowController *windowController = [PluginWindowController openGameView];
-	glView = [windowController openGLView];
-	
-    NSString *title = [NSString stringWithCString:pCaptionText encoding:NSUTF8StringEncoding];
-	[[windowController window] setTitle:title];
-	
-	return (unsigned long)[windowController window];
+	return (unsigned long)window;
 }
 
 
