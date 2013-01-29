@@ -90,7 +90,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 
 	glLock = [[NSLock alloc] init];
 	if (nil == glLock) {
-		[self release];
+		[self autorelease];
 		return nil;
 	}
 
