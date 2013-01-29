@@ -1832,7 +1832,7 @@ int nfile;
 		ptr+= 0xa; \
 		if (pfile[0] == 0) { \
 			strncpy(dir->name, ptr, sizeof(dir->name)); \
-			dir->name[sizeof(dir->name)] = '\0'; \
+			dir->name[sizeof(dir->name) - 1] = '\0'; \
 		} else for (i=0; i<20; i++) { \
 			if (pfile[i] == ptr[i]) { \
 				dir->name[i] = ptr[i]; \
