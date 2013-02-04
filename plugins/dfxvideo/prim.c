@@ -589,7 +589,7 @@ void primBlkFill(unsigned char * baseAddr)
  short sX = GETLEs16(&sgpuData[2]);
  short sY = GETLEs16(&sgpuData[3]);
  short sW = GETLEs16(&sgpuData[4]) & 0x3ff;
- short sH = GETLEs16(&sgpuData[5]) & 0x3ff;
+ short sH = GETLEs16(&sgpuData[5]) & iGPUHeightMask;
 
  sW = (sW+15) & ~15;
 
