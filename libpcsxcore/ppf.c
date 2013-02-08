@@ -207,7 +207,7 @@ void BuildPPFCache() {
 	buffer[10] = CdromId[8];
 	buffer[11] = '\0';
 
-	sprintf(szPPF, "%s%s", Config.PatchesDir, buffer);
+	sprintf(szPPF, "%s/%s", Config.PatchesDir, buffer);
 
 	ppffile = fopen(szPPF, "rb");
 	if (ppffile == NULL) return;

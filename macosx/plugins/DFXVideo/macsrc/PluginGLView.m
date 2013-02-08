@@ -606,8 +606,8 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	long y = PSXDisplay.DisplayPosition.y;
 	GLuint lu;
 	unsigned short row,column;
-	unsigned short dx=(unsigned short)PSXDisplay.DisplayEnd.x;//PreviousPSXDisplay.Range.x1;
-	unsigned short dy=(unsigned short)PSXDisplay.DisplayEnd.y;//PreviousPSXDisplay.DisplayMode.y;
+	unsigned short dx=PreviousPSXDisplay.Range.x1;
+	unsigned short dy=PreviousPSXDisplay.DisplayMode.y;
 	long lPitch;
 
 	//printf("y=%i",PSXDisplay.DisplayPosition.y);
