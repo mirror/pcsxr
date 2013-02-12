@@ -215,8 +215,8 @@ void CALLBACK SPUwriteRegister(unsigned long reg, unsigned short val)
       break;
     //-------------------------------------------------//
     case H_SPUdata:
-			// BIOS - allow dma 00
-			Check_IRQ( spuAddr, 0 );
+      // BIOS - allow dma 00
+      Check_IRQ( spuAddr, 0 );
 
       spuMem[spuAddr>>1] = val;
       spuAddr+=2;

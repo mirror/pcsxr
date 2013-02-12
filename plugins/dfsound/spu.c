@@ -732,9 +732,10 @@ static void *MAINThread(void *arg)
              //////////////////////////////////////////// irq check
 
 #if 1
-						// ?? (-8)
-						if( Check_IRQ( (start-spuMemC)-8, 0 ) ||
-								Check_IRQ( (start-spuMemC)-0, 0 ) )
+						// Check channel/loop IRQs (e.g. Castlevania Chronicles) and at pos-8 for unknown reason
+						if( Check_IRQ( (s_chan[ch].pCurr)-spuMemC, 0 ) ||
+								Check_IRQ( (start-spuMemC)-0, 0 ) ||
+								Check_IRQ( (start-spuMemC)-8, 0 ) )
 						{
 #else
              if(irqCallback && (spuCtrl&0x40))         // some callback and irq active?
@@ -747,7 +748,7 @@ static void *MAINThread(void *arg)
 #endif
                {
                  s_chan[ch].iIrqDone=1;                // -> debug flag
-                 irqCallback();                        // -> call main emu
+                 //irqCallback();                      // -> call main emu (checked & called on Check_IRQ)
 
                  if(iSPUIRQWait)                       // -> option: wait after irq for main emu
                   {
