@@ -131,14 +131,15 @@
 
 - (void)saveHotkey:(NSString*)keyIdent device:(NSString*)device deviceLabel:(NSString*)deviceLabel code:(NSString*)keyCode label:(NSString*)keyLabel
 {
-    NSMutableDictionary *tempUserMappings = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"HotkeyBindings"]];
-	[tempUserMappings setValue:[[NSDictionary alloc] initWithObjectsAndKeys:
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults] ;
+	NSMutableDictionary *tempUserMappings = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:@"HotkeyBindings"]];
+	[tempUserMappings setValue:[NSDictionary dictionaryWithObjectsAndKeys:
         device, @"device",
         deviceLabel, @"deviceName",
         keyCode, @"keyCode",
         keyLabel, @"keyLabel",
         nil] forKey:keyIdent];
-	[[NSUserDefaults standardUserDefaults] setValue:tempUserMappings forKey:@"HotkeyBindings"];
+	[defaults setValue:tempUserMappings forKey:@"HotkeyBindings"];
 }
 
 - (NSString *) parseMappingDisplayString:(NSString *)keyString
