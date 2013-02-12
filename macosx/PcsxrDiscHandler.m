@@ -27,15 +27,19 @@
 - (BOOL)handleFile:(NSString *)theFile
 {
 	PcsxrController *appDelegate = [NSApp delegate];
-	[[appDelegate recentItems] addRecentItem:[NSURL fileURLWithPath:theFile]];
 	if ([EmuThread active] == YES) {
-		SetCdOpenCaseTime(time(NULL) + 2);
-		SetIsoFile([theFile fileSystemRepresentation]);
-		//[EmuThread reset];
+		if (UsingIso()) {
+			SetCdOpenCaseTime(time(NULL) + 2);
+			SetIsoFile([theFile fileSystemRepresentation]);
+			//[EmuThread reset];
+		} else {
+			return NO;
+		}
 	} else {
 		SetIsoFile([theFile fileSystemRepresentation]);
 		[EmuThread run];
 	}
+	[[appDelegate recentItems] addRecentItem:[NSURL fileURLWithPath:theFile]];
 	return YES;
 }
 
