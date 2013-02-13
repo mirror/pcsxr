@@ -152,9 +152,10 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 #endif
 			return;
 
+		case 0x0401: // Vampire Hunter D: title screen linked list update
 		case 0x01000401: // dma chain
 #ifdef PSXDMA_LOG
-			PSXDMA_LOG("*** DMA 2 - GPU dma chain *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
+			PSXDMA_LOG("*** DMA 2 - GPU dma chain *** %8.8lx addr = %lx size = %lx\n", chcr, madr, bcr);
 #endif
 
 			size = gpuDmaChainSize(madr);
