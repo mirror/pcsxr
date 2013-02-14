@@ -991,7 +991,8 @@ void cdrInterrupt() {
 		case CdlReadS:
 			cdr.Reading = 1;
 			cdr.FirstSector = 1;
-
+			
+			/* FIXME: break Twisted Metal 2
             // Mortal Kombat Trilogy - resume CDDA playback from pause
 			if ((cdr.Mode & MODE_CDDA)) {
 #ifdef CDR_LOG
@@ -1000,11 +1001,12 @@ void cdrInterrupt() {
 				AddIrqQueue(CdlPlay, cdReadTime * 75 / 4);
 				break;
 			} else {
+			*/
 				// Fighting Force 2 - update subq time immediately
 				// - fixes new game
 				Find_CurTrack(cdr.SetSector);
 				ReadTrack(cdr.SetSector);
-			}
+			//}
 
 			// Crusaders of Might and Magic - update getlocl now
 			// - fixes cutscene speech
