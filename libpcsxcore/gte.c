@@ -493,23 +493,27 @@ void gteNCLIP() {
 }
 
 void gteAVSZ3() {
+	s64 t;
+	
 #ifdef GTE_LOG
 	GTE_LOG("GTE AVSZ3\n");
 #endif
 	gteFLAG = 0;
 
-	s64 t = (s64)(gteZSF3  * (s64)(gteSZ1 + gteSZ2 + gteSZ3));
+	t = (s64)(gteZSF3  * (s64)(gteSZ1 + gteSZ2 + gteSZ3));
 	gteMAC0 = F(t);
 	gteOTZ = limD(t >> 12);
 }
 
 void gteAVSZ4() {
+	s64 t;
+	
 #ifdef GTE_LOG
 	GTE_LOG("GTE AVSZ4\n");
 #endif
 	gteFLAG = 0;
 
-	s64 t = (s64)(gteZSF4 * (s64)(gteSZ0 + gteSZ1 + gteSZ2 + gteSZ3));
+	t = (s64)(gteZSF4 * (s64)(gteSZ0 + gteSZ1 + gteSZ2 + gteSZ3));
 	gteMAC0 = F(t);
 	gteOTZ = limD(t >> 12);
 }
