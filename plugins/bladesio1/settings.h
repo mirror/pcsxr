@@ -24,9 +24,10 @@
 
 typedef struct Settings
 {
-    long player;
+	s32 enabled;
+    s32 player;
     char ip[32];
-    unsigned short port;
+    u16 port;
 } Settings;
 
 /******************************************************************************/

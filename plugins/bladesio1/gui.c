@@ -5,6 +5,9 @@
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 
+#include "psxcommon.h"
+#include "psemu_plugin_defs.h"
+
 #include "settings.h"
 #include "sio1.h"
 
@@ -14,7 +17,8 @@ Settings settings;
 
 /******************************************************************************/
 
-long CFGopen()
+static
+s32 configure()
 {
 	GtkBuilder *builder;
 	GtkWidget *widget, *MainWindow;
@@ -64,22 +68,42 @@ long CFGopen()
 	return 0;
 }
 
-int main( int argc, char *argv[] )
+static
+s32 about()
+{
+	const char *authors[]= {"edgbla <edgbla@yandex.ru>", NULL};
+	GtkWidget *widget;
+
+	widget = gtk_about_dialog_new();
+	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(widget), "Link Cable");
+	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(widget), "1.0");
+	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(widget), authors);
+	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(widget), "http://www.codeplex.com/pcsxr/");
+
+	gtk_dialog_run(GTK_DIALOG(widget));
+	gtk_widget_destroy(widget);
+}
+
+int main(int argc, char *argv[])
 {
 #ifdef ENABLE_NLS
-	setlocale( LC_ALL, "" );
-	bindtextdomain( GETTEXT_PACKAGE, LOCALE_DIR );
-	bind_textdomain_codeset( GETTEXT_PACKAGE, "UTF-8" );
-	textdomain( GETTEXT_PACKAGE );
+	setlocale(LC_ALL, "");
+	bindtextdomain(GETTEXT_PACKAGE, LOCALE_DIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+	textdomain(GETTEXT_PACKAGE);
 #endif
 
-	gtk_init( &argc, &argv );
+	gtk_init(&argc, &argv);
 
-	if( argc > 1 )
+	if(argc > 1)
 	{
-		if( !strcmp(argv[1], "open") )
+		if(!strcmp(argv[1], "configure"))
 		{
-			return CFGopen();
+			return configure();
+		}
+		if(!strcmp(argv[1], "about"))
+		{
+			return about();
 		}
 	}
 	

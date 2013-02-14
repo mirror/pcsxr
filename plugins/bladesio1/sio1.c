@@ -21,6 +21,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include <sys/stat.h>
 
 #include "psxcommon.h"
 #include "psemu_plugin_defs.h"
@@ -318,17 +319,54 @@ unsigned long CALLBACK PSEgetLibVersion()
     return version << 16 | revision << 8 | build;
 }
 
-void CALLBACK SIO1about()
-{
-}
-
 long CALLBACK SIO1test()
 {
     return 0;
 }
 
+void ExecCfg(char *arg) {
+	char cfg[256];
+	struct stat buf;
+
+	strcpy(cfg, "./cfgBladeSio1");
+	if (stat(cfg, &buf) != -1) {
+		int pid = fork();
+		if (pid == 0) {
+			if (fork() == 0) {
+				execl(cfg, "cfgBladeSio1", arg, NULL);
+			}
+			exit(0);
+		} else if (pid > 0) {
+			waitpid(pid, NULL, 0);
+		}
+		return;
+	}
+
+	strcpy(cfg, "./cfg/cfgBladeSio1");
+	if (stat(cfg, &buf) != -1) {
+		int pid = fork();
+		if (pid == 0) {
+			if (fork() == 0) {
+				execl(cfg, "cfgBladeSio1", arg, NULL);
+			}
+			exit(0);
+		} else if (pid > 0) {
+			waitpid(pid, NULL, 0);
+		}
+		return;
+	}
+
+	fprintf(stderr, "cfgBladeSio1 file not found!\n");
+}
+
+void CALLBACK SIO1about()
+{
+	ExecCfg("about");
+}
+
 void CALLBACK SIO1configure()
 {
+	ExecCfg("configure");
 }
 
 /******************************************************************************/

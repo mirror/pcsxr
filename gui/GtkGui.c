@@ -120,6 +120,13 @@ void ResetMenuSlots() {
 		gtk_widget_set_sensitive(widget, TRUE);
 		widget = gtk_builder_get_object(builder, "pad1");
 		gtk_widget_set_sensitive(widget, TRUE);
+#ifdef ENABLE_SIO1API
+		widget = gtk_builder_get_object(builder, "sio1");
+		gtk_widget_set_sensitive(widget, TRUE);
+#else
+		widget = gtk_builder_get_object(builder, "sio1");
+		gtk_widget_set_sensitive(widget, FALSE);	
+#endif
 		widget = gtk_builder_get_object(builder, "net1");
 		gtk_widget_set_sensitive(widget, TRUE);
 
@@ -160,6 +167,10 @@ void ResetMenuSlots() {
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = gtk_builder_get_object(builder, "pad1");
 		gtk_widget_set_sensitive(widget, FALSE);
+#ifdef ENABLE_SIO1API
+		widget = gtk_builder_get_object(builder, "sio1");
+		gtk_widget_set_sensitive(widget, FALSE);
+#endif
 		widget = gtk_builder_get_object(builder, "net1");
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = gtk_builder_get_object(builder, "SwitchImage");
@@ -370,6 +381,11 @@ void StartGui() {
 	widget = gtk_builder_get_object(builder, "pad1");
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Pad), NULL, NULL, G_CONNECT_AFTER);
+#ifdef ENABLE_SIO1API
+	widget = gtk_builder_get_object(builder, "sio1");
+	g_signal_connect_data(G_OBJECT(widget), "activate",
+			G_CALLBACK(OnConf_Sio1), NULL, NULL, G_CONNECT_AFTER);
+#endif
 	widget = gtk_builder_get_object(builder, "cpu1");
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Cpu), NULL, NULL, G_CONNECT_AFTER);

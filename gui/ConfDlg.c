@@ -151,6 +151,15 @@ void ConfigurePlugins() {
 	widget = gtk_builder_get_object(builder, "btn_ConfSio1");
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_SIO1, NULL, G_CONNECT_AFTER);
+#else
+	widget = gtk_builder_get_object(builder, "label18");
+	gtk_widget_set_sensitive(widget, FALSE);
+	widget = gtk_builder_get_object(builder, "GtkCombo_Sio1");
+	gtk_widget_set_sensitive(widget, FALSE);
+	widget = gtk_builder_get_object(builder, "btn_ConfSio1");
+	gtk_widget_set_sensitive(widget, FALSE);
+	widget = gtk_builder_get_object(builder, "btn_AboutSio1");
+	gtk_widget_set_sensitive(widget, FALSE);
 #endif
 	widget = gtk_builder_get_object(builder, "btn_AboutGpu");
 	g_signal_connect_data(G_OBJECT(widget), "clicked",

@@ -22,6 +22,9 @@
 #include <string.h>
 #include <fcntl.h>
 
+#include "psxcommon.h"
+#include "psemu_plugin_defs.h"
+
 #include "settings.h"
 #include "sio1.h"
 

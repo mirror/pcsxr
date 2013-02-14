@@ -2366,6 +2366,16 @@
                       </object>
                     </child>
                     <child>
+                      <object class="GtkImageMenuItem" id="sio1">
+                        <property name="label" translatable="yes">_Link cable...</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="image">image42</property>
+                        <property name="use_stock">False</property>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkSeparatorMenuItem" id="separator7">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -4039,6 +4049,12 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-convert</property>
+    <property name="icon-size">1</property>
+  </object>
+  <object class="GtkImage" id="image42">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-execute</property>
     <property name="icon-size">1</property>
   </object>
   <object class="GtkImage" id="image5">
