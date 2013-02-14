@@ -68,9 +68,7 @@
 		NSURL *url = [[supportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"PlugIns"];
 
 		NSFileWrapper *wrapper = [[NSFileWrapper alloc] initWithPath:theFile];
-		NSString *dst = [NSString stringWithFormat:@"%@/%@", 
-						 [url path],
-						 [wrapper filename]];
+		NSString *dst = [[url URLByAppendingPathComponent:[wrapper filename]] path];
 		if ([wrapper writeToFile:dst atomically:NO updateFilenames:NO]) {
 			[[NSWorkspace sharedWorkspace] noteFileSystemChanged:[url path]];
 			NSRunInformationalAlertPanel(NSLocalizedString(@"Installation Succesfull", nil),
