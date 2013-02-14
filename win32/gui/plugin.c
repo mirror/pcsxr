@@ -170,8 +170,6 @@ void PADhandleKey(int key) {
 	}
 }
 
-void CALLBACK SPUirq(void);
-
 char charsTable[4] = { "|/-\\" };
 
 BOOL CALLBACK ConnectDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
@@ -292,7 +290,12 @@ int _OpenPlugins(HWND hWnd) {
 	if (ret < 0) { SysMessage (_("Error Opening PAD2 Plugin (%d)"), ret); return -1; }
     PAD2_registerVibration(GPU_visualVibration);
     PAD2_registerCursor(GPU_cursor);
-
+#ifdef ENABLE_SIO1API
+	ret = SIO1_open();
+	if (ret < 0) { SysMessage (_("Error Opening SIO1 plugin (%d)"), ret); return -1; }
+	SIO1_registerCallback(SIO1irq);
+#endif
+	
 	SetCurrentDirectory(PcsxrDir);
 	ShowCursor(FALSE);
 	return 0;
@@ -324,6 +327,10 @@ void ClosePlugins() {
 	if (ret < 0) { SysMessage (_("Error Closing GPU Plugin")); return; }
 	ret = SPU_close();
 	if (ret < 0) { SysMessage (_("Error Closing SPU Plugin")); return; }
+#ifdef ENABLE_SIO1API
+	ret = SIO1_close();
+	if (ret < 0) { SysMessage (_("Error Closing SIO1 plugin")); return; }
+#endif
 
 	if (Config.UseNet) {
 		NET_pause();
@@ -338,6 +345,9 @@ void ResetPlugins() {
 	SPU_shutdown();
 	PAD1_shutdown();
 	PAD2_shutdown();
+#ifdef ENABLE_SIO1API
+	SIO1_shutdown();
+#endif
 	if (Config.UseNet) NET_shutdown();
 
 	ret = CDR_init();
@@ -350,6 +360,11 @@ void ResetPlugins() {
 	if (ret != 0) { SysMessage (_("PAD1init error: %d"), ret); return; }
 	ret = PAD2_init(2);
 	if (ret != 0) { SysMessage (_("PAD2init error: %d"), ret); return; }
+#ifdef ENABLE_SIO1API
+	ret = SIO1_init();
+	if (ret != 0) { SysMessage (_("SIO1init error: %d"), ret); return; }
+#endif
+
 	if (Config.UseNet) {
 		ret = NET_init();
 		if (ret < 0) { SysMessage (_("NETinit error: %d"), ret); return; }

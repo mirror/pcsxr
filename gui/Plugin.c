@@ -334,6 +334,11 @@ int _OpenPlugins() {
 	if (ret < 0) { SysMessage(_("Error opening Controller 2 plugin!")); return -1; }
     PAD2_registerVibration(GPU_visualVibration);
     PAD2_registerCursor(GPU_cursor);
+#ifdef ENABLE_SIO1API
+	ret = SIO1_open(&gpuDisp);
+	if (ret < 0) { SysMessage(_("Error opening SIO1 plugin!")); return -1; }
+	SIO1_registerCallback(SIO1irq);
+#endif
 
 	if (Config.UseNet && !NetOpened) {
 		netInfo info;
@@ -422,6 +427,10 @@ void ClosePlugins() {
 	if (ret < 0) { SysMessage(_("Error closing Controller 2 plugin!")); return; }
 	ret = GPU_close();
 	if (ret < 0) { SysMessage(_("Error closing GPU plugin!")); return; }
+#ifdef ENABLE_SIO1API
+	ret = SIO1_close();
+	if (ret < 0) { SysMessage(_("Error closing SIO1 plugin!")); return; }
+#endif
 
 	if (Config.UseNet) {
 		NET_pause();

@@ -1326,3 +1326,7 @@ void SaveDongle( char *str )
 		fclose( f );
 	}
 }
+
+void CALLBACK SIO1irq(void) {
+	psxHu32ref(0x1070) |= SWAPu32(0x100);
+}

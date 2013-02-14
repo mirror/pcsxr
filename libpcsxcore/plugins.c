@@ -656,10 +656,6 @@ unsigned short CALLBACK SIO1__readBaud16(void) { return 0; }
 unsigned long CALLBACK SIO1__readBaud32(void) { return 0; }
 void CALLBACK SIO1__registerCallback(void (CALLBACK *callback)(void)) {};
 
-void CALLBACK SIO1irq(void) {
-    psxHu32ref(0x1070) |= SWAPu32(0x100);
-}
-
 #define LoadSio1Sym1(dest, name) \
     LoadSym(SIO1_##dest, SIO1##dest, name, TRUE);
 
