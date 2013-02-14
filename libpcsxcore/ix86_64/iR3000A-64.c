@@ -178,8 +178,21 @@ static void SetBranch() {
 		RET();
 		return;
 	}
+	switch( psxRegs.code >> 26 ) {
+		// Lode Runner (jr - beq)
 
-	recBSC[psxRegs.code>>26]();
+		// bltz - bgez - bltzal - bgezal / beq - bne - blez - bgtz
+		case 0x01:
+		case 0x04:
+		case 0x05:
+		case 0x06:
+		case 0x07:
+			break;
+
+		default:
+			recBSC[psxRegs.code>>26]();
+			break;
+	}
 
 	iFlushRegs();
 	iStoreCycle();
