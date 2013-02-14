@@ -29,6 +29,7 @@ void OnConf_CdRom();
 void OnConf_Pad();
 void OnConf_Cpu();
 void OnConf_Net();
+void OnConf_Sio1();
 
 void ConfigurePlugins();
 
@@ -45,6 +46,9 @@ extern PluginConf CdrConfS;
 extern PluginConf Pad1ConfS;
 extern PluginConf Pad2ConfS;
 extern PluginConf NetConfS;
+#ifdef ENABLE_SIO1API
+extern PluginConf Sio1ConfS;
+#endif
 extern PluginConf BiosConfS;
 
 #endif

@@ -68,7 +68,7 @@ int LoadConfig() {
 	QueryKey(256, "Lang", Conf->Lang);
 
 	QueryKeyV("Xa",       Conf->Xa);
-	QueryKeyV("Sio",      Conf->Sio);
+	QueryKeyV("SioIrq",   Conf->SioIrq);
 	QueryKeyV("Mdec",     Conf->Mdec);
 	QueryKeyV("PsxAuto",  Conf->PsxAuto);
 	QueryKeyV("Cdda",     Conf->Cdda);
@@ -120,7 +120,7 @@ void SaveConfig() {
 	SetKey("BiosDir",    Conf->BiosDir,    strlen(Conf->BiosDir), REG_SZ);
 
 	SetKeyV("Xa",      Conf->Xa);
-	SetKeyV("Sio",     Conf->Sio);
+	SetKeyV("SioIrq",  Conf->SioIrq);
 	SetKeyV("Mdec",    Conf->Mdec);
 	SetKeyV("PsxAuto", Conf->PsxAuto);
 	SetKeyV("Cdda",    Conf->Cdda);

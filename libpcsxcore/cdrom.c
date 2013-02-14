@@ -250,8 +250,6 @@ static void adjustTransferIndex(void)
 // FIXME: do this in SPU instead
 void cdrDecodedBufferInterrupt()
 {
-	u16 buf_ptr[0x400], lcv;
-
 #if 0
 	return;
 #endif
@@ -267,10 +265,8 @@ void cdrDecodedBufferInterrupt()
 	if( (SPU_readRegister( H_SPUirqAddr ) * 8) >= 0x800 ) return;
 
 
-
 	// turn off plugin SPU IRQ decoded buffer handling
 	SPU_registerCallback( 0 );
-
 
 
 	/*

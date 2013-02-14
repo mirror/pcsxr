@@ -234,8 +234,8 @@ void PADhandleKey(int key) {
 			gpuShowPic();
 			break;
 		case XK_F5:
-			Config.Sio ^= 0x1;
-			if (Config.Sio)
+			Config.SioIrq ^= 0x1;
+			if (Config.SioIrq)
 				sprintf(Text, _("SIO IRQ Always Enabled"));
 			else sprintf(Text, _("SIO IRQ Not Always Enabled"));
 			GPU_displayText(Text);

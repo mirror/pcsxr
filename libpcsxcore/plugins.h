@@ -26,8 +26,6 @@ extern "C" {
 
 #include "psxcommon.h"
 
-//#define ENABLE_SIO1API 1
-
 #ifndef _WIN32
 
 typedef void* HWND;

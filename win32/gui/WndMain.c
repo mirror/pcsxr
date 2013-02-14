@@ -1326,7 +1326,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Static_SetText(GetDlgItem(hW,IDC_SELPSX),  _("Psx System Type"));
 
 			Button_SetCheck(GetDlgItem(hW,IDC_XA),      Config.Xa);
-			Button_SetCheck(GetDlgItem(hW,IDC_SIO),     Config.Sio);
+			Button_SetCheck(GetDlgItem(hW,IDC_SIO),     Config.SioIrq);
 			Button_SetCheck(GetDlgItem(hW,IDC_MDEC),    Config.Mdec);
 			Button_SetCheck(GetDlgItem(hW,IDC_CDDA),    Config.Cdda);
 			Button_SetCheck(GetDlgItem(hW,IDC_SLOWBOOT),Config.SlowBoot);
@@ -1360,7 +1360,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					else Config.PsxType = 1;
 
 					Config.Xa      = Button_GetCheck(GetDlgItem(hW,IDC_XA));
-					Config.Sio     = Button_GetCheck(GetDlgItem(hW,IDC_SIO));
+					Config.SioIrq  = Button_GetCheck(GetDlgItem(hW,IDC_SIO));
 					Config.Mdec    = Button_GetCheck(GetDlgItem(hW,IDC_MDEC));
 					Config.Cdda    = Button_GetCheck(GetDlgItem(hW,IDC_CDDA));
 					Config.SlowBoot= Button_GetCheck(GetDlgItem(hW,IDC_SLOWBOOT));

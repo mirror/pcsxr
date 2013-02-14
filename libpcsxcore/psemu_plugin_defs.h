@@ -16,6 +16,7 @@ extern "C" {
 #define PSE_LT_SPU					4
 #define PSE_LT_PAD					8
 #define PSE_LT_NET					16
+#define PSE_LT_SIO1					32
 
 // DLL function return codes
 #define PSE_ERR_SUCCESS				0	// every function in DLL if completed sucessfully should return this value

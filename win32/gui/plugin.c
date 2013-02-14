@@ -118,8 +118,8 @@ void PADhandleKey(int key) {
 			break;
 
 		case VK_F5:
-			Config.Sio ^= 0x1;
-			if (Config.Sio)
+			Config.SioIrq ^= 0x1;
+			if (Config.SioIrq)
 				 sprintf(Text, _("*PCSXR*: Sio Irq Always Enabled"));
 			else sprintf(Text, _("*PCSXR*: Sio Irq Not Always Enabled"));
 			GPU_displayText(Text);

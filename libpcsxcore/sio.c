@@ -85,7 +85,7 @@ static int DongleInit;
 #if 0
 // Breaks Twisted Metal 2 intro
 #define SIO_INT(eCycle) { \
-	if (!Config.Sio) { \
+	if (!Config.SioIrq) { \
 		psxRegs.interrupt |= (1 << PSXINT_SIO); \
 		psxRegs.intCycle[PSXINT_SIO].cycle = eCycle; \
 		psxRegs.intCycle[PSXINT_SIO].sCycle = psxRegs.cycle; \
@@ -97,7 +97,7 @@ static int DongleInit;
 #endif
 
 #define SIO_INT(eCycle) { \
-	if (!Config.Sio) { \
+	if (!Config.SioIrq) { \
 		psxRegs.interrupt |= (1 << PSXINT_SIO); \
 		psxRegs.intCycle[PSXINT_SIO].cycle = eCycle; \
 		psxRegs.intCycle[PSXINT_SIO].sCycle = psxRegs.cycle; \

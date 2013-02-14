@@ -386,6 +386,9 @@ int main(int argc, char *argv[]) {
 		set_default_plugin(GpuConfS.plist[0], Config.Gpu);
 		set_default_plugin(SpuConfS.plist[0], Config.Spu);
 		set_default_plugin(CdrConfS.plist[0], Config.Cdr);
+#ifdef ENABLE_SIO1API
+		set_default_plugin(Sio1ConfS.plist[0], Config.Sio1);
+#endif
 		set_default_plugin(Pad1ConfS.plist[0], Config.Pad1);
 		set_default_plugin(Pad2ConfS.plist[0], Config.Pad2);
 		set_default_plugin(BiosConfS.plist[0], Config.Bios);

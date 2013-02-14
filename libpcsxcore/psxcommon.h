@@ -129,7 +129,9 @@ typedef struct {
 	char Pad1[MAXPATHLEN];
 	char Pad2[MAXPATHLEN];
 	char Net[MAXPATHLEN];
+#ifdef ENABLE_SIO1API
 	char Sio1[MAXPATHLEN];
+#endif
 	char Mcd1[MAXPATHLEN];
 	char Mcd2[MAXPATHLEN];
 	char Bios[MAXPATHLEN];
@@ -138,7 +140,7 @@ typedef struct {
 	char PatchesDir[MAXPATHLEN];
 	char IsoImgDir[MAXPATHLEN];
 	boolean Xa;
-	boolean Sio;
+	boolean SioIrq;
 	boolean Mdec;
 	boolean PsxAuto;
 	boolean Cdda;

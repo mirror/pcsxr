@@ -114,6 +114,9 @@ int LoadConfig(PcsxConfig *Conf) {
 	GetValue(data, "Gpu",  Config.Gpu);
 	GetValue(data, "Spu",  Config.Spu);
 	GetValue(data, "Cdr",  Config.Cdr);
+#ifdef ENABLE_SIO1API
+	GetValue(data, "Sio1", Config.Sio1);
+#endif
 	GetValue(data, "Pad1", Config.Pad1);
 	GetValue(data, "Pad2", Config.Pad2);
 	GetValue(data, "Net",  Config.Net);
@@ -124,7 +127,7 @@ int LoadConfig(PcsxConfig *Conf) {
 	GetValue(data, "IsoImgDir",  Config.IsoImgDir);
 
 	Config.Xa      = GetValueb(data, "Xa");
-	Config.Sio     = GetValueb(data, "Sio");
+	Config.SioIrq  = GetValueb(data, "SioIrq");
 	Config.Mdec    = GetValueb(data, "Mdec");
 	Config.PsxAuto = GetValueb(data, "PsxAuto");
 	Config.Cdda    = GetValueb(data, "Cdda");
@@ -157,6 +160,9 @@ void SaveConfig() {
 	SetValue("Gpu",  Config.Gpu);
 	SetValue("Spu",  Config.Spu);
 	SetValue("Cdr",  Config.Cdr);
+#ifdef ENABLE_SIO1API
+	SetValue("Sio1", Config.Sio1);
+#endif
 	SetValue("Net",  Config.Net);
 	SetValue("Pad1", Config.Pad1);
 	SetValue("Pad2", Config.Pad2);
@@ -167,7 +173,7 @@ void SaveConfig() {
 	SetValue("IsoImgDir",  Config.IsoImgDir);
 
 	SetValueb("Xa",      Config.Xa);
-	SetValueb("Sio",     Config.Sio);
+	SetValueb("SioIrq",  Config.SioIrq);
 	SetValueb("Mdec",    Config.Mdec);
 	SetValueb("PsxAuto", Config.PsxAuto);
 	SetValueb("Cdda",    Config.Cdda);

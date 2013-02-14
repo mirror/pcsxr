@@ -398,7 +398,7 @@ NSString *saveStatePath;
 	prefByteKeys = [[NSDictionary alloc] initWithObjectsAndKeys:
 		[NSValue valueWithPointer:&Config.Xa], @"NoXaAudio",
 		//[NSValue valueWithPointer:&Config.UseNet], @"NetPlay",
-		[NSValue valueWithPointer:&Config.Sio], @"SioIrqAlways",
+		[NSValue valueWithPointer:&Config.SioIrq], @"SioIrqAlways",
 		[NSValue valueWithPointer:&Config.Mdec], @"BlackAndWhiteMDECVideo",
 		[NSValue valueWithPointer:&Config.PsxAuto], @"AutoDetectVideoType",
 		[NSValue valueWithPointer:&Config.PsxType], @"VideoTypePAL",

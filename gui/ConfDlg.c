@@ -62,6 +62,9 @@ PluginConf CdrConfS;
 PluginConf Pad1ConfS;
 PluginConf Pad2ConfS;
 PluginConf NetConfS;
+#ifdef ENABLE_SIO1API
+PluginConf Sio1ConfS;
+#endif
 PluginConf BiosConfS;
 
 #define FindComboText(combo, list, conf) \
@@ -144,7 +147,11 @@ void ConfigurePlugins() {
 	widget = gtk_builder_get_object(builder, "btn_ConfCdr");
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
-
+#ifdef ENABLE_SIO1API
+	widget = gtk_builder_get_object(builder, "btn_ConfSio1");
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
+			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_SIO1, NULL, G_CONNECT_AFTER);
+#endif
 	widget = gtk_builder_get_object(builder, "btn_AboutGpu");
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
@@ -164,7 +171,11 @@ void ConfigurePlugins() {
 	widget = gtk_builder_get_object(builder, "btn_AboutCdr");
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
-
+#ifdef ENABLE_SIO1API
+	widget = gtk_builder_get_object(builder, "btn_AboutSio1");
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
+			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_SIO1, NULL, G_CONNECT_AFTER);
+#endif
 	widget = gtk_builder_get_object(builder, "GtkFileChooser_Bios");
 	g_signal_connect_data(G_OBJECT(widget), "current_folder_changed",
 			G_CALLBACK(OnBiosPath_Changed), builder, NULL, G_CONNECT_AFTER);
@@ -279,7 +290,28 @@ void OnConf_CdRom() {
 
 	SysCloseLibrary(drv);
 }
+#ifdef ENABLE_SIO1API
+void OnConf_Sio1() {
+	void *drv;
+	SIO1configure conf;
+	char Plugin[MAXPATHLEN];
 
+	sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Sio1);
+	drv = SysLoadLibrary(Plugin);
+	if (drv == NULL) { printf("Error with file %s\n", Plugin); return; }
+
+	while (gtk_events_pending()) gtk_main_iteration();
+
+	conf = (SIO1configure)SysLoadSym(drv, "SIO1configure");
+	if (conf != NULL) {
+		conf();
+	}
+	else
+		SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured."));
+
+	SysCloseLibrary(drv);
+}
+#endif
 void OnConf_Pad() {
 	void *drv;
 	PADconfigure conf;
@@ -291,7 +323,7 @@ void OnConf_Pad() {
 
 	while (gtk_events_pending()) gtk_main_iteration();
 
-	conf = (GPUconfigure)SysLoadSym(drv, "PADconfigure");
+	conf = (PADconfigure)SysLoadSym(drv, "PADconfigure");
 	if (conf != NULL) {
 		conf();
 	}
@@ -307,7 +339,7 @@ void OnConf_Pad() {
 
 		while (gtk_events_pending()) gtk_main_iteration();
 
-		conf = (GPUconfigure)SysLoadSym(drv, "PADconfigure");
+		conf = (PADconfigure)SysLoadSym(drv, "PADconfigure");
 		if (conf != NULL) {
 			conf();
 		}
@@ -322,6 +354,9 @@ static int all_config_set() {
 	if ((strlen(Config.Gpu) != 0) &&
 	    (strlen(Config.Spu) != 0) &&
 	    (strlen(Config.Cdr) != 0) &&
+#ifdef ENABLE_SIO1API
+	    (strlen(Config.Sio1) != 0) &&
+#endif
 	    (strlen(Config.Pad1) != 0) &&
 	    (strlen(Config.Pad2) != 0))
 		retval = TRUE;
@@ -372,6 +407,11 @@ static void on_configure_plugin(GtkWidget *widget, gpointer user_data) {
 			case PSE_LT_CDR:
 				ConfPlugin(CDRconfigure, CdrConfS, Config.Cdr, "CDRconfigure", ConfDlg);
 				break;
+#ifdef ENABLE_SIO1API
+			case PSE_LT_SIO1:
+				ConfPlugin(SIO1configure, Sio1ConfS, Config.Sio1, "SIO1configure", ConfDlg);
+				break;
+#endif
 		}
 	} else
 		ConfigurePlugins();
@@ -393,6 +433,11 @@ static void on_about_plugin(GtkWidget *widget, gpointer user_data) {
 			case PSE_LT_CDR:
 				ConfPlugin(CDRconfigure, CdrConfS, Config.Cdr, "CDRabout", ConfDlg);
 				break;
+#ifdef ENABLE_SIO1API
+			case PSE_LT_SIO1:
+				ConfPlugin(SIO1configure, Sio1ConfS, Config.Sio1, "SIO1about", ConfDlg);
+				break;
+#endif
 		}
 	} else
 		ConfigurePlugins();
@@ -449,6 +494,9 @@ void OnConf_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 	GetComboText(GpuConfS.Combo, GpuConfS.plist, Config.Gpu);
 	GetComboText(SpuConfS.Combo, SpuConfS.plist, Config.Spu);
 	GetComboText(CdrConfS.Combo, CdrConfS.plist, Config.Cdr);
+#ifdef ENABLE_SIO1API
+	GetComboText(Sio1ConfS.Combo, Sio1ConfS.plist, Config.Sio1);
+#endif
 	GetComboText(Pad1ConfS.Combo, Pad1ConfS.plist, Config.Pad1);
 	GetComboText(Pad2ConfS.Combo, Pad2ConfS.plist, Config.Pad2);
 	GetComboText(BiosConfS.Combo, BiosConfS.plist, Config.Bios);
@@ -541,6 +589,9 @@ int plugins_configured() {
 	if (plugin_is_available (Config.Gpu) == FALSE) { Config.Gpu[0] = '\0'; return FALSE; }
 	if (plugin_is_available (Config.Spu) == FALSE) { Config.Spu[0] = '\0'; return FALSE; }
 	if (plugin_is_available (Config.Cdr) == FALSE) { Config.Cdr[0] = '\0'; return FALSE; }
+#ifdef ENABLE_SIO1API
+	if (plugin_is_available (Config.Sio1) == FALSE) { Config.Sio1[0] = '\0'; return FALSE; }
+#endif
 	if (plugin_is_available (Config.Pad1) == FALSE) { Config.Pad1[0] = '\0'; return FALSE; }
 	if (plugin_is_available (Config.Pad2) == FALSE) { Config.Pad2[0] = '\0'; return FALSE; }
 
@@ -597,12 +648,33 @@ void UpdatePluginsBIOS() {
 	char name[256];
 	gchar *linkname;
 
-	GpuConfS.plugins  = 0; SpuConfS.plugins  = 0; CdrConfS.plugins  = 0;
-	Pad1ConfS.plugins = 0; Pad2ConfS.plugins = 0; BiosConfS.plugins = 0;
-	GpuConfS.glist  = NULL; SpuConfS.glist  = NULL; CdrConfS.glist  = NULL;
-	Pad1ConfS.glist = NULL; Pad2ConfS.glist = NULL; BiosConfS.glist = NULL;
-	GpuConfS.plist[0][0]  = '\0'; SpuConfS.plist[0][0]  = '\0'; CdrConfS.plist[0][0]  = '\0';
-	Pad1ConfS.plist[0][0] = '\0'; Pad2ConfS.plist[0][0] = '\0'; BiosConfS.plist[0][0] = '\0';
+	GpuConfS.plugins  = 0;
+	SpuConfS.plugins  = 0;
+	CdrConfS.plugins  = 0;
+#ifdef ENABLE_SIO1API
+	Sio1ConfS.plugins = 0;
+#endif
+	Pad1ConfS.plugins = 0;
+	Pad2ConfS.plugins = 0;
+	BiosConfS.plugins = 0;
+	GpuConfS.glist  = NULL;
+	SpuConfS.glist  = NULL;
+	CdrConfS.glist  = NULL;
+#ifdef ENABLE_SIO1API
+	Sio1ConfS.glist  = NULL;
+#endif
+	Pad1ConfS.glist = NULL;
+	Pad2ConfS.glist = NULL;
+	BiosConfS.glist = NULL;
+	GpuConfS.plist[0][0]  = '\0';
+	SpuConfS.plist[0][0]  = '\0';
+	CdrConfS.plist[0][0]  = '\0';
+#ifdef ENABLE_SIO1API
+	Sio1ConfS.plist[0][0]  = '\0';
+#endif
+	Pad1ConfS.plist[0][0] = '\0';
+	Pad2ConfS.plist[0][0] = '\0';
+	BiosConfS.plist[0][0] = '\0';
 
 	// Load and get plugin info
 	dir = opendir(Config.PluginsDir);
@@ -629,6 +701,9 @@ void UpdatePluginsBIOS() {
 		if (PSE_getLibType == NULL) {
 			if (strstr(linkname, "gpu") != NULL) type = PSE_LT_GPU;
 			else if (strstr(linkname, "cdr") != NULL) type = PSE_LT_CDR;
+#ifdef ENABLE_SIO1API
+			else if (strstr(linkname, "sio1") != NULL) type = PSE_LT_SIO1;
+#endif
 			else if (strstr(linkname, "spu") != NULL) type = PSE_LT_SPU;
 			else if (strstr(linkname, "pad") != NULL) type = PSE_LT_PAD;
 			else { g_free(linkname); continue; }
@@ -651,6 +726,10 @@ void UpdatePluginsBIOS() {
 
 		if (type & PSE_LT_CDR)
 			ComboAddPlugin(Cdr);
+#ifdef ENABLE_SIO1API
+		if (type & PSE_LT_SIO1)
+			ComboAddPlugin(Sio1);
+#endif
 		if (type & PSE_LT_GPU)
 			ComboAddPlugin(Gpu);
 		if (type & PSE_LT_SPU)
@@ -681,6 +760,9 @@ static void UpdatePluginsBIOS_UpdateGUI() {
 	ConfCreatePConf("Pad1", Pad1);
 	ConfCreatePConf("Pad2", Pad2);
 	ConfCreatePConf("Cdr", Cdr);
+#ifdef ENABLE_SIO1API
+	ConfCreatePConf("Sio1", Sio1);
+#endif
 	ConfCreatePConf("Bios", Bios);
 }
 
@@ -792,7 +874,7 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 		Config.PsxType = PSX_TYPE_PAL;
 
 	Config.Xa = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Xa")));
-	Config.Sio = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Sio")));
+	Config.SioIrq = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_SioIrq")));
 	Config.Mdec = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Mdec")));
 	Config.Cdda = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_CDDA")));
 	Config.SlowBoot = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_SlowBoot")));
@@ -855,7 +937,7 @@ void OnConf_Cpu() {
 	gtk_widget_set_sensitive(GTK_WIDGET (PsxCombo), !Config.PsxAuto);
 
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Xa")), Config.Xa);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Sio")), Config.Sio);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_SioIrq")), Config.SioIrq);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Mdec")), Config.Mdec);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_CDDA")), Config.Cdda);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_SlowBoot")), Config.SlowBoot);
