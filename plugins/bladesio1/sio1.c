@@ -20,6 +20,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
+
+#include "psemu_plugin_defs.h"
 
 #include "settings.h"
 #include "sio1.h"
@@ -81,107 +84,129 @@ long CALLBACK SIO1keypressed( int val )
 
 void CALLBACK SIO1writeData8(unsigned char val)
 {
+	printf("SIO1writeData8(%.2x)\n", val);
 }
 
 void CALLBACK SIO1writeData16(unsigned short val)
 {
+	printf("SIO1writeData16(%.4x)\n", val);
 }
 
 void CALLBACK SIO1writeData32(unsigned long val)
 {
+	printf("SIO1writeData32(%.8x)\n", val);
 }
 
 void CALLBACK SIO1writeStat16(unsigned short val)
 {
+	printf("SIO1writeStat16(%.4x)\n", val);
 }
 
 void CALLBACK SIO1writeStat32(unsigned long val)
 {
+	printf("SIO1writeStat32(%.8x)\n", val);
 }
 
 void CALLBACK SIO1writeMode16(unsigned short val)
 {
+	printf("SIO1writeMode16(%.4x)\n", val);
 }
 
 void CALLBACK SIO1writeMode32(unsigned long val)
 {
+	printf("SIO1writeMode32(%.8x)\n", val);
 }
 
 void CALLBACK SIO1writeCtrl16(unsigned short val)
 {
+	printf("SIO1writeCtrl16(%.4x)\n", val);
 }
 
 void CALLBACK SIO1writeCtrl32(unsigned long val)
 {
+	printf("SIO1writeCtrl32(%.8x)\n", val);
 }
 
 void CALLBACK SIO1writeBaud16(unsigned short val)
 {
+	printf("SIO1writeBaud16(%.4x)\n", val);
 }
 
 void CALLBACK SIO1writeBaud32(unsigned long val)
 {
+	printf("SIO1writeBaud32(%.8x)\n", val);
 }
 
-unsigned char CALLBACK SIO1readData8(void)
+unsigned char CALLBACK SIO1readData8()
 {
+	printf("SIO1readData8()\n");
     return 0;
 }
 
-unsigned short CALLBACK SIO1readData16(void)
+unsigned short CALLBACK SIO1readData16()
 {
+	printf("SIO1readData16()\n");
     return 0;
 }
 
-unsigned long CALLBACK SIO1readData32(void)
+unsigned long CALLBACK SIO1readData32()
 {
+	printf("SIO1readData32()\n");
     return 0;
 }
 
-unsigned short CALLBACK SIO1readStat16(void)
+unsigned short CALLBACK SIO1readStat16()
 {
+	printf("SIO1readStat16()\n");
     return 0;
 }
 
-unsigned long CALLBACK SIO1readStat32(void)
+unsigned long CALLBACK SIO1readStat32()
 {
+	printf("SIO1readStat32()\n");
     return 0;
 }
 
-unsigned short CALLBACK SIO1readMode16(void)
+unsigned short CALLBACK SIO1readMode16()
 {
+	printf("SIO1readMode16()\n");
     return 0;
 }
 
-unsigned long CALLBACK SIO1readMode32(void)
+unsigned long CALLBACK SIO1readMode32()
 {
+	printf("SIO1readMode32()\n");
     return 0;
 }
 
-unsigned short CALLBACK SIO1readCtrl16(void)
+unsigned short CALLBACK SIO1readCtrl16()
 {
+	printf("SIO1readCtrl16()\n");
     return 0;
 }
 
-unsigned long CALLBACK SIO1readCtrl32(void)
+unsigned long CALLBACK SIO1readCtrl32()
 {
+	printf("SIO1readCtrl32()\n");
     return 0;
 }
 
-unsigned short CALLBACK SIO1readBaud16(void)
+unsigned short CALLBACK SIO1readBaud16()
 {
+	printf("SIO1readBaud16()\n");
     return 0;
 }
 
-unsigned long CALLBACK SIO1readBaud32(void)
+unsigned long CALLBACK SIO1readBaud32()
 {
+	printf("SIO1readBaud32()\n");
     return 0;
 }
 
 
 /******************************************************************************/
 
-void CALLBACK SIO1registerCallback(void (CALLBACK *callback)(void))
+void CALLBACK SIO1registerCallback(void (CALLBACK *callback)())
 {
 }
 
@@ -196,7 +221,6 @@ long CALLBACK SIO1queryPlayer()
 
 unsigned long CALLBACK PSEgetLibType()
 {
-	#define PSE_LT_SIO1   32
     return PSE_LT_SIO1;
 }
 

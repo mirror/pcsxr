@@ -43,7 +43,6 @@ plugins/dfsound/Makefile
 plugins/dfxvideo/Makefile
 plugins/dfcdrom/Makefile
 plugins/dfnet/Makefile
-plugins/bladesio1/Makefile
 pixmaps/Makefile
 po/Makefile.in])
 
@@ -141,6 +140,18 @@ if test "$BUILD_OPENGL" = "yes"; then
 	PEOPSXGL="plugins/peopsxgl"
 	AC_SUBST(PEOPSXGL)
 	AC_CONFIG_FILES([plugins/peopsxgl/Makefile])
+fi
+
+AC_ARG_ENABLE(sio1, [  --enable-sio1         build SIO1 plugin (default=no)],
+[ BUILD_SIO1="$enableval" ],[ BUILD_SIO1="no" ])
+
+BLADESIO1=""
+
+if test "$BUILD_SIO1" = "yes"; then
+	AC_DEFINE([ENABLE_SIO1API], [1], [Define if we want use sio interface.])
+	PEOPSXGL="plugins/bladesio1"
+	AC_SUBST(BLADESIO1)
+	AC_CONFIG_FILES([plugins/bladesio1/Makefile])
 fi
 
 AM_CONDITIONAL(X86_NASM, false)
