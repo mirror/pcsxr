@@ -599,6 +599,7 @@ void OnFile_RunBios() {
 }
 
 static gchar *Open_Iso_Proc() {
+	struct stat sb;
 	GtkWidget *chooser;
 	gchar *filename;
 	GtkFileFilter *psxfilter, *allfilter;
@@ -609,9 +610,9 @@ static gchar *Open_Iso_Proc() {
 		GTK_STOCK_OK, GTK_RESPONSE_OK,
 		NULL);
 
-	if (current_folder[0] == '\0' && Config.IsoImgDir[0] != '\0') {
+	if (stat(Config.IsoImgDir, &sb) == 0 && S_ISDIR(sb.st_mode)) {
 		strcpy(current_folder, Config.IsoImgDir);
-	} else if (current_folder[0] == '\0' && Config.IsoImgDir[0] == '\0') {
+	} else if (strlen(Config.IsoImgDir) <= 0) {
 		strcpy(current_folder, getenv("HOME"));
 	} else {
 		/* Using static (recent) PATH */
@@ -664,7 +665,7 @@ static gchar *Open_Iso_Proc() {
 		}
 
 		/* If ISO path is NULL save current path. */
-		if (Config.IsoImgDir[0] == '\0') {
+		if (!S_ISDIR(sb.st_mode)) {
 		  strcpy(Config.IsoImgDir, current_folder);
 		  SaveConfig();
 		}
