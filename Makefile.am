@@ -9,8 +9,8 @@ SUBDIRS += plugins/dfsound
 SUBDIRS += plugins/dfxvideo 
 SUBDIRS += plugins/dfcdrom
 SUBDIRS += plugins/dfnet
-SUBDIRS += plugins/bladesio1
 
+SUBDIRS += $(BLADESIO1)
 SUBDIRS += $(PEOPSXGL)
 
 EXTRA_DIST = AUTHORS COPYING INSTALL NEWS README ChangeLog ChangeLog.df strip_fPIC.sh
