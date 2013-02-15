@@ -149,7 +149,7 @@ BLADESIO1=""
 
 if test "$BUILD_SIO1" = "yes"; then
 	AC_DEFINE([ENABLE_SIO1API], [1], [Define if we want use sio interface.])
-	PEOPSXGL="plugins/bladesio1"
+	BLADESIO1="plugins/bladesio1"
 	AC_SUBST(BLADESIO1)
 	AC_CONFIG_FILES([plugins/bladesio1/Makefile])
 fi

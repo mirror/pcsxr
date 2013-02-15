@@ -230,7 +230,8 @@ static int LoadGPUplugin(const char *GPUdll) {
 	hGPUDriver = SysLoadLibrary(GPUdll);
 	if (hGPUDriver == NULL) {
 		GPU_configure = NULL;
-		SysMessage (_("Could not load GPU plugin %s!"), GPUdll); return -1;
+		SysMessage (_("Could not load GPU plugin %s!\n%s"), GPUdll, SysLibError());
+		return -1;
 	}
 	drv = hGPUDriver;
 	LoadGpuSym1(init, "GPUinit");
@@ -305,7 +306,8 @@ static int LoadCDRplugin(const char *CDRdll) {
 	hCDRDriver = SysLoadLibrary(CDRdll);
 	if (hCDRDriver == NULL) {
 		CDR_configure = NULL;
-		SysMessage (_("Could not load CD-ROM plugin %s!"), CDRdll);  return -1;
+		SysMessage (_("Could not load CD-ROM plugin %s!\n%s"), CDRdll, SysLibError());
+		return -1;
 	}
 	drv = hCDRDriver;
 	LoadCdrSym1(init, "CDRinit");
@@ -353,7 +355,8 @@ static int LoadSPUplugin(const char *SPUdll) {
 	hSPUDriver = SysLoadLibrary(SPUdll);
 	if (hSPUDriver == NULL) {
 		SPU_configure = NULL;
-		SysMessage (_("Could not load SPU plugin %s!"), SPUdll); return -1;
+		SysMessage (_("Could not load SPU plugin %s!\n%s"), SPUdll, SysLibError());
+		return -1;
 	}
 	drv = hSPUDriver;
 	LoadSpuSym1(init, "SPUinit");
@@ -492,7 +495,8 @@ static int LoadPAD1plugin(const char *PAD1dll) {
 	hPAD1Driver = SysLoadLibrary(PAD1dll);
 	if (hPAD1Driver == NULL) {
 		PAD1_configure = NULL;
-		SysMessage (_("Could not load Controller 1 plugin %s!"), PAD1dll); return -1;
+		SysMessage (_("Could not load Controller 1 plugin %s!\n%s"), PAD1dll, SysLibError());
+		return -1;
 	}
 	drv = hPAD1Driver;
 	LoadPad1Sym1(init, "PADinit");
@@ -550,7 +554,8 @@ static int LoadPAD2plugin(const char *PAD2dll) {
 	hPAD2Driver = SysLoadLibrary(PAD2dll);
 	if (hPAD2Driver == NULL) {
 		PAD2_configure = NULL;
-		SysMessage (_("Could not load Controller 2 plugin %s!"), PAD2dll); return -1;
+		SysMessage (_("Could not load Controller 2 plugin %s!\n%s"), PAD2dll, SysLibError());
+		return -1;
 	}
 	drv = hPAD2Driver;
 	LoadPad2Sym1(init, "PADinit");
@@ -595,7 +600,8 @@ static int LoadNETplugin(const char *NETdll) {
 
 	hNETDriver = SysLoadLibrary(NETdll);
 	if (hNETDriver == NULL) {
-		SysMessage (_("Could not load NetPlay plugin %s!"), NETdll); return -1;
+		SysMessage (_("Could not load NetPlay plugin %s!\n%s"), NETdll, SysLibError());
+		return -1;
 	}
 	drv = hNETDriver;
 	LoadNetSym1(init, "NETinit");
@@ -671,7 +677,8 @@ static int LoadSIO1plugin(const char *SIO1dll) {
 
     hSIO1Driver = SysLoadLibrary(SIO1dll);
     if (hSIO1Driver == NULL) {
-        SysMessage (_("Could not load SIO1 plugin %s!"), SIO1dll); return -1;
+		SysMessage (_("Could not load SIO1 plugin %s!\n%s"), SIO1dll, SysLibError());
+		return -1;
     }
     drv = hSIO1Driver;
 
