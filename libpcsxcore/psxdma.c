@@ -42,8 +42,8 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 #endif
 			ptr = (u16 *)PSXM(madr);
 			if (ptr == NULL) {
-#ifdef CPU_LOG
-				CPU_LOG("*** DMA4 SPU - mem2spu *** NULL Pointer!!!\n");
+#ifdef PSXDMA_LOG
+				PSXDMA_LOG("*** DMA4 SPU - mem2spu *** NULL Pointer!!!\n");
 #endif
 				break;
 			}
@@ -59,8 +59,8 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 #endif
 			ptr = (u16 *)PSXM(madr);
 			if (ptr == NULL) {
-#ifdef CPU_LOG
-				CPU_LOG("*** DMA4 SPU - spu2mem *** NULL Pointer!!!\n");
+#ifdef PSXDMA_LOG
+				PSXDMA_LOG("*** DMA4 SPU - spu2mem *** NULL Pointer!!!\n");
 #endif
 				break;
 			}
@@ -98,8 +98,8 @@ void psxDma6(u32 madr, u32 bcr, u32 chcr) {
 
 	if (chcr == 0x11000002) {
 		if (mem == NULL) {
-#ifdef CPU_LOG
-			CPU_LOG("*** DMA6 OT *** NULL Pointer!!!\n");
+#ifdef PSXDMA_LOG
+			PSXDMA_LOG("*** DMA6 OT *** NULL Pointer!!!\n");
 #endif
 			HW_DMA6_CHCR &= SWAP32(~0x01000000);
 			DMA_INTERRUPT(6);
