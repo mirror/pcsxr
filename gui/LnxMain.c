@@ -307,6 +307,7 @@ int main(int argc, char *argv[]) {
 
 			if (i+1 >= argc) break;
 			strncpy(isofilename, argv[++i], MAXPATHLEN);
+			isofilename[MAXPATHLEN] = '\0';
 			if (isofilename[0] != '/') {
 				getcwd(path, MAXPATHLEN);
 				if (strlen(path) + strlen(isofilename) + 1 < MAXPATHLEN) {
@@ -467,7 +468,17 @@ int SysInit() {
 #else
 	emuLog = stdout;
 #endif
-	setvbuf(emuLog, NULL, _IONBF, 0);
+#ifdef PSXCPU_LOG
+    if (Config.Cpu == CPU_INTERPRETER) {
+		const int BUFSZ = 1 * 512*512*512;
+		void* buf = malloc(BUFSZ);
+		setvbuf(emuLog, buf, _IOFBF, BUFSZ);
+	} else {
+		setvbuf(emuLog, NULL, _IONBF, NULL);
+	}
+#else
+	setvbuf(emuLog, NULL, _IONBF, NULL);
+#endif
 #endif
 
 	if (EmuInit() == -1) {
@@ -520,7 +531,7 @@ void SysPrintf(const char *fmt, ...) {
 
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
-	fprintf(emuLog, "%s", msg);
+	if (emuLog != NULL) fprintf(emuLog, "%s", msg);
 #endif
 #endif
 }
