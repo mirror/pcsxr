@@ -108,16 +108,16 @@ void ConfigurePlugins() {
 
 	UpdatePluginsBIOS_UpdateGUI(builder);
 
-	ConfDlg = gtk_builder_get_object(builder, "ConfDlg");
+	ConfDlg = GTK_WIDGET(gtk_builder_get_object(builder, "ConfDlg"));
 	
 	gtk_window_set_title(GTK_WINDOW(ConfDlg), _("Configure PCSXR"));
 	gtk_widget_show (ConfDlg);
 
 	/* Set the paths in the file choosers to be based on the saved configurations */
-	widget = gtk_builder_get_object(builder, "GtkFileChooser_Bios");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkFileChooser_Bios"));
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (widget), Config.BiosDir);
 
-	widget = gtk_builder_get_object(builder, "GtkFileChooser_Plugin");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkFileChooser_Plugin"));
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (widget), Config.PluginsDir);
 
 	if (strlen(Config.PluginsDir) == 0) {
@@ -127,69 +127,69 @@ void ConfigurePlugins() {
 		}
 	}
 
-	widget = gtk_builder_get_object(builder, "btn_ConfGpu");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_ConfGpu"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_ConfSpu");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_ConfSpu"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_SPU, NULL, G_CONNECT_AFTER);
 
 	/* ADB TODO Does pad 1 and 2 need to be different? */
-	widget = gtk_builder_get_object(builder, "btn_ConfPad1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_ConfPad1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 						  G_CALLBACK(OnConfConf_Pad1Conf), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_ConfPad2");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_ConfPad2"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConfConf_Pad2Conf), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_ConfCdr");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_ConfCdr"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
 #ifdef ENABLE_SIO1API
-	widget = gtk_builder_get_object(builder, "btn_ConfSio1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_ConfSio1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_SIO1, NULL, G_CONNECT_AFTER);
 #else
-	widget = gtk_builder_get_object(builder, "label18");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "label18"));
 	gtk_widget_set_sensitive(widget, FALSE);
-	widget = gtk_builder_get_object(builder, "GtkCombo_Sio1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCombo_Sio1"));
 	gtk_widget_set_sensitive(widget, FALSE);
-	widget = gtk_builder_get_object(builder, "btn_ConfSio1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_ConfSio1"));
 	gtk_widget_set_sensitive(widget, FALSE);
-	widget = gtk_builder_get_object(builder, "btn_AboutSio1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_AboutSio1"));
 	gtk_widget_set_sensitive(widget, FALSE);
 #endif
-	widget = gtk_builder_get_object(builder, "btn_AboutGpu");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_AboutGpu"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_AboutSpu");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_AboutSpu"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_SPU, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_AboutPad1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_AboutPad1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConfConf_Pad1About), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_AboutPad2");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_AboutPad2"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConfConf_Pad2About), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_AboutCdr");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_AboutCdr"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
 #ifdef ENABLE_SIO1API
-	widget = gtk_builder_get_object(builder, "btn_AboutSio1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_AboutSio1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_SIO1, NULL, G_CONNECT_AFTER);
 #endif
-	widget = gtk_builder_get_object(builder, "GtkFileChooser_Bios");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkFileChooser_Bios"));
 	g_signal_connect_data(G_OBJECT(widget), "current_folder_changed",
 			G_CALLBACK(OnBiosPath_Changed), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "GtkFileChooser_Plugin");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkFileChooser_Plugin"));
 	g_signal_connect_data(G_OBJECT(widget), "current_folder_changed",
 			G_CALLBACK(OnPluginPath_Changed), builder, NULL, G_CONNECT_AFTER);
 
@@ -218,7 +218,7 @@ void OnConf_Net() {
 		return;
 	}
 
-	NetDlg = gtk_builder_get_object(builder, "NetDlg");
+	NetDlg = GTK_WIDGET(gtk_builder_get_object(builder, "NetDlg"));
 	
 	gtk_widget_show (NetDlg);
 
@@ -228,11 +228,11 @@ void OnConf_Net() {
 	g_signal_connect_data(G_OBJECT(NetDlg), "response",
 			G_CALLBACK(OnNet_Clicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_ConfNet");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_ConfNet"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnNet_Conf), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_AboutNet");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_AboutNet"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnNet_About), builder, NULL, G_CONNECT_AFTER);
 }
@@ -480,8 +480,13 @@ static void OnPluginPath_Changed(GtkWidget *wdg, gpointer data) {
 	gchar *path;
 
 	path = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (wdg));
+	GSList * l = gtk_file_chooser_get_filenames(GTK_FILE_CHOOSER (wdg));
+	//printf(("%s and %s\n"), path, l->data);
+
+    if (l) path = l->data;
 	strcpy(Config.PluginsDir, path);
-	UpdatePluginsBIOS();
+
+    UpdatePluginsBIOS();
 	UpdatePluginsBIOS_UpdateGUI(data);
 
 	g_free(path);
@@ -491,6 +496,10 @@ static void OnBiosPath_Changed(GtkWidget *wdg, gpointer data) {
 	gchar *foldername;
 
 	foldername = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (wdg));
+	GSList * l = gtk_file_chooser_get_filenames(GTK_FILE_CHOOSER (wdg));
+	//printf(("%s and %s\n"), foldername, l->data);
+
+	if (l) foldername = l->data;
 	strcpy(Config.BiosDir, foldername);
 
 	UpdatePluginsBIOS();
@@ -549,24 +558,24 @@ void populate_combo_box(GtkWidget *widget, GList *list) {
 	/* Populate the relevant combo widget with the list of plugins. \
 	   If no plugins available, disable the combo and its controls. \
 	   Note that the Bios plugin has no About/Conf control. */ \
-	type##ConfS.Combo = gtk_builder_get_object(builder, "GtkCombo_" name); \
+	type##ConfS.Combo = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCombo_" name)); \
 	if (type##ConfS.glist != NULL) { \
 		populate_combo_box (type##ConfS.Combo, type##ConfS.glist); \
 		FindComboText(type##ConfS.Combo, type##ConfS.plist, Config.type); \
 		gtk_widget_set_sensitive (type##ConfS.Combo, TRUE); \
 		if (g_ascii_strcasecmp (name, "Bios") != 0) { \
-			controlwidget = gtk_builder_get_object(builder, "btn_Conf" name); \
+			controlwidget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_Conf" name)); \
 			gtk_widget_set_sensitive (controlwidget, TRUE); \
-			controlwidget = gtk_builder_get_object(builder, "btn_About" name); \
+			controlwidget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_About" name)); \
 			gtk_widget_set_sensitive (controlwidget, TRUE); \
 		} \
 	} else { \
 		if (g_ascii_strcasecmp (name, "Bios") != 0) { \
-			gtk_cell_layout_clear (GTK_CELL_LAYOUT (type##ConfS.Combo)); \
+			gtk_combo_box_set_model(GTK_COMBO_BOX(type##ConfS.Combo), NULL); \
 			gtk_widget_set_sensitive (type##ConfS.Combo, FALSE); \
-			controlwidget = gtk_builder_get_object(builder, "btn_Conf" name); \
+			controlwidget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_Conf" name)); \
 			gtk_widget_set_sensitive (controlwidget, FALSE); \
-			controlwidget = gtk_builder_get_object(builder, "btn_About" name); \
+			controlwidget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_About" name)); \
 			gtk_widget_set_sensitive (controlwidget, FALSE); \
 		} \
 	}
@@ -846,7 +855,7 @@ char *psxtypes[] = {
 // When the auto-detect CPU type is selected, disable the NTSC/PAL selection
 static void OnCpu_PsxAutoClicked (GtkWidget *widget, gpointer user_data) {
 	GtkWidget *combo;
-	combo = gtk_builder_get_object(builder, "GtkCombo_PsxType");
+	combo = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCombo_PsxType"));
 
 	gtk_widget_set_sensitive (combo,
 			!(gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))));
@@ -855,7 +864,7 @@ static void OnCpu_PsxAutoClicked (GtkWidget *widget, gpointer user_data) {
 // When the interpreter core is deselected, disable the debugger checkbox
 static void OnCpu_CpuClicked(GtkWidget *widget, gpointer user_data) {
 	GtkWidget *check;
-	check = gtk_builder_get_object(builder, "GtkCheckButton_Dbg");
+	check = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCheckButton_Dbg"));
 
 	// Debugger is only working with interpreter not recompiler, so let's set it
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
@@ -870,7 +879,7 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 	int tmp;
 	long t;
 
-	widget = gtk_builder_get_object(builder, "GtkCombo_PsxType");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCombo_PsxType"));
 
 	// If nothing chosen, default to NTSC
 	tmp = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
@@ -937,11 +946,11 @@ void OnConf_Cpu() {
 		return;
 	}
 
-	CpuDlg = gtk_builder_get_object(builder, "CpuDlg");
+	CpuDlg = GTK_WIDGET(gtk_builder_get_object(builder, "CpuDlg"));
 
 	gtk_widget_show (CpuDlg);
 
-	PsxCombo = gtk_builder_get_object(builder, "GtkCombo_PsxType");
+	PsxCombo = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCombo_PsxType"));
 	gtk_combo_box_set_active(GTK_COMBO_BOX (PsxCombo), Config.PsxType);
 	gtk_widget_set_sensitive(GTK_WIDGET (PsxCombo), !Config.PsxAuto);
 
