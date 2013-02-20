@@ -77,78 +77,78 @@ void ResetMenuSlots() {
 		// disable state saving/loading if no CD is loaded
 		for (i = 0; i < MAX_SLOTS; i++) {
 			str = g_strdup_printf("GtkMenuItem_SaveSlot%d", i+1);
-			widget = gtk_builder_get_object(builder, str);
+			widget = GTK_WIDGET(gtk_builder_get_object(builder, str));
 			g_free(str);
 
 			gtk_widget_set_sensitive(widget, FALSE);
 
 			str = g_strdup_printf("GtkMenuItem_LoadSlot%d", i+1);
-			widget = gtk_builder_get_object(builder, str);
+			widget = GTK_WIDGET(gtk_builder_get_object(builder, str));
 			g_free(str);
 
 			gtk_widget_set_sensitive(widget, FALSE);
 		}
 
 		// also disable certain menu/toolbar items
-		widget = gtk_builder_get_object(builder, "other1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "other1"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "other2");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "other2"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "run1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "run1"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "reset1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "reset1"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "shutdown1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "shutdown1"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "search1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "search1"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "SwitchImage");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "SwitchImage"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "memorydump1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "memorydump1"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "toolbutton_run");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_run"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "toolbutton_switchimage");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_switchimage"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "plugins_bios");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "plugins_bios"));
 		gtk_widget_set_sensitive(widget, TRUE);
-		widget = gtk_builder_get_object(builder, "graphics1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "graphics1"));
 		gtk_widget_set_sensitive(widget, TRUE);
-		widget = gtk_builder_get_object(builder, "sound1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "sound1"));
 		gtk_widget_set_sensitive(widget, TRUE);
-		widget = gtk_builder_get_object(builder, "cdrom1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "cdrom1"));
 		gtk_widget_set_sensitive(widget, TRUE);
-		widget = gtk_builder_get_object(builder, "pad1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "pad1"));
 		gtk_widget_set_sensitive(widget, TRUE);
 #ifdef ENABLE_SIO1API
-		widget = gtk_builder_get_object(builder, "sio1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "sio1"));
 		gtk_widget_set_sensitive(widget, TRUE);
 #else
-		widget = gtk_builder_get_object(builder, "sio1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "sio1"));
 		gtk_widget_set_sensitive(widget, FALSE);	
 #endif
-		widget = gtk_builder_get_object(builder, "net1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "net1"));
 		gtk_widget_set_sensitive(widget, TRUE);
 
-		widget = gtk_builder_get_object(builder, "toolbutton_switchimage");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_switchimage"));
 		gtk_widget_set_sensitive(widget, UsingIso());
-		widget = gtk_builder_get_object(builder, "toolbutton_graphics");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_graphics"));
 		gtk_widget_set_sensitive(widget, TRUE);
-		widget = gtk_builder_get_object(builder, "toolbutton_sound");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_sound"));
 		gtk_widget_set_sensitive(widget, TRUE);
-		widget = gtk_builder_get_object(builder, "toolbutton_cdrom");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_cdrom"));
 		gtk_widget_set_sensitive(widget, TRUE);
-		widget = gtk_builder_get_object(builder, "toolbutton_controllers");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_controllers"));
 		gtk_widget_set_sensitive(widget, TRUE);
 		
-		widget = gtk_builder_get_object(builder, "statusbar");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "statusbar"));
 		gtk_statusbar_pop(GTK_STATUSBAR(widget), 1);
 		gtk_statusbar_push(GTK_STATUSBAR(widget), 1, _("Ready"));
 	}
 	else {
 		for (i = 0; i < MAX_SLOTS; i++) {
 			str = g_strdup_printf("GtkMenuItem_LoadSlot%d", i+1);
-			widget = gtk_builder_get_object (builder, str);
+			widget = GTK_WIDGET(gtk_builder_get_object (builder, str));
 			g_free (str);
 
 			if (Slots[i] == -1) 
@@ -157,36 +157,36 @@ void ResetMenuSlots() {
 				gtk_widget_set_sensitive(widget, TRUE);
 		}
 
-		widget = gtk_builder_get_object(builder, "plugins_bios");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "plugins_bios"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "graphics1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "graphics1"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "sound1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "sound1"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "cdrom1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "cdrom1"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "pad1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "pad1"));
 		gtk_widget_set_sensitive(widget, FALSE);
 #ifdef ENABLE_SIO1API
-		widget = gtk_builder_get_object(builder, "sio1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "sio1"));
 		gtk_widget_set_sensitive(widget, FALSE);
 #endif
-		widget = gtk_builder_get_object(builder, "net1");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "net1"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "SwitchImage");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "SwitchImage"));
 		gtk_widget_set_sensitive(widget, UsingIso());
-		widget = gtk_builder_get_object(builder, "toolbutton_switchimage");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_switchimage"));
 		gtk_widget_set_sensitive(widget, UsingIso());
-		widget = gtk_builder_get_object(builder, "toolbutton_graphics");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_graphics"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "toolbutton_sound");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_sound"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "toolbutton_cdrom");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_cdrom"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = gtk_builder_get_object(builder, "toolbutton_controllers");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_controllers"));
 		gtk_widget_set_sensitive(widget, FALSE);
 
-		widget = gtk_builder_get_object(builder, "statusbar");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "statusbar"));
 		gtk_statusbar_pop(GTK_STATUSBAR(widget), 1);
 		gtk_statusbar_push(GTK_STATUSBAR(widget), 1, _("Emulation Paused."));
 	}
@@ -255,7 +255,7 @@ void StartGui() {
 		return;
 	}
 	
-	Window = gtk_builder_get_object(builder, "MainWindow");
+	Window = GTK_WIDGET(gtk_builder_get_object(builder, "MainWindow"));
 	gtk_widget_show(GTK_WIDGET(Window));
 
 	gtk_window_set_title(GTK_WINDOW(Window), "PCSXR");
@@ -268,184 +268,184 @@ void StartGui() {
 			G_CALLBACK(OnDestroy), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
 	// File menu
-	widget = gtk_builder_get_object(builder, "RunCd");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "RunCd"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnFile_RunCd), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "RunBios");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "RunBios"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnFile_RunBios), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "RunExe");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "RunExe"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnFile_RunExe), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "RunImage");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "RunImage"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnFile_RunImage), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "exit2");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "exit2"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnFile_Exit), NULL, NULL, G_CONNECT_AFTER);
 
 	// States
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 0, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot2");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot2"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 1, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot3");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot3"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 2, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot4");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot4"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 3, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot5");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot5"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 4, NULL, G_CONNECT_AFTER);	
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot6");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot6"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 5, NULL, G_CONNECT_AFTER);	
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot7");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot7"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 6, NULL, G_CONNECT_AFTER);	
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot8");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot8"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 7, NULL, G_CONNECT_AFTER);	
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot9");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot9"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), (gpointer) 8, NULL, G_CONNECT_AFTER);	
-	widget = gtk_builder_get_object(builder, "other1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "other1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load_other), NULL, NULL, G_CONNECT_AFTER);			
 
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 0, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot2");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot2"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 1, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot3");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot3"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 2, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot4");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot4"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 3, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot5");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot5"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 4, NULL, G_CONNECT_AFTER);	
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot6");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot6"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 5, NULL, G_CONNECT_AFTER);	
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot7");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot7"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 6, NULL, G_CONNECT_AFTER);	
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot8");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot8"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 7, NULL, G_CONNECT_AFTER);	
-	widget = gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot9");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot9"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save), (gpointer) 8, NULL, G_CONNECT_AFTER);	
-	widget = gtk_builder_get_object(builder, "other2");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "other2"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save_other), NULL, NULL, G_CONNECT_AFTER);
 
 	// Emulation menu
-	widget = gtk_builder_get_object(builder, "run1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "run1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnEmu_Run), NULL, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "reset1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "reset1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnEmu_Reset), NULL, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "shutdown1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "shutdown1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnEmu_Shutdown), NULL, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "SwitchImage");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "SwitchImage"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnEmu_SwitchImage), NULL, NULL, G_CONNECT_AFTER);
 
 	// Configuration menu
-	widget = gtk_builder_get_object(builder, "plugins_bios");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "plugins_bios"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(ConfigurePlugins), NULL, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "graphics1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "graphics1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Graphics), NULL, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "sound1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "sound1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Sound), NULL, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "cdrom1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "cdrom1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_CdRom), NULL, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "pad1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "pad1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Pad), NULL, NULL, G_CONNECT_AFTER);
 #ifdef ENABLE_SIO1API
-	widget = gtk_builder_get_object(builder, "sio1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "sio1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Sio1), NULL, NULL, G_CONNECT_AFTER);
 #endif
-	widget = gtk_builder_get_object(builder, "cpu1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "cpu1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Cpu), NULL, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "memory_cards1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "memory_cards1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Mcds), NULL, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "net1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "net1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Net), NULL, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "memorydump1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "memorydump1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(RunDebugMemoryDialog), NULL, NULL, G_CONNECT_AFTER);
 
 	// Cheat menu
-	widget = gtk_builder_get_object(builder, "browse1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "browse1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(RunCheatListDialog), NULL, NULL, G_CONNECT_AFTER);
-	widget = gtk_builder_get_object(builder, "search1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "search1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(RunCheatSearchDialog), NULL, NULL, G_CONNECT_AFTER);
 
 	// Help menu
-	widget = gtk_builder_get_object(builder, "about_pcsxr1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "about_pcsxr1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnHelp_About), NULL, NULL, G_CONNECT_AFTER);
 
 	// Toolbar
-	widget = gtk_builder_get_object(builder, "toolbutton_runcd");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_runcd"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnFile_RunCd), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "toolbutton_runimage");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_runimage"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnFile_RunImage), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "toolbutton_run");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_run"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnEmu_Run), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "toolbutton_switchimage");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_switchimage"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnEmu_SwitchImage), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "toolbutton_memcards");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_memcards"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConf_Mcds), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "toolbutton_graphics");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_graphics"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConf_Graphics), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "toolbutton_sound");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_sound"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConf_Sound), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "toolbutton_cdrom");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_cdrom"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConf_CdRom), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "toolbutton_controllers");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_controllers"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConf_Pad), NULL, NULL, G_CONNECT_AFTER);
 

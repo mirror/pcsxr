@@ -541,9 +541,11 @@ int SaveState(const char *file) {
 	free(gpufP);
 
 	// spu
-	spufP = (SPUFreeze_t *) malloc(16);
+	spufP = (SPUFreeze_t *) malloc(16); // only first 3 elements (up to Size)
 	SPU_freeze(2, spufP);
 	Size = spufP->Size; gzwrite(f, &Size, 4);
+	if (Size <= 0)
+		return 1; // error
 	free(spufP);
 	spufP = (SPUFreeze_t *) malloc(Size);
 	SPU_freeze(1, spufP);
