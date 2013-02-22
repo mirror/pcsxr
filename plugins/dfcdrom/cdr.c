@@ -441,7 +441,7 @@ unsigned char *CDRgetBufferSub(void) {
 
 // read CDDA sector into buffer
 long CDRreadCDDA(unsigned char m, unsigned char s, unsigned char f, unsigned char *buffer) {
-	unsigned char msf[3] = {m, s, f};
+	unsigned char msf[3] = {itob(m), itob(s), itob(f)};
 	unsigned char *p;
 
 	if (CDRreadTrack(msf) != 0) return -1;
