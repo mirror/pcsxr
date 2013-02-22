@@ -49,7 +49,6 @@ unsigned short usCursorActive = 0;
 
 #include <sys/ipc.h>
 #include <sys/shm.h>
-#include <X11/extensions/Xv.h>
 #include <X11/extensions/Xvlib.h>
 #include <X11/extensions/XShm.h>
 int xv_port = -1;

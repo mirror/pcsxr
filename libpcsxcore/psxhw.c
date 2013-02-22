@@ -41,7 +41,7 @@ u8 psxHwRead8(u32 add) {
 	unsigned char hard;
 
 	switch (add) {
-		case 0x1f801040: hard = sioRead8();break; 
+		case 0x1f801040: hard = sioRead8(); break; 
 #ifdef ENABLE_SIO1API
 		case 0x1f801050: hard = SIO1_readData8(); break;
 #endif
@@ -68,11 +68,13 @@ u16 psxHwRead16(u32 add) {
 
 	switch (add) {
 #ifdef PSXHW_LOG
-		case 0x1f801070: PSXHW_LOG("IREG 16bit read %x\n", psxHu16(0x1070));
+		case 0x1f801070: 
+			PSXHW_LOG("IREG 16bit read %x\n", psxHu16(0x1070));
 			return psxHu16(0x1070);
 #endif
 #ifdef PSXHW_LOG
-		case 0x1f801074: PSXHW_LOG("IMASK 16bit read %x\n", psxHu16(0x1074));
+		case 0x1f801074: 
+			PSXHW_LOG("IMASK 16bit read %x\n", psxHu16(0x1074));
 			return psxHu16(0x1074);
 #endif
 
@@ -110,15 +112,33 @@ u16 psxHwRead16(u32 add) {
 #ifdef ENABLE_SIO1API
 		case 0x1f801050:
 			hard = SIO1_readData16();
+#ifdef SIO1_LOG
+			SIO1_LOG("sio1 read16 %x; ret = %x\n", add&0xf, hard);
+#endif
 			return hard;
 		case 0x1f801054:
 			hard = SIO1_readStat16();
+#ifdef SIO1_LOG
+			SIO1_LOG("sio1 read16 %x; ret = %x\n", add&0xf, hard);
+#endif
+			return hard;
+		case 0x1f801058:
+			hard = SIO1_readMode16();
+#ifdef SIO1_LOG
+			SIO1_LOG("sio1 read16 %x; ret = %x\n", add&0xf, hard);
+#endif
 			return hard;
 		case 0x1f80105a:
 			hard = SIO1_readCtrl16();
+#ifdef SIO1_LOG
+			SIO1_LOG("sio1 read16 %x; ret = %x\n", add&0xf, hard);
+#endif
 			return hard;
 		case 0x1f80105e:
 			hard = SIO1_readBaud16();
+#ifdef SIO1_LOG
+			SIO1_LOG("sio1 read16 %x; ret = %x\n", add&0xf, hard);
+#endif
 			return hard;
 #endif
 		case 0x1f801100:
@@ -213,6 +233,9 @@ u32 psxHwRead32(u32 add) {
 #ifdef ENABLE_SIO1API
 		case 0x1f801050:
 			hard = SIO1_readData32();
+#ifdef SIO1_LOG
+			SIO1_LOG("sio1 read32 ;ret = %x\n", hard);
+#endif
 			return hard;
 #endif
 #ifdef PSXHW_LOG
@@ -221,11 +244,13 @@ u32 psxHwRead32(u32 add) {
 			return psxHu32(0x1060);
 #endif
 #ifdef PSXHW_LOG
-		case 0x1f801070: PSXHW_LOG("IREG 32bit read %x\n", psxHu32(0x1070));
+		case 0x1f801070: 
+			PSXHW_LOG("IREG 32bit read %x\n", psxHu32(0x1070));
 			return psxHu32(0x1070);
 #endif
 #ifdef PSXHW_LOG
-		case 0x1f801074: PSXHW_LOG("IMASK 32bit read %x\n", psxHu32(0x1074));
+		case 0x1f801074: 
+			PSXHW_LOG("IMASK 32bit read %x\n", psxHu32(0x1074));
 			return psxHu32(0x1074);
 #endif
 
@@ -407,15 +432,33 @@ void psxHwWrite16(u32 add, u16 value) {
 #ifdef ENABLE_SIO1API
 		case 0x1f801050:
 			SIO1_writeData16(value);
+#ifdef SIO1_LOG
+			SIO1_LOG("sio1 write16 %x, %x\n", add&0xf, value);
+#endif
 			return;
 		case 0x1f801054:
 			SIO1_writeStat16(value);
+#ifdef SIO1_LOG
+			SIO1_LOG("sio1 write16 %x, %x\n", add&0xf, value);
+#endif
+			return;
+		case 0x1f801058:
+			SIO1_writeMode16(value);
+#ifdef SIO1_LOG
+			SIO1_LOG("sio1 write16 %x, %x\n", add&0xf, value);
+#endif
 			return;
 		case 0x1f80105a:
 			SIO1_writeCtrl16(value);
+#ifdef SIO1_LOG
+			SIO1_LOG("sio1 write16 %x, %x\n", add&0xf, value);
+#endif
 			return;
 		case 0x1f80105e:
 			SIO1_writeBaud16(value);
+#ifdef SIO1_LOG
+			SIO1_LOG("sio1 write16 %x, %x\n", add&0xf, value);
+#endif
 			return;
 #endif
 		case 0x1f801070: 
@@ -524,6 +567,9 @@ void psxHwWrite32(u32 add, u32 value) {
 #ifdef ENABLE_SIO1API
 		case 0x1f801050:
 			SIO1_writeData32(value);
+#ifdef SIO1_LOG
+			SIO1_LOG("sio1 write32 %x\n", value);
+#endif
 			return;
 #endif
 #ifdef PSXHW_LOG

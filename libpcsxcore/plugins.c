@@ -178,6 +178,7 @@ SIO1readCtrl16        SIO1_readCtrl16;
 SIO1readCtrl32        SIO1_readCtrl32;
 SIO1readBaud16        SIO1_readBaud16;
 SIO1readBaud32        SIO1_readBaud32;
+SIO1update            SIO1_update;
 SIO1registerCallback  SIO1_registerCallback;
 
 #endif
@@ -638,28 +639,29 @@ void CALLBACK SIO1__about(void) {}
 void CALLBACK SIO1__pause(void) {}
 void CALLBACK SIO1__resume(void) {}
 long CALLBACK SIO1__keypressed(int key) { return 0; }
-void CALLBACK SIO1__writeData8(unsigned char val) {}
-void CALLBACK SIO1__writeData16(unsigned short val) {}
-void CALLBACK SIO1__writeData32(unsigned long val) {}
-void CALLBACK SIO1__writeStat16(unsigned short val) {}
-void CALLBACK SIO1__writeStat32(unsigned long val) {}
-void CALLBACK SIO1__writeMode16(unsigned short val) {}
-void CALLBACK SIO1__writeMode32(unsigned long val) {}
-void CALLBACK SIO1__writeCtrl16(unsigned short val) {}
-void CALLBACK SIO1__writeCtrl32(unsigned long val) {}
-void CALLBACK SIO1__writeBaud16(unsigned short val) {}
-void CALLBACK SIO1__writeBaud32(unsigned long val) {}
-unsigned char CALLBACK SIO1__readData8(void) { return 0; }
-unsigned short CALLBACK SIO1__readData16(void) { return 0; }
-unsigned long CALLBACK SIO1__readData32(void) { return 0; }
-unsigned short CALLBACK SIO1__readStat16(void) { return 0; }
-unsigned long CALLBACK SIO1__readStat32(void) { return 0; }
-unsigned short CALLBACK SIO1__readMode16(void) { return 0; }
-unsigned long CALLBACK SIO1__readMode32(void) { return 0; }
-unsigned short CALLBACK SIO1__readCtrl16(void) { return 0; }
-unsigned long CALLBACK SIO1__readCtrl32(void) { return 0; }
-unsigned short CALLBACK SIO1__readBaud16(void) { return 0; }
-unsigned long CALLBACK SIO1__readBaud32(void) { return 0; }
+void CALLBACK SIO1__writeData8(u8 val) {}
+void CALLBACK SIO1__writeData16(u16 val) {}
+void CALLBACK SIO1__writeData32(u32 val) {}
+void CALLBACK SIO1__writeStat16(u16 val) {}
+void CALLBACK SIO1__writeStat32(u32 val) {}
+void CALLBACK SIO1__writeMode16(u16 val) {}
+void CALLBACK SIO1__writeMode32(u32 val) {}
+void CALLBACK SIO1__writeCtrl16(u16 val) {}
+void CALLBACK SIO1__writeCtrl32(u32 val) {}
+void CALLBACK SIO1__writeBaud16(u16 val) {}
+void CALLBACK SIO1__writeBaud32(u32 val) {}
+u8 CALLBACK SIO1__readData8(void) { return 0; }
+u16 CALLBACK SIO1__readData16(void) { return 0; }
+u32 CALLBACK SIO1__readData32(void) { return 0; }
+u16 CALLBACK SIO1__readStat16(void) { return 0; }
+u32 CALLBACK SIO1__readStat32(void) { return 0; }
+u16 CALLBACK SIO1__readMode16(void) { return 0; }
+u32 CALLBACK SIO1__readMode32(void) { return 0; }
+u16 CALLBACK SIO1__readCtrl16(void) { return 0; }
+u32 CALLBACK SIO1__readCtrl32(void) { return 0; }
+u16 CALLBACK SIO1__readBaud16(void) { return 0; }
+u32 CALLBACK SIO1__readBaud32(void) { return 0; }
+void CALLBACK SIO1__update(uint32_t t) {};
 void CALLBACK SIO1__registerCallback(void (CALLBACK *callback)(void)) {};
 
 #define LoadSio1Sym1(dest, name) \
@@ -703,6 +705,7 @@ static int LoadSIO1plugin(const char *SIO1dll) {
     LoadSio1Sym0(writeCtrl32, "SIO1writeCtrl32");
     LoadSio1Sym0(writeBaud16, "SIO1writeBaud16");
     LoadSio1Sym0(writeBaud32, "SIO1writeBaud32");
+	LoadSio1Sym0(readData8, "SIO1readData8");
     LoadSio1Sym0(readData16, "SIO1readData16");
     LoadSio1Sym0(readData32, "SIO1readData32");
     LoadSio1Sym0(readStat16, "SIO1readStat16");
@@ -713,6 +716,7 @@ static int LoadSIO1plugin(const char *SIO1dll) {
     LoadSio1Sym0(readCtrl32, "SIO1readCtrl32");
     LoadSio1Sym0(readBaud16, "SIO1readBaud16");
     LoadSio1Sym0(readBaud32, "SIO1readBaud32");
+	LoadSio1Sym0(update, "SIO1update");
     LoadSio1Sym0(registerCallback, "SIO1registerCallback");
 
     return 0;

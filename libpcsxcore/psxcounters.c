@@ -286,6 +286,13 @@ void psxRcntUpdate()
             }
         }
 
+#ifdef ENABLE_SIO1API
+        if( SIO1_update )
+        {
+            SIO1_update( 0 );
+        }
+#endif
+
         // VSync irq.
         if( hSyncCount == VBlankStart[Config.PsxType] )
         {

@@ -293,6 +293,9 @@ void PADhandleKey(int key) {
 			break;
 		default:
 			GPU_keypressed(key);
+#ifdef ENABLE_SIO1API
+			SIO1_keypressed(key);
+#endif
 			if (Config.UseNet) NET_keypressed(key);
 	}
 }

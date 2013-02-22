@@ -92,8 +92,7 @@ plugins/peopsxgl/prim.c
 plugins/peopsxgl/soft.c
 plugins/peopsxgl/texture.c
 plugins/bladesio1/gui.c
-plugins/bladesio1/settings.c
-plugins/bladesio1/settings.h
+plugins/bladesio1/cfg.c
 plugins/bladesio1/sio1.c
 [type: gettext/glade]plugins/bladesio1/sio1.ui
 plugins/bladesio1/sio1.h
