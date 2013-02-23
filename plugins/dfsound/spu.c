@@ -1436,7 +1436,7 @@ long CALLBACK SPUconfigure(void)
 #elif defined (_MACOSX)
  DoConfiguration();
 #else
- StartCfgTool("CFG");
+ StartCfgTool("configure");
 #endif
 
  return 0;
@@ -1451,7 +1451,7 @@ void CALLBACK SPUabout(void)
 #elif defined (_MACOSX)
  DoAbout();
 #else
- StartCfgTool("ABOUT");
+ StartCfgTool("about");
 #endif
 }
 

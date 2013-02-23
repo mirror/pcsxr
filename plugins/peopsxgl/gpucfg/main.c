@@ -239,6 +239,17 @@ int main( int argc, char **argv ) {
 
     gtk_init( &argc, &argv );
 
+	if (argc < 2) {
+		printf ("Usage: cfgpeopsxgl {about | configure}\n");
+		return 0;
+	}
+
+	if (strcmp(argv[1], "configure") != 0 && 
+		strcmp(argv[1], "about") != 0) {
+		printf ("Usage: cfgpeopsxgl {about | configure}\n");
+		return 0;
+	}
+	
     builder = gtk_builder_new();
 
     // Load the glade file
@@ -249,7 +260,7 @@ int main( int argc, char **argv ) {
     }
 
     // Display the About dialog when the emulator ask for it
-    if ( argv[1] && strcmp( argv[1], "ABOUT" ) == 0 ) {
+    if ( argv[1] && strcmp( argv[1], "about" ) == 0 ) {
         GtkWidget *widget;
         const char *authors[]= {"Adapted from P.E.Op.S OpenGL GPU by Pete Bernert", NULL};
 
@@ -264,488 +275,489 @@ int main( int argc, char **argv ) {
 
         return 0;
     }
+	else {
+		// Get widgets from the glade file
+		window              = GTK_WIDGET( gtk_builder_get_object( builder, "MainDialog"          ) );
+		btnCancel           = GTK_WIDGET( gtk_builder_get_object( builder, "btnCancel"           ) );
+		btnSave             = GTK_WIDGET( gtk_builder_get_object( builder, "btnSave"             ) );
+		spinXSize           = GTK_WIDGET( gtk_builder_get_object( builder, "spinXSize"           ) );
+		spinYSize           = GTK_WIDGET( gtk_builder_get_object( builder, "spinYSize"           ) );
+		chkKeepRatio        = GTK_WIDGET( gtk_builder_get_object( builder, "chkKeepRatio"        ) );
+		chkDithering        = GTK_WIDGET( gtk_builder_get_object( builder, "chkDithering"        ) );
+		chkFullScreen       = GTK_WIDGET( gtk_builder_get_object( builder, "chkFullScreen"       ) );
+		cbxTexQuality       = GTK_WIDGET( gtk_builder_get_object( builder, "cbxTexQuality"       ) );
+		cbxTexFiltering     = GTK_WIDGET( gtk_builder_get_object( builder, "cbxTexFiltering"     ) );
+		cbxHiResTex         = GTK_WIDGET( gtk_builder_get_object( builder, "cbxHiResTex"         ) );
+		spinVRam            = GTK_WIDGET( gtk_builder_get_object( builder, "spinVRam"            ) );
+		chkShowFPS          = GTK_WIDGET( gtk_builder_get_object( builder, "chkShowFPS"          ) );
+		chkUseFPSLimit      = GTK_WIDGET( gtk_builder_get_object( builder, "chkUseFPSLimit"      ) );
+		vboxFPSLimit        = GTK_WIDGET( gtk_builder_get_object( builder, "vboxFPSLimit"        ) );
+		radFPSLimitAuto     = GTK_WIDGET( gtk_builder_get_object( builder, "radFPSLimitAuto"     ) );
+		radFPSLimitManual   = GTK_WIDGET( gtk_builder_get_object( builder, "radFPSLimitManual"   ) );
+		spinFPSLimit        = GTK_WIDGET( gtk_builder_get_object( builder, "spinFPSLimit"        ) );
+		chkUseFrameSkipping = GTK_WIDGET( gtk_builder_get_object( builder, "chkUseFrameSkipping" ) );
+		cbxOffscreen        = GTK_WIDGET( gtk_builder_get_object( builder, "cbxOffscreen"        ) );
+		cbxFBTex            = GTK_WIDGET( gtk_builder_get_object( builder, "cbxFBTex"            ) );
+		cbxFBAccess         = GTK_WIDGET( gtk_builder_get_object( builder, "cbxFBAccess"         ) );
+		chkMaskDetect       = GTK_WIDGET( gtk_builder_get_object( builder, "chkMaskDetect"       ) );
+		chkOpaquePass       = GTK_WIDGET( gtk_builder_get_object( builder, "chkOpaquePass"       ) );
+		chkAdvancedBlend    = GTK_WIDGET( gtk_builder_get_object( builder, "chkAdvancedBlend"    ) );
+		chkScanLines        = GTK_WIDGET( gtk_builder_get_object( builder, "chkScanLines"        ) );
+		spinScanLinesBlend  = GTK_WIDGET( gtk_builder_get_object( builder, "spinScanLinesBlend"  ) );
+		chkFastMdec         = GTK_WIDGET( gtk_builder_get_object( builder, "chkFastMdec"         ) );
+		chk15bitMdec        = GTK_WIDGET( gtk_builder_get_object( builder, "chk15bitMdec"        ) );
+		chkLineMode         = GTK_WIDGET( gtk_builder_get_object( builder, "chkLineMode"         ) );
+		chkAntiAlias        = GTK_WIDGET( gtk_builder_get_object( builder, "chkAntiAlias"        ) );
+		chkOGLExtensions    = GTK_WIDGET( gtk_builder_get_object( builder, "chkOGLExtensions"    ) );
+		chkScreenSmoothing  = GTK_WIDGET( gtk_builder_get_object( builder, "chkScreenSmoothing"  ) );
+		chkGteAccuracy      = GTK_WIDGET( gtk_builder_get_object( builder, "chkGteAccuracy"      ) );
+		chkUseGameFixes     = GTK_WIDGET( gtk_builder_get_object( builder, "chkUseGameFixes"     ) );
+		tblGameFixes        = GTK_WIDGET( gtk_builder_get_object( builder, "tblGameFixes"        ) );
+		chkCfgFix1          = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix1"          ) );
+		chkCfgFix2          = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix2"          ) );
+		chkCfgFix4          = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix4"          ) );
+		chkCfgFix8          = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix8"          ) );
+		chkCfgFix16         = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix16"         ) );
+		chkCfgFix32         = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix32"         ) );
+		chkCfgFix64         = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix64"         ) );
+		chkCfgFix128        = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix128"        ) );
+		chkCfgFix256        = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix256"        ) );
+		chkCfgFix512        = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix512"        ) );
+		chkCfgFix1024       = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix1024"       ) );
+		chkCfgFix2048       = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix2048"       ) );
+		chkCfgFix4096       = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix4096"       ) );
+		chkCfgFix8192       = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix8192"       ) );
+		chkCfgFix16384      = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix16384"      ) );
+		chkCfgFix32768      = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix32768"      ) );
+		chkCfgFix65536      = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix65536"      ) );
+		chkCfgFix131072     = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix131072"     ) );
+		btnFast             = GTK_WIDGET( gtk_builder_get_object( builder, "btnFast"             ) );
+		btnBeautiful        = GTK_WIDGET( gtk_builder_get_object( builder, "btnBeautiful"        ) );
 
-    // Get widgets from the glade file
-    window              = GTK_WIDGET( gtk_builder_get_object( builder, "MainDialog"          ) );
-    btnCancel           = GTK_WIDGET( gtk_builder_get_object( builder, "btnCancel"           ) );
-    btnSave             = GTK_WIDGET( gtk_builder_get_object( builder, "btnSave"             ) );
-    spinXSize           = GTK_WIDGET( gtk_builder_get_object( builder, "spinXSize"           ) );
-    spinYSize           = GTK_WIDGET( gtk_builder_get_object( builder, "spinYSize"           ) );
-    chkKeepRatio        = GTK_WIDGET( gtk_builder_get_object( builder, "chkKeepRatio"        ) );
-    chkDithering        = GTK_WIDGET( gtk_builder_get_object( builder, "chkDithering"        ) );
-    chkFullScreen       = GTK_WIDGET( gtk_builder_get_object( builder, "chkFullScreen"       ) );
-    cbxTexQuality       = GTK_WIDGET( gtk_builder_get_object( builder, "cbxTexQuality"       ) );
-    cbxTexFiltering     = GTK_WIDGET( gtk_builder_get_object( builder, "cbxTexFiltering"     ) );
-    cbxHiResTex         = GTK_WIDGET( gtk_builder_get_object( builder, "cbxHiResTex"         ) );
-    spinVRam            = GTK_WIDGET( gtk_builder_get_object( builder, "spinVRam"            ) );
-    chkShowFPS          = GTK_WIDGET( gtk_builder_get_object( builder, "chkShowFPS"          ) );
-    chkUseFPSLimit      = GTK_WIDGET( gtk_builder_get_object( builder, "chkUseFPSLimit"      ) );
-    vboxFPSLimit        = GTK_WIDGET( gtk_builder_get_object( builder, "vboxFPSLimit"        ) );
-    radFPSLimitAuto     = GTK_WIDGET( gtk_builder_get_object( builder, "radFPSLimitAuto"     ) );
-    radFPSLimitManual   = GTK_WIDGET( gtk_builder_get_object( builder, "radFPSLimitManual"   ) );
-    spinFPSLimit        = GTK_WIDGET( gtk_builder_get_object( builder, "spinFPSLimit"        ) );
-    chkUseFrameSkipping = GTK_WIDGET( gtk_builder_get_object( builder, "chkUseFrameSkipping" ) );
-    cbxOffscreen        = GTK_WIDGET( gtk_builder_get_object( builder, "cbxOffscreen"        ) );
-    cbxFBTex            = GTK_WIDGET( gtk_builder_get_object( builder, "cbxFBTex"            ) );
-    cbxFBAccess         = GTK_WIDGET( gtk_builder_get_object( builder, "cbxFBAccess"         ) );
-    chkMaskDetect       = GTK_WIDGET( gtk_builder_get_object( builder, "chkMaskDetect"       ) );
-    chkOpaquePass       = GTK_WIDGET( gtk_builder_get_object( builder, "chkOpaquePass"       ) );
-    chkAdvancedBlend    = GTK_WIDGET( gtk_builder_get_object( builder, "chkAdvancedBlend"    ) );
-    chkScanLines        = GTK_WIDGET( gtk_builder_get_object( builder, "chkScanLines"        ) );
-    spinScanLinesBlend  = GTK_WIDGET( gtk_builder_get_object( builder, "spinScanLinesBlend"  ) );
-    chkFastMdec         = GTK_WIDGET( gtk_builder_get_object( builder, "chkFastMdec"         ) );
-    chk15bitMdec        = GTK_WIDGET( gtk_builder_get_object( builder, "chk15bitMdec"        ) );
-    chkLineMode         = GTK_WIDGET( gtk_builder_get_object( builder, "chkLineMode"         ) );
-    chkAntiAlias        = GTK_WIDGET( gtk_builder_get_object( builder, "chkAntiAlias"        ) );
-    chkOGLExtensions    = GTK_WIDGET( gtk_builder_get_object( builder, "chkOGLExtensions"    ) );
-    chkScreenSmoothing  = GTK_WIDGET( gtk_builder_get_object( builder, "chkScreenSmoothing"  ) );
-	chkGteAccuracy      = GTK_WIDGET( gtk_builder_get_object( builder, "chkGteAccuracy"      ) );
-    chkUseGameFixes     = GTK_WIDGET( gtk_builder_get_object( builder, "chkUseGameFixes"     ) );
-    tblGameFixes        = GTK_WIDGET( gtk_builder_get_object( builder, "tblGameFixes"        ) );
-    chkCfgFix1          = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix1"          ) );
-    chkCfgFix2          = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix2"          ) );
-    chkCfgFix4          = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix4"          ) );
-    chkCfgFix8          = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix8"          ) );
-    chkCfgFix16         = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix16"         ) );
-    chkCfgFix32         = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix32"         ) );
-    chkCfgFix64         = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix64"         ) );
-    chkCfgFix128        = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix128"        ) );
-    chkCfgFix256        = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix256"        ) );
-    chkCfgFix512        = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix512"        ) );
-    chkCfgFix1024       = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix1024"       ) );
-    chkCfgFix2048       = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix2048"       ) );
-    chkCfgFix4096       = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix4096"       ) );
-    chkCfgFix8192       = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix8192"       ) );
-    chkCfgFix16384      = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix16384"      ) );
-    chkCfgFix32768      = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix32768"      ) );
-    chkCfgFix65536      = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix65536"      ) );
-    chkCfgFix131072     = GTK_WIDGET( gtk_builder_get_object( builder, "chkCfgFix131072"     ) );
-    btnFast             = GTK_WIDGET( gtk_builder_get_object( builder, "btnFast"             ) );
-    btnBeautiful        = GTK_WIDGET( gtk_builder_get_object( builder, "btnBeautiful"        ) );
+		// Read the config file
+		in = fopen( "gpuPeopsMesaGL.cfg", "rb" );
+		if ( in ) {
+			pB = (char *) malloc( 32767 );
+			memset( pB, 0, 32767 );
+			len = fread( pB, 1, 32767, in );
+			fclose(in);
+		}
+		else pB = 0;
 
-    // Read the config file
-    in = fopen( "gpuPeopsMesaGL.cfg", "rb" );
-    if ( in ) {
-        pB = (char *) malloc( 32767 );
-        memset( pB, 0, 32767 );
-        len = fread( pB, 1, 32767, in );
-        fclose(in);
-    }
-    else pB = 0;
+		val = 640;
+		if ( pB ) {
+			strcpy( t, "\nResX" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_spin_button_set_value( GTK_SPIN_BUTTON( spinXSize ), val );
 
-    val = 640;
-    if ( pB ) {
-        strcpy( t, "\nResX" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_spin_button_set_value( GTK_SPIN_BUTTON( spinXSize ), val );
+		val = 480;
+		if ( pB ) {
+			strcpy( t, "\nResY" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_spin_button_set_value( GTK_SPIN_BUTTON( spinYSize ), val );
 
-    val = 480;
-    if ( pB ) {
-        strcpy( t, "\nResY" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_spin_button_set_value( GTK_SPIN_BUTTON( spinYSize ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nKeepRatio" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkKeepRatio ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nKeepRatio" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkKeepRatio ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nDithering" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkDithering ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nDithering" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkDithering ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nFullScreen" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkFullScreen ), val );
+		
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nTexQuality" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_combo_box_set_active( GTK_COMBO_BOX( cbxTexQuality ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nFullScreen" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkFullScreen ), val );
-    
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nTexQuality" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_combo_box_set_active( GTK_COMBO_BOX( cbxTexQuality ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nTexFilter" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_combo_box_set_active( GTK_COMBO_BOX( cbxTexFiltering ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nTexFilter" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_combo_box_set_active( GTK_COMBO_BOX( cbxTexFiltering ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nHiResTextures" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_combo_box_set_active( GTK_COMBO_BOX( cbxHiResTex ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nHiResTextures" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_combo_box_set_active( GTK_COMBO_BOX( cbxHiResTex ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy(t,"\nVRamSize");
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_spin_button_set_value( GTK_SPIN_BUTTON( spinVRam ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy(t,"\nVRamSize");
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_spin_button_set_value( GTK_SPIN_BUTTON( spinVRam ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nShowFPS" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkShowFPS ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nShowFPS" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkShowFPS ), val );
+		val = 1;
+		if ( pB ) {
+			strcpy( t, "\nUseFrameLimit" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkUseFPSLimit ), val );
 
-    val = 1;
-    if ( pB ) {
-        strcpy( t, "\nUseFrameLimit" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkUseFPSLimit ), val );
+		val = 1;
+		if ( pB ) {
+			strcpy( t, "\nFPSDetection" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( radFPSLimitAuto ), val );
 
-    val = 1;
-    if ( pB ) {
-        strcpy( t, "\nFPSDetection" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( radFPSLimitAuto ), val );
+		val = 200;
+		if ( pB ) {
+			strcpy(t,"\nFrameRate");
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_spin_button_set_value( GTK_SPIN_BUTTON( spinFPSLimit ), val );
 
-    val = 200;
-    if ( pB ) {
-        strcpy(t,"\nFrameRate");
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_spin_button_set_value( GTK_SPIN_BUTTON( spinFPSLimit ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nUseFrameSkip" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkUseFrameSkipping ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nUseFrameSkip" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkUseFrameSkipping ), val );
+		val = 2;
+		if ( pB ) {
+			strcpy( t, "\nOffscreenDrawing" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_combo_box_set_active( GTK_COMBO_BOX( cbxOffscreen ), val );
+		
+		val = 1;
+		if ( pB ) {
+			strcpy( t, "\nFrameTextures" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_combo_box_set_active( GTK_COMBO_BOX( cbxFBTex ), val );
+		
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nFrameAccess" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_combo_box_set_active( GTK_COMBO_BOX( cbxFBAccess ), val );
 
-    val = 2;
-    if ( pB ) {
-        strcpy( t, "\nOffscreenDrawing" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_combo_box_set_active( GTK_COMBO_BOX( cbxOffscreen ), val );
-    
-    val = 1;
-    if ( pB ) {
-        strcpy( t, "\nFrameTextures" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_combo_box_set_active( GTK_COMBO_BOX( cbxFBTex ), val );
-    
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nFrameAccess" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_combo_box_set_active( GTK_COMBO_BOX( cbxFBAccess ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nMaskDetect" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkMaskDetect ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nMaskDetect" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkMaskDetect ), val );
+		val = 1;
+		if ( pB ) {
+			strcpy( t, "\nOpaquePass" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkOpaquePass ), val );
 
-    val = 1;
-    if ( pB ) {
-        strcpy( t, "\nOpaquePass" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkOpaquePass ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nAdvancedBlend" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkAdvancedBlend ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nAdvancedBlend" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkAdvancedBlend ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nScanLines" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkScanLines ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nScanLines" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkScanLines ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy(t,"\nScanLinesBlend");
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_spin_button_set_value( GTK_SPIN_BUTTON( spinScanLinesBlend ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy(t,"\nScanLinesBlend");
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_spin_button_set_value( GTK_SPIN_BUTTON( spinScanLinesBlend ), val );
+		val = 1;
+		if ( pB ) {
+			strcpy( t, "\nFastMdec" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkFastMdec ), val );
 
-    val = 1;
-    if ( pB ) {
-        strcpy( t, "\nFastMdec" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkFastMdec ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\n15bitMdec" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chk15bitMdec ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\n15bitMdec" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chk15bitMdec ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nLineMode" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkLineMode ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nLineMode" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkLineMode ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nAntiAlias" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkAntiAlias ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nAntiAlias" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkAntiAlias ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nOGLExtensions" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkOGLExtensions ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nOGLExtensions" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkOGLExtensions ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nScreenSmoothing" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkScreenSmoothing ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nScreenSmoothing" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkScreenSmoothing ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nGteAccuracy" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkGteAccuracy ), val );
+		
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nUseFixes" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkUseGameFixes ), val );
 
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nGteAccuracy" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkGteAccuracy ), val );
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nCfgFixes" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		if ( val & (1 << 17) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix131072 ), TRUE ); }
+		if ( val & (1 << 16) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix65536  ), TRUE ); }
+		if ( val & (1 << 15) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix32768  ), TRUE ); }
+		if ( val & (1 << 14) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix16384  ), TRUE ); }
+		if ( val & (1 << 13) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix8192   ), TRUE ); }
+		if ( val & (1 << 12) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix4096   ), TRUE ); }
+		if ( val & (1 << 11) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix2048   ), TRUE ); }
+		if ( val & (1 << 10) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix1024   ), TRUE ); }
+		if ( val & (1 << 9)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix512    ), TRUE ); }
+		if ( val & (1 << 8)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix256    ), TRUE ); }
+		if ( val & (1 << 7)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix128    ), TRUE ); }
+		if ( val & (1 << 6)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix64     ), TRUE ); }
+		if ( val & (1 << 5)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix32     ), TRUE ); }
+		if ( val & (1 << 4)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix16     ), TRUE ); }
+		if ( val & (1 << 3)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix8      ), TRUE ); }
+		if ( val & (1 << 2)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix4      ), TRUE ); }
+		if ( val & (1 << 1)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix2      ), TRUE ); }
+		if ( val & (1 << 0)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix1      ), TRUE ); }
+
+		gtk_builder_connect_signals( builder, NULL );
+		
+		g_object_unref( G_OBJECT( builder ) );
+
+		// Connect callbacks to signals
+		g_signal_connect(G_OBJECT( window ),            "destroy", G_CALLBACK( gtk_main_quit ),                NULL );
+		g_signal_connect(G_OBJECT( btnCancel ),         "clicked", G_CALLBACK( gtk_main_quit ),                NULL );
+		g_signal_connect(G_OBJECT( btnSave ),           "clicked", G_CALLBACK( on_btnSave_clicked ),           NULL );
+		g_signal_connect(G_OBJECT( chkUseGameFixes ),   "toggled", G_CALLBACK( on_chkUseGameFixes_toggled ),   NULL );
+		g_signal_connect(G_OBJECT( chkUseFPSLimit ),    "toggled", G_CALLBACK( on_chkUseFPSLimit_toggled ),    NULL );
+		g_signal_connect(G_OBJECT( radFPSLimitManual ), "toggled", G_CALLBACK( on_radFPSLimitManual_toggled ), NULL );
+		g_signal_connect(G_OBJECT( chkScanLines ),      "toggled", G_CALLBACK( on_chkScanLines_toggled ),      NULL );
+		g_signal_connect(G_OBJECT( btnFast ),           "clicked", G_CALLBACK( on_btnFast_clicked ),           NULL );
+		g_signal_connect(G_OBJECT( btnBeautiful ),      "clicked", G_CALLBACK( on_btnBeautiful_clicked ),      NULL );
+
+		// Call some callbacks to ensure widget state consistency
+		on_chkUseGameFixes_toggled(   G_OBJECT( chkUseGameFixes   ), NULL );
+		on_chkUseFPSLimit_toggled(    G_OBJECT( chkUseFPSLimit    ), NULL );
+		on_radFPSLimitManual_toggled( G_OBJECT( radFPSLimitManual ), NULL );
+		on_chkScanLines_toggled(      G_OBJECT( chkScanLines      ), NULL );
+
+		gtk_widget_show( window );
+
+		gtk_main();
+	}
 	
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nUseFixes" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkUseGameFixes ), val );
-
-    val = 0;
-    if ( pB ) {
-        strcpy( t, "\nCfgFixes" );
-        p = strstr( pB, t );
-        if ( p ) {
-            p = strstr( p, "=" );
-            len = 1;
-            val = atoi( p + len );
-        }
-    }
-    if ( val & (1 << 17) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix131072 ), TRUE ); }
-    if ( val & (1 << 16) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix65536  ), TRUE ); }
-    if ( val & (1 << 15) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix32768  ), TRUE ); }
-    if ( val & (1 << 14) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix16384  ), TRUE ); }
-    if ( val & (1 << 13) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix8192   ), TRUE ); }
-    if ( val & (1 << 12) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix4096   ), TRUE ); }
-    if ( val & (1 << 11) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix2048   ), TRUE ); }
-    if ( val & (1 << 10) ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix1024   ), TRUE ); }
-    if ( val & (1 << 9)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix512    ), TRUE ); }
-    if ( val & (1 << 8)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix256    ), TRUE ); }
-    if ( val & (1 << 7)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix128    ), TRUE ); }
-    if ( val & (1 << 6)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix64     ), TRUE ); }
-    if ( val & (1 << 5)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix32     ), TRUE ); }
-    if ( val & (1 << 4)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix16     ), TRUE ); }
-    if ( val & (1 << 3)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix8      ), TRUE ); }
-    if ( val & (1 << 2)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix4      ), TRUE ); }
-    if ( val & (1 << 1)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix2      ), TRUE ); }
-    if ( val & (1 << 0)  ) { gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkCfgFix1      ), TRUE ); }
-
-    gtk_builder_connect_signals( builder, NULL );
-    
-    g_object_unref( G_OBJECT( builder ) );
-
-    // Connect callbacks to signals
-    g_signal_connect(G_OBJECT( window ),            "destroy", G_CALLBACK( gtk_main_quit ),                NULL );
-    g_signal_connect(G_OBJECT( btnCancel ),         "clicked", G_CALLBACK( gtk_main_quit ),                NULL );
-    g_signal_connect(G_OBJECT( btnSave ),           "clicked", G_CALLBACK( on_btnSave_clicked ),           NULL );
-    g_signal_connect(G_OBJECT( chkUseGameFixes ),   "toggled", G_CALLBACK( on_chkUseGameFixes_toggled ),   NULL );
-    g_signal_connect(G_OBJECT( chkUseFPSLimit ),    "toggled", G_CALLBACK( on_chkUseFPSLimit_toggled ),    NULL );
-    g_signal_connect(G_OBJECT( radFPSLimitManual ), "toggled", G_CALLBACK( on_radFPSLimitManual_toggled ), NULL );
-    g_signal_connect(G_OBJECT( chkScanLines ),      "toggled", G_CALLBACK( on_chkScanLines_toggled ),      NULL );
-    g_signal_connect(G_OBJECT( btnFast ),           "clicked", G_CALLBACK( on_btnFast_clicked ),           NULL );
-    g_signal_connect(G_OBJECT( btnBeautiful ),      "clicked", G_CALLBACK( on_btnBeautiful_clicked ),      NULL );
-
-    // Call some callbacks to ensure widget state consistency
-    on_chkUseGameFixes_toggled(   G_OBJECT( chkUseGameFixes   ), NULL );
-    on_chkUseFPSLimit_toggled(    G_OBJECT( chkUseFPSLimit    ), NULL );
-    on_radFPSLimitManual_toggled( G_OBJECT( radFPSLimitManual ), NULL );
-    on_chkScanLines_toggled(      G_OBJECT( chkScanLines      ), NULL );
-
-    gtk_widget_show( window );
-
-    gtk_main();
-
     return 0;
 }

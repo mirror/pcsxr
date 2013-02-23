@@ -66,19 +66,20 @@ int main(int argc, char *argv[])
     textdomain (GETTEXT_PACKAGE);
 #endif
 
-    if (argc != 2) {
-    	printf ("Usage: cfgDFSound {ABOUT | CFG}\n");
+    if (argc < 2) {
+    	printf ("Usage: cfgDFSound {about | configure}\n");
 		return 0;
 	}
 
-    if (strcmp(argv[1], "CFG") != 0 && strcmp(argv[1], "ABOUT") != 0) {
-		printf ("Usage: cfgDFSound {ABOUT | CFG}\n");
+    if (strcmp(argv[1], "configure") != 0 && 
+		strcmp(argv[1], "about") != 0) {
+		printf ("Usage: cfgDFSound {about | configure}\n");
 		return 0;
     }
 
     gtk_init(&argc, &argv);
 
-    if (strcmp(argv[1], "ABOUT") == 0) {
+    if (strcmp(argv[1], "about") == 0) {
 		const char *authors[]= {"Pete Bernert and the P.E.Op.S. team", "Ryan Schultz", "Andrew Burton", NULL};
 		widget = gtk_about_dialog_new ();
 		gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG (widget), "dfsound PCSXR Sound Plugin");
@@ -94,143 +95,145 @@ int main(int argc, char *argv[])
 
 		return 0;
     }
+	else if (strcmp(argv[1], "configure") == 0) {
+		builder = gtk_builder_new();
 
-	builder = gtk_builder_new();
+		if (!gtk_builder_add_from_file(builder, DATADIR "dfsound.ui", NULL)) {
+			g_warning("We could not load the interface!");
+			return 0;
+		}
+		
+		MainWindow = gtk_builder_get_object(builder, "CfgWnd");
 
-	if (!gtk_builder_add_from_file(builder, DATADIR "dfsound.ui", NULL)) {
-		g_warning("We could not load the interface!");
-		return 0;
+		strcpy(cfg, CONFIG_FILENAME);
+
+		in = fopen(cfg, READBINARY);
+		if (in) {
+			pB = (char *)malloc(32767);
+			memset(pB, 0, 32767);
+			len = fread(pB, 1, 32767, in);
+			fclose(in);
+		} else {
+			pB = 0;
+			printf ("Error - no configuration file\n");
+			/* TODO Raise error - no configuration file */
+		}
+
+		/* ADB TODO Replace a lot of the following with common functions */
+		if (pB) {
+			strcpy(t, "\nVolume");
+			p = strstr(pB, t);
+			if (p) {
+				p = strstr(p, "=");
+				len = 1;
+			}
+			val = set_limit (p, len, -1, 4) + 1;
+		} else val = 2;
+
+		gtk_combo_box_set_active(GTK_COMBO_BOX (gtk_builder_get_object(builder, "cbVolume2")), val);
+
+		if (pB) {
+		strcpy(t, "\nUseInterpolation");
+		p = strstr(pB, t);
+		if (p) {
+			p = strstr(p, "=");
+			len = 1;
+		}
+			val = set_limit (p, len, 0, 3);
+		} else val = 2;
+
+		gtk_combo_box_set_active(GTK_COMBO_BOX (gtk_builder_get_object(builder, "cbInterpolation2")), val);
+
+		if (pB) {
+			strcpy(t, "\nXAPitch");
+			p = strstr(pB, t);
+			if (p) {
+				p = strstr(p, "=");
+				len = 1;
+			}
+			val = set_limit (p, len, 0, 1);
+		} else val = 0;
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "chkXASpeed")), val);
+
+		if (pB) {
+			strcpy(t, "\nHighCompMode");
+			p = strstr(pB, t);
+			if (p) {
+				p = strstr(p, "=");
+				len = 1;
+			}
+			val = set_limit (p, len, 0, 1);
+		} else val = 1;
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "chkHiCompat")), val);
+
+		if (pB) {
+			strcpy(t, "\nSPUIRQWait");
+			p = strstr(pB, t);
+			if (p) {
+				p = strstr(p, "=");
+				len = 1;
+			}
+
+			val = set_limit (p, len, 0, 1);
+		} else val = 1;
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "chkIRQWait")), val);
+
+		if (pB) {
+			strcpy(t, "\nDisStereo");
+			p = strstr(pB, t);
+			if (p) {
+				p = strstr(p, "=");
+				len = 1;
+			}
+
+			val = set_limit (p, len, 0, 1);
+		} else val = 0;
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "chkDisStereo")), val);
+
+		if (pB) {
+			strcpy(t, "\nFreqResponse");
+			p = strstr(pB, t);
+			if (p) {
+				p = strstr(p, "=");
+				len = 1;
+			}
+
+			val = set_limit (p, len, 0, 1);
+		} else val = 0;
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "chkFreqResponse")), val);
+
+		if (pB) {
+			strcpy(t, "\nUseReverb");
+			p = strstr(pB, t);
+			if (p) {
+				p = strstr(p, "=");
+				len = 1;
+			}
+			val = set_limit (p, len, 0, 2);
+		} else val = 2;
+
+		gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_builder_get_object(builder, "cbReverb2")), val);
+
+		if (pB)
+			free(pB);
+
+		widget = gtk_builder_get_object(builder, "CfgWnd");
+		g_signal_connect_data(G_OBJECT(widget), "destroy",
+			G_CALLBACK(SaveConfig), builder, NULL, 0);
+
+		widget = gtk_builder_get_object(builder, "btn_close");
+		g_signal_connect_data(G_OBJECT(widget), "clicked",
+			G_CALLBACK(OnConfigClose), builder, NULL, G_CONNECT_AFTER);
+
+		gtk_widget_show(MainWindow);
+		gtk_main();
 	}
 	
-	MainWindow = gtk_builder_get_object(builder, "CfgWnd");
-
-    strcpy(cfg, CONFIG_FILENAME);
-
-    in = fopen(cfg, READBINARY);
-    if (in) {
-		pB = (char *)malloc(32767);
-		memset(pB, 0, 32767);
-		len = fread(pB, 1, 32767, in);
-		fclose(in);
-    } else {
-		pB = 0;
-		printf ("Error - no configuration file\n");
-		/* TODO Raise error - no configuration file */
-    }
-
-	/* ADB TODO Replace a lot of the following with common functions */
-    if (pB) {
-		strcpy(t, "\nVolume");
-		p = strstr(pB, t);
-		if (p) {
-		    p = strstr(p, "=");
-	    	len = 1;
-		}
-	    val = set_limit (p, len, -1, 4) + 1;
-    } else val = 2;
-
-    gtk_combo_box_set_active(GTK_COMBO_BOX (gtk_builder_get_object(builder, "cbVolume2")), val);
-
-    if (pB) {
-	strcpy(t, "\nUseInterpolation");
-	p = strstr(pB, t);
-	if (p) {
-	    p = strstr(p, "=");
-	    len = 1;
-	}
-	    val = set_limit (p, len, 0, 3);
-    } else val = 2;
-
-    gtk_combo_box_set_active(GTK_COMBO_BOX (gtk_builder_get_object(builder, "cbInterpolation2")), val);
-
-    if (pB) {
-		strcpy(t, "\nXAPitch");
-		p = strstr(pB, t);
-		if (p) {
-		    p = strstr(p, "=");
-	    	len = 1;
-		}
-		val = set_limit (p, len, 0, 1);
-    } else val = 0;
-
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "chkXASpeed")), val);
-
-    if (pB) {
-		strcpy(t, "\nHighCompMode");
-		p = strstr(pB, t);
-		if (p) {
-		    p = strstr(p, "=");
-	    	len = 1;
-		}
-		val = set_limit (p, len, 0, 1);
-    } else val = 1;
-
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "chkHiCompat")), val);
-
-    if (pB) {
-		strcpy(t, "\nSPUIRQWait");
-		p = strstr(pB, t);
-		if (p) {
-		    p = strstr(p, "=");
-		    len = 1;
-		}
-
-		val = set_limit (p, len, 0, 1);
-    } else val = 1;
-
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "chkIRQWait")), val);
-
-    if (pB) {
-		strcpy(t, "\nDisStereo");
-		p = strstr(pB, t);
-		if (p) {
-		    p = strstr(p, "=");
-		    len = 1;
-		}
-
-		val = set_limit (p, len, 0, 1);
-    } else val = 0;
-
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "chkDisStereo")), val);
-
-    if (pB) {
-		strcpy(t, "\nFreqResponse");
-		p = strstr(pB, t);
-		if (p) {
-		    p = strstr(p, "=");
-		    len = 1;
-		}
-
-		val = set_limit (p, len, 0, 1);
-    } else val = 0;
-
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "chkFreqResponse")), val);
-
-	if (pB) {
-		strcpy(t, "\nUseReverb");
-		p = strstr(pB, t);
-		if (p) {
-		    p = strstr(p, "=");
-		    len = 1;
-		}
-		val = set_limit (p, len, 0, 2);
-    } else val = 2;
-
-    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_builder_get_object(builder, "cbReverb2")), val);
-
-    if (pB)
-		free(pB);
-
-	widget = gtk_builder_get_object(builder, "CfgWnd");
-	g_signal_connect_data(G_OBJECT(widget), "destroy",
-		G_CALLBACK(SaveConfig), builder, NULL, 0);
-
-	widget = gtk_builder_get_object(builder, "btn_close");
-	g_signal_connect_data(G_OBJECT(widget), "clicked",
-		G_CALLBACK(OnConfigClose), builder, NULL, G_CONNECT_AFTER);
-
-	gtk_widget_show(MainWindow);
-    gtk_main();
     return 0;
 }
 

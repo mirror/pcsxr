@@ -214,18 +214,31 @@ int main(int argc, char *argv[]) {
 
 	gtk_init(&argc, &argv);
 
-	if (!strcmp(argv[1], "configure")) {
-		CFGconfigure();
-	} else if (!strcmp(argv[1], "open")) {
-		return CFGopen();
-	} else if (!strcmp(argv[1], "wait")) {
-		CFGwait();
-	} else if (!strcmp(argv[1], "pause")) {
-		return CFGpause();
-	} else if (!strcmp(argv[1], "about")) {
-		CFGabout();
-	} else if (!strcmp(argv[1], "message")) {
-		CFGmessage(&argv[2], argc - 2);
+	if (argc < 2) {
+    	printf ("Usage: cfgDFNet {about | configure | open | wait | pause | message}\n");
+		return 0;
+	}
+
+    if (strcmp(argv[1], "configure") != 0 && 
+		strcmp(argv[1], "about") != 0) {
+		printf ("Usage: cfgDFNet {about | configure | open | wait | pause | message}\n");
+		return 0;
+    }
+	
+	if(argc > 1) {
+		if (!strcmp(argv[1], "configure")) {
+			CFGconfigure();
+		} else if (!strcmp(argv[1], "about")) {
+			CFGabout();
+		} else if (!strcmp(argv[1], "open")) {
+			return CFGopen();
+		} else if (!strcmp(argv[1], "wait")) {
+			CFGwait();
+		} else if (!strcmp(argv[1], "pause")) {
+			return CFGpause();
+		} else if (!strcmp(argv[1], "message")) {
+			CFGmessage(&argv[2], argc - 2);
+		}
 	}
 
 	return 0;

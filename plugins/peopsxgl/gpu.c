@@ -3000,8 +3000,8 @@ long CALLBACK GPUconfigure(void)
 #elif defined(_MACGL)
 long CALLBACK GPUconfigure(void)
 {
- DlgProc();
-   return 0;
+	DlgProc();
+	return 0;
 }
 #else
 
@@ -3057,7 +3057,7 @@ void StartCfgTool(char *arg) // linux: start external cfg tool
 
 long CALLBACK GPUconfigure(void)
 {
- StartCfgTool("CFG");
+ StartCfgTool("configure");
  return 0;
 }
 
@@ -3140,16 +3140,12 @@ long CALLBACK GPUdmaChain(uint32_t *baseAddrL, uint32_t addr)
 void CALLBACK GPUabout(void)
 {
 #ifdef _WINDOWS
- HWND hWP=GetActiveWindow();                           // to be sure
- DialogBox(hInst,MAKEINTRESOURCE(IDD_DIALOG_ABOUT),
-           hWP,(DLGPROC)AboutDlgProc);
+	HWND hWP=GetActiveWindow();                           // to be sure
+	DialogBox(hInst,MAKEINTRESOURCE(IDD_DIALOG_ABOUT), hWP,(DLGPROC)AboutDlgProc);
 #elif defined(_MACGL)
-
     AboutDlgProc();
 #else
-
- StartCfgTool("ABOUT");
-
+	StartCfgTool("about");
 #endif
 }
 

@@ -217,15 +217,12 @@ void ExecCfg(char *arg) {
 
 void SoftDlgProc(void)
 {
-	ExecCfg("CFG");
+	ExecCfg("configure");
 }
 
 void AboutDlgProc(void)
 {
-	char args[256];
-
-	sprintf(args, "ABOUT");
-	ExecCfg(args);
+	ExecCfg("about");
 }
 
 void ReadConfig(void)

@@ -29,6 +29,7 @@
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 #include <netdb.h>
+#include <unistd.h>
 #endif
 
 #include "typedefs.h"

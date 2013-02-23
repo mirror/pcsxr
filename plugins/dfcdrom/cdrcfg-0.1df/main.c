@@ -206,6 +206,13 @@ static void OnConfigExit(GtkWidget *widget, gpointer user_data) {
 long CDRconfigure() {
 	LoadConf();
 
+	builder = gtk_builder_new();
+		
+	if (!gtk_builder_add_from_file(builder, DATADIR "dfcdrom.ui", NULL)) {
+		g_warning("We could not load the interface!");
+		return 0;
+	}
+
 	MainWindow = gtk_builder_get_object(builder, "CfgWnd");
 	gtk_window_set_title(GTK_WINDOW(MainWindow), _("CDR configuration"));
 
@@ -268,20 +275,21 @@ int main(int argc, char *argv[]) {
 
 	gtk_init(&argc, &argv);
 
-	if (argc != 2) return 0;
-	
-	if (strcmp(argv[1], "configure") == 0) {
-		builder = gtk_builder_new();
-		
-		if (!gtk_builder_add_from_file(builder, DATADIR "dfcdrom.ui", NULL)) {
-			g_warning("We could not load the interface!");
-			return 0;
-		}
-		
-		CDRconfigure();
-	} else {
-		CDRabout();
+	if (argc < 2) {
+    	printf ("Usage: cfgBladeSio1 {about | configure}\n");
+		return 0;
 	}
 
+    if (strcmp(argv[1], "configure") != 0 && 
+		strcmp(argv[1], "about") != 0) {
+		printf ("Usage: cfgBladeSio1 {about | configure}\n");
+		return 0;
+    }
+    
+	if(!strcmp(argv[1], "configure"))
+		CDRconfigure();
+	else if(!strcmp(argv[1], "about"))
+		CDRabout();
+	
 	return 0;
 }

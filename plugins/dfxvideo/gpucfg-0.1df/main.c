@@ -117,19 +117,20 @@ main (int argc, char *argv[])
   textdomain (GETTEXT_PACKAGE);
 #endif
 
-  if (argc!=2) {
-    printf("Usage: cfgDFXVideo {ABOUT | CFG}\n");
-    return 0;
-  }
-  if(strcmp(argv[1],"CFG")!=0 && strcmp(argv[1],"ABOUT")!=0) {
-    printf("Usage: cfgDFXVideo {ABOUT | CFG}\n");
-    return 0;
-  }
+	if (argc < 2) {
+		printf ("Usage: cfgDFXVideo {about | configure}\n");
+		return 0;
+	}
 
-  gtk_init (&argc, &argv);
+	if (strcmp(argv[1], "configure") != 0 && 
+		strcmp(argv[1], "about") != 0) {
+		printf ("Usage: cfgDFXVideo {about | configure}\n");
+		return 0;
+	}
 
+	gtk_init (&argc, &argv);
 
-       if (strcmp(argv[1], "ABOUT") == 0) {
+	if (strcmp(argv[1], "about") == 0) {
 		const char *authors[]= {"Pete Bernert and the P.E.Op.S. team", "Ryan Schultz", "Andrew Burton", NULL};
 		widget = gtk_about_dialog_new ();
 		gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG (widget), "P.E.Op.S PCSXR Video Plugin");
@@ -137,7 +138,7 @@ main (int argc, char *argv[])
 		gtk_about_dialog_set_authors (GTK_ABOUT_DIALOG (widget), authors);
 		gtk_about_dialog_set_website (GTK_ABOUT_DIALOG (widget), "http://pcsx-df.sourceforge.net/");
 
-	g_signal_connect_data(G_OBJECT(widget), "response",
+		g_signal_connect_data(G_OBJECT(widget), "response",
 			G_CALLBACK(on_about_clicked), NULL, NULL, G_CONNECT_AFTER);
 
 		gtk_widget_show (widget);
@@ -145,189 +146,191 @@ main (int argc, char *argv[])
 
 		return 0;
     }
+	else {
+		builder = gtk_builder_new();
+		
+		if (!gtk_builder_add_from_file(builder, DATADIR "dfxvideo.ui", NULL)) {
+			g_warning("We could not load the interface!");
+			return -1;
+		}
 
-	builder = gtk_builder_new();
+		/*ADB wndMain = gtk_builder_get_object(builder, "CfgWnd");*/
+
+		strcpy(cfg, CONFIG_FILENAME);
+
+		in = fopen(cfg,READBINARY);
+		/* ADB TODO This is bad - asking for problems; need to read in line by line */
+		if(in)
+		{
+			pB=(char *)malloc(32767);
+			memset(pB,0,32767);
+			len = fread(pB, 1, 32767, in);
+			fclose(in);
+		}
+		else{ pB=0;printf("Couldn't find config file %s\n", cfg);}
+		/* ADB TODO Parse this like we parse the config file in PCSXR - use common functions! */
+		val=1;
+		if(pB)
+		{
+			strcpy(t,"\nResX");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+			val = set_limit (p, len, 0, 1600);
+		}
+
+		if (val == 1600) val = VIDMODE_1600x1200;
+		else if (val == 1280) val = VIDMODE_1280x1024;
+		else if (val == 1152) val = VIDMODE_1152x864;
+		else if (val == 1024) val = VIDMODE_1024x768;
+		else if (val == 800) val = VIDMODE_800x600;
+		else if (val == 640) val = VIDMODE_640x480;
+		else if (val == 320) val = VIDMODE_320x200;
+
+		gtk_combo_box_set_active(GTK_COMBO_BOX (gtk_builder_get_object(builder, "resCombo2")), val);
+
+		val=0;
+		if(pB)
+		{
+			strcpy(t,"\nNoStretch");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+
+			val = set_limit (p, len, 0, 9);
+		}
+
+		gtk_combo_box_set_active(GTK_COMBO_BOX (gtk_builder_get_object(builder, "stretchCombo2")), val);
+
+		val=0;
+		if(pB)
+		{
+			strcpy(t,"\nDithering");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+
+				val = set_limit (p, len, 0, 2);
+		}
+
+		gtk_combo_box_set_active(GTK_COMBO_BOX (gtk_builder_get_object(builder, "ditherCombo2")), val);
+
+		val=0;
+		if(pB)
+		{
+			strcpy(t,"\nMaintain43");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+
+			val = set_limit (p, len, 0, 1);
+		}
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "maintain43")), val);
+		
+		val=0; //ADB Leave - these are default values
+		if(pB)
+		{
+			strcpy(t,"\nFullScreen");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+
+				val = set_limit (p, len, 0, 1);
+		}
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkFullscreen")), val);
+
+		val=0;
+		if(pB)
+		{
+			strcpy(t,"\nShowFPS");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+
+				val = set_limit (p, len, 0, 1);
+		}
+
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkShowFPS")), val);
+
+		val=1;
+		if(pB)
+		{
+			strcpy(t,"\nUseFrameLimit");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+
+				val = set_limit (p, len, 0, 1);
+		}
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkSetFPS")), val);
+
+		val=0;
+		if(pB)
+		{
+			strcpy(t,"\nFPSDetection");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+
+				val = set_limit (p, len, 1, 2);
+		}
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkAutoFPSLimit")), (val-1));
+
+		val=0;
+		if(pB)
+		{
+			strcpy(t,"\nUseFrameSkip");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+				val = set_limit (p, len, 0, 1);
+		}
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkFrameSkip")), val);
+
+		valf=200;
+		if(pB)
+		{
+			strcpy(t,"\nFrameRate");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+			if(p) valf=(float)atoi(p+len) / 10;
+			if(valf<1) valf=1;
+			if(valf>500) valf=500;
+		}
+		sprintf(tempstr,"%.1f",valf);
+		gtk_entry_set_text(gtk_builder_get_object(builder, "entryFPS"),tempstr);
+
+		val=0;
+		if(pB)
+		{
+			strcpy(t,"\nUseFixes");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+
+				val = set_limit (p, len, 0, 1);
+		}
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkUseFixes")), val);
+
+		
+			if(pB)
+			{
+				strcpy(t,"\nCfgFixes");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+				if (p)
+					val = atoi(p + len);
+			}
+
+			for (i=0; i<11; i++)
+			{
+				sprintf(tempstr, "checkFix%d", i+1);
+				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder,tempstr)), (val>>i)&1 );
+			}
+
+
+		if(pB) free(pB);
+
+			widget = gtk_builder_get_object(builder, "CfgWnd");
+			g_signal_connect_data(G_OBJECT(widget), "destroy",
+					G_CALLBACK(SaveConfig), NULL, NULL, 0);
+
+			widget = gtk_builder_get_object(builder, "btn_close");
+			g_signal_connect_data(G_OBJECT(widget), "clicked",
+					G_CALLBACK(OnConfigClose), NULL, NULL, G_CONNECT_AFTER);
+
+			widget = gtk_builder_get_object(builder, "checkFullscreen");
+			g_signal_connect_data(G_OBJECT(widget), "clicked",
+					G_CALLBACK(on_fullscreen_toggled), NULL, NULL, G_CONNECT_AFTER);
+
+			widget = gtk_builder_get_object(builder, "checkUseFixes");
+			g_signal_connect_data(G_OBJECT(widget), "clicked",
+					G_CALLBACK(on_use_fixes_toggled), NULL, NULL, G_CONNECT_AFTER);
+
+			widget = gtk_builder_get_object(builder, "checkSetFPS");
+			g_signal_connect_data(G_OBJECT(widget), "clicked",
+					G_CALLBACK(on_fps_toggled), NULL, NULL, G_CONNECT_AFTER);
+
+			widget = gtk_builder_get_object(builder, "checkAutoFPSLimit");
+			g_signal_connect_data(G_OBJECT(widget), "clicked",
+					G_CALLBACK(on_fps_toggled), NULL, NULL, G_CONNECT_AFTER);
+
+			on_fullscreen_toggled(widget, NULL);
+			on_fps_toggled(widget, NULL);
+			on_use_fixes_toggled(widget, NULL);
+
+		gtk_main ();
+	}
 	
-	if (!gtk_builder_add_from_file(builder, DATADIR "dfxvideo.ui", NULL)) {
-		g_warning("We could not load the interface!");
-		return -1;
-	}
-
-    /*ADB wndMain = gtk_builder_get_object(builder, "CfgWnd");*/
-
-  strcpy(cfg, CONFIG_FILENAME);
-
-  in = fopen(cfg,READBINARY);
-  /* ADB TODO This is bad - asking for problems; need to read in line by line */
-  if(in)
-   {
-    pB=(char *)malloc(32767);
-    memset(pB,0,32767);
-    len = fread(pB, 1, 32767, in);
-    fclose(in);
-   }
-  else{ pB=0;printf("Couldn't find config file %s\n", cfg);}
-/* ADB TODO Parse this like we parse the config file in PCSXR - use common functions! */
-  val=1;
-  if(pB)
-   {
-    strcpy(t,"\nResX");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
-    val = set_limit (p, len, 0, 1600);
-   }
-
-  if (val == 1600) val = VIDMODE_1600x1200;
-  else if (val == 1280) val = VIDMODE_1280x1024;
-  else if (val == 1152) val = VIDMODE_1152x864;
-  else if (val == 1024) val = VIDMODE_1024x768;
-  else if (val == 800) val = VIDMODE_800x600;
-  else if (val == 640) val = VIDMODE_640x480;
-  else if (val == 320) val = VIDMODE_320x200;
-
-  gtk_combo_box_set_active(GTK_COMBO_BOX (gtk_builder_get_object(builder, "resCombo2")), val);
-
-  val=0;
-  if(pB)
-   {
-    strcpy(t,"\nNoStretch");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
-
-    val = set_limit (p, len, 0, 9);
-   }
-
-  gtk_combo_box_set_active(GTK_COMBO_BOX (gtk_builder_get_object(builder, "stretchCombo2")), val);
-
-  val=0;
-  if(pB)
-   {
-    strcpy(t,"\nDithering");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
-
-           val = set_limit (p, len, 0, 2);
-   }
-
-   gtk_combo_box_set_active(GTK_COMBO_BOX (gtk_builder_get_object(builder, "ditherCombo2")), val);
-
- val=0;
-  if(pB)
-   {
-    strcpy(t,"\nMaintain43");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
-
-    val = set_limit (p, len, 0, 1);
-   }
-
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "maintain43")), val);
-  
-  val=0; //ADB Leave - these are default values
-  if(pB)
-   {
-    strcpy(t,"\nFullScreen");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
-
-        val = set_limit (p, len, 0, 1);
-   }
-
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkFullscreen")), val);
-
-  val=0;
-  if(pB)
-   {
-    strcpy(t,"\nShowFPS");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
-
-        val = set_limit (p, len, 0, 1);
-   }
-
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkShowFPS")), val);
-
-  val=1;
-  if(pB)
-   {
-    strcpy(t,"\nUseFrameLimit");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
-
-        val = set_limit (p, len, 0, 1);
-   }
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkSetFPS")), val);
-
-  val=0;
-  if(pB)
-   {
-    strcpy(t,"\nFPSDetection");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
-
-        val = set_limit (p, len, 1, 2);
-   }
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkAutoFPSLimit")), (val-1));
-
- val=0;
-  if(pB)
-   {
-    strcpy(t,"\nUseFrameSkip");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
-        val = set_limit (p, len, 0, 1);
-   }
-
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkFrameSkip")), val);
-
- valf=200;
-  if(pB)
-   {
-    strcpy(t,"\nFrameRate");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
-    if(p) valf=(float)atoi(p+len) / 10;
-    if(valf<1) valf=1;
-    if(valf>500) valf=500;
-   }
-  sprintf(tempstr,"%.1f",valf);
-  gtk_entry_set_text(gtk_builder_get_object(builder, "entryFPS"),tempstr);
-
-  val=0;
-  if(pB)
-   {
-    strcpy(t,"\nUseFixes");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
-
-        val = set_limit (p, len, 0, 1);
-   }
-  gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder, "checkUseFixes")), val);
-
-   
-	if(pB)
-	{
-		strcpy(t,"\nCfgFixes");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
-		if (p)
-			val = atoi(p + len);
-	}
-
-	for (i=0; i<11; i++)
-	{
-		sprintf(tempstr, "checkFix%d", i+1);
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gtk_builder_get_object(builder,tempstr)), (val>>i)&1 );
-	}
-
-
-  if(pB) free(pB);
-
-	widget = gtk_builder_get_object(builder, "CfgWnd");
-	g_signal_connect_data(G_OBJECT(widget), "destroy",
-			G_CALLBACK(SaveConfig), NULL, NULL, 0);
-
-	widget = gtk_builder_get_object(builder, "btn_close");
-	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(OnConfigClose), NULL, NULL, G_CONNECT_AFTER);
-
-	widget = gtk_builder_get_object(builder, "checkFullscreen");
-	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(on_fullscreen_toggled), NULL, NULL, G_CONNECT_AFTER);
-
-	widget = gtk_builder_get_object(builder, "checkUseFixes");
-	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(on_use_fixes_toggled), NULL, NULL, G_CONNECT_AFTER);
-
-	widget = gtk_builder_get_object(builder, "checkSetFPS");
-	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(on_fps_toggled), NULL, NULL, G_CONNECT_AFTER);
-
-	widget = gtk_builder_get_object(builder, "checkAutoFPSLimit");
-	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(on_fps_toggled), NULL, NULL, G_CONNECT_AFTER);
-
-	on_fullscreen_toggled(widget, NULL);
-	on_fps_toggled(widget, NULL);
-	on_use_fixes_toggled(widget, NULL);
-
-  gtk_main ();
   return 0;
 }
 

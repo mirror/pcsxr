@@ -97,16 +97,14 @@ void OnCopyIP(GtkWidget *widget, gpointer user_data) {
 /***************************************************************************/
 
 static
-s32 configure() {
+void configure() {
 	GtkBuilder *builder;
 	GtkWidget *widget, *MainWindow;
 
 	builder = gtk_builder_new();
 
-	if (!gtk_builder_add_from_file(builder, DATADIR "sio1.ui", NULL)) {
+	if(!gtk_builder_add_from_file(builder, DATADIR "sio1.ui", NULL))
 		g_warning("We could not load the interface!");
-		return 0;
-	}
 
 	settingsRead();
 
@@ -144,31 +142,26 @@ s32 configure() {
 		settings.port = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
 
 		widget = gtk_builder_get_object(builder, "rbDisabled");
-		if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget))) {
+		if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)))
 			settings.player = PLAYER_DISABLED;
-		}
 		else {
 			widget = gtk_builder_get_object(builder, "rbServer");
-			if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget))) {
+			if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)))
 				settings.player = PLAYER_MASTER;
-			} else {
+			else
 				settings.player = PLAYER_SLAVE;
-			}
 		}
 
 		settingsWrite();
 
 		gtk_widget_destroy(MainWindow);
-		return 1;
 	}
 
 	gtk_widget_destroy(MainWindow);
-
-	return 0;
 }
 
 static
-s32 about() {
+void about() {
 	const char *authors[]= {"edgbla <edgbla@yandex.ru>", NULL};
 	GtkWidget *widget;
 
@@ -194,12 +187,21 @@ int main(int argc, char *argv[]) {
 
 	gtk_init(&argc, &argv);
 
-	if(argc > 1) {
-		if(!strcmp(argv[1], "configure"))
-			return configure();
-		if(!strcmp(argv[1], "about"))
-			return about();
+	if (argc < 2) {
+    	printf ("Usage: cfgBladeSio1 {about | configure}\n");
+		return 0;
 	}
+
+    if (strcmp(argv[1], "configure") != 0 && 
+		strcmp(argv[1], "about") != 0) {
+		printf ("Usage: cfgBladeSio1 {about | configure}\n");
+		return 0;
+    }
+
+	if(!strcmp(argv[1], "configure"))
+		configure();
+	else if(!strcmp(argv[1], "about"))
+		about();
 
 	return 0;
 }

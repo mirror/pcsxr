@@ -655,7 +655,7 @@ long PADconfigure(void) {
 
 	if (pid == 0) {
 		if (fork() == 0) {
-			execl("cfg/cfgDFInput", "cfgDFInput", NULL);
+			execl("cfg/cfgDFInput", "cfgDFInput", "configure", NULL);
 		}
 		exit(0);
 	} else if (pid > 0) {
@@ -670,7 +670,7 @@ void PADabout(void) {
 
 	if (pid == 0) {
 		if (fork() == 0) {
-			execl("cfg/cfgDFInput", "cfgDFInput", "-about", NULL);
+			execl("cfg/cfgDFInput", "cfgDFInput", "about", NULL);
 		}
 		exit(0);
 	} else if (pid > 0) {

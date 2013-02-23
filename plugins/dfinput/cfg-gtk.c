@@ -775,11 +775,21 @@ int main(int argc, char *argv[]) {
 
 	gtk_init(&argc, &argv);
 
-	if (argc > 1 && !strcmp(argv[1], "-about")) {
-		PADabout();
-	} else {
-		PADconfigure();
+	if (argc < 2) {
+    	printf ("Usage: cfgDFInput {about | configure}\n");
+		return 0;
 	}
+
+    if (strcmp(argv[1], "configure") != 0 && 
+		strcmp(argv[1], "about") != 0) {
+		printf ("Usage: cfgDFInput {about | configure}\n");
+		return 0;
+    }
+    
+	if(!strcmp(argv[1], "configure"))
+		PADconfigure();
+	else if(!strcmp(argv[1], "about"))
+		PADabout();
 
 	return 0;
 }
