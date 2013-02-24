@@ -291,7 +291,7 @@ int _OpenPlugins(HWND hWnd) {
     PAD2_registerVibration(GPU_visualVibration);
     PAD2_registerCursor(GPU_cursor);
 #ifdef ENABLE_SIO1API
-	ret = SIO1_open();
+	ret = SIO1_open(hWnd);
 	if (ret < 0) { SysMessage (_("Error Opening SIO1 plugin (%d)"), ret); return -1; }
 	SIO1_registerCallback(SIO1irq);
 #endif

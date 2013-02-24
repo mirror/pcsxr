@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="winsrc">
+      <UniqueIdentifier>{f5923236-a28e-4398-a152-67b79b0782e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="peopsxgl">
+      <UniqueIdentifier>{2edeb7e0-6467-4735-89eb-253dcc226912}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="winsrc\cfg.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\fps.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\key.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\ssave.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\winmain.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\peopsxgl\draw.c">
+      <Filter>peopsxgl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\peopsxgl\gpu.c">
+      <Filter>peopsxgl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\peopsxgl\gte_accuracy.c">
+      <Filter>peopsxgl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\peopsxgl\menu.c">
+      <Filter>peopsxgl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\peopsxgl\prim.c">
+      <Filter>peopsxgl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\peopsxgl\soft.c">
+      <Filter>peopsxgl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\peopsxgl\texture.c">
+      <Filter>peopsxgl</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="winsrc\ssave.h">
+      <Filter>winsrc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\peopsxgl\cfg.h">
+      <Filter>peopsxgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\peopsxgl\draw.h">
+      <Filter>peopsxgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\peopsxgl\externals.h">
+      <Filter>peopsxgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\peopsxgl\fps.h">
+      <Filter>peopsxgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\peopsxgl\gl_ext.h">
+      <Filter>peopsxgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\peopsxgl\gpu.h">
+      <Filter>peopsxgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\peopsxgl\gte_accuracy.h">
+      <Filter>peopsxgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\peopsxgl\key.h">
+      <Filter>peopsxgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\peopsxgl\menu.h">
+      <Filter>peopsxgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\peopsxgl\prim.h">
+      <Filter>peopsxgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\peopsxgl\soft.h">
+      <Filter>peopsxgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\peopsxgl\stdafx.h">
+      <Filter>peopsxgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\peopsxgl\texture.h">
+      <Filter>peopsxgl</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\gpu.bmp" />
+    <None Include="gpuPeopsOpenGL.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="gpuPeopsOpenGL.rc" />
+  </ItemGroup>
+</Project>

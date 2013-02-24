@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="winsrc">
+      <UniqueIdentifier>{b54538cc-5b42-4480-adf8-44c08f01d6c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bladesio1">
+      <UniqueIdentifier>{394ea6fd-453d-4665-ac08-c0c5d867918b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="winsrc\winmain.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\bladesio1\connection.c">
+      <Filter>bladesio1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\bladesio1\fifo.c">
+      <Filter>bladesio1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\bladesio1\sio1.c">
+      <Filter>bladesio1</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\cfg-winapi.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\..\..\plugins\bladesio1\fifo.h">
+      <Filter>bladesio1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\bladesio1\sio1.h">
+      <Filter>bladesio1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\bladesio1\connection.h">
+      <Filter>bladesio1</Filter>
+    </ClInclude>
+    <ClInclude Include="winsrc\stdafx.h">
+      <Filter>winsrc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\bladesio1\typedefs.h">
+      <Filter>bladesio1</Filter>
+    </ClInclude>
+    <ClInclude Include="winsrc\cfg-winapi.h">
+      <Filter>winsrc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bladesio1.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="bladesio1.rc" />
+  </ItemGroup>
+</Project>

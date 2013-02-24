@@ -671,6 +671,12 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 				    if (CDR_configure) CDR_configure();
 					return TRUE;
 
+				case ID_CONFIGURATION_LINKCABLE:
+#ifdef ENABLE_SIO1API
+					if (SIO1_configure) SIO1_configure();
+#endif
+					return TRUE;
+
 				case ID_CONFIGURATION_NETPLAY:
 					DialogBox(gApp.hInstance, MAKEINTRESOURCE(IDD_NETPLAY), hWnd, (DLGPROC)ConfigureNetPlayDlgProc);
 					return TRUE;
@@ -1687,6 +1693,7 @@ void CreateMainMenu() {
 	ADDSEPARATOR(0);
 	ADDMENUITEM(0, _("&NetPlay..."), ID_CONFIGURATION_NETPLAY);
 	ADDSEPARATOR(0);
+	ADDMENUITEM(0, _("&Link cable..."), ID_CONFIGURATION_LINKCABLE);
 	ADDMENUITEM(0, _("&Controllers..."), ID_CONFIGURATION_CONTROLLERS);
 	ADDMENUITEM(0, _("CD-&ROM..."), ID_CONFIGURATION_CDROM);
 	ADDMENUITEM(0, _("&Sound..."), ID_CONFIGURATION_SOUND);
@@ -1889,6 +1896,7 @@ void SysRunGui() {
 void UpdateMenuItems() {
 	if (CdromId[0] != '\0') {
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_NETPLAY, MF_BYCOMMAND | MF_GRAYED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_LINKCABLE, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CONTROLLERS, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CDROM, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_SOUND, MF_BYCOMMAND | MF_GRAYED);
@@ -1926,10 +1934,15 @@ void UpdateMenuItems() {
 		EnableMenuItem(gApp.hMenu, ID_FILE_STATES_SAVE_OTHER, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CHEATSEARCH, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_NETPLAY, MF_BYCOMMAND | MF_ENABLED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_LINKCABLE, MF_BYCOMMAND | MF_ENABLED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CONTROLLERS, MF_BYCOMMAND | MF_ENABLED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CDROM, MF_BYCOMMAND | MF_ENABLED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_SOUND, MF_BYCOMMAND | MF_ENABLED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_GRAPHICS, MF_BYCOMMAND | MF_ENABLED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION, MF_BYCOMMAND | MF_ENABLED);
 	}
+
+#ifndef ENABLE_SIO1API
+	EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_LINKCABLE, MF_BYCOMMAND | MF_GRAYED);
+#endif
 }

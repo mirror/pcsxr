@@ -59,6 +59,9 @@ int LoadConfig() {
 	QueryKey(256, "Cdr",  Conf->Cdr);
 	QueryKey(256, "Pad1", Conf->Pad1);
 	QueryKey(256, "Pad2", Conf->Pad2);
+#ifdef ENABLE_SIO1API
+	QueryKey(256, "Sio1", Conf->Sio1);
+#endif
 	QueryKey(256, "Mcd1", Conf->Mcd1);
 	QueryKey(256, "Mcd2", Conf->Mcd2);
 	QueryKey(256, "PluginsDir", Conf->PluginsDir);
@@ -112,6 +115,7 @@ void SaveConfig() {
 	SetKey("Cdr",  Conf->Cdr,  strlen(Conf->Cdr),  REG_SZ);
 	SetKey("Pad1", Conf->Pad1, strlen(Conf->Pad1), REG_SZ);
 	SetKey("Pad2", Conf->Pad2, strlen(Conf->Pad2), REG_SZ);
+	SetKey("Sio1", Conf->Sio1, strlen(Conf->Sio1), REG_SZ);
 	SetKey("Net",  Conf->Net,  strlen(Conf->Net),  REG_SZ);
 	SetKey("Mcd1", Conf->Mcd1, strlen(Conf->Mcd1), REG_SZ);
 	SetKey("Mcd2", Conf->Mcd2, strlen(Conf->Mcd2), REG_SZ);
@@ -161,6 +165,7 @@ BOOL OnConfigurePluginsDialog(HWND hW) {
 	HWND hWC_CDR=GetDlgItem(hW,IDC_LISTCDR);
 	HWND hWC_PAD1=GetDlgItem(hW,IDC_LISTPAD1);
 	HWND hWC_PAD2=GetDlgItem(hW,IDC_LISTPAD2);
+	HWND hWC_SIO1=GetDlgItem(hW,IDC_LISTSIO1);
 	HWND hWC_BIOS=GetDlgItem(hW,IDC_LISTBIOS);
 	char tmpStr[256];
 	char *lp;
@@ -210,6 +215,10 @@ BOOL OnConfigurePluginsDialog(HWND hW) {
 							ComboAddPlugin(hWC_PAD1, Config.Pad1);
 						}
 					}
+
+					if (type & PSE_LT_SIO1) {
+						ComboAddPlugin(hWC_SIO1, Config.Sio1);
+					}
 				}
 			}
 		} while (FindNextFile(Find,&FindData));
@@ -257,6 +266,8 @@ BOOL OnConfigurePluginsDialog(HWND hW) {
 		ComboBox_SetCurSel(hWC_PAD1, 0);
 	if (ComboBox_GetCurSel(hWC_PAD2) == -1)
 		ComboBox_SetCurSel(hWC_PAD2, 0);
+	if (ComboBox_GetCurSel(hWC_SIO1 ) == -1)
+		ComboBox_SetCurSel(hWC_SIO1,  0);
 	if (ComboBox_GetCurSel(hWC_BIOS) == -1)
 		ComboBox_SetCurSel(hWC_BIOS, 0);
 
@@ -280,6 +291,7 @@ void CleanUpCombos(HWND hW) {
 	CleanCombo(IDC_LISTCDR);
 	CleanCombo(IDC_LISTPAD1);
 	CleanCombo(IDC_LISTPAD2);
+	CleanCombo(IDC_LISTSIO1);
 	CleanCombo(IDC_LISTBIOS);
 }
 
@@ -302,10 +314,17 @@ void OnOK(HWND hW) {
 	char *cdrDLL=GetSelDLL(hW,IDC_LISTCDR);
 	char *pad1DLL=GetSelDLL(hW,IDC_LISTPAD1);
 	char *pad2DLL=GetSelDLL(hW,IDC_LISTPAD2);
+#ifdef ENABLE_SIO1API
+	char *sio1DLL=GetSelDLL(hW,IDC_LISTSIO1);
+#endif
 	char *biosFILE=GetSelDLL(hW,IDC_LISTBIOS);
 
     if (gpuDLL == NULL || spuDLL == NULL || cdrDLL == NULL || pad1DLL == NULL ||
-		pad2DLL == NULL || biosFILE == NULL) {
+		pad2DLL == NULL || biosFILE == NULL
+#ifdef ENABLE_SIO1API
+		|| sio1DLL == NULL
+#endif
+		) {
 		MessageBox(hW, _("Configuration not OK!"), _("Error"), MB_OK | MB_ICONERROR);
 		return;
 	}
@@ -316,6 +335,9 @@ void OnOK(HWND hW) {
 	strcpy(Config.Cdr,  cdrDLL);
 	strcpy(Config.Pad1, pad1DLL);
 	strcpy(Config.Pad2, pad2DLL);
+#ifdef ENABLE_SIO1API
+	strcpy(Config.Sio1, sio1DLL);
+#endif
 
 	SaveConfig();
 
@@ -366,6 +388,11 @@ void ConfigurePAD2(HWND hW) {
 	ConfPlugin(PADconfigure, IDC_LISTPAD2, "PADconfigure");
 }
 
+void ConfigureSIO1(HWND hW) {
+#ifdef ENABLE_SIO1API
+	ConfPlugin(SIO1configure, IDC_LISTSIO1, "SIO1configure");
+#endif
+}
 
 void AboutGPU(HWND hW) {
 	ConfPlugin(GPUabout, IDC_LISTGPU, "GPUabout");
@@ -389,6 +416,12 @@ void AboutPAD1(HWND hW) {
 
 void AboutPAD2(HWND hW) {
 	ConfPlugin(PADabout, IDC_LISTPAD2, "PADabout");
+}
+
+void AboutSIO1(HWND hW) {
+#ifdef ENABLE_SIO1API
+	ConfPlugin(SIO1about, IDC_LISTSIO1, "SIO1about");
+#endif
 }
 
 
@@ -435,6 +468,13 @@ void TestPAD1(HWND hW) {
 void TestPAD2(HWND hW) {
 	TestPlugin(PADtest, IDC_LISTPAD2, "PADtest");
 }
+
+void TestSIO1(HWND hW) {
+#ifdef ENABLE_SIO1API
+	TestPlugin(SIO1test, IDC_LISTSIO1, "SIO1test");
+#endif
+}
+
 
 #include <shlobj.h>
 
@@ -491,6 +531,7 @@ BOOL CALLBACK ConfigurePluginsDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM 
 			Static_SetText(GetDlgItem(hW, IDC_SECONDCONTROLLER), _("Second Controller"));
 			Static_SetText(GetDlgItem(hW, IDC_SOUND), _("Sound"));
 			Static_SetText(GetDlgItem(hW, IDC_CDROM), _("Cdrom"));
+			Static_SetText(GetDlgItem(hW, IDC_LINKCABLE), _("Link cable"));
 			Static_SetText(GetDlgItem(hW, IDC_BIOS), _("Bios"));
 			Button_SetText(GetDlgItem(hW, IDC_BIOSDIR), _("Set Bios Directory"));
 			Button_SetText(GetDlgItem(hW, IDC_PLUGINSDIR), _("Set Plugins Directory"));
@@ -509,6 +550,9 @@ BOOL CALLBACK ConfigurePluginsDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM 
 			Button_SetText(GetDlgItem(hW, IDC_CONFIGPAD2), _("Configure..."));
 			Button_SetText(GetDlgItem(hW, IDC_TESTPAD2), _("Test..."));
 			Button_SetText(GetDlgItem(hW, IDC_ABOUTPAD2), _("About..."));
+			Button_SetText(GetDlgItem(hW, IDC_CONFIGSIO1), _("Configure..."));
+			Button_SetText(GetDlgItem(hW, IDC_TESTSIO1), _("Test..."));
+			Button_SetText(GetDlgItem(hW, IDC_ABOUTSIO1), _("About..."));
 
 			return OnConfigurePluginsDialog(hW);
 
@@ -519,18 +563,21 @@ BOOL CALLBACK ConfigurePluginsDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM 
        			case IDC_CONFIGCDR:  ConfigureCDR(hW); return TRUE;
        			case IDC_CONFIGPAD1: ConfigurePAD1(hW); return TRUE;
        			case IDC_CONFIGPAD2: ConfigurePAD2(hW); return TRUE;
+				case IDC_CONFIGSIO1: ConfigureSIO1(hW); return TRUE;
 
 				case IDC_TESTGPU:    TestGPU(hW);   return TRUE;
 				case IDC_TESTSPU:    TestSPU(hW);   return TRUE;
 				case IDC_TESTCDR:    TestCDR(hW);   return TRUE;
 				case IDC_TESTPAD1:   TestPAD1(hW);  return TRUE;
 				case IDC_TESTPAD2:   TestPAD2(hW);  return TRUE;
+				case IDC_TESTSIO1:   TestSIO1(hW);  return TRUE;
 
 				case IDC_ABOUTGPU:   AboutGPU(hW);  return TRUE;
 				case IDC_ABOUTSPU:   AboutSPU(hW);  return TRUE;
                 case IDC_ABOUTCDR:   AboutCDR(hW);  return TRUE;
     	        case IDC_ABOUTPAD1:  AboutPAD1(hW); return TRUE;
     		    case IDC_ABOUTPAD2:  AboutPAD2(hW); return TRUE;
+				case IDC_ABOUTSIO1:  AboutSIO1(hW); return TRUE;
 
 				case IDC_PLUGINSDIR: SetPluginsDir(hW); return TRUE;
 				case IDC_BIOSDIR:	 SetBiosDir(hW);	return TRUE;

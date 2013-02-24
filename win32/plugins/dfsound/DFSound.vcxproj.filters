@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="winsrc">
+      <UniqueIdentifier>{7f60c61a-63bd-4623-97da-50b7c5934d07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dfsound">
+      <UniqueIdentifier>{de115a9f-f76e-4f24-a883-2ad4be594713}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="winsrc\cfg.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\debug.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\dsound.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\psemu.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\record.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\winmain.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\dfsound\adsr.c">
+      <Filter>dfsound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\dfsound\dma.c">
+      <Filter>dfsound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\dfsound\externals.c">
+      <Filter>dfsound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\dfsound\freeze.c">
+      <Filter>dfsound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\dfsound\registers.c">
+      <Filter>dfsound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\dfsound\reverb.c">
+      <Filter>dfsound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\dfsound\spu.c">
+      <Filter>dfsound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\dfsound\xa.c">
+      <Filter>dfsound</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="winsrc\debug.h">
+      <Filter>winsrc</Filter>
+    </ClInclude>
+    <ClInclude Include="winsrc\dsound.h">
+      <Filter>winsrc</Filter>
+    </ClInclude>
+    <ClInclude Include="winsrc\record.h">
+      <Filter>winsrc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfsound\adsr.h">
+      <Filter>dfsound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfsound\dma.h">
+      <Filter>dfsound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfsound\dsoundoss.h">
+      <Filter>dfsound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfsound\externals.h">
+      <Filter>dfsound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfsound\gauss_i.h">
+      <Filter>dfsound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfsound\psemuxa.h">
+      <Filter>dfsound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfsound\registers.h">
+      <Filter>dfsound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfsound\regs.h">
+      <Filter>dfsound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfsound\reverb.h">
+      <Filter>dfsound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfsound\spu.h">
+      <Filter>dfsound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfsound\stdafx.h">
+      <Filter>dfsound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfsound\xa.h">
+      <Filter>dfsound</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DFSound.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DFSound.rc" />
+  </ItemGroup>
+</Project>

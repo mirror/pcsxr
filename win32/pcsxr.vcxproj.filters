@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="libpcsxcore">
+      <UniqueIdentifier>{ec95fe4a-9af2-4149-9084-07a8af1455ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libpcsxcore\ix86">
+      <UniqueIdentifier>{fbc09cea-5b71-484b-94da-16bb339e13be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gui">
+      <UniqueIdentifier>{86fc40af-6bfa-43ae-8648-bac5191a5ce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="zlib">
+      <UniqueIdentifier>{014c7814-ebe0-443e-bdf1-0e07fe0508f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="glue">
+      <UniqueIdentifier>{d3639188-eb44-4961-9d3c-fd2189b4c22f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="glue\sys">
+      <UniqueIdentifier>{b78acda2-160b-446b-be41-2048d552068d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="intl">
+      <UniqueIdentifier>{2fc9bc1d-cd0d-4c0e-a6ff-d26d53d52434}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\libpcsxcore\cdriso.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\cdrom.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\cheat.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\debug.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\decode_xa.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\disr3000a.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\gpu.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\gte.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\mdec.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\misc.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\plugins.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\ppf.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\psxbios.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\psxcommon.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\psxcounters.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\psxdma.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\psxhle.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\psxhw.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\psxinterpreter.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\psxmem.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\r3000a.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\sio.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\socket.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\spu.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\ix86\iR3000A.c">
+      <Filter>libpcsxcore\ix86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\ix86\ix86.c">
+      <Filter>libpcsxcore\ix86</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\AboutDlg.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CheatDlg.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\ConfigurePlugins.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\plugin.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\WndMain.c">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\adler32.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\compress.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\crc32.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\deflate.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\gzio.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\infblock.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\infcodes.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\inffast.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\inflate.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\inftrees.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\infutil.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\trees.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\uncompr.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\zutil.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="intl\bindtextdom.c">
+      <Filter>intl</Filter>
+    </ClCompile>
+    <ClCompile Include="intl\dcgettext.c">
+      <Filter>intl</Filter>
+    </ClCompile>
+    <ClCompile Include="intl\dgettext.c">
+      <Filter>intl</Filter>
+    </ClCompile>
+    <ClCompile Include="intl\explodename.c">
+      <Filter>intl</Filter>
+    </ClCompile>
+    <ClCompile Include="intl\finddomain.c">
+      <Filter>intl</Filter>
+    </ClCompile>
+    <ClCompile Include="intl\gettext.c">
+      <Filter>intl</Filter>
+    </ClCompile>
+    <ClCompile Include="intl\intl-compat.c">
+      <Filter>intl</Filter>
+    </ClCompile>
+    <ClCompile Include="intl\l10nflist.c">
+      <Filter>intl</Filter>
+    </ClCompile>
+    <ClCompile Include="intl\loadmsgcat.c">
+      <Filter>intl</Filter>
+    </ClCompile>
+    <ClCompile Include="intl\localealias.c">
+      <Filter>intl</Filter>
+    </ClCompile>
+    <ClCompile Include="intl\textdomain.c">
+      <Filter>intl</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\libpcsxcore\cdriso.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\cdrom.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\cheat.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\coff.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\debug.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\decode_xa.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\gpu.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\gte.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\gte_divider.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\mdec.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\misc.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\plugins.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\ppf.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\psemu_plugin_defs.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\psxbios.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\psxcommon.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\psxcounters.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\psxdma.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\psxhle.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\psxhw.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\psxmem.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\r3000a.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\sio.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\sjisfont.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\socket.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\spu.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\system.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\ix86\iGte.h">
+      <Filter>libpcsxcore\ix86</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\ix86\ix86.h">
+      <Filter>libpcsxcore\ix86</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\AboutDlg.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\NoPic.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\plugin.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\Win32.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\deflate.h">
+      <Filter>zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\infblock.h">
+      <Filter>zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\infcodes.h">
+      <Filter>zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inffast.h">
+      <Filter>zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inffixed.h">
+      <Filter>zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inftrees.h">
+      <Filter>zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\infutil.h">
+      <Filter>zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\trees.h">
+      <Filter>zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\zconf.h">
+      <Filter>zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\zlib.h">
+      <Filter>zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\zutil.h">
+      <Filter>zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="glue\stdint.h">
+      <Filter>glue</Filter>
+    </ClInclude>
+    <ClInclude Include="glue\sys\mman.h">
+      <Filter>glue\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="intl\gettext.h">
+      <Filter>intl</Filter>
+    </ClInclude>
+    <ClInclude Include="intl\gettextP.h">
+      <Filter>intl</Filter>
+    </ClInclude>
+    <ClInclude Include="intl\hash-string.h">
+      <Filter>intl</Filter>
+    </ClInclude>
+    <ClInclude Include="intl\intlconfig.h">
+      <Filter>intl</Filter>
+    </ClInclude>
+    <ClInclude Include="intl\libgettext.h">
+      <Filter>intl</Filter>
+    </ClInclude>
+    <ClInclude Include="intl\libintl.h">
+      <Filter>intl</Filter>
+    </ClInclude>
+    <ClInclude Include="intl\loadinfo.h">
+      <Filter>intl</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gui\about.bmp">
+      <Filter>gui</Filter>
+    </None>
+    <None Include="gui\pcsxr.ico">
+      <Filter>gui</Filter>
+    </None>
+    <None Include="gui\pcsxr.bmp">
+      <Filter>gui</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="gui\pcsxr.exe.manifest">
+      <Filter>gui</Filter>
+    </Manifest>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="pcsxr.rc" />
+  </ItemGroup>
+</Project>

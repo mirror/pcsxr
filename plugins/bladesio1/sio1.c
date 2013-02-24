@@ -23,6 +23,8 @@
 #include <stdint.h>
 
 #if defined _WINDOWS
+#include "stdafx.h"
+#include "cfg-winapi.h"
 #elif defined _MACOSX
 #else
 #include <sys/stat.h>
@@ -579,6 +581,7 @@ void ExecCfg(char *arg) {
 
 void CALLBACK SIO1about() {
 #if defined _WINDOWS
+	DialogBox(hInst,MAKEINTRESOURCE(IDD_ABOUT), GetActiveWindow(),(DLGPROC)AboutDlgProc);
 #elif defined _MACOSX
 #else
 	ExecCfg("about");
@@ -587,6 +590,7 @@ void CALLBACK SIO1about() {
 
 void CALLBACK SIO1configure() {
 #if defined _WINDOWS
+	DialogBox(hInst,MAKEINTRESOURCE(IDD_CFGDLG), GetActiveWindow(),(DLGPROC)Sio1DlgProc);
 #elif defined _MACOSX
 #else
 	ExecCfg("configure");

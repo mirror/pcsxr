@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="winsrc">
+      <UniqueIdentifier>{afc9ce0e-17fa-434b-8647-6f5a06a36ed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="winsrc\directx">
+      <UniqueIdentifier>{cc13db17-9136-4f07-8ddb-981412cb060b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dfxvideo">
+      <UniqueIdentifier>{435c6684-c400-40cc-a3b8-29f69899e0e6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="winsrc\cfg.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\draw.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\fps.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\key.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\record.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\winmain.c">
+      <Filter>winsrc</Filter>
+    </ClCompile>
+    <ClCompile Include="winsrc\dxguid.c">
+      <Filter>winsrc\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\dfxvideo\gpu.c">
+      <Filter>dfxvideo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\dfxvideo\menu.c">
+      <Filter>dfxvideo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\dfxvideo\prim.c">
+      <Filter>dfxvideo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\dfxvideo\soft.c">
+      <Filter>dfxvideo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\plugins\dfxvideo\zn.c">
+      <Filter>dfxvideo</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="winsrc\record.h">
+      <Filter>winsrc</Filter>
+    </ClInclude>
+    <ClInclude Include="winsrc\d3d.h">
+      <Filter>winsrc\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="winsrc\d3dcaps.h">
+      <Filter>winsrc\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="winsrc\d3dtypes.h">
+      <Filter>winsrc\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="winsrc\ddraw.h">
+      <Filter>winsrc\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfxvideo\cfg.h">
+      <Filter>dfxvideo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfxvideo\draw.h">
+      <Filter>dfxvideo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfxvideo\externals.h">
+      <Filter>dfxvideo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfxvideo\fps.h">
+      <Filter>dfxvideo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfxvideo\gpu.h">
+      <Filter>dfxvideo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfxvideo\hq2x.h">
+      <Filter>dfxvideo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfxvideo\hq3x.h">
+      <Filter>dfxvideo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfxvideo\interp.h">
+      <Filter>dfxvideo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfxvideo\key.h">
+      <Filter>dfxvideo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfxvideo\menu.h">
+      <Filter>dfxvideo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfxvideo\prim.h">
+      <Filter>dfxvideo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfxvideo\soft.h">
+      <Filter>dfxvideo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\plugins\dfxvideo\swap.h">
+      <Filter>dfxvideo</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DFXVideo.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DFXVideo.rc" />
+  </ItemGroup>
+</Project>

@@ -112,12 +112,12 @@ s32 connectionOpen() {
 
 void connectionClose() {
 	if(clientsock >= 0) {
-		close(clientsock);
+		//close(clientsock);
 		clientsock = -1;
 	}
 
 	if(serversock >= 0) {
-		close(serversock);
+		//close(serversock);
 		serversock = -1;
 	}
 }

@@ -1,0 +1,47 @@
+; Declares the module parameters for the DLL.
+
+LIBRARY      "bladesio1"
+
+EXPORTS
+    ; Explicit exports can go here
+	PSEgetLibType		@2
+	PSEgetLibName		@3
+	PSEgetLibVersion	@4
+	SIO1configure		@5
+	SIO1about			@6
+	SIO1test			@7
+	SIO1init			@8
+	SIO1shutdown		@9
+	SIO1open			@10
+	SIO1close			@11
+
+	SIO1pause			@12
+	SIO1resume			@13
+	SIO1keypressed		@14
+	
+	SIO1writeData8		@15
+	SIO1writeData16		@16
+	SIO1writeData32		@17
+	SIO1writeStat16		@18
+	SIO1writeStat32		@19
+	SIO1writeMode16		@20
+	SIO1writeMode32		@21
+	SIO1writeCtrl16		@22
+	SIO1writeCtrl32		@23
+	SIO1writeBaud16		@24
+	SIO1writeBaud32		@25
+	
+	SIO1readData8		@26
+	SIO1readData16		@27
+	SIO1readData32		@28
+	SIO1readStat16		@29
+	SIO1readStat32		@30
+	SIO1readMode16		@31
+	SIO1readMode32		@32
+	SIO1readCtrl16		@33
+	SIO1readCtrl32		@34
+	SIO1readBaud16		@35
+	SIO1readBaud32		@36
+	
+	SIO1update			@37
+	SIO1registerCallback	@38

@@ -126,6 +126,7 @@
 #define IDC_ASMCHECK24                  1038
 #define IDC_BIOS                        1038
 #define IDC_NETPLAY                     1039
+#define IDC_LINKCABLE                   1039
 #define IDC_NETPLAYNOTE                 1040
 #define IDC_FRAMEMCD1                   1041
 #define IDC_FRAMEMCD2                   1042
@@ -166,6 +167,7 @@
 #define IDC_TESTCDR                     1063
 #define IDC_ABOUTCDR                    1064
 #define IDC_COMBODRIVE                  1065
+#define IDC_LISTSIO1                    1065
 #define IDC_LISTPAD1                    1066
 #define IDC_CONFIGPAD1                  1067
 #define IDC_GPR12                       1068
@@ -181,8 +183,12 @@
 #define IDC_GPR17                       1073
 #define IDC_ABOUTPAD2                   1073
 #define IDC_GPR18                       1074
+#define IDC_CONFIGSIO1                  1074
 #define IDC_GPR19                       1075
+#define IDC_TESTSIO1                    1075
 #define IDC_GPR20                       1076
+#define IDC_ABOUTCDR2                   1076
+#define IDC_ABOUTSIO1                   1076
 #define IDC_GPR21                       1077
 #define IDC_GPR22                       1078
 #define IDC_GPR23                       1079
@@ -317,6 +323,7 @@
 #define ID_FILE_RUN_NOGUI               40016
 #define ID_CONFIGURATION_CONTROLLERS    40017
 #define ID_CONFIGURATION                40018
+#define ID_CONFIGURATION_LINKCABLE      40019
 #define ID_FILE_RUNBIOS                 40026
 #define ID_CONFIGURATION_NETPLAY        40043
 #define ID_EMULATOR_SWITCH_ISO          40044
