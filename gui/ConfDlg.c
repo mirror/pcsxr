@@ -385,19 +385,21 @@ static int all_config_set() {
 	gchar *filename; \
  \
 	GetComboText(confs.Combo, confs.plist, plugin); \
-	filename = g_build_filename (getenv("HOME"), PLUGINS_DIR, plugin, NULL); \
-	/*printf("Configuring plugin %s\n", filename);*/ \
-	drv = SysLoadLibrary(filename); \
-	if (drv == NULL) {printf("Error with file %s\n", filename);return; } \
+ 	if (strlen(plugin) > 0) { \
+		filename = g_build_filename (getenv("HOME"), PLUGINS_DIR, plugin, NULL); \
+		/*printf("Configuring plugin %s\n", filename);*/ \
+		drv = SysLoadLibrary(filename); \
+		if (drv == NULL) {printf("Error with file %s\n", filename);return; } \
 \
-	while (gtk_events_pending()) gtk_main_iteration(); \
-	conf = (src) SysLoadSym(drv, name); \
-	if (conf) { \
-		conf(); \
-	} else \
-		SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured.")); \
-	SysCloseLibrary(drv); \
-	g_free (filename); \
+		while (gtk_events_pending()) gtk_main_iteration(); \
+			conf = (src) SysLoadSym(drv, name); \
+		if (conf) { \
+			conf(); \
+		} else \
+			SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured.")); \
+		SysCloseLibrary(drv); \
+		g_free (filename); \
+    } else SysInfoMessage (name, _("Please select a plugin.")); \
 }
 
 static void on_configure_plugin(GtkWidget *widget, gpointer user_data) {
@@ -405,25 +407,23 @@ static void on_configure_plugin(GtkWidget *widget, gpointer user_data) {
 
 	while (gtk_events_pending())
 		gtk_main_iteration();
-	if (all_config_set() == TRUE) {
-		switch (plugin_type) {
-			case PSE_LT_GPU:
-				ConfPlugin(GPUconfigure, GpuConfS, Config.Gpu, "GPUconfigure", ConfDlg);
-				break;
-			case PSE_LT_SPU:
-				ConfPlugin(SPUconfigure, SpuConfS, Config.Spu, "SPUconfigure", ConfDlg);
-				break;
-			case PSE_LT_CDR:
-				ConfPlugin(CDRconfigure, CdrConfS, Config.Cdr, "CDRconfigure", ConfDlg);
-				break;
+
+	switch (plugin_type) {
+		case PSE_LT_GPU:
+			ConfPlugin(GPUconfigure, GpuConfS, Config.Gpu, "GPUconfigure", ConfDlg);
+			break;
+		case PSE_LT_SPU:
+			ConfPlugin(SPUconfigure, SpuConfS, Config.Spu, "SPUconfigure", ConfDlg);
+			break;
+		case PSE_LT_CDR:
+			ConfPlugin(CDRconfigure, CdrConfS, Config.Cdr, "CDRconfigure", ConfDlg);
+			break;
 #ifdef ENABLE_SIO1API
-			case PSE_LT_SIO1:
-				ConfPlugin(SIO1configure, Sio1ConfS, Config.Sio1, "SIO1configure", ConfDlg);
-				break;
+		case PSE_LT_SIO1:
+			ConfPlugin(SIO1configure, Sio1ConfS, Config.Sio1, "SIO1configure", ConfDlg);
+			break;
 #endif
-		}
-	} else
-		ConfigurePlugins();
+	}
 }
 
 static void on_about_plugin(GtkWidget *widget, gpointer user_data) {
@@ -431,25 +431,23 @@ static void on_about_plugin(GtkWidget *widget, gpointer user_data) {
 
 	while (gtk_events_pending())
 		gtk_main_iteration();
-	if (all_config_set() == TRUE) {
-		switch (plugin_type) {
-			case PSE_LT_GPU:
-				ConfPlugin(GPUconfigure, GpuConfS, Config.Gpu, "GPUabout", ConfDlg);
-				break;
-			case PSE_LT_SPU:
-				ConfPlugin(SPUconfigure, SpuConfS, Config.Spu, "SPUabout", ConfDlg);
-				break;
-			case PSE_LT_CDR:
-				ConfPlugin(CDRconfigure, CdrConfS, Config.Cdr, "CDRabout", ConfDlg);
-				break;
+
+	switch (plugin_type) {
+		case PSE_LT_GPU:
+			ConfPlugin(GPUconfigure, GpuConfS, Config.Gpu, "GPUabout", ConfDlg);
+			break;
+		case PSE_LT_SPU:
+			ConfPlugin(SPUconfigure, SpuConfS, Config.Spu, "SPUabout", ConfDlg);
+			break;
+		case PSE_LT_CDR:
+			ConfPlugin(CDRconfigure, CdrConfS, Config.Cdr, "CDRabout", ConfDlg);
+			break;
 #ifdef ENABLE_SIO1API
-			case PSE_LT_SIO1:
-				ConfPlugin(SIO1configure, Sio1ConfS, Config.Sio1, "SIO1about", ConfDlg);
-				break;
+		case PSE_LT_SIO1:
+			ConfPlugin(SIO1configure, Sio1ConfS, Config.Sio1, "SIO1about", ConfDlg);
+			break;
 #endif
-		}
-	} else
-		ConfigurePlugins();
+	}
 }
 
 static void OnConfConf_Pad1About(GtkWidget *widget, gpointer user_data) {
