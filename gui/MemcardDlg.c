@@ -191,10 +191,10 @@ static void LoadListItems(int mcd, GtkWidget *widget) {
 	store = gtk_list_store_new(NUM_CL, GDK_TYPE_PIXBUF, G_TYPE_STRING,
 			G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
-	dialog = gtk_builder_get_object(builder, "McdsDlg");
+	dialog = GTK_WIDGET(gtk_builder_get_object(builder, "McdsDlg"));
 
-	if (mcd == 1) List = gtk_builder_get_object(builder, "GtkCList_McdList1");
-	else List = gtk_builder_get_object(builder, "GtkCList_McdList2");
+	if (mcd == 1) List = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_McdList1"));
+	else List = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_McdList2"));
 
 	for (i = 0; i < MAX_MEMCARD_BLOCKS; i++) {
 		McdBlock *Info;
@@ -236,14 +236,14 @@ static void UpdateFilenameButtons(GtkWidget *widget) {
 	const char *filename;
 	gchar *p;
 
-	dialog = gtk_builder_get_object(builder, "McdsDlg");
+	dialog = GTK_WIDGET(gtk_builder_get_object(builder, "McdsDlg"));
 
 	for (i = 0; i < 2; i++) {
 		if (i == 0) {
-			widget = gtk_builder_get_object(builder, "Mcd1Label");
+			widget = GTK_WIDGET(gtk_builder_get_object(builder, "Mcd1Label"));
 			filename = Config.Mcd1;
 		} else {
-			widget = gtk_builder_get_object(builder, "Mcd2Label");
+			widget = GTK_WIDGET(gtk_builder_get_object(builder, "Mcd2Label"));
 			filename = Config.Mcd2;
 		}
 
@@ -279,10 +279,10 @@ static void UpdateListItems(int mcd, GtkWidget *widget) {
 	int i;
 	gchar *title;
 
-	dialog = gtk_builder_get_object(builder, "McdsDlg");
+	dialog = GTK_WIDGET(gtk_builder_get_object(builder, "McdsDlg"));
 
-	if (mcd == 1) List = gtk_builder_get_object(builder, "GtkCList_McdList1");
-	else List = gtk_builder_get_object(builder, "GtkCList_McdList2");
+	if (mcd == 1) List = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_McdList1"));
+	else List = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_McdList2"));
 
 	store = GTK_LIST_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(List)));
 	gtk_tree_model_get_iter_first(GTK_TREE_MODEL(store), &iter);
@@ -322,7 +322,7 @@ static void UpdateListItems(int mcd, GtkWidget *widget) {
 
 	gtk_widget_show(List);
 
-	OnTreeSelectionChanged(gtk_tree_view_get_selection(GTK_TREE_VIEW(List)), (gpointer)mcd);
+	OnTreeSelectionChanged(gtk_tree_view_get_selection(GTK_TREE_VIEW(List)), GINT_TO_POINTER(mcd));
 }
 
 static void UpdateMcdDlg(GtkWidget *widget) {
@@ -346,7 +346,7 @@ static void OnMcd_Close(GtkDialog *dialog, gint arg1, gpointer user_data) {
 }
 
 static void OnMcd_FileChange(GtkWidget *widget, gpointer user_data) {
-	gint memcard = (int)user_data;
+	gint memcard = GPOINTER_TO_INT(user_data);
 	gchar *filename;
 	GtkWidget *chooser;
 
@@ -387,7 +387,7 @@ static void OnMcd_Format(GtkWidget *widget, gpointer user_data) {
 	gint result;
 	char *str;
 
-	gint memcard = (int)user_data;
+	gint memcard = GPOINTER_TO_INT(user_data);
 
 	message_dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL,
 		GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
@@ -416,6 +416,7 @@ static void OnMcd_Format(GtkWidget *widget, gpointer user_data) {
 static void OnMcd_New(GtkWidget *widget, gpointer user_data) {
 	GtkWidget *chooser;
 	gchar *path;
+	gint memcard = GPOINTER_TO_INT(user_data);
 
 	// Ask for name of new memory card
 	chooser = gtk_file_chooser_dialog_new(_("Create a new Memory Card"),
@@ -438,10 +439,10 @@ static void OnMcd_New(GtkWidget *widget, gpointer user_data) {
 
 		CreateMcd(name);
 
-		if ((int)user_data == 1) strncpy(Config.Mcd1, name, MAXPATHLEN);
+		if (memcard == 1) strncpy(Config.Mcd1, name, MAXPATHLEN);
 		else strncpy(Config.Mcd2, name, MAXPATHLEN);
 
-		LoadMcd((int)user_data, name);
+		LoadMcd(memcard, name);
 		LoadMcdDlg(widget);
 
 		g_free(name);
@@ -522,7 +523,7 @@ gint GetMcdBlockCount(gint mcd, gint startblock) {
 }
 
 static void OnMcd_CopyTo(GtkWidget *widget, gpointer user_data) {
-	gint dstmcd = (gint)user_data;
+	gint dstmcd = GPOINTER_TO_INT(user_data);
 	gint srcmcd;
 
 	GtkTreeIter iter;
@@ -574,7 +575,7 @@ static void OnMcd_CopyTo(GtkWidget *widget, gpointer user_data) {
 
 	for (j=0; j < count; j++) {
 		CopyMemcardData(source, destination, (srci+j), (first_free_slot+j), str);
-		printf("count = %i, firstfree=%i, i=%i\n", count, first_free_slot, j);
+		//printf("count = %i, firstfree=%i, i=%i\n", count, first_free_slot, j);
 	}
 
 	UpdateMcdDlg(widget);
@@ -592,16 +593,16 @@ static void OnMemcardDelete(GtkWidget *widget, gpointer user_data) {
 	GtkWidget *tree;
 	GtkTreeSelection *sel;
 
-	gint memcard = (int)user_data;
+	gint memcard = GPOINTER_TO_INT(user_data);
 
 	if (memcard == 1) {
-		tree = gtk_builder_get_object(builder, "GtkCList_McdList1");
+		tree = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_McdList1"));
 		sel = gtk_tree_view_get_selection(GTK_TREE_VIEW (tree));
 		selected = gtk_tree_selection_get_selected (sel, &model, &iter);
 		data = Mcd1Data;
 		filename = Config.Mcd1;
 	} else {
-		tree = gtk_builder_get_object(builder, "GtkCList_McdList2");
+		tree = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_McdList2"));
 		sel = gtk_tree_view_get_selection(GTK_TREE_VIEW (tree));
 		selected = gtk_tree_selection_get_selected(sel, &model, &iter);
 		data = Mcd2Data;
@@ -642,7 +643,7 @@ static void OnTreeSelectionChanged(GtkTreeSelection *selection, gpointer user_da
 	int i;
 	McdBlock b;
 
-	gint memcard = (int)user_data;
+	gint memcard = GPOINTER_TO_INT(user_data);
 
 	selected = gtk_tree_selection_get_selected(selection, &model, &iter);
 
@@ -657,38 +658,38 @@ static void OnTreeSelectionChanged(GtkTreeSelection *selection, gpointer user_da
 			GetMcdBlockInfo(1, i + 1, &b);
 
 			if ((b.Flags >= 0xA1 && b.Flags <= 0xA3) || ((b.Flags & 0xF0) == 0x50)) {
-				gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_Delete1"), TRUE);
+				gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_Delete1")), TRUE);
 			} else {
-				gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_Delete1"), FALSE);
+				gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_Delete1")), FALSE);
 			}
 
 			if ((b.Flags & 0xF3) == 0x51) {
-				gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_CopyTo2"), TRUE);
+				gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_CopyTo2")), TRUE);
 			} else {
-				gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_CopyTo2"), FALSE);
+				gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_CopyTo2")), FALSE);
 			}
 		} else {
 			GetMcdBlockInfo(2, i + 1, &b);
 
 			if ((b.Flags >= 0xA1 && b.Flags <= 0xA3) || ((b.Flags & 0xF0) == 0x50)) {
-				gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_Delete2"), TRUE);
+				gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_Delete2")), TRUE);
 			} else {
-				gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_Delete2"), FALSE);
+				gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_Delete2")), FALSE);
 			}
 
 			if ((b.Flags & 0xF3) == 0x51) {
-				gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_CopyTo1"), TRUE);
+				gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_CopyTo1")), TRUE);
 			} else {
-				gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_CopyTo1"), FALSE);
+				gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_CopyTo1")), FALSE);
 			}
 		}
 	} else {
 		if (memcard == 1) {
-			gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_CopyTo2"), FALSE);
-			gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_Delete1"), FALSE);
+			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_CopyTo2")), FALSE);
+			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_Delete1")), FALSE);
 		} else {
-			gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_CopyTo1"), FALSE);
-			gtk_widget_set_sensitive(gtk_builder_get_object(builder, "GtkButton_Delete2"), FALSE);
+			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_CopyTo1")), FALSE);
+			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_Delete2")), FALSE);
 		}
 	}
 }
@@ -715,7 +716,7 @@ void OnConf_Mcds() {
 		return;
 	}
 
-	dialog = gtk_builder_get_object(builder, "McdsDlg");
+	dialog = GTK_WIDGET(gtk_builder_get_object(builder, "McdsDlg"));
 
 	gtk_window_set_title(GTK_WINDOW(dialog), _("Memory Card Manager"));
 	gtk_widget_show (dialog);
@@ -733,22 +734,22 @@ void OnConf_Mcds() {
 		g_free(str);
 	}
 
-	GtkCList_McdList1 = gtk_builder_get_object(builder, "GtkCList_McdList1");
+	GtkCList_McdList1 = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_McdList1"));
 	AddColumns(GTK_TREE_VIEW(GtkCList_McdList1));
-	GtkCList_McdList2 = gtk_builder_get_object(builder, "GtkCList_McdList2");
+	GtkCList_McdList2 = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_McdList2"));
 	AddColumns(GTK_TREE_VIEW(GtkCList_McdList2));
 
 	treesel1 = gtk_tree_view_get_selection(GTK_TREE_VIEW (GtkCList_McdList1));
 	gtk_tree_selection_set_mode(treesel1, GTK_SELECTION_SINGLE);
 	g_signal_connect_data(G_OBJECT(treesel1), "changed",
 						  G_CALLBACK(OnTreeSelectionChanged),
-						  (gpointer)1, NULL, G_CONNECT_AFTER);
+						  GINT_TO_POINTER(1), NULL, G_CONNECT_AFTER);
 
 	treesel2 = gtk_tree_view_get_selection(GTK_TREE_VIEW (GtkCList_McdList2));
 	gtk_tree_selection_set_mode(treesel2, GTK_SELECTION_SINGLE);
 	g_signal_connect_data(G_OBJECT(treesel2), "changed",
 						  G_CALLBACK(OnTreeSelectionChanged),
-						  (gpointer)2, NULL, G_CONNECT_AFTER);
+						  GINT_TO_POINTER(2), NULL, G_CONNECT_AFTER);
 
 	LoadMcdDlg(dialog);
 
@@ -756,48 +757,48 @@ void OnConf_Mcds() {
 	g_signal_connect_data(G_OBJECT(dialog), "response",
 			G_CALLBACK(OnMcd_Close), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "GtkButton_Format1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_Format1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(OnMcd_Format), (gpointer)1, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_Format), GINT_TO_POINTER(1), NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "GtkButton_Format2");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_Format2"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(OnMcd_Format), (gpointer)2, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_Format), GINT_TO_POINTER(2), NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "Mcd1Button");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "Mcd1Button"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(OnMcd_FileChange), (gpointer)1, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_FileChange), GINT_TO_POINTER(1), NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "Mcd2Button");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "Mcd2Button"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(OnMcd_FileChange), (gpointer)2, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_FileChange), GINT_TO_POINTER(2), NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "GtkButton_New1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_New1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(OnMcd_New), (gpointer)1, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_New), GINT_TO_POINTER(1), NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "GtkButton_New2");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_New2"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(OnMcd_New), (gpointer)2, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_New), GINT_TO_POINTER(2), NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "GtkButton_CopyTo1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_CopyTo1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(OnMcd_CopyTo), (gpointer)1, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_CopyTo), GINT_TO_POINTER(1), NULL, G_CONNECT_AFTER);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), FALSE);
 
-	widget = gtk_builder_get_object(builder, "GtkButton_CopyTo2");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_CopyTo2"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(OnMcd_CopyTo), (gpointer)2, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMcd_CopyTo), GINT_TO_POINTER(2), NULL, G_CONNECT_AFTER);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), FALSE);
 
-	widget = gtk_builder_get_object(builder, "GtkButton_Delete1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_Delete1"));
 	g_signal_connect_data (G_OBJECT (widget), "clicked",
-			G_CALLBACK(OnMemcardDelete), (gpointer)1, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMemcardDelete), GINT_TO_POINTER(1), NULL, G_CONNECT_AFTER);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), FALSE);
 
-	widget = gtk_builder_get_object(builder, "GtkButton_Delete2");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_Delete2"));
 	g_signal_connect_data (G_OBJECT (widget), "clicked",
-			G_CALLBACK(OnMemcardDelete), (gpointer)2, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(OnMemcardDelete), GINT_TO_POINTER(2), NULL, G_CONNECT_AFTER);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), FALSE);
 
 	quit = FALSE;
