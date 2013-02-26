@@ -82,25 +82,33 @@ static void AddColumns(GtkTreeView *treeview) {
 	gtk_tree_view_append_column(treeview, column);
 }
 
-static GdkPixbuf *SetIcon(GtkWidget *dialog, short *icon, int i) {
-	GdkPixbuf *result;
+static GdkPixbuf *SetIcon(GtkWidget *dialog, short *icon, int scale) {
+	GdkPixbuf *gdkpixbuf;
+	GdkPixbuf *gdkpixbuf2;
 	guchar *dest_pixels;
-	u32 x, y, c;
-	
-	result = gdk_pixbuf_new(GDK_COLORSPACE_RGB, 0, 8, 32, 32);
-	dest_pixels = gdk_pixbuf_get_pixels(result);
-	
-	for (y = 0; y < 32; y++) {
-		for (x = 0; x < 32; x++) {
-			c = icon[(y >> 1) * 16 + (x >> 1)];
+	u32 x, y;
+	u16 c;
+
+	gdkpixbuf = gdk_pixbuf_new(GDK_COLORSPACE_RGB, 0, 8, 16, 16);
+	dest_pixels = gdk_pixbuf_get_pixels(gdkpixbuf);
+
+	for (y = 0; y < 16; y++) {
+		for (x = 0; x < 16; x++) {
+			c = icon[y * 16 + x];
 			dest_pixels[0] = (c & 0x001f) << 3;
 			dest_pixels[1] = (c & 0x03e0) >> 2;
 			dest_pixels[2] = (c & 0x7c00) >> 7;
 			dest_pixels += 3;
 		}
 	}
-	
-	return result;
+
+	if(scale != 1) {
+		gdkpixbuf2 = gdk_pixbuf_scale_simple(gdkpixbuf, 16 * scale, 16 * scale, GDK_INTERP_NEAREST);
+		g_object_unref(gdkpixbuf);
+		return gdkpixbuf2;
+	}
+
+	return gdkpixbuf;
 }
 
 static gchar* MCDStatusToChar(McdBlock *Info) {
