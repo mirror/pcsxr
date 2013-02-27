@@ -7,10 +7,10 @@
       <source stock-id="generated-icon-pad-png" filename="pad.png"/>
       <source stock-id="generated-icon-cdr-png" filename="cdr.png"/>
       <source stock-id="generated-icon-gpu-png" filename="gpu.png"/>
+      <source stock-id="generated-icon-sio1-png" filename="sio1.png"/>
       <source stock-id="generated-icon-memcard-png" filename="memcard.png"/>
       <source stock-id="generated-icon-iso-reopen-png" filename="iso-reopen.png"/>
       <source stock-id="generated-icon-spu-png" filename="spu.png"/>
-	  <source stock-id="generated-icon-sio1-png" filename="sio1.png"/>
       <source stock-id="generated-icon-play-png" filename="play.png"/>
       <source stock-id="generated-icon-cd-png" filename="cd.png"/>
     </sources>
@@ -2383,6 +2383,23 @@
                       </object>
                     </child>
                     <child>
+                      <object class="GtkImageMenuItem" id="net1">
+                        <property name="label" translatable="yes">_Netplay...</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="image">image14</property>
+                        <property name="use_stock">False</property>
+                        <signal name="activate" handler="OnConf_Net" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSeparatorMenuItem" id="separator8">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkImageMenuItem" id="cpu1">
                         <property name="label" translatable="yes">_CPU...</property>
                         <property name="visible">True</property>
@@ -2403,17 +2420,6 @@
                         <property name="use_stock">False</property>
                         <accelerator key="M" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="OnConf_Mcds" swapped="no"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="net1">
-                        <property name="label" translatable="yes">_Netplay...</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="image">image14</property>
-                        <property name="use_stock">False</property>
-                        <signal name="activate" handler="OnConf_Net" swapped="no"/>
                       </object>
                     </child>
                     <child>
