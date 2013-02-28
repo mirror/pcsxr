@@ -73,7 +73,13 @@
 
 - (NSMenuItem*)newMenuItem:(NSURL*)documentURL
 {
-    NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:[documentURL lastPathComponent] action:@selector(openRecentItem:) keyEquivalent:@""];
+    NSString *lastName = nil;
+	[documentURL getResourceValue:&lastName forKey:NSURLLocalizedNameKey error:NULL];
+	if (!lastName) {
+		lastName = [documentURL lastPathComponent];
+	}
+	
+	NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:lastName action:@selector(openRecentItem:) keyEquivalent:@""];
     [newItem setRepresentedObject:documentURL];
     //[newItem setEnabled:YES];
     [newItem setTarget:self];
@@ -97,7 +103,7 @@
 // Document items are menu items with tag 0
 - (void)removeDocumentItems
 {
-	NSMutableArray *removeItemsArray = [NSMutableArray array];
+	NSMutableArray *removeItemsArray = [[NSMutableArray alloc] initWithCapacity:10];
 	for (NSMenuItem* item in [self itemArray]) {
 		if([item tag] == 0) {
 			[removeItemsArray addObject:item];
@@ -106,6 +112,7 @@
 	for (NSMenuItem *item in removeItemsArray) {
 		[self removeItem:item];
 	}
+	RELEASEOBJ(removeItemsArray);
 }
 
 @end
