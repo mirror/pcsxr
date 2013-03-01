@@ -82,6 +82,7 @@ int LoadConfig() {
 	QueryKeyV("RCntFix",  Conf->RCntFix);
 	QueryKeyV("VSyncWA",  Conf->VSyncWA);
 	QueryKeyV("Widescreen",  Conf->Widescreen);
+	QueryKeyV("HideCursor",  Conf->HideCursor);
 
 	QueryKeyV("Cpu",      Conf->Cpu);
 	QueryKeyV("PsxType",  Conf->PsxType);
@@ -135,6 +136,7 @@ void SaveConfig() {
 	SetKeyV("RCntFix", Conf->RCntFix);
 	SetKeyV("VSyncWA", Conf->VSyncWA);
 	SetKeyV("Widescreen", Conf->Widescreen);
+	SetKeyV("HideCursor", Conf->HideCursor);
 
 	SetKeyV("Cpu",     Conf->Cpu);
 	SetKeyV("PsxType", Conf->PsxType);

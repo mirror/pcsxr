@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2013-03-01 08:41+0400\n"
+"POT-Creation-Date: 2013-03-02 03:33+0400\n"
 "PO-Revision-Date: 2011-06-04 13:43+0400\n"
 "Last-Translator: Delirious <delirious@freemail.hu>\n"
 "Language-Team: Delirious <delirious@freemail.hu>\n"
@@ -156,7 +156,7 @@ msgstr "XA kódolás kikapcsolása"
 msgid "Disable CD Audio"
 msgstr "CD hang kikapcsolása"
 
-#: ../data/pcsxr.ui.h:34 ../win32/gui/WndMain.c:1321
+#: ../data/pcsxr.ui.h:34 ../win32/gui/WndMain.c:1331
 msgid "Slow Boot"
 msgstr ""
 
@@ -164,23 +164,23 @@ msgstr ""
 msgid "Enable Interpreter CPU"
 msgstr "Processzor interpreter használata"
 
-#: ../data/pcsxr.ui.h:36 ../win32/gui/WndMain.c:1324
+#: ../data/pcsxr.ui.h:36 ../win32/gui/WndMain.c:1334
 msgid "Enable Console Output"
 msgstr "Konzol kimenet bekapcsolása"
 
-#: ../data/pcsxr.ui.h:37 ../win32/gui/WndMain.c:1325
+#: ../data/pcsxr.ui.h:37 ../win32/gui/WndMain.c:1335
 msgid "Enable Debugger"
 msgstr "Hibakereső bekapcsolása"
 
-#: ../data/pcsxr.ui.h:38 ../win32/gui/WndMain.c:1327
+#: ../data/pcsxr.ui.h:38 ../win32/gui/WndMain.c:1337
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr "Parasite Eve 2, Vandal Hearts 1/2 javítás"
 
-#: ../data/pcsxr.ui.h:39 ../win32/gui/WndMain.c:1328
+#: ../data/pcsxr.ui.h:39 ../win32/gui/WndMain.c:1338
 msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku Battle javítás"
 
-#: ../data/pcsxr.ui.h:40 ../win32/gui/WndMain.c:1329
+#: ../data/pcsxr.ui.h:40 ../win32/gui/WndMain.c:1339
 msgid "Widescreen (GTE Hack)"
 msgstr ""
 
@@ -188,7 +188,7 @@ msgstr ""
 msgid "<b>Options</b>"
 msgstr "<b>Beállítások</b>"
 
-#: ../data/pcsxr.ui.h:42 ../win32/gui/WndMain.c:1322
+#: ../data/pcsxr.ui.h:42 ../win32/gui/WndMain.c:1332
 msgid "Autodetect"
 msgstr "Automatikus észlelés"
 
@@ -564,7 +564,7 @@ msgid "Cheat Code:"
 msgstr "Csalás kód:"
 
 #: ../gui/Cheat.c:147 ../gui/Cheat.c:241 ../gui/LnxMain.c:425
-#: ../win32/gui/ConfigurePlugins.c:328
+#: ../win32/gui/ConfigurePlugins.c:330
 msgid "Error"
 msgstr "Hiba"
 
@@ -586,7 +586,7 @@ msgid "PCSXR Cheat Code Files (*.cht)"
 msgstr "PCSXR csalás kód fájlok (*.cht)"
 
 #: ../gui/Cheat.c:322 ../gui/GtkGui.c:491 ../gui/GtkGui.c:643
-#: ../win32/gui/WndMain.c:1470 ../win32/gui/WndMain.c:1551
+#: ../win32/gui/WndMain.c:1483 ../win32/gui/WndMain.c:1564
 msgid "All Files"
 msgstr "Minden fájl"
 
@@ -757,14 +757,14 @@ msgstr "A fájl nem tűnik PlayStation futtatható fájlnak"
 msgid "CD ROM failed"
 msgstr "CD ROM hiba"
 
-#: ../gui/GtkGui.c:553 ../gui/GtkGui.c:725 ../win32/gui/WndMain.c:469
-#: ../win32/gui/WndMain.c:521 ../win32/gui/WndMain.c:590
+#: ../gui/GtkGui.c:553 ../gui/GtkGui.c:725 ../win32/gui/WndMain.c:472
+#: ../win32/gui/WndMain.c:526 ../win32/gui/WndMain.c:596
 #, c-format
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "Úgy tűnik a CD lemez nem PlayStation CD formátum"
 
-#: ../gui/GtkGui.c:564 ../gui/GtkGui.c:736 ../win32/gui/WndMain.c:479
-#: ../win32/gui/WndMain.c:531 ../win32/gui/WndMain.c:600
+#: ../gui/GtkGui.c:564 ../gui/GtkGui.c:736 ../win32/gui/WndMain.c:482
+#: ../win32/gui/WndMain.c:536 ../win32/gui/WndMain.c:606
 #, c-format
 msgid "Could not load CD-ROM!"
 msgstr "CD-ROM betöltése sikertelen!"
@@ -877,11 +877,11 @@ msgstr "PSX emulátor incializálása sikertelen.\n"
 msgid "Icon"
 msgstr "Ikon"
 
-#: ../gui/MemcardDlg.c:62 ../win32/gui/WndMain.c:768
+#: ../gui/MemcardDlg.c:62 ../win32/gui/WndMain.c:778
 msgid "Title"
 msgstr "Cím"
 
-#: ../gui/MemcardDlg.c:68 ../win32/gui/WndMain.c:774
+#: ../gui/MemcardDlg.c:68 ../win32/gui/WndMain.c:784
 msgid "Status"
 msgstr "Állapot"
 
@@ -893,16 +893,16 @@ msgstr "Azonosító"
 msgid "Name"
 msgstr "Név"
 
-#: ../gui/MemcardDlg.c:118 ../win32/gui/WndMain.c:979
+#: ../gui/MemcardDlg.c:118 ../win32/gui/WndMain.c:989
 msgid "Deleted"
 msgstr "Törölve"
 
-#: ../gui/MemcardDlg.c:120 ../gui/MemcardDlg.c:129 ../win32/gui/WndMain.c:980
-#: ../win32/gui/WndMain.c:983
+#: ../gui/MemcardDlg.c:120 ../gui/MemcardDlg.c:129 ../win32/gui/WndMain.c:990
+#: ../win32/gui/WndMain.c:993
 msgid "Free"
 msgstr "Üres"
 
-#: ../gui/MemcardDlg.c:123 ../win32/gui/WndMain.c:982
+#: ../gui/MemcardDlg.c:123 ../win32/gui/WndMain.c:992
 msgid "Used"
 msgstr "Foglalt"
 
@@ -1584,7 +1584,7 @@ msgstr "Kettes irányító"
 msgid "Multi-Threaded (Recommended)"
 msgstr "Többszálas (ajánlott)"
 
-#: ../plugins/dfinput/dfinput.ui.h:9 ../win32/gui/WndMain.c:1331
+#: ../plugins/dfinput/dfinput.ui.h:9 ../win32/gui/WndMain.c:1342
 msgid "Options"
 msgstr "Lehetőségek"
 
@@ -1669,7 +1669,7 @@ msgid "Port Number"
 msgstr "Port száma"
 
 #: ../plugins/dfnet/gui.c:30 ../plugins/dfnet/gui.c:112
-#: ../plugins/bladesio1/gui.c:82 ../win32/gui/ConfigurePlugins.c:667
+#: ../plugins/bladesio1/gui.c:82 ../win32/gui/ConfigurePlugins.c:669
 msgid "NetPlay"
 msgstr "Internetes játék"
 
@@ -2451,9 +2451,9 @@ msgstr ""
 #. *************************************************************************
 #: ../plugins/bladesio1/sio1.ui.h:1 ../win32/gui/AboutDlg.c:48
 #: ../win32/gui/AboutDlg.c:52 ../win32/gui/CheatDlg.c:69
-#: ../win32/gui/CheatDlg.c:119 ../win32/gui/ConfigurePlugins.c:527
-#: ../win32/gui/ConfigurePlugins.c:665 ../win32/gui/WndMain.c:1078
-#: ../win32/gui/WndMain.c:1314
+#: ../win32/gui/CheatDlg.c:119 ../win32/gui/ConfigurePlugins.c:529
+#: ../win32/gui/ConfigurePlugins.c:667 ../win32/gui/WndMain.c:1088
+#: ../win32/gui/WndMain.c:1324
 msgid "OK"
 msgstr "Rendben"
 
@@ -2541,8 +2541,8 @@ msgid "No"
 msgstr "Nem"
 
 #: ../win32/gui/CheatDlg.c:70 ../win32/gui/CheatDlg.c:120
-#: ../win32/gui/ConfigurePlugins.c:528 ../win32/gui/ConfigurePlugins.c:666
-#: ../win32/gui/WndMain.c:1079 ../win32/gui/WndMain.c:1315
+#: ../win32/gui/ConfigurePlugins.c:530 ../win32/gui/ConfigurePlugins.c:668
+#: ../win32/gui/WndMain.c:1089 ../win32/gui/WndMain.c:1325
 msgid "Cancel"
 msgstr "Mégsem"
 
@@ -2619,118 +2619,118 @@ msgstr "&Új keresés"
 msgid "C&lose"
 msgstr "B&ezárás"
 
-#: ../win32/gui/ConfigurePlugins.c:232
+#: ../win32/gui/ConfigurePlugins.c:234
 msgid "Simulate Psx Bios"
 msgstr "PSX BIOS szimulálása"
 
-#: ../win32/gui/ConfigurePlugins.c:328
+#: ../win32/gui/ConfigurePlugins.c:330
 msgid "Configuration not OK!"
 msgstr "Nem megfelelő beállítás!"
 
-#: ../win32/gui/ConfigurePlugins.c:443
+#: ../win32/gui/ConfigurePlugins.c:445
 msgid "This plugin reports that should work correctly"
 msgstr "Ez a plugin megfelelően fog működni"
 
-#: ../win32/gui/ConfigurePlugins.c:444
+#: ../win32/gui/ConfigurePlugins.c:446
 msgid "This plugin reports that should not work correctly"
 msgstr "Ez a plugin nem fog megfelelően működni"
 
-#: ../win32/gui/ConfigurePlugins.c:507
+#: ../win32/gui/ConfigurePlugins.c:509
 msgid "Select Plugins Directory"
 msgstr "Plugin könyvtár megadása"
 
-#: ../win32/gui/ConfigurePlugins.c:516
+#: ../win32/gui/ConfigurePlugins.c:518
 msgid "Select Bios Directory"
 msgstr "BIOS könyvtár megadása"
 
-#: ../win32/gui/ConfigurePlugins.c:525
+#: ../win32/gui/ConfigurePlugins.c:527
 msgid "Configuration"
 msgstr "Beállítás"
 
-#: ../win32/gui/ConfigurePlugins.c:529
+#: ../win32/gui/ConfigurePlugins.c:531
 msgid "Graphics"
 msgstr "Kép"
 
-#: ../win32/gui/ConfigurePlugins.c:530
+#: ../win32/gui/ConfigurePlugins.c:532
 msgid "First Controller"
 msgstr "Egyes irányító"
 
-#: ../win32/gui/ConfigurePlugins.c:531
+#: ../win32/gui/ConfigurePlugins.c:533
 msgid "Second Controller"
 msgstr "Kettes irányító"
 
-#: ../win32/gui/ConfigurePlugins.c:532
+#: ../win32/gui/ConfigurePlugins.c:534
 msgid "Sound"
 msgstr "Hang"
 
-#: ../win32/gui/ConfigurePlugins.c:533
+#: ../win32/gui/ConfigurePlugins.c:535
 msgid "Cdrom"
 msgstr "CD-ROM"
 
-#: ../win32/gui/ConfigurePlugins.c:534
+#: ../win32/gui/ConfigurePlugins.c:536
 #, fuzzy
 msgid "Link cable"
 msgstr "Bekapcsolás"
 
-#: ../win32/gui/ConfigurePlugins.c:535
+#: ../win32/gui/ConfigurePlugins.c:537
 msgid "Bios"
 msgstr "BIOS"
 
-#: ../win32/gui/ConfigurePlugins.c:536
+#: ../win32/gui/ConfigurePlugins.c:538
 msgid "Set Bios Directory"
 msgstr "BIOS könyvtára"
 
-#: ../win32/gui/ConfigurePlugins.c:537
+#: ../win32/gui/ConfigurePlugins.c:539
 msgid "Set Plugins Directory"
 msgstr "Pluginok könyvtára"
-
-#: ../win32/gui/ConfigurePlugins.c:538 ../win32/gui/ConfigurePlugins.c:541
-#: ../win32/gui/ConfigurePlugins.c:544 ../win32/gui/ConfigurePlugins.c:547
-#: ../win32/gui/ConfigurePlugins.c:550 ../win32/gui/ConfigurePlugins.c:553
-#: ../win32/gui/ConfigurePlugins.c:668
-msgid "Configure..."
-msgstr "Beállítás..."
-
-#: ../win32/gui/ConfigurePlugins.c:539 ../win32/gui/ConfigurePlugins.c:542
-#: ../win32/gui/ConfigurePlugins.c:545 ../win32/gui/ConfigurePlugins.c:548
-#: ../win32/gui/ConfigurePlugins.c:551 ../win32/gui/ConfigurePlugins.c:554
-#: ../win32/gui/ConfigurePlugins.c:669
-msgid "Test..."
-msgstr "Tesztelés..."
 
 #: ../win32/gui/ConfigurePlugins.c:540 ../win32/gui/ConfigurePlugins.c:543
 #: ../win32/gui/ConfigurePlugins.c:546 ../win32/gui/ConfigurePlugins.c:549
 #: ../win32/gui/ConfigurePlugins.c:552 ../win32/gui/ConfigurePlugins.c:555
 #: ../win32/gui/ConfigurePlugins.c:670
+msgid "Configure..."
+msgstr "Beállítás..."
+
+#: ../win32/gui/ConfigurePlugins.c:541 ../win32/gui/ConfigurePlugins.c:544
+#: ../win32/gui/ConfigurePlugins.c:547 ../win32/gui/ConfigurePlugins.c:550
+#: ../win32/gui/ConfigurePlugins.c:553 ../win32/gui/ConfigurePlugins.c:556
+#: ../win32/gui/ConfigurePlugins.c:671
+msgid "Test..."
+msgstr "Tesztelés..."
+
+#: ../win32/gui/ConfigurePlugins.c:542 ../win32/gui/ConfigurePlugins.c:545
+#: ../win32/gui/ConfigurePlugins.c:548 ../win32/gui/ConfigurePlugins.c:551
+#: ../win32/gui/ConfigurePlugins.c:554 ../win32/gui/ConfigurePlugins.c:557
+#: ../win32/gui/ConfigurePlugins.c:672
 msgid "About..."
 msgstr "Névjegy..."
 
-#: ../win32/gui/ConfigurePlugins.c:663
+#: ../win32/gui/ConfigurePlugins.c:665
 msgid "NetPlay Configuration"
 msgstr "Internetes játék beállítása"
 
-#: ../win32/gui/ConfigurePlugins.c:671
+#: ../win32/gui/ConfigurePlugins.c:673
 msgid ""
 "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
 msgstr ""
 "Megjegyzés: A NetPlay plugin könyvtár azonos a többi plugin könyvtárával."
 
-#: ../win32/gui/plugin.c:94 ../win32/gui/WndMain.c:328
+#: ../win32/gui/plugin.c:94 ../win32/gui/WndMain.c:331
 #, c-format
 msgid "*PCSXR*: Saved State %d"
 msgstr "*PCSXR*: Elmentett állás %d"
 
-#: ../win32/gui/plugin.c:95 ../win32/gui/WndMain.c:329
+#: ../win32/gui/plugin.c:95 ../win32/gui/WndMain.c:332
 #, c-format
 msgid "*PCSXR*: Error Saving State %d"
 msgstr "*PCSXR*: Hiba az állás mentése közben %d"
 
-#: ../win32/gui/plugin.c:111 ../win32/gui/WndMain.c:306
+#: ../win32/gui/plugin.c:111 ../win32/gui/WndMain.c:309
 #, c-format
 msgid "*PCSXR*: Loaded State %d"
 msgstr "*PCSXR*: Betöltött elmentett állás %d"
 
-#: ../win32/gui/plugin.c:112 ../win32/gui/WndMain.c:307
+#: ../win32/gui/plugin.c:112 ../win32/gui/WndMain.c:310
 #, c-format
 msgid "*PCSXR*: Error Loading State %d"
 msgstr "*PCSXR*: Hiba a mentett állás betöltése közben %d"
@@ -2879,8 +2879,8 @@ msgstr "Német"
 msgid "Greek"
 msgstr "Görög"
 
-#: ../win32/gui/WndMain.c:81 ../win32/gui/WndMain.c:1685
-#: ../win32/gui/WndMain.c:1687
+#: ../win32/gui/WndMain.c:81 ../win32/gui/WndMain.c:1699
+#: ../win32/gui/WndMain.c:1701
 msgid "English"
 msgstr "Angol"
 
@@ -2948,335 +2948,339 @@ msgstr ""
 "\t-cdfile FILE\tCD képfájl futtatása (-nogui szükséges)\n"
 "\t-help\t\tAz üzenet megjelenítése"
 
-#: ../win32/gui/WndMain.c:347 ../win32/gui/WndMain.c:393
+#: ../win32/gui/WndMain.c:350 ../win32/gui/WndMain.c:396
 msgid "PCSXR State Format"
 msgstr "PCSXR állás mentés formátum"
 
-#: ../win32/gui/WndMain.c:374
+#: ../win32/gui/WndMain.c:377
 #, c-format
 msgid "*PCSXR*: Loaded State %s"
 msgstr "*PCSXR*: Betöltött állás %s"
 
-#: ../win32/gui/WndMain.c:375
+#: ../win32/gui/WndMain.c:378
 #, c-format
 msgid "*PCSXR*: Error Loading State %s"
 msgstr "*PCSXR*: Hiba a mentett állás betöltése közben %s"
 
-#: ../win32/gui/WndMain.c:420
+#: ../win32/gui/WndMain.c:423
 #, c-format
 msgid "*PCSXR*: Saved State %s"
 msgstr "*PCSXR*: Mentett állás %s"
 
-#: ../win32/gui/WndMain.c:421
+#: ../win32/gui/WndMain.c:424
 #, c-format
 msgid "*PCSXR*: Error Saving State %s"
 msgstr "*PCSXR*: Hiba az állás mentése közben %s"
 
-#: ../win32/gui/WndMain.c:489
+#: ../win32/gui/WndMain.c:493
 msgid "Running BIOS is not supported with Internal HLE Bios."
 msgstr "BIOS használata nem támogatott belső HLE Bios esetén."
 
-#: ../win32/gui/WndMain.c:780
+#: ../win32/gui/WndMain.c:790
 msgid "Game ID"
 msgstr "Játék azonosító"
 
-#: ../win32/gui/WndMain.c:786
+#: ../win32/gui/WndMain.c:796
 msgid "Game"
 msgstr "Játék"
 
-#: ../win32/gui/WndMain.c:968
+#: ../win32/gui/WndMain.c:978
 msgid "mid link block"
 msgstr "mid link block"
 
-#: ../win32/gui/WndMain.c:971
+#: ../win32/gui/WndMain.c:981
 msgid "terminiting link block"
 msgstr "link block megszakítása"
 
-#: ../win32/gui/WndMain.c:1076
+#: ../win32/gui/WndMain.c:1086
 msgid "Memcard Manager"
 msgstr "Memória kártya kezelő"
 
-#: ../win32/gui/WndMain.c:1080 ../win32/gui/WndMain.c:1083
+#: ../win32/gui/WndMain.c:1090 ../win32/gui/WndMain.c:1093
 msgid "Select Mcd"
 msgstr "Választás"
 
-#: ../win32/gui/WndMain.c:1081 ../win32/gui/WndMain.c:1084
+#: ../win32/gui/WndMain.c:1091 ../win32/gui/WndMain.c:1094
 msgid "Format Mcd"
 msgstr "Formázás"
 
-#: ../win32/gui/WndMain.c:1082 ../win32/gui/WndMain.c:1085
+#: ../win32/gui/WndMain.c:1092 ../win32/gui/WndMain.c:1095
 msgid "Reload Mcd"
 msgstr "Újratöltés"
 
-#: ../win32/gui/WndMain.c:1086
+#: ../win32/gui/WndMain.c:1096
 msgid "-> Copy ->"
 msgstr "-> Másolás ->"
 
-#: ../win32/gui/WndMain.c:1087
+#: ../win32/gui/WndMain.c:1097
 msgid "<- Copy <-"
 msgstr "<- Másolás <-"
 
-#: ../win32/gui/WndMain.c:1088
+#: ../win32/gui/WndMain.c:1098
 msgid "Paste"
 msgstr "Beszúrás"
 
-#: ../win32/gui/WndMain.c:1089
+#: ../win32/gui/WndMain.c:1099
 msgid "<- Un/Delete"
 msgstr "<- Nem/törlés"
 
-#: ../win32/gui/WndMain.c:1090
+#: ../win32/gui/WndMain.c:1100
 msgid "Un/Delete ->"
 msgstr "Nem/törlés ->"
 
-#: ../win32/gui/WndMain.c:1092
+#: ../win32/gui/WndMain.c:1102
 msgid "Memory Card 1"
 msgstr "Memória kártya 1"
 
-#: ../win32/gui/WndMain.c:1093
+#: ../win32/gui/WndMain.c:1103
 msgid "Memory Card 2"
 msgstr "Memória kártya 2"
 
-#: ../win32/gui/WndMain.c:1148
+#: ../win32/gui/WndMain.c:1158
 msgid "Are you sure you want to paste this selection?"
 msgstr "Valóban be akarod szúrni a kijelölést?"
 
-#: ../win32/gui/WndMain.c:1148 ../win32/gui/WndMain.c:1259
-#: ../win32/gui/WndMain.c:1266
+#: ../win32/gui/WndMain.c:1158 ../win32/gui/WndMain.c:1269
+#: ../win32/gui/WndMain.c:1276
 msgid "Confirmation"
 msgstr "Megerősítés"
 
-#: ../win32/gui/WndMain.c:1259 ../win32/gui/WndMain.c:1266
+#: ../win32/gui/WndMain.c:1269 ../win32/gui/WndMain.c:1276
 msgid "Are you sure you want to format this Memory Card?"
 msgstr "Valóban le kívánod formázni ezt a Memória kártyát?"
 
-#: ../win32/gui/WndMain.c:1312
+#: ../win32/gui/WndMain.c:1322
 msgid "Cpu Config"
 msgstr "Processzor beállítás"
 
-#: ../win32/gui/WndMain.c:1317
+#: ../win32/gui/WndMain.c:1327
 msgid "Disable Xa Decoding"
 msgstr "Xa kódolás kikapcsolása"
 
-#: ../win32/gui/WndMain.c:1318
+#: ../win32/gui/WndMain.c:1328
 msgid "Sio Irq Always Enabled"
 msgstr "Sio IRQ mindig bekapcsolva"
 
-#: ../win32/gui/WndMain.c:1319
+#: ../win32/gui/WndMain.c:1329
 msgid "Black && White Movies"
 msgstr "Fekete &fehér videók"
 
-#: ../win32/gui/WndMain.c:1320
+#: ../win32/gui/WndMain.c:1330
 msgid "Disable Cd audio"
 msgstr "CD hang kikapcsolása"
 
-#: ../win32/gui/WndMain.c:1323
+#: ../win32/gui/WndMain.c:1333
 msgid "Enable Interpreter Cpu"
 msgstr "Processzor interpretáló rutin bekapcsolása"
 
-#: ../win32/gui/WndMain.c:1326
+#: ../win32/gui/WndMain.c:1336
 msgid "Spu Irq Always Enabled"
 msgstr "Hang IRQ mindig bekapcsolva"
 
-#: ../win32/gui/WndMain.c:1332
+#: ../win32/gui/WndMain.c:1340
+msgid "Hide cursor"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:1343
 msgid "Psx System Type"
 msgstr "PSX régió"
 
-#: ../win32/gui/WndMain.c:1440
+#: ../win32/gui/WndMain.c:1453
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 msgstr "Psx memória kártya formátum (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 
-#: ../win32/gui/WndMain.c:1445
+#: ../win32/gui/WndMain.c:1458
 msgid "Psx Memory Card (*.mcr;*.mc)"
 msgstr "Psx memória kártya (*.mcr;*.mc)"
 
-#: ../win32/gui/WndMain.c:1450
+#: ../win32/gui/WndMain.c:1463
 msgid "CVGS Memory Card (*.mem;*.vgs)"
 msgstr "CVSG memória kártya (*.mem;*.vgs)"
 
-#: ../win32/gui/WndMain.c:1455
+#: ../win32/gui/WndMain.c:1468
 msgid "Bleem Memory Card (*.mcd)"
 msgstr "Bleem memória kártya (*.mcd)"
 
-#: ../win32/gui/WndMain.c:1460
+#: ../win32/gui/WndMain.c:1473
 msgid "DexDrive Memory Card (*.gme)"
 msgstr "DexDrive memória kártya (*.gme)"
 
-#: ../win32/gui/WndMain.c:1465
+#: ../win32/gui/WndMain.c:1478
 msgid "DataDeck Memory Card (*.ddf)"
 msgstr "DataDeck memória kártya (*.ddf)"
 
-#: ../win32/gui/WndMain.c:1509
+#: ../win32/gui/WndMain.c:1522
 msgid "Psx Exe Format"
 msgstr "Psx exe formátum"
 
-#: ../win32/gui/WndMain.c:1546
+#: ../win32/gui/WndMain.c:1559
 #, fuzzy
 msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin;*.cue;*.pbp;*.cbn)"
 msgstr "Psx képfájlok (*.iso;*.mdf;*.img;*.bin)"
 
-#: ../win32/gui/WndMain.c:1622
+#: ../win32/gui/WndMain.c:1635
 msgid "&File"
 msgstr "&Fájl"
 
-#: ../win32/gui/WndMain.c:1623
+#: ../win32/gui/WndMain.c:1636
 msgid "E&xit"
 msgstr "K&ilépés"
 
-#: ../win32/gui/WndMain.c:1625
+#: ../win32/gui/WndMain.c:1638
 msgid "Run &EXE..."
 msgstr "&EXE indítása..."
 
-#: ../win32/gui/WndMain.c:1626
+#: ../win32/gui/WndMain.c:1639
 msgid "Run &BIOS"
 msgstr "&BIOS indítása"
 
-#: ../win32/gui/WndMain.c:1627
+#: ../win32/gui/WndMain.c:1640
 msgid "Run &ISO..."
 msgstr "&ISO megnyitása..."
 
-#: ../win32/gui/WndMain.c:1628
+#: ../win32/gui/WndMain.c:1641
 msgid "Run &CD"
 msgstr "&CD indítása"
 
-#: ../win32/gui/WndMain.c:1630
+#: ../win32/gui/WndMain.c:1643
 msgid "&Emulator"
 msgstr "&Emulátor"
 
-#: ../win32/gui/WndMain.c:1631
+#: ../win32/gui/WndMain.c:1644
 msgid "&States"
 msgstr "&Állapot"
 
-#: ../win32/gui/WndMain.c:1633
+#: ../win32/gui/WndMain.c:1646
 msgid "S&witch ISO..."
 msgstr "ISO v&áltás..."
 
-#: ../win32/gui/WndMain.c:1635
+#: ../win32/gui/WndMain.c:1648
 #, fuzzy
 msgid "S&hutdown"
 msgstr "Jobbra le"
 
-#: ../win32/gui/WndMain.c:1636
+#: ../win32/gui/WndMain.c:1649
 msgid "Re&set"
 msgstr "Al&apra állítás"
 
-#: ../win32/gui/WndMain.c:1637
+#: ../win32/gui/WndMain.c:1650
 msgid "&Run"
 msgstr "&Indítás"
 
-#: ../win32/gui/WndMain.c:1638
+#: ../win32/gui/WndMain.c:1651
 msgid "&Save"
 msgstr "&Mentés"
 
-#: ../win32/gui/WndMain.c:1639
+#: ../win32/gui/WndMain.c:1652
 msgid "&Load"
 msgstr "&Betöltés"
 
-#: ../win32/gui/WndMain.c:1640 ../win32/gui/WndMain.c:1650
+#: ../win32/gui/WndMain.c:1653 ../win32/gui/WndMain.c:1663
 msgid "&Other..."
 msgstr "&Más..."
 
-#: ../win32/gui/WndMain.c:1641 ../win32/gui/WndMain.c:1651
+#: ../win32/gui/WndMain.c:1654 ../win32/gui/WndMain.c:1664
 msgid "Slot &9"
 msgstr "&Kilencedik hely"
 
-#: ../win32/gui/WndMain.c:1642 ../win32/gui/WndMain.c:1652
+#: ../win32/gui/WndMain.c:1655 ../win32/gui/WndMain.c:1665
 msgid "Slot &8"
 msgstr "&Nyolcadik hely"
 
-#: ../win32/gui/WndMain.c:1643 ../win32/gui/WndMain.c:1653
+#: ../win32/gui/WndMain.c:1656 ../win32/gui/WndMain.c:1666
 msgid "Slot &7"
 msgstr "&Hetedik hely"
 
-#: ../win32/gui/WndMain.c:1644 ../win32/gui/WndMain.c:1654
+#: ../win32/gui/WndMain.c:1657 ../win32/gui/WndMain.c:1667
 msgid "Slot &6"
 msgstr "&Hatodik hely"
 
-#: ../win32/gui/WndMain.c:1645 ../win32/gui/WndMain.c:1655
+#: ../win32/gui/WndMain.c:1658 ../win32/gui/WndMain.c:1668
 msgid "Slot &5"
 msgstr "&Ötödik hely"
 
-#: ../win32/gui/WndMain.c:1646 ../win32/gui/WndMain.c:1656
+#: ../win32/gui/WndMain.c:1659 ../win32/gui/WndMain.c:1669
 msgid "Slot &4"
 msgstr "&Negyedik hely"
 
-#: ../win32/gui/WndMain.c:1647 ../win32/gui/WndMain.c:1657
+#: ../win32/gui/WndMain.c:1660 ../win32/gui/WndMain.c:1670
 msgid "Slot &3"
 msgstr "&Harmadik hely"
 
-#: ../win32/gui/WndMain.c:1648 ../win32/gui/WndMain.c:1658
+#: ../win32/gui/WndMain.c:1661 ../win32/gui/WndMain.c:1671
 msgid "Slot &2"
 msgstr "&Második hely"
 
-#: ../win32/gui/WndMain.c:1649 ../win32/gui/WndMain.c:1659
+#: ../win32/gui/WndMain.c:1662 ../win32/gui/WndMain.c:1672
 msgid "Slot &1"
 msgstr "&Első hely"
 
-#: ../win32/gui/WndMain.c:1661
+#: ../win32/gui/WndMain.c:1674
 msgid "&Configuration"
 msgstr "&Beállítások"
 
-#: ../win32/gui/WndMain.c:1662
+#: ../win32/gui/WndMain.c:1675
 msgid "Cheat &Search..."
 msgstr "Csalás &keresése..."
 
-#: ../win32/gui/WndMain.c:1663
+#: ../win32/gui/WndMain.c:1676
 msgid "Ch&eat Code..."
 msgstr "Cs&alás kód..."
 
-#: ../win32/gui/WndMain.c:1666
+#: ../win32/gui/WndMain.c:1679
 msgid "&Language"
 msgstr "&Nyelv"
 
-#: ../win32/gui/WndMain.c:1691
+#: ../win32/gui/WndMain.c:1705
 msgid "&Memory cards..."
 msgstr "&Memória kártyák..."
 
-#: ../win32/gui/WndMain.c:1692
+#: ../win32/gui/WndMain.c:1706
 msgid "C&PU..."
 msgstr "P&rocesszor..."
 
-#: ../win32/gui/WndMain.c:1694
+#: ../win32/gui/WndMain.c:1708
 msgid "&NetPlay..."
 msgstr "&Internetes játék..."
 
-#: ../win32/gui/WndMain.c:1696
+#: ../win32/gui/WndMain.c:1710
 #, fuzzy
 msgid "&Link cable..."
 msgstr "Bekapcsolás"
 
-#: ../win32/gui/WndMain.c:1697
+#: ../win32/gui/WndMain.c:1711
 msgid "&Controllers..."
 msgstr "&Irányítók..."
 
-#: ../win32/gui/WndMain.c:1698
+#: ../win32/gui/WndMain.c:1712
 msgid "CD-&ROM..."
 msgstr "CD-&ROM..."
 
-#: ../win32/gui/WndMain.c:1699
+#: ../win32/gui/WndMain.c:1713
 msgid "&Sound..."
 msgstr "&Hang..."
 
-#: ../win32/gui/WndMain.c:1700
+#: ../win32/gui/WndMain.c:1714
 msgid "&Graphics..."
 msgstr "&Kép..."
 
-#: ../win32/gui/WndMain.c:1702
+#: ../win32/gui/WndMain.c:1716
 msgid "&Plugins && Bios..."
 msgstr "&Pluginok és BIOS..."
 
-#: ../win32/gui/WndMain.c:1704
+#: ../win32/gui/WndMain.c:1718
 msgid "&Help"
 msgstr "&Súgó"
 
-#: ../win32/gui/WndMain.c:1705
+#: ../win32/gui/WndMain.c:1719
 msgid "&About..."
 msgstr "&A program névjegye..."
 
-#: ../win32/gui/WndMain.c:1856
+#: ../win32/gui/WndMain.c:1870
 msgid "Pcsxr Msg"
 msgstr "Pcsxr üzenet"
 
-#: ../win32/gui/WndMain.c:1859
+#: ../win32/gui/WndMain.c:1873
 msgid "Error Loading Symbol"
 msgstr "Hiba a szimbólum betöltése közben"
 

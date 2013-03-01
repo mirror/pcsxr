@@ -260,9 +260,12 @@ void RestoreWindow() {
 	AccBreak = 1;
 	DestroyWindow(gApp.hWnd);
 	CreateMainWindow(SW_SHOWNORMAL);
-	ShowCursor(TRUE);
-	SetCursor(LoadCursor(gApp.hInstance, IDC_ARROW));
-	ShowCursor(TRUE);
+	
+	if(Config.HideCursor)
+		ShowCursor(TRUE);
+	
+	//SetCursor(LoadCursor(gApp.hInstance, IDC_ARROW));
+	//ShowCursor(TRUE);
 
 	if (!UseGui) PostMessage(gApp.hWnd, WM_COMMAND, ID_FILE_EXIT, 0);
 }
@@ -479,7 +482,8 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 						SysMessage(_("Could not load CD-ROM!"));
 						return TRUE;
 					}
-					ShowCursor(FALSE);
+					if(Config.HideCursor)
+						ShowCursor(FALSE);
 					Running = 1;
 					psxCpu->Execute();
 					return TRUE;
@@ -497,7 +501,8 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 						RestoreWindow();
 						return TRUE;
 					}
-					ShowCursor(FALSE);
+					if(Config.HideCursor)
+						ShowCursor(FALSE);
 					SysReset();
 					CdromId[0] = '\0';
 					CdromLabel[0] = '\0';
@@ -531,7 +536,8 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 						SysMessage(_("Could not load CD-ROM!"));
 						return TRUE;
 					}
-					ShowCursor(FALSE);
+					if(Config.HideCursor)
+						ShowCursor(FALSE);
 					Running = 1;
 					psxCpu->Execute();
 					return TRUE;
@@ -602,7 +608,8 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 						RestoreWindow();
 						return TRUE;
 					}
-					ShowCursor(FALSE);
+					if(Config.HideCursor)
+						ShowCursor(FALSE);
 					Running = 1;
 					psxCpu->Execute();
 					return TRUE;
@@ -610,7 +617,8 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 				case ID_EMULATOR_RUN:
 					SetMenu(hWnd, NULL);
 					OpenPlugins(hWnd);
-					ShowCursor(FALSE);
+					if(Config.HideCursor)
+						ShowCursor(FALSE);
 					Running = 1;
 					CheatSearchBackupMemory();
 					psxCpu->Execute();
@@ -625,7 +633,8 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 					SysReset();
 					
 					LoadCdrom();
-					ShowCursor(FALSE);
+					if(Config.HideCursor)
+						ShowCursor(FALSE);
 					Running = 1;
 					psxCpu->Execute();
 					return TRUE;
@@ -647,7 +656,8 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 						RestoreWindow();
 						return TRUE;
 					}
-					ShowCursor(FALSE);
+					if(Config.HideCursor)
+						ShowCursor(FALSE);
 					Running = 1;
 					SetCdOpenCaseTime(time(NULL) + 2);
 					CheatSearchBackupMemory();
@@ -1327,6 +1337,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Button_SetText(GetDlgItem(hW,IDC_RCNTFIX), _("Parasite Eve 2, Vandal Hearts 1/2 Fix"));
 			Button_SetText(GetDlgItem(hW,IDC_VSYNCWA), _("InuYasha Sengoku Battle Fix"));
 			Button_SetText(GetDlgItem(hW,IDC_WIDESCREEN), _("Widescreen (GTE Hack)"));
+			Button_SetText(GetDlgItem(hW,IDC_HIDECURSOR), _("Hide cursor"));
 
 			Static_SetText(GetDlgItem(hW,IDC_MISCOPT), _("Options"));
 			Static_SetText(GetDlgItem(hW,IDC_SELPSX),  _("Psx System Type"));
@@ -1344,6 +1355,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 	   		Button_SetCheck(GetDlgItem(hW,IDC_RCNTFIX), Config.RCntFix);
 	   		Button_SetCheck(GetDlgItem(hW,IDC_VSYNCWA), Config.VSyncWA);
 			Button_SetCheck(GetDlgItem(hW,IDC_WIDESCREEN), Config.Widescreen);
+			Button_SetCheck(GetDlgItem(hW,IDC_HIDECURSOR), Config.HideCursor);
 	   		ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "NTSC");
 	   		ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "PAL");
 	   		ComboBox_SetCurSel(GetDlgItem(hW,IDC_PSXTYPES),Config.PsxType);
@@ -1388,6 +1400,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					Config.RCntFix = Button_GetCheck(GetDlgItem(hW,IDC_RCNTFIX));
 					Config.VSyncWA = Button_GetCheck(GetDlgItem(hW,IDC_VSYNCWA));
 					Config.Widescreen = Button_GetCheck(GetDlgItem(hW,IDC_WIDESCREEN));
+					Config.HideCursor = Button_GetCheck(GetDlgItem(hW,IDC_HIDECURSOR));
 					tmp = Config.Debug;
 					Config.Debug   = Button_GetCheck(GetDlgItem(hW,IDC_DEBUG));
 					if (tmp != Config.Debug) {
@@ -1665,6 +1678,7 @@ void CreateMainMenu() {
 #ifdef ENABLE_NLS
 	ADDSUBMENUS(0, 1, _("&Language"));
 
+	// wtf?
 	if (langs != langs) free(langs);
 	langs = (_langs*)malloc(sizeof(_langs));
 	strcpy(langs[0].lang, "English");

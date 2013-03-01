@@ -151,6 +151,7 @@ typedef struct {
 	boolean UseNet;
 	boolean VSyncWA;
 	boolean Widescreen;
+	boolean HideCursor;
 	u8 Cpu; // CPU_DYNAREC or CPU_INTERPRETER
 	u8 PsxType; // PSX_TYPE_NTSC or PSX_TYPE_PAL
 #ifdef _WIN32

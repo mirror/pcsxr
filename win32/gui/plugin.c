@@ -297,7 +297,9 @@ int _OpenPlugins(HWND hWnd) {
 #endif
 	
 	SetCurrentDirectory(PcsxrDir);
-	ShowCursor(FALSE);
+	
+	if(Config.HideCursor)
+		ShowCursor(FALSE);
 	return 0;
 }
 
