@@ -199,6 +199,7 @@ static void SetBranch() {
 	MOV32MtoR(EAX, (uptr)&target);
 	MOV32RtoM((uptr)&psxRegs.pc, EAX);
 	CALLFunc((uptr)psxBranchTest);
+	CALLFunc((uptr)psxJumpTest);
 
 	StackRes();
 	RET();
@@ -233,6 +234,7 @@ static void iJump(u32 branchPC) {
 	iStoreCycle();
 	MOV32ItoM((uptr)&psxRegs.pc, branchPC);
 	CALLFunc((uptr)psxBranchTest);
+	CALLFunc((uptr)psxJumpTest);
 
 	StackRes();
 
@@ -297,6 +299,7 @@ static void iBranch(u32 branchPC, int savectx) {
 	iStoreCycle();
 	MOV32ItoM((uptr)&psxRegs.pc, branchPC);
 	CALLFunc((uptr)psxBranchTest);
+	CALLFunc((uptr)psxJumpTest);
 	
 	StackRes();
 
@@ -490,6 +493,13 @@ static void recError() {
 
 	if (*p == 0) {
 		recRecompile();
+	}
+	else if (psxRegs.ICache_valid == FALSE) { // Xenogears: fixes memory card access with original BIOS (0a_44_FlushCache issue)
+		//psxCpu->Clear(0x0, 0x20000);
+		memset(recRAM, 0, 0x10000 * PTRMULT);
+		recRecompile();
+		p = (uptr *)PC_REC(psxRegs.pc);
+		psxRegs.ICache_valid == TRUE;
 	}
 
 	if (*p < (uptr)recMem || *p >= (uptr)recMem + RECMEM_SIZE)
