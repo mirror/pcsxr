@@ -219,8 +219,12 @@ int main(int argc, char *argv[]) {
 		return 0;
 	}
 
-    if (strcmp(argv[1], "configure") != 0 && 
-		strcmp(argv[1], "about") != 0) {
+    if (strcmp(argv[1], "about") != 0 && 
+		strcmp(argv[1], "configure") != 0 && 
+		strcmp(argv[1], "open") != 0 && 
+		strcmp(argv[1], "wait") != 0 && 
+		strcmp(argv[1], "pause") != 0 && 
+		strcmp(argv[1], "message") != 0) {
 		printf ("Usage: cfgDFNet {about | configure | open | wait | pause | message}\n");
 		return 0;
     }
