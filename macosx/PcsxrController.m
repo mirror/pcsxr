@@ -143,8 +143,12 @@ NSString *saveStatePath;
 - (void)runURL:(NSURL*)url
 {
     if ([EmuThread active] == YES) {
-		SetCdOpenCaseTime(time(NULL) + 2);
-		SetIsoFile([[url path] fileSystemRepresentation]);
+		if (UsingIso()) {
+			SetCdOpenCaseTime(time(NULL) + 2);
+			SetIsoFile([[url path] fileSystemRepresentation]);
+		} else {
+			NSBeep();
+		}
 	} else {
 		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"NetPlay"]) {
 			[pluginList enableNetPlug];
