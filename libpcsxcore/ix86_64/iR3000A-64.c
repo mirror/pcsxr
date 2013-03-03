@@ -499,7 +499,7 @@ static void recError() {
 		memset(recRAM, 0, 0x10000 * PTRMULT);
 		recRecompile();
 		p = (uptr *)PC_REC(psxRegs.pc);
-		psxRegs.ICache_valid == TRUE;
+		psxRegs.ICache_valid = TRUE;
 	}
 
 	if (*p < (uptr)recMem || *p >= (uptr)recMem + RECMEM_SIZE)
