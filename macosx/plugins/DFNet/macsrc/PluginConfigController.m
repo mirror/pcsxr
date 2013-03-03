@@ -134,12 +134,12 @@ void ReadConfig()
 
 @end
 
-const char* PLUGLOC(char *toloc)
+char* PLUGLOC(char *toloc)
 {
 	NSBundle *mainBundle = [NSBundle bundleForClass:[PluginConfigController class]];
 	NSString *origString = nil, *transString = nil;
 	origString = [NSString stringWithCString:toloc encoding:NSUTF8StringEncoding];
 	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
-	return [transString cStringUsingEncoding:NSUTF8StringEncoding];
+	return (char*)[transString cStringUsingEncoding:NSUTF8StringEncoding];
 }
 

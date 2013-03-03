@@ -176,10 +176,10 @@ void OnFile_Exit() {
     exit(0);
 }
 
-const char* Pcsxr_locale_text(char* toloc){
+char* Pcsxr_locale_text(char* toloc){
 	NSBundle *mainBundle = [NSBundle mainBundle];
 	NSString *origString = nil, *transString = nil;
 	origString = [NSString stringWithCString:toloc encoding:NSUTF8StringEncoding];
 	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
-	return [transString cStringUsingEncoding:NSUTF8StringEncoding];
+	return (char*)[transString cStringUsingEncoding:NSUTF8StringEncoding];
 }
