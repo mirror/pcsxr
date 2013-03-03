@@ -6,13 +6,16 @@
 #import "RecentItemsMenu.h"
 
 @class ConfigurationController;
+@class CheatController;
 
 @interface PcsxrController : NSObject <NSApplicationDelegate>
 {
     ConfigurationController *preferencesController;
+    CheatController *cheatController;
     PluginList *pluginList;
     
     IBOutlet NSWindow *preferenceWindow;
+    IBOutlet NSWindow *cheatWindow;
     IBOutlet RecentItemsMenu *recentItems;
     
     BOOL sleepInBackground;
@@ -22,6 +25,7 @@
 
 - (IBAction)ejectCD:(id)sender;
 - (IBAction)pause:(id)sender;
+- (IBAction)showCheatsWindow:(id)sender;
 - (IBAction)preferences:(id)sender;
 - (IBAction)reset:(id)sender;
 - (IBAction)runCD:(id)sender;

@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
 		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2844</string>
+			<string key="NS.object.0">3084</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSCustomObject</string>
@@ -281,6 +281,15 @@
 									<reference key="NSMenu" ref="164090988"/>
 									<string key="NSTitle">Pause When Inactive</string>
 									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="926047672"/>
+									<reference key="NSMixedImage" ref="645484985"/>
+								</object>
+								<object class="NSMenuItem" id="392373865">
+									<reference key="NSMenu" ref="164090988"/>
+									<string key="NSTitle">Cheats</string>
+									<string key="NSKeyEquiv">c</string>
+									<int key="NSKeyEquivModMask">1572864</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="926047672"/>
 									<reference key="NSMixedImage" ref="645484985"/>
@@ -592,16 +601,7 @@
 				<string key="NSAction">submenuAction:</string>
 				<object class="NSMenu" key="NSSubmenu" id="37407557">
 					<string key="NSTitle">Menu</string>
-					<array class="NSMutableArray" key="NSMenuItems">
-						<object class="NSMenuItem" id="392373865">
-							<reference key="NSMenu" ref="37407557"/>
-							<string key="NSTitle">Item</string>
-							<string key="NSKeyEquiv"/>
-							<int key="NSMnemonicLoc">2147483647</int>
-							<reference key="NSOnImage" ref="926047672"/>
-							<reference key="NSMixedImage" ref="645484985"/>
-						</object>
-					</array>
+					<array class="NSMutableArray" key="NSMenuItems"/>
 				</object>
 			</object>
 		</array>
@@ -864,6 +864,14 @@
 					<int key="connectionID">364</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showCheatsWindow:</string>
+						<reference key="source" ref="113826207"/>
+						<reference key="destination" ref="392373865"/>
+					</object>
+					<int key="connectionID">373</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">pcsxr</string>
 						<reference key="source" ref="689397059"/>
@@ -1068,6 +1076,7 @@
 							<reference ref="927940433"/>
 							<reference ref="160118245"/>
 							<reference ref="435063348"/>
+							<reference ref="392373865"/>
 						</array>
 						<reference key="parent" ref="622845102"/>
 					</object>
@@ -1310,15 +1319,13 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">370</int>
 						<reference key="object" ref="37407557"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="392373865"/>
-						</array>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="126713148"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">371</int>
 						<reference key="object" ref="392373865"/>
-						<reference key="parent" ref="37407557"/>
+						<reference key="parent" ref="164090988"/>
 					</object>
 				</array>
 			</object>
@@ -1395,7 +1402,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">371</int>
+			<int key="maxID">373</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1403,6 +1410,7 @@
 					<string key="className">PcsxrController</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="cheats:">id</string>
 						<string key="defrost:">id</string>
 						<string key="ejectCD:">id</string>
 						<string key="freeze:">id</string>
@@ -1414,8 +1422,13 @@
 						<string key="runBios:">id</string>
 						<string key="runCD:">id</string>
 						<string key="runIso:">id</string>
+						<string key="showCheatsWindow:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="cheats:">
+							<string key="name">cheats:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="defrost:">
 							<string key="name">defrost:</string>
 							<string key="candidateClassName">id</string>
@@ -1460,12 +1473,21 @@
 							<string key="name">runIso:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="showCheatsWindow:">
+							<string key="name">showCheatsWindow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="cheatWindow">NSWindow</string>
 						<string key="preferenceWindow">NSWindow</string>
 						<string key="recentItems">RecentItemsMenu</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="cheatWindow">
+							<string key="name">cheatWindow</string>
+							<string key="candidateClassName">NSWindow</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="preferenceWindow">
 							<string key="name">preferenceWindow</string>
 							<string key="candidateClassName">NSWindow</string>

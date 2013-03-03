@@ -1,6 +1,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PcsxrController.h"
 #import "ConfigurationController.h"
+#import "CheatController.h"
 #import "EmuThread.h"
 #import "PcsxrMemCardHandler.h"
 #import "PcsxrPluginHandler.h"
@@ -86,6 +87,21 @@ NSString *saveStatePath;
     }
 }
 
+- (IBAction)showCheatsWindow:(id)sender
+{
+	/* load the nib if it hasn't yet */
+	if (cheatWindow == nil) {
+		if (cheatController == nil) {
+			cheatController = [[CheatController alloc] initWithWindowNibName:@"CheatWindow"];
+		}
+		cheatWindow = [cheatController window];
+	}
+    
+	/* show the window */
+	//[cheatWindow makeKeyAndOrderFront:sender];
+	[cheatController showWindow:sender];
+}
+
 - (IBAction)preferences:(id)sender
 {
 	/* load the nib if it hasn't yet */
@@ -97,8 +113,8 @@ NSString *saveStatePath;
 	}
 
 	/* show the window */
-	[preferenceWindow makeKeyAndOrderFront:self];
-	[preferencesController showWindow:self];
+	//[preferenceWindow makeKeyAndOrderFront:sender];
+	[preferencesController showWindow:sender];
 }
 
 - (IBAction)reset:(id)sender
@@ -216,6 +232,10 @@ NSString *saveStatePath;
 			if ([preferencesController isMemoryCardWindowVisible] == YES)
 				return NO;
 		}
+        
+        if (cheatWindow != nil)
+            if ([cheatWindow isVisible])
+                return NO;
 		
 		if ([menuItem action] == @selector(runBios:) && strcmp(Config.Bios, "HLE") == 0)
 			return NO;
@@ -238,7 +258,7 @@ NSString *saveStatePath;
 		[menuItem setState:(sleepInBackground ? NSOnState : NSOffState)];
 		return YES;
 	}
-	
+
 	return YES;
 }
 

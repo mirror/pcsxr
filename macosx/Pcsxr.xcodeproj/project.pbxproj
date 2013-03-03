@@ -79,6 +79,8 @@
 		71F4C5AF0FDED12800529849 /* spu.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5860FDED12800529849 /* spu.c */; };
 		71F4C5B90FDED16D00529849 /* iR3000A.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5B50FDED16D00529849 /* iR3000A.c */; };
 		71F4C5BA0FDED16D00529849 /* ix86.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5B60FDED16D00529849 /* ix86.c */; };
+		D422E66E16DC48D000526DCF /* CheatWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D422E66C16DC48D000526DCF /* CheatWindow.xib */; };
+		D422E67A16DC495800526DCF /* CheatController.m in Sources */ = {isa = PBXBuildFile; fileRef = D422E67916DC495800526DCF /* CheatController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -354,6 +356,9 @@
 		71F4C5B70FDED16D00529849 /* ix86.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ix86.h; sourceTree = "<group>"; };
 		71F703A611B3A673007DD5C5 /* sjisfont.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = sjisfont.h; sourceTree = "<group>"; };
 		71F93F6311FB8E9D007A5A7C /* DFCdrom.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DFCdrom.xcodeproj; path = plugins/DFCdrom/DFCdrom.xcodeproj; sourceTree = "<group>"; };
+		D422E66D16DC48D000526DCF /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CheatWindow.xib; sourceTree = "<group>"; };
+		D422E67816DC495800526DCF /* CheatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheatController.h; sourceTree = "<group>"; };
+		D422E67916DC495800526DCF /* CheatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheatController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -427,6 +432,7 @@
 		2BA178AD0514CE260026D74D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D422E66C16DC48D000526DCF /* CheatWindow.xib */,
 				02FE55E616765F9400205CF2 /* KeyNames.plist */,
 				2BBB1786051E0D9700B84448 /* Credits.rtf */,
 				28F0C3C4146521A700A90285 /* Configuration.xib */,
@@ -478,6 +484,8 @@
 				2BA44361052DB2EA00E21DDD /* PcsxrPlugin.m */,
 				55A9021E147D7C380037E18F /* PcsxrMemCardController.h */,
 				55A9021F147D7C380037E18F /* PcsxrMemCardController.m */,
+				D422E67816DC495800526DCF /* CheatController.h */,
+				D422E67916DC495800526DCF /* CheatController.m */,
 				55A90227147D89380037E18F /* PcsxrMemoryObject.h */,
 				55A90228147D89380037E18F /* PcsxrMemoryObject.m */,
 				55BBA690149454DE003B2CEC /* PcsxrFileHandle.h */,
@@ -791,6 +799,7 @@
 				55A90223147D7C7A0037E18F /* MemCardManager.xib in Resources */,
 				55C7A214148B2B3800C22ABC /* PcsxrMemCardDocument.xib in Resources */,
 				02FE55E816765F9400205CF2 /* KeyNames.plist in Resources */,
+				D422E66E16DC48D000526DCF /* CheatWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -850,6 +859,7 @@
 				0280B7AD16764CC5007B8001 /* HotkeyController.m in Sources */,
 				02717968167884C9004AED62 /* hotkeys.m in Sources */,
 				5529EA11169CBE3400BAA2A5 /* RecentItemsMenu.m in Sources */,
+				D422E67A16DC495800526DCF /* CheatController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -964,6 +974,15 @@
 				55C7A215148B2B3800C22ABC /* English */,
 			);
 			name = PcsxrMemCardDocument.xib;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		D422E66C16DC48D000526DCF /* CheatWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D422E66D16DC48D000526DCF /* English */,
+			);
+			name = CheatWindow.xib;
 			path = ..;
 			sourceTree = "<group>";
 		};
