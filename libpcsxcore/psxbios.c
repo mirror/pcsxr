@@ -1005,7 +1005,11 @@ _start:
 
 	memcpy((char*)PSXM(sp), save, 4 * 4);
 
+#ifdef PSXBIOS_LOG
+	PSXBIOS_LOG("psxBios_%s: %s\n", biosA0n[0x3f], tmp);
+#else
 	SysPrintf(tmp);
+#endif
 
 	pc0 = ra;
 }
@@ -1809,13 +1813,36 @@ void psxBios_close() { // 0x36
 	pc0 = ra;
 }
 
+#define PSXSTRBUFMAX 255
+char psxstrbuf[PSXSTRBUFMAX+1];
+unsigned short psxstrbuf_count = 0;
+
 void psxBios_putchar() { // 3d
+    char logchar = ( a0 == 0xa ? '>' : (char)a0 );
+    if (psxstrbuf_count < PSXSTRBUFMAX) psxstrbuf[psxstrbuf_count++] = logchar;
+
+#ifdef PSXBIOS_LOG
+	PSXBIOS_LOG("psxBios_%s: %x (%c)\n", biosB0n[0x3d], a0, logchar);
+#else
 	SysPrintf("%c", (char)a0);
+#endif
+    if ((a0 == 0xa && psxstrbuf_count >= 2) || psxstrbuf_count >= PSXSTRBUFMAX) {
+        psxstrbuf[psxstrbuf_count++] = '\0';
+#ifdef PSXBIOS_LOG
+        PSXBIOS_LOG("psxBios_%s: string_[%d]_cr: %s\n", biosB0n[0x3d], psxstrbuf_count, psxstrbuf);
+#endif
+        psxstrbuf_count = 0;
+    }
+
 	pc0 = ra;
 }
 
 void psxBios_puts() { // 3e/3f
+#ifdef PSXBIOS_LOG
+	PSXBIOS_LOG("psxBios_%s: %s\n", biosB0n[0x3f], Ra0);
+#else
 	SysPrintf(Ra0);
+#endif
 	pc0 = ra;
 }
 
