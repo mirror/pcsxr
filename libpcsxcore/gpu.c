@@ -99,7 +99,7 @@ int gpuReadStatus() {
 
 void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 	u32 *ptr;
-	u32 size;
+	u32 size, bs;
 
 	switch (chcr) {
 		case 0x01000200: // vram2mem
@@ -108,8 +108,8 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 #endif
 			ptr = (u32 *)PSXM(madr);
 			if (ptr == NULL) {
-#ifdef CPU_LOG
-				CPU_LOG("*** DMA2 GPU - vram2mem *** NULL Pointer!!!\n");
+#ifdef PSXDMA_LOG
+				PSXDMA_LOG("*** DMA2 GPU - vram2mem *** NULL Pointer!!!\n");
 #endif
 				break;
 			}
@@ -128,27 +128,27 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			return;
 
 		case 0x01000201: // mem2vram
+    		bs=(bcr & 0xffff);
+			size = (bcr >> 16) * bs; // BA blocks * BS words (word = 32-bits)
 #ifdef PSXDMA_LOG
-			PSXDMA_LOG("*** DMA 2 - GPU mem2vram *** %lx addr = %lx size = %lx\n", chcr, madr, bcr);
+			PSXDMA_LOG("*** DMA 2 - GPU mem2vram *** %lx addr = %lxh, BCR %lxh => size %d = BA(%d) * BS(%xh)\n",
+						chcr, madr, bcr, size, size / bs, size / (bcr >> 16));
 #endif
 			ptr = (u32 *)PSXM(madr);
 			if (ptr == NULL) {
-#ifdef CPU_LOG
-				CPU_LOG("*** DMA2 GPU - mem2vram *** NULL Pointer!!!\n");
+#ifdef PSXDMA_LOG
+				PSXDMA_LOG("*** DMA2 GPU - mem2vram *** NULL Pointer!!!\n");
 #endif
 				break;
 			}
-			// BA blocks * BS words (word = 32-bits)
-			size = (bcr >> 16) * (bcr & 0xffff);
 			GPU_writeDataMem(ptr, size);
 
-#if 1
+#if 0
 			// already 32-bit word size ((size * 4) / 4)
 			GPUDMA_INT(size);
 #else
-			// Experimental burst dma transfer
-			// - X-Files = 0.333333x max for videos
-			GPUDMA_INT( size / 3 );
+			// X-Files video interlace. Experimental delay depending of BS.
+			GPUDMA_INT( (7 * size) / bs );
 #endif
 			return;
 
