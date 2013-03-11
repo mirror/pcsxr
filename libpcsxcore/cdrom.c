@@ -777,8 +777,6 @@ void cdrInterrupt() {
 			break;
 
 		case CdlPause:
-			cdr.StatP |= STATUS_READ;
-			cdr.Result[0] = cdr.StatP;
 			/*
 			Gundam Battle Assault 2: much slower (*)
 			- Fixes boot, gameplay
