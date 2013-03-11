@@ -558,7 +558,10 @@ void cdrPlayInterrupt()
 			setIrq();
 		}
 
-		memcpy(cdr.SetSectorPlay, cdr.SetSector, 4);
+		if (cdr.SetlocPending) {
+			memcpy(cdr.SetSectorPlay, cdr.SetSector, 4);
+			cdr.SetlocPending = 0;
+		}
 		Find_CurTrack(cdr.SetSectorPlay);
 		ReadTrack(cdr.SetSectorPlay);
 		cdr.TrackChanged = FALSE;
@@ -650,12 +653,16 @@ void cdrInterrupt() {
 		case CdlSetloc:
 			break;
 
+		do_CdlPlay:
 		case CdlPlay:
 			StopCdda();
 			if (cdr.Seeked == SEEK_PENDING) {
 				// XXX: wrong, should seek instead..
-				memcpy( cdr.SetSectorPlay, cdr.SetSector, 4 );
 				cdr.Seeked = SEEK_DONE;
+			}
+			if (cdr.SetlocPending) {
+				memcpy(cdr.SetSectorPlay, cdr.SetSector, 4);
+				cdr.SetlocPending = 0;
 			}
 
 			// BIOS CD Player
@@ -983,24 +990,23 @@ void cdrInterrupt() {
 
 		case CdlReadN:
 		case CdlReadS:
+			if (cdr.SetlocPending) {
+				memcpy(cdr.SetSectorPlay, cdr.SetSector, 4);
+				cdr.SetlocPending = 0;
+			}
+			Find_CurTrack(cdr.SetSectorPlay);
+
+			if ((cdr.Mode & MODE_CDDA) && cdr.CurTrack > 1)
+				// Read* acts as play for cdda tracks in cdda mode
+				goto do_CdlPlay;
+
 			cdr.Reading = 1;
 			cdr.FirstSector = 1;
-			
-			/* FIXME: break Twisted Metal 2
-            // Mortal Kombat Trilogy - resume CDDA playback from pause
-			if ((cdr.Mode & MODE_CDDA)) {
-#ifdef CDR_LOG
-				CDR_LOG("Resuming CDDA playback at track %d.\n", cdr.CurTrack);
-#endif
-				AddIrqQueue(CdlPlay, cdReadTime * 75 / 4);
-				break;
-			} else {
-			*/
-				// Fighting Force 2 - update subq time immediately
-				// - fixes new game
-				Find_CurTrack(cdr.SetSector);
-				ReadTrack(cdr.SetSector);
-			//}
+
+			// Fighting Force 2 - update subq time immediately
+			// - fixes new game
+			ReadTrack(cdr.SetSectorPlay);
+
 
 			// Crusaders of Might and Magic - update getlocl now
 			// - fixes cutscene speech
@@ -1155,7 +1161,7 @@ void cdrReadInterrupt() {
 	cdr.Result[0] = cdr.StatP;
 	cdr.Seeked = SEEK_DONE;
 
-	ReadTrack(cdr.SetSector);
+	ReadTrack(cdr.SetSectorPlay);
 
 	buf = CDR_getBuffer();
 	if (buf == NULL)
@@ -1199,13 +1205,13 @@ void cdrReadInterrupt() {
 		}
 	}
 
-	cdr.SetSector[2]++;
-	if (cdr.SetSector[2] == 75) {
-		cdr.SetSector[2] = 0;
-		cdr.SetSector[1]++;
-		if (cdr.SetSector[1] == 60) {
-			cdr.SetSector[1] = 0;
-			cdr.SetSector[0]++;
+	cdr.SetSectorPlay[2]++;
+	if (cdr.SetSectorPlay[2] == 75) {
+		cdr.SetSectorPlay[2] = 0;
+		cdr.SetSectorPlay[1]++;
+		if (cdr.SetSectorPlay[1] == 60) {
+			cdr.SetSectorPlay[1] = 0;
+			cdr.SetSectorPlay[0]++;
 		}
 	}
 
@@ -1226,7 +1232,7 @@ void cdrReadInterrupt() {
 	}
 
 	// update for CdlGetlocP
-	ReadTrack(cdr.SetSector);
+	ReadTrack(cdr.SetSectorPlay);
 }
 
 /*
@@ -1322,18 +1328,14 @@ void cdrWrite1(unsigned char rt) {
 		for (i = 0; i < 3; i++)
 			set_loc[i] = btoi(cdr.Param[i]);
 
-		// FIXME: clean up this SetSector/SetSectorPlay mess,
-		// there should be single var tracking current sector pos
-		if (cdr.Play)
-			i = msf2sec(cdr.SetSectorPlay);
-		else
-			i = msf2sec(cdr.SetSector);
+		i = msf2sec(cdr.SetSectorPlay);
 		i = abs(i - msf2sec(set_loc));
 		if (i > 16)
 			cdr.Seeked = SEEK_PENDING;
 
 		memcpy(cdr.SetSector, set_loc, 3);
 		cdr.SetSector[3] = 0;
+		cdr.SetlocPending = 1;
 		break;
 
 	case CdlReadN:
