@@ -601,131 +601,134 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 
 - (void)swapBuffer
 {
-	unsigned char * surf;
-	long x = PSXDisplay.DisplayPosition.x;
-	long y = PSXDisplay.DisplayPosition.y;
-	GLuint lu;
-	unsigned short row,column;
-	unsigned short dx=PreviousPSXDisplay.Range.x1;
-	unsigned short dy=PreviousPSXDisplay.DisplayMode.y;
-	long lPitch;
 
 	//printf("y=%i",PSXDisplay.DisplayPosition.y);
 
-	if ([glLock tryLock]) {
-		// make sure the texture area is ready to be written to
-		glFinishObjectAPPLE(GL_TEXTURE, 2-whichImage);
-
-		if ((image_width != PreviousPSXDisplay.Range.x1) || 
-			(image_height != PreviousPSXDisplay.DisplayMode.y) ||
-			((PSXDisplay.RGB24 ? 32 : 16) != image_depth)) {
-			[self loadTextures:NO];
-		}
- 
-		surf = image[1-whichImage];
-		lPitch=image_width2<<(image_depth >> 4);
-
-		if(PreviousPSXDisplay.Range.y0)                       // centering needed?
-		{
-			surf+=PreviousPSXDisplay.Range.y0*lPitch;
-			dy-=PreviousPSXDisplay.Range.y0;
-		}
-
-		if(PSXDisplay.RGB24)
-		{
-			unsigned char * pD;unsigned int startxy;
-
-			surf+=PreviousPSXDisplay.Range.x0<<2;
-
-			for(column=0;column<dy;column++)
-			{ 
-				startxy = (1024 * (column + y)) + x;
-				pD = (unsigned char *)&psxVuw[startxy];
-
-				row = 0;
-				// make sure the reads are aligned
-				while ((intptr_t)pD & 0x3) {
-					*((unsigned long *)((surf)+(column*lPitch)+(row<<2))) =
-						(*(pD+0)<<16)|(*(pD+1)<<8)|*(pD+2);
-
-					pD+=3;
-					row++;
-				}
-
-				for(;row<dx;row+=4)
+	dispatch_sync(dispatch_get_main_queue(), ^{
+		unsigned char * surf;
+		long x = PSXDisplay.DisplayPosition.x;
+		long y = PSXDisplay.DisplayPosition.y;
+		GLuint lu;
+		unsigned short row,column;
+		unsigned short dx=PreviousPSXDisplay.Range.x1;
+		unsigned short dy=PreviousPSXDisplay.DisplayMode.y;
+		long lPitch;
+		
+		if ([glLock tryLock]) {
+			// make sure the texture area is ready to be written to
+			glFinishObjectAPPLE(GL_TEXTURE, 2-whichImage);
+			
+			if ((image_width != PreviousPSXDisplay.Range.x1) ||
+				(image_height != PreviousPSXDisplay.DisplayMode.y) ||
+				((PSXDisplay.RGB24 ? 32 : 16) != image_depth)) {
+				[self loadTextures:NO];
+			}
+			
+			surf = image[1-whichImage];
+			lPitch=image_width2<<(image_depth >> 4);
+			
+			if(PreviousPSXDisplay.Range.y0)                       // centering needed?
+			{
+				surf+=PreviousPSXDisplay.Range.y0*lPitch;
+				dy-=PreviousPSXDisplay.Range.y0;
+			}
+			
+			if(PSXDisplay.RGB24)
+			{
+				unsigned char * pD;unsigned int startxy;
+				
+				surf+=PreviousPSXDisplay.Range.x0<<2;
+				
+				for(column=0;column<dy;column++)
 				{
-					GLuint lu1 = *((GLuint *)pD);
-					GLuint lu2 = *((GLuint *)pD+1);
-					GLuint lu3 = *((GLuint *)pD+2);
-					GLuint *dst = ((GLuint *)((surf)+(column*lPitch)+(row<<2)));
+					startxy = (1024 * (column + y)) + x;
+					pD = (unsigned char *)&psxVuw[startxy];
+					
+					row = 0;
+					// make sure the reads are aligned
+					while ((intptr_t)pD & 0x3) {
+						*((unsigned long *)((surf)+(column*lPitch)+(row<<2))) =
+						(*(pD+0)<<16)|(*(pD+1)<<8)|*(pD+2);
+						
+						pD+=3;
+						row++;
+					}
+					
+					for(;row<dx;row+=4)
+					{
+						GLuint lu1 = *((GLuint *)pD);
+						GLuint lu2 = *((GLuint *)pD+1);
+						GLuint lu3 = *((GLuint *)pD+2);
+						GLuint *dst = ((GLuint *)((surf)+(column*lPitch)+(row<<2)));
 #ifdef __BIG_ENDIAN__
-					*(dst)=
+						*(dst)=
 						(((lu1>>24)&0xff)<<16)|(((lu1>>16)&0xff)<<8)|(((lu1>>8)&0xff));
-					*(dst+1)=
+						*(dst+1)=
 						(((lu1>>0)&0xff)<<16)|(((lu2>>24)&0xff)<<8)|(((lu2>>16)&0xff));
-					*(dst+2)=
+						*(dst+2)=
 						(((lu2>>8)&0xff)<<16)|(((lu2>>0)&0xff)<<8)|(((lu3>>24)&0xff));
-					*(dst+3)=
+						*(dst+3)=
 						(((lu3>>16)&0xff)<<16)|(((lu3>>8)&0xff)<<8)|(((lu3>>0)&0xff));
 #else
-					*(dst)=
+						*(dst)=
 						(((lu1>>0)&0xff)<<16)|(((lu1>>8)&0xff)<<8)|(((lu1>>16)&0xff));
-					*(dst+1)=
+						*(dst+1)=
 						(((lu1>>24)&0xff)<<16)|(((lu2>>0)&0xff)<<8)|(((lu2>>8)&0xff));
-					*(dst+2)=
+						*(dst+2)=
 						(((lu2>>16)&0xff)<<16)|(((lu2>>24)&0xff)<<8)|(((lu3>>0)&0xff));
-					*(dst+3)=
+						*(dst+3)=
 						(((lu3>>8)&0xff)<<16)|(((lu3>>16)&0xff)<<8)|(((lu3>>24)&0xff));
 #endif
-					pD+=12;
+						pD+=12;
+					}
+					
+					//for(;row<dx;row+=4)
+					/*while (pD&0x3) {
+					 *((unsigned long *)((surf)+(column*lPitch)+(row<<2)))=
+					 (*(pD+0)<<16)|(*(pD+1)<<8)|(*(pD+2)&0xff));
+					 pD+=3;
+					 row++;
+					 }*/
 				}
-
-				//for(;row<dx;row+=4)
-				/*while (pD&0x3) {
-					*((unsigned long *)((surf)+(column*lPitch)+(row<<2)))=
-						(*(pD+0)<<16)|(*(pD+1)<<8)|(*(pD+2)&0xff));
-					pD+=3;
-					row++;
-				}*/
 			}
-		}
-		else
-		{
-			int LineOffset,SurfOffset;
-			GLuint * SRCPtr = (GLuint *)(psxVuw + (y << 10) + x);
-			GLuint * DSTPtr =
-				((GLuint *)surf) + (PreviousPSXDisplay.Range.x0 >> 1);
-
-			dx >>= 1;
-
-			LineOffset = 512 - dx;
-			SurfOffset = (lPitch >> 2) - dx;
-
-			for(column=0;column<dy;column++)
+			else
 			{
-				for(row=0;row<dx;row++)
+				int LineOffset,SurfOffset;
+				GLuint * SRCPtr = (GLuint *)(psxVuw + (y << 10) + x);
+				GLuint * DSTPtr =
+				((GLuint *)surf) + (PreviousPSXDisplay.Range.x0 >> 1);
+				
+				dx >>= 1;
+				
+				LineOffset = 512 - dx;
+				SurfOffset = (lPitch >> 2) - dx;
+				
+				for(column=0;column<dy;column++)
 				{
+					for(row=0;row<dx;row++)
+					{
 #ifdef __BIG_ENDIAN__
-					lu=GETLE16D(SRCPtr++);
+						lu=GETLE16D(SRCPtr++);
 #else
-					lu=*SRCPtr++;
+						lu=*SRCPtr++;
 #endif
-					*DSTPtr++=
+						*DSTPtr++=
 						((lu << 10) & 0x7c007c00)|
 						((lu) & 0x3e003e0)|
 						((lu >> 10) & 0x1f001f);
+					}
+					SRCPtr += LineOffset;
+					DSTPtr += SurfOffset;
 				}
-				SRCPtr += LineOffset;
-				DSTPtr += SurfOffset;
 			}
+			
+			// Swap image buffer
+			whichImage = 1 - whichImage;
+			
+			[self renderScreen];
+			[glLock unlock];
 		}
-
-	// Swap image buffer
-		whichImage = 1 - whichImage;
-
-		[self renderScreen];
-		[glLock unlock];
-	}
+	});
 }
 
 - (void)clearBuffer:(BOOL)display
@@ -767,72 +770,77 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 
 - (GLuint)loadShader:(GLenum)type location:(NSURL*)filename
 {
-    GLuint myShader = 0;
-    GLsizei logsize = 0;
-    GLint compile_status = GL_TRUE;
-    char *log = NULL;
-    char *src = NULL;
-    
-    /* creation d'un shader de sommet */
-    myShader = glCreateShader(type);
-    if(myShader == 0)
-    {
-        fprintf(stderr, "impossible de creer le shader\n");
-        return 0;
-    }
-    
-    /* chargement du code source */
-    src = [self loadSource:filename];
-    if(src == NULL)
-    {
-        /* theoriquement, la fonction LoadSource a deja affiche un message
-		 d'erreur, nous nous contenterons de supprimer notre shader
-		 et de retourner 0 */
-        
-        glDeleteShader(myShader);
-        return 0;
-    }
-    
-    /* assignation du code source */
-    glShaderSource(myShader, 1, (const GLchar**)&src, NULL);
-    
-    /* compilation du shader */
-    glCompileShader(myShader);
-    
-    /* liberation de la memoire du code source */
-    free(src);
-    src = NULL;
-    
-    /* verification du succes de la compilation */
-    glGetShaderiv(myShader, GL_COMPILE_STATUS, &compile_status);
-    if(compile_status != GL_TRUE)
-    {
-        /* erreur a la compilation recuperation du log d'erreur */
-        
-        /* on recupere la taille du message d'erreur */
-        glGetShaderiv(myShader, GL_INFO_LOG_LENGTH, &logsize);
-        
-        /* on alloue un espace memoire dans lequel OpenGL ecrira le message */
-        log = malloc(logsize + 1);
-        if(log == NULL)
-        {
-            fprintf(stderr, "impossible d'allouer de la memoire !\n");
-            return 0;
-        }
-        /* initialisation du contenu */
-        memset(log, '\0', logsize + 1);
-        
-        glGetShaderInfoLog(myShader, logsize, &logsize, log);
-        fprintf(stderr, "impossible de compiler le shader '%s' :\n%s",
-                [[filename path] UTF8String], log);
-        
-        /* ne pas oublier de liberer la memoire et notre shader */
-        free(log);
-        glDeleteShader(myShader);
-        
-        return 0;
-    }
-    
+	__block	GLuint myShader = 0;
+
+	dispatch_sync(dispatch_get_main_queue(), ^{
+		GLsizei logsize = 0;
+		GLint compile_status = GL_TRUE;
+		char *log = NULL;
+		char *src = NULL;
+		
+		/* creation d'un shader de sommet */
+		myShader = glCreateShader(type);
+		if(myShader == 0)
+		{
+			fprintf(stderr, "impossible de creer le shader\n");
+			return;
+		}
+		
+		/* chargement du code source */
+		src = [self loadSource:filename];
+		if(src == NULL)
+		{
+			/* theoriquement, la fonction LoadSource a deja affiche un message
+			 d'erreur, nous nous contenterons de supprimer notre shader
+			 et de retourner 0 */
+			
+			glDeleteShader(myShader);
+			myShader = 0;
+			return;
+		}
+		
+		/* assignation du code source */
+		glShaderSource(myShader, 1, (const GLchar**)&src, NULL);
+		
+		/* compilation du shader */
+		glCompileShader(myShader);
+		
+		/* liberation de la memoire du code source */
+		free(src);
+		src = NULL;
+		
+		/* verification du succes de la compilation */
+		glGetShaderiv(myShader, GL_COMPILE_STATUS, &compile_status);
+		if(compile_status != GL_TRUE)
+		{
+			/* erreur a la compilation recuperation du log d'erreur */
+			
+			/* on recupere la taille du message d'erreur */
+			glGetShaderiv(myShader, GL_INFO_LOG_LENGTH, &logsize);
+			
+			/* on alloue un espace memoire dans lequel OpenGL ecrira le message */
+			log = malloc(logsize + 1);
+			if(log == NULL)
+			{
+				fprintf(stderr, "impossible d'allouer de la memoire !\n");
+				myShader = 0;
+				return;
+			}
+			/* initialisation du contenu */
+			memset(log, '\0', logsize + 1);
+			
+			glGetShaderInfoLog(myShader, logsize, &logsize, log);
+			fprintf(stderr, "impossible de compiler le shader '%s' :\n%s",
+					[[filename path] UTF8String], log);
+			
+			/* ne pas oublier de liberer la memoire et notre shader */
+			free(log);
+			glDeleteShader(myShader);
+			
+			myShader = 0;
+			return;
+		}
+    });
     return myShader;
 }
 
@@ -845,7 +853,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	NSMutableData *shaderData = [NSMutableData dataWithContentsOfURL:filename];
 	[shaderData appendBytes:"\0" length:1];
 	char *shaderText = malloc([shaderData length]);
-	memcpy(shaderText, [shaderData bytes], [shaderData length]);
+	[shaderData getBytes:shaderText length:[shaderData length]];
 	return shaderText;
 }
 
