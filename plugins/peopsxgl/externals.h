@@ -224,6 +224,7 @@ extern HINSTANCE hInst;
 extern int            iResX;
 extern int            iResY;
 extern BOOL           bKeepRatio;
+extern BOOL           bForceRatio43;
 extern RECT           rRatioRect;
 extern BOOL           bSnapShot;
 extern BOOL           bSmallAlpha;

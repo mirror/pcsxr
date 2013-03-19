@@ -89,6 +89,7 @@
 #define IDC_F14_STATIC3                 1083
 #define IDC_F14_STATIC4                 1084
 #define IDC_F14_STATIC5                 1085
+#define IDC_ARATIO43                    1086
 #define IDC_FIX1                        2038
 #define IDC_FIX2                        2039
 #define IDC_FIX3                        2040

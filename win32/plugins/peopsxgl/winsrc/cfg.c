@@ -339,6 +339,9 @@ void GetSettings(HWND hW)
  if(IsDlgButtonChecked(hW,IDC_ARATIO))
   bKeepRatio=TRUE; else bKeepRatio=FALSE; 
 
+ if(IsDlgButtonChecked(hW,IDC_ARATIO43))
+  bForceRatio43=TRUE; else bForceRatio43=FALSE; 
+
  if(IsDlgButtonChecked(hW,IDC_BLUR))
   iBlurBuffer=1; else iBlurBuffer=0; 
 
@@ -617,6 +620,7 @@ void ReadConfig(void)                                  // read all config vals
  iFrameReadType=0;
  iShowFPS=0;
  bKeepRatio=FALSE;
+ bForceRatio43=FALSE;
  iScanBlend=0;
  iVRamSize=0;
  iTexGarbageCollection=1;
@@ -731,6 +735,9 @@ void ReadConfig(void)                                  // read all config vals
    size = 4;
    if(RegQueryValueEx(myKey,"KeepRatio",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
     bKeepRatio=(BOOL)temp;
+   size = 4;
+   if(RegQueryValueEx(myKey,"ForceRatio43",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
+    bForceRatio43=(BOOL)temp;
    size = 4;
    if(RegQueryValueEx(myKey,"ScanBlend",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
     iScanBlend=(int)temp;
@@ -874,6 +881,8 @@ void WriteConfig(void)
  RegSetValueEx(myKey,"FrameReadType",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=bKeepRatio;
  RegSetValueEx(myKey,"KeepRatio",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
+ temp=bForceRatio43;
+ RegSetValueEx(myKey,"ForceRatio43",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=iBlurBuffer;
  RegSetValueEx(myKey,"FullscreenBlur",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=iHiResTextures;

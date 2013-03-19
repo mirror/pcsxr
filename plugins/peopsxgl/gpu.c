@@ -169,7 +169,7 @@ short           imageY0,imageY1;
 BOOL            bDisplayNotSet = TRUE;
 GLuint          uiScanLine=0;
 int             iUseScanLines=0;
-float           iScanlineColor[] = {0,0,0, 0.3}; // easy on the eyes.
+float           iScanlineColor[] = {0,0,0, 0.3f}; // easy on the eyes.
 int             lSelectedSlot=0;
 unsigned char * pGfxCardScreen=0;
 int             iBlurBuffer=0;
@@ -1799,17 +1799,20 @@ void ChangeDispOffsetsY(void)                          // CENTER Y
 
 void SetAspectRatio(void)
 {
- float xs,ys,s;RECT r;
+ float xs,ys,s,resx,resy;RECT r;
 
  if(!PSXDisplay.DisplayModeNew.x) return;
  if(!PSXDisplay.DisplayModeNew.y) return;
 
- xs=(float)iResX/(float)PSXDisplay.DisplayModeNew.x;
- ys=(float)iResY/(float)PSXDisplay.DisplayModeNew.y;
+ resx = bForceRatio43 ? 640.0f : (float)PSXDisplay.DisplayModeNew.x;
+ resy = bForceRatio43 ? 480.0f : (float)PSXDisplay.DisplayModeNew.y;
+
+ xs=(float)iResX/resx;
+ ys=(float)iResY/resy;
 
  s=min(xs,ys);
- r.right =(int)((float)PSXDisplay.DisplayModeNew.x*s);
- r.bottom=(int)((float)PSXDisplay.DisplayModeNew.y*s);
+ r.right =(int)(resx*s);
+ r.bottom=(int)(resy*s);
  if(r.right  > iResX) r.right  = iResX;
  if(r.bottom > iResY) r.bottom = iResY;
  if(r.right  < 1)     r.right  = 1;

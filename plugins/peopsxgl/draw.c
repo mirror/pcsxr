@@ -95,7 +95,8 @@ BOOL           bIsFirstFrame = TRUE;
 
 int            iResX;
 int            iResY;
-BOOL           bKeepRatio = FALSE;
+BOOL           bKeepRatio    = FALSE;
+BOOL           bForceRatio43 = FALSE;
 RECT           rRatioRect;
 
 // psx mask related vars
