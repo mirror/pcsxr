@@ -64,6 +64,11 @@ void ReadConfigFile()
  if(bKeepRatio<0) bKeepRatio=0;
  if(bKeepRatio>1) bKeepRatio=1;
 
+ strcpy(t,"\nForceRatio43");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+ if(p) bForceRatio43=atoi(p+len);
+ if(bForceRatio43<0) bForceRatio43=0;
+ if(bForceRatio43>1) bForceRatio43=1;
+ 
  strcpy(t,"\nScreenSmoothing");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
  if(p) iBlurBuffer=atoi(p+len);
  if(iBlurBuffer<0) iBlurBuffer=0;
@@ -238,6 +243,7 @@ void ReadConfig(void)                                  // read config (linux fil
  iShowFPS=0;
  bGteAccuracy=0;
  bKeepRatio=FALSE;
+ bForceRatio43=FALSE;
  iScanBlend=0;
  iVRamSize=0;
  iTexGarbageCollection=1;

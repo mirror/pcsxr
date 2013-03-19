@@ -142,6 +142,21 @@
                     <property name="position">3</property>
                   </packing>
                 </child>
+                <child>
+                  <object class="GtkCheckButton" id="chkForceRatio43">
+                    <property name="label" translatable="yes">Force 4:3 aspect ratio</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="xalign">0</property>
+                    <property name="draw_indicator">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">4</property>
+                  </packing>
+                </child>
               </object>
             </child>
             <child type="tab">
@@ -1248,6 +1263,49 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
+  <object class="GtkListStore" id="liststore1">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Emulated VRam - Ok most times</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Gfx card buffer reads</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Gfx card buffer moves</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Gfx card buffer reads and moves</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Full Software (FVP)</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="liststore2">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Emulated VRam - Needs FVP</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Black - Fast, no effects</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Gfx card buffer - Can be slow</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Gfx card and soft - Slow</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkListStore" id="liststore3">
     <columns>
       <!-- column-name item -->
@@ -1345,49 +1403,6 @@
     <property name="upper">255</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
-  </object>
-  <object class="GtkListStore" id="liststore1">
-    <columns>
-      <!-- column-name item -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Emulated VRam - Ok most times</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Gfx card buffer reads</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Gfx card buffer moves</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Gfx card buffer reads and moves</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Full Software (FVP)</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="liststore2">
-    <columns>
-      <!-- column-name item -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Emulated VRam - Needs FVP</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Black - Fast, no effects</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Gfx card buffer - Can be slow</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Gfx card and soft - Slow</col>
-      </row>
-    </data>
   </object>
   <object class="GtkAdjustment" id="v">
     <property name="upper">1024</property>

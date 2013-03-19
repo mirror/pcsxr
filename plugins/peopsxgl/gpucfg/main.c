@@ -16,6 +16,7 @@ GtkWidget *window,
           *spinXSize,
           *spinYSize,
           *chkKeepRatio,
+		  *chkForceRatio43,
           *chkDithering,
           *chkFullScreen,
           *cbxTexQuality,
@@ -99,6 +100,7 @@ void on_btnSave_clicked( GObject *object, gpointer user_data ) {
         fprintf( out, "\nResX             = %i", gtk_spin_button_get_value_as_int( GTK_SPIN_BUTTON(   spinXSize           ) ) );
         fprintf( out, "\nResY             = %i", gtk_spin_button_get_value_as_int( GTK_SPIN_BUTTON(   spinYSize           ) ) );        
         fprintf( out, "\nKeepRatio        = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkKeepRatio        ) ) );
+		fprintf( out, "\nForceRatio43     = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkForceRatio43     ) ) );
         fprintf( out, "\nDithering        = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkDithering        ) ) );
         fprintf( out, "\nFullScreen       = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkFullScreen       ) ) );
         fprintf( out, "\nTexQuality       = %i", gtk_combo_box_get_active(         GTK_COMBO_BOX(     cbxTexQuality       ) ) );
@@ -140,6 +142,7 @@ void on_btnFast_clicked( GObject *object, gpointer user_data ) {
     gtk_spin_button_set_value(    GTK_SPIN_BUTTON(   spinXSize ),           640 );
     gtk_spin_button_set_value(    GTK_SPIN_BUTTON(   spinYSize ),           480 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkKeepRatio ),          0 );
+	gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkForceRatio43 ),       0 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkDithering ),          0 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkFullScreen ),         0 );
     gtk_combo_box_set_active(     GTK_COMBO_BOX(     cbxTexQuality ),         0 );
@@ -172,6 +175,7 @@ void on_btnBeautiful_clicked( GObject *object, gpointer user_data ) {
     gtk_spin_button_set_value(    GTK_SPIN_BUTTON(   spinXSize ),           640 );
     gtk_spin_button_set_value(    GTK_SPIN_BUTTON(   spinYSize ),           480 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkKeepRatio ),          0 );
+	gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkForceRatio43 ),       0 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkDithering ),          0 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkFullScreen ),         0 );
     gtk_combo_box_set_active(     GTK_COMBO_BOX(     cbxTexQuality ),         3 );
@@ -283,6 +287,7 @@ int main( int argc, char **argv ) {
 		spinXSize           = GTK_WIDGET( gtk_builder_get_object( builder, "spinXSize"           ) );
 		spinYSize           = GTK_WIDGET( gtk_builder_get_object( builder, "spinYSize"           ) );
 		chkKeepRatio        = GTK_WIDGET( gtk_builder_get_object( builder, "chkKeepRatio"        ) );
+		chkForceRatio43     = GTK_WIDGET( gtk_builder_get_object( builder, "chkForceRatio43"     ) );
 		chkDithering        = GTK_WIDGET( gtk_builder_get_object( builder, "chkDithering"        ) );
 		chkFullScreen       = GTK_WIDGET( gtk_builder_get_object( builder, "chkFullScreen"       ) );
 		cbxTexQuality       = GTK_WIDGET( gtk_builder_get_object( builder, "cbxTexQuality"       ) );
@@ -379,6 +384,18 @@ int main( int argc, char **argv ) {
 			}
 		}
 		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkKeepRatio ), val );
+
+		val = 0;
+		if ( pB ) {
+			strcpy( t, "\nForceRatio43" );
+			p = strstr( pB, t );
+			if ( p ) {
+				p = strstr( p, "=" );
+				len = 1;
+				val = atoi( p + len );
+			}
+		}
+		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkForceRatio43 ), val );
 
 		val = 0;
 		if ( pB ) {
