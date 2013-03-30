@@ -40,7 +40,7 @@ static void LoadCheatListItems(int index) {
 
 	int i;
 
-	widget = gtk_builder_get_object(builder, "GtkCList_Cheat");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_Cheat"));
 
 	for (i = 0; i < NumCheats; i++) {
 		gtk_list_store_append(store, &iter);
@@ -167,7 +167,7 @@ static void OnCheatListDlg_EditClicked(GtkWidget *widget, gpointer user_data) {
 	char buf[8192];
 	char *p = buf;
 
-	widget = gtk_builder_get_object(builder, "GtkCList_Cheat");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_Cheat"));
 
 	selected = gtk_tree_selection_get_selected(
 		gtk_tree_view_get_selection(GTK_TREE_VIEW(widget)),
@@ -243,7 +243,7 @@ static void OnCheatListDlg_EditClicked(GtkWidget *widget, gpointer user_data) {
 
 		LoadCheatListItems(index);
 
-		free(codetext);		
+		free(codetext);
 	}
 
 	gtk_widget_destroy(dlg);
@@ -257,7 +257,7 @@ static void OnCheatListDlg_DelClicked(GtkWidget *widget, gpointer user_data) {
 	gboolean selected;
 	int i = -1;
 
-	widget = gtk_builder_get_object(builder, "GtkCList_Cheat");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_Cheat"));
 
 	selected = gtk_tree_selection_get_selected(
 		gtk_tree_view_get_selection(GTK_TREE_VIEW(widget)),
@@ -280,23 +280,29 @@ static void OnCheatListDlg_EnableToggled(GtkCellRendererToggle *cell, gchar *pat
 	GtkTreeIter  iter;
 	gboolean fixed;
 
-	widget = gtk_builder_get_object (builder, "GtkCList_Cheat");
+	widget = GTK_WIDGET(gtk_builder_get_object (builder, "GtkCList_Cheat"));
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW(widget));
 	path = gtk_tree_path_new_from_string (path_str);
-  
+
 	gtk_tree_model_get_iter (model, &iter, path);
 	gtk_tree_model_get (model, &iter, 0, &fixed, -1);
 
 	fixed ^= 1;
-	
+
 	int i = atoi(path_str);
 	assert(i >= 0 && i < NumCheats);
-	
+
 	Cheats[i].Enabled = fixed;
 
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, fixed, -1);
 	gtk_tree_path_free (path);
 }
+
+// last chosen filename is kept in here
+static gchar *lastfilename = NULL;
+
+const gchar* file_filter_all = NULL;
+const gchar* extension_cht="*.cht";
 
 static void OnCheatListDlg_OpenClicked(GtkWidget *widget, gpointer user_data) {
 	GtkWidget *chooser;
@@ -310,16 +316,17 @@ static void OnCheatListDlg_OpenClicked(GtkWidget *widget, gpointer user_data) {
 
 	filename = g_build_filename(getenv("HOME"), CHEATS_DIR, NULL);
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser), filename);
+	//gtk_file_chooser_select_filename(GTK_FILE_CHOOSER(chooser), filename);
 	g_free(filename);
 
 	filter = gtk_file_filter_new ();
-	gtk_file_filter_add_pattern (filter, "*.cht");
+	gtk_file_filter_add_pattern (filter, extension_cht);
 	gtk_file_filter_set_name (filter, _("PCSXR Cheat Code Files (*.cht)"));
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser), filter);
 
 	filter = gtk_file_filter_new ();
 	gtk_file_filter_add_pattern (filter, "*");
-	gtk_file_filter_set_name (filter, _("All Files"));
+	gtk_file_filter_set_name (filter, file_filter_all);
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser), filter);
 
 	if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_OK) {
@@ -334,6 +341,9 @@ static void OnCheatListDlg_OpenClicked(GtkWidget *widget, gpointer user_data) {
 
 	LoadCheats(filename);
 
+	g_free(lastfilename);
+	lastfilename = g_path_get_basename(filename);
+
 	g_free(filename);
 
 	LoadCheatListItems(-1);
@@ -341,7 +351,7 @@ static void OnCheatListDlg_OpenClicked(GtkWidget *widget, gpointer user_data) {
 
 static void OnCheatListDlg_SaveClicked(GtkWidget *widget, gpointer user_data) {
 	GtkWidget *chooser;
-	gchar *filename;
+	gchar *filename, *filename2=NULL;
 	GtkFileFilter *filter;
 
 	chooser = gtk_file_chooser_dialog_new(_("Save Cheat File"),
@@ -350,20 +360,30 @@ static void OnCheatListDlg_SaveClicked(GtkWidget *widget, gpointer user_data) {
 
 	filename = g_build_filename(getenv("HOME"), CHEATS_DIR, NULL);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(chooser), filename);
+	/*if (lastfilename)*/gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(chooser), lastfilename);
+
 	g_free(filename);
 
 	filter = gtk_file_filter_new();
-	gtk_file_filter_add_pattern(filter, "*.cht");
+	gtk_file_filter_add_pattern(filter, extension_cht);
 	gtk_file_filter_set_name(filter, _("PCSXR Cheat Code Files (*.cht)"));
 	gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(chooser), filter);
 
 	filter = gtk_file_filter_new();
 	gtk_file_filter_add_pattern(filter, "*");
-	gtk_file_filter_set_name(filter, _("All Files (*.*)"));
+	gtk_file_filter_set_name(filter, file_filter_all);
 	gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(chooser), filter);
 
 	if (gtk_dialog_run(GTK_DIALOG(chooser)) == GTK_RESPONSE_OK) {
-		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
+		filename = filename2 = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
+	if (!g_str_has_suffix(filename, extension_cht+1) // add extension if cht filter chosen and filename doesn't end with .cht
+			&& strcmp(file_filter_all, gtk_file_filter_get_name(
+				gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(chooser)))) != 0) {
+		filename = g_strdup_printf ("%s%s", filename2, extension_cht+1);
+	} else {
+		filename2 = NULL;
+	}
+
 		gtk_widget_destroy (GTK_WIDGET(chooser));
 		while (gtk_events_pending()) gtk_main_iteration();
 	} else {
@@ -374,12 +394,18 @@ static void OnCheatListDlg_SaveClicked(GtkWidget *widget, gpointer user_data) {
 
 	SaveCheats(filename);
 
+	g_free(lastfilename);
+	lastfilename = g_path_get_basename(filename);
+
 	g_free(filename);
+	g_free(filename2);
 }
 
 static void OnCheatListDlg_CloseClicked() {
 	gtk_widget_destroy(CheatListDlg);
 	CheatListDlg = NULL;
+	//g_free(lastfilename);
+	//lastfilename = NULL;
 }
 
 // run the cheat list dialog
@@ -389,19 +415,21 @@ void RunCheatListDialog() {
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
 
+	file_filter_all = _("All Files (*.*)");
+
 	builder = gtk_builder_new();
-	
+
 	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
 		g_warning("Error: interface could not be loaded!");
 		return;
 	}
 
-	CheatListDlg = gtk_builder_get_object(builder, "CheatListDlg");
-	
+	CheatListDlg = GTK_WIDGET(gtk_builder_get_object(builder, "CheatListDlg"));
+
 	gtk_window_set_title(GTK_WINDOW(CheatListDlg), _("Cheat Codes"));
 	gtk_widget_show (CheatListDlg);
 
-	widget = gtk_builder_get_object(builder, "GtkCList_Cheat");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_Cheat"));
 
 	// column for enable
 	renderer = gtk_cell_renderer_toggle_new();
@@ -425,23 +453,23 @@ void RunCheatListDialog() {
 						  G_CALLBACK (CheatList_TreeSelectionChanged),
 						  NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "addbutton1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "addbutton1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnCheatListDlg_AddClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "editbutton1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "editbutton1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnCheatListDlg_EditClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "delbutton1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "delbutton1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnCheatListDlg_DelClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "loadbutton1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "loadbutton1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnCheatListDlg_OpenClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "savebutton1");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "savebutton1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnCheatListDlg_SaveClicked), builder, NULL, G_CONNECT_AFTER);
 
@@ -489,7 +517,7 @@ static void UpdateCheatSearchDialog() {
 	GtkTreeIter		iter;
 	GtkWidget		*widget;
 
-	widget = gtk_builder_get_object(builder, "GtkCList_Result");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_Result"));
 
 	gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_builder_get_object(builder, "combo_searchfor")), current_search);
 	gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_builder_get_object(builder, "combo_datatype")), current_searchtype);
@@ -1056,7 +1084,7 @@ static void OnCheatSearchDlg_SearchForChanged(GtkWidget *widget, gpointer user_d
 static void OnCheatSearchDlg_DataBaseChanged(GtkWidget *widget, gpointer user_data) {
 	u32				val;
 	char			buf[256];
-	
+
 	if (gtk_combo_box_get_active(GTK_COMBO_BOX(widget)) == SEARCHBASE_DEC) {
 		val = 0;
 		sscanf(gtk_entry_get_text(GTK_ENTRY(gtk_builder_get_object(builder, "entry_value"))), "%x", &val);
@@ -1102,18 +1130,18 @@ void RunCheatSearchDialog() {
 	GtkTreeViewColumn *column;
 
 	builder = gtk_builder_new();
-	
+
 	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
 		g_warning("Error: interface could not be loaded!");
 		return;
 	}
 
-	CheatSearchDlg = gtk_builder_get_object(builder, "CheatSearchDlg");
-	
+	CheatSearchDlg = GTK_WIDGET(gtk_builder_get_object(builder, "CheatSearchDlg"));
+
 	gtk_window_set_title(GTK_WINDOW(CheatSearchDlg), _("Cheat Search"));
 	gtk_widget_show (CheatSearchDlg);
 
-	widget = gtk_builder_get_object(builder, "GtkCList_Result");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_Result"));
 
 	renderer = gtk_cell_renderer_text_new ();
 	column = gtk_tree_view_column_new_with_attributes(_("Search Results"),
@@ -1128,31 +1156,31 @@ void RunCheatSearchDialog() {
 
 	UpdateCheatSearchDialog();
 
-	widget = gtk_builder_get_object(builder, "btn_freeze");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_freeze"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnCheatSearchDlg_FreezeClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_modify");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_modify"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnCheatSearchDlg_ModifyClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_copy");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_copy"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnCheatSearchDlg_CopyClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_start");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_start"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnCheatSearchDlg_SearchClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_restart");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_restart"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnCheatSearchDlg_RestartClicked), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "combo_searchfor");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "combo_searchfor"));
 	g_signal_connect_data(G_OBJECT(widget), "changed",
 		G_CALLBACK(OnCheatSearchDlg_SearchForChanged), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "combo_database");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "combo_database"));
 	g_signal_connect_data(G_OBJECT(widget), "changed",
 		G_CALLBACK(OnCheatSearchDlg_DataBaseChanged), builder, NULL, G_CONNECT_AFTER);
 
