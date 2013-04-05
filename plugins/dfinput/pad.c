@@ -676,8 +676,6 @@ void PADabout(void) {
 	} else if (pid > 0) {
 		waitpid(pid, NULL, 0);
 	}
-
-	return PSE_PAD_ERR_SUCCESS;
 }
 
 #endif
