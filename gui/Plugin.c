@@ -102,7 +102,9 @@ void KeyStateLoad(int i) {
 	if (Config.Cpu == CPU_DYNAREC) psxCpu->Execute();
 }
 
-static short modctrl = 0, modalt = 0;
+// todo: make toggle config param
+static short modctrl = 0, modalt = 0, toggle = 0, pressed = 0;
+int lastpressed = 0;
 
 /* Handle keyboard keystrokes */
 void PADhandleKey(int key) {
@@ -111,11 +113,12 @@ void PADhandleKey(int key) {
 
 	short rel = 0;	//released key flag
 
-	if (key == 0)
+	if (key == 0 || key == lastpressed)
 		return;
 
 	if ((key >> 30) & 1)	//specific to dfinput (padJoy)
 		rel = 1;
+	//printf("Key %x\n", key);
 
 	if (rel) {
 		switch (key & ~0x40000000) {
@@ -127,10 +130,16 @@ void PADhandleKey(int key) {
 		case XK_Control_R:
 			modctrl=0;
 			break;
+		case XK_section:
+			if (!toggle && pressed) GPU_keypressed( XK_section );
+			pressed = 0;
+			break;
 		}
+		lastpressed = 0;
 		return;
 	}
 
+	lastpressed = key;
 	switch (key) {
 		case XK_Alt_L:
 		case XK_Alt_R:
@@ -232,6 +241,11 @@ void PADhandleKey(int key) {
 			break;
 		case XK_F4:
 			gpuShowPic();
+			break;
+		case XK_section:
+			if (pressed) break;
+			GPU_keypressed( XK_section );
+			pressed = 1;
 			break;
 		case XK_F5:
 			Config.SioIrq ^= 0x1;

@@ -25,6 +25,14 @@
 GtkWidget *MainWindow;
 GtkBuilder *xml;
 
+
+const int NUM_KEYLIST = 3; // emukey + num controllers
+const char *widgetname_treeview[3] = {"treeview_e", "treeview1", "treeview2"};
+const char *widgetname_change[3] = {"btnchange_e", "btnchange1", "btnchange2"};
+const char *widgetname_reset[3] = {"btnreset_e", "btnreset1", "btnreset2"};
+const char *widgetname_combodev[3] = {"combodev_e", "combodev1", "combodev2"};
+
+// TODO: this could be removed if the underlying enum order is changed like this has, so then GUI's order will be the same
 const int DPad[DKEY_TOTAL] = {
 	DKEY_UP,
 	DKEY_DOWN,
@@ -43,6 +51,15 @@ const int DPad[DKEY_TOTAL] = {
 	DKEY_L3,
 	DKEY_R3,
 	DKEY_ANALOG
+};
+
+
+const char *EmuKeyText[EMU_TOTAL] = {
+	N_("Increment state slot"),
+	N_("Fast-forwards"),
+	N_("Load state"),
+	N_("Save state"),
+	N_("Screenshot")
 };
 
 const char *DPadText[DKEY_TOTAL] = {
@@ -84,7 +101,7 @@ static int GetSelectedKeyIndex(int padnum) {
 	gboolean			selected;
 	int					i;
 
-	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(gtk_builder_get_object(xml, padnum == 0 ? "treeview1" : "treeview2")));
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(gtk_builder_get_object(xml, widgetname_treeview[padnum+1])));
 	selected = gtk_tree_selection_get_selected(selection, &model, &iter);
 
 	if (!selected) {
@@ -103,19 +120,21 @@ static void GetKeyDescription(char *buf, int joynum, int key) {
 		_("Down"), "", _("Rightdown"), "", _("Left"), _("Leftup"), "", "",
 		_("Leftdown"), "", "", ""};
 
-	switch (g.cfg.PadDef[joynum].KeyDef[key].JoyEvType) {
+	KEYDEF* keydef = joynum < 0 ? &g.cfg.E.EmuDef[key].Mapping : &g.cfg.PadDef[joynum].KeyDef[key];
+
+	switch (keydef->JoyEvType) {
 		case BUTTON:
-			sprintf(buf, _("Joystick: Button %d"), g.cfg.PadDef[joynum].KeyDef[key].J.Button);
+			sprintf(buf, _("Joystick: Button %d"), keydef->J.Button);
 			break;
 
 		case AXIS:
-			sprintf(buf, _("Joystick: Axis %d%c"), abs(g.cfg.PadDef[joynum].KeyDef[key].J.Axis) - 1,
-				g.cfg.PadDef[joynum].KeyDef[key].J.Axis > 0 ? '+' : '-');
+			sprintf(buf, _("Joystick: Axis %d%c"), abs(keydef->J.Axis) - 1,
+				keydef->J.Axis > 0 ? '+' : '-');
 			break;
 
 		case HAT:
-			sprintf(buf, _("Joystick: Hat %d %s"), (g.cfg.PadDef[joynum].KeyDef[key].J.Hat >> 8),
-				hatname[g.cfg.PadDef[joynum].KeyDef[key].J.Hat & 0x0F]);
+			sprintf(buf, _("Joystick: Hat %d %s"), (keydef->J.Hat >> 8),
+				hatname[keydef->J.Hat & 0x0F]);
 			break;
 
 		case NONE:
@@ -124,14 +143,14 @@ static void GetKeyDescription(char *buf, int joynum, int key) {
 			break;
 	}
 
-	if (g.cfg.PadDef[joynum].KeyDef[key].Key != 0) {
+	if (keydef->Key != 0) {
 		if (buf[0] != '\0') {
 			strcat(buf, " / ");
 		}
 
 		strcat(buf, _("Keyboard:"));
 		strcat(buf, " ");
-		strcat(buf, XKeysymToString(g.cfg.PadDef[joynum].KeyDef[key].Key));
+		strcat(buf, XKeysymToString(keydef->Key));
 	} else if (buf[0] == '\0') {
 		strcpy(buf, _("(Not Set)"));
 	}
@@ -177,44 +196,46 @@ static void GetAnalogDescription(char *buf, int joynum, int analognum, int dir) 
 }
 
 static void UpdateKeyList() {
-	const char *widgetname[2] = {"treeview1", "treeview2"};
-
 	GtkWidget *widget;
 	GtkListStore *store;
 	GtkTreeIter iter;
 	int i, j;
 	char buf[256];
 
-	for (i = 0; i < 2; i++) {
+	for (i = 0; i < NUM_KEYLIST; i++) {
 		int total;
 
-        switch(g.cfg.PadDef[i].Type)
-        {
-            case PSE_PAD_TYPE_MOUSE:
-                total = 0;
-                break;
-            case PSE_PAD_TYPE_STANDARD:
-                total = DKEY_TOTAL - 3;
-                break;
-            case PSE_PAD_TYPE_ANALOGPAD:
-                total = DKEY_TOTAL;
-                break;
-        }
-
-		widget = gtk_builder_get_object(xml, widgetname[i]);
-
+		widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_treeview[i]));
 		store = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
+
+		if ( i == 0 ) {
+			total = EMU_TOTAL;
+		}
+		else {
+		switch(g.cfg.PadDef[i-1].Type)
+		{
+			case PSE_PAD_TYPE_MOUSE:
+				total = 0;
+				break;
+			case PSE_PAD_TYPE_STANDARD:
+				total = DKEY_TOTAL - 3;
+				break;
+			case PSE_PAD_TYPE_ANALOGPAD:
+				total = DKEY_TOTAL;
+				break;
+		}
+		}
 
 		for (j = 0; j < total; j++) {
 			gtk_list_store_append(store, &iter);
-			GetKeyDescription(buf, i, DPad[j]);
-			gtk_list_store_set(store, &iter, 0, _(DPadText[j]), 1, buf, -1);
+			GetKeyDescription(buf, i-1, i == 0 ? j : DPad[j]); // change order of orig. typedef to up, down, etc
+			gtk_list_store_set(store, &iter, 0, i == 0 ? _(EmuKeyText[j]) : _(DPadText[j]), 1, buf, -1);
 		}
 
-		if (g.cfg.PadDef[i].Type == PSE_PAD_TYPE_ANALOGPAD) {
+		if (i > 0 && g.cfg.PadDef[i-1].Type == PSE_PAD_TYPE_ANALOGPAD) {
 			for (j = 0; j < 8; j++) {
 				gtk_list_store_append(store, &iter);
-				GetAnalogDescription(buf, i, j / 4, j % 4);
+				GetAnalogDescription(buf, i-1, j / 4, j % 4);
 				gtk_list_store_set(store, &iter, 0, _(AnalogText[j]), 1, buf, -1);
 			}
 		}
@@ -227,25 +248,28 @@ static void UpdateKeyList() {
 }
 
 static void UpdateKey() {
-	const char *widgetname[2] = {"treeview1", "treeview2"};
 	int i, index;
 	GtkWidget *widget;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	GValue value = {0, };
 	char buf[256];
 
-	for (i = 0; i < 2; i++) {
-		index = GetSelectedKeyIndex(i);
+	for (i = 0; i < NUM_KEYLIST; i++) {
+		GValue value = { 0, };
+		index = GetSelectedKeyIndex(i-1);
 		if (index == -1) continue;
 
-		widget = gtk_builder_get_object(xml, widgetname[i]);
+		widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_treeview[i]));
 		gtk_tree_selection_get_selected(gtk_tree_view_get_selection(GTK_TREE_VIEW(widget)), &model, &iter);
 
-		if (index < DKEY_TOTAL) {
-			GetKeyDescription(buf, i, DPad[index]);
+		// this can be removed if DPAD[index] is removed
+		if (i == 0) {
+			GetKeyDescription(buf, i-1, index);
+		}
+		else if (index < DKEY_TOTAL) {
+			GetKeyDescription(buf, i-1, DPad[index]);
 		} else {
-			GetAnalogDescription(buf, i, (index - DKEY_TOTAL) / 4, (index - DKEY_TOTAL) % 4);
+			GetAnalogDescription(buf, i-1, (index - DKEY_TOTAL) / 4, (index - DKEY_TOTAL) % 4);
 		}
 
 		g_value_init(&value, G_TYPE_STRING);
@@ -281,39 +305,31 @@ static void TreeSelectionChanged(GtkTreeSelection *selection, gpointer user_data
 
 		// If a row was selected, and the row is not blank, we can now enable
 		// some of the disabled widgets
-		if ((int)user_data == 0) {
-			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, "btnchange1")), TRUE);
-			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, "btnreset1")), TRUE);
-		} else {
-			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, "btnchange2")), TRUE);
-			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, "btnreset2")), TRUE);
-		}
-	} else {
-		if ((int)user_data == 0) {
-			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, "btnchange1")), FALSE);
-			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, "btnreset1")), FALSE);
-		} else {
-			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, "btnchange2")), FALSE);
-			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, "btnreset2")), FALSE);
-		}
 	}
+	gint padnum = GPOINTER_TO_INT(user_data);
+	gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, widgetname_reset[padnum+1])), selected);
+	gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(xml, widgetname_change[padnum+1])), selected);
 }
 
 static void OnDeviceChanged(GtkWidget *widget, gpointer user_data) {
-	int n = (int)user_data, current = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
-	current--;
-	g.cfg.PadDef[n].DevNum = current;
+	int n = GPOINTER_TO_INT(user_data);
+	int current = gtk_combo_box_get_active(GTK_COMBO_BOX(widget)) - 1;
+	if (n >= 0) {
+		g.cfg.PadDef[n].DevNum = current;
+	} else {
+		g.cfg.E.DevNum = current;
+	}
 }
 
 static void OnTypeChanged(GtkWidget *widget, gpointer user_data) {
-	int n = (int)user_data, current = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
-    
-    int padTypeList[] = {
-        PSE_PAD_TYPE_STANDARD,
-        PSE_PAD_TYPE_ANALOGPAD,
-        PSE_PAD_TYPE_MOUSE
-    };
-    
+	uint n = GPOINTER_TO_UINT(user_data), current = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
+
+	int padTypeList[] = {
+		PSE_PAD_TYPE_STANDARD,
+		PSE_PAD_TYPE_ANALOGPAD,
+		PSE_PAD_TYPE_MOUSE
+	};
+
 	g.cfg.PadDef[n].Type = padTypeList[current];
 
 	UpdateKeyList();
@@ -324,28 +340,31 @@ static void OnThreadedToggled(GtkWidget *widget, gpointer user_data) {
 }
 
 static void OnVisualVibration1Toggled(GtkWidget *widget, gpointer user_data) {
-    g.cfg.PadDef[0].VisualVibration = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+	g.cfg.PadDef[0].VisualVibration = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 }
 
 static void OnVisualVibration2Toggled(GtkWidget *widget, gpointer user_data) {
-    g.cfg.PadDef[1].VisualVibration = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+	g.cfg.PadDef[1].VisualVibration = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 }
 
 static void OnHideCursorToggled(GtkWidget *widget, gpointer user_data) {
-    g.cfg.HideCursor = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+	g.cfg.HideCursor = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 }
 
 static void ReadDKeyEvent(int padnum, int key) {
 	SDL_Joystick *js;
 	time_t t;
-	GdkEvent *ge;
+	//GdkEvent *ge;
 	int i;
 	Sint16 axis, numAxes = 0, InitAxisPos[256], PrevAxisPos[256];
 	unsigned char buttons[32];
 	uint16_t Key;
 
-	if (g.cfg.PadDef[padnum].DevNum >= 0) {
-		js = SDL_JoystickOpen(g.cfg.PadDef[padnum].DevNum);
+	KEYDEF* keydef = padnum < 0 ? &g.cfg.E.EmuDef[key].Mapping : &g.cfg.PadDef[padnum].KeyDef[key];
+	int8_t devnum = padnum < 0 ? g.cfg.E.DevNum : g.cfg.PadDef[padnum].DevNum;
+
+	if (devnum >= 0) {
+		js = SDL_JoystickOpen(devnum);
 		SDL_JoystickEventState(SDL_IGNORE);
 
 		SDL_JoystickUpdate();
@@ -369,8 +388,8 @@ static void ReadDKeyEvent(int padnum, int key) {
 
 			for (i = 0; i < SDL_JoystickNumButtons(js); i++) {
 				if (SDL_JoystickGetButton(js, i)) {
-					g.cfg.PadDef[padnum].KeyDef[key].JoyEvType = BUTTON;
-					g.cfg.PadDef[padnum].KeyDef[key].J.Button = i;
+					keydef->JoyEvType = BUTTON;
+					keydef->J.Button = i;
 					goto end;
 				}
 			}
@@ -378,8 +397,8 @@ static void ReadDKeyEvent(int padnum, int key) {
 			for (i = 0; i < numAxes; i++) {
 				axis = SDL_JoystickGetAxis(js, i);
 				if (abs(axis) > 16383 && (abs(axis - InitAxisPos[i]) > 4096 || abs(axis - PrevAxisPos[i]) > 4096)) {
-					g.cfg.PadDef[padnum].KeyDef[key].JoyEvType = AXIS;
-					g.cfg.PadDef[padnum].KeyDef[key].J.Axis = (i + 1) * (axis > 0 ? 1 : -1);
+					keydef->JoyEvType = AXIS;
+					keydef->J.Axis = (i + 1) * (axis > 0 ? 1 : -1);
 					goto end;
 				}
 				PrevAxisPos[i] = axis;
@@ -388,16 +407,16 @@ static void ReadDKeyEvent(int padnum, int key) {
 			for (i = 0; i < SDL_JoystickNumHats(js); i++) {
 				axis = SDL_JoystickGetHat(js, i);
 				if (axis != SDL_HAT_CENTERED) {
-					g.cfg.PadDef[padnum].KeyDef[key].JoyEvType = HAT;
+					keydef->JoyEvType = HAT;
 
 					if (axis & SDL_HAT_UP) {
-						g.cfg.PadDef[padnum].KeyDef[key].J.Hat = ((i << 8) | SDL_HAT_UP);
+						keydef->J.Hat = ((i << 8) | SDL_HAT_UP);
 					} else if (axis & SDL_HAT_DOWN) {
-						g.cfg.PadDef[padnum].KeyDef[key].J.Hat = ((i << 8) | SDL_HAT_DOWN);
+						keydef->J.Hat = ((i << 8) | SDL_HAT_DOWN);
 					} else if (axis & SDL_HAT_LEFT) {
-						g.cfg.PadDef[padnum].KeyDef[key].J.Hat = ((i << 8) | SDL_HAT_LEFT);
+						keydef->J.Hat = ((i << 8) | SDL_HAT_LEFT);
 					} else if (axis & SDL_HAT_RIGHT) {
-						g.cfg.PadDef[padnum].KeyDef[key].J.Hat = ((i << 8) | SDL_HAT_RIGHT);
+						keydef->J.Hat = ((i << 8) | SDL_HAT_RIGHT);
 					}
 
 					goto end;
@@ -411,7 +430,7 @@ static void ReadDKeyEvent(int padnum, int key) {
 			if(buttons[i >> 3] & (1 << (i & 7))) {
 				Key = XkbKeycodeToKeysym(g.Disp, i, 0, 0);
 				if(Key != XK_Escape) {
-					g.cfg.PadDef[padnum].KeyDef[key].Key = Key;
+					keydef->Key = Key;
 				}
 				goto end;
 			}
@@ -517,13 +536,15 @@ end:
 	}
 }
 
-static void OnChangeClicked(GtkWidget *widget, gpointer user_data) {
-	int pad = (int)user_data;
+static void OnChangeClicked(GtkWidget* widget, gpointer user_data) {
+	int pad = GPOINTER_TO_INT(user_data);
 	int index = GetSelectedKeyIndex(pad);
 
-	if (index == -1) return;
-
-	if (index < DKEY_TOTAL) {
+	if (index == -1) {
+		return;
+	} else if (pad < 0) {
+		ReadDKeyEvent(pad, index); // order matches EMUKEY struct
+	} else if (index < DKEY_TOTAL) {
 		ReadDKeyEvent(pad, DPad[index]);
 	} else {
 		index -= DKEY_TOTAL;
@@ -534,12 +555,16 @@ static void OnChangeClicked(GtkWidget *widget, gpointer user_data) {
 }
 
 static void OnResetClicked(GtkWidget *widget, gpointer user_data) {
-	int pad = (int)user_data;
+	int pad = GPOINTER_TO_INT(user_data);
 	int index = GetSelectedKeyIndex(pad);
 
-	if (index == -1) return;
-
-	if (index < DKEY_TOTAL) {
+	if (index == -1) {
+		return;
+	} else if (pad < 0) {
+		g.cfg.E.EmuDef[index].Mapping.Key = 0;
+		g.cfg.E.EmuDef[index].Mapping.JoyEvType = NONE;
+		g.cfg.E.EmuDef[index].Mapping.J.Button = 0;
+	} else if (index < DKEY_TOTAL) {
 		g.cfg.PadDef[pad].KeyDef[DPad[index]].Key = 0;
 		g.cfg.PadDef[pad].KeyDef[DPad[index]].JoyEvType = NONE;
 		g.cfg.PadDef[pad].KeyDef[DPad[index]].J.Button = 0;
@@ -554,7 +579,6 @@ static void OnResetClicked(GtkWidget *widget, gpointer user_data) {
 }
 
 static void PopulateDevList() {
-	const char *widgetname[2] = {"combodev1", "combodev2"};
 	int i, j, n;
 	GtkWidget *widget;
 	GtkTreeIter iter;
@@ -562,8 +586,8 @@ static void PopulateDevList() {
 	GtkCellRenderer *renderer;
 	char buf[256];
 
-	for (i = 0; i < 2; i++) {
-		widget = gtk_builder_get_object(xml, widgetname[i]);
+	for (i = 0; i < NUM_KEYLIST; i++) {
+		widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_combodev[i]));
 
 		renderer = gtk_cell_renderer_text_new();
 		gtk_cell_layout_pack_start(GTK_CELL_LAYOUT(widget), renderer, FALSE);
@@ -583,10 +607,12 @@ static void PopulateDevList() {
 
 		gtk_combo_box_set_model(GTK_COMBO_BOX(widget), GTK_TREE_MODEL(store));
 
-		n = g.cfg.PadDef[i].DevNum + 1;
-		if (n > SDL_NumJoysticks()) {
-			n = 0;
-			g.cfg.PadDef[i].DevNum = -1;
+		if (i > 0) {
+			n = g.cfg.PadDef[i-1].DevNum + 1;
+			if (n > SDL_NumJoysticks()) {
+				n = 0;
+				g.cfg.PadDef[i-1].DevNum = -1;
+			}
 		}
 
 		gtk_combo_box_set_active(GTK_COMBO_BOX(widget), n);
@@ -603,7 +629,7 @@ long PADconfigure() {
 		fprintf(stderr, "Failed to initialize SDL!\n");
 		return -1;
 	}
-	
+
 	g.Disp = XOpenDisplay(NULL);
 	if (!g.Disp) {
 		fprintf(stderr, "XOpenDisplay failed!\n");
@@ -619,10 +645,10 @@ long PADconfigure() {
 		return -1;
 	}
 
-	MainWindow = gtk_builder_get_object(xml, "CfgWnd");
+	MainWindow = GTK_WIDGET(gtk_builder_get_object(xml, "CfgWnd"));
 	gtk_window_set_title(GTK_WINDOW(MainWindow), _("Gamepad/Keyboard Input Configuration"));
 
-	widget = gtk_builder_get_object(xml, "treeview1");
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_treeview[1])); // pad 1
 
 	// column for key
 	renderer = gtk_cell_renderer_text_new();
@@ -640,9 +666,9 @@ long PADconfigure() {
 	gtk_tree_selection_set_mode(treesel, GTK_SELECTION_SINGLE);
 
 	g_signal_connect_data(G_OBJECT(treesel), "changed",
-		G_CALLBACK(TreeSelectionChanged), (gpointer)0, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(TreeSelectionChanged), GINT_TO_POINTER(0), NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(xml, "treeview2");
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_treeview[2])); // pad 2
 
 	// column for key
 	renderer = gtk_cell_renderer_text_new();
@@ -660,20 +686,17 @@ long PADconfigure() {
 	gtk_tree_selection_set_mode(treesel, GTK_SELECTION_SINGLE);
 
 	g_signal_connect_data(G_OBJECT(treesel), "changed",
-		G_CALLBACK(TreeSelectionChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(TreeSelectionChanged), GINT_TO_POINTER(1), NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(xml, "CfgWnd");
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, "CfgWnd"));
 	g_signal_connect_data(G_OBJECT(widget), "delete_event",
 		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(xml, "btnclose");
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, "btnclose"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
-	PopulateDevList();
-	UpdateKeyList();
-
-	widget = gtk_builder_get_object(xml, "checkmt");
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, "checkmt"));
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.Threaded);
 	g_signal_connect_data(G_OBJECT(widget), "toggled",
 		G_CALLBACK(OnThreadedToggled), NULL, NULL, G_CONNECT_AFTER);
@@ -684,66 +707,105 @@ long PADconfigure() {
     g_signal_connect_data(GTK_OBJECT(widget), "toggled",
         G_CALLBACK(OnHideCursorToggled), NULL, NULL, G_CONNECT_AFTER);
 */
-	widget = gtk_builder_get_object(xml, "combodev1");
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_combodev[1]));
 	g_signal_connect_data(G_OBJECT(widget), "changed",
-		G_CALLBACK(OnDeviceChanged), (gpointer)0, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnDeviceChanged), GINT_TO_POINTER(0), NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(xml, "combodev2");
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_combodev[2]));
 	g_signal_connect_data(G_OBJECT(widget), "changed",
-		G_CALLBACK(OnDeviceChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnDeviceChanged), GINT_TO_POINTER(1), NULL, G_CONNECT_AFTER);
 
-    int padTypeList[] = {
-        0,
-        2, // PSE_PAD_TYPE_MOUSE
-        0, // PSE_PAD_TYPE_NEGCON
-        0, // PSE_PAD_TYPE_GUN
-        0, // PSE_PAD_TYPE_STANDARD
-        1, // PSE_PAD_TYPE_ANALOGJOY
-        0, // PSE_PAD_TYPE_GUNCON
-        1, //PSE_PAD_TYPE_ANALOGPAD
-    };
-    
-	widget = gtk_builder_get_object(xml, "combotype1");
+	int padTypeList[] = {
+		0,
+		2, // PSE_PAD_TYPE_MOUSE
+		0, // PSE_PAD_TYPE_NEGCON
+		0, // PSE_PAD_TYPE_GUN
+		0, // PSE_PAD_TYPE_STANDARD
+		1, // PSE_PAD_TYPE_ANALOGJOY
+		0, // PSE_PAD_TYPE_GUNCON
+		1, //PSE_PAD_TYPE_ANALOGPAD
+	};
+
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, "combotype1"));
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget),
 		padTypeList[g.cfg.PadDef[0].Type]);
 	g_signal_connect_data(G_OBJECT(widget), "changed",
-		G_CALLBACK(OnTypeChanged), (gpointer)0, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnTypeChanged), GUINT_TO_POINTER(0u), NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(xml, "combotype2");
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, "combotype2"));
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget),
 		padTypeList[g.cfg.PadDef[1].Type]);
 	g_signal_connect_data(G_OBJECT(widget), "changed",
-		G_CALLBACK(OnTypeChanged), (gpointer)1, NULL, G_CONNECT_AFTER);
-	
-	widget = gtk_builder_get_object(xml, "checkvv1");
+		G_CALLBACK(OnTypeChanged), GUINT_TO_POINTER(1u), NULL, G_CONNECT_AFTER);
+
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, "checkvv1"));
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.PadDef[0].VisualVibration);
 	g_signal_connect_data(G_OBJECT(widget), "toggled",
 		G_CALLBACK(OnVisualVibration1Toggled), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(xml, "checkvv2");
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, "checkvv2"));
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.PadDef[1].VisualVibration);
 	g_signal_connect_data(G_OBJECT(widget), "toggled",
 		G_CALLBACK(OnVisualVibration2Toggled), NULL, NULL, G_CONNECT_AFTER);
-	
-	widget = gtk_builder_get_object(xml, "btnchange1");
-	gtk_widget_set_sensitive(widget, FALSE);
-	g_signal_connect_data(G_OBJECT(widget), "clicked",
-		G_CALLBACK(OnChangeClicked), (gpointer)0, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(xml, "btnreset1");
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_change[1]));
 	gtk_widget_set_sensitive(widget, FALSE);
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-		G_CALLBACK(OnResetClicked), (gpointer)0, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnChangeClicked), GINT_TO_POINTER(0), NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(xml, "btnchange2");
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_reset[1]));
 	gtk_widget_set_sensitive(widget, FALSE);
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-		G_CALLBACK(OnChangeClicked), (gpointer)1, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnResetClicked), GINT_TO_POINTER(0), NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(xml, "btnreset2");
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_change[2]));
 	gtk_widget_set_sensitive(widget, FALSE);
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-		G_CALLBACK(OnResetClicked), (gpointer)1, NULL, G_CONNECT_AFTER);
+		G_CALLBACK(OnChangeClicked), GINT_TO_POINTER(1), NULL, G_CONNECT_AFTER);
+
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_reset[2]));
+	gtk_widget_set_sensitive(widget, FALSE);
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
+		G_CALLBACK(OnResetClicked), GINT_TO_POINTER(1), NULL, G_CONNECT_AFTER);
+
+
+	// ************ Emulators keys	**********************
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_treeview[0])); // emu
+
+	// column for key
+	renderer = gtk_cell_renderer_text_new();
+	column = gtk_tree_view_column_new_with_attributes(_("Key"),
+		renderer, "text", 0, NULL);
+	gtk_tree_view_append_column(GTK_TREE_VIEW(widget), column);
+
+	// column for button
+	renderer = gtk_cell_renderer_text_new();
+	column = gtk_tree_view_column_new_with_attributes(_("Button"),
+		renderer, "text", 1, NULL);
+	gtk_tree_view_append_column(GTK_TREE_VIEW(widget), column);
+
+	treesel = gtk_tree_view_get_selection(GTK_TREE_VIEW(widget));
+	gtk_tree_selection_set_mode(treesel, GTK_SELECTION_SINGLE);
+
+	g_signal_connect_data(G_OBJECT(treesel), "changed",
+		G_CALLBACK(TreeSelectionChanged), GINT_TO_POINTER(-1), NULL, G_CONNECT_AFTER);
+
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_change[0]));
+	gtk_widget_set_sensitive(widget, FALSE);
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
+		G_CALLBACK(OnChangeClicked), GINT_TO_POINTER(-1), NULL, G_CONNECT_AFTER);
+
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_reset[0]));
+	gtk_widget_set_sensitive(widget, FALSE);
+	g_signal_connect_data(G_OBJECT(widget), "clicked",
+		G_CALLBACK(OnResetClicked), GINT_TO_POINTER(-1), NULL, G_CONNECT_AFTER);
+
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_combodev[0]));
+	g_signal_connect_data(G_OBJECT(widget), "changed",
+		G_CALLBACK(OnDeviceChanged), GINT_TO_POINTER(-1), NULL, G_CONNECT_AFTER);
+
+	PopulateDevList();
+	UpdateKeyList();
 
 	gtk_widget_show(MainWindow);
 	gtk_main();
@@ -752,12 +814,12 @@ long PADconfigure() {
 }
 
 void PADabout() {
-	const char *authors[]= {"Wei Mingzhi <weimingzhi@gmail.com>", NULL};
+	const char *authors[]= {"Wei Mingzhi <weimingzhi@gmail.com>", "ckain <ckain@iki.fi>", NULL};
 	GtkWidget *widget;
 
 	widget = gtk_about_dialog_new();
 	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(widget), "Gamepad/Keyboard Input");
-	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(widget), "1.1");
+	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(widget), "1.2");
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(widget), authors);
 	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(widget), "http://www.codeplex.com/pcsxr/");
 
@@ -776,16 +838,16 @@ int main(int argc, char *argv[]) {
 	gtk_init(&argc, &argv);
 
 	if (argc < 2) {
-    	printf ("Usage: cfgDFInput {about | configure}\n");
+	printf ("Usage: cfgDFInput {about | configure}\n");
 		return 0;
 	}
 
-    if (strcmp(argv[1], "configure") != 0 && 
+	if (strcmp(argv[1], "configure") != 0 &&
 		strcmp(argv[1], "about") != 0) {
 		printf ("Usage: cfgDFInput {about | configure}\n");
 		return 0;
-    }
-    
+	}
+
 	if(!strcmp(argv[1], "configure"))
 		PADconfigure();
 	else if(!strcmp(argv[1], "about"))

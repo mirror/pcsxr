@@ -37,17 +37,17 @@ void InitKeyboard() {
         grabCursor(g.Disp, window, 1);
         showCursor(g.Disp, window, 0);
     }
-    
+
     g_currentMouse_X = 0;
     g_currentMouse_Y = 0;
-    
+
 	g.PadState[0].KeyStatus = 0xFFFF;
 	g.PadState[1].KeyStatus = 0xFFFF;
 }
 
 void DestroyKeyboard() {
 	XkbSetDetectableAutoRepeat(g.Disp, 0, NULL);
-    
+
     if (g.cfg.PadDef[0].Type == PSE_PAD_TYPE_MOUSE ||
         g.cfg.PadDef[1].Type == PSE_PAD_TYPE_MOUSE) {
         grabCursor(g.Disp, window, 0);
@@ -74,7 +74,7 @@ void CheckKeyboard() {
 	XEvent					evt;
 	XClientMessageEvent		*xce;
 	uint16_t				Key;
-    
+
 	while (XPending(g.Disp)) {
 		XNextEvent(g.Disp, &evt);
 		switch (evt.type) {
@@ -126,6 +126,14 @@ void CheckKeyboard() {
 					}
 				}
 				if (!found && !AnalogKeyPressed(Key)) {
+					for (i=0 ; i < EMU_TOTAL ; i++) {
+						if (Key == g.cfg.E.EmuDef[i].Mapping.Key /*&& g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending == 0*/) {
+							//printf("press %x %x and %x\n", Key, g.cfg.E.EmuDef[i].Mapping.Key, g.cfg.E.EmuDef[i].EmuKeyEvent);
+							Key = g.cfg.E.EmuDef[i].EmuKeyEvent;
+							//g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending = 1; // joypad sends immediately release if enabled here
+							i=EMU_TOTAL;
+						}
+					}
 					g.KeyLeftOver = Key;
 				}
 				break;
@@ -141,7 +149,15 @@ void CheckKeyboard() {
 					}
 				}
 				if (!found && !AnalogKeyReleased(Key)) {
-					g.KeyLeftOver = ((long)Key | 0x40000000);
+				for (i=0 ; i < EMU_TOTAL ; i++) {
+					if (Key == g.cfg.E.EmuDef[i].Mapping.Key) {
+							//printf("release %x and %x\n", Key, g.cfg.E.EmuDef[i].EmuKeyEvent);
+							Key = g.cfg.E.EmuDef[i].EmuKeyEvent;
+							//g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending = 0;
+							i=EMU_TOTAL;
+						}
+					}
+					g.KeyLeftOver = (long) ( Key | 0x40000000l );
 				}
 				break;
 			case ClientMessage:
@@ -154,12 +170,12 @@ void CheckKeyboard() {
 				break;
 		}
     }
-    
+
 	g.PadState[0].MouseAxis[0][0] = g_currentMouse_X;
     g.PadState[0].MouseAxis[0][1] = g_currentMouse_Y;
     g_currentMouse_X *= 0.7;
     g_currentMouse_Y *= 0.7;
-    
+
     if (g.cfg.PadDef[0].Type == PSE_PAD_TYPE_MOUSE ||
         g.cfg.PadDef[1].Type == PSE_PAD_TYPE_MOUSE) {
         XWarpPointer(g.Disp, None, window, 0, 0, 0, 0, 160, 120);

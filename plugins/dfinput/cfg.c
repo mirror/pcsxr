@@ -36,7 +36,7 @@ static void SetDefaultConfig() {
 
 	g.cfg.PadDef[0].VisualVibration = 0;
 	g.cfg.PadDef[1].VisualVibration = 0;
-	
+
 	// Pad1 keyboard
 	g.cfg.PadDef[0].KeyDef[DKEY_SELECT].Key = XK_c;
 	g.cfg.PadDef[0].KeyDef[DKEY_START].Key = XK_v;
@@ -113,6 +113,16 @@ static void SetDefaultConfig() {
 	g.cfg.PadDef[1].KeyDef[DKEY_CROSS].J.Button = 2;
 	g.cfg.PadDef[1].KeyDef[DKEY_SQUARE].JoyEvType = BUTTON;
 	g.cfg.PadDef[1].KeyDef[DKEY_SQUARE].J.Button = 3;
+
+	// Emu special
+	g.cfg.E.DevNum = -1;
+	g.cfg.E.EmuKeyDev = 0;
+
+	g.cfg.E.EmuDef[EMU_SAVESTATE].EmuKeyEvent = XK_F1;
+	g.cfg.E.EmuDef[EMU_FASTFORWARDS].EmuKeyEvent = XK_section;
+	g.cfg.E.EmuDef[EMU_LOADSTATE].EmuKeyEvent = XK_F3;
+	g.cfg.E.EmuDef[EMU_INCREMENTSTATE].EmuKeyEvent = XK_F2;
+	g.cfg.E.EmuDef[EMU_SCREENSHOT].EmuKeyEvent = XK_F8;
 }
 
 void LoadPADConfig() {
@@ -133,8 +143,8 @@ void LoadPADConfig() {
 		if (strncmp(buf, "Threaded=", 9) == 0) {
 			g.cfg.Threaded = atoi(&buf[9]);
 		} else if (strncmp(buf, "HideCursor=", 11) == 0) {
-            g.cfg.HideCursor = atoi(&buf[11]);
-        } else if (strncmp(buf, "[PAD", 4) == 0) {
+			g.cfg.HideCursor = atoi(&buf[11]);
+		} else if (strncmp(buf, "[PAD", 4) == 0) {
 			current = atoi(&buf[4]) - 1;
 			if (current < 0) {
 				current = 0;
@@ -147,6 +157,33 @@ void LoadPADConfig() {
 			g.cfg.PadDef[current].Type = atoi(&buf[5]);
 		} else if (strncmp(buf, "VisualVibration=", 16) == 0) {
 			g.cfg.PadDef[current].VisualVibration = atoi(&buf[16]);
+		} else if (strncmp(buf, "EmuDev=", 7) == 0) {
+			g.cfg.E.DevNum = atoi(&buf[5]);
+		} else if (strncmp(buf, "EMU_FASTFORWARDS=", 17) == 0) {
+			sscanf(buf, "EMU_FASTFORWARDS=%d,%d,%d", &a, &b, &c);
+			g.cfg.E.EmuDef[EMU_FASTFORWARDS].Mapping.Key = a;
+			g.cfg.E.EmuDef[EMU_FASTFORWARDS].Mapping.JoyEvType = b;
+			g.cfg.E.EmuDef[EMU_FASTFORWARDS].Mapping.J.d = c;
+		} else if (strncmp(buf, "EMU_SAVESTATE=", 14) == 0) {
+			sscanf(buf, "EMU_SAVESTATE=%d,%d,%d", &a, &b, &c);
+			g.cfg.E.EmuDef[EMU_SAVESTATE].Mapping.Key = a;
+			g.cfg.E.EmuDef[EMU_SAVESTATE].Mapping.JoyEvType = b;
+			g.cfg.E.EmuDef[EMU_SAVESTATE].Mapping.J.d = c;
+		} else if (strncmp(buf, "EMU_LOADSTATE=", 14) == 0) {
+			sscanf(buf, "EMU_LOADSTATE=%d,%d,%d", &a, &b, &c);
+			g.cfg.E.EmuDef[EMU_LOADSTATE].Mapping.Key = a;
+			g.cfg.E.EmuDef[EMU_LOADSTATE].Mapping.JoyEvType = b;
+			g.cfg.E.EmuDef[EMU_LOADSTATE].Mapping.J.d = c;
+		} else if (strncmp(buf, "EMU_SCREENSHOT=", 15) == 0) {
+			sscanf(buf, "EMU_SCREENSHOT=%d,%d,%d", &a, &b, &c);
+			g.cfg.E.EmuDef[EMU_SCREENSHOT].Mapping.Key = a;
+			g.cfg.E.EmuDef[EMU_SCREENSHOT].Mapping.JoyEvType = b;
+			g.cfg.E.EmuDef[EMU_SCREENSHOT].Mapping.J.d = c;
+		} else if (strncmp(buf, "EMU_INCREMENTSTATE=", 19) == 0) {
+			sscanf(buf, "EMU_INCREMENTSTATE=%d,%d,%d", &a, &b, &c);
+			g.cfg.E.EmuDef[EMU_INCREMENTSTATE].Mapping.Key = a;
+			g.cfg.E.EmuDef[EMU_INCREMENTSTATE].Mapping.JoyEvType = b;
+			g.cfg.E.EmuDef[EMU_INCREMENTSTATE].Mapping.J.d = c;
 		} else if (strncmp(buf, "Select=", 7) == 0) {
 			sscanf(buf, "Select=%d,%d,%d", &a, &b, &c);
 			g.cfg.PadDef[current].KeyDef[DKEY_SELECT].Key = a;
@@ -297,7 +334,7 @@ void SavePADConfig() {
 		fprintf(fp, "DevNum=%d\n", g.cfg.PadDef[i].DevNum);
 		fprintf(fp, "Type=%d\n", g.cfg.PadDef[i].Type);
 		fprintf(fp, "VisualVibration=%d\n", g.cfg.PadDef[i].VisualVibration);
-		
+
 		fprintf(fp, "Select=%d,%d,%d\n", g.cfg.PadDef[i].KeyDef[DKEY_SELECT].Key,
 			g.cfg.PadDef[i].KeyDef[DKEY_SELECT].JoyEvType, g.cfg.PadDef[i].KeyDef[DKEY_SELECT].J.d);
 		fprintf(fp, "L3=%d,%d,%d\n", g.cfg.PadDef[i].KeyDef[DKEY_L3].Key,
@@ -360,5 +397,23 @@ void SavePADConfig() {
 		fprintf(fp, "\n");
 	}
 
+	// Emulator keys
+	fprintf(fp, "[EMU]\n");
+	fprintf(fp, "EmuDev=%d\n", g.cfg.E.DevNum);
+	fprintf(fp, "EMU_SAVESTATE=%d,%d,%d\n", g.cfg.E.EmuDef[EMU_SAVESTATE].Mapping.Key,
+			g.cfg.E.EmuDef[EMU_SAVESTATE].Mapping.JoyEvType,
+			g.cfg.E.EmuDef[EMU_SAVESTATE].Mapping.J.d);
+	fprintf(fp, "EMU_LOADSTATE=%d,%d,%d\n", g.cfg.E.EmuDef[EMU_LOADSTATE].Mapping.Key,
+			g.cfg.E.EmuDef[EMU_LOADSTATE].Mapping.JoyEvType,
+			g.cfg.E.EmuDef[EMU_LOADSTATE].Mapping.J.d);
+	fprintf(fp, "EMU_INCREMENTSTATE=%d,%d,%d\n", g.cfg.E.EmuDef[EMU_INCREMENTSTATE].Mapping.Key,
+			g.cfg.E.EmuDef[EMU_INCREMENTSTATE].Mapping.JoyEvType,
+			g.cfg.E.EmuDef[EMU_INCREMENTSTATE].Mapping.J.d);
+	fprintf(fp, "EMU_FASTFORWARDS=%d,%d,%d\n", g.cfg.E.EmuDef[EMU_FASTFORWARDS].Mapping.Key,
+			g.cfg.E.EmuDef[EMU_FASTFORWARDS].Mapping.JoyEvType,
+			g.cfg.E.EmuDef[EMU_FASTFORWARDS].Mapping.J.d);
+	fprintf(fp, "EMU_SCREENSHOT=%d,%d,%d\n", g.cfg.E.EmuDef[EMU_SCREENSHOT].Mapping.Key,
+			g.cfg.E.EmuDef[EMU_SCREENSHOT].Mapping.JoyEvType,
+			g.cfg.E.EmuDef[EMU_SCREENSHOT].Mapping.J.d);
 	fclose(fp);
 }

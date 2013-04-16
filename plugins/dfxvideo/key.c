@@ -54,11 +54,15 @@ void GPUkeypressed(int keycode)
   {
    case 0xFFC9:			//X11 key: F12
    case ((1<<29) | 0xFF0D):	//special keycode from pcsx-df: alt-enter
-	bChangeWinMode=TRUE;
-	break;
+       bChangeWinMode=TRUE;
+       break;
+   case XK_section:	//special - accelerate
+       iFastFwd = ( iFastFwd != 0 ? 0 : 1 );
+       UseFrameLimit = ( UseFrameLimit != 0 ? 0 : 1 );
+       break;
    case VK_F5:
        GPUmakeSnapshot();
-      break;
+       break;
 
    case VK_INSERT:
        if(iUseFixes) {iUseFixes=0;dwActFixes=0;}
@@ -70,7 +74,7 @@ void GPUkeypressed(int keycode)
    case VK_DEL:
        if(ulKeybits&KEY_SHOWFPS)
          ulKeybits&=~KEY_SHOWFPS;
-       else 
+       else
         {
          ulKeybits|=KEY_SHOWFPS;
          szDispBuf[0]=0;

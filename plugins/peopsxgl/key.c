@@ -3,7 +3,7 @@
                              -------------------
     begin                : Sun Mar 08 2009
     copyright            : (C) 1999-2009 by Pete Bernert
-    web                  : www.pbernert.com   
+    web                  : www.pbernert.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -30,7 +30,7 @@
 // KeyBoard handler stuff
 ////////////////////////////////////////////////////////////////////////
 
-uint32_t   ulKeybits = 0;                     
+uint32_t   ulKeybits = 0;
 
 ////////////////////////////////////////////////////////////////////////
 // keyboard handler (UNIX)
@@ -62,20 +62,33 @@ void GPUkeypressed(int keycode)
        bSnapShot=1;
       break;
 
+      // maybe could somehow handle alt+enter
+      /*case XK_k:
+       //GPUclose();
+       bFullScreen = ( bFullScreen != 0 ? 0 : 1 );
+       GPUopen(disp, "2");
+      break;*/
+
+      case XK_section:
+       bUseFrameSkip=!bUseFrameSkip;
+       bUseFrameLimit=!bUseFrameLimit;
+       iFrameLimit = ( iFrameLimit != 0 ? 0 : 2 );
+      break;
+
       case VK_INSERT:
        ulKeybits|=KEY_RESETTEXSTORE;
        if(iBlurBuffer) iBlurBuffer=0;
        else            iBlurBuffer=1;
        break;
 
-      case VK_DEL: 
+      case VK_DEL:
        if(ulKeybits&KEY_SHOWFPS)
         {
          ulKeybits&=~KEY_SHOWFPS;
          HideText();
          DestroyPic();
         }
-       else 
+       else
         {
          ulKeybits|=KEY_SHOWFPS;
          szDispBuf[0]=0;
@@ -152,8 +165,8 @@ void ResetStuff(void)
  if(ulKeybits&KEY_RESETDITHER)
   {
    bDrawDither=!bDrawDither;
-   if(bDrawDither)  glEnable(GL_DITHER); 
-   else             glDisable(GL_DITHER); 
+   if(bDrawDither)  glEnable(GL_DITHER);
+   else             glDisable(GL_DITHER);
    ulKeybits&=~KEY_RESETDITHER;
    BuildDispMenu(0);
   }
@@ -165,9 +178,9 @@ void ResetStuff(void)
    else iFrameTexType++;
    if(iFrameTexType>3) iFrameTexType=0;
    if(iFrameTexType<0) iFrameTexType=3;
-   if(gTexFrameName!=0)                              
-    glDeleteTextures(1, &gTexFrameName);             
-   gTexFrameName=0;                                  
+   if(gTexFrameName!=0)
+    glDeleteTextures(1, &gTexFrameName);
+   gTexFrameName=0;
    ulKeybits&=~(KEY_TOGGLEFBTEXTURE|KEY_STEPDOWN);
   }
 

@@ -83,11 +83,11 @@ extern char* PLUGLOC(char* toloc);
 #define _(x)  (x)
 #define N_(x) (x)
 #endif
- 
+
 #if SDL_VERSION_ATLEAST(1,3,0)
 extern int has_haptic;
 #endif
-	
+
 int JoyHapticRumble(int pad, uint32_t low, uint32_t high);
 
 enum {
@@ -113,6 +113,16 @@ enum {
 };
 
 enum {
+	EMU_INCREMENTSTATE=0,
+	EMU_FASTFORWARDS,
+	EMU_LOADSTATE,
+	EMU_SAVESTATE,
+	EMU_SCREENSHOT,
+
+	EMU_TOTAL
+};
+
+enum {
 	ANALOG_LEFT = 0,
 	ANALOG_RIGHT,
 
@@ -130,6 +140,7 @@ typedef struct tagKeyDef {
 		uint16_t	Button; // button number
 	} J;
 	uint16_t		Key;
+	uint8_t			ReleaseEventPending;
 } KEYDEF;
 
 enum { ANALOG_XP = 0, ANALOG_XM, ANALOG_YP, ANALOG_YM };
@@ -142,17 +153,29 @@ typedef struct tagPadDef {
 	KEYDEF			AnalogDef[ANALOG_TOTAL][4];
 } PADDEF;
 
+typedef struct tagEmuDef {
+	uint16_t	EmuKeyEvent;
+	KEYDEF		Mapping;
+} EMUDEF;
+
+typedef struct tagEmuDef2{
+	EMUDEF		EmuDef[EMU_TOTAL];
+	SDL_Joystick	*EmuKeyDev;
+	int8_t		DevNum;
+} EMUDEF2;
+
 typedef struct tagConfig {
 	uint8_t			Threaded;
-    uint8_t         HideCursor;
+	uint8_t         HideCursor;
 	PADDEF			PadDef[2];
+	EMUDEF2			E;
 } CONFIG;
 
 typedef struct tagPadState {
 	SDL_Joystick		*JoyDev;
 	uint8_t				PadMode;
 	uint8_t				PadID;
-	uint8_t			PadModeKey;
+	uint8_t				PadModeKey;
 	volatile uint8_t	PadModeSwitch;
 	volatile uint16_t	KeyStatus;
 	volatile uint16_t	JoyKeyStatus;

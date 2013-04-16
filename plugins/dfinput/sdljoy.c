@@ -84,13 +84,18 @@ int JoyHapticRumble(int pad, uint32_t low, uint32_t high)
 
 void InitSDLJoy() {
 	uint8_t				i;
-
+	uint8_t				emukeydev;
 	g.PadState[0].JoyKeyStatus = 0xFFFF;
 	g.PadState[1].JoyKeyStatus = 0xFFFF;
 
 	for (i = 0; i < 2; i++) {
 		if (g.cfg.PadDef[i].DevNum >= 0) {
 			g.PadState[i].JoyDev = SDL_JoystickOpen(g.cfg.PadDef[i].DevNum);
+
+			// Saves an extra call to SDL joystick open
+			if (g.cfg.E.DevNum == g.cfg.PadDef[i].DevNum) {
+				g.cfg.E.EmuKeyDev = g.PadState[i].JoyDev;
+			}
 		} else {
 			g.PadState[i].JoyDev = NULL;
 		}
@@ -106,6 +111,10 @@ void InitSDLJoy() {
     JoyInitHaptic();
   }
 #endif
+
+	if (g.cfg.E.EmuKeyDev == 0 && g.cfg.E.DevNum >= 0) {
+		g.cfg.E.EmuKeyDev = SDL_JoystickOpen(g.cfg.E.DevNum);
+	}
 
 	SDL_JoystickEventState(SDL_IGNORE);
 
@@ -133,6 +142,7 @@ void DestroySDLJoy() {
 	for (i = 0; i < 2; i++) {
 		g.PadState[i].JoyDev = NULL;
 	}
+	g.cfg.E.EmuKeyDev = NULL;
 }
 
 static void bdown(int pad, int bit)
@@ -207,6 +217,71 @@ void CheckJoy() {
 				default:
 					break;
 			}
+		}
+	}
+
+	// Check for emulator button states
+	for (i=(g.cfg.E.EmuKeyDev == NULL ? EMU_TOTAL : 0) ; i < EMU_TOTAL ; i++) {
+		switch (g.cfg.E.EmuDef[i].Mapping.JoyEvType) {
+			case BUTTON:
+				if (SDL_JoystickGetButton(g.cfg.E.EmuKeyDev, g.cfg.E.EmuDef[i].Mapping.J.Button)) {
+					if (g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending == 0) {
+						//printf("%x %x %x %x\n", g.cfg.E.EmuKeyDev, i, g.cfg.E.EmuDef[i].Mapping.J.Button, g.cfg.E.EmuDef[i].EmuKeyEvent);
+						g.KeyLeftOver = g.cfg.E.EmuDef[i].EmuKeyEvent;
+						g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending = 1;
+					}
+				} else if (g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending) {
+					//printf("%x %x %x %x\n", g.cfg.E.EmuKeyDev, i, g.cfg.E.EmuDef[i].Mapping.J.Button, g.cfg.E.EmuDef[i].EmuKeyEvent);
+					g.KeyLeftOver = ( g.cfg.E.EmuDef[i].EmuKeyEvent | 0x40000000l );
+					g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending = 0;
+				}
+				break;
+			case HAT:
+				n = (g.cfg.E.EmuDef[i].Mapping.J.Hat >> 8);
+				if (SDL_JoystickGetHat(g.cfg.E.EmuKeyDev, n) & (g.cfg.E.EmuDef[i].Mapping.J.Hat & 0xFF)) {
+					if (g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending == 0) {
+						//printf("%x %x %x %x\n", g.cfg.E.EmuKeyDev, i, g.cfg.E.EmuDef[i].Mapping.J.Button, g.cfg.E.EmuDef[i].EmuKeyEvent);
+						g.KeyLeftOver = g.cfg.E.EmuDef[i].EmuKeyEvent;
+						g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending = 1;
+					}
+				} else if (g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending) {
+					//printf("%x %x %x %x\n", g.cfg.E.EmuKeyDev, i, g.cfg.E.EmuDef[i].Mapping.J.Button, g.cfg.E.EmuDef[i].EmuKeyEvent);
+					g.KeyLeftOver = ( g.cfg.E.EmuDef[i].EmuKeyEvent | 0x40000000l );
+					g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending = 0;
+				}
+				break;
+			case AXIS:
+				n = abs(g.cfg.E.EmuDef[i].Mapping.J.Axis) - 1;
+
+				if (g.cfg.E.EmuDef[i].Mapping.J.Axis > 0) {
+					if (SDL_JoystickGetAxis(g.cfg.E.EmuKeyDev, n) > 16383) {
+						if (g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending == 0) {
+							//printf("push1 %x %x %x %x\n", g.cfg.E.EmuKeyDev, i, g.cfg.E.EmuDef[i].Mapping.J.Axis, g.cfg.E.EmuDef[i].EmuKeyEvent);
+							g.KeyLeftOver = g.cfg.E.EmuDef[i].EmuKeyEvent;
+							g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending = 1;
+						}
+					} else if (g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending) {
+						//printf("rel1 %x %x %x %x\n", g.cfg.E.EmuKeyDev, i, g.cfg.E.EmuDef[i].Mapping.J.Button, g.cfg.E.EmuDef[i].EmuKeyEvent);
+						g.KeyLeftOver = ( g.cfg.E.EmuDef[i].EmuKeyEvent | 0x40000000l );
+						g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending = 0;
+					}
+				} else if (g.cfg.E.EmuDef[i].Mapping.J.Axis < 0) {
+					if (SDL_JoystickGetAxis(g.cfg.E.EmuKeyDev, n) < -16383) {
+						if (g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending == 0) {
+							//printf("push2 %x %x %x %x\n", g.cfg.E.EmuKeyDev, i, g.cfg.E.EmuDef[i].Mapping.J.Axis, g.cfg.E.EmuDef[i].EmuKeyEvent);
+							g.KeyLeftOver = g.cfg.E.EmuDef[i].EmuKeyEvent;
+							g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending = 1;
+						}
+					} else if (g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending) {
+						//printf("rel2 %x %x %x %x\n", g.cfg.E.EmuKeyDev, i, g.cfg.E.EmuDef[i].Mapping.J.Button, g.cfg.E.EmuDef[i].EmuKeyEvent);
+						g.KeyLeftOver = ( g.cfg.E.EmuDef[i].EmuKeyEvent | 0x40000000l );
+						g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending = 0;
+					}
+				}
+				break;
+			default:
+				break;
+
 		}
 	}
 
