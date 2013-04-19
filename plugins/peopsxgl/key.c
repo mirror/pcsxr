@@ -68,12 +68,14 @@ void GPUkeypressed(int keycode)
        bFullScreen = ( bFullScreen != 0 ? 0 : 1 );
        GPUopen(disp, "2");
       break;*/
-
+			 
+#ifndef _MACGL
       case XK_section:
        bUseFrameSkip=!bUseFrameSkip;
        bUseFrameLimit=!bUseFrameLimit;
        iFrameLimit = ( iFrameLimit != 0 ? 0 : 2 );
       break;
+#endif
 
       case VK_INSERT:
        ulKeybits|=KEY_RESETTEXSTORE;

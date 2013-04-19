@@ -56,10 +56,12 @@ void GPUkeypressed(int keycode)
    case ((1<<29) | 0xFF0D):	//special keycode from pcsx-df: alt-enter
        bChangeWinMode=TRUE;
        break;
+#ifndef _MACGL
    case XK_section:	//special - accelerate
        iFastFwd = ( iFastFwd != 0 ? 0 : 1 );
        UseFrameLimit = ( UseFrameLimit != 0 ? 0 : 1 );
        break;
+#endif
    case VK_F5:
        GPUmakeSnapshot();
        break;
