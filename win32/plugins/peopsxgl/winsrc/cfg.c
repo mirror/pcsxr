@@ -182,6 +182,7 @@ BOOL OnInitCfgDialog(HWND hW)                          // INIT CONFIG DIALOG
  if(iUseScanLines)    CheckDlgButton(hW,IDC_USESCANLINES,TRUE);
  if(iShowFPS)         CheckDlgButton(hW,IDC_SHOWFPS,TRUE);
  if(bKeepRatio)       CheckDlgButton(hW,IDC_ARATIO,TRUE);
+ if(bForceRatio43)    CheckDlgButton(hW,IDC_ARATIO43,TRUE);
  if(iBlurBuffer)      CheckDlgButton(hW,IDC_BLUR,TRUE);
  if(iNoScreenSaver)   CheckDlgButton(hW,IDC_SSAVE,TRUE);
 
