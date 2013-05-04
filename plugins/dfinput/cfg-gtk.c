@@ -59,7 +59,8 @@ const char *EmuKeyText[EMU_TOTAL] = {
 	N_("Fast-forwards"),
 	N_("Load state"),
 	N_("Save state"),
-	N_("Screenshot")
+	N_("Screenshot"),
+	N_("Escape")
 };
 
 const char *DPadText[DKEY_TOTAL] = {
