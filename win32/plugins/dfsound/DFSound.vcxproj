@@ -129,7 +129,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>dsound.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\Debug/DFSound.dll</OutputFile>
+      <OutputFile>$(SolutionDir)$(Configuration)\DFSound.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ModuleDefinitionFile>.\DFSound.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>

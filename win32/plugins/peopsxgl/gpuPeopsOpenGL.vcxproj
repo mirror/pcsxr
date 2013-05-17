@@ -81,7 +81,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\Debug/gpuPeopsOpenGL.dll</OutputFile>
+      <OutputFile>$(SolutionDir)$(Configuration)\gpuPeopsOpenGL.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ModuleDefinitionFile>.\gpuPeopsOpenGL.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>

@@ -83,7 +83,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;dinput8.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\Debug/PadSSSPSX.dll</OutputFile>
+      <OutputFile>$(SolutionDir)$(Configuration)\PadSSSPSX.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ModuleDefinitionFile>.\PadSSSPSX.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>

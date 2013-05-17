@@ -134,7 +134,7 @@ rem copy release\DFXVideo.dll d:\emus\zinc\renderer.znc
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>winmm.lib;vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\Debug/DFXVideo.dll</OutputFile>
+      <OutputFile>$(SolutionDir)$(Configuration)\DFXVideo.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ModuleDefinitionFile>.\DFXVideo.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>

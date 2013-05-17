@@ -129,7 +129,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>winmm.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\Debug/bladesio1.dll</OutputFile>
+      <OutputFile>$(SolutionDir)$(Configuration)\bladesio1.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ModuleDefinitionFile>.\bladesio1.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
