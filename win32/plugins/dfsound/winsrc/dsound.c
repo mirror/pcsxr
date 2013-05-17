@@ -211,6 +211,9 @@ void SoundFeedStreamData(unsigned char* pSound,long lBytes)
  HRESULT hr;
  unsigned long status;
 
+ if (lpDSB == NULL)
+	 return;
+
  if(iDoRecord) RecordBuffer(pSound,lBytes);
 
  IDirectSoundBuffer_GetStatus(lpDSB,&status);
