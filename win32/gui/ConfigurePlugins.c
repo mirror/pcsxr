@@ -321,7 +321,7 @@ void OnOK(HWND hW) {
 #endif
 	char *biosFILE=GetSelDLL(hW,IDC_LISTBIOS);
 
-    if (gpuDLL == NULL || spuDLL == NULL || cdrDLL == NULL || pad1DLL == NULL ||
+    if (gpuDLL == NULL || spuDLL == NULL || /*cdrDLL == NULL ||*/ pad1DLL == NULL ||
 		pad2DLL == NULL || biosFILE == NULL
 #ifdef ENABLE_SIO1API
 		|| sio1DLL == NULL
@@ -334,7 +334,10 @@ void OnOK(HWND hW) {
 	strcpy(Config.Bios, biosFILE);
 	strcpy(Config.Gpu,  gpuDLL);
 	strcpy(Config.Spu,  spuDLL);
-	strcpy(Config.Cdr,  cdrDLL);
+	if (cdrDLL != NULL)
+		strcpy(Config.Cdr,  cdrDLL);
+	else
+		Config.Cdr[0] = '\0';
 	strcpy(Config.Pad1, pad1DLL);
 	strcpy(Config.Pad2, pad2DLL);
 #ifdef ENABLE_SIO1API

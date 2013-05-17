@@ -838,7 +838,7 @@ const char *GetIsoFile(void) {
 }
 
 boolean UsingIso(void) {
-	return (IsoFile[0] != '\0');
+	return (IsoFile[0] != '\0' || Config.Cdr[0] == '\0');
 }
 
 void SetCdOpenCaseTime(s64 time) {
