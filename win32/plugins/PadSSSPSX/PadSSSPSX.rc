@@ -2,7 +2,15 @@
 
 #define APSTUDIO_READONLY_SYMBOLS
 
+///////////////////////////////////////////////////////////////////////////////
+// Use MFC if available
+//
+#if defined(_MFC_VER)
 #include "afxres.h"
+#else
+#include "WinResrc.h"
+#include <winres.h>
+#endif
 
 #undef APSTUDIO_READONLY_SYMBOLS
 
