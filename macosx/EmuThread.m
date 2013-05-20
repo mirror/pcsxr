@@ -312,6 +312,23 @@ done:
 	return NO;
 }
 
++ (void)pauseSafeWithBlock:(void (^)(BOOL))theBlock
+{
+	dispatch_async(dispatch_get_global_queue(0, 0), ^{
+		BOOL wasPaused = NO;
+		if ((paused == 2) || ![EmuThread active])
+		{
+			wasPaused = YES;
+		} else {
+			[EmuThread pause];
+			while ([EmuThread isPaused] != 2) [NSThread sleepUntilDate:[[NSDate date] addTimeInterval:0.05]];
+			wasPaused = NO;
+		}
+		
+		dispatch_async(dispatch_get_main_queue(), ^{theBlock(wasPaused);});
+	});
+}
+
 + (void)resume
 {
 	if (!paused || ![EmuThread active])
@@ -369,18 +386,20 @@ done:
 
 + (void)freezeAt:(NSString *)path which:(int)num
 {
-	BOOL emuWasPaused = [EmuThread pauseSafe];
-	char Text[256];
-
-	GPU_freeze(2, (GPUFreeze_t *)&num);
-	int ret = SaveState([path fileSystemRepresentation]);
-	if (ret == 0) sprintf (Text, _("*PCSXR*: Saved State %d"), num);
-	else sprintf (Text, _("*PCSXR*: Error Saving State %d"), num);
-	GPU_displayText(Text);
-
-	if (!emuWasPaused) {
-		[EmuThread resume];
-	}
+	[self pauseSafeWithBlock:^(BOOL emuWasPaused) {
+		char Text[256];
+		
+		GPU_freeze(2, (GPUFreeze_t *)&num);
+		int ret = SaveState([path fileSystemRepresentation]);
+		if (ret == 0) sprintf (Text, _("*PCSXR*: Saved State %d"), num);
+		else sprintf (Text, _("*PCSXR*: Error Saving State %d"), num);
+		GPU_displayText(Text);
+		
+		if (!emuWasPaused) {
+			[EmuThread resume];
+		}
+		
+	}];
 }
 
 + (BOOL)defrostAt:(NSString *)path
