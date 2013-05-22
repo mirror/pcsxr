@@ -1608,6 +1608,11 @@ static void recLW() {
 		MOV32RtoM((uptr)&psxRegs.GPR.r[_Rt_], EAX);
 	}
 //	ADD32ItoR(ESP, 4);
+
+	// Delay is memread delay + 1 cycle.
+	// Seems to work nicely with games that require cycle accuracy like CART World Series.
+	// TODO: this could be needed with other L ops such as LB.
+	INC32M((uptr)&psxRegs.cycle);
 }
 
 extern u32 LWL_MASK[4];
