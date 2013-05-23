@@ -291,62 +291,62 @@ void StartGui() {
 	// States
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_load), (gpointer) 0, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_load), GINT_TO_POINTER(0), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot2"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_load), (gpointer) 1, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_load), GINT_TO_POINTER(1), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot3"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_load), (gpointer) 2, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_load), GINT_TO_POINTER(2), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot4"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_load), (gpointer) 3, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_load), GINT_TO_POINTER(3), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot5"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_load), (gpointer) 4, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_load), GINT_TO_POINTER(4), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot6"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_load), (gpointer) 5, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_load), GINT_TO_POINTER(5), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot7"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_load), (gpointer) 6, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_load), GINT_TO_POINTER(6), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot8"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_load), (gpointer) 7, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_load), GINT_TO_POINTER(7), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot9"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_load), (gpointer) 8, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_load), GINT_TO_POINTER(8), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "other1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load_other), NULL, NULL, G_CONNECT_AFTER);			
 
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_save), (gpointer) 0, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_save), GINT_TO_POINTER(0), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot2"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_save), (gpointer) 1, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_save), GINT_TO_POINTER(1), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot3"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_save), (gpointer) 2, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_save), GINT_TO_POINTER(2), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot4"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_save), (gpointer) 3, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_states_save), GINT_TO_POINTER(3), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot5"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_save), (gpointer) 4, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_save), GINT_TO_POINTER(4), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot6"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_save), (gpointer) 5, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_save), GINT_TO_POINTER(5), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot7"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_save), (gpointer) 6, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_save), GINT_TO_POINTER(6), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot8"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_save), (gpointer) 7, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_save), GINT_TO_POINTER(7), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_SaveSlot9"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(on_states_save), (gpointer) 8, NULL, G_CONNECT_AFTER);	
+			G_CALLBACK(on_states_save), GINT_TO_POINTER(8), NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "other2"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_save_other), NULL, NULL, G_CONNECT_AFTER);
@@ -812,6 +812,7 @@ void OnEmu_SwitchImage() {
 	}
 
 	SetCdOpenCaseTime(time(NULL) + 2);
+	LidInterrupt(); // causes CD lid open event
 
 	CheatSearchBackupMemory();
 	psxCpu->Execute();
@@ -913,8 +914,10 @@ void state_save(gchar *state_filename) {
 }
 
 void on_states_load (GtkWidget *widget, gpointer user_data) {
+	(void)widget; // unused
+
 	gchar *state_filename;
-	gint state = (int)user_data;
+	gint state = GPOINTER_TO_INT(user_data);
 
 	state_filename = get_state_filename(state);
 
@@ -926,8 +929,10 @@ void on_states_load (GtkWidget *widget, gpointer user_data) {
 }
 
 void on_states_save (GtkWidget *widget, gpointer user_data) {
+	(void)widget; // unused
+
 	gchar *state_filename;
-	gint state = (int)user_data;
+	gint state = GPOINTER_TO_INT(user_data);
 
 	state_filename = get_state_filename(state);
 
