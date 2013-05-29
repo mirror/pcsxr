@@ -60,7 +60,9 @@
     
     if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
         NSArray *files = [openDlg URLs];
-        LoadCheats((const char *)[[[files objectAtIndex:0] path] fileSystemRepresentation]);
+		for (NSURL *theURL in files) {
+			LoadCheats([[theURL path] fileSystemRepresentation]);
+		}
         [self refresh];
     }
     RELEASEOBJ(openDlg);
