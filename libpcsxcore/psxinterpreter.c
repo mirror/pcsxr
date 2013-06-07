@@ -33,9 +33,9 @@ static u32 branchPC;
 // These macros are used to assemble the repassembler functions
 
 #ifdef PSXCPU_LOG
-#define debugI() PSXCPU_LOG("%s\n", disR3000AF(psxRegs.code, psxRegs.pc)); 
+	#define debugI() if (Config.PsxOut) { PSXCPU_LOG("%s\n", disR3000AF(psxRegs.code, psxRegs.pc)); }
 #else
-#define debugI()
+	#define debugI()
 #endif
 
 static inline void execI();
@@ -573,7 +573,7 @@ void psxSRLV() { if (!_Rd_) return; _u32(_rRd_) = _u32(_rRt_) >> _u32(_rRs_); } 
 * Load higher 16 bits of the first word in GPR with imm  *
 * Format:  OP rt, immediate                              *
 *********************************************************/
-void psxLUI() { if (!_Rt_) return; _u32(_rRt_) = psxRegs.code << 16; } // Upper halfword of Rt = Im
+void psxLUI() { if (!_Rt_) return; _u32(_rRt_) = _ImmLU_; } // Upper halfword of Rt = Im
 
 /*********************************************************
 * Move from HI/LO to GPR                                 *

@@ -149,8 +149,8 @@ void CheckKeyboard() {
 					}
 				}
 				if (!found && !AnalogKeyReleased(Key)) {
-				for (i=0 ; i < EMU_TOTAL ; i++) {
-					if (Key == g.cfg.E.EmuDef[i].Mapping.Key) {
+					for (i=0 ; i < EMU_TOTAL ; i++) {
+						if (Key == g.cfg.E.EmuDef[i].Mapping.Key) {
 							//printf("release %x and %x\n", Key, g.cfg.E.EmuDef[i].EmuKeyEvent);
 							Key = g.cfg.E.EmuDef[i].EmuKeyEvent;
 							//g.cfg.E.EmuDef[i].Mapping.ReleaseEventPending = 0;

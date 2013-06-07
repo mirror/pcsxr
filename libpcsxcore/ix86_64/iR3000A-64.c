@@ -65,6 +65,7 @@ typedef struct {
 
 static iRegisters iRegs[32];
 static iRegisters iRegsS[32];
+static psxRegisters psxRegsS;
 
 #define ST_UNK    0
 #define ST_CONST  1
@@ -90,6 +91,8 @@ static void StackRes()
 #endif
 }
 
+int dump = FALSE;
+
 static void MapConst(int reg, u32 _const) {
 	iRegs[reg].k = _const;
 	iRegs[reg].state = ST_CONST;
@@ -100,6 +103,26 @@ static void iFlushReg(int reg) {
 		MOV32ItoM((uptr)&psxRegs.GPR.r[reg], iRegs[reg].k);
 	}
 	iRegs[reg].state = ST_UNK;
+}
+
+
+static inline void iDump(const iRegisters* iRegsParam) {
+#ifdef PSXCPU_LOG
+	int i;
+
+	for (i=0; i<32; i++) {
+		psxRegsS.GPR.r[i] = psxRegs.GPR.r[i];
+		if (iRegsParam[i].state != ST_UNK) psxRegs.GPR.r[i] = iRegsParam[i].k;
+	}
+
+	PSXCPU_LOG("%s\n", disR3000AF(PSXMu32(pc), pc));
+//	PSXCPU_LOG("%s (%x %x)\n", disR3000AF(PSXMu32(pc), pc), iRegsParam[_Rt_].k, psxRegs.GPR.r[_Rt_]);
+
+
+	for (i=0; i<32; i++) {
+		psxRegs.GPR.r[i] = psxRegsS.GPR.r[i];
+	}
+#endif
 }
 
 static void iFlushRegs() {
@@ -160,6 +183,9 @@ static int iLoadTest() {
 static void SetBranch() {
 	branch = 1;
 	psxRegs.code = PSXMu32(pc);
+#ifdef PSXCPU_LOG
+	if (dump) iDump(iRegsS);
+#endif
 	pc+=4;
 
 	if (iLoadTest() == 1) {
@@ -208,6 +234,9 @@ static void SetBranch() {
 static void iJump(u32 branchPC) {
 	branch = 1;
 	psxRegs.code = PSXMu32(pc);
+#ifdef PSXCPU_LOG
+	if (dump) iDump(iRegsS);
+#endif
 	pc+=4;
 
 	if (iLoadTest() == 1) {
@@ -271,7 +300,9 @@ static void iBranch(u32 branchPC, int savectx) {
 
 	branch = 1;
 	psxRegs.code = PSXMu32(pc);
-
+#ifdef PSXCPU_LOG
+	if (dump && savectx) iDump(iRegsS);
+#endif
 	// the delay test is only made when the branch is taken
 	// savectx == 0 will mean that :)
 	if (savectx == 0 && iLoadTest() == 1) {
@@ -300,7 +331,7 @@ static void iBranch(u32 branchPC, int savectx) {
 	MOV32ItoM((uptr)&psxRegs.pc, branchPC);
 	CALLFunc((uptr)psxBranchTest);
 	CALLFunc((uptr)psxJumpTest);
-	
+
 	StackRes();
 
 	// maybe just happened an interruption, check so
@@ -375,20 +406,19 @@ static void iDumpRegs() {
 #endif
 
 void iDumpBlock(char *ptr) {
-	FILE *f;
+#ifdef PSXCPU_LOG
 	u32 i;
-
-	SysPrintf("dump1 %x:%x, %x\n", psxRegs.pc, pc, psxRegs.cycle);
-
 	for (i = psxRegs.pc; i < pc; i+=4)
-		SysPrintf("%s\n", disR3000AF(PSXMu32(i), i));
+		PSXCPU_LOG("%s\n", disR3000AF(PSXMu32(i), i));
+#endif
 
-	fflush(stdout);
+#ifdef PSXCPUDUMP_LOG
+	FILE *f;
 	f = fopen("dump1", "w");
 	fwrite(ptr, 1, (uptr)x86Ptr - (uptr)ptr, f);
 	fclose(f);
 	//system("ndisasm -b64 dump1");
-	fflush(stdout);
+#endif
 }
 
 #define REC_FUNC(f) \
@@ -607,7 +637,7 @@ static void recADDIU()  {
 			iRegs[_Rt_].state = ST_UNK;
 
 			MOV32MtoR(EAX, (uptr)&psxRegs.GPR.r[_Rs_]);
-			if (_Imm_ == 1) { 
+			if (_Imm_ == 1) {
 				INC32R(EAX);
 			} else if (_Imm_ == -1) {
 				DEC32R(EAX);
@@ -737,7 +767,7 @@ static void recXORI() {
 	}
 }
 #endif
-//end of * Arithmetic with immediate operand  
+//end of * Arithmetic with immediate operand
 
 /*********************************************************
 * Load higher 16 bits of the first word in GPR with imm  *
@@ -748,8 +778,8 @@ static void recXORI() {
 static void recLUI()  {
 // Rt = Imm << 16
 	if (!_Rt_) return;
-
-	MapConst(_Rt_, psxRegs.code << 16);
+	//iFlushReg(_Rt_);
+	MapConst(_Rt_, _ImmLU_);
 }
 #endif
 //End of Load Higher .....
@@ -776,7 +806,7 @@ REC_FUNC(SLTU);
 
 #if 1
 static void recADDU() {
-// Rd = Rs + Rt 
+// Rd = Rs + Rt
 	if (!_Rd_) return;
 
 //	iFlushRegs();
@@ -796,7 +826,7 @@ static void recADDU() {
 			}
 		} else {
 			MOV32MtoR(EAX, (uptr)&psxRegs.GPR.r[_Rt_]);
-			if (iRegs[_Rs_].k == 1) { 
+			if (iRegs[_Rs_].k == 1) {
 				INC32R(EAX);
 			} else if (iRegs[_Rs_].k == 0xffffffff) {
 				DEC32R(EAX);
@@ -818,7 +848,7 @@ static void recADDU() {
 			}
 		} else {
 			MOV32MtoR(EAX, (uptr)&psxRegs.GPR.r[_Rs_]);
-			if (iRegs[_Rt_].k == 1) { 
+			if (iRegs[_Rt_].k == 1) {
 				INC32R(EAX);
 			} else if (iRegs[_Rt_].k == 0xffffffff) {
 				DEC32R(EAX);
@@ -876,12 +906,12 @@ static void recSUBU() {
 		SUB32MtoR(EAX, (uptr)&psxRegs.GPR.r[_Rt_]);
 		MOV32RtoM((uptr)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-}   
+}
 
 static void recSUB() {
 // Rd = Rs - Rt
 	recSUBU();
-}   
+}
 
 static void recAND() {
 // Rd = Rs And Rt
@@ -926,7 +956,7 @@ static void recAND() {
 			MOV32RtoM((uptr)&psxRegs.GPR.r[_Rd_], EAX);
 		}
 	}
-}   
+}
 
 static void recOR() {
 // Rd = Rs Or Rt
@@ -955,7 +985,7 @@ static void recOR() {
 		OR32MtoR (EAX, (uptr)&psxRegs.GPR.r[_Rt_]);
 		MOV32RtoM((uptr)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-}   
+}
 
 static void recXOR() {
 // Rd = Rs Xor Rt
@@ -1051,9 +1081,9 @@ static void recSLT() {
 		AND32ItoR(EAX, 0xff);
 		MOV32RtoM((uptr)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-}  
+}
 
-static void recSLTU() { 
+static void recSLTU() {
 // Rd = Rs < Rt (unsigned)
 	if (!_Rd_) return;
 
@@ -1255,7 +1285,7 @@ static void recDIVU() {
 	}
 }
 #endif
-//End of * Register mult/div & Register trap logic  
+//End of * Register mult/div & Register trap logic
 
 #if 0
 REC_FUNC(LB);
@@ -1303,6 +1333,7 @@ static void SetArg_OfB(x86IntRegType arg) {
 }
 
 #if 1
+
 static void recLB() {
 // Rt = mem[Rs + Im] (signed)
 
@@ -1532,6 +1563,7 @@ static void recLHU() {
 //	ADD32ItoR(ESP, 4);
 }
 
+
 static void recLW() {
 // Rt = mem[Rs + Im] (unsigned)
 
@@ -1565,20 +1597,20 @@ static void recLW() {
 		}
 		if (t == 0x1f80) {
 			switch (addr) {
-				case 0x1f801080: case 0x1f801084: case 0x1f801088: 
-				case 0x1f801090: case 0x1f801094: case 0x1f801098: 
-				case 0x1f8010a0: case 0x1f8010a4: case 0x1f8010a8: 
-				case 0x1f8010b0: case 0x1f8010b4: case 0x1f8010b8: 
-				case 0x1f8010c0: case 0x1f8010c4: case 0x1f8010c8: 
-				case 0x1f8010d0: case 0x1f8010d4: case 0x1f8010d8: 
-				case 0x1f8010e0: case 0x1f8010e4: case 0x1f8010e8: 
+				case 0x1f801080: case 0x1f801084: case 0x1f801088:
+				case 0x1f801090: case 0x1f801094: case 0x1f801098:
+				case 0x1f8010a0: case 0x1f8010a4: case 0x1f8010a8:
+				case 0x1f8010b0: case 0x1f8010b4: case 0x1f8010b8:
+				case 0x1f8010c0: case 0x1f8010c4: case 0x1f8010c8:
+				case 0x1f8010d0: case 0x1f8010d4: case 0x1f8010d8:
+				case 0x1f8010e0: case 0x1f8010e4: case 0x1f8010e8:
 				case 0x1f801070: case 0x1f801074:
 				case 0x1f8010f0: case 0x1f8010f4:
 					if (!_Rt_) return;
 					iRegs[_Rt_].state = ST_UNK;
-
 					MOV32MtoR(EAX, (uptr)&psxH[addr & 0xffff]);
 					MOV32RtoM((uptr)&psxRegs.GPR.r[_Rt_], EAX);
+					
 					return;
 
 				case 0x1f801810:
@@ -1754,7 +1786,7 @@ static void recLWBlock(int count) {
 	for (i=0; i<count; i++, code++) {
 		if (_fRt_(*code)) {
 			iRegs[_fRt_(*code)].state = ST_UNK;
-			
+
 			MOV64RmStoR(EDX, EAX, ECX, 2);
 			MOV32RtoM((uptr)&psxRegs.GPR.r[_fRt_(*code)], EDX);
 		}
@@ -1890,6 +1922,7 @@ static void recSB() {
 	}
 	SetArg_OfB(X86ARG1);
 	CALLFunc((uptr)psxMemWrite8);
+
 //	ADD32ItoR(ESP, 8);
 }
 
@@ -1983,13 +2016,13 @@ static void recSW() {
 		}
 		if (t == 0x1f80) {
 			switch (addr) {
-				case 0x1f801080: case 0x1f801084: 
-				case 0x1f801090: case 0x1f801094: 
-				case 0x1f8010a0: case 0x1f8010a4: 
-				case 0x1f8010b0: case 0x1f8010b4: 
-				case 0x1f8010c0: case 0x1f8010c4: 
-				case 0x1f8010d0: case 0x1f8010d4: 
-				case 0x1f8010e0: case 0x1f8010e4: 
+				case 0x1f801080: case 0x1f801084:
+				case 0x1f801090: case 0x1f801094:
+				case 0x1f8010a0: case 0x1f8010a4:
+				case 0x1f8010b0: case 0x1f8010b4:
+				case 0x1f8010c0: case 0x1f8010c4:
+				case 0x1f8010d0: case 0x1f8010d4:
+				case 0x1f8010e0: case 0x1f8010e4:
 				case 0x1f801074:
 				case 0x1f8010f0:
 					if (IsConst(_Rt_)) {
@@ -2224,7 +2257,7 @@ void recSWR() {
 		if (_Imm_) ADD32ItoR(EAX, _Imm_);
 	}
 	PUSHR  (EAX);
-	
+
 	AND32ItoR(EAX, ~3);
 	MOV32RtoR(X86ARG1, EAX);
 
@@ -2429,8 +2462,6 @@ static void recSRAV() {
 REC_SYS(SYSCALL);
 REC_SYS(BREAK);
 #endif
-
-int dump = 0;
 
 #if 1
 static void recSYSCALL() {
@@ -2672,7 +2703,7 @@ static void recJALR() {
 	if (_Rd_) {
 		MapConst(_Rd_, pc + 4);
 	}
-	
+
 	SetBranch();
 }
 
@@ -2947,7 +2978,7 @@ static void (*recCP2[64])() = {
 	recDPCS , recINTPL, recMVMVA, recNCDS, recCDP , recNULL , recNCDT , recNULL, // 10
 	recNULL , recNULL , recNULL , recNCCS, recCC  , recNULL , recNCS  , recNULL, // 18
 	recNCT  , recNULL , recNULL , recNULL, recNULL, recNULL , recNULL , recNULL, // 20
-	recSQR  , recDCPL , recDPCT , recNULL, recNULL, recAVSZ3, recAVSZ4, recNULL, // 28 
+	recSQR  , recDCPL , recDPCT , recNULL, recNULL, recAVSZ3, recAVSZ4, recNULL, // 28
 	recRTPT , recNULL , recNULL , recNULL, recNULL, recNULL , recNULL , recNULL, // 30
 	recNULL , recNULL , recNULL , recNULL, recNULL, recGPF  , recGPL  , recNCCT  // 38
 };
@@ -2963,8 +2994,6 @@ static void (*recCP2BSC[32])() = {
 static void recRecompile() {
 	char *p;
 	char *ptr;
-
-	dump = 0;
 	resp = 0;
 
 	/* if x86Ptr reached the mem limit reset whole mem */
@@ -3026,13 +3055,20 @@ static void recRecompile() {
 				pc = pc + i*4; continue;
 			}
 		}*/
-
+#ifdef PSXCPU_LOG
+		if (Config.PsxOut) { dump = TRUE; }
+		iDump(iRegs);
+#endif
 		pc+=4; count++;
 		recBSC[psxRegs.code>>26]();
-
+#ifdef PSXCPU_LOG
+		dump = FALSE;
+#endif
 		if (branch) {
 			branch = 0;
+#ifdef PSXCPU_LOG
 			if (dump) iDumpBlock(ptr);
+#endif
 			return;
 		}
 	}

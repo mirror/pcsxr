@@ -290,6 +290,7 @@ static inline u32 *Read_ICache(u32 pc, boolean isolate) {
 
 #define _fImm_(code)	((s16)code)            // sign-extended immediate
 #define _fImmU_(code)	(code&0xffff)          // zero-extended immediate
+#define _fImmLU_(code)	(code<<16)             // LUI
 
 #define _Op_     _fOp_(psxRegs.code)
 #define _Funct_  _fFunct_(psxRegs.code)
@@ -302,6 +303,7 @@ static inline u32 *Read_ICache(u32 pc, boolean isolate) {
 
 #define _Imm_	 _fImm_(psxRegs.code)
 #define _ImmU_	 _fImmU_(psxRegs.code)
+#define _ImmLU_	 _fImmLU_(psxRegs.code)
 
 #define _rRs_   psxRegs.GPR.r[_Rs_]   // Rs register
 #define _rRt_   psxRegs.GPR.r[_Rt_]   // Rt register

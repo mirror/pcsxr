@@ -469,12 +469,12 @@ int SysInit() {
 	emuLog = stdout;
 #endif
 #ifdef PSXCPU_LOG
-    if (Config.Cpu == CPU_INTERPRETER) {
-		const int BUFSZ = 1 * 512*512*512;
+	if (Config.PsxOut) { //PSXCPU_LOG generates so much stuff that buffer is necessary
+		const int BUFSZ = 20 * 1024*1024;
 		void* buf = malloc(BUFSZ);
 		setvbuf(emuLog, buf, _IOFBF, BUFSZ);
 	} else {
-		setvbuf(emuLog, NULL, _IONBF, NULL);
+		setvbuf(emuLog, NULL, _IONBF, 0u);
 	}
 #else
 	setvbuf(emuLog, NULL, _IONBF, NULL);
