@@ -23,6 +23,7 @@
 + (void)stop;
 + (BOOL)pause;
 + (BOOL)pauseSafe;
++ (void)pauseSafeWithBlock:(void (^)(BOOL))theBlock;
 + (void)resume;
 + (void)resetNow;
 + (void)reset;
