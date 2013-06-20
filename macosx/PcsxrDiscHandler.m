@@ -10,6 +10,7 @@
 #import "EmuThread.h"
 #include "psxcommon.h"
 #include "plugins.h"
+#include "cdrom.h"
 #import "RecentItemsMenu.h"
 #import "PcsxrController.h"
 
@@ -29,8 +30,9 @@
 	PcsxrController *appDelegate = [NSApp delegate];
 	if ([EmuThread active] == YES) {
 		if (UsingIso()) {
-			SetCdOpenCaseTime(time(NULL) + 2);
 			SetIsoFile([theFile fileSystemRepresentation]);
+			SetCdOpenCaseTime(time(NULL) + 2);
+			LidInterrupt();
 			//[EmuThread reset];
 		} else {
 			return NO;

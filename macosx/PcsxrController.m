@@ -10,6 +10,7 @@
 #include "psxcommon.h"
 #include "plugins.h"
 #include "misc.h"
+#include "cdrom.h"
 #include "ExtendedKeys.h"
 #import "ARCBridge.h"
 
@@ -44,8 +45,9 @@ NSString *saveStatePath;
 
 		if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 			NSArray* files = [openDlg URLs];
-			SetCdOpenCaseTime(time(NULL) + 2);
 			SetIsoFile((const char *)[[[files objectAtIndex:0] path] fileSystemRepresentation]);
+			SetCdOpenCaseTime(time(NULL) + 2);
+			LidInterrupt();
 		}
 		RELEASEOBJ(openDlg);
 	} else {
@@ -160,8 +162,9 @@ NSString *saveStatePath;
 {
     if ([EmuThread active] == YES) {
 		if (UsingIso()) {
-			SetCdOpenCaseTime(time(NULL) + 2);
 			SetIsoFile([[url path] fileSystemRepresentation]);
+			SetCdOpenCaseTime(time(NULL) + 2);
+			LidInterrupt();
 		} else {
 			NSBeep();
 		}
@@ -485,8 +488,6 @@ NSString *saveStatePath;
 		str = [[url path] fileSystemRepresentation];
 		if (str != nil) {
 			strlcpy(Config.PatchesDir, str, MAXPATHLEN);
-			//workaround for the fact that the PCSXR core doesn't append a forward slash to the patches dir
-			strlcat(Config.PatchesDir, "/", MAXPATHLEN);
 		}
 	} else {
 		strcpy(Config.BiosDir, "Bios/");
