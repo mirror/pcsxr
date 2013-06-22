@@ -30,13 +30,13 @@ static pthread_mutex_t eventMutex;
 #define EMUEVENT_RESET		(1<<1)
 #define EMUEVENT_STOP		(1<<2)
 
-static NSString * const ThreadInfo = @"PSX Emu Background thread";
-
 @implementation EmuThread
 
-- (void)EmuThreadRun:(id)anObject
+- (void)setUpThread
 {
-	[[NSThread currentThread] setName:ThreadInfo];
+	NSAssert(![[NSThread currentThread] isEqual:[NSThread mainThread]], @"This function should not be run on the main thread!");
+	
+	[[NSThread currentThread] setName:@"PSX Emu Background thread"];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(emuWindowDidClose:)
@@ -52,6 +52,11 @@ static NSString * const ThreadInfo = @"PSX Emu Background thread";
 	
 	// we shouldn't change the priority, since we might depend on subthreads
 	//[NSThread setThreadPriority:1.0-((1.0-[NSThread threadPriority])/4.0)];
+}
+
+- (void)EmuThreadRun:(id)anObject
+{
+	[self setUpThread];
 	
 	// Do processing here
 	if (OpenPlugins() == -1)
@@ -87,23 +92,8 @@ done:
 
 - (void)EmuThreadRunBios:(id)anObject
 {
-	[[NSThread currentThread] setName:ThreadInfo];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(emuWindowDidClose:)
-												 name:@"emuWindowDidClose" object:nil];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(emuWindowWantPause:)
-												 name:@"emuWindowWantPause" object:nil];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(emuWindowWantResume:)
-												 name:@"emuWindowWantResume" object:nil];
-	
-	// we shouldn't change the priority, since we might depend on subthreads
-	//[NSThread setThreadPriority:1.0-((1.0-[NSThread threadPriority])/4.0)];
-	
+	[self setUpThread];
+		
 	// Do processing here
 	if (OpenPlugins() == -1)
 		goto done;
@@ -122,7 +112,7 @@ done:
 - (void)dealloc
 {
 	// remove all registered observers
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:nil object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 
 	SUPERDEALLOC;
 }

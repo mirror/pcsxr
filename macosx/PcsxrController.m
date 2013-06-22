@@ -43,11 +43,14 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 @property (readwrite) BOOL endAtEmuClose;
 @property (readwrite) BOOL sleepInBackground;
 @property (readwrite) BOOL wasPausedBeforeBGSwitch;
+@property (retain) NSMutableArray *skipFiles;
 @end
 
 @implementation PcsxrController
 
 @synthesize recentItems;
+@synthesize skipFiles;
+
 - (BOOL)endAtEmuClose
 {
 	return PSXflags.endAtEmuClose;
@@ -338,8 +341,14 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
-	RELEASEOBJ(skipFiles);
-	skipFiles = nil;
+	self.skipFiles = nil;
+	BOOL enableLogging = NO;
+#ifdef DEBUG
+	enableLogging = YES;
+	//Just in case it didn't get set.
+	Config.PsxOut = TRUE;
+#endif
+	[[NSUserDefaults standardUserDefaults] setBool:enableLogging forKey:@"ConsoleOutput"];
 }
 
 static void ParseErrorStr(NSString *errStr) __dead2;
@@ -390,15 +399,17 @@ otherblock();\
 	}
 
 	self.sleepInBackground = [[NSUserDefaults standardUserDefaults] boolForKey:@"PauseInBackground"];
-	NSProcessInfo *procInfo = [NSProcessInfo processInfo];
-	NSArray *progArgs = [procInfo arguments];
+	
+	NSArray *progArgs = [[NSProcessInfo processInfo] arguments];
 	if ([progArgs count] > 1 && ![[progArgs objectAtIndex:1] hasPrefix:@"-psn"]) {
-		skipFiles = [[NSMutableArray alloc] init];
+		self.skipFiles = [NSMutableArray array];
+		
 		BOOL isLaunchable = NO;
 		NSString *runtimeStr = nil;
+		
+		__block short memcardHandled = 0;
 		__block dispatch_block_t runtimeBlock = NULL;
 		__block BOOL hasParsedAnArgument = NO;
-
 		__block NSString *(^FileTestBlock)() = NULL;
 		
 		NSMutableArray *unknownOptions = [NSMutableArray array];
@@ -432,6 +443,11 @@ otherblock();\
 		
 		void (^mcdBlock)(int mcdNumber) = ^(int mcdnumber){
 			hasParsedAnArgument = YES;
+			if (memcardHandled & (1 << mcdnumber)) {
+				NSLog(@"Memory card %i has already been defined. The latest one passed will be used.", mcdnumber);
+			} else {
+				memcardHandled |= (1 << mcdnumber);
+			}
 			NSString *path = FileTestBlock();
 			LoadMcd(mcdnumber, (char*)[path fileSystemRepresentation]);
 		};
@@ -584,7 +600,12 @@ otherblock();\
 
 	char *str = (char *)[[prefStringKeys objectForKey:defaultKey] pointerValue];
 	if (str) {
-		[defaults setObject:[NSString stringWithCString:str encoding:NSUTF8StringEncoding] forKey:defaultKey];
+		NSString *tmpNSStr = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:str length:strlen(str)];
+		if (!tmpNSStr) {
+			tmpNSStr = [NSString stringWithCString:str encoding:NSUTF8StringEncoding];
+		}
+		
+		[defaults setObject:tmpNSStr forKey:defaultKey];
 		return;
 	}
 
@@ -749,7 +770,7 @@ otherblock();\
 	NSError *err = nil;
 	NSString *utiFile = [[NSWorkspace sharedWorkspace] typeOfFile:filename error:&err];
 	if (err) {
-		NSRunAlertPanel(NSLocalizedString(@"Error opening file", nil), [NSString stringWithFormat:NSLocalizedString(@"Unable to open %@: %@", nil), [filename lastPathComponent], [err localizedFailureReason]], nil, nil, nil);
+		NSRunAlertPanel(NSLocalizedString(@"Error opening file", nil), NSLocalizedString(@"Unable to open %@: %@", nil), nil, nil, nil, [filename lastPathComponent], err);
 		return NO;
 	}
 	static NSArray *handlers = nil;
