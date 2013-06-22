@@ -10,14 +10,14 @@
 
 
 @interface PcsxrPlugin : NSObject {
-    void *pluginRef;
-    
-    NSString *path;
+	void *pluginRef;
+	
+	NSString *path;
 	NSDate *modDate;
-    NSString *name;
+	NSString *name;
 	NSString *fullPlugPath;
-    long version;
-    int type;
+	long version;
+	int type;
 	int active;
 }
 

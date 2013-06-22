@@ -5,13 +5,13 @@
 
 @interface PluginController : NSObject
 {
-    IBOutlet NSButton *aboutButton;
-    IBOutlet NSButton *configureButton;
-    IBOutlet NSPopUpButton *pluginMenu;
-	 
-	 int pluginType;
-	 NSArray *plugins;
-	 NSString *defaultKey;
+	IBOutlet NSButton *aboutButton;
+	IBOutlet NSButton *configureButton;
+	IBOutlet NSPopUpButton *pluginMenu;
+	
+	int pluginType;
+	NSArray *plugins;
+	NSString *defaultKey;
 }
 - (IBAction)doAbout:(id)sender;
 - (IBAction)doConfigure:(id)sender;

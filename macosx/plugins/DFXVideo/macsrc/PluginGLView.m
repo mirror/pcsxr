@@ -194,7 +194,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	// Call for a redisplay
 	noDisplay = YES;
 	PSXDisplay.Disabled = 1;
-	[self setNeedsDisplay:true];
+	[self setNeedsDisplay:YES];
 	
 	return self;
 }

@@ -27,11 +27,11 @@
 
 - (id)initWithMcdBlock:(McdBlock *)infoBlock;
 
-@property(readonly) NSString *englishName;
-@property(readonly) NSString *sjisName;
-@property(readonly) NSString *memName;
-@property(readonly) NSString *memID;
-@property(readonly) NSImage *memImage;
+@property(readonly, retain) NSString *englishName;
+@property(readonly, retain) NSString *sjisName;
+@property(readonly, retain) NSString *memName;
+@property(readonly, retain) NSString *memID;
+@property(readonly, retain) NSImage *memImage;
 @property(readonly) int memIconCount;
 @property(readonly, getter = isNotDeleted) BOOL notDeleted;
 @property(readonly) unsigned char memFlags;

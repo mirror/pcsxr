@@ -11,12 +11,12 @@ extern NSString *memChangeNotifier;
 
 @interface ConfigurationController : NSWindowController
 {
-    IBOutlet PluginController *cdromPlugin;
-    IBOutlet PluginController *graphicsPlugin;
-    IBOutlet PluginController *padPlugin;
-    IBOutlet PluginController *soundPlugin;
+	IBOutlet PluginController *cdromPlugin;
+	IBOutlet PluginController *graphicsPlugin;
+	IBOutlet PluginController *padPlugin;
+	IBOutlet PluginController *soundPlugin;
 	IBOutlet PluginController *netPlugin;
-
+	
 	IBOutlet id noXaAudioCell;
 	IBOutlet id sioIrqAlwaysCell;
 	IBOutlet id bwMdecCell;
@@ -32,14 +32,14 @@ extern NSString *memChangeNotifier;
 	IBOutlet id noFastBootCell;
 	IBOutlet id enableNetPlayCell;
 	IBOutlet id widescreen;
-    
-    // Hotkeys
-    IBOutlet HotkeyController *hkController;
-    IBOutlet NSTabViewItem *hkTab;
-
+	
+	// Hotkeys
+	IBOutlet HotkeyController *hkController;
+	IBOutlet NSTabViewItem *hkTab;
+	
 	IBOutlet NSTextField *mcd1Label;
 	IBOutlet NSTextField *mcd2Label;
-
+	
 	PcsxrMemCardController *memCardEdit;
 	
 	NSMutableDictionary *checkBoxDefaults;

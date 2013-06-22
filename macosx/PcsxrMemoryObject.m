@@ -12,6 +12,18 @@
 #import <AppKit/NSImage.h>
 #import "ARCBridge.h"
 
+@interface PcsxrMemoryObject ()
+//Mangle the setters' names so that if someone tries to use them, they won't work
+@property(readwrite, retain, setter = setEngName:) NSString *englishName;
+@property(readwrite, retain, setter = setJapaneseName:) NSString *sjisName;
+@property(readwrite, retain, setter = setTheMemName:) NSString *memName;
+@property(readwrite, retain, setter = setTheMemId:) NSString *memID;
+@property(readwrite, retain, setter = setTheMemImage:) NSImage *memImage;
+@property(readwrite, setter = setIconCount:) int memIconCount;
+@property(readwrite, getter = isNotDeleted, setter = setIsNotDeleted:) BOOL notDeleted;
+@property(readwrite, setter = setTheMemFlags:) unsigned char memFlags;
+@end
+
 @implementation PcsxrMemoryObject
 
 + (NSImage *)imageFromMcd:(short *)icon
@@ -54,24 +66,23 @@
 - (id)initWithMcdBlock:(McdBlock *)infoBlock
 {
 	if (self = [super init]) {
-		englishName = [[NSString alloc] initWithCString:infoBlock->Title encoding:NSASCIIStringEncoding];
-		sjisName = [[NSString alloc] initWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
-		memImage = RETAINOBJ([PcsxrMemoryObject imageFromMcd:infoBlock->Icon]);
-		memName = [[NSString alloc] initWithCString:infoBlock->Name encoding:NSASCIIStringEncoding];
-		memID = [[NSString alloc] initWithCString:infoBlock->ID encoding:NSASCIIStringEncoding];
-		memIconCount = infoBlock->IconCount;
-		memFlags = infoBlock->Flags;
+		self.englishName = [NSString stringWithCString:infoBlock->Title encoding:NSASCIIStringEncoding];
+		self.sjisName = [NSString stringWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
+		self.memImage = [PcsxrMemoryObject imageFromMcd:infoBlock->Icon];
+		self.memName = [NSString stringWithCString:infoBlock->Name encoding:NSASCIIStringEncoding];
+		self.memID = [NSString stringWithCString:infoBlock->ID encoding:NSASCIIStringEncoding];
+		self.memIconCount = infoBlock->IconCount;
+		self.memFlags = infoBlock->Flags;
 		if ((infoBlock->Flags & 0xF0) == 0xA0) {
 			if ((infoBlock->Flags & 0xF) >= 1 &&
 				(infoBlock->Flags & 0xF) <= 3) {
-				notDeleted = NO;
+				self.notDeleted = NO;
 			} else
-				notDeleted = NO;
+				self.notDeleted = NO;
 		} else if ((infoBlock->Flags & 0xF0) == 0x50)
-			notDeleted = YES;
+			self.notDeleted = YES;
 		else
-			notDeleted = NO;
-
+			self.notDeleted = NO;
 	}
 	return self;
 }
@@ -88,11 +99,11 @@
 #if !__has_feature(objc_arc)
 - (void)dealloc
 {
-	[englishName release];
-	[sjisName release];
-	[memName release];
-	[memID release];
-	[memImage release];
+	self.englishName = nil;
+	self.sjisName = nil;
+	self.memName = nil;
+	self.memID = nil;
+	self.memImage = nil;
 	
 	[super dealloc];
 }
