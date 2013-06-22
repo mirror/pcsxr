@@ -14,6 +14,7 @@
 #define SUPERDEALLOC 
 #define RELEASEOBJ(obj) 
 #define RETAINOBJ(obj) obj
+#define RETAINOBJNORETURN(obj)
 #define AUTORELEASEOBJ(obj) obj
 #define AUTORELEASEOBJNORETURN(obj)
 #define BRIDGE(toType, obj) (__bridge toType)(obj)
@@ -24,6 +25,7 @@
 #define SUPERDEALLOC [super dealloc]
 #define RELEASEOBJ(obj) [obj release]
 #define RETAINOBJ(obj) [obj retain]
+#define RETAINOBJNORETURN(obj) [obj retain]
 #define AUTORELEASEOBJ(obj) [obj autorelease]
 #define AUTORELEASEOBJNORETURN(obj) [obj autorelease]
 #define BRIDGE(toType, obj) (toType)obj

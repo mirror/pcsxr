@@ -18,20 +18,19 @@ NSDictionary *prefStringKeys;
 NSDictionary *prefByteKeys;
 NSMutableArray *biosList;
 NSString *saveStatePath;
-static NSArray *PCSXRParsingArray = nil;
 
 #define HELPSTR "\n" \
 "At least one of these must be passed:\n"\
-"\t--iso path    launch with selected ISO\n" \
-"\t--cdrom       launch with a CD-ROM\n" \
-"\t--bios        launch into the BIOS\n\n" \
+"\t--iso path    \tlaunch with selected ISO\n" \
+"\t--cdrom       \tlaunch with a CD-ROM\n" \
+"\t--bios        \tlaunch into the BIOS\n\n" \
 "Additional options:\n" \
-"\t--exitAtClose closes PCSX-R at when the emulation has ended\n" \
-"\t--mcd1 path   sets the fist memory card to path\n" \
-"\t--mcd2 path   sets the second memory card to path\n" \
-"\t--freeze path loads freeze state from path\n\n" \
+"\t--exitAtClose \tcloses PCSX-R at when the emulation has ended\n" \
+"\t--mcd1 path   \tsets the fist memory card to path\n" \
+"\t--mcd2 path   \tsets the second memory card to path\n" \
+"\t--freeze path \tloads freeze state from path\n\n" \
 "Help:\n" \
-"\t--help        shows this message\n\n" \
+"\t--help        \tshows this message\n\n" \
 
 
 void ShowHelpAndExit(FILE* output, int exitCode)
@@ -42,12 +41,42 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 
 @interface PcsxrController ()
 @property (readwrite) BOOL endAtEmuClose;
+@property (readwrite) BOOL sleepInBackground;
+@property (readwrite) BOOL wasPausedBeforeBGSwitch;
 @end
 
 @implementation PcsxrController
 
 @synthesize recentItems;
-@synthesize endAtEmuClose;
+- (BOOL)endAtEmuClose
+{
+	return PSXflags.endAtEmuClose;
+}
+
+- (void)setEndAtEmuClose:(BOOL)endAtEmuClose
+{
+	PSXflags.endAtEmuClose = endAtEmuClose;
+}
+
+- (BOOL)sleepInBackground
+{
+	return PSXflags.sleepInBackground;
+}
+
+- (void)setSleepInBackground:(BOOL)sleepInBackground
+{
+	PSXflags.sleepInBackground = sleepInBackground;
+}
+
+- (BOOL)wasPausedBeforeBGSwitch
+{
+	return PSXflags.wasPausedBeforeBGSwitch;
+}
+
+- (void)setWasPausedBeforeBGSwitch:(BOOL)wasPausedBeforeBGSwitch
+{
+	PSXflags.wasPausedBeforeBGSwitch = wasPausedBeforeBGSwitch;
+}
 
 - (IBAction)ejectCD:(id)sender
 {
@@ -200,7 +229,7 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 		} else {
 			[pluginList disableNetPlug];
 		}
-		SetIsoFile((const char *)[[url path] fileSystemRepresentation]);
+		SetIsoFile([[url path] fileSystemRepresentation]);
 		[EmuThread run];
 	}
 }
@@ -234,8 +263,8 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 
 - (IBAction)pauseInBackground:(id)sender
 {
-	sleepInBackground = !sleepInBackground;
-	[[NSUserDefaults standardUserDefaults] setBool:sleepInBackground forKey:@"PauseInBackground"];
+	self.sleepInBackground = !self.sleepInBackground;
+	[[NSUserDefaults standardUserDefaults] setBool:self.sleepInBackground forKey:@"PauseInBackground"];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
@@ -284,7 +313,7 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 		return ![EmuThread active];
 
 	if ([menuItem action] == @selector(pauseInBackground:)) {
-		[menuItem setState:(sleepInBackground ? NSOnState : NSOffState)];
+		[menuItem setState:(self.sleepInBackground ? NSOnState : NSOffState)];
 		return YES;
 	}
 
@@ -293,18 +322,24 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 
 - (void)applicationWillResignActive:(NSNotification *)aNotification
 {
-	wasPausedBeforeBGSwitch = [EmuThread isPaused];
+	self.wasPausedBeforeBGSwitch = [EmuThread isPaused];
 
-	if (sleepInBackground) {
+	if (self.sleepInBackground) {
 		 [EmuThread pause];
 	}
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)aNotification
 {
-	if (sleepInBackground && !wasPausedBeforeBGSwitch) {
+	if (self.sleepInBackground && !self.wasPausedBeforeBGSwitch) {
 		[EmuThread resume];
 	}
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)notification
+{
+	RELEASEOBJ(skipFiles);
+	skipFiles = nil;
 }
 
 static void ParseErrorStr(NSString *errStr) __dead2;
@@ -336,7 +371,6 @@ runtimeStr = arg; \
 otherblock();\
 }
 
-
 - (void)awakeFromNib
 {
 	pluginList = [[PluginList alloc] init];
@@ -355,16 +389,19 @@ otherblock();\
 				nil, nil, nil);
 	}
 
-	sleepInBackground = [[NSUserDefaults standardUserDefaults] boolForKey:@"PauseInBackground"];
+	self.sleepInBackground = [[NSUserDefaults standardUserDefaults] boolForKey:@"PauseInBackground"];
 	NSProcessInfo *procInfo = [NSProcessInfo processInfo];
 	NSArray *progArgs = [procInfo arguments];
 	if ([progArgs count] > 1 && ![[progArgs objectAtIndex:1] hasPrefix:@"-psn"]) {
+		skipFiles = [[NSMutableArray alloc] init];
 		BOOL isLaunchable = NO;
 		NSString *runtimeStr = nil;
 		__block dispatch_block_t runtimeBlock = NULL;
 		__block BOOL hasParsedAnArgument = NO;
 
 		__block NSString *(^FileTestBlock)() = NULL;
+		
+		NSMutableArray *unknownOptions = [NSMutableArray array];
 		
 		dispatch_block_t cdromBlock = ^{
 			hasParsedAnArgument = YES;
@@ -405,23 +442,27 @@ otherblock();\
 			[EmuThread defrostAt:path];
 		};
 
+		BOOL hasFileTestBlock = NO;
 
 		for (__block int i = 1; i < [progArgs count]; i++) {
-			
-			FileTestBlock = ^NSString *(){
-				if ([progArgs count] <= ++i) {
-					ParseErrorStr(@"Not enough arguments.");
-				}
-				NSString *path = [progArgs objectAtIndex:i];
-				if (![[NSFileManager defaultManager] fileExistsAtPath:path])
-				{
-					NSString *errStr = [NSString stringWithFormat:@"The file \"%@\" does not exist.", path];
-					ParseErrorStr(errStr);
-					return nil;
-				}
-				return path;
-
-			};
+			if (!hasFileTestBlock)
+			{
+				FileTestBlock = ^NSString *(){
+					if ([progArgs count] <= ++i) {
+						ParseErrorStr(@"Not enough arguments.");
+					}
+					NSString *path = [progArgs objectAtIndex:i];
+					if (![[NSFileManager defaultManager] fileExistsAtPath:path])
+					{
+						NSString *errStr = [NSString stringWithFormat:@"The file \"%@\" does not exist.", path];
+						ParseErrorStr(errStr);
+						return nil;
+					}
+					[skipFiles addObject:path];
+					return path;
+				};
+				hasFileTestBlock = YES;
+			}
 			
 			//DO NOT END these MACROS WITH A SIMICOLON! it will break the if-else if process
 			HandleArg(@"--iso", YES, isoBlock)
@@ -432,14 +473,23 @@ otherblock();\
 			HandleArgElse(@"--mcd2", NO, ^{mcdBlock(2);})
 			HandleArgElse(@"--freeze", NO, freezeBlock)
 			else {
-				static BOOL hasBeenWarned = NO;
-				NSLog(@"PCSXR does not recognize the command line argument \"%@\".", [progArgs objectAtIndex:i]);
-				if (hasBeenWarned == NO) {
-					NSLog(@"The OS or something else might have passed it, but check the spelling of the arguments just in case.");
-					hasBeenWarned = YES;
-				}
+				[unknownOptions addObject:[progArgs objectAtIndex:i]];
 			}
 		}
+#ifdef DEBUG
+		if ([unknownOptions count]) {
+			NSString *unknownString = @"The following options weren't recognized by PCSX-R:";
+			@autoreleasepool {
+				for (NSString *arg in unknownOptions) {
+					unknownString = [NSString stringWithFormat:@"%@ %@", unknownString, arg];
+				}
+				RETAINOBJNORETURN(unknownString);
+			}
+			NSLog(@"%@", unknownString);
+			RELEASEOBJ(unknownString);
+			NSLog(@"This may be due to extra arguments passed by the OS or debugger.");
+		}
+#endif
 		if (!isLaunchable && hasParsedAnArgument) {
 			NSString *tmpStr = @"A launch command wasn't found in the command line and an argument that PCSX-R recognizes was.\n";
 			@autoreleasepool {
@@ -447,11 +497,9 @@ otherblock();\
 					tmpStr = [NSString stringWithFormat:@"%@ %@", tmpStr, arg];
 				}
 				tmpStr = [NSString stringWithFormat:@"%@\n\nThe valid launch commands are --iso, --cdrom, and --bios", tmpStr];
-#if !__has_feature(objc_arc)
-				[tmpStr retain];
-#endif
+				RETAINOBJNORETURN(tmpStr);
 			}
-			ParseErrorStr([tmpStr autorelease]);
+			ParseErrorStr(AUTORELEASEOBJ(tmpStr));
 		} else if (hasParsedAnArgument){
 			runtimeBlock();
 			RELEASEOBJ(runtimeBlock);
@@ -483,11 +531,11 @@ otherblock();\
 
 	for (NSString *key in prefByteKeys) {
 		u8 *dst = (u8 *)[[prefByteKeys objectForKey:key] pointerValue];
-		if (dst != nil) *dst = [defaults integerForKey:key];
+		if (dst != NULL) *dst = [defaults boolForKey:key];
 #ifdef __i386__
 		//i386 on OS X doesn't like the dynarec core
 		if ([key isEqualToString:@"NoDynarec"]) {
-			*dst = 1;
+			if (dst != NULL) *dst = 1;
 			[defaults setBool:YES forKey:key];
 		}
 #endif
@@ -559,12 +607,12 @@ otherblock();\
 	const char *str;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
-								 [NSNumber numberWithBool:YES], @"NoDynarec",
-								 [NSNumber numberWithBool:YES], @"AutoDetectVideoType",
-								 [NSNumber numberWithBool:NO], @"UseHLE",
-								 [NSNumber numberWithBool:YES], @"PauseInBackground",
-								 [NSNumber numberWithBool:NO], @"Widescreen",
-								 [NSNumber numberWithBool:NO], @"NetPlay",
+								 @YES, @"NoDynarec",
+								 @YES, @"AutoDetectVideoType",
+								 @NO, @"UseHLE",
+								 @YES, @"PauseInBackground",
+								 @NO, @"Widescreen",
+								 @NO, @"NetPlay",
 								 nil];
 	
 	[defaults registerDefaults:appDefaults];
@@ -690,6 +738,14 @@ otherblock();\
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
+	if (skipFiles && [skipFiles count]) {
+		for (NSString *parsedFile in skipFiles) {
+			if ([filename isEqualToString:parsedFile]) {
+				return YES;
+			}
+		}
+	}
+	
 	NSError *err = nil;
 	NSString *utiFile = [[NSWorkspace sharedWorkspace] typeOfFile:filename error:&err];
 	if (err) {
@@ -716,8 +772,8 @@ otherblock();\
 			break;
 		}
 		RELEASEOBJ(hand);
-
 	}
+	
 	return isHandled;
 }
 

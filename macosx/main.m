@@ -21,15 +21,6 @@ static BOOL sysInited = NO;
 //#define EMU_LOG
 static IOPMAssertionID powerAssertion = kIOPMNullAssertionID;
 
-#define HELPSTR \
-"%s\n\n" \
-"\t--help        shows this message\n" \
-"\t--iso path    launch with selected ISO\n" \
-"\t--cdrom       launch with a CD-ROM\n" \
-"\t--exitAtClose closes PCSX-R at when the emulation has ended\n" \
-"\t--mcd1 path   sets the fist memory card to path\n" \
-"\t--mcd2 path   sets the second memory card to path\n"
-
 int main(int argc, const char *argv[]) {
     if ( argc >= 2 && strncmp (argv[1], "-psn", 4) == 0 ) {
         char parentdir[MAXPATHLEN];
@@ -125,14 +116,16 @@ void SysPrintf(const char *fmt, ...) {
 void SysMessage(const char *fmt, ...) {
 	va_list list;
 
-	NSString *locFmtString = NSLocalizedString([NSString stringWithCString:fmt encoding:NSUTF8StringEncoding], nil);
+	NSString *locFmtString = NSLocalizedString(@(fmt), nil);
 
 	va_start(list, fmt);
     NSString *msg = [[NSString alloc] initWithFormat:locFmtString arguments:list];
 	va_end(list);
     
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedFailureReasonErrorKey];
-    [NSApp presentError:[NSError errorWithDomain:@"Unknown Domain" code:-1 userInfo:userInfo]];
+	dispatch_sync(dispatch_get_main_queue(), ^{
+		[NSApp presentError:[NSError errorWithDomain:@"Unknown Domain" code:-1 userInfo:userInfo]];
+	});
     
 	RELEASEOBJ(msg);
 }
@@ -199,7 +192,7 @@ void OnFile_Exit() {
 char* Pcsxr_locale_text(char* toloc){
 	NSBundle *mainBundle = [NSBundle mainBundle];
 	NSString *origString = nil, *transString = nil;
-	origString = [NSString stringWithCString:toloc encoding:NSUTF8StringEncoding];
+	origString = @(toloc);
 	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
 	return (char*)[transString UTF8String];
 }
