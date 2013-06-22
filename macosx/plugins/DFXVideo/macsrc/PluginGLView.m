@@ -770,77 +770,72 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 
 - (GLuint)loadShader:(GLenum)type location:(NSURL*)filename
 {
-	__block	GLuint myShader = 0;
-
-	dispatch_sync(dispatch_get_main_queue(), ^{
-		GLsizei logsize = 0;
-		GLint compile_status = GL_TRUE;
-		char *log = NULL;
-		char *src = NULL;
+	GLuint myShader = 0;
+	
+	GLsizei logsize = 0;
+	GLint compile_status = GL_TRUE;
+	char *log = NULL;
+	char *src = NULL;
+	
+	/* creation d'un shader de sommet */
+	myShader = glCreateShader(type);
+	if(myShader == 0)
+	{
+		fprintf(stderr, "impossible de creer le shader\n");
+		return 0;
+	}
+	
+	/* chargement du code source */
+	src = [self loadSource:filename];
+	if(src == NULL)
+	{
+		/* theoriquement, la fonction LoadSource a deja affiche un message
+		 d'erreur, nous nous contenterons de supprimer notre shader
+		 et de retourner 0 */
 		
-		/* creation d'un shader de sommet */
-		myShader = glCreateShader(type);
-		if(myShader == 0)
+		glDeleteShader(myShader);
+		return 0;
+	}
+	
+	/* assignation du code source */
+	glShaderSource(myShader, 1, (const GLchar**)&src, NULL);
+	
+	/* compilation du shader */
+	glCompileShader(myShader);
+	
+	/* liberation de la memoire du code source */
+	free(src);
+	src = NULL;
+	
+	/* verification du succes de la compilation */
+	glGetShaderiv(myShader, GL_COMPILE_STATUS, &compile_status);
+	if(compile_status != GL_TRUE)
+	{
+		/* erreur a la compilation recuperation du log d'erreur */
+		
+		/* on recupere la taille du message d'erreur */
+		glGetShaderiv(myShader, GL_INFO_LOG_LENGTH, &logsize);
+		
+		/* on alloue un espace memoire dans lequel OpenGL ecrira le message */
+		log = malloc(logsize + 1);
+		if(log == NULL)
 		{
-			fprintf(stderr, "impossible de creer le shader\n");
-			return;
+			fprintf(stderr, "impossible d'allouer de la memoire !\n");
+			return 0;
 		}
+		/* initialisation du contenu */
+		memset(log, '\0', logsize + 1);
 		
-		/* chargement du code source */
-		src = [self loadSource:filename];
-		if(src == NULL)
-		{
-			/* theoriquement, la fonction LoadSource a deja affiche un message
-			 d'erreur, nous nous contenterons de supprimer notre shader
-			 et de retourner 0 */
-			
-			glDeleteShader(myShader);
-			myShader = 0;
-			return;
-		}
+		glGetShaderInfoLog(myShader, logsize, &logsize, log);
+		fprintf(stderr, "impossible de compiler le shader '%s' :\n%s",
+				[[filename path] UTF8String], log);
 		
-		/* assignation du code source */
-		glShaderSource(myShader, 1, (const GLchar**)&src, NULL);
+		/* ne pas oublier de liberer la memoire et notre shader */
+		free(log);
+		glDeleteShader(myShader);
 		
-		/* compilation du shader */
-		glCompileShader(myShader);
-		
-		/* liberation de la memoire du code source */
-		free(src);
-		src = NULL;
-		
-		/* verification du succes de la compilation */
-		glGetShaderiv(myShader, GL_COMPILE_STATUS, &compile_status);
-		if(compile_status != GL_TRUE)
-		{
-			/* erreur a la compilation recuperation du log d'erreur */
-			
-			/* on recupere la taille du message d'erreur */
-			glGetShaderiv(myShader, GL_INFO_LOG_LENGTH, &logsize);
-			
-			/* on alloue un espace memoire dans lequel OpenGL ecrira le message */
-			log = malloc(logsize + 1);
-			if(log == NULL)
-			{
-				fprintf(stderr, "impossible d'allouer de la memoire !\n");
-				myShader = 0;
-				return;
-			}
-			/* initialisation du contenu */
-			memset(log, '\0', logsize + 1);
-			
-			glGetShaderInfoLog(myShader, logsize, &logsize, log);
-			fprintf(stderr, "impossible de compiler le shader '%s' :\n%s",
-					[[filename path] UTF8String], log);
-			
-			/* ne pas oublier de liberer la memoire et notre shader */
-			free(log);
-			glDeleteShader(myShader);
-			
-			myShader = 0;
-			return;
-		}
-    });
+		return 0;
+	}
     return myShader;
 }
 
