@@ -767,6 +767,11 @@ otherblock();\
 		}
 	}
 	
+	if (![[NSFileManager defaultManager] fileExistsAtPath:filename]) {
+		NSLog(@"Nonexistant file %@ was passed to open.", filename);
+		return NO;
+	}
+	
 	NSError *err = nil;
 	NSString *utiFile = [[NSWorkspace sharedWorkspace] typeOfFile:filename error:&err];
 	if (err) {
