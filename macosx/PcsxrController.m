@@ -18,10 +18,36 @@ NSDictionary *prefStringKeys;
 NSDictionary *prefByteKeys;
 NSMutableArray *biosList;
 NSString *saveStatePath;
+static NSArray *PCSXRParsingArray = nil;
+
+#define HELPSTR "\n" \
+"At least one of these must be passed:\n"\
+"\t--iso path    launch with selected ISO\n" \
+"\t--cdrom       launch with a CD-ROM\n" \
+"\t--bios        launch into the BIOS\n\n" \
+"Additional options:\n" \
+"\t--exitAtClose closes PCSX-R at when the emulation has ended\n" \
+"\t--mcd1 path   sets the fist memory card to path\n" \
+"\t--mcd2 path   sets the second memory card to path\n" \
+"\t--freeze path loads freeze state from path\n\n" \
+"Help:\n" \
+"\t--help        shows this message\n\n" \
+
+
+void ShowHelpAndExit(FILE* output, int exitCode)
+{
+	fprintf(output, HELPSTR);
+	exit(exitCode);
+}
+
+@interface PcsxrController ()
+@property (readwrite) BOOL endAtEmuClose;
+@end
 
 @implementation PcsxrController
 
 @synthesize recentItems;
+@synthesize endAtEmuClose;
 
 - (IBAction)ejectCD:(id)sender
 {
@@ -281,6 +307,36 @@ NSString *saveStatePath;
 	}
 }
 
+static void ParseErrorStr(NSString *errStr) __dead2;
+static void ParseErrorStr(NSString *errStr)
+{
+	NSLog(@"%@", errStr);
+	NSRunCriticalAlertPanel(@"Parsing error", @"%@\n\nPlease check the command line options and try again", nil, nil, nil, errStr);
+	ShowHelpAndExit(stderr, EXIT_FAILURE);
+}
+
+//DO NOT END THIS MACRO WITH A SIMICOLON! it will break the if-else if process
+#define HandleArg(arg, launchable, otherblock) \
+if ([[progArgs objectAtIndex:i] compare:arg options:NSCaseInsensitiveSearch] == NSOrderedSame) { \
+HandleArgBase(arg, launchable, otherblock)
+
+#define HandleArgElse(arg, launchable, otherblock) \
+else if ([[progArgs objectAtIndex:i] compare:arg options:NSCaseInsensitiveSearch] == NSOrderedSame) { \
+HandleArgBase(arg, launchable, otherblock)
+
+#define HandleArgBase(arg, launchable, otherblock) \
+if (isLaunchable && launchable) { \
+NSString *messageStr = [NSString stringWithFormat:@"The options %@ and %@ are exclusive.", arg, runtimeStr];  \
+ParseErrorStr(messageStr); \
+} \
+if(launchable) { \
+isLaunchable = YES; \
+runtimeStr = arg; \
+} \
+otherblock();\
+}
+
+
 - (void)awakeFromNib
 {
 	pluginList = [[PluginList alloc] init];
@@ -300,6 +356,107 @@ NSString *saveStatePath;
 	}
 
 	sleepInBackground = [[NSUserDefaults standardUserDefaults] boolForKey:@"PauseInBackground"];
+	NSProcessInfo *procInfo = [NSProcessInfo processInfo];
+	NSArray *progArgs = [procInfo arguments];
+	if ([progArgs count] > 1 && ![[progArgs objectAtIndex:1] hasPrefix:@"-psn"]) {
+		BOOL isLaunchable = NO;
+		NSString *runtimeStr = nil;
+		__block dispatch_block_t runtimeBlock = NULL;
+		__block BOOL hasParsedAnArgument = NO;
+
+		__block NSString *(^FileTestBlock)() = NULL;
+		
+		dispatch_block_t cdromBlock = ^{
+			hasParsedAnArgument = YES;
+			runtimeBlock = [^{
+				[self runCD:nil];
+			} copy];
+		};
+		
+		dispatch_block_t biosBlock = ^{
+			hasParsedAnArgument = YES;
+			runtimeBlock = [^{
+				[self runBios:nil];
+			} copy];
+		};
+		
+		dispatch_block_t emuCloseAtEnd = ^{
+			hasParsedAnArgument = YES;
+			self.endAtEmuClose = YES;
+		};
+		
+		dispatch_block_t isoBlock = ^{
+			hasParsedAnArgument = YES;
+			NSString *path = FileTestBlock();
+			runtimeBlock = [^{
+				[self runURL:[NSURL fileURLWithPath:path]];
+			} copy];
+		};
+		
+		void (^mcdBlock)(int mcdNumber) = ^(int mcdnumber){
+			hasParsedAnArgument = YES;
+			NSString *path = FileTestBlock();
+			LoadMcd(mcdnumber, (char*)[path fileSystemRepresentation]);
+		};
+		
+		dispatch_block_t freezeBlock = ^{
+			hasParsedAnArgument = YES;
+			NSString *path = FileTestBlock();
+			[EmuThread defrostAt:path];
+		};
+
+
+		for (__block int i = 1; i < [progArgs count]; i++) {
+			
+			FileTestBlock = ^NSString *(){
+				if ([progArgs count] <= ++i) {
+					ParseErrorStr(@"Not enough arguments.");
+				}
+				NSString *path = [progArgs objectAtIndex:i];
+				if (![[NSFileManager defaultManager] fileExistsAtPath:path])
+				{
+					NSString *errStr = [NSString stringWithFormat:@"The file \"%@\" does not exist.", path];
+					ParseErrorStr(errStr);
+					return nil;
+				}
+				return path;
+
+			};
+			
+			//DO NOT END these MACROS WITH A SIMICOLON! it will break the if-else if process
+			HandleArg(@"--iso", YES, isoBlock)
+			HandleArgElse(@"--cdrom", YES, cdromBlock)
+			HandleArgElse(@"--bios", YES, biosBlock)
+			HandleArgElse(@"--exitAtClose", NO, emuCloseAtEnd)
+			HandleArgElse(@"--mcd1", NO, ^{mcdBlock(1);})
+			HandleArgElse(@"--mcd2", NO, ^{mcdBlock(2);})
+			HandleArgElse(@"--freeze", NO, freezeBlock)
+			else {
+				static BOOL hasBeenWarned = NO;
+				NSLog(@"PCSXR does not recognize the command line argument \"%@\".", [progArgs objectAtIndex:i]);
+				if (hasBeenWarned == NO) {
+					NSLog(@"The OS or something else might have passed it, but check the spelling of the arguments just in case.");
+					hasBeenWarned = YES;
+				}
+			}
+		}
+		if (!isLaunchable && hasParsedAnArgument) {
+			NSString *tmpStr = @"A launch command wasn't found in the command line and an argument that PCSX-R recognizes was.\n";
+			@autoreleasepool {
+				for (NSString *arg in progArgs) {
+					tmpStr = [NSString stringWithFormat:@"%@ %@", tmpStr, arg];
+				}
+				tmpStr = [NSString stringWithFormat:@"%@\n\nThe valid launch commands are --iso, --cdrom, and --bios", tmpStr];
+#if !__has_feature(objc_arc)
+				[tmpStr retain];
+#endif
+			}
+			ParseErrorStr([tmpStr autorelease]);
+		} else if (hasParsedAnArgument){
+			runtimeBlock();
+			RELEASEOBJ(runtimeBlock);
+		}
+	}
 }
 
 

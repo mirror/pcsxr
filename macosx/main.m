@@ -6,8 +6,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <Carbon/Carbon.h>
 #import "EmuThread.h"
+#import "PcsxrController.h"
 #include <dlfcn.h>
 //#import <sys/param.h>
 #import <unistd.h>
@@ -20,6 +20,15 @@
 static BOOL sysInited = NO;
 //#define EMU_LOG
 static IOPMAssertionID powerAssertion = kIOPMNullAssertionID;
+
+#define HELPSTR \
+"%s\n\n" \
+"\t--help        shows this message\n" \
+"\t--iso path    launch with selected ISO\n" \
+"\t--cdrom       launch with a CD-ROM\n" \
+"\t--exitAtClose closes PCSX-R at when the emulation has ended\n" \
+"\t--mcd1 path   sets the fist memory card to path\n" \
+"\t--mcd2 path   sets the second memory card to path\n"
 
 int main(int argc, const char *argv[]) {
     if ( argc >= 2 && strncmp (argv[1], "-psn", 4) == 0 ) {
@@ -39,7 +48,15 @@ int main(int argc, const char *argv[]) {
 
         assert ( chdir (parentdir) == 0 );   /* chdir to the binary app's parent */
         assert ( chdir ("../../../") == 0 ); /* chdir to the .app's parent */
-    }
+    } else {
+		for (int i = 1; i < argc; i++) {
+			//All the other option will be handled in the app delegate's awakeFromNib
+			if (!strcasecmp("--help", argv[i])) {
+				fprintf(stdout, "%s\n", argv[0]);
+				ShowHelpAndExit(stdout, EXIT_SUCCESS);
+			}
+		}
+	}
 
     strcpy(Config.BiosDir,    "Bios/");
     strcpy(Config.PatchesDir, "Patches/");
@@ -169,6 +186,9 @@ void SysClose() {
 
     sysInited = NO;
     detachHotkeys();
+	if (((PcsxrController *)[NSApp delegate]).endAtEmuClose) {
+		[NSApp stop:nil];
+	}
 }
 
 void OnFile_Exit() {
@@ -181,5 +201,5 @@ char* Pcsxr_locale_text(char* toloc){
 	NSString *origString = nil, *transString = nil;
 	origString = [NSString stringWithCString:toloc encoding:NSUTF8StringEncoding];
 	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
-	return (char*)[transString cStringUsingEncoding:NSUTF8StringEncoding];
+	return (char*)[transString UTF8String];
 }

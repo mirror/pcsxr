@@ -8,6 +8,8 @@
 @class ConfigurationController;
 @class CheatController;
 
+void ShowHelpAndExit(FILE* output, int exitCode) __dead2;
+
 @interface PcsxrController : NSObject <NSApplicationDelegate>
 {
     ConfigurationController *preferencesController;
@@ -20,8 +22,10 @@
     
     BOOL sleepInBackground;
     BOOL wasPausedBeforeBGSwitch;
+	BOOL endAtEmuClose;
 }
 @property (readonly) RecentItemsMenu *recentItems;
+@property (readonly) BOOL endAtEmuClose;
 
 - (IBAction)ejectCD:(id)sender;
 - (IBAction)pause:(id)sender;
