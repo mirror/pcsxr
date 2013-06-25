@@ -11,6 +11,9 @@
 
 @class NSImage;
 @class NSString;
+@class NSArray;
+
+extern NSString *const memoryAnimateTimerKey;
 
 @interface PcsxrMemoryObject : NSObject
 {
@@ -19,11 +22,13 @@
 	NSString *memName;
 	NSString *memID;
 	NSImage *memImage;
+	NSArray *memImages;
 	int memIconCount;
 	BOOL notDeleted;
 	unsigned char memFlags;
 }
-+ (NSImage *)imageFromMcd:(short *)icon;
++ (NSImage *)imageFromMcd:(McdBlock *)block index:(int)idx;
++ (NSArray *)imagesFromMcd:(McdBlock *)block;
 
 - (id)initWithMcdBlock:(McdBlock *)infoBlock;
 
@@ -31,7 +36,7 @@
 @property(readonly, retain) NSString *sjisName;
 @property(readonly, retain) NSString *memName;
 @property(readonly, retain) NSString *memID;
-@property(readonly, retain) NSImage *memImage;
+@property(readwrite, retain) NSImage *memImage;
 @property(readonly) int memIconCount;
 @property(readonly, getter = isNotDeleted) BOOL notDeleted;
 @property(readonly) unsigned char memFlags;

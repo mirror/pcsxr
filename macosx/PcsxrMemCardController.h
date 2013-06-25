@@ -15,6 +15,7 @@
 	IBOutlet NSCollectionView *memCard2view;
 	NSMutableArray *memCard1Array;
 	NSMutableArray *memCard2Array;
+	NSTimer *imageAnimateTimer;
 }
 
 - (IBAction)moveBlock:(id)sender;

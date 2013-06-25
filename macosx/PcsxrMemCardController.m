@@ -80,7 +80,6 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	return memCard2Array;
 }
 
-
 - (id)init
 {
 	self = [self initWithWindowNibName:@"MemCardManager"];
@@ -159,6 +158,13 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	[[self window] setDelegate:self];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(memoryCardDidChangeNotification:) name:memChangeNotifier object:nil];
 
+	imageAnimateTimer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:2] interval:2.0/3.0 target:self selector:@selector(animateMemCards:) userInfo:nil repeats:YES];
+	[[NSRunLoop mainRunLoop] addTimer:imageAnimateTimer forMode:NSDefaultRunLoopMode];
+}
+
+- (void)animateMemCards:(NSTimer*)theTimer
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName:memoryAnimateTimerKey object:self];
 }
 
 - (void)windowDidBecomeKey:(NSNotification *)notification
@@ -404,6 +410,9 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[imageAnimateTimer invalidate];
+	
+	RELEASEOBJ(imageAnimateTimer);
 	RELEASEOBJ(memCard1Array);
 	RELEASEOBJ(memCard2Array);
 
