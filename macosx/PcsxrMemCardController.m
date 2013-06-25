@@ -43,6 +43,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	NSString *fullPath1 = [fm stringWithFileSystemRepresentation:Config.Mcd1 length:sizeof(Config.Mcd1)];
 	NSString *fullPath2 = [fm stringWithFileSystemRepresentation:Config.Mcd2 length:sizeof(Config.Mcd2)];
 #if 0
+	//For some odd reason, Cocoa complains about being passed a URL with no scheme.
 	fileName1 = [fm displayNameAtPath:fullPath1];
 	fileName2 = [fm displayNameAtPath:fullPath2];
 #else
