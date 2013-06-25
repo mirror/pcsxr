@@ -27,7 +27,6 @@ extern NSString *const memoryAnimateTimerKey;
 	BOOL notDeleted;
 	unsigned char memFlags;
 }
-+ (NSImage *)imageFromMcd:(McdBlock *)block index:(int)idx;
 + (NSArray *)imagesFromMcd:(McdBlock *)block;
 
 - (id)initWithMcdBlock:(McdBlock *)infoBlock;

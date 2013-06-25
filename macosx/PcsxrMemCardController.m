@@ -9,13 +9,15 @@
 #import "PcsxrMemCardController.h"
 #import "PcsxrMemoryObject.h"
 #import "ConfigurationController.h"
+#import "PcsxrMemCardHandler.h"
 #include "sio.h"
 #import "ARCBridge.h"
 
 #define MAX_MEMCARD_BLOCKS 15
 
 
-static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, char *str) {
+static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, char *str)
+{
 		// header
 		memcpy(to + (dsti + 1) * 128, from + (srci + 1) * 128, 128);
 		SaveMcd(str, to, (dsti + 1) * 128, 128);
@@ -32,11 +34,39 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 
 //memCard1Array KVO functions
 
--(void)insertObject:(PcsxrMemoryObject *)p inMemCard1ArrayAtIndex:(NSUInteger)index {
+- (void)setupValues
+{
+	LoadMcds(Config.Mcd1, Config.Mcd2);
+	NSFileManager *fm = [NSFileManager defaultManager];
+	NSString *fileName1 = nil;
+	NSString *fileName2 = nil;
+	NSString *fullPath1 = [fm stringWithFileSystemRepresentation:Config.Mcd1 length:sizeof(Config.Mcd1)];
+	NSString *fullPath2 = [fm stringWithFileSystemRepresentation:Config.Mcd2 length:sizeof(Config.Mcd2)];
+#if 0
+	fileName1 = [fm displayNameAtPath:fullPath1];
+	fileName2 = [fm displayNameAtPath:fullPath2];
+#else
+	fileName1 = [fullPath1 lastPathComponent];
+	fileName2 = [fullPath2 lastPathComponent];
+#endif
+	
+	[memCard1Label setTitleWithMnemonic:fileName1];
+	[memCard2Label setTitleWithMnemonic:fileName2];
+
+	[memCard1Label setToolTip:fullPath1];
+	[memCard2Label setToolTip:fullPath2];
+	
+	[self loadMemoryCardInfoForCard:1];
+	[self loadMemoryCardInfoForCard:2];
+}
+
+-(void)insertObject:(PcsxrMemoryObject *)p inMemCard1ArrayAtIndex:(NSUInteger)index
+{
     [memCard1Array insertObject:p atIndex:index];
 }
 
--(void)removeObjectFromMemCard1ArrayAtIndex:(NSUInteger)index {
+-(void)removeObjectFromMemCard1ArrayAtIndex:(NSUInteger)index
+{
     [memCard1Array removeObjectAtIndex:index];
 }
 
@@ -52,16 +82,18 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 
 - (NSArray *)memCard1Array
 {
-	return memCard1Array;
+	return [NSArray arrayWithArray:memCard1Array];
 }
 
 //memCard2Array KVO functions
 
--(void)insertObject:(PcsxrMemoryObject *)p inMemCard2ArrayAtIndex:(NSUInteger)index {
+-(void)insertObject:(PcsxrMemoryObject *)p inMemCard2ArrayAtIndex:(NSUInteger)index
+{
     [memCard2Array insertObject:p atIndex:index];
 }
 
--(void)removeObjectFromMemCard2ArrayAtIndex:(NSUInteger)index {
+-(void)removeObjectFromMemCard2ArrayAtIndex:(NSUInteger)index
+{
     [memCard2Array removeObjectAtIndex:index];
 }
 
@@ -77,7 +109,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 
 - (NSArray *)memCard2Array
 {
-	return memCard2Array;
+	return [NSArray arrayWithArray:memCard2Array];
 }
 
 - (id)init
@@ -90,7 +122,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 {
     self = [super initWithWindow:window];
     if (self) {
-        LoadMcds(Config.Mcd1, Config.Mcd2);
+        //LoadMcds(Config.Mcd1, Config.Mcd2);
     }
     
     return self;
@@ -145,9 +177,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 
 - (void)memoryCardDidChangeNotification:(NSNotification *)aNote
 {
-	LoadMcds(Config.Mcd1, Config.Mcd2);
-	[self loadMemoryCardInfoForCard:1];
-	[self loadMemoryCardInfoForCard:2];
+	[self setupValues];
 }
 
 - (void)windowDidLoad
@@ -156,9 +186,10 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 	[[self window] setDelegate:self];
+	//[self setupValues];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(memoryCardDidChangeNotification:) name:memChangeNotifier object:nil];
 
-	imageAnimateTimer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:2] interval:2.0/3.0 target:self selector:@selector(animateMemCards:) userInfo:nil repeats:YES];
+	imageAnimateTimer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:2] interval:2.0/5.0 target:self selector:@selector(animateMemCards:) userInfo:nil repeats:YES];
 	[[NSRunLoop mainRunLoop] addTimer:imageAnimateTimer forMode:NSDefaultRunLoopMode];
 }
 
@@ -167,11 +198,10 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	[[NSNotificationCenter defaultCenter] postNotificationName:memoryAnimateTimerKey object:self];
 }
 
-- (void)windowDidBecomeKey:(NSNotification *)notification
+- (IBAction)showWindow:(id)sender
 {
-	LoadMcds(Config.Mcd1, Config.Mcd2);
-	[self loadMemoryCardInfoForCard:1];
-	[self loadMemoryCardInfoForCard:2];
+	[super showWindow:sender];
+	[self setupValues];
 }
 
 - (int)findFreeMemCardBlockInCard:(int)target_card length:(int)len
@@ -221,7 +251,6 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 		return (i-foundcount);
 	
  	return -1;
-	
 }
 
 - (int)findFreeMemCardBlockInCard:(int)target_card
@@ -376,7 +405,6 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	*ptr = xor;
 	
 	SaveMcd(filename, data, i * 128, 128);
-
 }
 
 - (IBAction)deleteMemoryObject:(id)sender {
@@ -405,6 +433,65 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 		}
 		[self loadMemoryCardInfoForCard:memCardSelect];
 	}
+}
+
+- (IBAction)newMemCard:(id)sender {
+	int tag = [sender tag];
+	char *mcd;
+	NSTextField *label;
+	NSOpenPanel *openDlg = RETAINOBJ([NSOpenPanel openPanel]);
+	NSString *path;
+	
+	if (tag == 1) { mcd = Config.Mcd1; label = memCard1Label; }
+	else { mcd = Config.Mcd2; label = memCard2Label; }
+	
+	[openDlg setCanChooseFiles:YES];
+	[openDlg setCanChooseDirectories:NO];
+	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler supportedUTIs]];
+	
+	path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
+    
+    [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent]]];
+    [openDlg setNameFieldStringValue:[path lastPathComponent]];
+	
+	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
+		NSArray* urls = [openDlg URLs];
+        NSString *mcdPath = [[urls objectAtIndex:0] path];
+        
+		[ConfigurationController setMemoryCard:tag toPath:mcdPath];
+    }
+	RELEASEOBJ(openDlg);
+
+}
+
+- (IBAction)changeMemCard:(id)sender {
+	int tag = [sender tag];
+	char *mcd;
+	NSTextField *label;
+	NSSavePanel *openDlg = RETAINOBJ([NSSavePanel savePanel]);
+	NSString *path;
+	
+	if (tag == 1) { mcd = Config.Mcd1; label = memCard1Label; }
+	else { mcd = Config.Mcd2; label = memCard2Label; }
+	
+    path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
+	
+    [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent]]];
+    [openDlg setNameFieldStringValue:@"New Memory Card File.mcr"];
+	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler supportedUTIs]];
+    
+	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
+        NSString *mcdPath = [[openDlg URL] path];
+		
+		//Workaround/kludge to make sure we create a memory card before posting a notification
+		strlcpy(mcd, [mcdPath fileSystemRepresentation], MAXPATHLEN);
+		
+		CreateMcd(mcd);
+		
+		[ConfigurationController setMemoryCard:tag toPath:mcdPath];
+    }
+	RELEASEOBJ(openDlg);
+
 }
 
 - (void)dealloc

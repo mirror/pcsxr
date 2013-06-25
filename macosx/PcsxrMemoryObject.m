@@ -34,11 +34,33 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 {
 	NSMutableArray *imagesArray = [[NSMutableArray alloc] initWithCapacity:block->IconCount];
 	for (int i = 0; i < block->IconCount; i++) {
-		[imagesArray addObject:[self imageFromMcd:block index:i]];
+		NSImage *memImage = nil;
+		{
+			NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:16 pixelsHigh:16 bitsPerSample:8 samplesPerPixel:3 hasAlpha:NO isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:0 bitsPerPixel:0];
+			
+			short *icon = block->Icon;
+			
+			int x, y, c, v, r, g, b;
+			for (v = 0; v < 256; v++) {
+				x = (v % 16);
+				y = (v / 16);
+				c = icon[(i * 256) + v];
+				r = (c & 0x001f) << 3;
+				g = ((c & 0x03e0) >> 5) << 3;
+				b = ((c & 0x7c00) >> 10) << 3;
+				[imageRep setColor:[NSColor colorWithCalibratedRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0] atX:x y:y];
+			}
+			memImage = [[NSImage alloc] init];
+			[memImage addRepresentation:imageRep];
+			RELEASEOBJ(imageRep);
+			[memImage setSize:NSMakeSize(32, 32)];
+		}
+		[imagesArray addObject:memImage];
+		RELEASEOBJ(memImage);
 	}
-	NSArray *retArray = [[NSArray alloc] initWithArray:imagesArray];
+	NSArray *retArray = [NSArray arrayWithArray:imagesArray];
 	RELEASEOBJ(imagesArray);
-	return AUTORELEASEOBJ(retArray);
+	return retArray;
 }
 
 + (NSImage *)blankImage
@@ -51,32 +73,8 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 		[[NSColor blackColor] set];
 		[NSBezierPath fillRect:imageRect];
 		[imageBlank unlockFocus];
-		
 	}
 	return imageBlank;
-}
-
-+ (NSImage *)imageFromMcd:(McdBlock *)block index:(int)idx
-{
-	NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:16 pixelsHigh:16 bitsPerSample:8 samplesPerPixel:3 hasAlpha:NO isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:0 bitsPerPixel:0];
-	
-	short *icon = block->Icon;
-	
-	int x, y, c, i, r, g, b;
-	for (i = 0; i < 256 * (idx + 1); i++) {
-		x = (i % 16);
-		y = (i / 16);
-		c = icon[(idx * 256) + i];
-		r = (c & 0x001f) << 3;
-		g = ((c & 0x03e0) >> 5) << 3;
-		b = ((c & 0x7c00) >> 10) << 3;
-		[imageRep setColor:[NSColor colorWithCalibratedRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0] atX:x y:y];
-	}
-	NSImage *theImage = [[NSImage alloc] init];
-	[theImage addRepresentation:imageRep];
-	RELEASEOBJ(imageRep);
-	[theImage setSize:NSMakeSize(32, 32)];
-	return AUTORELEASEOBJ(theImage);
 }
 
 - (id)initWithMcdBlock:(McdBlock *)infoBlock
