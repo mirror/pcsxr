@@ -22,6 +22,7 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 @property (readwrite, retain, setter = setJapaneseName:) NSString *sjisName;
 @property (readwrite, retain, setter = setTheMemName:) NSString *memName;
 @property (readwrite, retain, setter = setTheMemId:) NSString *memID;
+@property (readwrite, retain) NSImage *memImage;
 @property (readwrite, setter = setIconCount:) int memIconCount;
 @property (readwrite, getter = isNotDeleted, setter = setIsNotDeleted:) BOOL notDeleted;
 @property (readwrite, setter = setTheMemFlags:) unsigned char memFlags;
