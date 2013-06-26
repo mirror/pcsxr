@@ -83,9 +83,7 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 	if (self = [super init]) {
 		self.englishName = [NSString stringWithCString:infoBlock->Title encoding:NSASCIIStringEncoding];
 		self.sjisName = [NSString stringWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
-		@autoreleasepool {
-			self.memImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
-		}
+		self.memImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
 		if ([memImages count] == 0) {
 			self.memImage = [PcsxrMemoryObject blankImage];
 		} else {

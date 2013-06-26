@@ -19,7 +19,7 @@
 #include "pad.h"
 
 #if SDL_VERSION_ATLEAST(1,3,0)
-//static SDL_HapticEffect haptic_rumbleEffect;
+static SDL_HapticEffect haptic_rumbleEffect;
 #endif
 
 void JoyInitHaptic()

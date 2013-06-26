@@ -8,6 +8,7 @@
 
 #import "PcsxrMemCardHandler.h"
 #import "ConfigurationController.h"
+#import "ARCBridge.h"
 
 @implementation PcsxrMemCardHandler
 
@@ -15,7 +16,7 @@
 {
 	static NSArray *utisupport = nil;
 	if (utisupport == nil) {
-		utisupport = [[NSArray alloc] initWithObjects:@"com.codeplex.pcsxr.memcard", nil];
+		utisupport = RETAINOBJ([NSArray arrayWithObject:@"com.codeplex.pcsxr.memcard"]);
 	}
 	return utisupport;
 }

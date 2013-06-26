@@ -8,21 +8,30 @@
 #include "plugins.h"
 #import "ARCBridge.h"
 
-NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
+NSString *const memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
+NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 
 @implementation ConfigurationController
 
-+ (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile
++ (void)setMemoryCard:(int)theCard toURL:(NSURL *)theURL;
 {
 	if (theCard == 1) {
-		[[NSUserDefaults standardUserDefaults] setObject:theFile forKey:@"Mcd1"];
-		strlcpy(Config.Mcd1, [theFile fileSystemRepresentation], MAXPATHLEN );
+		[[NSUserDefaults standardUserDefaults] setURL:theURL forKey:@"Mcd1"];
+		strlcpy(Config.Mcd1, [[theURL path] fileSystemRepresentation], MAXPATHLEN );
 	} else {
-		[[NSUserDefaults standardUserDefaults] setObject:theFile forKey:@"Mcd2"];
-		strlcpy(Config.Mcd2, [theFile fileSystemRepresentation], MAXPATHLEN );
+		[[NSUserDefaults standardUserDefaults] setURL:theURL forKey:@"Mcd2"];
+		strlcpy(Config.Mcd2, [[theURL path] fileSystemRepresentation], MAXPATHLEN );
 	}
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil];
+	NSDictionary *userDict = [NSDictionary dictionaryWithObject:@(theCard) forKey:memCardChangeNumberKey];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil userInfo:userDict];
+
+}
+
++ (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile
+{
+	[self setMemoryCard:theCard toURL:[NSURL fileURLWithPath:theFile isDirectory:NO]];
 }
 
 - (IBAction)setCheckbox:(id)sender
@@ -53,62 +62,71 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 
 - (IBAction)mcdChangeClicked:(id)sender
 {
-	int tag = [sender tag];
-	char *mcd;
-	NSTextField *label;
-	NSOpenPanel *openDlg = RETAINOBJ([NSOpenPanel openPanel]);
-	NSString *path;
-
-	if (tag == 1) { mcd = Config.Mcd1; label = mcd1Label; }
-	else { mcd = Config.Mcd2; label = mcd2Label; }
-
-	[openDlg setCanChooseFiles:YES];
-	[openDlg setCanChooseDirectories:NO];
-	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler supportedUTIs]];
-
-	path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
-    
-    [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent]]];
-    [openDlg setNameFieldStringValue:[path lastPathComponent]];
-
-	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
-		NSArray* urls = [openDlg URLs];
-        NSString *mcdPath = [[urls objectAtIndex:0] path];
-        
-		[ConfigurationController setMemoryCard:tag toPath:mcdPath];
-    }
-	RELEASEOBJ(openDlg);
+	[ConfigurationController mcdChangeClicked:sender];
 }
 
 - (IBAction)mcdNewClicked:(id)sender
 {
-	int tag = [sender tag];
+	[ConfigurationController mcdNewClicked:sender];
+}
+
++ (void)mcdChangeClicked:(id)sender
+{
+	NSInteger tag = [sender tag];
 	char *mcd;
-	NSTextField *label;
+	NSOpenPanel *openDlg = RETAINOBJ([NSOpenPanel openPanel]);
+	NSString *path;
+	
+	if (tag == 1) { mcd = Config.Mcd1; }
+	else { mcd = Config.Mcd2; }
+	
+	[openDlg setCanChooseFiles:YES];
+	[openDlg setCanChooseDirectories:NO];
+	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler supportedUTIs]];
+	
+	path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
+    
+    [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent]]];
+    [openDlg setNameFieldStringValue:[path lastPathComponent]];
+	
+	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
+		NSArray* urls = [openDlg URLs];
+        NSURL *mcdURL = [urls objectAtIndex:0];
+        
+		[ConfigurationController setMemoryCard:tag toURL:mcdURL];
+    }
+	RELEASEOBJ(openDlg);	
+}
+
++ (void)mcdNewClicked:(id)sender
+{
+	NSInteger tag = [sender tag];
+	char *mcd;
 	NSSavePanel *openDlg = RETAINOBJ([NSSavePanel savePanel]);
 	NSString *path;
-
-	if (tag == 1) { mcd = Config.Mcd1; label = mcd1Label; }
-	else { mcd = Config.Mcd2; label = mcd2Label; }
-
+	
+	if (tag == 1) { mcd = Config.Mcd1; }
+	else { mcd = Config.Mcd2; }
+	
     path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
-
+	
     [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent]]];
     [openDlg setNameFieldStringValue:@"New Memory Card File.mcr"];
 	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler supportedUTIs]];
     
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
-        NSString *mcdPath = [[openDlg URL] path];
+        NSURL *mcdURL = [openDlg URL];
 		
 		//Workaround/kludge to make sure we create a memory card before posting a notification
-		strlcpy(mcd, [mcdPath fileSystemRepresentation], MAXPATHLEN);
+		strlcpy(mcd, [[mcdURL path] fileSystemRepresentation], MAXPATHLEN);
 		
 		CreateMcd(mcd);
-
-		[ConfigurationController setMemoryCard:tag toPath:mcdPath];
+		
+		[ConfigurationController setMemoryCard:tag toURL:mcdURL];
     }
 	RELEASEOBJ(openDlg);
 }
+
 
 - (IBAction)setVideoType:(id)sender
 {
@@ -136,10 +154,17 @@ NSString *memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 
 - (void)memoryCardDidChangeNotification:(NSNotification *)aNote
 {
-	NSString *path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.Mcd1 length:strlen(Config.Mcd1)];
-	[mcd1Label setTitleWithMnemonic:path];
-	path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.Mcd2 length:strlen(Config.Mcd2)];
-	[mcd2Label setTitleWithMnemonic:path];
+	NSNumber *aNumber = [[aNote userInfo] objectForKey:memCardChangeNumberKey];
+	int iNum = [aNumber intValue];
+	
+	if (iNum & 1) {
+		NSURL *path = [[NSUserDefaults standardUserDefaults] URLForKey:@"Mcd1"];
+		[mcd1Label setTitleWithMnemonic:[path path]];
+	}
+	if (iNum & 2) {
+		NSURL *path = [[NSUserDefaults standardUserDefaults] URLForKey:@"Mcd2"];
+		[mcd2Label setTitleWithMnemonic:[path path]];
+	}
 }
 
 - (void)awakeFromNib

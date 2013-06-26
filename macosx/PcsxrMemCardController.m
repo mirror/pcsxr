@@ -34,31 +34,40 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 
 //memCard1Array KVO functions
 
-- (void)setupValues
+- (void)setupValues:(int)theCards
 {
-	LoadMcds(Config.Mcd1, Config.Mcd2);
+	NSParameterAssert(theCards < 4 && theCards > 0);
+	if (theCards == 3) {
+		LoadMcds(Config.Mcd1, Config.Mcd2);
+	} else {
+		LoadMcd(theCards, theCards == 1 ? Config.Mcd1 : Config.Mcd2);
+	}
 	NSFileManager *fm = [NSFileManager defaultManager];
-	NSString *fileName1 = nil;
-	NSString *fileName2 = nil;
-	NSString *fullPath1 = [fm stringWithFileSystemRepresentation:Config.Mcd1 length:sizeof(Config.Mcd1)];
-	NSString *fullPath2 = [fm stringWithFileSystemRepresentation:Config.Mcd2 length:sizeof(Config.Mcd2)];
-#if 0
-	//For some odd reason, Cocoa complains about being passed a URL with no scheme.
-	fileName1 = [fm displayNameAtPath:fullPath1];
-	fileName2 = [fm displayNameAtPath:fullPath2];
-#else
-	fileName1 = [fullPath1 lastPathComponent];
-	fileName2 = [fullPath2 lastPathComponent];
-#endif
 	
-	[memCard1Label setTitleWithMnemonic:fileName1];
-	[memCard2Label setTitleWithMnemonic:fileName2];
-
-	[memCard1Label setToolTip:fullPath1];
-	[memCard2Label setToolTip:fullPath2];
+	NSString *fullPath = nil;
+	NSString *fileName = nil;
 	
-	[self loadMemoryCardInfoForCard:1];
-	[self loadMemoryCardInfoForCard:2];
+	if (theCards & 1) {
+		fullPath = [[[NSUserDefaults standardUserDefaults] URLForKey:@"Mcd1"] path];
+		fileName = [fm displayNameAtPath:fullPath];
+		
+		[memCard1Label setTitleWithMnemonic:fileName];
+		
+		[memCard1Label setToolTip:fullPath];
+		
+		[self loadMemoryCardInfoForCard:1];
+	}
+	
+	if (theCards & 2) {
+		fullPath = [[[NSUserDefaults standardUserDefaults] URLForKey:@"Mcd2"] path];
+		fileName = [fm displayNameAtPath:fullPath];
+		
+		[memCard2Label setTitleWithMnemonic:fileName];
+		
+		[memCard2Label setToolTip:fullPath];
+		
+		[self loadMemoryCardInfoForCard:2];
+	}
 }
 
 -(void)insertObject:(PcsxrMemoryObject *)p inMemCard1ArrayAtIndex:(NSUInteger)index
@@ -178,7 +187,9 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 
 - (void)memoryCardDidChangeNotification:(NSNotification *)aNote
 {
-	[self setupValues];
+	NSDictionary *dict = [aNote userInfo];
+	NSNumber *theNum = [dict objectForKey:memCardChangeNumberKey];
+	[self setupValues:[theNum intValue]];
 }
 
 - (void)windowDidLoad
@@ -202,7 +213,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 - (IBAction)showWindow:(id)sender
 {
 	[super showWindow:sender];
-	[self setupValues];
+	[self setupValues:3];
 }
 
 - (int)findFreeMemCardBlockInCard:(int)target_card length:(int)len
@@ -436,63 +447,14 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	}
 }
 
-- (IBAction)newMemCard:(id)sender {
-	int tag = [sender tag];
-	char *mcd;
-	NSTextField *label;
-	NSOpenPanel *openDlg = RETAINOBJ([NSOpenPanel openPanel]);
-	NSString *path;
-	
-	if (tag == 1) { mcd = Config.Mcd1; label = memCard1Label; }
-	else { mcd = Config.Mcd2; label = memCard2Label; }
-	
-	[openDlg setCanChooseFiles:YES];
-	[openDlg setCanChooseDirectories:NO];
-	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler supportedUTIs]];
-	
-	path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
-    
-    [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent]]];
-    [openDlg setNameFieldStringValue:[path lastPathComponent]];
-	
-	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
-		NSArray* urls = [openDlg URLs];
-        NSString *mcdPath = [[urls objectAtIndex:0] path];
-        
-		[ConfigurationController setMemoryCard:tag toPath:mcdPath];
-    }
-	RELEASEOBJ(openDlg);
-
+- (IBAction)changeMemCard:(id)sender
+{
+	[ConfigurationController mcdChangeClicked:sender];
 }
 
-- (IBAction)changeMemCard:(id)sender {
-	int tag = [sender tag];
-	char *mcd;
-	NSTextField *label;
-	NSSavePanel *openDlg = RETAINOBJ([NSSavePanel savePanel]);
-	NSString *path;
-	
-	if (tag == 1) { mcd = Config.Mcd1; label = memCard1Label; }
-	else { mcd = Config.Mcd2; label = memCard2Label; }
-	
-    path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
-	
-    [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent]]];
-    [openDlg setNameFieldStringValue:@"New Memory Card File.mcr"];
-	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler supportedUTIs]];
-    
-	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
-        NSString *mcdPath = [[openDlg URL] path];
-		
-		//Workaround/kludge to make sure we create a memory card before posting a notification
-		strlcpy(mcd, [mcdPath fileSystemRepresentation], MAXPATHLEN);
-		
-		CreateMcd(mcd);
-		
-		[ConfigurationController setMemoryCard:tag toPath:mcdPath];
-    }
-	RELEASEOBJ(openDlg);
-
+- (IBAction)newMemCard:(id)sender
+{
+	[ConfigurationController mcdNewClicked:sender];
 }
 
 - (void)dealloc

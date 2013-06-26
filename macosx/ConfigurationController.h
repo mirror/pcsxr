@@ -5,7 +5,8 @@
 #import "HotkeyController.h"
 #import "PluginList.h"
 
-extern NSString *memChangeNotifier;
+extern NSString *const memChangeNotifier;
+extern NSString *const memCardChangeNumberKey;
 
 @class PcsxrMemCardController;
 
@@ -53,7 +54,11 @@ extern NSString *memChangeNotifier;
 - (BOOL)isMemoryCardWindowVisible;
 
 - (NSString *)keyForSender:(id)sender;
-+ (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile;
++ (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile DEPRECATED_ATTRIBUTE;
++ (void)setMemoryCard:(int)theCard toURL:(NSURL *)theURL;
+
++ (void)mcdNewClicked:(id)sender;
++ (void)mcdChangeClicked:(id)sender;
 
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 

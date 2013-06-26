@@ -16,6 +16,7 @@
 
 NSDictionary *prefStringKeys;
 NSDictionary *prefByteKeys;
+NSDictionary *prefURLKeys;
 NSMutableArray *biosList;
 NSString *saveStatePath;
 
@@ -437,7 +438,7 @@ otherblock();\
 			hasParsedAnArgument = YES;
 			NSString *path = FileTestBlock();
 			runtimeBlock = [^{
-				[self runURL:[NSURL fileURLWithPath:path]];
+				[self runURL:[NSURL fileURLWithPath:path isDirectory:NO]];
 			} copy];
 		};
 		
@@ -573,10 +574,10 @@ otherblock();\
 		}
 	}
 
-	str = [[defaults stringForKey:@"Mcd1"] fileSystemRepresentation];
+	str = [[[defaults URLForKey:@"Mcd1"] path] fileSystemRepresentation];
 	if (str) strlcpy(Config.Mcd1, str, MAXPATHLEN);
 
-	str = [[defaults stringForKey:@"Mcd2"] fileSystemRepresentation];
+	str = [[[defaults URLForKey:@"Mcd2"] path] fileSystemRepresentation];
 	if (str) strlcpy(Config.Mcd2, str, MAXPATHLEN);
 
 	if ([defaults boolForKey:@"UseHLE"] || 0 == [biosList count]) {
@@ -606,6 +607,16 @@ otherblock();\
 		}
 		
 		[defaults setObject:tmpNSStr forKey:defaultKey];
+		return;
+	}
+	
+	str = (char *)[[prefURLKeys objectForKey:defaultKey] pointerValue];
+	if (str) {
+		NSString *tmpNSStr = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:str length:strlen(str)];
+		if (!tmpNSStr) {
+			tmpNSStr = [NSString stringWithCString:str encoding:NSUTF8StringEncoding];
+		}
+		[defaults setURL:[NSURL fileURLWithPath:tmpNSStr isDirectory:NO] forKey:defaultKey];
 		return;
 	}
 
@@ -644,9 +655,12 @@ otherblock();\
 		[NSValue valueWithPointer:Config.Pad1], @"PluginPAD",
 		[NSValue valueWithPointer:Config.Cdr], @"PluginCDR",
 		[NSValue valueWithPointer:Config.Net], @"PluginNET",
-		[NSValue valueWithPointer:Config.Mcd1], @"Mcd1",
-		[NSValue valueWithPointer:Config.Mcd2], @"Mcd2",
 		nil];
+	
+	prefURLKeys = [[NSDictionary alloc] initWithObjectsAndKeys:
+				   [NSValue valueWithPointer:Config.Mcd1], @"Mcd1",
+				   [NSValue valueWithPointer:Config.Mcd2], @"Mcd2",
+				   nil];
 
 	prefByteKeys = [[NSDictionary alloc] initWithObjectsAndKeys:
 		[NSValue valueWithPointer:&Config.Xa], @"NoXaAudio",
