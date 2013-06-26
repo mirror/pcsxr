@@ -86,7 +86,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	
 	path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
     
-    [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent]]];
+    [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent] isDirectory:YES]];
     [openDlg setNameFieldStringValue:[path lastPathComponent]];
 	
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
@@ -110,7 +110,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	
     path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
 	
-    [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent]]];
+    [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent] isDirectory:YES]];
     [openDlg setNameFieldStringValue:@"New Memory Card File.mcr"];
 	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler supportedUTIs]];
     
