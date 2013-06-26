@@ -154,7 +154,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 - (void)memoryCardDidChangeNotification:(NSNotification *)aNote
 {
 	NSNumber *aNumber = [[aNote userInfo] objectForKey:memCardChangeNumberKey];
-	int iNum = [aNumber intValue];
+	int iNum = aNumber ? [aNumber intValue] : 3;
 	
 	if (iNum & 1) {
 		NSURL *path = [[NSUserDefaults standardUserDefaults] URLForKey:@"Mcd1"];

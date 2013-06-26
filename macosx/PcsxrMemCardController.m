@@ -43,12 +43,12 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 		LoadMcd(theCards, theCards == 1 ? Config.Mcd1 : Config.Mcd2);
 	}
 	NSFileManager *fm = [NSFileManager defaultManager];
-	
+	NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
 	NSString *fullPath = nil;
 	NSString *fileName = nil;
 	
 	if (theCards & 1) {
-		fullPath = [[[NSUserDefaults standardUserDefaults] URLForKey:@"Mcd1"] path];
+		fullPath = [[def URLForKey:@"Mcd1"] path];
 		fileName = [fm displayNameAtPath:fullPath];
 		
 		[memCard1Label setTitleWithMnemonic:fileName];
@@ -59,7 +59,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	}
 	
 	if (theCards & 2) {
-		fullPath = [[[NSUserDefaults standardUserDefaults] URLForKey:@"Mcd2"] path];
+		fullPath = [[def URLForKey:@"Mcd2"] path];
 		fileName = [fm displayNameAtPath:fullPath];
 		
 		[memCard2Label setTitleWithMnemonic:fileName];
@@ -189,7 +189,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 {
 	NSDictionary *dict = [aNote userInfo];
 	NSNumber *theNum = [dict objectForKey:memCardChangeNumberKey];
-	[self setupValues:[theNum intValue]];
+	[self setupValues: theNum ? [theNum intValue] : 3];
 }
 
 - (void)windowDidLoad
