@@ -388,7 +388,6 @@ done:
 		if (!emuWasPaused) {
 			[EmuThread resume];
 		}
-		
 	}];
 }
 

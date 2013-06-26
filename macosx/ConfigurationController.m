@@ -23,10 +23,8 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 		strlcpy(Config.Mcd2, [[theURL path] fileSystemRepresentation], MAXPATHLEN );
 	}
 	
-	NSDictionary *userDict = [NSDictionary dictionaryWithObject:@(theCard) forKey:memCardChangeNumberKey];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil userInfo:userDict];
-
+	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil userInfo:
+	 [NSDictionary dictionaryWithObject:@(theCard) forKey:memCardChangeNumberKey]];
 }
 
 + (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile

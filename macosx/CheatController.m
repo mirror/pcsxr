@@ -33,10 +33,10 @@
         return nil;
     NSString *ident = [col identifier];
     if ([ident isEqualToString:@"COL_NAME"]) {
-        return [NSString stringWithCString:Cheats[idx].Descr encoding:NSUTF8StringEncoding];
+        return @(Cheats[idx].Descr);
     }
     if ([ident isEqualToString:@"COL_ENABLE"]) {
-        return [NSNumber numberWithInt: Cheats[idx].Enabled ? NSOnState : NSOffState];
+        return @(Cheats[idx].Enabled ? NSOnState : NSOffState);
     }
     NSLog(@"Unknown column identifier: %@", ident);
     return nil;
