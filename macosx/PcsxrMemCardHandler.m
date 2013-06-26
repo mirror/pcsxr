@@ -8,6 +8,7 @@
 
 #import "PcsxrMemCardHandler.h"
 #import "ConfigurationController.h"
+#import "EmuThread.h"
 #import "ARCBridge.h"
 
 @implementation PcsxrMemCardHandler
@@ -54,10 +55,13 @@
 
 - (BOOL)handleFile:(NSString *)theFile
 {
+	if ([EmuThread active]) {
+		return NO;
+	}
 	if (![self window]) {
 		[NSBundle loadNibNamed:@"PcsxrMemCardDocument" owner:self];
 	}
-	[cardPath setObjectValue:[theFile lastPathComponent]];
+	[cardPath setObjectValue:[[NSFileManager defaultManager] displayNameAtPath:theFile]];
 	
 	[NSApp runModalForWindow:[self window]];
 	

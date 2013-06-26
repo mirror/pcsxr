@@ -7,6 +7,7 @@
 //
 
 #import "PcsxrPluginHandler.h"
+#import "EmuThread.h"
 #import "ARCBridge.h"
 
 @implementation PcsxrPluginHandler
@@ -55,6 +56,10 @@
 
 - (BOOL)handleFile:(NSString *)theFile
 {
+	if ([EmuThread active]) {
+		return NO;
+	}
+
 	if (![self window])
 		[NSBundle loadNibNamed:@"AddPluginSheet" owner:self];
 	

@@ -127,7 +127,6 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	RELEASEOBJ(openDlg);
 }
 
-
 - (IBAction)setVideoType:(id)sender
 {
 	int tag = [[sender selectedItem] tag];
