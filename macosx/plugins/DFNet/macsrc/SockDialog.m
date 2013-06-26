@@ -9,6 +9,8 @@
 #import "SockDialog.h"
 #include "dfnet.h"
 
+#import "EmuThread.h"
+
 void SysMessage(const char *fmt, ...)
 {
 	va_list list;
@@ -22,13 +24,18 @@ void SysMessage(const char *fmt, ...)
 	//sprintf(cmd, "message %s\n", msg);
 	NSString *errString = [NSString stringWithUTF8String:msg];
 	fprintf(stderr, "%s", msg);
-	NSAlert *alert = [NSAlert alertWithMessageText:nil defaultButton:@"Exit" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@", errString];
+	NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"Exit" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@", errString];
 	[alert setAlertStyle:NSCriticalAlertStyle];
 	//NSInteger result = NSRunAlertPanel(errString, nil, @"Okay", nil, nil);
 	NSInteger result = [alert runModal];
 	if (result == NSAlertDefaultReturn)
 	{
-		//TODO: Handle closing the emulator, but not quitting the program.
+		Class theEmuClass = NSClassFromString(@"EmuThread");
+		if (theEmuClass) {
+			[theEmuClass stop];
+		} else {
+			NSLog(@"Unable to stop emulation because the Objective-C class \"EmuThreaed\" was not found. Are you using a different emulator than PCSXR?");
+		}
 	}
 }
 
@@ -37,14 +44,15 @@ static SockDialog *globalSock = nil;
 
 void sockCreateWaitDlg()
 {
-	if (globalSock == nil) {
-		globalSock = [[SockDialog alloc] init];
-	}
-	NSWindow *tempWindow = [globalSock window];
-	[tempWindow center];
-	[globalSock showWindow:nil];
-	[tempWindow makeKeyAndOrderFront:nil];
-
+	dispatch_sync(dispatch_get_main_queue(), ^{
+		if (globalSock == nil) {
+			globalSock = [[SockDialog alloc] init];
+		}
+		NSWindow *tempWindow = [globalSock window];
+		[tempWindow center];
+		[globalSock showWindow:nil];
+		[tempWindow makeKeyAndOrderFront:nil];
+	});
 }
 
 void sockDlgUpdate()
@@ -61,26 +69,27 @@ long sockOpen()
 
 void sockDestroyWaitDlg()
 {
-	if (globalSock != nil) {
-		[globalSock close];
-		[globalSock release];
-		globalSock = nil;
-	}
+	dispatch_sync(dispatch_get_main_queue(), ^{
+		if (globalSock != nil) {
+			[globalSock close];
+			[globalSock release];
+			globalSock = nil;
+		}
+	});
 }
 
 @implementation SockDialog
+
 - (IBAction)cancel:(id)sender {
 	WaitCancel = 1;
-
 }
 
 - (id)init
 {
 	if ((self = [super initWithWindowNibName:@"SockDialog"])) {
-		return self;
-	} else {
-		return nil;
+		
 	}
+	return self;
 }
 
 -(void)dealloc
