@@ -10,5 +10,8 @@
 #import "PcsxrFileHandle.h"
 
 @interface PcsxrDiscHandler : NSObject <PcsxrFileHandle>
+{
+	NSURL *discURL;
+}
 
 @end

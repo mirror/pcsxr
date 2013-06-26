@@ -14,7 +14,21 @@
 #import "RecentItemsMenu.h"
 #import "PcsxrController.h"
 
+@interface PcsxrDiscHandler ()
+@property (retain) NSURL *discURL;
+@end
+
 @implementation PcsxrDiscHandler
+
+@synthesize discURL;
+
+- (NSURL*)discURLFromFilePath:(NSString *)filePath
+{
+	if (!discURL) {
+		self.discURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
+	}
+	return self.discURL;
+}
 
 + (NSArray *)supportedUTIs
 {
@@ -38,11 +52,19 @@
 			return NO;
 		}
 	} else {
-		SetIsoFile([theFile fileSystemRepresentation]);
-		[EmuThread run];
+		[appDelegate runURL:[self discURLFromFilePath:theFile]];
 	}
-	[[appDelegate recentItems] addRecentItem:[NSURL fileURLWithPath:theFile]];
+	[[appDelegate recentItems] addRecentItem:[self discURLFromFilePath:theFile]];
 	return YES;
 }
+
+#if !__has_feature(objc_arc)
+- (void)dealloc
+{
+	self.discURL = nil;
+	
+	[super dealloc];
+}
+#endif
 
 @end

@@ -9,6 +9,7 @@
 #import "PcsxrFreezeStateHandler.h"
 #import "EmuThread.h"
 #import "ARCBridge.h"
+#import "PluginList.h"
 #include "misc.h"
 
 @implementation PcsxrFreezeStateHandler
@@ -28,6 +29,13 @@
 		return NO;
 	}
 	if (![EmuThread active]) {
+		PluginList *pluginList = [PluginList list];
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"NetPlay"]) {
+			[pluginList enableNetPlug];
+		} else {
+			[pluginList disableNetPlug];
+		}
+
 		[EmuThread run];
 	}
 	return [EmuThread defrostAt:theFile];
