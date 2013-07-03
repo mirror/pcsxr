@@ -22,8 +22,7 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 @property (readwrite, retain, setter = setJapaneseName:) NSString *sjisName;
 @property (readwrite, retain, setter = setTheMemName:) NSString *memName;
 @property (readwrite, retain, setter = setTheMemId:) NSString *memID;
-@property (readwrite, retain) NSImage *memImage;
-@property (readwrite, setter = setIconCount:) int memIconCount;
+@property (readwrite, retain, setter = setTheMemImage:) NSImage *memImage;
 @property (readwrite, getter = isNotDeleted, setter = setIsNotDeleted:) BOOL notDeleted;
 @property (readwrite, setter = setTheMemFlags:) unsigned char memFlags;
 @property (retain) NSArray *memImages;
@@ -86,6 +85,8 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 		self.memImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
 		if ([memImages count] == 0) {
 			self.memImage = [PcsxrMemoryObject blankImage];
+		} else if ([memImages count] == 1) {
+			self.memImage = [memImages objectAtIndex:0];
 		} else {
 			self.memImage = [self.memImages objectAtIndex:0];
 			[[NSNotificationCenter defaultCenter] addObserverForName:memoryAnimateTimerKey object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
@@ -98,7 +99,6 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 		}
 		self.memName = [NSString stringWithCString:infoBlock->Name encoding:NSASCIIStringEncoding];
 		self.memID = [NSString stringWithCString:infoBlock->ID encoding:NSASCIIStringEncoding];
-		self.memIconCount = infoBlock->IconCount;
 		self.memFlags = infoBlock->Flags;
 		if ((infoBlock->Flags & 0xF0) == 0xA0) {
 			if ((infoBlock->Flags & 0xF) >= 1 &&
@@ -117,11 +117,38 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 @synthesize englishName;
 @synthesize sjisName;
 @synthesize memImage;
+- (void)setTheMemImage:(NSImage *)theMemImage
+{
+	if (memImage == theMemImage) {
+		return;
+	}
+	//This is the only setter that is being watched AND changed.
+	[self willChangeValueForKey:@"memImage"];
+#if __has_feature(objc_arc)
+	memImage = theMemImage;
+#else
+	NSImage *tmpImage = memImage;
+	memImage = [theMemImage retain];
+	[tmpImage release];
+#endif
+	[self didChangeValueForKey:@"memImage"];
+}
+- (NSImage*)memImage
+{
+	@synchronized(memImage)
+	{
+		return memImage;
+	}
+}
+
 @synthesize notDeleted;
 @synthesize memFlags;
 @synthesize memName;
 @synthesize memID;
-@synthesize memIconCount;
+- (int)memIconCount
+{
+	return [memImages count];
+}
 @synthesize memImages;
 
 - (void)dealloc

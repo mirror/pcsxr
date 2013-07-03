@@ -23,7 +23,6 @@ extern NSString *const memoryAnimateTimerKey;
 	NSString *memID;
 	NSImage *memImage;
 	NSArray *memImages;
-	int memIconCount;
 	BOOL notDeleted;
 	unsigned char memFlags;
 }
