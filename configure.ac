@@ -142,8 +142,8 @@ if test "$BUILD_OPENGL" = "yes"; then
 	AC_CONFIG_FILES([plugins/peopsxgl/Makefile])
 fi
 
-AC_ARG_ENABLE(sio1, [  --enable-sio1         build SIO1 plugin (default=no)],
-[ BUILD_SIO1="$enableval" ],[ BUILD_SIO1="no" ])
+AC_ARG_ENABLE(sio1, [  --enable-sio1         build SIO1 plugin (default=yes)],
+[ BUILD_SIO1="$enableval" ],[ BUILD_SIO1="yes" ])
 
 BLADESIO1=""
 
