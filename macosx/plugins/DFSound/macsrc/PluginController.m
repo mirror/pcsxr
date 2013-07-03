@@ -41,7 +41,7 @@ extern char* PLUGLOC(char* toloc);
 #endif
 #define PrefsKey APP_ID @" Settings"
 
-static PluginController *pluginController = nil;
+static SPUPluginController *pluginController = nil;
 char * pConfigFile=NULL;
 
 void DoAbout()
@@ -80,11 +80,7 @@ long DoConfiguration()
 	NSWindow *window;
 	
 	if (pluginController == nil) {
-#ifdef USEOPENAL
-		pluginController = [[PluginController alloc] initWithWindowNibName:@"NetSfPeopsSpuALPluginMain"];
-#else
-		pluginController = [[PluginController alloc] initWithWindowNibName:@"NetSfPeopsSpuSDLPluginMain"];
-#endif
+		pluginController = [[PluginController alloc] initWithWindowNibName:@"NetSfPeopsSpuPluginMain"];
 	}
 	window = [pluginController window];
 
@@ -103,13 +99,13 @@ void ReadConfig(void)
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 								[NSDictionary dictionaryWithObjectsAndKeys:
-								 [NSNumber numberWithBool:YES], @"High Compatibility Mode",
-								 [NSNumber numberWithBool:YES], @"SPU IRQ Wait",
-								 [NSNumber numberWithBool:NO], @"XA Pitch",
-								 [NSNumber numberWithBool:NO], @"Mono Sound Output",
-								 [NSNumber numberWithInt:0], @"Interpolation Quality",
-								 [NSNumber numberWithInt:1], @"Reverb Quality",
-								 [NSNumber numberWithInt:3], @"Volume",
+								 @YES, @"High Compatibility Mode",
+								 @YES, @"SPU IRQ Wait",
+								 @NO, @"XA Pitch",
+								 @NO, @"Mono Sound Output",
+								 @0, @"Interpolation Quality",
+								 @1, @"Reverb Quality",
+								 @3, @"Volume",
 								 nil], PrefsKey,
 								nil]];
 
@@ -138,15 +134,15 @@ void ReadConfig(void)
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
-	[writeDic setObject:[NSNumber numberWithBool:[hiCompBox intValue]] forKey:@"High Compatibility Mode"];
-	[writeDic setObject:[NSNumber numberWithBool:[irqWaitBox intValue]] forKey:@"SPU IRQ Wait"];
-	[writeDic setObject:[NSNumber numberWithBool:[monoSoundBox intValue]] forKey:@"Mono Sound Output"];
-	[writeDic setObject:[NSNumber numberWithBool:[xaSpeedBox intValue]] forKey:@"XA Pitch"];
+	[writeDic setObject:@((BOOL)[hiCompBox intValue]) forKey:@"High Compatibility Mode"];
+	[writeDic setObject:@((BOOL)[irqWaitBox intValue]) forKey:@"SPU IRQ Wait"];
+	[writeDic setObject:@((BOOL)[monoSoundBox intValue]) forKey:@"Mono Sound Output"];
+	[writeDic setObject:@((BOOL)[xaSpeedBox intValue]) forKey:@"XA Pitch"];
 
-	[writeDic setObject:[NSNumber numberWithInt:[interpolValue intValue]] forKey:@"Interpolation Quality"];
-	[writeDic setObject:[NSNumber numberWithInt:[reverbValue intValue]] forKey:@"Reverb Quality"];
+	[writeDic setObject:@([interpolValue intValue]) forKey:@"Interpolation Quality"];
+	[writeDic setObject:@([reverbValue intValue]) forKey:@"Reverb Quality"];
 
-	[writeDic setObject:[NSNumber numberWithInt:[volumeValue intValue]] forKey:@"Volume"];
+	[writeDic setObject:@([volumeValue intValue]) forKey:@"Volume"];
 
 	// write to defaults
 	[defaults setObject:writeDic forKey:PrefsKey];
@@ -187,37 +183,40 @@ void ReadConfig(void)
 
 - (void)awakeFromNib
 {
-	NSBundle *mainBundle = [NSBundle bundleForClass:[self class]];
+	Class thisClass = [self class];
+	
+	NSBundle *mainBundle = [NSBundle bundleForClass:thisClass];
+	
+	[interpolValue setStrings:@[
+		[mainBundle localizedStringForKey:@"(No Interpolation)" value:@"" table:nil],
+		[mainBundle localizedStringForKey:@"(Simple Interpolation)" value:@"" table:nil],
+		[mainBundle localizedStringForKey:@"(Gaussian Interpolation)" value:@"" table:nil],
+		[mainBundle localizedStringForKey:@"(Cubic Interpolation)" value:@"" table:nil]]];
+	interpolValue.pluginClass = thisClass;
 
-	[interpolValue setStrings:[NSArray arrayWithObjects:
-		[mainBundle localizedStringForKey:@"(No Interpolation)" value:nil table:nil],
-		[mainBundle localizedStringForKey:@"(Simple Interpolation)" value:nil table:nil],
-		[mainBundle localizedStringForKey:@"(Gaussian Interpolation)" value:nil table:nil],
-		[mainBundle localizedStringForKey:@"(Cubic Interpolation)" value:nil table:nil],
-		nil]];
+	[reverbValue setStrings:@[
+		[mainBundle localizedStringForKey:@"(No Reverb)" value:@"" table:nil],
+		[mainBundle localizedStringForKey:@"(Simple Reverb)" value:@"" table:nil],
+		[mainBundle localizedStringForKey:@"(PSX Reverb)" value:@"" table:nil]]];
+	reverbValue.pluginClass = thisClass;
 
-	[reverbValue setStrings:[NSArray arrayWithObjects:
-		[mainBundle localizedStringForKey:@"(No Reverb)" value:nil table:nil],
-		[mainBundle localizedStringForKey:@"(Simple Reverb)" value:nil table:nil],
-		[mainBundle localizedStringForKey:@"(PSX Reverb)" value:nil table:nil],
-		nil]];
-
-	[volumeValue setStrings:[NSArray arrayWithObjects:
-		[mainBundle localizedStringForKey:@"(Muted)" value:nil table:nil],
-		[mainBundle localizedStringForKey:@"(Low)" value:nil table:nil],
-		[mainBundle localizedStringForKey:@"(Medium)" value:nil table:nil],
-		[mainBundle localizedStringForKey:@"(Loud)" value:nil table:nil],
-		[mainBundle localizedStringForKey:@"(Loudest)" value:nil table:nil],
-		nil]];
+	[volumeValue setStrings:@[
+		[mainBundle localizedStringForKey:@"(Muted)" value:@"" table:nil],
+		[mainBundle localizedStringForKey:@"(Low)" value:@"" table:nil],
+		[mainBundle localizedStringForKey:@"(Medium)" value:@"" table:nil],
+		[mainBundle localizedStringForKey:@"(Loud)" value:@"" table:nil],
+		[mainBundle localizedStringForKey:@"(Loudest)" value:@"" table:nil]]];
+	volumeValue.pluginClass = thisClass;
 }
 
 @end
+
 
 char* PLUGLOC(char *toloc)
 {
 	NSBundle *mainBundle = [NSBundle bundleForClass:[PluginController class]];
 	NSString *origString = nil, *transString = nil;
-	origString = [NSString stringWithCString:toloc encoding:NSUTF8StringEncoding];
-	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
-	return (char*)[transString cStringUsingEncoding:NSUTF8StringEncoding];
+	origString = @(toloc);
+	transString = [mainBundle localizedStringForKey:origString value:@"" table:nil];
+	return (char*)[transString UTF8String];
 }

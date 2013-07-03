@@ -2,16 +2,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-#ifdef USEOPENAL
-#define NamedSlider NetSfPeopsSPUALPluginNamedSlider
-#else
-#define NamedSlider NetSfPeopsSPUSDLPluginNamedSlider
-#endif
-
 @interface NamedSlider : NSSlider
 {
 	NSArray *strings;
+	Class pluginClass;
 }
-
-- (void)setStrings:(NSArray *)theStrings;
+@property (retain) NSArray *strings;
+@property Class pluginClass;
 @end

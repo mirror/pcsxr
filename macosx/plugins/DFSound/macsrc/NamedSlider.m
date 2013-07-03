@@ -1,19 +1,16 @@
 #import "NamedSlider.h"
 
 @implementation NamedSlider
+@synthesize pluginClass;
 
 - (void)dealloc
 {
-	[strings release];
+	self.strings = nil;
+	
 	[super dealloc];
 }
 
-- (void)setStrings:(NSArray *)theStrings
-{
-	[theStrings retain];
-	[strings release];
-	strings = theStrings;
-}
+@synthesize strings;
 
 - (NSString *)stringValue
 {
@@ -22,7 +19,11 @@
 	if (index >= 0 && index < [strings count])
 		return [strings objectAtIndex:index];
 
-	return @"(Unknown)";
+	if (!pluginClass) {
+		return @"(Unknown)";
+	} else {
+		return [[NSBundle bundleForClass:pluginClass] localizedStringForKey:@"(Unknown)" value:@"" table:nil];
+	}
 }
 
 - (void)setIntValue:(int)value
