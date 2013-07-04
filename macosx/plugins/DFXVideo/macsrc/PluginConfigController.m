@@ -3,7 +3,8 @@
 #include "cfg.h"
 #include "menu.h"
 #include "externals.h"
-#include "SGPUPreferences.h"
+#import "SGPUPreferences.h"
+#import "ARCBridge.h"
 
 #ifdef ENABLE_NLS
 #include <libintl.h>
@@ -52,10 +53,11 @@ void AboutDlgProc()
 	NSString *path = [bundle pathForResource:@"Credits" ofType:@"rtf"];
 	NSAttributedString *credits;
 	if (path) {
-		credits = [[[NSAttributedString alloc] initWithPath: path
-				documentAttributes:NULL] autorelease];
+		credits = [[NSAttributedString alloc] initWithPath: path
+				documentAttributes:NULL];
+		AUTORELEASEOBJNORETURN(credits);
 	} else {
-		credits = [[[NSAttributedString alloc] initWithString:@""] autorelease];
+		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithString:@""]);
 	}
 	
 	// Get Application Icon
@@ -125,18 +127,18 @@ void ReadConfig(void)
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 								[NSDictionary dictionaryWithObjectsAndKeys:
-								 [NSNumber numberWithBool:NO], @"FPS Counter",
-								 [NSNumber numberWithBool:NO], @"Auto Full Screen",
-								 [NSNumber numberWithBool:NO], @"Frame Skipping",
-								 [NSNumber numberWithBool:YES], @"Frame Limit",
-								 [NSNumber numberWithBool:NO], @"VSync",
-								 [NSNumber numberWithBool:NO], @"Enable Hacks",
-								 [NSNumber numberWithInt:1], @"Dither Mode",
-								 [NSNumber numberWithUnsignedInt:0], @"Hacks",
+								 @NO, @"FPS Counter",
+								 @NO, @"Auto Full Screen",
+								 @NO, @"Frame Skipping",
+								 @YES, @"Frame Limit",
+								 @NO, @"VSync",
+								 @NO, @"Enable Hacks",
+								 @1, @"Dither Mode",
+								 @((unsigned int)0), @"Hacks",
 								 [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"] bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil], @"VertexShader",
 								 [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"] bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil], @"FragmentShader",
 								 [NSNumber numberWithBool:NO], @"UseShader",
-								 [NSNumber numberWithInt:4], @"ShaderQuality",
+								 @4, @"ShaderQuality",
 								 nil], PrefsKey,
 								nil]];
 	
@@ -254,24 +256,24 @@ void ReadConfig(void)
 }
 
 - (IBAction)selectShader:(id)sender {
-	NSOpenPanel *openPanel = [[NSOpenPanel openPanel] retain];
+	NSOpenPanel *openPanel = RETAINOBJ([NSOpenPanel openPanel]);
 	[openPanel setAllowsMultipleSelection:NO];
 	[openPanel setCanChooseDirectories:NO];
 	[openPanel setCanChooseFiles:YES];
 	if ([openPanel runModal] == NSFileHandlingPanelOKButton)
 	{
 		if ([sender tag] == 1) {
-			[vertexPath release];
-			vertexPath = [[openPanel URL] copy];
+			RELEASEOBJ(vertexPath);
+			vertexPath = RETAINOBJ([openPanel URL]);
 			[vertexShaderViewablePath setTitleWithMnemonic:[vertexPath path]];
 		} else {
-			[fragmentPath release];
-			fragmentPath = [[openPanel URL] copy];
+			RELEASEOBJ(fragmentPath);
+			fragmentPath = RETAINOBJ([openPanel URL]);
 			[fragmentShaderViewablePath setTitleWithMnemonic:[fragmentPath path]];
 		}
 	}
 	
-	[openPanel release];
+	RELEASEOBJ(openPanel);
 }
 
 - (void)loadValues
@@ -281,7 +283,7 @@ void ReadConfig(void)
 	ReadConfig();
 	
 	/* load from preferences */
-	[keyValues release];
+	RELEASEOBJ(keyValues);
 	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 	
 	{
@@ -299,8 +301,8 @@ void ReadConfig(void)
 			vertexPath = [selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"];
 			fragmentPath = [selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"];
 		}
-		[vertexPath retain];
-		[fragmentPath retain];
+		RETAINOBJNORETURN(vertexPath);
+		RETAINOBJNORETURN(fragmentPath);
 	}
 	[fpsCounter setIntValue:[[keyValues objectForKey:@"FPS Counter"] intValue]];
 	[autoFullScreen setIntValue:[[keyValues objectForKey:@"Auto Full Screen"] intValue]];
@@ -312,8 +314,10 @@ void ReadConfig(void)
 	[ditherMode selectItemAtIndex:[[keyValues objectForKey:@"Dither Mode"] intValue]];
 	[shaderQualitySelector selectItemAtIndex:[[keyValues objectForKey:@"ShaderQuality"] intValue] - 1];
 	
-	[vertexShaderViewablePath setTitleWithMnemonic:[vertexPath path]];
-	[fragmentShaderViewablePath setTitleWithMnemonic:[fragmentPath path]];
+	[vertexShaderViewablePath setTitleWithMnemonic:[vertexPath lastPathComponent]];
+	[vertexShaderViewablePath setToolTip:[vertexPath path]];
+	[fragmentShaderViewablePath setTitleWithMnemonic:[fragmentPath lastPathComponent]];
+	[fragmentShaderViewablePath setToolTip:[fragmentPath path]];
 	unsigned int hackValues = [[keyValues objectForKey:@"Hacks"] unsignedIntValue];
 	
 	
@@ -335,6 +339,7 @@ void ReadConfig(void)
 	shadersView = [[shadersView subviews] objectAtIndex:0];
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc
 {
 	[vertexPath release];
@@ -343,6 +348,7 @@ void ReadConfig(void)
 	
 	[super dealloc];
 }
+#endif
 
 @end
 

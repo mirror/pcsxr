@@ -21,6 +21,7 @@
 
 #import "PluginConfigController.h"
 #include "cdr.h"
+#import "ARCBridge.h"
 
 #define APP_ID @"net.pcsxr.DFCdrom"
 #define PrefsKey APP_ID @" Settings"
@@ -37,10 +38,12 @@ void AboutDlgProc()
 	NSString *path = [bundle pathForResource:@"Credits" ofType:@"rtf"];
 	NSAttributedString *credits;
 	if (path) {
-		credits = [[[NSAttributedString alloc] initWithPath: path
-				documentAttributes:NULL] autorelease];
+		credits = [[NSAttributedString alloc] initWithPath: path
+				documentAttributes:NULL];
+		AUTORELEASEOBJNORETURN(credits);
+		
 	} else {
-		credits = [[[NSAttributedString alloc] initWithString:@""] autorelease];
+		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithString:@""]);
 	}
 
 	// Get Application Icon
@@ -79,9 +82,9 @@ void ReadConfig()
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 		[NSDictionary dictionaryWithObjectsAndKeys:
-			[NSNumber numberWithBool:YES], @"Threaded",
-			[NSNumber numberWithInt:64], @"Cache Size",
-			[NSNumber numberWithInt:0], @"Speed",
+			@YES, @"Threaded",
+			@64, @"Cache Size",
+			@0, @"Speed",
 			nil], PrefsKey, nil]];
 
 	keyValues = [defaults dictionaryForKey:PrefsKey];
@@ -104,17 +107,17 @@ void ReadConfig()
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
 
-	[writeDic setObject:[NSNumber numberWithBool:[Cached intValue]] forKey:@"Threaded"];
-	[writeDic setObject:[NSNumber numberWithInt:[CacheSize intValue]] forKey:@"Cache Size"];
+	[writeDic setObject:@((BOOL)[Cached intValue]) forKey:@"Threaded"];
+	[writeDic setObject:@([CacheSize intValue]) forKey:@"Cache Size"];
 
 	switch ([CdSpeed indexOfSelectedItem]) {
-		case 1: [writeDic setObject:[NSNumber numberWithInt:1] forKey:@"Speed"]; break;
-		case 2: [writeDic setObject:[NSNumber numberWithInt:2] forKey:@"Speed"]; break;
-		case 3: [writeDic setObject:[NSNumber numberWithInt:4] forKey:@"Speed"]; break;
-		case 4: [writeDic setObject:[NSNumber numberWithInt:8] forKey:@"Speed"]; break;
-		case 5: [writeDic setObject:[NSNumber numberWithInt:16] forKey:@"Speed"]; break;
-		case 6: [writeDic setObject:[NSNumber numberWithInt:32] forKey:@"Speed"]; break;
-		default: [writeDic setObject:[NSNumber numberWithInt:0] forKey:@"Speed"]; break;
+		case 1: [writeDic setObject:@1 forKey:@"Speed"]; break;
+		case 2: [writeDic setObject:@2 forKey:@"Speed"]; break;
+		case 3: [writeDic setObject:@4 forKey:@"Speed"]; break;
+		case 4: [writeDic setObject:@8 forKey:@"Speed"]; break;
+		case 5: [writeDic setObject:@16 forKey:@"Speed"]; break;
+		case 6: [writeDic setObject:@32 forKey:@"Speed"]; break;
+		default: [writeDic setObject:@0 forKey:@"Speed"]; break;
 	}
 
 	// write to defaults
@@ -134,7 +137,7 @@ void ReadConfig()
 	ReadConfig();
 
 	// load from preferences
-	[keyValues release];
+	RELEASEOBJ(keyValues);
 	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 
 	[Cached setIntValue:[[keyValues objectForKey:@"Threaded"] intValue]];

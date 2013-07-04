@@ -10,6 +10,7 @@
 		28586CC614651E870082B8EC /* DFCdromPluginConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28586CC414651E870082B8EC /* DFCdromPluginConfig.xib */; };
 		2BD707180555997500CB5D9B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BD707170555997500CB5D9B /* IOKit.framework */; };
 		552E4CBA1474737A00FB231F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 552E4CBC1474737A00FB231F /* Localizable.strings */; };
+		5586006E1785137C00CB3D85 /* ARCBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 5586006D1785137C00CB3D85 /* ARCBridge.h */; };
 		713DB2E811F113C30001BDD4 /* cdr.c in Sources */ = {isa = PBXBuildFile; fileRef = 713DB2E311F113C30001BDD4 /* cdr.c */; };
 		713DB2E911F113C30001BDD4 /* cdr.h in Headers */ = {isa = PBXBuildFile; fileRef = 713DB2E411F113C30001BDD4 /* cdr.h */; };
 		713DB2EB11F113C30001BDD4 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 713DB2E611F113C30001BDD4 /* util.c */; };
@@ -30,6 +31,7 @@
 		28586CC514651E870082B8EC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/DFCdromPluginConfig.xib; sourceTree = "<group>"; };
 		2BD707170555997500CB5D9B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		552E4CBB1474737A00FB231F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5586006D1785137C00CB3D85 /* ARCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		713DB2E311F113C30001BDD4 /* cdr.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = cdr.c; path = ../../../plugins/dfcdrom/cdr.c; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		713DB2E411F113C30001BDD4 /* cdr.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = cdr.h; path = ../../../plugins/dfcdrom/cdr.h; sourceTree = SOURCE_ROOT; };
 		713DB2E611F113C30001BDD4 /* util.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; lineEnding = 0; name = util.c; path = ../../../plugins/dfcdrom/util.c; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.c; };
@@ -123,6 +125,7 @@
 		71F3C32111F3CCEF007B9F12 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
+				5586006D1785137C00CB3D85 /* ARCBridge.h */,
 				71F3C32411F3CD0B007B9F12 /* cdr-macosx.c */,
 				71F3C32511F3CD0B007B9F12 /* cfg.c */,
 				71F3C32611F3CD0B007B9F12 /* PluginConfigController.h */,
@@ -140,6 +143,7 @@
 			files = (
 				713DB2E911F113C30001BDD4 /* cdr.h in Headers */,
 				71F3C32A11F3CD0B007B9F12 /* PluginConfigController.h in Headers */,
+				5586006E1785137C00CB3D85 /* ARCBridge.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,24 +275,23 @@
 		7107359A0FDEED75004AD098 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=DFCdrom",
-					"_MACOSX=1",
+					"$(inherited)",
 				);
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = DFCdrom;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SECTORDER_FLAGS = "";
-				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -296,24 +299,23 @@
 		7107359B0FDEED75004AD098 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=DFCdrom",
-					"_MACOSX=1",
+					"$(inherited)",
 				);
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = DFCdrom;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SECTORDER_FLAGS = "";
-				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -327,8 +329,12 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
+				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -342,7 +348,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = ../../build;
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
@@ -356,8 +361,12 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_PREPROCESSOR_DEFINITIONS = "";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
+				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -369,7 +378,6 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
-				SYMROOT = ../../build;
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;

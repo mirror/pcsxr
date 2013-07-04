@@ -10,6 +10,7 @@
 #include "dfnet.h"
 
 #import "EmuThread.h"
+#import "ARCBridge.h"
 
 void SysMessage(const char *fmt, ...)
 {
@@ -72,7 +73,8 @@ void sockDestroyWaitDlg()
 	dispatch_sync(dispatch_get_main_queue(), ^{
 		if (globalSock != nil) {
 			[globalSock close];
-			[globalSock release];
+			
+			RELEASEOBJ(globalSock);
 			globalSock = nil;
 		}
 	});
@@ -92,10 +94,12 @@ void sockDestroyWaitDlg()
 	return self;
 }
 
+#if !__has_feature(objc_arc)
 -(void)dealloc
 {
 	
 	[super dealloc];
 }
+#endif
 
 @end

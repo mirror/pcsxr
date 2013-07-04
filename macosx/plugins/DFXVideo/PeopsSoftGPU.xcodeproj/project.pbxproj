@@ -21,6 +21,7 @@
 		552E4CAE1474730B00FB231F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 552E4CB01474730B00FB231F /* Localizable.strings */; };
 		5555E0C41606839300C0A310 /* gpuPeteOGL2.slf in Resources */ = {isa = PBXBuildFile; fileRef = 5555E0C21606839300C0A310 /* gpuPeteOGL2.slf */; };
 		5555E0C51606839300C0A310 /* gpuPeteOGL2.slv in Resources */ = {isa = PBXBuildFile; fileRef = 5555E0C31606839300C0A310 /* gpuPeteOGL2.slv */; };
+		5586006717850E7600CB3D85 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5586006617850E7600CB3D85 /* Cocoa.framework */; };
 		71E9EC06109F24E700E98D1D /* fps.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E9EBF4109F24E600E98D1D /* fps.c */; };
 		71E9EC08109F24E700E98D1D /* gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E9EBF6109F24E600E98D1D /* gpu.c */; };
 		71E9EC0B109F24E700E98D1D /* key.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E9EBF9109F24E600E98D1D /* key.c */; };
@@ -44,7 +45,7 @@
 		2B959E4306342D32000F2A2D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		2BAF4FC90632967A00DB9A16 /* PluginGLView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginGLView.h; path = macsrc/PluginGLView.h; sourceTree = SOURCE_ROOT; };
 		2BAF4FCA0632967A00DB9A16 /* PluginGLView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PluginGLView.m; path = macsrc/PluginGLView.m; sourceTree = SOURCE_ROOT; };
-		2BAF50930632BB1A00DB9A16 /* PeopsSoftGL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopsSoftGL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BAF50930632BB1A00DB9A16 /* gpuPeopsSoftGL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gpuPeopsSoftGL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BB260A60777462E00F6854C /* PluginConfigController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginConfigController.h; path = macsrc/PluginConfigController.h; sourceTree = SOURCE_ROOT; };
 		2BB260A70777462E00F6854C /* PluginConfigController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PluginConfigController.m; path = macsrc/PluginConfigController.m; sourceTree = SOURCE_ROOT; };
 		2BD2E768077AF53E00657C69 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
@@ -52,6 +53,11 @@
 		5555E0C21606839300C0A310 /* gpuPeteOGL2.slf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gpuPeteOGL2.slf; sourceTree = "<group>"; };
 		5555E0C31606839300C0A310 /* gpuPeteOGL2.slv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gpuPeteOGL2.slv; sourceTree = "<group>"; };
 		5555E0CA160695BF00C0A310 /* SGPUPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPUPreferences.h; path = macsrc/SGPUPreferences.h; sourceTree = "<group>"; };
+		5586006017850E5800CB3D85 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		5586006217850E6C00CB3D85 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		5586006317850E6C00CB3D85 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5586006617850E7600CB3D85 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		5586006C1785137400CB3D85 /* ARCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		55D42F0E168D9A7F0027EBF0 /* ExtendedKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ExtendedKeys.h; path = macsrc/ExtendedKeys.h; sourceTree = "<group>"; };
 		71E9EBF1109F24E600E98D1D /* cfg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cfg.h; path = ../../../plugins/dfxvideo/cfg.h; sourceTree = SOURCE_ROOT; };
 		71E9EBF2109F24E600E98D1D /* draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = draw.h; path = ../../../plugins/dfxvideo/draw.h; sourceTree = SOURCE_ROOT; };
@@ -78,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5586006717850E7600CB3D85 /* Cocoa.framework in Frameworks */,
 				2B959E4406342D32000F2A2D /* OpenGL.framework in Frameworks */,
 				2BD7C777076E1FAB000F05ED /* GLUT.framework in Frameworks */,
 			);
@@ -101,8 +108,10 @@
 		2B3E5A0B062AAC34001D796E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5586006617850E7600CB3D85 /* Cocoa.framework */,
 				2B959E4306342D32000F2A2D /* OpenGL.framework */,
 				2B51949E06B3D2D200744730 /* GLUT.framework */,
+				5586006817850E8800CB3D85 /* Additional Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -110,7 +119,7 @@
 		2B3E5A46062AACF3001D796E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2BAF50930632BB1A00DB9A16 /* PeopsSoftGL.psxplugin */,
+				2BAF50930632BB1A00DB9A16 /* gpuPeopsSoftGL.psxplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,6 +127,7 @@
 		2BD2E2F40779F50B00657C69 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
+				5586006C1785137400CB3D85 /* ARCBridge.h */,
 				55D42F0E168D9A7F0027EBF0 /* ExtendedKeys.h */,
 				2BB260A60777462E00F6854C /* PluginConfigController.h */,
 				2BB260A70777462E00F6854C /* PluginConfigController.m */,
@@ -145,6 +155,16 @@
 				2B038C05069183300082466B /* InfoPlist.strings */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		5586006817850E8800CB3D85 /* Additional Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5586006217850E6C00CB3D85 /* CoreFoundation.framework */,
+				5586006317850E6C00CB3D85 /* Foundation.framework */,
+				5586006017850E5800CB3D85 /* AppKit.framework */,
+			);
+			name = "Additional Frameworks";
 			sourceTree = "<group>";
 		};
 		71E9EBF0109F24B600E98D1D /* src */ = {
@@ -189,7 +209,7 @@
 			);
 			name = gpuPeopsSoftGL;
 			productName = gpuPeopsSoftGL;
-			productReference = 2BAF50930632BB1A00DB9A16 /* PeopsSoftGL.psxplugin */;
+			productReference = 2BAF50930632BB1A00DB9A16 /* gpuPeopsSoftGL.psxplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -298,6 +318,7 @@
 		7170842D0FDFD328004F3EB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -309,6 +330,7 @@
 					"PCSXRPLUG=SoftGL",
 					_MACGL,
 					_DARWIN,
+					"$(inherited)",
 				);
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
@@ -316,15 +338,8 @@
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OPTIMIZATION_CFLAGS = "-finline-functions -finline-limit=1600 -fno-exceptions -funroll-loops -falign-loops=16 -ffast-math";
 				OTHER_CFLAGS = "-finline-functions";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PRODUCT_NAME = PeopsSoftGL;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SECTORDER_FLAGS = "";
-				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -332,6 +347,7 @@
 		7170842E0FDFD328004F3EB4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -343,21 +359,15 @@
 					"PCSXRPLUG=SoftGL",
 					_MACGL,
 					_DARWIN,
+					"$(inherited)",
 				);
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OPTIMIZATION_CFLAGS = "-finline-functions -finline-limit=1600 -fomit-frame-pointer -fno-exceptions -funroll-loops -falign-loops=16 -ffast-math";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PRODUCT_NAME = PeopsSoftGL;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SECTORDER_FLAGS = "";
-				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -371,7 +381,12 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
+				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -383,7 +398,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SYMROOT = ../../build;
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
@@ -397,7 +411,12 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_PREPROCESSOR_DEFINITIONS = "";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
+				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -408,7 +427,6 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
-				SYMROOT = ../../build;
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;

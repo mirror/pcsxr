@@ -3,12 +3,14 @@
 @implementation NamedSlider
 @synthesize pluginClass;
 
+#if !__has_feature(objc_arc)
 - (void)dealloc
 {
 	self.strings = nil;
 	
 	[super dealloc];
 }
+#endif
 
 @synthesize strings;
 

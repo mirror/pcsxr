@@ -37,7 +37,7 @@
 		2B038D2206918AA80082466B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B51949E06B3D2D200744730 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
 		2B959E4306342D32000F2A2D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
-		2BAF50930632BB1A00DB9A16 /* PeopsXGL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopsXGL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BAF50930632BB1A00DB9A16 /* gpuPeopsXGL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gpuPeopsXGL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BD2E768077AF53E00657C69 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		3F31AF6A1302D4B600CBB551 /* drawgl.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = drawgl.m; path = macsrc/drawgl.m; sourceTree = SOURCE_ROOT; };
 		3F31AF6E1302D4B600CBB551 /* PluginGLView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PluginGLView.h; path = macsrc/PluginGLView.h; sourceTree = SOURCE_ROOT; };
@@ -68,6 +68,7 @@
 		3F7F384613079BFD00556C34 /* draw.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = draw.h; path = ../../../plugins/peopsxgl/draw.h; sourceTree = SOURCE_ROOT; };
 		3F7F384713079BFD00556C34 /* draw.c */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = draw.c; path = ../../../plugins/peopsxgl/draw.c; sourceTree = SOURCE_ROOT; };
 		552E4CCA1474742F00FB231F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		558600711785139200CB3D85 /* ARCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		55D42F10168D9AAE0027EBF0 /* ExtendedKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ExtendedKeys.h; path = macsrc/ExtendedKeys.h; sourceTree = "<group>"; };
 		55F36E4A146C9F9900718DE6 /* drawgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = drawgl.h; path = macsrc/drawgl.h; sourceTree = "<group>"; };
 		A191B90513F6741300D0971F /* gte_accuracy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gte_accuracy.c; path = ../../../plugins/peopsxgl/gte_accuracy.c; sourceTree = SOURCE_ROOT; };
@@ -111,7 +112,7 @@
 		2B3E5A46062AACF3001D796E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2BAF50930632BB1A00DB9A16 /* PeopsXGL.psxplugin */,
+				2BAF50930632BB1A00DB9A16 /* gpuPeopsXGL.psxplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,6 +120,7 @@
 		2BD2E2F40779F50B00657C69 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
+				558600711785139200CB3D85 /* ARCBridge.h */,
 				55D42F10168D9AAE0027EBF0 /* ExtendedKeys.h */,
 				3F7F38021307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.h */,
 				3F7F38031307999800556C34 /* NetSfPeopsOpenGLPluginConfigController.m */,
@@ -191,7 +193,7 @@
 			);
 			name = gpuPeopsXGL;
 			productName = gpuPeopsSoftGL;
-			productReference = 2BAF50930632BB1A00DB9A16 /* PeopsXGL.psxplugin */;
+			productReference = 2BAF50930632BB1A00DB9A16 /* gpuPeopsXGL.psxplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -301,6 +303,7 @@
 		7170842D0FDFD328004F3EB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -311,7 +314,7 @@
 					"PCSXRPLUG=PeopsXGL",
 					_MACGL,
 					_DARWIN,
-					"_MACOSX=1",
+					"$(inherited)",
 				);
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
@@ -325,9 +328,8 @@
 					"-framework",
 					AppKit,
 				);
-				PRODUCT_NAME = PeopsXGL;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SECTORDER_FLAGS = "";
-				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -335,6 +337,7 @@
 		7170842E0FDFD328004F3EB4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -345,7 +348,7 @@
 					"PCSXRPLUG=PeopsXGL",
 					_MACGL,
 					_DARWIN,
-					"_MACOSX=1",
+					"$(inherited)",
 				);
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
@@ -358,9 +361,8 @@
 					"-framework",
 					AppKit,
 				);
-				PRODUCT_NAME = PeopsXGL;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SECTORDER_FLAGS = "";
-				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -374,7 +376,12 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
+				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -387,7 +394,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SYMROOT = ../../build;
 				VALID_ARCHS = "i386 x86_64";
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -402,9 +408,14 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_PREPROCESSOR_DEFINITIONS = "";
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
+				);
 				GCC_UNROLL_LOOPS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
@@ -418,7 +429,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "-fomit-frame-pointer";
 				SDKROOT = macosx;
-				SYMROOT = ../../build;
 				VALID_ARCHS = "i386 x86_64";
 				WARNING_CFLAGS = "-Wall";
 			};

@@ -113,6 +113,13 @@
 			remoteGlobalIDString = 5599695E13AFCD2900B0216B;
 			remoteInfo = PeopsAL;
 		};
+		5586005E17850CFC00CB3D85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 554588431783DF39008A7407;
+			remoteInfo = SPUSharedCode;
+		};
 		559DAC45146BA61400C5DF71 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 71AD2DC710C356FD00365243 /* PeopsSPU.xcodeproj */;
@@ -597,6 +604,7 @@
 			children = (
 				71AD2DD110C356FD00365243 /* PeopsSpuSDL.psxplugin */,
 				28B467F11463D0020083F129 /* PeopsSpuAL.psxplugin */,
+				5586005F17850CFC00CB3D85 /* libSPUSharedCode.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -734,6 +742,13 @@
 			fileType = wrapper.cfbundle;
 			path = PeopsSpuAL.psxplugin;
 			remoteRef = 28B467F01463D0020083F129 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5586005F17850CFC00CB3D85 /* libSPUSharedCode.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libSPUSharedCode.dylib;
+			remoteRef = 5586005E17850CFC00CB3D85 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		559DACAE146C647E00C5DF71 /* DFNet.psxplugin */ = {
@@ -1002,12 +1017,12 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					PCSXRCORE,
-					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_1)",
+					"PCSXR_VERSION=\\\"1.5\\\"",
+					"XA_HACK=1",
 					"_MACOSX=1",
 					__MACOSX__,
-					DEBUG,
+					"$(inherited)",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_1 = "PCSXR_VERSION=\\\"1.5\\\" XA_HACK=1";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
@@ -1030,11 +1045,12 @@
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					PCSXRCORE,
-					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_1)",
+					"PCSXR_VERSION=\\\"1.5\\\"",
+					"XA_HACK=1",
 					"_MACOSX=1",
 					__MACOSX__,
+					"$(inherited)",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_1 = "PCSXR_VERSION=\\\"1.5\\\" XA_HACK=1";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
@@ -1058,6 +1074,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

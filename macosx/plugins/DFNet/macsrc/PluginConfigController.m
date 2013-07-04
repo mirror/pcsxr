@@ -21,6 +21,7 @@
 
 #import "PluginConfigController.h"
 #include "dfnet.h"
+#import "ARCBridge.h"
 
 NSString * const kIPADDRKEY = @"IP Address";
 NSString * const kIPPORT = @"IP Port";
@@ -41,10 +42,11 @@ void AboutDlgProc()
 	NSString *path = [bundle pathForResource:@"Credits" ofType:@"rtf"];
 	NSAttributedString *credits;
 	if (path) {
-		credits = [[[NSAttributedString alloc] initWithPath: path
-				documentAttributes:NULL] autorelease];
+		credits = [[NSAttributedString alloc] initWithPath: path
+				documentAttributes:NULL];
+		AUTORELEASEOBJNORETURN(credits);
 	} else {
-		credits = [[[NSAttributedString alloc] initWithString:@""] autorelease];
+		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithString:@""]);
 	}
 
 	// Get Application Icon

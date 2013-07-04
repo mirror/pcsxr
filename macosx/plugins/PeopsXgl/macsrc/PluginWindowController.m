@@ -26,6 +26,7 @@
 #include "externals.h"
 #include "draw.h" // for CreateScanLines()
 #undef BOOL
+#import "ARCBridge.h"
 
 // not sure why these aren't class or instance variables...
 NSWindow *gameWindow;
@@ -219,13 +220,12 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
 
 - (void)dealloc
 {
-  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-
-  [nc removeObserver:self];
-  windowFrame = [[self window] frame]; // huh?
-
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	
-	[super dealloc];
+	[nc removeObserver:self];
+	windowFrame = [[self window] frame]; // huh?
+
+	SUPERDEALLOC;
 }
 
 // forget keyDownEvents
@@ -346,7 +346,7 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
 - (BOOL)windowShouldClose:(id)sender
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"emuWindowDidClose" object:self];
-	[gameController autorelease];
+	AUTORELEASEOBJNORETURN(gameController);
 	gameController = nil;
 	gameWindow = nil;
     CGReleaseAllDisplays();

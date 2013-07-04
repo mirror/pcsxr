@@ -11,6 +11,7 @@
 #include "menu.h"
 #include <OpenGL/gl.h> // bah, "externals.h" thinks include files are for wimps; OpenGL header, in fact, is needed
 #include "externals.h"
+#import "ARCBridge.h"
 
 #ifdef ENABLE_NLS
 #include <libintl.h>
@@ -59,9 +60,9 @@ void AboutDlgProc()
 	NSString *path = [bundle pathForResource:@"Credits" ofType:@"rtf"];
 	NSAttributedString *credits;
 	if (path) {
-		credits = [[[NSAttributedString alloc] initWithPath: path documentAttributes:NULL] autorelease];
+		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithPath: path documentAttributes:NULL]);
 	} else {
-		credits = [[[NSAttributedString alloc] initWithString:@""] autorelease];
+		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithString:@""]);
 	}
 	
 	// Get Application Icon
@@ -113,32 +114,32 @@ void PrepFactoryDefaultPreferences(void)
 
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 								 [NSDictionary dictionaryWithObjectsAndKeys:
-								  [NSNumber numberWithBool:NO], @"FPS Counter",
-								  [NSNumber numberWithBool:NO], @"Auto Full Screen",
-								  [NSNumber numberWithBool:NO], @"Frame Skipping",
-								  [NSNumber numberWithBool:YES], @"Frame Limit",
-								  [NSNumber numberWithBool:NO], @"VSync",
-								  [NSNumber numberWithBool:NO], @"Enable Hacks",
-								  [NSNumber numberWithInt:0], @"Dither Mode",
-								  [NSNumber numberWithUnsignedInt:0], @"Hacks",
+								  @NO, @"FPS Counter",
+								  @NO, @"Auto Full Screen",
+								  @NO, @"Frame Skipping",
+								  @YES, @"Frame Limit",
+								  @NO, @"VSync",
+								  @NO, @"Enable Hacks",
+								  @0, @"Dither Mode",
+								  @((unsigned int)0), @"Hacks",
 								  
-								  [NSNumber numberWithBool:YES], @"Proportional Resize",
+								  @YES, @"Proportional Resize",
 								  //[NSSize stringWithCString: @"default"], @"Fullscreen Resolution",
-								  [NSNumber numberWithInt:2], @"Offscreen Drawing Level",
-								  [NSNumber numberWithInt:0], @"Texture Color Depth Level",
-								  [NSNumber numberWithInt:0], @"Texture Enhancement Level",
-								  [NSNumber numberWithInt:0], @"Texture Filter Level",
-								  [NSNumber numberWithInt:0], @"Frame Buffer Level",
-								  [NSNumber numberWithBool:NO], @"Draw Scanlines",
+								  @2, @"Offscreen Drawing Level",
+								  @0, @"Texture Color Depth Level",
+								  @0, @"Texture Enhancement Level",
+								  @0, @"Texture Filter Level",
+								  @0, @"Frame Buffer Level",
+								  @NO, @"Draw Scanlines",
 								  // nasty:
 								  [NSArchiver archivedDataWithRootObject: [NSColor colorWithCalibratedRed:0  green:0 blue:0 alpha:0.25]], @"Scanline Color",
-								  [NSNumber numberWithBool:NO], @"Advanced Blending",
-								  [NSNumber numberWithBool:NO], @"Opaque Pass",
-								  [NSNumber numberWithBool:NO], @"Blur",
-								  [NSNumber numberWithBool:YES], @"Z Mask Clipping",
-								  [NSNumber numberWithBool:NO], @"Wireframe Mode",
-								  [NSNumber numberWithBool:YES], @"Emulate mjpeg decoder", // helps remove unsightly vertical line in movies
-								  [NSNumber numberWithBool:NO], @"Fast mjpeg decoder",
+								  @NO, @"Advanced Blending",
+								  @NO, @"Opaque Pass",
+								  @NO, @"Blur",
+								  @YES, @"Z Mask Clipping",
+								  @NO, @"Wireframe Mode",
+								  @YES, @"Emulate mjpeg decoder", // helps remove unsightly vertical line in movies
+								  @NO, @"Fast mjpeg decoder",
 								  nil],  PrefsKey, nil]];
 }
 
@@ -291,7 +292,7 @@ void ReadConfig(void)
 	keyValues = [NSMutableDictionary dictionaryWithDictionary: [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey]];
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
-	[writeDic setObject:[NSNumber numberWithUnsignedInt:hackValues] forKey:@"Hacks"];
+	[writeDic setObject:@((unsigned int)hackValues) forKey:@"Hacks"];
 	
 	// write the preferences with Hacks adjustments
 	[defaults setObject:writeDic forKey:PrefsKey];

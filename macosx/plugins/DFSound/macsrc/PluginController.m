@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "externals.h"
 #include "maccfg.h"
+#include "ARCBridge.h"
 
 #ifdef ENABLE_NLS
 #include <libintl.h>
@@ -54,9 +55,9 @@ void DoAbout()
 	NSString *path = [bundle pathForResource:@"Credits" ofType:@"rtf"];
 	NSAttributedString *credits;
 	if (path) {
-		credits = [[[NSAttributedString alloc] initWithPath: path documentAttributes:NULL] autorelease];
+		credits =  AUTORELEASEOBJ([[NSAttributedString alloc] initWithPath: path documentAttributes:NULL]);
 	} else {
-		credits = [[[NSAttributedString alloc] initWithString:@""] autorelease];
+		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithString:@""]);
 	}
 	
 	// Get Application Icon
@@ -168,7 +169,7 @@ void ReadConfig(void)
 	ReadConfig();
 
 	/* load from preferences */
-	[keyValues release];
+	RELEASEOBJ(keyValues);
 	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 
 	[hiCompBox setIntValue:[[keyValues objectForKey:@"High Compatibility Mode"] boolValue]];

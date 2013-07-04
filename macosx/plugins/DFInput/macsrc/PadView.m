@@ -33,11 +33,13 @@
 	return self;
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc
 {
 	[controller release];
 	[super dealloc];
 }
+#endif
 
 - (void)drawRect:(NSRect)rect
 {

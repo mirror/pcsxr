@@ -22,6 +22,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PadController.h"
 #include "pad.h"
+#import "ARCBridge.h"
 
 static NSWindow *padWindow = nil;
 static PadController *padController = nil;
@@ -37,10 +38,11 @@ void DoAbout() {
 	NSString *path = [bundle pathForResource:@"Credits" ofType:@"rtf"];
 	NSAttributedString *credits;
 	if (path) {
-		credits = [[[NSAttributedString alloc] initWithPath: path
-				documentAttributes:NULL] autorelease];
+		credits = [[NSAttributedString alloc] initWithPath: path
+				documentAttributes:NULL];
+		AUTORELEASEOBJNORETURN(credits);
 	} else {
-		credits = [[[NSAttributedString alloc] initWithString:@""] autorelease];
+		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithString:@""]);
 	}
 
 	// Get Application Icon

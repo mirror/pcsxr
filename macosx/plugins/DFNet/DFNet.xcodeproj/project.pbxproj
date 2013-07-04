@@ -13,6 +13,7 @@
 		55278DBE12C813AC00288CD8 /* dfnet.h in Headers */ = {isa = PBXBuildFile; fileRef = 55278DBB12C813AC00288CD8 /* dfnet.h */; };
 		55278DC212C8141600288CD8 /* cfg.c in Sources */ = {isa = PBXBuildFile; fileRef = 55278DC112C8141600288CD8 /* cfg.c */; };
 		55612EC912C965F500BD3D17 /* unix.c in Sources */ = {isa = PBXBuildFile; fileRef = 55278DBC12C813AC00288CD8 /* unix.c */; };
+		558600731785139C00CB3D85 /* ARCBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 558600721785139C00CB3D85 /* ARCBridge.h */; };
 		559DACB3146C64B800C5DF71 /* DFNet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559DACB1146C64B800C5DF71 /* DFNet.xib */; };
 		559DACB8146C64D600C5DF71 /* SockDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559DACB6146C64D600C5DF71 /* SockDialog.xib */; };
 		55F79D6C1475B252007C856E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55F79D6E1475B252007C856E /* Localizable.strings */; };
@@ -33,6 +34,7 @@
 		55278DBB12C813AC00288CD8 /* dfnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dfnet.h; path = ../../../plugins/dfnet/dfnet.h; sourceTree = SOURCE_ROOT; };
 		55278DBC12C813AC00288CD8 /* unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = unix.c; path = ../../../plugins/dfnet/unix.c; sourceTree = SOURCE_ROOT; };
 		55278DC112C8141600288CD8 /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cfg.c; sourceTree = "<group>"; };
+		558600721785139C00CB3D85 /* ARCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		559DACB2146C64B800C5DF71 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = plugins/DFNet/English.lproj/DFNet.xib; sourceTree = "<group>"; };
 		559DACB7146C64D600C5DF71 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = plugins/DFNet/English.lproj/SockDialog.xib; sourceTree = "<group>"; };
 		55F79D6D1475B252007C856E /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 		71F3C32111F3CCEF007B9F12 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
+				558600721785139C00CB3D85 /* ARCBridge.h */,
 				55278DC112C8141600288CD8 /* cfg.c */,
 				71F3C32611F3CD0B007B9F12 /* PluginConfigController.h */,
 				71F3C32711F3CD0B007B9F12 /* PluginConfigController.m */,
@@ -141,6 +144,7 @@
 				71F3C32A11F3CD0B007B9F12 /* PluginConfigController.h in Headers */,
 				55278DBE12C813AC00288CD8 /* dfnet.h in Headers */,
 				551ED70C130F209C00D19D11 /* SockDialog.h in Headers */,
+				558600731785139C00CB3D85 /* ARCBridge.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,13 +295,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=DFNet",
-					"_MACOSX=1",
+					"$(inherited)",
 				);
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				PRODUCT_NAME = DFNet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 			};
@@ -314,13 +318,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=DFNet",
-					"_MACOSX=1",
+					"$(inherited)",
 				);
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				PRODUCT_NAME = DFNet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 			};
@@ -330,8 +334,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
+				DEBUG_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
+				);
 				HEADER_SEARCH_PATHS = (
 					../../../libpcsxcore,
 					../..,
@@ -349,7 +358,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				GCC_PREPROCESSOR_DEFINITIONS = "_MACOSX=1";
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
+				DEBUG_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
+				);
 				HEADER_SEARCH_PATHS = (
 					../../../libpcsxcore,
 					../..,

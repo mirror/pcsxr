@@ -34,13 +34,11 @@
 
 }
 
-
 - (void)swapBuffer; // I wonder what this does ;-)
 - (void)clearBuffer:(BOOL)display;
 
 // overrides:
 - (id) initWithCoder: (NSCoder *) coder;
-- (void)dealloc;
 - (BOOL)isOpaque;
 - (BOOL)acceptsFirstResponder;
 - (void)reshape;

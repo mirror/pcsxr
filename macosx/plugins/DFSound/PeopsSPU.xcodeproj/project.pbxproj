@@ -27,6 +27,7 @@
 		554588751783E5FE008A7407 /* NetSfPeopsSpuPluginMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5545886E1783E5FE008A7407 /* NetSfPeopsSpuPluginMain.xib */; };
 		554588781783F2E3008A7407 /* SPUPluginController.h in Headers */ = {isa = PBXBuildFile; fileRef = 554588761783F2E3008A7407 /* SPUPluginController.h */; };
 		554588791783F2E3008A7407 /* SPUPluginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 554588771783F2E3008A7407 /* SPUPluginController.m */; };
+		5586006B1785136A00CB3D85 /* ARCBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 5586006A1785136A00CB3D85 /* ARCBridge.h */; };
 		5599693C13AFCD2900B0216B /* PluginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B2B92072D9BE6007F0C35 /* PluginController.m */; };
 		5599693E13AFCD2900B0216B /* dma.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E797109DC529003BB7AC /* dma.c */; };
 		5599693F13AFCD2900B0216B /* freeze.c in Sources */ = {isa = PBXBuildFile; fileRef = 71E4E79B109DC529003BB7AC /* freeze.c */; };
@@ -129,6 +130,7 @@
 		5545886F1783E5FE008A7407 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsSpuPluginMain.xib; sourceTree = "<group>"; };
 		554588761783F2E3008A7407 /* SPUPluginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPUPluginController.h; sourceTree = "<group>"; };
 		554588771783F2E3008A7407 /* SPUPluginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUPluginController.m; sourceTree = "<group>"; };
+		5586006A1785136A00CB3D85 /* ARCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		5599692713AFCCC600B0216B /* openal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = openal.c; sourceTree = "<group>"; };
 		5599695E13AFCD2900B0216B /* PeopsSpuAL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopsSpuAL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		5599696E13AFCE1D00B0216B /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -327,6 +329,7 @@
 		2B7B2B8E072D9BD6007F0C35 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
+				5586006A1785136A00CB3D85 /* ARCBridge.h */,
 				55F36E4B146CA0A900718DE6 /* maccfg.h */,
 				2B7B2B91072D9BE6007F0C35 /* PluginController.h */,
 				2B7B2B92072D9BE6007F0C35 /* PluginController.m */,
@@ -505,6 +508,7 @@
 			files = (
 				554588551783DF8B008A7407 /* NamedSlider.h in Headers */,
 				554588781783F2E3008A7407 /* SPUPluginController.h in Headers */,
+				5586006B1785136A00CB3D85 /* ARCBridge.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,6 +746,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -764,6 +769,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -788,7 +794,6 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=ALSound",
-					_MACOSX,
 					USEOPENAL,
 					"$(inherited)",
 				);
@@ -799,8 +804,7 @@
 				INFOPLIST_FILE = "Info-AL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				PRODUCT_NAME = PeopsSpuAL;
-				SYMROOT = ../../build;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -814,7 +818,6 @@
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=ALSound",
-					_MACOSX,
 					USEOPENAL,
 					"$(inherited)",
 				);
@@ -825,8 +828,7 @@
 				INFOPLIST_FILE = "Info-AL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				PRODUCT_NAME = PeopsSpuAL;
-				SYMROOT = ../../build;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -841,7 +843,6 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=SDLSound",
-					_MACOSX,
 					USESDL,
 					SDL_JOYSTICK_DISABLED,
 					"$(inherited)",
@@ -854,9 +855,7 @@
 				INFOPLIST_FILE = "Info-SDL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = PeopsSpuSDL;
-				SYMROOT = ../../build;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -870,7 +869,6 @@
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=SDLSound",
-					_MACOSX,
 					USESDL,
 					SDL_JOYSTICK_DISABLED,
 					"$(inherited)",
@@ -883,9 +881,7 @@
 				INFOPLIST_FILE = "Info-SDL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = PeopsSpuSDL;
-				SYMROOT = ../../build;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -894,13 +890,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
+				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -908,7 +909,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SYMROOT = ../../build;
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
@@ -917,19 +917,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_PREPROCESSOR_DEFINITIONS = "";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
+				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
-				SYMROOT = ../../build;
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
