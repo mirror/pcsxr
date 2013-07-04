@@ -53,7 +53,6 @@ extern PluginWindowController *gameController;
 - (NSRect) screenFrame;
 - (void)subscribeToEvents;
 
-
 - (id)initWithCoder:(NSCoder *)aDecoder ;
 - (id)initWithWindow:(NSWindow*)theWindow;
 

@@ -113,7 +113,6 @@
 	return YES;
 }
 
-
 - (void)keyDown:(NSEvent *)theEvent
 {
 	NSString *keyCode = [NSString stringWithFormat:@"%d", [theEvent keyCode]];

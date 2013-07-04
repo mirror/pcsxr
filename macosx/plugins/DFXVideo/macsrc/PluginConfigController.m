@@ -75,7 +75,6 @@ void AboutDlgProc()
 			nil]];
 }
 
-
 void SoftDlgProc()
 {
 	NSWindow *window;

@@ -52,7 +52,6 @@
 	[NSApp stopModal];
 }
 
-
 - (BOOL)handleFile:(NSString *)theFile
 {
 	if ([EmuThread active]) {
@@ -72,6 +71,5 @@
 	}
 	return YES;
 }
-
 
 @end

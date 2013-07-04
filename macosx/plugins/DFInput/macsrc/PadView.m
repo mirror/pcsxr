@@ -82,7 +82,6 @@
 	[tableView reloadData];
 }
 
-
 - (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor
 {
 	return false;

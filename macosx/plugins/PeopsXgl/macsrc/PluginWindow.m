@@ -58,8 +58,6 @@
     return nil;
 }
 
-
-
 - (void) windowDidResize:(NSNotification*)notice
 {
 }
@@ -73,8 +71,6 @@
 
 }
 
-
-
 - (BOOL) canBecomeKeyWindow
 {
     return YES;
@@ -87,7 +83,6 @@
 - (void)keyUp:(NSEvent *)theEvent
 {
 }
-
 
 - (BOOL)validateMenuItem:(NSMenuItem*) menuItem
 {

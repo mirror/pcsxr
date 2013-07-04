@@ -33,7 +33,6 @@
     
     IBOutlet NSPopUpButton *frameBufferEffects;
 
-
     IBOutlet NSControl *drawScanlines;
     IBOutlet NSControl *advancedBlending;
     IBOutlet NSControl *opaquePass;

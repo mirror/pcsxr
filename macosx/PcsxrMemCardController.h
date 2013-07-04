@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface PcsxrMemCardController : NSWindowController <NSWindowDelegate>
 {
 	IBOutlet NSCollectionView *memCard1view;

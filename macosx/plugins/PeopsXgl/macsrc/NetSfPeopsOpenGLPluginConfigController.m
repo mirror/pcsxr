@@ -80,7 +80,6 @@ void AboutDlgProc()
 												  nil]];
 }
 
-
 void DlgProc()
 {
 	NSWindow *window;
@@ -98,7 +97,6 @@ void DlgProc()
 	[window center];
 	[window makeKeyAndOrderFront:nil];
 }
-
 
 void PrepFactoryDefaultPreferences(void)
 {

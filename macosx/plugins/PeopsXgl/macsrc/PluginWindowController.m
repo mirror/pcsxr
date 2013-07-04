@@ -61,7 +61,6 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
     return newRect;
 }
 
-
 @implementation PluginWindowController
 
 + (id)openGameView
@@ -119,8 +118,6 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
   [nc addObserver:self selector:@selector(applicationWillBecomeActive:) name:NSApplicationWillBecomeActiveNotification object:NSApp];
   [nc addObserver:self selector:@selector(applicationWillTerminate:) name:NSApplicationWillTerminateNotification object:NSApp];
 */
-
-
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

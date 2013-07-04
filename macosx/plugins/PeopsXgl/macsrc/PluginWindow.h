@@ -48,8 +48,6 @@
 
 @end
 
-
-
 @interface NetSfPeopsOpenGLGPUPluginWindow (NSMenuValidation) 
 - (BOOL)validateMenuItem:(NSMenuItem*) item;
 @end

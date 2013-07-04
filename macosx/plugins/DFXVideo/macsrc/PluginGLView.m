@@ -223,7 +223,6 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 #if !__has_feature(objc_arc)
 	[glLock release];
 
-
 	[super dealloc];
 #endif
 }
@@ -453,7 +452,6 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 			for (i = 0; i < len; i++) {
 				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, szDispBuf[i]);
 			}
-
 
 			glEnable(rect_texture ? GL_TEXTURE_RECTANGLE_EXT : GL_TEXTURE_2D);
 			glPopMatrix();

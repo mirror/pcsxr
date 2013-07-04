@@ -175,7 +175,6 @@ void ShowTextGpuPic(void)
 	// this is the default implementation...
 }
 
-
 void HandleKey(int keycode)
 {
 	switch (keycode) {

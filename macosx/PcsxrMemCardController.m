@@ -15,7 +15,6 @@
 
 #define MAX_MEMCARD_BLOCKS 15
 
-
 static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, char *str)
 {
 		// header
@@ -28,7 +27,6 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	
 		//printf("data = %s\n", from + (srci+1) * 128);
 }
-
 
 @implementation PcsxrMemCardController
 

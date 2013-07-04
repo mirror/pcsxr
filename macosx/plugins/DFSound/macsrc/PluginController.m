@@ -75,7 +75,6 @@ void DoAbout()
 												  nil]];
 }
 
-
 long DoConfiguration()
 {
 	NSWindow *window;
@@ -211,7 +210,6 @@ void ReadConfig(void)
 }
 
 @end
-
 
 char* PLUGLOC(char *toloc)
 {

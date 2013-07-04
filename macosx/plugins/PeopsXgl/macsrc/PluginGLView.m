@@ -36,7 +36,6 @@
 - (BOOL)isOpaque {	return YES; } 
 - (BOOL)acceptsFirstResponder { return NO; }
 
-
 - (id) initWithCoder: (NSCoder *) coder
 {
     // Set up pixel format on creation
@@ -97,15 +96,15 @@
 	return self;
 }
 
-#if !__has_feature(objc_arc)
 - (void)dealloc
 {
 	[[self openGLContext] makeCurrentContext]; // just in case
 	[NSOpenGLContext clearCurrentContext];
+#if !__has_feature(objc_arc)
 	[glLock release];
 	[super dealloc];
-}
 #endif
+}
 
 - (void)reshape	// scrolled, moved or resized
 {
