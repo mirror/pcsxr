@@ -1434,7 +1434,7 @@ long CALLBACK SPUconfigure(void)
  DialogBox(hInst,MAKEINTRESOURCE(IDD_CFGDLG),
            GetActiveWindow(),(DLGPROC)DSoundDlgProc);
 #elif defined (_MACOSX)
- DoConfiguration();
+ return DoConfiguration();
 #else
  StartCfgTool("configure");
 #endif
