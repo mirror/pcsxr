@@ -123,7 +123,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>PCSXR.icns</string>
+	<string>PCSXR</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.codeplex.pcsxr</string>
 	<key>CFBundleInfoDictionaryVersion</key>

@@ -75,8 +75,11 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	NSOpenPanel *openDlg = RETAINOBJ([NSOpenPanel openPanel]);
 	NSString *path;
 	
-	if (tag == 1) { mcd = Config.Mcd1; }
-	else { mcd = Config.Mcd2; }
+	if (tag == 1) {
+		mcd = Config.Mcd1;
+	} else {
+		mcd = Config.Mcd2;
+	}
 	
 	[openDlg setCanChooseFiles:YES];
 	[openDlg setCanChooseDirectories:NO];
@@ -103,8 +106,11 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	NSSavePanel *openDlg = RETAINOBJ([NSSavePanel savePanel]);
 	NSString *path;
 	
-	if (tag == 1) { mcd = Config.Mcd1; }
-	else { mcd = Config.Mcd2; }
+	if (tag == 1) {
+		mcd = Config.Mcd1;
+	} else {
+		mcd = Config.Mcd2;
+	}
 	
     path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
 	

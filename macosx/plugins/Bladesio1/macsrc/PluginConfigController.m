@@ -154,7 +154,7 @@ void ReadConfig()
 {
 	BOOL isEnabled = [enabledButton state] == NSOnState ? YES : NO;
 	
-	for (NSView *subView in [[configBox subviews][0] subviews]) {
+	for (NSView *subView in [[[configBox subviews] objectAtIndex:0] subviews]) {
 		if ([subView isKindOfClass:[NSTextField class]] && ![(NSTextField*)subView isEditable]) {
 				[(NSTextField*)subView setTextColor:isEnabled ? [NSColor controlTextColor] : [NSColor disabledControlTextColor]];
 		} else {

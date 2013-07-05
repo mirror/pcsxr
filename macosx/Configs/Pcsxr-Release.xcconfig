@@ -1,5 +1,4 @@
 DEBUG_PREPROCESSOR_DEFINITIONS = 
-
 #include "Pcsxr.xcconfig"
 
 GCC_GENERATE_DEBUGGING_SYMBOLS = NO
@@ -7,5 +6,5 @@ GCC_INLINES_ARE_PRIVATE_EXTERN = YES
 GCC_OPTIMIZATION_LEVEL = s
 GCC_UNROLL_LOOPS = YES
 COPY_PHASE_STRIP = YES
-
 OPTIMIZATION_CFLAGS = -finline-functions -finline-limit=1600 -fomit-frame-pointer -fno-exceptions -funroll-loops -falign-loops=16 -ffast-math
+STRIP_INSTALLED_PRODUCT = YES
