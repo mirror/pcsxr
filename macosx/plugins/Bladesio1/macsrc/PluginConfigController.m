@@ -23,7 +23,6 @@
 #include "typedefs.h"
 #include "sio1.h"
 #import "ARCBridge.h"
-#include "macsrc.h"
 
 #define APP_ID @"net.pcsxr.Bladesio1"
 #define PrefsKey APP_ID @" Settings"
