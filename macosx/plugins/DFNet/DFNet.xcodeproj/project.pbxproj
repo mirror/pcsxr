@@ -34,10 +34,10 @@
 		55278DBB12C813AC00288CD8 /* dfnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dfnet.h; path = ../../../plugins/dfnet/dfnet.h; sourceTree = SOURCE_ROOT; };
 		55278DBC12C813AC00288CD8 /* unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = unix.c; path = ../../../plugins/dfnet/unix.c; sourceTree = SOURCE_ROOT; };
 		55278DC112C8141600288CD8 /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cfg.c; sourceTree = "<group>"; };
-		55858D65178658810068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Debug.xcconfig"; path = "../../Pcsxr-Debug.xcconfig"; sourceTree = "<group>"; };
-		55858D66178658810068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Instrument.xcconfig"; path = "../../Pcsxr-Instrument.xcconfig"; sourceTree = "<group>"; };
-		55858D67178658810068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Release.xcconfig"; path = "../../Pcsxr-Release.xcconfig"; sourceTree = "<group>"; };
-		55858D68178658810068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = Pcsxr.xcconfig; path = ../../Pcsxr.xcconfig; sourceTree = "<group>"; };
+		55858D65178658810068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Debug.xcconfig"; sourceTree = "<group>"; };
+		55858D66178658810068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Instrument.xcconfig"; sourceTree = "<group>"; };
+		55858D67178658810068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Release.xcconfig"; sourceTree = "<group>"; };
+		55858D68178658810068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pcsxr.xcconfig; sourceTree = "<group>"; };
 		558600721785139C00CB3D85 /* ARCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		559DACB2146C64B800C5DF71 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = plugins/DFNet/English.lproj/DFNet.xib; sourceTree = "<group>"; };
 		559DACB7146C64D600C5DF71 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = plugins/DFNet/English.lproj/SockDialog.xib; sourceTree = "<group>"; };
@@ -125,8 +125,8 @@
 				55858D68178658810068B8FC /* Pcsxr.xcconfig */,
 			);
 			name = Configs;
-			path = "/Users/cwbetts/makestuff/PCSX-R/macosx/plugins/DFSound/Resorces/../../Bladesio1";
-			sourceTree = "<absolute>";
+			path = ../../Configs;
+			sourceTree = "<group>";
 		};
 		71F3C30911F3CC22007B9F12 /* src */ = {
 			isa = PBXGroup;

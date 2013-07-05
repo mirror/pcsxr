@@ -31,10 +31,10 @@
 		28586CC514651E870082B8EC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/DFCdromPluginConfig.xib; sourceTree = "<group>"; };
 		2BD707170555997500CB5D9B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		552E4CBB1474737A00FB231F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		55858D56178657110068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Debug.xcconfig"; path = "../../Pcsxr-Debug.xcconfig"; sourceTree = "<group>"; };
-		55858D57178657110068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Instrument.xcconfig"; path = "../../Pcsxr-Instrument.xcconfig"; sourceTree = "<group>"; };
-		55858D58178657110068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Release.xcconfig"; path = "../../Pcsxr-Release.xcconfig"; sourceTree = "<group>"; };
-		55858D59178657110068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = Pcsxr.xcconfig; path = ../../Pcsxr.xcconfig; sourceTree = "<group>"; };
+		55858D56178657110068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Debug.xcconfig"; sourceTree = "<group>"; };
+		55858D57178657110068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Instrument.xcconfig"; sourceTree = "<group>"; };
+		55858D58178657110068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Release.xcconfig"; sourceTree = "<group>"; };
+		55858D59178657110068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pcsxr.xcconfig; sourceTree = "<group>"; };
 		5586006D1785137C00CB3D85 /* ARCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		713DB2E311F113C30001BDD4 /* cdr.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = cdr.c; path = ../../../plugins/dfcdrom/cdr.c; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		713DB2E411F113C30001BDD4 /* cdr.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; name = cdr.h; path = ../../../plugins/dfcdrom/cdr.h; sourceTree = SOURCE_ROOT; };
@@ -126,7 +126,7 @@
 				55858D59178657110068B8FC /* Pcsxr.xcconfig */,
 			);
 			name = Configs;
-			path = "/Users/cwbetts/makestuff/PCSX-R/macosx/plugins/DFSound/Resorces/../../Bladesio1";
+			path = "/Users/cwbetts/makestuff/PCSX-R/macosx/Configs";
 			sourceTree = "<absolute>";
 		};
 		71F3C30911F3CC22007B9F12 /* src */ = {

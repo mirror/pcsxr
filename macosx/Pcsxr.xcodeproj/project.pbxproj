@@ -289,10 +289,10 @@
 		5550D2711683C923006C56B5 /* RecentItemsMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecentItemsMenu.h; sourceTree = "<group>"; };
 		5550D2721683C923006C56B5 /* RecentItemsMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecentItemsMenu.m; sourceTree = "<group>"; };
 		55858D1B1786329D0068B8FC /* Bladesio1.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Bladesio1.xcodeproj; path = plugins/Bladesio1/Bladesio1.xcodeproj; sourceTree = "<group>"; };
-		55858D2817864D140068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pcsxr.xcconfig; sourceTree = SOURCE_ROOT; };
-		55858D2A17864DC80068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Debug.xcconfig"; sourceTree = SOURCE_ROOT; };
-		55858D2B17864DC90068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Instrument.xcconfig"; sourceTree = SOURCE_ROOT; };
-		55858D2C17864DC90068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Release.xcconfig"; sourceTree = SOURCE_ROOT; };
+		55858D2817864D140068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pcsxr.xcconfig; sourceTree = "<group>"; };
+		55858D2A17864DC80068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Debug.xcconfig"; sourceTree = "<group>"; };
+		55858D2B17864DC90068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Instrument.xcconfig"; sourceTree = "<group>"; };
+		55858D2C17864DC90068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Release.xcconfig"; sourceTree = "<group>"; };
 		559366C012B694DF004ACC1E /* iGte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGte.h; sourceTree = "<group>"; };
 		559366C112B694DF004ACC1E /* iR3000A-64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "iR3000A-64.c"; sourceTree = "<group>"; };
 		559366C212B694DF004ACC1E /* ix86-64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "ix86-64.c"; sourceTree = "<group>"; };
@@ -615,6 +615,7 @@
 				55858D2817864D140068B8FC /* Pcsxr.xcconfig */,
 			);
 			name = Configs;
+			path = ../Configs;
 			sourceTree = "<group>";
 		};
 		559366BF12B694DF004ACC1E /* ix86_64 */ = {

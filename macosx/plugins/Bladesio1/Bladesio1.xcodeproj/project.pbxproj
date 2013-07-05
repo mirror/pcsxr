@@ -41,10 +41,10 @@
 		55858D0F178609A80068B8FC /* sio1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sio1.c; sourceTree = "<group>"; };
 		55858D10178609A80068B8FC /* sio1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sio1.h; sourceTree = "<group>"; };
 		55858D11178609A80068B8FC /* typedefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = typedefs.h; sourceTree = "<group>"; };
-		55858D301786531D0068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Debug.xcconfig"; path = "../../Pcsxr-Debug.xcconfig"; sourceTree = "<group>"; };
-		55858D311786531D0068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Instrument.xcconfig"; path = "../../Pcsxr-Instrument.xcconfig"; sourceTree = "<group>"; };
-		55858D321786531D0068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Release.xcconfig"; path = "../../Pcsxr-Release.xcconfig"; sourceTree = "<group>"; };
-		55858D331786531D0068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = Pcsxr.xcconfig; path = ../../Pcsxr.xcconfig; sourceTree = "<group>"; };
+		55858D301786531D0068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Debug.xcconfig"; sourceTree = "<group>"; };
+		55858D311786531D0068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Instrument.xcconfig"; sourceTree = "<group>"; };
+		55858D321786531D0068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Release.xcconfig"; sourceTree = "<group>"; };
+		55858D331786531D0068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pcsxr.xcconfig; sourceTree = "<group>"; };
 		5586006D1785137C00CB3D85 /* ARCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		71F3C32511F3CD0B007B9F12 /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = cfg.c; sourceTree = "<group>"; };
 		71F3C32611F3CD0B007B9F12 /* PluginConfigController.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = PluginConfigController.h; sourceTree = "<group>"; };
@@ -132,6 +132,7 @@
 				55858D331786531D0068B8FC /* Pcsxr.xcconfig */,
 			);
 			name = Configs;
+			path = ../../Configs;
 			sourceTree = "<group>";
 		};
 		71F3C30911F3CC22007B9F12 /* src */ = {

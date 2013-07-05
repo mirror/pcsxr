@@ -53,10 +53,10 @@
 		5555E0C21606839300C0A310 /* gpuPeteOGL2.slf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gpuPeteOGL2.slf; sourceTree = "<group>"; };
 		5555E0C31606839300C0A310 /* gpuPeteOGL2.slv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gpuPeteOGL2.slv; sourceTree = "<group>"; };
 		5555E0CA160695BF00C0A310 /* SGPUPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPUPreferences.h; path = macsrc/SGPUPreferences.h; sourceTree = "<group>"; };
-		55858D4F178656240068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Debug.xcconfig"; path = "../../Pcsxr-Debug.xcconfig"; sourceTree = "<group>"; };
-		55858D50178656240068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Instrument.xcconfig"; path = "../../Pcsxr-Instrument.xcconfig"; sourceTree = "<group>"; };
-		55858D51178656240068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Release.xcconfig"; path = "../../Pcsxr-Release.xcconfig"; sourceTree = "<group>"; };
-		55858D52178656240068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = Pcsxr.xcconfig; path = ../../Pcsxr.xcconfig; sourceTree = "<group>"; };
+		55858D4F178656240068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pcsxr-Debug.xcconfig"; path = "../../Configs/Pcsxr-Debug.xcconfig"; sourceTree = "<group>"; };
+		55858D50178656240068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pcsxr-Instrument.xcconfig"; path = "../../Configs/Pcsxr-Instrument.xcconfig"; sourceTree = "<group>"; };
+		55858D51178656240068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pcsxr-Release.xcconfig"; path = "../../Configs/Pcsxr-Release.xcconfig"; sourceTree = "<group>"; };
+		55858D52178656240068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Pcsxr.xcconfig; path = ../../Configs/Pcsxr.xcconfig; sourceTree = "<group>"; };
 		5586006017850E5800CB3D85 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		5586006217850E6C00CB3D85 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		5586006317850E6C00CB3D85 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
