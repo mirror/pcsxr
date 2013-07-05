@@ -143,7 +143,15 @@ void *SysLoadSym(void *lib, const char *sym) {
 }
 
 const char *SysLibError() {
+#ifdef DEBUG
+	const char *theErr = dlerror();
+	if (theErr) {
+		NSLog(@"Error loading binary: %s", theErr);
+	}
+	return theErr;
+#else
 	return dlerror();
+#endif
 }
 
 void SysCloseLibrary(void *lib) {

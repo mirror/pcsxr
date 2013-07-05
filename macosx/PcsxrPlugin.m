@@ -144,6 +144,8 @@
                         }
                     }
                     SysCloseLibrary(tempHandle);
+                } else {
+                    SysLibError();
                 }
             }
         }

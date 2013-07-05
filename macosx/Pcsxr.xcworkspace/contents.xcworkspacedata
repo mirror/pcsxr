@@ -4,25 +4,4 @@
    <FileRef
       location = "container:Pcsxr.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:plugins/PeopsXgl/PeopsXGL.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:plugins/DFInput/DFInput.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:plugins/DFCdrom/DFCdrom.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:plugins/DFXVideo/PeopsSoftGPU.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:plugins/DFSound/PeopsSPU.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:plugins/DFNet/DFNet.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:plugins/Bladesio1/Bladesio1.xcodeproj">
-   </FileRef>
 </Workspace>

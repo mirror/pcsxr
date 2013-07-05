@@ -8,3 +8,4 @@ GCC_UNROLL_LOOPS = NO
 ONLY_ACTIVE_ARCH = YES
 COPY_PHASE_STRIP = NO
 STRIP_INSTALLED_PRODUCT = NO
+OPTIMIZATION_CFLAGS = -finline-functions -finline-limit=1600 -fno-exceptions -funroll-loops -falign-loops=16 -ffast-math
