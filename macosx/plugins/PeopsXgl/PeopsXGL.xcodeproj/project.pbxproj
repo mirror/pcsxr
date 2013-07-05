@@ -68,6 +68,10 @@
 		3F7F384613079BFD00556C34 /* draw.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = draw.h; path = ../../../plugins/peopsxgl/draw.h; sourceTree = SOURCE_ROOT; };
 		3F7F384713079BFD00556C34 /* draw.c */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = draw.c; path = ../../../plugins/peopsxgl/draw.c; sourceTree = SOURCE_ROOT; };
 		552E4CCA1474742F00FB231F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		55858D60178657F70068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Debug.xcconfig"; path = "../../Pcsxr-Debug.xcconfig"; sourceTree = "<group>"; };
+		55858D61178657F70068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Instrument.xcconfig"; path = "../../Pcsxr-Instrument.xcconfig"; sourceTree = "<group>"; };
+		55858D62178657F70068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Release.xcconfig"; path = "../../Pcsxr-Release.xcconfig"; sourceTree = "<group>"; };
+		55858D63178657F70068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = Pcsxr.xcconfig; path = ../../Pcsxr.xcconfig; sourceTree = "<group>"; };
 		558600711785139200CB3D85 /* ARCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		55D42F10168D9AAE0027EBF0 /* ExtendedKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ExtendedKeys.h; path = macsrc/ExtendedKeys.h; sourceTree = "<group>"; };
 		55F36E4A146C9F9900718DE6 /* drawgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = drawgl.h; path = macsrc/drawgl.h; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 		2BD2E818077AFB9F00657C69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				55858D64178657F70068B8FC /* Configs */,
 				28586CBC14651D960082B8EC /* NetSfPeopsOpenGLConfig.xib */,
 				28586CBF14651E560082B8EC /* NetSfPeopsOpenGLGPUInterface.xib */,
 				2BD2E767077AF53E00657C69 /* Credits.rtf */,
@@ -147,6 +152,18 @@
 			);
 			name = Resources;
 			sourceTree = "<group>";
+		};
+		55858D64178657F70068B8FC /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				55858D60178657F70068B8FC /* Pcsxr-Debug.xcconfig */,
+				55858D61178657F70068B8FC /* Pcsxr-Instrument.xcconfig */,
+				55858D62178657F70068B8FC /* Pcsxr-Release.xcconfig */,
+				55858D63178657F70068B8FC /* Pcsxr.xcconfig */,
+			);
+			name = Configs;
+			path = "/Users/cwbetts/makestuff/PCSX-R/macosx/plugins/DFSound/Resorces/../../Bladesio1";
+			sourceTree = "<absolute>";
 		};
 		71E9EBF0109F24B600E98D1D /* src */ = {
 			isa = PBXGroup;
@@ -303,12 +320,7 @@
 		7170842D0FDFD328004F3EB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=PeopsXGL",
@@ -337,12 +349,7 @@
 		7170842E0FDFD328004F3EB4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=PeopsXGL",
@@ -369,20 +376,12 @@
 		};
 		717084320FDFD328004F3EB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55858D60178657F70068B8FC /* Pcsxr-Debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEBUG_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"_MACOSX=1",
-					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
-				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -391,33 +390,20 @@
 					../../../plugins/peopsxgl,
 					../../../libpcsxcore,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
-				VALID_ARCHS = "i386 x86_64";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
 		};
 		717084330FDFD328004F3EB4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55858D62178657F70068B8FC /* Pcsxr-Release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEBUG_PREPROCESSOR_DEFINITIONS = "";
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"_MACOSX=1",
-					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
-				);
-				GCC_UNROLL_LOOPS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -426,10 +412,7 @@
 					../../../plugins/peopsxgl,
 					../../../libpcsxcore,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "-fomit-frame-pointer";
-				SDKROOT = macosx;
-				VALID_ARCHS = "i386 x86_64";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;

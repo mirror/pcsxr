@@ -34,6 +34,10 @@
 		55278DBB12C813AC00288CD8 /* dfnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dfnet.h; path = ../../../plugins/dfnet/dfnet.h; sourceTree = SOURCE_ROOT; };
 		55278DBC12C813AC00288CD8 /* unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 2; name = unix.c; path = ../../../plugins/dfnet/unix.c; sourceTree = SOURCE_ROOT; };
 		55278DC112C8141600288CD8 /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cfg.c; sourceTree = "<group>"; };
+		55858D65178658810068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Debug.xcconfig"; path = "../../Pcsxr-Debug.xcconfig"; sourceTree = "<group>"; };
+		55858D66178658810068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Instrument.xcconfig"; path = "../../Pcsxr-Instrument.xcconfig"; sourceTree = "<group>"; };
+		55858D67178658810068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Release.xcconfig"; path = "../../Pcsxr-Release.xcconfig"; sourceTree = "<group>"; };
+		55858D68178658810068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = Pcsxr.xcconfig; path = ../../Pcsxr.xcconfig; sourceTree = "<group>"; };
 		558600721785139C00CB3D85 /* ARCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		559DACB2146C64B800C5DF71 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = plugins/DFNet/English.lproj/DFNet.xib; sourceTree = "<group>"; };
 		559DACB7146C64D600C5DF71 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = plugins/DFNet/English.lproj/SockDialog.xib; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				55858D69178658810068B8FC /* Configs */,
 				559DACB1146C64B800C5DF71 /* DFNet.xib */,
 				71F3C47811F3D108007B9F12 /* Credits.rtf */,
 				8D576317048677EA00EA77CD /* Info.plist */,
@@ -110,6 +115,18 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		55858D69178658810068B8FC /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				55858D65178658810068B8FC /* Pcsxr-Debug.xcconfig */,
+				55858D66178658810068B8FC /* Pcsxr-Instrument.xcconfig */,
+				55858D67178658810068B8FC /* Pcsxr-Release.xcconfig */,
+				55858D68178658810068B8FC /* Pcsxr.xcconfig */,
+			);
+			name = Configs;
+			path = "/Users/cwbetts/makestuff/PCSX-R/macosx/plugins/DFSound/Resorces/../../Bladesio1";
+			sourceTree = "<absolute>";
 		};
 		71F3C30911F3CC22007B9F12 /* src */ = {
 			isa = PBXGroup;
@@ -288,10 +305,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=DFNet",
@@ -302,7 +315,6 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -311,10 +323,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=DFNet",
@@ -325,53 +333,31 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
 		};
 		7107359F0FDEED75004AD098 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55858D65178658810068B8FC /* Pcsxr-Debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
-				DEBUG_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"_MACOSX=1",
-					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
-				);
 				HEADER_SEARCH_PATHS = (
 					../../../libpcsxcore,
 					../..,
 					../../../plugins/dfnet,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
-				STRIP_INSTALLED_PRODUCT = NO;
-				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
 		};
 		710735A00FDEED75004AD098 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55858D67178658810068B8FC /* Pcsxr-Release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
-				DEBUG_PREPROCESSOR_DEFINITIONS = "";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"_MACOSX=1",
-					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
-				);
 				HEADER_SEARCH_PATHS = (
 					../../../libpcsxcore,
 					../..,
 					../../../plugins/dfnet,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				SDKROOT = macosx;
-				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
 		};

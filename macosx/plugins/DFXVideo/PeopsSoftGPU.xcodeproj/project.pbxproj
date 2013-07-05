@@ -53,6 +53,10 @@
 		5555E0C21606839300C0A310 /* gpuPeteOGL2.slf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gpuPeteOGL2.slf; sourceTree = "<group>"; };
 		5555E0C31606839300C0A310 /* gpuPeteOGL2.slv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gpuPeteOGL2.slv; sourceTree = "<group>"; };
 		5555E0CA160695BF00C0A310 /* SGPUPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPUPreferences.h; path = macsrc/SGPUPreferences.h; sourceTree = "<group>"; };
+		55858D4F178656240068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Debug.xcconfig"; path = "../../Pcsxr-Debug.xcconfig"; sourceTree = "<group>"; };
+		55858D50178656240068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Instrument.xcconfig"; path = "../../Pcsxr-Instrument.xcconfig"; sourceTree = "<group>"; };
+		55858D51178656240068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pcsxr-Release.xcconfig"; path = "../../Pcsxr-Release.xcconfig"; sourceTree = "<group>"; };
+		55858D52178656240068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = Pcsxr.xcconfig; path = ../../Pcsxr.xcconfig; sourceTree = "<group>"; };
 		5586006017850E5800CB3D85 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		5586006217850E6C00CB3D85 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		5586006317850E6C00CB3D85 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -146,6 +150,7 @@
 		2BD2E818077AFB9F00657C69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				55858D53178656240068B8FC /* Configs */,
 				5555E0C21606839300C0A310 /* gpuPeteOGL2.slf */,
 				5555E0C31606839300C0A310 /* gpuPeteOGL2.slv */,
 				28586CC714651E9B0082B8EC /* NetSfPeopsSoftGPUConfig.xib */,
@@ -156,6 +161,18 @@
 			);
 			name = Resources;
 			sourceTree = "<group>";
+		};
+		55858D53178656240068B8FC /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				55858D4F178656240068B8FC /* Pcsxr-Debug.xcconfig */,
+				55858D50178656240068B8FC /* Pcsxr-Instrument.xcconfig */,
+				55858D51178656240068B8FC /* Pcsxr-Release.xcconfig */,
+				55858D52178656240068B8FC /* Pcsxr.xcconfig */,
+			);
+			name = Configs;
+			path = "/Users/cwbetts/makestuff/PCSX-R/macosx/plugins/DFSound/Resorces/../../Bladesio1";
+			sourceTree = "<absolute>";
 		};
 		5586006817850E8800CB3D85 /* Additional Frameworks */ = {
 			isa = PBXGroup;
@@ -318,26 +335,16 @@
 		7170842D0FDFD328004F3EB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 1;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"PCSXRPLUG=SoftGL",
-					_MACGL,
-					_DARWIN,
-					"$(inherited)",
-				);
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OPTIMIZATION_CFLAGS = "-finline-functions -finline-limit=1600 -fno-exceptions -funroll-loops -falign-loops=16 -ffast-math";
-				OTHER_CFLAGS = "-finline-functions";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"$(OPTIMIZATION_CFLAGS)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SECTORDER_FLAGS = "";
 				WRAPPER_EXTENSION = psxplugin;
@@ -347,25 +354,16 @@
 		7170842E0FDFD328004F3EB4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"PCSXRPLUG=SoftGL",
-					_MACGL,
-					_DARWIN,
-					"$(inherited)",
-				);
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OPTIMIZATION_CFLAGS = "-finline-functions -finline-limit=1600 -fomit-frame-pointer -fno-exceptions -funroll-loops -falign-loops=16 -ffast-math";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"$(OPTIMIZATION_CFLAGS)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SECTORDER_FLAGS = "";
 				WRAPPER_EXTENSION = psxplugin;
@@ -374,20 +372,12 @@
 		};
 		717084320FDFD328004F3EB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55858D4F178656240068B8FC /* Pcsxr-Debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEBUG_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"_MACOSX=1",
-					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
-				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -395,29 +385,17 @@
 					../../../plugins/dfxvideo,
 					../../../libpcsxcore,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
-				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
 		};
 		717084330FDFD328004F3EB4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55858D51178656240068B8FC /* Pcsxr-Release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEBUG_PREPROCESSOR_DEFINITIONS = "";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"_MACOSX=1",
-					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
-				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -425,9 +403,6 @@
 					../../../plugins/dfxvideo,
 					../../../libpcsxcore,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				SDKROOT = macosx;
-				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
 		};

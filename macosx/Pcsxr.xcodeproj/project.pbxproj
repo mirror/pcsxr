@@ -32,7 +32,6 @@
 		2BB3D6C805427FE200831ACB /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6E8AB404C8327C0017A3B1 /* IOKit.framework */; };
 		5529EA11169CBE3400BAA2A5 /* RecentItemsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5550D2721683C923006C56B5 /* RecentItemsMenu.m */; };
 		55858D24178632C50068B8FC /* Bladesio1.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55858D201786329D0068B8FC /* Bladesio1.psxplugin */; };
-		55858D2917864D140068B8FC /* Pcsxr.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 55858D2817864D140068B8FC /* Pcsxr.xcconfig */; };
 		5586CD9714AFADD9008EF4EE /* PeopsSpuSDL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DD110C356FD00365243 /* PeopsSpuSDL.psxplugin */; };
 		5586CD9814AFADD9008EF4EE /* PeopsSpuAL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 28B467F11463D0020083F129 /* PeopsSpuAL.psxplugin */; };
 		559366CA12B694DF004ACC1E /* iR3000A-64.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C112B694DF004ACC1E /* iR3000A-64.c */; };
@@ -471,10 +470,7 @@
 				28F0C3CA146521B700A90285 /* AddPluginSheet.xib */,
 				55A90221147D7C7A0037E18F /* MemCardManager.xib */,
 				55C7A216148B2B3800C22ABC /* PcsxrMemCardDocument.xib */,
-				55858D2A17864DC80068B8FC /* Pcsxr-Debug.xcconfig */,
-				55858D2B17864DC90068B8FC /* Pcsxr-Instrument.xcconfig */,
-				55858D2C17864DC90068B8FC /* Pcsxr-Release.xcconfig */,
-				55858D2817864D140068B8FC /* Pcsxr.xcconfig */,
+				55858D2F178652F90068B8FC /* Configs */,
 			);
 			name = Resources;
 			path = English.lproj;
@@ -608,6 +604,17 @@
 				55858D201786329D0068B8FC /* Bladesio1.psxplugin */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		55858D2F178652F90068B8FC /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				55858D2A17864DC80068B8FC /* Pcsxr-Debug.xcconfig */,
+				55858D2B17864DC90068B8FC /* Pcsxr-Instrument.xcconfig */,
+				55858D2C17864DC90068B8FC /* Pcsxr-Release.xcconfig */,
+				55858D2817864D140068B8FC /* Pcsxr.xcconfig */,
+			);
+			name = Configs;
 			sourceTree = "<group>";
 		};
 		559366BF12B694DF004ACC1E /* ix86_64 */ = {
@@ -862,7 +869,6 @@
 				55C7A214148B2B3800C22ABC /* PcsxrMemCardDocument.xib in Resources */,
 				02FE55E816765F9400205CF2 /* KeyNames.plist in Resources */,
 				D422E66E16DC48D000526DCF /* CheatWindow.xib in Resources */,
-				55858D2917864D140068B8FC /* Pcsxr.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1057,61 +1063,9 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		55858D2D1786522D0068B8FC /* Instrument */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55858D2B17864DC90068B8FC /* Pcsxr-Instrument.xcconfig */;
-			buildSettings = {
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					../include,
-					../libpcsxcore,
-					../macosx,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OTHER_CFLAGS = "-fomit-frame-pointer";
-				OTHER_LDFLAGS = "-lz";
-			};
-			name = Instrument;
-		};
-		55858D2E1786522D0068B8FC /* Instrument */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_ENABLE_ASM_KEYWORD = YES;
-				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					PCSXRCORE,
-					"PCSXR_VERSION=\\\"1.5\\\"",
-					"XA_HACK=1",
-					"_MACOSX=1",
-					__MACOSX__,
-					"ENABLE_SIO1API=1",
-					"$(inherited)",
-				);
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = Info.plist;
-				OTHER_CFLAGS = (
-					"-funroll-loops",
-					"-falign-loops=16",
-					"$(inherited)",
-				);
-				PRODUCT_NAME = PCSXR;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Instrument;
-		};
 		71F353F40FD98DFE00CBEC28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
 				GCC_ENABLE_ASM_KEYWORD = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1137,7 +1091,6 @@
 		71F353F50FD98DFE00CBEC28 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
 				GCC_ENABLE_ASM_KEYWORD = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1152,6 +1105,7 @@
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
+				LD_NO_PIE = YES;
 				OTHER_CFLAGS = (
 					"-funroll-loops",
 					"-falign-loops=16",
@@ -1215,7 +1169,6 @@
 			buildConfigurations = (
 				71F353F40FD98DFE00CBEC28 /* Debug */,
 				71F353F50FD98DFE00CBEC28 /* Release */,
-				55858D2E1786522D0068B8FC /* Instrument */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1225,7 +1178,6 @@
 			buildConfigurations = (
 				71F353F90FD98DFE00CBEC28 /* Debug */,
 				71F353FA0FD98DFE00CBEC28 /* Release */,
-				55858D2D1786522D0068B8FC /* Instrument */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
