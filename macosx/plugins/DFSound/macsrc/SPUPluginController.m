@@ -10,48 +10,53 @@
 
 @implementation SPUPluginController
 
+static Class GetSPUBaseClass()
+{
+	static Class spuBaseClass;
+	if (!spuBaseClass) {
+		spuBaseClass = [SPUPluginController class];
+	}
+	return spuBaseClass;
+}
+
 static inline void FuncNotAvailable(id sel, id sender, SEL theCmd)
 {
 #ifdef DEBUG
-	NSLog(@"Class %@ does not implement %@, and was sent a(n) %@ with the description %@", [sel class], NSStringFromSelector(theCmd), [sender class], [sender description]);
-	if ([sel isMemberOfClass:[SPUPluginController class]]) {
-		NSLog(@"For one thing, the class %@ isn't supposed to be accessed directly, just subclassed!", [SPUPluginController class]); \
+	NSString *selString = NSStringFromSelector(theCmd);
+	if (sender) {
+		NSLog(@"Class %@ does not implement %@, and was sent a(n) %@ with the description %@", [sel class], selString, [sender class], [sender description]);
 	} else {
-		NSLog(@"You should implement %@ for your class %@. As it is, you are calling %@ from the superclass %@.", NSStringFromSelector(theCmd), [sel class], NSStringFromSelector(theCmd), [SPUPluginController class]);
+		NSLog(@"Class %@ does not implement %@", [sel class], selString);
+	}
+	if ([sel isMemberOfClass:GetSPUBaseClass()]) {
+		NSLog(@"For one thing, the class %@ isn't supposed to be accessed directly, just subclassed!", GetSPUBaseClass()); \
+	} else {
+		NSLog(@"You should implement %@ for your class %@. As it is, you are calling %@ from the superclass %@.", selString, [sel class], selString, GetSPUBaseClass());
 	}
 #endif
 	[sel doesNotRecognizeSelector:theCmd];
 }
 
-#define NotAvailableWarn() FuncNotAvailable(self, sender, _cmd)
+#define NotAvailableWarn(sender) FuncNotAvailable(self, sender, _cmd)
 
 - (IBAction)cancel:(id)sender
 {
-	NotAvailableWarn();
-	
+	NotAvailableWarn(sender);
 }
 
 - (IBAction)ok:(id)sender
 {
-	NotAvailableWarn();
+	NotAvailableWarn(sender);
 }
 
 - (IBAction)reset:(id)sender
 {
-	NotAvailableWarn();
+	NotAvailableWarn(sender);
 }
 
 - (void)loadValues
 {
-#ifdef DEBUG
-	NSLog(@"Class %@ does not implement %@", [self class], NSStringFromSelector(_cmd));
-	if ([self isMemberOfClass:[SPUPluginController class]]) {
-		NSLog(@"For one thing, the class %@ isn't supposed to be accessed directly, just subclassed!", [SPUPluginController class]);
-	} else {
-		NSLog(@"You should implement %@ for your class %@. As it is, you are calling %@ from the superclass %@.", NSStringFromSelector(_cmd), [self class], NSStringFromSelector(_cmd), [SPUPluginController class]);
-	}
-#endif
-	[self doesNotRecognizeSelector:_cmd];
+	NotAvailableWarn(nil);
 }
 
 @end

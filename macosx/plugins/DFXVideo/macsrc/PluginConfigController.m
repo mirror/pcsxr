@@ -323,7 +323,6 @@ void ReadConfig(void)
 	[fragmentShaderViewablePath setToolTip:[fragmentPath path]];
 	unsigned int hackValues = [[keyValues objectForKey:@"Hacks"] unsignedIntValue];
 	
-	
 	NSArray *views = [hacksView subviews];
 	for (NSView *control in views) {
 		if ([control isKindOfClass:[NSButton class]]) {
@@ -359,8 +358,8 @@ char* PLUGLOC(char *toloc)
 {
 	NSBundle *mainBundle = [NSBundle bundleForClass:[PluginConfigController class]];
 	NSString *origString = nil, *transString = nil;
-	origString = [NSString stringWithCString:toloc encoding:NSUTF8StringEncoding];
+	origString = @(toloc);
 	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
-	return (char*)[transString cStringUsingEncoding:NSUTF8StringEncoding];
+	return (char*)[transString UTF8String];
 }
 

@@ -51,7 +51,7 @@ void DoAbout() {
 	[icon setSize:size];
 
 	NSDictionary *infoPaneDict =
-	[NSDictionary dictionaryWithObjectsAndKeys:
+	[[NSDictionary alloc] initWithObjectsAndKeys:
 	 [bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
 	 icon, @"ApplicationIcon",
 	 [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
@@ -62,6 +62,7 @@ void DoAbout() {
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[app orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
+	RELEASEOBJ(infoPaneDict);
 }
 
 long DoConfiguration() {
@@ -148,7 +149,7 @@ char* PLUGLOC(char *toloc)
 {
 	NSBundle *mainBundle = [NSBundle bundleForClass:[PadController class]];
 	NSString *origString = nil, *transString = nil;
-	origString = [NSString stringWithCString:toloc encoding:NSUTF8StringEncoding];
+	origString = @(toloc);
 	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
-	return (char*)[transString cStringUsingEncoding:NSUTF8StringEncoding];
+	return (char*)[transString UTF8String];
 }

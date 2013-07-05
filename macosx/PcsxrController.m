@@ -602,7 +602,7 @@ otherblock();\
 	if (str) {
 		NSString *tmpNSStr = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:str length:strlen(str)];
 		if (!tmpNSStr) {
-			tmpNSStr = [NSString stringWithCString:str encoding:NSUTF8StringEncoding];
+			tmpNSStr = @(str);
 		}
 		
 		[defaults setObject:tmpNSStr forKey:defaultKey];

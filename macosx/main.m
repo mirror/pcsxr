@@ -123,16 +123,16 @@ void SysMessage(const char *fmt, ...) {
 	va_end(list);
     
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedFailureReasonErrorKey];
+	RELEASEOBJ(msg);
 	dispatch_sync(dispatch_get_main_queue(), ^{
 		[NSApp presentError:[NSError errorWithDomain:@"Unknown Domain" code:-1 userInfo:userInfo]];
 	});
-    
-	RELEASEOBJ(msg);
 }
 
 void *SysLoadLibrary(const char *lib) {
-	NSBundle *bundle = [NSBundle bundleWithPath:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:lib length:strlen(lib)]];
+	NSBundle *bundle = [[NSBundle alloc] initWithPath:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:lib length:strlen(lib)]];
 	if (bundle != nil) {
+		AUTORELEASEOBJNORETURN(bundle);
 		return dlopen([[bundle executablePath] fileSystemRepresentation], RTLD_LAZY /*RTLD_NOW*/);
 	}
 	return dlopen(lib, RTLD_LAZY);

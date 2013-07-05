@@ -54,7 +54,7 @@ void AboutDlgProc()
 	[icon setSize:NSMakeSize(64, 64)];
 
 	NSDictionary *infoPaneDict =
-	[NSDictionary dictionaryWithObjectsAndKeys:
+	[[NSDictionary alloc] initWithObjectsAndKeys:
 	 [bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
 	 icon, @"ApplicationIcon",
 	 [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
@@ -65,6 +65,7 @@ void AboutDlgProc()
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[app orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
+	RELEASEOBJ(infoPaneDict);
 }
 
 void ConfDlgProc()
@@ -144,8 +145,8 @@ char* PLUGLOC(char *toloc)
 {
 	NSBundle *mainBundle = [NSBundle bundleForClass:[PluginConfigController class]];
 	NSString *origString = nil, *transString = nil;
-	origString = [NSString stringWithCString:toloc encoding:NSUTF8StringEncoding];
+	origString = @(toloc);
 	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
-	return (char*)[transString cStringUsingEncoding:NSUTF8StringEncoding];
+	return (char*)[transString UTF8String];
 }
 

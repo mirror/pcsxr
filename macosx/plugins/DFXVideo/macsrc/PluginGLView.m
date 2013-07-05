@@ -169,7 +169,6 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	}
 	 
 	
-	
 	[NSOpenGLContext clearCurrentContext];
 	[glLock unlock];
 

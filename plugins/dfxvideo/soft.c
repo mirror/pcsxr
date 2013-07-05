@@ -1213,7 +1213,7 @@ static __inline int shl10idiv(int x, int y)
 {
  __int64 bi=x;
  bi<<=10;
- return bi/y;
+ return (int)(bi/y);
 }
 
 #endif

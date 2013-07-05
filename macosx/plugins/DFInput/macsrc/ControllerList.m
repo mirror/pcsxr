@@ -126,7 +126,7 @@ static const int DPad[DKEY_TOTAL] = {
 			GetAnalogDescription(buf, currentController, rowIndex / 4, rowIndex % 4);
 		}
 
-		return [NSString stringWithUTF8String:buf];
+		return @(buf);
 	}
 }
 

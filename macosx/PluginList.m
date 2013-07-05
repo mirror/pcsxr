@@ -188,7 +188,6 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 	if ([activePadPlugin runAs:PSE_LT_PAD] != 0) bad = YES;
 	if ([activeNetPlugin runAs:PSE_LT_NET] != 0) bad = YES;
 	if ([activeSIO1Plugin runAs:PSE_LT_SIO1] != 0) bad = YES;
-
 	
 	return !bad;
 }

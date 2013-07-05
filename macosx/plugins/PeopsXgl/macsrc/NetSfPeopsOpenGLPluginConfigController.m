@@ -160,7 +160,6 @@ void ReadConfig(void)
 	//NOTE this is NOT the "keyValues" member of the controller. Just sayin.
     NSDictionary* keyValues = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey];
 	
-	
     // bind all prefs settings to their PCSXR counterparts
     // with a little finagling to make it work as expected
 	iShowFPS = [[keyValues objectForKey:@"FPS Counter"] boolValue];
@@ -244,7 +243,6 @@ void ReadConfig(void)
 #else
     dwActFixes = 0; // for now... TODO
 #endif
-	
 	
 	SetFixes();
 	
@@ -368,7 +366,7 @@ char* PLUGLOC(char *toloc)
 {
 	NSBundle *mainBundle = [NSBundle bundleForClass:[PluginConfigController class]];
 	NSString *origString = nil, *transString = nil;
-	origString = [NSString stringWithCString:toloc encoding:NSUTF8StringEncoding];
+	origString = @(toloc);
 	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
-	return (char*)[transString cStringUsingEncoding:NSUTF8StringEncoding];
+	return (char*)[transString UTF8String];
 }

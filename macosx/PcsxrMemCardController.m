@@ -224,7 +224,6 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	}else {
 		cardArray = [self memCard2Array];
 	}
-
 	
 	// search for empty (formatted) blocks first
 	while (i < MAX_MEMCARD_BLOCKS && foundcount < len) {

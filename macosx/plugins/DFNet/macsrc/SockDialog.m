@@ -23,7 +23,7 @@ void SysMessage(const char *fmt, ...)
 	va_end(list);
 	
 	//sprintf(cmd, "message %s\n", msg);
-	NSString *errString = [NSString stringWithUTF8String:msg];
+	NSString *errString = @(msg);
 	fprintf(stderr, "%s", msg);
 	NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"Exit" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@", errString];
 	[alert setAlertStyle:NSCriticalAlertStyle];

@@ -191,7 +191,7 @@
     
     PSE_getLibName = (PSEgetLibName) SysLoadSym(pluginRef, "PSEgetLibName");
     if (SysLibError() == nil) {
-        name = [[NSString alloc] initWithCString:PSE_getLibName() encoding:NSUTF8StringEncoding];
+        name = RETAINOBJ(@(PSE_getLibName()));
     }
     
     PSE_getLibVersion = (PSEgetLibVersion) SysLoadSym(pluginRef, "PSEgetLibVersion");

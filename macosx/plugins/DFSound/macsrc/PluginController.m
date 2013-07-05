@@ -66,7 +66,7 @@ void DoAbout()
 	[icon setSize:size];
 		
 	NSDictionary *infoPaneDict =
-	[NSDictionary dictionaryWithObjectsAndKeys:
+	[[NSDictionary alloc] initWithObjectsAndKeys:
 	 [bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
 	 icon, @"ApplicationIcon",
 	 [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
@@ -77,6 +77,7 @@ void DoAbout()
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[app orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
+	RELEASEOBJ(infoPaneDict);
 }
 
 long DoConfiguration()
@@ -189,27 +190,27 @@ void ReadConfig(void)
 {
 	Class thisClass = [self class];
 	
-	NSBundle *mainBundle = [NSBundle bundleForClass:thisClass];
+	NSBundle *spuBundle = [NSBundle bundleForClass:thisClass];
 	
 	[interpolValue setStrings:@[
-		[mainBundle localizedStringForKey:@"(No Interpolation)" value:@"" table:nil],
-		[mainBundle localizedStringForKey:@"(Simple Interpolation)" value:@"" table:nil],
-		[mainBundle localizedStringForKey:@"(Gaussian Interpolation)" value:@"" table:nil],
-		[mainBundle localizedStringForKey:@"(Cubic Interpolation)" value:@"" table:nil]]];
+		[spuBundle localizedStringForKey:@"(No Interpolation)" value:@"" table:nil],
+		[spuBundle localizedStringForKey:@"(Simple Interpolation)" value:@"" table:nil],
+		[spuBundle localizedStringForKey:@"(Gaussian Interpolation)" value:@"" table:nil],
+		[spuBundle localizedStringForKey:@"(Cubic Interpolation)" value:@"" table:nil]]];
 	interpolValue.pluginClass = thisClass;
 
 	[reverbValue setStrings:@[
-		[mainBundle localizedStringForKey:@"(No Reverb)" value:@"" table:nil],
-		[mainBundle localizedStringForKey:@"(Simple Reverb)" value:@"" table:nil],
-		[mainBundle localizedStringForKey:@"(PSX Reverb)" value:@"" table:nil]]];
+		[spuBundle localizedStringForKey:@"(No Reverb)" value:@"" table:nil],
+		[spuBundle localizedStringForKey:@"(Simple Reverb)" value:@"" table:nil],
+		[spuBundle localizedStringForKey:@"(PSX Reverb)" value:@"" table:nil]]];
 	reverbValue.pluginClass = thisClass;
 
 	[volumeValue setStrings:@[
-		[mainBundle localizedStringForKey:@"(Muted)" value:@"" table:nil],
-		[mainBundle localizedStringForKey:@"(Low)" value:@"" table:nil],
-		[mainBundle localizedStringForKey:@"(Medium)" value:@"" table:nil],
-		[mainBundle localizedStringForKey:@"(Loud)" value:@"" table:nil],
-		[mainBundle localizedStringForKey:@"(Loudest)" value:@"" table:nil]]];
+		[spuBundle localizedStringForKey:@"(Muted)" value:@"" table:nil],
+		[spuBundle localizedStringForKey:@"(Low)" value:@"" table:nil],
+		[spuBundle localizedStringForKey:@"(Medium)" value:@"" table:nil],
+		[spuBundle localizedStringForKey:@"(Loud)" value:@"" table:nil],
+		[spuBundle localizedStringForKey:@"(Loudest)" value:@"" table:nil]]];
 	volumeValue.pluginClass = thisClass;
 }
 

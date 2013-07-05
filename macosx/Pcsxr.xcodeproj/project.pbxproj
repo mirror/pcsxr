@@ -536,7 +536,7 @@
 		551A753117868BEB0052D185 /* xkb.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = xkb.c; sourceTree = "<group>"; };
 		551A753717868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		551A753917868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/DFNet.xib; sourceTree = "<group>"; };
-		551A753B17868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		551A753B17868BEB0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		551A753D17868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		551A753F17868BEC0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SockDialog.xib; sourceTree = "<group>"; };
 		551A754017868BEC0052D185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -584,7 +584,7 @@
 		551A757F17868BED0052D185 /* NetSfPeopsSoftGPUInterface.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetSfPeopsSoftGPUInterface.xib; sourceTree = "<group>"; };
 		551A758417868BED0052D185 /* ARCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ARCBridge.h; path = ../ARCBridge.h; sourceTree = "<group>"; };
 		551A758617868BED0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
-		551A758817868BED0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		551A758817868BED0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		551A758A17868BED0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		551A758C17868BED0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsOpenGLConfig.xib; sourceTree = "<group>"; };
 		551A758D17868BED0052D185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1112,8 +1112,8 @@
 		551A74AF17868BE90052D185 /* plugins */ = {
 			isa = PBXGroup;
 			children = (
-				551A74B017868BE90052D185 /* Bladesio1 */,
 				551A74C317868BEA0052D185 /* Common */,
+				551A74B017868BE90052D185 /* Bladesio1 */,
 				551A750417868BEA0052D185 /* DFCdrom */,
 				551A751817868BEB0052D185 /* DFInput */,
 				551A753217868BEB0052D185 /* DFNet */,
