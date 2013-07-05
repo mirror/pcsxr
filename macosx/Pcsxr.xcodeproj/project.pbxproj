@@ -31,6 +31,8 @@
 		2BB3D6C605427FE200831ACB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC4786204C7FD3600CAB520 /* Cocoa.framework */; };
 		2BB3D6C805427FE200831ACB /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6E8AB404C8327C0017A3B1 /* IOKit.framework */; };
 		5529EA11169CBE3400BAA2A5 /* RecentItemsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5550D2721683C923006C56B5 /* RecentItemsMenu.m */; };
+		55858D24178632C50068B8FC /* Bladesio1.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 55858D201786329D0068B8FC /* Bladesio1.psxplugin */; };
+		55858D2917864D140068B8FC /* Pcsxr.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 55858D2817864D140068B8FC /* Pcsxr.xcconfig */; };
 		5586CD9714AFADD9008EF4EE /* PeopsSpuSDL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DD110C356FD00365243 /* PeopsSpuSDL.psxplugin */; };
 		5586CD9814AFADD9008EF4EE /* PeopsSpuAL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 28B467F11463D0020083F129 /* PeopsSpuAL.psxplugin */; };
 		559366CA12B694DF004ACC1E /* iR3000A-64.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C112B694DF004ACC1E /* iR3000A-64.c */; };
@@ -55,8 +57,8 @@
 		713CB2E411FC49DA0033B6A8 /* DFCdrom.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71F93F6C11FB8E9D007A5A7C /* DFCdrom.psxplugin */; };
 		7192F42A129C412E0042D946 /* gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 7192F428129C412E0042D946 /* gpu.c */; };
 		719594B211AEFE8C004AD686 /* psxcommon.c in Sources */ = {isa = PBXBuildFile; fileRef = 719594B011AEFE8C004AD686 /* psxcommon.c */; };
-		71AD2DF510C3575C00365243 /* PeopsSoftGL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DDC10C3570900365243 /* PeopsSoftGL.psxplugin */; };
-		71D888D6130F04F100F150FF /* PeopsXGL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71D888D4130F04DC00F150FF /* PeopsXGL.psxplugin */; };
+		71AD2DF510C3575C00365243 /* gpuPeopsSoftGL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71AD2DDC10C3570900365243 /* gpuPeopsSoftGL.psxplugin */; };
+		71D888D6130F04F100F150FF /* gpuPeopsXGL.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71D888D4130F04DC00F150FF /* gpuPeopsXGL.psxplugin */; };
 		71F2C0881200B6B000322AD9 /* DFInput.psxplugin in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 71F2C0861200B69B00322AD9 /* DFInput.psxplugin */; };
 		71F4C5890FDED12800529849 /* cdriso.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5600FDED12800529849 /* cdriso.c */; };
 		71F4C58B0FDED12800529849 /* cdrom.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5620FDED12800529849 /* cdrom.c */; };
@@ -112,6 +114,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 5599695E13AFCD2900B0216B;
 			remoteInfo = PeopsAL;
+		};
+		55858D1F1786329D0068B8FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55858D1B1786329D0068B8FC /* Bladesio1.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D576316048677EA00EA77CD;
+			remoteInfo = Bladesio1;
+		};
+		55858D22178632B70068B8FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55858D1B1786329D0068B8FC /* Bladesio1.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D57630D048677EA00EA77CD;
+			remoteInfo = Bladesio1;
 		};
 		5586005E17850CFC00CB3D85 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -220,13 +236,14 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				55858D24178632C50068B8FC /* Bladesio1.psxplugin in Copy PlugIns */,
 				5586CD9714AFADD9008EF4EE /* PeopsSpuSDL.psxplugin in Copy PlugIns */,
 				5586CD9814AFADD9008EF4EE /* PeopsSpuAL.psxplugin in Copy PlugIns */,
 				559DACBB146C68C500C5DF71 /* DFNet.psxplugin in Copy PlugIns */,
-				71D888D6130F04F100F150FF /* PeopsXGL.psxplugin in Copy PlugIns */,
+				71D888D6130F04F100F150FF /* gpuPeopsXGL.psxplugin in Copy PlugIns */,
 				71F2C0881200B6B000322AD9 /* DFInput.psxplugin in Copy PlugIns */,
 				713CB2E411FC49DA0033B6A8 /* DFCdrom.psxplugin in Copy PlugIns */,
-				71AD2DF510C3575C00365243 /* PeopsSoftGL.psxplugin in Copy PlugIns */,
+				71AD2DF510C3575C00365243 /* gpuPeopsSoftGL.psxplugin in Copy PlugIns */,
 			);
 			name = "Copy PlugIns";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +289,11 @@
 		2BC4786204C7FD3600CAB520 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		5550D2711683C923006C56B5 /* RecentItemsMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecentItemsMenu.h; sourceTree = "<group>"; };
 		5550D2721683C923006C56B5 /* RecentItemsMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecentItemsMenu.m; sourceTree = "<group>"; };
+		55858D1B1786329D0068B8FC /* Bladesio1.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Bladesio1.xcodeproj; path = plugins/Bladesio1/Bladesio1.xcodeproj; sourceTree = "<group>"; };
+		55858D2817864D140068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pcsxr.xcconfig; sourceTree = SOURCE_ROOT; };
+		55858D2A17864DC80068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Debug.xcconfig"; sourceTree = SOURCE_ROOT; };
+		55858D2B17864DC90068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Instrument.xcconfig"; sourceTree = SOURCE_ROOT; };
+		55858D2C17864DC90068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Release.xcconfig"; sourceTree = SOURCE_ROOT; };
 		559366C012B694DF004ACC1E /* iGte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGte.h; sourceTree = "<group>"; };
 		559366C112B694DF004ACC1E /* iR3000A-64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "iR3000A-64.c"; sourceTree = "<group>"; };
 		559366C212B694DF004ACC1E /* ix86-64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "ix86-64.c"; sourceTree = "<group>"; };
@@ -449,6 +471,10 @@
 				28F0C3CA146521B700A90285 /* AddPluginSheet.xib */,
 				55A90221147D7C7A0037E18F /* MemCardManager.xib */,
 				55C7A216148B2B3800C22ABC /* PcsxrMemCardDocument.xib */,
+				55858D2A17864DC80068B8FC /* Pcsxr-Debug.xcconfig */,
+				55858D2B17864DC90068B8FC /* Pcsxr-Instrument.xcconfig */,
+				55858D2C17864DC90068B8FC /* Pcsxr-Release.xcconfig */,
+				55858D2817864D140068B8FC /* Pcsxr.xcconfig */,
 			);
 			name = Resources;
 			path = English.lproj;
@@ -457,6 +483,7 @@
 		2BBD6C1D04C893F500A83E33 /* PlugIns */ = {
 			isa = PBXGroup;
 			children = (
+				55858D1B1786329D0068B8FC /* Bladesio1.xcodeproj */,
 				559DACA3146C647E00C5DF71 /* DFNet.xcodeproj */,
 				71D888CE130F04DC00F150FF /* PeopsXGL.xcodeproj */,
 				71F2C07E1200B69B00322AD9 /* DFInput.xcodeproj */,
@@ -575,6 +602,14 @@
 			path = ../libpcsxcore;
 			sourceTree = "<group>";
 		};
+		55858D1C1786329D0068B8FC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55858D201786329D0068B8FC /* Bladesio1.psxplugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		559366BF12B694DF004ACC1E /* ix86_64 */ = {
 			isa = PBXGroup;
 			children = (
@@ -612,7 +647,7 @@
 		71AD2DD810C3570900365243 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				71AD2DDC10C3570900365243 /* PeopsSoftGL.psxplugin */,
+				71AD2DDC10C3570900365243 /* gpuPeopsSoftGL.psxplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -620,7 +655,7 @@
 		71D888CF130F04DC00F150FF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				71D888D4130F04DC00F150FF /* PeopsXGL.psxplugin */,
+				71D888D4130F04DC00F150FF /* gpuPeopsXGL.psxplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -669,6 +704,7 @@
 				2BB3D6D005427FE200831ACB /* PBXBuildRule */,
 			);
 			dependencies = (
+				55858D23178632B70068B8FC /* PBXTargetDependency */,
 				559DACBA146C68B700C5DF71 /* PBXTargetDependency */,
 				559DAC46146BA61400C5DF71 /* PBXTargetDependency */,
 				71AD2DE910C3572200365243 /* PBXTargetDependency */,
@@ -704,6 +740,10 @@
 			mainGroup = 08FB7794FE84155DC02AAC07 /* Pcsxr */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 55858D1C1786329D0068B8FC /* Products */;
+					ProjectRef = 55858D1B1786329D0068B8FC /* Bladesio1.xcodeproj */;
+				},
 				{
 					ProductGroup = 71F93F6411FB8E9D007A5A7C /* Products */;
 					ProjectRef = 71F93F6311FB8E9D007A5A7C /* DFCdrom.xcodeproj */;
@@ -744,6 +784,13 @@
 			remoteRef = 28B467F01463D0020083F129 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		55858D201786329D0068B8FC /* Bladesio1.psxplugin */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Bladesio1.psxplugin;
+			remoteRef = 55858D1F1786329D0068B8FC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5586005F17850CFC00CB3D85 /* libSPUSharedCode.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
@@ -765,17 +812,17 @@
 			remoteRef = 71AD2DD010C356FD00365243 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		71AD2DDC10C3570900365243 /* PeopsSoftGL.psxplugin */ = {
+		71AD2DDC10C3570900365243 /* gpuPeopsSoftGL.psxplugin */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = PeopsSoftGL.psxplugin;
+			path = gpuPeopsSoftGL.psxplugin;
 			remoteRef = 71AD2DDB10C3570900365243 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		71D888D4130F04DC00F150FF /* PeopsXGL.psxplugin */ = {
+		71D888D4130F04DC00F150FF /* gpuPeopsXGL.psxplugin */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = PeopsXGL.psxplugin;
+			path = gpuPeopsXGL.psxplugin;
 			remoteRef = 71D888D3130F04DC00F150FF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -815,6 +862,7 @@
 				55C7A214148B2B3800C22ABC /* PcsxrMemCardDocument.xib in Resources */,
 				02FE55E816765F9400205CF2 /* KeyNames.plist in Resources */,
 				D422E66E16DC48D000526DCF /* CheatWindow.xib in Resources */,
+				55858D2917864D140068B8FC /* Pcsxr.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,6 +929,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		55858D23178632B70068B8FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Bladesio1;
+			targetProxy = 55858D22178632B70068B8FC /* PBXContainerItemProxy */;
+		};
 		559DAC46146BA61400C5DF71 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PeopsAL;
@@ -1004,111 +1057,14 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		71F353F40FD98DFE00CBEC28 /* Debug */ = {
+		55858D2D1786522D0068B8FC /* Instrument */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55858D2B17864DC90068B8FC /* Pcsxr-Instrument.xcconfig */;
 			buildSettings = {
-				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_ASM_KEYWORD = YES;
-				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					PCSXRCORE,
-					"PCSXR_VERSION=\\\"1.5\\\"",
-					"XA_HACK=1",
-					"_MACOSX=1",
-					__MACOSX__,
-					"$(inherited)",
-				);
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = Info.plist;
-				OTHER_CFLAGS = "-falign-loops=16";
-				PRODUCT_NAME = PCSXR;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		71F353F50FD98DFE00CBEC28 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				GCC_DYNAMIC_NO_PIC = YES;
-				GCC_ENABLE_ASM_KEYWORD = YES;
-				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					PCSXRCORE,
-					"PCSXR_VERSION=\\\"1.5\\\"",
-					"XA_HACK=1",
-					"_MACOSX=1",
-					__MACOSX__,
-					"$(inherited)",
-				);
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = Info.plist;
-				OTHER_CFLAGS = (
-					"-fomit-frame-pointer",
-					"-funroll-loops",
-					"-falign-loops=16",
-				);
-				PRODUCT_NAME = PCSXR;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		71F353F90FD98DFE00CBEC28 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					../include,
-					../libpcsxcore,
-					../macosx,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-lz";
-				SDKROOT = macosx;
-				VALID_ARCHS = "i386 x86_64";
-			};
-			name = Debug;
-		};
-		71F353FA0FD98DFE00CBEC28 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_DYNAMIC_NO_PIC = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_OPTIMIZATION_LEVEL = 2;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_UNROLL_LOOPS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -1121,8 +1077,133 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-fomit-frame-pointer";
 				OTHER_LDFLAGS = "-lz";
-				SDKROOT = macosx;
-				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Instrument;
+		};
+		55858D2E1786522D0068B8FC /* Instrument */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_ENABLE_ASM_KEYWORD = YES;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PCSXRCORE,
+					"PCSXR_VERSION=\\\"1.5\\\"",
+					"XA_HACK=1",
+					"_MACOSX=1",
+					__MACOSX__,
+					"ENABLE_SIO1API=1",
+					"$(inherited)",
+				);
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				INFOPLIST_FILE = Info.plist;
+				OTHER_CFLAGS = (
+					"-funroll-loops",
+					"-falign-loops=16",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = PCSXR;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Instrument;
+		};
+		71F353F40FD98DFE00CBEC28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_ENABLE_ASM_KEYWORD = YES;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PCSXRCORE,
+					"PCSXR_VERSION=\\\"1.5\\\"",
+					"XA_HACK=1",
+					__MACOSX__,
+					"ENABLE_SIO1API=1",
+					"$(inherited)",
+				);
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				INFOPLIST_FILE = Info.plist;
+				OTHER_CFLAGS = (
+					"-falign-loops=16",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = PCSXR;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		71F353F50FD98DFE00CBEC28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_ENABLE_ASM_KEYWORD = YES;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PCSXRCORE,
+					"PCSXR_VERSION=\\\"1.5\\\"",
+					"XA_HACK=1",
+					"_MACOSX=1",
+					__MACOSX__,
+					"ENABLE_SIO1API=1",
+					"$(inherited)",
+				);
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				INFOPLIST_FILE = Info.plist;
+				OTHER_CFLAGS = (
+					"-funroll-loops",
+					"-falign-loops=16",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = PCSXR;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		71F353F90FD98DFE00CBEC28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55858D2A17864DC80068B8FC /* Pcsxr-Debug.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../libpcsxcore,
+					../macosx,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = "-lz";
+			};
+			name = Debug;
+		};
+		71F353FA0FD98DFE00CBEC28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55858D2C17864DC90068B8FC /* Pcsxr-Release.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../libpcsxcore,
+					../macosx,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CFLAGS = "-fomit-frame-pointer";
+				OTHER_LDFLAGS = "-lz";
 			};
 			name = Release;
 		};
@@ -1134,6 +1215,7 @@
 			buildConfigurations = (
 				71F353F40FD98DFE00CBEC28 /* Debug */,
 				71F353F50FD98DFE00CBEC28 /* Release */,
+				55858D2E1786522D0068B8FC /* Instrument */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1143,6 +1225,7 @@
 			buildConfigurations = (
 				71F353F90FD98DFE00CBEC28 /* Debug */,
 				71F353FA0FD98DFE00CBEC28 /* Release */,
+				55858D2D1786522D0068B8FC /* Instrument */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

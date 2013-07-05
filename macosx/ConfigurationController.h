@@ -17,6 +17,7 @@ extern NSString *const memCardChangeNumberKey;
 	IBOutlet PluginController *padPlugin;
 	IBOutlet PluginController *soundPlugin;
 	IBOutlet PluginController *netPlugin;
+	IBOutlet PluginController *sio1Plugin;
 	
 	IBOutlet id noXaAudioCell;
 	IBOutlet id sioIrqAlwaysCell;

@@ -1,0 +1,5 @@
+
+#include "Pcsxr-Release.xcconfig"
+
+//:configuration = Debug
+COPY_PHASE_STRIP = NO

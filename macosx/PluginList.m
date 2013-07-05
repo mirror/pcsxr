@@ -15,7 +15,7 @@
 
 //NSMutableArray *plugins;
 static PluginList __arcweak *sPluginList = nil;
-const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, PSE_LT_NET};
+const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, PSE_LT_NET, PSE_LT_SIO1};
 
 @implementation PluginList
 
@@ -83,6 +83,7 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	[activeCdrPlugin release];
 	[activePadPlugin release];
 	[activeNetPlugin release];
+	[activeSIO1Plugin release];
 	
 	[pluginList release];
 	
@@ -186,6 +187,8 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	if ([activeCdrPlugin runAs:PSE_LT_CDR] != 0) bad = YES;
 	if ([activePadPlugin runAs:PSE_LT_PAD] != 0) bad = YES;
 	if ([activeNetPlugin runAs:PSE_LT_NET] != 0) bad = YES;
+	if ([activeSIO1Plugin runAs:PSE_LT_SIO1] != 0) bad = YES;
+
 	
 	return !bad;
 }
@@ -198,6 +201,7 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 		case PSE_LT_SPU: return activeSpuPlugin; break;
 		case PSE_LT_PAD: return activePadPlugin; break;
 		case PSE_LT_NET: return activeNetPlugin; break;
+		case PSE_LT_SIO1: return activeNetPlugin; break;
 	}
 	
 	return nil;
@@ -208,10 +212,11 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 	PcsxrPlugin *pluginPtr = nil;
 	
 	switch (type) {
-		case PSE_LT_GPU: 
-		case PSE_LT_CDR: 
-		case PSE_LT_SPU: 
-		case PSE_LT_PAD: 
+		case PSE_LT_SIO1:
+		case PSE_LT_GPU:
+		case PSE_LT_CDR:
+		case PSE_LT_SPU:
+		case PSE_LT_PAD:
 		case PSE_LT_NET: pluginPtr = [self activePluginForType:type]; break;
 		default: return NO; break;
 	}
@@ -252,6 +257,9 @@ const static int typeList[5] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, 
 				break;
 			case PSE_LT_NET:
 				activeNetPlugin = RETAINOBJ(plugin);
+				break;
+			case PSE_LT_SIO1:
+				activeSIO1Plugin = RETAINOBJ(plugin);
 				break;
 	}
 	

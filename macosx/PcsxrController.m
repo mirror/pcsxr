@@ -654,6 +654,7 @@ otherblock();\
 		[NSValue valueWithPointer:Config.Pad1], @"PluginPAD",
 		[NSValue valueWithPointer:Config.Cdr], @"PluginCDR",
 		[NSValue valueWithPointer:Config.Net], @"PluginNET",
+		[NSValue valueWithPointer:Config.Sio1], @"PluginSIO1",
 		nil];
 	
 	prefURLKeys = [[NSDictionary alloc] initWithObjectsAndKeys:

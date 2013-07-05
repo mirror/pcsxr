@@ -123,15 +123,17 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 		return;
 	}
 	//This is the only setter that is being watched AND changed.
-	[self willChangeValueForKey:@"memImage"];
 #if __has_feature(objc_arc)
+	[self willChangeValueForKey:@"memImage"];
 	memImage = theMemImage;
+	[self didChangeValueForKey:@"memImage"];
 #else
 	NSImage *tmpImage = memImage;
+	[self willChangeValueForKey:@"memImage"];
 	memImage = [theMemImage retain];
+	[self didChangeValueForKey:@"memImage"];
 	[tmpImage release];
 #endif
-	[self didChangeValueForKey:@"memImage"];
 }
 - (NSImage*)memImage
 {

@@ -20,6 +20,7 @@
 	PcsxrPlugin *activeCdrPlugin;
 	PcsxrPlugin *activePadPlugin;
 	PcsxrPlugin *activeNetPlugin;
+	PcsxrPlugin *activeSIO1Plugin;
 	 
 	BOOL missingPlugins;
 }

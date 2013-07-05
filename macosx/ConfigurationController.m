@@ -240,6 +240,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	[padPlugin setPluginsTo:[list pluginsForType:PSE_LT_PAD] withType: PSE_LT_PAD];
 	[cdromPlugin setPluginsTo:[list pluginsForType:PSE_LT_CDR] withType: PSE_LT_CDR];
 	[netPlugin setPluginsTo:[list pluginsForType:PSE_LT_NET] withType: PSE_LT_NET];
+	[sio1Plugin setPluginsTo:[list pluginsForType:PSE_LT_SIO1] withType:PSE_LT_SIO1];
     
     // Setup hotkey view
     [hkController initialize];

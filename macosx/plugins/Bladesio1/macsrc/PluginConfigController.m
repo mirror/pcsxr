@@ -23,6 +23,7 @@
 #include "typedefs.h"
 #include "sio1.h"
 #import "ARCBridge.h"
+#include "macsrc.h"
 
 #define APP_ID @"net.pcsxr.Bladesio1"
 #define PrefsKey APP_ID @" Settings"
@@ -89,7 +90,7 @@ void ReadConfig()
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 								[NSDictionary dictionaryWithObjectsAndKeys:
 								 @NO, kSioEnabled,
-								 @((unsigned short)33307), kSioPort,
+								 @((u16)33307), kSioPort,
 								 @"127.0.0.1", kSioIPAddress,
 								 @(PLAYER_DISABLED), kSioPlayer,
 								 nil], PrefsKey, nil]];
@@ -115,25 +116,25 @@ void ReadConfig()
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
 
-	
 	NSString *theAddress = [ipAddressField stringValue];
-	{
-		unsigned char a, b, c, d;
-		if (sscanf([theAddress cStringUsingEncoding:NSASCIIStringEncoding], "%s.%s.%s.%s", &a, &b, &c, &d) != 4) {
-			NSBeginAlertSheet(@"Invalid IP address", nil, nil, nil, [self window], nil, NULL, NULL, NULL, @"The IP address cannot be a hostname,");
-		}
+	if ([theAddress lengthOfBytesUsingEncoding:NSASCIIStringEncoding] > (sizeof(settings.ip) - 1)) {
+		NSBeginAlertSheet(@"Address too long", nil, nil, nil, [self window], nil, NULL, NULL, NULL, @"The address is too long. Try to use only the IP address and not a host name.");
+		return;
 	}
 	
 	[writeDic setObject:(([enabledButton state]  == NSOnState) ? @YES : @NO) forKey:kSioEnabled];
-	[writeDic setObject:[ipAddressField stringValue] forKey:kSioIPAddress];
+	[writeDic setObject:theAddress forKey:kSioIPAddress];
 	[writeDic setObject:@((unsigned short)[portField intValue]) forKey:kSioPort];
 	
-
-	switch ([playerMenu indexOfSelectedItem]) {
-		default:
-		case 0: [writeDic setObject:@(PLAYER_DISABLED) forKey:kSioPlayer]; break;
-		case 1: [writeDic setObject:@(PLAYER_MASTER) forKey:kSioPlayer]; break;
-		case 2: [writeDic setObject:@(PLAYER_SLAVE) forKey:kSioPlayer]; break;
+	{
+		int player;
+		switch ([playerMenu indexOfSelectedItem]) {
+			default:
+			case 0: player = PLAYER_DISABLED; break;
+			case 1: player = PLAYER_MASTER; break;
+			case 2: player = PLAYER_SLAVE; break;
+		}
+		[writeDic setObject:@(player) forKey:kSioPlayer];
 	}
 
 	// write to defaults
@@ -150,11 +151,13 @@ void ReadConfig()
 {
 	BOOL isEnabled = [enabledButton state] == NSOnState ? YES : NO;
 	
-	for (NSView *subView in [configBox subviews]) {
+	for (NSView *subView in [[configBox subviews][0] subviews]) {
 		if ([subView isKindOfClass:[NSTextField class]] && ![(NSTextField*)subView isEditable]) {
 				[(NSTextField*)subView setTextColor:isEnabled ? [NSColor controlTextColor] : [NSColor disabledControlTextColor]];
 		} else {
-			[(NSControl*)subView setEnabled:isEnabled];
+			if ([subView respondsToSelector:@selector(setEnabled:)]) {
+				[(NSControl*)subView setEnabled:isEnabled];
+			}
 		}
 	}
 }
@@ -177,14 +180,16 @@ void ReadConfig()
 
 	[enabledButton setState: [[keyValues objectForKey:kSioEnabled] boolValue] ? NSOnState : NSOffState];
 	[ipAddressField setTitleWithMnemonic:[keyValues objectForKey:kSioIPAddress]];
-	[portField setValue:[keyValues objectForKey:kSioPort]];
+	[portField setIntValue:[[keyValues objectForKey:kSioPort] intValue]];
 	
-	switch ([[keyValues objectForKey:kSioPlayer] intValue]) {
+	switch ([[keyValues objectForKey:kSioPlayer] integerValue]) {
 		default:
 		case PLAYER_DISABLED: [playerMenu selectItemAtIndex:0]; break;
 		case PLAYER_MASTER: [playerMenu selectItemAtIndex:1]; break;
 		case PLAYER_SLAVE: [playerMenu selectItemAtIndex:2]; break;
 	}
+	
+	[self toggleEnabled:nil];
 }
 
 - (void)awakeFromNib

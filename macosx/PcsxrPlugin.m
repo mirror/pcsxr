@@ -22,6 +22,7 @@
         case PSE_LT_SPU: return @"SPU"; break;
         case PSE_LT_PAD: return @"PAD"; break;
         case PSE_LT_NET: return @"NET"; break;
+        case PSE_LT_SIO1: return @"SIO1"; break;
     }
     
     return @"";
@@ -36,6 +37,7 @@
         case PSE_LT_SPU:
         case PSE_LT_PAD:
         case PSE_LT_NET:
+        case PSE_LT_SIO1:
             return [NSString stringWithFormat:@"Plugin%@", [self prefixForType:aType]];
             break;
         default:
@@ -51,6 +53,8 @@
 	static char *spu[2] = {(char *)&Config.Spu, NULL};
 	static char *pad[3] = {(char *)&Config.Pad1, (char *)&Config.Pad2, NULL};
 	static char *net[2] = {(char *)&Config.Net, NULL};
+    static char *sio1[2] = {(char *)&Config.Sio1, NULL};
+
 
     switch (aType) {
         case PSE_LT_GPU: return (char **)gpu;
@@ -58,6 +62,7 @@
         case PSE_LT_SPU: return (char **)spu;
         case PSE_LT_PAD: return (char **)pad;
         case PSE_LT_NET: return (char **)net;
+        case PSE_LT_SIO1: return (char **)sio1;
     }
 
     return nil;
@@ -168,13 +173,15 @@
             type = PSE_LT_PAD;
         else if (([path rangeOfString: @"net" options:NSCaseInsensitiveSearch]).length != 0)
             type = PSE_LT_NET;
+        else if (([path rangeOfString: @"sio1" options:NSCaseInsensitiveSearch]).length != 0)
+            type = PSE_LT_SIO1;
         else {
             AUTORELEASEOBJNORETURN(self);
             return nil;
         }
     } else {
         type = (int)PSE_getLibType();
-        if (type != PSE_LT_GPU && type != PSE_LT_CDR && type != PSE_LT_SPU && type != PSE_LT_PAD && type != PSE_LT_NET) {
+        if (type != PSE_LT_GPU && type != PSE_LT_CDR && type != PSE_LT_SPU && type != PSE_LT_PAD && type != PSE_LT_NET && type != PSE_LT_SIO1) {
             AUTORELEASEOBJNORETURN(self);
             return nil;
         }

@@ -34,7 +34,6 @@
 		28586CC514651E870082B8EC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Bladesio1PluginConfig.xib; sourceTree = "<group>"; };
 		2BD707170555997500CB5D9B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		552E4CBB1474737A00FB231F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		55858D0A178609A80068B8FC /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cfg.c; sourceTree = "<group>"; };
 		55858D0B178609A80068B8FC /* connection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = connection.c; sourceTree = "<group>"; };
 		55858D0C178609A80068B8FC /* connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = connection.h; sourceTree = "<group>"; };
 		55858D0D178609A80068B8FC /* fifo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fifo.c; sourceTree = "<group>"; };
@@ -122,7 +121,6 @@
 		71F3C30911F3CC22007B9F12 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				55858D0A178609A80068B8FC /* cfg.c */,
 				55858D0B178609A80068B8FC /* connection.c */,
 				55858D0C178609A80068B8FC /* connection.h */,
 				55858D0D178609A80068B8FC /* fifo.c */,
@@ -359,7 +357,7 @@
 					../..,
 					../../../plugins/dfcdrom,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -391,7 +389,7 @@
 					../..,
 					../../../plugins/dfcdrom,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 				VALID_ARCHS = "i386 x86_64";
 			};
