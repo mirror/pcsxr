@@ -57,14 +57,18 @@ void AboutDlgProc()
 	NSSize size = NSMakeSize(64, 64);
 	[icon setSize:size];
 
-	[app orderFrontStandardAboutPanelWithOptions:[NSDictionary dictionaryWithObjectsAndKeys:
-			[bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
-			icon, @"ApplicationIcon",
-			[bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
-			[bundle objectForInfoDictionaryKey:@"CFBundleVersion"], @"Version",
-			[bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"], @"Copyright",
-			credits, @"Credits",
-			nil]];
+	NSDictionary *infoPaneDict =
+	[NSDictionary dictionaryWithObjectsAndKeys:
+	 [bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
+	 icon, @"ApplicationIcon",
+	 [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
+	 [bundle objectForInfoDictionaryKey:@"CFBundleVersion"], @"Version",
+	 [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"], @"Copyright",
+	 credits, @"Credits",
+	 nil];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[app orderFrontStandardAboutPanelWithOptions:infoPaneDict];
+	});
 }
 
 void ConfDlgProc()
