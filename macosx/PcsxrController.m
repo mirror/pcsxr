@@ -733,7 +733,7 @@ otherblock();\
 		strcpy(Config.BiosDir, "Bios/");
 		strcpy(Config.PatchesDir, "Patches/");
 
-		saveStatePath = RETAINOBJ(@"sstates");
+		saveStatePath = @"sstates";
 	}
 
 	// set plugin path

@@ -20,8 +20,8 @@
 	int active;
 }
 
-@property (readonly) NSString *path;
-@property (readonly) NSString *name;
+@property (readonly, copy) NSString *path;
+@property (readonly, retain) NSString *name;
 
 + (NSString *)prefixForType:(int)type;
 + (NSString *)defaultKeyForType:(int)type;

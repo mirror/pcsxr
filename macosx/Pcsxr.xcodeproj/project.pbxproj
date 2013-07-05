@@ -450,7 +450,6 @@
 		551A74B917868BEA0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		551A74BB17868BEA0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		551A74BC17868BEA0052D185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		551A74BE17868BEA0052D185 /* ARCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		551A74BF17868BEA0052D185 /* cfg.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cfg.c; sourceTree = "<group>"; };
 		551A74C017868BEA0052D185 /* PluginConfigController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PluginConfigController.h; sourceTree = "<group>"; };
 		551A74C117868BEA0052D185 /* PluginConfigController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PluginConfigController.m; sourceTree = "<group>"; };
@@ -506,7 +505,6 @@
 		551A750117868BEA0052D185 /* SDL_systhread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_systhread.h; sourceTree = "<group>"; };
 		551A750217868BEA0052D185 /* SDL_thread.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = SDL_thread.c; sourceTree = "<group>"; };
 		551A750317868BEA0052D185 /* SDL_thread_c.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_thread_c.h; sourceTree = "<group>"; };
-		551A750517868BEA0052D185 /* ARCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ARCBridge.h; path = ../ARCBridge.h; sourceTree = "<group>"; };
 		551A750A17868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		551A750C17868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/DFCdromPluginConfig.xib; sourceTree = "<group>"; };
 		551A750E17868BEB0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -517,7 +515,6 @@
 		551A751517868BEB0052D185 /* PluginConfigController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PluginConfigController.h; sourceTree = "<group>"; };
 		551A751617868BEB0052D185 /* PluginConfigController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PluginConfigController.m; sourceTree = "<group>"; };
 		551A751717868BEB0052D185 /* version.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
-		551A751917868BEB0052D185 /* ARCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ARCBridge.h; path = ../ARCBridge.h; sourceTree = "<group>"; };
 		551A751E17868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		551A752017868BEB0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		551A752217868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -540,7 +537,6 @@
 		551A753D17868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		551A753F17868BEC0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SockDialog.xib; sourceTree = "<group>"; };
 		551A754017868BEC0052D185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		551A754217868BEC0052D185 /* ARCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		551A754317868BEC0052D185 /* cfg.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cfg.c; sourceTree = "<group>"; };
 		551A754417868BEC0052D185 /* PluginConfigController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PluginConfigController.h; sourceTree = "<group>"; };
 		551A754517868BEC0052D185 /* PluginConfigController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PluginConfigController.m; sourceTree = "<group>"; };
@@ -549,7 +545,6 @@
 		551A754817868BEC0052D185 /* version.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		551A754A17868BEC0052D185 /* Info-AL.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-AL.plist"; path = "../../Info-AL.plist"; sourceTree = "<group>"; };
 		551A754B17868BEC0052D185 /* Info-SDL.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-SDL.plist"; path = "../../Info-SDL.plist"; sourceTree = "<group>"; };
-		551A754D17868BEC0052D185 /* ARCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		551A754E17868BEC0052D185 /* maccfg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = maccfg.h; sourceTree = "<group>"; };
 		551A754F17868BEC0052D185 /* NamedSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NamedSlider.h; sourceTree = "<group>"; };
 		551A755017868BEC0052D185 /* NamedSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NamedSlider.m; sourceTree = "<group>"; };
@@ -562,7 +557,6 @@
 		551A756117868BEC0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		551A756317868BEC0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		551A756517868BEC0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsSpuPluginMain.xib; sourceTree = "<group>"; };
-		551A756717868BEC0052D185 /* ARCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ARCBridge.h; path = ../ARCBridge.h; sourceTree = "<group>"; };
 		551A756917868BEC0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		551A756B17868BEC0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		551A756D17868BEC0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -582,7 +576,6 @@
 		551A757D17868BEC0052D185 /* PluginWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PluginWindowController.m; sourceTree = "<group>"; };
 		551A757E17868BEC0052D185 /* SGPUPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGPUPreferences.h; sourceTree = "<group>"; };
 		551A757F17868BED0052D185 /* NetSfPeopsSoftGPUInterface.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetSfPeopsSoftGPUInterface.xib; sourceTree = "<group>"; };
-		551A758417868BED0052D185 /* ARCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ARCBridge.h; path = ../ARCBridge.h; sourceTree = "<group>"; };
 		551A758617868BED0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		551A758817868BED0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		551A758A17868BED0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1137,7 +1130,6 @@
 		551A74BD17868BEA0052D185 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
-				551A74BE17868BEA0052D185 /* ARCBridge.h */,
 				551A74BF17868BEA0052D185 /* cfg.c */,
 				551A74C017868BEA0052D185 /* PluginConfigController.h */,
 				551A74C117868BEA0052D185 /* PluginConfigController.m */,
@@ -1320,7 +1312,6 @@
 		551A751217868BEB0052D185 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
-				551A750517868BEA0052D185 /* ARCBridge.h */,
 				551A751317868BEB0052D185 /* cdr-macosx.c */,
 				551A751417868BEB0052D185 /* cfg.c */,
 				551A751517868BEB0052D185 /* PluginConfigController.h */,
@@ -1342,7 +1333,6 @@
 		551A752617868BEB0052D185 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
-				551A751917868BEB0052D185 /* ARCBridge.h */,
 				551A752717868BEB0052D185 /* cfg.c */,
 				551A752817868BEB0052D185 /* cfg.h */,
 				551A752917868BEB0052D185 /* ControllerList.h */,
@@ -1371,7 +1361,6 @@
 		551A754117868BEC0052D185 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
-				551A754217868BEC0052D185 /* ARCBridge.h */,
 				551A754317868BEC0052D185 /* cfg.c */,
 				551A754417868BEC0052D185 /* PluginConfigController.h */,
 				551A754517868BEC0052D185 /* PluginConfigController.m */,
@@ -1394,7 +1383,6 @@
 		551A754C17868BEC0052D185 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
-				551A754D17868BEC0052D185 /* ARCBridge.h */,
 				551A754E17868BEC0052D185 /* maccfg.h */,
 				551A754F17868BEC0052D185 /* NamedSlider.h */,
 				551A755017868BEC0052D185 /* NamedSlider.m */,
@@ -1457,7 +1445,6 @@
 		551A757317868BEC0052D185 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
-				551A756717868BEC0052D185 /* ARCBridge.h */,
 				551A757417868BEC0052D185 /* drawgl.m */,
 				551A757517868BEC0052D185 /* ExtendedKeys.h */,
 				551A757617868BEC0052D185 /* PluginConfigController.h */,
@@ -1486,7 +1473,6 @@
 		551A758E17868BED0052D185 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
-				551A758417868BED0052D185 /* ARCBridge.h */,
 				551A758F17868BED0052D185 /* drawgl.h */,
 				551A759017868BED0052D185 /* drawgl.m */,
 				551A759117868BED0052D185 /* ExtendedKeys.h */,

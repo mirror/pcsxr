@@ -12,7 +12,23 @@
 #include "plugins.h"
 #import "ARCBridge.h"
 
+#define kPCSXRGetLibName "PSEgetLibName"
+#define kPCSXRGetLibVersion "PSEgetLibVersion"
+#define kPCSXRGetLibType "PSEgetLibType"
+
+@interface PcsxrPlugin ()
+@property (readwrite, copy) NSString *path;
+@property (readwrite, retain) NSDate *modDate;
+@property (readwrite, retain) NSString *name;
+@property (readwrite, retain) NSString *fullPlugPath;
+@end
+
 @implementation PcsxrPlugin
+
+@synthesize path;
+@synthesize name;
+@synthesize fullPlugPath;
+@synthesize modDate;
 
 + (NSString *)prefixForType:(int)aType
 {
@@ -54,7 +70,6 @@
 	static char *pad[3] = {(char *)&Config.Pad1, (char *)&Config.Pad2, NULL};
 	static char *net[2] = {(char *)&Config.Net, NULL};
     static char *sio1[2] = {(char *)&Config.Sio1, NULL};
-
 
     switch (aType) {
         case PSE_LT_GPU: return (char **)gpu;
@@ -100,9 +115,6 @@
     return returnArray;
 }
 
-@synthesize path;
-@synthesize name;
-
 - (id)initWithPath:(NSString *)aPath 
 {
     if (!(self = [super init])) {
@@ -117,7 +129,7 @@
     
     pluginRef = NULL;
     name = nil;
-    path = [aPath copy];
+    self.path = aPath;
     NSString *goodPath = nil;
     if ([aPath isAbsolutePath]) {
         goodPath = aPath;
@@ -130,7 +142,7 @@
                 void *tempHandle = SysLoadLibrary([fullPath fileSystemRepresentation]);
                 if (tempHandle != NULL)
                 {
-                    PSEgetLibVersion tempLibVersion = SysLoadSym(tempHandle, "PSEgetLibVersion");
+                    PSEgetLibVersion tempLibVersion = SysLoadSym(tempHandle, kPCSXRGetLibVersion);
                     if (SysLibError() == NULL)
                     {
                         long tempVers2 = tempLibVersion();
@@ -138,8 +150,7 @@
                             goodPath = fullPath;
                             tempVers = tempVers2;
                             if (![plugDir isEqualToString:[fm stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)]]) {
-                                RELEASEOBJ(path);
-                                path = [goodPath copy];
+                                self.path = goodPath;
                             }
                         }
                     }
@@ -158,12 +169,13 @@
 	
     pluginRef = SysLoadLibrary([goodPath fileSystemRepresentation]);
     if (pluginRef == NULL) {
+        SysLibError();
         AUTORELEASEOBJNORETURN(self);
         return nil;
     }
 
     // TODO: add support for plugins with multiple functionalities???
-    PSE_getLibType = (PSEgetLibType) SysLoadSym(pluginRef, "PSEgetLibType");
+    PSE_getLibType = (PSEgetLibType) SysLoadSym(pluginRef, kPCSXRGetLibType);
     if (SysLibError() != nil) {
         if (([path rangeOfString: @"gpu" options:NSCaseInsensitiveSearch]).length != 0)
             type = PSE_LT_GPU;
@@ -189,12 +201,12 @@
         }
     }
     
-    PSE_getLibName = (PSEgetLibName) SysLoadSym(pluginRef, "PSEgetLibName");
+    PSE_getLibName = (PSEgetLibName) SysLoadSym(pluginRef, kPCSXRGetLibName);
     if (SysLibError() == nil) {
-        name = RETAINOBJ(@(PSE_getLibName()));
+        self.name = @(PSE_getLibName());
     }
     
-    PSE_getLibVersion = (PSEgetLibVersion) SysLoadSym(pluginRef, "PSEgetLibVersion");
+    PSE_getLibVersion = (PSEgetLibVersion) SysLoadSym(pluginRef, kPCSXRGetLibVersion);
     if (SysLibError() == nil) {
         version = PSE_getLibVersion();
     } else {
@@ -203,8 +215,8 @@
     
     // save the current modification date
     NSDictionary *fattrs = [fm attributesOfItemAtPath:[goodPath stringByResolvingSymlinksInPath] error:NULL];
-    modDate = RETAINOBJ([fattrs fileModificationDate]);
-    fullPlugPath = RETAINOBJ(goodPath);
+    self.modDate = [fattrs fileModificationDate];
+    self.fullPlugPath = goodPath;
     
     active = 0;
     
@@ -225,14 +237,16 @@
     if (pluginRef) SysCloseLibrary(pluginRef);
     
 #if !__has_feature(objc_arc)
-    [modDate release];
-    [path release];
-    [name release];
-    [fullPlugPath release];
+    self.modDate = nil;
+    self.path = nil;
+    self.name = nil;
+    self.fullPlugPath = nil;
     
     [super dealloc];
 #endif
 }
+
+#define PluginSymbolName(type, theName) [[PcsxrPlugin prefixForType:type] stringByAppendingString:theName]
 
 - (void)runCommand:(id)arg
 {
@@ -252,9 +266,10 @@
     }
 }
 
+#define PluginSymbolNameShutdownInit(type, isInit) PluginSymbolName(type, isInit ? @"init" : @"shutdown")
+
 - (long)runAs:(int)aType
 {
-    char symbol[255];
     long (*init)();
     long (*initArg)(long arg);
     int res = PSE_ERR_FATAL;
@@ -263,8 +278,8 @@
         return 0;
     }
 
-    sprintf(symbol, "%sinit", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSASCIIStringEncoding]);
-    init = initArg = SysLoadSym(pluginRef, symbol);
+    init = initArg = SysLoadSym(pluginRef, [PluginSymbolNameShutdownInit(aType, YES)
+                                            cStringUsingEncoding:NSASCIIStringEncoding]);
     if (SysLibError() == nil) {
         if (aType != PSE_LT_PAD) {
             res = init();
@@ -277,20 +292,22 @@
         active |= aType;
     } else {
         NSRunCriticalAlertPanel(NSLocalizedString(@"Plugin Initialization Failed!", nil),
-            [NSString stringWithFormat:NSLocalizedString(@"Pcsxr failed to initialize the selected %@ plugin (error=%i).\nThe plugin might not work with your system.", nil), [PcsxrPlugin prefixForType:aType], res], 
-			nil, nil, nil);
+            NSLocalizedString(@"Pcsxr failed to initialize the selected %@ plugin (error=%i).\nThe plugin might not work with your system.", nil), 
+			nil, nil, nil, [PcsxrPlugin prefixForType:aType], res);
     }
     
     return res;
 }
 
+//#define PluginSymbolNameShutdown(type) PluginSymbolNameShutdownInit(type, NO)
+#define PluginSymbolNameShutdown(type) PluginSymbolName(type, @"shutdown")
+
 - (long)shutdownAs:(int)aType
 {
-    char symbol[255];
     long (*shutdown)(void);
 
-    sprintf(symbol, "%sshutdown", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSASCIIStringEncoding]);
-    shutdown = SysLoadSym(pluginRef, symbol);
+    shutdown = SysLoadSym(pluginRef, [PluginSymbolNameShutdown(aType)
+                                      cStringUsingEncoding:NSASCIIStringEncoding]);
     if (SysLibError() == nil) {
         active &= ~aType;
         return shutdown();
@@ -299,22 +316,20 @@
     return PSE_ERR_FATAL;
 }
 
+#define PluginSymbolNameAboutConfigure(type, isAbout) PluginSymbolName(type,isAbout ? @"about" : @"configure")
+
 - (BOOL)hasAboutAs:(int)aType
 {
-    char symbol[255];
-
-    sprintf(symbol, "%sabout", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSASCIIStringEncoding]);
-    SysLoadSym(pluginRef, symbol);
+    SysLoadSym(pluginRef, [PluginSymbolNameAboutConfigure(aType, YES)
+                           cStringUsingEncoding:NSASCIIStringEncoding]);
     
     return (SysLibError() == nil);
 }
 
 - (BOOL)hasConfigureAs:(int)aType
 {
-    char symbol[255];
-
-    sprintf(symbol, "%sconfigure", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSASCIIStringEncoding]);
-    SysLoadSym(pluginRef, symbol);
+    SysLoadSym(pluginRef, [PluginSymbolNameAboutConfigure(aType, NO)
+                           cStringUsingEncoding:NSASCIIStringEncoding]);
     
     return (SysLibError() == nil);
 }
@@ -322,11 +337,10 @@
 - (void)aboutAs:(int)aType
 {
     NSArray *arg;
-    char symbol[255];
-
-    sprintf(symbol, "%sabout", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSASCIIStringEncoding]);
-    arg = [[NSArray alloc] initWithObjects:[NSString stringWithCString:symbol encoding:NSASCIIStringEncoding], 
-                    [NSNumber numberWithInt:0], nil];
+    
+    NSString *aboutSym = PluginSymbolNameAboutConfigure(aType, YES);
+    arg = @[aboutSym, @0];
+    RETAINOBJNORETURN(arg);
     
     // detach a new thread
     [NSThread detachNewThreadSelector:@selector(runCommand:) toTarget:self 
@@ -338,11 +352,10 @@
 - (void)configureAs:(int)aType
 {
     NSArray *arg;
-    char symbol[255];
     
-    sprintf(symbol, "%sconfigure", [[PcsxrPlugin prefixForType:aType] cStringUsingEncoding:NSASCIIStringEncoding]);
-    arg = [[NSArray alloc] initWithObjects:[NSString stringWithCString:symbol encoding:NSASCIIStringEncoding], 
-                    [NSNumber numberWithInt:1], nil];
+    NSString *configSym = PluginSymbolNameAboutConfigure(aType, NO);
+    arg = @[configSym, @1];
+    RETAINOBJNORETURN(arg);
     
     // detach a new thread
     [NSThread detachNewThreadSelector:@selector(runCommand:) toTarget:self 
