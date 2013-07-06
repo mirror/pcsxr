@@ -46,8 +46,6 @@ extern NSString *const memCardChangeNumberKey;
 - (IBAction)setCheckbox:(id)sender;
 - (IBAction)setCheckboxInverse:(id)sender;
 - (IBAction)setVideoType:(id)sender;
-- (IBAction)mcdChangeClicked:(id)sender;
-- (IBAction)mcdNewClicked:(id)sender;
 
 - (NSString *)keyForSender:(id)sender;
 + (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile DEPRECATED_ATTRIBUTE;

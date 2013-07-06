@@ -26,7 +26,7 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 
 @property (readwrite, nonatomic) NSInteger memImageIndex;
 @property (arcstrong) NSArray *memImages;
-@property PCSXRMemFlags flagNameIndex;
+@property (readwrite) PCSXRMemFlags flagNameIndex;
 @end
 
 @implementation PcsxrMemoryObject
@@ -143,31 +143,41 @@ static NSString *MemLabelEndLink;
 		} else
 			self.flagNameIndex = memFlagFree;
 
-		self.englishName = @(infoBlock->Title);
-		self.sjisName = [NSString stringWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
-		@autoreleasepool {
-			self.memImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
-		}
-		if ([memImages count] == 0) {
-			self.memImageIndex = -1;
-		} else if ([memImages count] == 1) {
-			self.memImageIndex = 0;
-		} else {
-			self.memImageIndex = 0;
-			[[NSNotificationCenter defaultCenter] addObserverForName:memoryAnimateTimerKey object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-				NSInteger index = memImageIndex;
-				if (++index >= [memImages count]) {
-					index = 0;
-				}
-				self.memImageIndex = index;
-			}];
-		}
-		self.memName = @(infoBlock->Name);
-		self.memID = @(infoBlock->ID);
-		//This prevents possible uglies in multi-save images
-		if (self.flagName == MemLabelLink || self.flagName == MemLabelEndLink) {
+		if (self.flagNameIndex == memFlagLink || self.flagNameIndex == memFlagEndLink || self.flagNameIndex == memFlagFree) {
+			//This prevents possible uglies in multi-save images
 			self.memImages = @[];
 			self.memImageIndex = -1;
+			
+			if (flagNameIndex != memFlagFree) {
+				self.englishName = self.sjisName = (flagNameIndex == memFlagLink ? @"Multi-save" : @"Multi-save (end)");
+			} else {
+				self.englishName = self.sjisName = @"Free block";
+			}
+			
+			self.memID = self.memName = @"";
+		} else {
+			self.englishName = @(infoBlock->Title);
+			self.sjisName = [NSString stringWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
+			
+			@autoreleasepool {
+				self.memImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
+			}
+			if ([memImages count] == 0) {
+				self.memImageIndex = -1;
+			} else if ([memImages count] == 1) {
+				self.memImageIndex = 0;
+			} else {
+				self.memImageIndex = 0;
+				[[NSNotificationCenter defaultCenter] addObserverForName:memoryAnimateTimerKey object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+					NSInteger index = memImageIndex;
+					if (++index >= [memImages count]) {
+						index = 0;
+					}
+					self.memImageIndex = index;
+				}];
+			}
+			self.memName = @(infoBlock->Name);
+			self.memID = @(infoBlock->ID);
 		}
 	}
 	return self;
@@ -232,6 +242,7 @@ NS_INLINE void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtclr)
 		attribMemLabelFree = [tmpStr copy];
 		RELEASEOBJ(tmpStr);
 		
+#ifdef DEBUG
 		tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelEndLink];
 		SetupAttrStr(tmpStr, [NSColor blueColor]);
 		attribMemLabelEndLink = [tmpStr copy];
@@ -246,6 +257,21 @@ NS_INLINE void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtclr)
 		SetupAttrStr(tmpStr, [NSColor controlTextColor]);
 		attribMemLabelUsed = [tmpStr copy];
 		RELEASEOBJ(tmpStr);
+#else
+		tmpStr = [[NSMutableAttributedString alloc] initWithString:@"Multi-save"];
+		SetupAttrStr(tmpStr, [NSColor blueColor]);
+		attribMemLabelEndLink = [tmpStr copy];
+		RELEASEOBJ(tmpStr);
+		
+		//tmpStr = [[NSMutableAttributedString alloc] initWithString:@"Multi-save"];
+		//SetupAttrStr(tmpStr, [NSColor blueColor]);
+		//attribMemLabelLink = [tmpStr copy];
+		//RELEASEOBJ(tmpStr);
+		attribMemLabelLink = attribMemLabelEndLink;
+		
+		//display nothing
+		attribMemLabelUsed = [[NSAttributedString alloc] initWithString:@""];
+#endif
 
 		tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelDeleted];
 		SetupAttrStr(tmpStr, [NSColor redColor]);

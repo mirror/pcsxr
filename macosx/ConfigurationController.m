@@ -58,16 +58,6 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	}
 }
 
-- (IBAction)mcdChangeClicked:(id)sender
-{
-	[ConfigurationController mcdChangeClicked:sender];
-}
-
-- (IBAction)mcdNewClicked:(id)sender
-{
-	[ConfigurationController mcdNewClicked:sender];
-}
-
 + (void)mcdChangeClicked:(id)sender
 {
 	NSInteger tag = [sender tag];
@@ -91,8 +81,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
     [openDlg setNameFieldStringValue:[path lastPathComponent]];
 	
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
-		NSArray* urls = [openDlg URLs];
-        NSURL *mcdURL = [urls objectAtIndex:0];
+		NSURL *mcdURL = [[openDlg URLs] objectAtIndex:0];
         
 		[ConfigurationController setMemoryCard:tag toURL:mcdURL];
     }
@@ -123,7 +112,6 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 		
 		//Workaround/kludge to make sure we create a memory card before posting a notification
 		strlcpy(mcd, [[mcdURL path] fileSystemRepresentation], MAXPATHLEN);
-		
 		CreateMcd(mcd);
 		
 		[ConfigurationController setMemoryCard:tag toURL:mcdURL];
@@ -160,8 +148,6 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	[[self window] center];
-
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(memoryCardDidChangeNotification:) name:memChangeNotifier object:nil];
 	
 	// setup checkboxes
 	checkBoxDefaults = [[NSMutableDictionary alloc] init];
@@ -200,7 +186,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	}
 	
 #ifdef __i386__
-	//i386 on OS X doesn't like the dynarec core
+	//OS X on i386 doesn't like the dynarec core
 	[usesDynarecCell setState:NSOffState];
 	[usesDynarecCell setEnabled:NO];
 #endif
@@ -255,7 +241,6 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 
 	return nil;
 }
-
 
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {

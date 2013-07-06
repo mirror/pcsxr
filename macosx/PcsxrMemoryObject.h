@@ -47,11 +47,12 @@ typedef enum _PCSXRMemFlags {
 @property (readonly, arcstrong) NSString *sjisName;
 @property (readonly, arcstrong) NSString *memName;
 @property (readonly, arcstrong) NSString *memID;
+@property (readonly) PCSXRMemFlags flagNameIndex;
+@property (readonly) unsigned char memFlags;
 @property (readonly, unsafe_unretained, nonatomic) NSString *flagName;
 @property (readonly, unsafe_unretained, nonatomic) NSAttributedString *attributedFlagName;
 @property (readonly, unsafe_unretained, nonatomic) NSImage *memImage;
 @property (readonly, nonatomic) int memIconCount;
 @property (readonly, getter = isNotDeleted, nonatomic) BOOL notDeleted DEPRECATED_ATTRIBUTE;
-@property (readonly) unsigned char memFlags;
 
 @end

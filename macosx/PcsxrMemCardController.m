@@ -84,7 +84,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 #if !__has_feature(objc_arc)
 		[memCard1Array release];
 #endif
-		memCard1Array = [[NSMutableArray alloc] initWithArray:a];
+		memCard1Array = [a mutableCopy];
 	}
 }
 
@@ -111,7 +111,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 #if !__has_feature(objc_arc)
 		[memCard2Array release];
 #endif
-		memCard2Array = [[NSMutableArray alloc] initWithArray:a];
+		memCard2Array = [a mutableCopy];
 	}
 }
 
@@ -132,7 +132,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 
 - (int)blockCount:(int)card fromIndex:(int)idx
 {
-	int i = 0;
+	int i = 1;
 	NSArray *memArray = nil;
 	if (card == 1) {
 		memArray = [self memCard1Array];
@@ -140,8 +140,10 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 		memArray = [self memCard2Array];
 	}
 
-	for (i = 0; i <= (MAX_MEMCARD_BLOCKS-idx); i++) {
-		PcsxrMemoryObject *obj = [memArray objectAtIndex:i];
+	for (i = 1; i <= (MAX_MEMCARD_BLOCKS-idx); i++) {
+		//Get the mem card +1 from the current card
+		//And check its attributes
+		PcsxrMemoryObject *obj = [memArray objectAtIndex:(i + idx)];
 		
 		//GetMcdBlockInfo(mcd, idx+i, &b);
 		//printf("i=%i, mcd=%i, startblock=%i, diff=%i, flags=%x\n", i, mcd, startblock, (MAX_MEMCARD_BLOCKS-startblock), b.Flags);
@@ -219,7 +221,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 		} else if (foundcount >= 1) { // need to find n count consecutive blocks
 			foundcount = 0;
 		} else {
-			i++;
+			//i++;
 		}
 		//printf("formatstatus=%x\n", Info->Flags);
  	}
@@ -228,8 +230,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 		return (i-foundcount);
 	
 	// no free formatted slots, try to find a deleted one
-	foundcount=0;
-	i = 0;
+	foundcount = i = 0;
 	while (i < MAX_MEMCARD_BLOCKS && foundcount < len) {
 		PcsxrMemoryObject *obj = [cardArray objectAtIndex:i++];
 		if ((obj.memFlags & 0xF0) == 0xA0) { // A2 or A6 f.e.
@@ -237,7 +238,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 		} else if (foundcount >= 1) { // need to find n count consecutive blocks
 			foundcount = 0;
 		} else {
-			i++;
+			//i++;
 		}
 		//printf("delstatus=%x\n", Info->Flags);
  	}
@@ -250,51 +251,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 
 - (int)findFreeMemCardBlockInCard:(int)target_card
 {
-#if 0
-	BOOL found = NO;
-	NSString *blockName;
-	NSArray *cardArray;
-	if (target_card == 1) {
-		cardArray = [self memCard1Array];
-	}else {
-		cardArray = [self memCard2Array];
-	}
-	
-	int i = 0;
-	while (i < MAX_MEMCARD_BLOCKS && found == NO) {
-		blockName = [[cardArray objectAtIndex:i] englishName];
-		//FIXME: Does this properly handle saves that span more than one block?
-		if ([blockName isEqualToString:@""]) {
-			found = YES;
-		} else {
-			i++;
-		}
-	}
-	if (found == YES)
-		return i;
-	
-	// no free slots, try to find a deleted one
-	i = 0;
-	while (i < MAX_MEMCARD_BLOCKS && found == NO) {
-		unsigned char flags = [[cardArray objectAtIndex:i] memFlags];
-		if ((flags & 0xF0) != 0x50) {
-			found = YES;
-		} else {
-			i++;
-		}
-	}
-	if (found == YES)
-		return i;
-#else
-	int i;
-	for (i = 0; i < MAX_MEMCARD_BLOCKS; i++) {
-		if ([self isMemoryBlockEmptyOnCard:target_card block:i]) {
-			return i;
-		}
-	}
-#endif
-	
-	return -1;
+	return [self findFreeMemCardBlockInCard:target_card length:1];
 }
 
 - (IBAction)moveBlock:(id)sender
@@ -333,7 +290,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	
 	freeSlot = [self findFreeMemCardBlockInCard:toCard length:count];
 	if (freeSlot == -1) {
-		NSRunCriticalAlertPanel(NSLocalizedString(@"No Free Space", nil), [NSString stringWithFormat:NSLocalizedString(@"Memory card %d doesn't have a free block on it. Please remove some blocks on that card to continue", nil), toCard], NSLocalizedString(@"Okay", nil), nil, nil);
+		NSRunCriticalAlertPanel(NSLocalizedString(@"No Free Space", nil), NSLocalizedString(@"Memory card %d doesn't have %d free consecutive blocks on it. Please remove some blocks on that card to continue", nil), nil, nil, nil, count, toCard);
 		return;
 	}
 	
