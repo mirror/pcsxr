@@ -13,9 +13,10 @@
 #include "cdrom.h"
 #import "RecentItemsMenu.h"
 #import "PcsxrController.h"
+#import "ARCBridge.h"
 
 @interface PcsxrDiscHandler ()
-@property (retain) NSURL *discURL;
+@property (arcstrong) NSURL *discURL;
 @end
 
 @implementation PcsxrDiscHandler

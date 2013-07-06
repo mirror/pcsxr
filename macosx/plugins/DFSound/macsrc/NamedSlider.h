@@ -1,6 +1,7 @@
 /* NetSfPeopsSPUPluginNamedSlider */
 
 #import <Cocoa/Cocoa.h>
+#import "ARCBridge.h"
 
 @interface NamedSlider : NSSlider
 {

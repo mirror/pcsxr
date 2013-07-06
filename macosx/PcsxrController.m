@@ -44,7 +44,7 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 @property (readwrite) BOOL endAtEmuClose;
 @property (readwrite) BOOL sleepInBackground;
 @property (readwrite) BOOL wasPausedBeforeBGSwitch;
-@property (retain) NSMutableArray *skipFiles;
+@property (arcstrong) NSMutableArray *skipFiles;
 @end
 
 @implementation PcsxrController

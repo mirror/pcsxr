@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ARCBridge.h"
 
 @interface PcsxrPlugin : NSObject {
 	void *pluginRef;
@@ -21,7 +22,7 @@
 }
 
 @property (readonly, copy) NSString *path;
-@property (readonly, retain) NSString *name;
+@property (readonly, arcstrong) NSString *name;
 
 + (NSString *)prefixForType:(int)type;
 + (NSString *)defaultKeyForType:(int)type;

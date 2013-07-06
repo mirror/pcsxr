@@ -17,15 +17,15 @@
 NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 
 @interface PcsxrMemoryObject ()
-//Mangle the setters' names so that if someone tries to use them, they won't work
-@property (readwrite, retain, setter = setEngName:) NSString *englishName;
-@property (readwrite, retain, setter = setJapaneseName:) NSString *sjisName;
-@property (readwrite, retain, setter = setTheMemName:) NSString *memName;
-@property (readwrite, retain, setter = setTheMemId:) NSString *memID;
-@property (readwrite, retain, setter = setTheMemImage:) NSImage *memImage;
-@property (readwrite, getter = isNotDeleted, setter = setIsNotDeleted:) BOOL notDeleted;
-@property (readwrite, setter = setTheMemFlags:) unsigned char memFlags;
-@property (retain) NSArray *memImages;
+@property (readwrite, arcstrong) NSString *englishName;
+@property (readwrite, arcstrong) NSString *sjisName;
+@property (readwrite, arcstrong) NSString *memName;
+@property (readwrite, arcstrong) NSString *memID;
+@property (readwrite, getter = isNotDeleted) BOOL notDeleted;
+@property (readwrite) unsigned char memFlags;
+
+@property (readwrite, nonatomic) NSInteger memImageIndex;
+@property (arcstrong) NSArray *memImages;
 @end
 
 @implementation PcsxrMemoryObject
@@ -82,19 +82,21 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 	if (self = [super init]) {
 		self.englishName = [NSString stringWithCString:infoBlock->Title encoding:NSASCIIStringEncoding];
 		self.sjisName = [NSString stringWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
-		self.memImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
+		@autoreleasepool {
+			self.memImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
+		}
 		if ([memImages count] == 0) {
-			self.memImage = [PcsxrMemoryObject blankImage];
+			self.memImageIndex = -1;
 		} else if ([memImages count] == 1) {
-			self.memImage = [memImages objectAtIndex:0];
+			self.memImageIndex = 0;
 		} else {
-			self.memImage = [self.memImages objectAtIndex:0];
+			self.memImageIndex = 0;
 			[[NSNotificationCenter defaultCenter] addObserverForName:memoryAnimateTimerKey object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-				NSInteger index = [memImages indexOfObject:memImage];
+				NSInteger index = memImageIndex;
 				if (++index >= [memImages count]) {
 					index = 0;
 				}
-				self.memImage = [memImages objectAtIndex:index];
+				self.memImageIndex = index;
 			}];
 		}
 		self.memName = [NSString stringWithCString:infoBlock->Name encoding:NSASCIIStringEncoding];
@@ -114,44 +116,38 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 	return self;
 }
 
+#pragma mark - Property Synthesizers
 @synthesize englishName;
 @synthesize sjisName;
-@synthesize memImage;
-- (void)setTheMemImage:(NSImage *)theMemImage
+@synthesize memImageIndex;
+- (void)setMemImageIndex:(NSInteger)theMemImageIndex
 {
-	if (memImage == theMemImage) {
-		return;
-	}
-	//This is the only setter that is being watched AND changed.
-#if __has_feature(objc_arc)
 	[self willChangeValueForKey:@"memImage"];
-	memImage = theMemImage;
+	memImageIndex = theMemImageIndex;
 	[self didChangeValueForKey:@"memImage"];
-#else
-	NSImage *tmpImage = memImage;
-	[self willChangeValueForKey:@"memImage"];
-	memImage = [theMemImage retain];
-	[self didChangeValueForKey:@"memImage"];
-	[tmpImage release];
-#endif
-}
-- (NSImage*)memImage
-{
-	@synchronized(memImage)
-	{
-		return memImage;
-	}
 }
 
 @synthesize notDeleted;
 @synthesize memFlags;
 @synthesize memName;
 @synthesize memID;
+@synthesize memImages;
+
+#pragma mark Non-synthesize Properties
 - (int)memIconCount
 {
 	return [memImages count];
 }
-@synthesize memImages;
+
+- (NSImage*)memImage
+{
+	if (memImageIndex == -1) {
+		return [PcsxrMemoryObject blankImage];
+	}
+	return [memImages objectAtIndex:memImageIndex];
+}
+
+#pragma mark -
 
 - (void)dealloc
 {

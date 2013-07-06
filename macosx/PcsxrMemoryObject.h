@@ -8,6 +8,7 @@
 
 #import <Foundation/NSObject.h>
 #include "sio.h"
+#import "ARCBridge.h"
 
 @class NSImage;
 @class NSString;
@@ -21,7 +22,7 @@ extern NSString *const memoryAnimateTimerKey;
 	NSString *sjisName;
 	NSString *memName;
 	NSString *memID;
-	NSImage *memImage;
+	NSInteger memImageIndex;
 	NSArray *memImages;
 	BOOL notDeleted;
 	unsigned char memFlags;
@@ -30,11 +31,11 @@ extern NSString *const memoryAnimateTimerKey;
 
 - (id)initWithMcdBlock:(McdBlock *)infoBlock;
 
-@property (readonly, retain) NSString *englishName;
-@property (readonly, retain) NSString *sjisName;
-@property (readonly, retain) NSString *memName;
-@property (readonly, retain) NSString *memID;
-@property (readonly, retain) NSImage *memImage;
+@property (readonly, arcstrong) NSString *englishName;
+@property (readonly, arcstrong) NSString *sjisName;
+@property (readonly, arcstrong) NSString *memName;
+@property (readonly, arcstrong) NSString *memID;
+@property (readonly, unsafe_unretained, nonatomic) NSImage *memImage;
 @property (readonly) int memIconCount;
 @property (readonly, getter = isNotDeleted) BOOL notDeleted;
 @property (readonly) unsigned char memFlags;

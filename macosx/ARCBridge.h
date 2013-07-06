@@ -19,6 +19,8 @@
 #define AUTORELEASEOBJNORETURN(obj)
 #define BRIDGE(toType, obj) (__bridge toType)(obj)
 #define __arcweak __weak
+#define arcweak weak
+#define arcstrong strong
 
 #else
 
@@ -30,7 +32,11 @@
 #define AUTORELEASEOBJNORETURN(obj) [obj autorelease]
 #define BRIDGE(toType, obj) (toType)obj
 #define __arcweak
+#define arcweak assign
+#define arcstrong retain
 
 #endif
+
+#define arcretain arcstrong
 
 #endif
