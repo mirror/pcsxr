@@ -19,6 +19,8 @@ extern NSString *const memCardChangeNumberKey;
 	IBOutlet PluginController *netPlugin;
 	IBOutlet PluginController *sio1Plugin;
 	
+	IBOutlet PcsxrMemCardController *memCardEdit;
+
 	IBOutlet id noXaAudioCell;
 	IBOutlet id sioIrqAlwaysCell;
 	IBOutlet id bwMdecCell;
@@ -37,12 +39,7 @@ extern NSString *const memCardChangeNumberKey;
 	
 	// Hotkeys
 	IBOutlet HotkeyController *hkController;
-	IBOutlet NSTabViewItem *hkTab;
-	
-	IBOutlet NSTextField *mcd1Label;
-	IBOutlet NSTextField *mcd2Label;
-	
-	PcsxrMemCardController *memCardEdit;
+	IBOutlet NSTabViewItem *hkTab;	
 	
 	NSMutableDictionary *checkBoxDefaults;
 }
@@ -51,8 +48,6 @@ extern NSString *const memCardChangeNumberKey;
 - (IBAction)setVideoType:(id)sender;
 - (IBAction)mcdChangeClicked:(id)sender;
 - (IBAction)mcdNewClicked:(id)sender;
-- (IBAction)mcdEditClicked:(id)sender;
-- (BOOL)isMemoryCardWindowVisible;
 
 - (NSString *)keyForSender:(id)sender;
 + (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile DEPRECATED_ATTRIBUTE;

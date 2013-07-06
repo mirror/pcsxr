@@ -206,7 +206,6 @@
 		559366D012B694DF004ACC1E /* ix86_sse.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C812B694DF004ACC1E /* ix86_sse.c */; };
 		559DACEE146C72FF00C5DF71 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 559DACEC146C72FF00C5DF71 /* Localizable.strings */; };
 		55A90220147D7C380037E18F /* PcsxrMemCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A9021F147D7C380037E18F /* PcsxrMemCardController.m */; };
-		55A90223147D7C7A0037E18F /* MemCardManager.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A90221147D7C7A0037E18F /* MemCardManager.xib */; };
 		55A90229147D89380037E18F /* PcsxrMemoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A90228147D89380037E18F /* PcsxrMemoryObject.m */; };
 		55BBA693149455E1003B2CEC /* PcsxrMemCardHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBA692149455E1003B2CEC /* PcsxrMemCardHandler.m */; };
 		55BBA69614945628003B2CEC /* PcsxrPluginHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBA69514945628003B2CEC /* PcsxrPluginHandler.m */; };
@@ -718,7 +717,6 @@
 		559DACED146C72FF00C5DF71 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = Localizable.strings; sourceTree = "<group>"; };
 		55A9021E147D7C380037E18F /* PcsxrMemCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrMemCardController.h; sourceTree = "<group>"; };
 		55A9021F147D7C380037E18F /* PcsxrMemCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrMemCardController.m; sourceTree = "<group>"; };
-		55A90222147D7C7A0037E18F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = MemCardManager.xib; sourceTree = "<group>"; };
 		55A90227147D89380037E18F /* PcsxrMemoryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PcsxrMemoryObject.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		55A90228147D89380037E18F /* PcsxrMemoryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PcsxrMemoryObject.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		55BB3493169CD42500850200 /* ARCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ARCBridge.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -970,7 +968,6 @@
 				559DACEC146C72FF00C5DF71 /* Localizable.strings */,
 				28F0C3C7146521B000A90285 /* PCSXR.xib */,
 				28F0C3CA146521B700A90285 /* AddPluginSheet.xib */,
-				55A90221147D7C7A0037E18F /* MemCardManager.xib */,
 				55C7A216148B2B3800C22ABC /* PcsxrMemCardDocument.xib */,
 				D422E66C16DC48D000526DCF /* CheatWindow.xib */,
 			);
@@ -2073,7 +2070,6 @@
 				28F0C3C9146521B000A90285 /* PCSXR.xib in Resources */,
 				28F0C3CC146521B700A90285 /* AddPluginSheet.xib in Resources */,
 				559DACEE146C72FF00C5DF71 /* Localizable.strings in Resources */,
-				55A90223147D7C7A0037E18F /* MemCardManager.xib in Resources */,
 				55C7A214148B2B3800C22ABC /* PcsxrMemCardDocument.xib in Resources */,
 				02FE55E816765F9400205CF2 /* KeyNames.plist in Resources */,
 				D422E66E16DC48D000526DCF /* CheatWindow.xib in Resources */,
@@ -2754,14 +2750,6 @@
 				559DACED146C72FF00C5DF71 /* English */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		55A90221147D7C7A0037E18F /* MemCardManager.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55A90222147D7C7A0037E18F /* English */,
-			);
-			name = MemCardManager.xib;
 			sourceTree = "<group>";
 		};
 		55C7A216148B2B3800C22ABC /* PcsxrMemCardDocument.xib */ = {

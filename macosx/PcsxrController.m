@@ -290,11 +290,6 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 			if ([preferenceWindow isVisible])
 				return NO;
 
-		if (preferencesController != nil) {
-			if ([preferencesController isMemoryCardWindowVisible] == YES)
-				return NO;
-		}
-        
         if (cheatWindow != nil)
             if ([cheatWindow isVisible])
                 return NO;

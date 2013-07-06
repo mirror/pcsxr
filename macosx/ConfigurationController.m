@@ -155,21 +155,6 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	}
 }
 
-- (void)memoryCardDidChangeNotification:(NSNotification *)aNote
-{
-	NSNumber *aNumber = [[aNote userInfo] objectForKey:memCardChangeNumberKey];
-	int iNum = aNumber ? [aNumber intValue] : 3;
-	
-	if (iNum & 1) {
-		NSURL *path = [[NSUserDefaults standardUserDefaults] URLForKey:@"Mcd1"];
-		[mcd1Label setTitleWithMnemonic:[path path]];
-	}
-	if (iNum & 2) {
-		NSURL *path = [[NSUserDefaults standardUserDefaults] URLForKey:@"Mcd2"];
-		[mcd2Label setTitleWithMnemonic:[path path]];
-	}
-}
-
 - (void)awakeFromNib
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -221,8 +206,6 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 #endif
 
 	// setup labels
-	[mcd1Label setTitleWithMnemonic:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.Mcd1 length:strlen(Config.Mcd1)]];
-	[mcd2Label setTitleWithMnemonic:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.Mcd2 length:strlen(Config.Mcd2)]];
 
 	int tag = [defaults integerForKey:@"AutoDetectVideoType"];
 	if (tag)
@@ -256,10 +239,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	RELEASEOBJ(checkBoxDefaults);
-	if (memCardEdit) {
-		[memCardEdit close];
-		RELEASEOBJ(memCardEdit);
-	}
+	
 	SUPERDEALLOC;
 }
 
@@ -276,23 +256,6 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	return nil;
 }
 
-- (IBAction)mcdEditClicked:(id)sender
-{
-	if (!memCardEdit) {
-		memCardEdit = [[PcsxrMemCardController alloc] init];
-	}
-	[[memCardEdit window] center];
-	[memCardEdit showWindow:sender];
-}
-
-- (BOOL)isMemoryCardWindowVisible
-{
-	if (!memCardEdit) {
-		return NO;
-	} else {
-		return [[memCardEdit window] isVisible];
-	}
-}
 
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {

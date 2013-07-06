@@ -120,15 +120,9 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	return [NSArray arrayWithArray:memCard2Array];
 }
 
-- (id)init
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 {
-	self = [self initWithWindowNibName:@"MemCardManager"];
-	return self;
-}
-
-- (id)initWithWindow:(NSWindow *)window
-{
-    self = [super initWithWindow:window];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         //LoadMcds(Config.Mcd1, Config.Mcd2);
     }
@@ -190,13 +184,11 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	[self setupValues: theNum ? [theNum intValue] : 3];
 }
 
-- (void)windowDidLoad
+- (void)awakeFromNib
 {
-    [super windowDidLoad];
+	[super awakeFromNib];
+	[self setupValues:3];
     
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-	[[self window] setDelegate:self];
-	//[self setupValues];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(memoryCardDidChangeNotification:) name:memChangeNotifier object:nil];
 
 	imageAnimateTimer = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:3.0/10.0 target:self selector:@selector(animateMemCards:) userInfo:nil repeats:YES];
@@ -206,12 +198,6 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 - (void)animateMemCards:(NSTimer*)theTimer
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:memoryAnimateTimerKey object:self];
-}
-
-- (IBAction)showWindow:(id)sender
-{
-	[super showWindow:sender];
-	[self setupValues:3];
 }
 
 - (int)findFreeMemCardBlockInCard:(int)target_card length:(int)len
