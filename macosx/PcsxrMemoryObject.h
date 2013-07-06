@@ -13,8 +13,17 @@
 @class NSImage;
 @class NSString;
 @class NSArray;
+@class NSAttributedString;
 
 extern NSString *const memoryAnimateTimerKey;
+
+typedef enum _PCSXRMemFlags {
+	memFlagDeleted,
+	memFlagFree,
+	memFlagUsed,
+	memFlagLink,
+	memFlagEndLink
+} PCSXRMemFlags;
 
 @interface PcsxrMemoryObject : NSObject
 {
@@ -22,12 +31,15 @@ extern NSString *const memoryAnimateTimerKey;
 	NSString *sjisName;
 	NSString *memName;
 	NSString *memID;
-	NSInteger memImageIndex;
+	
 	NSArray *memImages;
-	BOOL notDeleted;
+	NSInteger memImageIndex;
+	
+	PCSXRMemFlags flagNameIndex;
 	unsigned char memFlags;
 }
 + (NSArray *)imagesFromMcd:(McdBlock *)block;
++ (NSString*)memoryLabelFromFlag:(PCSXRMemFlags)flagNameIndex;
 
 - (id)initWithMcdBlock:(McdBlock *)infoBlock;
 
@@ -35,9 +47,11 @@ extern NSString *const memoryAnimateTimerKey;
 @property (readonly, arcstrong) NSString *sjisName;
 @property (readonly, arcstrong) NSString *memName;
 @property (readonly, arcstrong) NSString *memID;
+@property (readonly, unsafe_unretained, nonatomic) NSString *flagName;
+@property (readonly, unsafe_unretained, nonatomic) NSAttributedString *attributedFlagName;
 @property (readonly, unsafe_unretained, nonatomic) NSImage *memImage;
-@property (readonly) int memIconCount;
-@property (readonly, getter = isNotDeleted) BOOL notDeleted;
+@property (readonly, nonatomic) int memIconCount;
+@property (readonly, getter = isNotDeleted, nonatomic) BOOL notDeleted DEPRECATED_ATTRIBUTE;
 @property (readonly) unsigned char memFlags;
 
 @end

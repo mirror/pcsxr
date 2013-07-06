@@ -12,6 +12,7 @@
 #import <AppKit/NSColor.h>
 #import <AppKit/NSImage.h>
 #import <AppKit/NSBezierPath.h>
+#import <AppKit/NSAttributedString.h>
 #import "ARCBridge.h"
 
 NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
@@ -21,11 +22,11 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 @property (readwrite, arcstrong) NSString *sjisName;
 @property (readwrite, arcstrong) NSString *memName;
 @property (readwrite, arcstrong) NSString *memID;
-@property (readwrite, getter = isNotDeleted) BOOL notDeleted;
 @property (readwrite) unsigned char memFlags;
 
 @property (readwrite, nonatomic) NSInteger memImageIndex;
 @property (arcstrong) NSArray *memImages;
+@property PCSXRMemFlags flagNameIndex;
 @end
 
 @implementation PcsxrMemoryObject
@@ -63,6 +64,52 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 	return retArray;
 }
 
+
+static NSString *MemLabelDeleted;
+static NSString *MemLabelFree;
+static NSString *MemLabelUsed;
+static NSString *MemLabelLink;
+static NSString *MemLabelEndLink;
+
++ (void)initialize
+{
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSBundle *mainBundle = [NSBundle mainBundle];
+		MemLabelDeleted = [[mainBundle localizedStringForKey:@"MemCard_Deleted" value:@"" table:((void *)0)] copy];
+		MemLabelFree = [[mainBundle localizedStringForKey:@"MemCard_Free" value:@"" table:((void *)0)] copy];
+		MemLabelUsed = [[mainBundle localizedStringForKey:@"MemCard_Used" value:@"" table:((void *)0)] copy];
+		MemLabelLink = [[mainBundle localizedStringForKey:@"MemCard_Link" value:@"" table:((void *)0)] copy];
+		MemLabelEndLink = [[mainBundle localizedStringForKey:@"MemCard_EndLink" value:@"" table:((void *)0)] copy];
+	});
+}
+
++ (NSString*)memoryLabelFromFlag:(PCSXRMemFlags)flagNameIndex
+{
+	switch (flagNameIndex) {
+		default:
+		case memFlagFree:
+			return MemLabelFree;
+			break;
+			
+		case memFlagEndLink:
+			return MemLabelEndLink;
+			break;
+			
+		case memFlagLink:
+			return MemLabelLink;
+			break;
+			
+		case memFlagUsed:
+			return MemLabelUsed;
+			break;
+			
+		case memFlagDeleted:
+			return MemLabelDeleted;
+			break;
+	}
+}
+
 + (NSImage *)blankImage
 {
 	static NSImage *imageBlank = nil;
@@ -80,7 +127,23 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 - (id)initWithMcdBlock:(McdBlock *)infoBlock
 {
 	if (self = [super init]) {
-		self.englishName = [NSString stringWithCString:infoBlock->Title encoding:NSASCIIStringEncoding];
+		self.memFlags = infoBlock->Flags;
+		if ((infoBlock->Flags & 0xF0) == 0xA0) {
+			if ((infoBlock->Flags & 0xF) >= 1 && (infoBlock->Flags & 0xF) <= 3)
+				self.flagNameIndex = memFlagDeleted;
+			else
+				self.flagNameIndex = memFlagFree;
+		} else if ((infoBlock->Flags & 0xF0) == 0x50) {
+			if ((infoBlock->Flags & 0xF) == 0x1)
+				self.flagNameIndex = memFlagUsed;
+			else if ((infoBlock->Flags & 0xF) == 0x2)
+				self.flagNameIndex = memFlagLink;
+			else if ((infoBlock->Flags & 0xF) == 0x3)
+				self.flagNameIndex = memFlagEndLink;
+		} else
+			self.flagNameIndex = memFlagFree;
+
+		self.englishName = @(infoBlock->Title);
 		self.sjisName = [NSString stringWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
 		@autoreleasepool {
 			self.memImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
@@ -99,19 +162,13 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 				self.memImageIndex = index;
 			}];
 		}
-		self.memName = [NSString stringWithCString:infoBlock->Name encoding:NSASCIIStringEncoding];
-		self.memID = [NSString stringWithCString:infoBlock->ID encoding:NSASCIIStringEncoding];
-		self.memFlags = infoBlock->Flags;
-		if ((infoBlock->Flags & 0xF0) == 0xA0) {
-			if ((infoBlock->Flags & 0xF) >= 1 &&
-				(infoBlock->Flags & 0xF) <= 3) {
-				self.notDeleted = NO;
-			} else
-				self.notDeleted = NO;
-		} else if ((infoBlock->Flags & 0xF0) == 0x50)
-			self.notDeleted = YES;
-		else
-			self.notDeleted = NO;
+		self.memName = @(infoBlock->Name);
+		self.memID = @(infoBlock->ID);
+		//This prevents possible uglies in multi-save images
+		if (self.flagName == MemLabelLink || self.flagName == MemLabelEndLink) {
+			self.memImages = @[];
+			self.memImageIndex = -1;
+		}
 	}
 	return self;
 }
@@ -127,11 +184,11 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 	[self didChangeValueForKey:@"memImage"];
 }
 
-@synthesize notDeleted;
 @synthesize memFlags;
 @synthesize memName;
 @synthesize memID;
 @synthesize memImages;
+@synthesize flagNameIndex;
 
 #pragma mark Non-synthesize Properties
 - (int)memIconCount
@@ -147,6 +204,88 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 	return [memImages objectAtIndex:memImageIndex];
 }
 
+- (NSString*)flagName
+{
+	return [PcsxrMemoryObject memoryLabelFromFlag:flagNameIndex];
+}
+
+NS_INLINE void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtclr)
+{
+	NSRange wholeStrRange = NSMakeRange(0, mutStr.string.length);
+	[mutStr addAttribute:NSFontAttributeName value:[NSFont userFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]] range:wholeStrRange];
+	[mutStr addAttribute:NSForegroundColorAttributeName value:txtclr range:wholeStrRange];
+	[mutStr setAlignment:NSCenterTextAlignment range:wholeStrRange];
+}
+
+- (NSAttributedString*)attributedFlagName
+{
+	static NSAttributedString *attribMemLabelDeleted;
+	static NSAttributedString *attribMemLabelFree;
+	static NSAttributedString *attribMemLabelUsed;
+	static NSAttributedString *attribMemLabelLink;
+	static NSAttributedString *attribMemLabelEndLink;
+	
+	static dispatch_once_t attrStrSetOnceToken;
+	dispatch_once(&attrStrSetOnceToken, ^{
+		NSMutableAttributedString *tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelFree];
+		SetupAttrStr(tmpStr, [NSColor greenColor]);
+		attribMemLabelFree = [tmpStr copy];
+		RELEASEOBJ(tmpStr);
+		
+		tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelEndLink];
+		SetupAttrStr(tmpStr, [NSColor blueColor]);
+		attribMemLabelEndLink = [tmpStr copy];
+		RELEASEOBJ(tmpStr);
+
+		tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelLink];
+		SetupAttrStr(tmpStr, [NSColor blueColor]);
+		attribMemLabelLink = [tmpStr copy];
+		RELEASEOBJ(tmpStr);
+
+		tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelUsed];
+		SetupAttrStr(tmpStr, [NSColor controlTextColor]);
+		attribMemLabelUsed = [tmpStr copy];
+		RELEASEOBJ(tmpStr);
+
+		tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelDeleted];
+		SetupAttrStr(tmpStr, [NSColor redColor]);
+		attribMemLabelDeleted = [tmpStr copy];
+		RELEASEOBJ(tmpStr);
+	});
+	
+	switch (flagNameIndex) {
+		default:
+		case memFlagFree:
+			return attribMemLabelFree;
+			break;
+			
+		case memFlagEndLink:
+			return attribMemLabelEndLink;
+			break;
+			
+		case memFlagLink:
+			return attribMemLabelLink;
+			break;
+			
+		case memFlagUsed:
+			return attribMemLabelUsed;
+			break;
+			
+		case memFlagDeleted:
+			return attribMemLabelDeleted;
+			break;
+	}
+}
+
+- (BOOL)isNotDeleted
+{
+	if (self.flagNameIndex == memFlagFree || self.flagNameIndex == memFlagDeleted) {
+		return NO;
+	} else {
+		return YES;
+	}
+}
+
 #pragma mark -
 
 - (void)dealloc
@@ -157,7 +296,6 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 	self.sjisName = nil;
 	self.memName = nil;
 	self.memID = nil;
-	self.memImage = nil;
 	self.memImages = nil;
 	
 	[super dealloc];

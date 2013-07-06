@@ -64,3 +64,11 @@
 "Okay" = "Okay";
 "Error opening file" = "Error opening file";
 "Unable to open %@: %@" = "Unable to open %@: %@";
+
+//Mem card flags
+"MemCard_Deleted" = "Deleted";
+"MemCard_Free" = "Free";
+"MemCard_Used" = "Used";
+"MemCard_Link" = "Link";
+"MemCard_EndLink" = "End Link";
+
