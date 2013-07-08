@@ -193,6 +193,7 @@ void SysClose() {
 		[NSApp stop:nil];
 	}
 	//Tell the memory card manager that the memory cards changed.
+	//The number three tells the mem card manager to update both cards 1 and 2.
 	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil userInfo:[NSDictionary dictionaryWithObject:@3 forKey:memCardChangeNumberKey]];
 }
 

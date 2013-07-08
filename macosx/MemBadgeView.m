@@ -31,6 +31,7 @@
 		tmpDraw = [[NSImage alloc] initWithSize:drawToRect.size];
 		[tmpDraw lockFocus];
 	}
+	
 	[[NSColor whiteColor] set];
 	[[NSBezierPath bezierPathWithOvalInRect:drawToRect] fill];
 	[[NSColor redColor] set];

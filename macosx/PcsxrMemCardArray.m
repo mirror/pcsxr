@@ -37,8 +37,10 @@ static inline char* CreateBlankHeader()
 		unsigned char checksum;
 	};
 	struct PSXMemHeader *toReturn = calloc(sizeof(struct PSXMemHeader), 1);
-		
+	
+	//FIXME: Which value is right?
 	toReturn->allocState = 0x000000a0;
+	//toReturn->allocState = 0xa0000000;
 	toReturn->nextBlock = 0xFFFF;
 	unsigned char *bytePtr = (unsigned char*)toReturn;
 	for (int i = 0; i < sizeof(struct PSXMemHeader) - sizeof(unsigned char); i++) {
@@ -60,9 +62,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	// data
 	memset(to + (dsti + 1) * 1024 * 8, 0, 1024 * 8);
 	SaveMcd(str, to, (dsti + 1) * 1024 * 8, 1024 * 8);
-
 }
-
 
 @interface PcsxrMemCardArray ()
 @property (arcretain) NSArray *rawArray;
@@ -72,7 +72,6 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 
 @implementation PcsxrMemCardArray
 @synthesize rawArray;
-//@synthesize memDataPtr;
 
 - (char*)memDataPtr
 {
@@ -195,6 +194,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	if (toCopy == -1) {
 		NSLog(@"Not enough consecutive blocks. Compacting the other card.");
 		[otherCard compactMemory];
+		//Since we're accessing the mem card data directly (instead of via PcsxrMemoryObject objects) using the following calls, we don't need to reload the data.
 		toCopy = [otherCard indexOfFreeBlocksWithSize:memSize];
 		NSAssert(toCopy != -1, @"Compacting the card should have made space!");
 	}
@@ -297,9 +297,6 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	}
 	
 	LoadMcd(cardNumber, (char*)self.memCardCPath);
-#if 0
-	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil userInfo:[NSDictionary dictionaryWithObject:@(cardNumber) forKey:memCardChangeNumberKey]];
-#endif
 }
 
 - (void)deleteMemoryBlocksAtIndex:(int)slotnum

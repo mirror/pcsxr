@@ -66,7 +66,6 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 	return retArray;
 }
 
-
 static NSString *MemLabelDeleted;
 static NSString *MemLabelFree;
 static NSString *MemLabelUsed;
@@ -124,12 +123,6 @@ static NSString *MemLabelEndLink;
 		[imageBlank unlockFocus];
 	}
 	return imageBlank;
-}
-
-- (id)initWithMcdBlock:(McdBlock *)infoBlock
-{
-	[self doesNotRecognizeSelector:_cmd];
-	return nil;
 }
 
 - (id)initWithMcdBlock:(McdBlock *)infoBlock startingIndex:(int)startIdx

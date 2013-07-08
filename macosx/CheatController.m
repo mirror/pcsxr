@@ -13,8 +13,7 @@
 
 - (id)init
 {
-	self = [self initWithWindowNibName:@"CheatWindow"];
-	return self;
+	return self = [self initWithWindowNibName:@"CheatWindow"];
 }
 
 - (void)refresh
@@ -34,8 +33,7 @@
     NSString *ident = [col identifier];
     if ([ident isEqualToString:@"COL_NAME"]) {
         return @(Cheats[idx].Descr);
-    }
-    if ([ident isEqualToString:@"COL_ENABLE"]) {
+    } else if ([ident isEqualToString:@"COL_ENABLE"]) {
         return @(Cheats[idx].Enabled ? NSOnState : NSOffState);
     }
     NSLog(@"Unknown column identifier: %@", ident);
@@ -49,7 +47,10 @@
     NSString *ident = [col identifier];
     if ([ident isEqualToString:@"COL_ENABLE"]) {
         Cheats[row].Enabled = [object integerValue] == NSOnState;
-    }
+    } else if ([ident isEqualToString:@"COL_NAME"]) {
+		free(Cheats[row].Descr);
+		Cheats[row].Descr = strdup([object UTF8String]);
+	}
 }
 
 - (IBAction)LoadCheats:(id)sender

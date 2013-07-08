@@ -48,7 +48,6 @@
 			SetIsoFile([theFile fileSystemRepresentation]);
 			SetCdOpenCaseTime(time(NULL) + 2);
 			LidInterrupt();
-			//[EmuThread reset];
 		} else {
 			return NO;
 		}

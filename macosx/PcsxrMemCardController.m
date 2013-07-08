@@ -25,8 +25,6 @@
 
 @synthesize memCard1Array, memCard2Array;
 
-//memCard1Array KVO functions
-
 - (void)setupValues:(int)theCards
 {
 	NSParameterAssert(theCards < 4 && theCards > 0);
@@ -244,11 +242,14 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[imageAnimateTimer invalidate];
 	
-	RELEASEOBJ(imageAnimateTimer);
-	RELEASEOBJ(memCard1Array);
-	RELEASEOBJ(memCard2Array);
+#if !__has_feature(objc_arc)
 
-	SUPERDEALLOC;
+	[imageAnimateTimer release];
+	self.memCard1Array = nil;
+	self.memCard2Array = nil;
+
+	[super dealloc];
+#endif
 }
 
 @end

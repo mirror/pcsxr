@@ -29,7 +29,6 @@
 - (BOOL)moveBlockAtIndex:(int)idx toMemoryCard:(PcsxrMemCardArray*)otherCard;
 - (int)indexOfFreeBlocksWithSize:(int)asize;
 
-
 @property (nonatomic, readonly, unsafe_unretained) NSArray *memoryArray;
 @property (nonatomic, readonly, unsafe_unretained) NSURL *memCardURL;
 @property (nonatomic, readonly) const char *memCardCPath;

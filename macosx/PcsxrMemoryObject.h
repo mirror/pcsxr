@@ -43,7 +43,6 @@ typedef enum _PCSXRMemFlags {
 + (NSImage *)blankImage;
 + (PCSXRMemFlags)memFlagsFromBlockFlags:(unsigned char)blockFlags;
 
-- (id)initWithMcdBlock:(McdBlock *)infoBlockc NS_UNAVAILABLE;
 - (id)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(int)startIdx;
 - (id)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(int)startIdx size:(int)memSize;
 
