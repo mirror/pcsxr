@@ -170,14 +170,13 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	if (widescreen) [checkBoxDefaults setObject:widescreen forKey:@"Widescreen"];
 
 	// make the visuals match the defaults
-	NSEnumerator *enumerator= [checkBoxDefaults keyEnumerator];
-	id key;
-	while ((key = [enumerator nextObject])) {
+	
+	for (NSString* key in checkBoxDefaults) {
 		if ([defaults integerForKey:key]) {
 			[[checkBoxDefaults objectForKey:key] setNextState];
 		}
 	}
-
+	
 	// special cases
 	if (![PcsxrController biosAvailable]) {
 		// no bios means always use HLE
@@ -231,14 +230,13 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 
 - (NSString *)keyForSender:(id)sender
 {
-	NSEnumerator *enumerator = [checkBoxDefaults keyEnumerator];
-	id key;
-	while ((key = [enumerator nextObject])) {
+	for (NSString *key in checkBoxDefaults) {
 		id object = [checkBoxDefaults objectForKey:key];
-		if ([object isEqual:sender])
+		if ([object isEqual:sender]) {
 			return key;
+		}
 	}
-
+	
 	return nil;
 }
 
