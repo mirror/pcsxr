@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+//TODO: also include the memory count in the view as well.
 @interface MemBadgeView : NSView
 
 @end

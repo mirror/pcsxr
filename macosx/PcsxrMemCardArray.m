@@ -28,11 +28,22 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 
 @interface PcsxrMemCardArray ()
 @property (arcretain) NSArray *rawArray;
+@property (readonly) char* memDataPtr;
 
 @end
 
 @implementation PcsxrMemCardArray
 @synthesize rawArray;
+//@synthesize memDataPtr;
+
+- (char*)memDataPtr
+{
+	if (cardNumber == 1) {
+		return Mcd1Data;
+	} else {
+		return Mcd2Data;
+	}
+}
 
 - (id)initWithMemoryCardNumber:(int)carNum
 {
@@ -124,12 +135,39 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 #endif
 		return NO;
 	}
+	PcsxrMemoryObject *tmpObj = [rawArray objectAtIndex:idx];
 
+	int memSize = tmpObj.blockSize;
 	
-	//TODO: Implement!
-	return NO;
+	if ([otherCard availableBlocks] < memSize) {
+		NSLog(@"Failing because the other card does not have enough space!");
+		return NO;
+	}
+	
+	int toCopy = [otherCard indexOfFreeBlocksWithSize:memSize];
+	if (toCopy == -1) {
+		NSLog(@"Not enough consecutive blocks. Compacting the other card.");
+		[otherCard compactMemory];
+		toCopy = [otherCard indexOfFreeBlocksWithSize:memSize];
+		NSAssert(toCopy != -1, @"Compacting the card should have made space!");
+	}
+	
+	char *to, *from;
+	if (cardNumber == 1) {
+		to = Mcd2Data;
+		from = Mcd1Data;
+	} else {
+		to = Mcd1Data;
+		from = Mcd2Data;
+	}
+	int memIdx = tmpObj.startingIndex;
+	int i;
+	for (i = 0; i < memSize; i++) {
+		CopyMemcardData([self memDataPtr], [otherCard memDataPtr], (memIdx+i), (toCopy+i), (char*)[[[otherCard memCardURL] path] fileSystemRepresentation]);
+	}
+	
+	return YES;
 }
-
 
 - (int)freeBlocks
 {
@@ -166,7 +204,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 		return rawArray;
 }
 
-- (NSURL*)memCardLocation
+- (NSURL*)memCardURL
 {
 	if (cardNumber == 1) {
 		return [[NSUserDefaults standardUserDefaults] URLForKey:@"Mcd1"];
@@ -179,7 +217,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 {
 	if (idx == [rawArray count]) {
 #ifdef DEBUG
-		NSLog(@"Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"delete\" the free blocks");
+		NSLog(@"Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"count\" the free blocks");
 #endif
 		return [self freeBlocks];
 	}
@@ -189,9 +227,10 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 
 - (void)compactMemory
 {
+	NSAssert(NO, @"Compacting memory cards is not implemented yet!");
 	
-#if 0
 	LoadMcd(cardNumber, cardNumber == 1 ? Config.Mcd1 : Config.Mcd2);
+#if 0
 	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil userInfo:[NSDictionary dictionaryWithObject:@(cardNumber) forKey:memCardChangeNumberKey]];
 #endif
 }
@@ -240,5 +279,13 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	}
 }
 
+#if !__has_feature(objc_arc)
+- (void)dealloc
+{
+	self.rawArray = nil;
+	
+	[super dealloc];
+}
+#endif
 
 @end

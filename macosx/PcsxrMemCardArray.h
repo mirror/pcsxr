@@ -31,6 +31,6 @@
 
 
 @property (nonatomic, readonly, unsafe_unretained) NSArray *memoryArray;
-@property (nonatomic, readonly, unsafe_unretained) NSURL *memCardLocation;
+@property (nonatomic, readonly, unsafe_unretained) NSURL *memCardURL;
 
 @end
