@@ -187,7 +187,6 @@
 								</object>
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-							<bool key="NSControlAutosetMaxLayoutWidth">YES</bool>
 						</object>
 						<object class="NSTextField" id="748030488">
 							<reference key="NSNextResponder" ref="802729152"/>
@@ -217,7 +216,6 @@
 								<reference key="NSTextColor" ref="107150481"/>
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-							<bool key="NSControlAutosetMaxLayoutWidth">YES</bool>
 						</object>
 						<object class="NSTextField" id="106264949">
 							<reference key="NSNextResponder" ref="802729152"/>
