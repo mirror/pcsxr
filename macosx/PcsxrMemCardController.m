@@ -133,12 +133,17 @@
 	
 	int cardSize, freeConsBlocks, availBlocks;
 	
+	if ([[[fromCard memoryArray] objectAtIndex:selectedIndex] flagNameIndex] == memFlagFree) {
+		NSBeep();
+		return;
+	}
+	
 	cardSize = [fromCard memorySizeAtIndex:selectedIndex];
 	freeConsBlocks = [toCard indexOfFreeBlocksWithSize:cardSize];
 	availBlocks = [toCard availableBlocks];
 	if (freeConsBlocks == -1 && availBlocks >= cardSize) {
 		PcsxrMemoryObject *tmpmemobj = [fromCard.memoryArray objectAtIndex:selectedIndex];
-		NSInteger copyOK = NSRunInformationalAlertPanel(NSLocalizedString(@"Free Size", nil), NSLocalizedString(@"Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@ (%@),\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?", nil), NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), nil, cardnum, tmpmemobj.englishName, tmpmemobj.sjisName, cardnum == 1 ? 2 : 1);
+		NSInteger copyOK = NSRunInformationalAlertPanel(NSLocalizedString(@"Free Size", nil), NSLocalizedString(@"Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@ (%@),\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?", nil), NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), nil, cardnum, tmpmemobj.englishName, tmpmemobj.sjisName, cardnum);
 		if (copyOK != NSAlertDefaultReturn) {
 			return;
 		}

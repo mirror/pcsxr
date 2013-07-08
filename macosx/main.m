@@ -8,6 +8,7 @@
 #import <Cocoa/Cocoa.h>
 #import "EmuThread.h"
 #import "PcsxrController.h"
+#import "ConfigurationController.h"
 #include <dlfcn.h>
 //#import <sys/param.h>
 #import <unistd.h>
@@ -187,9 +188,12 @@ void SysClose() {
 
     sysInited = NO;
     detachHotkeys();
+	
 	if (((PcsxrController *)[NSApp delegate]).endAtEmuClose) {
 		[NSApp stop:nil];
 	}
+	//Tell the memory card manager that the memory cards changed.
+	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil userInfo:[NSDictionary dictionaryWithObject:@3 forKey:memCardChangeNumberKey]];
 }
 
 void OnFile_Exit() {

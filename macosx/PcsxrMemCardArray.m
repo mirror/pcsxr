@@ -9,6 +9,7 @@
 #import "PcsxrMemCardArray.h"
 #import "ARCBridge.h"
 #import "ConfigurationController.h"
+#include "sio.h"
 
 #define MAX_MEMCARD_BLOCKS 15
 
@@ -23,6 +24,43 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	SaveMcd(str, to, (dsti + 1) * 1024 * 8, 1024 * 8);
 	
 	//printf("data = %s\n", from + (srci+1) * 128);
+}
+
+static inline char* CreateBlankHeader()
+{
+	struct PSXMemHeader {
+		unsigned int allocState;
+		unsigned int fileSize;
+		unsigned short nextBlock;
+		char fileName[21];
+		unsigned char garbage[96];
+		unsigned char checksum;
+	};
+	struct PSXMemHeader *toReturn = calloc(sizeof(struct PSXMemHeader), 1);
+		
+	toReturn->allocState = 0x000000a0;
+	toReturn->nextBlock = 0xFFFF;
+	unsigned char *bytePtr = (unsigned char*)toReturn;
+	for (int i = 0; i < sizeof(struct PSXMemHeader) - sizeof(unsigned char); i++) {
+		toReturn->checksum = toReturn->checksum ^ bytePtr[i];
+	}
+	
+	return (char*)toReturn;
+}
+
+static inline void ClearMemcardData(char *to, int dsti, char *str)
+{
+	// header
+	char *header = CreateBlankHeader();
+	
+	memcpy(to + (dsti + 1) * 128, header, 128);
+	SaveMcd(str, to, (dsti + 1) * 128, 128);
+	free(header);
+	
+	// data
+	memset(to + (dsti + 1) * 1024 * 8, 0, 1024 * 8);
+	SaveMcd(str, to, (dsti + 1) * 1024 * 8, 1024 * 8);
+
 }
 
 
@@ -42,6 +80,15 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 		return Mcd1Data;
 	} else {
 		return Mcd2Data;
+	}
+}
+
+- (const char *)memCardCPath
+{
+	if (cardNumber == 1) {
+		return Config.Mcd1;
+	} else {
+		return Config.Mcd2;
 	}
 }
 
@@ -152,18 +199,10 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 		NSAssert(toCopy != -1, @"Compacting the card should have made space!");
 	}
 	
-	char *to, *from;
-	if (cardNumber == 1) {
-		to = Mcd2Data;
-		from = Mcd1Data;
-	} else {
-		to = Mcd1Data;
-		from = Mcd2Data;
-	}
 	int memIdx = tmpObj.startingIndex;
 	int i;
 	for (i = 0; i < memSize; i++) {
-		CopyMemcardData([self memDataPtr], [otherCard memDataPtr], (memIdx+i), (toCopy+i), (char*)[[[otherCard memCardURL] path] fileSystemRepresentation]);
+		CopyMemcardData([self memDataPtr], [otherCard memDataPtr], (memIdx+i), (toCopy+i), (char*)otherCard.memCardCPath);
 	}
 	
 	return YES;
@@ -227,9 +266,37 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 
 - (void)compactMemory
 {
-	NSAssert(NO, @"Compacting memory cards is not implemented yet!");
+	int i = 0, x = 1;
+	while (i < MAX_MEMCARD_BLOCKS && x < MAX_MEMCARD_BLOCKS) {
+		x = i;
+		McdBlock baseBlock;
+		GetMcdBlockInfo(cardNumber, i+1, &baseBlock);
+		PCSXRMemFlags theFlags = [PcsxrMemoryObject memFlagsFromBlockFlags:baseBlock.Flags];
+		
+		if (theFlags == memFlagDeleted || theFlags == memFlagFree) {
+			PCSXRMemFlags up1Flags = theFlags;
+			while ((up1Flags == memFlagDeleted || up1Flags == memFlagFree) && x < MAX_MEMCARD_BLOCKS){
+				x++;
+				McdBlock up1Block;
+				GetMcdBlockInfo(cardNumber, x+1, &up1Block);
+				up1Flags = [PcsxrMemoryObject memFlagsFromBlockFlags:up1Block.Flags];
+			}
+			if (x >= MAX_MEMCARD_BLOCKS) {
+				
+				break;
+			}
+			CopyMemcardData(self.memDataPtr, self.memDataPtr, x, i, (char*)[[self.memCardURL path] fileSystemRepresentation]);
+			ClearMemcardData(self.memDataPtr, x, (char*)self.memCardCPath );
+		}
+		i++;
+	}
 	
-	LoadMcd(cardNumber, cardNumber == 1 ? Config.Mcd1 : Config.Mcd2);
+	while (i < MAX_MEMCARD_BLOCKS) {
+		ClearMemcardData(self.memDataPtr, i, (char*)self.memCardCPath);
+		i++;
+	}
+	
+	LoadMcd(cardNumber, (char*)self.memCardCPath);
 #if 0
 	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil userInfo:[NSDictionary dictionaryWithObject:@(cardNumber) forKey:memCardChangeNumberKey]];
 #endif
