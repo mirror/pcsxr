@@ -212,6 +212,7 @@
 		55BBA69914953887003B2CEC /* PcsxrDiscHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBA69814953887003B2CEC /* PcsxrDiscHandler.m */; };
 		55BBA69C1495839A003B2CEC /* PcsxrFreezeStateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBA69B1495839A003B2CEC /* PcsxrFreezeStateHandler.m */; };
 		55C7A214148B2B3800C22ABC /* PcsxrMemCardDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C7A216148B2B3800C22ABC /* PcsxrMemCardDocument.xib */; };
+		55E0ACE0178B69620005C945 /* LaunchArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E0ACDF178B69600005C945 /* LaunchArg.m */; };
 		55EC05FB1788B1230053AC23 /* PcsxrMemCardArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */; };
 		55EC05FE178916E80053AC23 /* MemBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC05FD178916E70053AC23 /* MemBadgeView.m */; };
 		712FD1E81093096F00575A92 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E51093096F00575A92 /* debug.c */; };
@@ -732,6 +733,8 @@
 		55BBA69A14958399003B2CEC /* PcsxrFreezeStateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrFreezeStateHandler.h; sourceTree = "<group>"; };
 		55BBA69B1495839A003B2CEC /* PcsxrFreezeStateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrFreezeStateHandler.m; sourceTree = "<group>"; };
 		55C7A215148B2B3800C22ABC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PcsxrMemCardDocument.xib; sourceTree = "<group>"; };
+		55E0ACDE178B695F0005C945 /* LaunchArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchArg.h; sourceTree = "<group>"; };
+		55E0ACDF178B69600005C945 /* LaunchArg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchArg.m; sourceTree = "<group>"; };
 		55EC05F91788B1230053AC23 /* PcsxrMemCardArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrMemCardArray.h; sourceTree = "<group>"; };
 		55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrMemCardArray.m; sourceTree = "<group>"; };
 		55EC05FC178916E70053AC23 /* MemBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemBadgeView.h; sourceTree = "<group>"; };
@@ -994,23 +997,14 @@
 				557649B61786AF6F007C4457 /* File Handlers */,
 				557649B71786AF92007C4457 /* Plug-in handling */,
 				557649B81786AFB7007C4457 /* Controllers */,
+				55E0ACE1178B850B0005C945 /* Helper Classes */,
 				55BB3493169CD42500850200 /* ARCBridge.h */,
 				7161C2810FDED6D000225F97 /* config.h */,
 				2BA178A505148D9D0026D74D /* main.m */,
 				2BBB17DA051E4D0F00B84448 /* Plugin.c */,
-				2BBB1791051E113B00B84448 /* EmuThread.h */,
-				2BBB1792051E113B00B84448 /* EmuThread.m */,
 				7161C2970FDED75300225F97 /* ExtendedKeys.h */,
-				55A90227147D89380037E18F /* PcsxrMemoryObject.h */,
-				55A90228147D89380037E18F /* PcsxrMemoryObject.m */,
-				55EC05F91788B1230053AC23 /* PcsxrMemCardArray.h */,
-				55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */,
-				55EC05FC178916E70053AC23 /* MemBadgeView.h */,
-				55EC05FD178916E70053AC23 /* MemBadgeView.m */,
 				02717969167884DF004AED62 /* hotkeys.h */,
 				02717967167884C9004AED62 /* hotkeys.m */,
-				5550D2711683C923006C56B5 /* RecentItemsMenu.h */,
-				5550D2721683C923006C56B5 /* RecentItemsMenu.m */,
 			);
 			name = MacOSX;
 			sourceTree = "<group>";
@@ -1789,6 +1783,25 @@
 			path = ix86_64;
 			sourceTree = "<group>";
 		};
+		55E0ACE1178B850B0005C945 /* Helper Classes */ = {
+			isa = PBXGroup;
+			children = (
+				2BBB1791051E113B00B84448 /* EmuThread.h */,
+				2BBB1792051E113B00B84448 /* EmuThread.m */,
+				55A90227147D89380037E18F /* PcsxrMemoryObject.h */,
+				55A90228147D89380037E18F /* PcsxrMemoryObject.m */,
+				55EC05F91788B1230053AC23 /* PcsxrMemCardArray.h */,
+				55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */,
+				55E0ACDE178B695F0005C945 /* LaunchArg.h */,
+				55E0ACDF178B69600005C945 /* LaunchArg.m */,
+				55EC05FC178916E70053AC23 /* MemBadgeView.h */,
+				55EC05FD178916E70053AC23 /* MemBadgeView.m */,
+				5550D2711683C923006C56B5 /* RecentItemsMenu.h */,
+				5550D2721683C923006C56B5 /* RecentItemsMenu.m */,
+			);
+			name = "Helper Classes";
+			sourceTree = "<group>";
+		};
 		71F4C5B30FDED15800529849 /* ix86 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2238,6 +2251,7 @@
 				D422E67A16DC495800526DCF /* CheatController.m in Sources */,
 				55EC05FB1788B1230053AC23 /* PcsxrMemCardArray.m in Sources */,
 				55EC05FE178916E80053AC23 /* MemBadgeView.m in Sources */,
+				55E0ACE0178B69620005C945 /* LaunchArg.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

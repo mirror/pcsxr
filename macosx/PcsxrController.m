@@ -7,6 +7,7 @@
 #import "PcsxrPluginHandler.h"
 #import "PcsxrDiscHandler.h"
 #import "PcsxrFreezeStateHandler.h"
+#import "LaunchArg.h"
 #include "psxcommon.h"
 #include "plugins.h"
 #include "misc.h"
@@ -366,8 +367,7 @@ HandleArgBase(arg, launchable, otherblock)
 
 #define HandleArgBase(arg, launchable, otherblock) \
 if (isLaunchable && launchable) { \
-NSString *messageStr = [NSString stringWithFormat:@"The options %@ and %@ are exclusive.", arg, runtimeStr];  \
-ParseErrorStr(messageStr); \
+ParseErrorStr([NSString stringWithFormat:@"The options %@ and %@ are exclusive.", arg, runtimeStr]); \
 } \
 if(launchable) { \
 isLaunchable = YES; \
@@ -375,6 +375,13 @@ runtimeStr = arg; \
 } \
 otherblock();\
 }
+
+#define kPCSXRArgumentCDROM @"--cdrom"
+#define kPCSXRArgumentBIOS @"--bios"
+#define kPCSXRArgumentISO @"--iso"
+#define kPCSXRArgumentMcd @"--mcd"
+#define kPCSXRArgumentFreeze @"--freeze"
+#define kPCSXRArgumentExitAtClose @"--exitAtClose"
 
 - (void)awakeFromNib
 {
@@ -404,26 +411,34 @@ otherblock();\
 		NSString *runtimeStr = nil;
 		
 		__block short memcardHandled = 0;
-		__block dispatch_block_t runtimeBlock = NULL;
 		__block BOOL hasParsedAnArgument = NO;
 		__block NSString *(^FileTestBlock)() = NULL;
+		__block NSMutableDictionary *argDict = [[NSMutableDictionary alloc] initWithCapacity:[progArgs count]];
+		
 		
 		NSMutableArray *unknownOptions = [NSMutableArray array];
 		
 		dispatch_block_t cdromBlock = ^{
-			hasParsedAnArgument = YES;
-			runtimeBlock = [^{
+			dispatch_block_t otherBlock = ^{
 				[self runCD:nil];
-			} copy];
+			};
+			hasParsedAnArgument = YES;
+			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgRun block:otherBlock argument:kPCSXRArgumentCDROM];
+			[larg addToDictionary:argDict];
+			RELEASEOBJ(larg);
 		};
 		
 		dispatch_block_t biosBlock = ^{
 			hasParsedAnArgument = YES;
-			runtimeBlock = [^{
+			dispatch_block_t runtimeBlock = ^{
 				[self runBios:nil];
-			} copy];
+			};
+			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgRun block:runtimeBlock argument:kPCSXRArgumentBIOS];
+			[larg addToDictionary:argDict];
+			RELEASEOBJ(larg);
 		};
 		
+		//This block/argument does not need to be sorted
 		dispatch_block_t emuCloseAtEnd = ^{
 			hasParsedAnArgument = YES;
 			self.endAtEmuClose = YES;
@@ -432,9 +447,12 @@ otherblock();\
 		dispatch_block_t isoBlock = ^{
 			hasParsedAnArgument = YES;
 			NSString *path = FileTestBlock();
-			runtimeBlock = [^{
+			dispatch_block_t runtimeBlock = ^{
 				[self runURL:[NSURL fileURLWithPath:path isDirectory:NO]];
-			} copy];
+			};
+			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgRun block:runtimeBlock argument:kPCSXRArgumentISO];
+			[larg addToDictionary:argDict];
+			RELEASEOBJ(larg);
 		};
 		
 		void (^mcdBlock)(int mcdNumber) = ^(int mcdnumber){
@@ -444,18 +462,36 @@ otherblock();\
 			} else {
 				memcardHandled |= (1 << mcdnumber);
 			}
+			
 			NSString *path = FileTestBlock();
-			LoadMcd(mcdnumber, (char*)[path fileSystemRepresentation]);
+			dispatch_block_t runtimeBlock = ^{
+				LoadMcd(mcdnumber, (char*)[path fileSystemRepresentation]);
+			};
+			NSString *mcdArg = [kPCSXRArgumentMcd stringByAppendingFormat:@"%i", mcdnumber];
+			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPreRun block:runtimeBlock argument:mcdArg];
+			[larg addToDictionary:argDict];
+			RELEASEOBJ(larg);
 		};
 		
 		dispatch_block_t freezeBlock = ^{
 			hasParsedAnArgument = YES;
 			NSString *path = FileTestBlock();
-			[EmuThread defrostAt:path];
+			dispatch_block_t runtimeBlock = ^{
+				if (![EmuThread isRunBios]) {
+					sleep(2);
+					[EmuThread defrostAt:path];
+				}
+			};
+			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPostRun block:runtimeBlock argument:kPCSXRArgumentFreeze];
+			[larg addToDictionary:argDict];
+			RELEASEOBJ(larg);
 		};
 
 		BOOL hasFileTestBlock = NO;
 
+		NSString *mcd1NSStr = [kPCSXRArgumentMcd stringByAppendingFormat:@"%i", 1];
+		NSString *mcd2NSStr = [kPCSXRArgumentMcd stringByAppendingFormat:@"%i", 2];
+		
 		for (__block int i = 1; i < [progArgs count]; i++) {
 			if (!hasFileTestBlock)
 			{
@@ -466,8 +502,7 @@ otherblock();\
 					NSString *path = [progArgs objectAtIndex:i];
 					if (![[NSFileManager defaultManager] fileExistsAtPath:path])
 					{
-						NSString *errStr = [NSString stringWithFormat:@"The file \"%@\" does not exist.", path];
-						ParseErrorStr(errStr);
+						ParseErrorStr([NSString stringWithFormat:@"The file \"%@\" does not exist.", path]);
 						return nil;
 					}
 					[skipFiles addObject:path];
@@ -477,44 +512,48 @@ otherblock();\
 			}
 			
 			//DO NOT END these MACROS WITH A SIMICOLON! it will break the if-else if process
-			HandleArg(@"--iso", YES, isoBlock)
-			HandleArgElse(@"--cdrom", YES, cdromBlock)
-			HandleArgElse(@"--bios", YES, biosBlock)
-			HandleArgElse(@"--exitAtClose", NO, emuCloseAtEnd)
-			HandleArgElse(@"--mcd1", NO, ^{mcdBlock(1);})
-			HandleArgElse(@"--mcd2", NO, ^{mcdBlock(2);})
-			HandleArgElse(@"--freeze", NO, freezeBlock)
+			HandleArg(kPCSXRArgumentISO, YES, isoBlock)
+			HandleArgElse(kPCSXRArgumentCDROM, YES, cdromBlock)
+			HandleArgElse(kPCSXRArgumentBIOS, YES, biosBlock)
+			HandleArgElse(kPCSXRArgumentExitAtClose, NO, emuCloseAtEnd)
+			HandleArgElse(mcd1NSStr, NO, ^{mcdBlock(1);})
+			HandleArgElse(mcd2NSStr, NO, ^{mcdBlock(2);})
+			HandleArgElse(kPCSXRArgumentFreeze, NO, freezeBlock)
 			else {
 				[unknownOptions addObject:[progArgs objectAtIndex:i]];
 			}
 		}
 #ifdef DEBUG
-		if ([unknownOptions count]) {
-			NSString *unknownString = @"The following options weren't recognized by PCSX-R:";
-			@autoreleasepool {
-				for (NSString *arg in unknownOptions) {
-					unknownString = [NSString stringWithFormat:@"%@ %@", unknownString, arg];
-				}
-				RETAINOBJNORETURN(unknownString);
-			}
-			NSLog(@"%@. This may be due to extra arguments passed by the OS or debugger.", unknownString);
-			RELEASEOBJ(unknownString);
+		if ([unknownOptions count]) {			
+			//As there doesn't seem to be a Cocoa/Objective-C method like this...
+			NSString *unknownString = CFBridgingRelease(CFStringCreateByCombiningStrings(kCFAllocatorDefault, BRIDGE(CFArrayRef, unknownOptions), CFSTR(" ")));
+			
+			NSLog(@"The following options weren't recognized by PCSX-R: %@. This may be due to extra arguments passed by the OS or debugger.", unknownString);
 		}
 #endif
 		if (!isLaunchable && hasParsedAnArgument) {
-			NSString *tmpStr = @"A launch command wasn't found in the command line and an argument that PCSX-R recognizes was.\n";
-			@autoreleasepool {
-				for (NSString *arg in progArgs) {
-					tmpStr = [NSString stringWithFormat:@"%@ %@", tmpStr, arg];
-				}
-				tmpStr = [NSString stringWithFormat:@"%@\n\nThe valid launch commands are --iso, --cdrom, and --bios", tmpStr];
-				RETAINOBJNORETURN(tmpStr);
-			}
-			ParseErrorStr(AUTORELEASEOBJ(tmpStr));
+			NSString *tmpStr = @"";
+			NSString *arg = CFBridgingRelease(CFStringCreateByCombiningStrings(kCFAllocatorDefault, BRIDGE(CFArrayRef, progArgs), CFSTR(" ")));
+			
+			tmpStr = [NSString stringWithFormat:@"A launch command wasn't found in the command line and an argument that PCSX-R recognizes was: %@\n\nThe valid launch commands are --iso, --cdrom, and --bios.", arg];
+			ParseErrorStr(tmpStr);
 		} else if (hasParsedAnArgument){
-			runtimeBlock();
-			RELEASEOBJ(runtimeBlock);
+			NSArray *argArray = [[argDict allValues] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+				LaunchArg *LA1 = obj1;
+				LaunchArg *LA2 = obj2;
+				if (LA1.launchOrder > LA2.launchOrder) {
+					return NSOrderedDescending;
+				} else if (LA1.launchOrder < LA2.launchOrder) {
+					return NSOrderedAscending;
+				} else {
+					return [LA1.argument compare:LA2.argument];
+				}
+			}];
+			for (LaunchArg *arg in argArray) {
+				arg.theBlock();
+			}
 		}
+		RELEASEOBJ(argDict);
 	}
 }
 
