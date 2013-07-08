@@ -16,19 +16,21 @@
 #import "ARCBridge.h"
 
 @interface PcsxrDiscHandler ()
-@property (arcstrong) NSURL *discURL;
+@property (nonatomic, arcstrong) NSURL *discURL;
+@property (arcweak) NSString *discPath;
 @end
 
 @implementation PcsxrDiscHandler
 
-@synthesize discURL;
+@synthesize discURL = _discURL;
+@synthesize discPath;
 
-- (NSURL*)discURLFromFilePath:(NSString *)filePath
+- (NSURL*)discURL
 {
-	if (!discURL) {
-		self.discURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
+	if (!_discURL) {
+		self.discURL = [NSURL fileURLWithPath:discPath isDirectory:NO];
 	}
-	return self.discURL;
+	return _discURL;
 }
 
 + (NSArray *)supportedUTIs
@@ -42,19 +44,13 @@
 
 - (BOOL)handleFile:(NSString *)theFile
 {
+	self.discPath = theFile;
 	PcsxrController *appDelegate = [NSApp delegate];
-	if ([EmuThread active] == YES) {
-		if (UsingIso()) {
-			SetIsoFile([theFile fileSystemRepresentation]);
-			SetCdOpenCaseTime(time(NULL) + 2);
-			LidInterrupt();
-		} else {
-			return NO;
-		}
-	} else {
-		[appDelegate runURL:[self discURLFromFilePath:theFile]];
+	if ([EmuThread active] == YES && !UsingIso()) {
+		return NO;
 	}
-	[[appDelegate recentItems] addRecentItem:[self discURLFromFilePath:theFile]];
+	[appDelegate runURL:[self discURL]];
+	[[appDelegate recentItems] addRecentItem:[self discURL]];
 	return YES;
 }
 
