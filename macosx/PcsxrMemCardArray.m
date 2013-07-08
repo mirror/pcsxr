@@ -26,7 +26,7 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	//printf("data = %s\n", from + (srci+1) * 128);
 }
 
-static inline char* CreateBlankHeader()
+static inline char* BlankHeader()
 {
 	struct PSXMemHeader {
 		unsigned int allocState;
@@ -36,15 +36,19 @@ static inline char* CreateBlankHeader()
 		unsigned char garbage[96];
 		unsigned char checksum;
 	};
-	struct PSXMemHeader *toReturn = calloc(sizeof(struct PSXMemHeader), 1);
 	
-	//FIXME: Which value is right?
-	toReturn->allocState = 0x000000a0;
-	//toReturn->allocState = 0xa0000000;
-	toReturn->nextBlock = 0xFFFF;
-	unsigned char *bytePtr = (unsigned char*)toReturn;
-	for (int i = 0; i < sizeof(struct PSXMemHeader) - sizeof(unsigned char); i++) {
-		toReturn->checksum = toReturn->checksum ^ bytePtr[i];
+	static struct PSXMemHeader *toReturn = NULL;
+	if (!toReturn) {
+		toReturn = calloc(sizeof(struct PSXMemHeader), 1);
+		
+		//FIXME: Which value is right?
+		toReturn->allocState = 0x000000a0;
+		//toReturn->allocState = 0xa0000000;
+		toReturn->nextBlock = 0xFFFF;
+		unsigned char *bytePtr = (unsigned char*)toReturn;
+		for (int i = 0; i < sizeof(struct PSXMemHeader) - sizeof(unsigned char); i++) {
+			toReturn->checksum = toReturn->checksum ^ bytePtr[i];
+		}
 	}
 	
 	return (char*)toReturn;
@@ -53,11 +57,10 @@ static inline char* CreateBlankHeader()
 static inline void ClearMemcardData(char *to, int dsti, char *str)
 {
 	// header
-	char *header = CreateBlankHeader();
+	char *header = BlankHeader();
 	
 	memcpy(to + (dsti + 1) * 128, header, 128);
 	SaveMcd(str, to, (dsti + 1) * 128, 128);
-	free(header);
 	
 	// data
 	memset(to + (dsti + 1) * 1024 * 8, 0, 1024 * 8);
