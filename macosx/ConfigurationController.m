@@ -220,13 +220,14 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
     [hkController initialize];
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	RELEASEOBJ(checkBoxDefaults);
 	
 	SUPERDEALLOC;
 }
+#endif
 
 - (NSString *)keyForSender:(id)sender
 {
