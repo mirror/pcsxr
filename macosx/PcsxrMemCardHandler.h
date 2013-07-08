@@ -11,7 +11,7 @@
 
 @interface PcsxrMemCardHandler : NSWindowController <PcsxrFileHandle> {
 	IBOutlet NSTextField *cardPath;
-	int memChosen;
+	NSInteger memChosen;
 }
 - (IBAction)setMemCard:(id)sender;
 

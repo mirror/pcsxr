@@ -218,9 +218,9 @@ static NSString *MemLabelEndLink;
 @synthesize startingIndex;
 
 #pragma mark Non-synthesize Properties
-- (int)memIconCount
+- (unsigned)memIconCount
 {
-	return [memImages count];
+	return (unsigned)[memImages count];
 }
 
 - (NSImage*)memImage

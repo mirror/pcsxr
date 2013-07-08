@@ -136,7 +136,7 @@
 		return;
 	}
 	
-	cardSize = [fromCard memorySizeAtIndex:selectedIndex];
+	cardSize = [fromCard memorySizeAtIndex:(int)selectedIndex];
 	freeConsBlocks = [toCard indexOfFreeBlocksWithSize:cardSize];
 	availBlocks = [toCard availableBlocks];
 	if (freeConsBlocks == -1 && availBlocks >= cardSize) {
@@ -150,7 +150,7 @@
 		return;
 	}
 	
-	[fromCard moveBlockAtIndex:selectedIndex toMemoryCard:toCard];
+	[fromCard moveBlockAtIndex:(int)selectedIndex toMemoryCard:toCard];
 	
 	if (cardnum == 1) {
 		LoadMcd(1, Config.Mcd1);
@@ -172,7 +172,7 @@
 			CreateMcd(Config.Mcd2);
 			LoadMcd(2, Config.Mcd2);
 		}
-		[self loadMemoryCardInfoForCard:memCardSelect];
+		[self loadMemoryCardInfoForCard:(int)memCardSelect];
 	}
 }
 
@@ -216,14 +216,14 @@
 	
 	NSInteger deleteOkay = NSRunAlertPanel(NSLocalizedString(@"Delete Block", nil), NSLocalizedString(@"Deleting a block will remove all saved data on that block.\n\nThis cannot be undone.", nil), NSLocalizedString(@"Cancel", nil), NSLocalizedString(@"Delete", nil), nil);
 	if (deleteOkay == NSAlertAlternateReturn) {
-		[self deleteMemoryBlocksAtIndex:selectedIndex card:memCardSelect];
+		[self deleteMemoryBlocksAtIndex:selectedIndex card:(int)memCardSelect];
 		
 		if (memCardSelect == 1) {
 			LoadMcd(1, Config.Mcd1);
 		} else {
 			LoadMcd(2, Config.Mcd2);
 		}
-		[self loadMemoryCardInfoForCard:memCardSelect];
+		[self loadMemoryCardInfoForCard:(int)memCardSelect];
 	}
 }
 

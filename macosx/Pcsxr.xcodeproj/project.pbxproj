@@ -3165,6 +3165,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -3174,7 +3175,6 @@
 					../libpcsxcore,
 					../macosx,
 				);
-				OTHER_CFLAGS = "-fomit-frame-pointer";
 			};
 			name = Instrument;
 		};
@@ -3197,7 +3197,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = (
 					"-funroll-loops",
-					"-falign-loops=16",
 					"$(inherited)",
 				);
 				PRODUCT_NAME = PCSXR;
@@ -3398,11 +3397,9 @@
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
+				LD_NO_PIE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OTHER_CFLAGS = (
-					"-falign-loops=16",
-					"$(inherited)",
-				);
+				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_NAME = PCSXR;
 				WRAPPER_EXTENSION = app;
 			};
@@ -3427,7 +3424,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = (
 					"-funroll-loops",
-					"-falign-loops=16",
+					"-fomit-frame-pointer",
 					"$(inherited)",
 				);
 				PRODUCT_NAME = PCSXR;
@@ -3443,6 +3440,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -3463,6 +3461,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -3472,7 +3471,6 @@
 					../libpcsxcore,
 					../macosx,
 				);
-				OTHER_CFLAGS = "-fomit-frame-pointer";
 			};
 			name = Release;
 		};

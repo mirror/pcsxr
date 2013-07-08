@@ -67,7 +67,7 @@
 	[[self window] orderOut:nil];
 	
 	if (memChosen != 0) {
-		[ConfigurationController setMemoryCard:memChosen toPath:theFile];
+		[ConfigurationController setMemoryCard:(int)memChosen toPath:theFile];
 	}
 	return YES;
 }

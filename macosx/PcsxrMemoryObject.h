@@ -55,7 +55,7 @@ typedef enum _PCSXRMemFlags {
 @property (readonly) int blockSize;
 
 @property (readonly, unsafe_unretained, nonatomic) NSImage *memImage;
-@property (readonly, nonatomic) int memIconCount;
+@property (readonly, nonatomic) unsigned memIconCount;
 @property (readonly, unsafe_unretained, nonatomic) NSString *flagName;
 @property (readonly, unsafe_unretained, nonatomic) NSAttributedString *attributedFlagName;
 @property (readonly, nonatomic) BOOL isBiggerThanOne;

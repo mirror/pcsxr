@@ -69,7 +69,7 @@ void SPUirq(void);
 	}
 
 int _OpenPlugins() {
-	int ret;
+	long ret;
 
 	GPU_clearDynarec(clearDynarec);
 
@@ -160,7 +160,7 @@ int OpenPlugins() {
 }
 
 void ClosePlugins() {
-	int ret;
+	long ret;
 
 	//signal(SIGINT, SIG_DFL);
 	//signal(SIGPIPE, SIG_DFL);
@@ -181,7 +181,7 @@ void ClosePlugins() {
 }
 
 void ResetPlugins() {
-	int ret;
+	long ret;
 
 	CDR_shutdown();
 	GPU_shutdown();

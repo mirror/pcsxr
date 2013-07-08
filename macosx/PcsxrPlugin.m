@@ -272,7 +272,7 @@
 {
     long (*init)();
     long (*initArg)(long arg);
-    int res = PSE_ERR_FATAL;
+    long res = PSE_ERR_FATAL;
     
     if ((active & aType) == aType) {
         return 0;

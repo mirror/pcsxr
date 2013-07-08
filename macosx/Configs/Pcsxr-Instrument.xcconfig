@@ -1,6 +1,6 @@
 #include "Pcsxr-Release.xcconfig"
 
 COPY_PHASE_STRIP = NO
-OPTIMIZATION_CFLAGS = -finline-functions -finline-limit=1600 -fno-exceptions -funroll-loops -falign-loops=16 -ffast-math
+OPTIMIZATION_CFLAGS = -finline-functions -fno-exceptions -funroll-loops -ffast-math
 STRIP_INSTALLED_PRODUCT = NO
 GCC_GENERATE_DEBUGGING_SYMBOLS = YES

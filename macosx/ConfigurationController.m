@@ -83,7 +83,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 		NSURL *mcdURL = [[openDlg URLs] objectAtIndex:0];
         
-		[ConfigurationController setMemoryCard:tag toURL:mcdURL];
+		[ConfigurationController setMemoryCard:(int)tag toURL:mcdURL];
     }
 	RELEASEOBJ(openDlg);	
 }
@@ -114,14 +114,14 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 		strlcpy(mcd, [[mcdURL path] fileSystemRepresentation], MAXPATHLEN);
 		CreateMcd(mcd);
 		
-		[ConfigurationController setMemoryCard:tag toURL:mcdURL];
+		[ConfigurationController setMemoryCard:(int)tag toURL:mcdURL];
     }
 	RELEASEOBJ(openDlg);
 }
 
 - (IBAction)setVideoType:(id)sender
 {
-	int tag = [[sender selectedItem] tag];
+	NSInteger tag = [[sender selectedItem] tag];
 
 	if (3 == tag) {
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoDetectVideoType"];
@@ -193,7 +193,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 
 	// setup labels
 
-	int tag = [defaults integerForKey:@"AutoDetectVideoType"];
+	NSInteger tag = [defaults integerForKey:@"AutoDetectVideoType"];
 	if (tag)
 		tag = 3;
 	else {

@@ -219,7 +219,7 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 
 - (void)runURL:(NSURL*)url
 {
-    if ([EmuThread active] == YES) {
+	if ([EmuThread active] == YES) {
 		if (UsingIso()) {
 			SetIsoFile([[url path] fileSystemRepresentation]);
 			SetCdOpenCaseTime(time(NULL) + 2);
@@ -241,7 +241,7 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 - (IBAction)freeze:(id)sender
 {
 	NSInteger num = [sender tag];
-    [PcsxrController saveState:num];
+	[PcsxrController saveState:(int)num];
 }
 
 + (void)saveState:(int)num
@@ -251,8 +251,8 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 
 - (IBAction)defrost:(id)sender
 {
-    NSInteger num = [sender tag];
-	[PcsxrController loadState:num];
+	NSInteger num = [sender tag];
+	[PcsxrController loadState:(int)num];
 }
 
 + (void)loadState:(int)num
@@ -558,7 +558,7 @@ otherblock();\
 	str = [[defaults stringForKey:@"Bios"] fileSystemRepresentation];
 	if (str) {
 		NSString *path = [defaults stringForKey:@"Bios"];
-		int index = [biosList indexOfObject:path];
+		NSInteger index = [biosList indexOfObject:path];
 
 		if (-1 == index) {
 			[biosList insertObject:path atIndex:0];
