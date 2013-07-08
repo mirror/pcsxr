@@ -10,25 +10,20 @@
 #import "PcsxrMemoryObject.h"
 #import "ConfigurationController.h"
 #import "PcsxrMemCardHandler.h"
+#import "PcsxrMemCardArray.h"
 #include "sio.h"
 #import "ARCBridge.h"
 
 #define MAX_MEMCARD_BLOCKS 15
 
-static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, char *str)
-{
-		// header
-		memcpy(to + (dsti + 1) * 128, from + (srci + 1) * 128, 128);
-		SaveMcd(str, to, (dsti + 1) * 128, 128);
-	
-		// data
-		memcpy(to + (dsti + 1) * 1024 * 8, from + (srci+1) * 1024 * 8, 1024 * 8);
-		SaveMcd(str, to, (dsti + 1) * 1024 * 8, 1024 * 8);
-	
-		//printf("data = %s\n", from + (srci+1) * 128);
-}
+@interface PcsxrMemCardController ()
+@property (readwrite, arcretain) PcsxrMemCardArray *memCard1Array;
+@property (readwrite, arcretain) PcsxrMemCardArray *memCard2Array;
+@end
 
 @implementation PcsxrMemCardController
+
+@synthesize memCard1Array, memCard2Array;
 
 //memCard1Array KVO functions
 
@@ -50,7 +45,6 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 		fileName = [fm displayNameAtPath:fullPath];
 		
 		[memCard1Label setTitleWithMnemonic:fileName];
-		
 		[memCard1Label setToolTip:fullPath];
 		
 		[self loadMemoryCardInfoForCard:1];
@@ -61,63 +55,10 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 		fileName = [fm displayNameAtPath:fullPath];
 		
 		[memCard2Label setTitleWithMnemonic:fileName];
-		
 		[memCard2Label setToolTip:fullPath];
 		
 		[self loadMemoryCardInfoForCard:2];
 	}
-}
-
--(void)insertObject:(PcsxrMemoryObject *)p inMemCard1ArrayAtIndex:(NSUInteger)index
-{
-    [memCard1Array insertObject:p atIndex:index];
-}
-
--(void)removeObjectFromMemCard1ArrayAtIndex:(NSUInteger)index
-{
-    [memCard1Array removeObjectAtIndex:index];
-}
-
-- (void)setMemCard1Array:(NSMutableArray *)a
-{
-	if (memCard1Array != a) {
-#if !__has_feature(objc_arc)
-		[memCard1Array release];
-#endif
-		memCard1Array = [a mutableCopy];
-	}
-}
-
-- (NSArray *)memCard1Array
-{
-	return [NSArray arrayWithArray:memCard1Array];
-}
-
-//memCard2Array KVO functions
-
--(void)insertObject:(PcsxrMemoryObject *)p inMemCard2ArrayAtIndex:(NSUInteger)index
-{
-    [memCard2Array insertObject:p atIndex:index];
-}
-
--(void)removeObjectFromMemCard2ArrayAtIndex:(NSUInteger)index
-{
-    [memCard2Array removeObjectAtIndex:index];
-}
-
-- (void)setMemCard2Array:(NSMutableArray *)a
-{
-	if (memCard2Array != a) {
-#if !__has_feature(objc_arc)
-		[memCard2Array release];
-#endif
-		memCard2Array = [a mutableCopy];
-	}
-}
-
-- (NSArray *)memCard2Array
-{
-	return [NSArray arrayWithArray:memCard2Array];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
@@ -130,47 +71,10 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
     return self;
 }
 
-- (int)blockCount:(int)card fromIndex:(int)idx
-{
-	int i = 1;
-	NSArray *memArray = nil;
-	if (card == 1) {
-		memArray = [self memCard1Array];
-	} else {
-		memArray = [self memCard2Array];
-	}
-
-	for (i = 1; i <= (MAX_MEMCARD_BLOCKS-idx); i++) {
-		//Get the mem card +1 from the current card
-		//And check its attributes
-		PcsxrMemoryObject *obj = [memArray objectAtIndex:(i + idx)];
-		
-		//GetMcdBlockInfo(mcd, idx+i, &b);
-		//printf("i=%i, mcd=%i, startblock=%i, diff=%i, flags=%x\n", i, mcd, startblock, (MAX_MEMCARD_BLOCKS-startblock), b.Flags);
-		if ((obj.memFlags & 0x3) == 0x3) {
-			return i+1;
-		} else if ((obj.memFlags & 0x2) == 0x2) {
-			//i++
-		} else {
-			return i;
-		}
-	}
-	return i; // startblock was the last block so count = 1
-}
-
 - (void)loadMemoryCardInfoForCard:(int)theCard
 {
-	NSInteger i;
-	McdBlock info;
-	NSMutableArray *newArray = [[NSMutableArray alloc] initWithCapacity:MAX_MEMCARD_BLOCKS];
+	PcsxrMemCardArray *newArray = [[PcsxrMemCardArray alloc] initWithMemoryCardNumber:theCard];
 	
-	for (i = 0; i < MAX_MEMCARD_BLOCKS; i++) {
-		GetMcdBlockInfo(theCard, i + 1, &info);
-		PcsxrMemoryObject *ob = [[PcsxrMemoryObject alloc] initWithMcdBlock:&info];
-
-		[newArray insertObject:ob atIndex:i];
-		RELEASEOBJ(ob);
-	}
 	if (theCard == 1) {
 		[self setMemCard1Array:newArray];
 	} else {
@@ -202,109 +106,55 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	[[NSNotificationCenter defaultCenter] postNotificationName:memoryAnimateTimerKey object:self];
 }
 
-- (int)findFreeMemCardBlockInCard:(int)target_card length:(int)len
-{
-	int foundcount = 0, i = 0;
-	
-	NSArray *cardArray;
-	if (target_card == 1) {
-		cardArray = [self memCard1Array];
-	}else {
-		cardArray = [self memCard2Array];
-	}
-	
-	// search for empty (formatted) blocks first
-	while (i < MAX_MEMCARD_BLOCKS && foundcount < len) {
-		PcsxrMemoryObject *obj = [cardArray objectAtIndex:i++]; //&Blocks[target_card][++i];
-		if ((obj.memFlags & 0xFF) == 0xA0) { // if A0 but not A1
-			foundcount++;
-		} else if (foundcount >= 1) { // need to find n count consecutive blocks
-			foundcount = 0;
-		} else {
-			//i++;
-		}
-		//printf("formatstatus=%x\n", Info->Flags);
- 	}
-	
-	if (foundcount == len)
-		return (i-foundcount);
-	
-	// no free formatted slots, try to find a deleted one
-	foundcount = i = 0;
-	while (i < MAX_MEMCARD_BLOCKS && foundcount < len) {
-		PcsxrMemoryObject *obj = [cardArray objectAtIndex:i++];
-		if ((obj.memFlags & 0xF0) == 0xA0) { // A2 or A6 f.e.
-			foundcount++;
-		} else if (foundcount >= 1) { // need to find n count consecutive blocks
-			foundcount = 0;
-		} else {
-			//i++;
-		}
-		//printf("delstatus=%x\n", Info->Flags);
- 	}
-	
-	if (foundcount == len)
-		return (i-foundcount);
-	
- 	return -1;
-}
-
-- (int)findFreeMemCardBlockInCard:(int)target_card
-{
-	return [self findFreeMemCardBlockInCard:target_card length:1];
-}
-
 - (IBAction)moveBlock:(id)sender
 {
 	NSInteger memCardSelect = [sender tag];
 	NSCollectionView *cardView;
 	NSIndexSet *selection;
-	int toCard, fromCard, freeSlot;
-	int count;
-	int j = 0;
-	char *str, *source, *destination;
+	PcsxrMemCardArray *toCard, *fromCard;
+	int cardnum;
 	if (memCardSelect == 1) {
-		str = Config.Mcd1;
-		source = Mcd2Data;
-		destination = Mcd1Data;
 		cardView = memCard2view;
-		toCard = 1;
-		fromCard = 2;
+		toCard = memCard1Array;
+		fromCard = memCard2Array;
+		cardnum = 1;
 	} else {
-		str = Config.Mcd2;
-		source = Mcd1Data;
-		destination = Mcd2Data;
 		cardView = memCard1view;
-		toCard = 2;
-		fromCard = 1;
+		toCard = memCard2Array;
+		fromCard = memCard1Array;
+		cardnum = 2;
 	}
 	selection = [cardView selectionIndexes];
 	if (!selection || [selection count] == 0) {
 		NSBeep();
 		return;
 	}
-	
 	NSInteger selectedIndex = [selection firstIndex];
 	
-	count = [self blockCount:fromCard fromIndex:selectedIndex];
+	int cardSize, freeConsBlocks, availBlocks;
 	
-	freeSlot = [self findFreeMemCardBlockInCard:toCard length:count];
-	if (freeSlot == -1) {
-		NSRunCriticalAlertPanel(NSLocalizedString(@"No Free Space", nil), NSLocalizedString(@"Memory card %d doesn't have %d free consecutive blocks on it. Please remove some blocks on that card to continue", nil), nil, nil, nil, count, toCard);
+	cardSize = [fromCard memorySizeAtIndex:selectedIndex];
+	freeConsBlocks = [toCard indexOfFreeBlocksWithSize:cardSize];
+	availBlocks = [toCard availableBlocks];
+	if (freeConsBlocks == -1 && availBlocks >= cardSize) {
+		PcsxrMemoryObject *tmpmemobj = [fromCard.memoryArray objectAtIndex:selectedIndex];
+		NSInteger copyOK = NSRunInformationalAlertPanel(NSLocalizedString(@"Free Size", nil), NSLocalizedString(@"Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@ (%@),\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?", nil), NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), nil, cardnum, tmpmemobj.englishName, tmpmemobj.sjisName, cardnum == 1 ? 2 : 1);
+		if (copyOK != NSAlertDefaultReturn) {
+			return;
+		}
+	} else if (cardSize > availBlocks) {
+		NSRunCriticalAlertPanel(NSLocalizedString(@"No Free Space", nil), NSLocalizedString(@"Memory card %d doesn't have %d free consecutive blocks on it. Please remove some blocks on that card to continue", nil), nil, nil, nil, availBlocks, cardnum);
 		return;
 	}
 	
-	for (j=0; j < count; j++) {
-		CopyMemcardData(source, destination, (selectedIndex+j), (freeSlot+j), str);
-		//printf("count = %i, firstfree=%i, i=%i\n", count, first_free_slot, j);
-	}
+	[fromCard moveBlockAtIndex:selectedIndex toMemoryCard:toCard];
 	
-	if (toCard == 1) {
+	if (cardnum == 1) {
 		LoadMcd(1, Config.Mcd1);
 	} else {
 		LoadMcd(2, Config.Mcd2);
 	}
-	[self loadMemoryCardInfoForCard:toCard];
+	[self loadMemoryCardInfoForCard:cardnum];
 }
 
 - (IBAction)formatCard:(id)sender
@@ -323,60 +173,47 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	}
 }
 
-- (void)deleteMemoryBlockAtSlot:(int)slotnum card:(int)cardNum
+- (void)deleteMemoryBlocksAtIndex:(int)slotnum card:(int)cardNum
 {
-	int xor = 0, i, j;
-	char *data, *ptr, *filename;
-	NSArray *cardArray;
-	PcsxrMemoryObject *memObject;
+	PcsxrMemCardArray *cardArray;
 	if (cardNum == 1) {
-		filename = Config.Mcd1;
-		data = Mcd1Data;
 		cardArray = [self memCard1Array];
 	} else {
-		filename = Config.Mcd2;
-		data = Mcd2Data;
 		cardArray = [self memCard2Array];
 	}
-	memObject = [cardArray objectAtIndex:slotnum];
-	unsigned char flags = [memObject memFlags];
-	i = slotnum;
-	i++;
-	ptr = data + i * 128;
-	
-	if ((flags & 0xF0) == 0xA0) {
-		if ((flags & 0xF) >= 1 &&
-			(flags & 0xF) <= 3) { // deleted
-			*ptr = 0x50 | (flags & 0xF);
-		} else return;
-	} else if ((flags & 0xF0) == 0x50) { // used
-		*ptr = 0xA0 | (flags & 0xF);
-	} else { return; }
-	
-	for (j = 0; j < 127; j++) xor ^= *ptr++;
-	*ptr = xor;
-	
-	SaveMcd(filename, data, i * 128, 128);
+	[cardArray deleteMemoryBlocksAtIndex:slotnum];
 }
 
-- (IBAction)deleteMemoryObject:(id)sender {
+- (IBAction)deleteMemoryObject:(id)sender
+{
+	PcsxrMemCardArray *curCard;
+	NSInteger memCardSelect = [sender tag];
+	NSIndexSet *selected;
+	if (memCardSelect == 1) {
+		curCard = memCard1Array;
+		selected = [memCard1view selectionIndexes];
+	} else {
+		curCard = memCard2Array;
+		selected = [memCard2view selectionIndexes];
+	}
+	
+	if (!selected || [selected count] == 0) {
+		NSBeep();
+		return;
+	}
+	
+	NSInteger selectedIndex = [selected firstIndex];
+
+	PcsxrMemoryObject *tmpObj = [[curCard memoryArray] objectAtIndex:selectedIndex];
+	
+	if (tmpObj.flagNameIndex == memFlagFree) {
+		NSBeep();
+		return;
+	}
+	
 	NSInteger deleteOkay = NSRunAlertPanel(NSLocalizedString(@"Delete Block", nil), NSLocalizedString(@"Deleting a block will remove all saved data on that block.\n\nThis cannot be undone.", nil), NSLocalizedString(@"Cancel", nil), NSLocalizedString(@"Delete", nil), nil);
 	if (deleteOkay == NSAlertAlternateReturn) {
-		NSInteger memCardSelect = [sender tag];
-		NSIndexSet *selected;
-		if (memCardSelect == 1) {
-			selected = [memCard1view selectionIndexes];
-		} else {
-			selected = [memCard2view selectionIndexes];
-		}
-		
-		if (!selected || [selected count] == 0) {
-			NSBeep();
-			return;
-		}
-		
-		NSInteger selectedIndex = [selected firstIndex];
-		[self deleteMemoryBlockAtSlot:selectedIndex card:memCardSelect];
+		[self deleteMemoryBlocksAtIndex:selectedIndex card:memCardSelect];
 		
 		if (memCardSelect == 1) {
 			LoadMcd(1, Config.Mcd1);
@@ -407,44 +244,6 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	RELEASEOBJ(memCard2Array);
 
 	SUPERDEALLOC;
-}
-
-- (BOOL)isMemoryBlockEmptyOnCard:(int)aCard block:(int)aBlock
-{
-	NSArray *memArray;
-	PcsxrMemoryObject *obj;
-	if (aCard == 1) {
-		memArray = [self memCard1Array];
-	} else {
-		memArray = [self memCard2Array];
-	}
-	obj = [memArray objectAtIndex:aBlock];
-#if 0
-	if (([obj memFlags] & 0xF0) != 0x50)
-		return YES;
-	
-	//FIXME: Does this properly handle saves that span more than one block?
-	if ([[obj englishName] isEqualToString:@""]) {
-		return YES;
-	}
-#else
-	if (![obj isNotDeleted]) {
-		return YES;
-	} 
-#endif
-	
-	return NO;
-}
-
-- (int)countFreeBlocksOnCard:(int)aCard
-{
-	int i, count = 0;
-	for (i = 0; i < MAX_MEMCARD_BLOCKS; i++) {
-		if ([self isMemoryBlockEmptyOnCard:aCard block:i]) {
-			count++;
-		}
-	}
-	return count;
 }
 
 @end

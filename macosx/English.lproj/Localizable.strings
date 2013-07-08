@@ -52,18 +52,28 @@
 "CD-ROM ID: %.9s\n" = "CD-ROM ID: %.9s\n";
 "Error opening file: %s.\n" = "Error opening file: %s.\n";
 "Unknown CPE opcode %02x at poiition %08x.\n" = "Unknown CPE opcode %02x at position %08x.\n";
+
+"Error opening file" = "Error opening file.";
+"Unable to open %@: %@" = "Unable to open %@: %@.";
+
+
+//Memory card management
 "Format Card" = "Format Card";
-"Cancel" = "Cancel";
+"Free Size" = "Free Size";
 "Format" = "Format";
 "Formatting a memory card will remove all data on it.\n\nThis cannot be undone." = "Formatting a memory card will remove all data on it.\n\nThis cannot be undone.";
 "Delete Block" = "Delete Block";
-"Deleting a block will remove all saved data on that block.\n\nThis cannot be undone." = "Deleting a block will remove all saved data on that block.\n\nThis cannot be undone.";
-"Delete" = "Delete";
+"Deleting a block will remove all saved data on that block.\n\nThis cannot be undone." = "Deleting a memory card object will set the blocks to not be readable by the emulator, and may result in the data being overwritten.";
 "No Free Space" = "No Free Space";
-"Memory card %d doesn't have %d free consecutive blocks on it. Please remove some blocks on that card to continue" = "Memory card %d doesn't have %d free consecutive blocks on it. Please remove some blocks on that card to continue";
+"Memory card %d doesn't have %d free consecutive blocks on it. Please remove some blocks on that card to continue" = "Memory card %d doesn't have %d free blocks on it. Please remove some blocks on that card to continue.";
+"Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@ (%@),\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?" = "Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@ (%@),\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?";
+
+//General buttons
 "Okay" = "Okay";
-"Error opening file" = "Error opening file";
-"Unable to open %@: %@" = "Unable to open %@: %@";
+"Cancel" = "Cancel";
+"Yes" = "Yes";
+"No" = "No";
+"Delete" = "Delete";
 
 //Mem card flags
 "MemCard_Deleted" = "Deleted";

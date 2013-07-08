@@ -22,7 +22,9 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 @property (readwrite, arcstrong) NSString *sjisName;
 @property (readwrite, arcstrong) NSString *memName;
 @property (readwrite, arcstrong) NSString *memID;
-@property (readwrite) unsigned char memFlags;
+@property (readwrite) int startingIndex;
+@property (readwrite) int blockSize;
+
 
 @property (readwrite, nonatomic) NSInteger memImageIndex;
 @property (arcstrong) NSArray *memImages;
@@ -126,39 +128,60 @@ static NSString *MemLabelEndLink;
 
 - (id)initWithMcdBlock:(McdBlock *)infoBlock
 {
-	if (self = [super init]) {
-		self.memFlags = infoBlock->Flags;
-		if ((infoBlock->Flags & 0xF0) == 0xA0) {
-			if ((infoBlock->Flags & 0xF) >= 1 && (infoBlock->Flags & 0xF) <= 3)
-				self.flagNameIndex = memFlagDeleted;
-			else
-				self.flagNameIndex = memFlagFree;
-		} else if ((infoBlock->Flags & 0xF0) == 0x50) {
-			if ((infoBlock->Flags & 0xF) == 0x1)
-				self.flagNameIndex = memFlagUsed;
-			else if ((infoBlock->Flags & 0xF) == 0x2)
-				self.flagNameIndex = memFlagLink;
-			else if ((infoBlock->Flags & 0xF) == 0x3)
-				self.flagNameIndex = memFlagEndLink;
-		} else
-			self.flagNameIndex = memFlagFree;
+	[self doesNotRecognizeSelector:_cmd];
+	return nil;
+}
 
-		if (self.flagNameIndex == memFlagLink || self.flagNameIndex == memFlagEndLink || self.flagNameIndex == memFlagFree) {
-			//This prevents possible uglies in multi-save images
+- (id)initWithMcdBlock:(McdBlock *)infoBlock startingIndex:(int)startIdx
+{
+	return [self initWithMcdBlock:infoBlock startingIndex:startIdx size:1];
+}
+
++ (PCSXRMemFlags)memFlagsFromBlockFlags:(unsigned char)blockFlags
+{
+	if ((blockFlags & 0xF0) == 0xA0) {
+		if ((blockFlags & 0xF) >= 1 && (blockFlags & 0xF) <= 3)
+			return memFlagDeleted;
+		else
+			return memFlagFree;
+	} else if ((blockFlags & 0xF0) == 0x50) {
+		if ((blockFlags & 0xF) == 0x1)
+			return memFlagUsed;
+		else if ((blockFlags & 0xF) == 0x2)
+			return memFlagLink;
+		else if ((blockFlags & 0xF) == 0x3)
+			return memFlagEndLink;
+	} else
+		return memFlagFree;
+	
+	//Xcode complains unless we do this...
+#ifdef DEBUG
+	NSLog(@"Unknown flag ");
+#endif
+	return memFlagFree;
+}
+
+- (id)initWithMcdBlock:(McdBlock *)infoBlock startingIndex:(int)startIdx size:(int)memSize
+{
+	if (self = [super init]) {
+		self.startingIndex = startIdx;
+		self.blockSize = memSize;
+		self.flagNameIndex = [PcsxrMemoryObject memFlagsFromBlockFlags:infoBlock->Flags];
+		if (self.flagNameIndex == memFlagFree) {
 			self.memImages = @[];
 			self.memImageIndex = -1;
-			
-			if (flagNameIndex != memFlagFree) {
-				self.englishName = self.sjisName = (flagNameIndex == memFlagLink ? @"Multi-save" : @"Multi-save (end)");
-			} else {
-				self.englishName = self.sjisName = @"Free block";
-			}
-			
+			self.englishName = self.sjisName = @"Free block";
 			self.memID = self.memName = @"";
 		} else {
 			self.englishName = @(infoBlock->Title);
 			self.sjisName = [NSString stringWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
 			
+			if ([englishName isEqualToString:sjisName]) {
+#ifdef DEBUG
+				NSLog(@"English name and SJIS name are the same: %@. Replacing the sjis string with the English string.", englishName);
+#endif
+				self.sjisName = self.englishName;
+			}
 			@autoreleasepool {
 				self.memImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
 			}
@@ -194,11 +217,12 @@ static NSString *MemLabelEndLink;
 	[self didChangeValueForKey:@"memImage"];
 }
 
-@synthesize memFlags;
 @synthesize memName;
 @synthesize memID;
 @synthesize memImages;
 @synthesize flagNameIndex;
+@synthesize blockSize;
+@synthesize startingIndex;
 
 #pragma mark Non-synthesize Properties
 - (int)memIconCount
@@ -247,12 +271,12 @@ NS_INLINE void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtclr)
 		SetupAttrStr(tmpStr, [NSColor blueColor]);
 		attribMemLabelEndLink = [tmpStr copy];
 		RELEASEOBJ(tmpStr);
-
+		
 		tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelLink];
 		SetupAttrStr(tmpStr, [NSColor blueColor]);
 		attribMemLabelLink = [tmpStr copy];
 		RELEASEOBJ(tmpStr);
-
+		
 		tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelUsed];
 		SetupAttrStr(tmpStr, [NSColor controlTextColor]);
 		attribMemLabelUsed = [tmpStr copy];
@@ -272,7 +296,7 @@ NS_INLINE void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtclr)
 		//display nothing
 		attribMemLabelUsed = [[NSAttributedString alloc] initWithString:@""];
 #endif
-
+		
 		tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelDeleted];
 		SetupAttrStr(tmpStr, [NSColor redColor]);
 		attribMemLabelDeleted = [tmpStr copy];
@@ -303,12 +327,13 @@ NS_INLINE void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtclr)
 	}
 }
 
-- (BOOL)isNotDeleted
+- (BOOL)isBiggerThanOne
 {
-	if (self.flagNameIndex == memFlagFree || self.flagNameIndex == memFlagDeleted) {
-		return NO;
-	} else {
+	if (flagNameIndex == memFlagFree) {
+		//Always show the size of the free blocks
 		return YES;
+	} else {
+		return blockSize != 1;
 	}
 }
 
@@ -330,7 +355,7 @@ NS_INLINE void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtclr)
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"%@ (%@): Name: %@ ID: %@ Flags: %d", englishName, sjisName, memName, memID, memFlags];
+	return [NSString stringWithFormat:@"%@ (%@): Name: %@ ID: %@, type: %@ start: %i size: %i", englishName, sjisName, memName, memID, self.flagName, startingIndex, blockSize];
 }
 
 @end

@@ -212,6 +212,8 @@
 		55BBA69914953887003B2CEC /* PcsxrDiscHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBA69814953887003B2CEC /* PcsxrDiscHandler.m */; };
 		55BBA69C1495839A003B2CEC /* PcsxrFreezeStateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBA69B1495839A003B2CEC /* PcsxrFreezeStateHandler.m */; };
 		55C7A214148B2B3800C22ABC /* PcsxrMemCardDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C7A216148B2B3800C22ABC /* PcsxrMemCardDocument.xib */; };
+		55EC05FB1788B1230053AC23 /* PcsxrMemCardArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */; };
+		55EC05FE178916E80053AC23 /* MemBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC05FD178916E70053AC23 /* MemBadgeView.m */; };
 		712FD1E81093096F00575A92 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E51093096F00575A92 /* debug.c */; };
 		712FD1E91093096F00575A92 /* socket.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E61093096F00575A92 /* socket.c */; };
 		713B530E110B75650002F164 /* ppf.c in Sources */ = {isa = PBXBuildFile; fileRef = 713B530C110B75650002F164 /* ppf.c */; };
@@ -730,6 +732,10 @@
 		55BBA69A14958399003B2CEC /* PcsxrFreezeStateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrFreezeStateHandler.h; sourceTree = "<group>"; };
 		55BBA69B1495839A003B2CEC /* PcsxrFreezeStateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrFreezeStateHandler.m; sourceTree = "<group>"; };
 		55C7A215148B2B3800C22ABC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PcsxrMemCardDocument.xib; sourceTree = "<group>"; };
+		55EC05F91788B1230053AC23 /* PcsxrMemCardArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrMemCardArray.h; sourceTree = "<group>"; };
+		55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrMemCardArray.m; sourceTree = "<group>"; };
+		55EC05FC178916E70053AC23 /* MemBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemBadgeView.h; sourceTree = "<group>"; };
+		55EC05FD178916E70053AC23 /* MemBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemBadgeView.m; sourceTree = "<group>"; };
 		712FD1E51093096F00575A92 /* debug.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = debug.c; sourceTree = "<group>"; };
 		712FD1E61093096F00575A92 /* socket.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = socket.c; sourceTree = "<group>"; };
 		712FD1E71093096F00575A92 /* socket.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
@@ -997,6 +1003,10 @@
 				7161C2970FDED75300225F97 /* ExtendedKeys.h */,
 				55A90227147D89380037E18F /* PcsxrMemoryObject.h */,
 				55A90228147D89380037E18F /* PcsxrMemoryObject.m */,
+				55EC05F91788B1230053AC23 /* PcsxrMemCardArray.h */,
+				55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */,
+				55EC05FC178916E70053AC23 /* MemBadgeView.h */,
+				55EC05FD178916E70053AC23 /* MemBadgeView.m */,
 				02717969167884DF004AED62 /* hotkeys.h */,
 				02717967167884C9004AED62 /* hotkeys.m */,
 				5550D2711683C923006C56B5 /* RecentItemsMenu.h */,
@@ -2226,6 +2236,8 @@
 				02717968167884C9004AED62 /* hotkeys.m in Sources */,
 				5529EA11169CBE3400BAA2A5 /* RecentItemsMenu.m in Sources */,
 				D422E67A16DC495800526DCF /* CheatController.m in Sources */,
+				55EC05FB1788B1230053AC23 /* PcsxrMemCardArray.m in Sources */,
+				55EC05FE178916E80053AC23 /* MemBadgeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

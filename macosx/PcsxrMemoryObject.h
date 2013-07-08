@@ -34,25 +34,31 @@ typedef enum _PCSXRMemFlags {
 	
 	NSArray *memImages;
 	NSInteger memImageIndex;
-	
+	int startingIndex;
+	int blockSize;
 	PCSXRMemFlags flagNameIndex;
-	unsigned char memFlags;
 }
 + (NSArray *)imagesFromMcd:(McdBlock *)block;
 + (NSString*)memoryLabelFromFlag:(PCSXRMemFlags)flagNameIndex;
++ (NSImage *)blankImage;
++ (PCSXRMemFlags)memFlagsFromBlockFlags:(unsigned char)blockFlags;
 
-- (id)initWithMcdBlock:(McdBlock *)infoBlock;
+- (id)initWithMcdBlock:(McdBlock *)infoBlockc NS_UNAVAILABLE;
+- (id)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(int)startIdx;
+- (id)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(int)startIdx size:(int)memSize;
 
 @property (readonly, arcstrong) NSString *englishName;
 @property (readonly, arcstrong) NSString *sjisName;
 @property (readonly, arcstrong) NSString *memName;
 @property (readonly, arcstrong) NSString *memID;
 @property (readonly) PCSXRMemFlags flagNameIndex;
-@property (readonly) unsigned char memFlags;
-@property (readonly, unsafe_unretained, nonatomic) NSString *flagName;
-@property (readonly, unsafe_unretained, nonatomic) NSAttributedString *attributedFlagName;
+@property (readonly) int startingIndex;
+@property (readonly) int blockSize;
+
 @property (readonly, unsafe_unretained, nonatomic) NSImage *memImage;
 @property (readonly, nonatomic) int memIconCount;
-@property (readonly, getter = isNotDeleted, nonatomic) BOOL notDeleted DEPRECATED_ATTRIBUTE;
+@property (readonly, unsafe_unretained, nonatomic) NSString *flagName;
+@property (readonly, unsafe_unretained, nonatomic) NSAttributedString *attributedFlagName;
+@property (readonly, nonatomic) BOOL isBiggerThanOne;
 
 @end

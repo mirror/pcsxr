@@ -122,7 +122,7 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 				[deviceName deleteCharactersInRange:rdiskRange];
 			}
 			// execute hdiutil to eject the device
-			ejectTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/hdiutil" arguments:[NSArray arrayWithObjects:@"eject", deviceName, nil]];
+			ejectTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/hdiutil" arguments:@[@"eject", deviceName]];
 			[ejectTask waitUntilExit];
 		}
 	}
@@ -497,9 +497,8 @@ otherblock();\
 				}
 				RETAINOBJNORETURN(unknownString);
 			}
-			NSLog(@"%@", unknownString);
+			NSLog(@"%@. This may be due to extra arguments passed by the OS or debugger.", unknownString);
 			RELEASEOBJ(unknownString);
-			NSLog(@"This may be due to extra arguments passed by the OS or debugger.");
 		}
 #endif
 		if (!isLaunchable && hasParsedAnArgument) {

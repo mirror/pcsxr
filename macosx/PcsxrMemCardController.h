@@ -7,6 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ARCBridge.h"
+@class PcsxrMemCardArray;
 
 @interface PcsxrMemCardController : NSViewController
 {
@@ -15,10 +17,12 @@
 	IBOutlet NSTextField *memCard1Label;
 	IBOutlet NSTextField *memCard2Label;
 	
-	NSMutableArray *memCard1Array;
-	NSMutableArray *memCard2Array;
+	PcsxrMemCardArray *memCard1Array;
+	PcsxrMemCardArray *memCard2Array;
 	NSTimer *imageAnimateTimer;
 }
+@property (readonly, arcretain) PcsxrMemCardArray *memCard1Array;
+@property (readonly, arcretain) PcsxrMemCardArray *memCard2Array;
 
 - (IBAction)moveBlock:(id)sender;
 - (IBAction)formatCard:(id)sender;
@@ -26,6 +30,4 @@
 - (IBAction)newMemCard:(id)sender;
 - (IBAction)changeMemCard:(id)sender;
 - (void)loadMemoryCardInfoForCard:(int)theCard;
-- (BOOL)isMemoryBlockEmptyOnCard:(int)aCard block:(int)aBlock;
-- (int)countFreeBlocksOnCard:(int)aCard;
 @end
