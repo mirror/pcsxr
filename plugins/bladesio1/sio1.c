@@ -42,10 +42,6 @@ void ConfDlgProc();
 
 /***************************************************************************/
 
-#ifndef CALLBACK
-#define CALLBACK
-#endif
-
 //#define SIO1_DEBUG 1
 
 static char *pluginName	 = N_("sio1Blade");

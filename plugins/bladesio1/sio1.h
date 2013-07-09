@@ -58,6 +58,10 @@ extern char* PLUGLOC(char* toloc);
 #define N_(x) (x)
 #endif
 
+#ifndef CALLBACK
+#define CALLBACK
+#endif
+
 enum {
 	PLAYER_DISABLED = 0,
 	PLAYER_MASTER,
