@@ -702,6 +702,7 @@
 		551A777417869E830052D185 /* dfnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfnet.h; sourceTree = "<group>"; };
 		551A777817869E830052D185 /* unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unix.c; sourceTree = "<group>"; };
 		551A77C01786A2890052D185 /* libTinySDL.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libTinySDL.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		5539965D178BB1B100859644 /* OSXPlugLocalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSXPlugLocalization.h; sourceTree = "<group>"; };
 		5550D2711683C923006C56B5 /* RecentItemsMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecentItemsMenu.h; sourceTree = "<group>"; };
 		5550D2721683C923006C56B5 /* RecentItemsMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecentItemsMenu.m; sourceTree = "<group>"; usesTabs = 1; };
 		55858D2817864D140068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pcsxr.xcconfig; sourceTree = "<group>"; };
@@ -1005,6 +1006,7 @@
 				7161C2970FDED75300225F97 /* ExtendedKeys.h */,
 				02717969167884DF004AED62 /* hotkeys.h */,
 				02717967167884C9004AED62 /* hotkeys.m */,
+				5539965D178BB1B100859644 /* OSXPlugLocalization.h */,
 			);
 			name = MacOSX;
 			sourceTree = "<group>";
@@ -1121,9 +1123,9 @@
 		551A74B017868BE90052D185 /* Bladesio1 */ = {
 			isa = PBXGroup;
 			children = (
-				551A75B917868C200052D185 /* Resources */,
-				551A74BD17868BEA0052D185 /* macsrc */,
 				551A75BA17868C400052D185 /* src */,
+				551A74BD17868BEA0052D185 /* macsrc */,
+				551A75B917868C200052D185 /* Resources */,
 			);
 			path = Bladesio1;
 			sourceTree = "<group>";
