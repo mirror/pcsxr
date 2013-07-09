@@ -75,7 +75,7 @@ Config conf;
 void LoadConf();
 void SaveConf();
 
-long sock;
+int sock;
 char *PadSendData;
 char *PadRecvData;
 char PadSendSize;
@@ -100,7 +100,7 @@ int sockPing();
 int ShowPauseDlg();
 void SysMessage(const char *fmt, ...);
 
-int SEND(const void *pData, int Size, int Mode);
-int RECV(void *pData, int Size, int Mode);
+size_t SEND(const void *pData, int Size, int Mode);
+size_t RECV(void *pData, int Size, int Mode);
 
 #endif

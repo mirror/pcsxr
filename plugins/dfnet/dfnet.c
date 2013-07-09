@@ -38,9 +38,9 @@ long CALLBACK NETinit() {
 	return sockInit();
 }
 
-int SEND(const void *buf, int Size, int Mode) {
-	int bytes;
-	int count = 0;
+size_t SEND(const void *buf, int Size, int Mode) {
+	long bytes;
+	long count = 0;
 	const char *pData = (const char *)buf;
 
 	if (Mode & PSE_NET_NONBLOCKING) { // NONBLOCKING
@@ -69,9 +69,9 @@ int SEND(const void *buf, int Size, int Mode) {
 	return count;
 }
 
-int RECV(void *buf, int Size, int Mode) {
-	int bytes;
-	int count = 0;
+size_t RECV(void *buf, int Size, int Mode) {
+	long bytes;
+	long count = 0;
 	char *pData = (char *)buf;
 
 	if (Mode & PSE_NET_NONBLOCKING) { // NONBLOCKING
@@ -100,7 +100,7 @@ int RECV(void *buf, int Size, int Mode) {
 }
 
 long CALLBACK NETopen(unsigned long *gpuDisp) {
-	int ret = sockOpen();
+	long ret = sockOpen();
 
 	struct sockaddr_in address;
 
@@ -183,7 +183,7 @@ long CALLBACK NETopen(unsigned long *gpuDisp) {
 
 	PadSendData = (char *)malloc(PadCountMax * 128);
 	if (PadSendData == NULL) {
-		SysMessage(_("Error allocating memory!\n")); return -1;
+		SysMessage("%s", _("Error allocating memory!\n")); return -1;
 	}
 	memset(PadSendData, 0xff, PadCountMax);
 
