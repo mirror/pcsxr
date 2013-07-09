@@ -235,6 +235,7 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 	// stop the old plugin and start the new one
 	if (pluginPtr) {
 		[pluginPtr shutdownAs:type];
+		//NOTE: We can ignore Clang's "Incorrect Decrement" here
 		RELEASEOBJ(pluginPtr);
 	}
 	

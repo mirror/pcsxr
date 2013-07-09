@@ -14,7 +14,6 @@
 	@private
 	NSArray *rawArray;
 	int cardNumber;
-	NSURL *fileURL;
 }
 
 - (id)initWithMemoryCardNumber:(int)carNum;

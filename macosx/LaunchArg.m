@@ -27,7 +27,7 @@
 	if (_theBlock == theBlock) {
 		return;
 	}
-	dispatch_block_t tmpBlock = _theBlock
+	dispatch_block_t tmpBlock = _theBlock;
 	_theBlock = [theBlock copy];
 	[tmpBlock release];
 #endif

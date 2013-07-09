@@ -48,7 +48,7 @@ extern NSString *const memCardChangeNumberKey;
 - (IBAction)setVideoType:(id)sender;
 
 - (NSString *)keyForSender:(id)sender;
-+ (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile DEPRECATED_ATTRIBUTE;
++ (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile;
 + (void)setMemoryCard:(int)theCard toURL:(NSURL *)theURL;
 
 + (void)mcdNewClicked:(id)sender;
