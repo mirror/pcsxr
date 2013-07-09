@@ -121,14 +121,18 @@ void ReadConfig()
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
 
 	NSString *theAddress = [ipAddressField stringValue];
-	if ([theAddress lengthOfBytesUsingEncoding:NSASCIIStringEncoding] > (sizeof(settings.ip) - 1)) {
-		NSBeginAlertSheet(@"Address too long", nil, nil, nil, [self window], nil, NULL, NULL, NULL, @"The address is too long. Try to use only the IP address and not a host name.");
+	NSInteger asciiLen = [theAddress lengthOfBytesUsingEncoding:NSASCIIStringEncoding];
+	if (asciiLen > (sizeof(settings.ip) - 1)) {
+		NSBeginAlertSheet(@"Address too long", nil, nil, nil, [self window], nil, NULL, NULL, NULL, @"The address is too long.\n\nTry to use only the IP address and not a host name.");
+		return;
+	} else if (asciiLen == 0) {
+		NSBeginAlertSheet(@"Blank address", nil, nil, nil, [self window], nil, NULL, NULL, NULL, @"The address specified is either blank, or can't be converted to ASCII.\n\nTry connecting directly using the IP address using latin numerals.");
 		return;
 	}
 	
 	[writeDic setObject:(([enabledButton state]  == NSOnState) ? @YES : @NO) forKey:kSioEnabled];
 	[writeDic setObject:theAddress forKey:kSioIPAddress];
-	[writeDic setObject:@((unsigned short)[portField intValue]) forKey:kSioPort];
+	[writeDic setObject:@((u16)[portField intValue]) forKey:kSioPort];
 	
 	{
 		int player;
@@ -202,12 +206,5 @@ void ReadConfig()
 
 @end
 
-char* PLUGLOC(char *toloc)
-{
-	NSBundle *mainBundle = [NSBundle bundleForClass:[PluginConfigController class]];
-	NSString *origString = nil, *transString = nil;
-	origString = @(toloc);
-	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
-	return (char*)[transString UTF8String];
-}
-
+#import "OSXPlugLocalization.h"
+PLUGLOCIMP([PluginConfigController class]);

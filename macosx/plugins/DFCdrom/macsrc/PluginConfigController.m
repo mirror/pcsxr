@@ -165,12 +165,5 @@ void ReadConfig()
 
 @end
 
-char* PLUGLOC(char *toloc)
-{
-	NSBundle *mainBundle = [NSBundle bundleForClass:[PluginConfigController class]];
-	NSString *origString = nil, *transString = nil;
-	origString = @(toloc);
-	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
-	return (char*)[transString UTF8String];
-}
-
+#import "OSXPlugLocalization.h"
+PLUGLOCIMP([PluginConfigController class]);

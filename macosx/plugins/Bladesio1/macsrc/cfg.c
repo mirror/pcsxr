@@ -37,14 +37,3 @@ void settingsRead() {
 
 	ReadConfig();
 }
-
-#if 0
-extern long SIO1configure() {
-	ConfDlgProc();
-	return 0;
-}
-
-extern void SIO1about() {
-	AboutDlgProc();
-}
-#endif

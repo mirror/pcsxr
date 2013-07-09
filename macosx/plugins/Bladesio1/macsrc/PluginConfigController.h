@@ -17,7 +17,6 @@
 - (IBAction)toggleEnabled:(id)sender;
 - (IBAction)resetPreferences:(id)sender;
 
-
 - (void)loadValues;
 
 @end

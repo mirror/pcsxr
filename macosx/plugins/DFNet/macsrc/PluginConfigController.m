@@ -23,9 +23,9 @@
 #include "dfnet.h"
 #import "ARCBridge.h"
 
-NSString * const kIPADDRKEY = @"IP Address";
-NSString * const kIPPORT = @"IP Port";
-NSString * const kPLAYERNUM = @"Player Number";
+#define kIPADDRKEY @"IP Address"
+#define kIPPORT @"IP Port"
+#define kPLAYERNUM @"Player Number"
 
 #define APP_ID @"net.codeplex.pcsxr.DFNet"
 #define PrefsKey APP_ID @" Settings"
@@ -90,9 +90,9 @@ void ReadConfig()
 	
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 								[NSDictionary dictionaryWithObjectsAndKeys:
-								 @"127.0.0.1",kIPADDRKEY,
-								 [NSNumber numberWithInt:33306], kIPPORT,
-								 [NSNumber numberWithInt:1], kPLAYERNUM,
+								 @"127.0.0.1", kIPADDRKEY,
+								 @((unsigned short)33306), kIPPORT,
+								 @1, kPLAYERNUM,
 								 nil], PrefsKey, nil]];
 	
 	keyValues = [defaults dictionaryForKey:PrefsKey];
@@ -113,10 +113,21 @@ void ReadConfig()
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
+	NSString *theAddress = [ipAddress  stringValue];
+	NSInteger asciiLen = [theAddress lengthOfBytesUsingEncoding:NSASCIIStringEncoding];
+	if (asciiLen > (sizeof(conf.ipAddress) - 1)) {
+		NSBeginAlertSheet(@"Address too long", nil, nil, nil, [self window], nil, NULL, NULL, NULL, @"The address is too long.\n\nTry to use only the IP address and not a host name.");
+		return;
+	} else if (asciiLen == 0) {
+		NSBeginAlertSheet(@"Blank address", nil, nil, nil, [self window], nil, NULL, NULL, NULL, @"The address specified is either blank, or can't be converted to ASCII.\n\nTry connecting directly using the IP address using latin numerals.");
+		return;
+	}
+
+	
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:PrefsKey]];
-	[writeDic setObject:[NSNumber numberWithInt:[portNum intValue]] forKey:kIPPORT];
-	[writeDic setObject:[NSNumber numberWithInt:[playerNum intValue]] forKey:kPLAYERNUM];
-	[writeDic setObject:[ipAddress  stringValue] forKey:kIPADDRKEY];
+	[writeDic setObject:@((unsigned short)[portNum intValue]) forKey:kIPPORT];
+	[writeDic setObject:@([playerNum intValue]) forKey:kPLAYERNUM];
+	[writeDic setObject:theAddress forKey:kIPADDRKEY];
 
 	// write to defaults
 	[defaults setObject:writeDic forKey:PrefsKey];
@@ -135,18 +146,11 @@ void ReadConfig()
 	NSDictionary *keyValues = [defaults dictionaryForKey:PrefsKey];
 
 	[ipAddress setStringValue:[keyValues objectForKey:kIPADDRKEY]];
-	[portNum setStringValue:[[keyValues objectForKey:kIPPORT] stringValue]];
-	[playerNum setStringValue:[[keyValues objectForKey:kPLAYERNUM] stringValue]];
+	[portNum setIntValue:[[keyValues objectForKey:kIPPORT] unsignedShortValue]];
+	[playerNum setIntValue:[[keyValues objectForKey:kPLAYERNUM] intValue]];
 }
 
 @end
 
-char* PLUGLOC(char *toloc)
-{
-	NSBundle *mainBundle = [NSBundle bundleForClass:[PluginConfigController class]];
-	NSString *origString = nil, *transString = nil;
-	origString = @(toloc);
-	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
-	return (char*)[transString UTF8String];
-}
-
+#import "OSXPlugLocalization.h"
+PLUGLOCIMP([PluginConfigController class]);
