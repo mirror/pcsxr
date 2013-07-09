@@ -36,7 +36,7 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	pluginList = [[NSMutableArray alloc] initWithCapacity:20];
 
-	activeGpuPlugin = activeSpuPlugin = activeCdrPlugin = activePadPlugin = activeNetPlugin = nil;
+	activeGpuPlugin = activeSpuPlugin = activeCdrPlugin = activePadPlugin = activeNetPlugin = activeSIO1Plugin = nil;
 	
 	missingPlugins = NO;
 	for (i = 0; i < sizeof(typeList) / sizeof(typeList[0]); i++) {
@@ -200,7 +200,7 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 		case PSE_LT_SPU: return activeSpuPlugin; break;
 		case PSE_LT_PAD: return activePadPlugin; break;
 		case PSE_LT_NET: return activeNetPlugin; break;
-		case PSE_LT_SIO1: return activeNetPlugin; break;
+		case PSE_LT_SIO1: return activeSIO1Plugin; break;
 	}
 	
 	return nil;

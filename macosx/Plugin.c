@@ -42,6 +42,13 @@ void gpuShowPic() {
 }
 
 void PADhandleKey(int key) {
+	//TODO: get these set up properly!
+	GPU_keypressed(key);
+#ifdef ENABLE_SIO1API
+	SIO1_keypressed(key);
+#endif
+	if (Config.UseNet) NET_keypressed(key);
+
 }
 
 long PAD1__open(void) {
@@ -51,8 +58,6 @@ long PAD1__open(void) {
 long PAD2__open(void) {
 	return PAD2_open(&gpuDisp);
 }
-
-void OnFile_Exit();
 
 void SignalExit(int sig) {
 	ClosePlugins();
@@ -88,6 +93,11 @@ int _OpenPlugins() {
 	if (ret < 0) { SysMessage("%s", _("Error Opening PAD2 Plugin")); return -1; }
     PAD2_registerVibration(GPU_visualVibration);
     PAD2_registerCursor(GPU_cursor);
+#ifdef ENABLE_SIO1API
+	ret = SIO1_open(&gpuDisp);
+	if (ret < 0) { SysMessage("%s", _("Error opening SIO1 plugin!")); return -1; }
+	SIO1_registerCallback(SIO1irq);
+#endif
 
 	if (Config.UseNet && !NetOpened) {
 		netInfo info;
@@ -174,6 +184,10 @@ void ClosePlugins() {
 	if (ret < 0) { SysMessage("%s", _("Error Closing PAD2 Plugin")); return; }
 	ret = GPU_close();
 	if (ret < 0) { SysMessage("%s", _("Error Closing GPU Plugin")); return; }
+#ifdef ENABLE_SIO1API
+	ret = SIO1_close();
+	if (ret < 0) { SysMessage(_("Error closing SIO1 plugin!")); return; }
+#endif
 
 	if (Config.UseNet) {
 		NET_pause();
@@ -188,6 +202,9 @@ void ResetPlugins() {
 	SPU_shutdown();
 	PAD1_shutdown();
 	PAD2_shutdown();
+#ifdef ENABLE_SIO1API
+	SIO1_shutdown();
+#endif
 	if (Config.UseNet) NET_shutdown();
 
 	ret = CDR_init();
@@ -200,6 +217,11 @@ void ResetPlugins() {
 	if (ret < 0) { SysMessage(_("PAD1init error: %d"), ret); return; }
 	ret = PAD2_init(2);
 	if (ret < 0) { SysMessage(_("PAD2init error: %d"), ret); return; }
+#ifdef ENABLE_SIO1API
+	ret = SIO1_init();
+	if (ret < 0) { SysMessage(_("SIO1init error: %d!"), ret); return; }
+#endif
+
 	if (Config.UseNet) {
 		ret = NET_init();
 		if (ret < 0) { SysMessage(_("NETinit error: %d"), ret); return; }
