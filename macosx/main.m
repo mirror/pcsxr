@@ -207,8 +207,13 @@ void SysCloseLibrary(void *lib) {
 
 // Called periodically from the emu thread
 void SysUpdate() {
+#if 0
+	PADhandleKey(PAD1_keypressed());
+	PADhandleKey(PAD2_keypressed());
+#else
 	PAD1_keypressed();
 	PAD2_keypressed();
+#endif
 	[emuThread handleEvents];
 }
 

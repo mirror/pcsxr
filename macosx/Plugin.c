@@ -186,7 +186,7 @@ void ClosePlugins() {
 	if (ret < 0) { SysMessage("%s", _("Error Closing GPU Plugin")); return; }
 #ifdef ENABLE_SIO1API
 	ret = SIO1_close();
-	if (ret < 0) { SysMessage(_("Error closing SIO1 plugin!")); return; }
+	if (ret < 0) { SysMessage("%s", _("Error closing SIO1 plugin!")); return; }
 #endif
 
 	if (Config.UseNet) {
