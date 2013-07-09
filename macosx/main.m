@@ -64,7 +64,15 @@ int SysInit() {
 	if (!sysInited) {
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
-		emuLog = fopen("emuLog.txt","wb");
+		NSFileManager *manager = [NSFileManager defaultManager];
+		NSURL *supportURL = [manager URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+		NSURL *logFolderURL = [supportURL URLByAppendingPathComponent:@"Logs/PCSXR"];
+		if (![logFolderURL checkResourceIsReachableAndReturnError:NULL])
+			[manager createDirectoryAtPath:[logFolderURL path] withIntermediateDirectories:YES attributes:nil error:NULL];
+		//We use the log extension so that OS X's console app can open it by default.
+		NSURL *logFileURL = [logFolderURL URLByAppendingPathComponent:@"emuLog.log"];
+
+		emuLog = fopen([[logFileURL path] fileSystemRepresentation],"wb");
 #else
 		emuLog = stdout;
 #endif
@@ -85,7 +93,7 @@ int SysInit() {
 
 	IOReturn success = IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, CFSTR("PSX Emu Running"), &powerAssertion);
 	if (success != kIOReturnSuccess) {
-		NSLog(@"Unable to stop sleep, error code %d", success);
+		SysPrintf("Unable to stop sleep, error code %d", success);
 	}
     
     attachHotkeys();
@@ -147,7 +155,7 @@ const char *SysLibError() {
 #ifdef DEBUG
 	const char *theErr = dlerror();
 	if (theErr) {
-		NSLog(@"Error loading binary: %s", theErr);
+		SysPrintf("Error loading binary: %s\n", theErr);
 	}
 	return theErr;
 #else
@@ -206,6 +214,6 @@ char* Pcsxr_locale_text(char* toloc){
 	NSBundle *mainBundle = [NSBundle mainBundle];
 	NSString *origString = nil, *transString = nil;
 	origString = @(toloc);
-	transString = [mainBundle localizedStringForKey:origString value:nil table:nil];
+	transString = [mainBundle localizedStringForKey:origString value:@"" table:nil];
 	return (char*)[transString UTF8String];
 }

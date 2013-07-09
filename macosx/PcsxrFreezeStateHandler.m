@@ -18,7 +18,8 @@
 {
 	static NSArray *utisupport = nil;
 	if (utisupport == nil) {
-		utisupport = RETAINOBJ([NSArray arrayWithObject:@"com.codeplex.pcsxr.freeze"]);
+		utisupport = @[@"com.codeplex.pcsxr.freeze"];
+		RETAINOBJNORETURN(utisupport);
 	}
 	return utisupport;
 }

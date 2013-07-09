@@ -21,10 +21,7 @@
 @end
 
 @implementation PcsxrDiscHandler
-
 @synthesize discURL = _discURL;
-@synthesize discPath;
-
 - (NSURL*)discURL
 {
 	if (!_discURL) {
@@ -33,11 +30,14 @@
 	return _discURL;
 }
 
+@synthesize discPath;
+
 + (NSArray *)supportedUTIs
 {
 	static NSArray *utisupport = nil;
 	if (utisupport == nil) {
-		utisupport = [[NSArray alloc] initWithObjects:@"com.alcohol-soft.mdfdisc", @"com.goldenhawk.cdrwin-cuesheet", @"com.apple.disk-image-ndif", @"public.iso-image", @"com.sony.psp.firmware", @"com.codeplex.pcsxr.compressed-bin-image", nil];
+		utisupport = @[@"com.alcohol-soft.mdfdisc", @"com.goldenhawk.cdrwin-cuesheet", @"com.apple.disk-image-ndif", @"public.iso-image", @"com.sony.psp.firmware", @"com.codeplex.pcsxr.compressed-bin-image"];
+		RETAINOBJNORETURN(utisupport);
 	}
 	return utisupport;
 }

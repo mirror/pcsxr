@@ -160,7 +160,6 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 	}
     
 	/* show the window */
-	//[cheatWindow makeKeyAndOrderFront:sender];
 	[cheatController showWindow:sender];
 }
 
@@ -175,7 +174,6 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 	}
 
 	/* show the window */
-	//[preferenceWindow makeKeyAndOrderFront:sender];
 	[preferencesController showWindow:sender];
 }
 
@@ -339,20 +337,17 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
 	self.skipFiles = nil;
-	BOOL enableLogging = NO;
-#ifdef DEBUG
-	enableLogging = YES;
-	//Just in case it didn't get set.
-	Config.PsxOut = TRUE;
-#endif
-	[[NSUserDefaults standardUserDefaults] setBool:enableLogging forKey:@"ConsoleOutput"];
 }
 
 static void ParseErrorStr(NSString *errStr) __dead2;
 static void ParseErrorStr(NSString *errStr)
 {
+#if 1
+	SysMessage("Parsing error: %s\n\nPlease check the command line options and try again.\n\nPCSXR will now quit.\n", [errStr UTF8String]);
+#else
 	NSLog(@"%@", errStr);
-	NSRunCriticalAlertPanel(@"Parsing error", @"%@\n\nPlease check the command line options and try again", nil, nil, nil, errStr);
+	NSRunCriticalAlertPanel(@"Parsing error", @"%@\n\nPlease check the command line options and try again.\n\nPCSXR will now quit.", nil, nil, nil, errStr);
+#endif
 	ShowHelpAndExit(stderr, EXIT_FAILURE);
 }
 
@@ -380,6 +375,8 @@ otherblock();\
 #define kPCSXRArgumentBIOS @"--bios"
 #define kPCSXRArgumentISO @"--iso"
 #define kPCSXRArgumentMcd @"--mcd"
+#define kPCSXRArgumentMcd1 kPCSXRArgumentMcd @"1"
+#define kPCSXRArgumentMcd2 kPCSXRArgumentMcd @"2"
 #define kPCSXRArgumentFreeze @"--freeze"
 #define kPCSXRArgumentExitAtClose @"--exitAtClose"
 
@@ -458,7 +455,7 @@ otherblock();\
 		void (^mcdBlock)(int mcdNumber) = ^(int mcdnumber){
 			hasParsedAnArgument = YES;
 			if (memcardHandled & (1 << mcdnumber)) {
-				NSLog(@"Memory card %i has already been defined. The latest one passed will be used.", mcdnumber);
+				SysPrintf("Memory card %i has already been defined. The latest one passed will be used.\n", mcdnumber);
 			} else {
 				memcardHandled |= (1 << mcdnumber);
 			}
@@ -478,6 +475,7 @@ otherblock();\
 			NSString *path = FileTestBlock();
 			dispatch_block_t runtimeBlock = ^{
 				if (![EmuThread isRunBios]) {
+					//Make sure the emulator is running
 					sleep(2);
 					[EmuThread defrostAt:path];
 				}
@@ -488,9 +486,6 @@ otherblock();\
 		};
 
 		BOOL hasFileTestBlock = NO;
-
-		NSString *mcd1NSStr = [kPCSXRArgumentMcd stringByAppendingFormat:@"%i", 1];
-		NSString *mcd2NSStr = [kPCSXRArgumentMcd stringByAppendingFormat:@"%i", 2];
 		
 		for (__block int i = 1; i < [progArgs count]; i++) {
 			if (!hasFileTestBlock)
@@ -516,8 +511,8 @@ otherblock();\
 			HandleArgElse(kPCSXRArgumentCDROM, YES, cdromBlock)
 			HandleArgElse(kPCSXRArgumentBIOS, YES, biosBlock)
 			HandleArgElse(kPCSXRArgumentExitAtClose, NO, emuCloseAtEnd)
-			HandleArgElse(mcd1NSStr, NO, ^{mcdBlock(1);})
-			HandleArgElse(mcd2NSStr, NO, ^{mcdBlock(2);})
+			HandleArgElse(kPCSXRArgumentMcd1, NO, ^{mcdBlock(1);})
+			HandleArgElse(kPCSXRArgumentMcd2, NO, ^{mcdBlock(2);})
 			HandleArgElse(kPCSXRArgumentFreeze, NO, freezeBlock)
 			else {
 				[unknownOptions addObject:[progArgs objectAtIndex:i]];
@@ -528,14 +523,19 @@ otherblock();\
 			//As there doesn't seem to be a Cocoa/Objective-C method like this...
 			NSString *unknownString = CFBridgingRelease(CFStringCreateByCombiningStrings(kCFAllocatorDefault, BRIDGE(CFArrayRef, unknownOptions), CFSTR(" ")));
 			
-			NSLog(@"The following options weren't recognized by PCSX-R: %@. This may be due to extra arguments passed by the OS or debugger.", unknownString);
+			SysPrintf("The following options weren't recognized by PCSX-R: %s. This may be due to extra arguments passed by the OS or debugger.", [unknownString UTF8String]);
 		}
 #endif
 		if (!isLaunchable && hasParsedAnArgument) {
-			NSString *tmpStr = @"";
-			NSString *arg = CFBridgingRelease(CFStringCreateByCombiningStrings(kCFAllocatorDefault, BRIDGE(CFArrayRef, progArgs), CFSTR(" ")));
+			NSMutableArray *mutProgArgs = [NSMutableArray arrayWithArray:progArgs];
+			NSString *appRawPath = RETAINOBJ([mutProgArgs objectAtIndex:0]);
+			//Remove the app file path from the array
+			[mutProgArgs removeObjectAtIndex:0];
+			NSString *arg = CFBridgingRelease(CFStringCreateByCombiningStrings(kCFAllocatorDefault, BRIDGE(CFArrayRef, mutProgArgs), CFSTR(" ")));
+			NSString *recognizedArgs = CFBridgingRelease(CFStringCreateByCombiningStrings(kCFAllocatorDefault, BRIDGE(CFArrayRef, [argDict allKeys]), CFSTR(" ")));
 			
-			tmpStr = [NSString stringWithFormat:@"A launch command wasn't found in the command line and an argument that PCSX-R recognizes was: %@\n\nThe valid launch commands are --iso, --cdrom, and --bios.", arg];
+			NSString *tmpStr = [NSString stringWithFormat:@"A launch command wasn't found in the command line and an argument that PCSX-R recognizes was: %@.\nThe following command line arguments were passed with the application launch file at %@: %@.\n\nThe valid launch commands are %@, %@, and %@.", recognizedArgs, appRawPath, arg, kPCSXRArgumentISO, kPCSXRArgumentCDROM, kPCSXRArgumentBIOS];
+			RELEASEOBJ(appRawPath);
 			ParseErrorStr(tmpStr);
 		} else if (hasParsedAnArgument){
 			NSArray *argArray = [[argDict allValues] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
@@ -561,6 +561,8 @@ otherblock();\
 - (void)dealloc
 {
 	[pluginList release];
+	self.skipFiles = nil;
+	
 	[super dealloc];
 }
 #endif
@@ -646,7 +648,7 @@ otherblock();\
 	if (str) {
 		NSString *tmpNSStr = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:str length:strlen(str)];
 		if (!tmpNSStr) {
-			tmpNSStr = [NSString stringWithCString:str encoding:NSUTF8StringEncoding];
+			tmpNSStr = @(str);
 		}
 		[defaults setURL:[NSURL fileURLWithPath:tmpNSStr isDirectory:NO] forKey:defaultKey];
 		return;
@@ -766,6 +768,7 @@ otherblock();\
 		strcpy(Config.BiosDir, "Bios/");
 		strcpy(Config.PatchesDir, "Patches/");
 
+		//NSString constants don't need to be retained/released. In fact, retain/releasing them does nothing.
 		saveStatePath = @"sstates";
 	}
 
@@ -815,7 +818,7 @@ otherblock();\
 	}
 	
 	if (![[NSFileManager defaultManager] fileExistsAtPath:filename]) {
-		NSLog(@"Nonexistant file %@ was passed to open.", filename);
+		SysPrintf("Nonexistant file %s was passed to open.\n", [filename fileSystemRepresentation]);
 		return NO;
 	}
 	
@@ -827,7 +830,8 @@ otherblock();\
 	}
 	static NSArray *handlers = nil;
 	if (handlers == nil) {
-		handlers = [[NSArray alloc] initWithObjects:[PcsxrPluginHandler class], [PcsxrMemCardHandler class], [PcsxrFreezeStateHandler class], [PcsxrDiscHandler class], nil];
+		handlers = @[[PcsxrPluginHandler class], [PcsxrMemCardHandler class], [PcsxrFreezeStateHandler class], [PcsxrDiscHandler class]];
+		RETAINOBJNORETURN(handlers);
 	}
 	BOOL isHandled = NO;
 	for (Class fileHandler in handlers) {

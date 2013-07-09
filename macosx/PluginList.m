@@ -130,7 +130,7 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 	
 	// check the we have the needed plugins
 	missingPlugins = NO;
-	for (i=0; i < sizeof(*typeList); i++) {
+	for (i=0; i < 4 /*sizeof(*typeList)*/; i++) {
 		PcsxrPlugin *plugin = [self activePluginForType:typeList[i]];
 		if (nil == plugin) {
 			NSArray *list = [self pluginsForType:typeList[i]];

@@ -17,7 +17,8 @@
 {
 	static NSArray *utisupport = nil;
 	if (utisupport == nil) {
-		utisupport = RETAINOBJ([NSArray arrayWithObject:@"com.codeplex.pcsxr.memcard"]);
+		utisupport = @[@"com.codeplex.pcsxr.memcard"];
+		RETAINOBJNORETURN(utisupport);
 	}
 	return utisupport;
 }
@@ -34,8 +35,7 @@
 
 - (id)init
 {
-	self = [self initWithWindowNibName:@"PcsxrMemCardDocument"];
-	return self;
+	return self = [self initWithWindowNibName:@"PcsxrMemCardDocument"];
 }
 
 - (void)windowDidLoad

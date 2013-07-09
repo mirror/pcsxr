@@ -36,7 +36,7 @@
     } else if ([ident isEqualToString:@"COL_ENABLE"]) {
         return @(Cheats[idx].Enabled ? NSOnState : NSOffState);
     }
-    NSLog(@"Unknown column identifier: %@", ident);
+    SysPrintf("Unknown column identifier: %s\n", [[ident description] UTF8String]);
     return nil;
 }
 

@@ -204,8 +204,8 @@ void ReadConfig(void)
 	[writeDic setObject:[NSNumber numberWithBool:[vSync intValue]] forKey:@"VSync"];
 	[writeDic setObject:[NSNumber numberWithBool:[hackEnable intValue]] forKey:@"Enable Hacks"];
 	[writeDic setObject:[NSNumber numberWithBool:[shaders intValue]] forKey:@"UseShader"];
-	[writeDic setObject:[NSNumber numberWithInt:[shaderQualitySelector indexOfSelectedItem] + 1] forKey:@"ShaderQuality"];
-	[writeDic setObject:[NSNumber numberWithInt:[ditherMode indexOfSelectedItem]] forKey:@"Dither Mode"];
+	[writeDic setObject:[NSNumber numberWithInteger:[shaderQualitySelector indexOfSelectedItem] + 1] forKey:@"ShaderQuality"];
+	[writeDic setObject:[NSNumber numberWithInteger:[ditherMode indexOfSelectedItem]] forKey:@"Dither Mode"];
 	
 	unsigned int hackValues = 0;
 	NSArray *views = [hacksView subviews];

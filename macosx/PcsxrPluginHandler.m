@@ -16,7 +16,8 @@
 {
 	static NSArray *utisupport = nil;
 	if (utisupport == nil) {
-		utisupport = RETAINOBJ([NSArray arrayWithObject:@"com.codeplex.pcsxr.plugin"]);
+		utisupport = @[@"com.codeplex.pcsxr.plugin"];
+		RETAINOBJNORETURN(utisupport);
 	}
 	return utisupport;
 }

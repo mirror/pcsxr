@@ -67,7 +67,7 @@ static pthread_mutex_t eventMutex;
 	int res = CheckCdrom();
 	if (res == -1) {
 		ClosePlugins();
-		SysMessage(_("Could not check CD-ROM!\n"));
+		SysMessage("%s", _("Could not check CD-ROM!\n"));
 		goto done;
 	}
 	
@@ -305,16 +305,7 @@ done:
 + (void)pauseSafeWithBlock:(void (^)(BOOL))theBlock
 {
 	dispatch_async(dispatch_get_global_queue(0, 0), ^{
-		BOOL wasPaused = NO;
-		if ((paused == 2) || ![EmuThread active])
-		{
-			wasPaused = YES;
-		} else {
-			[EmuThread pause];
-			while ([EmuThread isPaused] != 2) [NSThread sleepUntilDate:[[NSDate date] addTimeInterval:0.05]];
-			wasPaused = NO;
-		}
-		
+		BOOL wasPaused = [self pauseSafe];
 		dispatch_async(dispatch_get_main_queue(), ^{theBlock(wasPaused);});
 	});
 }

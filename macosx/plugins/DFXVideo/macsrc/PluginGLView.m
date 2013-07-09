@@ -695,7 +695,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 			}
 			else
 			{
-				int LineOffset,SurfOffset;
+				long LineOffset,SurfOffset;
 				GLuint * SRCPtr = (GLuint *)(psxVuw + (y << 10) + x);
 				GLuint * DSTPtr =
 				((GLuint *)surf) + (PreviousPSXDisplay.Range.x0 >> 1);

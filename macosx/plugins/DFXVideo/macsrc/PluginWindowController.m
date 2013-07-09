@@ -118,8 +118,8 @@ NSRect windowFrame;
 			//[window orderOut:self];
 		}
 		
-		int width = CGDisplayPixelsWide(display);
-		int height = CGDisplayPixelsHigh(display);
+		size_t width = CGDisplayPixelsWide(display);
+		size_t height = CGDisplayPixelsHigh(display);
 		
 		// assume square pixel ratio on the monitor
 		if ((width*3)/4 < height) {

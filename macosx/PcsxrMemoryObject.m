@@ -25,7 +25,6 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 @property (readwrite) int startingIndex;
 @property (readwrite) int blockSize;
 
-
 @property (readwrite, nonatomic) NSInteger memImageIndex;
 @property (arcstrong) NSArray *memImages;
 @property (readwrite) PCSXRMemFlags flagNameIndex;
@@ -148,9 +147,7 @@ static NSString *MemLabelEndLink;
 		return memFlagFree;
 	
 	//Xcode complains unless we do this...
-#ifdef DEBUG
-	NSLog(@"Unknown flag ");
-#endif
+	SysPrintf("Unknown flag %x\n", blockFlags);
 	return memFlagFree;
 }
 
@@ -170,9 +167,7 @@ static NSString *MemLabelEndLink;
 			self.sjisName = [NSString stringWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
 			
 			if ([englishName isEqualToString:sjisName]) {
-#ifdef DEBUG
-				NSLog(@"English name and SJIS name are the same: %@. Replacing the sjis string with the English string.", englishName);
-#endif
+				SysPrintf("English name and sjis name are the same: %s. Replacing the sjis string with the English string.\n", [englishName UTF8String]);
 				self.sjisName = self.englishName;
 			}
 			@autoreleasepool {

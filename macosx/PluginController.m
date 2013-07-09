@@ -76,8 +76,8 @@
 #if !__has_feature(objc_arc)
 - (void)dealloc
 {
-	if (plugins) [plugins release];
-	if (defaultKey) [defaultKey release];
+	[plugins release];
+	[defaultKey release];
 	[super dealloc];
 }
 #endif

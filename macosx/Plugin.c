@@ -74,18 +74,18 @@ int _OpenPlugins() {
 	GPU_clearDynarec(clearDynarec);
 
 	ret = CDR_open();
-	if (ret < 0) { SysMessage(_("Error Opening CDR Plugin")); return -1; }
+	if (ret < 0) { SysMessage("%s", _("Error Opening CDR Plugin")); return -1; }
 	ret = SPU_open();
-	if (ret < 0) { SysMessage(_("Error Opening SPU Plugin")); return -1; }
+	if (ret < 0) { SysMessage("%s", _("Error Opening SPU Plugin")); return -1; }
 	SPU_registerCallback(SPUirq);
 	ret = GPU_open(&gpuDisp, "PCSXR", NULL);
-	if (ret < 0) { SysMessage(_("Error Opening GPU Plugin")); return -1; }
+	if (ret < 0) { SysMessage("%s", _("Error Opening GPU Plugin")); return -1; }
 	ret = PAD1_open(&gpuDisp);
-	if (ret < 0) { SysMessage(_("Error Opening PAD1 Plugin")); return -1; }
+	if (ret < 0) { SysMessage("%s", _("Error Opening PAD1 Plugin")); return -1; }
     PAD1_registerVibration(GPU_visualVibration);
     PAD1_registerCursor(GPU_cursor);
 	ret = PAD2_open(&gpuDisp);
-	if (ret < 0) { SysMessage(_("Error Opening PAD2 Plugin")); return -1; }
+	if (ret < 0) { SysMessage("%s", _("Error Opening PAD2 Plugin")); return -1; }
     PAD2_registerVibration(GPU_visualVibration);
     PAD2_registerCursor(GPU_cursor);
 
@@ -165,15 +165,15 @@ void ClosePlugins() {
 	//signal(SIGINT, SIG_DFL);
 	//signal(SIGPIPE, SIG_DFL);
 	ret = CDR_close();
-	if (ret < 0) { SysMessage(_("Error Closing CDR Plugin")); return; }
+	if (ret < 0) { SysMessage("%s", _("Error Closing CDR Plugin")); return; }
 	ret = SPU_close();
-	if (ret < 0) { SysMessage(_("Error Closing SPU Plugin")); return; }
+	if (ret < 0) { SysMessage("%s", _("Error Closing SPU Plugin")); return; }
 	ret = PAD1_close();
-	if (ret < 0) { SysMessage(_("Error Closing PAD1 Plugin")); return; }
+	if (ret < 0) { SysMessage("%s", _("Error Closing PAD1 Plugin")); return; }
 	ret = PAD2_close();
-	if (ret < 0) { SysMessage(_("Error Closing PAD2 Plugin")); return; }
+	if (ret < 0) { SysMessage("%s", _("Error Closing PAD2 Plugin")); return; }
 	ret = GPU_close();
-	if (ret < 0) { SysMessage(_("Error Closing GPU Plugin")); return; }
+	if (ret < 0) { SysMessage("%s", _("Error Closing GPU Plugin")); return; }
 
 	if (Config.UseNet) {
 		NET_pause();

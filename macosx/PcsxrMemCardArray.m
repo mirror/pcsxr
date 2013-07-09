@@ -22,8 +22,6 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 	// data
 	memmove(to + (dsti + 1) * 1024 * 8, from + (srci+1) * 1024 * 8, 1024 * 8);
 	SaveMcd(str, to, (dsti + 1) * 1024 * 8, 1024 * 8);
-	
-	//printf("data = %s\n", from + (srci+1) * 128);
 }
 
 static inline char* BlankHeader()
@@ -58,7 +56,6 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 {
 	// header
 	char *header = BlankHeader();
-	
 	memcpy(to + (dsti + 1) * 128, header, 128);
 	SaveMcd(str, to, (dsti + 1) * 128, 128);
 	
@@ -179,9 +176,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 - (BOOL)moveBlockAtIndex:(int)idx toMemoryCard:(PcsxrMemCardArray*)otherCard
 {
 	if (idx == [rawArray count]) {
-#ifdef DEBUG
-		NSLog(@"Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"move\" the free blocks");
-#endif
+		SysPrintf("Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"move\" the free blocks. We don't want to do this.\n");
 		return NO;
 	}
 	PcsxrMemoryObject *tmpObj = [rawArray objectAtIndex:idx];
@@ -189,13 +184,13 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	int memSize = tmpObj.blockSize;
 	
 	if ([otherCard availableBlocks] < memSize) {
-		NSLog(@"Failing because the other card does not have enough space!");
+		SysPrintf("Failing because the other card does not have enough space!\n");
 		return NO;
 	}
 	
 	int toCopy = [otherCard indexOfFreeBlocksWithSize:memSize];
 	if (toCopy == -1) {
-		NSLog(@"Not enough consecutive blocks. Compacting the other card.");
+		SysPrintf("Not enough consecutive blocks. Compacting the other card.\n");
 		[otherCard compactMemory];
 		//Since we're accessing the mem card data directly (instead of via PcsxrMemoryObject objects) using the following calls, we don't need to reload the data.
 		toCopy = [otherCard indexOfFreeBlocksWithSize:memSize];
@@ -203,8 +198,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	}
 	
 	int memIdx = tmpObj.startingIndex;
-	int i;
-	for (i = 0; i < memSize; i++) {
+	for (int i = 0; i < memSize; i++) {
 		CopyMemcardData([self memDataPtr], [otherCard memDataPtr], (memIdx+i), (toCopy+i), (char*)otherCard.memCardCPath);
 	}
 	
@@ -258,9 +252,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 - (int)memorySizeAtIndex:(int)idx
 {
 	if (idx == [rawArray count]) {
-#ifdef DEBUG
-		NSLog(@"Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"count\" the free blocks");
-#endif
+		SysPrintf("Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"count\" the free blocks.\n");
 		return [self freeBlocks];
 	}
 
@@ -315,9 +307,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	}
 	
 	if (slotnum == [rawArray count]) {
-#ifdef DEBUG
-		NSLog(@"Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"delete\" the free blocks");
-#endif
+		SysPrintf("Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"delete\" the free blocks.\n");
 		return;
 	}
 	

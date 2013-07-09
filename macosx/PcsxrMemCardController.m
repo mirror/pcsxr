@@ -59,6 +59,7 @@
 	}
 }
 
+#if 0
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -68,6 +69,7 @@
     
     return self;
 }
+#endif
 
 - (void)loadMemoryCardInfoForCard:(int)theCard
 {
@@ -216,7 +218,7 @@
 	
 	NSInteger deleteOkay = NSRunAlertPanel(NSLocalizedString(@"Delete Block", nil), NSLocalizedString(@"Deleting a block will remove all saved data on that block.\n\nThis cannot be undone.", nil), NSLocalizedString(@"Cancel", nil), NSLocalizedString(@"Delete", nil), nil);
 	if (deleteOkay == NSAlertAlternateReturn) {
-		[self deleteMemoryBlocksAtIndex:selectedIndex card:(int)memCardSelect];
+		[self deleteMemoryBlocksAtIndex:(int)selectedIndex card:(int)memCardSelect];
 		
 		if (memCardSelect == 1) {
 			LoadMcd(1, Config.Mcd1);
@@ -243,7 +245,6 @@
 	[imageAnimateTimer invalidate];
 	
 #if !__has_feature(objc_arc)
-
 	[imageAnimateTimer release];
 	self.memCard1Array = nil;
 	self.memCard2Array = nil;
