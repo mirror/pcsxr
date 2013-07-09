@@ -32,34 +32,34 @@
 
 + (NSString *)prefixForType:(int)aType
 {
-    switch (aType) {
-        case PSE_LT_GPU: return @"GPU"; break;
-        case PSE_LT_CDR: return @"CDR"; break;
-        case PSE_LT_SPU: return @"SPU"; break;
-        case PSE_LT_PAD: return @"PAD"; break;
-        case PSE_LT_NET: return @"NET"; break;
-        case PSE_LT_SIO1: return @"SIO1"; break;
-    }
-    
-    return @"";
+	switch (aType) {
+		case PSE_LT_GPU: return @"GPU"; break;
+		case PSE_LT_CDR: return @"CDR"; break;
+		case PSE_LT_SPU: return @"SPU"; break;
+		case PSE_LT_PAD: return @"PAD"; break;
+		case PSE_LT_NET: return @"NET"; break;
+		case PSE_LT_SIO1: return @"SIO1"; break;
+	}
+	
+	return @"";
 }
 
 + (NSString *)defaultKeyForType:(int)aType
 {
-    //return @"Plugin" [PcsxrPlugin prefixForType:aType];
-    switch (aType) {
-        case PSE_LT_GPU:
-        case PSE_LT_CDR:
-        case PSE_LT_SPU:
-        case PSE_LT_PAD:
-        case PSE_LT_NET:
-        case PSE_LT_SIO1:
-            return [NSString stringWithFormat:@"Plugin%@", [self prefixForType:aType]];
-            break;
-        default:
-            return @"";
-            break;
-    }
+	//return @"Plugin" [PcsxrPlugin prefixForType:aType];
+	switch (aType) {
+		case PSE_LT_GPU:
+		case PSE_LT_CDR:
+		case PSE_LT_SPU:
+		case PSE_LT_PAD:
+		case PSE_LT_NET:
+		case PSE_LT_SIO1:
+			return [NSString stringWithFormat:@"Plugin%@", [self prefixForType:aType]];
+			break;
+		default:
+			return @"";
+			break;
+	}
 }
 
 + (char **)configEntriesForType:(int)aType
@@ -69,18 +69,18 @@
 	static char *spu[2] = {(char *)&Config.Spu, NULL};
 	static char *pad[3] = {(char *)&Config.Pad1, (char *)&Config.Pad2, NULL};
 	static char *net[2] = {(char *)&Config.Net, NULL};
-    static char *sio1[2] = {(char *)&Config.Sio1, NULL};
-
-    switch (aType) {
-        case PSE_LT_GPU: return (char **)gpu;
-        case PSE_LT_CDR: return (char **)cdr;
-        case PSE_LT_SPU: return (char **)spu;
-        case PSE_LT_PAD: return (char **)pad;
-        case PSE_LT_NET: return (char **)net;
-        case PSE_LT_SIO1: return (char **)sio1;
-    }
-
-    return nil;
+	static char *sio1[2] = {(char *)&Config.Sio1, NULL};
+	
+	switch (aType) {
+		case PSE_LT_GPU: return (char **)gpu;
+		case PSE_LT_CDR: return (char **)cdr;
+		case PSE_LT_SPU: return (char **)spu;
+		case PSE_LT_PAD: return (char **)pad;
+		case PSE_LT_NET: return (char **)net;
+		case PSE_LT_SIO1: return (char **)sio1;
+	}
+	
+	return nil;
 }
 
 + (NSArray *)pluginsPaths
@@ -88,34 +88,32 @@
     static NSArray *returnArray = nil;
     if (returnArray == nil)
     {
-        @autoreleasepool {
-            NSURL *supportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
-            NSURL *libraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
-            NSURL *localSupportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:YES error:NULL];
-            NSURL *localLibraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:YES error:NULL];
-            
-            NSMutableArray *mutArray = [NSMutableArray arrayWithCapacity:5];
-            
-            [mutArray addObject:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)]];
-            NSURL *url = [localLibraryURL URLByAppendingPathComponent:@"Playstation Emulator Plugins"];
-            if ([url checkResourceIsReachableAndReturnError:NULL])
-                [mutArray addObject:[url path]];
-            url = [[localSupportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"PlugIns"];
-            if ([url checkResourceIsReachableAndReturnError:NULL])
-                [mutArray addObject:[url path]];
-            url = [libraryURL URLByAppendingPathComponent:@"Playstation Emulator Plugins"];
-            if ([url checkResourceIsReachableAndReturnError:NULL])
-                [mutArray addObject:[url path]];
-            url = [[supportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"PlugIns"];
-            if ([url checkResourceIsReachableAndReturnError:NULL])
-                [mutArray addObject:[url path]];
-            returnArray = [[NSArray alloc] initWithArray:mutArray];
-        }
+		NSURL *supportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+		NSURL *libraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+		NSURL *localSupportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:YES error:NULL];
+		NSURL *localLibraryURL = [[NSFileManager defaultManager] URLForDirectory:NSLibraryDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:YES error:NULL];
+		
+		NSMutableArray *mutArray = [NSMutableArray arrayWithCapacity:5];
+		
+		[mutArray addObject:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)]];
+		NSURL *url = [localLibraryURL URLByAppendingPathComponent:@"Playstation Emulator Plugins"];
+		if ([url checkResourceIsReachableAndReturnError:NULL])
+			[mutArray addObject:[url path]];
+		url = [[localSupportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"PlugIns"];
+		if ([url checkResourceIsReachableAndReturnError:NULL])
+			[mutArray addObject:[url path]];
+		url = [libraryURL URLByAppendingPathComponent:@"Playstation Emulator Plugins"];
+		if ([url checkResourceIsReachableAndReturnError:NULL])
+			[mutArray addObject:[url path]];
+		url = [[supportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"PlugIns"];
+		if ([url checkResourceIsReachableAndReturnError:NULL])
+			[mutArray addObject:[url path]];
+		returnArray = [[NSArray alloc] initWithArray:mutArray];
     }
     return returnArray;
 }
 
-- (id)initWithPath:(NSString *)aPath 
+- (id)initWithPath:(NSString *)aPath
 {
     if (!(self = [super init])) {
         return nil;
@@ -136,30 +134,30 @@
     } else {
         long tempVers = 0;
         for (NSString *plugDir in [PcsxrPlugin pluginsPaths])
-        {
-            NSString *fullPath = [plugDir stringByAppendingPathComponent:path];
-            if ([fm fileExistsAtPath:fullPath]) {
-                void *tempHandle = SysLoadLibrary([fullPath fileSystemRepresentation]);
-                if (tempHandle != NULL)
-                {
-                    PSEgetLibVersion tempLibVersion = SysLoadSym(tempHandle, kPCSXRGetLibVersion);
-                    if (SysLibError() == NULL)
-                    {
-                        long tempVers2 = tempLibVersion();
-                        if (tempVers < tempVers2 ){
-                            goodPath = fullPath;
-                            tempVers = tempVers2;
-                            if (![plugDir isEqualToString:[fm stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)]]) {
-                                self.path = goodPath;
-                            }
-                        }
-                    }
-                    SysCloseLibrary(tempHandle);
-                } else {
-                    SysLibError();
-                }
-            }
-        }
+		{
+			NSString *fullPath = [plugDir stringByAppendingPathComponent:path];
+			if ([fm fileExistsAtPath:fullPath]) {
+				void *tempHandle = SysLoadLibrary([fullPath fileSystemRepresentation]);
+				if (tempHandle != NULL)
+				{
+					PSEgetLibVersion tempLibVersion = SysLoadSym(tempHandle, kPCSXRGetLibVersion);
+					if (SysLibError() == NULL)
+					{
+						long tempVers2 = tempLibVersion();
+						if (tempVers < tempVers2 ){
+							goodPath = fullPath;
+							tempVers = tempVers2;
+							if (![plugDir isEqualToString:[fm stringWithFileSystemRepresentation:Config.PluginsDir length:strlen(Config.PluginsDir)]]) {
+								self.path = goodPath;
+							}
+						}
+					}
+					SysCloseLibrary(tempHandle);
+				} else {
+					SysLibError();
+				}
+			}
+		}
     }
 	
     if (goodPath == nil) {
@@ -175,31 +173,31 @@
     }
 
     // TODO: add support for plugins with multiple functionalities???
-    PSE_getLibType = (PSEgetLibType) SysLoadSym(pluginRef, kPCSXRGetLibType);
-    if (SysLibError() != nil) {
-        if (([path rangeOfString: @"gpu" options:NSCaseInsensitiveSearch]).length != 0)
-            type = PSE_LT_GPU;
-        else if (([path rangeOfString: @"cdr" options:NSCaseInsensitiveSearch]).length != 0)
-            type = PSE_LT_CDR;
-        else if (([path rangeOfString: @"spu" options:NSCaseInsensitiveSearch]).length != 0)
-            type = PSE_LT_SPU;
-        else if (([path rangeOfString: @"pad" options:NSCaseInsensitiveSearch]).length != 0)
-            type = PSE_LT_PAD;
-        else if (([path rangeOfString: @"net" options:NSCaseInsensitiveSearch]).length != 0)
-            type = PSE_LT_NET;
-        else if (([path rangeOfString: @"sio1" options:NSCaseInsensitiveSearch]).length != 0)
-            type = PSE_LT_SIO1;
-        else {
-            AUTORELEASEOBJNORETURN(self);
-            return nil;
-        }
-    } else {
-        type = (int)PSE_getLibType();
-        if (type != PSE_LT_GPU && type != PSE_LT_CDR && type != PSE_LT_SPU && type != PSE_LT_PAD && type != PSE_LT_NET && type != PSE_LT_SIO1) {
-            AUTORELEASEOBJNORETURN(self);
-            return nil;
-        }
-    }
+	PSE_getLibType = (PSEgetLibType) SysLoadSym(pluginRef, kPCSXRGetLibType);
+	if (SysLibError() != nil) {
+		if (([path rangeOfString: @"gpu" options:NSCaseInsensitiveSearch]).length != 0)
+			type = PSE_LT_GPU;
+		else if (([path rangeOfString: @"cdr" options:NSCaseInsensitiveSearch]).length != 0)
+			type = PSE_LT_CDR;
+		else if (([path rangeOfString: @"spu" options:NSCaseInsensitiveSearch]).length != 0)
+			type = PSE_LT_SPU;
+		else if (([path rangeOfString: @"pad" options:NSCaseInsensitiveSearch]).length != 0)
+			type = PSE_LT_PAD;
+		else if (([path rangeOfString: @"net" options:NSCaseInsensitiveSearch]).length != 0)
+			type = PSE_LT_NET;
+		else if (([path rangeOfString: @"sio1" options:NSCaseInsensitiveSearch]).length != 0)
+			type = PSE_LT_SIO1;
+		else {
+			AUTORELEASEOBJNORETURN(self);
+			return nil;
+		}
+	} else {
+		type = (int)PSE_getLibType();
+		if (type != PSE_LT_GPU && type != PSE_LT_CDR && type != PSE_LT_SPU && type != PSE_LT_PAD && type != PSE_LT_NET && type != PSE_LT_SIO1) {
+			AUTORELEASEOBJNORETURN(self);
+			return nil;
+		}
+	}
     
     PSE_getLibName = (PSEgetLibName) SysLoadSym(pluginRef, kPCSXRGetLibName);
     if (SysLibError() == nil) {
@@ -266,8 +264,6 @@
     }
 }
 
-#define PluginSymbolNameShutdownInit(type, isInit) PluginSymbolName(type, isInit ? @"init" : @"shutdown")
-
 - (long)runAs:(int)aType
 {
     long (*init)();
@@ -278,7 +274,7 @@
         return 0;
     }
 
-    init = initArg = SysLoadSym(pluginRef, [PluginSymbolNameShutdownInit(aType, YES)
+    init = initArg = SysLoadSym(pluginRef, [PluginSymbolName(aType, @"init")
                                             cStringUsingEncoding:NSASCIIStringEncoding]);
     if (SysLibError() == nil) {
         if (aType != PSE_LT_PAD) {
@@ -299,14 +295,11 @@
     return res;
 }
 
-//#define PluginSymbolNameShutdown(type) PluginSymbolNameShutdownInit(type, NO)
-#define PluginSymbolNameShutdown(type) PluginSymbolName(type, @"shutdown")
-
 - (long)shutdownAs:(int)aType
 {
     long (*shutdown)(void);
 
-    shutdown = SysLoadSym(pluginRef, [PluginSymbolNameShutdown(aType)
+    shutdown = SysLoadSym(pluginRef, [PluginSymbolName(aType, @"shutdown")
                                       cStringUsingEncoding:NSASCIIStringEncoding]);
     if (SysLibError() == nil) {
         active &= ~aType;
@@ -316,11 +309,12 @@
     return PSE_ERR_FATAL;
 }
 
-#define PluginSymbolNameAboutConfigure(type, isAbout) PluginSymbolName(type,isAbout ? @"about" : @"configure")
+#define PluginSymbolNameConfigure(type) PluginSymbolName(type, @"configure")
+#define PluginSymbolNameAbout(type) PluginSymbolName(type, @"about")
 
 - (BOOL)hasAboutAs:(int)aType
 {
-    SysLoadSym(pluginRef, [PluginSymbolNameAboutConfigure(aType, YES)
+    SysLoadSym(pluginRef, [PluginSymbolNameAbout(aType)
                            cStringUsingEncoding:NSASCIIStringEncoding]);
     
     return (SysLibError() == nil);
@@ -328,7 +322,7 @@
 
 - (BOOL)hasConfigureAs:(int)aType
 {
-    SysLoadSym(pluginRef, [PluginSymbolNameAboutConfigure(aType, NO)
+    SysLoadSym(pluginRef, [PluginSymbolNameConfigure(aType)
                            cStringUsingEncoding:NSASCIIStringEncoding]);
     
     return (SysLibError() == nil);
@@ -338,7 +332,7 @@
 {
     NSArray *arg;
     
-    NSString *aboutSym = PluginSymbolNameAboutConfigure(aType, YES);
+    NSString *aboutSym = PluginSymbolNameAbout(aType);
     arg = @[aboutSym, @0];
     RETAINOBJNORETURN(arg);
     
@@ -353,7 +347,7 @@
 {
     NSArray *arg;
     
-    NSString *configSym = PluginSymbolNameAboutConfigure(aType, NO);
+    NSString *configSym = PluginSymbolNameConfigure(aType);
     arg = @[configSym, @1];
     RETAINOBJNORETURN(arg);
     
