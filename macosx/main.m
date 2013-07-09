@@ -22,6 +22,36 @@ static BOOL sysInited = NO;
 //#define EMU_LOG
 static IOPMAssertionID powerAssertion = kIOPMNullAssertionID;
 
+static void LoadEmuLog()
+{
+	if (emuLog == NULL) {
+#ifdef EMU_LOG
+#ifndef LOG_STDOUT
+	NSFileManager *manager = [NSFileManager defaultManager];
+	NSURL *supportURL = [manager URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+	NSURL *logFolderURL = [supportURL URLByAppendingPathComponent:@"Logs/PCSXR"];
+	if (![logFolderURL checkResourceIsReachableAndReturnError:NULL])
+		[manager createDirectoryAtPath:[logFolderURL path] withIntermediateDirectories:YES attributes:nil error:NULL];
+	//We use the log extension so that OS X's console app can open it by default.
+	NSURL *logFileURL = [logFolderURL URLByAppendingPathComponent:@"emuLog.log"];
+	
+	emuLog = fopen([[logFileURL path] fileSystemRepresentation],"wb");
+#else
+	emuLog = stdout;
+#endif
+	setvbuf(emuLog, NULL, _IONBF, 0);
+#endif
+	}
+}
+
+void CloseEmuLog()
+{
+	if (emuLog != NULL) {
+		fclose(emuLog);
+		emuLog = NULL;
+	}
+}
+
 int main(int argc, const char *argv[]) {
     if ( argc >= 2 && strncmp (argv[1], "-psn", 4) == 0 ) {
         char parentdir[MAXPATHLEN];
@@ -57,47 +87,34 @@ int main(int argc, const char *argv[]) {
     if (getenv("DISPLAY") == NULL)
         setenv("DISPLAY", ":0.0", 0); // Default to first local display
 
+	LoadEmuLog();
+	
     return NSApplicationMain(argc, argv);
 }
 
 int SysInit() {
 	if (!sysInited) {
-#ifdef EMU_LOG
-#ifndef LOG_STDOUT
-		NSFileManager *manager = [NSFileManager defaultManager];
-		NSURL *supportURL = [manager URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
-		NSURL *logFolderURL = [supportURL URLByAppendingPathComponent:@"Logs/PCSXR"];
-		if (![logFolderURL checkResourceIsReachableAndReturnError:NULL])
-			[manager createDirectoryAtPath:[logFolderURL path] withIntermediateDirectories:YES attributes:nil error:NULL];
-		//We use the log extension so that OS X's console app can open it by default.
-		NSURL *logFileURL = [logFolderURL URLByAppendingPathComponent:@"emuLog.log"];
-
-		emuLog = fopen([[logFileURL path] fileSystemRepresentation],"wb");
-#else
-		emuLog = stdout;
-#endif
-		setvbuf(emuLog, NULL, _IONBF, 0);
-#endif
-
+		LoadEmuLog();
+		
 		if (EmuInit() != 0)
 			return -1;
-
+		
 		sysInited = YES;
 	}
-
+	
 	if (LoadPlugins() == -1) {
 		return -1;
 	}
-
+	
 	LoadMcds(Config.Mcd1, Config.Mcd2);
-
+	
 	IOReturn success = IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, CFSTR("PSX Emu Running"), &powerAssertion);
 	if (success != kIOReturnSuccess) {
 		SysPrintf("Unable to stop sleep, error code %d", success);
 	}
-    
-    attachHotkeys();
-
+	
+	attachHotkeys();
+	
 	return 0;
 }
 
@@ -105,6 +122,20 @@ void SysReset() {
     [EmuThread resetNow];
     //EmuReset();
 }
+
+#ifdef EMU_LOG
+#ifndef LOG_STDOUT
+static NSDateFormatter* debugDateFormatter()
+{
+	static NSDateFormatter* theFormatter = nil;
+	if (theFormatter == nil) {
+		theFormatter = [[NSDateFormatter alloc] init];
+		[theFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss:SSS"];
+	}
+	return theFormatter;
+}
+#endif
+#endif
 
 void SysPrintf(const char *fmt, ...) {
     va_list list;
@@ -117,7 +148,8 @@ void SysPrintf(const char *fmt, ...) {
     if (Config.PsxOut) printf ("%s", msg);
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
-    fprintf(emuLog, "%s", msg);
+    fprintf(emuLog, "%s %s: %s",[[debugDateFormatter() stringFromDate:[NSDate date]] UTF8String],
+			[[[NSBundle mainBundle]objectForInfoDictionaryKey:@"CFBundleName"] UTF8String], msg);
 #endif
 #endif
 }
@@ -134,6 +166,12 @@ void SysMessage(const char *fmt, ...) {
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedFailureReasonErrorKey];
 	RELEASEOBJ(msg);
 	dispatch_sync(dispatch_get_main_queue(), ^{
+#ifdef EMU_LOG
+#ifndef LOG_STDOUT
+		fprintf(emuLog, "%s %s: %s",[[debugDateFormatter() stringFromDate:[NSDate date]] UTF8String],
+				[[[NSBundle mainBundle]objectForInfoDictionaryKey:@"CFBundleName"] UTF8String], [msg UTF8String]);
+#endif
+#endif
 		[NSApp presentError:[NSError errorWithDomain:@"Unknown Domain" code:-1 userInfo:userInfo]];
 	});
 }
@@ -192,8 +230,8 @@ void SysClose() {
 		powerAssertion = kIOPMNullAssertionID;
 	}
 
-    if (emuLog != NULL) fclose(emuLog);
-
+	//CloseEmuLog();
+	
     sysInited = NO;
     detachHotkeys();
 	
@@ -207,7 +245,8 @@ void SysClose() {
 
 void OnFile_Exit() {
     SysClose();
-    exit(0);
+	CloseEmuLog();
+	[NSApp stop:nil];
 }
 
 char* Pcsxr_locale_text(char* toloc){

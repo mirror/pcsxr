@@ -9,6 +9,7 @@
 @class CheatController;
 
 void ShowHelpAndExit(FILE* output, int exitCode) __dead2;
+void CloseEmuLog();
 
 @interface PcsxrController : NSObject <NSApplicationDelegate>
 {
@@ -16,8 +17,8 @@ void ShowHelpAndExit(FILE* output, int exitCode) __dead2;
 	CheatController *cheatController;
 	PluginList *pluginList;
 	
-	IBOutlet NSWindow *preferenceWindow;
-	IBOutlet NSWindow *cheatWindow;
+	NSWindow *preferenceWindow;
+	NSWindow *cheatWindow;
 	IBOutlet RecentItemsMenu *recentItems;
 	
 	struct _PSXflags {

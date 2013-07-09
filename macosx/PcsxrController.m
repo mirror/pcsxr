@@ -339,6 +339,11 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 	self.skipFiles = nil;
 }
 
+- (void)applicationWillTerminate:(NSNotification *)notification
+{
+	CloseEmuLog();
+}
+
 static void ParseErrorStr(NSString *errStr) __dead2;
 static void ParseErrorStr(NSString *errStr)
 {
