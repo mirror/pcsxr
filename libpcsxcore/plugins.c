@@ -729,7 +729,7 @@ void CALLBACK clearDynarec(void) {
 }
 
 int LoadPlugins() {
-	int ret;
+	long ret;
 	char Plugin[MAXPATHLEN];
 
 	ReleasePlugins();
@@ -787,13 +787,13 @@ int LoadPlugins() {
 	if (ret < 0) { SysMessage (_("Error initializing SIO1 plugin: %d"), ret); return -1; }
 #endif
 
-	SysPrintf(_("Plugins loaded.\n"));
+	SysPrintf("%s", _("Plugins loaded.\n"));
 	return 0;
 }
 
 void ReleasePlugins() {
 	if (Config.UseNet) {
-		int ret = NET_close();
+		long ret = NET_close();
 		if (ret < 0) Config.UseNet = FALSE;
 	}
 	NetOpened = FALSE;

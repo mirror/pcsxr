@@ -75,7 +75,7 @@ int psxMemInit() {
 
 	if (psxMemRLUT == NULL || psxMemWLUT == NULL || 
 		psxM == NULL || psxP == NULL || psxH == NULL) {
-		SysMessage(_("Error allocating memory!"));
+		SysMessage("%s", _("Error allocating memory!"));
 		return -1;
 	}
 

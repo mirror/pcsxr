@@ -318,23 +318,23 @@ void StartDebugger() {
 
     MemoryMap = (u8 *)malloc(0x200000);
     if (MemoryMap == NULL) {
-        SysMessage(_("Error allocating memory"));
+        SysMessage("%s", _("Error allocating memory"));
         return;
     }
 
     if (StartServer() == -1) {
-        SysPrintf(_("Unable to start debug server.\n"));
+        SysPrintf("%s", _("Unable to start debug server.\n"));
         return;
     }
 
-    SysPrintf(_("Debugger started.\n"));
+    SysPrintf("%s", _("Debugger started.\n"));
     debugger_active = 1;
 }
 
 void StopDebugger() {
     if (debugger_active) {
         StopServer();
-        SysPrintf(_("Debugger stopped.\n"));
+        SysPrintf("%s", _("Debugger stopped.\n"));
     }
 
     if (MemoryMap != NULL) {

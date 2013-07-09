@@ -933,7 +933,7 @@ void psxBios_InitHeap() { // 0x39
 	heap_end = (u32 *)((u8 *)heap_addr + size);
 	*heap_addr = SWAP32(size | 1);
 
-	SysPrintf("InitHeap %x,%x : %x %x\n",a0,a1, (uptr)heap_addr-(uptr)psxM, size);
+	SysPrintf("InitHeap %x,%x : %lx %x\n",a0,a1, (uptr)heap_addr-(uptr)psxM, size);
 
 	pc0 = ra;
 }
@@ -1008,7 +1008,7 @@ _start:
 #ifdef PSXBIOS_LOG
 	PSXBIOS_LOG("psxBios_%s: %s\n", biosA0n[0x3f], tmp);
 #else
-	SysPrintf(tmp);
+	SysPrintf("%s", tmp);
 #endif
 
 	pc0 = ra;
@@ -1841,7 +1841,7 @@ void psxBios_puts() { // 3e/3f
 #ifdef PSXBIOS_LOG
 	PSXBIOS_LOG("psxBios_%s: %s\n", biosB0n[0x3f], Ra0);
 #else
-	SysPrintf(Ra0);
+	SysPrintf("%s", Ra0);
 #endif
 	pc0 = ra;
 }
