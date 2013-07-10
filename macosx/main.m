@@ -119,8 +119,8 @@ int SysInit() {
 }
 
 void SysReset() {
-    [EmuThread resetNow];
-    //EmuReset();
+	[EmuThread resetNow];
+	//EmuReset();
 }
 
 #ifdef EMU_LOG
@@ -138,13 +138,13 @@ static NSDateFormatter* debugDateFormatter()
 #endif
 
 void SysPrintf(const char *fmt, ...) {
-    va_list list;
-    char *msg = calloc(sizeof(char), 512);
-
-    va_start(list, fmt);
+	va_list list;
+	char *msg = calloc(sizeof(char), 512);
+	
+	va_start(list, fmt);
 	vsnprintf(msg, 512, fmt, list);
-    va_end(list);
-
+	va_end(list);
+	
 	
 	dispatch_block_t printfBlock = ^{
 		if (Config.PsxOut) printf ("%s", msg);
@@ -246,18 +246,18 @@ void SysRunGui() {
 
 // Close mem and plugins
 void SysClose() {
-    EmuShutdown();
-    //ReleasePlugins();
-
+	EmuShutdown();
+	//ReleasePlugins();
+	
 	if (powerAssertion != kIOPMNullAssertionID) {
 		IOPMAssertionRelease(powerAssertion);
 		powerAssertion = kIOPMNullAssertionID;
 	}
-
+	
 	//CloseEmuLog();
 	
-    sysInited = NO;
-    detachHotkeys();
+	sysInited = NO;
+	detachHotkeys();
 	
 	if (((PcsxrController *)[NSApp delegate]).endAtEmuClose) {
 		[NSApp stop:nil];
