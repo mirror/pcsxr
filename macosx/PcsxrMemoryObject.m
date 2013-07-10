@@ -167,7 +167,10 @@ static NSString *MemLabelEndLink;
 			self.sjisName = [NSString stringWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
 			
 			if ([englishName isEqualToString:sjisName]) {
-				SysPrintf("English name and sjis name are the same: %s. Replacing the sjis string with the English string.\n", [englishName UTF8String]);
+#if 0
+				if (![englishName isEqualToString:@""])
+					SysPrintf("English name and sjis name are the same: %s. Replacing the sjis string with the English string.\n", [englishName UTF8String]);
+#endif
 				self.sjisName = self.englishName;
 			}
 			@autoreleasepool {

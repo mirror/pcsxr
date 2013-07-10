@@ -110,7 +110,7 @@ int SysInit() {
 	
 	IOReturn success = IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, CFSTR("PSX Emu Running"), &powerAssertion);
 	if (success != kIOReturnSuccess) {
-		SysPrintf("Unable to stop sleep, error code %d", success);
+		SysPrintf("Unable to stop sleep, error code %d\n", success);
 	}
 	
 	attachHotkeys();
@@ -139,24 +139,34 @@ static NSDateFormatter* debugDateFormatter()
 
 void SysPrintf(const char *fmt, ...) {
     va_list list;
-    char msg[512];
+    char *msg = calloc(sizeof(char), 512);
 
     va_start(list, fmt);
-    vsprintf(msg, fmt, list);
+	vsnprintf(msg, 512, fmt, list);
     va_end(list);
 
-    if (Config.PsxOut) printf ("%s", msg);
+	
+	dispatch_block_t printfBlock = ^{
+		if (Config.PsxOut) printf ("%s", msg);
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
-    fprintf(emuLog, "%s %s: %s",[[debugDateFormatter() stringFromDate:[NSDate date]] UTF8String],
-			[[[NSBundle mainBundle]objectForInfoDictionaryKey:@"CFBundleName"] UTF8String], msg);
+		fprintf(emuLog, "%s %s: %s",[[debugDateFormatter() stringFromDate:[NSDate date]] UTF8String],
+				[[[NSBundle mainBundle]objectForInfoDictionaryKey:@"CFBundleName"] UTF8String], msg);
 #endif
 #endif
+	};
+	if ([NSThread isMainThread]) {
+		printfBlock();
+	} else {
+		dispatch_sync(dispatch_get_main_queue(), printfBlock);
+	}
+	free(msg);
 }
 
 void SysMessage(const char *fmt, ...) {
 	va_list list;
 
+	
 	NSString *locFmtString = NSLocalizedString(@(fmt), nil);
 
 	va_start(list, fmt);
@@ -165,7 +175,10 @@ void SysMessage(const char *fmt, ...) {
     
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedFailureReasonErrorKey];
 	RELEASEOBJ(msg);
-	dispatch_sync(dispatch_get_main_queue(), ^{
+	
+	
+	dispatch_block_t sysBlock = ^{
+		if (Config.PsxOut) printf ("%s", [msg UTF8String]);
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
 		fprintf(emuLog, "%s %s: %s",[[debugDateFormatter() stringFromDate:[NSDate date]] UTF8String],
@@ -173,7 +186,13 @@ void SysMessage(const char *fmt, ...) {
 #endif
 #endif
 		[NSApp presentError:[NSError errorWithDomain:@"Unknown Domain" code:-1 userInfo:userInfo]];
-	});
+	};
+	
+	if ([NSThread isMainThread]) {
+		sysBlock();
+	} else {
+		dispatch_sync(dispatch_get_main_queue(), sysBlock);
+	}
 }
 
 void *SysLoadLibrary(const char *lib) {

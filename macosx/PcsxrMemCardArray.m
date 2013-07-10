@@ -101,7 +101,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 		i = 0;
 		while (i < MAX_MEMCARD_BLOCKS) {
 			x = 1;
-			McdBlock memBlock, tmpBlock;
+			McdBlock memBlock;
 			GetMcdBlockInfo(carNum, i + 1, &memBlock);
 			
 			if ([PcsxrMemoryObject memFlagsFromBlockFlags:memBlock.Flags] == memFlagFree) {
@@ -110,6 +110,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 				continue;
 			}
 			do {
+				McdBlock tmpBlock;
 				GetMcdBlockInfo(carNum, i + x + 1, &tmpBlock);
 				if ((tmpBlock.Flags & 0x3) == 0x3) {
 					x++;
@@ -120,9 +121,11 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 					break;
 				}
 			} while (i + x - 1 < MAX_MEMCARD_BLOCKS);
-			PcsxrMemoryObject *obj = [[PcsxrMemoryObject alloc] initWithMcdBlock:&memBlock startingIndex:i size:x];
-			[tmpMemArray addObject:obj];
-			RELEASEOBJ(obj);
+			@autoreleasepool {
+				PcsxrMemoryObject *obj = [[PcsxrMemoryObject alloc] initWithMcdBlock:&memBlock startingIndex:i size:x];
+				[tmpMemArray addObject:obj];
+				RELEASEOBJ(obj);
+			}
 			i += x;
 		}
 		self.rawArray = [NSArray arrayWithArray:tmpMemArray];

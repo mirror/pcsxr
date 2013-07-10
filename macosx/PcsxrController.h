@@ -8,7 +8,7 @@
 @class ConfigurationController;
 @class CheatController;
 
-void ShowHelpAndExit(FILE* output, int exitCode) __dead2;
+void ShowHelpAndExit(FILE* output, int exitCode);
 void CloseEmuLog();
 
 @interface PcsxrController : NSObject <NSApplicationDelegate>

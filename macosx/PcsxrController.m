@@ -38,13 +38,17 @@ NSString *saveStatePath;
 void ShowHelpAndExit(FILE* output, int exitCode)
 {
 	fprintf(output, HELPSTR);
-	exit(exitCode);
+	if (!NSApp) {
+		exit(exitCode);
+	} else {
+		[NSApp stop:nil];
+	}
 }
 
 @interface PcsxrController ()
 @property (readwrite) BOOL endAtEmuClose;
-@property (readwrite) BOOL sleepInBackground;
-@property (readwrite) BOOL wasPausedBeforeBGSwitch;
+@property BOOL sleepInBackground;
+@property BOOL wasPausedBeforeBGSwitch;
 @property (arcstrong) NSMutableArray *skipFiles;
 @end
 
@@ -344,15 +348,16 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 	CloseEmuLog();
 }
 
-static void ParseErrorStr(NSString *errStr) __dead2;
 static void ParseErrorStr(NSString *errStr)
 {
-#if 1
-	SysMessage("Parsing error: %s\n\nPlease check the command line options and try again.\n\nPCSXR will now quit.\n", [errStr UTF8String]);
-#else
-	NSLog(@"%@", errStr);
+	NSString *logStr = [NSString stringWithFormat:@"Parse error: %@", errStr];
+	
+	SysPrintf("%s\n", [logStr UTF8String]);
+	if (!Config.PsxOut) {
+		//make sure this comes out on the console.
+		NSLog(@"%@", logStr);
+	}
 	NSRunCriticalAlertPanel(@"Parsing error", @"%@\n\nPlease check the command line options and try again.\n\nPCSXR will now quit.", nil, nil, nil, errStr);
-#endif
 	ShowHelpAndExit(stderr, EXIT_FAILURE);
 }
 
@@ -443,7 +448,12 @@ otherblock();\
 		//This block/argument does not need to be sorted
 		dispatch_block_t emuCloseAtEnd = ^{
 			hasParsedAnArgument = YES;
-			self.endAtEmuClose = YES;
+			dispatch_block_t runtimeBlock = ^{
+				self.endAtEmuClose = YES;
+			};
+			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPreRun block:runtimeBlock argument:kPCSXRArgumentExitAtClose];
+			[larg addToDictionary:argDict];
+			RELEASEOBJ(larg);
 		};
 		
 		dispatch_block_t isoBlock = ^{
@@ -499,7 +509,7 @@ otherblock();\
 					if ([progArgs count] <= ++i) {
 						ParseErrorStr(@"Not enough arguments.");
 					}
-					NSString *path = [progArgs objectAtIndex:i];
+					NSString *path = [[progArgs objectAtIndex:i] stringByExpandingTildeInPath];
 					if (![[NSFileManager defaultManager] fileExistsAtPath:path])
 					{
 						ParseErrorStr([NSString stringWithFormat:@"The file \"%@\" does not exist.", path]);
@@ -528,9 +538,10 @@ otherblock();\
 			//As there doesn't seem to be a Cocoa/Objective-C method like this...
 			NSString *unknownString = CFBridgingRelease(CFStringCreateByCombiningStrings(kCFAllocatorDefault, BRIDGE(CFArrayRef, unknownOptions), CFSTR(" ")));
 			
-			SysPrintf("The following options weren't recognized by PCSX-R: %s. This may be due to extra arguments passed by the OS or debugger.", [unknownString UTF8String]);
+			SysPrintf("The following options weren't recognized by PCSX-R: %s. This may be due to extra arguments passed by the OS or debugger.\n", [unknownString UTF8String]);
 		}
 #endif
+		unknownOptions = nil;
 		if (!isLaunchable && hasParsedAnArgument) {
 			NSMutableArray *mutProgArgs = [NSMutableArray arrayWithArray:progArgs];
 			NSString *appRawPath = RETAINOBJ([mutProgArgs objectAtIndex:0]);
@@ -539,7 +550,7 @@ otherblock();\
 			NSString *arg = CFBridgingRelease(CFStringCreateByCombiningStrings(kCFAllocatorDefault, BRIDGE(CFArrayRef, mutProgArgs), CFSTR(" ")));
 			NSString *recognizedArgs = CFBridgingRelease(CFStringCreateByCombiningStrings(kCFAllocatorDefault, BRIDGE(CFArrayRef, [argDict allKeys]), CFSTR(" ")));
 			
-			NSString *tmpStr = [NSString stringWithFormat:@"A launch command wasn't found in the command line and an argument that PCSX-R recognizes was: %@.\nThe following command line arguments were passed with the application launch file at %@: %@.\n\nThe valid launch commands are %@, %@, and %@.", recognizedArgs, appRawPath, arg, kPCSXRArgumentISO, kPCSXRArgumentCDROM, kPCSXRArgumentBIOS];
+			NSString *tmpStr = [NSString stringWithFormat:@"A launch command wasn't found in the command line and one or more arguments that PCSX-R recognizes were: %@.\nThe following command line arguments were passed with the application launch file at %@: %@.\n\nThe valid launch commands are %@, %@, and %@.", recognizedArgs, appRawPath, arg, kPCSXRArgumentISO, kPCSXRArgumentCDROM, kPCSXRArgumentBIOS];
 			RELEASEOBJ(appRawPath);
 			ParseErrorStr(tmpStr);
 		} else if (hasParsedAnArgument){
