@@ -22,6 +22,8 @@ static BOOL sysInited = NO;
 //#define EMU_LOG
 static IOPMAssertionID powerAssertion = kIOPMNullAssertionID;
 
+void PADhandleKey(int key);
+
 static void LoadEmuLog()
 {
 	if (emuLog == NULL) {
@@ -227,8 +229,8 @@ void SysCloseLibrary(void *lib) {
 // Called periodically from the emu thread
 void SysUpdate() {
 #if 0
-	PADhandleKey(PAD1_keypressed());
-	PADhandleKey(PAD2_keypressed());
+	PADhandleKey(PAD1_keypressed() & 0xffffffff);
+	PADhandleKey(PAD2_keypressed() & 0xffffffff);
 #else
 	PAD1_keypressed();
 	PAD2_keypressed();
