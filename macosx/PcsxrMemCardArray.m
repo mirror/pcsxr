@@ -257,7 +257,9 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 - (int)memorySizeAtIndex:(int)idx
 {
 	if (idx == [rawArray count]) {
+#ifdef DEBUG
 		NSLog(@"Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"count\" the free blocks.");
+#endif
 		return [self freeBlocks];
 	}
 
@@ -312,7 +314,9 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	}
 	
 	if (slotnum == [rawArray count]) {
+#ifdef DEBUG
 		NSLog(@"Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"delete\" the free blocks.");
+#endif
 		return;
 	}
 	
