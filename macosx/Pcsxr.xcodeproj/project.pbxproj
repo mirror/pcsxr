@@ -2998,6 +2998,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3015,6 +3016,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3224,6 +3226,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

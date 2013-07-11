@@ -78,12 +78,17 @@ void ConfDlgProc()
 	__block PluginConfigController *tmpWindowController = nil;
 	
 	//We need this block due to the xib's use of auto layout
-	dispatch_sync(dispatch_get_main_queue(), ^{
+	dispatch_block_t getWindowBlock = ^{
 		if (windowController == nil) {
 			tmpWindowController = [[PluginConfigController alloc] initWithWindowNibName:@"Bladesio1PluginConfig"];
 		}
 		window = [(windowController ? windowController : tmpWindowController) window];
-	});
+	};
+	if ([NSThread isMainThread]) {
+		getWindowBlock();
+	} else {
+		dispatch_sync(dispatch_get_main_queue(), getWindowBlock);
+	}
 	if (!windowController) {
 		windowController = tmpWindowController;
 	}
