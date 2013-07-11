@@ -823,7 +823,7 @@ otherblock();\
 	}
 	
 	if (![[NSFileManager defaultManager] fileExistsAtPath:filename]) {
-		SysPrintf("Nonexistant file %s was passed to open.\n", [filename fileSystemRepresentation]);
+		NSLog(@"Nonexistant file %@ was passed to open.", filename );
 		return NO;
 	}
 	

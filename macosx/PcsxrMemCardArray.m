@@ -179,7 +179,9 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 - (BOOL)moveBlockAtIndex:(int)idx toMemoryCard:(PcsxrMemCardArray*)otherCard
 {
 	if (idx == [rawArray count]) {
-		SysPrintf("Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"move\" the free blocks. We don't want to do this.\n");
+#ifdef DEBUG
+		NSLog(@"Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"move\" the free blocks. We don't want to do this.");
+#endif
 		return NO;
 	}
 	PcsxrMemoryObject *tmpObj = [rawArray objectAtIndex:idx];
@@ -187,13 +189,13 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	int memSize = tmpObj.blockSize;
 	
 	if ([otherCard availableBlocks] < memSize) {
-		SysPrintf("Failing because the other card does not have enough space!\n");
+		NSLog(@"Failing because the other card does not have enough space!");
 		return NO;
 	}
 	
 	int toCopy = [otherCard indexOfFreeBlocksWithSize:memSize];
 	if (toCopy == -1) {
-		SysPrintf("Not enough consecutive blocks. Compacting the other card.\n");
+		NSLog(@"Not enough consecutive blocks. Compacting the other card.");
 		[otherCard compactMemory];
 		//Since we're accessing the mem card data directly (instead of via PcsxrMemoryObject objects) using the following calls, we don't need to reload the data.
 		toCopy = [otherCard indexOfFreeBlocksWithSize:memSize];
@@ -255,7 +257,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 - (int)memorySizeAtIndex:(int)idx
 {
 	if (idx == [rawArray count]) {
-		SysPrintf("Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"count\" the free blocks.\n");
+		NSLog(@"Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"count\" the free blocks.");
 		return [self freeBlocks];
 	}
 
@@ -310,7 +312,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	}
 	
 	if (slotnum == [rawArray count]) {
-		SysPrintf("Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"delete\" the free blocks.\n");
+		NSLog(@"Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"delete\" the free blocks.");
 		return;
 	}
 	
