@@ -32,11 +32,11 @@
         return nil;
     NSString *ident = [col identifier];
     if ([ident isEqualToString:@"COL_NAME"]) {
-        return @(Cheats[idx].Descr);
+        return [NSString stringWithCString:Cheats[idx].Descr encoding:NSUTF8StringEncoding];
     } else if ([ident isEqualToString:@"COL_ENABLE"]) {
-        return @(Cheats[idx].Enabled ? NSOnState : NSOffState);
+        return [NSNumber numberWithInt: Cheats[idx].Enabled ? NSOnState : NSOffState];
     }
-    SysPrintf("Unknown column identifier: %s\n", [[ident description] UTF8String]);
+    NSLog(@"Unknown column identifier: %@", ident);
     return nil;
 }
 

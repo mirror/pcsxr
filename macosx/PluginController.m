@@ -78,6 +78,7 @@
 {
 	[plugins release];
 	[defaultKey release];
+	
 	[super dealloc];
 }
 #endif

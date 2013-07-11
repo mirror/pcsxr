@@ -147,7 +147,7 @@ static NSString *MemLabelEndLink;
 		return memFlagFree;
 	
 	//Xcode complains unless we do this...
-	SysPrintf("Unknown flag %x\n", blockFlags);
+	NSLog(@"Unknown flag %x", blockFlags);
 	return memFlagFree;
 }
 
@@ -169,7 +169,7 @@ static NSString *MemLabelEndLink;
 			if ([englishName isEqualToString:sjisName]) {
 #if 0
 				if (![englishName isEqualToString:@""])
-					SysPrintf("English name and sjis name are the same: %s. Replacing the sjis string with the English string.\n", [englishName UTF8String]);
+					NSLog(@"English name and sjis name are the same: %s. Replacing the sjis string with the English string.", [englishName UTF8String]);
 #endif
 				self.sjisName = self.englishName;
 			}

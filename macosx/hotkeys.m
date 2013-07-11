@@ -76,7 +76,7 @@ BOOL handleHotkey(NSString* keyCode) {
                     GPU_displayText((char*)[[NSString stringWithFormat:@"State Slot: %d", currentState] UTF8String]);
                     break;
                 default:
-                    SysPrintf("Invalid hotkey identifier %i.\n", [ident intValue]);
+                    NSLog(@"Invalid hotkey identifier %li.", [ident integerValue]);
             }
         
             return YES;

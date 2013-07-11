@@ -24,36 +24,6 @@ static IOPMAssertionID powerAssertion = kIOPMNullAssertionID;
 
 void PADhandleKey(int key);
 
-static void LoadEmuLog()
-{
-	if (emuLog == NULL) {
-#ifdef EMU_LOG
-#ifndef LOG_STDOUT
-	NSFileManager *manager = [NSFileManager defaultManager];
-	NSURL *supportURL = [manager URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
-	NSURL *logFolderURL = [supportURL URLByAppendingPathComponent:@"Logs/PCSXR"];
-	if (![logFolderURL checkResourceIsReachableAndReturnError:NULL])
-		[manager createDirectoryAtPath:[logFolderURL path] withIntermediateDirectories:YES attributes:nil error:NULL];
-	//We use the log extension so that OS X's console app can open it by default.
-	NSURL *logFileURL = [logFolderURL URLByAppendingPathComponent:@"emuLog.log"];
-	
-	emuLog = fopen([[logFileURL path] fileSystemRepresentation],"wb");
-#else
-	emuLog = stdout;
-#endif
-	setvbuf(emuLog, NULL, _IONBF, 0);
-#endif
-	}
-}
-
-void CloseEmuLog()
-{
-	if (emuLog != NULL) {
-		fclose(emuLog);
-		emuLog = NULL;
-	}
-}
-
 int main(int argc, const char *argv[]) {
     if ( argc >= 2 && strncmp (argv[1], "-psn", 4) == 0 ) {
         char parentdir[MAXPATHLEN];
@@ -89,14 +59,27 @@ int main(int argc, const char *argv[]) {
     if (getenv("DISPLAY") == NULL)
         setenv("DISPLAY", ":0.0", 0); // Default to first local display
 
-	LoadEmuLog();
-	
     return NSApplicationMain(argc, argv);
 }
 
 int SysInit() {
 	if (!sysInited) {
-		LoadEmuLog();
+#ifdef EMU_LOG
+#ifndef LOG_STDOUT
+		NSFileManager *manager = [NSFileManager defaultManager];
+		NSURL *supportURL = [manager URLForDirectory:NSLibraryDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+		NSURL *logFolderURL = [supportURL URLByAppendingPathComponent:@"Logs/PCSXR"];
+		if (![logFolderURL checkResourceIsReachableAndReturnError:NULL])
+			[manager createDirectoryAtPath:[logFolderURL path] withIntermediateDirectories:YES attributes:nil error:NULL];
+		//We use the log extension so that OS X's console app can open it by default.
+		NSURL *logFileURL = [logFolderURL URLByAppendingPathComponent:@"emuLog.log"];
+		
+		emuLog = fopen([[logFileURL path] fileSystemRepresentation],"wb");
+#else
+		emuLog = stdout;
+#endif
+		setvbuf(emuLog, NULL, _IONBF, 0);
+#endif
 		
 		if (EmuInit() != 0)
 			return -1;
@@ -112,7 +95,7 @@ int SysInit() {
 	
 	IOReturn success = IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, CFSTR("PSX Emu Running"), &powerAssertion);
 	if (success != kIOReturnSuccess) {
-		SysPrintf("Unable to stop sleep, error code %d\n", success);
+		NSLog(@"Unable to stop sleep, error code %d", success);
 	}
 	
 	attachHotkeys();
@@ -149,7 +132,7 @@ void SysPrintf(const char *fmt, ...) {
 	
 	
 	dispatch_block_t printfBlock = ^{
-		if (Config.PsxOut) printf ("%s", msg);
+		if (Config.PsxOut) NSLog (@"%s", msg);
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
 		fprintf(emuLog, "%s %s: %s",[[debugDateFormatter() stringFromDate:[NSDate date]] UTF8String],
@@ -167,26 +150,18 @@ void SysPrintf(const char *fmt, ...) {
 
 void SysMessage(const char *fmt, ...) {
 	va_list list;
-
 	
 	NSString *locFmtString = NSLocalizedString(@(fmt), nil);
-
+	
 	va_start(list, fmt);
-    NSString *msg = [[NSString alloc] initWithFormat:locFmtString arguments:list];
+	NSString *msg = [[NSString alloc] initWithFormat:locFmtString arguments:list];
 	va_end(list);
-    
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedFailureReasonErrorKey];
+	
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedFailureReasonErrorKey];
 	RELEASEOBJ(msg);
 	
 	
 	dispatch_block_t sysBlock = ^{
-		if (Config.PsxOut) printf ("%s", [msg UTF8String]);
-#ifdef EMU_LOG
-#ifndef LOG_STDOUT
-		fprintf(emuLog, "%s %s: %s",[[debugDateFormatter() stringFromDate:[NSDate date]] UTF8String],
-				[[[NSBundle mainBundle]objectForInfoDictionaryKey:@"CFBundleName"] UTF8String], [msg UTF8String]);
-#endif
-#endif
 		[NSApp presentError:[NSError errorWithDomain:@"Unknown Domain" code:-1 userInfo:userInfo]];
 	};
 	
@@ -256,7 +231,7 @@ void SysClose() {
 		powerAssertion = kIOPMNullAssertionID;
 	}
 	
-	//CloseEmuLog();
+	if (emuLog != NULL) fclose(emuLog);
 	
 	sysInited = NO;
 	detachHotkeys();
@@ -264,6 +239,7 @@ void SysClose() {
 	if (((PcsxrController *)[NSApp delegate]).endAtEmuClose) {
 		[NSApp stop:nil];
 	}
+	
 	//Tell the memory card manager that the memory cards changed.
 	//The number three tells the mem card manager to update both cards 1 and 2.
 	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil userInfo:[NSDictionary dictionaryWithObject:@3 forKey:memCardChangeNumberKey]];
@@ -271,7 +247,6 @@ void SysClose() {
 
 void OnFile_Exit() {
     SysClose();
-	CloseEmuLog();
 	[NSApp stop:nil];
 }
 

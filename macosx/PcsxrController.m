@@ -343,20 +343,9 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 	self.skipFiles = nil;
 }
 
-- (void)applicationWillTerminate:(NSNotification *)notification
-{
-	CloseEmuLog();
-}
-
 static void ParseErrorStr(NSString *errStr)
 {
-	NSString *logStr = [NSString stringWithFormat:@"Parse error: %@", errStr];
-	
-	SysPrintf("%s\n", [logStr UTF8String]);
-	if (!Config.PsxOut) {
-		//make sure this comes out on the console.
-		NSLog(@"%@", logStr);
-	}
+	NSLog(@"Parse error: %@", errStr);
 	NSRunCriticalAlertPanel(@"Parsing error", @"%@\n\nPlease check the command line options and try again.\n\nPCSXR will now quit.", nil, nil, nil, errStr);
 	ShowHelpAndExit(stderr, EXIT_FAILURE);
 }
@@ -470,7 +459,7 @@ otherblock();\
 		void (^mcdBlock)(int mcdNumber) = ^(int mcdnumber){
 			hasParsedAnArgument = YES;
 			if (memcardHandled & (1 << mcdnumber)) {
-				SysPrintf("Memory card %i has already been defined. The latest one passed will be used.\n", mcdnumber);
+				NSLog(@"Memory card %i has already been defined. The latest one passed will be used.", mcdnumber);
 			} else {
 				memcardHandled |= (1 << mcdnumber);
 			}
@@ -538,7 +527,7 @@ otherblock();\
 			//As there doesn't seem to be a Cocoa/Objective-C method like this...
 			NSString *unknownString = CFBridgingRelease(CFStringCreateByCombiningStrings(kCFAllocatorDefault, BRIDGE(CFArrayRef, unknownOptions), CFSTR(" ")));
 			
-			SysPrintf("The following options weren't recognized by PCSX-R: %s. This may be due to extra arguments passed by the OS or debugger.\n", [unknownString UTF8String]);
+			NSLog(@"The following options weren't recognized by PCSX-R: %@. This may be due to extra arguments passed by the OS or debugger.", unknownString);
 		}
 #endif
 		unknownOptions = nil;
