@@ -69,7 +69,8 @@
 	[deviceMenu addItemWithTitle:@"(Keyboard only)"];
 
 	for (i = 0; i < SDL_NumJoysticks(); i++) {
-		[deviceMenu addItemWithTitle:@(SDL_JoystickName(i))];
+		NSMenuItem * joystickItem = [[NSMenuItem alloc] initWithTitle:@(SDL_JoystickName(i)) action:NULL keyEquivalent:@""];
+        [[deviceMenu menu] addItem:joystickItem];
 	}
 
 	if (g.cfg.PadDef[which].DevNum >= SDL_NumJoysticks()) {
