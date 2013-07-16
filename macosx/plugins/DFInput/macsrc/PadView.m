@@ -21,6 +21,7 @@
 
 #import "PadView.h"
 #include "pad.h"
+#import "ARCBridge.h"
 
 @implementation PadView
 
@@ -70,7 +71,9 @@
 
 	for (i = 0; i < SDL_NumJoysticks(); i++) {
 		NSMenuItem * joystickItem = [[NSMenuItem alloc] initWithTitle:@(SDL_JoystickName(i)) action:NULL keyEquivalent:@""];
+		[joystickItem setTag:i + 1];
         [[deviceMenu menu] addItem:joystickItem];
+		RELEASEOBJ(joystickItem);
 	}
 
 	if (g.cfg.PadDef[which].DevNum >= SDL_NumJoysticks()) {

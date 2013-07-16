@@ -81,7 +81,6 @@
 	
 	NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:lastName action:@selector(openRecentItem:) keyEquivalent:@""];
     [newItem setRepresentedObject:documentURL];
-    //[newItem setEnabled:YES];
     [newItem setTarget:self];
     
     return newItem;
