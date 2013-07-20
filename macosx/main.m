@@ -135,8 +135,8 @@ void SysPrintf(const char *fmt, ...) {
 		if (Config.PsxOut) NSLog (@"%s", msg);
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
-		fprintf(emuLog, "%s %s: %s",[[debugDateFormatter() stringFromDate:[NSDate date]] UTF8String],
-				[[[NSBundle mainBundle]objectForInfoDictionaryKey:@"CFBundleName"] UTF8String], msg);
+		if (emuLog) fprintf(emuLog, "%s %s: %s",[[debugDateFormatter() stringFromDate:[NSDate date]] UTF8String],
+				[[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"] UTF8String], msg);
 #endif
 #endif
 	};
@@ -231,7 +231,10 @@ void SysClose() {
 		powerAssertion = kIOPMNullAssertionID;
 	}
 	
-	if (emuLog != NULL) fclose(emuLog);
+	if (emuLog != NULL) {
+		fclose(emuLog);
+		emuLog = NULL;
+	}
 	
 	sysInited = NO;
 	detachHotkeys();
