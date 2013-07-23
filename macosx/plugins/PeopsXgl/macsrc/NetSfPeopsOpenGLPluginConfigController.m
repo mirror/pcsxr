@@ -102,6 +102,14 @@ void DlgProc()
 	[window makeKeyAndOrderFront:nil];
 }
 
+#define kFPSCounter @"FPS Counter"
+#define kHacks @"Hacks"
+#define kAutoFullScreen @"Auto Full Screen"
+#define kFrameSkipping @"Frame Skipping"
+#define kFrameLimit @"Frame Limit"
+#define kVSync @"VSync"
+#define kHacksEnable @"Enable Hacks"
+
 void PrepFactoryDefaultPreferences(void)
 {
     // THE place to find the names of settings.
@@ -116,14 +124,14 @@ void PrepFactoryDefaultPreferences(void)
 
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 								 [NSDictionary dictionaryWithObjectsAndKeys:
-								  @NO, @"FPS Counter",
-								  @NO, @"Auto Full Screen",
-								  @NO, @"Frame Skipping",
-								  @YES, @"Frame Limit",
-								  @NO, @"VSync",
-								  @NO, @"Enable Hacks",
+								  @NO, kFPSCounter,
+								  @NO, kAutoFullScreen,
+								  @NO, kFrameSkipping,
+								  @YES, kFrameLimit,
+								  @NO, kVSync,
+								  @NO, kHacksEnable,
 								  @0, @"Dither Mode",
-								  @((unsigned int)0), @"Hacks",
+								  @((unsigned int)0), kHacks,
 								  
 								  @YES, @"Proportional Resize",
 								  //[NSSize stringWithCString: @"default"], @"Fullscreen Resolution",
@@ -132,6 +140,7 @@ void PrepFactoryDefaultPreferences(void)
 								  @0, @"Texture Enhancement Level",
 								  @0, @"Texture Filter Level",
 								  @0, @"Frame Buffer Level",
+								  @0, @"Window Size",
 								  @NO, @"Draw Scanlines",
 								  // nasty:
 								  [NSArchiver archivedDataWithRootObject: [NSColor colorWithCalibratedRed:0  green:0 blue:0 alpha:0.25]], @"Scanline Color",
@@ -142,6 +151,7 @@ void PrepFactoryDefaultPreferences(void)
 								  @NO, @"Wireframe Mode",
 								  @YES, @"Emulate mjpeg decoder", // helps remove unsightly vertical line in movies
 								  @NO, @"Fast mjpeg decoder",
+								  @YES, @"GteAccuracy",
 								  nil],  PrefsKey, nil]];
 }
 
@@ -157,14 +167,13 @@ void ReadConfig(void)
     
     PrepFactoryDefaultPreferences(); // in case user deletes, or on new startup
 	
-	//NOTE this is NOT the "keyValues" member of the controller. Just sayin.
     NSDictionary* keyValues = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey];
 	
     // bind all prefs settings to their PCSXR counterparts
     // with a little finagling to make it work as expected
-	iShowFPS = [[keyValues objectForKey:@"FPS Counter"] boolValue];
+	iShowFPS = [[keyValues objectForKey:kFPSCounter] boolValue];
     
-    if ([[keyValues objectForKey:@"Frame Limit"] boolValue]){
+    if ([[keyValues objectForKey:kFrameLimit] boolValue]){
         bUseFrameLimit = 1;
         iFrameLimit = 2; // required
         fFrameRate = 60; // required (some number, 60 seems ok)
@@ -173,11 +182,11 @@ void ReadConfig(void)
 	// Dithering is either on or off in OpenGL plug, but hey
 	bDrawDither = [[keyValues objectForKey:@"Dither Mode"] intValue];
 	
-	bChangeWinMode = [[keyValues objectForKey:@"Auto Full Screen"] boolValue] ? 2 : 1;
-	bUseFrameSkip = [[keyValues objectForKey:@"Frame Skipping"] boolValue];
+	bChangeWinMode = [[keyValues objectForKey:kAutoFullScreen] boolValue] ? 2 : 1;
+	bUseFrameSkip = [[keyValues objectForKey:kFrameSkipping] boolValue];
 	
-	bUseFixes = [[keyValues objectForKey:@"Enable Hacks"] boolValue];
-	dwCfgFixes = [[keyValues objectForKey:@"Hacks"] unsignedIntValue];
+	bUseFixes = [[keyValues objectForKey:kHacksEnable] boolValue];
+	dwCfgFixes = [[keyValues objectForKey:kHacks] unsignedIntValue];
     
 	
 	// we always start out at 800x600 (at least until resizing the window is implemented)
@@ -187,6 +196,7 @@ void ReadConfig(void)
     iBlurBuffer = [[keyValues objectForKey:@"Blur"] boolValue]; // not noticeable, but doesn't harm
     iUseScanLines = [[keyValues objectForKey:@"Draw Scanlines"] boolValue]; // works
     NSColor* scanColor = [NSUnarchiver unarchiveObjectWithData: [keyValues objectForKey:@"Scanline Color"]];
+	scanColor = [scanColor colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
     iScanlineColor[0] = [scanColor redComponent];
     iScanlineColor[1] = [scanColor greenComponent];
     iScanlineColor[2] = [scanColor blueComponent];
@@ -236,13 +246,14 @@ void ReadConfig(void)
 		ulKeybits &=~ KEY_SHOWFPS;
 	
 	// additional checks
-	if(!iColDepth)       iColDepth=32;
-#if 0 // was in SoftGPU, not in OpenGL
-	if(iUseFixes)        dwActFixes=dwCfgFixes;
-	else						 dwActFixes=0;
-#else
-    dwActFixes = 0; // for now... TODO
-#endif
+	if(!iColDepth)
+		iColDepth=32;
+	if(bUseFixes)
+	{
+		dwActFixes = dwCfgFixes;
+	} else {
+		dwActFixes = 0;
+	}
 	
 	SetFixes();
 	
@@ -254,47 +265,58 @@ void ReadConfig(void)
 	BuildDispMenu(0);
 }
 
-@implementation PluginConfigController
+@implementation NetSfPeopsOpenGLPluginConfigController
+
+@synthesize keyValues;
 
 - (IBAction)cancel:(id)sender
 {
-    //TODO: the IB bindings have already changed everything to what the
-    // user clicked on.
-    // Therefore, "backup" settings should be stored before interaction, 
-    // then restored here.
-    // IMO, 'cancel' is not needed since the config dialog doesn't launch
-    // an action when "ok" is clicked.
 	[self close];
 }
 
 - (IBAction)ok:(id)sender
 {
 
-// most everything is taken care of through bindings in Interface Builder.
-// note that the IB interface uses NSObjectController (a dict controller) as a proxy to
-// NSUserDefaultsController because NSUserDefaultsController can't
-// handle dictionaries. Yup, that's what I said. </snark>.
-
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-   [defaults synchronize];
-
-// treat hacks specially:
 
 	unsigned int hackValues = 0;
-	NSArray *views = [hacksView subviews];
+	NSArray *views = [hacksMatrix cells];
 
-	for (NSView *control in views) {
-		if ([control isKindOfClass:[NSButton class]]) {
-			hackValues |= [(NSControl *)control intValue] << ([control tag] - 1);
-		}
+	for (NSControl *control in views) {
+		hackValues |= [control intValue] << ([control tag] - 1);
 	}
 	
-	keyValues = [NSMutableDictionary dictionaryWithDictionary: [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey]];
+	self.keyValues = [NSMutableDictionary dictionaryWithDictionary: [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey]];
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
-	[writeDic setObject:@((unsigned int)hackValues) forKey:@"Hacks"];
+	[writeDic setObject:@((unsigned int)hackValues) forKey:kHacks];
+	[writeDic setObject:@((BOOL)[hackEnable integerValue]) forKey:kHacksEnable];
+	[writeDic setObject:@((BOOL)[fpsCounter integerValue]) forKey:kFPSCounter];
+	[writeDic setObject:[NSArchiver archivedDataWithRootObject:[scanlineColorWell color]] forKey:@"Scanline Color"];
+	[writeDic setObject:@((BOOL)[frameSkipping integerValue]) forKey:kFrameSkipping];
+	[writeDic setObject:@((BOOL)[autoFullScreen integerValue]) forKey:kAutoFullScreen];
+	//[writeDic setObject:@((BOOL)[frameLimit integerValue]) forKey:kFrameLimit];
+	[writeDic setObject:@((BOOL)[proportionalResize integerValue]) forKey:@"Proportional Resize"];
+	[writeDic setObject:@([ditherMode integerValue]) forKey:@"Dither Mode"];
+	[writeDic setObject:@([offscreenDrawing integerValue]) forKey:@"Offscreen Drawing Level"];
+	[writeDic setObject:@([texColorDepth indexOfItem:[texColorDepth selectedItem]]) forKey:@"Texture Color Depth Level"];
+	[writeDic setObject:@([texEnhancment integerValue]) forKey:@"Texture Enhancement Level"];
+	[writeDic setObject:@([texFiltering integerValue]) forKey:@"Texture Filter Level"];
+	[writeDic setObject:@([frameBufferEffects indexOfItem:[frameBufferEffects selectedItem]]) forKey:@"Frame Buffer Level"];
+	[writeDic setObject:@((BOOL)[drawScanlines integerValue]) forKey:@"Draw Scanlines"];
+	[writeDic setObject:@((BOOL)[advancedBlending integerValue]) forKey:@"Advanced Blending"];
+	[writeDic setObject:@((BOOL)[opaquePass integerValue]) forKey:@"Opaque Pass"];
+	[writeDic setObject:@((BOOL)[blurEffect integerValue]) forKey:@"Blur"];
+	[writeDic setObject:@((BOOL)[zMaskClipping integerValue]) forKey:@"Z Mask Clipping"];
+	[writeDic setObject:@((BOOL)[wireframeOnly integerValue]) forKey:@"Wireframe Mode"];
+	[writeDic setObject:@((BOOL)[mjpegDecoder integerValue]) forKey:@"Emulate mjpeg decoder"];
+	[writeDic setObject:@((BOOL)[mjpegDecoder15bit integerValue]) forKey:@"Fast mjpeg decoder"];
+	[writeDic setObject:@((BOOL)[gteAccuracy integerValue]) forKey:@"GteAccuracy"];
+	[writeDic setObject:@((BOOL)[vSync integerValue]) forKey:kVSync];
 	
-	// write the preferences with Hacks adjustments
+	//[writeDic setObject:@([windowSize indexOfItem:[windowSize selectedItem]]) forKey:@"Window Size"];
+
+
 	[defaults setObject:writeDic forKey:PrefsKey];
 	[defaults synchronize];
 	
@@ -312,52 +334,104 @@ void ReadConfig(void)
 {
     // enable the "hacks" checkboxes 
 	BOOL enable = [sender intValue] ? YES : NO;
-	NSArray *views = [hacksView subviews];
+	NSArray *views = [hacksMatrix cells];
 
-	for (NSView *control in views) {
-		if ([control isKindOfClass:[NSButton class]]) {
-			[(NSControl *)control setEnabled:enable];
-		}
+	for (NSControl *control in views) {
+		[control setEnabled:enable];
 	}
+}
+
+- (void)loadHacksValues
+{
+	unsigned int hackValues = [[self.keyValues objectForKey:kHacks] unsignedIntValue];
+	[hackEnable setIntegerValue:[[self.keyValues objectForKey:kHacksEnable] boolValue]];
+
+    // build refs to hacks checkboxes
+	NSArray *views = [hacksMatrix cells];
+	for (NSControl *control in views) {
+		[control setIntValue:(hackValues >> ([control tag] - 1)) & 1];
+	}
+	
+	[self hackToggle:hackEnable];
 }
 
 - (void)loadValues
 {
 // set up the window with the values in the .plist
 
-// all preferences are bound in Interface Builder.
-// Though the "hacks settings" is controlled here because it disables/enables the list
-// and uses a bit mask
-
-// Note that in the .nib, an NSObjectController (aka "dict controller")
-// is used as a proxy to NSUserDefaults
-// because NSUserDefaults is slightly retarded about nested dictionaries
-// OK, "Completely" retarded.
-
     PrepFactoryDefaultPreferences(); // in case we're starting anew
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	/* load from preferences */
-	keyValues = [NSMutableDictionary dictionaryWithDictionary: [defaults dictionaryForKey:PrefsKey]];
+	self.keyValues = [NSMutableDictionary dictionaryWithDictionary: [defaults dictionaryForKey:PrefsKey]];
 
-	unsigned int hackValues = [[keyValues objectForKey:@"Hacks"] unsignedIntValue];
-
-    // build refs to hacks checkboxes
-	NSArray *views = [hacksView subviews];
-	for (NSView *control in views) {
-		if ([control isKindOfClass:[NSButton class]]) {
-			[(NSControl *)control setIntValue:(hackValues >> ([control tag] - 1)) & 1];
-		}
-	}
+	[self loadHacksValues];
 	
-	[self hackToggle:hackEnable];
+	[autoFullScreen setIntegerValue:[[keyValues objectForKey:kAutoFullScreen] boolValue]];
+	[ditherMode selectItemAtIndex:[[keyValues objectForKey:@"Dither Mode"] integerValue]];
+	[fpsCounter setIntegerValue:[[keyValues objectForKey:kFPSCounter] boolValue]];
+	[scanlineColorWell setColor:[NSUnarchiver unarchiveObjectWithData: [keyValues objectForKey:@"Scanline Color"]]];
+	[frameSkipping setIntegerValue:[[keyValues objectForKey:kFrameSkipping] boolValue]];
+	[advancedBlending setIntegerValue:[[keyValues objectForKey:@"Advanced Blending"] boolValue]];
+	[texFiltering setIntegerValue:[[keyValues objectForKey:@"Texture Filter Level"] integerValue]];
+	[texEnhancment setIntegerValue:[[keyValues objectForKey:@"Texture Enhancement Level"] integerValue]];
+	[zMaskClipping setIntegerValue:[[keyValues objectForKey:@"Z Mask Clipping"] integerValue]];
+	[mjpegDecoder setIntegerValue:[[keyValues objectForKey:@"Emulate mjpeg decoder"] boolValue]];
+	[mjpegDecoder15bit setIntegerValue:[[keyValues objectForKey:@"Fast mjpeg decoder"] boolValue]];
+	[drawScanlines setIntegerValue:[[keyValues objectForKey:@"Draw Scanlines"] boolValue]];
+	[offscreenDrawing selectItemAtIndex:[[keyValues objectForKey:@"Offscreen Drawing Level"] integerValue]];
+	[advancedBlending setIntegerValue:[[keyValues objectForKey:@"Advanced Blending"] boolValue]];
+	[opaquePass setIntegerValue:[[keyValues objectForKey:@"Opaque Pass"] boolValue]];
+	[wireframeOnly setIntegerValue:[[keyValues objectForKey:@"Wireframe Mode"] boolValue]];
+	[blurEffect setIntegerValue:[[keyValues objectForKey:@"Blur"] boolValue]];
+	[texColorDepth selectItemAtIndex:[[keyValues objectForKey:@"Texture Color Depth Level"] integerValue]];
+	[gteAccuracy setIntegerValue:[[keyValues objectForKey:@"GteAccuracy"] boolValue]];
+	[scanlineColorWell setEnabled:[[keyValues objectForKey:@"Draw Scanlines"] boolValue]];
+	[frameBufferEffects selectItemAtIndex:[[keyValues objectForKey:@"Frame Buffer Level"] integerValue]];
+	[vSync setIntegerValue:[[keyValues objectForKey:kVSync] boolValue]];
+	[proportionalResize setIntegerValue:[[keyValues objectForKey:@"Proportional Resize"] boolValue]];
+
+	
+	//[windowSize selectItemAtIndex:[[keyValues objectForKey:@"Window Size"] integerValue]];
 }
 
 - (void)awakeFromNib
 {
-	hacksView = [[hacksView subviews] objectAtIndex:0];
+	//hacksView = [[hacksView subviews] objectAtIndex:0];
     [[NSColorPanel sharedColorPanel] setShowsAlpha:YES]; // eliminate dumb behavior!
+}
+
+- (void)hacksSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+	NSParameterAssert(sheet == hacksWindow);
+	if (returnCode == NSCancelButton) {
+		//Reset hack preferences.
+		[self loadHacksValues];
+	}
+	[sheet orderOut:nil];
+}
+
+- (IBAction)closeHacks:(id)sender
+{
+	if ([sender tag] == 1) {
+		[NSApp endSheet:hacksWindow returnCode:NSOKButton];
+	} else {
+		[NSApp endSheet:hacksWindow returnCode:NSCancelButton];
+	}
+}
+
+- (IBAction)showHacks:(id)sender
+{
+	[NSApp beginSheet:hacksWindow modalForWindow:[self window] modalDelegate:self
+	   didEndSelector:@selector(hacksSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
+}
+
+- (IBAction)toggleCheck:(id)sender
+{
+	if([sender tag] == 1) {
+		[scanlineColorWell setEnabled: [sender intValue] ? YES : NO];
+	}
 }
 
 @end

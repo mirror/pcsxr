@@ -18,8 +18,6 @@
     IBOutlet NSPopUpButton *ditherMode;
     IBOutlet NSControl *fpsCounter;
     IBOutlet NSControl *frameSkipping;
-    IBOutlet NSControl *hackEnable;
-    IBOutlet NSView *hacksView;
     IBOutlet NSControl *vSync;
     
     IBOutlet NSControl *proportionalResize;
@@ -42,14 +40,24 @@
     IBOutlet NSControl *mjpegDecoder;
     IBOutlet NSControl *mjpegDecoder15bit;
 	IBOutlet NSControl *gteAccuracy;
+	IBOutlet NSColorWell *scanlineColorWell;
 	
-      
+	IBOutlet NSMatrix *hacksMatrix;
+	IBOutlet NSControl *hackEnable;
+    IBOutlet NSWindow *hacksWindow;
+    
 	NSMutableDictionary *keyValues;
 }
+@property (readwrite, retain) NSMutableDictionary *keyValues;
+
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;
 - (IBAction)reset:(id)sender;
+- (IBAction)toggleCheck:(id)sender;
+
 - (IBAction)hackToggle:(id)sender;
+- (IBAction)showHacks:(id)sender;
+- (IBAction)closeHacks:(id)sender;
 
 - (void)loadValues;
 
