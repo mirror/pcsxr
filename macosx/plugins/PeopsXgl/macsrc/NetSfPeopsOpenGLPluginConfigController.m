@@ -297,8 +297,8 @@ void ReadConfig(void)
 	[writeDic setObject:@((BOOL)[autoFullScreen integerValue]) forKey:kAutoFullScreen];
 	//[writeDic setObject:@((BOOL)[frameLimit integerValue]) forKey:kFrameLimit];
 	[writeDic setObject:@((BOOL)[proportionalResize integerValue]) forKey:@"Proportional Resize"];
-	[writeDic setObject:@([ditherMode integerValue]) forKey:@"Dither Mode"];
-	[writeDic setObject:@([offscreenDrawing integerValue]) forKey:@"Offscreen Drawing Level"];
+	[writeDic setObject:@([ditherMode indexOfItem:[ditherMode selectedItem]]) forKey:@"Dither Mode"];
+	[writeDic setObject:@([offscreenDrawing indexOfItem:[offscreenDrawing selectedItem]]) forKey:@"Offscreen Drawing Level"];
 	[writeDic setObject:@([texColorDepth indexOfItem:[texColorDepth selectedItem]]) forKey:@"Texture Color Depth Level"];
 	[writeDic setObject:@([texEnhancment integerValue]) forKey:@"Texture Enhancement Level"];
 	[writeDic setObject:@([texFiltering integerValue]) forKey:@"Texture Filter Level"];

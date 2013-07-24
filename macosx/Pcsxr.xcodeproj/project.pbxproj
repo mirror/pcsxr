@@ -2813,7 +2813,6 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				WRAPPER_EXTENSION = psxplugin;
@@ -2830,7 +2829,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				WRAPPER_EXTENSION = psxplugin;
@@ -2849,7 +2847,6 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				WRAPPER_EXTENSION = psxplugin;
 			};
@@ -2865,7 +2862,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				WRAPPER_EXTENSION = psxplugin;
 			};
@@ -2883,7 +2879,6 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					plugins/Common/SDL/include,
 					"$(inherited)",
@@ -2904,7 +2899,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					plugins/Common/SDL/include,
 					"$(inherited)",
@@ -2928,7 +2922,6 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OTHER_CFLAGS = "$(OPTIMIZATION_CFLAGS)";
 				PRODUCT_NAME = PeopsSoftGPU;
@@ -2948,7 +2941,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OTHER_CFLAGS = "$(OPTIMIZATION_CFLAGS)";
 				PRODUCT_NAME = PeopsSoftGPU;
@@ -2969,7 +2961,6 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					plugins/Common/SDL/include,
 					"$(inherited)",
@@ -2992,7 +2983,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					plugins/Common/SDL/include,
 					"$(inherited)",
@@ -3017,6 +3007,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GENERATE_PKGINFO_FILE = NO;
 				INSTALL_PATH = "@rpath";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -3034,6 +3025,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GENERATE_PKGINFO_FILE = NO;
 				INSTALL_PATH = "@rpath";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -3052,7 +3044,6 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_FILE = "plugins/DFSound/Info-AL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
@@ -3071,7 +3062,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_FILE = "plugins/DFSound/Info-AL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
@@ -3093,7 +3083,6 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OTHER_CFLAGS = "$(OPTIMIZATION_CFLAGS)";
 				PRODUCT_NAME = PeopsXGL;
@@ -3113,7 +3102,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OTHER_CFLAGS = "$(OPTIMIZATION_CFLAGS)";
 				PRODUCT_NAME = PeopsXGL;
@@ -3133,7 +3121,6 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				WRAPPER_EXTENSION = psxplugin;
 			};
@@ -3149,7 +3136,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				WRAPPER_EXTENSION = psxplugin;
 			};
@@ -3164,6 +3150,7 @@
 				EXECUTABLE_PREFIX = lib;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GENERATE_PKGINFO_FILE = NO;
 				HEADER_SEARCH_PATHS = (
 					plugins/Common/SDL/include,
 					"$(inherited)",
@@ -3182,6 +3169,7 @@
 				EXECUTABLE_PREFIX = lib;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GENERATE_PKGINFO_FILE = NO;
 				HEADER_SEARCH_PATHS = (
 					plugins/Common/SDL/include,
 					"$(inherited)",
@@ -3204,6 +3192,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../libpcsxcore,
@@ -3250,6 +3239,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GENERATE_PKGINFO_FILE = NO;
 				INSTALL_PATH = "@rpath";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -3264,6 +3254,7 @@
 				EXECUTABLE_PREFIX = lib;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GENERATE_PKGINFO_FILE = NO;
 				HEADER_SEARCH_PATHS = (
 					plugins/Common/SDL/include,
 					"$(inherited)",
@@ -3283,7 +3274,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				WRAPPER_EXTENSION = psxplugin;
 			};
@@ -3299,7 +3289,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					plugins/Common/SDL/include,
 					"$(inherited)",
@@ -3322,7 +3311,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OTHER_CFLAGS = "$(OPTIMIZATION_CFLAGS)";
 				PRODUCT_NAME = PeopsSoftGPU;
@@ -3342,7 +3330,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OTHER_CFLAGS = "$(OPTIMIZATION_CFLAGS)";
 				PRODUCT_NAME = PeopsXGL;
@@ -3361,7 +3348,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					plugins/Common/SDL/include,
 					"$(inherited)",
@@ -3384,7 +3370,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_FILE = "plugins/DFSound/Info-AL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
@@ -3402,7 +3387,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				WRAPPER_EXTENSION = psxplugin;
 			};
@@ -3418,7 +3402,6 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				WRAPPER_EXTENSION = psxplugin;
@@ -3489,6 +3472,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../libpcsxcore,
@@ -3510,6 +3494,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../libpcsxcore,
