@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>PsxP</string>
 	<key>CFBundleSignature</key>
-	<string>DFI</string>
+	<string>DFI </string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>NSPrincipalClass</key>

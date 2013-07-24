@@ -11,8 +11,8 @@
 
 typedef enum _LaunchArgOrder {
 	LaunchArgPreRun = 0,
-	LaunchArgRun = 2,
-	LaunchArgPostRun = 4
+	LaunchArgRun = 200,
+	LaunchArgPostRun = 400
 }LaunchArgOrder;
 
 @interface LaunchArg : NSObject

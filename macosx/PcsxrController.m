@@ -480,7 +480,7 @@ otherblock();\
 			dispatch_block_t runtimeBlock = ^{
 				if (![EmuThread isRunBios]) {
 					//Make sure the emulator is running
-					sleep(2);
+					sleep(5);
 					[EmuThread defrostAt:path];
 				}
 			};
