@@ -349,6 +349,7 @@ static void OnVisualVibration2Toggled(GtkWidget *widget, gpointer user_data) {
 }
 
 static void OnHideCursorToggled(GtkWidget *widget, gpointer user_data) {
+	(void)user_data; // unused
 	g.cfg.HideCursor = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 }
 
@@ -702,12 +703,11 @@ long PADconfigure() {
 	g_signal_connect_data(G_OBJECT(widget), "toggled",
 		G_CALLBACK(OnThreadedToggled), NULL, NULL, G_CONNECT_AFTER);
 
-/*
-    widget = gtk_builder_get_object(xml, "checkcg");
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.HideCursor);
-    g_signal_connect_data(GTK_OBJECT(widget), "toggled",
-        G_CALLBACK(OnHideCursorToggled), NULL, NULL, G_CONNECT_AFTER);
-*/
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, "checkcg"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.HideCursor);
+	g_signal_connect_data(G_OBJECT(widget), "toggled",
+		G_CALLBACK(OnHideCursorToggled), NULL, NULL, G_CONNECT_AFTER);
+
 	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_combodev[1]));
 	g_signal_connect_data(G_OBJECT(widget), "changed",
 		G_CALLBACK(OnDeviceChanged), GINT_TO_POINTER(0), NULL, G_CONNECT_AFTER);

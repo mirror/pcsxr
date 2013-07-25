@@ -25,24 +25,26 @@ static int g_currentMouse_Y;
 static Window window;
 
 void InitKeyboard() {
-	wmprotocols = XInternAtom(g.Disp, "WM_PROTOCOLS", 0);
-	wmdelwindow = XInternAtom(g.Disp, "WM_DELETE_WINDOW", 0);
+    int revert_to;
 
-	XkbSetDetectableAutoRepeat(g.Disp, 1, NULL);
+    wmprotocols = XInternAtom(g.Disp, "WM_PROTOCOLS", 0);
+    wmdelwindow = XInternAtom(g.Disp, "WM_DELETE_WINDOW", 0);
 
+    XkbSetDetectableAutoRepeat(g.Disp, 1, NULL);
+    XGetInputFocus(g.Disp, &window, &revert_to);
     if (g.cfg.PadDef[0].Type == PSE_PAD_TYPE_MOUSE ||
         g.cfg.PadDef[1].Type == PSE_PAD_TYPE_MOUSE) {
-        int revert_to;
-        XGetInputFocus(g.Disp, &window, &revert_to);
         grabCursor(g.Disp, window, 1);
+        showCursor(g.Disp, window, 0);
+    } else if (g.cfg.HideCursor) {
         showCursor(g.Disp, window, 0);
     }
 
     g_currentMouse_X = 0;
     g_currentMouse_Y = 0;
 
-	g.PadState[0].KeyStatus = 0xFFFF;
-	g.PadState[1].KeyStatus = 0xFFFF;
+    g.PadState[0].KeyStatus = 0xFFFF;
+    g.PadState[1].KeyStatus = 0xFFFF;
 }
 
 void DestroyKeyboard() {
@@ -51,6 +53,8 @@ void DestroyKeyboard() {
     if (g.cfg.PadDef[0].Type == PSE_PAD_TYPE_MOUSE ||
         g.cfg.PadDef[1].Type == PSE_PAD_TYPE_MOUSE) {
         grabCursor(g.Disp, window, 0);
+        showCursor(g.Disp, window, 1);
+    } else if (g.cfg.HideCursor) {
         showCursor(g.Disp, window, 1);
     }
 }

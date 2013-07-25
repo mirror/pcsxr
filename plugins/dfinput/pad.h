@@ -217,7 +217,7 @@ enum {
 	CMD_QUERY_ACT = 0x46, // ??
 	CMD_QUERY_COMB = 0x47, // ??
 	CMD_QUERY_MODE = 0x4C, // QUERY_MODE ??
-	CMD_VIBRATION_TOGGLE = 0x4D,
+	CMD_VIBRATION_TOGGLE = 0x4D
 };
 
 // cfg.c functions...
