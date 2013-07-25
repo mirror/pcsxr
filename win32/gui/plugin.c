@@ -163,6 +163,7 @@ void PADhandleKey(int key) {
 			break;
 
 		case VK_ESCAPE:
+			ShowCursor(TRUE); // we want GUI to have cursor always
 			Running = 0;
 			ClosePlugins();
 			SysRunGui();
@@ -215,7 +216,7 @@ int _OpenPlugins(HWND hWnd) {
 	GPU_clearDynarec(clearDynarec);
 
 	ret = CDR_open();
-	if (ret < 0) { SysMessage (_("Error Opening CDR Plugin")); return -1; }
+	//if (ret < 0) { SysMessage (_("Error Opening CDR Plugin")); return -1; }
 
 	SetCurrentDirectory(PcsxrDir);
 	if (Config.UseNet && !NetOpened) {
@@ -284,12 +285,12 @@ int _OpenPlugins(HWND hWnd) {
 	SPU_registerCallback(SPUirq);
 	ret = PAD1_open(hWnd);
 	if (ret < 0) { SysMessage (_("Error Opening PAD1 Plugin (%d)"), ret); return -1; }
-    PAD1_registerVibration(GPU_visualVibration);
-    PAD1_registerCursor(GPU_cursor);
+	PAD1_registerVibration(GPU_visualVibration);
+	PAD1_registerCursor(GPU_cursor);
 	ret = PAD2_open(hWnd);
 	if (ret < 0) { SysMessage (_("Error Opening PAD2 Plugin (%d)"), ret); return -1; }
-    PAD2_registerVibration(GPU_visualVibration);
-    PAD2_registerCursor(GPU_cursor);
+	PAD2_registerVibration(GPU_visualVibration);
+	PAD2_registerCursor(GPU_cursor);
 #ifdef ENABLE_SIO1API
 	ret = SIO1_open(hWnd);
 	if (ret < 0) { SysMessage (_("Error Opening SIO1 plugin (%d)"), ret); return -1; }

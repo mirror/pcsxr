@@ -645,6 +645,7 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 					CdromId[0] = '\0';
 					CdromLabel[0] = '\0';
 					UpdateMenuItems();
+					ShowCursor(TRUE); // we want GUI to have cursor always
 					return TRUE;
 
 				case ID_EMULATOR_SWITCH_ISO:
@@ -1908,7 +1909,7 @@ void SysRunGui() {
 }
 
 void UpdateMenuItems() {
-	if (CdromId[0] != '\0') {
+	if (CdromId[0] != '\0') { // Emulating...
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_NETPLAY, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_LINKCABLE, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CONTROLLERS, MF_BYCOMMAND | MF_GRAYED);
@@ -1921,7 +1922,7 @@ void UpdateMenuItems() {
 		}
 
 		ResetMenuSlots();
-	} else {
+	} else { // GUI...
 		EnableMenuItem(gApp.hMenu, ID_EMULATOR_RESET, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_EMULATOR_RUN, MF_BYCOMMAND | MF_GRAYED);
 		EnableMenuItem(gApp.hMenu, ID_EMULATOR_SHUTDOWN, MF_BYCOMMAND | MF_GRAYED);
@@ -1950,7 +1951,7 @@ void UpdateMenuItems() {
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_NETPLAY, MF_BYCOMMAND | MF_ENABLED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_LINKCABLE, MF_BYCOMMAND | MF_ENABLED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CONTROLLERS, MF_BYCOMMAND | MF_ENABLED);
-		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CDROM, MF_BYCOMMAND | MF_ENABLED);
+		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_CDROM, MF_BYCOMMAND | ( Config.Cdr[0] != '\0' ? MF_ENABLED : MF_GRAYED ));
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_SOUND, MF_BYCOMMAND | MF_ENABLED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION_GRAPHICS, MF_BYCOMMAND | MF_ENABLED);
 		EnableMenuItem(gApp.hMenu, ID_CONFIGURATION, MF_BYCOMMAND | MF_ENABLED);
