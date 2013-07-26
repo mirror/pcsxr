@@ -141,7 +141,6 @@ long PADclose(void) {
 			SDL_Quit();
 		}
 	}
-
 	g.Opened = 0;
 
 	return PSE_PAD_ERR_SUCCESS;

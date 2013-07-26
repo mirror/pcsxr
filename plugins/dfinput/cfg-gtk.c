@@ -353,6 +353,11 @@ static void OnHideCursorToggled(GtkWidget *widget, gpointer user_data) {
 	g.cfg.HideCursor = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 }
 
+static void OnPreventScrSaverToggled(GtkWidget *widget, gpointer user_data) {
+	(void)user_data; // unused
+	g.cfg.PreventScrSaver = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+}
+
 static void ReadDKeyEvent(int padnum, int key) {
 	SDL_Joystick *js;
 	time_t t;
@@ -707,6 +712,11 @@ long PADconfigure() {
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.HideCursor);
 	g_signal_connect_data(G_OBJECT(widget), "toggled",
 		G_CALLBACK(OnHideCursorToggled), NULL, NULL, G_CONNECT_AFTER);
+
+	widget = GTK_WIDGET(gtk_builder_get_object(xml, "checkps"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.PreventScrSaver);
+	g_signal_connect_data(G_OBJECT(widget), "toggled",
+		G_CALLBACK(OnPreventScrSaverToggled), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_combodev[1]));
 	g_signal_connect_data(G_OBJECT(widget), "changed",

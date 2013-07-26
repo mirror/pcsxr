@@ -457,6 +457,29 @@ void OnDestroy() {
 }
 
 void destroy_main_window () {
+#ifdef DISABLE_GNOME_SCREENSAVER
+	// Disable GNOME screensaver
+	int response_token = 0;
+	GError *error;
+	GDBusProxy *proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+					G_DBUS_PROXY_FLAGS_NONE, NULL,
+					"org.gnome.ScreenSaver",
+					"org/gnome/ScreenSaver",
+					"org.gnome.ScreenSaver",
+					NULL, &error);
+
+	GVariant *retval = g_dbus_proxy_call_sync (proxy,
+					 "Inhibit",
+					 g_variant_new ("(ssu)", "PCSXR",
+							"Emulating",
+							response_token),
+					 G_DBUS_CALL_FLAGS_NONE,
+					 2, /* timeout */
+					 NULL, /* cancellable */
+					 &error);
+	printf("Response %i\n", response_token);
+#endif
+
 	destroy = 1;
 	gtk_widget_destroy(Window);
 	Window = NULL;

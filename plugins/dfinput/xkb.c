@@ -23,6 +23,7 @@ static Atom wmprotocols, wmdelwindow;
 static int g_currentMouse_X;
 static int g_currentMouse_Y;
 static Window window;
+static uint8_t resumeScrSaver = 0;
 
 void InitKeyboard() {
     int revert_to;
@@ -30,6 +31,7 @@ void InitKeyboard() {
     wmprotocols = XInternAtom(g.Disp, "WM_PROTOCOLS", 0);
     wmdelwindow = XInternAtom(g.Disp, "WM_DELETE_WINDOW", 0);
 
+    // Hide cursor and lock cursor to window if type is mouse
     XkbSetDetectableAutoRepeat(g.Disp, 1, NULL);
     XGetInputFocus(g.Disp, &window, &revert_to);
     if (g.cfg.PadDef[0].Type == PSE_PAD_TYPE_MOUSE ||
@@ -38,6 +40,20 @@ void InitKeyboard() {
         showCursor(g.Disp, window, 0);
     } else if (g.cfg.HideCursor) {
         showCursor(g.Disp, window, 0);
+    }
+
+    // Disable screensaver - this could be in different place
+    resumeScrSaver = 0;
+    if (g.cfg.PreventScrSaver) {
+        char buf[64];
+        snprintf(buf, 64, "xdg-screensaver suspend 0x%x > /dev/null 2>&1", window);
+        if (pclose(popen(buf, "r")) == 0) {
+            resumeScrSaver = 1;
+            printf("Suspending Window ID 0x%x of activating screensaver.\n", window);
+        } else {
+            //resumeScrSaver = 0;
+            fprintf(stderr, "Failed to execute xdg-screensaver (maybe not installed?)\n");
+        }
     }
 
     g_currentMouse_X = 0;
@@ -50,12 +66,22 @@ void InitKeyboard() {
 void DestroyKeyboard() {
 	XkbSetDetectableAutoRepeat(g.Disp, 0, NULL);
 
+    // Enable cursor and revert grab cursor if mouse
     if (g.cfg.PadDef[0].Type == PSE_PAD_TYPE_MOUSE ||
         g.cfg.PadDef[1].Type == PSE_PAD_TYPE_MOUSE) {
         grabCursor(g.Disp, window, 0);
         showCursor(g.Disp, window, 1);
     } else if (g.cfg.HideCursor) {
         showCursor(g.Disp, window, 1);
+    }
+
+    // Enable screensaver if it was disabled - this could be in different place
+    if (resumeScrSaver) {
+        char buf[64];
+        printf("Resuming Window ID 0x%x to activate screensaver.\n", window);
+        snprintf(buf, 64, "xdg-screensaver resume 0x%x", window);
+        FILE *phandle = popen(buf, "r");
+        pclose(phandle);
     }
 }
 

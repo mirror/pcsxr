@@ -26,7 +26,8 @@ static void SetDefaultConfig() {
 	memset(&g.cfg, 0, sizeof(g.cfg));
 
 	g.cfg.Threaded = 1;
-    g.cfg.HideCursor = 0;
+	g.cfg.HideCursor = 0;
+	g.cfg.PreventScrSaver = 0u;
 
 	g.cfg.PadDef[0].DevNum = 0;
 	g.cfg.PadDef[1].DevNum = 1;
@@ -145,6 +146,8 @@ void LoadPADConfig() {
 			g.cfg.Threaded = atoi(&buf[9]);
 		} else if (strncmp(buf, "HideCursor=", 11) == 0) {
 			g.cfg.HideCursor = atoi(&buf[11]);
+		} else if (strncmp(buf, "PreventScrSaver=", 16) == 0) {
+			g.cfg.PreventScrSaver = atoi(&buf[16]);
 		} else if (strncmp(buf, "[PAD", 4) == 0) {
 			current = atoi(&buf[4]) - 1;
 			if (current < 0) {
@@ -332,7 +335,8 @@ void SavePADConfig() {
 
 	fprintf(fp, "[CONFIG]\n");
 	fprintf(fp, "Threaded=%d\n", g.cfg.Threaded);
-    fprintf(fp, "HideCursor=%d\n", g.cfg.HideCursor);
+	fprintf(fp, "HideCursor=%d\n", g.cfg.HideCursor);
+	fprintf(fp, "PreventScrSaver=%d\n", g.cfg.PreventScrSaver);
 	fprintf(fp, "\n");
 
 	for (i = 0; i < 2; i++) {
