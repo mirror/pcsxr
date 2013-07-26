@@ -18,6 +18,15 @@
 #import "hotkeys.h"
 #import "ARCBridge.h"
 
+static inline void RunOnMainThreadSync(dispatch_block_t block)
+{
+	if ([NSThread isMainThread]) {
+		block();
+	} else {
+		dispatch_sync(dispatch_get_main_queue(), block);
+	}
+}
+
 static BOOL sysInited = NO;
 //#define EMU_LOG
 static IOPMAssertionID powerAssertion = kIOPMNullAssertionID;
@@ -129,22 +138,16 @@ void SysPrintf(const char *fmt, ...) {
 	va_start(list, fmt);
 	vsnprintf(msg, 512, fmt, list);
 	va_end(list);
-	
-	
-	dispatch_block_t printfBlock = ^{
+		
+	RunOnMainThreadSync(^{
 		if (Config.PsxOut) NSLog (@"%s", msg);
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
 		if (emuLog) fprintf(emuLog, "%s %s: %s",[[debugDateFormatter() stringFromDate:[NSDate date]] UTF8String],
-				[[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"] UTF8String], msg);
+							[[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"] UTF8String], msg);
 #endif
 #endif
-	};
-	if ([NSThread isMainThread]) {
-		printfBlock();
-	} else {
-		dispatch_sync(dispatch_get_main_queue(), printfBlock);
-	}
+	});
 	free(msg);
 }
 
@@ -160,16 +163,9 @@ void SysMessage(const char *fmt, ...) {
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedFailureReasonErrorKey];
 	RELEASEOBJ(msg);
 	
-	
-	dispatch_block_t sysBlock = ^{
+	RunOnMainThreadSync(^{
 		[NSApp presentError:[NSError errorWithDomain:@"Unknown Domain" code:-1 userInfo:userInfo]];
-	};
-	
-	if ([NSThread isMainThread]) {
-		sysBlock();
-	} else {
-		dispatch_sync(dispatch_get_main_queue(), sysBlock);
-	}
+	});
 }
 
 void *SysLoadLibrary(const char *lib) {

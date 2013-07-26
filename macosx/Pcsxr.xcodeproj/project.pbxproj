@@ -917,8 +917,8 @@
 			children = (
 				55858D2F178652F90068B8FC /* Configs */,
 				08FB7795FE84155DC02AAC07 /* PCSXR */,
-				551A749D17868B110052D185 /* Frameworks */,
 				551A74AF17868BE90052D185 /* plugins */,
+				551A749D17868B110052D185 /* Frameworks */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 				2BB3D6CF05427FE200831ACB /* Info.plist */,
 			);
@@ -2998,7 +2998,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3017,7 +3016,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3144,6 +3142,7 @@
 		551A77C21786A2890052D185 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				DYLIB_COMPATIBILITY_VERSION = 150.2.50;
 				DYLIB_CURRENT_VERSION = 24;
@@ -3163,6 +3162,7 @@
 		551A77C31786A2890052D185 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				DYLIB_COMPATIBILITY_VERSION = 150.2.50;
 				DYLIB_CURRENT_VERSION = 24;
@@ -3231,7 +3231,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -3248,6 +3247,7 @@
 		557649BC1786B09E007C4457 /* Instrument */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CLANG_ENABLE_OBJC_ARC[arch=x86_64]" = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				DYLIB_COMPATIBILITY_VERSION = 150.2.50;
 				DYLIB_CURRENT_VERSION = 24;

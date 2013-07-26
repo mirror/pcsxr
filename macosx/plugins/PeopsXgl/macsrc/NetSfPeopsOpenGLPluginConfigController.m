@@ -71,7 +71,7 @@ void AboutDlgProc()
 	[icon setSize:size];
 	
 	NSDictionary *infoPaneDict =
-	[NSDictionary dictionaryWithObjectsAndKeys:
+	[[NSDictionary alloc] initWithObjectsAndKeys:
 	 [bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
 	 icon, @"ApplicationIcon",
 	 [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
@@ -82,6 +82,7 @@ void AboutDlgProc()
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[app orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
+	RELEASEOBJ(infoPaneDict);
 }
 
 void DlgProc()

@@ -40,12 +40,20 @@ void SysMessage(const char *fmt, ...)
 	}
 }
 
+static inline void RunOnMainThreadSync(dispatch_block_t block)
+{
+	if ([NSThread isMainThread]) {
+		block();
+	} else {
+		dispatch_sync(dispatch_get_main_queue(), block);
+	}
+}
 
 static SockDialog *globalSock = nil;
 
 void sockCreateWaitDlg()
 {
-	dispatch_sync(dispatch_get_main_queue(), ^{
+	RunOnMainThreadSync(^{
 		if (globalSock == nil) {
 			globalSock = [[SockDialog alloc] init];
 		}
@@ -70,7 +78,7 @@ long sockOpen()
 
 void sockDestroyWaitDlg()
 {
-	dispatch_sync(dispatch_get_main_queue(), ^{
+	RunOnMainThreadSync(^{
 		if (globalSock != nil) {
 			[globalSock close];
 			
