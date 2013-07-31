@@ -455,6 +455,7 @@ int main(int argc, char *argv[]) {
 			g_free(state_filename);
 		}
 
+		autoloadCheats();
 		psxCpu->Execute();
 	}
 

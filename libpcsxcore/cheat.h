@@ -23,6 +23,10 @@
 extern "C" {
 #endif
 
+static const char* all_extension_cht="*.cht";
+static const char* dot_extension_cht=".cht";
+static const char* tla_extension_cht="cht";
+
 typedef struct {
 	uint32_t	Addr;
 	uint16_t	Val;

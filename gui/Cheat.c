@@ -135,7 +135,7 @@ static void OnCheatListDlg_AddClicked(GtkWidget *widget, gpointer user_data) {
 
 	gtk_widget_show_all(dlg);
 
-	if (gtk_dialog_run(GTK_DIALOG(dlg)) == GTK_RESPONSE_ACCEPT) {
+	while (gtk_dialog_run(GTK_DIALOG(dlg)) == GTK_RESPONSE_ACCEPT) {
 		GtkTextBuffer *b = gtk_text_view_get_buffer(GTK_TEXT_VIEW(code_edit));
 		GtkTextIter s, e;
 		char *codetext;
@@ -145,11 +145,12 @@ static void OnCheatListDlg_AddClicked(GtkWidget *widget, gpointer user_data) {
 
 		if (AddCheat(gtk_entry_get_text(GTK_ENTRY(descr_edit)), codetext) != 0) {
 			SysErrorMessage(_("Error"), _("Invalid cheat code!"));
+			continue;
 		}
 
 		LoadCheatListItems(NumCheats - 1);
-
 		free(codetext);
+		break;
 	}
 
 	gtk_widget_destroy(dlg);
@@ -302,7 +303,6 @@ static void OnCheatListDlg_EnableToggled(GtkCellRendererToggle *cell, gchar *pat
 static gchar *lastfilename = NULL;
 
 const gchar* file_filter_all = NULL;
-const gchar* extension_cht="*.cht";
 
 static void OnCheatListDlg_OpenClicked(GtkWidget *widget, gpointer user_data) {
 	GtkWidget *chooser;
@@ -320,7 +320,7 @@ static void OnCheatListDlg_OpenClicked(GtkWidget *widget, gpointer user_data) {
 	g_free(filename);
 
 	filter = gtk_file_filter_new ();
-	gtk_file_filter_add_pattern (filter, extension_cht);
+	gtk_file_filter_add_pattern (filter, all_extension_cht);
 	gtk_file_filter_set_name (filter, _("PCSXR Cheat Code Files (*.cht)"));
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser), filter);
 
@@ -360,12 +360,17 @@ static void OnCheatListDlg_SaveClicked(GtkWidget *widget, gpointer user_data) {
 
 	filename = g_build_filename(getenv("HOME"), CHEATS_DIR, NULL);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(chooser), filename);
-	/*if (lastfilename)*/gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(chooser), lastfilename);
+
+	// Use game code as default filename, otherwise remember what user selected
+	if (!lastfilename) {
+		lastfilename = get_cdrom_label_id(dot_extension_cht);
+	}
+	gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(chooser), lastfilename);
 
 	g_free(filename);
 
 	filter = gtk_file_filter_new();
-	gtk_file_filter_add_pattern(filter, extension_cht);
+	gtk_file_filter_add_pattern(filter, all_extension_cht);
 	gtk_file_filter_set_name(filter, _("PCSXR Cheat Code Files (*.cht)"));
 	gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(chooser), filter);
 
@@ -376,10 +381,10 @@ static void OnCheatListDlg_SaveClicked(GtkWidget *widget, gpointer user_data) {
 
 	if (gtk_dialog_run(GTK_DIALOG(chooser)) == GTK_RESPONSE_OK) {
 		filename = filename2 = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
-	if (!g_str_has_suffix(filename, extension_cht+1) // add extension if cht filter chosen and filename doesn't end with .cht
+	if (!g_str_has_suffix(filename, dot_extension_cht) // add extension if cht filter chosen and filename doesn't end with .cht
 			&& strcmp(file_filter_all, gtk_file_filter_get_name(
 				gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(chooser)))) != 0) {
-		filename = g_strdup_printf ("%s%s", filename2, extension_cht+1);
+		filename = g_strdup_printf ("%s%s", filename2, dot_extension_cht);
 	} else {
 		filename2 = NULL;
 	}

@@ -69,6 +69,7 @@ void LoadCheats(const char *filename) {
 
 	fp = fopen(filename, "r");
 	if (fp == NULL) {
+		SysPrintf(_("Could not load cheats from: %s\n"), filename);
 		return;
 	}
 

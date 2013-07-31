@@ -129,11 +129,11 @@ void ConfigurePlugins() {
 
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_ConfGpu"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_configure_plugin), GINT_TO_POINTER(PSE_LT_GPU), NULL, G_CONNECT_AFTER);
 
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_ConfSpu"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_SPU, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_configure_plugin), GINT_TO_POINTER(PSE_LT_SPU), NULL, G_CONNECT_AFTER);
 
 	/* ADB TODO Does pad 1 and 2 need to be different? */
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_ConfPad1"));
@@ -146,7 +146,7 @@ void ConfigurePlugins() {
 
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_ConfCdr"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(on_configure_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_configure_plugin), GINT_TO_POINTER(PSE_LT_CDR), NULL, G_CONNECT_AFTER);
 #ifdef ENABLE_SIO1API
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_ConfSio1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
@@ -163,11 +163,11 @@ void ConfigurePlugins() {
 #endif
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_AboutGpu"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_GPU, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_about_plugin), GINT_TO_POINTER(PSE_LT_GPU), NULL, G_CONNECT_AFTER);
 
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_AboutSpu"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_SPU, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_about_plugin), GINT_TO_POINTER(PSE_LT_SPU), NULL, G_CONNECT_AFTER);
 
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_AboutPad1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
@@ -179,7 +179,7 @@ void ConfigurePlugins() {
 
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_AboutCdr"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
-			G_CALLBACK(on_about_plugin), (gpointer) PSE_LT_CDR, NULL, G_CONNECT_AFTER);
+			G_CALLBACK(on_about_plugin), GINT_TO_POINTER(PSE_LT_CDR), NULL, G_CONNECT_AFTER);
 #ifdef ENABLE_SIO1API
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_AboutSio1"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
@@ -361,13 +361,13 @@ static int all_config_set() {
 	int retval;
 
 	if ((strlen(Config.Gpu) != 0) &&
-	    (strlen(Config.Spu) != 0) &&
-	    (strlen(Config.Cdr) != 0) &&
+		(strlen(Config.Spu) != 0) &&
+		(strlen(Config.Cdr) != 0) &&
 #ifdef ENABLE_SIO1API
-	    (strlen(Config.Sio1) != 0) &&
+		(strlen(Config.Sio1) != 0) &&
 #endif
-	    (strlen(Config.Pad1) != 0) &&
-	    (strlen(Config.Pad2) != 0))
+		(strlen(Config.Pad1) != 0) &&
+		(strlen(Config.Pad2) != 0))
 		retval = TRUE;
 	else
 		retval = FALSE;
@@ -385,7 +385,7 @@ static int all_config_set() {
 	gchar *filename; \
  \
 	GetComboText(confs.Combo, confs.plist, plugin); \
- 	if (strlen(plugin) > 0) { \
+	if (strlen(plugin) > 0) { \
 		filename = g_build_filename (getenv("HOME"), PLUGINS_DIR, plugin, NULL); \
 		/*printf("Configuring plugin %s\n", filename);*/ \
 		drv = SysLoadLibrary(filename); \
@@ -399,11 +399,11 @@ static int all_config_set() {
 			SysInfoMessage (_("No configuration required"), _("This plugin doesn't need to be configured.")); \
 		SysCloseLibrary(drv); \
 		g_free (filename); \
-    } else SysInfoMessage (name, _("Please select a plugin.")); \
+	} else SysInfoMessage (name, _("Please select a plugin.")); \
 }
 
 static void on_configure_plugin(GtkWidget *widget, gpointer user_data) {
-	gint plugin_type = (int) user_data;
+	gint plugin_type = GPOINTER_TO_INT(user_data);
 
 	while (gtk_events_pending())
 		gtk_main_iteration();
@@ -427,7 +427,7 @@ static void on_configure_plugin(GtkWidget *widget, gpointer user_data) {
 }
 
 static void on_about_plugin(GtkWidget *widget, gpointer user_data) {
-	gint plugin_type = (int) user_data;
+	gint plugin_type = GPOINTER_TO_INT(user_data);
 
 	while (gtk_events_pending())
 		gtk_main_iteration();

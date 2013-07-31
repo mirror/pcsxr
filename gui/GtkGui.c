@@ -209,23 +209,47 @@ int match(const char *string, char *pattern) {
 }
 
 gchar* get_state_filename(int i) {
-	gchar *state_filename;
+	gchar *state_filename, *trimlabel;
 	char SStateFile[64];
+	int j;
+
+	trimlabel = get_cdrom_label_trim();
+
+	sprintf(SStateFile, "%.32s-%.9s.%3.3d", trimlabel, CdromId, i);
+	state_filename = g_build_filename (getenv("HOME"), STATES_DIR, SStateFile, NULL);
+
+	g_free(trimlabel);
+
+	return state_filename;
+}
+
+gchar* get_cdrom_label_trim() {
 	char trimlabel[33];
 	int j;
 
 	strncpy(trimlabel, CdromLabel, 32);
 	trimlabel[32] = 0;
-	for (j = 31; j >= 0; j--)
+	for (j = 31; j >= 0; j--) {
 		if (trimlabel[j] == ' ')
 			trimlabel[j] = 0;
 		else
 			continue;
+	}
 
-	sprintf(SStateFile, "%.32s-%.9s.%3.3d", trimlabel, CdromId, i);
-	state_filename = g_build_filename (getenv("HOME"), STATES_DIR, SStateFile, NULL);
+	return g_strdup(trimlabel);
+}
 
-	return state_filename;
+gchar* get_cdrom_label_id(const gchar* suffix) {
+	const u8 lblmax = sizeof(CdromId) + sizeof(CdromLabel) + 20u;
+	printf("MAx %u\n", lblmax);
+	char buf[lblmax];
+	gchar *trimlabel = get_cdrom_label_trim();
+
+	snprintf(buf, lblmax, "%.32s-%.9s%s", trimlabel, CdromId, suffix);
+
+	g_free(trimlabel);
+
+	return g_strdup(buf);
 }
 
 void UpdateMenuSlots() {
@@ -237,6 +261,14 @@ void UpdateMenuSlots() {
 		Slots[i] = CheckState(str);
 		g_free (str);
 	}
+}
+
+void autoloadCheats() {
+	gchar *chtfile = get_cdrom_label_id(dot_extension_cht);
+	gchar *defaultChtFilePath = g_build_filename (getenv("HOME"), CHEATS_DIR, chtfile, NULL);
+	LoadCheats(defaultChtFilePath); // file existence/access check in LoadCheats()
+	g_free(defaultChtFilePath);
+	g_free(chtfile);
 }
 
 void StartGui() {
@@ -588,6 +620,7 @@ void OnFile_RunCd() {
 		SysRunGui();
 	}
 
+	autoloadCheats();
 	psxCpu->Execute();
 }
 
@@ -760,6 +793,7 @@ void OnFile_RunImage() {
 		SysRunGui();
 	}
 
+	autoloadCheats();
 	psxCpu->Execute();
 }
 
