@@ -25,6 +25,7 @@
 static GtkBuilder *builder;
 static GtkWidget *MemViewDlg = NULL;
 static u32 MemViewAddress = 0;
+static u8 MemViewValue = 0;
 
 /* Copy value of MemViewAddress as text of entry_address */
 static void sync_update_address_text() {
@@ -32,7 +33,7 @@ static void sync_update_address_text() {
 	GtkWidget *widget;
 
 	sprintf(buftext, "%.8X", MemViewAddress | 0x80000000);
-	widget = gtk_builder_get_object(builder, "entry_address");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "entry_address"));
 	gtk_entry_set_text(GTK_ENTRY(widget), buftext);
 }
 
@@ -59,7 +60,7 @@ static void UpdateMemViewDlg() {
 
 	if (end > 0x1fffff) end = 0x1fffff;
 
-	widget = gtk_builder_get_object(builder, "GtkCList_MemView");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_MemView"));
 
 	buftext[16] = '\0';
 
@@ -104,11 +105,43 @@ static void MemView_Next() {
 static void MemView_Go() {
 	GtkWidget *widget;
 
-	widget = gtk_builder_get_object(builder, "entry_address");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "entry_address"));
 
 	sscanf(gtk_entry_get_text(GTK_ENTRY(widget)), "%x", &MemViewAddress);
 
 	UpdateMemViewDlg();
+}
+
+static void MemView_RowActivated(
+	GtkTreeView			*tree_view,
+	GtkTreePath			*path,
+	GtkTreeViewColumn	*column,
+	gpointer			user_data)
+{
+	GtkTreeIter iter;
+	GtkTreeModel *mdl = gtk_tree_view_get_model(tree_view);
+
+	if (gtk_tree_model_get_iter(mdl, &iter, path)) {
+		const char *title = gtk_tree_view_column_get_title(column);
+		char *value, *address;
+		s8 index;
+		if (title[1] != '\0') {
+			index=1;
+		} else if (title[0] > 0x40) {
+			index=title[0]-0x36;
+		} else {
+			index=title[0]-0x2F;
+		}
+		gtk_tree_model_get(mdl, &iter, 0, &address,  index, &value, -1);
+		sscanf(value, "%x", &MemViewValue);
+		sscanf(address, "%x", &MemViewAddress);
+		MemViewAddress &= ~0xF;
+		MemViewAddress |= (index-1u);
+		sync_update_address_text();
+
+		g_free(address);
+		g_free(value);
+	}
 }
 
 static void MemView_Dump() {
@@ -192,7 +225,7 @@ static void MemView_Dump() {
 static void MemView_Patch() {
 	GtkWidget *dlg;
 	GtkWidget *box, *table, *label, *addr_edit, *val_edit;
-	char buf[10];
+	char buf[12];
 
 	dlg = gtk_dialog_new_with_buttons(_("Memory Patch"), GTK_WINDOW(MemViewDlg),
 		GTK_DIALOG_MODAL, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -218,6 +251,8 @@ static void MemView_Patch() {
 	gtk_widget_show(label);
 
 	val_edit = gtk_entry_new();
+	sprintf(buf, "%.2X", MemViewValue);
+	gtk_entry_set_text(GTK_ENTRY(val_edit), buf);
 	gtk_table_attach(GTK_TABLE(table), val_edit, 1, 2, 1, 2, 0, 0, 5, 5);
 	gtk_widget_show(val_edit);
 
@@ -278,12 +313,12 @@ void RunDebugMemoryDialog() {
 		return;
 	}
 	
-	MemViewDlg = gtk_builder_get_object(builder, "MemViewDlg");
+	MemViewDlg = GTK_WIDGET(gtk_builder_get_object(builder, "MemViewDlg"));
 	
 	gtk_window_set_title(GTK_WINDOW(MemViewDlg), _("Memory Viewer"));
 	gtk_widget_show (MemViewDlg);
 	
-	widget = gtk_builder_get_object(builder, "GtkCList_MemView");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_MemView"));
 
 	renderer = gtk_cell_renderer_text_new();
 	column = gtk_tree_view_column_new_with_attributes(_("Address"),
@@ -317,23 +352,26 @@ void RunDebugMemoryDialog() {
 
 	UpdateMemViewDlg();
 
-	widget = gtk_builder_get_object(builder, "btn_dump");
+	g_signal_connect_data(G_OBJECT(widget), "row-activated",
+		G_CALLBACK(MemView_RowActivated), builder, NULL, G_CONNECT_AFTER);
+
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_dump"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(MemView_Dump), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_patch");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_patch"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(MemView_Patch), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_go");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_go"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(MemView_Go), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_prev");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_prev"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(MemView_Prev), builder, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "btn_next");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_next"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(MemView_Next), builder, NULL, G_CONNECT_AFTER);
 
