@@ -30,6 +30,7 @@ void ShowHelpAndExit(FILE* output, int exitCode);
 	NSMutableArray *skipFiles;
 }
 @property (readonly) RecentItemsMenu *recentItems;
+@property (readonly) CheatController *cheatController;
 @property (readonly) BOOL endAtEmuClose;
 
 - (IBAction)ejectCD:(id)sender;

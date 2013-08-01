@@ -119,6 +119,20 @@
 				<string>public.iso-image</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>cht</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Playstation Cheat</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.codeplex.pcsxr.cheat</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
@@ -234,6 +248,24 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>pcsxrstate</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>PCSXR Cheat</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.codeplex.pcsxr.cheat</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cht</string>
 				</array>
 			</dict>
 		</dict>

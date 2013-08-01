@@ -88,7 +88,7 @@ BOOL handleHotkey(NSString* keyCode) {
 
 void setupHotkey(int hk, NSString *label, NSDictionary *binding) {
 	if(binding != nil)
-		[hotkeys setObject:[NSNumber numberWithInt:hk] forKey:[binding objectForKey:@"keyCode"]];
+		[hotkeys setObject:@(hk) forKey:[binding objectForKey:@"keyCode"]];
 }
 
 void setupHotkeys() {

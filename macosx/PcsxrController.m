@@ -7,6 +7,7 @@
 #import "PcsxrPluginHandler.h"
 #import "PcsxrDiscHandler.h"
 #import "PcsxrFreezeStateHandler.h"
+#import "PcsxrCheatHandler.h"
 #import "LaunchArg.h"
 #include "psxcommon.h"
 #include "plugins.h"
@@ -56,6 +57,7 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 
 @synthesize recentItems;
 @synthesize skipFiles;
+@synthesize cheatController;
 
 - (BOOL)endAtEmuClose
 {
@@ -835,7 +837,7 @@ otherblock();\
 	}
 	static NSArray *handlers = nil;
 	if (handlers == nil) {
-		handlers = @[[PcsxrPluginHandler class], [PcsxrMemCardHandler class], [PcsxrFreezeStateHandler class], [PcsxrDiscHandler class]];
+		handlers = @[[PcsxrPluginHandler class], [PcsxrMemCardHandler class], [PcsxrFreezeStateHandler class], [PcsxrDiscHandler class], [PcsxrCheatHandler class]];
 		RETAINOBJNORETURN(handlers);
 	}
 	BOOL isHandled = NO;

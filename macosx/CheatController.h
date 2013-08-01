@@ -10,6 +10,8 @@
     IBOutlet NSTableView *cheatView;
 }
 
+- (void)refresh;
+
 -(IBAction)SaveCheats:(id)sender;
 -(IBAction)LoadCheats:(id)sender;
 -(IBAction)clear:(id)sender;

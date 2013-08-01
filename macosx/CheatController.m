@@ -8,6 +8,7 @@
 #include "cheat.h"
 #import "CheatController.h"
 #import "ARCBridge.h"
+#import "PcsxrCheatHandler.h"
 
 @implementation CheatController
 
@@ -32,9 +33,9 @@
         return nil;
     NSString *ident = [col identifier];
     if ([ident isEqualToString:@"COL_NAME"]) {
-        return [NSString stringWithCString:Cheats[idx].Descr encoding:NSUTF8StringEncoding];
+        return @(Cheats[idx].Descr);
     } else if ([ident isEqualToString:@"COL_ENABLE"]) {
-        return [NSNumber numberWithInt: Cheats[idx].Enabled ? NSOnState : NSOffState];
+        return @( Cheats[idx].Enabled ? NSOnState : NSOffState);
     }
     NSLog(@"Unknown column identifier: %@", ident);
     return nil;
@@ -58,6 +59,8 @@
     NSOpenPanel *openDlg = RETAINOBJ([NSOpenPanel openPanel]);
     [openDlg setCanChooseFiles:YES];
     [openDlg setCanChooseDirectories:NO];
+	[openDlg setAllowsMultipleSelection:YES];
+	[openDlg setAllowedFileTypes:[PcsxrCheatHandler supportedUTIs]];
     
     if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
         NSArray *files = [openDlg URLs];
@@ -72,6 +75,9 @@
 - (IBAction)SaveCheats:(id)sender
 {
     NSSavePanel *saveDlg = RETAINOBJ([NSSavePanel savePanel]);
+	[saveDlg setAllowedFileTypes:[PcsxrCheatHandler supportedUTIs]];
+	[saveDlg setCanSelectHiddenExtension:YES];
+	[saveDlg setCanCreateDirectories:YES];
     [saveDlg setPrompt:NSLocalizedString(@"Save Cheats", nil)];
     if ([saveDlg runModal] == NSFileHandlingPanelOKButton) {
         NSURL *url = [saveDlg URL];
