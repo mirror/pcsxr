@@ -141,7 +141,7 @@ void ReadConfig(void)
 								 @((unsigned int)0), @"Hacks",
 								 [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"] bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil], @"VertexShader",
 								 [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"] bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil], @"FragmentShader",
-								 [NSNumber numberWithBool:NO], @"UseShader",
+								 @NO, @"UseShader",
 								 @4, @"ShaderQuality",
 								 nil], PrefsKey,
 								nil]];
@@ -198,15 +198,15 @@ void ReadConfig(void)
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
-	[writeDic setObject:[NSNumber numberWithBool:[fpsCounter intValue]] forKey:@"FPS Counter"];
-	[writeDic setObject:[NSNumber numberWithBool:[autoFullScreen intValue]] forKey:@"Auto Full Screen"];
-	[writeDic setObject:[NSNumber numberWithBool:[frameSkipping intValue]] forKey:@"Frame Skipping"];
-	//[writeDic setObject:[NSNumber numberWithInt:[frameLimit intValue]] forKey:@"Frame Limit"];
-	[writeDic setObject:[NSNumber numberWithBool:[vSync intValue]] forKey:@"VSync"];
-	[writeDic setObject:[NSNumber numberWithBool:[hackEnable intValue]] forKey:@"Enable Hacks"];
-	[writeDic setObject:[NSNumber numberWithBool:[shaders intValue]] forKey:@"UseShader"];
-	[writeDic setObject:[NSNumber numberWithInteger:[shaderQualitySelector indexOfSelectedItem] + 1] forKey:@"ShaderQuality"];
-	[writeDic setObject:[NSNumber numberWithInteger:[ditherMode indexOfSelectedItem]] forKey:@"Dither Mode"];
+	[writeDic setObject:@((BOOL)[fpsCounter intValue]) forKey:@"FPS Counter"];
+	[writeDic setObject:@((BOOL)[autoFullScreen intValue]) forKey:@"Auto Full Screen"];
+	[writeDic setObject:@((BOOL)[frameSkipping intValue]) forKey:@"Frame Skipping"];
+	//[writeDic setObject:@([frameLimit intValue]) forKey:@"Frame Limit"];
+	[writeDic setObject:@((BOOL)[vSync intValue]) forKey:@"VSync"];
+	[writeDic setObject:@((BOOL)[hackEnable intValue]) forKey:@"Enable Hacks"];
+	[writeDic setObject:@((BOOL)[shaders intValue]) forKey:@"UseShader"];
+	[writeDic setObject:@([shaderQualitySelector indexOfSelectedItem] + 1) forKey:@"ShaderQuality"];
+	[writeDic setObject:@([ditherMode indexOfSelectedItem]) forKey:@"Dither Mode"];
 	
 	unsigned int hackValues = 0;
 	NSArray *views = [hacksView subviews];
@@ -216,7 +216,7 @@ void ReadConfig(void)
 		}
 	}
 	
-	[writeDic setObject:[NSNumber numberWithUnsignedInt:hackValues] forKey:@"Hacks"];
+	[writeDic setObject:@(hackValues) forKey:@"Hacks"];
 
 	[writeDic setObject:[vertexPath bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil] forKey:@"VertexShader"];
 	[writeDic setObject:[fragmentPath bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil] forKey:@"FragmentShader"];
