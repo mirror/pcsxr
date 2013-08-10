@@ -41,7 +41,6 @@ extern char* PLUGLOC(char* toloc);
 #define PrefsKey APP_ID @" Settings"
 
 static PluginConfigController *windowController = nil;
-char * pConfigFile=NULL;
 
 void AboutDlgProc()
 {
@@ -188,6 +187,9 @@ void ReadConfig(void)
 
 @implementation NetSfPeopsSoftGPUPluginConfigController
 
+@synthesize fragmentPath;
+@synthesize vertexPath;
+
 - (IBAction)cancel:(id)sender
 {
 	[self close];
@@ -259,6 +261,24 @@ void ReadConfig(void)
 	}
 }
 
+- (void)setFragmentPathInfo:(NSURL *)_fragmentPath
+{
+	self.fragmentPath = _fragmentPath;
+	if (_fragmentPath) {
+		[fragmentShaderViewablePath setTitleWithMnemonic:[fragmentPath lastPathComponent]];
+		[fragmentShaderViewablePath setToolTip:[fragmentPath path]];
+	}
+}
+
+- (void)setVertexPathInfo:(NSURL *)_vertexPath
+{
+	self.vertexPath = _vertexPath;
+	if (_vertexPath) {
+		[vertexShaderViewablePath setTitleWithMnemonic:[vertexPath lastPathComponent]];
+		[vertexShaderViewablePath setToolTip:[vertexPath path]];
+	}
+}
+
 - (IBAction)selectShader:(id)sender {
 	NSOpenPanel *openPanel = RETAINOBJ([NSOpenPanel openPanel]);
 	[openPanel setAllowsMultipleSelection:NO];
@@ -267,13 +287,9 @@ void ReadConfig(void)
 	if ([openPanel runModal] == NSFileHandlingPanelOKButton)
 	{
 		if ([sender tag] == 1) {
-			RELEASEOBJ(vertexPath);
-			vertexPath = RETAINOBJ([openPanel URL]);
-			[vertexShaderViewablePath setTitleWithMnemonic:[vertexPath path]];
+			[self setVertexPathInfo:[openPanel URL]];
 		} else {
-			RELEASEOBJ(fragmentPath);
-			fragmentPath = RETAINOBJ([openPanel URL]);
-			[fragmentShaderViewablePath setTitleWithMnemonic:[fragmentPath path]];
+			[self setFragmentPathInfo:[openPanel URL]];
 		}
 	}
 	
@@ -292,21 +308,19 @@ void ReadConfig(void)
 	
 	{
 		BOOL resetPrefs = NO;
-		vertexPath = [NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"VertexShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil];
+		[self setVertexPathInfo:[NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"VertexShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil]];
 		if (!vertexPath) {
 			resetPrefs = YES;
 		}
-		fragmentPath = [NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"FragmentShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil];
+		[self setFragmentPathInfo:[NSURL URLByResolvingBookmarkData:[keyValues objectForKey:@"FragmentShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil]];
 		if (!fragmentPath) {
 			resetPrefs = YES;
 		}
 		if (resetPrefs) {
 			NSBundle *selfBundle = [NSBundle bundleForClass:[self class]];
-			vertexPath = [selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"];
-			fragmentPath = [selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"];
+			[self setVertexPathInfo:[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"]];
+			[self setFragmentPathInfo:[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"]];
 		}
-		RETAINOBJNORETURN(vertexPath);
-		RETAINOBJNORETURN(fragmentPath);
 	}
 	[fpsCounter setIntValue:[[keyValues objectForKey:@"FPS Counter"] intValue]];
 	[autoFullScreen setIntValue:[[keyValues objectForKey:@"Auto Full Screen"] intValue]];
@@ -318,10 +332,6 @@ void ReadConfig(void)
 	[ditherMode selectItemAtIndex:[[keyValues objectForKey:@"Dither Mode"] intValue]];
 	[shaderQualitySelector selectItemAtIndex:[[keyValues objectForKey:@"ShaderQuality"] intValue] - 1];
 	
-	[vertexShaderViewablePath setTitleWithMnemonic:[vertexPath lastPathComponent]];
-	[vertexShaderViewablePath setToolTip:[vertexPath path]];
-	[fragmentShaderViewablePath setTitleWithMnemonic:[fragmentPath lastPathComponent]];
-	[fragmentShaderViewablePath setToolTip:[fragmentPath path]];
 	unsigned int hackValues = [[keyValues objectForKey:@"Hacks"] unsignedIntValue];
 	
 	NSArray *views = [hacksView subviews];
