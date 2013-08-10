@@ -615,11 +615,30 @@ otherblock();\
 		}
 	}
 
-	str = [[[defaults URLForKey:@"Mcd1"] path] fileSystemRepresentation];
-	if (str) strlcpy(Config.Mcd1, str, MAXPATHLEN);
-
-	str = [[[defaults URLForKey:@"Mcd2"] path] fileSystemRepresentation];
-	if (str) strlcpy(Config.Mcd2, str, MAXPATHLEN);
+	{
+		NSFileManager *manager = [NSFileManager defaultManager];
+		NSURL *memoryURL = [[[manager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL] URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"Memory Cards"];
+		
+		str = [[[defaults URLForKey:@"Mcd1"] path] fileSystemRepresentation];
+		if (str) {
+			strlcpy(Config.Mcd1, str, MAXPATHLEN);
+		} else {
+			NSURL *url = [memoryURL URLByAppendingPathComponent:@"Mcd001.mcr"];
+			[defaults setURL:url forKey:@"Mcd1"];
+			str = [[url path] fileSystemRepresentation];
+			if (str != nil) strlcpy(Config.Mcd1, str, MAXPATHLEN);
+		}
+		
+		str = [[[defaults URLForKey:@"Mcd2"] path] fileSystemRepresentation];
+		if (str) {
+			strlcpy(Config.Mcd2, str, MAXPATHLEN);
+		} else {
+			NSURL *url = [memoryURL URLByAppendingPathComponent:@"Mcd002.mcr"];
+			[defaults setURL:url forKey:@"Mcd2"];
+			str = [[url path] fileSystemRepresentation];
+			if (str != nil) strlcpy(Config.Mcd2, str, MAXPATHLEN);
+		}
+	}
 
 	if ([defaults boolForKey:@"UseHLE"] || 0 == [biosList count]) {
 		strcpy(Config.Bios, "HLE");
