@@ -290,8 +290,17 @@
 		NSRunCriticalAlertPanel(NSLocalizedString(@"Plugin Initialization Failed!", nil),
 								NSLocalizedString(@"Pcsxr failed to initialize the selected %@ plugin (error=%i).\nThe plugin might not work with your system.", nil),
 								nil, nil, nil, [PcsxrPlugin prefixForType:aType], res);
+		return res;
 	}
 	
+	//Prevent a memory leak.
+	long (*shutdown)(void);
+	shutdown = SysLoadSym(pluginRef, [PluginSymbolName(aType, @"shutdown")
+									  cStringUsingEncoding:NSASCIIStringEncoding]);
+	if (SysLibError() == nil) {
+		shutdown();
+	}
+
 	return res;
 }
 
