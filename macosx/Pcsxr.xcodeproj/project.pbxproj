@@ -28,6 +28,7 @@
 		2BB3D6C205427FE200831ACB /* EmuThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBB1792051E113B00B84448 /* EmuThread.m */; };
 		2BB3D6C305427FE200831ACB /* Plugin.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BBB17DA051E4D0F00B84448 /* Plugin.c */; };
 		2BB3D6C405427FE200831ACB /* PcsxrPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA44361052DB2EA00E21DDD /* PcsxrPlugin.m */; };
+		550F023D17BFFD97002594DF /* PcsxrHexadecimalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F023C17BFFD97002594DF /* PcsxrHexadecimalFormatter.m */; };
 		551A75C917868C4E0052D185 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A749E17868B110052D185 /* Cocoa.framework */; };
 		551A75CF17868C860052D185 /* Bladesio1PluginConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551A74B417868BEA0052D185 /* Bladesio1PluginConfig.xib */; };
 		551A75D017868C860052D185 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 551A74B617868BEA0052D185 /* Credits.rtf */; };
@@ -444,6 +445,8 @@
 		2BBB1791051E113B00B84448 /* EmuThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmuThread.h; sourceTree = "<group>"; };
 		2BBB1792051E113B00B84448 /* EmuThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EmuThread.m; sourceTree = "<group>"; usesTabs = 1; };
 		2BBB17DA051E4D0F00B84448 /* Plugin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Plugin.c; sourceTree = SOURCE_ROOT; usesTabs = 1; };
+		550F023B17BFFD97002594DF /* PcsxrHexadecimalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrHexadecimalFormatter.h; sourceTree = "<group>"; };
+		550F023C17BFFD97002594DF /* PcsxrHexadecimalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrHexadecimalFormatter.m; sourceTree = "<group>"; };
 		551A749E17868B110052D185 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		551A74A117868B110052D185 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		551A74A217868B110052D185 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -1805,6 +1808,8 @@
 				55EC05FD178916E70053AC23 /* MemBadgeView.m */,
 				5550D2711683C923006C56B5 /* RecentItemsMenu.h */,
 				5550D2721683C923006C56B5 /* RecentItemsMenu.m */,
+				550F023B17BFFD97002594DF /* PcsxrHexadecimalFormatter.h */,
+				550F023C17BFFD97002594DF /* PcsxrHexadecimalFormatter.m */,
 			);
 			name = "Helper Classes";
 			sourceTree = "<group>";
@@ -2260,6 +2265,7 @@
 				55EC05FE178916E80053AC23 /* MemBadgeView.m in Sources */,
 				55E0ACE0178B69620005C945 /* LaunchArg.m in Sources */,
 				5581463917AABCD100862DBF /* PcsxrCheatHandler.m in Sources */,
+				550F023D17BFFD97002594DF /* PcsxrHexadecimalFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
