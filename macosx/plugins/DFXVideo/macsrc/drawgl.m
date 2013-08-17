@@ -114,7 +114,7 @@ unsigned long ulInitDisplay(void)	// OPEN GAME WINDOW
 		BuildDispMenu(0);
 	}
 	__block NSWindow *window = nil;
-	dispatch_sync(dispatch_get_main_queue(), ^{
+	RunOnMainThreadSync(^{
 		PluginWindowController *windowController = [PluginWindowController openGameView];
 		glView = [windowController openGLView];
 		

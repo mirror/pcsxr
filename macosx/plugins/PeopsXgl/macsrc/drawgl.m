@@ -133,29 +133,29 @@ void DoClearFrontBuffer(void)                          // CLEAR DX BUFFER
 
 unsigned long ulInitDisplay(void)	// OPEN GAME WINDOW
 {
-	bUsingTWin=FALSE;                          
-
-//	InitMenu(); // This function does nothing 
-
+	bUsingTWin = FALSE;
+	
+	//InitMenu(); // This function does nothing
+	
 	bIsFirstFrame = FALSE;
-
+	
 	if(iShowFPS)
 	{
 		//iShowFPS=0;
-		ulKeybits|=KEY_SHOWFPS;
-		szDispBuf[0]=0;
+		ulKeybits |= KEY_SHOWFPS;
+		szDispBuf[0] = 0;
 		BuildDispMenu(0);
 	}
 	
-    __block PluginWindowController *windowController;
-    
-    // this causes a runtime error if it's done on a thread other than the main thread
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        windowController = [PluginWindowController openGameView];
-        glView = [windowController openGLView];
+	__block PluginWindowController *windowController;
 	
-        [[windowController window] setTitle:@(pCaptionText)];
-    });
+	// this causes a runtime error if it's done on a thread other than the main thread
+	RunOnMainThreadSync(^{
+		windowController = [PluginWindowController openGameView];
+		glView = [windowController openGLView];
+		
+		[[windowController window] setTitle:@(pCaptionText)];
+	});
 	
 	return (unsigned long)[windowController window];
 }

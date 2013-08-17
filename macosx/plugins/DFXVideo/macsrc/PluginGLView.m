@@ -606,7 +606,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 
 	//printf("y=%i",PSXDisplay.DisplayPosition.y);
 
-	dispatch_sync(dispatch_get_main_queue(), ^{
+	RunOnMainThreadSync(^{
 		unsigned char * surf;
 		long x = PSXDisplay.DisplayPosition.x;
 		long y = PSXDisplay.DisplayPosition.y;

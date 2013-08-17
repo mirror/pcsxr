@@ -33,33 +33,39 @@
 
 @implementation PluginGLView
 
-- (BOOL)isOpaque {	return YES; } 
-- (BOOL)acceptsFirstResponder { return NO; }
+- (BOOL)isOpaque
+{
+	return YES;
+}
+- (BOOL)acceptsFirstResponder
+{
+	return NO;
+}
 
 - (id) initWithCoder: (NSCoder *) coder
 {
-    // Set up pixel format on creation
-    // and, well, that's about it.
-    if ((self = [super initWithCoder:coder]) == nil)
+	// Set up pixel format on creation
+	// and, well, that's about it.
+	if ((self = [super initWithCoder:coder]) == nil)
 		return nil;
-
+	
 	glLock = [[NSLock alloc] init];
 	if (nil == glLock) {
 		AUTORELEASEOBJNORETURN(self);
 		return nil;
 	}
-
+	
 	// Init pixel format attribs
 	NSOpenGLPixelFormatAttribute attrs[] =
 	{
 		NSOpenGLPFAAccelerated,
 		NSOpenGLPFANoRecovery,
 		NSOpenGLPFADoubleBuffer,
-//      NSOpenGLPFASampleBuffers, 1,  // For full screen AA when implemented
-//      NSOpenGLPFASamples, 2,
+		//NSOpenGLPFASampleBuffers, 1,  // For full screen AA when implemented
+		//NSOpenGLPFASamples, 2,
 		0
 	};
-
+	
 	// Get pixel format from OpenGL
 	NSOpenGLPixelFormat* pixFmt = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
 	if (!pixFmt)
@@ -71,7 +77,7 @@
 			NSOpenGLPFANoRecovery,
 			0
 		};
-
+		
 		// Get pixel format from OpenGL
 		pixFmt = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs2];
 		if (!pixFmt) {
@@ -83,11 +89,11 @@
 	}
 	
 	[self setPixelFormat:AUTORELEASEOBJ(pixFmt)];
-
+	
 	[[self openGLContext] makeCurrentContext];
-
-    // we're done, dude.
-
+	
+	// we're done, dude.
+	
 	// Call for a redisplay
 	noDisplay = YES; // hm, this can be deleted I think
 	PSXDisplay.Disabled = 1;
@@ -109,21 +115,21 @@
 - (void)reshape	// scrolled, moved or resized
 {
 	[super reshape];
-    
-    [glLock lock];  // not sure if needed, but hey
-    [[self openGLContext] makeCurrentContext];
-    
-    NSRect rect = [self bounds];
-    rect.size = [self convertSize:rect.size toView:nil];
-    glViewport(0.0, 0.0, NSWidth(rect), NSHeight(rect));
- 
-    glClearColor (1.0, 0.5, 0.0, 0.0);
+	
+	[glLock lock];  // not sure if needed, but hey
+	[[self openGLContext] makeCurrentContext];
+	
+	NSRect rect = [self bounds];
+	rect.size = [self convertSize:rect.size toView:nil];
+	glViewport(0.0, 0.0, NSWidth(rect), NSHeight(rect));
+	
+	glClearColor (1.0, 0.5, 0.0, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT);
-   [[self openGLContext] flushBuffer];
-
-//    [NSOpenGLContext clearCurrentContext]; // this makes bad things happen, so screw it.
+	[[self openGLContext] flushBuffer];
+	
+	//[NSOpenGLContext clearCurrentContext]; // this makes bad things happen, so screw it.
 	[glLock unlock];
-    return;
+	return;
 }
 
 - (void)swapBuffer
@@ -142,7 +148,7 @@
 		//[self loadTextures:NO];
 	} else {
 		noDisplay = YES;
-        //		[self setNeedsDisplay:true];
+		//		[self setNeedsDisplay:true];
 	}
 }
 

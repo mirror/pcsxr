@@ -72,23 +72,27 @@ void AboutDlgProc()
 	RELEASEOBJ(infoPaneDict);
 }
 
+static inline void RunOnMainThreadSync(dispatch_block_t block)
+{
+	if ([NSThread isMainThread]) {
+		block();
+	} else {
+		dispatch_sync(dispatch_get_main_queue(), block);
+	}
+}
+
 void ConfDlgProc()
 {
 	__block NSWindow *window;
 	__block PluginConfigController *tmpWindowController = nil;
 	
 	//We need this block due to the xib's use of auto layout
-	dispatch_block_t getWindowBlock = ^{
+	RunOnMainThreadSync(^{
 		if (windowController == nil) {
 			tmpWindowController = [[PluginConfigController alloc] initWithWindowNibName:@"Bladesio1PluginConfig"];
 		}
 		window = [(windowController ? windowController : tmpWindowController) window];
-	};
-	if ([NSThread isMainThread]) {
-		getWindowBlock();
-	} else {
-		dispatch_sync(dispatch_get_main_queue(), getWindowBlock);
-	}
+	});
 	if (!windowController) {
 		windowController = tmpWindowController;
 	}
