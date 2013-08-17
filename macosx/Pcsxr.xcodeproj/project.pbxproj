@@ -926,7 +926,6 @@
 				551A74AF17868BE90052D185 /* plugins */,
 				551A749D17868B110052D185 /* Frameworks */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
-				2BB3D6CF05427FE200831ACB /* Info.plist */,
 			);
 			name = Pcsxr;
 			sourceTree = "<group>";
@@ -969,14 +968,14 @@
 				2B143D04078A2CBD00AF745A /* psxbios.icns */,
 				2B143D05078A2CBD00AF745A /* psxplugin.icns */,
 			);
-			name = icons;
-			path = ../icons;
+			path = icons;
 			sourceTree = "<group>";
 		};
 		2BA178AD0514CE260026D74D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				2B143D00078A2CBD00AF745A /* icons */,
+				2BB3D6CF05427FE200831ACB /* Info.plist */,
 				02FE55E616765F9400205CF2 /* KeyNames.plist */,
 				2BBB1786051E0D9700B84448 /* Credits.rtf */,
 				28F0C3C4146521A700A90285 /* Configuration.xib */,
@@ -988,7 +987,6 @@
 				D422E66C16DC48D000526DCF /* CheatWindow.xib */,
 			);
 			name = Resources;
-			path = English.lproj;
 			sourceTree = "<group>";
 		};
 		2BBD6C1D04C893F500A83E33 /* PlugIns */ = {
@@ -2502,6 +2500,7 @@
 				02FE55E716765F9400205CF2 /* English */,
 			);
 			name = KeyNames.plist;
+			path = English.lproj;
 			sourceTree = "<group>";
 		};
 		28F0C3C4146521A700A90285 /* Configuration.xib */ = {
@@ -2510,6 +2509,7 @@
 				28F0C3C5146521A700A90285 /* English */,
 			);
 			name = Configuration.xib;
+			path = English.lproj;
 			sourceTree = "<group>";
 		};
 		28F0C3C7146521B000A90285 /* PCSXR.xib */ = {
@@ -2518,6 +2518,7 @@
 				28F0C3C8146521B000A90285 /* English */,
 			);
 			name = PCSXR.xib;
+			path = English.lproj;
 			sourceTree = "<group>";
 		};
 		28F0C3CA146521B700A90285 /* AddPluginSheet.xib */ = {
@@ -2526,6 +2527,7 @@
 				28F0C3CB146521B700A90285 /* English */,
 			);
 			name = AddPluginSheet.xib;
+			path = English.lproj;
 			sourceTree = "<group>";
 		};
 		2BA178B20514CE260026D74D /* InfoPlist.strings */ = {
@@ -2534,6 +2536,7 @@
 				2BA178B30514CE260026D74D /* English */,
 			);
 			name = InfoPlist.strings;
+			path = English.lproj;
 			sourceTree = "<group>";
 		};
 		2BBB1786051E0D9700B84448 /* Credits.rtf */ = {
@@ -2542,6 +2545,7 @@
 				2BBB1787051E0D9700B84448 /* English */,
 			);
 			name = Credits.rtf;
+			path = English.lproj;
 			sourceTree = "<group>";
 		};
 		551A74B417868BEA0052D185 /* Bladesio1PluginConfig.xib */ = {
@@ -2790,6 +2794,7 @@
 				559DACED146C72FF00C5DF71 /* English */,
 			);
 			name = Localizable.strings;
+			path = English.lproj;
 			sourceTree = "<group>";
 		};
 		55C7A216148B2B3800C22ABC /* PcsxrMemCardDocument.xib */ = {
@@ -2798,7 +2803,6 @@
 				55C7A215148B2B3800C22ABC /* English */,
 			);
 			name = PcsxrMemCardDocument.xib;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		D422E66C16DC48D000526DCF /* CheatWindow.xib */ = {
@@ -2807,7 +2811,6 @@
 				D422E66D16DC48D000526DCF /* English */,
 			);
 			name = CheatWindow.xib;
-			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

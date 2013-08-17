@@ -147,20 +147,15 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>PCSX-Reloaded SVN</string>
+	<string>1.9.93</string>
 	<key>CFBundleSignature</key>
 	<string>Pcsx</string>
 	<key>CFBundleVersion</key>
-	<string>SVN</string>
+	<string>86707</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.games</string>
-	<key>LSMinimumSystemVersionByArchitecture</key>
-	<dict>
-		<key>i386</key>
-		<string>10.7.0</string>
-		<key>x86_64</key>
-		<string>10.7.0</string>
-	</dict>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.7.0</string>
 	<key>NSMainNibFile</key>
 	<string>PCSXR</string>
 	<key>NSPrincipalClass</key>
