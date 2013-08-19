@@ -188,8 +188,8 @@ void SetupSound (void)
 	  }
 	  else if (context_state == PA_CONTEXT_READY)
 	       break;
-	  else
-	       fprintf (stderr, "PulseAudio context state is %d\n", context_state);
+	  //else
+	  //     fprintf (stderr, "PulseAudio context state is %d\n", context_state);
 	  pa_threaded_mainloop_wait (device.mainloop);
      }
 
@@ -253,14 +253,14 @@ void SetupSound (void)
 	       fprintf (stderr, "Stream state is not good: %s\n", pa_strerror (error_number));
 	       return;
 	  }
-	  else
-	       fprintf (stderr, "PulseAudio stream state is %d\n", stream_state);
+	  //else
+	  //     fprintf (stderr, "PulseAudio stream state is %d\n", stream_state);
 	  pa_threaded_mainloop_wait (device.mainloop);
      }
 
      pa_threaded_mainloop_unlock (device.mainloop);
 
-     fprintf  (stderr, "PulseAudio should be connected\n");
+     //fprintf  (stderr, "PulseAudio should be connected\n");
      return;
 }
 

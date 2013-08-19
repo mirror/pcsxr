@@ -241,7 +241,7 @@ gchar* get_cdrom_label_trim() {
 
 gchar* get_cdrom_label_id(const gchar* suffix) {
 	const u8 lblmax = sizeof(CdromId) + sizeof(CdromLabel) + 20u;
-	printf("MAx %u\n", lblmax);
+	//printf("MAx %u\n", lblmax);
 	char buf[lblmax];
 	gchar *trimlabel = get_cdrom_label_trim();
 
