@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		55906B1717C28E490057F60D /* Make SVN revision */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 55906B1817C28E490057F60D /* Build configuration list for PBXAggregateTarget "Make SVN revision" */;
+			buildPhases = (
+				55906B1C17C28E530057F60D /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "Make SVN revision";
+			productName = "Make SVN revision";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		02717968167884C9004AED62 /* hotkeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 02717967167884C9004AED62 /* hotkeys.m */; };
 		0280B7AD16764CC5007B8001 /* HotkeyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280B7AC16764CC3007B8001 /* HotkeyController.m */; };
@@ -353,6 +367,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 551A77BF1786A2890052D185;
 			remoteInfo = TinySDL;
+		};
+		55906B1D17C28EE40057F60D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55906B1717C28E490057F60D;
+			remoteInfo = "Make SVN revision";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1857,6 +1878,7 @@
 				2BB3D6D005427FE200831ACB /* PBXBuildRule */,
 			);
 			dependencies = (
+				55906B1E17C28EE40057F60D /* PBXTargetDependency */,
 				551A778517869F4B0052D185 /* PBXTargetDependency */,
 				551A778717869F4B0052D185 /* PBXTargetDependency */,
 				551A778917869F4B0052D185 /* PBXTargetDependency */,
@@ -2083,6 +2105,7 @@
 				551A7706178698C60052D185 /* PeopsSpuAL */,
 				551A776517869E430052D185 /* DFNet */,
 				551A75C617868C4E0052D185 /* Bladesio1 */,
+				55906B1717C28E490057F60D /* Make SVN revision */,
 			);
 		};
 /* End PBXProject section */
@@ -2203,6 +2226,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		55906B1C17C28E530057F60D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../.svn/dir-wcprops",
+				"$(SRCROOT)/.svn/dir-wcprops",
+			);
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/SVNRevision.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Xcode auto-versioning script for Subversion\n# by Axel Andersson, modified by Daniel Jalkut to add\n# \"--revision HEAD\" to the svn info line, which allows\n# the latest revision to always be used.\n\n# further modified by Augie Fackler to be gross and sh-based in places\n# so that you can have svn installed anywhere\nPATH=/sw/bin:/opt/local/bin:/usr/local/bin:/usr/bin:$PATH\nREV=`svnversion -n ../`\necho $REV\n\ncat > $SCRIPT_OUTPUT_FILE_0.tmp <<EOF\n#define SVNREVISION $REV\n#define SVNREVISION_C_STRING \"$REV\"\nEOF\n\ncmp -s $SCRIPT_OUTPUT_FILE_0 $SCRIPT_OUTPUT_FILE_0.tmp || mv $SCRIPT_OUTPUT_FILE_0.tmp $SCRIPT_OUTPUT_FILE_0\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2BB3D6A805427FE200831ACB /* Sources */ = {
@@ -2490,6 +2532,11 @@
 			isa = PBXTargetDependency;
 			target = 551A77BF1786A2890052D185 /* TinySDL */;
 			targetProxy = 551A77E01786A3880052D185 /* PBXContainerItemProxy */;
+		};
+		55906B1E17C28EE40057F60D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55906B1717C28E490057F60D /* Make SVN revision */;
+			targetProxy = 55906B1D17C28EE40057F60D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3231,6 +3278,9 @@
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
+				INFOPLIST_PREFIX_HEADER = "$(TARGET_BUILD_DIR)/SVNRevision.h";
+				INFOPLIST_PREPROCESS = YES;
 				LD_NO_PIE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = (
@@ -3423,6 +3473,27 @@
 			};
 			name = Instrument;
 		};
+		55906B1917C28E490057F60D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		55906B1A17C28E490057F60D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		55906B1B17C28E490057F60D /* Instrument */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Instrument;
+		};
 		71F353F40FD98DFE00CBEC28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3439,6 +3510,9 @@
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
+				INFOPLIST_PREFIX_HEADER = "$(TARGET_BUILD_DIR)/SVNRevision.h";
+				INFOPLIST_PREPROCESS = YES;
 				LD_NO_PIE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "$(inherited)";
@@ -3462,6 +3536,9 @@
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
+				INFOPLIST_PREFIX_HEADER = "$(TARGET_BUILD_DIR)/SVNRevision.h";
+				INFOPLIST_PREPROCESS = YES;
 				LD_NO_PIE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = (
@@ -3620,6 +3697,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		55906B1817C28E490057F60D /* Build configuration list for PBXAggregateTarget "Make SVN revision" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55906B1917C28E490057F60D /* Debug */,
+				55906B1A17C28E490057F60D /* Release */,
+				55906B1B17C28E490057F60D /* Instrument */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		71F353F30FD98DFE00CBEC28 /* Build configuration list for PBXNativeTarget "PCSXR" */ = {
 			isa = XCConfigurationList;

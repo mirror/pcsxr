@@ -151,7 +151,7 @@
 	<key>CFBundleSignature</key>
 	<string>Pcsx</string>
 	<key>CFBundleVersion</key>
-	<string>86707</string>
+	<string>SVNREVISION</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.games</string>
 	<key>LSMinimumSystemVersion</key>
