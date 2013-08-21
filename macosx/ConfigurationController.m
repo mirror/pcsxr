@@ -13,7 +13,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 
 @implementation ConfigurationController
 
-+ (void)setMemoryCard:(int)theCard toURL:(NSURL *)theURL;
++ (void)setMemoryCard:(NSInteger)theCard toURL:(NSURL *)theURL;
 {
 	if (theCard == 1) {
 		[[NSUserDefaults standardUserDefaults] setURL:theURL forKey:@"Mcd1"];
@@ -27,7 +27,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	 [NSDictionary dictionaryWithObject:@(theCard) forKey:memCardChangeNumberKey]];
 }
 
-+ (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile
++ (void)setMemoryCard:(NSInteger)theCard toPath:(NSString *)theFile
 {
 	[self setMemoryCard:theCard toURL:[NSURL fileURLWithPath:theFile isDirectory:NO]];
 }
@@ -83,7 +83,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 		NSURL *mcdURL = [[openDlg URLs] objectAtIndex:0];
         
-		[ConfigurationController setMemoryCard:(int)tag toURL:mcdURL];
+		[ConfigurationController setMemoryCard:tag toURL:mcdURL];
     }
 	RELEASEOBJ(openDlg);	
 }
@@ -114,7 +114,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 		strlcpy(mcd, [[mcdURL path] fileSystemRepresentation], MAXPATHLEN);
 		CreateMcd(mcd);
 		
-		[ConfigurationController setMemoryCard:(int)tag toURL:mcdURL];
+		[ConfigurationController setMemoryCard:tag toURL:mcdURL];
     }
 	RELEASEOBJ(openDlg);
 }
@@ -223,9 +223,9 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 #if !__has_feature(objc_arc)
 - (void)dealloc
 {
-	RELEASEOBJ(checkBoxDefaults);
+	[checkBoxDefaults release];
 	
-	SUPERDEALLOC;
+	[super dealloc];
 }
 #endif
 
@@ -233,9 +233,8 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 {
 	for (NSString *key in checkBoxDefaults) {
 		id object = [checkBoxDefaults objectForKey:key];
-		if ([object isEqual:sender]) {
+		if ([object isEqual:sender])
 			return key;
-		}
 	}
 	
 	return nil;

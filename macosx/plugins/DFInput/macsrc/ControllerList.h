@@ -33,7 +33,7 @@
 
 + (void)setCurrentController:(int)which;
 + (int)currentController;
-+ (int)buttonOfRow:(int)row;
++ (int)buttonOfRow:(NSInteger)row;
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView;
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex;
 - (void)deleteRow:(NSInteger)which;

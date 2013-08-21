@@ -102,7 +102,6 @@
 							<string key="NSFrame">{{413, 13}, {122, 32}}</string>
 							<reference key="NSSuperview" ref="675926718"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="972260448">
 								<int key="NSCellFlags">67108864</int>
@@ -656,7 +655,6 @@
 												<bytes key="NSWhite">MQA</bytes>
 											</object>
 											<reference key="NSFont" ref="917501388"/>
-											<bool key="NSAutorecalculatesCellSize">YES</bool>
 										</object>
 									</object>
 									<string key="NSFrame">{{2, 2}, {510, 127}}</string>
@@ -1577,7 +1575,7 @@
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<object class="NSView" key="NSWindowView" id="713073715">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1596,7 +1594,6 @@
 											<int key="NSvFlags">256</int>
 											<string key="NSFrame">{{17, 13}, {420, 178}}</string>
 											<reference key="NSSuperview" ref="138033641"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="599923"/>
 											<bool key="NSEnabled">YES</bool>
 											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -1896,13 +1893,11 @@
 									</object>
 									<string key="NSFrame">{{2, 2}, {459, 202}}</string>
 									<reference key="NSSuperview" ref="671483095"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="232960397"/>
 								</object>
 							</object>
 							<string key="NSFrame">{{17, 57}, {463, 206}}</string>
 							<reference key="NSSuperview" ref="713073715"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="138033641"/>
 							<string key="NSOffsets">{0, 0}</string>
 							<object class="NSTextFieldCell" key="NSTitleCell">
@@ -1927,7 +1922,6 @@
 							<int key="NSvFlags">269</int>
 							<string key="NSFrame">{{143, 269}, {211, 56}}</string>
 							<reference key="NSSuperview" ref="713073715"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="671483095"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="688135460">
@@ -1949,7 +1943,6 @@ A</string>
 							<int key="NSvFlags">269</int>
 							<string key="NSFrame">{{195, 331}, {106, 18}}</string>
 							<reference key="NSSuperview" ref="713073715"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="320711766"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="46903452">
@@ -1973,8 +1966,6 @@ A</string>
 							<int key="NSvFlags">269</int>
 							<string key="NSFrame">{{424, 13}, {59, 32}}</string>
 							<reference key="NSSuperview" ref="713073715"/>
-							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<int key="NSTag">1</int>
 							<bool key="NSEnabled">YES</bool>
@@ -1999,7 +1990,6 @@ A</string>
 							<int key="NSvFlags">269</int>
 							<string key="NSFrame">{{342, 13}, {82, 32}}</string>
 							<reference key="NSSuperview" ref="713073715"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="91253578"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
@@ -2021,8 +2011,6 @@ A</string>
 						</object>
 					</object>
 					<string key="NSFrameSize">{497, 367}</string>
-					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="1031376586"/>
 					<string key="NSReuseIdentifierKey">_NS:20</string>
 				</object>
@@ -4326,7 +4314,6 @@ A</string>
 							<string>texFiltering</string>
 							<string>vSync</string>
 							<string>windowHeighth</string>
-							<string>windowSize</string>
 							<string>windowWidth</string>
 							<string>wireframeOnly</string>
 							<string>zMaskClipping</string>
@@ -4357,7 +4344,6 @@ A</string>
 							<string>NSSlider</string>
 							<string>NSControl</string>
 							<string>NSFormCell</string>
-							<string>NSPopUpButton</string>
 							<string>NSFormCell</string>
 							<string>NSControl</string>
 							<string>NSControl</string>
@@ -4391,7 +4377,6 @@ A</string>
 							<string>texFiltering</string>
 							<string>vSync</string>
 							<string>windowHeighth</string>
-							<string>windowSize</string>
 							<string>windowWidth</string>
 							<string>wireframeOnly</string>
 							<string>zMaskClipping</string>
@@ -4493,10 +4478,6 @@ A</string>
 							<object class="IBToOneOutletInfo">
 								<string key="name">windowHeighth</string>
 								<string key="candidateClassName">NSFormCell</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">windowSize</string>
-								<string key="candidateClassName">NSPopUpButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">windowWidth</string>

@@ -32,27 +32,27 @@ typedef enum _PCSXRMemFlags {
 	NSString *memName;
 	NSString *memID;
 	
-	NSArray *memImages;
-	NSInteger memImageIndex;
-	int startingIndex;
-	int blockSize;
-	PCSXRMemFlags flagNameIndex;
+	NSArray			*memImages;
+	NSInteger		memImageIndex;
+	uint8_t			startingIndex;
+	uint8_t			blockSize;
+	PCSXRMemFlags	flagNameIndex;
 }
 + (NSArray *)imagesFromMcd:(McdBlock *)block;
 + (NSString*)memoryLabelFromFlag:(PCSXRMemFlags)flagNameIndex;
 + (NSImage *)blankImage;
 + (PCSXRMemFlags)memFlagsFromBlockFlags:(unsigned char)blockFlags;
 
-- (id)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(int)startIdx;
-- (id)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(int)startIdx size:(int)memSize;
+- (id)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(uint8_t)startIdx;
+- (id)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(uint8_t)startIdx size:(uint8_t)memSize;
 
 @property (readonly, arcstrong) NSString *englishName;
 @property (readonly, arcstrong) NSString *sjisName;
 @property (readonly, arcstrong) NSString *memName;
 @property (readonly, arcstrong) NSString *memID;
 @property (readonly) PCSXRMemFlags flagNameIndex;
-@property (readonly) int startingIndex;
-@property (readonly) int blockSize;
+@property (readonly) uint8_t startingIndex;
+@property (readonly) uint8_t blockSize;
 
 @property (readonly, unsafe_unretained, nonatomic) NSImage *memImage;
 @property (readonly, nonatomic) unsigned memIconCount;

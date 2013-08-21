@@ -48,8 +48,8 @@ extern NSString *const memCardChangeNumberKey;
 - (IBAction)setVideoType:(id)sender;
 
 - (NSString *)keyForSender:(id)sender;
-+ (void)setMemoryCard:(int)theCard toPath:(NSString *)theFile;
-+ (void)setMemoryCard:(int)theCard toURL:(NSURL *)theURL;
++ (void)setMemoryCard:(NSInteger)theCard toPath:(NSString *)theFile;
++ (void)setMemoryCard:(NSInteger)theCard toURL:(NSURL *)theURL;
 
 + (void)mcdNewClicked:(id)sender;
 + (void)mcdChangeClicked:(id)sender;

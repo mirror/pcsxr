@@ -314,28 +314,37 @@
 	[self setDocumentEdited:NO];
 }
 
+- (void)sheetDidDismiss:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void  *)contextInfo
+{
+	switch (returnCode) {
+		case NSAlertDefaultReturn:
+			[self reloadCheats];
+			[self close];
+			break;
+			
+		default:
+			[self refreshNSCheatArray];
+			[self close];
+			break;
+			
+		case NSAlertOtherReturn:
+			break;
+	}
+}
+
 - (BOOL)windowShouldClose:(id)sender
 {
 	if (![sender isDocumentEdited] || ![[self window] isEqual:sender]) {
 		return YES;
 	} else {
-		//TODO: properly use a non-deprecated method here.
-		NSInteger retVal = NSRunAlertPanelRelativeToWindow(NSLocalizedString(@"Unsaved Changes", @"Unsaved changes"), NSLocalizedString(@"The Cheat codes have not been applied. Unapplied cheats will not run nor be saved. Do you wish to save?",nil), NSLocalizedString(@"Save", @"Save"), NSLocalizedString(@"Don't Save",@"Don't Save"), NSLocalizedString(@"Cancel", @"Cancel"), sender);
-		switch (retVal) {
-			case NSAlertDefaultReturn:
-				[self reloadCheats];
-				return YES;
-				break;
-				
-			default:
-				[self refreshNSCheatArray];
-				return YES;
-				break;
-				
-			case NSAlertOtherReturn:
-				return NO;
-				break;
-		}
+		NSBeginAlertSheet(NSLocalizedString(@"Unsaved Changes", @"Unsaved changes"),
+						  NSLocalizedString(@"Save", @"Save"),
+						  NSLocalizedString(@"Don't Save",@"Don't Save"),
+						  NSLocalizedString(@"Cancel", @"Cancel"), [self window], self,
+						  NULL, @selector(sheetDidDismiss:returnCode:contextInfo:), NULL,
+						  NSLocalizedString(@"The cheat codes have not been applied. Unapplied cheats will not run nor be saved. Do you wish to save?",nil));
+		
+		return NO;
 	}
 }
 

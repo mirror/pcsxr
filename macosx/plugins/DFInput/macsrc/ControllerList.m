@@ -105,7 +105,7 @@ static const int DPad[DKEY_TOTAL] = {
 	DKEY_ANALOG
 };
 
-+ (int)buttonOfRow:(int)row
++ (int)buttonOfRow:(NSInteger)row
 {
 	return DPad[row];
 }

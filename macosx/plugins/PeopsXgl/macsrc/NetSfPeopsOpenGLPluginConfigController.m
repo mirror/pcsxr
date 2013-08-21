@@ -48,12 +48,10 @@ extern char* PLUGLOC(char* toloc);
 #define PrefsKey APP_ID @" Settings"
 
 static NetSfPeopsOpenGLPluginConfigController *windowController = nil;
-char * pConfigFile=NULL;
 
 void AboutDlgProc()
 {
 	// Get parent application instance
-	NSApplication *app = [NSApplication sharedApplication];
 	NSBundle *bundle = [NSBundle bundleWithIdentifier:APP_ID];
 	
 	// Get Credits.rtf
@@ -80,7 +78,7 @@ void AboutDlgProc()
 	 credits, @"Credits",
 	 nil];
 	dispatch_async(dispatch_get_main_queue(), ^{
-		[app orderFrontStandardAboutPanelWithOptions:infoPaneDict];
+		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
 	RELEASEOBJ(infoPaneDict);
 }
@@ -110,6 +108,7 @@ void DlgProc()
 #define kFrameLimit @"Frame Limit"
 #define kVSync @"VSync"
 #define kHacksEnable @"Enable Hacks"
+#define kWindowSize @"Window Size"
 
 void PrepFactoryDefaultPreferences(void)
 {
@@ -124,15 +123,25 @@ void PrepFactoryDefaultPreferences(void)
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	NSDictionary* keyValues = [defaults dictionaryForKey:PrefsKey];
-	
-	if (keyValues && [[keyValues objectForKey:@"Window Size"] isKindOfClass:[NSNumber class]]) {
+	BOOL windowSizeNeedsReset = NO;
+	if (keyValues) {
+		NSSize size = NSSizeFromString([keyValues objectForKey:kWindowSize]);
+		if (![keyValues objectForKey:kWindowSize]) {
+			windowSizeNeedsReset = YES;
+		} else if ([[keyValues objectForKey:kWindowSize] isKindOfClass:[NSNumber class]]) {
+			windowSizeNeedsReset = YES;
+		} else if (size.height == 0 || size.width == 0) {
+			windowSizeNeedsReset = YES;
+		}
+	}
+	if (windowSizeNeedsReset) {
 		NSMutableDictionary *tmpDict = [[NSMutableDictionary alloc] initWithDictionary:keyValues];
-		[tmpDict setObject:NSStringFromSize(NSMakeSize(800, 600)) forKey:@"Window Size"];
+		[tmpDict setObject:NSStringFromSize(NSMakeSize(800, 600)) forKey:kWindowSize];
 		[defaults setObject:tmpDict forKey:PrefsKey];
 		[defaults synchronize];
 		RELEASEOBJ(tmpDict);
 	}
-
+	keyValues = nil;
 	
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 								 [NSDictionary dictionaryWithObjectsAndKeys:
@@ -143,7 +152,7 @@ void PrepFactoryDefaultPreferences(void)
 								  @NO, kVSync,
 								  @NO, kHacksEnable,
 								  @0, @"Dither Mode",
-								  @((unsigned int)0), kHacks,
+								  @0, kHacks,
 								  
 								  @YES, @"Proportional Resize",
 								  //[NSSize stringWithCString: @"default"], @"Fullscreen Resolution",
@@ -152,7 +161,7 @@ void PrepFactoryDefaultPreferences(void)
 								  @0, @"Texture Enhancement Level",
 								  @0, @"Texture Filter Level",
 								  @0, @"Frame Buffer Level",
-								  NSStringFromSize(NSMakeSize(800, 600)), @"Window Size",
+								  NSStringFromSize(NSMakeSize(800, 600)), kWindowSize,
 								  @NO, @"Draw Scanlines",
 								  // nasty:
 								  [NSArchiver archivedDataWithRootObject: [NSColor colorWithCalibratedRed:0  green:0 blue:0 alpha:0.25]], @"Scanline Color",
@@ -202,7 +211,7 @@ void ReadConfig(void)
     
 	
 	// we always start out at 800x600 (at least until resizing the window is implemented)
-	NSSize winSize = NSSizeFromString([keyValues objectForKey:@"Window Size"]);
+	NSSize winSize = NSSizeFromString([keyValues objectForKey:kWindowSize]);
 	if (bChangeWinMode == 1) {
 		iResX = winSize.width;
 		iResY = winSize.height;
@@ -213,7 +222,7 @@ void ReadConfig(void)
 	
     iBlurBuffer = [[keyValues objectForKey:@"Blur"] boolValue]; // not noticeable, but doesn't harm
     iUseScanLines = [[keyValues objectForKey:@"Draw Scanlines"] boolValue]; // works
-    NSColor* scanColor = [NSUnarchiver unarchiveObjectWithData: [keyValues objectForKey:@"Scanline Color"]];
+    NSColor* scanColor = [NSUnarchiver unarchiveObjectWithData:[keyValues objectForKey:@"Scanline Color"]];
 	scanColor = [scanColor colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
     iScanlineColor[0] = [scanColor redComponent];
     iScanlineColor[1] = [scanColor greenComponent];
@@ -296,17 +305,19 @@ void ReadConfig(void)
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
+#if 0
 	unsigned int hackValues = 0;
 	NSArray *views = [hacksMatrix cells];
 
 	for (NSControl *control in views) {
 		hackValues |= [control intValue] << ([control tag] - 1);
 	}
+#endif
 	
-	self.keyValues = [NSMutableDictionary dictionaryWithDictionary: [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey]];
+	//self.keyValues = [NSMutableDictionary dictionaryWithDictionary: [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey]];
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
-	[writeDic setObject:@(hackValues) forKey:kHacks];
+	//[writeDic setObject:@(hackValues) forKey:kHacks];
 	[writeDic setObject:([hackEnable integerValue] ? @YES : @NO) forKey:kHacksEnable];
 	[writeDic setObject:([fpsCounter integerValue] ? @YES : @NO) forKey:kFPSCounter];
 	[writeDic setObject:[NSArchiver archivedDataWithRootObject:[scanlineColorWell color]] forKey:@"Scanline Color"];
@@ -330,10 +341,8 @@ void ReadConfig(void)
 	[writeDic setObject:([mjpegDecoder15bit integerValue] ? @YES : @NO) forKey:@"Fast mjpeg decoder"];
 	[writeDic setObject:([gteAccuracy integerValue] ? @YES : @NO) forKey:@"GteAccuracy"];
 	[writeDic setObject:([vSync integerValue] ? @YES : @NO) forKey:kVSync];
-	[writeDic setObject:NSStringFromSize(NSMakeSize([windowWidth integerValue], [windowHeighth integerValue])) forKey:@"Window Size"];
-	//[writeDic setObject:@([windowSize indexOfItem:[windowSize selectedItem]]) forKey:@"Window Size"];
-
-
+	[writeDic setObject:NSStringFromSize(NSMakeSize([windowWidth integerValue], [windowHeighth integerValue])) forKey:kWindowSize];
+	
 	[defaults setObject:writeDic forKey:PrefsKey];
 	[defaults synchronize];
 	
@@ -364,8 +373,7 @@ void ReadConfig(void)
 	[hackEnable setIntegerValue:[[self.keyValues objectForKey:kHacksEnable] boolValue]];
 
     // build refs to hacks checkboxes
-	NSArray *views = [hacksMatrix cells];
-	for (NSControl *control in views) {
+	for (NSControl *control in [hacksMatrix cells]) {
 		[control setIntValue:(hackValues >> ([control tag] - 1)) & 1];
 	}
 	
@@ -408,16 +416,13 @@ void ReadConfig(void)
 	[frameBufferEffects selectItemAtIndex:[[keyValues objectForKey:@"Frame Buffer Level"] integerValue]];
 	[vSync setIntegerValue:[[keyValues objectForKey:kVSync] boolValue]];
 	[proportionalResize setIntegerValue:[[keyValues objectForKey:@"Proportional Resize"] boolValue]];
-	NSSize winSize = NSSizeFromString([keyValues objectForKey:@"Window Size"]);
+	NSSize winSize = NSSizeFromString([keyValues objectForKey:kWindowSize]);
 	[windowWidth setIntegerValue:winSize.width];
 	[windowHeighth setIntegerValue:winSize.height];
-	
-	//[windowSize selectItemAtIndex:[[keyValues objectForKey:@"Window Size"] integerValue]];
 }
 
 - (void)awakeFromNib
 {
-	//hacksView = [[hacksView subviews] objectAtIndex:0];
     [[NSColorPanel sharedColorPanel] setShowsAlpha:YES]; // eliminate dumb behavior!
 }
 
@@ -427,6 +432,12 @@ void ReadConfig(void)
 	if (returnCode == NSCancelButton) {
 		//Reset hack preferences.
 		[self loadHacksValues];
+	} else {
+		unsigned int hackValues = 0;		
+		for (NSControl *control in [hacksMatrix cells]) {
+			hackValues |= [control intValue] << ([control tag] - 1);
+		}
+		[self.keyValues setObject:@(hackValues) forKey:kHacks];
 	}
 	[sheet orderOut:nil];
 }
@@ -452,6 +463,15 @@ void ReadConfig(void)
 		[scanlineColorWell setEnabled: [sender intValue] ? YES : NO];
 	}
 }
+
+#if !__has_feature(objc_arc)
+- (void)dealloc
+{
+	self.keyValues = nil;
+	
+	[super dealloc];
+}
+#endif
 
 @end
 

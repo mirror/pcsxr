@@ -22,8 +22,8 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 @property (readwrite, arcstrong) NSString *sjisName;
 @property (readwrite, arcstrong) NSString *memName;
 @property (readwrite, arcstrong) NSString *memID;
-@property (readwrite) int startingIndex;
-@property (readwrite) int blockSize;
+@property (readwrite) uint8_t startingIndex;
+@property (readwrite) uint8_t blockSize;
 
 @property (readwrite, nonatomic) NSInteger memImageIndex;
 @property (arcstrong) NSArray *memImages;
@@ -124,7 +124,7 @@ static NSString *MemLabelEndLink;
 	return imageBlank;
 }
 
-- (id)initWithMcdBlock:(McdBlock *)infoBlock startingIndex:(int)startIdx
+- (id)initWithMcdBlock:(McdBlock *)infoBlock startingIndex:(uint8_t)startIdx
 {
 	return [self initWithMcdBlock:infoBlock startingIndex:startIdx size:1];
 }
@@ -151,7 +151,7 @@ static NSString *MemLabelEndLink;
 	return memFlagFree;
 }
 
-- (id)initWithMcdBlock:(McdBlock *)infoBlock startingIndex:(int)startIdx size:(int)memSize
+- (id)initWithMcdBlock:(McdBlock *)infoBlock startingIndex:(uint8_t)startIdx size:(uint8_t)memSize
 {
 	if (self = [super init]) {
 		self.startingIndex = startIdx;
