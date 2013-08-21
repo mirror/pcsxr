@@ -123,6 +123,17 @@ void PrepFactoryDefaultPreferences(void)
     
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
+	NSDictionary* keyValues = [defaults dictionaryForKey:PrefsKey];
+	
+	if (keyValues && [[keyValues objectForKey:@"Window Size"] isKindOfClass:[NSNumber class]]) {
+		NSMutableDictionary *tmpDict = [[NSMutableDictionary alloc] initWithDictionary:keyValues];
+		[tmpDict setObject:NSStringFromSize(NSMakeSize(800, 600)) forKey:@"Window Size"];
+		[defaults setObject:tmpDict forKey:PrefsKey];
+		[defaults synchronize];
+		RELEASEOBJ(tmpDict);
+	}
+
+	
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 								 [NSDictionary dictionaryWithObjectsAndKeys:
 								  @NO, kFPSCounter,
@@ -141,7 +152,7 @@ void PrepFactoryDefaultPreferences(void)
 								  @0, @"Texture Enhancement Level",
 								  @0, @"Texture Filter Level",
 								  @0, @"Frame Buffer Level",
-								  @0, @"Window Size",
+								  NSStringFromSize(NSMakeSize(800, 600)), @"Window Size",
 								  @NO, @"Draw Scanlines",
 								  // nasty:
 								  [NSArchiver archivedDataWithRootObject: [NSColor colorWithCalibratedRed:0  green:0 blue:0 alpha:0.25]], @"Scanline Color",
@@ -169,7 +180,7 @@ void ReadConfig(void)
     PrepFactoryDefaultPreferences(); // in case user deletes, or on new startup
 	
     NSDictionary* keyValues = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey];
-	
+		
     // bind all prefs settings to their PCSXR counterparts
     // with a little finagling to make it work as expected
 	iShowFPS = [[keyValues objectForKey:kFPSCounter] boolValue];
@@ -191,8 +202,14 @@ void ReadConfig(void)
     
 	
 	// we always start out at 800x600 (at least until resizing the window is implemented)
-	iResX = 800;
-	iResY = 600;
+	NSSize winSize = NSSizeFromString([keyValues objectForKey:@"Window Size"]);
+	if (bChangeWinMode == 1) {
+		iResX = winSize.width;
+		iResY = winSize.height;
+	} else {
+		iResX = 800;
+		iResY = 600;
+	}
 	
     iBlurBuffer = [[keyValues objectForKey:@"Blur"] boolValue]; // not noticeable, but doesn't harm
     iUseScanLines = [[keyValues objectForKey:@"Draw Scanlines"] boolValue]; // works
@@ -277,7 +294,6 @@ void ReadConfig(void)
 
 - (IBAction)ok:(id)sender
 {
-
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	unsigned int hackValues = 0;
@@ -290,31 +306,31 @@ void ReadConfig(void)
 	self.keyValues = [NSMutableDictionary dictionaryWithDictionary: [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey]];
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
-	[writeDic setObject:@((unsigned int)hackValues) forKey:kHacks];
-	[writeDic setObject:@((BOOL)[hackEnable integerValue]) forKey:kHacksEnable];
-	[writeDic setObject:@((BOOL)[fpsCounter integerValue]) forKey:kFPSCounter];
+	[writeDic setObject:@(hackValues) forKey:kHacks];
+	[writeDic setObject:([hackEnable integerValue] ? @YES : @NO) forKey:kHacksEnable];
+	[writeDic setObject:([fpsCounter integerValue] ? @YES : @NO) forKey:kFPSCounter];
 	[writeDic setObject:[NSArchiver archivedDataWithRootObject:[scanlineColorWell color]] forKey:@"Scanline Color"];
-	[writeDic setObject:@((BOOL)[frameSkipping integerValue]) forKey:kFrameSkipping];
-	[writeDic setObject:@((BOOL)[autoFullScreen integerValue]) forKey:kAutoFullScreen];
-	//[writeDic setObject:@((BOOL)[frameLimit integerValue]) forKey:kFrameLimit];
-	[writeDic setObject:@((BOOL)[proportionalResize integerValue]) forKey:@"Proportional Resize"];
+	[writeDic setObject:([frameSkipping integerValue] ? @YES : @NO) forKey:kFrameSkipping];
+	[writeDic setObject:([autoFullScreen integerValue] ? @YES : @NO) forKey:kAutoFullScreen];
+	//[writeDic setObject:([frameLimit integerValue] ? @YES : @NO) forKey:kFrameLimit];
+	[writeDic setObject:([proportionalResize integerValue] ? @YES : @NO) forKey:@"Proportional Resize"];
 	[writeDic setObject:@([ditherMode indexOfItem:[ditherMode selectedItem]]) forKey:@"Dither Mode"];
 	[writeDic setObject:@([offscreenDrawing indexOfItem:[offscreenDrawing selectedItem]]) forKey:@"Offscreen Drawing Level"];
 	[writeDic setObject:@([texColorDepth indexOfItem:[texColorDepth selectedItem]]) forKey:@"Texture Color Depth Level"];
 	[writeDic setObject:@([texEnhancment integerValue]) forKey:@"Texture Enhancement Level"];
 	[writeDic setObject:@([texFiltering integerValue]) forKey:@"Texture Filter Level"];
 	[writeDic setObject:@([frameBufferEffects indexOfItem:[frameBufferEffects selectedItem]]) forKey:@"Frame Buffer Level"];
-	[writeDic setObject:@((BOOL)[drawScanlines integerValue]) forKey:@"Draw Scanlines"];
-	[writeDic setObject:@((BOOL)[advancedBlending integerValue]) forKey:@"Advanced Blending"];
-	[writeDic setObject:@((BOOL)[opaquePass integerValue]) forKey:@"Opaque Pass"];
-	[writeDic setObject:@((BOOL)[blurEffect integerValue]) forKey:@"Blur"];
-	[writeDic setObject:@((BOOL)[zMaskClipping integerValue]) forKey:@"Z Mask Clipping"];
-	[writeDic setObject:@((BOOL)[wireframeOnly integerValue]) forKey:@"Wireframe Mode"];
-	[writeDic setObject:@((BOOL)[mjpegDecoder integerValue]) forKey:@"Emulate mjpeg decoder"];
-	[writeDic setObject:@((BOOL)[mjpegDecoder15bit integerValue]) forKey:@"Fast mjpeg decoder"];
-	[writeDic setObject:@((BOOL)[gteAccuracy integerValue]) forKey:@"GteAccuracy"];
-	[writeDic setObject:@((BOOL)[vSync integerValue]) forKey:kVSync];
-	
+	[writeDic setObject:([drawScanlines integerValue] ? @YES : @NO) forKey:@"Draw Scanlines"];
+	[writeDic setObject:([advancedBlending integerValue] ? @YES : @NO) forKey:@"Advanced Blending"];
+	[writeDic setObject:([opaquePass integerValue] ? @YES : @NO) forKey:@"Opaque Pass"];
+	[writeDic setObject:([blurEffect integerValue] ? @YES : @NO) forKey:@"Blur"];
+	[writeDic setObject:([zMaskClipping integerValue] ? @YES : @NO) forKey:@"Z Mask Clipping"];
+	[writeDic setObject:([wireframeOnly integerValue] ? @YES : @NO) forKey:@"Wireframe Mode"];
+	[writeDic setObject:([mjpegDecoder integerValue] ? @YES : @NO) forKey:@"Emulate mjpeg decoder"];
+	[writeDic setObject:([mjpegDecoder15bit integerValue] ? @YES : @NO) forKey:@"Fast mjpeg decoder"];
+	[writeDic setObject:([gteAccuracy integerValue] ? @YES : @NO) forKey:@"GteAccuracy"];
+	[writeDic setObject:([vSync integerValue] ? @YES : @NO) forKey:kVSync];
+	[writeDic setObject:NSStringFromSize(NSMakeSize([windowWidth integerValue], [windowHeighth integerValue])) forKey:@"Window Size"];
 	//[writeDic setObject:@([windowSize indexOfItem:[windowSize selectedItem]]) forKey:@"Window Size"];
 
 
@@ -392,7 +408,9 @@ void ReadConfig(void)
 	[frameBufferEffects selectItemAtIndex:[[keyValues objectForKey:@"Frame Buffer Level"] integerValue]];
 	[vSync setIntegerValue:[[keyValues objectForKey:kVSync] boolValue]];
 	[proportionalResize setIntegerValue:[[keyValues objectForKey:@"Proportional Resize"] boolValue]];
-
+	NSSize winSize = NSSizeFromString([keyValues objectForKey:@"Window Size"]);
+	[windowWidth setIntegerValue:winSize.width];
+	[windowHeighth setIntegerValue:winSize.height];
 	
 	//[windowSize selectItemAtIndex:[[keyValues objectForKey:@"Window Size"] integerValue]];
 }

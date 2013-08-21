@@ -21,8 +21,9 @@
     IBOutlet NSControl *vSync;
     
     IBOutlet NSControl *proportionalResize;
-	IBOutlet NSPopUpButton *windowSize;
     IBOutlet NSPopUpButton *fullscreenSize;
+	IBOutlet NSFormCell *windowWidth;
+	IBOutlet NSFormCell *windowHeighth;
     IBOutlet NSPopUpButton *offscreenDrawing;
     
     IBOutlet NSPopUpButton *texColorDepth;
