@@ -194,7 +194,7 @@ const char *SysLibError() {
 }
 
 void SysCloseLibrary(void *lib) {
-	dlclose(lib);
+	//dlclose(lib);
 }
 
 // Called periodically from the emu thread
