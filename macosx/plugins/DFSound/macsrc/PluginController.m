@@ -43,7 +43,6 @@ extern char* PLUGLOC(char* toloc);
 #define PrefsKey APP_ID @" Settings"
 
 static SPUPluginController *pluginController = nil;
-char * pConfigFile=NULL;
 
 void DoAbout()
 {

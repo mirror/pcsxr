@@ -29,25 +29,25 @@
 // misc globals
 ////////////////////////////////////////////////////////////////////////////////////
 
-int            iResX;
-int            iResY;
-long           lLowerpart;
-BOOL           bIsFirstFrame = TRUE;
-BOOL           bCheckMask=FALSE;
-unsigned short sSetMask=0;
-unsigned long  lSetMask=0;
-int            iDesktopCol=16;
-int            iShowFPS=0;
-int            iWinSize; 
-int            iUseScanLines=0;
-int            iUseNoStretchBlt=0;
-int            iFastFwd=0;
-int            iDebugMode=0;
-int            iFVDisplay=0;
-PSXPoint_t     ptCursorPoint[8];
-unsigned short usCursorActive=0;
+int				iResX;
+int				iResY;
+long			lLowerpart;
+BOOL			bIsFirstFrame = TRUE;
+BOOL			bCheckMask=FALSE;
+unsigned short	sSetMask=0;
+unsigned long	lSetMask=0;
+int				iDesktopCol=16;
+int				iShowFPS=0;
+int				iWinSize;
+int				iUseScanLines=0;
+int				iUseNoStretchBlt=0;
+int				iFastFwd=0;
+int				iDebugMode=0;
+int				iFVDisplay=0;
+PSXPoint_t		ptCursorPoint[8];
+unsigned short	usCursorActive=0;
 char *			Xpixels;
-char *         pCaptionText;
+char *			pCaptionText;
 
 //static PluginWindowController *windowController;
 static PluginGLView *glView;

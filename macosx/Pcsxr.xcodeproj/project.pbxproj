@@ -681,7 +681,7 @@
 		551A764E17868F570052D185 /* fps.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fps.c; sourceTree = "<group>"; };
 		551A764F17868F570052D185 /* fps.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fps.h; sourceTree = "<group>"; };
 		551A765017868F570052D185 /* gl_ext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gl_ext.h; sourceTree = "<group>"; };
-		551A765117868F570052D185 /* gpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gpu.c; sourceTree = "<group>"; };
+		551A765117868F570052D185 /* gpu.c */ = {isa = PBXFileReference; indentWidth = 1; lastKnownFileType = sourcecode.c.c; path = gpu.c; sourceTree = "<group>"; usesTabs = 0; };
 		551A765217868F570052D185 /* gpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gpu.h; sourceTree = "<group>"; };
 		551A765617868F570052D185 /* gte_accuracy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gte_accuracy.c; sourceTree = "<group>"; };
 		551A765717868F570052D185 /* gte_accuracy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gte_accuracy.h; sourceTree = "<group>"; };
@@ -1682,9 +1682,11 @@
 				551A766217868F570052D185 /* texture.c */,
 				551A766317868F570052D185 /* texture.h */,
 			);
+			indentWidth = 1;
 			name = src;
 			path = ../../../plugins/peopsxgl;
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		551A766417868F870052D185 /* Resources */ = {
 			isa = PBXGroup;
@@ -3706,6 +3708,7 @@
 				55906B1B17C28E490057F60D /* Instrument */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		71F353F30FD98DFE00CBEC28 /* Build configuration list for PBXNativeTarget "PCSXR" */ = {
 			isa = XCConfigurationList;

@@ -281,7 +281,7 @@ void SetExtGLFuncs(void)
   }
 #endif
 #ifdef _MACGL
-    SetVSync(iForceVSync);
+ SetVSync(iForceVSync);
 #endif
  if(iUseExts && !(dwActFixes&1024) &&                  // extensions wanted? and not turned off by game fix?
     strstr((char *)glGetString(GL_EXTENSIONS),         // and blend_subtract available?
@@ -527,21 +527,21 @@ void CreateScanLines(void)
      uiScanLine=glGenLists(1);
      glNewList(uiScanLine,GL_COMPILE);
      #ifdef _MACGL
-     	// not mac specific, just commenting out to be friendly
-     	// use it if you like
-     	// this draws anti-aliased lines with user-chosen color
-         glPushAttrib(GL_ENABLE_BIT | GL_COLOR_BUFFER_BIT | GL_CURRENT_BIT);
-             glEnable(GL_BLEND | GL_LINE_SMOOTH);
-             glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-             glColor4f(iScanlineColor[0],iScanlineColor[1],iScanlineColor[2],iScanlineColor[3]);
-             glBegin(GL_LINES);
-                 for(y=0;y<iResY;y+=2)
-                  {
-                    glVertex2f(0,y);
-                    glVertex2f(iResX,y);
-                  }
-             glEnd();
-         glPopAttrib();
+      // not mac specific, just commenting out to be friendly
+      // use it if you like
+      // this draws anti-aliased lines with user-chosen color
+      glPushAttrib(GL_ENABLE_BIT | GL_COLOR_BUFFER_BIT | GL_CURRENT_BIT);
+      glEnable(GL_BLEND | GL_LINE_SMOOTH);
+      glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+      glColor4f(iScanlineColor[0],iScanlineColor[1],iScanlineColor[2],iScanlineColor[3]);
+      glBegin(GL_LINES);
+      for(y=0;y<iResY;y+=2)
+      {
+       glVertex2f(0,y);
+       glVertex2f(iResX,y);
+      }
+      glEnd();
+      glPopAttrib();
 	 #else
 	      for(y=0;y<iResY;y+=2)
       {
@@ -580,7 +580,7 @@ int GLinitialize()
  if(bWindowMode) ReleaseDC(hWWindow,dcGlobal);         // win mode: release dc again
 #endif
 #if defined (_MACGL)
-    BringContextForward();
+ BringContextForward();
 #endif
  glViewport(rRatioRect.left,                           // init viewport by ratio rect
             iResY-(rRatioRect.top+rRatioRect.bottom),

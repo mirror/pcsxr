@@ -1062,7 +1062,9 @@ extern char * pCaptionText;
 long GPUopen(unsigned long * disp,char * CapText,char * CfgFile)
 {
  pCaptionText=CapText;
+#if !defined (_MACGL)
  pConfigFile=CfgFile;
+#endif
 
  ReadConfig();                                         // read text file for config
 
@@ -1070,11 +1072,11 @@ long GPUopen(unsigned long * disp,char * CapText,char * CfgFile)
 
  bIsFirstFrame = TRUE;                                 // we have to init later (well, no really... in Linux we do all in GPUopen)
 
- #if defined (_MACGL)
+#if defined (_MACGL)
  unsigned long display = ulInitDisplay();
- #else
+#else
  sysdep_create_display();                              // create display
- #endif 
+#endif
  
  InitializeTextureStore();                             // init texture mem
 
@@ -1086,11 +1088,11 @@ long GPUopen(unsigned long * disp,char * CapText,char * CfgFile)
 
  if(disp)
   {
-  #if defined (_MACGL)
-  *disp = display;
-  #else
+#if defined (_MACGL)
+   *disp = display;
+#else
    *disp=(unsigned long *)display;                       // return display ID to main emu
-  #endif
+#endif
   }
 
  if(display) return 0;
@@ -1135,11 +1137,11 @@ long GPUclose()                                        // LINUX CLOSE
 
  if(pGfxCardScreen) free(pGfxCardScreen);              // free helper memory
  pGfxCardScreen=0;
- #if defined (_MACGL)
+#if defined (_MACGL)
  CloseDisplay();
- #else
+#else
  osd_close_display();                                  // destroy display
- #endif
+#endif
  return 0;
 }
 
@@ -1470,7 +1472,7 @@ void updateDisplay(void)                               // UPDATE DISPLAY
  wglMakeCurrent(hdc,GLCONTEXT);                        // -> make context current again
 #endif
 #if defined (_MACGL)
-    BringContextForward();
+ BringContextForward();
 #endif
  bFakeFrontBuffer=FALSE;
  bRenderFrontBuffer=FALSE;
@@ -1562,7 +1564,7 @@ void updateDisplay(void)                               // UPDATE DISPLAY
 #ifdef _WINDOWS
       SwapBuffers(wglGetCurrentDC());                  // -> to skip or not to skip
 #elif defined(_MACGL)
-        DoBufferSwap();
+     DoBufferSwap();
 #else
       glXSwapBuffers(display,window);
 #endif
@@ -1581,7 +1583,7 @@ void updateDisplay(void)                               // UPDATE DISPLAY
 #ifdef _WINDOWS
     SwapBuffers(wglGetCurrentDC());                    // -> swap
 #elif defined(_MACGL)
-    DoBufferSwap();
+   DoBufferSwap();
 #else
     glXSwapBuffers(display,window);
 #endif
@@ -1707,9 +1709,9 @@ void updateFrontDisplay(void)
    ReleaseDC(hWWindow,hdc);                            // -> ! important !
   }
 #elif defined (_MACGL)
-if (iDrawnSomething){
-    DoBufferSwap();
-    }
+ if (iDrawnSomething){
+  DoBufferSwap();
+ }
 #else
  if(iDrawnSomething)                                   // linux:
   glXSwapBuffers(display,window);
@@ -3146,7 +3148,7 @@ void CALLBACK GPUabout(void)
 	HWND hWP=GetActiveWindow();                           // to be sure
 	DialogBox(hInst,MAKEINTRESOURCE(IDD_DIALOG_ABOUT), hWP,(DLGPROC)AboutDlgProc);
 #elif defined(_MACGL)
-    AboutDlgProc();
+ AboutDlgProc();
 #else
 	StartCfgTool("about");
 #endif
