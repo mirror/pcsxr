@@ -304,21 +304,8 @@ void ReadConfig(void)
 - (IBAction)ok:(id)sender
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-#if 0
-	unsigned int hackValues = 0;
-	NSArray *views = [hacksMatrix cells];
-
-	for (NSControl *control in views) {
-		hackValues |= [control intValue] << ([control tag] - 1);
-	}
-#endif
 	
-	//self.keyValues = [NSMutableDictionary dictionaryWithDictionary: [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey]];
-
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
-	//[writeDic setObject:@(hackValues) forKey:kHacks];
-	[writeDic setObject:([hackEnable integerValue] ? @YES : @NO) forKey:kHacksEnable];
 	[writeDic setObject:([fpsCounter integerValue] ? @YES : @NO) forKey:kFPSCounter];
 	[writeDic setObject:[NSArchiver archivedDataWithRootObject:[scanlineColorWell color]] forKey:@"Scanline Color"];
 	[writeDic setObject:([frameSkipping integerValue] ? @YES : @NO) forKey:kFrameSkipping];
@@ -437,7 +424,9 @@ void ReadConfig(void)
 		for (NSControl *control in [hacksMatrix cells]) {
 			hackValues |= [control intValue] << ([control tag] - 1);
 		}
-		[self.keyValues setObject:@(hackValues) forKey:kHacks];
+		NSMutableDictionary *writeDic = self.keyValues;
+		[writeDic setObject:@(hackValues) forKey:kHacks];
+		[writeDic setObject:([hackEnable integerValue] ? @YES : @NO) forKey:kHacksEnable];
 	}
 	[sheet orderOut:nil];
 }

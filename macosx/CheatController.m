@@ -73,7 +73,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-	return [[[self class] alloc] initWithAddress:address value:value];
+	return [[[self class] allocWithZone:zone] initWithAddress:address value:value];
 }
 
 @end
@@ -163,7 +163,9 @@
 {
 	NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithCapacity:NumCheats];
 	for (int i = 0; i < NumCheats; i++) {
-		[tmpArray addObject:AUTORELEASEOBJ([[PcsxrCheatTemp alloc] initWithCheat:&Cheats[i]])];
+		PcsxrCheatTemp *tmpObj = [[PcsxrCheatTemp alloc] initWithCheat:&Cheats[i]];
+		[tmpArray addObject:tmpObj];
+		RELEASEOBJ(tmpObj);
 	}
 	self.cheats = tmpArray;
 	RELEASEOBJ(tmpArray);
