@@ -24,12 +24,22 @@
 #include "pad.h"
 #import "ARCBridge.h"
 
+static inline void RunOnMainThreadSync(dispatch_block_t block)
+{
+	if ([NSThread isMainThread]) {
+		block();
+	} else {
+		dispatch_sync(dispatch_get_main_queue(), block);
+	}
+}
+
 static NSWindow *padWindow = nil;
 static PadController *padController = nil;
 
 #define APP_ID @"net.pcsxr.DFInputPlugin"
 
-void DoAbout() {
+void DoAbout()
+{
 	// Get parent application instance
 	NSApplication *app = [NSApplication sharedApplication];
 	NSBundle *bundle = [NSBundle bundleWithIdentifier:APP_ID];
@@ -65,19 +75,26 @@ void DoAbout() {
 	RELEASEOBJ(infoPaneDict);
 }
 
-long DoConfiguration() {
-	SDL_Init(SDL_INIT_JOYSTICK | SDL_INIT_NOPARACHUTE);
-	LoadPADConfig();
-
-	if (padWindow == nil) {
-		if (padController == nil) {
-			padController = [[PadController alloc] initWithWindowNibName:@"NetPcsxrHIDInputPluginMain"];
+long DoConfiguration()
+{
+	RunOnMainThreadSync(^{
+#if SDL_VERSION_ATLEAST(2, 0, 0)
+		SDL_InitSubSystem(SDL_INIT_JOYSTICK);
+#else
+		SDL_Init(SDL_INIT_JOYSTICK | SDL_INIT_NOPARACHUTE);
+#endif
+		LoadPADConfig();
+		
+		if (padWindow == nil) {
+			if (padController == nil) {
+				padController = [[PadController alloc] initWithWindowNibName:@"NetPcsxrHIDInputPluginMain"];
+			}
+			padWindow = [padController window];
 		}
-		padWindow = [padController window];
-	}
-
-	[padWindow center];
-	[padWindow makeKeyAndOrderFront:nil];
+		
+		[padWindow center];
+		[padWindow makeKeyAndOrderFront:nil];
+	});
 
 	return 0;
 }
@@ -86,14 +103,22 @@ long DoConfiguration() {
 
 - (IBAction)cancel:(id)sender
 {
+#if SDL_VERSION_ATLEAST(2, 0, 0)
+	SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
+#else
 	SDL_Quit();
+#endif
 	[self close];
 }
 
 - (IBAction)ok:(id)sender
 {
 	SavePADConfig();
+#if SDL_VERSION_ATLEAST(2, 0, 0)
+	SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
+#else
 	SDL_Quit();
+#endif
 	[self close];
 }
 

@@ -26,6 +26,15 @@
 #define APP_ID @"net.pcsxr.DFCdrom"
 #define PrefsKey APP_ID @" Settings"
 
+static inline void RunOnMainThreadSync(dispatch_block_t block)
+{
+	if ([NSThread isMainThread]) {
+		block();
+	} else {
+		dispatch_sync(dispatch_get_main_queue(), block);
+	}
+}
+
 static PluginConfigController *windowController = nil;
 
 void AboutDlgProc()
@@ -68,17 +77,19 @@ void AboutDlgProc()
 
 void ConfDlgProc()
 {
-	NSWindow *window;
-
-	if (windowController == nil) {
-		windowController = [[PluginConfigController alloc] initWithWindowNibName:@"DFCdromPluginConfig"];
-	}
-	window = [windowController window];
-
-	[windowController loadValues];
-
-	[window center];
-	[window makeKeyAndOrderFront:nil];
+	RunOnMainThreadSync(^{
+		NSWindow *window;
+		
+		if (windowController == nil) {
+			windowController = [[PluginConfigController alloc] initWithWindowNibName:@"DFCdromPluginConfig"];
+		}
+		window = [windowController window];
+		
+		[windowController loadValues];
+		
+		[window center];
+		[window makeKeyAndOrderFront:nil];
+	});
 }
 
 void ReadConfig()

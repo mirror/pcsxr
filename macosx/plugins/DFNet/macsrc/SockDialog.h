@@ -9,8 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface SockDialog : NSWindowController {
-
+@interface SockDialog : NSWindowController
+{
+	IBOutlet NSProgressIndicator *spinningBar;
 }
 - (IBAction)cancel:(id)sender;
 @end

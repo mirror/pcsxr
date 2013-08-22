@@ -3,6 +3,7 @@
 #define PluginConfigController NetSfPeopsSoftGPUPluginConfigController
 
 #import <Cocoa/Cocoa.h>
+#import "ARCBridge.h"
 
 @interface NetSfPeopsSoftGPUPluginConfigController : NSWindowController
 {
@@ -12,6 +13,7 @@
     IBOutlet NSControl *frameSkipping;
     IBOutlet NSControl *hackEnable;
     IBOutlet NSView *hacksView;
+	IBOutlet NSMatrix *hacksMatrix;
     IBOutlet NSControl *vSync;
 	IBOutlet NSControl *shaders;
 	IBOutlet NSTextField *vertexShaderViewablePath;
@@ -27,8 +29,8 @@
 	NSMutableDictionary *keyValues;
 }
 
-@property (retain) NSURL *vertexPath;
-@property (retain) NSURL *fragmentPath;
+@property (arcretain) NSURL *vertexPath;
+@property (arcretain) NSURL *fragmentPath;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;

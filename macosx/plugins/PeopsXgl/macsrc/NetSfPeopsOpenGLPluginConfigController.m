@@ -12,6 +12,7 @@
 #include <OpenGL/gl.h> // bah, "externals.h" thinks include files are for wimps; OpenGL header, in fact, is needed
 #include "externals.h"
 #import "ARCBridge.h"
+#import "PluginGLView.h"
 
 #ifdef ENABLE_NLS
 #include <libintl.h>
@@ -85,20 +86,22 @@ void AboutDlgProc()
 
 void DlgProc()
 {
-	NSWindow *window;
-
-    PrepFactoryDefaultPreferences(); // Must do here to avoid a "when does such-and-such bind" issue
-	
-	if (windowController == nil) {
-		windowController = [[PluginConfigController alloc] initWithWindowNibName:@"NetSfPeopsOpenGLConfig"];
-	}
-	window = [windowController window];
-	
-	/* load values */
-	[windowController loadValues];
-	
-	[window center];
-	[window makeKeyAndOrderFront:nil];
+	RunOnMainThreadSync(^{
+		NSWindow *window;
+		
+		PrepFactoryDefaultPreferences(); // Must do here to avoid a "when does such-and-such bind" issue
+		
+		if (windowController == nil) {
+			windowController = [[PluginConfigController alloc] initWithWindowNibName:@"NetSfPeopsOpenGLConfig"];
+		}
+		window = [windowController window];
+		
+		/* load values */
+		[windowController loadValues];
+		
+		[window center];
+		[window makeKeyAndOrderFront:nil];
+	});
 }
 
 #define kFPSCounter @"FPS Counter"

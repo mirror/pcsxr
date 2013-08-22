@@ -5,6 +5,7 @@
 #include "externals.h"
 #import "SGPUPreferences.h"
 #import "ARCBridge.h"
+#import "PluginGLView.h"
 
 #ifdef ENABLE_NLS
 #include <libintl.h>
@@ -81,18 +82,20 @@ void AboutDlgProc()
 
 void SoftDlgProc()
 {
-	NSWindow *window;
-	
-	if (windowController == nil) {
-		windowController = [[PluginConfigController alloc] initWithWindowNibName:@"NetSfPeopsSoftGPUConfig"];
-	}
-	window = [windowController window];
-	
-	/* load values */
-	[windowController loadValues];
-	
-	[window center];
-	[window makeKeyAndOrderFront:nil];
+	RunOnMainThreadSync(^{
+		NSWindow *window;
+		
+		if (windowController == nil) {
+			windowController = [[PluginConfigController alloc] initWithWindowNibName:@"NetSfPeopsSoftGPUConfig"];
+		}
+		window = [windowController window];
+		
+		/* load values */
+		[windowController loadValues];
+		
+		[window center];
+		[window makeKeyAndOrderFront:nil];
+	});
 }
 
 BOOL isShaderEnabled()
@@ -211,11 +214,8 @@ void ReadConfig(void)
 	[writeDic setObject:@([ditherMode indexOfSelectedItem]) forKey:@"Dither Mode"];
 	
 	unsigned int hackValues = 0;
-	NSArray *views = [hacksView subviews];
-	for (NSView *control in views) {
-		if ([control isKindOfClass:[NSButton class]]) {
-			hackValues |= [(NSControl *)control intValue] << ([control tag] - 1);
-		}
+	for (NSCell *control in [hacksMatrix cells]) {
+			hackValues |= [control intValue] << ([control tag] - 1);
 	}
 	
 	[writeDic setObject:@(hackValues) forKey:@"Hacks"];
@@ -243,10 +243,13 @@ void ReadConfig(void)
 - (IBAction)hackToggle:(id)sender
 {
 	BOOL enable = [sender intValue] ? YES : NO;
-	NSArray *views = [hacksView subviews];
+	NSArray *views = [[[hacksView subviews] objectAtIndex:0] subviews];
 
 	for (NSView *control in views) {
-		if ([control isKindOfClass:[NSButton class]]) {
+		if ([control isKindOfClass:[NSControl class]]) {
+			if ([control isKindOfClass:[NSTextField class]]) {
+				[(NSTextField*)control setTextColor:enable ? [NSColor controlTextColor] : [NSColor disabledControlTextColor] ];
+			}
 			[(NSControl *)control setEnabled:enable];
 		}
 	}
@@ -254,10 +257,15 @@ void ReadConfig(void)
 
 - (IBAction)toggleShader:(id)sender {
 	BOOL enable = [sender intValue] ? YES : NO;
-	NSArray *views = [shadersView subviews];
+	NSArray *views = [[[shadersView subviews] objectAtIndex:0] subviews];
 	
 	for (NSView *control in views) {
-		[(NSControl *)control setEnabled:enable];
+		if ([control isKindOfClass:[NSControl class]]) {
+			if ([control isKindOfClass:[NSTextField class]]) {
+				[(NSTextField*)control setTextColor:enable ? [NSColor controlTextColor] : [NSColor disabledControlTextColor] ];
+			}
+			[(NSControl *)control setEnabled:enable];
+		}
 	}
 }
 
@@ -334,22 +342,12 @@ void ReadConfig(void)
 	
 	unsigned int hackValues = [[keyValues objectForKey:@"Hacks"] unsignedIntValue];
 	
-	NSArray *views = [hacksView subviews];
-	for (NSView *control in views) {
-		if ([control isKindOfClass:[NSButton class]]) {
-			[(NSControl *)control setIntValue:(hackValues >> ([control tag] - 1)) & 1];
-		}
+	for (NSCell *control in [hacksMatrix cells]) {
+			[control setIntValue:(hackValues >> ([control tag] - 1)) & 1];
 	}
 	
 	[self hackToggle:hackEnable];
 	[self toggleShader:shaders];
-}
-
-- (void)awakeFromNib
-{
-	//I don't know why we need to do this...
-	hacksView = [[hacksView subviews] objectAtIndex:0];
-	shadersView = [[shadersView subviews] objectAtIndex:0];
 }
 
 #if !__has_feature(objc_arc)

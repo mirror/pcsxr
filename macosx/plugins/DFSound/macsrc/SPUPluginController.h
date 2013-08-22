@@ -8,13 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "NamedSlider.h"
+#import "ARCBridge.h"
 
 @interface SPUPluginController : NSWindowController
 {
-    IBOutlet NSControl *hiCompBox;
+    IBOutlet NSCell *hiCompBox;
     IBOutlet NamedSlider *interpolValue;
-    IBOutlet NSControl *irqWaitBox;
-    IBOutlet NSControl *monoSoundBox;
+    IBOutlet NSCell *irqWaitBox;
+    IBOutlet NSCell *monoSoundBox;
     IBOutlet NamedSlider *reverbValue;
     IBOutlet NSControl *xaEnableBox;
     IBOutlet NSControl *xaSpeedBox;
@@ -22,6 +23,7 @@
 	
 	NSMutableDictionary *keyValues;
 }
+@property (readwrite, arcretain) NSMutableDictionary *keyValues;
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;
 - (IBAction)reset:(id)sender;

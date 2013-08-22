@@ -29,7 +29,9 @@ static int currentController;
 
 - (id)initWithConfig
 {
-	if (!(self = [super init])) return nil;
+	if (self = [super init]) {
+		
+	}
 	return self;
 }
 

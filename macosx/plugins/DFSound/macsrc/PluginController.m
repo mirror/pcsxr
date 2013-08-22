@@ -44,6 +44,15 @@ extern char* PLUGLOC(char* toloc);
 
 static SPUPluginController *pluginController = nil;
 
+static inline void RunOnMainThreadSync(dispatch_block_t block)
+{
+	if ([NSThread isMainThread]) {
+		block();
+	} else {
+		dispatch_sync(dispatch_get_main_queue(), block);
+	}
+}
+
 void DoAbout()
 {
 	// Get parent application instance
@@ -81,18 +90,20 @@ void DoAbout()
 
 long DoConfiguration()
 {
-	NSWindow *window;
-	
-	if (pluginController == nil) {
-		pluginController = [[PluginController alloc] initWithWindowNibName:@"NetSfPeopsSpuPluginMain"];
-	}
-	window = [pluginController window];
-
-	/* load values */
-	[pluginController loadValues];
-
-	[window center];
-	[window makeKeyAndOrderFront:nil];
+	RunOnMainThreadSync(^{
+		NSWindow *window;
+		
+		if (pluginController == nil) {
+			pluginController = [[PluginController alloc] initWithWindowNibName:@"NetSfPeopsSpuPluginMain"];
+		}
+		window = [pluginController window];
+		
+		/* load values */
+		[pluginController loadValues];
+		
+		[window center];
+		[window makeKeyAndOrderFront:nil];
+	});
 
 	return 0;
 }
@@ -137,7 +148,7 @@ void ReadConfig(void)
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
+	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:self.keyValues];
 	[writeDic setObject:@((BOOL)[hiCompBox intValue]) forKey:@"High Compatibility Mode"];
 	[writeDic setObject:@((BOOL)[irqWaitBox intValue]) forKey:@"SPU IRQ Wait"];
 	[writeDic setObject:@((BOOL)[monoSoundBox intValue]) forKey:@"Mono Sound Output"];
@@ -172,8 +183,7 @@ void ReadConfig(void)
 	ReadConfig();
 
 	/* load from preferences */
-	RELEASEOBJ(keyValues);
-	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
+	self.keyValues = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:PrefsKey]];
 
 	[hiCompBox setIntValue:[[keyValues objectForKey:@"High Compatibility Mode"] boolValue]];
 	[irqWaitBox setIntValue:[[keyValues objectForKey:@"SPU IRQ Wait"] boolValue]];

@@ -17,6 +17,7 @@
  */
 
 #include "pad.h"
+#include <sys/param.h>
 
 GLOBALDATA			g;
 
@@ -114,7 +115,7 @@ static void SetDefaultConfig() {
 
 void LoadPADConfig() {
 	FILE		*fp;
-	char		buf[256];
+	char		buf[PATH_MAX];
 	int			current, a, b, c;
 
 	SetDefaultConfig();
@@ -276,7 +277,7 @@ void LoadPADConfig() {
 void SavePADConfig() {
 	FILE		*fp;
 	int			i;
-	char		buf[256];
+	char		buf[PATH_MAX];
 
 	sprintf(buf, "%s/Library/Preferences/net.pcsxr.DFInput.plist", getenv("HOME"));
 

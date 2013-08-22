@@ -2551,7 +2551,6 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -2567,7 +2566,6 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -2899,6 +2897,7 @@
 					../libpcsxcore,
 					../macosx,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 			};
 			name = Instrument;
 		};
@@ -2921,7 +2920,6 @@
 				INFOPLIST_PREFIX_HEADER = "$(TARGET_BUILD_DIR)/SVNRevision.h";
 				INFOPLIST_PREPROCESS = YES;
 				LD_NO_PIE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = (
 					"-funroll-loops",
 					"$(inherited)",
@@ -3089,7 +3087,6 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Instrument;
@@ -3135,7 +3132,6 @@
 				INFOPLIST_PREFIX_HEADER = "$(TARGET_BUILD_DIR)/SVNRevision.h";
 				INFOPLIST_PREPROCESS = YES;
 				LD_NO_PIE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_NAME = PCSXR;
 				WRAPPER_EXTENSION = app;
@@ -3161,7 +3157,6 @@
 				INFOPLIST_PREFIX_HEADER = "$(TARGET_BUILD_DIR)/SVNRevision.h";
 				INFOPLIST_PREPROCESS = YES;
 				LD_NO_PIE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = (
 					"-funroll-loops",
 					"-fomit-frame-pointer",
@@ -3191,6 +3186,7 @@
 					../libpcsxcore,
 					../macosx,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 			};
 			name = Debug;
 		};
@@ -3213,6 +3209,7 @@
 					../libpcsxcore,
 					../macosx,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 			};
 			name = Release;
 		};

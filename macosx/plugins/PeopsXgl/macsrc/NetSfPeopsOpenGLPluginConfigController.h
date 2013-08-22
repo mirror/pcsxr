@@ -14,11 +14,11 @@
     // uses bindings to magically set user defaults.
     // But you can look at their grandness if you like:
     
-    IBOutlet NSControl *autoFullScreen;
+    IBOutlet NSCell *autoFullScreen;
     IBOutlet NSPopUpButton *ditherMode;
-    IBOutlet NSControl *fpsCounter;
-    IBOutlet NSControl *frameSkipping;
-    IBOutlet NSControl *vSync;
+    IBOutlet NSCell *fpsCounter;
+    IBOutlet NSCell *frameSkipping;
+    IBOutlet NSCell *vSync;
     
     IBOutlet NSControl *proportionalResize;
     IBOutlet NSPopUpButton *fullscreenSize;
@@ -32,15 +32,15 @@
     
     IBOutlet NSPopUpButton *frameBufferEffects;
 
-    IBOutlet NSControl *drawScanlines;
-    IBOutlet NSControl *advancedBlending;
-    IBOutlet NSControl *opaquePass;
-    IBOutlet NSControl *zMaskClipping;
-    IBOutlet NSControl *wireframeOnly;
-    IBOutlet NSControl *blurEffect;
-    IBOutlet NSControl *mjpegDecoder;
-    IBOutlet NSControl *mjpegDecoder15bit;
-	IBOutlet NSControl *gteAccuracy;
+    IBOutlet NSCell *drawScanlines;
+    IBOutlet NSCell *advancedBlending;
+    IBOutlet NSCell *opaquePass;
+    IBOutlet NSCell *zMaskClipping;
+    IBOutlet NSCell *wireframeOnly;
+    IBOutlet NSCell *blurEffect;
+    IBOutlet NSCell *mjpegDecoder;
+    IBOutlet NSCell *mjpegDecoder15bit;
+	IBOutlet NSCell *gteAccuracy;
 	IBOutlet NSColorWell *scanlineColorWell;
 	
 	IBOutlet NSMatrix *hacksMatrix;

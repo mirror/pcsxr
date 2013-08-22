@@ -70,7 +70,14 @@
 	[deviceMenu addItemWithTitle:@"(Keyboard only)"];
 
 	for (i = 0; i < SDL_NumJoysticks(); i++) {
-		NSMenuItem * joystickItem = [[NSMenuItem alloc] initWithTitle:@(SDL_JoystickName(i)) action:NULL keyEquivalent:@""];
+		NSMenuItem *joystickItem = nil;
+#if SDL_VERSION_ATLEAST(2, 0, 0)
+		SDL_Joystick *tmpJoy = SDL_JoystickOpen(i);
+		joystickItem = [[NSMenuItem alloc] initWithTitle:@(SDL_JoystickName(tmpJoy)) action:NULL keyEquivalent:@""];
+		SDL_JoystickClose(tmpJoy);
+#else
+		joystickItem = [[NSMenuItem alloc] initWithTitle:@(SDL_JoystickName(i)) action:NULL keyEquivalent:@""];
+#endif
 		[joystickItem setTag:i + 1];
         [[deviceMenu menu] addItem:joystickItem];
 		RELEASEOBJ(joystickItem);

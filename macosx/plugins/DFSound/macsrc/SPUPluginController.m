@@ -8,9 +8,7 @@
 
 #import "SPUPluginController.h"
 
-@implementation SPUPluginController
-
-static Class GetSPUBaseClass()
+static inline Class GetSPUBaseClass()
 {
 	static Class spuBaseClass;
 	if (!spuBaseClass) {
@@ -19,7 +17,7 @@ static Class GetSPUBaseClass()
 	return spuBaseClass;
 }
 
-static inline void FuncNotAvailable(id sel, id sender, SEL theCmd)
+static void FuncNotAvailable(id sel, id sender, SEL theCmd)
 {
 #ifdef DEBUG
 	NSString *selString = NSStringFromSelector(theCmd);
@@ -38,6 +36,9 @@ static inline void FuncNotAvailable(id sel, id sender, SEL theCmd)
 }
 
 #define NotAvailableWarn(sender) FuncNotAvailable(self, sender, _cmd)
+
+@implementation SPUPluginController
+@synthesize keyValues;
 
 - (IBAction)cancel:(id)sender
 {
@@ -58,5 +59,14 @@ static inline void FuncNotAvailable(id sel, id sender, SEL theCmd)
 {
 	NotAvailableWarn(nil);
 }
+
+#if !__has_feature(objc_arc)
+- (void)dealloc
+{
+	self.keyValues = nil;
+	
+	[super dealloc];
+}
+#endif
 
 @end

@@ -32,6 +32,15 @@
 
 static PluginConfigController *windowController = nil;
 
+static inline void RunOnMainThreadSync(dispatch_block_t block)
+{
+	if ([NSThread isMainThread]) {
+		block();
+	} else {
+		dispatch_sync(dispatch_get_main_queue(), block);
+	}
+}
+
 void AboutDlgProc()
 {
 	// Get parent application instance
@@ -70,17 +79,19 @@ void AboutDlgProc()
 
 void ConfDlgProc()
 {
-	NSWindow *window;
-
-	if (windowController == nil) {
-		windowController = [[PluginConfigController alloc] initWithWindowNibName:@"DFNet"];
-	}
-	window = [windowController window];
-
-	[windowController loadValues];
-
-	[window center];
-	[window makeKeyAndOrderFront:nil];
+	RunOnMainThreadSync(^{
+		NSWindow *window;
+		
+		if (windowController == nil) {
+			windowController = [[PluginConfigController alloc] initWithWindowNibName:@"DFNet"];
+		}
+		window = [windowController window];
+		
+		[windowController loadValues];
+		
+		[window center];
+		[window makeKeyAndOrderFront:nil];
+	});
 }
 
 void ReadConfig()
