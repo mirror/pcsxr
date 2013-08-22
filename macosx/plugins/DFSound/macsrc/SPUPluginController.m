@@ -28,7 +28,7 @@ static inline void FuncNotAvailable(id sel, id sender, SEL theCmd)
 	} else {
 		NSLog(@"Class %@ does not implement %@", [sel class], selString);
 	}
-	if ([sel isMemberOfClass:GetSPUBaseClass()]) {
+	if ([sel class] == GetSPUBaseClass()) {
 		NSLog(@"For one thing, the class %@ isn't supposed to be accessed directly, just subclassed!", GetSPUBaseClass()); \
 	} else {
 		NSLog(@"You should implement %@ for your class %@. As it is, you are calling %@ from the superclass %@.", selString, [sel class], selString, GetSPUBaseClass());
