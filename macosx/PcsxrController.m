@@ -394,9 +394,15 @@ otherblock();\
 	}
 
 	if (![PcsxrController biosAvailable]) {
-		NSRunInformationalAlertPanel(NSLocalizedString(@"Missing BIOS!", nil),
-				NSLocalizedString(@"Pcsxr wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\nIf you have a BIOS available, please copy it to\n~/Library/Application Support/Pcsxr/Bios/", nil), 
-				nil, nil, nil);
+		NSFileManager *manager = [NSFileManager defaultManager];
+		NSURL *supportURL = [manager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
+		NSURL *biosURL = [[supportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"Bios"];
+		NSInteger retVal = NSRunInformationalAlertPanel(NSLocalizedString(@"Missing BIOS!", nil),
+				NSLocalizedString(@"Pcsxr wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\nIf you have a BIOS available, please copy it to\n%@", nil), 
+				NSLocalizedString(@"OK", @"OK"), NSLocalizedString(@"Show Folder", @"Show Folder"), nil, [[biosURL path] stringByAbbreviatingWithTildeInPath]);
+		if (retVal == NSAlertAlternateReturn) {
+			[[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[biosURL]];
+		}
 	}
 
 	self.sleepInBackground = [[NSUserDefaults standardUserDefaults] boolForKey:@"PauseInBackground"];
@@ -417,21 +423,19 @@ otherblock();\
 		NSMutableArray *unknownOptions = [NSMutableArray array];
 		
 		dispatch_block_t cdromBlock = ^{
-			dispatch_block_t otherBlock = ^{
-				[self runCD:nil];
-			};
 			hasParsedAnArgument = YES;
-			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgRun block:otherBlock argument:kPCSXRArgumentCDROM];
+			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgRun argument:kPCSXRArgumentCDROM block:^{
+				[self runCD:nil];
+			}];
 			[larg addToDictionary:argDict];
 			RELEASEOBJ(larg);
 		};
 		
 		dispatch_block_t biosBlock = ^{
 			hasParsedAnArgument = YES;
-			dispatch_block_t runtimeBlock = ^{
+			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgRun argument:kPCSXRArgumentBIOS block:^{
 				[self runBios:nil];
-			};
-			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgRun block:runtimeBlock argument:kPCSXRArgumentBIOS];
+			}];
 			[larg addToDictionary:argDict];
 			RELEASEOBJ(larg);
 		};
@@ -439,10 +443,9 @@ otherblock();\
 		//This block/argument does not need to be sorted
 		dispatch_block_t emuCloseAtEnd = ^{
 			hasParsedAnArgument = YES;
-			dispatch_block_t runtimeBlock = ^{
+			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPreRun argument:kPCSXRArgumentExitAtClose block:^{
 				self.endAtEmuClose = YES;
-			};
-			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPreRun block:runtimeBlock argument:kPCSXRArgumentExitAtClose];
+			}];
 			[larg addToDictionary:argDict];
 			RELEASEOBJ(larg);
 		};
@@ -450,10 +453,9 @@ otherblock();\
 		dispatch_block_t isoBlock = ^{
 			hasParsedAnArgument = YES;
 			NSString *path = FileTestBlock();
-			dispatch_block_t runtimeBlock = ^{
+			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgRun argument:kPCSXRArgumentISO block:^{
 				[self runURL:[NSURL fileURLWithPath:path isDirectory:NO]];
-			};
-			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgRun block:runtimeBlock argument:kPCSXRArgumentISO];
+			}];
 			[larg addToDictionary:argDict];
 			RELEASEOBJ(larg);
 		};
@@ -467,11 +469,10 @@ otherblock();\
 			}
 			
 			NSString *path = FileTestBlock();
-			dispatch_block_t runtimeBlock = ^{
-				LoadMcd(mcdnumber, (char*)[path fileSystemRepresentation]);
-			};
 			NSString *mcdArg = [kPCSXRArgumentMcd stringByAppendingFormat:@"%i", mcdnumber];
-			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPreRun block:runtimeBlock argument:mcdArg];
+			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPreRun argument:mcdArg block:^{
+				LoadMcd(mcdnumber, (char*)[path fileSystemRepresentation]);
+			}];
 			[larg addToDictionary:argDict];
 			RELEASEOBJ(larg);
 		};
@@ -479,14 +480,13 @@ otherblock();\
 		dispatch_block_t freezeBlock = ^{
 			hasParsedAnArgument = YES;
 			NSString *path = FileTestBlock();
-			dispatch_block_t runtimeBlock = ^{
+			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPostRun argument:kPCSXRArgumentFreeze block:^{
 				if (![EmuThread isRunBios]) {
 					//Make sure the emulator is running
 					sleep(5);
 					[EmuThread defrostAt:path];
 				}
-			};
-			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPostRun block:runtimeBlock argument:kPCSXRArgumentFreeze];
+			}];
 			[larg addToDictionary:argDict];
 			RELEASEOBJ(larg);
 		};

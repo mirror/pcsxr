@@ -26,5 +26,6 @@ typedef enum _LaunchArgOrder {
 @property (readonly, arcretain) NSString *argument;
 
 - (id)initWithLaunchOrder:(LaunchArgOrder)order block:(dispatch_block_t)block argument:(NSString*)arg;
+- (id)initWithLaunchOrder:(LaunchArgOrder)order argument:(NSString*)arg block:(dispatch_block_t)block;
 - (void)addToDictionary:(NSMutableDictionary*)toAdd;
 @end

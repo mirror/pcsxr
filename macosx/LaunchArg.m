@@ -33,6 +33,11 @@
 #endif
 }
 
+- (id)initWithLaunchOrder:(LaunchArgOrder)order argument:(NSString*)arg block:(dispatch_block_t)block
+{
+	return [self initWithLaunchOrder:order block:block argument:arg];
+}
+
 - (id)initWithLaunchOrder:(LaunchArgOrder)order block:(dispatch_block_t)block argument:(NSString*)arg
 {
 	if (self = [super init]) {
