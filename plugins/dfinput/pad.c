@@ -134,7 +134,12 @@ long PADclose(void) {
 
 		DestroySDLJoy();
 		DestroyKeyboard();
-
+#if SDL_VERSION_ATLEAST(1,3,0)
+		if (SDL_WasInit(SDL_INIT_EVERYTHING & ~(SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK))) {
+			SDL_QuitSubSystem(SDL_INIT_HAPTIC);
+			SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
+		} else
+#endif
 		if (SDL_WasInit(SDL_INIT_EVERYTHING & ~SDL_INIT_JOYSTICK)) {
 			SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
 		} else {
