@@ -67,7 +67,6 @@
 	if ([string hasPrefix:@"0x"]) {
 		NSRange zeroXRange = [string rangeOfString:@"0x"];
 		tmpstr = [string stringByReplacingCharactersInRange:zeroXRange withString:@""];
-		//[[NSMutableString stringWithString:string] deleteCharactersInRange:]
 	}else {
 		tmpstr = string;
 	}
