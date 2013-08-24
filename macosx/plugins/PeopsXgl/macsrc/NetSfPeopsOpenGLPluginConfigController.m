@@ -59,7 +59,7 @@ void AboutDlgProc()
 	NSString *path = [bundle pathForResource:@"Credits" ofType:@"rtf"];
 	NSAttributedString *credits;
 	if (path) {
-		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithPath: path documentAttributes:NULL]);
+		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithPath:path documentAttributes:NULL]);
 	} else {
 		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithString:@""]);
 	}
@@ -167,7 +167,7 @@ void PrepFactoryDefaultPreferences(void)
 								  NSStringFromSize(NSMakeSize(800, 600)), kWindowSize,
 								  @NO, @"Draw Scanlines",
 								  // nasty:
-								  [NSArchiver archivedDataWithRootObject: [NSColor colorWithCalibratedRed:0  green:0 blue:0 alpha:0.25]], @"Scanline Color",
+								  [NSArchiver archivedDataWithRootObject: [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0.25]], @"Scanline Color",
 								  @NO, @"Advanced Blending",
 								  @NO, @"Opaque Pass",
 								  @NO, @"Blur",
@@ -278,8 +278,7 @@ void ReadConfig(void)
 	// additional checks
 	if(!iColDepth)
 		iColDepth=32;
-	if(bUseFixes)
-	{
+	if(bUseFixes) {
 		dwActFixes = dwCfgFixes;
 	} else {
 		dwActFixes = 0;
@@ -315,12 +314,12 @@ void ReadConfig(void)
 	[writeDic setObject:([autoFullScreen integerValue] ? @YES : @NO) forKey:kAutoFullScreen];
 	//[writeDic setObject:([frameLimit integerValue] ? @YES : @NO) forKey:kFrameLimit];
 	[writeDic setObject:([proportionalResize integerValue] ? @YES : @NO) forKey:@"Proportional Resize"];
-	[writeDic setObject:@([ditherMode indexOfItem:[ditherMode selectedItem]]) forKey:@"Dither Mode"];
-	[writeDic setObject:@([offscreenDrawing indexOfItem:[offscreenDrawing selectedItem]]) forKey:@"Offscreen Drawing Level"];
-	[writeDic setObject:@([texColorDepth indexOfItem:[texColorDepth selectedItem]]) forKey:@"Texture Color Depth Level"];
+	[writeDic setObject:@([ditherMode indexOfSelectedItem]) forKey:@"Dither Mode"];
+	[writeDic setObject:@([offscreenDrawing indexOfSelectedItem]) forKey:@"Offscreen Drawing Level"];
+	[writeDic setObject:@([texColorDepth indexOfSelectedItem]) forKey:@"Texture Color Depth Level"];
 	[writeDic setObject:@([texEnhancment integerValue]) forKey:@"Texture Enhancement Level"];
 	[writeDic setObject:@([texFiltering integerValue]) forKey:@"Texture Filter Level"];
-	[writeDic setObject:@([frameBufferEffects indexOfItem:[frameBufferEffects selectedItem]]) forKey:@"Frame Buffer Level"];
+	[writeDic setObject:@([frameBufferEffects indexOfSelectedItem]) forKey:@"Frame Buffer Level"];
 	[writeDic setObject:([drawScanlines integerValue] ? @YES : @NO) forKey:@"Draw Scanlines"];
 	[writeDic setObject:([advancedBlending integerValue] ? @YES : @NO) forKey:@"Advanced Blending"];
 	[writeDic setObject:([opaquePass integerValue] ? @YES : @NO) forKey:@"Opaque Pass"];

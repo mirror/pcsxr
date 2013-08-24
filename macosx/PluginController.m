@@ -3,7 +3,14 @@
 #import "PcsxrController.h"
 #import "ARCBridge.h"
 
+@interface PluginController ()
+@property (arcstrong) NSArray *plugins;
+@property (arcstrong) NSString *defaultKey;
+@end
+
 @implementation PluginController
+@synthesize defaultKey;
+@synthesize plugins;
 
 - (IBAction)doAbout:(id)sender
 {
@@ -14,13 +21,12 @@
 - (IBAction)doConfigure:(id)sender
 {
 	 PcsxrPlugin *plugin = [plugins objectAtIndex:[pluginMenu indexOfSelectedItem]];
-
 	 [plugin configureAs:pluginType];
 }
 
 - (IBAction)selectPlugin:(id)sender
 {
-	if (sender==pluginMenu) {
+	if (sender == pluginMenu) {
 		NSInteger index = [pluginMenu indexOfSelectedItem];
 		if (index != -1) {
 			PcsxrPlugin *plugin = [plugins objectAtIndex:index];
@@ -47,12 +53,11 @@
 - (void)setPluginsTo:(NSArray *)list withType:(int)type
 {
 	NSString *sel;
-	NSUInteger i;
 
 	// remember the list
 	pluginType = type;
-	plugins = RETAINOBJ(list);
-	defaultKey = RETAINOBJ([PcsxrPlugin defaultKeyForType:pluginType]);
+	self.plugins = list;
+	self.defaultKey = [PcsxrPlugin defaultKeyForType:pluginType];
 
 	// clear the previous menu items
 	[pluginMenu removeAllItems];
@@ -61,12 +66,13 @@
 	sel = [[NSUserDefaults standardUserDefaults] stringForKey:defaultKey];
 
 	// add the menu entries
-	for (i = 0; i < [plugins count]; i++) {
-		[pluginMenu addItemWithTitle:[[plugins objectAtIndex:i] description]];
-
+	for (PcsxrPlugin *plug in plugins) {
+		NSString *description = [plug description];
+		[pluginMenu addItemWithTitle:description];
+		
 		// make sure the currently selected is set as such
-		if ([sel isEqualToString:[[plugins objectAtIndex:i] path]]) {
-			[pluginMenu selectItemAtIndex:i];
+		if ([sel isEqualToString:[plug path]]) {
+			[pluginMenu selectItemWithTitle:description];
 		}
 	}
 
@@ -76,8 +82,8 @@
 #if !__has_feature(objc_arc)
 - (void)dealloc
 {
-	[plugins release];
-	[defaultKey release];
+	self.plugins = nil;
+	self.defaultKey = nil;
 	
 	[super dealloc];
 }

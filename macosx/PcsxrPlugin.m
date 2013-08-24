@@ -232,7 +232,10 @@
 		}
 	}
 	
-	if (pluginRef) SysCloseLibrary(pluginRef);
+	if (pluginRef) {
+		SysCloseLibrary(pluginRef);
+		pluginRef = NULL;
+	}
 	
 #if !__has_feature(objc_arc)
 	self.modDate = nil;
@@ -306,6 +309,7 @@
 
 - (long)shutdownAs:(int)aType
 {
+#if 0
 	long (*shutdown)(void);
 	
 	shutdown = SysLoadSym(pluginRef, [PluginSymbolName(aType, @"shutdown")
@@ -316,6 +320,10 @@
 	}
 	
 	return PSE_ERR_FATAL;
+#else 
+	active &= ~aType;
+	return PSE_ERR_SUCCESS;
+#endif
 }
 
 #define PluginSymbolNameConfigure(type) PluginSymbolName(type, @"configure")
