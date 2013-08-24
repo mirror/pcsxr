@@ -13,6 +13,34 @@
 
 #define kTempCheatCodesName @"tempCheatCodes"
 #define kCheatsName @"cheats"
+
+@interface PcsxrCheatTempObject : NSObject <NSCopying>
+{
+	uint32_t address;
+	uint16_t value;
+}
+@property (readwrite) uint32_t address;
+@property (readwrite, arcweak) NSNumber* addressNS;
+@property (readwrite) uint16_t value;
+@property (readwrite, arcweak) NSNumber* valueNS;
+
+- (id)initWithAddress:(uint32_t)add value:(uint16_t)val;
+- (id)initWithCheatCode:(CheatCode *)theCheat;
+@end
+
+@interface PcsxrCheatTemp : NSObject
+{
+	NSMutableArray *cheatValues;
+	NSString *cheatName;
+	BOOL enabled;
+}
+@property (readwrite, arcretain) NSMutableArray *cheatValues;
+@property (readwrite, arcretain) NSString *cheatName;
+@property (readwrite, getter = isEnabled) BOOL enabled;
+
+- (id)initWithCheat:(Cheat *)theCheat;
+@end
+
 @implementation PcsxrCheatTempObject
 @synthesize address, value;
 
@@ -36,7 +64,7 @@
 
 - (id)init
 {
-	return self = [self initWithAddress:0x10000000 value:0];
+	return [self initWithAddress:0x10000000 value:0];
 }
 
 - (id)initWithAddress:(uint32_t)add value:(uint16_t)val
@@ -71,6 +99,11 @@
 		return NO;
 }
 
+- (NSUInteger)hash
+{
+	return address ^ value;
+}
+
 - (id)copyWithZone:(NSZone *)zone
 {
 	return [[[self class] allocWithZone:zone] initWithAddress:address value:value];
@@ -83,22 +116,6 @@
 @synthesize cheatValues;
 @synthesize enabled;
 
-- (void)setCheatName:(NSString *)_cheatName
-{
-	if ([cheatName isEqualToString:_cheatName]) {
-		return;
-	}
-	[self willChangeValueForKey:@"cheatName"];
-#if __has_feature(objc_arc)
-	cheatName = _cheatName;
-#else
-	NSString *temp = cheatName;
-	cheatName = [_cheatName copy];
-	[temp release];
-#endif
-	[self didChangeValueForKey:@"cheatName"];
-}
-
 - (id)initWithCheat:(Cheat *)theCheat
 {
 	if (self = [super init]) {
@@ -110,6 +127,11 @@
 		}
 	}
 	return self;
+}
+
+- (NSUInteger)hash
+{
+	return [cheatName hash] ^ [cheatValues hash];
 }
 
 - (NSString *)description

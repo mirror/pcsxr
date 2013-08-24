@@ -538,14 +538,14 @@ otherblock();\
 			NSString *appRawPath = RETAINOBJ([mutProgArgs objectAtIndex:0]);
 			//Remove the app file path from the array
 			[mutProgArgs removeObjectAtIndex:0];
-			NSString *arg = CFBridgingRelease(CFStringCreateByCombiningStrings(kCFAllocatorDefault, BRIDGE(CFArrayRef, mutProgArgs), CFSTR(" ")));
-			NSString *recognizedArgs = CFBridgingRelease(CFStringCreateByCombiningStrings(kCFAllocatorDefault, BRIDGE(CFArrayRef, [argDict allKeys]), CFSTR(" ")));
+			NSString *arg = [mutProgArgs componentsJoinedByString:@" "];
+			NSString *recognizedArgs = [[argDict allKeys] componentsJoinedByString:@" "];
 			
 			NSString *tmpStr = [NSString stringWithFormat:@"A launch command wasn't found in the command line and one or more arguments that PCSX-R recognizes were: %@.\nThe following command line arguments were passed with the application launch file at %@: %@.\n\nThe valid launch commands are %@, %@, and %@.", recognizedArgs, appRawPath, arg, kPCSXRArgumentISO, kPCSXRArgumentCDROM, kPCSXRArgumentBIOS];
 			RELEASEOBJ(appRawPath);
 			ParseErrorStr(tmpStr);
 		} else if (hasParsedAnArgument){
-			NSArray *argArray = [[argDict allValues] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+			NSArray *argArray = [[argDict allValues] sortedArrayWithOptions:NSSortStable usingComparator:^NSComparisonResult(id obj1, id obj2) {
 				LaunchArg *LA1 = obj1;
 				LaunchArg *LA2 = obj2;
 				if (LA1.launchOrder > LA2.launchOrder) {
@@ -553,7 +553,7 @@ otherblock();\
 				} else if (LA1.launchOrder < LA2.launchOrder) {
 					return NSOrderedAscending;
 				} else {
-					return [LA1.argument compare:LA2.argument];
+					return NSOrderedSame;
 				}
 			}];
 			for (LaunchArg *arg in argArray) {
