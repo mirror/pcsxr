@@ -36,7 +36,7 @@
  */
 
 #define BUFFER_SIZE_TOTAL   (32768)
-#define BUFFER_SIZE         (2048)
+#define BUFFER_SIZE         (1024)
 #define BUFFER_QUANTITY     (BUFFER_SIZE_TOTAL / BUFFER_SIZE)
 
 /******************************************************************************/
