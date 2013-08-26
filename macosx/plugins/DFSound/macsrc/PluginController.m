@@ -56,7 +56,6 @@ static inline void RunOnMainThreadSync(dispatch_block_t block)
 void DoAbout()
 {
 	// Get parent application instance
-	NSApplication *app = [NSApplication sharedApplication];
 	NSBundle *bundle = [NSBundle bundleWithIdentifier:APP_ID];
 
 	// Get Credits.rtf
@@ -83,7 +82,7 @@ void DoAbout()
 	 credits, @"Credits",
 	 nil];
 	dispatch_async(dispatch_get_main_queue(), ^{
-		[app orderFrontStandardAboutPanelWithOptions:infoPaneDict];
+		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
 	RELEASEOBJ(infoPaneDict);
 }

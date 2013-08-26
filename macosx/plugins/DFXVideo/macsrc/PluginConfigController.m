@@ -46,7 +46,6 @@ static PluginConfigController *windowController = nil;
 void AboutDlgProc()
 {
 	// Get parent application instance
-	NSApplication *app = [NSApplication sharedApplication];
 	NSBundle *bundle = [NSBundle bundleWithIdentifier:APP_ID];
 
 	// Get Credits.rtf
@@ -75,7 +74,7 @@ void AboutDlgProc()
 	 credits, @"Credits",
 	 nil];
 	dispatch_async(dispatch_get_main_queue(), ^{
-		[app orderFrontStandardAboutPanelWithOptions:infoPaneDict];
+		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
 	RELEASEOBJ(infoPaneDict);
 }

@@ -3231,7 +3231,6 @@
 					../macosx,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
