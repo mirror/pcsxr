@@ -125,7 +125,7 @@ static const int DPad[DKEY_TOTAL] = {
 			GetKeyDescription(buf, currentController, DPad[rowIndex]);
 		} else {
 			rowIndex -= DKEY_TOTAL;
-			GetAnalogDescription(buf, currentController, rowIndex / 4, rowIndex % 4);
+			GetAnalogDescription(buf, currentController, (int)(rowIndex / 4), rowIndex % 4);
 		}
 
 		return @(buf);

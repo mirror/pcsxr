@@ -638,6 +638,7 @@
 		551A777417869E830052D185 /* dfnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfnet.h; sourceTree = "<group>"; };
 		551A777817869E830052D185 /* unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unix.c; sourceTree = "<group>"; };
 		5539965D178BB1B100859644 /* OSXPlugLocalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSXPlugLocalization.h; sourceTree = "<group>"; };
+		554572F217CBC69600FB7D19 /* SPUShared-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SPUShared-info.plist"; sourceTree = "<group>"; };
 		554FD70817C6A13E0056CF66 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = /Library/Frameworks/SDL2.framework; sourceTree = "<absolute>"; };
 		5550D2711683C923006C56B5 /* RecentItemsMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecentItemsMenu.h; sourceTree = "<group>"; };
 		5550D2721683C923006C56B5 /* RecentItemsMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecentItemsMenu.m; sourceTree = "<group>"; usesTabs = 1; };
@@ -1189,6 +1190,7 @@
 		551A755F17868BEC0052D185 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				554572F217CBC69600FB7D19 /* SPUShared-info.plist */,
 				551A756017868BEC0052D185 /* Credits.rtf */,
 				551A756217868BEC0052D185 /* Localizable.strings */,
 				551A756417868BEC0052D185 /* NetSfPeopsSpuPluginMain.xib */,
@@ -2747,6 +2749,12 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GENERATE_PKGINFO_FILE = NO;
 				INSTALL_PATH = "@rpath";
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"plugins/DFSound/Resorces/Shared/SPUShared-info.plist",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2764,6 +2772,12 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GENERATE_PKGINFO_FILE = NO;
 				INSTALL_PATH = "@rpath";
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"plugins/DFSound/Resorces/Shared/SPUShared-info.plist",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -2942,6 +2956,12 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GENERATE_PKGINFO_FILE = NO;
 				INSTALL_PATH = "@rpath";
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"plugins/DFSound/Resorces/Shared/SPUShared-info.plist",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Instrument;

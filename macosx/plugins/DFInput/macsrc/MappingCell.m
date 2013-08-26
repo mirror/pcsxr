@@ -35,7 +35,7 @@
 {
 	[super selectWithFrame:aRect inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 
-	long whichPad = [ControllerList currentController];
+	int whichPad = [ControllerList currentController];
 	NSTableView *tableView = (NSTableView *)[self controlView];
 	long i, changed = 0, row;
 	NSEvent *endEvent;
@@ -58,7 +58,7 @@
 			changed = ReadDKeyEvent(whichPad, [ControllerList buttonOfRow:row]);
 		} else {
 			row -= DKEY_TOTAL;
-			changed = ReadAnalogEvent(whichPad, row / 4, row % 4);
+			changed = ReadAnalogEvent(whichPad, (int)(row / 4), row % 4);
 		}
 
 		if (changed) break;
@@ -69,7 +69,7 @@
 	/* move selection to the next list element */
 	[self endEditing:textObj];
 	if (changed == 1) {
-		int nextRow = [tableView selectedRow] + 1;
+		int nextRow = (int)[tableView selectedRow] + 1;
 		if (nextRow >= [tableView numberOfRows]) {
 			[tableView deselectAll:self];
 			return;
