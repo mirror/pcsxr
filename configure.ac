@@ -1,4 +1,4 @@
-AC_INIT([pcsxr], [1.9.93])
+AC_INIT([pcsxr], [1.9.94])
 
 AC_CANONICAL_HOST
 AC_CANONICAL_BUILD
