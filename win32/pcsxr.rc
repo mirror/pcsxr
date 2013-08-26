@@ -49,12 +49,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "http://pcsxr.codeplex.com/"
             VALUE "FileDescription", "Playstation Emulator based on PCSX-df"
-            VALUE "FileVersion", "1, 9, 4, 0"
+            VALUE "FileVersion", "1, 9, 94, 0"
             VALUE "InternalName", "pcsxr"
             VALUE "LegalCopyright", "Copyright (c) 2013"
             VALUE "OriginalFilename", "pcsxr.exe"
             VALUE "ProductName", "PCSX-Reloaded"
-            VALUE "ProductVersion", "1, 9, 4, 0"
+            VALUE "ProductVersion", "1, 9, 94, 0"
         END
     END
     BLOCK "VarFileInfo"
