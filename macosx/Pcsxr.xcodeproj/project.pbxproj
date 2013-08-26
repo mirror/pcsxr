@@ -487,7 +487,7 @@
 		551A754F17868BEC0052D185 /* NamedSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = NamedSlider.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		551A755017868BEC0052D185 /* NamedSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NamedSlider.m; sourceTree = "<group>"; };
 		551A755117868BEC0052D185 /* PluginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PluginController.h; sourceTree = "<group>"; };
-		551A755217868BEC0052D185 /* PluginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PluginController.m; sourceTree = "<group>"; };
+		551A755217868BEC0052D185 /* PluginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PluginController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		551A755317868BEC0052D185 /* SPUPluginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPUPluginController.h; sourceTree = "<group>"; };
 		551A755417868BEC0052D185 /* SPUPluginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPUPluginController.m; sourceTree = "<group>"; };
 		551A755B17868BEC0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -505,7 +505,7 @@
 		551A757417868BEC0052D185 /* drawgl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = drawgl.m; sourceTree = "<group>"; };
 		551A757517868BEC0052D185 /* ExtendedKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtendedKeys.h; sourceTree = "<group>"; };
 		551A757617868BEC0052D185 /* PluginConfigController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PluginConfigController.h; sourceTree = "<group>"; };
-		551A757717868BEC0052D185 /* PluginConfigController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PluginConfigController.m; sourceTree = "<group>"; };
+		551A757717868BEC0052D185 /* PluginConfigController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PluginConfigController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		551A757817868BEC0052D185 /* PluginGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PluginGLView.h; sourceTree = "<group>"; };
 		551A757917868BEC0052D185 /* PluginGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PluginGLView.m; sourceTree = "<group>"; };
 		551A757A17868BEC0052D185 /* PluginWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PluginWindow.h; sourceTree = "<group>"; };
@@ -523,7 +523,7 @@
 		551A759017868BED0052D185 /* drawgl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = drawgl.m; sourceTree = "<group>"; };
 		551A759117868BED0052D185 /* ExtendedKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtendedKeys.h; sourceTree = "<group>"; };
 		551A759217868BED0052D185 /* NetSfPeopsOpenGLPluginConfigController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetSfPeopsOpenGLPluginConfigController.h; sourceTree = "<group>"; };
-		551A759317868BED0052D185 /* NetSfPeopsOpenGLPluginConfigController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetSfPeopsOpenGLPluginConfigController.m; sourceTree = "<group>"; };
+		551A759317868BED0052D185 /* NetSfPeopsOpenGLPluginConfigController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = NetSfPeopsOpenGLPluginConfigController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		551A759417868BED0052D185 /* PluginGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PluginGLView.h; sourceTree = "<group>"; };
 		551A759517868BED0052D185 /* PluginGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PluginGLView.m; sourceTree = "<group>"; };
 		551A759617868BED0052D185 /* PluginWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PluginWindow.h; sourceTree = "<group>"; };
@@ -536,11 +536,11 @@
 		551A75BE17868C400052D185 /* fifo.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fifo.c; sourceTree = "<group>"; };
 		551A75BF17868C400052D185 /* fifo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fifo.h; sourceTree = "<group>"; };
 		551A75C217868C400052D185 /* sio1.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sio1.c; sourceTree = "<group>"; };
-		551A75C317868C400052D185 /* sio1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sio1.h; sourceTree = "<group>"; };
+		551A75C317868C400052D185 /* sio1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = sio1.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		551A75C517868C400052D185 /* typedefs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = typedefs.h; sourceTree = "<group>"; };
 		551A75CE17868C4E0052D185 /* Bladesio1.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Bladesio1.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		551A75F417868E640052D185 /* cdr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cdr.c; sourceTree = "<group>"; };
-		551A75F517868E640052D185 /* cdr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cdr.h; sourceTree = "<group>"; };
+		551A75F517868E640052D185 /* cdr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = cdr.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		551A75FB17868E640052D185 /* util.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = util.c; sourceTree = "<group>"; };
 		551A760A17868EF00052D185 /* adsr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = adsr.c; sourceTree = "<group>"; };
 		551A760B17868EF00052D185 /* adsr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = adsr.h; sourceTree = "<group>"; };
@@ -559,7 +559,7 @@
 		551A761F17868EF00052D185 /* reverb.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = reverb.c; sourceTree = "<group>"; };
 		551A762017868EF00052D185 /* reverb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = reverb.h; sourceTree = "<group>"; };
 		551A762117868EF00052D185 /* sdl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sdl.c; sourceTree = "<group>"; };
-		551A762217868EF00052D185 /* spu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = spu.c; sourceTree = "<group>"; };
+		551A762217868EF00052D185 /* spu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = spu.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		551A762317868EF00052D185 /* spu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = spu.h; sourceTree = "<group>"; };
 		551A762717868EF00052D185 /* stdafx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
 		551A762817868EF00052D185 /* xa.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = xa.c; sourceTree = "<group>"; };
@@ -571,7 +571,7 @@
 		551A762F17868F270052D185 /* externals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = externals.h; sourceTree = "<group>"; };
 		551A763017868F270052D185 /* fps.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fps.c; sourceTree = "<group>"; };
 		551A763117868F270052D185 /* fps.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fps.h; sourceTree = "<group>"; };
-		551A763217868F270052D185 /* gpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gpu.c; sourceTree = "<group>"; };
+		551A763217868F270052D185 /* gpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = gpu.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		551A763317868F270052D185 /* gpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gpu.h; sourceTree = "<group>"; };
 		551A763717868F270052D185 /* hq2x.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hq2x.h; sourceTree = "<group>"; };
 		551A763817868F270052D185 /* hq3x.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hq3x.h; sourceTree = "<group>"; };
@@ -592,7 +592,7 @@
 		551A764E17868F570052D185 /* fps.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fps.c; sourceTree = "<group>"; };
 		551A764F17868F570052D185 /* fps.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fps.h; sourceTree = "<group>"; };
 		551A765017868F570052D185 /* gl_ext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gl_ext.h; sourceTree = "<group>"; };
-		551A765117868F570052D185 /* gpu.c */ = {isa = PBXFileReference; indentWidth = 1; lastKnownFileType = sourcecode.c.c; path = gpu.c; sourceTree = "<group>"; usesTabs = 0; };
+		551A765117868F570052D185 /* gpu.c */ = {isa = PBXFileReference; indentWidth = 1; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = gpu.c; sourceTree = "<group>"; usesTabs = 0; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		551A765217868F570052D185 /* gpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gpu.h; sourceTree = "<group>"; };
 		551A765617868F570052D185 /* gte_accuracy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = gte_accuracy.c; sourceTree = "<group>"; };
 		551A765717868F570052D185 /* gte_accuracy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gte_accuracy.h; sourceTree = "<group>"; };
@@ -609,7 +609,7 @@
 		551A766317868F570052D185 /* texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
 		551A76661786901F0052D185 /* analog.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = analog.c; sourceTree = "<group>"; };
 		551A766B1786901F0052D185 /* pad.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pad.c; sourceTree = "<group>"; };
-		551A766C1786901F0052D185 /* pad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pad.h; sourceTree = "<group>"; };
+		551A766C1786901F0052D185 /* pad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = pad.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		551A766D1786901F0052D185 /* sdljoy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sdljoy.c; sourceTree = "<group>"; };
 		551A766E1786901F0052D185 /* util.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = util.c; sourceTree = "<group>"; };
 		551A766F1786901F0052D185 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
@@ -635,7 +635,7 @@
 		551A774F17869C280052D185 /* PeopsXGL.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopsXGL.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		551A776D17869E430052D185 /* DFNet.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DFNet.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		551A777317869E830052D185 /* dfnet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfnet.c; sourceTree = "<group>"; };
-		551A777417869E830052D185 /* dfnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfnet.h; sourceTree = "<group>"; };
+		551A777417869E830052D185 /* dfnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = dfnet.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		551A777817869E830052D185 /* unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unix.c; sourceTree = "<group>"; };
 		5539965D178BB1B100859644 /* OSXPlugLocalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSXPlugLocalization.h; sourceTree = "<group>"; };
 		554572F217CBC69600FB7D19 /* SPUShared-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SPUShared-info.plist"; sourceTree = "<group>"; };
