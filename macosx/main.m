@@ -220,7 +220,7 @@ void SysRunGui() {
 // Close mem and plugins
 void SysClose() {
 	EmuShutdown();
-	//ReleasePlugins();
+	ReleasePlugins();
 	
 	if (powerAssertion != kIOPMNullAssertionID) {
 		IOPMAssertionRelease(powerAssertion);
