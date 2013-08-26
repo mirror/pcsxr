@@ -82,24 +82,19 @@ static inline void RunOnMainThreadSync(dispatch_block_t block)
 
 void ConfDlgProc()
 {
-	__block NSWindow *window;
-	__block PluginConfigController *tmpWindowController = nil;
-	
 	//We need this block due to the xib's use of auto layout
 	RunOnMainThreadSync(^{
+		NSWindow *window;
 		if (windowController == nil) {
-			tmpWindowController = [[PluginConfigController alloc] initWithWindowNibName:@"Bladesio1PluginConfig"];
+			windowController = [[PluginConfigController alloc] initWithWindowNibName:@"Bladesio1PluginConfig"];
 		}
-		window = [(windowController ? windowController : tmpWindowController) window];
+		window = [windowController window];
+		
+		[windowController loadValues];
+		
+		[window center];
+		[window makeKeyAndOrderFront:nil];
 	});
-	if (!windowController) {
-		windowController = tmpWindowController;
-	}
-
-	[windowController loadValues];
-
-	[window center];
-	[window makeKeyAndOrderFront:nil];
 }
 
 void ReadConfig()
@@ -109,7 +104,7 @@ void ReadConfig()
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 								[NSDictionary dictionaryWithObjectsAndKeys:
 								 @NO, kSioEnabled,
-								 @((u16)33307), kSioPort,
+								 @33307, kSioPort,
 								 @"127.0.0.1", kSioIPAddress,
 								 @(PLAYER_DISABLED), kSioPlayer,
 								 nil], PrefsKey, nil]];
