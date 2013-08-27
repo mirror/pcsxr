@@ -432,6 +432,7 @@ void OnStates_SaveOther() {
 LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	char File[256];
 	PAINTSTRUCT ps;
+	RECT rect;
 
 	switch (msg) {
 		case WM_CREATE:
@@ -453,6 +454,7 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 			switch (LOWORD(wParam)) {
 				case ID_FILE_EXIT:
 					SysClose();
+					SaveConfig();
 					PostQuitMessage(0);
 					exit(0);
 					return TRUE;
@@ -741,6 +743,7 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 			if (!AccBreak) {
 				if (Running) ClosePlugins();
 				SysClose();
+				SaveConfig();
 				PostQuitMessage(0);
 				exit(0);
 			}
@@ -750,7 +753,16 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 			DeleteDC(hdcmem);
 			return TRUE;
 
+		case WM_EXITSIZEMOVE:
+			if(Config.SaveWindowPos) {
+				GetWindowRect(hWnd, &rect);
+				Config.WindowPos[0] = rect.left;
+				Config.WindowPos[1] = rect.top;
+			}
+			return TRUE;
+
 		case WM_QUIT:
+			SaveConfig();
 			exit(0);
 			break;
 
@@ -1317,6 +1329,7 @@ BOOL CALLBACK ConfigureMcdsDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPa
 
 BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	long tmp;
+	RECT rect;
 
 	switch(uMsg) {
 		case WM_INITDIALOG:
@@ -1339,6 +1352,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Button_SetText(GetDlgItem(hW,IDC_VSYNCWA), _("InuYasha Sengoku Battle Fix"));
 			Button_SetText(GetDlgItem(hW,IDC_WIDESCREEN), _("Widescreen (GTE Hack)"));
 			Button_SetText(GetDlgItem(hW,IDC_HIDECURSOR), _("Hide cursor"));
+			Button_SetText(GetDlgItem(hW,IDC_SAVEWINDOWPOS),_("Save window position"));
 
 			Static_SetText(GetDlgItem(hW,IDC_MISCOPT), _("Options"));
 			Static_SetText(GetDlgItem(hW,IDC_SELPSX),  _("Psx System Type"));
@@ -1357,6 +1371,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 	   		Button_SetCheck(GetDlgItem(hW,IDC_VSYNCWA), Config.VSyncWA);
 			Button_SetCheck(GetDlgItem(hW,IDC_WIDESCREEN), Config.Widescreen);
 			Button_SetCheck(GetDlgItem(hW,IDC_HIDECURSOR), Config.HideCursor);
+			Button_SetCheck(GetDlgItem(hW,IDC_SAVEWINDOWPOS), Config.SaveWindowPos);
 	   		ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "NTSC");
 	   		ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "PAL");
 	   		ComboBox_SetCurSel(GetDlgItem(hW,IDC_PSXTYPES),Config.PsxType);
@@ -1402,6 +1417,12 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					Config.VSyncWA = Button_GetCheck(GetDlgItem(hW,IDC_VSYNCWA));
 					Config.Widescreen = Button_GetCheck(GetDlgItem(hW,IDC_WIDESCREEN));
 					Config.HideCursor = Button_GetCheck(GetDlgItem(hW,IDC_HIDECURSOR));
+					Config.SaveWindowPos = Button_GetCheck(GetDlgItem(hW,IDC_SAVEWINDOWPOS));
+					if(!Config.SaveWindowPos) {
+						GetWindowRect(gApp.hWnd, &rect);
+						Config.WindowPos[0] = rect.left;
+						Config.WindowPos[1] = rect.top;
+					}
 					tmp = Config.Debug;
 					Config.Debug   = Button_GetCheck(GetDlgItem(hW,IDC_DEBUG));
 					if (tmp != Config.Debug) {
@@ -1679,8 +1700,7 @@ void CreateMainMenu() {
 #ifdef ENABLE_NLS
 	ADDSUBMENUS(0, 1, _("&Language"));
 
-	// wtf?
-	if (langs != langs) free(langs);
+	if (langs) free(langs);
 	langs = (_langs*)malloc(sizeof(_langs));
 	strcpy(langs[0].lang, "English");
 	InitLanguages(); i=1;
@@ -1755,6 +1775,9 @@ void CreateMainWindow(int nCmdShow) {
 
 	CreateMainMenu();
 	SetMenu(gApp.hWnd, gApp.hMenu);
+
+	if(Config.SaveWindowPos)
+		SetWindowPos(hWnd, 0, Config.WindowPos[0], Config.WindowPos[1], 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
 	ShowWindow(hWnd, nCmdShow);
 }

@@ -304,6 +304,7 @@
 #define IDC_LABEL_DATABASE              1263
 #define IDC_WIDESCREEN                  1264
 #define IDC_HIDECURSOR                  1265
+#define IDC_SAVEWINDOWPOS               1266
 #define ID_FILE_EXIT                    40001
 #define ID_HELP_ABOUT                   40002
 #define ID_FILE_RUN_CD                  40003

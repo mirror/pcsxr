@@ -83,6 +83,9 @@ int LoadConfig() {
 	QueryKeyV("VSyncWA",  Conf->VSyncWA);
 	QueryKeyV("Widescreen",  Conf->Widescreen);
 	QueryKeyV("HideCursor",  Conf->HideCursor);
+	QueryKeyV("SaveWindowPos",  Conf->SaveWindowPos);
+	QueryKeyV("WindowPosX",  Conf->WindowPos[0]);
+	QueryKeyV("WindowPosY",  Conf->WindowPos[1]);
 
 	QueryKeyV("Cpu",      Conf->Cpu);
 	QueryKeyV("PsxType",  Conf->PsxType);
@@ -137,6 +140,9 @@ void SaveConfig() {
 	SetKeyV("VSyncWA", Conf->VSyncWA);
 	SetKeyV("Widescreen", Conf->Widescreen);
 	SetKeyV("HideCursor", Conf->HideCursor);
+	SetKeyV("SaveWindowPos",  Conf->SaveWindowPos);
+	SetKeyV("WindowPosX",  Conf->WindowPos[0]);
+	SetKeyV("WindowPosY",  Conf->WindowPos[1]);
 
 	SetKeyV("Cpu",     Conf->Cpu);
 	SetKeyV("PsxType", Conf->PsxType);
