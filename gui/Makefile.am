@@ -24,8 +24,7 @@ pcsxr_SOURCES = \
 	DebugMemory.c	\
 	DebugMemory.h	\
 	AboutDlg.c	\
-	AboutDlg.h	\
-	gdk-compat.h
+	AboutDlg.h
 
 pcsxr_LDADD = \
 	../libpcsxcore/libpcsxcore.a \
