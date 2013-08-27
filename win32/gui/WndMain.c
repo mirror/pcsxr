@@ -1352,7 +1352,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Button_SetText(GetDlgItem(hW,IDC_VSYNCWA), _("InuYasha Sengoku Battle Fix"));
 			Button_SetText(GetDlgItem(hW,IDC_WIDESCREEN), _("Widescreen (GTE Hack)"));
 			Button_SetText(GetDlgItem(hW,IDC_HIDECURSOR), _("Hide cursor"));
-			Button_SetText(GetDlgItem(hW,IDC_SAVEWINDOWPOS),_("Save window position"));
+			Button_SetText(GetDlgItem(hW,IDC_SAVEWINDOWPOS), _("Save window position"));
 
 			Static_SetText(GetDlgItem(hW,IDC_MISCOPT), _("Options"));
 			Static_SetText(GetDlgItem(hW,IDC_SELPSX),  _("Psx System Type"));
@@ -1418,7 +1418,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					Config.Widescreen = Button_GetCheck(GetDlgItem(hW,IDC_WIDESCREEN));
 					Config.HideCursor = Button_GetCheck(GetDlgItem(hW,IDC_HIDECURSOR));
 					Config.SaveWindowPos = Button_GetCheck(GetDlgItem(hW,IDC_SAVEWINDOWPOS));
-					if(!Config.SaveWindowPos) {
+					if(Config.SaveWindowPos) {
 						GetWindowRect(gApp.hWnd, &rect);
 						Config.WindowPos[0] = rect.left;
 						Config.WindowPos[1] = rect.top;
