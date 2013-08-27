@@ -81,6 +81,7 @@ LangDef sLangs[] = {
 	{ "en",		N_("English"),				0x0409 },
 	{ "es",		N_("Spanish"),				0x040a },
 	{ "fr_FR",	N_("French"),				0x040c },
+	{ "hu_HU",	N_("Hungarian"),			0x040e },
 	{ "it",		N_("Italian"),				0x0410 },
 	{ "pt",		N_("Portuguese"),			0x0816 },
 	{ "pt_BR",	N_("Portuguese (Brazilian)"),		0x0416 },

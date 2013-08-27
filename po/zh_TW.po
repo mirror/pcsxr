@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2013-03-02 03:33+0400\n"
+"POT-Creation-Date: 2013-08-28 01:35+0400\n"
 "PO-Revision-Date: 2011-06-04 13:46+0400\n"
 "Last-Translator: Wei Mingzhi <whistler_wmz@users.sf.net>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
@@ -27,7 +27,7 @@ msgstr "編輯金手指"
 msgid "<b>Cheat Codes</b>"
 msgstr "<b>金手指碼</b>"
 
-#: ../data/pcsxr.ui.h:3 ../gui/Cheat.c:1113 ../win32/gui/CheatDlg.c:678
+#: ../data/pcsxr.ui.h:3 ../gui/Cheat.c:1146 ../win32/gui/CheatDlg.c:678
 msgid "Cheat Search"
 msgstr "搜尋金手指碼"
 
@@ -39,7 +39,7 @@ msgstr "搜尋:"
 msgid "Data Type:"
 msgstr "數值類型:"
 
-#: ../data/pcsxr.ui.h:6 ../gui/Cheat.c:645 ../win32/gui/CheatDlg.c:506
+#: ../data/pcsxr.ui.h:6 ../gui/Cheat.c:678 ../win32/gui/CheatDlg.c:506
 #: ../win32/gui/CheatDlg.c:597 ../win32/gui/CheatDlg.c:682
 msgid "Value:"
 msgstr "值:"
@@ -142,7 +142,7 @@ msgstr "SPU IRQ 總是開啟"
 msgid "Black & White Movies"
 msgstr "黑白電影"
 
-#: ../data/pcsxr.ui.h:31 ../gui/Plugin.c:239
+#: ../data/pcsxr.ui.h:31 ../gui/Plugin.c:253
 #, c-format
 msgid "SIO IRQ Always Enabled"
 msgstr "SIO IRQ 總是開啟"
@@ -155,7 +155,7 @@ msgstr "禁用 XA 解碼"
 msgid "Disable CD Audio"
 msgstr "禁用 CD 音頻"
 
-#: ../data/pcsxr.ui.h:34 ../win32/gui/WndMain.c:1331
+#: ../data/pcsxr.ui.h:34 ../win32/gui/WndMain.c:1346
 msgid "Slow Boot"
 msgstr ""
 
@@ -163,23 +163,23 @@ msgstr ""
 msgid "Enable Interpreter CPU"
 msgstr "開啟解釋執行 CPU"
 
-#: ../data/pcsxr.ui.h:36 ../win32/gui/WndMain.c:1334
+#: ../data/pcsxr.ui.h:36 ../win32/gui/WndMain.c:1349
 msgid "Enable Console Output"
 msgstr "開啟控制台輸出"
 
-#: ../data/pcsxr.ui.h:37 ../win32/gui/WndMain.c:1335
+#: ../data/pcsxr.ui.h:37 ../win32/gui/WndMain.c:1350
 msgid "Enable Debugger"
 msgstr "開啟調試器"
 
-#: ../data/pcsxr.ui.h:38 ../win32/gui/WndMain.c:1337
+#: ../data/pcsxr.ui.h:38 ../win32/gui/WndMain.c:1352
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
 msgstr "Parasite Eve 2, Vandal Hearts 1/2 修正"
 
-#: ../data/pcsxr.ui.h:39 ../win32/gui/WndMain.c:1338
+#: ../data/pcsxr.ui.h:39 ../win32/gui/WndMain.c:1353
 msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku 戰斗修正"
 
-#: ../data/pcsxr.ui.h:40 ../win32/gui/WndMain.c:1339
+#: ../data/pcsxr.ui.h:40 ../win32/gui/WndMain.c:1354
 msgid "Widescreen (GTE Hack)"
 msgstr ""
 
@@ -187,7 +187,7 @@ msgstr ""
 msgid "<b>Options</b>"
 msgstr "<b>選項</b>"
 
-#: ../data/pcsxr.ui.h:42 ../win32/gui/WndMain.c:1332
+#: ../data/pcsxr.ui.h:42 ../win32/gui/WndMain.c:1347
 msgid "Autodetect"
 msgstr "自動檢測"
 
@@ -413,11 +413,11 @@ msgstr "<b>記憶卡 1</b>"
 msgid "<b>Memory Card 2</b>"
 msgstr "<b>記憶卡 2</b>"
 
-#: ../data/pcsxr.ui.h:98 ../gui/DebugMemory.c:119
+#: ../data/pcsxr.ui.h:98 ../gui/DebugMemory.c:152
 msgid "Memory Dump"
 msgstr "記憶體轉儲"
 
-#: ../data/pcsxr.ui.h:99 ../gui/DebugMemory.c:205
+#: ../data/pcsxr.ui.h:99 ../gui/DebugMemory.c:238
 msgid "Address (Hexadecimal):"
 msgstr "位址 (十六進制):"
 
@@ -504,17 +504,18 @@ msgstr "十進制"
 msgid "Hexadecimal"
 msgstr "十六進制"
 
-#: ../gui/AboutDlg.c:71
+#: ../gui/AboutDlg.c:72
+#, fuzzy
 msgid ""
 "(C) 1999-2003 PCSX Team\n"
 "(C) 2005-2009 PCSX-df Team\n"
-"(C) 2009-2011 PCSX-Reloaded Team"
+"(C) 2009-2013 PCSX-Reloaded Team"
 msgstr ""
 "(C) 1999-2003 PCSX 開發組\n"
 "(C) 2005-2009 PCSX-df 開發組\n"
 "(C) 2009-2010 PCSX-Reloaded 開發組 "
 
-#: ../gui/AboutDlg.c:76
+#: ../gui/AboutDlg.c:77
 msgid ""
 "This program is free software; you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -544,11 +545,15 @@ msgstr ""
 "this program; if not, write to the Free Software Foundation, Inc., 51 "
 "Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA."
 
-#: ../gui/AboutDlg.c:100
+#: ../gui/AboutDlg.c:100 ../win32/gui/AboutDlg.c:46
+msgid "About"
+msgstr "關於 PCSXR"
+
+#: ../gui/AboutDlg.c:109
 msgid "translator-credits"
 msgstr "Wei Mingzhi <whistler@openoffice.org>"
 
-#: ../gui/AboutDlg.c:101
+#: ../gui/AboutDlg.c:110
 msgid "A PlayStation emulator."
 msgstr "一個 PlayStation 模擬器。"
 
@@ -556,107 +561,102 @@ msgstr "一個 PlayStation 模擬器。"
 msgid "Add New Cheat"
 msgstr "添加新金手指"
 
-#: ../gui/Cheat.c:109 ../gui/Cheat.c:192
+#: ../gui/Cheat.c:109 ../gui/Cheat.c:193
 msgid "Cheat Description:"
 msgstr "金手指描述:"
 
-#: ../gui/Cheat.c:117 ../gui/Cheat.c:201 ../win32/gui/CheatDlg.c:68
+#: ../gui/Cheat.c:117 ../gui/Cheat.c:202 ../win32/gui/CheatDlg.c:68
 #: ../win32/gui/CheatDlg.c:118
 msgid "Cheat Code:"
 msgstr "金手指碼:"
 
-#: ../gui/Cheat.c:147 ../gui/Cheat.c:241 ../gui/LnxMain.c:425
-#: ../win32/gui/ConfigurePlugins.c:330
+#: ../gui/Cheat.c:147 ../gui/Cheat.c:242 ../gui/LnxMain.c:423
+#: ../win32/gui/ConfigurePlugins.c:336
 msgid "Error"
 msgstr "錯誤"
 
-#: ../gui/Cheat.c:147 ../gui/Cheat.c:241 ../win32/gui/CheatDlg.c:91
+#: ../gui/Cheat.c:147 ../gui/Cheat.c:242 ../win32/gui/CheatDlg.c:91
 #: ../win32/gui/CheatDlg.c:132
 msgid "Invalid cheat code!"
 msgstr "非法金手指碼!"
 
-#: ../gui/Cheat.c:184 ../win32/gui/CheatDlg.c:66
+#: ../gui/Cheat.c:185 ../win32/gui/CheatDlg.c:66
 msgid "Edit Cheat"
 msgstr "編輯金手指"
 
-#: ../gui/Cheat.c:307
+#: ../gui/Cheat.c:313
 msgid "Open Cheat File"
 msgstr "打開金手指檔"
 
-#: ../gui/Cheat.c:317 ../gui/Cheat.c:357
+#: ../gui/Cheat.c:324 ../gui/Cheat.c:374
 msgid "PCSXR Cheat Code Files (*.cht)"
 msgstr "PCSXR 金手指檔 (*.cht)"
 
-#: ../gui/Cheat.c:322 ../gui/GtkGui.c:491 ../gui/GtkGui.c:643
-#: ../win32/gui/WndMain.c:1483 ../win32/gui/WndMain.c:1564
-msgid "All Files"
-msgstr "所有檔案"
-
-#: ../gui/Cheat.c:347
+#: ../gui/Cheat.c:357
 msgid "Save Cheat File"
 msgstr "儲存金手指檔"
 
-#: ../gui/Cheat.c:362
+#: ../gui/Cheat.c:423
 msgid "All Files (*.*)"
 msgstr "所有檔案 (*.*)"
 
-#: ../gui/Cheat.c:401
+#: ../gui/Cheat.c:434
 msgid "Cheat Codes"
 msgstr "金手指碼"
 
-#: ../gui/Cheat.c:408
+#: ../gui/Cheat.c:441
 msgid "Enable"
 msgstr "開啟"
 
-#: ../gui/Cheat.c:416 ../win32/gui/CheatDlg.c:185
+#: ../gui/Cheat.c:449 ../win32/gui/CheatDlg.c:185
 msgid "Description"
 msgstr "描述"
 
-#: ../gui/Cheat.c:544 ../win32/gui/CheatDlg.c:457
+#: ../gui/Cheat.c:577 ../win32/gui/CheatDlg.c:457
 msgid "Too many addresses found."
 msgstr "找到過多位址。"
 
-#: ../gui/Cheat.c:553 ../win32/gui/CheatDlg.c:466
+#: ../gui/Cheat.c:586 ../win32/gui/CheatDlg.c:466
 #, c-format
 msgid "%.8X    Current: %u (%.2X), Previous: %u (%.2X)"
 msgstr "%.8X    當前值: %u (%.2X), 前次值: %u (%.2X)"
 
-#: ../gui/Cheat.c:558 ../win32/gui/CheatDlg.c:471
+#: ../gui/Cheat.c:591 ../win32/gui/CheatDlg.c:471
 #, c-format
 msgid "%.8X    Current: %u (%.4X), Previous: %u (%.4X)"
 msgstr "%.8X    當前值: %u (%.4X), 前次值: %u (%.4X)"
 
-#: ../gui/Cheat.c:563 ../win32/gui/CheatDlg.c:476
+#: ../gui/Cheat.c:596 ../win32/gui/CheatDlg.c:476
 #, c-format
 msgid "%.8X    Current: %u (%.8X), Previous: %u (%.8X)"
 msgstr "%.8X    當前值: %u (%.8X), 前次值: %u (%.8X)"
 
-#: ../gui/Cheat.c:578 ../win32/gui/CheatDlg.c:492
+#: ../gui/Cheat.c:611 ../win32/gui/CheatDlg.c:492
 #, c-format
 msgid "Founded Addresses: %d"
 msgstr "找到位址: %d"
 
-#: ../gui/Cheat.c:586 ../win32/gui/CheatDlg.c:448
+#: ../gui/Cheat.c:619 ../win32/gui/CheatDlg.c:448
 msgid "Enter the values and start your search."
 msgstr "輸入數值並開始搜索。"
 
-#: ../gui/Cheat.c:628
+#: ../gui/Cheat.c:661
 msgid "Freeze value"
 msgstr "固定數值"
 
-#: ../gui/Cheat.c:634 ../win32/gui/CheatDlg.c:67 ../win32/gui/CheatDlg.c:117
+#: ../gui/Cheat.c:667 ../win32/gui/CheatDlg.c:67 ../win32/gui/CheatDlg.c:117
 msgid "Description:"
 msgstr "描述:"
 
-#: ../gui/Cheat.c:727
+#: ../gui/Cheat.c:760
 msgid "Modify value"
 msgstr "更改數值"
 
-#: ../gui/Cheat.c:735
+#: ../gui/Cheat.c:768
 msgid "New value:"
 msgstr "新值:"
 
-#: ../gui/Cheat.c:1119
+#: ../gui/Cheat.c:1152
 msgid "Search Results"
 msgstr "搜尋結果"
 
@@ -694,40 +694,40 @@ msgstr "無法開啟目錄: \"%s\"\n"
 msgid "Simulate PSX BIOS"
 msgstr "模擬 PS BIOS"
 
-#: ../gui/DebugMemory.c:127
+#: ../gui/DebugMemory.c:160
 msgid "Start Address (Hexadecimal):"
 msgstr "起始位址 (十六進制):"
 
-#: ../gui/DebugMemory.c:138
+#: ../gui/DebugMemory.c:171
 msgid "Length (Decimal):"
 msgstr "長度 (十進制):"
 
-#: ../gui/DebugMemory.c:164
+#: ../gui/DebugMemory.c:197
 msgid "Dump to File"
 msgstr "轉儲至檔案"
 
-#: ../gui/DebugMemory.c:179
+#: ../gui/DebugMemory.c:212
 #, c-format
 msgid "Error writing to %s!"
 msgstr "存儲至 %s 時出錯!"
 
-#: ../gui/DebugMemory.c:197
+#: ../gui/DebugMemory.c:230
 msgid "Memory Patch"
 msgstr "記憶體修改"
 
-#: ../gui/DebugMemory.c:216
+#: ../gui/DebugMemory.c:249
 msgid "Value (Hexa string):"
 msgstr "數值 (十六進制串):"
 
-#: ../gui/DebugMemory.c:283
+#: ../gui/DebugMemory.c:318
 msgid "Memory Viewer"
 msgstr "記憶體檢視"
 
-#: ../gui/DebugMemory.c:289
+#: ../gui/DebugMemory.c:324
 msgid "Address"
 msgstr "位址"
 
-#: ../gui/DebugMemory.c:307
+#: ../gui/DebugMemory.c:342
 msgid "Text"
 msgstr "文字"
 
@@ -739,84 +739,89 @@ msgstr "就緒"
 msgid "Emulation Paused."
 msgstr "模擬器已暫停。"
 
-#: ../gui/GtkGui.c:474
+#: ../gui/GtkGui.c:529
 msgid "Select PSX EXE File"
 msgstr "選擇 PS EXE 檔案"
 
-#: ../gui/GtkGui.c:487
+#: ../gui/GtkGui.c:542
 msgid "PlayStation Executable Files"
 msgstr "PlayStation 執行檔"
 
-#: ../gui/GtkGui.c:524
+#: ../gui/GtkGui.c:546 ../gui/GtkGui.c:699 ../win32/gui/WndMain.c:1506
+#: ../win32/gui/WndMain.c:1587
+msgid "All Files"
+msgstr "所有檔案"
+
+#: ../gui/GtkGui.c:579
 msgid "Not a valid PSX file"
 msgstr "不是一個合法的 PSX 檔"
 
-#: ../gui/GtkGui.c:524
+#: ../gui/GtkGui.c:579
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "此文件不是一個合法的 PlayStation 執行檔"
 
-#: ../gui/GtkGui.c:553 ../gui/GtkGui.c:725
+#: ../gui/GtkGui.c:608 ../gui/GtkGui.c:781
 msgid "CD ROM failed"
 msgstr "CD-ROM 失敗"
 
-#: ../gui/GtkGui.c:553 ../gui/GtkGui.c:725 ../win32/gui/WndMain.c:472
-#: ../win32/gui/WndMain.c:526 ../win32/gui/WndMain.c:596
+#: ../gui/GtkGui.c:608 ../gui/GtkGui.c:781 ../win32/gui/WndMain.c:475
+#: ../win32/gui/WndMain.c:529 ../win32/gui/WndMain.c:599
 #, c-format
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "此光碟不是一張合法的 PlayStation 光碟。"
 
-#: ../gui/GtkGui.c:564 ../gui/GtkGui.c:736 ../win32/gui/WndMain.c:482
-#: ../win32/gui/WndMain.c:536 ../win32/gui/WndMain.c:606
+#: ../gui/GtkGui.c:619 ../gui/GtkGui.c:792 ../win32/gui/WndMain.c:485
+#: ../win32/gui/WndMain.c:539 ../win32/gui/WndMain.c:609
 #, c-format
 msgid "Could not load CD-ROM!"
 msgstr "無法加載光碟!"
 
-#: ../gui/GtkGui.c:564 ../gui/GtkGui.c:736
+#: ../gui/GtkGui.c:619 ../gui/GtkGui.c:792
 msgid "The CD-ROM could not be loaded"
 msgstr "無法加載 CD-ROM"
 
-#: ../gui/GtkGui.c:578
+#: ../gui/GtkGui.c:634
 msgid "Could not run BIOS"
 msgstr "無法執行 BIOS"
 
-#: ../gui/GtkGui.c:578
+#: ../gui/GtkGui.c:634
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr "內部 HLE BIOS 不支援直接執行。"
 
-#: ../gui/GtkGui.c:608
+#: ../gui/GtkGui.c:664
 msgid "Open PSX Disc Image File"
 msgstr "打開 PS 光碟映像檔"
 
-#: ../gui/GtkGui.c:638
+#: ../gui/GtkGui.c:694
 #, fuzzy
 msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso, *.cue, *.pbp, *.cbn)"
 msgstr "PS 鏡像檔 (*.bin, *.img, *.mdf, *.iso)"
 
-#: ../gui/GtkGui.c:894
+#: ../gui/GtkGui.c:952
 #, c-format
 msgid "Loaded state %s."
 msgstr "已讀取記錄 %s。"
 
-#: ../gui/GtkGui.c:897
+#: ../gui/GtkGui.c:955
 #, c-format
 msgid "Error loading state %s!"
 msgstr "讀取記錄 %s 時出錯。"
 
-#: ../gui/GtkGui.c:908
+#: ../gui/GtkGui.c:966
 #, c-format
 msgid "Saved state %s."
 msgstr "已存儲記錄 %s"
 
-#: ../gui/GtkGui.c:910
+#: ../gui/GtkGui.c:968
 #, c-format
 msgid "Error saving state %s!"
 msgstr "存儲記錄 %s 時出錯。"
 
-#: ../gui/GtkGui.c:945 ../gui/GtkGui.c:973
+#: ../gui/GtkGui.c:1007 ../gui/GtkGui.c:1035
 msgid "Select State File"
 msgstr "選擇記錄檔案"
 
-#: ../gui/GtkGui.c:1016
+#: ../gui/GtkGui.c:1078
 msgid "Notice"
 msgstr "警告"
 
@@ -847,16 +852,16 @@ msgid ""
 "without -nogui.\n"
 msgstr "PCSXR 不能在字符界面下設定 -- 請不使用 -nogui 參數重新啟動程式\n"
 
-#: ../gui/LnxMain.c:425
+#: ../gui/LnxMain.c:423
 msgid "Failed loading plugins!"
 msgstr "外掛加載失敗"
 
-#: ../gui/LnxMain.c:444
+#: ../gui/LnxMain.c:442
 #, c-format
 msgid "Could not load CD-ROM!\n"
 msgstr "無法加載光碟。\n"
 
-#: ../gui/LnxMain.c:485
+#: ../gui/LnxMain.c:484
 #, c-format
 msgid "PSX emulator couldn't be initialized.\n"
 msgstr "PS 模擬器無法初期化。\n"
@@ -865,11 +870,11 @@ msgstr "PS 模擬器無法初期化。\n"
 msgid "Icon"
 msgstr "圖符"
 
-#: ../gui/MemcardDlg.c:62 ../win32/gui/WndMain.c:778
+#: ../gui/MemcardDlg.c:62 ../win32/gui/WndMain.c:792
 msgid "Title"
 msgstr "標題"
 
-#: ../gui/MemcardDlg.c:68 ../win32/gui/WndMain.c:784
+#: ../gui/MemcardDlg.c:68 ../win32/gui/WndMain.c:798
 msgid "Status"
 msgstr "狀態"
 
@@ -881,16 +886,16 @@ msgstr "ID"
 msgid "Name"
 msgstr "名稱"
 
-#: ../gui/MemcardDlg.c:118 ../win32/gui/WndMain.c:989
+#: ../gui/MemcardDlg.c:118 ../win32/gui/WndMain.c:1003
 msgid "Deleted"
 msgstr "已刪除"
 
-#: ../gui/MemcardDlg.c:120 ../gui/MemcardDlg.c:129 ../win32/gui/WndMain.c:990
-#: ../win32/gui/WndMain.c:993
+#: ../gui/MemcardDlg.c:120 ../gui/MemcardDlg.c:129 ../win32/gui/WndMain.c:1004
+#: ../win32/gui/WndMain.c:1007
 msgid "Free"
 msgstr "空閑"
 
-#: ../gui/MemcardDlg.c:123 ../win32/gui/WndMain.c:992
+#: ../gui/MemcardDlg.c:123 ../win32/gui/WndMain.c:1006
 msgid "Used"
 msgstr "已使用"
 
@@ -931,91 +936,91 @@ msgid "New Memory Card.mcd"
 msgstr "新記憶卡檔.mcd"
 
 #. No free slots available on the destination card
-#: ../gui/MemcardDlg.c:511
+#: ../gui/MemcardDlg.c:512
 msgid "No free space on memory card"
 msgstr "記憶卡無空餘位置"
 
-#: ../gui/MemcardDlg.c:512
+#: ../gui/MemcardDlg.c:513
 msgid ""
 "There are no free slots available on the target memory card. Please delete a "
 "slot first."
 msgstr "目的記憶卡無空餘位置。請先刪除一個檔案。"
 
-#: ../gui/MemcardDlg.c:671
+#: ../gui/MemcardDlg.c:672
 msgid "Memory Card Manager"
 msgstr "記憶卡管理器"
 
-#: ../gui/Plugin.c:240
+#: ../gui/Plugin.c:254
 #, c-format
 msgid "SIO IRQ Not Always Enabled"
 msgstr "SIO IRQ 不總是開啟"
 
-#: ../gui/Plugin.c:246
+#: ../gui/Plugin.c:260
 #, c-format
 msgid "Black & White Mdecs Only Enabled"
 msgstr "Black & White Mdecs Only 開啟"
 
-#: ../gui/Plugin.c:247
+#: ../gui/Plugin.c:261
 #, c-format
 msgid "Black & White Mdecs Only Disabled"
 msgstr "Black & White Mdecs Only 禁用"
 
-#: ../gui/Plugin.c:253
+#: ../gui/Plugin.c:267
 #, c-format
 msgid "XA Enabled"
 msgstr "XA 已開啟"
 
-#: ../gui/Plugin.c:254
+#: ../gui/Plugin.c:268
 #, c-format
 msgid "XA Disabled"
 msgstr "XA 已禁用"
 
-#: ../gui/Plugin.c:326
+#: ../gui/Plugin.c:340
 msgid "Error opening CD-ROM plugin!"
 msgstr "無法開啟 CD-ROM 外掛!"
 
-#: ../gui/Plugin.c:328
+#: ../gui/Plugin.c:342
 msgid "Error opening SPU plugin!"
 msgstr "無法開啟 SPU 外掛!"
 
-#: ../gui/Plugin.c:331
+#: ../gui/Plugin.c:345
 msgid "Error opening GPU plugin!"
 msgstr "無法開啟 GPU 外掛!"
 
-#: ../gui/Plugin.c:333
+#: ../gui/Plugin.c:347
 msgid "Error opening Controller 1 plugin!"
 msgstr "無法開啟 \"控制器 1\" 外掛!"
 
-#: ../gui/Plugin.c:337
+#: ../gui/Plugin.c:351
 msgid "Error opening Controller 2 plugin!"
 msgstr "無法開啟 \"控制器 2\" 外掛!"
 
-#: ../gui/Plugin.c:342
+#: ../gui/Plugin.c:356
 #, fuzzy
 msgid "Error opening SIO1 plugin!"
 msgstr "無法開啟 SPU 外掛!"
 
-#: ../gui/Plugin.c:424
+#: ../gui/Plugin.c:438
 msgid "Error closing CD-ROM plugin!"
 msgstr "無法關閉 CD-ROM 外掛!"
 
-#: ../gui/Plugin.c:426
+#: ../gui/Plugin.c:440
 msgid "Error closing SPU plugin!"
 msgstr "無法關閉 SPU 外掛!"
 
-#: ../gui/Plugin.c:428
+#: ../gui/Plugin.c:442
 msgid "Error closing Controller 1 Plugin!"
 msgstr "無法關閉 \"控制器 1\" 外掛!"
 
-#: ../gui/Plugin.c:430
+#: ../gui/Plugin.c:444
 msgid "Error closing Controller 2 plugin!"
 msgstr "無法關閉 \"控制器 2\" 外掛!"
 
-#: ../gui/Plugin.c:432
+#: ../gui/Plugin.c:446
 msgid "Error closing GPU plugin!"
 msgstr "無法關閉 GPU 外掛!"
 
-#: ../gui/Plugin.c:435
+#: ../gui/Plugin.c:449
 #, fuzzy
 msgid "Error closing SIO1 plugin!"
 msgstr "無法關閉 SPU 外掛!"
@@ -1037,17 +1042,22 @@ msgstr "軌道 %.2d (%s) - 起始位置 %.2d:%.2d:%.2d, 長度 %.2d:%.2d:%.2d\n"
 msgid "Loaded CD Image: %s"
 msgstr "已加載 CD 映像: %s"
 
-#: ../libpcsxcore/cheat.c:147
+#: ../libpcsxcore/cheat.c:72
+#, fuzzy, c-format
+msgid "Could not load cheats from: %s\n"
+msgstr "金手指碼已加載: %s\n"
+
+#: ../libpcsxcore/cheat.c:148
 #, c-format
 msgid "Cheats loaded from: %s\n"
 msgstr "金手指碼已加載: %s\n"
 
-#: ../libpcsxcore/cheat.c:179
+#: ../libpcsxcore/cheat.c:180
 #, c-format
 msgid "Cheats saved to: %s\n"
 msgstr "金手指碼已保存: %s\n"
 
-#: ../libpcsxcore/cheat.c:322 ../libpcsxcore/cheat.c:443
+#: ../libpcsxcore/cheat.c:323 ../libpcsxcore/cheat.c:444
 msgid "(Untitled)"
 msgstr "(未定名)"
 
@@ -1077,17 +1087,22 @@ msgstr "CD-ROM 卷標: %.32s\n"
 msgid "CD-ROM ID: %.9s\n"
 msgstr "CD-ROM ID: %.9s\n"
 
-#: ../libpcsxcore/misc.c:415
+#: ../libpcsxcore/misc.c:352
+#, fuzzy, c-format
+msgid "CD-ROM EXE Name: %.255s\n"
+msgstr "CD-ROM 卷標: %.32s\n"
+
+#: ../libpcsxcore/misc.c:416
 #, c-format
 msgid "Error opening file: %s.\n"
 msgstr "開啟檔案錯誤: %s.\n"
 
-#: ../libpcsxcore/misc.c:458
+#: ../libpcsxcore/misc.c:459
 #, c-format
 msgid "Unknown CPE opcode %02x at position %08x.\n"
 msgstr "未知 CPE opcode %02x 位於 %08x.\n"
 
-#: ../libpcsxcore/misc.c:486
+#: ../libpcsxcore/misc.c:487
 msgid "This file does not appear to be a valid PSX file.\n"
 msgstr "此檔案不是一個合法的 PSX 檔案。\n"
 
@@ -1355,181 +1370,209 @@ msgstr ""
 msgid "32min"
 msgstr ""
 
-#: ../plugins/dfinput/cfg-gtk.c:49
+#: ../plugins/dfinput/cfg-gtk.c:58
+msgid "Increment state slot"
+msgstr ""
+
+#: ../plugins/dfinput/cfg-gtk.c:59
+msgid "Fast-forwards"
+msgstr ""
+
+#: ../plugins/dfinput/cfg-gtk.c:60
+#, fuzzy
+msgid "Load state"
+msgstr "讀取記錄(_L)"
+
+#: ../plugins/dfinput/cfg-gtk.c:61
+#, fuzzy
+msgid "Save state"
+msgstr "存儲記錄(_S)"
+
+#: ../plugins/dfinput/cfg-gtk.c:62
+msgid "Screenshot"
+msgstr ""
+
+#: ../plugins/dfinput/cfg-gtk.c:63
+msgid "Escape"
+msgstr ""
+
+#: ../plugins/dfinput/cfg-gtk.c:67
 msgid "D-Pad Up"
 msgstr "上方向鍵"
 
-#: ../plugins/dfinput/cfg-gtk.c:50
+#: ../plugins/dfinput/cfg-gtk.c:68
 msgid "D-Pad Down"
 msgstr "下方向鍵"
 
-#: ../plugins/dfinput/cfg-gtk.c:51
+#: ../plugins/dfinput/cfg-gtk.c:69
 msgid "D-Pad Left"
 msgstr "左方向鍵"
 
-#: ../plugins/dfinput/cfg-gtk.c:52
+#: ../plugins/dfinput/cfg-gtk.c:70
 msgid "D-Pad Right"
 msgstr "右方向鍵"
 
-#: ../plugins/dfinput/cfg-gtk.c:53
+#: ../plugins/dfinput/cfg-gtk.c:71
 msgid "Cross"
 msgstr "叉號鍵"
 
-#: ../plugins/dfinput/cfg-gtk.c:54
+#: ../plugins/dfinput/cfg-gtk.c:72
 msgid "Circle"
 msgstr "圓圈鍵"
 
-#: ../plugins/dfinput/cfg-gtk.c:55
+#: ../plugins/dfinput/cfg-gtk.c:73
 msgid "Square"
 msgstr "方塊鍵"
 
-#: ../plugins/dfinput/cfg-gtk.c:56
+#: ../plugins/dfinput/cfg-gtk.c:74
 msgid "Triangle"
 msgstr "三角鍵"
 
-#: ../plugins/dfinput/cfg-gtk.c:57
+#: ../plugins/dfinput/cfg-gtk.c:75
 msgid "L1"
 msgstr "L1"
 
-#: ../plugins/dfinput/cfg-gtk.c:58
+#: ../plugins/dfinput/cfg-gtk.c:76
 msgid "R1"
 msgstr "R1"
 
-#: ../plugins/dfinput/cfg-gtk.c:59
+#: ../plugins/dfinput/cfg-gtk.c:77
 msgid "L2"
 msgstr "L2"
 
-#: ../plugins/dfinput/cfg-gtk.c:60
+#: ../plugins/dfinput/cfg-gtk.c:78
 msgid "R2"
 msgstr "R2"
 
-#: ../plugins/dfinput/cfg-gtk.c:61
+#: ../plugins/dfinput/cfg-gtk.c:79
 msgid "Select"
 msgstr "選擇鍵"
 
-#: ../plugins/dfinput/cfg-gtk.c:62
+#: ../plugins/dfinput/cfg-gtk.c:80
 msgid "Start"
 msgstr "開始鍵"
 
-#: ../plugins/dfinput/cfg-gtk.c:63
+#: ../plugins/dfinput/cfg-gtk.c:81
 msgid "L3"
 msgstr "L3"
 
-#: ../plugins/dfinput/cfg-gtk.c:64
+#: ../plugins/dfinput/cfg-gtk.c:82
 msgid "R3"
 msgstr "R3"
 
-#: ../plugins/dfinput/cfg-gtk.c:65
+#: ../plugins/dfinput/cfg-gtk.c:83
 #, fuzzy
 msgid "Analog"
 msgstr "類比手把"
 
-#: ../plugins/dfinput/cfg-gtk.c:69
+#: ../plugins/dfinput/cfg-gtk.c:87
 msgid "L-Stick Right"
 msgstr "左搖桿右方向"
 
-#: ../plugins/dfinput/cfg-gtk.c:70
+#: ../plugins/dfinput/cfg-gtk.c:88
 msgid "L-Stick Left"
 msgstr "左搖桿左方向"
 
-#: ../plugins/dfinput/cfg-gtk.c:71
+#: ../plugins/dfinput/cfg-gtk.c:89
 msgid "L-Stick Down"
 msgstr "左搖桿下方向"
 
-#: ../plugins/dfinput/cfg-gtk.c:72
+#: ../plugins/dfinput/cfg-gtk.c:90
 msgid "L-Stick Up"
 msgstr "左搖桿上方向"
 
-#: ../plugins/dfinput/cfg-gtk.c:73
+#: ../plugins/dfinput/cfg-gtk.c:91
 msgid "R-Stick Right"
 msgstr "右搖桿右方向"
 
-#: ../plugins/dfinput/cfg-gtk.c:74
+#: ../plugins/dfinput/cfg-gtk.c:92
 msgid "R-Stick Left"
 msgstr "右搖桿左方向"
 
-#: ../plugins/dfinput/cfg-gtk.c:75
+#: ../plugins/dfinput/cfg-gtk.c:93
 msgid "R-Stick Down"
 msgstr "右搖桿下方向"
 
-#: ../plugins/dfinput/cfg-gtk.c:76
+#: ../plugins/dfinput/cfg-gtk.c:94
 msgid "R-Stick Up"
 msgstr "右搖桿上方向"
 
-#: ../plugins/dfinput/cfg-gtk.c:102 ../plugins/dfinput/cfg-gtk.c:141
+#: ../plugins/dfinput/cfg-gtk.c:120 ../plugins/dfinput/cfg-gtk.c:161
 msgid "Centered"
 msgstr "居中"
 
-#: ../plugins/dfinput/cfg-gtk.c:102 ../plugins/dfinput/cfg-gtk.c:141
+#: ../plugins/dfinput/cfg-gtk.c:120 ../plugins/dfinput/cfg-gtk.c:161
 msgid "Up"
 msgstr "上"
 
-#: ../plugins/dfinput/cfg-gtk.c:102 ../plugins/dfinput/cfg-gtk.c:141
+#: ../plugins/dfinput/cfg-gtk.c:120 ../plugins/dfinput/cfg-gtk.c:161
 msgid "Right"
 msgstr "右"
 
-#: ../plugins/dfinput/cfg-gtk.c:102 ../plugins/dfinput/cfg-gtk.c:141
+#: ../plugins/dfinput/cfg-gtk.c:120 ../plugins/dfinput/cfg-gtk.c:161
 msgid "Rightup"
 msgstr "右上"
 
-#: ../plugins/dfinput/cfg-gtk.c:103 ../plugins/dfinput/cfg-gtk.c:142
+#: ../plugins/dfinput/cfg-gtk.c:121 ../plugins/dfinput/cfg-gtk.c:162
 msgid "Down"
 msgstr "下"
 
-#: ../plugins/dfinput/cfg-gtk.c:103 ../plugins/dfinput/cfg-gtk.c:142
+#: ../plugins/dfinput/cfg-gtk.c:121 ../plugins/dfinput/cfg-gtk.c:162
 msgid "Rightdown"
 msgstr "右下"
 
-#: ../plugins/dfinput/cfg-gtk.c:103 ../plugins/dfinput/cfg-gtk.c:142
+#: ../plugins/dfinput/cfg-gtk.c:121 ../plugins/dfinput/cfg-gtk.c:162
 msgid "Left"
 msgstr "左"
 
-#: ../plugins/dfinput/cfg-gtk.c:103 ../plugins/dfinput/cfg-gtk.c:142
+#: ../plugins/dfinput/cfg-gtk.c:121 ../plugins/dfinput/cfg-gtk.c:162
 msgid "Leftup"
 msgstr "左上"
 
-#: ../plugins/dfinput/cfg-gtk.c:104 ../plugins/dfinput/cfg-gtk.c:143
+#: ../plugins/dfinput/cfg-gtk.c:122 ../plugins/dfinput/cfg-gtk.c:163
 msgid "Leftdown"
 msgstr "左下"
 
-#: ../plugins/dfinput/cfg-gtk.c:108 ../plugins/dfinput/cfg-gtk.c:147
+#: ../plugins/dfinput/cfg-gtk.c:128 ../plugins/dfinput/cfg-gtk.c:167
 #, c-format
 msgid "Joystick: Button %d"
 msgstr "手把: 按鈕 %d"
 
-#: ../plugins/dfinput/cfg-gtk.c:112 ../plugins/dfinput/cfg-gtk.c:151
+#: ../plugins/dfinput/cfg-gtk.c:132 ../plugins/dfinput/cfg-gtk.c:171
 #, c-format
 msgid "Joystick: Axis %d%c"
 msgstr "手把: 軸 %d%c"
 
-#: ../plugins/dfinput/cfg-gtk.c:117 ../plugins/dfinput/cfg-gtk.c:156
+#: ../plugins/dfinput/cfg-gtk.c:137 ../plugins/dfinput/cfg-gtk.c:176
 #, c-format
 msgid "Joystick: Hat %d %s"
 msgstr "手把: Hat %d %s"
 
-#: ../plugins/dfinput/cfg-gtk.c:132 ../plugins/dfinput/cfg-gtk.c:171
+#: ../plugins/dfinput/cfg-gtk.c:152 ../plugins/dfinput/cfg-gtk.c:191
 msgid "Keyboard:"
 msgstr "鍵盤:"
 
-#: ../plugins/dfinput/cfg-gtk.c:136 ../plugins/dfinput/cfg-gtk.c:175
+#: ../plugins/dfinput/cfg-gtk.c:156 ../plugins/dfinput/cfg-gtk.c:195
 msgid "(Not Set)"
 msgstr "(未設定)"
 
-#: ../plugins/dfinput/cfg-gtk.c:575
+#: ../plugins/dfinput/cfg-gtk.c:606
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:14
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:68
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:78
 msgid "None"
 msgstr "無"
 
-#: ../plugins/dfinput/cfg-gtk.c:623
+#: ../plugins/dfinput/cfg-gtk.c:656
 msgid "Gamepad/Keyboard Input Configuration"
 msgstr "手把/鍵盤輸入設定"
 
-#: ../plugins/dfinput/cfg-gtk.c:629 ../plugins/dfinput/cfg-gtk.c:649
+#: ../plugins/dfinput/cfg-gtk.c:662 ../plugins/dfinput/cfg-gtk.c:682
+#: ../plugins/dfinput/cfg-gtk.c:788
 msgid "Key"
 msgstr "按鍵"
 
-#: ../plugins/dfinput/cfg-gtk.c:635 ../plugins/dfinput/cfg-gtk.c:655
+#: ../plugins/dfinput/cfg-gtk.c:668 ../plugins/dfinput/cfg-gtk.c:688
+#: ../plugins/dfinput/cfg-gtk.c:794
 msgid "Button"
 msgstr "按鈕"
 
@@ -1562,22 +1605,35 @@ msgid "Controller 2"
 msgstr "控制器 2"
 
 #: ../plugins/dfinput/dfinput.ui.h:8
+#, fuzzy
+msgid "Emulator keys"
+msgstr "模擬器(_E)"
+
+#: ../plugins/dfinput/dfinput.ui.h:9
 msgid "Multi-Threaded (Recommended)"
 msgstr "多執行緒 (建議使用)"
 
-#: ../plugins/dfinput/dfinput.ui.h:9 ../win32/gui/WndMain.c:1342
+#: ../plugins/dfinput/dfinput.ui.h:10
+msgid "Hide mouse cursor"
+msgstr ""
+
+#: ../plugins/dfinput/dfinput.ui.h:11
+msgid "Prevent screensaver (xdg-screensaver)"
+msgstr ""
+
+#: ../plugins/dfinput/dfinput.ui.h:12 ../win32/gui/WndMain.c:1358
 msgid "Options"
 msgstr "選項"
 
-#: ../plugins/dfinput/dfinput.ui.h:10
+#: ../plugins/dfinput/dfinput.ui.h:13
 msgid "Digital Pad"
 msgstr "普通手把"
 
-#: ../plugins/dfinput/dfinput.ui.h:11
+#: ../plugins/dfinput/dfinput.ui.h:14
 msgid "Analog Pad"
 msgstr "類比手把"
 
-#: ../plugins/dfinput/dfinput.ui.h:12
+#: ../plugins/dfinput/dfinput.ui.h:15
 msgid "Mouse"
 msgstr ""
 
@@ -1646,7 +1702,7 @@ msgid "Port Number"
 msgstr "Port 號"
 
 #: ../plugins/dfnet/gui.c:30 ../plugins/dfnet/gui.c:112
-#: ../plugins/bladesio1/gui.c:82 ../win32/gui/ConfigurePlugins.c:669
+#: ../plugins/bladesio1/gui.c:82 ../win32/gui/ConfigurePlugins.c:678
 msgid "NetPlay"
 msgstr "聯線遊戲"
 
@@ -1897,7 +1953,7 @@ msgid "Autodetect FPS limit"
 msgstr "自動偵測 FPS 界限"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:16
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:36
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:37
 msgid "Use game fixes"
 msgstr "開啟遊戲修補"
 
@@ -1918,7 +1974,7 @@ msgid "Chrono Cross"
 msgstr "Chrono Cross"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:21
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:45
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:46
 msgid "PC FPS calculation"
 msgstr "PC FPS 計算"
 
@@ -1959,7 +2015,7 @@ msgid "Pandemonium 2"
 msgstr "Pandemonium 2"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:31
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:46
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:47
 msgid "Old frame skipping"
 msgstr "老式跳幀"
 
@@ -2101,315 +2157,320 @@ msgid "Keep psx aspect ratio"
 msgstr "保持 psx 縱橫比"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:7
+#, fuzzy
+msgid "Force 4:3 aspect ratio"
+msgstr "保持 psx 縱橫比"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:8
 msgid "Window options"
 msgstr "視窗設定"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:8
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:9
 msgid "Quality:"
 msgstr "質量:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:9
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:10
 msgid "Filtering:"
 msgstr "過濾:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:10
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:11
 msgid "HiRes Tex:"
 msgstr "高分辨率紋理:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:11
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:12
 msgid "VRam size in MBytes (0..1024, 0=auto):"
 msgstr "顯存大小 MB (0..1024, 0=自動):"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:12
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:13
 msgid "Textures"
 msgstr "紋理"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:13
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:14
 msgid "Show FPS display on startup"
 msgstr "啟動時顯示 FPS"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:14
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:15
 msgid "Use FPS limit"
 msgstr "开啟 FPS 界限"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:15
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:16
 msgid "FPS limit auto-detector"
 msgstr "FPS 界限自動偵測"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:16
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:17
 msgid "FPS limit manual"
 msgstr "手動設定 FPS 界限"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:17
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:18
 msgid "FPS"
 msgstr "FPS"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:18
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:19
 msgid "Use Frame skipping"
 msgstr "開啟跳幀"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:19
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:20
 msgid "Framerate"
 msgstr "幀率"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:20
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:21
 msgid "Offscreen drawing:"
 msgstr "離熒幕描繪:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:21
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:22
 msgid "Framebuffer textures:"
 msgstr "Framebuffer 紋理:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:22
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:23
 msgid "Framebuffer access:"
 msgstr "Framebuffer 存取:"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:23
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:24
 msgid "Mask bit detection (Needed by a few games, zbuffer)"
 msgstr "屏蔽位偵測 (部分遊戲需要, zbuffer)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:24
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:25
 msgid "Alpha multipass (Correct opaque texture areas)"
 msgstr "半透明多通道 (更正不透明的紋理區域)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:25
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:26
 msgid "Advanced blending (Accurate psx color emulation)"
 msgstr "高級混合 (準確的 psx 顏色模擬)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:26
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:27
 msgid "Compatibility"
 msgstr "相容性"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:27
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:28
 msgid "Scanlines Blending (0..255, -1=dot):"
 msgstr "掃描線混合 (0..255, -1=dot):"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:28
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:29
 msgid "Unfiltered MDECs (Small movie speedup)"
 msgstr "非過濾 MDECs (微小的影片加速)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:29
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:30
 msgid "Force 15 bit framebuffer updates (Faster movies)"
 msgstr "強制 15 位 framebuffer 更新 (影片較快)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:30
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:31
 msgid "Line mode (Polygons will not get filled)"
 msgstr "直線模式 (多邊形將不被填充)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:31
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:32
 msgid "Polygon anti-aliasing (Slow with most cards)"
 msgstr "多邊形抗鋸齒 (對于大多數顯卡較慢)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:32
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:33
 msgid "Use OpenGL extensions (Recommended)"
 msgstr "使用 OpenGL 擴展 (建議使用)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:33
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:34
 msgid "Screen smoothing (Can be slow or unsupported)"
 msgstr "平滑熒幕 (可能較慢或不被支援)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:34
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:35
 msgid "Gte accuracy"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:35
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:36
 msgid "Misc"
 msgstr "雜項"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:37
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:38
 msgid "Battle cursor (FF7)"
 msgstr "戰鬥光標 (FF7)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:38
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
 msgid "Yellow rect (FF9)"
 msgstr "黃色方塊 (FF9)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:40
 msgid "Direct FB updates"
 msgstr "直接 FB 更新"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:40
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:41
 msgid "Black brightness (Lunar)"
 msgstr "黑色亮度 (Lunar)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:41
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:42
 msgid "Swap front detection"
 msgstr "swap front 偵測"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:42
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:43
 msgid "Disable coord check"
 msgstr "禁用坐標檢查"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:43
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:44
 msgid "No blue glitches (LoD)"
 msgstr "無藍色干擾 (LoD)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:44
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:45
 msgid "Soft FB access"
 msgstr "軟 FB 存取"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:47
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:48
 msgid "No subtr. blending"
 msgstr "無 subtr. 混合"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:48
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:49
 msgid "Lazy upload (DW7)"
 msgstr "延遲上傳 (DW7)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:49
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:50
 msgid "Odd/even hack"
 msgstr "奇偶位修正"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:50
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:51
 msgid "Adjust screen width"
 msgstr "調整熒幕寬度"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:51
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:52
 msgid "Old texture filtering"
 msgstr "老式紋理過濾"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:52
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:53
 msgid "Additional uploads"
 msgstr "附加上傳"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:53
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:54
 msgid "Unused"
 msgstr "未使用"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:54
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:55
 msgid "Fake 'GPU busy'"
 msgstr "欺騙 'gpu 忙'"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:55
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:56
 msgid "Special game fixes"
 msgstr "特定遊戲修正"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:56
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:57
 msgid "Fast"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:57
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:58
 msgid "Autoconfigure for fast display"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:58
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:59
 msgid "Beautiful"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:59
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
 msgid "Auto configure for beautiful display"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
-msgid "None - Fastest, most glitches"
-msgstr ""
-
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:61
-msgid "Minimum - Missing screens"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:62
-msgid "Standard - OK for most games"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
-msgid "Enhanced - Shows more stuff"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:64
-msgid "Extended - Causing garbage"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:65
-msgid "None (Standard)"
-msgstr "無 (標準)"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:66
-msgid "2xSaI (Much vram needed)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:67
-msgid "Scaled (Needs tex filtering)"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:69
-msgid "Standard - Glitches will happen"
-msgstr "標準 - 可能有問題"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:70
-msgid "Extended - No black borders"
-msgstr "擴展 - 無黑色邊緣"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:71
-msgid "Standard without sprites - Unfiltered 2D"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:72
-msgid "Extended without sprites - Unfiltered 2D"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:73
-msgid "Standard + smoothed sprites"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:74
-msgid "Extended + smoothed sprites"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:75
-msgid "Don't care - Use driver's default textures"
-msgstr "不設定 - 使用驅動程式缺省紋理"
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:76
-msgid "4444 - Fast, but less colorful"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:77
-msgid "5551 - Nice colors, bad transparency"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:78
-msgid "8888 - Best colors, more ram needed"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:79
-msgid "BGR8888 - Faster on some cards"
-msgstr ""
-
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:80
 msgid "Emulated VRam - Ok most times"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:81
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:62
 msgid "Gfx card buffer reads"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:82
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
 msgid "Gfx card buffer moves"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:83
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:64
 msgid "Gfx card buffer reads and moves"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:84
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:65
 msgid "Full Software (FVP)"
 msgstr "全軟體 (FVP)"
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:85
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:66
 msgid "Emulated VRam - Needs FVP"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:86
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:67
 msgid "Black - Fast, no effects"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:87
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:68
 msgid "Gfx card buffer - Can be slow"
 msgstr ""
 
-#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:88
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:69
 msgid "Gfx card and soft - Slow"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:70
+msgid "None - Fastest, most glitches"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:71
+msgid "Minimum - Missing screens"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:72
+msgid "Standard - OK for most games"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:73
+msgid "Enhanced - Shows more stuff"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:74
+msgid "Extended - Causing garbage"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:75
+msgid "None (Standard)"
+msgstr "無 (標準)"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:76
+msgid "2xSaI (Much vram needed)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:77
+msgid "Scaled (Needs tex filtering)"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:79
+msgid "Standard - Glitches will happen"
+msgstr "標準 - 可能有問題"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:80
+msgid "Extended - No black borders"
+msgstr "擴展 - 無黑色邊緣"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:81
+msgid "Standard without sprites - Unfiltered 2D"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:82
+msgid "Extended without sprites - Unfiltered 2D"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:83
+msgid "Standard + smoothed sprites"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:84
+msgid "Extended + smoothed sprites"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:85
+msgid "Don't care - Use driver's default textures"
+msgstr "不設定 - 使用驅動程式缺省紋理"
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:86
+msgid "4444 - Fast, but less colorful"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:87
+msgid "5551 - Nice colors, bad transparency"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:88
+msgid "8888 - Best colors, more ram needed"
+msgstr ""
+
+#: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:89
+msgid "BGR8888 - Faster on some cards"
 msgstr ""
 
 #: ../plugins/bladesio1/gui.c:112
@@ -2419,16 +2480,16 @@ msgstr "設定"
 
 #. *************************************************************************
 #. #define SIO1_DEBUG 1
-#: ../plugins/bladesio1/sio1.c:44
+#: ../plugins/bladesio1/sio1.c:47
 msgid "sio1Blade"
 msgstr ""
 
 #. *************************************************************************
 #: ../plugins/bladesio1/sio1.ui.h:1 ../win32/gui/AboutDlg.c:48
 #: ../win32/gui/AboutDlg.c:52 ../win32/gui/CheatDlg.c:69
-#: ../win32/gui/CheatDlg.c:119 ../win32/gui/ConfigurePlugins.c:529
-#: ../win32/gui/ConfigurePlugins.c:667 ../win32/gui/WndMain.c:1088
-#: ../win32/gui/WndMain.c:1324
+#: ../win32/gui/CheatDlg.c:119 ../win32/gui/ConfigurePlugins.c:538
+#: ../win32/gui/ConfigurePlugins.c:676 ../win32/gui/WndMain.c:1102
+#: ../win32/gui/WndMain.c:1339
 msgid "OK"
 msgstr "確定"
 
@@ -2494,10 +2555,6 @@ msgstr ""
 "\n"
 "http://pcsxr.codeplex.com/"
 
-#: ../win32/gui/AboutDlg.c:46
-msgid "About"
-msgstr "關於 PCSXR"
-
 #: ../win32/gui/AboutDlg.c:49
 msgid "PCSXR EMU\n"
 msgstr "PCSXR 模擬器\n"
@@ -2513,8 +2570,8 @@ msgid "No"
 msgstr "否"
 
 #: ../win32/gui/CheatDlg.c:70 ../win32/gui/CheatDlg.c:120
-#: ../win32/gui/ConfigurePlugins.c:530 ../win32/gui/ConfigurePlugins.c:668
-#: ../win32/gui/WndMain.c:1089 ../win32/gui/WndMain.c:1325
+#: ../win32/gui/ConfigurePlugins.c:539 ../win32/gui/ConfigurePlugins.c:677
+#: ../win32/gui/WndMain.c:1103 ../win32/gui/WndMain.c:1340
 msgid "Cancel"
 msgstr "取消"
 
@@ -2591,117 +2648,117 @@ msgstr "新搜尋(&N)"
 msgid "C&lose"
 msgstr "關閉(&L)"
 
-#: ../win32/gui/ConfigurePlugins.c:234
+#: ../win32/gui/ConfigurePlugins.c:240
 msgid "Simulate Psx Bios"
 msgstr "模擬 PS BIOS"
 
-#: ../win32/gui/ConfigurePlugins.c:330
+#: ../win32/gui/ConfigurePlugins.c:336
 msgid "Configuration not OK!"
 msgstr "設定不正確!"
 
-#: ../win32/gui/ConfigurePlugins.c:445
+#: ../win32/gui/ConfigurePlugins.c:454
 msgid "This plugin reports that should work correctly"
 msgstr "此外掛報告其可正常工作。"
 
-#: ../win32/gui/ConfigurePlugins.c:446
+#: ../win32/gui/ConfigurePlugins.c:455
 msgid "This plugin reports that should not work correctly"
 msgstr "此外掛報告其不可正常工作。"
 
-#: ../win32/gui/ConfigurePlugins.c:509
+#: ../win32/gui/ConfigurePlugins.c:518
 msgid "Select Plugins Directory"
 msgstr "選擇外掛目錄"
 
-#: ../win32/gui/ConfigurePlugins.c:518
+#: ../win32/gui/ConfigurePlugins.c:527
 msgid "Select Bios Directory"
 msgstr "選擇 BIOS 目錄"
 
-#: ../win32/gui/ConfigurePlugins.c:527
+#: ../win32/gui/ConfigurePlugins.c:536
 msgid "Configuration"
 msgstr "設定"
 
-#: ../win32/gui/ConfigurePlugins.c:531
+#: ../win32/gui/ConfigurePlugins.c:540
 msgid "Graphics"
 msgstr "圖像"
 
-#: ../win32/gui/ConfigurePlugins.c:532
+#: ../win32/gui/ConfigurePlugins.c:541
 msgid "First Controller"
 msgstr "主控制器"
 
-#: ../win32/gui/ConfigurePlugins.c:533
+#: ../win32/gui/ConfigurePlugins.c:542
 msgid "Second Controller"
 msgstr "輔控制器"
 
-#: ../win32/gui/ConfigurePlugins.c:534
+#: ../win32/gui/ConfigurePlugins.c:543
 msgid "Sound"
 msgstr "聲音"
 
-#: ../win32/gui/ConfigurePlugins.c:535
+#: ../win32/gui/ConfigurePlugins.c:544
 msgid "Cdrom"
 msgstr "CD-ROM"
 
-#: ../win32/gui/ConfigurePlugins.c:536
+#: ../win32/gui/ConfigurePlugins.c:545
 #, fuzzy
 msgid "Link cable"
 msgstr "開啟"
 
-#: ../win32/gui/ConfigurePlugins.c:537
+#: ../win32/gui/ConfigurePlugins.c:546
 msgid "Bios"
 msgstr "BIOS"
 
-#: ../win32/gui/ConfigurePlugins.c:538
+#: ../win32/gui/ConfigurePlugins.c:547
 msgid "Set Bios Directory"
 msgstr "設定 BIOS 目錄"
 
-#: ../win32/gui/ConfigurePlugins.c:539
+#: ../win32/gui/ConfigurePlugins.c:548
 msgid "Set Plugins Directory"
 msgstr "設定外掛目錄"
 
-#: ../win32/gui/ConfigurePlugins.c:540 ../win32/gui/ConfigurePlugins.c:543
-#: ../win32/gui/ConfigurePlugins.c:546 ../win32/gui/ConfigurePlugins.c:549
-#: ../win32/gui/ConfigurePlugins.c:552 ../win32/gui/ConfigurePlugins.c:555
-#: ../win32/gui/ConfigurePlugins.c:670
+#: ../win32/gui/ConfigurePlugins.c:549 ../win32/gui/ConfigurePlugins.c:552
+#: ../win32/gui/ConfigurePlugins.c:555 ../win32/gui/ConfigurePlugins.c:558
+#: ../win32/gui/ConfigurePlugins.c:561 ../win32/gui/ConfigurePlugins.c:564
+#: ../win32/gui/ConfigurePlugins.c:679
 msgid "Configure..."
 msgstr "設定..."
 
-#: ../win32/gui/ConfigurePlugins.c:541 ../win32/gui/ConfigurePlugins.c:544
-#: ../win32/gui/ConfigurePlugins.c:547 ../win32/gui/ConfigurePlugins.c:550
-#: ../win32/gui/ConfigurePlugins.c:553 ../win32/gui/ConfigurePlugins.c:556
-#: ../win32/gui/ConfigurePlugins.c:671
+#: ../win32/gui/ConfigurePlugins.c:550 ../win32/gui/ConfigurePlugins.c:553
+#: ../win32/gui/ConfigurePlugins.c:556 ../win32/gui/ConfigurePlugins.c:559
+#: ../win32/gui/ConfigurePlugins.c:562 ../win32/gui/ConfigurePlugins.c:565
+#: ../win32/gui/ConfigurePlugins.c:680
 msgid "Test..."
 msgstr "測試..."
 
-#: ../win32/gui/ConfigurePlugins.c:542 ../win32/gui/ConfigurePlugins.c:545
-#: ../win32/gui/ConfigurePlugins.c:548 ../win32/gui/ConfigurePlugins.c:551
-#: ../win32/gui/ConfigurePlugins.c:554 ../win32/gui/ConfigurePlugins.c:557
-#: ../win32/gui/ConfigurePlugins.c:672
+#: ../win32/gui/ConfigurePlugins.c:551 ../win32/gui/ConfigurePlugins.c:554
+#: ../win32/gui/ConfigurePlugins.c:557 ../win32/gui/ConfigurePlugins.c:560
+#: ../win32/gui/ConfigurePlugins.c:563 ../win32/gui/ConfigurePlugins.c:566
+#: ../win32/gui/ConfigurePlugins.c:681
 msgid "About..."
 msgstr "關於..."
 
-#: ../win32/gui/ConfigurePlugins.c:665
+#: ../win32/gui/ConfigurePlugins.c:674
 msgid "NetPlay Configuration"
 msgstr "聯線遊戲設定"
 
-#: ../win32/gui/ConfigurePlugins.c:673
+#: ../win32/gui/ConfigurePlugins.c:682
 msgid ""
 "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
 msgstr "注意: 聯線遊戲外掛應和其它外掛放在同一資料夾中。"
 
-#: ../win32/gui/plugin.c:94 ../win32/gui/WndMain.c:331
+#: ../win32/gui/plugin.c:94 ../win32/gui/WndMain.c:332
 #, c-format
 msgid "*PCSXR*: Saved State %d"
 msgstr "*PCSXR*: Saved State %d"
 
-#: ../win32/gui/plugin.c:95 ../win32/gui/WndMain.c:332
+#: ../win32/gui/plugin.c:95 ../win32/gui/WndMain.c:333
 #, c-format
 msgid "*PCSXR*: Error Saving State %d"
 msgstr "*PCSXR*: Error Saving State %d"
 
-#: ../win32/gui/plugin.c:111 ../win32/gui/WndMain.c:309
+#: ../win32/gui/plugin.c:111 ../win32/gui/WndMain.c:310
 #, c-format
 msgid "*PCSXR*: Loaded State %d"
 msgstr "*PCSXR*: Loaded State %d"
 
-#: ../win32/gui/plugin.c:112 ../win32/gui/WndMain.c:310
+#: ../win32/gui/plugin.c:112 ../win32/gui/WndMain.c:311
 #, c-format
 msgid "*PCSXR*: Error Loading State %d"
 msgstr "*PCSXR*: Error Loading State %d"
@@ -2744,92 +2801,88 @@ msgstr "*PCSXR*: CdRom Case Opened"
 msgid "*PCSXR*: CdRom Case Closed"
 msgstr "*PCSXR*: CdRom Case Closed"
 
-#: ../win32/gui/plugin.c:181
+#: ../win32/gui/plugin.c:182
 msgid "Connecting..."
 msgstr "正在連線..."
 
-#: ../win32/gui/plugin.c:183 ../win32/gui/plugin.c:190
+#: ../win32/gui/plugin.c:184 ../win32/gui/plugin.c:191
 #, c-format
 msgid "Please wait while connecting... %c\n"
 msgstr "請稍候，正在連線... %c\n"
 
-#: ../win32/gui/plugin.c:218
-msgid "Error Opening CDR Plugin"
-msgstr "無法開啟 CDR 外掛"
-
-#: ../win32/gui/plugin.c:281
+#: ../win32/gui/plugin.c:282
 #, c-format
 msgid "Error Opening GPU Plugin (%d)"
 msgstr "無法開啟 GPU 外掛 (%d)"
 
-#: ../win32/gui/plugin.c:283
+#: ../win32/gui/plugin.c:284
 #, c-format
 msgid "Error Opening SPU Plugin (%d)"
 msgstr "無法開啟 SPU 外掛 (%d)"
 
-#: ../win32/gui/plugin.c:286
+#: ../win32/gui/plugin.c:287
 #, c-format
 msgid "Error Opening PAD1 Plugin (%d)"
 msgstr "無法開啟 PAD1 外掛 (%d)"
 
-#: ../win32/gui/plugin.c:290
+#: ../win32/gui/plugin.c:291
 #, c-format
 msgid "Error Opening PAD2 Plugin (%d)"
 msgstr "無法開啟 PAD2 外掛 (%d)"
 
-#: ../win32/gui/plugin.c:295
+#: ../win32/gui/plugin.c:296
 #, fuzzy, c-format
 msgid "Error Opening SIO1 plugin (%d)"
 msgstr "無法開啟 SPU 外掛 (%d)"
 
-#: ../win32/gui/plugin.c:325
+#: ../win32/gui/plugin.c:328
 msgid "Error Closing CDR Plugin"
 msgstr "無法關閉 CD-ROM 外掛 (%d)"
 
-#: ../win32/gui/plugin.c:327
+#: ../win32/gui/plugin.c:330
 msgid "Error Closing GPU Plugin"
 msgstr "無法關閉 GPU 外掛"
 
-#: ../win32/gui/plugin.c:329
+#: ../win32/gui/plugin.c:332
 msgid "Error Closing SPU Plugin"
 msgstr "無法關閉 SPU 外掛"
 
-#: ../win32/gui/plugin.c:332
+#: ../win32/gui/plugin.c:335
 #, fuzzy
 msgid "Error Closing SIO1 plugin"
 msgstr "無法關閉 SPU 外掛"
 
-#: ../win32/gui/plugin.c:354
+#: ../win32/gui/plugin.c:357
 #, c-format
 msgid "CDRinit error: %d"
 msgstr "CDRinit 錯誤: %d"
 
-#: ../win32/gui/plugin.c:356
+#: ../win32/gui/plugin.c:359
 #, c-format
 msgid "GPUinit error: %d"
 msgstr "GPUinit 錯誤: %d"
 
-#: ../win32/gui/plugin.c:358
+#: ../win32/gui/plugin.c:361
 #, c-format
 msgid "SPUinit error: %d"
 msgstr "SPUinit 錯誤: %d"
 
-#: ../win32/gui/plugin.c:360
+#: ../win32/gui/plugin.c:363
 #, c-format
 msgid "PAD1init error: %d"
 msgstr "PAD1init 錯誤: %d"
 
-#: ../win32/gui/plugin.c:362
+#: ../win32/gui/plugin.c:365
 #, c-format
 msgid "PAD2init error: %d"
 msgstr "PAD2init 錯誤: %d"
 
-#: ../win32/gui/plugin.c:365
+#: ../win32/gui/plugin.c:368
 #, fuzzy, c-format
 msgid "SIO1init error: %d"
 msgstr "SPUinit 錯誤: %d"
 
-#: ../win32/gui/plugin.c:370
+#: ../win32/gui/plugin.c:373
 #, c-format
 msgid "NETinit error: %d"
 msgstr "NETinit 錯誤: %d"
@@ -2850,8 +2903,8 @@ msgstr "德語"
 msgid "Greek"
 msgstr "希臘語"
 
-#: ../win32/gui/WndMain.c:81 ../win32/gui/WndMain.c:1699
-#: ../win32/gui/WndMain.c:1701
+#: ../win32/gui/WndMain.c:81 ../win32/gui/WndMain.c:1721
+#: ../win32/gui/WndMain.c:1723
 msgid "English"
 msgstr "英語"
 
@@ -2864,42 +2917,46 @@ msgid "French"
 msgstr "法語"
 
 #: ../win32/gui/WndMain.c:84
+msgid "Hungarian"
+msgstr ""
+
+#: ../win32/gui/WndMain.c:85
 msgid "Italian"
 msgstr "義大利語"
 
-#: ../win32/gui/WndMain.c:85
+#: ../win32/gui/WndMain.c:86
 msgid "Portuguese"
 msgstr "葡萄牙語"
 
-#: ../win32/gui/WndMain.c:86
+#: ../win32/gui/WndMain.c:87
 msgid "Portuguese (Brazilian)"
 msgstr "葡萄牙語 (巴西)"
 
-#: ../win32/gui/WndMain.c:87
+#: ../win32/gui/WndMain.c:88
 msgid "Romanian"
 msgstr "羅馬尼亞語"
 
-#: ../win32/gui/WndMain.c:88
+#: ../win32/gui/WndMain.c:89
 msgid "Russian"
 msgstr "俄語"
 
-#: ../win32/gui/WndMain.c:89
+#: ../win32/gui/WndMain.c:90
 msgid "Simplified Chinese"
 msgstr "簡體中文"
 
-#: ../win32/gui/WndMain.c:90
+#: ../win32/gui/WndMain.c:91
 msgid "Traditional Chinese"
 msgstr "正體中文"
 
-#: ../win32/gui/WndMain.c:91
+#: ../win32/gui/WndMain.c:92
 msgid "Japanese"
 msgstr "日語"
 
-#: ../win32/gui/WndMain.c:92
+#: ../win32/gui/WndMain.c:93
 msgid "Korean"
 msgstr "韓國語"
 
-#: ../win32/gui/WndMain.c:215
+#: ../win32/gui/WndMain.c:216
 msgid ""
 "Usage: pcsxr [options]\n"
 "\toptions:\n"
@@ -2911,341 +2968,349 @@ msgid ""
 "\t-help\t\tDisplay this message"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:350 ../win32/gui/WndMain.c:396
+#: ../win32/gui/WndMain.c:351 ../win32/gui/WndMain.c:397
 msgid "PCSXR State Format"
 msgstr "PCSXR 記錄格式"
 
-#: ../win32/gui/WndMain.c:377
+#: ../win32/gui/WndMain.c:378
 #, c-format
 msgid "*PCSXR*: Loaded State %s"
 msgstr "*PCSXR*: Loaded State %s"
 
-#: ../win32/gui/WndMain.c:378
+#: ../win32/gui/WndMain.c:379
 #, c-format
 msgid "*PCSXR*: Error Loading State %s"
 msgstr "*PCSXR*: Error Loading State %s"
 
-#: ../win32/gui/WndMain.c:423
+#: ../win32/gui/WndMain.c:424
 #, c-format
 msgid "*PCSXR*: Saved State %s"
 msgstr "*PCSXR*: Saved State %s"
 
-#: ../win32/gui/WndMain.c:424
+#: ../win32/gui/WndMain.c:425
 #, c-format
 msgid "*PCSXR*: Error Saving State %s"
 msgstr "*PCSXR*: Error Saving State %s"
 
-#: ../win32/gui/WndMain.c:493
+#: ../win32/gui/WndMain.c:496
 msgid "Running BIOS is not supported with Internal HLE Bios."
 msgstr "內部 HLE BIOS 不支援直接執行。"
 
-#: ../win32/gui/WndMain.c:790
+#: ../win32/gui/WndMain.c:804
 msgid "Game ID"
 msgstr "遊戲 ID"
 
-#: ../win32/gui/WndMain.c:796
+#: ../win32/gui/WndMain.c:810
 msgid "Game"
 msgstr "遊戲"
 
-#: ../win32/gui/WndMain.c:978
+#: ../win32/gui/WndMain.c:992
 msgid "mid link block"
 msgstr "mid link block"
 
-#: ../win32/gui/WndMain.c:981
+#: ../win32/gui/WndMain.c:995
 msgid "terminiting link block"
 msgstr "terminiting link block"
 
-#: ../win32/gui/WndMain.c:1086
+#: ../win32/gui/WndMain.c:1100
 msgid "Memcard Manager"
 msgstr "記憶卡管理器"
 
-#: ../win32/gui/WndMain.c:1090 ../win32/gui/WndMain.c:1093
+#: ../win32/gui/WndMain.c:1104 ../win32/gui/WndMain.c:1107
 msgid "Select Mcd"
 msgstr "選擇"
 
-#: ../win32/gui/WndMain.c:1091 ../win32/gui/WndMain.c:1094
+#: ../win32/gui/WndMain.c:1105 ../win32/gui/WndMain.c:1108
 msgid "Format Mcd"
 msgstr "格式化"
 
-#: ../win32/gui/WndMain.c:1092 ../win32/gui/WndMain.c:1095
+#: ../win32/gui/WndMain.c:1106 ../win32/gui/WndMain.c:1109
 msgid "Reload Mcd"
 msgstr "重新加載"
 
-#: ../win32/gui/WndMain.c:1096
+#: ../win32/gui/WndMain.c:1110
 msgid "-> Copy ->"
 msgstr "-> 複制 ->"
 
-#: ../win32/gui/WndMain.c:1097
+#: ../win32/gui/WndMain.c:1111
 msgid "<- Copy <-"
 msgstr "<- 複制 <-"
 
-#: ../win32/gui/WndMain.c:1098
+#: ../win32/gui/WndMain.c:1112
 msgid "Paste"
 msgstr "粘貼"
 
-#: ../win32/gui/WndMain.c:1099
+#: ../win32/gui/WndMain.c:1113
 msgid "<- Un/Delete"
 msgstr "<- 刪除/恢複"
 
-#: ../win32/gui/WndMain.c:1100
+#: ../win32/gui/WndMain.c:1114
 msgid "Un/Delete ->"
 msgstr "刪除/恢複 ->"
 
-#: ../win32/gui/WndMain.c:1102
+#: ../win32/gui/WndMain.c:1116
 msgid "Memory Card 1"
 msgstr "記憶卡 1"
 
-#: ../win32/gui/WndMain.c:1103
+#: ../win32/gui/WndMain.c:1117
 msgid "Memory Card 2"
 msgstr "記憶卡 2"
 
-#: ../win32/gui/WndMain.c:1158
+#: ../win32/gui/WndMain.c:1172
 msgid "Are you sure you want to paste this selection?"
 msgstr "是否確認粘貼此選中內容?"
 
-#: ../win32/gui/WndMain.c:1158 ../win32/gui/WndMain.c:1269
-#: ../win32/gui/WndMain.c:1276
+#: ../win32/gui/WndMain.c:1172 ../win32/gui/WndMain.c:1283
+#: ../win32/gui/WndMain.c:1290
 msgid "Confirmation"
 msgstr "確認"
 
-#: ../win32/gui/WndMain.c:1269 ../win32/gui/WndMain.c:1276
+#: ../win32/gui/WndMain.c:1283 ../win32/gui/WndMain.c:1290
 msgid "Are you sure you want to format this Memory Card?"
 msgstr "是否確認格式化此記憶卡?"
 
-#: ../win32/gui/WndMain.c:1322
+#: ../win32/gui/WndMain.c:1337
 msgid "Cpu Config"
 msgstr "CPU 設定"
 
-#: ../win32/gui/WndMain.c:1327
+#: ../win32/gui/WndMain.c:1342
 msgid "Disable Xa Decoding"
 msgstr "禁用 XA 解碼"
 
-#: ../win32/gui/WndMain.c:1328
+#: ../win32/gui/WndMain.c:1343
 msgid "Sio Irq Always Enabled"
 msgstr "SIO IRQ 總是開啟"
 
-#: ../win32/gui/WndMain.c:1329
+#: ../win32/gui/WndMain.c:1344
 msgid "Black && White Movies"
 msgstr "黑白電影"
 
-#: ../win32/gui/WndMain.c:1330
+#: ../win32/gui/WndMain.c:1345
 msgid "Disable Cd audio"
 msgstr "禁用 CD 音頻"
 
-#: ../win32/gui/WndMain.c:1333
+#: ../win32/gui/WndMain.c:1348
 msgid "Enable Interpreter Cpu"
 msgstr "開啟解釋執行 CPU"
 
-#: ../win32/gui/WndMain.c:1336
+#: ../win32/gui/WndMain.c:1351
 msgid "Spu Irq Always Enabled"
 msgstr "SPU IRQ 總是開啟"
 
-#: ../win32/gui/WndMain.c:1340
+#: ../win32/gui/WndMain.c:1355
 msgid "Hide cursor"
 msgstr ""
 
-#: ../win32/gui/WndMain.c:1343
+#: ../win32/gui/WndMain.c:1356
+#, fuzzy
+msgid "Save window position"
+msgstr "視窗設定"
+
+#: ../win32/gui/WndMain.c:1359
 msgid "Psx System Type"
 msgstr "PS 系統類型"
 
-#: ../win32/gui/WndMain.c:1453
+#: ../win32/gui/WndMain.c:1476
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 msgstr "PS 記憶卡格式 (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 
-#: ../win32/gui/WndMain.c:1458
+#: ../win32/gui/WndMain.c:1481
 msgid "Psx Memory Card (*.mcr;*.mc)"
 msgstr "PS 記憶卡 (*.mcr;*.mc)"
 
-#: ../win32/gui/WndMain.c:1463
+#: ../win32/gui/WndMain.c:1486
 msgid "CVGS Memory Card (*.mem;*.vgs)"
 msgstr "VGS 記憶卡 (*.mem;*.vgs)"
 
-#: ../win32/gui/WndMain.c:1468
+#: ../win32/gui/WndMain.c:1491
 msgid "Bleem Memory Card (*.mcd)"
 msgstr "Bleem 記憶卡 (*.mcd)"
 
-#: ../win32/gui/WndMain.c:1473
+#: ../win32/gui/WndMain.c:1496
 msgid "DexDrive Memory Card (*.gme)"
 msgstr "DexDrive 記憶卡 (*.gme)"
 
-#: ../win32/gui/WndMain.c:1478
+#: ../win32/gui/WndMain.c:1501
 msgid "DataDeck Memory Card (*.ddf)"
 msgstr "DataDeck 記憶卡 (*.ddl)"
 
-#: ../win32/gui/WndMain.c:1522
+#: ../win32/gui/WndMain.c:1545
 msgid "Psx Exe Format"
 msgstr "PS EXE 格式"
 
-#: ../win32/gui/WndMain.c:1559
+#: ../win32/gui/WndMain.c:1582
 #, fuzzy
 msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin;*.cue;*.pbp;*.cbn)"
 msgstr "PS 鏡像檔 (*.iso;*.mdf;*.img;*.bin)"
 
-#: ../win32/gui/WndMain.c:1635
+#: ../win32/gui/WndMain.c:1658
 msgid "&File"
 msgstr "檔案(&F)"
 
-#: ../win32/gui/WndMain.c:1636
+#: ../win32/gui/WndMain.c:1659
 msgid "E&xit"
 msgstr "離開(&X)"
 
-#: ../win32/gui/WndMain.c:1638
+#: ../win32/gui/WndMain.c:1661
 msgid "Run &EXE..."
 msgstr "執行 EXE(&E)..."
 
-#: ../win32/gui/WndMain.c:1639
+#: ../win32/gui/WndMain.c:1662
 msgid "Run &BIOS"
 msgstr "執行 BIOS(&B)"
 
-#: ../win32/gui/WndMain.c:1640
+#: ../win32/gui/WndMain.c:1663
 msgid "Run &ISO..."
 msgstr "執行 ISO(&I)..."
 
-#: ../win32/gui/WndMain.c:1641
+#: ../win32/gui/WndMain.c:1664
 msgid "Run &CD"
 msgstr "執行光碟(&C)"
 
-#: ../win32/gui/WndMain.c:1643
+#: ../win32/gui/WndMain.c:1666
 msgid "&Emulator"
 msgstr "模擬器(&E)"
 
-#: ../win32/gui/WndMain.c:1644
+#: ../win32/gui/WndMain.c:1667
 msgid "&States"
 msgstr "記錄(&S)"
 
-#: ../win32/gui/WndMain.c:1646
+#: ../win32/gui/WndMain.c:1669
 msgid "S&witch ISO..."
 msgstr "更換 ISO(&W)..."
 
-#: ../win32/gui/WndMain.c:1648
+#: ../win32/gui/WndMain.c:1671
 #, fuzzy
 msgid "S&hutdown"
 msgstr "右下"
 
-#: ../win32/gui/WndMain.c:1649
+#: ../win32/gui/WndMain.c:1672
 msgid "Re&set"
 msgstr "複位(&S)"
 
-#: ../win32/gui/WndMain.c:1650
+#: ../win32/gui/WndMain.c:1673
 msgid "&Run"
 msgstr "執行(&R)"
 
-#: ../win32/gui/WndMain.c:1651
+#: ../win32/gui/WndMain.c:1674
 msgid "&Save"
 msgstr "存儲(&S)"
 
-#: ../win32/gui/WndMain.c:1652
+#: ../win32/gui/WndMain.c:1675
 msgid "&Load"
 msgstr "讀取(&L)"
 
-#: ../win32/gui/WndMain.c:1653 ../win32/gui/WndMain.c:1663
+#: ../win32/gui/WndMain.c:1676 ../win32/gui/WndMain.c:1686
 msgid "&Other..."
 msgstr "其它(&O)..."
 
-#: ../win32/gui/WndMain.c:1654 ../win32/gui/WndMain.c:1664
+#: ../win32/gui/WndMain.c:1677 ../win32/gui/WndMain.c:1687
 msgid "Slot &9"
 msgstr "記錄 9(&9)"
 
-#: ../win32/gui/WndMain.c:1655 ../win32/gui/WndMain.c:1665
+#: ../win32/gui/WndMain.c:1678 ../win32/gui/WndMain.c:1688
 msgid "Slot &8"
 msgstr "記錄 8(&8)"
 
-#: ../win32/gui/WndMain.c:1656 ../win32/gui/WndMain.c:1666
+#: ../win32/gui/WndMain.c:1679 ../win32/gui/WndMain.c:1689
 msgid "Slot &7"
 msgstr "記錄 7(&7)"
 
-#: ../win32/gui/WndMain.c:1657 ../win32/gui/WndMain.c:1667
+#: ../win32/gui/WndMain.c:1680 ../win32/gui/WndMain.c:1690
 msgid "Slot &6"
 msgstr "記錄 6(&6)"
 
-#: ../win32/gui/WndMain.c:1658 ../win32/gui/WndMain.c:1668
+#: ../win32/gui/WndMain.c:1681 ../win32/gui/WndMain.c:1691
 msgid "Slot &5"
 msgstr "記錄 5(&5)"
 
-#: ../win32/gui/WndMain.c:1659 ../win32/gui/WndMain.c:1669
+#: ../win32/gui/WndMain.c:1682 ../win32/gui/WndMain.c:1692
 msgid "Slot &4"
 msgstr "記錄 4(&4)"
 
-#: ../win32/gui/WndMain.c:1660 ../win32/gui/WndMain.c:1670
+#: ../win32/gui/WndMain.c:1683 ../win32/gui/WndMain.c:1693
 msgid "Slot &3"
 msgstr "記錄 3(&3)"
 
-#: ../win32/gui/WndMain.c:1661 ../win32/gui/WndMain.c:1671
+#: ../win32/gui/WndMain.c:1684 ../win32/gui/WndMain.c:1694
 msgid "Slot &2"
 msgstr "記錄 2(&2)"
 
-#: ../win32/gui/WndMain.c:1662 ../win32/gui/WndMain.c:1672
+#: ../win32/gui/WndMain.c:1685 ../win32/gui/WndMain.c:1695
 msgid "Slot &1"
 msgstr "記錄 1(&1)"
 
-#: ../win32/gui/WndMain.c:1674
+#: ../win32/gui/WndMain.c:1697
 msgid "&Configuration"
 msgstr "設定(&C)"
 
-#: ../win32/gui/WndMain.c:1675
+#: ../win32/gui/WndMain.c:1698
 msgid "Cheat &Search..."
 msgstr "搜尋金手指碼(&S)..."
 
-#: ../win32/gui/WndMain.c:1676
+#: ../win32/gui/WndMain.c:1699
 msgid "Ch&eat Code..."
 msgstr "金手指碼(&E)..."
 
-#: ../win32/gui/WndMain.c:1679
+#: ../win32/gui/WndMain.c:1702
 msgid "&Language"
 msgstr "語言(&L)"
 
-#: ../win32/gui/WndMain.c:1705
+#: ../win32/gui/WndMain.c:1727
 msgid "&Memory cards..."
 msgstr "記憶卡(&M)..."
 
-#: ../win32/gui/WndMain.c:1706
+#: ../win32/gui/WndMain.c:1728
 msgid "C&PU..."
 msgstr "CPU(&P)..."
 
-#: ../win32/gui/WndMain.c:1708
+#: ../win32/gui/WndMain.c:1730
 msgid "&NetPlay..."
 msgstr "聯線遊戲(&N)..."
 
-#: ../win32/gui/WndMain.c:1710
+#: ../win32/gui/WndMain.c:1732
 #, fuzzy
 msgid "&Link cable..."
 msgstr "開啟"
 
-#: ../win32/gui/WndMain.c:1711
+#: ../win32/gui/WndMain.c:1733
 msgid "&Controllers..."
 msgstr "控制器(&C)..."
 
-#: ../win32/gui/WndMain.c:1712
+#: ../win32/gui/WndMain.c:1734
 msgid "CD-&ROM..."
 msgstr "CD-ROM(&R)..."
 
-#: ../win32/gui/WndMain.c:1713
+#: ../win32/gui/WndMain.c:1735
 msgid "&Sound..."
 msgstr "聲音(&S)..."
 
-#: ../win32/gui/WndMain.c:1714
+#: ../win32/gui/WndMain.c:1736
 msgid "&Graphics..."
 msgstr "圖像(&G)..."
 
-#: ../win32/gui/WndMain.c:1716
+#: ../win32/gui/WndMain.c:1738
 msgid "&Plugins && Bios..."
 msgstr "外掛及 BIOS(&P)..."
 
-#: ../win32/gui/WndMain.c:1718
+#: ../win32/gui/WndMain.c:1740
 msgid "&Help"
 msgstr "說明(&H)"
 
-#: ../win32/gui/WndMain.c:1719
+#: ../win32/gui/WndMain.c:1741
 msgid "&About..."
 msgstr "關於(&A)..."
 
-#: ../win32/gui/WndMain.c:1870
+#: ../win32/gui/WndMain.c:1893
 msgid "Pcsxr Msg"
 msgstr "Pcsxr 消息"
 
-#: ../win32/gui/WndMain.c:1873
+#: ../win32/gui/WndMain.c:1896
 msgid "Error Loading Symbol"
 msgstr "無法加載符號"
+
+#~ msgid "Error Opening CDR Plugin"
+#~ msgstr "無法開啟 CDR 外掛"
 
 #~ msgid "Controller 1:   "
 #~ msgstr "控制器 1:"
