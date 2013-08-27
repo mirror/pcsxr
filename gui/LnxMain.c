@@ -354,7 +354,7 @@ int main(int argc, char *argv[]) {
 
 	strcpy(Config.Net, "Disabled");
 
-	if (UseGui) gtk_init(NULL, NULL);
+	if (UseGui) gtk_init(&argc, &argv);
 
 	CheckSubDir();
 	ScanAllPlugins();
@@ -377,8 +377,6 @@ int main(int argc, char *argv[]) {
 		gchar *str_plugin_dir = g_strconcat(getenv("HOME"), PLUGINS_DIR, NULL);
 		strcpy(Config.PluginsDir, str_plugin_dir);
 		g_free(str_plugin_dir);
-
-		gtk_init(NULL, NULL);
 
 		// Update available plugins, but not GUI
 		UpdatePluginsBIOS();

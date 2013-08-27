@@ -22,6 +22,7 @@
 #define ABOUT_VERSION "svn"
 
 void RunAboutDialog(void) {
+	GtkBuilder *builder;
 	GtkWidget *AboutDlg;
 
 	const gchar *authors[] = {
@@ -87,8 +88,16 @@ void RunAboutDialog(void) {
 		"along with this program; if not, write to the Free Software "
 		"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.");
 
-	AboutDlg = gtk_about_dialog_new();
-	gtk_window_set_resizable(GTK_WINDOW(AboutDlg), TRUE);
+	builder = gtk_builder_new();
+	
+	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+		g_warning("Error: interface could not be loaded!");
+		return;
+	}
+	
+	AboutDlg = GTK_WIDGET(gtk_builder_get_object(builder, "AboutDlg"));
+
+	gtk_window_set_title(GTK_WINDOW(AboutDlg), _("About"));
 	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(AboutDlg), "PCSX-Reloaded");
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(AboutDlg), ABOUT_VERSION);
 	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(AboutDlg), "http://pcsxr.codeplex.com/");
@@ -101,7 +110,9 @@ void RunAboutDialog(void) {
 	gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG (AboutDlg), _("A PlayStation emulator."));
 	gtk_about_dialog_set_license(GTK_ABOUT_DIALOG(AboutDlg), _(license));
 	gtk_about_dialog_set_wrap_license(GTK_ABOUT_DIALOG(AboutDlg), TRUE);
-
+	
 	gtk_dialog_run(GTK_DIALOG(AboutDlg));
 	gtk_widget_destroy(AboutDlg);
+	
+	g_object_unref(builder);
 }
