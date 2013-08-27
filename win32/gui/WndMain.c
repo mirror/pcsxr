@@ -1771,24 +1771,22 @@ void InitLanguages() {
 }
 
 char *GetLanguageNext() {
+	if (lFind == INVALID_HANDLE_VALUE) 
+		return NULL;
+
 	for (;;) {
-		if (!strcmp(lFindData.cFileName, ".")) {
+		if (lFirst == 0) {
 			if (FindNextFile(lFind, &lFindData) == FALSE)
 				return NULL;
+		} 
+		else 
+			lFirst = 0;
+
+		if (!strcmp(lFindData.cFileName, ".") ||
+			!strcmp(lFindData.cFileName, ".."))
 			continue;
-		}
-		if (!strcmp(lFindData.cFileName, "..")) {
-			if (FindNextFile(lFind, &lFindData) == FALSE)
-				return NULL;
-			continue;
-		}
 		break;
 	}
-	if (lFirst == 0) {
-		if (FindNextFile(lFind, &lFindData) == FALSE)
-			return NULL;
-	} else lFirst = 0;
-	if (lFind==INVALID_HANDLE_VALUE) return NULL;
 
 	return lFindData.cFileName;
 }
