@@ -430,6 +430,7 @@
 		2BBB17DA051E4D0F00B84448 /* Plugin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Plugin.c; sourceTree = SOURCE_ROOT; usesTabs = 1; };
 		550F023B17BFFD97002594DF /* PcsxrHexadecimalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrHexadecimalFormatter.h; sourceTree = "<group>"; };
 		550F023C17BFFD97002594DF /* PcsxrHexadecimalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrHexadecimalFormatter.m; sourceTree = "<group>"; };
+		550FFAEE17CEB8780003A2F3 /* DFSound.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; path = DFSound.exp; sourceTree = "<group>"; };
 		551A749E17868B110052D185 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		551A74A117868B110052D185 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		551A74A217868B110052D185 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -1190,6 +1191,7 @@
 		551A755F17868BEC0052D185 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				550FFAEE17CEB8780003A2F3 /* DFSound.exp */,
 				554572F217CBC69600FB7D19 /* SPUShared-info.plist */,
 				551A756017868BEC0052D185 /* Credits.rtf */,
 				551A756217868BEC0052D185 /* Localizable.strings */,
@@ -2691,6 +2693,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFSound/Resorces/Shared/DFSound.exp;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -2716,6 +2719,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFSound/Resorces/Shared/DFSound.exp;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2786,6 +2790,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFSound/Resorces/Shared/DFSound.exp;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2806,6 +2811,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFSound/Resorces/Shared/DFSound.exp;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=ALSound",
@@ -3044,6 +3050,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFSound/Resorces/Shared/DFSound.exp;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3067,6 +3074,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFSound/Resorces/Shared/DFSound.exp;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"PCSXRPLUG=ALSound",
