@@ -67,7 +67,7 @@
 	[tableView setDataSource:controller];
 
 	[deviceMenu removeAllItems];
-	[deviceMenu addItemWithTitle:@"(Keyboard only)"];
+	[deviceMenu addItemWithTitle:[[NSBundle bundleForClass:[self class]] localizedStringForKey:@"(Keyboard only)" value:@"" table:nil]];
 
 	for (i = 0; i < SDL_NumJoysticks(); i++) {
 		NSMenuItem *joystickItem = nil;

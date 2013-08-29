@@ -8,6 +8,6 @@
 	NSArray *strings;
 	__unsafe_unretained Class pluginClass;
 }
-@property (retain) NSArray *strings;
+@property (arcretain) NSArray *strings;
 @property (unsafe_unretained) Class pluginClass;
 @end

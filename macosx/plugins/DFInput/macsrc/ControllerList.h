@@ -28,7 +28,6 @@
 
 @interface ControllerList : NSObject <NSTableViewDataSource> {
 }
-
 - (id)initWithConfig;
 
 + (void)setCurrentController:(int)which;

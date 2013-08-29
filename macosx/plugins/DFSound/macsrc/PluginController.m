@@ -122,17 +122,17 @@ void ReadConfig(void)
 								 @3, @"Volume",
 								 nil], PrefsKey,
 								nil]];
-
+	
 	keyValues = [defaults dictionaryForKey:PrefsKey];
-
+	
 	iUseTimer = [[keyValues objectForKey:@"High Compatibility Mode"] boolValue] ? 2 : 0;
 	iSPUIRQWait = [[keyValues objectForKey:@"SPU IRQ Wait"] boolValue];
 	iDisStereo = [[keyValues objectForKey:@"Mono Sound Output"] boolValue];
 	iXAPitch = [[keyValues objectForKey:@"XA Pitch"] boolValue];
-
+	
 	iUseInterpolation = [[keyValues objectForKey:@"Interpolation Quality"] intValue];
 	iUseReverb = [[keyValues objectForKey:@"Reverb Quality"] intValue];
-
+	
 	iVolume = 5 - [[keyValues objectForKey:@"Volume"] intValue];
 }
 

@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>net.pcsx.DFInputPlugin</string>
+	<string>net.pcsxr.DFInputPlugin</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -17,7 +17,7 @@
 	<key>CFBundleSignature</key>
 	<string>DFI </string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.5</string>
 	<key>NSPrincipalClass</key>
 	<string>NetPcsxrHIDInputPluginPadController</string>
 </dict>

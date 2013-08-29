@@ -43,6 +43,8 @@
 		2BB3D6C305427FE200831ACB /* Plugin.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BBB17DA051E4D0F00B84448 /* Plugin.c */; };
 		2BB3D6C405427FE200831ACB /* PcsxrPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA44361052DB2EA00E21DDD /* PcsxrPlugin.m */; };
 		550F023D17BFFD97002594DF /* PcsxrHexadecimalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F023C17BFFD97002594DF /* PcsxrHexadecimalFormatter.m */; };
+		550FFAEF17CEE37D0003A2F3 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76B2178693EA0052D185 /* CoreFoundation.framework */; };
+		550FFAF117CEEECA0003A2F3 /* cfgHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 550FFAF017CEEEC90003A2F3 /* cfgHelper.m */; };
 		551A75C917868C4E0052D185 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A749E17868B110052D185 /* Cocoa.framework */; };
 		551A75CF17868C860052D185 /* Bladesio1PluginConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551A74B417868BEA0052D185 /* Bladesio1PluginConfig.xib */; };
 		551A75D017868C860052D185 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 551A74B617868BEA0052D185 /* Credits.rtf */; };
@@ -431,6 +433,7 @@
 		550F023B17BFFD97002594DF /* PcsxrHexadecimalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrHexadecimalFormatter.h; sourceTree = "<group>"; };
 		550F023C17BFFD97002594DF /* PcsxrHexadecimalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrHexadecimalFormatter.m; sourceTree = "<group>"; };
 		550FFAEE17CEB8780003A2F3 /* DFSound.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; path = DFSound.exp; sourceTree = "<group>"; };
+		550FFAF017CEEEC90003A2F3 /* cfgHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cfgHelper.m; sourceTree = "<group>"; };
 		551A749E17868B110052D185 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		551A74A117868B110052D185 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		551A74A217868B110052D185 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -778,6 +781,7 @@
 				551A76891786919F0052D185 /* Cocoa.framework in Frameworks */,
 				551A77E71786A4DD0052D185 /* Carbon.framework in Frameworks */,
 				554FD70C17C6A1F10056CF66 /* SDL2.framework in Frameworks */,
+				550FFAEF17CEE37D0003A2F3 /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,8 +817,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				551A7724178699250052D185 /* OpenAL.framework in Frameworks */,
 				551A7715178698C60052D185 /* libSPUSharedCode.dylib in Frameworks */,
+				551A7724178699250052D185 /* OpenAL.framework in Frameworks */,
 				551A7716178698C60052D185 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1099,6 +1103,7 @@
 		551A752617868BEB0052D185 /* macsrc */ = {
 			isa = PBXGroup;
 			children = (
+				550FFAF017CEEEC90003A2F3 /* cfgHelper.m */,
 				551A752717868BEB0052D185 /* cfg.c */,
 				551A752817868BEB0052D185 /* cfg.h */,
 				551A752917868BEB0052D185 /* ControllerList.h */,
@@ -2061,6 +2066,7 @@
 				551A76981786923E0052D185 /* PadController.m in Sources */,
 				551A76991786923E0052D185 /* PadView.m in Sources */,
 				551A769A1786923E0052D185 /* xkb.c in Sources */,
+				550FFAF117CEEECA0003A2F3 /* cfgHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

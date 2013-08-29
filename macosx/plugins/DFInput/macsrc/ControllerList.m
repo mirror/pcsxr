@@ -22,20 +22,53 @@
 #import "ControllerList.h"
 #include "pad.h"
 #include "cfg.h"
+#import "ARCBridge.h"
 
 static int currentController;
+static NSArray *labelText;
 
 @implementation ControllerList
-
 - (id)initWithConfig
 {
 	if (self = [super init]) {
-		
+		NSBundle *plugBundle = [NSBundle bundleForClass:[self class]];
+		if (!labelText) {
+			labelText = @[[plugBundle localizedStringForKey:@"D-Pad Up" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"D-Pad Down" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"D-Pad Left" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"D-Pad Right" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"Cross" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"Circle" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"Square" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"Triangle" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"L1" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"R1" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"L2" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"R2" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"Select" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"Start" value:@"" table:nil],
+				 
+				 [plugBundle localizedStringForKey:@"L3" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"R3" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"Analog" value:@"" table:nil],
+				 
+				 [plugBundle localizedStringForKey:@"L-Stick Right" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"L-Stick Left" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"L-Stick Down" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"L-Stick Up" value:@"" table:nil],
+				 
+				 [plugBundle localizedStringForKey:@"R-Stick Right" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"R-Stick Left" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"R-Stick Down" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"R-Stick Up" value:@"" table:nil]];
+			RETAINOBJ(labelText);
+		}
 	}
 	return self;
 }
 
-#if !__has_feature(objc_arc)
+//#if !__has_feature(objc_arc)
+#if 0
 - (void)dealloc
 {
 	[super dealloc];
@@ -58,34 +91,6 @@ static int currentController;
 {
 	return DKEY_TOTAL + (g.cfg.PadDef[currentController].Type == PSE_PAD_TYPE_ANALOGPAD ? 8 : -3);
 }
-
-static const NSString *LabelText[DKEY_TOTAL + 8] = {
-	@"D-Pad Up",
-	@"D-Pad Down",
-	@"D-Pad Left",
-	@"D-Pad Right",
-	@"Cross",
-	@"Circle",
-	@"Square",
-	@"Triangle",
-	@"L1",
-	@"R1",
-	@"L2",
-	@"R2",
-	@"Select",
-	@"Start",
-	@"L3",
-	@"R3",
-	@"Analog",
-	@"L-Stick Right",
-	@"L-Stick Left",
-	@"L-Stick Down",
-	@"L-Stick Up",
-	@"R-Stick Right",
-	@"R-Stick Left",
-	@"R-Stick Down",
-	@"R-Stick Up"
-};
 
 static const int DPad[DKEY_TOTAL] = {
 	DKEY_UP,
@@ -115,11 +120,11 @@ static const int DPad[DKEY_TOTAL] = {
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn 
 		row:(NSInteger)rowIndex
 {
-	char buf[256];
-
-	if ([((NSString *)[aTableColumn identifier]) isEqualToString:@"key"])
-		return LabelText[rowIndex];
-	else {
+	char buf[256] = {0};
+	
+	if ([[aTableColumn identifier] isEqualToString:@"key"]) {
+		return [labelText objectAtIndex:rowIndex];
+	} else {
 		// actual keys
 		if (rowIndex < DKEY_TOTAL) {
 			GetKeyDescription(buf, currentController, DPad[rowIndex]);
@@ -127,7 +132,7 @@ static const int DPad[DKEY_TOTAL] = {
 			rowIndex -= DKEY_TOTAL;
 			GetAnalogDescription(buf, currentController, (int)(rowIndex / 4), rowIndex % 4);
 		}
-
+		
 		return @(buf);
 	}
 }

@@ -7,3 +7,36 @@
  */
 
 "Gamepad/Keyboard/Mouse Input" = "Gamepad/Keyboard/Mouse Input";
+"Joystick: Button %d" = "Joystick: Button %d";
+"Joystick: Axis %d%c" = "Joystick: Axis %d%c";
+"Joystick: Hat %d %s" = "Joystick: Hat %d %s";
+"Keyboard: %s" = "Keyboard: %s";
+
+"(Keyboard only)" = "(Keyboard only)";
+
+"D-Pad Up" = "D-Pad Up";
+"D-Pad Down" = "D-Pad Down";
+"D-Pad Left" = "D-Pad Left";
+"D-Pad Right" = "D-Pad Right";
+"Cross" = "Cross";
+"Circle" = "Circle";
+"Square" = "Square";
+"Triangle" = "Triangle";
+"L1" = "L1";
+"R1" = "R1";
+"L2" = "L2";
+"R2" = "R2";
+"Select" = "Select";
+"Start" = "Start";
+"L3" = "L3";
+"R3" = "R3";
+"Analog" = "Analog";
+"L-Stick Right" = "L-Stick Right";
+"L-Stick Left" = "L-Stick Left";
+"L-Stick Down" = "L-Stick Down";
+"L-Stick Up" = "L-Stick Up";
+"R-Stick Right" = "R-Stick Right";
+"R-Stick Left" = "R-Stick Left";
+"R-Stick Down" = "R-Stick Down";
+"R-Stick Up" = "R-Stick Up";
+

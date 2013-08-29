@@ -21,8 +21,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PadController.h"
-#include "pad.h"
 #import "ARCBridge.h"
+#include "pad.h"
+#include <sys/param.h>
 
 static inline void RunOnMainThreadSync(dispatch_block_t block)
 {
@@ -37,6 +38,302 @@ static NSWindow *padWindow = nil;
 static PadController *padController = nil;
 
 #define APP_ID @"net.pcsxr.DFInputPlugin"
+#define PrefsKey APP_ID @" Settings"
+
+#define kDFThreading @"Threading"
+#define kDFPad1 @"Pad 1"
+#define kDFPad2 @"Pad 2"
+
+static void SetDefaultConfig() {
+	memset(&g.cfg, 0, sizeof(g.cfg));
+	
+	g.cfg.Threaded = 1;
+	
+	g.cfg.PadDef[0].DevNum = 0;
+	g.cfg.PadDef[1].DevNum = 1;
+	
+	g.cfg.PadDef[0].Type = PSE_PAD_TYPE_STANDARD;
+	g.cfg.PadDef[1].Type = PSE_PAD_TYPE_STANDARD;
+	
+	// Pad1 keyboard
+	g.cfg.PadDef[0].KeyDef[DKEY_SELECT].Key = 9;
+	g.cfg.PadDef[0].KeyDef[DKEY_START].Key = 10;
+	g.cfg.PadDef[0].KeyDef[DKEY_UP].Key = 127;
+	g.cfg.PadDef[0].KeyDef[DKEY_RIGHT].Key = 125;
+	g.cfg.PadDef[0].KeyDef[DKEY_DOWN].Key = 126;
+	g.cfg.PadDef[0].KeyDef[DKEY_LEFT].Key = 124;
+	g.cfg.PadDef[0].KeyDef[DKEY_L2].Key = 16;
+	g.cfg.PadDef[0].KeyDef[DKEY_R2].Key = 18;
+	g.cfg.PadDef[0].KeyDef[DKEY_L1].Key = 14;
+	g.cfg.PadDef[0].KeyDef[DKEY_R1].Key = 15;
+	g.cfg.PadDef[0].KeyDef[DKEY_TRIANGLE].Key = 3;
+	g.cfg.PadDef[0].KeyDef[DKEY_CIRCLE].Key = 8;
+	g.cfg.PadDef[0].KeyDef[DKEY_CROSS].Key = 7;
+	g.cfg.PadDef[0].KeyDef[DKEY_SQUARE].Key = 2;
+	g.cfg.PadDef[0].KeyDef[DKEY_ANALOG].Key = 12;
+	
+	// Pad1 joystick
+	g.cfg.PadDef[0].KeyDef[DKEY_SELECT].JoyEvType = BUTTON;
+	g.cfg.PadDef[0].KeyDef[DKEY_SELECT].J.Button = 8;
+	g.cfg.PadDef[0].KeyDef[DKEY_START].JoyEvType = BUTTON;
+	g.cfg.PadDef[0].KeyDef[DKEY_START].J.Button = 9;
+	g.cfg.PadDef[0].KeyDef[DKEY_UP].JoyEvType = AXIS;
+	g.cfg.PadDef[0].KeyDef[DKEY_UP].J.Axis = -2;
+	g.cfg.PadDef[0].KeyDef[DKEY_RIGHT].JoyEvType = AXIS;
+	g.cfg.PadDef[0].KeyDef[DKEY_RIGHT].J.Axis = 1;
+	g.cfg.PadDef[0].KeyDef[DKEY_DOWN].JoyEvType = AXIS;
+	g.cfg.PadDef[0].KeyDef[DKEY_DOWN].J.Axis = 2;
+	g.cfg.PadDef[0].KeyDef[DKEY_LEFT].JoyEvType = AXIS;
+	g.cfg.PadDef[0].KeyDef[DKEY_LEFT].J.Axis = -1;
+	g.cfg.PadDef[0].KeyDef[DKEY_L2].JoyEvType = BUTTON;
+	g.cfg.PadDef[0].KeyDef[DKEY_L2].J.Button = 4;
+	g.cfg.PadDef[0].KeyDef[DKEY_L1].JoyEvType = BUTTON;
+	g.cfg.PadDef[0].KeyDef[DKEY_L1].J.Button = 6;
+	g.cfg.PadDef[0].KeyDef[DKEY_R2].JoyEvType = BUTTON;
+	g.cfg.PadDef[0].KeyDef[DKEY_R2].J.Button = 5;
+	g.cfg.PadDef[0].KeyDef[DKEY_R1].JoyEvType = BUTTON;
+	g.cfg.PadDef[0].KeyDef[DKEY_R1].J.Button = 7;
+	g.cfg.PadDef[0].KeyDef[DKEY_TRIANGLE].JoyEvType = BUTTON;
+	g.cfg.PadDef[0].KeyDef[DKEY_TRIANGLE].J.Button = 0;
+	g.cfg.PadDef[0].KeyDef[DKEY_CIRCLE].JoyEvType = BUTTON;
+	g.cfg.PadDef[0].KeyDef[DKEY_CIRCLE].J.Button = 1;
+	g.cfg.PadDef[0].KeyDef[DKEY_CROSS].JoyEvType = BUTTON;
+	g.cfg.PadDef[0].KeyDef[DKEY_CROSS].J.Button = 2;
+	g.cfg.PadDef[0].KeyDef[DKEY_SQUARE].JoyEvType = BUTTON;
+	g.cfg.PadDef[0].KeyDef[DKEY_SQUARE].J.Button = 3;
+	
+	// Pad2 joystick
+	g.cfg.PadDef[1].KeyDef[DKEY_SELECT].JoyEvType = BUTTON;
+	g.cfg.PadDef[1].KeyDef[DKEY_SELECT].J.Button = 8;
+	g.cfg.PadDef[1].KeyDef[DKEY_START].JoyEvType = BUTTON;
+	g.cfg.PadDef[1].KeyDef[DKEY_START].J.Button = 9;
+	g.cfg.PadDef[1].KeyDef[DKEY_UP].JoyEvType = AXIS;
+	g.cfg.PadDef[1].KeyDef[DKEY_UP].J.Axis = -2;
+	g.cfg.PadDef[1].KeyDef[DKEY_RIGHT].JoyEvType = AXIS;
+	g.cfg.PadDef[1].KeyDef[DKEY_RIGHT].J.Axis = 1;
+	g.cfg.PadDef[1].KeyDef[DKEY_DOWN].JoyEvType = AXIS;
+	g.cfg.PadDef[1].KeyDef[DKEY_DOWN].J.Axis = 2;
+	g.cfg.PadDef[1].KeyDef[DKEY_LEFT].JoyEvType = AXIS;
+	g.cfg.PadDef[1].KeyDef[DKEY_LEFT].J.Axis = -1;
+	g.cfg.PadDef[1].KeyDef[DKEY_L2].JoyEvType = BUTTON;
+	g.cfg.PadDef[1].KeyDef[DKEY_L2].J.Button = 4;
+	g.cfg.PadDef[1].KeyDef[DKEY_L1].JoyEvType = BUTTON;
+	g.cfg.PadDef[1].KeyDef[DKEY_L1].J.Button = 6;
+	g.cfg.PadDef[1].KeyDef[DKEY_R2].JoyEvType = BUTTON;
+	g.cfg.PadDef[1].KeyDef[DKEY_R2].J.Button = 5;
+	g.cfg.PadDef[1].KeyDef[DKEY_R1].JoyEvType = BUTTON;
+	g.cfg.PadDef[1].KeyDef[DKEY_R1].J.Button = 7;
+	g.cfg.PadDef[1].KeyDef[DKEY_TRIANGLE].JoyEvType = BUTTON;
+	g.cfg.PadDef[1].KeyDef[DKEY_TRIANGLE].J.Button = 0;
+	g.cfg.PadDef[1].KeyDef[DKEY_CIRCLE].JoyEvType = BUTTON;
+	g.cfg.PadDef[1].KeyDef[DKEY_CIRCLE].J.Button = 1;
+	g.cfg.PadDef[1].KeyDef[DKEY_CROSS].JoyEvType = BUTTON;
+	g.cfg.PadDef[1].KeyDef[DKEY_CROSS].J.Button = 2;
+	g.cfg.PadDef[1].KeyDef[DKEY_SQUARE].JoyEvType = BUTTON;
+	g.cfg.PadDef[1].KeyDef[DKEY_SQUARE].J.Button = 3;
+}
+
+
+
+void LoadPADConfig()
+{
+	SetDefaultConfig();
+	[[NSUserDefaults standardUserDefaults] registerDefaults:
+	 [NSDictionary dictionaryWithObject:[NSDictionary dictionaryWithObjectsAndKeys:
+										 DefaultPadArray(0), kDFPad1,
+										 DefaultPadArray(1), kDFPad2,
+										 @YES, kDFThreading,
+										 nil]
+								 forKey:PrefsKey]];
+	
+	//Load the old preferences if present.
+	NSFileManager *fm = [NSFileManager defaultManager];
+	NSString *oldPrefPath = [NSString pathWithComponents:@[NSHomeDirectory(), @"Library", @"Preferences", @"net.pcsxr.DFInput.plist"]];
+	if ([fm fileExistsAtPath:oldPrefPath]) {
+		char buf[256] = {0};
+		int current = 0, a = 0, b = 0, c = 0;
+
+		FILE *fp = fopen([oldPrefPath fileSystemRepresentation], "r");
+		if (fp == NULL) {
+			return;
+		}
+		
+		while (fgets(buf, 256, fp) != NULL) {
+			if (strncmp(buf, "Threaded=", 9) == 0) {
+				g.cfg.Threaded = atoi(&buf[9]);
+			} else if (strncmp(buf, "[PAD", 4) == 0) {
+				current = atoi(&buf[4]) - 1;
+				if (current < 0) {
+					current = 0;
+				} else if (current > 1) {
+					current = 1;
+				}
+			} else if (strncmp(buf, "DevNum=", 7) == 0) {
+				g.cfg.PadDef[current].DevNum = atoi(&buf[7]);
+			} else if (strncmp(buf, "Type=", 5) == 0) {
+				g.cfg.PadDef[current].Type = atoi(&buf[5]);
+			} else if (strncmp(buf, "Select=", 7) == 0) {
+				sscanf(buf, "Select=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_SELECT].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_SELECT].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_SELECT].J.d = c;
+			} else if (strncmp(buf, "L3=", 3) == 0) {
+				sscanf(buf, "L3=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_L3].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_L3].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_L3].J.d = c;
+			} else if (strncmp(buf, "R3=", 3) == 0) {
+				sscanf(buf, "R3=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_R3].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_R3].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_R3].J.d = c;
+			} else if (strncmp(buf, "Analog=", 7) == 0) {
+				sscanf(buf, "Analog=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_ANALOG].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_ANALOG].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_ANALOG].J.d = c;
+			} else if (strncmp(buf, "Start=", 6) == 0) {
+				sscanf(buf, "Start=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_START].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_START].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_START].J.d = c;
+			} else if (strncmp(buf, "Up=", 3) == 0) {
+				sscanf(buf, "Up=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_UP].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_UP].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_UP].J.d = c;
+			} else if (strncmp(buf, "Right=", 6) == 0) {
+				sscanf(buf, "Right=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_RIGHT].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_RIGHT].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_RIGHT].J.d = c;
+			} else if (strncmp(buf, "Down=", 5) == 0) {
+				sscanf(buf, "Down=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_DOWN].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_DOWN].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_DOWN].J.d = c;
+			} else if (strncmp(buf, "Left=", 5) == 0) {
+				sscanf(buf, "Left=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_LEFT].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_LEFT].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_LEFT].J.d = c;
+			} else if (strncmp(buf, "L2=", 3) == 0) {
+				sscanf(buf, "L2=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_L2].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_L2].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_L2].J.d = c;
+			} else if (strncmp(buf, "R2=", 3) == 0) {
+				sscanf(buf, "R2=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_R2].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_R2].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_R2].J.d = c;
+			} else if (strncmp(buf, "L1=", 3) == 0) {
+				sscanf(buf, "L1=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_L1].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_L1].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_L1].J.d = c;
+			} else if (strncmp(buf, "R1=", 3) == 0) {
+				sscanf(buf, "R1=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_R1].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_R1].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_R1].J.d = c;
+			} else if (strncmp(buf, "Triangle=", 9) == 0) {
+				sscanf(buf, "Triangle=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_TRIANGLE].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_TRIANGLE].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_TRIANGLE].J.d = c;
+			} else if (strncmp(buf, "Circle=", 7) == 0) {
+				sscanf(buf, "Circle=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_CIRCLE].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_CIRCLE].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_CIRCLE].J.d = c;
+			} else if (strncmp(buf, "Cross=", 6) == 0) {
+				sscanf(buf, "Cross=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_CROSS].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_CROSS].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_CROSS].J.d = c;
+			} else if (strncmp(buf, "Square=", 7) == 0) {
+				sscanf(buf, "Square=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].KeyDef[DKEY_SQUARE].Key = a;
+				g.cfg.PadDef[current].KeyDef[DKEY_SQUARE].JoyEvType = b;
+				g.cfg.PadDef[current].KeyDef[DKEY_SQUARE].J.d = c;
+			} else if (strncmp(buf, "LeftAnalogXP=", 13) == 0) {
+				sscanf(buf, "LeftAnalogXP=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_XP].Key = a;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_XP].JoyEvType = b;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_XP].J.d = c;
+			} else if (strncmp(buf, "LeftAnalogXM=", 13) == 0) {
+				sscanf(buf, "LeftAnalogXM=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_XM].Key = a;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_XM].JoyEvType = b;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_XM].J.d = c;
+			} else if (strncmp(buf, "LeftAnalogYP=", 13) == 0) {
+				sscanf(buf, "LeftAnalogYP=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_YP].Key = a;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_YP].JoyEvType = b;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_YP].J.d = c;
+			} else if (strncmp(buf, "LeftAnalogYM=", 13) == 0) {
+				sscanf(buf, "LeftAnalogYM=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_YM].Key = a;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_YM].JoyEvType = b;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_LEFT][ANALOG_YM].J.d = c;
+			} else if (strncmp(buf, "RightAnalogXP=", 14) == 0) {
+				sscanf(buf, "RightAnalogXP=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_XP].Key = a;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_XP].JoyEvType = b;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_XP].J.d = c;
+			} else if (strncmp(buf, "RightAnalogXM=", 14) == 0) {
+				sscanf(buf, "RightAnalogXM=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_XM].Key = a;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_XM].JoyEvType = b;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_XM].J.d = c;
+			} else if (strncmp(buf, "RightAnalogYP=", 14) == 0) {
+				sscanf(buf, "RightAnalogYP=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_YP].Key = a;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_YP].JoyEvType = b;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_YP].J.d = c;
+			} else if (strncmp(buf, "RightAnalogYM=", 14) == 0) {
+				sscanf(buf, "RightAnalogYM=%d,%d,%d", &a, &b, &c);
+				g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_YM].Key = a;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_YM].JoyEvType = b;
+				g.cfg.PadDef[current].AnalogDef[ANALOG_RIGHT][ANALOG_YM].J.d = c;
+			}
+		}
+		
+		fclose(fp);
+		//Save to new preferences
+		SavePADConfig();
+		//Delete the old preferences
+		[fm removeItemAtPath:oldPrefPath error:NULL];
+	} else {
+		NSDictionary *dfPrefs = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey];
+		g.cfg.Threaded = [[dfPrefs objectForKey:kDFThreading] boolValue];
+		LoadPadArray(0, [dfPrefs objectForKey:kDFPad1]);
+		LoadPadArray(1, [dfPrefs objectForKey:kDFPad2]);
+	}
+}
+
+void SavePADConfig()
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSMutableDictionary *pad1Dict = nil, *pad2Dict = nil;
+	NSDictionary *prefDict = [defaults dictionaryForKey:PrefsKey];
+	pad1Dict = [[NSMutableDictionary alloc] initWithDictionary:[prefDict objectForKey:kDFPad1]];
+	pad2Dict = [[NSMutableDictionary alloc] initWithDictionary:[prefDict objectForKey:kDFPad2]];
+	prefDict = nil;
+	
+	[pad1Dict addEntriesFromDictionary:SavePadArray(0)];
+	[pad2Dict addEntriesFromDictionary:SavePadArray(1)];
+	
+	[defaults setObject:[NSDictionary dictionaryWithObjectsAndKeys:
+						 g.cfg.Threaded ? @YES : @NO, kDFThreading,
+						 pad1Dict, kDFPad1,
+						 pad2Dict, kDFPad2,
+						 nil] forKey:PrefsKey];
+	[defaults synchronize];
+	RELEASEOBJ(pad1Dict);
+	RELEASEOBJ(pad2Dict);
+}
 
 void DoAbout()
 {
