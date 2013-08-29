@@ -30,8 +30,8 @@ endif
 
 if SOUND_SDL
 libDFSound_la_SOURCES += sdl.c
-libDFSound_la_CPPFLAGS += -DUSESDL=1 $(SDL_CFLAGS)
-libDFSound_la_LIBADD += $(SDL_LIBS)
+libDFSound_la_CPPFLAGS += -DUSESDL=1 $(SDL2_CFLAGS) $(SDL_CFLAGS)
+libDFSound_la_LIBADD += $(SDL2_LIBS) $(SDL_LIBS)
 endif
 
 if SOUND_OPENAL

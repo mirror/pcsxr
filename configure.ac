@@ -26,7 +26,12 @@ AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["${GETTEXT_PACKAGE}"], [gettext domain])
 PKG_CHECK_MODULES(GLIB2, glib-2.0 >= 2.20, [], AC_MSG_ERROR([*** glib2 >= 2.20 not found!]))
 PKG_CHECK_MODULES(GTK3, gtk+-3.0 , [], AC_MSG_ERROR([*** libgtk3 >= 3.0 not found!]))
 
-PKG_CHECK_MODULES(SDL, sdl >= 1.2.12, [], AC_MSG_ERROR([*** SDL >= 1.2.12 not found!]))
+PKG_CHECK_MODULES([SDL2], [sdl2 >= 2.0.0],
+   [AC_DEFINE([HAVE_SDL2], [1], [Use SDL2])],
+   [PKG_CHECK_MODULES([SDL], [sdl >= 1.2.12],
+       [AC_DEFINE([HAVE_SDL], [1], [Use SDL])
+    ], AC_MSG_ERROR([*** SDL >= 1.2.12 not found!]))
+])
 
 AC_SUBST(GLIB2_CFLAGS)
 AC_SUBST(GLIB2_LIBS)

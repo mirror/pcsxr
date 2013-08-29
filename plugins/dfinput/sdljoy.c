@@ -18,13 +18,13 @@
 
 #include "pad.h"
 
-#if SDL_VERSION_ATLEAST(1,3,0)
+#if SDL_VERSION_ATLEAST(2,0,0)
 static SDL_HapticEffect haptic_rumbleEffect;
 #endif
 
 void JoyInitHaptic()
 {
-#if SDL_VERSION_ATLEAST(1,3,0)
+#if SDL_VERSION_ATLEAST(2,0,0)
   uint8_t i;
     //unsigned int haptic_query = 0;
   for (i = 0; i < 2; i++)
@@ -61,7 +61,7 @@ void JoyInitHaptic()
 
 int JoyHapticRumble(int pad, uint32_t low, uint32_t high)
 {
-#if SDL_VERSION_ATLEAST(1,3,0)
+#if SDL_VERSION_ATLEAST(2,0,0)
   float mag;
 
   if (g.PadState[pad].haptic) {
@@ -99,13 +99,13 @@ void InitSDLJoy() {
 		} else {
 			g.PadState[i].JoyDev = NULL;
 		}
-#if !SDL_VERSION_ATLEAST(1,3,0) && defined(__linux__)
+#if !SDL_VERSION_ATLEAST(2,0,0) && defined(__linux__)
 		g.PadState[i].VibrateDev = -1;
 		g.PadState[i].VibrateEffect = -1;
 #endif
 	}
 
-#if SDL_VERSION_ATLEAST(1,3,0)
+#if SDL_VERSION_ATLEAST(2,0,0)
   if (has_haptic)
   {
     JoyInitHaptic();
@@ -127,7 +127,7 @@ void DestroySDLJoy() {
 	if (SDL_WasInit(SDL_INIT_JOYSTICK)) {
 		for (i = 0; i < 2; i++) {
 			if (g.PadState[i].JoyDev != NULL) {
-#if SDL_VERSION_ATLEAST(1,3,0)
+#if SDL_VERSION_ATLEAST(2,0,0)
         if (g.PadState[i].haptic != NULL)
         {
           SDL_HapticClose(g.PadState[i].haptic);

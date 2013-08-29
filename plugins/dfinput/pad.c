@@ -17,13 +17,13 @@
  */
 
 #include "pad.h"
-#if !SDL_VERSION_ATLEAST(1,3,0) && defined(__linux__)
+#if !SDL_VERSION_ATLEAST(2,0,0) && defined(__linux__)
 #include <linux/input.h>
 #include <sys/file.h>
 #include <time.h>
 #endif
 
-#if SDL_VERSION_ATLEAST(1,3,0)
+#if SDL_VERSION_ATLEAST(2,0,0)
 int has_haptic;
 #endif
 
@@ -99,7 +99,7 @@ long PADopen(unsigned long *Disp) {
 			return PSE_PAD_ERR_FAILURE;
 		}
  
-#if SDL_VERSION_ATLEAST(1,3,0)
+#if SDL_VERSION_ATLEAST(2,0,0)
     has_haptic = 0;
     if (SDL_InitSubSystem(SDL_INIT_HAPTIC) == 0)
       has_haptic = 1;
@@ -134,7 +134,7 @@ long PADclose(void) {
 
 		DestroySDLJoy();
 		DestroyKeyboard();
-#if SDL_VERSION_ATLEAST(1,3,0)
+#if SDL_VERSION_ATLEAST(2,0,0)
 		if (SDL_WasInit(SDL_INIT_EVERYTHING & ~(SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK))) {
 			SDL_QuitSubSystem(SDL_INIT_HAPTIC);
 			SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
@@ -221,7 +221,7 @@ static uint8_t stdmodel[2][8] = {
 	 0x00}
 };
  
-#if !SDL_VERSION_ATLEAST(1,3,0) && defined(__linux__)
+#if !SDL_VERSION_ATLEAST(2,0,0) && defined(__linux__)
 /* lifted from SDL; but it's GPL as well */
 /* added ffbit, though */
 #define test_bit(nr, addr) \
@@ -473,7 +473,7 @@ unsigned char PADpoll(unsigned char value) {
 					g.PadState[CurPad].VibF[0] = value;
 
 					if (g.PadState[CurPad].VibF[0] != 0 || g.PadState[CurPad].VibF[1] != 0) {
-#if !SDL_VERSION_ATLEAST(1,3,0) && defined(__linux__)
+#if !SDL_VERSION_ATLEAST(2,0,0) && defined(__linux__)
 						if (g.PadState[CurPad].VibrateDev == -1 &&
 							g.PadState[CurPad].JoyDev != NULL) {
 							linux_set_vibrate(CurPad);
@@ -496,7 +496,7 @@ unsigned char PADpoll(unsigned char value) {
 					g.PadState[CurPad].VibF[1] = value;
 
 					if (g.PadState[CurPad].VibF[0] != 0 || g.PadState[CurPad].VibF[1] != 0) {
-#if !SDL_VERSION_ATLEAST(1,3,0) && defined(__linux__)
+#if !SDL_VERSION_ATLEAST(2,0,0) && defined(__linux__)
 						if (g.PadState[CurPad].VibrateDev == -1 &&
 							g.PadState[CurPad].JoyDev != NULL) {
 							linux_set_vibrate(CurPad);

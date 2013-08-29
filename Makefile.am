@@ -1,4 +1,4 @@
-SUBDIRS =  data     
+SUBDIRS =  data
 SUBDIRS += doc
 SUBDIRS += pixmaps
 SUBDIRS += po

@@ -36,7 +36,7 @@ extern "C" {
 
 #include <SDL.h>
 #include <SDL_joystick.h>
-#if SDL_VERSION_ATLEAST(1,3,0)
+#if SDL_VERSION_ATLEAST(2,0,0)
 #include <SDL_haptic.h>
 #endif
 
@@ -84,7 +84,7 @@ __private_extern__ char* PLUGLOC(char* toloc);
 #define N_(x) (x)
 #endif
 
-#if SDL_VERSION_ATLEAST(1,3,0)
+#if SDL_VERSION_ATLEAST(2,0,0)
 extern int has_haptic;
 #endif
 
@@ -186,7 +186,7 @@ typedef struct tagPadState {
 	volatile int8_t		MouseAxis[2][2];
 	uint8_t				Vib0, Vib1;
 	volatile uint8_t	VibF[2];
-#if SDL_VERSION_ATLEAST(1,3,0)
+#if SDL_VERSION_ATLEAST(2,0,0)
 	SDL_Haptic		*haptic;
 #else
 #ifdef __linux__
