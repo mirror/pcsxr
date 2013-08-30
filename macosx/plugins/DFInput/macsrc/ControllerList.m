@@ -28,41 +28,47 @@ static int currentController;
 static NSArray *labelText;
 
 @implementation ControllerList
+
++ (void)initialize
+{
+	if (!labelText) {
+		NSBundle *plugBundle = [NSBundle bundleForClass:[ControllerList class]];
+		labelText = @[[plugBundle localizedStringForKey:@"D-Pad Up" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"D-Pad Down" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"D-Pad Left" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"D-Pad Right" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"Cross" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"Circle" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"Square" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"Triangle" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"L1" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"R1" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"L2" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"R2" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"Select" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"Start" value:@"" table:nil],
+				
+				[plugBundle localizedStringForKey:@"L3" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"R3" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"Analog" value:@"" table:nil],
+				
+				[plugBundle localizedStringForKey:@"L-Stick Right" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"L-Stick Left" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"L-Stick Down" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"L-Stick Up" value:@"" table:nil],
+				
+				[plugBundle localizedStringForKey:@"R-Stick Right" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"R-Stick Left" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"R-Stick Down" value:@"" table:nil],
+				[plugBundle localizedStringForKey:@"R-Stick Up" value:@"" table:nil]];
+		RETAINOBJ(labelText);
+	}
+}
+
 - (id)initWithConfig
 {
 	if (self = [super init]) {
-		NSBundle *plugBundle = [NSBundle bundleForClass:[self class]];
-		if (!labelText) {
-			labelText = @[[plugBundle localizedStringForKey:@"D-Pad Up" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"D-Pad Down" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"D-Pad Left" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"D-Pad Right" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"Cross" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"Circle" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"Square" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"Triangle" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"L1" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"R1" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"L2" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"R2" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"Select" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"Start" value:@"" table:nil],
-				 
-				 [plugBundle localizedStringForKey:@"L3" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"R3" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"Analog" value:@"" table:nil],
-				 
-				 [plugBundle localizedStringForKey:@"L-Stick Right" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"L-Stick Left" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"L-Stick Down" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"L-Stick Up" value:@"" table:nil],
-				 
-				 [plugBundle localizedStringForKey:@"R-Stick Right" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"R-Stick Left" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"R-Stick Down" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"R-Stick Up" value:@"" table:nil]];
-			RETAINOBJ(labelText);
-		}
+		
 	}
 	return self;
 }
@@ -120,11 +126,11 @@ static const int DPad[DKEY_TOTAL] = {
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn 
 		row:(NSInteger)rowIndex
 {
-	char buf[256] = {0};
-	
 	if ([[aTableColumn identifier] isEqualToString:@"key"]) {
 		return [labelText objectAtIndex:rowIndex];
 	} else {
+		char buf[256] = {0};
+		
 		// actual keys
 		if (rowIndex < DKEY_TOTAL) {
 			GetKeyDescription(buf, currentController, DPad[rowIndex]);

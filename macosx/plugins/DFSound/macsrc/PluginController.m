@@ -148,10 +148,10 @@ void ReadConfig(void)
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:self.keyValues];
-	[writeDic setObject:@((BOOL)[hiCompBox intValue]) forKey:@"High Compatibility Mode"];
-	[writeDic setObject:@((BOOL)[irqWaitBox intValue]) forKey:@"SPU IRQ Wait"];
-	[writeDic setObject:@((BOOL)[monoSoundBox intValue]) forKey:@"Mono Sound Output"];
-	[writeDic setObject:@((BOOL)[xaSpeedBox intValue]) forKey:@"XA Pitch"];
+	[writeDic setObject:([hiCompBox intValue] ? @YES : @NO) forKey:@"High Compatibility Mode"];
+	[writeDic setObject:([irqWaitBox intValue] ? @YES : @NO) forKey:@"SPU IRQ Wait"];
+	[writeDic setObject:([monoSoundBox intValue] ? @YES : @NO) forKey:@"Mono Sound Output"];
+	[writeDic setObject:([xaSpeedBox intValue] ? @YES : @NO) forKey:@"XA Pitch"];
 
 	[writeDic setObject:@([interpolValue intValue]) forKey:@"Interpolation Quality"];
 	[writeDic setObject:@([reverbValue intValue]) forKey:@"Reverb Quality"];

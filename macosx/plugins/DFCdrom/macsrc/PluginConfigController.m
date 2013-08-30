@@ -122,7 +122,7 @@ void ReadConfig()
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
 
-	[writeDic setObject:@((BOOL)[Cached intValue]) forKey:@"Threaded"];
+	[writeDic setObject:([Cached intValue] ? @YES : @NO) forKey:@"Threaded"];
 	[writeDic setObject:@([CacheSize intValue]) forKey:@"Cache Size"];
 
 	switch ([CdSpeed indexOfSelectedItem]) {

@@ -202,13 +202,13 @@ void ReadConfig(void)
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
-	[writeDic setObject:@((BOOL)[fpsCounter intValue]) forKey:@"FPS Counter"];
-	[writeDic setObject:@((BOOL)[autoFullScreen intValue]) forKey:@"Auto Full Screen"];
-	[writeDic setObject:@((BOOL)[frameSkipping intValue]) forKey:@"Frame Skipping"];
+	[writeDic setObject:([fpsCounter intValue] ? @YES : @NO) forKey:@"FPS Counter"];
+	[writeDic setObject:([autoFullScreen intValue] ? @YES : @NO) forKey:@"Auto Full Screen"];
+	[writeDic setObject:([frameSkipping intValue] ? @YES : @NO) forKey:@"Frame Skipping"];
 	//[writeDic setObject:@([frameLimit intValue]) forKey:@"Frame Limit"];
-	[writeDic setObject:@((BOOL)[vSync intValue]) forKey:@"VSync"];
-	[writeDic setObject:@((BOOL)[hackEnable intValue]) forKey:@"Enable Hacks"];
-	[writeDic setObject:@((BOOL)[shaders intValue]) forKey:@"UseShader"];
+	[writeDic setObject:([vSync intValue] ? @YES : @NO) forKey:@"VSync"];
+	[writeDic setObject:([hackEnable intValue] ? @YES : @NO) forKey:@"Enable Hacks"];
+	[writeDic setObject:([shaders intValue] ? @YES : @NO) forKey:@"UseShader"];
 	[writeDic setObject:@([shaderQualitySelector indexOfSelectedItem] + 1) forKey:@"ShaderQuality"];
 	[writeDic setObject:@([ditherMode indexOfSelectedItem]) forKey:@"Dither Mode"];
 	

@@ -101,7 +101,7 @@ void ReadConfig()
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 								[NSDictionary dictionaryWithObjectsAndKeys:
 								 @"127.0.0.1", kIPADDRKEY,
-								 @((unsigned short)33306), kIPPORT,
+								 @33306, kIPPORT,
 								 @1, kPLAYERNUM,
 								 nil], PrefsKey, nil]];
 	
