@@ -17,8 +17,8 @@
     IBOutlet NSCell *irqWaitBox;
     IBOutlet NSCell *monoSoundBox;
     IBOutlet NamedSlider *reverbValue;
-    IBOutlet NSControl *xaEnableBox;
-    IBOutlet NSControl *xaSpeedBox;
+    IBOutlet NSCell *xaEnableBox;
+    IBOutlet NSCell *xaSpeedBox;
     IBOutlet NamedSlider *volumeValue;
 	
 	NSMutableDictionary *keyValues;

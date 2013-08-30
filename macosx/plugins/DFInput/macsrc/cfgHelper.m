@@ -6,10 +6,10 @@
 //
 //
 
-#include "cfg.h"
 #import <Foundation/Foundation.h>
 #import "ARCBridge.h"
 #import "PadController.h"
+#include "cfg.h"
 
 #define padType @"Pad Type"
 #define deviceNumber @"Device Number"

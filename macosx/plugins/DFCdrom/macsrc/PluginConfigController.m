@@ -20,8 +20,8 @@
  */
 
 #import "PluginConfigController.h"
-#include "cdr.h"
 #import "ARCBridge.h"
+#include "cdr.h"
 
 #define APP_ID @"net.pcsxr.DFCdrom"
 #define PrefsKey APP_ID @" Settings"

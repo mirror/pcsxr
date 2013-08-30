@@ -21,7 +21,7 @@
 
 #import "MappingCell.h"
 #import "ControllerList.h"
-#import "cfg.h"
+#include "cfg.h"
 
 @implementation MappingCell
 

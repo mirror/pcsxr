@@ -23,7 +23,6 @@
 #import "PadController.h"
 #import "ARCBridge.h"
 #include "pad.h"
-#include <sys/param.h>
 
 static inline void RunOnMainThreadSync(dispatch_block_t block)
 {

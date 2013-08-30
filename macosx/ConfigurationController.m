@@ -40,7 +40,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 
 	NSString *key = [self keyForSender:sender];
 	if (key) {
-		[[NSUserDefaults standardUserDefaults] setInteger:[sender intValue] forKey:key];
+		[[NSUserDefaults standardUserDefaults] setBool:[sender intValue] ? YES : NO forKey:key];
 		[PcsxrController setConfigFromDefaults];
 	}
 }
@@ -53,7 +53,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 
 	NSString *key = [self keyForSender:sender];
 	if (key) {
-		[[NSUserDefaults standardUserDefaults] setInteger:![sender intValue] forKey:key];
+		[[NSUserDefaults standardUserDefaults] setBool:[sender intValue] ? NO : YES forKey:key];
 		[PcsxrController setConfigFromDefaults];
 	}
 }

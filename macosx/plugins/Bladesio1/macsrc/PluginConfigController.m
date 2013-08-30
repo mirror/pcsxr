@@ -20,9 +20,9 @@
  */
 
 #import "PluginConfigController.h"
+#import "ARCBridge.h"
 #include "typedefs.h"
 #include "sio1.h"
-#import "ARCBridge.h"
 
 #define APP_ID @"net.pcsxr.Bladesio1"
 #define PrefsKey APP_ID @" Settings"

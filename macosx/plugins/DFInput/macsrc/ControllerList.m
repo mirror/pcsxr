@@ -20,66 +20,54 @@
  */
 
 #import "ControllerList.h"
+#import "ARCBridge.h"
 #include "pad.h"
 #include "cfg.h"
-#import "ARCBridge.h"
 
 static int currentController;
 static NSArray *labelText;
 
 @implementation ControllerList
 
-+ (void)initialize
-{
-	if (!labelText) {
-		NSBundle *plugBundle = [NSBundle bundleForClass:[ControllerList class]];
-		labelText = @[[plugBundle localizedStringForKey:@"D-Pad Up" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"D-Pad Down" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"D-Pad Left" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"D-Pad Right" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"Cross" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"Circle" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"Square" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"Triangle" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"L1" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"R1" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"L2" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"R2" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"Select" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"Start" value:@"" table:nil],
-				
-				[plugBundle localizedStringForKey:@"L3" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"R3" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"Analog" value:@"" table:nil],
-				
-				[plugBundle localizedStringForKey:@"L-Stick Right" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"L-Stick Left" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"L-Stick Down" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"L-Stick Up" value:@"" table:nil],
-				
-				[plugBundle localizedStringForKey:@"R-Stick Right" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"R-Stick Left" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"R-Stick Down" value:@"" table:nil],
-				[plugBundle localizedStringForKey:@"R-Stick Up" value:@"" table:nil]];
-		RETAINOBJ(labelText);
-	}
-}
-
 - (id)initWithConfig
 {
 	if (self = [super init]) {
-		
+		static dispatch_once_t onceToken;
+		dispatch_once(&onceToken, ^{
+			NSBundle *plugBundle = [NSBundle bundleForClass:[ControllerList class]];
+			labelText = @[[plugBundle localizedStringForKey:@"D-Pad Up" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"D-Pad Down" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"D-Pad Left" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"D-Pad Right" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"Cross" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"Circle" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"Square" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"Triangle" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"L1" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"R1" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"L2" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"R2" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"Select" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"Start" value:@"" table:nil],
+				 
+				 [plugBundle localizedStringForKey:@"L3" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"R3" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"Analog" value:@"" table:nil],
+				 
+				 [plugBundle localizedStringForKey:@"L-Stick Right" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"L-Stick Left" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"L-Stick Down" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"L-Stick Up" value:@"" table:nil],
+				 
+				 [plugBundle localizedStringForKey:@"R-Stick Right" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"R-Stick Left" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"R-Stick Down" value:@"" table:nil],
+				 [plugBundle localizedStringForKey:@"R-Stick Up" value:@"" table:nil]];
+			RETAINOBJNORETURN(labelText);
+		});
 	}
 	return self;
 }
-
-//#if !__has_feature(objc_arc)
-#if 0
-- (void)dealloc
-{
-	[super dealloc];
-}
-#endif
 
 /* sets current controller data returned by data source */
 + (void)setCurrentController:(int)which

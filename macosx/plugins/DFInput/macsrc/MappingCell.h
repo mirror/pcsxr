@@ -23,7 +23,6 @@
 
 #import <AppKit/AppKit.h>
 
-@interface MappingCell : NSTextFieldCell {
-}
+@interface MappingCell : NSTextFieldCell
 
 @end

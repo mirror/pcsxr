@@ -20,8 +20,8 @@
  */
 
 #import "PadView.h"
-#include "pad.h"
 #import "ARCBridge.h"
+#include "pad.h"
 
 @implementation PadView
 

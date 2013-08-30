@@ -22,8 +22,8 @@
 @end
 
 @implementation PcsxrMemCardController
-
-@synthesize memCard1Array, memCard2Array;
+@synthesize memCard1Array;
+@synthesize memCard2Array;
 
 - (void)setupValues:(int)theCards
 {
@@ -58,18 +58,6 @@
 		[self loadMemoryCardInfoForCard:2];
 	}
 }
-
-#if 0
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        //LoadMcds(Config.Mcd1, Config.Mcd2);
-    }
-    
-    return self;
-}
-#endif
 
 - (void)loadMemoryCardInfoForCard:(int)theCard
 {
@@ -125,7 +113,7 @@
 		cardnum = 2;
 	}
 	selection = [cardView selectionIndexes];
-	if (!selection || [selection count] == 0) {
+	if (!selection || [selection count] != 1) {
 		NSBeep();
 		return;
 	}

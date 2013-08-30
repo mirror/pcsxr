@@ -24,10 +24,8 @@
 #import <Cocoa/Cocoa.h>
 #include "cfg.h"
 
-@class KeyConfig;
+@interface ControllerList : NSObject <NSTableViewDataSource>
 
-@interface ControllerList : NSObject <NSTableViewDataSource> {
-}
 - (id)initWithConfig;
 
 + (void)setCurrentController:(int)which;

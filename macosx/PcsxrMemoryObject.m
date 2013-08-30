@@ -76,11 +76,11 @@ static NSString *MemLabelEndLink;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 		NSBundle *mainBundle = [NSBundle mainBundle];
-		MemLabelDeleted = [[mainBundle localizedStringForKey:@"MemCard_Deleted" value:@"" table:((void *)0)] copy];
-		MemLabelFree = [[mainBundle localizedStringForKey:@"MemCard_Free" value:@"" table:((void *)0)] copy];
-		MemLabelUsed = [[mainBundle localizedStringForKey:@"MemCard_Used" value:@"" table:((void *)0)] copy];
-		MemLabelLink = [[mainBundle localizedStringForKey:@"MemCard_Link" value:@"" table:((void *)0)] copy];
-		MemLabelEndLink = [[mainBundle localizedStringForKey:@"MemCard_EndLink" value:@"" table:((void *)0)] copy];
+		MemLabelDeleted = [[mainBundle localizedStringForKey:@"MemCard_Deleted" value:@"" table:nil] copy];
+		MemLabelFree = [[mainBundle localizedStringForKey:@"MemCard_Free" value:@"" table:nil] copy];
+		MemLabelUsed = [[mainBundle localizedStringForKey:@"MemCard_Used" value:@"" table:nil] copy];
+		MemLabelLink = [[mainBundle localizedStringForKey:@"MemCard_Link" value:@"" table:nil] copy];
+		MemLabelEndLink = [[mainBundle localizedStringForKey:@"MemCard_EndLink" value:@"" table:nil] copy];
 	});
 }
 
