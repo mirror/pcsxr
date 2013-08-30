@@ -1955,7 +1955,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/../.svn/dir-wcprops",
-				"$(SRCROOT)/.svn/dir-wcprops",
 			);
 			outputPaths = (
 				"$(TARGET_BUILD_DIR)/SVNRevision.h",
