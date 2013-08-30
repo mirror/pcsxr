@@ -42,6 +42,7 @@ typedef struct
 	u32 keys[2][21];
 	u32 dualshock;
 	u32 visualvibration[2];
+	u32 background;
 } Config;
 
 #endif

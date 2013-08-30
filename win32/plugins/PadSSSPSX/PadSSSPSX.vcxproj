@@ -93,6 +93,8 @@
       </DataExecutionPrevention>
       <ImportLibrary>.\Debug/PadSSSPSX.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -138,6 +140,8 @@
       </DataExecutionPrevention>
       <ImportLibrary>.\Release/PadSSSPSX.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>

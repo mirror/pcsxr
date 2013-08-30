@@ -151,7 +151,7 @@ static bool InitDirectInput (void)
 		if (hTargetWnd)
 		{
 			pDDevice->Unacquire();
-			result = pDDevice->SetCooperativeLevel (hTargetWnd, DISCL_FOREGROUND | DISCL_EXCLUSIVE);
+			result = pDDevice->SetCooperativeLevel (hTargetWnd, (global.config.background ? DISCL_BACKGROUND : DISCL_FOREGROUND) | DISCL_EXCLUSIVE);
 			if (FAILED (result))
 				return ReleaseDirectInput();
 		}
@@ -564,6 +564,7 @@ static BOOL CALLBACK ConfigureDlgProc (const HWND hWnd, const UINT msg, const WP
 		TabCtrl_InsertItem (hTabWnd, 1, &tcI);
 		CheckDlgButton(hWnd, IDC_DS2, global.config.dualshock);
 		CheckDlgButton(hWnd, IDC_VV3, global.config.visualvibration[0]);
+		CheckDlgButton(hWnd, IDC_BG, global.config.background);
 		EnableWindow(GetDlgItem(hWnd, IDC_BMODE), global.config.dualshock);
 		EnableWindow(GetDlgItem(hWnd, IDC_BLAX), global.config.dualshock);
 		EnableWindow(GetDlgItem(hWnd, IDC_BLAY), global.config.dualshock);
@@ -634,6 +635,10 @@ static BOOL CALLBACK ConfigureDlgProc (const HWND hWnd, const UINT msg, const WP
 		else if (LOWORD (wParam) == IDC_VV3)
 		{
 			global.config.visualvibration[pad] ^= 1;
+		}
+		else if (LOWORD (wParam) == IDC_BG)
+		{
+			global.config.background ^= 1;
 		}
 		break;
 	case WM_TIMER:
