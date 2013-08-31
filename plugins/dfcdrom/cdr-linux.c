@@ -288,6 +288,7 @@ long GetStatus(int playing, struct CdrStat *stat) {
 		case CDS_DATA_2:
 		case CDS_XA_2_1:
 		case CDS_XA_2_2:
+		case CDS_MIXED:
 			stat->Type = 0x01;
 			break;
 	}
