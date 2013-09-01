@@ -1,0 +1,11 @@
+/* 
+ Localizable.strings
+ PeopsSoftGPU
+ 
+ Created by C.W. Betts on 11/16/11.
+ Copyright 2011 __MyCompanyName__. All rights reserved.
+ */
+
+"Pete Bernert and the P.E.Op.S. team" = "Pete Bernert et l'équipe P.E.Op.S.";
+"SoftGL Driver" = "Pilote SoftGL";
+"P.E.Op.S. SoftGL Driver V1.17\nCoded by Pete Bernert and the P.E.Op.S. team\n" = "Pilote SoftGL P.E.Op.S. V1.17\nCodé par Pete Bernert et l'équipe P.E.Op.S.\n";

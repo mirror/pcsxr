@@ -13,6 +13,7 @@
 "Keyboard: %s" = "Keyboard: %s";
 
 "(Keyboard only)" = "(Keyboard only)";
+"(Not Set)" = "(Not Set)";
 
 "D-Pad Up" = "D-Pad Up";
 "D-Pad Down" = "D-Pad Down";
@@ -39,4 +40,16 @@
 "R-Stick Left" = "R-Stick Left";
 "R-Stick Down" = "R-Stick Down";
 "R-Stick Up" = "R-Stick Up";
+
+//Unused right now
+"Centered" = "Centered";
+"Up" = "Up";
+"Right" = "Right";
+"Rightup" = "Right-up";
+"Down" = "Down";
+"Rightdown" = "Right-down";
+"Left" = "Left";
+"Leftup" = "Left-up";
+"Leftdown" = "Left-down";
+
 

@@ -10,6 +10,8 @@
 
 	NSMutableDictionary *keyValues;
 }
+@property (retain) NSMutableDictionary *keyValues;
+
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;
 

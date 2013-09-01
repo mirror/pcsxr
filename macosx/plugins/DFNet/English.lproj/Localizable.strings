@@ -7,5 +7,5 @@
  */
 
 "Error allocating memory!\n" = "Error allocating memory!\n";
-"error connecting to %s: %s\n" = "error connecting to %s: %s\n";
+"error connecting to %s: %s\n" = "Error connecting to %s: %s\n";
 "Socket Driver" = "Socket Driver";

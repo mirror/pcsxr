@@ -1,0 +1,35 @@
+/* 
+ Localizable.strings
+ PeopsSPU
+ 
+ Created by C.W. Betts on 11/16/11.
+ Copyright 2011 __MyCompanyName__. All rights reserved.
+ */
+
+//Commented out strings are those that need to be translated
+
+"SDL Sound" = "Son SDL";
+"OpenAL Sound" = "Son OpenAL";
+"Mac OS X Sound" = "Son Mac OS X";
+"P.E.Op.S. Sound Driver V1.7\nCoded by Pete Bernert and the P.E.Op.S. team\n" = "Pilote de son P.E.Op.S. V1.7\nCodé par Pete Bernert et l'équipe P.E.Op.S.\n";
+
+/*Unknown/not found value */
+"(Unknown)" = "(Unknown)";
+
+/* Interpolation Values */
+//"(No Interpolation)" = "(No Interpolation)";
+//"(Simple Interpolation)" = "(Simple Interpolation)";
+//"(Gaussian Interpolation)" = "(Gaussian Interpolation)";
+//"(Cubic Interpolation)" = "(Cubic Interpolation)";
+
+/* Reverb Values */
+//"(No Reverb)" = "(No Reverb)";
+//"(Simple Reverb)" = "(Simple Reverb)";
+//"(PSX Reverb)" = "(PSX Reverb)";
+
+/* Volume Values */
+//"(Muted)" = "(Muted)";
+//"(Low)" = "(Low)";
+//"(Medium)" = "(Medium)";
+//"(Loud)" = "(Loud)";
+//"(Loudest)" = "(Loudest)";

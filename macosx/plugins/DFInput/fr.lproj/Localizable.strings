@@ -1,0 +1,54 @@
+/* 
+ Localizable.strings
+ DFInput
+ 
+ Created by C.W. Betts on 11/16/11.
+ Copyright 2011 __MyCompanyName__. All rights reserved.
+ */
+
+"Gamepad/Keyboard/Mouse Input" = "Entrées clavier/manette";
+"Joystick: Button %d" = "Joystick : Bouton %d";
+"Joystick: Axis %d%c" = "Joystick: Axe %d%c";
+"Joystick: Hat %d %s" = "Joystick: Tête %d %s";
+"Keyboard: %s" = "Clavier : %s";
+
+"(Keyboard only)" = "(Keyboard only)";
+"(Not Set)" = "(Non défini)";
+
+
+"D-Pad Up" = "Pavé directionnel Haut";
+"D-Pad Down" = "Pavé directionnel Bas";
+"D-Pad Left" = "Pavé directionnel Gauche";
+"D-Pad Right" = "Pavé directionnel Droite";
+"Cross" = "Croix";
+"Circle" = "Rond";
+"Square" = "Carré";
+"Triangle" = "Triangle";
+"L1" = "L1";
+"R1" = "R1";
+"L2" = "L2";
+"R2" = "R2";
+"Select" = "Select";
+"Start" = "Start";
+"L3" = "L3";
+"R3" = "R3";
+//"Analog" = "Analog"; //Not translated
+"L-Stick Right" = "L-Stick Droite";
+"L-Stick Left" = "L-Stick Gauche";
+"L-Stick Down" = "L-Stick Bas";
+"L-Stick Up" = "L-Stick Haut";
+"R-Stick Right" = "R-Stick Droite";
+"R-Stick Left" = "R-Stick Gauche";
+"R-Stick Down" = "R-Stick Bas";
+"R-Stick Up" = "R-Stick Haut";
+
+//Unused right now
+"Centered" = "Centré";
+"Up" = "Haut";
+"Right" = "Droite";
+"Rightup" = "Droite-haut";
+"Down" = "Bas";
+"Rightdown" = "Droite-bas";
+"Left" = "Gauche";
+"Leftup" = "Gauche-haut";
+"Leftdown" = "Gauche-bas";

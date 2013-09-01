@@ -1,0 +1,11 @@
+/* 
+ Localizable.strings
+ PeopsXGL
+ 
+ Created by C.W. Betts on 11/16/11.
+ Copyright 2011 __MyCompanyName__. All rights reserved.
+ */
+
+"OpenGL Driver" = "Pilote OpenGL";
+"Pete Bernert" = "Pete Bernert";
+"Based on P.E.Op.S. MesaGL Driver V1.78\nCoded by Pete Bernert\n" = "Basé sur le pilote MesaGL P.E.Op.S. V1.78\nCodé par Pete Bernert\n";

@@ -106,13 +106,15 @@ void ReadConfig()
 
 	ReadMode = ([[keyValues objectForKey:@"Threaded"] boolValue] ? THREADED : NORMAL);
 	CacheSize = [[keyValues objectForKey:@"Cache Size"] intValue];
-	CdrSpeed = [[keyValues objectForKey:@"Speed"] intValue];
+	CdrSpeed = [[keyValues objectForKey:@"Speed"] integerValue];
 }
 
 @implementation PluginConfigController
+@synthesize keyValues;
 
 - (IBAction)cancel:(id)sender
 {
+	self.keyValues = nil;
 	[self close];
 }
 
@@ -120,10 +122,10 @@ void ReadConfig()
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
+	NSMutableDictionary *writeDic = [keyValues mutableCopy];
 
 	[writeDic setObject:([Cached intValue] ? @YES : @NO) forKey:@"Threaded"];
-	[writeDic setObject:@([CacheSize intValue]) forKey:@"Cache Size"];
+	[writeDic setObject:@([CacheSize integerValue]) forKey:@"Cache Size"];
 
 	switch ([CdSpeed indexOfSelectedItem]) {
 		case 1: [writeDic setObject:@1 forKey:@"Speed"]; break;
@@ -141,7 +143,9 @@ void ReadConfig()
 
 	// and set global values accordingly
 	ReadConfig();
-
+	
+	RELEASEOBJ(writeDic);
+	self.keyValues = nil;
 	[self close];
 }
 
@@ -152,11 +156,10 @@ void ReadConfig()
 	ReadConfig();
 
 	// load from preferences
-	RELEASEOBJ(keyValues);
-	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
+	self.keyValues = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:PrefsKey]];
 
 	[Cached setIntValue:[[keyValues objectForKey:@"Threaded"] intValue]];
-	[CacheSize setIntValue:[[keyValues objectForKey:@"Cache Size"] intValue]];
+	[CacheSize setIntegerValue:[[keyValues objectForKey:@"Cache Size"] integerValue]];
 
 	switch ([[keyValues objectForKey:@"Speed"] intValue]) {
 		case 1: [CdSpeed selectItemAtIndex:1]; break;
@@ -168,6 +171,15 @@ void ReadConfig()
 		default: [CdSpeed selectItemAtIndex:0]; break;
 	}
 }
+
+#if !__has_feature(objc_arc)
+- (void)dealloc
+{
+	self.keyValues = nil;
+	
+	[super dealloc];
+}
+#endif
 
 - (void)awakeFromNib
 {
