@@ -661,7 +661,46 @@
 		559366C612B694DF004ACC1E /* ix86_fpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86_fpu.c; sourceTree = "<group>"; };
 		559366C712B694DF004ACC1E /* ix86_mmx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86_mmx.c; sourceTree = "<group>"; };
 		559366C812B694DF004ACC1E /* ix86_sse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86_sse.c; sourceTree = "<group>"; };
-		559DACED146C72FF00C5DF71 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = Localizable.strings; sourceTree = "<group>"; };
+		5598AAC317D2D2010024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/KeyNames.plist; sourceTree = "<group>"; };
+		5598AAC417D2D2020024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = es; path = es.lproj/Credits.rtf; sourceTree = "<group>"; };
+		5598AAC517D2D2030024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/Configuration.xib; sourceTree = "<group>"; };
+		5598AAC617D2D2040024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5598AAC717D2D2050024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5598AAC817D2D2060024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/PCSXR.xib; sourceTree = "<group>"; };
+		5598AAC917D2D2070024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/AddPluginSheet.xib; sourceTree = "<group>"; };
+		5598AACA17D2D2080024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/PcsxrMemCardDocument.xib; sourceTree = "<group>"; };
+		5598AACB17D2D2090024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/CheatWindow.xib; sourceTree = "<group>"; };
+		5598AACC17D2D20A0024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/Bladesio1PluginConfig.xib; sourceTree = "<group>"; };
+		5598AACD17D2D20B0024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = es; path = es.lproj/Credits.rtf; sourceTree = "<group>"; };
+		5598AACE17D2D20C0024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5598AACF17D2D20D0024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5598AAD017D2D20E0024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = es; path = es.lproj/Credits.rtf; sourceTree = "<group>"; };
+		5598AAD117D2D20F0024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/DFCdromPluginConfig.xib; sourceTree = "<group>"; };
+		5598AAD217D2D2100024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5598AAD317D2D2110024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5598AAD417D2D2120024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = es; path = es.lproj/Credits.rtf; sourceTree = "<group>"; };
+		5598AAD517D2D2130024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5598AAD617D2D2140024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5598AAD717D2D2150024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/NetPcsxrHIDInputPluginMain.xib; sourceTree = "<group>"; };
+		5598AAD817D2D2160024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = es; path = es.lproj/Credits.rtf; sourceTree = "<group>"; };
+		5598AAD917D2D2170024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/DFNet.xib; sourceTree = "<group>"; };
+		5598AADA17D2D2180024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5598AADB17D2D2190024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5598AADC17D2D21A0024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/SockDialog.xib; sourceTree = "<group>"; };
+		5598AADD17D2D21B0024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5598AADE17D2D21C0024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5598AADF17D2D21D0024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = es; path = es.lproj/Credits.rtf; sourceTree = "<group>"; };
+		5598AAE017D2D21E0024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5598AAE117D2D21F0024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/NetSfPeopsSpuPluginMain.xib; sourceTree = "<group>"; };
+		5598AAE217D2D2200024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = es; path = es.lproj/Credits.rtf; sourceTree = "<group>"; };
+		5598AAE317D2D2210024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5598AAE417D2D2220024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5598AAE517D2D2230024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/NetSfPeopsSoftGPUConfig.xib; sourceTree = "<group>"; };
+		5598AAE617D2D2240024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = es; path = es.lproj/Credits.rtf; sourceTree = "<group>"; };
+		5598AAE717D2D2250024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5598AAE817D2D2260024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5598AAE917D2D2270024F71D /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/NetSfPeopsOpenGLConfig.xib; sourceTree = "<group>"; };
+		559DACED146C72FF00C5DF71 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Localizable.strings; sourceTree = "<group>"; };
 		55A9021E147D7C380037E18F /* PcsxrMemCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrMemCardController.h; sourceTree = "<group>"; };
 		55A9021F147D7C380037E18F /* PcsxrMemCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrMemCardController.m; sourceTree = "<group>"; usesTabs = 1; };
 		55A90227147D89380037E18F /* PcsxrMemoryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PcsxrMemoryObject.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1810,6 +1849,7 @@
 				French,
 				German,
 				en,
+				es,
 			);
 			mainGroup = 08FB7794FE84155DC02AAC07 /* Pcsxr */;
 			projectDirPath = "";
@@ -2229,6 +2269,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				02FE55E716765F9400205CF2 /* English */,
+				5598AAC317D2D2010024F71D /* es */,
 			);
 			name = KeyNames.plist;
 			path = English.lproj;
@@ -2238,6 +2279,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				28F0C3C5146521A700A90285 /* English */,
+				5598AAC517D2D2030024F71D /* es */,
 			);
 			name = Configuration.xib;
 			path = English.lproj;
@@ -2247,6 +2289,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				28F0C3C8146521B000A90285 /* English */,
+				5598AAC817D2D2060024F71D /* es */,
 			);
 			name = PCSXR.xib;
 			path = English.lproj;
@@ -2256,6 +2299,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				28F0C3CB146521B700A90285 /* English */,
+				5598AAC917D2D2070024F71D /* es */,
 			);
 			name = AddPluginSheet.xib;
 			path = English.lproj;
@@ -2265,6 +2309,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2BA178B30514CE260026D74D /* English */,
+				5598AAC617D2D2040024F71D /* es */,
 			);
 			name = InfoPlist.strings;
 			path = English.lproj;
@@ -2274,6 +2319,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2BBB1787051E0D9700B84448 /* English */,
+				5598AAC417D2D2020024F71D /* es */,
 			);
 			name = Credits.rtf;
 			path = English.lproj;
@@ -2283,6 +2329,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A74B517868BEA0052D185 /* English */,
+				5598AACC17D2D20A0024F71D /* es */,
 			);
 			name = Bladesio1PluginConfig.xib;
 			sourceTree = "<group>";
@@ -2291,6 +2338,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A74B717868BEA0052D185 /* English */,
+				5598AACD17D2D20B0024F71D /* es */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -2299,6 +2347,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A74B917868BEA0052D185 /* English */,
+				5598AACE17D2D20C0024F71D /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2307,6 +2356,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A74BB17868BEA0052D185 /* English */,
+				5598AACF17D2D20D0024F71D /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2315,6 +2365,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A750A17868BEB0052D185 /* English */,
+				5598AAD017D2D20E0024F71D /* es */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -2323,6 +2374,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A750C17868BEB0052D185 /* English */,
+				5598AAD117D2D20F0024F71D /* es */,
 			);
 			name = DFCdromPluginConfig.xib;
 			sourceTree = "<group>";
@@ -2331,6 +2383,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A750E17868BEB0052D185 /* English */,
+				5598AAD217D2D2100024F71D /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2339,6 +2392,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A751017868BEB0052D185 /* English */,
+				5598AAD317D2D2110024F71D /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2347,6 +2401,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A751E17868BEB0052D185 /* English */,
+				5598AAD417D2D2120024F71D /* es */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -2355,6 +2410,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A752017868BEB0052D185 /* English */,
+				5598AAD517D2D2130024F71D /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2363,6 +2419,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A752217868BEB0052D185 /* English */,
+				5598AAD617D2D2140024F71D /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2371,6 +2428,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A752417868BEB0052D185 /* English */,
+				5598AAD717D2D2150024F71D /* es */,
 			);
 			name = NetPcsxrHIDInputPluginMain.xib;
 			sourceTree = "<group>";
@@ -2379,6 +2437,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A753717868BEB0052D185 /* English */,
+				5598AAD817D2D2160024F71D /* es */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -2387,6 +2446,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A753917868BEB0052D185 /* English */,
+				5598AAD917D2D2170024F71D /* es */,
 			);
 			name = DFNet.xib;
 			sourceTree = "<group>";
@@ -2395,6 +2455,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A753B17868BEB0052D185 /* English */,
+				5598AADA17D2D2180024F71D /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2403,6 +2464,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A753D17868BEB0052D185 /* English */,
+				5598AADB17D2D2190024F71D /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2411,6 +2473,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A753F17868BEC0052D185 /* English */,
+				5598AADC17D2D21A0024F71D /* es */,
 			);
 			name = SockDialog.xib;
 			sourceTree = "<group>";
@@ -2419,6 +2482,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A755B17868BEC0052D185 /* English */,
+				5598AADD17D2D21B0024F71D /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2427,6 +2491,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A755E17868BEC0052D185 /* English */,
+				5598AADE17D2D21C0024F71D /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2435,6 +2500,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A756117868BEC0052D185 /* English */,
+				5598AADF17D2D21D0024F71D /* es */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -2443,6 +2509,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A756317868BEC0052D185 /* English */,
+				5598AAE017D2D21E0024F71D /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2451,6 +2518,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A756517868BEC0052D185 /* English */,
+				5598AAE117D2D21F0024F71D /* es */,
 			);
 			name = NetSfPeopsSpuPluginMain.xib;
 			sourceTree = "<group>";
@@ -2459,6 +2527,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A756917868BEC0052D185 /* English */,
+				5598AAE217D2D2200024F71D /* es */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -2467,6 +2536,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A756B17868BEC0052D185 /* English */,
+				5598AAE317D2D2210024F71D /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2475,6 +2545,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A756D17868BEC0052D185 /* English */,
+				5598AAE417D2D2220024F71D /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2483,6 +2554,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A756F17868BEC0052D185 /* English */,
+				5598AAE517D2D2230024F71D /* es */,
 			);
 			name = NetSfPeopsSoftGPUConfig.xib;
 			sourceTree = "<group>";
@@ -2491,6 +2563,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A758617868BED0052D185 /* English */,
+				5598AAE617D2D2240024F71D /* es */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -2499,6 +2572,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A758817868BED0052D185 /* English */,
+				5598AAE717D2D2250024F71D /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2507,6 +2581,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A758A17868BED0052D185 /* English */,
+				5598AAE817D2D2260024F71D /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2515,6 +2590,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A758C17868BED0052D185 /* English */,
+				5598AAE917D2D2270024F71D /* es */,
 			);
 			name = NetSfPeopsOpenGLConfig.xib;
 			sourceTree = "<group>";
@@ -2523,6 +2599,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				559DACED146C72FF00C5DF71 /* English */,
+				5598AAC717D2D2050024F71D /* es */,
 			);
 			name = Localizable.strings;
 			path = English.lproj;
@@ -2532,6 +2609,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55C7A215148B2B3800C22ABC /* English */,
+				5598AACA17D2D2080024F71D /* es */,
 			);
 			name = PcsxrMemCardDocument.xib;
 			sourceTree = "<group>";
@@ -2540,6 +2618,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D422E66D16DC48D000526DCF /* English */,
+				5598AACB17D2D2090024F71D /* es */,
 			);
 			name = CheatWindow.xib;
 			sourceTree = "<group>";
@@ -2916,7 +2995,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../libpcsxcore,
@@ -3213,7 +3291,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../libpcsxcore,
@@ -3237,7 +3314,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../libpcsxcore,

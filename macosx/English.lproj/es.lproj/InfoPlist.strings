@@ -1,0 +1,10 @@
+/* Localized versions of Info.plist keys */
+
+CFBundleName = "PCSXR";
+CFBundleShortVersionString = "PCSX-Reloaded 1.9.94";
+CFBundleGetInfoString = "PlayStation Emulator based on PCSX-df Project.";
+NSHumanReadableCopyright = "Copyright © 2003-2005 PCSX Team, Gil Pedersen, Nicolas Pepin-Perreault.\nCopyright © 2009-2013 PCSX-Reloaded Team.";
+"Playstation Emulator Plug-in" = "Playstation Emulator Plug-in";
+"Playstation BIOS Image" = "Playstation BIOS Image";
+"PCSXR Memory Card" = "PCSXR Memory Card";
+"PCSXR Freeze State" = "PCSXR Freeze State";

@@ -204,7 +204,7 @@
 		return;
 	}
 	
-	NSInteger deleteOkay = NSRunAlertPanel(NSLocalizedString(@"Delete Block", nil), NSLocalizedString(@"Deleting a block will remove all saved data on that block.\n\nThis cannot be undone.", nil), NSLocalizedString(@"Cancel", nil), NSLocalizedString(@"Delete", nil), nil);
+	NSInteger deleteOkay = NSRunAlertPanel(NSLocalizedString(@"Delete Block", @"The block will be deleted"), NSLocalizedString(@"Deleting a block will remove all saved data on that block.\n\nThis cannot be undone.", @"Delete block cannot be undone"), NSLocalizedString(@"Cancel", @"Cancel"), NSLocalizedString(@"Delete", nil), nil);
 	if (deleteOkay == NSAlertAlternateReturn) {
 		[self deleteMemoryBlocksAtIndex:(int)selectedIndex card:(int)memCardSelect];
 		
