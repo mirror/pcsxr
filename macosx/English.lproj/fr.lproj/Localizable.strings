@@ -65,15 +65,15 @@
 // Cocoa Code
 "Plugin Initialization Failed!" = "Plugin Initialization Failed!";
 "Pcsxr failed to initialize the selected %@ plugin (error=%i).\nThe plugin might not work with your system." = "Pcsxr failed to initialize the selected %1$@ plugin (error=%2$i).\nThe plugin might not work with your system.";
-"Error!" = "Error!";
-"Installation Succesfull" = "Installation Succesfull";
-"Installation Failed!" = "Installation Failed!";
-"The installation of the specified plugin was succesfull. In order to use it, please restart the application." = "The installation of the specified plugin was succesfull. In order to use it, please restart the application.";
-"The installation of the specified plugin failed. Please try again, or make a manual install." ="The installation of the specified plugin failed. Please try again, or make a manual install.";
-"Missing plugins!" = "Missing plugins!";
-"Pcsxr is missing one or more critical plugins. You will need to install these in order to play games." = "Pcsx is missing one or more critical plugins. You will need to install these in order to play games.";
-"Missing BIOS!" = "Missing BIOS!";
-"Pcsxr wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\nIf you have a BIOS available, please copy it to\n%@" = "Pcsxr wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\nIf you have a BIOS available, please copy it to:\n%@";
+//"Error!" = "Error!";
+//"Installation Succesfull" = "Installation Succesfull";
+//"Installation Failed!" = "Installation Failed!";
+//"The installation of the specified plugin was succesfull. In order to use it, please restart the application." = "The installation of the specified plugin was succesfull. In order to use it, please restart the application.";
+//"The installation of the specified plugin failed. Please try again, or make a manual install." ="The installation of the specified plugin failed. Please try again, or make a manual install.";
+//"Missing plugins!" = "Missing plugins!";
+//"Pcsxr is missing one or more critical plugins. You will need to install these in order to play games." = "Pcsx is missing one or more critical plugins. You will need to install these in order to play games.";
+//"Missing BIOS!" = "Missing BIOS!";
+//"Pcsxr wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\nIf you have a BIOS available, please copy it to\n%@" = "Pcsxr wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\nIf you have a BIOS available, please copy it to:\n%@";
 
 "Error opening file" = "Érreur en ouvrant le fichier.";
 "Unable to open %@: %@" = "Unable to open %1$@: %2$@";
@@ -91,9 +91,9 @@
 //"Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@ (%@),\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?" = "Memory card %1$i does not have enough free consecutive blocks.\n\nIn order to copy over \"%2$@ (%3$@),\" memory card %4$i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?";
 
 //Cheat manager
-"Save Cheats" = "Save Cheats";
-"The cheat codes have not been applied. Unapplied cheats will not run nor be saved. Do you wish to save?" = "The cheat codes have not been applied. Unapplied cheats will not run nor be saved. Do you wish to save?";
-"Unsaved Changes" = "Unsaved Changes";
+//"Save Cheats" = "Save Cheats";
+//"The cheat codes have not been applied. Unapplied cheats will not run nor be saved. Do you wish to save?" = "The cheat codes have not been applied. Unapplied cheats will not run nor be saved. Do you wish to save?";
+//"Unsaved Changes" = "Unsaved Changes";
 "(Untitled)" = "(Sans titre)";
 
 //General buttons
