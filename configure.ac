@@ -159,6 +159,26 @@ if test "$BUILD_SIO1" = "yes"; then
 	AC_CONFIG_FILES([plugins/bladesio1/Makefile])
 fi
 
+#####apt-get install libavcodec-dev libavformat-dev libavutil-dev
+AC_ARG_ENABLE(ccdda, [  --enable-ccdda         support for compressed CDDA formats via ffmpeg (default=no)],
+[ BUILD_CCDDA="$enableval" ],[ BUILD_CCDDA="no" ])
+
+if test "$BUILD_CCDDA" = "yes"; then
+	AC_DEFINE([ENABLE_CCDDA], [1], [Defined when compressed cdda support wanted.])
+	#AC_CHECK_HEADER([libavutil/mathematics.h],, AC_MSG_ERROR("No ffmpeg headers libavcodec/avcodec.h libavutil/mathematics.h"))
+	#AC_CHECK_HEADER([libavcodec/avcodec.h],, AC_MSG_ERROR("No ffmpeg headers libavcodec/avcodec.h libavutil/mathematics.h"))
+	AC_CHECK_HEADERS([libavcodec/avcodec.h libavutil/mathematics.h libavformat/avformat.h],,AC_MSG_ERROR("No ffmpeg headers libavcodec/avcodec.h libavformat/avformat.h libavutil/mathematics.h"))
+	#AC_CHECK_LIB([avcodec], [main], [LIBS="$LIBS -l:libavcodec.so.52 "], AC_MSG_ERROR("No avcodec library"))
+	#AC_CHECK_LIB(avutil, [main], [LIBS="$LIBS -l:libavutil.so.52 "], AC_MSG_ERROR("No avutil library"))
+	#AC_CHECK_LIB(avformat, [main], [LIBS="$LIBS -l:libavformat.so.52 "], AC_MSG_ERROR("No avformat library"))
+	AC_CHECK_LIB([avcodec], [main], [LIBS="$LIBS -lavcodec"], AC_MSG_ERROR("No avcodec library"))
+	AC_CHECK_LIB([avutil], [main], [LIBS="$LIBS -lavutil"], AC_MSG_ERROR("No avutil library"))
+	AC_CHECK_LIB([avformat], [main], [LIBS="$LIBS -lavformat"], AC_MSG_ERROR("No avformat library"))
+	#AC_CHECK_LIB(avcodec  ,[main],AC_DEFINE([HAVE_LIBAVCODEC],   [1], [ ]),AC_MSG_ERROR([$errormsgl]))
+	#AC_CHECK_LIB(swscale  ,[main],AC_DEFINE([HAVE_LIBSWSCALE],   [1], [ ]),AC_MSG_ERROR([$errormsgl]), [-lavutil])
+	#AC_CHECK_LIB(avdevice ,[main],AC_DEFINE([HAVE_LIBAVDEVICE],  [1], [ ]),AC_MSG_ERROR([$errormsgl]), [-lavcodec -lavutil -lavformat])
+fi
+
 AM_CONDITIONAL(X86_NASM, false)
 
 if expr x"$build_cpu" : 'xi.86' > /dev/null; then
@@ -206,7 +226,7 @@ if test "x$DYNARECSEL" = xauto; then
 fi
 
 if test "x$DYNARECSEL" = xno; then
-        AC_DEFINE([NOPSXREC], [1], [Define if we are compiling without dynamic recompiler.])
+		AC_DEFINE([NOPSXREC], [1], [Define if we are compiling without dynamic recompiler.])
 elif test "x$DYNARECSEL" = xx86; then
 	AC_DEFINE([__i386__], [1], [Define if we are compiling for x86 architectures.])
 	AM_CONDITIONAL(ARCH_X86, true)
