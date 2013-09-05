@@ -856,7 +856,7 @@ void sysdep_create_display(void)                       // create display
        if(bModeChanged==0)                             // -> no mode found?
         {
          free(modes);                                  // --> free infos
-         printf("No proper fullscreen mode found!\n"); // --> some info output
+         printf("%s", "No proper fullscreen mode found!\n"); // --> some info output
         }
       }
     }
@@ -1013,9 +1013,9 @@ void sysdep_create_display(void)                       // create display
  glXMakeCurrent(display,window,cx);
 
 /* 
- printf(glGetString(GL_VENDOR));
+ printf("%s", glGetString(GL_VENDOR));
  printf("\n");
- printf(glGetString(GL_RENDERER));
+ printf("%s", glGetString(GL_RENDERER));
  printf("\n");
 */
 

@@ -1102,7 +1102,7 @@ void SysErrorMessage(gchar *primary, gchar *secondary) {
 				primary,
 				NULL);
 		gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(message_dialog),
-				secondary);
+				"s", secondary);
 
 		gtk_dialog_run(GTK_DIALOG(message_dialog));
 		gtk_widget_destroy(message_dialog);
@@ -1121,7 +1121,7 @@ void SysInfoMessage(gchar *primary, gchar *secondary) {
 				primary,
 				NULL);
 		gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(message_dialog),
-				secondary);
+				"s", secondary);
 
 		gtk_dialog_run(GTK_DIALOG(message_dialog));
 		gtk_widget_destroy(message_dialog);
