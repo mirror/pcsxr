@@ -35,6 +35,19 @@
 #endif
 #include <zlib.h>
 
+#ifdef ENABLE_CCDDA
+#include "libavcodec/avcodec.h"
+#include "libavutil/mathematics.h"
+#include "libavformat/avformat.h"
+
+#define INBUF_SIZE 4096
+#define AUDIO_INBUF_SIZE INBUF_SIZE*4
+#define AUDIO_REFILL_THRESH 4096
+/*#ifndef AVCODEC_MAX_AUDIO_FRAME_SIZE
+	#define 	AVCODEC_MAX_AUDIO_FRAME_SIZE   192000
+#endif*/
+#endif
+
 unsigned int cdrIsoMultidiskCount;
 unsigned int cdrIsoMultidiskSelect;
 
@@ -87,7 +100,15 @@ struct trackinfo {
 	u8 start[3];		// MSF-format
 	u8 length[3];		// MSF-format
 	FILE *handle;		// for multi-track images CDDA
-	unsigned int start_offset; // byte offset from start of above file
+	enum {NONE=0, BIN=1, CCDDA=2
+#ifdef ENABLE_CCDDA1
+		,MP3=AV_CODEC_ID_MP3, APE=AV_CODEC_ID_APE, FLAC=AV_CODEC_ID_FLAC
+#endif
+	} cddatype;	// BIN, WAV, MP3, APE
+	void* decoded_buffer;
+	u32	 len_decoded_buffer;
+	char filepath[256];
+	u32 start_offset; // byte offset from start of above file
 };
 
 #define MAXTRACKS 100 /* How many tracks can a CD hold? */
@@ -135,6 +156,265 @@ static void tok2msf(char *time, char *msf) {
 	else {
 		msf[2] = 0;
 	}
+}
+
+static int get_cdda_type(const char *str)
+{
+	const size_t lenstr = strlen(str);
+	if (strncmp((str+lenstr-3), "bin", 3) == 0) {
+		return BIN;
+	}
+#ifdef ENABLE_CCDDA1
+	else if (strncmp((str+lenstr-3), "mp3", 3) == 0) {
+		return MP3;
+	}
+	else if (strncmp((str+lenstr-3), "ape", 3) == 0) {
+		return APE;
+	}
+	else if (strncmp((str+lenstr-4), "flac", 4) == 0) {
+		return FLAC;
+	}
+#endif
+#ifdef ENABLE_CCDDA
+	else {
+		return CCDDA;
+	}
+#else
+	else {
+		static boolean ccddaWarn = TRUE;
+		if (ccddaWarn) {
+			SysMessage(_(" -> Compressed CDDA support is not compiled with this version. Such tracks will be silent."));
+			ccddaWarn = FALSE;
+		}
+	}
+#endif
+	return BIN; // no valid extension or no support; assume bin
+}
+
+static int get_compressed_cdda_track_length(const char* filepath) {
+	int seconds = -1;
+#ifdef ENABLE_CCDDA
+	av_register_all();
+
+	AVFormatContext * inAudioFormat = NULL;
+	inAudioFormat = avformat_alloc_context();
+	int errorCode = avformat_open_input(&inAudioFormat, filepath, NULL, NULL);
+	avformat_find_stream_info(inAudioFormat, NULL);
+	seconds = (int)(inAudioFormat->duration/AV_TIME_BASE);
+	avformat_close_input(&inAudioFormat);
+#endif
+	return seconds;
+}
+
+
+#ifdef ENABLE_CCDDA
+static int decode_compressed_cdda_track(FILE* outfile, const char* infilepath, s32 id) {
+	AVCodec *codec;
+	AVCodecContext *c=NULL;
+	AVFormatContext *inAudioFormat = NULL;
+	s32 len;
+	AVPacket avpkt;
+	AVFrame *decoded_frame = NULL;
+	s32 got_frame = 0, moreFrames = 1;
+	s32 audio_stream_index;
+	s32 ret;
+
+	//av_init_packet(&avpkt);
+	
+	avcodec_register_all();
+	
+	inAudioFormat = avformat_alloc_context();
+	int errorCode = avformat_open_input(&inAudioFormat, infilepath, NULL, NULL);
+	if (errorCode) {
+		SysMessage(_("Audio file opening failed!\n"));
+		return errorCode;
+	}
+	avformat_find_stream_info(inAudioFormat, NULL);
+
+	/* select the audio stream */
+	ret = av_find_best_stream(inAudioFormat, AVMEDIA_TYPE_AUDIO, -1, -1, &codec, 0);
+	if (ret < 0) {
+		avformat_close_input(&inAudioFormat);
+		SysMessage(_("Couldn't find any audio stream in file\n"));
+		return ret;
+	}
+	audio_stream_index = ret;
+	c = inAudioFormat->streams[audio_stream_index]->codec;
+	av_opt_set_int(c, "refcounted_frames", 1, 0);
+
+	c->sample_fmt = AV_SAMPLE_FMT_S16;
+	c->channels = 2;
+	c->sample_rate = 44100;
+
+	/* open it */
+	if (avcodec_open2(c, codec, NULL) < 0) {
+		SysMessage(_("Audio decoder opening failed. Compressed audio support not available.\n"));
+		avformat_close_input(&inAudioFormat);
+		return 3; // codec open failed
+	}
+	//http://ffmpeg.org/doxygen/trunk/doc_2examples_2filtering_audio_8c-example.html#a80
+	//http://blog.tomaka17.com/2012/03/libavcodeclibavformat-tutorial/
+	do {
+		if ((moreFrames=av_read_frame(inAudioFormat, &avpkt)) < 0) {// returns non-zero on error
+			break;
+		}
+
+		if (avpkt.stream_index != audio_stream_index) {
+			continue;
+		}
+
+		if (!decoded_frame) {
+			if (!(decoded_frame = avcodec_alloc_frame())) {
+				SysMessage(_(" -> Error allocating audio frame buffer. This track will not be available."));
+				avformat_close_input(&inAudioFormat);
+				avcodec_free_frame(&decoded_frame);
+				return 1; // error decoding frame
+			}
+		} else {
+			avcodec_get_frame_defaults(decoded_frame);
+		}
+		len = avcodec_decode_audio4(c, decoded_frame, &got_frame, &avpkt);
+		if (len > 0 && got_frame) {
+			/* if a frame has been decoded, output it */
+			int data_size = av_samples_get_buffer_size(NULL, c->channels,
+								decoded_frame->nb_samples,
+								c->sample_fmt, 1);
+			//printf ("Channels %i/%i: %i -> %i/%i\n", len, data_size, decoded_frame->sample_rate, c->channels, c->sample_rate);
+			fwrite(decoded_frame->data[0], 1, data_size, outfile);
+		}
+		av_free_packet(&avpkt);
+		//avcodec_free_frame(&decoded_frame);
+	} while (moreFrames >= 0); // TODO: check for possible leaks
+
+	// file will be closed later on, now just flush it
+	fflush(outfile);
+
+	avformat_close_input(&inAudioFormat);
+	//avcodec_close(c);
+	//av_free(c);
+	avcodec_free_frame(&decoded_frame);
+	return 0;
+}
+#endif
+
+
+#ifdef ENABLE_CCDDA1
+static int decode_compressed_cdda_track(FILE* outfile, FILE* infile, enum AVCodecID id) {
+	AVCodec *codec;
+	AVCodecContext *c=NULL;
+	s32 len;
+	u8 inbuf[AUDIO_INBUF_SIZE + FF_INPUT_BUFFER_PADDING_SIZE];
+	AVPacket avpkt;
+	AVFrame *decoded_frame = NULL;
+	//fseek(infile, 0, SEEK_SET);
+	//fseek(outfile, 0, SEEK_SET);
+
+	av_init_packet(&avpkt);
+
+	/* find the mpeg audio decoder */
+	avcodec_register_all();
+	codec = avcodec_find_decoder(id);
+	if (!codec) {
+		SysMessage("Audio decoder not found. Is ffmpeg compiled with support for this format?\n");
+		return 2; // codec not found
+	}
+	//codec->id = AV_CODEC_ID_PCM_S16LE;
+
+	c = avcodec_alloc_context3(codec);
+
+	/* open it */
+	if (avcodec_open2(c, codec, NULL) < 0) {
+		SysMessage("Audio decoder opening failed. Compressed audio support not available.\n");
+		return 3; // codec open failed
+	}
+
+	/* decode until eof */
+	avpkt.data = inbuf;
+	avpkt.size = fread(inbuf, 1, AUDIO_INBUF_SIZE, infile);
+	c->sample_fmt = AV_SAMPLE_FMT_S16;
+	c->channels = 2;
+	c->sample_rate = 44100;
+
+	while (avpkt.size > 0) {
+		int got_frame = 0;
+		if (!decoded_frame) {
+			if (!(decoded_frame = avcodec_alloc_frame())) {
+				SysPrintf(" -> Error allocating audio frame buffer. Track will not be available.");
+				return 1; // error decoding frame
+			}
+		} else {
+			avcodec_get_frame_defaults(decoded_frame);
+		}
+
+		len = avcodec_decode_audio4(c, decoded_frame, &got_frame, &avpkt);
+		if (len < 0) {
+			SysPrintf(" -> Error decoding audio track. IDTAG present? Track will not be available.");
+			return 5;
+		}
+		if (len > 0 && got_frame) {
+			/* if a frame has been decoded, output it */
+			int data_size = av_samples_get_buffer_size(NULL, c->channels,
+														decoded_frame->nb_samples,
+														c->sample_fmt, 1);
+			//printf ("Channels %i/%i %i/%i\n", decoded_frame->channels, decoded_frame->sample_rate, c->channels, c->sample_rate);
+			fwrite(decoded_frame->data[0], 1, data_size, outfile);
+		}
+		avpkt.size -= len;
+		avpkt.data += len;
+		avpkt.dts = avpkt.pts = AV_NOPTS_VALUE;
+		if (avpkt.size < AUDIO_REFILL_THRESH) {
+			/* Refill the input buffer, to avoid trying to decode
+				* incomplete frames. Instead of this, one could also use
+				* a parser, or use a proper container format through
+				* libavformat. */
+			memmove(inbuf, avpkt.data, avpkt.size);
+			avpkt.data = inbuf;
+			len = fread(avpkt.data + avpkt.size, 1,
+					AUDIO_INBUF_SIZE - avpkt.size, infile);
+			if (len > 0)
+				avpkt.size += len;
+		}
+	}
+
+	// file will be closed later on, now just flush it
+	fflush(outfile);
+
+	avcodec_close(c);
+	av_free(c);
+	avcodec_free_frame(&decoded_frame);
+	return 0;
+}
+#endif
+
+static int do_decode_cdda(struct trackinfo* tri, u32 tracknumber) {
+#ifndef ENABLE_CCDDA
+	return 4; // support is not compiled in
+#else
+	tri->decoded_buffer = malloc(tri->len_decoded_buffer);
+	FILE* decoded_cdda = fmemopen(tri->decoded_buffer, tri->len_decoded_buffer, "wb");
+
+	if (decoded_cdda == NULL || tri->decoded_buffer == NULL) {
+		SysMessage(_("Could not allocate memory to decode CDDA TRACK: %s\n"), tri->filepath);
+	}
+
+	fclose(tri->handle); // encoded file handle not needed anymore
+
+	int ret;
+	SysPrintf(_("Decoding audio tr#%u (%s)..."), tracknumber, tri->filepath);
+	// decode 2nd input param to 1st output param
+	if ((ret=decode_compressed_cdda_track(decoded_cdda, tri->filepath /*tri->handle*/, tri->cddatype)) == 0) {
+		int len1 = ftell(decoded_cdda);
+		if (len1 > tri->len_decoded_buffer) {
+			SysPrintf(_("Buffer overflow..."));
+		}
+		//printf("actual %i vs. %i estimated", len1, tri->len_decoded_buffer);
+		fclose(decoded_cdda); // close wb file now and will be opened as rb
+		tri->handle = fmemopen(tri->decoded_buffer, len1, "rb"); // change handle to decoded one
+		SysPrintf(_("OK\n"), tri->filepath);
+	}
+	tri->cddatype = BIN;
+	return ret;
+#endif
 }
 
 // this function tries to get the .toc file of the given .bin
@@ -423,13 +703,29 @@ static int parsecue(const char *isofile) {
 				SysPrintf(_("\ncould not open: %s\n"), filepath);
 				continue;
 			}
-			fseek(ti[numtracks + 1].handle, 0, SEEK_END);
-			file_len = ftell(ti[numtracks + 1].handle) / 2352;
+
+			// Check if extension is mp3, etc, and send to decoder if not lazy decoding
+			if ((ti[numtracks + 1].cddatype = get_cdda_type(filepath)) > BIN) {
+				int seconds = get_compressed_cdda_track_length(filepath) + 0;
+				ti[numtracks + 1].len_decoded_buffer = 44100 * (16/8) * 2 * seconds;
+				strcpy(ti[numtracks + 1].filepath, filepath);
+				file_len = ti[numtracks + 1].len_decoded_buffer/2352;
+
+				const boolean lazy_decode = TRUE; // TODO: config param
+				if (!lazy_decode) { // accurate length
+					do_decode_cdda(&(ti[numtracks + 1]), numtracks + 1);
+					fseek(ti[numtracks + 1].handle, 0, SEEK_END);
+					file_len = ftell(ti[numtracks + 1].handle) / 2352;
+				}
+			} else {
+				fseek(ti[numtracks + 1].handle, 0, SEEK_END);
+				file_len = ftell(ti[numtracks + 1].handle) / 2352;
+			}
 
 			if (numtracks == 0 && strlen(isofile) >= 4 &&
 				strcmp(isofile + strlen(isofile) - 4, ".cue") == 0)
 			{
-				// user selected .cue as image file, use it's data track instead
+				// user selected .cue as image file, use its data track instead
 				fclose(cdHandle);
 				cdHandle = fopen(filepath, "rb");
 			}
@@ -1041,7 +1337,7 @@ static void PrintTracks(void) {
 
 	for (i = 1; i <= numtracks; i++) {
 		SysPrintf(_("Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"),
-			i, (ti[i].type == DATA ? "DATA" : "AUDIO"),
+			i, (ti[i].type == DATA ? "DATA" : ti[i].cddatype == BIN ? "CDDA" : "CZDA"),
 			ti[i].start[0], ti[i].start[1], ti[i].start[2],
 			ti[i].length[0], ti[i].length[1], ti[i].length[2]);
 	}
@@ -1155,6 +1451,10 @@ static long CALLBACK ISOclose(void) {
 		if (ti[i].handle != NULL) {
 			fclose(ti[i].handle);
 			ti[i].handle = NULL;
+			if (ti[i].decoded_buffer != NULL) {
+				free(ti[i].decoded_buffer);
+			}
+			ti[i].cddatype = NONE;
 		}
 	}
 	numtracks = 0;
@@ -1347,6 +1647,11 @@ long CALLBACK ISOreadCDDA(unsigned char m, unsigned char s, unsigned char f, uns
 		for (file = track; file > 1; file--)
 			if (ti[file].handle != NULL)
 				break;
+	}
+
+	/* Need to decode audio track first if compressed still (lazy) */
+	if (ti[file].cddatype > BIN) {
+		do_decode_cdda(&(ti[file]), file);
 	}
 
 	ret = cdimg_read_func(ti[file].handle, ti[track].start_offset,
