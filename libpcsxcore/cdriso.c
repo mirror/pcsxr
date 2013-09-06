@@ -707,11 +707,12 @@ static int parsecue(const char *isofile) {
 			// Check if extension is mp3, etc, and send to decoder if not lazy decoding
 			if ((ti[numtracks + 1].cddatype = get_cdda_type(filepath)) > BIN) {
 				int seconds = get_compressed_cdda_track_length(filepath) + 0;
+				const boolean lazy_decode = TRUE; // TODO: config param
+
 				ti[numtracks + 1].len_decoded_buffer = 44100 * (16/8) * 2 * seconds;
 				strcpy(ti[numtracks + 1].filepath, filepath);
 				file_len = ti[numtracks + 1].len_decoded_buffer/2352;
 
-				const boolean lazy_decode = TRUE; // TODO: config param
 				if (!lazy_decode) { // accurate length
 					do_decode_cdda(&(ti[numtracks + 1]), numtracks + 1);
 					fseek(ti[numtracks + 1].handle, 0, SEEK_END);
