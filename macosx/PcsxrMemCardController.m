@@ -72,7 +72,7 @@
 - (void)memoryCardDidChangeNotification:(NSNotification *)aNote
 {
 	NSDictionary *dict = [aNote userInfo];
-	NSNumber *theNum = [dict objectForKey:memCardChangeNumberKey];
+	NSNumber *theNum = dict[memCardChangeNumberKey];
 	[self setupValues: theNum ? [theNum intValue] : 3];
 }
 
@@ -119,7 +119,7 @@
 	
 	int cardSize, freeConsBlocks, availBlocks;
 	
-	if ([[[fromCard memoryArray] objectAtIndex:selectedIndex] flagNameIndex] == memFlagFree) {
+	if ([[fromCard memoryArray][selectedIndex] flagNameIndex] == memFlagFree) {
 		NSBeep();
 		return;
 	}
@@ -128,7 +128,7 @@
 	freeConsBlocks = [toCard indexOfFreeBlocksWithSize:cardSize];
 	availBlocks = [toCard availableBlocks];
 	if (freeConsBlocks == -1 && availBlocks >= cardSize) {
-		PcsxrMemoryObject *tmpmemobj = [fromCard.memoryArray objectAtIndex:selectedIndex];
+		PcsxrMemoryObject *tmpmemobj = (fromCard.memoryArray)[selectedIndex];
 		NSInteger copyOK = NSRunInformationalAlertPanel(NSLocalizedString(@"Free Size", nil), NSLocalizedString(@"Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@ (%@),\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?", nil), NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), nil, cardnum, tmpmemobj.englishName, tmpmemobj.sjisName, cardnum);
 		if (copyOK != NSAlertDefaultReturn) {
 			return;
@@ -195,7 +195,7 @@
 	
 	NSInteger selectedIndex = [selected firstIndex];
 
-	PcsxrMemoryObject *tmpObj = [[curCard memoryArray] objectAtIndex:selectedIndex];
+	PcsxrMemoryObject *tmpObj = [curCard memoryArray][selectedIndex];
 	
 	if (tmpObj.flagNameIndex == memFlagFree) {
 		NSBeep();

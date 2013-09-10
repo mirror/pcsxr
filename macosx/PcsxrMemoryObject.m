@@ -222,7 +222,7 @@ static NSString *MemLabelEndLink;
 	if (memImageIndex == -1) {
 		return [PcsxrMemoryObject blankImage];
 	}
-	return [memImages objectAtIndex:memImageIndex];
+	return memImages[memImageIndex];
 }
 
 - (NSString*)flagName

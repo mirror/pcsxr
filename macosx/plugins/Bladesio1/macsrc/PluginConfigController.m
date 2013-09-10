@@ -55,14 +55,12 @@ void AboutDlgProc()
 	[icon setSize:size];
 
 	NSDictionary *infoPaneDict =
-	[[NSDictionary alloc] initWithObjectsAndKeys:
-	 [bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
-	 icon, @"ApplicationIcon",
-	 [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
-	 [bundle objectForInfoDictionaryKey:@"CFBundleVersion"], @"Version",
-	 [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"], @"Copyright",
-	 credits, @"Credits",
-	 nil];
+	@{@"ApplicationName": [bundle objectForInfoDictionaryKey:@"CFBundleName"],
+	 @"ApplicationIcon": icon,
+	 @"ApplicationVersion": [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
+	 @"Version": [bundle objectForInfoDictionaryKey:@"CFBundleVersion"],
+	 @"Copyright": [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"],
+	 @"Credits": credits};
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
@@ -98,20 +96,17 @@ void ReadConfig()
 {
 	NSDictionary *keyValues;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-								[NSDictionary dictionaryWithObjectsAndKeys:
-								 @NO, kSioEnabled,
-								 @33307, kSioPort,
-								 @"127.0.0.1", kSioIPAddress,
-								 @(PLAYER_DISABLED), kSioPlayer,
-								 nil], PrefsKey, nil]];
+	[defaults registerDefaults:@{PrefsKey: @{kSioEnabled: @NO,
+								 kSioPort: @33307,
+								 kSioIPAddress: @"127.0.0.1",
+								 kSioPlayer: @(PLAYER_DISABLED)}}];
 
 	keyValues = [defaults dictionaryForKey:PrefsKey];
 
-	settings.enabled = [[keyValues objectForKey:kSioEnabled] boolValue];
-	settings.port = [[keyValues objectForKey:kSioPort] unsignedShortValue];
-	settings.player = [[keyValues objectForKey:kSioPlayer] intValue];
-	strlcpy(settings.ip, [[keyValues objectForKey:kSioIPAddress] cStringUsingEncoding:NSASCIIStringEncoding], sizeof(settings.ip));
+	settings.enabled = [keyValues[kSioEnabled] boolValue];
+	settings.port = [keyValues[kSioPort] unsignedShortValue];
+	settings.player = [keyValues[kSioPlayer] intValue];
+	strlcpy(settings.ip, [keyValues[kSioIPAddress] cStringUsingEncoding:NSASCIIStringEncoding], sizeof(settings.ip));
 }
 
 @implementation Bladesio1PluginConfigController
@@ -137,9 +132,9 @@ void ReadConfig()
 		return;
 	}
 	
-	[writeDic setObject:(([enabledButton state]  == NSOnState) ? @YES : @NO) forKey:kSioEnabled];
-	[writeDic setObject:theAddress forKey:kSioIPAddress];
-	[writeDic setObject:@((u16)[portField intValue]) forKey:kSioPort];
+	writeDic[kSioEnabled] = (([enabledButton state]  == NSOnState) ? @YES : @NO);
+	writeDic[kSioIPAddress] = theAddress;
+	writeDic[kSioPort] = @((u16)[portField intValue]);
 	
 	{
 		int player;
@@ -149,7 +144,7 @@ void ReadConfig()
 			case 1: player = PLAYER_MASTER; break;
 			case 2: player = PLAYER_SLAVE; break;
 		}
-		[writeDic setObject:@(player) forKey:kSioPlayer];
+		writeDic[kSioPlayer] = @(player);
 	}
 
 	// write to defaults
@@ -166,7 +161,7 @@ void ReadConfig()
 {
 	BOOL isEnabled = [enabledButton state] == NSOnState ? YES : NO;
 	
-	for (NSView *subView in [[[configBox subviews] objectAtIndex:0] subviews]) {
+	for (NSView *subView in [[configBox subviews][0] subviews]) {
 		if ([subView isKindOfClass:[NSTextField class]] && ![(NSTextField*)subView isEditable]) {
 				[(NSTextField*)subView setTextColor:isEnabled ? [NSColor controlTextColor] : [NSColor disabledControlTextColor]];
 		} else {
@@ -192,11 +187,11 @@ void ReadConfig()
 	// load from preferences
 	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 
-	[enabledButton setState: [[keyValues objectForKey:kSioEnabled] boolValue] ? NSOnState : NSOffState];
-	[ipAddressField setTitleWithMnemonic:[keyValues objectForKey:kSioIPAddress]];
-	[portField setIntValue:[[keyValues objectForKey:kSioPort] intValue]];
+	[enabledButton setState: [keyValues[kSioEnabled] boolValue] ? NSOnState : NSOffState];
+	[ipAddressField setTitleWithMnemonic:keyValues[kSioIPAddress]];
+	[portField setIntValue:[keyValues[kSioPort] intValue]];
 	
-	switch ([[keyValues objectForKey:kSioPlayer] integerValue]) {
+	switch ([keyValues[kSioPlayer] integerValue]) {
 		default:
 		case PLAYER_DISABLED: [playerMenu selectItemAtIndex:0]; break;
 		case PLAYER_MASTER: [playerMenu selectItemAtIndex:1]; break;

@@ -41,7 +41,7 @@
 
 - (void)addToDictionary:(NSMutableDictionary*)toAdd
 {
-	[toAdd setObject:self forKey:self.argument];
+	toAdd[self.argument] = self;
 }
 
 - (NSString*)description

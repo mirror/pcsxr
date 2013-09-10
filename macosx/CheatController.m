@@ -279,7 +279,7 @@
 - (void)editCheatCodeSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
 	if (returnCode == NSOKButton) {
-		PcsxrCheatTemp *tmpCheat = [cheats objectAtIndex:[cheatView selectedRow]];
+		PcsxrCheatTemp *tmpCheat = cheats[[cheatView selectedRow]];
 		if (![tmpCheat.cheatValues isEqualToArray:tempCheatCodes]) {
 			tmpCheat.cheatValues = tempCheatCodes;
 			[self setDocumentEdited:YES];
@@ -295,7 +295,7 @@
 		NSBeep();
 		return;
 	}
-	NSMutableArray *tmpArray = [[cheats objectAtIndex:[cheatView selectedRow]] cheatValues];
+	NSMutableArray *tmpArray = [cheats[[cheatView selectedRow]] cheatValues];
 	NSMutableArray *newCheats = [[NSMutableArray alloc] initWithArray:tmpArray copyItems:YES];
 	self.tempCheatCodes = newCheats;
 	[NSApp beginSheet:editCheatWindow modalForWindow:[self window] modalDelegate:self didEndSelector:@selector(editCheatCodeSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];

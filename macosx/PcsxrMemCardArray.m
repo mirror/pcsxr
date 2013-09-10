@@ -181,7 +181,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 #endif
 		return NO;
 	}
-	PcsxrMemoryObject *tmpObj = [rawArray objectAtIndex:idx];
+	PcsxrMemoryObject *tmpObj = rawArray[idx];
 
 	int memSize = tmpObj.blockSize;
 	
@@ -260,7 +260,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 		return [self freeBlocks];
 	}
 
-	return [[rawArray objectAtIndex:idx] blockSize];
+	return [rawArray[idx] blockSize];
 }
 
 - (void)compactMemory
@@ -317,7 +317,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 		return;
 	}
 	
-	PcsxrMemoryObject *theObj = [rawArray objectAtIndex:slotnum];
+	PcsxrMemoryObject *theObj = rawArray[slotnum];
 	
 	McdBlock flagBlock;
 	

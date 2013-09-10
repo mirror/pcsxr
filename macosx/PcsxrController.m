@@ -110,7 +110,7 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 
 		if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 			NSArray* files = [openDlg URLs];
-			SetIsoFile((const char *)[[[files objectAtIndex:0] path] fileSystemRepresentation]);
+			SetIsoFile([[files[0] path] fileSystemRepresentation]);
 			SetCdOpenCaseTime(time(NULL) + 2);
 			LidInterrupt();
 		}
@@ -206,7 +206,7 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 	[openDlg setAllowedFileTypes:[PcsxrDiscHandler supportedUTIs]];
 
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
-        NSURL *url = [[openDlg URLs] objectAtIndex:0];
+        NSURL *url = [openDlg URLs][0];
         [recentItems addRecentItem:url];
 		[self runURL:url];
     }
@@ -405,7 +405,7 @@ otherblock();\
 	self.sleepInBackground = [[NSUserDefaults standardUserDefaults] boolForKey:@"PauseInBackground"];
 	
 	NSArray *progArgs = [[NSProcessInfo processInfo] arguments];
-	if ([progArgs count] > 1 && ![[progArgs objectAtIndex:1] hasPrefix:@"-psn"]) {
+	if ([progArgs count] > 1 && ![progArgs[1] hasPrefix:@"-psn"]) {
 		self.skipFiles = [NSMutableArray array];
 		
 		BOOL isLaunchable = NO;
@@ -491,7 +491,7 @@ otherblock();\
 					if ([progArgs count] <= ++i) {
 						ParseErrorStr(@"Not enough arguments.");
 					}
-					NSString *path = [[progArgs objectAtIndex:i] stringByExpandingTildeInPath];
+					NSString *path = [progArgs[i] stringByExpandingTildeInPath];
 					if (![[NSFileManager defaultManager] fileExistsAtPath:path])
 					{
 						ParseErrorStr([NSString stringWithFormat:@"The file \"%@\" does not exist.", path]);
@@ -512,7 +512,7 @@ otherblock();\
 			HandleArgElse(kPCSXRArgumentMcd2, NO, ^{mcdBlock(2);})
 			HandleArgElse(kPCSXRArgumentFreeze, NO, freezeBlock)
 			else {
-				[unknownOptions addObject:[progArgs objectAtIndex:i]];
+				[unknownOptions addObject:progArgs[i]];
 			}
 		}
 #ifdef DEBUG
@@ -526,7 +526,7 @@ otherblock();\
 		unknownOptions = nil;
 		if (!isLaunchable && hasParsedAnArgument) {
 			NSMutableArray *mutProgArgs = [NSMutableArray arrayWithArray:progArgs];
-			NSString *appRawPath = [mutProgArgs objectAtIndex:0];
+			NSString *appRawPath = mutProgArgs[0];
 			//Remove the app file path from the array
 			[mutProgArgs removeObjectAtIndex:0];
 			NSString *arg = [mutProgArgs componentsJoinedByString:@" "];
@@ -567,7 +567,7 @@ otherblock();\
 	}*/
 
 	for (NSString *key in prefByteKeys) {
-		u8 *dst = (u8 *)[[prefByteKeys objectForKey:key] pointerValue];
+		u8 *dst = (u8 *)[prefByteKeys[key] pointerValue];
 		if (dst != NULL) *dst = [defaults boolForKey:key];
 	}
 
@@ -615,7 +615,7 @@ otherblock();\
 	if ([defaults boolForKey:@"UseHLE"] || 0 == [biosList count]) {
 		strcpy(Config.Bios, "HLE");
 	} else {
-		str = [(NSString *)[biosList objectAtIndex:0] fileSystemRepresentation];
+		str = [(NSString *)biosList[0] fileSystemRepresentation];
 		if (str != nil) strlcpy(Config.Bios, str, MAXPATHLEN);
 		else strcpy(Config.Bios, "HLE");
 	}
@@ -631,7 +631,7 @@ otherblock();\
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-	char *str = (char *)[[prefStringKeys objectForKey:defaultKey] pointerValue];
+	char *str = (char *)[prefStringKeys[defaultKey] pointerValue];
 	if (str) {
 		NSString *tmpNSStr = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:str length:strlen(str)];
 		if (!tmpNSStr) {
@@ -642,7 +642,7 @@ otherblock();\
 		return;
 	}
 	
-	str = (char *)[[prefURLKeys objectForKey:defaultKey] pointerValue];
+	str = (char *)[prefURLKeys[defaultKey] pointerValue];
 	if (str) {
 		NSString *tmpNSStr = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:str length:strlen(str)];
 		if (!tmpNSStr) {
@@ -652,7 +652,7 @@ otherblock();\
 		return;
 	}
 
-	u8 *val = (u8 *)[[prefByteKeys objectForKey:defaultKey] pointerValue];
+	u8 *val = (u8 *)[prefByteKeys[defaultKey] pointerValue];
 	if (val) {
 		[defaults setInteger:*val forKey:defaultKey];
 		return;
@@ -670,46 +670,37 @@ otherblock();\
 	NSString *path;
 	const char *str;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
-								 @YES, @"NoDynarec",
-								 @YES, @"AutoDetectVideoType",
-								 @NO, @"UseHLE",
-								 @YES, @"PauseInBackground",
-								 @NO, @"Widescreen",
-								 @NO, @"NetPlay",
-								 nil];
+	NSDictionary *appDefaults = @{@"NoDynarec": @YES,
+								 @"AutoDetectVideoType": @YES,
+								 @"UseHLE": @NO,
+								 @"PauseInBackground": @YES,
+								 @"Widescreen": @NO,
+								 @"NetPlay": @NO};
 	
 	[defaults registerDefaults:appDefaults];
 
-	prefStringKeys = [[NSDictionary alloc] initWithObjectsAndKeys:
-		[NSValue valueWithPointer:Config.Gpu], @"PluginGPU",
-		[NSValue valueWithPointer:Config.Spu], @"PluginSPU",
-		[NSValue valueWithPointer:Config.Pad1], @"PluginPAD",
-		[NSValue valueWithPointer:Config.Cdr], @"PluginCDR",
-		[NSValue valueWithPointer:Config.Net], @"PluginNET",
-		[NSValue valueWithPointer:Config.Sio1], @"PluginSIO1",
-		nil];
+	prefStringKeys = @{@"PluginGPU": [NSValue valueWithPointer:Config.Gpu],
+		@"PluginSPU": [NSValue valueWithPointer:Config.Spu],
+		@"PluginPAD": [NSValue valueWithPointer:Config.Pad1],
+		@"PluginCDR": [NSValue valueWithPointer:Config.Cdr],
+		@"PluginNET": [NSValue valueWithPointer:Config.Net],
+		@"PluginSIO1": [NSValue valueWithPointer:Config.Sio1]};
 	
-	prefURLKeys = [[NSDictionary alloc] initWithObjectsAndKeys:
-				   [NSValue valueWithPointer:Config.Mcd1], @"Mcd1",
-				   [NSValue valueWithPointer:Config.Mcd2], @"Mcd2",
-				   nil];
+	prefURLKeys = @{@"Mcd1": [NSValue valueWithPointer:Config.Mcd1],
+				   @"Mcd2": [NSValue valueWithPointer:Config.Mcd2]};
 
-	prefByteKeys = [[NSDictionary alloc] initWithObjectsAndKeys:
-		[NSValue valueWithPointer:&Config.Xa], @"NoXaAudio",
-		//[NSValue valueWithPointer:&Config.UseNet], @"NetPlay",
-		[NSValue valueWithPointer:&Config.SioIrq], @"SioIrqAlways",
-		[NSValue valueWithPointer:&Config.Mdec], @"BlackAndWhiteMDECVideo",
-		[NSValue valueWithPointer:&Config.PsxAuto], @"AutoDetectVideoType",
-		[NSValue valueWithPointer:&Config.PsxType], @"VideoTypePAL",
-		[NSValue valueWithPointer:&Config.Cdda], @"NoCDAudio",
-		[NSValue valueWithPointer:&Config.Cpu], @"NoDynarec",
-		[NSValue valueWithPointer:&Config.PsxOut], @"ConsoleOutput",
-		[NSValue valueWithPointer:&Config.SpuIrq], @"SpuIrqAlways",
-		[NSValue valueWithPointer:&Config.RCntFix], @"RootCounterFix",
-		[NSValue valueWithPointer:&Config.VSyncWA], @"VideoSyncWAFix",
-		[NSValue valueWithPointer:&Config.Widescreen], @"Widescreen",
-		nil];
+	prefByteKeys = @{@"NoXaAudio": [NSValue valueWithPointer:&Config.Xa],
+		@"SioIrqAlways": [NSValue valueWithPointer:&Config.SioIrq],
+		@"BlackAndWhiteMDECVideo": [NSValue valueWithPointer:&Config.Mdec],
+		@"AutoDetectVideoType": [NSValue valueWithPointer:&Config.PsxAuto],
+		@"VideoTypePAL": [NSValue valueWithPointer:&Config.PsxType],
+		@"NoCDAudio": [NSValue valueWithPointer:&Config.Cdda],
+		@"NoDynarec": [NSValue valueWithPointer:&Config.Cpu],
+		@"ConsoleOutput": [NSValue valueWithPointer:&Config.PsxOut],
+		@"SpuIrqAlways": [NSValue valueWithPointer:&Config.SpuIrq],
+		@"RootCounterFix": [NSValue valueWithPointer:&Config.RCntFix],
+		@"VideoSyncWAFix": [NSValue valueWithPointer:&Config.VSyncWA],
+		@"Widescreen": [NSValue valueWithPointer:&Config.Widescreen]};
 
 	// setup application support paths
     NSFileManager *manager = [NSFileManager defaultManager];

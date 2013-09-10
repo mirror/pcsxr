@@ -38,14 +38,14 @@
 
 - (void)mapOutletToIdentifier:(id)outlet forIdentifier:(NSString*)identifier
 {
-    [hotkeyOutlets setObject:outlet forKey:identifier];
+    hotkeyOutlets[identifier] = outlet;
     [self setHotkeyDisplay:identifier];
 }
 
 - (void)setHotkeyDisplay:(NSString*)keyIdent
 {
     NSString *label = [self parseMappingDisplayString:keyIdent];
-    NSTextField *displayField = [hotkeyOutlets objectForKey:keyIdent];
+    NSTextField *displayField = hotkeyOutlets[keyIdent];
     
     if(displayField) {
         [[displayField cell] setStringValue:label];
@@ -123,12 +123,10 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults] ;
 	NSMutableDictionary *tempUserMappings = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:@"HotkeyBindings"]];
-	[tempUserMappings setValue:[NSDictionary dictionaryWithObjectsAndKeys:
-        device, @"device",
-        deviceLabel, @"deviceName",
-        keyCode, @"keyCode",
-        keyLabel, @"keyLabel",
-        nil] forKey:keyIdent];
+	[tempUserMappings setValue:@{@"device": device,
+        @"deviceName": deviceLabel,
+        @"keyCode": keyCode,
+        @"keyLabel": keyLabel} forKey:keyIdent];
 	[defaults setValue:tempUserMappings forKey:@"HotkeyBindings"];
 }
 

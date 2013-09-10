@@ -63,21 +63,21 @@ NSDictionary *DefaultPadArray(int padnum)
 									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@3, joyVal, @(BUTTON), joyType, nil], dSquare,
 									 nil];
 	if (padnum == 0) {
-		[[mutArray objectForKey:dSelect] setObject:@9 forKey:dfKey];
-		[[mutArray objectForKey:dStart] setObject:@10 forKey:dfKey];
-		[[mutArray objectForKey:dUp] setObject:@127 forKey:dfKey];
-		[[mutArray objectForKey:dRight] setObject:@125 forKey:dfKey];
-		[[mutArray objectForKey:dDown] setObject:@126 forKey:dfKey];
-		[[mutArray objectForKey:dLeft] setObject:@124 forKey:dfKey];
-		[[mutArray objectForKey:dL2] setObject:@16 forKey:dfKey];
-		[[mutArray objectForKey:dR2] setObject:@18 forKey:dfKey];
-		[[mutArray objectForKey:dL1] setObject:@14 forKey:dfKey];
-		[[mutArray objectForKey:dR1] setObject:@15 forKey:dfKey];
-		[[mutArray objectForKey:dTriangle] setObject:@3 forKey:dfKey];
-		[[mutArray objectForKey:dCircle] setObject:@8 forKey:dfKey];
-		[[mutArray objectForKey:dCross] setObject:@7 forKey:dfKey];
-		[[mutArray objectForKey:dSquare] setObject:@2 forKey:dfKey];
-		[mutArray setObject:[NSDictionary dictionaryWithObject:@12 forKey:dfKey] forKey:dAnalog];
+		mutArray[dSelect][dfKey] = @9;
+		mutArray[dStart][dfKey] = @10;
+		mutArray[dUp][dfKey] = @127;
+		mutArray[dRight][dfKey] = @125;
+		mutArray[dDown][dfKey] = @126;
+		mutArray[dLeft][dfKey] = @124;
+		mutArray[dL2][dfKey] = @16;
+		mutArray[dR2][dfKey] = @18;
+		mutArray[dL1][dfKey] = @14;
+		mutArray[dR1][dfKey] = @15;
+		mutArray[dTriangle][dfKey] = @3;
+		mutArray[dCircle][dfKey] = @8;
+		mutArray[dCross][dfKey] = @7;
+		mutArray[dSquare][dfKey] = @2;
+		mutArray[dAnalog] = @{dfKey: @12};
 	}
 	return [NSDictionary dictionaryWithDictionary:mutArray];
 }
@@ -86,21 +86,21 @@ static NSDictionary *DictionaryFromButtonDef(KEYDEF theKey)
 {
 	NSMutableDictionary *mutDict = [NSMutableDictionary dictionaryWithCapacity:3];
 	if (theKey.Key) {
-		[mutDict setObject:@(theKey.Key) forKey:dfKey];
+		mutDict[dfKey] = @(theKey.Key);
 	}
 	if (theKey.JoyEvType != NONE) {
-		[mutDict setObject:@(theKey.JoyEvType) forKey:joyType];
+		mutDict[joyType] = @(theKey.JoyEvType);
 		switch (theKey.JoyEvType) {
 			case BUTTON:
-				[mutDict setObject:@(theKey.J.Button) forKey:joyVal];
+				mutDict[joyVal] = @(theKey.J.Button);
 				break;
 				
 			case HAT:
-				[mutDict setObject:@(theKey.J.Hat) forKey:joyVal];
+				mutDict[joyVal] = @(theKey.J.Hat);
 				break;
 				
 			case AXIS:
-				[mutDict setObject:@(theKey.J.Axis) forKey:joyVal];
+				mutDict[joyVal] = @(theKey.J.Axis);
 				break;
 				
 			case NONE:
@@ -119,9 +119,9 @@ static void SetKeyFromDictionary(NSDictionary *inDict, KEYDEF *outDef)
 	if (!inDict) {
 		return;
 	}
-	NSNumber *theJoyType = [inDict objectForKey:joyType];
+	NSNumber *theJoyType = inDict[joyType];
 	if (theJoyType) {
-		NSNumber *theJoyVal = [inDict objectForKey:joyVal];
+		NSNumber *theJoyVal = inDict[joyVal];
 		outDef->JoyEvType = [theJoyType unsignedCharValue];
 		switch (outDef->JoyEvType) {
 			case BUTTON:
@@ -140,7 +140,7 @@ static void SetKeyFromDictionary(NSDictionary *inDict, KEYDEF *outDef)
 				break;
 		}
 	}
-	NSNumber *keyVal = [inDict objectForKey:dfKey];
+	NSNumber *keyVal = inDict[dfKey];
 	if (keyVal) {
 		outDef->Key = [keyVal unsignedShortValue];
 	}
@@ -149,88 +149,88 @@ static void SetKeyFromDictionary(NSDictionary *inDict, KEYDEF *outDef)
 void LoadPadArray(int padnum, NSDictionary *nsPrefs)
 {
 	PADDEF *curDef = &g.cfg.PadDef[padnum];
-	curDef->DevNum = [[nsPrefs objectForKey:deviceNumber] charValue];
-	curDef->Type = [[nsPrefs objectForKey:padType] unsignedShortValue];
+	curDef->DevNum = [nsPrefs[deviceNumber] charValue];
+	curDef->Type = [nsPrefs[padType] unsignedShortValue];
 	curDef->VisualVibration = 0; //Not implemented on OS X right now.
 	
 	//Analog buttons
-	SetKeyFromDictionary([nsPrefs objectForKey:dL3], &curDef->KeyDef[DKEY_L3]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dR3], &curDef->KeyDef[DKEY_R3]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dAnalog], &curDef->KeyDef[DKEY_ANALOG]);
+	SetKeyFromDictionary(nsPrefs[dL3], &curDef->KeyDef[DKEY_L3]);
+	SetKeyFromDictionary(nsPrefs[dR3], &curDef->KeyDef[DKEY_R3]);
+	SetKeyFromDictionary(nsPrefs[dAnalog], &curDef->KeyDef[DKEY_ANALOG]);
 	
 	//Analog sticks
-	SetKeyFromDictionary([nsPrefs objectForKey:dLeftAnalogXP], &curDef->AnalogDef[ANALOG_LEFT][ANALOG_XP]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dLeftAnalogXM], &curDef->AnalogDef[ANALOG_LEFT][ANALOG_XM]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dLeftAnalogYP], &curDef->AnalogDef[ANALOG_LEFT][ANALOG_YP]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dLeftAnalogYM], &curDef->AnalogDef[ANALOG_LEFT][ANALOG_YM]);
+	SetKeyFromDictionary(nsPrefs[dLeftAnalogXP], &curDef->AnalogDef[ANALOG_LEFT][ANALOG_XP]);
+	SetKeyFromDictionary(nsPrefs[dLeftAnalogXM], &curDef->AnalogDef[ANALOG_LEFT][ANALOG_XM]);
+	SetKeyFromDictionary(nsPrefs[dLeftAnalogYP], &curDef->AnalogDef[ANALOG_LEFT][ANALOG_YP]);
+	SetKeyFromDictionary(nsPrefs[dLeftAnalogYM], &curDef->AnalogDef[ANALOG_LEFT][ANALOG_YM]);
 	
-	SetKeyFromDictionary([nsPrefs objectForKey:dRightAnalogXP], &curDef->AnalogDef[ANALOG_RIGHT][ANALOG_XP]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dRightAnalogXM], &curDef->AnalogDef[ANALOG_RIGHT][ANALOG_XM]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dRightAnalogYP], &curDef->AnalogDef[ANALOG_RIGHT][ANALOG_YP]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dRightAnalogYM], &curDef->AnalogDef[ANALOG_RIGHT][ANALOG_YM]);
+	SetKeyFromDictionary(nsPrefs[dRightAnalogXP], &curDef->AnalogDef[ANALOG_RIGHT][ANALOG_XP]);
+	SetKeyFromDictionary(nsPrefs[dRightAnalogXM], &curDef->AnalogDef[ANALOG_RIGHT][ANALOG_XM]);
+	SetKeyFromDictionary(nsPrefs[dRightAnalogYP], &curDef->AnalogDef[ANALOG_RIGHT][ANALOG_YP]);
+	SetKeyFromDictionary(nsPrefs[dRightAnalogYM], &curDef->AnalogDef[ANALOG_RIGHT][ANALOG_YM]);
 	
 	//Digital shouldurs
-	SetKeyFromDictionary([nsPrefs objectForKey:dL1], &curDef->KeyDef[DKEY_L1]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dL2], &curDef->KeyDef[DKEY_L2]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dR1], &curDef->KeyDef[DKEY_R1]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dR2], &curDef->KeyDef[DKEY_R2]);
+	SetKeyFromDictionary(nsPrefs[dL1], &curDef->KeyDef[DKEY_L1]);
+	SetKeyFromDictionary(nsPrefs[dL2], &curDef->KeyDef[DKEY_L2]);
+	SetKeyFromDictionary(nsPrefs[dR1], &curDef->KeyDef[DKEY_R1]);
+	SetKeyFromDictionary(nsPrefs[dR2], &curDef->KeyDef[DKEY_R2]);
 	
 	//Digital buttons
-	SetKeyFromDictionary([nsPrefs objectForKey:dSelect], &curDef->KeyDef[DKEY_SELECT]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dStart], &curDef->KeyDef[DKEY_START]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dUp], &curDef->KeyDef[DKEY_UP]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dRight], &curDef->KeyDef[DKEY_RIGHT]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dDown], &curDef->KeyDef[DKEY_DOWN]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dLeft], &curDef->KeyDef[DKEY_LEFT]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dTriangle], &curDef->KeyDef[DKEY_TRIANGLE]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dCircle], &curDef->KeyDef[DKEY_CIRCLE]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dCross], &curDef->KeyDef[DKEY_CROSS]);
-	SetKeyFromDictionary([nsPrefs objectForKey:dSquare], &curDef->KeyDef[DKEY_SQUARE]);
+	SetKeyFromDictionary(nsPrefs[dSelect], &curDef->KeyDef[DKEY_SELECT]);
+	SetKeyFromDictionary(nsPrefs[dStart], &curDef->KeyDef[DKEY_START]);
+	SetKeyFromDictionary(nsPrefs[dUp], &curDef->KeyDef[DKEY_UP]);
+	SetKeyFromDictionary(nsPrefs[dRight], &curDef->KeyDef[DKEY_RIGHT]);
+	SetKeyFromDictionary(nsPrefs[dDown], &curDef->KeyDef[DKEY_DOWN]);
+	SetKeyFromDictionary(nsPrefs[dLeft], &curDef->KeyDef[DKEY_LEFT]);
+	SetKeyFromDictionary(nsPrefs[dTriangle], &curDef->KeyDef[DKEY_TRIANGLE]);
+	SetKeyFromDictionary(nsPrefs[dCircle], &curDef->KeyDef[DKEY_CIRCLE]);
+	SetKeyFromDictionary(nsPrefs[dCross], &curDef->KeyDef[DKEY_CROSS]);
+	SetKeyFromDictionary(nsPrefs[dSquare], &curDef->KeyDef[DKEY_SQUARE]);
 }
 
 NSDictionary *SavePadArray(int padnum)
 {
 	NSMutableDictionary *mutArray = [NSMutableDictionary dictionary];
 	PADDEF *curDef = &g.cfg.PadDef[padnum];
-	[mutArray setObject:@(curDef->DevNum) forKey:deviceNumber];
-	[mutArray setObject:@(curDef->Type) forKey:padType];
+	mutArray[deviceNumber] = @(curDef->DevNum);
+	mutArray[padType] = @(curDef->Type);
 	
 	switch (curDef->Type) {
 		case PSE_PAD_TYPE_ANALOGPAD:
 		{
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_L3]) forKey:dL3];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_R3]) forKey:dR3];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_ANALOG]) forKey:dAnalog];
+			mutArray[dL3] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_L3]);
+			mutArray[dR3] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_R3]);
+			mutArray[dAnalog] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_ANALOG]);
 			
-			[mutArray setObject:DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_LEFT][ANALOG_XP]) forKey:dLeftAnalogXP];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_LEFT][ANALOG_XM]) forKey:dLeftAnalogXM];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_LEFT][ANALOG_YP]) forKey:dLeftAnalogYP];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_LEFT][ANALOG_YM]) forKey:dLeftAnalogYM];
+			mutArray[dLeftAnalogXP] = DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_LEFT][ANALOG_XP]);
+			mutArray[dLeftAnalogXM] = DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_LEFT][ANALOG_XM]);
+			mutArray[dLeftAnalogYP] = DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_LEFT][ANALOG_YP]);
+			mutArray[dLeftAnalogYM] = DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_LEFT][ANALOG_YM]);
 			
-			[mutArray setObject:DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_RIGHT][ANALOG_XP]) forKey:dRightAnalogXP];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_RIGHT][ANALOG_XM]) forKey:dRightAnalogXM];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_RIGHT][ANALOG_YP]) forKey:dRightAnalogYP];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_RIGHT][ANALOG_YM]) forKey:dRightAnalogYM];
+			mutArray[dRightAnalogXP] = DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_RIGHT][ANALOG_XP]);
+			mutArray[dRightAnalogXM] = DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_RIGHT][ANALOG_XM]);
+			mutArray[dRightAnalogYP] = DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_RIGHT][ANALOG_YP]);
+			mutArray[dRightAnalogYM] = DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_RIGHT][ANALOG_YM]);
 		}
 			//Fall through
 			
 		case PSE_PAD_TYPE_STANDARD:
 		{
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_L1]) forKey:dL1];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_L2]) forKey:dL2];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_R1]) forKey:dR1];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_R2]) forKey:dR2];
+			mutArray[dL1] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_L1]);
+			mutArray[dL2] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_L2]);
+			mutArray[dR1] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_R1]);
+			mutArray[dR2] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_R2]);
 			
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_SELECT]) forKey:dSelect];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_START]) forKey:dStart];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_UP]) forKey:dUp];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_RIGHT]) forKey:dRight];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_DOWN]) forKey:dDown];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_LEFT]) forKey:dLeft];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_TRIANGLE]) forKey:dTriangle];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_CIRCLE]) forKey:dCircle];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_CROSS]) forKey:dCross];
-			[mutArray setObject:DictionaryFromButtonDef(curDef->KeyDef[DKEY_SQUARE]) forKey:dSquare];
+			mutArray[dSelect] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_SELECT]);
+			mutArray[dStart] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_START]);
+			mutArray[dUp] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_UP]);
+			mutArray[dRight] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_RIGHT]);
+			mutArray[dDown] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_DOWN]);
+			mutArray[dLeft] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_LEFT]);
+			mutArray[dTriangle] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_TRIANGLE]);
+			mutArray[dCircle] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_CIRCLE]);
+			mutArray[dCross] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_CROSS]);
+			mutArray[dSquare] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_SQUARE]);
 		}
 			break;
 			

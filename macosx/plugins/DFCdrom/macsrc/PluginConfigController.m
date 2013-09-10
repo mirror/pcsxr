@@ -58,14 +58,12 @@ void AboutDlgProc()
 	[icon setSize:size];
 
 	NSDictionary *infoPaneDict =
-	[[NSDictionary alloc] initWithObjectsAndKeys:
-	 [bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
-	 icon, @"ApplicationIcon",
-	 [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
-	 [bundle objectForInfoDictionaryKey:@"CFBundleVersion"], @"Version",
-	 [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"], @"Copyright",
-	 credits, @"Credits",
-	 nil];
+	@{@"ApplicationName": [bundle objectForInfoDictionaryKey:@"CFBundleName"],
+	 @"ApplicationIcon": icon,
+	 @"ApplicationVersion": [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
+	 @"Version": [bundle objectForInfoDictionaryKey:@"CFBundleVersion"],
+	 @"Copyright": [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"],
+	 @"Credits": credits};
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
@@ -92,18 +90,15 @@ void ReadConfig()
 {
 	NSDictionary *keyValues;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-		[NSDictionary dictionaryWithObjectsAndKeys:
-			@YES, @"Threaded",
-			@64, @"Cache Size",
-			@0, @"Speed",
-			nil], PrefsKey, nil]];
+	[defaults registerDefaults:@{PrefsKey: @{@"Threaded": @YES,
+			@"Cache Size": @64,
+			@"Speed": @0}}];
 
 	keyValues = [defaults dictionaryForKey:PrefsKey];
 
-	ReadMode = ([[keyValues objectForKey:@"Threaded"] boolValue] ? THREADED : NORMAL);
-	CacheSize = [[keyValues objectForKey:@"Cache Size"] intValue];
-	CdrSpeed = [[keyValues objectForKey:@"Speed"] integerValue];
+	ReadMode = ([keyValues[@"Threaded"] boolValue] ? THREADED : NORMAL);
+	CacheSize = [keyValues[@"Cache Size"] intValue];
+	CdrSpeed = [keyValues[@"Speed"] integerValue];
 }
 
 @implementation PluginConfigController
@@ -121,17 +116,17 @@ void ReadConfig()
 
 	NSMutableDictionary *writeDic = [keyValues mutableCopy];
 
-	[writeDic setObject:([Cached intValue] ? @YES : @NO) forKey:@"Threaded"];
-	[writeDic setObject:@([CacheSize integerValue]) forKey:@"Cache Size"];
+	writeDic[@"Threaded"] = ([Cached intValue] ? @YES : @NO);
+	writeDic[@"Cache Size"] = @([CacheSize integerValue]);
 
 	switch ([CdSpeed indexOfSelectedItem]) {
-		case 1: [writeDic setObject:@1 forKey:@"Speed"]; break;
-		case 2: [writeDic setObject:@2 forKey:@"Speed"]; break;
-		case 3: [writeDic setObject:@4 forKey:@"Speed"]; break;
-		case 4: [writeDic setObject:@8 forKey:@"Speed"]; break;
-		case 5: [writeDic setObject:@16 forKey:@"Speed"]; break;
-		case 6: [writeDic setObject:@32 forKey:@"Speed"]; break;
-		default: [writeDic setObject:@0 forKey:@"Speed"]; break;
+		case 1: writeDic[@"Speed"] = @1; break;
+		case 2: writeDic[@"Speed"] = @2; break;
+		case 3: writeDic[@"Speed"] = @4; break;
+		case 4: writeDic[@"Speed"] = @8; break;
+		case 5: writeDic[@"Speed"] = @16; break;
+		case 6: writeDic[@"Speed"] = @32; break;
+		default: writeDic[@"Speed"] = @0; break;
 	}
 
 	// write to defaults
@@ -154,10 +149,10 @@ void ReadConfig()
 	// load from preferences
 	self.keyValues = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:PrefsKey]];
 
-	[Cached setIntValue:[[keyValues objectForKey:@"Threaded"] intValue]];
-	[CacheSize setIntegerValue:[[keyValues objectForKey:@"Cache Size"] integerValue]];
+	[Cached setIntValue:[keyValues[@"Threaded"] intValue]];
+	[CacheSize setIntegerValue:[keyValues[@"Cache Size"] integerValue]];
 
-	switch ([[keyValues objectForKey:@"Speed"] intValue]) {
+	switch ([keyValues[@"Speed"] intValue]) {
 		case 1: [CdSpeed selectItemAtIndex:1]; break;
 		case 2: [CdSpeed selectItemAtIndex:2]; break;
 		case 4: [CdSpeed selectItemAtIndex:3]; break;

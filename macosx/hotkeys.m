@@ -44,7 +44,7 @@ void prevState() {
 
 BOOL handleHotkey(NSString* keyCode) {
     if([EmuThread active]) { // Don't catch hotkeys if there is no emulation
-        NSNumber *ident = [hotkeys objectForKey:keyCode];
+        NSNumber *ident = hotkeys[keyCode];
 
         if(ident != nil) {
             switch([ident intValue]) {
@@ -87,19 +87,19 @@ BOOL handleHotkey(NSString* keyCode) {
 
 void setupHotkey(int hk, NSString *label, NSDictionary *binding) {
 	if(binding != nil)
-		[hotkeys setObject:@(hk) forKey:[binding objectForKey:@"keyCode"]];
+		hotkeys[binding[@"keyCode"]] = @(hk);
 }
 
 void setupHotkeys() {
     NSDictionary *bindings = [[NSUserDefaults standardUserDefaults] objectForKey:@"HotkeyBindings"];
     hotkeys = [[NSMutableDictionary alloc] initWithCapacity:[bindings count]];
     
-    setupHotkey(HK_FAST_FORWARD, @"FastForward", [bindings objectForKey:@"FastForward"]);
-    setupHotkey(HK_SAVE_STATE, @"SaveState", [bindings objectForKey:@"SaveState"]);
-    setupHotkey(HK_LOAD_STATE, @"LoadState", [bindings objectForKey:@"LoadState"]);
-    setupHotkey(HK_NEXT_STATE, @"NextState", [bindings objectForKey:@"NextState"]);
-    setupHotkey(HK_PREV_STATE, @"PrevState", [bindings objectForKey:@"PrevState"]);
-    setupHotkey(HK_FRAME_LIMIT, @"FrameLimit", [bindings objectForKey:@"FrameLimit"]);
+    setupHotkey(HK_FAST_FORWARD, @"FastForward", bindings[@"FastForward"]);
+    setupHotkey(HK_SAVE_STATE, @"SaveState", bindings[@"SaveState"]);
+    setupHotkey(HK_LOAD_STATE, @"LoadState", bindings[@"LoadState"]);
+    setupHotkey(HK_NEXT_STATE, @"NextState", bindings[@"NextState"]);
+    setupHotkey(HK_PREV_STATE, @"PrevState", bindings[@"PrevState"]);
+    setupHotkey(HK_FRAME_LIMIT, @"FrameLimit", bindings[@"FrameLimit"]);
     
     currentState = 0;
 }

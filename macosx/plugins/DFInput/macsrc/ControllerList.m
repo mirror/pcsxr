@@ -113,7 +113,7 @@ static const int DPad[DKEY_TOTAL] = {
 		row:(NSInteger)rowIndex
 {
 	if ([[aTableColumn identifier] isEqualToString:@"key"]) {
-		return [labelText objectAtIndex:rowIndex];
+		return labelText[rowIndex];
 	} else {
 		char buf[256] = {0};
 		

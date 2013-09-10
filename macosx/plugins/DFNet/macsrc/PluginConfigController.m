@@ -60,14 +60,12 @@ void AboutDlgProc()
 	[icon setSize:NSMakeSize(64, 64)];
 
 	NSDictionary *infoPaneDict =
-	[[NSDictionary alloc] initWithObjectsAndKeys:
-	 [bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
-	 icon, @"ApplicationIcon",
-	 [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
-	 [bundle objectForInfoDictionaryKey:@"CFBundleVersion"], @"Version",
-	 [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"], @"Copyright",
-	 credits, @"Credits",
-	 nil];
+	@{@"ApplicationName": [bundle objectForInfoDictionaryKey:@"CFBundleName"],
+	 @"ApplicationIcon": icon,
+	 @"ApplicationVersion": [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
+	 @"Version": [bundle objectForInfoDictionaryKey:@"CFBundleVersion"],
+	 @"Copyright": [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"],
+	 @"Credits": credits};
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
@@ -95,18 +93,15 @@ void ReadConfig()
 	NSDictionary *keyValues;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-								[NSDictionary dictionaryWithObjectsAndKeys:
-								 @"127.0.0.1", kIPADDRKEY,
-								 @33306, kIPPORT,
-								 @1, kPLAYERNUM,
-								 nil], PrefsKey, nil]];
+	[defaults registerDefaults:@{PrefsKey: @{kIPADDRKEY: @"127.0.0.1",
+								 kIPPORT: @33306,
+								 kPLAYERNUM: @1}}];
 	
 	keyValues = [defaults dictionaryForKey:PrefsKey];
 
-	conf.PortNum = [[keyValues objectForKey:kIPPORT] intValue];
-	conf.PlayerNum = [[keyValues objectForKey:kPLAYERNUM] intValue];
-	strlcpy(conf.ipAddress, [[keyValues objectForKey:kIPADDRKEY] cStringUsingEncoding:NSASCIIStringEncoding], sizeof(conf.ipAddress));
+	conf.PortNum = [keyValues[kIPPORT] intValue];
+	conf.PlayerNum = [keyValues[kPLAYERNUM] intValue];
+	strlcpy(conf.ipAddress, [keyValues[kIPADDRKEY] cStringUsingEncoding:NSASCIIStringEncoding], sizeof(conf.ipAddress));
 }
 
 @implementation PluginConfigController
@@ -132,9 +127,9 @@ void ReadConfig()
 
 	
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:PrefsKey]];
-	[writeDic setObject:@((unsigned short)[portNum intValue]) forKey:kIPPORT];
-	[writeDic setObject:@([playerNum intValue]) forKey:kPLAYERNUM];
-	[writeDic setObject:theAddress forKey:kIPADDRKEY];
+	writeDic[kIPPORT] = @((unsigned short)[portNum intValue]);
+	writeDic[kPLAYERNUM] = @([playerNum intValue]);
+	writeDic[kIPADDRKEY] = theAddress;
 
 	// write to defaults
 	[defaults setObject:writeDic forKey:PrefsKey];
@@ -152,9 +147,9 @@ void ReadConfig()
 	ReadConfig();
 	NSDictionary *keyValues = [defaults dictionaryForKey:PrefsKey];
 
-	[ipAddress setStringValue:[keyValues objectForKey:kIPADDRKEY]];
-	[portNum setIntValue:[[keyValues objectForKey:kIPPORT] unsignedShortValue]];
-	[playerNum setIntValue:[[keyValues objectForKey:kPLAYERNUM] intValue]];
+	[ipAddress setStringValue:keyValues[kIPADDRKEY]];
+	[portNum setIntValue:[keyValues[kIPPORT] unsignedShortValue]];
+	[playerNum setIntValue:[keyValues[kPLAYERNUM] intValue]];
 }
 
 @end

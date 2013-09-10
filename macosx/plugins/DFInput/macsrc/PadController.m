@@ -137,12 +137,9 @@ void LoadPADConfig()
 {
 	SetDefaultConfig();
 	[[NSUserDefaults standardUserDefaults] registerDefaults:
-	 [NSDictionary dictionaryWithObject:[NSDictionary dictionaryWithObjectsAndKeys:
-										 DefaultPadArray(0), kDFPad1,
-										 DefaultPadArray(1), kDFPad2,
-										 @YES, kDFThreading,
-										 nil]
-								 forKey:PrefsKey]];
+	 @{PrefsKey: @{kDFPad1: DefaultPadArray(0),
+										 kDFPad2: DefaultPadArray(1),
+										 kDFThreading: @YES}}];
 	
 	//Load the old preferences if present.
 	NSFileManager *fm = [NSFileManager defaultManager];
@@ -305,9 +302,9 @@ void LoadPADConfig()
 		[fm removeItemAtPath:oldPrefPath error:NULL];
 	} else {
 		NSDictionary *dfPrefs = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey];
-		g.cfg.Threaded = [[dfPrefs objectForKey:kDFThreading] boolValue];
-		LoadPadArray(0, [dfPrefs objectForKey:kDFPad1]);
-		LoadPadArray(1, [dfPrefs objectForKey:kDFPad2]);
+		g.cfg.Threaded = [dfPrefs[kDFThreading] boolValue];
+		LoadPadArray(0, dfPrefs[kDFPad1]);
+		LoadPadArray(1, dfPrefs[kDFPad2]);
 	}
 }
 
@@ -316,18 +313,16 @@ void SavePADConfig()
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSMutableDictionary *pad1Dict = nil, *pad2Dict = nil;
 	NSDictionary *prefDict = [defaults dictionaryForKey:PrefsKey];
-	pad1Dict = [[NSMutableDictionary alloc] initWithDictionary:[prefDict objectForKey:kDFPad1]];
-	pad2Dict = [[NSMutableDictionary alloc] initWithDictionary:[prefDict objectForKey:kDFPad2]];
+	pad1Dict = [[NSMutableDictionary alloc] initWithDictionary:prefDict[kDFPad1]];
+	pad2Dict = [[NSMutableDictionary alloc] initWithDictionary:prefDict[kDFPad2]];
 	prefDict = nil;
 	
 	[pad1Dict addEntriesFromDictionary:SavePadArray(0)];
 	[pad2Dict addEntriesFromDictionary:SavePadArray(1)];
 	
-	[defaults setObject:[NSDictionary dictionaryWithObjectsAndKeys:
-						 g.cfg.Threaded ? @YES : @NO, kDFThreading,
-						 pad1Dict, kDFPad1,
-						 pad2Dict, kDFPad2,
-						 nil] forKey:PrefsKey];
+	[defaults setObject:@{kDFThreading: g.cfg.Threaded ? @YES : @NO,
+						 kDFPad1: pad1Dict,
+						 kDFPad2: pad2Dict} forKey:PrefsKey];
 	[defaults synchronize];
 }
 
@@ -352,14 +347,12 @@ void DoAbout()
 	[icon setSize:size];
 
 	NSDictionary *infoPaneDict =
-	[[NSDictionary alloc] initWithObjectsAndKeys:
-	 [bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
-	 icon, @"ApplicationIcon",
-	 [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
-	 [bundle objectForInfoDictionaryKey:@"CFBundleVersion"], @"Version",
-	 [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"], @"Copyright",
-	 credits, @"Credits",
-	 nil];
+	@{@"ApplicationName": [bundle objectForInfoDictionaryKey:@"CFBundleName"],
+	 @"ApplicationIcon": icon,
+	 @"ApplicationVersion": [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
+	 @"Version": [bundle objectForInfoDictionaryKey:@"CFBundleVersion"],
+	 @"Copyright": [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"],
+	 @"Credits": credits};
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});

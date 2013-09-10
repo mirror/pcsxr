@@ -9,7 +9,7 @@
 	NSInteger index = [self integerValue];
 
 	if (index >= 0 && index < [strings count])
-		return [strings objectAtIndex:index];
+		return strings[index];
 
 	if (!pluginClass) {
 		return @"(Unknown)";

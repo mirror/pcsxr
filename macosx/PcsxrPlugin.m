@@ -238,7 +238,7 @@
 - (void)runCommand:(id)arg
 {
 	@autoreleasepool {
-		NSString *funcName = [arg objectAtIndex:0];
+		NSString *funcName = arg[0];
 		long (*func)(void);
 		
 		func = SysLoadSym(pluginRef, [funcName cStringUsingEncoding:NSASCIIStringEncoding]);

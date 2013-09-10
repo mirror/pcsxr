@@ -77,7 +77,7 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 	
 	// verify that the ones that are in list still works
 	for (i=0; i < [pluginList count]; i++) {
-		if (![[pluginList objectAtIndex:i] verifyOK]) {
+		if (![pluginList[i] verifyOK]) {
 			[pluginList removeObjectAtIndex:i]; i--;
 		}
 	}
@@ -114,7 +114,7 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 			NSUInteger j;
 			
 			for (j=0; j < [list count]; j++) {
-				if ([self setActivePlugin:[list objectAtIndex:j] forType:typeList[i]])
+				if ([self setActivePlugin:list[j] forType:typeList[i]])
 					break;
 			}
 			if (j == [list count])

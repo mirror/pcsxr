@@ -159,7 +159,7 @@ void SysMessage(const char *fmt, ...) {
 	NSString *msg = [[NSString alloc] initWithFormat:locFmtString arguments:list];
 	va_end(list);
 	
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedFailureReasonErrorKey];
+	NSDictionary *userInfo = @{NSLocalizedFailureReasonErrorKey: msg};
 	
 	RunOnMainThreadSync(^{
 		[NSApp presentError:[NSError errorWithDomain:@"Unknown Domain" code:-1 userInfo:userInfo]];
@@ -238,7 +238,7 @@ void SysClose() {
 	
 	//Tell the memory card manager that the memory cards changed.
 	//The number three tells the mem card manager to update both cards 1 and 2.
-	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil userInfo:[NSDictionary dictionaryWithObject:@3 forKey:memCardChangeNumberKey]];
+	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil userInfo:@{memCardChangeNumberKey: @3}];
 }
 
 void OnFile_Exit() {

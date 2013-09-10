@@ -13,13 +13,13 @@
 
 - (IBAction)doAbout:(id)sender
 {
-	 PcsxrPlugin *plugin = [plugins objectAtIndex:[pluginMenu indexOfSelectedItem]];
+	 PcsxrPlugin *plugin = plugins[[pluginMenu indexOfSelectedItem]];
 	 [plugin aboutAs:pluginType];
 }
 
 - (IBAction)doConfigure:(id)sender
 {
-	 PcsxrPlugin *plugin = [plugins objectAtIndex:[pluginMenu indexOfSelectedItem]];
+	 PcsxrPlugin *plugin = plugins[[pluginMenu indexOfSelectedItem]];
 	 [plugin configureAs:pluginType];
 }
 
@@ -28,7 +28,7 @@
 	if (sender == pluginMenu) {
 		NSInteger index = [pluginMenu indexOfSelectedItem];
 		if (index != -1) {
-			PcsxrPlugin *plugin = [plugins objectAtIndex:index];
+			PcsxrPlugin *plugin = plugins[index];
 
 			if (![[PluginList list] setActivePlugin:plugin forType:pluginType]) {
 				/* plugin won't initialize */

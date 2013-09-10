@@ -69,14 +69,12 @@ void AboutDlgProc()
 	[icon setSize:size];
 	
 	NSDictionary *infoPaneDict =
-	[[NSDictionary alloc] initWithObjectsAndKeys:
-	 [bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
-	 icon, @"ApplicationIcon",
-	 [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
-	 [bundle objectForInfoDictionaryKey:@"CFBundleVersion"], @"Version",
-	 [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"], @"Copyright",
-	 credits, @"Credits",
-	 nil];
+	@{@"ApplicationName": [bundle objectForInfoDictionaryKey:@"CFBundleName"],
+	 @"ApplicationIcon": icon,
+	 @"ApplicationVersion": [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
+	 @"Version": [bundle objectForInfoDictionaryKey:@"CFBundleVersion"],
+	 @"Copyright": [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"],
+	 @"Credits": credits};
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
@@ -126,10 +124,10 @@ void PrepFactoryDefaultPreferences(void)
 	NSDictionary* keyValues = [defaults dictionaryForKey:PrefsKey];
 	BOOL windowSizeNeedsReset = NO;
 	if (keyValues) {
-		NSSize size = NSSizeFromString([keyValues objectForKey:kWindowSize]);
-		if (![keyValues objectForKey:kWindowSize]) {
+		NSSize size = NSSizeFromString(keyValues[kWindowSize]);
+		if (!keyValues[kWindowSize]) {
 			windowSizeNeedsReset = YES;
-		} else if ([[keyValues objectForKey:kWindowSize] isKindOfClass:[NSNumber class]]) {
+		} else if ([keyValues[kWindowSize] isKindOfClass:[NSNumber class]]) {
 			windowSizeNeedsReset = YES;
 		} else if (size.height == 0 || size.width == 0) {
 			windowSizeNeedsReset = YES;
@@ -137,43 +135,40 @@ void PrepFactoryDefaultPreferences(void)
 	}
 	if (windowSizeNeedsReset) {
 		NSMutableDictionary *tmpDict = [[NSMutableDictionary alloc] initWithDictionary:keyValues];
-		[tmpDict setObject:NSStringFromSize(NSMakeSize(800, 600)) forKey:kWindowSize];
+		tmpDict[kWindowSize] = NSStringFromSize(NSMakeSize(800, 600));
 		[defaults setObject:tmpDict forKey:PrefsKey];
 		[defaults synchronize];
 	}
 	keyValues = nil;
 	
-	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-								 [NSDictionary dictionaryWithObjectsAndKeys:
-								  @NO, kFPSCounter,
-								  @NO, kAutoFullScreen,
-								  @NO, kFrameSkipping,
-								  @YES, kFrameLimit,
-								  @NO, kVSync,
-								  @NO, kHacksEnable,
-								  @0, @"Dither Mode",
-								  @0, kHacks,
+	[defaults registerDefaults:@{PrefsKey: @{kFPSCounter: @NO,
+								  kAutoFullScreen: @NO,
+								  kFrameSkipping: @NO,
+								  kFrameLimit: @YES,
+								  kVSync: @NO,
+								  kHacksEnable: @NO,
+								  @"Dither Mode": @0,
+								  kHacks: @0,
 								  
-								  @YES, @"Proportional Resize",
+								  @"Proportional Resize": @YES,
 								  //[NSSize stringWithCString: @"default"], @"Fullscreen Resolution",
-								  @2, @"Offscreen Drawing Level",
-								  @0, @"Texture Color Depth Level",
-								  @0, @"Texture Enhancement Level",
-								  @0, @"Texture Filter Level",
-								  @0, @"Frame Buffer Level",
-								  NSStringFromSize(NSMakeSize(800, 600)), kWindowSize,
-								  @NO, @"Draw Scanlines",
+								  @"Offscreen Drawing Level": @2,
+								  @"Texture Color Depth Level": @0,
+								  @"Texture Enhancement Level": @0,
+								  @"Texture Filter Level": @0,
+								  @"Frame Buffer Level": @0,
+								  kWindowSize: NSStringFromSize(NSMakeSize(800, 600)),
+								  @"Draw Scanlines": @NO,
 								  // nasty:
-								  [NSArchiver archivedDataWithRootObject: [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0.25]], @"Scanline Color",
-								  @NO, @"Advanced Blending",
-								  @NO, @"Opaque Pass",
-								  @NO, @"Blur",
-								  @YES, @"Z Mask Clipping",
-								  @NO, @"Wireframe Mode",
-								  @YES, @"Emulate mjpeg decoder", // helps remove unsightly vertical line in movies
-								  @NO, @"Fast mjpeg decoder",
-								  @YES, @"GteAccuracy",
-								  nil],  PrefsKey, nil]];
+								  @"Scanline Color": [NSArchiver archivedDataWithRootObject: [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0.25]],
+								  @"Advanced Blending": @NO,
+								  @"Opaque Pass": @NO,
+								  @"Blur": @NO,
+								  @"Z Mask Clipping": @YES,
+								  @"Wireframe Mode": @NO,
+								  @"Emulate mjpeg decoder": @YES, // helps remove unsightly vertical line in movies
+								  @"Fast mjpeg decoder": @NO,
+								  @"GteAccuracy": @YES}}];
 }
 
 void ReadConfig(void)
@@ -192,26 +187,26 @@ void ReadConfig(void)
 		
     // bind all prefs settings to their PCSXR counterparts
     // with a little finagling to make it work as expected
-	iShowFPS = [[keyValues objectForKey:kFPSCounter] boolValue];
+	iShowFPS = [keyValues[kFPSCounter] boolValue];
     
-    if ([[keyValues objectForKey:kFrameLimit] boolValue]){
+    if ([keyValues[kFrameLimit] boolValue]){
         bUseFrameLimit = 1;
         iFrameLimit = 2; // required
         fFrameRate = 60; // required (some number, 60 seems ok)
     }
 	
 	// Dithering is either on or off in OpenGL plug, but hey
-	bDrawDither = [[keyValues objectForKey:@"Dither Mode"] intValue];
+	bDrawDither = [keyValues[@"Dither Mode"] intValue];
 	
-	bChangeWinMode = [[keyValues objectForKey:kAutoFullScreen] boolValue] ? 2 : 1;
-	bUseFrameSkip = [[keyValues objectForKey:kFrameSkipping] boolValue];
+	bChangeWinMode = [keyValues[kAutoFullScreen] boolValue] ? 2 : 1;
+	bUseFrameSkip = [keyValues[kFrameSkipping] boolValue];
 	
-	bUseFixes = [[keyValues objectForKey:kHacksEnable] boolValue];
-	dwCfgFixes = [[keyValues objectForKey:kHacks] unsignedIntValue];
+	bUseFixes = [keyValues[kHacksEnable] boolValue];
+	dwCfgFixes = [keyValues[kHacks] unsignedIntValue];
     
 	
 	// we always start out at 800x600 (at least until resizing the window is implemented)
-	NSSize winSize = NSSizeFromString([keyValues objectForKey:kWindowSize]);
+	NSSize winSize = NSSizeFromString(keyValues[kWindowSize]);
 	if (bChangeWinMode == 1) {
 		iResX = winSize.width;
 		iResY = winSize.height;
@@ -220,9 +215,9 @@ void ReadConfig(void)
 		iResY = 600;
 	}
 	
-    iBlurBuffer = [[keyValues objectForKey:@"Blur"] boolValue]; // not noticeable, but doesn't harm
-    iUseScanLines = [[keyValues objectForKey:@"Draw Scanlines"] boolValue]; // works
-    NSColor* scanColor = [NSUnarchiver unarchiveObjectWithData:[keyValues objectForKey:@"Scanline Color"]];
+    iBlurBuffer = [keyValues[@"Blur"] boolValue]; // not noticeable, but doesn't harm
+    iUseScanLines = [keyValues[@"Draw Scanlines"] boolValue]; // works
+    NSColor* scanColor = [NSUnarchiver unarchiveObjectWithData:keyValues[@"Scanline Color"]];
 	scanColor = [scanColor colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
     iScanlineColor[0] = [scanColor redComponent];
     iScanlineColor[1] = [scanColor greenComponent];
@@ -230,29 +225,29 @@ void ReadConfig(void)
     iScanlineColor[3] = [scanColor alphaComponent];
     
     iScanBlend = 0; // we always draw nice since it costs nothing.
-    iUseMask = [[keyValues objectForKey:@"Z Mask Clipping"] boolValue];  // works, clips polygons with primitive "Z" buffer
-    bUseLines = [[keyValues objectForKey:@"Wireframe Mode"] boolValue]; // works, aka "Wireframe" mode
-    iOffscreenDrawing = [[keyValues objectForKey:@"Offscreen Drawing Level"] intValue]; // draw offscreen for texture building?
+    iUseMask = [keyValues[@"Z Mask Clipping"] boolValue];  // works, clips polygons with primitive "Z" buffer
+    bUseLines = [keyValues[@"Wireframe Mode"] boolValue]; // works, aka "Wireframe" mode
+    iOffscreenDrawing = [keyValues[@"Offscreen Drawing Level"] intValue]; // draw offscreen for texture building?
     if (iOffscreenDrawing > 4) iOffscreenDrawing = 4;
     if (iOffscreenDrawing < 0) iOffscreenDrawing = 0;
     
 	
 	// texture quality, whatever that means (doesn't hurt), more like "texture handling" or "texture performance"
-    iFrameTexType = [[keyValues objectForKey:@"Frame Buffer Level"] intValue];
+    iFrameTexType = [keyValues[@"Frame Buffer Level"] intValue];
     if (iFrameTexType > 3) iFrameTexType = 3;
     if (iFrameTexType < 0) iFrameTexType = 0;
     
-    iTexQuality = [[keyValues objectForKey:@"Texture Color Depth Level"] intValue];
+    iTexQuality = [keyValues[@"Texture Color Depth Level"] intValue];
     if (iTexQuality > 4) iTexQuality = 4;
     if (iTexQuality < 0) iTexQuality = 0;
 	
 	// MAG_FILTER = LINEAR, etc.
-    iFilterType = [[keyValues objectForKey:@"Texture Filter Level"] intValue];
+    iFilterType = [keyValues[@"Texture Filter Level"] intValue];
     if (iFilterType > 2) iFilterType = 2;
     if (iFilterType < 0) iFilterType = 0;
     
 	// stretches textures (more detail). You'd think it would look great, but it's not massively better. NEEDS iFilterType to be of any use.
-    iHiResTextures = [[keyValues objectForKey:@"Texture Enhancement Level"] intValue];
+    iHiResTextures = [keyValues[@"Texture Enhancement Level"] intValue];
     if (iHiResTextures > 2) iHiResTextures = 2;
     if (iHiResTextures < 0) iHiResTextures = 0;
     
@@ -263,9 +258,9 @@ void ReadConfig(void)
     if (iHiResTextures && !iFilterType)
         iFilterType = 1; // needed to see any real effect
     
-    bUseFastMdec = [[keyValues objectForKey:@"Emulate mjpeg decoder"] boolValue];
-    bUse15bitMdec = [[keyValues objectForKey:@"Fast mjpeg decoder"] boolValue];
-    bGteAccuracy = [[keyValues objectForKey:@"GteAccuracy"] boolValue];
+    bUseFastMdec = [keyValues[@"Emulate mjpeg decoder"] boolValue];
+    bUse15bitMdec = [keyValues[@"Fast mjpeg decoder"] boolValue];
+    bGteAccuracy = [keyValues[@"GteAccuracy"] boolValue];
 	
 	if (iShowFPS)
 		ulKeybits |= KEY_SHOWFPS;
@@ -305,29 +300,29 @@ void ReadConfig(void)
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
-	[writeDic setObject:([fpsCounter integerValue] ? @YES : @NO) forKey:kFPSCounter];
-	[writeDic setObject:[NSArchiver archivedDataWithRootObject:[scanlineColorWell color]] forKey:@"Scanline Color"];
-	[writeDic setObject:([frameSkipping integerValue] ? @YES : @NO) forKey:kFrameSkipping];
-	[writeDic setObject:([autoFullScreen integerValue] ? @YES : @NO) forKey:kAutoFullScreen];
+	writeDic[kFPSCounter] = ([fpsCounter integerValue] ? @YES : @NO);
+	writeDic[@"Scanline Color"] = [NSArchiver archivedDataWithRootObject:[scanlineColorWell color]];
+	writeDic[kFrameSkipping] = ([frameSkipping integerValue] ? @YES : @NO);
+	writeDic[kAutoFullScreen] = ([autoFullScreen integerValue] ? @YES : @NO);
 	//[writeDic setObject:([frameLimit integerValue] ? @YES : @NO) forKey:kFrameLimit];
-	[writeDic setObject:([proportionalResize integerValue] ? @YES : @NO) forKey:@"Proportional Resize"];
-	[writeDic setObject:@([ditherMode indexOfSelectedItem]) forKey:@"Dither Mode"];
-	[writeDic setObject:@([offscreenDrawing indexOfSelectedItem]) forKey:@"Offscreen Drawing Level"];
-	[writeDic setObject:@([texColorDepth indexOfSelectedItem]) forKey:@"Texture Color Depth Level"];
-	[writeDic setObject:@([texEnhancment integerValue]) forKey:@"Texture Enhancement Level"];
-	[writeDic setObject:@([texFiltering integerValue]) forKey:@"Texture Filter Level"];
-	[writeDic setObject:@([frameBufferEffects indexOfSelectedItem]) forKey:@"Frame Buffer Level"];
-	[writeDic setObject:([drawScanlines integerValue] ? @YES : @NO) forKey:@"Draw Scanlines"];
-	[writeDic setObject:([advancedBlending integerValue] ? @YES : @NO) forKey:@"Advanced Blending"];
-	[writeDic setObject:([opaquePass integerValue] ? @YES : @NO) forKey:@"Opaque Pass"];
-	[writeDic setObject:([blurEffect integerValue] ? @YES : @NO) forKey:@"Blur"];
-	[writeDic setObject:([zMaskClipping integerValue] ? @YES : @NO) forKey:@"Z Mask Clipping"];
-	[writeDic setObject:([wireframeOnly integerValue] ? @YES : @NO) forKey:@"Wireframe Mode"];
-	[writeDic setObject:([mjpegDecoder integerValue] ? @YES : @NO) forKey:@"Emulate mjpeg decoder"];
-	[writeDic setObject:([mjpegDecoder15bit integerValue] ? @YES : @NO) forKey:@"Fast mjpeg decoder"];
-	[writeDic setObject:([gteAccuracy integerValue] ? @YES : @NO) forKey:@"GteAccuracy"];
-	[writeDic setObject:([vSync integerValue] ? @YES : @NO) forKey:kVSync];
-	[writeDic setObject:NSStringFromSize(NSMakeSize([windowWidth integerValue], [windowHeighth integerValue])) forKey:kWindowSize];
+	writeDic[@"Proportional Resize"] = ([proportionalResize integerValue] ? @YES : @NO);
+	writeDic[@"Dither Mode"] = @([ditherMode indexOfSelectedItem]);
+	writeDic[@"Offscreen Drawing Level"] = @([offscreenDrawing indexOfSelectedItem]);
+	writeDic[@"Texture Color Depth Level"] = @([texColorDepth indexOfSelectedItem]);
+	writeDic[@"Texture Enhancement Level"] = @([texEnhancment integerValue]);
+	writeDic[@"Texture Filter Level"] = @([texFiltering integerValue]);
+	writeDic[@"Frame Buffer Level"] = @([frameBufferEffects indexOfSelectedItem]);
+	writeDic[@"Draw Scanlines"] = ([drawScanlines integerValue] ? @YES : @NO);
+	writeDic[@"Advanced Blending"] = ([advancedBlending integerValue] ? @YES : @NO);
+	writeDic[@"Opaque Pass"] = ([opaquePass integerValue] ? @YES : @NO);
+	writeDic[@"Blur"] = ([blurEffect integerValue] ? @YES : @NO);
+	writeDic[@"Z Mask Clipping"] = ([zMaskClipping integerValue] ? @YES : @NO);
+	writeDic[@"Wireframe Mode"] = ([wireframeOnly integerValue] ? @YES : @NO);
+	writeDic[@"Emulate mjpeg decoder"] = ([mjpegDecoder integerValue] ? @YES : @NO);
+	writeDic[@"Fast mjpeg decoder"] = ([mjpegDecoder15bit integerValue] ? @YES : @NO);
+	writeDic[@"GteAccuracy"] = ([gteAccuracy integerValue] ? @YES : @NO);
+	writeDic[kVSync] = ([vSync integerValue] ? @YES : @NO);
+	writeDic[kWindowSize] = NSStringFromSize(NSMakeSize([windowWidth integerValue], [windowHeighth integerValue]));
 	
 	[defaults setObject:writeDic forKey:PrefsKey];
 	[defaults synchronize];
@@ -355,8 +350,8 @@ void ReadConfig(void)
 
 - (void)loadHacksValues
 {
-	unsigned int hackValues = [[self.keyValues objectForKey:kHacks] unsignedIntValue];
-	[hackEnable setIntegerValue:[[self.keyValues objectForKey:kHacksEnable] boolValue]];
+	unsigned int hackValues = [(self.keyValues)[kHacks] unsignedIntValue];
+	[hackEnable setIntegerValue:[(self.keyValues)[kHacksEnable] boolValue]];
 
     // build refs to hacks checkboxes
 	for (NSControl *control in [hacksMatrix cells]) {
@@ -379,30 +374,30 @@ void ReadConfig(void)
 
 	[self loadHacksValues];
 	
-	[autoFullScreen setIntegerValue:[[keyValues objectForKey:kAutoFullScreen] boolValue]];
-	[ditherMode selectItemAtIndex:[[keyValues objectForKey:@"Dither Mode"] integerValue]];
-	[fpsCounter setIntegerValue:[[keyValues objectForKey:kFPSCounter] boolValue]];
-	[scanlineColorWell setColor:[NSUnarchiver unarchiveObjectWithData: [keyValues objectForKey:@"Scanline Color"]]];
-	[frameSkipping setIntegerValue:[[keyValues objectForKey:kFrameSkipping] boolValue]];
-	[advancedBlending setIntegerValue:[[keyValues objectForKey:@"Advanced Blending"] boolValue]];
-	[texFiltering setIntegerValue:[[keyValues objectForKey:@"Texture Filter Level"] integerValue]];
-	[texEnhancment setIntegerValue:[[keyValues objectForKey:@"Texture Enhancement Level"] integerValue]];
-	[zMaskClipping setIntegerValue:[[keyValues objectForKey:@"Z Mask Clipping"] integerValue]];
-	[mjpegDecoder setIntegerValue:[[keyValues objectForKey:@"Emulate mjpeg decoder"] boolValue]];
-	[mjpegDecoder15bit setIntegerValue:[[keyValues objectForKey:@"Fast mjpeg decoder"] boolValue]];
-	[drawScanlines setIntegerValue:[[keyValues objectForKey:@"Draw Scanlines"] boolValue]];
-	[offscreenDrawing selectItemAtIndex:[[keyValues objectForKey:@"Offscreen Drawing Level"] integerValue]];
-	[advancedBlending setIntegerValue:[[keyValues objectForKey:@"Advanced Blending"] boolValue]];
-	[opaquePass setIntegerValue:[[keyValues objectForKey:@"Opaque Pass"] boolValue]];
-	[wireframeOnly setIntegerValue:[[keyValues objectForKey:@"Wireframe Mode"] boolValue]];
-	[blurEffect setIntegerValue:[[keyValues objectForKey:@"Blur"] boolValue]];
-	[texColorDepth selectItemAtIndex:[[keyValues objectForKey:@"Texture Color Depth Level"] integerValue]];
-	[gteAccuracy setIntegerValue:[[keyValues objectForKey:@"GteAccuracy"] boolValue]];
-	[scanlineColorWell setEnabled:[[keyValues objectForKey:@"Draw Scanlines"] boolValue]];
-	[frameBufferEffects selectItemAtIndex:[[keyValues objectForKey:@"Frame Buffer Level"] integerValue]];
-	[vSync setIntegerValue:[[keyValues objectForKey:kVSync] boolValue]];
-	[proportionalResize setIntegerValue:[[keyValues objectForKey:@"Proportional Resize"] boolValue]];
-	NSSize winSize = NSSizeFromString([keyValues objectForKey:kWindowSize]);
+	[autoFullScreen setIntegerValue:[keyValues[kAutoFullScreen] boolValue]];
+	[ditherMode selectItemAtIndex:[keyValues[@"Dither Mode"] integerValue]];
+	[fpsCounter setIntegerValue:[keyValues[kFPSCounter] boolValue]];
+	[scanlineColorWell setColor:[NSUnarchiver unarchiveObjectWithData: keyValues[@"Scanline Color"]]];
+	[frameSkipping setIntegerValue:[keyValues[kFrameSkipping] boolValue]];
+	[advancedBlending setIntegerValue:[keyValues[@"Advanced Blending"] boolValue]];
+	[texFiltering setIntegerValue:[keyValues[@"Texture Filter Level"] integerValue]];
+	[texEnhancment setIntegerValue:[keyValues[@"Texture Enhancement Level"] integerValue]];
+	[zMaskClipping setIntegerValue:[keyValues[@"Z Mask Clipping"] integerValue]];
+	[mjpegDecoder setIntegerValue:[keyValues[@"Emulate mjpeg decoder"] boolValue]];
+	[mjpegDecoder15bit setIntegerValue:[keyValues[@"Fast mjpeg decoder"] boolValue]];
+	[drawScanlines setIntegerValue:[keyValues[@"Draw Scanlines"] boolValue]];
+	[offscreenDrawing selectItemAtIndex:[keyValues[@"Offscreen Drawing Level"] integerValue]];
+	[advancedBlending setIntegerValue:[keyValues[@"Advanced Blending"] boolValue]];
+	[opaquePass setIntegerValue:[keyValues[@"Opaque Pass"] boolValue]];
+	[wireframeOnly setIntegerValue:[keyValues[@"Wireframe Mode"] boolValue]];
+	[blurEffect setIntegerValue:[keyValues[@"Blur"] boolValue]];
+	[texColorDepth selectItemAtIndex:[keyValues[@"Texture Color Depth Level"] integerValue]];
+	[gteAccuracy setIntegerValue:[keyValues[@"GteAccuracy"] boolValue]];
+	[scanlineColorWell setEnabled:[keyValues[@"Draw Scanlines"] boolValue]];
+	[frameBufferEffects selectItemAtIndex:[keyValues[@"Frame Buffer Level"] integerValue]];
+	[vSync setIntegerValue:[keyValues[kVSync] boolValue]];
+	[proportionalResize setIntegerValue:[keyValues[@"Proportional Resize"] boolValue]];
+	NSSize winSize = NSSizeFromString(keyValues[kWindowSize]);
 	[windowWidth setIntegerValue:winSize.width];
 	[windowHeighth setIntegerValue:winSize.height];
 }
@@ -424,8 +419,8 @@ void ReadConfig(void)
 			hackValues |= [control intValue] << ([control tag] - 1);
 		}
 		NSMutableDictionary *writeDic = self.keyValues;
-		[writeDic setObject:@(hackValues) forKey:kHacks];
-		[writeDic setObject:([hackEnable integerValue] ? @YES : @NO) forKey:kHacksEnable];
+		writeDic[kHacks] = @(hackValues);
+		writeDic[kHacksEnable] = ([hackEnable integerValue] ? @YES : @NO);
 	}
 	[sheet orderOut:nil];
 }

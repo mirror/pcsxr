@@ -2560,6 +2560,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -2575,6 +2576,7 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -2592,6 +2594,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -2607,6 +2610,7 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -2630,6 +2634,7 @@
 				);
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -2651,6 +2656,7 @@
 				);
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -2671,6 +2677,7 @@
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OTHER_CFLAGS = "$(OPTIMIZATION_CFLAGS)";
 				PRODUCT_NAME = PeopsSoftGPU;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -2690,6 +2697,7 @@
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OTHER_CFLAGS = "$(OPTIMIZATION_CFLAGS)";
 				PRODUCT_NAME = PeopsSoftGPU;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -2716,6 +2724,7 @@
 				INFOPLIST_FILE = "plugins/DFSound/Info-SDL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -2740,6 +2749,7 @@
 				INFOPLIST_FILE = "plugins/DFSound/Info-SDL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -2765,6 +2775,7 @@
 					"plugins/DFSound/Resorces/Shared/SPUShared-info.plist",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -2788,6 +2799,7 @@
 					"plugins/DFSound/Resorces/Shared/SPUShared-info.plist",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -2808,6 +2820,7 @@
 				INFOPLIST_FILE = "plugins/DFSound/Info-AL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -2827,6 +2840,7 @@
 				INFOPLIST_FILE = "plugins/DFSound/Info-AL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -2848,6 +2862,7 @@
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OTHER_CFLAGS = "$(OPTIMIZATION_CFLAGS)";
 				PRODUCT_NAME = PeopsXGL;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -2867,6 +2882,7 @@
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OTHER_CFLAGS = "$(OPTIMIZATION_CFLAGS)";
 				PRODUCT_NAME = PeopsXGL;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -2884,6 +2900,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Debug;
@@ -2899,6 +2916,7 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Release;
@@ -2948,6 +2966,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = PCSXR;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Instrument;
@@ -2972,6 +2991,7 @@
 					"plugins/DFSound/Resorces/Shared/SPUShared-info.plist",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Instrument;
 		};
@@ -2986,6 +3006,7 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Instrument;
@@ -3007,6 +3028,7 @@
 				);
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Instrument;
@@ -3026,6 +3048,7 @@
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OTHER_CFLAGS = "$(OPTIMIZATION_CFLAGS)";
 				PRODUCT_NAME = PeopsSoftGPU;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Instrument;
@@ -3045,6 +3068,7 @@
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				OTHER_CFLAGS = "$(OPTIMIZATION_CFLAGS)";
 				PRODUCT_NAME = PeopsXGL;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Instrument;
@@ -3069,6 +3093,7 @@
 				INFOPLIST_FILE = "plugins/DFSound/Info-SDL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Instrument;
@@ -3088,6 +3113,7 @@
 				INFOPLIST_FILE = "plugins/DFSound/Info-AL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Instrument;
@@ -3103,6 +3129,7 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Instrument;
@@ -3118,6 +3145,7 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = psxplugin;
 			};
 			name = Instrument;
@@ -3166,6 +3194,7 @@
 				LD_NO_PIE = YES;
 				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_NAME = PCSXR;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3195,6 +3224,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = PCSXR;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

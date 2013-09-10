@@ -72,14 +72,12 @@ void DoAbout()
 	[icon setSize:size];
 		
 	NSDictionary *infoPaneDict =
-	[[NSDictionary alloc] initWithObjectsAndKeys:
-	 [bundle objectForInfoDictionaryKey:@"CFBundleName"], @"ApplicationName",
-	 icon, @"ApplicationIcon",
-	 [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], @"ApplicationVersion",
-	 [bundle objectForInfoDictionaryKey:@"CFBundleVersion"], @"Version",
-	 [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"], @"Copyright",
-	 credits, @"Credits",
-	 nil];
+	@{@"ApplicationName": [bundle objectForInfoDictionaryKey:@"CFBundleName"],
+	 @"ApplicationIcon": icon,
+	 @"ApplicationVersion": [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
+	 @"Version": [bundle objectForInfoDictionaryKey:@"CFBundleVersion"],
+	 @"Copyright": [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"],
+	 @"Credits": credits};
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
@@ -109,29 +107,25 @@ void ReadConfig(void)
 {
 	NSDictionary *keyValues;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-								[NSDictionary dictionaryWithObjectsAndKeys:
-								 @YES, @"High Compatibility Mode",
-								 @YES, @"SPU IRQ Wait",
-								 @NO, @"XA Pitch",
-								 @NO, @"Mono Sound Output",
-								 @0, @"Interpolation Quality",
-								 @1, @"Reverb Quality",
-								 @3, @"Volume",
-								 nil], PrefsKey,
-								nil]];
+	[defaults registerDefaults:@{PrefsKey: @{@"High Compatibility Mode": @YES,
+								 @"SPU IRQ Wait": @YES,
+								 @"XA Pitch": @NO,
+								 @"Mono Sound Output": @NO,
+								 @"Interpolation Quality": @0,
+								 @"Reverb Quality": @1,
+								 @"Volume": @3}}];
 	
 	keyValues = [defaults dictionaryForKey:PrefsKey];
 	
-	iUseTimer = [[keyValues objectForKey:@"High Compatibility Mode"] boolValue] ? 2 : 0;
-	iSPUIRQWait = [[keyValues objectForKey:@"SPU IRQ Wait"] boolValue];
-	iDisStereo = [[keyValues objectForKey:@"Mono Sound Output"] boolValue];
-	iXAPitch = [[keyValues objectForKey:@"XA Pitch"] boolValue];
+	iUseTimer = [keyValues[@"High Compatibility Mode"] boolValue] ? 2 : 0;
+	iSPUIRQWait = [keyValues[@"SPU IRQ Wait"] boolValue];
+	iDisStereo = [keyValues[@"Mono Sound Output"] boolValue];
+	iXAPitch = [keyValues[@"XA Pitch"] boolValue];
 	
-	iUseInterpolation = [[keyValues objectForKey:@"Interpolation Quality"] intValue];
-	iUseReverb = [[keyValues objectForKey:@"Reverb Quality"] intValue];
+	iUseInterpolation = [keyValues[@"Interpolation Quality"] intValue];
+	iUseReverb = [keyValues[@"Reverb Quality"] intValue];
 	
-	iVolume = 5 - [[keyValues objectForKey:@"Volume"] intValue];
+	iVolume = 5 - [keyValues[@"Volume"] intValue];
 }
 
 @implementation PluginController
@@ -146,15 +140,15 @@ void ReadConfig(void)
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:self.keyValues];
-	[writeDic setObject:([hiCompBox intValue] ? @YES : @NO) forKey:@"High Compatibility Mode"];
-	[writeDic setObject:([irqWaitBox intValue] ? @YES : @NO) forKey:@"SPU IRQ Wait"];
-	[writeDic setObject:([monoSoundBox intValue] ? @YES : @NO) forKey:@"Mono Sound Output"];
-	[writeDic setObject:([xaSpeedBox intValue] ? @YES : @NO) forKey:@"XA Pitch"];
+	writeDic[@"High Compatibility Mode"] = ([hiCompBox intValue] ? @YES : @NO);
+	writeDic[@"SPU IRQ Wait"] = ([irqWaitBox intValue] ? @YES : @NO);
+	writeDic[@"Mono Sound Output"] = ([monoSoundBox intValue] ? @YES : @NO);
+	writeDic[@"XA Pitch"] = ([xaSpeedBox intValue] ? @YES : @NO);
 
-	[writeDic setObject:@([interpolValue intValue]) forKey:@"Interpolation Quality"];
-	[writeDic setObject:@([reverbValue intValue]) forKey:@"Reverb Quality"];
+	writeDic[@"Interpolation Quality"] = @([interpolValue intValue]);
+	writeDic[@"Reverb Quality"] = @([reverbValue intValue]);
 
-	[writeDic setObject:@([volumeValue intValue]) forKey:@"Volume"];
+	writeDic[@"Volume"] = @([volumeValue intValue]);
 
 	// write to defaults
 	[defaults setObject:writeDic forKey:PrefsKey];
@@ -182,14 +176,14 @@ void ReadConfig(void)
 	/* load from preferences */
 	self.keyValues = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:PrefsKey]];
 
-	[hiCompBox setIntValue:[[keyValues objectForKey:@"High Compatibility Mode"] boolValue]];
-	[irqWaitBox setIntValue:[[keyValues objectForKey:@"SPU IRQ Wait"] boolValue]];
-	[monoSoundBox setIntValue:[[keyValues objectForKey:@"Mono Sound Output"] boolValue]];
-	[xaSpeedBox setIntValue:[[keyValues objectForKey:@"XA Pitch"] boolValue]];
+	[hiCompBox setIntValue:[keyValues[@"High Compatibility Mode"] boolValue]];
+	[irqWaitBox setIntValue:[keyValues[@"SPU IRQ Wait"] boolValue]];
+	[monoSoundBox setIntValue:[keyValues[@"Mono Sound Output"] boolValue]];
+	[xaSpeedBox setIntValue:[keyValues[@"XA Pitch"] boolValue]];
 
-	[interpolValue setIntValue:[[keyValues objectForKey:@"Interpolation Quality"] intValue]];
-	[reverbValue setIntValue:[[keyValues objectForKey:@"Reverb Quality"] intValue]];
-	[volumeValue setIntValue:[[keyValues objectForKey:@"Volume"] intValue]];
+	[interpolValue setIntValue:[keyValues[@"Interpolation Quality"] intValue]];
+	[reverbValue setIntValue:[keyValues[@"Reverb Quality"] intValue]];
+	[volumeValue setIntValue:[keyValues[@"Volume"] intValue]];
 }
 
 - (void)awakeFromNib
