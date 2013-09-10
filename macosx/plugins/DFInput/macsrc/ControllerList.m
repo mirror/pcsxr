@@ -20,7 +20,6 @@
  */
 
 #import "ControllerList.h"
-#import "ARCBridge.h"
 #include "pad.h"
 #include "cfg.h"
 
@@ -63,7 +62,6 @@ static NSArray *labelText;
 				 [plugBundle localizedStringForKey:@"R-Stick Left" value:@"" table:nil],
 				 [plugBundle localizedStringForKey:@"R-Stick Down" value:@"" table:nil],
 				 [plugBundle localizedStringForKey:@"R-Stick Up" value:@"" table:nil]];
-			RETAINOBJNORETURN(labelText);
 		});
 	}
 	return self;

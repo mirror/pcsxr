@@ -14,7 +14,6 @@
 #include "misc.h"
 #include "cdrom.h"
 #include "ExtendedKeys.h"
-#import "ARCBridge.h"
 
 NSDictionary *prefStringKeys;
 NSDictionary *prefByteKeys;
@@ -50,7 +49,7 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 @property (readwrite) BOOL endAtEmuClose;
 @property BOOL sleepInBackground;
 @property BOOL wasPausedBeforeBGSwitch;
-@property (arcstrong) NSMutableArray *skipFiles;
+@property (strong) NSMutableArray *skipFiles;
 @end
 
 @implementation PcsxrController
@@ -103,7 +102,7 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 
 	// switch to another ISO if using internal image reader, otherwise eject the CD
 	if (UsingIso()) {
-		NSOpenPanel* openDlg = RETAINOBJ([NSOpenPanel openPanel]);
+		NSOpenPanel* openDlg = [NSOpenPanel openPanel];
 
 		[openDlg setCanChooseFiles:YES];
 		[openDlg setCanChooseDirectories:NO];
@@ -115,7 +114,6 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 			SetCdOpenCaseTime(time(NULL) + 2);
 			LidInterrupt();
 		}
-		RELEASEOBJ(openDlg);
 	} else {
         char *driveLetter = CDR_getDriveLetter();
         
@@ -201,7 +199,7 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 
 - (IBAction)runIso:(id)sender
 {
-	NSOpenPanel* openDlg = RETAINOBJ([NSOpenPanel openPanel]);
+	NSOpenPanel* openDlg = [NSOpenPanel openPanel];
 
 	[openDlg setCanChooseFiles:YES];
 	[openDlg setCanChooseDirectories:NO];
@@ -212,7 +210,6 @@ void ShowHelpAndExit(FILE* output, int exitCode)
         [recentItems addRecentItem:url];
 		[self runURL:url];
     }
-	RELEASEOBJ(openDlg);
 }
 
 - (IBAction)runBios:(id)sender
@@ -428,7 +425,6 @@ otherblock();\
 				[self runCD:nil];
 			}];
 			[larg addToDictionary:argDict];
-			RELEASEOBJ(larg);
 		};
 		
 		dispatch_block_t biosBlock = ^{
@@ -437,7 +433,6 @@ otherblock();\
 				[self runBios:nil];
 			}];
 			[larg addToDictionary:argDict];
-			RELEASEOBJ(larg);
 		};
 		
 		//This block/argument does not need to be sorted
@@ -447,7 +442,6 @@ otherblock();\
 				self.endAtEmuClose = YES;
 			}];
 			[larg addToDictionary:argDict];
-			RELEASEOBJ(larg);
 		};
 		
 		dispatch_block_t isoBlock = ^{
@@ -457,7 +451,6 @@ otherblock();\
 				[self runURL:[NSURL fileURLWithPath:path isDirectory:NO]];
 			}];
 			[larg addToDictionary:argDict];
-			RELEASEOBJ(larg);
 		};
 		
 		void (^mcdBlock)(int mcdNumber) = ^(int mcdnumber){
@@ -474,7 +467,6 @@ otherblock();\
 				LoadMcd(mcdnumber, (char*)[path fileSystemRepresentation]);
 			}];
 			[larg addToDictionary:argDict];
-			RELEASEOBJ(larg);
 		};
 		
 		dispatch_block_t freezeBlock = ^{
@@ -488,7 +480,6 @@ otherblock();\
 				}
 			}];
 			[larg addToDictionary:argDict];
-			RELEASEOBJ(larg);
 		};
 
 		BOOL hasFileTestBlock = NO;
@@ -527,7 +518,7 @@ otherblock();\
 #ifdef DEBUG
 		if ([unknownOptions count]) {			
 			//As there doesn't seem to be a Cocoa/Objective-C method like this...
-			NSString *unknownString = CFBridgingRelease(CFStringCreateByCombiningStrings(kCFAllocatorDefault, BRIDGE(CFArrayRef, unknownOptions), CFSTR(" ")));
+			NSString *unknownString = [unknownOptions componentsJoinedByString:@" "];
 			
 			NSLog(@"The following options weren't recognized by PCSX-R: %@. This may be due to extra arguments passed by the OS or debugger.", unknownString);
 		}
@@ -535,14 +526,13 @@ otherblock();\
 		unknownOptions = nil;
 		if (!isLaunchable && hasParsedAnArgument) {
 			NSMutableArray *mutProgArgs = [NSMutableArray arrayWithArray:progArgs];
-			NSString *appRawPath = RETAINOBJ([mutProgArgs objectAtIndex:0]);
+			NSString *appRawPath = [mutProgArgs objectAtIndex:0];
 			//Remove the app file path from the array
 			[mutProgArgs removeObjectAtIndex:0];
 			NSString *arg = [mutProgArgs componentsJoinedByString:@" "];
 			NSString *recognizedArgs = [[argDict allKeys] componentsJoinedByString:@" "];
 			
 			NSString *tmpStr = [NSString stringWithFormat:@"A launch command wasn't found in the command line and one or more arguments that PCSX-R recognizes were: %@.\nThe following command line arguments were passed with the application launch file at %@: %@.\n\nThe valid launch commands are %@, %@, and %@.", recognizedArgs, appRawPath, arg, kPCSXRArgumentISO, kPCSXRArgumentCDROM, kPCSXRArgumentBIOS];
-			RELEASEOBJ(appRawPath);
 			ParseErrorStr(tmpStr);
 		} else if (hasParsedAnArgument){
 			NSArray *argArray = [[argDict allValues] sortedArrayWithOptions:NSSortStable usingComparator:^NSComparisonResult(id obj1, id obj2) {
@@ -560,19 +550,8 @@ otherblock();\
 				arg.theBlock();
 			}
 		}
-		RELEASEOBJ(argDict);
 	}
 }
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	[pluginList release];
-	self.skipFiles = nil;
-	
-	[super dealloc];
-}
-#endif
 
 + (void)setConfigFromDefaults
 {
@@ -590,13 +569,6 @@ otherblock();\
 	for (NSString *key in prefByteKeys) {
 		u8 *dst = (u8 *)[[prefByteKeys objectForKey:key] pointerValue];
 		if (dst != NULL) *dst = [defaults boolForKey:key];
-#ifdef __i386__
-		//i386 on OS X doesn't like the dynarec core
-		if ([key isEqualToString:@"NoDynarec"]) {
-			if (dst != NULL) *dst = 1;
-			[defaults setBool:YES forKey:key];
-		}
-#endif
 	}
 
 	// special cases
@@ -857,7 +829,6 @@ otherblock();\
 	static NSArray *handlers = nil;
 	if (handlers == nil) {
 		handlers = @[[PcsxrPluginHandler class], [PcsxrMemCardHandler class], [PcsxrFreezeStateHandler class], [PcsxrDiscHandler class], [PcsxrCheatHandler class]];
-		RETAINOBJNORETURN(handlers);
 	}
 	BOOL isHandled = NO;
 	for (Class fileHandler in handlers) {
@@ -871,10 +842,8 @@ otherblock();\
 		}			
 		if (canHandle) {
 			isHandled = [hand handleFile:filename];
-			RELEASEOBJ(hand);
 			break;
 		}
-		RELEASEOBJ(hand);
 	}
 	
 	return isHandled;

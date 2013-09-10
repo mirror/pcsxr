@@ -10,7 +10,6 @@
 #import "PcsxrPlugin.h"
 #include "psxcommon.h"
 #include "plugins.h"
-#import "ARCBridge.h"
 
 #define kPCSXRGetLibName "PSEgetLibName"
 #define kPCSXRGetLibVersion "PSEgetLibVersion"
@@ -18,9 +17,9 @@
 
 @interface PcsxrPlugin ()
 @property (readwrite, copy) NSString *path;
-@property (readwrite, arcstrong) NSDate *modDate;
-@property (readwrite, arcstrong) NSString *name;
-@property (readwrite, arcstrong) NSString *fullPlugPath;
+@property (readwrite, strong) NSDate *modDate;
+@property (readwrite, strong) NSString *name;
+@property (readwrite, strong) NSString *fullPlugPath;
 @end
 
 @implementation PcsxrPlugin
@@ -161,14 +160,12 @@
 	}
 	
 	if (goodPath == nil) {
-		AUTORELEASEOBJNORETURN(self);
 		return nil;
 	}
 	
 	pluginRef = SysLoadLibrary([goodPath fileSystemRepresentation]);
 	if (pluginRef == NULL) {
 		SysLibError();
-		AUTORELEASEOBJNORETURN(self);
 		return nil;
 	}
 	
@@ -188,13 +185,11 @@
 		else if (([path rangeOfString: @"sio1" options:NSCaseInsensitiveSearch]).length != 0)
 			type = PSE_LT_SIO1;
 		else {
-			AUTORELEASEOBJNORETURN(self);
 			return nil;
 		}
 	} else {
 		type = (int)PSE_getLibType();
 		if (type != PSE_LT_GPU && type != PSE_LT_CDR && type != PSE_LT_SPU && type != PSE_LT_PAD && type != PSE_LT_NET && type != PSE_LT_SIO1) {
-			AUTORELEASEOBJNORETURN(self);
 			return nil;
 		}
 	}
@@ -236,15 +231,6 @@
 		SysCloseLibrary(pluginRef);
 		pluginRef = NULL;
 	}
-	
-#if !__has_feature(objc_arc)
-	self.modDate = nil;
-	self.path = nil;
-	self.name = nil;
-	self.fullPlugPath = nil;
-	
-	[super dealloc];
-#endif
 }
 
 #define PluginSymbolName(type, theName) [[PcsxrPlugin prefixForType:type] stringByAppendingString:theName]
@@ -262,7 +248,6 @@
 			NSBeep();
 		}
 		
-		RELEASEOBJ(arg);
 		return;
 	}
 }
@@ -351,7 +336,6 @@
 	
 	NSString *aboutSym = PluginSymbolNameAbout(aType);
 	arg = @[aboutSym, @0];
-	RETAINOBJNORETURN(arg);
 	
 	// detach a new thread
 	[NSThread detachNewThreadSelector:@selector(runCommand:) toTarget:self
@@ -366,7 +350,6 @@
 	
 	NSString *configSym = PluginSymbolNameConfigure(aType);
 	arg = @[configSym, @1];
-	RETAINOBJNORETURN(arg);
 	
 	// detach a new thread
 	[NSThread detachNewThreadSelector:@selector(runCommand:) toTarget:self

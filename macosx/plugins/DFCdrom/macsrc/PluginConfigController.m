@@ -20,7 +20,6 @@
  */
 
 #import "PluginConfigController.h"
-#import "ARCBridge.h"
 #include "cdr.h"
 
 #define APP_ID @"net.pcsxr.DFCdrom"
@@ -48,10 +47,9 @@ void AboutDlgProc()
 	if (path) {
 		credits = [[NSAttributedString alloc] initWithPath: path
 				documentAttributes:NULL];
-		AUTORELEASEOBJNORETURN(credits);
 		
 	} else {
-		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithString:@""]);
+		credits = [[NSAttributedString alloc] initWithString:@""];
 	}
 
 	// Get Application Icon
@@ -71,7 +69,6 @@ void AboutDlgProc()
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
-	RELEASEOBJ(infoPaneDict);
 }
 
 void ConfDlgProc()
@@ -144,7 +141,6 @@ void ReadConfig()
 	// and set global values accordingly
 	ReadConfig();
 	
-	RELEASEOBJ(writeDic);
 	self.keyValues = nil;
 	[self close];
 }
@@ -171,15 +167,6 @@ void ReadConfig()
 		default: [CdSpeed selectItemAtIndex:0]; break;
 	}
 }
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	self.keyValues = nil;
-	
-	[super dealloc];
-}
-#endif
 
 - (void)awakeFromNib
 {

@@ -12,13 +12,12 @@
 #import "PcsxrMemCardHandler.h"
 #import "PcsxrMemCardArray.h"
 #include "sio.h"
-#import "ARCBridge.h"
 
 #define MAX_MEMCARD_BLOCKS 15
 
 @interface PcsxrMemCardController ()
-@property (readwrite, arcretain) PcsxrMemCardArray *memCard1Array;
-@property (readwrite, arcretain) PcsxrMemCardArray *memCard2Array;
+@property (readwrite, strong) PcsxrMemCardArray *memCard1Array;
+@property (readwrite, strong) PcsxrMemCardArray *memCard2Array;
 @end
 
 @implementation PcsxrMemCardController
@@ -68,7 +67,6 @@
 	} else {
 		[self setMemCard2Array:newArray];
 	}
-	RELEASEOBJ(newArray);
 }
 
 - (void)memoryCardDidChangeNotification:(NSNotification *)aNote
@@ -231,14 +229,6 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[imageAnimateTimer invalidate];
-	
-#if !__has_feature(objc_arc)
-	[imageAnimateTimer release];
-	self.memCard1Array = nil;
-	self.memCard2Array = nil;
-
-	[super dealloc];
-#endif
 }
 
 @end

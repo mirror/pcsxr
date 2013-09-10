@@ -16,7 +16,6 @@
 #include "sio.h"
 #include <IOKit/pwr_mgt/IOPMLib.h>
 #import "hotkeys.h"
-#import "ARCBridge.h"
 
 static inline void RunOnMainThreadSync(dispatch_block_t block)
 {
@@ -161,7 +160,6 @@ void SysMessage(const char *fmt, ...) {
 	va_end(list);
 	
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:msg forKey:NSLocalizedFailureReasonErrorKey];
-	RELEASEOBJ(msg);
 	
 	RunOnMainThreadSync(^{
 		[NSApp presentError:[NSError errorWithDomain:@"Unknown Domain" code:-1 userInfo:userInfo]];
@@ -171,7 +169,6 @@ void SysMessage(const char *fmt, ...) {
 void *SysLoadLibrary(const char *lib) {
 	NSBundle *bundle = [[NSBundle alloc] initWithPath:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:lib length:strlen(lib)]];
 	if (bundle != nil) {
-		AUTORELEASEOBJNORETURN(bundle);
 		return dlopen([[bundle executablePath] fileSystemRepresentation], RTLD_LAZY /*RTLD_NOW*/);
 	}
 	return dlopen(lib, RTLD_LAZY);

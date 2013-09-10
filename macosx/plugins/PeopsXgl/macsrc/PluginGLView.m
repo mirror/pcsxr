@@ -29,8 +29,6 @@
 #include "externals.h" // for PSXDisplay.disable -- should move it elsewhere really
 #undef BOOL
 
-#import "ARCBridge.h"
-
 @implementation PluginGLView
 
 - (BOOL)isOpaque
@@ -51,7 +49,6 @@
 	
 	glLock = [[NSLock alloc] init];
 	if (nil == glLock) {
-		AUTORELEASEOBJNORETURN(self);
 		return nil;
 	}
 	
@@ -83,12 +80,11 @@
 		if (!pixFmt) {
 			NSLog(@"No OpenGL pixel format found!\n");
 			
-			AUTORELEASEOBJNORETURN(self);
 			return nil;
 		}
 	}
 	
-	[self setPixelFormat:AUTORELEASEOBJ(pixFmt)];
+	[self setPixelFormat:pixFmt];
 	
 	[[self openGLContext] makeCurrentContext];
 	
@@ -106,10 +102,6 @@
 {
 	[[self openGLContext] makeCurrentContext]; // just in case
 	[NSOpenGLContext clearCurrentContext];
-#if !__has_feature(objc_arc)
-	[glLock release];
-	[super dealloc];
-#endif
 }
 
 - (void)reshape	// scrolled, moved or resized

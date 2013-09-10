@@ -11,7 +11,7 @@
 @interface LaunchArg ()
 @property (readwrite) LaunchArgOrder launchOrder;
 @property (readwrite, copy, nonatomic) dispatch_block_t theBlock;
-@property (readwrite, arcretain) NSString *argument;
+@property (readwrite, strong) NSString *argument;
 
 @end
 
@@ -21,16 +21,7 @@
 @synthesize theBlock = _theBlock;
 - (void)setTheBlock:(dispatch_block_t)theBlock
 {
-#if __has_feature(objc_arc)
 	_theBlock = [theBlock copy];
-#else
-	if (_theBlock == theBlock) {
-		return;
-	}
-	dispatch_block_t tmpBlock = _theBlock;
-	_theBlock = [theBlock copy];
-	[tmpBlock release];
-#endif
 }
 
 - (id)initWithLaunchOrder:(LaunchArgOrder)order argument:(NSString*)arg block:(dispatch_block_t)block
@@ -57,15 +48,5 @@
 {
 	return [NSString stringWithFormat:@"Arg: %@, order: %u, block addr: %p", _argument, _launchOrder, _theBlock];
 }
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	self.theBlock = nil;
-	self.argument = nil;
-	
-	[super dealloc];
-}
-#endif
 
 @end

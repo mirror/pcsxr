@@ -4,7 +4,6 @@
 #include "menu.h"
 #include "externals.h"
 #import "SGPUPreferences.h"
-#import "ARCBridge.h"
 #import "PluginGLView.h"
 
 #ifdef ENABLE_NLS
@@ -54,9 +53,8 @@ void AboutDlgProc()
 	if (path) {
 		credits = [[NSAttributedString alloc] initWithPath: path
 				documentAttributes:NULL];
-		AUTORELEASEOBJNORETURN(credits);
 	} else {
-		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithString:@""]);
+		credits = [[NSAttributedString alloc] initWithString:@""];
 	}
 	
 	// Get Application Icon
@@ -76,7 +74,6 @@ void AboutDlgProc()
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
-	RELEASEOBJ(infoPaneDict);
 }
 
 void SoftDlgProc()
@@ -287,7 +284,7 @@ void ReadConfig(void)
 }
 
 - (IBAction)selectShader:(id)sender {
-	NSOpenPanel *openPanel = RETAINOBJ([NSOpenPanel openPanel]);
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
 	[openPanel setAllowsMultipleSelection:NO];
 	[openPanel setCanChooseDirectories:NO];
 	[openPanel setCanChooseFiles:YES];
@@ -299,8 +296,6 @@ void ReadConfig(void)
 			[self setFragmentPathInfo:[openPanel URL]];
 		}
 	}
-	
-	RELEASEOBJ(openPanel);
 }
 
 - (void)loadValues
@@ -310,7 +305,6 @@ void ReadConfig(void)
 	ReadConfig();
 	
 	/* load from preferences */
-	RELEASEOBJ(keyValues);
 	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 	
 	{
@@ -348,17 +342,6 @@ void ReadConfig(void)
 	[self hackToggle:hackEnable];
 	[self toggleShader:shaders];
 }
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	[vertexPath release];
-	[fragmentPath release];
-	[keyValues release];
-	
-	[super dealloc];
-}
-#endif
 
 @end
 

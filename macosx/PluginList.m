@@ -11,10 +11,8 @@
 #import "PcsxrPlugin.h"
 #include "psxcommon.h"
 #include "plugins.h"
-#import "ARCBridge.h"
 
-//NSMutableArray *plugins;
-static PluginList __arcweak *sPluginList = nil;
+static PluginList __weak *sPluginList = nil;
 const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, PSE_LT_NET, PSE_LT_SIO1};
 
 @implementation PluginList
@@ -55,7 +53,6 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 					[pluginList addObject:plugin];
 					if (![self setActivePlugin:plugin forType:typeList[i]])
 						missingPlugins = YES;
-					RELEASEOBJ(plugin);
 				} else {
 					missingPlugins = YES;
 				}
@@ -71,25 +68,6 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 	
 	return self;
 }
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	if (sPluginList == self)
-		sPluginList = nil;
-
-	[activeGpuPlugin release];
-	[activeSpuPlugin release];
-	[activeCdrPlugin release];
-	[activePadPlugin release];
-	[activeNetPlugin release];
-	[activeSIO1Plugin release];
-	
-	[pluginList release];
-	
-	[super dealloc];
-}
-#endif
 
 - (void)refreshPlugins
 {
@@ -120,7 +98,6 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 						PcsxrPlugin *plugin = [[PcsxrPlugin alloc] initWithPath:pname];
 						if (plugin != nil) {
 							[pluginList addObject:plugin];
-							RELEASEOBJ(plugin);
 						}
 					}
 				}
@@ -235,8 +212,6 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 	// stop the old plugin and start the new one
 	if (pluginPtr) {
 		[pluginPtr shutdownAs:type];
-		//NOTE: We can ignore Clang's "Incorrect Decrement" here
-		RELEASEOBJ(pluginPtr);
 	}
 	
 	if ([plugin runAs:type] != 0) {
@@ -244,22 +219,22 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 	}
 		switch (type) {
 			case PSE_LT_GPU:
-				activeGpuPlugin = RETAINOBJ(plugin);
+				activeGpuPlugin = plugin;
 				break;
 			case PSE_LT_CDR:
-				activeCdrPlugin = RETAINOBJ(plugin);
+				activeCdrPlugin = plugin;
 				break;
 			case PSE_LT_SPU:
-				activeSpuPlugin = RETAINOBJ(plugin);
+				activeSpuPlugin = plugin;
 				break;
 			case PSE_LT_PAD:
-				activePadPlugin = RETAINOBJ(plugin);
+				activePadPlugin = plugin;
 				break;
 			case PSE_LT_NET:
-				activeNetPlugin = RETAINOBJ(plugin);
+				activeNetPlugin = plugin;
 				break;
 			case PSE_LT_SIO1:
-				activeSIO1Plugin = RETAINOBJ(plugin);
+				activeSIO1Plugin = plugin;
 				break;
 	}
 	

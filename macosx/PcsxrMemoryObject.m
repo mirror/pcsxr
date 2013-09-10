@@ -13,20 +13,19 @@
 #import <AppKit/NSImage.h>
 #import <AppKit/NSBezierPath.h>
 #import <AppKit/NSAttributedString.h>
-#import "ARCBridge.h"
 
 NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 
 @interface PcsxrMemoryObject ()
-@property (readwrite, arcstrong) NSString *englishName;
-@property (readwrite, arcstrong) NSString *sjisName;
-@property (readwrite, arcstrong) NSString *memName;
-@property (readwrite, arcstrong) NSString *memID;
+@property (readwrite, strong) NSString *englishName;
+@property (readwrite, strong) NSString *sjisName;
+@property (readwrite, strong) NSString *memName;
+@property (readwrite, strong) NSString *memID;
 @property (readwrite) uint8_t startingIndex;
 @property (readwrite) uint8_t blockSize;
 
 @property (readwrite, nonatomic) NSInteger memImageIndex;
-@property (arcstrong) NSArray *memImages;
+@property (strong) NSArray *memImages;
 @property (readwrite) PCSXRMemFlags flagNameIndex;
 @end
 
@@ -54,14 +53,11 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 			}
 			memImage = [[NSImage alloc] init];
 			[memImage addRepresentation:imageRep];
-			RELEASEOBJ(imageRep);
 			[memImage setSize:NSMakeSize(32, 32)];
 		}
 		[imagesArray addObject:memImage];
-		RELEASEOBJ(memImage);
 	}
 	NSArray *retArray = [NSArray arrayWithArray:imagesArray];
-	RELEASEOBJ(imagesArray);
 	return retArray;
 }
 
@@ -255,28 +251,23 @@ NS_INLINE void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtclr)
 		NSMutableAttributedString *tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelFree];
 		SetupAttrStr(tmpStr, [NSColor greenColor]);
 		attribMemLabelFree = [tmpStr copy];
-		RELEASEOBJ(tmpStr);
 		
 #ifdef DEBUG
 		tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelEndLink];
 		SetupAttrStr(tmpStr, [NSColor blueColor]);
 		attribMemLabelEndLink = [tmpStr copy];
-		RELEASEOBJ(tmpStr);
 		
 		tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelLink];
 		SetupAttrStr(tmpStr, [NSColor blueColor]);
 		attribMemLabelLink = [tmpStr copy];
-		RELEASEOBJ(tmpStr);
 		
 		tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelUsed];
 		SetupAttrStr(tmpStr, [NSColor controlTextColor]);
 		attribMemLabelUsed = [tmpStr copy];
-		RELEASEOBJ(tmpStr);
 #else
 		tmpStr = [[NSMutableAttributedString alloc] initWithString:@"Multi-save"];
 		SetupAttrStr(tmpStr, [NSColor blueColor]);
 		attribMemLabelEndLink = [tmpStr copy];
-		RELEASEOBJ(tmpStr);
 		
 		//tmpStr = [[NSMutableAttributedString alloc] initWithString:@"Multi-save"];
 		//SetupAttrStr(tmpStr, [NSColor blueColor]);
@@ -291,7 +282,6 @@ NS_INLINE void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtclr)
 		tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelDeleted];
 		SetupAttrStr(tmpStr, [NSColor redColor]);
 		attribMemLabelDeleted = [tmpStr copy];
-		RELEASEOBJ(tmpStr);
 	});
 	
 	switch (flagNameIndex) {
@@ -333,15 +323,6 @@ NS_INLINE void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtclr)
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-#if !__has_feature(objc_arc)
-	self.englishName = nil;
-	self.sjisName = nil;
-	self.memName = nil;
-	self.memID = nil;
-	self.memImages = nil;
-	
-	[super dealloc];
-#endif
 }
 
 - (NSString *)description

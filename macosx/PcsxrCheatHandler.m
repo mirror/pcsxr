@@ -7,7 +7,6 @@
 //
 
 #import "PcsxrCheatHandler.h"
-#import "ARCBridge.h"
 #import "CheatController.h"
 #import "PcsxrController.h"
 #include "psxcommon.h"
@@ -20,7 +19,6 @@
 	static NSArray *utisupport;
 	if (utisupport == nil) {
 		utisupport = @[@"com.codeplex.pcsxr.cheat"];
-		RETAINOBJNORETURN(utisupport);
 	}
 	return utisupport;
 }

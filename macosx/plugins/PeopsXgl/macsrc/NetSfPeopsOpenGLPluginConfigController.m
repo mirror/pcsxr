@@ -11,7 +11,6 @@
 #include "menu.h"
 #include <OpenGL/gl.h> // bah, "externals.h" thinks include files are for wimps; OpenGL header, in fact, is needed
 #include "externals.h"
-#import "ARCBridge.h"
 #import "PluginGLView.h"
 
 #ifdef ENABLE_NLS
@@ -59,9 +58,9 @@ void AboutDlgProc()
 	NSString *path = [bundle pathForResource:@"Credits" ofType:@"rtf"];
 	NSAttributedString *credits;
 	if (path) {
-		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithPath:path documentAttributes:NULL]);
+		credits = [[NSAttributedString alloc] initWithPath:path documentAttributes:NULL];
 	} else {
-		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithString:@""]);
+		credits = [[NSAttributedString alloc] initWithString:@""];
 	}
 	
 	// Get Application Icon
@@ -81,7 +80,6 @@ void AboutDlgProc()
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
-	RELEASEOBJ(infoPaneDict);
 }
 
 void DlgProc()
@@ -142,7 +140,6 @@ void PrepFactoryDefaultPreferences(void)
 		[tmpDict setObject:NSStringFromSize(NSMakeSize(800, 600)) forKey:kWindowSize];
 		[defaults setObject:tmpDict forKey:PrefsKey];
 		[defaults synchronize];
-		RELEASEOBJ(tmpDict);
 	}
 	keyValues = nil;
 	
@@ -454,15 +451,6 @@ void ReadConfig(void)
 		[scanlineColorWell setEnabled: [sender intValue] ? YES : NO];
 	}
 }
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	self.keyValues = nil;
-	
-	[super dealloc];
-}
-#endif
 
 @end
 

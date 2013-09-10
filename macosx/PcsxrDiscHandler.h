@@ -8,12 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PcsxrFileHandle.h"
-#import "ARCBridge.h"
 
 @interface PcsxrDiscHandler : NSObject <PcsxrFileHandle>
-{
-	NSURL *_discURL;
-	__arcweak NSString *discPath;
-}
 
 @end

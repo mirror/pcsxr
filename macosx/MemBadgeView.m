@@ -7,7 +7,6 @@
 //
 
 #import "MemBadgeView.h"
-#import "ARCBridge.h"
 
 @implementation MemBadgeView
 
@@ -46,8 +45,6 @@
 		[tmpDraw unlockFocus];
 		
 		[tmpDraw drawInRect:dirtyRect fromRect:dirtyRect operation:NSCompositeSourceOver fraction:1.0];
-		
-		RELEASEOBJ(tmpDraw);
 	}
 }
 

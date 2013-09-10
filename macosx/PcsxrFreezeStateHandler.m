@@ -8,7 +8,6 @@
 
 #import "PcsxrFreezeStateHandler.h"
 #import "EmuThread.h"
-#import "ARCBridge.h"
 #import "PluginList.h"
 #include "misc.h"
 
@@ -19,7 +18,6 @@
 	static NSArray *utisupport = nil;
 	if (utisupport == nil) {
 		utisupport = @[@"com.codeplex.pcsxr.freeze"];
-		RETAINOBJNORETURN(utisupport);
 	}
 	return utisupport;
 }

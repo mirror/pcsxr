@@ -13,7 +13,6 @@
 #include "plugins.h"
 #include "ExtendedKeys.h"
 #import "PcsxrController.h"
-#import "ARCBridge.h"
 
 #define HK_MAX_STATE 10
 static id monitor;
@@ -127,7 +126,7 @@ void attachHotkeys() {
 }
 
 void detachHotkeys() {
-	RELEASEOBJ(hotkeys); hotkeys = nil;
+	hotkeys = nil;
     [NSEvent removeMonitor:monitor];
     [NSEvent removeMonitor:gpuMonitor];
     monitor = nil;

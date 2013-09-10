@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ARCBridge.h"
 
 typedef enum _LaunchArgOrder {
 	LaunchArgPreRun = 0,
@@ -23,7 +22,7 @@ typedef enum _LaunchArgOrder {
 }
 @property (readonly) LaunchArgOrder launchOrder;
 @property (readonly, copy, nonatomic) dispatch_block_t theBlock;
-@property (readonly, arcretain) NSString *argument;
+@property (readonly, strong) NSString *argument;
 
 - (id)initWithLaunchOrder:(LaunchArgOrder)order block:(dispatch_block_t)block argument:(NSString*)arg;
 - (id)initWithLaunchOrder:(LaunchArgOrder)order argument:(NSString*)arg block:(dispatch_block_t)block;

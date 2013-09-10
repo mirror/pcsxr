@@ -19,7 +19,6 @@
 #import "PluginWindowController.h"
 #import "PluginWindow.h"
 #include "externals.h"
-#import "ARCBridge.h"
 #undef BOOL
 
 NSWindow *gameWindow;
@@ -63,18 +62,9 @@ NSRect windowFrame;
 {
 	if (fullWindow) {
 		[fullWindow orderOut:self];
-#if !__has_feature(objc_arc)
-
-		[fullWindow autorelease];
-		fullWindow = nil;
-#endif
 	}
 	
 	windowFrame = [[self window] frame];
-	
-#if !__has_feature(objc_arc)
-	[super dealloc];
-#endif
 }
 
 // forget keyDownEvents
@@ -159,7 +149,6 @@ NSRect windowFrame;
 
 		if (fullWindow) {
 			[fullWindow orderOut:self];
-			AUTORELEASEOBJNORETURN(fullWindow);
 			fullWindow = nil;
 			
 			[[glView openGLContext] setView:glView];
@@ -222,7 +211,6 @@ NSRect windowFrame;
 		return NO;
 	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"emuWindowDidClose" object:self];
-	AUTORELEASEOBJNORETURN(gameController);
 	gameController = nil;
 	gameWindow = nil;
 	

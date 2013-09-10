@@ -4,7 +4,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "ARCBridge.h"
 
 @class PcsxrHexadecimalFormatter;
 
@@ -19,8 +18,8 @@
 	NSMutableArray *tempCheatCodes;
 	NSMutableArray *cheats;
 }
-@property (readwrite, arcretain) NSMutableArray *tempCheatCodes;
-@property (readwrite, arcretain) NSMutableArray *cheats;
+@property (readwrite, strong) NSMutableArray *tempCheatCodes;
+@property (readwrite, strong) NSMutableArray *cheats;
 
 - (void)refresh;
 

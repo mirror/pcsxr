@@ -21,7 +21,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PadController.h"
-#import "ARCBridge.h"
 #include "pad.h"
 
 static inline void RunOnMainThreadSync(dispatch_block_t block)
@@ -330,8 +329,6 @@ void SavePADConfig()
 						 pad2Dict, kDFPad2,
 						 nil] forKey:PrefsKey];
 	[defaults synchronize];
-	RELEASEOBJ(pad1Dict);
-	RELEASEOBJ(pad2Dict);
 }
 
 void DoAbout()
@@ -345,9 +342,8 @@ void DoAbout()
 	if (path) {
 		credits = [[NSAttributedString alloc] initWithPath: path
 				documentAttributes:NULL];
-		AUTORELEASEOBJNORETURN(credits);
 	} else {
-		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithString:@""]);
+		credits = [[NSAttributedString alloc] initWithString:@""];
 	}
 
 	// Get Application Icon
@@ -367,7 +363,6 @@ void DoAbout()
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
-	RELEASEOBJ(infoPaneDict);
 }
 
 long DoConfiguration()

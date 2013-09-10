@@ -8,7 +8,6 @@
 
 #import <Foundation/NSObject.h>
 #include "sio.h"
-#import "ARCBridge.h"
 
 @class NSImage;
 @class NSString;
@@ -27,11 +26,6 @@ typedef enum _PCSXRMemFlags {
 
 @interface PcsxrMemoryObject : NSObject
 {
-	NSString *englishName;
-	NSString *sjisName;
-	NSString *memName;
-	NSString *memID;
-	
 	NSArray			*memImages;
 	NSInteger		memImageIndex;
 	uint8_t			startingIndex;
@@ -46,10 +40,10 @@ typedef enum _PCSXRMemFlags {
 - (id)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(uint8_t)startIdx;
 - (id)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(uint8_t)startIdx size:(uint8_t)memSize;
 
-@property (readonly, arcstrong) NSString *englishName;
-@property (readonly, arcstrong) NSString *sjisName;
-@property (readonly, arcstrong) NSString *memName;
-@property (readonly, arcstrong) NSString *memID;
+@property (readonly, strong) NSString *englishName;
+@property (readonly, strong) NSString *sjisName;
+@property (readonly, strong) NSString *memName;
+@property (readonly, strong) NSString *memID;
 @property (readonly) PCSXRMemFlags flagNameIndex;
 @property (readonly) uint8_t startingIndex;
 @property (readonly) uint8_t blockSize;

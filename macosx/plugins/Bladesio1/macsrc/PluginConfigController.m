@@ -20,7 +20,6 @@
  */
 
 #import "PluginConfigController.h"
-#import "ARCBridge.h"
 #include "typedefs.h"
 #include "sio1.h"
 
@@ -45,10 +44,9 @@ void AboutDlgProc()
 	if (path) {
 		credits = [[NSAttributedString alloc] initWithPath: path
 				documentAttributes:NULL];
-		AUTORELEASEOBJNORETURN(credits);
 		
 	} else {
-		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithString:@""]);
+		credits = [[NSAttributedString alloc] initWithString:@""];
 	}
 
 	// Get Application Icon
@@ -68,7 +66,6 @@ void AboutDlgProc()
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
-	RELEASEOBJ(infoPaneDict);
 }
 
 static inline void RunOnMainThreadSync(dispatch_block_t block)
@@ -193,7 +190,6 @@ void ReadConfig()
 	ReadConfig();
 
 	// load from preferences
-	RELEASEOBJ(keyValues);
 	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 
 	[enabledButton setState: [[keyValues objectForKey:kSioEnabled] boolValue] ? NSOnState : NSOffState];

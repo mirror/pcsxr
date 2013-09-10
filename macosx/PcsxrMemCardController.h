@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "ARCBridge.h"
 @class PcsxrMemCardArray;
 
 @interface PcsxrMemCardController : NSViewController
@@ -21,8 +20,8 @@
 	PcsxrMemCardArray *memCard2Array;
 	NSTimer *imageAnimateTimer;
 }
-@property (readonly, arcretain) PcsxrMemCardArray *memCard1Array;
-@property (readonly, arcretain) PcsxrMemCardArray *memCard2Array;
+@property (readonly, strong) PcsxrMemCardArray *memCard1Array;
+@property (readonly, strong) PcsxrMemCardArray *memCard2Array;
 
 - (IBAction)moveBlock:(id)sender;
 - (IBAction)formatCard:(id)sender;

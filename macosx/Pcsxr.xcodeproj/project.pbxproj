@@ -233,8 +233,6 @@
 		71F4C5AB0FDED12800529849 /* r3000a.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5820FDED12800529849 /* r3000a.c */; };
 		71F4C5AD0FDED12800529849 /* sio.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5840FDED12800529849 /* sio.c */; };
 		71F4C5AF0FDED12800529849 /* spu.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5860FDED12800529849 /* spu.c */; };
-		71F4C5B90FDED16D00529849 /* iR3000A.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5B50FDED16D00529849 /* iR3000A.c */; };
-		71F4C5BA0FDED16D00529849 /* ix86.c in Sources */ = {isa = PBXBuildFile; fileRef = 71F4C5B60FDED16D00529849 /* ix86.c */; };
 		D422E66E16DC48D000526DCF /* CheatWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D422E66C16DC48D000526DCF /* CheatWindow.xib */; };
 		D422E67A16DC495800526DCF /* CheatController.m in Sources */ = {isa = PBXBuildFile; fileRef = D422E67916DC495800526DCF /* CheatController.m */; };
 /* End PBXBuildFile section */
@@ -676,7 +674,6 @@
 		55A9021F147D7C380037E18F /* PcsxrMemCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrMemCardController.m; sourceTree = "<group>"; usesTabs = 1; };
 		55A90227147D89380037E18F /* PcsxrMemoryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PcsxrMemoryObject.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		55A90228147D89380037E18F /* PcsxrMemoryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PcsxrMemoryObject.m; sourceTree = "<group>"; usesTabs = 1; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		55BB3493169CD42500850200 /* ARCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ARCBridge.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		55BBA690149454DE003B2CEC /* PcsxrFileHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrFileHandle.h; sourceTree = "<group>"; };
 		55BBA691149455E1003B2CEC /* PcsxrMemCardHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrMemCardHandler.h; sourceTree = "<group>"; };
 		55BBA692149455E1003B2CEC /* PcsxrMemCardHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrMemCardHandler.m; sourceTree = "<group>"; usesTabs = 1; };
@@ -745,10 +742,6 @@
 		71F4C5860FDED12800529849 /* spu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = spu.c; sourceTree = "<group>"; };
 		71F4C5870FDED12800529849 /* spu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spu.h; sourceTree = "<group>"; };
 		71F4C5880FDED12800529849 /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
-		71F4C5B40FDED16D00529849 /* iGte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGte.h; sourceTree = "<group>"; };
-		71F4C5B50FDED16D00529849 /* iR3000A.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iR3000A.c; sourceTree = "<group>"; };
-		71F4C5B60FDED16D00529849 /* ix86.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86.c; sourceTree = "<group>"; };
-		71F4C5B70FDED16D00529849 /* ix86.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ix86.h; sourceTree = "<group>"; };
 		71F703A611B3A673007DD5C5 /* sjisfont.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = sjisfont.h; sourceTree = "<group>"; };
 		D422E66D16DC48D000526DCF /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CheatWindow.xib; sourceTree = "<group>"; };
 		D422E67816DC495800526DCF /* CheatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheatController.h; sourceTree = "<group>"; };
@@ -938,7 +931,6 @@
 				557649B71786AF92007C4457 /* Plug-in handling */,
 				557649B81786AFB7007C4457 /* Controllers */,
 				55E0ACE1178B850B0005C945 /* Helper Classes */,
-				55BB3493169CD42500850200 /* ARCBridge.h */,
 				7161C2810FDED6D000225F97 /* config.h */,
 				2BA178A505148D9D0026D74D /* main.m */,
 				2BBB17DA051E4D0F00B84448 /* Plugin.c */,
@@ -953,7 +945,6 @@
 		2BCE23B204C6B52C007C2DA3 /* libpcsxcore */ = {
 			isa = PBXGroup;
 			children = (
-				71F4C5B30FDED15800529849 /* ix86 */,
 				559366BF12B694DF004ACC1E /* ix86_64 */,
 				71F4C5600FDED12800529849 /* cdriso.c */,
 				71F4C5610FDED12800529849 /* cdriso.h */,
@@ -1590,17 +1581,6 @@
 			name = "Helper Classes";
 			sourceTree = "<group>";
 		};
-		71F4C5B30FDED15800529849 /* ix86 */ = {
-			isa = PBXGroup;
-			children = (
-				71F4C5B40FDED16D00529849 /* iGte.h */,
-				71F4C5B50FDED16D00529849 /* iR3000A.c */,
-				71F4C5B60FDED16D00529849 /* ix86.c */,
-				71F4C5B70FDED16D00529849 /* ix86.h */,
-			);
-			path = ix86;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2009,8 +1989,6 @@
 				71F4C5AB0FDED12800529849 /* r3000a.c in Sources */,
 				71F4C5AD0FDED12800529849 /* sio.c in Sources */,
 				71F4C5AF0FDED12800529849 /* spu.c in Sources */,
-				71F4C5B90FDED16D00529849 /* iR3000A.c in Sources */,
-				71F4C5BA0FDED16D00529849 /* ix86.c in Sources */,
 				712FD1E81093096F00575A92 /* debug.c in Sources */,
 				712FD1E91093096F00575A92 /* socket.c in Sources */,
 				713B530E110B75650002F164 /* ppf.c in Sources */,
@@ -2943,7 +2921,6 @@
 					../libpcsxcore,
 					../macosx,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 			};
 			name = Instrument;
 		};
@@ -3240,7 +3217,6 @@
 					../libpcsxcore,
 					../macosx,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 			};
 			name = Debug;
 		};
@@ -3263,7 +3239,6 @@
 					../libpcsxcore,
 					../macosx,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 			};
 			name = Release;
 		};

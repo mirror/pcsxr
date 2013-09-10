@@ -8,7 +8,6 @@
 
 #import "RecentItemsMenu.h"
 #import "PcsxrController.h"
-#import "ARCBridge.h"
 
 @implementation RecentItemsMenu
 
@@ -23,7 +22,6 @@
     for (NSURL* url in recentDocuments) {
 		NSMenuItem *tempItem = [self newMenuItem:url];
         [self addMenuItem:tempItem atIndex:index];
-		RELEASEOBJ(tempItem);
         index++;
     }
 }
@@ -32,15 +30,13 @@
 {
     [[NSDocumentController sharedDocumentController] noteNewRecentDocumentURL:documentURL];
     
-    NSMenuItem* item = RETAINOBJ([self findMenuItemByURL:documentURL]);
+    NSMenuItem* item = [self findMenuItemByURL:documentURL];
     if (item != nil) {
         [self removeItem:item];
         [self insertItem:item atIndex:0];
-		RELEASEOBJ(item);
     } else {
 		NSMenuItem *newitem = [self newMenuItem:documentURL];
         [self addMenuItem:newitem];
-		RELEASEOBJ(newitem);
     }
 }
 
@@ -111,7 +107,6 @@
 	for (NSMenuItem *item in removeItemsArray) {
 		[self removeItem:item];
 	}
-	RELEASEOBJ(removeItemsArray);
 }
 
 @end

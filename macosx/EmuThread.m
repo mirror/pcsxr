@@ -14,7 +14,6 @@
 #include "psxcommon.h"
 #include "plugins.h"
 #include "misc.h"
-#import "ARCBridge.h"
 
 EmuThread *emuThread = nil;
 static NSString *defrostPath = nil;
@@ -78,13 +77,12 @@ static pthread_mutex_t eventMutex;
 	
 	if (defrostPath) {
 		LoadState([defrostPath fileSystemRepresentation]);
-		RELEASEOBJ(defrostPath); defrostPath = nil;
+		defrostPath = nil;
 	}
 	
 	psxCpu->Execute();
 	
 done:
-	AUTORELEASEOBJNORETURN(emuThread);
 	emuThread = nil;
 	
 	return;
@@ -103,7 +101,6 @@ done:
 	psxCpu->Execute();
 	
 done:
-	AUTORELEASEOBJNORETURN(emuThread);
 	emuThread = nil;
 	
 	return;
@@ -113,8 +110,6 @@ done:
 {
 	// remove all registered observers
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-
-	SUPERDEALLOC;
 }
 
 - (void)emuWindowDidClose:(NSNotification *)aNotification
@@ -144,7 +139,6 @@ done:
 		while (safeEvent) {
 			if (safeEvent & EMUEVENT_STOP) {
 				/* signify that the emulation has stopped */
-				AUTORELEASEOBJNORETURN(emuThread);
 				emuThread = nil;
 				paused = NO;
 				
@@ -337,7 +331,6 @@ done:
 + (void)resetNow
 {
 	/* signify that the emulation has stopped */
-	AUTORELEASEOBJNORETURN(emuThread);
 	emuThread = nil;
 
 	ClosePlugins();
@@ -388,7 +381,7 @@ done:
 	if (CheckState(cPath) != 0)
 		return NO;
 
-	defrostPath = RETAINOBJ(path);
+	defrostPath = path;
 	[EmuThread reset];
 
 	GPU_displayText(_("*PCSXR*: Loaded State"));

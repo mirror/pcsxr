@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import "NamedSlider.h"
-#import "ARCBridge.h"
 
 @interface SPUPluginController : NSWindowController
 {
@@ -23,7 +22,7 @@
 	
 	NSMutableDictionary *keyValues;
 }
-@property (readwrite, arcretain) NSMutableDictionary *keyValues;
+@property (readwrite, strong) NSMutableDictionary *keyValues;
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;
 - (IBAction)reset:(id)sender;

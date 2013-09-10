@@ -4,16 +4,6 @@
 @synthesize pluginClass;
 @synthesize strings;
 
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	self.strings = nil;
-	self.pluginClass = nil;
-	
-	[super dealloc];
-}
-#endif
-
 - (NSString *)stringValue
 {
 	NSInteger index = [self integerValue];

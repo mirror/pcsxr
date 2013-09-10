@@ -6,7 +6,6 @@
 #import "PcsxrMemCardHandler.h"
 #include "psxcommon.h"
 #include "plugins.h"
-#import "ARCBridge.h"
 
 NSString *const memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
@@ -62,7 +61,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 {
 	NSInteger tag = [sender tag];
 	char *mcd;
-	NSOpenPanel *openDlg = RETAINOBJ([NSOpenPanel openPanel]);
+	NSOpenPanel *openDlg = [NSOpenPanel openPanel];
 	NSString *path;
 	
 	if (tag == 1) {
@@ -85,14 +84,13 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
         
 		[ConfigurationController setMemoryCard:tag toURL:mcdURL];
     }
-	RELEASEOBJ(openDlg);	
 }
 
 + (void)mcdNewClicked:(id)sender
 {
 	NSInteger tag = [sender tag];
 	char *mcd;
-	NSSavePanel *openDlg = RETAINOBJ([NSSavePanel savePanel]);
+	NSSavePanel *openDlg = [NSSavePanel savePanel];
 	NSString *path;
 	
 	if (tag == 1) {
@@ -116,7 +114,6 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 		
 		[ConfigurationController setMemoryCard:tag toURL:mcdURL];
     }
-	RELEASEOBJ(openDlg);
 }
 
 - (IBAction)setVideoType:(id)sender
@@ -184,11 +181,6 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 		[usesHleCell setEnabled:NO];
 	}
 	
-#ifdef __i386__
-	//OS X on i386 doesn't like the dynarec core
-	[usesDynarecCell setState:NSOffState];
-	[usesDynarecCell setEnabled:NO];
-#endif
 
 	// setup labels
 
@@ -219,15 +211,6 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
     // Setup hotkey view
     [hkController initialize];
 }
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	[checkBoxDefaults release];
-	
-	[super dealloc];
-}
-#endif
 
 - (NSString *)keyForSender:(id)sender
 {

@@ -29,7 +29,6 @@
 #include "gpu.h"
 #include "menu.h"
 #include "drawgl.h"
-#import "ARCBridge.h"
 
 ////////////////////////////////////////////////////////////////////////////////////
 // misc globals
@@ -167,7 +166,6 @@ void CloseDisplay(void)
 {
 	if (gameController) {
 		[gameController close];
-		RELEASEOBJ(gameController);
 		gameController = nil;
 		gameWindow = nil;
 	}

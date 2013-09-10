@@ -20,7 +20,6 @@
  */
 
 #import "PadView.h"
-#import "ARCBridge.h"
 #include "pad.h"
 
 @implementation PadView
@@ -33,14 +32,6 @@
 	}
 	return self;
 }
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	[controller release];
-	[super dealloc];
-}
-#endif
 
 - (void)drawRect:(NSRect)rect
 {
@@ -80,7 +71,6 @@
 #endif
 		[joystickItem setTag:i + 1];
         [[deviceMenu menu] addItem:joystickItem];
-		RELEASEOBJ(joystickItem);
 	}
 
 	if (g.cfg.PadDef[which].DevNum >= SDL_NumJoysticks()) {

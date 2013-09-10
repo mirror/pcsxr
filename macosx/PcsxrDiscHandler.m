@@ -13,11 +13,10 @@
 #include "cdrom.h"
 #import "RecentItemsMenu.h"
 #import "PcsxrController.h"
-#import "ARCBridge.h"
 
 @interface PcsxrDiscHandler ()
-@property (nonatomic, arcstrong) NSURL *discURL;
-@property (arcweak) NSString *discPath;
+@property (nonatomic, strong) NSURL *discURL;
+@property (weak) NSString *discPath;
 @end
 
 @implementation PcsxrDiscHandler
@@ -37,7 +36,6 @@
 	static NSArray *utisupport = nil;
 	if (utisupport == nil) {
 		utisupport = @[@"com.alcohol-soft.mdfdisc", @"com.goldenhawk.cdrwin-cuesheet", @"com.apple.disk-image-ndif", @"public.iso-image", @"com.sony.psp.firmware", @"com.codeplex.pcsxr.compressed-bin-image"];
-		RETAINOBJNORETURN(utisupport);
 	}
 	return utisupport;
 }
@@ -53,14 +51,5 @@
 	[[appDelegate recentItems] addRecentItem:[self discURL]];
 	return YES;
 }
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	self.discURL = nil;
-	
-	[super dealloc];
-}
-#endif
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ARCBridge.h"
 #import "PadController.h"
 #include "cfg.h"
 

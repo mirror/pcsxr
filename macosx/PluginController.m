@@ -1,11 +1,10 @@
 #import "PluginController.h"
 #import "PcsxrPlugin.h"
 #import "PcsxrController.h"
-#import "ARCBridge.h"
 
 @interface PluginController ()
-@property (arcstrong) NSArray *plugins;
-@property (arcstrong) NSString *defaultKey;
+@property (strong) NSArray *plugins;
+@property (strong) NSString *defaultKey;
 @end
 
 @implementation PluginController
@@ -78,15 +77,5 @@
 
 	[self selectPlugin:pluginMenu];
 }
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	self.plugins = nil;
-	self.defaultKey = nil;
-	
-	[super dealloc];
-}
-#endif
 
 @end

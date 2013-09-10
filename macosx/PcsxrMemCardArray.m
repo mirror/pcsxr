@@ -7,7 +7,6 @@
 //
 
 #import "PcsxrMemCardArray.h"
-#import "ARCBridge.h"
 #import "ConfigurationController.h"
 #include "sio.h"
 
@@ -65,7 +64,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 }
 
 @interface PcsxrMemCardArray ()
-@property (arcretain) NSArray *rawArray;
+@property (strong) NSArray *rawArray;
 @property (readonly) char* memDataPtr;
 
 @end
@@ -124,12 +123,10 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 			@autoreleasepool {
 				PcsxrMemoryObject *obj = [[PcsxrMemoryObject alloc] initWithMcdBlock:&memBlock startingIndex:i size:x];
 				[tmpMemArray addObject:obj];
-				RELEASEOBJ(obj);
 			}
 			i += x;
 		}
 		self.rawArray = [NSArray arrayWithArray:tmpMemArray];
-		RELEASEOBJ(tmpMemArray);
 	}
 	return self;
 }
@@ -240,7 +237,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 		theBlock.Flags = 0xA0;
 		theBlock.IconCount = 0;
 		PcsxrMemoryObject *freeObj = [[PcsxrMemoryObject alloc] initWithMcdBlock:&theBlock startingIndex:MAX_MEMCARD_BLOCKS - 1 - freeSize size:freeSize];
-		return [rawArray arrayByAddingObject:AUTORELEASEOBJ(freeObj)];
+		return [rawArray arrayByAddingObject:freeObj];
 	} else
 		return rawArray;
 }
@@ -344,14 +341,5 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 		SaveMcd(filename, data, i * 128, 128);
 	}
 }
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	self.rawArray = nil;
-	
-	[super dealloc];
-}
-#endif
 
 @end

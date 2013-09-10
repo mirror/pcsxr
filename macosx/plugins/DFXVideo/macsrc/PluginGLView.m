@@ -26,7 +26,6 @@
 #undef BOOL
 #include "gpu.h"
 #include "swap.h"
-#import "ARCBridge.h"
 
 #include <time.h>
 extern time_t tStart;
@@ -91,7 +90,6 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 
 	glLock = [[NSLock alloc] init];
 	if (nil == glLock) {
-		AUTORELEASEOBJNORETURN(self);
 		return nil;
 	}
 
@@ -121,12 +119,11 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 		if (!pixFmt) {
 			NSLog(@"No OpenGL pixel format found!\n");
 			
-			AUTORELEASEOBJNORETURN(self);
 			return nil;
 		}
 	}
 	
-	[self setPixelFormat:AUTORELEASEOBJ(pixFmt)];
+	[self setPixelFormat:pixFmt];
 
 	/*
 	long swapInterval = 1 ;
@@ -179,7 +176,6 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	image_type = GL_UNSIGNED_SHORT_1_5_5_5_REV;
 	image_base = (GLubyte *) calloc(((IMAGE_COUNT * image_width * image_height) / 3) * 4, image_depth >> 3);
 	if (image_base == nil) {
-		AUTORELEASEOBJNORETURN(self);
 		return nil;
 	}
 
@@ -218,12 +214,6 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 	
 	if (image_base)
 		free(image_base);
-	
-#if !__has_feature(objc_arc)
-	[glLock release];
-
-	[super dealloc];
-#endif
 }
 
 - (BOOL)isOpaque

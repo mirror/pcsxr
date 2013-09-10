@@ -8,7 +8,6 @@
 
 #import "PcsxrPluginHandler.h"
 #import "EmuThread.h"
-#import "ARCBridge.h"
 
 @implementation PcsxrPluginHandler
 
@@ -17,7 +16,6 @@
 	static NSArray *utisupport = nil;
 	if (utisupport == nil) {
 		utisupport = @[@"com.codeplex.pcsxr.plugin"];
-		RETAINOBJNORETURN(utisupport);
 	}
 	return utisupport;
 }
@@ -85,7 +83,6 @@
 							NSLocalizedString(@"The installation of the specified plugin failed. Please try again, or make a manual install.", nil), 
 							nil, nil, nil);
 		}
-		RELEASEOBJ(wrapper);
 	}
 	return YES;
 }

@@ -9,7 +9,6 @@
 #import "PcsxrMemCardHandler.h"
 #import "ConfigurationController.h"
 #import "EmuThread.h"
-#import "ARCBridge.h"
 
 @implementation PcsxrMemCardHandler
 
@@ -18,7 +17,6 @@
 	static NSArray *utisupport = nil;
 	if (utisupport == nil) {
 		utisupport = @[@"com.codeplex.pcsxr.memcard"];
-		RETAINOBJNORETURN(utisupport);
 	}
 	return utisupport;
 }

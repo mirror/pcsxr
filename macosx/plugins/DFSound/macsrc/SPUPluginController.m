@@ -60,13 +60,4 @@ static void FuncNotAvailable(id sel, id sender, SEL theCmd)
 	NotAvailableWarn(nil);
 }
 
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	self.keyValues = nil;
-	
-	[super dealloc];
-}
-#endif
-
 @end

@@ -7,14 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ARCBridge.h"
 
 @interface PcsxrPlugin : NSObject {
 	void *pluginRef;
 	
-	NSString *path;
 	NSDate *modDate;
-	NSString *name;
 	NSString *fullPlugPath;
 	long version;
 	int type;
@@ -22,7 +19,7 @@
 }
 
 @property (readonly, copy) NSString *path;
-@property (readonly, arcstrong) NSString *name;
+@property (readonly, strong) NSString *name;
 
 + (NSString *)prefixForType:(int)type;
 + (NSString *)defaultKeyForType:(int)type;

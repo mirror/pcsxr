@@ -21,7 +21,6 @@
 
 #import "PluginConfigController.h"
 #include "dfnet.h"
-#import "ARCBridge.h"
 
 #define kIPADDRKEY @"IP Address"
 #define kIPPORT @"IP Port"
@@ -52,9 +51,8 @@ void AboutDlgProc()
 	if (path) {
 		credits = [[NSAttributedString alloc] initWithPath: path
 				documentAttributes:NULL];
-		AUTORELEASEOBJNORETURN(credits);
 	} else {
-		credits = AUTORELEASEOBJ([[NSAttributedString alloc] initWithString:@""]);
+		credits = [[NSAttributedString alloc] initWithString:@""];
 	}
 
 	// Get Application Icon
@@ -73,7 +71,6 @@ void AboutDlgProc()
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
-	RELEASEOBJ(infoPaneDict);
 }
 
 void ConfDlgProc()

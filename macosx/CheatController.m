@@ -7,7 +7,6 @@
 #include "psxcommon.h"
 #include "cheat.h"
 #import "CheatController.h"
-#import "ARCBridge.h"
 #import "PcsxrCheatHandler.h"
 #import "PcsxrHexadecimalFormatter.h"
 
@@ -20,9 +19,9 @@
 	uint16_t value;
 }
 @property (readwrite) uint32_t address;
-@property (readwrite, arcweak) NSNumber* addressNS;
+@property (readwrite, weak) NSNumber* addressNS;
 @property (readwrite) uint16_t value;
-@property (readwrite, arcweak) NSNumber* valueNS;
+@property (readwrite, weak) NSNumber* valueNS;
 
 - (id)initWithAddress:(uint32_t)add value:(uint16_t)val;
 - (id)initWithCheatCode:(CheatCode *)theCheat;
@@ -34,8 +33,8 @@
 	NSString *cheatName;
 	BOOL enabled;
 }
-@property (readwrite, arcretain) NSMutableArray *cheatValues;
-@property (readwrite, arcretain) NSString *cheatName;
+@property (readwrite, strong) NSMutableArray *cheatValues;
+@property (readwrite, strong) NSString *cheatName;
 @property (readwrite, getter = isEnabled) BOOL enabled;
 
 - (id)initWithCheat:(Cheat *)theCheat;
@@ -123,7 +122,7 @@
 		self.enabled = theCheat->Enabled ? YES : NO;
 		self.cheatValues = [NSMutableArray arrayWithCapacity:theCheat->n];
 		for (int i = 0; i < theCheat->n; i++) {
-			[cheatValues addObject:AUTORELEASEOBJ([[PcsxrCheatTempObject alloc] initWithCheatCode:&CheatCodes[i+theCheat->First]])];
+			[cheatValues addObject:[[PcsxrCheatTempObject alloc] initWithCheatCode:&CheatCodes[i+theCheat->First]]];
 		}
 	}
 	return self;
@@ -138,16 +137,6 @@
 {
 	return [NSString stringWithFormat:@"[%@%@]\n%@", enabled ? @"*" : @"", cheatName, [cheatValues componentsJoinedByString:@"\n"]];
 }
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-	self.cheatName = nil;
-	self.cheatValues = nil;
-	
-	[super dealloc];
-}
-#endif
 
 @end
 
@@ -187,10 +176,8 @@
 	for (int i = 0; i < NumCheats; i++) {
 		PcsxrCheatTemp *tmpObj = [[PcsxrCheatTemp alloc] initWithCheat:&Cheats[i]];
 		[tmpArray addObject:tmpObj];
-		RELEASEOBJ(tmpObj);
 	}
 	self.cheats = tmpArray;
-	RELEASEOBJ(tmpArray);
 	[self setDocumentEdited:NO];
 }
 
@@ -217,7 +204,7 @@
 
 - (IBAction)loadCheats:(id)sender
 {
-	NSOpenPanel *openDlg = RETAINOBJ([NSOpenPanel openPanel]);
+	NSOpenPanel *openDlg = [NSOpenPanel openPanel];
 	[openDlg setCanChooseFiles:YES];
 	[openDlg setCanChooseDirectories:NO];
 	[openDlg setAllowsMultipleSelection:NO];
@@ -228,12 +215,11 @@
 		LoadCheats([[file path] fileSystemRepresentation]);
 		[self refresh];
 	}
-	RELEASEOBJ(openDlg);
 }
 
 - (IBAction)saveCheats:(id)sender
 {
-	NSSavePanel *saveDlg = RETAINOBJ([NSSavePanel savePanel]);
+	NSSavePanel *saveDlg = [NSSavePanel savePanel];
 	[saveDlg setAllowedFileTypes:[PcsxrCheatHandler supportedUTIs]];
 	[saveDlg setCanSelectHiddenExtension:YES];
 	[saveDlg setCanCreateDirectories:YES];
@@ -243,7 +229,6 @@
 		NSString *saveString = [cheats componentsJoinedByString:@"\n"];
 		[saveString writeToURL:url atomically:YES encoding:NSUTF8StringEncoding error:NULL];
 	}
-	RELEASEOBJ(saveDlg);
 }
 
 - (IBAction)clear:(id)sender
@@ -277,7 +262,7 @@
 - (IBAction)addCheatValue:(id)sender
 {
 	[self willChange:NSKeyValueChangeInsertion valuesAtIndexes:[NSIndexSet indexSetWithIndex:[tempCheatCodes count]] forKey:kTempCheatCodesName];
-	[tempCheatCodes addObject:AUTORELEASEOBJ([[PcsxrCheatTempObject alloc] init])];
+	[tempCheatCodes addObject:[[PcsxrCheatTempObject alloc] init]];
 	[self didChange:NSKeyValueChangeInsertion valuesAtIndexes:[NSIndexSet indexSetWithIndex:[tempCheatCodes count] - 1] forKey:kTempCheatCodesName];
 }
 
@@ -313,7 +298,6 @@
 	NSMutableArray *tmpArray = [[cheats objectAtIndex:[cheatView selectedRow]] cheatValues];
 	NSMutableArray *newCheats = [[NSMutableArray alloc] initWithArray:tmpArray copyItems:YES];
 	self.tempCheatCodes = newCheats;
-	RELEASEOBJ(newCheats);
 	[NSApp beginSheet:editCheatWindow modalForWindow:[self window] modalDelegate:self didEndSelector:@selector(editCheatCodeSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
 }
 
@@ -324,10 +308,8 @@
 	tmpCheat.cheatName = NSLocalizedString(@"New Cheat", @"New Cheat Name" );
 	PcsxrCheatTempObject *tmpObj = [[PcsxrCheatTempObject alloc] initWithAddress:0x10000000 value:0];
 	NSMutableArray *tmpArray = [NSMutableArray arrayWithObject:tmpObj];
-	RELEASEOBJ(tmpObj);
 	tmpCheat.cheatValues = tmpArray;
 	[cheats addObject:tmpCheat];
-	RELEASEOBJ(tmpCheat);
 	[self didChange:NSKeyValueChangeInsertion valuesAtIndexes:[NSIndexSet indexSetWithIndex:[cheats count] - 1] forKey:kCheatsName];
 	[self setDocumentEdited:YES];
 }
