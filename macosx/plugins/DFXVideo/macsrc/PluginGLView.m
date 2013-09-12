@@ -627,7 +627,8 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 			
 			if(PSXDisplay.RGB24)
 			{
-				unsigned char * pD;unsigned int startxy;
+				unsigned char * pD;
+				size_t startxy;
 				
 				surf+=PreviousPSXDisplay.Range.x0<<2;
 				
