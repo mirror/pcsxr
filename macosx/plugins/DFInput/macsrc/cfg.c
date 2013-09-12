@@ -28,7 +28,7 @@ long PADconfigure(void) {
 	if (SDL_WasInit(SDL_INIT_JOYSTICK)) return PSE_ERR_FATAL; // cannot change settings on the fly
 	
 	DoConfiguration();
-	LoadPADConfig();
+	//LoadPADConfig();
 	return PSE_ERR_SUCCESS;
 }
 

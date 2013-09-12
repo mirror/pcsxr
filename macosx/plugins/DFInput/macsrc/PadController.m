@@ -311,7 +311,7 @@ void LoadPADConfig()
 void SavePADConfig()
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSMutableDictionary *pad1Dict = nil, *pad2Dict = nil;
+	NSMutableDictionary *pad1Dict, *pad2Dict;
 	NSDictionary *prefDict = [defaults dictionaryForKey:PrefsKey];
 	pad1Dict = [[NSMutableDictionary alloc] initWithDictionary:prefDict[kDFPad1]];
 	pad2Dict = [[NSMutableDictionary alloc] initWithDictionary:prefDict[kDFPad2]];

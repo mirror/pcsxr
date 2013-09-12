@@ -42,26 +42,28 @@
 #define dRightAnalogYP @"RightAnalogYP"
 #define dRightAnalogYM @"RightAnalogYM"
 
+#define VibrateOn @"Visual Vibration"
+
 NSDictionary *DefaultPadArray(int padnum)
 {
-	NSMutableDictionary *mutArray = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-									 @(padnum), deviceNumber,
-									 @(PSE_PAD_TYPE_STANDARD), padType,
-									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@8, joyVal, @(BUTTON), joyType, nil], dSelect,
-									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@9, joyVal, @(BUTTON), joyType, nil], dStart,
-									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@(-2), joyVal, @(AXIS), joyType, nil], dUp,
-									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@1, joyVal, @(AXIS), joyType, nil], dRight,
-									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@2, joyVal, @(AXIS), joyType, nil], dDown,
-									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@(-1), joyVal, @(AXIS), joyType, nil], dLeft,
-									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@4, joyVal, @(BUTTON), joyType, nil], dL2,
-									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@6, joyVal, @(BUTTON), joyType, nil], dL1,
-									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@5, joyVal, @(BUTTON), joyType, nil], dR2,
-									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@7, joyVal, @(BUTTON), joyType, nil], dR1,
-									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@0, joyVal, @(BUTTON), joyType, nil], dTriangle,
-									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@1, joyVal, @(BUTTON), joyType, nil], dCircle,
-									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@2, joyVal, @(BUTTON), joyType, nil], dCross,
-									 [NSMutableDictionary dictionaryWithObjectsAndKeys:@3, joyVal, @(BUTTON), joyType, nil], dSquare,
-									 nil];
+	NSMutableDictionary *mutArray =
+	[NSMutableDictionary dictionaryWithDictionary:@{VibrateOn: @NO,
+									 deviceNumber: @(padnum),
+										  padType: @(PSE_PAD_TYPE_STANDARD),
+										  dSelect: [NSMutableDictionary dictionaryWithObjectsAndKeys:@8, joyVal, @(BUTTON), joyType, nil],
+										   dStart: [NSMutableDictionary dictionaryWithObjectsAndKeys:@9, joyVal, @(BUTTON), joyType, nil],
+											  dUp: [NSMutableDictionary dictionaryWithObjectsAndKeys:@(-2), joyVal, @(AXIS), joyType, nil],
+										   dRight: [NSMutableDictionary dictionaryWithObjectsAndKeys:@1, joyVal, @(AXIS), joyType, nil],
+											dDown: [NSMutableDictionary dictionaryWithObjectsAndKeys:@2, joyVal, @(AXIS), joyType, nil],
+											dLeft: [NSMutableDictionary dictionaryWithObjectsAndKeys:@(-1), joyVal, @(AXIS), joyType, nil],
+											  dL2: [NSMutableDictionary dictionaryWithObjectsAndKeys:@4, joyVal, @(BUTTON), joyType, nil],
+											  dL1: [NSMutableDictionary dictionaryWithObjectsAndKeys:@6, joyVal, @(BUTTON), joyType, nil],
+											  dR2: [NSMutableDictionary dictionaryWithObjectsAndKeys:@5, joyVal, @(BUTTON), joyType, nil],
+											  dR1: [NSMutableDictionary dictionaryWithObjectsAndKeys:@7, joyVal, @(BUTTON), joyType, nil],
+										dTriangle: [NSMutableDictionary dictionaryWithObjectsAndKeys:@0, joyVal, @(BUTTON), joyType, nil],
+										  dCircle: [NSMutableDictionary dictionaryWithObjectsAndKeys:@1, joyVal, @(BUTTON), joyType, nil],
+										   dCross: [NSMutableDictionary dictionaryWithObjectsAndKeys:@2, joyVal, @(BUTTON), joyType, nil],
+										  dSquare: [NSMutableDictionary dictionaryWithObjectsAndKeys:@3, joyVal, @(BUTTON), joyType, nil]}];
 	if (padnum == 0) {
 		mutArray[dSelect][dfKey] = @9;
 		mutArray[dStart][dfKey] = @10;
@@ -151,7 +153,7 @@ void LoadPadArray(int padnum, NSDictionary *nsPrefs)
 	PADDEF *curDef = &g.cfg.PadDef[padnum];
 	curDef->DevNum = [nsPrefs[deviceNumber] charValue];
 	curDef->Type = [nsPrefs[padType] unsignedShortValue];
-	curDef->VisualVibration = 0; //Not implemented on OS X right now.
+	curDef->VisualVibration = [nsPrefs[VibrateOn] boolValue]; //Not implemented on OS X right now.
 	
 	//Analog buttons
 	SetKeyFromDictionary(nsPrefs[dL3], &curDef->KeyDef[DKEY_L3]);
@@ -194,6 +196,7 @@ NSDictionary *SavePadArray(int padnum)
 	PADDEF *curDef = &g.cfg.PadDef[padnum];
 	mutArray[deviceNumber] = @(curDef->DevNum);
 	mutArray[padType] = @(curDef->Type);
+	mutArray[VibrateOn] = curDef->VisualVibration ? @YES : @NO;
 	
 	switch (curDef->Type) {
 		case PSE_PAD_TYPE_ANALOGPAD:
