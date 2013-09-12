@@ -40,6 +40,8 @@
 #include "libavutil/mathematics.h"
 #include "libavformat/avformat.h"
 
+#include "ecm.h"
+
 #define INBUF_SIZE 4096
 #define AUDIO_INBUF_SIZE INBUF_SIZE*4
 #define AUDIO_REFILL_THRESH 4096
@@ -1325,6 +1327,192 @@ static int cdread_2048(FILE *f, unsigned int base, void *dest, int sector)
 	return ret;
 }
 
+#ifdef ENABLE_CCDDA // TODO: experimental... test reliability & possibly move these functions to ecm.h
+/* Adapted from ecm.c:unecmify() (C) Neill Corlett */
+static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector) {
+	u32 output_edc = 0, b, writebytecount=0, sectorcount=0, num;
+	s8 type; // mode type 0 (META) or 1, 2 or 3 for CDROM type
+	u8 sector_buffer[CD_FRAMESIZE_RAW];
+	boolean processsectors = (boolean)decoded_ecm_sectors; // this flag tells if to decode all sectors or just skip to wanted sector
+
+	ECMFILELUT* pos = &(ecm_savetable[sector-0]); // get sector from LUT which points to wanted sector or to beginning
+	// if suitable sector was not found from LUT use last sector if less than wanted sector
+	if (pos->filepos <= ECM_HEADER_SIZE && sector > lastsector) pos=&(ecm_savetable[lastsector]);
+
+	if (decoded_ecm_sectors && sector < decoded_ecm_sectors) {
+		//printf("ReadSector %i %i\n", sector, savedsectors);
+		return cdimg_read_func_o(decoded_ecm, base, dest, sector);
+	}/* else if (sector > len_ecm_savetable) {
+		SysPrintf("ECM: invalid sector requested\n");
+		return -1;
+	}*/
+	//printf("SeekSector %i %i %i\n", sector, pos->sector, lastsector);
+
+	writebytecount = pos->sector * CD_FRAMESIZE_RAW;
+	sectorcount = pos->sector;
+	if (decoded_ecm_sectors) fseek(decoded_ecm, writebytecount, SEEK_SET); // rewind to last pos
+	fseek(f, base+pos->filepos, SEEK_SET);
+	while(sector >= sectorcount) { // decode ecm file until we are past wanted sector
+		int c = fgetc(f);
+		int bits = 5;
+		if(c == EOF) { goto error_in; }
+		type = c & 3;
+		num = (c >> 2) & 0x1F;
+		//printf("ECM1 file; count %x\n", c);
+		while(c & 0x80) {
+			c = fgetc(f);
+			//printf("ECM2 file; count %x\n", c);
+			if(c == EOF) { goto error_in; }
+			if( (bits > 31) ||
+					((uint32_t)(c & 0x7F)) >= (((uint32_t)0x80000000LU) >> (bits-1))
+					) {
+				//SysMessage(_("Corrupt ECM file; invalid sector count\n"));
+				goto error;
+			}
+			num |= ((uint32_t)(c & 0x7F)) << bits;
+			bits += 7;
+		}
+		if(num == 0xFFFFFFFF) {
+			// End indicator
+			break;
+		}
+		num++;
+		while(num) {
+			if (!processsectors && sectorcount >= (sector-1)) { // ensure that we read the sector we are supposed to
+				processsectors = TRUE;
+				//printf("Saving at %i\n", sectorcount);
+			}
+			/*printf("Type %i Num %i SeekSector %i ProcessedSectors %i(%i) Bytecount %i Pos %li Write %u\n",
+					type, num, sector, sectorcount, pos->sector, writebytecount, ftell(f), processsectors);*/
+			switch(type) {
+			case 0: // META
+				b = num;
+				if(b > sizeof(sector_buffer)) { b = sizeof(sector_buffer); }
+				writebytecount += b;
+				if (!processsectors) { fseek(f, +b, SEEK_CUR); break; } // seek only
+				if(fread(sector_buffer, 1, b, f) != b) {
+					goto error_in;
+				}
+				//output_edc = edc_compute(output_edc, sector_buffer, b);
+				if(decoded_ecm_sectors && fwrite(sector_buffer, 1, b, decoded_ecm) != b) { // just seek or write also
+					goto error_out;
+				}
+				break;
+			case 1: //Mode 1
+				b=1;
+				writebytecount += ECM_SECTOR_SIZE[type];
+				if(fread(sector_buffer + 0x00C, 1, 0x003, f) != 0x003) { goto error_in; }
+				if(fread(sector_buffer + 0x010, 1, 0x800, f) != 0x800) { goto error_in; }
+				if (!processsectors) break; // seek only
+				reconstruct_sector(sector_buffer, 1);
+				//output_edc = edc_compute(output_edc, sector_buffer, ECM_SECTOR_SIZE[type]);
+				if(decoded_ecm_sectors && fwrite(sector_buffer, 1, ECM_SECTOR_SIZE[type], decoded_ecm) != ECM_SECTOR_SIZE[type]) { goto error_out; }
+				break;
+			case 2: //Mode 2 (XA), form 1
+				b=1;
+				writebytecount += ECM_SECTOR_SIZE[type];
+				if (!processsectors) { fseek(f, +0x804, SEEK_CUR); break; } // seek only
+				if(fread(sector_buffer + 0x014, 1, 0x804, f) != 0x804) { goto error_in; }
+				reconstruct_sector(sector_buffer, 2);
+				//output_edc = edc_compute(output_edc, sector_buffer + 0x10, ECM_SECTOR_SIZE[type]);
+				if(decoded_ecm_sectors && fwrite(sector_buffer + 0x10, 1, ECM_SECTOR_SIZE[type], decoded_ecm) != ECM_SECTOR_SIZE[type]) { goto error_out; }
+				break;
+			case 3: //Mode 2 (XA), form 2
+				b=1;
+				writebytecount += ECM_SECTOR_SIZE[type];
+				if (!processsectors) { fseek(f, +0x918, SEEK_CUR); break; } // seek only
+				if(fread(sector_buffer + 0x014, 1, 0x918, f) != 0x918) { goto error_in; }
+				reconstruct_sector(sector_buffer, 3);
+				//output_edc = edc_compute(output_edc, sector_buffer + 0x10, ECM_SECTOR_SIZE[type]);
+				if(decoded_ecm_sectors && fwrite(sector_buffer + 0x10, 1, ECM_SECTOR_SIZE[type], decoded_ecm) != ECM_SECTOR_SIZE[type]) { goto error_out; }
+				break;
+			}
+			sectorcount=((writebytecount/CD_FRAMESIZE_RAW) - 0);
+			num -= b;
+		}
+		if (sectorcount > 0 && ecm_savetable[sectorcount].filepos <= ECM_HEADER_SIZE ) {
+			ecm_savetable[sectorcount].filepos = ftell(f)-base;
+			ecm_savetable[sectorcount].sector = sectorcount;
+			//printf("Marked %i at pos %i\n", ecm_savetable[sectorcount].sector, ecm_savetable[sectorcount].filepos);
+		}
+	}
+
+	if (decoded_ecm_sectors) {
+		fflush(decoded_ecm);
+		fseek(decoded_ecm, -1*CD_FRAMESIZE_RAW, SEEK_CUR);
+		num = fread(sector_buffer, 1, CD_FRAMESIZE_RAW, decoded_ecm);
+		decoded_ecm_sectors = MAX(decoded_ecm_sectors, sectorcount);
+	} else {
+		num = CD_FRAMESIZE_RAW;
+	}
+
+	memcpy(dest, sector_buffer, CD_FRAMESIZE_RAW);
+	lastsector = sectorcount;
+	//printf("OK: Frame decoded %i %i\n", sectorcount-1, writebytecount);
+	return num;
+
+error_in:
+error:
+error_out:
+	//memset(dest, 0x0, CD_FRAMESIZE_RAW);
+	SysPrintf("Error decoding ECM image: WantedSector %i Type %i Sectors %i Pos %i(%li)\n",
+				sector, type, sectorcount, writebytecount, ftell(f));
+	return -1;
+}
+#endif
+
+static int handleecm(const char *isoname) {
+#ifdef ENABLE_CCDDA
+	// Rewind to start and check ECM header and filename suffix validity
+	fseek(cdHandle, 0, SEEK_SET);
+	if(
+		(fgetc(cdHandle) == 'E') &&
+		(fgetc(cdHandle) == 'C') &&
+		(fgetc(cdHandle) == 'M') &&
+		(fgetc(cdHandle) == 0x00) &&
+		(strncmp((isoname+strlen(isoname)-5), ".ecm", 4))
+	) {
+		SysPrintf(_("\nDetected ECM file with proper header and filename suffix.\n"));
+
+		// Save real function used to read CD
+		cdimg_read_func_o = cdimg_read_func;
+		cdimg_read_func = cdread_ecm_decode;
+
+		// Based in file length use LUT of variable size
+		fseek(cdHandle, 0, SEEK_END);
+		//len_ecm_savetable = savedsectors ? len_ecm_savetable : (ftell(cdHandle)/CD_FRAMESIZE_RAW)/100;
+		len_ecm_savetable = 2*(ftell(cdHandle)/CD_FRAMESIZE_RAW); // todo: optimize size...
+
+		// Full image decoded??
+		if (decoded_ecm_sectors) {
+			len_decoded_ecm_buffer = len_ecm_savetable*CD_FRAMESIZE_RAW;
+			decoded_ecm_buffer = malloc(len_decoded_ecm_buffer);
+			if (decoded_ecm_buffer) {
+				//printf("Memory ok1 %u %p\n", len_decoded_ecm_buffer, decoded_ecm_buffer);
+				decoded_ecm = fmemopen(decoded_ecm_buffer, len_decoded_ecm_buffer, "w+b");
+				decoded_ecm_sectors = 1;
+			} else {
+				SysMessage("Could not reserve memory for full ECM buffer. Only LUT will be used.");
+				decoded_ecm_sectors = 0;
+			}
+		}
+
+		// Init ECC/EDC tables
+		eccedc_init();
+
+		// Last accessed sector
+		lastsector = 0;
+
+		// Index 0 always points to beginning of ECM data
+		ecm_savetable = calloc(len_ecm_savetable, sizeof(ECMFILELUT));
+		ecm_savetable[0].filepos = ECM_HEADER_SIZE;
+		return 0;
+	}
+#endif
+	return 1;
+}
+
+
 static unsigned char * CALLBACK ISOgetBuffer_compr(void) {
 	return compr_img->buff_raw[compr_img->sector_in_blk] + 12;
 }
@@ -1422,6 +1610,10 @@ static long CALLBACK ISOopen(void) {
 	else if (isMode1ISO)
 		cdimg_read_func = cdread_2048;
 
+	if (handleecm(GetIsoFile()) == 0) {
+		SysPrintf("[+ecm]");
+	}
+
 	// make sure we have another handle open for cdda
 	if (numtracks > 1 && ti[1].handle == NULL) {
 		ti[1].handle = fopen(GetIsoFile(), "rb");
@@ -1447,6 +1639,12 @@ static long CALLBACK ISOclose(void) {
 		free(compr_img);
 		compr_img = NULL;
 	}
+
+	// ECM LUT
+#ifdef ENABLE_CCDDA
+	free(ecm_savetable);
+	ecm_savetable = NULL;
+#endif
 
 	for (i = 1; i <= numtracks; i++) {
 		if (ti[i].handle != NULL) {
@@ -1476,6 +1674,15 @@ long CALLBACK ISOinit(void) {
 
 static long CALLBACK ISOshutdown(void) {
 	ISOclose();
+
+#ifdef ENABLE_CCDDA
+	if (decoded_ecm != NULL) {
+		fclose(decoded_ecm);
+		free(decoded_ecm_buffer);
+		decoded_ecm_buffer = NULL;
+		decoded_ecm	= NULL;
+	}
+#endif
 	return 0;
 }
 
