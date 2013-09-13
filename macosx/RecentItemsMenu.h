@@ -9,9 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 @class PcsxrController;
-@interface RecentItemsMenu : NSMenu {
-    IBOutlet PcsxrController *pcsxr;
-}
+@interface RecentItemsMenu : NSMenu
+
+@property (weak) IBOutlet PcsxrController *pcsxr;
 
 - (IBAction)clearRecentDocuments:(id)sender;
 - (void)addRecentItem:(NSURL*)documentURL;

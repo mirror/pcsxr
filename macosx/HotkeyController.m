@@ -11,17 +11,29 @@
 
 #define INPUT_HOLD_TIME		0.1
 
+@interface HotkeyController ()
+@property (strong) NSButton *lastConfigButton;
+@property (strong) NSMutableDictionary *hotkeysList;
+@property (strong) NSDictionary *keyNameTable;
+@property (strong) NSMutableDictionary *hotkeyOutlets;
+@end
+
 @implementation HotkeyController
 
-@synthesize configInput;
+@synthesize FastForward;
+@synthesize FrameLimit;
+@synthesize LoadState;
+@synthesize NextState;
+@synthesize PrevState;
+@synthesize SaveState;
 
 - (void)initialize
 {
-	lastConfigButton = nil;
-	configInput = 0;
-	hotkeysList = [[NSMutableDictionary alloc] initWithCapacity:16];
-    keyNameTable = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"KeyNames" ofType:@"plist"]];
-    hotkeyOutlets = [[NSMutableDictionary alloc] initWithCapacity:8];
+	self.lastConfigButton = nil;
+	self.configInput = 0;
+	self.hotkeysList = [[NSMutableDictionary alloc] initWithCapacity:16];
+    self.keyNameTable = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"KeyNames" ofType:@"plist"]];
+    self.hotkeyOutlets = [[NSMutableDictionary alloc] initWithCapacity:8];
     
     [self mapOutletToIdentifier:FastForward forIdentifier:@"FastForward"];
 	[self mapOutletToIdentifier:SaveState forIdentifier:@"SaveState"];
@@ -36,16 +48,16 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)mapOutletToIdentifier:(id)outlet forIdentifier:(NSString*)identifier
+- (void)mapOutletToIdentifier:(id)outlet forIdentifier:(NSString*)identifier1
 {
-    hotkeyOutlets[identifier] = outlet;
-    [self setHotkeyDisplay:identifier];
+    (self.hotkeyOutlets)[identifier1] = outlet;
+    [self setHotkeyDisplay:identifier1];
 }
 
 - (void)setHotkeyDisplay:(NSString*)keyIdent
 {
     NSString *label = [self parseMappingDisplayString:keyIdent];
-    NSTextField *displayField = hotkeyOutlets[keyIdent];
+    NSTextField *displayField = (self.hotkeyOutlets)[keyIdent];
     
     if(displayField) {
         [[displayField cell] setStringValue:label];
@@ -96,7 +108,7 @@
 
 - (BOOL) handleMouseDown:(NSEvent *)mouseEvent
 {
-	if (configInput != 0)
+	if (self.configInput != 0)
 	{
 		[self hotkeyCancel];
 	}
@@ -107,12 +119,12 @@
 - (void)keyDown:(NSEvent *)theEvent
 {
 	NSString *keyCode = [NSString stringWithFormat:@"%d", [theEvent keyCode]];
-	NSString *keyLabel = (NSString *)[keyNameTable valueForKey:keyCode];
+	NSString *keyLabel = (NSString *) (self.keyNameTable)[keyCode];
 	
-	if (configInput != 0)
+	if (self.configInput != 0)
 	{
 		// Save input
-        NSString *ident = [lastConfigButton identifier];
+        NSString *ident = [self.lastConfigButton identifier];
         [self saveHotkey:ident device:@"NSEventKeyboard" deviceLabel:@"Keyboard" code:keyCode label:keyLabel];
         [self setHotkeyDisplay:ident];
 		[self hotkeyCancel];
@@ -152,16 +164,16 @@
 {
 	NSButton *theButton = (NSButton *)sender;
 	
-	if (configInput && lastConfigButton != theButton)
+	if (self.configInput && self.lastConfigButton != theButton)
 	{
-		[lastConfigButton setState:NSOffState];
+		[self.lastConfigButton setState:NSOffState];
 	}
 	
 	if ([theButton state] == NSOnState)
 	{
-		lastConfigButton = theButton;
-		[hotkeysList removeAllObjects];
-		configInput = [theButton tag];
+		self.lastConfigButton = theButton;
+		[self.hotkeysList removeAllObjects];
+		self.configInput = [theButton tag];
 	}
 	else
 	{
@@ -172,13 +184,13 @@
 
 - (void) hotkeyCancel
 {
-	if (lastConfigButton != nil)
+	if (self.lastConfigButton != nil)
 	{
-		[lastConfigButton setState:NSOffState];
-		lastConfigButton = nil;
+		[self.lastConfigButton setState:NSOffState];
+		self.lastConfigButton = nil;
 	}
 	
-	configInput = 0;
+	self.configInput = 0;
 }
 
 - (BOOL)acceptsFirstResponder

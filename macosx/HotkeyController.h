@@ -6,22 +6,16 @@
 #import <Cocoa/Cocoa.h>
 
 @interface HotkeyController : NSView
-{
-	NSButton *lastConfigButton;
-	NSInteger configInput;
-	NSMutableDictionary *hotkeysList;
-	NSDictionary *keyNameTable;
-    NSMutableDictionary *hotkeyOutlets;
-    
-    IBOutlet NSTextField *FastForward;
-    IBOutlet NSTextField *SaveState;
-    IBOutlet NSTextField *LoadState;
-    IBOutlet NSTextField *NextState;
-    IBOutlet NSTextField *PrevState;
-    IBOutlet NSTextField *FrameLimit;
-}
 
-@property (assign) NSInteger configInput;
+@property (weak) IBOutlet NSTextField *FastForward;
+@property (weak) IBOutlet NSTextField *SaveState;
+@property (weak) IBOutlet NSTextField *LoadState;
+@property (weak) IBOutlet NSTextField *NextState;
+@property (weak) IBOutlet NSTextField *PrevState;
+@property (weak) IBOutlet NSTextField *FrameLimit;
+
+
+@property NSInteger configInput;
 
 - (void) initialize;
 - (BOOL) handleMouseDown:(NSEvent *)mouseEvent;

@@ -10,11 +10,6 @@
 #import "PcsxrMemoryObject.h"
 
 @interface PcsxrMemCardArray : NSObject
-{
-	@private
-	NSArray *rawArray;
-	int cardNumber;
-}
 
 - (id)initWithMemoryCardNumber:(int)carNum;
 

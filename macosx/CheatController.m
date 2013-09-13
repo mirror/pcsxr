@@ -14,10 +14,6 @@
 #define kCheatsName @"cheats"
 
 @interface PcsxrCheatTempObject : NSObject <NSCopying>
-{
-	uint32_t address;
-	uint16_t value;
-}
 @property (readwrite) uint32_t address;
 @property (readwrite, weak) NSNumber* addressNS;
 @property (readwrite) uint16_t value;
@@ -28,11 +24,6 @@
 @end
 
 @interface PcsxrCheatTemp : NSObject
-{
-	NSMutableArray *cheatValues;
-	NSString *cheatName;
-	BOOL enabled;
-}
 @property (readwrite, strong) NSMutableArray *cheatValues;
 @property (readwrite, strong) NSString *cheatName;
 @property (readwrite, getter = isEnabled) BOOL enabled;
@@ -141,8 +132,11 @@
 @end
 
 @implementation CheatController
-@synthesize tempCheatCodes;
-@synthesize cheats;
+@synthesize addressFormatter;
+@synthesize cheatView;
+@synthesize editCheatView;
+@synthesize editCheatWindow;
+@synthesize valueFormatter;
 
 - (NSString *)windowNibName
 {
@@ -226,7 +220,7 @@
 	[saveDlg setPrompt:NSLocalizedString(@"Save Cheats", nil)];
 	if ([saveDlg runModal] == NSFileHandlingPanelOKButton) {
 		NSURL *url = [saveDlg URL];
-		NSString *saveString = [cheats componentsJoinedByString:@"\n"];
+		NSString *saveString = [self.cheats componentsJoinedByString:@"\n"];
 		[saveString writeToURL:url atomically:YES encoding:NSUTF8StringEncoding error:NULL];
 	}
 }
@@ -255,22 +249,23 @@
 
 	NSIndexSet *toRemoveIndex = [editCheatView selectedRowIndexes];
 	[self willChange:NSKeyValueChangeRemoval valuesAtIndexes:toRemoveIndex forKey:kTempCheatCodesName];
-	[tempCheatCodes removeObjectsAtIndexes:toRemoveIndex];
+	[self.tempCheatCodes removeObjectsAtIndexes:toRemoveIndex];
 	[self didChange:NSKeyValueChangeRemoval valuesAtIndexes:toRemoveIndex forKey:kTempCheatCodesName];	
 }
 
 - (IBAction)addCheatValue:(id)sender
 {
-	[self willChange:NSKeyValueChangeInsertion valuesAtIndexes:[NSIndexSet indexSetWithIndex:[tempCheatCodes count]] forKey:kTempCheatCodesName];
-	[tempCheatCodes addObject:[[PcsxrCheatTempObject alloc] init]];
-	[self didChange:NSKeyValueChangeInsertion valuesAtIndexes:[NSIndexSet indexSetWithIndex:[tempCheatCodes count] - 1] forKey:kTempCheatCodesName];
+	NSIndexSet *newSet = [NSIndexSet indexSetWithIndex:[self.tempCheatCodes count]];
+	[self willChange:NSKeyValueChangeInsertion valuesAtIndexes:newSet forKey:kTempCheatCodesName];
+	[self.tempCheatCodes addObject:[[PcsxrCheatTempObject alloc] init]];
+	[self didChange:NSKeyValueChangeInsertion valuesAtIndexes:newSet forKey:kTempCheatCodesName];
 }
 
 - (void)reloadCheats
 {
 	NSFileManager *manager = [NSFileManager defaultManager];
 	NSURL *tmpURL = [[manager URLForDirectory:NSItemReplacementDirectory inDomain:NSUserDomainMask appropriateForURL:[[NSBundle mainBundle] bundleURL] create:YES error:nil] URLByAppendingPathComponent:@"temp.cht" isDirectory:NO];
-	NSString *tmpStr = [cheats componentsJoinedByString:@"\n"];
+	NSString *tmpStr = [self.cheats componentsJoinedByString:@"\n"];
 	[tmpStr writeToURL:tmpURL atomically:NO encoding:NSUTF8StringEncoding error:NULL];
 	LoadCheats([[tmpURL path] fileSystemRepresentation]);
 	[manager removeItemAtURL:tmpURL error:NULL];
@@ -279,9 +274,9 @@
 - (void)editCheatCodeSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
 	if (returnCode == NSOKButton) {
-		PcsxrCheatTemp *tmpCheat = cheats[[cheatView selectedRow]];
-		if (![tmpCheat.cheatValues isEqualToArray:tempCheatCodes]) {
-			tmpCheat.cheatValues = tempCheatCodes;
+		PcsxrCheatTemp *tmpCheat = (self.cheats)[[cheatView selectedRow]];
+		if (![tmpCheat.cheatValues isEqualToArray:self.tempCheatCodes]) {
+			tmpCheat.cheatValues = self.tempCheatCodes;
 			[self setDocumentEdited:YES];
 		}
 	}
@@ -295,7 +290,7 @@
 		NSBeep();
 		return;
 	}
-	NSMutableArray *tmpArray = [cheats[[cheatView selectedRow]] cheatValues];
+	NSMutableArray *tmpArray = [(self.cheats)[[cheatView selectedRow]] cheatValues];
 	NSMutableArray *newCheats = [[NSMutableArray alloc] initWithArray:tmpArray copyItems:YES];
 	self.tempCheatCodes = newCheats;
 	[NSApp beginSheet:editCheatWindow modalForWindow:[self window] modalDelegate:self didEndSelector:@selector(editCheatCodeSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
@@ -303,14 +298,15 @@
 
 - (IBAction)addCheat:(id)sender
 {
-	[self willChange:NSKeyValueChangeInsertion valuesAtIndexes:[NSIndexSet indexSetWithIndex:[cheats count]] forKey:kCheatsName];
+	NSIndexSet *newSet = [NSIndexSet indexSetWithIndex:[self.cheats count]];
+	[self willChange:NSKeyValueChangeInsertion valuesAtIndexes:newSet forKey:kCheatsName];
 	PcsxrCheatTemp *tmpCheat = [[PcsxrCheatTemp alloc] init];
 	tmpCheat.cheatName = NSLocalizedString(@"New Cheat", @"New Cheat Name" );
 	PcsxrCheatTempObject *tmpObj = [[PcsxrCheatTempObject alloc] initWithAddress:0x10000000 value:0];
 	NSMutableArray *tmpArray = [NSMutableArray arrayWithObject:tmpObj];
 	tmpCheat.cheatValues = tmpArray;
-	[cheats addObject:tmpCheat];
-	[self didChange:NSKeyValueChangeInsertion valuesAtIndexes:[NSIndexSet indexSetWithIndex:[cheats count] - 1] forKey:kCheatsName];
+	[self.cheats addObject:tmpCheat];
+	[self didChange:NSKeyValueChangeInsertion valuesAtIndexes:newSet forKey:kCheatsName];
 	[self setDocumentEdited:YES];
 }
 
@@ -363,7 +359,7 @@
 	
 	NSIndexSet *toRemoveIndex = [cheatView selectedRowIndexes];
 	[self willChange:NSKeyValueChangeRemoval valuesAtIndexes:toRemoveIndex forKey:kCheatsName];
-	[cheats removeObjectsAtIndexes:toRemoveIndex];
+	[self.cheats removeObjectsAtIndexes:toRemoveIndex];
 	[self didChange:NSKeyValueChangeRemoval valuesAtIndexes:toRemoveIndex forKey:kCheatsName];
 	[self setDocumentEdited:YES];
 }

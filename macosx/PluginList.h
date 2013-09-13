@@ -11,19 +11,7 @@
 
 //extern NSMutableArray *plugins;
 
-@interface PluginList : NSObject {
-    @private
-    NSMutableArray *pluginList;
-	 
-	PcsxrPlugin *activeGpuPlugin;
-	PcsxrPlugin *activeSpuPlugin;
-	PcsxrPlugin *activeCdrPlugin;
-	PcsxrPlugin *activePadPlugin;
-	PcsxrPlugin *activeNetPlugin;
-	PcsxrPlugin *activeSIO1Plugin;
-	 
-	BOOL missingPlugins;
-}
+@interface PluginList : NSObject
 
 + (PluginList *)list;
 

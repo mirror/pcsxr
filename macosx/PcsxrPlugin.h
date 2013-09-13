@@ -10,16 +10,11 @@
 
 @interface PcsxrPlugin : NSObject {
 	void *pluginRef;
-	
-	NSDate *modDate;
-	NSString *fullPlugPath;
-	long version;
-	int type;
-	int active;
 }
 
 @property (readonly, copy) NSString *path;
 @property (readonly, strong) NSString *name;
+@property (readonly) int type;
 
 + (NSString *)prefixForType:(int)type;
 + (NSString *)defaultKeyForType:(int)type;
@@ -29,9 +24,6 @@
 - (id)initWithPath:(NSString *)aPath;
 
 - (NSString *)displayVersion;
-- (int)type;
-- (NSUInteger)hash;
-- (NSString *)description;
 - (BOOL)hasAboutAs:(int)type;
 - (BOOL)hasConfigureAs:(int)type;
 - (long)runAs:(int)aType;

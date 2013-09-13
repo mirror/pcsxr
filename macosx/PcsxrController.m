@@ -50,13 +50,16 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 @property BOOL sleepInBackground;
 @property BOOL wasPausedBeforeBGSwitch;
 @property (strong) NSMutableArray *skipFiles;
+@property (strong) NSWindow *preferenceWindow;
+@property (strong) NSWindow *cheatWindow;
 @end
 
 @implementation PcsxrController
-
 @synthesize recentItems;
 @synthesize skipFiles;
 @synthesize cheatController;
+@synthesize cheatWindow;
+@synthesize preferenceWindow;
 
 - (BOOL)endAtEmuClose
 {

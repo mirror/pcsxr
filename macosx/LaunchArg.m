@@ -9,10 +9,9 @@
 #import "LaunchArg.h"
 
 @interface LaunchArg ()
-@property (readwrite) LaunchArgOrder launchOrder;
+@property (readwrite) unsigned launchOrder;
 @property (readwrite, copy, nonatomic) dispatch_block_t theBlock;
 @property (readwrite, strong) NSString *argument;
-
 @end
 
 @implementation LaunchArg
@@ -24,12 +23,12 @@
 	_theBlock = [theBlock copy];
 }
 
-- (id)initWithLaunchOrder:(LaunchArgOrder)order argument:(NSString*)arg block:(dispatch_block_t)block
+- (id)initWithLaunchOrder:(unsigned)order argument:(NSString*)arg block:(dispatch_block_t)block
 {
 	return [self initWithLaunchOrder:order block:block argument:arg];
 }
 
-- (id)initWithLaunchOrder:(LaunchArgOrder)order block:(dispatch_block_t)block argument:(NSString*)arg
+- (id)initWithLaunchOrder:(unsigned)order block:(dispatch_block_t)block argument:(NSString*)arg
 {
 	if (self = [super init]) {
 		self.launchOrder = order;

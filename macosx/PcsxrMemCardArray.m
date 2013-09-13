@@ -66,11 +66,12 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 @interface PcsxrMemCardArray ()
 @property (strong) NSArray *rawArray;
 @property (readonly) char* memDataPtr;
-
+@property int cardNumber;
 @end
 
 @implementation PcsxrMemCardArray
 @synthesize rawArray;
+@synthesize cardNumber;
 
 - (char*)memDataPtr
 {

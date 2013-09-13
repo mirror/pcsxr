@@ -17,17 +17,24 @@
 
 @interface PcsxrPlugin ()
 @property (readwrite, copy) NSString *path;
-@property (readwrite, strong) NSDate *modDate;
 @property (readwrite, strong) NSString *name;
-@property (readwrite, strong) NSString *fullPlugPath;
+@property (strong) NSDate *modDate;
+@property (strong) NSString *fullPlugPath;
+@property long version;
+@property (readwrite) int type;
+@property int active;
+
+
 @end
 
 @implementation PcsxrPlugin
 
-@synthesize path;
-@synthesize name;
+@synthesize active;
 @synthesize fullPlugPath;
 @synthesize modDate;
+@synthesize path;
+@synthesize type;
+@synthesize version;
 
 + (NSString *)prefixForType:(int)aType
 {
@@ -125,7 +132,7 @@
 	NSFileManager *fm = [NSFileManager defaultManager];
 	
 	pluginRef = NULL;
-	name = nil;
+	self.name = nil;
 	self.path = aPath;
 	NSString *goodPath = nil;
 	if ([aPath isAbsolutePath]) {
@@ -366,11 +373,6 @@
 	return [NSString stringWithFormat:@"v%ld.%ld.%ld", version>>16,(version>>8)&0xff,version&0xff];
 }
 
-- (int)type
-{
-	return type;
-}
-
 - (NSUInteger)hash
 {
 	return [path hash];
@@ -378,18 +380,18 @@
 
 - (NSString *)description
 {
-	if (name == nil)
+	if (_name == nil)
 		return [path lastPathComponent];
 	
-	return [NSString stringWithFormat:@"%@ %@ [%@]", name, [self displayVersion], [path lastPathComponent]];
+	return [NSString stringWithFormat:@"%@ %@ [%@]", self.name, [self displayVersion], [path lastPathComponent]];
 }
 
 - (NSString*)debugDescription
 {
-	if (name == nil) {
+	if (_name == nil) {
 		return fullPlugPath;
 	}
-	return [NSString stringWithFormat:@"%@, %@ [%@]", name, [self displayVersion], fullPlugPath];
+	return [NSString stringWithFormat:@"%@, %@ [%@]", self.name, [self displayVersion], fullPlugPath];
 }
 
 // the plugin will check if it's still valid and return the status

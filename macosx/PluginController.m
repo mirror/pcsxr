@@ -5,22 +5,24 @@
 @interface PluginController ()
 @property (strong) NSArray *plugins;
 @property (strong) NSString *defaultKey;
+@property int pluginType;
 @end
 
 @implementation PluginController
-@synthesize defaultKey;
-@synthesize plugins;
+@synthesize aboutButton;
+@synthesize configureButton;
+@synthesize pluginMenu;
 
 - (IBAction)doAbout:(id)sender
 {
-	 PcsxrPlugin *plugin = plugins[[pluginMenu indexOfSelectedItem]];
-	 [plugin aboutAs:pluginType];
+	 PcsxrPlugin *plugin = (self.plugins)[[pluginMenu indexOfSelectedItem]];
+	 [plugin aboutAs:self.pluginType];
 }
 
 - (IBAction)doConfigure:(id)sender
 {
-	 PcsxrPlugin *plugin = plugins[[pluginMenu indexOfSelectedItem]];
-	 [plugin configureAs:pluginType];
+	 PcsxrPlugin *plugin = (self.plugins)[[pluginMenu indexOfSelectedItem]];
+	 [plugin configureAs:self.pluginType];
 }
 
 - (IBAction)selectPlugin:(id)sender
@@ -28,18 +30,18 @@
 	if (sender == pluginMenu) {
 		NSInteger index = [pluginMenu indexOfSelectedItem];
 		if (index != -1) {
-			PcsxrPlugin *plugin = plugins[index];
+			PcsxrPlugin *plugin = (self.plugins)[index];
 
-			if (![[PluginList list] setActivePlugin:plugin forType:pluginType]) {
+			if (![[PluginList list] setActivePlugin:plugin forType:self.pluginType]) {
 				/* plugin won't initialize */
 			}
 
 			// write selection to defaults
-			[[NSUserDefaults standardUserDefaults] setObject:[plugin path] forKey:defaultKey];
+			[[NSUserDefaults standardUserDefaults] setObject:[plugin path] forKey:self.defaultKey];
 
 			// set button states
-			[aboutButton setEnabled:[plugin hasAboutAs:pluginType]];
-			[configureButton setEnabled:[plugin hasConfigureAs:pluginType]];
+			[aboutButton setEnabled:[plugin hasAboutAs:self.pluginType]];
+			[configureButton setEnabled:[plugin hasConfigureAs:self.pluginType]];
 		} else {
 			// set button states
 			[aboutButton setEnabled:NO];
@@ -54,18 +56,18 @@
 	NSString *sel;
 
 	// remember the list
-	pluginType = type;
+	self.pluginType = type;
 	self.plugins = list;
-	self.defaultKey = [PcsxrPlugin defaultKeyForType:pluginType];
+	self.defaultKey = [PcsxrPlugin defaultKeyForType:self.pluginType];
 
 	// clear the previous menu items
 	[pluginMenu removeAllItems];
 
 	// load the currently selected plugin
-	sel = [[NSUserDefaults standardUserDefaults] stringForKey:defaultKey];
+	sel = [[NSUserDefaults standardUserDefaults] stringForKey:self.defaultKey];
 
 	// add the menu entries
-	for (PcsxrPlugin *plug in plugins) {
+	for (PcsxrPlugin *plug in self.plugins) {
 		NSString *description = [plug description];
 		[pluginMenu addItemWithTitle:description];
 		

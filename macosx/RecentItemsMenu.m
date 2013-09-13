@@ -11,6 +11,8 @@
 
 @implementation RecentItemsMenu
 
+@synthesize pcsxr;
+
 // Initialization
 - (void)awakeFromNib
 {

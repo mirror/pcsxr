@@ -15,10 +15,6 @@
 	IBOutlet NSCollectionView *memCard2view;
 	IBOutlet NSTextField *memCard1Label;
 	IBOutlet NSTextField *memCard2Label;
-	
-	PcsxrMemCardArray *memCard1Array;
-	PcsxrMemCardArray *memCard2Array;
-	NSTimer *imageAnimateTimer;
 }
 @property (readonly, strong) PcsxrMemCardArray *memCard1Array;
 @property (readonly, strong) PcsxrMemCardArray *memCard2Array;

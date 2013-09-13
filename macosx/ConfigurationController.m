@@ -10,7 +10,28 @@
 NSString *const memChangeNotifier = @"PcsxrMemoryCardDidChangeNotifier";
 NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 
+@interface ConfigurationController ()
+@property (strong) NSMutableDictionary *checkBoxDefaults;
+- (NSString *)keyForSender:(id)sender;
+@end
+
 @implementation ConfigurationController
+@synthesize autoVTypeCell;
+@synthesize bwMdecCell;
+@synthesize checkBoxDefaults = _checkBoxDefaults;
+@synthesize consoleOutputCell;
+@synthesize enableNetPlayCell;
+@synthesize noCDAudioCell;
+@synthesize noFastBootCell;
+@synthesize noXaAudioCell;
+@synthesize rCountFixCell;
+@synthesize sioIrqAlwaysCell;
+@synthesize spuIrqAlwaysCell;
+@synthesize usesDynarecCell;
+@synthesize usesHleCell;
+@synthesize vSyncWAFixCell;
+@synthesize vTypePALCell;
+@synthesize widescreen;
 
 + (void)setMemoryCard:(NSInteger)theCard toURL:(NSURL *)theURL;
 {
@@ -119,12 +140,13 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 - (IBAction)setVideoType:(id)sender
 {
 	NSInteger tag = [[sender selectedItem] tag];
-
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
 	if (3 == tag) {
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoDetectVideoType"];
+		[defaults setBool:YES forKey:@"AutoDetectVideoType"];
 	} else if (1 == tag || 2 == tag) {
-		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AutoDetectVideoType"];
-		[[NSUserDefaults standardUserDefaults] setBool:tag==2 forKey:@"VideoTypePAL"];
+		[defaults setBool:NO forKey:@"AutoDetectVideoType"];
+		[defaults setBool:tag==2 forKey:@"VideoTypePAL"];
 	} else {
 		return;
 	}
@@ -147,30 +169,30 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	[[self window] center];
 	
 	// setup checkboxes
-	checkBoxDefaults = [[NSMutableDictionary alloc] init];
+	self.checkBoxDefaults = [[NSMutableDictionary alloc] init];
 
 	// check that the outlets are active before adding them
-	if (noXaAudioCell) checkBoxDefaults[@"NoXaAudio"] = noXaAudioCell;
-	if (enableNetPlayCell) checkBoxDefaults[@"NetPlay"] = enableNetPlayCell;
-	if (sioIrqAlwaysCell) checkBoxDefaults[@"SioIrqAlways"] = sioIrqAlwaysCell;
-	if (bwMdecCell) checkBoxDefaults[@"BlackAndWhiteMDECVideo"] = bwMdecCell;
-	if (autoVTypeCell) checkBoxDefaults[@"AutoDetectVideoType"] = autoVTypeCell;
-	if (vTypePALCell) checkBoxDefaults[@"VideoTypePAL"] = vTypePALCell;
-	if (noCDAudioCell) checkBoxDefaults[@"NoCDAudio"] = noCDAudioCell;
-	if (usesHleCell) checkBoxDefaults[@"UseHLE"] = usesHleCell;
-	if (usesDynarecCell) checkBoxDefaults[@"NoDynarec"] = usesDynarecCell;
-	if (consoleOutputCell) checkBoxDefaults[@"ConsoleOutput"] = consoleOutputCell;
-	if (spuIrqAlwaysCell) checkBoxDefaults[@"SpuIrqAlways"] = spuIrqAlwaysCell;
-	if (rCountFixCell) checkBoxDefaults[@"RootCounterFix"] = rCountFixCell;
-	if (vSyncWAFixCell) checkBoxDefaults[@"VideoSyncWAFix"] = vSyncWAFixCell;
-	if (noFastBootCell) checkBoxDefaults[@"NoFastBoot"] = noFastBootCell;
-	if (widescreen) checkBoxDefaults[@"Widescreen"] = widescreen;
+	if (noXaAudioCell) _checkBoxDefaults[@"NoXaAudio"] = noXaAudioCell;
+	if (enableNetPlayCell) _checkBoxDefaults[@"NetPlay"] = enableNetPlayCell;
+	if (sioIrqAlwaysCell) _checkBoxDefaults[@"SioIrqAlways"] = sioIrqAlwaysCell;
+	if (bwMdecCell) _checkBoxDefaults[@"BlackAndWhiteMDECVideo"] = bwMdecCell;
+	if (autoVTypeCell) _checkBoxDefaults[@"AutoDetectVideoType"] = autoVTypeCell;
+	if (vTypePALCell) _checkBoxDefaults[@"VideoTypePAL"] = vTypePALCell;
+	if (noCDAudioCell) _checkBoxDefaults[@"NoCDAudio"] = noCDAudioCell;
+	if (usesHleCell) _checkBoxDefaults[@"UseHLE"] = usesHleCell;
+	if (usesDynarecCell) _checkBoxDefaults[@"NoDynarec"] = usesDynarecCell;
+	if (consoleOutputCell) _checkBoxDefaults[@"ConsoleOutput"] = consoleOutputCell;
+	if (spuIrqAlwaysCell) _checkBoxDefaults[@"SpuIrqAlways"] = spuIrqAlwaysCell;
+	if (rCountFixCell) _checkBoxDefaults[@"RootCounterFix"] = rCountFixCell;
+	if (vSyncWAFixCell) _checkBoxDefaults[@"VideoSyncWAFix"] = vSyncWAFixCell;
+	if (noFastBootCell) _checkBoxDefaults[@"NoFastBoot"] = noFastBootCell;
+	if (widescreen) _checkBoxDefaults[@"Widescreen"] = widescreen;
 
 	// make the visuals match the defaults
 	
-	for (NSString* key in checkBoxDefaults) {
+	for (NSString* key in _checkBoxDefaults) {
 		if ([defaults integerForKey:key]) {
-			[checkBoxDefaults[key] setNextState];
+			[_checkBoxDefaults[key] setNextState];
 		}
 	}
 	
@@ -214,8 +236,8 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 
 - (NSString *)keyForSender:(id)sender
 {
-	for (NSString *key in checkBoxDefaults) {
-		id object = checkBoxDefaults[key];
+	for (NSString *key in [self.checkBoxDefaults keyEnumerator]) {
+		id object = (self.checkBoxDefaults)[key];
 		if ([object isEqual:sender])
 			return key;
 	}

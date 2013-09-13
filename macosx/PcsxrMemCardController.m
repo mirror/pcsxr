@@ -18,6 +18,7 @@
 @interface PcsxrMemCardController ()
 @property (readwrite, strong) PcsxrMemCardArray *memCard1Array;
 @property (readwrite, strong) PcsxrMemCardArray *memCard2Array;
+@property (strong) 	NSTimer *imageAnimateTimer;
 @end
 
 @implementation PcsxrMemCardController
@@ -83,8 +84,8 @@
     
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(memoryCardDidChangeNotification:) name:memChangeNotifier object:nil];
 
-	imageAnimateTimer = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:3.0/10.0 target:self selector:@selector(animateMemCards:) userInfo:nil repeats:YES];
-	[[NSRunLoop mainRunLoop] addTimer:imageAnimateTimer forMode:NSRunLoopCommonModes];
+	self.imageAnimateTimer = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:3.0/10.0 target:self selector:@selector(animateMemCards:) userInfo:nil repeats:YES];
+	[[NSRunLoop mainRunLoop] addTimer:self.imageAnimateTimer forMode:NSRunLoopCommonModes];
 }
 
 - (void)animateMemCards:(NSTimer*)theTimer
@@ -228,7 +229,7 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[imageAnimateTimer invalidate];
+	[self.imageAnimateTimer invalidate];
 }
 
 @end

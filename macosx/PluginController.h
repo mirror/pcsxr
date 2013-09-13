@@ -4,15 +4,11 @@
 #import "PluginList.h"
 
 @interface PluginController : NSObject
-{
-	IBOutlet NSButton *aboutButton;
-	IBOutlet NSButton *configureButton;
-	IBOutlet NSPopUpButton *pluginMenu;
-	
-	int pluginType;
-	NSArray *plugins;
-	NSString *defaultKey;
-}
+
+@property (weak) IBOutlet NSButton *aboutButton;
+@property (weak) IBOutlet NSButton *configureButton;
+@property (weak) IBOutlet NSPopUpButton *pluginMenu;
+
 - (IBAction)doAbout:(id)sender;
 - (IBAction)doConfigure:(id)sender;
 - (IBAction)selectPlugin:(id)sender;

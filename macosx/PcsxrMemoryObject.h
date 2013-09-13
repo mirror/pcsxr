@@ -25,19 +25,12 @@ typedef enum _PCSXRMemFlags {
 } PCSXRMemFlags;
 
 @interface PcsxrMemoryObject : NSObject
-{
-	NSArray			*memImages;
-	NSInteger		memImageIndex;
-	uint8_t			startingIndex;
-	uint8_t			blockSize;
-	PCSXRMemFlags	flagNameIndex;
-}
+
 + (NSArray *)imagesFromMcd:(McdBlock *)block;
 + (NSString*)memoryLabelFromFlag:(PCSXRMemFlags)flagNameIndex;
 + (NSImage *)blankImage;
 + (PCSXRMemFlags)memFlagsFromBlockFlags:(unsigned char)blockFlags;
 
-- (id)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(uint8_t)startIdx;
 - (id)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(uint8_t)startIdx size:(uint8_t)memSize;
 
 @property (readonly, strong) NSString *englishName;

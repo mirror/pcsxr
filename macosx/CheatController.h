@@ -8,16 +8,13 @@
 @class PcsxrHexadecimalFormatter;
 
 @interface CheatController : NSWindowController <NSWindowDelegate, NSTableViewDelegate>
-{
-    IBOutlet NSTableView *cheatView;
-	
-	IBOutlet NSWindow *editCheatWindow;
-	IBOutlet NSTableView *editCheatView;
-	IBOutlet PcsxrHexadecimalFormatter *addressFormatter;
-	IBOutlet PcsxrHexadecimalFormatter *valueFormatter;
-	NSMutableArray *tempCheatCodes;
-	NSMutableArray *cheats;
-}
+
+@property (weak) IBOutlet NSTableView *cheatView;
+@property (weak) IBOutlet NSWindow *editCheatWindow;
+@property (weak) IBOutlet NSTableView *editCheatView;
+@property (weak) IBOutlet PcsxrHexadecimalFormatter *addressFormatter;
+@property (weak) IBOutlet PcsxrHexadecimalFormatter *valueFormatter;
+
 @property (readwrite, strong) NSMutableArray *tempCheatCodes;
 @property (readwrite, strong) NSMutableArray *cheats;
 

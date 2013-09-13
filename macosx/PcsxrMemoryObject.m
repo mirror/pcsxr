@@ -57,8 +57,7 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 		}
 		[imagesArray addObject:memImage];
 	}
-	NSArray *retArray = [NSArray arrayWithArray:imagesArray];
-	return retArray;
+	return [NSArray arrayWithArray:imagesArray];
 }
 
 static NSString *MemLabelDeleted;
@@ -120,11 +119,6 @@ static NSString *MemLabelEndLink;
 	return imageBlank;
 }
 
-- (id)initWithMcdBlock:(McdBlock *)infoBlock startingIndex:(uint8_t)startIdx
-{
-	return [self initWithMcdBlock:infoBlock startingIndex:startIdx size:1];
-}
-
 + (PCSXRMemFlags)memFlagsFromBlockFlags:(unsigned char)blockFlags
 {
 	if ((blockFlags & 0xF0) == 0xA0) {
@@ -165,13 +159,14 @@ static NSString *MemLabelEndLink;
 			if ([englishName isEqualToString:sjisName]) {
 #if 0
 				if (![englishName isEqualToString:@""])
-					NSLog(@"English name and sjis name are the same: %s. Replacing the sjis string with the English string.", [englishName UTF8String]);
+					NSLog(@"English name and sjis name are the same: %@. Replacing the sjis string with the English string.", englishName);
 #endif
 				self.sjisName = self.englishName;
 			}
 			@autoreleasepool {
 				self.memImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
 			}
+			
 			if ([memImages count] == 0) {
 				self.memImageIndex = -1;
 			} else if ([memImages count] == 1) {

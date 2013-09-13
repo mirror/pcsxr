@@ -16,20 +16,14 @@ void ShowHelpAndExit(FILE* output, int exitCode);
 	CheatController *cheatController;
 	PluginList *pluginList;
 	
-	NSWindow *preferenceWindow;
-	NSWindow *cheatWindow;
-	IBOutlet RecentItemsMenu *recentItems;
-	
 	struct _PSXflags {
 		unsigned int sleepInBackground:1;
 		unsigned int wasPausedBeforeBGSwitch:1;
 		unsigned int endAtEmuClose:1;
 		unsigned int reserved:25;
 	} PSXflags;
-	
-	NSMutableArray *skipFiles;
 }
-@property (readonly) RecentItemsMenu *recentItems;
+@property (weak) IBOutlet RecentItemsMenu *recentItems;
 @property (readonly) CheatController *cheatController;
 @property (readonly) BOOL endAtEmuClose;
 

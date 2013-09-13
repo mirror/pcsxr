@@ -20,34 +20,32 @@ extern NSString *const memCardChangeNumberKey;
 	IBOutlet PluginController *sio1Plugin;
 	
 	IBOutlet PcsxrMemCardController *memCardEdit;
-
-	IBOutlet id noXaAudioCell;
-	IBOutlet id sioIrqAlwaysCell;
-	IBOutlet id bwMdecCell;
-	IBOutlet id autoVTypeCell;
-	IBOutlet id vTypePALCell;
-	IBOutlet id noCDAudioCell;
-	IBOutlet id usesHleCell;
-	IBOutlet id usesDynarecCell;
-	IBOutlet id consoleOutputCell;
-	IBOutlet id spuIrqAlwaysCell;
-	IBOutlet id rCountFixCell;
-	IBOutlet id vSyncWAFixCell;
-	IBOutlet id noFastBootCell;
-	IBOutlet id enableNetPlayCell;
-	IBOutlet id widescreen;
 	
 	// Hotkeys
 	IBOutlet HotkeyController *hkController;
-	IBOutlet NSTabViewItem *hkTab;	
-	
-	NSMutableDictionary *checkBoxDefaults;
+	IBOutlet NSTabViewItem *hkTab;
 }
+
+@property (weak) IBOutlet NSButtonCell *noXaAudioCell;
+@property (weak) IBOutlet NSButtonCell *sioIrqAlwaysCell;
+@property (weak) IBOutlet NSButtonCell *bwMdecCell;
+@property (weak) IBOutlet NSButtonCell *autoVTypeCell;
+@property (weak) IBOutlet NSPopUpButton *vTypePALCell;
+@property (weak) IBOutlet NSButtonCell *noCDAudioCell;
+@property (weak) IBOutlet NSButtonCell *usesHleCell;
+@property (weak) IBOutlet NSButtonCell *usesDynarecCell;
+@property (weak) IBOutlet NSButtonCell *consoleOutputCell;
+@property (weak) IBOutlet NSButtonCell *spuIrqAlwaysCell;
+@property (weak) IBOutlet NSButtonCell *rCountFixCell;
+@property (weak) IBOutlet NSButtonCell *vSyncWAFixCell;
+@property (weak) IBOutlet NSButtonCell *noFastBootCell;
+@property (weak) IBOutlet NSButtonCell *enableNetPlayCell;
+@property (weak) IBOutlet NSButtonCell *widescreen;
+
 - (IBAction)setCheckbox:(id)sender;
 - (IBAction)setCheckboxInverse:(id)sender;
 - (IBAction)setVideoType:(id)sender;
 
-- (NSString *)keyForSender:(id)sender;
 + (void)setMemoryCard:(NSInteger)theCard toPath:(NSString *)theFile;
 + (void)setMemoryCard:(NSInteger)theCard toURL:(NSURL *)theURL;
 

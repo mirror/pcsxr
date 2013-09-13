@@ -15,16 +15,11 @@ typedef enum _LaunchArgOrder {
 }LaunchArgOrder;
 
 @interface LaunchArg : NSObject
-{
-	LaunchArgOrder _launchOrder;
-	dispatch_block_t _theBlock;
-	NSString *_argument;
-}
-@property (readonly) LaunchArgOrder launchOrder;
+@property (readonly) unsigned launchOrder;
 @property (readonly, copy, nonatomic) dispatch_block_t theBlock;
 @property (readonly, strong) NSString *argument;
 
-- (id)initWithLaunchOrder:(LaunchArgOrder)order block:(dispatch_block_t)block argument:(NSString*)arg;
-- (id)initWithLaunchOrder:(LaunchArgOrder)order argument:(NSString*)arg block:(dispatch_block_t)block;
+- (id)initWithLaunchOrder:(unsigned)order block:(dispatch_block_t)block argument:(NSString*)arg;
+- (id)initWithLaunchOrder:(unsigned)order argument:(NSString*)arg block:(dispatch_block_t)block;
 - (void)addToDictionary:(NSMutableDictionary*)toAdd;
 @end
