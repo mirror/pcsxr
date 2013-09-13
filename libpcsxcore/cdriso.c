@@ -633,16 +633,34 @@ static int parsecue(const char *isofile) {
 			sector_size = 0;
 			if (strstr(linebuf, "AUDIO") != NULL) {
 				ti[numtracks].type = CDDA;
-				sector_size = 2352;
+				sector_size = CD_FRAMESIZE_RAW;
+				// Check if extension is mp3, etc, for compressed audio formats
+				if ((ti[numtracks].cddatype = get_cdda_type(filepath)) > BIN) {
+					int seconds = get_compressed_cdda_track_length(filepath) + 0;
+					const boolean lazy_decode = TRUE; // TODO: config param
+
+					ti[numtracks].len_decoded_buffer = 44100 * (16/8) * 2 * seconds;
+					strcpy(ti[numtracks].filepath, filepath);
+					file_len = ti[numtracks].len_decoded_buffer/CD_FRAMESIZE_RAW;
+
+					// Send to decoder if not lazy decoding
+					if (!lazy_decode) {
+						do_decode_cdda(&(ti[numtracks]), numtracks);
+						fseek(ti[numtracks].handle, 0, SEEK_END);
+						file_len = ftell(ti[numtracks].handle) / CD_FRAMESIZE_RAW; // accurate length
+					}
+				}
 			}
 			else if (sscanf(linebuf, " TRACK %u MODE%u/%u", &t, &mode, &sector_size) == 3)
+				// TODO: here detect if ECM and calculate real length
+				// TODO: also if 2048 frame length -> recalculate?
 				ti[numtracks].type = DATA;
 			else {
 				SysPrintf(".cue: failed to parse TRACK\n");
 				ti[numtracks].type = numtracks == 1 ? DATA : CDDA;
 			}
 			if (sector_size == 0)
-				sector_size = 2352;
+				sector_size = CD_FRAMESIZE_RAW;
 		}
 		else if (!strcmp(token, "INDEX")) {
 			if (sscanf(linebuf, " INDEX %02d %8s", &t, time) != 2)
@@ -706,24 +724,9 @@ static int parsecue(const char *isofile) {
 				continue;
 			}
 
-			// Check if extension is mp3, etc, and send to decoder if not lazy decoding
-			if ((ti[numtracks + 1].cddatype = get_cdda_type(filepath)) > BIN) {
-				int seconds = get_compressed_cdda_track_length(filepath) + 0;
-				const boolean lazy_decode = TRUE; // TODO: config param
-
-				ti[numtracks + 1].len_decoded_buffer = 44100 * (16/8) * 2 * seconds;
-				strcpy(ti[numtracks + 1].filepath, filepath);
-				file_len = ti[numtracks + 1].len_decoded_buffer/2352;
-
-				if (!lazy_decode) { // accurate length
-					do_decode_cdda(&(ti[numtracks + 1]), numtracks + 1);
-					fseek(ti[numtracks + 1].handle, 0, SEEK_END);
-					file_len = ftell(ti[numtracks + 1].handle) / 2352;
-				}
-			} else {
-				fseek(ti[numtracks + 1].handle, 0, SEEK_END);
-				file_len = ftell(ti[numtracks + 1].handle) / 2352;
-			}
+			// File length, compressed audio length will be calculated in AUDIO tag
+			fseek(ti[numtracks + 1].handle, 0, SEEK_END);
+			file_len = ftell(ti[numtracks + 1].handle) / CD_FRAMESIZE_RAW;
 
 			if (numtracks == 0 && strlen(isofile) >= 4 &&
 				strcmp(isofile + strlen(isofile) - 4, ".cue") == 0)
@@ -1339,19 +1342,27 @@ static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector)
 	// if suitable sector was not found from LUT use last sector if less than wanted sector
 	if (pos->filepos <= ECM_HEADER_SIZE && sector > lastsector) pos=&(ecm_savetable[lastsector]);
 
-	if (decoded_ecm_sectors && sector < decoded_ecm_sectors) {
+	// If not pointing to ECM file but CDDA file or some other track
+	if(f != cdHandle) {
+		//printf("BASETR %i %i\n", base, sector);
+		return cdimg_read_func_o(f, base, dest, sector);
+	}
+	// When sector exists in decoded ECM file buffer
+	else if (decoded_ecm_sectors && sector < decoded_ecm_sectors) {
 		//printf("ReadSector %i %i\n", sector, savedsectors);
 		return cdimg_read_func_o(decoded_ecm, base, dest, sector);
-	}/* else if (sector > len_ecm_savetable) {
+	}
+	// To prevent invalid seek
+	/* else if (sector > len_ecm_savetable) {
 		SysPrintf("ECM: invalid sector requested\n");
 		return -1;
 	}*/
-	//printf("SeekSector %i %i %i\n", sector, pos->sector, lastsector);
+	//printf("SeekSector %i %i %i %i\n", sector, pos->sector, lastsector, base);
 
 	writebytecount = pos->sector * CD_FRAMESIZE_RAW;
 	sectorcount = pos->sector;
 	if (decoded_ecm_sectors) fseek(decoded_ecm, writebytecount, SEEK_SET); // rewind to last pos
-	fseek(f, base+pos->filepos, SEEK_SET);
+	fseek(f, /*base+*/pos->filepos, SEEK_SET);
 	while(sector >= sectorcount) { // decode ecm file until we are past wanted sector
 		int c = fgetc(f);
 		int bits = 5;
@@ -1431,7 +1442,7 @@ static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector)
 			num -= b;
 		}
 		if (sectorcount > 0 && ecm_savetable[sectorcount].filepos <= ECM_HEADER_SIZE ) {
-			ecm_savetable[sectorcount].filepos = ftell(f)-base;
+			ecm_savetable[sectorcount].filepos = ftell(f)/*-base*/;
 			ecm_savetable[sectorcount].sector = sectorcount;
 			//printf("Marked %i at pos %i\n", ecm_savetable[sectorcount].sector, ecm_savetable[sectorcount].filepos);
 		}
@@ -1455,8 +1466,8 @@ error_in:
 error:
 error_out:
 	//memset(dest, 0x0, CD_FRAMESIZE_RAW);
-	SysPrintf("Error decoding ECM image: WantedSector %i Type %i Sectors %i Pos %i(%li)\n",
-				sector, type, sectorcount, writebytecount, ftell(f));
+	SysPrintf("Error decoding ECM image: WantedSector %i Type %i Base %i Sectors %i(%i) Pos %i(%li)\n",
+				sector, type, base, sectorcount, pos->sector, writebytecount, ftell(f));
 	return -1;
 }
 #endif
