@@ -691,7 +691,12 @@ static gchar *Open_Iso_Proc() {
 	gtk_file_filter_add_pattern(psxfilter, "*.CUE");
 	gtk_file_filter_add_pattern(psxfilter, "*.PBP");
 	gtk_file_filter_add_pattern(psxfilter, "*.CBN");
+#ifdef ENABLE_CCDDA
+	gtk_file_filter_add_pattern(psxfilter, "*.ecm");
+	gtk_file_filter_set_name(psxfilter, _("PSX Image Files (*.bin, *.img, *.mdf, *.iso, *.ecm, *.cue, *.pbp, *.cbn)"));
+#else
 	gtk_file_filter_set_name(psxfilter, _("PSX Image Files (*.bin, *.img, *.mdf, *.iso, *.cue, *.pbp, *.cbn)"));
+#endif
 	gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (chooser), psxfilter);
 
 	allfilter = gtk_file_filter_new();
