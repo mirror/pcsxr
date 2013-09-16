@@ -33,6 +33,7 @@
 #else
 #include <sys/time.h>
 #include <unistd.h>
+#include <limits.h>
 #endif
 #include <zlib.h>
 
@@ -652,9 +653,9 @@ static int parsecue(const char *isofile) {
 				}
 			}
 			else if (sscanf(linebuf, " TRACK %u MODE%u/%u", &t, &mode, &sector_size) == 3) {
+				s32 accurate_len;
 				// TODO: if 2048 frame length -> recalculate file_len?
 				ti[numtracks].type = DATA;
-				s32 accurate_len;
 				if (handleecm(filepath, &accurate_len) == 0) {// detect if ECM & get accurate length
 					file_len = accurate_len;
 				}
