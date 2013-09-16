@@ -25,6 +25,7 @@
 extern "C" {
 #endif
 
+int handleecm(const char *isoname, s32* accurate_length);
 void cdrIsoInit(void);
 int cdrIsoActive(void);
 

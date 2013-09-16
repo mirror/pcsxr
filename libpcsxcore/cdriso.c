@@ -24,6 +24,7 @@
 #include "cdrom.h"
 #include "cdriso.h"
 #include "ppf.h"
+#include "ecm.h"
 
 #ifdef _WIN32
 #include <process.h>
@@ -39,8 +40,6 @@
 #include "libavcodec/avcodec.h"
 #include "libavutil/mathematics.h"
 #include "libavformat/avformat.h"
-
-#include "ecm.h"
 
 #define INBUF_SIZE 4096
 #define AUDIO_INBUF_SIZE INBUF_SIZE*4
@@ -639,6 +638,7 @@ static int parsecue(const char *isofile) {
 					int seconds = get_compressed_cdda_track_length(filepath) + 0;
 					const boolean lazy_decode = TRUE; // TODO: config param
 
+					// TODO: get frame length for compressed audio as well
 					ti[numtracks].len_decoded_buffer = 44100 * (16/8) * 2 * seconds;
 					strcpy(ti[numtracks].filepath, filepath);
 					file_len = ti[numtracks].len_decoded_buffer/CD_FRAMESIZE_RAW;
@@ -651,11 +651,14 @@ static int parsecue(const char *isofile) {
 					}
 				}
 			}
-			else if (sscanf(linebuf, " TRACK %u MODE%u/%u", &t, &mode, &sector_size) == 3)
-				// TODO: here detect if ECM and calculate real length
-				// TODO: also if 2048 frame length -> recalculate?
+			else if (sscanf(linebuf, " TRACK %u MODE%u/%u", &t, &mode, &sector_size) == 3) {
+				// TODO: if 2048 frame length -> recalculate file_len?
 				ti[numtracks].type = DATA;
-			else {
+				s32 accurate_len;
+				if (handleecm(filepath, &accurate_len) == 0) {// detect if ECM & get accurate length
+					file_len = accurate_len;
+				}
+			} else {
 				SysPrintf(".cue: failed to parse TRACK\n");
 				ti[numtracks].type = numtracks == 1 ? DATA : CDDA;
 			}
@@ -1330,17 +1333,15 @@ static int cdread_2048(FILE *f, unsigned int base, void *dest, int sector)
 	return ret;
 }
 
-#ifdef ENABLE_CCDDA // TODO: experimental... test reliability & possibly move these functions to ecm.h
 /* Adapted from ecm.c:unecmify() (C) Neill Corlett */
+//TODO: move this func to ecm.h
 static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector) {
-	u32 output_edc = 0, b, writebytecount=0, sectorcount=0, num;
+	u32 output_edc=0, b, writebytecount=0, num;
+	s32 sectorcount=0;
 	s8 type; // mode type 0 (META) or 1, 2 or 3 for CDROM type
 	u8 sector_buffer[CD_FRAMESIZE_RAW];
 	boolean processsectors = (boolean)decoded_ecm_sectors; // this flag tells if to decode all sectors or just skip to wanted sector
-
-	ECMFILELUT* pos = &(ecm_savetable[sector-0]); // get sector from LUT which points to wanted sector or to beginning
-	// if suitable sector was not found from LUT use last sector if less than wanted sector
-	if (pos->filepos <= ECM_HEADER_SIZE && sector > lastsector) pos=&(ecm_savetable[lastsector]);
+	ECMFILELUT* pos = &(ecm_savetable[0]); // points always to beginning of ECM DATA
 
 	// If not pointing to ECM file but CDDA file or some other track
 	if(f != cdHandle) {
@@ -1357,7 +1358,13 @@ static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector)
 		SysPrintf("ECM: invalid sector requested\n");
 		return -1;
 	}*/
-	//printf("SeekSector %i %i %i %i\n", sector, pos->sector, lastsector, base);
+	//printf("SeekSector %i %i %i %i\n", sector, pos->sector, prevsector, base);
+
+	if (sector <= len_ecm_savetable) {
+		pos = &(ecm_savetable[sector-0]); // get sector from LUT which points to wanted sector or to beginning
+		// if suitable sector was not found from LUT use last sector if less than wanted sector
+		if (pos->filepos <= ECM_HEADER_SIZE && sector > prevsector) pos=&(ecm_savetable[prevsector]);
+	}
 
 	writebytecount = pos->sector * CD_FRAMESIZE_RAW;
 	sectorcount = pos->sector;
@@ -1385,6 +1392,8 @@ static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector)
 		}
 		if(num == 0xFFFFFFFF) {
 			// End indicator
+			len_decoded_ecm_buffer = writebytecount;
+			len_ecm_savetable = len_decoded_ecm_buffer/CD_FRAMESIZE_RAW;
 			break;
 		}
 		num++;
@@ -1458,7 +1467,7 @@ static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector)
 	}
 
 	memcpy(dest, sector_buffer, CD_FRAMESIZE_RAW);
-	lastsector = sectorcount;
+	prevsector = sectorcount;
 	//printf("OK: Frame decoded %i %i\n", sectorcount-1, writebytecount);
 	return num;
 
@@ -1470,10 +1479,8 @@ error_out:
 				sector, type, base, sectorcount, pos->sector, writebytecount, ftell(f));
 	return -1;
 }
-#endif
 
-static int handleecm(const char *isoname) {
-#ifdef ENABLE_CCDDA
+int handleecm(const char *isoname, s32* accurate_length) {
 	// Rewind to start and check ECM header and filename suffix validity
 	fseek(cdHandle, 0, SEEK_SET);
 	if(
@@ -1483,18 +1490,44 @@ static int handleecm(const char *isoname) {
 		(fgetc(cdHandle) == 0x00) &&
 		(strncmp((isoname+strlen(isoname)-5), ".ecm", 4))
 	) {
-		SysPrintf(_("\nDetected ECM file with proper header and filename suffix.\n"));
+		// Function used to read CD normally
+		// TODO: detect if 2048 and use it
+		cdimg_read_func_o = cdread_normal;
 
-		// Save real function used to read CD
-		cdimg_read_func_o = cdimg_read_func;
+		// Function used to decode ECM data
 		cdimg_read_func = cdread_ecm_decode;
 
-		// Based in file length use LUT of variable size
-		fseek(cdHandle, 0, SEEK_END);
-		//len_ecm_savetable = savedsectors ? len_ecm_savetable : (ftell(cdHandle)/CD_FRAMESIZE_RAW)/100;
-		len_ecm_savetable = 2*(ftell(cdHandle)/CD_FRAMESIZE_RAW); // todo: optimize size...
+		// Last accessed sector
+		prevsector = 0;
 
-		// Full image decoded??
+		// Already analyzed during this session, use cached results
+		if (ecm_file_detected) {
+			if (accurate_length) *accurate_length = len_ecm_savetable;
+			return 0;
+		}
+
+		SysPrintf(_("\nDetected ECM file with proper header and filename suffix.\n"));
+
+		// Init ECC/EDC tables
+		eccedc_init();
+
+		// Default: use LUT of double the ECM image size
+		fseek(cdHandle, 0, SEEK_END);
+		len_ecm_savetable = 2*(ftell(cdHandle)/CD_FRAMESIZE_RAW);
+
+		// Index 0 always points to beginning of ECM data
+		ecm_savetable = calloc(len_ecm_savetable, sizeof(ECMFILELUT));
+		ecm_savetable[0].filepos = ECM_HEADER_SIZE;
+
+		if (accurate_length || decoded_ecm_sectors) {
+			u8 tbuf1[CD_FRAMESIZE_RAW];
+			len_ecm_savetable = 0;
+			cdread_ecm_decode(cdHandle, 0U, tbuf1, INT_MAX);
+			if (accurate_length)*accurate_length = len_ecm_savetable;
+		}
+
+		// Full image decoded? Needs fmemopen()
+#ifdef ENABLE_ECM_FULL
 		if (decoded_ecm_sectors) {
 			len_decoded_ecm_buffer = len_ecm_savetable*CD_FRAMESIZE_RAW;
 			decoded_ecm_buffer = malloc(len_decoded_ecm_buffer);
@@ -1507,22 +1540,14 @@ static int handleecm(const char *isoname) {
 				decoded_ecm_sectors = 0;
 			}
 		}
+#endif
 
-		// Init ECC/EDC tables
-		eccedc_init();
+		ecm_file_detected = TRUE;
 
-		// Last accessed sector
-		lastsector = 0;
-
-		// Index 0 always points to beginning of ECM data
-		ecm_savetable = calloc(len_ecm_savetable, sizeof(ECMFILELUT));
-		ecm_savetable[0].filepos = ECM_HEADER_SIZE;
 		return 0;
 	}
-#endif
-	return 1;
+	return -1;
 }
-
 
 static unsigned char * CALLBACK ISOgetBuffer_compr(void) {
 	return compr_img->buff_raw[compr_img->sector_in_blk] + 12;
@@ -1599,7 +1624,12 @@ static long CALLBACK ISOopen(void) {
 		SysPrintf("[+sbi]");
 	}
 
+	if ((handleecm(GetIsoFile(), NULL) == 0)) {
+		SysPrintf("[+ecm]");
+	}
+
 	// guess whether it is mode1/2048
+	// TODO: use sector size/mode info from CUE?
 	fseek(cdHandle, 0, SEEK_END);
 	if (ftell(cdHandle) % 2048 == 0) {
 		unsigned int modeTest = 0;
@@ -1620,10 +1650,6 @@ static long CALLBACK ISOopen(void) {
 		cdimg_read_func = cdread_sub_mixed;
 	else if (isMode1ISO)
 		cdimg_read_func = cdread_2048;
-
-	if (handleecm(GetIsoFile()) == 0) {
-		SysPrintf("[+ecm]");
-	}
 
 	// make sure we have another handle open for cdda
 	if (numtracks > 1 && ti[1].handle == NULL) {
@@ -1651,12 +1677,6 @@ static long CALLBACK ISOclose(void) {
 		compr_img = NULL;
 	}
 
-	// ECM LUT
-#ifdef ENABLE_CCDDA
-	free(ecm_savetable);
-	ecm_savetable = NULL;
-#endif
-
 	for (i = 1; i <= numtracks; i++) {
 		if (ti[i].handle != NULL) {
 			fclose(ti[i].handle);
@@ -1679,6 +1699,9 @@ static long CALLBACK ISOclose(void) {
 long CALLBACK ISOinit(void) {
 	assert(cdHandle == NULL);
 	assert(subHandle == NULL);
+	assert(ecm_file_detected == FALSE);
+	assert(decoded_ecm_buffer == NULL);
+	assert(decoded_ecm == NULL);
 
 	return 0; // do nothing
 }
@@ -1686,14 +1709,18 @@ long CALLBACK ISOinit(void) {
 static long CALLBACK ISOshutdown(void) {
 	ISOclose();
 
-#ifdef ENABLE_CCDDA
+	// ECM LUT
+	free(ecm_savetable);
+	ecm_savetable = NULL;
+
 	if (decoded_ecm != NULL) {
 		fclose(decoded_ecm);
 		free(decoded_ecm_buffer);
 		decoded_ecm_buffer = NULL;
 		decoded_ecm	= NULL;
 	}
-#endif
+	ecm_file_detected = FALSE;
+
 	return 0;
 }
 
@@ -1919,5 +1946,5 @@ void cdrIsoInit(void) {
 }
 
 int cdrIsoActive(void) {
-	return (cdHandle != NULL);
+	return (cdHandle != NULL || ecm_savetable != NULL || decoded_ecm != NULL);
 }

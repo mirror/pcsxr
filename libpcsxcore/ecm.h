@@ -68,12 +68,24 @@
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define ECM_HEADER_SIZE 4
-u32 len_decoded_ecm_buffer, len_ecm_savetable, lastsector;
-u32 decoded_ecm_sectors = 0; // setting this to 1 makes whole ECM to be decoded in-memory
+
+u32 len_decoded_ecm_buffer=0; // same as decoded ECM file length or 2x size
+u32 len_ecm_savetable=0; // same as sector count of decoded ECM file or 2x count
+
+#ifdef ENABLE_ECM_FULL //setting this makes whole ECM to be decoded in-memory meaning buffer could eat up to 700 MB of memory
+u32 decoded_ecm_sectors=1; // initially sector 1 is always decoded
+#else
+u32 decoded_ecm_sectors=0; // disabled
+#endif
+
+boolean ecm_file_detected = FALSE;
+u32 prevsector;
+
 FILE* decoded_ecm = NULL;
 void *decoded_ecm_buffer;
 
-int (*cdimg_read_func_o)(FILE *f, unsigned int base, void *dest, int sector);
+// Function that is used to read CD normally
+int (*cdimg_read_func_o)(FILE *f, unsigned int base, void *dest, int sector) = NULL;
 
 typedef struct ECMFILELUT {
     s32 sector;
