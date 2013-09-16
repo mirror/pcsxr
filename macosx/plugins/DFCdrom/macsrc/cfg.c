@@ -39,7 +39,7 @@ void LoadConf() {
 	CacheSize = 64;
 	CdrSpeed = 0;
 	SpinDown = SPINDOWN_VENDOR_SPECIFIC;
-
+	
 	ReadConfig();
 }
 

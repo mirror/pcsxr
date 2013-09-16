@@ -9,6 +9,8 @@
 #import "PcsxrFreezeStateHandler.h"
 #import "PcsxrCheatHandler.h"
 #import "LaunchArg.h"
+#include <DiskArbitration/DiskArbitration.h>
+#include <IOKit/storage/IOCDMedia.h>
 #include "psxcommon.h"
 #include "plugins.h"
 #include "misc.h"
@@ -52,6 +54,7 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 @property (strong) NSMutableArray *skipFiles;
 @property (strong) NSWindow *preferenceWindow;
 @property (strong) NSWindow *cheatWindow;
+@property (nonatomic) DASessionRef diskSession;
 @end
 
 @implementation PcsxrController
@@ -91,13 +94,43 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 	PSXflags.wasPausedBeforeBGSwitch = wasPausedBeforeBGSwitch;
 }
 
+@synthesize diskSession = _diskSession;
+- (void)setDiskSession:(DASessionRef)diskSession
+{
+	if (diskSession == _diskSession) {
+		return;
+	}
+	if (_diskSession) {
+		CFRelease(_diskSession);
+	}if (diskSession) {
+		_diskSession = diskSession;
+		CFRetain(diskSession);
+	}
+}
+
+static BOOL wasPaused;
+static void PSXDiscAppearedCallback(DADiskRef disk, void *context)
+{
+	PcsxrController *theSelf = (__bridge PcsxrController*)context;
+	
+	SetCdOpenCaseTime(time(NULL) + 2);
+	LidInterrupt();
+	
+	/* and open new cd */
+	if ([EmuThread active])
+		CDR_open();
+	
+	if (!wasPaused) {
+		[EmuThread resume];
+	}
+
+	DASessionUnscheduleFromRunLoop(theSelf.diskSession, CFRunLoopGetMain(), kCFRunLoopCommonModes);
+	theSelf.diskSession = NULL;
+}
+
 - (IBAction)ejectCD:(id)sender
 {
-	NSMutableString *deviceName;
-	NSTask *ejectTask;
-	NSRange rdiskRange;
-
-	BOOL wasPaused = [EmuThread pauseSafe];
+	wasPaused = [EmuThread pauseSafe];
 
 	/* close connection to current cd */
 	if ([EmuThread active])
@@ -117,10 +150,20 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 			SetCdOpenCaseTime(time(NULL) + 2);
 			LidInterrupt();
 		}
+		
+		if ([EmuThread active])
+			CDR_open();
+		
+		if (!wasPaused) {
+			[EmuThread resume];
+		}
 	} else {
-        char *driveLetter = CDR_getDriveLetter();
+		NSMutableString *deviceName;
+		NSTask *ejectTask;
+		NSRange rdiskRange;
+		char *driveLetter = CDR_getDriveLetter();
         
-		if (driveLetter != nil) {
+		if (driveLetter != NULL) {
 			deviceName = [NSMutableString stringWithString:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:driveLetter length:strlen(driveLetter)]];
 
 			// delete the 'r' in 'rdisk'
@@ -133,14 +176,16 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 			ejectTask = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/hdiutil" arguments:@[@"eject", deviceName]];
 			[ejectTask waitUntilExit];
 		}
-	}
-
-	/* and open new cd */
-	if ([EmuThread active])
-		CDR_open();
-
-	if (!wasPaused) {
-		[EmuThread resume];
+		DASessionRef tmpSession = DASessionCreate(kCFAllocatorDefault);
+		CFDictionaryRef match = CFBridgingRetain(@{(NSString*)kDADiskDescriptionMediaKindKey : @(kIOCDMediaClass),
+												 (NSString*)kDADiskDescriptionMediaWholeKey : @YES});
+		DARegisterDiskAppearedCallback(tmpSession, match, PSXDiscAppearedCallback, (__bridge void*)self);
+		CFRelease(match);
+		
+		DASessionScheduleWithRunLoop(tmpSession, CFRunLoopGetMain(), kCFRunLoopCommonModes);
+		
+		self.diskSession = tmpSession;
+		CFRelease(tmpSession);
 	}
 }
 

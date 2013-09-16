@@ -38,29 +38,29 @@ static int IsPsxDisc(const char *dev) {
 	int fd;
 	char buf[CD_FRAMESIZE_RAW];
 	dk_cd_read_t r;
-
+	
 	fd = open(dev, O_RDONLY, 0);
 	if (fd < 0) return 0;
-
+	
 	memset(&r, 0, sizeof(r));
-
+	
 	r.offset = msf_to_lba(0, 2, 4) * CD_FRAMESIZE_RAW;
 	r.sectorArea = 0xF8;
 	r.sectorType = kCDSectorTypeUnknown;
 	r.bufferLength = CD_FRAMESIZE_RAW;
 	r.buffer = buf;
-
+	
 	if (ioctl(fd, DKIOCCDREAD, &r) != kIOReturnSuccess) {
 		close(fd);
 		return 0;
 	}
-
+	
 	close(fd);
-
+	
 	if (strncmp(buf + 56, "Sony Computer Entertainment", 27) == 0) {
 		return 1;
 	}
-
+	
 	return 0;
 }
 
@@ -70,45 +70,45 @@ static void FindCdDevice(char *dev) {
 	io_iterator_t media_iterator;
 	CFMutableDictionaryRef classes_to_match;
 	const char *name, *cd = kIOCDMediaClass, *dvd = kIODVDMediaClass;
-
+	
 	dev[0] = '\0';
 	name = cd;
-
+	
 start:
 	classes_to_match = IOServiceMatching(name);
 	if (classes_to_match == NULL) goto end;
-
+	
 	CFDictionarySetValue(classes_to_match, CFSTR(kIOMediaEjectableKey),
-		kCFBooleanTrue);
-
-	kern_result = IOServiceGetMatchingServices(kIOMasterPortDefault, 
-		classes_to_match, &media_iterator);
-
+						 kCFBooleanTrue);
+	
+	kern_result = IOServiceGetMatchingServices(kIOMasterPortDefault,
+											   classes_to_match, &media_iterator);
+	
 	if (kern_result != KERN_SUCCESS) goto end;
-
+	
 	next_media = IOIteratorNext(media_iterator);
 	if (next_media != 0) {
 		char psz_buf[0x32];
 		size_t dev_path_length;
 		CFTypeRef str_bsd_path;
-
+		
 		do {
 			str_bsd_path = IORegistryEntryCreateCFProperty(next_media,
-				CFSTR(kIOBSDNameKey), kCFAllocatorDefault, 0);
-
+														   CFSTR(kIOBSDNameKey), kCFAllocatorDefault, 0);
+			
 			if (str_bsd_path == NULL) {
 				IOObjectRelease(next_media);
 				continue;
 			}
-
+			
 			strcpy(psz_buf, "/dev/r");
 			dev_path_length = strlen(psz_buf);
-
+			
 			if (CFStringGetCString(str_bsd_path, (char *)&psz_buf + dev_path_length,
-				sizeof(psz_buf) - dev_path_length, kCFStringEncodingASCII))
+								   sizeof(psz_buf) - dev_path_length, kCFStringEncodingASCII))
 			{
 				strcpy(dev, psz_buf);
-
+				
 				if (IsPsxDisc(dev)) {
 					CFRelease(str_bsd_path);
 					IOObjectRelease(next_media);
@@ -116,14 +116,14 @@ start:
 					return;
 				}
 			}
-
+			
 			CFRelease(str_bsd_path);
 			IOObjectRelease(next_media);
 		} while ((next_media = IOIteratorNext(media_iterator)) != 0);
 	}
-
+	
 	IOObjectRelease(media_iterator);
-
+	
 end:
 	if (dev[0] == '\0') {
 		if (name == cd) {
@@ -136,15 +136,15 @@ end:
 int OpenCdHandle(const char *dev) {
 	if (dev != NULL && dev[0] != '\0') strcpy(cdDevice, dev);
 	else if (cdDevice[0] == '\0') FindCdDevice(cdDevice);
-
+	
 	cdHandle = open(cdDevice, O_RDONLY, 0);
 	if (cdHandle < 0) return -1;
-
+	
 	if (CdrSpeed > 0) {
 		u_int16_t speed = kCDSpeedMin * CdrSpeed;
 		ioctl(cdHandle, DKIOCCDSETSPEED, &speed);
 	}
-
+	
 	return 0;
 }
 
@@ -183,23 +183,23 @@ long ReadSector(crdata *cr) {
 	int lba;
 	dk_cd_read_t r;
 	char buf[CD_FRAMESIZE_RAW];
-
+	
 	if (cdHandle < 0) return -1;
-
+	
 	lba = msf_to_lba(cr->msf.cdmsf_min0, cr->msf.cdmsf_sec0, cr->msf.cdmsf_frame0);
-
+	
 	memset(&r, 0, sizeof(r));
-
+	
 	r.offset = lba * CD_FRAMESIZE_RAW;
 	r.sectorArea = 0xF8;
 	r.sectorType = kCDSectorTypeUnknown;
 	r.bufferLength = CD_FRAMESIZE_RAW;
 	r.buffer = buf; // ??? Why using cr->buf directly does not work in threaded mode?
-
+	
 	if (ioctl(cdHandle, DKIOCCDREAD, &r) != kIOReturnSuccess) {
 		return -1;
 	}
-
+	
 	memcpy(cr->buf, buf, CD_FRAMESIZE_RAW);
 	return 0;
 }
@@ -215,7 +215,7 @@ long StopCDDA() {
 long GetStatus(int playing, struct CdrStat *stat) {
 	memset(stat, 0, sizeof(struct CdrStat));
 	stat->Type = 0x01;
-
+	
 	// Close and reopen the CD handle. If opening failed,
 	// then there is no CD in drive.
 	// Note that this WILL be screwed if user inserted another
@@ -225,7 +225,7 @@ long GetStatus(int playing, struct CdrStat *stat) {
 		close(cdHandle);
 		cdHandle = -1;
 	}
-
+	
 	cdHandle = open(cdDevice, O_RDONLY, 0);
 	if (cdHandle < 0) {
 		// No CD in drive
@@ -237,7 +237,7 @@ long GetStatus(int playing, struct CdrStat *stat) {
 			ioctl(cdHandle, DKIOCCDSETSPEED, &speed);
 		}
 	}
-
+	
 	return 0;
 }
 

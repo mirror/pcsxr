@@ -91,11 +91,11 @@ void ReadConfig()
 	NSDictionary *keyValues;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:@{PrefsKey: @{@"Threaded": @YES,
-			@"Cache Size": @64,
-			@"Speed": @0}}];
-
+	 @"Cache Size": @64,
+	 @"Speed": @0}}];
+	
 	keyValues = [defaults dictionaryForKey:PrefsKey];
-
+	
 	ReadMode = ([keyValues[@"Threaded"] boolValue] ? THREADED : NORMAL);
 	CacheSize = [keyValues[@"Cache Size"] intValue];
 	CdrSpeed = [keyValues[@"Speed"] integerValue];
@@ -113,12 +113,12 @@ void ReadConfig()
 - (IBAction)ok:(id)sender
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
+	
 	NSMutableDictionary *writeDic = [keyValues mutableCopy];
-
+	
 	writeDic[@"Threaded"] = ([Cached intValue] ? @YES : @NO);
 	writeDic[@"Cache Size"] = @([CacheSize integerValue]);
-
+	
 	switch ([CdSpeed indexOfSelectedItem]) {
 		case 1: writeDic[@"Speed"] = @1; break;
 		case 2: writeDic[@"Speed"] = @2; break;
@@ -128,11 +128,11 @@ void ReadConfig()
 		case 6: writeDic[@"Speed"] = @32; break;
 		default: writeDic[@"Speed"] = @0; break;
 	}
-
+	
 	// write to defaults
 	[defaults setObject:writeDic forKey:PrefsKey];
 	[defaults synchronize];
-
+	
 	// and set global values accordingly
 	ReadConfig();
 	
@@ -143,15 +143,15 @@ void ReadConfig()
 - (void)loadValues
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
+	
 	ReadConfig();
-
+	
 	// load from preferences
-	self.keyValues = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:PrefsKey]];
-
+	self.keyValues = [[NSMutableDictionary alloc] initWithDictionary:[defaults dictionaryForKey:PrefsKey]];
+	
 	[Cached setIntValue:[keyValues[@"Threaded"] intValue]];
 	[CacheSize setIntegerValue:[keyValues[@"Cache Size"] integerValue]];
-
+	
 	switch ([keyValues[@"Speed"] intValue]) {
 		case 1: [CdSpeed selectItemAtIndex:1]; break;
 		case 2: [CdSpeed selectItemAtIndex:2]; break;
