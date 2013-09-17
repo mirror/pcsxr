@@ -139,9 +139,6 @@ static void PSXDiscAppearedCallback(DADiskRef disk, void *context)
 	// switch to another ISO if using internal image reader, otherwise eject the CD
 	if (UsingIso()) {
 		NSOpenPanel* openDlg = [NSOpenPanel openPanel];
-
-		[openDlg setCanChooseFiles:YES];
-		[openDlg setCanChooseDirectories:NO];
 		[openDlg setAllowedFileTypes:[PcsxrDiscHandler supportedUTIs]];
 
 		if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
@@ -248,9 +245,6 @@ static void PSXDiscAppearedCallback(DADiskRef disk, void *context)
 - (IBAction)runIso:(id)sender
 {
 	NSOpenPanel* openDlg = [NSOpenPanel openPanel];
-
-	[openDlg setCanChooseFiles:YES];
-	[openDlg setCanChooseDirectories:NO];
 	[openDlg setAllowedFileTypes:[PcsxrDiscHandler supportedUTIs]];
 
 	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {

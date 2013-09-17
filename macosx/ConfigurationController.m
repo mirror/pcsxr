@@ -91,8 +91,6 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 		mcd = Config.Mcd2;
 	}
 	
-	[openDlg setCanChooseFiles:YES];
-	[openDlg setCanChooseDirectories:NO];
 	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler supportedUTIs]];
 	
 	path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];

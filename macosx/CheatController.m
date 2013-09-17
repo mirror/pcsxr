@@ -199,8 +199,6 @@
 - (IBAction)loadCheats:(id)sender
 {
 	NSOpenPanel *openDlg = [NSOpenPanel openPanel];
-	[openDlg setCanChooseFiles:YES];
-	[openDlg setCanChooseDirectories:NO];
 	[openDlg setAllowsMultipleSelection:NO];
 	[openDlg setAllowedFileTypes:[PcsxrCheatHandler supportedUTIs]];
 	
