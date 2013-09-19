@@ -2931,6 +2931,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 55858D2B17864DC90068B8FC /* Pcsxr-Instrument.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -3243,6 +3244,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 55858D2A17864DC80068B8FC /* Pcsxr-Debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -3269,6 +3271,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 55858D2C17864DC90068B8FC /* Pcsxr-Release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
