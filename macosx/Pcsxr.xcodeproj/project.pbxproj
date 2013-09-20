@@ -27,11 +27,6 @@
 		28F0C3C6146521A700A90285 /* Configuration.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F0C3C4146521A700A90285 /* Configuration.xib */; };
 		28F0C3C9146521B000A90285 /* PCSXR.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F0C3C7146521B000A90285 /* PCSXR.xib */; };
 		28F0C3CC146521B700A90285 /* AddPluginSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F0C3CA146521B700A90285 /* AddPluginSheet.xib */; };
-		2B143D06078A2CBD00AF745A /* PCSXR.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2B143D01078A2CBD00AF745A /* PCSXR.icns */; };
-		2B143D07078A2CBD00AF745A /* pcsxrfreeze.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2B143D02078A2CBD00AF745A /* pcsxrfreeze.icns */; };
-		2B143D08078A2CBD00AF745A /* pcsxrmemcard.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2B143D03078A2CBD00AF745A /* pcsxrmemcard.icns */; };
-		2B143D09078A2CBD00AF745A /* psxbios.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2B143D04078A2CBD00AF745A /* psxbios.icns */; };
-		2B143D0A078A2CBD00AF745A /* psxplugin.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2B143D05078A2CBD00AF745A /* psxplugin.icns */; };
 		2B4DE99205FF9307003EFEF0 /* PluginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4DE98E05FF9307003EFEF0 /* PluginController.m */; };
 		2BB3D6A405427FE200831ACB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2BA178B20514CE260026D74D /* InfoPlist.strings */; };
 		2BB3D6A705427FE200831ACB /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2BBB1786051E0D9700B84448 /* Credits.rtf */; };
@@ -191,6 +186,7 @@
 		554FD70A17C6A14B0056CF66 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; };
 		554FD70B17C6A1EF0056CF66 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; };
 		554FD70C17C6A1F10056CF66 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; };
+		5557769A17EBE7D60019D008 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5557769917EBE7D60019D008 /* Media.xcassets */; };
 		5581463917AABCD100862DBF /* PcsxrCheatHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5581463817AABCD100862DBF /* PcsxrCheatHandler.m */; };
 		559366CA12B694DF004ACC1E /* iR3000A-64.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C112B694DF004ACC1E /* iR3000A-64.c */; };
 		559366CB12B694DF004ACC1E /* ix86-64.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C212B694DF004ACC1E /* ix86-64.c */; };
@@ -404,11 +400,6 @@
 		28F0C3C5146521A700A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Configuration.xib; sourceTree = "<group>"; };
 		28F0C3C8146521B000A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = PCSXR.xib; sourceTree = "<group>"; };
 		28F0C3CB146521B700A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = AddPluginSheet.xib; sourceTree = "<group>"; };
-		2B143D01078A2CBD00AF745A /* PCSXR.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PCSXR.icns; sourceTree = "<group>"; };
-		2B143D02078A2CBD00AF745A /* pcsxrfreeze.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = pcsxrfreeze.icns; sourceTree = "<group>"; };
-		2B143D03078A2CBD00AF745A /* pcsxrmemcard.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = pcsxrmemcard.icns; sourceTree = "<group>"; };
-		2B143D04078A2CBD00AF745A /* psxbios.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = psxbios.icns; sourceTree = "<group>"; };
-		2B143D05078A2CBD00AF745A /* psxplugin.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = psxplugin.icns; sourceTree = "<group>"; };
 		2B4DE98D05FF9307003EFEF0 /* PluginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginController.h; sourceTree = "<group>"; };
 		2B4DE98E05FF9307003EFEF0 /* PluginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginController.m; sourceTree = "<group>"; usesTabs = 1; };
 		2B690C760635C65C00CDA575 /* ExceptionHandling.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExceptionHandling.framework; path = /System/Library/Frameworks/ExceptionHandling.framework; sourceTree = "<absolute>"; };
@@ -645,6 +636,7 @@
 		554FD70817C6A13E0056CF66 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = /Library/Frameworks/SDL2.framework; sourceTree = "<absolute>"; };
 		5550D2711683C923006C56B5 /* RecentItemsMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecentItemsMenu.h; sourceTree = "<group>"; };
 		5550D2721683C923006C56B5 /* RecentItemsMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecentItemsMenu.m; sourceTree = "<group>"; usesTabs = 1; };
+		5557769917EBE7D60019D008 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		5581463717AABCD100862DBF /* PcsxrCheatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrCheatHandler.h; sourceTree = "<group>"; };
 		5581463817AABCD100862DBF /* PcsxrCheatHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrCheatHandler.m; sourceTree = "<group>"; };
 		55858D2817864D140068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pcsxr.xcconfig; sourceTree = "<group>"; };
@@ -891,22 +883,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2B143D00078A2CBD00AF745A /* icons */ = {
-			isa = PBXGroup;
-			children = (
-				2B143D01078A2CBD00AF745A /* PCSXR.icns */,
-				2B143D02078A2CBD00AF745A /* pcsxrfreeze.icns */,
-				2B143D03078A2CBD00AF745A /* pcsxrmemcard.icns */,
-				2B143D04078A2CBD00AF745A /* psxbios.icns */,
-				2B143D05078A2CBD00AF745A /* psxplugin.icns */,
-			);
-			path = icons;
-			sourceTree = "<group>";
-		};
 		2BA178AD0514CE260026D74D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2B143D00078A2CBD00AF745A /* icons */,
+				5557769917EBE7D60019D008 /* Media.xcassets */,
 				2BB3D6CF05427FE200831ACB /* Info.plist */,
 				02FE55E616765F9400205CF2 /* KeyNames.plist */,
 				2BBB1786051E0D9700B84448 /* Credits.rtf */,
@@ -1835,14 +1815,10 @@
 			files = (
 				2BB3D6A405427FE200831ACB /* InfoPlist.strings in Resources */,
 				2BB3D6A705427FE200831ACB /* Credits.rtf in Resources */,
-				2B143D06078A2CBD00AF745A /* PCSXR.icns in Resources */,
-				2B143D07078A2CBD00AF745A /* pcsxrfreeze.icns in Resources */,
-				2B143D08078A2CBD00AF745A /* pcsxrmemcard.icns in Resources */,
-				2B143D09078A2CBD00AF745A /* psxbios.icns in Resources */,
-				2B143D0A078A2CBD00AF745A /* psxplugin.icns in Resources */,
 				28F0C3C6146521A700A90285 /* Configuration.xib in Resources */,
 				28F0C3C9146521B000A90285 /* PCSXR.xib in Resources */,
 				28F0C3CC146521B700A90285 /* AddPluginSheet.xib in Resources */,
+				5557769A17EBE7D60019D008 /* Media.xcassets in Resources */,
 				559DACEE146C72FF00C5DF71 /* Localizable.strings in Resources */,
 				55C7A214148B2B3800C22ABC /* PcsxrMemCardDocument.xib in Resources */,
 				02FE55E816765F9400205CF2 /* KeyNames.plist in Resources */,
@@ -2773,6 +2749,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GENERATE_PKGINFO_FILE = NO;
+				INFOPLIST_FILE = "plugins/DFSound/Resorces/Shared/SPUShared-info.plist";
 				INSTALL_PATH = "@rpath";
 				OTHER_LDFLAGS = (
 					"-sectcreate",
@@ -2790,6 +2767,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
+				CODE_SIGN_IDENTITY = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -2797,6 +2775,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GENERATE_PKGINFO_FILE = NO;
+				INFOPLIST_FILE = "plugins/DFSound/Resorces/Shared/SPUShared-info.plist";
 				INSTALL_PATH = "@rpath";
 				OTHER_LDFLAGS = (
 					"-sectcreate",
@@ -2956,6 +2935,7 @@
 		557649BA1786B09E007C4457 /* Instrument */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = PCSXR;
 				GCC_ENABLE_ASM_KEYWORD = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2972,12 +2952,12 @@
 				INFOPLIST_PREFIX_HEADER = "$(TARGET_BUILD_DIR)/SVNRevision.h";
 				INFOPLIST_PREPROCESS = YES;
 				LD_NO_PIE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = (
 					"-funroll-loops",
 					"$(inherited)",
 				);
 				PRODUCT_NAME = PCSXR;
-				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Instrument;
@@ -2994,6 +2974,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GENERATE_PKGINFO_FILE = NO;
+				INFOPLIST_FILE = "plugins/DFSound/Resorces/Shared/SPUShared-info.plist";
 				INSTALL_PATH = "@rpath";
 				OTHER_LDFLAGS = (
 					"-sectcreate",
@@ -3185,6 +3166,7 @@
 		71F353F40FD98DFE00CBEC28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = PCSXR;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEBUG_PREPROCESSOR_DEFINITIONS = "DEBUG=1 EMU_LOG=__Log";
 				GCC_ENABLE_ASM_KEYWORD = YES;
@@ -3203,9 +3185,9 @@
 				INFOPLIST_PREFIX_HEADER = "$(TARGET_BUILD_DIR)/SVNRevision.h";
 				INFOPLIST_PREPROCESS = YES;
 				LD_NO_PIE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_NAME = PCSXR;
-				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3213,6 +3195,7 @@
 		71F353F50FD98DFE00CBEC28 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = PCSXR;
 				GCC_ENABLE_ASM_KEYWORD = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3229,13 +3212,13 @@
 				INFOPLIST_PREFIX_HEADER = "$(TARGET_BUILD_DIR)/SVNRevision.h";
 				INFOPLIST_PREPROCESS = YES;
 				LD_NO_PIE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = (
 					"-funroll-loops",
 					"-fomit-frame-pointer",
 					"$(inherited)",
 				);
 				PRODUCT_NAME = PCSXR;
-				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
