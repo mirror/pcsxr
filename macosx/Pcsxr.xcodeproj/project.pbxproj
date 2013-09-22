@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		55906B1717C28E490057F60D /* Make SVN revision */ = {
+		55906B1717C28E490057F60D /* Update SVN revision */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 55906B1817C28E490057F60D /* Build configuration list for PBXAggregateTarget "Make SVN revision" */;
+			buildConfigurationList = 55906B1817C28E490057F60D /* Build configuration list for PBXAggregateTarget "Update SVN revision" */;
 			buildPhases = (
 				55906B1C17C28E530057F60D /* ShellScript */,
 			);
 			dependencies = (
 			);
-			name = "Make SVN revision";
+			name = "Update SVN revision";
 			productName = "Make SVN revision";
 		};
 /* End PBXAggregateTarget section */
@@ -685,6 +685,9 @@
 		55EC05FC178916E70053AC23 /* MemBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemBadgeView.h; sourceTree = "<group>"; };
 		55EC05FD178916E70053AC23 /* MemBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemBadgeView.m; sourceTree = "<group>"; usesTabs = 1; };
 		55EE2D9017E2323400FED42A /* ecm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ecm.h; sourceTree = "<group>"; };
+		55F41A1F17EF771600605DF8 /* updateInfoPlist.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = updateInfoPlist.rb; sourceTree = "<group>"; };
+		55F41A2017EF774500605DF8 /* version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = version.sh; sourceTree = "<group>"; };
+		55F41A2117EF7A3300605DF8 /* Info.plistvers.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plistvers.plist; sourceTree = "<group>"; };
 		712FD1E51093096F00575A92 /* debug.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = debug.c; sourceTree = "<group>"; };
 		712FD1E61093096F00575A92 /* socket.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = socket.c; sourceTree = "<group>"; };
 		712FD1E71093096F00575A92 /* socket.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
@@ -846,6 +849,8 @@
 		08FB7794FE84155DC02AAC07 /* Pcsxr */ = {
 			isa = PBXGroup;
 			children = (
+				55F41A2017EF774500605DF8 /* version.sh */,
+				55F41A1F17EF771600605DF8 /* updateInfoPlist.rb */,
 				55858D2F178652F90068B8FC /* Configs */,
 				08FB7795FE84155DC02AAC07 /* PCSXR */,
 				551A74AF17868BE90052D185 /* plugins */,
@@ -888,6 +893,7 @@
 			children = (
 				5557769917EBE7D60019D008 /* Media.xcassets */,
 				2BB3D6CF05427FE200831ACB /* Info.plist */,
+				55F41A2117EF7A3300605DF8 /* Info.plistvers.plist */,
 				02FE55E616765F9400205CF2 /* KeyNames.plist */,
 				2BBB1786051E0D9700B84448 /* Credits.rtf */,
 				28F0C3C4146521A700A90285 /* Configuration.xib */,
@@ -1803,7 +1809,7 @@
 				551A7706178698C60052D185 /* PeopsSpuAL */,
 				551A776517869E430052D185 /* DFNet */,
 				551A75C617868C4E0052D185 /* Bladesio1 */,
-				55906B1717C28E490057F60D /* Make SVN revision */,
+				55906B1717C28E490057F60D /* Update SVN revision */,
 			);
 		};
 /* End PBXProject section */
@@ -1931,11 +1937,11 @@
 				"$(SRCROOT)/../.svn/dir-wcprops",
 			);
 			outputPaths = (
-				"$(TARGET_BUILD_DIR)/SVNRevision.h",
+				Info.plistvers.plist,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Xcode auto-versioning script for Subversion\n# by Axel Andersson, modified by Daniel Jalkut to add\n# \"--revision HEAD\" to the svn info line, which allows\n# the latest revision to always be used.\n\n# further modified by Augie Fackler to be gross and sh-based in places\n# so that you can have svn installed anywhere\nPATH=/sw/bin:/opt/local/bin:/usr/local/bin:/usr/bin:$PATH\nREV=`svnversion -n ../`\necho $REV\n\ncat > $SCRIPT_OUTPUT_FILE_0.tmp <<EOF\n#define SVNREVISION $REV\n#define SVNREVISION_C_STRING \"$REV\"\nEOF\n\ncmp -s $SCRIPT_OUTPUT_FILE_0 $SCRIPT_OUTPUT_FILE_0.tmp || mv $SCRIPT_OUTPUT_FILE_0.tmp $SCRIPT_OUTPUT_FILE_0\n";
+			shellScript = "#Some code taken from the MPlayerX people.\nruby updateInfoPlist.rb Info.plist\ntouch -amfc Info.plistvers.plist\n\nexit 0\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2191,7 +2197,7 @@
 		};
 		55906B1E17C28EE40057F60D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 55906B1717C28E490057F60D /* Make SVN revision */;
+			target = 55906B1717C28E490057F60D /* Update SVN revision */;
 			targetProxy = 55906B1D17C28EE40057F60D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -2945,10 +2951,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
-				INFOPLIST_PREFIX_HEADER = "$(TARGET_BUILD_DIR)/SVNRevision.h";
-				INFOPLIST_PREPROCESS = YES;
+				INFOPLIST_FILE = Info.plistvers.plist;
 				LD_NO_PIE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = (
@@ -3178,10 +3181,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
-				INFOPLIST_PREFIX_HEADER = "$(TARGET_BUILD_DIR)/SVNRevision.h";
-				INFOPLIST_PREPROCESS = YES;
+				INFOPLIST_FILE = Info.plistvers.plist;
 				LD_NO_PIE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "$(inherited)";
@@ -3205,10 +3205,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
-				INFOPLIST_PREFIX_HEADER = "$(TARGET_BUILD_DIR)/SVNRevision.h";
-				INFOPLIST_PREPROCESS = YES;
+				INFOPLIST_FILE = Info.plistvers.plist;
 				LD_NO_PIE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = (
@@ -3365,7 +3362,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55906B1817C28E490057F60D /* Build configuration list for PBXAggregateTarget "Make SVN revision" */ = {
+		55906B1817C28E490057F60D /* Build configuration list for PBXAggregateTarget "Update SVN revision" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55906B1917C28E490057F60D /* Debug */,
