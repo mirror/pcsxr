@@ -3240,7 +3240,6 @@
 					../libpcsxcore,
 					../macosx,
 				);
-				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
