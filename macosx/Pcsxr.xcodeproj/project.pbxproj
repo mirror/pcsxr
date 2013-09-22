@@ -1594,6 +1594,7 @@
 				2BB3D6A805427FE200831ACB /* Sources */,
 				2BB3D6C505427FE200831ACB /* Frameworks */,
 				71AD2DF010C3573400365243 /* Copy PlugIns */,
+				55F41A3317EF8CFF00605DF8 /* Strip Headers */,
 			);
 			buildRules = (
 				2BD707B705559AE300CB5D9B /* PBXBuildRule */,
@@ -1942,6 +1943,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#Some code taken from the MPlayerX people.\nruby updateInfoPlist.rb Info.plist\ntouch -amfc Info.plistvers.plist\n\nexit 0\n";
+		};
+		55F41A3317EF8CFF00605DF8 /* Strip Headers */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Strip Headers";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Remove all headers from copied frameworks\nfind \"${TARGET_BUILD_DIR}\"/\"${PRODUCT_NAME}\".${WRAPPER_EXTENSION} -name Headers -o -name PrivateHeaders -print0 | xargs -0 rm -rf\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
