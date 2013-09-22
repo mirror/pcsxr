@@ -2974,6 +2974,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = PCSXR;
+				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Instrument;
@@ -3201,6 +3202,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_NAME = PCSXR;
+				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3229,6 +3231,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = PCSXR;
+				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
