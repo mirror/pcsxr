@@ -38,19 +38,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <box title="Hacks" translatesAutoresizingMaskIntoConstraints="NO" id="76">
-                        <rect key="frame" x="17" y="213" width="432" height="192"/>
+                        <rect key="frame" x="17" y="190" width="432" height="217"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
-                            <rect key="frame" x="2" y="2" width="428" height="175"/>
+                            <rect key="frame" x="2" y="2" width="428" height="200"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="74">
-                                    <rect key="frame" x="33" y="137" width="362" height="28"/>
+                                    <rect key="frame" x="39" y="148" width="351" height="42"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="356" id="318"/>
-                                    </constraints>
-                                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" id="162">
+                                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="center" id="162">
                                         <font key="font" metaFont="smallSystem"/>
                                         <string key="title">Only enable a hack to fix a specific problem in a game.
 Hold the mouse over a checkbox to get more information about it.</string>
@@ -59,7 +56,7 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                     </textFieldCell>
                                 </textField>
                                 <matrix verticalHuggingPriority="750" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="530">
-                                    <rect key="frame" x="20" y="31" width="388" height="98"/>
+                                    <rect key="frame" x="20" y="42" width="388" height="98"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     <size key="cellSize" width="192" height="18"/>
@@ -121,32 +118,29 @@ Hold the mouse over a checkbox to get more information about it.</string>
                             <constraint firstItem="74" firstAttribute="top" secondItem="76" secondAttribute="top" constant="25" id="396"/>
                             <constraint firstItem="530" firstAttribute="top" secondItem="74" secondAttribute="bottom" constant="8" symbolic="YES" id="545"/>
                             <constraint firstItem="530" firstAttribute="centerX" secondItem="76" secondAttribute="centerX" id="548"/>
-                            <constraint firstItem="530" firstAttribute="centerX" secondItem="74" secondAttribute="centerX" id="549"/>
+                            <constraint firstAttribute="centerX" secondItem="74" secondAttribute="centerX" id="FQU-NU-T1y"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <box title="Display Settings" translatesAutoresizingMaskIntoConstraints="NO" id="89">
-                        <rect key="frame" x="17" y="409" width="220" height="135"/>
+                        <rect key="frame" x="17" y="411" width="220" height="133"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
-                            <rect key="frame" x="2" y="2" width="216" height="118"/>
+                            <rect key="frame" x="2" y="2" width="216" height="116"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="93">
-                                    <rect key="frame" x="18" y="32" width="189" height="18"/>
+                                    <rect key="frame" x="18" y="30" width="173" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <string key="toolTip">Removes tearing artifacts by waiting for the monitor to sync. Will cause a slight performance loss. This setting has no effect on LCD monitors.</string>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="185" id="308"/>
-                                    </constraints>
                                     <buttonCell key="cell" type="check" title="Sync to Monitor Refresh" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="172">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
                                 </button>
                                 <button toolTip="Skip rendering frames to improve overall speed when needed. This setting might cause compatibility problems" translatesAutoresizingMaskIntoConstraints="NO" id="96">
-                                    <rect key="frame" x="18" y="72" width="147" height="18"/>
+                                    <rect key="frame" x="18" y="70" width="147" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <buttonCell key="cell" type="check" title="Use Frame Skipping" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="173">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -154,7 +148,7 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                     </buttonCell>
                                 </button>
                                 <button toolTip="When Enabled a small counter will show the current performance of the rendering measured in Frames Per Second (FPS)" translatesAutoresizingMaskIntoConstraints="NO" id="97">
-                                    <rect key="frame" x="18" y="92" width="148" height="18"/>
+                                    <rect key="frame" x="18" y="90" width="148" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <buttonCell key="cell" type="check" title="Display FPS Counter" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="174">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -162,7 +156,7 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                     </buttonCell>
                                 </button>
                                 <button hidden="YES" toolTip="Automatically enter full screen mode" translatesAutoresizingMaskIntoConstraints="NO" id="99">
-                                    <rect key="frame" x="18" y="52" width="125" height="18"/>
+                                    <rect key="frame" x="18" y="50" width="125" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <buttonCell key="cell" type="check" title="Auto Full Screen" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="175">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -185,18 +179,15 @@ Hold the mouse over a checkbox to get more information about it.</string>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <box title="Rendering" translatesAutoresizingMaskIntoConstraints="NO" id="107">
-                        <rect key="frame" x="242" y="409" width="207" height="135"/>
+                        <rect key="frame" x="239" y="411" width="210" height="133"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
-                            <rect key="frame" x="2" y="2" width="203" height="118"/>
+                            <rect key="frame" x="2" y="2" width="206" height="116"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField toolTip="Specify when to use dithering to render colors" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="112">
-                                    <rect key="frame" x="14" y="95" width="144" height="17"/>
+                                    <rect key="frame" x="14" y="93" width="107" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="138" id="254"/>
-                                    </constraints>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Dither Graphics:" id="176">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -204,14 +195,14 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                     </textFieldCell>
                                 </textField>
                                 <popUpButton toolTip="Specify when to use dithering to render colors" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="116">
-                                    <rect key="frame" x="15" y="63" width="174" height="26"/>
+                                    <rect key="frame" x="15" y="61" width="177" height="26"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <popUpButtonCell key="cell" type="push" title="Never" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="177">
+                                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="177">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="system"/>
+                                        <font key="font" metaFont="menu"/>
                                         <menu key="menu" title="OtherViews" id="113">
                                             <items>
-                                                <menuItem title="Never" state="on" id="111"/>
+                                                <menuItem title="Never" id="111"/>
                                                 <menuItem title="When Hinted" id="115"/>
                                                 <menuItem title="Always" id="114"/>
                                             </items>
@@ -219,7 +210,7 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                     </popUpButtonCell>
                                 </popUpButton>
                                 <button toolTip="Enable use of the hacks specified below" translatesAutoresizingMaskIntoConstraints="NO" id="117">
-                                    <rect key="frame" x="15" y="44" width="118" height="18"/>
+                                    <rect key="frame" x="15" y="40" width="118" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <buttonCell key="cell" type="check" title="Enable Hacks" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="178">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -230,7 +221,7 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                     </connections>
                                 </button>
                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="180">
-                                    <rect key="frame" x="15" y="24" width="118" height="18"/>
+                                    <rect key="frame" x="15" y="20" width="118" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Enable Shaders" bezelStyle="regularSquare" imagePosition="left" inset="2" id="181">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -245,27 +236,28 @@ Hold the mouse over a checkbox to get more information about it.</string>
                         <constraints>
                             <constraint firstItem="112" firstAttribute="top" secondItem="107" secondAttribute="top" constant="21" id="309"/>
                             <constraint firstItem="116" firstAttribute="top" secondItem="112" secondAttribute="bottom" constant="8" symbolic="YES" id="310"/>
-                            <constraint firstItem="116" firstAttribute="leading" secondItem="107" secondAttribute="leading" constant="16" id="311"/>
-                            <constraint firstItem="180" firstAttribute="leading" secondItem="107" secondAttribute="leading" constant="16" id="574"/>
-                            <constraint firstItem="117" firstAttribute="leading" secondItem="107" secondAttribute="leading" constant="16" id="582"/>
                             <constraint firstItem="112" firstAttribute="leading" secondItem="107" secondAttribute="leading" constant="16" id="583"/>
-                            <constraint firstItem="117" firstAttribute="top" secondItem="107" secondAttribute="top" constant="73" id="590"/>
                             <constraint firstItem="180" firstAttribute="top" secondItem="117" secondAttribute="bottom" constant="6" symbolic="YES" id="591"/>
                             <constraint firstAttribute="trailing" secondItem="116" secondAttribute="trailing" constant="16" id="592"/>
                             <constraint firstItem="180" firstAttribute="trailing" secondItem="117" secondAttribute="trailing" id="593"/>
+                            <constraint firstItem="117" firstAttribute="leading" secondItem="180" secondAttribute="leading" id="E8l-1O-t2W"/>
+                            <constraint firstItem="117" firstAttribute="top" secondItem="116" secondAttribute="bottom" constant="8" symbolic="YES" id="edX-A9-gv2"/>
+                            <constraint firstItem="117" firstAttribute="leading" secondItem="112" secondAttribute="leading" id="rCK-rd-Jyw"/>
+                            <constraint firstAttribute="bottom" secondItem="180" secondAttribute="bottom" constant="20" id="ttc-Yy-itN"/>
+                            <constraint firstItem="117" firstAttribute="leading" secondItem="116" secondAttribute="leading" id="wDx-5p-e55"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <box autoresizesSubviews="NO" title="Shaders" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="179">
-                        <rect key="frame" x="17" y="67" width="432" height="142"/>
+                        <rect key="frame" x="17" y="57" width="432" height="129"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView">
-                            <rect key="frame" x="1" y="1" width="430" height="126"/>
+                            <rect key="frame" x="1" y="1" width="430" height="113"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="182">
-                                    <rect key="frame" x="333" y="88" width="89" height="32"/>
+                                    <rect key="frame" x="333" y="75" width="89" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="push" title="Select..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="183">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -276,7 +268,7 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="184">
-                                    <rect key="frame" x="333" y="55" width="89" height="32"/>
+                                    <rect key="frame" x="333" y="42" width="89" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="push" title="Select..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="185">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -287,7 +279,7 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                     </connections>
                                 </button>
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="186">
-                                    <rect key="frame" x="85" y="98" width="249" height="17"/>
+                                    <rect key="frame" x="85" y="85" width="249" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="243" id="255"/>
@@ -299,7 +291,7 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="188">
-                                    <rect key="frame" x="85" y="65" width="249" height="17"/>
+                                    <rect key="frame" x="85" y="52" width="249" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="189">
                                         <font key="font" metaFont="system"/>
@@ -308,35 +300,35 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="194">
-                                    <rect key="frame" x="15" y="98" width="50" height="17"/>
+                                    <rect key="frame" x="15" y="85" width="68" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Vertex:" id="195">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Vertex:" id="195">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="196">
-                                    <rect key="frame" x="15" y="65" width="68" height="17"/>
+                                    <rect key="frame" x="15" y="52" width="68" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Fragment:" id="197">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Fragment:" id="197">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="219">
-                                    <rect key="frame" x="86" y="26" width="100" height="26"/>
+                                    <rect key="frame" x="86" y="20" width="100" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="95" id="279"/>
                                     </constraints>
-                                    <popUpButtonCell key="cell" type="push" title="1.0" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1" imageScaling="proportionallyDown" inset="2" id="220">
+                                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="220">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="system"/>
+                                        <font key="font" metaFont="menu"/>
                                         <menu key="menu" title="OtherViews" id="221">
                                             <items>
-                                                <menuItem title="1.0" state="on" tag="1" id="222">
+                                                <menuItem title="1.0" tag="1" id="222">
                                                     <modifierMask key="keyEquivalentModifierMask"/>
                                                 </menuItem>
                                                 <menuItem title="2.0" tag="2" id="223">
@@ -351,9 +343,9 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                     </popUpButtonCell>
                                 </popUpButton>
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="225">
-                                    <rect key="frame" x="15" y="32" width="53" height="17"/>
+                                    <rect key="frame" x="15" y="26" width="68" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Quality:" id="226">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Quality:" id="226">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -376,9 +368,13 @@ Hold the mouse over a checkbox to get more information about it.</string>
                             <constraint firstItem="188" firstAttribute="baseline" secondItem="184" secondAttribute="baseline" id="337"/>
                             <constraint firstItem="196" firstAttribute="baseline" secondItem="188" secondAttribute="baseline" id="339"/>
                             <constraint firstItem="182" firstAttribute="top" secondItem="179" secondAttribute="top" constant="25" id="347"/>
-                            <constraint firstItem="225" firstAttribute="top" secondItem="196" secondAttribute="bottom" constant="16" id="602"/>
                             <constraint firstItem="219" firstAttribute="baseline" secondItem="225" secondAttribute="baseline" id="604"/>
                             <constraint firstItem="219" firstAttribute="leading" secondItem="188" secondAttribute="leading" id="605"/>
+                            <constraint firstItem="219" firstAttribute="leading" secondItem="225" secondAttribute="trailing" constant="8" symbolic="YES" id="A6p-5D-bmZ"/>
+                            <constraint firstItem="219" firstAttribute="top" secondItem="188" secondAttribute="bottom" constant="8" symbolic="YES" id="KPq-V4-so9"/>
+                            <constraint firstAttribute="bottom" secondItem="219" secondAttribute="bottom" constant="20" id="PEh-P9-5MF"/>
+                            <constraint firstAttribute="trailing" secondItem="182" secondAttribute="trailing" constant="12" id="UCy-BE-x17"/>
+                            <constraint firstItem="186" firstAttribute="leading" secondItem="194" secondAttribute="trailing" constant="8" symbolic="YES" id="a1M-U6-Tbp"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -431,21 +427,19 @@ Gw
                     <constraint firstItem="381" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="20" symbolic="YES" id="383"/>
                     <constraint firstAttribute="trailing" secondItem="371" secondAttribute="trailing" constant="20" symbolic="YES" id="386"/>
                     <constraint firstAttribute="bottom" secondItem="371" secondAttribute="bottom" constant="20" symbolic="YES" id="387"/>
-                    <constraint firstAttribute="bottom" secondItem="375" secondAttribute="bottom" constant="20" symbolic="YES" id="388"/>
                     <constraint firstItem="371" firstAttribute="leading" secondItem="375" secondAttribute="trailing" constant="12" symbolic="YES" id="389"/>
-                    <constraint firstAttribute="bottom" secondItem="381" secondAttribute="bottom" constant="20" symbolic="YES" id="390"/>
-                    <constraint firstItem="179" firstAttribute="top" secondItem="6" secondAttribute="top" constant="355" id="517"/>
                     <constraint firstItem="107" firstAttribute="top" secondItem="6" secondAttribute="top" constant="20" symbolic="YES" id="560"/>
                     <constraint firstAttribute="trailing" secondItem="107" secondAttribute="trailing" constant="20" symbolic="YES" id="561"/>
                     <constraint firstItem="89" firstAttribute="baseline" secondItem="107" secondAttribute="baseline" id="563"/>
-                    <constraint firstItem="107" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="245" id="575"/>
                     <constraint firstAttribute="trailing" secondItem="89" secondAttribute="trailing" constant="232" id="576"/>
                     <constraint firstItem="76" firstAttribute="top" secondItem="89" secondAttribute="bottom" constant="8" symbolic="YES" id="577"/>
                     <constraint firstItem="76" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="20" symbolic="YES" id="578"/>
-                    <constraint firstItem="76" firstAttribute="top" secondItem="6" secondAttribute="top" constant="159" id="579"/>
                     <constraint firstAttribute="trailing" secondItem="76" secondAttribute="trailing" constant="20" symbolic="YES" id="580"/>
                     <constraint firstItem="179" firstAttribute="top" secondItem="76" secondAttribute="bottom" constant="8" symbolic="YES" id="581"/>
-                    <constraint firstAttribute="bottom" secondItem="179" secondAttribute="bottom" constant="71" id="600"/>
+                    <constraint firstItem="107" firstAttribute="leading" secondItem="89" secondAttribute="trailing" constant="8" symbolic="YES" id="0zX-Nj-tN8"/>
+                    <constraint firstItem="381" firstAttribute="top" secondItem="179" secondAttribute="bottom" constant="20" symbolic="YES" id="adH-hd-tGe"/>
+                    <constraint firstItem="375" firstAttribute="baseline" secondItem="371" secondAttribute="baseline" id="af1-DM-A7k"/>
+                    <constraint firstItem="375" firstAttribute="baseline" secondItem="381" secondAttribute="baseline" id="zZT-Ts-UqV"/>
                 </constraints>
             </view>
             <connections>

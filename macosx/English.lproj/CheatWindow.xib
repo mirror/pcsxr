@@ -49,14 +49,14 @@
                         </connections>
                     </button>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23">
-                        <rect key="frame" x="20" y="53" width="658" height="284"/>
+                        <rect key="frame" x="20" y="58" width="658" height="279"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" id="6pF-og-es3">
-                            <rect key="frame" x="1" y="17" width="656" height="266"/>
+                            <rect key="frame" x="1" y="17" width="656" height="261"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" headerView="27" id="26">
-                                    <rect key="frame" x="0.0" y="0.0" width="656" height="266"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="656" height="261"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -187,7 +187,6 @@
                 <constraints>
                     <constraint firstItem="6" firstAttribute="baseline" secondItem="4" secondAttribute="baseline" id="115"/>
                     <constraint firstAttribute="trailing" secondItem="23" secondAttribute="trailing" constant="20" symbolic="YES" id="116"/>
-                    <constraint firstAttribute="bottom" secondItem="23" secondAttribute="bottom" constant="53" id="117"/>
                     <constraint firstItem="23" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" symbolic="YES" id="118"/>
                     <constraint firstItem="6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" symbolic="YES" id="121"/>
                     <constraint firstAttribute="bottom" secondItem="6" secondAttribute="bottom" constant="17" id="122"/>
@@ -203,6 +202,7 @@
                     <constraint firstItem="78" firstAttribute="leading" secondItem="256" secondAttribute="trailing" constant="12" symbolic="YES" id="259"/>
                     <constraint firstItem="256" firstAttribute="baseline" secondItem="78" secondAttribute="baseline" id="260"/>
                     <constraint firstItem="256" firstAttribute="leading" secondItem="227" secondAttribute="trailing" constant="12" symbolic="YES" id="261"/>
+                    <constraint firstItem="256" firstAttribute="top" secondItem="23" secondAttribute="bottom" constant="20" symbolic="YES" id="I40-Zw-qK6"/>
                 </constraints>
             </view>
             <connections>
@@ -219,14 +219,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="136">
-                        <rect key="frame" x="20" y="56" width="302" height="189"/>
+                        <rect key="frame" x="20" y="53" width="302" height="192"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" id="COc-Cf-C5K">
-                            <rect key="frame" x="1" y="17" width="300" height="171"/>
+                            <rect key="frame" x="1" y="17" width="300" height="174"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="139" id="137">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="171"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="174"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -238,7 +238,7 @@
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableHeaderCell>
-                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="144">
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" id="144">
                                                 <customFormatter key="formatter" id="271" customClass="PcsxrHexadecimalFormatter"/>
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -255,7 +255,7 @@
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableHeaderCell>
-                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="143">
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" id="143">
                                                 <customFormatter key="formatter" id="272" customClass="PcsxrHexadecimalFormatter"/>
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -278,7 +278,7 @@
                             <rect key="frame" x="1" y="120" width="143" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="37" id="140">
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" id="140">
                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -351,14 +351,16 @@ Gw
                     <constraint firstAttribute="trailing" secondItem="152" secondAttribute="trailing" constant="20" symbolic="YES" id="154"/>
                     <constraint firstAttribute="bottom" secondItem="152" secondAttribute="bottom" constant="20" symbolic="YES" id="155"/>
                     <constraint firstItem="152" firstAttribute="leading" secondItem="156" secondAttribute="trailing" constant="12" symbolic="YES" id="158"/>
-                    <constraint firstAttribute="bottom" secondItem="156" secondAttribute="bottom" constant="20" symbolic="YES" id="159"/>
-                    <constraint firstAttribute="bottom" secondItem="136" secondAttribute="bottom" constant="56" id="160"/>
                     <constraint firstAttribute="trailing" secondItem="136" secondAttribute="trailing" constant="20" symbolic="YES" id="161"/>
-                    <constraint firstAttribute="bottom" secondItem="179" secondAttribute="bottom" constant="20" symbolic="YES" id="182"/>
                     <constraint firstItem="175" firstAttribute="leading" secondItem="135" secondAttribute="leading" constant="20" symbolic="YES" id="193"/>
-                    <constraint firstAttribute="bottom" secondItem="175" secondAttribute="bottom" constant="20" symbolic="YES" id="198"/>
                     <constraint firstItem="175" firstAttribute="top" secondItem="179" secondAttribute="top" id="203"/>
                     <constraint firstItem="179" firstAttribute="leading" secondItem="175" secondAttribute="trailing" constant="-1" id="236"/>
+                    <constraint firstItem="175" firstAttribute="bottom" secondItem="156" secondAttribute="bottom" id="BiT-cB-72z"/>
+                    <constraint firstItem="179" firstAttribute="top" secondItem="136" secondAttribute="bottom" constant="8" symbolic="YES" id="Ehy-91-5kl"/>
+                    <constraint firstItem="152" firstAttribute="baseline" secondItem="156" secondAttribute="baseline" id="G4C-ss-lMH"/>
+                    <constraint firstItem="175" firstAttribute="height" secondItem="179" secondAttribute="height" id="cDU-nE-cHi"/>
+                    <constraint firstItem="175" firstAttribute="bottom" secondItem="179" secondAttribute="bottom" id="dA3-Bb-69x"/>
+                    <constraint firstItem="175" firstAttribute="width" secondItem="179" secondAttribute="width" id="krz-I3-Qzw"/>
                 </constraints>
             </view>
         </window>

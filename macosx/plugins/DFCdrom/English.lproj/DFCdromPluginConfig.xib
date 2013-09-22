@@ -33,7 +33,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="169">
-                                    <rect key="frame" x="15" y="21" width="151" height="18"/>
+                                    <rect key="frame" x="15" y="19" width="151" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <buttonCell key="cell" type="check" title="Use Cached Reading" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="189">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -41,17 +41,17 @@
                                     </buttonCell>
                                 </button>
                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="173">
-                                    <rect key="frame" x="128" y="40" width="197" height="26"/>
+                                    <rect key="frame" x="130" y="40" width="195" height="26"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="192" id="271"/>
+                                        <constraint firstAttribute="width" constant="190" id="QnV-gO-Owq"/>
                                     </constraints>
-                                    <popUpButtonCell key="cell" type="push" title="Default" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="190">
+                                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="190">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="system"/>
+                                        <font key="font" metaFont="menu"/>
                                         <menu key="menu" title="OtherViews" id="174">
                                             <items>
-                                                <menuItem title="Default" state="on" id="176"/>
+                                                <menuItem title="Default" id="176"/>
                                                 <menuItem title="1 X" tag="1" id="177"/>
                                                 <menuItem title="2 X" tag="2" id="175"/>
                                                 <menuItem title="4 X" tag="4" id="179"/>
@@ -63,9 +63,9 @@
                                     </popUpButtonCell>
                                 </popUpButton>
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="266">
-                                    <rect key="frame" x="14" y="46" width="106" height="17"/>
+                                    <rect key="frame" x="14" y="46" width="113" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="CD-ROM Speed:" id="267">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="CD-ROM Speed:" id="267">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -77,9 +77,10 @@
                             <constraint firstItem="173" firstAttribute="top" secondItem="162" secondAttribute="top" constant="24" id="232"/>
                             <constraint firstAttribute="trailing" secondItem="173" secondAttribute="trailing" constant="16" id="234"/>
                             <constraint firstItem="169" firstAttribute="leading" secondItem="162" secondAttribute="leading" constant="16" id="236"/>
-                            <constraint firstAttribute="bottom" secondItem="169" secondAttribute="bottom" constant="21" id="270"/>
                             <constraint firstItem="173" firstAttribute="baseline" secondItem="266" secondAttribute="baseline" id="272"/>
-                            <constraint firstItem="266" firstAttribute="leading" secondItem="162" secondAttribute="leading" constant="16" id="273"/>
+                            <constraint firstItem="173" firstAttribute="leading" secondItem="266" secondAttribute="trailing" constant="8" symbolic="YES" id="FPY-Qc-N1f"/>
+                            <constraint firstItem="266" firstAttribute="leading" secondItem="162" secondAttribute="leading" constant="16" id="XTz-Fk-3oB"/>
+                            <constraint firstItem="169" firstAttribute="top" secondItem="173" secondAttribute="bottom" constant="8" symbolic="YES" id="n6F-ne-iWN"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -91,21 +92,6 @@
                             <rect key="frame" x="2" y="2" width="339" height="51"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="171">
-                                    <rect key="frame" x="14" y="21" width="114" height="17"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="108" id="220"/>
-                                        <constraint firstAttribute="height" constant="17" id="221"/>
-                                    </constraints>
-                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="191">
-                                        <font key="font" metaFont="system"/>
-                                        <string key="title">Cache Size:
-</string>
-                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="172">
                                     <rect key="frame" x="129" y="15" width="195" height="25"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -116,13 +102,25 @@
                                         <font key="font" size="12" name="Helvetica"/>
                                     </sliderCell>
                                 </slider>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Jzm-F5-M7J">
+                                    <rect key="frame" x="14" y="10" width="112" height="34"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" id="MSf-Ad-auA">
+                                        <font key="font" metaFont="system"/>
+                                        <string key="title">Cache Size:
+</string>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
                             </subviews>
                         </view>
                         <constraints>
-                            <constraint firstItem="172" firstAttribute="top" secondItem="171" secondAttribute="top" id="238"/>
-                            <constraint firstItem="171" firstAttribute="leading" secondItem="164" secondAttribute="leading" constant="16" id="239"/>
-                            <constraint firstItem="171" firstAttribute="top" secondItem="164" secondAttribute="top" constant="28" id="240"/>
                             <constraint firstAttribute="trailing" secondItem="172" secondAttribute="trailing" constant="16" id="241"/>
+                            <constraint firstItem="172" firstAttribute="top" secondItem="164" secondAttribute="top" constant="28" id="1SZ-MD-TCY"/>
+                            <constraint firstItem="Jzm-F5-M7J" firstAttribute="baseline" secondItem="172" secondAttribute="baseline" id="M64-If-woz"/>
+                            <constraint firstItem="172" firstAttribute="leading" secondItem="Jzm-F5-M7J" secondAttribute="trailing" constant="8" symbolic="YES" id="NFN-dN-Z1o"/>
+                            <constraint firstItem="Jzm-F5-M7J" firstAttribute="leading" secondItem="164" secondAttribute="leading" constant="16" id="b9u-7l-0XP"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -168,7 +166,7 @@ Gw
                     <constraint firstAttribute="bottom" secondItem="164" secondAttribute="bottom" constant="60" id="247"/>
                     <constraint firstAttribute="trailing" secondItem="242" secondAttribute="trailing" constant="20" symbolic="YES" id="249"/>
                     <constraint firstItem="242" firstAttribute="leading" secondItem="250" secondAttribute="trailing" constant="12" symbolic="YES" id="252"/>
-                    <constraint firstAttribute="bottom" secondItem="250" secondAttribute="bottom" constant="20" symbolic="YES" id="253"/>
+                    <constraint firstItem="242" firstAttribute="baseline" secondItem="250" secondAttribute="baseline" id="sHP-yL-yOn"/>
                 </constraints>
             </view>
             <connections>

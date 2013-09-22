@@ -55,30 +55,27 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="19">
-                        <rect key="frame" x="17" y="120" width="75" height="17"/>
+                        <rect key="frame" x="17" y="120" width="104" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="IP Address:" id="20">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="IP Address:" id="20">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="21">
-                        <rect key="frame" x="17" y="88" width="38" height="17"/>
+                        <rect key="frame" x="17" y="88" width="104" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="32" id="32"/>
-                        </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Port:" id="22">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Port:" id="22">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="24">
-                        <rect key="frame" x="17" y="56" width="101" height="17"/>
+                        <rect key="frame" x="17" y="56" width="104" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Player Number:" id="25">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Player Number:" id="25">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -130,11 +127,8 @@ Gw
                     <constraint firstItem="17" firstAttribute="leading" secondItem="9" secondAttribute="leading" id="46"/>
                     <constraint firstItem="21" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" symbolic="YES" id="47"/>
                     <constraint firstItem="19" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" symbolic="YES" id="48"/>
-                    <constraint firstAttribute="trailing" secondItem="17" secondAttribute="trailing" constant="20" symbolic="YES" id="49"/>
-                    <constraint firstAttribute="trailing" secondItem="26" secondAttribute="trailing" constant="20" symbolic="YES" id="52"/>
                     <constraint firstAttribute="bottom" secondItem="54" secondAttribute="bottom" constant="20" symbolic="YES" id="57"/>
                     <constraint firstAttribute="trailing" secondItem="54" secondAttribute="trailing" constant="20" symbolic="YES" id="58"/>
-                    <constraint firstAttribute="bottom" secondItem="59" secondAttribute="bottom" constant="20" symbolic="YES" id="61"/>
                     <constraint firstItem="54" firstAttribute="leading" secondItem="59" secondAttribute="trailing" constant="12" symbolic="YES" id="63"/>
                     <constraint firstItem="9" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" symbolic="YES" id="72"/>
                     <constraint firstItem="19" firstAttribute="baseline" secondItem="9" secondAttribute="baseline" id="74"/>
@@ -143,6 +137,12 @@ Gw
                     <constraint firstItem="26" firstAttribute="top" secondItem="17" secondAttribute="bottom" constant="10" symbolic="YES" id="82"/>
                     <constraint firstItem="24" firstAttribute="baseline" secondItem="26" secondAttribute="baseline" id="83"/>
                     <constraint firstItem="24" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" symbolic="YES" id="84"/>
+                    <constraint firstItem="54" firstAttribute="baseline" secondItem="59" secondAttribute="baseline" id="Hiw-cw-hgP"/>
+                    <constraint firstItem="26" firstAttribute="leading" secondItem="24" secondAttribute="trailing" constant="8" symbolic="YES" id="Z3c-SU-FF9"/>
+                    <constraint firstItem="9" firstAttribute="leading" secondItem="19" secondAttribute="trailing" constant="8" symbolic="YES" id="khN-2J-vyq"/>
+                    <constraint firstItem="17" firstAttribute="leading" secondItem="21" secondAttribute="trailing" constant="8" symbolic="YES" id="qkM-ee-2DJ"/>
+                    <constraint firstItem="9" firstAttribute="trailing" secondItem="26" secondAttribute="trailing" id="tih-ev-TML"/>
+                    <constraint firstItem="9" firstAttribute="trailing" secondItem="17" secondAttribute="trailing" id="yvV-4Z-Fpf"/>
                 </constraints>
             </view>
         </window>

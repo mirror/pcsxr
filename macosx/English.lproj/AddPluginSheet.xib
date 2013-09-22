@@ -34,11 +34,8 @@
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="psxplugin" id="57"/>
                     </imageView>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="43">
-                        <rect key="frame" x="89" y="114" width="290" height="17"/>
+                        <rect key="frame" x="89" y="114" width="126" height="17"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="284" id="62"/>
-                        </constraints>
                         <textFieldCell key="cell" alignment="left" title="Plugin Installation" id="58">
                             <font key="font" metaFont="systemBold"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -46,11 +43,8 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="44">
-                        <rect key="frame" x="89" y="88" width="290" height="18"/>
+                        <rect key="frame" x="89" y="92" width="248" height="14"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="18" id="79"/>
-                        </constraints>
                         <textFieldCell key="cell" selectable="YES" alignment="left" title="Do you want to install this plugin into PCSXR?" id="59">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -92,18 +86,18 @@ Gw
                 <constraints>
                     <constraint firstItem="29" firstAttribute="top" secondItem="7" secondAttribute="top" constant="20" symbolic="YES" id="88"/>
                     <constraint firstItem="43" firstAttribute="top" secondItem="7" secondAttribute="top" constant="16" id="94"/>
-                    <constraint firstItem="44" firstAttribute="top" secondItem="43" secondAttribute="bottom" constant="8" symbolic="YES" id="96"/>
                     <constraint firstItem="29" firstAttribute="leading" secondItem="7" secondAttribute="leading" constant="20" symbolic="YES" id="101"/>
                     <constraint firstItem="47" firstAttribute="leading" secondItem="29" secondAttribute="trailing" constant="8" symbolic="YES" id="103"/>
                     <constraint firstItem="44" firstAttribute="leading" secondItem="29" secondAttribute="trailing" constant="8" symbolic="YES" id="108"/>
-                    <constraint firstItem="43" firstAttribute="trailing" secondItem="44" secondAttribute="trailing" id="109"/>
                     <constraint firstItem="43" firstAttribute="leading" secondItem="29" secondAttribute="trailing" constant="8" symbolic="YES" id="110"/>
                     <constraint firstAttribute="bottom" secondItem="112" secondAttribute="bottom" constant="20" symbolic="YES" id="115"/>
-                    <constraint firstAttribute="bottom" secondItem="116" secondAttribute="bottom" constant="20" symbolic="YES" id="119"/>
                     <constraint firstAttribute="trailing" secondItem="47" secondAttribute="trailing" constant="20" symbolic="YES" id="121"/>
                     <constraint firstItem="47" firstAttribute="bottom" secondItem="29" secondAttribute="bottom" id="122"/>
                     <constraint firstAttribute="trailing" secondItem="112" secondAttribute="trailing" constant="20" symbolic="YES" id="125"/>
                     <constraint firstItem="112" firstAttribute="leading" secondItem="116" secondAttribute="trailing" constant="12" symbolic="YES" id="126"/>
+                    <constraint firstItem="47" firstAttribute="top" secondItem="44" secondAttribute="bottom" constant="7" id="nEW-ZE-1vH"/>
+                    <constraint firstItem="44" firstAttribute="top" secondItem="43" secondAttribute="bottom" constant="8" symbolic="YES" id="wXs-74-I05"/>
+                    <constraint firstItem="112" firstAttribute="baseline" secondItem="116" secondAttribute="baseline" id="wec-HN-wNe"/>
                 </constraints>
             </view>
             <connections>

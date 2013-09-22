@@ -13,19 +13,19 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" wantsToBeColor="NO" animationBehavior="default" id="1">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+        <window title="Connecting…" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" wantsToBeColor="NO" animationBehavior="default" id="1">
+            <windowStyleMask key="styleMask" titled="YES" texturedBackground="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="371" width="380" height="124"/>
+            <rect key="contentRect" x="196" y="371" width="259" height="124"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="380" height="140"/>
             <value key="maxSize" type="size" width="380" height="140"/>
             <view key="contentView" id="2">
-                <rect key="frame" x="0.0" y="0.0" width="380" height="124"/>
+                <rect key="frame" x="0.0" y="0.0" width="259" height="124"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3">
-                        <rect key="frame" x="78" y="87" width="225" height="17"/>
+                        <rect key="frame" x="17" y="87" width="225" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="219" id="11"/>
@@ -37,14 +37,14 @@
                         </textFieldCell>
                     </textField>
                     <progressIndicator verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="6">
-                        <rect key="frame" x="103" y="60" width="174" height="20"/>
+                        <rect key="frame" x="42" y="60" width="174" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="174" id="19"/>
                         </constraints>
                     </progressIndicator>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="26">
-                        <rect key="frame" x="149" y="13" width="82" height="32"/>
+                        <rect key="frame" x="88" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="27">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -60,11 +60,13 @@ Gw
                 </subviews>
                 <constraints>
                     <constraint firstItem="3" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" symbolic="YES" id="14"/>
-                    <constraint firstItem="3" firstAttribute="centerX" secondItem="6" secondAttribute="centerX" id="17"/>
                     <constraint firstItem="6" firstAttribute="top" secondItem="3" secondAttribute="bottom" constant="8" symbolic="YES" id="21"/>
-                    <constraint firstItem="26" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" id="28"/>
                     <constraint firstAttribute="bottom" secondItem="26" secondAttribute="bottom" constant="20" symbolic="YES" id="29"/>
-                    <constraint firstItem="26" firstAttribute="centerX" secondItem="6" secondAttribute="centerX" id="30"/>
+                    <constraint firstItem="3" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" symbolic="YES" id="5Ll-g2-DWG"/>
+                    <constraint firstItem="26" firstAttribute="top" secondItem="6" secondAttribute="bottom" constant="20" symbolic="YES" id="EeQ-6H-ewJ"/>
+                    <constraint firstAttribute="trailing" secondItem="3" secondAttribute="trailing" constant="20" symbolic="YES" id="WGc-wJ-nm5"/>
+                    <constraint firstAttribute="centerX" secondItem="26" secondAttribute="centerX" id="aG8-6a-4Pp"/>
+                    <constraint firstAttribute="centerX" secondItem="6" secondAttribute="centerX" id="dae-LS-2An"/>
                 </constraints>
             </view>
         </window>

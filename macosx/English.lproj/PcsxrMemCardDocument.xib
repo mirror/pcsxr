@@ -16,16 +16,16 @@
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowCollectionBehavior key="collectionBehavior" moveToActiveSpace="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="133" y="235" width="416" height="148"/>
+            <rect key="contentRect" x="133" y="235" width="420" height="160"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="416" height="86"/>
             <value key="maxSize" type="size" width="416" height="155"/>
             <view key="contentView" id="6">
-                <rect key="frame" x="0.0" y="0.0" width="416" height="148"/>
+                <rect key="frame" x="0.0" y="0.0" width="420" height="160"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <imageView translatesAutoresizingMaskIntoConstraints="NO" id="100023">
-                        <rect key="frame" x="20" y="63" width="64" height="64"/>
+                        <rect key="frame" x="20" y="75" width="64" height="64"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="64" id="100071"/>
@@ -34,7 +34,7 @@
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="pcsxrmemcard" id="100030"/>
                     </imageView>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="100024">
-                        <rect key="frame" x="89" y="111" width="310" height="17"/>
+                        <rect key="frame" x="89" y="122" width="158" height="17"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" alignment="left" title="Memory Card Selection" id="100029">
                             <font key="font" metaFont="systemBold"/>
@@ -43,28 +43,25 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="100025">
-                        <rect key="frame" x="89" y="44" width="310" height="34"/>
+                        <rect key="frame" x="89" y="61" width="314" height="28"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="34" id="100072"/>
-                        </constraints>
-                        <textFieldCell key="cell" selectable="YES" alignment="left" title="Select which memory card slot you want to put this card in?" id="100028">
+                        <textFieldCell key="cell" controlSize="small" alignment="left" title="Select which memory card slot you want to put this card in." id="100028">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="100034">
-                        <rect key="frame" x="89" y="86" width="310" height="17"/>
+                        <rect key="frame" x="89" y="97" width="314" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="100035">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" title="Label" id="100035">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="100126">
-                        <rect key="frame" x="326" y="13" width="76" height="32"/>
+                        <rect key="frame" x="330" y="13" width="76" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Slot 2" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100127">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -72,7 +69,7 @@
                         </buttonCell>
                     </button>
                     <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="100130">
-                        <rect key="frame" x="250" y="13" width="76" height="32"/>
+                        <rect key="frame" x="254" y="13" width="76" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Slot 1" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100131">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -97,21 +94,21 @@ Gw
                 <constraints>
                     <constraint firstItem="100023" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="20" symbolic="YES" id="100056"/>
                     <constraint firstItem="100034" firstAttribute="top" secondItem="100024" secondAttribute="bottom" constant="8" symbolic="YES" id="100061"/>
-                    <constraint firstItem="100024" firstAttribute="top" secondItem="6" secondAttribute="top" constant="20" symbolic="YES" id="100062"/>
                     <constraint firstItem="100024" firstAttribute="leading" secondItem="100023" secondAttribute="trailing" constant="8" symbolic="YES" id="100082"/>
-                    <constraint firstItem="100034" firstAttribute="leading" secondItem="100023" secondAttribute="trailing" constant="8" symbolic="YES" id="100086"/>
-                    <constraint firstItem="100025" firstAttribute="leading" secondItem="100023" secondAttribute="trailing" constant="8" symbolic="YES" id="100092"/>
                     <constraint firstAttribute="trailing" secondItem="100025" secondAttribute="trailing" constant="20" symbolic="YES" id="100094"/>
-                    <constraint firstAttribute="trailing" secondItem="100034" secondAttribute="trailing" constant="20" symbolic="YES" id="100096"/>
-                    <constraint firstAttribute="trailing" secondItem="100024" secondAttribute="trailing" constant="20" symbolic="YES" id="100097"/>
                     <constraint firstItem="100025" firstAttribute="top" secondItem="100034" secondAttribute="bottom" constant="8" symbolic="YES" id="100098"/>
                     <constraint firstItem="100023" firstAttribute="top" secondItem="6" secondAttribute="top" constant="21" id="100125"/>
                     <constraint firstAttribute="trailing" secondItem="100126" secondAttribute="trailing" constant="20" symbolic="YES" id="100128"/>
                     <constraint firstAttribute="bottom" secondItem="100126" secondAttribute="bottom" constant="20" symbolic="YES" id="100129"/>
-                    <constraint firstAttribute="bottom" secondItem="100130" secondAttribute="bottom" constant="20" symbolic="YES" id="100132"/>
                     <constraint firstItem="100126" firstAttribute="leading" secondItem="100130" secondAttribute="trailing" constant="12" symbolic="YES" id="100133"/>
-                    <constraint firstAttribute="bottom" secondItem="100134" secondAttribute="bottom" constant="20" symbolic="YES" id="100136"/>
                     <constraint firstItem="100134" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="20" symbolic="YES" id="100137"/>
+                    <constraint firstItem="100130" firstAttribute="baseline" secondItem="100134" secondAttribute="baseline" id="QnN-dy-ijO"/>
+                    <constraint firstItem="100034" firstAttribute="leading" secondItem="100024" secondAttribute="leading" id="cns-wR-hZz"/>
+                    <constraint firstAttribute="trailing" secondItem="100034" secondAttribute="trailing" constant="20" symbolic="YES" id="eWZ-wr-Bub"/>
+                    <constraint firstItem="100130" firstAttribute="baseline" secondItem="100126" secondAttribute="baseline" id="fiF-w1-dU1"/>
+                    <constraint firstItem="100034" firstAttribute="leading" secondItem="100025" secondAttribute="leading" id="qEH-aA-8nT"/>
+                    <constraint firstItem="100130" firstAttribute="top" secondItem="100025" secondAttribute="bottom" constant="8" symbolic="YES" id="qor-pU-drx"/>
+                    <constraint firstItem="100024" firstAttribute="top" secondItem="100023" secondAttribute="top" id="u6d-xx-QEZ"/>
                 </constraints>
             </view>
             <connections>
