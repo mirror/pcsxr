@@ -112,7 +112,7 @@ static BOOL wasPaused;
 static void PSXDiscAppearedCallback(DADiskRef disk, void *context)
 {
 	PcsxrController *theSelf = (__bridge PcsxrController*)context;
-	
+	//sleep(3); //Is this needed?
 	SetCdOpenCaseTime(time(NULL) + 2);
 	LidInterrupt();
 	
@@ -183,6 +183,14 @@ static void PSXDiscAppearedCallback(DADiskRef disk, void *context)
 		
 		self.diskSession = tmpSession;
 		CFRelease(tmpSession);
+	}
+}
+
+- (void)emuWindowDidClose:(NSNotification*)theNot
+{
+	if (self.diskSession) {
+		DASessionUnscheduleFromRunLoop(self.diskSession, CFRunLoopGetMain(), kCFRunLoopCommonModes);
+		self.diskSession = NULL;
 	}
 }
 
@@ -420,8 +428,17 @@ otherblock();\
 #define kPCSXRArgumentFreeze @"--freeze"
 #define kPCSXRArgumentExitAtClose @"--exitAtClose"
 
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)awakeFromNib
 {
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(emuWindowDidClose:)
+												 name:@"emuWindowDidClose" object:nil];
+
 	pluginList = [[PluginList alloc] init];
 	if (![pluginList configured] /*!Config.Gpu[0] || !Config.Spu[0] || !Config.Pad1[0] || !Config.Cdr[0]*/) {
 		// configure plugins

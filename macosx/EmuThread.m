@@ -36,18 +36,18 @@ static pthread_mutex_t eventMutex;
 	NSAssert(![[NSThread currentThread] isEqual:[NSThread mainThread]], @"This function should not be run on the main thread!");
 	
 	[[NSThread currentThread] setName:@"PSX Emu Background thread"];
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	[center addObserver:self
+			   selector:@selector(emuWindowDidClose:)
+				   name:@"emuWindowDidClose" object:nil];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(emuWindowDidClose:)
-												 name:@"emuWindowDidClose" object:nil];
+	[center addObserver:self
+			   selector:@selector(emuWindowWantPause:)
+				   name:@"emuWindowWantPause" object:nil];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(emuWindowWantPause:)
-												 name:@"emuWindowWantPause" object:nil];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(emuWindowWantResume:)
-												 name:@"emuWindowWantResume" object:nil];
+	[center addObserver:self
+			   selector:@selector(emuWindowWantResume:)
+				   name:@"emuWindowWantResume" object:nil];
 	
 	// we shouldn't change the priority, since we might depend on subthreads
 	//[NSThread setThreadPriority:1.0-((1.0-[NSThread threadPriority])/4.0)];
