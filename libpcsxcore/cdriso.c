@@ -1361,7 +1361,7 @@ static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector)
 	}*/
 	//printf("SeekSector %i %i %i %i\n", sector, pos->sector, prevsector, base);
 
-	if (sector <= len_ecm_savetable) {
+	if (sector > 2*75 && sector <= len_ecm_savetable) { // actual data starts after 150 "pregap", ignore LUT
 		pos = &(ecm_savetable[sector-0]); // get sector from LUT which points to wanted sector or to beginning
 		// if suitable sector was not found from LUT use last sector if less than wanted sector
 		if (pos->filepos <= ECM_HEADER_SIZE && sector > prevsector) pos=&(ecm_savetable[prevsector]);
