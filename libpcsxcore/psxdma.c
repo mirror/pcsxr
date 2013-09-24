@@ -49,8 +49,10 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 			}
 			SPU_writeDMAMem(ptr, (bcr >> 16) * (bcr & 0xffff) * 2);
 
-			// Jungle Book - 0-0.333x DMA
-			SPUDMA_INT((bcr >> 16) * (bcr & 0xffff) / 3);
+			// Jungle Book - max 0.333x DMA length
+			// Harry Potter and the Philosopher's Stone - max 0.5x DMA length
+			//u32 dmalen=64 + ((bcr >> 18) * (bcr & 0xffff)); // less linear to DMA length which should work with both games above?
+			SPUDMA_INT((bcr >> 16) * (bcr & 0xffff) / 2);
 			return;
 
 		case 0x01000200: //spu to cpu transfer
