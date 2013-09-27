@@ -22,9 +22,10 @@
 
 #define GPUSTATUS_ODDLINES            0x80000000
 #define GPUSTATUS_DMABITS             0x60000000 // Two bits
-#define GPUSTATUS_READYFORCOMMANDS    0x10000000
+#define GPUSTATUS_READYFORCOMMANDS    0x10000000 // DMA block ready
 #define GPUSTATUS_READYFORVRAM        0x08000000
-#define GPUSTATUS_IDLE                0x04000000
+#define GPUSTATUS_IDLE                0x04000000 // CMD ready
+#define GPUSTATUS_MODE                0x02000000 // Data request mode
 
 #define GPUSTATUS_DISPLAYDISABLED     0x00800000
 #define GPUSTATUS_INTERLACED          0x00400000
@@ -128,7 +129,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			return;
 
 		case 0x01000201: // mem2vram
-    		bs=(bcr & 0xffff);
+		bs=(bcr & 0xffff);
 			size = (bcr >> 16) * bs; // BA blocks * BS words (word = 32-bits)
 #ifdef PSXDMA_LOG
 			PSXDMA_LOG("*** DMA 2 - GPU mem2vram *** %lx addr = %lxh, BCR %lxh => size %d = BA(%d) * BS(%xh)\n",
@@ -152,7 +153,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 #endif
 			return;
 
-		case 0x0401: // Vampire Hunter D: title screen linked list update
+		case 0x00000401: // Vampire Hunter D: title screen linked list update (see psxhw.c)
 		case 0x01000401: // dma chain
 #ifdef PSXDMA_LOG
 			PSXDMA_LOG("*** DMA 2 - GPU dma chain *** %8.8lx addr = %lx size = %lx\n", chcr, madr, bcr);

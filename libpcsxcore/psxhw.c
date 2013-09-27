@@ -26,6 +26,9 @@
 #include "cdrom.h"
 #include "gpu.h"
 
+// Vampire Hunter D hack
+boolean dmaGpuListHackEn=FALSE;
+
 void psxHwReset() {
 	if (Config.SioIrq) psxHu32ref(0x1070) |= SWAP32(0x80);
 	if (Config.SpuIrq) psxHu32ref(0x1070) |= SWAP32(0x200);
@@ -201,14 +204,14 @@ u16 psxHwRead16(u32 add) {
 
 		default:
 			if (add >= 0x1f801c00 && add < 0x1f801e00) {
-            	hard = SPU_readRegister(add);
+				hard = SPU_readRegister(add);
 			} else {
 				hard = psxHu16(add); 
 #ifdef PSXHW_LOG
 				PSXHW_LOG("*Unkwnown 16bit read at address %x\n", add);
 #endif
 			}
-            return hard;
+			return hard;
 	}
 	
 #ifdef PSXHW_LOG
@@ -412,7 +415,7 @@ void psxHwWrite16(u32 add, u16 value) {
 #endif
 			return;
 		case 0x1f801048:
-            sioWriteMode16(value);
+			sioWriteMode16(value);
 #ifdef PAD_LOG
 			PAD_LOG ("sio write16 %x, %x\n", add&0xf, value);
 #endif
@@ -424,7 +427,7 @@ void psxHwWrite16(u32 add, u16 value) {
 #endif
 			return;
 		case 0x1f80104e: // baudrate register
-            sioWriteBaud16(value);
+			sioWriteBaud16(value);
 #ifdef PAD_LOG
 			PAD_LOG ("sio write16 %x, %x\n", add&0xf, value);
 #endif
@@ -527,7 +530,7 @@ void psxHwWrite16(u32 add, u16 value) {
 
 		default:
 			if (add>=0x1f801c00 && add<0x1f801e00) {
-            	SPU_writeRegister(add, value);
+				SPU_writeRegister(add, value);
 				return;
 			}
 
@@ -546,16 +549,14 @@ void psxHwWrite16(u32 add, u16 value) {
 #define DmaExec(n) { \
 	HW_DMA##n##_CHCR = SWAPu32(value); \
 \
-	if ((SWAPu32(HW_DMA##n##_CHCR) & 0x01000000 || \
-			(n == 2 && SWAPu32(HW_DMA##n##_CHCR) == 0x0401 && SWAPu32(HW_DMA##n##_BCR) == 0x0)) /* Vampire Hunter D */ && \
-			SWAPu32(HW_DMA_PCR) & (8 << (n * 4))) { \
+	if (SWAPu32(HW_DMA##n##_CHCR) & 0x01000000 && SWAPu32(HW_DMA_PCR) & (8 << (n * 4))) { \
 		psxDma##n(SWAPu32(HW_DMA##n##_MADR), SWAPu32(HW_DMA##n##_BCR), SWAPu32(HW_DMA##n##_CHCR)); \
 	} \
 }
 
 void psxHwWrite32(u32 add, u32 value) {
 	switch (add) {
-	    case 0x1f801040:
+		case 0x1f801040:
 			sioWrite8((unsigned char)value);
 			sioWrite8((unsigned char)((value&0xff) >>  8));
 			sioWrite8((unsigned char)((value&0xff) >> 16));
@@ -636,7 +637,19 @@ void psxHwWrite32(u32 add, u32 value) {
 #ifdef PSXHW_LOG
 			PSXHW_LOG("DMA2 CHCR 32bit write %x\n", value);
 #endif
+			/* A hack that makes Vampire Hunter D title screen visible,
+			/* but makes Tomb Raider II water effect to stay opaque
+			/* Root cause for this problem is that when DMA2 is issued
+			/* it is incompletele and still beign built by the game.
+			/* Maybe it is ready when some signal comes in or within given delay?
+			*/
+			if (dmaGpuListHackEn && value == 0x00000401 && HW_DMA2_BCR == 0x0) {
+				psxDma2(SWAPu32(HW_DMA2_MADR), SWAPu32(HW_DMA2_BCR), SWAPu32(value));
+				return;
+			}
 			DmaExec(2);                  // DMA2 chcr (GPU DMA)
+			if (HW_DMA2_CHCR == 0x1000401)
+				dmaGpuListHackEn=TRUE;
 			return;
 
 #ifdef PSXHW_LOG
@@ -717,6 +730,8 @@ void psxHwWrite32(u32 add, u32 value) {
 #ifdef PSXHW_LOG
 			PSXHW_LOG("GPU STATUS 32bit write %x\n", value);
 #endif
+			if (value & 0x8000000)
+				dmaGpuListHackEn=FALSE;
 			GPU_writeStatus(value); return;
 
 		case 0x1f801820:
@@ -775,8 +790,7 @@ void psxHwWrite32(u32 add, u32 value) {
 		default:
 			// Dukes of Hazard 2 - car engine noise
 			if (add>=0x1f801c00 && add<0x1f801e00) {
-        SPU_writeRegister(add, value&0xffff);
-				
+				SPU_writeRegister(add, value&0xffff);
 				add += 2;
 				value >>= 16;
 
