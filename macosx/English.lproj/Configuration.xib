@@ -51,7 +51,7 @@
                         <tabViewItems>
                             <tabViewItem label="Emulation" identifier="1" id="240">
                                 <view key="view" id="239">
-                                    <rect key="frame" x="10" y="33" width="506" height="411"/>
+                                    <rect key="frame" x="10" y="33" width="505.99999999999994" height="411"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <box title="Options" translatesAutoresizingMaskIntoConstraints="NO" id="502">
@@ -169,14 +169,14 @@
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
                                         <box title="Game Fixes" translatesAutoresizingMaskIntoConstraints="NO" id="509">
-                                            <rect key="frame" x="211" y="300" width="278" height="91"/>
+                                            <rect key="frame" x="211" y="300" width="277.99999999999994" height="91"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                             <view key="contentView">
-                                                <rect key="frame" x="2" y="2" width="274" height="74"/>
+                                                <rect key="frame" x="2" y="2" width="273.99999999999994" height="74"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <matrix verticalHuggingPriority="750" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="512" userLabel="Game Fixes">
-                                                        <rect key="frame" x="18" y="16" width="238" height="40"/>
+                                                        <rect key="frame" x="18" y="16" width="237.99999999999994" height="40"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         <size key="cellSize" width="238" height="18"/>
@@ -214,10 +214,10 @@
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
                                         <box title="Hacks" translatesAutoresizingMaskIntoConstraints="NO" id="542">
-                                            <rect key="frame" x="211" y="150" width="278" height="97"/>
+                                            <rect key="frame" x="211" y="150" width="277.99999999999994" height="97"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                             <view key="contentView">
-                                                <rect key="frame" x="2" y="2" width="274" height="80"/>
+                                                <rect key="frame" x="2" y="2" width="273.99999999999994" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <matrix verticalHuggingPriority="750" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="544" userLabel="Hacks">
@@ -272,7 +272,7 @@
                             </tabViewItem>
                             <tabViewItem label="Plugins" identifier="2" id="241">
                                 <view key="view" id="242">
-                                    <rect key="frame" x="10" y="33" width="506" height="411"/>
+                                    <rect key="frame" x="10" y="33" width="505.99999999999994" height="411"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <box title="Graphics" translatesAutoresizingMaskIntoConstraints="NO" id="257">
@@ -283,7 +283,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="262">
-                                                        <rect key="frame" x="118" y="7" width="90" height="28"/>
+                                                        <rect key="frame" x="118.00000000000001" y="7" width="90" height="28"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                                         <buttonCell key="cell" type="push" title="Configure…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="600">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -339,14 +339,14 @@
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
                                         <box title="Sound" translatesAutoresizingMaskIntoConstraints="NO" id="291">
-                                            <rect key="frame" x="269" y="300" width="220" height="91"/>
+                                            <rect key="frame" x="268.99999999999994" y="300" width="220" height="91"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                             <view key="contentView">
-                                                <rect key="frame" x="2.0000000000001137" y="2" width="216" height="74"/>
+                                                <rect key="frame" x="2" y="2" width="216" height="74"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="292">
-                                                        <rect key="frame" x="118" y="7" width="90" height="28"/>
+                                                        <rect key="frame" x="118.00000000000001" y="7" width="90" height="28"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                                         <buttonCell key="cell" type="push" title="Configure…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="603">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -406,7 +406,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="301">
-                                                        <rect key="frame" x="118" y="7" width="90" height="28"/>
+                                                        <rect key="frame" x="118.00000000000001" y="7" width="90" height="28"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                                         <buttonCell key="cell" type="push" title="Configure…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="605">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -459,14 +459,14 @@
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
                                         <box title="CD-ROM" translatesAutoresizingMaskIntoConstraints="NO" id="302">
-                                            <rect key="frame" x="269" y="158" width="220" height="91"/>
+                                            <rect key="frame" x="268.99999999999994" y="158" width="220" height="91"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <view key="contentView">
-                                                <rect key="frame" x="2.0000000000001137" y="2" width="216" height="74"/>
+                                                <rect key="frame" x="2" y="2" width="216" height="74"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="297">
-                                                        <rect key="frame" x="118" y="7" width="90" height="28"/>
+                                                        <rect key="frame" x="118" y="7" width="90.000000000000014" height="28"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                                         <buttonCell key="cell" type="push" title="Configure…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="609">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -526,7 +526,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="625">
-                                                        <rect key="frame" x="118" y="7" width="90" height="28"/>
+                                                        <rect key="frame" x="118.00000000000001" y="7" width="90" height="28"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                                         <buttonCell key="cell" type="push" title="Configure…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="626">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -579,14 +579,14 @@
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
                                         <box title="SIO1" translatesAutoresizingMaskIntoConstraints="NO" id="902">
-                                            <rect key="frame" x="269" y="16" width="220" height="91"/>
+                                            <rect key="frame" x="268.99999999999994" y="16" width="220" height="91"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                             <view key="contentView">
-                                                <rect key="frame" x="2.0000000000001137" y="2" width="216" height="74"/>
+                                                <rect key="frame" x="2" y="2" width="216" height="74"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="903">
-                                                        <rect key="frame" x="118" y="7" width="90" height="28"/>
+                                                        <rect key="frame" x="118" y="7" width="90.000000000000014" height="28"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                                         <buttonCell key="cell" type="push" title="Configure…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="910">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -665,11 +665,11 @@
                             </tabViewItem>
                             <tabViewItem label="Memory Cards" identifier="3" id="579">
                                 <view key="view" id="580">
-                                    <rect key="frame" x="10" y="33" width="505.99999999999994" height="411"/>
+                                    <rect key="frame" x="10" y="33" width="506" height="411"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="922">
-                                            <rect key="frame" x="223.99999999999997" y="273" width="58" height="32"/>
+                                            <rect key="frame" x="224" y="273" width="58" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="push" title="&lt;-" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="954">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -680,7 +680,7 @@
                                             </connections>
                                         </button>
                                         <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="923">
-                                            <rect key="frame" x="223.99999999999997" y="73" width="58" height="32"/>
+                                            <rect key="frame" x="224" y="73" width="58" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <buttonCell key="cell" type="push" title="->" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="952">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -691,7 +691,7 @@
                                             </connections>
                                         </button>
                                         <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="924">
-                                            <rect key="frame" x="303.99999999999994" y="61" width="182" height="264"/>
+                                            <rect key="frame" x="304" y="61" width="181.99999999999994" height="264"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                             <clipView key="contentView" id="Yf6-rO-8CR">
                                                 <rect key="frame" x="1" y="1" width="180" height="262"/>
@@ -708,8 +708,8 @@
                                                     </collectionView>
                                                 </subviews>
                                             </clipView>
-                                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" id="950">
-                                                <rect key="frame" x="1" y="144" width="233" height="15"/>
+                                            <scroller key="horizontalScroller" verticalHuggingPriority="750" id="950">
+                                                <rect key="frame" x="1" y="247" width="179.99999999999994" height="16"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" id="949">
@@ -737,7 +737,7 @@
                                             </clipView>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="264" id="IgP-M1-qCs"/>
-                                                <constraint firstAttribute="width" constant="182" id="Zi2-VL-89Y"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="182" id="Zi2-VL-89Y"/>
                                             </constraints>
                                             <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" id="947">
                                                 <rect key="frame" x="1" y="144" width="233" height="15"/>
@@ -749,7 +749,7 @@
                                             </scroller>
                                         </scrollView>
                                         <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="926">
-                                            <rect key="frame" x="297.99999999999994" y="13" width="98" height="32"/>
+                                            <rect key="frame" x="298" y="13" width="98" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                             <buttonCell key="cell" type="push" title="Format…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="945">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -782,7 +782,7 @@
                                             </connections>
                                         </button>
                                         <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="929">
-                                            <rect key="frame" x="398.99999999999994" y="13" width="93" height="32"/>
+                                            <rect key="frame" x="399" y="13" width="93" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                             <buttonCell key="cell" type="push" title="Delete…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="942">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -900,7 +900,7 @@
                             </tabViewItem>
                             <tabViewItem label="Hotkeys" identifier="4" id="655">
                                 <view key="view" id="656" userLabel="Hotkey View" customClass="HotkeyController">
-                                    <rect key="frame" x="10" y="33" width="506" height="411"/>
+                                    <rect key="frame" x="10" y="33" width="505.99999999999994" height="411"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button identifier="FastForward" verticalHuggingPriority="750" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="769">
@@ -918,7 +918,7 @@
                                             </connections>
                                         </button>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="771">
-                                            <rect key="frame" x="145" y="370" width="341.00000000000011" height="22"/>
+                                            <rect key="frame" x="145" y="370" width="341" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="None..." bezelStyle="round" id="772">
                                                 <font key="font" metaFont="system"/>
@@ -938,7 +938,7 @@
                                             </connections>
                                         </button>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="897">
-                                            <rect key="frame" x="145" y="337" width="341.00000000000011" height="22"/>
+                                            <rect key="frame" x="145" y="337" width="341" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="None..." bezelStyle="round" id="898">
                                                 <font key="font" metaFont="system"/>
@@ -958,7 +958,7 @@
                                             </connections>
                                         </button>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="851">
-                                            <rect key="frame" x="145" y="304" width="341.00000000000011" height="22"/>
+                                            <rect key="frame" x="145" y="304" width="341" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="None..." bezelStyle="round" id="852">
                                                 <font key="font" metaFont="system"/>
@@ -978,7 +978,7 @@
                                             </connections>
                                         </button>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="870">
-                                            <rect key="frame" x="145" y="271" width="341.00000000000011" height="22"/>
+                                            <rect key="frame" x="145" y="271" width="341" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="None..." bezelStyle="round" id="871">
                                                 <font key="font" metaFont="system"/>
@@ -998,7 +998,7 @@
                                             </connections>
                                         </button>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="872">
-                                            <rect key="frame" x="145" y="238" width="341.00000000000011" height="22"/>
+                                            <rect key="frame" x="145" y="238" width="341" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="None..." bezelStyle="round" id="873">
                                                 <font key="font" metaFont="system"/>
@@ -1018,7 +1018,7 @@
                                             </connections>
                                         </button>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="874">
-                                            <rect key="frame" x="145" y="205" width="341.00000000000011" height="22"/>
+                                            <rect key="frame" x="145" y="205" width="341" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="None..." bezelStyle="round" id="875">
                                                 <font key="font" metaFont="system"/>
@@ -1027,7 +1027,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="884">
-                                            <rect key="frame" x="3" y="182" width="500" height="5"/>
+                                            <rect key="frame" x="3" y="182" width="499.99999999999994" height="5"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="zce-SA-vPl"/>
@@ -1215,11 +1215,6 @@
                                         </textFieldCell>
                                         <connections>
                                             <binding destination="958" name="value" keyPath="representedObject.blockSize" id="1052"/>
-                                            <binding destination="958" name="hidden" keyPath="representedObject.isBiggerThanOne" id="1055">
-                                                <dictionary key="options">
-                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                                </dictionary>
-                                            </binding>
                                         </connections>
                                     </textField>
                                 </subviews>
