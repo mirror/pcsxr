@@ -1942,7 +1942,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#Some code taken from the MPlayerX people.\nruby updateInfoPlist.rb Info.plist\ntouch -amfc Info.plistvers.plist\n\nexit 0\n";
+			shellScript = "#Some code taken from the MPlayerX people.\nexport PATH=\"/usr/bin:/bin:/usr/sbin:/sbin\"\nruby updateInfoPlist.rb Info.plist\ntouch -amfc Info.plistvers.plist\n\nexit 0\n";
 		};
 		55F41A3317EF8CFF00605DF8 /* Strip Headers */ = {
 			isa = PBXShellScriptBuildPhase;
