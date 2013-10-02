@@ -44,22 +44,37 @@ unsigned short CALLBACK SPUreadDMA(void)
 void CALLBACK SPUreadDMAMem(unsigned short * pusPSXMem,int iSize)
 {
  int i;
+ unsigned char crc=0;
 
  spuStat |= STAT_DATA_BUSY;
 
  for(i=0;i<iSize;i++)
   {
-	 Check_IRQ( spuAddr, 0 );
+   Check_IRQ( spuAddr, 0 );
 
-		
-	 *pusPSXMem++=spuMem[spuAddr>>1];                    // spu addr got by writeregister
-   spuAddr+=2;                                         // inc spu addr
+   crc|=*pusPSXMem++=spuMem[spuAddr>>1]; // spu addr got by writeregister
+   spuAddr+=2;                           // inc spu addr
+   spuMem[spuAddr>>1];
 
-	 // guess based on Vib Ribbon (below)
+   // guess based on Vib Ribbon (below)
    if(spuAddr>0x7ffff) break;
   }
 
  iSpuAsyncWait=0;
+
+ /*
+ /* Toshiden Subaru "story screen" hack.
+ /*
+ /* After character selection screen, the game checks values inside returned
+ /* SPU buffer and all values cannot be 0x0.
+ /* Due to XA timings(?) we return buffer that has only NULLs.
+ /* Setting little lag to MixXA() causes buffer to have some non-NULL values,
+ /* but causes garbage sound so this hack is preferable.
+ /*
+ /* Note: When messing with xa.c like fixing Suikoden II's demo video sound issue
+ /* this should be handled as well.
+ */
+ if (crc == 0) *--pusPSXMem=0xFF;
 
  spuStat &= ~STAT_DATA_BUSY;
  spuStat &= ~STAT_DMA_NON;

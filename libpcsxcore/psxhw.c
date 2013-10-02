@@ -298,12 +298,12 @@ u32 psxHwRead32(u32 add) {
 #endif
 
 #ifdef PSXHW_LOG
-/*		case 0x1f8010f0:
-			PSXHW_LOG("DMA PCR 32bit read %x\n", psxHu32(0x10f0));
-			return SWAPu32(HW_DMA_PCR); // dma rest channel
+		case 0x1f8010f0:
+			PSXHW_LOG("DMA PCR 32bit read %x\n", HW_DMA_PCR);
+			return SWAPu32(HW_DMA_PCR); // DMA control register
 		case 0x1f8010f4:
-			PSXHW_LOG("DMA ICR 32bit read %x\n", psxHu32(0x10f4));
-			return SWAPu32(HW_DMA_ICR); // interrupt enabler?*/
+			PSXHW_LOG("DMA ICR 32bit read %x\n", HW_DMA_ICR);
+			return SWAPu32(HW_DMA_ICR); // DMA interrupt register (enable/ack)
 #endif
 
 		// time for rootcounters :)
@@ -361,11 +361,17 @@ u32 psxHwRead32(u32 add) {
 			PSXHW_LOG("T2 target read32: %x\n", hard);
 #endif
 			return hard;
+		case 0x1f801014:
+			hard = psxHu32(add);
+#ifdef PSXHW_LOG
+			PSXHW_LOG("SPU delay [0x1014] read32: %8.8lx\n", hard);
+#endif
+			return hard;
 
 		default:
 			hard = psxHu32(add); 
 #ifdef PSXHW_LOG
-			PSXHW_LOG("*Unkwnown 32bit read at address %x\n", add);
+			PSXHW_LOG("*Unknown 32bit read at address %x (0x%8.8lx)\n", add, hard);
 #endif
 			return hard;
 	}
@@ -721,6 +727,13 @@ void psxHwWrite32(u32 add, u32 value) {
 			return;
 		}
 
+
+		case 0x1f801014:
+#ifdef PSXHW_LOG
+			PSXHW_LOG("SPU delay [0x1014] write32: %8.8lx\n", value);
+#endif
+			psxHu32ref(add) = SWAPu32(value);
+			return;
 		case 0x1f801810:
 #ifdef PSXHW_LOG
 			PSXHW_LOG("GPU DATA 32bit write %x\n", value);

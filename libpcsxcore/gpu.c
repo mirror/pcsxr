@@ -129,7 +129,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			return;
 
 		case 0x01000201: // mem2vram
-		bs=(bcr & 0xffff);
+			bs=(bcr & 0xffff);
 			size = (bcr >> 16) * bs; // BA blocks * BS words (word = 32-bits)
 #ifdef PSXDMA_LOG
 			PSXDMA_LOG("*** DMA 2 - GPU mem2vram *** %lx addr = %lxh, BCR %lxh => size %d = BA(%d) * BS(%xh)\n",
