@@ -1509,10 +1509,10 @@
 		557649B81786AFB7007C4457 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2B4DE98D05FF9307003EFEF0 /* PluginController.h */,
-				2B4DE98E05FF9307003EFEF0 /* PluginController.m */,
 				2B75FD3C051C56D200D12034 /* PcsxrController.h */,
 				2B75FD3D051C56D200D12034 /* PcsxrController.m */,
+				2B4DE98D05FF9307003EFEF0 /* PluginController.h */,
+				2B4DE98E05FF9307003EFEF0 /* PluginController.m */,
 				2B75FD4A051C8A7400D12034 /* ConfigurationController.h */,
 				2B75FD4B051C8A7400D12034 /* ConfigurationController.m */,
 				55A9021E147D7C380037E18F /* PcsxrMemCardController.h */,

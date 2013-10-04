@@ -51,6 +51,7 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 @property (readwrite) BOOL endAtEmuClose;
 @property BOOL sleepInBackground;
 @property BOOL wasPausedBeforeBGSwitch;
+@property BOOL wasPausedBeforeDiscEject;
 @property (strong) NSMutableArray *skipFiles;
 @property (strong) NSWindow *preferenceWindow;
 @property (strong) NSWindow *cheatWindow;
@@ -94,6 +95,16 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 	PSXflags.wasPausedBeforeBGSwitch = wasPausedBeforeBGSwitch;
 }
 
+- (BOOL)wasPausedBeforeDiscEject
+{
+	return PSXflags.wasPausedBeforeDiscEject;
+}
+
+-(void)setWasPausedBeforeDiscEject:(BOOL)wasPausedBeforeDiscEject
+{
+	PSXflags.wasPausedBeforeDiscEject = wasPausedBeforeDiscEject;
+}
+
 @synthesize diskSession = _diskSession;
 - (void)setDiskSession:(DASessionRef)diskSession
 {
@@ -102,13 +113,13 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 	}
 	if (_diskSession) {
 		CFRelease(_diskSession);
+		_diskSession = NULL;
 	}if (diskSession) {
 		_diskSession = diskSession;
 		CFRetain(diskSession);
 	}
 }
 
-static BOOL wasPaused;
 static void PSXDiscAppearedCallback(DADiskRef disk, void *context)
 {
 	PcsxrController *theSelf = (__bridge PcsxrController*)context;
@@ -120,7 +131,7 @@ static void PSXDiscAppearedCallback(DADiskRef disk, void *context)
 	if ([EmuThread active])
 		CDR_open();
 	
-	if (!wasPaused) {
+	if (theSelf.wasPausedBeforeDiscEject) {
 		[EmuThread resume];
 	}
 
@@ -130,17 +141,17 @@ static void PSXDiscAppearedCallback(DADiskRef disk, void *context)
 
 - (IBAction)ejectCD:(id)sender
 {
-	wasPaused = [EmuThread pauseSafe];
-
+	self.wasPausedBeforeDiscEject = [EmuThread pauseSafe];
+	
 	/* close connection to current cd */
 	if ([EmuThread active])
 		CDR_close();
-
+	
 	// switch to another ISO if using internal image reader, otherwise eject the CD
 	if (UsingIso()) {
 		NSOpenPanel* openDlg = [NSOpenPanel openPanel];
 		[openDlg setAllowedFileTypes:[PcsxrDiscHandler supportedUTIs]];
-
+		
 		if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
 			NSArray* files = [openDlg URLs];
 			SetIsoFile([[files[0] path] fileSystemRepresentation]);
@@ -151,7 +162,7 @@ static void PSXDiscAppearedCallback(DADiskRef disk, void *context)
 		if ([EmuThread active])
 			CDR_open();
 		
-		if (!wasPaused) {
+		if (self.wasPausedBeforeDiscEject) {
 			[EmuThread resume];
 		}
 	} else {
@@ -162,7 +173,7 @@ static void PSXDiscAppearedCallback(DADiskRef disk, void *context)
         
 		if (driveLetter != NULL) {
 			deviceName = [NSMutableString stringWithString:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:driveLetter length:strlen(driveLetter)]];
-
+			
 			// delete the 'r' in 'rdisk'
 			rdiskRange = [deviceName rangeOfString:@"rdisk"];
 			if (rdiskRange.length != 0) {

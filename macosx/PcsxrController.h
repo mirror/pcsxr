@@ -20,7 +20,8 @@ void ShowHelpAndExit(FILE* output, int exitCode);
 		unsigned int sleepInBackground:1;
 		unsigned int wasPausedBeforeBGSwitch:1;
 		unsigned int endAtEmuClose:1;
-		unsigned int reserved:25;
+		unsigned int wasPausedBeforeDiscEject:1;
+		unsigned int reserved:28;
 	} PSXflags;
 }
 @property (weak) IBOutlet RecentItemsMenu *recentItems;
