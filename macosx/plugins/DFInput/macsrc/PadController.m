@@ -131,20 +131,27 @@ static void SetDefaultConfig() {
 	g.cfg.PadDef[1].KeyDef[DKEY_SQUARE].J.Button = 3;
 }
 
-
-
 void LoadPADConfig()
 {
 	SetDefaultConfig();
-	[[NSUserDefaults standardUserDefaults] registerDefaults:
+	BOOL tryToLoadOld = YES;
+	//Do we have the new settings?
+	//This is placed here so we don't have the prefskey defined.
+	NSUserDefaults *usrDefaults = [NSUserDefaults standardUserDefaults];
+	if ([usrDefaults objectForKey:PrefsKey]) {
+		//Yes we do, don't load the old.
+		tryToLoadOld = NO;
+	}
+	
+	[usrDefaults registerDefaults:
 	 @{PrefsKey: @{kDFPad1: DefaultPadArray(0),
 										 kDFPad2: DefaultPadArray(1),
 										 kDFThreading: @YES}}];
 	
-	//Load the old preferences if present.
+	//Load the old preferences if present and we don't have new ones.
 	NSFileManager *fm = [NSFileManager defaultManager];
 	NSString *oldPrefPath = [NSString pathWithComponents:@[NSHomeDirectory(), @"Library", @"Preferences", @"net.pcsxr.DFInput.plist"]];
-	if ([fm fileExistsAtPath:oldPrefPath]) {
+	if ([fm fileExistsAtPath:oldPrefPath] && tryToLoadOld) {
 		char buf[256] = {0};
 		int current = 0, a = 0, b = 0, c = 0;
 
@@ -301,7 +308,7 @@ void LoadPADConfig()
 		//Delete the old preferences
 		[fm removeItemAtPath:oldPrefPath error:NULL];
 	} else {
-		NSDictionary *dfPrefs = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey];
+		NSDictionary *dfPrefs = [usrDefaults dictionaryForKey:PrefsKey];
 		g.cfg.Threaded = [dfPrefs[kDFThreading] boolValue];
 		LoadPadArray(0, dfPrefs[kDFPad1]);
 		LoadPadArray(1, dfPrefs[kDFPad2]);
