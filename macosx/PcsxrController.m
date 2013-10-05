@@ -131,7 +131,7 @@ static void PSXDiscAppearedCallback(DADiskRef disk, void *context)
 	if ([EmuThread active])
 		CDR_open();
 	
-	if (theSelf.wasPausedBeforeDiscEject) {
+	if (!theSelf.wasPausedBeforeDiscEject) {
 		[EmuThread resume];
 	}
 
@@ -162,7 +162,7 @@ static void PSXDiscAppearedCallback(DADiskRef disk, void *context)
 		if ([EmuThread active])
 			CDR_open();
 		
-		if (self.wasPausedBeforeDiscEject) {
+		if (!self.wasPausedBeforeDiscEject) {
 			[EmuThread resume];
 		}
 	} else {
