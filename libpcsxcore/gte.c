@@ -1,235 +1,175 @@
-/***************************************************************************
- *   PCSX-Revolution - PlayStation Emulator for Nintendo Wii               *
- *   Copyright (C) 2009-2010  PCSX-Revolution Dev Team                     *
- *   <http://code.google.com/p/pcsx-revolution/>                           *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.           *
- ***************************************************************************/
-
 /*
-* GTE functions.
-*/
+ * PlayStation Geometry Transformation Engine emulator
+ *
+ * Copyright 2003-2013 smf
+ *
+ */
 
 #include "gte.h"
 #include "psxmem.h"
 
-#define VX(n) (n < 3 ? psxRegs.CP2D.p[n << 1].sw.l : psxRegs.CP2D.p[9].sw.l)
-#define VY(n) (n < 3 ? psxRegs.CP2D.p[n << 1].sw.h : psxRegs.CP2D.p[10].sw.l)
-#define VZ(n) (n < 3 ? psxRegs.CP2D.p[(n << 1) + 1].sw.l : psxRegs.CP2D.p[11].sw.l)
-#define MX11(n) (n < 3 ? psxRegs.CP2C.p[(n << 3)].sw.l : 0)
-#define MX12(n) (n < 3 ? psxRegs.CP2C.p[(n << 3)].sw.h : 0)
-#define MX13(n) (n < 3 ? psxRegs.CP2C.p[(n << 3) + 1].sw.l : 0)
-#define MX21(n) (n < 3 ? psxRegs.CP2C.p[(n << 3) + 1].sw.h : 0)
-#define MX22(n) (n < 3 ? psxRegs.CP2C.p[(n << 3) + 2].sw.l : 0)
-#define MX23(n) (n < 3 ? psxRegs.CP2C.p[(n << 3) + 2].sw.h : 0)
-#define MX31(n) (n < 3 ? psxRegs.CP2C.p[(n << 3) + 3].sw.l : 0)
-#define MX32(n) (n < 3 ? psxRegs.CP2C.p[(n << 3) + 3].sw.h : 0)
-#define MX33(n) (n < 3 ? psxRegs.CP2C.p[(n << 3) + 4].sw.l : 0)
-#define CV1(n) (n < 3 ? (s32)psxRegs.CP2C.r[(n << 3) + 5] : 0)
-#define CV2(n) (n < 3 ? (s32)psxRegs.CP2C.r[(n << 3) + 6] : 0)
-#define CV3(n) (n < 3 ? (s32)psxRegs.CP2C.r[(n << 3) + 7] : 0)
-
-#define fSX(n) ((psxRegs.CP2D.p)[((n) + 12)].sw.l)
-#define fSY(n) ((psxRegs.CP2D.p)[((n) + 12)].sw.h)
-#define fSZ(n) ((psxRegs.CP2D.p)[((n) + 17)].w.l) /* (n == 0) => SZ1; */
-
-#define gteVXY0 (psxRegs.CP2D.r[0])
-#define gteVX0  (psxRegs.CP2D.p[0].sw.l)
-#define gteVY0  (psxRegs.CP2D.p[0].sw.h)
-#define gteVZ0  (psxRegs.CP2D.p[1].sw.l)
-#define gteVXY1 (psxRegs.CP2D.r[2])
-#define gteVX1  (psxRegs.CP2D.p[2].sw.l)
-#define gteVY1  (psxRegs.CP2D.p[2].sw.h)
-#define gteVZ1  (psxRegs.CP2D.p[3].sw.l)
-#define gteVXY2 (psxRegs.CP2D.r[4])
-#define gteVX2  (psxRegs.CP2D.p[4].sw.l)
-#define gteVY2  (psxRegs.CP2D.p[4].sw.h)
-#define gteVZ2  (psxRegs.CP2D.p[5].sw.l)
-#define gteRGB  (psxRegs.CP2D.r[6])
-#define gteR    (psxRegs.CP2D.p[6].b.l)
-#define gteG    (psxRegs.CP2D.p[6].b.h)
-#define gteB    (psxRegs.CP2D.p[6].b.h2)
-#define gteCODE (psxRegs.CP2D.p[6].b.h3)
-#define gteOTZ  (psxRegs.CP2D.p[7].w.l)
-#define gteIR0  (psxRegs.CP2D.p[8].sw.l)
-#define gteIR1  (psxRegs.CP2D.p[9].sw.l)
-#define gteIR2  (psxRegs.CP2D.p[10].sw.l)
-#define gteIR3  (psxRegs.CP2D.p[11].sw.l)
-#define gteSXY0 (psxRegs.CP2D.r[12])
-#define gteSX0  (psxRegs.CP2D.p[12].sw.l)
-#define gteSY0  (psxRegs.CP2D.p[12].sw.h)
-#define gteSXY1 (psxRegs.CP2D.r[13])
-#define gteSX1  (psxRegs.CP2D.p[13].sw.l)
-#define gteSY1  (psxRegs.CP2D.p[13].sw.h)
-#define gteSXY2 (psxRegs.CP2D.r[14])
-#define gteSX2  (psxRegs.CP2D.p[14].sw.l)
-#define gteSY2  (psxRegs.CP2D.p[14].sw.h)
-#define gteSXYP (psxRegs.CP2D.r[15])
-#define gteSXP  (psxRegs.CP2D.p[15].sw.l)
-#define gteSYP  (psxRegs.CP2D.p[15].sw.h)
-#define gteSZ0  (psxRegs.CP2D.p[16].w.l)
-#define gteSZ1  (psxRegs.CP2D.p[17].w.l)
-#define gteSZ2  (psxRegs.CP2D.p[18].w.l)
-#define gteSZ3  (psxRegs.CP2D.p[19].w.l)
-#define gteRGB0  (psxRegs.CP2D.r[20])
-#define gteR0    (psxRegs.CP2D.p[20].b.l)
-#define gteG0    (psxRegs.CP2D.p[20].b.h)
-#define gteB0    (psxRegs.CP2D.p[20].b.h2)
-#define gteCODE0 (psxRegs.CP2D.p[20].b.h3)
-#define gteRGB1  (psxRegs.CP2D.r[21])
-#define gteR1    (psxRegs.CP2D.p[21].b.l)
-#define gteG1    (psxRegs.CP2D.p[21].b.h)
-#define gteB1    (psxRegs.CP2D.p[21].b.h2)
-#define gteCODE1 (psxRegs.CP2D.p[21].b.h3)
-#define gteRGB2  (psxRegs.CP2D.r[22])
-#define gteR2    (psxRegs.CP2D.p[22].b.l)
-#define gteG2    (psxRegs.CP2D.p[22].b.h)
-#define gteB2    (psxRegs.CP2D.p[22].b.h2)
-#define gteCODE2 (psxRegs.CP2D.p[22].b.h3)
-#define gteRES1  (psxRegs.CP2D.r[23])
-#define gteMAC0  (((s32 *)psxRegs.CP2D.r)[24])
-#define gteMAC1  (((s32 *)psxRegs.CP2D.r)[25])
-#define gteMAC2  (((s32 *)psxRegs.CP2D.r)[26])
-#define gteMAC3  (((s32 *)psxRegs.CP2D.r)[27])
-#define gteIRGB  (psxRegs.CP2D.r[28])
-#define gteORGB  (psxRegs.CP2D.r[29])
-#define gteLZCS  (psxRegs.CP2D.r[30])
-#define gteLZCR  (psxRegs.CP2D.r[31])
-
-#define gteR11R12 (((s32 *)psxRegs.CP2C.r)[0])
-#define gteR22R23 (((s32 *)psxRegs.CP2C.r)[2])
-#define gteR11 (psxRegs.CP2C.p[0].sw.l)
-#define gteR12 (psxRegs.CP2C.p[0].sw.h)
-#define gteR13 (psxRegs.CP2C.p[1].sw.l)
-#define gteR21 (psxRegs.CP2C.p[1].sw.h)
-#define gteR22 (psxRegs.CP2C.p[2].sw.l)
-#define gteR23 (psxRegs.CP2C.p[2].sw.h)
-#define gteR31 (psxRegs.CP2C.p[3].sw.l)
-#define gteR32 (psxRegs.CP2C.p[3].sw.h)
-#define gteR33 (psxRegs.CP2C.p[4].sw.l)
-#define gteTRX (((s32 *)psxRegs.CP2C.r)[5])
-#define gteTRY (((s32 *)psxRegs.CP2C.r)[6])
-#define gteTRZ (((s32 *)psxRegs.CP2C.r)[7])
-#define gteL11 (psxRegs.CP2C.p[8].sw.l)
-#define gteL12 (psxRegs.CP2C.p[8].sw.h)
-#define gteL13 (psxRegs.CP2C.p[9].sw.l)
-#define gteL21 (psxRegs.CP2C.p[9].sw.h)
-#define gteL22 (psxRegs.CP2C.p[10].sw.l)
-#define gteL23 (psxRegs.CP2C.p[10].sw.h)
-#define gteL31 (psxRegs.CP2C.p[11].sw.l)
-#define gteL32 (psxRegs.CP2C.p[11].sw.h)
-#define gteL33 (psxRegs.CP2C.p[12].sw.l)
-#define gteRBK (((s32 *)psxRegs.CP2C.r)[13])
-#define gteGBK (((s32 *)psxRegs.CP2C.r)[14])
-#define gteBBK (((s32 *)psxRegs.CP2C.r)[15])
-#define gteLR1 (psxRegs.CP2C.p[16].sw.l)
-#define gteLR2 (psxRegs.CP2C.p[16].sw.h)
-#define gteLR3 (psxRegs.CP2C.p[17].sw.l)
-#define gteLG1 (psxRegs.CP2C.p[17].sw.h)
-#define gteLG2 (psxRegs.CP2C.p[18].sw.l)
-#define gteLG3 (psxRegs.CP2C.p[18].sw.h)
-#define gteLB1 (psxRegs.CP2C.p[19].sw.l)
-#define gteLB2 (psxRegs.CP2C.p[19].sw.h)
-#define gteLB3 (psxRegs.CP2C.p[20].sw.l)
-#define gteRFC (((s32 *)psxRegs.CP2C.r)[21])
-#define gteGFC (((s32 *)psxRegs.CP2C.r)[22])
-#define gteBFC (((s32 *)psxRegs.CP2C.r)[23])
-#define gteOFX (((s32 *)psxRegs.CP2C.r)[24])
-#define gteOFY (((s32 *)psxRegs.CP2C.r)[25])
-#define gteH   (psxRegs.CP2C.p[26].sw.l)
-#define gteDQA (psxRegs.CP2C.p[27].sw.l)
-#define gteDQB (((s32 *)psxRegs.CP2C.r)[28])
-#define gteZSF3 (psxRegs.CP2C.p[29].sw.l)
-#define gteZSF4 (psxRegs.CP2C.p[30].sw.l)
-#define gteFLAG (psxRegs.CP2C.r[31])
-
-#define SUM_FLAG { if( gteFLAG & 0x7f87e000 ) gteFLAG |= 0x80000000; }
-
-#define GTE_OP(op) ((op >> 20) & 31)
 #define GTE_SF(op) ((op >> 19) & 1)
 #define GTE_MX(op) ((op >> 17) & 3)
 #define GTE_V(op) ((op >> 15) & 3)
 #define GTE_CV(op) ((op >> 13) & 3)
-#define GTE_CD(op) ((op >> 11) & 3) /* not used */
 #define GTE_LM(op) ((op >> 10) & 1)
-#define GTE_CT(op) ((op >> 6) & 15) /* not used */
 #define GTE_FUNCT(op) (op & 63)
 
 #define gteop (psxRegs.code & 0x1ffffff)
 
-static inline s64 BOUNDS(s64 n_value, s64 n_max, int n_maxflag, s64 n_min, int n_minflag) {
-	if (n_value > n_max) {
-		gteFLAG |= n_maxflag;
-	} else if (n_value < n_min) {
-		gteFLAG |= n_minflag;
+#define VX0  (psxRegs.CP2D.p[ 0 ].sw.l)
+#define VY0  (psxRegs.CP2D.p[ 0 ].sw.h)
+#define VZ0  (psxRegs.CP2D.p[ 1 ].sw.l)
+#define VX1  (psxRegs.CP2D.p[ 2 ].w.l)
+#define VY1  (psxRegs.CP2D.p[ 2 ].w.h)
+#define VZ1  (psxRegs.CP2D.p[ 3 ].w.l)
+#define VX2  (psxRegs.CP2D.p[ 4 ].w.l)
+#define VY2  (psxRegs.CP2D.p[ 4 ].w.h)
+#define VZ2  (psxRegs.CP2D.p[ 5 ].w.l)
+#define R    (psxRegs.CP2D.p[ 6 ].b.l)
+#define G    (psxRegs.CP2D.p[ 6 ].b.h)
+#define B    (psxRegs.CP2D.p[ 6 ].b.h2)
+#define CODE (psxRegs.CP2D.p[ 6 ].b.h3)
+#define OTZ  (psxRegs.CP2D.p[ 7 ].w.l)
+#define IR0  (psxRegs.CP2D.p[ 8 ].sw.l)
+#define IR1  (psxRegs.CP2D.p[ 9 ].sw.l)
+#define IR2  (psxRegs.CP2D.p[ 10 ].sw.l)
+#define IR3  (psxRegs.CP2D.p[ 11 ].sw.l)
+#define SXY0 (psxRegs.CP2D.p[ 12 ].d)
+#define SX0  (psxRegs.CP2D.p[ 12 ].sw.l)
+#define SY0  (psxRegs.CP2D.p[ 12 ].sw.h)
+#define SXY1 (psxRegs.CP2D.p[ 13 ].d)
+#define SX1  (psxRegs.CP2D.p[ 13 ].sw.l)
+#define SY1  (psxRegs.CP2D.p[ 13 ].sw.h)
+#define SXY2 (psxRegs.CP2D.p[ 14 ].d)
+#define SX2  (psxRegs.CP2D.p[ 14 ].sw.l)
+#define SY2  (psxRegs.CP2D.p[ 14 ].sw.h)
+#define SXYP (psxRegs.CP2D.p[ 15 ].d)
+#define SXP  (psxRegs.CP2D.p[ 15 ].sw.l)
+#define SYP  (psxRegs.CP2D.p[ 15 ].sw.h)
+#define SZ0  (psxRegs.CP2D.p[ 16 ].w.l)
+#define SZ1  (psxRegs.CP2D.p[ 17 ].w.l)
+#define SZ2  (psxRegs.CP2D.p[ 18 ].w.l)
+#define SZ3  (psxRegs.CP2D.p[ 19 ].w.l)
+#define RGB0 (psxRegs.CP2D.p[ 20 ].d)
+#define R0   (psxRegs.CP2D.p[ 20 ].b.l)
+#define G0   (psxRegs.CP2D.p[ 20 ].b.h)
+#define B0   (psxRegs.CP2D.p[ 20 ].b.h2)
+#define CD0  (psxRegs.CP2D.p[ 20 ].b.h3)
+#define RGB1 (psxRegs.CP2D.p[ 21 ].d)
+#define R1   (psxRegs.CP2D.p[ 21 ].b.l)
+#define G1   (psxRegs.CP2D.p[ 21 ].b.h)
+#define B1   (psxRegs.CP2D.p[ 21 ].b.h2)
+#define CD1  (psxRegs.CP2D.p[ 21 ].b.h3)
+#define RGB2 (psxRegs.CP2D.p[ 22 ].d)
+#define R2   (psxRegs.CP2D.p[ 22 ].b.l)
+#define G2   (psxRegs.CP2D.p[ 22 ].b.h)
+#define B2   (psxRegs.CP2D.p[ 22 ].b.h2)
+#define CD2  (psxRegs.CP2D.p[ 22 ].b.h3)
+#define RES1 (psxRegs.CP2D.p[ 23 ].d)
+#define MAC0 (psxRegs.CP2D.p[ 24 ].sd)
+#define MAC1 (psxRegs.CP2D.p[ 25 ].sd)
+#define MAC2 (psxRegs.CP2D.p[ 26 ].sd)
+#define MAC3 (psxRegs.CP2D.p[ 27 ].sd)
+#define IRGB (psxRegs.CP2D.p[ 28 ].d)
+#define ORGB (psxRegs.CP2D.p[ 29 ].d)
+#define LZCS (psxRegs.CP2D.p[ 30 ].d)
+#define LZCR (psxRegs.CP2D.p[ 31 ].d)
+
+#define R11 (psxRegs.CP2C.p[ 0 ].sw.l)
+#define R12 (psxRegs.CP2C.p[ 0 ].sw.h)
+#define R13 (psxRegs.CP2C.p[ 1 ].sw.l)
+#define R21 (psxRegs.CP2C.p[ 1 ].sw.h)
+#define R22 (psxRegs.CP2C.p[ 2 ].sw.l)
+#define R23 (psxRegs.CP2C.p[ 2 ].sw.h)
+#define R31 (psxRegs.CP2C.p[ 3 ].sw.l)
+#define R32 (psxRegs.CP2C.p[ 3 ].sw.h)
+#define R33 (psxRegs.CP2C.p[ 4 ].sw.l)
+#define TRX (psxRegs.CP2C.p[ 5 ].sd)
+#define TRY (psxRegs.CP2C.p[ 6 ].sd)
+#define TRZ (psxRegs.CP2C.p[ 7 ].sd)
+#define L11 (psxRegs.CP2C.p[ 8 ].sw.l)
+#define L12 (psxRegs.CP2C.p[ 8 ].sw.h)
+#define L13 (psxRegs.CP2C.p[ 9 ].sw.l)
+#define L21 (psxRegs.CP2C.p[ 9 ].sw.h)
+#define L22 (psxRegs.CP2C.p[ 10 ].sw.l)
+#define L23 (psxRegs.CP2C.p[ 10 ].sw.h)
+#define L31 (psxRegs.CP2C.p[ 11 ].sw.l)
+#define L32 (psxRegs.CP2C.p[ 11 ].sw.h)
+#define L33 (psxRegs.CP2C.p[ 12 ].sw.l)
+#define RBK (psxRegs.CP2C.p[ 13 ].sd)
+#define GBK (psxRegs.CP2C.p[ 14 ].sd)
+#define BBK (psxRegs.CP2C.p[ 15 ].sd)
+#define LR1 (psxRegs.CP2C.p[ 16 ].sw.l)
+#define LR2 (psxRegs.CP2C.p[ 16 ].sw.h)
+#define LR3 (psxRegs.CP2C.p[ 17 ].sw.l)
+#define LG1 (psxRegs.CP2C.p[ 17 ].sw.h)
+#define LG2 (psxRegs.CP2C.p[ 18 ].sw.l)
+#define LG3 (psxRegs.CP2C.p[ 18 ].sw.h)
+#define LB1 (psxRegs.CP2C.p[ 19 ].sw.l)
+#define LB2 (psxRegs.CP2C.p[ 19 ].sw.h)
+#define LB3 (psxRegs.CP2C.p[ 20 ].sw.l)
+#define RFC (psxRegs.CP2C.p[ 21 ].sd)
+#define GFC (psxRegs.CP2C.p[ 22 ].sd)
+#define BFC (psxRegs.CP2C.p[ 23 ].sd)
+#define OFX (psxRegs.CP2C.p[ 24 ].sd)
+#define OFY (psxRegs.CP2C.p[ 25 ].sd)
+#define H   (psxRegs.CP2C.p[ 26 ].sw.l)
+#define DQA (psxRegs.CP2C.p[ 27 ].sw.l)
+#define DQB (psxRegs.CP2C.p[ 28 ].sd)
+#define ZSF3 (psxRegs.CP2C.p[ 29 ].sw.l)
+#define ZSF4 (psxRegs.CP2C.p[ 30 ].sw.l)
+#define FLAG (psxRegs.CP2C.p[ 31 ].d)
+
+#define VX(n) (n < 3 ? psxRegs.CP2D.p[ n << 1 ].sw.l : IR1)
+#define VY(n) (n < 3 ? psxRegs.CP2D.p[ n << 1 ].sw.h : IR2)
+#define VZ(n) (n < 3 ? psxRegs.CP2D.p[ (n << 1) + 1 ].sw.l : IR3)
+#define MX11(n) (n < 3 ? psxRegs.CP2C.p[ (n << 3) ].sw.l : -R << 4)
+#define MX12(n) (n < 3 ? psxRegs.CP2C.p[ (n << 3) ].sw.h : R << 4)
+#define MX13(n) (n < 3 ? psxRegs.CP2C.p[ (n << 3) + 1 ].sw.l : IR0)
+#define MX21(n) (n < 3 ? psxRegs.CP2C.p[ (n << 3) + 1 ].sw.h : R13)
+#define MX22(n) (n < 3 ? psxRegs.CP2C.p[ (n << 3) + 2 ].sw.l : R13)
+#define MX23(n) (n < 3 ? psxRegs.CP2C.p[ (n << 3) + 2 ].sw.h : R13)
+#define MX31(n) (n < 3 ? psxRegs.CP2C.p[ (n << 3) + 3 ].sw.l : R22)
+#define MX32(n) (n < 3 ? psxRegs.CP2C.p[ (n << 3) + 3 ].sw.h : R22)
+#define MX33(n) (n < 3 ? psxRegs.CP2C.p[ (n << 3) + 4 ].sw.l : R22)
+#define CV1(n) (n < 3 ? psxRegs.CP2C.p[ (n << 3) + 5 ].sd : 0)
+#define CV2(n) (n < 3 ? psxRegs.CP2C.p[ (n << 3) + 6 ].sd : 0)
+#define CV3(n) (n < 3 ? psxRegs.CP2C.p[ (n << 3) + 7 ].sd : 0)
+
+static int m_sf;
+static s64 m_mac0;
+static s64 m_mac3;
+
+static u32 gte_leadingzerocount(u32 lzcs) {
+	u32 lzcr = 0;
+
+	if((lzcs & 0x80000000) == 0)
+		lzcs = ~lzcs;
+
+	while((lzcs & 0x80000000) != 0) {
+		lzcr++;
+		lzcs <<= 1;
 	}
-	return n_value;
+
+	return lzcr;
 }
 
-static inline s64 LIM(s64 value, s64 max, s64 min, u32 flag) {
-	s64 ret = value;
-	if (value > max) {
-		gteFLAG |= flag;
-		ret = max;
-	} else if (value < min) {
-		gteFLAG |= flag;
-		ret = min;
+s32 LIM(s32 value, s32 max, s32 min, u32 flag) {
+	if(value > max) {
+		FLAG |= flag;
+		return max;
 	}
-	return ret;
+	else if(value < min) {
+		FLAG |= flag;
+		return min;
+	}
+	
+	return value;
 }
 
-#define A1(a) BOUNDS((a), 0x7fffffff, (1 << 30), -(s64)0x80000000, (1 << 27))
-#define A2(a) BOUNDS((a), 0x7fffffff, (1 << 29), -(s64)0x80000000, (1 << 26))
-#define A3(a) BOUNDS((a), 0x7fffffff, (1 << 28), -(s64)0x80000000, (1 << 25))
-#define limB1(a, l) LIM((a), 0x7fff, -0x8000 * !l, (1 << 24))
-#define limB2(a, l) LIM((a), 0x7fff, -0x8000 * !l, (1 << 23))
-#define limB3(a, l) LIM((a), 0x7fff, -0x8000 * !l, (1 << 22))
-#define limC1(a) LIM((a), 0x00ff, 0x0000, (1 << 21))
-#define limC2(a) LIM((a), 0x00ff, 0x0000, (1 << 20))
-#define limC3(a) LIM((a), 0x00ff, 0x0000, (1 << 19))
-#define limD(a) LIM((a), 0xffff, 0x0000, (1 << 18))
-
-static inline u32 limE(u32 result) {
-	if (result > 0x1ffff) {
-		gteFLAG |= (1 << 17);
-		return 0x1ffff;
-	}
-	return result;
-}
-
-static inline float flimE(float result) {
-	if (result > 0x1ffff) {
-		gteFLAG |= (1 << 17);
-		return 0x1ffff;
-	}
-	return result;
-}
-
-#define F(a) BOUNDS((a), 0x7fffffff, (1 << 16), -(s64)0x80000000, (1 << 15))
-#define limG1(a) LIM((a), 0x3ff, -0x400,(1 << 14))
-#define limG2(a) LIM((a), 0x3ff, -0x400, (1 << 13))
-#define limH(a) LIM((a), 0x1000, 0x0000, (1 << 12))
-
-#define limG1_ia(a) LIM((a), 0x3ffffff, -0x4000000, (1 << 14))
-#define limG2_ia(a) LIM((a), 0x3ffffff, -0x4000000, (1 << 13))
-
-#include "gte_divider.h"
-
-static inline u32 MFC2(int reg) {
-	switch (reg) {
+static u32 MFC2(int reg) {
+	switch(reg) {
 		case 1:
 		case 3:
 		case 5:
@@ -237,7 +177,7 @@ static inline u32 MFC2(int reg) {
 		case 9:
 		case 10:
 		case 11:
-			psxRegs.CP2D.r[reg] = (s32)psxRegs.CP2D.p[reg].sw.l;
+			psxRegs.CP2D.p[reg].d = (s32)psxRegs.CP2D.p[reg].sw.l;
 			break;
 
 		case 7:
@@ -245,96 +185,49 @@ static inline u32 MFC2(int reg) {
 		case 17:
 		case 18:
 		case 19:
-			psxRegs.CP2D.r[reg] = (u32)psxRegs.CP2D.p[reg].w.l;
+			psxRegs.CP2D.p[reg].d = (u32)psxRegs.CP2D.p[reg].w.l;
 			break;
 
 		case 15:
-			psxRegs.CP2D.r[reg] = gteSXY2;
+			psxRegs.CP2D.p[reg].d = SXY2;
 			break;
 
 		case 28:
 		case 29:
-			psxRegs.CP2D.r[reg] = LIM(gteIR1 >> 7, 0x1f, 0, 0) |
-									(LIM(gteIR2 >> 7, 0x1f, 0, 0) << 5) |
-									(LIM(gteIR3 >> 7, 0x1f, 0, 0) << 10);
+			psxRegs.CP2D.p[reg].d = LIM(IR1 >> 7, 0x1f, 0, 0) | (LIM(IR2 >> 7, 0x1f, 0, 0) << 5) | (LIM(IR3 >> 7, 0x1f, 0, 0) << 10);
 			break;
 	}
-	return psxRegs.CP2D.r[reg];
+
+	return psxRegs.CP2D.p[reg].d;
 }
 
-static inline void MTC2(u32 value, int reg) {
-	switch (reg) {
+static void MTC2(u32 value, int reg) {
+	switch(reg) {
 		case 15:
-			gteSXY0 = gteSXY1;
-			gteSXY1 = gteSXY2;
-			gteSXY2 = value;
-			gteSXYP = value;
+			SXY0 = SXY1;
+			SXY1 = SXY2;
+			SXY2 = value;
 			break;
 
 		case 28:
-			gteIRGB = value;
-			gteIR1 = (value & 0x1f) << 7;
-			gteIR2 = (value & 0x3e0) << 2;
-			gteIR3 = (value & 0x7c00) >> 3;
+			IR1 = (value & 0x1f) << 7;
+			IR2 = (value & 0x3e0) << 2;
+			IR3 = (value & 0x7c00) >> 3;
 			break;
 
 		case 30:
-			{
-#if 1
-				int a;
-				gteLZCS = value;
-
-				// non-MAME code
-				a = gteLZCS;
-				if (a > 0) {
-					int i;
-					for (i = 31; (a & (1 << i)) == 0 && i >= 0; i--);
-					gteLZCR = 31 - i;
-				} else if (a < 0) {
-					int i;
-					a ^= 0xffffffff;
-					for (i = 31; (a & (1 << i)) == 0 && i >= 0; i--);
-					gteLZCR = 31 - i;
-				} else {
-					gteLZCR = 32;
-				}
-#else
-				// MAME
-				u32 lzcs = value;
-				u32 lzcr = 0;
-
-				gteLZCS = value;
-
-				if( ( lzcs & 0x80000000 ) == 0 )
-				{
-					lzcs = ~lzcs;
-				}
-				while( ( lzcs & 0x80000000 ) != 0 )
-				{
-					lzcr++;
-					lzcs <<= 1;
-				}
-				gteLZCR = lzcr;
-#endif
-			}
+			LZCR = gte_leadingzerocount(value);
 			break;
 
-#if 1
 		case 31:
 			return;
-#else
-		case 31:
-			value = psxRegs.CP2D.r[reg];
-			break;
-#endif
-
-		default:
-			psxRegs.CP2D.r[reg] = value;
 	}
+
+	psxRegs.CP2D.p[reg].d = value;
 }
 
-static inline void CTC2(u32 value, int reg) {
-	switch (reg) {
+static void CTC2(u32 value, int reg) {
+	switch(reg) {
 		case 4:
 		case 12:
 		case 20:
@@ -347,10 +240,12 @@ static inline void CTC2(u32 value, int reg) {
 
 		case 31:
 			value = value & 0x7ffff000;
+			if((value & 0x7f87e000) != 0)
+				value |= 0x80000000;
 			break;
 	}
 
-	psxRegs.CP2C.r[reg] = value;
+	psxRegs.CP2C.p[reg].d = value;
 }
 
 void gteMFC2() {
@@ -360,8 +255,7 @@ void gteMFC2() {
 
 void gteCFC2() {
 	if (!_Rt_) return;
-	if (_Rd_ == 31) SUM_FLAG;
-	psxRegs.GPR.r[_Rt_] = psxRegs.CP2C.r[_Rd_];
+	psxRegs.GPR.r[_Rt_] = psxRegs.CP2C.p[_Rd_].d;
 }
 
 void gteMTC2() {
@@ -382,582 +276,778 @@ void gteSWC2() {
 	psxMemWrite32(_oB_, MFC2(_Rt_));
 }
 
-void gteRTPS() {
-	int quotient;
-    float fquotient;
+inline s64 gte_shift(s64 a, int sf) {
+	if(sf > 0)
+		return a >> 12;
+	else if(sf < 0)
+		return a << 12;
 
-#ifdef GTE_LOG
-	GTE_LOG("GTE RTPS\n");
-#endif
-	gteFLAG = 0;
-
-	gteMAC1 = A1((((s64)gteTRX << 12) + (gteR11 * gteVX0) + (gteR12 * gteVY0) + (gteR13 * gteVZ0)) >> 12);
-	gteMAC2 = A2((((s64)gteTRY << 12) + (gteR21 * gteVX0) + (gteR22 * gteVY0) + (gteR23 * gteVZ0)) >> 12);
-	gteMAC3 = A3((((s64)gteTRZ << 12) + (gteR31 * gteVX0) + (gteR32 * gteVY0) + (gteR33 * gteVZ0)) >> 12);
-	gteIR1 = limB1(gteMAC1, 0);
-	gteIR2 = limB2(gteMAC2, 0);
-	gteIR3 = limB3(gteMAC3, 0);
-	gteSZ0 = gteSZ1;
-	gteSZ1 = gteSZ2;
-	gteSZ2 = gteSZ3;
-	gteSZ3 = limD(gteMAC3);
-	quotient = limE(DIVIDE(gteH, gteSZ3));
-	gteSXY0 = gteSXY1;
-	gteSXY1 = gteSXY2;
-	gteSX2 = limG1(F((s64)gteOFX + ((s64)gteIR1 * quotient) * (Config.Widescreen ? 0.75 : 1)) >> 16);
-	gteSY2 = limG2(F((s64)gteOFY + ((s64)gteIR2 * quotient)) >> 16);
-
-    fquotient = flimE((float)(gteH << 16) / (float)gteSZ3);
-    GPU_addVertex(gteSX2,
-                  gteSY2,
-                  limG1_ia((s64)gteOFX + (s64)(gteIR1 * fquotient) * (Config.Widescreen ? 0.75 : 1)), // TODO: MAC1 calc instead of IR1.
-                  limG2_ia((s64)gteOFY + (s64)(gteIR2 * fquotient)), // TODO: MAC2 calc instead of IR2.
-				  ((s64)gteSZ3));                                    // TODO: MAC3 calc instead of SZ3.
-	
-	gteMAC0 = F((s64)(gteDQB + ((s64)gteDQA * quotient)) >> 12);
-	gteIR0 = limH(gteMAC0);
+	return a;
 }
 
-void gteRTPT() {
-	int quotient;
-    float fquotient;
-	int v;
-	s32 vx, vy, vz;
+s32 BOUNDS(/*int44*/s64 value, int max_flag, int min_flag) {
+	if(value/*.positive_overflow()*/ > S64(0x7ffffffffff))
+		FLAG |= max_flag;
+	
+	if(value/*.negative_overflow()*/ < S64(-0x80000000000))
+		FLAG |= min_flag;
+	
+	return gte_shift(value/*.value()*/, m_sf);
+}
 
-#ifdef GTE_LOG
-	GTE_LOG("GTE RTPT\n");
-#endif
-	gteFLAG = 0;
+u32 gte_divide( u16 numerator, u16 denominator )
+{
+	if( numerator < ( denominator * 2 ) )
+	{
+		static u8 table[] =
+		{
+			0xff, 0xfd, 0xfb, 0xf9, 0xf7, 0xf5, 0xf3, 0xf1, 0xef, 0xee, 0xec, 0xea, 0xe8, 0xe6, 0xe4, 0xe3,
+			0xe1, 0xdf, 0xdd, 0xdc, 0xda, 0xd8, 0xd6, 0xd5, 0xd3, 0xd1, 0xd0, 0xce, 0xcd, 0xcb, 0xc9, 0xc8,
+			0xc6, 0xc5, 0xc3, 0xc1, 0xc0, 0xbe, 0xbd, 0xbb, 0xba, 0xb8, 0xb7, 0xb5, 0xb4, 0xb2, 0xb1, 0xb0,
+			0xae, 0xad, 0xab, 0xaa, 0xa9, 0xa7, 0xa6, 0xa4, 0xa3, 0xa2, 0xa0, 0x9f, 0x9e, 0x9c, 0x9b, 0x9a,
+			0x99, 0x97, 0x96, 0x95, 0x94, 0x92, 0x91, 0x90, 0x8f, 0x8d, 0x8c, 0x8b, 0x8a, 0x89, 0x87, 0x86,
+			0x85, 0x84, 0x83, 0x82, 0x81, 0x7f, 0x7e, 0x7d, 0x7c, 0x7b, 0x7a, 0x79, 0x78, 0x77, 0x75, 0x74,
+			0x73, 0x72, 0x71, 0x70, 0x6f, 0x6e, 0x6d, 0x6c, 0x6b, 0x6a, 0x69, 0x68, 0x67, 0x66, 0x65, 0x64,
+			0x63, 0x62, 0x61, 0x60, 0x5f, 0x5e, 0x5d, 0x5d, 0x5c, 0x5b, 0x5a, 0x59, 0x58, 0x57, 0x56, 0x55,
+			0x54, 0x53, 0x53, 0x52, 0x51, 0x50, 0x4f, 0x4e, 0x4d, 0x4d, 0x4c, 0x4b, 0x4a, 0x49, 0x48, 0x48,
+			0x47, 0x46, 0x45, 0x44, 0x43, 0x43, 0x42, 0x41, 0x40, 0x3f, 0x3f, 0x3e, 0x3d, 0x3c, 0x3c, 0x3b,
+			0x3a, 0x39, 0x39, 0x38, 0x37, 0x36, 0x36, 0x35, 0x34, 0x33, 0x33, 0x32, 0x31, 0x31, 0x30, 0x2f,
+			0x2e, 0x2e, 0x2d, 0x2c, 0x2c, 0x2b, 0x2a, 0x2a, 0x29, 0x28, 0x28, 0x27, 0x26, 0x26, 0x25, 0x24,
+			0x24, 0x23, 0x22, 0x22, 0x21, 0x20, 0x20, 0x1f, 0x1e, 0x1e, 0x1d, 0x1d, 0x1c, 0x1b, 0x1b, 0x1a,
+			0x19, 0x19, 0x18, 0x18, 0x17, 0x16, 0x16, 0x15, 0x15, 0x14, 0x14, 0x13, 0x12, 0x12, 0x11, 0x11,
+			0x10, 0x0f, 0x0f, 0x0e, 0x0e, 0x0d, 0x0d, 0x0c, 0x0c, 0x0b, 0x0a, 0x0a, 0x09, 0x09, 0x08, 0x08,
+			0x07, 0x07, 0x06, 0x06, 0x05, 0x05, 0x04, 0x04, 0x03, 0x03, 0x02, 0x02, 0x01, 0x01, 0x00, 0x00,
+			0x00
+		};
 
-	gteSZ0 = gteSZ3;
-	for (v = 0; v < 3; v++) {
-		vx = VX(v);
-		vy = VY(v);
-		vz = VZ(v);
-		gteMAC1 = A1((((s64)gteTRX << 12) + (gteR11 * vx) + (gteR12 * vy) + (gteR13 * vz)) >> 12);
-		gteMAC2 = A2((((s64)gteTRY << 12) + (gteR21 * vx) + (gteR22 * vy) + (gteR23 * vz)) >> 12);
-		gteMAC3 = A3((((s64)gteTRZ << 12) + (gteR31 * vx) + (gteR32 * vy) + (gteR33 * vz)) >> 12);
-		gteIR1 = limB1(gteMAC1, 0);
-		gteIR2 = limB2(gteMAC2, 0);
-		gteIR3 = limB3(gteMAC3, 0);
-		fSZ(v) = limD(gteMAC3);
-		quotient = limE(DIVIDE(gteH, fSZ(v)));
-		fSX(v) = limG1(F((s64)gteOFX + ((s64)gteIR1 * quotient) * (Config.Widescreen ? 0.75 : 1)) >> 16);
-		fSY(v) = limG2(F((s64)gteOFY + ((s64)gteIR2 * quotient)) >> 16);
+		int shift = gte_leadingzerocount( denominator ) - 16;
 
-        fquotient = flimE((float)(gteH << 16) / (float)fSZ(v));
-		GPU_addVertex(fSX(v),
-                      fSY(v),
-                      limG1_ia((s64)gteOFX + (s64)(gteIR1 * fquotient) * (Config.Widescreen ? 0.75 : 1)), // TODO: MAC1 calc instead of IR1.
-                      limG2_ia((s64)gteOFY + (s64)(gteIR2 * fquotient)), // TODO: MAC2 calc instead of IR2.
-					  ((s64)fSZ(v)));                                    // TODO: MAC3 calc instead of fSZ(v).
+		int r1 = ( denominator << shift ) & 0x7fff;
+		int r2 = table[ ( ( r1 + 0x40 ) >> 7 ) ] + 0x101;
+		int r3 = ( ( 0x80 - ( r2 * ( r1 + 0x8000 ) ) ) >> 8 ) & 0x1ffff;
+		u32 reciprocal = ( ( r2 * r3 ) + 0x80 ) >> 8;
+
+		return (u32)( ( ( (u64) reciprocal * ( numerator << shift ) ) + 0x8000 ) >> 16 );
 	}
-	
-	gteMAC0 = F((s64)(gteDQB + ((s64)gteDQA * quotient)) >> 12);
-	gteIR0 = limH(gteMAC0);
+
+	return 0xffffffff;
 }
 
-void gteMVMVA() {
-	int shift = 12 * GTE_SF(gteop);
-	int mx = GTE_MX(gteop);
-	int v = GTE_V(gteop);
-	int cv = GTE_CV(gteop);
-	int lm = GTE_LM(gteop);
-	s32 vx = VX(v);
-	s32 vy = VY(v);
-	s32 vz = VZ(v);
+/* Setting bits 12 & 19-22 in FLAG does not set bit 31 */
 
+s32 A1(/*int44*/s64 a) { return BOUNDS(a, (1 << 31) | (1 << 30), (1 << 31) | (1 << 27)); }
+s32 A2(/*int44*/s64 a) { return BOUNDS(a, (1 << 31) | (1 << 29), (1 << 31) | (1 << 26)); }
+s32 A3(/*int44*/s64 a) { m_mac3 = a; return BOUNDS(a, (1 << 31) | (1 << 28), (1 << 31) | (1 << 25)); }
+s32 Lm_B1(s32 a, int lm) { return LIM(a, 0x7fff, -0x8000 * !lm, (1 << 31) | (1 << 24)); }
+s32 Lm_B2(s32 a, int lm) { return LIM(a, 0x7fff, -0x8000 * !lm, (1 << 31) | (1 << 23)); }
+s32 Lm_B3(s32 a, int lm) { return LIM(a, 0x7fff, -0x8000 * !lm, (1 << 22)); }
+
+s32 Lm_B3_sf(s64 value, int sf, int lm) {
+	s32 value_sf = gte_shift(value, sf);
+	s32 value_12 = gte_shift(value, 1);
+	int max = 0x7fff;
+	int min = 0;
+	if(lm == 0)
+		min = -0x8000;
+
+	if(value_12 < -0x8000 || value_12 > 0x7fff)
+		FLAG |= (1 << 22);
+
+	if(value_sf > max)
+		return max;
+	else if(value_sf < min)
+		return min;
+
+	return value_sf;
+}
+
+s32 Lm_C1(s32 a) { return LIM(a, 0x00ff, 0x0000, (1 << 21)); }
+s32 Lm_C2(s32 a) { return LIM(a, 0x00ff, 0x0000, (1 << 20)); }
+s32 Lm_C3(s32 a) { return LIM(a, 0x00ff, 0x0000, (1 << 19)); }
+s32 Lm_D(s64 a, int sf) { return LIM(gte_shift(a, sf), 0xffff, 0x0000, (1 << 31) | (1 << 18)); }
+
+u32 Lm_E(u32 result) {
+	if(result == 0xffffffff) {
+		FLAG |= (1 << 31) | (1 << 17);
+		return 0x1ffff;
+	}
+
+	if(result > 0x1ffff)
+		return 0x1ffff;
+
+	return result;
+}
+
+s64 F(s64 a) {
+	m_mac0 = a;
+
+	if(a > S64(0x7fffffff))
+		FLAG |= (1 << 31) | (1 << 16);
+
+	if(a < S64(-0x80000000))
+		FLAG |= (1 << 31) | (1 << 15);
+
+	return a;
+}
+
+s32 Lm_G1(s64 a) {
+	if(a > 0x3ff) {
+		FLAG |= (1 << 31) | (1 << 14);
+		return 0x3ff;
+	}
+	if(a < -0x400) {
+		FLAG |= (1 << 31) | (1 << 14);
+		return -0x400;
+	}
+
+	return a;
+}
+
+s32 Lm_G2(s64 a) {
+	if(a > 0x3ff) {
+		FLAG |= (1 << 31) | (1 << 13);
+		return 0x3ff;
+	}
+
+	if(a < -0x400) {
+		FLAG |= (1 << 31) | (1 << 13);
+		return -0x400;
+	}
+
+	return a;
+}
+
+s32 Lm_G1_ia(s64 a) {
+	if(a > 0x3ffffff)
+		return 0x3ffffff;
+	
+	if(a < -0x4000000)
+		return -0x4000000;
+
+	return a;
+}
+
+s32 Lm_G2_ia(s64 a) {
+	if(a > 0x3ffffff)
+		return 0x3ffffff;
+
+	if(a < -0x4000000)
+		return -0x4000000;
+
+	return a;
+}
+
+s32 Lm_H(s64 value, int sf) {
+	s64 value_sf = gte_shift(value, sf);
+	s32 value_12 = gte_shift(value, 1);
+	int max = 0x1000;
+	int min = 0x0000;
+
+	if(value_sf < min || value_sf > max)
+		FLAG |= (1 << 12);
+
+	if(value_12 > max)
+		return max;
+
+	if(value_12 < min)
+		return min;
+
+	return value_12;
+}
+
+int docop2(int op) {
+	int v;
+	int lm;
+	int cv;
+	int mx;
+	s32 h_over_sz3 = 0;
+
+	lm = GTE_LM(gteop);
+	m_sf = GTE_SF(gteop);
+
+	FLAG = 0;
+
+	switch(GTE_FUNCT(gteop)) {
+	case 0x00:
+	case 0x01:
 #ifdef GTE_LOG
-	GTE_LOG("GTE MVMVA\n");
+		GTELOG("%08x RTPS", op);
 #endif
-	gteFLAG = 0;
+		
+		MAC1 = A1(/*int44*/(s64)((s64) TRX << 12) + (R11 * VX0) + (R12 * VY0) + (R13 * VZ0));
+		MAC2 = A2(/*int44*/(s64)((s64) TRY << 12) + (R21 * VX0) + (R22 * VY0) + (R23 * VZ0));
+		MAC3 = A3(/*int44*/(s64)((s64) TRZ << 12) + (R31 * VX0) + (R32 * VY0) + (R33 * VZ0));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3_sf(m_mac3, m_sf, lm);
+		SZ0 = SZ1;
+		SZ1 = SZ2;
+		SZ2 = SZ3;
+		SZ3 = Lm_D(m_mac3, 1);
+		h_over_sz3 = Lm_E(gte_divide(H, SZ3));
+		SXY0 = SXY1;
+		SXY1 = SXY2;
+		SX2 = Lm_G1(F((s64) OFX + ((s64) IR1 * h_over_sz3) * (Config.Widescreen ? 0.75 : 1)) >> 16);
+		SY2 = Lm_G2(F((s64) OFY + ((s64) IR2 * h_over_sz3)) >> 16);
+		
+		GPU_addVertex(SX2, SY2,
+                  Lm_G1_ia((s64) OFX + (s64)(IR1 * h_over_sz3) * (Config.Widescreen ? 0.75 : 1)),
+                  Lm_G2_ia((s64) OFY + (s64)(IR2 * h_over_sz3)),
+				  ((s64)SZ3));
+		
+		MAC0 = F((s64) DQB + ((s64) DQA * h_over_sz3));
+		IR0 = Lm_H(m_mac0, 1);
+		return 1;
 
-	gteMAC1 = A1((((s64)CV1(cv) << 12) + (MX11(mx) * vx) + (MX12(mx) * vy) + (MX13(mx) * vz)) >> shift);
-	gteMAC2 = A2((((s64)CV2(cv) << 12) + (MX21(mx) * vx) + (MX22(mx) * vy) + (MX23(mx) * vz)) >> shift);
-	gteMAC3 = A3((((s64)CV3(cv) << 12) + (MX31(mx) * vx) + (MX32(mx) * vy) + (MX33(mx) * vz)) >> shift);
+	case 0x06:
+#ifdef GTE_LOG
+		GTELOG("%08x NCLIP", op);
+#endif
 
-	gteIR1 = limB1(gteMAC1, lm);
-	gteIR2 = limB2(gteMAC2, lm);
-	gteIR3 = limB3(gteMAC3, lm);
+		MAC0 = F((s64) (SX0 * SY1) + (SX1 * SY2) + (SX2 * SY0) - (SX0 * SY2) - (SX1 * SY0) - (SX2 * SY1));
+		return 1;
+
+	case 0x0c:
+#ifdef GTE_LOG
+		GTELOG("%08x OP", op);
+#endif
+
+		MAC1 = A1((s64) (R22 * IR3) - (R33 * IR2));
+		MAC2 = A2((s64) (R33 * IR1) - (R11 * IR3));
+		MAC3 = A3((s64) (R11 * IR2) - (R22 * IR1));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		return 1;
+
+	case 0x10:
+#ifdef GTE_LOG
+		GTELOG("%08x DPCS", op);
+#endif
+
+		MAC1 = A1((R << 16) + (IR0 * Lm_B1(A1(((s64) RFC << 12) - (R << 16)), 0)));
+		MAC2 = A2((G << 16) + (IR0 * Lm_B2(A2(((s64) GFC << 12) - (G << 16)), 0)));
+		MAC3 = A3((B << 16) + (IR0 * Lm_B3(A3(((s64) BFC << 12) - (B << 16)), 0)));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		RGB0 = RGB1;
+		RGB1 = RGB2;
+		CD2 = CODE;
+		R2 = Lm_C1(MAC1 >> 4);
+		G2 = Lm_C2(MAC2 >> 4);
+		B2 = Lm_C3(MAC3 >> 4);
+		return 1;
+
+	case 0x11:
+#ifdef GTE_LOG
+		GTELOG("%08x INTPL", op);
+#endif
+
+		MAC1 = A1((IR1 << 12) + (IR0 * Lm_B1(A1(((s64) RFC << 12) - (IR1 << 12)), 0)));
+		MAC2 = A2((IR2 << 12) + (IR0 * Lm_B2(A2(((s64) GFC << 12) - (IR2 << 12)), 0)));
+		MAC3 = A3((IR3 << 12) + (IR0 * Lm_B3(A3(((s64) BFC << 12) - (IR3 << 12)), 0)));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		RGB0 = RGB1;
+		RGB1 = RGB2;
+		CD2 = CODE;
+		R2 = Lm_C1(MAC1 >> 4);
+		G2 = Lm_C2(MAC2 >> 4);
+		B2 = Lm_C3(MAC3 >> 4);
+		return 1;
+
+	case 0x12:
+#ifdef GTE_LOG
+		GTELOG("%08x MVMVA", op);
+#endif
+
+		mx = GTE_MX(gteop);
+		v = GTE_V(gteop);
+		cv = GTE_CV(gteop);
+
+		switch(cv) {
+		case 2:
+			MAC1 = A1((s64) (MX12(mx) * VY(v)) + (MX13(mx) * VZ(v)));
+			MAC2 = A2((s64) (MX22(mx) * VY(v)) + (MX23(mx) * VZ(v)));
+			MAC3 = A3((s64) (MX32(mx) * VY(v)) + (MX33(mx) * VZ(v)));
+			Lm_B1(A1(((s64) CV1(cv) << 12) + (MX11(mx) * VX(v))), 0);
+			Lm_B2(A2(((s64) CV2(cv) << 12) + (MX21(mx) * VX(v))), 0);
+			Lm_B3(A3(((s64) CV3(cv) << 12) + (MX31(mx) * VX(v))), 0);
+			break;
+
+		default:
+			MAC1 = A1(/*int44*/(s64)((s64) CV1(cv) << 12) + (MX11(mx) * VX(v)) + (MX12(mx) * VY(v)) + (MX13(mx) * VZ(v)));
+			MAC2 = A2(/*int44*/(s64)((s64) CV2(cv) << 12) + (MX21(mx) * VX(v)) + (MX22(mx) * VY(v)) + (MX23(mx) * VZ(v)));
+			MAC3 = A3(/*int44*/(s64)((s64) CV3(cv) << 12) + (MX31(mx) * VX(v)) + (MX32(mx) * VY(v)) + (MX33(mx) * VZ(v)));
+			break;
+		}
+
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		return 1;
+
+	case 0x13:
+#ifdef GTE_LOG
+		GTELOG("%08x NCDS", op);
+#endif
+
+		MAC1 = A1((s64) (L11 * VX0) + (L12 * VY0) + (L13 * VZ0));
+		MAC2 = A2((s64) (L21 * VX0) + (L22 * VY0) + (L23 * VZ0));
+		MAC3 = A3((s64) (L31 * VX0) + (L32 * VY0) + (L33 * VZ0));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		MAC1 = A1(/*int44*/(s64)((s64) RBK << 12) + (LR1 * IR1) + (LR2 * IR2) + (LR3 * IR3));
+		MAC2 = A2(/*int44*/(s64)((s64) GBK << 12) + (LG1 * IR1) + (LG2 * IR2) + (LG3 * IR3));
+		MAC3 = A3(/*int44*/(s64)((s64) BBK << 12) + (LB1 * IR1) + (LB2 * IR2) + (LB3 * IR3));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		MAC1 = A1(((R << 4) * IR1) + (IR0 * Lm_B1(A1(((s64) RFC << 12) - ((R << 4) * IR1)), 0)));
+		MAC2 = A2(((G << 4) * IR2) + (IR0 * Lm_B2(A2(((s64) GFC << 12) - ((G << 4) * IR2)), 0)));
+		MAC3 = A3(((B << 4) * IR3) + (IR0 * Lm_B3(A3(((s64) BFC << 12) - ((B << 4) * IR3)), 0)));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		RGB0 = RGB1;
+		RGB1 = RGB2;
+		CD2 = CODE;
+		R2 = Lm_C1(MAC1 >> 4);
+		G2 = Lm_C2(MAC2 >> 4);
+		B2 = Lm_C3(MAC3 >> 4);
+		return 1;
+
+	case 0x14:
+#ifdef GTE_LOG
+		GTELOG("%08x CDP", op);
+#endif
+
+		MAC1 = A1(/*int44*/(s64)((s64) RBK << 12) + (LR1 * IR1) + (LR2 * IR2) + (LR3 * IR3));
+		MAC2 = A2(/*int44*/(s64)((s64) GBK << 12) + (LG1 * IR1) + (LG2 * IR2) + (LG3 * IR3));
+		MAC3 = A3(/*int44*/(s64)((s64) BBK << 12) + (LB1 * IR1) + (LB2 * IR2) + (LB3 * IR3));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		MAC1 = A1(((R << 4) * IR1) + (IR0 * Lm_B1(A1(((s64) RFC << 12) - ((R << 4) * IR1)), 0)));
+		MAC2 = A2(((G << 4) * IR2) + (IR0 * Lm_B2(A2(((s64) GFC << 12) - ((G << 4) * IR2)), 0)));
+		MAC3 = A3(((B << 4) * IR3) + (IR0 * Lm_B3(A3(((s64) BFC << 12) - ((B << 4) * IR3)), 0)));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		RGB0 = RGB1;
+		RGB1 = RGB2;
+		CD2 = CODE;
+		R2 = Lm_C1(MAC1 >> 4);
+		G2 = Lm_C2(MAC2 >> 4);
+		B2 = Lm_C3(MAC3 >> 4);
+		return 1;
+
+	case 0x16:
+#ifdef GTE_LOG
+		GTELOG("%08x NCDT", op);
+#endif
+
+		for(v = 0; v < 3; v++) {
+			MAC1 = A1((s64) (L11 * VX(v)) + (L12 * VY(v)) + (L13 * VZ(v)));
+			MAC2 = A2((s64) (L21 * VX(v)) + (L22 * VY(v)) + (L23 * VZ(v)));
+			MAC3 = A3((s64) (L31 * VX(v)) + (L32 * VY(v)) + (L33 * VZ(v)));
+			IR1 = Lm_B1(MAC1, lm);
+			IR2 = Lm_B2(MAC2, lm);
+			IR3 = Lm_B3(MAC3, lm);
+			MAC1 = A1(/*int44*/(s64)((s64) RBK << 12) + (LR1 * IR1) + (LR2 * IR2) + (LR3 * IR3));
+			MAC2 = A2(/*int44*/(s64)((s64) GBK << 12) + (LG1 * IR1) + (LG2 * IR2) + (LG3 * IR3));
+			MAC3 = A3(/*int44*/(s64)((s64) BBK << 12) + (LB1 * IR1) + (LB2 * IR2) + (LB3 * IR3));
+			IR1 = Lm_B1(MAC1, lm);
+			IR2 = Lm_B2(MAC2, lm);
+			IR3 = Lm_B3(MAC3, lm);
+			MAC1 = A1(((R << 4) * IR1) + (IR0 * Lm_B1(A1(((s64) RFC << 12) - ((R << 4) * IR1)), 0)));
+			MAC2 = A2(((G << 4) * IR2) + (IR0 * Lm_B2(A2(((s64) GFC << 12) - ((G << 4) * IR2)), 0)));
+			MAC3 = A3(((B << 4) * IR3) + (IR0 * Lm_B3(A3(((s64) BFC << 12) - ((B << 4) * IR3)), 0)));
+			IR1 = Lm_B1(MAC1, lm);
+			IR2 = Lm_B2(MAC2, lm);
+			IR3 = Lm_B3(MAC3, lm);
+			RGB0 = RGB1;
+			RGB1 = RGB2;
+			CD2 = CODE;
+			R2 = Lm_C1(MAC1 >> 4);
+			G2 = Lm_C2(MAC2 >> 4);
+			B2 = Lm_C3(MAC3 >> 4);
+		}
+		return 1;
+
+	case 0x1b:
+#ifdef GTE_LOG
+		GTELOG("%08x NCCS", op);
+#endif
+
+		MAC1 = A1((s64) (L11 * VX0) + (L12 * VY0) + (L13 * VZ0));
+		MAC2 = A2((s64) (L21 * VX0) + (L22 * VY0) + (L23 * VZ0));
+		MAC3 = A3((s64) (L31 * VX0) + (L32 * VY0) + (L33 * VZ0));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		MAC1 = A1(/*int44*/(s64)((s64) RBK << 12) + (LR1 * IR1) + (LR2 * IR2) + (LR3 * IR3));
+		MAC2 = A2(/*int44*/(s64)((s64) GBK << 12) + (LG1 * IR1) + (LG2 * IR2) + (LG3 * IR3));
+		MAC3 = A3(/*int44*/(s64)((s64) BBK << 12) + (LB1 * IR1) + (LB2 * IR2) + (LB3 * IR3));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		MAC1 = A1((R << 4) * IR1);
+		MAC2 = A2((G << 4) * IR2);
+		MAC3 = A3((B << 4) * IR3);
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		RGB0 = RGB1;
+		RGB1 = RGB2;
+		CD2 = CODE;
+		R2 = Lm_C1(MAC1 >> 4);
+		G2 = Lm_C2(MAC2 >> 4);
+		B2 = Lm_C3(MAC3 >> 4);
+		return 1;
+
+	case 0x1c:
+#ifdef GTE_LOG
+		GTELOG("%08x CC", op);
+#endif
+
+		MAC1 = A1(/*int44*/(s64)(((s64) RBK) << 12) + (LR1 * IR1) + (LR2 * IR2) + (LR3 * IR3));
+		MAC2 = A2(/*int44*/(s64)(((s64) GBK) << 12) + (LG1 * IR1) + (LG2 * IR2) + (LG3 * IR3));
+		MAC3 = A3(/*int44*/(s64)(((s64) BBK) << 12) + (LB1 * IR1) + (LB2 * IR2) + (LB3 * IR3));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		MAC1 = A1((R << 4) * IR1);
+		MAC2 = A2((G << 4) * IR2);
+		MAC3 = A3((B << 4) * IR3);
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		RGB0 = RGB1;
+		RGB1 = RGB2;
+		CD2 = CODE;
+		R2 = Lm_C1(MAC1 >> 4);
+		G2 = Lm_C2(MAC2 >> 4);
+		B2 = Lm_C3(MAC3 >> 4);
+		return 1;
+
+	case 0x1e:
+#ifdef GTE_LOG
+		GTELOG("%08x NCS", op);
+#endif
+
+		MAC1 = A1((s64) (L11 * VX0) + (L12 * VY0) + (L13 * VZ0));
+		MAC2 = A2((s64) (L21 * VX0) + (L22 * VY0) + (L23 * VZ0));
+		MAC3 = A3((s64) (L31 * VX0) + (L32 * VY0) + (L33 * VZ0));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		MAC1 = A1(/*int44*/(s64)((s64) RBK << 12) + (LR1 * IR1) + (LR2 * IR2) + (LR3 * IR3));
+		MAC2 = A2(/*int44*/(s64)((s64) GBK << 12) + (LG1 * IR1) + (LG2 * IR2) + (LG3 * IR3));
+		MAC3 = A3(/*int44*/(s64)((s64) BBK << 12) + (LB1 * IR1) + (LB2 * IR2) + (LB3 * IR3));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		RGB0 = RGB1;
+		RGB1 = RGB2;
+		CD2 = CODE;
+		R2 = Lm_C1(MAC1 >> 4);
+		G2 = Lm_C2(MAC2 >> 4);
+		B2 = Lm_C3(MAC3 >> 4);
+		return 1;
+
+	case 0x20:
+#ifdef GTE_LOG
+		GTELOG("%08x NCT", op);
+#endif
+
+		for(v = 0; v < 3; v++) {
+			MAC1 = A1((s64) (L11 * VX(v)) + (L12 * VY(v)) + (L13 * VZ(v)));
+			MAC2 = A2((s64) (L21 * VX(v)) + (L22 * VY(v)) + (L23 * VZ(v)));
+			MAC3 = A3((s64) (L31 * VX(v)) + (L32 * VY(v)) + (L33 * VZ(v)));
+			IR1 = Lm_B1(MAC1, lm);
+			IR2 = Lm_B2(MAC2, lm);
+			IR3 = Lm_B3(MAC3, lm);
+			MAC1 = A1(/*int44*/(s64)((s64) RBK << 12) + (LR1 * IR1) + (LR2 * IR2) + (LR3 * IR3));
+			MAC2 = A2(/*int44*/(s64)((s64) GBK << 12) + (LG1 * IR1) + (LG2 * IR2) + (LG3 * IR3));
+			MAC3 = A3(/*int44*/(s64)((s64) BBK << 12) + (LB1 * IR1) + (LB2 * IR2) + (LB3 * IR3));
+			IR1 = Lm_B1(MAC1, lm);
+			IR2 = Lm_B2(MAC2, lm);
+			IR3 = Lm_B3(MAC3, lm);
+			RGB0 = RGB1;
+			RGB1 = RGB2;
+			CD2 = CODE;
+			R2 = Lm_C1(MAC1 >> 4);
+			G2 = Lm_C2(MAC2 >> 4);
+			B2 = Lm_C3(MAC3 >> 4);
+		}
+		return 1;
+
+	case 0x28:
+#ifdef GTE_LOG
+		GTELOG("%08x SQR", op);
+#endif
+
+		MAC1 = A1(IR1 * IR1);
+		MAC2 = A2(IR2 * IR2);
+		MAC3 = A3(IR3 * IR3);
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		return 1;
+
+	case 0x29:
+#ifdef GTE_LOG
+		GTELOG("%08x DPCL", op);
+#endif
+
+		MAC1 = A1(((R << 4) * IR1) + (IR0 * Lm_B1(A1(((s64) RFC << 12) - ((R << 4) * IR1)), 0)));
+		MAC2 = A2(((G << 4) * IR2) + (IR0 * Lm_B2(A2(((s64) GFC << 12) - ((G << 4) * IR2)), 0)));
+		MAC3 = A3(((B << 4) * IR3) + (IR0 * Lm_B3(A3(((s64) BFC << 12) - ((B << 4) * IR3)), 0)));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		RGB0 = RGB1;
+		RGB1 = RGB2;
+		CD2 = CODE;
+		R2 = Lm_C1(MAC1 >> 4);
+		G2 = Lm_C2(MAC2 >> 4);
+		B2 = Lm_C3(MAC3 >> 4);
+		return 1;
+
+	case 0x2a:
+#ifdef GTE_LOG
+		GTELOG("%08x DPCT", op);
+#endif
+
+		for(v = 0; v < 3; v++) {
+			MAC1 = A1((R0 << 16) + (IR0 * Lm_B1(A1(((s64) RFC << 12) - (R0 << 16)), 0)));
+			MAC2 = A2((G0 << 16) + (IR0 * Lm_B2(A2(((s64) GFC << 12) - (G0 << 16)), 0)));
+			MAC3 = A3((B0 << 16) + (IR0 * Lm_B3(A3(((s64) BFC << 12) - (B0 << 16)), 0)));
+			IR1 = Lm_B1(MAC1, lm);
+			IR2 = Lm_B2(MAC2, lm);
+			IR3 = Lm_B3(MAC3, lm);
+			RGB0 = RGB1;
+			RGB1 = RGB2;
+			CD2 = CODE;
+			R2 = Lm_C1(MAC1 >> 4);
+			G2 = Lm_C2(MAC2 >> 4);
+			B2 = Lm_C3(MAC3 >> 4);
+		}
+		return 1;
+
+	case 0x2d:
+#ifdef GTE_LOG
+		GTELOG("%08x AVSZ3", op);
+#endif
+
+		MAC0 = F((s64) (ZSF3 * SZ1) + (ZSF3 * SZ2) + (ZSF3 * SZ3));
+		OTZ = Lm_D(m_mac0, 1);
+		return 1;
+
+	case 0x2e:
+#ifdef GTE_LOG
+		GTELOG("%08x AVSZ4", op);
+#endif
+
+		MAC0 = F((s64) (ZSF4 * SZ0) + (ZSF4 * SZ1) + (ZSF4 * SZ2) + (ZSF4 * SZ3));
+		OTZ = Lm_D(m_mac0, 1);
+		return 1;
+
+	case 0x30:
+#ifdef GTE_LOG
+		GTELOG("%08x RTPT", op);
+#endif
+
+		for(v = 0; v < 3; v++) {
+			MAC1 = A1(/*int44*/(s64)((s64) TRX << 12) + (R11 * VX(v)) + (R12 * VY(v)) + (R13 * VZ(v)));
+			MAC2 = A2(/*int44*/(s64)((s64) TRY << 12) + (R21 * VX(v)) + (R22 * VY(v)) + (R23 * VZ(v)));
+			MAC3 = A3(/*int44*/(s64)((s64) TRZ << 12) + (R31 * VX(v)) + (R32 * VY(v)) + (R33 * VZ(v)));
+			IR1 = Lm_B1(MAC1, lm);
+			IR2 = Lm_B2(MAC2, lm);
+			IR3 = Lm_B3_sf(m_mac3, m_sf, lm);
+			SZ0 = SZ1;
+			SZ1 = SZ2;
+			SZ2 = SZ3;
+			SZ3 = Lm_D(m_mac3, 1);
+			h_over_sz3 = Lm_E(gte_divide(H, SZ3));
+			SXY0 = SXY1;
+			SXY1 = SXY2;
+			SX2 = Lm_G1(F((s64) OFX + ((s64) IR1 * h_over_sz3) * (Config.Widescreen ? 0.75 : 1)) >> 16);
+			SY2 = Lm_G2(F((s64) OFY + ((s64) IR2 * h_over_sz3)) >> 16);
+			
+			GPU_addVertex(SX2, SY2,
+                  Lm_G1_ia((s64) OFX + (s64)(IR1 * h_over_sz3) * (Config.Widescreen ? 0.75 : 1)),
+                  Lm_G2_ia((s64) OFY + (s64)(IR2 * h_over_sz3)),
+				  ((s64)SZ3));
+		}
+
+		MAC0 = F((s64) DQB + ((s64) DQA * h_over_sz3));
+		IR0 = Lm_H(m_mac0, 1);
+		return 1;
+
+	case 0x3d:
+#ifdef GTE_LOG
+		GTELOG("%08x GPF", op);
+#endif
+
+		MAC1 = A1(IR0 * IR1);
+		MAC2 = A2(IR0 * IR2);
+		MAC3 = A3(IR0 * IR3);
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		RGB0 = RGB1;
+		RGB1 = RGB2;
+		CD2 = CODE;
+		R2 = Lm_C1(MAC1 >> 4);
+		G2 = Lm_C2(MAC2 >> 4);
+		B2 = Lm_C3(MAC3 >> 4);
+		return 1;
+
+	case 0x3e:
+#ifdef GTE_LOG
+		GTELOG("%08x GPL", op);
+#endif
+
+		MAC1 = A1(gte_shift(MAC1, -m_sf) + (IR0 * IR1));
+		MAC2 = A2(gte_shift(MAC2, -m_sf) + (IR0 * IR2));
+		MAC3 = A3(gte_shift(MAC3, -m_sf) + (IR0 * IR3));
+		IR1 = Lm_B1(MAC1, lm);
+		IR2 = Lm_B2(MAC2, lm);
+		IR3 = Lm_B3(MAC3, lm);
+		RGB0 = RGB1;
+		RGB1 = RGB2;
+		CD2 = CODE;
+		R2 = Lm_C1(MAC1 >> 4);
+		G2 = Lm_C2(MAC2 >> 4);
+		B2 = Lm_C3(MAC3 >> 4);
+		return 1;
+
+	case 0x3f:
+#ifdef GTE_LOG
+		GTELOG("%08x NCCT", op);
+#endif
+
+		for(v = 0; v < 3; v++) {
+			MAC1 = A1((s64) (L11 * VX(v)) + (L12 * VY(v)) + (L13 * VZ(v)));
+			MAC2 = A2((s64) (L21 * VX(v)) + (L22 * VY(v)) + (L23 * VZ(v)));
+			MAC3 = A3((s64) (L31 * VX(v)) + (L32 * VY(v)) + (L33 * VZ(v)));
+			IR1 = Lm_B1(MAC1, lm);
+			IR2 = Lm_B2(MAC2, lm);
+			IR3 = Lm_B3(MAC3, lm);
+			MAC1 = A1(/*int44*/(s64)((s64) RBK << 12) + (LR1 * IR1) + (LR2 * IR2) + (LR3 * IR3));
+			MAC2 = A2(/*int44*/(s64)((s64) GBK << 12) + (LG1 * IR1) + (LG2 * IR2) + (LG3 * IR3));
+			MAC3 = A3(/*int44*/(s64)((s64) BBK << 12) + (LB1 * IR1) + (LB2 * IR2) + (LB3 * IR3));
+			IR1 = Lm_B1(MAC1, lm);
+			IR2 = Lm_B2(MAC2, lm);
+			IR3 = Lm_B3(MAC3, lm);
+			MAC1 = A1((R << 4) * IR1);
+			MAC2 = A2((G << 4) * IR2);
+			MAC3 = A3((B << 4) * IR3);
+			IR1 = Lm_B1(MAC1, lm);
+			IR2 = Lm_B2(MAC2, lm);
+			IR3 = Lm_B3(MAC3, lm);
+			RGB0 = RGB1;
+			RGB1 = RGB2;
+			CD2 = CODE;
+			R2 = Lm_C1(MAC1 >> 4);
+			G2 = Lm_C2(MAC2 >> 4);
+			B2 = Lm_C3(MAC3 >> 4);
+		}
+		return 1;
+	}
+
+	return 0;
+}
+
+void gteRTPS() {
+	docop2(gteop);
 }
 
 void gteNCLIP() {
-#ifdef GTE_LOG
-	GTE_LOG("GTE NCLIP\n");
-#endif
-	gteFLAG = 0;
-
-	gteMAC0 = F((s64)gteSX0 * (gteSY1 - gteSY2) +
-				gteSX1 * (gteSY2 - gteSY0) +
-				gteSX2 * (gteSY0 - gteSY1));
-}
-
-void gteAVSZ3() {
-	s64 t;
-	
-#ifdef GTE_LOG
-	GTE_LOG("GTE AVSZ3\n");
-#endif
-	gteFLAG = 0;
-
-	t = (s64)(gteZSF3  * (s64)(gteSZ1 + gteSZ2 + gteSZ3));
-	gteMAC0 = F(t);
-	gteOTZ = limD(t >> 12);
-}
-
-void gteAVSZ4() {
-	s64 t;
-	
-#ifdef GTE_LOG
-	GTE_LOG("GTE AVSZ4\n");
-#endif
-	gteFLAG = 0;
-
-	t = (s64)(gteZSF4 * (s64)(gteSZ0 + gteSZ1 + gteSZ2 + gteSZ3));
-	gteMAC0 = F(t);
-	gteOTZ = limD(t >> 12);
-}
-
-void gteSQR() {
-	int shift = 12 * GTE_SF(gteop);
-	int lm = GTE_LM(gteop);
-
-#ifdef GTE_LOG
-	GTE_LOG("GTE SQR\n");
-#endif
-	gteFLAG = 0;
-
-	gteMAC1 = A1((gteIR1 * gteIR1) >> shift);
-	gteMAC2 = A2((gteIR2 * gteIR2) >> shift);
-	gteMAC3 = A3((gteIR3 * gteIR3) >> shift);
-	gteIR1 = limB1(gteMAC1, lm);
-	gteIR2 = limB2(gteMAC2, lm);
-	gteIR3 = limB3(gteMAC3, lm);
-}
-
-void gteNCCS() {
-#ifdef GTE_LOG
-	GTE_LOG("GTE NCCS\n");
-#endif
-	gteFLAG = 0;
-
-	gteMAC1 = A1((((s64)gteL11 * gteVX0) + (gteL12 * gteVY0) + (gteL13 * gteVZ0)) >> 12);
-	gteMAC2 = A2((((s64)gteL21 * gteVX0) + (gteL22 * gteVY0) + (gteL23 * gteVZ0)) >> 12);
-	gteMAC3 = A3((((s64)gteL31 * gteVX0) + (gteL32 * gteVY0) + (gteL33 * gteVZ0)) >> 12);
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
-	gteMAC1 = A1((((s64)gteRBK << 12) + (gteLR1 * gteIR1) + (gteLR2 * gteIR2) + (gteLR3 * gteIR3)) >> 12);
-	gteMAC2 = A2((((s64)gteGBK << 12) + (gteLG1 * gteIR1) + (gteLG2 * gteIR2) + (gteLG3 * gteIR3)) >> 12);
-	gteMAC3 = A3((((s64)gteBBK << 12) + (gteLB1 * gteIR1) + (gteLB2 * gteIR2) + (gteLB3 * gteIR3)) >> 12);
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
-	gteMAC1 = A1(((s64)gteR * gteIR1) >> 8);
-	gteMAC2 = A2(((s64)gteG * gteIR2) >> 8);
-	gteMAC3 = A3(((s64)gteB * gteIR3) >> 8);
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
-
-	gteRGB0 = gteRGB1;
-	gteRGB1 = gteRGB2;
-	gteCODE2 = gteCODE;
-	gteR2 = limC1(gteMAC1 >> 4);
-	gteG2 = limC2(gteMAC2 >> 4);
-	gteB2 = limC3(gteMAC3 >> 4);
-}
-
-void gteNCCT() {
-	int v;
-	s32 vx, vy, vz;
-
-#ifdef GTE_LOG
-	GTE_LOG("GTE NCCT\n");
-#endif
-	gteFLAG = 0;
-
-	for (v = 0; v < 3; v++) {
-		vx = VX(v);
-		vy = VY(v);
-		vz = VZ(v);
-		gteMAC1 = A1((((s64)gteL11 * vx) + (gteL12 * vy) + (gteL13 * vz)) >> 12);
-		gteMAC2 = A2((((s64)gteL21 * vx) + (gteL22 * vy) + (gteL23 * vz)) >> 12);
-		gteMAC3 = A3((((s64)gteL31 * vx) + (gteL32 * vy) + (gteL33 * vz)) >> 12);
-		gteIR1 = limB1(gteMAC1, 1);
-		gteIR2 = limB2(gteMAC2, 1);
-		gteIR3 = limB3(gteMAC3, 1);
-		gteMAC1 = A1((((s64)gteRBK << 12) + (gteLR1 * gteIR1) + (gteLR2 * gteIR2) + (gteLR3 * gteIR3)) >> 12);
-		gteMAC2 = A2((((s64)gteGBK << 12) + (gteLG1 * gteIR1) + (gteLG2 * gteIR2) + (gteLG3 * gteIR3)) >> 12);
-		gteMAC3 = A3((((s64)gteBBK << 12) + (gteLB1 * gteIR1) + (gteLB2 * gteIR2) + (gteLB3 * gteIR3)) >> 12);
-		gteIR1 = limB1(gteMAC1, 1);
-		gteIR2 = limB2(gteMAC2, 1);
-		gteIR3 = limB3(gteMAC3, 1);
-		gteMAC1 = A1(((s64)gteR * gteIR1) >> 8);
-		gteMAC2 = A2(((s64)gteG * gteIR2) >> 8);
-		gteMAC3 = A3(((s64)gteB * gteIR3) >> 8);
-
-		gteRGB0 = gteRGB1;
-		gteRGB1 = gteRGB2;
-		gteCODE2 = gteCODE;
-		gteR2 = limC1(gteMAC1 >> 4);
-		gteG2 = limC2(gteMAC2 >> 4);
-		gteB2 = limC3(gteMAC3 >> 4);
-	}
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
-}
-
-void gteNCDS() {
-#ifdef GTE_LOG
-	GTE_LOG("GTE NCDS\n");
-#endif
-	gteFLAG = 0;
-
-	gteMAC1 = A1((((s64)gteL11 * gteVX0) + (gteL12 * gteVY0) + (gteL13 * gteVZ0)) >> 12);
-	gteMAC2 = A2((((s64)gteL21 * gteVX0) + (gteL22 * gteVY0) + (gteL23 * gteVZ0)) >> 12);
-	gteMAC3 = A3((((s64)gteL31 * gteVX0) + (gteL32 * gteVY0) + (gteL33 * gteVZ0)) >> 12);
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
-	gteMAC1 = A1((((s64)gteRBK << 12) + (gteLR1 * gteIR1) + (gteLR2 * gteIR2) + (gteLR3 * gteIR3)) >> 12);
-	gteMAC2 = A2((((s64)gteGBK << 12) + (gteLG1 * gteIR1) + (gteLG2 * gteIR2) + (gteLG3 * gteIR3)) >> 12);
-	gteMAC3 = A3((((s64)gteBBK << 12) + (gteLB1 * gteIR1) + (gteLB2 * gteIR2) + (gteLB3 * gteIR3)) >> 12);
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
-	gteMAC1 = A1(((((s64)gteR << 4) * gteIR1) + (gteIR0 * limB1(gteRFC - ((gteR * gteIR1) >> 8), 0))) >> 12);
-	gteMAC2 = A2(((((s64)gteG << 4) * gteIR2) + (gteIR0 * limB2(gteGFC - ((gteG * gteIR2) >> 8), 0))) >> 12);
-	gteMAC3 = A3(((((s64)gteB << 4) * gteIR3) + (gteIR0 * limB3(gteBFC - ((gteB * gteIR3) >> 8), 0))) >> 12);
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
-
-	gteRGB0 = gteRGB1;
-	gteRGB1 = gteRGB2;
-	gteCODE2 = gteCODE;
-	gteR2 = limC1(gteMAC1 >> 4);
-	gteG2 = limC2(gteMAC2 >> 4);
-	gteB2 = limC3(gteMAC3 >> 4);
-}
-
-void gteNCDT() {
-	int v;
-	s32 vx, vy, vz;
-
-#ifdef GTE_LOG
-	GTE_LOG("GTE NCDT\n");
-#endif
-	gteFLAG = 0;
-
-	for (v = 0; v < 3; v++) {
-		vx = VX(v);
-		vy = VY(v);
-		vz = VZ(v);
-		gteMAC1 = A1((((s64)gteL11 * vx) + (gteL12 * vy) + (gteL13 * vz)) >> 12);
-		gteMAC2 = A2((((s64)gteL21 * vx) + (gteL22 * vy) + (gteL23 * vz)) >> 12);
-		gteMAC3 = A3((((s64)gteL31 * vx) + (gteL32 * vy) + (gteL33 * vz)) >> 12);
-		gteIR1 = limB1(gteMAC1, 1);
-		gteIR2 = limB2(gteMAC2, 1);
-		gteIR3 = limB3(gteMAC3, 1);
-		gteMAC1 = A1((((s64)gteRBK << 12) + (gteLR1 * gteIR1) + (gteLR2 * gteIR2) + (gteLR3 * gteIR3)) >> 12);
-		gteMAC2 = A2((((s64)gteGBK << 12) + (gteLG1 * gteIR1) + (gteLG2 * gteIR2) + (gteLG3 * gteIR3)) >> 12);
-		gteMAC3 = A3((((s64)gteBBK << 12) + (gteLB1 * gteIR1) + (gteLB2 * gteIR2) + (gteLB3 * gteIR3)) >> 12);
-		gteIR1 = limB1(gteMAC1, 1);
-		gteIR2 = limB2(gteMAC2, 1);
-		gteIR3 = limB3(gteMAC3, 1);
-		gteMAC1 = A1(((((s64)gteR << 4) * gteIR1) + (gteIR0 * limB1(gteRFC - ((gteR * gteIR1) >> 8), 0))) >> 12);
-		gteMAC2 = A2(((((s64)gteG << 4) * gteIR2) + (gteIR0 * limB2(gteGFC - ((gteG * gteIR2) >> 8), 0))) >> 12);
-		gteMAC3 = A3(((((s64)gteB << 4) * gteIR3) + (gteIR0 * limB3(gteBFC - ((gteB * gteIR3) >> 8), 0))) >> 12);
-
-		gteRGB0 = gteRGB1;
-		gteRGB1 = gteRGB2;
-		gteCODE2 = gteCODE;
-		gteR2 = limC1(gteMAC1 >> 4);
-		gteG2 = limC2(gteMAC2 >> 4);
-		gteB2 = limC3(gteMAC3 >> 4);
-	}
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
+	docop2(gteop);
 }
 
 void gteOP() {
-	int shift = 12 * GTE_SF(gteop);
-	int lm = GTE_LM(gteop);
-
-#ifdef GTE_LOG
-	GTE_LOG("GTE OP\n");
-#endif
-	gteFLAG = 0;
-
-	gteMAC1 = A1(((s64)(gteR22 * gteIR3) - (gteR33 * gteIR2)) >> shift);
-	gteMAC2 = A2(((s64)(gteR33 * gteIR1) - (gteR11 * gteIR3)) >> shift);
-	gteMAC3 = A3(((s64)(gteR11 * gteIR2) - (gteR22 * gteIR1)) >> shift);
-	gteIR1 = limB1(gteMAC1, lm);
-	gteIR2 = limB2(gteMAC2, lm);
-	gteIR3 = limB3(gteMAC3, lm);
-}
-
-void gteDCPL() {
-	int lm = GTE_LM(gteop);
-
-	s64 RIR1 = ((s64)gteR * gteIR1) >> 8;
-	s64 GIR2 = ((s64)gteG * gteIR2) >> 8;
-	s64 BIR3 = ((s64)gteB * gteIR3) >> 8;
-
-#ifdef GTE_LOG
-	GTE_LOG("GTE DCPL\n");
-#endif
-	gteFLAG = 0;
-
-	gteMAC1 = A1(RIR1 + ((gteIR0 * limB1(gteRFC - RIR1, 0)) >> 12));
-	gteMAC2 = A2(GIR2 + ((gteIR0 * limB1(gteGFC - GIR2, 0)) >> 12));
-	gteMAC3 = A3(BIR3 + ((gteIR0 * limB1(gteBFC - BIR3, 0)) >> 12));
-
-	gteIR1 = limB1(gteMAC1, lm);
-	gteIR2 = limB2(gteMAC2, lm);
-	gteIR3 = limB3(gteMAC3, lm);
-
-	gteRGB0 = gteRGB1;
-	gteRGB1 = gteRGB2;
-	gteCODE2 = gteCODE;
-	gteR2 = limC1(gteMAC1 >> 4);
-	gteG2 = limC2(gteMAC2 >> 4);
-	gteB2 = limC3(gteMAC3 >> 4);
-}
-
-void gteGPF() {
-	int shift = 12 * GTE_SF(gteop);
-	int lm = GTE_LM(gteop);
-
-#ifdef GTE_LOG
-	GTE_LOG("GTE GPF\n");
-#endif
-	gteFLAG = 0;
-
-	gteMAC1 = A1((s64)(gteIR0 * gteIR1)) >> shift;
-	gteMAC2 = A2((s64)(gteIR0 * gteIR2)) >> shift;
-	gteMAC3 = A3((s64)(gteIR0 * gteIR3)) >> shift;
-	gteIR1 = limB1(gteMAC1, lm);
-	gteIR2 = limB2(gteMAC2, lm);
-	gteIR3 = limB3(gteMAC3, lm);
-
-	gteRGB0 = gteRGB1;
-	gteRGB1 = gteRGB2;
-	gteCODE2 = gteCODE;
-	gteR2 = limC1(gteMAC1 >> 4);
-	gteG2 = limC2(gteMAC2 >> 4);
-	gteB2 = limC3(gteMAC3 >> 4);
-}
-
-void gteGPL() {
-	int shift = 12 * GTE_SF(gteop);
-
-#ifdef GTE_LOG
-	GTE_LOG("GTE GPL\n");
-#endif
-	gteFLAG = 0;
-
-	gteMAC1 = A1((((s64)gteMAC1 << shift) + (gteIR0 * gteIR1)) >> shift);
-	gteMAC2 = A2((((s64)gteMAC2 << shift) + (gteIR0 * gteIR2)) >> shift);
-	gteMAC3 = A3((((s64)gteMAC3 << shift) + (gteIR0 * gteIR3)) >> shift);
-	gteIR1 = limB1(gteMAC1, 0);
-	gteIR2 = limB2(gteMAC2, 0);
-	gteIR3 = limB3(gteMAC3, 0);
-
-	gteRGB0 = gteRGB1;
-	gteRGB1 = gteRGB2;
-	gteCODE2 = gteCODE;
-	gteR2 = limC1(gteMAC1 >> 4);
-	gteG2 = limC2(gteMAC2 >> 4);
-	gteB2 = limC3(gteMAC3 >> 4);
+	docop2(gteop);
 }
 
 void gteDPCS() {
-	int shift = 12 * GTE_SF(gteop);
-
-#ifdef GTE_LOG
-	GTE_LOG("GTE DPCS\n");
-#endif
-	gteFLAG = 0;
-
-	gteMAC1 = A1(((gteR << 16) + (gteIR0 * limB1(A1((s64)gteRFC - (gteR << 4)) << (12 - shift), 0))) >> 12);
-	gteMAC2 = A2(((gteG << 16) + (gteIR0 * limB2(A2((s64)gteGFC - (gteG << 4)) << (12 - shift), 0))) >> 12);
-	gteMAC3 = A3(((gteB << 16) + (gteIR0 * limB3(A3((s64)gteBFC - (gteB << 4)) << (12 - shift), 0))) >> 12);
-
-	gteIR1 = limB1(gteMAC1, 0);
-	gteIR2 = limB2(gteMAC2, 0);
-	gteIR3 = limB3(gteMAC3, 0);
-	gteRGB0 = gteRGB1;
-	gteRGB1 = gteRGB2;
-	gteCODE2 = gteCODE;
-	gteR2 = limC1(gteMAC1 >> 4);
-	gteG2 = limC2(gteMAC2 >> 4);
-	gteB2 = limC3(gteMAC3 >> 4);
-}
-
-void gteDPCT() {
-	int v;
-
-#ifdef GTE_LOG
-	GTE_LOG("GTE DPCT\n");
-#endif
-	gteFLAG = 0;
-
-	for (v = 0; v < 3; v++) {
-		gteMAC1 = A1((((s64)gteR0 << 16) + ((s64)gteIR0 * (limB1(gteRFC - (gteR0 << 4), 0)))) >> 12);
-		gteMAC2 = A2((((s64)gteG0 << 16) + ((s64)gteIR0 * (limB1(gteGFC - (gteG0 << 4), 0)))) >> 12);
-		gteMAC3 = A3((((s64)gteB0 << 16) + ((s64)gteIR0 * (limB1(gteBFC - (gteB0 << 4), 0)))) >> 12);
-
-		gteRGB0 = gteRGB1;
-		gteRGB1 = gteRGB2;
-		gteCODE2 = gteCODE;
-		gteR2 = limC1(gteMAC1 >> 4);
-		gteG2 = limC2(gteMAC2 >> 4);
-		gteB2 = limC3(gteMAC3 >> 4);
-	}
-	gteIR1 = limB1(gteMAC1, 0);
-	gteIR2 = limB2(gteMAC2, 0);
-	gteIR3 = limB3(gteMAC3, 0);
-}
-
-void gteNCS() {
-#ifdef GTE_LOG
-	GTE_LOG("GTE NCS\n");
-#endif
-	gteFLAG = 0;
-
-	gteMAC1 = A1((((s64)gteL11 * gteVX0) + (gteL12 * gteVY0) + (gteL13 * gteVZ0)) >> 12);
-	gteMAC2 = A2((((s64)gteL21 * gteVX0) + (gteL22 * gteVY0) + (gteL23 * gteVZ0)) >> 12);
-	gteMAC3 = A3((((s64)gteL31 * gteVX0) + (gteL32 * gteVY0) + (gteL33 * gteVZ0)) >> 12);
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
-	gteMAC1 = A1((((s64)gteRBK << 12) + (gteLR1 * gteIR1) + (gteLR2 * gteIR2) + (gteLR3 * gteIR3)) >> 12);
-	gteMAC2 = A2((((s64)gteGBK << 12) + (gteLG1 * gteIR1) + (gteLG2 * gteIR2) + (gteLG3 * gteIR3)) >> 12);
-	gteMAC3 = A3((((s64)gteBBK << 12) + (gteLB1 * gteIR1) + (gteLB2 * gteIR2) + (gteLB3 * gteIR3)) >> 12);
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
-
-	gteRGB0 = gteRGB1;
-	gteRGB1 = gteRGB2;
-	gteCODE2 = gteCODE;
-	gteR2 = limC1(gteMAC1 >> 4);
-	gteG2 = limC2(gteMAC2 >> 4);
-	gteB2 = limC3(gteMAC3 >> 4);
-}
-
-void gteNCT() {
-	int v;
-	s32 vx, vy, vz;
-
-#ifdef GTE_LOG
-	GTE_LOG("GTE NCT\n");
-#endif
-	gteFLAG = 0;
-
-	for (v = 0; v < 3; v++) {
-		vx = VX(v);
-		vy = VY(v);
-		vz = VZ(v);
-		gteMAC1 = A1((((s64)gteL11 * vx) + (gteL12 * vy) + (gteL13 * vz)) >> 12);
-		gteMAC2 = A2((((s64)gteL21 * vx) + (gteL22 * vy) + (gteL23 * vz)) >> 12);
-		gteMAC3 = A3((((s64)gteL31 * vx) + (gteL32 * vy) + (gteL33 * vz)) >> 12);
-		gteIR1 = limB1(gteMAC1, 1);
-		gteIR2 = limB2(gteMAC2, 1);
-		gteIR3 = limB3(gteMAC3, 1);
-		gteMAC1 = A1((((s64)gteRBK << 12) + (gteLR1 * gteIR1) + (gteLR2 * gteIR2) + (gteLR3 * gteIR3)) >> 12);
-		gteMAC2 = A2((((s64)gteGBK << 12) + (gteLG1 * gteIR1) + (gteLG2 * gteIR2) + (gteLG3 * gteIR3)) >> 12);
-		gteMAC3 = A3((((s64)gteBBK << 12) + (gteLB1 * gteIR1) + (gteLB2 * gteIR2) + (gteLB3 * gteIR3)) >> 12);
-		gteRGB0 = gteRGB1;
-		gteRGB1 = gteRGB2;
-		gteCODE2 = gteCODE;
-		gteR2 = limC1(gteMAC1 >> 4);
-		gteG2 = limC2(gteMAC2 >> 4);
-		gteB2 = limC3(gteMAC3 >> 4);
-	}
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
-}
-
-void gteCC() {
-#ifdef GTE_LOG
-	GTE_LOG("GTE CC\n");
-#endif
-	gteFLAG = 0;
-
-	gteMAC1 = A1((((s64)gteRBK << 12) + (gteLR1 * gteIR1) + (gteLR2 * gteIR2) + (gteLR3 * gteIR3)) >> 12);
-	gteMAC2 = A2((((s64)gteGBK << 12) + (gteLG1 * gteIR1) + (gteLG2 * gteIR2) + (gteLG3 * gteIR3)) >> 12);
-	gteMAC3 = A3((((s64)gteBBK << 12) + (gteLB1 * gteIR1) + (gteLB2 * gteIR2) + (gteLB3 * gteIR3)) >> 12);
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
-	gteMAC1 = A1(((s64)gteR * gteIR1) >> 8);
-	gteMAC2 = A2(((s64)gteG * gteIR2) >> 8);
-	gteMAC3 = A3(((s64)gteB * gteIR3) >> 8);
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
-
-	gteRGB0 = gteRGB1;
-	gteRGB1 = gteRGB2;
-	gteCODE2 = gteCODE;
-	gteR2 = limC1(gteMAC1 >> 4);
-	gteG2 = limC2(gteMAC2 >> 4);
-	gteB2 = limC3(gteMAC3 >> 4);
+	docop2(gteop);
 }
 
 void gteINTPL() {
-	int shift = 12 * GTE_SF(gteop);
-	int lm = GTE_LM(gteop);
+	docop2(gteop);
+}
 
-#ifdef GTE_LOG
-	GTE_LOG("GTE INTPL\n");
-#endif
-	gteFLAG = 0;
+void gteMVMVA() {
+	docop2(gteop);
+}
 
-	gteMAC1 = A1(((gteIR1 << 12) + (gteIR0 * limB1(((s64)gteRFC - gteIR1), 0))) >> shift);
-	gteMAC2 = A2(((gteIR2 << 12) + (gteIR0 * limB2(((s64)gteGFC - gteIR2), 0))) >> shift);
-	gteMAC3 = A3(((gteIR3 << 12) + (gteIR0 * limB3(((s64)gteBFC - gteIR3), 0))) >> shift);
-	gteIR1 = limB1(gteMAC1, lm);
-	gteIR2 = limB2(gteMAC2, lm);
-	gteIR3 = limB3(gteMAC3, lm);
-	
-	gteRGB0 = gteRGB1;
-	gteRGB1 = gteRGB2;
-	gteCODE2 = gteCODE;
-	gteR2 = limC1(gteMAC1 >> 4);
-	gteG2 = limC2(gteMAC2 >> 4);
-	gteB2 = limC3(gteMAC3 >> 4);
+void gteNCDS() {
+	docop2(gteop);
 }
 
 void gteCDP() {
-#ifdef GTE_LOG
-	GTE_LOG("GTE CDP\n");
-#endif
-	gteFLAG = 0;
+	docop2(gteop);
+}
 
-	gteMAC1 = A1((((s64)gteRBK << 12) + (gteLR1 * gteIR1) + (gteLR2 * gteIR2) + (gteLR3 * gteIR3)) >> 12);
-	gteMAC2 = A2((((s64)gteGBK << 12) + (gteLG1 * gteIR1) + (gteLG2 * gteIR2) + (gteLG3 * gteIR3)) >> 12);
-	gteMAC3 = A3((((s64)gteBBK << 12) + (gteLB1 * gteIR1) + (gteLB2 * gteIR2) + (gteLB3 * gteIR3)) >> 12);
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
-	gteMAC1 = A1(((((s64)gteR << 4) * gteIR1) + (gteIR0 * limB1(gteRFC - ((gteR * gteIR1) >> 8), 0))) >> 12);
-	gteMAC2 = A2(((((s64)gteG << 4) * gteIR2) + (gteIR0 * limB2(gteGFC - ((gteG * gteIR2) >> 8), 0))) >> 12);
-	gteMAC3 = A3(((((s64)gteB << 4) * gteIR3) + (gteIR0 * limB3(gteBFC - ((gteB * gteIR3) >> 8), 0))) >> 12);
-	gteIR1 = limB1(gteMAC1, 1);
-	gteIR2 = limB2(gteMAC2, 1);
-	gteIR3 = limB3(gteMAC3, 1);
+void gteNCDT() {
+	docop2(gteop);
+}
 
-	gteRGB0 = gteRGB1;
-	gteRGB1 = gteRGB2;
-	gteCODE2 = gteCODE;
-	gteR2 = limC1(gteMAC1 >> 4);
-	gteG2 = limC2(gteMAC2 >> 4);
-	gteB2 = limC3(gteMAC3 >> 4);
+void gteNCCS() {
+	docop2(gteop);
+}
+
+void gteCC() {
+	docop2(gteop);
+}
+
+void gteNCS() {
+	docop2(gteop);
+}
+
+void gteNCT() {
+	docop2(gteop);
+}
+
+void gteSQR() {
+	docop2(gteop);
+}
+
+void gteDCPL() {
+	docop2(gteop);
+}
+
+void gteDPCT() {
+	docop2(gteop);
+}
+
+void gteAVSZ3() {
+	docop2(gteop);
+}
+
+void gteAVSZ4() {
+	docop2(gteop);
+}
+
+void gteRTPT() {
+	docop2(gteop);
+}
+
+void gteGPF() {
+	docop2(gteop);
+}
+
+void gteGPL() {
+	docop2(gteop);
+}
+
+void gteNCCT() {
+	docop2(gteop);
 }

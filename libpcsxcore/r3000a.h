@@ -57,6 +57,8 @@ typedef union {
 	struct { s8 l, h, h2, h3; } sb;
 	struct { s16 l, h; } sw;
 #endif
+	u32 d;
+	s32 sd;
 } PAIR;
 
 typedef union {
@@ -251,6 +253,15 @@ static inline u32 *Read_ICache(u32 pc, boolean isolate) {
 	// default
 	return (u32 *)PSXM(pc);
 }
+
+// U64 and S64 are used to wrap long integer constants.
+#ifdef __GNUC__
+#define U64(val) val##ULL
+#define S64(val) val##LL
+#else
+#define U64(val) val
+#define S64(val) val
+#endif
 
 #if defined(__BIGENDIAN__)
 

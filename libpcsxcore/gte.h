@@ -1,7 +1,5 @@
 /***************************************************************************
- *   PCSX-Revolution - PlayStation Emulator for Nintendo Wii               *
- *   Copyright (C) 2009-2010  PCSX-Revolution Dev Team                     *
- *   <http://code.google.com/p/pcsx-revolution/>                           *
+ *   Copyright (C) 2007 Ryan Schultz, PCSX-df Team, PCSX team              *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -37,14 +35,14 @@ void gteLWC2();
 void gteSWC2();
 
 void gteRTPS();
-void gteOP();
 void gteNCLIP();
+void gteOP();
 void gteDPCS();
 void gteINTPL();
 void gteMVMVA();
 void gteNCDS();
-void gteNCDT();
 void gteCDP();
+void gteNCDT();
 void gteNCCS();
 void gteCC();
 void gteNCS();

@@ -46,44 +46,34 @@ static void rec##f() { \
 	cop2readypc = pc + psxCP2time[_fFunct_(psxRegs.code)]<<2; \
 }
 
-#define CP2_FUNCNC(f) \
-void gte##f(); \
-static void rec##f() { \
-	if (pc < cop2readypc) idlecyclecount += (cop2readypc - pc)>>2; \
-	iFlushRegs(0); \
-	CALLFunc ((u32)gte##f); \
-/*	branch = 2; */\
-	cop2readypc = pc + psxCP2time[_fFunct_(psxRegs.code)]; \
-}
-
 CP2_FUNC(MFC2);
 CP2_FUNC(MTC2);
 CP2_FUNC(CFC2);
 CP2_FUNC(CTC2);
 CP2_FUNC(LWC2);
 CP2_FUNC(SWC2);
-CP2_FUNCNC(RTPS);
+CP2_FUNC(RTPS);
 CP2_FUNC(OP);
-CP2_FUNCNC(NCLIP);
+CP2_FUNC(NCLIP);
 CP2_FUNC(DPCS);
 CP2_FUNC(INTPL);
 CP2_FUNC(MVMVA);
-CP2_FUNCNC(NCDS);
-CP2_FUNCNC(NCDT);
-CP2_FUNCNC(CDP);
-CP2_FUNCNC(NCCS);
-CP2_FUNCNC(CC);
-CP2_FUNCNC(NCS);
-CP2_FUNCNC(NCT);
+CP2_FUNC(NCDS);
+CP2_FUNC(NCDT);
+CP2_FUNC(CDP);
+CP2_FUNC(NCCS);
+CP2_FUNC(CC);
+CP2_FUNC(NCS);
+CP2_FUNC(NCT);
 CP2_FUNC(SQR);
 CP2_FUNC(DCPL);
-CP2_FUNCNC(DPCT);
-CP2_FUNCNC(AVSZ3);
-CP2_FUNCNC(AVSZ4);
-CP2_FUNCNC(RTPT);
+CP2_FUNC(DPCT);
+CP2_FUNC(AVSZ3);
+CP2_FUNC(AVSZ4);
+CP2_FUNC(RTPT);
 CP2_FUNC(GPF);
 CP2_FUNC(GPL);
-CP2_FUNCNC(NCCT);
+CP2_FUNC(NCCT);
 
 #ifdef __cplusplus
 }
