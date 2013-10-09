@@ -255,7 +255,7 @@ static inline u32 *Read_ICache(u32 pc, boolean isolate) {
 }
 
 // U64 and S64 are used to wrap long integer constants.
-#ifdef __GNUC__
+#if defined __GNUC__ || defined _MSC_VER_
 #define U64(val) val##ULL
 #define S64(val) val##LL
 #else
