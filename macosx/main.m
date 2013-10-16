@@ -121,7 +121,7 @@ void SysReset()
 
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
-static NSDateFormatter* debugDateFormatter()
+static inline NSDateFormatter* debugDateFormatter()
 {
 	static NSDateFormatter* theFormatter = nil;
 	if (theFormatter == nil) {
@@ -133,7 +133,29 @@ static NSDateFormatter* debugDateFormatter()
 #endif
 #endif
 
-void SysPrintf(const char *fmt, ...) {
+static void AddStringToLogList(const char *themsg)
+{
+	static NSMutableString *theStr;
+	NSRange newlineRange, fullLineRange;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		theStr = [[NSMutableString alloc] init];
+	});
+	[theStr appendString:@(themsg)];
+	while ((newlineRange = [theStr rangeOfString:@"\n"]).location != NSNotFound) {
+		NSString *tmpStr = [theStr substringFromIndex:newlineRange.location];
+		if (tmpStr && ![tmpStr isEqualToString:@""]) {
+			NSLog(@"%@", tmpStr);
+		}
+		fullLineRange.location = 0;
+		fullLineRange.length = newlineRange.location + newlineRange.length;
+		fullLineRange = [theStr rangeOfComposedCharacterSequencesForRange:fullLineRange];
+		[theStr deleteCharactersInRange:fullLineRange];
+	}
+}
+
+void SysPrintf(const char *fmt, ...)
+{
 	va_list list;
 	char *msg = calloc(sizeof(char), 512);
 	
@@ -142,7 +164,7 @@ void SysPrintf(const char *fmt, ...) {
 	va_end(list);
 		
 	RunOnMainThreadSync(^{
-		if (Config.PsxOut) NSLog (@"%s", msg);
+		if (Config.PsxOut) AddStringToLogList(msg);
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
 		if (emuLog) fprintf(emuLog, "%s %s: %s",[[debugDateFormatter() stringFromDate:[NSDate date]] UTF8String],
@@ -214,7 +236,8 @@ void SysUpdate()
 }
 
 // Returns to the Gui
-void SysRunGui() {
+void SysRunGui()
+{
 	if (powerAssertion != kIOPMNullAssertionID) {
 		IOPMAssertionRelease(powerAssertion);
 		powerAssertion = kIOPMNullAssertionID;
@@ -222,7 +245,8 @@ void SysRunGui() {
 }
 
 // Close mem and plugins
-void SysClose() {
+void SysClose()
+{
 	EmuShutdown();
 	ReleasePlugins();
 	
