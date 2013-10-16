@@ -32,7 +32,8 @@ static IOPMAssertionID powerAssertion = kIOPMNullAssertionID;
 
 void PADhandleKey(int key);
 
-int main(int argc, const char *argv[]) {
+int main(int argc, const char *argv[])
+{
     if ( argc >= 2 && strncmp (argv[1], "-psn", 4) == 0 ) {
         char parentdir[MAXPATHLEN];
         char *c;
@@ -70,7 +71,8 @@ int main(int argc, const char *argv[]) {
     return NSApplicationMain(argc, argv);
 }
 
-int SysInit() {
+int SysInit()
+{
 	if (!sysInited) {
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
@@ -101,7 +103,7 @@ int SysInit() {
 	
 	LoadMcds(Config.Mcd1, Config.Mcd2);
 	
-	IOReturn success = IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, CFSTR("PSX Emu Running"), &powerAssertion);
+	IOReturn success = IOPMAssertionCreateWithName(kIOPMAssertionTypePreventUserIdleDisplaySleep, kIOPMAssertionLevelOn, CFSTR("PSX Emu Running"), &powerAssertion);
 	if (success != kIOReturnSuccess) {
 		NSLog(@"Unable to stop sleep, error code %d", success);
 	}
@@ -111,7 +113,8 @@ int SysInit() {
 	return 0;
 }
 
-void SysReset() {
+void SysReset()
+{
 	[EmuThread resetNow];
 	//EmuReset();
 }
@@ -150,9 +153,9 @@ void SysPrintf(const char *fmt, ...) {
 	free(msg);
 }
 
-void SysMessage(const char *fmt, ...) {
+void SysMessage(const char *fmt, ...)
+{
 	va_list list;
-	
 	NSString *locFmtString = NSLocalizedString(@(fmt), nil);
 	
 	va_start(list, fmt);
@@ -166,7 +169,8 @@ void SysMessage(const char *fmt, ...) {
 	});
 }
 
-void *SysLoadLibrary(const char *lib) {
+void *SysLoadLibrary(const char *lib)
+{
 	NSBundle *bundle = [[NSBundle alloc] initWithPath:[[NSFileManager defaultManager] stringWithFileSystemRepresentation:lib length:strlen(lib)]];
 	if (bundle != nil) {
 		return dlopen([[bundle executablePath] fileSystemRepresentation], RTLD_LAZY /*RTLD_NOW*/);
@@ -174,11 +178,13 @@ void *SysLoadLibrary(const char *lib) {
 	return dlopen(lib, RTLD_LAZY);
 }
 
-void *SysLoadSym(void *lib, const char *sym) {
+void *SysLoadSym(void *lib, const char *sym)
+{
 	return dlsym(lib, sym);
 }
 
-const char *SysLibError() {
+const char *SysLibError()
+{
 #ifdef DEBUG
 	const char *theErr = dlerror();
 	if (theErr) {
@@ -195,7 +201,8 @@ void SysCloseLibrary(void *lib) {
 }
 
 // Called periodically from the emu thread
-void SysUpdate() {
+void SysUpdate()
+{
 #if 0
 	PADhandleKey(PAD1_keypressed() & 0xffffffff);
 	PADhandleKey(PAD2_keypressed() & 0xffffffff);
@@ -241,12 +248,14 @@ void SysClose() {
 	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil userInfo:@{memCardChangeNumberKey: @3}];
 }
 
-void OnFile_Exit() {
+void OnFile_Exit()
+{
     SysClose();
 	[NSApp stop:nil];
 }
 
-char* Pcsxr_locale_text(char* toloc){
+char* Pcsxr_locale_text(char* toloc)
+{
 	NSBundle *mainBundle = [NSBundle mainBundle];
 	NSString *origString = @(toloc), *transString = nil;
 	transString = [mainBundle localizedStringForKey:origString value:@"" table:nil];
