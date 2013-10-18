@@ -143,7 +143,7 @@ static void AddStringToLogList(const char *themsg)
 	});
 	[theStr appendString:@(themsg)];
 	while ((newlineRange = [theStr rangeOfString:@"\n"]).location != NSNotFound) {
-		NSString *tmpStr = [theStr substringFromIndex:newlineRange.location];
+		NSString *tmpStr = [theStr substringToIndex:newlineRange.location];
 		if (tmpStr && ![tmpStr isEqualToString:@""]) {
 			NSLog(@"%@", tmpStr);
 		}
