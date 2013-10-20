@@ -6,23 +6,23 @@
  Copyright 2011 __MyCompanyName__. All rights reserved.
  */
 
-"Gamepad/Keyboard/Mouse Input" = "Gamepad/Keyboard/Mouse Input";
-"Joystick: Button %d" = "Joystick: Button %d";
-"Joystick: Axis %d%c" = "Joystick: Axis %d%c";
-"Joystick: Hat %d %s" = "Joystick: Hat %d %s";
-"Keyboard: %s" = "Keyboard: %s";
+"Gamepad/Keyboard/Mouse Input" = "Játékirányító/Billentyűzet bemenet";
+"Joystick: Button %d" = "Joystick: %d gomb";
+"Joystick: Axis %d%c" = "Joystick: %d%c irány";
+"Joystick: Hat %d %s" = "Joystick: %d %s hat";
+"Keyboard: %s" = "Billentyűzet: %s";
 
-"(Keyboard only)" = "(Keyboard only)";
-"(Not Set)" = "(Not Set)";
+//"(Keyboard only)" = "(Keyboard only)";
+"(Not Set)" = "(Nincs beállítva)";
 
-"D-Pad Up" = "D-Pad Up";
-"D-Pad Down" = "D-Pad Down";
-"D-Pad Left" = "D-Pad Left";
-"D-Pad Right" = "D-Pad Right";
-"Cross" = "Cross";
-"Circle" = "Circle";
-"Square" = "Square";
-"Triangle" = "Triangle";
+"D-Pad Up" = "Digitális FEL";
+"D-Pad Down" = "Digitális LE";
+"D-Pad Left" = "Digitális BALRA";
+"D-Pad Right" = "Digitális JOBBRA";
+"Cross" = "KERESZT";
+"Circle" = "KÖR";
+"Square" = "NÉGYSZÖG";
+"Triangle" = "HÁROMSZÖG";
 "L1" = "L1";
 "R1" = "R1";
 "L2" = "L2";
@@ -31,25 +31,25 @@
 "Start" = "Start";
 "L3" = "L3";
 "R3" = "R3";
-"Analog" = "Analog";
-"L-Stick Right" = "L-Stick Right";
-"L-Stick Left" = "L-Stick Left";
-"L-Stick Down" = "L-Stick Down";
-"L-Stick Up" = "L-Stick Up";
-"R-Stick Right" = "R-Stick Right";
-"R-Stick Left" = "R-Stick Left";
-"R-Stick Down" = "R-Stick Down";
-"R-Stick Up" = "R-Stick Up";
+"Analog" = "Analóg irányító";
+"L-Stick Right" = "Bal kar jobbra";
+"L-Stick Left" = "Bal kar balra";
+"L-Stick Down" = "Bal kar le";
+"L-Stick Up" = "Bal kar fel";
+"R-Stick Right" = "Jobb kar jobbra";
+"R-Stick Left" = "Jobb kar balra";
+"R-Stick Down" = "Jobb kar le";
+"R-Stick Up" = "Jobb kar fel";
 
 //Unused right now
-"Centered" = "Centered";
-"Up" = "Up";
-"Right" = "Right";
-"Rightup" = "Right-up";
-"Down" = "Down";
-"Rightdown" = "Right-down";
-"Left" = "Left";
-"Leftup" = "Left-up";
-"Leftdown" = "Left-down";
+"Centered" = "Középen";
+"Up" = "Fel";
+"Right" = "Jobbra";
+"Rightup" = "Jobbra fel";
+"Down" = "Le";
+"Rightdown" = "Jobbra le";
+"Left" = "Balra";
+"Leftup" = "Balra fel";
+"Leftdown" = "Balra le";
 
 

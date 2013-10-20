@@ -6,6 +6,6 @@
  Copyright 2011 __MyCompanyName__. All rights reserved.
  */
 
-"Error allocating memory!\n" = "Error allocating memory!\n";
-"error connecting to %s: %s\n" = "Error connecting to %s: %s\n";
-"Socket Driver" = "Socket Driver";
+"Error allocating memory!\n" = "Memória kiosztási hiba!\n";
+"error connecting to %s: %s\n" = "hiba a következőhöz történő kapcsolódáskor: %s: %s\n";
+"Socket Driver" = "Socket illesztőprogram";

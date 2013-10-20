@@ -86,7 +86,7 @@
 "Deleting a block will remove all saved data on that block.\n\nThis cannot be undone." = "Deleting a memory card object will set the blocks to not be readable by the emulator, and may result in the data being overwritten in the future.";
 "No Free Space" = "No Free Space";
 "Memory card %d doesn't have %d free consecutive blocks on it. Please remove some blocks on that card to continue" = "Memory card %1$d doesn't have %2$d free consecutive blocks on it. Please remove some blocks on that card to continue.";
-"Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@ (%@),\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?" = "Memory card %1$i does not have enough free consecutive blocks.\n\nIn order to copy over \"%2$@ (%3$@),\" memory card %4$i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?";
+"Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@ (%@),\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?" = "Memory card %1$i does not have enough free consecutive blocks.\n\nIn order to copy over “%2$@ (%3$@),” memory card %4$i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?";
 
 //Cheat manager
 "Save Cheats" = "Save Cheats";

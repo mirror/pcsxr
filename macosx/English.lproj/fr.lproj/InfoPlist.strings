@@ -2,12 +2,12 @@
 
 //Commented out strings are those that need to be translated
 
-CFBundleName = "PCSXR";
-CFBundleShortVersionString = "PCSX-Reloaded 1.9.94";
-CFBundleGetInfoString = "PlayStation Emulator based on PCSX-df Project.";
-NSHumanReadableCopyright = "Copyright © 2003-2005 PCSX Team, Gil Pedersen, Nicolas Pepin-Perreault.\nCopyright © 2009-2013 PCSX-Reloaded Team.";
+//CFBundleName = "PCSXR";
+//CFBundleShortVersionString = "PCSX-Reloaded 1.9.94";
+//CFBundleGetInfoString = "PlayStation Emulator based on PCSX-df Project.";
+//NSHumanReadableCopyright = "Copyright © 2003-2005 PCSX Team, Gil Pedersen, Nicolas Pepin-Perreault.\nCopyright © 2009-2013 PCSX-Reloaded Team.";
 "Playstation Emulator Plug-in" = "PlayStation Emulator Greffon"; //Incomplete/mangled translation
-"Playstation BIOS Image" = "PlayStation BIOS Image";
+//"Playstation BIOS Image" = "PlayStation BIOS Image";
 "PCSXR Memory Card" = "Format de carte mémoire PSX";
 //"PCSXR Freeze State" = "PCSXR Freeze State";
 "Playstation Cheat" = "Codes de triche PCSXR";
