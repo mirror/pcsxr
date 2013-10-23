@@ -19,6 +19,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface NetSfPeopsSoftGPUPluginWindow : NSWindow
-{
-}
+
 @end

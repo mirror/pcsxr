@@ -42,6 +42,8 @@ __private_extern__ char* PLUGLOC(char* toloc);
 
 static PluginConfigController *windowController = nil;
 
+#define kWindowSize @"Window Size"
+
 void AboutDlgProc()
 {
 	// Get parent application instance
@@ -136,10 +138,28 @@ void ReadConfig(void)
 								 @"VertexShader": [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"] bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil],
 								 @"FragmentShader": [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"] bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil],
 								 @"UseShader": @NO,
-								 @"ShaderQuality": @4}}];
+								 @"ShaderQuality": @4,
+								 kWindowSize: NSStringFromSize(NSMakeSize(640, 480))}}];
 	
 	keyValues = [defaults dictionaryForKey:PrefsKey];
-
+	BOOL windowSizeNeedsReset = NO;
+	if (keyValues) {
+		NSSize size = NSSizeFromString(keyValues[kWindowSize]);
+		if (!keyValues[kWindowSize]) {
+			windowSizeNeedsReset = YES;
+		} else if ([keyValues[kWindowSize] isKindOfClass:[NSNumber class]]) {
+			windowSizeNeedsReset = YES;
+		} else if (size.height == 0 || size.width == 0) {
+			windowSizeNeedsReset = YES;
+		}
+	}
+	if (windowSizeNeedsReset) {
+		NSMutableDictionary *tmpDict = [[NSMutableDictionary alloc] initWithDictionary:keyValues];
+		tmpDict[kWindowSize] = NSStringFromSize(NSMakeSize(640, 480));
+		[defaults setObject:tmpDict forKey:PrefsKey];
+		[defaults synchronize];
+	}
+	
 	iShowFPS = [keyValues[@"FPS Counter"] boolValue];
 	iWindowMode = [keyValues[@"Auto Full Screen"] boolValue] ? 0 : 1;
 	UseFrameSkip = [keyValues[@"Frame Skipping"] boolValue];
@@ -150,8 +170,10 @@ void ReadConfig(void)
 	iUseDither = [keyValues[@"Dither Mode"] intValue];
 	dwCfgFixes = [keyValues[@"Hacks"] unsignedIntValue];
 	
-	iResX = 640;
-	iResY = 480;
+	NSSize windowSize = NSSizeFromString(keyValues[kWindowSize]);
+	
+	iResX = windowSize.width;
+	iResY = windowSize.height;
 	iUseNoStretchBlt = 1;
 
 	fFrameRate = 60;
@@ -163,7 +185,8 @@ void ReadConfig(void)
 		ulKeybits &= ~KEY_SHOWFPS;
 	
 	// additional checks
-	if(!iColDepth)       iColDepth = 32;
+	if(!iColDepth)
+		iColDepth = 32;
 	if(iUseFixes) {
 		dwActFixes = dwCfgFixes;
 	} else {
@@ -171,7 +194,8 @@ void ReadConfig(void)
 	}
 	SetFixes();
 	
-	if(iFrameLimit == 2) SetAutoFrameCap();
+	if(iFrameLimit == 2)
+		SetAutoFrameCap();
 	bSkipNextFrame = FALSE;
 	
 	szDispBuf[0] = 0;
@@ -212,6 +236,7 @@ void ReadConfig(void)
 
 	writeDic[@"VertexShader"] = [vertexPath bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil];
 	writeDic[@"FragmentShader"] = [fragmentPath bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil];
+	writeDic[kWindowSize] = NSStringFromSize(NSMakeSize(self.displayWidth.integerValue, self.displayHeight.integerValue));
 	
 	// write to defaults
 	[defaults setObject:writeDic forKey:PrefsKey];
@@ -295,6 +320,7 @@ void ReadConfig(void)
 - (void)loadValues
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSSize theSize;
 	
 	ReadConfig();
 	
@@ -332,6 +358,9 @@ void ReadConfig(void)
 	for (NSCell *control in [hacksMatrix cells]) {
 			[control setIntValue:(hackValues >> ([control tag] - 1)) & 1];
 	}
+	theSize = NSSizeFromString(keyValues[kWindowSize]);
+	[self.displayWidth setIntegerValue:theSize.width];
+	[self.displayHeight setIntegerValue:theSize.height];
 	
 	[self hackToggle:hackEnable];
 	[self toggleShader:shaders];

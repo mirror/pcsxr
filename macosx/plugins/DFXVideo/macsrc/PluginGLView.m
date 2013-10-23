@@ -309,15 +309,6 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 		// Make this context current
 		[[self openGLContext] makeCurrentContext];
 		
-		// Loads the shaders
-		//shader=LoadShader(GL_VERTEX_SHADER,"/Users/alexandremathieu/vertex.c");
-		//program=glCreateProgram();
-		//glAttachShader(program, shader);
-		//glLinkProgram(program);
-		//if(program == 0){
-		//	printf("Program invalide bourdel\n");
-		//}
-		
 		if (PSXDisplay.Disabled) {
 			glClear(GL_COLOR_BUFFER_BIT);
 		} else {
@@ -735,31 +726,6 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 //		[self setNeedsDisplay:true];
 	}
 }
-/*
-- (void)mouseDown:(NSEvent *)theEvent
-{
-	PluginWindowController *controller = [[self window] windowController];
-	
-	static unsigned long lastTime = 0;
-	unsigned long time;
-	
-	time = TickCount();
-	
-	if (lastTime != 0) {
-		if (time - lastTime > GetDblTime()) {
-			if (isFullscreen) {
-				[[self openGLContext] clearDrawable];
-			} else {
-				[[self openGLContext] setFullScreen];
-			}
-			isFullscreen = 1-isFullscreen;
-			lastTime = 0;
-			return;
-		}
-	}
-	
-	lastTime = time;
-}*/
 
 - (GLuint)loadShader:(GLenum)type location:(NSURL*)filename
 {

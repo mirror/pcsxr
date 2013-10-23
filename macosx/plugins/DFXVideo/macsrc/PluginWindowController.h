@@ -28,14 +28,13 @@ extern PluginWindowController *gameController;
 
 @interface PluginWindowController : NSWindowController <NSWindowDelegate>
 {
-    IBOutlet NSOpenGLView *glView;
-	 
-	 NSWindow *fullWindow;
+	IBOutlet NSOpenGLView *glView;
+	
+	NSWindow *fullWindow;
 }
+@property BOOL fullscreen;
 
 + (id)openGameView;
 - (PluginGLView *)openGLView;
-- (BOOL)fullscreen;
-- (void)setFullscreen:(BOOL)flag;
 
 @end

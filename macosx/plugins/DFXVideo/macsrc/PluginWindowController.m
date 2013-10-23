@@ -35,12 +35,12 @@ NSRect windowFrame;
 		}
 		gameWindow = [gameController window];
 	}
+	windowFrame = NSMakeRect(0, 0, iResX + 8, iResY + 4);
 	
 	if (windowFrame.size.width != 0) {
 		[gameWindow setFrame:windowFrame display:NO];
-	} else {
-		[gameWindow center];
 	}
+	[gameWindow center];
 
 	[gameWindow makeKeyAndOrderFront:nil];
 	[gameController showWindow:nil];

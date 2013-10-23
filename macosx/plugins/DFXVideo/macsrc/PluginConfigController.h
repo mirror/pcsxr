@@ -30,6 +30,8 @@
 
 @property (strong) NSURL *vertexPath;
 @property (strong) NSURL *fragmentPath;
+@property (weak) IBOutlet NSFormCell *displayWidth;
+@property (weak) IBOutlet NSFormCell *displayHeight;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;
