@@ -635,7 +635,7 @@ static int parsecue(const char *isofile) {
 				ti[numtracks].type = CDDA;
 				sector_size = CD_FRAMESIZE_RAW;
 				// Check if extension is mp3, etc, for compressed audio formats
-				if ((ti[numtracks].cddatype = get_cdda_type(filepath)) > BIN) {
+				if (multifile && (ti[numtracks].cddatype = get_cdda_type(filepath)) > BIN) {
 					int seconds = get_compressed_cdda_track_length(filepath) + 0;
 					const boolean lazy_decode = TRUE; // TODO: config param
 
@@ -718,7 +718,7 @@ static int parsecue(const char *isofile) {
 
 			// update global offset if this is not first file in this .cue
 			if (numtracks + 1 > 1) {
-				multifile = 1;
+				multifile = TRUE;
 				sector_offs += file_len;
 			}
 
@@ -1361,8 +1361,16 @@ static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector)
 	}*/
 	//printf("SeekSector %i %i %i %i\n", sector, pos->sector, prevsector, base);
 
-	if (sector > 2*75 && sector <= len_ecm_savetable) { // actual data starts after 150 "pregap", ignore LUT
-		pos = &(ecm_savetable[sector-0]); // get sector from LUT which points to wanted sector or to beginning
+
+	if (sector <= len_ecm_savetable) {
+		// get sector from LUT which points to wanted sector or close to
+		for (sectorcount = sector; ((sectorcount > 0) && ((sector-sectorcount) <= 2*75)); sectorcount--) {
+			if (ecm_savetable[sectorcount].filepos >= ECM_HEADER_SIZE) {
+				pos = &(ecm_savetable[sectorcount]);
+				//printf("LUTSector %i %i %i %i\n", sector, pos->sector, prevsector, base);
+				break;
+			}
+		}
 		// if suitable sector was not found from LUT use last sector if less than wanted sector
 		if (pos->filepos <= ECM_HEADER_SIZE && sector > prevsector) pos=&(ecm_savetable[prevsector]);
 	}
@@ -1425,7 +1433,7 @@ static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector)
 				if(fread(sector_buffer + 0x00C, 1, 0x003, f) != 0x003) { goto error_in; }
 				if(fread(sector_buffer + 0x010, 1, 0x800, f) != 0x800) { goto error_in; }
 				if (!processsectors) break; // seek only
-				reconstruct_sector(sector_buffer, 1);
+				reconstruct_sector(sector_buffer, type);
 				//output_edc = edc_compute(output_edc, sector_buffer, ECM_SECTOR_SIZE[type]);
 				if(decoded_ecm_sectors && fwrite(sector_buffer, 1, ECM_SECTOR_SIZE[type], decoded_ecm) != ECM_SECTOR_SIZE[type]) { goto error_out; }
 				break;
@@ -1434,7 +1442,7 @@ static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector)
 				writebytecount += ECM_SECTOR_SIZE[type];
 				if (!processsectors) { fseek(f, +0x804, SEEK_CUR); break; } // seek only
 				if(fread(sector_buffer + 0x014, 1, 0x804, f) != 0x804) { goto error_in; }
-				reconstruct_sector(sector_buffer, 2);
+				reconstruct_sector(sector_buffer, type);
 				//output_edc = edc_compute(output_edc, sector_buffer + 0x10, ECM_SECTOR_SIZE[type]);
 				if(decoded_ecm_sectors && fwrite(sector_buffer + 0x10, 1, ECM_SECTOR_SIZE[type], decoded_ecm) != ECM_SECTOR_SIZE[type]) { goto error_out; }
 				break;
@@ -1443,7 +1451,7 @@ static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector)
 				writebytecount += ECM_SECTOR_SIZE[type];
 				if (!processsectors) { fseek(f, +0x918, SEEK_CUR); break; } // seek only
 				if(fread(sector_buffer + 0x014, 1, 0x918, f) != 0x918) { goto error_in; }
-				reconstruct_sector(sector_buffer, 3);
+				reconstruct_sector(sector_buffer, type);
 				//output_edc = edc_compute(output_edc, sector_buffer + 0x10, ECM_SECTOR_SIZE[type]);
 				if(decoded_ecm_sectors && fwrite(sector_buffer + 0x10, 1, ECM_SECTOR_SIZE[type], decoded_ecm) != ECM_SECTOR_SIZE[type]) { goto error_out; }
 				break;
@@ -1563,7 +1571,7 @@ static void PrintTracks(void) {
 
 	for (i = 1; i <= numtracks; i++) {
 		SysPrintf(_("Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"),
-			i, (ti[i].type == DATA ? "DATA" : ti[i].cddatype == BIN ? "CDDA" : "CZDA"),
+			i, (ti[i].type == DATA ? "DATA" : ti[i].cddatype == CCDDA ? "CZDA" : "CDDA"),
 			ti[i].start[0], ti[i].start[1], ti[i].start[2],
 			ti[i].length[0], ti[i].length[1], ti[i].length[2]);
 	}
@@ -1590,7 +1598,7 @@ static long CALLBACK ISOopen(void) {
 	subChanRaw = FALSE;
 	pregapOffset = 0;
 	cdrIsoMultidiskCount = 1;
-	multifile = 0;
+	multifile = FALSE;
 
 	CDR_getBuffer = ISOgetBuffer;
 	cdimg_read_func = cdread_normal;
