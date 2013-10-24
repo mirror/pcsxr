@@ -926,7 +926,7 @@ void state_load(gchar *state_filename) {
 	fclose(fp);
 
 	// If the window exists, then we are loading the state from within
-	// within the PCSXR GUI. We need to initialise the plugins first
+	// the PCSXR GUI. We need to initialise the plugins first.
 	if (Window) {
 		destroy_main_window();
 
@@ -960,6 +960,17 @@ void state_load(gchar *state_filename) {
 
 void state_save(gchar *state_filename) {
 	char Text[MAXPATHLEN + 20];
+
+	// If the window exists, then we are saving the state from within
+	// the PCSXR GUI. We need to initialise the plugins first.
+	if (Window) {
+		destroy_main_window();
+
+		if (OpenPlugins() == -1) {
+			SysRunGui();
+			return;
+		}
+	}
 
 	GPU_updateLace();
 
