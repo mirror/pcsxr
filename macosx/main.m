@@ -167,8 +167,7 @@ void SysPrintf(const char *fmt, ...)
 		if (Config.PsxOut) AddStringToLogList(msg);
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
-		if (emuLog) fprintf(emuLog, "%s %s: %s",[[debugDateFormatter() stringFromDate:[NSDate date]] UTF8String],
-							[[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"] UTF8String], msg);
+		if (emuLog) fprintf(emuLog, "%s", msg);
 #endif
 #endif
 	});
