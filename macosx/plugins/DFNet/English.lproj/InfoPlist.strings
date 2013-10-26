@@ -3,4 +3,4 @@
 CFBundleName = "NetPlay";
 CFBundleShortVersionString = "1.0";
 CFBundleGetInfoString = "NetPlay plugin by linuzappz.";
-NSHumanReadableCopyright = "Copyright (c) 2010 C.W. Betts.";
+NSHumanReadableCopyright = "Copyright © 2010 C.W. Betts.";

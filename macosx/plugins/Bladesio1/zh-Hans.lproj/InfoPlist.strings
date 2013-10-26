@@ -1,6 +1,0 @@
-﻿/* Localized versions of Info.plist keys */
-
-CFBundleName = "Bladesio1 sio1 plug-in";
-CFBundleShortVersionString = "1.0";
-CFBundleGetInfoString = "Based on bladesio plugin by linuzappz.";
-NSHumanReadableCopyright = "Copyright © 2013 C.W. Betts.";

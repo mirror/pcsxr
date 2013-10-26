@@ -1,6 +1,0 @@
-﻿/* Localized versions of Info.plist keys */
-
-CFBundleName = "DFInput PSX Controller Plugin";
-CFBundleShortVersionString = "DFInput version 1.5";
-CFBundleGetInfoString = "DFInput PSX Controller Plugin version 1.5, Copyright © 2009 Wei Mingzhi.";
-NSHumanReadableCopyright = "Copyright © 2009 Wei Mingzhi.";

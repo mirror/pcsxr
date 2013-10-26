@@ -1,6 +1,0 @@
-﻿/* Localized versions of Info.plist keys */
-
-CFBundleName = "SDL Sound Plugin";
-CFBundleShortVersionString = "SPU Plugin for PCSXR";
-CFBundleGetInfoString = "Based on P.E.Op.S. SPU Sound Plugin.";
-NSHumanReadableCopyright = "Copyright © 2004 Gil Pedersen.";
