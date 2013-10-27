@@ -291,7 +291,7 @@ done:
         return YES;
 
 	[EmuThread pause];
-	while ([EmuThread isPaused] != 2) [NSThread sleepUntilDate:[[NSDate date] addTimeInterval:0.05]];
+	while ([EmuThread isPaused] != 2) [NSThread sleepUntilDate:[[NSDate date] dateByAddingTimeInterval:0.05]];
 	
 	return NO;
 }
