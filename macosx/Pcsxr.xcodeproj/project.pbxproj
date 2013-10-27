@@ -3379,7 +3379,6 @@
 					../libpcsxcore,
 					../macosx,
 				);
-				RUN_CLANG_STATIC_ANALYZER = YES;
 			};
 			name = Release;
 		};
