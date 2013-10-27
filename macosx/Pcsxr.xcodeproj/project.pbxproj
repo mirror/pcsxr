@@ -173,7 +173,6 @@
 		554FD70C17C6A1F10056CF66 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; };
 		55534AF218183BFA006D6BCB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55534AF118183BFA006D6BCB /* Foundation.framework */; };
 		55534AF518183BFB006D6BCB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55534AF418183BFB006D6BCB /* main.m */; };
-		55534AF918183BFB006D6BCB /* updateInfoPlist.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55534AF818183BFB006D6BCB /* updateInfoPlist.1 */; };
 		5557769A17EBE7D60019D008 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5557769917EBE7D60019D008 /* Media.xcassets */; };
 		5581463917AABCD100862DBF /* PcsxrCheatHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5581463817AABCD100862DBF /* PcsxrCheatHandler.m */; };
 		559366CA12B694DF004ACC1E /* iR3000A-64.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C112B694DF004ACC1E /* iR3000A-64.c */; };
@@ -358,16 +357,6 @@
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
-		};
-		55534AEE18183BFA006D6BCB /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-				55534AF918183BFB006D6BCB /* updateInfoPlist.1 in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 1;
 		};
 		71AD2DF010C3573400365243 /* Copy PlugIns */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -638,7 +627,6 @@
 		55534AF118183BFA006D6BCB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55534AF418183BFB006D6BCB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		55534AF718183BFB006D6BCB /* updateInfoPlist-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "updateInfoPlist-Prefix.pch"; sourceTree = "<group>"; };
-		55534AF818183BFB006D6BCB /* updateInfoPlist.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = updateInfoPlist.1; sourceTree = "<group>"; };
 		5557769917EBE7D60019D008 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		55707E41181232A9007CC5D0 /* pt-BR */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		55707E6518123456007CC5D0 /* ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1504,7 +1492,6 @@
 			isa = PBXGroup;
 			children = (
 				55534AF418183BFB006D6BCB /* main.m */,
-				55534AF818183BFB006D6BCB /* updateInfoPlist.1 */,
 				55534AF618183BFB006D6BCB /* Supporting Files */,
 			);
 			path = updateInfoPlist;
@@ -1822,7 +1809,6 @@
 			buildPhases = (
 				55534AEC18183BFA006D6BCB /* Sources */,
 				55534AED18183BFA006D6BCB /* Frameworks */,
-				55534AEE18183BFA006D6BCB /* CopyFiles */,
 				55534AFE18183D86006D6BCB /* ShellScript */,
 			);
 			buildRules = (
@@ -3091,7 +3077,6 @@
 					../libpcsxcore,
 					../macosx,
 				);
-				LLVM_LTO = YES;
 			};
 			name = Instrument;
 		};
@@ -3394,7 +3379,6 @@
 					../libpcsxcore,
 					../macosx,
 				);
-				LLVM_LTO = YES;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 			};
 			name = Release;
