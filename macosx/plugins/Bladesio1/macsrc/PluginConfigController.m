@@ -188,7 +188,7 @@ void ReadConfig()
 	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 
 	[enabledButton setState: [keyValues[kSioEnabled] boolValue] ? NSOnState : NSOffState];
-	[ipAddressField setTitleWithMnemonic:keyValues[kSioIPAddress]];
+	[[ipAddressField cell] setTitle:keyValues[kSioIPAddress]];
 	[portField setIntValue:[keyValues[kSioPort] intValue]];
 	
 	switch ([keyValues[kSioPlayer] integerValue]) {

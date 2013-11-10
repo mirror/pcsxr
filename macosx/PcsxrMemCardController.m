@@ -42,7 +42,7 @@
 		fullPath = [[def URLForKey:@"Mcd1"] path];
 		fileName = [fm displayNameAtPath:fullPath];
 		
-		[memCard1Label setTitleWithMnemonic:fileName];
+		[[memCard1Label cell] setTitle:fileName];
 		[memCard1Label setToolTip:fullPath];
 		
 		[self loadMemoryCardInfoForCard:1];
@@ -52,7 +52,7 @@
 		fullPath = [[def URLForKey:@"Mcd2"] path];
 		fileName = [fm displayNameAtPath:fullPath];
 		
-		[memCard2Label setTitleWithMnemonic:fileName];
+		[[memCard2Label cell] setTitle:fileName];
 		[memCard2Label setToolTip:fullPath];
 		
 		[self loadMemoryCardInfoForCard:2];

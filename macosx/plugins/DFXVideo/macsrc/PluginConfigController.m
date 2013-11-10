@@ -135,8 +135,8 @@ void ReadConfig(void)
 								 @"Enable Hacks": @NO,
 								 @"Dither Mode": @1,
 								 @"Hacks": @((unsigned int)0),
-								 @"VertexShader": [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"] bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil],
-								 @"FragmentShader": [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"] bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil],
+								 @"VertexShader": [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slv"] bookmarkDataWithOptions:0 includingResourceValuesForKeys:nil relativeToURL:nil error:nil],
+								 @"FragmentShader": [[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"] bookmarkDataWithOptions:0 includingResourceValuesForKeys:nil relativeToURL:nil error:nil],
 								 @"UseShader": @NO,
 								 @"ShaderQuality": @4,
 								 kWindowSize: NSStringFromSize(NSMakeSize(640, 480))}}];
@@ -234,8 +234,8 @@ void ReadConfig(void)
 	
 	writeDic[@"Hacks"] = @(hackValues);
 
-	writeDic[@"VertexShader"] = [vertexPath bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil];
-	writeDic[@"FragmentShader"] = [fragmentPath bookmarkDataWithOptions:NSURLBookmarkCreationPreferFileIDResolution includingResourceValuesForKeys:nil relativeToURL:nil error:nil];
+	writeDic[@"VertexShader"] = [vertexPath bookmarkDataWithOptions:0 includingResourceValuesForKeys:nil relativeToURL:nil error:nil];
+	writeDic[@"FragmentShader"] = [fragmentPath bookmarkDataWithOptions:0 includingResourceValuesForKeys:nil relativeToURL:nil error:nil];
 	writeDic[kWindowSize] = NSStringFromSize(NSMakeSize(self.displayWidth.integerValue, self.displayHeight.integerValue));
 	
 	// write to defaults
@@ -288,7 +288,7 @@ void ReadConfig(void)
 {
 	self.fragmentPath = _fragmentPath;
 	if (_fragmentPath) {
-		[fragmentShaderViewablePath setTitleWithMnemonic:[fragmentPath lastPathComponent]];
+		[[fragmentShaderViewablePath cell] setTitle:[fragmentPath lastPathComponent]];
 		[fragmentShaderViewablePath setToolTip:[fragmentPath path]];
 	}
 }
@@ -297,7 +297,7 @@ void ReadConfig(void)
 {
 	self.vertexPath = _vertexPath;
 	if (_vertexPath) {
-		[vertexShaderViewablePath setTitleWithMnemonic:[vertexPath lastPathComponent]];
+		[[vertexShaderViewablePath cell] setTitle:[vertexPath lastPathComponent]];
 		[vertexShaderViewablePath setToolTip:[vertexPath path]];
 	}
 }
