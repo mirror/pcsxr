@@ -384,9 +384,6 @@
 		0280B7AB16764CC3007B8001 /* HotkeyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotkeyController.h; sourceTree = "<group>"; };
 		0280B7AC16764CC3007B8001 /* HotkeyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotkeyController.m; sourceTree = "<group>"; usesTabs = 1; };
 		02FE55E716765F9400205CF2 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = English; path = KeyNames.plist; sourceTree = "<group>"; };
-		28F0C3C5146521A700A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Configuration.xib; sourceTree = "<group>"; };
-		28F0C3C8146521B000A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = PCSXR.xib; sourceTree = "<group>"; };
-		28F0C3CB146521B700A90285 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = AddPluginSheet.xib; sourceTree = "<group>"; };
 		2B4DE98D05FF9307003EFEF0 /* PluginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginController.h; sourceTree = "<group>"; };
 		2B4DE98E05FF9307003EFEF0 /* PluginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginController.m; sourceTree = "<group>"; usesTabs = 1; };
 		2B690C760635C65C00CDA575 /* ExceptionHandling.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExceptionHandling.framework; path = /System/Library/Frameworks/ExceptionHandling.framework; sourceTree = "<absolute>"; };
@@ -415,7 +412,6 @@
 		551A74A117868B110052D185 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		551A74A217868B110052D185 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		551A74A317868B110052D185 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		551A74B517868BEA0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Bladesio1PluginConfig.xib; sourceTree = "<group>"; };
 		551A74B717868BEA0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		551A74B917868BEA0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		551A74BB17868BEA0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -425,7 +421,6 @@
 		551A74C117868BEA0052D185 /* PluginConfigController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PluginConfigController.m; sourceTree = "<group>"; };
 		551A74C217868BEA0052D185 /* version.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		551A750A17868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
-		551A750C17868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/DFCdromPluginConfig.xib; sourceTree = "<group>"; };
 		551A750E17868BEB0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		551A751017868BEB0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		551A751117868BEB0052D185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -437,7 +432,6 @@
 		551A751E17868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		551A752017868BEB0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		551A752217868BEB0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		551A752417868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetPcsxrHIDInputPluginMain.xib; sourceTree = "<group>"; };
 		551A752517868BEB0052D185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551A752717868BEB0052D185 /* cfg.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cfg.c; sourceTree = "<group>"; };
 		551A752817868BEB0052D185 /* cfg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cfg.h; sourceTree = "<group>"; };
@@ -451,10 +445,8 @@
 		551A753017868BEB0052D185 /* PadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PadView.m; sourceTree = "<group>"; };
 		551A753117868BEB0052D185 /* xkb.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = xkb.c; sourceTree = "<group>"; };
 		551A753717868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
-		551A753917868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/DFNet.xib; sourceTree = "<group>"; };
 		551A753B17868BEB0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		551A753D17868BEB0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		551A753F17868BEC0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SockDialog.xib; sourceTree = "<group>"; };
 		551A754017868BEC0052D185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551A754317868BEC0052D185 /* cfg.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cfg.c; sourceTree = "<group>"; };
 		551A754417868BEC0052D185 /* PluginConfigController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PluginConfigController.h; sourceTree = "<group>"; };
@@ -475,11 +467,9 @@
 		551A755E17868BEC0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		551A756117868BEC0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		551A756317868BEC0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		551A756517868BEC0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsSpuPluginMain.xib; sourceTree = "<group>"; };
 		551A756917868BEC0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		551A756B17868BEC0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		551A756D17868BEC0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		551A756F17868BEC0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsSoftGPUConfig.xib; sourceTree = "<group>"; };
 		551A757017868BEC0052D185 /* gpuPeteOGL2.slf */ = {isa = PBXFileReference; lastKnownFileType = text; path = gpuPeteOGL2.slf; sourceTree = "<group>"; };
 		551A757117868BEC0052D185 /* gpuPeteOGL2.slv */ = {isa = PBXFileReference; lastKnownFileType = text; path = gpuPeteOGL2.slv; sourceTree = "<group>"; };
 		551A757217868BEC0052D185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -498,7 +488,6 @@
 		551A758617868BED0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		551A758817868BED0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		551A758A17868BED0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		551A758C17868BED0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetSfPeopsOpenGLConfig.xib; sourceTree = "<group>"; };
 		551A758D17868BED0052D185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551A758F17868BED0052D185 /* drawgl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drawgl.h; sourceTree = "<group>"; };
 		551A759017868BED0052D185 /* drawgl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = drawgl.m; sourceTree = "<group>"; };
@@ -628,6 +617,33 @@
 		55534AF418183BFB006D6BCB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		55534AF718183BFB006D6BCB /* updateInfoPlist-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "updateInfoPlist-Prefix.pch"; sourceTree = "<group>"; };
 		5557769917EBE7D60019D008 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		5569B09A182F0B3A00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Configuration.xib; sourceTree = "<group>"; };
+		5569B09B182F0B3B00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PCSXR.xib; sourceTree = "<group>"; };
+		5569B09C182F0B3C00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AddPluginSheet.xib; sourceTree = "<group>"; };
+		5569B09D182F0B3D00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PcsxrMemCardDocument.xib; sourceTree = "<group>"; };
+		5569B09E182F0B3E00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CheatWindow.xib; sourceTree = "<group>"; };
+		5569B09F182F0B3F00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Bladesio1PluginConfig.xib; sourceTree = "<group>"; };
+		5569B0A0182F0B4000991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DFCdromPluginConfig.xib; sourceTree = "<group>"; };
+		5569B0A1182F0B4100991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NetPcsxrHIDInputPluginMain.xib; sourceTree = "<group>"; };
+		5569B0A2182F0B4200991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DFNet.xib; sourceTree = "<group>"; };
+		5569B0A3182F0B4800991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SockDialog.xib; sourceTree = "<group>"; };
+		5569B0A4182F0B4900991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NetSfPeopsSpuPluginMain.xib; sourceTree = "<group>"; };
+		5569B0A5182F0B4A00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NetSfPeopsSoftGPUConfig.xib; sourceTree = "<group>"; };
+		5569B0A6182F0B4B00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NetSfPeopsOpenGLConfig.xib; sourceTree = "<group>"; };
+		5569B0A7182F0B5D00991C9C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Configuration.strings; sourceTree = "<group>"; };
+		5569B0A9182F0B6500991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Configuration.strings; sourceTree = "<group>"; };
+		5569B0AB182F0B6B00991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PCSXR.strings; sourceTree = "<group>"; };
+		5569B0AD182F0B7200991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AddPluginSheet.strings; sourceTree = "<group>"; };
+		5569B0AF182F0B7900991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PcsxrMemCardDocument.strings; sourceTree = "<group>"; };
+		5569B0B1182F0B8100991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CheatWindow.strings; sourceTree = "<group>"; };
+		5569B0B3182F0B8B00991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Bladesio1PluginConfig.strings; sourceTree = "<group>"; };
+		5569B0B5182F0B9800991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DFCdromPluginConfig.strings; sourceTree = "<group>"; };
+		5569B0B7182F0BA700991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NetSfPeopsOpenGLConfig.strings; sourceTree = "<group>"; };
+		5569B0B9182F0BB100991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NetSfPeopsSoftGPUConfig.strings; sourceTree = "<group>"; };
+		5569B0BB182F0BC000991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NetSfPeopsSpuPluginMain.strings; sourceTree = "<group>"; };
+		5569B0BD182F0BCE00991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DFNet.strings; sourceTree = "<group>"; };
+		5569B0BF182F0BD500991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SockDialog.strings; sourceTree = "<group>"; };
+		5569B0C1182F0BE100991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NetPcsxrHIDInputPluginMain.strings; sourceTree = "<group>"; };
 		55707E41181232A9007CC5D0 /* pt-BR */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		55707E6518123456007CC5D0 /* ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55707E77181234A1007CC5D0 /* it */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -663,7 +679,6 @@
 		5598AAF517D2D54A0024F71D /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5598AAF717D2D54C0024F71D /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5598AAF917D2D54E0024F71D /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		5598AAFA17D2D6C00024F71D /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/Configuration.xib; sourceTree = "<group>"; };
 		5598AAFB17D2E9E90024F71D /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		559DACED146C72FF00C5DF71 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Localizable.strings; sourceTree = "<group>"; };
 		55A9021E147D7C380037E18F /* PcsxrMemCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrMemCardController.h; sourceTree = "<group>"; };
@@ -679,7 +694,6 @@
 		55BBA69814953887003B2CEC /* PcsxrDiscHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PcsxrDiscHandler.m; sourceTree = "<group>"; usesTabs = 1; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		55BBA69A14958399003B2CEC /* PcsxrFreezeStateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrFreezeStateHandler.h; sourceTree = "<group>"; };
 		55BBA69B1495839A003B2CEC /* PcsxrFreezeStateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrFreezeStateHandler.m; sourceTree = "<group>"; usesTabs = 1; };
-		55C7A215148B2B3800C22ABC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PcsxrMemCardDocument.xib; sourceTree = "<group>"; };
 		55CA586A17E799E6007424D5 /* DiskArbitration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiskArbitration.framework; path = System/Library/Frameworks/DiskArbitration.framework; sourceTree = SDKROOT; };
 		55E0ACDE178B695F0005C945 /* LaunchArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchArg.h; sourceTree = "<group>"; };
 		55E0ACDF178B69600005C945 /* LaunchArg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchArg.m; sourceTree = "<group>"; usesTabs = 1; };
@@ -743,7 +757,6 @@
 		71F4C5870FDED12800529849 /* spu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spu.h; sourceTree = "<group>"; };
 		71F4C5880FDED12800529849 /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
 		71F703A611B3A673007DD5C5 /* sjisfont.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = sjisfont.h; sourceTree = "<group>"; };
-		D422E66D16DC48D000526DCF /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CheatWindow.xib; sourceTree = "<group>"; };
 		D422E67816DC495800526DCF /* CheatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheatController.h; sourceTree = "<group>"; };
 		D422E67916DC495800526DCF /* CheatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheatController.m; sourceTree = "<group>"; usesTabs = 1; };
 /* End PBXFileReference section */
@@ -1847,6 +1860,7 @@
 				hu,
 				"zh-Hans",
 				"zh-Hant",
+				Base,
 			);
 			mainGroup = 08FB7794FE84155DC02AAC07 /* Pcsxr */;
 			projectDirPath = "";
@@ -2290,8 +2304,9 @@
 		28F0C3C4146521A700A90285 /* Configuration.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				28F0C3C5146521A700A90285 /* English */,
-				5598AAFA17D2D6C00024F71D /* fr */,
+				5569B09A182F0B3A00991C9C /* Base */,
+				5569B0A7182F0B5D00991C9C /* fr */,
+				5569B0A9182F0B6500991C9C /* en */,
 			);
 			name = Configuration.xib;
 			path = English.lproj;
@@ -2300,7 +2315,8 @@
 		28F0C3C7146521B000A90285 /* PCSXR.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				28F0C3C8146521B000A90285 /* English */,
+				5569B09B182F0B3B00991C9C /* Base */,
+				5569B0AB182F0B6B00991C9C /* en */,
 			);
 			name = PCSXR.xib;
 			path = English.lproj;
@@ -2309,7 +2325,8 @@
 		28F0C3CA146521B700A90285 /* AddPluginSheet.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				28F0C3CB146521B700A90285 /* English */,
+				5569B09C182F0B3C00991C9C /* Base */,
+				5569B0AD182F0B7200991C9C /* en */,
 			);
 			name = AddPluginSheet.xib;
 			path = English.lproj;
@@ -2343,7 +2360,8 @@
 		551A74B417868BEA0052D185 /* Bladesio1PluginConfig.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				551A74B517868BEA0052D185 /* English */,
+				5569B09F182F0B3F00991C9C /* Base */,
+				5569B0B3182F0B8B00991C9C /* en */,
 			);
 			name = Bladesio1PluginConfig.xib;
 			sourceTree = "<group>";
@@ -2383,7 +2401,8 @@
 		551A750B17868BEB0052D185 /* DFCdromPluginConfig.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				551A750C17868BEB0052D185 /* English */,
+				5569B0A0182F0B4000991C9C /* Base */,
+				5569B0B5182F0B9800991C9C /* en */,
 			);
 			name = DFCdromPluginConfig.xib;
 			sourceTree = "<group>";
@@ -2435,7 +2454,8 @@
 		551A752317868BEB0052D185 /* NetPcsxrHIDInputPluginMain.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				551A752417868BEB0052D185 /* English */,
+				5569B0A1182F0B4100991C9C /* Base */,
+				5569B0C1182F0BE100991C9C /* en */,
 			);
 			name = NetPcsxrHIDInputPluginMain.xib;
 			sourceTree = "<group>";
@@ -2451,7 +2471,8 @@
 		551A753817868BEB0052D185 /* DFNet.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				551A753917868BEB0052D185 /* English */,
+				5569B0A2182F0B4200991C9C /* Base */,
+				5569B0BD182F0BCE00991C9C /* en */,
 			);
 			name = DFNet.xib;
 			sourceTree = "<group>";
@@ -2477,7 +2498,8 @@
 		551A753E17868BEB0052D185 /* SockDialog.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				551A753F17868BEC0052D185 /* English */,
+				5569B0A3182F0B4800991C9C /* Base */,
+				5569B0BF182F0BD500991C9C /* en */,
 			);
 			name = SockDialog.xib;
 			sourceTree = "<group>";
@@ -2519,7 +2541,8 @@
 		551A756417868BEC0052D185 /* NetSfPeopsSpuPluginMain.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				551A756517868BEC0052D185 /* English */,
+				5569B0A4182F0B4900991C9C /* Base */,
+				5569B0BB182F0BC000991C9C /* en */,
 			);
 			name = NetSfPeopsSpuPluginMain.xib;
 			sourceTree = "<group>";
@@ -2553,7 +2576,8 @@
 		551A756E17868BEC0052D185 /* NetSfPeopsSoftGPUConfig.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				551A756F17868BEC0052D185 /* English */,
+				5569B0A5182F0B4A00991C9C /* Base */,
+				5569B0B9182F0BB100991C9C /* en */,
 			);
 			name = NetSfPeopsSoftGPUConfig.xib;
 			sourceTree = "<group>";
@@ -2587,7 +2611,8 @@
 		551A758B17868BED0052D185 /* NetSfPeopsOpenGLConfig.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				551A758C17868BED0052D185 /* English */,
+				5569B0A6182F0B4B00991C9C /* Base */,
+				5569B0B7182F0BA700991C9C /* en */,
 			);
 			name = NetSfPeopsOpenGLConfig.xib;
 			sourceTree = "<group>";
@@ -2606,7 +2631,8 @@
 		55C7A216148B2B3800C22ABC /* PcsxrMemCardDocument.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				55C7A215148B2B3800C22ABC /* English */,
+				5569B09D182F0B3D00991C9C /* Base */,
+				5569B0AF182F0B7900991C9C /* en */,
 			);
 			name = PcsxrMemCardDocument.xib;
 			sourceTree = "<group>";
@@ -2614,7 +2640,8 @@
 		D422E66C16DC48D000526DCF /* CheatWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D422E66D16DC48D000526DCF /* English */,
+				5569B09E182F0B3E00991C9C /* Base */,
+				5569B0B1182F0B8100991C9C /* en */,
 			);
 			name = CheatWindow.xib;
 			sourceTree = "<group>";
