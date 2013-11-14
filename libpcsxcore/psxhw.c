@@ -29,6 +29,12 @@
 // Vampire Hunter D hack
 boolean dmaGpuListHackEn=FALSE;
 
+static inline
+void setIrq( u32 irq )
+{
+	psxHu32ref(0x1070) |= SWAPu32(irq);
+}
+
 void psxHwReset() {
 	if (Config.SioIrq) psxHu32ref(0x1070) |= SWAP32(0x80);
 	if (Config.SpuIrq) psxHu32ref(0x1070) |= SWAP32(0x200);
@@ -736,8 +742,13 @@ void psxHwWrite32(u32 add, u32 value) {
 			return;
 		case 0x1f801810:
 #ifdef PSXHW_LOG
-			PSXHW_LOG("GPU DATA 32bit write %x\n", value);
+			PSXHW_LOG("GPU DATA 32bit write %x (CMD/MSB %x)\n", value, value>>24);
 #endif
+			// 0x1F means irq request, so fulfill it here because plugin can't and won't
+			// Probably no need to send this to plugin in first place...
+			if (value == 0x01f00000) {
+				setIrq( 0x01 );
+			}
 			GPU_writeData(value); return;
 		case 0x1f801814:
 #ifdef PSXHW_LOG
