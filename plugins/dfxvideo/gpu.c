@@ -140,6 +140,7 @@ static int        iFakePrimBusy=0;
 uint32_t          vBlank=0;
 int               iRumbleVal=0;
 int               iRumbleTime=0;
+BOOL              oddLines;
 
 #ifdef _WINDOWS
 
@@ -485,6 +486,7 @@ long CALLBACK GPUinit()                                // GPU INIT
  GPUIsReadyForCommands;
  bDoVSyncUpdate = TRUE;
  vBlank = 0;
+ oddLines = FALSE;
 
  // Get a handle for kernel32.dll, and access the required export function
  LoadKernel32();
@@ -938,15 +940,14 @@ void CALLBACK GPUcursor(int iPlayer,int x,int y)
 
 void CALLBACK GPUupdateLace(void)                      // VSYNC
 {
- //if(!(dwActFixes&1))
-  //lGPUstatusRet^=0x80000000;                           // odd/even bit
+ if(!(dwActFixes&1))
+  lGPUstatusRet^=0x80000000;                           // odd/even bit
 
  if(!(dwActFixes&32))                                  // std fps limitation?
   CheckFrameRate();
 
  if(PSXDisplay.Interlaced)                             // interlaced mode?
   {
-   lGPUstatusRet^=0x80000000;
    if(bDoVSyncUpdate && PSXDisplay.DisplayMode.x>0 && PSXDisplay.DisplayMode.y>0)
     {
      updateDisplay();
@@ -987,6 +988,15 @@ void CALLBACK GPUupdateLace(void)                      // VSYNC
 
 uint32_t CALLBACK GPUreadStatus(void)             // READ STATUS
 {
+ if (vBlank || oddLines == FALSE) 
+  { // vblank or even lines
+   lGPUstatusRet &= ~(0x80000000);
+  } 
+ else 
+  { // Oddlines and not vblank
+   lGPUstatusRet |= 0x80000000;
+  }
+
  if(dwActFixes&1)
   {
    static int iNumRead=0;                         // odd/even hack
@@ -1012,7 +1022,7 @@ uint32_t CALLBACK GPUreadStatus(void)             // READ STATUS
      GPUIsReadyForCommands;
     }
   }
- return lGPUstatusRet | (vBlank ? 0x80000000 : 0 );
+ return lGPUstatusRet;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -2299,7 +2309,17 @@ void CALLBACK GPUsetfix(uint32_t dwFixBits)
 
 void CALLBACK GPUvBlank( int val )
 {
-    vBlank = val;
+ vBlank = val;
+ oddLines = oddLines ? FALSE : TRUE; // bit changes per frame when not interlaced
+ //printf("VB %x (%x)\n", oddLines, vBlank);
+}
+
+void CALLBACK GPUhSync( int val ) {
+ // Interlaced mode - update bit every scanline
+ if (PSXDisplay.Interlaced) {
+   oddLines = (val%2 ? FALSE : TRUE);
+ }
+ //printf("HS %x (%x)\n", oddLines, vBlank);
 }
 
 void CALLBACK GPUvisualVibration(uint32_t iSmall, uint32_t iBig)

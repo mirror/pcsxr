@@ -181,6 +181,7 @@ int             iFakePrimBusy = 0;
 int             iRumbleVal    = 0;
 int             iRumbleTime   = 0;
 uint32_t        vBlank=0;
+BOOL			oddLines;
 
 ////////////////////////////////////////////////////////////////////////
 // stuff to make this a true PDK module
@@ -578,6 +579,7 @@ long CALLBACK GPUinit()
  // device initialised already !
  //lGPUstatusRet = 0x74000000;
  vBlank = 0;
+ oddLines = FALSE;
 
  STATUSREG = 0x14802000;
  GPUIsIdle;
@@ -2021,8 +2023,8 @@ static unsigned short usFirstPos=2;
 
 void CALLBACK GPUupdateLace(void)
 {
- //if(!(dwActFixes&0x1000))                               
- // STATUSREG^=0x80000000;                               // interlaced bit toggle, if the CC game fix is not active (see gpuReadStatus)
+ if(!(dwActFixes&0x1000))                               
+  STATUSREG^=0x80000000;                               // interlaced bit toggle, if the CC game fix is not active (see gpuReadStatus)
 
  if(!(dwActFixes&128))                                 // normal frame limit func
   CheckFrameRate();
@@ -2034,7 +2036,7 @@ void CALLBACK GPUupdateLace(void)
 
  if(PSXDisplay.Interlaced)                             // interlaced mode?
   {
-   STATUSREG^=0x80000000;
+   //STATUSREG^=0x80000000;
    if(PSXDisplay.DisplayMode.x>0 && PSXDisplay.DisplayMode.y>0)
     {
      updateDisplay();                                  // -> swap buffers (new frame)
@@ -2059,7 +2061,16 @@ void CALLBACK GPUupdateLace(void)
 ////////////////////////////////////////////////////////////////////////
 
 uint32_t CALLBACK GPUreadStatus(void)
-{
+{   
+ if (vBlank || oddLines == FALSE) 
+  { // vblank or even lines
+   STATUSREG &= ~(0x80000000);
+  } 
+ else 
+  { // Oddlines and not vblank
+   STATUSREG |= 0x80000000;
+  }
+ 
  if(dwActFixes&0x1000)                                 // CC game fix
   {
    static int iNumRead=0;
@@ -2086,7 +2097,7 @@ uint32_t CALLBACK GPUreadStatus(void)
     }
   }
 
- return STATUSREG | (vBlank ? 0x80000000 : 0 );;
+ return STATUSREG;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -3590,5 +3601,15 @@ void CALLBACK GPUdisplayFlags(uint32_t dwFlags)
 
 void CALLBACK GPUvBlank( int val )
 {
-    vBlank = val;
+ vBlank = val;
+ oddLines = oddLines ? FALSE : TRUE; // bit changes per frame when not interlaced
+ //printf("VB %x (%x)\n", oddLines, vBlank);
+}
+
+void CALLBACK GPUhSync( int val ) {
+ // Interlaced mode - update bit every scanline
+ if (PSXDisplay.Interlaced) {
+   oddLines = (val%2 ? FALSE : TRUE);
+ }
+ //printf("HS %x (%x)\n", oddLines, vBlank);
 }
