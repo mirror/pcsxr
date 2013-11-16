@@ -32,7 +32,7 @@ extern PluginWindowController *gameController;
 	
 	NSWindow *fullWindow;
 }
-@property BOOL fullscreen;
+@property (getter = isFullscreen) BOOL fullscreen;
 
 + (id)openGameView;
 - (PluginGLView *)openGLView;

@@ -203,7 +203,7 @@ void HandleKey(int keycode)
             bSkipNextFrame = FALSE;
             break;
 		case GPU_FULLSCREEN_KEY:
-			[gameController setFullscreen:![gameController fullscreen]];
+			gameController.fullscreen = !gameController.fullscreen;
 			break;
 	}
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4510"/>
+        <deployment defaultVersion="1090" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PcsxrPluginHandler">
@@ -17,15 +17,15 @@
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowCollectionBehavior key="collectionBehavior" moveToActiveSpace="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
-            <rect key="contentRect" x="177" y="439" width="420" height="147"/>
+            <rect key="contentRect" x="177" y="439" width="420" height="138"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="94" height="7"/>
             <view key="contentView" id="7">
-                <rect key="frame" x="0.0" y="0.0" width="420" height="147"/>
+                <rect key="frame" x="0.0" y="0.0" width="420" height="138"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <imageView translatesAutoresizingMaskIntoConstraints="NO" id="29">
-                        <rect key="frame" x="20" y="63" width="64" height="64"/>
+                        <rect key="frame" x="20" y="54" width="64" height="64"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="64" id="81"/>
@@ -34,7 +34,7 @@
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="psxplugin" id="57"/>
                     </imageView>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="43">
-                        <rect key="frame" x="89" y="110" width="126" height="17"/>
+                        <rect key="frame" x="90" y="101" width="127" height="17"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" alignment="left" title="Plugin Installation" id="58">
                             <font key="font" metaFont="systemBold"/>
@@ -43,7 +43,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="44">
-                        <rect key="frame" x="89" y="88" width="248" height="14"/>
+                        <rect key="frame" x="90" y="79" width="247" height="14"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" selectable="YES" alignment="left" title="Do you want to install this plugin into PCSXR?" id="59">
                             <font key="font" metaFont="smallSystem"/>
@@ -52,9 +52,9 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="47">
-                        <rect key="frame" x="92" y="58" width="308" height="22"/>
+                        <rect key="frame" x="92" y="49" width="308" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="60">
+                        <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" usesSingleLineMode="YES" id="60">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -85,7 +85,6 @@ Gw
                 </subviews>
                 <constraints>
                     <constraint firstItem="29" firstAttribute="top" secondItem="7" secondAttribute="top" constant="20" symbolic="YES" id="88"/>
-                    <constraint firstItem="43" firstAttribute="top" secondItem="7" secondAttribute="top" constant="20" symbolic="YES" id="94"/>
                     <constraint firstItem="29" firstAttribute="leading" secondItem="7" secondAttribute="leading" constant="20" symbolic="YES" id="101"/>
                     <constraint firstItem="43" firstAttribute="leading" secondItem="29" secondAttribute="trailing" constant="8" symbolic="YES" id="110"/>
                     <constraint firstAttribute="bottom" secondItem="112" secondAttribute="bottom" constant="20" symbolic="YES" id="115"/>
@@ -95,8 +94,10 @@ Gw
                     <constraint firstItem="43" firstAttribute="leading" secondItem="47" secondAttribute="leading" id="G0m-uo-WmB"/>
                     <constraint firstItem="43" firstAttribute="leading" secondItem="44" secondAttribute="leading" id="fb2-Jc-MtO"/>
                     <constraint firstItem="47" firstAttribute="top" secondItem="44" secondAttribute="bottom" constant="8" symbolic="YES" id="nEW-ZE-1vH"/>
+                    <constraint firstItem="116" firstAttribute="top" secondItem="47" secondAttribute="bottom" constant="8" symbolic="YES" id="o3B-PA-sfX"/>
                     <constraint firstItem="44" firstAttribute="top" secondItem="43" secondAttribute="bottom" constant="8" symbolic="YES" id="wXs-74-I05"/>
                     <constraint firstItem="112" firstAttribute="baseline" secondItem="116" secondAttribute="baseline" id="wec-HN-wNe"/>
+                    <constraint firstItem="43" firstAttribute="top" secondItem="29" secondAttribute="top" id="zsa-7M-mIg"/>
                 </constraints>
             </view>
             <connections>

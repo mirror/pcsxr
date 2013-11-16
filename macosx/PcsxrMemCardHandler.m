@@ -43,6 +43,11 @@
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
+- (NSString*)windowNibName
+{
+	return @"PcsxrMemCardDocument";
+}
+
 - (IBAction)setMemCard:(id)sender
 {
 	memChosen = [sender tag];
@@ -55,17 +60,15 @@
 	if ([EmuThread active]) {
 		return NO;
 	}
-	if (![self window]) {
-		[NSBundle loadNibNamed:@"PcsxrMemCardDocument" owner:self];
-	}
-	[cardPath setObjectValue:[[NSFileManager defaultManager] displayNameAtPath:theFile]];
+	
+	[[cardPath cell] setTitle:[[NSFileManager defaultManager] displayNameAtPath:theFile]];
 	
 	[NSApp runModalForWindow:[self window]];
 	
 	[[self window] orderOut:nil];
 	
 	if (memChosen != 0) {
-		[ConfigurationController setMemoryCard:(int)memChosen toPath:theFile];
+		[ConfigurationController setMemoryCard:memChosen toPath:theFile];
 	}
 	return YES;
 }

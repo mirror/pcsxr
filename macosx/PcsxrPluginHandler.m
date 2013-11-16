@@ -30,6 +30,11 @@
     return self;
 }
 
+- (NSString*)windowNibName
+{
+	return @"AddPluginSheet";
+}
+
 - (id)init
 {
 	self = [self initWithWindowNibName:@"AddPluginSheet"];
@@ -58,9 +63,6 @@
 	if ([EmuThread active]) {
 		return NO;
 	}
-
-	if (![self window])
-		[NSBundle loadNibNamed:@"AddPluginSheet" owner:self];
 	
 	[pluginName setObjectValue:[theFile lastPathComponent]];
 	

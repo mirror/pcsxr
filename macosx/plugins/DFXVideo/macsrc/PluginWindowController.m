@@ -35,7 +35,11 @@ NSRect windowFrame;
 		}
 		gameWindow = [gameController window];
 	}
+	
 	windowFrame = NSMakeRect(0, 0, iResX + 8, iResY + 4);
+	
+	windowFrame = [NSWindow contentRectForFrameRect:windowFrame styleMask:NSTitledWindowMask];
+
 	
 	if (windowFrame.size.width != 0) {
 		[gameWindow setFrame:windowFrame display:NO];
@@ -63,6 +67,7 @@ NSRect windowFrame;
 	if (fullWindow) {
 		[fullWindow orderOut:self];
 	}
+	fullWindow = nil;
 	
 	windowFrame = [[self window] frame];
 }
@@ -75,14 +80,14 @@ NSRect windowFrame;
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-	if ([self fullscreen]) {
+	if (self.fullscreen) {
 		[self setFullscreen:NO];
 	}
 }
 
-- (BOOL)fullscreen
+- (BOOL)isFullscreen
 {
-	return (fullWindow!=nil);
+	return (fullWindow != nil);
 }
 
 - (void)setFullscreen:(BOOL)flag
@@ -164,7 +169,7 @@ NSRect windowFrame;
 
 - (BOOL)windowShouldZoom:(NSWindow *)sender toFrame:(NSRect)newFrame
 {
-	[self setFullscreen:YES];
+	self.fullscreen = YES;
 	
 	return NO;
 }
@@ -196,14 +201,6 @@ NSRect windowFrame;
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"emuWindowWantResume" object:self];
 }
-
-//- (void)windowDidBecomeMain:(NSNotification *)aNotification
-/*- (void)windowDidBecomeKey:(NSNotification *)aNotification
-{
-	if (iWindowMode==0) {
-		[self setFullscreen:YES];
-	}
-}*/
 
 - (BOOL)windowShouldClose:(id)sender
 {
