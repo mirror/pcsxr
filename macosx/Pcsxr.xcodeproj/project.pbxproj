@@ -187,9 +187,10 @@
 		55BBA69614945628003B2CEC /* PcsxrPluginHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBA69514945628003B2CEC /* PcsxrPluginHandler.m */; };
 		55BBA69914953887003B2CEC /* PcsxrDiscHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBA69814953887003B2CEC /* PcsxrDiscHandler.m */; };
 		55BBA69C1495839A003B2CEC /* PcsxrFreezeStateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBA69B1495839A003B2CEC /* PcsxrFreezeStateHandler.m */; };
-		55C7A214148B2B3800C22ABC /* PcsxrMemCardDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C7A216148B2B3800C22ABC /* PcsxrMemCardDocument.xib */; };
+		55C7A214148B2B3800C22ABC /* PcsxrMemCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C7A216148B2B3800C22ABC /* PcsxrMemCard.xib */; };
 		55CA586B17E799E6007424D5 /* DiskArbitration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CA586A17E799E6007424D5 /* DiskArbitration.framework */; };
 		55E0ACE0178B69620005C945 /* LaunchArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E0ACDF178B69600005C945 /* LaunchArg.m */; };
+		55E15994184564D4007983CB /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E15993184564D4007983CB /* GLKit.framework */; };
 		55EC05FB1788B1230053AC23 /* PcsxrMemCardArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */; };
 		55EC05FE178916E80053AC23 /* MemBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC05FD178916E70053AC23 /* MemBadgeView.m */; };
 		712FD1E81093096F00575A92 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E51093096F00575A92 /* debug.c */; };
@@ -616,7 +617,7 @@
 		5569B09A182F0B3A00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Configuration.xib; sourceTree = "<group>"; };
 		5569B09B182F0B3B00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PCSXR.xib; sourceTree = "<group>"; };
 		5569B09C182F0B3C00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AddPluginSheet.xib; sourceTree = "<group>"; };
-		5569B09D182F0B3D00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PcsxrMemCardDocument.xib; sourceTree = "<group>"; };
+		5569B09D182F0B3D00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PcsxrMemCard.xib; sourceTree = "<group>"; };
 		5569B09E182F0B3E00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CheatWindow.xib; sourceTree = "<group>"; };
 		5569B09F182F0B3F00991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Bladesio1PluginConfig.xib; sourceTree = "<group>"; };
 		5569B0A0182F0B4000991C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DFCdromPluginConfig.xib; sourceTree = "<group>"; };
@@ -630,7 +631,7 @@
 		5569B0A9182F0B6500991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Configuration.strings; sourceTree = "<group>"; };
 		5569B0AB182F0B6B00991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PCSXR.strings; sourceTree = "<group>"; };
 		5569B0AD182F0B7200991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AddPluginSheet.strings; sourceTree = "<group>"; };
-		5569B0AF182F0B7900991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PcsxrMemCardDocument.strings; sourceTree = "<group>"; };
+		5569B0AF182F0B7900991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PcsxrMemCard.strings; sourceTree = "<group>"; };
 		5569B0B1182F0B8100991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CheatWindow.strings; sourceTree = "<group>"; };
 		5569B0B3182F0B8B00991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Bladesio1PluginConfig.strings; sourceTree = "<group>"; };
 		5569B0B5182F0B9800991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DFCdromPluginConfig.strings; sourceTree = "<group>"; };
@@ -693,6 +694,14 @@
 		55CA586A17E799E6007424D5 /* DiskArbitration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiskArbitration.framework; path = System/Library/Frameworks/DiskArbitration.framework; sourceTree = SDKROOT; };
 		55E0ACDE178B695F0005C945 /* LaunchArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchArg.h; sourceTree = "<group>"; };
 		55E0ACDF178B69600005C945 /* LaunchArg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchArg.m; sourceTree = "<group>"; usesTabs = 1; };
+		55E1598618455B69007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Configuration.strings; sourceTree = "<group>"; };
+		55E1598818455BB9007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AddPluginSheet.strings; sourceTree = "<group>"; };
+		55E1598A18455BBD007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/AddPluginSheet.strings; sourceTree = "<group>"; };
+		55E1598C18455C60007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CheatWindow.strings; sourceTree = "<group>"; };
+		55E1598E18455C78007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PcsxrMemCard.strings; sourceTree = "<group>"; };
+		55E1599018455C7C007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/PcsxrMemCard.strings; sourceTree = "<group>"; };
+		55E1599218455D7E007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/CheatWindow.strings; sourceTree = "<group>"; };
+		55E15993184564D4007983CB /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		55EC05F91788B1230053AC23 /* PcsxrMemCardArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrMemCardArray.h; sourceTree = "<group>"; };
 		55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrMemCardArray.m; sourceTree = "<group>"; usesTabs = 1; };
 		55EC05FC178916E70053AC23 /* MemBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemBadgeView.h; sourceTree = "<group>"; };
@@ -801,6 +810,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55E15994184564D4007983CB /* GLKit.framework in Frameworks */,
 				551A76D3178695D10052D185 /* GLUT.framework in Frameworks */,
 				551A76D4178695D20052D185 /* OpenGL.framework in Frameworks */,
 				551A76B7178693FF0052D185 /* Cocoa.framework in Frameworks */,
@@ -919,7 +929,7 @@
 				559DACEC146C72FF00C5DF71 /* Localizable.strings */,
 				28F0C3C7146521B000A90285 /* PCSXR.xib */,
 				28F0C3CA146521B700A90285 /* AddPluginSheet.xib */,
-				55C7A216148B2B3800C22ABC /* PcsxrMemCardDocument.xib */,
+				55C7A216148B2B3800C22ABC /* PcsxrMemCard.xib */,
 				D422E66C16DC48D000526DCF /* CheatWindow.xib */,
 			);
 			name = Resources;
@@ -1014,6 +1024,7 @@
 		551A749D17868B110052D185 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55E15993184564D4007983CB /* GLKit.framework */,
 				554FD70817C6A13E0056CF66 /* SDL2.framework */,
 				55CA586A17E799E6007424D5 /* DiskArbitration.framework */,
 				551A7723178699250052D185 /* OpenAL.framework */,
@@ -1883,7 +1894,7 @@
 				28F0C3CC146521B700A90285 /* AddPluginSheet.xib in Resources */,
 				5557769A17EBE7D60019D008 /* Media.xcassets in Resources */,
 				559DACEE146C72FF00C5DF71 /* Localizable.strings in Resources */,
-				55C7A214148B2B3800C22ABC /* PcsxrMemCardDocument.xib in Resources */,
+				55C7A214148B2B3800C22ABC /* PcsxrMemCard.xib in Resources */,
 				02FE55E816765F9400205CF2 /* KeyNames.plist in Resources */,
 				D422E66E16DC48D000526DCF /* CheatWindow.xib in Resources */,
 			);
@@ -2297,6 +2308,7 @@
 				5569B09A182F0B3A00991C9C /* Base */,
 				5569B0A7182F0B5D00991C9C /* fr */,
 				5569B0A9182F0B6500991C9C /* en */,
+				55E1598618455B69007983CB /* hu */,
 			);
 			name = Configuration.xib;
 			path = English.lproj;
@@ -2319,6 +2331,8 @@
 			children = (
 				5569B09C182F0B3C00991C9C /* Base */,
 				5569B0AD182F0B7200991C9C /* en */,
+				55E1598818455BB9007983CB /* fr */,
+				55E1598A18455BBD007983CB /* hu */,
 			);
 			name = AddPluginSheet.xib;
 			path = English.lproj;
@@ -2620,13 +2634,15 @@
 			path = English.lproj;
 			sourceTree = "<group>";
 		};
-		55C7A216148B2B3800C22ABC /* PcsxrMemCardDocument.xib */ = {
+		55C7A216148B2B3800C22ABC /* PcsxrMemCard.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				5569B09D182F0B3D00991C9C /* Base */,
 				5569B0AF182F0B7900991C9C /* en */,
+				55E1598E18455C78007983CB /* fr */,
+				55E1599018455C7C007983CB /* hu */,
 			);
-			name = PcsxrMemCardDocument.xib;
+			name = PcsxrMemCard.xib;
 			sourceTree = "<group>";
 		};
 		D422E66C16DC48D000526DCF /* CheatWindow.xib */ = {
@@ -2634,6 +2650,8 @@
 			children = (
 				5569B09E182F0B3E00991C9C /* Base */,
 				5569B0B1182F0B8100991C9C /* en */,
+				55E1598C18455C60007983CB /* fr */,
+				55E1599218455D7E007983CB /* hu */,
 			);
 			name = CheatWindow.xib;
 			sourceTree = "<group>";

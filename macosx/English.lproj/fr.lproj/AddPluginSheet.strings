@@ -1,0 +1,15 @@
+
+/* Class = "NSPanel"; title = "Install Plug-in"; ObjectID = "10"; */
+"10.title" = "Install Greffon";
+
+/* Class = "NSTextFieldCell"; title = "Plugin Installation"; ObjectID = "58"; */
+"58.title" = "Plugin Installation";
+
+/* Class = "NSTextFieldCell"; title = "Do you want to install this plugin into PCSXR?"; ObjectID = "59"; */
+"59.title" = "Do you want to install this plugin into PCSXR?";
+
+/* Class = "NSButtonCell"; title = "Yes"; ObjectID = "113"; */
+"113.title" = "Oui";
+
+/* Class = "NSButtonCell"; title = "No"; ObjectID = "117"; */
+"117.title" = "Non";

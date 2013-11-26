@@ -70,6 +70,9 @@
 DQ
 </string>
                         </buttonCell>
+                        <connections>
+                            <action selector="closeAddPluginSheet:" target="-2" id="wuB-p5-1L1"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="116">
                         <rect key="frame" x="286" y="13" width="58" height="32"/>
@@ -81,6 +84,9 @@ DQ
 Gw
 </string>
                         </buttonCell>
+                        <connections>
+                            <action selector="closeAddPluginSheet:" target="-2" id="3PF-nt-DV0"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

@@ -9,11 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PcsxrFileHandle.h"
 
-@interface PcsxrPluginHandler : NSWindowController <PcsxrFileHandle> {
-	IBOutlet NSTextField *pluginName;
-	
-	BOOL moveOK;
-}
+@interface PcsxrPluginHandler : NSWindowController <PcsxrFileHandle>
+@property (weak) IBOutlet NSTextField *pluginName;
 - (IBAction)closeAddPluginSheet:(id)sender;
-
 @end

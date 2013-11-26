@@ -8,7 +8,6 @@
 
 //Commented out strings are those that need to be translated
 
-
 //libpcsxrcore strings
 "Error Opening CDR Plugin" = "Error Opening CDR Plugin";
 "Error Opening SPU Plugin" = "Hiba a hang plugin megnyitáskor";

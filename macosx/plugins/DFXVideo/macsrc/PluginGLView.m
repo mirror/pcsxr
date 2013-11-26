@@ -326,6 +326,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 				
 				
 				glBegin(GL_QUADS);
+				{
 					glTexCoord2f(0.0f, 0.0f);
 					glVertex2f(-1.0f, 1.0f);
 					
@@ -337,6 +338,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 					
 					glTexCoord2f(image_width, 0.0f);
 					glVertex2f(1.0f, 1.0f);
+				}
 				glEnd();
 			}
 			else
@@ -381,6 +383,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 				}
 				
 				glBegin(GL_QUADS);
+				{
 					glTexCoord2f(0.0f, 0.0f);
 					glVertex2f(-1.0f, 1.0f);
 					
@@ -392,6 +395,7 @@ void BlitScreen16NS(unsigned char * surf,long x,long y)
 					
 					glTexCoord2f(image_tx, 0.0f);
 					glVertex2f(1.0f, 1.0f);
+				}
 				glEnd();
 			}
 		}

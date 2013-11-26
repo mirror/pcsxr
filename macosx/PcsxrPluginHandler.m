@@ -9,7 +9,13 @@
 #import "PcsxrPluginHandler.h"
 #import "EmuThread.h"
 
+@interface PcsxrPluginHandler ()
+@property BOOL moveOK;
+@end
+
 @implementation PcsxrPluginHandler
+@synthesize pluginName;
+@synthesize moveOK;
 
 + (NSArray *)supportedUTIs
 {
@@ -37,8 +43,7 @@
 
 - (id)init
 {
-	self = [self initWithWindowNibName:@"AddPluginSheet"];
-	return self;
+	return self = [self initWithWindowNibName:@"AddPluginSheet"];
 }
 
 - (void)windowDidLoad
@@ -71,7 +76,7 @@
 	[[self window] orderOut:nil];
 	if (moveOK == YES) {
 		NSURL *supportURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
-		NSURL *url = [[supportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"PlugIns"];
+		NSURL *url = [[supportURL URLByAppendingPathComponent:@"Pcsxr" isDirectory:YES] URLByAppendingPathComponent:@"PlugIns" isDirectory:YES];
 
 		NSFileWrapper *wrapper = [[NSFileWrapper alloc] initWithPath:theFile];
 		NSString *dst = [[url URLByAppendingPathComponent:[wrapper filename]] path];

@@ -9,10 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PcsxrFileHandle.h"
 
-@interface PcsxrMemCardHandler : NSWindowController <PcsxrFileHandle> {
-	IBOutlet NSTextField *cardPath;
-	NSInteger memChosen;
-}
+@interface PcsxrMemCardHandler : NSWindowController <PcsxrFileHandle>
+@property (weak) IBOutlet NSTextField *cardPath;
 - (IBAction)setMemCard:(id)sender;
-
 @end

@@ -24,7 +24,7 @@
 - (NSURL*)discURL
 {
 	if (!_discURL) {
-		self.discURL = [NSURL fileURLWithPath:discPath isDirectory:NO];
+		self.discURL = [NSURL fileURLWithPath:discPath];
 	}
 	return _discURL;
 }

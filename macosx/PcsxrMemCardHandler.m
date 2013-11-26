@@ -10,7 +10,13 @@
 #import "ConfigurationController.h"
 #import "EmuThread.h"
 
+@interface PcsxrMemCardHandler ()
+@property NSInteger memChosen;
+@end
+
 @implementation PcsxrMemCardHandler
+@synthesize cardPath;
+@synthesize memChosen;
 
 + (NSArray *)supportedUTIs
 {
@@ -33,19 +39,18 @@
 
 - (id)init
 {
-	return self = [self initWithWindowNibName:@"PcsxrMemCardDocument"];
+	return self = [self initWithWindowNibName:@"PcsxrMemCard"];
 }
 
 - (void)windowDidLoad
 {
-    [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+	[super windowDidLoad];
+	// Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
 - (NSString*)windowNibName
 {
-	return @"PcsxrMemCardDocument";
+	return @"PcsxrMemCard";
 }
 
 - (IBAction)setMemCard:(id)sender

@@ -48,7 +48,7 @@
 "502.title" = "Options";
 
 /* Class = "NSBox"; title = "Game Fixes"; ObjectID = "509"; */
-"509.title" = "Game Fixes";
+"509.title" = "les correctifs de jeu";
 
 /* Class = "NSButtonCell"; ibShadowedToolTip = "When enabled the emulation will be faster, but possibly more unstable"; ObjectID = "516"; */
 "516.ibShadowedToolTip" = "When enabled the emulation will be faster, but possibly more unstable";
@@ -174,16 +174,16 @@
 "770.title" = "Fast Forward";
 
 /* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "772"; */
-"772.placeholderString" = "None...";
+"772.placeholderString" = "Non…";
 
 /* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "852"; */
-"852.placeholderString" = "None...";
+"852.placeholderString" = "Non…";
 
 /* Class = "NSButtonCell"; title = "Save State"; ObjectID = "853"; */
-"853.title" = "Save State";
+"853.title" = "Sauver un état";
 
 /* Class = "NSButtonCell"; title = "Load State"; ObjectID = "856"; */
-"856.title" = "Load State";
+"856.title" = "Charger un état";
 
 /* Class = "NSButtonCell"; title = "Next State"; ObjectID = "862"; */
 "862.title" = "Next State";
@@ -192,13 +192,13 @@
 "868.title" = "Previous State";
 
 /* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "871"; */
-"871.placeholderString" = "None...";
+"871.placeholderString" = "Non…";
 
 /* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "873"; */
-"873.placeholderString" = "None...";
+"873.placeholderString" = "Non…";
 
 /* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "875"; */
-"875.placeholderString" = "None...";
+"875.placeholderString" = "Non…";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "884"; */
 "884.title" = "Box";
@@ -225,7 +225,7 @@
 "893.title" = "Alt / Option ⌥";
 
 /* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "898"; */
-"898.placeholderString" = "None...";
+"898.placeholderString" = "None…";
 
 /* Class = "NSButtonCell"; title = "Frame Limit"; ObjectID = "899"; */
 "899.title" = "Frame Limit";
