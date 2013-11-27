@@ -39,7 +39,7 @@
 "111.title" = "PCSXR Help";
 
 /* Class = "NSMenuItem"; title = "Preferences..."; ObjectID = "129"; */
-"129.title" = "Preferences...";
+"129.title" = "Préférences…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
 "130.title" = "Services";
@@ -51,7 +51,7 @@
 "134.title" = "Hide PCSXR";
 
 /* Class = "NSMenuItem"; title = "Quit PCSXR"; ObjectID = "136"; */
-"136.title" = "Quit PCSXR";
+"136.title" = "Quitter PCSXR";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
 "145.title" = "Hide Others";
@@ -69,82 +69,82 @@
 "270.title" = "Close";
 
 /* Class = "NSMenuItem"; title = "Run CD"; ObjectID = "273"; */
-"273.title" = "Run CD";
+"273.title" = "Lancer à Partir du CD";
 
 /* Class = "NSMenu"; title = "Freeze State"; ObjectID = "278"; */
-"278.title" = "Freeze State";
+"278.title" = "Sauver un État";
 
 /* Class = "NSMenuItem"; title = "Freeze State"; ObjectID = "280"; */
-"280.title" = "Freeze State";
+"280.title" = "Sauver un État";
 
 /* Class = "NSMenuItem"; title = "Slot 0"; ObjectID = "281"; */
-"281.title" = "Slot 0";
+"281.title" = "Emplacement 0";
 
 /* Class = "NSMenuItem"; title = "Defrost State"; ObjectID = "284"; */
-"284.title" = "Defrost State";
+"284.title" = "Charger un État";
 
 /* Class = "NSMenu"; title = "Defrost State"; ObjectID = "285"; */
-"285.title" = "Defrost State";
+"285.title" = "Charger un État";
 
 /* Class = "NSMenuItem"; title = "Slot 2"; ObjectID = "286"; */
-"286.title" = "Slot 2";
+"286.title" = "Emplacement 2";
 
 /* Class = "NSMenuItem"; title = "Slot 0"; ObjectID = "287"; */
-"287.title" = "Slot 0";
+"287.title" = "Emplacement 0";
 
 /* Class = "NSMenuItem"; title = "Slot 2"; ObjectID = "289"; */
-"289.title" = "Slot 2";
+"289.title" = "Emplacement 2";
 
 /* Class = "NSMenuItem"; title = "Run ISO..."; ObjectID = "290"; */
-"290.title" = "Run ISO...";
+"290.title" = "Lancer un ISO…";
 
 /* Class = "NSMenuItem"; title = "Slot 3"; ObjectID = "292"; */
-"292.title" = "Slot 3";
+"292.title" = "Emplacement 3";
 
 /* Class = "NSMenuItem"; title = "Slot 3"; ObjectID = "293"; */
-"293.title" = "Slot 3";
+"293.title" = "Emplacement 3";
 
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "300"; */
 "300.title" = "Fullscreen";
 
 /* Class = "NSMenuItem"; title = "Eject CD"; ObjectID = "303"; */
-"303.title" = "Eject CD";
+"303.title" = "Lancer à partir du CD";
 
 /* Class = "NSMenuItem"; title = "Run BIOS"; ObjectID = "306"; */
-"306.title" = "Run BIOS";
+"306.title" = "Lancer le BIOS";
 
 /* Class = "NSMenuItem"; title = "Slot 4"; ObjectID = "309"; */
-"309.title" = "Slot 4";
+"309.title" = "Emplacement 4";
 
 /* Class = "NSMenuItem"; title = "Slot 5"; ObjectID = "310"; */
-"310.title" = "Slot 5";
+"310.title" = "Emplacement 5";
 
 /* Class = "NSMenuItem"; title = "Slot 4"; ObjectID = "311"; */
-"311.title" = "Slot 4";
+"311.title" = "Emplacement 4";
 
 /* Class = "NSMenuItem"; title = "Slot 5"; ObjectID = "312"; */
-"312.title" = "Slot 5";
+"312.title" = "Emplacement 5";
 
 /* Class = "NSMenuItem"; title = "Pause When Inactive"; ObjectID = "318"; */
 "318.title" = "Pause When Inactive";
 
 /* Class = "NSMenuItem"; title = "Slot 1"; ObjectID = "320"; */
-"320.title" = "Slot 1";
+"320.title" = "Emplacement 1";
 
 /* Class = "NSMenuItem"; title = "Slot 1"; ObjectID = "322"; */
-"322.title" = "Slot 1";
+"322.title" = "Emplacement 1";
 
 /* Class = "NSMenuItem"; title = "Run Recent..."; ObjectID = "329"; */
-"329.title" = "Run Recent...";
+"329.title" = "Run Recent…";
 
 /* Class = "NSMenu"; title = "Run Recent..."; ObjectID = "330"; */
-"330.title" = "Run Recent...";
+"330.title" = "Run Recent…";
 
 /* Class = "NSMenuItem"; title = "Clear recent list"; ObjectID = "366"; */
 "366.title" = "Clear recent list";
 
 /* Class = "NSMenuItem"; title = "Cheats"; ObjectID = "371"; */
-"371.title" = "Cheats";
+"371.title" = "Codes de Triche";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "385"; */
 "385.title" = "Edit";

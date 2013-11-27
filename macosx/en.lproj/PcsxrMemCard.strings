@@ -8,8 +8,8 @@
 /* Class = "NSTextFieldCell"; title = "Memory Card Selection"; ObjectID = "100029"; */
 "100029.title" = "Memory Card Selection";
 
-/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "100035"; */
-"100035.title" = "Label";
+/* Class = "NSTextFieldCell"; placeholderString = "Mem card file name"; ObjectID = "100035"; */
+"100035.placeholderString" = "Mem card file name";
 
 /* Class = "NSButtonCell"; title = "Slot 2"; ObjectID = "100127"; */
 "100127.title" = "Slot 2";
