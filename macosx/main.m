@@ -118,7 +118,7 @@ void SysReset()
 	//EmuReset();
 }
 
-static void AddStringToLogList(const char *themsg)
+static void AddStringToLogList(NSString *themsg)
 {
 	static NSMutableString *theStr;
 	NSRange newlineRange, fullLineRange;
@@ -126,7 +126,7 @@ static void AddStringToLogList(const char *themsg)
 	dispatch_once(&onceToken, ^{
 		theStr = [[NSMutableString alloc] init];
 	});
-	[theStr appendString:@(themsg)];
+	[theStr appendString:themsg];
 	while ((newlineRange = [theStr rangeOfString:@"\n"]).location != NSNotFound) {
 		NSString *tmpStr = [theStr substringToIndex:newlineRange.location];
 		if (tmpStr && ![tmpStr isEqualToString:@""]) {
@@ -142,32 +142,29 @@ static void AddStringToLogList(const char *themsg)
 void SysPrintf(const char *fmt, ...)
 {
 	va_list list;
-	char *msg = calloc(sizeof(char), 512);
+	NSString *msg;
 	
 	va_start(list, fmt);
-	vsnprintf(msg, 512, fmt, list);
+	msg = [[NSString alloc] initWithFormat:@(fmt) arguments:list];
 	va_end(list);
-		
+	
 	RunOnMainThreadSync(^{
 		if (Config.PsxOut)
 			AddStringToLogList(msg);
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
 		if (emuLog)
-			fprintf(emuLog, "%s", msg);
+			fprintf(emuLog, "%s", [msg UTF8String]);
 #endif
 #endif
 	});
-	free(msg);
 }
 
 void SysMessage(const char *fmt, ...)
 {
 	va_list list;
-	NSString *locFmtString = NSLocalizedString(@(fmt), nil);
-	
 	va_start(list, fmt);
-	NSString *msg = [[NSString alloc] initWithFormat:locFmtString arguments:list];
+	NSString *msg = [[NSString alloc] initWithFormat:@(fmt) arguments:list];
 	va_end(list);
 	
 	NSDictionary *userInfo = @{NSLocalizedFailureReasonErrorKey: msg};
@@ -256,6 +253,12 @@ void SysClose()
 	//Tell the memory card manager that the memory cards changed.
 	//The number three tells the mem card manager to update both cards 1 and 2.
 	[[NSNotificationCenter defaultCenter] postNotificationName:memChangeNotifier object:nil userInfo:@{memCardChangeNumberKey: @3}];
+	
+	//Clear the log list
+	RunOnMainThreadSync(^{
+		if (Config.PsxOut)
+			AddStringToLogList(@"\n");
+	});
 }
 
 void OnFile_Exit()

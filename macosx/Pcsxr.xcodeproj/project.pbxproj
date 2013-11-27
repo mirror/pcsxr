@@ -2869,6 +2869,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -3044,6 +3045,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GENERATE_PKGINFO_FILE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3066,6 +3068,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "updateInfoPlist/updateInfoPlist-Prefix.pch";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GENERATE_PKGINFO_FILE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3087,6 +3090,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "updateInfoPlist/updateInfoPlist-Prefix.pch";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GENERATE_PKGINFO_FILE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3134,11 +3138,8 @@
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plistvers.plist;
-				LD_NO_PIE = YES;
-				OTHER_CFLAGS = (
-					"-funroll-loops",
-					"$(inherited)",
-				);
+				LD_NO_PIE = NO;
+				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_NAME = PCSXR;
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
@@ -3334,7 +3335,7 @@
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plistvers.plist;
-				LD_NO_PIE = YES;
+				LD_NO_PIE = NO;
 				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_NAME = PCSXR;
 				SKIP_INSTALL = NO;
@@ -3358,9 +3359,8 @@
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plistvers.plist;
-				LD_NO_PIE = YES;
+				LD_NO_PIE = NO;
 				OTHER_CFLAGS = (
-					"-funroll-loops",
 					"-fomit-frame-pointer",
 					"$(inherited)",
 				);
