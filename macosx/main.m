@@ -10,8 +10,7 @@
 #import "PcsxrController.h"
 #import "ConfigurationController.h"
 #include <dlfcn.h>
-//#import <sys/param.h>
-#import <unistd.h>
+#include <unistd.h>
 #include "psxcommon.h"
 #include "sio.h"
 #include <IOKit/pwr_mgt/IOPMLib.h>
@@ -119,20 +118,6 @@ void SysReset()
 	//EmuReset();
 }
 
-#ifdef EMU_LOG
-#ifndef LOG_STDOUT
-static inline NSDateFormatter* debugDateFormatter()
-{
-	static NSDateFormatter* theFormatter = nil;
-	if (theFormatter == nil) {
-		theFormatter = [[NSDateFormatter alloc] init];
-		[theFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss:SSS"];
-	}
-	return theFormatter;
-}
-#endif
-#endif
-
 static void AddStringToLogList(const char *themsg)
 {
 	static NSMutableString *theStr;
@@ -164,10 +149,12 @@ void SysPrintf(const char *fmt, ...)
 	va_end(list);
 		
 	RunOnMainThreadSync(^{
-		if (Config.PsxOut) AddStringToLogList(msg);
+		if (Config.PsxOut)
+			AddStringToLogList(msg);
 #ifdef EMU_LOG
 #ifndef LOG_STDOUT
-		if (emuLog) fprintf(emuLog, "%s", msg);
+		if (emuLog)
+			fprintf(emuLog, "%s", msg);
 #endif
 #endif
 	});
