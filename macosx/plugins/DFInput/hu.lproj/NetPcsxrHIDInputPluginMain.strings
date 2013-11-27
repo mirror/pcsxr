@@ -1,0 +1,48 @@
+
+/* Class = "NSWindow"; title = "Input Configuration"; ObjectID = "5"; */
+"5.title" = "Input Configuration";
+
+/* Class = "NSTabViewItem"; label = "Controller 2"; ObjectID = "8"; */
+"8.label" = "Controller 2";
+
+/* Class = "NSTabViewItem"; label = "Controller 1"; ObjectID = "9"; */
+"9.label" = "Controller 1";
+
+/* Class = "NSTableColumn"; headerCell.title = "Button"; ObjectID = "124"; */
+"124.headerCell.title" = "Button";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "127"; */
+"127.title" = "OtherViews";
+
+/* Class = "NSTableColumn"; headerCell.title = "Key"; ObjectID = "128"; */
+"128.headerCell.title" = "Key";
+
+/* Class = "NSMenuItem"; title = "Digital Pad"; ObjectID = "130"; */
+"130.title" = "Digital Pad";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Double-Click to Set"; ObjectID = "166"; */
+"166.placeholderString" = "Double-Click to Set";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "190"; */
+"190.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "(Keyboard only)"; ObjectID = "192"; */
+"192.title" = "(Keyboard only)";
+
+/* Class = "NSMenuItem"; title = "Analog Pad"; ObjectID = "198"; */
+"198.title" = "Analog Pad";
+
+/* Class = "NSTextFieldCell"; title = "Type:"; ObjectID = "205"; */
+"205.title" = "Type:";
+
+/* Class = "NSTextFieldCell"; title = "To reset an entry: Select it and press the delete '←' key"; ObjectID = "206"; */
+"206.title" = "To reset an entry: Select it and press the delete '←' key";
+
+/* Class = "NSTextFieldCell"; title = "Device:"; ObjectID = "208"; */
+"208.title" = "Device:";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "257"; */
+"257.title" = "OK";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "262"; */
+"262.title" = "Cancel";

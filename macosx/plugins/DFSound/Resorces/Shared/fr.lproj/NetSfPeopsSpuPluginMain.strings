@@ -1,0 +1,57 @@
+
+/* Class = "NSWindow"; title = "SPU Configuration"; ObjectID = "6"; */
+"6.title" = "SPU Configuration";
+
+/* Class = "NSBox"; title = "General Settings"; ObjectID = "9"; */
+"9.title" = "General Settings";
+
+/* Class = "NSBox"; title = "XA Music"; ObjectID = "19"; */
+"19.title" = "XA Music";
+
+/* Class = "NSBox"; title = "Misc"; ObjectID = "24"; */
+"24.title" = "Misc";
+
+/* Class = "NSTextFieldCell"; title = "Reverb:"; ObjectID = "80"; */
+"80.title" = "Reverb:";
+
+/* Class = "NSTextFieldCell"; title = "Interpolation:"; ObjectID = "82"; */
+"82.title" = "Interpolation:";
+
+/* Class = "NSTextFieldCell"; title = "(Simple Reverb)"; ObjectID = "84"; */
+"84.title" = "(Simple Reverb)";
+
+/* Class = "NSTextFieldCell"; title = "(Simple Interpolation)"; ObjectID = "85"; */
+"85.title" = "(Simple Interpolation)";
+
+/* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "86"; */
+"86.title" = "Volume:";
+
+/* Class = "NSTextFieldCell"; title = "(Loud)"; ObjectID = "88"; */
+"88.title" = "(Loud)";
+
+/* Class = "NSButtonCell"; title = "Change XA Speed"; ObjectID = "89"; */
+"89.title" = "Change XA Speed";
+
+/* Class = "NSButtonCell"; title = "High Compatibility Mode"; ObjectID = "90"; */
+"90.title" = "High Compatibility Mode";
+
+/* Class = "NSButtonCell"; title = "SPU IRQ Wait"; ObjectID = "91"; */
+"91.title" = "SPU IRQ Wait";
+
+/* Class = "NSButtonCell"; title = "Mono Sound"; ObjectID = "92"; */
+"92.title" = "Mono Sound";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "163"; */
+"163.title" = "OK";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "167"; */
+"167.title" = "Cancel";
+
+/* Class = "NSButtonCell"; title = "Reset"; ObjectID = "172"; */
+"172.title" = "Reset";
+
+/* Class = "NSButtonCell"; title = "High Compatibility Mode"; ObjectID = "197"; */
+"197.title" = "High Compatibility Mode";
+
+/* Class = "NSButtonCell"; title = "Change XA Speed"; ObjectID = "234"; */
+"234.title" = "Change XA Speed";

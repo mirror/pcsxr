@@ -706,6 +706,22 @@
 		55E1599D1845A424007983CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/KeyNames.plist; sourceTree = "<group>"; };
 		55E1599F1845A44A007983CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55E159A11845A465007983CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		55E159A31845BA55007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Bladesio1PluginConfig.strings; sourceTree = "<group>"; };
+		55E159A51845BA57007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Bladesio1PluginConfig.strings; sourceTree = "<group>"; };
+		55E159A71845BA63007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/DFCdromPluginConfig.strings; sourceTree = "<group>"; };
+		55E159A91845BA66007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/DFCdromPluginConfig.strings; sourceTree = "<group>"; };
+		55E159AB1845BA78007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/NetPcsxrHIDInputPluginMain.strings; sourceTree = "<group>"; };
+		55E159AD1845BA7B007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/NetPcsxrHIDInputPluginMain.strings; sourceTree = "<group>"; };
+		55E159AF1845BA88007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/SockDialog.strings; sourceTree = "<group>"; };
+		55E159B11845BA8A007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/SockDialog.strings; sourceTree = "<group>"; };
+		55E159B31845BABA007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/DFNet.strings; sourceTree = "<group>"; };
+		55E159B51845BABC007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/DFNet.strings; sourceTree = "<group>"; };
+		55E159B71845BACC007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/NetSfPeopsSpuPluginMain.strings; sourceTree = "<group>"; };
+		55E159B91845BACF007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/NetSfPeopsSpuPluginMain.strings; sourceTree = "<group>"; };
+		55E159BB1845BAEB007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/NetSfPeopsSoftGPUConfig.strings; sourceTree = "<group>"; };
+		55E159BD1845BAED007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/NetSfPeopsSoftGPUConfig.strings; sourceTree = "<group>"; };
+		55E159BF1845BB4C007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/NetSfPeopsOpenGLConfig.strings; sourceTree = "<group>"; };
+		55E159C11845BB4F007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/NetSfPeopsOpenGLConfig.strings; sourceTree = "<group>"; };
 		55EC05F91788B1230053AC23 /* PcsxrMemCardArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrMemCardArray.h; sourceTree = "<group>"; };
 		55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrMemCardArray.m; sourceTree = "<group>"; usesTabs = 1; };
 		55EC05FC178916E70053AC23 /* MemBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemBadgeView.h; sourceTree = "<group>"; };
@@ -1342,9 +1358,9 @@
 			children = (
 				551A753617868BEB0052D185 /* Credits.rtf */,
 				551A753817868BEB0052D185 /* DFNet.xib */,
+				551A753E17868BEB0052D185 /* SockDialog.xib */,
 				551A753A17868BEB0052D185 /* InfoPlist.strings */,
 				551A753C17868BEB0052D185 /* Localizable.strings */,
-				551A753E17868BEB0052D185 /* SockDialog.xib */,
 				551A754017868BEC0052D185 /* Info.plist */,
 				551A754817868BEC0052D185 /* version.plist */,
 			);
@@ -1418,10 +1434,10 @@
 				551A756A17868BEC0052D185 /* InfoPlist.strings */,
 				551A756C17868BEC0052D185 /* Localizable.strings */,
 				551A756E17868BEC0052D185 /* NetSfPeopsSoftGPUConfig.xib */,
+				551A757F17868BED0052D185 /* NetSfPeopsSoftGPUInterface.xib */,
 				551A757017868BEC0052D185 /* gpuPeteOGL2.slf */,
 				551A757117868BEC0052D185 /* gpuPeteOGL2.slv */,
 				551A757217868BEC0052D185 /* Info.plist */,
-				551A757F17868BED0052D185 /* NetSfPeopsSoftGPUInterface.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1462,10 +1478,10 @@
 			children = (
 				551A758517868BED0052D185 /* Credits.rtf */,
 				551A758717868BED0052D185 /* InfoPlist.strings */,
-				551A758917868BED0052D185 /* Localizable.strings */,
 				551A758B17868BED0052D185 /* NetSfPeopsOpenGLConfig.xib */,
-				551A758D17868BED0052D185 /* Info.plist */,
 				551A759A17868BED0052D185 /* NetSfPeopsOpenGLGPUInterface.xib */,
+				551A758917868BED0052D185 /* Localizable.strings */,
+				551A758D17868BED0052D185 /* Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2376,6 +2392,8 @@
 			children = (
 				5569B09F182F0B3F00991C9C /* Base */,
 				5569B0B3182F0B8B00991C9C /* en */,
+				55E159A31845BA55007983CB /* fr */,
+				55E159A51845BA57007983CB /* hu */,
 			);
 			name = Bladesio1PluginConfig.xib;
 			sourceTree = "<group>";
@@ -2417,6 +2435,8 @@
 			children = (
 				5569B0A0182F0B4000991C9C /* Base */,
 				5569B0B5182F0B9800991C9C /* en */,
+				55E159A71845BA63007983CB /* fr */,
+				55E159A91845BA66007983CB /* hu */,
 			);
 			name = DFCdromPluginConfig.xib;
 			sourceTree = "<group>";
@@ -2470,6 +2490,8 @@
 			children = (
 				5569B0A1182F0B4100991C9C /* Base */,
 				5569B0C1182F0BE100991C9C /* en */,
+				55E159AB1845BA78007983CB /* fr */,
+				55E159AD1845BA7B007983CB /* hu */,
 			);
 			name = NetPcsxrHIDInputPluginMain.xib;
 			sourceTree = "<group>";
@@ -2487,6 +2509,8 @@
 			children = (
 				5569B0A2182F0B4200991C9C /* Base */,
 				5569B0BD182F0BCE00991C9C /* en */,
+				55E159B31845BABA007983CB /* fr */,
+				55E159B51845BABC007983CB /* hu */,
 			);
 			name = DFNet.xib;
 			sourceTree = "<group>";
@@ -2514,6 +2538,8 @@
 			children = (
 				5569B0A3182F0B4800991C9C /* Base */,
 				5569B0BF182F0BD500991C9C /* en */,
+				55E159AF1845BA88007983CB /* fr */,
+				55E159B11845BA8A007983CB /* hu */,
 			);
 			name = SockDialog.xib;
 			sourceTree = "<group>";
@@ -2557,6 +2583,8 @@
 			children = (
 				5569B0A4182F0B4900991C9C /* Base */,
 				5569B0BB182F0BC000991C9C /* en */,
+				55E159B71845BACC007983CB /* fr */,
+				55E159B91845BACF007983CB /* hu */,
 			);
 			name = NetSfPeopsSpuPluginMain.xib;
 			sourceTree = "<group>";
@@ -2592,6 +2620,8 @@
 			children = (
 				5569B0A5182F0B4A00991C9C /* Base */,
 				5569B0B9182F0BB100991C9C /* en */,
+				55E159BB1845BAEB007983CB /* fr */,
+				55E159BD1845BAED007983CB /* hu */,
 			);
 			name = NetSfPeopsSoftGPUConfig.xib;
 			sourceTree = "<group>";
@@ -2627,6 +2657,8 @@
 			children = (
 				5569B0A6182F0B4B00991C9C /* Base */,
 				5569B0B7182F0BA700991C9C /* en */,
+				55E159BF1845BB4C007983CB /* fr */,
+				55E159C11845BB4F007983CB /* hu */,
 			);
 			name = NetSfPeopsOpenGLConfig.xib;
 			sourceTree = "<group>";

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4510"/>
+        <deployment defaultVersion="1080" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NetSfPeopsOpenGLPluginConfigController">
@@ -129,7 +129,7 @@
                                     </popUpButtonCell>
                                 </popUpButton>
                                 <textField toolTip="Change resolution to this when going full screen" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="909">
-                                    <rect key="frame" x="14" y="106" width="136" height="18"/>
+                                    <rect key="frame" x="15" y="106" width="134" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="18" id="920"/>
@@ -150,7 +150,7 @@
                                     </buttonCell>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="911">
-                                    <rect key="frame" x="195" y="17" width="91" height="32"/>
+                                    <rect key="frame" x="195" y="17" width="90" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="push" title="Hacks…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="918">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -226,7 +226,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField toolTip="Specify when to use dithering to render colors" verticalHuggingPriority="750" horizontalCompressionResistancePriority="671" translatesAutoresizingMaskIntoConstraints="NO" id="112">
-                                    <rect key="frame" x="14" y="232" width="107" height="17"/>
+                                    <rect key="frame" x="15" y="232" width="106" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Dither Graphics:" id="383">
                                         <font key="font" metaFont="system"/>
@@ -235,7 +235,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <popUpButton toolTip="Specify when to use dithering to render colors" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="116">
-                                    <rect key="frame" x="124" y="226" width="174" height="26"/>
+                                    <rect key="frame" x="125" y="226" width="174" height="26"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="169" id="624"/>
@@ -253,7 +253,7 @@
                                     </popUpButtonCell>
                                 </popUpButton>
                                 <popUpButton toolTip="Use offscreen drawing to remove some graphics glitches" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="202">
-                                    <rect key="frame" x="124" y="199" width="174" height="22"/>
+                                    <rect key="frame" x="125" y="199" width="174" height="22"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="701"/>
@@ -273,7 +273,7 @@
                                     </popUpButtonCell>
                                 </popUpButton>
                                 <textField toolTip="Use offscreen drawing to remove some graphics glitches" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="207">
-                                    <rect key="frame" x="14" y="203" width="107" height="21"/>
+                                    <rect key="frame" x="15" y="203" width="106" height="21"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Offscreen Drawing:" id="394">
                                         <font key="font" metaFont="system"/>
@@ -309,7 +309,7 @@
                                                 </popUpButtonCell>
                                             </popUpButton>
                                             <textField toolTip="Select a quality level of texture scaling" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="201">
-                                                <rect key="frame" x="13" y="46" width="115" height="17"/>
+                                                <rect key="frame" x="14" y="46" width="113" height="17"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Enhancement:" id="398">
                                                     <font key="font" metaFont="system"/>
@@ -318,7 +318,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField toolTip="Filter textures when scaled. Higher values filter more kinds of textures, i.e. sprites." verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="193">
-                                                <rect key="frame" x="14" y="18" width="114" height="17"/>
+                                                <rect key="frame" x="15" y="18" width="112" height="17"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Filtering:" id="397">
                                                     <font key="font" metaFont="system"/>
@@ -327,7 +327,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField toolTip="The color depth of stored textures." verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="174">
-                                                <rect key="frame" x="14" y="78" width="114" height="17"/>
+                                                <rect key="frame" x="15" y="78" width="112" height="17"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="108" id="758"/>
@@ -400,7 +400,7 @@
                                     </popUpButtonCell>
                                 </popUpButton>
                                 <textField toolTip="Select the method the PSX uses to read the contents of the screen" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="220">
-                                    <rect key="frame" x="384" y="232" width="175" height="17"/>
+                                    <rect key="frame" x="385" y="232" width="173" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Frame Buffer Effects" id="402">
                                         <font key="font" metaFont="system"/>
@@ -509,7 +509,6 @@
                             <constraint firstItem="116" firstAttribute="leading" secondItem="112" secondAttribute="trailing" constant="8" symbolic="YES" id="980"/>
                             <constraint firstItem="207" firstAttribute="top" secondItem="112" secondAttribute="bottom" constant="8" symbolic="YES" id="983"/>
                             <constraint firstItem="212" firstAttribute="leading" secondItem="107" secondAttribute="leading" constant="16" id="989"/>
-                            <constraint firstItem="207" firstAttribute="leading" secondItem="107" secondAttribute="leading" constant="16" id="991"/>
                             <constraint firstItem="116" firstAttribute="top" secondItem="107" secondAttribute="top" constant="25" id="993"/>
                             <constraint firstItem="112" firstAttribute="leading" secondItem="107" secondAttribute="leading" constant="16" id="995"/>
                             <constraint firstItem="220" firstAttribute="baseline" secondItem="116" secondAttribute="baseline" id="997"/>
@@ -529,7 +528,7 @@
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="665">
-                        <rect key="frame" x="14" y="13" width="75" height="32"/>
+                        <rect key="frame" x="14" y="13" width="74" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="666">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -591,21 +590,21 @@ Gw
         <window title="Hacks" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="472">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="207" width="497" height="367"/>
+            <rect key="contentRect" x="196" y="207" width="500" height="370"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" id="473">
-                <rect key="frame" x="0.0" y="0.0" width="497" height="367"/>
+                <rect key="frame" x="0.0" y="0.0" width="500" height="370"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <box titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="474">
-                        <rect key="frame" x="17" y="57" width="463" height="206"/>
+                        <rect key="frame" x="17" y="57" width="466" height="206"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView">
-                            <rect key="frame" x="2" y="2" width="459" height="202"/>
+                            <rect key="frame" x="2" y="2" width="462" height="202"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <matrix verticalHuggingPriority="750" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="479">
-                                    <rect key="frame" x="17" y="13" width="425" height="178"/>
+                                    <rect key="frame" x="17" y="13" width="428" height="178"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     <size key="cellSize" width="210" height="18"/>
@@ -705,7 +704,7 @@ Gw
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="475">
-                        <rect key="frame" x="149" y="269" width="199" height="56"/>
+                        <rect key="frame" x="151" y="269" width="198" height="56"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="center" id="478">
                             <font key="font" metaFont="smallSystem"/>
@@ -716,7 +715,7 @@ Hold the mouse over a checkbox to get more information about it.</string>
                         </textFieldCell>
                     </textField>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="476">
-                        <rect key="frame" x="195" y="331" width="106" height="18"/>
+                        <rect key="frame" x="198" y="331" width="105" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Enable Hacks" bezelStyle="regularSquare" imagePosition="left" alignment="center" inset="2" id="477">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -727,7 +726,7 @@ Hold the mouse over a checkbox to get more information about it.</string>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="501">
-                        <rect key="frame" x="424" y="13" width="59" height="32"/>
+                        <rect key="frame" x="427" y="13" width="59" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="502">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -741,7 +740,7 @@ DQ
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="503">
-                        <rect key="frame" x="342" y="13" width="82" height="32"/>
+                        <rect key="frame" x="345" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="504">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

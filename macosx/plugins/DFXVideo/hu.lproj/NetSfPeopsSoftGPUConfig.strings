@@ -1,0 +1,189 @@
+
+/* Class = "NSWindow"; title = "GPU Configuration"; ObjectID = "5"; */
+"5.title" = "GPU Configuration";
+
+/* Class = "NSBox"; title = "Hacks"; ObjectID = "76"; */
+"76.title" = "Hacks";
+
+/* Class = "NSBox"; title = "Display Settings"; ObjectID = "89"; */
+"89.title" = "Display Settings";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Removes tearing artifacts by waiting for the monitor to sync. Will cause a slight performance loss. This setting has no effect on LCD monitors."; ObjectID = "93"; */
+"93.ibShadowedToolTip" = "Removes tearing artifacts by waiting for the monitor to sync. Will cause a slight performance loss. This setting has no effect on LCD monitors.";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Skip rendering frames to improve overall speed when needed. This setting might cause compatibility problems"; ObjectID = "96"; */
+"96.ibShadowedToolTip" = "Skip rendering frames to improve overall speed when needed. This setting might cause compatibility problems";
+
+/* Class = "NSButton"; ibShadowedToolTip = "When Enabled a small counter will show the current performance of the rendering measured in Frames Per Second (FPS)"; ObjectID = "97"; */
+"97.ibShadowedToolTip" = "When Enabled a small counter will show the current performance of the rendering measured in Frames Per Second (FPS)";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Automatically enter full screen mode"; ObjectID = "99"; */
+"99.ibShadowedToolTip" = "Automatically enter full screen mode";
+
+/* Class = "NSBox"; title = "Rendering"; ObjectID = "107"; */
+"107.title" = "Rendering";
+
+/* Class = "NSMenuItem"; title = "Never"; ObjectID = "111"; */
+"111.title" = "Never";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Specify when to use dithering to render colors"; ObjectID = "112"; */
+"112.ibShadowedToolTip" = "Specify when to use dithering to render colors";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "113"; */
+"113.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Always"; ObjectID = "114"; */
+"114.title" = "Always";
+
+/* Class = "NSMenuItem"; title = "When Hinted"; ObjectID = "115"; */
+"115.title" = "When Hinted";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Specify when to use dithering to render colors"; ObjectID = "116"; */
+"116.ibShadowedToolTip" = "Specify when to use dithering to render colors";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Enable use of the hacks specified below"; ObjectID = "117"; */
+"117.ibShadowedToolTip" = "Enable use of the hacks specified below";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "Fixes black screens in Lunar"; ObjectID = "161"; */
+"161.ibShadowedToolTip" = "Fixes black screens in Lunar";
+
+/* Class = "NSButtonCell"; title = "Ignore black brightness color"; ObjectID = "161"; */
+"161.title" = "Ignore black brightness color";
+
+/* Class = "NSTextFieldCell"; title = "Only enable a hack to fix a specific problem in a game.\nHold the mouse over a checkbox to get more information about it."; ObjectID = "162"; */
+"162.title" = "Only enable a hack to fix a specific problem in a game.\nHold the mouse over a checkbox to get more information about it.";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "Better fps limitation with some games"; ObjectID = "163"; */
+"163.ibShadowedToolTip" = "Better fps limitation with some games";
+
+/* Class = "NSButtonCell"; title = "Use PC FPS calculation"; ObjectID = "163"; */
+"163.title" = "Use PC FPS calculation";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "Old compatibility mode"; ObjectID = "164"; */
+"164.ibShadowedToolTip" = "Old compatibility mode";
+
+/* Class = "NSButtonCell"; title = "Disable coord check"; ObjectID = "164"; */
+"164.title" = "Disable coord check";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "Better fps limitation with some games"; ObjectID = "165"; */
+"165.ibShadowedToolTip" = "Better fps limitation with some games";
+
+/* Class = "NSButtonCell"; title = "Use old frame skipping"; ObjectID = "165"; */
+"165.title" = "Use old frame skipping";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "Shows the full area in Capcom 2D fighters"; ObjectID = "166"; */
+"166.ibShadowedToolTip" = "Shows the full area in Capcom 2D fighters";
+
+/* Class = "NSButtonCell"; title = "Expand screen width"; ObjectID = "166"; */
+"166.title" = "Expand screen width";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "Maybe faster, needed for Pandemonium 2"; ObjectID = "167"; */
+"167.ibShadowedToolTip" = "Maybe faster, needed for Pandemonium 2";
+
+/* Class = "NSButtonCell"; title = "Lazy screen updates"; ObjectID = "167"; */
+"167.title" = "Lazy screen updates";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "Chrono Cross"; ObjectID = "168"; */
+"168.ibShadowedToolTip" = "Chrono Cross";
+
+/* Class = "NSButtonCell"; title = "Odd/even bit hack"; ObjectID = "168"; */
+"168.title" = "Odd/even bit hack";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "Slightly distorted textures can happen"; ObjectID = "169"; */
+"169.ibShadowedToolTip" = "Slightly distorted textures can happen";
+
+/* Class = "NSButtonCell"; title = "Draw tex-quads as triangles"; ObjectID = "169"; */
+"169.title" = "Draw tex-quads as triangles";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "Needed by Dark Forces"; ObjectID = "170"; */
+"170.ibShadowedToolTip" = "Needed by Dark Forces";
+
+/* Class = "NSButtonCell"; title = "Repeated flat tex triangles"; ObjectID = "170"; */
+"170.title" = "Repeated flat tex triangles";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "Toggles busy flags after drawing"; ObjectID = "171"; */
+"171.ibShadowedToolTip" = "Toggles busy flags after drawing";
+
+/* Class = "NSButtonCell"; title = "Fake 'gpu busy' states"; ObjectID = "171"; */
+"171.title" = "Fake 'gpu busy' states";
+
+/* Class = "NSButtonCell"; title = "Sync to Monitor Refresh"; ObjectID = "172"; */
+"172.title" = "Sync to Monitor Refresh";
+
+/* Class = "NSButtonCell"; title = "Use Frame Skipping"; ObjectID = "173"; */
+"173.title" = "Use Frame Skipping";
+
+/* Class = "NSButtonCell"; title = "Display FPS Counter"; ObjectID = "174"; */
+"174.title" = "Display FPS Counter";
+
+/* Class = "NSButtonCell"; title = "Auto Full Screen"; ObjectID = "175"; */
+"175.title" = "Auto Full Screen";
+
+/* Class = "NSTextFieldCell"; title = "Dither Graphics:"; ObjectID = "176"; */
+"176.title" = "Dither Graphics:";
+
+/* Class = "NSButtonCell"; title = "Enable Hacks"; ObjectID = "178"; */
+"178.title" = "Enable Hacks";
+
+/* Class = "NSBox"; title = "Shaders"; ObjectID = "179"; */
+"179.title" = "Shaders";
+
+/* Class = "NSButtonCell"; title = "Enable Shaders"; ObjectID = "181"; */
+"181.title" = "Enable Shaders";
+
+/* Class = "NSButtonCell"; title = "Select..."; ObjectID = "183"; */
+"183.title" = "Select...";
+
+/* Class = "NSButtonCell"; title = "Select..."; ObjectID = "185"; */
+"185.title" = "Select...";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "187"; */
+"187.title" = "Label";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "189"; */
+"189.title" = "Label";
+
+/* Class = "NSTextFieldCell"; title = "Vertex:"; ObjectID = "195"; */
+"195.title" = "Vertex:";
+
+/* Class = "NSTextFieldCell"; title = "Fragment:"; ObjectID = "197"; */
+"197.title" = "Fragment:";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "221"; */
+"221.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "1.0"; ObjectID = "222"; */
+"222.title" = "1.0";
+
+/* Class = "NSMenuItem"; title = "2.0"; ObjectID = "223"; */
+"223.title" = "2.0";
+
+/* Class = "NSMenuItem"; title = "3.0"; ObjectID = "224"; */
+"224.title" = "3.0";
+
+/* Class = "NSTextFieldCell"; title = "Quality:"; ObjectID = "226"; */
+"226.title" = "Quality:";
+
+/* Class = "NSMenuItem"; title = "4.0"; ObjectID = "227"; */
+"227.title" = "4.0";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "372"; */
+"372.title" = "OK";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "376"; */
+"376.title" = "Cancel";
+
+/* Class = "NSButtonCell"; title = "Reset"; ObjectID = "382"; */
+"382.title" = "Reset";
+
+/* Class = "NSButtonCell"; title = "Odd/even bit hack"; ObjectID = "531"; */
+"531.title" = "Odd/even bit hack";
+
+/* Class = "NSFormCell"; title = "Height:"; ObjectID = "3eM-lr-W6U"; */
+"3eM-lr-W6U.title" = "Height:";
+
+/* Class = "NSFormCell"; title = "Width:"; ObjectID = "4UQ-Uy-UYS"; */
+"4UQ-Uy-UYS.title" = "Width:";
+
+/* Class = "NSFormCell"; title = "Field:"; ObjectID = "7gB-tB-Kx4"; */
+"7gB-tB-Kx4.title" = "Field:";
