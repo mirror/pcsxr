@@ -594,7 +594,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="903">
-                                                        <rect key="frame" x="76.000000242143869" y="7" width="90" height="28"/>
+                                                        <rect key="frame" x="76" y="7" width="90.000000242143869" height="28"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                                         <buttonCell key="cell" type="push" title="Configure…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="910">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

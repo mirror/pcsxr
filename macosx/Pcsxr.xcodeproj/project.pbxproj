@@ -385,7 +385,6 @@
 		02717969167884DF004AED62 /* hotkeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hotkeys.h; sourceTree = "<group>"; };
 		0280B7AB16764CC3007B8001 /* HotkeyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotkeyController.h; sourceTree = "<group>"; };
 		0280B7AC16764CC3007B8001 /* HotkeyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotkeyController.m; sourceTree = "<group>"; usesTabs = 1; };
-		02FE55E716765F9400205CF2 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = English; path = KeyNames.plist; sourceTree = "<group>"; };
 		2B4DE98D05FF9307003EFEF0 /* PluginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginController.h; sourceTree = "<group>"; };
 		2B4DE98E05FF9307003EFEF0 /* PluginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginController.m; sourceTree = "<group>"; usesTabs = 1; };
 		2B75FD3C051C56D200D12034 /* PcsxrController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PcsxrController.h; sourceTree = "<group>"; };
@@ -394,14 +393,12 @@
 		2B75FD4B051C8A7400D12034 /* ConfigurationController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ConfigurationController.m; sourceTree = "<group>"; usesTabs = 1; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2B976C00074C14B4007C050A /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = /System/Library/Frameworks/Kernel.framework; sourceTree = "<absolute>"; };
 		2BA178A505148D9D0026D74D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; usesTabs = 1; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		2BA178B30514CE260026D74D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InfoPlist.strings; sourceTree = "<group>"; };
 		2BA44360052DB2EA00E21DDD /* PcsxrPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PcsxrPlugin.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		2BA44361052DB2EA00E21DDD /* PcsxrPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PcsxrPlugin.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 1; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2BB3D6CF05427FE200831ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BB3D6D105427FE200831ACB /* PCSXR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PCSXR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBB1126051DC00500B84448 /* PluginList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginList.h; sourceTree = "<group>"; };
 		2BBB1127051DC00500B84448 /* PluginList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PluginList.m; sourceTree = "<group>"; usesTabs = 1; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		2BBB1787051E0D9700B84448 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = Credits.rtf; sourceTree = "<group>"; };
 		2BBB1791051E113B00B84448 /* EmuThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmuThread.h; sourceTree = "<group>"; };
 		2BBB1792051E113B00B84448 /* EmuThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EmuThread.m; sourceTree = "<group>"; usesTabs = 1; };
 		2BBB17DA051E4D0F00B84448 /* Plugin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Plugin.c; sourceTree = SOURCE_ROOT; usesTabs = 1; };
@@ -679,7 +676,6 @@
 		5598AAF717D2D54C0024F71D /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5598AAF917D2D54E0024F71D /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5598AAFB17D2E9E90024F71D /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		559DACED146C72FF00C5DF71 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Localizable.strings; sourceTree = "<group>"; };
 		55A9021E147D7C380037E18F /* PcsxrMemCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrMemCardController.h; sourceTree = "<group>"; };
 		55A9021F147D7C380037E18F /* PcsxrMemCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrMemCardController.m; sourceTree = "<group>"; usesTabs = 1; };
 		55A90227147D89380037E18F /* PcsxrMemoryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PcsxrMemoryObject.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -706,6 +702,10 @@
 		55E15993184564D4007983CB /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		55E15995184567D5007983CB /* GL2Code.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GL2Code.m; sourceTree = "<group>"; };
 		55E15997184567F4007983CB /* GL3Code.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GL3Code.m; sourceTree = "<group>"; };
+		55E1599B1845A403007983CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		55E1599D1845A424007983CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/KeyNames.plist; sourceTree = "<group>"; };
+		55E1599F1845A44A007983CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		55E159A11845A465007983CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55EC05F91788B1230053AC23 /* PcsxrMemCardArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrMemCardArray.h; sourceTree = "<group>"; };
 		55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrMemCardArray.m; sourceTree = "<group>"; usesTabs = 1; };
 		55EC05FC178916E70053AC23 /* MemBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemBadgeView.h; sourceTree = "<group>"; };
@@ -2304,7 +2304,7 @@
 		02FE55E616765F9400205CF2 /* KeyNames.plist */ = {
 			isa = PBXVariantGroup;
 			children = (
-				02FE55E716765F9400205CF2 /* English */,
+				55E1599D1845A424007983CB /* en */,
 			);
 			name = KeyNames.plist;
 			path = English.lproj;
@@ -2349,7 +2349,6 @@
 		2BA178B20514CE260026D74D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2BA178B30514CE260026D74D /* English */,
 				5598AAEB17D2D5400024F71D /* fr */,
 				55707E41181232A9007CC5D0 /* pt-BR */,
 				55707E6518123456007CC5D0 /* ru */,
@@ -2357,6 +2356,7 @@
 				55707E8918123574007CC5D0 /* hu */,
 				55707E9B181235E3007CC5D0 /* zh-Hans */,
 				55707EAD18123616007CC5D0 /* zh-Hant */,
+				55E1599F1845A44A007983CB /* en */,
 			);
 			name = InfoPlist.strings;
 			path = English.lproj;
@@ -2365,7 +2365,7 @@
 		2BBB1786051E0D9700B84448 /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2BBB1787051E0D9700B84448 /* English */,
+				55E1599B1845A403007983CB /* en */,
 			);
 			name = Credits.rtf;
 			path = English.lproj;
@@ -2634,9 +2634,9 @@
 		559DACEC146C72FF00C5DF71 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				559DACED146C72FF00C5DF71 /* English */,
 				5598AAEC17D2D5410024F71D /* fr */,
 				55707E8A18123575007CC5D0 /* hu */,
+				55E159A11845A465007983CB /* en */,
 			);
 			name = Localizable.strings;
 			path = English.lproj;
