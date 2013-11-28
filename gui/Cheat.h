@@ -22,4 +22,7 @@
 void RunCheatListDialog();
 void RunCheatSearchDialog();
 
+// last chosen cheat filename is kept in here
+extern gchar *cheat_last_filename;
+
 #endif

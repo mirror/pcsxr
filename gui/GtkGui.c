@@ -195,6 +195,14 @@ void ResetMenuSlots() {
 	}
 }
 
+static void clear_change_image() {
+	g_free(reset_load_info);
+	reset_load_info = NULL;
+	autoloadCheats();
+	g_free(cheat_last_filename);
+	cheat_last_filename = NULL;
+}
+
 int match(const char *string, char *pattern) {
 	int    status;
 	regex_t    re;
@@ -252,7 +260,10 @@ gchar* get_cdrom_label_id(const gchar* suffix) {
 
 	g_free(trimlabel);
 
-	return g_strdup(buf);
+	if (strlen(buf) <= (2+strlen(dot_extension_cht)))
+		return g_strconcat("psx-default", dot_extension_cht, NULL);
+	else 
+		return g_strdup(buf);
 }
 
 void UpdateMenuSlots() {
@@ -267,6 +278,7 @@ void UpdateMenuSlots() {
 }
 
 void autoloadCheats() {
+	ClearAllCheats();
 	gchar *chtfile = get_cdrom_label_id(dot_extension_cht);
 	gchar *defaultChtFilePath = g_build_filename (getenv("HOME"), CHEATS_DIR, chtfile, NULL);
 	LoadCheats(defaultChtFilePath); // file existence/access check in LoadCheats()
@@ -624,9 +636,7 @@ void OnFile_RunCd() {
 		SysRunGui();
 	}
 
-	g_free(reset_load_info);
-	reset_load_info = NULL;
-	autoloadCheats();
+	clear_change_image();
 	psxCpu->Execute();
 }
 
@@ -657,8 +667,7 @@ void OnFile_RunBios() {
 	CdromId[0] = '\0';
 	CdromLabel[0] = '\0';
 
-	g_free(reset_load_info);
-	reset_load_info = NULL;
+	clear_change_image();
 	psxCpu->Execute();
 }
 
@@ -802,9 +811,7 @@ void OnFile_RunImage() {
 		SysRunGui();
 	}
 
-	g_free(reset_load_info);
-	reset_load_info = NULL;
-	autoloadCheats();
+	clear_change_image();
 	psxCpu->Execute();
 }
 

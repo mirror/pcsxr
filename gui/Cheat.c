@@ -300,7 +300,7 @@ static void OnCheatListDlg_EnableToggled(GtkCellRendererToggle *cell, gchar *pat
 }
 
 // last chosen filename is kept in here
-static gchar *lastfilename = NULL;
+gchar *cheat_last_filename = NULL;
 
 const gchar* file_filter_all = NULL;
 
@@ -341,8 +341,8 @@ static void OnCheatListDlg_OpenClicked(GtkWidget *widget, gpointer user_data) {
 
 	LoadCheats(filename);
 
-	g_free(lastfilename);
-	lastfilename = g_path_get_basename(filename);
+	g_free(cheat_last_filename);
+	cheat_last_filename = g_path_get_basename(filename);
 
 	g_free(filename);
 
@@ -362,10 +362,10 @@ static void OnCheatListDlg_SaveClicked(GtkWidget *widget, gpointer user_data) {
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(chooser), filename);
 
 	// Use game code as default filename, otherwise remember what user selected
-	if (!lastfilename) {
-		lastfilename = get_cdrom_label_id(dot_extension_cht);
+	if (!cheat_last_filename) {
+		cheat_last_filename = get_cdrom_label_id(dot_extension_cht);
 	}
-	gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(chooser), lastfilename);
+	gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(chooser), cheat_last_filename);
 
 	g_free(filename);
 
@@ -399,8 +399,8 @@ static void OnCheatListDlg_SaveClicked(GtkWidget *widget, gpointer user_data) {
 
 	SaveCheats(filename);
 
-	g_free(lastfilename);
-	lastfilename = g_path_get_basename(filename);
+	g_free(cheat_last_filename);
+	cheat_last_filename = g_path_get_basename(filename);
 
 	g_free(filename);
 	g_free(filename2);
