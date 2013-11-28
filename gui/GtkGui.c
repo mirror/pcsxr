@@ -53,6 +53,9 @@ void OnHelp_About();
 void OnDestroy();
 void OnFile_Exit();
 
+// EXE name is stored here 
+gchar* reset_load_info = NULL;
+
 void on_states_load(GtkWidget *widget, gpointer user_data);
 void on_states_load_other();
 void on_states_save(GtkWidget *widget, gpointer user_data);
@@ -571,6 +574,7 @@ void OnFile_RunExe() {
 				SysReset();
 
 				if (Load(file) == 0) {
+					reset_load_info = g_strdup(file);
 					g_free(file);
 					psxCpu->Execute();
 				} else {
@@ -620,6 +624,8 @@ void OnFile_RunCd() {
 		SysRunGui();
 	}
 
+	g_free(reset_load_info);
+	reset_load_info = NULL;
 	autoloadCheats();
 	psxCpu->Execute();
 }
@@ -651,6 +657,8 @@ void OnFile_RunBios() {
 	CdromId[0] = '\0';
 	CdromLabel[0] = '\0';
 
+	g_free(reset_load_info);
+	reset_load_info = NULL;
 	psxCpu->Execute();
 }
 
@@ -794,6 +802,8 @@ void OnFile_RunImage() {
 		SysRunGui();
 	}
 
+	g_free(reset_load_info);
+	reset_load_info = NULL;
 	autoloadCheats();
 	psxCpu->Execute();
 }
@@ -828,12 +838,17 @@ void OnEmu_Reset() {
 		return;
 	}
 
-	if (CheckCdrom() != -1) {
+	// No extra checks here since this is reset and target has been verified already once
+	if (reset_load_info) {
+		SysPrintf("RESET/reloading %s\n", reset_load_info);
+		SysReset();
+		Load(reset_load_info);
+	} else {
+		SysPrintf("RESET/reloading %s %s\n", CdromId, CdromLabel);
+		CheckCdrom();
+		SysReset();
 		LoadCdrom();
 	}
-
-	// Auto-detect: get region first, then rcnt-bios reset
-	SysReset();
 
 	psxCpu->Execute();
 }
@@ -844,6 +859,8 @@ void OnEmu_Shutdown() {
 	CdromId[0] = '\0';
 	CdromLabel[0] = '\0';
 	ResetMenuSlots();
+	g_free(reset_load_info);
+	reset_load_info = NULL;
 }
 
 void OnEmu_SwitchImage() {
