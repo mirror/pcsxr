@@ -150,6 +150,7 @@ typedef struct {
 	boolean RCntFix;
 	boolean UseNet;
 	boolean VSyncWA;
+	boolean NoMemcard;
 	boolean Widescreen;
 	boolean HideCursor;
 	boolean SaveWindowPos;

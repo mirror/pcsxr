@@ -718,19 +718,22 @@ void sioWrite8(unsigned char value) {
 			SIO_INT(SIO_CYCLES);
 			return;
 		case 0x81: // start memcard
+		//case 0x82: case 0x83: case 0x84: // Multitap memcard access
 			StatReg |= RX_RDY;
-#if 0
+
 			// Chronicles of the Sword - no memcard = password options
-			if( Config.Memcard == 1 ) return;
-#endif
-			memcpy(buf, cardh, 4);
+			if( Config.NoMemcard || ((strlen(Config.Mcd1) <=0) && (strlen(Config.Mcd2) <=0)) ) {
+				memset(buf, 0x00, 4);
+			} else {
+				memcpy(buf, cardh, 4);
+			}
+
 			parp = 0;
 			bufcount = 3;
 			mcdst = 1;
 			rdwr = 0;
 			SIO_INT(SIO_CYCLES);
 			return;
-
 		case 0xae: // GameShark CDX - start dongle
 			StatReg |= RX_RDY;
 			gsdonglest = 1;
