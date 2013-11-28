@@ -45,6 +45,9 @@
 #define RTS			0x0020
 #define SIO_RESET	0x0040
 
+// MCD flags
+#define MCDST_CHANGED 0x08
+
 // *** FOR WORKS ON PADS AND MEMORY CARDS *****
 
 
@@ -56,7 +59,7 @@ void SaveDongle( char *str );
 
 static unsigned char buf[ BUFFER_SIZE ];
 
-unsigned char cardh[4] = { 0x00, 0x00, 0x5a, 0x5d };
+unsigned char cardh[4] = { 0x00, 0x08, 0x5a, 0x5d };
 
 // Transfer Ready and the Buffer is Empty
 // static unsigned short StatReg = 0x002b;
@@ -141,7 +144,7 @@ unsigned char reverse_8( unsigned char bits )
 
 void sioWrite8(unsigned char value) {
 #ifdef PAD_LOG
-	PAD_LOG("sio write8 %x\n", value);
+	PAD_LOG("sio write8 %x (PAR:%x PAD:%x MCDL%x)\n", value, parp, padst, mcdst);
 #endif
 	switch (padst) {
 		case 1: SIO_INT(SIO_CYCLES);
@@ -281,11 +284,11 @@ void sioWrite8(unsigned char value) {
 							break;
 					}
 					{
-					char xor = 0;
+					char xorsum = 0;
 					int i;
 					for (i = 2; i < 128 + 4; i++)
-						xor ^= buf[i];
-					buf[132] = xor;
+						xorsum ^= buf[i];
+					buf[132] = xorsum;
 					}
 					buf[133] = 0x47;
 					bufcount = 133;
@@ -297,6 +300,7 @@ void sioWrite8(unsigned char value) {
 					buf[130] = 0x5d;
 					buf[131] = 0x47;
 					bufcount = 131;
+					cardh[1] &= ~MCDST_CHANGED;
 					break;
 			}
 			mcdst = 5;
@@ -758,6 +762,9 @@ void sioWriteMode16(unsigned short value) {
 }
 
 void sioWriteCtrl16(unsigned short value) {
+#ifdef PAD_LOG
+	PAD_LOG("sio ctrlwrite16 %x (PAR:%x PAD:%x MCD:%x)\n", value, parp, padst, mcdst);
+#endif
 	CtrlReg = value & ~RESET_ERR;
 	if (value & RESET_ERR) StatReg &= ~IRQ;
 	if ((CtrlReg & SIO_RESET) || (!CtrlReg)) {
@@ -803,7 +810,8 @@ unsigned char sioRead8() {
 	}
 
 #ifdef PAD_LOG
-	PAD_LOG("sio read8 ;ret = %x\n", ret);
+	PAD_LOG("sio read8 ;ret = %x (I:%x ST:%x BUF:(%x %x %x))\n", 
+			ret, parp, StatReg, buf[parp>0?parp-1:0], buf[parp], buf[parp<BUFFER_SIZE-1?parp+1:BUFFER_SIZE-1]);
 #endif
 	return ret;
 }
@@ -872,8 +880,8 @@ void LoadMcd(int mcd, char *str) {
 	if (mcd == 2) data = Mcd2Data;
 
 	if (*str == 0) {
-		sprintf(str, "memcards/card%d.mcd", mcd);
-		SysPrintf(_("No memory card value was specified - creating a default card %s\n"), str);
+		sprintf(str, "%s/.pcsxr/memcards/card%d.mcd", getenv("HOME"), mcd); // TODO: maybe just whine and quit..
+		SysPrintf(_("No memory card value was specified - using a default card %s\n"), str);
 	}
 	f = fopen(str, "rb");
 	if (f == NULL) {
@@ -907,6 +915,9 @@ void LoadMcd(int mcd, char *str) {
 		fread(data, 1, MCD_SIZE, f);
 		fclose(f);
 	}
+
+	// flag indicating entries have not yet been read (i.e. new card plugged)
+	cardh[1] |= MCDST_CHANGED;
 }
 
 void LoadMcds(char *mcd1, char *mcd2) {
