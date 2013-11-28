@@ -50,12 +50,12 @@ enum
     Rc0Unknown9       = 0x0200, // 9    ?
     Rc1Unknown9       = 0x0200, // 9    ?
     Rc2OneEighthClock = 0x0200, // 9
-    RcUnknown10       = 0x0400, // 10   ?
+    RcIrqRequest      = 0x0400, // 10   Interrupt request flag (0 disabled or during int, 1 request)
     RcCountEqTarget   = 0x0800, // 11
     RcOverflow        = 0x1000, // 12
     RcUnknown13       = 0x2000, // 13   ? (always zero)
     RcUnknown14       = 0x4000, // 14   ? (always zero)
-    RcUnknown15       = 0x8000, // 15   ? (always zero)
+    RcUnknown15       = 0x8000  // 15   ? (always zero)
 };
 
 #define CounterQuantity           ( 4 )
@@ -70,7 +70,12 @@ static const u32 VBlankStart[]    = { 243, 256 };
 static const u32 HSyncTotal[]     = { 263, 313 };
 static const u32 SpuUpdInterval[] = { 23, 22 };
 
+#if defined(PSXHW_LOG) && defined(PSXMEM_LOG) && defined(PSXDMA_LOG) // automatic guess if we want trace level logging
+static const s32 VerboseLevel     = 4;
+#else
 static const s32 VerboseLevel     = 0;
+#endif
+static const u16 JITTER_FLAGS     = (Rc2OneEighthClock|RcIrqRegenerate|RcCountToTarget);
 
 /******************************************************************************/
 
@@ -92,6 +97,7 @@ void setIrq( u32 irq )
 static
 void verboseLog( s32 level, const char *str, ... )
 {
+#ifdef PSXHW_LOG
     if( level <= VerboseLevel )
     {
         va_list va;
@@ -101,9 +107,9 @@ void verboseLog( s32 level, const char *str, ... )
         vsnprintf( buf, sizeof(buf), str, va );
         va_end( va );
 
-        printf( "%s", buf );
-        fflush( stdout );
+        PSXHW_LOG( "%s", buf );
     }
+#endif
 }
 
 /******************************************************************************/
@@ -131,6 +137,7 @@ void _psxRcntWcount( u32 index, u32 value )
         rcnts[index].cycle = 0xffff * rcnts[index].rate;
         rcnts[index].counterState = CountToOverflow;
     }
+    verboseLog( 5, "[RCNT %i] scount: %x\n", index, value );
 }
 
 static inline
@@ -208,7 +215,7 @@ void psxRcntReset( u32 index )
             {
                 verboseLog( 3, "[RCNT %i] irq: %x\n", index, count );
                 setIrq( rcnts[index].irq );
-                rcnts[index].irqState = 1;
+                rcnts[index].irqState = TRUE;
             }
         }
 
@@ -229,14 +236,14 @@ void psxRcntReset( u32 index )
             {
                 verboseLog( 3, "[RCNT %i] irq: %x\n", index, count );
                 setIrq( rcnts[index].irq );
-                rcnts[index].irqState = 1;
+                rcnts[index].irqState = TRUE;
             }
         }
 
         rcnts[index].mode |= RcOverflow;
     }
 
-    rcnts[index].mode |= RcUnknown10;
+    rcnts[index].mode |= RcIrqRequest;
 
     psxRcntSet();
 }
@@ -337,7 +344,7 @@ void psxRcntWmode( u32 index, u32 value )
     psxRcntUpdate();
 
     rcnts[index].mode = value;
-    rcnts[index].irqState = 0;
+    rcnts[index].irqState = FALSE;
 
     switch( index )
     {
@@ -389,7 +396,7 @@ void psxRcntWtarget( u32 index, u32 value )
 
     psxRcntUpdate();
 
-    rcnts[index].target = value;
+    rcnts[index].target = value; // TODO: only upper 16bit used
 
     _psxRcntWcount( index, _psxRcntRcount( index ) );
     psxRcntSet();
@@ -405,16 +412,30 @@ u32 psxRcntRcount( u32 index )
 
     count = _psxRcntRcount( index );
 
-    // Parasite Eve 2 fix.
-    if( Config.RCntFix )
+    // Parasite Eve 2 fix - artificial clock jitter based on BIAS
+    // TODO: any other games depend on getting excepted value from RCNT?
+    if( index == 2 && rcnts[index].counterState == CountToTarget && (Config.RCntFix || ((rcnts[index].mode & 0x2FF) == JITTER_FLAGS)) )
     {
-        if( index == 2 )
-        {
-            if( rcnts[index].counterState == CountToTarget )
-            {
-                count /= BIAS;
-            }
-        }
+        /*
+        *The problem is that...
+        *
+        *We generate too many cycles during PSX HW hardware operations.
+        *
+        *OR
+        *
+        *We simply count too many cycles here for RCNTs.
+        *
+        *OR
+        *
+        *RCNT implementation here is only 99% compatible. Assumed this since easities to fix (only PE2 known to be affected).
+        */
+        static u32 clast = 0xffff;
+        static u32 cylast = 0;
+        u32 count1 = count;
+        count /= BIAS;
+        verboseLog( 4, "[RCNT %i] rcountpe2: %x %x %x (%u)\n", index, count, count1, clast, (psxRegs.cycle-cylast));
+        cylast=psxRegs.cycle;
+        clast=count;
     }
 
     verboseLog( 2, "[RCNT %i] rcount: %x\n", index, count );
