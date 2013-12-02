@@ -33,7 +33,7 @@ void PADhandleKey(int key);
 
 int main(int argc, const char *argv[])
 {
-    if ( argc >= 2 && strncmp (argv[1], "-psn", 4) == 0 ) {
+    if (argc >= 2 && strncmp (argv[1], "-psn", 4) == 0 ) {
         char parentdir[MAXPATHLEN];
         char *c;
 

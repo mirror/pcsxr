@@ -587,7 +587,6 @@ otherblock();\
 		}
 #ifdef DEBUG
 		if ([unknownOptions count]) {			
-			//As there doesn't seem to be a Cocoa/Objective-C method like this...
 			NSString *unknownString = [unknownOptions componentsJoinedByString:@" "];
 			
 			NSLog(@"The following options weren't recognized by PCSX-R: %@. This may be due to extra arguments passed by the OS or debugger.", unknownString);

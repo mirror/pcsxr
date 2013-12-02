@@ -347,8 +347,6 @@
 	// detach a new thread
 	[NSThread detachNewThreadSelector:@selector(runCommand:) toTarget:self
 						   withObject:arg];
-	//NOTE: the runCommand releases the arg command. Probably not the best way to do it...
-	//This is not an issue with ARC (64-bit) code
 }
 
 - (void)configureAs:(int)aType
@@ -361,8 +359,6 @@
 	// detach a new thread
 	[NSThread detachNewThreadSelector:@selector(runCommand:) toTarget:self
 						   withObject:arg];
-	//NOTE: the runCommand releases the arg command. Probably not the best way to do it...
-	//This is not an issue with ARC (64-bit) code
 }
 
 - (NSString *)displayVersion
