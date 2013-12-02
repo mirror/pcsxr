@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4510"/>
+        <deployment defaultVersion="1080" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="DFCdromPluginConfigController">
@@ -33,7 +33,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="169">
-                                    <rect key="frame" x="15" y="19" width="151" height="18"/>
+                                    <rect key="frame" x="15" y="19" width="150" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <buttonCell key="cell" type="check" title="Use Cached Reading" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="189">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -63,7 +63,7 @@
                                     </popUpButtonCell>
                                 </popUpButton>
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="266">
-                                    <rect key="frame" x="14" y="46" width="113" height="17"/>
+                                    <rect key="frame" x="15" y="46" width="111" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="CD-ROM Speed:" id="267">
                                         <font key="font" metaFont="system"/>
@@ -93,7 +93,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="172">
-                                    <rect key="frame" x="129" y="15" width="195" height="25"/>
+                                    <rect key="frame" x="129" y="13" width="195" height="27"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="191" id="222"/>
@@ -103,12 +103,10 @@
                                     </sliderCell>
                                 </slider>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Jzm-F5-M7J">
-                                    <rect key="frame" x="14" y="10" width="112" height="34"/>
+                                    <rect key="frame" x="15" y="25" width="110" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" id="MSf-Ad-auA">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Cache Size:" id="MSf-Ad-auA">
                                         <font key="font" metaFont="system"/>
-                                        <string key="title">Cache Size:
-</string>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>

@@ -14,19 +14,13 @@
 void SysMessage(const char *fmt, ...)
 {
 	va_list list;
-	char msg[512];
-	//char cmd[512];
-	
 	va_start(list, fmt);
-	vsprintf(msg, fmt, list);
+	NSString *errString = [[NSString alloc] initWithFormat:@(fmt) arguments:list];
 	va_end(list);
 	
-	//sprintf(cmd, "message %s\n", msg);
-	NSString *errString = @(msg);
-	fprintf(stderr, "%s", msg);
-	NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"Exit" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@", errString];
+	fprintf(stderr, "message %s\n", [errString UTF8String]);
+	NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"Stop" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@", errString];
 	[alert setAlertStyle:NSCriticalAlertStyle];
-	//NSInteger result = NSRunAlertPanel(errString, nil, @"Okay", nil, nil);
 	NSInteger result = [alert runModal];
 	if (result == NSAlertDefaultReturn)
 	{
@@ -34,7 +28,8 @@ void SysMessage(const char *fmt, ...)
 		if (theEmuClass) {
 			[theEmuClass stop];
 		} else {
-			NSLog(@"Unable to stop emulation because the Objective-C class \"EmuThreaed\" was not found. Are you using a different emulator than PCSXR?");
+			NSLog(@"Unable to stop emulation because the Objective-C class \"EmuThreaed\" was not found.");
+			NSLog(@"Are you using a different emulator than PCSXR?");
 		}
 	}
 }
@@ -93,10 +88,7 @@ void sockDestroyWaitDlg()
 
 - (id)init
 {
-	if ((self = [super initWithWindowNibName:@"SockDialog"])) {
-		
-	}
-	return self;
+	return self = [self initWithWindowNibName:@"SockDialog"];
 }
 
 @end

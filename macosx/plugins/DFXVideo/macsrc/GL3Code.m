@@ -43,11 +43,14 @@ static int mylog2(int val)
 	
 	// Get pixel format from OpenGL
 	NSOpenGLPixelFormat* pixFmt = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
-	if (!pixFmt)
+	if (!pixFmt) {
+		NSLog(@"OpenGL 3 context could not be created.");
+		NSLog(@"Legacy context will be tried.");
 		return NO;
+	}
 	
 	[self setPixelFormat:pixFmt];
-
+	
 	return NO;
 }
 
@@ -109,7 +112,7 @@ static int mylog2(int val)
 	myShader = glCreateShader(type);
 	if(myShader == 0)
 	{
-		fprintf(stderr, "impossible de creer le shader\n");
+		NSLog(@"impossible de creer le shader");
 		return 0;
 	}
 	
@@ -145,18 +148,16 @@ static int mylog2(int val)
 		glGetShaderiv(myShader, GL_INFO_LOG_LENGTH, &logsize);
 		
 		/* on alloue un espace memoire dans lequel OpenGL ecrira le message */
-		log = malloc(logsize + 1);
+		log = calloc(logsize + 1, 1);
 		if(log == NULL)
 		{
-			fprintf(stderr, "impossible d'allouer de la memoire !\n");
+			NSLog(@"impossible d'allouer de la memoire!");
 			return 0;
 		}
-		/* initialisation du contenu */
-		memset(log, '\0', logsize + 1);
 		
 		glGetShaderInfoLog(myShader, logsize, &logsize, log);
-		fprintf(stderr, "impossible de compiler le shader '%s' :\n%s",
-				[[filename path] UTF8String], log);
+		NSLog(@"impossible de compiler le shader '%@' :\n%s",
+			  [filename path], log);
 		
 		/* ne pas oublier de liberer la memoire et notre shader */
 		free(log);
@@ -181,7 +182,7 @@ void printProgramInfoLog(GLuint obj)
 	{
 		infoLog = (char *)malloc(infologLength);
 		glGetProgramInfoLog(obj, infologLength, &charsWritten, infoLog);
-		printf("%s\n",infoLog);
+		NSLog(@"%s", infoLog);
 		free(infoLog);
 	}
 }
