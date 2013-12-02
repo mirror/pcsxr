@@ -177,7 +177,7 @@
 "477.title" = "Enable Hacks";
 
 /* Class = "NSTextFieldCell"; title = "Only enable a hack to fix a specific problem in a game.\nHold the mouse over a checkbox to get more information about it."; ObjectID = "478"; */
-"478.title" = "Only enable a hack to fix a specific problem in a game.\nHold the mouse over a checkbox to get more information about it.";
+"478.title" = "Only enable a hack to fix a specific problem in a game.\nHover the mouse over a checkbox to get more information about it.";
 
 /* Class = "NSButtonCell"; ibShadowedToolTip = "For buggy motherboard chipsets"; ObjectID = "480"; */
 "480.ibShadowedToolTip" = "For buggy motherboard chipsets";
