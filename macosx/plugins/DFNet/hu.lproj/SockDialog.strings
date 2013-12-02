@@ -3,7 +3,7 @@
 "1.title" = "Connecting…";
 
 /* Class = "NSTextFieldCell"; title = "Waiting for connections..."; ObjectID = "4"; */
-"4.title" = "Waiting for connections...";
+"4.title" = "Waiting for connections…";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "27"; */
 "27.title" = "Cancel";

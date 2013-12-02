@@ -198,7 +198,7 @@
 "482.title" = "Fake subtractive blending";
 
 /* Class = "NSButtonCell"; ibShadowedToolTip = "DW7 fix (not 100% perfect...)"; ObjectID = "483"; */
-"483.ibShadowedToolTip" = "DW7 fix (not 100% perfect...)";
+"483.ibShadowedToolTip" = "DW7 fix (not 100% perfect…)";
 
 /* Class = "NSButtonCell"; title = "Lazy upload detection"; ObjectID = "483"; */
 "483.title" = "Lazy upload detection";
@@ -222,7 +222,7 @@
 "486.title" = "Expand screen width";
 
 /* Class = "NSButtonCell"; ibShadowedToolTip = "ONLY for FF9 battle mode... yellow rect"; ObjectID = "487"; */
-"487.ibShadowedToolTip" = "ONLY for FF9 battle mode... yellow rect";
+"487.ibShadowedToolTip" = "ONLY for FF9 battle mode… yellow rect";
 
 /* Class = "NSButtonCell"; title = "G4 polygon cache"; ObjectID = "487"; */
 "487.title" = "G4 polygon cache";

@@ -39,7 +39,7 @@
 "111.title" = "PCSXR Help";
 
 /* Class = "NSMenuItem"; title = "Preferences..."; ObjectID = "129"; */
-"129.title" = "Preferences...";
+"129.title" = "Preferences…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
 "130.title" = "Services";
@@ -96,7 +96,7 @@
 "289.title" = "Slot 2";
 
 /* Class = "NSMenuItem"; title = "Run ISO..."; ObjectID = "290"; */
-"290.title" = "Run ISO...";
+"290.title" = "Run ISO…";
 
 /* Class = "NSMenuItem"; title = "Slot 3"; ObjectID = "292"; */
 "292.title" = "Slot 3";
@@ -135,10 +135,10 @@
 "322.title" = "Slot 1";
 
 /* Class = "NSMenuItem"; title = "Run Recent..."; ObjectID = "329"; */
-"329.title" = "Run Recent...";
+"329.title" = "Run Recent…";
 
 /* Class = "NSMenu"; title = "Run Recent..."; ObjectID = "330"; */
-"330.title" = "Run Recent...";
+"330.title" = "Run Recent…";
 
 /* Class = "NSMenuItem"; title = "Clear recent list"; ObjectID = "366"; */
 "366.title" = "Clear recent list";
