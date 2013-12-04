@@ -1,0 +1,363 @@
+
+/* Class = "NSWindow"; title = "GPU 配置"; ObjectID = "5"; */
+"5.title" = "GPU 配置";
+
+/* Class = "NSBox"; title = "显示设置"; ObjectID = "89"; */
+"89.title" = "显示设置";
+
+/* Class = "NSBox"; ibShadowedToolTip = "如果你的硬件支持,纹理将更精确."; ObjectID = "107"; */
+"107.ibShadowedToolTip" = "如果你的硬件支持,纹理将更精确.";
+
+/* Class = "NSBox"; title = "渲染"; ObjectID = "107"; */
+"107.title" = "渲染";
+
+/* Class = "NSMenuItem"; title = "从不"; ObjectID = "111"; */
+"111.title" = "从不";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "指定渲染抖动的颜色"; ObjectID = "112"; */
+"112.ibShadowedToolTip" = "指定渲染抖动的颜色";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "113"; */
+"113.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "永远"; ObjectID = "114"; */
+"114.title" = "永远";
+
+/* Class = "NSMenuItem"; title = "需要时"; ObjectID = "115"; */
+"115.title" = "需要时";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "指定渲染抖动的颜色"; ObjectID = "116"; */
+"116.ibShadowedToolTip" = "指定渲染抖动的颜色";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "纹理颜色深度."; ObjectID = "169"; */
+"169.ibShadowedToolTip" = "纹理颜色深度.";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "170"; */
+"170.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "RGBA 16"; ObjectID = "171"; */
+"171.title" = "RGBA 16";
+
+/* Class = "NSMenuItem"; title = "预设值"; ObjectID = "172"; */
+"172.title" = "预设值";
+
+/* Class = "NSMenuItem"; title = "R5 G5 B5 A1"; ObjectID = "173"; */
+"173.title" = "R5 G5 B5 A1";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "纹理颜色深度."; ObjectID = "174"; */
+"174.ibShadowedToolTip" = "纹理颜色深度.";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "纹理过滤.高标准过滤纹理种类."; ObjectID = "193"; */
+"193.ibShadowedToolTip" = "纹理过滤.高标准过滤纹理种类.";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "选择纹理缩放品质等级"; ObjectID = "201"; */
+"201.ibShadowedToolTip" = "选择纹理缩放品质等级";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "使用屏幕外绘画移除图形毛刺"; ObjectID = "202"; */
+"202.ibShadowedToolTip" = "使用屏幕外绘画移除图形毛刺";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "203"; */
+"203.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "有些"; ObjectID = "204"; */
+"204.title" = "有些";
+
+/* Class = "NSMenuItem"; title = "无"; ObjectID = "205"; */
+"205.title" = "无";
+
+/* Class = "NSMenuItem"; title = "默认值"; ObjectID = "206"; */
+"206.title" = "默认值";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "使用屏幕外绘画移除图形毛刺"; ObjectID = "207"; */
+"207.ibShadowedToolTip" = "使用屏幕外绘画移除图形毛刺";
+
+/* Class = "NSBox"; title = "纹理"; ObjectID = "212"; */
+"212.title" = "纹理";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "216"; */
+"216.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "Item2"; ObjectID = "217"; */
+"217.title" = "Item2";
+
+/* Class = "NSMenuItem"; title = "Item1"; ObjectID = "218"; */
+"218.title" = "Item1";
+
+/* Class = "NSMenuItem"; title = "Item3"; ObjectID = "219"; */
+"219.title" = "Item3";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "选择PSX读取屏幕内容的方案"; ObjectID = "220"; */
+"220.ibShadowedToolTip" = "选择PSX读取屏幕内容的方案";
+
+/* Class = "NSMenuItem"; title = "RGBA 32"; ObjectID = "250"; */
+"250.title" = "RGBA 32";
+
+/* Class = "NSMenuItem"; title = "BGRA 32"; ObjectID = "251"; */
+"251.title" = "BGRA 32";
+
+/* Class = "NSSlider"; ibShadowedToolTip = "纹理过滤.高标准过滤纹理种类."; ObjectID = "252"; */
+"252.ibShadowedToolTip" = "纹理过滤.高标准过滤纹理种类.";
+
+/* Class = "NSSlider"; ibShadowedToolTip = "选择纹理缩放品质等级"; ObjectID = "253"; */
+"253.ibShadowedToolTip" = "选择纹理缩放品质等级";
+
+/* Class = "NSMenuItem"; title = "更多"; ObjectID = "254"; */
+"254.title" = "更多";
+
+/* Class = "NSMenuItem"; title = "侵略性"; ObjectID = "255"; */
+"255.title" = "侵略性";
+
+/* Class = "NSColorWell"; ibShadowedToolTip = "选择屏幕颜色透明度"; ObjectID = "341"; */
+"341.ibShadowedToolTip" = "选择屏幕颜色透明度";
+
+/* Class = "NSButtonCell"; title = "显示器同步刷新"; ObjectID = "374"; */
+"374.title" = "显示器同步刷新";
+
+/* Class = "NSButtonCell"; title = "使用自动跳帧"; ObjectID = "375"; */
+"375.title" = "使用自动跳帧";
+
+/* Class = "NSButtonCell"; title = "显示反相FPS"; ObjectID = "376"; */
+"376.title" = "显示反相FPS";
+
+/* Class = "NSButtonCell"; title = "自动全屏"; ObjectID = "377"; */
+"377.title" = "自动全屏";
+
+/* Class = "NSButtonCell"; title = "限制跳帧速度"; ObjectID = "380"; */
+"380.title" = "限制跳帧速度";
+
+/* Class = "NSTextFieldCell"; title = "图形抖动:"; ObjectID = "383"; */
+"383.title" = "图形抖动:";
+
+/* Class = "NSButtonCell"; title = "只绘制线框图"; ObjectID = "385"; */
+"385.title" = "只绘制线框图";
+
+/* Class = "NSButtonCell"; title = "使用高级混合"; ObjectID = "386"; */
+"386.title" = "使用高级混合";
+
+/* Class = "NSButtonCell"; title = "通过不透明输出"; ObjectID = "387"; */
+"387.title" = "通过不透明输出";
+
+/* Class = "NSButtonCell"; title = "裁剪 Z-Masks"; ObjectID = "388"; */
+"388.title" = "裁剪 Z-Masks";
+
+/* Class = "NSButtonCell"; title = "建议 JPEG 解码"; ObjectID = "389"; */
+"389.title" = "建议 JPEG 解码";
+
+/* Class = "NSButtonCell"; title = "建议 JPEGs 15bit"; ObjectID = "390"; */
+"390.title" = "建议 JPEGs 15bit";
+
+/* Class = "NSButtonCell"; title = "绘制扫描线"; ObjectID = "391"; */
+"391.title" = "绘制扫描线";
+
+/* Class = "NSButtonCell"; title = "增加模糊"; ObjectID = "392"; */
+"392.title" = "增加模糊";
+
+/* Class = "NSTextFieldCell"; title = "画面外绘画:"; ObjectID = "394"; */
+"394.title" = "画面外绘画:";
+
+/* Class = "NSTextFieldCell"; title = "颜色深度:"; ObjectID = "396"; */
+"396.title" = "颜色深度:";
+
+/* Class = "NSTextFieldCell"; title = "滤波:"; ObjectID = "397"; */
+"397.title" = "滤波:";
+
+/* Class = "NSTextFieldCell"; title = "优化:"; ObjectID = "398"; */
+"398.title" = "优化:";
+
+/* Class = "NSTextFieldCell"; title = "帧缓冲效果"; ObjectID = "402"; */
+"402.title" = "帧缓冲效果";
+
+/* Class = "NSButtonCell"; title = "GTE精确度"; ObjectID = "406"; */
+"406.title" = "GTE精确度";
+
+/* Class = "NSWindow"; title = "技巧"; ObjectID = "472"; */
+"472.title" = "技巧";
+
+/* Class = "NSButtonCell"; title = "启用技巧"; ObjectID = "477"; */
+"477.title" = "启用技巧";
+
+/* Class = "NSTextFieldCell"; title = "仅启用技巧修复游戏中指定的问题."; ObjectID = "478"; */
+"478.title" = "仅启用技巧修复游戏中指定的问题.";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "buggy芯片组主板"; ObjectID = "480"; */
+"480.ibShadowedToolTip" = "buggy芯片组主板";
+
+/* Class = "NSButtonCell"; title = "使用 low-res FPS 时钟"; ObjectID = "480"; */
+"480.title" = "使用 low-res FPS 时钟";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "需要 epsxe 1.5.2 或更老版本."; ObjectID = "481"; */
+"481.ibShadowedToolTip" = "需要 epsxe 1.5.2 或更老版本.";
+
+/* Class = "NSButtonCell"; title = "奇数/偶数 控制技巧"; ObjectID = "481"; */
+"481.title" = "奇数/偶数 控制技巧";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "需要(buggy) OpenGL ICDs"; ObjectID = "482"; */
+"482.ibShadowedToolTip" = "需要(buggy) OpenGL ICDs";
+
+/* Class = "NSButtonCell"; title = "假装删减混合"; ObjectID = "482"; */
+"482.title" = "假装删减混合";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "DW7 fix (不是100%完美...)"; ObjectID = "483"; */
+"483.ibShadowedToolTip" = "DW7 fix (不是100%完美...)";
+
+/* Class = "NSButtonCell"; title = "缓慢检测更新"; ObjectID = "483"; */
+"483.title" = "缓慢检测更新";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "修复黑色区域"; ObjectID = "484"; */
+"484.ibShadowedToolTip" = "修复黑色区域";
+
+/* Class = "NSButtonCell"; title = "使用老纹理过滤"; ObjectID = "484"; */
+"484.title" = "使用老纹理过滤";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "绘图繁忙时切换标志寄存器"; ObjectID = "485"; */
+"485.ibShadowedToolTip" = "绘图繁忙时切换标志寄存器";
+
+/* Class = "NSButtonCell"; title = "假装\"GPU繁忙\"状态"; ObjectID = "485"; */
+"485.title" = "假装\"GPU繁忙\"状态";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "显示全部Capcom的2D战斗"; ObjectID = "486"; */
+"486.ibShadowedToolTip" = "显示全部Capcom的2D战斗";
+
+/* Class = "NSButtonCell"; title = "扩大屏幕宽度"; ObjectID = "486"; */
+"486.title" = "扩大屏幕宽度";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "只对FF9战斗模式..."; ObjectID = "487"; */
+"487.ibShadowedToolTip" = "只对FF9战斗模式...";
+
+/* Class = "NSButtonCell"; title = "G4多边形缓存"; ObjectID = "487"; */
+"487.title" = "G4多边形缓存";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "显示一些额外的飞溅屏幕"; ObjectID = "488"; */
+"488.ibShadowedToolTip" = "显示一些额外的飞溅屏幕";
+
+/* Class = "NSButtonCell"; title = "检测特殊上传"; ObjectID = "488"; */
+"488.title" = "检测特殊上传";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "只对FF9战斗指针..."; ObjectID = "489"; */
+"489.ibShadowedToolTip" = "只对FF9战斗指针...";
+
+/* Class = "NSButtonCell"; title = "调整帧缓冲区通道"; ObjectID = "489"; */
+"489.title" = "调整帧缓冲区通道";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "帧上传状态速度上升"; ObjectID = "490"; */
+"490.ibShadowedToolTip" = "帧上传状态速度上升";
+
+/* Class = "NSButtonCell"; title = "管理帧缓冲区更新"; ObjectID = "490"; */
+"490.title" = "管理帧缓冲区更新";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "修复在Lunar时黑屏"; ObjectID = "491"; */
+"491.ibShadowedToolTip" = "修复在Lunar时黑屏";
+
+/* Class = "NSButtonCell"; title = "忽视黑色"; ObjectID = "491"; */
+"491.title" = "忽视黑色";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "速度怪胎,循环杀手"; ObjectID = "492"; */
+"492.ibShadowedToolTip" = "速度怪胎,循环杀手";
+
+/* Class = "NSButtonCell"; title = "正面交换/后面检测"; ObjectID = "492"; */
+"492.title" = "正面交换/后面检测";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "老坐标兼容模式"; ObjectID = "493"; */
+"493.ibShadowedToolTip" = "老坐标兼容模式";
+
+/* Class = "NSButtonCell"; title = "关闭坐标检查"; ObjectID = "493"; */
+"493.title" = "关闭坐标检查";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "Leg. o. 龙骑兵,需要多通道"; ObjectID = "494"; */
+"494.ibShadowedToolTip" = "Leg. o. 龙骑兵,需要多通道";
+
+/* Class = "NSButtonCell"; title = "移除蓝色毛刺"; ObjectID = "494"; */
+"494.title" = "移除蓝色毛刺";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "在ATI系统快速使用FB"; ObjectID = "495"; */
+"495.ibShadowedToolTip" = "在ATI系统快速使用FB";
+
+/* Class = "NSButtonCell"; title = "混合软件使用FB"; ObjectID = "495"; */
+"495.title" = "混合软件使用FB";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "在有些游戏中限制每秒的帧数."; ObjectID = "496"; */
+"496.ibShadowedToolTip" = "在有些游戏中限制每秒的帧数.";
+
+/* Class = "NSButtonCell"; title = "使用PC计算每秒的帧数"; ObjectID = "496"; */
+"496.title" = "使用PC计算每秒的帧数";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "每秒只跳过帧数"; ObjectID = "497"; */
+"497.ibShadowedToolTip" = "每秒只跳过帧数";
+
+/* Class = "NSButtonCell"; title = "使用老跳帧方式"; ObjectID = "497"; */
+"497.title" = "使用老跳帧方式";
+
+/* Class = "NSButtonCell"; title = "奇数/偶数 控制技巧"; ObjectID = "498"; */
+"498.title" = "奇数/偶数 控制技巧";
+
+/* Class = "NSButtonCell"; title = "确认"; ObjectID = "502"; */
+"502.title" = "确认";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "504"; */
+"504.title" = "取消";
+
+/* Class = "NSButtonCell"; title = "重置"; ObjectID = "666"; */
+"666.title" = "重置";
+
+/* Class = "NSButtonCell"; title = "确认"; ObjectID = "671"; */
+"671.title" = "确认";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "675"; */
+"675.title" = "取消";
+
+/* Class = "NSButtonCell"; title = "绘制扫描线"; ObjectID = "703"; */
+"703.title" = "绘制扫描线";
+
+/* Class = "NSButtonCell"; title = "限制跳帧速度"; ObjectID = "786"; */
+"786.title" = "限制跳帧速度";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "改变全屏模式分辨率"; ObjectID = "908"; */
+"908.ibShadowedToolTip" = "改变全屏模式分辨率";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "改变全屏模式分辨率"; ObjectID = "909"; */
+"909.ibShadowedToolTip" = "改变全屏模式分辨率";
+
+/* Class = "NSButton"; ibShadowedToolTip = "保持PSX显示固有比例"; ObjectID = "910"; */
+"910.ibShadowedToolTip" = "保持PSX显示固有比例";
+
+/* Class = "NSFormCell"; title = "高度:"; ObjectID = "913"; */
+"913.title" = "高度:";
+
+/* Class = "NSFormCell"; title = "宽度:"; ObjectID = "914"; */
+"914.title" = "宽度:";
+
+/* Class = "NSFormCell"; title = "领域:"; ObjectID = "915"; */
+"915.title" = "领域:";
+
+/* Class = "NSButtonCell"; title = "技巧…"; ObjectID = "918"; */
+"918.title" = "技巧…";
+
+/* Class = "NSButtonCell"; title = "按比例调整大小"; ObjectID = "919"; */
+"919.title" = "按比例调整大小";
+
+/* Class = "NSTextFieldCell"; title = "全屏大小"; ObjectID = "922"; */
+"922.title" = "全屏大小";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "925"; */
+"925.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "当前"; ObjectID = "926"; */
+"926.title" = "当前";
+
+/* Class = "NSMenuItem"; title = "1600 x 1200"; ObjectID = "927"; */
+"927.title" = "1600 x 1200";
+
+/* Class = "NSMenuItem"; title = "1280 x1024"; ObjectID = "928"; */
+"928.title" = "1280 x1024";
+
+/* Class = "NSMenuItem"; title = "1152 x 864"; ObjectID = "929"; */
+"929.title" = "1152 x 864";
+
+/* Class = "NSMenuItem"; title = "1024 x 768"; ObjectID = "930"; */
+"930.title" = "1024 x 768";
+
+/* Class = "NSMenuItem"; title = "640 x 480"; ObjectID = "931"; */
+"931.title" = "640 x 480";
+
+/* Class = "NSMenuItem"; title = "800 x 600"; ObjectID = "932"; */
+"932.title" = "800 x 600";

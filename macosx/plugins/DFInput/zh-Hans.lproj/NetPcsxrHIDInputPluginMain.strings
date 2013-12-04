@@ -1,0 +1,48 @@
+
+/* Class = "NSWindow"; title = "手柄输入配置"; ObjectID = "5"; */
+"5.title" = "手柄输入配置";
+
+/* Class = "NSTabViewItem"; label = "手柄 2"; ObjectID = "8"; */
+"8.label" = "手柄 2";
+
+/* Class = "NSTabViewItem"; label = "手柄 1"; ObjectID = "9"; */
+"9.label" = "手柄 1";
+
+/* Class = "NSTableColumn"; headerCell.title = "模拟输入按钮"; ObjectID = "124"; */
+"124.headerCell.title" = "模拟输入按钮";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "127"; */
+"127.title" = "查看其他";
+
+/* Class = "NSTableColumn"; headerCell.title = "原始按钮"; ObjectID = "128"; */
+"128.headerCell.title" = "原始按钮";
+
+/* Class = "NSMenuItem"; title = "数字手柄"; ObjectID = "130"; */
+"130.title" = "数字手柄";
+
+/* Class = "NSTextFieldCell"; placeholderString = "双击设置"; ObjectID = "166"; */
+"166.placeholderString" = "双击设置";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "190"; */
+"190.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "(键盘)"; ObjectID = "192"; */
+"192.title" = "(键盘)";
+
+/* Class = "NSMenuItem"; title = "模拟手柄"; ObjectID = "198"; */
+"198.title" = "模拟手柄";
+
+/* Class = "NSTextFieldCell"; title = "类型:"; ObjectID = "205"; */
+"205.title" = "类型:";
+
+/* Class = "NSTextFieldCell"; title = "重置一个输入按钮: 选择它并按下delete'←'键"; ObjectID = "206"; */
+"206.title" = "重置一个输入按钮: 选择它并按下delete'←'键";
+
+/* Class = "NSTextFieldCell"; title = "设备:"; ObjectID = "208"; */
+"208.title" = "设备:";
+
+/* Class = "NSButtonCell"; title = "确认"; ObjectID = "257"; */
+"257.title" = "确认";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "262"; */
+"262.title" = "取消";

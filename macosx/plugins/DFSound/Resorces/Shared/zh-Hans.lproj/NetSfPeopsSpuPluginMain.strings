@@ -1,0 +1,57 @@
+
+/* Class = "NSWindow"; title = "SPU 配置"; ObjectID = "6"; */
+"6.title" = "SPU 配置";
+
+/* Class = "NSBox"; title = "常规设置"; ObjectID = "9"; */
+"9.title" = "常规设置";
+
+/* Class = "NSBox"; title = "XA 音乐"; ObjectID = "19"; */
+"19.title" = "XA 音乐";
+
+/* Class = "NSBox"; title = "杂项"; ObjectID = "24"; */
+"24.title" = "杂项";
+
+/* Class = "NSTextFieldCell"; title = "混响:"; ObjectID = "80"; */
+"80.title" = "混响:";
+
+/* Class = "NSTextFieldCell"; title = "增益:"; ObjectID = "82"; */
+"82.title" = "增益:";
+
+/* Class = "NSTextFieldCell"; title = "(简易混响)"; ObjectID = "84"; */
+"84.title" = "(简易混响)";
+
+/* Class = "NSTextFieldCell"; title = "(简易增益)"; ObjectID = "85"; */
+"85.title" = "(简易增益)";
+
+/* Class = "NSTextFieldCell"; title = "音量:"; ObjectID = "86"; */
+"86.title" = "音量:";
+
+/* Class = "NSTextFieldCell"; title = "(高音)"; ObjectID = "88"; */
+"88.title" = "(高音)";
+
+/* Class = "NSButtonCell"; title = "改变 XA 速度"; ObjectID = "89"; */
+"89.title" = "改变 XA 速度";
+
+/* Class = "NSButtonCell"; title = "高兼容模式"; ObjectID = "90"; */
+"90.title" = "高兼容模式";
+
+/* Class = "NSButtonCell"; title = "SPU IRQ 等待"; ObjectID = "91"; */
+"91.title" = "SPU IRQ 等待";
+
+/* Class = "NSButtonCell"; title = "单声道"; ObjectID = "92"; */
+"92.title" = "单声道";
+
+/* Class = "NSButtonCell"; title = "确认"; ObjectID = "163"; */
+"163.title" = "确认";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "167"; */
+"167.title" = "取消";
+
+/* Class = "NSButtonCell"; title = "重置"; ObjectID = "172"; */
+"172.title" = "重置";
+
+/* Class = "NSButtonCell"; title = "高兼容模式"; ObjectID = "197"; */
+"197.title" = "高兼容模式";
+
+/* Class = "NSButtonCell"; title = "改变 XA 速度"; ObjectID = "234"; */
+"234.title" = "改变 XA 速度";

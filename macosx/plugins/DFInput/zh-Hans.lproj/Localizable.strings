@@ -1,0 +1,53 @@
+﻿/* 
+ Localizable.strings
+ DFInput
+ 
+ Created by C.W. Betts on 11/16/11.
+ Copyright 2011 __MyCompanyName__. All rights reserved.
+ */
+
+"Gamepad/Keyboard/Mouse Input" = "手柄/键盘/鼠标 输入";
+"Joystick: Button %d" = "操纵杆: 按钮 %d";
+"Joystick: Axis %d%c" = "操纵杆: 坐标轴 %d%c";
+"Joystick: Hat %d %s" = "操纵杆: Hat %d %s";
+"Keyboard: %s" = "键盘: %s";
+
+"(Keyboard only)" = "(键盘)";
+"(Not Set)" = "(未设置)";
+
+"D-Pad Up" = "↑ / 上";
+"D-Pad Down" = "↓ / 下";
+"D-Pad Left" = "← / 左";
+"D-Pad Right" = "→ / 右";
+"Cross" = "× / 叉";
+"Circle" = "◯ / 圆圈";
+"Square" = "☐ / 方块";
+"Triangle" = "△ / 三角";
+"L1" = "L1";
+"R1" = "R1";
+"L2" = "L2";
+"R2" = "R2";
+"Select" = "Select / 选择";
+"Start" = "Start / 开始";
+"L3" = "L3";
+"R3" = "R3";
+"Analog" = "模拟";
+"L-Stick Right" = "L-摇杆  → / 右";
+"L-Stick Left" = "L-摇杆  ← / 左";
+"L-Stick Down" = "L-摇杆  ↓ / 下";
+"L-Stick Up" = "L-摇杆  ↑ / 上";
+"R-Stick Right" = "R-摇杆  → / 右";
+"R-Stick Left" = "R-摇杆  ← / 左";
+"R-Stick Down" = "R-摇杆  ↓ / 下";
+"R-Stick Up" = "R-摇杆  ↑ / 上";
+
+//Unused right now
+"Centered" = "中间键";
+"Up" = "↑ / 上";
+"Right" = "→ / 右";
+"Rightup" = "↗ / 右上";
+"Down" = "↓ / 下";
+"Rightdown" = "↘ / 右下";
+"Left" = "← / 左";
+"Leftup" = "↖ / 左上";
+"Leftdown" = "↙ / 左下";

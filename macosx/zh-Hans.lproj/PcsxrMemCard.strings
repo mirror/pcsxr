@@ -1,0 +1,21 @@
+
+/* Class = "NSWindow"; title = "记忆卡"; ObjectID = "5"; */
+"5.title" = "记忆卡";
+
+/* Class = "NSTextFieldCell"; title = "选择要插入这个记忆卡的插槽."; ObjectID = "100028"; */
+"100028.title" = "选择要插入这个记忆卡的插槽.";
+
+/* Class = "NSTextFieldCell"; title = "选择记忆卡"; ObjectID = "100029"; */
+"100029.title" = "选择记忆卡";
+
+/* Class = "NSTextFieldCell"; placeholderString = "记忆卡文件名称"; ObjectID = "100035"; */
+"100035.placeholderString" = "记忆卡文件名称";
+
+/* Class = "NSButtonCell"; title = "插槽2"; ObjectID = "100127"; */
+"100127.title" = "插槽2";
+
+/* Class = "NSButtonCell"; title = "插槽1"; ObjectID = "100131"; */
+"100131.title" = "插槽1";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "100135"; */
+"100135.title" = "取消";

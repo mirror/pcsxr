@@ -1,0 +1,48 @@
+
+/* Class = "NSWindow"; title = "金手指"; ObjectID = "1"; */
+"1.title" = "金手指";
+
+/* Class = "NSButtonCell"; title = "存储金手指..."; ObjectID = "5"; */
+"5.title" = "存储金手指...";
+
+/* Class = "NSButtonCell"; title = "载入金手指..."; ObjectID = "7"; */
+"7.title" = "载入金手指...";
+
+/* Class = "NSTableColumn"; headerCell.title = "名称"; ObjectID = "28"; */
+"28.headerCell.title" = "名称";
+
+/* Class = "NSTableColumn"; headerCell.title = "启用"; ObjectID = "29"; */
+"29.headerCell.title" = "启用";
+
+/* Class = "NSTextFieldCell"; title = "文本框"; ObjectID = "31"; */
+"31.title" = "文本框";
+
+/* Class = "NSButtonCell"; title = "清除"; ObjectID = "79"; */
+"79.title" = "清除";
+
+/* Class = "NSButtonCell"; title = "编辑…"; ObjectID = "130"; */
+"130.title" = "编辑…";
+
+/* Class = "NSWindow"; title = "编辑金手指"; ObjectID = "134"; */
+"134.title" = "编辑金手指";
+
+/* Class = "NSTableColumn"; headerCell.title = "地址"; ObjectID = "141"; */
+"141.headerCell.title" = "地址";
+
+/* Class = "NSTableColumn"; headerCell.title = "数值"; ObjectID = "142"; */
+"142.headerCell.title" = "数值";
+
+/* Class = "NSButtonCell"; title = "确认"; ObjectID = "153"; */
+"153.title" = "确认";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "157"; */
+"157.title" = "取消";
+
+/* Class = "NSButtonCell"; title = "添加"; ObjectID = "207"; */
+"207.title" = "添加";
+
+/* Class = "NSButtonCell"; title = "移除"; ObjectID = "228"; */
+"228.title" = "移除";
+
+/* Class = "NSButtonCell"; title = "应用"; ObjectID = "257"; */
+"257.title" = "应用";

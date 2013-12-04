@@ -655,6 +655,30 @@
 		55707EAD18123616007CC5D0 /* zh-Hant */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		5581463717AABCD100862DBF /* PcsxrCheatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrCheatHandler.h; sourceTree = "<group>"; };
 		5581463817AABCD100862DBF /* PcsxrCheatHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrCheatHandler.m; sourceTree = "<group>"; };
+		558328BE184F21EF00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AddPluginSheet.strings"; sourceTree = "<group>"; };
+		558328BF184F220E00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		558328C1184F222200DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PCSXR.strings"; sourceTree = "<group>"; };
+		558328C5184F227500DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PcsxrMemCard.strings"; sourceTree = "<group>"; };
+		558328C7184F227E00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CheatWindow.strings"; sourceTree = "<group>"; };
+		558328C8184F22CA00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Configuration.strings"; sourceTree = "<group>"; };
+		558328CA184F237000DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Bladesio1PluginConfig.strings"; sourceTree = "<group>"; };
+		558328CB184F238F00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
+		558328CD184F23DF00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DFCdromPluginConfig.strings"; sourceTree = "<group>"; };
+		558328CE184F23EC00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
+		558328D2184F246500DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NetPcsxrHIDInputPluginMain.strings"; sourceTree = "<group>"; };
+		558328D3184F246B00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		558328D4184F24A300DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
+		558328D6184F253300DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DFNet.strings"; sourceTree = "<group>"; };
+		558328D8184F253D00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SockDialog.strings"; sourceTree = "<group>"; };
+		558328D9184F254500DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		558328DB184F25AB00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NetSfPeopsSoftGPUConfig.strings"; sourceTree = "<group>"; };
+		558328DC184F25B300DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
+		558328DE184F263F00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NetSfPeopsOpenGLConfig.strings"; sourceTree = "<group>"; };
+		558328DF184F264800DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
+		558328E1184F268300DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NetSfPeopsSpuPluginMain.strings"; sourceTree = "<group>"; };
+		558328E2184F268C00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
+		558328E3184F26F100DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
+		558328E4184F272C00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
 		55858D2817864D140068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pcsxr.xcconfig; sourceTree = "<group>"; };
 		55858D2A17864DC80068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Debug.xcconfig"; sourceTree = "<group>"; };
 		55858D2B17864DC90068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Instrument.xcconfig"; sourceTree = "<group>"; };
@@ -2333,6 +2357,7 @@
 				5569B0A7182F0B5D00991C9C /* fr */,
 				5569B0A9182F0B6500991C9C /* en */,
 				55E1598618455B69007983CB /* hu */,
+				558328C8184F22CA00DFACE4 /* zh-Hans */,
 			);
 			name = Configuration.xib;
 			path = English.lproj;
@@ -2345,6 +2370,7 @@
 				5569B0AB182F0B6B00991C9C /* en */,
 				554703DC1834390B008E5B9B /* fr */,
 				554703DE1834390D008E5B9B /* hu */,
+				558328C1184F222200DFACE4 /* zh-Hans */,
 			);
 			name = PCSXR.xib;
 			path = English.lproj;
@@ -2357,6 +2383,7 @@
 				5569B0AD182F0B7200991C9C /* en */,
 				55E1598818455BB9007983CB /* fr */,
 				55E1598A18455BBD007983CB /* hu */,
+				558328BE184F21EF00DFACE4 /* zh-Hans */,
 			);
 			name = AddPluginSheet.xib;
 			path = English.lproj;
@@ -2382,6 +2409,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				55E1599B1845A403007983CB /* en */,
+				558328E3184F26F100DFACE4 /* zh-Hans */,
 			);
 			name = Credits.rtf;
 			path = English.lproj;
@@ -2394,6 +2422,7 @@
 				5569B0B3182F0B8B00991C9C /* en */,
 				55E159A31845BA55007983CB /* fr */,
 				55E159A51845BA57007983CB /* hu */,
+				558328CA184F237000DFACE4 /* zh-Hans */,
 			);
 			name = Bladesio1PluginConfig.xib;
 			sourceTree = "<group>";
@@ -2402,6 +2431,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A74B717868BEA0052D185 /* English */,
+				558328CB184F238F00DFACE4 /* zh-Hans */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -2426,6 +2456,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A750A17868BEB0052D185 /* English */,
+				558328CE184F23EC00DFACE4 /* zh-Hans */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -2437,6 +2468,7 @@
 				5569B0B5182F0B9800991C9C /* en */,
 				55E159A71845BA63007983CB /* fr */,
 				55E159A91845BA66007983CB /* hu */,
+				558328CD184F23DF00DFACE4 /* zh-Hans */,
 			);
 			name = DFCdromPluginConfig.xib;
 			sourceTree = "<group>";
@@ -2463,6 +2495,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A751E17868BEB0052D185 /* English */,
+				558328D4184F24A300DFACE4 /* zh-Hans */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -2481,6 +2514,7 @@
 				551A752217868BEB0052D185 /* English */,
 				5598AAFB17D2E9E90024F71D /* fr */,
 				55707E901812357B007CC5D0 /* hu */,
+				558328D3184F246B00DFACE4 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2492,6 +2526,7 @@
 				5569B0C1182F0BE100991C9C /* en */,
 				55E159AB1845BA78007983CB /* fr */,
 				55E159AD1845BA7B007983CB /* hu */,
+				558328D2184F246500DFACE4 /* zh-Hans */,
 			);
 			name = NetPcsxrHIDInputPluginMain.xib;
 			sourceTree = "<group>";
@@ -2500,6 +2535,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A753717868BEB0052D185 /* English */,
+				558328E4184F272C00DFACE4 /* zh-Hans */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -2511,6 +2547,7 @@
 				5569B0BD182F0BCE00991C9C /* en */,
 				55E159B31845BABA007983CB /* fr */,
 				55E159B51845BABC007983CB /* hu */,
+				558328D6184F253300DFACE4 /* zh-Hans */,
 			);
 			name = DFNet.xib;
 			sourceTree = "<group>";
@@ -2519,6 +2556,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A753B17868BEB0052D185 /* English */,
+				558328D9184F254500DFACE4 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2540,6 +2578,7 @@
 				5569B0BF182F0BD500991C9C /* en */,
 				55E159AF1845BA88007983CB /* fr */,
 				55E159B11845BA8A007983CB /* hu */,
+				558328D8184F253D00DFACE4 /* zh-Hans */,
 			);
 			name = SockDialog.xib;
 			sourceTree = "<group>";
@@ -2564,6 +2603,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A756117868BEC0052D185 /* English */,
+				558328E2184F268C00DFACE4 /* zh-Hans */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -2585,6 +2625,7 @@
 				5569B0BB182F0BC000991C9C /* en */,
 				55E159B71845BACC007983CB /* fr */,
 				55E159B91845BACF007983CB /* hu */,
+				558328E1184F268300DFACE4 /* zh-Hans */,
 			);
 			name = NetSfPeopsSpuPluginMain.xib;
 			sourceTree = "<group>";
@@ -2593,6 +2634,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A756917868BEC0052D185 /* English */,
+				558328DC184F25B300DFACE4 /* zh-Hans */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -2622,6 +2664,7 @@
 				5569B0B9182F0BB100991C9C /* en */,
 				55E159BB1845BAEB007983CB /* fr */,
 				55E159BD1845BAED007983CB /* hu */,
+				558328DB184F25AB00DFACE4 /* zh-Hans */,
 			);
 			name = NetSfPeopsSoftGPUConfig.xib;
 			sourceTree = "<group>";
@@ -2630,6 +2673,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551A758617868BED0052D185 /* English */,
+				558328DF184F264800DFACE4 /* zh-Hans */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -2659,6 +2703,7 @@
 				5569B0B7182F0BA700991C9C /* en */,
 				55E159BF1845BB4C007983CB /* fr */,
 				55E159C11845BB4F007983CB /* hu */,
+				558328DE184F263F00DFACE4 /* zh-Hans */,
 			);
 			name = NetSfPeopsOpenGLConfig.xib;
 			sourceTree = "<group>";
@@ -2669,6 +2714,7 @@
 				5598AAEC17D2D5410024F71D /* fr */,
 				55707E8A18123575007CC5D0 /* hu */,
 				55E159A11845A465007983CB /* en */,
+				558328BF184F220E00DFACE4 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			path = English.lproj;
@@ -2681,6 +2727,7 @@
 				5569B0AF182F0B7900991C9C /* en */,
 				55E1598E18455C78007983CB /* fr */,
 				55E1599018455C7C007983CB /* hu */,
+				558328C5184F227500DFACE4 /* zh-Hans */,
 			);
 			name = PcsxrMemCard.xib;
 			sourceTree = "<group>";
@@ -2692,6 +2739,7 @@
 				5569B0B1182F0B8100991C9C /* en */,
 				55E1598C18455C60007983CB /* fr */,
 				55E1599218455D7E007983CB /* hu */,
+				558328C7184F227E00DFACE4 /* zh-Hans */,
 			);
 			name = CheatWindow.xib;
 			sourceTree = "<group>";

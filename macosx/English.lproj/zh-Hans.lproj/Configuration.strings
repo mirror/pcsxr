@@ -1,0 +1,303 @@
+
+/* Class = "NSWindow"; title = "PCSXR 偏好设置"; ObjectID = "21"; */
+"21.title" = "PCSXR 偏好设置";
+
+/* Class = "NSTabViewItem"; label = "模拟"; ObjectID = "240"; */
+"240.label" = "模拟";
+
+/* Class = "NSTabViewItem"; label = "插件"; ObjectID = "241"; */
+"241.label" = "插件";
+
+/* Class = "NSBox"; title = "图像"; ObjectID = "257"; */
+"257.title" = "图像";
+
+/* Class = "NSBox"; title = "声音"; ObjectID = "291"; */
+"291.title" = "声音";
+
+/* Class = "NSBox"; title = "手柄"; ObjectID = "299"; */
+"299.title" = "手柄";
+
+/* Class = "NSBox"; title = "光驱"; ObjectID = "302"; */
+"302.title" = "光驱";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "369"; */
+"369.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "图像插件"; ObjectID = "370"; */
+"370.title" = "图像插件";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "372"; */
+"372.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "声音插件"; ObjectID = "373"; */
+"373.title" = "声音插件";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "375"; */
+"375.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "手柄插件"; ObjectID = "376"; */
+"376.title" = "手柄插件";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "378"; */
+"378.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "光驱插件"; ObjectID = "379"; */
+"379.title" = "光驱插件";
+
+/* Class = "NSBox"; title = "选项"; ObjectID = "502"; */
+"502.title" = "选项";
+
+/* Class = "NSBox"; title = "游戏修正"; ObjectID = "509"; */
+"509.title" = "游戏修正";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "启用后模拟速度更快,但有可能不稳定."; ObjectID = "516"; */
+"516.ibShadowedToolTip" = "启用后模拟速度更快,但有可能不稳定.";
+
+/* Class = "NSButtonCell"; title = "Dynarec CPU 核心"; ObjectID = "516"; */
+"516.title" = "Dynarec CPU 核心";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "关闭CD音轨解码"; ObjectID = "517"; */
+"517.ibShadowedToolTip" = "关闭CD音轨解码";
+
+/* Class = "NSButtonCell"; title = "关闭CD音频"; ObjectID = "517"; */
+"517.title" = "关闭CD音频";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "启用后模拟器将超过真实的Playstation BIOS文件,但是兼容性可能会降低."; ObjectID = "518"; */
+"518.ibShadowedToolTip" = "启用后模拟器将超过真实的Playstation BIOS文件,但是兼容性可能会降低.";
+
+/* Class = "NSButtonCell"; title = "模拟 PSX BIOS"; ObjectID = "518"; */
+"518.title" = "模拟 PSX BIOS";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "关闭XA音频解码"; ObjectID = "519"; */
+"519.ibShadowedToolTip" = "关闭XA音频解码";
+
+/* Class = "NSButtonCell"; title = "关闭XA音频"; ObjectID = "519"; */
+"519.title" = "关闭XA音频";
+
+/* Class = "NSButtonCell"; title = "InuYasha Sengoku Battle"; ObjectID = "539"; */
+"539.title" = "InuYasha Sengoku Battle";
+
+/* Class = "NSButtonCell"; title = "寄生前夜 2,天上之门 1/2"; ObjectID = "540"; */
+"540.title" = "寄生前夜 2,天上之门 1/2";
+
+/* Class = "NSBox"; title = "技巧"; ObjectID = "542"; */
+"542.title" = "技巧";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "这里通常应该关闭,如果你遇到声音问题或许应该启用它."; ObjectID = "543"; */
+"543.ibShadowedToolTip" = "这里通常应该关闭,如果你遇到声音问题或许应该启用它.";
+
+/* Class = "NSButtonCell"; title = "总是启用 SPU IRQ"; ObjectID = "543"; */
+"543.title" = "总是启用 SPU IRQ";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "这里通常应该关闭,如果你遇到控制器问题或许应该启用它."; ObjectID = "545"; */
+"545.ibShadowedToolTip" = "这里通常应该关闭,如果你遇到控制器问题或许应该启用它.";
+
+/* Class = "NSButtonCell"; title = "总是启用 SIO IRQ"; ObjectID = "545"; */
+"545.title" = "总是启用 SIO IRQ";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "561"; */
+"561.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "地区信息"; ObjectID = "562"; */
+"562.title" = "地区信息";
+
+/* Class = "NSMenuItem"; title = "自动选择"; ObjectID = "563"; */
+"563.title" = "自动选择";
+
+/* Class = "NSMenuItem"; title = "NTSC (美国/日本)"; ObjectID = "564"; */
+"564.title" = "NTSC (美国/日本)";
+
+/* Class = "NSMenuItem"; title = "PAL (欧洲)"; ObjectID = "566"; */
+"566.title" = "PAL (欧洲)";
+
+/* Class = "NSTabViewItem"; label = "记忆卡"; ObjectID = "579"; */
+"579.label" = "记忆卡";
+
+/* Class = "NSButtonCell"; title = "关于..."; ObjectID = "599"; */
+"599.title" = "关于...";
+
+/* Class = "NSButtonCell"; title = "配置..."; ObjectID = "600"; */
+"600.title" = "配置...";
+
+/* Class = "NSButtonCell"; title = "关于..."; ObjectID = "602"; */
+"602.title" = "关于...";
+
+/* Class = "NSButtonCell"; title = "配置..."; ObjectID = "603"; */
+"603.title" = "配置...";
+
+/* Class = "NSButtonCell"; title = "配置..."; ObjectID = "605"; */
+"605.title" = "配置...";
+
+/* Class = "NSButtonCell"; title = "关于..."; ObjectID = "606"; */
+"606.title" = "关于...";
+
+/* Class = "NSButtonCell"; title = "关于..."; ObjectID = "608"; */
+"608.title" = "关于...";
+
+/* Class = "NSButtonCell"; title = "配置..."; ObjectID = "609"; */
+"609.title" = "配置...";
+
+/* Class = "NSButtonCell"; title = "选择"; ObjectID = "617"; */
+"617.title" = "选择";
+
+/* Class = "NSButtonCell"; title = "选择"; ObjectID = "618"; */
+"618.title" = "选择";
+
+/* Class = "NSButtonCell"; title = "选择"; ObjectID = "619"; */
+"619.title" = "选择";
+
+/* Class = "NSBox"; title = "网络"; ObjectID = "622"; */
+"622.title" = "网络";
+
+/* Class = "NSButtonCell"; title = "配置..."; ObjectID = "626"; */
+"626.title" = "配置...";
+
+/* Class = "NSButtonCell"; title = "关于..."; ObjectID = "627"; */
+"627.title" = "关于...";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "629"; */
+"629.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "网络插件"; ObjectID = "630"; */
+"630.title" = "网络插件";
+
+/* Class = "NSButtonCell"; title = "启用网络对战"; ObjectID = "640"; */
+"640.title" = "启用网络对战";
+
+/* Class = "NSButtonCell"; title = "宽屏"; ObjectID = "652"; */
+"652.title" = "宽屏";
+
+/* Class = "NSTabViewItem"; label = "热键"; ObjectID = "655"; */
+"655.label" = "热键";
+
+/* Class = "NSButtonCell"; title = "快进"; ObjectID = "770"; */
+"770.title" = "快进";
+
+/* Class = "NSTextFieldCell"; placeholderString = "无..."; ObjectID = "772"; */
+"772.placeholderString" = "无...";
+
+/* Class = "NSTextFieldCell"; placeholderString = "无..."; ObjectID = "852"; */
+"852.placeholderString" = "无...";
+
+/* Class = "NSButtonCell"; title = "即时存档"; ObjectID = "853"; */
+"853.title" = "即时存档";
+
+/* Class = "NSButtonCell"; title = "即时读档"; ObjectID = "856"; */
+"856.title" = "即时读档";
+
+/* Class = "NSButtonCell"; title = "下个进度"; ObjectID = "862"; */
+"862.title" = "下个进度";
+
+/* Class = "NSButtonCell"; title = "上个进度"; ObjectID = "868"; */
+"868.title" = "上个进度";
+
+/* Class = "NSTextFieldCell"; placeholderString = "无..."; ObjectID = "871"; */
+"871.placeholderString" = "无...";
+
+/* Class = "NSTextFieldCell"; placeholderString = "无..."; ObjectID = "873"; */
+"873.placeholderString" = "无...";
+
+/* Class = "NSTextFieldCell"; placeholderString = "无..."; ObjectID = "875"; */
+"875.placeholderString" = "无...";
+
+/* Class = "NSBox"; title = "窗体"; ObjectID = "884"; */
+"884.title" = "窗体";
+
+/* Class = "NSTextFieldCell"; title = "GPU 热键修改"; ObjectID = "886"; */
+"886.title" = "GPU 热键修改";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Control (ctrl);command (cmd)."; ObjectID = "887"; */
+"887.ibShadowedToolTip" = "Control (ctrl);command (cmd).";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "889"; */
+"889.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "Control ⌃"; ObjectID = "890"; */
+"890.title" = "Control ⌃";
+
+/* Class = "NSMenuItem"; title = "Shift ⇧"; ObjectID = "891"; */
+"891.title" = "Shift ⇧";
+
+/* Class = "NSMenuItem"; title = "Command ⌘"; ObjectID = "892"; */
+"892.title" = "Command ⌘";
+
+/* Class = "NSMenuItem"; title = "Alt / Option ⌥"; ObjectID = "893"; */
+"893.title" = "Alt / Option ⌥";
+
+/* Class = "NSTextFieldCell"; placeholderString = "无..."; ObjectID = "898"; */
+"898.placeholderString" = "无...";
+
+/* Class = "NSButtonCell"; title = "跳帧限制"; ObjectID = "899"; */
+"899.title" = "跳帧限制";
+
+/* Class = "NSBox"; title = "SIO1"; ObjectID = "902"; */
+"902.title" = "SIO1";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "907"; */
+"907.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "网络插件"; ObjectID = "908"; */
+"908.title" = "网络插件";
+
+/* Class = "NSButtonCell"; title = "关于..."; ObjectID = "909"; */
+"909.title" = "关于...";
+
+/* Class = "NSButtonCell"; title = "配置..."; ObjectID = "910"; */
+"910.title" = "配置...";
+
+/* Class = "NSTextFieldCell"; title = "标签"; ObjectID = "936"; */
+"936.title" = "标签";
+
+/* Class = "NSButtonCell"; title = "改变…"; ObjectID = "937"; */
+"937.title" = "改变…";
+
+/* Class = "NSButtonCell"; title = "新建..."; ObjectID = "938"; */
+"938.title" = "新建...";
+
+/* Class = "NSTextFieldCell"; title = "标签"; ObjectID = "939"; */
+"939.title" = "标签";
+
+/* Class = "NSButtonCell"; title = "改变…"; ObjectID = "940"; */
+"940.title" = "改变…";
+
+/* Class = "NSButtonCell"; title = "新建..."; ObjectID = "941"; */
+"941.title" = "新建...";
+
+/* Class = "NSButtonCell"; title = "删除..."; ObjectID = "942"; */
+"942.title" = "删除...";
+
+/* Class = "NSButtonCell"; title = "删除..."; ObjectID = "943"; */
+"943.title" = "删除...";
+
+/* Class = "NSButtonCell"; title = "格式化..."; ObjectID = "944"; */
+"944.title" = "格式化...";
+
+/* Class = "NSButtonCell"; title = "格式化..."; ObjectID = "945"; */
+"945.title" = "格式化...";
+
+/* Class = "NSButtonCell"; title = "->"; ObjectID = "952"; */
+"952.title" = "->";
+
+/* Class = "NSButtonCell"; title = "<-"; ObjectID = "954"; */
+"954.title" = "<-";
+
+/* Class = "NSBox"; title = "窗体"; ObjectID = "965"; */
+"965.title" = "窗体";
+
+/* Class = "NSTextFieldCell"; title = "英文名称"; ObjectID = "981"; */
+"981.title" = "英文名称";
+
+/* Class = "NSTextFieldCell"; title = "SJIS 名称"; ObjectID = "982"; */
+"982.title" = "SJIS 名称";
+
+/* Class = "NSTextFieldCell"; title = "删除"; ObjectID = "983"; */
+"983.title" = "删除";
+
+/* Class = "NSTextFieldCell"; title = "0"; ObjectID = "1048"; */
+"1048.title" = "0";
+
+/* Class = "NSButtonCell"; title = "日志"; ObjectID = "1278"; */
+"1278.title" = "日志";
+
+/* Class = "NSButtonCell"; title = "快速启动"; ObjectID = "1279"; */
+"1279.title" = "快速启动";

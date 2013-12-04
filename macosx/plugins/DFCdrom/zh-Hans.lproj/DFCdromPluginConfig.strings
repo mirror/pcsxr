@@ -1,0 +1,48 @@
+
+/* Class = "NSWindow"; title = "光驱配置"; ObjectID = "5"; */
+"5.title" = "光驱配置";
+
+/* Class = "NSBox"; title = "常规设置"; ObjectID = "162"; */
+"162.title" = "常规设置";
+
+/* Class = "NSBox"; title = "杂项"; ObjectID = "164"; */
+"164.title" = "杂项";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "174"; */
+"174.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "2 X"; ObjectID = "175"; */
+"175.title" = "2 X";
+
+/* Class = "NSMenuItem"; title = "预设值"; ObjectID = "176"; */
+"176.title" = "预设值";
+
+/* Class = "NSMenuItem"; title = "1 X"; ObjectID = "177"; */
+"177.title" = "1 X";
+
+/* Class = "NSMenuItem"; title = "8 X"; ObjectID = "178"; */
+"178.title" = "8 X";
+
+/* Class = "NSMenuItem"; title = "4 X"; ObjectID = "179"; */
+"179.title" = "4 X";
+
+/* Class = "NSMenuItem"; title = "16 X"; ObjectID = "180"; */
+"180.title" = "16 X";
+
+/* Class = "NSMenuItem"; title = "32 X"; ObjectID = "181"; */
+"181.title" = "32 X";
+
+/* Class = "NSButtonCell"; title = "读取缓存"; ObjectID = "189"; */
+"189.title" = "读取缓存";
+
+/* Class = "NSButtonCell"; title = "确认"; ObjectID = "243"; */
+"243.title" = "确认";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "251"; */
+"251.title" = "取消";
+
+/* Class = "NSTextFieldCell"; title = "光驱速率:"; ObjectID = "267"; */
+"267.title" = "光驱速率:";
+
+/* Class = "NSTextFieldCell"; title = "高速缓存大小:"; ObjectID = "MSf-Ad-auA"; */
+"MSf-Ad-auA.title" = "高速缓存大小:";

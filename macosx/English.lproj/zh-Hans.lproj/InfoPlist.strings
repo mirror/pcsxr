@@ -1,14 +1,12 @@
-﻿/* Localized versions of Info.plist keys */
+/* Localized versions of Info.plist keys */
 
-//Commented out strings are those that need to be translated
-
-//CFBundleName = "PCSXR";
-//CFBundleDisplayName = "PCSX Reloaded";
-//CFBundleShortVersionString = "PCSX-Reloaded 1.9.95";
-//CFBundleGetInfoString = "PlayStation Emulator based on PCSX-df Project.";
-//NSHumanReadableCopyright = "Copyright © 2003-2005 PCSX Team, Gil Pedersen, Nicolas Pepin-Perreault.\nCopyright © 2009-2013 PCSX-Reloaded Team.";
-//"Playstation Emulator Plug-in" = "PlayStation Emulator Plug-in";
-//"Playstation BIOS Image" = "PlayStation BIOS Image";
-"PCSXR Memory Card" = "PS 记忆卡格式";
-//"PCSXR Freeze State" = "PCSXR Freeze State";
-"Playstation Cheat" = "PCSXR 作弊码文件";
+CFBundleName = "PCSXR";
+CFBundleDisplayName = "PCSX Reloaded";
+CFBundleShortVersionString = "PCSX-Reloaded 1.9.95";
+CFBundleGetInfoString = "PlayStation 模拟器源代码 PCSX-df 项目.";
+NSHumanReadableCopyright = "Copyright © 2003-2005 PCSX Team, Gil Pedersen, Nicolas Pepin-Perreault.\nCopyright © 2009-2013 PCSX-Reloaded Team.";
+"Playstation Emulator Plug-in" = "PlayStation 模拟器插件安装";
+"Playstation BIOS Image" = "PlayStation BIOS 映像";
+"PCSXR Memory Card" = "Psx 记忆卡格式";
+"PCSXR Freeze State" = "PCSXR 即时进度";
+"Playstation Cheat" = "PCSXR 金手指文件";

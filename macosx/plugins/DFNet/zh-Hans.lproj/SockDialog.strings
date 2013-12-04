@@ -1,0 +1,9 @@
+
+/* Class = "NSWindow"; title = "连接中…"; ObjectID = "1"; */
+"1.title" = "连接中…";
+
+/* Class = "NSTextFieldCell"; title = "连接等待中..."; ObjectID = "4"; */
+"4.title" = "连接等待中...";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "27"; */
+"27.title" = "取消";

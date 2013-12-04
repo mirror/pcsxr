@@ -1,0 +1,192 @@
+
+/* Class = "NSWindow"; title = "GPU 配置"; ObjectID = "5"; */
+"5.title" = "GPU 配置";
+
+/* Class = "NSBox"; title = "技巧"; ObjectID = "76"; */
+"76.title" = "技巧";
+
+/* Class = "NSBox"; title = "显示设置"; ObjectID = "89"; */
+"89.title" = "显示设置";
+
+/* Class = "NSButton"; ibShadowedToolTip = "等待显示器同步移除画面撕裂.会轻微性能降低.这个设置不会影响LCD显示器."; ObjectID = "93"; */
+"93.ibShadowedToolTip" = "等待显示器同步移除画面撕裂.会轻微性能降低.这个设置不会影响LCD显示器.";
+
+/* Class = "NSButton"; ibShadowedToolTip = "需要时跳过渲染以改善全部速度.这个设置可能使兼容性存在问题."; ObjectID = "96"; */
+"96.ibShadowedToolTip" = "需要时跳过渲染以改善全部速度.这个设置可能使兼容性存在问题.";
+
+/* Class = "NSButton"; ibShadowedToolTip = "启用小计数器测量现有FPS性能."; ObjectID = "97"; */
+"97.ibShadowedToolTip" = "启用小计数器测量现有FPS性能.";
+
+/* Class = "NSButton"; ibShadowedToolTip = "自动进入全屏模式"; ObjectID = "99"; */
+"99.ibShadowedToolTip" = "自动进入全屏模式";
+
+/* Class = "NSBox"; title = "渲染"; ObjectID = "107"; */
+"107.title" = "渲染";
+
+/* Class = "NSMenuItem"; title = "从不"; ObjectID = "111"; */
+"111.title" = "从不";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "指定使用抖动时渲染颜色"; ObjectID = "112"; */
+"112.ibShadowedToolTip" = "指定使用抖动时渲染颜色";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "113"; */
+"113.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "总是"; ObjectID = "114"; */
+"114.title" = "总是";
+
+/* Class = "NSMenuItem"; title = "需要时"; ObjectID = "115"; */
+"115.title" = "需要时";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "指定使用抖动时渲染颜色"; ObjectID = "116"; */
+"116.ibShadowedToolTip" = "指定使用抖动时渲染颜色";
+
+/* Class = "NSButton"; ibShadowedToolTip = "启用下面指定的技巧"; ObjectID = "117"; */
+"117.ibShadowedToolTip" = "启用下面指定的技巧";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "修复在Lunar时黑屏"; ObjectID = "161"; */
+"161.ibShadowedToolTip" = "修复在Lunar时黑屏";
+
+/* Class = "NSButtonCell"; title = "忽视黑色"; ObjectID = "161"; */
+"161.title" = "忽视黑色";
+
+/* Class = "NSTextFieldCell"; title = "仅启用技巧修复游戏中指定的问题."; ObjectID = "162"; */
+"162.title" = "仅启用技巧修复游戏中指定的问题.";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "在有些游戏中限制每秒的帧数."; ObjectID = "163"; */
+"163.ibShadowedToolTip" = "在有些游戏中限制每秒的帧数.";
+
+/* Class = "NSButtonCell"; title = "使用PC计算每秒的帧数"; ObjectID = "163"; */
+"163.title" = "使用PC计算每秒的帧数";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "老兼容模式"; ObjectID = "164"; */
+"164.ibShadowedToolTip" = "老兼容模式";
+
+/* Class = "NSButtonCell"; title = "关闭坐标检查"; ObjectID = "164"; */
+"164.title" = "关闭坐标检查";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "在有些游戏中限制每秒的帧数."; ObjectID = "165"; */
+"165.ibShadowedToolTip" = "在有些游戏中限制每秒的帧数.";
+
+/* Class = "NSButtonCell"; title = "使用老跳帧方式"; ObjectID = "165"; */
+"165.title" = "使用老跳帧方式";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "显示全部Capcom的2D战斗"; ObjectID = "166"; */
+"166.ibShadowedToolTip" = "显示全部Capcom的2D战斗";
+
+/* Class = "NSButtonCell"; title = "扩大屏幕宽度"; ObjectID = "166"; */
+"166.title" = "扩大屏幕宽度";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "可能更快,需要 Pandemonium 2"; ObjectID = "167"; */
+"167.ibShadowedToolTip" = "可能更快,需要 Pandemonium 2";
+
+/* Class = "NSButtonCell"; title = "屏幕更新缓慢"; ObjectID = "167"; */
+"167.title" = "屏幕更新缓慢";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "取消计时器"; ObjectID = "168"; */
+"168.ibShadowedToolTip" = "取消计时器";
+
+/* Class = "NSButtonCell"; title = "奇数/偶数 控制技巧"; ObjectID = "168"; */
+"168.title" = "奇数/偶数 控制技巧";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "偶尔会有轻微的纹理失真"; ObjectID = "169"; */
+"169.ibShadowedToolTip" = "偶尔会有轻微的纹理失真";
+
+/* Class = "NSButtonCell"; title = "四倍tex曲线"; ObjectID = "169"; */
+"169.title" = "四倍tex曲线";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "需要黑暗势力"; ObjectID = "170"; */
+"170.ibShadowedToolTip" = "需要黑暗势力";
+
+/* Class = "NSButtonCell"; title = "反复扁平tex triangles"; ObjectID = "170"; */
+"170.title" = "反复扁平tex triangles";
+
+/* Class = "NSButtonCell"; ibShadowedToolTip = "绘图繁忙时切换标志寄存器"; ObjectID = "171"; */
+"171.ibShadowedToolTip" = "绘图繁忙时切换标志寄存器";
+
+/* Class = "NSButtonCell"; title = "假冒GPU繁忙状态"; ObjectID = "171"; */
+"171.title" = "假冒GPU繁忙状态";
+
+/* Class = "NSButtonCell"; title = "显示器同步刷新"; ObjectID = "172"; */
+"172.title" = "显示器同步刷新";
+
+/* Class = "NSButtonCell"; title = "使用自动跳帧"; ObjectID = "173"; */
+"173.title" = "使用自动跳帧";
+
+/* Class = "NSButtonCell"; title = "显示反相FPS"; ObjectID = "174"; */
+"174.title" = "显示反相FPS";
+
+/* Class = "NSButtonCell"; title = "自动全屏"; ObjectID = "175"; */
+"175.title" = "自动全屏";
+
+/* Class = "NSTextFieldCell"; title = "图形抖动:"; ObjectID = "176"; */
+"176.title" = "图形抖动:";
+
+/* Class = "NSButtonCell"; title = "启用技巧"; ObjectID = "178"; */
+"178.title" = "启用技巧";
+
+/* Class = "NSBox"; title = "着色器"; ObjectID = "179"; */
+"179.title" = "着色器";
+
+/* Class = "NSButtonCell"; title = "启用着色器"; ObjectID = "181"; */
+"181.title" = "启用着色器";
+
+/* Class = "NSButtonCell"; title = "选择..."; ObjectID = "183"; */
+"183.title" = "选择...";
+
+/* Class = "NSButtonCell"; title = "选择..."; ObjectID = "185"; */
+"185.title" = "选择...";
+
+/* Class = "NSTextFieldCell"; title = "标签"; ObjectID = "187"; */
+"187.title" = "标签";
+
+/* Class = "NSTextFieldCell"; title = "标签"; ObjectID = "189"; */
+"189.title" = "标签";
+
+/* Class = "NSTextFieldCell"; title = "顶点:"; ObjectID = "195"; */
+"195.title" = "顶点:";
+
+/* Class = "NSTextFieldCell"; title = "片段:"; ObjectID = "197"; */
+"197.title" = "片段:";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "221"; */
+"221.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "1.0"; ObjectID = "222"; */
+"222.title" = "1.0";
+
+/* Class = "NSMenuItem"; title = "2.0"; ObjectID = "223"; */
+"223.title" = "2.0";
+
+/* Class = "NSMenuItem"; title = "3.0"; ObjectID = "224"; */
+"224.title" = "3.0";
+
+/* Class = "NSTextFieldCell"; title = "品质:"; ObjectID = "226"; */
+"226.title" = "品质:";
+
+/* Class = "NSMenuItem"; title = "4.0"; ObjectID = "227"; */
+"227.title" = "4.0";
+
+/* Class = "NSButtonCell"; title = "确认"; ObjectID = "372"; */
+"372.title" = "确认";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "376"; */
+"376.title" = "取消";
+
+/* Class = "NSButtonCell"; title = "重置"; ObjectID = "382"; */
+"382.title" = "重置";
+
+/* Class = "NSButtonCell"; title = "Odd/even bit hack"; ObjectID = "531"; */
+"531.title" = "Odd/even bit hack";
+
+/* Class = "NSFormCell"; title = "高度:"; ObjectID = "3eM-lr-W6U"; */
+"3eM-lr-W6U.title" = "高度:";
+
+/* Class = "NSFormCell"; title = "宽度:"; ObjectID = "4UQ-Uy-UYS"; */
+"4UQ-Uy-UYS.title" = "宽度:";
+
+/* Class = "NSFormCell"; title = "领域:"; ObjectID = "7gB-tB-Kx4"; */
+"7gB-tB-Kx4.title" = "领域:";
+
+/* Class = "NSButtonCell"; title = "隐藏"; ObjectID = "tsc-3g-k3d"; */
+"tsc-3g-k3d.title" = "隐藏";

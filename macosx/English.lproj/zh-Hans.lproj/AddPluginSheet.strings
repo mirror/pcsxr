@@ -1,0 +1,15 @@
+
+/* Class = "NSPanel"; title = "插件安装"; ObjectID = "10"; */
+"10.title" = "插件安装";
+
+/* Class = "NSTextFieldCell"; title = "插件安装"; ObjectID = "58"; */
+"58.title" = "插件安装";
+
+/* Class = "NSTextFieldCell"; title = "你想安装这个插件到PCSXR吗?"; ObjectID = "59"; */
+"59.title" = "你想安装这个插件到PCSXR吗?";
+
+/* Class = "NSButtonCell"; title = "确定"; ObjectID = "113"; */
+"113.title" = "确定";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "117"; */
+"117.title" = "取消";

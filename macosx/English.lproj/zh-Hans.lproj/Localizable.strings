@@ -1,0 +1,109 @@
+/* 
+  Localizable.strings
+  Pcsx
+
+  Created by C.W. Betts on 4/23/11.
+  Copyright 2011 __MyCompanyName__. All rights reserved.
+*/
+
+//libpcsxrcore strings
+"Error Opening CDR Plugin" = "打开CDR插件时发生错误";
+"Error Opening SPU Plugin" = "打开SPU插件时发生错误";
+"Error Opening GPU Plugin" = "打开GPU插件时发生错误";
+"Error Opening PAD1 Plugin" = "打开PAD1插件时发生错误";
+"Error Opening PAD2 Plugin" = "打开PAD2插件时发生错误";
+"Error opening SIO1 plugin!" = "打开SIO1插件时发生错误";
+"Error Closing CDR Plugin" = "关闭CDR插件时发生错误";
+"Error Closing SPU Plugin" = "关闭SPU插件时发生错误";
+"Error Closing PAD1 Plugin" = "关闭PAD1插件时发生错误";
+"Error Closing PAD2 Plugin" = "关闭PAD2插件时发生错误";
+"Error Closing GPU Plugin" = "关闭GPU插件时发生错误";
+"Error closing SIO1 plugin!" = "关闭SIO1插件时发生错误";
+"CDRinit error: %d" = "光驱初始化错误: %d";
+"GPUinit error: %d" = "GPU初始化错误: %d";
+"SPUinit error: %d" = "SPU初始化错误: %d";
+"PAD1init error: %d" = "PAD1初始化错误: %d";
+"PAD2init error: %d" = "PAD2初始化错误: %d";
+"NETinit error: %d" = "网络初始化错误: %d";
+"SIO1init error: %d!" = "SIO1初始化错误: %d";
+"Could not open BIOS:\"%s\". Enabling HLE Bios!\n" = "不能打开BIOS:\"%s\".启用 HLE Bios!\n";
+"Error allocating memory!" = "分配内存错误!";
+"Running PCSXR Version %s (%s).\n" = "运行 PCSXR 版本 %s (%s).\n";
+"No memory card value was specified - creating a default card %s\n" = "无记忆卡,指定 - 创建一个记忆卡 %s\n";
+"Memory card %s failed to load!\n" = "记忆卡 %s 载入失败!\n";
+"Loading memory card %s\n" = "加载记忆卡 %s\n";
+"The memory card %s doesn't exist - creating it\n" = "记忆卡 %s 不能推出 - 创建\n";
+"Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n" = "音轨 %.2d (%s) - 开始 %.2d:%.2d:%.2d, 长度 %.2d:%.2d:%.2d\n";
+"Loaded CD Image: %s" = "载入 CD 映像: %s";
+"Cheats saved to: %s\n" = "金手指存储为: %s\n";
+"Cheats loaded from: %s\n" = "金手指载入: %s\n";
+"Error allocating memory" = "分配内存错误";
+"Unable to start debug server.\n" = "不能开启调试服务.\n";
+"Debugger started.\n" = "调试程序开始.\n";
+"Debugger stopped.\n" = "调试程序停止.\n";
+"CD-ROM Label: %.32s\n" = "光驱标签: %.32s\n";
+"CD-ROM ID: %.9s\n" = "光驱ID: %.9s\n";
+"CD-ROM EXE Name: %.255s\n" = "光驱名称: %.255s\n";
+"Error opening file: %s.\n" = "打开文件错误: %s.\n";
+"Unknown CPE opcode %02x at poiition %08x.\n" = "未知CPE指令 %02x在%08x.\n";
+"\ncould not open: %s\n" = "\n不能打开: %s\n";
+"New Memory Card.mcd" = "新记忆卡文件.mcr";
+"Loaded PPF %d.0 patch: %s.\n" = "载入 PPF %d.0 补丁: %s.\n";
+
+//Emu Thread
+"*PCSXR*: Loaded State" = "*PCSXR*: 载入进度";
+"*PCSXR*: Error Saving State %d" = "*PCSXR*: 存储进度 %d 错误";
+"*PCSXR*: Saved State %d" = "*PCSXR*: 存储进度 %d";
+
+"*PCSXR*: Error Loading State %d" = "*PCSXR*: 载入进度 %d 错误";
+"*PCSXR*: Sio Irq Always Enabled" = "*PCSXR*: Sio Irq 总是开启";
+"*PCSXR*: Sio Irq Not Always Enabled" = "*PCSXR*: Sio Irq 取消总是开始";
+
+
+// Cocoa Code
+"Plugin Initialization Failed!" = "插件初始化失败!";
+"Pcsxr failed to initialize the selected %@ plugin (error=%i).\nThe plugin might not work with your system." = "Pcsxr 初始化插件 %1$@ 失败 (error=%2$i).\n插件不能工作.";
+"Error!" = "错误!";
+"Installation Succesfull" = "初始化成功!";
+"Installation Failed!" = "初始化失败!";
+"The installation of the specified plugin was succesfull. In order to use it, please restart the application." = "初始化指定插件成功.请重启应用以使用它.";
+"The installation of the specified plugin failed. Please try again, or make a manual install." = "初始化指定插件失败.请重试或手动安装.";
+"Missing plugins!" = "缺少插件!";
+"Pcsxr is missing one or more critical plugins. You will need to install these in order to play games." = "Pcsx缺少至少一个关键插件.需要安装这些插件才能进行游戏.";
+"Missing BIOS!" = "缺少BIOS!";
+"Pcsxr wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\nIf you have a BIOS available, please copy it to\n%@" = "Pcsxr找不到BIOS映像文件.这意味着将运行在模拟BIOS模式(会降低稳定和兼容性).\n如果你有BIOS文件,请复制到:\n%@";
+
+"Error opening file" = "文件打开错误.";
+"Unable to open %@: %@" = "不能打开 %1$@: %2$@";
+
+//Memory card management
+"Format Card" = "格式化记忆卡";
+"Free Size" = "可用大小";
+"Format" = "格式";
+"No Free Space" = "No Free Space";
+"Formatting a memory card will remove all data on it.\n\nThis cannot be undone." = "格式化记忆卡将移除里面的数据.\n";
+"Delete Block" = "删除存档";
+"Deleting a block will remove all saved data on that block.\n\nThis cannot be undone." = "删除后在模拟器里将不能呢个读取这个存档.";
+"No Free Space" = "没有可用空间";
+"Memory card %d doesn't have %d free consecutive blocks on it. Please remove some blocks on that card to continue" = "记忆卡 %1$d 没有 %2$d 个可用存储位置.请移除一些存档.";
+"Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@ (%@),\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?" = "记忆卡 %1$i 没有足够的空间.\n\nIn 复制结束 “%2$@ (%3$@),” 记忆卡 %4$i 必须压缩. 压缩记忆卡将删除存档且不可回复.\n\n要继续吗?";
+
+//Cheat manager
+"Save Cheats" = "存储金手指";
+"The cheat codes have not been applied. Unapplied cheats will not run nor be saved. Do you wish to save?" = "金手指代码不能应用.未应用的金手指不能运行也不能存储.你要存储吗?";
+"Unsaved Changes" = "更改后未存储";
+"(Untitled)" = "(无标题)";
+
+//General buttons
+"Okay" = "确认";
+"Cancel" = "取消";
+"Yes" = "确定";
+"No" = "取消";
+"Delete" = "删除";
+
+//Mem card flags
+"MemCard_Deleted" = "删除";
+"MemCard_Free" = "可用";
+"MemCard_Used" = "占用";
+"MemCard_Link" = "链接";
+"MemCard_EndLink" = "链接结束";

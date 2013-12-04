@@ -1,0 +1,27 @@
+
+/* Class = "NSWindow"; title = "设置"; ObjectID = "1"; */
+"1.title" = "设置";
+
+/* Class = "NSTextFieldCell"; title = "127.0.0.1"; ObjectID = "10"; */
+"10.title" = "127.0.0.1";
+
+/* Class = "NSTextFieldCell"; title = "33306"; ObjectID = "18"; */
+"18.title" = "33306";
+
+/* Class = "NSTextFieldCell"; title = "IP 地址:"; ObjectID = "20"; */
+"20.title" = "IP 地址:";
+
+/* Class = "NSTextFieldCell"; title = "端口:"; ObjectID = "22"; */
+"22.title" = "端口:";
+
+/* Class = "NSTextFieldCell"; title = "玩家编号:"; ObjectID = "25"; */
+"25.title" = "玩家编号:";
+
+/* Class = "NSTextFieldCell"; title = "1"; ObjectID = "27"; */
+"27.title" = "1";
+
+/* Class = "NSButtonCell"; title = "确认"; ObjectID = "55"; */
+"55.title" = "确认";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "60"; */
+"60.title" = "取消";

@@ -1,0 +1,39 @@
+
+/* Class = "NSWindow"; title = "BladeSIO1 配置"; ObjectID = "5"; */
+"5.title" = "BladeSIO1 配置";
+
+/* Class = "NSButtonCell"; title = "取消"; ObjectID = "186"; */
+"186.title" = "取消";
+
+/* Class = "NSButtonCell"; title = "确认"; ObjectID = "187"; */
+"187.title" = "确认";
+
+/* Class = "NSBox"; title = "窗体"; ObjectID = "193"; */
+"193.title" = "窗体";
+
+/* Class = "NSButtonCell"; title = "启用"; ObjectID = "195"; */
+"195.title" = "启用";
+
+/* Class = "NSTextFieldCell"; title = "IP 地址:"; ObjectID = "199"; */
+"199.title" = "IP 地址:";
+
+/* Class = "NSTextFieldCell"; title = "玩家:"; ObjectID = "201"; */
+"201.title" = "玩家:";
+
+/* Class = "NSTextFieldCell"; title = "端口:"; ObjectID = "203"; */
+"203.title" = "端口:";
+
+/* Class = "NSMenu"; title = "查看其他"; ObjectID = "210"; */
+"210.title" = "查看其他";
+
+/* Class = "NSMenuItem"; title = "主要"; ObjectID = "211"; */
+"211.title" = "主要";
+
+/* Class = "NSMenuItem"; title = "次要"; ObjectID = "212"; */
+"212.title" = "次要";
+
+/* Class = "NSMenuItem"; title = "关闭"; ObjectID = "213"; */
+"213.title" = "关闭";
+
+/* Class = "NSButtonCell"; title = "重置"; ObjectID = "222"; */
+"222.title" = "重置";
