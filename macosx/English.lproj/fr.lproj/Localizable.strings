@@ -82,7 +82,6 @@
 "Format Card" = "Formater cette carte mémoire ?";
 //"Free Size" = "Free Size";
 //"Format" = "Format";
-"No Free Space" = "Pas d'emplacement libre sur la carte mémoire";
 //"Formatting a memory card will remove all data on it.\n\nThis cannot be undone." = "Formatting a memory card will remove all data on it.\n\nThis cannot be undone.";
 //"Delete Block" = "Delete Block";
 //"Deleting a block will remove all saved data on that block.\n\nThis cannot be undone." = "Deleting a memory card object will set the blocks to not be readable by the emulator, and may result in the data being overwritten in the future.";
@@ -102,6 +101,9 @@
 "Yes" = "Oui";
 "No" = "Non";
 //"Delete" = "Delete";
+
+//not-so-general buttons
+//"Show Folder" = "Show Folder";
 
 //Mem card flags
 "MemCard_Deleted" = "Supprimé";

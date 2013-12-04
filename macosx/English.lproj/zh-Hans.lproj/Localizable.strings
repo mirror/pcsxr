@@ -80,7 +80,6 @@
 "Format Card" = "格式化记忆卡";
 "Free Size" = "可用大小";
 "Format" = "格式";
-"No Free Space" = "No Free Space";
 "Formatting a memory card will remove all data on it.\n\nThis cannot be undone." = "格式化记忆卡将移除里面的数据.\n";
 "Delete Block" = "删除存档";
 "Deleting a block will remove all saved data on that block.\n\nThis cannot be undone." = "删除后在模拟器里将不能呢个读取这个存档.";
@@ -100,6 +99,9 @@
 "Yes" = "确定";
 "No" = "取消";
 "Delete" = "删除";
+
+//not-so-general buttons
+//"Show Folder" = "Show Folder";
 
 //Mem card flags
 "MemCard_Deleted" = "删除";

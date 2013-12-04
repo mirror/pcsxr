@@ -82,7 +82,6 @@
 "Format Card" = "Kártya formázása";
 //"Free Size" = "Free Size";
 "Format" = "Formázod a memória kártyát?";
-//"No Free Space" = "No Free Space";
 "Formatting a memory card will remove all data on it.\n\nThis cannot be undone." = "Ha leformázod a memória kártyát, akkor a kártya üres lesz és minden meglévő adat el fog veszni.";
 //"Delete Block" = "Delete Block";
 //"Deleting a block will remove all saved data on that block.\n\nThis cannot be undone." = "Deleting a memory card object will set the blocks to not be readable by the emulator, and may result in the data being overwritten in the future.";
@@ -102,6 +101,9 @@
 "Yes" = "Igen";
 "No" = "Nem";
 //"Delete" = "Delete";
+
+//not-so-general buttons
+//"Show Folder" = "Show Folder";
 
 //Mem card flags
 "MemCard_Deleted" = "Törölve";

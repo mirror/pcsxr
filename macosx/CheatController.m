@@ -342,7 +342,7 @@
 						  NSLocalizedString(@"Don't Save",@"Don't Save"),
 						  NSLocalizedString(@"Cancel", @"Cancel"), [self window], self,
 						  NULL, @selector(sheetDidDismiss:returnCode:contextInfo:), NULL,
-						  NSLocalizedString(@"The cheat codes have not been applied. Unapplied cheats will not run nor be saved. Do you wish to save?",nil));
+						  NSLocalizedString(@"The cheat codes have not been applied. Unapplied cheats will not run nor be saved. Do you wish to save?", nil));
 		
 		return NO;
 	}
