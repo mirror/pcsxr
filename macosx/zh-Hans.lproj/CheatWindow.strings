@@ -3,10 +3,10 @@
 "1.title" = "金手指";
 
 /* Class = "NSButtonCell"; title = "存储金手指..."; ObjectID = "5"; */
-"5.title" = "存储金手指...";
+"5.title" = "存储金手指…";
 
 /* Class = "NSButtonCell"; title = "载入金手指..."; ObjectID = "7"; */
-"7.title" = "载入金手指...";
+"7.title" = "载入金手指…";
 
 /* Class = "NSTableColumn"; headerCell.title = "名称"; ObjectID = "28"; */
 "28.headerCell.title" = "名称";

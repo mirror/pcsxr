@@ -198,7 +198,7 @@
 "482.title" = "假装删减混合";
 
 /* Class = "NSButtonCell"; ibShadowedToolTip = "DW7 fix (不是100%完美...)"; ObjectID = "483"; */
-"483.ibShadowedToolTip" = "DW7 fix (不是100%完美...)";
+"483.ibShadowedToolTip" = "DW7 fix (不是100%完美…)";
 
 /* Class = "NSButtonCell"; title = "缓慢检测更新"; ObjectID = "483"; */
 "483.title" = "缓慢检测更新";
@@ -222,7 +222,7 @@
 "486.title" = "扩大屏幕宽度";
 
 /* Class = "NSButtonCell"; ibShadowedToolTip = "只对FF9战斗模式..."; ObjectID = "487"; */
-"487.ibShadowedToolTip" = "只对FF9战斗模式...";
+"487.ibShadowedToolTip" = "只对FF9战斗模式…";
 
 /* Class = "NSButtonCell"; title = "G4多边形缓存"; ObjectID = "487"; */
 "487.title" = "G4多边形缓存";
@@ -234,7 +234,7 @@
 "488.title" = "检测特殊上传";
 
 /* Class = "NSButtonCell"; ibShadowedToolTip = "只对FF9战斗指针..."; ObjectID = "489"; */
-"489.ibShadowedToolTip" = "只对FF9战斗指针...";
+"489.ibShadowedToolTip" = "只对FF9战斗指针…";
 
 /* Class = "NSButtonCell"; title = "调整帧缓冲区通道"; ObjectID = "489"; */
 "489.title" = "调整帧缓冲区通道";

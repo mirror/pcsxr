@@ -28,6 +28,8 @@
 
 #define APP_ID @"net.codeplex.pcsxr.DFNet"
 #define PrefsKey APP_ID @" Settings"
+#define NSLocalizedStringInBundle(key, bundle, comment) \
+	[bundle localizedStringForKey:(key) value:@"" table:nil]
 
 static PluginConfigController *windowController = nil;
 
@@ -49,7 +51,7 @@ void AboutDlgProc()
 	NSString *path = [bundle pathForResource:@"Credits" ofType:@"rtf"];
 	NSAttributedString *credits;
 	if (path) {
-		credits = [[NSAttributedString alloc] initWithPath: path
+		credits = [[NSAttributedString alloc] initWithPath:path
 				documentAttributes:NULL];
 	} else {
 		credits = [[NSAttributedString alloc] initWithString:@""];
@@ -99,7 +101,7 @@ void ReadConfig()
 	
 	keyValues = [defaults dictionaryForKey:PrefsKey];
 
-	conf.PortNum = [keyValues[kIPPORT] intValue];
+	conf.PortNum = [keyValues[kIPPORT] unsignedShortValue];
 	conf.PlayerNum = [keyValues[kPLAYERNUM] intValue];
 	strlcpy(conf.ipAddress, [keyValues[kIPADDRKEY] cStringUsingEncoding:NSASCIIStringEncoding], sizeof(conf.ipAddress));
 }
@@ -114,14 +116,15 @@ void ReadConfig()
 - (IBAction)ok:(id)sender
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSBundle *curBundle = [NSBundle bundleForClass:[PluginConfigController class]];
 	
 	NSString *theAddress = [ipAddress  stringValue];
 	NSInteger asciiLen = [theAddress lengthOfBytesUsingEncoding:NSASCIIStringEncoding];
 	if (asciiLen > (sizeof(conf.ipAddress) - 1)) {
-		NSBeginAlertSheet(@"Address too long", nil, nil, nil, [self window], nil, NULL, NULL, NULL, @"The address is too long.\n\nTry to use only the IP address and not a host name.");
+		NSBeginAlertSheet(NSLocalizedStringInBundle(@"Address Too Long", curBundle, nil), nil, nil, nil, [self window], nil, NULL, NULL, NULL, @"%@", NSLocalizedStringInBundle(@"The address is too long.\n\nTry to use only the IP address and not a host name.", curBundle, nil));
 		return;
 	} else if (asciiLen == 0) {
-		NSBeginAlertSheet(@"Blank address", nil, nil, nil, [self window], nil, NULL, NULL, NULL, @"The address specified is either blank, or can't be converted to ASCII.\n\nTry connecting directly using the IP address using latin numerals.");
+		NSBeginAlertSheet(NSLocalizedStringInBundle(@"Blank Address", curBundle, nil), nil, nil, nil, [self window], nil, NULL, NULL, NULL, @"%@", NSLocalizedStringInBundle(@"The address specified is either blank, or can't be converted to ASCII.\n\nTry connecting directly using the IP address using latin numerals.", curBundle, nil));
 		return;
 	}
 

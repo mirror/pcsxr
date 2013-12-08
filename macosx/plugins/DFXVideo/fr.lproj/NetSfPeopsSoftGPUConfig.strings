@@ -132,10 +132,10 @@
 "181.title" = "Enable Shaders";
 
 /* Class = "NSButtonCell"; title = "Select..."; ObjectID = "183"; */
-"183.title" = "Select...";
+"183.title" = "Select…";
 
 /* Class = "NSButtonCell"; title = "Select..."; ObjectID = "185"; */
-"185.title" = "Select...";
+"185.title" = "Select…";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "187"; */
 "187.title" = "Label";

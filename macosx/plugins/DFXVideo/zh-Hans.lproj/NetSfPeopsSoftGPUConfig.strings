@@ -132,10 +132,10 @@
 "181.title" = "启用着色器";
 
 /* Class = "NSButtonCell"; title = "选择..."; ObjectID = "183"; */
-"183.title" = "选择...";
+"183.title" = "选择…";
 
 /* Class = "NSButtonCell"; title = "选择..."; ObjectID = "185"; */
-"185.title" = "选择...";
+"185.title" = "选择…";
 
 /* Class = "NSTextFieldCell"; title = "标签"; ObjectID = "187"; */
 "187.title" = "标签";

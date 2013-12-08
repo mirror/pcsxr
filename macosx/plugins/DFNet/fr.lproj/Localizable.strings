@@ -9,3 +9,8 @@
 "Error allocating memory!\n" = "Erreur d'allocation mémoire !\n";
 "error connecting to %s: %s\n" = "Erreur lors de la connection à %s: %s\n";
 "Socket Driver" = "Pilote Socket";
+
+//"Address Too Long" = "Address Too Long";
+//"The address is too long.\n\nTry to use only the IP address and not a host name." = "The address is too long.\n\nTry to use only the IP address and not a host name.";
+//"Blank Address" = "Blank Address";
+//"The address specified is either blank, or can't be converted to ASCII.\n\nTry connecting directly using the IP address using latin numerals." = "The address specified is either blank, or can't be converted to ASCII.\n\nTry connecting directly using the IP address using latin numerals.";

@@ -39,7 +39,7 @@
 "111.title" = "PCSXR 帮助";
 
 /* Class = "NSMenuItem"; title = "偏好设置..."; ObjectID = "129"; */
-"129.title" = "偏好设置...";
+"129.title" = "偏好设置…";
 
 /* Class = "NSMenu"; title = "服务"; ObjectID = "130"; */
 "130.title" = "服务";
@@ -96,7 +96,7 @@
 "289.title" = "位置 2";
 
 /* Class = "NSMenuItem"; title = "运行 ISO..."; ObjectID = "290"; */
-"290.title" = "运行 ISO...";
+"290.title" = "运行 ISO…";
 
 /* Class = "NSMenuItem"; title = "位置 3"; ObjectID = "292"; */
 "292.title" = "位置 3";
@@ -135,10 +135,10 @@
 "322.title" = "位置 1";
 
 /* Class = "NSMenuItem"; title = "运行历史..."; ObjectID = "329"; */
-"329.title" = "运行历史...";
+"329.title" = "运行历史…";
 
 /* Class = "NSMenu"; title = "运行历史..."; ObjectID = "330"; */
-"330.title" = "运行历史...";
+"330.title" = "运行历史…";
 
 /* Class = "NSMenuItem"; title = "清除列表"; ObjectID = "366"; */
 "366.title" = "清除列表";
@@ -258,7 +258,7 @@
 "425.title" = "查找";
 
 /* Class = "NSMenuItem"; title = "查找..."; ObjectID = "426"; */
-"426.title" = "查找...";
+"426.title" = "查找…";
 
 /* Class = "NSMenuItem"; title = "查找下一个"; ObjectID = "427"; */
 "427.title" = "查找下一个";
