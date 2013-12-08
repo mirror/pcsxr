@@ -6,6 +6,8 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
+	<key>CFBundleDevelopmentRegion - 2</key>
+	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
@@ -18,7 +20,5 @@
 	<string>PSGl</string>
 	<key>CFBundleVersion</key>
 	<string>1.16</string>
-	<key>NSPrincipalClass</key>
-	<string>NetSfPeopsSoftGPUPluginConfigController</string>
 </dict>
 </plist>
