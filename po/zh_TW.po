@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2013-08-28 01:35+0400\n"
+"POT-Creation-Date: 2013-12-13 14:14+0400\n"
 "PO-Revision-Date: 2011-06-04 13:46+0400\n"
 "Last-Translator: Wei Mingzhi <whistler_wmz@users.sf.net>\n"
 "Language-Team: Traditional Chinese <whistler@openoffice.org>\n"
@@ -179,328 +179,332 @@ msgstr "Parasite Eve 2, Vandal Hearts 1/2 修正"
 msgid "InuYasha Sengoku Battle Fix"
 msgstr "InuYasha Sengoku 戰斗修正"
 
-#: ../data/pcsxr.ui.h:40 ../win32/gui/WndMain.c:1354
+#: ../data/pcsxr.ui.h:40
+msgid "No memcard (COTS password option)"
+msgstr ""
+
+#: ../data/pcsxr.ui.h:41 ../win32/gui/WndMain.c:1354
 msgid "Widescreen (GTE Hack)"
 msgstr ""
 
-#: ../data/pcsxr.ui.h:41
+#: ../data/pcsxr.ui.h:42
 msgid "<b>Options</b>"
 msgstr "<b>選項</b>"
 
-#: ../data/pcsxr.ui.h:42 ../win32/gui/WndMain.c:1347
+#: ../data/pcsxr.ui.h:43 ../win32/gui/WndMain.c:1347
 msgid "Autodetect"
 msgstr "自動檢測"
 
-#: ../data/pcsxr.ui.h:43
+#: ../data/pcsxr.ui.h:44
 msgid "<b>System Type</b>"
 msgstr "<b>系統類型</b>"
 
-#: ../data/pcsxr.ui.h:44
+#: ../data/pcsxr.ui.h:45
 msgid "PCSXR"
 msgstr "PCSXR"
 
-#: ../data/pcsxr.ui.h:45
+#: ../data/pcsxr.ui.h:46
 msgid "_File"
 msgstr "檔案(_F)"
 
-#: ../data/pcsxr.ui.h:46
+#: ../data/pcsxr.ui.h:47
 msgid "Run _CD"
 msgstr "執行光碟(_C)"
 
-#: ../data/pcsxr.ui.h:47
+#: ../data/pcsxr.ui.h:48
 msgid "Run _ISO..."
 msgstr "執行 _ISO..."
 
-#: ../data/pcsxr.ui.h:48
+#: ../data/pcsxr.ui.h:49
 msgid "Run _BIOS"
 msgstr "執行 _BIOS"
 
-#: ../data/pcsxr.ui.h:49
+#: ../data/pcsxr.ui.h:50
 msgid "Run _EXE..."
 msgstr "執行 _EXE..."
 
-#: ../data/pcsxr.ui.h:50
+#: ../data/pcsxr.ui.h:51
 msgid "E_xit"
 msgstr "離開(_X)"
 
-#: ../data/pcsxr.ui.h:51
+#: ../data/pcsxr.ui.h:52
 msgid "_Emulator"
 msgstr "模擬器(_E)"
 
-#: ../data/pcsxr.ui.h:52
+#: ../data/pcsxr.ui.h:53
 msgid "_Continue"
 msgstr "繼續(_C)"
 
-#: ../data/pcsxr.ui.h:53
+#: ../data/pcsxr.ui.h:54
 msgid "_Reset"
 msgstr "複位(_R)"
 
-#: ../data/pcsxr.ui.h:54
+#: ../data/pcsxr.ui.h:55
 #, fuzzy
 msgid "_Shutdown"
 msgstr "右下"
 
-#: ../data/pcsxr.ui.h:55
+#: ../data/pcsxr.ui.h:56
 msgid "S_witch ISO..."
 msgstr "更換 ISO(_W)"
 
-#: ../data/pcsxr.ui.h:56
+#: ../data/pcsxr.ui.h:57
 msgid "_Save State"
 msgstr "存儲記錄(_S)"
 
-#: ../data/pcsxr.ui.h:57
+#: ../data/pcsxr.ui.h:58
 msgid "Slot _1"
 msgstr "記錄 _1"
 
-#: ../data/pcsxr.ui.h:58
+#: ../data/pcsxr.ui.h:59
 msgid "Slot _2"
 msgstr "記錄 _2"
 
-#: ../data/pcsxr.ui.h:59
+#: ../data/pcsxr.ui.h:60
 msgid "Slot _3"
 msgstr "記錄 _3"
 
-#: ../data/pcsxr.ui.h:60
+#: ../data/pcsxr.ui.h:61
 msgid "Slot _4"
 msgstr "記錄 _4"
 
-#: ../data/pcsxr.ui.h:61
+#: ../data/pcsxr.ui.h:62
 msgid "Slot _5"
 msgstr "記錄 _5"
 
-#: ../data/pcsxr.ui.h:62
+#: ../data/pcsxr.ui.h:63
 msgid "Slot _6"
 msgstr "記錄 _6"
 
-#: ../data/pcsxr.ui.h:63
+#: ../data/pcsxr.ui.h:64
 msgid "Slot _7"
 msgstr "記錄 _7"
 
-#: ../data/pcsxr.ui.h:64
+#: ../data/pcsxr.ui.h:65
 msgid "Slot _8"
 msgstr "記錄 _8"
 
-#: ../data/pcsxr.ui.h:65
+#: ../data/pcsxr.ui.h:66
 msgid "Slot _9"
 msgstr "記錄 _9"
 
-#: ../data/pcsxr.ui.h:66
+#: ../data/pcsxr.ui.h:67
 msgid "_Other..."
 msgstr "其它(_O)..."
 
-#: ../data/pcsxr.ui.h:67
+#: ../data/pcsxr.ui.h:68
 msgid "_Load State"
 msgstr "讀取記錄(_L)"
 
-#: ../data/pcsxr.ui.h:68
+#: ../data/pcsxr.ui.h:69
 msgid "_Configuration"
 msgstr "設定(_C)"
 
-#: ../data/pcsxr.ui.h:69
+#: ../data/pcsxr.ui.h:70
 msgid "_Plugins & BIOS..."
 msgstr "外掛及 BIOS(_P)..."
 
-#: ../data/pcsxr.ui.h:70
+#: ../data/pcsxr.ui.h:71
 msgid "_Graphics..."
 msgstr "圖像(_G)..."
 
-#: ../data/pcsxr.ui.h:71
+#: ../data/pcsxr.ui.h:72
 msgid "_Sound..."
 msgstr "聲音(_S)..."
 
-#: ../data/pcsxr.ui.h:72
+#: ../data/pcsxr.ui.h:73
 msgid "CD-_ROM..."
 msgstr "CD-_ROM..."
 
-#: ../data/pcsxr.ui.h:73
+#: ../data/pcsxr.ui.h:74
 msgid "C_ontrollers..."
 msgstr "控制器(_O)..."
 
-#: ../data/pcsxr.ui.h:74
+#: ../data/pcsxr.ui.h:75
 #, fuzzy
 msgid "_Link cable..."
 msgstr "開啟"
 
-#: ../data/pcsxr.ui.h:75
+#: ../data/pcsxr.ui.h:76
 msgid "_Netplay..."
 msgstr "聯線遊戲(_N)..."
 
-#: ../data/pcsxr.ui.h:76
+#: ../data/pcsxr.ui.h:77
 msgid "_CPU..."
 msgstr "_CPU..."
 
-#: ../data/pcsxr.ui.h:77
+#: ../data/pcsxr.ui.h:78
 msgid "_Memory Cards..."
 msgstr "記憶卡(_M)..."
 
-#: ../data/pcsxr.ui.h:78
+#: ../data/pcsxr.ui.h:79
 msgid "Chea_t"
 msgstr "金手指(_T)"
 
-#: ../data/pcsxr.ui.h:79
+#: ../data/pcsxr.ui.h:80
 msgid "_Browse..."
 msgstr "檢視(_B)..."
 
-#: ../data/pcsxr.ui.h:80
+#: ../data/pcsxr.ui.h:81
 msgid "_Search..."
 msgstr "搜尋(_S)..."
 
-#: ../data/pcsxr.ui.h:81
+#: ../data/pcsxr.ui.h:82
 msgid "Memory _Dump"
 msgstr "記憶體轉儲(_D)"
 
-#: ../data/pcsxr.ui.h:82
+#: ../data/pcsxr.ui.h:83
 msgid "_Help"
 msgstr "說明(_H)"
 
-#: ../data/pcsxr.ui.h:83
+#: ../data/pcsxr.ui.h:84
 msgid "_About PCSXR..."
 msgstr "關於 PCSXR(_A)..."
 
-#: ../data/pcsxr.ui.h:84
+#: ../data/pcsxr.ui.h:85
 msgid "Run CD"
 msgstr "執行光碟"
 
-#: ../data/pcsxr.ui.h:85
+#: ../data/pcsxr.ui.h:86
 msgid "Run ISO Image"
 msgstr "執行 ISO 光碟映像"
 
-#: ../data/pcsxr.ui.h:86
+#: ../data/pcsxr.ui.h:87
 msgid "Continue Emulation"
 msgstr "繼續模擬"
 
-#: ../data/pcsxr.ui.h:87
+#: ../data/pcsxr.ui.h:88
 msgid "Switch ISO Image"
 msgstr "更換 ISO 光碟映像"
 
-#: ../data/pcsxr.ui.h:88
+#: ../data/pcsxr.ui.h:89
 msgid "Configure Memory Cards"
 msgstr "記憶卡設定"
 
-#: ../data/pcsxr.ui.h:89
+#: ../data/pcsxr.ui.h:90
 msgid "Configure Graphics"
 msgstr "圖像設定"
 
-#: ../data/pcsxr.ui.h:90 ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:1
+#: ../data/pcsxr.ui.h:91 ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:1
 msgid "Configure Sound"
 msgstr "聲音設定"
 
-#: ../data/pcsxr.ui.h:91
+#: ../data/pcsxr.ui.h:92
 msgid "Configure CD-ROM"
 msgstr "CD-ROM 設定"
 
-#: ../data/pcsxr.ui.h:92
+#: ../data/pcsxr.ui.h:93
 msgid "Configure Controllers"
 msgstr "控制器設定"
 
-#: ../data/pcsxr.ui.h:93
+#: ../data/pcsxr.ui.h:94
 msgid "New"
 msgstr "新增"
 
-#: ../data/pcsxr.ui.h:94
+#: ../data/pcsxr.ui.h:95
 msgid "Format"
 msgstr "格式化"
 
-#: ../data/pcsxr.ui.h:95
+#: ../data/pcsxr.ui.h:96
 msgid "Un/Delete"
 msgstr "刪除/恢複"
 
-#: ../data/pcsxr.ui.h:96
+#: ../data/pcsxr.ui.h:97
 msgid "<b>Memory Card 1</b>"
 msgstr "<b>記憶卡 1</b>"
 
-#: ../data/pcsxr.ui.h:97
+#: ../data/pcsxr.ui.h:98
 msgid "<b>Memory Card 2</b>"
 msgstr "<b>記憶卡 2</b>"
 
-#: ../data/pcsxr.ui.h:98 ../gui/DebugMemory.c:152
+#: ../data/pcsxr.ui.h:99 ../gui/DebugMemory.c:152
 msgid "Memory Dump"
 msgstr "記憶體轉儲"
 
-#: ../data/pcsxr.ui.h:99 ../gui/DebugMemory.c:238
+#: ../data/pcsxr.ui.h:100 ../gui/DebugMemory.c:238
 msgid "Address (Hexadecimal):"
 msgstr "位址 (十六進制):"
 
-#: ../data/pcsxr.ui.h:100
+#: ../data/pcsxr.ui.h:101
 msgid "Raw Dump..."
 msgstr "Raw 轉儲..."
 
-#: ../data/pcsxr.ui.h:101
+#: ../data/pcsxr.ui.h:102
 msgid "Patch Memory..."
 msgstr "修改記憶體..."
 
-#: ../data/pcsxr.ui.h:102
+#: ../data/pcsxr.ui.h:103
 msgid "Configure NetPlay"
 msgstr "聯線遊戲設定"
 
-#: ../data/pcsxr.ui.h:103
+#: ../data/pcsxr.ui.h:104
 msgid "<b>NetPlay</b>"
 msgstr "<b>聯線遊戲</b>"
 
-#: ../data/pcsxr.ui.h:104
+#: ../data/pcsxr.ui.h:105
 #, fuzzy
 msgid "NTSC"
 msgstr ""
 "NTSC\n"
 "PAL"
 
-#: ../data/pcsxr.ui.h:105
+#: ../data/pcsxr.ui.h:106
 msgid "PAL"
 msgstr ""
 
-#: ../data/pcsxr.ui.h:106 ../win32/gui/CheatDlg.c:692
+#: ../data/pcsxr.ui.h:107 ../win32/gui/CheatDlg.c:692
 msgid "8-bit"
 msgstr "8 位元"
 
-#: ../data/pcsxr.ui.h:107 ../win32/gui/CheatDlg.c:693
+#: ../data/pcsxr.ui.h:108 ../win32/gui/CheatDlg.c:693
 msgid "16-bit"
 msgstr "16 位元"
 
-#: ../data/pcsxr.ui.h:108 ../win32/gui/CheatDlg.c:694
+#: ../data/pcsxr.ui.h:109 ../win32/gui/CheatDlg.c:694
 msgid "32-bit"
 msgstr "32 位元"
 
-#: ../data/pcsxr.ui.h:109 ../win32/gui/CheatDlg.c:402
+#: ../data/pcsxr.ui.h:110 ../win32/gui/CheatDlg.c:402
 msgid "Equal Value"
 msgstr "等于數值"
 
-#: ../data/pcsxr.ui.h:110 ../win32/gui/CheatDlg.c:403
+#: ../data/pcsxr.ui.h:111 ../win32/gui/CheatDlg.c:403
 msgid "Not Equal Value"
 msgstr "不等于數值"
 
-#: ../data/pcsxr.ui.h:111 ../win32/gui/CheatDlg.c:404
+#: ../data/pcsxr.ui.h:112 ../win32/gui/CheatDlg.c:404
 msgid "Range"
 msgstr "範圍"
 
-#: ../data/pcsxr.ui.h:112 ../win32/gui/CheatDlg.c:407
+#: ../data/pcsxr.ui.h:113 ../win32/gui/CheatDlg.c:407
 msgid "Increased By"
 msgstr "增加數值"
 
-#: ../data/pcsxr.ui.h:113 ../win32/gui/CheatDlg.c:408
+#: ../data/pcsxr.ui.h:114 ../win32/gui/CheatDlg.c:408
 msgid "Decreased By"
 msgstr "減少數值"
 
-#: ../data/pcsxr.ui.h:114 ../win32/gui/CheatDlg.c:409
+#: ../data/pcsxr.ui.h:115 ../win32/gui/CheatDlg.c:409
 msgid "Increased"
 msgstr "增加"
 
-#: ../data/pcsxr.ui.h:115 ../win32/gui/CheatDlg.c:410
+#: ../data/pcsxr.ui.h:116 ../win32/gui/CheatDlg.c:410
 msgid "Decreased"
 msgstr "已減少"
 
-#: ../data/pcsxr.ui.h:116 ../win32/gui/CheatDlg.c:411
+#: ../data/pcsxr.ui.h:117 ../win32/gui/CheatDlg.c:411
 msgid "Different"
 msgstr "不同"
 
-#: ../data/pcsxr.ui.h:117 ../win32/gui/CheatDlg.c:412
+#: ../data/pcsxr.ui.h:118 ../win32/gui/CheatDlg.c:412
 msgid "No Change"
 msgstr "無改變"
 
-#: ../data/pcsxr.ui.h:118 ../win32/gui/CheatDlg.c:695
+#: ../data/pcsxr.ui.h:119 ../win32/gui/CheatDlg.c:695
 msgid "Decimal"
 msgstr "十進制"
 
-#: ../data/pcsxr.ui.h:119 ../win32/gui/CheatDlg.c:696
+#: ../data/pcsxr.ui.h:120 ../win32/gui/CheatDlg.c:696
 msgid "Hexadecimal"
 msgstr "十六進制"
 
@@ -731,97 +735,98 @@ msgstr "位址"
 msgid "Text"
 msgstr "文字"
 
-#: ../gui/GtkGui.c:146
+#: ../gui/GtkGui.c:149
 msgid "Ready"
 msgstr "就緒"
 
-#: ../gui/GtkGui.c:191
+#: ../gui/GtkGui.c:194
 msgid "Emulation Paused."
 msgstr "模擬器已暫停。"
 
-#: ../gui/GtkGui.c:529
+#: ../gui/GtkGui.c:544
 msgid "Select PSX EXE File"
 msgstr "選擇 PS EXE 檔案"
 
-#: ../gui/GtkGui.c:542
+#: ../gui/GtkGui.c:557
 msgid "PlayStation Executable Files"
 msgstr "PlayStation 執行檔"
 
-#: ../gui/GtkGui.c:546 ../gui/GtkGui.c:699 ../win32/gui/WndMain.c:1506
+#: ../gui/GtkGui.c:561 ../gui/GtkGui.c:717 ../win32/gui/WndMain.c:1506
 #: ../win32/gui/WndMain.c:1587
 msgid "All Files"
 msgstr "所有檔案"
 
-#: ../gui/GtkGui.c:579
+#: ../gui/GtkGui.c:595
 msgid "Not a valid PSX file"
 msgstr "不是一個合法的 PSX 檔"
 
-#: ../gui/GtkGui.c:579
+#: ../gui/GtkGui.c:595
 msgid "The file does not appear to be a valid Playstation executable"
 msgstr "此文件不是一個合法的 PlayStation 執行檔"
 
-#: ../gui/GtkGui.c:608 ../gui/GtkGui.c:781
+#: ../gui/GtkGui.c:624 ../gui/GtkGui.c:799
 msgid "CD ROM failed"
 msgstr "CD-ROM 失敗"
 
-#: ../gui/GtkGui.c:608 ../gui/GtkGui.c:781 ../win32/gui/WndMain.c:475
+#: ../gui/GtkGui.c:624 ../gui/GtkGui.c:799 ../win32/gui/WndMain.c:475
 #: ../win32/gui/WndMain.c:529 ../win32/gui/WndMain.c:599
 #, c-format
 msgid "The CD does not appear to be a valid Playstation CD"
 msgstr "此光碟不是一張合法的 PlayStation 光碟。"
 
-#: ../gui/GtkGui.c:619 ../gui/GtkGui.c:792 ../win32/gui/WndMain.c:485
+#: ../gui/GtkGui.c:635 ../gui/GtkGui.c:810 ../win32/gui/WndMain.c:485
 #: ../win32/gui/WndMain.c:539 ../win32/gui/WndMain.c:609
 #, c-format
 msgid "Could not load CD-ROM!"
 msgstr "無法加載光碟!"
 
-#: ../gui/GtkGui.c:619 ../gui/GtkGui.c:792
+#: ../gui/GtkGui.c:635 ../gui/GtkGui.c:810
 msgid "The CD-ROM could not be loaded"
 msgstr "無法加載 CD-ROM"
 
-#: ../gui/GtkGui.c:634
+#: ../gui/GtkGui.c:650
 msgid "Could not run BIOS"
 msgstr "無法執行 BIOS"
 
-#: ../gui/GtkGui.c:634
+#: ../gui/GtkGui.c:650
 msgid "Running BIOS is not supported with Internal HLE BIOS."
 msgstr "內部 HLE BIOS 不支援直接執行。"
 
-#: ../gui/GtkGui.c:664
+#: ../gui/GtkGui.c:681
 msgid "Open PSX Disc Image File"
 msgstr "打開 PS 光碟映像檔"
 
-#: ../gui/GtkGui.c:694
+#: ../gui/GtkGui.c:712
 #, fuzzy
-msgid "PSX Image Files (*.bin, *.img, *.mdf, *.iso, *.cue, *.pbp, *.cbn)"
+msgid ""
+"PSX Image Files (*.bin, *.img, *.mdf, *.iso, *.ecm, *.cue, *.pbp, *.cbn)"
 msgstr "PS 鏡像檔 (*.bin, *.img, *.mdf, *.iso)"
 
-#: ../gui/GtkGui.c:952
+#: ../gui/GtkGui.c:977
 #, c-format
 msgid "Loaded state %s."
 msgstr "已讀取記錄 %s。"
 
-#: ../gui/GtkGui.c:955
+#: ../gui/GtkGui.c:980
 #, c-format
 msgid "Error loading state %s!"
 msgstr "讀取記錄 %s 時出錯。"
 
-#: ../gui/GtkGui.c:966
+#: ../gui/GtkGui.c:1002
 #, c-format
 msgid "Saved state %s."
 msgstr "已存儲記錄 %s"
 
-#: ../gui/GtkGui.c:968
+#: ../gui/GtkGui.c:1004
 #, c-format
 msgid "Error saving state %s!"
 msgstr "存儲記錄 %s 時出錯。"
 
-#: ../gui/GtkGui.c:1007 ../gui/GtkGui.c:1035
+#: ../gui/GtkGui.c:1043 ../gui/GtkGui.c:1071
 msgid "Select State File"
 msgstr "選擇記錄檔案"
 
-#: ../gui/GtkGui.c:1078
+#: ../gui/GtkGui.c:1114
 msgid "Notice"
 msgstr "警告"
 
@@ -1025,19 +1030,70 @@ msgstr "無法關閉 GPU 外掛!"
 msgid "Error closing SIO1 plugin!"
 msgstr "無法關閉 SPU 外掛!"
 
-#: ../libpcsxcore/cdriso.c:423
+#: ../libpcsxcore/cdriso.c:188
+msgid ""
+" -> Compressed CDDA support is not compiled with this version. Such tracks "
+"will be silent."
+msgstr ""
+
+#: ../libpcsxcore/cdriso.c:231
+msgid "Audio file opening failed!\n"
+msgstr ""
+
+#: ../libpcsxcore/cdriso.c:240
+msgid "Couldn't find any audio stream in file\n"
+msgstr ""
+
+#: ../libpcsxcore/cdriso.c:253
+msgid "Audio decoder opening failed. Compressed audio support not available.\n"
+msgstr ""
+
+#: ../libpcsxcore/cdriso.c:270
+msgid ""
+" -> Error allocating audio frame buffer. This track will not be available."
+msgstr ""
+
+#: ../libpcsxcore/cdriso.c:399
+#, c-format
+msgid "Could not allocate memory to decode CDDA TRACK: %s\n"
+msgstr ""
+
+#: ../libpcsxcore/cdriso.c:405
+#, c-format
+msgid "Decoding audio tr#%u (%s)..."
+msgstr ""
+
+#: ../libpcsxcore/cdriso.c:410
+msgid "Buffer overflow..."
+msgstr ""
+
+#. printf("actual %i vs. %i estimated", len1, tri->len_decoded_buffer);
+#. close wb file now and will be opened as rb
+#. change handle to decoded one
+#: ../libpcsxcore/cdriso.c:415
+#, fuzzy
+msgid "OK\n"
+msgstr "確定"
+
+#: ../libpcsxcore/cdriso.c:727
 #, fuzzy, c-format
 msgid ""
 "\n"
 "could not open: %s\n"
 msgstr "無法開啟目錄: \"%s\"\n"
 
-#: ../libpcsxcore/cdriso.c:1043
+#: ../libpcsxcore/cdriso.c:1518
+msgid ""
+"\n"
+"Detected ECM file with proper header and filename suffix.\n"
+msgstr ""
+
+#: ../libpcsxcore/cdriso.c:1573
 #, c-format
 msgid "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"
 msgstr "軌道 %.2d (%s) - 起始位置 %.2d:%.2d:%.2d, 長度 %.2d:%.2d:%.2d\n"
 
-#: ../libpcsxcore/cdriso.c:1064
+#: ../libpcsxcore/cdriso.c:1594
 #, c-format
 msgid "Loaded CD Image: %s"
 msgstr "已加載 CD 映像: %s"
@@ -1234,26 +1290,27 @@ msgstr "無法開啟 BIOS: \"%s\"。使用內部 HLE Bios。\n"
 msgid "Running PCSXR Version %s (%s).\n"
 msgstr "PCSXR 版本 %s (%s) 執行中。\n"
 
-#: ../libpcsxcore/sio.c:843
+#: ../libpcsxcore/sio.c:854
 msgid "Connection closed!\n"
 msgstr "連線被關閉!\n"
 
-#: ../libpcsxcore/sio.c:876
-#, c-format
-msgid "No memory card value was specified - creating a default card %s\n"
+#. TODO: maybe just whine and quit..
+#: ../libpcsxcore/sio.c:887
+#, fuzzy, c-format
+msgid "No memory card value was specified - using a default card %s\n"
 msgstr "未指定記憶卡 - 創建一個新的記憶卡 %s\n"
 
-#: ../libpcsxcore/sio.c:880
+#: ../libpcsxcore/sio.c:891
 #, c-format
 msgid "The memory card %s doesn't exist - creating it\n"
 msgstr "記憶卡 %s 不存在 - 正在創建\n"
 
-#: ../libpcsxcore/sio.c:896
+#: ../libpcsxcore/sio.c:907
 #, c-format
 msgid "Memory card %s failed to load!\n"
 msgstr "記憶卡 %s 讀取失敗!\n"
 
-#: ../libpcsxcore/sio.c:900
+#: ../libpcsxcore/sio.c:911
 #, c-format
 msgid "Loading memory card %s\n"
 msgstr "正在加載記憶卡 %s\n"

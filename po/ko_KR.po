@@ -1,184 +1,179 @@
-# Italian translation of pcsxr
-# Copyright (C) 2010 Giovanni Scafora
-# This file is distributed under the same license as the pcsxr package.
-# Giovanni Scafora <giovanni@archlinux.org>, 2010.
-#
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# msgid ""
 msgid ""
 msgstr ""
-"Project-Id-Version: pcsxr 1.0\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
 "POT-Creation-Date: 2013-12-13 14:14+0400\n"
-"PO-Revision-Date: 2011-06-04 13:43+0400\n"
-"Last-Translator: Delirious <delirious@freemail.hu>\n"
-"Language-Team: Delirious <delirious@freemail.hu>\n"
-"Language: \n"
+"PO-Revision-Date: 2013-12-13 15:08+0900\n"
+"Last-Translator: \n"
+"Language-Team: 99skull <99skull@gmail.com>\n"
+"Language: ko_KR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Hungarian\n"
-"X-Generator: Lokalize 1.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.6\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../data/pcsxr.ui.h:1 ../win32/gui/CheatDlg.c:166
 msgid "Edit Cheat Codes"
-msgstr "Csalás kódok szerkesztése"
+msgstr "치트코드 수정"
 
 #: ../data/pcsxr.ui.h:2
 msgid "<b>Cheat Codes</b>"
-msgstr "<b>Csalás kódok</b>"
+msgstr "<b>치트 코드</b>"
 
 #: ../data/pcsxr.ui.h:3 ../gui/Cheat.c:1146 ../win32/gui/CheatDlg.c:678
 msgid "Cheat Search"
-msgstr "Csalás keresés"
+msgstr "치트 검색"
 
 #: ../data/pcsxr.ui.h:4 ../win32/gui/CheatDlg.c:680
 msgid "Search For:"
-msgstr "A következő keresése:"
+msgstr "찾기:"
 
 #: ../data/pcsxr.ui.h:5 ../win32/gui/CheatDlg.c:681
 msgid "Data Type:"
-msgstr "Adat fajta:"
+msgstr "데이터 유형:"
 
 #: ../data/pcsxr.ui.h:6 ../gui/Cheat.c:678 ../win32/gui/CheatDlg.c:506
 #: ../win32/gui/CheatDlg.c:597 ../win32/gui/CheatDlg.c:682
 msgid "Value:"
-msgstr "Érték:"
+msgstr "값:"
 
 #: ../data/pcsxr.ui.h:7 ../win32/gui/CheatDlg.c:683
 msgid "Data Base:"
-msgstr "Adatbázis:"
+msgstr "Data Base:"
 
 #: ../data/pcsxr.ui.h:8 ../win32/gui/CheatDlg.c:684
 msgid "To:"
-msgstr "Ide:"
+msgstr "To:"
 
 #: ../data/pcsxr.ui.h:9 ../win32/gui/CheatDlg.c:504
 msgid "Freeze"
-msgstr "Fagyasztás"
+msgstr "고정"
 
 #: ../data/pcsxr.ui.h:10 ../win32/gui/CheatDlg.c:595
 msgid "Modify"
-msgstr "Módosítás"
+msgstr "수정"
 
 #: ../data/pcsxr.ui.h:11
 msgid "Copy"
-msgstr "Másolás"
+msgstr "복사"
 
 #: ../data/pcsxr.ui.h:12
 msgid "label_resultsfound"
-msgstr "címke_eredmény találva"
+msgstr "라벨_결과 발견"
 
 #: ../data/pcsxr.ui.h:13
 msgid "Search"
-msgstr "Keresés"
+msgstr "검색"
 
 #: ../data/pcsxr.ui.h:14
 msgid "Restart"
-msgstr "Újraindítás"
+msgstr "재시작"
 
 #: ../data/pcsxr.ui.h:15
 msgid "<b>Cheat Search</b>"
-msgstr "<b>Csalás keresés</b>"
+msgstr "<b>치트 검색</b>"
 
 #: ../data/pcsxr.ui.h:16 ../gui/ConfDlg.c:113
 msgid "Configure PCSXR"
-msgstr "PCSXR beállítása"
+msgstr "PCSXR 설정"
 
 #: ../data/pcsxr.ui.h:17
 msgid "Graphics:"
-msgstr "Kép:"
+msgstr "그래픽:"
 
 #: ../data/pcsxr.ui.h:18
 msgid "Sound:"
-msgstr "Hang:"
+msgstr "사운드:"
 
 #: ../data/pcsxr.ui.h:19
-#, fuzzy
 msgid "Controller 1:"
-msgstr "Egyes irányító"
+msgstr "콘트롤러 1:"
 
 #: ../data/pcsxr.ui.h:20
 msgid "Controller 2:"
-msgstr "2. irányító:"
+msgstr "콘트롤러 2:"
 
 #: ../data/pcsxr.ui.h:21
 msgid "CD-ROM:"
-msgstr "CD-ROM:"
+msgstr "CD-롬:"
 
 #: ../data/pcsxr.ui.h:22
 msgid "Search in:"
-msgstr "Keresés itt:"
+msgstr "검색:"
 
 #: ../data/pcsxr.ui.h:23
 msgid "Select Folder to Search"
-msgstr "Keresési mappa kiválasztása"
+msgstr "찾을 폴더 선택"
 
 #: ../data/pcsxr.ui.h:24
-#, fuzzy
 msgid "Link cable:"
-msgstr "Bekapcsolás"
+msgstr "케이블 연결:"
 
 #: ../data/pcsxr.ui.h:25
 msgid "<b>Plugins</b>"
-msgstr "<b>Plugin</b>"
+msgstr "<b>플러그인</b>"
 
 #: ../data/pcsxr.ui.h:26
 msgid "BIOS:"
-msgstr ""
+msgstr "바이오스:"
 
 #: ../data/pcsxr.ui.h:27
 msgid "<b>BIOS</b>"
-msgstr "<b>BIOS</b>"
+msgstr "<b>바이오스</b>"
 
 #: ../data/pcsxr.ui.h:28
 msgid "Configure CPU"
-msgstr "Processzor beállítások"
+msgstr "CPU설정"
 
 #: ../data/pcsxr.ui.h:29
 msgid "SPU IRQ Always Enabled"
-msgstr "Hang IRQ mindig bekacsolva"
+msgstr "SPU IRQ 항상 사용"
 
 #: ../data/pcsxr.ui.h:30
 msgid "Black & White Movies"
-msgstr "Fekete-fehér videók"
+msgstr "흑백 영상"
 
 #: ../data/pcsxr.ui.h:31 ../gui/Plugin.c:253
 #, c-format
 msgid "SIO IRQ Always Enabled"
-msgstr "SIO IRQ mindig bekapcsolva"
+msgstr "SIO IRQ 항상 사용"
 
 #: ../data/pcsxr.ui.h:32
 msgid "Disable XA Decoding"
-msgstr "XA kódolás kikapcsolása"
+msgstr "XA 복호화 사용안함"
 
 #: ../data/pcsxr.ui.h:33
 msgid "Disable CD Audio"
-msgstr "CD hang kikapcsolása"
+msgstr "CD 오디오 끄기"
 
 #: ../data/pcsxr.ui.h:34 ../win32/gui/WndMain.c:1346
 msgid "Slow Boot"
-msgstr ""
+msgstr "느린 부트"
 
 #: ../data/pcsxr.ui.h:35
 msgid "Enable Interpreter CPU"
-msgstr "Processzor interpreter használata"
+msgstr "인터프리터 CPU 사용"
 
 #: ../data/pcsxr.ui.h:36 ../win32/gui/WndMain.c:1349
 msgid "Enable Console Output"
-msgstr "Konzol kimenet bekapcsolása"
+msgstr "콘솔 출력 사용"
 
 #: ../data/pcsxr.ui.h:37 ../win32/gui/WndMain.c:1350
 msgid "Enable Debugger"
-msgstr "Hibakereső bekapcsolása"
+msgstr "디버거 사용"
 
 #: ../data/pcsxr.ui.h:38 ../win32/gui/WndMain.c:1352
 msgid "Parasite Eve 2, Vandal Hearts 1/2 Fix"
-msgstr "Parasite Eve 2, Vandal Hearts 1/2 javítás"
+msgstr "패러사이트 이브2, 반달하츠 1/2 수정"
 
 #: ../data/pcsxr.ui.h:39 ../win32/gui/WndMain.c:1353
 msgid "InuYasha Sengoku Battle Fix"
-msgstr "InuYasha Sengoku Battle javítás"
+msgstr "이누야사 전국 배틀 수정"
 
 #: ../data/pcsxr.ui.h:40
 msgid "No memcard (COTS password option)"
@@ -186,19 +181,19 @@ msgstr ""
 
 #: ../data/pcsxr.ui.h:41 ../win32/gui/WndMain.c:1354
 msgid "Widescreen (GTE Hack)"
-msgstr ""
+msgstr "와이드화면 (GTE핵)"
 
 #: ../data/pcsxr.ui.h:42
 msgid "<b>Options</b>"
-msgstr "<b>Beállítások</b>"
+msgstr "<b>옵션</b>"
 
 #: ../data/pcsxr.ui.h:43 ../win32/gui/WndMain.c:1347
 msgid "Autodetect"
-msgstr "Automatikus észlelés"
+msgstr "자동감지"
 
 #: ../data/pcsxr.ui.h:44
 msgid "<b>System Type</b>"
-msgstr "<b>Rendszer típus</b>"
+msgstr "<b>시스템 유형</b>"
 
 #: ../data/pcsxr.ui.h:45
 msgid "PCSXR"
@@ -206,308 +201,303 @@ msgstr "PCSXR"
 
 #: ../data/pcsxr.ui.h:46
 msgid "_File"
-msgstr "_Fájl"
+msgstr "_파일"
 
 #: ../data/pcsxr.ui.h:47
 msgid "Run _CD"
-msgstr "CD _indítása"
+msgstr "_CD 실행"
 
 #: ../data/pcsxr.ui.h:48
 msgid "Run _ISO..."
-msgstr "ISO _futtatása......"
+msgstr "_ISO 실행"
 
 #: ../data/pcsxr.ui.h:49
 msgid "Run _BIOS"
-msgstr "BIOS _futtatása"
+msgstr "_BIOS 실행"
 
 #: ../data/pcsxr.ui.h:50
 msgid "Run _EXE..."
-msgstr "EXE _futtatása..."
+msgstr "_EXE 실행"
 
 #: ../data/pcsxr.ui.h:51
 msgid "E_xit"
-msgstr "E_xit"
+msgstr "_종료"
 
 #: ../data/pcsxr.ui.h:52
 msgid "_Emulator"
-msgstr "_Emulátor"
+msgstr "_에뮬레이터"
 
 #: ../data/pcsxr.ui.h:53
 msgid "_Continue"
-msgstr "_Folytatás"
+msgstr "_계속"
 
 #: ../data/pcsxr.ui.h:54
 msgid "_Reset"
-msgstr "_Alapra állítás"
+msgstr "_재시작"
 
 #: ../data/pcsxr.ui.h:55
-#, fuzzy
 msgid "_Shutdown"
-msgstr "Jobbra le"
+msgstr "_중단"
 
 #: ../data/pcsxr.ui.h:56
 msgid "S_witch ISO..."
-msgstr "S_ami ISO..."
+msgstr "_ISO 교체"
 
 #: ../data/pcsxr.ui.h:57
 msgid "_Save State"
-msgstr "_Állás mentés"
+msgstr "_상태 저장"
 
 #: ../data/pcsxr.ui.h:58
 msgid "Slot _1"
-msgstr "Slot _1"
+msgstr "슬롯_1"
 
 #: ../data/pcsxr.ui.h:59
 msgid "Slot _2"
-msgstr "Slot _2"
+msgstr "슬롯_2"
 
 #: ../data/pcsxr.ui.h:60
 msgid "Slot _3"
-msgstr "Slot _3"
+msgstr "슬롯_3"
 
 #: ../data/pcsxr.ui.h:61
 msgid "Slot _4"
-msgstr "Slot _4"
+msgstr "슬롯_4"
 
 #: ../data/pcsxr.ui.h:62
 msgid "Slot _5"
-msgstr "Slot _5"
+msgstr "슬롯_5"
 
 #: ../data/pcsxr.ui.h:63
 msgid "Slot _6"
-msgstr "Slot _6"
+msgstr "슬롯_6"
 
 #: ../data/pcsxr.ui.h:64
 msgid "Slot _7"
-msgstr "Slot _7"
+msgstr "슬롯_7"
 
 #: ../data/pcsxr.ui.h:65
 msgid "Slot _8"
-msgstr "Slot _8"
+msgstr "슬롯_8"
 
 #: ../data/pcsxr.ui.h:66
 msgid "Slot _9"
-msgstr "Slot _9"
+msgstr "슬롯_9"
 
 #: ../data/pcsxr.ui.h:67
 msgid "_Other..."
-msgstr "_Egyebek..."
+msgstr "_기타"
 
 #: ../data/pcsxr.ui.h:68
 msgid "_Load State"
-msgstr "_Állás betöltése"
+msgstr "_상태 로드"
 
 #: ../data/pcsxr.ui.h:69
 msgid "_Configuration"
-msgstr "_Beállítások"
+msgstr "_환경설정"
 
 #: ../data/pcsxr.ui.h:70
 msgid "_Plugins & BIOS..."
-msgstr "_Pluginok és BIOS..."
+msgstr "_플러그인 & 바이오스"
 
 #: ../data/pcsxr.ui.h:71
 msgid "_Graphics..."
-msgstr "_Kép..."
+msgstr "_그래픽"
 
 #: ../data/pcsxr.ui.h:72
 msgid "_Sound..."
-msgstr "_Hang..."
+msgstr "_사운드"
 
 #: ../data/pcsxr.ui.h:73
 msgid "CD-_ROM..."
-msgstr "CD-_ROM..."
+msgstr "_CD-롬"
 
 #: ../data/pcsxr.ui.h:74
 msgid "C_ontrollers..."
-msgstr "C_ontrollers..."
+msgstr "_콘트롤러"
 
 #: ../data/pcsxr.ui.h:75
-#, fuzzy
 msgid "_Link cable..."
-msgstr "Bekapcsolás"
+msgstr "_케이블 연결"
 
 #: ../data/pcsxr.ui.h:76
 msgid "_Netplay..."
-msgstr "_Netplay..."
+msgstr "_넷플레이"
 
 #: ../data/pcsxr.ui.h:77
 msgid "_CPU..."
-msgstr "_Processzor..."
+msgstr "_CPU"
 
 #: ../data/pcsxr.ui.h:78
 msgid "_Memory Cards..."
-msgstr "_Memória kártyák..."
+msgstr "_메모리 카드"
 
 #: ../data/pcsxr.ui.h:79
 msgid "Chea_t"
-msgstr "Chea_t"
+msgstr "_치트"
 
 #: ../data/pcsxr.ui.h:80
 msgid "_Browse..."
-msgstr "_Tallózás..."
+msgstr "_찾아보기"
 
 #: ../data/pcsxr.ui.h:81
 msgid "_Search..."
-msgstr "_Keresés..."
+msgstr "_검색"
 
 #: ../data/pcsxr.ui.h:82
 msgid "Memory _Dump"
-msgstr "Memória _mentés"
+msgstr "_메모리 덤프"
 
 #: ../data/pcsxr.ui.h:83
 msgid "_Help"
-msgstr "_Súgó"
+msgstr "_도움말"
 
 #: ../data/pcsxr.ui.h:84
 msgid "_About PCSXR..."
-msgstr "_A PCSXR névjegye..."
+msgstr "_PCSXR에 대해"
 
 #: ../data/pcsxr.ui.h:85
 msgid "Run CD"
-msgstr "CD indítása"
+msgstr "CD 구동"
 
 #: ../data/pcsxr.ui.h:86
 msgid "Run ISO Image"
-msgstr "ISO képfájl futtatása"
+msgstr "ISO 구동"
 
 #: ../data/pcsxr.ui.h:87
 msgid "Continue Emulation"
-msgstr "Emuláció folytatása"
+msgstr "에뮬레이션 계속"
 
 #: ../data/pcsxr.ui.h:88
 msgid "Switch ISO Image"
-msgstr "ISO képfájl csere"
+msgstr "ISO 교체"
 
 #: ../data/pcsxr.ui.h:89
 msgid "Configure Memory Cards"
-msgstr "Memóriakártyák beállításai"
+msgstr "메모리카드 설정"
 
 #: ../data/pcsxr.ui.h:90
 msgid "Configure Graphics"
-msgstr "Grafikai beállítások"
+msgstr "그래픽 설정"
 
 #: ../data/pcsxr.ui.h:91 ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:1
 msgid "Configure Sound"
-msgstr "Hang beállítások"
+msgstr "사운드 설정"
 
 #: ../data/pcsxr.ui.h:92
 msgid "Configure CD-ROM"
-msgstr "CD-ROM beállítás"
+msgstr "CD롬 설정"
 
 #: ../data/pcsxr.ui.h:93
 msgid "Configure Controllers"
-msgstr "Irányítók beállítása"
+msgstr "콘트롤러 설정"
 
 #: ../data/pcsxr.ui.h:94
 msgid "New"
-msgstr "Új"
+msgstr "새로운"
 
 #: ../data/pcsxr.ui.h:95
 msgid "Format"
-msgstr "Formátum"
+msgstr "포맷"
 
 #: ../data/pcsxr.ui.h:96
 msgid "Un/Delete"
-msgstr "Nem/törlés"
+msgstr "꺼내기/삭제"
 
 #: ../data/pcsxr.ui.h:97
 msgid "<b>Memory Card 1</b>"
-msgstr "<b>Memória kártya 1</b>"
+msgstr "<b>메모리카드 1</b>"
 
 #: ../data/pcsxr.ui.h:98
 msgid "<b>Memory Card 2</b>"
-msgstr "<b>Memória kártya 2</b>"
+msgstr "<b>메모리카드 2</b>"
 
 #: ../data/pcsxr.ui.h:99 ../gui/DebugMemory.c:152
 msgid "Memory Dump"
-msgstr "Mentett memóriatartalom"
+msgstr "메모리 덤프"
 
 #: ../data/pcsxr.ui.h:100 ../gui/DebugMemory.c:238
 msgid "Address (Hexadecimal):"
-msgstr "Címzés (hexadecimális):"
+msgstr "주소 (16진수):"
 
 #: ../data/pcsxr.ui.h:101
 msgid "Raw Dump..."
-msgstr "Nyers mentés..."
+msgstr "Raw 덤프"
 
 #: ../data/pcsxr.ui.h:102
 msgid "Patch Memory..."
-msgstr "Memória hibajavítás..."
+msgstr "메모리 패치"
 
 #: ../data/pcsxr.ui.h:103
 msgid "Configure NetPlay"
-msgstr "Internetes játék beállításai"
+msgstr "넷플레이 설정"
 
 #: ../data/pcsxr.ui.h:104
 msgid "<b>NetPlay</b>"
-msgstr "<b>Internetes játék</b>"
+msgstr "<b>넷플레이</b>"
 
 #: ../data/pcsxr.ui.h:105
-#, fuzzy
 msgid "NTSC"
-msgstr ""
-"NTSC\n"
-"PAL"
+msgstr "NTSC"
 
 #: ../data/pcsxr.ui.h:106
 msgid "PAL"
-msgstr ""
+msgstr "PAL"
 
 #: ../data/pcsxr.ui.h:107 ../win32/gui/CheatDlg.c:692
 msgid "8-bit"
-msgstr "8 bit"
+msgstr "8비트"
 
 #: ../data/pcsxr.ui.h:108 ../win32/gui/CheatDlg.c:693
 msgid "16-bit"
-msgstr "16 bit"
+msgstr "16비트"
 
 #: ../data/pcsxr.ui.h:109 ../win32/gui/CheatDlg.c:694
 msgid "32-bit"
-msgstr "32 bit"
+msgstr "32비트"
 
 #: ../data/pcsxr.ui.h:110 ../win32/gui/CheatDlg.c:402
 msgid "Equal Value"
-msgstr "Azonos érték"
+msgstr "같은 값"
 
 #: ../data/pcsxr.ui.h:111 ../win32/gui/CheatDlg.c:403
 msgid "Not Equal Value"
-msgstr "Eltérő érték"
+msgstr "다른 값"
 
 #: ../data/pcsxr.ui.h:112 ../win32/gui/CheatDlg.c:404
 msgid "Range"
-msgstr "Tartomány"
+msgstr "범위"
 
 #: ../data/pcsxr.ui.h:113 ../win32/gui/CheatDlg.c:407
 msgid "Increased By"
-msgstr "Megnövelve"
+msgstr "만큼 증가"
 
 #: ../data/pcsxr.ui.h:114 ../win32/gui/CheatDlg.c:408
 msgid "Decreased By"
-msgstr "Csökkentve"
+msgstr "만큼 감소"
 
 #: ../data/pcsxr.ui.h:115 ../win32/gui/CheatDlg.c:409
 msgid "Increased"
-msgstr "Növelve"
+msgstr "증가한 값"
 
 #: ../data/pcsxr.ui.h:116 ../win32/gui/CheatDlg.c:410
 msgid "Decreased"
-msgstr "Csökkentve"
+msgstr "감소한 값"
 
 #: ../data/pcsxr.ui.h:117 ../win32/gui/CheatDlg.c:411
 msgid "Different"
-msgstr "Különböző"
+msgstr "변한 값"
 
 #: ../data/pcsxr.ui.h:118 ../win32/gui/CheatDlg.c:412
 msgid "No Change"
-msgstr "Nincs változtatás"
+msgstr "안변한 값"
 
 #: ../data/pcsxr.ui.h:119 ../win32/gui/CheatDlg.c:695
 msgid "Decimal"
-msgstr "Decimális"
+msgstr "10진수"
 
 #: ../data/pcsxr.ui.h:120 ../win32/gui/CheatDlg.c:696
 msgid "Hexadecimal"
-msgstr "Hexadecimális"
+msgstr "16진수"
 
 #: ../gui/AboutDlg.c:72
 msgid ""
@@ -515,6 +505,9 @@ msgid ""
 "(C) 2005-2009 PCSX-df Team\n"
 "(C) 2009-2013 PCSX-Reloaded Team"
 msgstr ""
+"(C) 1999-2003 PCSX 팀\n"
+"(C) 2005-2009 PCSX-df 팀\n"
+"(C) 2009-2013 PCSX-Reloaded 팀"
 
 #: ../gui/AboutDlg.c:77
 msgid ""
@@ -532,134 +525,132 @@ msgid ""
 "this program; if not, write to the Free Software Foundation, Inc., 51 "
 "Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA."
 msgstr ""
-"Ez a program szabad szoftver; terjeszthető illetve módosítható a Free "
-"Software Foundation által kiadott GNU General Public License dokumentumában "
-"leírtak; akár a licenc 2-es, akár (tetszőleges) későbbi változata szerint.\n"
+"이 프로그램은 무료 소프트웨어입니다; 무료 소프트웨어 기관에서 배포된 GNU 일"
+"반 공용 라이센스에 따른 재배포 및 수정이 가능합니다; 또한 라이센스 버전2 혹"
+"은 (당신의 선택에 따라) 그 이상의 버전도 마찬가지입니다.\n"
 "\n"
-"Ez a program abban a reményben kerül közreadásra, hogy hasznos lesz, de "
-"minden egyéb GARANCIA NÉLKÜL, az ELADHATÓSÁGRA vagy VALAMELY CÉLRA VALÓ "
-"ALKALMAZHATÓSÁGRA való származtatott garanciát is beleértve. További "
-"részleteket a GNU General Public License tartalmaz.\n"
+"이 프로그램은 유용하게 쓰이길 바라는 마음으로 배포되었습니다, 그러나 상품성 "
+"또는 특정 목적의 적합성에 대한 어떤 묵시적 보장도 할 수 없습니다. 자세한 내용"
+"은 GNU 일반 공용 라이센스를 보세요.\n"
 "\n"
-"A felhasználónak a programmal együtt meg kell kapnia a GNU General Public "
-"License egy példányát; ha mégsem kapta meg, akkor írjon a következő címre: "
-"Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, "
-"MA02110-1301 USA."
+"당신은 이 프로그램과 GNU 일반 공용 라이센스를 함께 받아야만 합니다. 만약 그렇"
+"지 않으면, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA 에 있"
+"는 무료 소프트웨어 기관으로 알려주세요."
 
 #: ../gui/AboutDlg.c:100 ../win32/gui/AboutDlg.c:46
 msgid "About"
-msgstr "A program névjegye"
+msgstr "PCSXR에 대해서"
 
 #: ../gui/AboutDlg.c:109
 msgid "translator-credits"
-msgstr "Magyarítást Delirious készítette <delirious@freemail.hu>"
+msgstr "번역한 사람들"
 
 #: ../gui/AboutDlg.c:110
 msgid "A PlayStation emulator."
-msgstr "A PlayStation emulátor."
+msgstr "플레이스테이션 에뮬레이터."
 
 #: ../gui/Cheat.c:101 ../win32/gui/CheatDlg.c:116
 msgid "Add New Cheat"
-msgstr "Új csalás felvétele"
+msgstr "새 치트 추가"
 
 #: ../gui/Cheat.c:109 ../gui/Cheat.c:193
 msgid "Cheat Description:"
-msgstr "Csalás leírás:"
+msgstr "치트 설명:"
 
 #: ../gui/Cheat.c:117 ../gui/Cheat.c:202 ../win32/gui/CheatDlg.c:68
 #: ../win32/gui/CheatDlg.c:118
 msgid "Cheat Code:"
-msgstr "Csalás kód:"
+msgstr "치트 코드:"
 
 #: ../gui/Cheat.c:147 ../gui/Cheat.c:242 ../gui/LnxMain.c:423
 #: ../win32/gui/ConfigurePlugins.c:336
 msgid "Error"
-msgstr "Hiba"
+msgstr "에러"
 
 #: ../gui/Cheat.c:147 ../gui/Cheat.c:242 ../win32/gui/CheatDlg.c:91
 #: ../win32/gui/CheatDlg.c:132
 msgid "Invalid cheat code!"
-msgstr "Érvénytelen csalás kód!"
+msgstr "사용할 수 없는 코드!"
 
 #: ../gui/Cheat.c:185 ../win32/gui/CheatDlg.c:66
 msgid "Edit Cheat"
-msgstr "Csalás szerkesztése"
+msgstr "치트 수정"
 
 #: ../gui/Cheat.c:313
 msgid "Open Cheat File"
-msgstr "Csalás fájl megnyitása"
+msgstr "치트파일 열기"
 
 #: ../gui/Cheat.c:324 ../gui/Cheat.c:374
 msgid "PCSXR Cheat Code Files (*.cht)"
-msgstr "PCSXR csalás kód fájlok (*.cht)"
+msgstr "PCSXR 치트코드 파일 (*.cht)"
 
 #: ../gui/Cheat.c:357
 msgid "Save Cheat File"
-msgstr "Csalás fájl mentése"
+msgstr "치트파일 저장"
 
 #: ../gui/Cheat.c:423
 msgid "All Files (*.*)"
-msgstr "Minden fájl (*.*)"
+msgstr "모든 파일 (*.*)"
 
 #: ../gui/Cheat.c:434
 msgid "Cheat Codes"
-msgstr "Csalás kódok"
+msgstr "치트 코드"
 
 #: ../gui/Cheat.c:441
 msgid "Enable"
-msgstr "Bekapcsolás"
+msgstr "사용"
 
 #: ../gui/Cheat.c:449 ../win32/gui/CheatDlg.c:185
 msgid "Description"
-msgstr "Ismertető"
+msgstr "설명"
 
 #: ../gui/Cheat.c:577 ../win32/gui/CheatDlg.c:457
 msgid "Too many addresses found."
-msgstr "Túl sok cím található."
+msgstr "주소가 너무 많습니다."
 
 #: ../gui/Cheat.c:586 ../win32/gui/CheatDlg.c:466
 #, c-format
 msgid "%.8X    Current: %u (%.2X), Previous: %u (%.2X)"
-msgstr "%.8X    Jelenlegi: %u (%.2X), Előző: %u (%.2X)"
+msgstr "%.8X    현재: %u (%.2X), 이전: %u (%.2X)"
 
 #: ../gui/Cheat.c:591 ../win32/gui/CheatDlg.c:471
 #, c-format
 msgid "%.8X    Current: %u (%.4X), Previous: %u (%.4X)"
-msgstr "%.8X    Jelenlegi: %u (%.4X), Előző: %u (%.4X)"
+msgstr "%.8X    현재: %u (%.4X), 이전: %u (%.4X)"
 
 #: ../gui/Cheat.c:596 ../win32/gui/CheatDlg.c:476
 #, c-format
 msgid "%.8X    Current: %u (%.8X), Previous: %u (%.8X)"
-msgstr "%.8X    Jelenlegi: %u (%.8X), Előző: %u (%.8X)"
+msgstr "%.8X    현재: %u (%.8X), 이전: %u (%.8X)"
 
 #: ../gui/Cheat.c:611 ../win32/gui/CheatDlg.c:492
 #, c-format
 msgid "Founded Addresses: %d"
-msgstr "Cím találatok: %d"
+msgstr "발견된 주소: %d"
 
 #: ../gui/Cheat.c:619 ../win32/gui/CheatDlg.c:448
 msgid "Enter the values and start your search."
-msgstr "Gépeld be a kívánt értékeket és indítsd el a keresést."
+msgstr "값을 입력하고 검색을 시작하세요."
 
 #: ../gui/Cheat.c:661
 msgid "Freeze value"
-msgstr "Érték fagyasztása"
+msgstr "멈춤 값"
 
 #: ../gui/Cheat.c:667 ../win32/gui/CheatDlg.c:67 ../win32/gui/CheatDlg.c:117
 msgid "Description:"
-msgstr "Ismertető:"
+msgstr "설명:"
 
 #: ../gui/Cheat.c:760
 msgid "Modify value"
-msgstr "Érték módosítása"
+msgstr "수정된 값"
 
 #: ../gui/Cheat.c:768
 msgid "New value:"
-msgstr "Új érték:"
+msgstr "새로운 값:"
 
 #: ../gui/Cheat.c:1152
 msgid "Search Results"
-msgstr "Keresési találatok"
+msgstr "검색 결과"
 
 #. TODO Check whether configuration is required when we choose the plugin, and set the state of the
 #. button appropriately. New gtk tooltip API should allow us to put a tooltip explanation for
@@ -669,171 +660,170 @@ msgstr "Keresési találatok"
 #: ../gui/ConfDlg.c:256 ../gui/ConfDlg.c:277 ../gui/ConfDlg.c:298
 #: ../gui/ConfDlg.c:319 ../gui/ConfDlg.c:340 ../gui/ConfDlg.c:399
 msgid "No configuration required"
-msgstr "Beállítás nem szükséges"
+msgstr "설정이 필요 없습니다."
 
 #: ../gui/ConfDlg.c:256 ../gui/ConfDlg.c:277 ../gui/ConfDlg.c:298
 #: ../gui/ConfDlg.c:319 ../gui/ConfDlg.c:340 ../gui/ConfDlg.c:399
 msgid "This plugin doesn't need to be configured."
-msgstr "Ezt a plugint nem kell beállítani."
+msgstr "이 플러그인은 설정이 필요없습니다."
 
 #: ../gui/ConfDlg.c:402
 msgid "Please select a plugin."
-msgstr ""
+msgstr "플러그인을 선택하세요."
 
 #: ../gui/ConfDlg.c:647
 #, c-format
 msgid "Could not open BIOS directory: '%s'\n"
-msgstr "A BIOS könyvtár nem nyitható meg: '%s'\n"
+msgstr "바이오스 폴더를 열수 없습니다: '%s'\n"
 
 #: ../gui/ConfDlg.c:698 ../gui/ConfDlg.c:801 ../gui/LnxMain.c:168
 #, c-format
 msgid "Could not open directory: '%s'\n"
-msgstr "A könyvtár nem nyitható meg: '%s'\n"
+msgstr "폴더를 열 수 없습니다: '%s'\n"
 
 #. The BIOS list always contains the PCSXR internal BIOS
 #: ../gui/ConfDlg.c:769
 msgid "Simulate PSX BIOS"
-msgstr "PSX BIOS szimulálása"
+msgstr "PSX 바이오스 시뮬레이트"
 
 #: ../gui/DebugMemory.c:160
 msgid "Start Address (Hexadecimal):"
-msgstr "Címzés kezdése (hexadecimális): "
+msgstr "시작 주소 (16진수):"
 
 #: ../gui/DebugMemory.c:171
 msgid "Length (Decimal):"
-msgstr "Hossz (tizedes):"
+msgstr "길이 (10진수):"
 
 #: ../gui/DebugMemory.c:197
 msgid "Dump to File"
-msgstr "Mentés fájlba"
+msgstr "파일로 덤프"
 
 #: ../gui/DebugMemory.c:212
 #, c-format
 msgid "Error writing to %s!"
-msgstr "%s írása közben hiba lépett fel!"
+msgstr "%s에 쓰기 에러!"
 
 #: ../gui/DebugMemory.c:230
 msgid "Memory Patch"
-msgstr "Memória hibajavítás"
+msgstr "메모리 패치"
 
 #: ../gui/DebugMemory.c:249
 msgid "Value (Hexa string):"
-msgstr "Érték (hexa sztring):"
+msgstr "값 (16진수 문자열):"
 
 #: ../gui/DebugMemory.c:318
 msgid "Memory Viewer"
-msgstr "Memória betekintő"
+msgstr "메모리 뷰어"
 
 #: ../gui/DebugMemory.c:324
 msgid "Address"
-msgstr "Címzés"
+msgstr "주소"
 
 #: ../gui/DebugMemory.c:342
 msgid "Text"
-msgstr "Szöveg"
+msgstr "텍스트"
 
 #: ../gui/GtkGui.c:149
 msgid "Ready"
-msgstr "Kész"
+msgstr "준비"
 
 #: ../gui/GtkGui.c:194
 msgid "Emulation Paused."
-msgstr "Emuláció szüneteltetve."
+msgstr "에뮬레이션 중지됨."
 
 #: ../gui/GtkGui.c:544
 msgid "Select PSX EXE File"
-msgstr "PSX EXE fájl választás"
+msgstr "PSX EXE 파일 선택"
 
 #: ../gui/GtkGui.c:557
 msgid "PlayStation Executable Files"
-msgstr "PlayStation futtatható fájlok"
+msgstr "플레이스테이션 실행 파일"
 
 #: ../gui/GtkGui.c:561 ../gui/GtkGui.c:717 ../win32/gui/WndMain.c:1506
 #: ../win32/gui/WndMain.c:1587
 msgid "All Files"
-msgstr "Minden fájl"
+msgstr "모든 파일"
 
 #: ../gui/GtkGui.c:595
 msgid "Not a valid PSX file"
-msgstr "Nem megfelelő PSX fájl"
+msgstr "PSX 파일이 아닙니다"
 
 #: ../gui/GtkGui.c:595
 msgid "The file does not appear to be a valid Playstation executable"
-msgstr "A fájl nem tűnik PlayStation futtatható fájlnak"
+msgstr "이 파일은 유효한 플레이스테이션 실행파일이 아닌 것 같습니다"
 
 #: ../gui/GtkGui.c:624 ../gui/GtkGui.c:799
 msgid "CD ROM failed"
-msgstr "CD ROM hiba"
+msgstr "CD 롬 실패"
 
 #: ../gui/GtkGui.c:624 ../gui/GtkGui.c:799 ../win32/gui/WndMain.c:475
 #: ../win32/gui/WndMain.c:529 ../win32/gui/WndMain.c:599
 #, c-format
 msgid "The CD does not appear to be a valid Playstation CD"
-msgstr "Úgy tűnik a CD lemez nem PlayStation CD formátum"
+msgstr "유효한 플스CD 같지 않습니다"
 
 #: ../gui/GtkGui.c:635 ../gui/GtkGui.c:810 ../win32/gui/WndMain.c:485
 #: ../win32/gui/WndMain.c:539 ../win32/gui/WndMain.c:609
 #, c-format
 msgid "Could not load CD-ROM!"
-msgstr "CD-ROM betöltése sikertelen!"
+msgstr "CD롬을 읽을 수 없습니다!"
 
 #: ../gui/GtkGui.c:635 ../gui/GtkGui.c:810
 msgid "The CD-ROM could not be loaded"
-msgstr "CD-ROM nem tölthető be"
+msgstr "CD롬이 로드되지 못했습니다"
 
 #: ../gui/GtkGui.c:650
 msgid "Could not run BIOS"
-msgstr "BIOS nem futtatható"
+msgstr "바이오스 구동실패"
 
 #: ../gui/GtkGui.c:650
 msgid "Running BIOS is not supported with Internal HLE BIOS."
-msgstr "BIOS használata nem támogatott belső HLE BIOS esetén."
+msgstr "내부 HLE바이오스는 바이오스 구동을 할 수 없습니다."
 
 #: ../gui/GtkGui.c:681
 msgid "Open PSX Disc Image File"
-msgstr "PSX lemez képfájl megnyitása"
+msgstr "PSX 이미지 파일 열기"
 
 #: ../gui/GtkGui.c:712
 #, fuzzy
 msgid ""
 "PSX Image Files (*.bin, *.img, *.mdf, *.iso, *.ecm, *.cue, *.pbp, *.cbn)"
-msgstr "PSX képfájlok (*.bin, *.img, *.mdf, *.iso)"
+msgstr "PSX 이미지 파일 (*.bin, *.img, *.mdf, *.iso, *.cue, *.pbp, *.cbn)"
 
 #: ../gui/GtkGui.c:977
 #, c-format
 msgid "Loaded state %s."
-msgstr "Betöltött állás %s."
+msgstr "상태 %s 불러오기."
 
 #: ../gui/GtkGui.c:980
 #, c-format
 msgid "Error loading state %s!"
-msgstr "Hiba a mentett állás betöltése közben %s!"
+msgstr "상태 %s 불러오기 에러!"
 
 #: ../gui/GtkGui.c:1002
 #, c-format
 msgid "Saved state %s."
-msgstr "Mentett állás %s."
+msgstr "상태 %s 저장."
 
 #: ../gui/GtkGui.c:1004
 #, c-format
 msgid "Error saving state %s!"
-msgstr "Hiba az állás mentése közben %s!"
+msgstr "상태 %s 저장 에러!"
 
 #: ../gui/GtkGui.c:1043 ../gui/GtkGui.c:1071
 msgid "Select State File"
-msgstr "Állás mentés választás"
+msgstr "상태 파일 선택"
 
 #: ../gui/GtkGui.c:1114
 msgid "Notice"
-msgstr "Megjegyzés"
+msgstr "주의"
 
 #: ../gui/LnxMain.c:62
 #, c-format
 msgid "Creating memory card: %s\n"
-msgstr "Memória kártya létrehozása: %s\n"
+msgstr "메모리카드 만들기: %s\n"
 
 #: ../gui/LnxMain.c:329
-#, fuzzy
 msgid ""
 " pcsxr [options] [file]\n"
 "\toptions:\n"
@@ -847,17 +837,17 @@ msgid ""
 "\t-h -help\tDisplay this message\n"
 "\tfile\t\tLoads file\n"
 msgstr ""
-" pcsxr [beállítások] [fájl]\n"
-"\toptions:\n"
-"\t-runcd\t\tCD-ROM futtatása\n"
-"\t-cdfile FILE\tCD képfájl futtatása\n"
-"\t-nogui\t\tNe nyíljon meg a GTK GUI\n"
-"\t-cfg FILE\tA kívánt konfigurációs fájl betöltése (alap: ~/.pcsxr/pcsxr."
-"cfg)\n"
-"\t-psxout\t\tPSX kimenet bekapcsolása\n"
-"\t-load STATENUM\tÁllásmentés betöltése STATENUM (1-9)\n"
-"\t-h -help\tAz üzenet megjelenítése\n"
-"\tfile\t\tFájl betöltése\n"
+" pcsxr [options] [file]\n"
+"\t옵션들:\n"
+"\t-cd구동\t\tCD롬 구동\n"
+"\t-cd파일\tCD 이미지 구동\n"
+"\t-gui구동\t\tGTK GUI를 열지 마세요\n"
+"\t-cfg 파일\t원하는 환경설정 파일 불러오기 (기본값: ~/.pcsxr/pcsxr.cfg)\n"
+"\t-psx 출력\t\tPSX 출력 사용\n"
+"\t-느린부트\t바이오스 로고 사용\n"
+"\t-상태NUM 불러오기\t상태 STATENUM (1-9) 불러오기\n"
+"\t-h -help\t이 메시지를 표시\n"
+"\t파일\t\t파일 불러오기\n"
 
 #: ../gui/LnxMain.c:366
 #, c-format
@@ -865,184 +855,181 @@ msgid ""
 "PCSXR cannot be configured without using the GUI -- you should restart "
 "without -nogui.\n"
 msgstr ""
-"PCSXR nem konfigurálható a GUI használata nélkül -- újraindítás szükséges -"
-"nogui nélkül.\n"
+"GUI를 이용하지 않고 PCSXR를 설정할 수 없습니다 -- -gui없음 옵션을 빼고 재시"
+"작 해야 합니다.\n"
 
 #: ../gui/LnxMain.c:423
 msgid "Failed loading plugins!"
-msgstr "Pluginok betöltése sikertelen!"
+msgstr "플러그인 불러오기 실패!"
 
 #: ../gui/LnxMain.c:442
 #, c-format
 msgid "Could not load CD-ROM!\n"
-msgstr "CD-ROM nem tölthető be!\n"
+msgstr "CD롬을 불러올 수 없음!\n"
 
 #: ../gui/LnxMain.c:484
 #, c-format
 msgid "PSX emulator couldn't be initialized.\n"
-msgstr "PSX emulátor incializálása sikertelen.\n"
+msgstr "PSX 에뮬레이터를 초기화할 수 없습니다.\n"
 
 #: ../gui/MemcardDlg.c:56
 msgid "Icon"
-msgstr "Ikon"
+msgstr "아이콘"
 
 #: ../gui/MemcardDlg.c:62 ../win32/gui/WndMain.c:792
 msgid "Title"
-msgstr "Cím"
+msgstr "타이틀"
 
 #: ../gui/MemcardDlg.c:68 ../win32/gui/WndMain.c:798
 msgid "Status"
-msgstr "Állapot"
+msgstr "상태"
 
 #: ../gui/MemcardDlg.c:74
 msgid "ID"
-msgstr "Azonosító"
+msgstr "ID"
 
 #: ../gui/MemcardDlg.c:80
 msgid "Name"
-msgstr "Név"
+msgstr "이름"
 
 #: ../gui/MemcardDlg.c:118 ../win32/gui/WndMain.c:1003
 msgid "Deleted"
-msgstr "Törölve"
+msgstr "삭제된"
 
 #: ../gui/MemcardDlg.c:120 ../gui/MemcardDlg.c:129 ../win32/gui/WndMain.c:1004
 #: ../win32/gui/WndMain.c:1007
 msgid "Free"
-msgstr "Üres"
+msgstr "비었음"
 
 #: ../gui/MemcardDlg.c:123 ../win32/gui/WndMain.c:1006
 msgid "Used"
-msgstr "Foglalt"
+msgstr "사용중"
 
 #: ../gui/MemcardDlg.c:125
 msgid "Link"
-msgstr ""
+msgstr "연결"
 
 #: ../gui/MemcardDlg.c:127
 msgid "End link"
-msgstr ""
+msgstr "연결 종료"
 
 #. Ask for name of memory card
 #: ../gui/MemcardDlg.c:305
 msgid "Select A File"
-msgstr "Fájl választás"
+msgstr "A 파일 선택"
 
 #: ../gui/MemcardDlg.c:345
 msgid "Format this Memory Card?"
-msgstr "Formázod a memória kártyát?"
+msgstr "이 메모리를 포맷합니까?"
 
 #: ../gui/MemcardDlg.c:347
 msgid ""
 "If you format the memory card, the card will be empty, and any existing data "
 "overwritten."
 msgstr ""
-"Ha leformázod a memória kártyát, akkor a kártya üres lesz és minden meglévő "
-"adat el fog veszni."
+"메모리카드를 포맷하면, 카드는 비게 됩니다. 그 다음에 기존 데이터를 덮어쓰세"
+"요."
 
 #: ../gui/MemcardDlg.c:350
 msgid "Format card"
-msgstr "Kártya formázása"
+msgstr "메모리카드 포맷"
 
 #. Ask for name of new memory card
 #: ../gui/MemcardDlg.c:372
 msgid "Create a new Memory Card"
-msgstr "Új memória kártya létrehozása"
+msgstr "새 메모리카드 만들기"
 
 #: ../gui/MemcardDlg.c:381
 msgid "New Memory Card.mcd"
-msgstr "Új memória kártya.mcd"
+msgstr "새 메모리카드 mcd"
 
 #. No free slots available on the destination card
 #: ../gui/MemcardDlg.c:512
 msgid "No free space on memory card"
-msgstr "Nincs szabad hely a memória kártyán"
+msgstr "메모리카드에 여유 공간이 없습니다"
 
 #: ../gui/MemcardDlg.c:513
 msgid ""
 "There are no free slots available on the target memory card. Please delete a "
 "slot first."
-msgstr ""
-"Nincs szabad mentési blokk a cél memória kártyán. Először törölj egy blokkot."
+msgstr "메모리카드에 이용할 수 있는 빈슬롯이 없습니다. 슬롯을 먼저 지워주세요."
 
 #: ../gui/MemcardDlg.c:672
 msgid "Memory Card Manager"
-msgstr "Memória kártya intéző"
+msgstr "메모리카드 관리자"
 
 #: ../gui/Plugin.c:254
 #, c-format
 msgid "SIO IRQ Not Always Enabled"
-msgstr "SIO IRQ nincs mindig bekapcsolva"
+msgstr "SIO IRQ 항상 사용하지 않음"
 
 #: ../gui/Plugin.c:260
 #, c-format
 msgid "Black & White Mdecs Only Enabled"
-msgstr "Csak fekete és fehér Mdecs használata"
+msgstr "흑백 Mdecs 만 사용 켜기"
 
 #: ../gui/Plugin.c:261
 #, c-format
 msgid "Black & White Mdecs Only Disabled"
-msgstr "Csak fekete és fehér Mdecs kikapcsolva"
+msgstr "흑백 Mdecs 만 사용 끄기"
 
 #: ../gui/Plugin.c:267
 #, c-format
 msgid "XA Enabled"
-msgstr "XA bekapcsolva"
+msgstr "XA 사용"
 
 #: ../gui/Plugin.c:268
 #, c-format
 msgid "XA Disabled"
-msgstr "XA kikapcsolva"
+msgstr "XA 사용안함"
 
 #: ../gui/Plugin.c:340
 msgid "Error opening CD-ROM plugin!"
-msgstr "Hiba a CD-ROM plugin megnyitásakor!"
+msgstr "CD롬 플러그인 열기 에러!"
 
 #: ../gui/Plugin.c:342
 msgid "Error opening SPU plugin!"
-msgstr "Hiba a hang plugin megnyitásakor!"
+msgstr "SPU 플러그인 열기 에러!"
 
 #: ../gui/Plugin.c:345
 msgid "Error opening GPU plugin!"
-msgstr "Hiba a kép plugin megnyitásakor!"
+msgstr "GPU 플러그인 열기 에러!"
 
 #: ../gui/Plugin.c:347
 msgid "Error opening Controller 1 plugin!"
-msgstr "Hiba az egyes irányító plugin megnyitásakor!"
+msgstr "컨트롤러 1 플러그인 열기 에러!"
 
 #: ../gui/Plugin.c:351
 msgid "Error opening Controller 2 plugin!"
-msgstr "Hiba a kettes irányító plugin megnyitásakor!"
+msgstr "컨트롤러 2 플러그인 열기 에러!"
 
 #: ../gui/Plugin.c:356
-#, fuzzy
 msgid "Error opening SIO1 plugin!"
-msgstr "Hiba a hang plugin megnyitásakor!"
+msgstr "SIO1 플러그인 열기 에러!"
 
 #: ../gui/Plugin.c:438
 msgid "Error closing CD-ROM plugin!"
-msgstr "Hiba a CD-ROM plugin bezárásakor!"
+msgstr "CD롬 플러그인 닫기 에러!"
 
 #: ../gui/Plugin.c:440
 msgid "Error closing SPU plugin!"
-msgstr "Hiba a hang plugin bezárásakor!"
+msgstr "SPU 플러그인 닫기 에러!"
 
 #: ../gui/Plugin.c:442
 msgid "Error closing Controller 1 Plugin!"
-msgstr "Hiba az egyes irányító plugin bezárásakor!"
+msgstr "컨트롤러 1 플러그인 닫기 에러!"
 
 #: ../gui/Plugin.c:444
 msgid "Error closing Controller 2 plugin!"
-msgstr "Hiba a kettes irányító plugin bezárásakor!"
+msgstr "컨트롤러 2 플러그인 닫기 에러!"
 
 #: ../gui/Plugin.c:446
 msgid "Error closing GPU plugin!"
-msgstr "Hiba a kép plugin bezárásakor!"
+msgstr "GPU 플러그인 닫기 에러!"
 
 #: ../gui/Plugin.c:449
-#, fuzzy
 msgid "Error closing SIO1 plugin!"
-msgstr "Hiba a hang plugin bezárásakor!"
+msgstr "SIO1 플러그인 닫기 에러!"
 
 #: ../libpcsxcore/cdriso.c:188
 msgid ""
@@ -1087,14 +1074,16 @@ msgstr ""
 #: ../libpcsxcore/cdriso.c:415
 #, fuzzy
 msgid "OK\n"
-msgstr "Rendben"
+msgstr "확인"
 
 #: ../libpcsxcore/cdriso.c:727
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "could not open: %s\n"
-msgstr "A könyvtár nem nyitható meg: '%s'\n"
+msgstr ""
+"\n"
+"열 수 없습니다: %s\n"
 
 #: ../libpcsxcore/cdriso.c:1518
 msgid ""
@@ -1105,403 +1094,408 @@ msgstr ""
 #: ../libpcsxcore/cdriso.c:1573
 #, c-format
 msgid "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n"
-msgstr "Sáv %.2d (%s) - Kezdet %.2d:%.2d:%.2d, Hosszúság %.2d:%.2d:%.2d\n"
+msgstr "트랙 %.2d (%s) - 시작 %.2d:%.2d:%.2d, 길이 %.2d:%.2d:%.2d\n"
 
 #: ../libpcsxcore/cdriso.c:1594
 #, c-format
 msgid "Loaded CD Image: %s"
-msgstr "Betöltött CD képfájl: %s"
+msgstr "CD 이미지 불러오기: %s"
 
 #: ../libpcsxcore/cheat.c:72
-#, fuzzy, c-format
+#, c-format
 msgid "Could not load cheats from: %s\n"
-msgstr "Csalások betöltve innen: %s\n"
+msgstr "%s: 에서 치트를 불러올 수 없음\n"
 
 #: ../libpcsxcore/cheat.c:148
 #, c-format
 msgid "Cheats loaded from: %s\n"
-msgstr "Csalások betöltve innen: %s\n"
+msgstr "%s: 에서 치트 불러오기\n"
 
 #: ../libpcsxcore/cheat.c:180
 #, c-format
 msgid "Cheats saved to: %s\n"
-msgstr "Csalások mentve ide: %s\n"
+msgstr "%s: 에 치트 저장\n"
 
 #: ../libpcsxcore/cheat.c:323 ../libpcsxcore/cheat.c:444
 msgid "(Untitled)"
-msgstr "(Cím nélküli)"
+msgstr "(이름 없음)"
 
 #: ../libpcsxcore/debug.c:321
 msgid "Error allocating memory"
-msgstr "Memóriafoglalási hiba"
+msgstr "메모리 할당 에러"
 
 #: ../libpcsxcore/debug.c:326
 msgid "Unable to start debug server.\n"
-msgstr "Hibakereső szervert nem lehetett elindítani.\n"
+msgstr "디버그 서버를 시작할 수 없음.\n"
 
 #: ../libpcsxcore/debug.c:330
 msgid "Debugger started.\n"
-msgstr "Hibakereső elindítva.\n"
+msgstr "디버거 시작.\n"
 
 #: ../libpcsxcore/debug.c:337
 msgid "Debugger stopped.\n"
-msgstr "Hibakereső leállítva.\n"
+msgstr "디버거 정지.\n"
 
 #: ../libpcsxcore/misc.c:350
 #, c-format
 msgid "CD-ROM Label: %.32s\n"
-msgstr "CD-ROM címke: %.32s\n"
+msgstr "CD롬 라벨: %.32s\n"
 
 #: ../libpcsxcore/misc.c:351
 #, c-format
 msgid "CD-ROM ID: %.9s\n"
-msgstr "CD-ROM azonosító: %.9s\n"
+msgstr "CD롬 ID: %.9s\n"
 
 #: ../libpcsxcore/misc.c:352
-#, fuzzy, c-format
+#, c-format
 msgid "CD-ROM EXE Name: %.255s\n"
-msgstr "CD-ROM címke: %.32s\n"
+msgstr "CD롬 EXE 이름: %.255s\n"
 
 #: ../libpcsxcore/misc.c:416
 #, c-format
 msgid "Error opening file: %s.\n"
-msgstr "Hiba a fájl megnyitása közben: %s.\n"
+msgstr "파일 열기 에러: %s.\n"
 
 #: ../libpcsxcore/misc.c:459
 #, c-format
 msgid "Unknown CPE opcode %02x at position %08x.\n"
-msgstr "Ismeretlen CPE művelet-kód: %02x ezen a helyen: %08x.\n"
+msgstr "%08x 에서 알 수 없는 CPE op코드 %02x.\n"
 
 #: ../libpcsxcore/misc.c:487
 msgid "This file does not appear to be a valid PSX file.\n"
-msgstr "A fájl nem tűnik érvényes PSX fájlnak.\n"
+msgstr "이 파일은 유효한 PSX 파일 같지 않습니다.\n"
 
 #: ../libpcsxcore/plugins.c:190
 #, c-format
 msgid "Error loading %s: %s"
-msgstr "Hiba a(z) %s: %s betöltése közben"
+msgstr "%s 불러오기 에러: %s"
 
 #: ../libpcsxcore/plugins.c:234
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not load GPU plugin %s!\n"
 "%s"
-msgstr "%s grafikai plugin nem tölthető be!"
+msgstr ""
+"GPU 플러그인 %s 을 불러올 수 없음!\n"
+"%s"
 
 #: ../libpcsxcore/plugins.c:310
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not load CD-ROM plugin %s!\n"
 "%s"
-msgstr "%s CD-ROM plugin nem tölthető be!"
+msgstr ""
+"CD롬 플러그인 %s 를 불러올 수 없음!\n"
+"%s"
 
 #: ../libpcsxcore/plugins.c:359
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not load SPU plugin %s!\n"
 "%s"
-msgstr "%s hang plugin nem tölthető be!"
+msgstr ""
+"SPU 플러그인 %s 를 불러올 수 없음!\n"
+"%s"
 
 #: ../libpcsxcore/plugins.c:499
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not load Controller 1 plugin %s!\n"
 "%s"
-msgstr "Az egyes irányító plugin: %s nem tölthető be!"
+msgstr ""
+"Could not load Controller 1 plugin %s!\n"
+"%s"
 
 #: ../libpcsxcore/plugins.c:558
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not load Controller 2 plugin %s!\n"
 "%s"
-msgstr "A kettes irányító plugin: %s nem tölthető be!"
+msgstr ""
+"콘트롤러 2 플러그인 %s 를 불러올 수 없음!\n"
+"%s"
 
 #: ../libpcsxcore/plugins.c:604
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not load NetPlay plugin %s!\n"
 "%s"
-msgstr "%s NetPlay plugin nem tölthető be!"
+msgstr ""
+"넷플레이 플러그인 %s 를 불러올 수 없음!\n"
+"%s"
 
 #: ../libpcsxcore/plugins.c:682
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not load SIO1 plugin %s!\n"
 "%s"
-msgstr "%s SIO1 plugin nem tölthető be!"
+msgstr ""
+"SIO1 플러그인 %s 를 불러올 수 없음!\n"
+"%s"
 
 #: ../libpcsxcore/plugins.c:770
 #, c-format
 msgid "Error initializing CD-ROM plugin: %d"
-msgstr "Hiba a CD-ROM plugin iniciálásakor: %d"
+msgstr "CD롬 플러그인 초기화 에러: %d"
 
 #: ../libpcsxcore/plugins.c:772
 #, c-format
 msgid "Error initializing GPU plugin: %d"
-msgstr "Error initializing GPU plugin: %d"
+msgstr "GPU 플러그인 초기화 에러: %d"
 
 #: ../libpcsxcore/plugins.c:774
 #, c-format
 msgid "Error initializing SPU plugin: %d"
-msgstr "Hiba a hang plugin iniciálásakor: %d"
+msgstr "SPU 플러그인 초기화 에러: %d"
 
 #: ../libpcsxcore/plugins.c:776
 #, c-format
 msgid "Error initializing Controller 1 plugin: %d"
-msgstr "Hiba az egyes irányító plugin iniciálásakor: %d"
+msgstr "콘트롤러 1 플러그인 초기화 에러: %d"
 
 #: ../libpcsxcore/plugins.c:778
 #, c-format
 msgid "Error initializing Controller 2 plugin: %d"
-msgstr "Hiba a kettes irányító plugin iniciálásakor: %d"
+msgstr "콘트롤러 2 플러그인 초기화 에러: %d"
 
 #: ../libpcsxcore/plugins.c:782
 #, c-format
 msgid "Error initializing NetPlay plugin: %d"
-msgstr "Hiba a NetPlay plugin iniciálásakor: %d"
+msgstr "넷플레이 플러그인 초기화 에러: %d"
 
 #: ../libpcsxcore/plugins.c:787
 #, c-format
 msgid "Error initializing SIO1 plugin: %d"
-msgstr "Hiba a SIO1 plugin iniciálásakor: %d"
+msgstr "SIO1 플러그인 초기화 에러: %d"
 
 #: ../libpcsxcore/plugins.c:790
 msgid "Plugins loaded.\n"
-msgstr "Pluginok betöltve.\n"
+msgstr "플러그인을 불러옴.\n"
 
 #: ../libpcsxcore/ppf.c:219
 #, c-format
 msgid "Invalid PPF patch: %s.\n"
-msgstr "Érvénytelen PPF patch: %s.\n"
+msgstr "유효하지 않은 PPF 패치: %s.\n"
 
 #: ../libpcsxcore/ppf.c:295
 #, c-format
 msgid "Unsupported PPF version (%d).\n"
-msgstr "Nem támogatott PPF verzió (%d).\n"
+msgstr "지원하지 않는 PPF 버전 (%d).\n"
 
 #. build address array
 #: ../libpcsxcore/ppf.c:334
 #, c-format
 msgid "Loaded PPF %d.0 patch: %s.\n"
-msgstr "PPF %d.0 patch betöltve: %s.\n"
+msgstr "PPF %d.0 패치 불러옴: %s.\n"
 
 #: ../libpcsxcore/ppf.c:384
 #, c-format
 msgid "Loaded SBI file: %s.\n"
-msgstr "SBI fájl betöltve: %s.\n"
+msgstr "SBI 파일: %s 불러옴.\n"
 
 #: ../libpcsxcore/psxmem.c:78
 msgid "Error allocating memory!"
-msgstr "Memóriafoglalási hiba!"
+msgstr "메모리 할당 에러!"
 
 #: ../libpcsxcore/psxmem.c:121
 #, c-format
 msgid "Could not open BIOS:\"%s\". Enabling HLE Bios!\n"
-msgstr "BIOS nem nyitható meg:\"%s\". HLE Bios használata!\n"
+msgstr "바이오스를 열 수 없음:\"%s\". HLE 바이오스 사용함!\n"
 
 #: ../libpcsxcore/r3000a.c:34
 #, c-format
 msgid "Running PCSXR Version %s (%s).\n"
-msgstr "PCSXR %s (%s) verzió fut.\n"
+msgstr "PCSXR 버전 %s (%s) 구동중.\n"
 
 #: ../libpcsxcore/sio.c:854
 msgid "Connection closed!\n"
-msgstr "Kapcsolat lezárva!\n"
+msgstr "연결 종료!\n"
 
 #. TODO: maybe just whine and quit..
 #: ../libpcsxcore/sio.c:887
 #, fuzzy, c-format
 msgid "No memory card value was specified - using a default card %s\n"
-msgstr ""
-"Nincs megadva memóriakártyához tartozó érték - alapértelmezett kártya "
-"létrehozása %s\n"
+msgstr "메모리카드가 지정되지 않았습니다 - 기본 카드 %s를 만드세요\n"
 
 #: ../libpcsxcore/sio.c:891
 #, c-format
 msgid "The memory card %s doesn't exist - creating it\n"
-msgstr "Nincs %s. memóriakártya - létrehozása folyamatban\n"
+msgstr "메모리카드 %s 가 없습니다 - 만드세요\n"
 
 #: ../libpcsxcore/sio.c:907
 #, c-format
 msgid "Memory card %s failed to load!\n"
-msgstr "%s. memóriakártya betöltése sikertelen!\n"
+msgstr "메모리카드 %s 불러오기 실패!\n"
 
 #: ../libpcsxcore/sio.c:911
 #, c-format
 msgid "Loading memory card %s\n"
-msgstr "%s. memóriakártya betöltése\n"
+msgstr "메모리카드 %s 불러오기\n"
 
 #: ../plugins/dfcdrom/cdr.c:25
 msgid "CD-ROM Drive Reader"
-msgstr "CD-ROM olvasó"
+msgstr "CD롬 드라이브 리더"
 
 #: ../plugins/dfcdrom/cdr.c:27
 msgid "CDR NULL Plugin"
-msgstr "CDR NULL plugin"
+msgstr "CDR NULL 플러그인"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:1
 #: ../plugins/dfcdrom/cdrcfg-0.1df/main.c:217
 msgid "CDR configuration"
-msgstr "CD-ROM beállítások"
+msgstr "CDR 환경설정"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:2
 msgid "Choose your CD-ROM device or type its path if it's not listed"
-msgstr ""
-"Válassz CD-ROM eszközt vagy gépeld be az elérési útját ha nincs a "
-"felsoroltak közt"
+msgstr "목록이 안보이면 CD롬 장치나 유형의 경로를 선택하세요"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:3
 msgid "Select read mode:"
-msgstr "Válassz olvasási módot:"
+msgstr "읽기 모드 선택:"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:4
 msgid "Cache Size (Def. 64):"
-msgstr "Gyorsítótár mérete (Def. 64):"
+msgstr "캐쉬 크기 (Def. 64):"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:5
 msgid "Spindown Time:"
-msgstr "Lelassulási idő:"
+msgstr "Spindown 시간:"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:6
 msgid "Cdrom Speed (Def. 0 = MAX):"
-msgstr "CD-ROM sebessége (alap. 0 = MAX):"
+msgstr "Cd롬 속도 (Def. 0 = MAX):"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:7
 msgid "Enable subchannel read"
-msgstr "Segéd csatorna olvasás használata"
+msgstr "보조채널 읽기 사용"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:8
 msgid "Normal (No Cache)"
-msgstr ""
+msgstr "보통 (캐쉬 없음)"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:9
-#, fuzzy
 msgid "Threaded - Faster (With Cache)"
-msgstr ""
-"Normál (gyorsítótár nélkül)\n"
-"Szálanként - Gyorsabb (gyorsítótárral)"
+msgstr "스레드된 - 더 빠른 (캐쉬 사용)"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:10
 msgid "Default"
-msgstr ""
+msgstr "기본값"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:11
 msgid "125ms"
-msgstr ""
+msgstr "125ms"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:12
 msgid "250ms"
-msgstr ""
+msgstr "250ms"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:13
 msgid "500ms"
-msgstr ""
+msgstr "500ms"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:14
 msgid "1s"
-msgstr ""
+msgstr "1초"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:15
 msgid "2s"
-msgstr ""
+msgstr "2초"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:16
 msgid "4s"
-msgstr ""
+msgstr "4초"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:17
 msgid "8s"
-msgstr ""
+msgstr "8초"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:18
 msgid "16s"
-msgstr ""
+msgstr "16초"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:19
 msgid "32s"
-msgstr ""
+msgstr "32초"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:20
 msgid "1min"
-msgstr ""
+msgstr "1분"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:21
 msgid "2min"
-msgstr ""
+msgstr "2분"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:22
 msgid "4min"
-msgstr ""
+msgstr "4분"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:23
 msgid "8min"
-msgstr ""
+msgstr "8분"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:24
 msgid "16min"
-msgstr ""
+msgstr "16분"
 
 #: ../plugins/dfcdrom/cdrcfg-0.1df/dfcdrom.ui.h:25
 msgid "32min"
-msgstr ""
+msgstr "32분"
 
 #: ../plugins/dfinput/cfg-gtk.c:58
 msgid "Increment state slot"
-msgstr ""
+msgstr "상태 슬롯 증가"
 
 #: ../plugins/dfinput/cfg-gtk.c:59
 msgid "Fast-forwards"
-msgstr ""
+msgstr "앞으로 빠르게"
 
 #: ../plugins/dfinput/cfg-gtk.c:60
-#, fuzzy
 msgid "Load state"
-msgstr "_Állás betöltése"
+msgstr "상태 불러오기"
 
 #: ../plugins/dfinput/cfg-gtk.c:61
-#, fuzzy
 msgid "Save state"
-msgstr "_Állás mentés"
+msgstr "상태 저장하기"
 
 #: ../plugins/dfinput/cfg-gtk.c:62
 msgid "Screenshot"
-msgstr ""
+msgstr "스크린샷"
 
 #: ../plugins/dfinput/cfg-gtk.c:63
 msgid "Escape"
-msgstr ""
+msgstr "나가기"
 
 #: ../plugins/dfinput/cfg-gtk.c:67
 msgid "D-Pad Up"
-msgstr "Digitális FEL"
+msgstr "디지털↑"
 
 #: ../plugins/dfinput/cfg-gtk.c:68
 msgid "D-Pad Down"
-msgstr "Digitális LE"
+msgstr "디지털↓"
 
 #: ../plugins/dfinput/cfg-gtk.c:69
 msgid "D-Pad Left"
-msgstr "Digitális BALRA"
+msgstr "디지털←"
 
 #: ../plugins/dfinput/cfg-gtk.c:70
 msgid "D-Pad Right"
-msgstr "Digitális JOBBRA"
+msgstr "디지털→"
 
 #: ../plugins/dfinput/cfg-gtk.c:71
 msgid "Cross"
-msgstr "KERESZT"
+msgstr "Ｘ"
 
 #: ../plugins/dfinput/cfg-gtk.c:72
 msgid "Circle"
-msgstr "KÖR"
+msgstr "○"
 
 #: ../plugins/dfinput/cfg-gtk.c:73
 msgid "Square"
-msgstr "NÉGYSZÖG"
+msgstr "□"
 
 #: ../plugins/dfinput/cfg-gtk.c:74
 msgid "Triangle"
-msgstr "HÁROMSZÖG"
+msgstr "△"
 
 #: ../plugins/dfinput/cfg-gtk.c:75
 msgid "L1"
@@ -1521,11 +1515,11 @@ msgstr "R2"
 
 #: ../plugins/dfinput/cfg-gtk.c:79
 msgid "Select"
-msgstr "Select"
+msgstr "셀렉트"
 
 #: ../plugins/dfinput/cfg-gtk.c:80
 msgid "Start"
-msgstr "Start"
+msgstr "스타트"
 
 #: ../plugins/dfinput/cfg-gtk.c:81
 msgid "L3"
@@ -1536,208 +1530,205 @@ msgid "R3"
 msgstr "R3"
 
 #: ../plugins/dfinput/cfg-gtk.c:83
-#, fuzzy
 msgid "Analog"
-msgstr "Analóg irányító"
+msgstr "아날로그"
 
 #: ../plugins/dfinput/cfg-gtk.c:87
 msgid "L-Stick Right"
-msgstr "Bal kar jobbra"
+msgstr "왼쪽스틱"
 
 #: ../plugins/dfinput/cfg-gtk.c:88
 msgid "L-Stick Left"
-msgstr "Bal kar jobbra"
+msgstr "왼쪽스틱"
 
 #: ../plugins/dfinput/cfg-gtk.c:89
 msgid "L-Stick Down"
-msgstr "Bal kar le"
+msgstr "왼쪽스틱"
 
 #: ../plugins/dfinput/cfg-gtk.c:90
 msgid "L-Stick Up"
-msgstr "Bal kar fel"
+msgstr "왼쪽스틱"
 
 #: ../plugins/dfinput/cfg-gtk.c:91
 msgid "R-Stick Right"
-msgstr "Jobb kar jobbra"
+msgstr "오른쪽스틱"
 
 #: ../plugins/dfinput/cfg-gtk.c:92
 msgid "R-Stick Left"
-msgstr "Jobb kar balra"
+msgstr "오른쪽스틱"
 
 #: ../plugins/dfinput/cfg-gtk.c:93
 msgid "R-Stick Down"
-msgstr "Jobb kar le"
+msgstr "오른쪽스틱"
 
 #: ../plugins/dfinput/cfg-gtk.c:94
 msgid "R-Stick Up"
-msgstr "Jobb kar fel"
+msgstr "오른쪽스틱"
 
 #: ../plugins/dfinput/cfg-gtk.c:120 ../plugins/dfinput/cfg-gtk.c:161
 msgid "Centered"
-msgstr "Középen"
+msgstr "중앙으로"
 
 #: ../plugins/dfinput/cfg-gtk.c:120 ../plugins/dfinput/cfg-gtk.c:161
 msgid "Up"
-msgstr "Fel"
+msgstr "↑"
 
 #: ../plugins/dfinput/cfg-gtk.c:120 ../plugins/dfinput/cfg-gtk.c:161
 msgid "Right"
-msgstr "Jobbra"
+msgstr "→"
 
 #: ../plugins/dfinput/cfg-gtk.c:120 ../plugins/dfinput/cfg-gtk.c:161
 msgid "Rightup"
-msgstr "Jobbra fel"
+msgstr "↗"
 
 #: ../plugins/dfinput/cfg-gtk.c:121 ../plugins/dfinput/cfg-gtk.c:162
 msgid "Down"
-msgstr "Le"
+msgstr "↓"
 
 #: ../plugins/dfinput/cfg-gtk.c:121 ../plugins/dfinput/cfg-gtk.c:162
 msgid "Rightdown"
-msgstr "Jobbra le"
+msgstr "↘"
 
 #: ../plugins/dfinput/cfg-gtk.c:121 ../plugins/dfinput/cfg-gtk.c:162
 msgid "Left"
-msgstr "Balra"
+msgstr "←"
 
 #: ../plugins/dfinput/cfg-gtk.c:121 ../plugins/dfinput/cfg-gtk.c:162
 msgid "Leftup"
-msgstr "Balra fel"
+msgstr "↖"
 
 #: ../plugins/dfinput/cfg-gtk.c:122 ../plugins/dfinput/cfg-gtk.c:163
 msgid "Leftdown"
-msgstr "Balra le"
+msgstr "↙"
 
 #: ../plugins/dfinput/cfg-gtk.c:128 ../plugins/dfinput/cfg-gtk.c:167
 #, c-format
 msgid "Joystick: Button %d"
-msgstr "Joystick: %d gomb"
+msgstr "조이스틱: 버튼 %d"
 
 #: ../plugins/dfinput/cfg-gtk.c:132 ../plugins/dfinput/cfg-gtk.c:171
 #, c-format
 msgid "Joystick: Axis %d%c"
-msgstr "Joystick: %d%c irány"
+msgstr "조이스틱: 축 %d%c"
 
 #: ../plugins/dfinput/cfg-gtk.c:137 ../plugins/dfinput/cfg-gtk.c:176
 #, c-format
 msgid "Joystick: Hat %d %s"
-msgstr "Joystick: %d %s hat"
+msgstr "조이스틱: Hat %d %s"
 
 #: ../plugins/dfinput/cfg-gtk.c:152 ../plugins/dfinput/cfg-gtk.c:191
 msgid "Keyboard:"
-msgstr "Billentyűzet:"
+msgstr "키보드:"
 
 #: ../plugins/dfinput/cfg-gtk.c:156 ../plugins/dfinput/cfg-gtk.c:195
 msgid "(Not Set)"
-msgstr "(Nincs beállítva)"
+msgstr "(설정 안함)"
 
 #: ../plugins/dfinput/cfg-gtk.c:606
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:14
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:78
 msgid "None"
-msgstr "Nincs"
+msgstr "없음"
 
 #: ../plugins/dfinput/cfg-gtk.c:656
 msgid "Gamepad/Keyboard Input Configuration"
-msgstr "Játékirányító/Billentyűzet bemeneti beállítás"
+msgstr "게임패드/키보드 입력 설정"
 
 #: ../plugins/dfinput/cfg-gtk.c:662 ../plugins/dfinput/cfg-gtk.c:682
 #: ../plugins/dfinput/cfg-gtk.c:788
 msgid "Key"
-msgstr "Billentyű"
+msgstr "키"
 
 #: ../plugins/dfinput/cfg-gtk.c:668 ../plugins/dfinput/cfg-gtk.c:688
 #: ../plugins/dfinput/cfg-gtk.c:794
 msgid "Button"
-msgstr "Gomb"
+msgstr "버튼"
 
 #: ../plugins/dfinput/dfinput.ui.h:1
 msgid "Device:"
-msgstr "Eszköz:"
+msgstr "장치:"
 
 #: ../plugins/dfinput/dfinput.ui.h:2
 msgid "Type:"
-msgstr "Típus:"
+msgstr "유형:"
 
 #: ../plugins/dfinput/dfinput.ui.h:3
 msgid "Visual vibration"
-msgstr ""
+msgstr "시각적 진동"
 
 #: ../plugins/dfinput/dfinput.ui.h:4
 msgid "Change"
-msgstr "Változtatás"
+msgstr "변경"
 
 #: ../plugins/dfinput/dfinput.ui.h:5
 msgid "Reset"
-msgstr "Alapra állítás"
+msgstr "재시작"
 
 #: ../plugins/dfinput/dfinput.ui.h:6
 msgid "Controller 1"
-msgstr "Egyes irányító"
+msgstr "콘트롤러 1"
 
 #: ../plugins/dfinput/dfinput.ui.h:7
 msgid "Controller 2"
-msgstr "Kettes irányító"
+msgstr "콘트롤러 2"
 
 #: ../plugins/dfinput/dfinput.ui.h:8
-#, fuzzy
 msgid "Emulator keys"
-msgstr "_Emulátor"
+msgstr "에뮬레이터 키"
 
 #: ../plugins/dfinput/dfinput.ui.h:9
 msgid "Multi-Threaded (Recommended)"
-msgstr "Többszálas (ajánlott)"
+msgstr "멀티-스레드 (권장)"
 
 #: ../plugins/dfinput/dfinput.ui.h:10
 msgid "Hide mouse cursor"
-msgstr ""
+msgstr "마우스커서 숨기기"
 
 #: ../plugins/dfinput/dfinput.ui.h:11
 msgid "Prevent screensaver (xdg-screensaver)"
-msgstr ""
+msgstr "화면보호기 막기 (xdg-화면보호기)"
 
 #: ../plugins/dfinput/dfinput.ui.h:12 ../win32/gui/WndMain.c:1358
 msgid "Options"
-msgstr "Lehetőségek"
+msgstr "옵션"
 
 #: ../plugins/dfinput/dfinput.ui.h:13
 msgid "Digital Pad"
-msgstr "Digitális irányító"
+msgstr "디지털패드"
 
 #: ../plugins/dfinput/dfinput.ui.h:14
 msgid "Analog Pad"
-msgstr "Analóg irányító"
+msgstr "아날로그 패드"
 
 #: ../plugins/dfinput/dfinput.ui.h:15
 msgid "Mouse"
-msgstr ""
+msgstr "마우스"
 
 #: ../plugins/dfinput/pad.c:33
-#, fuzzy
 msgid "Gamepad/Keyboard/Mouse Input"
-msgstr "Játékirányító/Billentyűzet bemenet"
+msgstr "게임패드/키보드/마우스 입력"
 
 #. increase that with each version
 #: ../plugins/dfnet/dfnet.c:23
 msgid "Socket Driver"
-msgstr "Socket illesztőprogram"
+msgstr "소켓 드라이버"
 
 #: ../plugins/dfnet/dfnet.c:161
 #, c-format
 msgid "error connecting to %s: %s\n"
-msgstr "hiba a következőhöz történő kapcsolódáskor: %s: %s\n"
+msgstr "%s로 연결 에러: %s\n"
 
 #: ../plugins/dfnet/dfnet.c:186
 msgid "Error allocating memory!\n"
-msgstr "Memória kiosztási hiba!\n"
+msgstr "메모리 할당 에러!\n"
 
 #: ../plugins/dfnet/dfnet.ui.h:1
 msgid "Start Game"
-msgstr "Játék indítása"
+msgstr "게임 시작"
 
 #: ../plugins/dfnet/dfnet.ui.h:2
 msgid "Play Offline"
-msgstr "Offline játék"
+msgstr "오프라인 플레이"
 
 #: ../plugins/dfnet/dfnet.ui.h:3
 msgid ""
@@ -1749,45 +1740,42 @@ msgid ""
 "If you selected Client please enter the IP address the Server gave to you in "
 "the IP Address Control."
 msgstr ""
-"Válaszd ezt ha te létesítesz szervert (1. játékos) vagy ha kliens leszel (2. "
-"játékos).\n"
+"서버(플레이어1) 혹은 클라이언트(플레이어2)가 되면 여기를 선택하세요.\n"
 "\n"
-"Ha szervert választasz, másold az IP címedet a vágólapra és szúrd be (Ctrl"
-"+V) bárhová, ahol a kliens látni fogja.\n"
+"본인이 서버라면 IP주소를 복사해서 클라이언트가 볼 수 있는 곳에 붙여넣기(Ctrl"
+"+V) 해야 합니다.\n"
 "\n"
-"Ha klienset választottál, írd be az IP címedet amit a szerver adott az IP "
-"cím vezérlőnél."
+"본인이 클라이언트라면 IP주소 콘트롤 부분에 서버가 준 IP주소를 입력하세요."
 
 #: ../plugins/dfnet/dfnet.ui.h:8 ../plugins/bladesio1/sio1.ui.h:6
 msgid "Copy PC IP to Clipboard"
-msgstr "A számítógép IP címének másolása vágólapra"
+msgstr "PC IP를 클립보드에 복사"
 
 #: ../plugins/dfnet/dfnet.ui.h:9 ../plugins/bladesio1/sio1.ui.h:7
 msgid "Server (Player1)"
-msgstr "Szerver (1. játékos)"
+msgstr "서버(플레이어1)"
 
 #: ../plugins/dfnet/dfnet.ui.h:10 ../plugins/bladesio1/sio1.ui.h:8
 msgid "Client (Player2)"
-msgstr "Kliens (2. játékos)"
+msgstr "클라이언트(플레이어2)"
 
 #: ../plugins/dfnet/dfnet.ui.h:11 ../plugins/bladesio1/sio1.ui.h:10
 msgid ""
 "Do not change if not necessary (remember it must be changed on both sides)."
-msgstr ""
-"Ne változtasd ha nem muszály (ne feledd, mindkét oldalon módosítani kell)."
+msgstr "필요없다면 바꾸지 마세요(양쪽 모두 바꿔야 한다는 걸 기억하세요)"
 
 #: ../plugins/dfnet/dfnet.ui.h:12 ../plugins/bladesio1/sio1.ui.h:11
 msgid "Port Number"
-msgstr "Port száma"
+msgstr "포트 번호"
 
 #: ../plugins/dfnet/gui.c:30 ../plugins/dfnet/gui.c:112
 #: ../plugins/bladesio1/gui.c:82 ../win32/gui/ConfigurePlugins.c:678
 msgid "NetPlay"
-msgstr "Internetes játék"
+msgstr "넷플레이"
 
 #: ../plugins/dfnet/gui.c:38
 msgid "Nothing to configure"
-msgstr "Nincs mit beállítani"
+msgstr "설정할 게 없음"
 
 #: ../plugins/dfnet/gui.c:94 ../plugins/bladesio1/gui.c:94
 #, c-format
@@ -1796,234 +1784,228 @@ msgstr "IP %s"
 
 #: ../plugins/dfnet/gui.c:165
 msgid "Waiting for connection..."
-msgstr "Várakozás a csatlakozásra..."
+msgstr "연결 대기중"
 
 #: ../plugins/dfnet/gui.c:168
 msgid "The Client should now Start a Connection, waiting..."
-msgstr "A kliens kapcsolatot kezdeményez, várjon..."
+msgstr "클라이언트가 연결을 시작해야 합니다, 대기중..."
 
 #: ../plugins/dfsound/spu.c:66
 msgid "DirectSound Driver"
-msgstr "DirectSound driver"
+msgstr "다이렉트사운드 드라이버"
 
 #: ../plugins/dfsound/spu.c:68
 msgid "Mac OS X Sound"
-msgstr "Mac OS X hang"
+msgstr "Mac OS X 사운드"
 
 #: ../plugins/dfsound/spu.c:70
 msgid "ALSA Sound"
-msgstr "ALSA hang"
+msgstr "ALSA 사운드"
 
 #: ../plugins/dfsound/spu.c:72
 msgid "OSS Sound"
-msgstr "OSS hang"
+msgstr "OSS 사운드"
 
 #: ../plugins/dfsound/spu.c:74
 msgid "SDL Sound"
-msgstr "SDL hang"
+msgstr "SDL 사운드"
 
 #: ../plugins/dfsound/spu.c:76
-#, fuzzy
 msgid "OpenAL Sound"
-msgstr "ALSA hang"
+msgstr "오픈AL 사운드"
 
 #: ../plugins/dfsound/spu.c:78
 msgid "PulseAudio Sound"
-msgstr "PulseAudio hang"
+msgstr "PulseAudio 사운드"
 
 #: ../plugins/dfsound/spu.c:80
 msgid "NULL Sound"
-msgstr "NULL hang"
+msgstr "사운드 없음"
 
 #: ../plugins/dfsound/spu.c:83
 msgid ""
 "P.E.Op.S. Sound Driver V1.7\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
-"P.E.Op.S. Sound Driver V1.7\n"
-"Fejlesztő Pete Bernert és a P.E.Op.S. team\n"
+"P.E.Op.S. 사운드 드라이버 V1.7\n"
+"Pete Bernert 과 P.E.Op.S. 팀이 작성\n"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:2
 msgid "Volume:"
-msgstr "Hangerő:"
+msgstr "소리크기:"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:3
 msgid "Interpolation:"
-msgstr "Interpoláció:"
+msgstr "보간법:"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:4
 msgid "Reverb:"
-msgstr "Utózengés:"
+msgstr "반향:"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:5
 msgid "Adjust XA speed"
-msgstr "XA sebesség beállítása"
+msgstr "XA 속도 조절"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:6
 msgid "Choose this if XA music is played too quickly."
-msgstr "Válaszd ezt, ha az XA zene túl gyors."
+msgstr "XA 음악이 너무 빠르면 이것을 선택하세요."
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:7
 msgid "High compatibility mode"
-msgstr "Magas kompatibilitási mód"
+msgstr "높은 호환성 모드"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:8
 msgid "Use the asynchronous SPU interface."
-msgstr "Aszinkron hang interfész használata."
+msgstr "비동기 SPU 인터페이스 사용"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:9
 msgid "SPU IRQ Wait"
-msgstr "Hang IRQ várakozás"
+msgstr "SPU IRQ 대기"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:10
 msgid "Wait for CPU; only useful for some games."
-msgstr "Processzorra várás; csak néhány játéknál hasznos."
+msgstr "CPU를 대기; 일부 게임에서만 유용함."
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:11
 msgid "Single channel sound"
-msgstr "Egycsatornás hang"
+msgstr "단일 채널 사운드"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:12
 msgid "Play only one channel for a performance boost."
-msgstr "Csupán egy csatorna lejátszása a teljesítmény növelés érdekében."
+msgstr "성능향상을 위해 단일채널만 연주합니다."
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:13
 msgid "Frequency Response - Output Filter"
-msgstr "Frekvencia reakció - Kimeneti szűrő"
+msgstr "주파수 반응 - 출력 필터"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:15
 msgid "Simple"
-msgstr ""
+msgstr "단순"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:16
-#, fuzzy
 msgid "Gaussian"
-msgstr "Orosz"
+msgstr "가우시안"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:17
 msgid "Cubic"
-msgstr ""
+msgstr "큐빅"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:18
 msgid "Off"
-msgstr ""
+msgstr "끄기"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:19
-#, fuzzy
 msgid "Playstation"
-msgstr ""
-"Ki\n"
-"Egyszerű\n"
-"PlayStation"
+msgstr "플레이스테이션"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:20
 msgid "Low"
-msgstr ""
+msgstr "작은"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:21
 msgid "Medium"
-msgstr ""
+msgstr "중간"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:22
 msgid "Loud"
-msgstr ""
+msgstr "크게"
 
 #: ../plugins/dfsound/spucfg-0.1df/dfsound.ui.h:23
 msgid "Loudest"
-msgstr ""
+msgstr "제일크게"
 
 #: ../plugins/dfxvideo/gpu.c:82
 msgid "Soft Driver"
-msgstr "Soft driver"
+msgstr "소프트 드라이버"
 
 #: ../plugins/dfxvideo/gpu.c:83
 msgid ""
 "P.E.Op.S. Soft Driver V1.17\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
-"P.E.Op.S. Soft Driver V1.17\n"
-"Fejlesztő Pete Bernert és a  P.E.Op.S. team\n"
+"P.E.Op.S. 소프트 드라이버 V1.17\n"
+"Pete Bernert 과 P.E.Op.S. 팀이 작성\n"
 
 #: ../plugins/dfxvideo/gpu.c:85
 msgid "SoftGL Driver"
-msgstr "SoftGL Driver"
+msgstr "SoftGL 드라이버"
 
 #: ../plugins/dfxvideo/gpu.c:86
 msgid ""
 "P.E.Op.S. SoftGL Driver V1.17\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
-"P.E.Op.S. SoftGL Driver V1.17\n"
-"Fejlesztő Pete Bernert és a  P.E.Op.S. team\n"
+"P.E.Op.S. 소프트GL 드라이버 V1.17\n"
+"Pete Bernert 과 P.E.Op.S. 팀이 작성\n"
 
 #: ../plugins/dfxvideo/gpu.c:88
 msgid "XVideo Driver"
-msgstr "XVideo driver"
+msgstr "XVideo 드라이버"
 
 #: ../plugins/dfxvideo/gpu.c:89
 msgid ""
 "P.E.Op.S. Xvideo Driver V1.17\n"
 "Coded by Pete Bernert and the P.E.Op.S. team\n"
 msgstr ""
-"P.E.Op.S. Xvideo driver V1.17\n"
-"Fejlesztő Pete Bernert és a  P.E.Op.S. team\n"
+"P.E.Op.S. Xvideo 드라이버 V1.17\n"
+"Pete Bernert 과 P.E.Op.S. 팀이 작성\n"
 
 #: ../plugins/dfxvideo/gpu.c:92
 msgid "Pete Bernert and the P.E.Op.S. team"
-msgstr "Fejlesztő Pete Bernert és a  P.E.Op.S. team"
+msgstr "Pete Bernert 과 P.E.Op.S. 팀"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:1
 msgid "Configure X11 Video"
-msgstr "X11 Video beállítása"
+msgstr "환경설정 X11 비디오"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:2
 msgid "Initial Window Size:"
-msgstr "Induló ablak mérete:"
+msgstr "초기 화면 크기:"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:3
 msgid "Stretching:"
-msgstr "Nyújtás:"
+msgstr "늘리기:"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:4
 msgid "Dithering:"
-msgstr "Szürkeárnyalás:"
+msgstr "디더링:"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:5
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:4
 msgid "Fullscreen"
-msgstr "Teljes képernyő"
+msgstr "전체화면"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:6
 msgid "Toggle windowed/fullscreen mode."
-msgstr "Váltás ablakos/teljes képernyős mód között."
+msgstr "창모드/전체화면 전환"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:7
 msgid "Maintain 4:3 Aspect Ratio"
-msgstr "4:3 méretarány megtartása"
+msgstr "4:3 화면비율 유지"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:8
 msgid "Show FPS"
-msgstr "FPS megjelenítése"
+msgstr "FPS 표시"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:9
 msgid "Toggle whether the FPS will be shown."
-msgstr "Váltás az FPS megjelenítéstől függően."
+msgstr "FPS 표시 전환"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:10
 msgid "Enable frame skipping"
-msgstr "Képkocka kihagyás használata"
+msgstr "프레임 스킵 사용"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:11
 msgid "Skip frames when rendering."
-msgstr "Képkockák kihagyása rendereléskor."
+msgstr "렌더링시 프레임을 스킵합니다."
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:12
 msgid "Set FPS"
-msgstr "FPS megadás"
+msgstr "FPS 설정"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:13
 msgid "Enable this if games display too quickly."
-msgstr "Kapcsold be ezt, ha a játékok megjelenítése túl gyors"
+msgstr "게임속도가 너무 빠르면 이것을 사용하세요."
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:14
 msgid "200.0"
@@ -2031,179 +2013,178 @@ msgstr "200.0"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:15
 msgid "Autodetect FPS limit"
-msgstr "FPS korlát automatikus észlelése"
+msgstr "FPS 제한 자동감지"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:16
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:37
 msgid "Use game fixes"
-msgstr "Játék javítások használata"
+msgstr "게임 수정 사용"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:17
 msgid "Disable CPU Saving"
-msgstr "Processzor mentés kikapcsolása"
+msgstr "CPU 절약 끄기"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:18
 msgid "For precise framerate"
-msgstr "A pontos képfrissítéshez"
+msgstr "정확한 프레임레이트를 위함"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:19
 msgid "Odd/even bit hack"
-msgstr "Páratlan/páros bit hack"
+msgstr "홀/짝 비트 핵"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:20
 msgid "Chrono Cross"
-msgstr "Chrono Cross"
+msgstr "크로노 크로스"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:21
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:46
 msgid "PC FPS calculation"
-msgstr "PC FPS kalkuláció"
+msgstr "PC FPS 계산"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:22
 msgid "Better FPS limit in some"
-msgstr "Jobb FPS korlátozás némelyikben"
+msgstr "때때로 더 나은 FPS 제한"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:23
 msgid "Expand screen width"
-msgstr "Képernyő szélesség nyújtása"
+msgstr "화면 폭 확장"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:24
 msgid "Capcom fighting games"
-msgstr "Capcom verekedős játékok"
+msgstr "캡콤 배틀 게임"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:25
 msgid "Ignore brightness color"
-msgstr "Világos szín kihagyása"
+msgstr "색상 밝기 무시"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:26
 msgid "Black screens in Lunar"
-msgstr "Lunar fekete képernyője"
+msgstr "루나 에서 검은 화면"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:27
 msgid "Disable coordinate check"
-msgstr "Helyzeti ellenőrzés kikapcsolása"
+msgstr "좌표 확인 끄기"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:28
 msgid "Compatibility mode"
-msgstr "Kompatibilitási mód"
+msgstr "호환성 모드"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:29
 msgid "Lazy screen update"
-msgstr "Lassú képernyő frissítése"
+msgstr "낮은 빈도의 화면 업데이트"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:30
 msgid "Pandemonium 2"
-msgstr "Pandemonium 2"
+msgstr "판데모니움 2"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:31
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:47
 msgid "Old frame skipping"
-msgstr "Régi képkocka kihagyás"
+msgstr "구버전 프레임 스킵"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:32
 msgid "Skip every second frame"
-msgstr "Minden második képkocka kihagyása"
+msgstr "모든 두번째 프레임 스킵"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:33
 msgid "Repeated flat tex triangles"
-msgstr "Ismétlődő lapos textúra háromszögek"
+msgstr "반복된 flat tex triangles"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:34
 msgid "Needed by Dark Forces"
-msgstr "Dark Forces játékhoz szükséges"
+msgstr "다크포스에서 필요"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:35
 msgid "Draw quads with triangles"
-msgstr "Négyszögek megrajzolása háromszögekkel"
+msgstr "삼각형으로 사각형 그리기"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:36
 msgid "better g-colors, worse textures"
-msgstr "Jobb G-színek, roszabb textúrák"
+msgstr "더 나은 g-색상, 더 나쁜 텍스처"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:37
 msgid "Fake 'gpu busy' states"
-msgstr "Hamis 'gpu foglalt' állapot"
+msgstr "거짓 'gpu busy' 상태"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:38
 msgid "Toggle busy flags after drawing"
-msgstr "Foglalt jelzés elhelyezése megrajzolás után"
+msgstr "드로잉 후 busy 플래그 전환"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:39
 msgid "0: Off (fastest)"
-msgstr ""
+msgstr "0: 끄기 (가장빠름)"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:40
 msgid "1: Game dependant"
-msgstr ""
+msgstr "1: 게임 의존적"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:41
 msgid "2: Always"
-msgstr ""
+msgstr "2: 항상"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:42
 msgid "320x240"
-msgstr ""
+msgstr "320x240"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:43
 msgid "640x480"
-msgstr ""
+msgstr "640x480"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:44
 msgid "800x600"
-msgstr ""
+msgstr "800x600"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:45
 msgid "1024x768"
-msgstr ""
+msgstr "1024x768"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:46
 msgid "1152x864"
-msgstr ""
+msgstr "1152x864"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:47
 msgid "1280x1024"
-msgstr ""
+msgstr "1280x1024"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:48
 msgid "1600x1200"
-msgstr ""
+msgstr "1600x1200"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:49
-#, fuzzy
 msgid "0: None"
-msgstr "0: Nessuno"
+msgstr "0: 없음"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:50
 msgid "1: 2xSai"
-msgstr ""
+msgstr "1: 2xSai"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:51
 msgid "2: 2xSuperSai"
-msgstr ""
+msgstr "2: 2xSuperSai"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:52
 msgid "3: SuperEagle"
-msgstr ""
+msgstr "3: SuperEagle"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:53
 msgid "4: Scale2x"
-msgstr ""
+msgstr "4: Scale2x"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:54
 msgid "5: Scale3x"
-msgstr ""
+msgstr "5: Scale3x"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:55
 msgid "6: HQ2X"
-msgstr ""
+msgstr "6: HQ2X"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:56
 msgid "7: HQ3X"
-msgstr ""
+msgstr "7: HQ3X"
 
 #: ../plugins/peopsxgl/gpu.c:97
 msgid "OpenGL Driver"
-msgstr "OpenGL driver"
+msgstr "오픈GL 드라이버"
 
 #: ../plugins/peopsxgl/gpu.c:99
 msgid "Pete Bernert"
@@ -2214,73 +2195,72 @@ msgid ""
 "Based on P.E.Op.S. MesaGL Driver V1.78\n"
 "Coded by Pete Bernert\n"
 msgstr ""
-"P.E.Op.S. MesaGL driver V1.78 alapján\n"
-"Fejlesztő Pete Bernert\n"
+"P.E.Op.S. MesaGL 드라이버 V1.78에 기반\n"
+"Pete Bernert이 작성\n"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:1
 msgid "OpenGL Driver configuration"
-msgstr "OpenGL driver beállítás"
+msgstr "오픈GL 드라이버 설정"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:2
 msgid "Width:"
-msgstr "Szélesség:"
+msgstr "폭:"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:3
 msgid "Height:"
-msgstr "Magasság:"
+msgstr "높이:"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:5
 msgid "Dithering"
-msgstr "Remegés"
+msgstr "디더링"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:6
 msgid "Keep psx aspect ratio"
-msgstr "PSX képarány megtartása"
+msgstr "psx 비율 유지"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:7
-#, fuzzy
 msgid "Force 4:3 aspect ratio"
-msgstr "PSX képarány megtartása"
+msgstr "4:3 비율로 강제"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:8
 msgid "Window options"
-msgstr "Ablak beállítások"
+msgstr "화면 옵션"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:9
 msgid "Quality:"
-msgstr "Minőség:"
+msgstr "품질:"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:10
 msgid "Filtering:"
-msgstr "Szűrés:"
+msgstr "필터링:"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:11
 msgid "HiRes Tex:"
-msgstr "Nagyfelbontású textúrák:"
+msgstr "고해상도 텍스처:"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:12
 msgid "VRam size in MBytes (0..1024, 0=auto):"
-msgstr "Videómemória mérete MB értékben (0..1024, 0=auto):"
+msgstr "MBytes 단위 VRam 크기 (0..1024, 0=자동):"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:13
 msgid "Textures"
-msgstr "Textúrák"
+msgstr "텍스처"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:14
 msgid "Show FPS display on startup"
-msgstr "FPS megjelenítése indításkor"
+msgstr "시작시 FPS표시 보기"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:15
 msgid "Use FPS limit"
-msgstr "FPS korlátozás használata"
+msgstr "FPS 제한 사용"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:16
 msgid "FPS limit auto-detector"
-msgstr "FPS korlát automatikus észlelő"
+msgstr "FPS 제한 자동-감지기"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:17
 msgid "FPS limit manual"
-msgstr "FPS korlát kezelő"
+msgstr "FPS 제한 수동"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:18
 msgid "FPS"
@@ -2288,282 +2268,281 @@ msgstr "FPS"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:19
 msgid "Use Frame skipping"
-msgstr "Képkocka kihagyás"
+msgstr "프레임 스킵 사용"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:20
 msgid "Framerate"
-msgstr "Képfrissítési frekvencia"
+msgstr "프레임레이트"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:21
 msgid "Offscreen drawing:"
-msgstr "Képernyőn kívülre helyezés:"
+msgstr "오프스크린 드로잉:"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:22
 msgid "Framebuffer textures:"
-msgstr "Képkocka-puffer textúrák:"
+msgstr "프레임버퍼 텍스처:"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:23
 msgid "Framebuffer access:"
-msgstr "Képkocka-puffer hozzáférés:"
+msgstr "프레임버퍼 접근:"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:24
 msgid "Mask bit detection (Needed by a few games, zbuffer)"
-msgstr "Maszk bit észlelés (Szükséges néhány játékhoz, zbuffer)"
+msgstr "마스크 비트 감지 (소수 게임에서 필요, z버퍼)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:25
 msgid "Alpha multipass (Correct opaque texture areas)"
-msgstr "Alpha multipass (megfelelő nem áttetsző textúra területek)"
+msgstr "알파 다중경로 (불투명 텍스처 영역 수정)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:26
 msgid "Advanced blending (Accurate psx color emulation)"
-msgstr "Fejlett keverés (pontos psx szín emuláció)"
+msgstr "발전된 블렌딩 (psx 색상 에뮬레이션을 정확하게)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:27
 msgid "Compatibility"
-msgstr "Kompatibilitás"
+msgstr "호환성"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:28
 msgid "Scanlines Blending (0..255, -1=dot):"
-msgstr "Képsorok keverése (0..255, -1=pont):"
+msgstr "스캔라인 블렌딩 (0..255, -1=dot):"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:29
 msgid "Unfiltered MDECs (Small movie speedup)"
-msgstr "Szűretlen MDEC-ek (Kisebb videó gyorsulás)"
+msgstr "필터링안된 MDECs (약간의 영상 속도상승)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:30
 msgid "Force 15 bit framebuffer updates (Faster movies)"
-msgstr "15 bites kényszerített képkocka-puffer frissítés (gyorsabb videók)"
+msgstr "강제 15 비트 프레임버퍼 업데이트 (더 빠른 영상)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:31
 msgid "Line mode (Polygons will not get filled)"
-msgstr "Vonal mód (Poligonok nem lesznek kitöltve)"
+msgstr "라인 모드 (폴리곤은 채워지지 않음)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:32
 msgid "Polygon anti-aliasing (Slow with most cards)"
-msgstr "Poligon élsímítás (Lassú a legtöbb kártyával)"
+msgstr "폴리곤 안티에일리어싱 (그래픽카드에 따라 느릴수도)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:33
 msgid "Use OpenGL extensions (Recommended)"
-msgstr "OpenGL kiterjesztés használata (Ajánlott)"
+msgstr "오픈GL 확장 사용 (권장)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:34
 msgid "Screen smoothing (Can be slow or unsupported)"
-msgstr "Kép finomítás (Lassú lehet, vagy nincs támogatva)"
+msgstr "부드러운 화면 (느려지거나 지원이 안될 수 있음)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:35
 msgid "Gte accuracy"
-msgstr ""
+msgstr "Gte 정확도"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:36
 msgid "Misc"
-msgstr "Egyebek"
+msgstr "기타"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:38
 msgid "Battle cursor (FF7)"
-msgstr "Csata kurzor (Final Fantasy 7)"
+msgstr "배틀 커서 (FF7)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:39
 msgid "Yellow rect (FF9)"
-msgstr "Sárga háromszögek (Final Fantasy 9)"
+msgstr "노란 사각형 (FF9)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:40
 msgid "Direct FB updates"
-msgstr "Közvetlen FB frissítések"
+msgstr "직접 FB 업데이트"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:41
 msgid "Black brightness (Lunar)"
-msgstr "Fekete fényesség (Lunar)"
+msgstr "검은 화면 (루나)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:42
 msgid "Swap front detection"
-msgstr "Felcserélt előtér észlelés"
+msgstr "정면 감지 바꾸기"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:43
 msgid "Disable coord check"
-msgstr "Koordináció ellenőrzés kikapcsolása"
+msgstr "좌표 확인 끄기"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:44
 msgid "No blue glitches (LoD)"
-msgstr "Nincsenek kék képhibák (Legend of Dragoon)"
+msgstr "푸른 깨짐 없음 (LoD)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:45
 msgid "Soft FB access"
-msgstr "Szoftveres FB hozzáférés"
+msgstr "소프트 FB 접근"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:48
 msgid "No subtr. blending"
-msgstr "Keverés kiszűrése nélkül"
+msgstr "대체 블렌딩 없음"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:49
 msgid "Lazy upload (DW7)"
-msgstr "Lassú feltöltés (Dragon Warrior 7)"
+msgstr "낮은 빈도 업로드 (DW7)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:50
 msgid "Odd/even hack"
-msgstr "Páratlan/páros hack"
+msgstr "홀/짝 핵"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:51
 msgid "Adjust screen width"
-msgstr "Kép szélesség beállítása"
+msgstr "화면 폭 조정"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:52
 msgid "Old texture filtering"
-msgstr "Régi textúra szűrő"
+msgstr "구버전 텍스처 필터링"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:53
 msgid "Additional uploads"
-msgstr "További feltöltések"
+msgstr "추가 업로드"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:54
 msgid "Unused"
-msgstr "Használatlan"
+msgstr "사용안됨"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:55
 msgid "Fake 'GPU busy'"
-msgstr "Hamis 'gpu foglalt'"
+msgstr "거짓 'GPU busy'"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:56
 msgid "Special game fixes"
-msgstr "Speciális játék javítások"
+msgstr "특별한 게임 수정"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:57
 msgid "Fast"
-msgstr "Gyors"
+msgstr "빠른"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:58
 msgid "Autoconfigure for fast display"
-msgstr "Automatikus beállítás a gyors megjelenítéshez"
+msgstr "빠른 화면을 위한 자동설정"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:59
 msgid "Beautiful"
-msgstr "Szép"
+msgstr "좋은"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:60
 msgid "Auto configure for beautiful display"
-msgstr "Automatikus beállítás a szép megjelenítéshez"
+msgstr "좋은 화면을 위한 자동설정"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:61
 msgid "Emulated VRam - Ok most times"
-msgstr "Emulált VRam - Többnyire megfelelő"
+msgstr "Emulated VRam - 대부분의 게임에 OK"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:62
 msgid "Gfx card buffer reads"
-msgstr "Videókártya puffer olvasás"
+msgstr "Gfx 카드 버퍼 읽기"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:63
 msgid "Gfx card buffer moves"
-msgstr "Videókártya puffer áthelyezés"
+msgstr "Gfx 카드 버퍼 이동"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:64
 msgid "Gfx card buffer reads and moves"
-msgstr "Videókártya puffer olvasás és áthelyezés"
+msgstr "Gfx 카드 버퍼 읽고 이동"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:65
 msgid "Full Software (FVP)"
-msgstr "Teljes szoftveres (FVP)"
+msgstr "완전 소프트웨어 (FVP)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:66
 msgid "Emulated VRam - Needs FVP"
-msgstr "Emulált VRam - FVP szükséges"
+msgstr "Emulated VRam - FVP 필요"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:67
 msgid "Black - Fast, no effects"
-msgstr "Fekete - Gyors, nincs effektus"
+msgstr "검은 - 빠른, 효과없음"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:68
 msgid "Gfx card buffer - Can be slow"
-msgstr "Videókártya puffer - Lassú lehet"
+msgstr "Gfx 카드 버퍼 - 느려질 수 있음"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:69
 msgid "Gfx card and soft - Slow"
-msgstr "Videókártya és szoftveres - Lassú"
+msgstr "Gfx 카드와 소프트 - 느림"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:70
 msgid "None - Fastest, most glitches"
-msgstr "Nincs - Leggyorsabb, legtöbb képhiba"
+msgstr "없음 - 가장빠름, 대부분 깨짐"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:71
 msgid "Minimum - Missing screens"
-msgstr "Minimum - Hiányzó képrészletek"
+msgstr "최소한 - 화면 문제"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:72
 msgid "Standard - OK for most games"
-msgstr "Általános - Jó a legtöbb játékhoz"
+msgstr "표준 - 대부분의 게임에 OK"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:73
 msgid "Enhanced - Shows more stuff"
-msgstr "Fokozott - Több dolog jelenik meg"
+msgstr "강화 - 더 많은 효과가 보임"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:74
 msgid "Extended - Causing garbage"
-msgstr "Kibővített - Hibákat okozhat"
+msgstr "확장 - 문제를 일으킬 수 있음"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:75
 msgid "None (Standard)"
-msgstr "Nincs (Általános)"
+msgstr "없음 (표준)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:76
 msgid "2xSaI (Much vram needed)"
-msgstr "2xSaI (Sok videó memória szükséges)"
+msgstr "2xSaI (많은 vram 필요)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:77
 msgid "Scaled (Needs tex filtering)"
-msgstr "Méretarányos (Textúra szűrés szükséges)"
+msgstr "Scaled (텍스처 필터링 필요)"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:79
 msgid "Standard - Glitches will happen"
-msgstr "Általános - Képhibák lehetnek"
+msgstr "표준 - 화면문제 발생 가능"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:80
 msgid "Extended - No black borders"
-msgstr "Kibővített - Nincsenek fekete szélek"
+msgstr "확장 - 검은 경계 없음"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:81
 msgid "Standard without sprites - Unfiltered 2D"
-msgstr "Általános sprite-ok nélkül - Szűrés nélküli 2D"
+msgstr "스프라이트 없는 표준 - 2D 필터링안됨"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:82
 msgid "Extended without sprites - Unfiltered 2D"
-msgstr "Kibővített sprite-ok nélkül - Szűrés nélküli 2D"
+msgstr "스프라이트 없는 확장 - 2D 필터링안됨"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:83
 msgid "Standard + smoothed sprites"
-msgstr "Általános + finom sprite-ok"
+msgstr "표준 + 부드러운 스프라이트"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:84
 msgid "Extended + smoothed sprites"
-msgstr "Kiterjesztett + mosott sprite-ok"
+msgstr "확장 + 부드러운 스프라이트"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:85
 msgid "Don't care - Use driver's default textures"
-msgstr "Mindegy - A driver alapértelmezett textúráinak használata"
+msgstr "무시 - 드라이버 기본 텍스처 사용"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:86
 msgid "4444 - Fast, but less colorful"
-msgstr "4444 - Gyors, de kevesebb a szín"
+msgstr "4444 - 빠른, 그러나 적은 색상"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:87
 msgid "5551 - Nice colors, bad transparency"
-msgstr "5551 - Szép színek, rossz átlátszóság"
+msgstr "5551 - 좋은 색상, 나쁜 투명도"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:88
 msgid "8888 - Best colors, more ram needed"
-msgstr "8888 - Legszebb színek, több memóriát igényel"
+msgstr "8888 - 가장 좋은 색상, 더 많은 ram 필요"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:89
 msgid "BGR8888 - Faster on some cards"
-msgstr "BGR8888 - Gyorsabb néhány kártyán"
+msgstr "BGR8888 - 일부 카드에서 더 빠름"
 
 #: ../plugins/bladesio1/gui.c:112
-#, fuzzy
 msgid "Link Cable Configuration"
-msgstr "Beállítás"
+msgstr "케이블 연결 설정"
 
 #. *************************************************************************
 #. #define SIO1_DEBUG 1
 #: ../plugins/bladesio1/sio1.c:47
 msgid "sio1Blade"
-msgstr ""
+msgstr "sio1블레이드"
 
 #. *************************************************************************
 #: ../plugins/bladesio1/sio1.ui.h:1 ../win32/gui/AboutDlg.c:48
@@ -2572,14 +2551,13 @@ msgstr ""
 #: ../win32/gui/ConfigurePlugins.c:676 ../win32/gui/WndMain.c:1102
 #: ../win32/gui/WndMain.c:1339
 msgid "OK"
-msgstr "Rendben"
+msgstr "확인"
 
 #: ../plugins/bladesio1/sio1.ui.h:2
 msgid "CANCEL"
-msgstr ""
+msgstr "취소"
 
 #: ../plugins/bladesio1/sio1.ui.h:3
-#, fuzzy
 msgid ""
 "Select here if you'll be Server (Player1) or Client (Player2).\n"
 "If you select Server you must Copy your IP address to the Clipboard and "
@@ -2587,19 +2565,14 @@ msgid ""
 "If you selected Client please enter the IP address the Server gave to you in "
 "the IP Address Control."
 msgstr ""
-"Válaszd ezt ha te létesítesz szervert (1. játékos) vagy ha kliens leszel (2. "
-"játékos).\n"
-"\n"
-"Ha szervert választasz, másold az IP címedet a vágólapra és szúrd be (Ctrl"
-"+V) bárhová, ahol a kliens látni fogja.\n"
-"\n"
-"Ha klienset választottál, írd be az IP címedet amit a szerver adott az IP "
-"cím vezérlőnél."
+"서버(플레이어1) 혹은 클라이언트(플레이어2)가 되면 여기를 선택하세요.\n"
+"본인이 서버라면 IP주소를 복사해서 클라이언트가 볼 수 있는 곳에 붙여넣기(Ctrl"
+"+V) 해야 합니다.\n"
+"본인이 클라이언트라면 IP주소 콘트롤 부분에 서버가 준 IP주소를 입력하세요."
 
 #: ../plugins/bladesio1/sio1.ui.h:9
-#, fuzzy
 msgid "Disabled"
-msgstr "XA kikapcsolva"
+msgstr "사용안함"
 
 #: ../win32/gui/AboutDlg.c:26
 msgid ""
@@ -2611,13 +2584,13 @@ msgid ""
 "ex-coders: Nocomp, Pete Bernett, nik3d\n"
 "Webmaster: AkumaX"
 msgstr ""
-"PCSXR - A PlayStation Emulátor\n"
+"PCSXR - 플레이스테이션 에뮬레이터\n"
 "\n"
-"Eredeti fejlesztők:\n"
-"Vezető programozó: linuzappz\n"
-"Segéd programozók: shadow\n"
-"Előző programozók: Nocomp, Pete Bernett, nik3d\n"
-"Webmester: AkumaX"
+"원 저작권자:\n"
+"메인 프로그래머: linuzappz\n"
+"동료-프로그래머: shadow\n"
+"그외-프로그래머: Nocomp, Pete Bernett, nik3d\n"
+"웹마스터: AkumaX"
 
 #: ../win32/gui/AboutDlg.c:35
 msgid ""
@@ -2630,419 +2603,415 @@ msgid ""
 "\n"
 "http://pcsxr.codeplex.com/"
 msgstr ""
-"PCSX-df fejlesztők:\n"
+"PCSX-df 저작권자:\n"
 "Ryan Schultz, Andrew Burton, Stephen Chao,\n"
 "Marcus Comstedt, Stefan Sikora\n"
 "\n"
-"PCSX-Reloaded fejlesztők:\n"
-"edgbla, Wei Mingzhi, et al.\n"
-"http://pcsxr.codeplex.com/\n"
-"Magyar fordítás: Delirious"
+"PCSX-Reloaded By:\n"
+"edgbla, shalma, Wei Mingzhi, et al.\n"
+"\n"
+"http://pcsxr.codeplex.com"
 
 #: ../win32/gui/AboutDlg.c:49
 msgid "PCSXR EMU\n"
-msgstr "PCSXR EMULÁTOR\n"
+msgstr "PCSXR EMU\n"
 
 #: ../win32/gui/CheatDlg.c:51 ../win32/gui/CheatDlg.c:223
 #: ../win32/gui/CheatDlg.c:270
 msgid "Yes"
-msgstr "Igen"
+msgstr "예"
 
 #: ../win32/gui/CheatDlg.c:51 ../win32/gui/CheatDlg.c:223
 #: ../win32/gui/CheatDlg.c:270
 msgid "No"
-msgstr "Nem"
+msgstr "아니오"
 
 #: ../win32/gui/CheatDlg.c:70 ../win32/gui/CheatDlg.c:120
 #: ../win32/gui/ConfigurePlugins.c:539 ../win32/gui/ConfigurePlugins.c:677
 #: ../win32/gui/WndMain.c:1103 ../win32/gui/WndMain.c:1340
 msgid "Cancel"
-msgstr "Mégsem"
+msgstr "취소"
 
 #: ../win32/gui/CheatDlg.c:168
 msgid "&Add Code"
-msgstr "&Kód felvétele"
+msgstr "&코드 추가"
 
 #: ../win32/gui/CheatDlg.c:169
 msgid "&Edit Code"
-msgstr "&Kód szerkesztése"
+msgstr "&코드 수정"
 
 #: ../win32/gui/CheatDlg.c:170
 msgid "&Remove Code"
-msgstr "&Kód eltávolítása"
+msgstr "&코드 제거"
 
 #: ../win32/gui/CheatDlg.c:171
 msgid "&Enable/Disable"
-msgstr "&Bekapcsolás/Kikapcsolás"
+msgstr "&사용/취소"
 
 #: ../win32/gui/CheatDlg.c:172
 msgid "&Load..."
-msgstr "&Betöltés..."
+msgstr "&불러오기"
 
 #: ../win32/gui/CheatDlg.c:173
 msgid "&Save As..."
-msgstr "&Mentés másként..."
+msgstr "&다른이름 저장"
 
 #: ../win32/gui/CheatDlg.c:174
 msgid "&Close"
-msgstr "&Bezárás"
+msgstr "&닫기"
 
 #: ../win32/gui/CheatDlg.c:190
 msgid "Enabled"
-msgstr "Bekapcsolva"
+msgstr "사용"
 
 #: ../win32/gui/CheatDlg.c:282 ../win32/gui/CheatDlg.c:311
 msgid "PCSXR Cheat Code Files"
-msgstr "PCSXR csalás kód fájlok"
+msgstr "PCSXR 치트코드 파일"
 
 #: ../win32/gui/CheatDlg.c:453
 msgid "No addresses found."
-msgstr "Nem találhatóak címek."
+msgstr "해당 주소 없음."
 
 #: ../win32/gui/CheatDlg.c:505 ../win32/gui/CheatDlg.c:596
 msgid "Address:"
-msgstr "Cím:"
+msgstr "주소:"
 
 #: ../win32/gui/CheatDlg.c:566
 #, c-format
 msgid "Freeze %.8X"
-msgstr "Fagyasztás %.8x"
+msgstr "고정 %.8X"
 
 #: ../win32/gui/CheatDlg.c:685
 msgid "&Freeze"
-msgstr "&Fagyasztás"
+msgstr "&고정"
 
 #: ../win32/gui/CheatDlg.c:686
 msgid "&Modify"
-msgstr "&Módosítás"
+msgstr "&수정"
 
 #: ../win32/gui/CheatDlg.c:687
 msgid "&Copy"
-msgstr "&Másolás"
+msgstr "&복사"
 
 #: ../win32/gui/CheatDlg.c:688
 msgid "&Search"
-msgstr "&Keresés"
+msgstr "&검색"
 
 #: ../win32/gui/CheatDlg.c:689
 msgid "&New Search"
-msgstr "&Új keresés"
+msgstr "&새로운 검색"
 
 #: ../win32/gui/CheatDlg.c:690
 msgid "C&lose"
-msgstr "B&ezárás"
+msgstr "&닫기"
 
 #: ../win32/gui/ConfigurePlugins.c:240
 msgid "Simulate Psx Bios"
-msgstr "PSX BIOS szimulálása"
+msgstr "Psx 바이오스 시뮬레이트"
 
 #: ../win32/gui/ConfigurePlugins.c:336
 msgid "Configuration not OK!"
-msgstr "Nem megfelelő beállítás!"
+msgstr "설정이 안 끝남!"
 
 #: ../win32/gui/ConfigurePlugins.c:454
 msgid "This plugin reports that should work correctly"
-msgstr "Ez a plugin megfelelően fog működni"
+msgstr "이 플러그인은 정상동작할 것입니다"
 
 #: ../win32/gui/ConfigurePlugins.c:455
 msgid "This plugin reports that should not work correctly"
-msgstr "Ez a plugin nem fog megfelelően működni"
+msgstr "이 플러그인은 정상동작하지 않을 것입니다"
 
 #: ../win32/gui/ConfigurePlugins.c:518
 msgid "Select Plugins Directory"
-msgstr "Plugin könyvtár megadása"
+msgstr "플러그인 폴더 선택"
 
 #: ../win32/gui/ConfigurePlugins.c:527
 msgid "Select Bios Directory"
-msgstr "BIOS könyvtár megadása"
+msgstr "바이오스 폴더 선택"
 
 #: ../win32/gui/ConfigurePlugins.c:536
 msgid "Configuration"
-msgstr "Beállítás"
+msgstr "환경설정"
 
 #: ../win32/gui/ConfigurePlugins.c:540
 msgid "Graphics"
-msgstr "Kép"
+msgstr "그래픽"
 
 #: ../win32/gui/ConfigurePlugins.c:541
 msgid "First Controller"
-msgstr "Egyes irányító"
+msgstr "첫번째 컨트롤러"
 
 #: ../win32/gui/ConfigurePlugins.c:542
 msgid "Second Controller"
-msgstr "Kettes irányító"
+msgstr "두번째 컨트롤러"
 
 #: ../win32/gui/ConfigurePlugins.c:543
 msgid "Sound"
-msgstr "Hang"
+msgstr "사운드"
 
 #: ../win32/gui/ConfigurePlugins.c:544
 msgid "Cdrom"
-msgstr "CD-ROM"
+msgstr "Cd롬"
 
 #: ../win32/gui/ConfigurePlugins.c:545
-#, fuzzy
 msgid "Link cable"
-msgstr "Bekapcsolás"
+msgstr "케이블 연결"
 
 #: ../win32/gui/ConfigurePlugins.c:546
 msgid "Bios"
-msgstr "BIOS"
+msgstr "바이오스"
 
 #: ../win32/gui/ConfigurePlugins.c:547
 msgid "Set Bios Directory"
-msgstr "BIOS könyvtára"
+msgstr "바이오스 폴더 설정"
 
 #: ../win32/gui/ConfigurePlugins.c:548
 msgid "Set Plugins Directory"
-msgstr "Pluginok könyvtára"
+msgstr "플러그인 폴더 설정"
 
 #: ../win32/gui/ConfigurePlugins.c:549 ../win32/gui/ConfigurePlugins.c:552
 #: ../win32/gui/ConfigurePlugins.c:555 ../win32/gui/ConfigurePlugins.c:558
 #: ../win32/gui/ConfigurePlugins.c:561 ../win32/gui/ConfigurePlugins.c:564
 #: ../win32/gui/ConfigurePlugins.c:679
 msgid "Configure..."
-msgstr "Beállítás..."
+msgstr "설정"
 
 #: ../win32/gui/ConfigurePlugins.c:550 ../win32/gui/ConfigurePlugins.c:553
 #: ../win32/gui/ConfigurePlugins.c:556 ../win32/gui/ConfigurePlugins.c:559
 #: ../win32/gui/ConfigurePlugins.c:562 ../win32/gui/ConfigurePlugins.c:565
 #: ../win32/gui/ConfigurePlugins.c:680
 msgid "Test..."
-msgstr "Tesztelés..."
+msgstr "테스트"
 
 #: ../win32/gui/ConfigurePlugins.c:551 ../win32/gui/ConfigurePlugins.c:554
 #: ../win32/gui/ConfigurePlugins.c:557 ../win32/gui/ConfigurePlugins.c:560
 #: ../win32/gui/ConfigurePlugins.c:563 ../win32/gui/ConfigurePlugins.c:566
 #: ../win32/gui/ConfigurePlugins.c:681
 msgid "About..."
-msgstr "Névjegy..."
+msgstr "비고"
 
 #: ../win32/gui/ConfigurePlugins.c:674
 msgid "NetPlay Configuration"
-msgstr "Internetes játék beállítása"
+msgstr "넷플레이 환경설정"
 
 #: ../win32/gui/ConfigurePlugins.c:682
 msgid ""
 "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
-msgstr ""
-"Megjegyzés: A NetPlay plugin könyvtár azonos a többi plugin könyvtárával."
+msgstr "주의: 넷플레이 플러그인 폴더는 다른 플러그인 폴더와 같아야 합니다."
 
 #: ../win32/gui/plugin.c:94 ../win32/gui/WndMain.c:332
 #, c-format
 msgid "*PCSXR*: Saved State %d"
-msgstr "*PCSXR*: Elmentett állás %d"
+msgstr "*PCSXR*: 상태 저장 %d"
 
 #: ../win32/gui/plugin.c:95 ../win32/gui/WndMain.c:333
 #, c-format
 msgid "*PCSXR*: Error Saving State %d"
-msgstr "*PCSXR*: Hiba az állás mentése közben %d"
+msgstr "*PCSXR*: 상태 저장 에러 %d"
 
 #: ../win32/gui/plugin.c:111 ../win32/gui/WndMain.c:310
 #, c-format
 msgid "*PCSXR*: Loaded State %d"
-msgstr "*PCSXR*: Betöltött elmentett állás %d"
+msgstr "*PCSXR*: 상태 불러오기 %d"
 
 #: ../win32/gui/plugin.c:112 ../win32/gui/WndMain.c:311
 #, c-format
 msgid "*PCSXR*: Error Loading State %d"
-msgstr "*PCSXR*: Hiba a mentett állás betöltése közben %d"
+msgstr "*PCSXR*: 상태 불러오기 에러 %d"
 
 #: ../win32/gui/plugin.c:123
 #, c-format
 msgid "*PCSXR*: Sio Irq Always Enabled"
-msgstr "*PCSXR*: Sio IRQ mindig bekapcsolva"
+msgstr "*PCSXR*: Sio Irq 항상 사용"
 
 #: ../win32/gui/plugin.c:124
 #, c-format
 msgid "*PCSXR*: Sio Irq Not Always Enabled"
-msgstr "*PCSXR*: Sio IRQ nincs mindig bekapcsolva"
+msgstr "*PCSXR*: Sio Irq 항상 사용 안함"
 
 #: ../win32/gui/plugin.c:131
 #, c-format
 msgid "*PCSXR*: Black&White Mdecs Only Enabled"
-msgstr "*PCSXR*: Csak fekete és fehér Mdecs használata"
+msgstr "*PCSXR*: 흑백 Mdecs 만 사용"
 
 #: ../win32/gui/plugin.c:132
 #, c-format
 msgid "*PCSXR*: Black&White Mdecs Only Disabled"
-msgstr "*PCSXR*: Csak fekete és fehér Mdecs nincs használva"
+msgstr "*PCSXR*: 흑백 Mdecs 만 사용 중지"
 
 #: ../win32/gui/plugin.c:139
 #, c-format
 msgid "*PCSXR*: Xa Enabled"
-msgstr "*PCSXR*: Xa bekapcsolva"
+msgstr "*PCSXR*: Xa 사용"
 
 #: ../win32/gui/plugin.c:140
 #, c-format
 msgid "*PCSXR*: Xa Disabled"
-msgstr "*PCSXR*: Xa kikapcsolva"
+msgstr "*PCSXR*: Xa 사용안함"
 
 #: ../win32/gui/plugin.c:149
 msgid "*PCSXR*: CdRom Case Opened"
-msgstr "*PCSXR*: CD-ROM tálca nyitva"
+msgstr "*PCSXR*: Cd롬 케이스 열기"
 
 #: ../win32/gui/plugin.c:155
 msgid "*PCSXR*: CdRom Case Closed"
-msgstr "*PCSXR*: CD-ROM tálca zárva"
+msgstr "*PCSXR*: Cd롬 케이스 닫기"
 
 #: ../win32/gui/plugin.c:182
 msgid "Connecting..."
-msgstr "Csatlakozás..."
+msgstr "연결중"
 
 #: ../win32/gui/plugin.c:184 ../win32/gui/plugin.c:191
 #, c-format
 msgid "Please wait while connecting... %c\n"
-msgstr "Kis türelem, csatlakozás folyamatban... %c\n"
+msgstr "연결을 잠시 기다려 주세요 %c\n"
 
 #: ../win32/gui/plugin.c:282
 #, c-format
 msgid "Error Opening GPU Plugin (%d)"
-msgstr "Hiba a kép plugin megnyitáskor (%d)"
+msgstr "GPU 플러그인 열기 에러 (%d)"
 
 #: ../win32/gui/plugin.c:284
 #, c-format
 msgid "Error Opening SPU Plugin (%d)"
-msgstr "Hiba a hang plugin megnyitáskor (%d)"
+msgstr "SPU 플러그인 열기 에러 (%d)"
 
 #: ../win32/gui/plugin.c:287
 #, c-format
 msgid "Error Opening PAD1 Plugin (%d)"
-msgstr "Hiba az egyes irányító plugin megnyitásakor (%d)"
+msgstr "PAD1 플러그인 열기 에러 (%d)"
 
 #: ../win32/gui/plugin.c:291
 #, c-format
 msgid "Error Opening PAD2 Plugin (%d)"
-msgstr "Hiba a kettes irányító plugin megnyitásakor (%d)"
+msgstr "PAD2 플러그인 열기 에러 (%d)"
 
 #: ../win32/gui/plugin.c:296
-#, fuzzy, c-format
+#, c-format
 msgid "Error Opening SIO1 plugin (%d)"
-msgstr "Hiba a hang plugin megnyitáskor (%d)"
+msgstr "SIO1 플러그인 열기 에러 (%d)"
 
 #: ../win32/gui/plugin.c:328
 msgid "Error Closing CDR Plugin"
-msgstr "Hiba a CD-ROM plugin bezárásakor"
+msgstr "CDR 플러그인 닫기 에러"
 
 #: ../win32/gui/plugin.c:330
 msgid "Error Closing GPU Plugin"
-msgstr "Hiba a kép plugin bezárásakor"
+msgstr "GPU 플러그인 닫기 에러"
 
 #: ../win32/gui/plugin.c:332
 msgid "Error Closing SPU Plugin"
-msgstr "Hiba a hang plugin bezárásakor"
+msgstr "SPU 플러그인 닫기 에러"
 
 #: ../win32/gui/plugin.c:335
-#, fuzzy
 msgid "Error Closing SIO1 plugin"
-msgstr "Hiba a hang plugin bezárásakor"
+msgstr "SIO1 플러그인 닫기 에러"
 
 #: ../win32/gui/plugin.c:357
 #, c-format
 msgid "CDRinit error: %d"
-msgstr "CD-ROM inicializálási hiba: %d"
+msgstr "CD로 초기화 에러: %d"
 
 #: ../win32/gui/plugin.c:359
 #, c-format
 msgid "GPUinit error: %d"
-msgstr "Kép plugin inicializálási hiba: %d"
+msgstr "GPU 초기화 에러: %d"
 
 #: ../win32/gui/plugin.c:361
 #, c-format
 msgid "SPUinit error: %d"
-msgstr "Hang plugin inicializálási hiba: %d"
+msgstr "SPU 초기화 에러: %d"
 
 #: ../win32/gui/plugin.c:363
 #, c-format
 msgid "PAD1init error: %d"
-msgstr "Egyes irányító plugin inicializálási hiba: %d"
+msgstr "PAD1 초기화 에러: %d"
 
 #: ../win32/gui/plugin.c:365
 #, c-format
 msgid "PAD2init error: %d"
-msgstr "Kettes irányító plugin inicializálási hiba: %d"
+msgstr "PAD2 초기화 에러: %d"
 
 #: ../win32/gui/plugin.c:368
-#, fuzzy, c-format
+#, c-format
 msgid "SIO1init error: %d"
-msgstr "Hang plugin inicializálási hiba: %d"
+msgstr "SIO1 초기화 에러: %d"
 
 #: ../win32/gui/plugin.c:373
 #, c-format
 msgid "NETinit error: %d"
-msgstr "Internetes plugin inicializálási hiba: %d"
+msgstr "NET 초기화 에러: %d"
 
 #: ../win32/gui/WndMain.c:77
 msgid "Arabic"
-msgstr "Arab"
+msgstr "아라비어어"
 
 #: ../win32/gui/WndMain.c:78
 msgid "Catalan"
-msgstr "Katalán"
+msgstr "카탈로니아어"
 
 #: ../win32/gui/WndMain.c:79
 msgid "German"
-msgstr "Német"
+msgstr "독일어"
 
 #: ../win32/gui/WndMain.c:80
 msgid "Greek"
-msgstr "Görög"
+msgstr "그리스어"
 
 #: ../win32/gui/WndMain.c:81 ../win32/gui/WndMain.c:1721
 #: ../win32/gui/WndMain.c:1723
 msgid "English"
-msgstr "Angol"
+msgstr "영어"
 
 #: ../win32/gui/WndMain.c:82
 msgid "Spanish"
-msgstr "Spanyol"
+msgstr "스페인어"
 
 #: ../win32/gui/WndMain.c:83
 msgid "French"
-msgstr "Francia"
+msgstr "불어"
 
 #: ../win32/gui/WndMain.c:84
 msgid "Hungarian"
-msgstr ""
+msgstr "헝가리어"
 
 #: ../win32/gui/WndMain.c:85
 msgid "Italian"
-msgstr "Olasz"
+msgstr "이탈리아어"
 
 #: ../win32/gui/WndMain.c:86
 msgid "Portuguese"
-msgstr "Portugál"
+msgstr "포루투갈어"
 
 #: ../win32/gui/WndMain.c:87
 msgid "Portuguese (Brazilian)"
-msgstr "Portugál (brazil)"
+msgstr "포루투갈어(브라질의)"
 
 #: ../win32/gui/WndMain.c:88
 msgid "Romanian"
-msgstr "Román"
+msgstr "루마니아어"
 
 #: ../win32/gui/WndMain.c:89
 msgid "Russian"
-msgstr "Orosz"
+msgstr "러시아어"
 
 #: ../win32/gui/WndMain.c:90
 msgid "Simplified Chinese"
-msgstr "Egyszerűsített kínai"
+msgstr "중국어(간체)"
 
 #: ../win32/gui/WndMain.c:91
 msgid "Traditional Chinese"
-msgstr "Hagyományos kínai"
+msgstr "중국어(번체)"
 
 #: ../win32/gui/WndMain.c:92
 msgid "Japanese"
-msgstr "Japán"
+msgstr "일본어"
 
 #: ../win32/gui/WndMain.c:93
 msgid "Korean"
-msgstr "Koreai"
+msgstr "한국어"
 
 #: ../win32/gui/WndMain.c:216
-#, fuzzy
 msgid ""
 "Usage: pcsxr [options]\n"
 "\toptions:\n"
@@ -3053,601 +3022,348 @@ msgid ""
 "\t-cdfile FILE\tRuns a CD image file (requires -nogui)\n"
 "\t-help\t\tDisplay this message"
 msgstr ""
-"Használat: pcsxr [beállítások]\n"
-"\toptions:\n"
-"\t-nogui\t\tNe nyíljon meg a GUI\n"
-"\t-psxout\t\tPSX kimenet bekapcsolása\n"
-"\t-runcd\t\tCD-ROM futtatása (-nogui szükséges)\n"
-"\t-cdfile FILE\tCD képfájl futtatása (-nogui szükséges)\n"
-"\t-help\t\tAz üzenet megjelenítése"
+"Usage: pcsxr [options]\n"
+"\t옵션들:\n"
+"\t-gui없음\t\tGUI 열지 마세요\n"
+"\t-psx출력\t\tPSX 출력 사용\n"
+"\t-느린부트\t바이오스 로고 사용\n"
+"\t-cd구동\t\tCD롬 구동 (-gui없음 필요)\n"
+"\t-cd파일\tCD 이미지파일 구동 (-nogui필요)\n"
+"\t-도움말\t\t이 메시지를 표시"
 
 #: ../win32/gui/WndMain.c:351 ../win32/gui/WndMain.c:397
 msgid "PCSXR State Format"
-msgstr "PCSXR állás mentés formátum"
+msgstr "PCSXR 상태 포맷"
 
 #: ../win32/gui/WndMain.c:378
 #, c-format
 msgid "*PCSXR*: Loaded State %s"
-msgstr "*PCSXR*: Betöltött állás %s"
+msgstr "*PCSXR*: 불러온 상태 %s"
 
 #: ../win32/gui/WndMain.c:379
 #, c-format
 msgid "*PCSXR*: Error Loading State %s"
-msgstr "*PCSXR*: Hiba a mentett állás betöltése közben %s"
+msgstr "*PCSXR*: 상태 %s 불러오기 에러"
 
 #: ../win32/gui/WndMain.c:424
 #, c-format
 msgid "*PCSXR*: Saved State %s"
-msgstr "*PCSXR*: Mentett állás %s"
+msgstr "*PCSXR*: 저장된 상태 %s"
 
 #: ../win32/gui/WndMain.c:425
 #, c-format
 msgid "*PCSXR*: Error Saving State %s"
-msgstr "*PCSXR*: Hiba az állás mentése közben %s"
+msgstr "*PCSXR*: 상태 %s 저장 에러"
 
 #: ../win32/gui/WndMain.c:496
 msgid "Running BIOS is not supported with Internal HLE Bios."
-msgstr "BIOS használata nem támogatott belső HLE Bios esetén."
+msgstr "내부 HLE 바이오스는 바이오스 구동을 지원하지 않습니다."
 
 #: ../win32/gui/WndMain.c:804
 msgid "Game ID"
-msgstr "Játék azonosító"
+msgstr "게임 ID"
 
 #: ../win32/gui/WndMain.c:810
 msgid "Game"
-msgstr "Játék"
+msgstr "게임"
 
 #: ../win32/gui/WndMain.c:992
 msgid "mid link block"
-msgstr "mid link block"
+msgstr "중간 링크 블럭"
 
 #: ../win32/gui/WndMain.c:995
 msgid "terminiting link block"
-msgstr "link block megszakítása"
+msgstr "링크 블럭 종료중"
 
 #: ../win32/gui/WndMain.c:1100
 msgid "Memcard Manager"
-msgstr "Memória kártya kezelő"
+msgstr "메모리카드 관리자"
 
 #: ../win32/gui/WndMain.c:1104 ../win32/gui/WndMain.c:1107
 msgid "Select Mcd"
-msgstr "Választás"
+msgstr "Mcd 선택"
 
 #: ../win32/gui/WndMain.c:1105 ../win32/gui/WndMain.c:1108
 msgid "Format Mcd"
-msgstr "Formázás"
+msgstr "Mcd 포맷"
 
 #: ../win32/gui/WndMain.c:1106 ../win32/gui/WndMain.c:1109
 msgid "Reload Mcd"
-msgstr "Újratöltés"
+msgstr "새로고침"
 
 #: ../win32/gui/WndMain.c:1110
 msgid "-> Copy ->"
-msgstr "-> Másolás ->"
+msgstr "-> 복사 ->"
 
 #: ../win32/gui/WndMain.c:1111
 msgid "<- Copy <-"
-msgstr "<- Másolás <-"
+msgstr "<- 복사 <-"
 
 #: ../win32/gui/WndMain.c:1112
 msgid "Paste"
-msgstr "Beszúrás"
+msgstr "붙여넣기"
 
 #: ../win32/gui/WndMain.c:1113
 msgid "<- Un/Delete"
-msgstr "<- Nem/törlés"
+msgstr "<- 꺼냄/삭제"
 
 #: ../win32/gui/WndMain.c:1114
 msgid "Un/Delete ->"
-msgstr "Nem/törlés ->"
+msgstr "꺼냄/삭제 ->"
 
 #: ../win32/gui/WndMain.c:1116
 msgid "Memory Card 1"
-msgstr "Memória kártya 1"
+msgstr "메모리카드 1"
 
 #: ../win32/gui/WndMain.c:1117
 msgid "Memory Card 2"
-msgstr "Memória kártya 2"
+msgstr "메모리카드 2"
 
 #: ../win32/gui/WndMain.c:1172
 msgid "Are you sure you want to paste this selection?"
-msgstr "Valóban be akarod szúrni a kijelölést?"
+msgstr "선택한 것을 붙여넣을까요?"
 
 #: ../win32/gui/WndMain.c:1172 ../win32/gui/WndMain.c:1283
 #: ../win32/gui/WndMain.c:1290
 msgid "Confirmation"
-msgstr "Megerősítés"
+msgstr "확인"
 
 #: ../win32/gui/WndMain.c:1283 ../win32/gui/WndMain.c:1290
 msgid "Are you sure you want to format this Memory Card?"
-msgstr "Valóban le kívánod formázni ezt a Memória kártyát?"
+msgstr "이 메모리카드를 포맷할까요?"
 
 #: ../win32/gui/WndMain.c:1337
 msgid "Cpu Config"
-msgstr "Processzor beállítás"
+msgstr "Cpu 설정"
 
 #: ../win32/gui/WndMain.c:1342
 msgid "Disable Xa Decoding"
-msgstr "Xa kódolás kikapcsolása"
+msgstr "Xa 복호화 사용안함"
 
 #: ../win32/gui/WndMain.c:1343
 msgid "Sio Irq Always Enabled"
-msgstr "Sio IRQ mindig bekapcsolva"
+msgstr "Sio Irq 항상 사용"
 
 #: ../win32/gui/WndMain.c:1344
 msgid "Black && White Movies"
-msgstr "Fekete &fehér videók"
+msgstr "흑백 영상"
 
 #: ../win32/gui/WndMain.c:1345
 msgid "Disable Cd audio"
-msgstr "CD hang kikapcsolása"
+msgstr "Cd 오디오 사용안함"
 
 #: ../win32/gui/WndMain.c:1348
 msgid "Enable Interpreter Cpu"
-msgstr "Processzor interpretáló rutin bekapcsolása"
+msgstr "인터프리터 CPU 사용"
 
 #: ../win32/gui/WndMain.c:1351
 msgid "Spu Irq Always Enabled"
-msgstr "Hang IRQ mindig bekapcsolva"
+msgstr "Spu Irq 항상 사용"
 
 #: ../win32/gui/WndMain.c:1355
 msgid "Hide cursor"
-msgstr ""
+msgstr "커서 숨기기"
 
 #: ../win32/gui/WndMain.c:1356
-#, fuzzy
 msgid "Save window position"
-msgstr "Ablak beállítások"
+msgstr "프로그램 위치 저장"
 
 #: ../win32/gui/WndMain.c:1359
 msgid "Psx System Type"
-msgstr "PSX régió"
+msgstr "Psx 시스템 유형"
 
 #: ../win32/gui/WndMain.c:1476
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
-msgstr "Psx memória kártya formátum (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
+msgstr "Psx Mcd 포맷 (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 
 #: ../win32/gui/WndMain.c:1481
 msgid "Psx Memory Card (*.mcr;*.mc)"
-msgstr "Psx memória kártya (*.mcr;*.mc)"
+msgstr "Psx 메모리카드 (*.mcr;*.mc)"
 
 #: ../win32/gui/WndMain.c:1486
 msgid "CVGS Memory Card (*.mem;*.vgs)"
-msgstr "CVSG memória kártya (*.mem;*.vgs)"
+msgstr "CVGS 메모리카드 (*.mem;*.vgs)"
 
 #: ../win32/gui/WndMain.c:1491
 msgid "Bleem Memory Card (*.mcd)"
-msgstr "Bleem memória kártya (*.mcd)"
+msgstr "Bleem 메모리카드 (*.mcd)"
 
 #: ../win32/gui/WndMain.c:1496
 msgid "DexDrive Memory Card (*.gme)"
-msgstr "DexDrive memória kártya (*.gme)"
+msgstr "DexDrive 메모리카드 (*.gme)"
 
 #: ../win32/gui/WndMain.c:1501
 msgid "DataDeck Memory Card (*.ddf)"
-msgstr "DataDeck memória kártya (*.ddf)"
+msgstr "DataDeck 메모리카드 (*.ddf)"
 
 #: ../win32/gui/WndMain.c:1545
 msgid "Psx Exe Format"
-msgstr "Psx exe formátum"
+msgstr "Psx Exe 포맷"
 
 #: ../win32/gui/WndMain.c:1582
-#, fuzzy
 msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin;*.cue;*.pbp;*.cbn)"
-msgstr "Psx képfájlok (*.iso;*.mdf;*.img;*.bin)"
+msgstr "Psx Iso들 (*.iso;*.mdf;*.img;*.bin;*.cue;*.pbp;*.cbn)"
 
 #: ../win32/gui/WndMain.c:1658
 msgid "&File"
-msgstr "&Fájl"
+msgstr "&파일"
 
 #: ../win32/gui/WndMain.c:1659
 msgid "E&xit"
-msgstr "K&ilépés"
+msgstr "&종료"
 
 #: ../win32/gui/WndMain.c:1661
 msgid "Run &EXE..."
-msgstr "&EXE indítása..."
+msgstr "&EXE 실행"
 
 #: ../win32/gui/WndMain.c:1662
 msgid "Run &BIOS"
-msgstr "&BIOS indítása"
+msgstr "&바이오스 실행"
 
 #: ../win32/gui/WndMain.c:1663
 msgid "Run &ISO..."
-msgstr "&ISO megnyitása..."
+msgstr "&ISO 실행"
 
 #: ../win32/gui/WndMain.c:1664
 msgid "Run &CD"
-msgstr "&CD indítása"
+msgstr "&CD 실행"
 
 #: ../win32/gui/WndMain.c:1666
 msgid "&Emulator"
-msgstr "&Emulátor"
+msgstr "&에뮬레이터"
 
 #: ../win32/gui/WndMain.c:1667
 msgid "&States"
-msgstr "&Állapot"
+msgstr "&상태"
 
 #: ../win32/gui/WndMain.c:1669
 msgid "S&witch ISO..."
-msgstr "ISO v&áltás..."
+msgstr "&ISO 교체"
 
 #: ../win32/gui/WndMain.c:1671
-#, fuzzy
 msgid "S&hutdown"
-msgstr "Jobbra le"
+msgstr "&종료"
 
 #: ../win32/gui/WndMain.c:1672
 msgid "Re&set"
-msgstr "Al&apra állítás"
+msgstr "&재시작"
 
 #: ../win32/gui/WndMain.c:1673
 msgid "&Run"
-msgstr "&Indítás"
+msgstr "&계속"
 
 #: ../win32/gui/WndMain.c:1674
 msgid "&Save"
-msgstr "&Mentés"
+msgstr "&저장"
 
 #: ../win32/gui/WndMain.c:1675
 msgid "&Load"
-msgstr "&Betöltés"
+msgstr "&불러오기"
 
 #: ../win32/gui/WndMain.c:1676 ../win32/gui/WndMain.c:1686
 msgid "&Other..."
-msgstr "&Más..."
+msgstr "&기타"
 
 #: ../win32/gui/WndMain.c:1677 ../win32/gui/WndMain.c:1687
 msgid "Slot &9"
-msgstr "&Kilencedik hely"
+msgstr "&슬롯9"
 
 #: ../win32/gui/WndMain.c:1678 ../win32/gui/WndMain.c:1688
 msgid "Slot &8"
-msgstr "&Nyolcadik hely"
+msgstr "&슬롯8"
 
 #: ../win32/gui/WndMain.c:1679 ../win32/gui/WndMain.c:1689
 msgid "Slot &7"
-msgstr "&Hetedik hely"
+msgstr "&슬롯7"
 
 #: ../win32/gui/WndMain.c:1680 ../win32/gui/WndMain.c:1690
 msgid "Slot &6"
-msgstr "&Hatodik hely"
+msgstr "&슬롯6"
 
 #: ../win32/gui/WndMain.c:1681 ../win32/gui/WndMain.c:1691
 msgid "Slot &5"
-msgstr "&Ötödik hely"
+msgstr "&슬롯5"
 
 #: ../win32/gui/WndMain.c:1682 ../win32/gui/WndMain.c:1692
 msgid "Slot &4"
-msgstr "&Negyedik hely"
+msgstr "&슬롯4"
 
 #: ../win32/gui/WndMain.c:1683 ../win32/gui/WndMain.c:1693
 msgid "Slot &3"
-msgstr "&Harmadik hely"
+msgstr "&슬롯3"
 
 #: ../win32/gui/WndMain.c:1684 ../win32/gui/WndMain.c:1694
 msgid "Slot &2"
-msgstr "&Második hely"
+msgstr "&슬롯2"
 
 #: ../win32/gui/WndMain.c:1685 ../win32/gui/WndMain.c:1695
 msgid "Slot &1"
-msgstr "&Első hely"
+msgstr "&슬롯1"
 
 #: ../win32/gui/WndMain.c:1697
 msgid "&Configuration"
-msgstr "&Beállítások"
+msgstr "&환경설정"
 
 #: ../win32/gui/WndMain.c:1698
 msgid "Cheat &Search..."
-msgstr "Csalás &keresése..."
+msgstr "&치트 검색"
 
 #: ../win32/gui/WndMain.c:1699
 msgid "Ch&eat Code..."
-msgstr "Cs&alás kód..."
+msgstr "&치트 코드"
 
 #: ../win32/gui/WndMain.c:1702
 msgid "&Language"
-msgstr "&Nyelv"
+msgstr "&언어"
 
 #: ../win32/gui/WndMain.c:1727
 msgid "&Memory cards..."
-msgstr "&Memória kártyák..."
+msgstr "&메모리카드"
 
 #: ../win32/gui/WndMain.c:1728
 msgid "C&PU..."
-msgstr "P&rocesszor..."
+msgstr "&CPU"
 
 #: ../win32/gui/WndMain.c:1730
 msgid "&NetPlay..."
-msgstr "&Internetes játék..."
+msgstr "&넷플레이"
 
 #: ../win32/gui/WndMain.c:1732
-#, fuzzy
 msgid "&Link cable..."
-msgstr "Bekapcsolás"
+msgstr "&케이블 연결"
 
 #: ../win32/gui/WndMain.c:1733
 msgid "&Controllers..."
-msgstr "&Irányítók..."
+msgstr "&컨트롤러"
 
 #: ../win32/gui/WndMain.c:1734
 msgid "CD-&ROM..."
-msgstr "CD-&ROM..."
+msgstr "&CD롬"
 
 #: ../win32/gui/WndMain.c:1735
 msgid "&Sound..."
-msgstr "&Hang..."
+msgstr "&사운드"
 
 #: ../win32/gui/WndMain.c:1736
 msgid "&Graphics..."
-msgstr "&Kép..."
+msgstr "&그래픽"
 
 #: ../win32/gui/WndMain.c:1738
 msgid "&Plugins && Bios..."
-msgstr "&Pluginok és BIOS..."
+msgstr "&플러그인&& 바이오스"
 
 #: ../win32/gui/WndMain.c:1740
 msgid "&Help"
-msgstr "&Súgó"
+msgstr "&도움말"
 
 #: ../win32/gui/WndMain.c:1741
 msgid "&About..."
-msgstr "&A program névjegye..."
+msgstr "&Pcsxr에 대해"
 
 #: ../win32/gui/WndMain.c:1893
 msgid "Pcsxr Msg"
-msgstr "Pcsxr üzenet"
+msgstr "Pcsxr 메시지"
 
 #: ../win32/gui/WndMain.c:1896
 msgid "Error Loading Symbol"
-msgstr "Hiba a szimbólum betöltése közben"
-
-#~ msgid "Error Opening CDR Plugin"
-#~ msgstr "Hiba a CD-ROM plugin megnyitásakor"
-
-#~ msgid "Controller 1:   "
-#~ msgstr "1. irányító:   "
-
-#~ msgid "Sio1 Driver"
-#~ msgstr "Sio1 Driver"
-
-#~ msgid ""
-#~ "8-bit\n"
-#~ "16-bit\n"
-#~ "32-bit"
-#~ msgstr ""
-#~ "8-bit\n"
-#~ "16-bit\n"
-#~ "32-bit"
-
-#~ msgid "CD-ROM..."
-#~ msgstr "CD-ROM..."
-
-#~ msgid "Continue..."
-#~ msgstr "Folytatása..."
-
-#~ msgid "Controllers..."
-#~ msgstr "Irányítók..."
-
-#~ msgid ""
-#~ "Decimal\n"
-#~ "Hexadecimal"
-#~ msgstr ""
-#~ "Decimális\n"
-#~ "Hexadecimális"
-
-#~ msgid ""
-#~ "Equal Value\n"
-#~ "Not Equal Value\n"
-#~ "Range\n"
-#~ "Increased By\n"
-#~ "Decreased By\n"
-#~ "Increased\n"
-#~ "Decreased\n"
-#~ "Different\n"
-#~ "No Change"
-#~ msgstr ""
-#~ "Equal Value\n"
-#~ "Egyenlő érték\n"
-#~ "Nem egyenlő érték\n"
-#~ "Hatótáv\n"
-#~ "Növelve ennyivel\n"
-#~ "Csökkentve ennyivel\n"
-#~ "Növelve\n"
-#~ "Csökkentve\n"
-#~ "Különböző\n"
-#~ "Változatlan"
-
-#~ msgid "Graphics..."
-#~ msgstr "Kép..."
-
-#~ msgid "Memcards..."
-#~ msgstr "Memória kártyák..."
-
-#~ msgid "Run ISO..."
-#~ msgstr "ISO futtatása..."
-
-#~ msgid "Sound..."
-#~ msgstr "Hang..."
-
-#~ msgid "Switch ISO..."
-#~ msgstr "ISO váltás..."
-
-#~ msgid "Error: Glade interface could not be loaded!"
-#~ msgstr "Hiba: Glade interfész nem tölthető be!"
-
-#~ msgid ""
-#~ "0: None\n"
-#~ "1: 2xSai\n"
-#~ "2: 2xSuperSai\n"
-#~ "3: SuperEagle\n"
-#~ "4: Scale2x\n"
-#~ "5: Scale3x\n"
-#~ "6: HQ2X\n"
-#~ "7: HQ3X"
-#~ msgstr ""
-#~ "0: Nincs\n"
-#~ "1: 2xSai\n"
-#~ "2: 2xSuperSai\n"
-#~ "3: SuperEagle\n"
-#~ "4: Scale2x\n"
-#~ "5: Scale3x\n"
-#~ "6: HQ2X\n"
-#~ "7: HQ3X"
-
-#~ msgid ""
-#~ "0: Off (fastest)\n"
-#~ "1: Game dependant\n"
-#~ "2: Always"
-#~ msgstr ""
-#~ "0: Ki (leggyorsabb)\n"
-#~ "1: Játék alárendelt\n"
-#~ "2: Mindig"
-
-#~ msgid ""
-#~ "320x240\n"
-#~ "640x480\n"
-#~ "800x600\n"
-#~ "1024x768\n"
-#~ "1152x864\n"
-#~ "1280x1024\n"
-#~ "1600x1200"
-#~ msgstr ""
-#~ "320x240\n"
-#~ "640x480\n"
-#~ "800x600\n"
-#~ "1024x768\n"
-#~ "1152x864\n"
-#~ "1280x1024\n"
-#~ "1600x1200"
-
-#~ msgid "<b>Compatibility</b>"
-#~ msgstr "<b>Kompatibilitás</b>"
-
-#~ msgid "<b>Framerate</b>"
-#~ msgstr "<b>Képfrissítési frekvencia</b>"
-
-#~ msgid "<b>Screen</b>"
-#~ msgstr "<b>Képernyő</b>"
-
-#~ msgid "<b>General</b>"
-#~ msgstr "<b>Általános</b>"
-
-#~ msgid "<b>XA Music</b>"
-#~ msgstr "<b>XA zene</b>"
-
-#~ msgid ""
-#~ "None\n"
-#~ "Low\n"
-#~ "Medium\n"
-#~ "Loud\n"
-#~ "Loudest"
-#~ msgstr ""
-#~ "Nincs\n"
-#~ "Halk\n"
-#~ "Közepes\n"
-#~ "Hangos\n"
-#~ "Leghangosabb"
-
-#~ msgid ""
-#~ "None\n"
-#~ "Simple\n"
-#~ "Gaussian\n"
-#~ "Cubic"
-#~ msgstr ""
-#~ "Nincs\n"
-#~ "Egyszerű\n"
-#~ "Gauss\n"
-#~ "Köbös"
-
-#~ msgid ""
-#~ "Default\n"
-#~ "125ms\n"
-#~ "250ms\n"
-#~ "500ms\n"
-#~ "1s\n"
-#~ "2s\n"
-#~ "4s\n"
-#~ "8s\n"
-#~ "16s\n"
-#~ "32s\n"
-#~ "1min\n"
-#~ "2min\n"
-#~ "4min\n"
-#~ "8min\n"
-#~ "16min\n"
-#~ "32min"
-#~ msgstr ""
-#~ "Alapérték\n"
-#~ "125 ms\n"
-#~ "250 ms\n"
-#~ "500 ms\n"
-#~ "1 s\n"
-#~ "2 s\n"
-#~ "4 s\n"
-#~ "8 s\n"
-#~ "16 s\n"
-#~ "32 s\n"
-#~ "1 perc\n"
-#~ "2 perc\n"
-#~ "4 perc\n"
-#~ "8 perc\n"
-#~ "16 perc\n"
-#~ "32 perc"
-
-#~ msgid "Select CD-ROM device"
-#~ msgstr "Válassz CD-ROM eszközt"
-
-#~ msgid "hseparator"
-#~ msgstr "hseparator"
-
-#, fuzzy
-#~ msgid "COFF files not supported.\n"
-#~ msgstr "File COFF non supportato.\n"
-
-#, fuzzy
-#~ msgid "PC fps calculation"
-#~ msgstr "Calcolo degli fps del PC"
-
-#, fuzzy
-#~ msgid "Scanlines"
-#~ msgstr "Scanlines"
-
-#, fuzzy
-#~ msgid "Adapted from P.E.Op.S OpenGL GPU by Pete Bernert"
-#~ msgstr "Adattato da P.E.Op.S OpenGL GPU da Pete Bernert"
-
-#, fuzzy
-#~ msgid "Homepage: http://www.pbernert.com"
-#~ msgstr "Homepage: http://www.pbernert.com"
-
-#, fuzzy
-#~ msgid "Version: 1.78"
-#~ msgstr "Versione: 1.78"
-
-#~ msgid "Error Closing PAD1 Plugin"
-#~ msgstr "Hiba az egyes irányító plugin bezárásakor"
-
-#~ msgid "Error Closing PAD2 Plugin"
-#~ msgstr "Hiba a kettes irányító plugin bezárásakor"
-
-#~ msgid "Internal HLE Bios"
-#~ msgstr "Bios HLE interno"
-
-#, fuzzy
-#~ msgid "Dump Memory..."
-#~ msgstr "&Memory card..."
-
-#~ msgid ""
-#~ "(C) 1999-2003 PCSX Team\n"
-#~ "(C) 2005-2006 Ryan Schultz\n"
-#~ "(C) 2005-2006 Andrew Burton\n"
-#~ "(C) 2008-2009 Wei Mingzhi"
-#~ msgstr ""
-#~ "(C) 1999-2003 PCSX Team\n"
-#~ "(C) 2005-2006 Ryan Schultz\n"
-#~ "(C) 2005-2006 Andrew Burton\n"
-#~ "(C) 2008-2009 Wei Mingzhi"
-
-#~ msgid "PulseAudio Simple Sound"
-#~ msgstr "Audio PulseAudio semplice"
+msgstr "기호 불러오기 에러"
