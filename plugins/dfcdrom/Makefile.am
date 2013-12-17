@@ -24,7 +24,7 @@ endif
 AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
 	$(GTK3_CFLAGS) \
-	-I../../libpcsxcore -I../../include
+	-I$(top_srcdir)/libpcsxcore -I../../include
 
 bin_PROGRAMS = cfgDFCdrom
 cfgDFCdrom_SOURCES = cdrcfg-0.1df/main.c

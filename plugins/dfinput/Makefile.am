@@ -10,7 +10,7 @@ libDFInput_la_LIBADD = -lpthread -lX11 $(SDL2_LIBS) $(SDL_LIBS)
 AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
 	$(GTK3_CFLAGS) \
-	-I../../include -I../../libpcsxcore $(SDL2_CFLAGS) $(SDL_CFLAGS)
+	-I../../include -I$(top_srcdir)/libpcsxcore $(SDL2_CFLAGS) $(SDL_CFLAGS)
 
 bin_PROGRAMS = cfgDFInput
 cfgDFInput_SOURCES = cfg-gtk.c pad.h

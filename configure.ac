@@ -43,11 +43,13 @@ data/Makefile
 doc/Makefile
 libpcsxcore/Makefile
 gui/Makefile
+plugins/bladesio1/Makefile
 plugins/dfinput/Makefile
 plugins/dfsound/Makefile
 plugins/dfxvideo/Makefile
 plugins/dfcdrom/Makefile
 plugins/dfnet/Makefile
+plugins/peopsxgl/Makefile
 pixmaps/Makefile
 po/Makefile.in])
 
@@ -144,7 +146,6 @@ if test "$BUILD_OPENGL" = "yes"; then
 	fi
 	PEOPSXGL="plugins/peopsxgl"
 	AC_SUBST(PEOPSXGL)
-	AC_CONFIG_FILES([plugins/peopsxgl/Makefile])
 fi
 
 AC_ARG_ENABLE(sio1, [  --enable-sio1         build SIO1 plugin (default=yes)],
@@ -156,7 +157,6 @@ if test "$BUILD_SIO1" = "yes"; then
 	AC_DEFINE([ENABLE_SIO1API], [1], [Define if we want use sio interface.])
 	BLADESIO1="plugins/bladesio1"
 	AC_SUBST(BLADESIO1)
-	AC_CONFIG_FILES([plugins/bladesio1/Makefile])
 fi
 
 #####apt-get install libavcodec-dev libavformat-dev libavutil-dev

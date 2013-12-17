@@ -9,7 +9,7 @@ libDFNet_la_LDFLAGS = -module -avoid-version
 AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
 	$(GTK3_CFLAGS) \
-	-I../../libpcsxcore -I../../include
+	-I$(top_srcdir)/libpcsxcore -I../../include
 
 bin_PROGRAMS = cfgDFNet
 cfgDFNet_SOURCES = gui.c

@@ -9,7 +9,7 @@ SUFFIXES = .asm
 AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
 	$(GTK3_CFLAGS)\
-	-I../../libpcsxcore \
+	-I$(top_srcdir)/libpcsxcore \
 	-I../../include
 
 bindir = @libdir@/games/psemu/
