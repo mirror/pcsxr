@@ -288,7 +288,7 @@ void ReadConfig(void)
 {
 	self.fragmentPath = _fragmentPath;
 	if (_fragmentPath) {
-		[[fragmentShaderViewablePath cell] setTitle:[fragmentPath lastPathComponent]];
+		[fragmentShaderViewablePath setStringValue:[fragmentPath lastPathComponent]];
 		[fragmentShaderViewablePath setToolTip:[fragmentPath path]];
 	}
 }
@@ -297,7 +297,7 @@ void ReadConfig(void)
 {
 	self.vertexPath = _vertexPath;
 	if (_vertexPath) {
-		[[vertexShaderViewablePath cell] setTitle:[vertexPath lastPathComponent]];
+		[vertexShaderViewablePath setStringValue:[vertexPath lastPathComponent]];
 		[vertexShaderViewablePath setToolTip:[vertexPath path]];
 	}
 }
@@ -307,8 +307,7 @@ void ReadConfig(void)
 	[openPanel setAllowsMultipleSelection:NO];
 	[openPanel setCanChooseDirectories:NO];
 	[openPanel setCanChooseFiles:YES];
-	if ([openPanel runModal] == NSFileHandlingPanelOKButton)
-	{
+	if ([openPanel runModal] == NSFileHandlingPanelOKButton) {
 		if ([sender tag] == 1) {
 			[self setVertexPathInfo:[openPanel URL]];
 		} else {

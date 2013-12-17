@@ -66,7 +66,7 @@
 		return NO;
 	}
 	
-	[[cardPath cell] setTitle:[[NSFileManager defaultManager] displayNameAtPath:theFile]];
+	[cardPath setStringValue:[[NSFileManager defaultManager] displayNameAtPath:theFile]];
 	
 	[NSApp runModalForWindow:[self window]];
 	

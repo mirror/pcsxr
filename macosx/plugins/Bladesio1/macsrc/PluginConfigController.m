@@ -26,7 +26,7 @@
 #define APP_ID @"net.pcsxr.Bladesio1"
 #define PrefsKey APP_ID @" Settings"
 
-static PluginConfigController *windowController = nil;
+static PluginConfigController *windowController;
 
 #define kSioEnabled @"SIO Enabled"
 #define kSioPort @"Port"
@@ -42,7 +42,7 @@ void AboutDlgProc()
 	NSString *path = [bundle pathForResource:@"Credits" ofType:@"rtf"];
 	NSAttributedString *credits;
 	if (path) {
-		credits = [[NSAttributedString alloc] initWithPath: path
+		credits = [[NSAttributedString alloc] initWithPath:path
 				documentAttributes:NULL];
 		
 	} else {
@@ -51,8 +51,7 @@ void AboutDlgProc()
 
 	// Get Application Icon
 	NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[bundle bundlePath]];
-	NSSize size = NSMakeSize(64, 64);
-	[icon setSize:size];
+	[icon setSize:NSMakeSize(64, 64)];
 
 	NSDictionary *infoPaneDict =
 	@{@"ApplicationName": [bundle objectForInfoDictionaryKey:@"CFBundleName"],
@@ -188,14 +187,22 @@ void ReadConfig()
 	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 
 	[enabledButton setState: [keyValues[kSioEnabled] boolValue] ? NSOnState : NSOffState];
-	[[ipAddressField cell] setTitle:keyValues[kSioIPAddress]];
+	[ipAddressField setStringValue:keyValues[kSioIPAddress]];
 	[portField setIntValue:[keyValues[kSioPort] intValue]];
 	
 	switch ([keyValues[kSioPlayer] integerValue]) {
 		default:
-		case PLAYER_DISABLED: [playerMenu selectItemAtIndex:0]; break;
-		case PLAYER_MASTER: [playerMenu selectItemAtIndex:1]; break;
-		case PLAYER_SLAVE: [playerMenu selectItemAtIndex:2]; break;
+		case PLAYER_DISABLED:
+			[playerMenu selectItemAtIndex:0];
+			break;
+			
+		case PLAYER_MASTER:
+			[playerMenu selectItemAtIndex:1];
+			break;
+			
+		case PLAYER_SLAVE:
+			[playerMenu selectItemAtIndex:2];
+			break;
 	}
 	
 	[self toggleEnabled:nil];

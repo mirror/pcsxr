@@ -60,7 +60,7 @@
     NSTextField *displayField = (self.hotkeyOutlets)[keyIdent];
     
     if(displayField) {
-        [[displayField cell] setStringValue:label];
+        [displayField setStringValue:label];
     }
 }
 
