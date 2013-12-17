@@ -1,0 +1,6 @@
+﻿/* Localized versions of Info.plist keys */
+
+CFBundleName = "NetPlay";
+CFBundleShortVersionString = "1.0";
+CFBundleGetInfoString = "NetPlay plugin by linuzappz.";
+NSHumanReadableCopyright = "Copyright © 2010 C.W. Betts.";

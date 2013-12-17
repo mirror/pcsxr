@@ -1,0 +1,6 @@
+﻿/* Localized versions of Info.plist keys */
+
+CFBundleName = "Peops OpenGL GPU Plugin";
+CFBundleShortVersionString = "GPU Plugin 1.17";
+CFBundleGetInfoString = "OpenGL GPU Renderer Plugin version 1.17.";
+NSHumanReadableCopyright = "Copyright © 2004 Gil Pedersen.";

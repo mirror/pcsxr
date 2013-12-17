@@ -1,0 +1,111 @@
+﻿/* 
+  Localizable.strings
+  Pcsx
+
+  Created by C.W. Betts on 4/23/11.
+  Copyright 2011 __MyCompanyName__. All rights reserved.
+*/
+
+//libpcsxrcore strings
+"Error Opening CDR Plugin" = "Error Opening CDR Plugin";
+"Error Opening SPU Plugin" = "Error Opening SPU Plugin";
+"Error Opening GPU Plugin" = "Error Opening GPU Plugin";
+"Error Opening PAD1 Plugin" = "Error Opening PAD1 Plugin";
+"Error Opening PAD2 Plugin" = "Error Opening PAD2 Plugin";
+"Error opening SIO1 plugin!" = "Error Opening SIO1 Plugin";
+"Error Closing CDR Plugin" = "Error Closing CDR Plugin";
+"Error Closing SPU Plugin" = "Error Closing SPU Plugin";
+"Error Closing PAD1 Plugin" = "Error Closing PAD1 Plugin";
+"Error Closing PAD2 Plugin" = "Error Closing PAD2 Plugin";
+"Error Closing GPU Plugin" = "Error Closing GPU Plugin";
+"Error closing SIO1 plugin!" = "Error Closing SIO1 Plugin";
+"CDRinit error: %d" = "CDRinit error: %d";
+"GPUinit error: %d" = "GPUinit error: %d";
+"SPUinit error: %d" = "SPUinit error: %d";
+"PAD1init error: %d" = "PAD1init error: %d";
+"PAD2init error: %d" = "PAD2init error: %d";
+"NETinit error: %d" = "NETinit error: %d";
+"SIO1init error: %d!" = "SIO1init error: %d";
+"Could not open BIOS:\"%s\". Enabling HLE Bios!\n" = "Could not open BIOS:\"%s\". Enabling HLE Bios!\n";
+"Error allocating memory!" = "Error allocating memory!";
+"Running PCSXR Version %s (%s).\n" = "Running PCSXR Version %s (%s).\n";
+"No memory card value was specified - creating a default card %s\n" = "No memory card value was specified - creating a default card %s\n";
+"Memory card %s failed to load!\n" = "Memory card %s failed to load!\n";
+"Loading memory card %s\n" = "Loading memory card %s\n";
+"The memory card %s doesn't exist - creating it\n" = "The memory card %s doesn't exist - creating it\n";
+"Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n" = "Track %.2d (%s) - Start %.2d:%.2d:%.2d, Length %.2d:%.2d:%.2d\n";
+"Loaded CD Image: %s" = "Loaded CD Image: %s";
+"Cheats saved to: %s\n" = "Cheats saved to: %s\n";
+"Cheats loaded from: %s\n" = "Cheats loaded from: %s\n";
+"Error allocating memory" = "Error allocating memory";
+"Unable to start debug server.\n" = "Unable to start debug server.\n";
+"Debugger started.\n" = "Debugger started.\n";
+"Debugger stopped.\n" = "Debugger stopped.\n";
+"CD-ROM Label: %.32s\n" = "CD-ROM Label: %.32s\n";
+"CD-ROM ID: %.9s\n" = "CD-ROM ID: %.9s\n";
+"CD-ROM EXE Name: %.255s\n" = "CD-ROM EXE Name: %.255s\n";
+"Error opening file: %s.\n" = "Error opening file: %s.\n";
+"Unknown CPE opcode %02x at poiition %08x.\n" = "Unknown CPE opcode %02x at position %08x.\n";
+"\ncould not open: %s\n" = "\ncould not open: %s\n";
+"New Memory Card.mcd" = "New Memory Card File.mcr";
+"Loaded PPF %d.0 patch: %s.\n" = "Loaded PPF %d.0 patch: %s.\n";
+
+//Emu Thread
+"*PCSXR*: Loaded State" = "*PCSXR*: Loaded State";
+"*PCSXR*: Error Saving State %d" = "*PCSXR*: Error Saving State %d";
+"*PCSXR*: Saved State %d" = "*PCSXR*: Saved State %d";
+
+"*PCSXR*: Error Loading State %d" = "*PCSXR*: Error Loading State %d";
+"*PCSXR*: Sio Irq Always Enabled" = "*PCSXR*: Sio Irq Always Enabled";
+"*PCSXR*: Sio Irq Not Always Enabled" = "*PCSXR*: Sio Irq Not Always Enabled";
+
+
+// Cocoa Code
+"Plugin Initialization Failed!" = "Plugin Initialization Failed!";
+"Pcsxr failed to initialize the selected %@ plugin (error=%i).\nThe plugin might not work with your system." = "Pcsxr failed to initialize the selected %1$@ plugin (error=%2$i).\nThe plugin might not work with your system.";
+"Error!" = "Error!";
+"Installation Succesfull" = "Installation Succesfull";
+"Installation Failed!" = "Installation Failed!";
+"The installation of the specified plugin was succesfull. In order to use it, please restart the application." = "The installation of the specified plugin was succesfull. In order to use it, please restart the application.";
+"The installation of the specified plugin failed. Please try again, or make a manual install." ="The installation of the specified plugin failed. Please try again, or make a manual install.";
+"Missing plugins!" = "Missing plugins!";
+"Pcsxr is missing one or more critical plugins. You will need to install these in order to play games." = "Pcsx is missing one or more critical plugins. You will need to install these in order to play games.";
+"Missing BIOS!" = "Missing BIOS!";
+"Pcsxr wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\nIf you have a BIOS available, please copy it to\n%@" = "Pcsxr wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\nIf you have a BIOS available, please copy it to:\n%@";
+
+"Error opening file" = "Error opening file.";
+"Unable to open %@: %@" = "Unable to open %1$@: %2$@";
+
+//Memory card management
+"Format Card" = "Format Card";
+"Free Size" = "Free Size";
+"Format" = "Format";
+"Formatting a memory card will remove all data on it.\n\nThis cannot be undone." = "Formatting a memory card will remove all data on it.\n\nThis cannot be undone.";
+"Delete Block" = "Delete Block";
+"Deleting a block will remove all saved data on that block.\n\nThis cannot be undone." = "Deleting a memory card object will set the blocks to not be readable by the emulator, and may result in the data being overwritten in the future.";
+"No Free Space" = "No Free Space";
+"Memory card %d doesn't have %d free consecutive blocks on it. Please remove some blocks on that card to continue" = "Memory card %1$d doesn't have %2$d free consecutive blocks on it. Please remove some blocks on that card to continue.";
+"Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@ (%@),\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?" = "Memory card %1$i does not have enough free consecutive blocks.\n\nIn order to copy over “%2$@ (%3$@),” memory card %4$i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?";
+
+//Cheat manager
+"Save Cheats" = "Save Cheats";
+"The cheat codes have not been applied. Unapplied cheats will not run nor be saved. Do you wish to save?" = "The cheat codes have not been applied. Unapplied cheats will not run nor be saved. Do you wish to save?";
+"Unsaved Changes" = "Unsaved Changes";
+"(Untitled)" = "(Untitled)";
+
+//General buttons
+"Okay" = "OK";
+"Cancel" = "Cancel";
+"Yes" = "Yes";
+"No" = "No";
+"Delete" = "Delete";
+
+//not-so-general buttons
+"Show Folder" = "Show Folder";
+
+//Mem card flags
+"MemCard_Deleted" = "Deleted";
+"MemCard_Free" = "Free";
+"MemCard_Used" = "Used";
+"MemCard_Link" = "Link";
+"MemCard_EndLink" = "End Link";
