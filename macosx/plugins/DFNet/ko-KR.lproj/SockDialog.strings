@@ -1,9 +1,0 @@
-
-/* Class = "NSWindow"; title = "Connecting…"; ObjectID = "1"; */
-"1.title" = "Connecting…";
-
-/* Class = "NSTextFieldCell"; title = "Waiting for connections..."; ObjectID = "4"; */
-"4.title" = "Waiting for connections...";
-
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "27"; */
-"27.title" = "Cancel";

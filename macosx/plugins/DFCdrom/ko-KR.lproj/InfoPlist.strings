@@ -1,6 +1,0 @@
-﻿/* Localized versions of Info.plist keys */
-
-CFBundleName = "CD-ROM Drive Reader";
-CFBundleShortVersionString = "1.0";
-CFBundleGetInfoString = "Based on CDR plugin by linuzappz.";
-NSHumanReadableCopyright = "Copyright © 2010 Wei Mingzhi.";
