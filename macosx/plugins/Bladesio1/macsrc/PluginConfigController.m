@@ -139,9 +139,16 @@ void ReadConfig()
 		int player;
 		switch ([playerMenu indexOfSelectedItem]) {
 			default:
-			case 0: player = PLAYER_DISABLED; break;
-			case 1: player = PLAYER_MASTER; break;
-			case 2: player = PLAYER_SLAVE; break;
+			case 0:
+				player = PLAYER_DISABLED;
+				break;
+				
+			case 1:
+				player = PLAYER_MASTER;
+				break;
+			case 2:
+				player = PLAYER_SLAVE;
+				break;
 		}
 		writeDic[kSioPlayer] = @(player);
 	}
