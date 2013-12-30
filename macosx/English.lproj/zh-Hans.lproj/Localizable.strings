@@ -6,6 +6,8 @@
   Copyright 2011 __MyCompanyName__. All rights reserved.
 */
 
+//Commented out strings are those that need to be translated
+
 //libpcsxrcore strings
 "Error Opening CDR Plugin" = "打开CDR插件时发生错误";
 "Error Opening SPU Plugin" = "打开SPU插件时发生错误";
@@ -102,6 +104,14 @@
 
 //not-so-general buttons
 //"Show Folder" = "Show Folder";
+
+//BIOS file opener
+"PlayStation BIOS File" = "PlayStation BIOS 映像";
+//"The file \"%@\" seems to be a BIOS file. Do you want PCSX-R to copy it to the proper location?" = "The file “%1$@\” seems to be a BIOS file. Do you want PCSX-R to copy it to the proper location?";
+//"BIOS_Copy" = "Copy";
+//"BIOS_Move" = "Move";
+//"BIOS Already Exists" = "BIOS Already Exists";
+//"There already exists a BIOS file at \"%1$@\": not copying the file at \"%2$@\".\n\nIf you do want to use the BIOS file at \"%2$@\", delete the BIOS at \"%1$@\"." = "There already exists a BIOS file at “%1$@”: not copying the file at “%2$@”.\n\nIf you do want to use the BIOS file at “%2$@”, delete the BIOS at “%1$@”.";
 
 //Mem card flags
 "MemCard_Deleted" = "删除";

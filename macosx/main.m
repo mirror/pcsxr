@@ -16,6 +16,10 @@
 #include <IOKit/pwr_mgt/IOPMLib.h>
 #import "hotkeys.h"
 
+#ifndef NSFoundationVersionNumber10_8_4
+#define NSFoundationVersionNumber10_8_4 945.18
+#endif
+
 static inline void RunOnMainThreadSync(dispatch_block_t block)
 {
 	if ([NSThread isMainThread]) {
@@ -31,14 +35,43 @@ static IOPMAssertionID powerAssertion = kIOPMNullAssertionID;
 
 void PADhandleKey(int key);
 
+static inline BOOL IsRootCwd()
+{
+	char buf[MAXPATHLEN];
+	char *cwd = getcwd(buf, sizeof(buf));
+	return (cwd && (strcmp(cwd, "/") == 0));
+}
+
+static inline BOOL IsTenPointNineOrLater()
+{
+	int curFoundNum = floor(NSFoundationVersionNumber), tenPointEightFoundNum = floor(NSFoundationVersionNumber10_8_4);
+	return curFoundNum > tenPointEightFoundNum;
+}
+
+static BOOL IsFinderLaunch(const int argc, const char **argv)
+{
+	BOOL isNewerOS = IsTenPointNineOrLater();
+	/* -psn_XXX is passed if we are launched from Finder in 10.8 and earlier */
+	if ( (!isNewerOS) && (argc >= 2) && (strncmp(argv[1], "-psn", 4) == 0) ) {
+		return YES;
+	} else if ((isNewerOS) && (argc == 1) && IsRootCwd()) {
+		/* we might still be launched from the Finder; on 10.9+, you might not
+		 get the -psn command line anymore. Check version, if there's no
+		 command line, and if our current working directory is "/". */
+		return YES;
+	}
+	return NO;  /* not a Finder launch. */
+}
+
 int main(int argc, const char *argv[])
 {
-    if (argc >= 2 && strncmp (argv[1], "-psn", 4) == 0 ) {
+    if (argc >= 2 && IsFinderLaunch(argc, argv)) {
+		wasFinderLaunch = YES;
         char parentdir[MAXPATHLEN];
         char *c;
 
-        strlcpy ( parentdir, argv[0], sizeof(parentdir) );
-        c = (char*) parentdir;
+        strlcpy(parentdir, argv[0], sizeof(parentdir));
+        c = (char*)parentdir;
 
         while (*c != '\0')     /* go to end */
                c++;
@@ -48,8 +81,8 @@ int main(int argc, const char *argv[])
 
         *c++ = '\0';           /* cut off last part (binary name) */
 
-        assert ( chdir (parentdir) == 0 );   /* chdir to the binary app's parent */
-        assert ( chdir ("../../../") == 0 ); /* chdir to the .app's parent */
+        assert(chdir(parentdir) == 0);   /* chdir to the binary app's parent */
+        assert(chdir("../../../") == 0); /* chdir to the .app's parent */
     } else {
 		for (int i = 1; i < argc; i++) {
 			//All the other option will be handled in the app delegate's awakeFromNib
@@ -83,7 +116,7 @@ int SysInit()
 		//We use the log extension so that OS X's console app can open it by default.
 		NSURL *logFileURL = [logFolderURL URLByAppendingPathComponent:@"emuLog.log"];
 		
-		emuLog = fopen([[logFileURL path] fileSystemRepresentation],"wb");
+		emuLog = fopen([[logFileURL path] fileSystemRepresentation], "wb");
 #else
 		emuLog = stdout;
 #endif

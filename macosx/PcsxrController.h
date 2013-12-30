@@ -9,6 +9,7 @@
 @class CheatController;
 
 void ShowHelpAndExit(FILE* output, int exitCode);
+extern BOOL wasFinderLaunch;
 
 @interface PcsxrController : NSObject <NSApplicationDelegate>
 {

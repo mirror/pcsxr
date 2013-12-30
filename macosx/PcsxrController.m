@@ -17,24 +17,29 @@
 #include "cdrom.h"
 #include "ExtendedKeys.h"
 
-NSDictionary *prefStringKeys;
-NSDictionary *prefByteKeys;
-NSDictionary *prefURLKeys;
-NSMutableArray *biosList;
-NSString *saveStatePath;
+NSDictionary *prefStringKeys = nil;
+NSDictionary *prefByteKeys = nil;
+NSDictionary *prefURLKeys = nil;
+NSMutableArray *biosList = nil;
+NSString *saveStatePath = nil;
+BOOL wasFinderLaunch = NO;
+
 
 #define HELPSTR "\n" \
-"At least one of these must be passed:\n"\
-"\t--iso path    \tlaunch with selected ISO\n" \
-"\t--cdrom       \tlaunch with a CD-ROM\n" \
-"\t--bios        \tlaunch into the BIOS\n\n" \
+"At least one of these must be passed:\n" \
+"\t--iso path    launch with selected ISO\n" \
+"\t--cdrom       launch with a CD-ROM\n" \
+"\t--bios        launch into the BIOS\n" \
+"\n" \
 "Additional options:\n" \
-"\t--exitAtClose \tcloses PCSX-R at when the emulation has ended\n" \
-"\t--mcd1 path   \tsets the fist memory card to path\n" \
-"\t--mcd2 path   \tsets the second memory card to path\n" \
-"\t--freeze path \tloads freeze state from path\n\n" \
+"\t--exitAtClose closes PCSX-R at when the emulation has ended\n" \
+"\t--mcd1 path   sets the fist memory card to path\n" \
+"\t--mcd2 path   sets the second memory card to path\n" \
+"\t--freeze path loads freeze state from path\n" \
+"\n" \
 "Help:\n" \
-"\t--help        \tshows this message\n\n" \
+"\t--help        shows this message\n" \
+"\n" \
 
 
 void ShowHelpAndExit(FILE* output, int exitCode)
@@ -446,36 +451,36 @@ otherblock();\
 
 - (void)awakeFromNib
 {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(emuWindowDidClose:)
-												 name:@"emuWindowDidClose" object:nil];
-
+	[[NSNotificationCenter defaultCenter]
+	 addObserver:self selector:@selector(emuWindowDidClose:)
+	 name:@"emuWindowDidClose" object:nil];
+	
 	pluginList = [[PluginList alloc] init];
 	if (![pluginList configured] /*!Config.Gpu[0] || !Config.Spu[0] || !Config.Pad1[0] || !Config.Cdr[0]*/) {
 		// configure plugins
 		[self preferences:nil];
-
+		
 		NSRunCriticalAlertPanel(NSLocalizedString(@"Missing plugins!", nil),
-				NSLocalizedString(@"Pcsxr is missing one or more critical plugins. You will need to install these in order to play games.", nil), 
-				nil, nil, nil);
+								NSLocalizedString(@"Pcsxr is missing one or more critical plugins. You will need to install these in order to play games.", nil),
+								nil, nil, nil);
 	}
-
+	
 	if (![PcsxrController biosAvailable]) {
 		NSFileManager *manager = [NSFileManager defaultManager];
 		NSURL *supportURL = [manager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
 		NSURL *biosURL = [[supportURL URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"Bios"];
 		NSInteger retVal = NSRunInformationalAlertPanel(NSLocalizedString(@"Missing BIOS!", nil),
-				NSLocalizedString(@"Pcsxr wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\nIf you have a BIOS available, please copy it to\n%@", nil), 
-				NSLocalizedString(@"Okay", @"OK"), NSLocalizedString(@"Show Folder", @"Show Folder"), nil, [[biosURL path] stringByAbbreviatingWithTildeInPath]);
+														NSLocalizedString(@"Pcsxr wasn't able to locate any Playstation BIOS ROM files. This means that it will run in BIOS simulation mode which is less stable and compatible than using a real Playstation BIOS.\nIf you have a BIOS available, please copy it to\n%@", nil),
+														NSLocalizedString(@"Okay", @"OK"), NSLocalizedString(@"Show Folder", @"Show Folder"), nil, [[biosURL path] stringByAbbreviatingWithTildeInPath]);
 		if (retVal == NSAlertAlternateReturn) {
 			[[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[biosURL]];
 		}
 	}
-
+	
 	self.sleepInBackground = [[NSUserDefaults standardUserDefaults] boolForKey:@"PauseInBackground"];
 	
 	NSArray *progArgs = [[NSProcessInfo processInfo] arguments];
-	if ([progArgs count] > 1 && ![progArgs[1] hasPrefix:@"-psn"]) {
+	if ([progArgs count] > 1 && !wasFinderLaunch) {
 		self.skipFiles = [NSMutableArray array];
 		
 		BOOL isLaunchable = NO;
@@ -551,7 +556,7 @@ otherblock();\
 			}];
 			[larg addToDictionary:argDict];
 		};
-
+		
 		BOOL hasFileTestBlock = NO;
 		
 		for (__block int i = 1; i < [progArgs count]; i++) {
@@ -573,7 +578,7 @@ otherblock();\
 				hasFileTestBlock = YES;
 			}
 			
-			//DO NOT END these MACROS WITH A SIMICOLON! it will break the if-else if process
+			//DO NOT END these MACROS WITH A SIMICOLON! It will break the if-else if process
 			HandleArg(kPCSXRArgumentISO, YES, isoBlock)
 			HandleArgElse(kPCSXRArgumentCDROM, YES, cdromBlock)
 			HandleArgElse(kPCSXRArgumentBIOS, YES, biosBlock)
@@ -586,7 +591,7 @@ otherblock();\
 			}
 		}
 #ifdef DEBUG
-		if ([unknownOptions count]) {			
+		if ([unknownOptions count]) {
 			NSString *unknownString = [unknownOptions componentsJoinedByString:@" "];
 			
 			NSLog(@"The following options weren't recognized by PCSX-R: %@. This may be due to extra arguments passed by the OS or debugger.", unknownString);
