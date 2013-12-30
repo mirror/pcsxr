@@ -872,6 +872,7 @@ otherblock();\
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
+	NSFileManager *fm = [NSFileManager defaultManager];
 	if (skipFiles && [skipFiles count]) {
 		for (NSString *parsedFile in skipFiles) {
 			if ([filename isEqualToString:parsedFile]) {
@@ -880,9 +881,60 @@ otherblock();\
 		}
 	}
 	
-	if (![[NSFileManager defaultManager] fileExistsAtPath:filename]) {
+	if (![fm fileExistsAtPath:filename]) {
 		NSLog(@"Nonexistant file %@ was passed to open.", filename );
 		return NO;
+	}
+	
+	if ([[filename pathExtension] compare:@"bin" options:(NSCaseInsensitiveSearch | NSWidthInsensitiveSearch)]) {
+		NSDictionary *attrib = [fm attributesOfItemAtPath:filename error:NULL];
+		if ([[attrib fileType] isEqualToString:NSFileTypeRegular] && ([attrib fileSize] % (256 * 1024)) == 0 && [attrib fileSize] > 0 ) {
+			NSAlert *biosInfo = [NSAlert alertWithMessageText:NSLocalizedString(@"PlayStation BIOS File", @"PSX BIOS File") defaultButton:NSLocalizedString(@"BIOS_Copy", @"copy the BIOS over") alternateButton:NSLocalizedString(@"Cancel", @"Cancel") otherButton:NSLocalizedString(@"BIOS_Move", @"Move the bios over") informativeTextWithFormat:NSLocalizedString(@"The file \"%@\" seems to be a BIOS file. Do you want PCSX-R to copy it to the proper location?", @"Can we copy the BIOS?")];
+			biosInfo.alertStyle = NSInformationalAlertStyle;
+			switch ([biosInfo runModal]) {
+				case NSAlertFirstButtonReturn:
+				case NSAlertDefaultReturn:
+				{
+					NSError *theErr = nil;
+					NSURL *biosDirPath = [NSURL fileURLWithPath:[fm stringWithFileSystemRepresentation:Config.BiosDir length:strlen(Config.BiosDir)] isDirectory:YES];
+					NSURL *biosPath = [biosDirPath URLByAppendingPathComponent:[filename lastPathComponent]];
+					if ([biosPath checkResourceIsReachableAndReturnError:NULL]) {
+						NSAlert *alreadyThere = [NSAlert alertWithMessageText:NSLocalizedString(@"BIOS Already Exists", @"BIOS file already there.") defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:NSLocalizedString(@"There already exists a BIOS file at \"%1$@\": not copying the file at \"%2$@\".\n\nIf you do want to use the BIOS file at \"%2$@\", delete the BIOS at \"%1$@\".", @"What to do"), [biosPath path], filename];
+						alreadyThere.alertStyle = NSCriticalAlertStyle;
+						[alreadyThere runModal];
+						return NO;
+					}
+					if (![fm copyItemAtURL:[NSURL fileURLWithPath:filename isDirectory:NO] toURL:biosPath error:&theErr]) {
+						[[NSAlert alertWithError:theErr] runModal];
+						return NO;
+					}
+				}
+					break;
+					
+				case NSAlertThirdButtonReturn:
+				case NSAlertOtherReturn:
+				{
+					NSError *theErr = nil;
+					NSURL *biosDirPath = [NSURL fileURLWithPath:[fm stringWithFileSystemRepresentation:Config.BiosDir length:strlen(Config.BiosDir)] isDirectory:YES];
+					NSURL *biosPath = [biosDirPath URLByAppendingPathComponent:[filename lastPathComponent]];
+					if ([biosPath checkResourceIsReachableAndReturnError:NULL]) {
+						NSAlert *alreadyThere = [NSAlert alertWithMessageText:NSLocalizedString(@"BIOS Already Exists", @"BIOS file already there.") defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:NSLocalizedString(@"There already exists a BIOS file at \"%1$@\": not copying the file at \"%2$@\".\n\nIf you do want to use the BIOS file at \"%2$@\", delete the BIOS at \"%1$@\".", @"What to do"), [biosPath path], filename];
+						alreadyThere.alertStyle = NSCriticalAlertStyle;
+						[alreadyThere runModal];
+						return NO;
+					}
+					if (![fm moveItemAtURL:[NSURL fileURLWithPath:filename isDirectory:NO] toURL:biosPath error:&theErr]) {
+						[[NSAlert alertWithError:theErr] runModal];
+						return NO;
+					}
+				}
+					break;
+
+				default:
+					break;
+			}
+			return YES;
+		}
 	}
 	
 	NSError *err = nil;
