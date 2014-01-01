@@ -918,7 +918,7 @@ otherblock();\
 					NSURL *biosDirPath = [NSURL fileURLWithPath:[fm stringWithFileSystemRepresentation:Config.BiosDir length:strlen(Config.BiosDir)] isDirectory:YES];
 					NSURL *biosPath = [biosDirPath URLByAppendingPathComponent:[filename lastPathComponent]];
 					if ([biosPath checkResourceIsReachableAndReturnError:NULL]) {
-						NSAlert *alreadyThere = [NSAlert alertWithMessageText:NSLocalizedString(@"BIOS Already Exists", @"BIOS file already there.") defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:NSLocalizedString(@"There already exists a BIOS file at \"%1$@\": not copying the file at \"%2$@\".\n\nIf you do want to use the BIOS file at \"%2$@\", delete the BIOS at \"%1$@\".", @"What to do"), [biosPath path], filename];
+						NSAlert *alreadyThere = [NSAlert alertWithMessageText:NSLocalizedString(@"BIOS Already Exists", @"BIOS file already there.") defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:NSLocalizedString(@"There already exists a BIOS file at \"%1$@\": not moving the file at \"%2$@\".\n\nIf you do want to use the BIOS file at \"%2$@\", delete the BIOS at \"%1$@\".", @"What to do"), [biosPath path], filename];
 						alreadyThere.alertStyle = NSCriticalAlertStyle;
 						[alreadyThere runModal];
 						return NO;

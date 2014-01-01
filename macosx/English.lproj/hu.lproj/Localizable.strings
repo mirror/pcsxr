@@ -112,6 +112,7 @@
 //"BIOS_Move" = "Move";
 //"BIOS Already Exists" = "BIOS Already Exists";
 //"There already exists a BIOS file at \"%1$@\": not copying the file at \"%2$@\".\n\nIf you do want to use the BIOS file at \"%2$@\", delete the BIOS at \"%1$@\"." = "There already exists a BIOS file at “%1$@”: not copying the file at “%2$@”.\n\nIf you do want to use the BIOS file at “%2$@”, delete the BIOS at “%1$@”.";
+//"There already exists a BIOS file at \"%1$@\": not moving the file at \"%2$@\".\n\nIf you do want to use the BIOS file at \"%2$@\", delete the BIOS at \"%1$@\"." = "There already exists a BIOS file at “%1$@”: not moving the file at “%2$@”.\n\nIf you do want to use the BIOS file at “%2$@”, delete the BIOS at “%1$@”.";
 
 //Mem card flags
 "MemCard_Deleted" = "Törölve";
