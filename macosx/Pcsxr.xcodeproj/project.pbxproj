@@ -3417,7 +3417,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				INFOPLIST_FILE = Info.plistvers.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_NO_PIE = NO;
 				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_NAME = PCSXR;
