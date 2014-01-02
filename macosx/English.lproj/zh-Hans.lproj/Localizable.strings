@@ -47,7 +47,7 @@
 "CD-ROM ID: %.9s\n" = "光驱ID: %.9s\n";
 "CD-ROM EXE Name: %.255s\n" = "光驱名称: %.255s\n";
 "Error opening file: %s.\n" = "打开文件错误: %s.\n";
-"Unknown CPE opcode %02x at poiition %08x.\n" = "未知CPE指令 %02x在%08x.\n";
+"Unknown CPE opcode %02x at position %08x.\n" = "未知CPE指令 %02x在%08x.\n";
 "\ncould not open: %s\n" = "\n不能打开: %s\n";
 "New Memory Card.mcd" = "新记忆卡文件.mcr";
 "Loaded PPF %d.0 patch: %s.\n" = "载入 PPF %d.0 补丁: %s.\n";

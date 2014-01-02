@@ -47,7 +47,7 @@
 "CD-ROM ID: %.9s\n" = "CD-ROM azonosító: %.9s\n";
 //"CD-ROM EXE Name: %.255s\n" = "CD-ROM címke: %.32s\n";
 "Error opening file: %s.\n" = "Hiba a fájl megnyitása közben: %s.\n";
-"Unknown CPE opcode %02x at poiition %08x.\n" = "Ismeretlen CPE művelet-kód: %02x ezen a helyen: %08x.\n";
+"Unknown CPE opcode %02x at position %08x.\n" = "Ismeretlen CPE művelet-kód: %02x ezen a helyen: %08x.\n";
 "\ncould not open: %s\n" = "\nA könyvtár nem nyitható meg: '%s'\n";
 "New Memory Card.mcd" = "Új memória kártya.mcr";
 "Loaded PPF %d.0 patch: %s.\n" = "PPF %d.0 patch betöltve: %s.\n";

@@ -47,7 +47,7 @@
 "CD-ROM ID: %.9s\n" = "ID CD-ROM : %.9s\n";
 //"CD-ROM EXE Name: %.255s\n" = "CD-ROM EXE Name: %.255s\n";
 "Error opening file: %s.\n" = "Érreur en ouvrant le fichier %s.\n";
-"Unknown CPE opcode %02x at poiition %08x.\n" = "Opcode CPE inconnu %02x à la position %08x.\n";
+"Unknown CPE opcode %02x at position %08x.\n" = "Opcode CPE inconnu %02x à la position %08x.\n";
 "\ncould not open: %s\n" = "\nImpossible d'ouvrir le dossier : '%s'\n";
 "New Memory Card.mcd" = "Nouvelle carte mémoire.mcd";
 "Loaded PPF %d.0 patch: %s.\n" = "Patch PPF %d.0 chargé : %s.\n";
