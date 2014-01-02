@@ -158,4 +158,4 @@ void ReadConfig()
 @end
 
 #import "OSXPlugLocalization.h"
-PLUGLOCIMP([PluginConfigController class]);
+PLUGLOCIMP([PluginConfigController class])

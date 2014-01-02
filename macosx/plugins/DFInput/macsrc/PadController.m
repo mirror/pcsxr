@@ -461,4 +461,4 @@ long DoConfiguration()
 @end
 
 #import "OSXPlugLocalization.h"
-PLUGLOCIMP([padController class]);
+PLUGLOCIMP([padController class])
