@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
@@ -392,13 +392,9 @@ Hold the mouse over a checkbox to get more information about it.</string>
                         <constraints>
                             <constraint firstItem="186" firstAttribute="leading" secondItem="188" secondAttribute="leading" id="237"/>
                             <constraint firstItem="182" firstAttribute="leading" secondItem="186" secondAttribute="trailing" constant="8" symbolic="YES" id="240"/>
-                            <constraint firstItem="184" firstAttribute="leading" secondItem="188" secondAttribute="trailing" constant="8" symbolic="YES" id="241"/>
-                            <constraint firstItem="188" firstAttribute="leading" secondItem="196" secondAttribute="trailing" constant="8" symbolic="YES" id="242"/>
                             <constraint firstItem="182" firstAttribute="leading" secondItem="184" secondAttribute="leading" id="244"/>
-                            <constraint firstItem="196" firstAttribute="leading" secondItem="179" secondAttribute="leading" constant="16" id="247"/>
                             <constraint firstItem="194" firstAttribute="leading" secondItem="179" secondAttribute="leading" constant="16" id="248"/>
                             <constraint firstItem="194" firstAttribute="baseline" secondItem="186" secondAttribute="baseline" id="250"/>
-                            <constraint firstItem="225" firstAttribute="leading" secondItem="179" secondAttribute="leading" constant="16" id="251"/>
                             <constraint firstItem="182" firstAttribute="baseline" secondItem="186" secondAttribute="baseline" id="333"/>
                             <constraint firstItem="184" firstAttribute="top" secondItem="182" secondAttribute="bottom" constant="12" symbolic="YES" id="336"/>
                             <constraint firstItem="188" firstAttribute="baseline" secondItem="184" secondAttribute="baseline" id="337"/>
@@ -406,14 +402,20 @@ Hold the mouse over a checkbox to get more information about it.</string>
                             <constraint firstItem="182" firstAttribute="top" secondItem="179" secondAttribute="top" constant="25" id="347"/>
                             <constraint firstItem="219" firstAttribute="baseline" secondItem="225" secondAttribute="baseline" id="604"/>
                             <constraint firstItem="219" firstAttribute="leading" secondItem="188" secondAttribute="leading" id="605"/>
-                            <constraint firstItem="219" firstAttribute="leading" secondItem="225" secondAttribute="trailing" constant="8" symbolic="YES" id="A6p-5D-bmZ"/>
+                            <constraint firstItem="225" firstAttribute="leading" secondItem="196" secondAttribute="leading" id="7sO-uZ-cCq"/>
+                            <constraint firstItem="225" firstAttribute="trailing" secondItem="194" secondAttribute="trailing" id="FbC-Ov-dbx"/>
                             <constraint firstItem="rcP-o2-vWh" firstAttribute="top" secondItem="184" secondAttribute="bottom" constant="12" symbolic="YES" id="OC3-Pc-OHe"/>
                             <constraint firstAttribute="bottom" secondItem="219" secondAttribute="bottom" constant="20" id="PEh-P9-5MF"/>
+                            <constraint firstItem="225" firstAttribute="leading" secondItem="194" secondAttribute="leading" id="S90-fl-dvb"/>
                             <constraint firstAttribute="trailing" secondItem="182" secondAttribute="trailing" constant="12" id="UCy-BE-x17"/>
+                            <constraint firstItem="186" firstAttribute="trailing" secondItem="188" secondAttribute="trailing" id="Yl3-Mk-Y5f"/>
                             <constraint firstItem="186" firstAttribute="leading" secondItem="194" secondAttribute="trailing" constant="8" symbolic="YES" id="a1M-U6-Tbp"/>
+                            <constraint firstItem="225" firstAttribute="trailing" secondItem="196" secondAttribute="trailing" id="gKm-EB-nYH"/>
                             <constraint firstItem="182" firstAttribute="trailing" secondItem="184" secondAttribute="trailing" id="ixr-Wj-e4h"/>
                             <constraint firstItem="219" firstAttribute="baseline" secondItem="rcP-o2-vWh" secondAttribute="baseline" id="lKY-gQ-2K0"/>
                             <constraint firstItem="rcP-o2-vWh" firstAttribute="trailing" secondItem="184" secondAttribute="trailing" id="x9r-MP-G0b"/>
+                            <constraint firstItem="rcP-o2-vWh" firstAttribute="baseline" secondItem="219" secondAttribute="baseline" id="xfw-qZ-V3J"/>
+                            <constraint firstItem="rcP-o2-vWh" firstAttribute="baseline" secondItem="225" secondAttribute="baseline" id="y2m-kS-7Dl"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
@@ -22,22 +22,22 @@
         <window title="SPU Configuration" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" wantsToBeColor="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Configuration">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="128" y="348" width="466" height="337"/>
+            <rect key="contentRect" x="128" y="348" width="466" height="316"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="5">
-                <rect key="frame" x="0.0" y="0.0" width="466" height="337"/>
+                <rect key="frame" x="0.0" y="0.0" width="466" height="316"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <box title="General Settings" translatesAutoresizingMaskIntoConstraints="NO" id="9">
-                        <rect key="frame" x="17" y="161" width="432" height="156"/>
+                        <rect key="frame" x="17" y="161" width="432" height="135"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
-                            <rect key="frame" x="2" y="2" width="428" height="139"/>
+                            <rect key="frame" x="2" y="2" width="428" height="118"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="11">
-                                    <rect key="frame" x="14" y="98" width="94" height="17"/>
+                                    <rect key="frame" x="14" y="77" width="94" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="90" id="157"/>
@@ -50,7 +50,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="12" customClass="NamedSlider">
-                                    <rect key="frame" x="127" y="96" width="144" height="26"/>
+                                    <rect key="frame" x="127" y="75" width="144" height="26"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="140" id="122"/>
@@ -64,7 +64,7 @@
                                     </connections>
                                 </slider>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="15">
-                                    <rect key="frame" x="14" y="66" width="94" height="17"/>
+                                    <rect key="frame" x="14" y="45" width="94" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="227"/>
@@ -76,7 +76,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16" customClass="NamedSlider">
-                                    <rect key="frame" x="127" y="64" width="144" height="26"/>
+                                    <rect key="frame" x="127" y="43" width="144" height="26"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="3" doubleValue="1" tickMarkPosition="above" numberOfTickMarks="4" allowsTickMarkValuesOnly="YES" sliderType="linear" id="83">
                                         <font key="font" size="12" name="Helvetica"/>
@@ -86,7 +86,7 @@
                                     </connections>
                                 </slider>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="17">
-                                    <rect key="frame" x="275" y="98" width="131" height="17"/>
+                                    <rect key="frame" x="275" y="77" width="131" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="127" id="129"/>
@@ -98,7 +98,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="18">
-                                    <rect key="frame" x="275" y="66" width="131" height="17"/>
+                                    <rect key="frame" x="275" y="45" width="131" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="(Simple Interpolation)" id="85">
                                         <font key="font" metaFont="smallSystem"/>
@@ -107,7 +107,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="69">
-                                    <rect key="frame" x="15" y="38" width="94" height="17"/>
+                                    <rect key="frame" x="15" y="17" width="94" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="90" id="182"/>
@@ -119,7 +119,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="70" customClass="NamedSlider">
-                                    <rect key="frame" x="127" y="32" width="144" height="26"/>
+                                    <rect key="frame" x="127" y="11" width="144" height="26"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="4" doubleValue="3" tickMarkPosition="above" numberOfTickMarks="5" allowsTickMarkValuesOnly="YES" sliderType="linear" id="87">
                                         <font key="font" size="12" name="Helvetica"/>
@@ -130,7 +130,7 @@
                                     </connections>
                                 </slider>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="71">
-                                    <rect key="frame" x="275" y="38" width="131" height="17"/>
+                                    <rect key="frame" x="275" y="17" width="131" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="224"/>
@@ -169,6 +169,7 @@
                             <constraint firstItem="15" firstAttribute="top" secondItem="18" secondAttribute="top" id="226"/>
                             <constraint firstItem="71" firstAttribute="baseline" secondItem="69" secondAttribute="baseline" id="229"/>
                             <constraint firstItem="12" firstAttribute="top" secondItem="9" secondAttribute="top" constant="32" id="NZC-Zb-1uZ"/>
+                            <constraint firstAttribute="bottom" secondItem="70" secondAttribute="bottom" constant="11" id="fHY-VB-0ck"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -295,9 +296,6 @@ Gw
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="24" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="107"/>
-                    <constraint firstAttribute="trailing" secondItem="19" secondAttribute="trailing" constant="20" symbolic="YES" id="108"/>
-                    <constraint firstAttribute="trailing" secondItem="9" secondAttribute="trailing" constant="20" symbolic="YES" id="109"/>
                     <constraint firstItem="9" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="111"/>
                     <constraint firstItem="9" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" id="112"/>
                     <constraint firstAttribute="bottom" secondItem="162" secondAttribute="bottom" constant="20" symbolic="YES" id="164"/>
@@ -308,8 +306,11 @@ Gw
                     <constraint firstItem="24" firstAttribute="baseline" secondItem="19" secondAttribute="baseline" id="210"/>
                     <constraint firstItem="19" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="24" secondAttribute="trailing" constant="8" symbolic="YES" id="213"/>
                     <constraint firstItem="162" firstAttribute="baseline" secondItem="166" secondAttribute="baseline" id="2K2-D5-vWF"/>
+                    <constraint firstAttribute="centerX" secondItem="9" secondAttribute="centerX" id="4Be-LX-Uyc"/>
+                    <constraint firstItem="19" firstAttribute="trailing" secondItem="9" secondAttribute="trailing" id="6hC-pI-ZsP"/>
                     <constraint firstItem="24" firstAttribute="bottom" secondItem="19" secondAttribute="bottom" id="Piu-cZ-ar8"/>
                     <constraint firstItem="171" firstAttribute="top" secondItem="24" secondAttribute="bottom" constant="20" symbolic="YES" id="ZcK-sY-WDH"/>
+                    <constraint firstItem="24" firstAttribute="leading" secondItem="9" secondAttribute="leading" id="mbJ-pa-40c"/>
                     <constraint firstItem="162" firstAttribute="baseline" secondItem="171" secondAttribute="baseline" id="qDt-F5-FPQ"/>
                 </constraints>
             </view>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
@@ -42,15 +42,15 @@
         <window title="GPU Configuration" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" wantsToBeColor="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="Window">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="2" y="373" width="611" height="509"/>
+            <rect key="contentRect" x="2" y="373" width="611" height="511"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="283.34100000000001" height="107"/>
             <view key="contentView" id="6">
-                <rect key="frame" x="0.0" y="0.0" width="611" height="509"/>
+                <rect key="frame" x="0.0" y="0.0" width="611" height="511"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <box title="Display Settings" translatesAutoresizingMaskIntoConstraints="NO" id="89">
-                        <rect key="frame" x="17" y="338" width="577" height="151"/>
+                        <rect key="frame" x="17" y="340" width="577" height="151"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
                             <rect key="frame" x="2" y="2" width="573" height="134"/>
@@ -211,6 +211,7 @@
                             <constraint firstItem="908" firstAttribute="top" secondItem="89" secondAttribute="top" constant="25" id="946"/>
                             <constraint firstItem="908" firstAttribute="leading" secondItem="89" secondAttribute="leading" constant="149" id="947"/>
                             <constraint firstItem="910" firstAttribute="leading" secondItem="89" secondAttribute="leading" constant="16" id="948"/>
+                            <constraint firstItem="785" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="911" secondAttribute="trailing" constant="8" symbolic="YES" id="GwH-kn-rLW"/>
                             <constraint firstItem="911" firstAttribute="trailing" secondItem="908" secondAttribute="trailing" id="Kvw-mi-0pm"/>
                             <constraint firstAttribute="bottom" secondItem="912" secondAttribute="bottom" constant="22" id="YZu-mL-ucP"/>
                             <constraint firstAttribute="bottom" secondItem="785" secondAttribute="bottom" constant="24" id="slk-vo-UJi"/>
@@ -219,14 +220,14 @@
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <box toolTip="If your card supports it, will mix textures more accurately" title="Rendering" translatesAutoresizingMaskIntoConstraints="NO" id="107">
-                        <rect key="frame" x="17" y="57" width="577" height="277"/>
+                        <rect key="frame" x="17" y="57" width="577" height="279"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
-                            <rect key="frame" x="2" y="2" width="573" height="260"/>
+                            <rect key="frame" x="2" y="2" width="573" height="262"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textField toolTip="Specify when to use dithering to render colors" verticalHuggingPriority="750" horizontalCompressionResistancePriority="671" translatesAutoresizingMaskIntoConstraints="NO" id="112">
-                                    <rect key="frame" x="15" y="232" width="106" height="17"/>
+                                <textField toolTip="Specify when to use dithering to render colors" horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="671" translatesAutoresizingMaskIntoConstraints="NO" id="112">
+                                    <rect key="frame" x="15" y="234" width="125" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Dither Graphics:" id="383">
                                         <font key="font" metaFont="system"/>
@@ -235,7 +236,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <popUpButton toolTip="Specify when to use dithering to render colors" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="116">
-                                    <rect key="frame" x="125" y="226" width="174" height="26"/>
+                                    <rect key="frame" x="144" y="228" width="174" height="26"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="169" id="624"/>
@@ -253,11 +254,8 @@
                                     </popUpButtonCell>
                                 </popUpButton>
                                 <popUpButton toolTip="Use offscreen drawing to remove some graphics glitches" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="202">
-                                    <rect key="frame" x="125" y="199" width="174" height="22"/>
+                                    <rect key="frame" x="144" y="197" width="174" height="26"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="17" id="701"/>
-                                    </constraints>
                                     <popUpButtonCell key="cell" type="push" title="Default" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="206" id="393">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="menu"/>
@@ -273,23 +271,26 @@
                                     </popUpButtonCell>
                                 </popUpButton>
                                 <textField toolTip="Use offscreen drawing to remove some graphics glitches" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="207">
-                                    <rect key="frame" x="15" y="203" width="106" height="21"/>
+                                    <rect key="frame" x="15" y="203" width="125" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Offscreen Drawing:" id="394">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="17" id="Frr-gU-j9s"/>
+                                    </constraints>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Offscreen Drawing:" usesSingleLineMode="YES" id="394">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
                                 <box title="Textures" translatesAutoresizingMaskIntoConstraints="NO" id="212">
-                                    <rect key="frame" x="14" y="71" width="337" height="123"/>
+                                    <rect key="frame" x="14" y="66" width="318" height="126"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <view key="contentView">
-                                        <rect key="frame" x="2" y="2" width="333" height="106"/>
+                                        <rect key="frame" x="2" y="2" width="314" height="109"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <popUpButton toolTip="The color depth of stored textures." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="169">
-                                                <rect key="frame" x="131" y="72" width="188" height="26"/>
+                                                <rect key="frame" x="112" y="75" width="188" height="26"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="183" id="1030"/>
@@ -309,7 +310,7 @@
                                                 </popUpButtonCell>
                                             </popUpButton>
                                             <textField toolTip="Select a quality level of texture scaling" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="201">
-                                                <rect key="frame" x="14" y="46" width="113" height="17"/>
+                                                <rect key="frame" x="15" y="46" width="93" height="17"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Enhancement:" id="398">
                                                     <font key="font" metaFont="system"/>
@@ -318,7 +319,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField toolTip="Filter textures when scaled. Higher values filter more kinds of textures, i.e. sprites." verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="193">
-                                                <rect key="frame" x="15" y="18" width="112" height="17"/>
+                                                <rect key="frame" x="15" y="18" width="93" height="17"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Filtering:" id="397">
                                                     <font key="font" metaFont="system"/>
@@ -326,12 +327,9 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField toolTip="The color depth of stored textures." verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="174">
-                                                <rect key="frame" x="15" y="78" width="112" height="17"/>
+                                            <textField toolTip="The color depth of stored textures." horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="174">
+                                                <rect key="frame" x="15" y="81" width="93" height="17"/>
                                                 <autoresizingMask key="autoresizingMask"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="108" id="758"/>
-                                                </constraints>
                                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Color Depth:" id="396">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -339,14 +337,14 @@
                                                 </textFieldCell>
                                             </textField>
                                             <slider toolTip="Filter textures when scaled. Higher values filter more kinds of textures, i.e. sprites." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="252">
-                                                <rect key="frame" x="131" y="12" width="187" height="26"/>
+                                                <rect key="frame" x="112" y="12" width="187" height="26"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <sliderCell key="cell" alignment="left" maxValue="6" tickMarkPosition="above" numberOfTickMarks="7" allowsTickMarkValuesOnly="YES" sliderType="linear" id="399">
                                                     <font key="font" size="12" name="Helvetica"/>
                                                 </sliderCell>
                                             </slider>
                                             <slider toolTip="Select a quality level of texture scaling" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="253">
-                                                <rect key="frame" x="131" y="44" width="187" height="26"/>
+                                                <rect key="frame" x="112" y="44" width="187" height="26"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <sliderCell key="cell" alignment="left" maxValue="2" tickMarkPosition="above" numberOfTickMarks="3" allowsTickMarkValuesOnly="YES" sliderType="linear" id="400">
                                                     <font key="font" size="12" name="Helvetica"/>
@@ -355,14 +353,11 @@
                                         </subviews>
                                     </view>
                                     <constraints>
-                                        <constraint firstItem="201" firstAttribute="leading" secondItem="212" secondAttribute="leading" constant="15" id="735"/>
                                         <constraint firstItem="174" firstAttribute="leading" secondItem="212" secondAttribute="leading" constant="16" id="736"/>
                                         <constraint firstItem="169" firstAttribute="baseline" secondItem="174" secondAttribute="baseline" id="739"/>
                                         <constraint firstAttribute="trailing" secondItem="169" secondAttribute="trailing" constant="16" id="741"/>
-                                        <constraint firstItem="253" firstAttribute="top" secondItem="174" secondAttribute="bottom" constant="8" symbolic="YES" id="745"/>
                                         <constraint firstAttribute="trailing" secondItem="253" secondAttribute="trailing" constant="16" id="748"/>
                                         <constraint firstItem="201" firstAttribute="baseline" secondItem="253" secondAttribute="baseline" id="749"/>
-                                        <constraint firstItem="193" firstAttribute="leading" secondItem="212" secondAttribute="leading" constant="16" id="754"/>
                                         <constraint firstItem="169" firstAttribute="top" secondItem="212" secondAttribute="top" constant="25" id="767"/>
                                         <constraint firstItem="252" firstAttribute="top" secondItem="253" secondAttribute="bottom" constant="8" symbolic="YES" id="1025"/>
                                         <constraint firstItem="193" firstAttribute="centerY" secondItem="252" secondAttribute="centerY" id="1028"/>
@@ -370,8 +365,13 @@
                                         <constraint firstItem="169" firstAttribute="leading" secondItem="253" secondAttribute="leading" id="1031"/>
                                         <constraint firstItem="252" firstAttribute="leading" secondItem="253" secondAttribute="leading" id="1032"/>
                                         <constraint firstItem="253" firstAttribute="leading" secondItem="169" secondAttribute="leading" id="8nJ-Q1-ZKd"/>
+                                        <constraint firstItem="174" firstAttribute="trailing" secondItem="193" secondAttribute="trailing" id="9Iq-aC-OEr"/>
+                                        <constraint firstItem="174" firstAttribute="trailing" secondItem="201" secondAttribute="trailing" id="9LB-1k-ECC"/>
+                                        <constraint firstItem="174" firstAttribute="leading" secondItem="193" secondAttribute="leading" id="CPg-9c-dty"/>
                                         <constraint firstItem="169" firstAttribute="leading" secondItem="174" secondAttribute="trailing" constant="8" symbolic="YES" id="SbF-7f-Bnq"/>
                                         <constraint firstItem="252" firstAttribute="leading" secondItem="193" secondAttribute="trailing" constant="8" symbolic="YES" id="Tqx-Cn-OVc"/>
+                                        <constraint firstItem="253" firstAttribute="top" secondItem="169" secondAttribute="bottom" constant="8" symbolic="YES" id="Uxd-Wa-luh"/>
+                                        <constraint firstItem="174" firstAttribute="leading" secondItem="201" secondAttribute="leading" id="aIR-BW-D9z"/>
                                         <constraint firstItem="253" firstAttribute="trailing" secondItem="169" secondAttribute="trailing" id="eXl-E8-pL6"/>
                                         <constraint firstItem="253" firstAttribute="trailing" secondItem="252" secondAttribute="trailing" id="skt-z8-TVZ"/>
                                         <constraint firstItem="253" firstAttribute="leading" secondItem="252" secondAttribute="leading" id="u9D-yy-haW"/>
@@ -382,7 +382,7 @@
                                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </box>
                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="215">
-                                    <rect key="frame" x="407" y="197" width="130" height="26"/>
+                                    <rect key="frame" x="398" y="197" width="130" height="26"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="125" id="623"/>
@@ -400,7 +400,7 @@
                                     </popUpButtonCell>
                                 </popUpButton>
                                 <textField toolTip="Select the method the PSX uses to read the contents of the screen" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="220">
-                                    <rect key="frame" x="385" y="232" width="173" height="17"/>
+                                    <rect key="frame" x="366" y="234" width="192" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Frame Buffer Effects" id="402">
                                         <font key="font" metaFont="system"/>
@@ -409,7 +409,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <colorWell toolTip="Select a color and transparency for the scanlines" translatesAutoresizingMaskIntoConstraints="NO" id="341">
-                                    <rect key="frame" x="356" y="158" width="23" height="22"/>
+                                    <rect key="frame" x="337" y="158" width="23" height="22"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="23" id="563"/>
@@ -418,7 +418,7 @@
                                     <color key="color" red="0.0" green="0.0" blue="0.0" alpha="0.23999999459999999" colorSpace="calibratedRGB"/>
                                 </colorWell>
                                 <matrix verticalHuggingPriority="750" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="702">
-                                    <rect key="frame" x="387" y="30" width="169" height="150"/>
+                                    <rect key="frame" x="368" y="30" width="188" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     <size key="cellSize" width="155" height="14"/>
@@ -501,13 +501,10 @@
                             <constraint firstItem="116" firstAttribute="leading" secondItem="202" secondAttribute="leading" id="600"/>
                             <constraint firstItem="116" firstAttribute="trailing" secondItem="202" secondAttribute="trailing" id="607"/>
                             <constraint firstItem="112" firstAttribute="baseline" secondItem="116" secondAttribute="baseline" id="692"/>
-                            <constraint firstItem="202" firstAttribute="top" secondItem="116" secondAttribute="bottom" constant="10" symbolic="YES" id="694"/>
                             <constraint firstAttribute="trailing" secondItem="702" secondAttribute="trailing" constant="16" id="965"/>
                             <constraint firstItem="220" firstAttribute="leading" secondItem="702" secondAttribute="leading" id="975"/>
                             <constraint firstAttribute="trailing" secondItem="220" secondAttribute="trailing" constant="16" id="977"/>
                             <constraint firstItem="215" firstAttribute="centerX" secondItem="220" secondAttribute="centerX" id="978"/>
-                            <constraint firstItem="116" firstAttribute="leading" secondItem="112" secondAttribute="trailing" constant="8" symbolic="YES" id="980"/>
-                            <constraint firstItem="207" firstAttribute="top" secondItem="112" secondAttribute="bottom" constant="8" symbolic="YES" id="983"/>
                             <constraint firstItem="212" firstAttribute="leading" secondItem="107" secondAttribute="leading" constant="16" id="989"/>
                             <constraint firstItem="116" firstAttribute="top" secondItem="107" secondAttribute="top" constant="25" id="993"/>
                             <constraint firstItem="112" firstAttribute="leading" secondItem="107" secondAttribute="leading" constant="16" id="995"/>
@@ -520,6 +517,7 @@
                             <constraint firstItem="341" firstAttribute="top" secondItem="702" secondAttribute="top" id="1017"/>
                             <constraint firstAttribute="bottom" secondItem="702" secondAttribute="bottom" constant="28" id="3Ng-tn-NLl"/>
                             <constraint firstItem="112" firstAttribute="leading" secondItem="207" secondAttribute="leading" id="7oK-ZZ-JYr"/>
+                            <constraint firstItem="202" firstAttribute="top" secondItem="116" secondAttribute="bottom" constant="10" symbolic="YES" id="O3g-hv-kg2"/>
                             <constraint firstItem="112" firstAttribute="trailing" secondItem="207" secondAttribute="trailing" id="PhN-KE-FcQ"/>
                             <constraint firstItem="212" firstAttribute="top" secondItem="202" secondAttribute="bottom" constant="8" symbolic="YES" id="RYi-RA-sus"/>
                             <constraint firstItem="202" firstAttribute="leading" secondItem="207" secondAttribute="trailing" constant="8" symbolic="YES" id="naS-nh-gFe"/>
@@ -568,8 +566,6 @@ Gw
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="107" secondAttribute="trailing" constant="20" symbolic="YES" id="566"/>
-                    <constraint firstItem="107" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="20" symbolic="YES" id="567"/>
                     <constraint firstItem="665" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="20" symbolic="YES" id="667"/>
                     <constraint firstAttribute="bottom" secondItem="670" secondAttribute="bottom" constant="20" symbolic="YES" id="672"/>
                     <constraint firstAttribute="trailing" secondItem="670" secondAttribute="trailing" constant="20" symbolic="YES" id="673"/>
@@ -579,8 +575,10 @@ Gw
                     <constraint firstItem="89" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="20" symbolic="YES" id="907"/>
                     <constraint firstItem="107" firstAttribute="top" secondItem="89" secondAttribute="bottom" constant="8" symbolic="YES" id="985"/>
                     <constraint firstItem="674" firstAttribute="baseline" secondItem="670" secondAttribute="baseline" id="2YQ-xw-azh"/>
+                    <constraint firstItem="107" firstAttribute="leading" secondItem="89" secondAttribute="leading" id="Ahd-Du-WuU"/>
                     <constraint firstItem="674" firstAttribute="top" secondItem="107" secondAttribute="bottom" constant="20" symbolic="YES" id="Iw3-oE-kXe"/>
                     <constraint firstItem="674" firstAttribute="baseline" secondItem="665" secondAttribute="baseline" id="WHu-Oa-tPr"/>
+                    <constraint firstItem="107" firstAttribute="trailing" secondItem="89" secondAttribute="trailing" id="XDw-KH-rtQ"/>
                 </constraints>
             </view>
             <connections>
