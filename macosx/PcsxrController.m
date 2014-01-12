@@ -791,20 +791,20 @@ otherblock();\
 		// create them if needed
         url = [PcsxrAppSupport URLByAppendingPathComponent:@"Bios"];
 		if (![url checkResourceIsReachableAndReturnError:NULL])
-			[manager createDirectoryAtPath:[url path] withIntermediateDirectories:YES attributes:nil error:NULL];
+			[manager createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:NULL];
 
         MemCardPath = [PcsxrAppSupport URLByAppendingPathComponent:@"Memory Cards"];
 		url = MemCardPath;
 		if (![url checkResourceIsReachableAndReturnError:NULL])
-            [manager createDirectoryAtPath:[url path] withIntermediateDirectories:YES attributes:nil error:NULL];
+            [manager createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:NULL];
 
         url = [PcsxrAppSupport URLByAppendingPathComponent:@"Patches"];
 		if (![url checkResourceIsReachableAndReturnError:NULL])
-            [manager createDirectoryAtPath:[url path] withIntermediateDirectories:YES attributes:nil error:NULL];
+            [manager createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:NULL];
 		
 		url = [PcsxrAppSupport URLByAppendingPathComponent:@"PlugIns"];
 		if (![url checkResourceIsReachableAndReturnError:NULL])
-            [manager createDirectoryAtPath:[url path] withIntermediateDirectories:YES attributes:nil error:NULL];
+            [manager createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:NULL];
         
         saveStatePath = [[[PcsxrAppSupport URLByAppendingPathComponent:@"Save States"] path] copy];
 		if (![manager fileExistsAtPath:saveStatePath isDirectory:&dir])
@@ -812,15 +812,18 @@ otherblock();\
 
         url = [MemCardPath URLByAppendingPathComponent:@"Mcd001.mcr"];
 		str = [[url path] fileSystemRepresentation];
-		if (str != nil) strlcpy(Config.Mcd1, str, MAXPATHLEN);
+		if (str != nil)
+			strlcpy(Config.Mcd1, str, MAXPATHLEN);
 
 		url = [MemCardPath URLByAppendingPathComponent:@"Mcd002.mcr"];
 		str = [[url path] fileSystemRepresentation];
-		if (str != nil) strlcpy(Config.Mcd2, str, MAXPATHLEN);
+		if (str != nil)
+			strlcpy(Config.Mcd2, str, MAXPATHLEN);
 
 		url = [PcsxrAppSupport URLByAppendingPathComponent:@"Bios"];
 		str = [[url path] fileSystemRepresentation];
-		if (str != nil) strlcpy(Config.BiosDir, str, MAXPATHLEN);
+		if (str != nil)
+			strlcpy(Config.BiosDir, str, MAXPATHLEN);
 
 		url = [PcsxrAppSupport URLByAppendingPathComponent:@"Patches"];
 		str = [[url path] fileSystemRepresentation];
@@ -838,7 +841,8 @@ otherblock();\
 	// set plugin path
 	path = [[NSBundle mainBundle] builtInPlugInsPath];
 	str = [path fileSystemRepresentation];
-	if (str != nil) strlcpy(Config.PluginsDir, str, MAXPATHLEN);
+	if (str != nil)
+		strlcpy(Config.PluginsDir, str, MAXPATHLEN);
 
 	// locate a bios
 	biosList = [[NSMutableArray alloc] init];
