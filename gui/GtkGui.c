@@ -586,6 +586,7 @@ void OnFile_RunExe() {
 				SysReset();
 
 				if (Load(file) == 0) {
+					g_free(reset_load_info);
 					reset_load_info = g_strdup(file);
 					g_free(file);
 					psxCpu->Execute();

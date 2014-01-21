@@ -476,7 +476,7 @@ int SysInit() {
 		setvbuf(emuLog, NULL, _IONBF, 0u);
 	}
 #else
-	setvbuf(emuLog, NULL, _IONBF, NULL);
+	setvbuf(emuLog, NULL, _IONBF, 0u);
 #endif
 #endif
 

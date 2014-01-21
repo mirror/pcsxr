@@ -1133,7 +1133,6 @@ void CreateDisplay(void)
  }
 
  if ((dwActFixes&0x800)) { // Try to use Xv's sync
-     printf("Jebac\n");
    Atom atom_vsync = xv_intern_atom_if_exists(display, "XV_SYNC_TO_VBLANK");
    if (atom_vsync != None) {
        XvGetPortAttribute(display, xv_port, atom_vsync, &xv_vsync);
