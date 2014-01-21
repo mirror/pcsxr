@@ -44,6 +44,10 @@ int            iFVDisplay = 0;
 PSXPoint_t     ptCursorPoint[8];
 unsigned short usCursorActive = 0;
 
+// This could be used to select specific mode known to work.
+// TODO implement as a cfg param if needed for wider compatibility among GPU cards
+unsigned int uOverrideMode = 0x59565955U;
+
 //unsigned int   LUT16to32[65536];
 //unsigned int   RGBtoYUV[65536];
 
@@ -53,16 +57,15 @@ unsigned short usCursorActive = 0;
 #include <X11/extensions/XShm.h>
 int xv_port = -1;
 int xv_id = -1;
-int xv_depth = 0;
-int yuv_port = -1;
-int yuv_id = -1;
-int use_yuv = 0;
-int xv_vsync = 0;
+int use_yuv = False;
+int xv_vsync = False;
 
 XShmSegmentInfo shminfo;
 int finalw,finalh;
 
-extern XvImage  *XvShmCreateImage(Display*, XvPortID, int, char*, int, int, XShmSegmentInfo*);
+
+Screen*  screen;
+//extern XvImage  *XvShmCreateImage(Display*, XvPortID, int, char*, int, int, XShmSegmentInfo*);
 
 #include <time.h>
 
@@ -982,7 +985,6 @@ void CreateDisplay(void)
 {
  XSetWindowAttributes winattr;
  int                  myscreen;
- Screen *             screen;
  XEvent               event;
  XSizeHints           hints;
  XWMHints             wm_hints;
@@ -1003,6 +1005,10 @@ void CreateDisplay(void)
 
  XClassHint* classHint;
 
+ int yuv_port = -1, yuv_id = -1;
+ int rgb_port = -1, rgb_id = -1;
+ int xv_depth = 0;
+
  // Open display
  display = XOpenDisplay(NULL);
 
@@ -1013,109 +1019,139 @@ void CreateDisplay(void)
    return;
   }
 
- myscreen=DefaultScreen(display);
 
  // desktop fullscreen switch
  if (!iWindowMode) fx = 1;
 
  screen=DefaultScreenOfDisplay(display);
+ myscreen=DefaultScreen(display);
+ root_window_id=RootWindow(display, myscreen);
 
- root_window_id=RootWindow(display,DefaultScreen(display));
+ //Look for an Xvideo RGB port
+ ret = XvQueryAdaptors(display, root_window_id, &p_num_adaptors, &ai);
+ if (ret != Success) {
+   if (ret == XvBadExtension)
+     printf("XvBadExtension returned at XvQueryExtension.\n");
+   else
+     if (ret == XvBadAlloc)
+   printf("XvBadAlloc returned at XvQueryExtension.\n");
+     else
+   printf("other error happaned at XvQueryAdaptors.\n");
 
-  //Look for an Xvideo RGB port
-  ret = XvQueryAdaptors(display, root_window_id, &p_num_adaptors, &ai);
-  if (ret != Success) {
-    if (ret == XvBadExtension)
-      printf("XvBadExtension returned at XvQueryExtension.\n");
-    else
-      if (ret == XvBadAlloc)
-	printf("XvBadAlloc returned at XvQueryExtension.\n");
-      else
-	printf("other error happaned at XvQueryAdaptors.\n");
+   exit(-1);
+ }
 
-    exit(-1);
-  }
+ depth = DefaultDepth(display, myscreen);
 
-  depth = DefaultDepth(display, myscreen);
-
-  for (i = 0; i < p_num_adaptors; i++) {
-	p_num_ports = ai[i].base_id + ai[i].num_ports;
-	for (p = ai[i].base_id; p < p_num_ports; p++) {
-		fo = XvListImageFormats(display, p, &formats);
-		for (j = 0; j < formats; j++) {
-			//backup YUV mode
-			//hmm, should I bother check guid == 55595659-0000-0010-8000-00aa00389b71?
-			//and check byte order?   fo[j].byte_order == LSBFirst
+ for (i = 0; i < p_num_adaptors; i++) {
+   p_num_ports = ai[i].base_id + ai[i].num_ports;
+   for (p = ai[i].base_id; p < p_num_ports; p++) {
+     fo = XvListImageFormats(display, p, &formats);
+     for (j = 0; j < formats; j++) {
+       //Check for compatible YUV modes for backup
+       //hmm, should I bother check guid == 55595659-0000-0010-8000-00aa00389b71?
+       //and check byte order?   fo[j].byte_order == LSBFirst
 #ifdef __BIG_ENDIAN__
-			if ( fo[j].type == XvYUV && fo[j].bits_per_pixel == 16 && fo[j].format == XvPacked && strncmp("YUYV", fo[j].component_order, 5) == 0 )
+       if ( fo[j].type == XvYUV && fo[j].bits_per_pixel == 16 && fo[j].format == XvPacked && strncmp("YUYV", fo[j].component_order, 5) == 0 )
 #else
-			if ( fo[j].type == XvYUV && fo[j].bits_per_pixel == 16 && fo[j].format == XvPacked && strncmp("UYVY", fo[j].component_order, 5) == 0 )
+       if ( fo[j].type == XvYUV && fo[j].bits_per_pixel == 16 && fo[j].format == XvPacked && strncmp("UYVY", fo[j].component_order, 5) == 0 )
 #endif
-			{
-				yuv_port = p;
-				yuv_id = fo[j].id;
-			}
-			if (fo[j].type == XvRGB && fo[j].bits_per_pixel == 32)
-			{
-				xv_port = p;
-				xv_id = fo[j].id;
-				xv_depth = fo[j].depth;
-				printf("RGB mode found.  id: %x, depth: %d\n", xv_id, xv_depth);
+       {
+         yuv_port = p;
+         yuv_id = fo[j].id;
+       }
+       if (fo[j].type == XvRGB && fo[j].bits_per_pixel == 32)
+       {
+         rgb_port = p;
+         rgb_id = fo[j].id;
+         xv_depth = fo[j].depth;
+         printf("RGB mode found.  id: %x, depth: %d\n", xv_id, xv_depth);
+         
+         if (xv_depth != depth) {
+           printf("Warning: Depth does not match screen depth (%d)\n", depth);
+         }
+         else {
+           //break out of loops
+           j = formats;
+           p = p_num_ports;
+           i = p_num_adaptors;
+         }
+       }
 
-				if (xv_depth != depth) {
-					printf("Warning: Depth does not match screen depth (%d)\n", depth);
-				}
-				else {
-					//break out of loops
-					j = formats;
-					p = p_num_ports;
-					i = p_num_adaptors;
-				}
-			}
-		}
-		if (fo)
-			XFree(fo);
-	}
-  }
-  if (p_num_adaptors > 0)
-    XvFreeAdaptorInfo(ai);
-  if (xv_port == -1 && yuv_port == -1)
-  {
-	printf("RGB & YUV not found.  Quitting.\n");
-	exit(-1);
-  }
-  else if (xv_port == -1 && yuv_port != -1)
-  {
-	use_yuv = 1;
-	printf("RGB not found.  Using YUV.\n");
-	xv_port = yuv_port;
-	xv_id = yuv_id;
-  }
-  else if (xv_depth && xv_depth != depth && yuv_port != -1)
-  {
-	use_yuv = 1;
-	printf("Acceptable RGB mode not found.  Using YUV.\n");
-	xv_port = yuv_port;
-	xv_id = yuv_id;
-  }
+       // Are we searching for a specific mode?
+       /*
+       if ( fo[j].id == uOverrideMode) {
+         if (fo[j].type == XvYUV) {
+           xv_id = yuv_id = fo[j].id;
+           xv_port = yuv_port = p;
+           use_yuv = True;
+         } else if (fo[j].type == XvRGB) {
+           xv_id = rgb_id = fo[j].id;
+           xv_port = rgb_port = p;
+           //xv_depth = fo[j].depth;
+           use_yuv = False;
+         }
+         // Get out
+         j = formats;
+         p = p_num_ports;
+         i = p_num_adaptors;
+         //break;
+       }*/
+     }
+     if (fo)
+         XFree(fo);
+   }
+   if (yuv_port != -1) i = p_num_adaptors; // TODO: at least intel adapters >0 just display black image
+ }
+ if (p_num_adaptors > 0)
+   XvFreeAdaptorInfo(ai);
+ if (xv_port == -1 && rgb_port == -1 && yuv_port == -1)
+ {
+   printf("RGB or YUV not available for this adapter. See xvinfo. Quitting.\n");
+   exit(-1);
+ }
+ else if (xv_port != -1) {
+     printf("Using explicit mode id = %x.\n", uOverrideMode);
+ }
+ else if (rgb_port == -1 && yuv_port != -1)
+ {
+   use_yuv = True;
+   printf("RGB not found. Using YUV.\n");
+   xv_port = yuv_port;
+   xv_id = yuv_id;
+ }
+ else if (xv_depth && xv_depth != depth && yuv_port != -1)
+ {
+   use_yuv = True;
+   printf("Acceptable RGB mode not found.  Using YUV.\n");
+   xv_port = yuv_port;
+   xv_id = yuv_id;
+ }
+ else if (rgb_port != -1) {
+   xv_port = rgb_port;
+   xv_id = rgb_id;
+ }
 
-  Atom atom_vsync = xv_intern_atom_if_exists(display, "XV_SYNC_TO_VBLANK");
-  if (atom_vsync != None) {
-	XvGetPortAttribute(display, xv_port, atom_vsync, &xv_vsync);
-	XvSetPortAttribute(display, xv_port, atom_vsync, 0);
-  }
+ if ((dwActFixes&0x800)) { // Try to use Xv's sync
+     printf("Jebac\n");
+   Atom atom_vsync = xv_intern_atom_if_exists(display, "XV_SYNC_TO_VBLANK");
+   if (atom_vsync != None) {
+       XvGetPortAttribute(display, xv_port, atom_vsync, &xv_vsync);
+       XvSetPortAttribute(display, xv_port, atom_vsync, 0);
+   }
+ }
 
-myvisual = 0;
+ myvisual = 0;
 
-if(XMatchVisualInfo(display,myscreen, depth, TrueColor, &vi))
-	myvisual = &vi;
+ if(XMatchVisualInfo(display,myscreen, depth, TrueColor, &vi))
+   myvisual = &vi;
 
-if (!myvisual)
-{
-	fprintf(stderr,"Failed to obtain visual!\n");
-	DestroyDisplay();
-	return;
-}
+ if (!myvisual)
+ {
+   fprintf(stderr,"Failed to obtain visual!\n");
+   DestroyDisplay();
+   return;
+ }
 
  if(myvisual->red_mask==0x00007c00 &&
     myvisual->green_mask==0x000003e0 &&
@@ -1576,7 +1612,6 @@ __inline void MaintainAspect(uint32_t * dx, uint32_t * dy, uint32_t * dw, uint32
 
 void DoBufferSwap(void)
 {
-	Screen *screen;
 	Window _dw;
 	XvImage *xvi;
 	unsigned int dstx, dsty;
@@ -1607,14 +1642,11 @@ void DoBufferSwap(void)
 	}
 
 	XGetGeometry(display, window, &_dw, (int *)&_d, (int *)&_d, &_w, &_h, &_d, &_d);
-	if (use_yuv) {
-		xvi = XvShmCreateImage(display, yuv_port, yuv_id, 0, finalw, finalh, &shminfo);
-	} else
-		xvi = XvShmCreateImage(display, xv_port, xv_id, 0, finalw, finalh, &shminfo);
+	xvi = XvShmCreateImage(display, xv_port, xv_id, 0, finalw, finalh, &shminfo);
 
 	xvi->data = shminfo.shmaddr;
 
-	screen=DefaultScreenOfDisplay(display);
+	if (!screen) screen=DefaultScreenOfDisplay(display);
 	//screennum = DefaultScreen(display);
 
 	if (!iWindowMode) {

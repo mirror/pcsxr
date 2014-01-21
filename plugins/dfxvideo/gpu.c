@@ -819,10 +819,10 @@ void ChangeWindowMode(void)                            // TOGGLE FULLSCREEN - WI
 
 void ChangeWindowMode(void)                            // TOGGLE FULLSCREEN - WINDOW
 {
- extern Display         *display;
+ extern Display       *display;
  extern Window        window;
  extern int           root_window_id;
- Screen 		*screen;
+ extern Screen        *screen;
  XSizeHints           hints;
  MotifWmHints         mwmhints;
  Atom                 mwmatom;
