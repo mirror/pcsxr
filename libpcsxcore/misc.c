@@ -499,7 +499,8 @@ int Load(const char *ExePath) {
 }
 
 // STATES
-
+static const u8 PCSXR_HEADER_SZ = 10U;
+static const u32 SZ_GPUPIC = 128 * 96 * 3;
 static const char PcsxrHeader[32] = "STv4 PCSXR v" PACKAGE_VERSION;
 
 // Savestate Versioning!
@@ -508,23 +509,143 @@ static const u32 SaveVersion = 0x8b410008;
 
 int SaveState(const char *file) {
 	gzFile f;
-	GPUFreeze_t *gpufP;
+	long size;
+
+	f = gzopen(file, "wb9"); // Best ratio but slow
+	if (f == NULL) return -1;
+	return SaveStateGz(f, &size);
+}
+
+int LoadState(const char *file) {
+	gzFile f;
+
+	f = gzopen(file, "rb");
+	if (f == NULL) return -1;
+	return LoadStateGz(f);
+}
+
+u32 mem_cur_save_count=0, mem_last_save;
+boolean mem_wrapped=FALSE; // Whether we went past max count and restarted counting
+
+void CreateRewindState() {
+	SaveStateMem(mem_last_save=mem_cur_save_count++);
+	
+	if (mem_cur_save_count > Config.RewindCount) {
+		mem_cur_save_count = 0;
+		mem_wrapped=TRUE;
+	}
+}
+
+void RewindState() {
+	mem_cur_save_count--;
+	if (mem_cur_save_count > Config.RewindCount && mem_wrapped) { 
+		mem_cur_save_count = Config.RewindCount;
+		mem_wrapped = FALSE;
+	} else if (mem_cur_save_count > Config.RewindCount && !mem_wrapped) {
+		mem_cur_save_count++;
+		return;
+	} else if (mem_last_save == mem_cur_save_count-1) {
+		mem_cur_save_count = 0;
+		return;
+	}
+	LoadStateMem(mem_cur_save_count);
+}
+
+/* 
+
+Pros of using SHM
++ No need to change SaveState interface (gzip OK)
++ Possibiliy to preserve saves after pcsxr crash
+
+Cons of using SHM
+- UNIX only
+- Possibility of leaving left over shm files
+- Possibly not the quickest way to allocate memory
+
+*/
+#ifndef NO_RT_SHM
+#include <sys/mman.h>
+#include <sys/stat.h> /* For mode constants */
+#include <fcntl.h> /* For O_* constants */
+#include <errno.h>
+
+#define SHM_SS_NAME_TEMPLATE "/pcsxrmemsavestate%.4u"
+
+int SaveStateMem(const u32 id) {
+	char name[32];
+	int ret = -1;
+
+	snprintf(name, 32, SHM_SS_NAME_TEMPLATE, id);
+	int fd = shm_open(name, O_CREAT | O_RDWR | O_TRUNC, 0666);
+
+	if (fd >= 0) {
+		gzFile f = gzdopen(fd, "wb0R"); // Fast and no compression
+		if (f != NULL) {
+			long size;
+			ret = SaveStateGz(f, &size);
+			//printf("Saved %s/%i (ID: %i SZ: %lik)\n", name, fd, id, size/1024);
+		} else {
+			SysMessage("GZ OPEN FAIL %i\n", errno );
+		}
+	} else {
+		SysMessage("FD OPEN FAIL %i\n", errno );
+	}
+	return ret;
+}
+
+int LoadStateMem(const u32 id) {
+	char name[32];
+	int ret = -1;
+
+	snprintf(name, 32, SHM_SS_NAME_TEMPLATE, id);
+	int fd = shm_open(name, O_RDONLY, 0444);
+
+	if (fd >= 0) {
+		gzFile f = gzdopen(fd, "rb");
+		if (f != NULL) {
+			ret = LoadStateGz(f);
+			//printf("Loaded %s/%i (ID: %i RET: %i)\n", name, fd, id, ret);
+			shm_unlink(name);
+		} else {
+			SysMessage("GZ OPEN FAIL %i\n", errno);
+		}
+	} else {
+		SysMessage("FD OPEN FAIL %i (%s)\n", errno, name);
+	}
+	return ret;
+}
+
+void CleanupMemSaveStates() {
+	char name[32];
+	u32 i;
+	
+	for (i=0; i <= Config.RewindCount; i++) {
+		snprintf(name, sizeof(name), SHM_SS_NAME_TEMPLATE, i);
+		if (shm_unlink(name) != 0) {
+			//break;
+		}
+	}
+}
+#else
+int SaveStateMem(const u32 id) {return 0;}
+int LoadStateMem(const u32 id) {return 0;}
+void CleanupMemSaveStates() {}
+#endif
+
+int SaveStateGz(gzFile f, long* gzsize) {
+	GPUFreeze_t gpufP;
 	SPUFreeze_t *spufP;
 	int Size;
-	unsigned char *pMem;
+	unsigned char pMemGpuPic[SZ_GPUPIC], pMemSpuT[16];
 
-	f = gzopen(file, "wb");
 	if (f == NULL) return -1;
 
-	gzwrite(f, (void *)PcsxrHeader, 32);
+	gzwrite(f, (void *)PcsxrHeader, sizeof(PcsxrHeader));
 	gzwrite(f, (void *)&SaveVersion, sizeof(u32));
 	gzwrite(f, (void *)&Config.HLE, sizeof(boolean));
 
-	pMem = (unsigned char *)malloc(128 * 96 * 3);
-	if (pMem == NULL) return -1;
-	GPU_getScreenPic(pMem);
-	gzwrite(f, pMem, 128 * 96 * 3);
-	free(pMem);
+	GPU_getScreenPic(pMemGpuPic);
+	gzwrite(f, pMemGpuPic, SZ_GPUPIC);
 
 	if (Config.HLE)
 		psxBiosFreeze(1);
@@ -535,19 +656,16 @@ int SaveState(const char *file) {
 	gzwrite(f, (void *)&psxRegs, sizeof(psxRegs));
 
 	// gpu
-	gpufP = (GPUFreeze_t *)malloc(sizeof(GPUFreeze_t));
-	gpufP->ulFreezeVersion = 1;
-	GPU_freeze(1, gpufP);
-	gzwrite(f, gpufP, sizeof(GPUFreeze_t));
-	free(gpufP);
+	gpufP.ulFreezeVersion = 1;
+	GPU_freeze(1, &gpufP);
+	gzwrite(f, &gpufP, sizeof(GPUFreeze_t));
 
 	// spu
-	spufP = (SPUFreeze_t *) malloc(16); // only first 3 elements (up to Size)
+	spufP = (SPUFreeze_t *)pMemSpuT; // only first 3 elements (up to Size)
 	SPU_freeze(2, spufP);
 	Size = spufP->Size; gzwrite(f, &Size, 4);
 	if (Size <= 0)
 		return 1; // error
-	free(spufP);
 	spufP = (SPUFreeze_t *) malloc(Size);
 	SPU_freeze(1, spufP);
 	gzwrite(f, spufP, Size);
@@ -559,34 +677,34 @@ int SaveState(const char *file) {
 	psxRcntFreeze(f, 1);
 	mdecFreeze(f, 1);
 
+	*gzsize = gztell(f);
 	gzclose(f);
 
 	return 0;
 }
 
-int LoadState(const char *file) {
-	gzFile f;
-	GPUFreeze_t *gpufP;
+int LoadStateGz(gzFile f) {
+	GPUFreeze_t gpufP;
 	SPUFreeze_t *spufP;
 	int Size;
-	char header[32];
+	char header[sizeof(PcsxrHeader)];
 	u32 version;
 	boolean hle;
 
-	f = gzopen(file, "rb");
 	if (f == NULL) return -1;
 
 	gzread(f, header, sizeof(header));
 	gzread(f, &version, sizeof(u32));
 	gzread(f, &hle, sizeof(boolean));
 
-	if (strncmp("STv4 PCSXR", header, 10) != 0 || version != SaveVersion || hle != Config.HLE) {
+	// Compare header only "STv4 PCSXR" part no version
+	if (strncmp(PcsxrHeader, header, PCSXR_HEADER_SZ) != 0 || version != SaveVersion || hle != Config.HLE) {
 		gzclose(f);
 		return -1;
 	}
 
 	psxCpu->Reset();
-	gzseek(f, 128 * 96 * 3, SEEK_CUR);
+	gzseek(f, SZ_GPUPIC, SEEK_CUR);
 
 	gzread(f, psxM, 0x00200000);
 	gzread(f, psxR, 0x00080000);
@@ -597,10 +715,8 @@ int LoadState(const char *file) {
 		psxBiosFreeze(0);
 
 	// gpu
-	gpufP = (GPUFreeze_t *)malloc(sizeof(GPUFreeze_t));
-	gzread(f, gpufP, sizeof(GPUFreeze_t));
-	GPU_freeze(0, gpufP);
-	free(gpufP);
+	gzread(f, &gpufP, sizeof(GPUFreeze_t));
+	GPU_freeze(0, &gpufP);
 
 	// spu
 	gzread(f, &Size, 4);
@@ -622,7 +738,7 @@ int LoadState(const char *file) {
 
 int CheckState(const char *file) {
 	gzFile f;
-	char header[32];
+	char header[sizeof(PcsxrHeader)];
 	u32 version;
 	boolean hle;
 
@@ -635,7 +751,8 @@ int CheckState(const char *file) {
 
 	gzclose(f);
 
-	if (strncmp("STv4 PCSXR", header, 10) != 0 || version != SaveVersion || hle != Config.HLE)
+	// Compare header only "STv4 PCSXR" part no version
+	if (strncmp(PcsxrHeader, header, PCSXR_HEADER_SZ) != 0 || version != SaveVersion || hle != Config.HLE)
 		return -1;
 
 	return 0;

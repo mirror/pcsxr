@@ -157,6 +157,7 @@ typedef struct {
 	s32 WindowPos[2];
 	u8 Cpu; // CPU_DYNAREC or CPU_INTERPRETER
 	u8 PsxType; // PSX_TYPE_NTSC or PSX_TYPE_PAL
+	u32 RewindCount;
 #ifdef _WIN32
 	char Lang[256];
 #endif

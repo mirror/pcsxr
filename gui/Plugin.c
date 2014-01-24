@@ -60,8 +60,8 @@ void gpuShowPic() {
 		f = gzopen(state_filename, "rb");
 		if (f != NULL) {
 			gzseek(f, 32, SEEK_SET); // skip header
-            gzseek(f, sizeof(u32), SEEK_CUR);
-            gzseek(f, sizeof(boolean), SEEK_CUR);
+			gzseek(f, sizeof(u32), SEEK_CUR);
+			gzseek(f, sizeof(boolean), SEEK_CUR);
 			gzread(f, pMem, 128*96*3);
 			gzclose(f);
 		} else {
@@ -103,8 +103,9 @@ void KeyStateLoad(int i) {
 }
 
 // todo: make toggle config param
-static short modctrl = 0, modalt = 0, toggle = 0, pressed = 0;
-int lastpressed = 0;
+static s16 modctrl = 0, modalt = 0, toggle = 0, pressed = 0;
+s32 lastpressed = 0;
+time_t tslastpressed = 0;
 
 /* Handle keyboard keystrokes */
 void PADhandleKey(int key) {
@@ -113,7 +114,8 @@ void PADhandleKey(int key) {
 
 	short rel = 0;	//released key flag
 
-	if (key == 0 || key == lastpressed)
+	// Allow rewind key to repeat
+	if (key == 0 || (key == lastpressed && key != XK_BackSpace))
 		return;
 
 	if ((key >> 30) & 1)	//specific to dfinput (padJoy)
@@ -284,7 +286,15 @@ void PADhandleKey(int key) {
 		case XK_F12:
 			psxReset();
 			break;
-        case XK_Escape:
+		case XK_BackSpace:
+			rew_timer = 0;
+			time_t now = clock();
+			u32 millis = (((now - tslastpressed) * 1000) / CLOCKS_PER_SEC);
+			if (millis <= 130) break;
+			tslastpressed = now;
+			RewindState();
+			break;
+		case XK_Escape:
 			// TODO
 			// the architecture is too broken to actually restart the GUI
 			// because SysUpdate is called from deep within the actual
@@ -345,12 +355,12 @@ int _OpenPlugins() {
 	if (ret < 0) { SysMessage(_("Error opening GPU plugin!")); return -1; }
 	ret = PAD1_open(&gpuDisp);
 	if (ret < 0) { SysMessage(_("Error opening Controller 1 plugin!")); return -1; }
-    PAD1_registerVibration(GPU_visualVibration);
-    PAD1_registerCursor(GPU_cursor);
+	PAD1_registerVibration(GPU_visualVibration);
+	PAD1_registerCursor(GPU_cursor);
 	ret = PAD2_open(&gpuDisp);
 	if (ret < 0) { SysMessage(_("Error opening Controller 2 plugin!")); return -1; }
-    PAD2_registerVibration(GPU_visualVibration);
-    PAD2_registerCursor(GPU_cursor);
+	PAD2_registerVibration(GPU_visualVibration);
+	PAD2_registerCursor(GPU_cursor);
 #ifdef ENABLE_SIO1API
 	ret = SIO1_open(&gpuDisp);
 	if (ret < 0) { SysMessage(_("Error opening SIO1 plugin!")); return -1; }

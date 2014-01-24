@@ -125,6 +125,7 @@ static void SetDefaultConfig() {
 	g.cfg.E.EmuDef[EMU_INCREMENTSTATE].EmuKeyEvent = XK_F2;
 	g.cfg.E.EmuDef[EMU_SCREENSHOT].EmuKeyEvent = XK_F8;
 	g.cfg.E.EmuDef[EMU_ESCAPE].EmuKeyEvent = XK_Escape;
+	g.cfg.E.EmuDef[EMU_REWIND].EmuKeyEvent = XK_BackSpace;
 }
 
 void LoadPADConfig() {
@@ -193,6 +194,11 @@ void LoadPADConfig() {
 			g.cfg.E.EmuDef[EMU_ESCAPE].Mapping.Key = a;
 			g.cfg.E.EmuDef[EMU_ESCAPE].Mapping.JoyEvType = b;
 			g.cfg.E.EmuDef[EMU_ESCAPE].Mapping.J.d = c;
+		} else if (strncmp(buf, "EMU_REWIND=", 11) == 0) {
+			sscanf(buf, "EMU_REWIND=%d,%d,%d", &a, &b, &c);
+			g.cfg.E.EmuDef[EMU_REWIND].Mapping.Key = a;
+			g.cfg.E.EmuDef[EMU_REWIND].Mapping.JoyEvType = b;
+			g.cfg.E.EmuDef[EMU_REWIND].Mapping.J.d = c;
 		} else if (strncmp(buf, "Select=", 7) == 0) {
 			sscanf(buf, "Select=%d,%d,%d", &a, &b, &c);
 			g.cfg.PadDef[current].KeyDef[DKEY_SELECT].Key = a;
@@ -428,5 +434,8 @@ void SavePADConfig() {
 	fprintf(fp, "EMU_ESCAPE=%d,%d,%d\n", g.cfg.E.EmuDef[EMU_ESCAPE].Mapping.Key,
 			g.cfg.E.EmuDef[EMU_ESCAPE].Mapping.JoyEvType,
 			g.cfg.E.EmuDef[EMU_ESCAPE].Mapping.J.d);
+	fprintf(fp, "EMU_REWIND=%d,%d,%d\n", g.cfg.E.EmuDef[EMU_REWIND].Mapping.Key,
+			g.cfg.E.EmuDef[EMU_REWIND].Mapping.JoyEvType,
+			g.cfg.E.EmuDef[EMU_REWIND].Mapping.J.d);
 	fclose(fp);
 }

@@ -60,7 +60,8 @@ const char *EmuKeyText[EMU_TOTAL] = {
 	N_("Load state"),
 	N_("Save state"),
 	N_("Screenshot"),
-	N_("Escape")
+	N_("Escape"),
+	N_("Rewind")
 };
 
 const char *DPadText[DKEY_TOTAL] = {
@@ -403,7 +404,7 @@ static void ReadDKeyEvent(int padnum, int key) {
 
 			for (i = 0; i < numAxes; i++) {
 				axis = SDL_JoystickGetAxis(js, i);
-				if (abs(axis) > 16383 && (abs(axis - InitAxisPos[i]) > 4096 || abs(axis - PrevAxisPos[i]) > 4096)) {
+				if (abs(axis) > 16383 && (abs(axis - InitAxisPos[i]) > 4096 || abs(axis - PrevAxisPos[i]) > 4096) && (abs(axis) < 32768)) {
 					keydef->JoyEvType = AXIS;
 					keydef->J.Axis = (i + 1) * (axis > 0 ? 1 : -1);
 					goto end;
