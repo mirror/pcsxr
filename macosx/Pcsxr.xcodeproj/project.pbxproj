@@ -190,6 +190,7 @@
 		55BBA69C1495839A003B2CEC /* PcsxrFreezeStateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBA69B1495839A003B2CEC /* PcsxrFreezeStateHandler.m */; };
 		55C7A214148B2B3800C22ABC /* PcsxrMemCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C7A216148B2B3800C22ABC /* PcsxrMemCard.xib */; };
 		55CA586B17E799E6007424D5 /* DiskArbitration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CA586A17E799E6007424D5 /* DiskArbitration.framework */; };
+		55DA3723189440C800B44951 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76B2178693EA0052D185 /* CoreFoundation.framework */; };
 		55E0ACE0178B69620005C945 /* LaunchArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E0ACDF178B69600005C945 /* LaunchArg.m */; };
 		55E15994184564D4007983CB /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E15993184564D4007983CB /* GLKit.framework */; };
 		55E15996184567D5007983CB /* GL2Code.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E15995184567D5007983CB /* GL2Code.m */; };
@@ -716,6 +717,7 @@
 		55BBA69A14958399003B2CEC /* PcsxrFreezeStateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrFreezeStateHandler.h; sourceTree = "<group>"; };
 		55BBA69B1495839A003B2CEC /* PcsxrFreezeStateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrFreezeStateHandler.m; sourceTree = "<group>"; usesTabs = 1; };
 		55CA586A17E799E6007424D5 /* DiskArbitration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiskArbitration.framework; path = System/Library/Frameworks/DiskArbitration.framework; sourceTree = SDKROOT; };
+		55DA37241894419000B44951 /* pcsxr.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pcsxr.pch; sourceTree = "<group>"; };
 		55E0ACDE178B695F0005C945 /* LaunchArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchArg.h; sourceTree = "<group>"; };
 		55E0ACDF178B69600005C945 /* LaunchArg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchArg.m; sourceTree = "<group>"; usesTabs = 1; };
 		55E1598618455B69007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Configuration.strings; sourceTree = "<group>"; };
@@ -818,9 +820,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				551A76D9178696810052D185 /* libz.dylib in Frameworks */,
-				551A76D61786960C0052D185 /* Cocoa.framework in Frameworks */,
+				55DA3723189440C800B44951 /* CoreFoundation.framework in Frameworks */,
 				551A76D7178696110052D185 /* IOKit.framework in Frameworks */,
 				55CA586B17E799E6007424D5 /* DiskArbitration.framework in Frameworks */,
+				551A76D61786960C0052D185 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1003,6 +1006,7 @@
 				02717969167884DF004AED62 /* hotkeys.h */,
 				02717967167884C9004AED62 /* hotkeys.m */,
 				5539965D178BB1B100859644 /* OSXPlugLocalization.h */,
+				55DA37241894419000B44951 /* pcsxr.pch */,
 			);
 			name = MacOSX;
 			sourceTree = "<group>";
@@ -3214,9 +3218,9 @@
 					"ENABLE_SIO1API=1",
 					"$(inherited)",
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plistvers.plist;
-				LD_NO_PIE = NO;
 				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_NAME = PCSXR;
 				SKIP_INSTALL = NO;
@@ -3400,7 +3404,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = PCSXR;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEBUG_PREPROCESSOR_DEFINITIONS = "DEBUG=1 EMU_LOG=__Log";
+				DEBUG_PREPROCESSOR_DEFINITIONS = "$(inherited) EMU_LOG=__Log";
 				GCC_ENABLE_ASM_KEYWORD = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3411,9 +3415,9 @@
 					"ENABLE_SIO1API=1",
 					"$(inherited)",
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
-				LD_NO_PIE = NO;
 				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_NAME = PCSXR;
 				SKIP_INSTALL = NO;
@@ -3437,7 +3441,6 @@
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plistvers.plist;
-				LD_NO_PIE = NO;
 				OTHER_CFLAGS = (
 					"-fomit-frame-pointer",
 					"$(inherited)",

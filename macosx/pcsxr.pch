@@ -1,0 +1,32 @@
+//
+//  pcsxr.pch
+//  Pcsxr
+//
+//  Created by C.W. Betts on 1/25/14.
+//
+//
+
+#ifndef Pcsxr_pcsxr_pch
+#define Pcsxr_pcsxr_pch
+
+#include <sys/time.h>
+#include <unistd.h>
+#include <limits.h>
+#include <zlib.h>
+#include <string.h>
+#include <errno.h>
+#include <signal.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <netdb.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+#include <CoreFoundation/CoreFoundation.h>
+#include <OpenGL/gltypes.h>
+#ifdef __OBJC__
+#import <Cocoa/Cocoa.h>
+#endif
+
+#endif
