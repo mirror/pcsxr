@@ -276,10 +276,10 @@
 "945.title" = "格式化…";
 
 /* Class = "NSButtonCell"; title = "->"; ObjectID = "952"; */
-"952.title" = "->";
+"952.title" = "→";
 
 /* Class = "NSButtonCell"; title = "<-"; ObjectID = "954"; */
-"954.title" = "<-";
+"954.title" = "←";
 
 /* Class = "NSBox"; title = "窗体"; ObjectID = "965"; */
 "965.title" = "窗体";
