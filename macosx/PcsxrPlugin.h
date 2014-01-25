@@ -8,10 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PcsxrPlugin : NSObject {
-	void *pluginRef;
-}
-
+@interface PcsxrPlugin : NSObject
 @property (readonly, copy) NSString *path;
 @property (readonly, strong) NSString *name;
 @property (readonly) int type;

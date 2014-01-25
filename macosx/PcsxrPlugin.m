@@ -23,12 +23,11 @@
 @property long version;
 @property (readwrite) int type;
 @property int active;
-
-
+@property void *pluginRef;
 @end
 
 @implementation PcsxrPlugin
-
+@synthesize pluginRef;
 @synthesize active;
 @synthesize fullPlugPath;
 @synthesize modDate;
@@ -249,7 +248,7 @@
 		long (*func)(void);
 		
 		func = SysLoadSym(pluginRef, [funcName cStringUsingEncoding:NSASCIIStringEncoding]);
-		if (SysLibError() == nil) {
+		if (SysLibError() == NULL) {
 			func();
 		} else {
 			NSBeep();
@@ -271,7 +270,7 @@
 	
 	init = initArg = SysLoadSym(pluginRef, [PluginSymbolName(aType, @"init")
 											cStringUsingEncoding:NSASCIIStringEncoding]);
-	if (SysLibError() == nil) {
+	if (SysLibError() == NULL) {
 		if (aType != PSE_LT_PAD) {
 			res = init();
 		} else {
@@ -292,7 +291,7 @@
 	long (*shutdown)(void);
 	shutdown = SysLoadSym(pluginRef, [PluginSymbolName(aType, @"shutdown")
 									  cStringUsingEncoding:NSASCIIStringEncoding]);
-	if (SysLibError() == nil) {
+	if (SysLibError() == NULL) {
 		shutdown();
 	}
 
@@ -326,7 +325,7 @@
 	SysLoadSym(pluginRef, [PluginSymbolNameAbout(aType)
 						   cStringUsingEncoding:NSASCIIStringEncoding]);
 	
-	return (SysLibError() == nil);
+	return (SysLibError() == NULL);
 }
 
 - (BOOL)hasConfigureAs:(int)aType
@@ -334,7 +333,7 @@
 	SysLoadSym(pluginRef, [PluginSymbolNameConfigure(aType)
 						   cStringUsingEncoding:NSASCIIStringEncoding]);
 	
-	return (SysLibError() == nil);
+	return (SysLibError() == NULL);
 }
 
 - (void)aboutAs:(int)aType
