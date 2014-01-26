@@ -1,4 +1,4 @@
-﻿/* Localized versions of Info.plist keys */
+/* Localized versions of Info.plist keys */
 
 CFBundleName = "PCSXR";
 CFBundleDisplayName = "PCSX Reloaded";
@@ -9,5 +9,5 @@ NSHumanReadableCopyright = "Copyright © 2003-2005 PCSX Team, Gil Pedersen, Nico
 "Playstation BIOS Image" = "PlayStation BIOS Image";
 "PCSXR Memory Card" = "Psx Mcd Format";
 "PCSXR Freeze State" = "PCSXR Freeze State";
-"Playstation Cheat" = "PCSXR Cheat Code Files";
-"PlayStation Disc" =  "PSX Image Files";
+"Playstation Cheat" = "PCSXR Cheat Code File";
+"PlayStation Disc" =  "PSX Image File";
