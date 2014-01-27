@@ -563,7 +563,7 @@ Cons of using SHM
 - Possibly not the quickest way to allocate memory
 
 */
-#ifndef NO_RT_SHM
+#if !defined(NO_RT_SHM) && !defined(_WINDOWS) && !defined(_WIN32)
 #include <sys/mman.h>
 #include <sys/stat.h> /* For mode constants */
 #include <fcntl.h> /* For O_* constants */
