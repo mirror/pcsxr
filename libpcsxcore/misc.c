@@ -499,8 +499,8 @@ int Load(const char *ExePath) {
 }
 
 // STATES
-static const u8 PCSXR_HEADER_SZ = 10U;
-static const u32 SZ_GPUPIC = 128 * 96 * 3;
+#define PCSXR_HEADER_SZ (10)
+#define SZ_GPUPIC (128 * 96 * 3)
 static const char PcsxrHeader[32] = "STv4 PCSXR v" PACKAGE_VERSION;
 
 // Savestate Versioning!
@@ -633,7 +633,7 @@ void CleanupMemSaveStates() {}
 #endif
 
 int SaveStateGz(gzFile f, long* gzsize) {
-	GPUFreeze_t gpufP;
+	GPUFreeze_t *gpufP;
 	SPUFreeze_t *spufP;
 	int Size;
 	unsigned char pMemGpuPic[SZ_GPUPIC], pMemSpuT[16];
@@ -656,9 +656,11 @@ int SaveStateGz(gzFile f, long* gzsize) {
 	gzwrite(f, (void *)&psxRegs, sizeof(psxRegs));
 
 	// gpu
-	gpufP.ulFreezeVersion = 1;
-	GPU_freeze(1, &gpufP);
-	gzwrite(f, &gpufP, sizeof(GPUFreeze_t));
+	gpufP = (GPUFreeze_t *)malloc(sizeof(GPUFreeze_t));
+	gpufP->ulFreezeVersion = 1;
+	GPU_freeze(1, gpufP);
+	gzwrite(f, gpufP, sizeof(GPUFreeze_t));
+	free(gpufP);
 
 	// spu
 	spufP = (SPUFreeze_t *)pMemSpuT; // only first 3 elements (up to Size)
@@ -684,7 +686,7 @@ int SaveStateGz(gzFile f, long* gzsize) {
 }
 
 int LoadStateGz(gzFile f) {
-	GPUFreeze_t gpufP;
+	GPUFreeze_t *gpufP;
 	SPUFreeze_t *spufP;
 	int Size;
 	char header[sizeof(PcsxrHeader)];
@@ -715,8 +717,10 @@ int LoadStateGz(gzFile f) {
 		psxBiosFreeze(0);
 
 	// gpu
-	gzread(f, &gpufP, sizeof(GPUFreeze_t));
-	GPU_freeze(0, &gpufP);
+	gpufP = (GPUFreeze_t *)malloc(sizeof(GPUFreeze_t));
+	gzread(f, gpufP, sizeof(GPUFreeze_t));
+	GPU_freeze(0, gpufP);
+	free(gpufP);
 
 	// spu
 	gzread(f, &Size, 4);
