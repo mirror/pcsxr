@@ -66,7 +66,7 @@ static boolean GetValueb(char *src, char *name) {
 	fprintf(f, "%s = %s\n", name, var);
 
 #define SetValuel(name, var) \
-	fprintf(f, "%s = %x\n", name, var);
+	fprintf(f, "%s = %li\n", name, var);
 
 #define SetValueb(name, var) \
 	fprintf(f, "%s = %d\n", name, (var) ? 1 : 0);
