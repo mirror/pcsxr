@@ -1170,11 +1170,18 @@ static int opensubfile(const char *isoname) {
 	// copy name of the iso and change extension from .img to .sub
 	strncpy(subname, isoname, sizeof(subname));
 	subname[MAXPATHLEN - 1] = '\0';
+
 	if (strlen(subname) >= 4) {
 		strcpy(subname + strlen(subname) - 4, ".sub");
 	}
-	else {
-		return -1;
+
+	subHandle = fopen(subname, "rb");
+	if (subHandle != NULL) {
+		return 0;
+	}
+
+	if (strlen(subname) >= 8) {
+		strcpy(subname + strlen(subname) - 8, ".sub");
 	}
 
 	subHandle = fopen(subname, "rb");
