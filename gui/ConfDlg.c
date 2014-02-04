@@ -843,7 +843,6 @@ static void FindNetPlugin() {
 }
 
 GtkWidget *CpuDlg;
-GtkWidget *PsxCombo;
 GList *psxglist;
 char *psxtypes[] = {
 	"NTSC",
@@ -874,7 +873,7 @@ static void OnCpu_CpuClicked(GtkWidget *widget, gpointer user_data) {
 
 void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 	GtkWidget *widget;
-	int tmp;
+	s64 tmp;
 	long t;
 
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCombo_PsxType"));
@@ -888,6 +887,12 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 		Config.PsxType = PSX_TYPE_NTSC;
 	else
 		Config.PsxType = PSX_TYPE_PAL;
+
+	sscanf(gtk_entry_get_text(GTK_ENTRY(gtk_builder_get_object(builder, "GtkEntry_RewindCount"))), "%lu", &tmp);
+	Config.RewindCount = tmp;
+
+	sscanf(gtk_entry_get_text(GTK_ENTRY(gtk_builder_get_object(builder, "GtkEntry_RewindInterval"))), "%lu", &tmp);
+	Config.RewindInterval = tmp;
 
 	Config.Xa = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Xa")));
 	Config.SioIrq = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_SioIrq")));
@@ -936,7 +941,8 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 }
 
 void OnConf_Cpu() {
-	
+	GtkWidget *widget;
+	char buf[25];
 
 	builder = gtk_builder_new();
 	
@@ -949,9 +955,17 @@ void OnConf_Cpu() {
 
 	gtk_widget_show (CpuDlg);
 
-	PsxCombo = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCombo_PsxType"));
-	gtk_combo_box_set_active(GTK_COMBO_BOX (PsxCombo), Config.PsxType);
-	gtk_widget_set_sensitive(GTK_WIDGET (PsxCombo), !Config.PsxAuto);
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCombo_PsxType"));
+	gtk_combo_box_set_active(GTK_COMBO_BOX (widget), Config.PsxType);
+	gtk_widget_set_sensitive(GTK_WIDGET (widget), !Config.PsxAuto);
+
+	snprintf(buf, sizeof(buf), "%lu", Config.RewindCount);
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkEntry_RewindCount"));
+	gtk_entry_set_text(GTK_ENTRY(widget), buf);
+
+	snprintf(buf, sizeof(buf), "%lu", Config.RewindInterval);
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkEntry_RewindInterval"));
+	gtk_entry_set_text(GTK_ENTRY(widget), buf);
 
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Xa")), Config.Xa);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_SioIrq")), Config.SioIrq);

@@ -111,6 +111,7 @@ time_t tslastpressed = 0;
 void PADhandleKey(int key) {
 	char Text[MAXPATHLEN];
 	gchar *state_filename;
+	time_t now;
 
 	short rel = 0;	//released key flag
 
@@ -287,10 +288,10 @@ void PADhandleKey(int key) {
 			psxReset();
 			break;
 		case XK_BackSpace:
-			rew_timer = 0;
-			time_t now = clock();
-			u32 millis = (((now - tslastpressed) * 1000) / CLOCKS_PER_SEC);
-			if (millis <= 130) break;
+			now = clock();
+			//printf("Rewind %u %u %u\n", tslastpressed, now, rewind_counter);
+			rewind_counter = 0;
+			if ((((now - tslastpressed) * 1000) / CLOCKS_PER_SEC) <= 130) break;
 			tslastpressed = now;
 			RewindState();
 			break;

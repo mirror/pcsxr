@@ -158,6 +158,7 @@ typedef struct {
 	u8 Cpu; // CPU_DYNAREC or CPU_INTERPRETER
 	u8 PsxType; // PSX_TYPE_NTSC or PSX_TYPE_PAL
 	u32 RewindCount;
+	u32 RewindInterval;
 #ifdef _WIN32
 	char Lang[256];
 #endif
@@ -165,6 +166,7 @@ typedef struct {
 
 extern PcsxConfig Config;
 extern boolean NetOpened;
+extern u32 rewind_counter; // It is safe if this overflows
 
 #define gzfreeze(ptr, size) { \
 	if (Mode == 1) gzwrite(f, ptr, size); \

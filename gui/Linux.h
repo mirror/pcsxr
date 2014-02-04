@@ -68,6 +68,4 @@ void UpdatePluginsBIOS();
 void SysErrorMessage(gchar *primary, gchar *secondary);
 void SysInfoMessage(gchar *primary, gchar *secondary);
 
-extern u8 rew_timer;
-
 #endif /* __LINUX_H__ */

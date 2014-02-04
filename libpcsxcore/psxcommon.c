@@ -29,6 +29,7 @@ boolean NetOpened = FALSE;
 
 int Log = 0;
 FILE *emuLog = NULL;
+u32 rewind_counter=0; // It is safe if this overflows
 
 int EmuInit() {
 	return psxInit();
@@ -57,6 +58,10 @@ void EmuUpdate() {
 		SysUpdate();
 
 	ApplyCheats();
+
+	if (Config.RewindInterval > 0 && !(++rewind_counter%Config.RewindInterval)) {
+		CreateRewindState();
+	}
 }
 
 void __Log(char *fmt, ...) {

@@ -143,6 +143,7 @@ int LoadConfig(PcsxConfig *Conf) {
 	Config.Cpu     = GetValuel(data, "Cpu");
 	Config.PsxType = GetValuel(data, "PsxType");
 	Config.RewindCount = GetValuel(data, "RewindCount");
+	Config.RewindInterval = GetValuel(data, "RewindInterval");
 
 	free(data);
 
@@ -191,6 +192,7 @@ void SaveConfig() {
 	SetValuel("Cpu",     Config.Cpu);
 	SetValuel("PsxType", Config.PsxType);
 	SetValuel("RewindCount", Config.RewindCount);
+	SetValuel("RewindInterval", Config.RewindInterval);
 
 	fclose(f);
 }

@@ -575,17 +575,11 @@ static void SysDisableScreenSaver() {
 	}
 }
 
-u8 rew_timer = 0u; // TODO: change to scaled ms based or psxcycle based
 void SysUpdate() {
 	PADhandleKey(PAD1_keypressed() );
 	PADhandleKey(PAD2_keypressed() );
 
-	if (Config.RewindCount > 0 && rew_timer++ > 35) {
-		CreateRewindState();
-		rew_timer = 0;
-	}
-
-	//SysDisableScreenSaver();
+	SysDisableScreenSaver();
 }
 
 /* ADB TODO Replace RunGui() with StartGui ()*/

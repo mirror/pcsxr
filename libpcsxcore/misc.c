@@ -528,11 +528,13 @@ u32 mem_cur_save_count=0, mem_last_save;
 boolean mem_wrapped=FALSE; // Whether we went past max count and restarted counting
 
 void CreateRewindState() {
-	SaveStateMem(mem_last_save=mem_cur_save_count++);
-	
-	if (mem_cur_save_count > Config.RewindCount) {
-		mem_cur_save_count = 0;
-		mem_wrapped=TRUE;
+	if (Config.RewindCount > 0) {
+		SaveStateMem(mem_last_save=mem_cur_save_count++);
+
+		if (mem_cur_save_count > Config.RewindCount) {
+			mem_cur_save_count = 0;
+			mem_wrapped=TRUE;
+		}
 	}
 }
 
