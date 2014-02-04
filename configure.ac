@@ -58,6 +58,7 @@ AC_CHECK_LIB(socket, socket, [LIBS="$LIBS -lsocket"], [])
 AC_CHECK_LIB(nsl, gethostbyname, [LIBS="$LIBS -lnsl"], [])
 AC_CHECK_LIB(umem, umem_alloc, [LIBS="$LIBS -lumem"], [])
 AC_CHECK_LIB(rt, shm_open, [LIBS="$LIBS -lrt"], [AC_DEFINE([NO_RT_SHM], [1], [rt_shm])])
+AC_CHECK_LIB(archive, archive_read_open_filename)
 
 AM_CONDITIONAL(SOUND_OSS, false)
 AM_CONDITIONAL(SOUND_SDL, false)
