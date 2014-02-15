@@ -120,22 +120,22 @@
     <ClCompile Include="zlib\adler32.c">
       <Filter>zlib</Filter>
     </ClCompile>
-    <ClCompile Include="zlib\compress.c">
-      <Filter>zlib</Filter>
-    </ClCompile>
     <ClCompile Include="zlib\crc32.c">
       <Filter>zlib</Filter>
     </ClCompile>
     <ClCompile Include="zlib\deflate.c">
       <Filter>zlib</Filter>
     </ClCompile>
-    <ClCompile Include="zlib\gzio.c">
+    <ClCompile Include="zlib\gzclose.c">
       <Filter>zlib</Filter>
     </ClCompile>
-    <ClCompile Include="zlib\infblock.c">
+    <ClCompile Include="zlib\gzlib.c">
       <Filter>zlib</Filter>
     </ClCompile>
-    <ClCompile Include="zlib\infcodes.c">
+    <ClCompile Include="zlib\gzread.c">
+      <Filter>zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\gzwrite.c">
       <Filter>zlib</Filter>
     </ClCompile>
     <ClCompile Include="zlib\inffast.c">
@@ -145,9 +145,6 @@
       <Filter>zlib</Filter>
     </ClCompile>
     <ClCompile Include="zlib\inftrees.c">
-      <Filter>zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="zlib\infutil.c">
       <Filter>zlib</Filter>
     </ClCompile>
     <ClCompile Include="zlib\trees.c">
@@ -293,13 +290,13 @@
     <ClInclude Include="gui\Win32.h">
       <Filter>gui</Filter>
     </ClInclude>
+    <ClInclude Include="zlib\crc32.h">
+      <Filter>zlib</Filter>
+    </ClInclude>
     <ClInclude Include="zlib\deflate.h">
       <Filter>zlib</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\infblock.h">
-      <Filter>zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="zlib\infcodes.h">
+    <ClInclude Include="zlib\gzguts.h">
       <Filter>zlib</Filter>
     </ClInclude>
     <ClInclude Include="zlib\inffast.h">
@@ -308,10 +305,10 @@
     <ClInclude Include="zlib\inffixed.h">
       <Filter>zlib</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\inftrees.h">
+    <ClInclude Include="zlib\inflate.h">
       <Filter>zlib</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\infutil.h">
+    <ClInclude Include="zlib\inftrees.h">
       <Filter>zlib</Filter>
     </ClInclude>
     <ClInclude Include="zlib\trees.h">

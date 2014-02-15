@@ -1,19 +1,24 @@
 /* zutil.c -- target dependent utility functions for the compression library
- * Copyright (C) 1995-2002 Jean-loup Gailly.
- * For conditions of distribution and use, see copyright notice in zlib.h 
+ * Copyright (C) 1995-2005, 2010, 2011, 2012 Jean-loup Gailly.
+ * For conditions of distribution and use, see copyright notice in zlib.h
  */
 
 /* @(#) $Id$ */
 
 #include "zutil.h"
-
-struct internal_state      {int dummy;}; /* for buggy compilers */
-
-#ifndef STDC
-extern void exit OF((int));
+#ifndef Z_SOLO
+#  include "gzguts.h"
 #endif
 
-const char *z_errmsg[10] = {
+#define ZLIB_NO_ZLIBVERSION
+#define ZLIB_NO_ZLIBCOMPILEFLAGS
+#define ZLIB_NO_ZERROR
+
+#ifndef NO_DUMMY_DECL
+struct internal_state      {int dummy;}; /* for buggy compilers */
+#endif
+
+z_const char * const z_errmsg[10] = {
 "need dictionary",     /* Z_NEED_DICT       2  */
 "stream end",          /* Z_STREAM_END      1  */
 "",                    /* Z_OK              0  */
@@ -25,20 +30,110 @@ const char *z_errmsg[10] = {
 "incompatible version",/* Z_VERSION_ERROR (-6) */
 ""};
 
-
-const char * ZEXPORT zlibVersion()
+#ifndef ZLIB_NO_ZLIBVERSION
+const char * ZEXPORT zlibVersion(void)
 {
     return ZLIB_VERSION;
 }
+#endif
+
+#if (defined(__INTEL_COMPILER))
+#  pragma warning(disable:280)
+#endif
+
+#ifndef ZLIB_NO_ZLIBCOMPILEFLAGS
+uLong ZEXPORT zlibCompileFlags(void)
+{
+    uLong flags;
+
+    flags = 0;
+    switch ((int)(sizeof(uInt))) {
+    case 2:     break;
+    case 4:     flags += 1;     break;
+    case 8:     flags += 2;     break;
+    default:    flags += 3;
+    }
+    switch ((int)(sizeof(uLong))) {
+    case 2:     break;
+    case 4:     flags += 1 << 2;        break;
+    case 8:     flags += 2 << 2;        break;
+    default:    flags += 3 << 2;
+    }
+    switch ((int)(sizeof(voidpf))) {
+    case 2:     break;
+    case 4:     flags += 1 << 4;        break;
+    case 8:     flags += 2 << 4;        break;
+    default:    flags += 3 << 4;
+    }
+    switch ((int)(sizeof(z_off_t))) {
+    case 2:     break;
+    case 4:     flags += 1 << 6;        break;
+    case 8:     flags += 2 << 6;        break;
+    default:    flags += 3 << 6;
+    }
+#ifdef DEBUG
+    flags += 1 << 8;
+#endif
+#if defined(ASMV) || defined(ASMINF)
+    flags += 1 << 9;
+#endif
+#ifdef ZLIB_WINAPI
+    flags += 1 << 10;
+#endif
+#ifdef BUILDFIXED
+    flags += 1 << 12;
+#endif
+#ifdef DYNAMIC_CRC_TABLE
+    flags += 1 << 13;
+#endif
+#ifdef NO_GZCOMPRESS
+    flags += 1L << 16;
+#endif
+#ifdef NO_GZIP
+    flags += 1L << 17;
+#endif
+#ifdef PKZIP_BUG_WORKAROUND
+    flags += 1L << 20;
+#endif
+#ifdef FASTEST
+    flags += 1L << 21;
+#endif
+#if defined(STDC) || defined(Z_HAVE_STDARG_H)
+#  ifdef NO_vsnprintf
+    flags += 1L << 25;
+#    ifdef HAS_vsprintf_void
+    flags += 1L << 26;
+#    endif
+#  else
+#    ifdef HAS_vsnprintf_void
+    flags += 1L << 26;
+#    endif
+#  endif
+#else
+    flags += 1L << 24;
+#  ifdef NO_snprintf
+    flags += 1L << 25;
+#    ifdef HAS_sprintf_void
+    flags += 1L << 26;
+#    endif
+#  else
+#    ifdef HAS_snprintf_void
+    flags += 1L << 26;
+#    endif
+#  endif
+#endif
+    return flags;
+}
+#endif
 
 #ifdef DEBUG
 
 #  ifndef verbose
 #    define verbose 0
 #  endif
-int z_verbose = verbose;
+int ZLIB_INTERNAL z_verbose = verbose;
 
-void z_error (m)
+void ZLIB_INTERNAL z_error (m)
     char *m;
 {
     fprintf(stderr, "%s\n", m);
@@ -46,19 +141,27 @@ void z_error (m)
 }
 #endif
 
+#ifndef ZLIB_NO_ZERROR
 /* exported to allow conversion of error code to string for compress() and
  * uncompress()
  */
-const char * ZEXPORT zError(err)
-    int err;
+const char * ZEXPORT zError(int err)
 {
     return ERR_MSG(err);
 }
+#endif
 
+#if defined(_WIN32_WCE)
+    /* The Microsoft C Run-Time Library for Windows CE doesn't have
+     * errno.  We define it as a global variable to simplify porting.
+     * Its value is always 0 and should not be used.
+     */
+    int errno = 0;
+#endif
 
 #ifndef HAVE_MEMCPY
 
-void zmemcpy(dest, source, len)
+void ZLIB_INTERNAL zmemcpy(dest, source, len)
     Bytef* dest;
     const Bytef* source;
     uInt  len;
@@ -69,7 +172,7 @@ void zmemcpy(dest, source, len)
     } while (--len != 0);
 }
 
-int zmemcmp(s1, s2, len)
+int ZLIB_INTERNAL zmemcmp(s1, s2, len)
     const Bytef* s1;
     const Bytef* s2;
     uInt  len;
@@ -82,7 +185,7 @@ int zmemcmp(s1, s2, len)
     return 0;
 }
 
-void zmemzero(dest, len)
+void ZLIB_INTERNAL zmemzero(dest, len)
     Bytef* dest;
     uInt  len;
 {
@@ -93,11 +196,13 @@ void zmemzero(dest, len)
 }
 #endif
 
+#ifndef Z_SOLO
+
+#ifdef SYS16BIT
+
 #ifdef __TURBOC__
-#if (defined( __BORLANDC__) || !defined(SMALL_MEDIUM)) && !defined(__32BIT__)
-/* Small and medium model in Turbo C are for now limited to near allocation
- * with reduced MAX_WBITS and MAX_MEM_LEVEL
- */
+/* Turbo C in 16-bit mode */
+
 #  define MY_ZCALLOC
 
 /* Turbo C malloc() does not allow dynamic allocation of 64K bytes
@@ -124,7 +229,7 @@ local ptr_table table[MAX_PTR];
  * a protected system like OS/2. Use Microsoft C instead.
  */
 
-voidpf zcalloc (voidpf opaque, unsigned items, unsigned size)
+voidpf ZLIB_INTERNAL zcalloc (voidpf opaque, unsigned items, unsigned size)
 {
     voidpf buf = opaque; /* just to make some compilers happy */
     ulg bsize = (ulg)items*size;
@@ -148,7 +253,7 @@ voidpf zcalloc (voidpf opaque, unsigned items, unsigned size)
     return buf;
 }
 
-void  zcfree (voidpf opaque, voidpf ptr)
+void ZLIB_INTERNAL zcfree (voidpf opaque, voidpf ptr)
 {
     int n;
     if (*(ush*)&ptr != 0) { /* object < 64K */
@@ -169,11 +274,11 @@ void  zcfree (voidpf opaque, voidpf ptr)
     ptr = opaque; /* just to make some compilers happy */
     Assert(0, "zcfree: ptr not found");
 }
-#endif
+
 #endif /* __TURBOC__ */
 
 
-#if defined(M_I86) && !defined(__32BIT__)
+#ifdef M_I86
 /* Microsoft C in 16-bit mode */
 
 #  define MY_ZCALLOC
@@ -183,43 +288,44 @@ void  zcfree (voidpf opaque, voidpf ptr)
 #  define _hfree   hfree
 #endif
 
-voidpf zcalloc (voidpf opaque, unsigned items, unsigned size)
+voidpf ZLIB_INTERNAL zcalloc (voidpf opaque, uInt items, uInt size)
 {
     if (opaque) opaque = 0; /* to make compiler happy */
     return _halloc((long)items, size);
 }
 
-void  zcfree (voidpf opaque, voidpf ptr)
+void ZLIB_INTERNAL zcfree (voidpf opaque, voidpf ptr)
 {
     if (opaque) opaque = 0; /* to make compiler happy */
     _hfree(ptr);
 }
 
-#endif /* MSC */
+#endif /* M_I86 */
+
+#endif /* SYS16BIT */
 
 
 #ifndef MY_ZCALLOC /* Any system without a special alloc function */
 
 #ifndef STDC
+extern voidp  malloc OF((uInt size));
 extern voidp  calloc OF((uInt items, uInt size));
 extern void   free   OF((voidpf ptr));
 #endif
 
-voidpf zcalloc (opaque, items, size)
-    voidpf opaque;
-    unsigned items;
-    unsigned size;
+voidpf ZLIB_INTERNAL zcalloc (voidpf opaque, unsigned items, unsigned size)
 {
     if (opaque) items += size - size; /* make compiler happy */
-    return (voidpf)calloc(items, size);
+    return sizeof(uInt) > 2 ? (voidpf)malloc(items * size) :
+                              (voidpf)calloc(items, size);
 }
 
-void  zcfree (opaque, ptr)
-    voidpf opaque;
-    voidpf ptr;
+void ZLIB_INTERNAL zcfree (voidpf opaque, voidpf ptr)
 {
     free(ptr);
     if (opaque) return; /* make compiler happy */
 }
 
 #endif /* MY_ZCALLOC */
+
+#endif /* !Z_SOLO */
