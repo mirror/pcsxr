@@ -25,6 +25,7 @@
 #include "cdrom.h"
 #include "mdec.h"
 #include "ppf.h"
+#include <stddef.h>
 
 char CdromId[10] = "";
 char CdromLabel[33] = "";
@@ -581,10 +582,11 @@ int SaveStateMem(const u32 id) {
 	int fd = shm_open(name, O_CREAT | O_RDWR | O_TRUNC, 0666);
 
 	if (fd >= 0) {
-		gzFile f = gzdopen(fd, "wb0R"); // Fast and no compression
+		gzFile f = gzdopen(fd, "wb0T"); // Fast and no compression
+		//gzbuffer(f, 64*1024);
+		//assert(gzdirect(f) == TRUE);
 		if (f != NULL) {
-			long size;
-			ret = SaveStateGz(f, &size);
+			ret = SaveStateGz(f, NULL);
 			//printf("Saved %s/%i (ID: %i SZ: %lik)\n", name, fd, id, size/1024);
 		} else {
 			SysMessage("GZ OPEN FAIL %i\n", errno );
@@ -617,6 +619,8 @@ int LoadStateMem(const u32 id) {
 	return ret;
 }
 
+GPUFreeze_t* gpufP = NULL;
+SPUFreeze_t *spufP = NULL;
 void CleanupMemSaveStates() {
 	char name[32];
 	u32 i;
@@ -627,6 +631,10 @@ void CleanupMemSaveStates() {
 			//break;
 		}
 	}
+	free(gpufP);
+	gpufP = NULL;
+	free(spufP);
+	spufP = NULL;
 }
 #else
 int SaveStateMem(const u32 id) {return 0;}
@@ -635,18 +643,16 @@ void CleanupMemSaveStates() {}
 #endif
 
 int SaveStateGz(gzFile f, long* gzsize) {
-	GPUFreeze_t *gpufP;
-	SPUFreeze_t *spufP;
 	int Size;
-	unsigned char pMemGpuPic[SZ_GPUPIC], pMemSpuT[16];
+	unsigned char pMemGpuPic[SZ_GPUPIC];
 
-	if (f == NULL) return -1;
+	//if (f == NULL) return -1;
 
 	gzwrite(f, (void *)PcsxrHeader, sizeof(PcsxrHeader));
 	gzwrite(f, (void *)&SaveVersion, sizeof(u32));
 	gzwrite(f, (void *)&Config.HLE, sizeof(boolean));
 
-	GPU_getScreenPic(pMemGpuPic);
+	if (gzsize)GPU_getScreenPic(pMemGpuPic); // Not necessary with ephemeral saves
 	gzwrite(f, pMemGpuPic, SZ_GPUPIC);
 
 	if (Config.HLE)
@@ -658,22 +664,32 @@ int SaveStateGz(gzFile f, long* gzsize) {
 	gzwrite(f, (void *)&psxRegs, sizeof(psxRegs));
 
 	// gpu
-	gpufP = (GPUFreeze_t *)malloc(sizeof(GPUFreeze_t));
+	if (!gpufP)gpufP = (GPUFreeze_t *)malloc(sizeof(GPUFreeze_t));
 	gpufP->ulFreezeVersion = 1;
 	GPU_freeze(1, gpufP);
 	gzwrite(f, gpufP, sizeof(GPUFreeze_t));
-	free(gpufP);
 
+	// SPU Plugin cannot change during run, so we query size info just once per session
+	if (!spufP) {
+		spufP = (SPUFreeze_t *)malloc(offsetof(SPUFreeze_t, SPUPorts)); // only first 3 elements (up to Size)        
+		SPU_freeze(2, spufP);
+		Size = spufP->Size;
+		SysPrintf("SPUFreezeSize %i/(%i)\n", Size, offsetof(SPUFreeze_t, SPUPorts));
+		free(spufP);
+		spufP = (SPUFreeze_t *) malloc(Size);
+		spufP->Size = Size;
+
+		if (spufP->Size <= 0) {
+			gzclose_w(f);
+			free(spufP);
+			spufP = NULL;
+			return 1; // error
+		}
+	}
 	// spu
-	spufP = (SPUFreeze_t *)pMemSpuT; // only first 3 elements (up to Size)
-	SPU_freeze(2, spufP);
-	Size = spufP->Size; gzwrite(f, &Size, 4);
-	if (Size <= 0)
-		return 1; // error
-	spufP = (SPUFreeze_t *) malloc(Size);
+	gzwrite(f, &(spufP->Size), 4);
 	SPU_freeze(1, spufP);
-	gzwrite(f, spufP, Size);
-	free(spufP);
+	gzwrite(f, spufP, spufP->Size);
 
 	sioFreeze(f, 1);
 	cdrFreeze(f, 1);
@@ -681,15 +697,14 @@ int SaveStateGz(gzFile f, long* gzsize) {
 	psxRcntFreeze(f, 1);
 	mdecFreeze(f, 1);
 
-	*gzsize = gztell(f);
-	gzclose(f);
+	if(gzsize)*gzsize = gztell(f);
+	gzclose_w(f);
 
 	return 0;
 }
 
 int LoadStateGz(gzFile f) {
-	GPUFreeze_t *gpufP;
-	SPUFreeze_t *spufP;
+	SPUFreeze_t *_spufP;
 	int Size;
 	char header[sizeof(PcsxrHeader)];
 	u32 version;
@@ -719,17 +734,16 @@ int LoadStateGz(gzFile f) {
 		psxBiosFreeze(0);
 
 	// gpu
-	gpufP = (GPUFreeze_t *)malloc(sizeof(GPUFreeze_t));
+	if (!gpufP)gpufP = (GPUFreeze_t *)malloc(sizeof(GPUFreeze_t));
 	gzread(f, gpufP, sizeof(GPUFreeze_t));
 	GPU_freeze(0, gpufP);
-	free(gpufP);
 
 	// spu
 	gzread(f, &Size, 4);
-	spufP = (SPUFreeze_t *)malloc(Size);
-	gzread(f, spufP, Size);
-	SPU_freeze(0, spufP);
-	free(spufP);
+	_spufP = (SPUFreeze_t *)malloc(Size);
+	gzread(f, _spufP, Size);
+	SPU_freeze(0, _spufP);
+	free(_spufP);
 
 	sioFreeze(f, 0);
 	cdrFreeze(f, 0);
@@ -737,7 +751,7 @@ int LoadStateGz(gzFile f) {
 	psxRcntFreeze(f, 0);
 	mdecFreeze(f, 0);
 
-	gzclose(f);
+	gzclose_r(f);
 
 	return 0;
 }

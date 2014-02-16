@@ -502,8 +502,6 @@ void SysClose() {
 	EmuShutdown();
 	ReleasePlugins();
 
-	CleanupMemSaveStates();
-
 	StopDebugger();
 
 	if (emuLog != NULL) fclose(emuLog);

@@ -50,6 +50,8 @@ void EmuShutdown() {
 	FreePPFCache();
 
 	psxShutdown();
+
+	CleanupMemSaveStates();
 }
 
 void EmuUpdate() {
