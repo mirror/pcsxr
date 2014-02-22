@@ -608,7 +608,12 @@ static void PopulateDevList() {
 
 		n = SDL_NumJoysticks();
 		for (j = 0; j < n; j++) {
-			sprintf(buf, "%d: %s", j + 1, SDL_JoystickName(j));
+			#if SDL_VERSION_ATLEAST(2, 0, 0)
+				SDL_Joystick *joystick = SDL_JoystickOpen(j);
+				sprintf(buf, "%d: %s", j + 1, SDL_JoystickName(joystick));
+			#else
+				sprintf(buf, "%d: %s", j + 1, SDL_JoystickName(j));
+			#endif
 			gtk_list_store_append(store, &iter);
 			gtk_list_store_set(store, &iter, 0, buf, -1);
 		}
@@ -632,7 +637,7 @@ long PADconfigure() {
 	GtkTreeSelection *treesel;
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
-
+        
 	if (SDL_Init(SDL_INIT_JOYSTICK) == -1) {
 		fprintf(stderr, "Failed to initialize SDL!\n");
 		return -1;
@@ -643,7 +648,7 @@ long PADconfigure() {
 		fprintf(stderr, "XOpenDisplay failed!\n");
 		return -1;
 	}
-
+        
 	LoadPADConfig();
 
 	xml = gtk_builder_new();
@@ -652,12 +657,12 @@ long PADconfigure() {
 		g_warning("We could not load the interface!");
 		return -1;
 	}
-
+        
 	MainWindow = GTK_WIDGET(gtk_builder_get_object(xml, "CfgWnd"));
 	gtk_window_set_title(GTK_WINDOW(MainWindow), _("Gamepad/Keyboard Input Configuration"));
 
 	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_treeview[1])); // pad 1
-
+        
 	// column for key
 	renderer = gtk_cell_renderer_text_new();
 	column = gtk_tree_view_column_new_with_attributes(_("Key"),
@@ -815,13 +820,13 @@ long PADconfigure() {
 	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_combodev[0]));
 	g_signal_connect_data(G_OBJECT(widget), "changed",
 		G_CALLBACK(OnDeviceChanged), GINT_TO_POINTER(-1), NULL, G_CONNECT_AFTER);
-
+        
 	PopulateDevList();
 	UpdateKeyList();
-
+        
 	gtk_widget_show(MainWindow);
 	gtk_main();
-
+        
 	return 0;
 }
 
