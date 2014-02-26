@@ -337,10 +337,10 @@ int CheckCdrom() {
 
 	if (Config.PsxAuto) { // autodetect system (pal or ntsc)
 		if((CdromId[2] == 'e') || (CdromId[2] == 'E') ||
-			!strncmp(CdromId, "\0DTLS3035", 10) ||
-			!strncmp(CdromId, "PBPX95001", 10) || // according to redump.org, these PAL
-			!strncmp(CdromId, "PBPX95007", 10) || // discs have a non-standard ID;
-			!strncmp(CdromId, "PBPX95008", 10))   // add more serials if they are discovered.
+			!strncmp(CdromId, "DTLS3035", 8) ||
+			!strncmp(CdromId, "PBPX95001", 9) || // according to redump.org, these PAL
+			!strncmp(CdromId, "PBPX95007", 9) || // discs have a non-standard ID;
+			!strncmp(CdromId, "PBPX95008", 9))   // add more serials if they are discovered.
 			Config.PsxType = PSX_TYPE_PAL; // pal
 		else Config.PsxType = PSX_TYPE_NTSC; // ntsc
 	}
