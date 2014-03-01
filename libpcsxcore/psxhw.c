@@ -746,7 +746,10 @@ void psxHwWrite32(u32 add, u32 value) {
 #endif
 			// 0x1F means irq request, so fulfill it here because plugin can't and won't
 			// Probably no need to send this to plugin in first place...
-			if (value == 0x01f00000) {
+			// MML/Tronbonne is known to use this.
+			// TODO FIFO is not implemented properly so commands are not exact
+			// and thus we rely on hack that counter/cdrom irqs are enabled at same time
+			if (SWAPu32(value) == 0x1f00000 && (psxHu32ref(0x1070) & 0x44)) {
 				setIrq( 0x01 );
 			}
 			GPU_writeData(value); return;
