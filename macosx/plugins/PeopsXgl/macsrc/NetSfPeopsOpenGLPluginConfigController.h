@@ -35,7 +35,7 @@
 @property (weak) IBOutlet NSMatrix *hacksMatrix;
 @property (weak) IBOutlet NSControl *hackEnable;
 @property (weak) IBOutlet NSWindow *hacksWindow;
-@property (readwrite, retain) NSMutableDictionary *keyValues;
+@property (readwrite, strong) NSMutableDictionary *keyValues;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;

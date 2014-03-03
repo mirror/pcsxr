@@ -88,7 +88,7 @@ void DlgProc()
 	RunOnMainThreadSync(^{
 		NSWindow *window;
 		
-		PrepFactoryDefaultPreferences(); // Must do here to avoid a "when does such-and-such bind" issue
+		PrepFactoryDefaultPreferences();
 		
 		if (windowController == nil) {
 			windowController = [[PluginConfigController alloc] initWithWindowNibName:@"NetSfPeopsOpenGLConfig"];
@@ -114,16 +114,16 @@ void DlgProc()
 
 void PrepFactoryDefaultPreferences(void)
 {
-    // THE place to find the names of settings.
-    // If it's not here, you can't set it.
-
-    // create or read a sub-dictionary beneath the main PCSXR app prefs.
-    // dictionary is named "net.sf.GpuOpenGLPlugin Settings"
-    // and contains all our key/values
-    // the prefs .plist will store this dictionary ("net.sf...") as an object
-    
+	// THE place to find the names of settings.
+	// If it's not here, you can't set it.
+	
+	// create or read a sub-dictionary beneath the main PCSXR app prefs.
+	// dictionary is named "net.sf.GpuOpenGLPlugin Settings"
+	// and contains all our key/values
+	// the prefs .plist will store this dictionary ("net.sf...") as an object
+	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
+	
 	NSDictionary* keyValues = [defaults dictionaryForKey:PrefsKey];
 	BOOL windowSizeNeedsReset = NO;
 	if (keyValues) {
@@ -144,59 +144,61 @@ void PrepFactoryDefaultPreferences(void)
 	}
 	keyValues = nil;
 	
-	[defaults registerDefaults:@{PrefsKey: @{kFPSCounter: @NO,
-								  kAutoFullScreen: @NO,
-								  kFrameSkipping: @NO,
-								  kFrameLimit: @YES,
-								  kVSync: @NO,
-								  kHacksEnable: @NO,
-								  @"Dither Mode": @0,
-								  kHacks: @0,
-								  
-								  @"Proportional Resize": @YES,
-								  //[NSSize stringWithCString: @"default"], @"Fullscreen Resolution",
-								  @"Offscreen Drawing Level": @2,
-								  @"Texture Color Depth Level": @0,
-								  @"Texture Enhancement Level": @0,
-								  @"Texture Filter Level": @0,
-								  @"Frame Buffer Level": @0,
-								  kWindowSize: NSStringFromSize(NSMakeSize(800, 600)),
-								  @"Draw Scanlines": @NO,
-								  // nasty:
-								  @"Scanline Color": [NSArchiver archivedDataWithRootObject: [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0.25]],
-								  @"Advanced Blending": @NO,
-								  @"Opaque Pass": @NO,
-								  @"Blur": @NO,
-								  @"Z Mask Clipping": @YES,
-								  @"Wireframe Mode": @NO,
-								  @"Emulate mjpeg decoder": @YES, // helps remove unsightly vertical line in movies
-								  @"Fast mjpeg decoder": @NO,
-								  @"GteAccuracy": @YES}}];
+	[defaults registerDefaults:
+	 @{PrefsKey:
+		   @{kFPSCounter: @NO,
+			 kAutoFullScreen: @NO,
+			 kFrameSkipping: @NO,
+			 kFrameLimit: @YES,
+			 kVSync: @NO,
+			 kHacksEnable: @NO,
+			 @"Dither Mode": @0,
+			 kHacks: @0,
+			 
+			 @"Proportional Resize": @YES,
+			 //[NSSize stringWithCString: @"default"], @"Fullscreen Resolution",
+			 @"Offscreen Drawing Level": @2,
+			 @"Texture Color Depth Level": @0,
+			 @"Texture Enhancement Level": @0,
+			 @"Texture Filter Level": @0,
+			 @"Frame Buffer Level": @0,
+			 kWindowSize: NSStringFromSize(NSMakeSize(800, 600)),
+			 @"Draw Scanlines": @NO,
+			 // nasty:
+			 @"Scanline Color": [NSArchiver archivedDataWithRootObject: [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0.25]],
+			 @"Advanced Blending": @NO,
+			 @"Opaque Pass": @NO,
+			 @"Blur": @NO,
+			 @"Z Mask Clipping": @YES,
+			 @"Wireframe Mode": @NO,
+			 @"Emulate mjpeg decoder": @YES, // helps remove unsightly vertical line in movies
+			 @"Fast mjpeg decoder": @NO,
+			 @"GteAccuracy": @YES}}];
 }
 
 void ReadConfig(void)
 {
-    // set up PCSXR GPU plug's global variables according to user preferences.
-    // this is called from the PCSXR GPU plugin thread via GPUOpen.
-    
-    // has nothing to do with the Configuration dialog box, btw., other than the
-    // fact that the config dialog writes to user prefs. This only reads, which
-    // is important because PCSXR will change its globals on the fly
-    // and saving those new ad hoc changes is Bad for the user.
-    
-    PrepFactoryDefaultPreferences(); // in case user deletes, or on new startup
+	// set up PCSXR GPU plug's global variables according to user preferences.
+	// this is called from the PCSXR GPU plugin thread via GPUOpen.
 	
-    NSDictionary* keyValues = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey];
-		
-    // bind all prefs settings to their PCSXR counterparts
-    // with a little finagling to make it work as expected
+	// has nothing to do with the Configuration dialog box, btw., other than the
+	// fact that the config dialog writes to user prefs. This only reads, which
+	// is important because PCSXR will change its globals on the fly
+	// and saving those new ad hoc changes is Bad for the user.
+	
+	PrepFactoryDefaultPreferences(); // in case user deletes, or on new startup
+	
+	NSDictionary* keyValues = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PrefsKey];
+	
+	// bind all prefs settings to their PCSXR counterparts
+	// with a little finagling to make it work as expected
 	iShowFPS = [keyValues[kFPSCounter] boolValue];
-    
-    if ([keyValues[kFrameLimit] boolValue]){
-        bUseFrameLimit = 1;
-        iFrameLimit = 2; // required
-        fFrameRate = 60; // required (some number, 60 seems ok)
-    }
+	
+	if ([keyValues[kFrameLimit] boolValue]) {
+		bUseFrameLimit = 1;
+		iFrameLimit = 2; // required
+		fFrameRate = 60; // required (some number, 60 seems ok)
+	}
 	
 	// Dithering is either on or off in OpenGL plug, but hey
 	bDrawDither = [keyValues[@"Dither Mode"] intValue];
@@ -206,7 +208,6 @@ void ReadConfig(void)
 	
 	bUseFixes = [keyValues[kHacksEnable] boolValue];
 	dwCfgFixes = [keyValues[kHacks] unsignedIntValue];
-    
 	
 	// we always start out at 800x600 (at least until resizing the window is implemented)
 	NSSize winSize = NSSizeFromString(keyValues[kWindowSize]);
@@ -218,52 +219,54 @@ void ReadConfig(void)
 		iResY = 600;
 	}
 	
-    iBlurBuffer = [keyValues[@"Blur"] boolValue]; // not noticeable, but doesn't harm
-    iUseScanLines = [keyValues[@"Draw Scanlines"] boolValue]; // works
-    NSColor* scanColor = [NSUnarchiver unarchiveObjectWithData:keyValues[@"Scanline Color"]];
+	iBlurBuffer = [keyValues[@"Blur"] boolValue]; // not noticeable, but doesn't harm
+	iUseScanLines = [keyValues[@"Draw Scanlines"] boolValue]; // works
+	NSColor* scanColor = [NSUnarchiver unarchiveObjectWithData:keyValues[@"Scanline Color"]];
 	scanColor = [scanColor colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
-    iScanlineColor[0] = [scanColor redComponent];
-    iScanlineColor[1] = [scanColor greenComponent];
-    iScanlineColor[2] = [scanColor blueComponent];
-    iScanlineColor[3] = [scanColor alphaComponent];
-    
-    iScanBlend = 0; // we always draw nice since it costs nothing.
-    iUseMask = [keyValues[@"Z Mask Clipping"] boolValue];  // works, clips polygons with primitive "Z" buffer
-    bUseLines = [keyValues[@"Wireframe Mode"] boolValue]; // works, aka "Wireframe" mode
-    iOffscreenDrawing = [keyValues[@"Offscreen Drawing Level"] intValue]; // draw offscreen for texture building?
-    if (iOffscreenDrawing > 4) iOffscreenDrawing = 4;
-    if (iOffscreenDrawing < 0) iOffscreenDrawing = 0;
-    
+	iScanlineColor[0] = [scanColor redComponent];
+	iScanlineColor[1] = [scanColor greenComponent];
+	iScanlineColor[2] = [scanColor blueComponent];
+	iScanlineColor[3] = [scanColor alphaComponent];
+	
+	iScanBlend = 0; // we always draw nice since it costs nothing.
+	iUseMask = [keyValues[@"Z Mask Clipping"] boolValue];  // works, clips polygons with primitive "Z" buffer
+	bUseLines = [keyValues[@"Wireframe Mode"] boolValue]; // works, aka "Wireframe" mode
+	iOffscreenDrawing = [keyValues[@"Offscreen Drawing Level"] intValue]; // draw offscreen for texture building?
+	if (iOffscreenDrawing > 4) iOffscreenDrawing = 4;
+	if (iOffscreenDrawing < 0) iOffscreenDrawing = 0;
+	
 	
 	// texture quality, whatever that means (doesn't hurt), more like "texture handling" or "texture performance"
-    iFrameTexType = [keyValues[@"Frame Buffer Level"] intValue];
-    if (iFrameTexType > 3) iFrameTexType = 3;
-    if (iFrameTexType < 0) iFrameTexType = 0;
-    
-    iTexQuality = [keyValues[@"Texture Color Depth Level"] intValue];
-    if (iTexQuality > 4) iTexQuality = 4;
-    if (iTexQuality < 0) iTexQuality = 0;
+	iFrameTexType = [keyValues[@"Frame Buffer Level"] intValue];
+	if (iFrameTexType > 3) iFrameTexType = 3;
+	if (iFrameTexType < 0) iFrameTexType = 0;
+	
+	iTexQuality = [keyValues[@"Texture Color Depth Level"] intValue];
+	if (iTexQuality > 4) iTexQuality = 4;
+	if (iTexQuality < 0) iTexQuality = 0;
 	
 	// MAG_FILTER = LINEAR, etc.
-    iFilterType = [keyValues[@"Texture Filter Level"] intValue];
-    if (iFilterType > 2) iFilterType = 2;
-    if (iFilterType < 0) iFilterType = 0;
-    
+	iFilterType = [keyValues[@"Texture Filter Level"] intValue];
+	if (iFilterType > 2) iFilterType = 2;
+	if (iFilterType < 0) iFilterType = 0;
+	
 	// stretches textures (more detail). You'd think it would look great, but it's not massively better. NEEDS iFilterType to be of any use.
-    iHiResTextures = [keyValues[@"Texture Enhancement Level"] intValue];
-    if (iHiResTextures > 2) iHiResTextures = 2;
-    if (iHiResTextures < 0) iHiResTextures = 0;
-    
-    // well actually, the "SaI" mode is best, but is #1, so swap qualities:
-    if (iHiResTextures != 0)
-        iHiResTextures = 3 - iHiResTextures;
-    
-    if (iHiResTextures && !iFilterType)
-        iFilterType = 1; // needed to see any real effect
-    
-    bUseFastMdec = [keyValues[@"Emulate mjpeg decoder"] boolValue];
-    bUse15bitMdec = [keyValues[@"Fast mjpeg decoder"] boolValue];
-    bGteAccuracy = [keyValues[@"GteAccuracy"] boolValue];
+	iHiResTextures = [keyValues[@"Texture Enhancement Level"] intValue];
+	if (iHiResTextures > 2)
+		iHiResTextures = 2;
+	if (iHiResTextures < 0)
+		iHiResTextures = 0;
+	
+	// well actually, the "SaI" mode is best, but is #1, so swap qualities:
+	if (iHiResTextures != 0)
+		iHiResTextures = 3 - iHiResTextures;
+	
+	if (iHiResTextures && !iFilterType)
+		iFilterType = 1; // needed to see any real effect
+	
+	bUseFastMdec = [keyValues[@"Emulate mjpeg decoder"] boolValue];
+	bUse15bitMdec = [keyValues[@"Fast mjpeg decoder"] boolValue];
+	bGteAccuracy = [keyValues[@"GteAccuracy"] boolValue];
 	
 	if (iShowFPS)
 		ulKeybits |= KEY_SHOWFPS;
@@ -369,10 +372,10 @@ void ReadConfig(void)
 
 - (IBAction)hackToggle:(id)sender
 {
-    // enable the "hacks" checkboxes 
+	// enable the "hacks" checkboxes
 	BOOL enable = [sender intValue] ? YES : NO;
 	NSArray *views = [hacksMatrix cells];
-
+	
 	for (NSControl *control in views) {
 		[control setEnabled:enable];
 	}
@@ -382,8 +385,8 @@ void ReadConfig(void)
 {
 	unsigned int hackValues = [(self.keyValues)[kHacks] unsignedIntValue];
 	[hackEnable setIntegerValue:[(self.keyValues)[kHacksEnable] boolValue]];
-
-    // build refs to hacks checkboxes
+	
+	// build refs to hacks checkboxes
 	for (NSControl *control in [hacksMatrix cells]) {
 		[control setIntValue:(hackValues >> ([control tag] - 1)) & 1];
 	}
@@ -393,15 +396,15 @@ void ReadConfig(void)
 
 - (void)loadValues
 {
-// set up the window with the values in the .plist
-
-    PrepFactoryDefaultPreferences(); // in case we're starting anew
-
+	// set up the window with the values in the .plist
+	
+	PrepFactoryDefaultPreferences(); // in case we're starting anew
+	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
+	
 	/* load from preferences */
-	self.keyValues = [NSMutableDictionary dictionaryWithDictionary: [defaults dictionaryForKey:PrefsKey]];
-
+	self.keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
+	
 	[self loadHacksValues];
 	
 	[autoFullScreen setIntegerValue:[keyValues[kAutoFullScreen] boolValue]];
