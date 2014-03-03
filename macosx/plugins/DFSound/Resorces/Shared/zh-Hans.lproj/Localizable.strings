@@ -16,19 +16,19 @@
 //"(Unknown)" = "(Unknown)";
 
 /* Interpolation Values */
-"(No Interpolation)" = "(No Interpolation)";
+//"(No Interpolation)" = "(No Interpolation)";
 "(Simple Interpolation)" = "(简易增益)";
-"(Gaussian Interpolation)" = "(Gaussian Interpolation)";
-"(Cubic Interpolation)" = "(Cubic Interpolation)";
+//"(Gaussian Interpolation)" = "(Gaussian Interpolation)";
+//"(Cubic Interpolation)" = "(Cubic Interpolation)";
 
 /* Reverb Values */
-"(No Reverb)" = "(No Reverb)";
+//"(No Reverb)" = "(No Reverb)";
 "(Simple Reverb)" = "(简易混响)";
-"(PSX Reverb)" = "(PSX Reverb)";
+//"(PSX Reverb)" = "(PSX Reverb)";
 
 /* Volume Values */
-"(Muted)" = "(Muted)";
-"(Low)" = "(Low)";
-"(Medium)" = "(Medium)";
+//"(Muted)" = "(Muted)";
+//"(Low)" = "(Low)";
+//"(Medium)" = "(Medium)";
 "(Loud)" = "(高音)";
-"(Loudest)" = "(Loudest)";
+//"(Loudest)" = "(Loudest)";

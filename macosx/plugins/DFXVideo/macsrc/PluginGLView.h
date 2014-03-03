@@ -75,7 +75,7 @@ static inline void RunOnMainThreadSync(dispatch_block_t block)
 - (void)swapBuffer;
 - (void)clearBuffer:(BOOL)display;
 - (void)loadTextures:(GLboolean)first;
-- (char*)loadSource:(NSURL *)filename;
++ (char*)loadSource:(NSURL *)filename;
 void printProgramInfoLog(GLuint obj);
 
 @end

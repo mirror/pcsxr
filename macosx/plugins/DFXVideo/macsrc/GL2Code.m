@@ -156,10 +156,6 @@ static int mylog2(int val)
 	
 	[NSOpenGLContext clearCurrentContext];
 	[glLock unlock];
-	
-	if (image_base)
-		free(image_base);
-
 }
 
 - (void)reshapeGL2

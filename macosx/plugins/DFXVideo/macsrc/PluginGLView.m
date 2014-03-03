@@ -57,6 +57,10 @@ extern time_t tStart;
 	} else if (oglProfile == NSOpenGLProfileVersion3_2Core) {
 		[self cleanupGL3];
 	}
+	
+	if (image_base) {
+		free(image_base);
+	}
 }
 
 - (BOOL)isOpaque
@@ -174,16 +178,19 @@ extern time_t tStart;
 	}
 }
 
-- (char*)loadSource:(NSURL *)filename
++ (char*)loadSource:(NSURL *)filename
 {
 	//Since we're passing Cocoa NSURLs, let's use Cocoa's methods
 	if (filename == nil) {
 		return NULL;
 	}
-	NSMutableData *shaderData = [NSMutableData dataWithContentsOfURL:filename];
+	
+	NSUInteger len;
+	NSMutableData *shaderData = [[NSMutableData alloc] initWithContentsOfURL:filename];
 	[shaderData appendBytes:"\0" length:1];
-	char *shaderText = malloc([shaderData length]);
-	[shaderData getBytes:shaderText length:[shaderData length]];
+	len = [shaderData length];
+	char *shaderText = malloc(len);
+	[shaderData getBytes:shaderText length:len];
 	return shaderText;
 }
 

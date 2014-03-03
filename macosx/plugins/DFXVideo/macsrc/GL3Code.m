@@ -117,7 +117,7 @@ static int mylog2(int val)
 	}
 	
 	/* chargement du code source */
-	src = [self loadSource:filename];
+	src = [PluginGLView loadSource:filename];
 	if(src == NULL)
 	{
 		/* theoriquement, la fonction LoadSource a deja affiche un message
