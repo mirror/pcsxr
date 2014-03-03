@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
@@ -37,10 +37,9 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="11">
-                                    <rect key="frame" x="14" y="77" width="94" height="17"/>
+                                    <rect key="frame" x="14" y="77" width="95" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="90" id="157"/>
                                         <constraint firstAttribute="height" constant="17" id="191"/>
                                     </constraints>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Reverb:" id="80">
@@ -50,11 +49,8 @@
                                     </textFieldCell>
                                 </textField>
                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="12" customClass="NamedSlider">
-                                    <rect key="frame" x="127" y="75" width="144" height="26"/>
+                                    <rect key="frame" x="113" y="75" width="165" height="26"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="140" id="122"/>
-                                    </constraints>
                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="2" doubleValue="1" tickMarkPosition="above" numberOfTickMarks="3" allowsTickMarkValuesOnly="YES" sliderType="linear" id="81">
                                         <font key="font" size="12" name="Helvetica"/>
                                     </sliderCell>
@@ -64,7 +60,7 @@
                                     </connections>
                                 </slider>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="15">
-                                    <rect key="frame" x="14" y="45" width="94" height="17"/>
+                                    <rect key="frame" x="14" y="45" width="95" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="227"/>
@@ -76,7 +72,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16" customClass="NamedSlider">
-                                    <rect key="frame" x="127" y="43" width="144" height="26"/>
+                                    <rect key="frame" x="113" y="43" width="165" height="26"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="3" doubleValue="1" tickMarkPosition="above" numberOfTickMarks="4" allowsTickMarkValuesOnly="YES" sliderType="linear" id="83">
                                         <font key="font" size="12" name="Helvetica"/>
@@ -86,7 +82,7 @@
                                     </connections>
                                 </slider>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="17">
-                                    <rect key="frame" x="275" y="77" width="131" height="17"/>
+                                    <rect key="frame" x="282" y="77" width="131" height="14"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="127" id="129"/>
@@ -98,9 +94,9 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="18">
-                                    <rect key="frame" x="275" y="45" width="131" height="17"/>
+                                    <rect key="frame" x="282" y="45" width="131" height="14"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="(Simple Interpolation)" id="85">
+                                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="(Simple Interpolation)" id="85">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -119,7 +115,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="70" customClass="NamedSlider">
-                                    <rect key="frame" x="127" y="11" width="144" height="26"/>
+                                    <rect key="frame" x="113" y="11" width="165" height="26"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="4" doubleValue="3" tickMarkPosition="above" numberOfTickMarks="5" allowsTickMarkValuesOnly="YES" sliderType="linear" id="87">
                                         <font key="font" size="12" name="Helvetica"/>
@@ -130,7 +126,7 @@
                                     </connections>
                                 </slider>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="71">
-                                    <rect key="frame" x="275" y="17" width="131" height="17"/>
+                                    <rect key="frame" x="282" y="17" width="131" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="224"/>
@@ -150,7 +146,6 @@
                             <constraint firstItem="71" firstAttribute="leading" secondItem="70" secondAttribute="trailing" constant="8" symbolic="YES" id="136"/>
                             <constraint firstItem="12" firstAttribute="baseline" secondItem="11" secondAttribute="baseline" id="137"/>
                             <constraint firstItem="16" firstAttribute="baseline" secondItem="15" secondAttribute="baseline" id="140"/>
-                            <constraint firstItem="12" firstAttribute="leading" secondItem="9" secondAttribute="leading" constant="128" id="141"/>
                             <constraint firstItem="71" firstAttribute="trailing" secondItem="18" secondAttribute="trailing" id="147"/>
                             <constraint firstItem="11" firstAttribute="leading" secondItem="15" secondAttribute="leading" id="148"/>
                             <constraint firstItem="11" firstAttribute="leading" secondItem="9" secondAttribute="leading" constant="15" id="149"/>
@@ -163,13 +158,17 @@
                             <constraint firstItem="18" firstAttribute="leading" secondItem="70" secondAttribute="trailing" constant="8" symbolic="YES" id="181"/>
                             <constraint firstItem="69" firstAttribute="leading" secondItem="9" secondAttribute="leading" constant="16" id="183"/>
                             <constraint firstItem="17" firstAttribute="baseline" secondItem="12" secondAttribute="baseline" id="186"/>
-                            <constraint firstItem="17" firstAttribute="top" secondItem="11" secondAttribute="top" id="193"/>
                             <constraint firstItem="18" firstAttribute="baseline" secondItem="16" secondAttribute="baseline" id="222"/>
                             <constraint firstItem="70" firstAttribute="centerY" secondItem="69" secondAttribute="centerY" id="225"/>
-                            <constraint firstItem="15" firstAttribute="top" secondItem="18" secondAttribute="top" id="226"/>
                             <constraint firstItem="71" firstAttribute="baseline" secondItem="69" secondAttribute="baseline" id="229"/>
+                            <constraint firstAttribute="trailing" secondItem="17" secondAttribute="trailing" constant="16" id="4PI-sI-ZI5"/>
+                            <constraint firstAttribute="trailing" secondItem="71" secondAttribute="trailing" constant="16" id="Iuy-7Z-phs"/>
+                            <constraint firstItem="12" firstAttribute="leading" secondItem="11" secondAttribute="trailing" constant="8" symbolic="YES" id="LUl-Av-C6I"/>
                             <constraint firstItem="12" firstAttribute="top" secondItem="9" secondAttribute="top" constant="32" id="NZC-Zb-1uZ"/>
+                            <constraint firstItem="16" firstAttribute="leading" secondItem="15" secondAttribute="trailing" constant="8" symbolic="YES" id="aQ1-fn-lLW"/>
                             <constraint firstAttribute="bottom" secondItem="70" secondAttribute="bottom" constant="11" id="fHY-VB-0ck"/>
+                            <constraint firstAttribute="trailing" secondItem="18" secondAttribute="trailing" constant="16" id="hc0-PA-irQ"/>
+                            <constraint firstItem="70" firstAttribute="leading" secondItem="69" secondAttribute="trailing" constant="8" symbolic="YES" id="iUw-bE-QEs"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -204,21 +203,21 @@
                         <constraints>
                             <constraint firstItem="233" firstAttribute="leading" secondItem="19" secondAttribute="leading" constant="16" id="240"/>
                             <constraint firstItem="233" firstAttribute="top" secondItem="19" secondAttribute="top" constant="25" id="247"/>
-                            <constraint firstAttribute="trailing" secondItem="233" secondAttribute="trailing" constant="16" id="685-id-VwW"/>
+                            <constraint firstAttribute="centerX" secondItem="233" secondAttribute="centerX" id="QuQ-ob-MDG"/>
                             <constraint firstAttribute="bottom" secondItem="233" secondAttribute="bottom" constant="53" id="s0x-In-827"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <box title="Misc" translatesAutoresizingMaskIntoConstraints="NO" id="24">
-                        <rect key="frame" x="17" y="57" width="221" height="100"/>
+                        <rect key="frame" x="17" y="57" width="215" height="100"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
-                            <rect key="frame" x="2" y="2" width="217" height="83"/>
+                            <rect key="frame" x="2" y="2" width="211" height="83"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <matrix verticalHuggingPriority="750" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="196">
-                                    <rect key="frame" x="17" y="13" width="189" height="60"/>
+                                    <rect key="frame" x="11" y="13" width="189" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     <size key="cellSize" width="189" height="18"/>
@@ -248,8 +247,8 @@
                         </view>
                         <constraints>
                             <constraint firstItem="196" firstAttribute="top" secondItem="24" secondAttribute="top" constant="25" id="206"/>
-                            <constraint firstItem="196" firstAttribute="leading" secondItem="24" secondAttribute="leading" constant="16" id="207"/>
                             <constraint firstAttribute="bottom" secondItem="196" secondAttribute="bottom" constant="11" id="PEg-kx-UCc"/>
+                            <constraint firstAttribute="centerX" secondItem="196" secondAttribute="centerX" id="YYi-LI-lqX"/>
                             <constraint firstAttribute="trailing" secondItem="196" secondAttribute="trailing" constant="10" id="keZ-Mg-22z"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>

@@ -184,6 +184,8 @@
 		559DACEE146C72FF00C5DF71 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 559DACEC146C72FF00C5DF71 /* Localizable.strings */; };
 		55A90220147D7C380037E18F /* PcsxrMemCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A9021F147D7C380037E18F /* PcsxrMemCardController.m */; };
 		55A90229147D89380037E18F /* PcsxrMemoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A90228147D89380037E18F /* PcsxrMemoryObject.m */; };
+		55B13FBD18C4F9CC00ACD9AC /* SPUPluginController.h in Headers */ = {isa = PBXBuildFile; fileRef = 551A755317868BEC0052D185 /* SPUPluginController.h */; };
+		55B13FBE18C4F9D800ACD9AC /* NamedSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 551A754F17868BEC0052D185 /* NamedSlider.h */; };
 		55BBA693149455E1003B2CEC /* PcsxrMemCardHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBA692149455E1003B2CEC /* PcsxrMemCardHandler.m */; };
 		55BBA69614945628003B2CEC /* PcsxrPluginHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBA69514945628003B2CEC /* PcsxrPluginHandler.m */; };
 		55BBA69914953887003B2CEC /* PcsxrDiscHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBA69814953887003B2CEC /* PcsxrDiscHandler.m */; };
@@ -707,6 +709,7 @@
 		55A9021F147D7C380037E18F /* PcsxrMemCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrMemCardController.m; sourceTree = "<group>"; usesTabs = 1; };
 		55A90227147D89380037E18F /* PcsxrMemoryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PcsxrMemoryObject.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		55A90228147D89380037E18F /* PcsxrMemoryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PcsxrMemoryObject.m; sourceTree = "<group>"; usesTabs = 1; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		55B13FBF18C4FAC600ACD9AC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55BBA690149454DE003B2CEC /* PcsxrFileHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrFileHandle.h; sourceTree = "<group>"; };
 		55BBA691149455E1003B2CEC /* PcsxrMemCardHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrMemCardHandler.h; sourceTree = "<group>"; };
 		55BBA692149455E1003B2CEC /* PcsxrMemCardHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrMemCardHandler.m; sourceTree = "<group>"; usesTabs = 1; };
@@ -848,10 +851,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				551A76891786919F0052D185 /* Cocoa.framework in Frameworks */,
-				551A77E71786A4DD0052D185 /* Carbon.framework in Frameworks */,
-				554FD70C17C6A1F10056CF66 /* SDL2.framework in Frameworks */,
 				550FFAEF17CEE37D0003A2F3 /* CoreFoundation.framework in Frameworks */,
+				551A77E71786A4DD0052D185 /* Carbon.framework in Frameworks */,
+				551A76891786919F0052D185 /* Cocoa.framework in Frameworks */,
+				554FD70C17C6A1F10056CF66 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -859,10 +862,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55E15994184564D4007983CB /* GLKit.framework in Frameworks */,
-				551A76D3178695D10052D185 /* GLUT.framework in Frameworks */,
 				551A76D4178695D20052D185 /* OpenGL.framework in Frameworks */,
 				551A76B7178693FF0052D185 /* Cocoa.framework in Frameworks */,
+				55E15994184564D4007983CB /* GLKit.framework in Frameworks */,
+				551A76D3178695D10052D185 /* GLUT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -870,9 +873,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				554FD70917C6A13E0056CF66 /* SDL2.framework in Frameworks */,
-				551A76F6178697D70052D185 /* libSPUSharedCode.dylib in Frameworks */,
 				551A76DD178696BD0052D185 /* Cocoa.framework in Frameworks */,
+				551A76F6178697D70052D185 /* libSPUSharedCode.dylib in Frameworks */,
+				554FD70917C6A13E0056CF66 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,9 +891,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				551A7715178698C60052D185 /* libSPUSharedCode.dylib in Frameworks */,
 				551A7724178699250052D185 /* OpenAL.framework in Frameworks */,
 				551A7716178698C60052D185 /* Cocoa.framework in Frameworks */,
+				551A7715178698C60052D185 /* libSPUSharedCode.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,9 +901,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				551A775117869C3C0052D185 /* OpenGL.framework in Frameworks */,
 				551A774A17869C280052D185 /* Cocoa.framework in Frameworks */,
 				551A775017869C3C0052D185 /* GLUT.framework in Frameworks */,
-				551A775117869C3C0052D185 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1667,6 +1670,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55B13FBD18C4F9CC00ACD9AC /* SPUPluginController.h in Headers */,
+				55B13FBE18C4F9D800ACD9AC /* NamedSlider.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2615,6 +2620,7 @@
 				551A756317868BEC0052D185 /* English */,
 				5598AAF517D2D54A0024F71D /* fr */,
 				55707E9518123580007CC5D0 /* hu */,
+				55B13FBF18C4FAC600ACD9AC /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
