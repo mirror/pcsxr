@@ -8,47 +8,33 @@
 #import <Cocoa/Cocoa.h>
 
 @interface NetSfPeopsOpenGLPluginConfigController : NSWindowController
-{
-    // buncha controls.
-    // most aren't worthy as IBOutlets since the IB interface
-    // uses bindings to magically set user defaults.
-    // But you can look at their grandness if you like:
-    
-    IBOutlet NSCell *autoFullScreen;
-    IBOutlet NSPopUpButton *ditherMode;
-    IBOutlet NSCell *fpsCounter;
-    IBOutlet NSCell *frameSkipping;
-    IBOutlet NSCell *vSync;
-    
-    IBOutlet NSControl *proportionalResize;
-    IBOutlet NSPopUpButton *fullscreenSize;
-	IBOutlet NSFormCell *windowWidth;
-	IBOutlet NSFormCell *windowHeighth;
-    IBOutlet NSPopUpButton *offscreenDrawing;
-    
-    IBOutlet NSPopUpButton *texColorDepth;
-    IBOutlet NSSlider *texFiltering;
-    IBOutlet NSSlider *texEnhancment;
-    
-    IBOutlet NSPopUpButton *frameBufferEffects;
-
-    IBOutlet NSCell *drawScanlines;
-    IBOutlet NSCell *advancedBlending;
-    IBOutlet NSCell *opaquePass;
-    IBOutlet NSCell *zMaskClipping;
-    IBOutlet NSCell *wireframeOnly;
-    IBOutlet NSCell *blurEffect;
-    IBOutlet NSCell *mjpegDecoder;
-    IBOutlet NSCell *mjpegDecoder15bit;
-	IBOutlet NSCell *gteAccuracy;
-	IBOutlet NSColorWell *scanlineColorWell;
-	
-	IBOutlet NSMatrix *hacksMatrix;
-	IBOutlet NSControl *hackEnable;
-    IBOutlet NSWindow *hacksWindow;
-    
-	NSMutableDictionary *keyValues;
-}
+@property (weak) IBOutlet NSCell *autoFullScreen;
+@property (weak) IBOutlet NSPopUpButton *ditherMode;
+@property (weak) IBOutlet NSCell *fpsCounter;
+@property (weak) IBOutlet NSCell *frameSkipping;
+@property (weak) IBOutlet NSCell *vSync;
+@property (weak) IBOutlet NSControl *proportionalResize;
+@property (weak) IBOutlet NSPopUpButton *fullscreenSize;
+@property (weak) IBOutlet NSFormCell *windowWidth;
+@property (weak) IBOutlet NSFormCell *windowHeighth;
+@property (weak) IBOutlet NSPopUpButton *offscreenDrawing;
+@property (weak) IBOutlet NSPopUpButton *texColorDepth;
+@property (weak) IBOutlet NSSlider *texFiltering;
+@property (weak) IBOutlet NSSlider *texEnhancment;
+@property (weak) IBOutlet NSPopUpButton *frameBufferEffects;
+@property (weak) IBOutlet NSCell *drawScanlines;
+@property (weak) IBOutlet NSCell *advancedBlending;
+@property (weak) IBOutlet NSCell *opaquePass;
+@property (weak) IBOutlet NSCell *zMaskClipping;
+@property (weak) IBOutlet NSCell *wireframeOnly;
+@property (weak) IBOutlet NSCell *blurEffect;
+@property (weak) IBOutlet NSCell *mjpegDecoder;
+@property (weak) IBOutlet NSCell *mjpegDecoder15bit;
+@property (weak) IBOutlet NSCell *gteAccuracy;
+@property (weak) IBOutlet NSColorWell *scanlineColorWell;
+@property (weak) IBOutlet NSMatrix *hacksMatrix;
+@property (weak) IBOutlet NSControl *hackEnable;
+@property (weak) IBOutlet NSWindow *hacksWindow;
 @property (readwrite, retain) NSMutableDictionary *keyValues;
 
 - (IBAction)cancel:(id)sender;
@@ -65,4 +51,3 @@
 @end
 
 void PrepFactoryDefaultPreferences(void);
-

@@ -48,13 +48,15 @@ void AboutDlgProc()
 {
 	// Get parent application instance
 	NSBundle *bundle = [NSBundle bundleWithIdentifier:APP_ID];
-
+	
 	// Get Credits.rtf
 	NSString *path = [bundle pathForResource:@"Credits" ofType:@"rtf"];
 	NSAttributedString *credits;
+	if (!path) {
+		path = [bundle pathForResource:@"Credits" ofType:@"rtfd"];
+	}
 	if (path) {
-		credits = [[NSAttributedString alloc] initWithPath: path
-				documentAttributes:NULL];
+		credits = [[NSAttributedString alloc] initWithPath:path documentAttributes:NULL];
 	} else {
 		credits = [[NSAttributedString alloc] initWithString:@""];
 	}
@@ -63,14 +65,14 @@ void AboutDlgProc()
 	NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[bundle bundlePath]];
 	NSSize size = NSMakeSize(64, 64);
 	[icon setSize:size];
-		
+	
 	NSDictionary *infoPaneDict =
 	@{@"ApplicationName": [bundle objectForInfoDictionaryKey:@"CFBundleName"],
-	 @"ApplicationIcon": icon,
-	 @"ApplicationVersion": [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
-	 @"Version": [bundle objectForInfoDictionaryKey:@"CFBundleVersion"],
-	 @"Copyright": [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"],
-	 @"Credits": credits};
+	  @"ApplicationIcon": icon,
+	  @"ApplicationVersion": [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
+	  @"Version": [bundle objectForInfoDictionaryKey:@"CFBundleVersion"],
+	  @"Copyright": [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"],
+	  @"Credits": credits};
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});

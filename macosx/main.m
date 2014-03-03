@@ -227,7 +227,7 @@ const char *SysLibError()
 #ifdef DEBUG
 	const char *theErr = dlerror();
 	if (theErr) {
-		NSLog(@"Error loading binary: %s.", theErr);
+		NSLog(@"dlerror(): %s.", theErr);
 	}
 	return theErr;
 #else

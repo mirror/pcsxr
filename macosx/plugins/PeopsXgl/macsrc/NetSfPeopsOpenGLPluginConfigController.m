@@ -57,6 +57,9 @@ void AboutDlgProc()
 	// Get Credits.rtf
 	NSString *path = [bundle pathForResource:@"Credits" ofType:@"rtf"];
 	NSAttributedString *credits;
+	if (!path) {
+		path = [bundle pathForResource:@"Credits" ofType:@"rtfd"];
+	}
 	if (path) {
 		credits = [[NSAttributedString alloc] initWithPath:path documentAttributes:NULL];
 	} else {
@@ -70,11 +73,11 @@ void AboutDlgProc()
 	
 	NSDictionary *infoPaneDict =
 	@{@"ApplicationName": [bundle objectForInfoDictionaryKey:@"CFBundleName"],
-	 @"ApplicationIcon": icon,
-	 @"ApplicationVersion": [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
-	 @"Version": [bundle objectForInfoDictionaryKey:@"CFBundleVersion"],
-	 @"Copyright": [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"],
-	 @"Credits": credits};
+	  @"ApplicationIcon": icon,
+	  @"ApplicationVersion": [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
+	  @"Version": [bundle objectForInfoDictionaryKey:@"CFBundleVersion"],
+	  @"Copyright": [bundle objectForInfoDictionaryKey:@"NSHumanReadableCopyright"],
+	  @"Credits": credits};
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[NSApp orderFrontStandardAboutPanelWithOptions:infoPaneDict];
 	});
@@ -287,6 +290,33 @@ void ReadConfig(void)
 }
 
 @implementation NetSfPeopsOpenGLPluginConfigController
+@synthesize autoFullScreen;
+@synthesize ditherMode;
+@synthesize fpsCounter;
+@synthesize frameSkipping;
+@synthesize vSync;
+@synthesize proportionalResize;
+@synthesize fullscreenSize;
+@synthesize windowWidth;
+@synthesize windowHeighth;
+@synthesize offscreenDrawing;
+@synthesize texColorDepth;
+@synthesize texFiltering;
+@synthesize texEnhancment;
+@synthesize frameBufferEffects;
+@synthesize drawScanlines;
+@synthesize advancedBlending;
+@synthesize opaquePass;
+@synthesize zMaskClipping;
+@synthesize wireframeOnly;
+@synthesize blurEffect;
+@synthesize mjpegDecoder;
+@synthesize mjpegDecoder15bit;
+@synthesize gteAccuracy;
+@synthesize scanlineColorWell;
+@synthesize hacksMatrix;
+@synthesize hackEnable;
+@synthesize hacksWindow;
 
 @synthesize keyValues;
 
@@ -299,7 +329,7 @@ void ReadConfig(void)
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
+	NSMutableDictionary *writeDic = [keyValues mutableCopy];
 	writeDic[kFPSCounter] = ([fpsCounter integerValue] ? @YES : @NO);
 	writeDic[@"Scanline Color"] = [NSArchiver archivedDataWithRootObject:[scanlineColorWell color]];
 	writeDic[kFrameSkipping] = ([frameSkipping integerValue] ? @YES : @NO);

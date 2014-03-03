@@ -40,7 +40,7 @@ extern PluginWindowController *gameController;
     IBOutlet NSOpenGLView *glView;
 	 
 	// NSWindow *fullWindow;
-    bool inFullscreen;
+    BOOL inFullscreen;
 }
 
 + (id)openGameView;
