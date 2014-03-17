@@ -274,7 +274,7 @@ int main(int argc, char *argv[]) {
 	char file[MAXPATHLEN] = "";
 	char path[MAXPATHLEN];
 	int runcd = RUN;
-	int loadst = 0;
+	int loadst = -1;
 	int i;
 
 #ifdef ENABLE_NLS
@@ -296,7 +296,7 @@ int main(int argc, char *argv[]) {
 		else if (!strcmp(argv[i], "-nogui")) UseGui = FALSE;
 		else if (!strcmp(argv[i], "-psxout")) Config.PsxOut = TRUE;
 		else if (!strcmp(argv[i], "-slowboot")) Config.SlowBoot = TRUE;
-		else if (!strcmp(argv[i], "-load")) loadst = atol(argv[++i]);
+		else if (!strcmp(argv[i], "-load")) loadst = ((argc > i+1) ? atol(argv[++i]) : 0);
 		else if (!strcmp(argv[i], "-cfg")) {
 			if (i+1 >= argc) break;
 			strncpy(cfgfile_basename, argv[++i], MAXPATHLEN-100);	/* TODO buffer overruns */
@@ -444,9 +444,13 @@ int main(int argc, char *argv[]) {
 				}
 			}
 		}
-
+		
+		if (loadst==0) {
+			loadst = UpdateMenuSlots() + 1;
+		}
 		// If a state has been specified, then load that
-		if (loadst) {
+		if (loadst > 0) {
+			SysPrintf("Loading slot %i (HLE=%i)\n", loadst, Config.HLE);
 			StatesC = loadst - 1;
 			gchar *state_filename = get_state_filename(StatesC);
 			LoadState(state_filename);

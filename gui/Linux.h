@@ -51,7 +51,7 @@ void autoloadCheats(); // try load cheat file from default path and filename
 
 void PADhandleKey(int key);
 
-void UpdateMenuSlots();
+int UpdateMenuSlots();
 
 gchar* get_state_filename(int i);
 gchar* get_cdrom_label_id(const gchar* suffix); // get cdrom label and id and append suffix to string

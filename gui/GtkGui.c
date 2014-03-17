@@ -266,15 +266,33 @@ gchar* get_cdrom_label_id(const gchar* suffix) {
 		return g_strdup(buf);
 }
 
-void UpdateMenuSlots() {
+static time_t get_state_time(const char* fn) {
+	struct stat st;
+	int ierr = stat (fn, &st);
+	if (!ierr)
+		return st.st_ctime;
+	else
+		return -1;
+}
+
+int UpdateMenuSlots() {
 	gchar *str;
-	int i;
+	int i, imax=-1;
+	time_t tsmax = -1;
 
 	for (i = 0; i < MAX_SLOTS; i++) {
 		str = get_state_filename (i);
-		Slots[i] = CheckState(str);
+		if ((Slots[i] = CheckState(str)) >= 0) {
+			time_t ts = get_state_time(str);
+			if (ts > tsmax) {
+				tsmax=ts;
+				imax=i;
+			}
+			//printf("File %s time %i\n", str, ts);
+		}
 		g_free (str);
 	}
+	return imax;
 }
 
 void autoloadCheats() {
