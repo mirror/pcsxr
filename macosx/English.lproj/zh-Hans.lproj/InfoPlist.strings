@@ -1,10 +1,9 @@
 /* Localized versions of Info.plist keys */
 
-CFBundleName = "PCSXR";
-CFBundleDisplayName = "PCSX Reloaded";
+CFBundleName = "PCSX-R";
 CFBundleShortVersionString = "PCSX-Reloaded 1.9.95";
 CFBundleGetInfoString = "PlayStation 模拟器源代码 PCSX-df 项目.";
-NSHumanReadableCopyright = "Copyright © 2003-2005 PCSX Team, Gil Pedersen, Nicolas Pepin-Perreault.\nCopyright © 2009-2013 PCSX-Reloaded Team.";
+NSHumanReadableCopyright = "Copyright © 2003-2005 PCSX Team, Gil Pedersen, Nicolas Pepin-Perreault.\nCopyright © 2009-2014 PCSX-Reloaded Team.";
 "Playstation Emulator Plug-in" = "PlayStation 模拟器插件安装";
 "Playstation BIOS Image" = "PlayStation BIOS 映像";
 "PCSXR Memory Card" = "Psx 记忆卡格式";
