@@ -554,8 +554,10 @@ void RewindState() {
 	LoadStateMem(mem_cur_save_count);
 }
 
-/* 
+GPUFreeze_t *gpufP = NULL;
+SPUFreeze_t *spufP = NULL;
 
+/* 
 Pros of using SHM
 + No need to change SaveState interface (gzip OK)
 + Possibiliy to preserve saves after pcsxr crash
@@ -619,8 +621,6 @@ int LoadStateMem(const u32 id) {
 	return ret;
 }
 
-GPUFreeze_t* gpufP = NULL;
-SPUFreeze_t *spufP = NULL;
 void CleanupMemSaveStates() {
 	char name[32];
 	u32 i;
@@ -680,7 +680,7 @@ int SaveStateGz(gzFile f, long* gzsize) {
 		spufP->Size = Size;
 
 		if (spufP->Size <= 0) {
-			gzclose_w(f);
+			gzclose(f);
 			free(spufP);
 			spufP = NULL;
 			return 1; // error
@@ -698,7 +698,7 @@ int SaveStateGz(gzFile f, long* gzsize) {
 	mdecFreeze(f, 1);
 
 	if(gzsize)*gzsize = gztell(f);
-	gzclose_w(f);
+	gzclose(f);
 
 	return 0;
 }
@@ -751,7 +751,7 @@ int LoadStateGz(gzFile f) {
 	psxRcntFreeze(f, 0);
 	mdecFreeze(f, 0);
 
-	gzclose_r(f);
+	gzclose(f);
 
 	return 0;
 }
