@@ -1,48 +1,48 @@
 
-/* Class = "NSWindow"; title = "Cheats"; ObjectID = "1"; */
+/* Class = "NSWindow"; title = "Codes de Triche"; ObjectID = "1"; */
 "1.title" = "Codes de Triche";
 
-/* Class = "NSButtonCell"; title = "Save Cheats…"; ObjectID = "5"; */
+/* Class = "NSButtonCell"; title = "Sauver de triche…"; ObjectID = "5"; */
 "5.title" = "Sauver de triche…"; //fuzzy
 
-/* Class = "NSButtonCell"; title = "Load Cheats…"; ObjectID = "7"; */
+/* Class = "NSButtonCell"; title = "Charger de triche…"; ObjectID = "7"; */
 "7.title" = "Charger de triche…"; //fuzzy
 
-/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "28"; */
+/* Class = "NSTableColumn"; headerCell.title = "Nom"; ObjectID = "28"; */
 "28.headerCell.title" = "Nom";
 
-/* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "29"; */
+/* Class = "NSTableColumn"; headerCell.title = "Activé"; ObjectID = "29"; */
 "29.headerCell.title" = "Activé";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "31"; */
 "31.title" = "Text Cell";
 
-/* Class = "NSButtonCell"; title = "Clear"; ObjectID = "79"; */
+/* Class = "NSButtonCell"; title = "Effacer"; ObjectID = "79"; */
 "79.title" = "Effacer";
 
-/* Class = "NSButtonCell"; title = "Edit…"; ObjectID = "130"; */
+/* Class = "NSButtonCell"; title = "Modifier…"; ObjectID = "130"; */
 "130.title" = "Modifier…";
 
-/* Class = "NSWindow"; title = "Edit Cheat"; ObjectID = "134"; */
+/* Class = "NSWindow"; title = "Modifier un code"; ObjectID = "134"; */
 "134.title" = "Modifier un code";
 
-/* Class = "NSTableColumn"; headerCell.title = "Address"; ObjectID = "141"; */
+/* Class = "NSTableColumn"; headerCell.title = "Adresse"; ObjectID = "141"; */
 "141.headerCell.title" = "Adresse";
 
-/* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "142"; */
+/* Class = "NSTableColumn"; headerCell.title = "Valeur"; ObjectID = "142"; */
 "142.headerCell.title" = "Valeur";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "153"; */
 "153.title" = "OK";
 
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "157"; */
+/* Class = "NSButtonCell"; title = "Annuler"; ObjectID = "157"; */
 "157.title" = "Annuler";
 
-/* Class = "NSButtonCell"; title = "Add"; ObjectID = "207"; */
+/* Class = "NSButtonCell"; title = "Ajouter"; ObjectID = "207"; */
 "207.title" = "Ajouter";
 
-/* Class = "NSButtonCell"; title = "Remove"; ObjectID = "228"; */
+/* Class = "NSButtonCell"; title = "Supprimer"; ObjectID = "228"; */
 "228.title" = "Supprimer";
 
-/* Class = "NSButtonCell"; title = "Apply"; ObjectID = "257"; */
+/* Class = "NSButtonCell"; title = "Appliquer"; ObjectID = "257"; */
 "257.title" = "Appliquer";

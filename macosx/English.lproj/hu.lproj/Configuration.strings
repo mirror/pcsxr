@@ -2,19 +2,19 @@
 /* Class = "NSWindow"; title = "PCSXR Preferences"; ObjectID = "21"; */
 "21.title" = "PCSXR Preferences";
 
-/* Class = "NSTabViewItem"; label = "Emulation"; ObjectID = "240"; */
+/* Class = "NSTabViewItem"; label = "Emuláció"; ObjectID = "240"; */
 "240.label" = "Emuláció";
 
 /* Class = "NSTabViewItem"; label = "Plugins"; ObjectID = "241"; */
 "241.label" = "Plugins";
 
-/* Class = "NSBox"; title = "Graphics"; ObjectID = "257"; */
+/* Class = "NSBox"; title = "Kép"; ObjectID = "257"; */
 "257.title" = "Kép";
 
-/* Class = "NSBox"; title = "Sound"; ObjectID = "291"; */
+/* Class = "NSBox"; title = "Hang"; ObjectID = "291"; */
 "291.title" = "Hang";
 
-/* Class = "NSBox"; title = "Controller"; ObjectID = "299"; */
+/* Class = "NSBox"; title = "Irányító"; ObjectID = "299"; */
 "299.title" = "Irányító";
 
 /* Class = "NSBox"; title = "CD-ROM"; ObjectID = "302"; */
@@ -47,8 +47,8 @@
 /* Class = "NSBox"; title = "Options"; ObjectID = "502"; */
 "502.title" = "Options";
 
-/* Class = "NSBox"; title = "Game Fixes"; ObjectID = "509"; */
-"509.title" = "javítások használata"; //Fuzzy
+/* Class = "NSBox"; title = "javítások használata"; ObjectID = "509"; */
+"509.title" = "javítások használata";
 
 /* Class = "NSButtonCell"; ibShadowedToolTip = "When enabled the emulation will be faster, but possibly more unstable"; ObjectID = "516"; */
 "516.ibShadowedToolTip" = "When enabled the emulation will be faster, but possibly more unstable";
@@ -59,25 +59,25 @@
 /* Class = "NSButtonCell"; ibShadowedToolTip = "Disables decoding of CD audio tracks"; ObjectID = "517"; */
 "517.ibShadowedToolTip" = "Disables decoding of CD audio tracks";
 
-/* Class = "NSButtonCell"; title = "No CD audio"; ObjectID = "517"; */
+/* Class = "NSButtonCell"; title = "CD hang kikapcsolása"; ObjectID = "517"; */
 "517.title" = "CD hang kikapcsolása";
 
 /* Class = "NSButtonCell"; ibShadowedToolTip = "Enables the emulator to run without using an actual Playstation BIOS file. The compatibility might also decrease"; ObjectID = "518"; */
 "518.ibShadowedToolTip" = "Enables the emulator to run without using an actual Playstation BIOS file. The compatibility might also decrease";
 
-/* Class = "NSButtonCell"; title = "Simulate PSX BIOS"; ObjectID = "518"; */
+/* Class = "NSButtonCell"; title = "PSX BIOS szimulálása"; ObjectID = "518"; */
 "518.title" = "PSX BIOS szimulálása";
 
 /* Class = "NSButtonCell"; ibShadowedToolTip = "Disables decoding of streamed XA audio"; ObjectID = "519"; */
 "519.ibShadowedToolTip" = "Disables decoding of streamed XA audio";
 
-/* Class = "NSButtonCell"; title = "No XA audio"; ObjectID = "519"; */
+/* Class = "NSButtonCell"; title = "XA kódolás kikapcsolása"; ObjectID = "519"; */
 "519.title" = "XA kódolás kikapcsolása";
 
-/* Class = "NSButtonCell"; title = "InuYasha Sengoku Battle"; ObjectID = "539"; */
+/* Class = "NSButtonCell"; title = "InuYasha Sengoku Battle javítás"; ObjectID = "539"; */
 "539.title" = "InuYasha Sengoku Battle javítás";
 
-/* Class = "NSButtonCell"; title = "Parasite Eve 2, Vandal Hearts 1/2"; ObjectID = "540"; */
+/* Class = "NSButtonCell"; title = "Parasite Eve 2, Vandal Hearts 1/2 javítás"; ObjectID = "540"; */
 "540.title" = "Parasite Eve 2, Vandal Hearts 1/2 javítás";
 
 /* Class = "NSBox"; title = "Hacks"; ObjectID = "542"; */
@@ -86,22 +86,22 @@
 /* Class = "NSButtonCell"; ibShadowedToolTip = "This should generally be disabled, though it might help to enable it if you are having sound problems"; ObjectID = "543"; */
 "543.ibShadowedToolTip" = "This should generally be disabled, though it might help to enable it if you are having sound problems";
 
-/* Class = "NSButtonCell"; title = "SPU IRQ always enabled"; ObjectID = "543"; */
+/* Class = "NSButtonCell"; title = "Hang IRQ mindig bekacsolva"; ObjectID = "543"; */
 "543.title" = "Hang IRQ mindig bekacsolva";
 
 /* Class = "NSButtonCell"; ibShadowedToolTip = "This should generally be disabled, though it might help to enable it if you are having controller problems"; ObjectID = "545"; */
 "545.ibShadowedToolTip" = "This should generally be disabled, though it might help to enable it if you are having controller problems";
 
-/* Class = "NSButtonCell"; title = "SIO IRQ always enabled"; ObjectID = "545"; */
+/* Class = "NSButtonCell"; title = "SIO IRQ mindig bekapcsolva"; ObjectID = "545"; */
 "545.title" = "SIO IRQ mindig bekapcsolva";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "561"; */
 "561.title" = "OtherViews";
 
-/* Class = "NSMenuItem"; title = "System Region"; ObjectID = "562"; */
+/* Class = "NSMenuItem"; title = "Rendszer Típus"; ObjectID = "562"; */
 "562.title" = "Rendszer Típus";
 
-/* Class = "NSMenuItem"; title = "Autodetect"; ObjectID = "563"; */
+/* Class = "NSMenuItem"; title = "Automatikus Észlelés"; ObjectID = "563"; */
 "563.title" = "Automatikus Észlelés";
 
 /* Class = "NSMenuItem"; title = "NTSC (USA/Japan)"; ObjectID = "564"; */
@@ -110,31 +110,31 @@
 /* Class = "NSMenuItem"; title = "PAL (Europe)"; ObjectID = "566"; */
 "566.title" = "PAL (Europe)";
 
-/* Class = "NSTabViewItem"; label = "Memory Cards"; ObjectID = "579"; */
+/* Class = "NSTabViewItem"; label = "Memória Kártyák"; ObjectID = "579"; */
 "579.label" = "Memória Kártyák";
 
-/* Class = "NSButtonCell"; title = "About…"; ObjectID = "599"; */
+/* Class = "NSButtonCell"; title = "Névjegy…"; ObjectID = "599"; */
 "599.title" = "Névjegy…";
 
-/* Class = "NSButtonCell"; title = "Configure…"; ObjectID = "600"; */
+/* Class = "NSButtonCell"; title = "Beállítás…"; ObjectID = "600"; */
 "600.title" = "Beállítás…";
 
-/* Class = "NSButtonCell"; title = "About…"; ObjectID = "602"; */
+/* Class = "NSButtonCell"; title = "Névjegy…"; ObjectID = "602"; */
 "602.title" = "Névjegy…";
 
-/* Class = "NSButtonCell"; title = "Configure…"; ObjectID = "603"; */
+/* Class = "NSButtonCell"; title = "Beállítás…"; ObjectID = "603"; */
 "603.title" = "Beállítás…";
 
-/* Class = "NSButtonCell"; title = "Configure…"; ObjectID = "605"; */
+/* Class = "NSButtonCell"; title = "Beállítás…"; ObjectID = "605"; */
 "605.title" = "Beállítás…";
 
-/* Class = "NSButtonCell"; title = "About…"; ObjectID = "606"; */
+/* Class = "NSButtonCell"; title = "Névjegy…"; ObjectID = "606"; */
 "606.title" = "Névjegy…";
 
-/* Class = "NSButtonCell"; title = "About…"; ObjectID = "608"; */
+/* Class = "NSButtonCell"; title = "Névjegy…"; ObjectID = "608"; */
 "608.title" = "Névjegy…";
 
-/* Class = "NSButtonCell"; title = "Configure…"; ObjectID = "609"; */
+/* Class = "NSButtonCell"; title = "Beállítás…"; ObjectID = "609"; */
 "609.title" = "Beállítás…";
 
 /* Class = "NSButtonCell"; title = "Switch"; ObjectID = "617"; */
@@ -149,16 +149,16 @@
 /* Class = "NSBox"; title = "Network"; ObjectID = "622"; */
 "622.title" = "Network";
 
-/* Class = "NSButtonCell"; title = "Configure…"; ObjectID = "626"; */
+/* Class = "NSButtonCell"; title = "Beállítás…"; ObjectID = "626"; */
 "626.title" = "Beállítás…";
 
-/* Class = "NSButtonCell"; title = "About…"; ObjectID = "627"; */
+/* Class = "NSButtonCell"; title = "Névjegy…"; ObjectID = "627"; */
 "627.title" = "Névjegy…";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "629"; */
 "629.title" = "OtherViews";
 
-/* Class = "NSMenuItem"; title = "Net Plugin"; ObjectID = "630"; */
+/* Class = "NSMenuItem"; title = "Internetes Játék"; ObjectID = "630"; */
 "630.title" = "Internetes Játék";
 
 /* Class = "NSButtonCell"; title = "Enable NetPlay"; ObjectID = "640"; */
@@ -173,10 +173,10 @@
 /* Class = "NSButtonCell"; title = "Fast Forward"; ObjectID = "770"; */
 "770.title" = "Fast Forward";
 
-/* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "772"; */
+/* Class = "NSTextFieldCell"; placeholderString = "Nincs…"; ObjectID = "772"; */
 "772.placeholderString" = "Nincs…";
 
-/* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "852"; */
+/* Class = "NSTextFieldCell"; placeholderString = "Nincs…"; ObjectID = "852"; */
 "852.placeholderString" = "Nincs…";
 
 /* Class = "NSButtonCell"; title = "Save State"; ObjectID = "853"; */
@@ -191,13 +191,13 @@
 /* Class = "NSButtonCell"; title = "Previous State"; ObjectID = "868"; */
 "868.title" = "Previous State";
 
-/* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "871"; */
+/* Class = "NSTextFieldCell"; placeholderString = "Nincs…"; ObjectID = "871"; */
 "871.placeholderString" = "Nincs…";
 
-/* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "873"; */
+/* Class = "NSTextFieldCell"; placeholderString = "Nincs…"; ObjectID = "873"; */
 "873.placeholderString" = "Nincs…";
 
-/* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "875"; */
+/* Class = "NSTextFieldCell"; placeholderString = "Nincs…"; ObjectID = "875"; */
 "875.placeholderString" = "Nincs…";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "884"; */
@@ -224,7 +224,7 @@
 /* Class = "NSMenuItem"; title = "Alt / Option ⌥"; ObjectID = "893"; */
 "893.title" = "Alt / Option ⌥";
 
-/* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "898"; */
+/* Class = "NSTextFieldCell"; placeholderString = "Nincs…"; ObjectID = "898"; */
 "898.placeholderString" = "Nincs…";
 
 /* Class = "NSButtonCell"; title = "Frame Limit"; ObjectID = "899"; */
@@ -239,10 +239,10 @@
 /* Class = "NSMenuItem"; title = "Net Plugin"; ObjectID = "908"; */
 "908.title" = "Net Plugin";
 
-/* Class = "NSButtonCell"; title = "About…"; ObjectID = "909"; */
+/* Class = "NSButtonCell"; title = "Névjegy…"; ObjectID = "909"; */
 "909.title" = "Névjegy…";
 
-/* Class = "NSButtonCell"; title = "Configure…"; ObjectID = "910"; */
+/* Class = "NSButtonCell"; title = "Beállítás…"; ObjectID = "910"; */
 "910.title" = "Beállítás…";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "936"; */
@@ -275,10 +275,10 @@
 /* Class = "NSButtonCell"; title = "Format…"; ObjectID = "945"; */
 "945.title" = "Format…";
 
-/* Class = "NSButtonCell"; title = "->"; ObjectID = "952"; */
+/* Class = "NSButtonCell"; title = "→"; ObjectID = "952"; */
 "952.title" = "→";
 
-/* Class = "NSButtonCell"; title = "<-"; ObjectID = "954"; */
+/* Class = "NSButtonCell"; title = "←"; ObjectID = "954"; */
 "954.title" = "←";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "965"; */

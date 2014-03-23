@@ -1,5 +1,5 @@
 
-/* Class = "NSWindow"; title = "Memory Card"; ObjectID = "5"; */
+/* Class = "NSWindow"; title = "Carte Mémoire"; ObjectID = "5"; */
 "5.title" = "Carte Mémoire";
 
 /* Class = "NSTextFieldCell"; title = "Select which memory card slot you want to put this card in."; ObjectID = "100028"; */
@@ -11,11 +11,11 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Mem card file name"; ObjectID = "100035"; */
 "100035.placeholderString" = "Mem card file name";
 
-/* Class = "NSButtonCell"; title = "Slot 2"; ObjectID = "100127"; */
+/* Class = "NSButtonCell"; title = "Carte 2"; ObjectID = "100127"; */
 "100127.title" = "Carte 2";
 
-/* Class = "NSButtonCell"; title = "Slot 1"; ObjectID = "100131"; */
+/* Class = "NSButtonCell"; title = "Carte 1"; ObjectID = "100131"; */
 "100131.title" = "Carte 1";
 
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "100135"; */
+/* Class = "NSButtonCell"; title = "Annuler"; ObjectID = "100135"; */
 "100135.title" = "Annuler";

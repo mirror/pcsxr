@@ -47,7 +47,7 @@
 /* Class = "NSBox"; title = "Options"; ObjectID = "502"; */
 "502.title" = "Options";
 
-/* Class = "NSBox"; title = "Game Fixes"; ObjectID = "509"; */
+/* Class = "NSBox"; title = "les correctifs de jeu"; ObjectID = "509"; */
 "509.title" = "les correctifs de jeu";
 
 /* Class = "NSButtonCell"; ibShadowedToolTip = "When enabled the emulation will be faster, but possibly more unstable"; ObjectID = "516"; */
@@ -173,16 +173,16 @@
 /* Class = "NSButtonCell"; title = "Fast Forward"; ObjectID = "770"; */
 "770.title" = "Fast Forward";
 
-/* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "772"; */
+/* Class = "NSTextFieldCell"; placeholderString = "Non…"; ObjectID = "772"; */
 "772.placeholderString" = "Non…";
 
-/* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "852"; */
+/* Class = "NSTextFieldCell"; placeholderString = "Non…"; ObjectID = "852"; */
 "852.placeholderString" = "Non…";
 
-/* Class = "NSButtonCell"; title = "Save State"; ObjectID = "853"; */
+/* Class = "NSButtonCell"; title = "Sauver un état"; ObjectID = "853"; */
 "853.title" = "Sauver un état";
 
-/* Class = "NSButtonCell"; title = "Load State"; ObjectID = "856"; */
+/* Class = "NSButtonCell"; title = "Charger un état"; ObjectID = "856"; */
 "856.title" = "Charger un état";
 
 /* Class = "NSButtonCell"; title = "Next State"; ObjectID = "862"; */
@@ -191,13 +191,13 @@
 /* Class = "NSButtonCell"; title = "Previous State"; ObjectID = "868"; */
 "868.title" = "Previous State";
 
-/* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "871"; */
+/* Class = "NSTextFieldCell"; placeholderString = "Non…"; ObjectID = "871"; */
 "871.placeholderString" = "Non…";
 
-/* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "873"; */
+/* Class = "NSTextFieldCell"; placeholderString = "Non…"; ObjectID = "873"; */
 "873.placeholderString" = "Non…";
 
-/* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "875"; */
+/* Class = "NSTextFieldCell"; placeholderString = "Non…"; ObjectID = "875"; */
 "875.placeholderString" = "Non…";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "884"; */
@@ -224,7 +224,7 @@
 /* Class = "NSMenuItem"; title = "Alt / Option ⌥"; ObjectID = "893"; */
 "893.title" = "Alt / Option ⌥";
 
-/* Class = "NSTextFieldCell"; placeholderString = "None..."; ObjectID = "898"; */
+/* Class = "NSTextFieldCell"; placeholderString = "None…"; ObjectID = "898"; */
 "898.placeholderString" = "None…";
 
 /* Class = "NSButtonCell"; title = "Frame Limit"; ObjectID = "899"; */
@@ -275,10 +275,10 @@
 /* Class = "NSButtonCell"; title = "Formater…"; ObjectID = "945"; */
 "945.title" = "Formater…";
 
-/* Class = "NSButtonCell"; title = "->"; ObjectID = "952"; */
+/* Class = "NSButtonCell"; title = "→"; ObjectID = "952"; */
 "952.title" = "→";
 
-/* Class = "NSButtonCell"; title = "<-"; ObjectID = "954"; */
+/* Class = "NSButtonCell"; title = "←"; ObjectID = "954"; */
 "954.title" = "←";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "965"; */

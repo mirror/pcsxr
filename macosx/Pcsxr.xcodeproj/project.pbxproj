@@ -725,11 +725,9 @@
 		55E0ACDF178B69600005C945 /* LaunchArg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchArg.m; sourceTree = "<group>"; usesTabs = 1; };
 		55E1598618455B69007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Configuration.strings; sourceTree = "<group>"; };
 		55E1598818455BB9007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AddPluginSheet.strings; sourceTree = "<group>"; };
-		55E1598A18455BBD007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/AddPluginSheet.strings; sourceTree = "<group>"; };
 		55E1598C18455C60007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CheatWindow.strings; sourceTree = "<group>"; };
 		55E1598E18455C78007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PcsxrMemCard.strings; sourceTree = "<group>"; };
 		55E1599018455C7C007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/PcsxrMemCard.strings; sourceTree = "<group>"; };
-		55E1599218455D7E007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/CheatWindow.strings; sourceTree = "<group>"; };
 		55E15993184564D4007983CB /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		55E15995184567D5007983CB /* GL2Code.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GL2Code.m; sourceTree = "<group>"; };
 		55E15997184567F4007983CB /* GL3Code.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GL3Code.m; sourceTree = "<group>"; };
@@ -2387,7 +2385,6 @@
 				5569B09C182F0B3C00991C9C /* Base */,
 				5569B0AD182F0B7200991C9C /* en */,
 				55E1598818455BB9007983CB /* fr */,
-				55E1598A18455BBD007983CB /* hu */,
 				558328BE184F21EF00DFACE4 /* zh-Hans */,
 			);
 			name = AddPluginSheet.xib;
@@ -2745,7 +2742,6 @@
 				5569B09E182F0B3E00991C9C /* Base */,
 				5569B0B1182F0B8100991C9C /* en */,
 				55E1598C18455C60007983CB /* fr */,
-				55E1599218455D7E007983CB /* hu */,
 				558328C7184F227E00DFACE4 /* zh-Hans */,
 			);
 			name = CheatWindow.xib;

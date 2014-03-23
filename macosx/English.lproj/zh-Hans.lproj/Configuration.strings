@@ -113,28 +113,28 @@
 /* Class = "NSTabViewItem"; label = "记忆卡"; ObjectID = "579"; */
 "579.label" = "记忆卡";
 
-/* Class = "NSButtonCell"; title = "关于..."; ObjectID = "599"; */
+/* Class = "NSButtonCell"; title = "关于…"; ObjectID = "599"; */
 "599.title" = "关于…";
 
-/* Class = "NSButtonCell"; title = "配置..."; ObjectID = "600"; */
+/* Class = "NSButtonCell"; title = "配置…"; ObjectID = "600"; */
 "600.title" = "配置…";
 
-/* Class = "NSButtonCell"; title = "关于..."; ObjectID = "602"; */
+/* Class = "NSButtonCell"; title = "关于…"; ObjectID = "602"; */
 "602.title" = "关于…";
 
-/* Class = "NSButtonCell"; title = "配置..."; ObjectID = "603"; */
+/* Class = "NSButtonCell"; title = "配置…"; ObjectID = "603"; */
 "603.title" = "配置…";
 
-/* Class = "NSButtonCell"; title = "配置..."; ObjectID = "605"; */
+/* Class = "NSButtonCell"; title = "配置…"; ObjectID = "605"; */
 "605.title" = "配置…";
 
-/* Class = "NSButtonCell"; title = "关于..."; ObjectID = "606"; */
+/* Class = "NSButtonCell"; title = "关于…"; ObjectID = "606"; */
 "606.title" = "关于…";
 
-/* Class = "NSButtonCell"; title = "关于..."; ObjectID = "608"; */
+/* Class = "NSButtonCell"; title = "关于…"; ObjectID = "608"; */
 "608.title" = "关于…";
 
-/* Class = "NSButtonCell"; title = "配置..."; ObjectID = "609"; */
+/* Class = "NSButtonCell"; title = "配置…"; ObjectID = "609"; */
 "609.title" = "配置…";
 
 /* Class = "NSButtonCell"; title = "选择"; ObjectID = "617"; */
@@ -149,10 +149,10 @@
 /* Class = "NSBox"; title = "网络"; ObjectID = "622"; */
 "622.title" = "网络";
 
-/* Class = "NSButtonCell"; title = "配置..."; ObjectID = "626"; */
+/* Class = "NSButtonCell"; title = "配置…"; ObjectID = "626"; */
 "626.title" = "配置…";
 
-/* Class = "NSButtonCell"; title = "关于..."; ObjectID = "627"; */
+/* Class = "NSButtonCell"; title = "关于…"; ObjectID = "627"; */
 "627.title" = "关于…";
 
 /* Class = "NSMenu"; title = "查看其他"; ObjectID = "629"; */
@@ -173,10 +173,10 @@
 /* Class = "NSButtonCell"; title = "快进"; ObjectID = "770"; */
 "770.title" = "快进";
 
-/* Class = "NSTextFieldCell"; placeholderString = "无..."; ObjectID = "772"; */
+/* Class = "NSTextFieldCell"; placeholderString = "无…"; ObjectID = "772"; */
 "772.placeholderString" = "无…";
 
-/* Class = "NSTextFieldCell"; placeholderString = "无..."; ObjectID = "852"; */
+/* Class = "NSTextFieldCell"; placeholderString = "无…"; ObjectID = "852"; */
 "852.placeholderString" = "无…";
 
 /* Class = "NSButtonCell"; title = "即时存档"; ObjectID = "853"; */
@@ -191,13 +191,13 @@
 /* Class = "NSButtonCell"; title = "上个进度"; ObjectID = "868"; */
 "868.title" = "上个进度";
 
-/* Class = "NSTextFieldCell"; placeholderString = "无..."; ObjectID = "871"; */
+/* Class = "NSTextFieldCell"; placeholderString = "无…"; ObjectID = "871"; */
 "871.placeholderString" = "无…";
 
-/* Class = "NSTextFieldCell"; placeholderString = "无..."; ObjectID = "873"; */
+/* Class = "NSTextFieldCell"; placeholderString = "无…"; ObjectID = "873"; */
 "873.placeholderString" = "无…";
 
-/* Class = "NSTextFieldCell"; placeholderString = "无..."; ObjectID = "875"; */
+/* Class = "NSTextFieldCell"; placeholderString = "无…"; ObjectID = "875"; */
 "875.placeholderString" = "无…";
 
 /* Class = "NSBox"; title = "窗体"; ObjectID = "884"; */
@@ -224,7 +224,7 @@
 /* Class = "NSMenuItem"; title = "Alt / Option ⌥"; ObjectID = "893"; */
 "893.title" = "Alt / Option ⌥";
 
-/* Class = "NSTextFieldCell"; placeholderString = "无..."; ObjectID = "898"; */
+/* Class = "NSTextFieldCell"; placeholderString = "无…"; ObjectID = "898"; */
 "898.placeholderString" = "无…";
 
 /* Class = "NSButtonCell"; title = "跳帧限制"; ObjectID = "899"; */
@@ -239,10 +239,10 @@
 /* Class = "NSMenuItem"; title = "网络插件"; ObjectID = "908"; */
 "908.title" = "网络插件";
 
-/* Class = "NSButtonCell"; title = "关于..."; ObjectID = "909"; */
+/* Class = "NSButtonCell"; title = "关于…"; ObjectID = "909"; */
 "909.title" = "关于…";
 
-/* Class = "NSButtonCell"; title = "配置..."; ObjectID = "910"; */
+/* Class = "NSButtonCell"; title = "配置…"; ObjectID = "910"; */
 "910.title" = "配置…";
 
 /* Class = "NSTextFieldCell"; title = "标签"; ObjectID = "936"; */
@@ -251,7 +251,7 @@
 /* Class = "NSButtonCell"; title = "改变…"; ObjectID = "937"; */
 "937.title" = "改变…";
 
-/* Class = "NSButtonCell"; title = "新建..."; ObjectID = "938"; */
+/* Class = "NSButtonCell"; title = "新建…"; ObjectID = "938"; */
 "938.title" = "新建…";
 
 /* Class = "NSTextFieldCell"; title = "标签"; ObjectID = "939"; */
@@ -260,25 +260,25 @@
 /* Class = "NSButtonCell"; title = "改变…"; ObjectID = "940"; */
 "940.title" = "改变…";
 
-/* Class = "NSButtonCell"; title = "新建..."; ObjectID = "941"; */
+/* Class = "NSButtonCell"; title = "新建…"; ObjectID = "941"; */
 "941.title" = "新建…";
 
-/* Class = "NSButtonCell"; title = "删除..."; ObjectID = "942"; */
+/* Class = "NSButtonCell"; title = "删除…"; ObjectID = "942"; */
 "942.title" = "删除…";
 
-/* Class = "NSButtonCell"; title = "删除..."; ObjectID = "943"; */
+/* Class = "NSButtonCell"; title = "删除…"; ObjectID = "943"; */
 "943.title" = "删除…";
 
-/* Class = "NSButtonCell"; title = "格式化..."; ObjectID = "944"; */
+/* Class = "NSButtonCell"; title = "格式化…"; ObjectID = "944"; */
 "944.title" = "格式化…";
 
-/* Class = "NSButtonCell"; title = "格式化..."; ObjectID = "945"; */
+/* Class = "NSButtonCell"; title = "格式化…"; ObjectID = "945"; */
 "945.title" = "格式化…";
 
-/* Class = "NSButtonCell"; title = "->"; ObjectID = "952"; */
+/* Class = "NSButtonCell"; title = "→"; ObjectID = "952"; */
 "952.title" = "→";
 
-/* Class = "NSButtonCell"; title = "<-"; ObjectID = "954"; */
+/* Class = "NSButtonCell"; title = "←"; ObjectID = "954"; */
 "954.title" = "←";
 
 /* Class = "NSBox"; title = "窗体"; ObjectID = "965"; */
