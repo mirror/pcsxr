@@ -1,7 +1,6 @@
 /* Localized versions of Info.plist keys */
 
 CFBundleName = "PCSX-R";
-CFBundleDisplayName = "PCSX Reloaded";
 CFBundleShortVersionString = "PCSX-Reloaded 1.9.95";
 CFBundleGetInfoString = "PlayStation Emulator based on PCSX-df Project.";
 NSHumanReadableCopyright = "Copyright © 2003-2005 PCSX Team, Gil Pedersen, Nicolas Pepin-Perreault.\nCopyright © 2009-2014 PCSX-Reloaded Team.";
