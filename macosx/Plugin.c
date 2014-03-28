@@ -47,8 +47,8 @@ void PADhandleKey(int key) {
 #ifdef ENABLE_SIO1API
 	SIO1_keypressed(key);
 #endif
-	if (Config.UseNet) NET_keypressed(key);
-
+	if (Config.UseNet)
+		NET_keypressed(key);
 }
 
 long PAD1__open(void) {
@@ -63,8 +63,6 @@ void SignalExit(int sig) {
 	ClosePlugins();
 	OnFile_Exit();
 }
-
-void SPUirq(void);
 
 #define PARSEPATH(dst, src) \
 	ptr = src + strlen(src); \
@@ -103,7 +101,7 @@ int _OpenPlugins() {
 		netInfo info;
 		char path[MAXPATHLEN];
 
-		strcpy(info.EmuName, "PCSX " PACKAGE_VERSION);
+		strcpy(info.EmuName, "PCSXR " PACKAGE_VERSION);
 		strncpy(info.CdromID, CdromId, 9);
 		strncpy(info.CdromLabel, CdromLabel, 11);
 		info.psxMem = psxM;
@@ -142,13 +140,11 @@ int _OpenPlugins() {
 				Config.UseNet = FALSE;
 			}
 		} else {
-
 			if (NET_queryPlayer() == 1) {
 				if (SendPcsxInfo() == -1) Config.UseNet = FALSE;
 			} else {
 				if (RecvPcsxInfo() == -1) Config.UseNet = FALSE;
 			}
-
 		}
 		NetOpened = TRUE;
 	} else if (Config.UseNet) {

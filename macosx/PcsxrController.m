@@ -877,6 +877,7 @@ otherblock();\
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
 	NSFileManager *fm = [NSFileManager defaultManager];
+	NSWorkspace *workspace = [NSWorkspace sharedWorkspace];
 	if (skipFiles && [skipFiles count]) {
 		for (NSString *parsedFile in skipFiles) {
 			if ([filename isEqualToString:parsedFile]) {
@@ -942,7 +943,7 @@ otherblock();\
 	}
 	
 	NSError *err = nil;
-	NSString *utiFile = [[NSWorkspace sharedWorkspace] typeOfFile:filename error:&err];
+	NSString *utiFile = [workspace typeOfFile:filename error:&err];
 	if (err) {
 		NSRunAlertPanel(NSLocalizedString(@"Error opening file", nil), NSLocalizedString(@"Unable to open %@: %@", nil), nil, nil, nil, [filename lastPathComponent], err);
 		return NO;
@@ -956,7 +957,7 @@ otherblock();\
 		NSObject<PcsxrFileHandle> *hand = [[fileHandler alloc] init];
 		BOOL canHandle = NO;
 		for (NSString *uti in [fileHandler supportedUTIs]) {
-			if ([[NSWorkspace sharedWorkspace] type:utiFile  conformsToType:uti]) {
+			if ([workspace type:utiFile conformsToType:uti]) {
 				canHandle = YES;
 				break;
 			}

@@ -291,7 +291,8 @@ done:
         return YES;
 
 	[EmuThread pause];
-	while ([EmuThread isPaused] != 2) [NSThread sleepUntilDate:[[NSDate date] dateByAddingTimeInterval:0.05]];
+	while ([EmuThread isPaused] != 2)
+		[NSThread sleepUntilDate:[[NSDate date] dateByAddingTimeInterval:0.05]];
 	
 	return NO;
 }
@@ -361,17 +362,21 @@ done:
 + (void)freezeAt:(NSString *)path which:(int)num
 {
 	[self pauseSafeWithBlock:^(BOOL emuWasPaused) {
+		int tmpNum = num;
 		char Text[256];
 		
-		GPU_freeze(2, (GPUFreeze_t *)&num);
+		GPU_freeze(2, (GPUFreeze_t *)&tmpNum);
 		int ret = SaveState([path fileSystemRepresentation]);
-		if (ret == 0) sprintf (Text, _("*PCSXR*: Saved State %d"), num);
-		else sprintf (Text, _("*PCSXR*: Error Saving State %d"), num);
-		GPU_displayText(Text);
 		
 		if (!emuWasPaused) {
 			[EmuThread resume];
 		}
+		
+		if (ret == 0)
+			snprintf(Text, sizeof(Text), _("*PCSXR*: Saved State %d"), num);
+		else
+			snprintf(Text, sizeof(Text), _("*PCSXR*: Error Saving State %d"), num);
+		GPU_displayText(Text);
 	}];
 }
 
