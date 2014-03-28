@@ -11,11 +11,16 @@
 
 OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options, CGSize maxSize)
 {
-    // To complete your generator please implement the function GenerateThumbnailForURL in GenerateThumbnailForURL.c
-    return noErr;
+	@autoreleasepool {
+		NSURL *urlNS = (__bridge NSURL*)url;
+		//NSString *UTI = (__bridge NSString*)contentTypeUTI;
+		//NSDictionary *optionsNS = (__bridge NSDictionary*)options;
+		
+		return noErr;
+	}
 }
 
 void CancelThumbnailGeneration(void *thisInterface, QLThumbnailRequestRef thumbnail)
 {
-    // Implement only if supported
+	// Implement only if supported
 }

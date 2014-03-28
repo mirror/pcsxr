@@ -8,3 +8,7 @@
 #include <CoreFoundation/CFPlugInCOM.h>
 #include <CoreServices/CoreServices.h>
 #include <QuickLook/QuickLook.h>
+
+#ifdef __OBJC__
+	#import <Cocoa/Cocoa.h>
+#endif

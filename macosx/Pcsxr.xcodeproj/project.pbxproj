@@ -22,10 +22,11 @@
 		550E343B18E6293D00A1AD21 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76AF178693D60052D185 /* CoreServices.framework */; };
 		550E343C18E6293D00A1AD21 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76B2178693EA0052D185 /* CoreFoundation.framework */; };
 		550E344218E6293D00A1AD21 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 550E344018E6293D00A1AD21 /* InfoPlist.strings */; };
-		550E344418E6293D00A1AD21 /* GenerateThumbnailForURL.c in Sources */ = {isa = PBXBuildFile; fileRef = 550E344318E6293D00A1AD21 /* GenerateThumbnailForURL.c */; };
-		550E344618E6293D00A1AD21 /* GeneratePreviewForURL.c in Sources */ = {isa = PBXBuildFile; fileRef = 550E344518E6293D00A1AD21 /* GeneratePreviewForURL.c */; };
+		550E344418E6293D00A1AD21 /* GenerateThumbnailForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 550E344318E6293D00A1AD21 /* GenerateThumbnailForURL.m */; };
+		550E344618E6293D00A1AD21 /* GeneratePreviewForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 550E344518E6293D00A1AD21 /* GeneratePreviewForURL.m */; };
 		550E344818E6293D00A1AD21 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 550E344718E6293D00A1AD21 /* main.c */; };
 		550E344F18E6332F00A1AD21 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76D8178696810052D185 /* libz.dylib */; };
+		550E345318E63DB700A1AD21 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A749E17868B110052D185 /* Cocoa.framework */; };
 		550F023D17BFFD97002594DF /* PcsxrHexadecimalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F023C17BFFD97002594DF /* PcsxrHexadecimalFormatter.m */; };
 		550FFAEF17CEE37D0003A2F3 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76B2178693EA0052D185 /* CoreFoundation.framework */; };
 		550FFAF117CEEECA0003A2F3 /* cfgHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 550FFAF017CEEEC90003A2F3 /* cfgHelper.m */; };
@@ -419,11 +420,12 @@
 		550E343818E6293D00A1AD21 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		550E343F18E6293D00A1AD21 /* Pcsxr-QL-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pcsxr-QL-Info.plist"; sourceTree = "<group>"; };
 		550E344118E6293D00A1AD21 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		550E344318E6293D00A1AD21 /* GenerateThumbnailForURL.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = GenerateThumbnailForURL.c; sourceTree = "<group>"; };
-		550E344518E6293D00A1AD21 /* GeneratePreviewForURL.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = GeneratePreviewForURL.c; sourceTree = "<group>"; };
+		550E344318E6293D00A1AD21 /* GenerateThumbnailForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenerateThumbnailForURL.m; sourceTree = "<group>"; };
+		550E344518E6293D00A1AD21 /* GeneratePreviewForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneratePreviewForURL.m; sourceTree = "<group>"; };
 		550E344718E6293D00A1AD21 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		550E344918E6293D00A1AD21 /* Pcsxr-QL-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pcsxr-QL-Prefix.pch"; sourceTree = "<group>"; };
 		550E344E18E629A300A1AD21 /* MyQuickLook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyQuickLook.h; sourceTree = "<group>"; };
+		550E345118E6362300A1AD21 /* nopic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nopic.h; sourceTree = "<group>"; };
 		550F023B17BFFD97002594DF /* PcsxrHexadecimalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrHexadecimalFormatter.h; sourceTree = "<group>"; };
 		550F023C17BFFD97002594DF /* PcsxrHexadecimalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrHexadecimalFormatter.m; sourceTree = "<group>"; };
 		550FFAEE17CEB8780003A2F3 /* DFSound.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; path = DFSound.exp; sourceTree = "<group>"; };
@@ -849,11 +851,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				550E343C18E6293D00A1AD21 /* CoreFoundation.framework in Frameworks */,
-				550E343918E6293D00A1AD21 /* QuickLook.framework in Frameworks */,
-				550E343B18E6293D00A1AD21 /* CoreServices.framework in Frameworks */,
-				550E343A18E6293D00A1AD21 /* ApplicationServices.framework in Frameworks */,
 				550E344F18E6332F00A1AD21 /* libz.dylib in Frameworks */,
+				550E343B18E6293D00A1AD21 /* CoreServices.framework in Frameworks */,
+				550E343C18E6293D00A1AD21 /* CoreFoundation.framework in Frameworks */,
+				550E343A18E6293D00A1AD21 /* ApplicationServices.framework in Frameworks */,
+				550E343918E6293D00A1AD21 /* QuickLook.framework in Frameworks */,
+				550E345318E63DB700A1AD21 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1107,9 +1110,10 @@
 		550E343D18E6293D00A1AD21 /* Pcsxr-QL */ = {
 			isa = PBXGroup;
 			children = (
+				550E345118E6362300A1AD21 /* nopic.h */,
 				550E344E18E629A300A1AD21 /* MyQuickLook.h */,
-				550E344318E6293D00A1AD21 /* GenerateThumbnailForURL.c */,
-				550E344518E6293D00A1AD21 /* GeneratePreviewForURL.c */,
+				550E344318E6293D00A1AD21 /* GenerateThumbnailForURL.m */,
+				550E344518E6293D00A1AD21 /* GeneratePreviewForURL.m */,
 				550E344718E6293D00A1AD21 /* main.c */,
 				550E343E18E6293D00A1AD21 /* Supporting Files */,
 			);
@@ -2240,8 +2244,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				550E344418E6293D00A1AD21 /* GenerateThumbnailForURL.c in Sources */,
-				550E344618E6293D00A1AD21 /* GeneratePreviewForURL.c in Sources */,
+				550E344418E6293D00A1AD21 /* GenerateThumbnailForURL.m in Sources */,
+				550E344618E6293D00A1AD21 /* GeneratePreviewForURL.m in Sources */,
 				550E344818E6293D00A1AD21 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3693,6 +3697,7 @@
 				550E344C18E6293D00A1AD21 /* Instrument */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		551A75CB17868C4E0052D185 /* Build configuration list for PBXNativeTarget "Bladesio1" */ = {
 			isa = XCConfigurationList;
