@@ -3117,7 +3117,7 @@
 					/Library/Frameworks/SDL2.framework/Headers,
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "plugins/DFSound/Resources/SDL/Info-SDL.plist";
+				INFOPLIST_FILE = "plugins/DFSound/Resorces/SDL/Info-SDL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				WRAPPER_EXTENSION = psxplugin;
@@ -3141,7 +3141,7 @@
 					/Library/Frameworks/SDL2.framework/Headers,
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "plugins/DFSound/Resources/SDL/Info-SDL.plist";
+				INFOPLIST_FILE = "plugins/DFSound/Resorces/SDL/Info-SDL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				WRAPPER_EXTENSION = psxplugin;
@@ -3212,7 +3212,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				INFOPLIST_FILE = "plugins/DFSound/Resources/OpenAL/Info-AL.plist";
+				INFOPLIST_FILE = "plugins/DFSound/Resorces/OpenAL/Info-AL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				WRAPPER_EXTENSION = psxplugin;
@@ -3231,7 +3231,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				INFOPLIST_FILE = "plugins/DFSound/Resources/OpenAL/Info-AL.plist";
+				INFOPLIST_FILE = "plugins/DFSound/Resorces/OpenAL/Info-AL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				WRAPPER_EXTENSION = psxplugin;
@@ -3545,7 +3545,7 @@
 					/Library/Frameworks/SDL2.framework/Headers,
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "plugins/DFSound/Resources/SDL/Info-SDL.plist";
+				INFOPLIST_FILE = "plugins/DFSound/Resorces/SDL/Info-SDL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				WRAPPER_EXTENSION = psxplugin;
@@ -3564,7 +3564,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				INFOPLIST_FILE = "plugins/DFSound/Resources/OpenAL/Info-AL.plist";
+				INFOPLIST_FILE = "plugins/DFSound/Resorces/OpenAL/Info-AL.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				WRAPPER_EXTENSION = psxplugin;
