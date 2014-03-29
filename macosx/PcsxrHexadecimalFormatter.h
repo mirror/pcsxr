@@ -9,10 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface PcsxrHexadecimalFormatter : NSFormatter
-{
-	char hexPadding;
-	NSString *hexFormatString;
-}
 @property (nonatomic) char hexPadding;
 
 @end

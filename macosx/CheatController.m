@@ -4,8 +4,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#include "psxcommon.h"
-#include "cheat.h"
 #import "CheatController.h"
 #import "PcsxrCheatHandler.h"
 #import "PcsxrHexadecimalFormatter.h"
@@ -13,75 +11,39 @@
 #define kTempCheatCodesName @"tempCheatCodes"
 #define kCheatsName @"cheats"
 
-@interface PcsxrCheatTempObject : NSObject <NSCopying>
-@property (readwrite) uint32_t address;
-@property (readwrite, weak) NSNumber* addressNS;
-@property (readwrite) uint16_t value;
-@property (readwrite, weak) NSNumber* valueNS;
-
-- (id)initWithAddress:(uint32_t)add value:(uint16_t)val;
-- (id)initWithCheatCode:(CheatCode *)theCheat;
-@end
-
-@interface PcsxrCheatTemp : NSObject
-@property (readwrite, strong) NSMutableArray *cheatValues;
-@property (readwrite, strong) NSString *cheatName;
-@property (readwrite, getter = isEnabled) BOOL enabled;
-
-- (id)initWithCheat:(Cheat *)theCheat;
-@end
-
 @implementation PcsxrCheatTempObject
-@synthesize address, value;
+@synthesize cheatAddress, cheatValue;
 
-- (NSNumber *)addressNS
-{
-	return @(self.address);
-}
-- (void)setAddressNS:(NSNumber *)addressNS
-{
-	self.address = [addressNS unsignedIntValue];
-}
-
-- (NSNumber *)valueNS
-{
-	return @(self.value);
-}
-- (void)setValueNS:(NSNumber *)valueNS
-{
-	self.value = [valueNS unsignedShortValue];
-}
-
-- (id)init
+- (instancetype)init
 {
 	return [self initWithAddress:0x10000000 value:0];
 }
 
-- (id)initWithAddress:(uint32_t)add value:(uint16_t)val
+- (instancetype)initWithAddress:(uint32_t)add value:(uint16_t)val
 {
 	if (self = [super init]) {
-		self.address = add;
-		self.value = val;
+		self.cheatAddress = add;
+		self.cheatValue = val;
 	}
 	return self;
 }
 
-- (id)initWithCheatCode:(CheatCode *)theCheat
+- (instancetype)initWithCheatCode:(CheatCode *)theCheat
 {
 	return [self initWithAddress:theCheat->Addr value:theCheat->Val];
 }
 
 - (NSString*)description
 {
-	return [NSString stringWithFormat:@"%08x %04x", address, value];
+	return [NSString stringWithFormat:@"%08x %04x", cheatAddress, cheatValue];
 }
 
 - (BOOL)isEqual:(id)object
 {
 	if ([object isKindOfClass:[PcsxrCheatTempObject class]]) {
-		if (address != [(PcsxrCheatTempObject*)object address]) {
+		if (cheatAddress != [object cheatAddress]) {
 			return NO;
-		} else if (value != [(PcsxrCheatTempObject*)object value]) {
+		} else if (cheatValue != [object cheatValue]) {
 			return NO;
 		} else
 			return YES;
@@ -91,12 +53,12 @@
 
 - (NSUInteger)hash
 {
-	return address ^ value;
+	return cheatAddress ^ cheatValue;
 }
 
 - (id)copyWithZone:(NSZone *)zone
 {
-	return [[[self class] allocWithZone:zone] initWithAddress:address value:value];
+	return [[[self class] allocWithZone:zone] initWithAddress:cheatAddress value:cheatValue];
 }
 
 @end
@@ -106,7 +68,7 @@
 @synthesize cheatValues;
 @synthesize enabled;
 
-- (id)initWithCheat:(Cheat *)theCheat
+- (instancetype)initWithCheat:(Cheat *)theCheat
 {
 	if (self = [super init]) {
 		self.cheatName = @(theCheat->Descr);
@@ -143,12 +105,12 @@
 	return @"CheatWindow";
 }
 
-- (id)init
+- (instancetype)init
 {
 	return self = [self initWithWindowNibName:@"CheatWindow"];
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
 	if (self = [super initWithCoder:aDecoder]) {
 		self.tempCheatCodes = [NSMutableArray array];
@@ -156,7 +118,7 @@
 	return self;
 }
 
-- (id)initWithWindow:(NSWindow *)window
+- (instancetype)initWithWindow:(NSWindow *)window
 {
 	if (self = [super initWithWindow:window]) {
 		self.tempCheatCodes = [NSMutableArray array];
@@ -225,7 +187,7 @@
 
 - (IBAction)clear:(id)sender
 {
-	self.cheats = [NSMutableArray array];
+	self.cheats = [[NSMutableArray alloc] init];
 }
 
 - (IBAction)closeCheatEdit:(id)sender
@@ -269,19 +231,6 @@
 	[manager removeItemAtURL:tmpURL error:NULL];
 }
 
-- (void)editCheatCodeSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-	if (returnCode == NSOKButton) {
-		PcsxrCheatTemp *tmpCheat = (self.cheats)[[cheatView selectedRow]];
-		if (![tmpCheat.cheatValues isEqualToArray:self.tempCheatCodes]) {
-			tmpCheat.cheatValues = self.tempCheatCodes;
-			[self setDocumentEdited:YES];
-		}
-	}
-	
-	[sheet orderOut:nil];
-}
-
 - (IBAction)editCheat:(id)sender
 {
 	if ([cheatView selectedRow] < 0) {
@@ -291,7 +240,17 @@
 	NSMutableArray *tmpArray = [(self.cheats)[[cheatView selectedRow]] cheatValues];
 	NSMutableArray *newCheats = [[NSMutableArray alloc] initWithArray:tmpArray copyItems:YES];
 	self.tempCheatCodes = newCheats;
-	[NSApp beginSheet:editCheatWindow modalForWindow:[self window] modalDelegate:self didEndSelector:@selector(editCheatCodeSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
+	[[self window] beginSheet:editCheatWindow completionHandler:^(NSModalResponse returnCode) {
+		if (returnCode == NSOKButton) {
+			PcsxrCheatTemp *tmpCheat = (self.cheats)[[cheatView selectedRow]];
+			if (![tmpCheat.cheatValues isEqualToArray:self.tempCheatCodes]) {
+				tmpCheat.cheatValues = self.tempCheatCodes;
+				[self setDocumentEdited:YES];
+			}
+		}
+		
+		[editCheatWindow orderOut:nil];
+	}];
 }
 
 - (IBAction)addCheat:(id)sender

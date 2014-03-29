@@ -4,8 +4,25 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PcsxrHexadecimalFormatter.h"
+#include "psxcommon.h"
+#include "cheat.h"
 
-@class PcsxrHexadecimalFormatter;
+@interface PcsxrCheatTempObject : NSObject <NSCopying>
+@property (readwrite) uint32_t cheatAddress;
+@property (readwrite) uint16_t cheatValue;
+
+- (instancetype)initWithAddress:(uint32_t)add value:(uint16_t)val;
+- (instancetype)initWithCheatCode:(CheatCode *)theCheat;
+@end
+
+@interface PcsxrCheatTemp : NSObject
+@property (readwrite, strong) NSMutableArray *cheatValues;
+@property (readwrite, strong) NSString *cheatName;
+@property (readwrite, getter = isEnabled) BOOL enabled;
+
+- (instancetype)initWithCheat:(Cheat *)theCheat;
+@end
 
 @interface CheatController : NSWindowController <NSWindowDelegate, NSTableViewDelegate>
 

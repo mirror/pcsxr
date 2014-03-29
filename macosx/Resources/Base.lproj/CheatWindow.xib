@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1090" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <deployment defaultVersion="1080" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CheatController">
@@ -17,7 +17,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
-        <window title="Cheats" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" wantsToBeColor="NO" visibleAtLaunch="NO" animationBehavior="default" id="1">
+        <window title="Cheats" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="153" width="698" height="357"/>
@@ -128,8 +128,8 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="78">
-                        <rect key="frame" x="611" y="13" width="73" height="32"/>
+                    <button toolTip="Clear all cheats" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="78">
+                        <rect key="frame" x="530" y="13" width="73" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Clear" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="79">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -139,41 +139,8 @@
                             <action selector="clear:" target="-2" id="109"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="129">
-                        <rect key="frame" x="302" y="13" width="77" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Edit…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="130">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="editCheat:" target="-2" id="163"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="206">
-                        <rect key="frame" x="469" y="13" width="66" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="207">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="addCheat:" target="-2" id="213"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="227">
-                        <rect key="frame" x="379" y="13" width="90" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Remove" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="228">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="removeCheats:" target="-2" id="253"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="256">
-                        <rect key="frame" x="535" y="13" width="76" height="32"/>
+                    <button toolTip="Apply Cheats" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="256">
+                        <rect key="frame" x="454" y="13" width="76" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Apply" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="257">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -183,27 +150,71 @@
                             <action selector="applyCheats:" target="-2" id="262"/>
                         </connections>
                     </button>
+                    <button toolTip="Add Cheat" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xfd-rR-U91">
+                        <rect key="frame" x="629" y="27" width="25" height="27"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="5Sw-u5-HYP"/>
+                            <constraint firstAttribute="width" constant="25" id="TzG-MJ-Gw5"/>
+                        </constraints>
+                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oPm-T9-TZo">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="addCheat:" target="-2" id="bsH-Bq-b9L"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Remove Cheat" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DBF-Fx-sqP">
+                        <rect key="frame" x="653" y="27" width="25" height="27"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="C9G-EI-fyW"/>
+                            <constraint firstAttribute="height" constant="25" id="l7b-a6-zzp"/>
+                        </constraints>
+                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7QM-jz-tbx">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="removeCheats:" target="-2" id="are-w2-Cx9"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Edit Cheat" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ORW-Vw-Xqo">
+                        <rect key="frame" x="605" y="27" width="25" height="27"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="e0J-6O-4Ih"/>
+                            <constraint firstAttribute="height" constant="25" id="pQO-S9-udY"/>
+                        </constraints>
+                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSActionTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iOw-6s-6s3">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="editCheat:" target="-2" id="8bd-ja-6Gx"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="6" firstAttribute="baseline" secondItem="4" secondAttribute="baseline" id="115"/>
-                    <constraint firstAttribute="trailing" secondItem="23" secondAttribute="trailing" constant="20" symbolic="YES" id="116"/>
-                    <constraint firstItem="23" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" symbolic="YES" id="118"/>
-                    <constraint firstItem="6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" symbolic="YES" id="121"/>
-                    <constraint firstAttribute="bottom" secondItem="6" secondAttribute="bottom" constant="20" symbolic="YES" id="122"/>
-                    <constraint firstItem="23" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" symbolic="YES" id="124"/>
-                    <constraint firstItem="4" firstAttribute="leading" secondItem="6" secondAttribute="trailing" constant="12" symbolic="YES" id="125"/>
-                    <constraint firstAttribute="trailing" secondItem="78" secondAttribute="trailing" constant="20" symbolic="YES" id="128"/>
-                    <constraint firstItem="129" firstAttribute="baseline" secondItem="4" secondAttribute="baseline" id="131"/>
-                    <constraint firstItem="206" firstAttribute="baseline" secondItem="129" secondAttribute="baseline" id="208"/>
-                    <constraint firstItem="227" firstAttribute="baseline" secondItem="206" secondAttribute="baseline" id="229"/>
-                    <constraint firstItem="256" firstAttribute="baseline" secondItem="227" secondAttribute="baseline" id="258"/>
-                    <constraint firstItem="78" firstAttribute="leading" secondItem="256" secondAttribute="trailing" constant="12" symbolic="YES" id="259"/>
-                    <constraint firstItem="256" firstAttribute="baseline" secondItem="78" secondAttribute="baseline" id="260"/>
-                    <constraint firstItem="256" firstAttribute="top" secondItem="23" secondAttribute="bottom" constant="20" symbolic="YES" id="I40-Zw-qK6"/>
-                    <constraint firstItem="227" firstAttribute="leading" secondItem="129" secondAttribute="trailing" constant="12" symbolic="YES" id="KeM-eV-qI0"/>
-                    <constraint firstItem="256" firstAttribute="leading" secondItem="206" secondAttribute="trailing" constant="12" symbolic="YES" id="Uxw-1R-7YH"/>
-                    <constraint firstItem="129" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4" secondAttribute="trailing" constant="40" id="WWq-7H-UP0"/>
-                    <constraint firstItem="206" firstAttribute="leading" secondItem="227" secondAttribute="trailing" constant="12" symbolic="YES" id="xlv-fw-Maa"/>
+                    <constraint firstItem="78" firstAttribute="baseline" secondItem="4" secondAttribute="baseline" id="82n-9F-8bg"/>
+                    <constraint firstItem="4" firstAttribute="leading" secondItem="6" secondAttribute="trailing" constant="12" symbolic="YES" id="9lp-BB-TZI"/>
+                    <constraint firstItem="6" firstAttribute="top" secondItem="23" secondAttribute="bottom" constant="20" symbolic="YES" id="E2i-TS-P4E"/>
+                    <constraint firstAttribute="trailing" secondItem="23" secondAttribute="trailing" constant="20" symbolic="YES" id="EiP-6U-3B3"/>
+                    <constraint firstItem="xfd-rR-U91" firstAttribute="leading" secondItem="ORW-Vw-Xqo" secondAttribute="trailing" constant="-1" id="GvR-cn-We8"/>
+                    <constraint firstItem="23" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" symbolic="YES" id="JRi-3E-R7a"/>
+                    <constraint firstItem="DBF-Fx-sqP" firstAttribute="leading" secondItem="xfd-rR-U91" secondAttribute="trailing" constant="-1" id="Liv-0d-lNG"/>
+                    <constraint firstItem="DBF-Fx-sqP" firstAttribute="baseline" secondItem="ORW-Vw-Xqo" secondAttribute="baseline" id="O2e-SZ-KXh"/>
+                    <constraint firstItem="6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" symbolic="YES" id="U1b-J8-Mn7"/>
+                    <constraint firstItem="23" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" symbolic="YES" id="Uzz-Lw-v8y"/>
+                    <constraint firstItem="DBF-Fx-sqP" firstAttribute="baseline" secondItem="xfd-rR-U91" secondAttribute="baseline" id="fPo-Kl-XqG"/>
+                    <constraint firstItem="ORW-Vw-Xqo" firstAttribute="leading" secondItem="78" secondAttribute="trailing" constant="8" symbolic="YES" id="g3Z-Wu-0w1"/>
+                    <constraint firstItem="DBF-Fx-sqP" firstAttribute="top" secondItem="23" secondAttribute="bottom" constant="8" symbolic="YES" id="gcQ-KX-9BU"/>
+                    <constraint firstAttribute="bottom" secondItem="6" secondAttribute="bottom" constant="20" symbolic="YES" id="lF8-2f-uaL"/>
+                    <constraint firstItem="78" firstAttribute="leading" secondItem="256" secondAttribute="trailing" constant="12" symbolic="YES" id="pZV-X6-uam"/>
+                    <constraint firstItem="78" firstAttribute="baseline" secondItem="256" secondAttribute="baseline" id="r4R-02-9tu"/>
+                    <constraint firstItem="4" firstAttribute="baseline" secondItem="6" secondAttribute="baseline" id="rAO-NL-fo9"/>
+                    <constraint firstAttribute="trailing" secondItem="DBF-Fx-sqP" secondAttribute="trailing" constant="20" symbolic="YES" id="xvQ-3b-NaW"/>
                 </constraints>
             </view>
             <connections>
@@ -247,7 +258,7 @@
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <connections>
-                                                <binding destination="219" name="value" keyPath="arrangedObjects.addressNS" id="244"/>
+                                                <binding destination="219" name="value" keyPath="arrangedObjects.cheatAddress" id="aeS-gI-Rzd"/>
                                             </connections>
                                         </tableColumn>
                                         <tableColumn identifier="Value" width="144" minWidth="40" maxWidth="1000" id="142">
@@ -264,7 +275,7 @@
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <connections>
-                                                <binding destination="219" name="value" keyPath="arrangedObjects.valueNS" id="245"/>
+                                                <binding destination="219" name="value" keyPath="arrangedObjects.cheatValue" id="k6k-fN-x0Z"/>
                                             </connections>
                                         </tableColumn>
                                     </tableColumns>
@@ -321,7 +332,7 @@ Gw
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="199"/>
-                            <constraint firstAttribute="width" constant="25" id="233"/>
+                            <constraint firstAttribute="width" constant="25" id="55i-4W-DPp"/>
                         </constraints>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="176">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -335,7 +346,7 @@ Gw
                         <rect key="frame" x="44" y="20" width="25" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="25" id="235"/>
+                            <constraint firstAttribute="width" constant="25" id="hHo-S2-lBN"/>
                         </constraints>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="180">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -359,9 +370,7 @@ Gw
                     <constraint firstItem="175" firstAttribute="bottom" secondItem="156" secondAttribute="bottom" id="BiT-cB-72z"/>
                     <constraint firstItem="179" firstAttribute="top" secondItem="136" secondAttribute="bottom" constant="8" symbolic="YES" id="Ehy-91-5kl"/>
                     <constraint firstItem="152" firstAttribute="baseline" secondItem="156" secondAttribute="baseline" id="G4C-ss-lMH"/>
-                    <constraint firstItem="175" firstAttribute="height" secondItem="179" secondAttribute="height" id="cDU-nE-cHi"/>
                     <constraint firstItem="175" firstAttribute="bottom" secondItem="179" secondAttribute="bottom" id="dA3-Bb-69x"/>
-                    <constraint firstItem="175" firstAttribute="width" secondItem="179" secondAttribute="width" id="krz-I3-Qzw"/>
                 </constraints>
             </view>
         </window>
@@ -377,6 +386,7 @@ Gw
         </arrayController>
     </objects>
     <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="8" height="8"/>
         <image name="NSRemoveTemplate" width="8" height="8"/>
     </resources>

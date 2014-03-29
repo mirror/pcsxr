@@ -9,19 +9,18 @@
 #import "PcsxrHexadecimalFormatter.h"
 
 @interface PcsxrHexadecimalFormatter ()
-@property (readwrite, retain) NSString *hexFormatString;
-
+@property (strong) NSString *hexFormatString;
 @end
 
 @implementation PcsxrHexadecimalFormatter
 @synthesize hexPadding;
+@synthesize hexFormatString;
+
 - (void)setHexPadding:(char)_hexPadding
 {
 	hexPadding = _hexPadding;
 	self.hexFormatString = [NSString stringWithFormat:@"0x%%0%ilx", hexPadding];
 }
-
-@synthesize hexFormatString;
 
 - (id)init
 {
@@ -64,18 +63,25 @@
 - (BOOL)getObjectValue:(out id *)obj forString:(NSString *)string errorDescription:(out NSString **)error
 {
 	NSString *tmpstr = nil;
-	if ([string hasPrefix:@"0x"]) {
-		NSRange zeroXRange = [string rangeOfString:@"0x"];
-		tmpstr = [string stringByReplacingCharactersInRange:zeroXRange withString:@""];
-	}else {
-		tmpstr = string;
-	}
-	long tmpNum = 0;
-	if (sscanf([tmpstr UTF8String], "%lx", &tmpNum) == 1) {
+	unsigned int tmpNum;
+	NSScanner *theScan = [[NSScanner alloc] initWithString:string];
+	if ([theScan scanHexInt:&tmpNum]) {
 		*obj = @(tmpNum);
 		return YES;
 	} else {
-		return NO;
+		if ([string hasPrefix:@"0x"]) {
+			NSRange zeroXRange = [string rangeOfString:@"0x"];
+			tmpstr = [string stringByReplacingCharactersInRange:zeroXRange withString:@""];
+		}else {
+			tmpstr = string;
+		}
+		long tmpNum = 0;
+		if (sscanf([tmpstr UTF8String], "%lx", &tmpNum) == 1) {
+			*obj = @(tmpNum);
+			return YES;
+		} else {
+			return NO;
+		}
 	}
 }
 
