@@ -246,7 +246,7 @@ static void PaintPicDot(unsigned char * p,unsigned char c)
  /////////////////////////////////////////////////////////////////////
  // generic number/border painter
 
-static void DrawNumBorPic(unsigned char *pMem, int lSelectedSlot)
+static inline void DrawNumBorPic(unsigned char *pMem, int lSelectedSlot)
 {
  unsigned char *pf;
  int x,y;
@@ -293,7 +293,7 @@ static void DrawNumBorPic(unsigned char *pMem, int lSelectedSlot)
 
 /* GIMP RGB C-Source image dump (NoPic.h) */
 
-static struct {
+static const struct {
   unsigned int 	 width;
   unsigned int 	 height;
   unsigned int 	 bytes_per_pixel; /* 3:RGB, 4:RGBA */ 
