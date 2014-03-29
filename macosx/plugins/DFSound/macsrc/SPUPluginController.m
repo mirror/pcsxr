@@ -8,6 +8,7 @@
 
 #import "SPUPluginController.h"
 
+#ifdef DEBUG
 static inline Class GetSPUBaseClass()
 {
 	static Class spuBaseClass;
@@ -16,6 +17,7 @@ static inline Class GetSPUBaseClass()
 	}
 	return spuBaseClass;
 }
+#endif
 
 static void FuncNotAvailable(id sel, id sender, SEL theCmd)
 {
