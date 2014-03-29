@@ -234,7 +234,7 @@ static unsigned char const cFont[10][120]=
 
 ////////////////////////////////////////////////////////////////////////
 
-static void PaintPicDot(unsigned char * p,unsigned char c)
+static inline void PaintPicDot(unsigned char * p,unsigned char c)
 {
 
  if(c==0) {*p++=0x00;*p++=0x00;*p=0x00;return;}        // black
