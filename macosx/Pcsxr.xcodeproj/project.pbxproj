@@ -460,7 +460,6 @@
 		551A74BF17868BEA0052D185 /* cfg.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cfg.c; sourceTree = "<group>"; };
 		551A74C017868BEA0052D185 /* PluginConfigController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PluginConfigController.h; sourceTree = "<group>"; };
 		551A74C117868BEA0052D185 /* PluginConfigController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PluginConfigController.m; sourceTree = "<group>"; };
-		551A74C217868BEA0052D185 /* version.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		551A750A17868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		551A750E17868BEB0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		551A751017868BEB0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -622,9 +621,6 @@
 		551A766B1786901F0052D185 /* pad.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pad.c; sourceTree = "<group>"; };
 		551A766C1786901F0052D185 /* pad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = pad.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		551A766D1786901F0052D185 /* sdljoy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sdljoy.c; sourceTree = "<group>"; };
-		551A766E1786901F0052D185 /* util.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = util.c; sourceTree = "<group>"; };
-		551A766F1786901F0052D185 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
-		551A76701786901F0052D185 /* xkb.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = xkb.c; sourceTree = "<group>"; };
 		551A767A178690500052D185 /* DFCdrom.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DFCdrom.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		551A7684178691170052D185 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		551A768E1786919F0052D185 /* DFInput.psxplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DFInput.psxplugin; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -677,6 +673,7 @@
 		553FED0618DF5B0200C7B007 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PCSXR.strings; sourceTree = "<group>"; };
 		553FED0718DF5B0500C7B007 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/PCSXR.strings; sourceTree = "<group>"; };
 		554572F217CBC69600FB7D19 /* SPUShared-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SPUShared-info.plist"; sourceTree = "<group>"; };
+		554B391418EB4C66000ADF68 /* DFInput.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; name = DFInput.exp; path = Resources/DFInput.exp; sourceTree = "<group>"; };
 		554FD70817C6A13E0056CF66 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = /Library/Frameworks/SDL2.framework; sourceTree = "<absolute>"; };
 		5550D2711683C923006C56B5 /* RecentItemsMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecentItemsMenu.h; sourceTree = "<group>"; };
 		5550D2721683C923006C56B5 /* RecentItemsMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecentItemsMenu.m; sourceTree = "<group>"; usesTabs = 1; };
@@ -1410,7 +1407,6 @@
 				551A74B817868BEA0052D185 /* InfoPlist.strings */,
 				551A74BA17868BEA0052D185 /* Localizable.strings */,
 				551A74BC17868BEA0052D185 /* Info.plist */,
-				551A74C217868BEA0052D185 /* version.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1594,9 +1590,6 @@
 				551A766B1786901F0052D185 /* pad.c */,
 				551A766C1786901F0052D185 /* pad.h */,
 				551A766D1786901F0052D185 /* sdljoy.c */,
-				551A766E1786901F0052D185 /* util.c */,
-				551A766F1786901F0052D185 /* util.h */,
-				551A76701786901F0052D185 /* xkb.c */,
 			);
 			name = src;
 			path = ../../../plugins/dfinput;
@@ -1605,6 +1598,7 @@
 		551A7671178690280052D185 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				554B391418EB4C66000ADF68 /* DFInput.exp */,
 				551A751D17868BEB0052D185 /* Credits.rtf */,
 				551A751F17868BEB0052D185 /* InfoPlist.strings */,
 				551A752117868BEB0052D185 /* Localizable.strings */,
@@ -3019,6 +3013,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFInput/Resources/DFInput.exp;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -3042,6 +3037,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFInput/Resources/DFInput.exp;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3473,6 +3469,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFInput/Resources/DFInput.exp;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
