@@ -802,7 +802,6 @@
 		7161C2970FDED75300225F97 /* ExtendedKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedKeys.h; sourceTree = "<group>"; };
 		7192F428129C412E0042D946 /* gpu.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = gpu.c; sourceTree = "<group>"; };
 		7192F429129C412E0042D946 /* gpu.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = gpu.h; sourceTree = "<group>"; };
-		719594AF11AEFE8C004AD686 /* gte_divider.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = gte_divider.h; sourceTree = "<group>"; };
 		719594B011AEFE8C004AD686 /* psxcommon.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = psxcommon.c; sourceTree = "<group>"; };
 		71F4C5600FDED12800529849 /* cdriso.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 2; path = cdriso.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		71F4C5610FDED12800529849 /* cdriso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cdriso.h; sourceTree = "<group>"; };
@@ -1083,7 +1082,6 @@
 				7192F429129C412E0042D946 /* gpu.h */,
 				71F4C56B0FDED12800529849 /* gte.c */,
 				71F4C56C0FDED12800529849 /* gte.h */,
-				719594AF11AEFE8C004AD686 /* gte_divider.h */,
 				71F4C56D0FDED12800529849 /* mdec.c */,
 				71F4C56E0FDED12800529849 /* mdec.h */,
 				71F4C56F0FDED12800529849 /* misc.c */,
