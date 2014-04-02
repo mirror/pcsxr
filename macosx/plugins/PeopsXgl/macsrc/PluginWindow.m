@@ -42,22 +42,6 @@
 	[super sendEvent:theEvent];
 }
 
-- (id) initWithContentRect: (NSRect) contentRect
-                 styleMask: (NSUInteger) aStyle
-                   backing: (NSBackingStoreType) bufferingType
-                     defer: (BOOL) flag
-{
-    if (self = [super initWithContentRect: contentRect
-                                styleMask: NSBorderlessWindowMask
-                                  backing: bufferingType
-                                    defer: flag])
-    {
-    return self;
-    }
-
-    return nil;
-}
-
 - (void) windowDidResize:(NSNotification*)notice
 {
 }
@@ -116,7 +100,6 @@
 
 }
 
- 
 
 /*
 

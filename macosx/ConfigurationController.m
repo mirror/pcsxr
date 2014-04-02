@@ -78,7 +78,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	}
 }
 
-+ (void)mcdChangeClicked:(id)sender
+- (IBAction)mcdChangeClicked:(id)sender
 {
 	NSInteger tag = [sender tag];
 	char *mcd;
@@ -91,21 +91,21 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 		mcd = Config.Mcd2;
 	}
 	
-	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler supportedUTIs]];
-	
 	path = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:mcd length:strlen(mcd)];
-    
+	
+	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler supportedUTIs]];
     [openDlg setDirectoryURL:[NSURL fileURLWithPath:[path stringByDeletingLastPathComponent] isDirectory:YES]];
     [openDlg setNameFieldStringValue:[path lastPathComponent]];
-	
-	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
-		NSURL *mcdURL = [openDlg URLs][0];
-        
-		[ConfigurationController setMemoryCard:tag toURL:mcdURL];
-    }
+	[openDlg beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
+		if (result == NSFileHandlingPanelOKButton) {
+			NSURL *mcdURL = [openDlg URLs][0];
+			
+			[ConfigurationController setMemoryCard:tag toURL:mcdURL];
+		}
+	}];
 }
 
-+ (void)mcdNewClicked:(id)sender
+- (IBAction)mcdNewClicked:(id)sender
 {
 	NSInteger tag = [sender tag];
 	char *mcd;
@@ -124,15 +124,24 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
     [openDlg setNameFieldStringValue:NSLocalizedString(@"New Memory Card.mcd", nil)];
 	[openDlg setAllowedFileTypes:[PcsxrMemCardHandler supportedUTIs]];
     
-	if ([openDlg runModal] == NSFileHandlingPanelOKButton) {
-        NSURL *mcdURL = [openDlg URL];
-		
-		//Workaround/kludge to make sure we create a memory card before posting a notification
-		strlcpy(mcd, [[mcdURL path] fileSystemRepresentation], MAXPATHLEN);
-		CreateMcd(mcd);
-		
-		[ConfigurationController setMemoryCard:tag toURL:mcdURL];
-    }
+	[openDlg beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
+		if (result == NSFileHandlingPanelOKButton) {
+			NSURL *mcdURL = [openDlg URL];
+			const char *fileSysRep;
+			
+			if ([mcdURL respondsToSelector:@selector(fileSystemRepresentation)]) {
+				fileSysRep = [mcdURL fileSystemRepresentation];
+			} else {
+				fileSysRep = [[mcdURL path] fileSystemRepresentation];
+			}
+			
+			//Workaround/kludge to make sure we create a memory card before posting a notification
+			strlcpy(mcd, fileSysRep, MAXPATHLEN);
+			CreateMcd(mcd);
+			
+			[ConfigurationController setMemoryCard:tag toURL:mcdURL];
+		}
+	}];
 }
 
 - (IBAction)setVideoType:(id)sender
@@ -160,6 +169,16 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	}
 }
 
+- (void)windowWillClose:(NSNotification *)notification
+{
+	[memCardEdit stopMemoryAnimation];
+}
+
+- (void)windowDidBecomeMain:(NSNotification *)notification
+{
+	[memCardEdit beginMemoryAnimation];
+}
+
 - (void)awakeFromNib
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -170,21 +189,36 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	self.checkBoxDefaults = [[NSMutableDictionary alloc] init];
 
 	// check that the outlets are active before adding them
-	if (noXaAudioCell) _checkBoxDefaults[@"NoXaAudio"] = noXaAudioCell;
-	if (enableNetPlayCell) _checkBoxDefaults[@"NetPlay"] = enableNetPlayCell;
-	if (sioIrqAlwaysCell) _checkBoxDefaults[@"SioIrqAlways"] = sioIrqAlwaysCell;
-	if (bwMdecCell) _checkBoxDefaults[@"BlackAndWhiteMDECVideo"] = bwMdecCell;
-	if (autoVTypeCell) _checkBoxDefaults[@"AutoDetectVideoType"] = autoVTypeCell;
-	if (vTypePALCell) _checkBoxDefaults[@"VideoTypePAL"] = vTypePALCell;
-	if (noCDAudioCell) _checkBoxDefaults[@"NoCDAudio"] = noCDAudioCell;
-	if (usesHleCell) _checkBoxDefaults[@"UseHLE"] = usesHleCell;
-	if (usesDynarecCell) _checkBoxDefaults[@"NoDynarec"] = usesDynarecCell;
-	if (consoleOutputCell) _checkBoxDefaults[@"ConsoleOutput"] = consoleOutputCell;
-	if (spuIrqAlwaysCell) _checkBoxDefaults[@"SpuIrqAlways"] = spuIrqAlwaysCell;
-	if (rCountFixCell) _checkBoxDefaults[@"RootCounterFix"] = rCountFixCell;
-	if (vSyncWAFixCell) _checkBoxDefaults[@"VideoSyncWAFix"] = vSyncWAFixCell;
-	if (noFastBootCell) _checkBoxDefaults[@"NoFastBoot"] = noFastBootCell;
-	if (widescreen) _checkBoxDefaults[@"Widescreen"] = widescreen;
+	if (noXaAudioCell)
+		_checkBoxDefaults[@"NoXaAudio"] = noXaAudioCell;
+	if (enableNetPlayCell)
+		_checkBoxDefaults[@"NetPlay"] = enableNetPlayCell;
+	if (sioIrqAlwaysCell)
+		_checkBoxDefaults[@"SioIrqAlways"] = sioIrqAlwaysCell;
+	if (bwMdecCell)
+		_checkBoxDefaults[@"BlackAndWhiteMDECVideo"] = bwMdecCell;
+	if (autoVTypeCell)
+		_checkBoxDefaults[@"AutoDetectVideoType"] = autoVTypeCell;
+	if (vTypePALCell)
+		_checkBoxDefaults[@"VideoTypePAL"] = vTypePALCell;
+	if (noCDAudioCell)
+		_checkBoxDefaults[@"NoCDAudio"] = noCDAudioCell;
+	if (usesHleCell)
+		_checkBoxDefaults[@"UseHLE"] = usesHleCell;
+	if (usesDynarecCell)
+		_checkBoxDefaults[@"NoDynarec"] = usesDynarecCell;
+	if (consoleOutputCell)
+		_checkBoxDefaults[@"ConsoleOutput"] = consoleOutputCell;
+	if (spuIrqAlwaysCell)
+		_checkBoxDefaults[@"SpuIrqAlways"] = spuIrqAlwaysCell;
+	if (rCountFixCell)
+		_checkBoxDefaults[@"RootCounterFix"] = rCountFixCell;
+	if (vSyncWAFixCell)
+		_checkBoxDefaults[@"VideoSyncWAFix"] = vSyncWAFixCell;
+	if (noFastBootCell)
+		_checkBoxDefaults[@"NoFastBoot"] = noFastBootCell;
+	if (widescreen)
+		_checkBoxDefaults[@"Widescreen"] = widescreen;
 
 	// make the visuals match the defaults
 	

@@ -15,9 +15,19 @@
 
 - (void)deleteMemoryBlocksAtIndex:(int)slotnum;
 - (void)compactMemory;
-//Blocks that are free
+
+/**
+ * @fn			freeBlocks
+ * @abstract	Blocks that are free from any data
+ * @result		free blocks
+ */
 - (int)freeBlocks;
-//Blocks that have been deleted and are free
+
+/**
+ * @fn			availableBlocks
+ * @abstract	Blocks that have been deleted
+ * @result		free blocks
+ */
 - (int)availableBlocks;
 - (int)memorySizeAtIndex:(int)idx;
 - (BOOL)moveBlockAtIndex:(int)idx toMemoryCard:(PcsxrMemCardArray*)otherCard;

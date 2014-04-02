@@ -44,7 +44,7 @@ static inline char* BlankHeader()
 		toReturn->nextBlock = 0xFFFF;
 		unsigned char *bytePtr = (unsigned char*)toReturn;
 		for (int i = 0; i < sizeof(struct PSXMemHeader) - sizeof(unsigned char); i++) {
-			toReturn->checksum = toReturn->checksum ^ bytePtr[i];
+			toReturn->checksum ^= bytePtr[i];
 		}
 	}
 	
@@ -127,7 +127,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 			}
 			i += x;
 		}
-		self.rawArray = [NSArray arrayWithArray:tmpMemArray];
+		self.rawArray = [[NSArray alloc] initWithArray:tmpMemArray];
 	}
 	return self;
 }
@@ -210,7 +210,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 
 - (int)freeBlocks
 {
-	int memSize = 15;
+	int memSize = MAX_MEMCARD_BLOCKS;
 	for (PcsxrMemoryObject *memObj in rawArray) {
 		memSize -= memObj.blockSize;
 	}
@@ -234,7 +234,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	
 	if (freeSize) {
 		McdBlock theBlock;
-		//Create a blank "block" that will be used for
+		//Create a blank "block" that will be used to show the amount of free blocks
 		theBlock.Flags = 0xA0;
 		theBlock.IconCount = 0;
 		PcsxrMemoryObject *freeObj = [[PcsxrMemoryObject alloc] initWithMcdBlock:&theBlock startingIndex:MAX_MEMCARD_BLOCKS - 1 - freeSize size:freeSize];
@@ -256,7 +256,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 {
 	if (idx == [rawArray count]) {
 #ifdef DEBUG
-		NSLog(@"Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"count\" the free blocks.");
+		NSLog(@"Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"count\" the free blocks?");
 #endif
 		return [self freeBlocks];
 	}
@@ -313,7 +313,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	
 	if (slotnum == [rawArray count]) {
 #ifdef DEBUG
-		NSLog(@"Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"delete\" the free blocks.");
+		NSLog(@"Trying to get an object one more than the length of the raw array. Perhaps you were trying to \"delete\" the free blocks?");
 #endif
 		return;
 	}

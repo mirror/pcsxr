@@ -25,6 +25,20 @@
 @synthesize memCard1Array;
 @synthesize memCard2Array;
 
+- (void)stopMemoryAnimation
+{
+	[self.imageAnimateTimer invalidate];
+	self.imageAnimateTimer = nil;
+}
+
+- (void)beginMemoryAnimation
+{
+	if (!_imageAnimateTimer) {
+		self.imageAnimateTimer = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:0.30 target:self selector:@selector(animateMemCards:) userInfo:nil repeats:YES];
+		[[NSRunLoop mainRunLoop] addTimer:self.imageAnimateTimer forMode:NSRunLoopCommonModes];
+	}
+}
+
 - (void)setupValues:(int)theCards
 {
 	NSParameterAssert(theCards < 4 && theCards > 0);
@@ -84,8 +98,7 @@
     
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(memoryCardDidChangeNotification:) name:memChangeNotifier object:nil];
 
-	self.imageAnimateTimer = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:3.0/10.0 target:self selector:@selector(animateMemCards:) userInfo:nil repeats:YES];
-	[[NSRunLoop mainRunLoop] addTimer:self.imageAnimateTimer forMode:NSRunLoopCommonModes];
+	[self beginMemoryAnimation];
 }
 
 - (void)animateMemCards:(NSTimer*)theTimer
@@ -214,16 +227,6 @@
 		}
 		[self loadMemoryCardInfoForCard:(int)memCardSelect];
 	}
-}
-
-- (IBAction)changeMemCard:(id)sender
-{
-	[ConfigurationController mcdChangeClicked:sender];
-}
-
-- (IBAction)newMemCard:(id)sender
-{
-	[ConfigurationController mcdNewClicked:sender];
 }
 
 - (void)dealloc

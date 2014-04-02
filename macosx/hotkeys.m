@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <AppKit/AppKit.h>
 #import "hotkeys.h"
 #import "EmuThread.h"
 #include "plugins.h"

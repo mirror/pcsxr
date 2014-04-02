@@ -6,13 +6,8 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import <Cocoa/Cocoa.h>
 #import "PcsxrMemoryObject.h"
-#import <Foundation/NSString.h>
-#import <Foundation/NSArray.h>
-#import <AppKit/NSColor.h>
-#import <AppKit/NSImage.h>
-#import <AppKit/NSBezierPath.h>
-#import <AppKit/NSAttributedString.h>
 
 NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 
@@ -225,7 +220,7 @@ static NSString *MemLabelEndLink;
 	return [PcsxrMemoryObject memoryLabelFromFlag:flagNameIndex];
 }
 
-NS_INLINE void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtclr)
+static inline void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtclr)
 {
 	NSRange wholeStrRange = NSMakeRange(0, mutStr.string.length);
 	[mutStr addAttribute:NSFontAttributeName value:[NSFont userFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]] range:wholeStrRange];

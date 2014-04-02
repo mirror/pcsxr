@@ -10,7 +10,7 @@ extern NSString *const memCardChangeNumberKey;
 
 @class PcsxrMemCardController;
 
-@interface ConfigurationController : NSWindowController
+@interface ConfigurationController : NSWindowController <NSWindowDelegate, NSTabViewDelegate>
 {
 	IBOutlet PluginController *cdromPlugin;
 	IBOutlet PluginController *graphicsPlugin;
@@ -49,8 +49,8 @@ extern NSString *const memCardChangeNumberKey;
 + (void)setMemoryCard:(NSInteger)theCard toPath:(NSString *)theFile;
 + (void)setMemoryCard:(NSInteger)theCard toURL:(NSURL *)theURL;
 
-+ (void)mcdNewClicked:(id)sender;
-+ (void)mcdChangeClicked:(id)sender;
+- (IBAction)mcdNewClicked:(id)sender;
+- (IBAction)mcdChangeClicked:(id)sender;
 
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 

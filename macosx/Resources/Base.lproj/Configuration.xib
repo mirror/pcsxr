@@ -292,7 +292,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="262">
-                                                        <rect key="frame" x="76.000000543188094" y="7" width="90" height="28"/>
+                                                        <rect key="frame" x="76" y="7" width="90" height="28"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                                         <buttonCell key="cell" type="push" title="Configure…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="600">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -314,7 +314,7 @@
                                                         </connections>
                                                     </button>
                                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="368">
-                                                        <rect key="frame" x="11" y="36" width="153.00000054318809" height="26"/>
+                                                        <rect key="frame" x="11" y="36" width="153" height="26"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                         <popUpButtonCell key="cell" type="push" title="Graphics Plugin" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingMiddle" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="370" id="601">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -356,7 +356,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="292">
-                                                        <rect key="frame" x="76.000000242143869" y="7" width="90" height="28"/>
+                                                        <rect key="frame" x="76" y="7" width="90" height="28"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                                         <buttonCell key="cell" type="push" title="Configure…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="603">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -378,7 +378,7 @@
                                                         </connections>
                                                     </button>
                                                     <popUpButton verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="371">
-                                                        <rect key="frame" x="11" y="36" width="153.00000024214387" height="26"/>
+                                                        <rect key="frame" x="11" y="36" width="153" height="26"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                         <popUpButtonCell key="cell" type="push" title="Sound Plugin" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingMiddle" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="373" id="604">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -421,7 +421,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="301">
-                                                        <rect key="frame" x="76.000000242143869" y="7" width="90" height="28"/>
+                                                        <rect key="frame" x="76" y="7" width="90" height="28"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                                         <buttonCell key="cell" type="push" title="Configure…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="605">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -443,7 +443,7 @@
                                                         </connections>
                                                     </button>
                                                     <popUpButton verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="374">
-                                                        <rect key="frame" x="11" y="36" width="153.00000024214387" height="26"/>
+                                                        <rect key="frame" x="11" y="36" width="153" height="26"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                         <popUpButtonCell key="cell" type="push" title="Controller Plugin" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingMiddle" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="376" id="607">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -486,7 +486,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="297">
-                                                        <rect key="frame" x="76.000000242143869" y="7" width="90" height="28"/>
+                                                        <rect key="frame" x="76" y="7" width="90" height="28"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                                         <buttonCell key="cell" type="push" title="Configure…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="609">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -508,7 +508,7 @@
                                                         </connections>
                                                     </button>
                                                     <popUpButton verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="377">
-                                                        <rect key="frame" x="11" y="36" width="153.00000024214387" height="26"/>
+                                                        <rect key="frame" x="11" y="36" width="153" height="26"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                         <popUpButtonCell key="cell" type="push" title="CDROM Plugin" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingMiddle" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="379" id="610">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -550,7 +550,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="625">
-                                                        <rect key="frame" x="76.000000242143869" y="7" width="90" height="28"/>
+                                                        <rect key="frame" x="76" y="7" width="90" height="28"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                                         <buttonCell key="cell" type="push" title="Configure…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="626">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -572,7 +572,7 @@
                                                         </connections>
                                                     </button>
                                                     <popUpButton verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="623">
-                                                        <rect key="frame" x="11" y="36" width="153.00000024214387" height="26"/>
+                                                        <rect key="frame" x="11" y="36" width="153" height="26"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                         <popUpButtonCell key="cell" type="push" title="Net Plugin" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingMiddle" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="630" id="628">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -614,7 +614,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="903">
-                                                        <rect key="frame" x="76.000000242143869" y="7" width="90" height="28"/>
+                                                        <rect key="frame" x="76" y="7" width="90" height="28"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                                         <buttonCell key="cell" type="push" title="Configure…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="910">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -636,7 +636,7 @@
                                                         </connections>
                                                     </button>
                                                     <popUpButton verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="905">
-                                                        <rect key="frame" x="11" y="36" width="153.00000024214387" height="26"/>
+                                                        <rect key="frame" x="11" y="36" width="153" height="26"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                         <popUpButtonCell key="cell" type="push" title="Net Plugin" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingMiddle" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="908" id="906">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -840,7 +840,7 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="newMemCard:" target="955" id="1011"/>
+                                                <action selector="mcdNewClicked:" target="-2" id="XdX-Ob-zgs"/>
                                             </connections>
                                         </button>
                                         <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="931">
@@ -851,7 +851,7 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="changeMemCard:" target="955" id="1005"/>
+                                                <action selector="mcdChangeClicked:" target="-2" id="dNz-eu-YMu"/>
                                             </connections>
                                         </button>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="932">
@@ -871,7 +871,7 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="newMemCard:" target="955" id="1010"/>
+                                                <action selector="mcdNewClicked:" target="-2" id="2fL-p3-QJe"/>
                                             </connections>
                                         </button>
                                         <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="934">
@@ -882,7 +882,7 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="changeMemCard:" target="955" id="1012"/>
+                                                <action selector="mcdChangeClicked:" target="-2" id="3id-0Y-3BS"/>
                                             </connections>
                                         </button>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="935">

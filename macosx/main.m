@@ -114,7 +114,7 @@ int SysInit()
 		if (![logFolderURL checkResourceIsReachableAndReturnError:NULL])
 			[manager createDirectoryAtPath:[logFolderURL path] withIntermediateDirectories:YES attributes:nil error:NULL];
 		//We use the log extension so that OS X's console app can open it by default.
-		NSURL *logFileURL = [logFolderURL URLByAppendingPathComponent:@"emuLog.log"];
+		NSURL *logFileURL = [logFolderURL URLByAppendingPathComponent:@"PCSX-R emuLog.log"];
 		
 		emuLog = fopen([[logFileURL path] fileSystemRepresentation], "wb");
 #else
@@ -154,8 +154,8 @@ void SysReset()
 static void AddStringToLogList(NSString *themsg)
 {
 	static NSMutableString *theStr;
-	NSRange newlineRange, fullLineRange;
 	static dispatch_once_t onceToken;
+	NSRange newlineRange, fullLineRange;
 	dispatch_once(&onceToken, ^{
 		theStr = [[NSMutableString alloc] init];
 	});

@@ -6,13 +6,8 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/NSObject.h>
+#import <Cocoa/Cocoa.h>
 #include "sio.h"
-
-@class NSImage;
-@class NSString;
-@class NSArray;
-@class NSAttributedString;
 
 extern NSString *const memoryAnimateTimerKey;
 

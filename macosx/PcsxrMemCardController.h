@@ -22,7 +22,9 @@
 - (IBAction)moveBlock:(id)sender;
 - (IBAction)formatCard:(id)sender;
 - (IBAction)deleteMemoryObject:(id)sender;
-- (IBAction)newMemCard:(id)sender;
-- (IBAction)changeMemCard:(id)sender;
 - (void)loadMemoryCardInfoForCard:(int)theCard;
+
+- (void)beginMemoryAnimation;
+- (void)stopMemoryAnimation;
+
 @end

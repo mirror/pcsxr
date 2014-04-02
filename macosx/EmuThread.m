@@ -7,7 +7,7 @@
 //
 
 #import <ExceptionHandling/NSExceptionHandler.h>
-#import <AppKit/NSApplication.h>
+#import <Cocoa/Cocoa.h>
 #include <pthread.h>
 #include <setjmp.h>
 #import "EmuThread.h"
