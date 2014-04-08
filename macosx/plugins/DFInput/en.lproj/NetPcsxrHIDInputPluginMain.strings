@@ -46,3 +46,9 @@
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "262"; */
 "262.title" = "Cancel";
+
+/* Class = "NSButtonCell"; title = "Use Game Controller API"; ObjectID = "XyD-IN-gbq"; */
+"XyD-IN-gbq.title" = "Use Game Controller API";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Uses the SDL2 Game Controller API to automatically map buttons"; ObjectID = "e1h-QZ-6Ge"; */
+"e1h-QZ-6Ge.ibShadowedToolTip" = "Uses the SDL2 Game Controller API to automatically map buttons";

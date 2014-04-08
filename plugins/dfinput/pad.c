@@ -25,6 +25,27 @@
 
 #if SDL_VERSION_ATLEAST(2,0,0)
 int has_haptic;
+
+SDL_GameControllerButton controllerMap[] = {
+	SDL_CONTROLLER_BUTTON_BACK,
+	SDL_CONTROLLER_BUTTON_LEFTSTICK,
+	SDL_CONTROLLER_BUTTON_RIGHTSTICK,
+	SDL_CONTROLLER_BUTTON_START,
+	SDL_CONTROLLER_BUTTON_DPAD_UP,
+	SDL_CONTROLLER_BUTTON_DPAD_RIGHT,
+	SDL_CONTROLLER_BUTTON_DPAD_DOWN,
+	SDL_CONTROLLER_BUTTON_DPAD_LEFT,
+	SDL_CONTROLLER_BUTTON_INVALID, //SDL2 doesn't map the bumpers to buttons, but axies
+	SDL_CONTROLLER_BUTTON_INVALID, //The bumpers are analogous to L2 and R2
+	SDL_CONTROLLER_BUTTON_LEFTSHOULDER,
+	SDL_CONTROLLER_BUTTON_RIGHTSHOULDER,
+	SDL_CONTROLLER_BUTTON_Y,
+	SDL_CONTROLLER_BUTTON_B,
+	SDL_CONTROLLER_BUTTON_A,
+	SDL_CONTROLLER_BUTTON_X,
+	
+	SDL_CONTROLLER_BUTTON_GUIDE
+};
 #endif
 
 static void (*gpuVisualVibration)(uint32_t, uint32_t) = NULL;
@@ -100,6 +121,8 @@ long PADopen(unsigned long *Disp) {
 		}
  
 #if SDL_VERSION_ATLEAST(2,0,0)
+		SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
+		
     has_haptic = 0;
     if (SDL_InitSubSystem(SDL_INIT_HAPTIC) == 0)
       has_haptic = 1;
@@ -135,14 +158,16 @@ long PADclose(void) {
 		DestroySDLJoy();
 		DestroyKeyboard();
 #if SDL_VERSION_ATLEAST(2,0,0)
-		if (SDL_WasInit(SDL_INIT_EVERYTHING & ~(SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK))) {
+		if (SDL_WasInit(SDL_INIT_EVERYTHING & ~(SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER))) {
 			SDL_QuitSubSystem(SDL_INIT_HAPTIC);
 			SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
-		} else
-#endif
+			SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
+		} else {
+#else
 		if (SDL_WasInit(SDL_INIT_EVERYTHING & ~SDL_INIT_JOYSTICK)) {
 			SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
 		} else {
+#endif
 			SDL_Quit();
 		}
 	}

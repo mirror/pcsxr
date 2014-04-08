@@ -18,6 +18,15 @@
 
 #include "pad.h"
 
+#if SDL_VERSION_ATLEAST(2,0,0)
+static SDL_GameControllerAxis PsxAxisMap[] = {
+	SDL_CONTROLLER_AXIS_LEFTX,
+	SDL_CONTROLLER_AXIS_LEFTY,
+	SDL_CONTROLLER_AXIS_RIGHTX,
+	SDL_CONTROLLER_AXIS_RIGHTY
+};
+#endif
+
 void InitAnalog() {
 	g.PadState[0].AnalogStatus[ANALOG_LEFT][0] = 127;
 	g.PadState[0].AnalogStatus[ANALOG_LEFT][1] = 127;
@@ -42,6 +51,23 @@ void CheckAnalog() {
 		}
 
 		for (j = 0; j < ANALOG_TOTAL; j++) {
+#if SDL_VERSION_ATLEAST(2,0,0)
+			if (g.PadState[i].GCDev != NULL) {
+				for(k = 0; k < 2; k++) {
+					unsigned int absVal;
+					val = SDL_GameControllerGetAxis(g.PadState[i].GCDev, PsxAxisMap[j << 1 | k]);
+					absVal = abs(val);
+					if (absVal > 0) {
+						absVal += 32640;
+						absVal /= 256;
+						g.PadState[i].AnalogStatus[j][k] = val > 0 ? absVal : -absVal;
+					} else {
+						g.PadState[i].AnalogStatus[j][k] = 0;
+					}
+				}
+				continue;
+			}
+#endif
 			for (k = 0; k < 4; k++) {
 				if (g.PadState[i].AnalogKeyStatus[j][k]) {
 					switch (k) {

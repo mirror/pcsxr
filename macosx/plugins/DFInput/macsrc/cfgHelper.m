@@ -43,6 +43,7 @@
 #define dRightAnalogYM @"RightAnalogYM"
 
 #define VibrateOn @"Visual Vibration"
+#define UseSDL2Mapping @"SDL2 Mapping"
 
 NSDictionary *DefaultPadArray(int padnum)
 {
@@ -63,7 +64,8 @@ NSDictionary *DefaultPadArray(int padnum)
 										dTriangle: [NSMutableDictionary dictionaryWithObjectsAndKeys:@0, joyVal, @(BUTTON), joyType, nil],
 										  dCircle: [NSMutableDictionary dictionaryWithObjectsAndKeys:@1, joyVal, @(BUTTON), joyType, nil],
 										   dCross: [NSMutableDictionary dictionaryWithObjectsAndKeys:@2, joyVal, @(BUTTON), joyType, nil],
-										  dSquare: [NSMutableDictionary dictionaryWithObjectsAndKeys:@3, joyVal, @(BUTTON), joyType, nil]}];
+										  dSquare: [NSMutableDictionary dictionaryWithObjectsAndKeys:@3, joyVal, @(BUTTON), joyType, nil],
+													UseSDL2Mapping: @YES}];
 	if (padnum == 0) {
 		mutArray[dSelect][dfKey] = @9;
 		mutArray[dStart][dfKey] = @10;
@@ -154,6 +156,7 @@ void LoadPadArray(int padnum, NSDictionary *nsPrefs)
 	curDef->DevNum = [nsPrefs[deviceNumber] charValue];
 	curDef->Type = [nsPrefs[padType] unsignedShortValue];
 	curDef->VisualVibration = [nsPrefs[VibrateOn] boolValue]; //Not implemented on OS X right now.
+	curDef->UseSDL2 = [nsPrefs[UseSDL2Mapping] boolValue];
 	
 	//Analog buttons
 	SetKeyFromDictionary(nsPrefs[dL3], &curDef->KeyDef[DKEY_L3]);
@@ -192,7 +195,7 @@ void LoadPadArray(int padnum, NSDictionary *nsPrefs)
 
 NSDictionary *SavePadArray(int padnum)
 {
-	NSMutableDictionary *mutArray = [NSMutableDictionary dictionary];
+	NSMutableDictionary *mutArray = [[NSMutableDictionary alloc] init];
 	PADDEF *curDef = &g.cfg.PadDef[padnum];
 	mutArray[deviceNumber] = @(curDef->DevNum);
 	mutArray[padType] = @(curDef->Type);
@@ -200,7 +203,6 @@ NSDictionary *SavePadArray(int padnum)
 	
 	switch (curDef->Type) {
 		case PSE_PAD_TYPE_ANALOGPAD:
-		{
 			mutArray[dL3] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_L3]);
 			mutArray[dR3] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_R3]);
 			mutArray[dAnalog] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_ANALOG]);
@@ -214,11 +216,9 @@ NSDictionary *SavePadArray(int padnum)
 			mutArray[dRightAnalogXM] = DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_RIGHT][ANALOG_XM]);
 			mutArray[dRightAnalogYP] = DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_RIGHT][ANALOG_YP]);
 			mutArray[dRightAnalogYM] = DictionaryFromButtonDef(curDef->AnalogDef[ANALOG_RIGHT][ANALOG_YM]);
-		}
 			//Fall through
 			
 		case PSE_PAD_TYPE_STANDARD:
-		{
 			mutArray[dL1] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_L1]);
 			mutArray[dL2] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_L2]);
 			mutArray[dR1] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_R1]);
@@ -234,7 +234,7 @@ NSDictionary *SavePadArray(int padnum)
 			mutArray[dCircle] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_CIRCLE]);
 			mutArray[dCross] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_CROSS]);
 			mutArray[dSquare] = DictionaryFromButtonDef(curDef->KeyDef[DKEY_SQUARE]);
-		}
+			mutArray[UseSDL2Mapping] = @((BOOL)curDef->UseSDL2);
 			break;
 			
 		default:

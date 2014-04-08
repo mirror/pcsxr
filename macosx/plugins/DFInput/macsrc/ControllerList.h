@@ -25,14 +25,13 @@
 #include "cfg.h"
 
 @interface ControllerList : NSObject <NSTableViewDataSource>
+@property (getter = isUsingSDL2) BOOL usingSDL2;
 
 - (id)initWithConfig;
 
 + (void)setCurrentController:(int)which;
 + (int)currentController;
 + (int)buttonOfRow:(NSInteger)row;
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView;
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex;
 - (void)deleteRow:(NSInteger)which;
 
 @end

@@ -41,7 +41,15 @@
 "R-Stick Down" = "R-摇杆  ↓ / 下";
 "R-Stick Up" = "R-摇杆  ↑ / 上";
 
-//Unused right now
+// Game Controller names
+//"Left Bumper" = "Left Bumper";
+//"Right Bumper" = "Right Bumper";
+//"Left Trigger" = "Left Trigger";
+//"Right Trigger" = "Right Trigger";
+//"Guide" = "Guide";
+//"Back" = "Back";
+
+// Unused right now
 "Centered" = "中间键";
 "Up" = "↑ / 上";
 "Right" = "→ / 右";

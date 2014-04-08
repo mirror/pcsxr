@@ -18,44 +18,44 @@
 
 #include "pad.h"
 
-#if SDL_VERSION_ATLEAST(2,0,0)
-static SDL_HapticEffect haptic_rumbleEffect;
-#endif
-
 void JoyInitHaptic()
 {
 #if SDL_VERSION_ATLEAST(2,0,0)
-  uint8_t i;
+	uint8_t i;
     //unsigned int haptic_query = 0;
-  for (i = 0; i < 2; i++)
-  {
-    if (g.PadState[i].JoyDev && SDL_JoystickIsHaptic(g.PadState[i].JoyDev))
-    {
-      if (g.PadState[i].haptic != NULL)
-      {
-        SDL_HapticClose(g.PadState[i].haptic);
-        g.PadState[i].haptic = NULL;
-      }
+	for (i = 0; i < 2; i++)
+	{
+		SDL_Joystick *curJoy = g.PadState[i].JoyDev;
+		if (!curJoy && g.PadState[i].GCDev) {
+			curJoy = SDL_GameControllerGetJoystick(g.PadState[i].GCDev);
+		}
+		if (SDL_JoystickIsHaptic(curJoy))
+		{
+			if (g.PadState[i].haptic != NULL)
+			{
+				SDL_HapticClose(g.PadState[i].haptic);
+				g.PadState[i].haptic = NULL;
+			}
 
-      g.PadState[i].haptic = SDL_HapticOpenFromJoystick(g.PadState[i].JoyDev);
-      if (g.PadState[i].haptic == NULL)
-        continue;
+			g.PadState[i].haptic = SDL_HapticOpenFromJoystick(curJoy);
+			if (g.PadState[i].haptic == NULL)
+				continue;
 
-      if (SDL_HapticRumbleSupported(g.PadState[i].haptic) == SDL_FALSE)
-      {
-        printf("\nRumble not supported\n");
-        g.PadState[i].haptic = NULL;
-        continue;
-      }
+			if (SDL_HapticRumbleSupported(g.PadState[i].haptic) == SDL_FALSE)
+			{
+				printf("\nRumble not supported\n");
+				g.PadState[i].haptic = NULL;
+				continue;
+			}
 
-      if (SDL_HapticRumbleInit(g.PadState[i].haptic) != 0)
-      {
-        printf("\nFailed to initialize rumble: %s\n", SDL_GetError());
-        g.PadState[i].haptic = NULL;
-        continue;
-      }
-    }
-  }
+			if (SDL_HapticRumbleInit(g.PadState[i].haptic) != 0)
+			{
+				printf("\nFailed to initialize rumble: %s\n", SDL_GetError());
+				g.PadState[i].haptic = NULL;
+				continue;
+			}
+		}
+	}
 #endif
 }
 
@@ -84,14 +84,22 @@ int JoyHapticRumble(int pad, uint32_t low, uint32_t high)
 
 void InitSDLJoy() {
 	uint8_t				i;
-	uint8_t				emukeydev;
 	g.PadState[0].JoyKeyStatus = 0xFFFF;
 	g.PadState[1].JoyKeyStatus = 0xFFFF;
 
 	for (i = 0; i < 2; i++) {
 		if (g.cfg.PadDef[i].DevNum >= 0) {
+#if SDL_VERSION_ATLEAST(2,0,0)
+			if (g.cfg.PadDef[i].UseSDL2) {
+				g.PadState[i].GCDev = SDL_GameControllerOpen(g.cfg.PadDef[i].DevNum);
+			}
+			
+			if (!g.PadState[i].GCDev) {
+				g.PadState[i].JoyDev = SDL_JoystickOpen(g.cfg.PadDef[i].DevNum);
+			}
+#else
 			g.PadState[i].JoyDev = SDL_JoystickOpen(g.cfg.PadDef[i].DevNum);
-
+#endif
 			// Saves an extra call to SDL joystick open
 			if (g.cfg.E.DevNum == g.cfg.PadDef[i].DevNum) {
 				g.cfg.E.EmuKeyDev = g.PadState[i].JoyDev;
@@ -106,10 +114,10 @@ void InitSDLJoy() {
 	}
 
 #if SDL_VERSION_ATLEAST(2,0,0)
-  if (has_haptic)
-  {
-    JoyInitHaptic();
-  }
+	if (has_haptic)
+	{
+		JoyInitHaptic();
+	}
 #endif
 
 	if (g.cfg.E.EmuKeyDev == 0 && g.cfg.E.DevNum >= 0) {
@@ -117,6 +125,9 @@ void InitSDLJoy() {
 	}
 
 	SDL_JoystickEventState(SDL_IGNORE);
+#if SDL_VERSION_ATLEAST(2,0,0)
+	SDL_GameControllerEventState(SDL_IGNORE);
+#endif
 
 	InitAnalog();
 }
@@ -126,21 +137,31 @@ void DestroySDLJoy() {
 
 	if (SDL_WasInit(SDL_INIT_JOYSTICK)) {
 		for (i = 0; i < 2; i++) {
-			if (g.PadState[i].JoyDev != NULL) {
 #if SDL_VERSION_ATLEAST(2,0,0)
-        if (g.PadState[i].haptic != NULL)
-        {
-          SDL_HapticClose(g.PadState[i].haptic);
-          g.PadState[i].haptic = NULL;
-        }
-#endif
+			if (g.PadState[i].JoyDev != NULL || g.PadState[i].GCDev != NULL) {
+				if (g.PadState[i].haptic != NULL) {
+					SDL_HapticClose(g.PadState[i].haptic);
+					g.PadState[i].haptic = NULL;
+				}
+				if (g.PadState[i].GCDev != NULL) {
+					SDL_GameControllerClose(g.PadState[i].GCDev);
+				} else {
+					SDL_JoystickClose(g.PadState[i].JoyDev);
+				}
+			}
+#else
+			if (g.PadState[i].JoyDev != NULL) {
 				SDL_JoystickClose(g.PadState[i].JoyDev);
 			}
+#endif
 		}
 	}
 
 	for (i = 0; i < 2; i++) {
 		g.PadState[i].JoyDev = NULL;
+#if SDL_VERSION_ATLEAST(2,0,0)
+		g.PadState[i].GCDev = NULL;
+#endif
 	}
 	g.cfg.E.EmuKeyDev = NULL;
 }
@@ -167,14 +188,14 @@ static void bup(int pad, int bit)
 
 void CheckJoy() {
 	uint8_t				i, j, n;
+#if SDL_VERSION_ATLEAST(2,0,0)
+	SDL_GameControllerUpdate();
+#endif
 
 	SDL_JoystickUpdate();
 
 	for (i = 0; i < 2; i++) {
-		if (g.PadState[i].JoyDev == NULL) {
-			continue;
-		}
-
+		if (g.PadState[i].JoyDev != NULL) {
 		g.PadState[i].JoyKeyStatus = ~0;
 		for (j = 0; j < DKEY_TOTAL; j++) {
 			switch (g.cfg.PadDef[i].KeyDef[j].JoyEvType) {
@@ -218,6 +239,63 @@ void CheckJoy() {
 					break;
 			}
 		}
+	}
+		
+#if SDL_VERSION_ATLEAST(2,0,0)
+		if (g.PadState[i].GCDev != NULL) {
+			g.PadState[i].JoyKeyStatus = ~0;
+			for (j = 0; j < DKEY_TOTAL; j++) {
+				Sint16 axis2;
+				switch (j) {
+					case DKEY_SELECT:
+					case DKEY_L3:
+					case DKEY_R3:
+					case DKEY_START:
+					case DKEY_UP:
+					case DKEY_RIGHT:
+					case DKEY_DOWN:
+					case DKEY_LEFT:
+					case DKEY_L1:
+					case DKEY_R1:
+					case DKEY_TRIANGLE:
+					case DKEY_CIRCLE:
+					case DKEY_CROSS:
+					case DKEY_SQUARE:
+					case DKEY_ANALOG:
+
+						if (SDL_GameControllerGetButton(g.PadState[i].GCDev, controllerMap[j])) {
+							bdown(i, j);
+						} else {
+							bup(i, j);
+						}
+						break;
+						
+					case DKEY_L2:
+						axis2 = SDL_GameControllerGetAxis(g.PadState[i].GCDev, SDL_CONTROLLER_AXIS_TRIGGERLEFT);
+						if (axis2 > 0) {
+							bdown(i, j);
+						} else {
+							bup(i, j);
+						}
+						
+						break;
+						
+					case DKEY_R2:
+						axis2 = SDL_GameControllerGetAxis(g.PadState[i].GCDev, SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
+						if (axis2 > 0) {
+							bdown(i, j);
+						} else {
+							bup(i, j);
+						}
+						
+						break;
+						
+					default:
+						break;
+				}
+			}
+		}
+#endif
 	}
 
 	// Check for emulator button states

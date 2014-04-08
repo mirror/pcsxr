@@ -25,43 +25,83 @@
 
 static int currentController;
 static NSArray *labelText;
+static NSArray *GameControllerText;
 
 @implementation ControllerList
+
+- (BOOL)isUsingSDL2
+{
+	return g.cfg.PadDef[currentController].UseSDL2;
+}
+
+- (void)setUsingSDL2:(BOOL)_usingSDL2
+{
+	g.cfg.PadDef[currentController].UseSDL2 = _usingSDL2;
+}
 
 - (id)initWithConfig
 {
 	if (self = [super init]) {
 		static dispatch_once_t onceToken;
 		dispatch_once(&onceToken, ^{
-			NSBundle *plugBundle = [NSBundle bundleForClass:[ControllerList class]];
-			labelText = @[[plugBundle localizedStringForKey:@"D-Pad Up" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"D-Pad Down" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"D-Pad Left" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"D-Pad Right" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"Cross" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"Circle" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"Square" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"Triangle" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"L1" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"R1" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"L2" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"R2" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"Select" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"Start" value:@"" table:nil],
-				 
-				 [plugBundle localizedStringForKey:@"L3" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"R3" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"Analog" value:@"" table:nil],
-				 
-				 [plugBundle localizedStringForKey:@"L-Stick Right" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"L-Stick Left" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"L-Stick Down" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"L-Stick Up" value:@"" table:nil],
-				 
-				 [plugBundle localizedStringForKey:@"R-Stick Right" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"R-Stick Left" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"R-Stick Down" value:@"" table:nil],
-				 [plugBundle localizedStringForKey:@"R-Stick Up" value:@"" table:nil]];
+			NSBundle *plugBundle = [NSBundle bundleForClass:[self class]];
+			labelText = @[NSLocalizedStringFromTableInBundle(@"D-Pad Up", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"D-Pad Down", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"D-Pad Left", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"D-Pad Right", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"Cross", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"Circle", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"Square", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"Triangle", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"L1", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"R1", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"L2", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"R2", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"Select", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"Start", nil, plugBundle, @""),
+						  
+						  NSLocalizedStringFromTableInBundle(@"L3", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"R3", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"Analog", nil, plugBundle, @""),
+						  
+						  NSLocalizedStringFromTableInBundle(@"L-Stick Right", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"L-Stick Left", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"L-Stick Down", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"L-Stick Up", nil, plugBundle, @""),
+						  
+						  NSLocalizedStringFromTableInBundle(@"R-Stick Right", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"R-Stick Left", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"R-Stick Down", nil, plugBundle, @""),
+						  NSLocalizedStringFromTableInBundle(@"R-Stick Up", nil, plugBundle, @"")];
+			
+			GameControllerText = @[NSLocalizedStringFromTableInBundle(@"D-Pad Up", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"D-Pad Down", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"D-Pad Left", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"D-Pad Right", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"Cross", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"Circle", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"Square", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"Triangle", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"Left Bumper", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"Right Bumper", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"Left Trigger", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"Right Trigger", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"Back", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"Start", nil, plugBundle, @""),
+								   
+								   NSLocalizedStringFromTableInBundle(@"L3", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"R3", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"Guide", nil, plugBundle, @""),
+								   
+								   NSLocalizedStringFromTableInBundle(@"L-Stick Right", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"L-Stick Left", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"L-Stick Down", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"L-Stick Up", nil, plugBundle, @""),
+								   
+								   NSLocalizedStringFromTableInBundle(@"R-Stick Right", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"R-Stick Left", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"R-Stick Down", nil, plugBundle, @""),
+								   NSLocalizedStringFromTableInBundle(@"R-Stick Up", nil, plugBundle, @"")];
 		});
 	}
 	return self;
@@ -117,6 +157,18 @@ static const int DPad[DKEY_TOTAL] = {
 	} else {
 		char buf[256] = {0};
 		
+		if ([self isUsingSDL2]) {
+			NSString *keyBoardString, *gamePadStr = GameControllerText[rowIndex];
+			if (rowIndex < DKEY_TOTAL) {
+				GetKeyboardKeyDescription(buf, currentController, DPad[rowIndex]);
+			} else {
+				NSInteger tmpRowIndex = rowIndex - DKEY_TOTAL;
+				GetKeyboardAnalogDescription(buf, currentController, (int)(tmpRowIndex / 4), tmpRowIndex % 4);
+			}
+			keyBoardString = @(buf);
+			
+			return [keyBoardString isEqualToString:@""] ? gamePadStr : [gamePadStr stringByAppendingFormat:@" / %@", keyBoardString];
+		} else {
 		// actual keys
 		if (rowIndex < DKEY_TOTAL) {
 			GetKeyDescription(buf, currentController, DPad[rowIndex]);
@@ -126,6 +178,7 @@ static const int DPad[DKEY_TOTAL] = {
 		}
 		
 		return @(buf);
+		}
 	}
 }
 

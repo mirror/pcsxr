@@ -23,6 +23,8 @@
 
 void GetKeyDescription(char *buf, int joynum, int key);
 void GetAnalogDescription(char *buf, int joynum, int analognum, int dir);
+void GetKeyboardKeyDescription(char *buf, int joynum, int key);
+void GetKeyboardAnalogDescription(char *buf, int joynum, int analognum, int dir);
 void InitAxisPos(int padnum);
 int ReadDKeyEvent(int padnum, int key);
 int ReadAnalogEvent(int padnum, int analognum, int analogdir);

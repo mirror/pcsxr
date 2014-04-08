@@ -26,8 +26,10 @@
 @implementation MappingCell
 
 - (id)initTextCell:(NSString *)aString {
-	self = [super initTextCell:aString];
-	[self setEditable:NO];
+	if (self = [super initTextCell:aString]) {
+		[self setEditable:NO];
+	}
+	
 	return self;
 }
 

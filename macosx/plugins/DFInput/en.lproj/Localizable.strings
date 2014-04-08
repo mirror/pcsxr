@@ -41,7 +41,15 @@
 "R-Stick Down" = "R-Stick Down";
 "R-Stick Up" = "R-Stick Up";
 
-//Unused right now
+// Game Controller names
+"Left Bumper" = "Left Bumper";
+"Right Bumper" = "Right Bumper";
+"Left Trigger" = "Left Trigger";
+"Right Trigger" = "Right Trigger";
+"Guide" = "Guide";
+"Back" = "Back";
+
+// Unused right now
 "Centered" = "Centered";
 "Up" = "Up";
 "Right" = "Right";
@@ -51,5 +59,3 @@
 "Left" = "Left";
 "Leftup" = "Left-up";
 "Leftdown" = "Left-down";
-
-

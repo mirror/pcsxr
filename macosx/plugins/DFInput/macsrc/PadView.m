@@ -26,7 +26,7 @@
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil) {
+	if (self = [super initWithFrame:frameRect]) {
 		controller = [[ControllerList alloc] initWithConfig];
 		[self setController:0];
 	}
@@ -35,13 +35,14 @@
 
 - (void)drawRect:(NSRect)rect
 {
+	
 }
 
 - (IBAction)setType:(id)sender
 {
 	g.cfg.PadDef[[ControllerList currentController]].Type =
 		([sender indexOfSelectedItem] > 0 ? PSE_PAD_TYPE_ANALOGPAD : PSE_PAD_TYPE_STANDARD);
-
+	
 	[tableView reloadData];
 }
 
@@ -50,36 +51,49 @@
 	g.cfg.PadDef[[ControllerList currentController]].DevNum = (int)[sender indexOfSelectedItem] - 1;
 }
 
+- (IBAction)toggleSDL2:(id)sender
+{
+	controller.usingSDL2 = !controller.usingSDL2;
+	
+	[tableView reloadData];
+}
+
 - (void)setController:(int)which
 {
 	int i;
-
+	
 	[ControllerList setCurrentController:which];
 	[tableView setDataSource:controller];
-
+	
 	[deviceMenu removeAllItems];
 	[deviceMenu addItemWithTitle:[[NSBundle bundleForClass:[self class]] localizedStringForKey:@"(Keyboard only)" value:@"" table:nil]];
-
+	
 	for (i = 0; i < SDL_NumJoysticks(); i++) {
-		NSMenuItem *joystickItem = nil;
+		NSMenuItem *joystickItem;
 #if SDL_VERSION_ATLEAST(2, 0, 0)
-		SDL_Joystick *tmpJoy = SDL_JoystickOpen(i);
-		joystickItem = [[NSMenuItem alloc] initWithTitle:@(SDL_JoystickName(tmpJoy)) action:NULL keyEquivalent:@""];
-		SDL_JoystickClose(tmpJoy);
+		NSString *tmpString;
+		if (SDL_IsGameController(i)) {
+			tmpString = @(SDL_GameControllerNameForIndex(i));
+		} else {
+			tmpString = @(SDL_JoystickNameForIndex(i));
+		}
+		joystickItem = [[NSMenuItem alloc] initWithTitle:tmpString action:NULL keyEquivalent:@""];
 #else
 		joystickItem = [[NSMenuItem alloc] initWithTitle:@(SDL_JoystickName(i)) action:NULL keyEquivalent:@""];
 #endif
 		[joystickItem setTag:i + 1];
         [[deviceMenu menu] addItem:joystickItem];
 	}
-
+	
 	if (g.cfg.PadDef[which].DevNum >= SDL_NumJoysticks()) {
 		g.cfg.PadDef[which].DevNum = -1;
 	}
-
+	
 	[deviceMenu selectItemAtIndex:g.cfg.PadDef[which].DevNum + 1];
 	[typeMenu selectItemAtIndex:(g.cfg.PadDef[which].Type == PSE_PAD_TYPE_ANALOGPAD ? 1 : 0)];
-
+	
+	[self.useSDL2Check setState:g.cfg.PadDef[which].UseSDL2 ? NSOnState : NSOffState];
+	
 	[tableView reloadData];
 }
 
@@ -92,7 +106,7 @@
 - (void)keyDown:(NSEvent *)theEvent
 {
 	unsigned short key = [theEvent keyCode];
-
+	
 	if ([[theEvent window] firstResponder] == tableView) {
 		if (key == 51 || key == 117) {
 			// delete keys - remove the mappings for the selected item
@@ -105,7 +119,7 @@
 			return;
 		}
 	}
-
+	
 	[super keyDown:theEvent];
 }
 

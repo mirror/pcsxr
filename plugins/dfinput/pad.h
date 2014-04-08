@@ -38,6 +38,7 @@ extern "C" {
 #include <SDL_joystick.h>
 #if SDL_VERSION_ATLEAST(2,0,0)
 #include <SDL_haptic.h>
+#include <SDL_gamecontroller.h>
 #endif
 
 #ifdef _MACOSX
@@ -147,12 +148,19 @@ typedef struct tagKeyDef {
 
 enum { ANALOG_XP = 0, ANALOG_XM, ANALOG_YP, ANALOG_YM };
 
+#if SDL_VERSION_ATLEAST(2,0,0)
+SDL_GameControllerButton controllerMap[DKEY_TOTAL];	
+#endif
+
 typedef struct tagPadDef {
 	int8_t			DevNum;
 	uint16_t		Type;
 	uint8_t			VisualVibration;
 	KEYDEF			KeyDef[DKEY_TOTAL];
 	KEYDEF			AnalogDef[ANALOG_TOTAL][4];
+#if SDL_VERSION_ATLEAST(2,0,0)
+	int8_t			UseSDL2;
+#endif
 } PADDEF;
 
 typedef struct tagEmuDef {
@@ -188,7 +196,8 @@ typedef struct tagPadState {
 	uint8_t				Vib0, Vib1;
 	volatile uint8_t	VibF[2];
 #if SDL_VERSION_ATLEAST(2,0,0)
-	SDL_Haptic		*haptic;
+	SDL_Haptic			*haptic;
+	SDL_GameController	*GCDev;
 #else
 #ifdef __linux__
 	int			VibrateDev;

@@ -41,7 +41,15 @@
 "R-Stick Down" = "Jobb kar le";
 "R-Stick Up" = "Jobb kar fel";
 
-//Unused right now
+// Game Controller names
+//"Left Bumper" = "Left Bumper";
+//"Right Bumper" = "Right Bumper";
+//"Left Trigger" = "Left Trigger";
+//"Right Trigger" = "Right Trigger";
+//"Guide" = "Guide";
+//"Back" = "Back";
+
+// Unused right now
 "Centered" = "Középen";
 "Up" = "Fel";
 "Right" = "Jobbra";

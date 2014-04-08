@@ -145,8 +145,8 @@ void LoadPADConfig()
 	
 	[usrDefaults registerDefaults:
 	 @{PrefsKey: @{kDFPad1: DefaultPadArray(0),
-										 kDFPad2: DefaultPadArray(1),
-										 kDFThreading: @YES}}];
+				   kDFPad2: DefaultPadArray(1),
+				   kDFThreading: @YES}}];
 	
 	//Load the old preferences if present and we don't have new ones.
 	NSFileManager *fm = [NSFileManager defaultManager];

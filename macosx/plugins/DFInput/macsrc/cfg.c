@@ -25,7 +25,8 @@ long DoConfiguration();
 void DoAbout();
 
 long PADconfigure(void) {
-	if (SDL_WasInit(SDL_INIT_JOYSTICK)) return PSE_ERR_FATAL; // cannot change settings on the fly
+	if (SDL_WasInit(SDL_INIT_JOYSTICK))
+		return PSE_ERR_FATAL; // cannot change settings on the fly
 	
 	DoConfiguration();
 	//LoadPADConfig();
@@ -152,7 +153,7 @@ static const char *XKeysymToString(uint16_t key) {
 		i++;
 	}
 	
-	sprintf(buf, "0x%.2X", key);
+	snprintf(buf, sizeof(buf), "0x%.2X", key);
 	return buf;
 }
 
@@ -191,6 +192,24 @@ void GetKeyDescription(char *buf, int joynum, int key)
 		
 		snprintf(keyboardBuf, 63, _("Keyboard: %s"), XKeysymToString(g.cfg.PadDef[joynum].KeyDef[key].Key));
 		strcat(buf, keyboardBuf);
+	}
+}
+
+void GetKeyboardKeyDescription(char *buf, int joynum, int key)
+{
+	if (g.cfg.PadDef[joynum].KeyDef[key].Key != 0) {
+		sprintf(buf, _("Keyboard: %s"), XKeysymToString(g.cfg.PadDef[joynum].KeyDef[key].Key));
+	} else {
+		buf[0] = '\0';
+	}
+}
+
+void GetKeyboardAnalogDescription(char *buf, int joynum, int analognum, int dir)
+{
+	if (g.cfg.PadDef[joynum].AnalogDef[analognum][dir].Key != 0) {
+		sprintf(buf, _("Keyboard: %s"), XKeysymToString(g.cfg.PadDef[joynum].AnalogDef[analognum][dir].Key));
+	} else {
+		buf[0] = '\0';
 	}
 }
 

@@ -471,7 +471,6 @@
 		551A751717868BEB0052D185 /* version.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		551A751E17868BEB0052D185 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		551A752017868BEB0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		551A752217868BEB0052D185 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		551A752517868BEB0052D185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551A752717868BEB0052D185 /* cfg.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cfg.c; sourceTree = "<group>"; };
 		551A752817868BEB0052D185 /* cfg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cfg.h; sourceTree = "<group>"; };
@@ -741,6 +740,7 @@
 		559366C612B694DF004ACC1E /* ix86_fpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86_fpu.c; sourceTree = "<group>"; };
 		559366C712B694DF004ACC1E /* ix86_mmx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86_mmx.c; sourceTree = "<group>"; };
 		559366C812B694DF004ACC1E /* ix86_sse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ix86_sse.c; sourceTree = "<group>"; };
+		5593804E18F38C060022C282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5598AAF017D2D5450024F71D /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5598AAF217D2D5470024F71D /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5598AAF517D2D54A0024F71D /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2579,7 +2579,7 @@
 		551A752117868BEB0052D185 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				551A752217868BEB0052D185 /* English */,
+				5593804E18F38C060022C282 /* en */,
 				5598AAFB17D2E9E90024F71D /* fr */,
 				55707E901812357B007CC5D0 /* hu */,
 				558328D3184F246B00DFACE4 /* zh-Hans */,

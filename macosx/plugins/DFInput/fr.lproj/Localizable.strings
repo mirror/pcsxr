@@ -15,7 +15,6 @@
 "(Keyboard only)" = "(Keyboard only)";
 "(Not Set)" = "(Non défini)";
 
-
 "D-Pad Up" = "Pavé directionnel Haut";
 "D-Pad Down" = "Pavé directionnel Bas";
 "D-Pad Left" = "Pavé directionnel Gauche";
@@ -32,7 +31,7 @@
 "Start" = "Start";
 "L3" = "L3";
 "R3" = "R3";
-//"Analog" = "Analog"; //Not translated
+//"Analog" = "Analog"; // Not translated
 "L-Stick Right" = "L-Stick Droite";
 "L-Stick Left" = "L-Stick Gauche";
 "L-Stick Down" = "L-Stick Bas";
@@ -42,7 +41,15 @@
 "R-Stick Down" = "R-Stick Bas";
 "R-Stick Up" = "R-Stick Haut";
 
-//Unused right now
+// Game Controller names
+//"Left Bumper" = "Left Bumper";
+//"Right Bumper" = "Right Bumper";
+//"Left Trigger" = "Left Trigger";
+//"Right Trigger" = "Right Trigger";
+//"Guide" = "Guide";
+//"Back" = "Back";
+
+// Unused right now
 "Centered" = "Centré";
 "Up" = "Haut";
 "Right" = "Droite";

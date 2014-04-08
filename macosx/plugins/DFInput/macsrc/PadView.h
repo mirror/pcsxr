@@ -32,9 +32,11 @@
 
 	ControllerList *controller;
 }
+@property (weak) IBOutlet NSButton *useSDL2Check;
+
 - (IBAction)setType:(id)sender;
 - (IBAction)setDevice:(id)sender;
+- (IBAction)toggleSDL2:(id)sender;
 
 - (void)setController:(int)which;
-
 @end
