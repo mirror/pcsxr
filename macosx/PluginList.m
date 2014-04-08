@@ -172,12 +172,18 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 {
 	BOOL bad = NO;
 	
-	if ([self.activeGpuPlugin runAs:PSE_LT_GPU] != 0) bad = YES;
-	if ([self.activeSpuPlugin runAs:PSE_LT_SPU] != 0) bad = YES;
-	if ([self.activeCdrPlugin runAs:PSE_LT_CDR] != 0) bad = YES;
-	if ([self.activePadPlugin runAs:PSE_LT_PAD] != 0) bad = YES;
-	if ([self.activeNetPlugin runAs:PSE_LT_NET] != 0) bad = YES;
-	if ([self.activeSIO1Plugin runAs:PSE_LT_SIO1] != 0) bad = YES;
+	if ([self.activeGpuPlugin runAs:PSE_LT_GPU] != 0)
+		bad = YES;
+	if ([self.activeSpuPlugin runAs:PSE_LT_SPU] != 0)
+		bad = YES;
+	if ([self.activeCdrPlugin runAs:PSE_LT_CDR] != 0)
+		bad = YES;
+	if ([self.activePadPlugin runAs:PSE_LT_PAD] != 0)
+		bad = YES;
+	if ([self.activeNetPlugin runAs:PSE_LT_NET] != 0)
+		bad = YES;
+	if ([self.activeSIO1Plugin runAs:PSE_LT_SIO1] != 0)
+		bad = YES;
 	
 	return !bad;
 }
@@ -231,25 +237,26 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 	if ([plugin runAs:type] != 0) {
 		plugin = nil;
 	}
-		switch (type) {
-			case PSE_LT_GPU:
-				self.activeGpuPlugin = plugin;
-				break;
-			case PSE_LT_CDR:
-				self.activeCdrPlugin = plugin;
-				break;
-			case PSE_LT_SPU:
-				self.activeSpuPlugin = plugin;
-				break;
-			case PSE_LT_PAD:
-				self.activePadPlugin = plugin;
-				break;
-			case PSE_LT_NET:
-				self.activeNetPlugin = plugin;
-				break;
-			case PSE_LT_SIO1:
-				self.activeSIO1Plugin = plugin;
-				break;
+	
+	switch (type) {
+		case PSE_LT_GPU:
+			self.activeGpuPlugin = plugin;
+			break;
+		case PSE_LT_CDR:
+			self.activeCdrPlugin = plugin;
+			break;
+		case PSE_LT_SPU:
+			self.activeSpuPlugin = plugin;
+			break;
+		case PSE_LT_PAD:
+			self.activePadPlugin = plugin;
+			break;
+		case PSE_LT_NET:
+			self.activeNetPlugin = plugin;
+			break;
+		case PSE_LT_SIO1:
+			self.activeSIO1Plugin = plugin;
+			break;
 	}
 	
 	// write path to the correct config entry

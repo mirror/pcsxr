@@ -236,6 +236,8 @@ const char *SysLibError()
 }
 
 void SysCloseLibrary(void *lib) {
+	// We do not close libraries due to how Objective C code misbehaves if unloaded,
+	// particularly constant NSStrings.
 	//dlclose(lib);
 }
 
