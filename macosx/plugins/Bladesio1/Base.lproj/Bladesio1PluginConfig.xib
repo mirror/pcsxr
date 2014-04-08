@@ -19,10 +19,8 @@
         <customObject id="-3" userLabel="Application"/>
         <window title="BladeSIO1 Configuration" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="Window">
             <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="131" y="362" width="315" height="203"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
-            <value key="minSize" type="size" width="315" height="203"/>
             <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="315" height="203"/>
                 <autoresizingMask key="autoresizingMask"/>
