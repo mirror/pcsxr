@@ -1,3 +1,5 @@
+
+
 /*  Pcsx - Pc Psx Emulator
  *  Copyright (C) 1999-2002  Pcsx Team
  *
@@ -41,13 +43,39 @@ unsigned long gpuDisp;
 
 int StatesC = 0;
 extern int UseGui;
-int ShowPic = 0;
+
+pthread_t ThreadID = 0;
+boolean start = FALSE;
+boolean restart = FALSE;
+
+void gpuHidePic()
+{
+	GPU_showScreenPic(NULL);
+}
+
+static void *HidePicAfter(void *param)
+{
+	while (1)
+	{
+		//TODO use pthread_cond_wait
+		while (!start) usleep(100000);
+
+		while (1) {
+			usleep(3000000);
+			if (!restart)
+				break;
+			restart = FALSE;
+		};
+
+		gpuHidePic();
+		start = FALSE;
+	}
+}
 
 void gpuShowPic() {
 	gchar *state_filename;
 	gzFile f;
 
-	if (!ShowPic) {
 		unsigned char *pMem;
 
 		pMem = (unsigned char *) malloc(128*96*3);
@@ -71,12 +99,11 @@ void gpuShowPic() {
 		GPU_showScreenPic(pMem);
 
 		free(pMem);
-		ShowPic = 1;
 		g_free (state_filename);
-	} else {
-		GPU_showScreenPic(NULL);
-		ShowPic = 0;
-	}
+		
+	if (!ThreadID) pthread_create(&ThreadID, NULL, HidePicAfter, NULL);
+	if (start) restart = TRUE;
+	start = TRUE;
 }
 
 void KeyStateSave(int i) {
@@ -220,15 +247,14 @@ void PADhandleKey(int key) {
 			state_save (state_filename);
 
 			g_free (state_filename);
-
-			if (ShowPic) { ShowPic = 0; gpuShowPic(); }
+			gpuShowPic();
 
 			break;
 		case XK_F2:
 			if (StatesC < (MAX_SLOTS - 1)) StatesC++;
 			else StatesC = 0;
 			GPU_freeze(2, (GPUFreeze_t *)&StatesC);
-			if (ShowPic) { ShowPic = 0; gpuShowPic(); }
+			gpuShowPic();
 			break;
 		case XK_F3:
 			state_filename = get_state_filename (StatesC);
@@ -240,7 +266,7 @@ void PADhandleKey(int key) {
 			// returned from compiled code. This WILL cause memory leak, however a
 			// large amount of refactor is needed for a proper fix.
 			if (Config.Cpu == CPU_DYNAREC) psxCpu->Execute();
-
+			gpuShowPic();
 			break;
 		case XK_F4:
 			gpuShowPic();
@@ -464,3 +490,4 @@ void ClosePlugins() {
 		NET_pause();
 	}
 }
+
