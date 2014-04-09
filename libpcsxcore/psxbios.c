@@ -1238,6 +1238,8 @@ void psxBios_SetMem() { // 9f
 }
 
 void psxBios__card_info() { // ab
+	// COTS password option
+	boolean nocard = (Config.NoMemcard || ((strlen(Config.Mcd1) <=0) && (strlen(Config.Mcd2) <=0)));
 #ifdef PSXBIOS_LOG
 	PSXBIOS_LOG("psxBios_%s: %x\n", biosA0n[0xab], a0);
 #endif
@@ -1245,7 +1247,7 @@ void psxBios__card_info() { // ab
 	card_active_chan = a0;
 
 //	DeliverEvent(0x11, 0x2); // 0xf0000011, 0x0004
-	DeliverEvent(0x81, 0x2); // 0xf4000001, 0x0004
+	DeliverEvent(0x81, nocard ? 0x8 : 0x2); // 0xf4000001, 0x0004
 
 	v0 = 1; pc0 = ra;
 }
