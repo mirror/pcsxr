@@ -1467,7 +1467,7 @@ static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector)
 			sectorcount=((writebytecount/CD_FRAMESIZE_RAW) - 0);
 			num -= b;
 		}
-		if (sectorcount > 0 && ecm_savetable[sectorcount].filepos <= ECM_HEADER_SIZE ) {
+		if (type && sectorcount > 0 && ecm_savetable[sectorcount].filepos <= ECM_HEADER_SIZE ) {
 			ecm_savetable[sectorcount].filepos = ftell(f)/*-base*/;
 			ecm_savetable[sectorcount].sector = sectorcount;
 			//printf("Marked %i at pos %i\n", ecm_savetable[sectorcount].sector, ecm_savetable[sectorcount].filepos);
