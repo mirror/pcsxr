@@ -2450,6 +2450,15 @@
                               </object>
                             </child>
                             <child>
+                              <object class="GtkMenuItem" id="GtkMenuItem_LoadSlotRecent">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Most _Recent</property>
+                                <property name="use_underline">True</property>
+                                <accelerator key="R" signal="activate" modifiers="GDK_MOD1_MASK"/>
+                              </object>
+                            </child>
+                            <child>
                               <object class="GtkImageMenuItem" id="other1">
                                 <property name="label" translatable="yes">_Other...</property>
                                 <property name="visible">True</property>

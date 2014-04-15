@@ -60,6 +60,7 @@ void on_states_load(GtkWidget *widget, gpointer user_data);
 void on_states_load_other();
 void on_states_save(GtkWidget *widget, gpointer user_data);
 void on_states_save_other();
+void on_states_load_recent();
 
 static GtkBuilder *builder;
 GtkWidget *Window = NULL;
@@ -70,6 +71,7 @@ int destroy = 0;
 
 /* TODO - If MAX_SLOTS changes, need to find a way to automatically set all positions */
 int Slots[MAX_SLOTS] = { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+int recent_load_slot = -1;
 
 void ResetMenuSlots() {
 	GtkWidget *widget;
@@ -79,24 +81,30 @@ void ResetMenuSlots() {
 	if (CdromId[0] == '\0') {
 		// disable state saving/loading if no CD is loaded
 		for (i = 0; i < MAX_SLOTS; i++) {
+			// Save slots
 			str = g_strdup_printf("GtkMenuItem_SaveSlot%d", i+1);
 			widget = GTK_WIDGET(gtk_builder_get_object(builder, str));
 			g_free(str);
 
 			gtk_widget_set_sensitive(widget, FALSE);
 
+			// Load slots
 			str = g_strdup_printf("GtkMenuItem_LoadSlot%d", i+1);
 			widget = GTK_WIDGET(gtk_builder_get_object(builder, str));
 			g_free(str);
 
 			gtk_widget_set_sensitive(widget, FALSE);
 		}
-
-		// also disable certain menu/toolbar items
+		// Recent
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlotRecent"));
+		gtk_widget_set_sensitive(widget, FALSE);
+		// Other save/load
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "other1"));
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "other2"));
 		gtk_widget_set_sensitive(widget, FALSE);
+
+		// also disable certain menu/toolbar items
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "run1"));
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "reset1"));
@@ -159,6 +167,9 @@ void ResetMenuSlots() {
 			else
 				gtk_widget_set_sensitive(widget, TRUE);
 		}
+		// Recent
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlotRecent"));
+		gtk_widget_set_sensitive(widget, recent_load_slot>-1);
 
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "plugins_bios"));
 		gtk_widget_set_sensitive(widget, FALSE);
@@ -292,7 +303,7 @@ int UpdateMenuSlots() {
 		}
 		g_free (str);
 	}
-	return imax;
+	return (recent_load_slot=imax);
 }
 
 void autoloadCheats() {
@@ -381,6 +392,9 @@ void StartGui() {
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlot9"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load), GINT_TO_POINTER(8), NULL, G_CONNECT_AFTER);
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "GtkMenuItem_LoadSlotRecent"));
+	g_signal_connect_data(G_OBJECT(widget), "activate",
+			G_CALLBACK(on_states_load_recent), NULL, NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "other1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(on_states_load_other), NULL, NULL, G_CONNECT_AFTER);			
@@ -1053,6 +1067,19 @@ void on_states_save (GtkWidget *widget, gpointer user_data) {
 	g_free(state_filename);
 }
 
+void on_states_load_recent() {
+	gchar *state_filename;
+	gint state = StatesC = recent_load_slot;
+
+	state_filename = get_state_filename(state);
+
+	state_load(state_filename);
+
+	g_free(state_filename);
+
+	psxCpu->Execute();
+}
+
 void on_states_load_other() {
 	GtkWidget *file_chooser;
 	gchar *SStateFile;
@@ -1079,7 +1106,7 @@ void on_states_load_other() {
 		psxCpu->Execute();
 	} else
 		gtk_widget_destroy(file_chooser);
-} 
+}
 
 void on_states_save_other() {
 	GtkWidget *file_chooser;
