@@ -270,7 +270,7 @@ static int decode_compressed_cdda_track(FILE* outfile, const char* infilepath, s
 			if (!(decoded_frame = avcodec_alloc_frame())) {
 				SysMessage(_(" -> Error allocating audio frame buffer. This track will not be available."));
 				avformat_close_input(&inAudioFormat);
-				avcodec_free_frame(&decoded_frame);
+				av_free(&decoded_frame);
 				return 1; // error decoding frame
 			}
 		} else {
@@ -293,98 +293,11 @@ static int decode_compressed_cdda_track(FILE* outfile, const char* infilepath, s
 	fflush(outfile);
 
 	avformat_close_input(&inAudioFormat);
+
+	// TODO not sure if all resources are freed...
 	//avcodec_close(c);
 	//av_free(c);
-	avcodec_free_frame(&decoded_frame);
-	return 0;
-}
-#endif
-
-
-#ifdef ENABLE_CCDDA1
-static int decode_compressed_cdda_track(FILE* outfile, FILE* infile, enum AVCodecID id) {
-	AVCodec *codec;
-	AVCodecContext *c=NULL;
-	s32 len;
-	u8 inbuf[AUDIO_INBUF_SIZE + FF_INPUT_BUFFER_PADDING_SIZE];
-	AVPacket avpkt;
-	AVFrame *decoded_frame = NULL;
-	//fseek(infile, 0, SEEK_SET);
-	//fseek(outfile, 0, SEEK_SET);
-
-	av_init_packet(&avpkt);
-
-	/* find the mpeg audio decoder */
-	avcodec_register_all();
-	codec = avcodec_find_decoder(id);
-	if (!codec) {
-		SysMessage("Audio decoder not found. Is ffmpeg compiled with support for this format?\n");
-		return 2; // codec not found
-	}
-	//codec->id = AV_CODEC_ID_PCM_S16LE;
-
-	c = avcodec_alloc_context3(codec);
-
-	/* open it */
-	if (avcodec_open2(c, codec, NULL) < 0) {
-		SysMessage("Audio decoder opening failed. Compressed audio support not available.\n");
-		return 3; // codec open failed
-	}
-
-	/* decode until eof */
-	avpkt.data = inbuf;
-	avpkt.size = fread(inbuf, 1, AUDIO_INBUF_SIZE, infile);
-	c->sample_fmt = AV_SAMPLE_FMT_S16;
-	c->channels = 2;
-	c->sample_rate = 44100;
-
-	while (avpkt.size > 0) {
-		int got_frame = 0;
-		if (!decoded_frame) {
-			if (!(decoded_frame = avcodec_alloc_frame())) {
-				SysPrintf(" -> Error allocating audio frame buffer. Track will not be available.");
-				return 1; // error decoding frame
-			}
-		} else {
-			avcodec_get_frame_defaults(decoded_frame);
-		}
-
-		len = avcodec_decode_audio4(c, decoded_frame, &got_frame, &avpkt);
-		if (len < 0) {
-			SysPrintf(" -> Error decoding audio track. IDTAG present? Track will not be available.");
-			return 5;
-		}
-		if (len > 0 && got_frame) {
-			/* if a frame has been decoded, output it */
-			int data_size = av_samples_get_buffer_size(NULL, c->channels,
-														decoded_frame->nb_samples,
-														c->sample_fmt, 1);
-			//printf ("Channels %i/%i %i/%i\n", decoded_frame->channels, decoded_frame->sample_rate, c->channels, c->sample_rate);
-			fwrite(decoded_frame->data[0], 1, data_size, outfile);
-		}
-		avpkt.size -= len;
-		avpkt.data += len;
-		avpkt.dts = avpkt.pts = AV_NOPTS_VALUE;
-		if (avpkt.size < AUDIO_REFILL_THRESH) {
-			/* Refill the input buffer, to avoid trying to decode
-				* incomplete frames. Instead of this, one could also use
-				* a parser, or use a proper container format through
-				* libavformat. */
-			memmove(inbuf, avpkt.data, avpkt.size);
-			avpkt.data = inbuf;
-			len = fread(avpkt.data + avpkt.size, 1,
-					AUDIO_INBUF_SIZE - avpkt.size, infile);
-			if (len > 0)
-				avpkt.size += len;
-		}
-	}
-
-	// file will be closed later on, now just flush it
-	fflush(outfile);
-
-	avcodec_close(c);
-	av_free(c);
-	avcodec_free_frame(&decoded_frame);
+	//av_free(&decoded_frame);
 	return 0;
 }
 #endif
@@ -657,14 +570,16 @@ static int parsecue(const char *isofile) {
 				s32 accurate_len;
 				// TODO: if 2048 frame length -> recalculate file_len?
 				ti[numtracks].type = DATA;
-				if (handleecm(filepath, cdHandle, &accurate_len) == 0) {// detect if ECM & get accurate length
+				// detect if ECM or compressed & get accurate length
+				if (handleecm(filepath, cdHandle, &accurate_len) == 0 ||
+					handlearchive(filepath, &accurate_len) == 0) {
 					file_len = accurate_len;
 				}
 			} else {
 				SysPrintf(".cue: failed to parse TRACK\n");
 				ti[numtracks].type = numtracks == 1 ? DATA : CDDA;
 			}
-			if (sector_size == 0)
+			if (sector_size == 0) // TODO isMode1ISO?
 				sector_size = CD_FRAMESIZE_RAW;
 		}
 		else if (!strcmp(token, "INDEX")) {
@@ -1687,9 +1602,33 @@ static int cdread_archive(FILE *f, unsigned int base, void *dest, int sector)
 	r = cdimg_read_func_archive(cdimage_buffer, base, dest, sector);
 	return r;
 }
+int handlearchive(const char *isoname, s32* accurate_length) {
+	u32 read_size = accurate_length?MSF2SECT(70,70,16) : MSF2SECT(0,0,16);
+	int ret = -1;
+	if ((ret=aropen(cdHandle, isoname)) == 0) {
+		cdimg_read_func = cdread_archive;
+		SysPrintf("[+archive]");
+		if (!ecm_file_detected) {
+#ifndef ENABLE_ECM_FULL
+			//Detect ECM inside archive
+			cdimg_read_func_archive = cdread_normal;
+			cdread_archive(cdHandle, 0, cdbuffer, read_size);
+			if (handleecm("test.ecm", cdimage_buffer, accurate_length) != -1) {
+				cdimg_read_func_archive = cdread_ecm_decode;
+				cdimg_read_func = cdread_archive;
+				SysPrintf("[+ecm]");
+			}
+#endif
+		} else {
+			SysPrintf("[+ecm]");
+		}
+	}
+	return ret;
+}
 #else
 int aropen(FILE* fparchive, const char* _fn) {return -1;}
 static int cdread_archive(FILE *f, unsigned int base, void *dest, int sector) {return -1;}
+int handlearchive(const char *isoname, s32* accurate_length) {return -1;}
 #endif
 
 static unsigned char * CALLBACK ISOgetBuffer_compr(void) {
@@ -1747,6 +1686,7 @@ static long CALLBACK ISOopen(void) {
 	else if (parsemds(GetIsoFile()) == 0) {
 		SysPrintf("[+mds]");
 	}
+	// TODO Is it possible that cue/ccd+ecm? otherwise use else if below to supressn extra checks
 	if (handlepbp(GetIsoFile()) == 0) {
 		SysPrintf("[pbp]");
 		CDR_getBuffer = ISOgetBuffer_compr;
@@ -1760,26 +1700,8 @@ static long CALLBACK ISOopen(void) {
 	else if ((handleecm(GetIsoFile(), cdHandle, NULL) == 0)) {
 		SysPrintf("[+ecm]");
 	}
-#ifdef HAVE_LIBARCHIVE
-	else if (aropen(cdHandle, GetIsoFile()) == 0) {
-		cdimg_read_func = cdread_archive;
-		SysPrintf("[+archive]");
-		if (!ecm_file_detected) {
-#ifndef ENABLE_ECM_FULL
-			//Detect ECM inside archive
-			cdimg_read_func_archive = cdread_normal;
-			cdread_archive(cdHandle, 0, cdbuffer, 16);
-			if (handleecm("test.ecm", cdimage_buffer, NULL) != -1) {
-				cdimg_read_func_archive = cdread_ecm_decode;
-				cdimg_read_func = cdread_archive;
-				SysPrintf("[+ecm]");
-			}
-#endif
-		} else {
-			SysPrintf("[+ecm]");
-		}
+	else if (handlearchive(GetIsoFile(), NULL) == 0) {
 	}
-#endif
 
 	if (!subChanMixed && opensubfile(GetIsoFile()) == 0) {
 		SysPrintf("[+sub]");
