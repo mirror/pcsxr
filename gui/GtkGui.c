@@ -1168,8 +1168,14 @@ void SysMessage(const char *fmt, ...) {
 
 	gtk_widget_show (Txt);
 	gtk_widget_show_all (MsgDlg);
-	gtk_dialog_run (GTK_DIALOG(MsgDlg));
-	gtk_widget_destroy (MsgDlg);
+
+	g_signal_connect_swapped(G_OBJECT(MsgDlg), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+	g_signal_connect_swapped (MsgDlg,
+					"response",
+					G_CALLBACK (gtk_widget_destroy),
+					MsgDlg);
+							 
+	gtk_main();
 }
 
 void SysErrorMessage(gchar *primary, gchar *secondary) {
