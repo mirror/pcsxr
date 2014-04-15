@@ -725,7 +725,7 @@ static int parsecue(const char *isofile) {
 
 			file_len = 0;
 			if (ti[numtracks + 1].handle == NULL) {
-				SysPrintf(_("\ncould not open: %s\n"), filepath);
+				SysMessage(_("\ncould not open: %s\n"), filepath);
 				continue;
 			}
 
