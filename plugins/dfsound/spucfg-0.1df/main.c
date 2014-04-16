@@ -29,14 +29,14 @@ int set_limit (char *p, int len, int lower, int upper)
 	int val = 0;
 
 	if (p)
-	    val = atoi(p + len);
+		val = atoi(p + len);
 
 	if (val < lower)
-	    val = lower;
+		val = lower;
 	if (val > upper)
-	    val = upper;
+		val = upper;
 
-    return val;
+	return val;
 }
 
 void on_about_clicked (GtkWidget *widget, gpointer user_data)
@@ -47,39 +47,39 @@ void on_about_clicked (GtkWidget *widget, gpointer user_data)
 
 void OnConfigClose(GtkWidget *widget, gpointer user_data)
 {
-	gtk_widget_destroy(gtk_builder_get_object(builder, "CfgWnd"));
+	gtk_widget_destroy(GTK_WIDGET(gtk_builder_get_object(builder, "CfgWnd")));
 	exit(0);
 }
 
 int main(int argc, char *argv[])
 {
-    FILE *in;
-    char t[256];
-    int len, val = 0;
-    char *pB, *p;
-    char cfg[255];
+	FILE *in;
+	char t[256];
+	int len, val = 0;
+	char *pB, *p;
+	char cfg[255];
 
 #ifdef ENABLE_NLS
-    setlocale (LC_ALL, "");
-    bindtextdomain (GETTEXT_PACKAGE, LOCALE_DIR);
-    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-    textdomain (GETTEXT_PACKAGE);
+	setlocale (LC_ALL, "");
+	bindtextdomain (GETTEXT_PACKAGE, LOCALE_DIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
 #endif
 
-    if (argc < 2) {
-    	printf ("Usage: cfgDFSound {about | configure}\n");
+	if (argc < 2) {
+		printf ("Usage: cfgDFSound {about | configure}\n");
 		return 0;
 	}
 
-    if (strcmp(argv[1], "configure") != 0 && 
+	if (strcmp(argv[1], "configure") != 0 && 
 		strcmp(argv[1], "about") != 0) {
 		printf ("Usage: cfgDFSound {about | configure}\n");
 		return 0;
-    }
+	}
 
-    gtk_init(&argc, &argv);
+	gtk_init(&argc, &argv);
 
-    if (strcmp(argv[1], "about") == 0) {
+	if (strcmp(argv[1], "about") == 0) {
 		const char *authors[]= {"Pete Bernert and the P.E.Op.S. team", "Ryan Schultz", "Andrew Burton", NULL};
 		widget = gtk_about_dialog_new ();
 		gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG (widget), "dfsound PCSXR Sound Plugin");
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
 		gtk_main();
 
 		return 0;
-    }
+	}
 	else if (strcmp(argv[1], "configure") == 0) {
 		builder = gtk_builder_new();
 
@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
 			return 0;
 		}
 		
-		MainWindow = gtk_builder_get_object(builder, "CfgWnd");
+		MainWindow = GTK_WIDGET(gtk_builder_get_object(builder, "CfgWnd"));
 
 		strcpy(cfg, CONFIG_FILENAME);
 
@@ -222,11 +222,11 @@ int main(int argc, char *argv[])
 		if (pB)
 			free(pB);
 
-		widget = gtk_builder_get_object(builder, "CfgWnd");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "CfgWnd"));
 		g_signal_connect_data(G_OBJECT(widget), "destroy",
 			G_CALLBACK(SaveConfig), builder, NULL, 0);
 
-		widget = gtk_builder_get_object(builder, "btn_close");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "btn_close"));
 		g_signal_connect_data(G_OBJECT(widget), "clicked",
 			G_CALLBACK(OnConfigClose), builder, NULL, G_CONNECT_AFTER);
 
@@ -234,7 +234,7 @@ int main(int argc, char *argv[])
 		gtk_main();
 	}
 	
-    return 0;
+	return 0;
 }
 
 void SaveConfig(GtkWidget *widget, gpointer user_data)

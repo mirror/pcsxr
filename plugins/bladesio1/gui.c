@@ -108,44 +108,44 @@ void configure() {
 
 	settingsRead();
 
-	MainWindow = gtk_builder_get_object(builder, "dlgStart");
+	MainWindow = GTK_WIDGET(gtk_builder_get_object(builder, "dlgStart"));
 	gtk_window_set_title(GTK_WINDOW(MainWindow), _("Link Cable Configuration"));
 
-	widget = gtk_builder_get_object(builder, "btnCopyIP");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "btnCopyIP"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnCopyIP), NULL, NULL, G_CONNECT_AFTER);
 
 	switch(settings.player) {
 		case PLAYER_DISABLED:
-			widget = gtk_builder_get_object(builder, "rbDisabled");
+			widget = GTK_WIDGET(gtk_builder_get_object(builder, "rbDisabled"));
 			break;
 		case PLAYER_MASTER:
-			widget = gtk_builder_get_object(builder, "rbServer");
+			widget = GTK_WIDGET(gtk_builder_get_object(builder, "rbServer"));
 			break;
 		case PLAYER_SLAVE:
-			widget = gtk_builder_get_object(builder, "rbClient");
+			widget = GTK_WIDGET(gtk_builder_get_object(builder, "rbClient"));
 			break;
 	}
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
 
-	widget = gtk_builder_get_object(builder, "tbServerIP");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "tbServerIP"));
 	gtk_entry_set_text(GTK_ENTRY(widget), settings.ip);
 
-	widget = gtk_builder_get_object(builder, "tbPort");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "tbPort"));
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), settings.port);
 
 	if(gtk_dialog_run(GTK_DIALOG(MainWindow)) == GTK_RESPONSE_OK) {
-		widget = gtk_builder_get_object(builder, "tbServerIP");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "tbServerIP"));
 		strncpy(settings.ip, gtk_entry_get_text(GTK_ENTRY(widget)), sizeof(settings.ip) - 1);
 
-		widget = gtk_builder_get_object(builder, "tbPort");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "tbPort"));
 		settings.port = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
 
-		widget = gtk_builder_get_object(builder, "rbDisabled");
+		widget = GTK_WIDGET(gtk_builder_get_object(builder, "rbDisabled"));
 		if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)))
 			settings.player = PLAYER_DISABLED;
 		else {
-			widget = gtk_builder_get_object(builder, "rbServer");
+			widget = GTK_WIDGET(gtk_builder_get_object(builder, "rbServer"));
 			if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)))
 				settings.player = PLAYER_MASTER;
 			else

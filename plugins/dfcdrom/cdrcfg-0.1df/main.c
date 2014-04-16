@@ -178,23 +178,23 @@ void fill_drives_list(GtkWidget *widget) {
 }
 
 static void OnConfigExit(GtkWidget *widget, gpointer user_data) {
-	widget = gtk_builder_get_object(builder, "cddev_comboboxentry");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "cddev_comboboxentry"));
 	strncpy(CdromDev, gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(widget)))), 255);
 	CdromDev[255] = '\0';
 
-	widget = gtk_builder_get_object(builder, "readmode_combobox");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "readmode_combobox"));
 	ReadMode = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
 
-	widget = gtk_builder_get_object(builder, "subQ_button");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "subQ_button"));
 	UseSubQ = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 
-	widget = gtk_builder_get_object(builder, "spinCacheSize");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "spinCacheSize"));
 	CacheSize = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
 
-	widget = gtk_builder_get_object(builder, "spinCdrSpeed");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "spinCdrSpeed"));
 	CdrSpeed = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
 
-	widget = gtk_builder_get_object(builder, "comboSpinDown");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "comboSpinDown"));
 	SpinDown = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
 
 	SaveConf();
@@ -213,34 +213,34 @@ long CDRconfigure() {
 		return 0;
 	}
 
-	MainWindow = gtk_builder_get_object(builder, "CfgWnd");
+	MainWindow = GTK_WIDGET(gtk_builder_get_object(builder, "CfgWnd"));
 	gtk_window_set_title(GTK_WINDOW(MainWindow), _("CDR configuration"));
 
-	widget = gtk_builder_get_object(builder, "CfgWnd");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "CfgWnd"));
 	g_signal_connect_data(G_OBJECT(widget), "delete_event",
 		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "cfg_closebutton");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "cfg_closebutton"));
 	g_signal_connect_data(G_OBJECT(widget), "clicked",
 		G_CALLBACK(OnConfigExit), NULL, NULL, G_CONNECT_AFTER);
 
-	widget = gtk_builder_get_object(builder, "cddev_comboboxentry");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "cddev_comboboxentry"));
 	fill_drives_list(widget);
 	gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(widget))), CdromDev);
 
-	widget = gtk_builder_get_object(builder, "readmode_combobox");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "readmode_combobox"));
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget), ReadMode);
 
-	widget = gtk_builder_get_object(builder, "subQ_button");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "subQ_button"));
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), UseSubQ);
 
-	widget = gtk_builder_get_object(builder, "spinCacheSize");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "spinCacheSize"));
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), (float)CacheSize);
 
-	widget = gtk_builder_get_object(builder, "spinCdrSpeed");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "spinCdrSpeed"));
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), (float)CdrSpeed);
 
-	widget = gtk_builder_get_object(builder, "comboSpinDown");
+	widget = GTK_WIDGET(gtk_builder_get_object(builder, "comboSpinDown"));
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget), SpinDown);
 
 	gtk_widget_show(MainWindow);
@@ -276,16 +276,16 @@ int main(int argc, char *argv[]) {
 	gtk_init(&argc, &argv);
 
 	if (argc < 2) {
-    	printf ("Usage: cfgBladeSio1 {about | configure}\n");
+		printf ("Usage: cfgBladeSio1 {about | configure}\n");
 		return 0;
 	}
 
-    if (strcmp(argv[1], "configure") != 0 && 
+	if (strcmp(argv[1], "configure") != 0 && 
 		strcmp(argv[1], "about") != 0) {
 		printf ("Usage: cfgBladeSio1 {about | configure}\n");
 		return 0;
-    }
-    
+	}
+
 	if(!strcmp(argv[1], "configure"))
 		CDRconfigure();
 	else if(!strcmp(argv[1], "about"))
