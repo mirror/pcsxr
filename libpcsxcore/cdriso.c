@@ -1980,8 +1980,8 @@ long CALLBACK ISOreadCDDA(unsigned char m, unsigned char s, unsigned char f, uns
 			break;
 	}
 
-	// data tracks play silent
-	if (ti[track].type != CDDA) {
+	// data tracks play silent (or CDDA set to silent)
+	if (ti[track].type != CDDA || Config.Cdda == CDDA_DISABLED) {
 		memset(buffer, 0, CD_FRAMESIZE_RAW);
 		return 0;
 	}
@@ -2006,7 +2006,7 @@ long CALLBACK ISOreadCDDA(unsigned char m, unsigned char s, unsigned char f, uns
 		return -1;
 	}
 
-	if (cddaBigEndian) {
+	if (Config.Cdda == CDDA_ENABLED_BE || cddaBigEndian) {
 		int i;
 		unsigned char tmp;
 

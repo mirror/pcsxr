@@ -703,7 +703,7 @@ void cdrInterrupt() {
 			ReadTrack(cdr.SetSectorPlay);
 			cdr.TrackChanged = FALSE;
 
-			if (!Config.Cdda)
+			if (Config.Cdda != CDDA_DISABLED)
 				CDR_play(cdr.SetSectorPlay);
 
 			// Vib Ribbon: gameplay checks flag
@@ -1582,7 +1582,7 @@ void cdrReset() {
 int cdrFreeze(gzFile f, int Mode) {
 	u8 tmpp[3];
 
-	if (Mode == 0 && !Config.Cdda)
+	if (Mode == 0 && Config.Cdda != CDDA_DISABLED)
 		CDR_stop();
 	
 	gzfreeze(&cdr, sizeof(cdr));
@@ -1600,7 +1600,7 @@ int cdrFreeze(gzFile f, int Mode) {
 
 		if (cdr.Play) {
 			Find_CurTrack(cdr.SetSectorPlay);
-			if (!Config.Cdda)
+			if (Config.Cdda != CDDA_DISABLED)
 				CDR_play(cdr.SetSectorPlay);
 		}
 	}

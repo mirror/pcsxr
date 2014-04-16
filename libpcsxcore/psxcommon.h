@@ -141,7 +141,7 @@ typedef struct {
 	boolean SioIrq;
 	boolean Mdec;
 	boolean PsxAuto;
-	boolean Cdda;
+	u8      Cdda;
 	boolean HLE;
 	boolean SlowBoot;
 	boolean Debug;
@@ -188,6 +188,12 @@ enum {
 	CPU_DYNAREC = 0,
 	CPU_INTERPRETER
 }; // CPU Types
+
+enum {
+	CDDA_ENABLED_LE = 0,
+	CDDA_DISABLED,
+	CDDA_ENABLED_BE
+}; // CDDA Types
 
 int EmuInit();
 void EmuReset();
