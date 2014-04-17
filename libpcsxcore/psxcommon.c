@@ -29,7 +29,10 @@ boolean NetOpened = FALSE;
 
 int Log = 0;
 FILE *emuLog = NULL;
-u32 rewind_counter=0; // It is safe if this overflows
+
+// It is safe if these overflow
+u32 rewind_counter=0;
+u8 vblank_count_hideafter=0;
 
 int EmuInit() {
 	return psxInit();
@@ -60,6 +63,12 @@ void EmuUpdate() {
 		SysUpdate();
 
 	ApplyCheats();
+
+	if (vblank_count_hideafter) {
+		if (!(--vblank_count_hideafter)) {
+			GPU_showScreenPic(NULL);
+		}
+	}
 
 	if (Config.RewindInterval > 0 && !(++rewind_counter%Config.RewindInterval)) {
 		CreateRewindState();

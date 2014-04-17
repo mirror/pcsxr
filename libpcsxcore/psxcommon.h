@@ -166,7 +166,10 @@ typedef struct {
 
 extern PcsxConfig Config;
 extern boolean NetOpened;
-extern u32 rewind_counter; // It is safe if this overflows
+
+// It is safe if these overflow
+extern u32 rewind_counter;
+extern u8 vblank_count_hideafter;
 
 #define gzfreeze(ptr, size) { \
 	if (Mode == 1) gzwrite(f, ptr, size); \

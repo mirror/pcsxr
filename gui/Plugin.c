@@ -44,66 +44,35 @@ unsigned long gpuDisp;
 int StatesC = 0;
 extern int UseGui;
 
-pthread_t ThreadID = 0;
-boolean start = FALSE;
-boolean restart = FALSE;
-
-void gpuHidePic()
-{
-	GPU_showScreenPic(NULL);
-}
-
-static void *HidePicAfter(void *param)
-{
-	while (1)
-	{
-		//TODO use pthread_cond_wait
-		while (!start) usleep(100000);
-
-		while (1) {
-			usleep(3000000);
-			if (!restart)
-				break;
-			restart = FALSE;
-		};
-
-		gpuHidePic();
-		start = FALSE;
-	}
-}
-
 void gpuShowPic() {
 	gchar *state_filename;
 	gzFile f;
+	unsigned char *pMem;
 
-		unsigned char *pMem;
+	pMem = (unsigned char *) malloc(128*96*3);
+	if (pMem == NULL) return;
 
-		pMem = (unsigned char *) malloc(128*96*3);
-		if (pMem == NULL) return;
+	state_filename = get_state_filename (StatesC);
 
-		state_filename = get_state_filename (StatesC);
+	GPU_freeze(2, (GPUFreeze_t *)&StatesC);
 
-		GPU_freeze(2, (GPUFreeze_t *)&StatesC);
+	f = gzopen(state_filename, "rb");
+	if (f != NULL) {
+		gzseek(f, 32, SEEK_SET); // skip header
+		gzseek(f, sizeof(u32), SEEK_CUR);
+		gzseek(f, sizeof(boolean), SEEK_CUR);
+		gzread(f, pMem, 128*96*3);
+		gzclose(f);
+	} else {
+		memcpy(pMem, NoPic_Image.pixel_data, 128*96*3);
+		DrawNumBorPic(pMem, StatesC+1);
+	}
+	GPU_showScreenPic(pMem);
 
-		f = gzopen(state_filename, "rb");
-		if (f != NULL) {
-			gzseek(f, 32, SEEK_SET); // skip header
-			gzseek(f, sizeof(u32), SEEK_CUR);
-			gzseek(f, sizeof(boolean), SEEK_CUR);
-			gzread(f, pMem, 128*96*3);
-			gzclose(f);
-		} else {
-			memcpy(pMem, NoPic_Image.pixel_data, 128*96*3);
-			DrawNumBorPic(pMem, StatesC+1);
-		}
-		GPU_showScreenPic(pMem);
+	free(pMem);
+	g_free (state_filename);
 
-		free(pMem);
-		g_free (state_filename);
-		
-	if (!ThreadID) pthread_create(&ThreadID, NULL, HidePicAfter, NULL);
-	if (start) restart = TRUE;
-	start = TRUE;
+	vblank_count_hideafter = 2*50; // show pic for about 2 seconds
 }
 
 void KeyStateSave(int i) {
