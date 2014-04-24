@@ -47,7 +47,13 @@ static struct hostent *hostinfo;
 
 /***************************************************************************/
 
-s32 connectionOpen() {
+int connectionOpen() {
+#if defined _WINDOWS
+	WSADATA wsaData;
+	if(WSAStartup(0x202, &wsaData))
+		fprintf(stderr, "[SIO1] ERROR: WSAStartup()\n");
+#endif
+
 	switch(settings.player) {
 		case PLAYER_MASTER: {
 			int reuse_addr = 1;
@@ -120,12 +126,16 @@ void connectionClose() {
 		//close(serversock);
 		serversock = -1;
 	}
+
+#if defined _WINDOWS
+	WSACleanup();
+#endif
 }
 
 /***************************************************************************/
 
-size_t connectionSend(u8 *pdata, s32 size) {
-	size_t bytes = 0;
+int connectionSend(u8 *pdata, s32 size) {
+	int bytes = 0;
 
 	if(clientsock >= 0)
 		if((bytes = send(clientsock, (const char*)pdata, size, 0)) < 0)
@@ -134,8 +144,8 @@ size_t connectionSend(u8 *pdata, s32 size) {
 	return bytes;
 }
 
-size_t connectionRecv(u8 *pdata, s32 size) {
-	size_t bytes = 0;
+int connectionRecv(u8 *pdata, s32 size) {
+	int bytes = 0;
 
 	if(clientsock >= 0)
 		if((bytes = recv(clientsock, (char*)pdata, size, 0)) < 0)

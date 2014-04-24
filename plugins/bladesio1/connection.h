@@ -22,13 +22,13 @@
 
 /***************************************************************************/
 
-extern s32 connectionOpen();
+extern int connectionOpen();
 extern void connectionClose();
 
 /***************************************************************************/
 
-extern size_t connectionSend(u8 *pdata, s32 size);
-extern size_t connectionRecv(u8 *pdata, s32 size);
+extern int connectionSend(u8 *pdata, s32 size);
+extern int connectionRecv(u8 *pdata, s32 size);
 
 /***************************************************************************/
 
