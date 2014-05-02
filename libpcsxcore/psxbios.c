@@ -1014,6 +1014,26 @@ _start:
 	pc0 = ra;
 }
 
+void psxBios_format() { // 0x41
+	if (strcmp(Ra0, "bu00:") == 0 && Config.Mcd1[0] != '\0')
+	{
+		CreateMcd(Config.Mcd1);
+		LoadMcd(1, Config.Mcd1);
+		v0 = 1;
+	}
+	else if (strcmp(Ra1, "bu01:") == 0 && Config.Mcd2[0] != '\0')
+	{
+		CreateMcd(Config.Mcd2);
+		LoadMcd(1, Config.Mcd2);
+		v0 = 1;
+	}
+	else
+	{
+	       v0 = 0;
+	}
+	pc0 = ra;
+}
+
 /*
  *	long Load(char *name, struct EXEC *header);
  */
@@ -2502,7 +2522,7 @@ void psxBiosInit() {
 	biosB0[0x3c] = psxBios_getchar;
 	//biosB0[0x3e] = psxBios_gets;
 	//biosB0[0x40] = psxBios_cd;
-	//biosB0[0x41] = psxBios_format;
+	biosB0[0x41] = psxBios_format;
 	biosB0[0x42] = psxBios_firstfile;
 	biosB0[0x43] = psxBios_nextfile;
 	biosB0[0x44] = psxBios_rename;
