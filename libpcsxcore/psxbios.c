@@ -1024,7 +1024,7 @@ void psxBios_format() { // 0x41
 	else if (strcmp(Ra0, "bu01:") == 0 && Config.Mcd2[0] != '\0')
 	{
 		CreateMcd(Config.Mcd2);
-		LoadMcd(1, Config.Mcd2);
+		LoadMcd(2, Config.Mcd2);
 		v0 = 1;
 	}
 	else
