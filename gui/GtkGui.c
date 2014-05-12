@@ -129,8 +129,6 @@ void ResetMenuSlots() {
 		gtk_widget_set_sensitive(widget, TRUE);
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "cdrom1"));
 		gtk_widget_set_sensitive(widget, TRUE);
-		widget = GTK_WIDGET(gtk_builder_get_object(builder, "pad1"));
-		gtk_widget_set_sensitive(widget, TRUE);
 #ifdef ENABLE_SIO1API
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "sio1"));
 		gtk_widget_set_sensitive(widget, TRUE);
@@ -148,8 +146,6 @@ void ResetMenuSlots() {
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_sound"));
 		gtk_widget_set_sensitive(widget, TRUE);
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_cdrom"));
-		gtk_widget_set_sensitive(widget, TRUE);
-		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_controllers"));
 		gtk_widget_set_sensitive(widget, TRUE);
 		
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "statusbar"));
@@ -179,8 +175,6 @@ void ResetMenuSlots() {
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "cdrom1"));
 		gtk_widget_set_sensitive(widget, FALSE);
-		widget = GTK_WIDGET(gtk_builder_get_object(builder, "pad1"));
-		gtk_widget_set_sensitive(widget, FALSE);
 #ifdef ENABLE_SIO1API
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "sio1"));
 		gtk_widget_set_sensitive(widget, FALSE);
@@ -196,8 +190,6 @@ void ResetMenuSlots() {
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_sound"));
 		gtk_widget_set_sensitive(widget, FALSE);
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_cdrom"));
-		gtk_widget_set_sensitive(widget, FALSE);
-		widget = GTK_WIDGET(gtk_builder_get_object(builder, "toolbutton_controllers"));
 		gtk_widget_set_sensitive(widget, FALSE);
 
 		widget = GTK_WIDGET(gtk_builder_get_object(builder, "statusbar"));

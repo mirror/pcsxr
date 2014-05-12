@@ -350,10 +350,12 @@ int _OpenPlugins() {
 	ret = GPU_open(&gpuDisp, "PCSXR", NULL);
 	if (ret < 0) { SysMessage(_("Error opening GPU plugin!")); return -1; }
 	ret = PAD1_open(&gpuDisp);
+	ret |= PAD1_init(1); // Allow setting to change during run
 	if (ret < 0) { SysMessage(_("Error opening Controller 1 plugin!")); return -1; }
 	PAD1_registerVibration(GPU_visualVibration);
 	PAD1_registerCursor(GPU_cursor);
 	ret = PAD2_open(&gpuDisp);
+	ret |= PAD2_init(2); // Allow setting to change during run
 	if (ret < 0) { SysMessage(_("Error opening Controller 2 plugin!")); return -1; }
 	PAD2_registerVibration(GPU_visualVibration);
 	PAD2_registerCursor(GPU_cursor);

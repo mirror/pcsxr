@@ -326,6 +326,7 @@ void OnConf_Pad() {
 	PADconfigure conf;
 	char Plugin[MAXPATHLEN];
 
+	// PAD 1
 	sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Pad1);
 	drv = SysLoadLibrary(Plugin);
 	if (drv == NULL) { printf("Error with file %s\n", Plugin); return; }
@@ -341,6 +342,7 @@ void OnConf_Pad() {
 
 	SysCloseLibrary(drv);
 
+	// PAD 2
 	if (strcmp(Config.Pad1, Config.Pad2) != 0) {
 		sprintf(Plugin, "%s/%s", Config.PluginsDir, Config.Pad2);
 		drv = SysLoadLibrary(Plugin);
