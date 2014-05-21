@@ -29,6 +29,13 @@
 #include "../libpcsxcore/sio.h"
 
 #define MAX_MEMCARD_BLOCKS 15
+#define ICON_SIZE 16 * 16
+#define ISLINKMIDBLOCK(Info) (((Info)->Flags & 0xF) == 0x2)
+#define ISLINKENDBLOCK(Info) (((Info)->Flags & 0xF) == 0x3)
+#define ISLINKBLOCK(Info) (ISLINKENDBLOCK((Info)) || ISLINKMIDBLOCK((Info)))
+#define ISDELETED(Info) (((Info)->Flags & 0xF) >= 1 && ((Info)->Flags & 0xF) <= 3)
+#define ISBLOCKDELETED(Info) (((Info)->Flags & 0xF0) == 0xA0)
+#define ISSTATUSDELETED(Info) (ISBLOCKDELETED(Info) && ISDELETED(Info)) 
 
 static gboolean quit;
 static unsigned int currentIcon;
@@ -43,6 +50,8 @@ enum {
 	CL_NAME,
 	NUM_CL
 };
+
+short IconDeleted[ICON_SIZE*3];
 
 static GtkBuilder *builder;
 GtkWidget *GtkCList_McdList1, *GtkCList_McdList2;
@@ -113,51 +122,66 @@ static GdkPixbuf *SetIcon(GtkWidget *dialog, short *icon, int scale) {
 
 static gchar* MCDStatusToChar(McdBlock *Info) {
 	gchar *state;
-	if ((Info->Flags & 0xF0) == 0xA0) {
-		if ((Info->Flags & 0xF) >= 1 && (Info->Flags & 0xF) <= 3)
+	if (ISBLOCKDELETED(Info)) {
+		if (ISDELETED(Info))
 			state = _("Deleted");
 		else
 			state = _("Free");
 	} else if ((Info->Flags & 0xF0) == 0x50) {
 		if ((Info->Flags & 0xF) == 0x1)
 			state = _("Used");
-		else if ((Info->Flags & 0xF) == 0x2)
+		else if (ISLINKMIDBLOCK(Info))
 			state = _("Link");
-		else if ((Info->Flags & 0xF) == 0x3)
+		else if (ISLINKENDBLOCK(Info))
 			state = _("End link");
-        } else
+		} else
 		state = _("Free");
 	return state;
 }
 
-static void LoadListItems(int mcd, GtkWidget *widget) {
+static void OnTreeSelectionChanged(GtkTreeSelection *selection, gpointer user_data);
+static void LoadListItems(int mcd, boolean newstore) {
 	int i;
+	GtkListStore *store;
 	GtkWidget *List;
 	GtkWidget *dialog;
-	GtkListStore *store;
 	GtkTreeIter iter;
 	GdkPixbuf *pixbuf;
 	gchar *title;
-
-	store = gtk_list_store_new(NUM_CL, GDK_TYPE_PIXBUF, G_TYPE_STRING,
-			G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
 	dialog = GTK_WIDGET(gtk_builder_get_object(builder, "McdsDlg"));
 
 	if (mcd == 1) List = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_McdList1"));
 	else List = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_McdList2"));
 
+	if (newstore) {
+		store = gtk_list_store_new(NUM_CL, GDK_TYPE_PIXBUF, G_TYPE_STRING,
+			G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+	} else {
+		store = GTK_LIST_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(List)));
+		gtk_tree_model_get_iter_first(GTK_TREE_MODEL(store), &iter);
+	}
+
 	for (i = 0; i < MAX_MEMCARD_BLOCKS; i++) {
 		McdBlock *Info;
-		gchar *state;
+		const gchar *state;
+		short* iconlinkptr;
 
 		Info = &Blocks[mcd - 1][i];
 		IconC[mcd - 1][i] = 0;
 		state = MCDStatusToChar(Info);
 
-		pixbuf = SetIcon(dialog, Info->Icon, 2);
+		if (ISSTATUSDELETED(Info)) {
+			iconlinkptr = IconDeleted;
+		} else if (!newstore && Info->IconCount > 0) {
+			iconlinkptr = &Info->Icon[(currentIcon % Info->IconCount) * ICON_SIZE];
+		} else if (!ISLINKBLOCK(Info)) {
+		//} else if (strcmp(state, _("Link")) != 0 && strcmp(state, _("End link")) != 0) {
+			iconlinkptr = Info->Icon;
+		}
+		pixbuf = SetIcon(dialog, iconlinkptr, 2);
 
-		gtk_list_store_append(store, &iter);
+		if (newstore) gtk_list_store_append(store, &iter);
 
 		title = g_convert(Info->sTitle, strlen(Info->sTitle), "UTF-8",
 			"Shift-JIS", NULL, NULL, NULL);
@@ -169,15 +193,21 @@ static void LoadListItems(int mcd, GtkWidget *widget) {
 				CL_NAME, Info->Name,
 				CL_ID, Info->ID,
 				-1);
+		
 
 		g_free(title);
 		
 		g_object_unref(pixbuf);
+		if (!newstore) gtk_tree_model_iter_next(GTK_TREE_MODEL(store), &iter);
 	}
 
-	gtk_tree_view_set_model(GTK_TREE_VIEW(List), GTK_TREE_MODEL(store));
-	g_object_unref(G_OBJECT(store));
-	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(List), TRUE);
+	if (newstore) {
+		gtk_tree_view_set_model(GTK_TREE_VIEW(List), GTK_TREE_MODEL(store));
+		g_object_unref(G_OBJECT(store));
+		gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(List), TRUE);
+	} else {
+		OnTreeSelectionChanged(gtk_tree_view_get_selection(GTK_TREE_VIEW(List)), GINT_TO_POINTER(mcd));
+	}
 	gtk_widget_show(List);
 }
 
@@ -212,68 +242,10 @@ static void LoadMcdDlg(GtkWidget *widget) {
 		GetMcdBlockInfo(2, i + 1, &Blocks[1][i]);
 	}
 
-	LoadListItems(1, widget);
-	LoadListItems(2, widget);
+	LoadListItems(1, TRUE);
+	LoadListItems(2, TRUE);
 
 	UpdateFilenameButtons(widget);
-}
-
-static void OnTreeSelectionChanged(GtkTreeSelection *selection, gpointer user_data);
-
-static void UpdateListItems(int mcd, GtkWidget *widget) {
-	GtkWidget *List;
-	GtkWidget *dialog;
-	GtkListStore *store;
-	GtkTreeIter iter;
-	GdkPixbuf *pixbuf;
-	short *pIcon;
-	int i;
-	gchar *title;
-
-	dialog = GTK_WIDGET(gtk_builder_get_object(builder, "McdsDlg"));
-
-	if (mcd == 1) List = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_McdList1"));
-	else List = GTK_WIDGET(gtk_builder_get_object(builder, "GtkCList_McdList2"));
-
-	store = GTK_LIST_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(List)));
-	gtk_tree_model_get_iter_first(GTK_TREE_MODEL(store), &iter);
-
-	for (i = 0; i < MAX_MEMCARD_BLOCKS; i++) {
-		McdBlock *Info;
-		gchar *state;
-
-		Info = &Blocks[mcd - 1][i];
-		IconC[mcd - 1][i] = 0;
-
-		state = MCDStatusToChar(Info);
-
-		if (Info->IconCount > 0) {
-			pIcon = &Info->Icon[(currentIcon % Info->IconCount) * 16 * 16];
-		} else {
-			pIcon = Info->Icon;
-		}
-
-		pixbuf = SetIcon(dialog, pIcon, 2);
-		title = g_convert(Info->sTitle, strlen(Info->sTitle), "UTF-8",
-			"Shift-JIS", NULL, NULL, NULL);
-
-		gtk_list_store_set(store, &iter,
-				CL_ICON, pixbuf,
-				CL_TITLE, title,
-				CL_STAT, state,
-				CL_NAME, Info->Name,
-				CL_ID, Info->ID,
-				-1);
-
-		g_free(title);
-
-		g_object_unref(pixbuf);
-		gtk_tree_model_iter_next(GTK_TREE_MODEL(store), &iter);
-	}
-
-	gtk_widget_show(List);
-
-	OnTreeSelectionChanged(gtk_tree_view_get_selection(GTK_TREE_VIEW(List)), GINT_TO_POINTER(mcd));
 }
 
 static void UpdateMcdDlg(GtkWidget *widget) {
@@ -284,8 +256,8 @@ static void UpdateMcdDlg(GtkWidget *widget) {
 		GetMcdBlockInfo(2, i + 1, &Blocks[1][i]);
 	}
 
-	UpdateListItems(1, widget);
-	UpdateListItems(2, widget);
+	LoadListItems(1, FALSE);
+	LoadListItems(2, FALSE);
 
 	UpdateFilenameButtons(widget);
 }
@@ -442,14 +414,32 @@ static int GetFreeMemcardSlot(gint target_card, gint count) {
 	return -1;
 }
 
-static void CopyMemcardData(char *from, char *to, gint srci, gint dsti, gchar *str) {
+void CopyMemcardData(char *from, char *to, gint srci, gint dsti,
+						gchar *str, u16 linkindex) {
+	u16* linkptr;
+	u8* checksumptr;
+	dsti += 1; srci += 1;
 	// header	
-	memcpy(to + (dsti + 1) * 128, from + (srci + 1) * 128, 128);
-	SaveMcd((char *)str, to, (dsti + 1) * 128, 128);
+	memcpy(to + dsti * 128, from + srci * 128, 128);
+	
+	// Link field to next block (multi block saves)
+	linkptr = (u16*)&to[(dsti*128)+0x08];
+	if (*linkptr != 0xFFFFU) {
+		// TODO: link index is 2 bytes, but how can link it be
+		// greater than num blocks (> 14), 41161 f.e..?
+		checksumptr = &to[(dsti*128)+0x7F]; // update checksum
+		*checksumptr ^= ((u8*)(linkptr))[0]; // checksum minus old index (lower byte)
+		*checksumptr ^= ((u8*)(linkptr))[1]; // checksum minus old index (upper byte)
+		*linkptr = linkindex; // next block in 0...14 index
+		*checksumptr ^= linkindex>>8; // checksum plus new index (upper byte)
+		*checksumptr ^= linkindex&0xFF; // checksum plus new index (lower byte)
+	}
+	
+	SaveMcd((char *)str, to, dsti * 128, 128);
 
 	// data	
-	memcpy(to + (dsti + 1) * 1024 * 8, from + (srci+1) * 1024 * 8, 1024 * 8);
-	SaveMcd((char *)str, to, (dsti + 1) * 1024 * 8, 1024 * 8);
+	memcpy(to + dsti * 1024 * 8, from + srci * 1024 * 8, 1024 * 8);
+	SaveMcd((char *)str, to, dsti * 1024 * 8, 1024 * 8);
 
 	//printf("data = %s\n", from + (srci+1) * 128);
 }
@@ -462,9 +452,9 @@ gint GetMcdBlockCount(gint mcd, gint startblock) {
 	for (i=1; i <= (MAX_MEMCARD_BLOCKS-startblock); i++) {
 		GetMcdBlockInfo(mcd, startblock+i, &b);
 		//printf("i=%i, mcd=%i, startblock=%i, diff=%i, flags=%x\n", i, mcd, startblock, (MAX_MEMCARD_BLOCKS-startblock), b.Flags);
-		if ((b.Flags & 0x3) == 0x3) {
+		if (ISLINKENDBLOCK(&b)) {
 			return i+1;
-		} else if ((b.Flags & 0x2) == 0x2) {
+		} else if (ISLINKMIDBLOCK(&b)) {
 			//i++
 		} else {
 			return i;
@@ -498,7 +488,7 @@ static void OnMcd_CopyTo(GtkWidget *widget, gpointer user_data) {
 	if (gtk_tree_selection_get_selected(treesel, &model, &iter)) {
 		path = gtk_tree_model_get_path(model, &iter);
 		i = gtk_tree_path_get_indices(path);
-		srci    = *i;
+		srci = *i;
 		gtk_tree_path_free(path);
 	}
 
@@ -525,16 +515,19 @@ static void OnMcd_CopyTo(GtkWidget *widget, gpointer user_data) {
 	}
 
 	for (j=0; j < count; j++) {
-		CopyMemcardData(source, destination, (srci+j), (first_free_slot+j), str);
-		printf("count = %i, firstfree=%i, i=%i\n", count, first_free_slot, j);
+		// TODO: possibility of copying multi block saves around card
+		// when specifying last parameter linkindex with next index
+		CopyMemcardData(source, destination, 
+					(srci+j), (first_free_slot+j), str, (first_free_slot+j+1));
+		//printf("count = %i, firstfree=%i, i=%i\n", count, first_free_slot, j);
 	}
 
 	UpdateMcdDlg(widget);
 }
 
 static void OnMemcardDelete(GtkWidget *widget, gpointer user_data) {
-	McdBlock *Info;
-	int i, xor = 0, j;
+	McdBlock *Info, *NextInfo;
+	int i, xorsum, j;
 	char *data, *ptr;
 	GtkTreeIter iter;
 	GtkTreeModel *model;
@@ -564,23 +557,30 @@ static void OnMemcardDelete(GtkWidget *widget, gpointer user_data) {
 		path = gtk_tree_model_get_path(model, &iter);
 		i = *gtk_tree_path_get_indices(path);
 
-		i++;
-		ptr = data + i * 128;
-		Info = &Blocks[memcard - 1][i - 1];
-
-		if ((Info->Flags & 0xF0) == 0xA0) {
-			if ((Info->Flags & 0xF) >= 1 &&
-				(Info->Flags & 0xF) <= 3) { // deleted
-				*ptr = 0x50 | (Info->Flags & 0xF);
-			} else return;
-		} else if ((Info->Flags & 0xF0) == 0x50) { // used
+		// Delete selected file and all linked blocks also (flag value 2 or 3)
+		do {
+			i++;
+			ptr = data + i * 128;
+			Info = &Blocks[memcard - 1][i - 1];
+			NextInfo = &Blocks[memcard - 1][i - 0];
+			
+			if ((Info->Flags & 0xF0) == 0xA0) {
+				if ((Info->Flags & 0xF) >= 1 &&
+						(Info->Flags & 0xF) <= 3) { // deleted
+					*ptr = 0x50 | (Info->Flags & 0xF);
+				} else return;
+			} else if ((Info->Flags & 0xF0) == 0x50) { // used
 				*ptr = 0xA0 | (Info->Flags & 0xF);
-		} else { return; }
+			} else { return; }
 
-		for (j = 0; j < 127; j++) xor ^= *ptr++;
-		*ptr = xor;
+			for (j = 0, xorsum = 0; j < 127; j++) {
+				xorsum ^= *ptr++;
+			}
+			*ptr = xorsum;
+			//printf("Info %s %i NextInfo %s %i (%i)\n", Info->ID, Info->Flags, NextInfo->ID, NextInfo->Flags, i);
+			SaveMcd((char *)filename, data, i * 128, 128);
+		} while (i < MAX_MEMCARD_BLOCKS && (ISLINKBLOCK(NextInfo)));
 
-		SaveMcd((char *)filename, data, i * 128, 128);
 		UpdateMcdDlg(widget);
 	}
 }
@@ -616,8 +616,10 @@ static void OnTreeSelectionChanged(GtkTreeSelection *selection, gpointer user_da
 
 			if ((b.Flags & 0xF3) == 0x51) {
 				gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_CopyTo2")), TRUE);
+				//gtk_button_set_label(GTK_BUTTON(gtk_builder_get_object(builder, "GtkButton_Delete1")), _("Delete"));
 			} else {
 				gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "GtkButton_CopyTo2")), FALSE);
+				//gtk_button_set_label(GTK_BUTTON(gtk_builder_get_object(builder, "GtkButton_Delete1")), _("Undelete"));
 			}
 		} else {
 			GetMcdBlockInfo(2, i + 1, &b);
@@ -648,8 +650,8 @@ static void OnTreeSelectionChanged(GtkTreeSelection *selection, gpointer user_da
 gboolean updateFunc(gpointer data) {
 	if (quit) return FALSE;
 	currentIcon++;
-	UpdateListItems(1, GtkCList_McdList1);
-	UpdateListItems(2, GtkCList_McdList2);
+	LoadListItems(1, FALSE);
+	LoadListItems(2, FALSE);
 	g_timeout_add(200, updateFunc, 0);
 	return FALSE;
 }
@@ -661,7 +663,7 @@ void OnConf_Mcds() {
 	gchar *str;
 
 	builder = gtk_builder_new();
-	
+
 	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
 		g_warning("Error: interface could not be loaded!");
 		return;
@@ -756,6 +758,8 @@ void OnConf_Mcds() {
 	currentIcon = 0;
 
 	g_timeout_add(1, updateFunc, 0);
+
+	memset(IconDeleted, 0x18, sizeof(IconDeleted));
 
 	while (gtk_events_pending()) {  gtk_main_iteration(); }
 }
