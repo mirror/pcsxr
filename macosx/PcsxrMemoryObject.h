@@ -11,13 +11,13 @@
 
 extern NSString *const memoryAnimateTimerKey;
 
-typedef enum _PCSXRMemFlags {
+typedef NS_ENUM(char, PCSXRMemFlags) {
 	memFlagDeleted,
 	memFlagFree,
 	memFlagUsed,
 	memFlagLink,
 	memFlagEndLink
-} PCSXRMemFlags;
+};
 
 @interface PcsxrMemoryObject : NSObject
 

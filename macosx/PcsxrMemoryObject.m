@@ -30,7 +30,7 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 {
 	NSMutableArray *imagesArray = [[NSMutableArray alloc] initWithCapacity:block->IconCount];
 	for (int i = 0; i < block->IconCount; i++) {
-		NSImage *memImage = nil;
+		NSImage *memImage;
 		{
 			NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:16 pixelsHigh:16 bitsPerSample:8 samplesPerPixel:3 hasAlpha:NO isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:0 bitsPerPixel:0];
 			
@@ -201,7 +201,7 @@ static NSString *MemLabelEndLink;
 @synthesize blockSize;
 @synthesize startingIndex;
 
-#pragma mark Non-synthesize Properties
+#pragma mark Non-synthesized Properties
 - (unsigned)memIconCount
 {
 	return (unsigned)[memImages count];

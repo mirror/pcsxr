@@ -11,7 +11,7 @@
 
 // Apple deprecated __private_extern__ in Xcode 4.6.
 // This is a convenience declaration to retain the old behavior.
-#define __private_extern__ __attribute__((visibility("hidden")))
+#define __private_extern __attribute__((visibility("hidden")))
 
 #include <sys/time.h>
 #include <unistd.h>
