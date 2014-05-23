@@ -1287,7 +1287,9 @@ static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector)
 
 	if (sector <= len_ecm_savetable) {
 		// get sector from LUT which points to wanted sector or close to
-		for (sectorcount = sector; ((sectorcount > 0) && ((sector-sectorcount) <= 2*75)); sectorcount--) {
+		// TODO: What would be optimal maximum to search near sector?
+		//       Might cause slowdown if too small but too big also..
+		for (sectorcount = sector; ((sectorcount > 0) && ((sector-sectorcount) <= 50000)); sectorcount--) {
 			if (ecm_savetable[sectorcount].filepos >= ECM_HEADER_SIZE) {
 				pos = &(ecm_savetable[sectorcount]);
 				//printf("LUTSector %i %i %i %i\n", sector, pos->sector, prevsector, base);
@@ -1333,6 +1335,9 @@ static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector)
 			if (!processsectors && sectorcount >= (sector-1)) { // ensure that we read the sector we are supposed to
 				processsectors = TRUE;
 				//printf("Saving at %i\n", sectorcount);
+			} else if (processsectors && sectorcount > sector) {
+				//printf("Terminating at %i\n", sectorcount);
+				break;
 			}
 			/*printf("Type %i Num %i SeekSector %i ProcessedSectors %i(%i) Bytecount %i Pos %li Write %u\n",
 					type, num, sector, sectorcount, pos->sector, writebytecount, ftell(f), processsectors);*/
