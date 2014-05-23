@@ -144,7 +144,7 @@ static gchar* MCDStatusToChar(McdBlock *Info) {
 u8 GetLinkReference(char* mcddata, const u8 block) {
 	u8 i;
 	for (i=0; i < MAX_MEMCARD_BLOCKS; i++) {
-		u16 link = GETLINKFORBLOCK(mcddata, i);
+		u16 link = GETLINKFORBLOCK(mcddata, i)+1; // 0...15 index
 		if (link == block) {
 			return i;
 		}
@@ -444,13 +444,13 @@ static int GetFreeMemcardSlot(gint target_card, gint count, u8* blocks) {
 }
 
 void CopyMemcardData(char *from, char *to, gint srci, gint dsti,
-						gchar *str, u16 linkindex) {
+						gchar *str, const u16 linkindex) {
 	u16* linkptr;
 	u8* checksumptr;
 
 	// header	
 	memcpy(to + dsti * 128, from + srci * 128, 128);
-	
+
 	// Link field to next block (multi block saves)
 	linkptr = (u16*)&to[(dsti*128)+0x08];
 	if (*linkptr != 0xFFFFU) {
@@ -462,8 +462,9 @@ void CopyMemcardData(char *from, char *to, gint srci, gint dsti,
 		*linkptr = linkindex; // next block in 0...14 index
 		*checksumptr ^= linkindex>>8; // checksum plus new index (upper byte)
 		*checksumptr ^= linkindex&0xFF; // checksum plus new index (lower byte)
+		//printf("link = %i %i\n", dsti, linkindex);
 	}
-	
+
 	SaveMcd((char *)str, to, dsti * 128, 128);
 
 	// data	
@@ -547,7 +548,7 @@ static void OnMcd_CopyTo(GtkWidget *widget, gpointer user_data) {
 	for (j=0; srctbl[j] > 0; j++) {
 		// last parameter specifies link index (next block)
 		CopyMemcardData(source, destination, 
-					srctbl[j], dsttbl[j], str, dsttbl[j+1]);
+					srctbl[j], dsttbl[j], str, dsttbl[j+1]-1);
 		//printf("count = %i, indices=(%x,%x) jindex=%i\n", count, srctbl[j], dsttbl[j], j);
 	}
 
@@ -589,16 +590,16 @@ static void OnMemcardDelete(GtkWidget *widget, gpointer user_data) {
 
 	if (selected) {
 		path = gtk_tree_model_get_path(model, &iter);
-		i = starti = *gtk_tree_path_get_indices(path) + 1;
+		i = starti = *gtk_tree_path_get_indices(path);
 
 		// Delete selected file and all linked blocks also (flag value 2 or 3)
 		do {
-			ptr = data + i * 128;
+			ptr = data + (++i) * 128;
 			Info = &Blocks[memcard - 1][i - 1];
 			//printf("Deleting %s %x (%i)\n", Info->ID, Info->Flags, i);
 
 			// N iter: check if link was valid but pointed to normal block
-			if (i!=starti && !ISLINKBLOCK(Info)) {
+			if (i!=(starti+1) && !ISLINKBLOCK(Info)) {
 				SysErrorMessage(_("Memory card is corrupted"),
 								_("Link block pointed to normal block which is not allowed."));
 				break;
@@ -617,11 +618,11 @@ static void OnMemcardDelete(GtkWidget *widget, gpointer user_data) {
 				xorsum ^= *ptr++;
 			}
 			*ptr = xorsum;
-	
+
 			SaveMcd((char *)filename, data, i * 128, 128);
 
 			// Check links
-			i = GETLINKFORBLOCK(data, i);
+			i = GETLINKFORBLOCK(data, i); //0...15 index when ++i at top of loop
 		} while (i <= MAX_MEMCARD_BLOCKS);
 
 		UpdateMcdDlg(widget);
