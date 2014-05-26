@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2BB3D68205427FE200831ACB"
-               BuildableName = "PCSXR.app"
-               BlueprintName = "PCSXR"
+               BlueprintIdentifier = "550E343618E6293D00A1AD21"
+               BuildableName = "Pcsxr-QL.qlgenerator"
+               BlueprintName = "Pcsxr-QL"
                ReferencedContainer = "container:Pcsxr.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,15 +29,6 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2BB3D68205427FE200831ACB"
-            BuildableName = "PCSXR.app"
-            BlueprintName = "PCSXR"
-            ReferencedContainer = "container:Pcsxr.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -48,19 +39,21 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "NO"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2BB3D68205427FE200831ACB"
-            BuildableName = "PCSXR.app"
-            BlueprintName = "PCSXR"
-            ReferencedContainer = "container:Pcsxr.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
+      <PathRunnable
+         FilePath = "/System/Library/Frameworks/QuickLook.framework/Versions/A/Resources/quicklookd.app/Contents/MacOS/qlmanage">
+      </PathRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "--iso &quot;~/PSX Games/Jet Moto 3/Jet Moto 3.cue&quot;"
+            argument = "-p /Users/cwbetts/Library/Application\ Support/Pcsxr/Save\ States/SCUS94555-000.pcsxrstate"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-p /Users/cwbetts/Library/Application\ Support/Pcsxr/Save\ States/JM3_FINAL1V4-SCUS94555.000.pcsxrstate"
             isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-o /Users/cwbetts/imdemo"
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>
@@ -70,17 +63,8 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Instrument"
+      buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2BB3D68205427FE200831ACB"
-            BuildableName = "PCSXR.app"
-            BlueprintName = "PCSXR"
-            ReferencedContainer = "container:Pcsxr.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

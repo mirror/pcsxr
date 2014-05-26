@@ -40,9 +40,10 @@ void CancelThumbnailGeneration(void *thisInterface, QLThumbnailRequestRef thumbn
 
 OSStatus GenerateThumbnailForFreeze(void *thisInterface, QLThumbnailRequestRef thumbnail, NSURL *url, NSDictionary *options, CGSize maxSize)
 {
-	NSData *data;
 	gzFile f;
-	const char* state_filename;
+	const char* state_filename = NULL;
+	NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:96 pixelsHigh:128 bitsPerSample:8 samplesPerPixel:3 hasAlpha:NO isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:0 bitsPerPixel:0];
+
 	if ([url respondsToSelector:@selector(fileSystemRepresentation)]) {
 		state_filename = [url fileSystemRepresentation];
 	} else {
@@ -52,10 +53,7 @@ OSStatus GenerateThumbnailForFreeze(void *thisInterface, QLThumbnailRequestRef t
 		return fnfErr;
 	}
 	
-	unsigned char *pMem = (unsigned char *) malloc(128*96*3);
-	if (pMem == NULL)
-		return mFulErr;
-	
+	unsigned char pMem[128*96*3] = {0};
 	f = gzopen(state_filename, "rb");
 	if (f != NULL) {
 		gzseek(f, 32, SEEK_SET); // skip header
@@ -67,12 +65,25 @@ OSStatus GenerateThumbnailForFreeze(void *thisInterface, QLThumbnailRequestRef t
 		memcpy(pMem, NoPic_Image.pixel_data, 128*96*3);
 	}
 	
-	NSBitmapImageRep *imRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&pMem pixelsWide:NoPic_Image.width pixelsHigh:NoPic_Image.height bitsPerSample:8 samplesPerPixel:3 hasAlpha:NO isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bitmapFormat:0 bytesPerRow:NoPic_Image.width * NoPic_Image.bytes_per_pixel bitsPerPixel:24];
-	if (imRep) {
-		data = [imRep TIFFRepresentation];
+	@autoreleasepool {
+		unsigned char *ppMem = pMem;
+		int x, y;
+		for (y = 0; y < 96; y++) {
+			for (x = 0; x < 128; x++) {
+				[imageRep setColor:[NSColor colorWithCalibratedRed:*(ppMem+2)/255.0 green:*(ppMem+1)/255.0 blue:*(ppMem+0)/255.0 alpha:1.0] atX:x y:y];
+				ppMem+=3;
+			}
+		}
+	}
+	
+	NSImage *theImage = [[NSImage alloc] init];
+	[theImage addRepresentation:imageRep];
+	[theImage setSize:NSMakeSize(NoPic_Image.width, NoPic_Image.height)];
+	
+	if (theImage) {
+		NSData *data = [theImage TIFFRepresentation];
 		QLThumbnailRequestSetImageWithData(thumbnail, (__bridge CFDataRef)(data), NULL);
 	}
-	free(pMem);
 	return noErr;
 }
 
