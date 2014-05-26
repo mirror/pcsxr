@@ -119,6 +119,8 @@
 				<string>com.apple.disk-image-ndif</string>
 				<string>com.goldenhawk.cdrwin-cuesheet</string>
 				<string>public.iso-image</string>
+				<string>com.apple.macbinary-​archive</string>
+				<string>com.coppertino.vox.cue</string>
 			</array>
 			<key>LSTypeIsPackage</key>
 			<false/>

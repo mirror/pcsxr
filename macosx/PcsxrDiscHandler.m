@@ -37,7 +37,8 @@
 	if (utisupport == nil) {
 		utisupport = @[@"com.alcohol-soft.mdfdisc", @"com.goldenhawk.cdrwin-cuesheet",
 					   @"com.apple.disk-image-ndif", @"public.iso-image", @"com.sony.psp.firmware",
-					   @"com.codeplex.pcsxr.compressed-bin-image", @"com.coppertino.vox.cue"];
+					   @"com.codeplex.pcsxr.compressed-bin-image", @"com.coppertino.vox.cue",
+					   @"com.apple.macbinary-​archive"];
 	}
 	return utisupport;
 }
