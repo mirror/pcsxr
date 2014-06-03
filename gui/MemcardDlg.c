@@ -36,7 +36,7 @@
 #define ISDELETED(Info) (((Info)->Flags & 0xF) >= 1 && ((Info)->Flags & 0xF) <= 3)
 #define ISBLOCKDELETED(Info) (((Info)->Flags & 0xF0) == 0xA0)
 #define ISSTATUSDELETED(Info) (ISBLOCKDELETED(Info) && ISDELETED(Info))
-#define ISLINKED(Data) ((Data) != 0xFFFFU)
+#define ISLINKED(Data) ( ((Data) != 0xFFFFU) && ((Data) <= MAX_MEMCARD_BLOCKS) )
 #define GETLINKFORBLOCK(Data, block) (*((Data)+(((block)*128)+0x08)))
 
 static gboolean quit;
@@ -53,7 +53,8 @@ enum {
 	NUM_CL
 };
 
-short IconDeleted[ICON_SIZE*3];
+short IconDeleted[ICON_SIZE];
+short IconLinked[ICON_SIZE];
 
 static GtkBuilder *builder;
 GtkWidget *GtkCList_McdList1, *GtkCList_McdList2;
@@ -192,7 +193,8 @@ static void LoadListItems(int mcd, boolean newstore) {
 
 		if (ISSTATUSDELETED(Info)) {
 			iconlinkptr = IconDeleted;
-		//} else if (ISLINKBLOCK(Info)) { // TODO link icons exists or not?
+		} else if (ISLINKBLOCK(Info)) { // // TODO link icons exists or not?
+			iconlinkptr = IconLinked;
 		} else {
 			iconcount = Info->IconCount>0?Info->IconCount:1;
 			iconlinkptr = &Info->Icon[(currentIcon % iconcount) * ICON_SIZE];
@@ -397,28 +399,10 @@ static int GetFreeMemcardSlot(gint target_card, gint count, u8* blocks) {
 	McdBlock *Info;
 	gint foundcount=0, i=-1;
 
-	/* If we want to prefer consecutive blocks...
-	// search for consecutive blocks
-	while (i < MAX_MEMCARD_BLOCKS && foundcount < count) {
-		Info = &Blocks[target_card][++i];
-		if ((Info->Flags & 0xFF) == 0xA0) { // if A0 but not A1
-			blocks[foundcount++] = i+1;
-		} else if (foundcount >= 1) { // need to find n count consecutive blocks
-			foundcount=0;
-		} else {
-		}
-		//printf("formatstatus=%x\n", Info->Flags);
-	}
-
-	if (foundcount == count)
-		return foundcount;
-	memset(blocks, 0x0, MAX_MEMCARD_BLOCKS*sizeof(u8));
-	*/
-
 	// search for empty (formatted) blocks first
 	while (i < MAX_MEMCARD_BLOCKS && foundcount < count) {
 		Info = &Blocks[target_card][++i];
-		if ((Info->Flags & 0xFF) == 0xA0) { // if A0 but not A1
+		if ((Info->Flags & 0xFF) == 0xA0) { // if A0 but not A1, etc..
 			blocks[foundcount++] = i+1;
 		}
 	}
@@ -427,11 +411,13 @@ static int GetFreeMemcardSlot(gint target_card, gint count, u8* blocks) {
 	if (foundcount == count)
 		return foundcount;
 
-	// not enough free formatted slots, try to find deleted ones
+	// not enough free formatted slots, include deleted ones
 	i = -1;
+	foundcount=0;
+	memset(blocks, 0x0, MAX_MEMCARD_BLOCKS*sizeof(u8));
 	while (i < MAX_MEMCARD_BLOCKS && foundcount < count) {
 		Info = &Blocks[target_card][++i];
-		if ((Info->Flags & 0xFF) > 0xA0) { // A2 or A6 f.e.
+		if ((Info->Flags & 0xFF) >= 0xA0) { // A2 or A6 f.e.
 			blocks[foundcount++] = i+1;
 		} //printf("delstatus=%x\n", Info->Flags);
 	}
@@ -453,7 +439,7 @@ void CopyMemcardData(char *from, char *to, gint srci, gint dsti,
 
 	// Link field to next block (multi block saves)
 	linkptr = (u16*)&to[(dsti*128)+0x08];
-	if (*linkptr != 0xFFFFU) {
+	if (ISLINKED(*linkptr)) {
 		// TODO: link index is 2 bytes, but how can link it be
 		// greater than num blocks (> 14), 41161 f.e..?
 		checksumptr = &to[(dsti*128)+0x7F]; // update checksum
@@ -486,8 +472,11 @@ gint GetMcdBlockCount(gint mcd, u8 startblock, u8* blocks) {
 	do {
 		dataT = data+((curblock*128)+0x08); 
 		linkblock = ((u16*)dataT)[0];
-		blocks[i++] = curblock = linkblock+1;
-		//printf("LINKS %i %x\n", i-1, linkblock);
+
+		// TODO check if target block has link flag (2 or 3)
+		linkblock = ( ISLINKED(linkblock) ? linkblock : 0xFFFFU );
+		blocks[i++] = curblock = linkblock + 1;
+		//printf("LINKS %x %x %x %x %x\n", blocks[0], blocks[i-2], blocks[i-1], blocks[i], blocks[i+1]);
 	} while (ISLINKED(linkblock));
 	return i-1;
 }
@@ -804,6 +793,7 @@ void OnConf_Mcds() {
 	g_timeout_add(1, updateFunc, 0);
 
 	memset(IconDeleted, 0x18, sizeof(IconDeleted));
+	memset(IconLinked, 0x05, sizeof(IconLinked));
 
 	while (gtk_events_pending()) {  gtk_main_iteration(); }
 }
