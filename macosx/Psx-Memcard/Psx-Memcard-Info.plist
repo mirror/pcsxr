@@ -8,10 +8,10 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
-			<string>QLGenerator</string>
+			<string>MDImporter</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.codeplex.pcsxr.freeze</string>
+				<string>com.codeplex.pcsxr.memcard</string>
 			</array>
 		</dict>
 	</array>
@@ -25,38 +25,28 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>${PRODUCT_NAME}</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFPlugInDynamicRegisterFunction</key>
 	<string></string>
 	<key>CFPlugInDynamicRegistration</key>
-	<string>NO</string>
+	<false/>
 	<key>CFPlugInFactories</key>
 	<dict>
-		<key>8C4B8FFE-72CC-436C-8D8A-034152616D03</key>
-		<string>QuickLookGeneratorPluginFactory</string>
+		<key>E6CB501C-9D5C-4CAF-A9DA-A6940F261514</key>
+		<string>MetadataImporterPluginFactory</string>
 	</dict>
 	<key>CFPlugInTypes</key>
 	<dict>
-		<key>5E2D9680-5022-40FA-B806-43349622E5B9</key>
+		<key>8B08C4BF-415B-11D8-B3F9-0003936726FC</key>
 		<array>
-			<string>8C4B8FFE-72CC-436C-8D8A-034152616D03</string>
+			<string>E6CB501C-9D5C-4CAF-A9DA-A6940F261514</string>
 		</array>
 	</dict>
 	<key>CFPlugInUnloadFunction</key>
 	<string></string>
-	<key>QLNeedsToBeRunInMainThread</key>
-	<false/>
-	<key>QLPreviewHeight</key>
-	<real>600</real>
-	<key>QLPreviewWidth</key>
-	<real>800</real>
-	<key>QLSupportsConcurrentRequests</key>
-	<false/>
-	<key>QLThumbnailMinimumSize</key>
-	<real>17</real>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -88,50 +78,6 @@
 					<string>mcd</string>
 					<string>gme</string>
 					<string>ddf</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-				<string>public.content</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>PCSXR Freeze State</string>
-			<key>UTTypeIconFile</key>
-			<string>pcsxrfreeze</string>
-			<key>UTTypeIdentifier</key>
-			<string>com.codeplex.pcsxr.freeze</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://pcsxr.codeplex.com/</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>com.apple.ostype</key>
-				<array>
-					<string>Pfrz</string>
-				</array>
-				<key>public.filename-extension</key>
-				<array>
-					<string>pcsxrstate</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.text</string>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>PCSXR Cheat</string>
-			<key>UTTypeIdentifier</key>
-			<string>com.codeplex.pcsxr.cheat</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>cht</string>
 				</array>
 			</dict>
 		</dict>

@@ -170,6 +170,15 @@
 		551A779E17869FC70052D185 /* libSPUSharedCode.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76E71786971B0052D185 /* libSPUSharedCode.dylib */; };
 		551A77A017869FED0052D185 /* libSPUSharedCode.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76E71786971B0052D185 /* libSPUSharedCode.dylib */; };
 		551A77E71786A4DD0052D185 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76AC178693C60052D185 /* Carbon.framework */; };
+		5525BC5E19421A760018AF2F /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76AF178693D60052D185 /* CoreServices.framework */; };
+		5525BC5F19421A760018AF2F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76B2178693EA0052D185 /* CoreFoundation.framework */; };
+		5525BC6019421A760018AF2F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A74A217868B110052D185 /* CoreData.framework */; };
+		5525BC6119421A760018AF2F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A74A317868B110052D185 /* Foundation.framework */; };
+		5525BC6719421A760018AF2F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5525BC6519421A760018AF2F /* InfoPlist.strings */; };
+		5525BC6919421A760018AF2F /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5525BC6819421A760018AF2F /* main.c */; };
+		5525BC6B19421A760018AF2F /* GetMetadataForFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 5525BC6A19421A760018AF2F /* GetMetadataForFile.m */; };
+		5525BC7819421D4F0018AF2F /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5525BC7719421D4F0018AF2F /* schema.xml */; };
+		5525BC7C194221EC0018AF2F /* schema.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5525BC7E194221EC0018AF2F /* schema.strings */; };
 		55268A5A1876244E00A82269 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A74A317868B110052D185 /* Foundation.framework */; };
 		5529EA11169CBE3400BAA2A5 /* RecentItemsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5550D2721683C923006C56B5 /* RecentItemsMenu.m */; };
 		553FECEE18DF5A8300C7B007 /* AddPluginSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553FECB818DF5A8300C7B007 /* AddPluginSheet.xib */; };
@@ -336,6 +345,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 551A776517869E430052D185;
 			remoteInfo = DFNet;
+		};
+		5525BC7519421A810018AF2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5525BC5C19421A750018AF2F;
+			remoteInfo = "Psx-Memcard";
 		};
 		55534AFF18183E5B006D6BCB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -647,6 +663,15 @@
 		551A777317869E830052D185 /* dfnet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfnet.c; sourceTree = "<group>"; };
 		551A777417869E830052D185 /* dfnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = dfnet.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		551A777817869E830052D185 /* unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unix.c; sourceTree = "<group>"; };
+		5525BC5D19421A750018AF2F /* Psx-Memcard.mdimporter */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Psx-Memcard.mdimporter"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5525BC6419421A760018AF2F /* Psx-Memcard-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Psx-Memcard-Info.plist"; sourceTree = "<group>"; };
+		5525BC6619421A760018AF2F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5525BC6819421A760018AF2F /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		5525BC6A19421A760018AF2F /* GetMetadataForFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetMetadataForFile.m; sourceTree = "<group>"; };
+		5525BC7019421A760018AF2F /* Psx-Memcard-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Psx-Memcard-Prefix.pch"; sourceTree = "<group>"; };
+		5525BC7719421D4F0018AF2F /* schema.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schema.xml; sourceTree = "<group>"; };
+		5525BC7B19421DDC0018AF2F /* GetMetadataForFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetMetadataForFile.h; sourceTree = "<group>"; };
+		5525BC7D194221EC0018AF2F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/schema.strings; sourceTree = "<group>"; };
 		5539965D178BB1B100859644 /* OSXPlugLocalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSXPlugLocalization.h; sourceTree = "<group>"; };
 		553FECB918DF5A8300C7B007 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AddPluginSheet.xib; sourceTree = "<group>"; };
 		553FECBD18DF5A8300C7B007 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Configuration.xib; sourceTree = "<group>"; };
@@ -967,6 +992,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5525BC5A19421A750018AF2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5525BC5F19421A760018AF2F /* CoreFoundation.framework in Frameworks */,
+				5525BC6019421A760018AF2F /* CoreData.framework in Frameworks */,
+				5525BC5E19421A760018AF2F /* CoreServices.framework in Frameworks */,
+				5525BC6119421A760018AF2F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55534AED18183BFA006D6BCB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -987,6 +1023,7 @@
 				551A74AF17868BE90052D185 /* plugins */,
 				55534AF318183BFA006D6BCB /* updateInfoPlist */,
 				550E343D18E6293D00A1AD21 /* Pcsxr-QL */,
+				5525BC6219421A760018AF2F /* Psx-Memcard */,
 				551A749D17868B110052D185 /* Frameworks */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
@@ -1019,6 +1056,7 @@
 				551A776D17869E430052D185 /* DFNet.psxplugin */,
 				55534AF018183BFA006D6BCB /* updateInfoPlist */,
 				550E343718E6293D00A1AD21 /* Pcsxr-QL.qlgenerator */,
+				5525BC5D19421A750018AF2F /* Psx-Memcard.mdimporter */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1624,6 +1662,29 @@
 			path = ../../../plugins/dfnet;
 			sourceTree = "<group>";
 		};
+		5525BC6219421A760018AF2F /* Psx-Memcard */ = {
+			isa = PBXGroup;
+			children = (
+				5525BC7B19421DDC0018AF2F /* GetMetadataForFile.h */,
+				5525BC6A19421A760018AF2F /* GetMetadataForFile.m */,
+				5525BC6319421A760018AF2F /* Supporting Files */,
+			);
+			path = "Psx-Memcard";
+			sourceTree = "<group>";
+		};
+		5525BC6319421A760018AF2F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5525BC7E194221EC0018AF2F /* schema.strings */,
+				5525BC7719421D4F0018AF2F /* schema.xml */,
+				5525BC6419421A760018AF2F /* Psx-Memcard-Info.plist */,
+				5525BC6519421A760018AF2F /* InfoPlist.strings */,
+				5525BC6819421A760018AF2F /* main.c */,
+				5525BC7019421A760018AF2F /* Psx-Memcard-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		55534AF318183BFA006D6BCB /* updateInfoPlist */ = {
 			isa = PBXGroup;
 			children = (
@@ -1776,6 +1837,7 @@
 				2BB3D6D005427FE200831ACB /* PBXBuildRule */,
 			);
 			dependencies = (
+				5525BC7619421A810018AF2F /* PBXTargetDependency */,
 				55534B0018183E5B006D6BCB /* PBXTargetDependency */,
 				551A778517869F4B0052D185 /* PBXTargetDependency */,
 				551A778717869F4B0052D185 /* PBXTargetDependency */,
@@ -1970,6 +2032,23 @@
 			productReference = 551A776D17869E430052D185 /* DFNet.psxplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
+		5525BC5C19421A750018AF2F /* Psx-Memcard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5525BC7119421A760018AF2F /* Build configuration list for PBXNativeTarget "Psx-Memcard" */;
+			buildPhases = (
+				5525BC5919421A750018AF2F /* Sources */,
+				5525BC5A19421A750018AF2F /* Frameworks */,
+				5525BC5B19421A750018AF2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Psx-Memcard";
+			productName = "Psx-Memcard";
+			productReference = 5525BC5D19421A750018AF2F /* Psx-Memcard.mdimporter */;
+			productType = "com.apple.product-type.bundle";
+		};
 		55534AEF18183BFA006D6BCB /* updateInfoPlist */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55534AFD18183BFB006D6BCB /* Build configuration list for PBXNativeTarget "updateInfoPlist" */;
@@ -2032,6 +2111,7 @@
 				551A776517869E430052D185 /* DFNet */,
 				551A75C617868C4E0052D185 /* Bladesio1 */,
 				550E343618E6293D00A1AD21 /* Pcsxr-QL */,
+				5525BC5C19421A750018AF2F /* Psx-Memcard */,
 				55534AEF18183BFA006D6BCB /* updateInfoPlist */,
 			);
 		};
@@ -2153,6 +2233,16 @@
 				551A778117869EAE0052D185 /* InfoPlist.strings in Resources */,
 				551A778217869EAE0052D185 /* Localizable.strings in Resources */,
 				551A778317869EAE0052D185 /* SockDialog.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5525BC5B19421A750018AF2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5525BC7819421D4F0018AF2F /* schema.xml in Resources */,
+				5525BC7C194221EC0018AF2F /* schema.strings in Resources */,
+				5525BC6719421A760018AF2F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2409,6 +2499,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5525BC5919421A750018AF2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5525BC6919421A760018AF2F /* main.c in Sources */,
+				5525BC6B19421A760018AF2F /* GetMetadataForFile.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55534AEC18183BFA006D6BCB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2474,6 +2573,11 @@
 			isa = PBXTargetDependency;
 			target = 551A776517869E430052D185 /* DFNet */;
 			targetProxy = 551A779217869F4B0052D185 /* PBXContainerItemProxy */;
+		};
+		5525BC7619421A810018AF2F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5525BC5C19421A750018AF2F /* Psx-Memcard */;
+			targetProxy = 5525BC7519421A810018AF2F /* PBXContainerItemProxy */;
 		};
 		55534B0018183E5B006D6BCB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2783,6 +2887,22 @@
 				558328DE184F263F00DFACE4 /* zh-Hans */,
 			);
 			name = NetSfPeopsOpenGLConfig.xib;
+			sourceTree = "<group>";
+		};
+		5525BC6519421A760018AF2F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5525BC6619421A760018AF2F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5525BC7E194221EC0018AF2F /* schema.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5525BC7D194221EC0018AF2F /* en */,
+			);
+			name = schema.strings;
 			sourceTree = "<group>";
 		};
 		553FECB818DF5A8300C7B007 /* AddPluginSheet.xib */ = {
@@ -3301,6 +3421,81 @@
 			};
 			name = Release;
 		};
+		5525BC7219421A760018AF2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Psx-Memcard/Psx-Memcard-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				INFOPLIST_FILE = "Psx-Memcard/Psx-Memcard-Info.plist";
+				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
+				LIBRARY_STYLE = BUNDLE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = mdimporter;
+			};
+			name = Debug;
+		};
+		5525BC7319421A760018AF2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Psx-Memcard/Psx-Memcard-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				INFOPLIST_FILE = "Psx-Memcard/Psx-Memcard-Info.plist";
+				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
+				LIBRARY_STYLE = BUNDLE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = mdimporter;
+			};
+			name = Release;
+		};
+		5525BC7419421A760018AF2F /* Instrument */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Psx-Memcard/Psx-Memcard-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				INFOPLIST_FILE = "Psx-Memcard/Psx-Memcard-Info.plist";
+				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
+				LIBRARY_STYLE = BUNDLE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = mdimporter;
+			};
+			name = Instrument;
+		};
 		55534AFA18183BFB006D6BCB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3689,6 +3884,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_NS_ASSERTIONS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -3806,6 +4002,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		5525BC7119421A760018AF2F /* Build configuration list for PBXNativeTarget "Psx-Memcard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5525BC7219421A760018AF2F /* Debug */,
+				5525BC7319421A760018AF2F /* Release */,
+				5525BC7419421A760018AF2F /* Instrument */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		55534AFD18183BFB006D6BCB /* Build configuration list for PBXNativeTarget "updateInfoPlist" */ = {
 			isa = XCConfigurationList;
