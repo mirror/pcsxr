@@ -170,7 +170,6 @@
 		551A779E17869FC70052D185 /* libSPUSharedCode.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76E71786971B0052D185 /* libSPUSharedCode.dylib */; };
 		551A77A017869FED0052D185 /* libSPUSharedCode.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76E71786971B0052D185 /* libSPUSharedCode.dylib */; };
 		551A77E71786A4DD0052D185 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76AC178693C60052D185 /* Carbon.framework */; };
-		55202EBB18E73E4F00C631AA /* Pcsxr-QL.qlgenerator in Copy QuickLook Plug-In */ = {isa = PBXBuildFile; fileRef = 550E343718E6293D00A1AD21 /* Pcsxr-QL.qlgenerator */; };
 		55268A5A1876244E00A82269 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A74A317868B110052D185 /* Foundation.framework */; };
 		5529EA11169CBE3400BAA2A5 /* RecentItemsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5550D2721683C923006C56B5 /* RecentItemsMenu.m */; };
 		553FECEE18DF5A8300C7B007 /* AddPluginSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553FECB818DF5A8300C7B007 /* AddPluginSheet.xib */; };
@@ -388,9 +387,17 @@
 			dstPath = Contents/Library/QuickLook;
 			dstSubfolderSpec = 1;
 			files = (
-				55202EBB18E73E4F00C631AA /* Pcsxr-QL.qlgenerator in Copy QuickLook Plug-In */,
 			);
 			name = "Copy QuickLook Plug-In";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5525BC58194219B80018AF2F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/Spotlight;
+			dstSubfolderSpec = 1;
+			files = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		71AD2DF010C3573400365243 /* Copy Plug-Ins */ = {
@@ -1761,6 +1768,7 @@
 				2BB3D6C505427FE200831ACB /* Frameworks */,
 				71AD2DF010C3573400365243 /* Copy Plug-Ins */,
 				55202EBA18E73E3E00C631AA /* Copy QuickLook Plug-In */,
+				5525BC58194219B80018AF2F /* CopyFiles */,
 				55F41A3317EF8CFF00605DF8 /* Strip Headers */,
 			);
 			buildRules = (
