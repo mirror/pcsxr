@@ -224,6 +224,7 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 		attr[kPCSXRFreeBlocks] = @(freeBlocks);
 		attr[kPCSXRMemNames] = [memNames copy];
 		attr[kPCSXRMemIDs] = [memIDs copy];
+		ok = TRUE;
 	}
     
 	// Return the status

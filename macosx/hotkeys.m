@@ -18,7 +18,8 @@ static id monitor;
 static id gpuMonitor;
 static int currentState = 0;
 static NSMutableDictionary *hotkeys = nil;
-enum {
+
+typedef NS_ENUM(int, PCSXR_HotKey) {
     HK_FAST_FORWARD,
     HK_SAVE_STATE,
     HK_LOAD_STATE,
@@ -53,28 +54,35 @@ BOOL handleHotkey(NSString* keyCode) {
                         GPU_keypressed(GPU_FAST_FORWARD);
                     }
                     break;
+					
                 case HK_FRAME_LIMIT:
                     // Ignore FrameLimit requests if paused
                     if(![EmuThread isPaused]) {
                         GPU_keypressed(GPU_FRAME_LIMIT);
                     }
                     break;
+					
                 case HK_SAVE_STATE:
                     [PcsxrController saveState:currentState];
                     break;
+					
                 case HK_LOAD_STATE:
                     [PcsxrController loadState:currentState];
                     break;
+					
                 case HK_NEXT_STATE:
                     nextState();
                     GPU_displayText((char*)[[NSString stringWithFormat:@"State Slot: %d", currentState] UTF8String]);
                     break;
+					
                 case HK_PREV_STATE:
                     prevState();
                     GPU_displayText((char*)[[NSString stringWithFormat:@"State Slot: %d", currentState] UTF8String]);
                     break;
+					
                 default:
                     NSLog(@"Invalid hotkey identifier %i.", [ident intValue]);
+					break;
             }
         
             return YES;
@@ -84,7 +92,7 @@ BOOL handleHotkey(NSString* keyCode) {
     return NO;
 }
 
-void setupHotkey(int hk, NSString *label, NSDictionary *binding) {
+void setupHotkey(PCSXR_HotKey hk, NSString *label, NSDictionary *binding) {
 	if(binding != nil)
 		hotkeys[binding[@"keyCode"]] = @(hk);
 }

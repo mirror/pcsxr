@@ -97,8 +97,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	if (self = [super init]) {
 		NSMutableArray *tmpMemArray = [[NSMutableArray alloc] initWithCapacity:MAX_MEMCARD_BLOCKS];
 		cardNumber = carNum;
-		int i, x;
-		i = 0;
+		int i = 0, x;
 		while (i < MAX_MEMCARD_BLOCKS) {
 			x = 1;
 			McdBlock memBlock;
@@ -202,7 +201,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	
 	int memIdx = tmpObj.startingIndex;
 	for (int i = 0; i < memSize; i++) {
-		CopyMemcardData([self memDataPtr], [otherCard memDataPtr], (memIdx+i), (toCopy+i), (char*)otherCard.memCardCPath);
+		CopyMemcardData([self memDataPtr], [otherCard memDataPtr], memIdx + i, toCopy + i, (char*)otherCard.memCardCPath);
 	}
 	
 	return YES;
@@ -275,18 +274,18 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 		
 		if (theFlags == memFlagDeleted || theFlags == memFlagFree) {
 			PCSXRMemFlags up1Flags = theFlags;
-			while ((up1Flags == memFlagDeleted || up1Flags == memFlagFree) && x < MAX_MEMCARD_BLOCKS){
+			while ((up1Flags == memFlagDeleted || up1Flags == memFlagFree) && x < MAX_MEMCARD_BLOCKS) {
 				x++;
 				McdBlock up1Block;
 				GetMcdBlockInfo(cardNumber, x+1, &up1Block);
 				up1Flags = [PcsxrMemoryObject memFlagsFromBlockFlags:up1Block.Flags];
 			}
 			if (x >= MAX_MEMCARD_BLOCKS) {
-				
 				break;
 			}
+			
 			CopyMemcardData(self.memDataPtr, self.memDataPtr, x, i, (char*)[[self.memCardURL path] fileSystemRepresentation]);
-			ClearMemcardData(self.memDataPtr, x, (char*)self.memCardCPath );
+			ClearMemcardData(self.memDataPtr, x, (char*)self.memCardCPath);
 		}
 		i++;
 	}
@@ -322,7 +321,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	
 	McdBlock flagBlock;
 	
-	for(i = theObj.startingIndex +1; i < (theObj.startingIndex + theObj.blockSize +1); i++)
+	for(i = theObj.startingIndex + 1; i < (theObj.startingIndex + theObj.blockSize + 1); i++)
 	{
 		GetMcdBlockInfo(cardNumber, i, &flagBlock);
 		ptr = data + i * 128;

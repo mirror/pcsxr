@@ -305,8 +305,7 @@ void OnFile_Exit()
 
 char* Pcsxr_locale_text(char* toloc)
 {
-	NSBundle *mainBundle = [NSBundle mainBundle];
 	NSString *origString = @(toloc), *transString = nil;
-	transString = [mainBundle localizedStringForKey:origString value:@"" table:nil];
+	transString = [[NSBundle mainBundle] localizedStringForKey:origString value:@"" table:nil];
 	return (char*)[transString UTF8String];
 }
