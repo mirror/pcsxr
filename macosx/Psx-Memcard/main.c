@@ -21,18 +21,13 @@
 //
 // Below is the generic glue code for all plug-ins.
 //
-// You should not have to modify this code aside from changing
-// names if you decide to change the names defined in the Info.plist
-//
-
 
 // -----------------------------------------------------------------------------
 //	typedefs
 // -----------------------------------------------------------------------------
 
 // The layout for an instance of MetaDataImporterPlugIn 
-typedef struct __MetadataImporterPluginType
-{
+typedef struct __MetadataImporterPluginType {
     MDImporterInterfaceStruct *conduitInterface;
     CFUUIDRef                 factoryID;
     UInt32                    refCount;
@@ -74,9 +69,7 @@ static MDImporterInterfaceStruct testInterfaceFtbl = {
 //
 MDImporterType *AllocMetadataImporterPluginType(CFUUIDRef inFactoryID)
 {
-	MDImporterType *theNewInstance;
-	
-	theNewInstance = (MDImporterType *)calloc(sizeof(MDImporterType), 1);
+	MDImporterType *theNewInstance = (MDImporterType *)calloc(sizeof(MDImporterType), 1);
 	
 	/* Point to the function table */
 	theNewInstance->conduitInterface = &testInterfaceFtbl;
@@ -192,4 +185,3 @@ void *MetadataImporterPluginFactory(CFAllocatorRef allocator,CFUUIDRef typeID)
 	/* If the requested type is incorrect, return NULL. */
 	return NULL;
 }
-
