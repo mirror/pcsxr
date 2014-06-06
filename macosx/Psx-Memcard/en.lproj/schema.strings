@@ -13,8 +13,18 @@
 /* The form is:  "myMetadataKey" = "My Metadata Key";    */
 /* The name on the left is the name defined in schema.xml */
 /* The name on the right is what the user will see */
+"com_codeplex_pcsxr_memcard_memcount" = "Saves";
+"com_codeplex_pcsxr_memcard_freeblocks" = "Free Blocks";
+"com_codeplex_pcsxr_memcard_savenames" = "Saved Games";
+"com_codeplex_pcsxr_memcard_memnames" = "Memory Block Names";
+"com_codeplex_pcsxr_memcard_memids" = "Memory Block IDs";
 
 /* Localized Description of you custom metadata attributes */
 /* The form is: "myMetadataKey.Description" = "stuff";
 /* com_Foo_YourAttrName should be definded in the schema.xml file  */
 /* The value on the right will be displayed by the Finder etc.. */
+"com_codeplex_pcsxr_memcard_memcount.Description" = "Number of individual save games";
+"com_codeplex_pcsxr_memcard_freeblocks.Description" = "Number of blocks that are free";
+"com_codeplex_pcsxr_memcard_savenames.Description" = "The names of the games saved on the memory card";
+"com_codeplex_pcsxr_memcard_memnames.Description" = "The names of the memory blocks";
+"com_codeplex_pcsxr_memcard_memids.Descriptions" = "IDs of memory cards";

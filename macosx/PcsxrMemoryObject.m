@@ -19,7 +19,7 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 @property (readwrite) uint8_t startingIndex;
 @property (readwrite) uint8_t blockSize;
 
-@property (readwrite, nonatomic) NSInteger memImageIndex;
+@property (nonatomic) NSInteger memImageIndex;
 @property (strong) NSArray *memImages;
 @property (readwrite) PCSXRMemFlags flagNameIndex;
 @end

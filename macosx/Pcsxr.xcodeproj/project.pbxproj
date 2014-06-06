@@ -179,6 +179,8 @@
 		5525BC6B19421A760018AF2F /* GetMetadataForFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 5525BC6A19421A760018AF2F /* GetMetadataForFile.m */; };
 		5525BC7819421D4F0018AF2F /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5525BC7719421D4F0018AF2F /* schema.xml */; };
 		5525BC7C194221EC0018AF2F /* schema.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5525BC7E194221EC0018AF2F /* schema.strings */; };
+		5525BC80194228460018AF2F /* PcsxrMemoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A90228147D89380037E18F /* PcsxrMemoryObject.m */; };
+		5525BC8119423FA90018AF2F /* Psx-Memcard.mdimporter in Copy Spotlight Plug-Ins */ = {isa = PBXBuildFile; fileRef = 5525BC5D19421A750018AF2F /* Psx-Memcard.mdimporter */; };
 		55268A5A1876244E00A82269 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A74A317868B110052D185 /* Foundation.framework */; };
 		5529EA11169CBE3400BAA2A5 /* RecentItemsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5550D2721683C923006C56B5 /* RecentItemsMenu.m */; };
 		553FECEE18DF5A8300C7B007 /* AddPluginSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553FECB818DF5A8300C7B007 /* AddPluginSheet.xib */; };
@@ -407,13 +409,15 @@
 			name = "Copy QuickLook Plug-In";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5525BC58194219B80018AF2F /* CopyFiles */ = {
+		5525BC58194219B80018AF2F /* Copy Spotlight Plug-Ins */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Contents/Library/Spotlight;
 			dstSubfolderSpec = 1;
 			files = (
+				5525BC8119423FA90018AF2F /* Psx-Memcard.mdimporter in Copy Spotlight Plug-Ins */,
 			);
+			name = "Copy Spotlight Plug-Ins";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		71AD2DF010C3573400365243 /* Copy Plug-Ins */ = {
@@ -1829,7 +1833,7 @@
 				2BB3D6C505427FE200831ACB /* Frameworks */,
 				71AD2DF010C3573400365243 /* Copy Plug-Ins */,
 				55202EBA18E73E3E00C631AA /* Copy QuickLook Plug-In */,
-				5525BC58194219B80018AF2F /* CopyFiles */,
+				5525BC58194219B80018AF2F /* Copy Spotlight Plug-Ins */,
 				55F41A3317EF8CFF00605DF8 /* Strip Headers */,
 			);
 			buildRules = (
@@ -2503,6 +2507,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5525BC80194228460018AF2F /* PcsxrMemoryObject.m in Sources */,
 				5525BC6919421A760018AF2F /* main.c in Sources */,
 				5525BC6B19421A760018AF2F /* GetMetadataForFile.m in Sources */,
 			);

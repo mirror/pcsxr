@@ -25,16 +25,11 @@
     -->
 	
 	<attributes>
-		<!--
-		<attribute name="net_sourceforge_playerpro_tracker_instumentlist" multivalued="true" type="CFString"/>
-		<attribute name="net_sourceforge_playerpro_tracker_patternlist" multivalued="true" type="CFString"/>
-		<attribute name="net_sourceforge_playerpro_tracker_totalpatterns" multivalued="false" nosearch="true" type="CFNumber"/>
-		<attribute name="net_sourceforge_playerpro_tracker_partitionlength" multivalued="false" nosearch="true" type="CFNumber"/>
-		<attribute name="net_sourceforge_playerpro_tracker_totalinstruments" multivalued="false" nosearch="true" type="CFNumber"/>
-		<attribute name="net_sourceforge_playerpro_tracker_totaltracks" multivalued="false" nosearch="true" type="CFNumber"/>
-		<attribute name="net_sourceforge_playerpro_tracker_formatdescription" multivalued="false" nosearch="true" type="CFString"/>
-		<attribute name="net_sourceforge_playerpro_tracker_madkinfo" multivalued="false" type="CFString" />
-		 -->
+		<attribute name="com_codeplex_pcsxr_memcard_memcount" multivalued="false" nosearch="true" type="CFNumber"/>
+		<attribute name="com_codeplex_pcsxr_memcard_freeblocks" multivalued="false" nosearch="true" type="CFNumber"/>
+		<attribute name="com_codeplex_pcsxr_memcard_savenames" multivalued="true" type="CFString"/>
+		<attribute name="com_codeplex_pcsxr_memcard_memnames" multivalued="true" type="CFString"/>
+		<attribute name="com_codeplex_pcsxr_memcard_memids" multivalued="true" type="CFString"/>
 	</attributes>
 
     <types>
@@ -43,15 +38,17 @@
             <!-- 'allattrs' is a whitespace separated list of all of the attributes that this UTI type normally has.
                  It does not have to be exhaustive. -->
             <allattrs> 
-				kMDItemTitle
-				kMDItemDurationSeconds
-				kMDItemCodecs
+				com_codeplex_pcsxr_memcard_memcount
+				com_codeplex_pcsxr_memcard_freeblocks
+				com_codeplex_pcsxr_memcard_savenames
+				com_codeplex_pcsxr_memcard_memnames
+				com_codeplex_pcsxr_memcard_memids
             </allattrs>
             <!-- 'displayattrs' is a whitespace separated list of the attributes that should normally be displayed when previewing files of this UTI type. -->
             <displayattrs>
-				kMDItemTitle
-				kMDItemDurationSeconds
-				kMDItemCodecs
+				com_codeplex_pcsxr_memcard_memcount
+				com_codeplex_pcsxr_memcard_freeblocks
+				com_codeplex_pcsxr_memcard_savenames
             </displayattrs>
         </type>
 		
