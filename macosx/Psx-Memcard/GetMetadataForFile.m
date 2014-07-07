@@ -9,7 +9,7 @@
 #include <CoreFoundation/CoreFoundation.h>
 #import <Foundation/Foundation.h>
 #include "GetMetadataForFile.h"
-#include "PcsxrMemoryObject.h"
+#import "PcsxrMemoryObject.h"
 
 #define MAX_MEMCARD_BLOCKS 15
 #define kPCSXRSaveNames @"com_codeplex_pcsxr_memcard_savenames"

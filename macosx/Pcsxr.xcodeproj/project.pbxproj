@@ -172,7 +172,6 @@
 		551A77E71786A4DD0052D185 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76AC178693C60052D185 /* Carbon.framework */; };
 		5525BC5E19421A760018AF2F /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76AF178693D60052D185 /* CoreServices.framework */; };
 		5525BC5F19421A760018AF2F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76B2178693EA0052D185 /* CoreFoundation.framework */; };
-		5525BC6019421A760018AF2F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A74A217868B110052D185 /* CoreData.framework */; };
 		5525BC6119421A760018AF2F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A74A317868B110052D185 /* Foundation.framework */; };
 		5525BC6719421A760018AF2F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5525BC6519421A760018AF2F /* InfoPlist.strings */; };
 		5525BC6919421A760018AF2F /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5525BC6819421A760018AF2F /* main.c */; };
@@ -1001,7 +1000,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5525BC5F19421A760018AF2F /* CoreFoundation.framework in Frameworks */,
-				5525BC6019421A760018AF2F /* CoreData.framework in Frameworks */,
 				5525BC5E19421A760018AF2F /* CoreServices.framework in Frameworks */,
 				5525BC6119421A760018AF2F /* Foundation.framework in Frameworks */,
 			);
@@ -4016,6 +4014,7 @@
 				5525BC7419421A760018AF2F /* Instrument */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55534AFD18183BFB006D6BCB /* Build configuration list for PBXNativeTarget "updateInfoPlist" */ = {
 			isa = XCConfigurationList;
