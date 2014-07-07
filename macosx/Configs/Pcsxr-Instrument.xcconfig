@@ -1,7 +1,0 @@
-#include "Pcsxr-Release.xcconfig"
-
-COPY_PHASE_STRIP = NO
-OPTIMIZATION_CFLAGS = -finline-functions -fno-exceptions -funroll-loops -ffast-math
-STRIP_INSTALLED_PRODUCT = NO
-CODE_SIGN_IDENTITY =
-LLVM_LTO = NO

@@ -761,10 +761,6 @@
 		558328E1184F268300DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NetSfPeopsSpuPluginMain.strings"; sourceTree = "<group>"; };
 		558328E2184F268C00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
 		558328E4184F272C00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
-		55858D2817864D140068B8FC /* Pcsxr.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pcsxr.xcconfig; sourceTree = "<group>"; };
-		55858D2A17864DC80068B8FC /* Pcsxr-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Debug.xcconfig"; sourceTree = "<group>"; };
-		55858D2B17864DC90068B8FC /* Pcsxr-Instrument.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Instrument.xcconfig"; sourceTree = "<group>"; };
-		55858D2C17864DC90068B8FC /* Pcsxr-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pcsxr-Release.xcconfig"; sourceTree = "<group>"; };
 		559366C012B694DF004ACC1E /* iGte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGte.h; sourceTree = "<group>"; };
 		559366C112B694DF004ACC1E /* iR3000A-64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "iR3000A-64.c"; sourceTree = "<group>"; };
 		559366C212B694DF004ACC1E /* ix86-64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "ix86-64.c"; sourceTree = "<group>"; };
@@ -1019,7 +1015,6 @@
 			isa = PBXGroup;
 			children = (
 				55F41A2017EF774500605DF8 /* version.sh */,
-				55858D2F178652F90068B8FC /* Configs */,
 				08FB7795FE84155DC02AAC07 /* PCSXR */,
 				551A74AF17868BE90052D185 /* plugins */,
 				55534AF318183BFA006D6BCB /* updateInfoPlist */,
@@ -1749,17 +1744,6 @@
 				0280B7AC16764CC3007B8001 /* HotkeyController.m */,
 			);
 			name = Controllers;
-			sourceTree = "<group>";
-		};
-		55858D2F178652F90068B8FC /* Configs */ = {
-			isa = PBXGroup;
-			children = (
-				55858D2A17864DC80068B8FC /* Pcsxr-Debug.xcconfig */,
-				55858D2B17864DC90068B8FC /* Pcsxr-Instrument.xcconfig */,
-				55858D2C17864DC90068B8FC /* Pcsxr-Release.xcconfig */,
-				55858D2817864D140068B8FC /* Pcsxr.xcconfig */,
-			);
-			path = Configs;
 			sourceTree = "<group>";
 		};
 		559366BF12B694DF004ACC1E /* ix86_64 */ = {
@@ -3394,21 +3378,15 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Psx-Memcard/Psx-Memcard-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=MDPsx";
 				INFOPLIST_FILE = "Psx-Memcard/Psx-Memcard-Info.plist";
 				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
-				PLIST_FILE_OUTPUT_FORMAT = XML;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				WRAPPER_EXTENSION = mdimporter;
 			};
 			name = Debug;
@@ -3419,21 +3397,14 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Psx-Memcard/Psx-Memcard-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=MDPsx";
 				INFOPLIST_FILE = "Psx-Memcard/Psx-Memcard-Info.plist";
 				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
-				PLIST_FILE_OUTPUT_FORMAT = XML;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				WRAPPER_EXTENSION = mdimporter;
 			};
 			name = Release;
@@ -3444,21 +3415,14 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Psx-Memcard/Psx-Memcard-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=MDPsx";
 				INFOPLIST_FILE = "Psx-Memcard/Psx-Memcard-Info.plist";
 				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
-				PLIST_FILE_OUTPUT_FORMAT = XML;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				WRAPPER_EXTENSION = mdimporter;
 			};
 			name = Instrument;
@@ -3532,9 +3496,11 @@
 		};
 		557649B91786B09E007C4457 /* Instrument */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55858D2B17864DC90068B8FC /* Pcsxr-Instrument.xcconfig */;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -3543,6 +3509,20 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_PREPROCESSOR_DEFINITIONS = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu89;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = pcsxr.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
@@ -3551,11 +3531,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../libpcsxcore,
 					../macosx,
 				);
+				INFOPLIST_FILE = "plugins/$(TARGET_NAME)/Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Instrument;
 		};
@@ -3795,9 +3780,11 @@
 		};
 		71F353F90FD98DFE00CBEC28 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55858D2A17864DC80068B8FC /* Pcsxr-Debug.xcconfig */;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -3806,6 +3793,21 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_C_LANGUAGE_STANDARD = gnu89;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = pcsxr.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
@@ -3814,20 +3816,28 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../libpcsxcore,
 					../macosx,
 				);
+				INFOPLIST_FILE = "plugins/$(TARGET_NAME)/Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
 		};
 		71F353FA0FD98DFE00CBEC28 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55858D2C17864DC90068B8FC /* Pcsxr-Release.xcconfig */;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -3836,7 +3846,20 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_PREPROCESSOR_DEFINITIONS = "";
 				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu89;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = pcsxr.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_MACOSX=1",
+					"$(DEBUG_PREPROCESSOR_DEFINITIONS)",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -3844,11 +3867,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					../include,
 					../libpcsxcore,
 					../macosx,
 				);
+				INFOPLIST_FILE = "plugins/$(TARGET_NAME)/Info.plist";
+				LLVM_LTO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
