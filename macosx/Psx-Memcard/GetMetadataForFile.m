@@ -219,7 +219,7 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 		
 		
 		attr[kPCSXRSaveNames] = @{@"en": [enNames copy],
-								  @"jp": [jpNames copy]};
+								  @"ja": [jpNames copy]};
 		attr[kPCSXRMemCount] = @(memCount);
 		attr[kPCSXRFreeBlocks] = @(freeBlocks);
 		attr[kPCSXRMemNames] = [memNames copy];
