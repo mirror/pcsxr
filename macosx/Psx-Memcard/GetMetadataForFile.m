@@ -9,7 +9,7 @@
 #include <CoreFoundation/CoreFoundation.h>
 #import <Foundation/Foundation.h>
 #include "GetMetadataForFile.h"
-#import "PcsxrMemoryObject.h"
+#include "sio.h"
 
 #define MAX_MEMCARD_BLOCKS 15
 #define kPCSXRSaveNames @"com_codeplex_pcsxr_memcard_savenames"
@@ -28,7 +28,17 @@
 //
 //==============================================================================
 
-static void trimPriv(char *str) {
+typedef NS_ENUM(char, PCSXRMemFlags) {
+	memFlagDeleted,
+	memFlagFree,
+	memFlagUsed,
+	memFlagLink,
+	memFlagEndLink
+};
+
+#if 0
+static void trimPriv(char *str)
+{
 	int pos = 0;
 	char *dest = str;
 	
@@ -47,79 +57,88 @@ static void trimPriv(char *str) {
 	while (dest >= str && *dest <= ' ' && *dest > 0)
 		*(dest--) = '\0';
 }
+#endif
 
 static void GetSoloBlockInfo(unsigned char *data, int block, McdBlock *Info)
 {
-	unsigned char *ptr, *str, *sstr;
-	unsigned short clut[16];
+	unsigned char *ptr = data + block * 8192 + 2;
+	unsigned char *str = Info->Title;
+	unsigned char *sstr = Info->sTitle;
 	unsigned short c;
-	int i, x;
+	unsigned short jisTitle[48] = {0};
+	int i, x = 0;
 	
 	memset(Info, 0, sizeof(McdBlock));
-	
-	ptr = data + block * 8192 + 2;
-	
 	Info->IconCount = *ptr & 0x3;
-	
 	ptr += 2;
-	
-	x = 0;
-	
-	str = Info->Title;
-	sstr = Info->sTitle;
 	
 	for (i = 0; i < 48; i++) {
 		c = *(ptr) << 8;
 		c |= *(ptr + 1);
-		if (!c) break;
-		
+		if (!c)
+			break;
+		jisTitle[i] = c;
 		// Convert ASCII characters to half-width
-		if (c >= 0x8281 && c <= 0x829A)
+		if (c >= 0x8281 && c <= 0x829A) {
 			c = (c - 0x8281) + 'a';
-		else if (c >= 0x824F && c <= 0x827A)
+		} else if (c >= 0x824F && c <= 0x827A) {
 			c = (c - 0x824F) + '0';
-		else if (c == 0x8140) c = ' ';
-		else if (c == 0x8143) c = ',';
-		else if (c == 0x8144) c = '.';
-		else if (c == 0x8146) c = ':';
-		else if (c == 0x8147) c = ';';
-		else if (c == 0x8148) c = '?';
-		else if (c == 0x8149) c = '!';
-		else if (c == 0x815E) c = '/';
-		else if (c == 0x8168) c = '"';
-		else if (c == 0x8169) c = '(';
-		else if (c == 0x816A) c = ')';
-		else if (c == 0x816D) c = '[';
-		else if (c == 0x816E) c = ']';
-		else if (c == 0x817C) c = '-';
-		else {
+		} else if (c == 0x8140) {
+			c = ' ';
+		} else if (c == 0x8143) {
+			c = ',';
+		} else if (c == 0x8144) {
+			c = '.';
+		} else if (c == 0x8146) {
+			c = ':';
+		} else if (c == 0x8147) {
+			c = ';';
+		} else if (c == 0x8148) {
+			c = '?';
+		} else if (c == 0x8149) {
+			c = '!';
+		} else if (c == 0x815E) {
+			c = '/';
+		} else if (c == 0x8168) {
+			c = '"';
+		} else if (c == 0x8169) {
+			c = '(';
+		} else if (c == 0x816A) {
+			c = ')';
+		} else if (c == 0x816D) {
+			c = '[';
+		} else if (c == 0x816E) {
+			c = ']';
+		} else if (c == 0x817C) {
+			c = '-';
+		} else {
 			str[i] = ' ';
-			sstr[x++] = *ptr++; sstr[x++] = *ptr++;
+			sstr[x++] = *ptr++;
+			sstr[x++] = *ptr++;
 			continue;
 		}
 		
-		str[i] = sstr[x++] = c;
+		str[i] = c;
 		ptr += 2;
 	}
+	memcpy(Info->sTitle, jisTitle, sizeof(jisTitle));
 	
+#if 0
 	trimPriv(str);
 	trimPriv(sstr);
+#endif
 	
 	ptr = data + block * 8192 + 0x60; // icon palette data
 	
 	for (i = 0; i < 16; i++) {
-		clut[i] = *((unsigned short *)ptr);
 		ptr += 2;
 	}
 	
 	for (i = 0; i < Info->IconCount; i++) {
-		short *icon = &Info->Icon[i * 16 * 16];
 		
 		ptr = data + block * 8192 + 128 + 128 * i; // icon data
 		
 		for (x = 0; x < 16 * 16; x++) {
-			icon[x++] = clut[*ptr & 0xf];
-			icon[x] = clut[*ptr >> 4];
 			ptr++;
 		}
 	}
@@ -134,59 +153,34 @@ static void GetSoloBlockInfo(unsigned char *data, int block, McdBlock *Info)
 	strlcpy(Info->Name, ptr, 16);
 }
 
-static Boolean PopulateMemCards(NSData *fileData, NSArray **outArray)
+static inline PCSXRMemFlags MemBlockFlag(unsigned char blockFlags)
 {
-	NSMutableArray *memArray = [[NSMutableArray alloc] initWithCapacity:MAX_MEMCARD_BLOCKS];
-	if (!fileData) {
-		*outArray = @[];
-		return FALSE;
-	}
-	const unsigned char *memPtr = [fileData bytes];
-	if ([fileData length] == MCD_SIZE + 64)
-		memPtr += 64;
-	else if([fileData length] == MCD_SIZE + 3904)
-		memPtr += 3904;
-	else if ([fileData length] != MCD_SIZE)
-		return FALSE;
+	if ((blockFlags & 0xF0) == 0xA0) {
+		if ((blockFlags & 0xF) >= 1 && (blockFlags & 0xF) <= 3)
+			return memFlagDeleted;
+		else
+			return memFlagFree;
+	} else if ((blockFlags & 0xF0) == 0x50) {
+		if ((blockFlags & 0xF) == 0x1)
+			return memFlagUsed;
+		else if ((blockFlags & 0xF) == 0x2)
+			return memFlagLink;
+		else if ((blockFlags & 0xF) == 0x3)
+			return memFlagEndLink;
+	} else
+		return memFlagFree;
 	
-	int i = 0, x;
-	while (i < MAX_MEMCARD_BLOCKS) {
-		x = 1;
-		McdBlock memBlock;
-		GetSoloBlockInfo((unsigned char *)memPtr, i + 1, &memBlock);
-		
-		if ([PcsxrMemoryObject memFlagsFromBlockFlags:memBlock.Flags] == memFlagFree) {
-			//Free space: ignore
-			i++;
-			continue;
-		}
-		do {
-			McdBlock tmpBlock;
-			GetSoloBlockInfo((unsigned char *)memPtr, i + x + 1, &tmpBlock);
-			if ((tmpBlock.Flags & 0x3) == 0x3) {
-				x++;
-				break;
-			} else if ((tmpBlock.Flags & 0x2) == 0x2) {
-				x++;
-			} else {
-				break;
-			}
-		} while (i + x - 1 < MAX_MEMCARD_BLOCKS);
-		@autoreleasepool {
-			PcsxrMemoryObject *obj = [[PcsxrMemoryObject alloc] initWithMcdBlock:&memBlock startingIndex:i size:x];
-			[memArray addObject:obj];
-		}
-		i += x;
-	}
-
-	*outArray = [[NSArray alloc] initWithArray:memArray];
-	return true;
+	//Xcode complains unless we do this...
+	//NSLog(@"Unknown flag %x", blockFlags);
+	return memFlagFree;
 }
 
 Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attributes, CFStringRef contentTypeUTI, CFStringRef pathToFile)
 {
     Boolean ok = FALSE;
     @autoreleasepool {
+		int i = 0, x;
+		NSCharacterSet *theCharSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
 		short freeBlocks = MAX_MEMCARD_BLOCKS;
 		short memCount = 0;
 		NSMutableArray *enNames = [[NSMutableArray alloc] initWithCapacity:MAX_MEMCARD_BLOCKS];
@@ -195,28 +189,59 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 		NSMutableArray *memIDs = [[NSMutableArray alloc] initWithCapacity:MAX_MEMCARD_BLOCKS];
 		NSMutableDictionary *attr = (__bridge NSMutableDictionary*)attributes;
 		NSString *path = (__bridge NSString*)pathToFile;
-		NSArray *cardArrays;
+		const unsigned char* fileCData = NULL;
 		NSData *fileData = [[NSData alloc] initWithContentsOfFile:path options:NSDataReadingMappedIfSafe error:NULL];
 		if (!fileData) {
 			return FALSE;
 		}
-		ok = PopulateMemCards(fileData, &cardArrays);
-		if (!ok) {
+		fileCData = [fileData bytes];
+		if ([fileData length] == MCD_SIZE + 64)
+			fileCData += 64;
+		else if([fileData length] == MCD_SIZE + 3904)
+			fileCData += 3904;
+		else if ([fileData length] != MCD_SIZE)
 			return FALSE;
-		}
-		for (PcsxrMemoryObject *obj in cardArrays) {
-			// Ignore deleted blocks
-			if (obj.flagNameIndex == memFlagDeleted) {
+
+		while (i < MAX_MEMCARD_BLOCKS) {
+			x = 1;
+			McdBlock memBlock;
+			GetSoloBlockInfo((unsigned char *)fileCData, i + 1, &memBlock);
+			
+			if (MemBlockFlag(memBlock.Flags) == memFlagFree) {
+				//Free space: ignore
+				i++;
 				continue;
 			}
-			freeBlocks -= obj.blockSize;
+			do {
+				McdBlock tmpBlock;
+				GetSoloBlockInfo((unsigned char *)fileCData, i + x + 1, &tmpBlock);
+				if ((tmpBlock.Flags & 0x3) == 0x3) {
+					x++;
+					break;
+				} else if ((tmpBlock.Flags & 0x2) == 0x2) {
+					x++;
+				} else {
+					break;
+				}
+			} while (i + x - 1 < MAX_MEMCARD_BLOCKS);
+			// Ignore deleted blocks
+			if (MemBlockFlag(memBlock.Flags) == memFlagDeleted) {
+				continue;
+			}
 			memCount++;
-			[enNames addObject:obj.englishName];
-			[jpNames addObject:obj.sjisName];
-			[memNames addObject:obj.memName];
-			[memIDs addObject:obj.memID];
+			i += x;
+			freeBlocks -= x;
+			NSString *enName = [@(memBlock.Title) stringByTrimmingCharactersInSet:theCharSet];
+			NSString *jpName = [[NSString alloc] initWithCString:memBlock.sTitle encoding:NSShiftJISStringEncoding];
+			NSString *memName = @(memBlock.Name);
+			NSString *memID = @(memBlock.ID);
+			
+			jpName = [jpName stringByTrimmingCharactersInSet:theCharSet];
+			[enNames addObject:enName];
+			[jpNames addObject:jpName];
+			[memNames addObject:memName];
+			[memIDs addObject:memID];
 		}
-		
 		
 		attr[kPCSXRSaveNames] = @{@"en": [enNames copy],
 								  @"ja": [jpNames copy]};
