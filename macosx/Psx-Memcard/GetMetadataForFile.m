@@ -28,7 +28,7 @@
 //
 //==============================================================================
 
-typedef NS_ENUM(char, PCSXRMemFlags) {
+typedef NS_ENUM(NSInteger, PCSXRMemFlags) {
 	memFlagDeleted,
 	memFlagFree,
 	memFlagUsed,
@@ -36,37 +36,13 @@ typedef NS_ENUM(char, PCSXRMemFlags) {
 	memFlagEndLink
 };
 
-#if 0
-static void trimPriv(char *str)
-{
-	int pos = 0;
-	char *dest = str;
-	
-	// skip leading blanks
-	while (str[pos] <= ' ' && str[pos] > 0)
-		pos++;
-	
-	while (str[pos]) {
-		*(dest++) = str[pos];
-		pos++;
-	}
-	
-	*(dest--) = '\0'; // store the null
-	
-	// remove trailing blanks
-	while (dest >= str && *dest <= ' ' && *dest > 0)
-		*(dest--) = '\0';
-}
-#endif
-
 static void GetSoloBlockInfo(unsigned char *data, int block, McdBlock *Info)
 {
 	unsigned char *ptr = data + block * 8192 + 2;
 	unsigned char *str = Info->Title;
-	unsigned char *sstr = Info->sTitle;
 	unsigned short c;
 	unsigned short jisTitle[48] = {0};
-	int i, x = 0;
+	int i;
 	
 	memset(Info, 0, sizeof(McdBlock));
 	Info->IconCount = *ptr & 0x3;
@@ -113,8 +89,6 @@ static void GetSoloBlockInfo(unsigned char *data, int block, McdBlock *Info)
 			c = '-';
 		} else {
 			str[i] = ' ';
-			sstr[x++] = *ptr++;
-			sstr[x++] = *ptr++;
 			continue;
 		}
 		
@@ -123,28 +97,7 @@ static void GetSoloBlockInfo(unsigned char *data, int block, McdBlock *Info)
 	}
 	memcpy(Info->sTitle, jisTitle, sizeof(jisTitle));
 	
-#if 0
-	trimPriv(str);
-	trimPriv(sstr);
-#endif
-	
-	ptr = data + block * 8192 + 0x60; // icon palette data
-	
-	for (i = 0; i < 16; i++) {
-		ptr += 2;
-	}
-	
-	for (i = 0; i < Info->IconCount; i++) {
-		
-		ptr = data + block * 8192 + 128 + 128 * i; // icon data
-		
-		for (x = 0; x < 16 * 16; x++) {
-			ptr++;
-		}
-	}
-	
 	ptr = data + block * 128;
-	
 	Info->Flags = *ptr;
 	
 	ptr += 0xa;
@@ -205,6 +158,11 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 		while (i < MAX_MEMCARD_BLOCKS) {
 			x = 1;
 			McdBlock memBlock;
+			NSString *enName;
+			NSString *jpName;
+			NSString *memName;
+			NSString *memID;
+
 			GetSoloBlockInfo((unsigned char *)fileCData, i + 1, &memBlock);
 			
 			if (MemBlockFlag(memBlock.Flags) == memFlagFree) {
@@ -231,24 +189,24 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 			memCount++;
 			i += x;
 			freeBlocks -= x;
-			NSString *enName = [@(memBlock.Title) stringByTrimmingCharactersInSet:theCharSet];
-			NSString *jpName = [[NSString alloc] initWithCString:memBlock.sTitle encoding:NSShiftJISStringEncoding];
-			NSString *memName = @(memBlock.Name);
-			NSString *memID = @(memBlock.ID);
-			
+			enName = [@(memBlock.Title) stringByTrimmingCharactersInSet:theCharSet];
+			jpName = [[NSString alloc] initWithCString:memBlock.sTitle encoding:NSShiftJISStringEncoding];
 			jpName = [jpName stringByTrimmingCharactersInSet:theCharSet];
+			memName = @(memBlock.Name);
+			memID = @(memBlock.ID);
+			
 			[enNames addObject:enName];
 			[jpNames addObject:jpName];
 			[memNames addObject:memName];
 			[memIDs addObject:memID];
 		}
 		
-		attr[kPCSXRSaveNames] = @{@"en": [enNames copy],
-								  @"ja": [jpNames copy]};
+		attr[kPCSXRSaveNames] = @{@"en": enNames,
+								  @"ja": jpNames};
 		attr[kPCSXRMemCount] = @(memCount);
 		attr[kPCSXRFreeBlocks] = @(freeBlocks);
-		attr[kPCSXRMemNames] = [memNames copy];
-		attr[kPCSXRMemIDs] = [memIDs copy];
+		attr[kPCSXRMemNames] = memNames;
+		attr[kPCSXRMemIDs] = memIDs;
 		ok = TRUE;
 	}
     
