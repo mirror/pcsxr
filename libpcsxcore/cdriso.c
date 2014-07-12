@@ -1264,9 +1264,9 @@ static int cdread_2048(FILE *f, unsigned int base, void *dest, int sector)
 /* Adapted from ecm.c:unecmify() (C) Neill Corlett */
 //TODO: move this func to ecm.h
 static int cdread_ecm_decode(FILE *f, unsigned int base, void *dest, int sector) {
-	u32 output_edc=0, b, writebytecount=0, num;
+	u32 output_edc=0, b=0, writebytecount=0, num;
 	s32 sectorcount=0;
-	s8 type; // mode type 0 (META) or 1, 2 or 3 for CDROM type
+	s8 type = 0; // mode type 0 (META) or 1, 2 or 3 for CDROM type
 	u8 sector_buffer[CD_FRAMESIZE_RAW];
 	boolean processsectors = (boolean)decoded_ecm_sectors; // this flag tells if to decode all sectors or just skip to wanted sector
 	ECMFILELUT* pos = &(ecm_savetable[0]); // points always to beginning of ECM DATA

@@ -182,7 +182,7 @@ void BuildPPFCache() {
 	FILE			*ppffile;
 	char			buffer[12];
 	char			method, undo = 0, blockcheck = 0;
-	int				dizlen, dizyn;
+	int				dizlen = 0, dizyn;
 	unsigned char	ppfmem[512];
 	char			szPPF[MAXPATHLEN];
 	int				count, seekpos, pos;

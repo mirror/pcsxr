@@ -422,8 +422,8 @@ void ProcessDebug() {
 static void ProcessCommands() {
     int code, i, dumping;
     FILE *sfile;
-    char cmd[257], *arguments, *p, reply[10240], *save, *dump;
-    u32 reg, value, size, address;
+    char cmd[257], *arguments, *p, reply[10240], *save, *dump = NULL;
+    u32 reg, value, size = 0, address;
     breakpoint_t *bp;
 
     if (!HasClient())
