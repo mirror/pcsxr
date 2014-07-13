@@ -642,10 +642,25 @@ void psxBios_memcpy() { // 0x2a
 }
 
 void psxBios_memset() { // 0x2b
-	char *p = (char *)Ra0;
-	while (a2-- > 0) *p++ = (char)a1;
+	a1 &= 0xff;
 
-	v0 = a0; pc0 = ra;
+	if(!a0)
+	{
+		v0 = 0; 
+	}
+	else
+	{
+		v0 = a0;
+		
+		while((s32)a2 > 0)
+		{
+			a2--;
+			psxMu8ref(a0) = a1;
+			a0++;
+		}
+	}
+	
+	pc0 = ra;
 }
 
 void psxBios_memmove() { // 0x2c
