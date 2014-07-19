@@ -2251,6 +2251,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/../.svn/dir-wcprops",
+				"$(SRCROOT)/Info.plist",
 			);
 			outputPaths = (
 				Info.plistvers.plist,
@@ -3007,6 +3008,7 @@
 				INFOPLIST_FILE = "Pcsxr-QL/Pcsxr-QL-Info.plist";
 				INSTALL_PATH = /Library/QuickLook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				WRAPPER_EXTENSION = qlgenerator;
 			};
 			name = Debug;
@@ -3025,6 +3027,7 @@
 				INFOPLIST_FILE = "Pcsxr-QL/Pcsxr-QL-Info.plist";
 				INSTALL_PATH = /Library/QuickLook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				WRAPPER_EXTENSION = qlgenerator;
 			};
 			name = Release;
@@ -3043,6 +3046,7 @@
 				INFOPLIST_FILE = "Pcsxr-QL/Pcsxr-QL-Info.plist";
 				INSTALL_PATH = /Library/QuickLook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				WRAPPER_EXTENSION = qlgenerator;
 			};
 			name = Instrument;
@@ -3387,6 +3391,7 @@
 				INFOPLIST_FILE = "Psx-Memcard/Psx-Memcard-Info.plist";
 				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				WRAPPER_EXTENSION = mdimporter;
 			};
 			name = Debug;
@@ -3405,6 +3410,7 @@
 				INFOPLIST_FILE = "Psx-Memcard/Psx-Memcard-Info.plist";
 				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				WRAPPER_EXTENSION = mdimporter;
 			};
 			name = Release;
@@ -3423,6 +3429,7 @@
 				INFOPLIST_FILE = "Psx-Memcard/Psx-Memcard-Info.plist";
 				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				WRAPPER_EXTENSION = mdimporter;
 			};
 			name = Instrument;
@@ -3541,6 +3548,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				STRINGS_FILE_OUTPUT_ENCODING = binary;
 			};
 			name = Instrument;
 		};
@@ -3827,6 +3835,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				STRINGS_FILE_OUTPUT_ENCODING = binary;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
@@ -3878,6 +3887,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				STRINGS_FILE_OUTPUT_ENCODING = binary;
 			};
 			name = Release;
 		};

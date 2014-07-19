@@ -211,5 +211,5 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 	}
     
 	// Return the status
-    return ok;
+	return ok;
 }
