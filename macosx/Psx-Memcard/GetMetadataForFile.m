@@ -53,7 +53,7 @@ static void GetSoloBlockInfo(unsigned char *data, int block, McdBlock *Info)
 		c |= *(ptr + 1);
 		if (!c)
 			break;
-		jisTitle[i] = c;
+		jisTitle[i] = CFSwapInt16BigToHost(c);
 		// Convert ASCII characters to half-width
 		if (c >= 0x8281 && c <= 0x829A) {
 			c = (c - 0x8281) + 'a';
@@ -183,11 +183,11 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 				}
 			} while (i + x - 1 < MAX_MEMCARD_BLOCKS);
 			// Ignore deleted blocks
+			i += x;
 			if (MemBlockFlag(memBlock.Flags) == memFlagDeleted) {
 				continue;
 			}
 			memCount++;
-			i += x;
 			freeBlocks -= x;
 			enName = [@(memBlock.Title) stringByTrimmingCharactersInSet:theCharSet];
 			jpName = [[NSString alloc] initWithCString:memBlock.sTitle encoding:NSShiftJISStringEncoding];
