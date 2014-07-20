@@ -40,9 +40,9 @@ static void GetSoloBlockInfo(unsigned char *data, int block, McdBlock *Info)
 {
 	unsigned char *ptr = data + block * 8192 + 2;
 	unsigned char *str = Info->Title;
+	unsigned char *	sstr = Info->sTitle;
 	unsigned short c;
-	unsigned short jisTitle[48] = {0};
-	int i;
+	int i, x = 0;
 	
 	memset(Info, 0, sizeof(McdBlock));
 	Info->IconCount = *ptr & 0x3;
@@ -53,7 +53,7 @@ static void GetSoloBlockInfo(unsigned char *data, int block, McdBlock *Info)
 		c |= *(ptr + 1);
 		if (!c)
 			break;
-		jisTitle[i] = CFSwapInt16BigToHost(c);
+		
 		// Convert ASCII characters to half-width
 		if (c >= 0x8281 && c <= 0x829A) {
 			c = (c - 0x8281) + 'a';
@@ -89,15 +89,17 @@ static void GetSoloBlockInfo(unsigned char *data, int block, McdBlock *Info)
 			c = '-';
 		} else {
 			str[i] = ' ';
+			sstr[x++] = *ptr++;
+			sstr[x++] = *ptr++;
 			continue;
 		}
 		
-		str[i] = c;
+		str[i] = sstr[x++] = c;
 		ptr += 2;
 	}
-	memcpy(Info->sTitle, jisTitle, sizeof(jisTitle));
 	
 	ptr = data + block * 128;
+	
 	Info->Flags = *ptr;
 	
 	ptr += 0xa;
@@ -136,7 +138,7 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 		NSCharacterSet *theCharSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
 		short freeBlocks = MAX_MEMCARD_BLOCKS;
 		short memCount = 0;
-		NSMutableArray *enNames = [[NSMutableArray alloc] initWithCapacity:MAX_MEMCARD_BLOCKS];
+		//NSMutableArray *enNames = [[NSMutableArray alloc] initWithCapacity:MAX_MEMCARD_BLOCKS];
 		NSMutableArray *jpNames = [[NSMutableArray alloc] initWithCapacity:MAX_MEMCARD_BLOCKS];
 		NSMutableArray *memNames = [[NSMutableArray alloc] initWithCapacity:MAX_MEMCARD_BLOCKS];
 		NSMutableArray *memIDs = [[NSMutableArray alloc] initWithCapacity:MAX_MEMCARD_BLOCKS];
@@ -158,7 +160,7 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 		while (i < MAX_MEMCARD_BLOCKS) {
 			x = 1;
 			McdBlock memBlock;
-			NSString *enName;
+			//NSString *enName;
 			NSString *jpName;
 			NSString *memName;
 			NSString *memID;
@@ -189,20 +191,19 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 			}
 			memCount++;
 			freeBlocks -= x;
-			enName = [@(memBlock.Title) stringByTrimmingCharactersInSet:theCharSet];
+			//enName = [@(memBlock.Title) stringByTrimmingCharactersInSet:theCharSet];
 			jpName = [[NSString alloc] initWithCString:memBlock.sTitle encoding:NSShiftJISStringEncoding];
 			jpName = [jpName stringByTrimmingCharactersInSet:theCharSet];
 			memName = @(memBlock.Name);
 			memID = @(memBlock.ID);
 			
-			[enNames addObject:enName];
+			//[enNames addObject:enName];
 			[jpNames addObject:jpName];
 			[memNames addObject:memName];
 			[memIDs addObject:memID];
 		}
 		
-		attr[kPCSXRSaveNames] = @{@"en": enNames,
-								  @"ja": jpNames};
+		attr[kPCSXRSaveNames] = jpNames;
 		attr[kPCSXRMemCount] = @(memCount);
 		attr[kPCSXRFreeBlocks] = @(freeBlocks);
 		attr[kPCSXRMemNames] = memNames;
