@@ -159,16 +159,16 @@
 		551A778117869EAE0052D185 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 551A753A17868BEB0052D185 /* InfoPlist.strings */; };
 		551A778217869EAE0052D185 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 551A753C17868BEB0052D185 /* Localizable.strings */; };
 		551A778317869EAE0052D185 /* SockDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551A753E17868BEB0052D185 /* SockDialog.xib */; };
-		551A779417869F610052D185 /* Bladesio1.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A75CE17868C4E0052D185 /* Bladesio1.psxplugin */; };
-		551A779517869F610052D185 /* DFCdrom.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A767A178690500052D185 /* DFCdrom.psxplugin */; };
-		551A779617869F610052D185 /* DFInput.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A768E1786919F0052D185 /* DFInput.psxplugin */; };
-		551A779717869F610052D185 /* PeopsSoftGPU.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A76BC178693FF0052D185 /* PeopsSoftGPU.psxplugin */; };
-		551A779817869F610052D185 /* PeopsSpuSDL.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A76E2178696BD0052D185 /* PeopsSpuSDL.psxplugin */; };
-		551A779917869F610052D185 /* PeopsSpuAL.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A771F178698C60052D185 /* PeopsSpuAL.psxplugin */; };
-		551A779A17869F610052D185 /* PeopsXGL.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A774F17869C280052D185 /* PeopsXGL.psxplugin */; };
-		551A779B17869F610052D185 /* DFNet.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A776D17869E430052D185 /* DFNet.psxplugin */; };
-		551A779E17869FC70052D185 /* libSPUSharedCode.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76E71786971B0052D185 /* libSPUSharedCode.dylib */; };
-		551A77A017869FED0052D185 /* libSPUSharedCode.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76E71786971B0052D185 /* libSPUSharedCode.dylib */; };
+		551A779417869F610052D185 /* Bladesio1.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A75CE17868C4E0052D185 /* Bladesio1.psxplugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		551A779517869F610052D185 /* DFCdrom.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A767A178690500052D185 /* DFCdrom.psxplugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		551A779617869F610052D185 /* DFInput.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A768E1786919F0052D185 /* DFInput.psxplugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		551A779717869F610052D185 /* PeopsSoftGPU.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A76BC178693FF0052D185 /* PeopsSoftGPU.psxplugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		551A779817869F610052D185 /* PeopsSpuSDL.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A76E2178696BD0052D185 /* PeopsSpuSDL.psxplugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		551A779917869F610052D185 /* PeopsSpuAL.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A771F178698C60052D185 /* PeopsSpuAL.psxplugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		551A779A17869F610052D185 /* PeopsXGL.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A774F17869C280052D185 /* PeopsXGL.psxplugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		551A779B17869F610052D185 /* DFNet.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A776D17869E430052D185 /* DFNet.psxplugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		551A779E17869FC70052D185 /* libSPUSharedCode.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76E71786971B0052D185 /* libSPUSharedCode.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		551A77A017869FED0052D185 /* libSPUSharedCode.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76E71786971B0052D185 /* libSPUSharedCode.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		551A77E71786A4DD0052D185 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76AC178693C60052D185 /* Carbon.framework */; };
 		5525BC5E19421A760018AF2F /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76AF178693D60052D185 /* CoreServices.framework */; };
 		5525BC5F19421A760018AF2F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76B2178693EA0052D185 /* CoreFoundation.framework */; };
@@ -178,7 +178,7 @@
 		5525BC6B19421A760018AF2F /* GetMetadataForFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 5525BC6A19421A760018AF2F /* GetMetadataForFile.m */; };
 		5525BC7819421D4F0018AF2F /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5525BC7719421D4F0018AF2F /* schema.xml */; };
 		5525BC7C194221EC0018AF2F /* schema.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5525BC7E194221EC0018AF2F /* schema.strings */; };
-		5525BC8119423FA90018AF2F /* Psx-Memcard.mdimporter in Copy Spotlight Plug-Ins */ = {isa = PBXBuildFile; fileRef = 5525BC5D19421A750018AF2F /* Psx-Memcard.mdimporter */; };
+		5525BC8119423FA90018AF2F /* Psx-Memcard.mdimporter in Copy Spotlight Plug-Ins */ = {isa = PBXBuildFile; fileRef = 5525BC5D19421A750018AF2F /* Psx-Memcard.mdimporter */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55268A5A1876244E00A82269 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A74A317868B110052D185 /* Foundation.framework */; };
 		5529EA11169CBE3400BAA2A5 /* RecentItemsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5550D2721683C923006C56B5 /* RecentItemsMenu.m */; };
 		553FECEE18DF5A8300C7B007 /* AddPluginSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553FECB818DF5A8300C7B007 /* AddPluginSheet.xib */; };
@@ -189,8 +189,8 @@
 		553FECF818DF5A8300C7B007 /* KeyNames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 553FECCC18DF5A8300C7B007 /* KeyNames.plist */; };
 		553FECF918DF5A8300C7B007 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 553FECCE18DF5A8300C7B007 /* Localizable.strings */; };
 		554FD70917C6A13E0056CF66 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; };
-		554FD70A17C6A14B0056CF66 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; };
-		554FD70B17C6A1EF0056CF66 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; };
+		554FD70A17C6A14B0056CF66 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		554FD70B17C6A1EF0056CF66 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		554FD70C17C6A1F10056CF66 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; };
 		55534AF518183BFB006D6BCB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55534AF418183BFB006D6BCB /* main.m */; };
 		5557769A17EBE7D60019D008 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5557769917EBE7D60019D008 /* Media.xcassets */; };
@@ -459,7 +459,7 @@
 		2BBB1127051DC00500B84448 /* PluginList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PluginList.m; sourceTree = "<group>"; usesTabs = 1; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2BBB1791051E113B00B84448 /* EmuThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmuThread.h; sourceTree = "<group>"; };
 		2BBB1792051E113B00B84448 /* EmuThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EmuThread.m; sourceTree = "<group>"; usesTabs = 1; };
-		2BBB17DA051E4D0F00B84448 /* Plugin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Plugin.c; sourceTree = SOURCE_ROOT; usesTabs = 1; };
+		2BBB17DA051E4D0F00B84448 /* Plugin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Plugin.c; sourceTree = "<group>"; usesTabs = 1; };
 		550E343718E6293D00A1AD21 /* Pcsxr-QL.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pcsxr-QL.qlgenerator"; sourceTree = BUILT_PRODUCTS_DIR; };
 		550E343818E6293D00A1AD21 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		550E343F18E6293D00A1AD21 /* Pcsxr-QL-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pcsxr-QL-Info.plist"; sourceTree = "<group>"; };
@@ -792,7 +792,7 @@
 		55BBA69A14958399003B2CEC /* PcsxrFreezeStateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrFreezeStateHandler.h; sourceTree = "<group>"; };
 		55BBA69B1495839A003B2CEC /* PcsxrFreezeStateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrFreezeStateHandler.m; sourceTree = "<group>"; usesTabs = 1; };
 		55CA586A17E799E6007424D5 /* DiskArbitration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiskArbitration.framework; path = System/Library/Frameworks/DiskArbitration.framework; sourceTree = SDKROOT; };
-		55DA37241894419000B44951 /* pcsxr.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pcsxr.pch; sourceTree = "<group>"; };
+		55DA37241894419000B44951 /* pcsxr.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pcsxr.pch; path = ../pcsxr.pch; sourceTree = "<group>"; };
 		55E0ACDE178B695F0005C945 /* LaunchArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchArg.h; sourceTree = "<group>"; };
 		55E0ACDF178B69600005C945 /* LaunchArg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchArg.m; sourceTree = "<group>"; usesTabs = 1; };
 		55E1598C18455C60007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CheatWindow.strings; sourceTree = "<group>"; };
@@ -1100,6 +1100,7 @@
 				55DA37241894419000B44951 /* pcsxr.pch */,
 			);
 			name = MacOSX;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		2BCE23B204C6B52C007C2DA3 /* libpcsxcore */ = {
@@ -3855,6 +3856,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "PCSX-R Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
