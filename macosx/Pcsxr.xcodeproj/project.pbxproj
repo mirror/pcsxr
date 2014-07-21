@@ -194,6 +194,7 @@
 		556C37AB197C9C59001A4265 /* PcsxrMemoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A90228147D89380037E18F /* PcsxrMemoryObject.m */; };
 		556C37AD197D94C8001A4265 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		556C37AE197D94D6001A4265 /* libSPUSharedCode.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76E71786971B0052D185 /* libSPUSharedCode.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		556C37B0197DB3CB001A4265 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 556C37AF197DB3CB001A4265 /* Style.css */; };
 		5581463917AABCD100862DBF /* PcsxrCheatHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5581463817AABCD100862DBF /* PcsxrCheatHandler.m */; };
 		559366CA12B694DF004ACC1E /* iR3000A-64.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C112B694DF004ACC1E /* iR3000A-64.c */; };
 		559366CB12B694DF004ACC1E /* ix86-64.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C212B694DF004ACC1E /* ix86-64.c */; };
@@ -716,6 +717,7 @@
 		5569B0C1182F0BE100991C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NetPcsxrHIDInputPluginMain.strings; sourceTree = "<group>"; };
 		556C37A8197C815C001A4265 /* PSXMemEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSXMemEnumerator.m; sourceTree = "<group>"; };
 		556C37AA197C81F9001A4265 /* PSXMemEnumerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSXMemEnumerator.h; sourceTree = "<group>"; };
+		556C37AF197DB3CB001A4265 /* Style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
 		55707E8E18123579007CC5D0 /* hu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55707E901812357B007CC5D0 /* hu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
 		55707E921812357D007CC5D0 /* hu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1166,6 +1168,7 @@
 				550E343F18E6293D00A1AD21 /* Pcsxr-QL-Info.plist */,
 				550E344018E6293D00A1AD21 /* InfoPlist.strings */,
 				550E344918E6293D00A1AD21 /* Pcsxr-QL-Prefix.pch */,
+				556C37AF197DB3CB001A4265 /* Style.css */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2108,6 +2111,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				550E344218E6293D00A1AD21 /* InfoPlist.strings in Resources */,
+				556C37B0197DB3CB001A4265 /* Style.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

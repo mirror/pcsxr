@@ -88,12 +88,12 @@ OSStatus GenerateThumbnailForFreeze(void *thisInterface, QLThumbnailRequestRef t
 	}
 	return noErr;
 #else
-	return unimpErr;
+	return noErr;
 #endif
 }
 
 OSStatus GenerateThumbnailForMemCard(void *thisInterface, QLThumbnailRequestRef thumbnail, NSURL *url, NSDictionary *options, CGSize maxSize)
 {
 	//NSArray *memCards = CreateArrayByEnumeratingMemoryCardAtURL(url);
-	return unimpErr;
+	return noErr;
 }

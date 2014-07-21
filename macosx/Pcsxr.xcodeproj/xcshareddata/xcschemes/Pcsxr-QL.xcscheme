@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "0510"
-   version = "1.3">
+   version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -38,14 +38,33 @@
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "NO"
-      allowLocationSimulation = "YES">
+      debugXPCServices = "NO"
+      allowLocationSimulation = "NO"
+      viewDebuggingEnabled = "No">
       <PathRunnable
          FilePath = "/System/Library/Frameworks/QuickLook.framework/Versions/A/Resources/quicklookd.app/Contents/MacOS/qlmanage">
       </PathRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "550E343618E6293D00A1AD21"
+            BuildableName = "Pcsxr-QL.qlgenerator"
+            BlueprintName = "Pcsxr-QL"
+            ReferencedContainer = "container:Pcsxr.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-p /Users/cwbetts/Library/Application\ Support/Pcsxr/Save\ States/SCUS94555-000.pcsxrstate"
+            argument = "-g &quot;${TARGET_BUILD_DIR}&quot;/&quot;${PRODUCT_NAME}&quot;.${WRAPPER_EXTENSION} -c com.codeplex.pcsxr.memcard"
             isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-p /Users/cwbetts/Library/&quot;Application Support&quot;/Pcsxr/&quot;Memory Cards&quot;/&quot;descent max.mcr&quot;"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-p /Users/cwbetts/Library/Application\ Support/Pcsxr/Save\ States/SCUS94555-000.pcsxrstate"
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-p /Users/cwbetts/Library/Application\ Support/Pcsxr/Save\ States/JM3_FINAL1V4-SCUS94555.000.pcsxrstate"

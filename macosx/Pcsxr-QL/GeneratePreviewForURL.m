@@ -77,15 +77,26 @@ OSStatus GeneratePreviewForFreeze(void *thisInterface, QLPreviewRequestRef previ
 	free(pMem);
 	return noErr;
 #else
-	return unimpErr;
+	return noErr;
 #endif
 }
 
 static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestRef preview, NSURL *url, NSDictionary *options)
 {
 	NSArray *memCards = CreateArrayByEnumeratingMemoryCardAtURL(url);
+	
+	if (!memCards) {
+		return noErr;
+	}
+	
 	NSMutableString *htmlStr = [[NSMutableString alloc] initWithCapacity:memCards.count * 200];
 	NSMutableDictionary *htmlDict = [[NSMutableDictionary alloc] initWithCapacity:memCards.count];
+	NSBundle *Bundle;
+	{
+		CFBundleRef cfbundle = QLPreviewRequestGetGeneratorBundle(preview);
+		NSURL *bundURL = CFBridgingRelease(CFBundleCopyBundleURL(cfbundle));
+		Bundle = [NSBundle bundleWithURL:bundURL];
+	}
 	int i;
 	for (PcsxrMemoryObject *obj in memCards) {
 		NSImage *theImage = [obj firstMemImage];
@@ -95,11 +106,15 @@ static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestR
 		NSDictionary *imgProps = @{(NSString *)kQLPreviewPropertyAttachmentDataKey: pngData,
 								   (NSString *)kQLPreviewPropertyMIMETypeKey: @"image/png"};
 		NSString *imgName = [[@(i++) stringValue] stringByAppendingPathComponent:@"png"];
-		[htmlStr appendFormat:@"<tr><td><img src=\"cid:%@\"></td><td>%@</td><td>%i</td></tr>\n", imgName, obj.sjisName, obj.blockSize];
+		[htmlStr appendFormat:@"\t\t\t<tr><td><img src=\"cid:%@\"></td> <td>%@</td> <td>%i</td></tr>\n", imgName, obj.sjisName, obj.blockSize];
 		htmlDict[imgName] = imgProps;
 	}
 	
-	NSString *theStr = [[NSString alloc] initWithFormat:@"<html>\n<body>\n<table>\n<tr><td ALIGN=center>Image</td><td ALIGN=name>Image</td><td ALIGN=center>Count</td></tr>%@\n</table>\n</body>\n</html>", htmlStr];
+	NSURL *cssURL = [Bundle URLForResource:@"Style" withExtension:@"css"];
+	
+	NSString *attributeStr = [[NSString alloc] initWithContentsOfURL:cssURL encoding:NSUTF8StringEncoding error:NULL];
+	
+	NSString *theStr = [[NSString alloc] initWithFormat:@"<html>\n\t<body>\n<style>\n%@</style>\n\t\t\t<table>\n<tr> <td ALIGN=center>Image</td> <td ALIGN=center>Name</td> <td ALIGN=center>Count</td> </tr>\n%@\n</table>\n\t</body>\n</html>", attributeStr ? attributeStr : @"", htmlStr];
 	
 	NSData *data = [theStr dataUsingEncoding:NSUTF8StringEncoding];
 	NSDictionary *previewDict =
