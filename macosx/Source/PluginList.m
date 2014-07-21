@@ -35,7 +35,7 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 	return sPluginList;
 }
 
-- (id)init
+- (instancetype)init
 {
 	NSUInteger i;
 	

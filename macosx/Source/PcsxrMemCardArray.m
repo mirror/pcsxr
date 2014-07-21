@@ -91,7 +91,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	}
 }
 
-- (id)initWithMemoryCardNumber:(int)carNum
+- (instancetype)initWithMemoryCardNumber:(int)carNum
 {
 	NSParameterAssert(carNum == 1 || carNum == 2);
 	if (self = [super init]) {

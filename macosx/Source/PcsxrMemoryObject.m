@@ -136,7 +136,7 @@ static NSString *MemLabelEndLink;
 	return memFlagFree;
 }
 
-- (id)initWithMcdBlock:(McdBlock *)infoBlock startingIndex:(uint8_t)startIdx size:(uint8_t)memSize
+- (instancetype)initWithMcdBlock:(McdBlock *)infoBlock startingIndex:(uint8_t)startIdx size:(uint8_t)memSize
 {
 	if (self = [super init]) {
 		self.startingIndex = startIdx;

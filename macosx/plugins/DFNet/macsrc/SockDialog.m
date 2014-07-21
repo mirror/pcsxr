@@ -86,7 +86,7 @@ void sockDestroyWaitDlg()
 	WaitCancel = 1;
 }
 
-- (id)init
+- (instancetype)init
 {
 	return self = [self initWithWindowNibName:@"SockDialog"];
 }

@@ -11,7 +11,7 @@
 @implementation MemBadgeView
 
 //TODO: also include the memory count in the view as well.
-- (id)initWithFrame:(NSRect)frame
+- (instancetype)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {

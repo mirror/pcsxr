@@ -11,7 +11,7 @@
 
 @interface PcsxrMemCardArray : NSObject
 
-- (id)initWithMemoryCardNumber:(int)carNum;
+- (instancetype)initWithMemoryCardNumber:(int)carNum NS_DESIGNATED_INITIALIZER;
 
 - (void)deleteMemoryBlocksAtIndex:(int)slotnum;
 - (void)compactMemory;
@@ -21,14 +21,14 @@
  * @abstract	Blocks that are free from any data
  * @result		free blocks
  */
-- (int)freeBlocks;
+@property (readonly) int freeBlocks;
 
 /**
  * @fn			availableBlocks
  * @abstract	Blocks that have been deleted
  * @result		free blocks
  */
-- (int)availableBlocks;
+@property (readonly) int availableBlocks;
 - (int)memorySizeAtIndex:(int)idx;
 - (BOOL)moveBlockAtIndex:(int)idx toMemoryCard:(PcsxrMemCardArray*)otherCard;
 - (int)indexOfFreeBlocksWithSize:(int)asize;

@@ -23,12 +23,12 @@
 	_theBlock = [theBlock copy];
 }
 
-- (id)initWithLaunchOrder:(unsigned)order argument:(NSString*)arg block:(dispatch_block_t)block
+- (instancetype)initWithLaunchOrder:(unsigned)order argument:(NSString*)arg block:(dispatch_block_t)block
 {
 	return [self initWithLaunchOrder:order block:block argument:arg];
 }
 
-- (id)initWithLaunchOrder:(unsigned)order block:(dispatch_block_t)block argument:(NSString*)arg
+- (instancetype)initWithLaunchOrder:(unsigned)order block:(dispatch_block_t)block argument:(NSString*)arg
 {
 	if (self = [super init]) {
 		self.launchOrder = order;

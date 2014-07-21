@@ -12,7 +12,7 @@
 @property (readwrite) uint32_t cheatAddress;
 @property (readwrite) uint16_t cheatValue;
 
-- (instancetype)initWithAddress:(uint32_t)add value:(uint16_t)val;
+- (instancetype)initWithAddress:(uint32_t)add value:(uint16_t)val NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithCheatCode:(CheatCode *)theCheat;
 @end
 
@@ -21,7 +21,7 @@
 @property (readwrite, strong) NSString *cheatName;
 @property (readwrite, getter = isEnabled) BOOL enabled;
 
-- (instancetype)initWithCheat:(Cheat *)theCheat;
+- (instancetype)initWithCheat:(Cheat *)theCheat NS_DESIGNATED_INITIALIZER;
 @end
 
 @interface CheatController : NSWindowController <NSWindowDelegate, NSTableViewDelegate>

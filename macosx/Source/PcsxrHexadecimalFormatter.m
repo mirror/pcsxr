@@ -22,7 +22,7 @@
 	self.hexFormatString = [NSString stringWithFormat:@"0x%%0%ilx", hexPadding];
 }
 
-- (id)init
+- (instancetype)init
 {
 	if (self = [super init]) {
 #ifdef __LP64__
@@ -34,7 +34,7 @@
 	return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
 	if (self = [super initWithCoder:aDecoder]) {
 #ifdef __LP64__

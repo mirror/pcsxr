@@ -167,8 +167,6 @@
 		551A779917869F610052D185 /* PeopsSpuAL.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A771F178698C60052D185 /* PeopsSpuAL.psxplugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		551A779A17869F610052D185 /* PeopsXGL.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A774F17869C280052D185 /* PeopsXGL.psxplugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		551A779B17869F610052D185 /* DFNet.psxplugin in Copy Plug-Ins */ = {isa = PBXBuildFile; fileRef = 551A776D17869E430052D185 /* DFNet.psxplugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		551A779E17869FC70052D185 /* libSPUSharedCode.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76E71786971B0052D185 /* libSPUSharedCode.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		551A77A017869FED0052D185 /* libSPUSharedCode.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76E71786971B0052D185 /* libSPUSharedCode.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		551A77E71786A4DD0052D185 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76AC178693C60052D185 /* Carbon.framework */; };
 		5525BC5E19421A760018AF2F /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76AF178693D60052D185 /* CoreServices.framework */; };
 		5525BC5F19421A760018AF2F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76B2178693EA0052D185 /* CoreFoundation.framework */; };
@@ -189,13 +187,13 @@
 		553FECF818DF5A8300C7B007 /* KeyNames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 553FECCC18DF5A8300C7B007 /* KeyNames.plist */; };
 		553FECF918DF5A8300C7B007 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 553FECCE18DF5A8300C7B007 /* Localizable.strings */; };
 		554FD70917C6A13E0056CF66 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; };
-		554FD70A17C6A14B0056CF66 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		554FD70B17C6A1EF0056CF66 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		554FD70C17C6A1F10056CF66 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; };
 		55534AF518183BFB006D6BCB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55534AF418183BFB006D6BCB /* main.m */; };
 		5557769A17EBE7D60019D008 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5557769917EBE7D60019D008 /* Media.xcassets */; };
 		556C37A9197C815C001A4265 /* PSXMemEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 556C37A8197C815C001A4265 /* PSXMemEnumerator.m */; };
 		556C37AB197C9C59001A4265 /* PcsxrMemoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A90228147D89380037E18F /* PcsxrMemoryObject.m */; };
+		556C37AD197D94C8001A4265 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 554FD70817C6A13E0056CF66 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		556C37AE197D94D6001A4265 /* libSPUSharedCode.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76E71786971B0052D185 /* libSPUSharedCode.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5581463917AABCD100862DBF /* PcsxrCheatHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5581463817AABCD100862DBF /* PcsxrCheatHandler.m */; };
 		559366CA12B694DF004ACC1E /* iR3000A-64.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C112B694DF004ACC1E /* iR3000A-64.c */; };
 		559366CB12B694DF004ACC1E /* ix86-64.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C212B694DF004ACC1E /* ix86-64.c */; };
@@ -366,40 +364,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		551A779C17869FB10052D185 /* Copy Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				551A779E17869FC70052D185 /* libSPUSharedCode.dylib in Copy Frameworks */,
-				554FD70A17C6A14B0056CF66 /* SDL2.framework in Copy Frameworks */,
-			);
-			name = "Copy Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		551A779F17869FD60052D185 /* Copy Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				551A77A017869FED0052D185 /* libSPUSharedCode.dylib in Copy Frameworks */,
-			);
-			name = "Copy Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		551A77BA1786A1DC0052D185 /* Copy Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				554FD70B17C6A1EF0056CF66 /* SDL2.framework in Copy Frameworks */,
-			);
-			name = "Copy Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		55202EBA18E73E3E00C631AA /* Copy QuickLook Plug-In */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -420,6 +384,18 @@
 				5525BC8119423FA90018AF2F /* Psx-Memcard.mdimporter in Copy Spotlight Plug-Ins */,
 			);
 			name = "Copy Spotlight Plug-Ins";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		556C37AC197D94AF001A4265 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				556C37AE197D94D6001A4265 /* libSPUSharedCode.dylib in Copy Frameworks */,
+				556C37AD197D94C8001A4265 /* SDL2.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		71AD2DF010C3573400365243 /* Copy Plug-Ins */ = {
@@ -1825,6 +1801,7 @@
 				55202EBA18E73E3E00C631AA /* Copy QuickLook Plug-In */,
 				5525BC58194219B80018AF2F /* Copy Spotlight Plug-Ins */,
 				55F41A3317EF8CFF00605DF8 /* Strip Headers */,
+				556C37AC197D94AF001A4265 /* Copy Frameworks */,
 			);
 			buildRules = (
 				2BD707B705559AE300CB5D9B /* PBXBuildRule */,
@@ -1909,7 +1886,6 @@
 				551A76871786919F0052D185 /* Sources */,
 				551A76881786919F0052D185 /* Frameworks */,
 				551A768A1786919F0052D185 /* Resources */,
-				551A77BA1786A1DC0052D185 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1944,7 +1920,6 @@
 				551A76DB178696BD0052D185 /* Sources */,
 				551A76DC178696BD0052D185 /* Frameworks */,
 				551A76DE178696BD0052D185 /* Resources */,
-				551A779C17869FB10052D185 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1980,7 +1955,6 @@
 				551A7709178698C60052D185 /* Sources */,
 				551A7714178698C60052D185 /* Frameworks */,
 				551A7717178698C60052D185 /* Resources */,
-				551A779F17869FD60052D185 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3559,6 +3533,7 @@
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plistvers.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @executable_path/../Frameworks";
 				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_NAME = PCSXR;
 				SKIP_INSTALL = NO;
@@ -3734,6 +3709,7 @@
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @executable_path/../Frameworks";
 				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_NAME = PCSXR;
 				SKIP_INSTALL = NO;
@@ -3758,6 +3734,7 @@
 				);
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = Info.plistvers.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @executable_path/../Frameworks";
 				OTHER_CFLAGS = (
 					"-fomit-frame-pointer",
 					"$(inherited)",

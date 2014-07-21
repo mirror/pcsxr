@@ -18,7 +18,7 @@
 - (void)refreshPlugins;
 - (NSArray *)pluginsForType:(int)typeMask;
 - (BOOL)hasPluginAtPath:(NSString *)path;
-- (BOOL)configured;
+@property (readonly) BOOL configured;
 - (PcsxrPlugin *)activePluginForType:(int)type;
 - (BOOL)setActivePlugin:(PcsxrPlugin *)plugin forType:(int)type;
 

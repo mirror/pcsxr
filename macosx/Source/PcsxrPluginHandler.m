@@ -26,7 +26,7 @@
 	return utisupport;
 }
 
-- (id)initWithWindow:(NSWindow *)window
+- (instancetype)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
     if (self) {
@@ -41,7 +41,7 @@
 	return @"AddPluginSheet";
 }
 
-- (id)init
+- (instancetype)init
 {
 	return self = [self initWithWindowNibName:@"AddPluginSheet"];
 }

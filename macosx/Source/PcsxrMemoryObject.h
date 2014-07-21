@@ -26,7 +26,7 @@ typedef NS_ENUM(char, PCSXRMemFlags) {
 + (NSImage *)blankImage;
 + (PCSXRMemFlags)memFlagsFromBlockFlags:(unsigned char)blockFlags;
 
-- (id)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(uint8_t)startIdx size:(uint8_t)memSize;
+- (instancetype)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(uint8_t)startIdx size:(uint8_t)memSize NS_DESIGNATED_INITIALIZER;
 
 @property (readonly, strong) NSString *englishName;
 @property (readonly, strong) NSString *sjisName;

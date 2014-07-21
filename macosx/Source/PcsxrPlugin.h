@@ -18,15 +18,15 @@
 + (char **)configEntriesForType:(int)type;
 + (NSArray *)pluginsPaths;
 
-- (id)initWithPath:(NSString *)aPath;
+- (instancetype)initWithPath:(NSString *)aPath NS_DESIGNATED_INITIALIZER;
 
-- (NSString *)displayVersion;
+@property (readonly, copy) NSString *displayVersion;
 - (BOOL)hasAboutAs:(int)type;
 - (BOOL)hasConfigureAs:(int)type;
 - (long)runAs:(int)aType;
 - (long)shutdownAs:(int)aType;
 - (void)aboutAs:(int)type;
 - (void)configureAs:(int)type;
-- (BOOL)verifyOK;
+@property (readonly) BOOL verifyOK;
 
 @end

@@ -118,7 +118,7 @@
 	return returnArray;
 }
 
-- (id)initWithPath:(NSString *)aPath
+- (instancetype)initWithPath:(NSString *)aPath
 {
 	if (!(self = [super init])) {
 		return nil;
