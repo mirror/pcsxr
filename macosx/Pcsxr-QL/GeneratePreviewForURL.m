@@ -95,9 +95,9 @@ static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestR
 	{
 		CFBundleRef cfbundle = QLPreviewRequestGetGeneratorBundle(preview);
 		NSURL *bundURL = CFBridgingRelease(CFBundleCopyBundleURL(cfbundle));
-		Bundle = [NSBundle bundleWithURL:bundURL];
+		Bundle = [[NSBundle alloc] initWithURL:bundURL];
 	}
-	int i;
+	int i = 0;
 	for (PcsxrMemoryObject *obj in memCards) {
 		NSImage *theImage = [obj firstMemImage];
 		NSData *tiffData = [theImage TIFFRepresentation];
@@ -105,18 +105,17 @@ static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestR
 		NSData *pngData = [bmImg representationUsingType:NSPNGFileType properties:nil];
 		NSDictionary *imgProps = @{(NSString *)kQLPreviewPropertyAttachmentDataKey: pngData,
 								   (NSString *)kQLPreviewPropertyMIMETypeKey: @"image/png"};
-		NSString *imgName = [[@(i++) stringValue] stringByAppendingPathComponent:@"png"];
+		NSString *imgName = [[@(i++) stringValue] stringByAppendingPathExtension:@"png"];
 		[htmlStr appendFormat:@"\t\t\t<tr><td><img src=\"cid:%@\"></td> <td>%@</td> <td>%i</td></tr>\n", imgName, obj.sjisName, obj.blockSize];
 		htmlDict[imgName] = imgProps;
 	}
 	
-	NSURL *cssURL = [Bundle URLForResource:@"Style" withExtension:@"css"];
+	NSURL *cssURL = [Bundle URLForResource:@"template" withExtension:@"html"];
 	
-	NSString *attributeStr = [[NSString alloc] initWithContentsOfURL:cssURL encoding:NSUTF8StringEncoding error:NULL];
+	NSMutableString *attributeStr = [[NSMutableString alloc] initWithContentsOfURL:cssURL encoding:NSUTF8StringEncoding error:NULL];
+	[attributeStr replaceOccurrencesOfString:@"(TABLECONTENT)" withString:htmlStr options:NSLiteralSearch range:NSMakeRange(0, [attributeStr length])];
 	
-	NSString *theStr = [[NSString alloc] initWithFormat:@"<html>\n\t<body>\n<style>\n%@</style>\n\t\t\t<table>\n<tr> <td ALIGN=center>Image</td> <td ALIGN=center>Name</td> <td ALIGN=center>Count</td> </tr>\n%@\n</table>\n\t</body>\n</html>", attributeStr ? attributeStr : @"", htmlStr];
-	
-	NSData *data = [theStr dataUsingEncoding:NSUTF8StringEncoding];
+	NSData *data = [attributeStr dataUsingEncoding:NSUTF8StringEncoding];
 	NSDictionary *previewDict =
  @{(NSString *)kQLPreviewPropertyAttachmentsKey: htmlDict,
    (NSString *)kQLPreviewPropertyDisplayNameKey: [url lastPathComponent],
