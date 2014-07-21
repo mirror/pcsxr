@@ -2,9 +2,10 @@
 #include <CoreServices/CoreServices.h>
 #include <QuickLook/QuickLook.h>
 #include "MyQuickLook.h"
-#include <zlib.h>
-#import <Foundation/Foundation.h>
-#include "nopic.h"
+//#include <zlib.h>
+#import <Cocoa/Cocoa.h>
+//#include "nopic.h"
+#import "PSXMemEnumerator.h"
 
 /* -----------------------------------------------------------------------------
    Generate a preview for file
@@ -39,6 +40,7 @@ void CancelPreviewGeneration(void *thisInterface, QLPreviewRequestRef preview)
 
 OSStatus GeneratePreviewForFreeze(void *thisInterface, QLPreviewRequestRef preview, NSURL *url, NSDictionary *options)
 {
+#if 0
 	NSData *data;
 	gzFile f;
 	const char* state_filename;
@@ -74,9 +76,13 @@ OSStatus GeneratePreviewForFreeze(void *thisInterface, QLPreviewRequestRef previ
 	}
 	free(pMem);
 	return noErr;
+#else
+	return unimpErr;
+#endif
 }
 
 static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestRef preview, NSURL *url, NSDictionary *options)
 {
+	NSArray *memCards = CreateArrayByEnumeratingMemoryCardAtURL(url);
 	return unimpErr;
 }

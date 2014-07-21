@@ -11,7 +11,7 @@
 			<string>QLGenerator</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.codeplex.pcsxr.freeze</string>
+				<string>com.codeplex.pcsxr.memcard</string>
 			</array>
 		</dict>
 	</array>

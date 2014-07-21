@@ -2,9 +2,10 @@
 #include <CoreServices/CoreServices.h>
 #include <QuickLook/QuickLook.h>
 #include "MyQuickLook.h"
-#include <zlib.h>
+//#include <zlib.h>
 #import <Cocoa/Cocoa.h>
-#include "nopic.h"
+//#include "nopic.h"
+#import "PSXMemEnumerator.h"
 
 /* -----------------------------------------------------------------------------
     Generate a thumbnail for file
@@ -40,6 +41,7 @@ void CancelThumbnailGeneration(void *thisInterface, QLThumbnailRequestRef thumbn
 
 OSStatus GenerateThumbnailForFreeze(void *thisInterface, QLThumbnailRequestRef thumbnail, NSURL *url, NSDictionary *options, CGSize maxSize)
 {
+#if 0
 	gzFile f;
 	const char* state_filename = NULL;
 	NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:96 pixelsHigh:128 bitsPerSample:8 samplesPerPixel:3 hasAlpha:NO isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:0 bitsPerPixel:0];
@@ -85,9 +87,13 @@ OSStatus GenerateThumbnailForFreeze(void *thisInterface, QLThumbnailRequestRef t
 		QLThumbnailRequestSetImageWithData(thumbnail, (__bridge CFDataRef)(data), NULL);
 	}
 	return noErr;
+#else
+	return unimpErr;
+#endif
 }
 
 OSStatus GenerateThumbnailForMemCard(void *thisInterface, QLThumbnailRequestRef thumbnail, NSURL *url, NSDictionary *options, CGSize maxSize)
 {
+	//NSArray *memCards = CreateArrayByEnumeratingMemoryCardAtURL(url);
 	return unimpErr;
 }
