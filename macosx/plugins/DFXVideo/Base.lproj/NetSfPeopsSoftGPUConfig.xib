@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
+        <development version="5100" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6185.7"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NetSfPeopsSoftGPUPluginConfigController">
@@ -39,14 +40,12 @@
                 <subviews>
                     <box title="Hacks" translatesAutoresizingMaskIntoConstraints="NO" id="76">
                         <rect key="frame" x="17" y="197" width="446" height="188"/>
-                        <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
                             <rect key="frame" x="2" y="2" width="442" height="171"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="74">
                                     <rect key="frame" x="46" y="119" width="350" height="42"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="center" id="162">
                                         <font key="font" metaFont="smallSystem"/>
                                         <string key="title">Only enable a hack to fix a specific problem in a game.
@@ -57,7 +56,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </textField>
                                 <matrix verticalHuggingPriority="750" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="530">
                                     <rect key="frame" x="27" y="13" width="388" height="98"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     <size key="cellSize" width="192" height="18"/>
                                     <size key="intercellSpacing" width="4" height="2"/>
@@ -126,14 +124,12 @@ Hold the mouse over a checkbox to get more information about it.</string>
                     </box>
                     <box title="Display Settings" translatesAutoresizingMaskIntoConstraints="NO" id="89">
                         <rect key="frame" x="17" y="389" width="234" height="174"/>
-                        <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
                             <rect key="frame" x="2" y="2" width="230" height="157"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="93">
                                     <rect key="frame" x="18" y="71" width="172" height="18"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <string key="toolTip">Removes tearing artifacts by waiting for the monitor to sync. Will cause a slight performance loss. This setting has no effect on LCD monitors.</string>
                                     <buttonCell key="cell" type="check" title="Sync to Monitor Refresh" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="172">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -142,7 +138,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </button>
                                 <button toolTip="Skip rendering frames to improve overall speed when needed. This setting might cause compatibility problems" translatesAutoresizingMaskIntoConstraints="NO" id="96">
                                     <rect key="frame" x="18" y="111" width="146" height="18"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <buttonCell key="cell" type="check" title="Use Frame Skipping" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="173">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -150,7 +145,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </button>
                                 <button toolTip="When Enabled a small counter will show the current performance of the rendering measured in Frames Per Second (FPS)" translatesAutoresizingMaskIntoConstraints="NO" id="97">
                                     <rect key="frame" x="18" y="131" width="148" height="18"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <buttonCell key="cell" type="check" title="Display FPS Counter" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="174">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -158,7 +152,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </button>
                                 <button hidden="YES" toolTip="Automatically enter full screen mode" translatesAutoresizingMaskIntoConstraints="NO" id="99">
                                     <rect key="frame" x="18" y="91" width="125" height="18"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <buttonCell key="cell" type="check" title="Auto Full Screen" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="175">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -166,7 +159,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </button>
                                 <form verticalHuggingPriority="750" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1k-Sq-djb">
                                     <rect key="frame" x="57" y="13" width="116" height="52"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     <size key="cellSize" width="116" height="22"/>
                                     <size key="intercellSpacing" width="1" height="8"/>
@@ -207,14 +199,12 @@ Hold the mouse over a checkbox to get more information about it.</string>
                     </box>
                     <box title="Rendering" translatesAutoresizingMaskIntoConstraints="NO" id="107">
                         <rect key="frame" x="253" y="389" width="210" height="174"/>
-                        <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
                             <rect key="frame" x="2" y="2" width="206" height="157"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField toolTip="Specify when to use dithering to render colors" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="112">
                                     <rect key="frame" x="15" y="134" width="106" height="17"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Dither Graphics:" id="176">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -223,7 +213,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </textField>
                                 <popUpButton toolTip="Specify when to use dithering to render colors" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="116">
                                     <rect key="frame" x="15" y="102" width="177" height="26"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="177">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="menu"/>
@@ -238,7 +227,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </popUpButton>
                                 <button toolTip="Enable use of the hacks specified below" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="117">
                                     <rect key="frame" x="15" y="81" width="117" height="18"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <buttonCell key="cell" type="check" title="Enable Hacks" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="178">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -249,7 +237,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </button>
                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="180">
                                     <rect key="frame" x="15" y="61" width="117" height="18"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="check" title="Enable Shaders" bezelStyle="regularSquare" imagePosition="left" inset="2" id="181">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -277,14 +264,12 @@ Hold the mouse over a checkbox to get more information about it.</string>
                     </box>
                     <box autoresizesSubviews="NO" title="Shaders" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="179">
                         <rect key="frame" x="17" y="57" width="446" height="136"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView">
                             <rect key="frame" x="1" y="1" width="444" height="120"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="182">
                                     <rect key="frame" x="335" y="82" width="101" height="32"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="push" title="Select..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="183">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -295,7 +280,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </button>
                                 <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="184">
                                     <rect key="frame" x="335" y="49" width="101" height="32"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="push" title="Select..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="185">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -306,7 +290,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </button>
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="186">
                                     <rect key="frame" x="88" y="92" width="247" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="243" id="255"/>
                                     </constraints>
@@ -318,7 +301,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </textField>
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="188">
                                     <rect key="frame" x="88" y="59" width="247" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="189">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -327,7 +309,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </textField>
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="194">
                                     <rect key="frame" x="16" y="92" width="68" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Vertex:" id="195">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -336,7 +317,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </textField>
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="196">
                                     <rect key="frame" x="16" y="59" width="68" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Fragment:" id="197">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -345,7 +325,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </textField>
                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="219">
                                     <rect key="frame" x="88" y="20" width="100" height="26"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="95" id="279"/>
                                     </constraints>
@@ -370,7 +349,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </popUpButton>
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="225">
                                     <rect key="frame" x="16" y="26" width="68" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Quality:" id="226">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -379,7 +357,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                                 </textField>
                                 <button hidden="YES" verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="rcP-o2-vWh">
                                     <rect key="frame" x="351" y="16" width="85" height="32"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="push" title="Hidden" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tsc-3g-k3d">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -420,7 +397,6 @@ Hold the mouse over a checkbox to get more information about it.</string>
                     </box>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="371">
                         <rect key="frame" x="384" y="13" width="82" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="372">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -434,7 +410,6 @@ DQ
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="375">
                         <rect key="frame" x="302" y="13" width="82" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="376">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -448,7 +423,6 @@ Gw
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="381">
                         <rect key="frame" x="14" y="13" width="74" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="382">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>

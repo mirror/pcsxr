@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
+        <development version="5100" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6185.7"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SPUPluginController">
@@ -29,14 +30,12 @@
                 <subviews>
                     <box title="General Settings" translatesAutoresizingMaskIntoConstraints="NO" id="9">
                         <rect key="frame" x="17" y="161" width="432" height="135"/>
-                        <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
                             <rect key="frame" x="2" y="2" width="428" height="118"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="11">
                                     <rect key="frame" x="14" y="77" width="95" height="17"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="191"/>
                                     </constraints>
@@ -48,7 +47,6 @@
                                 </textField>
                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="12" customClass="NamedSlider">
                                     <rect key="frame" x="113" y="75" width="165" height="26"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="2" doubleValue="1" tickMarkPosition="above" numberOfTickMarks="3" allowsTickMarkValuesOnly="YES" sliderType="linear" id="81">
                                         <font key="font" size="12" name="Helvetica"/>
                                     </sliderCell>
@@ -59,7 +57,6 @@
                                 </slider>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="15">
                                     <rect key="frame" x="14" y="45" width="95" height="17"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="227"/>
                                     </constraints>
@@ -71,7 +68,6 @@
                                 </textField>
                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16" customClass="NamedSlider">
                                     <rect key="frame" x="113" y="43" width="165" height="26"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="3" doubleValue="1" tickMarkPosition="above" numberOfTickMarks="4" allowsTickMarkValuesOnly="YES" sliderType="linear" id="83">
                                         <font key="font" size="12" name="Helvetica"/>
                                     </sliderCell>
@@ -81,7 +77,6 @@
                                 </slider>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="17">
                                     <rect key="frame" x="282" y="77" width="131" height="14"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="127" id="129"/>
                                     </constraints>
@@ -93,7 +88,6 @@
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="18">
                                     <rect key="frame" x="282" y="45" width="131" height="14"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="(Simple Interpolation)" id="85">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -102,7 +96,6 @@
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="69">
                                     <rect key="frame" x="15" y="17" width="94" height="17"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="90" id="182"/>
                                     </constraints>
@@ -114,7 +107,6 @@
                                 </textField>
                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="70" customClass="NamedSlider">
                                     <rect key="frame" x="113" y="11" width="165" height="26"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <sliderCell key="cell" continuous="YES" alignment="left" maxValue="4" doubleValue="3" tickMarkPosition="above" numberOfTickMarks="5" allowsTickMarkValuesOnly="YES" sliderType="linear" id="87">
                                         <font key="font" size="12" name="Helvetica"/>
                                     </sliderCell>
@@ -125,7 +117,6 @@
                                 </slider>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="71">
                                     <rect key="frame" x="282" y="17" width="131" height="17"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="224"/>
                                     </constraints>
@@ -173,14 +164,12 @@
                     </box>
                     <box title="XA Music" translatesAutoresizingMaskIntoConstraints="NO" id="19">
                         <rect key="frame" x="258" y="57" width="191" height="100"/>
-                        <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
                             <rect key="frame" x="2" y="2" width="187" height="83"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <matrix verticalHuggingPriority="750" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="233">
                                     <rect key="frame" x="17" y="55" width="153" height="18"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     <size key="cellSize" width="153" height="18"/>
                                     <buttonCell key="prototype" type="check" title="Change XA Speed" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="234">
@@ -209,14 +198,12 @@
                     </box>
                     <box title="Misc" translatesAutoresizingMaskIntoConstraints="NO" id="24">
                         <rect key="frame" x="17" y="57" width="215" height="100"/>
-                        <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView">
                             <rect key="frame" x="2" y="2" width="211" height="83"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <matrix verticalHuggingPriority="750" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="196">
                                     <rect key="frame" x="11" y="13" width="189" height="60"/>
-                                    <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     <size key="cellSize" width="189" height="18"/>
                                     <size key="intercellSpacing" width="0.0" height="3"/>
@@ -254,7 +241,6 @@
                     </box>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="162">
                         <rect key="frame" x="370" y="13" width="82" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="163">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -268,7 +254,6 @@ DQ
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="166">
                         <rect key="frame" x="288" y="13" width="82" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="167">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -282,7 +267,6 @@ Gw
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="171">
                         <rect key="frame" x="14" y="13" width="74" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="172">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
