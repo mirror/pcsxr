@@ -84,5 +84,31 @@ OSStatus GeneratePreviewForFreeze(void *thisInterface, QLPreviewRequestRef previ
 static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestRef preview, NSURL *url, NSDictionary *options)
 {
 	NSArray *memCards = CreateArrayByEnumeratingMemoryCardAtURL(url);
-	return unimpErr;
+	NSMutableString *htmlStr = [[NSMutableString alloc] initWithCapacity:memCards.count * 200];
+	NSMutableDictionary *htmlDict = [[NSMutableDictionary alloc] initWithCapacity:memCards.count];
+	int i;
+	for (PcsxrMemoryObject *obj in memCards) {
+		NSImage *theImage = [obj firstMemImage];
+		NSData *tiffData = [theImage TIFFRepresentation];
+		NSBitmapImageRep *bmImg = [NSBitmapImageRep imageRepWithData:tiffData];
+		NSData *pngData = [bmImg representationUsingType:NSPNGFileType properties:nil];
+		NSDictionary *imgProps = @{(NSString *)kQLPreviewPropertyAttachmentDataKey: pngData,
+								   (NSString *)kQLPreviewPropertyMIMETypeKey: @"image/png"};
+		NSString *imgName = [[@(i++) stringValue] stringByAppendingPathComponent:@"png"];
+		[htmlStr appendFormat:@"<tr><td><img src=\"cid:%@\"></td><td>%@</td><td>%i</td></tr>\n", imgName, obj.sjisName, obj.blockSize];
+		htmlDict[imgName] = imgProps;
+	}
+	
+	NSString *theStr = [[NSString alloc] initWithFormat:@"<html>\n<body>\n<table>\n<tr><td ALIGN=center>Image</td><td ALIGN=name>Image</td><td ALIGN=center>Count</td></tr>%@\n</table>\n</body>\n</html>", htmlStr];
+	
+	NSData *data = [theStr dataUsingEncoding:NSUTF8StringEncoding];
+	NSDictionary *previewDict =
+ @{(NSString *)kQLPreviewPropertyAttachmentsKey: htmlDict,
+   (NSString *)kQLPreviewPropertyDisplayNameKey: [url lastPathComponent],
+   (NSString *)kQLPreviewPropertyWidthKey: @400,
+   (NSString *)kQLPreviewPropertyHeightKey: @400};
+	
+	QLPreviewRequestSetDataRepresentation(preview, (__bridge CFDataRef)(data), kUTTypeHTML, (__bridge CFDictionaryRef)(previewDict));
+	
+	return noErr;
 }

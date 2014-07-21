@@ -798,7 +798,7 @@
 		55BBA69A14958399003B2CEC /* PcsxrFreezeStateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcsxrFreezeStateHandler.h; sourceTree = "<group>"; };
 		55BBA69B1495839A003B2CEC /* PcsxrFreezeStateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PcsxrFreezeStateHandler.m; sourceTree = "<group>"; usesTabs = 1; };
 		55CA586A17E799E6007424D5 /* DiskArbitration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiskArbitration.framework; path = System/Library/Frameworks/DiskArbitration.framework; sourceTree = SDKROOT; };
-		55DA37241894419000B44951 /* pcsxr.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pcsxr.pch; path = ../pcsxr.pch; sourceTree = "<group>"; };
+		55DA37241894419000B44951 /* pcsxr.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pcsxr.pch; sourceTree = SOURCE_ROOT; };
 		55E0ACDE178B695F0005C945 /* LaunchArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchArg.h; sourceTree = "<group>"; };
 		55E0ACDF178B69600005C945 /* LaunchArg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchArg.m; sourceTree = "<group>"; usesTabs = 1; };
 		55E1598C18455C60007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CheatWindow.strings; sourceTree = "<group>"; };
@@ -3016,6 +3016,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pcsxr-QL/Pcsxr-QL-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=PsxQL";
 				INFOPLIST_FILE = "Pcsxr-QL/Pcsxr-QL-Info.plist";
 				INSTALL_PATH = /Library/QuickLook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3029,12 +3030,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
-				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pcsxr-QL/Pcsxr-QL-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=PsxQL";
 				INFOPLIST_FILE = "Pcsxr-QL/Pcsxr-QL-Info.plist";
 				INSTALL_PATH = /Library/QuickLook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3048,12 +3048,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
-				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pcsxr-QL/Pcsxr-QL-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=PsxQL";
 				INFOPLIST_FILE = "Pcsxr-QL/Pcsxr-QL-Info.plist";
 				INSTALL_PATH = /Library/QuickLook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3067,7 +3066,6 @@
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=Bladesio1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -3079,7 +3077,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=Bladesio1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -3092,7 +3089,6 @@
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFCdrom";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -3104,7 +3100,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFCdrom";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -3119,7 +3114,6 @@
 				EXPORTED_SYMBOLS_FILE = plugins/DFInput/Resources/DFInput.exp;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFInput";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				HEADER_SEARCH_PATHS = (
@@ -3138,7 +3132,6 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				EXPORTED_SYMBOLS_FILE = plugins/DFInput/Resources/DFInput.exp;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFInput";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				HEADER_SEARCH_PATHS = (
@@ -3155,7 +3148,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACGL,
 					_DARWIN,
@@ -3174,7 +3166,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACGL,
 					_DARWIN,
@@ -3196,7 +3187,6 @@
 				EXPORTED_SYMBOLS_FILE = plugins/DFSound/Resorces/Shared/DFSound.exp;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
 					"PCSXRPLUG=SDLSound",
 					USESDL,
@@ -3219,7 +3209,6 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				EXPORTED_SYMBOLS_FILE = plugins/DFSound/Resorces/Shared/DFSound.exp;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
 					"PCSXRPLUG=SDLSound",
 					USESDL,
@@ -3292,7 +3281,6 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				EXPORTED_SYMBOLS_FILE = plugins/DFSound/Resorces/Shared/DFSound.exp;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
 					"PCSXRPLUG=ALSound",
 					USEOPENAL,
@@ -3310,7 +3298,6 @@
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
 				EXPORTED_SYMBOLS_FILE = plugins/DFSound/Resorces/Shared/DFSound.exp;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
 					"PCSXRPLUG=ALSound",
 					USEOPENAL,
@@ -3328,7 +3315,6 @@
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACGL,
 					_DARWIN,
@@ -3347,7 +3333,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACGL,
 					_DARWIN,
@@ -3367,7 +3352,6 @@
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFNet";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -3379,7 +3363,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFNet";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -3391,11 +3374,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Psx-Memcard/Psx-Memcard-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=MDPsx";
@@ -3411,10 +3392,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Psx-Memcard/Psx-Memcard-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=MDPsx";
@@ -3430,10 +3409,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Psx-Memcard/Psx-Memcard-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=MDPsx";
@@ -3535,6 +3512,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu89;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = pcsxr.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3558,6 +3536,7 @@
 				INFOPLIST_FILE = "plugins/$(TARGET_NAME)/Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
 			};
@@ -3615,7 +3594,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFCdrom";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -3629,7 +3607,6 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				EXPORTED_SYMBOLS_FILE = plugins/DFInput/Resources/DFInput.exp;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFInput";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				HEADER_SEARCH_PATHS = (
@@ -3646,7 +3623,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACGL,
 					_DARWIN,
@@ -3665,7 +3641,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACGL,
 					_DARWIN,
@@ -3686,7 +3661,6 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				EXPORTED_SYMBOLS_FILE = plugins/DFSound/Resorces/Shared/DFSound.exp;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
 					"PCSXRPLUG=SDLSound",
 					USESDL,
@@ -3708,7 +3682,6 @@
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
 				EXPORTED_SYMBOLS_FILE = plugins/DFSound/Resorces/Shared/DFSound.exp;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
 					"PCSXRPLUG=ALSound",
 					USEOPENAL,
@@ -3725,7 +3698,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFNet";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -3737,7 +3709,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=Bladesio1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -3814,7 +3785,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
+				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEBUG_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_C_LANGUAGE_STANDARD = gnu89;
@@ -3845,6 +3816,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -3875,6 +3847,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu89;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = pcsxr.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3898,6 +3871,7 @@
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
 			};

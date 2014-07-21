@@ -207,6 +207,14 @@ static NSString *MemLabelEndLink;
 	return (unsigned)[memImages count];
 }
 
+- (NSImage*)firstMemImage
+{
+	if (memImageIndex == -1) {
+		return [PcsxrMemoryObject blankImage];
+	}
+	return memImages[0];
+}
+
 - (NSImage*)memImage
 {
 	if (memImageIndex == -1) {

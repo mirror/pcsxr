@@ -168,11 +168,12 @@ NSArray *CreateArrayByEnumeratingMemoryCardAtURL(NSURL *location)
 				break;
 			}
 		} while (i + x - 1 < MAX_MEMCARD_BLOCKS);
-		@autoreleasepool {
-			PcsxrMemoryObject *obj = [[PcsxrMemoryObject alloc] initWithMcdBlock:&memBlock startingIndex:i size:x];
-			[memArray addObject:obj];
-		}
+		PcsxrMemoryObject *obj = [[PcsxrMemoryObject alloc] initWithMcdBlock:&memBlock startingIndex:i size:x];
 		i += x;
+		if (MemBlockFlag(memBlock.Flags) == memFlagDeleted) {
+			continue;
+		}
+		[memArray addObject:obj];
 	}
 	
 	return [[NSArray alloc] initWithArray:memArray];

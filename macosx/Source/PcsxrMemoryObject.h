@@ -36,6 +36,7 @@ typedef NS_ENUM(char, PCSXRMemFlags) {
 @property (readonly) uint8_t startingIndex;
 @property (readonly) uint8_t blockSize;
 
+@property (readonly, copy) NSImage *firstMemImage;
 @property (readonly, unsafe_unretained, nonatomic) NSImage *memImage;
 @property (readonly, nonatomic) unsigned memIconCount;
 @property (readonly, unsafe_unretained, nonatomic) NSString *flagName;
