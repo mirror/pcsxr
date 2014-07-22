@@ -204,6 +204,7 @@
 		559366D012B694DF004ACC1E /* ix86_sse.c in Sources */ = {isa = PBXBuildFile; fileRef = 559366C812B694DF004ACC1E /* ix86_sse.c */; };
 		55A90220147D7C380037E18F /* PcsxrMemCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A9021F147D7C380037E18F /* PcsxrMemCardController.m */; };
 		55A90229147D89380037E18F /* PcsxrMemoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A90228147D89380037E18F /* PcsxrMemoryObject.m */; };
+		55AF2A69197DF6A700EB2560 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5557769917EBE7D60019D008 /* Media.xcassets */; };
 		55B13FBD18C4F9CC00ACD9AC /* SPUPluginController.h in Headers */ = {isa = PBXBuildFile; fileRef = 551A755317868BEC0052D185 /* SPUPluginController.h */; };
 		55B13FBE18C4F9D800ACD9AC /* NamedSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 551A754F17868BEC0052D185 /* NamedSlider.h */; };
 		55BBA693149455E1003B2CEC /* PcsxrMemCardHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BBA692149455E1003B2CEC /* PcsxrMemCardHandler.m */; };
@@ -1165,10 +1166,10 @@
 		550E343E18E6293D00A1AD21 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				550E343F18E6293D00A1AD21 /* Pcsxr-QL-Info.plist */,
-				550E344018E6293D00A1AD21 /* InfoPlist.strings */,
-				550E344918E6293D00A1AD21 /* Pcsxr-QL-Prefix.pch */,
 				556C37B1197DBFD1001A4265 /* template.html */,
+				550E344018E6293D00A1AD21 /* InfoPlist.strings */,
+				550E343F18E6293D00A1AD21 /* Pcsxr-QL-Info.plist */,
+				550E344918E6293D00A1AD21 /* Pcsxr-QL-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2111,6 +2112,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				550E344218E6293D00A1AD21 /* InfoPlist.strings in Resources */,
+				55AF2A69197DF6A700EB2560 /* Media.xcassets in Resources */,
 				556C37B2197DBFD1001A4265 /* template.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

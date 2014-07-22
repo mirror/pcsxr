@@ -13,6 +13,8 @@
    This function's job is to create thumbnail for designated file as fast as possible
    ----------------------------------------------------------------------------- */
 
+#define ImageDivider 16
+
 static OSStatus GenerateThumbnailForFreeze(void *thisInterface, QLThumbnailRequestRef preview, NSURL *url, NSDictionary *options, CGSize maxSize);
 static OSStatus GenerateThumbnailForMemCard(void *thisInterface, QLThumbnailRequestRef preview, NSURL *url, NSDictionary *options, CGSize maxSize);
 
@@ -92,8 +94,69 @@ OSStatus GenerateThumbnailForFreeze(void *thisInterface, QLThumbnailRequestRef t
 #endif
 }
 
+static NSImage *MemoryImageAtIndex(NSArray *memArray, NSInteger my)
+{
+	NSInteger i = 0;
+	for (PcsxrMemoryObject *obj in memArray) {
+		NSIndexSet *idxSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(i, obj.blockSize)];
+		if ([idxSet containsIndex:my]) {
+			return obj.firstMemImage;
+		}
+		i += obj.blockSize;
+	}
+	
+	return nil;
+}
+
 OSStatus GenerateThumbnailForMemCard(void *thisInterface, QLThumbnailRequestRef thumbnail, NSURL *url, NSDictionary *options, CGSize maxSize)
 {
-	//NSArray *memCards = CreateArrayByEnumeratingMemoryCardAtURL(url);
+	NSArray *memCards = CreateArrayByEnumeratingMemoryCardAtURL(url);
+	if (!memCards) {
+		return noErr;
+	}
+	
+	NSBundle *Bundle;
+	{
+		CFBundleRef cfbundle = QLThumbnailRequestGetGeneratorBundle(thumbnail);
+		NSURL *bundURL = CFBridgingRelease(CFBundleCopyBundleURL(cfbundle));
+		Bundle = [[NSBundle alloc] initWithURL:bundURL];
+	}
+
+	NSRect imageRect = NSMakeRect(0, 0, ImageDivider, ImageDivider);
+	NSImage *blankImage = [[NSImage alloc] initWithSize:imageRect.size];
+	[blankImage lockFocus];
+	[[NSColor blackColor] set];
+	[NSBezierPath fillRect:imageRect];
+	[blankImage unlockFocus];
+
+	NSImage *memImages = [[NSImage alloc] initWithSize:NSMakeSize((4 * ImageDivider), (4 * ImageDivider))];
+
+	NSInteger allMems = 0;
+	for (PcsxrMemoryObject *obj in memCards) {
+		allMems += obj.blockSize;
+	}
+	[memImages lockFocus];
+	[[NSColor clearColor] set];
+	[NSBezierPath fillRect:NSMakeRect(0, 0, (4 * ImageDivider), (4 * ImageDivider))];
+	for (int i = 1; i < 16; i++) {
+		NSInteger x = (i % 4) * ImageDivider, y = (3 * ImageDivider) - ((i / 4) * ImageDivider);
+		NSImage *curImage;
+		if (i < allMems) {
+			curImage = MemoryImageAtIndex(memCards, i - 1);
+		} else {
+			curImage = blankImage;
+		}
+		[curImage drawInRect:NSMakeRect(x, y, ImageDivider, ImageDivider) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+	}
+	NSURL *psxMemURL = [Bundle URLForResource:@"pcsxrmemcard" withExtension:@"icns"];
+	NSImage *psxMemIcon = [[NSImage alloc] initByReferencingURL:psxMemURL];
+	psxMemIcon.size = NSMakeSize(ImageDivider, ImageDivider);
+	[psxMemIcon drawInRect:NSMakeRect(0, 3 * ImageDivider, ImageDivider, ImageDivider) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+	
+	[memImages unlockFocus];
+	
+	NSData *data = [memImages TIFFRepresentation];
+	QLThumbnailRequestSetImageWithData(thumbnail, (__bridge CFDataRef)(data), NULL);
+	
 	return noErr;
 }

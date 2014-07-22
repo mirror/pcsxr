@@ -59,8 +59,12 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-p /Users/cwbetts/Library/&quot;Application Support&quot;/Pcsxr/&quot;Memory Cards&quot;/&quot;descent max.mcr&quot;"
+            argument = "-t /Users/cwbetts/Library/&quot;Application Support&quot;/Pcsxr/&quot;Memory Cards&quot;/&quot;descent max.mcr&quot;"
             isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-p /Users/cwbetts/Library/&quot;Application Support&quot;/Pcsxr/&quot;Memory Cards&quot;/&quot;descent max.mcr&quot;"
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-p /Users/cwbetts/Library/Application\ Support/Pcsxr/Save\ States/SCUS94555-000.pcsxrstate"
