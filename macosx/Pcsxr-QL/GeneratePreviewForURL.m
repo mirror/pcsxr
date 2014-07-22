@@ -119,8 +119,7 @@ static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestR
 	NSDictionary *previewDict =
  @{(NSString *)kQLPreviewPropertyAttachmentsKey: htmlDict,
    (NSString *)kQLPreviewPropertyDisplayNameKey: [url lastPathComponent],
-   (NSString *)kQLPreviewPropertyWidthKey: @400,
-   (NSString *)kQLPreviewPropertyHeightKey: @400};
+   (NSString *)kQLPreviewPropertyWidthKey: @400};
 	
 	QLPreviewRequestSetDataRepresentation(preview, (__bridge CFDataRef)(data), kUTTypeHTML, (__bridge CFDictionaryRef)(previewDict));
 	
