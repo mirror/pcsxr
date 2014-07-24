@@ -145,6 +145,8 @@ int LoadConfig(PcsxConfig *Conf) {
 	Config.RewindCount = GetValuel(data, "RewindCount");
 	Config.RewindInterval = GetValuel(data, "RewindInterval");
 
+	Config.HackFix = GetValuel(data, "HackFix");
+
 	free(data);
 
 	return 0;
@@ -193,6 +195,8 @@ void SaveConfig() {
 	SetValuel("PsxType", Config.PsxType);
 	SetValuel("RewindCount", Config.RewindCount);
 	SetValuel("RewindInterval", Config.RewindInterval);
+
+	SetValuel("HackFix", Config.HackFix);
 
 	fclose(f);
 }

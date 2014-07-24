@@ -1644,7 +1644,7 @@ static void recLW() {
 	// Delay is memread delay + 1 cycle.
 	// Seems to work nicely with games that require cycle accuracy like CART World Series.
 	// TODO: this could be needed with other L ops such as LB.
-	INC32M((uptr)&psxRegs.cycle);
+	if (Config.HackFix)INC32M((uptr)&psxRegs.cycle);
 }
 
 extern u32 LWL_MASK[4];

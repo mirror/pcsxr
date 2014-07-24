@@ -660,7 +660,7 @@ void psxHwWrite32(u32 add, u32 value) {
 				return;
 			}
 			DmaExec(2);                  // DMA2 chcr (GPU DMA)
-			if (HW_DMA2_CHCR == 0x1000401)
+			if (Config.HackFix && HW_DMA2_CHCR == 0x1000401)
 				dmaGpuListHackEn=TRUE;
 			return;
 
@@ -749,7 +749,7 @@ void psxHwWrite32(u32 add, u32 value) {
 			// MML/Tronbonne is known to use this.
 			// TODO FIFO is not implemented properly so commands are not exact
 			// and thus we rely on hack that counter/cdrom irqs are enabled at same time
-			if (SWAPu32(value) == 0x1f00000 && (psxHu32ref(0x1070) & 0x44)) {
+			if (Config.HackFix && SWAPu32(value) == 0x1f00000 && (psxHu32ref(0x1070) & 0x44)) {
 				setIrq( 0x01 );
 			}
 			GPU_writeData(value); return;

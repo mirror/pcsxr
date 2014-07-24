@@ -938,6 +938,7 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 	Config.VSyncWA = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_VSyncWA")));
 	Config.NoMemcard = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_NoMemcard")));
 	Config.Widescreen = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Widescreen")));
+	Config.HackFix = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_HackFix")));
 
 	SaveConfig();
 
@@ -1011,6 +1012,7 @@ void OnConf_Cpu() {
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_VSyncWA")), Config.VSyncWA);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_NoMemcard")), Config.NoMemcard);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Widescreen")), Config.Widescreen);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_HackFix")), Config.HackFix);
 
 	// Setup a handler for when Close or Cancel is clicked
 	g_signal_connect_data(G_OBJECT(CpuDlg), "response",

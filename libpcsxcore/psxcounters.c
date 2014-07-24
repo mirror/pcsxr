@@ -65,9 +65,7 @@ static const u32 CountToOverflow  = 0;
 static const u32 CountToTarget    = 1;
 
 static const u32 FrameRate[]      = { 60, 50 };
-//static const u32 VBlankStart[]    = { 240, 256 };
 static const u32 VBlankStart[]    = { 243, 256 };
-static const u32 HSyncTotal[]     = { 263, 313 };
 static const u32 SpuUpdInterval[] = { 23, 22 };
 
 #if defined(PSXHW_LOG) && defined(PSXMEM_LOG) && defined(PSXDMA_LOG) // automatic guess if we want trace level logging
@@ -84,6 +82,7 @@ static Rcnt rcnts[ CounterQuantity ];
 static u32 hSyncCount = 0;
 static u32 spuSyncCount = 0;
 
+u32 HSyncTotal[PSX_TYPE_PAL+1]; // 2
 u32 psxNextCounter = 0, psxNextsCounter = 0;
 
 /******************************************************************************/
@@ -309,8 +308,8 @@ void psxRcntUpdate()
             //setIrq( 0x01 );
         }
 
-        // Update lace. (with InuYasha fix)
-        if( hSyncCount >= (Config.VSyncWA ? HSyncTotal[Config.PsxType] / BIAS : HSyncTotal[Config.PsxType]) )
+        // Update lace. (calculated at psxHsyncCalculate() on init/defreeze)
+        if( hSyncCount >= HSyncTotal[Config.PsxType] )
         {
             hSyncCount = 0;
 
@@ -414,7 +413,7 @@ u32 psxRcntRcount( u32 index )
 
     // Parasite Eve 2 fix - artificial clock jitter based on BIAS
     // TODO: any other games depend on getting excepted value from RCNT?
-    if( index == 2 && rcnts[index].counterState == CountToTarget && (Config.RCntFix || ((rcnts[index].mode & 0x2FF) == JITTER_FLAGS)) )
+    if( Config.HackFix && index == 2 && rcnts[index].counterState == CountToTarget && (Config.RCntFix || ((rcnts[index].mode & 0x2FF) == JITTER_FLAGS)) )
     {
         /*
         *The problem is that...
@@ -466,9 +465,21 @@ u32 psxRcntRtarget( u32 index )
 
 /******************************************************************************/
 
+void psxHsyncCalculate()
+{
+    HSyncTotal[PSX_TYPE_NTSC] = 263; HSyncTotal[PSX_TYPE_PAL] = 313;
+    if (Config.VSyncWA) {
+        HSyncTotal[Config.PsxType] = HSyncTotal[Config.PsxType] / BIAS;
+    } else if (Config.HackFix) {
+        HSyncTotal[Config.PsxType] = HSyncTotal[Config.PsxType]+1;
+    }
+}
+
 void psxRcntInit()
 {
     s32 i;
+
+    psxHsyncCalculate();
 
     // rcnt 0.
     rcnts[0].rate   = 1;
@@ -507,6 +518,10 @@ s32 psxRcntFreeze( gzFile f, s32 Mode )
     gzfreeze( &spuSyncCount, sizeof(spuSyncCount) );
     gzfreeze( &psxNextCounter, sizeof(psxNextCounter) );
     gzfreeze( &psxNextsCounter, sizeof(psxNextsCounter) );
+
+    if (Mode == 0) {
+        psxHsyncCalculate();
+    }
 
     return 0;
 }
