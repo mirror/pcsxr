@@ -715,7 +715,7 @@ static int parseccd(const char *isofile) {
 	// Fill out the last track's end based on size
 	if (numtracks >= 1) {
 		fseek(cdHandle, 0, SEEK_END);
-		t = ftell(cdHandle) / 2352 - msf2sec(ti[numtracks].start) + 2 * 75;
+		t = ftell(cdHandle) / CD_FRAMESIZE_RAW - msf2sec(ti[numtracks].start) + 2 * 75;
 		sec2msf(t, ti[numtracks].length);
 	}
 
