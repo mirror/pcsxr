@@ -19,8 +19,8 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 @property (readwrite) uint8_t startingIndex;
 @property (readwrite) uint8_t blockSize;
 
-@property (nonatomic) NSInteger memImageIndex;
-@property (strong) NSArray *memImages;
+@property (readwrite, nonatomic) NSInteger memImageIndex;
+@property (readwrite, strong) NSArray *memoryCardImages;
 @property (readwrite) PCSXRMemFlags flagNameIndex;
 @end
 
@@ -77,7 +77,7 @@ static NSString *MemLabelEndLink;
 - (NSImage*)memoryImageAtIndex:(NSInteger)idx
 {
 	if (memImageIndex == -1 || idx > self.memIconCount) {
-		return nil;
+		return [PcsxrMemoryObject blankImage];
 	}
 	return memImages[idx];
 }
@@ -119,7 +119,7 @@ static NSString *MemLabelEndLink;
 		[NSBezierPath fillRect:imageRect];
 		[imageBlank unlockFocus];
 	}
-	return imageBlank;
+	return [imageBlank copy];
 }
 
 + (PCSXRMemFlags)memFlagsFromBlockFlags:(unsigned char)blockFlags
@@ -151,7 +151,7 @@ static NSString *MemLabelEndLink;
 		self.blockSize = memSize;
 		self.flagNameIndex = [PcsxrMemoryObject memFlagsFromBlockFlags:infoBlock->Flags];
 		if (self.flagNameIndex == memFlagFree) {
-			self.memImages = @[];
+			self.memoryCardImages = @[];
 			self.memImageIndex = -1;
 			self.englishName = self.sjisName = @"Free block";
 			self.memID = self.memName = @"";
@@ -167,7 +167,7 @@ static NSString *MemLabelEndLink;
 				self.sjisName = self.englishName;
 			}
 			@autoreleasepool {
-				self.memImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
+				self.memoryCardImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
 			}
 			
 			if ([memImages count] == 0) {
@@ -204,15 +204,15 @@ static NSString *MemLabelEndLink;
 
 @synthesize memName;
 @synthesize memID;
-@synthesize memImages;
+@synthesize memoryCardImages = memImages;
 @synthesize flagNameIndex;
 @synthesize blockSize;
 @synthesize startingIndex;
 
 #pragma mark Non-synthesized Properties
-- (unsigned)memIconCount
+- (NSUInteger)memIconCount
 {
-	return (unsigned)[memImages count];
+	return [memImages count];
 }
 
 - (NSImage*)firstMemImage

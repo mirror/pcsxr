@@ -34,13 +34,15 @@ typedef NS_ENUM(char, PCSXRMemFlags) {
 @property (readonly, strong) NSString *sjisName;
 @property (readonly, strong) NSString *memName;
 @property (readonly, strong) NSString *memID;
+@property (readonly, strong) NSArray *memoryCardImages;
+@property (readonly, nonatomic) NSInteger memImageIndex;
 @property (readonly) PCSXRMemFlags flagNameIndex;
 @property (readonly) uint8_t startingIndex;
 @property (readonly) uint8_t blockSize;
 
 @property (readonly, copy) NSImage *firstMemImage;
 @property (readonly, unsafe_unretained, nonatomic) NSImage *memImage;
-@property (readonly, nonatomic) unsigned memIconCount;
+@property (readonly, nonatomic) NSUInteger memIconCount;
 @property (readonly, unsafe_unretained, nonatomic) NSString *flagName;
 @property (readonly, unsafe_unretained, nonatomic) NSAttributedString *attributedFlagName;
 @property (readonly, nonatomic) BOOL isBiggerThanOne;
