@@ -98,14 +98,37 @@ static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestR
 		Bundle = [[NSBundle alloc] initWithURL:bundURL];
 	}
 	int i = 0;
+
+	NSDictionary *prep = @{(NSString *) kCGImagePropertyGIFDictionary: @{(NSString *) kCGImagePropertyGIFDelayTime: @0.2}};
+
 	for (PcsxrMemoryObject *obj in memCards) {
-		NSImage *theImage = [obj firstMemImage];
-		NSData *tiffData = [theImage TIFFRepresentation];
-		NSBitmapImageRep *bmImg = [NSBitmapImageRep imageRepWithData:tiffData];
-		NSData *pngData = [bmImg representationUsingType:NSPNGFileType properties:nil];
-		NSDictionary *imgProps = @{(NSString *)kQLPreviewPropertyAttachmentDataKey: pngData,
-								   (NSString *)kQLPreviewPropertyMIMETypeKey: @"image/png"};
-		NSString *imgName = [[@(i++) stringValue] stringByAppendingPathExtension:@"png"];
+		if (obj.memIconCount == -1 || obj.memIconCount == 1) {
+			NSImage *theImage = [obj firstMemImage];
+			NSData *tiffData = [theImage TIFFRepresentation];
+			NSBitmapImageRep *bmImg = [NSBitmapImageRep imageRepWithData:tiffData];
+			NSData *pngData = [bmImg representationUsingType:NSPNGFileType properties:nil];
+			NSDictionary *imgProps = @{(NSString *)kQLPreviewPropertyAttachmentDataKey: pngData,
+									   (NSString *)kQLPreviewPropertyMIMETypeKey: @"image/png"};
+			NSString *imgName = [[@(i++) stringValue] stringByAppendingPathExtension:@"png"];
+			[htmlStr appendFormat:@"\t\t\t<tr><td><img src=\"cid:%@\"></td> <td>%@</td> <td>%i</td></tr>\n", imgName, obj.sjisName, obj.blockSize];
+			htmlDict[imgName] = imgProps;
+			continue;
+		}
+		NSMutableData *gifData = [NSMutableData new];
+		
+		CGImageDestinationRef dst = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)gifData, kUTTypeGIF, obj.memIconCount, NULL);
+		for (NSInteger j = 0; j < obj.memIconCount; j++) {
+			NSImage *theImage = [obj memoryImageAtIndex:j];
+			
+			CGImageRef imageRef=[theImage CGImageForProposedRect:nil context:nil hints:nil];
+			CGImageDestinationAddImage(dst, imageRef,(__bridge CFDictionaryRef)(prep));
+		}
+		CGImageDestinationFinalize(dst);
+		CFRelease(dst);
+		
+		NSDictionary *imgProps = @{(NSString *)kQLPreviewPropertyAttachmentDataKey: gifData,
+								   (NSString *)kQLPreviewPropertyMIMETypeKey: @"image/gif"};
+		NSString *imgName = [[@(i++) stringValue] stringByAppendingPathExtension:@"gif"];
 		[htmlStr appendFormat:@"\t\t\t<tr><td><img src=\"cid:%@\"></td> <td>%@</td> <td>%i</td></tr>\n", imgName, obj.sjisName, obj.blockSize];
 		htmlDict[imgName] = imgProps;
 	}

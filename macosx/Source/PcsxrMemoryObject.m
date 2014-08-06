@@ -74,6 +74,14 @@ static NSString *MemLabelEndLink;
 	});
 }
 
+- (NSImage*)memoryImageAtIndex:(NSInteger)idx
+{
+	if (memImageIndex == -1 || idx > self.memIconCount) {
+		return nil;
+	}
+	return memImages[idx];
+}
+
 + (NSString*)memoryLabelFromFlag:(PCSXRMemFlags)flagNameIndex
 {
 	switch (flagNameIndex) {
