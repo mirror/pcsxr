@@ -112,7 +112,7 @@ static NSString *MemLabelEndLink;
 {
 	static NSImage *imageBlank = nil;
 	if (imageBlank == nil) {
-		NSRect imageRect = NSMakeRect(0, 0, 32, 32);
+		NSRect imageRect = NSMakeRect(0, 0, 16, 16);
 		imageBlank = [[NSImage alloc] initWithSize:imageRect.size];
 		[imageBlank lockFocus];
 		[[NSColor blackColor] set];

@@ -104,15 +104,16 @@ static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestR
 	for (PcsxrMemoryObject *obj in memCards) {
 		if (obj.memImageIndex == -1 || obj.memIconCount == 1) {
 			NSMutableData *pngData = [NSMutableData new];
-			CGImageDestinationRef dst = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)pngData, kUTTypePNG, 1, NULL);
-			NSImage *theImage = [obj firstMemImage];
-			NSRect smallRect = NSMakeRect(0, 0, 16, 16);
-			
-			CGImageRef imageRef = [theImage CGImageForProposedRect:&smallRect context:nil hints:nil];
-			CGImageDestinationAddImage(dst, imageRef, NULL);
-			
-			CGImageDestinationFinalize(dst);
-			CFRelease(dst);
+			{
+				CGImageDestinationRef dst = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)pngData, kUTTypePNG, 1, NULL);
+				NSImage *theImage = [obj firstMemImage];
+				
+				CGImageRef imageRef = [theImage CGImageForProposedRect:NULL context:nil hints:nil];
+				CGImageDestinationAddImage(dst, imageRef, NULL);
+				
+				CGImageDestinationFinalize(dst);
+				CFRelease(dst);
+			}
 			
 			NSDictionary *imgProps = @{(NSString *)kQLPreviewPropertyAttachmentDataKey: pngData,
 									   (NSString *)kQLPreviewPropertyMIMETypeKey: @"image/png"};
