@@ -406,6 +406,14 @@ static void PSXDiscAppearedCallback(DADiskRef disk, void *context)
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
 	self.skipFiles = nil;
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"DidMoveMemoryObjects"]) {
+		NSAlert *memDidMove = [[NSAlert alloc] init];
+		memDidMove.messageText = NSLocalizedString(@"PSX Mem moved Desc", @"Playstation Cards did move");
+		memDidMove.informativeText = NSLocalizedString(@"Psx Mem Moved", @"Playstation Cards did move");
+		memDidMove.alertStyle = NSInformationalAlertStyle;
+		[memDidMove runModal];
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"DidMoveMemoryObjects"];
+	}
 }
 
 static void ParseErrorStr(NSString *errStr)
@@ -663,7 +671,29 @@ otherblock();\
 
 	{
 		NSFileManager *manager = [NSFileManager defaultManager];
-		NSURL *memoryURL = [[[manager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL] URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"Memory Cards"];
+		NSURL *oldMemoryURL = [[[manager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL] URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"Memory Cards"];
+		NSURL *memoryURL = [[[manager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL] URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"Memory Cards"];
+		
+		if (([[[NSProcessInfo processInfo] arguments] count] > 1 && !wasFinderLaunch) && [oldMemoryURL checkResourceIsReachableAndReturnError:NULL]) {
+			NSDictionary *mcds = @{@"Mcd1": [defaults URLForKey:@"Mcd1"],
+								   @"Mcd2": [defaults URLForKey:@"Mcd2"]};
+			for (NSString *key in mcds) {
+				NSURL *obj = mcds[key];
+				NSString *dirPath = [obj.path stringByStandardizingPath];
+				NSString *oldDirPath = [oldMemoryURL.path stringByStandardizingPath];
+				if ([dirPath hasPrefix:oldDirPath]) {
+					NSArray *barePath = [[dirPath stringByReplacingOccurrencesOfString:oldDirPath withString:@""] pathComponents];
+					NSMutableArray *newPath = [[memoryURL pathComponents] mutableCopy];
+					[newPath addObjectsFromArray:barePath];
+					NSURL *replacementPath = [NSURL fileURLWithPathComponents:newPath];
+					//if ([manager moveItemAtURL:obj toURL:replacementPath error:NULL]) {
+						[defaults setURL:replacementPath forKey:key];
+					//}
+				}
+			}
+			[manager moveItemAtURL:oldMemoryURL toURL:memoryURL error:NULL];
+			[defaults setBool:YES forKey:@"DidMoveMemoryObjects"];
+		}
 		
 		str = [[[defaults URLForKey:@"Mcd1"] path] fileSystemRepresentation];
 		if (str) {
@@ -745,11 +775,12 @@ otherblock();\
 	const char *str;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary *appDefaults = @{@"NoDynarec": @YES,
-								 @"AutoDetectVideoType": @YES,
-								 @"UseHLE": @NO,
-								 @"PauseInBackground": @YES,
-								 @"Widescreen": @NO,
-								 @"NetPlay": @NO};
+								  @"AutoDetectVideoType": @YES,
+								  @"UseHLE": @NO,
+								  @"PauseInBackground": @YES,
+								  @"Widescreen": @NO,
+								  @"NetPlay": @NO,
+								  @"DidMoveMemoryObjects": @NO};
 	
 	[defaults registerDefaults:appDefaults];
 
@@ -761,7 +792,7 @@ otherblock();\
 		@"PluginSIO1": [NSValue valueWithPointer:Config.Sio1]};
 	
 	prefURLKeys = @{@"Mcd1": [NSValue valueWithPointer:Config.Mcd1],
-				   @"Mcd2": [NSValue valueWithPointer:Config.Mcd2]};
+					@"Mcd2": [NSValue valueWithPointer:Config.Mcd2]};
 
 	prefByteKeys = @{@"NoXaAudio": [NSValue valueWithPointer:&Config.Xa],
 		@"SioIrqAlways": [NSValue valueWithPointer:&Config.SioIrq],
@@ -781,19 +812,19 @@ otherblock();\
     NSURL *supportURL = [manager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL];
     
     if(supportURL != nil) {
-		NSURL *PcsxrAppSupport;
+		NSURL *PcsxrAppSupport = [supportURL URLByAppendingPathComponent:@"Pcsxr"];
+		NSURL *pcsxrDocument = [[manager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL] URLByAppendingPathComponent:@"Pcsxr"];
 		NSURL *MemCardPath;
 		NSURL *url;
 		BOOL dir;
 		
-		PcsxrAppSupport = [supportURL URLByAppendingPathComponent:@"Pcsxr"];
 
 		// create them if needed
         url = [PcsxrAppSupport URLByAppendingPathComponent:@"Bios"];
 		if (![url checkResourceIsReachableAndReturnError:NULL])
 			[manager createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:NULL];
 
-        MemCardPath = [PcsxrAppSupport URLByAppendingPathComponent:@"Memory Cards"];
+        MemCardPath = [pcsxrDocument URLByAppendingPathComponent:@"Memory Cards"];
 		url = MemCardPath;
 		if (![url checkResourceIsReachableAndReturnError:NULL])
             [manager createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:NULL];

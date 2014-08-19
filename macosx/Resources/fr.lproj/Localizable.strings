@@ -77,6 +77,8 @@
 
 "Error opening file" = "Érreur en ouvrant le fichier.";
 "Unable to open %@: %@" = "Unable to open %1$@: %2$@";
+//"PSX Mem moved Desc" = "Memory Cards Moved";
+//"Psx Mem Moved" = "The memory card folder has been moved to your \"Documents\" folder\n\nThis message will not show up again.";
 
 //Memory card management
 "Format Card" = "Formater cette carte mémoire ?"; //Trim this down
