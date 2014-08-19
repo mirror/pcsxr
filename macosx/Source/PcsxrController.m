@@ -674,7 +674,7 @@ otherblock();\
 		NSURL *oldMemoryURL = [[[manager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL] URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"Memory Cards"];
 		NSURL *memoryURL = [[[manager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:NULL] URLByAppendingPathComponent:@"Pcsxr"] URLByAppendingPathComponent:@"Memory Cards"];
 		
-		if (([[[NSProcessInfo processInfo] arguments] count] > 1 && !wasFinderLaunch) && [oldMemoryURL checkResourceIsReachableAndReturnError:NULL]) {
+		if (!wasFinderLaunch && [oldMemoryURL checkResourceIsReachableAndReturnError:NULL]) {
 			NSDictionary *mcds = @{@"Mcd1": [defaults URLForKey:@"Mcd1"],
 								   @"Mcd2": [defaults URLForKey:@"Mcd2"]};
 			for (NSString *key in mcds) {
@@ -686,12 +686,16 @@ otherblock();\
 					NSMutableArray *newPath = [[memoryURL pathComponents] mutableCopy];
 					[newPath addObjectsFromArray:barePath];
 					NSURL *replacementPath = [NSURL fileURLWithPathComponents:newPath];
-					//if ([manager moveItemAtURL:obj toURL:replacementPath error:NULL]) {
+					if ([manager moveItemAtURL:obj toURL:replacementPath error:NULL]) {
 						[defaults setURL:replacementPath forKey:key];
-					//}
+					}
 				}
 			}
-			[manager moveItemAtURL:oldMemoryURL toURL:memoryURL error:NULL];
+			NSArray *memoryFiles = [manager contentsOfDirectoryAtURL:oldMemoryURL includingPropertiesForKeys:@[] options:0 error:NULL];
+			for (NSURL *memLoc in memoryFiles) {
+				[manager moveItemAtURL:memLoc toURL:[memoryURL URLByAppendingPathComponent:[memLoc lastPathComponent]] error:NULL];
+			}
+			[manager removeItemAtURL:oldMemoryURL error:NULL];
 			[defaults setBool:YES forKey:@"DidMoveMemoryObjects"];
 		}
 		
