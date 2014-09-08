@@ -40,6 +40,10 @@ int main(int argc, const char * argv[])
 			NSLog(@"Version is invalid!");
 			return EXIT_FAILURE;
 		}
+		if ([outString hasSuffix:@"m"]) {
+			outString = [outString stringByReplacingOccurrencesOfString:@"m" withString:@""];
+		}
+		
 		plistDict[@"CFBundleVersion"] = outString;
 
 		[plistDict writeToFile:[NSString stringWithFormat:@"%@vers.plist", plistLocation] atomically:NO];
