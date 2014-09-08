@@ -9,8 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "PcsxrMemoryObject.h"
 
-NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
-
 @interface PcsxrMemoryObject ()
 @property (readwrite, strong) NSString *englishName;
 @property (readwrite, strong) NSString *sjisName;
@@ -19,9 +17,10 @@ NSString *const memoryAnimateTimerKey = @"PCSXR Memory Card Image Animate";
 @property (readwrite) uint8_t startingIndex;
 @property (readwrite) uint8_t blockSize;
 
-@property (readwrite, nonatomic) NSInteger memImageIndex;
 @property (readwrite, strong) NSArray *memoryCardImages;
 @property (readwrite) PCSXRMemFlags flagNameIndex;
+@property (readwrite, nonatomic, strong) NSImage *memImage;
+@property (readwrite) BOOL hasImages;
 @end
 
 @implementation PcsxrMemoryObject
@@ -76,7 +75,7 @@ static NSString *MemLabelEndLink;
 
 - (NSImage*)memoryImageAtIndex:(NSInteger)idx
 {
-	if (memImageIndex == -1 || idx > self.memIconCount) {
+	if (!self.hasImages || idx > self.memIconCount) {
 		return [PcsxrMemoryObject blankImage];
 	}
 	return memImages[idx];
@@ -152,7 +151,7 @@ static NSString *MemLabelEndLink;
 		self.flagNameIndex = [PcsxrMemoryObject memFlagsFromBlockFlags:infoBlock->Flags];
 		if (self.flagNameIndex == memFlagFree) {
 			self.memoryCardImages = @[];
-			self.memImageIndex = -1;
+			self.hasImages = NO;
 			self.englishName = self.sjisName = @"Free block";
 			self.memID = self.memName = @"";
 		} else {
@@ -171,18 +170,9 @@ static NSString *MemLabelEndLink;
 			}
 			
 			if ([memImages count] == 0) {
-				self.memImageIndex = -1;
-			} else if ([memImages count] == 1) {
-				self.memImageIndex = 0;
+				self.hasImages = NO;
 			} else {
-				self.memImageIndex = 0;
-				[[NSNotificationCenter defaultCenter] addObserverForName:memoryAnimateTimerKey object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-					NSInteger index = memImageIndex;
-					if (++index >= [memImages count]) {
-						index = 0;
-					}
-					self.memImageIndex = index;
-				}];
+				self.hasImages = YES;
 			}
 			self.memName = @(infoBlock->Name);
 			self.memID = @(infoBlock->ID);
@@ -194,20 +184,13 @@ static NSString *MemLabelEndLink;
 #pragma mark - Property Synthesizers
 @synthesize englishName;
 @synthesize sjisName;
-@synthesize memImageIndex;
-- (void)setMemImageIndex:(NSInteger)theMemImageIndex
-{
-	[self willChangeValueForKey:@"memImage"];
-	memImageIndex = theMemImageIndex;
-	[self didChangeValueForKey:@"memImage"];
-}
-
 @synthesize memName;
 @synthesize memID;
 @synthesize memoryCardImages = memImages;
 @synthesize flagNameIndex;
 @synthesize blockSize;
 @synthesize startingIndex;
+@synthesize memImage = _memImage;
 
 #pragma mark Non-synthesized Properties
 - (NSUInteger)memIconCount
@@ -217,7 +200,7 @@ static NSString *MemLabelEndLink;
 
 - (NSImage*)firstMemImage
 {
-	if (memImageIndex == -1) {
+	if (self.hasImages == NO) {
 		return [PcsxrMemoryObject blankImage];
 	}
 	return memImages[0];
@@ -225,10 +208,25 @@ static NSString *MemLabelEndLink;
 
 - (NSImage*)memImage
 {
-	if (memImageIndex == -1) {
+	if (self.hasImages == NO) {
 		return [PcsxrMemoryObject blankImage];
 	}
-	return memImages[memImageIndex];
+	
+	if (!_memImage) {
+		NSMutableData *gifData = [NSMutableData new];
+		
+		CGImageDestinationRef dst = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)gifData, kUTTypeGIF, self.memIconCount, NULL);
+		NSDictionary *gifPrep = @{(NSString *) kCGImagePropertyGIFDictionary: @{(NSString *) kCGImagePropertyGIFDelayTime: @0.30f}};
+		for (NSImage *theImage in memImages) {
+			CGImageRef imageRef = [theImage CGImageForProposedRect:NULL context:nil hints:nil];
+			CGImageDestinationAddImage(dst, imageRef,(__bridge CFDictionaryRef)(gifPrep));
+		}
+		CGImageDestinationFinalize(dst);
+		CFRelease(dst);
+		
+		_memImage = [[NSImage alloc] initWithData:gifData];
+	}
+	return _memImage;
 }
 
 - (NSString*)flagName

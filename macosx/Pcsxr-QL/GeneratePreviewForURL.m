@@ -102,7 +102,7 @@ static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestR
 	NSDictionary *gifPrep = @{(NSString *) kCGImagePropertyGIFDictionary: @{(NSString *) kCGImagePropertyGIFDelayTime: @0.30f}};
 	
 	for (PcsxrMemoryObject *obj in memCards) {
-		if (obj.memImageIndex == -1 || obj.memIconCount == 1) {
+		if (!obj.hasImages || obj.memIconCount == 1) {
 			NSMutableData *pngData = [NSMutableData new];
 			{
 				CGImageDestinationRef dst = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)pngData, kUTTypePNG, 1, NULL);

@@ -18,26 +18,11 @@
 @interface PcsxrMemCardController ()
 @property (readwrite, strong) PcsxrMemCardArray *memCard1Array;
 @property (readwrite, strong) PcsxrMemCardArray *memCard2Array;
-@property (strong) 	NSTimer *imageAnimateTimer;
 @end
 
 @implementation PcsxrMemCardController
 @synthesize memCard1Array;
 @synthesize memCard2Array;
-
-- (void)stopMemoryAnimation
-{
-	[self.imageAnimateTimer invalidate];
-	self.imageAnimateTimer = nil;
-}
-
-- (void)beginMemoryAnimation
-{
-	if (!_imageAnimateTimer) {
-		self.imageAnimateTimer = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:0.30 target:self selector:@selector(animateMemCards:) userInfo:nil repeats:YES];
-		[[NSRunLoop mainRunLoop] addTimer:self.imageAnimateTimer forMode:NSRunLoopCommonModes];
-	}
-}
 
 - (void)setupValues:(int)theCards
 {
@@ -97,13 +82,6 @@
 	[self setupValues:3];
     
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(memoryCardDidChangeNotification:) name:memChangeNotifier object:nil];
-
-	[self beginMemoryAnimation];
-}
-
-- (void)animateMemCards:(NSTimer*)theTimer
-{
-	[[NSNotificationCenter defaultCenter] postNotificationName:memoryAnimateTimerKey object:self];
 }
 
 - (IBAction)moveBlock:(id)sender
@@ -232,7 +210,6 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[self.imageAnimateTimer invalidate];
 }
 
 @end

@@ -24,7 +24,4 @@
 - (IBAction)deleteMemoryObject:(id)sender;
 - (void)loadMemoryCardInfoForCard:(int)theCard;
 
-- (void)beginMemoryAnimation;
-- (void)stopMemoryAnimation;
-
 @end

@@ -9,8 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #include "sio.h"
 
-extern NSString *const memoryAnimateTimerKey;
-
 typedef NS_ENUM(char, PCSXRMemFlags) {
 	memFlagDeleted,
 	memFlagFree,
@@ -35,13 +33,13 @@ typedef NS_ENUM(char, PCSXRMemFlags) {
 @property (readonly, strong) NSString *memName;
 @property (readonly, strong) NSString *memID;
 @property (readonly, strong) NSArray *memoryCardImages;
-@property (readonly, nonatomic) NSInteger memImageIndex;
+@property (readonly, strong, nonatomic) NSImage *memImage;
 @property (readonly) PCSXRMemFlags flagNameIndex;
 @property (readonly) uint8_t startingIndex;
 @property (readonly) uint8_t blockSize;
+@property (readonly) BOOL hasImages;
 
 @property (readonly, copy) NSImage *firstMemImage;
-@property (readonly, unsafe_unretained, nonatomic) NSImage *memImage;
 @property (readonly, nonatomic) NSUInteger memIconCount;
 @property (readonly, unsafe_unretained, nonatomic) NSString *flagName;
 @property (readonly, unsafe_unretained, nonatomic) NSAttributedString *attributedFlagName;

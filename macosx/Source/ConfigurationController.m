@@ -169,16 +169,6 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	}
 }
 
-- (void)windowWillClose:(NSNotification *)notification
-{
-	[memCardEdit stopMemoryAnimation];
-}
-
-- (void)windowDidBecomeMain:(NSNotification *)notification
-{
-	[memCardEdit beginMemoryAnimation];
-}
-
 - (void)awakeFromNib
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
