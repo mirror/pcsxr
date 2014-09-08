@@ -46,7 +46,7 @@
 - (BOOL)handleFile:(NSString *)theFile
 {
 	self.discPath = theFile;
-	PcsxrController *appDelegate = [NSApp delegate];
+	PcsxrController *appDelegate = [(NSApplication*)NSApp delegate];
 	if ([EmuThread active] == YES && !UsingIso()) {
 		return NO;
 	}

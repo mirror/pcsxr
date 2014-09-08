@@ -1147,17 +1147,17 @@
             </connections>
         </window>
         <view id="957" userLabel="MemCardObjectView">
-            <rect key="frame" x="0.0" y="0.0" width="180" height="132"/>
+            <rect key="frame" x="0.0" y="0.0" width="180" height="107"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="965">
-                    <rect key="frame" x="0.0" y="0.0" width="180" height="132"/>
+                    <rect key="frame" x="0.0" y="0.0" width="180" height="107"/>
                     <view key="contentView">
-                        <rect key="frame" x="0.0" y="0.0" width="180" height="132"/>
+                        <rect key="frame" x="0.0" y="0.0" width="180" height="107"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView translatesAutoresizingMaskIntoConstraints="NO" id="976">
-                                <rect key="frame" x="66" y="80" width="48" height="48"/>
+                                <rect key="frame" x="66" y="55" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="kIh-n8-gJw"/>
                                     <constraint firstAttribute="height" constant="48" id="vPq-qO-hYs"/>
@@ -1168,29 +1168,21 @@
                                 </connections>
                             </imageView>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="979">
-                                <rect key="frame" x="1" y="55" width="178" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="English name" id="981">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="958" name="value" keyPath="representedObject.englishName" id="989"/>
-                                </connections>
-                            </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="978">
                                 <rect key="frame" x="1" y="30" width="178" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="SJIS name" id="982">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="174" id="wts-Vd-Pke"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="English name" id="981">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="958" name="value" keyPath="representedObject.sjisName" id="990"/>
+                                    <binding destination="958" name="value" keyPath="representedObject.name" id="Zcl-K6-pvX"/>
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="977">
-                                <rect key="frame" x="1" y="8" width="178" height="14"/>
+                                <rect key="frame" x="63" y="8" width="55" height="14"/>
                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingMiddle" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="DELETED" allowsEditingTextAttributes="YES" id="983">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -1201,7 +1193,7 @@
                                 </connections>
                             </textField>
                             <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="1021" customClass="MemBadgeView">
-                                <rect key="frame" x="90" y="104" width="24" height="24"/>
+                                <rect key="frame" x="90" y="79" width="24" height="24"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1047">
                                         <rect key="frame" x="-2" y="7" width="28" height="11"/>
@@ -1237,21 +1229,16 @@
                         </subviews>
                     </view>
                     <constraints>
-                        <constraint firstItem="977" firstAttribute="top" secondItem="978" secondAttribute="bottom" constant="8" symbolic="YES" id="7YC-M7-vn3"/>
                         <constraint firstAttribute="centerX" secondItem="976" secondAttribute="centerX" id="BqN-QU-plG"/>
                         <constraint firstAttribute="centerX" secondItem="979" secondAttribute="centerX" id="Dmf-If-mue"/>
-                        <constraint firstItem="978" firstAttribute="width" secondItem="977" secondAttribute="width" id="OLg-PY-KOQ"/>
                         <constraint firstItem="976" firstAttribute="trailing" secondItem="1021" secondAttribute="trailing" id="SW5-1f-7rd"/>
                         <constraint firstItem="976" firstAttribute="top" secondItem="1021" secondAttribute="top" id="Scn-jG-PGU"/>
                         <constraint firstAttribute="bottom" secondItem="977" secondAttribute="bottom" constant="8" id="WpJ-zn-ZXZ"/>
+                        <constraint firstItem="977" firstAttribute="top" secondItem="979" secondAttribute="bottom" constant="8" symbolic="YES" id="a7X-wp-e0G"/>
                         <constraint firstItem="979" firstAttribute="top" secondItem="976" secondAttribute="bottom" constant="8" symbolic="YES" id="glW-gx-yMC"/>
                         <constraint firstItem="976" firstAttribute="top" secondItem="965" secondAttribute="top" constant="4" id="lCY-pF-WD1"/>
-                        <constraint firstItem="978" firstAttribute="width" secondItem="979" secondAttribute="width" id="nh9-91-rTJ"/>
-                        <constraint firstItem="978" firstAttribute="leading" secondItem="965" secondAttribute="leading" constant="3" id="rfy-JA-Rzu"/>
-                        <constraint firstAttribute="trailing" secondItem="978" secondAttribute="trailing" constant="3" id="vOS-Qk-paU"/>
+                        <constraint firstItem="979" firstAttribute="leading" secondItem="965" secondAttribute="leading" constant="3" id="psC-ra-j1g"/>
                         <constraint firstAttribute="centerX" secondItem="977" secondAttribute="centerX" id="wB2-dm-nDi"/>
-                        <constraint firstAttribute="centerX" secondItem="978" secondAttribute="centerX" id="yEW-fK-6C2"/>
-                        <constraint firstItem="978" firstAttribute="top" secondItem="979" secondAttribute="bottom" constant="8" symbolic="YES" id="yIl-84-XQn"/>
                     </constraints>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" name="selectedControlColor" catalog="System" colorSpace="catalog"/>

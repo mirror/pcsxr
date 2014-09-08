@@ -10,8 +10,7 @@
 #import "PcsxrMemoryObject.h"
 
 @interface PcsxrMemoryObject ()
-@property (readwrite, strong) NSString *englishName;
-@property (readwrite, strong) NSString *sjisName;
+@property (readwrite, strong) NSString *name;
 @property (readwrite, strong) NSString *memName;
 @property (readwrite, strong) NSString *memID;
 @property (readwrite) uint8_t startingIndex;
@@ -152,22 +151,11 @@ static NSString *MemLabelEndLink;
 		if (self.flagNameIndex == memFlagFree) {
 			self.memoryCardImages = @[];
 			self.hasImages = NO;
-			self.englishName = self.sjisName = @"Free block";
+			self.name = @"Free block";
 			self.memID = self.memName = @"";
 		} else {
-			self.englishName = @(infoBlock->Title);
-			self.sjisName = [NSString stringWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
-			
-			if ([englishName isEqualToString:sjisName]) {
-#if 0
-				if (![englishName isEqualToString:@""])
-					NSLog(@"English name and sjis name are the same: %@. Replacing the sjis string with the English string.", englishName);
-#endif
-				self.sjisName = self.englishName;
-			}
-			@autoreleasepool {
-				self.memoryCardImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
-			}
+			self.name = [NSString stringWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
+			self.memoryCardImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
 			
 			if ([memImages count] == 0) {
 				self.hasImages = NO;
@@ -182,8 +170,7 @@ static NSString *MemLabelEndLink;
 }
 
 #pragma mark - Property Synthesizers
-@synthesize englishName;
-@synthesize sjisName;
+@synthesize name;
 @synthesize memName;
 @synthesize memID;
 @synthesize memoryCardImages = memImages;
@@ -331,7 +318,7 @@ static inline void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtc
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"%@ (%@): Name: %@ ID: %@, type: %@ start: %i size: %i", englishName, sjisName, memName, memID, self.flagName, startingIndex, blockSize];
+	return [NSString stringWithFormat:@"%@: Name: %@ ID: %@, type: %@ start: %i size: %i", name, memName, memID, self.flagName, startingIndex, blockSize];
 }
 
 @end

@@ -118,7 +118,7 @@ static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestR
 			NSDictionary *imgProps = @{(NSString *)kQLPreviewPropertyAttachmentDataKey: pngData,
 									   (NSString *)kQLPreviewPropertyMIMETypeKey: @"image/png"};
 			NSString *imgName = [[@(i++) stringValue] stringByAppendingPathExtension:@"png"];
-			[htmlStr appendFormat:@"\t\t\t<tr><td><img src=\"cid:%@\"></td> <td>%@</td> <td>%i</td></tr>\n", imgName, obj.sjisName, obj.blockSize];
+			[htmlStr appendFormat:@"\t\t\t<tr><td><img src=\"cid:%@\"></td> <td>%@</td> <td>%i</td></tr>\n", imgName, obj.name, obj.blockSize];
 			htmlDict[imgName] = imgProps;
 			continue;
 		}
@@ -135,7 +135,7 @@ static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestR
 		NSDictionary *imgProps = @{(NSString *)kQLPreviewPropertyAttachmentDataKey: gifData,
 								   (NSString *)kQLPreviewPropertyMIMETypeKey: @"image/gif"};
 		NSString *imgName = [[@(i++) stringValue] stringByAppendingPathExtension:@"gif"];
-		[htmlStr appendFormat:@"\t\t\t<tr><td><img src=\"cid:%@\"></td> <td>%@</td> <td>%i</td></tr>\n", imgName, obj.sjisName, obj.blockSize];
+		[htmlStr appendFormat:@"\t\t\t<tr><td><img src=\"cid:%@\"></td> <td>%@</td> <td>%i</td></tr>\n", imgName, obj.name, obj.blockSize];
 		htmlDict[imgName] = imgProps;
 	}
 	

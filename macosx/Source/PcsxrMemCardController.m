@@ -121,7 +121,7 @@
 	availBlocks = [toCard availableBlocks];
 	if (freeConsBlocks == -1 && availBlocks >= cardSize) {
 		PcsxrMemoryObject *tmpmemobj = (fromCard.memoryArray)[selectedIndex];
-		NSInteger copyOK = NSRunInformationalAlertPanel(NSLocalizedString(@"Free Size", nil), NSLocalizedString(@"Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@ (%@),\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?", nil), NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), nil, cardnum, tmpmemobj.englishName, tmpmemobj.sjisName, cardnum);
+		NSInteger copyOK = NSRunInformationalAlertPanel(NSLocalizedString(@"Free Size", nil), NSLocalizedString(@"Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@,\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?", nil), NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), nil, cardnum, tmpmemobj.name, cardnum);
 		if (copyOK != NSAlertDefaultReturn) {
 			return;
 		}

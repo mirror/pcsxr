@@ -89,7 +89,7 @@
 "Deleting a block will remove all saved data on that block.\n\nThis cannot be undone." = "删除后在模拟器里将不能呢个读取这个存档.";
 "No Free Space" = "没有可用空间";
 "Memory card %d doesn't have %d free consecutive blocks on it. Please remove some blocks on that card to continue" = "记忆卡 %1$d 没有 %2$d 个可用存储位置.请移除一些存档.";
-"Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@ (%@),\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?" = "记忆卡 %1$i 没有足够的空间.\n\nIn 复制结束 “%2$@ (%3$@),” 记忆卡 %4$i 必须压缩. 压缩记忆卡将删除存档且不可回复.\n\n要继续吗?";
+"Memory card %i does not have enough free consecutive blocks.\n\nIn order to copy over \"%@,\" memory card %i must be compressed. Compressing memory cards will make deleted blocks unrecoverable.\n\nDo you want to continue?" = "记忆卡 %1$i 没有足够的空间.\n\nIn 复制结束 “%2$@,” 记忆卡 %3$i 必须压缩. 压缩记忆卡将删除存档且不可回复.\n\n要继续吗?";
 
 //Cheat manager
 "Save Cheats" = "存储金手指";
