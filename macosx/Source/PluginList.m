@@ -312,7 +312,21 @@ const static int typeList[] = {PSE_LT_GPU, PSE_LT_SPU, PSE_LT_CDR, PSE_LT_PAD, P
 			dst++;
 		}
 	}
-	
+}
+
+- (NSInteger)count;
+{
+	return self.pluginList.count;
+}
+
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id [])buffer count:(NSUInteger)len
+{
+	return [self.pluginList countByEnumeratingWithState:state objects:buffer count:len];
+}
+
+- (PcsxrPlugin*)objectAtIndexedSubscript:(NSInteger)index
+{
+	return self.pluginList[index];
 }
 
 @end

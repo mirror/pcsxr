@@ -10,8 +10,9 @@
 #import "PcsxrPlugin.h"
 
 //extern NSMutableArray *plugins;
+@class PcsxrPlugin;
 
-@interface PluginList : NSObject
+@interface PluginList : NSObject <NSFastEnumeration>
 
 + (PluginList *)list;
 
@@ -24,5 +25,8 @@
 
 - (void)disableNetPlug;
 - (void)enableNetPlug;
+
+- (PcsxrPlugin*)objectAtIndexedSubscript:(NSInteger)index;
+- (NSInteger)count;
 
 @end

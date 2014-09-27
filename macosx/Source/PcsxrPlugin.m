@@ -369,7 +369,7 @@
 
 - (NSUInteger)hash
 {
-	return [path hash];
+	return [fullPlugPath hash];
 }
 
 - (NSString *)description
