@@ -784,7 +784,8 @@ otherblock();\
 								  @"PauseInBackground": @YES,
 								  @"Widescreen": @NO,
 								  @"NetPlay": @NO,
-								  @"DidMoveMemoryObjects": @NO};
+								  @"DidMoveMemoryObjects": @NO,
+								  @"NoFastBoot": @NO};
 	
 	[defaults registerDefaults:appDefaults];
 
@@ -809,7 +810,8 @@ otherblock();\
 		@"SpuIrqAlways": [NSValue valueWithPointer:&Config.SpuIrq],
 		@"RootCounterFix": [NSValue valueWithPointer:&Config.RCntFix],
 		@"VideoSyncWAFix": [NSValue valueWithPointer:&Config.VSyncWA],
-		@"Widescreen": [NSValue valueWithPointer:&Config.Widescreen]};
+		@"Widescreen": [NSValue valueWithPointer:&Config.Widescreen],
+					 @"NoFastBoot": [NSValue valueWithPointer:&Config.SlowBoot]};
 
 	// setup application support paths
     NSFileManager *manager = [NSFileManager defaultManager];
