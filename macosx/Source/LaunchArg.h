@@ -19,7 +19,7 @@ typedef enum _LaunchArgOrder {
 @property (readonly, copy, nonatomic) dispatch_block_t theBlock;
 @property (readonly, strong) NSString *argument;
 
-- (instancetype)initWithLaunchOrder:(unsigned)order block:(dispatch_block_t)block argument:(NSString*)arg NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithLaunchOrder:(unsigned)order argument:(NSString*)arg block:(dispatch_block_t)block;
+- (instancetype)initWithLaunchOrder:(unsigned)order block:(dispatch_block_t)block argument:(NSString*)arg;
+- (instancetype)initWithLaunchOrder:(unsigned)order argument:(NSString*)arg block:(dispatch_block_t)block NS_DESIGNATED_INITIALIZER;
 - (void)addToDictionary:(NSMutableDictionary*)toAdd;
 @end

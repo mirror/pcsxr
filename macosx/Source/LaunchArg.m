@@ -25,17 +25,17 @@
 
 - (instancetype)initWithLaunchOrder:(unsigned)order argument:(NSString*)arg block:(dispatch_block_t)block
 {
-	return [self initWithLaunchOrder:order block:block argument:arg];
-}
-
-- (instancetype)initWithLaunchOrder:(unsigned)order block:(dispatch_block_t)block argument:(NSString*)arg
-{
 	if (self = [super init]) {
 		self.launchOrder = order;
 		self.theBlock = block;
 		self.argument = arg;
 	}
 	return self;
+}
+
+- (instancetype)initWithLaunchOrder:(unsigned)order block:(dispatch_block_t)block argument:(NSString*)arg
+{
+	return [self initWithLaunchOrder:order argument:arg block:block];
 }
 
 - (void)addToDictionary:(NSMutableDictionary*)toAdd

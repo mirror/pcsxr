@@ -287,9 +287,6 @@
 /* Class = "NSTextFieldCell"; title = "英文名称"; ObjectID = "981"; */
 "981.title" = "英文名称";
 
-/* Class = "NSTextFieldCell"; title = "SJIS 名称"; ObjectID = "982"; */
-"982.title" = "SJIS 名称";
-
 /* Class = "NSTextFieldCell"; title = "删除"; ObjectID = "983"; */
 "983.title" = "删除";
 

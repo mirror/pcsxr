@@ -287,9 +287,6 @@
 /* Class = "NSTextFieldCell"; title = "English name"; ObjectID = "981"; */
 "981.title" = "English name";
 
-/* Class = "NSTextFieldCell"; title = "SJIS name"; ObjectID = "982"; */
-"982.title" = "SJIS name";
-
 /* Class = "NSTextFieldCell"; title = "DELETED"; ObjectID = "983"; */
 "983.title" = "DELETED";
 

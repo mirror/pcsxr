@@ -51,7 +51,6 @@
 
 + (NSString *)defaultKeyForType:(int)aType
 {
-	//return @"Plugin" [PcsxrPlugin prefixForType:aType];
 	switch (aType) {
 		case PSE_LT_GPU:
 		case PSE_LT_CDR:
@@ -175,7 +174,7 @@
 		return nil;
 	}
 	
-	// TODO: add support for plugins with multiple functionalities???
+	// TODO: add support for plugins with multiple functionalities?
 	PSE_getLibType = (PSEgetLibType) SysLoadSym(pluginRef, kPCSXRGetLibType);
 	if (SysLibError() != nil) {
 		if (([path rangeOfString: @"gpu" options:NSCaseInsensitiveSearch]).length != 0)
