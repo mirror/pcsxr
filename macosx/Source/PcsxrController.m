@@ -25,20 +25,22 @@ NSString *saveStatePath = nil;
 BOOL wasFinderLaunch = NO;
 
 
-#define HELPSTR "\n" \
+#define HELPSTR \
 "At least one of these must be passed:\n" \
-"\t--iso path    launch with selected ISO\n" \
-"\t--cdrom       launch with a CD-ROM\n" \
-"\t--bios        launch into the BIOS\n" \
+"\t-cdfile path  launch with selected ISO\n" \
+"\t-runcd        launch with a CD-ROM\n" \
+"\t-bios         launch into the BIOS\n" \
 "\n" \
 "Additional options:\n" \
-"\t--exitAtClose closes PCSX-R at when the emulation has ended\n" \
-"\t--mcd1 path   sets the fist memory card to path\n" \
-"\t--mcd2 path   sets the second memory card to path\n" \
-"\t--freeze path loads freeze state from path\n" \
+"\t-nogui       closes PCSX-R at when the emulation has ended\n" \
+"\t-mcd1 path   sets the fist memory card to path\n" \
+"\t-mcd2 path   sets the second memory card to path\n" \
+"\t-freeze path loads freeze state from path\n" \
+"\t-psxout      Enable logging\n" \
+"\t-slowboot    Show PSX splash screen\n" \
 "\n" \
 "Help:\n" \
-"\t--help        shows this message\n" \
+"\t-help        shows this message\n" \
 "\n" \
 
 
@@ -443,14 +445,16 @@ runtimeStr = arg; \
 otherblock();\
 }
 
-#define kPCSXRArgumentCDROM @"--cdrom"
-#define kPCSXRArgumentBIOS @"--bios"
-#define kPCSXRArgumentISO @"--iso"
-#define kPCSXRArgumentMcd @"--mcd"
+#define kPCSXRArgumentCDROM @"-runcd"
+#define kPCSXRArgumentBIOS @"-bios"
+#define kPCSXRArgumentISO @"-cdfile"
+#define kPCSXRArgumentMcd @"-mcd"
 #define kPCSXRArgumentMcd1 kPCSXRArgumentMcd @"1"
 #define kPCSXRArgumentMcd2 kPCSXRArgumentMcd @"2"
-#define kPCSXRArgumentFreeze @"--freeze"
-#define kPCSXRArgumentExitAtClose @"--exitAtClose"
+#define kPCSXRArgumentFreeze @"-freeze"
+#define kPCSXRArgumentExitAtClose @"-nogui"
+#define kPCSXRArgumentLogOutput @"-psxout"
+#define kPCSXRArgumentSlowBoot @"-slowboot"
 
 - (void)dealloc
 {
@@ -518,11 +522,29 @@ otherblock();\
 			[larg addToDictionary:argDict];
 		};
 		
-		//This block/argument does not need to be sorted
+		// This block/argument does not need to be sorted
 		dispatch_block_t emuCloseAtEnd = ^{
 			hasParsedAnArgument = YES;
 			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPreRun argument:kPCSXRArgumentExitAtClose block:^{
 				self.endAtEmuClose = YES;
+			}];
+			[larg addToDictionary:argDict];
+		};
+		
+		// This block/argument does not need to be sorted
+		dispatch_block_t psxOut = ^{
+			hasParsedAnArgument = YES;
+			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPreRun argument:kPCSXRArgumentLogOutput block:^{
+				Config.PsxOut = true;
+			}];
+			[larg addToDictionary:argDict];
+		};
+		
+		// This block/argument does not need to be sorted
+		dispatch_block_t slowBoot = ^{
+			hasParsedAnArgument = YES;
+			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPreRun argument:kPCSXRArgumentSlowBoot block:^{
+				Config.SlowBoot = true;
 			}];
 			[larg addToDictionary:argDict];
 		};
@@ -594,6 +616,8 @@ otherblock();\
 			HandleArgElse(kPCSXRArgumentMcd1, NO, ^{mcdBlock(1);})
 			HandleArgElse(kPCSXRArgumentMcd2, NO, ^{mcdBlock(2);})
 			HandleArgElse(kPCSXRArgumentFreeze, NO, freezeBlock)
+			HandleArgElse(kPCSXRArgumentLogOutput, NO, psxOut)
+			HandleArgElse(kPCSXRArgumentSlowBoot, NO, slowBoot)
 			else {
 				[unknownOptions addObject:progArgs[i]];
 			}

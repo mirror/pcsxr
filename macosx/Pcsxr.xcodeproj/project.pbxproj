@@ -3492,6 +3492,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
+				WARNING_CFLAGS = "-Wno-comment";
 			};
 			name = Instrument;
 		};
@@ -3776,6 +3777,7 @@
 				SKIP_INSTALL = YES;
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
 				STRIP_INSTALLED_PRODUCT = NO;
+				WARNING_CFLAGS = "-Wno-comment";
 			};
 			name = Debug;
 		};
@@ -3829,6 +3831,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
+				WARNING_CFLAGS = "-Wno-comment";
 			};
 			name = Release;
 		};

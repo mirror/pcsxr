@@ -86,7 +86,7 @@ int main(int argc, const char *argv[])
     } else {
 		for (int i = 1; i < argc; i++) {
 			//All the other option will be handled in the app delegate's awakeFromNib
-			if (!strcasecmp("--help", argv[i])) {
+			if (!strcasecmp("--help", argv[i]) || !strcasecmp("-help", argv[i]) || !strcasecmp("-h", argv[i])) {
 				fprintf(stdout, "%s\n", argv[0]);
 				ShowHelpAndExit(stdout, EXIT_SUCCESS);
 			}
