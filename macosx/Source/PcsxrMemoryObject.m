@@ -196,7 +196,9 @@ static NSString *MemLabelEndLink;
 - (NSImage*)memImage
 {
 	if (self.hasImages == NO) {
-		return [PcsxrMemoryObject blankImage];
+		NSImage *tmpBlank = [PcsxrMemoryObject blankImage];
+		tmpBlank.size = NSMakeSize(32, 32);
+		return tmpBlank;
 	}
 	
 	if (!_memImage) {
@@ -212,6 +214,7 @@ static NSString *MemLabelEndLink;
 		CFRelease(dst);
 		
 		_memImage = [[NSImage alloc] initWithData:gifData];
+		_memImage.size = NSMakeSize(32, 32);
 	}
 	return _memImage;
 }
