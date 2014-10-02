@@ -531,7 +531,6 @@ otherblock();\
 			[larg addToDictionary:argDict];
 		};
 		
-		// This block/argument does not need to be sorted
 		dispatch_block_t psxOut = ^{
 			hasParsedAnArgument = YES;
 			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPreRun argument:kPCSXRArgumentLogOutput block:^{
@@ -540,7 +539,6 @@ otherblock();\
 			[larg addToDictionary:argDict];
 		};
 		
-		// This block/argument does not need to be sorted
 		dispatch_block_t slowBoot = ^{
 			hasParsedAnArgument = YES;
 			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPreRun argument:kPCSXRArgumentSlowBoot block:^{
@@ -579,9 +577,12 @@ otherblock();\
 			NSString *path = FileTestBlock();
 			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPostRun argument:kPCSXRArgumentFreeze block:^{
 				if (![EmuThread isRunBios]) {
-					//Make sure the emulator is running
-					sleep(5);
-					[EmuThread defrostAt:path];
+					// TODO: use another API to put up a timer, instead of sleeping
+					dispatch_async(dispatch_get_global_queue(0, 0), ^{
+						//Make sure the emulator is running
+						sleep(5);
+						[EmuThread defrostAt:path];
+					});
 				}
 			}];
 			[larg addToDictionary:argDict];
