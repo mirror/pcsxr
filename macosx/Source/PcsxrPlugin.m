@@ -239,6 +239,8 @@
 }
 
 #define PluginSymbolName(type, theName) [[PcsxrPlugin prefixForType:type] stringByAppendingString:theName]
+#define PluginSymbolNameConfigure(type) PluginSymbolName(type, @"configure")
+#define PluginSymbolNameAbout(type) PluginSymbolName(type, @"about")
 
 - (void)runCommand:(id)arg
 {
@@ -315,9 +317,6 @@
 	return PSE_ERR_SUCCESS;
 #endif
 }
-
-#define PluginSymbolNameConfigure(type) PluginSymbolName(type, @"configure")
-#define PluginSymbolNameAbout(type) PluginSymbolName(type, @"about")
 
 - (BOOL)hasAboutAs:(int)aType
 {

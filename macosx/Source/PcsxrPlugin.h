@@ -27,6 +27,6 @@
 - (long)shutdownAs:(int)aType;
 - (void)aboutAs:(int)type;
 - (void)configureAs:(int)type;
-@property (readonly) BOOL verifyOK;
+- (BOOL)verifyOK;
 
 @end
