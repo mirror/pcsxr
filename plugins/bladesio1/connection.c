@@ -138,7 +138,7 @@ int connectionSend(u8 *pdata, s32 size) {
 	int bytes = 0;
 
 	if(clientsock >= 0)
-		if((bytes = send(clientsock, (const char*)pdata, size, 0)) < 0)
+		if((bytes = (int)send(clientsock, (const char*)pdata, size, 0)) < 0)
 			return 0;
 
 	return bytes;
@@ -148,7 +148,7 @@ int connectionRecv(u8 *pdata, s32 size) {
 	int bytes = 0;
 
 	if(clientsock >= 0)
-		if((bytes = recv(clientsock, (char*)pdata, size, 0)) < 0)
+		if((bytes = (int)recv(clientsock, (char*)pdata, size, 0)) < 0)
 			return 0;
 
 	return bytes;

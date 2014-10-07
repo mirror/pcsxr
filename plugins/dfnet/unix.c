@@ -57,7 +57,7 @@ int sockPing() {
 	RECV(data, 32, PSE_NET_BLOCKING);
 	gettimeofday(&tvn, NULL);
 
-	return (tvn.tv_sec - tv.tv_sec) * 1000 +
+	return (int)(tvn.tv_sec - tv.tv_sec) * 1000 +
 		   (tvn.tv_usec - tv.tv_usec) / 1000;
 }
 

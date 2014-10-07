@@ -278,7 +278,7 @@ void *CdrThread(void *arg) {
 
 			PRINTF("reading %d:%d:%d\n", curTime[0], curTime[1], curTime[2]);
 
-			cdcache[i].ret = ReadSector((crdata *)&cdcache[i].cr);
+			cdcache[i].ret = (int)ReadSector((crdata *)&cdcache[i].cr);
 			if (cdcache[i].ret == -1) break;
 
 			PRINTF("readed %x:%x:%x\n", cdcache[i].cr.buf[12], cdcache[i].cr.buf[13], cdcache[i].cr.buf[14]);
