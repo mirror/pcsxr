@@ -13,7 +13,7 @@
    This function's job is to create thumbnail for designated file as fast as possible
    ----------------------------------------------------------------------------- */
 
-#define ImageDivider 16
+#define ImageDivider 32
 
 static OSStatus GenerateThumbnailForFreeze(void *thisInterface, QLThumbnailRequestRef preview, NSURL *url, NSDictionary *options, CGSize maxSize);
 static OSStatus GenerateThumbnailForMemCard(void *thisInterface, QLThumbnailRequestRef preview, NSURL *url, NSDictionary *options, CGSize maxSize);

@@ -103,7 +103,7 @@ static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestR
 	
 	for (PcsxrMemoryObject *obj in memCards) {
 		if (!obj.hasImages || obj.memIconCount == 1) {
-			NSMutableData *pngData = [NSMutableData new];
+			NSMutableData *pngData = [[NSMutableData alloc] init];
 			{
 				CGImageDestinationRef dst = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)pngData, kUTTypePNG, 1, NULL);
 				NSImage *theImage = [obj firstMemImage];
@@ -122,12 +122,12 @@ static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestR
 			htmlDict[imgName] = imgProps;
 			continue;
 		}
-		NSMutableData *gifData = [NSMutableData new];
+		NSMutableData *gifData = [[NSMutableData alloc] init];
 		
 		CGImageDestinationRef dst = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)gifData, kUTTypeGIF, obj.memIconCount, NULL);
 		for (NSImage *theImage in obj.memoryCardImages) {
 			CGImageRef imageRef = [theImage CGImageForProposedRect:NULL context:nil hints:nil];
-			CGImageDestinationAddImage(dst, imageRef,(__bridge CFDictionaryRef)(gifPrep));
+			CGImageDestinationAddImage(dst, imageRef, (__bridge CFDictionaryRef)(gifPrep));
 		}
 		CGImageDestinationFinalize(dst);
 		CFRelease(dst);
