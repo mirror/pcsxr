@@ -10,8 +10,7 @@
 
 
 @interface SockDialog : NSWindowController
-{
-	IBOutlet NSProgressIndicator *spinningBar;
-}
+@property (weak) IBOutlet NSProgressIndicator *spinningBar;
+
 - (IBAction)cancel:(id)sender;
 @end
