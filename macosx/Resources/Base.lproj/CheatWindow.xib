@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6246" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14A386b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6246"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CheatController">
@@ -18,15 +19,14 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Cheats" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="documentWindow" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="153" width="698" height="357"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="698" height="357"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4">
-                        <rect key="frame" x="144" y="13" width="128" height="32"/>
+                        <rect key="frame" x="146" y="13" width="132" height="32"/>
                         <buttonCell key="cell" type="push" title="Save Cheats…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -36,7 +36,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6">
-                        <rect key="frame" x="14" y="13" width="130" height="32"/>
+                        <rect key="frame" x="14" y="13" width="132" height="32"/>
                         <buttonCell key="cell" type="push" title="Load Cheats…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -47,7 +47,7 @@
                     </button>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23">
                         <rect key="frame" x="20" y="61" width="658" height="276"/>
-                        <clipView key="contentView" id="6pF-og-es3">
+                        <clipView key="contentView" misplaced="YES" id="6pF-og-es3">
                             <rect key="frame" x="1" y="17" width="656" height="258"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -115,7 +115,7 @@
                             <rect key="frame" x="1" y="249" width="607" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="24">
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="24">
                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -125,7 +125,7 @@
                         </tableHeaderView>
                     </scrollView>
                     <button toolTip="Clear all cheats" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="78">
-                        <rect key="frame" x="530" y="13" width="73" height="32"/>
+                        <rect key="frame" x="545" y="13" width="73" height="32"/>
                         <buttonCell key="cell" type="push" title="Clear" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="79">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -135,7 +135,7 @@
                         </connections>
                     </button>
                     <button toolTip="Apply Cheats" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="256">
-                        <rect key="frame" x="454" y="13" width="76" height="32"/>
+                        <rect key="frame" x="469" y="13" width="76" height="32"/>
                         <buttonCell key="cell" type="push" title="Apply" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="257">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -145,67 +145,67 @@
                         </connections>
                     </button>
                     <button toolTip="Add Cheat" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xfd-rR-U91">
-                        <rect key="frame" x="629" y="27" width="25" height="27"/>
+                        <rect key="frame" x="620" y="32" width="20" height="22"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="25" id="5Sw-u5-HYP"/>
-                            <constraint firstAttribute="width" constant="25" id="TzG-MJ-Gw5"/>
+                            <constraint firstAttribute="height" constant="20" id="5Sw-u5-HYP"/>
+                            <constraint firstAttribute="width" constant="20" id="TzG-MJ-Gw5"/>
                         </constraints>
-                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oPm-T9-TZo">
+                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oPm-T9-TZo">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
                         <connections>
                             <action selector="addCheat:" target="-2" id="bsH-Bq-b9L"/>
                         </connections>
                     </button>
-                    <button toolTip="Remove Cheat" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DBF-Fx-sqP">
-                        <rect key="frame" x="653" y="27" width="25" height="27"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="25" id="C9G-EI-fyW"/>
-                            <constraint firstAttribute="height" constant="25" id="l7b-a6-zzp"/>
-                        </constraints>
-                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7QM-jz-tbx">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="removeCheats:" target="-2" id="are-w2-Cx9"/>
-                        </connections>
-                    </button>
                     <button toolTip="Edit Cheat" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ORW-Vw-Xqo">
-                        <rect key="frame" x="605" y="27" width="25" height="27"/>
+                        <rect key="frame" x="658" y="32" width="20" height="22"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="25" id="e0J-6O-4Ih"/>
-                            <constraint firstAttribute="height" constant="25" id="pQO-S9-udY"/>
+                            <constraint firstAttribute="width" constant="20" id="e0J-6O-4Ih"/>
+                            <constraint firstAttribute="height" constant="20" id="pQO-S9-udY"/>
                         </constraints>
-                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSActionTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iOw-6s-6s3">
+                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSActionTemplate" imagePosition="overlaps" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iOw-6s-6s3">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
                         <connections>
                             <action selector="editCheat:" target="-2" id="8bd-ja-6Gx"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Remove Cheat" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DBF-Fx-sqP">
+                        <rect key="frame" x="639" y="32" width="20" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="C9G-EI-fyW"/>
+                            <constraint firstAttribute="height" constant="20" id="l7b-a6-zzp"/>
+                        </constraints>
+                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7QM-jz-tbx">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="removeCheats:" target="-2" id="are-w2-Cx9"/>
                         </connections>
                     </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="78" firstAttribute="baseline" secondItem="4" secondAttribute="baseline" id="82n-9F-8bg"/>
                     <constraint firstItem="4" firstAttribute="leading" secondItem="6" secondAttribute="trailing" constant="12" symbolic="YES" id="9lp-BB-TZI"/>
+                    <constraint firstAttribute="trailing" secondItem="ORW-Vw-Xqo" secondAttribute="trailing" constant="20" symbolic="YES" id="AJy-ud-GTj"/>
                     <constraint firstItem="6" firstAttribute="top" secondItem="23" secondAttribute="bottom" constant="20" symbolic="YES" id="E2i-TS-P4E"/>
                     <constraint firstAttribute="trailing" secondItem="23" secondAttribute="trailing" constant="20" symbolic="YES" id="EiP-6U-3B3"/>
-                    <constraint firstItem="xfd-rR-U91" firstAttribute="leading" secondItem="ORW-Vw-Xqo" secondAttribute="trailing" constant="-1" id="GvR-cn-We8"/>
                     <constraint firstItem="23" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" symbolic="YES" id="JRi-3E-R7a"/>
-                    <constraint firstItem="DBF-Fx-sqP" firstAttribute="leading" secondItem="xfd-rR-U91" secondAttribute="trailing" constant="-1" id="Liv-0d-lNG"/>
+                    <constraint firstItem="xfd-rR-U91" firstAttribute="leading" secondItem="78" secondAttribute="trailing" constant="8" symbolic="YES" id="MoZ-yc-FFe"/>
                     <constraint firstItem="DBF-Fx-sqP" firstAttribute="baseline" secondItem="ORW-Vw-Xqo" secondAttribute="baseline" id="O2e-SZ-KXh"/>
                     <constraint firstItem="6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" symbolic="YES" id="U1b-J8-Mn7"/>
                     <constraint firstItem="23" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" symbolic="YES" id="Uzz-Lw-v8y"/>
+                    <constraint firstItem="ORW-Vw-Xqo" firstAttribute="leading" secondItem="DBF-Fx-sqP" secondAttribute="trailing" constant="-1" id="d7V-sk-LYe"/>
                     <constraint firstItem="DBF-Fx-sqP" firstAttribute="baseline" secondItem="xfd-rR-U91" secondAttribute="baseline" id="fPo-Kl-XqG"/>
-                    <constraint firstItem="ORW-Vw-Xqo" firstAttribute="leading" secondItem="78" secondAttribute="trailing" constant="8" symbolic="YES" id="g3Z-Wu-0w1"/>
+                    <constraint firstItem="DBF-Fx-sqP" firstAttribute="leading" secondItem="xfd-rR-U91" secondAttribute="trailing" constant="-1" id="fQh-TQ-YzN"/>
                     <constraint firstItem="DBF-Fx-sqP" firstAttribute="top" secondItem="23" secondAttribute="bottom" constant="8" symbolic="YES" id="gcQ-KX-9BU"/>
                     <constraint firstAttribute="bottom" secondItem="6" secondAttribute="bottom" constant="20" symbolic="YES" id="lF8-2f-uaL"/>
                     <constraint firstItem="78" firstAttribute="leading" secondItem="256" secondAttribute="trailing" constant="12" symbolic="YES" id="pZV-X6-uam"/>
                     <constraint firstItem="78" firstAttribute="baseline" secondItem="256" secondAttribute="baseline" id="r4R-02-9tu"/>
                     <constraint firstItem="4" firstAttribute="baseline" secondItem="6" secondAttribute="baseline" id="rAO-NL-fo9"/>
-                    <constraint firstAttribute="trailing" secondItem="DBF-Fx-sqP" secondAttribute="trailing" constant="20" symbolic="YES" id="xvQ-3b-NaW"/>
                 </constraints>
             </view>
             <connections>
@@ -216,14 +216,14 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="207" width="342" height="265"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="135">
                 <rect key="frame" x="0.0" y="0.0" width="342" height="265"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="136">
                         <rect key="frame" x="20" y="53" width="302" height="192"/>
-                        <clipView key="contentView" id="COc-Cf-C5K">
+                        <clipView key="contentView" misplaced="YES" id="COc-Cf-C5K">
                             <rect key="frame" x="1" y="17" width="300" height="174"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -290,7 +290,7 @@
                         </tableHeaderView>
                     </scrollView>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="152">
-                        <rect key="frame" x="269" y="13" width="59" height="32"/>
+                        <rect key="frame" x="245" y="13" width="83" height="32"/>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="153">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -303,7 +303,7 @@ DQ
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="156">
-                        <rect key="frame" x="187" y="13" width="82" height="32"/>
+                        <rect key="frame" x="162" y="13" width="83" height="32"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="157">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -357,6 +357,7 @@ Gw
                     <constraint firstItem="179" firstAttribute="top" secondItem="136" secondAttribute="bottom" constant="8" symbolic="YES" id="Ehy-91-5kl"/>
                     <constraint firstItem="152" firstAttribute="baseline" secondItem="156" secondAttribute="baseline" id="G4C-ss-lMH"/>
                     <constraint firstItem="175" firstAttribute="bottom" secondItem="179" secondAttribute="bottom" id="dA3-Bb-69x"/>
+                    <constraint firstItem="152" firstAttribute="width" secondItem="156" secondAttribute="width" id="mdz-o3-9Ep"/>
                 </constraints>
             </view>
         </window>
@@ -373,7 +374,7 @@ Gw
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <image name="NSAddTemplate" width="8" height="8"/>
-        <image name="NSRemoveTemplate" width="8" height="8"/>
+        <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
 </document>

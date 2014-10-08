@@ -1051,12 +1051,12 @@
 				553FECCC18DF5A8300C7B007 /* KeyNames.plist */,
 				553FECC818DF5A8300C7B007 /* Credits.rtf */,
 				553FECBC18DF5A8300C7B007 /* Configuration.xib */,
-				553FECCA18DF5A8300C7B007 /* InfoPlist.strings */,
-				553FECCE18DF5A8300C7B007 /* Localizable.strings */,
 				553FECBE18DF5A8300C7B007 /* PCSXR.xib */,
 				553FECB818DF5A8300C7B007 /* AddPluginSheet.xib */,
 				55C7A216148B2B3800C22ABC /* PcsxrMemCard.xib */,
 				D422E66C16DC48D000526DCF /* CheatWindow.xib */,
+				553FECCA18DF5A8300C7B007 /* InfoPlist.strings */,
+				553FECCE18DF5A8300C7B007 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

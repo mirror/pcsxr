@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6246" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14A386b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6246"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PcsxrPluginHandler">
@@ -15,16 +16,15 @@
         <window title="Install Plug-in" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="alertPanel" id="10" userLabel="Plugin Install" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowCollectionBehavior key="collectionBehavior" moveToActiveSpace="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
-            <rect key="contentRect" x="177" y="439" width="420" height="138"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="contentRect" x="177" y="439" width="420" height="152"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <value key="minSize" type="size" width="94" height="7"/>
             <view key="contentView" id="7">
-                <rect key="frame" x="0.0" y="0.0" width="420" height="138"/>
+                <rect key="frame" x="0.0" y="0.0" width="420" height="152"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <imageView translatesAutoresizingMaskIntoConstraints="NO" id="29">
-                        <rect key="frame" x="20" y="54" width="64" height="64"/>
+                        <rect key="frame" x="20" y="68" width="64" height="64"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="64" id="81"/>
                             <constraint firstAttribute="width" constant="64" id="123"/>
@@ -32,7 +32,7 @@
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="psxplugin" id="57"/>
                     </imageView>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="43">
-                        <rect key="frame" x="90" y="101" width="127" height="17"/>
+                        <rect key="frame" x="90" y="115" width="122" height="17"/>
                         <textFieldCell key="cell" alignment="left" title="Plugin Installation" id="58">
                             <font key="font" metaFont="systemBold"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -40,7 +40,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="44">
-                        <rect key="frame" x="90" y="79" width="247" height="14"/>
+                        <rect key="frame" x="90" y="79" width="204" height="28"/>
                         <textFieldCell key="cell" selectable="YES" alignment="left" title="Do you want to install this plugin into PCSXR?" id="59">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -69,7 +69,7 @@ DQ
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="116">
-                        <rect key="frame" x="286" y="13" width="58" height="32"/>
+                        <rect key="frame" x="282" y="13" width="62" height="32"/>
                         <buttonCell key="cell" type="push" title="No" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="117">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -90,6 +90,7 @@ Gw
                     <constraint firstAttribute="trailing" secondItem="47" secondAttribute="trailing" constant="20" symbolic="YES" id="121"/>
                     <constraint firstAttribute="trailing" secondItem="112" secondAttribute="trailing" constant="20" symbolic="YES" id="125"/>
                     <constraint firstItem="112" firstAttribute="leading" secondItem="116" secondAttribute="trailing" constant="12" symbolic="YES" id="126"/>
+                    <constraint firstItem="116" firstAttribute="width" secondItem="112" secondAttribute="width" id="9Rw-lF-JeX"/>
                     <constraint firstItem="43" firstAttribute="leading" secondItem="47" secondAttribute="leading" id="G0m-uo-WmB"/>
                     <constraint firstItem="43" firstAttribute="leading" secondItem="44" secondAttribute="leading" id="fb2-Jc-MtO"/>
                     <constraint firstItem="47" firstAttribute="top" secondItem="44" secondAttribute="bottom" constant="8" symbolic="YES" id="nEW-ZE-1vH"/>

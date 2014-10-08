@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6246" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14A386b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6246"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PcsxrMemCardHandler">
@@ -14,9 +15,8 @@
         <window title="Memory Card" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="alertPanel" id="5" userLabel="Window">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowCollectionBehavior key="collectionBehavior" moveToActiveSpace="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="133" y="235" width="420" height="160"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <value key="minSize" type="size" width="420" height="160"/>
             <value key="maxSize" type="size" width="420" height="160"/>
             <view key="contentView" id="6">
@@ -32,7 +32,7 @@
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="pcsxrmemcard" id="100030"/>
                     </imageView>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="100024">
-                        <rect key="frame" x="90" y="122" width="160" height="17"/>
+                        <rect key="frame" x="90" y="122" width="158" height="17"/>
                         <textFieldCell key="cell" alignment="left" title="Memory Card Selection" id="100029">
                             <font key="font" metaFont="systemBold"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -56,7 +56,7 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="100126">
-                        <rect key="frame" x="330" y="13" width="76" height="32"/>
+                        <rect key="frame" x="323" y="13" width="83" height="32"/>
                         <buttonCell key="cell" type="push" title="Slot 2" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100127">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -66,7 +66,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="100130">
-                        <rect key="frame" x="254" y="13" width="76" height="32"/>
+                        <rect key="frame" x="240" y="13" width="83" height="32"/>
                         <buttonCell key="cell" type="push" title="Slot 1" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100131">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -79,7 +79,7 @@ DQ
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="100134">
-                        <rect key="frame" x="14" y="13" width="82" height="32"/>
+                        <rect key="frame" x="14" y="13" width="83" height="32"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="100135">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -107,8 +107,10 @@ Gw
                     <constraint firstItem="100034" firstAttribute="leading" secondItem="100024" secondAttribute="leading" id="cns-wR-hZz"/>
                     <constraint firstAttribute="trailing" secondItem="100034" secondAttribute="trailing" constant="20" symbolic="YES" id="eWZ-wr-Bub"/>
                     <constraint firstItem="100130" firstAttribute="baseline" secondItem="100126" secondAttribute="baseline" id="fiF-w1-dU1"/>
+                    <constraint firstItem="100130" firstAttribute="width" secondItem="100134" secondAttribute="width" id="j2g-lH-4Rc"/>
                     <constraint firstItem="100034" firstAttribute="leading" secondItem="100025" secondAttribute="leading" id="qEH-aA-8nT"/>
-                    <constraint firstItem="100130" firstAttribute="top" secondItem="100025" secondAttribute="bottom" constant="8" symbolic="YES" id="qor-pU-drx"/>
+                    <constraint firstItem="100130" firstAttribute="top" secondItem="100025" secondAttribute="bottom" constant="20" symbolic="YES" id="qor-pU-drx"/>
+                    <constraint firstItem="100130" firstAttribute="width" secondItem="100126" secondAttribute="width" id="sEz-7V-Zzu"/>
                     <constraint firstItem="100024" firstAttribute="top" secondItem="100023" secondAttribute="top" id="u6d-xx-QEZ"/>
                 </constraints>
             </view>
