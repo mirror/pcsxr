@@ -136,7 +136,7 @@ void LoadPADConfig()
 	SetDefaultConfig();
 	BOOL tryToLoadOld = YES;
 	//Do we have the new settings?
-	//This is placed here so we don't have the prefskey defined.
+	//This is placed here so we don't have the PrefsKey defined.
 	NSUserDefaults *usrDefaults = [NSUserDefaults standardUserDefaults];
 	if ([usrDefaults objectForKey:PrefsKey]) {
 		//Yes we do, don't load the old.
@@ -157,6 +157,8 @@ void LoadPADConfig()
 
 		FILE *fp = fopen([oldPrefPath fileSystemRepresentation], "r");
 		if (fp == NULL) {
+			//Delete the old preferences
+			[fm removeItemAtPath:oldPrefPath error:NULL];
 			return;
 		}
 		
@@ -328,8 +330,8 @@ void SavePADConfig()
 	[pad2Dict addEntriesFromDictionary:SavePadArray(1)];
 	
 	[defaults setObject:@{kDFThreading: g.cfg.Threaded ? @YES : @NO,
-						 kDFPad1: pad1Dict,
-						 kDFPad2: pad2Dict} forKey:PrefsKey];
+						  kDFPad1: pad1Dict,
+						  kDFPad2: pad2Dict} forKey:PrefsKey];
 	[defaults synchronize];
 }
 
@@ -416,10 +418,6 @@ long DoConfiguration()
 
 - (void)awakeFromNib
 {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-    selector:@selector(windowWillClose:)
-    name:NSWindowWillCloseNotification object:[self window]];
-
 	[controllerView1 addSubview: controllerView];
 	[controllerView setController:0];
 }
@@ -442,21 +440,22 @@ long DoConfiguration()
 
 - (void)windowBecameKey:(NSNotification *)notification
 {
-	if ([[controllerView1 subviews] count] > 0)
-		[controllerView setController:0];
-	else if ([[controllerView2 subviews] count] > 0)
-		[controllerView setController:1];
-
-	[[NSNotificationCenter defaultCenter] removeObserver:self
-    name:NSWindowDidBecomeKeyNotification object:[self window]];
+	if ([notification object] == [self window]) {
+		if ([[controllerView1 subviews] count] > 0)
+			[controllerView setController:0];
+		else if ([[controllerView2 subviews] count] > 0)
+			[controllerView setController:1];
+	}
 }
 
 - (void)windowWillClose:(NSNotification *)aNotification
 {
 	if ([aNotification object] == [self window]) {
-		[[NSNotificationCenter defaultCenter] addObserver:self
-		 selector:@selector(windowBecameKey:)
-		 name:NSWindowDidBecomeKeyNotification object:[self window]];
+#if SDL_VERSION_ATLEAST(2, 0, 0)
+		SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
+#else
+		SDL_Quit();
+#endif
 	}
 }
 

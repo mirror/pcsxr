@@ -24,7 +24,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PadView.h"
 
-@interface PadController : NSWindowController
+@interface PadController : NSWindowController <NSWindowDelegate>
 {
     IBOutlet PadView *controllerView;
     IBOutlet id controllerView1;
