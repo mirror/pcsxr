@@ -23,7 +23,7 @@
 
 #include "psxcommon.h"
 
-char ostr[256];
+char ostr[512];
 
 // Names of registers
 char *disRNameGPR[] = {
