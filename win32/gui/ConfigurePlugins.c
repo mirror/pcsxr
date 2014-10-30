@@ -86,6 +86,7 @@ int LoadConfig() {
 	QueryKeyV("SaveWindowPos",  Conf->SaveWindowPos);
 	QueryKeyV("WindowPosX",  Conf->WindowPos[0]);
 	QueryKeyV("WindowPosY",  Conf->WindowPos[1]);
+	QueryKeyV("HackFix", Conf->HackFix);
 
 	QueryKeyV("Cpu",      Conf->Cpu);
 	QueryKeyV("PsxType",  Conf->PsxType);
@@ -143,6 +144,7 @@ void SaveConfig() {
 	SetKeyV("SaveWindowPos",  Conf->SaveWindowPos);
 	SetKeyV("WindowPosX",  Conf->WindowPos[0]);
 	SetKeyV("WindowPosY",  Conf->WindowPos[1]);
+	SetKeyV("HackFix", Conf->HackFix);
 
 	SetKeyV("Cpu",     Conf->Cpu);
 	SetKeyV("PsxType", Conf->PsxType);

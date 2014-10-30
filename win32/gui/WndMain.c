@@ -1354,6 +1354,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Button_SetText(GetDlgItem(hW,IDC_WIDESCREEN), _("Widescreen (GTE Hack)"));
 			Button_SetText(GetDlgItem(hW,IDC_HIDECURSOR), _("Hide cursor"));
 			Button_SetText(GetDlgItem(hW,IDC_SAVEWINDOWPOS), _("Save window position"));
+			Button_SetText(GetDlgItem(hW,IDC_HACKFIX), _("Compatibility hacks (Raystorm/VH-D/MML/Cart World/...)"));
 
 			Static_SetText(GetDlgItem(hW,IDC_MISCOPT), _("Options"));
 			Static_SetText(GetDlgItem(hW,IDC_SELPSX),  _("Psx System Type"));
@@ -1363,19 +1364,21 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Button_SetCheck(GetDlgItem(hW,IDC_MDEC),    Config.Mdec);
 			Button_SetCheck(GetDlgItem(hW,IDC_CDDA),    Config.Cdda);
 			Button_SetCheck(GetDlgItem(hW,IDC_SLOWBOOT),Config.SlowBoot);
-	   		Button_SetCheck(GetDlgItem(hW,IDC_PSXAUTO), Config.PsxAuto);
-	   		Button_SetCheck(GetDlgItem(hW,IDC_CPU),     (Config.Cpu == CPU_INTERPRETER));
-	   		Button_SetCheck(GetDlgItem(hW,IDC_PSXOUT),  Config.PsxOut);
+			Button_SetCheck(GetDlgItem(hW,IDC_PSXAUTO), Config.PsxAuto);
+			Button_SetCheck(GetDlgItem(hW,IDC_CPU),     (Config.Cpu == CPU_INTERPRETER));
+			Button_SetCheck(GetDlgItem(hW,IDC_PSXOUT),  Config.PsxOut);
 			Button_SetCheck(GetDlgItem(hW,IDC_DEBUG),   Config.Debug);
-	   		Button_SetCheck(GetDlgItem(hW,IDC_SPUIRQ),  Config.SpuIrq);
-	   		Button_SetCheck(GetDlgItem(hW,IDC_RCNTFIX), Config.RCntFix);
-	   		Button_SetCheck(GetDlgItem(hW,IDC_VSYNCWA), Config.VSyncWA);
+			Button_SetCheck(GetDlgItem(hW,IDC_SPUIRQ),  Config.SpuIrq);
+			Button_SetCheck(GetDlgItem(hW,IDC_RCNTFIX), Config.RCntFix);
+			Button_SetCheck(GetDlgItem(hW,IDC_VSYNCWA), Config.VSyncWA);
 			Button_SetCheck(GetDlgItem(hW,IDC_WIDESCREEN), Config.Widescreen);
 			Button_SetCheck(GetDlgItem(hW,IDC_HIDECURSOR), Config.HideCursor);
 			Button_SetCheck(GetDlgItem(hW,IDC_SAVEWINDOWPOS), Config.SaveWindowPos);
-	   		ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "NTSC");
-	   		ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "PAL");
-	   		ComboBox_SetCurSel(GetDlgItem(hW,IDC_PSXTYPES),Config.PsxType);
+			Button_SetCheck(GetDlgItem(hW,IDC_HACKFIX), Config.HackFix);
+
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "NTSC");
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "PAL");
+			ComboBox_SetCurSel(GetDlgItem(hW,IDC_PSXTYPES),Config.PsxType);
 
 			if (Config.Cpu == CPU_DYNAREC) {
 				Config.Debug = 0;
@@ -1388,8 +1391,8 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 
 		case WM_COMMAND: {
 			switch (LOWORD(wParam)) {
-       			case IDCANCEL: EndDialog(hW, FALSE); return TRUE;
-        		case IDOK:
+				case IDCANCEL: EndDialog(hW, FALSE); return TRUE;
+				case IDOK:
 					tmp = ComboBox_GetCurSel(GetDlgItem(hW,IDC_PSXTYPES));
 					if (tmp == 0) Config.PsxType = 0;
 					else Config.PsxType = 1;
@@ -1419,6 +1422,8 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					Config.Widescreen = Button_GetCheck(GetDlgItem(hW,IDC_WIDESCREEN));
 					Config.HideCursor = Button_GetCheck(GetDlgItem(hW,IDC_HIDECURSOR));
 					Config.SaveWindowPos = Button_GetCheck(GetDlgItem(hW,IDC_SAVEWINDOWPOS));
+					Config.HackFix = Button_GetCheck(GetDlgItem(hW, IDC_HACKFIX));
+
 					if(Config.SaveWindowPos) {
 						GetWindowRect(gApp.hWnd, &rect);
 						Config.WindowPos[0] = rect.left;
@@ -1765,8 +1770,8 @@ void CreateMainWindow(int nCmdShow) {
 						WS_CAPTION | WS_POPUPWINDOW | WS_MINIMIZEBOX,
 						CW_USEDEFAULT,
 						0,
-						356,
-						252,
+						360,
+						248,
 						NULL,
 						NULL,
 						gApp.hInstance,
