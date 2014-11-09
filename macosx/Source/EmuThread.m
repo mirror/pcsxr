@@ -15,19 +15,21 @@
 #include "plugins.h"
 #include "misc.h"
 
+typedef NS_OPTIONS(unsigned int, EmulationEvents) {
+	EMUEVENT_NONE	= 0,
+	EMUEVENT_PAUSE	= (1<<0),
+	EMUEVENT_RESET	= (1<<1),
+	EMUEVENT_STOP	= (1<<2)
+};
+
 EmuThread *emuThread = nil;
 static NSString *defrostPath = nil;
-static int safeEvent;
-static BOOL paused;
+static EmulationEvents safeEvent;
+static EmuThreadPauseStatus paused;
 static BOOL runbios;
 
 static pthread_cond_t eventCond;
 static pthread_mutex_t eventMutex;
-
-#define EMUEVENT_NONE		0
-#define EMUEVENT_PAUSE		(1<<0)
-#define EMUEVENT_RESET		(1<<1)
-#define EMUEVENT_STOP		(1<<2)
 
 @implementation EmuThread
 
@@ -140,7 +142,7 @@ done:
 			if (safeEvent & EMUEVENT_STOP) {
 				/* signify that the emulation has stopped */
 				emuThread = nil;
-				paused = NO;
+				paused = PauseStateIsNotPaused;
 				
 				/* better unlock the mutex before killing ourself */
 				pthread_mutex_unlock(&eventMutex);
@@ -179,7 +181,7 @@ done:
 			}
 			
 			if (safeEvent & EMUEVENT_PAUSE) {
-				paused = 2;
+				paused = PauseStateIsPaused;
 				/* wait until we're signalled */
 				pthread_cond_wait(&eventCond, &eventMutex);
 			}
@@ -191,72 +193,72 @@ done:
 + (void)run
 {
 	int err;
-
+	
 	if (emuThread) {
 		[EmuThread resume];
 		return;
 	}
-
+	
 	if (pthread_mutex_lock(&eventMutex) != 0) {
 		err = pthread_cond_init(&eventCond, NULL);
 		if (err) return;
-
+		
 		err = pthread_mutex_init(&eventMutex, NULL);
 		if (err) return;
-
+		
 		pthread_mutex_lock(&eventMutex);
 	}
-
-    safeEvent = EMUEVENT_NONE;
-    paused = NO;
-    runbios = NO;
-
+	
+	safeEvent = EMUEVENT_NONE;
+	paused = NO;
+	runbios = NO;
+	
 	if (SysInit() != 0) {
 		pthread_mutex_unlock(&eventMutex);
 		return;
 	}
-
+	
 	emuThread = [[EmuThread alloc] init];
-
-    [NSThread detachNewThreadSelector:@selector(EmuThreadRun:) 
-                toTarget:emuThread withObject:nil];
-
+	
+	[NSThread detachNewThreadSelector:@selector(EmuThreadRun:)
+							 toTarget:emuThread withObject:nil];
+	
 	pthread_mutex_unlock(&eventMutex);
 }
 
 + (void)runBios
 {
 	int err;
-
+	
 	if (emuThread) {
 		[EmuThread resume];
 		return;
 	}
-
+	
 	if (pthread_mutex_lock(&eventMutex) != 0) {
 		err = pthread_cond_init(&eventCond, NULL);
 		if (err) return;
-
+		
 		err = pthread_mutex_init(&eventMutex, NULL);
 		if (err) return;
-
+		
 		pthread_mutex_lock(&eventMutex);
 	}
-
-    safeEvent = EMUEVENT_NONE;
-    paused = NO;
-    runbios = YES;
-
+	
+	safeEvent = EMUEVENT_NONE;
+	paused = PauseStateIsNotPaused;
+	runbios = YES;
+	
 	if (SysInit() != 0) {
 		pthread_mutex_unlock(&eventMutex);
 		return;
 	}
-
+	
 	emuThread = [[EmuThread alloc] init];
-
-    [NSThread detachNewThreadSelector:@selector(EmuThreadRunBios:) 
-                toTarget:emuThread withObject:nil];
-
+	
+	[NSThread detachNewThreadSelector:@selector(EmuThreadRunBios:)
+							 toTarget:emuThread withObject:nil];
+	
 	pthread_mutex_unlock(&eventMutex);
 }
 
@@ -272,14 +274,14 @@ done:
 
 + (BOOL)pause
 {
-	if (paused || ![EmuThread active])
-        return YES;
-    
+	if (paused != PauseStateIsNotPaused || ![EmuThread active])
+		return YES;
+	
 	pthread_mutex_lock(&eventMutex);
 	safeEvent |= EMUEVENT_PAUSE;
-	paused = 1;
+	paused = PauseStatePauseRequested;
 	pthread_mutex_unlock(&eventMutex);
-
+	
 	pthread_cond_broadcast(&eventCond);
 	
 	return NO;
@@ -287,11 +289,11 @@ done:
 
 + (BOOL)pauseSafe
 {
-	if ((paused == 2) || ![EmuThread active])
-        return YES;
-
+	if ((paused == PauseStateIsPaused) || ![EmuThread active])
+		return YES;
+	
 	[EmuThread pause];
-	while ([EmuThread isPaused] != 2)
+	while ([EmuThread pausedState] != PauseStateIsPaused)
 		[NSThread sleepUntilDate:[[NSDate date] dateByAddingTimeInterval:0.05]];
 	
 	return NO;
@@ -307,15 +309,15 @@ done:
 
 + (void)resume
 {
-	if (!paused || ![EmuThread active])
+	if (paused == PauseStateIsNotPaused || ![EmuThread active])
 		return;
 	
 	pthread_mutex_lock(&eventMutex);
 	
 	safeEvent &= ~EMUEVENT_PAUSE;
-	paused = NO;
+	paused = PauseStateIsNotPaused;
 	pthread_mutex_unlock(&eventMutex);
-
+	
 	pthread_cond_broadcast(&eventCond);
 }
 
@@ -324,7 +326,7 @@ done:
 	pthread_mutex_lock(&eventMutex);
 	safeEvent = EMUEVENT_RESET;
 	pthread_mutex_unlock(&eventMutex);
-
+	
 	pthread_cond_broadcast(&eventCond);
 }
 
@@ -333,25 +335,30 @@ done:
 {
 	/* signify that the emulation has stopped */
 	emuThread = nil;
-
+	
 	ClosePlugins();
-
+	
 	// start a new emulation thread
 	[EmuThread run];
-
+	
 	//[[NSThread currentThread] autorelease];
 	[NSThread exit];
 	return;
 }
 
++ (EmuThreadPauseStatus)pausedState
+{
+	return paused;
+}
+
 + (BOOL)isPaused
 {
-    return paused;
+	return paused != PauseStateIsNotPaused;
 }
 
 + (BOOL)isRunBios
 {
-    return runbios;
+	return runbios;
 }
 
 + (BOOL)active

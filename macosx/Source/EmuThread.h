@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #include <setjmp.h>
 
+typedef NS_ENUM(char, EmuThreadPauseStatus) {
+	PauseStateIsNotPaused = 0,
+	PauseStatePauseRequested,
+	PauseStateIsPaused
+};
+
 @interface EmuThread : NSObject {
 	jmp_buf  restartJmp;
 	BOOL wasPaused;
@@ -29,6 +35,7 @@
 + (void)reset;
 
 + (BOOL)isPaused;
++ (EmuThreadPauseStatus)pausedState;
 + (BOOL)active;
 + (BOOL)isRunBios;
 
