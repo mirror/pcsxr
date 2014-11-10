@@ -25,11 +25,10 @@
 #import "PadView.h"
 
 @interface PadController : NSWindowController <NSWindowDelegate>
-{
-    IBOutlet PadView *controllerView;
-    IBOutlet id controllerView1;
-    IBOutlet id controllerView2;
-}
+@property (weak) IBOutlet PadView *controllerView;
+@property (weak) IBOutlet id controllerView1;
+@property (weak) IBOutlet id controllerView2;
+
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;

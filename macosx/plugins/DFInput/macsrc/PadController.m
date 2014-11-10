@@ -394,6 +394,9 @@ long DoConfiguration()
 }
 
 @implementation PadController
+@synthesize controllerView;
+@synthesize controllerView1;
+@synthesize controllerView2;
 
 - (IBAction)cancel:(id)sender
 {
