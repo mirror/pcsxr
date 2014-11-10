@@ -11,8 +11,6 @@
 
 #include "dfnet.h"
 
-#define CFG_FILENAME "dfnet.cfg"
-
 void AboutDlgProc();
 void ConfDlgProc();
 void ReadConfig();
@@ -25,15 +23,6 @@ long NETconfigure() {
 	ConfDlgProc();
 	
 	return 0;
-}
-
-void SaveConf() {
-	FILE *f;
-
-	f = fopen(CFG_FILENAME, "w");
-	if (f == NULL) return;
-	fwrite(&conf, 1, sizeof(conf), f);
-	fclose(f);
 }
 
 void LoadConf() {
