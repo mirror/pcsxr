@@ -34,6 +34,7 @@ static pthread_mutex_t eventMutex;
 @implementation EmuThread
 {
 	BOOL wasPaused;
+	jmp_buf  restartJmp;
 }
 
 - (void)setUpThread

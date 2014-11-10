@@ -23,6 +23,7 @@
 #include "pad.h"
 
 @implementation PadView
+@synthesize controllerList = controller;
 
 - (id)initWithFrame:(NSRect)frameRect
 {
@@ -43,7 +44,7 @@
 	g.cfg.PadDef[[ControllerList currentController]].Type =
 		([sender indexOfSelectedItem] > 0 ? PSE_PAD_TYPE_ANALOGPAD : PSE_PAD_TYPE_STANDARD);
 	
-	[tableView reloadData];
+	[self.tableView reloadData];
 }
 
 - (IBAction)setDevice:(id)sender
@@ -55,7 +56,7 @@
 {
 	controller.usingSDL2 = !controller.usingSDL2;
 	
-	[tableView reloadData];
+	[self.tableView reloadData];
 }
 
 - (void)setController:(int)which
@@ -63,10 +64,10 @@
 	int i;
 	
 	[ControllerList setCurrentController:which];
-	[tableView setDataSource:controller];
+	[self.tableView setDataSource:controller];
 	
-	[deviceMenu removeAllItems];
-	[deviceMenu addItemWithTitle:[[NSBundle bundleForClass:[self class]] localizedStringForKey:@"(Keyboard only)" value:@"" table:nil]];
+	[self.deviceMenu removeAllItems];
+	[self.deviceMenu addItemWithTitle:[[NSBundle bundleForClass:[self class]] localizedStringForKey:@"(Keyboard only)" value:@"" table:nil]];
 	
 	for (i = 0; i < SDL_NumJoysticks(); i++) {
 		NSMenuItem *joystickItem;
@@ -82,19 +83,19 @@
 		joystickItem = [[NSMenuItem alloc] initWithTitle:@(SDL_JoystickName(i)) action:NULL keyEquivalent:@""];
 #endif
 		[joystickItem setTag:i + 1];
-        [[deviceMenu menu] addItem:joystickItem];
+        [[self.deviceMenu menu] addItem:joystickItem];
 	}
 	
 	if (g.cfg.PadDef[which].DevNum >= SDL_NumJoysticks()) {
 		g.cfg.PadDef[which].DevNum = -1;
 	}
 	
-	[deviceMenu selectItemAtIndex:g.cfg.PadDef[which].DevNum + 1];
-	[typeMenu selectItemAtIndex:(g.cfg.PadDef[which].Type == PSE_PAD_TYPE_ANALOGPAD ? 1 : 0)];
+	[self.deviceMenu selectItemAtIndex:g.cfg.PadDef[which].DevNum + 1];
+	[self.typeMenu selectItemAtIndex:(g.cfg.PadDef[which].Type == PSE_PAD_TYPE_ANALOGPAD ? 1 : 0)];
 	
 	[self.useSDL2Check setState:g.cfg.PadDef[which].UseSDL2 ? NSOnState : NSOffState];
 	
-	[tableView reloadData];
+	[self.tableView reloadData];
 }
 
 - (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor
@@ -107,15 +108,15 @@
 {
 	unsigned short key = [theEvent keyCode];
 	
-	if ([[theEvent window] firstResponder] == tableView) {
+	if ([[theEvent window] firstResponder] == self.tableView) {
 		if (key == 51 || key == 117) {
 			// delete keys - remove the mappings for the selected item
-			[controller deleteRow:[tableView selectedRow]];
-			[tableView reloadData];
+			[controller deleteRow:[self.tableView selectedRow]];
+			[self.tableView reloadData];
 			return;
 		} else if (key == 36) {
 			// return key - configure the selected item
-			[tableView editColumn:[tableView columnWithIdentifier:@"button"] row:[tableView selectedRow] withEvent:nil select:YES];
+			[self.tableView editColumn:[self.tableView columnWithIdentifier:@"button"] row:[self.tableView selectedRow] withEvent:nil select:YES];
 			return;
 		}
 	}

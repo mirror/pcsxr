@@ -61,7 +61,9 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
 }
 
 @implementation PluginWindowController
-
+{
+	BOOL inFullscreen;
+}
 + (id)openGameView
 {
     // create a window for the GPU and return
@@ -168,7 +170,7 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
 
 - (PluginGLView *)openGLView
 {
-	return (PluginGLView *)glView;
+	return (PluginGLView *)self.glView;
 }
 
 - (void) cureAllIlls
@@ -184,7 +186,7 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
  rRatioRect.right  = iResX;
  rRatioRect.bottom = iResY;
 
- [[glView openGLContext] makeCurrentContext];
+ [[self.glView openGLContext] makeCurrentContext];
 
  glFlush();
  glFinish();
@@ -209,7 +211,7 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
 
  [NSOpenGLContext clearCurrentContext];
 
- [glView reshape]; // to get rid of fuglies on screen
+ [self.glView reshape]; // to get rid of fuglies on screen
 // GLinitialize(); // blunt instrument method of setting a proper state.
 
 }
@@ -313,7 +315,7 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
         
 	if (!(([sender resizeFlags] & NSShiftKeyMask) == NSShiftKeyMask)) {
 		NSRect oldSize = [sender frame];
-		NSRect viewSize = [glView frame];
+		NSRect viewSize = [self.glView frame];
 		
 		float xDiff = NSWidth(oldSize) - NSWidth(viewSize);
 		float yDiff = NSHeight(oldSize) - NSHeight(viewSize);
@@ -404,8 +406,8 @@ NSRect FitRectInRect(NSRect source, NSRect destination)
         roundf((aFrame.size.height - proportionalHeight)/2.0), 
         roundf(proportionalWidth), roundf(proportionalHeight));
         
-    [glView setFrame:fitToWindow];
-    [glView reshape];
+    [self.glView setFrame:fitToWindow];
+    [self.glView reshape];
     iResX = roundf(proportionalWidth);
     iResY = roundf(proportionalHeight);
         

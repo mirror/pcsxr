@@ -109,6 +109,9 @@ void ReadConfig()
 }
 
 @implementation PluginConfigController
+@synthesize ipAddress;
+@synthesize portNum;
+@synthesize playerNum;
 
 - (IBAction)cancel:(id)sender
 {

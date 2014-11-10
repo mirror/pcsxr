@@ -18,6 +18,10 @@
 
 #import "PluginWindow.h"
 @implementation NetSfPeopsOpenGLGPUPluginWindow
+{
+	NSWindow* myParent;
+	NSPoint initialLocation;
+}
 /*
 - (BOOL)windowShouldClose:(id)sender
 {

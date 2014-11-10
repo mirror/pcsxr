@@ -144,15 +144,15 @@ void ReadConfig(void)
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:self.keyValues];
-	writeDic[@"High Compatibility Mode"] = ([hiCompBox intValue] ? @YES : @NO);
-	writeDic[@"SPU IRQ Wait"] = ([irqWaitBox intValue] ? @YES : @NO);
-	writeDic[@"Mono Sound Output"] = ([monoSoundBox intValue] ? @YES : @NO);
-	writeDic[@"XA Pitch"] = ([xaSpeedBox intValue] ? @YES : @NO);
+	writeDic[@"High Compatibility Mode"] = ([self.hiCompBox intValue] ? @YES : @NO);
+	writeDic[@"SPU IRQ Wait"] = ([self.irqWaitBox intValue] ? @YES : @NO);
+	writeDic[@"Mono Sound Output"] = ([self.monoSoundBox intValue] ? @YES : @NO);
+	writeDic[@"XA Pitch"] = ([self.xaSpeedBox intValue] ? @YES : @NO);
 
-	writeDic[@"Interpolation Quality"] = @([interpolValue intValue]);
-	writeDic[@"Reverb Quality"] = @([reverbValue intValue]);
+	writeDic[@"Interpolation Quality"] = @([self.interpolValue intValue]);
+	writeDic[@"Reverb Quality"] = @([self.reverbValue intValue]);
 
-	writeDic[@"Volume"] = @([volumeValue intValue]);
+	writeDic[@"Volume"] = @([self.volumeValue intValue]);
 
 	// write to defaults
 	[defaults setObject:writeDic forKey:PrefsKey];
@@ -180,14 +180,14 @@ void ReadConfig(void)
 	/* load from preferences */
 	self.keyValues = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:PrefsKey]];
 
-	[hiCompBox setIntValue:[keyValues[@"High Compatibility Mode"] boolValue]];
-	[irqWaitBox setIntValue:[keyValues[@"SPU IRQ Wait"] boolValue]];
-	[monoSoundBox setIntValue:[keyValues[@"Mono Sound Output"] boolValue]];
-	[xaSpeedBox setIntValue:[keyValues[@"XA Pitch"] boolValue]];
+	[self.hiCompBox setIntValue:[self.keyValues[@"High Compatibility Mode"] boolValue]];
+	[self.irqWaitBox setIntValue:[self.keyValues[@"SPU IRQ Wait"] boolValue]];
+	[self.monoSoundBox setIntValue:[self.keyValues[@"Mono Sound Output"] boolValue]];
+	[self.xaSpeedBox setIntValue:[self.keyValues[@"XA Pitch"] boolValue]];
 
-	[interpolValue setIntValue:[keyValues[@"Interpolation Quality"] intValue]];
-	[reverbValue setIntValue:[keyValues[@"Reverb Quality"] intValue]];
-	[volumeValue setIntValue:[keyValues[@"Volume"] intValue]];
+	[self.interpolValue setIntValue:[self.keyValues[@"Interpolation Quality"] intValue]];
+	[self.reverbValue setIntValue:[self.keyValues[@"Reverb Quality"] intValue]];
+	[self.volumeValue setIntValue:[self.keyValues[@"Volume"] intValue]];
 }
 
 - (void)awakeFromNib
@@ -196,26 +196,26 @@ void ReadConfig(void)
 	
 	NSBundle *spuBundle = [NSBundle bundleForClass:thisClass];
 	
-	[interpolValue setStrings:@[
+	[self.interpolValue setStrings:@[
 		[spuBundle localizedStringForKey:@"(No Interpolation)" value:@"" table:nil],
 		[spuBundle localizedStringForKey:@"(Simple Interpolation)" value:@"" table:nil],
 		[spuBundle localizedStringForKey:@"(Gaussian Interpolation)" value:@"" table:nil],
 		[spuBundle localizedStringForKey:@"(Cubic Interpolation)" value:@"" table:nil]]];
-	interpolValue.pluginClass = thisClass;
+	self.interpolValue.pluginClass = thisClass;
 
-	[reverbValue setStrings:@[
+	[self.reverbValue setStrings:@[
 		[spuBundle localizedStringForKey:@"(No Reverb)" value:@"" table:nil],
 		[spuBundle localizedStringForKey:@"(Simple Reverb)" value:@"" table:nil],
 		[spuBundle localizedStringForKey:@"(PSX Reverb)" value:@"" table:nil]]];
-	reverbValue.pluginClass = thisClass;
+	self.reverbValue.pluginClass = thisClass;
 
-	[volumeValue setStrings:@[
+	[self.volumeValue setStrings:@[
 		[spuBundle localizedStringForKey:@"(Muted)" value:@"" table:nil],
 		[spuBundle localizedStringForKey:@"(Low)" value:@"" table:nil],
 		[spuBundle localizedStringForKey:@"(Medium)" value:@"" table:nil],
 		[spuBundle localizedStringForKey:@"(Loud)" value:@"" table:nil],
 		[spuBundle localizedStringForKey:@"(Loudest)" value:@"" table:nil]]];
-	volumeValue.pluginClass = thisClass;
+	self.volumeValue.pluginClass = thisClass;
 }
 
 @end

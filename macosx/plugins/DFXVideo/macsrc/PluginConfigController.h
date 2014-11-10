@@ -5,33 +5,27 @@
 #import <Cocoa/Cocoa.h>
 
 @interface NetSfPeopsSoftGPUPluginConfigController : NSWindowController
-{
-    IBOutlet NSControl *autoFullScreen;
-    IBOutlet NSPopUpButton *ditherMode;
-    IBOutlet NSControl *fpsCounter;
-    IBOutlet NSControl *frameSkipping;
-    IBOutlet NSControl *hackEnable;
-    IBOutlet NSView *hacksView;
-	IBOutlet NSMatrix *hacksMatrix;
-    IBOutlet NSControl *vSync;
-	IBOutlet NSControl *shaders;
-	IBOutlet NSTextField *vertexShaderViewablePath;
-	IBOutlet NSTextField *fragmentShaderViewablePath;
-	IBOutlet NSControl *vertexChooser;
-	IBOutlet NSControl *fragmentChooser;
-	IBOutlet NSView *shadersView;
-	IBOutlet NSPopUpButton *shaderQualitySelector;
-	
-	NSURL *vertexPath;
-	NSURL *fragmentPath;
-	 
-	NSMutableDictionary *keyValues;
-}
-
 @property (strong) NSURL *vertexPath;
 @property (strong) NSURL *fragmentPath;
+@property (strong) NSMutableDictionary *keyValues;
+
 @property (weak) IBOutlet NSFormCell *displayWidth;
 @property (weak) IBOutlet NSFormCell *displayHeight;
+@property (weak) IBOutlet NSControl *autoFullScreen;
+@property (weak) IBOutlet NSPopUpButton *ditherMode;
+@property (weak) IBOutlet NSControl *fpsCounter;
+@property (weak) IBOutlet NSControl *frameSkipping;
+@property (weak) IBOutlet NSControl *hackEnable;
+@property (weak) IBOutlet NSView *hacksView;
+@property (weak) IBOutlet NSMatrix *hacksMatrix;
+@property (weak) IBOutlet NSControl *vSync;
+@property (weak) IBOutlet NSControl *shaders;
+@property (weak) IBOutlet NSTextField *vertexShaderViewablePath;
+@property (weak) IBOutlet NSTextField *fragmentShaderViewablePath;
+@property (weak) IBOutlet NSControl *vertexChooser;
+@property (weak) IBOutlet NSControl *fragmentChooser;
+@property (weak) IBOutlet NSView *shadersView;
+@property (weak) IBOutlet NSPopUpButton *shaderQualitySelector;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;

@@ -25,14 +25,12 @@
 #import "ControllerList.h"
 
 @interface PadView : NSView
-{
-	IBOutlet NSTableView *tableView;
-	IBOutlet NSPopUpButton *typeMenu;
-	IBOutlet NSPopUpButton *deviceMenu;
 
-	ControllerList *controller;
-}
+@property (weak) IBOutlet NSTableView *tableView;
+@property (weak) IBOutlet NSPopUpButton *typeMenu;
+@property (weak) IBOutlet NSPopUpButton *deviceMenu;
 @property (weak) IBOutlet NSButton *useSDL2Check;
+@property (strong) ControllerList *controllerList;
 
 - (IBAction)setType:(id)sender;
 - (IBAction)setDevice:(id)sender;

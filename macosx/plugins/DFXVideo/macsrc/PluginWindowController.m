@@ -26,7 +26,9 @@ PluginWindowController *gameController;
 NSRect windowFrame;
 
 @implementation PluginWindowController
-
+{
+	NSWindow *fullWindow;
+}
 + (id)openGameView
 {
 	if (gameWindow == nil) {
@@ -59,7 +61,7 @@ NSRect windowFrame;
 
 - (PluginGLView *)openGLView
 {
-	return (PluginGLView *)glView;
+	return (PluginGLView *)self.glView;
 }
 
 - (void)dealloc
@@ -132,8 +134,8 @@ NSRect windowFrame;
 							screen:screen];
 		
 		//[[glView openGLContext] setFullScreen];
-		[[glView openGLContext] setView:[fullWindow contentView]];
-		[glView reshape];
+		[[self.glView openGLContext] setView:[fullWindow contentView]];
+		[self.glView reshape];
 		//[[glView openGLContext] update];
 		//[fullWindow setContentView:glView];
 		
@@ -156,8 +158,8 @@ NSRect windowFrame;
 			[fullWindow orderOut:self];
 			fullWindow = nil;
 			
-			[[glView openGLContext] setView:glView];
-			[glView reshape];
+			[[self.glView openGLContext] setView:_glView];
+			[self.glView reshape];
 			//[window setContentView:glView];
 		}
 		
@@ -178,7 +180,7 @@ NSRect windowFrame;
 {
 	if (!(([sender resizeFlags] & NSShiftKeyMask) == NSShiftKeyMask)) {
 		NSRect oldSize = [sender frame];
-		NSRect viewSize = [glView frame];
+		NSRect viewSize = [self.glView frame];
 		
 		float xDiff = NSWidth(oldSize) - NSWidth(viewSize);
 		float yDiff = NSHeight(oldSize) - NSHeight(viewSize);

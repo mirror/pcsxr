@@ -120,9 +120,9 @@ void ReadConfig()
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
+	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:self.keyValues];
 
-	NSString *theAddress = [ipAddressField stringValue];
+	NSString *theAddress = [self.ipAddressField stringValue];
 	NSInteger asciiLen = [theAddress lengthOfBytesUsingEncoding:NSASCIIStringEncoding];
 	if (asciiLen > (sizeof(settings.ip) - 1)) {
 		NSBeginAlertSheet(@"Address too long", nil, nil, nil, [self window], nil, NULL, NULL, NULL, @"The address is too long.\n\nTry to use only the IP address and not a host name.");
@@ -132,13 +132,13 @@ void ReadConfig()
 		return;
 	}
 	
-	writeDic[kSioEnabled] = (([enabledButton state]  == NSOnState) ? @YES : @NO);
+	writeDic[kSioEnabled] = (([self.enabledButton state]  == NSOnState) ? @YES : @NO);
 	writeDic[kSioIPAddress] = theAddress;
-	writeDic[kSioPort] = @((u16)[portField intValue]);
+	writeDic[kSioPort] = @((u16)[self.portField intValue]);
 	
 	{
 		int player;
-		switch ([playerMenu indexOfSelectedItem]) {
+		switch ([self.playerMenu indexOfSelectedItem]) {
 			default:
 			case 0:
 				player = PLAYER_DISABLED;
@@ -166,9 +166,9 @@ void ReadConfig()
 
 - (IBAction)toggleEnabled:(id)sender
 {
-	BOOL isEnabled = [enabledButton state] == NSOnState ? YES : NO;
+	BOOL isEnabled = [self.enabledButton state] == NSOnState ? YES : NO;
 	
-	for (NSView *subView in [[configBox subviews][0] subviews]) {
+	for (NSView *subView in [[self.configBox subviews][0] subviews]) {
 		if ([subView isKindOfClass:[NSTextField class]] && ![(NSTextField*)subView isEditable]) {
 				[(NSTextField*)subView setTextColor:isEnabled ? [NSColor controlTextColor] : [NSColor disabledControlTextColor]];
 		} else {
@@ -192,24 +192,24 @@ void ReadConfig()
 	ReadConfig();
 
 	// load from preferences
-	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
+	self.keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 
-	[enabledButton setState: [keyValues[kSioEnabled] boolValue] ? NSOnState : NSOffState];
-	[ipAddressField setStringValue:keyValues[kSioIPAddress]];
-	[portField setIntValue:[keyValues[kSioPort] intValue]];
+	[self.enabledButton setState: [self.keyValues[kSioEnabled] boolValue] ? NSOnState : NSOffState];
+	[self.ipAddressField setStringValue:self.keyValues[kSioIPAddress]];
+	[self.portField setIntValue:[self.keyValues[kSioPort] intValue]];
 	
-	switch ([keyValues[kSioPlayer] integerValue]) {
+	switch ([self.keyValues[kSioPlayer] integerValue]) {
 		default:
 		case PLAYER_DISABLED:
-			[playerMenu selectItemAtIndex:0];
+			[self.playerMenu selectItemAtIndex:0];
 			break;
 			
 		case PLAYER_MASTER:
-			[playerMenu selectItemAtIndex:1];
+			[self.playerMenu selectItemAtIndex:1];
 			break;
 			
 		case PLAYER_SLAVE:
-			[playerMenu selectItemAtIndex:2];
+			[self.playerMenu selectItemAtIndex:2];
 			break;
 	}
 	

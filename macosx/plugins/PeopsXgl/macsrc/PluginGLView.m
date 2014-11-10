@@ -30,6 +30,13 @@
 #undef BOOL
 
 @implementation PluginGLView
+{
+	struct timeval cycle_time;
+	
+	NSLock *glLock; // FIXME: wha?
+	BOOL noDisplay;
+	BOOL drawBG;
+}
 
 - (BOOL)isOpaque
 {

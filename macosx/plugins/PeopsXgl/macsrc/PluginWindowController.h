@@ -36,12 +36,8 @@ extern NSWindow *gameWindow;
 extern PluginWindowController *gameController;
 
 @interface PluginWindowController : NSWindowController
-{
-    IBOutlet NSOpenGLView *glView;
-	 
-	// NSWindow *fullWindow;
-    BOOL inFullscreen;
-}
+
+@property (weak) IBOutlet NSOpenGLView *glView;
 
 + (id)openGameView;
 - (PluginGLView *)openGLView;

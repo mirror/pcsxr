@@ -34,14 +34,6 @@ static inline void RunOnMainThreadSync(dispatch_block_t block)
 }
 
 @interface PluginGLView : NSOpenGLView
-{
-	struct timeval cycle_time;
-	
-	NSLock *glLock; // FIXME: wha?
-	BOOL noDisplay;
-	BOOL drawBG;
-
-}
 
 - (void)swapBuffer; // I wonder what this does ;-)
 - (void)clearBuffer:(BOOL)display;

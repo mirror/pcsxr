@@ -27,6 +27,40 @@
 extern time_t tStart;
 
 @implementation PluginGLView
+{
+	GLubyte  *image_base;
+	GLubyte  *image[IMAGE_COUNT];
+	
+	GLboolean useShader;
+	float	  shaderQuality;
+	GLint     buffers;
+	GLuint    vertexShader;
+	GLuint    fragmentShader;
+	GLuint	  program;
+	//GLint     frame_rate;
+	
+	GLenum    texture_hint;
+	GLboolean rect_texture;
+	GLboolean client_storage;
+	GLboolean texture_range;
+	
+	struct timeval cycle_time;
+	
+	BOOL noDisplay;
+	BOOL drawBG;
+	
+	int image_width;
+	int image_height;
+	int image_width2;
+	int image_height2;
+	int image_depth;
+	int image_type;
+	float image_tx;
+	float image_ty;
+	int whichImage;
+	BOOL isFullscreen;
+	NSOpenGLPixelFormatAttribute oglProfile;
+}
 @synthesize glLock;
 
 //- (id)initWithFrame:(NSRect)frameRect

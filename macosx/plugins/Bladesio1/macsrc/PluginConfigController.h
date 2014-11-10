@@ -3,15 +3,14 @@
 #import <Cocoa/Cocoa.h>
 
 @interface Bladesio1PluginConfigController : NSWindowController
-{
-	IBOutlet NSButton *enabledButton;
-	IBOutlet NSTextField *ipAddressField;
-	IBOutlet NSTextField *portField;
-	IBOutlet NSPopUpButton *playerMenu;
-	IBOutlet NSBox *configBox;
+@property (weak) IBOutlet NSButton *enabledButton;
+@property (weak) IBOutlet NSTextField *ipAddressField;
+@property (weak) IBOutlet NSTextField *portField;
+@property (weak) IBOutlet NSPopUpButton *playerMenu;
+@property (weak) IBOutlet NSBox *configBox;
 
-	NSMutableDictionary *keyValues;
-}
+@property (strong) NSMutableDictionary *keyValues;
+
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;
 - (IBAction)toggleEnabled:(id)sender;

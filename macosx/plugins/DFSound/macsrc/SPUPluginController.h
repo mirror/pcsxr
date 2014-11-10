@@ -10,19 +10,16 @@
 #import "NamedSlider.h"
 
 @interface SPUPluginController : NSWindowController
-{
-    IBOutlet NSCell *hiCompBox;
-    IBOutlet NamedSlider *interpolValue;
-    IBOutlet NSCell *irqWaitBox;
-    IBOutlet NSCell *monoSoundBox;
-    IBOutlet NamedSlider *reverbValue;
-    IBOutlet NSCell *xaEnableBox;
-    IBOutlet NSCell *xaSpeedBox;
-    IBOutlet NamedSlider *volumeValue;
-	
-	NSMutableDictionary *keyValues;
-}
+@property (weak) IBOutlet NSCell *hiCompBox;
+@property (weak) IBOutlet NamedSlider *interpolValue;
+@property (weak) IBOutlet NSCell *irqWaitBox;
+@property (weak) IBOutlet NSCell *monoSoundBox;
+@property (weak) IBOutlet NamedSlider *reverbValue;
+@property (weak) IBOutlet NSCell *xaEnableBox;
+@property (weak) IBOutlet NSCell *xaSpeedBox;
+@property (weak) IBOutlet NamedSlider *volumeValue;
 @property (readwrite, strong) NSMutableDictionary *keyValues;
+
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;
 - (IBAction)reset:(id)sender;

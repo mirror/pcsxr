@@ -3,14 +3,10 @@
 #import <Cocoa/Cocoa.h>
 
 @interface PluginConfigController : NSWindowController
-{
-	IBOutlet NSControl *Cached;
-	IBOutlet NSSlider *CacheSize;
-	IBOutlet NSPopUpButton *CdSpeed;
-
-	NSMutableDictionary *keyValues;
-}
-@property (retain) NSMutableDictionary *keyValues;
+@property (weak) IBOutlet NSControl *Cached;
+@property (weak) IBOutlet NSSlider *CacheSize;
+@property (weak) IBOutlet NSPopUpButton *CdSpeed;
+@property (strong) NSMutableDictionary *keyValues;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;

@@ -104,6 +104,7 @@ void ReadConfig()
 
 @implementation PluginConfigController
 @synthesize keyValues;
+@synthesize CdSpeed;
 
 - (IBAction)cancel:(id)sender
 {
@@ -115,12 +116,12 @@ void ReadConfig()
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	NSMutableDictionary *writeDic = [keyValues mutableCopy];
+	NSMutableDictionary *writeDic = [self.keyValues mutableCopy];
 	
-	writeDic[@"Threaded"] = ([Cached intValue] ? @YES : @NO);
-	writeDic[@"Cache Size"] = @([CacheSize integerValue]);
+	writeDic[@"Threaded"] = ([self.Cached intValue] ? @YES : @NO);
+	writeDic[@"Cache Size"] = @([self.CacheSize integerValue]);
 	
-	switch ([CdSpeed indexOfSelectedItem]) {
+	switch ([self.CdSpeed indexOfSelectedItem]) {
 		case 1: writeDic[@"Speed"] = @1; break;
 		case 2: writeDic[@"Speed"] = @2; break;
 		case 3: writeDic[@"Speed"] = @4; break;
@@ -150,8 +151,8 @@ void ReadConfig()
 	// load from preferences
 	self.keyValues = [[NSMutableDictionary alloc] initWithDictionary:[defaults dictionaryForKey:PrefsKey]];
 	
-	[Cached setIntValue:[keyValues[@"Threaded"] intValue]];
-	[CacheSize setIntegerValue:[keyValues[@"Cache Size"] integerValue]];
+	[self.Cached setIntValue:[keyValues[@"Threaded"] intValue]];
+	[self.CacheSize setIntegerValue:[keyValues[@"Cache Size"] integerValue]];
 	
 	switch ([keyValues[@"Speed"] intValue]) {
 		case 1: [CdSpeed selectItemAtIndex:1]; break;

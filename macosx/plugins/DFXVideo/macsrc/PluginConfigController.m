@@ -205,9 +205,23 @@ void ReadConfig(void)
 }
 
 @implementation NetSfPeopsSoftGPUPluginConfigController
-
 @synthesize fragmentPath;
 @synthesize vertexPath;
+@synthesize autoFullScreen;
+@synthesize ditherMode;
+@synthesize fpsCounter;
+@synthesize frameSkipping;
+@synthesize hackEnable;
+@synthesize hacksView;
+@synthesize hacksMatrix;
+@synthesize vSync;
+@synthesize shaders;
+@synthesize vertexShaderViewablePath;
+@synthesize fragmentShaderViewablePath;
+@synthesize vertexChooser;
+@synthesize fragmentChooser;
+@synthesize shadersView;
+@synthesize shaderQualitySelector;
 
 - (IBAction)cancel:(id)sender
 {
@@ -218,7 +232,7 @@ void ReadConfig(void)
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:keyValues];
+	NSMutableDictionary *writeDic = [NSMutableDictionary dictionaryWithDictionary:self.keyValues];
 	writeDic[@"FPS Counter"] = ([fpsCounter intValue] ? @YES : @NO);
 	writeDic[@"Auto Full Screen"] = ([autoFullScreen intValue] ? @YES : @NO);
 	writeDic[@"Frame Skipping"] = ([frameSkipping intValue] ? @YES : @NO);
@@ -326,15 +340,15 @@ void ReadConfig(void)
 	ReadConfig();
 	
 	/* load from preferences */
-	keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
+	self.keyValues = [[defaults dictionaryForKey:PrefsKey] mutableCopy];
 	
 	{
 		BOOL resetPrefs = NO;
-		[self setVertexPathInfo:[NSURL URLByResolvingBookmarkData:keyValues[@"VertexShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil]];
+		[self setVertexPathInfo:[NSURL URLByResolvingBookmarkData:self.keyValues[@"VertexShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil]];
 		if (!vertexPath) {
 			resetPrefs = YES;
 		}
-		[self setFragmentPathInfo:[NSURL URLByResolvingBookmarkData:keyValues[@"FragmentShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil]];
+		[self setFragmentPathInfo:[NSURL URLByResolvingBookmarkData:self.keyValues[@"FragmentShader"] options:NSURLBookmarkResolutionWithoutUI relativeToURL:nil bookmarkDataIsStale:NULL error:nil]];
 		if (!fragmentPath) {
 			resetPrefs = YES;
 		}
@@ -344,22 +358,22 @@ void ReadConfig(void)
 			[self setFragmentPathInfo:[selfBundle URLForResource:@"gpuPeteOGL2" withExtension:@"slf"]];
 		}
 	}
-	[fpsCounter setIntValue:[keyValues[@"FPS Counter"] intValue]];
-	[autoFullScreen setIntValue:[keyValues[@"Auto Full Screen"] intValue]];
-	[frameSkipping setIntValue:[keyValues[@"Frame Skipping"] intValue]];
-	[vSync setIntValue:[keyValues[@"VSync"] intValue]];
-	[hackEnable setIntValue:[keyValues[@"Enable Hacks"] intValue]];
-	[shaders setIntValue:[keyValues[@"UseShader"] intValue]];
+	[fpsCounter setIntValue:[self.keyValues[@"FPS Counter"] intValue]];
+	[autoFullScreen setIntValue:[self.keyValues[@"Auto Full Screen"] intValue]];
+	[frameSkipping setIntValue:[self.keyValues[@"Frame Skipping"] intValue]];
+	[vSync setIntValue:[self.keyValues[@"VSync"] intValue]];
+	[hackEnable setIntValue:[self.keyValues[@"Enable Hacks"] intValue]];
+	[shaders setIntValue:[self.keyValues[@"UseShader"] intValue]];
 
-	[ditherMode selectItemAtIndex:[keyValues[@"Dither Mode"] intValue]];
-	[shaderQualitySelector selectItemAtIndex:[keyValues[@"ShaderQuality"] intValue] - 1];
+	[ditherMode selectItemAtIndex:[self.keyValues[@"Dither Mode"] intValue]];
+	[shaderQualitySelector selectItemAtIndex:[self.keyValues[@"ShaderQuality"] intValue] - 1];
 	
-	unsigned int hackValues = [keyValues[@"Hacks"] unsignedIntValue];
+	unsigned int hackValues = [self.keyValues[@"Hacks"] unsignedIntValue];
 	
 	for (NSCell *control in [hacksMatrix cells]) {
 			[control setIntValue:(hackValues >> ([control tag] - 1)) & 1];
 	}
-	theSize = NSSizeFromString(keyValues[kWindowSize]);
+	theSize = NSSizeFromString(self.keyValues[kWindowSize]);
 	[self.displayWidth setIntegerValue:theSize.width];
 	[self.displayHeight setIntegerValue:theSize.height];
 	
