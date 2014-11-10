@@ -32,6 +32,15 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 @synthesize vSyncWAFixCell;
 @synthesize vTypePALCell;
 @synthesize widescreen;
+@synthesize cdromPlugin;
+@synthesize graphicsPlugin;
+@synthesize padPlugin;
+@synthesize soundPlugin;
+@synthesize netPlugin;
+@synthesize sio1Plugin;
+@synthesize memCardEdit;
+@synthesize hkController;
+@synthesize hkTab;
 
 + (void)setMemoryCard:(NSInteger)theCard toURL:(NSURL *)theURL;
 {

@@ -17,9 +17,9 @@
 
 @interface PcsxrPlugin ()
 @property (readwrite, copy) NSString *path;
-@property (readwrite, strong) NSString *name;
+@property (readwrite, copy) NSString *name;
 @property (strong) NSDate *modDate;
-@property (strong) NSString *fullPlugPath;
+@property (copy) NSString *fullPlugPath;
 @property long version;
 @property (readwrite) int type;
 @property int active;

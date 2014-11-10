@@ -23,6 +23,10 @@
 @implementation PcsxrMemCardController
 @synthesize memCard1Array;
 @synthesize memCard2Array;
+@synthesize memCard1view;
+@synthesize memCard2view;
+@synthesize memCard1Label;
+@synthesize memCard2Label;
 
 - (void)setupValues:(int)theCards
 {

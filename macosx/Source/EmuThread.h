@@ -17,7 +17,6 @@ typedef NS_ENUM(char, EmuThreadPauseStatus) {
 
 @interface EmuThread : NSObject {
 	jmp_buf  restartJmp;
-	BOOL wasPaused;
 }
 
 - (void)EmuThreadRun:(id)anObject;

@@ -12,21 +12,8 @@ __private_extern void ShowHelpAndExit(FILE* output, int exitCode);
 extern BOOL wasFinderLaunch;
 
 @interface PcsxrController : NSObject <NSApplicationDelegate>
-{
-	ConfigurationController *preferencesController;
-	CheatController *cheatController;
-	PluginList *pluginList;
-	
-	struct _PSXflags {
-		unsigned int sleepInBackground:1;
-		unsigned int wasPausedBeforeBGSwitch:1;
-		unsigned int endAtEmuClose:1;
-		unsigned int wasPausedBeforeDiscEject:1;
-		unsigned int reserved:28;
-	} PSXflags;
-}
 @property (weak) IBOutlet RecentItemsMenu *recentItems;
-@property (readonly) CheatController *cheatController;
+@property (strong, readonly) CheatController *cheatController;
 @property (readonly) BOOL endAtEmuClose;
 
 - (IBAction)ejectCD:(id)sender;

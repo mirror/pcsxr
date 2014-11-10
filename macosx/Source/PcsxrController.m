@@ -63,9 +63,21 @@ void ShowHelpAndExit(FILE* output, int exitCode)
 @property (strong) NSWindow *preferenceWindow;
 @property (strong) NSWindow *cheatWindow;
 @property (nonatomic) DASessionRef diskSession;
+@property (strong, readwrite) CheatController *cheatController;
 @end
 
 @implementation PcsxrController
+{
+	ConfigurationController *preferencesController;
+	PluginList *pluginList;
+	struct _PSXflags {
+		unsigned int sleepInBackground:1;
+		unsigned int wasPausedBeforeBGSwitch:1;
+		unsigned int endAtEmuClose:1;
+		unsigned int wasPausedBeforeDiscEject:1;
+		unsigned int reserved:28;
+	} PSXflags;
+}
 @synthesize recentItems;
 @synthesize skipFiles;
 @synthesize cheatController;

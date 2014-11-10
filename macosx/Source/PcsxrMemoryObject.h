@@ -28,9 +28,9 @@ typedef NS_ENUM(char, PCSXRMemFlags) {
 
 - (NSImage*)memoryImageAtIndex:(NSInteger)idx;
 
-@property (readonly, strong) NSString *name;
-@property (readonly, strong) NSString *memName;
-@property (readonly, strong) NSString *memID;
+@property (readonly, copy) NSString *name;
+@property (readonly, copy) NSString *memName;
+@property (readonly, copy) NSString *memID;
 @property (readonly, strong) NSArray *memoryCardImages;
 @property (readonly, strong, nonatomic) NSImage *memImage;
 @property (readonly) PCSXRMemFlags flagNameIndex;

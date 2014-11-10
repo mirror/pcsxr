@@ -10,12 +10,11 @@
 @class PcsxrMemCardArray;
 
 @interface PcsxrMemCardController : NSViewController
-{
-	IBOutlet NSCollectionView *memCard1view;
-	IBOutlet NSCollectionView *memCard2view;
-	IBOutlet NSTextField *memCard1Label;
-	IBOutlet NSTextField *memCard2Label;
-}
+@property (weak) IBOutlet NSCollectionView *memCard1view;
+@property (weak) IBOutlet NSCollectionView *memCard2view;
+@property (weak) IBOutlet NSTextField *memCard1Label;
+@property (weak) IBOutlet NSTextField *memCard2Label;
+
 @property (readonly, strong) PcsxrMemCardArray *memCard1Array;
 @property (readonly, strong) PcsxrMemCardArray *memCard2Array;
 

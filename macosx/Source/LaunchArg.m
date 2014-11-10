@@ -11,7 +11,7 @@
 @interface LaunchArg ()
 @property (readwrite) unsigned launchOrder;
 @property (readwrite, copy, nonatomic) dispatch_block_t theBlock;
-@property (readwrite, strong) NSString *argument;
+@property (readwrite, copy) NSString *argument;
 @end
 
 @implementation LaunchArg

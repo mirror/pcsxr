@@ -10,9 +10,9 @@
 #import "PcsxrMemoryObject.h"
 
 @interface PcsxrMemoryObject ()
-@property (readwrite, strong) NSString *name;
-@property (readwrite, strong) NSString *memName;
-@property (readwrite, strong) NSString *memID;
+@property (readwrite, copy) NSString *name;
+@property (readwrite, copy) NSString *memName;
+@property (readwrite, copy) NSString *memID;
 @property (readwrite) uint8_t startingIndex;
 @property (readwrite) uint8_t blockSize;
 

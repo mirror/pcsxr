@@ -11,20 +11,18 @@ extern NSString *const memCardChangeNumberKey;
 @class PcsxrMemCardController;
 
 @interface ConfigurationController : NSWindowController <NSWindowDelegate, NSTabViewDelegate>
-{
-	IBOutlet PluginController *cdromPlugin;
-	IBOutlet PluginController *graphicsPlugin;
-	IBOutlet PluginController *padPlugin;
-	IBOutlet PluginController *soundPlugin;
-	IBOutlet PluginController *netPlugin;
-	IBOutlet PluginController *sio1Plugin;
-	
-	IBOutlet PcsxrMemCardController *memCardEdit;
-	
-	// Hotkeys
-	IBOutlet HotkeyController *hkController;
-	IBOutlet NSTabViewItem *hkTab;
-}
+@property (weak) IBOutlet PluginController *cdromPlugin;
+@property (weak) IBOutlet PluginController *graphicsPlugin;
+@property (weak) IBOutlet PluginController *padPlugin;
+@property (weak) IBOutlet PluginController *soundPlugin;
+@property (weak) IBOutlet PluginController *netPlugin;
+@property (weak) IBOutlet PluginController *sio1Plugin;
+
+@property (weak) IBOutlet PcsxrMemCardController *memCardEdit;
+
+// Hotkeys
+@property (weak) IBOutlet HotkeyController *hkController;
+@property (weak) IBOutlet NSTabViewItem *hkTab;
 
 @property (weak) IBOutlet NSButtonCell *noXaAudioCell;
 @property (weak) IBOutlet NSButtonCell *sioIrqAlwaysCell;

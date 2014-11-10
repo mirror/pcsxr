@@ -10,7 +10,7 @@
 
 @interface PcsxrPlugin : NSObject
 @property (readonly, copy) NSString *path;
-@property (readonly, strong) NSString *name;
+@property (readonly, copy) NSString *name;
 @property (readonly) int type;
 
 + (NSString *)prefixForType:(int)type;
