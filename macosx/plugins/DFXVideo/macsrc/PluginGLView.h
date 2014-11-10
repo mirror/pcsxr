@@ -43,29 +43,6 @@ static inline void RunOnMainThreadSync(dispatch_block_t block)
 - (void)loadTextures:(GLboolean)first;
 + (char*)loadSource:(NSURL *)filename;
 void printProgramInfoLog(GLuint obj);
-
-@end
-
-@interface PluginGLView (GL2)
-
-- (BOOL)setupOpenGL2;
-- (void)cleanupGL2;
-- (void)reshapeGL2;
-- (void)renderScreenGL2;
-- (void)loadTexturesGL2:(GLboolean)first;
-- (void)swapBufferGL2;
-
-@end
-
-@interface PluginGLView (GL3)
-
-- (BOOL)setupOpenGL3;
-- (void)cleanupGL3;
-- (void)reshapeGL3;
-- (void)renderScreenGL3;
-- (void)loadTexturesGL3:(GLboolean)first;
-- (void)swapBufferGL3;
 - (GLuint)loadShader:(GLenum)type location:(NSURL*)filename;
 
 @end
-

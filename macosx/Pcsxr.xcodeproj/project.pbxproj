@@ -217,8 +217,6 @@
 		55DFBAAF197B8CCD00620084 /* Pcsxr-QL.qlgenerator in Copy QuickLook Plug-In */ = {isa = PBXBuildFile; fileRef = 550E343718E6293D00A1AD21 /* Pcsxr-QL.qlgenerator */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E0ACE0178B69620005C945 /* LaunchArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E0ACDF178B69600005C945 /* LaunchArg.m */; };
 		55E15994184564D4007983CB /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E15993184564D4007983CB /* GLKit.framework */; };
-		55E15996184567D5007983CB /* GL2Code.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E15995184567D5007983CB /* GL2Code.m */; };
-		55E15998184567F4007983CB /* GL3Code.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E15997184567F4007983CB /* GL3Code.m */; };
 		55EC05FB1788B1230053AC23 /* PcsxrMemCardArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */; };
 		55EC05FE178916E80053AC23 /* MemBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC05FD178916E70053AC23 /* MemBadgeView.m */; };
 		712FD1E81093096F00575A92 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E51093096F00575A92 /* debug.c */; };
@@ -783,8 +781,6 @@
 		55E1598C18455C60007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/CheatWindow.strings; sourceTree = "<group>"; };
 		55E1598E18455C78007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PcsxrMemCard.strings; sourceTree = "<group>"; };
 		55E15993184564D4007983CB /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		55E15995184567D5007983CB /* GL2Code.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GL2Code.m; sourceTree = "<group>"; };
-		55E15997184567F4007983CB /* GL3Code.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GL3Code.m; sourceTree = "<group>"; };
 		55E159A31845BA55007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Bladesio1PluginConfig.strings; sourceTree = "<group>"; };
 		55E159A51845BA57007983CB /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Bladesio1PluginConfig.strings; sourceTree = "<group>"; };
 		55E159A71845BA63007983CB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/DFCdromPluginConfig.strings; sourceTree = "<group>"; };
@@ -1393,8 +1389,6 @@
 				551A757C17868BEC0052D185 /* PluginWindowController.h */,
 				551A757D17868BEC0052D185 /* PluginWindowController.m */,
 				551A757E17868BEC0052D185 /* SGPUPreferences.h */,
-				55E15995184567D5007983CB /* GL2Code.m */,
-				55E15997184567F4007983CB /* GL3Code.m */,
 			);
 			path = macsrc;
 			sourceTree = "<group>";
@@ -2357,7 +2351,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55E15996184567D5007983CB /* GL2Code.m in Sources */,
 				551A76C41786954B0052D185 /* drawgl.m in Sources */,
 				551A76C51786954B0052D185 /* PluginConfigController.m in Sources */,
 				551A76C61786954B0052D185 /* PluginGLView.m in Sources */,
@@ -2368,7 +2361,6 @@
 				551A76CC178695840052D185 /* key.c in Sources */,
 				551A76CD178695840052D185 /* menu.c in Sources */,
 				551A76CE178695840052D185 /* prim.c in Sources */,
-				55E15998184567F4007983CB /* GL3Code.m in Sources */,
 				551A76CF178695840052D185 /* soft.c in Sources */,
 				551A76D0178695840052D185 /* zn.c in Sources */,
 			);
