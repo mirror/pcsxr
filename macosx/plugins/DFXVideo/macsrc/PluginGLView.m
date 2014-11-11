@@ -295,8 +295,8 @@ static int mylog2(int val)
 	
 	[NSOpenGLContext clearCurrentContext];
 	
-	[self setNeedsDisplay:true];
-	
+	//[self setNeedsDisplay:true];
+	[self renderScreen];
 	[glLock unlock];
 }
 
