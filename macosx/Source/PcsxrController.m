@@ -589,10 +589,7 @@ otherblock();\
 			NSString *path = FileTestBlock();
 			LaunchArg *larg = [[LaunchArg alloc] initWithLaunchOrder:LaunchArgPostRun argument:kPCSXRArgumentFreeze block:^{
 				if (![EmuThread isRunBios]) {
-					// TODO: use another API to put up a timer, instead of sleeping
-					dispatch_async(dispatch_get_global_queue(0, 0), ^{
-						//Make sure the emulator is running
-						sleep(5);
+					dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
 						[EmuThread defrostAt:path];
 					});
 				}
