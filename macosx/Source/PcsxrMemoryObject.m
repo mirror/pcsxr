@@ -10,15 +10,15 @@
 #import "PcsxrMemoryObject.h"
 
 @interface PcsxrMemoryObject ()
+@property (readwrite, copy) NSString *title;
 @property (readwrite, copy) NSString *name;
-@property (readwrite, copy) NSString *memName;
-@property (readwrite, copy) NSString *memID;
+@property (readwrite, copy) NSString *identifier;
 @property (readwrite) uint8_t startingIndex;
 @property (readwrite) uint8_t blockSize;
 
-@property (readwrite, strong) NSArray *memoryCardImages;
-@property (readwrite) PCSXRMemFlags flagNameIndex;
-@property (readwrite, nonatomic, strong) NSImage *memImage;
+@property (readwrite, strong) NSArray *imageArray;
+@property (readwrite) PCSXRMemFlag flag;
+@property (readwrite, nonatomic, strong) NSImage *image;
 @property (readwrite) BOOL hasImages;
 @end
 
@@ -74,13 +74,13 @@ static NSString *MemLabelEndLink;
 
 - (NSImage*)memoryImageAtIndex:(NSInteger)idx
 {
-	if (!self.hasImages || idx > self.memIconCount) {
+	if (!self.hasImages || idx > self.iconCount) {
 		return [PcsxrMemoryObject blankImage];
 	}
 	return memImages[idx];
 }
 
-+ (NSString*)memoryLabelFromFlag:(PCSXRMemFlags)flagNameIndex
++ (NSString*)memoryLabelFromFlag:(PCSXRMemFlag)flagNameIndex
 {
 	switch (flagNameIndex) {
 		default:
@@ -120,7 +120,7 @@ static NSString *MemLabelEndLink;
 	return [imageBlank copy];
 }
 
-+ (PCSXRMemFlags)memFlagsFromBlockFlags:(unsigned char)blockFlags
++ (PCSXRMemFlag)memFlagsFromBlockFlags:(unsigned char)blockFlags
 {
 	if ((blockFlags & 0xF0) == 0xA0) {
 		if ((blockFlags & 0xF) >= 1 && (blockFlags & 0xF) <= 3)
@@ -147,45 +147,45 @@ static NSString *MemLabelEndLink;
 	if (self = [super init]) {
 		self.startingIndex = startIdx;
 		self.blockSize = memSize;
-		self.flagNameIndex = [PcsxrMemoryObject memFlagsFromBlockFlags:infoBlock->Flags];
-		if (self.flagNameIndex == memFlagFree) {
-			self.memoryCardImages = @[];
+		self.flag = [PcsxrMemoryObject memFlagsFromBlockFlags:infoBlock->Flags];
+		if (self.flag == memFlagFree) {
+			self.imageArray = @[];
 			self.hasImages = NO;
-			self.name = @"Free block";
-			self.memID = self.memName = @"";
+			self.title = @"Free block";
+			self.identifier = self.name = @"";
 		} else {
-			self.name = [NSString stringWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
-			self.memoryCardImages = [PcsxrMemoryObject imagesFromMcd:infoBlock];
+			self.title = [NSString stringWithCString:infoBlock->sTitle encoding:NSShiftJISStringEncoding];
+			self.imageArray = [PcsxrMemoryObject imagesFromMcd:infoBlock];
 			
 			if ([memImages count] == 0) {
 				self.hasImages = NO;
 			} else {
 				self.hasImages = YES;
 			}
-			self.memName = @(infoBlock->Name);
-			self.memID = @(infoBlock->ID);
+			self.name = @(infoBlock->Name);
+			self.identifier = @(infoBlock->ID);
 		}
 	}
 	return self;
 }
 
 #pragma mark - Property Synthesizers
+@synthesize title;
 @synthesize name;
-@synthesize memName;
-@synthesize memID;
-@synthesize memoryCardImages = memImages;
-@synthesize flagNameIndex;
+@synthesize identifier;
+@synthesize imageArray = memImages;
+@synthesize flag;
 @synthesize blockSize;
 @synthesize startingIndex;
-@synthesize memImage = _memImage;
+@synthesize image = _memImage;
 
 #pragma mark Non-synthesized Properties
-- (NSUInteger)memIconCount
+- (NSUInteger)iconCount
 {
 	return [memImages count];
 }
 
-- (NSImage*)firstMemImage
+- (NSImage*)firstImage
 {
 	if (self.hasImages == NO) {
 		return [PcsxrMemoryObject blankImage];
@@ -193,7 +193,7 @@ static NSString *MemLabelEndLink;
 	return memImages[0];
 }
 
-- (NSImage*)memImage
+- (NSImage*)image
 {
 	if (self.hasImages == NO) {
 		NSImage *tmpBlank = [PcsxrMemoryObject blankImage];
@@ -204,7 +204,7 @@ static NSString *MemLabelEndLink;
 	if (!_memImage) {
 		NSMutableData *gifData = [NSMutableData new];
 		
-		CGImageDestinationRef dst = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)gifData, kUTTypeGIF, self.memIconCount, NULL);
+		CGImageDestinationRef dst = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)gifData, kUTTypeGIF, self.iconCount, NULL);
 		NSDictionary *gifPrep = @{(NSString *) kCGImagePropertyGIFDictionary: @{(NSString *) kCGImagePropertyGIFDelayTime: @0.30f}};
 		for (NSImage *theImage in memImages) {
 			CGImageRef imageRef = [theImage CGImageForProposedRect:NULL context:nil hints:nil];
@@ -221,7 +221,7 @@ static NSString *MemLabelEndLink;
 
 - (NSString*)flagName
 {
-	return [PcsxrMemoryObject memoryLabelFromFlag:flagNameIndex];
+	return [PcsxrMemoryObject memoryLabelFromFlag:flag];
 }
 
 static inline void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtclr)
@@ -278,7 +278,7 @@ static inline void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtc
 		attribMemLabelDeleted = [tmpStr copy];
 	});
 	
-	switch (flagNameIndex) {
+	switch (flag) {
 		default:
 		case memFlagFree:
 			return attribMemLabelFree;
@@ -302,9 +302,9 @@ static inline void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtc
 	}
 }
 
-- (BOOL)isBiggerThanOne
+- (BOOL)showCount
 {
-	if (flagNameIndex == memFlagFree) {
+	if (flag == memFlagFree) {
 		//Always show the size of the free blocks
 		return YES;
 	} else {
@@ -321,7 +321,7 @@ static inline void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtc
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"%@: Name: %@ ID: %@, type: %@ start: %i size: %i", name, memName, memID, self.flagName, startingIndex, blockSize];
+	return [NSString stringWithFormat:@"%@: Name: %@ ID: %@, type: %@ start: %i size: %i", title, name, identifier, self.flagName, startingIndex, blockSize];
 }
 
 @end

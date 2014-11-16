@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #include "sio.h"
 
-typedef NS_ENUM(char, PCSXRMemFlags) {
+typedef NS_ENUM(char, PCSXRMemFlag) {
 	memFlagDeleted,
 	memFlagFree,
 	memFlagUsed,
@@ -20,28 +20,28 @@ typedef NS_ENUM(char, PCSXRMemFlags) {
 @interface PcsxrMemoryObject : NSObject
 
 + (NSArray *)imagesFromMcd:(McdBlock *)block;
-+ (NSString*)memoryLabelFromFlag:(PCSXRMemFlags)flagNameIndex;
++ (NSString*)memoryLabelFromFlag:(PCSXRMemFlag)flagNameIndex;
 + (NSImage *)blankImage;
-+ (PCSXRMemFlags)memFlagsFromBlockFlags:(unsigned char)blockFlags;
++ (PCSXRMemFlag)memFlagsFromBlockFlags:(unsigned char)blockFlags;
 
 - (instancetype)initWithMcdBlock:(McdBlock *)infoBlockc startingIndex:(uint8_t)startIdx size:(uint8_t)memSize NS_DESIGNATED_INITIALIZER;
 
 - (NSImage*)memoryImageAtIndex:(NSInteger)idx;
 
+@property (readonly, copy) NSString *title;
 @property (readonly, copy) NSString *name;
-@property (readonly, copy) NSString *memName;
-@property (readonly, copy) NSString *memID;
-@property (readonly, strong) NSArray *memoryCardImages;
-@property (readonly, strong, nonatomic) NSImage *memImage;
-@property (readonly) PCSXRMemFlags flagNameIndex;
+@property (readonly, copy) NSString *identifier;
+@property (readonly, strong) NSArray *imageArray;
+@property (readonly, strong, nonatomic) NSImage *image;
+@property (readonly) PCSXRMemFlag flag;
 @property (readonly) uint8_t startingIndex;
 @property (readonly) uint8_t blockSize;
 @property (readonly) BOOL hasImages;
 
-@property (readonly, copy) NSImage *firstMemImage;
-@property (readonly, nonatomic) NSUInteger memIconCount;
+@property (readonly, copy) NSImage *firstImage;
+@property (readonly, nonatomic) NSUInteger iconCount;
 @property (readonly, unsafe_unretained, nonatomic) NSString *flagName;
 @property (readonly, unsafe_unretained, nonatomic) NSAttributedString *attributedFlagName;
-@property (readonly, nonatomic) BOOL isBiggerThanOne;
+@property (readonly, nonatomic) BOOL showCount;
 
 @end

@@ -102,11 +102,11 @@ static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestR
 	NSDictionary *gifPrep = @{(NSString *) kCGImagePropertyGIFDictionary: @{(NSString *) kCGImagePropertyGIFDelayTime: @0.30f}};
 	
 	for (PcsxrMemoryObject *obj in memCards) {
-		if (!obj.hasImages || obj.memIconCount == 1) {
+		if (!obj.hasImages || obj.iconCount == 1) {
 			NSMutableData *pngData = [[NSMutableData alloc] init];
 			{
 				CGImageDestinationRef dst = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)pngData, kUTTypePNG, 1, NULL);
-				NSImage *theImage = [obj firstMemImage];
+				NSImage *theImage = [obj firstImage];
 				
 				CGImageRef imageRef = [theImage CGImageForProposedRect:NULL context:nil hints:nil];
 				CGImageDestinationAddImage(dst, imageRef, NULL);
@@ -124,8 +124,8 @@ static OSStatus GeneratePreviewForMemCard(void *thisInterface, QLPreviewRequestR
 		}
 		NSMutableData *gifData = [[NSMutableData alloc] init];
 		
-		CGImageDestinationRef dst = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)gifData, kUTTypeGIF, obj.memIconCount, NULL);
-		for (NSImage *theImage in obj.memoryCardImages) {
+		CGImageDestinationRef dst = CGImageDestinationCreateWithData((__bridge CFMutableDataRef)gifData, kUTTypeGIF, obj.iconCount, NULL);
+		for (NSImage *theImage in obj.imageArray) {
 			CGImageRef imageRef = [theImage CGImageForProposedRect:NULL context:nil hints:nil];
 			CGImageDestinationAddImage(dst, imageRef, (__bridge CFDictionaryRef)(gifPrep));
 		}

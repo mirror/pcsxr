@@ -103,7 +103,7 @@ static void GetSoloBlockInfo(unsigned char *data, int block, McdBlock *Info)
 	strlcpy(Info->Name, ptr, 16);
 }
 
-static inline PCSXRMemFlags MemBlockFlag(unsigned char blockFlags)
+static inline PCSXRMemFlag MemBlockFlag(unsigned char blockFlags)
 {
 	if ((blockFlags & 0xF0) == 0xA0) {
 		if ((blockFlags & 0xF) >= 1 && (blockFlags & 0xF) <= 3)

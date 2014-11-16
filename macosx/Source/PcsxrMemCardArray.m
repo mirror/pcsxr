@@ -220,7 +220,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 {
 	int memSize = MAX_MEMCARD_BLOCKS;
 	for (PcsxrMemoryObject *memObj in rawArray) {
-		if (memObj.flagNameIndex != memFlagDeleted) {
+		if (memObj.flag != memFlagDeleted) {
 			memSize -= memObj.blockSize;
 		}
 	}
@@ -270,10 +270,10 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 		x = i;
 		McdBlock baseBlock;
 		GetMcdBlockInfo(cardNumber, i+1, &baseBlock);
-		PCSXRMemFlags theFlags = [PcsxrMemoryObject memFlagsFromBlockFlags:baseBlock.Flags];
+		PCSXRMemFlag theFlags = [PcsxrMemoryObject memFlagsFromBlockFlags:baseBlock.Flags];
 		
 		if (theFlags == memFlagDeleted || theFlags == memFlagFree) {
-			PCSXRMemFlags up1Flags = theFlags;
+			PCSXRMemFlag up1Flags = theFlags;
 			while ((up1Flags == memFlagDeleted || up1Flags == memFlagFree) && x < MAX_MEMCARD_BLOCKS) {
 				x++;
 				McdBlock up1Block;

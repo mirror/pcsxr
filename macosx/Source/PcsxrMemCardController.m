@@ -115,7 +115,7 @@
 	
 	int cardSize, freeConsBlocks, availBlocks;
 	
-	if ([[fromCard memoryArray][selectedIndex] flagNameIndex] == memFlagFree) {
+	if ([[fromCard memoryArray][selectedIndex] flag] == memFlagFree) {
 		NSBeep();
 		return;
 	}
@@ -193,7 +193,7 @@
 
 	PcsxrMemoryObject *tmpObj = [curCard memoryArray][selectedIndex];
 	
-	if (tmpObj.flagNameIndex == memFlagFree) {
+	if (tmpObj.flag == memFlagFree) {
 		NSBeep();
 		return;
 	}

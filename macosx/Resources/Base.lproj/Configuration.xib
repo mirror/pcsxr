@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14A386b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ConfigurationController">
@@ -1155,7 +1155,7 @@
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSAdvanced" id="986"/>
                                 <connections>
-                                    <binding destination="958" name="value" keyPath="representedObject.memImage" id="1057"/>
+                                    <binding destination="958" name="value" keyPath="representedObject.image" id="wKj-sJ-HxU"/>
                                 </connections>
                             </imageView>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="979">
@@ -1169,7 +1169,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="958" name="value" keyPath="representedObject.name" id="Zcl-K6-pvX"/>
+                                    <binding destination="958" name="value" keyPath="representedObject.title" id="ax9-dU-Vnf"/>
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="977">
@@ -1210,7 +1210,7 @@
                                     <constraint firstAttribute="centerY" secondItem="1047" secondAttribute="centerY" id="nmd-M9-gSz"/>
                                 </constraints>
                                 <connections>
-                                    <binding destination="958" name="hidden" keyPath="representedObject.isBiggerThanOne" id="1044">
+                                    <binding destination="958" name="hidden" keyPath="representedObject.showCount" id="cGM-hT-0ur">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSNegateBoolean</string>
                                         </dictionary>
@@ -1256,9 +1256,11 @@
         </collectionViewItem>
         <arrayController objectClassName="PcsxrMemoryObject" id="959" userLabel="MemCard2">
             <declaredKeys>
-                <string>englishName</string>
-                <string>sjisName</string>
-                <string>memImage</string>
+                <string>title</string>
+                <string>name</string>
+                <string>image</string>
+                <string>showCount</string>
+                <string>blockSize</string>
             </declaredKeys>
             <connections>
                 <binding destination="955" name="contentArray" keyPath="self.memCard2Array.memoryArray" id="1033"/>
@@ -1266,9 +1268,11 @@
         </arrayController>
         <arrayController objectClassName="PcsxrMemoryObject" id="960" userLabel="MemCard1">
             <declaredKeys>
-                <string>englishName</string>
-                <string>sjisName</string>
-                <string>memImage</string>
+                <string>title</string>
+                <string>name</string>
+                <string>image</string>
+                <string>blockSize</string>
+                <string>showCount</string>
             </declaredKeys>
             <connections>
                 <binding destination="955" name="contentArray" keyPath="self.memCard1Array.memoryArray" id="1034"/>

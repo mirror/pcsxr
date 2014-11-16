@@ -100,7 +100,7 @@ static NSImage *MemoryImageAtIndex(NSArray *memArray, NSInteger my)
 	for (PcsxrMemoryObject *obj in memArray) {
 		NSIndexSet *idxSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(i, obj.blockSize)];
 		if ([idxSet containsIndex:my]) {
-			return obj.firstMemImage;
+			return obj.firstImage;
 		}
 		i += obj.blockSize;
 	}
