@@ -58,6 +58,7 @@ static NSString *MemLabelFree;
 static NSString *MemLabelUsed;
 static NSString *MemLabelLink;
 static NSString *MemLabelEndLink;
+static NSString *MemLabelMultiSave;
 
 + (void)initialize
 {
@@ -69,6 +70,7 @@ static NSString *MemLabelEndLink;
 		MemLabelUsed = [[mainBundle localizedStringForKey:@"MemCard_Used" value:@"" table:nil] copy];
 		MemLabelLink = [[mainBundle localizedStringForKey:@"MemCard_Link" value:@"" table:nil] copy];
 		MemLabelEndLink = [[mainBundle localizedStringForKey:@"MemCard_EndLink" value:@"" table:nil] copy];
+		MemLabelMultiSave = [[mainBundle localizedStringForKey:@"MemCard_MultiSave" value:@"" table:nil] copy];
 	});
 }
 
@@ -259,7 +261,7 @@ static inline void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtc
 		SetupAttrStr(tmpStr, [NSColor controlTextColor]);
 		attribMemLabelUsed = [tmpStr copy];
 #else
-		tmpStr = [[NSMutableAttributedString alloc] initWithString:@"Multi-save"];
+		tmpStr = [[NSMutableAttributedString alloc] initWithString:MemLabelMultiSave];
 		SetupAttrStr(tmpStr, [NSColor blueColor]);
 		attribMemLabelEndLink = [tmpStr copy];
 		
