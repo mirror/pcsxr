@@ -71,20 +71,20 @@
 
 - (NSMenuItem*)newMenuItem:(NSURL*)documentURL
 {
-    NSString *lastName = nil;
-	[documentURL getResourceValue:&lastName forKey:NSURLLocalizedNameKey error:NULL];
-	if (!lastName) {
-		lastName = [documentURL lastPathComponent];
-	}
+	NSString *documentPath = [documentURL path];
+	NSString *lastName = [[NSFileManager defaultManager] displayNameAtPath:documentPath];
+	NSImage *fileImage = [[NSWorkspace sharedWorkspace] iconForFile:documentPath];
+	fileImage.size = NSMakeSize(16, 16);
 	
 	NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:lastName action:@selector(openRecentItem:) keyEquivalent:@""];
     [newItem setRepresentedObject:documentURL];
+	newItem.image = fileImage;
     [newItem setTarget:self];
     
     return newItem;
 }
 
-- (void)openRecentItem:(NSMenuItem*)sender
+- (IBAction)openRecentItem:(NSMenuItem*)sender
 {
     NSURL* url = [sender representedObject];
     [self addRecentItem:url];

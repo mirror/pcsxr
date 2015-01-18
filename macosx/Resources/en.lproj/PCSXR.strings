@@ -141,7 +141,7 @@
 "330.title" = "Run Recent…";
 
 /* Class = "NSMenuItem"; title = "Clear recent list"; ObjectID = "366"; */
-"366.title" = "Clear recent list";
+"366.title" = "Clear Recent List";
 
 /* Class = "NSMenuItem"; title = "Cheats"; ObjectID = "371"; */
 "371.title" = "Cheats";

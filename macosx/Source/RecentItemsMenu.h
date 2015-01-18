@@ -16,7 +16,7 @@
 - (IBAction)clearRecentDocuments:(id)sender;
 - (void)addRecentItem:(NSURL*)documentURL;
 - (NSMenuItem*)newMenuItem:(NSURL*)documentURL;
-- (void)openRecentItem:(NSMenuItem*)sender;
+- (IBAction)openRecentItem:(NSMenuItem*)sender;
 - (void)addMenuItem:(NSMenuItem*)item;
 
 @end
