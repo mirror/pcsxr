@@ -136,9 +136,9 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults] ;
 	NSMutableDictionary *tempUserMappings = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:@"HotkeyBindings"]];
 	[tempUserMappings setValue:@{@"device": device,
-        @"deviceName": deviceLabel,
-        @"keyCode": keyCode,
-        @"keyLabel": keyLabel} forKey:keyIdent];
+								 @"deviceName": deviceLabel,
+								 @"keyCode": keyCode,
+								 @"keyLabel": keyLabel} forKey:keyIdent];
 	[defaults setValue:tempUserMappings forKey:@"HotkeyBindings"];
 }
 

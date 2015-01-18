@@ -12,11 +12,11 @@
 #include "sio.h"
 
 #define MAX_MEMCARD_BLOCKS 15
-#define kPCSXRSaveNames @"com_codeplex_pcsxr_memcard_savenames"
-#define kPCSXRMemCount @"com_codeplex_pcsxr_memcard_memcount"
-#define kPCSXRFreeBlocks @"com_codeplex_pcsxr_memcard_freeblocks"
-#define kPCSXRMemNames @"com_codeplex_pcsxr_memcard_memnames"
-#define kPCSXRMemIDs @"com_codeplex_pcsxr_memcard_memids"
+#define kPCSXRSaveNames		@"com_codeplex_pcsxr_memcard_savenames"
+#define kPCSXRMemCount		@"com_codeplex_pcsxr_memcard_memcount"
+#define kPCSXRFreeBlocks	@"com_codeplex_pcsxr_memcard_freeblocks"
+#define kPCSXRMemNames		@"com_codeplex_pcsxr_memcard_memnames"
+#define kPCSXRMemIDs		@"com_codeplex_pcsxr_memcard_memids"
 
 //==============================================================================
 //
@@ -191,13 +191,11 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 			}
 			memCount++;
 			freeBlocks -= x;
-			//enName = [@(memBlock.Title) stringByTrimmingCharactersInSet:theCharSet];
 			jpName = [[NSString alloc] initWithCString:memBlock.sTitle encoding:NSShiftJISStringEncoding];
 			jpName = [jpName stringByTrimmingCharactersInSet:theCharSet];
 			memName = @(memBlock.Name);
 			memID = @(memBlock.ID);
 			
-			//[enNames addObject:enName];
 			[jpNames addObject:jpName];
 			[memNames addObject:memName];
 			[memIDs addObject:memID];

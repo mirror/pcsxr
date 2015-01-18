@@ -126,10 +126,14 @@ void attachHotkeys() {
     
     // GPU key presses
     NSEvent* (^gpuKeypress)(NSEvent*) = ^(NSEvent *event) {
-        GPU_keypressed([event keyCode]);
-        return (NSEvent*)nil;
+		if (event.modifierFlags & NSControlKeyMask) {
+			GPU_keypressed([event keyCode]);
+			return (NSEvent*)nil;
+		} else {
+			return event;
+		}
     };
-    gpuMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:(NSKeyUpMask | NSControlKeyMask) handler:gpuKeypress];
+    gpuMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyUpMask handler:gpuKeypress];
 }
 
 void detachHotkeys() {
