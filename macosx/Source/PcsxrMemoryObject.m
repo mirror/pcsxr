@@ -265,10 +265,7 @@ static inline void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtc
 		SetupAttrStr(tmpStr, [NSColor blueColor]);
 		attribMemLabelEndLink = [tmpStr copy];
 		
-		//tmpStr = [[NSMutableAttributedString alloc] initWithString:@"Multi-save"];
-		//SetupAttrStr(tmpStr, [NSColor blueColor]);
-		//attribMemLabelLink = [tmpStr copy];
-		//RELEASEOBJ(tmpStr);
+		// Same as attribMemLabelEndLink on release builds
 		attribMemLabelLink = attribMemLabelEndLink;
 		
 		//display nothing

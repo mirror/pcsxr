@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+IB_DESIGNABLE
 @interface PcsxrHexadecimalFormatter : NSFormatter
-@property (nonatomic) char hexPadding;
+@property (nonatomic) IBInspectable char hexPadding;
 
 @end
