@@ -159,9 +159,10 @@ long PADclose(void) {
 		DestroyKeyboard();
 #if SDL_VERSION_ATLEAST(2,0,0)
 		if (SDL_WasInit(SDL_INIT_EVERYTHING & ~(SDL_INIT_HAPTIC | SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER))) {
-			SDL_QuitSubSystem(SDL_INIT_HAPTIC);
-			SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
+			if (has_haptic)
+				SDL_QuitSubSystem(SDL_INIT_HAPTIC);
 			SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
+			SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
 		} else {
 #else
 		if (SDL_WasInit(SDL_INIT_EVERYTHING & ~SDL_INIT_JOYSTICK)) {
