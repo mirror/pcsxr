@@ -172,7 +172,7 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 				i++;
 				continue;
 			}
-			do {
+			while (i + x < MAX_MEMCARD_BLOCKS)  {
 				McdBlock tmpBlock;
 				GetSoloBlockInfo((unsigned char *)fileCData, i + x + 1, &tmpBlock);
 				if ((tmpBlock.Flags & 0x3) == 0x3) {
@@ -183,7 +183,7 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 				} else {
 					break;
 				}
-			} while (i + x - 1 < MAX_MEMCARD_BLOCKS);
+			};
 			// Ignore deleted blocks
 			i += x;
 			if (MemBlockFlag(memBlock.Flags) == memFlagDeleted) {

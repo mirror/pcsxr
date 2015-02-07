@@ -156,7 +156,7 @@ NSArray *CreateArrayByEnumeratingMemoryCardAtURL(NSURL *location)
 			i++;
 			continue;
 		}
-		do {
+		while (i + x < MAX_MEMCARD_BLOCKS)  {
 			McdBlock tmpBlock;
 			GetSoloBlockInfo((unsigned char *)memPtr, i + x + 1, &tmpBlock);
 			if ((tmpBlock.Flags & 0x3) == 0x3) {
@@ -167,7 +167,7 @@ NSArray *CreateArrayByEnumeratingMemoryCardAtURL(NSURL *location)
 			} else {
 				break;
 			}
-		} while (i + x - 1 < MAX_MEMCARD_BLOCKS);
+		};
 		PcsxrMemoryObject *obj = [[PcsxrMemoryObject alloc] initWithMcdBlock:&memBlock startingIndex:i size:x];
 		i += x;
 		if (MemBlockFlag(memBlock.Flags) == memFlagDeleted) {

@@ -108,7 +108,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 				i++;
 				continue;
 			}
-			do {
+			while (i + x < MAX_MEMCARD_BLOCKS) {
 				McdBlock tmpBlock;
 				GetMcdBlockInfo(carNum, i + x + 1, &tmpBlock);
 				if ((tmpBlock.Flags & 0x3) == 0x3) {
@@ -119,7 +119,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 				} else {
 					break;
 				}
-			} while (i + x - 1 < MAX_MEMCARD_BLOCKS);
+			};
 			@autoreleasepool {
 				PcsxrMemoryObject *obj = [[PcsxrMemoryObject alloc] initWithMcdBlock:&memBlock startingIndex:i size:x];
 				[tmpMemArray addObject:obj];
