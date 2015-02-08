@@ -216,7 +216,6 @@
 		55DA3723189440C800B44951 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551A76B2178693EA0052D185 /* CoreFoundation.framework */; };
 		55DFBAAF197B8CCD00620084 /* Pcsxr-QL.qlgenerator in Copy QuickLook Plug-In */ = {isa = PBXBuildFile; fileRef = 550E343718E6293D00A1AD21 /* Pcsxr-QL.qlgenerator */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55E0ACE0178B69620005C945 /* LaunchArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E0ACDF178B69600005C945 /* LaunchArg.m */; };
-		55E15994184564D4007983CB /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E15993184564D4007983CB /* GLKit.framework */; };
 		55EC05FB1788B1230053AC23 /* PcsxrMemCardArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */; };
 		55EC05FE178916E80053AC23 /* MemBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC05FD178916E70053AC23 /* MemBadgeView.m */; };
 		712FD1E81093096F00575A92 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E51093096F00575A92 /* debug.c */; };
@@ -920,7 +919,6 @@
 			files = (
 				551A76D4178695D20052D185 /* OpenGL.framework in Frameworks */,
 				551A76B7178693FF0052D185 /* Cocoa.framework in Frameworks */,
-				55E15994184564D4007983CB /* GLKit.framework in Frameworks */,
 				551A76D3178695D10052D185 /* GLUT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
