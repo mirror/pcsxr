@@ -1,0 +1,39 @@
+#  PeopsXgl.exp
+#  Pcsxr
+#
+#  Created by C.W. Betts on 2/8/15.
+#
+
+_PSEgetLibType
+_PSEgetLibName
+_PSEgetLibVersion
+_GPUinit
+_GPUshutdown
+_GPUopen
+_GPUclose
+_GPUconfigure
+_GPUabout
+_GPUtest
+_GPUwriteData
+_GPUwriteStatus
+_GPUreadData
+_GPUreadStatus
+_GPUdmaChain
+_GPUupdateLace
+_GPUmakeSnapshot
+_GPUwriteDataMem
+_GPUreadDataMem
+_GPUdisplayFlags
+_GPUfreeze
+_GPUshowScreenPic
+_GPUgetScreenPic
+
+_GPUkeypressed
+_GPUhSync
+_GPUvBlank
+_GPUaddVertex
+
+_GPUcursor
+_GPUsetfix
+
+_GPUvisualVibration

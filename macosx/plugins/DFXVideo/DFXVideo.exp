@@ -1,0 +1,62 @@
+#  DFXVideo.exp
+#  Pcsxr
+#
+#  Created by C.W. Betts on 2/8/15.
+#
+
+_PSEgetLibType
+_PSEgetLibName
+_PSEgetLibVersion
+_GPUinit
+_GPUshutdown
+_GPUopen
+_GPUclose
+_GPUconfigure
+_GPUabout
+_GPUtest
+_GPUwriteData
+_GPUwriteStatus
+_GPUreadData
+_GPUreadStatus
+_GPUdmaChain
+_GPUgetMode
+_GPUsetMode
+_GPUupdateLace
+_GPUmakeSnapshot
+_GPUwriteDataMem
+_GPUreadDataMem
+_GPUdisplayText
+_GPUdisplayFlags
+_GPUfreeze
+_GPUshowScreenPic
+_GPUgetScreenPic
+
+_GPUkeypressed
+_GPUhSync
+_GPUvBlank
+
+_GPUcursor
+_GPUsetfix
+
+# _ZN_GPUdisplayFlags
+# _ZN_GPUmakeSnapshot
+# _ZN_GPUinit
+# _ZN_GPUopen
+# _ZN_GPUclose
+# _ZN_GPUshutdown
+# _ZN_GPUupdateLace
+# _ZN_GPUreadStatus
+# _ZN_GPUwriteStatus
+# _ZN_GPUdmaSliceOut
+# _ZN_GPUreadData
+# _ZN_GPUsetMode
+# _ZN_GPUgetMode
+# _ZN_GPUdmaSliceIn
+# _ZN_GPUwriteData
+# _ZN_GPUdmaChain
+# _ZN_GPUtest
+# _ZN_GPUfreeze
+# _ZN_GPUgetScreenPic
+# _ZN_GPUshowScreenPic
+
+_GPUvisualVibration

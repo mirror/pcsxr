@@ -743,6 +743,11 @@
 		558328E1184F268300DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NetSfPeopsSpuPluginMain.strings"; sourceTree = "<group>"; };
 		558328E2184F268C00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
 		558328E4184F272C00DFACE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
+		5590BB8D1A87D5F10027F61B /* DFXVideo.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; path = DFXVideo.exp; sourceTree = "<group>"; };
+		5590BB8E1A87D8EC0027F61B /* PeopsXgl.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; path = PeopsXgl.exp; sourceTree = "<group>"; };
+		5590BB8F1A87DA0B0027F61B /* DFNet.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; path = DFNet.exp; sourceTree = "<group>"; };
+		5590BB901A87DA510027F61B /* DFCdrom.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; path = DFCdrom.exp; sourceTree = "<group>"; };
+		5590BB911A87DAA30027F61B /* Bladesio1.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; path = Bladesio1.exp; sourceTree = "<group>"; };
 		559366C012B694DF004ACC1E /* iGte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGte.h; sourceTree = "<group>"; };
 		559366C112B694DF004ACC1E /* iR3000A-64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "iR3000A-64.c"; sourceTree = "<group>"; };
 		559366C212B694DF004ACC1E /* ix86-64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "ix86-64.c"; sourceTree = "<group>"; };
@@ -1422,6 +1427,7 @@
 		551A75B917868C200052D185 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5590BB911A87DAA30027F61B /* Bladesio1.exp */,
 				551A74B417868BEA0052D185 /* Bladesio1PluginConfig.xib */,
 				550128911A11817800468D09 /* InfoPlist.strings */,
 				550128931A11817800468D09 /* Localizable.strings */,
@@ -1449,6 +1455,7 @@
 		551A75D817868E180052D185 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5590BB901A87DA510027F61B /* DFCdrom.exp */,
 				551A750917868BEB0052D185 /* Credits.rtf */,
 				551A750B17868BEB0052D185 /* DFCdromPluginConfig.xib */,
 				550128971A1181A000468D09 /* InfoPlist.strings */,
@@ -1473,6 +1480,7 @@
 		551A760817868EC10052D185 /* Resoruces */ = {
 			isa = PBXGroup;
 			children = (
+				5590BB8F1A87DA0B0027F61B /* DFNet.exp */,
 				551A753617868BEB0052D185 /* Credits.rtf */,
 				551A753817868BEB0052D185 /* DFNet.xib */,
 				551A753E17868BEB0052D185 /* SockDialog.xib */,
@@ -1547,6 +1555,7 @@
 		551A764717868F3D0052D185 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5590BB8D1A87D5F10027F61B /* DFXVideo.exp */,
 				551A756817868BEC0052D185 /* Credits.rtf */,
 				551A756C17868BEC0052D185 /* Localizable.strings */,
 				550128A81A11827F00468D09 /* InfoPlist.strings */,
@@ -1593,6 +1602,7 @@
 		551A766417868F870052D185 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5590BB8E1A87D8EC0027F61B /* PeopsXgl.exp */,
 				551A758517868BED0052D185 /* Credits.rtf */,
 				551A758B17868BED0052D185 /* NetSfPeopsOpenGLConfig.xib */,
 				551A759A17868BED0052D185 /* NetSfPeopsOpenGLGPUInterface.xib */,
@@ -3009,6 +3019,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/Bladesio1/Bladesio1.exp;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=Bladesio1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -3021,6 +3032,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/Bladesio1/Bladesio1.exp;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=Bladesio1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -3032,6 +3044,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFCdrom/DFCdrom.exp;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFCdrom";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -3044,6 +3057,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFCdrom/DFCdrom.exp;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFCdrom";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -3092,6 +3106,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFXVideo/DFXVideo.exp;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACGL,
 					_DARWIN,
@@ -3110,6 +3125,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFXVideo/DFXVideo.exp;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACGL,
 					_DARWIN,
@@ -3258,6 +3274,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/PeopsXgl/PeopsXgl.exp;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACGL,
@@ -3277,6 +3294,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/PeopsXgl/PeopsXgl.exp;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACGL,
 					_DARWIN,
@@ -3295,6 +3313,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFNet/DFNet.exp;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFNet";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -3307,6 +3326,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFNet/DFNet.exp;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFNet";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -3542,6 +3562,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFCdrom/DFCdrom.exp;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFCdrom";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -3571,6 +3592,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFXVideo/DFXVideo.exp;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACGL,
 					_DARWIN,
@@ -3589,6 +3611,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/PeopsXgl/PeopsXgl.exp;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MACGL,
 					_DARWIN,
@@ -3646,6 +3669,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/DFNet/DFNet.exp;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=DFNet";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";
@@ -3657,6 +3681,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
+				EXPORTED_SYMBOLS_FILE = plugins/Bladesio1/Bladesio1.exp;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "PCSXRPLUG=Bladesio1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Playstation Emulator Plugins";

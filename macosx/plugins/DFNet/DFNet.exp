@@ -1,0 +1,23 @@
+#  DFNet.exp
+#  Pcsxr
+#
+#  Created by C.W. Betts on 2/8/15.
+#
+
+_PSEgetLibType
+_PSEgetLibName
+_PSEgetLibVersion
+
+_NETinit
+_NETshutdown
+_NETclose
+_NETconfigure
+_NETtest
+_NETabout
+_NETpause
+_NETresume
+_NETqueryPlayer
+_NETsendData
+_NETrecvData
+_NETsendPadData
+_NETrecvPadData

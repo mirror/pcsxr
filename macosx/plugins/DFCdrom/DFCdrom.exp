@@ -1,0 +1,28 @@
+#  DFCdrom.exp
+#  Pcsxr
+#
+#  Created by C.W. Betts on 2/8/15.
+#
+
+_PSEgetLibType
+_PSEgetLibName
+_PSEgetLibVersion
+
+_CDRinit
+_CDRshutdown
+_CDRopen
+_CDRclose
+_CDRgetTN
+_CDRgetTD
+_CDRreadTrack
+_CDRgetBuffer
+_CDRgetBufferSub
+_CDRconfigure
+_CDRtest
+_CDRabout
+_CDRplay
+_CDRstop
+_CDRgetStatus
+_CDRgetDriveLetter
+_CDRreadCDDA
+_CDRgetTE
