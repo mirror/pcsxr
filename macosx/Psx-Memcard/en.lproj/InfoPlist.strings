@@ -1,3 +1,4 @@
 /* Localized versions of Info.plist keys */
 
 NSHumanReadableCopyright = "Copyright © 2014 Pcsx Reloaded team";
+CFBundleShortVersionString = "1.0";
