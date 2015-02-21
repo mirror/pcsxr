@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2014-10-16 00:45+0400\n"
+"POT-Creation-Date: 2015-02-22 00:38+0400\n"
 "PO-Revision-Date: 2013-08-28 01:35+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -180,7 +180,7 @@ msgstr ""
 msgid "Widescreen (GTE Hack)"
 msgstr "Широкоформатный режим (GTE хак)"
 
-#: ../data/pcsxr.ui.h:41
+#: ../data/pcsxr.ui.h:41 ../win32/gui/WndMain.c:1357
 msgid "Compatibility hacks (Raystorm/VH-D/MML/Cart World/...)"
 msgstr ""
 
@@ -595,7 +595,7 @@ msgid "Cheat Code:"
 msgstr "Чит код:"
 
 #: ../gui/Cheat.c:147 ../gui/Cheat.c:242 ../gui/LnxMain.c:423
-#: ../win32/gui/ConfigurePlugins.c:336
+#: ../win32/gui/ConfigurePlugins.c:338
 msgid "Error"
 msgstr "Ошибка"
 
@@ -771,8 +771,8 @@ msgstr "Выберите PSX EXE файл"
 msgid "PlayStation Executable Files"
 msgstr "Выполняемые файлы PlayStation"
 
-#: ../gui/GtkGui.c:585 ../gui/GtkGui.c:742 ../win32/gui/WndMain.c:1506
-#: ../win32/gui/WndMain.c:1587
+#: ../gui/GtkGui.c:585 ../gui/GtkGui.c:742 ../win32/gui/WndMain.c:1511
+#: ../win32/gui/WndMain.c:1592
 msgid "All Files"
 msgstr "Все файлы"
 
@@ -1727,7 +1727,7 @@ msgstr "Скрыть курсор"
 msgid "Prevent screensaver (xdg-screensaver)"
 msgstr ""
 
-#: ../plugins/dfinput/dfinput.ui.h:12 ../win32/gui/WndMain.c:1358
+#: ../plugins/dfinput/dfinput.ui.h:12 ../win32/gui/WndMain.c:1359
 msgid "Options"
 msgstr "Опции"
 
@@ -1811,7 +1811,7 @@ msgid "Port Number"
 msgstr "Номер порта"
 
 #: ../plugins/dfnet/gui.c:30 ../plugins/dfnet/gui.c:112
-#: ../plugins/bladesio1/gui.c:82 ../win32/gui/ConfigurePlugins.c:678
+#: ../plugins/bladesio1/gui.c:82 ../win32/gui/ConfigurePlugins.c:680
 msgid "NetPlay"
 msgstr "Сетевая игра"
 
@@ -2591,8 +2591,8 @@ msgstr ""
 #. *************************************************************************
 #: ../plugins/bladesio1/sio1.ui.h:1 ../win32/gui/AboutDlg.c:48
 #: ../win32/gui/AboutDlg.c:52 ../win32/gui/CheatDlg.c:69
-#: ../win32/gui/CheatDlg.c:119 ../win32/gui/ConfigurePlugins.c:538
-#: ../win32/gui/ConfigurePlugins.c:676 ../win32/gui/WndMain.c:1102
+#: ../win32/gui/CheatDlg.c:119 ../win32/gui/ConfigurePlugins.c:540
+#: ../win32/gui/ConfigurePlugins.c:678 ../win32/gui/WndMain.c:1102
 #: ../win32/gui/WndMain.c:1339
 msgid "OK"
 msgstr "ПРИНЯТЬ"
@@ -2653,7 +2653,7 @@ msgid "No"
 msgstr "Нет"
 
 #: ../win32/gui/CheatDlg.c:70 ../win32/gui/CheatDlg.c:120
-#: ../win32/gui/ConfigurePlugins.c:539 ../win32/gui/ConfigurePlugins.c:677
+#: ../win32/gui/ConfigurePlugins.c:541 ../win32/gui/ConfigurePlugins.c:679
 #: ../win32/gui/WndMain.c:1103 ../win32/gui/WndMain.c:1340
 msgid "Cancel"
 msgstr "Отмена"
@@ -2731,96 +2731,96 @@ msgstr "Новый поиск"
 msgid "C&lose"
 msgstr "Закрыть"
 
-#: ../win32/gui/ConfigurePlugins.c:240
+#: ../win32/gui/ConfigurePlugins.c:242
 msgid "Simulate Psx Bios"
 msgstr "Симулировать биос psx"
 
-#: ../win32/gui/ConfigurePlugins.c:336
+#: ../win32/gui/ConfigurePlugins.c:338
 msgid "Configuration not OK!"
 msgstr "Настройка не завершена!"
 
-#: ../win32/gui/ConfigurePlugins.c:454
+#: ../win32/gui/ConfigurePlugins.c:456
 msgid "This plugin reports that should work correctly"
 msgstr "Плагин готов к работе"
 
-#: ../win32/gui/ConfigurePlugins.c:455
+#: ../win32/gui/ConfigurePlugins.c:457
 msgid "This plugin reports that should not work correctly"
 msgstr "Плагин вернул сообщение об ошибке"
 
-#: ../win32/gui/ConfigurePlugins.c:518
+#: ../win32/gui/ConfigurePlugins.c:520
 msgid "Select Plugins Directory"
 msgstr "Каталог с плагинами"
 
-#: ../win32/gui/ConfigurePlugins.c:527
+#: ../win32/gui/ConfigurePlugins.c:529
 msgid "Select Bios Directory"
 msgstr "Каталог с биосами"
 
-#: ../win32/gui/ConfigurePlugins.c:536
+#: ../win32/gui/ConfigurePlugins.c:538
 msgid "Configuration"
 msgstr "Настройка"
 
-#: ../win32/gui/ConfigurePlugins.c:540
+#: ../win32/gui/ConfigurePlugins.c:542
 msgid "Graphics"
 msgstr "Графика"
 
-#: ../win32/gui/ConfigurePlugins.c:541
+#: ../win32/gui/ConfigurePlugins.c:543
 msgid "First Controller"
 msgstr "Первый контроллер"
 
-#: ../win32/gui/ConfigurePlugins.c:542
+#: ../win32/gui/ConfigurePlugins.c:544
 msgid "Second Controller"
 msgstr "Второй контроллер"
 
-#: ../win32/gui/ConfigurePlugins.c:543
+#: ../win32/gui/ConfigurePlugins.c:545
 msgid "Sound"
 msgstr "Звук"
 
-#: ../win32/gui/ConfigurePlugins.c:544
+#: ../win32/gui/ConfigurePlugins.c:546
 msgid "Cdrom"
 msgstr "CD-привод"
 
-#: ../win32/gui/ConfigurePlugins.c:545
+#: ../win32/gui/ConfigurePlugins.c:547
 msgid "Link cable"
 msgstr "Соединительный кабель"
 
-#: ../win32/gui/ConfigurePlugins.c:546
+#: ../win32/gui/ConfigurePlugins.c:548
 msgid "Bios"
 msgstr "Биос"
 
-#: ../win32/gui/ConfigurePlugins.c:547
+#: ../win32/gui/ConfigurePlugins.c:549
 msgid "Set Bios Directory"
 msgstr "Выберите каталог с биосами"
 
-#: ../win32/gui/ConfigurePlugins.c:548
+#: ../win32/gui/ConfigurePlugins.c:550
 msgid "Set Plugins Directory"
 msgstr "Выберите каталог с плагинами"
-
-#: ../win32/gui/ConfigurePlugins.c:549 ../win32/gui/ConfigurePlugins.c:552
-#: ../win32/gui/ConfigurePlugins.c:555 ../win32/gui/ConfigurePlugins.c:558
-#: ../win32/gui/ConfigurePlugins.c:561 ../win32/gui/ConfigurePlugins.c:564
-#: ../win32/gui/ConfigurePlugins.c:679
-msgid "Configure..."
-msgstr "Настройка..."
-
-#: ../win32/gui/ConfigurePlugins.c:550 ../win32/gui/ConfigurePlugins.c:553
-#: ../win32/gui/ConfigurePlugins.c:556 ../win32/gui/ConfigurePlugins.c:559
-#: ../win32/gui/ConfigurePlugins.c:562 ../win32/gui/ConfigurePlugins.c:565
-#: ../win32/gui/ConfigurePlugins.c:680
-msgid "Test..."
-msgstr "Тест..."
 
 #: ../win32/gui/ConfigurePlugins.c:551 ../win32/gui/ConfigurePlugins.c:554
 #: ../win32/gui/ConfigurePlugins.c:557 ../win32/gui/ConfigurePlugins.c:560
 #: ../win32/gui/ConfigurePlugins.c:563 ../win32/gui/ConfigurePlugins.c:566
 #: ../win32/gui/ConfigurePlugins.c:681
+msgid "Configure..."
+msgstr "Настройка..."
+
+#: ../win32/gui/ConfigurePlugins.c:552 ../win32/gui/ConfigurePlugins.c:555
+#: ../win32/gui/ConfigurePlugins.c:558 ../win32/gui/ConfigurePlugins.c:561
+#: ../win32/gui/ConfigurePlugins.c:564 ../win32/gui/ConfigurePlugins.c:567
+#: ../win32/gui/ConfigurePlugins.c:682
+msgid "Test..."
+msgstr "Тест..."
+
+#: ../win32/gui/ConfigurePlugins.c:553 ../win32/gui/ConfigurePlugins.c:556
+#: ../win32/gui/ConfigurePlugins.c:559 ../win32/gui/ConfigurePlugins.c:562
+#: ../win32/gui/ConfigurePlugins.c:565 ../win32/gui/ConfigurePlugins.c:568
+#: ../win32/gui/ConfigurePlugins.c:683
 msgid "About..."
 msgstr "О..."
 
-#: ../win32/gui/ConfigurePlugins.c:674
+#: ../win32/gui/ConfigurePlugins.c:676
 msgid "NetPlay Configuration"
 msgstr "Настройка сетевой игры"
 
-#: ../win32/gui/ConfigurePlugins.c:682
+#: ../win32/gui/ConfigurePlugins.c:684
 msgid ""
 "Note: The NetPlay Plugin Directory should be the same as the other Plugins."
 msgstr ""
@@ -2986,8 +2986,8 @@ msgstr "Немецкий"
 msgid "Greek"
 msgstr "Греческий"
 
-#: ../win32/gui/WndMain.c:81 ../win32/gui/WndMain.c:1721
-#: ../win32/gui/WndMain.c:1723
+#: ../win32/gui/WndMain.c:81 ../win32/gui/WndMain.c:1726
+#: ../win32/gui/WndMain.c:1728
 msgid "English"
 msgstr "Английский"
 
@@ -3040,12 +3040,13 @@ msgid "Korean"
 msgstr "Корейский"
 
 #: ../win32/gui/WndMain.c:216
+#, fuzzy
 msgid ""
 "Usage: pcsxr [options]\n"
 "\toptions:\n"
 "\t-nogui\t\tDon't open the GUI\n"
 "\t-psxout\t\tEnable PSX output\n"
-"\t-slowboot\tEnable BIOS logo\n"
+"\t-slowboot\t\tEnable BIOS logo\n"
 "\t-runcd\t\tRuns CD-ROM (requires -nogui)\n"
 "\t-cdfile FILE\tRuns a CD image file (requires -nogui)\n"
 "\t-help\t\tDisplay this message"
@@ -3199,203 +3200,203 @@ msgstr "Скрыть курсор"
 msgid "Save window position"
 msgstr "Опции окна"
 
-#: ../win32/gui/WndMain.c:1359
+#: ../win32/gui/WndMain.c:1360
 msgid "Psx System Type"
 msgstr "Тип системы psx"
 
-#: ../win32/gui/WndMain.c:1476
+#: ../win32/gui/WndMain.c:1481
 msgid "Psx Mcd Format (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 msgstr "Форматы карт памяти psx (*.mcr;*.mc;*.mem;*.vgs;*.mcd;*.gme;*.ddf)"
 
-#: ../win32/gui/WndMain.c:1481
+#: ../win32/gui/WndMain.c:1486
 msgid "Psx Memory Card (*.mcr;*.mc)"
 msgstr "Карта памяти psx (*.mcr;*.mc)"
 
-#: ../win32/gui/WndMain.c:1486
+#: ../win32/gui/WndMain.c:1491
 msgid "CVGS Memory Card (*.mem;*.vgs)"
 msgstr "Карта памяти CVGS (*.mem;*.vgs)"
 
-#: ../win32/gui/WndMain.c:1491
+#: ../win32/gui/WndMain.c:1496
 msgid "Bleem Memory Card (*.mcd)"
 msgstr "Карта памяти Bleem (*.mcd)"
 
-#: ../win32/gui/WndMain.c:1496
+#: ../win32/gui/WndMain.c:1501
 msgid "DexDrive Memory Card (*.gme)"
 msgstr "Карта памяти DexDrive (*.gme)"
 
-#: ../win32/gui/WndMain.c:1501
+#: ../win32/gui/WndMain.c:1506
 msgid "DataDeck Memory Card (*.ddf)"
 msgstr "Карта памяти DataDeck (*.ddf)"
 
-#: ../win32/gui/WndMain.c:1545
+#: ../win32/gui/WndMain.c:1550
 msgid "Psx Exe Format"
 msgstr "Psx exe формат"
 
-#: ../win32/gui/WndMain.c:1582
+#: ../win32/gui/WndMain.c:1587
 msgid "Psx Isos (*.iso;*.mdf;*.img;*.bin;*.cue;*.pbp;*.cbn)"
 msgstr "Образы диска psx (*.iso;*.mdf;*.img;*.bin;*.cue;*.pbp;*.cbn)"
 
-#: ../win32/gui/WndMain.c:1658
+#: ../win32/gui/WndMain.c:1663
 msgid "&File"
 msgstr "Файл(&F)"
 
-#: ../win32/gui/WndMain.c:1659
+#: ../win32/gui/WndMain.c:1664
 msgid "E&xit"
 msgstr "Выход(&X)"
 
-#: ../win32/gui/WndMain.c:1661
+#: ../win32/gui/WndMain.c:1666
 msgid "Run &EXE..."
 msgstr "Запустить EXE"
 
-#: ../win32/gui/WndMain.c:1662
+#: ../win32/gui/WndMain.c:1667
 msgid "Run &BIOS"
 msgstr "Запустить BIOS"
 
-#: ../win32/gui/WndMain.c:1663
+#: ../win32/gui/WndMain.c:1668
 msgid "Run &ISO..."
 msgstr "Запустить ISO"
 
-#: ../win32/gui/WndMain.c:1664
+#: ../win32/gui/WndMain.c:1669
 msgid "Run &CD"
 msgstr "Запустить CD"
 
-#: ../win32/gui/WndMain.c:1666
+#: ../win32/gui/WndMain.c:1671
 msgid "&Emulator"
 msgstr "Эмулятор(&E)"
 
-#: ../win32/gui/WndMain.c:1667
+#: ../win32/gui/WndMain.c:1672
 msgid "&States"
 msgstr "Состояния(&S)"
 
-#: ../win32/gui/WndMain.c:1669
+#: ../win32/gui/WndMain.c:1674
 msgid "S&witch ISO..."
 msgstr "Изменить ISO(&W)..."
 
-#: ../win32/gui/WndMain.c:1671
+#: ../win32/gui/WndMain.c:1676
 msgid "S&hutdown"
 msgstr "Выключить(&H)"
 
-#: ../win32/gui/WndMain.c:1672
+#: ../win32/gui/WndMain.c:1677
 msgid "Re&set"
 msgstr "Сброс(&S)"
 
-#: ../win32/gui/WndMain.c:1673
+#: ../win32/gui/WndMain.c:1678
 msgid "&Run"
 msgstr "Старт(&R)"
 
-#: ../win32/gui/WndMain.c:1674
+#: ../win32/gui/WndMain.c:1679
 msgid "&Save"
 msgstr "Сохранить(&S)"
 
-#: ../win32/gui/WndMain.c:1675
+#: ../win32/gui/WndMain.c:1680
 msgid "&Load"
 msgstr "Загрузить(&L)"
 
-#: ../win32/gui/WndMain.c:1676 ../win32/gui/WndMain.c:1686
+#: ../win32/gui/WndMain.c:1681 ../win32/gui/WndMain.c:1691
 msgid "&Other..."
 msgstr "Другой(&O)..."
 
-#: ../win32/gui/WndMain.c:1677 ../win32/gui/WndMain.c:1687
+#: ../win32/gui/WndMain.c:1682 ../win32/gui/WndMain.c:1692
 msgid "Slot &9"
 msgstr "Слот &9"
 
-#: ../win32/gui/WndMain.c:1678 ../win32/gui/WndMain.c:1688
+#: ../win32/gui/WndMain.c:1683 ../win32/gui/WndMain.c:1693
 msgid "Slot &8"
 msgstr "Слот &8"
 
-#: ../win32/gui/WndMain.c:1679 ../win32/gui/WndMain.c:1689
+#: ../win32/gui/WndMain.c:1684 ../win32/gui/WndMain.c:1694
 msgid "Slot &7"
 msgstr "Слот &7"
 
-#: ../win32/gui/WndMain.c:1680 ../win32/gui/WndMain.c:1690
+#: ../win32/gui/WndMain.c:1685 ../win32/gui/WndMain.c:1695
 msgid "Slot &6"
 msgstr "Слот &6"
 
-#: ../win32/gui/WndMain.c:1681 ../win32/gui/WndMain.c:1691
+#: ../win32/gui/WndMain.c:1686 ../win32/gui/WndMain.c:1696
 msgid "Slot &5"
 msgstr "Слот 5(&5)"
 
-#: ../win32/gui/WndMain.c:1682 ../win32/gui/WndMain.c:1692
+#: ../win32/gui/WndMain.c:1687 ../win32/gui/WndMain.c:1697
 msgid "Slot &4"
 msgstr "Слот 4(&4)"
 
-#: ../win32/gui/WndMain.c:1683 ../win32/gui/WndMain.c:1693
+#: ../win32/gui/WndMain.c:1688 ../win32/gui/WndMain.c:1698
 msgid "Slot &3"
 msgstr "Слот 3(&3)"
 
-#: ../win32/gui/WndMain.c:1684 ../win32/gui/WndMain.c:1694
+#: ../win32/gui/WndMain.c:1689 ../win32/gui/WndMain.c:1699
 msgid "Slot &2"
 msgstr "Слот 2(&2)"
 
-#: ../win32/gui/WndMain.c:1685 ../win32/gui/WndMain.c:1695
+#: ../win32/gui/WndMain.c:1690 ../win32/gui/WndMain.c:1700
 msgid "Slot &1"
 msgstr "Слот 1(&1)"
 
-#: ../win32/gui/WndMain.c:1697
+#: ../win32/gui/WndMain.c:1702
 msgid "&Configuration"
 msgstr "Настройка(&C)"
 
-#: ../win32/gui/WndMain.c:1698
+#: ../win32/gui/WndMain.c:1703
 msgid "Cheat &Search..."
 msgstr "Поиск читов...(&S)"
 
-#: ../win32/gui/WndMain.c:1699
+#: ../win32/gui/WndMain.c:1704
 msgid "Ch&eat Code..."
 msgstr "Чит код...(&E)"
 
-#: ../win32/gui/WndMain.c:1702
+#: ../win32/gui/WndMain.c:1707
 msgid "&Language"
 msgstr "Язык(&L)"
 
-#: ../win32/gui/WndMain.c:1727
+#: ../win32/gui/WndMain.c:1732
 msgid "&Memory cards..."
 msgstr "Карты памяти(&M)..."
 
-#: ../win32/gui/WndMain.c:1728
+#: ../win32/gui/WndMain.c:1733
 msgid "C&PU..."
 msgstr "ЦПУ(&P)..."
 
-#: ../win32/gui/WndMain.c:1730
+#: ../win32/gui/WndMain.c:1735
 msgid "&NetPlay..."
 msgstr "Сетевая игра..."
 
-#: ../win32/gui/WndMain.c:1732
+#: ../win32/gui/WndMain.c:1737
 msgid "&Link cable..."
 msgstr "Соединительный кабель..."
 
-#: ../win32/gui/WndMain.c:1733
+#: ../win32/gui/WndMain.c:1738
 msgid "&Controllers..."
 msgstr "Управление..."
 
-#: ../win32/gui/WndMain.c:1734
+#: ../win32/gui/WndMain.c:1739
 msgid "CD-&ROM..."
 msgstr "CD-привод(&R)..."
 
-#: ../win32/gui/WndMain.c:1735
+#: ../win32/gui/WndMain.c:1740
 msgid "&Sound..."
 msgstr "Звук..."
 
-#: ../win32/gui/WndMain.c:1736
+#: ../win32/gui/WndMain.c:1741
 msgid "&Graphics..."
 msgstr "Графика..."
 
-#: ../win32/gui/WndMain.c:1738
+#: ../win32/gui/WndMain.c:1743
 msgid "&Plugins && Bios..."
 msgstr "Плагины и биос(&P)..."
 
-#: ../win32/gui/WndMain.c:1740
+#: ../win32/gui/WndMain.c:1745
 msgid "&Help"
 msgstr "Помощь(&H)"
 
-#: ../win32/gui/WndMain.c:1741
+#: ../win32/gui/WndMain.c:1746
 msgid "&About..."
 msgstr "О(&A)..."
 
-#: ../win32/gui/WndMain.c:1893
+#: ../win32/gui/WndMain.c:1898
 msgid "Pcsxr Msg"
 msgstr "Сообщение pcsxr"
 
-#: ../win32/gui/WndMain.c:1896
+#: ../win32/gui/WndMain.c:1901
 msgid "Error Loading Symbol"
 msgstr "Ошибка загрузки символа"
 
