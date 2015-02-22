@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcsxr 1.0\n"
 "Report-Msgid-Bugs-To: whistler_wmz@users.sf.net\n"
-"POT-Creation-Date: 2015-02-22 00:38+0400\n"
-"PO-Revision-Date: 2013-08-28 01:35+0400\n"
+"POT-Creation-Date: 2015-02-22 20:26+0400\n"
+"PO-Revision-Date: 2015-02-22 12:49+0400\n"
 "Last-Translator: Blade_Arma <edgbla@yandex.ru>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "Language: \n"
@@ -175,6 +175,7 @@ msgstr "Исправление для InuYasha Sengoku Battle"
 #: ../data/pcsxr.ui.h:39
 msgid "No memcard (COTS password option)"
 msgstr ""
+"Отключить карты памяти (для задействования системы паролей в некоторых играх)"
 
 #: ../data/pcsxr.ui.h:40 ../win32/gui/WndMain.c:1354
 msgid "Widescreen (GTE Hack)"
@@ -182,16 +183,15 @@ msgstr "Широкоформатный режим (GTE хак)"
 
 #: ../data/pcsxr.ui.h:41 ../win32/gui/WndMain.c:1357
 msgid "Compatibility hacks (Raystorm/VH-D/MML/Cart World/...)"
-msgstr ""
+msgstr "Хаки совместимости (Raystorm/VH-D/MML/Cart World/...)"
 
 #: ../data/pcsxr.ui.h:42
 msgid "<b>Options</b>"
 msgstr "<b>Опции</b>"
 
 #: ../data/pcsxr.ui.h:43
-#, fuzzy
 msgid "CD Audio"
-msgstr "Выключить CD музыку"
+msgstr "CD музыка"
 
 #: ../data/pcsxr.ui.h:44 ../win32/gui/WndMain.c:1347
 msgid "Autodetect"
@@ -203,23 +203,23 @@ msgstr "<b>Тип системы</b>"
 
 #: ../data/pcsxr.ui.h:46
 msgid "Every"
-msgstr ""
+msgstr "Каждый"
 
 #: ../data/pcsxr.ui.h:47
 msgid "vblanks, max."
-msgstr ""
+msgstr "vblanks, макс."
 
 #: ../data/pcsxr.ui.h:48
 msgid "rewinds = "
-msgstr ""
+msgstr "перемотка будет занимать"
 
 #: ../data/pcsxr.ui.h:49
 msgid "MB"
-msgstr ""
+msgstr "МБ"
 
 #: ../data/pcsxr.ui.h:50
 msgid "<b>Rewind interval</b>"
-msgstr ""
+msgstr "<b>Параметры перемотки</b>"
 
 #: ../data/pcsxr.ui.h:51
 msgid "PCSXR"
@@ -318,9 +318,8 @@ msgid "_Load State"
 msgstr "Загрузить состояние(_L)"
 
 #: ../data/pcsxr.ui.h:75
-#, fuzzy
 msgid "Slot _Recent"
-msgstr "Слот _1"
+msgstr "Последний использованный слот"
 
 #: ../data/pcsxr.ui.h:76
 msgid "_Configuration"
@@ -532,7 +531,7 @@ msgstr "Шестнадцатеричное"
 
 #: ../data/pcsxr.ui.h:128
 msgid "Enabled (Little endian)"
-msgstr ""
+msgstr "Включено (порядок байт - от младшего к старшему)"
 
 #: ../data/pcsxr.ui.h:129 ../plugins/bladesio1/sio1.ui.h:9
 msgid "Disabled"
@@ -540,10 +539,9 @@ msgstr "Выключено"
 
 #: ../data/pcsxr.ui.h:130
 msgid "Enabled (Big endian)"
-msgstr ""
+msgstr "Включено (порядок байт - от старшему к младшему)"
 
 #: ../gui/AboutDlg.c:72
-#, fuzzy
 msgid ""
 "(C) 1999-2003 PCSX Team\n"
 "(C) 2005-2009 PCSX-df Team\n"
@@ -551,7 +549,7 @@ msgid ""
 msgstr ""
 "(C) 1999-2003 Команда PCSX\n"
 "(C) 2005-2009 Команда PCSX-df\n"
-"(C) 2009-2011 Команда PCSX-Reloaded"
+"(C) 2009-2014 Команда PCSX-Reloaded"
 
 #: ../gui/AboutDlg.c:77
 msgid ""
@@ -819,10 +817,10 @@ msgid "Open PSX Disc Image File"
 msgstr "Открыть образ PSX диска"
 
 #: ../gui/GtkGui.c:737
-#, fuzzy
 msgid ""
 "PSX Image Files (*.bin, *.img, *.mdf, *.iso, *.ecm, *.cue, *.pbp, *.cbn)"
-msgstr "Образы PSX дисков (*.bin, *.img, *.mdf, *.iso, *.cue, *.pbp, *.cbn)"
+msgstr ""
+"Образы PSX дисков (*.bin, *.img, *.mdf, *.iso, *.ecm, *.cue, *.pbp, *.cbn)"
 
 #: ../gui/GtkGui.c:1002
 #, c-format
@@ -988,13 +986,12 @@ msgid ""
 msgstr "Недостаточно свободных блоков на карте памяти."
 
 #: ../gui/MemcardDlg.c:592
-#, fuzzy
 msgid "Memory card is corrupted"
-msgstr "Карты памяти(&M)..."
+msgstr "Карта памяти повреждена"
 
 #: ../gui/MemcardDlg.c:593
 msgid "Link block pointed to normal block which is not allowed."
-msgstr ""
+msgstr "Соединительный блок повреждён."
 
 #: ../gui/MemcardDlg.c:707
 msgid "Memory Card Manager"
@@ -1079,46 +1076,51 @@ msgstr "Ошибка при закрытии SIO1 плагина!"
 msgid ""
 " -> Compressed CDDA support is not compiled with this version. Such tracks "
 "will be silent."
-msgstr ""
+msgstr " -> CDDA дорожки в сжатом формате не поддерживаются в этой версии."
 
 #: ../libpcsxcore/cdriso.c:232
 msgid "Audio file opening failed!\n"
-msgstr ""
+msgstr "Не удалось открыть аудио файл!\n"
 
 #: ../libpcsxcore/cdriso.c:241
 msgid "Couldn't find any audio stream in file\n"
 msgstr ""
+"Функция av_find_best_stream() завершилась с ошибкой, не удалось обнаружить "
+"какой-либо звуковой поток в файле\n"
 
 #: ../libpcsxcore/cdriso.c:254
 msgid "Audio decoder opening failed. Compressed audio support not available.\n"
 msgstr ""
+"Функция avcodec_open2() завершилась с ошибкой, проигрывание сжатых CDDA "
+"треков недоступно.\n"
 
 #: ../libpcsxcore/cdriso.c:271
 msgid ""
 " -> Error allocating audio frame buffer. This track will not be available."
 msgstr ""
+"Функция avcodec_alloc_frame() завершилась с ошибкой, проигрывание данного "
+"трека невозможно."
 
 #: ../libpcsxcore/cdriso.c:313
 #, c-format
 msgid "Could not allocate memory to decode CDDA TRACK: %s\n"
-msgstr ""
+msgstr "Не удалось выделить память для декодирования CDDA трека: %s\n"
 
 #: ../libpcsxcore/cdriso.c:319
 #, c-format
 msgid "Decoding audio tr#%u (%s)..."
-msgstr ""
+msgstr "Декодирование аудио, трек#%u (%s)..."
 
 #: ../libpcsxcore/cdriso.c:324
 msgid "Buffer overflow..."
-msgstr ""
+msgstr "Переполнение буфера..."
 
 #. printf("actual %i vs. %i estimated", len1, tri->len_decoded_buffer);
 #. close wb file now and will be opened as rb
 #. change handle to decoded one
 #: ../libpcsxcore/cdriso.c:329
-#, fuzzy
 msgid "OK\n"
-msgstr "ПРИНЯТЬ"
+msgstr "ПРИНЯТЬ\n"
 
 #: ../libpcsxcore/cdriso.c:643
 #, c-format
@@ -1134,6 +1136,8 @@ msgid ""
 "\n"
 "Detected ECM file with proper header and filename suffix.\n"
 msgstr ""
+"\n"
+"Обнаружен ECM файл с правильным заголовком и суффиксом имени файла.\n"
 
 #: ../libpcsxcore/cdriso.c:1655
 #, c-format
@@ -1146,19 +1150,19 @@ msgid "Loaded CD Image: %s"
 msgstr "Загружен образ CD: %s"
 
 #: ../libpcsxcore/cheat.c:72
-#, fuzzy, c-format
+#, c-format
 msgid "Could not load cheats from: %s\n"
-msgstr "Чит загружен из: %s\n"
+msgstr "Не удалось загрузить чит коды из: %s\n"
 
 #: ../libpcsxcore/cheat.c:148
 #, c-format
 msgid "Cheats loaded from: %s\n"
-msgstr "Чит загружен из: %s\n"
+msgstr "Чит коды загружены из: %s\n"
 
 #: ../libpcsxcore/cheat.c:180
 #, c-format
 msgid "Cheats saved to: %s\n"
-msgstr "Чит сохранён в: %s\n"
+msgstr "Чит коды сохранёны в: %s\n"
 
 #: ../libpcsxcore/cheat.c:323 ../libpcsxcore/cheat.c:444
 msgid "(Untitled)"
@@ -1191,9 +1195,9 @@ msgid "CD-ROM ID: %.9s\n"
 msgstr "Идентификатор CD диска: %.9s\n"
 
 #: ../libpcsxcore/misc.c:353
-#, fuzzy, c-format
+#, c-format
 msgid "CD-ROM EXE Name: %.255s\n"
-msgstr "Метка CD диска: %.32s\n"
+msgstr "Имя EXE файла на CD диске: %.255s\n"
 
 #: ../libpcsxcore/misc.c:417
 #, c-format
@@ -1343,9 +1347,10 @@ msgstr "Соединение закрыто!\n"
 
 #. TODO: maybe just whine and quit..
 #: ../libpcsxcore/sio.c:887
-#, fuzzy, c-format
+#, c-format
 msgid "No memory card value was specified - using a default card %s\n"
-msgstr "Карта памяти не указана - создана новая карта %s\n"
+msgstr ""
+"Карта памяти не указана - будет использована карта памяти по умолчанию %s\n"
 
 #: ../libpcsxcore/sio.c:891
 #, c-format
@@ -1474,33 +1479,31 @@ msgstr "32мин"
 
 #: ../plugins/dfinput/cfg-gtk.c:58
 msgid "Increment state slot"
-msgstr ""
+msgstr "Инкрементировать номер слота состояния"
 
 #: ../plugins/dfinput/cfg-gtk.c:59
 msgid "Fast-forwards"
-msgstr ""
+msgstr "Перемотка вперёд"
 
 #: ../plugins/dfinput/cfg-gtk.c:60
-#, fuzzy
 msgid "Load state"
-msgstr "Загрузить состояние(_L)"
+msgstr "Загрузить состояние"
 
 #: ../plugins/dfinput/cfg-gtk.c:61
-#, fuzzy
 msgid "Save state"
 msgstr "Сохранить состояние"
 
 #: ../plugins/dfinput/cfg-gtk.c:62
 msgid "Screenshot"
-msgstr ""
+msgstr "Снимок экрана"
 
 #: ../plugins/dfinput/cfg-gtk.c:63
 msgid "Escape"
-msgstr ""
+msgstr "Выход"
 
 #: ../plugins/dfinput/cfg-gtk.c:64
 msgid "Rewind"
-msgstr ""
+msgstr "Перемотка назад"
 
 #: ../plugins/dfinput/cfg-gtk.c:68
 msgid "D-Pad Up"
@@ -1568,7 +1571,7 @@ msgstr ""
 
 #: ../plugins/dfinput/cfg-gtk.c:84
 msgid "Analog"
-msgstr "Аналоговый контроллер "
+msgstr "Аналоговый контроллер"
 
 #: ../plugins/dfinput/cfg-gtk.c:88
 msgid "L-Stick Right"
@@ -1710,22 +1713,20 @@ msgid "Controller 2"
 msgstr "Контроллер 2"
 
 #: ../plugins/dfinput/dfinput.ui.h:8
-#, fuzzy
 msgid "Emulator keys"
-msgstr "Эмулятор(_E)"
+msgstr "Горячие клавиши эмулятора"
 
 #: ../plugins/dfinput/dfinput.ui.h:9
 msgid "Multi-Threaded (Recommended)"
 msgstr "В отдельном потоке (Рекомендуется)"
 
 #: ../plugins/dfinput/dfinput.ui.h:10
-#, fuzzy
 msgid "Hide mouse cursor"
-msgstr "Скрыть курсор"
+msgstr "Скрыть курсор мыши"
 
 #: ../plugins/dfinput/dfinput.ui.h:11
 msgid "Prevent screensaver (xdg-screensaver)"
-msgstr ""
+msgstr "Запретить запуск хранителя экрана (xdg-screensaver)"
 
 #: ../plugins/dfinput/dfinput.ui.h:12 ../win32/gui/WndMain.c:1359
 msgid "Options"
@@ -2123,11 +2124,11 @@ msgstr "Пропускать каждый второй кадр"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:33
 msgid "Repeated flat tex triangles"
-msgstr ""
+msgstr "Повышенная точность отрисовки спрайтов"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:34
 msgid "Needed by Dark Forces"
-msgstr "Необходимо для Dark Forces"
+msgstr "Необходимо для игры Star Wars - Dark Forces"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:35
 msgid "Draw quads with triangles"
@@ -2139,7 +2140,7 @@ msgstr "Улучшенное затенение, худшее текстурир
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:37
 msgid "Fake 'gpu busy' states"
-msgstr "Имитация 'занятости' gpu "
+msgstr "Имитация 'занятости' gpu"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:38
 msgid "Toggle busy flags after drawing"
@@ -2147,11 +2148,13 @@ msgstr "Переключить флаг занятости после отрис
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:39
 msgid "Use Xv VSync on vblank"
-msgstr ""
+msgstr "Использовать Xv VSync"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:40
 msgid "Try to use Xv's vsyncing if available (warning: may be unstable)"
 msgstr ""
+"Использовать Xv для вертикальной синхронизации (осторожно: может работать "
+"нестабильно)"
 
 #: ../plugins/dfxvideo/gpucfg-0.1df/dfxvideo.ui.h:41
 msgid "0: Off (fastest)"
@@ -2260,9 +2263,8 @@ msgid "Keep psx aspect ratio"
 msgstr "Сохранять пропорции картинки psx"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:7
-#, fuzzy
 msgid "Force 4:3 aspect ratio"
-msgstr "Сохранять пропорции картинки psx"
+msgstr "Установить пропорции картинки 4:3 принудительно"
 
 #: ../plugins/peopsxgl/gpucfg/peopsxgl.ui.h:8
 msgid "Window options"
@@ -3040,7 +3042,6 @@ msgid "Korean"
 msgstr "Корейский"
 
 #: ../win32/gui/WndMain.c:216
-#, fuzzy
 msgid ""
 "Usage: pcsxr [options]\n"
 "\toptions:\n"
@@ -3058,7 +3059,7 @@ msgstr ""
 "\t-slowboot\t\tВключить загрузку через оболочку BIOS\n"
 "\t-runcd\t\tЗапустить с CD-привода (требует -nogui)\n"
 "\t-cdfile FILE\tЗапустить с файла образа CD (требует -nogui)\n"
-"\t-h -help\tПоказать это сообщение"
+"\t-help\t\tПоказать это сообщение"
 
 #: ../win32/gui/WndMain.c:351 ../win32/gui/WndMain.c:397
 msgid "PCSXR State Format"
@@ -3196,9 +3197,8 @@ msgid "Hide cursor"
 msgstr "Скрыть курсор"
 
 #: ../win32/gui/WndMain.c:1356
-#, fuzzy
 msgid "Save window position"
-msgstr "Опции окна"
+msgstr "Сохранять положение окна"
 
 #: ../win32/gui/WndMain.c:1360
 msgid "Psx System Type"
