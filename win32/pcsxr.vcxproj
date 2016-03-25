@@ -199,6 +199,7 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="..\libpcsxcore\pgxp_gte.c" />
     <ClCompile Include="..\libpcsxcore\plugins.c">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -418,6 +419,7 @@
     <ClInclude Include="..\libpcsxcore\gte_divider.h" />
     <ClInclude Include="..\libpcsxcore\mdec.h" />
     <ClInclude Include="..\libpcsxcore\misc.h" />
+    <ClInclude Include="..\libpcsxcore\pgxp_gte.h" />
     <ClInclude Include="..\libpcsxcore\plugins.h" />
     <ClInclude Include="..\libpcsxcore\ppf.h" />
     <ClInclude Include="..\libpcsxcore\psemu_plugin_defs.h" />

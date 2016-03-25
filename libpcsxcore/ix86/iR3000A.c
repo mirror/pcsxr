@@ -25,6 +25,7 @@
 
 #include "ix86.h"
 #include <sys/mman.h>
+#include "pgxp_gte.h"
 
 #ifndef MAP_ANONYMOUS
 #define MAP_ANONYMOUS MAP_ANON
@@ -1546,14 +1547,15 @@ static void recLW() {
 //		SysPrintf("unhandled r32 %x\n", addr);
 	}
 
+	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	iPushOfB();
-	CALLFunc((u32)psxMemRead32);
+	CALLFunc((u32)PGXP_psxMemRead32Trace);
 	if (_Rt_) {
 		iRegs[_Rt_].state = ST_UNK;
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 	}
 //	ADD32ItoR(ESP, 4);
-	resp+= 4;
+	resp+= 8;
 }
 
 extern u32 LWL_MASK[4];
@@ -1601,12 +1603,13 @@ void recLWL() {
 		if (_Imm_) ADD32ItoR(EAX, _Imm_);
 	}
 	PUSH32R  (EAX);
+	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	AND32ItoR(EAX, ~3);
 	PUSH32R  (EAX);
-	CALLFunc((u32)psxMemRead32);
+	CALLFunc((u32)PGXP_psxMemRead32Trace);
 
 	if (_Rt_) {
-		ADD32ItoR(ESP, 4);
+		ADD32ItoR(ESP, 8);
 		POP32R   (EDX);
 		AND32ItoR(EDX, 0x3); // shift = addr & 3;
 
@@ -1629,7 +1632,7 @@ void recLWL() {
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 	} else {
 //		ADD32ItoR(ESP, 8);
-		resp+= 8;
+		resp+= 12;
 	}
 }
 
@@ -1756,12 +1759,13 @@ void recLWR() {
 		if (_Imm_) ADD32ItoR(EAX, _Imm_);
 	}
 	PUSH32R  (EAX);
+	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	AND32ItoR(EAX, ~3);
 	PUSH32R  (EAX);
-	CALLFunc((u32)psxMemRead32);
+	CALLFunc((u32)PGXP_psxMemRead32Trace);
 
 	if (_Rt_) {
-		ADD32ItoR(ESP, 4);
+		ADD32ItoR(ESP, 8);
 		POP32R   (EDX);
 		AND32ItoR(EDX, 0x3); // shift = addr & 3;
 
@@ -1785,7 +1789,7 @@ void recLWR() {
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 	} else {
 //		ADD32ItoR(ESP, 8);
-		resp+= 8;
+		resp+= 12;
 	}
 }
 
@@ -1978,15 +1982,16 @@ static void recSW() {
 //		SysPrintf("unhandled w32 %x\n", addr);
 	}
 
+	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	if (IsConst(_Rt_)) {
 		PUSH32I  (iRegs[_Rt_].k);
 	} else {
 		PUSH32M  ((u32)&psxRegs.GPR.r[_Rt_]);
 	}
 	iPushOfB();
-	CALLFunc((u32)psxMemWrite32);
+	CALLFunc((u32)PGXP_psxMemWrite32Trace);
 //	ADD32ItoR(ESP, 8);
-	resp+= 8;
+	resp+= 12;
 }
 //#endif
 
@@ -2104,12 +2109,13 @@ void recSWL() {
 		if (_Imm_) ADD32ItoR(EAX, _Imm_);
 	}
 	PUSH32R  (EAX);
+	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	AND32ItoR(EAX, ~3);
 	PUSH32R  (EAX);
 
-	CALLFunc((u32)psxMemRead32);
+	CALLFunc((u32)PGXP_psxMemRead32Trace);
 
-	ADD32ItoR(ESP, 4);
+	ADD32ItoR(ESP, 8);
 	POP32R   (EDX);
 	AND32ItoR(EDX, 0x3); // shift = addr & 3;
 
@@ -2126,6 +2132,8 @@ void recSWL() {
 	}
 	SHR32CLtoR(EDX); // _rRt_ >> SWL_SHIFT[shift]
 
+	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+
 	OR32RtoR (EAX, EDX);
 	PUSH32R  (EAX);
 
@@ -2137,9 +2145,9 @@ void recSWL() {
 	AND32ItoR(EAX, ~3);
 	PUSH32R  (EAX);
 
-	CALLFunc((u32)psxMemWrite32);
+	CALLFunc((u32)PGXP_psxMemWrite32Trace);
 //	ADD32ItoR(ESP, 8);
-	resp+= 8;
+	resp+= 12;
 }
 
 extern u32 SWR_MASK[4];
@@ -2186,12 +2194,13 @@ void recSWR() {
 		if (_Imm_) ADD32ItoR(EAX, _Imm_);
 	}
 	PUSH32R  (EAX);
+	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	AND32ItoR(EAX, ~3);
 	PUSH32R  (EAX);
 
-	CALLFunc((u32)psxMemRead32);
+	CALLFunc((u32)PGXP_psxMemRead32Trace);
 
-	ADD32ItoR(ESP, 4);
+	ADD32ItoR(ESP, 8);
 	POP32R   (EDX);
 	AND32ItoR(EDX, 0x3); // shift = addr & 3;
 
@@ -2208,6 +2217,8 @@ void recSWR() {
 	}
 	SHL32CLtoR(EDX); // _rRt_ << SWR_SHIFT[shift]
 
+	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+
 	OR32RtoR (EAX, EDX);
 	PUSH32R  (EAX);
 
@@ -2219,9 +2230,9 @@ void recSWR() {
 	AND32ItoR(EAX, ~3);
 	PUSH32R  (EAX);
 
-	CALLFunc((u32)psxMemWrite32);
+	CALLFunc((u32)PGXP_psxMemWrite32Trace);
 //	ADD32ItoR(ESP, 8);
-	resp += 8;
+	resp += 12;
 }
 
 /*REC_FUNC(SLL);

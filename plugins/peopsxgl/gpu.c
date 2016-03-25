@@ -48,6 +48,7 @@ static int iOldMode=0;
 #include "fps.h"
 #include "key.h"
 #include "gte_accuracy.h"
+#include "PGXP_gpu.h"
 #ifdef _WINDOWS
 #include "resource.h"
 #include "ssave.h"
@@ -3145,7 +3146,11 @@ long CALLBACK GPUdmaChain(uint32_t *baseAddrL, uint32_t addr)
 
    dmaMem=addr+4;
 
-   if(count>0) GPUwriteDataMem(&baseAddrL[dmaMem>>2],count);
+   if (count > 0)
+   {
+	   PGXP_SetAddress(dmaMem >> 2);
+	   GPUwriteDataMem(&baseAddrL[dmaMem >> 2], count);
+   }
 
    addr = baseAddrL[addr>>2]&0xffffff;
   }

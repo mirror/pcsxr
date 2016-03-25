@@ -19,6 +19,7 @@
 #include "psxhw.h"
 #include "gpu.h"
 #include "psxdma.h"
+#include "pgxp_gte.h"
 
 #define GPUSTATUS_ODDLINES            0x80000000
 #define GPUSTATUS_DMABITS             0x60000000 // Two bits
@@ -142,6 +143,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 #endif
 				break;
 			}
+			GPU_pgxpMemory(madr, PGXP_GetMem());
 			GPU_writeDataMem(ptr, size);
 
 #if 0

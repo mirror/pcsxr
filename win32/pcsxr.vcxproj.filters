@@ -192,6 +192,9 @@
     <ClCompile Include="zlib\zutil.c">
       <Filter>zlib</Filter>
     </ClCompile>
+    <ClCompile Include="..\libpcsxcore\pgxp_gte.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\libpcsxcore\cdriso.h">
@@ -354,6 +357,9 @@
     </ClInclude>
     <ClInclude Include="zlib\zutil.h">
       <Filter>zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\pgxp_gte.h">
+      <Filter>libpcsxcore</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

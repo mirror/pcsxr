@@ -34,3 +34,4 @@ EXPORTS
 	GPUsetframelimit    @27
 	GPUvisualVibration  @28
 	GPUaddVertex        @29
+	GPUpgxpMemory		@30

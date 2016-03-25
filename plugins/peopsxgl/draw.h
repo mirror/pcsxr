@@ -35,10 +35,10 @@ BOOL bSetupPixelFormat(HDC hDC);
 
 int  GLinitialize();
 void GLcleanup();
-BOOL offset2(void);
-BOOL offset3(void);
-BOOL offset4(void);
-BOOL offsetline(void);
+BOOL offset2(unsigned int* addr);
+BOOL offset3(unsigned int* addr);
+BOOL offset4(unsigned int* addr);
+BOOL offsetline(unsigned int* addr);
 void offsetST(void);
 void offsetBlk(void);
 void offsetScreenUpload(int Position);

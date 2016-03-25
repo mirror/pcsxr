@@ -44,6 +44,7 @@ int psxInit() {
 	Log = 0;
 
 	if (psxMemInit() == -1) return -1;
+	PGXP_Init();
 
 	return psxCpu->Init();
 }

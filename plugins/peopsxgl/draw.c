@@ -28,6 +28,7 @@
 #include "menu.h"
 
 #include "gte_accuracy.h"
+#include "pgxp_gpu.h"
 
 #if defined(_MACGL)
 // if you use it, you must include it
@@ -943,7 +944,7 @@ void offsetline(void)
 #define VERTEX_OFFX 0.2f
 #define VERTEX_OFFY 0.2f
 
-BOOL offsetline(void)           
+BOOL offsetline(unsigned int* addr)
 {
  short x0,x1,y0,y1,dx,dy;float px,py;
 
@@ -1004,6 +1005,8 @@ BOOL offsetline(void)
      else           py= 0.0f;
     }
   } 
+
+ PGXP_GetVertices(addr, vertex);
  
  vertex[0].x=(short)((float)x0-px);
  vertex[3].x=(short)((float)x0+py);
@@ -1040,7 +1043,7 @@ BOOL offsetline(void)
 
 ///////////////////////////////////////////////////////// 
 
-BOOL offset2(void)
+BOOL offset2(unsigned int* addr)
 {
  if(bDisplayNotSet)
   SetOGLDisplaySettings(1);
@@ -1066,6 +1069,8 @@ BOOL offset2(void)
 	vertex[1].y=ly1;
  }
 
+ PGXP_GetVertices(addr, vertex);
+
  vertex[0].x+=PSXDisplay.CumulOffset.x;
  vertex[1].x+=PSXDisplay.CumulOffset.x;
  vertex[0].y+=PSXDisplay.CumulOffset.y;
@@ -1076,7 +1081,7 @@ BOOL offset2(void)
 
 ///////////////////////////////////////////////////////// 
 
-BOOL offset3(void)
+BOOL offset3(unsigned int* addr)
 {
  if(bDisplayNotSet)
   SetOGLDisplaySettings(1);
@@ -1109,6 +1114,8 @@ BOOL offset3(void)
 	vertex[2].y=ly2;
  }
 
+ PGXP_GetVertices(addr, vertex);
+
  vertex[0].x+=PSXDisplay.CumulOffset.x;
  vertex[1].x+=PSXDisplay.CumulOffset.x;
  vertex[2].x+=PSXDisplay.CumulOffset.x;
@@ -1121,7 +1128,7 @@ BOOL offset3(void)
 
 ///////////////////////////////////////////////////////// 
 
-BOOL offset4(void)
+BOOL offset4(unsigned int* addr)
 {
  if(bDisplayNotSet)
   SetOGLDisplaySettings(1);
@@ -1161,6 +1168,8 @@ BOOL offset4(void)
 	vertex[3].y=ly3;
  }
  
+ PGXP_GetVertices(addr, vertex);
+
  vertex[0].x+=PSXDisplay.CumulOffset.x;
  vertex[1].x+=PSXDisplay.CumulOffset.x;
  vertex[2].x+=PSXDisplay.CumulOffset.x;

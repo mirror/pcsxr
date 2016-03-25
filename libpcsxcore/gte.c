@@ -7,6 +7,7 @@
 
 #include "gte.h"
 #include "psxmem.h"
+#include "pgxp_gte.h"
 
 #define GTE_SF(op) ((op >> 19) & 1)
 #define GTE_MX(op) ((op >> 17) & 3)
@@ -251,6 +252,7 @@ static void CTC2(u32 value, int reg) {
 void gteMFC2() {
 	if (!_Rt_) return;
 	psxRegs.GPR.r[_Rt_] = MFC2(_Rd_);
+	PGXP_MFC2(_Rt_, _Rd_, psxRegs.CP2D.p[_Rd_].d);
 }
 
 void gteCFC2() {
@@ -259,6 +261,7 @@ void gteCFC2() {
 }
 
 void gteMTC2() {
+	PGXP_MTC2(_Rt_, _Rd_, psxRegs.GPR.p[_Rt_].d);
 	MTC2(psxRegs.GPR.r[_Rt_], _Rd_);
 }
 
@@ -269,11 +272,15 @@ void gteCTC2() {
 #define _oB_ (psxRegs.GPR.r[_Rs_] + _Imm_)
 
 void gteLWC2() {
-	MTC2(psxMemRead32(_oB_), _Rt_);
+	u32 val = psxMemRead32(_oB_);
+	PGXP_LWC2(_oB_, _Rt_, val);
+	MTC2(val, _Rt_);
 }
 
 void gteSWC2() {
-	psxMemWrite32(_oB_, MFC2(_Rt_));
+	u32 val = MFC2(_Rt_);
+	PGXP_SWC2(_oB_, _Rt_, val);
+	psxMemWrite32(_oB_, val);
 }
 
 inline s64 gte_shift(s64 a, int sf) {
@@ -490,10 +497,9 @@ int docop2(int op) {
 		SX2 = Lm_G1(F((s64) OFX + ((s64) IR1 * h_over_sz3) * (Config.Widescreen ? 0.75 : 1)) >> 16);
 		SY2 = Lm_G2(F((s64) OFY + ((s64) IR2 * h_over_sz3)) >> 16);
 		
-		GPU_addVertex(SX2, SY2,
-                  Lm_G1_ia((s64) OFX + (s64)(IR1 * h_over_sz3) * (Config.Widescreen ? 0.75 : 1)),
-                  Lm_G2_ia((s64) OFY + (s64)(IR2 * h_over_sz3)),
-				  ((s64)SZ3));
+		PGXP_pushSXYZ2s(Lm_G1_ia((s64)OFX + (s64)(IR1 * h_over_sz3) * (Config.Widescreen ? 0.75 : 1)), 
+			Lm_G2_ia((s64)OFY + (s64)(IR2 * h_over_sz3)),
+			SZ3);
 		
 		MAC0 = F((s64) DQB + ((s64) DQA * h_over_sz3));
 		IR0 = Lm_H(m_mac0, 1);
@@ -503,8 +509,10 @@ int docop2(int op) {
 #ifdef GTE_LOG
 		GTELOG("%08x NCLIP", op);
 #endif
-
-		MAC0 = F((s64) (SX0 * SY1) + (SX1 * SY2) + (SX2 * SY0) - (SX0 * SY2) - (SX1 * SY0) - (SX2 * SY1));
+		if (PGXP_NLCIP_valid())
+			MAC0 = F(PGXP_NCLIP());
+		else
+			MAC0 = F((s64) (SX0 * SY1) + (SX1 * SY2) + (SX2 * SY0) - (SX0 * SY2) - (SX1 * SY0) - (SX2 * SY1));
 		return 1;
 
 	case 0x0c:
@@ -879,10 +887,9 @@ int docop2(int op) {
 			SX2 = Lm_G1(F((s64) OFX + ((s64) IR1 * h_over_sz3) * (Config.Widescreen ? 0.75 : 1)) >> 16);
 			SY2 = Lm_G2(F((s64) OFY + ((s64) IR2 * h_over_sz3)) >> 16);
 			
-			GPU_addVertex(SX2, SY2,
-                  Lm_G1_ia((s64) OFX + (s64)(IR1 * h_over_sz3) * (Config.Widescreen ? 0.75 : 1)),
-                  Lm_G2_ia((s64) OFY + (s64)(IR2 * h_over_sz3)),
-				  ((s64)SZ3));
+			PGXP_pushSXYZ2s(Lm_G1_ia((s64)OFX + (s64)(IR1 * h_over_sz3) * (Config.Widescreen ? 0.75 : 1)),
+				Lm_G2_ia((s64)OFY + (s64)(IR2 * h_over_sz3)), 
+				SZ3);
 		}
 
 		MAC0 = F((s64) DQB + ((s64) DQA * h_over_sz3));
