@@ -1005,8 +1005,6 @@ BOOL offsetline(unsigned int* addr)
      else           py= 0.0f;
     }
   } 
-
- PGXP_GetVertices(addr, vertex);
  
  vertex[0].x=(short)((float)x0-px);
  vertex[3].x=(short)((float)x0+py);
@@ -1019,6 +1017,9 @@ BOOL offsetline(unsigned int* addr)
 
  vertex[1].y=(short)((float)y1+px);
  vertex[2].y=(short)((float)y1+py);
+
+
+	PGXP_GetVertices(addr, vertex);
 
  if(vertex[0].x==vertex[3].x &&                        // ortho rect? done
     vertex[1].x==vertex[2].x &&

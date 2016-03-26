@@ -152,7 +152,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="pgxp_gpu.c" />
+    <ClCompile Include="..\..\..\plugins\peopsxgl\pgxp_gpu.c" />
     <ClCompile Include="winsrc\cfg.c">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -222,7 +222,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pgxp_gpu.h" />
+    <ClInclude Include="..\..\..\plugins\peopsxgl\pgxp_gpu.h" />
     <ClInclude Include="winsrc\ssave.h" />
     <ClInclude Include="..\..\..\plugins\peopsxgl\cfg.h" />
     <ClInclude Include="..\..\..\plugins\peopsxgl\draw.h" />

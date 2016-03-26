@@ -45,7 +45,7 @@
     <ClCompile Include="..\..\..\plugins\peopsxgl\texture.c">
       <Filter>peopsxgl</Filter>
     </ClCompile>
-    <ClCompile Include="pgxp_gpu.c">
+    <ClCompile Include="..\..\..\plugins\peopsxgl\pgxp_gpu.c">
       <Filter>peopsxgl</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,7 +93,7 @@
       <Filter>peopsxgl</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="pgxp_gpu.h">
+    <ClInclude Include="..\..\..\plugins\peopsxgl\pgxp_gpu.h">
       <Filter>peopsxgl</Filter>
     </ClInclude>
   </ItemGroup>

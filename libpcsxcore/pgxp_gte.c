@@ -260,7 +260,7 @@ float PGXP_NCLIP()
 
 	// ensure fractional values are not incorrectly rounded to 0
 	if (fabs(nclip) < 1.0f)
-		nclip += (nclip < 0.f ? -2 : 2);
+		nclip += (nclip < 0.f ? -1 : 1);
 
 	return nclip;
 }
@@ -349,7 +349,7 @@ void PGXP_SWC2(u32 addr, u32 gtr, u32 value)
 	WriteMem(PGXP_validateXY(&GTE_reg[gtr], value), addr);
 }
 
-// ltore 32bit word
+// load 32bit word
 void PGPR_L32(u32 addr, u32 code, u32 value)
 {
 	u32 reg = ((code >> 16) & 0x1F); // The rt part of the instruction register 
@@ -377,7 +377,7 @@ void PGPR_L32(u32 addr, u32 code, u32 value)
 		break;
 	default:
 		// invalidate register
-		//	WriteMem(p, addr);
+	//	CPU_reg[reg] = p;
 		break;
 	}
 
@@ -386,7 +386,7 @@ void PGPR_L32(u32 addr, u32 code, u32 value)
 #endif
 }
 
-// store 32bit word
+// store 16bit word
 void PGPR_S32(u32 addr, u32 code, u32 value)
 {
 	u32 reg = ((code >> 16) & 0x1F); // The rt part of the instruction register 
@@ -423,6 +423,38 @@ void PGPR_S32(u32 addr, u32 code, u32 value)
 	}
 }
 
+// load 16bit word
+void PGPR_L16(u32 addr, u32 code, u16 value)
+{
+	u32 reg = ((code >> 16) & 0x1F); // The rt part of the instruction register 
+	u32 op = ((code >> 26));
+	precise_value p;
+
+	low_value temp;
+	temp.word = value;
+
+	p.x = p.y = p.valid = p.count = 0;
+
+	// invalidate register
+	CPU_reg[reg] = p;
+}
+
+// store 32bit word
+void PGPR_S16(u32 addr, u32 code, u32 value)
+{
+	u32 reg = ((code >> 16) & 0x1F); // The rt part of the instruction register 
+	u32 op = ((code >> 26));
+	precise_value p;
+
+	low_value temp;
+	temp.word = value;
+
+	p.x = p.y = p.valid = p.count = 0;
+
+	// invalidate memory
+	WriteMem(p, addr);
+}
+
 u32 PGXP_psxMemRead32Trace(u32 mem, u32 code)
 {
 	u32 value = psxMemRead32(mem);
@@ -434,4 +466,17 @@ void PGXP_psxMemWrite32Trace(u32 mem, u32 value, u32 code)
 {
 	PGPR_S32(mem, code, value);
 	psxMemWrite32(mem, value);
+}
+
+u16 PGXP_psxMemRead16Trace(u32 mem, u32 code)
+{
+	u16 value = psxMemRead16(mem);
+	PGPR_L16(mem, code, value);
+	return value;
+}
+
+void PGXP_psxMemWrite16Trace(u32 mem, u16 value, u32 code)
+{
+	PGPR_S16(mem, code, value);
+	psxMemWrite16(mem, value);
 }
