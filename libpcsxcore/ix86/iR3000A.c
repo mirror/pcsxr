@@ -1283,15 +1283,16 @@ static void recLB() {
 //		SysPrintf("unhandled r8 %x\n", addr);
 	}
 
+	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	iPushOfB();
-	CALLFunc((u32)psxMemRead8);
+	CALLFunc((u32)PGXP_psxMemRead8Trace);
 	if (_Rt_) {
 		iRegs[_Rt_].state = ST_UNK;
 		MOVSX32R8toR(EAX, EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 	}
 //	ADD32ItoR(ESP, 4);
-	resp+= 4;
+	resp+= 8;
 }
 
 static void recLBU() {
@@ -1328,15 +1329,16 @@ static void recLBU() {
 //		SysPrintf("unhandled r8u %x\n", addr);
 	}
 
+	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	iPushOfB();
-	CALLFunc((u32)psxMemRead8);
+	CALLFunc((u32)PGXP_psxMemRead8Trace);
 	if (_Rt_) {
 		iRegs[_Rt_].state = ST_UNK;
 		MOVZX32R8toR(EAX, EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 	}
 //	ADD32ItoR(ESP, 4);
-	resp+= 4;
+	resp+= 8;
 }
 
 static void recLH() {
@@ -1831,15 +1833,16 @@ static void recSB() {
 //		SysPrintf("unhandled w8 %x\n", addr);
 	}
 
+	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	if (IsConst(_Rt_)) {
 		PUSH32I  (iRegs[_Rt_].k);
 	} else {
 		PUSH32M  ((u32)&psxRegs.GPR.r[_Rt_]);
 	}
 	iPushOfB();
-	CALLFunc((u32)psxMemWrite8);
+	CALLFunc((u32)PGXP_psxMemWrite8Trace);
 //	ADD32ItoR(ESP, 8);
-	resp+= 8;
+	resp+= 12;
 }
 
 static void recSH() {

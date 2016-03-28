@@ -64,7 +64,7 @@ void PGXP_SetAddress(unsigned int addr)
 int PGXP_GetVertices(unsigned int* addr, void* pOutput)
 {
 	unsigned int	primCmd		= ((*addr >> 24) & 0xff);		// primitive command
-	unsigned int	primIdx		= (primCmd - 0x20) >> 2;		// index to primitive lookup
+	unsigned int	primIdx		= min((primCmd - 0x20) >> 2, 8);		// index to primitive lookup
 	OGLVertex*		pVertex		= (OGLVertex*)pOutput;			// pointer to output vertices
 	unsigned int	stride		= primStrideTable[primIdx];		// stride between vertices
 	unsigned int	count		= primCountTable[primIdx];		// number of vertices

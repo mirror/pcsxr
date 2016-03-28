@@ -74,20 +74,21 @@ precise_value* ReadMem(u32 addr)
 	uint32_t paddr = addr;
 	int* ip = NULL;
 
-	switch (paddr >> 20)
+	switch (paddr >> 24)
 	{
-	case 0x800:
-	case 0x801:
-	case 0xa00:
-	case 0xa01:
-	case 0x000:
-	case 0x001:
+	case 0x80:
+	case 0xa0:
+	case 0x00:
 		memType = VRAM;
 		break;
-	case 0x1f8:
-		memType = SCRATCH;
-		break;
 	default:
+		if ((paddr >> 20) == 0x1f8)
+		{
+			memType = SCRATCH;
+			break;
+		}
+		//		if (value.valid)	//FAILED @ 0x807FFEE8
+		//			*ip = 5;
 		return NULL;
 	}
 	
@@ -96,12 +97,14 @@ precise_value* ReadMem(u32 addr)
 #endif
 	if (memType == VRAM)
 	{
-		paddr = (paddr & 0x1FFFFF) >> 2;
+		// RAM furher mirrored over 8MB
+		//paddr = (paddr & 0x1FFFFF) >> 2;
+		paddr = ((paddr & 0x7FFFFF) % 0x200000) >> 2;
 		return &Mem[paddr];
 	}
 	else if (memType == SCRATCH)
 	{
-		paddr = (paddr & 0x1FFFFF) >> 2;
+		paddr = (paddr & 0x1FFFFF) >> 2;// (paddr & 0x3FFF) >> 2;
 		return &Scratch[paddr];
 	}
 
@@ -114,22 +117,22 @@ void WriteMem(precise_value value, u32 addr)
 	uint32_t paddr = addr;
 	int* ip = NULL;
 
-	switch (paddr >> 20)
+	switch (paddr >> 24)
 	{
-	case 0x800:
-	case 0x801:
-	case 0xa00:
-	case 0xa01:
-	case 0x000:
-	case 0x001:
+	case 0x80:
+	case 0xa0:
+	case 0x00:
 		memType = VRAM;
 		break;
-	case 0x1f8:
-		memType = SCRATCH;
-		break;
 	default:
-		if (value.valid)
-			*ip = 5;
+		if ((paddr >> 20) == 0x1f8)
+		{
+			memType = SCRATCH;
+			break;
+		}
+		else
+			if (value.valid)	//FAILED @ 0x807FFEE8
+				*ip = 5;
 		return;
 	}
 
@@ -140,7 +143,9 @@ void WriteMem(precise_value value, u32 addr)
 	// Store to RAM
 	if (memType == VRAM)
 	{
-		paddr = (paddr & 0x1FFFFF) >> 2;
+		// RAM furher mirrored over 8MB
+		//paddr = (paddr & 0x1FFFFF) >> 2;
+		paddr = ((paddr & 0x7FFFFF) % 0x200000) >> 2;// (paddr & 0x3FFF) >> 2;
 		Mem[paddr] = value;
 	}
 	else if (memType == SCRATCH)
@@ -423,15 +428,11 @@ void PGPR_S32(u32 addr, u32 code, u32 value)
 	}
 }
 
-// load 16bit word
-void PGPR_L16(u32 addr, u32 code, u16 value)
+// invalidate register (invalid 8/16 bit read)
+void PGPR_InvalidLoad(u32 addr, u32 code)
 {
 	u32 reg = ((code >> 16) & 0x1F); // The rt part of the instruction register 
-	u32 op = ((code >> 26));
 	precise_value p;
-
-	low_value temp;
-	temp.word = value;
 
 	p.x = p.y = p.valid = p.count = 0;
 
@@ -439,15 +440,11 @@ void PGPR_L16(u32 addr, u32 code, u16 value)
 	CPU_reg[reg] = p;
 }
 
-// store 32bit word
-void PGPR_S16(u32 addr, u32 code, u32 value)
+// invalidate memory address (invalid 8/16 bit write)
+void PGPR_InvalidStore(u32 addr, u32 code)
 {
 	u32 reg = ((code >> 16) & 0x1F); // The rt part of the instruction register 
-	u32 op = ((code >> 26));
 	precise_value p;
-
-	low_value temp;
-	temp.word = value;
 
 	p.x = p.y = p.valid = p.count = 0;
 
@@ -471,12 +468,25 @@ void PGXP_psxMemWrite32Trace(u32 mem, u32 value, u32 code)
 u16 PGXP_psxMemRead16Trace(u32 mem, u32 code)
 {
 	u16 value = psxMemRead16(mem);
-	PGPR_L16(mem, code, value);
+	PGPR_InvalidLoad(mem, code);
 	return value;
 }
 
 void PGXP_psxMemWrite16Trace(u32 mem, u16 value, u32 code)
 {
-	PGPR_S16(mem, code, value);
+	PGPR_InvalidStore(mem, code);
 	psxMemWrite16(mem, value);
+}
+
+u8 PGXP_psxMemRead8Trace(u32 mem, u32 code)
+{
+	u8 value = psxMemRead8(mem);
+	PGPR_InvalidLoad(mem, code);
+	return value;
+}
+
+void PGXP_psxMemWrite8Trace(u32 mem, u8 value, u32 code)
+{
+	PGPR_InvalidStore(mem, code);
+	psxMemWrite8(mem, value);
 }
