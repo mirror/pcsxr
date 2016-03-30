@@ -156,6 +156,7 @@ int LoadConfig(PcsxConfig *Conf) {
 		Config.AltSpeed2 = 250;
 
 	Config.HackFix = GetValuel(data, "HackFix");
+        Config.MemHack = GetValuel(data, "MemHack");
 
 	free(data);
 
@@ -210,6 +211,7 @@ void SaveConfig() {
 	SetValuel("AltSpeed2", Config.AltSpeed2);
 
 	SetValuel("HackFix", Config.HackFix);
+        SetValuel("MemHack", Config.MemHack);
 
 	fclose(f);
 }

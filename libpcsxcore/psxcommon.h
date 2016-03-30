@@ -162,6 +162,7 @@ typedef struct {
 	u32 AltSpeed1; // Percent relative to natural speed.
 	u32 AltSpeed2;
 	u8 HackFix;
+	u8 MemHack;
 #ifdef _WIN32
 	char Lang[256];
 #endif
