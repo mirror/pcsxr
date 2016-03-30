@@ -217,7 +217,7 @@ void CALLBACK GPU__visualVibration(unsigned long iSmall, unsigned long iBig) {}
 void CALLBACK GPU__cursor(int player, int x, int y) {}
 void CALLBACK GPU__addVertex(short sx,short sy,s64 fx,s64 fy,s64 fz) {}
 void CALLBACK GPU__setSpeed(float newSpeed) {}
-void CALLBACK GPU__pgxpMemory(unsigned char* pMem, unsigned int count, unsigned int addr, unsigned char* pVRAM) {}
+void CALLBACK GPU__pgxpMemory(unsigned int addr, unsigned char* pVRAM) {}
 
 #define LoadGpuSym1(dest, name) \
 	LoadSym(GPU_##dest, GPU##dest, name, TRUE);
