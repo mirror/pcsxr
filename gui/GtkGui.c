@@ -229,7 +229,11 @@ gchar* get_state_filename(int i) {
 
 	trimlabel = get_cdrom_label_trim();
 
-	sprintf(SStateFile, "%.32s-%.9s.%3.3d", trimlabel, CdromId, i);
+	if (i >= OLD_SLOT && i <= LAST_OLD_SLOT) {
+		sprintf(SStateFile, "%.32s-%.9s.old_%d", trimlabel, CdromId, i - OLD_SLOT);
+	} else {
+		sprintf(SStateFile, "%.32s-%.9s.%3.3d", trimlabel, CdromId, i);
+	}
 	state_filename = g_build_filename (getenv("HOME"), STATES_DIR, SStateFile, NULL);
 
 	g_free(trimlabel);

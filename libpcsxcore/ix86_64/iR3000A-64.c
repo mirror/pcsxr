@@ -482,6 +482,9 @@ static int recInit() {
 
 	for (i=0; i<0x08; i++) psxRecLUT[i + 0xbfc0] = (uptr)&recROM[PTRMULT*(i << 16)];
 
+    //x86Init();
+    cpudetectInit();
+
 	return 0;
 }
 
@@ -489,8 +492,6 @@ static void recReset() {
 	memset(recRAM, 0, 0x200000 * PTRMULT);
 	memset(recROM, 0, 0x080000 * PTRMULT);
 
-	//x86Init();
-	cpudetectInit();
 	x86SetPtr(recMem);
 
 	branch = 0;

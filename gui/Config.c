@@ -148,6 +148,13 @@ int LoadConfig(PcsxConfig *Conf) {
 	Config.RewindCount = GetValuel(data, "RewindCount");
 	Config.RewindInterval = GetValuel(data, "RewindInterval");
 
+	Config.AltSpeed1 = GetValuel(data, "AltSpeed1");
+	if (!Config.AltSpeed1)
+		Config.AltSpeed1 = 50;
+	Config.AltSpeed2 = GetValuel(data, "AltSpeed2");
+	if (!Config.AltSpeed2)
+		Config.AltSpeed2 = 250;
+
 	Config.HackFix = GetValuel(data, "HackFix");
 
 	free(data);
@@ -198,6 +205,9 @@ void SaveConfig() {
 	SetValuel("PsxType", Config.PsxType);
 	SetValuel("RewindCount", Config.RewindCount);
 	SetValuel("RewindInterval", Config.RewindInterval);
+
+	SetValuel("AltSpeed1", Config.AltSpeed1);
+	SetValuel("AltSpeed2", Config.AltSpeed2);
 
 	SetValuel("HackFix", Config.HackFix);
 

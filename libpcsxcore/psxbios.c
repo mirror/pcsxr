@@ -165,12 +165,21 @@ char *biosC0n[256] = {
 #define ra (psxRegs.GPR.n.ra)
 #define pc0 (psxRegs.pc)
 
+#ifdef __NO_ASSERTS__
 #define Ra0 ((char *)PSXM(a0))
 #define Ra1 ((char *)PSXM(a1))
 #define Ra2 ((char *)PSXM(a2))
 #define Ra3 ((char *)PSXM(a3))
 #define Rv0 ((char *)PSXM(v0))
 #define Rsp ((char *)PSXM(sp))
+#else
+#define Ra0 (assert(PSXM(a0) != NULL), (char *)PSXM(a0))
+#define Ra1 (assert(PSXM(a1) != NULL), (char *)PSXM(a1))
+#define Ra2 (assert(PSXM(a2) != NULL), (char *)PSXM(a2))
+#define Ra3 (assert(PSXM(a3) != NULL), (char *)PSXM(a3))
+#define Rv0 (assert(PSXM(v0) != NULL), (char *)PSXM(v0))
+#define Rsp (assert(PSXM(sp) != NULL), (char *)PSXM(sp))
+#endif
 
 typedef struct {
 	u32 desc;
@@ -655,7 +664,7 @@ void psxBios_memset() { // 0x2b
 		while((s32)a2 > 0)
 		{
 			a2--;
-			psxMu8ref(a0) = a1;
+			*PSXM(a0) = a1;
 			a0++;
 		}
 	}
@@ -964,7 +973,7 @@ void psxBios_printf() { // 0x3f
 	char *ptmp = tmp;
 	int n=1, i=0, j;
 
-	memcpy(save, (char*)PSXM(sp), 4 * 4);
+	memcpy(save, Rsp, 4 * 4);
 	psxMu32ref(sp) = SWAP32((u32)a0);
 	psxMu32ref(sp + 4) = SWAP32((u32)a1);
 	psxMu32ref(sp + 8) = SWAP32((u32)a2);
@@ -1018,7 +1027,7 @@ _start:
 	}
 	*ptmp = 0;
 
-	memcpy((char*)PSXM(sp), save, 4 * 4);
+	memcpy(Rsp, save, 4 * 4);
 
 #ifdef PSXBIOS_LOG
 	PSXBIOS_LOG("psxBios_%s: %s\n", biosA0n[0x3f], tmp);
@@ -1273,16 +1282,34 @@ void psxBios_SetMem() { // 9f
 }
 
 void psxBios__card_info() { // ab
-	// COTS password option
-	boolean nocard = (Config.NoMemcard || ((strlen(Config.Mcd1) <=0) && (strlen(Config.Mcd2) <=0)));
+	u32 ret;
 #ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s: %x\n", biosA0n[0xab], a0);
+	PSXBIOS_LOG("psxBios_%s: 0x%x\n", biosA0n[0xab], a0);
 #endif
 
 	card_active_chan = a0;
 
+	switch (card_active_chan) {
+	case 0x00: case 0x01: case 0x02: case 0x03:
+		ret = Config.Mcd1[0] ? 0x2 : 0x8;
+		break;
+	case 0x10: case 0x11: case 0x12: case 0x13:
+		ret = Config.Mcd2[0] ? 0x2 : 0x8;
+		break;
+	default:
+#ifdef PSXBIOS_LOG
+		PSXBIOS_LOG("psxBios_%s: UNKNOWN PORT 0x%x\n", biosA0n[0xab], card_active_chan);
+#endif
+		ret = 0x11;
+		break;
+	}
+
+	// COTS password option
+	if (Config.NoMemcard)
+		ret = 0x8;
+
 //	DeliverEvent(0x11, 0x2); // 0xf0000011, 0x0004
-	DeliverEvent(0x81, nocard ? 0x8 : 0x2); // 0xf4000001, 0x0004
+	DeliverEvent(0x81, ret); // 0xf4000001, 0x0004
 
 	v0 = 1; pc0 = ra;
 }
@@ -1673,43 +1700,68 @@ void psxBios_UnDeliverEvent() { // 0x20
 	pc0 = ra;
 }
 
-#define buopen(mcd) { \
-	strcpy(FDesc[1 + mcd].name, Ra0+5); \
-	FDesc[1 + mcd].offset = 0; \
-	FDesc[1 + mcd].mode   = a1; \
- \
-	for (i=1; i<16; i++) { \
-		ptr = Mcd##mcd##Data + 128 * i; \
-		if ((*ptr & 0xF0) != 0x50) continue; \
-		if (strcmp(FDesc[1 + mcd].name, ptr+0xa)) continue; \
-		FDesc[1 + mcd].mcfile = i; \
-		SysPrintf("open %s\n", ptr+0xa); \
-		v0 = 1 + mcd; \
-		break; \
-	} \
-	if (a1 & 0x200 && v0 == -1) { /* FCREAT */ \
-		for (i=1; i<16; i++) { \
-			int j, xor = 0; \
- \
-			ptr = Mcd##mcd##Data + 128 * i; \
-			if ((*ptr & 0xF0) == 0x50) continue; \
-			ptr[0] = 0x50 | (u8)(a1 >> 16); \
-			ptr[4] = 0x00; \
-			ptr[5] = 0x20; \
-			ptr[6] = 0x00; \
-			ptr[7] = 0x00; \
-			ptr[8] = 'B'; \
-			ptr[9] = 'I'; \
-			strcpy(ptr+0xa, FDesc[1 + mcd].name); \
-			for (j=0; j<127; j++) xor^= ptr[j]; \
-			ptr[127] = xor; \
-			FDesc[1 + mcd].mcfile = i; \
-			SysPrintf("openC %s\n", ptr); \
-			v0 = 1 + mcd; \
-			SaveMcd(Config.Mcd##mcd, Mcd##mcd##Data, 128 * i, 128); \
-			break; \
-		} \
-	} \
+static void buopen(int mcd, u8 *ptr, u8 *cfg)
+{
+	int i;
+	u8 *fptr = ptr;
+
+	strcpy(FDesc[1 + mcd].name, Ra0+5);
+	FDesc[1 + mcd].offset = 0;
+	FDesc[1 + mcd].mode   = a1;
+
+	for (i=1; i<16; i++) {
+		fptr += 128;
+		if ((*fptr & 0xF0) != 0x50) continue;
+		if (strcmp(FDesc[1 + mcd].name, fptr+0xa)) continue;
+		FDesc[1 + mcd].mcfile = i;
+		SysPrintf("open %s\n", fptr+0xa);
+		v0 = 1 + mcd;
+		break;
+	}
+	if (a1 & 0x200 && v0 == -1) { /* FCREAT */
+		fptr = ptr;
+		for (i=1; i<16; i++) {
+			int j, xor, nblk = a1 >> 16;
+			u8 *pptr, *fptr2;
+
+			fptr += 128;
+			if ((*fptr & 0xF0) != 0xa0) continue;
+
+			FDesc[1 + mcd].mcfile = i;
+			fptr[0] = 0x51;
+			fptr[4] = 0x00;
+			fptr[5] = 0x20 * nblk;
+			fptr[6] = 0x00;
+			fptr[7] = 0x00;
+			strcpy(fptr+0xa, FDesc[1 + mcd].name);
+			pptr = fptr2 = fptr;
+			for(j=2; j<=nblk; j++) {
+				int k;
+				for(i++; i<16; i++) {
+					fptr2 += 128;
+					
+					memset(fptr2, 0, 128);
+					fptr2[0] = j < nblk ? 0x52 : 0x53;
+					pptr[8] = i - 1;
+					pptr[9] = 0;
+					for (k=0, xor=0; k<127; k++) xor^= pptr[k];
+					pptr[127] = xor;
+					pptr = fptr2;
+					break;
+				}
+				/* shouldn't this return ENOSPC if i == 16? */
+			}
+			pptr[8] = pptr[9] = 0xff;
+			for (j=0, xor=0; j<127; j++) xor^= pptr[j];
+			pptr[127] = xor;
+			SysPrintf("openC %s %d\n", ptr, nblk);
+			v0 = 1 + mcd;
+			/* just go ahead and resave them all */
+			SaveMcd(cfg, ptr, 128, 128 * 15);
+			break;
+		}
+		/* shouldn't this return ENOSPC if i == 16? */
+	}
 }
 
 /*
@@ -1717,8 +1769,7 @@ void psxBios_UnDeliverEvent() { // 0x20
  */
 
 void psxBios_open() { // 0x32
-	int i;
-	char *ptr;
+
 
 #ifdef PSXBIOS_LOG
 	PSXBIOS_LOG("psxBios_%s: %s,%x\n", biosB0n[0x32], Ra0, a1);
@@ -1727,11 +1778,11 @@ void psxBios_open() { // 0x32
 	v0 = -1;
 
 	if (!strncmp(Ra0, "bu00", 4)) {
-		buopen(1);
+		buopen(1, Mcd1Data, Config.Mcd1);
 	}
 
 	if (!strncmp(Ra0, "bu10", 4)) {
-		buopen(2);
+		buopen(2, Mcd2Data, Config.Mcd2);
 	}
 
 	pc0 = ra;
@@ -1770,7 +1821,7 @@ void psxBios_lseek() { // 0x33
 	if (FDesc[1 + mcd].mode & 0x8000) v0 = 0; \
 	else v0 = a2; \
 	FDesc[1 + mcd].offset += v0; \
-	DeliverEvent(0x11, 0x2); /* 0xf0000011, 0x0004 */ \
+		DeliverEvent(0x11, 0x2); /* 0xf0000011, 0x0004 */ \
 	DeliverEvent(0x81, 0x2); /* 0xf4000001, 0x0004 */ \
 }
 
@@ -1791,7 +1842,7 @@ void psxBios_read() { // 0x34
 		case 2: buread(1); break;
 		case 3: buread(2); break;
 	}
-  		
+		
 	pc0 = ra;
 }
 
@@ -1804,7 +1855,7 @@ void psxBios_read() { // 0x34
 	SaveMcd(Config.Mcd##mcd, Mcd##mcd##Data, offset, a2); \
 	if (FDesc[1 + mcd].mode & 0x8000) v0 = 0; \
 	else v0 = a2; \
-	DeliverEvent(0x11, 0x2); /* 0xf0000011, 0x0004 */ \
+		DeliverEvent(0x11, 0x2); /* 0xf0000011, 0x0004 */ \
 	DeliverEvent(0x81, 0x2); /* 0xf4000001, 0x0004 */ \
 }
 
@@ -1855,21 +1906,21 @@ char psxstrbuf[PSXSTRBUFMAX+1];
 unsigned short psxstrbuf_count = 0;
 
 void psxBios_putchar() { // 3d
-    char logchar = ( a0 == 0xa ? '>' : (char)a0 );
-    if (psxstrbuf_count < PSXSTRBUFMAX) psxstrbuf[psxstrbuf_count++] = logchar;
+	char logchar = ( a0 == 0xa ? '>' : (char)a0 );
+	if (psxstrbuf_count < PSXSTRBUFMAX) psxstrbuf[psxstrbuf_count++] = logchar;
 
 #ifdef PSXBIOS_LOG
 	PSXBIOS_LOG("psxBios_%s: %x (%c)\n", biosB0n[0x3d], a0, logchar);
 #else
 	SysPrintf("%c", (char)a0);
 #endif
-    if ((a0 == 0xa && psxstrbuf_count >= 2) || psxstrbuf_count >= PSXSTRBUFMAX) {
-        psxstrbuf[psxstrbuf_count++] = '\0';
+	if ((a0 == 0xa && psxstrbuf_count >= 2) || psxstrbuf_count >= PSXSTRBUFMAX) {
+		psxstrbuf[psxstrbuf_count++] = '\0';
 #ifdef PSXBIOS_LOG
-        PSXBIOS_LOG("psxBios_%s: string_[%d]_cr: %s\n", biosB0n[0x3d], psxstrbuf_count, psxstrbuf);
+		PSXBIOS_LOG("psxBios_%s: string_[%d]_cr: %s\n", biosB0n[0x3d], psxstrbuf_count, psxstrbuf);
 #endif
-        psxstrbuf_count = 0;
-    }
+		psxstrbuf_count = 0;
+	}
 
 	pc0 = ra;
 }
@@ -1890,17 +1941,18 @@ int nfile;
 	while (nfile < 16) { \
 		int match=1; \
  \
-		ptr = Mcd##mcd##Data + 128 * nfile; \
+		ptr = Mcd##mcd##Data + 128 * (nfile + 1); \
 		nfile++; \
 		if ((*ptr & 0xF0) != 0x50) continue; \
+				/* Bug link files show up as free block. */ \
+				if (!ptr[0xa]) continue; \
 		ptr+= 0xa; \
 		if (pfile[0] == 0) { \
 			strncpy(dir->name, ptr, sizeof(dir->name)); \
-			dir->name[sizeof(dir->name) - 1] = '\0'; \
+			dir->name[sizeof(dir->name)] = '\0'; \
 		} else for (i=0; i<20; i++) { \
 			if (pfile[i] == ptr[i]) { \
-				dir->name[i] = ptr[i]; \
-				if (ptr[i] == 0) break; else continue; } \
+								dir->name[i] = ptr[i]; continue; } \
 			if (pfile[i] == '?') { \
 				dir->name[i] = ptr[i]; continue; } \
 			if (pfile[i] == '*') { \
@@ -1908,7 +1960,7 @@ int nfile;
 			match = 0; break; \
 		} \
 		SysPrintf("%d : %s = %s + %s (match=%d)\n", nfile, dir->name, pfile, ptr, match); \
-		if (match == 0) continue; \
+		if (match == 0) { continue; } \
 		dir->size = 8192; \
 		v0 = _dir; \
 		break; \
@@ -1933,10 +1985,13 @@ void psxBios_firstfile() { // 42
 
 	strcpy(ffile, Ra0);
 	pfile = ffile+5;
-	nfile = 1;
+	nfile = 0;
+
 	if (!strncmp(Ra0, "bu00", 4)) {
+		DeliverEvent(0x11, 0x2);
 		bufile(1);
 	} else if (!strncmp(Ra0, "bu10", 4)) {
+		DeliverEvent(0x11, 0x2);
 		bufile(2);
 	}
 
@@ -2082,21 +2137,21 @@ void psxBios_StopCARD() { // 4c
 }
 
 void psxBios__card_write() { // 0x4e
-	int port;
+	int const port = a0 >> 4;
+	u32 const sect = a1 % (MCD_SIZE/8); // roll on range 0...3FFF
 
 #ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s: %x,%x,%x\n", biosB0n[0x4e], a0, a1, a2);
+	PSXBIOS_LOG("psxBios_%s, PORT=%i, SECT=%u(%u), DEST=%p\n", biosB0n[0x4e], port, sect, a1, a2);
 #endif
 
 	card_active_chan = a0;
-	port = a0 >> 4;
 
 	if (port == 0) {
-		memcpy(Mcd1Data + a1 * 128, Ra2, 128);
-		SaveMcd(Config.Mcd1, Mcd1Data, a1 * 128, 128);
+		memcpy(Mcd1Data + (sect * MCD_SECT_SIZE), Ra2, MCD_SECT_SIZE);
+		SaveMcd(Config.Mcd1, Mcd1Data, sect * MCD_SECT_SIZE, MCD_SECT_SIZE);
 	} else {
-		memcpy(Mcd2Data + a1 * 128, Ra2, 128);
-		SaveMcd(Config.Mcd2, Mcd2Data, a1 * 128, 128);
+		memcpy(Mcd2Data + (sect * MCD_SECT_SIZE), Ra2, MCD_SECT_SIZE);
+		SaveMcd(Config.Mcd2, Mcd2Data, sect * MCD_SECT_SIZE, MCD_SECT_SIZE);
 	}
 
 	DeliverEvent(0x11, 0x2); // 0xf0000011, 0x0004
@@ -2106,19 +2161,19 @@ void psxBios__card_write() { // 0x4e
 }
 
 void psxBios__card_read() { // 0x4f
-	int port;
+	int const port = a0 >> 4;
+	u32 const sect = a1 % (MCD_SIZE/8); // roll on range 0...3FFF
 
 #ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s\n", biosB0n[0x4f]);
+	PSXBIOS_LOG("psxBios_%s, PORT=%i, SECT=%u(%u), DEST=%p\n", biosB0n[0x4f], port, sect, a1, a2);
 #endif
 
 	card_active_chan = a0;
-	port = a0 >> 4;
 
 	if (port == 0) {
-		memcpy(Ra2, Mcd1Data + a1 * 128, 128);
+		memcpy(Ra2, Mcd1Data + (sect * MCD_SECT_SIZE), MCD_SECT_SIZE);
 	} else {
-		memcpy(Ra2, Mcd2Data + a1 * 128, 128);
+		memcpy(Ra2, Mcd2Data + (sect * MCD_SECT_SIZE), MCD_SECT_SIZE);
 	}
 
 	DeliverEvent(0x11, 0x2); // 0xf0000011, 0x0004
@@ -2176,6 +2231,15 @@ void psxBios_Krom2RawAdd() { // 0x51
 	}
 
 	pc0 = ra;
+}
+
+// stub?
+void psxBios__get_error() { // 55
+#ifdef PSXBIOS_LOG
+	PSXBIOS_LOG("psxBios_%s\n", biosB0n[0x55]);
+#endif
+
+	v0 = 0; pc0 = ra;
 }
 
 void psxBios_GetC0Table() { // 56
@@ -2566,7 +2630,7 @@ void psxBiosInit() {
 	//biosB0[0x52] = psxBios_sys_b0_52;
 	//biosB0[0x53] = psxBios_sys_b0_53;
 	//biosB0[0x54] = psxBios__get_errno;
-	//biosB0[0x55] = psxBios__get_error;
+	biosB0[0x55] = psxBios__get_error;
 	biosB0[0x56] = psxBios_GetC0Table;
 	biosB0[0x57] = psxBios_GetB0Table;
 	biosB0[0x58] = psxBios__card_chan;

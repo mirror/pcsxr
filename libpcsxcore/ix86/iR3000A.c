@@ -418,14 +418,14 @@ static int recInit() {
 
 	for (i = 0; i < 0x08; i++) psxRecLUT[i + 0xbfc0] = (u32)&recROM[i << 16];
 
+    x86Init();
+
 	return 0;
 }
 
 static void recReset() {
 	memset(recRAM, 0, 0x200000);
 	memset(recROM, 0, 0x080000);
-
-	x86Init();
 
 	x86SetPtr(recMem);
 

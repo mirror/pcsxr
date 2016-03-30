@@ -37,6 +37,10 @@
 #define CHEATS_DIR "/.pcsxr/cheats/"
 #define PATCHES_DIR "/.pcsxr/patches/"
 
+#define OLD_SLOT 1000
+#define NUM_OLD_SLOTS 2
+#define LAST_OLD_SLOT (OLD_SLOT + NUM_OLD_SLOTS - 1)
+
 extern gboolean UseGui;
 extern int StatesC;
 char cfgfile[MAXPATHLEN];	/* ADB Comment this out - make a local var, or at least use gchar funcs */

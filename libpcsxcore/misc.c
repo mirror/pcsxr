@@ -229,8 +229,17 @@ int LoadCdromFile(const char *filename, EXE_HEADER *head) {
 	u8 time[4],*buf;
 	u8 mdir[4096], exename[256];
 	u32 size, addr;
+	void *psxaddr;
 
-	sscanf(filename, "cdrom:\\%255s", exename);
+	if (sscanf(filename, "cdrom:\\%255s", exename) <= 0)
+	{
+		// Some games omit backslash (NFS4)
+		if (sscanf(filename, "cdrom:%255s", exename) <= 0)
+		{
+			SysPrintf("LoadCdromFile: EXE NAME PARSING ERROR (%s (%u))\n", filename, strlen(filename));
+			exit (1);
+		}
+	}
 
 	time[0] = itob(0); time[1] = itob(2); time[2] = itob(0x10);
 
@@ -259,7 +268,9 @@ int LoadCdromFile(const char *filename, EXE_HEADER *head) {
 		incTime();
 		READTRACK();
 
-		memcpy((void *)PSXM(addr), buf + 12, 2048);
+		psxaddr = (void *)PSXM(addr);
+		assert(psxaddr != NULL);
+		memcpy(psxaddr, buf + 12, 2048);
 
 		size -= 2048;
 		addr += 2048;
@@ -360,13 +371,15 @@ int CheckCdrom() {
 
 static int PSXGetFileType(FILE *f) {
 	unsigned long current;
-	u8 mybuf[2048];
+	u8 mybuf[sizeof(EXE_HEADER)]; // EXE_HEADER currently biggest
 	EXE_HEADER *exe_hdr;
 	FILHDR *coff_hdr;
+	size_t amt;
 
+	memset(mybuf, 0, sizeof(mybuf));
 	current = ftell(f);
 	fseek(f, 0L, SEEK_SET);
-	fread(mybuf, 2048, 1, f);
+	amt = fread(mybuf, sizeof(mybuf), 1, f);
 	fseek(f, current, SEEK_SET);
 
 	exe_hdr = (EXE_HEADER *)mybuf;
@@ -408,6 +421,7 @@ int Load(const char *ExePath) {
 	int retval = 0;
 	u8 opcode;
 	u32 section_address, section_size;
+	void* psxmaddr;
 
 	strncpy(CdromId, "SLUS99999", 9);
 	strncpy(CdromLabel, "SLUS_999.99", 11);
@@ -479,7 +493,9 @@ int Load(const char *ExePath) {
 						fseek(tmpFile, SWAP32(section.s_scnptr), SEEK_SET);
 						fread(PSXM(SWAP32(section.s_paddr)), SWAP32(section.s_size), 1, tmpFile);
 					} else {
-						memset(PSXM(SWAP32(section.s_paddr)), 0, SWAP32(section.s_size));
+						psxmaddr = PSXM(SWAP32(section.s_paddr));
+						assert(psxmaddr != NULL);
+						memset(psxmaddr, 0, SWAP32(section.s_size));
 					}
 				}
 				break;

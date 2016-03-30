@@ -96,6 +96,7 @@ typedef void (CALLBACK* GPUvBlank)(int);
 typedef void (CALLBACK* GPUvisualVibration)(uint32_t, uint32_t);
 typedef void (CALLBACK* GPUcursor)(int, int, int);
 typedef void (CALLBACK* GPUaddVertex)(short,short,s64,s64,s64);
+typedef void (CALLBACK* GPUsetSpeed)(float); // 1.0 = natural speed
 typedef void (CALLBACK* GPUpgxpMemory)(unsigned int, unsigned char*);
 
 // GPU function pointers
@@ -126,6 +127,7 @@ extern GPUvBlank        GPU_vBlank;
 extern GPUvisualVibration GPU_visualVibration;
 extern GPUcursor        GPU_cursor;
 extern GPUaddVertex     GPU_addVertex;
+extern GPUsetSpeed		GPU_setSpeed;
 extern GPUpgxpMemory	GPU_pgxpMemory;
 
 // CD-ROM Functions

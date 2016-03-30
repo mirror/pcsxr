@@ -137,7 +137,7 @@ static gchar* MCDStatusToChar(McdBlock *Info) {
 			state = _("Link");
 		else if (ISLINKENDBLOCK(Info))
 			state = _("End link");
-		} else
+	} else
 		state = _("Free");
 	return state;
 }
@@ -203,8 +203,20 @@ static void LoadListItems(int mcd, boolean newstore) {
 
 		if (newstore) gtk_list_store_append(store, &iter);
 
+		GError *error=NULL;
 		title = g_convert(Info->sTitle, strlen(Info->sTitle), "UTF-8",
-			"Shift-JIS", NULL, NULL, NULL);
+			"Shift-JIS", NULL, NULL, &error);
+
+		if (error)
+		{
+			// Some characters caused problems because of custom encoding.
+			// Let's use the ASCII title as fallback.
+			// Otherwise custom decoding from that region
+			// of BIOS needed which is way overkill here.
+			title = g_convert(Info->Title, strlen(Info->Title), "UTF-8",
+				"Shift-JIS", NULL, NULL, NULL);
+			g_clear_error(&error);
+		}
 
 		gtk_list_store_set(store, &iter,
 				CL_ICON, pixbuf,

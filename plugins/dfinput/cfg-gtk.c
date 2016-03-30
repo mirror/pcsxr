@@ -61,7 +61,9 @@ const char *EmuKeyText[EMU_TOTAL] = {
 	N_("Save state"),
 	N_("Screenshot"),
 	N_("Escape"),
-	N_("Rewind")
+	N_("Rewind"),
+	N_("Alt Speed 1"),
+	N_("Alt Speed 2")
 };
 
 const char *DPadText[DKEY_TOTAL] = {

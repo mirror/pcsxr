@@ -159,6 +159,8 @@ typedef struct {
 	u8 PsxType; // PSX_TYPE_NTSC or PSX_TYPE_PAL
 	u32 RewindCount;
 	u32 RewindInterval;
+	u32 AltSpeed1; // Percent relative to natural speed.
+	u32 AltSpeed2;
 	u8 HackFix;
 #ifdef _WIN32
 	char Lang[256];

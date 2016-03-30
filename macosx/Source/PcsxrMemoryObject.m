@@ -22,32 +22,37 @@
 @property (readwrite) BOOL hasImages;
 @end
 
+#pragma pack(push,2)
+struct PSXRGBColor {
+	UInt8 r;
+	UInt8 g;
+	UInt8 b;
+};
+#pragma pack(pop)
+
 @implementation PcsxrMemoryObject
 
 + (NSArray *)imagesFromMcd:(McdBlock *)block
 {
 	NSMutableArray *imagesArray = [[NSMutableArray alloc] initWithCapacity:block->IconCount];
 	for (int i = 0; i < block->IconCount; i++) {
-		NSImage *memImage;
-		@autoreleasepool {
-			NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:16 pixelsHigh:16 bitsPerSample:8 samplesPerPixel:3 hasAlpha:NO isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:0 bitsPerPixel:0];
-			
-			short *icon = block->Icon;
-			
-			int x, y, c, v, r, g, b;
-			for (v = 0; v < 256; v++) {
-				x = (v % 16);
-				y = (v / 16);
-				c = icon[(i * 256) + v];
-				r = (c & 0x001f) << 3;
-				g = ((c & 0x03e0) >> 5) << 3;
-				b = ((c & 0x7c00) >> 10) << 3;
-				[imageRep setColor:[NSColor colorWithCalibratedRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0] atX:x y:y];
-			}
-			memImage = [[NSImage alloc] init];
-			[memImage addRepresentation:imageRep];
-			[memImage setSize:NSMakeSize(32, 32)];
+		NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:16 pixelsHigh:16 bitsPerSample:8 samplesPerPixel:3 hasAlpha:NO isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:16*3 bitsPerPixel:24];
+		struct PSXRGBColor *cocoaImageData = (struct PSXRGBColor *)imageRep.bitmapData;
+		short *icon = block->Icon;
+		
+		for (int v = 0; v < 256; v++) {
+			int c = icon[(i * 256) + v];
+			int r = (c & 0x001f) << 3;
+			int g = ((c & 0x03e0) >> 5) << 3;
+			int b = ((c & 0x7c00) >> 10) << 3;
+			struct PSXRGBColor *colorItem = &cocoaImageData[v];
+			colorItem->r = r;
+			colorItem->g = g;
+			colorItem->b = b;
 		}
+		NSImage *memImage = [[NSImage alloc] init];
+		[memImage addRepresentation:imageRep];
+		[memImage setSize:NSMakeSize(32, 32)];
 		[imagesArray addObject:memImage];
 	}
 	return [NSArray arrayWithArray:imagesArray];
@@ -86,23 +91,23 @@ static NSString *MemLabelMultiSave;
 {
 	switch (flagNameIndex) {
 		default:
-		case memFlagFree:
+		case PCSXRMemFlagFree:
 			return MemLabelFree;
 			break;
 			
-		case memFlagEndLink:
+		case PCSXRMemFlagEndLink:
 			return MemLabelEndLink;
 			break;
 			
-		case memFlagLink:
+		case PCSXRMemFlagLink:
 			return MemLabelLink;
 			break;
 			
-		case memFlagUsed:
+		case PCSXRMemFlagUsed:
 			return MemLabelUsed;
 			break;
 			
-		case memFlagDeleted:
+		case PCSXRMemFlagDeleted:
 			return MemLabelDeleted;
 			break;
 	}
@@ -126,22 +131,22 @@ static NSString *MemLabelMultiSave;
 {
 	if ((blockFlags & 0xF0) == 0xA0) {
 		if ((blockFlags & 0xF) >= 1 && (blockFlags & 0xF) <= 3)
-			return memFlagDeleted;
+			return PCSXRMemFlagDeleted;
 		else
-			return memFlagFree;
+			return PCSXRMemFlagFree;
 	} else if ((blockFlags & 0xF0) == 0x50) {
 		if ((blockFlags & 0xF) == 0x1)
-			return memFlagUsed;
+			return PCSXRMemFlagUsed;
 		else if ((blockFlags & 0xF) == 0x2)
-			return memFlagLink;
+			return PCSXRMemFlagLink;
 		else if ((blockFlags & 0xF) == 0x3)
-			return memFlagEndLink;
+			return PCSXRMemFlagEndLink;
 	} else
-		return memFlagFree;
+		return PCSXRMemFlagFree;
 	
 	//Xcode complains unless we do this...
 	NSLog(@"Unknown flag %x", blockFlags);
-	return memFlagFree;
+	return PCSXRMemFlagFree;
 }
 
 - (instancetype)initWithMcdBlock:(McdBlock *)infoBlock startingIndex:(uint8_t)startIdx size:(uint8_t)memSize
@@ -150,7 +155,7 @@ static NSString *MemLabelMultiSave;
 		self.startingIndex = startIdx;
 		self.blockSize = memSize;
 		self.flag = [PcsxrMemoryObject memFlagsFromBlockFlags:infoBlock->Flags];
-		if (self.flag == memFlagFree) {
+		if (self.flag == PCSXRMemFlagFree) {
 			self.imageArray = @[];
 			self.hasImages = NO;
 			self.title = @"Free block";
@@ -279,23 +284,23 @@ static inline void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtc
 	
 	switch (flag) {
 		default:
-		case memFlagFree:
+		case PCSXRMemFlagFree:
 			return attribMemLabelFree;
 			break;
 			
-		case memFlagEndLink:
+		case PCSXRMemFlagEndLink:
 			return attribMemLabelEndLink;
 			break;
 			
-		case memFlagLink:
+		case PCSXRMemFlagLink:
 			return attribMemLabelLink;
 			break;
 			
-		case memFlagUsed:
+		case PCSXRMemFlagUsed:
 			return attribMemLabelUsed;
 			break;
 			
-		case memFlagDeleted:
+		case PCSXRMemFlagDeleted:
 			return attribMemLabelDeleted;
 			break;
 	}
@@ -303,7 +308,7 @@ static inline void SetupAttrStr(NSMutableAttributedString *mutStr, NSColor *txtc
 
 - (BOOL)showCount
 {
-	if (flag == memFlagFree) {
+	if (flag == PCSXRMemFlagFree) {
 		//Always show the size of the free blocks
 		return YES;
 	} else {

@@ -59,6 +59,10 @@ void SaveDongle( char *str );
 
 static unsigned char buf[ BUFFER_SIZE ];
 
+//[0] -> dummy
+//[1] -> memory card status flag
+//[2] -> card 1 id, 0x5a->plugged, any other not plugged
+//[3] -> card 2 id, 0x5d->plugged, any other not plugged
 unsigned char cardh[4] = { 0x00, 0x08, 0x5a, 0x5d };
 
 // Transfer Ready and the Buffer is Empty
@@ -722,10 +726,12 @@ void sioWrite8(unsigned char value) {
 			StatReg |= RX_RDY;
 
 			// Chronicles of the Sword - no memcard = password options
-			if( Config.NoMemcard || ((strlen(Config.Mcd1) <=0) && (strlen(Config.Mcd2) <=0)) ) {
+			if( Config.NoMemcard || (!Config.Mcd1[0] && !Config.Mcd2[0])) {
 				memset(buf, 0x00, 4);
 			} else {
 				memcpy(buf, cardh, 4);
+				if (!Config.Mcd1[0]) buf[2]=0; // is card 1 plugged? (Codename Tenka)
+				if (!Config.Mcd2[0]) buf[3]=0; // is card 2 plugged?
 			}
 
 			parp = 0;
@@ -883,8 +889,8 @@ void LoadMcd(int mcd, char *str) {
 	if (mcd == 2) data = Mcd2Data;
 
 	if (*str == 0) {
-		sprintf(str, "%s/.pcsxr/memcards/card%d.mcd", getenv("HOME"), mcd); // TODO: maybe just whine and quit..
-		SysPrintf(_("No memory card value was specified - using a default card %s\n"), str);
+		SysPrintf(_("No memory card value was specified - card %i is not plugged.\n"), mcd);
+		return;
 	}
 	f = fopen(str, "rb");
 	if (f == NULL) {
