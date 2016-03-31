@@ -137,6 +137,7 @@ typedef struct {
 	char PluginsDir[MAXPATHLEN];
 	char PatchesDir[MAXPATHLEN];
 	char IsoImgDir[MAXPATHLEN];
+	char PsxExeName[12];
 	boolean Xa;
 	boolean SioIrq;
 	boolean Mdec;
@@ -151,6 +152,7 @@ typedef struct {
 	boolean UseNet;
 	boolean VSyncWA;
 	boolean NoMemcard;
+	boolean PerGameMcd;
 	boolean Widescreen;
 	boolean HideCursor;
 	boolean SaveWindowPos;
@@ -162,6 +164,7 @@ typedef struct {
 	u32 AltSpeed1; // Percent relative to natural speed.
 	u32 AltSpeed2;
 	u8 HackFix;
+	u8 MemHack;
 #ifdef _WIN32
 	char Lang[256];
 #endif

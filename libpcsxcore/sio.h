@@ -55,7 +55,7 @@ int sioFreeze(gzFile f, int Mode);
 
 void LoadMcd(int mcd, char *str);
 void LoadMcds(char *mcd1, char *mcd2);
-void SaveMcd(char *mcd, char *data, uint32_t adr, int size);
+void SaveMcd(int mcd, char *str, char *data, uint32_t adr, int size);
 void CreateMcd(char *mcd);
 void ConvertMcd(char *mcd, char *data);
 
