@@ -143,10 +143,9 @@ u8 psxMemRead8(u32 mem) {
 	char *p;
 	u32 t;
 
-	if (Config.MemHack)
-	{
-		psxRegs.cycle += 0;
-	}
+
+	psxRegs.cycle += 0;
+
 
 	t = mem >> 16;
 	if (t == 0x1f80 || t == 0x9f80 || t == 0xbf80) {
@@ -173,11 +172,10 @@ u16 psxMemRead16(u32 mem) {
 	char *p;
 	u32 t;
 
-	if (Config.MemHack)
-	{
-		psxRegs.cycle += 1;
-	}
 
+	psxRegs.cycle += 1;
+
+	
 	t = mem >> 16;
 	if (t == 0x1f80 || t == 0x9f80 || t == 0xbf80) {
 		if ((mem & 0xffff) < 0x400)
@@ -203,11 +201,10 @@ u32 psxMemRead32(u32 mem) {
 	char *p;
 	u32 t;
 
-	if (Config.MemHack)
-	{
-		psxRegs.cycle += 1;
-	}
 
+	psxRegs.cycle += 1;
+
+	
 	t = mem >> 16;
 	if (t == 0x1f80 || t == 0x9f80 || t == 0xbf80) {
 		if ((mem & 0xffff) < 0x400)
@@ -233,11 +230,10 @@ void psxMemWrite8(u32 mem, u8 value) {
 	char *p;
 	u32 t;
 
-	if (Config.MemHack)
-	{
-		psxRegs.cycle += 1;
-	}
 
+	psxRegs.cycle += 1;
+	
+	
 	t = mem >> 16;
 	if (t == 0x1f80 || t == 0x9f80 || t == 0xbf80) {
 		if ((mem & 0xffff) < 0x400)
@@ -265,11 +261,10 @@ void psxMemWrite16(u32 mem, u16 value) {
 	char *p;
 	u32 t;
 
-	if (Config.MemHack)
-	{
-		psxRegs.cycle += 1;
-	}
 
+	psxRegs.cycle += 1;
+
+		
 	t = mem >> 16;
 	if (t == 0x1f80 || t == 0x9f80 || t == 0xbf80) {
 		if ((mem & 0xffff) < 0x400)
@@ -297,10 +292,9 @@ void psxMemWrite32(u32 mem, u32 value) {
 	char *p;
 	u32 t;
 
-	if (Config.MemHack)
-	{
-		psxRegs.cycle += 1;
-	}
+	
+	psxRegs.cycle += 1;
+
 
 	//	if ((mem&0x1fffff) == 0x71E18 || value == 0x48088800) SysPrintf("t2fix!!\n");
 	t = mem >> 16;
