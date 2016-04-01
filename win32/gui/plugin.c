@@ -30,6 +30,7 @@
 #include "NoPic.h"
 #include "misc.h"
 #include "sio.h"
+#include "pgxp_gte.h"
 
 extern void LidInterrupt();
 
@@ -310,6 +311,7 @@ int _OpenPlugins(HWND hWnd) {
 
 	ret = GPU_open(hWnd);
 	if (ret < 0) { SysMessage(_("Error Opening GPU Plugin (%d)"), ret); return -1; }
+	GPU_pgxpMemory(0, PGXP_GetMem());
 	ret = SPU_open(hWnd);
 	if (ret < 0) { SysMessage(_("Error Opening SPU Plugin (%d)"), ret); return -1; }
 	SPU_registerCallback(SPUirq);
