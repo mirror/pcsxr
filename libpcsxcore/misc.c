@@ -363,6 +363,12 @@ int CheckCdrom() {
 	SysPrintf(_("CD-ROM ID: %.9s\n"), CdromId);
 	SysPrintf(_("CD-ROM EXE Name: %.255s\n"), exename);
 
+	memset(Config.PsxExeName, 0, sizeof(Config.PsxExeName));
+	strncpy(Config.PsxExeName, exename, 11);
+
+	if(Config.PerGameMcd)
+		LoadMcds(Config.Mcd1, Config.Mcd2);
+	
 	BuildPPFCache();
 	LoadSBI(NULL);
 

@@ -470,6 +470,161 @@ static int parsetoc(const char *isofile) {
 	return 0;
 }
 
+
+int(*cdimg_read_func_archive)(FILE *f, unsigned int base, void *dest, int sector) = NULL;
+#ifdef HAVE_LIBARCHIVE
+#include <archive.h>
+#include <archive_entry.h>
+
+struct archive *a = NULL;
+u32 len_uncompressed_buffer = 0;
+void *cdimage_buffer_mem = NULL;
+FILE* cdimage_buffer = NULL; //cdHandle to store file
+
+int aropen(FILE* fparchive, const char* _fn) {
+	s32 r;
+	u64 length = 0, length_peek;
+	boolean use_temp_file = FALSE; // TODO make a config param
+	static struct archive_entry *ae = NULL;
+	struct archive_entry *ae_peek;
+
+	if (a == NULL && cdimage_buffer == NULL) {
+		// We open file twice. First to peek sizes. This nastyness due used interface.
+		a = archive_read_new();
+		r = archive_read_support_compression_all(a);
+		r = archive_read_support_format_all(a);
+		//r = archive_read_support_filter_all(a);
+		//r = archive_read_support_format_raw(a);
+		//r = archive_read_open_FILE(a, archive);
+		archive_read_open_filename(a, _fn, 75 * CD_FRAMESIZE_RAW);
+		if (r != ARCHIVE_OK) {
+			SysPrintf("Archive open failed (%i).\n", r);
+			archive_read_free(a);
+			a = NULL;
+			return -1;
+		}
+		// Get the biggest file in archive
+		while ((r = archive_read_next_header(a, &ae_peek)) == ARCHIVE_OK) {
+			length_peek = archive_entry_size(ae_peek);
+			//printf("Entry canditate %s %i\n", archive_entry_pathname(ae_peek), length_peek);
+			length = MAX(length_peek, length);
+			ae = (ae == NULL ? ae_peek : ae);
+		}
+		archive_read_free(a);
+		if (ae == NULL) {
+			SysPrintf("Archive entry read failed (%i).\n", r);
+			a = NULL;
+			return -1;
+		}
+		//Now really open the file
+		a = archive_read_new();
+		r = archive_read_support_compression_all(a);
+		r = archive_read_support_format_all(a);
+		archive_read_open_filename(a, _fn, 75 * CD_FRAMESIZE_RAW);
+		while ((r = archive_read_next_header(a, &ae)) == ARCHIVE_OK) {
+			length_peek = archive_entry_size(ae);
+			if (length_peek == length) {
+				//ae = ae_peek;
+				SysPrintf(" -- Selected entry %s %i", archive_entry_pathname(ae), length);
+				break;
+			}
+		}
+
+		len_uncompressed_buffer = length ? length : 700 * 1024 * 1024;
+	}
+
+	if (use_temp_file && (cdimage_buffer == NULL || cdHandle != cdimage_buffer)) {
+		cdimage_buffer = fopen("/tmp/pcsxr.tmp.bin", "w+b");
+	}
+	else if (!use_temp_file && (cdimage_buffer == NULL || cdHandle != cdimage_buffer)) {
+		if (cdimage_buffer_mem == NULL && ((cdimage_buffer_mem = malloc(len_uncompressed_buffer)) == NULL)) {
+			SysMessage("Could not reserve enough memory for full image buffer.\n");
+			exit(3);
+		}
+		//printf("Memory ok2 %u %p\n", len_uncompressed_buffer, cdimage_buffer_mem);
+		cdimage_buffer = fmemopen(cdimage_buffer_mem, len_uncompressed_buffer, "w+b");
+	}
+	else {
+
+	}
+
+	if (cdHandle != cdimage_buffer) {
+		fclose(cdHandle); // opened thru archive so this not needed anymore
+		cdHandle = cdimage_buffer;
+	}
+
+	return 0;
+}
+
+static int cdread_archive(FILE *f, unsigned int base, void *dest, int sector)
+{
+	s32 r;
+	size_t size;
+	size_t readsize;
+	static off_t offset = 0; // w/o read always or static/ftell
+	const void *buff;
+
+	// If not pointing to archive file but CDDA file or some other track
+	if (f != cdHandle) {
+		return cdimg_read_func_archive(f, base, dest, sector);
+	}
+
+	// Jump if already completely read
+	if (a != NULL /*&& (ecm_file_detected || sector*CD_FRAMESIZE_RAW <= len_uncompressed_buffer)*/) {
+		readsize = (sector + 1) * CD_FRAMESIZE_RAW;
+		for (fseek(cdimage_buffer, offset, SEEK_SET); offset < readsize;) {
+			r = archive_read_data_block(a, &buff, &size, &offset);
+			offset += size;
+			SysPrintf("ReadArchive seek:%u(%u) cur:%u(%u)\r", sector, readsize / 1024, offset / CD_FRAMESIZE_RAW, offset / 1024);
+			fwrite(buff, size, 1, cdimage_buffer);
+			if (r != ARCHIVE_OK) {
+				//SysPrintf("End of archive.\n");
+				archive_read_free(a);
+				a = NULL;
+				readsize = offset;
+				fflush(cdimage_buffer);
+				fseek(cdimage_buffer, 0, SEEK_SET);
+			}
+		}
+	}
+	else {
+		//SysPrintf("ReadSectorArchSector: %u(%u)\n", sector, sector*CD_FRAMESIZE_RAW);
+	}
+
+	// TODO what causes req sector to be greater than CD size?
+	r = cdimg_read_func_archive(cdimage_buffer, base, dest, sector);
+	return r;
+}
+int handlearchive(const char *isoname, s32* accurate_length) {
+	u32 read_size = accurate_length ? MSF2SECT(70, 70, 16) : MSF2SECT(0, 0, 16);
+	int ret = -1;
+	if ((ret = aropen(cdHandle, isoname)) == 0) {
+		cdimg_read_func = cdread_archive;
+		SysPrintf("[+archive]");
+		if (!ecm_file_detected) {
+#ifndef ENABLE_ECM_FULL
+			//Detect ECM inside archive
+			cdimg_read_func_archive = cdread_normal;
+			cdread_archive(cdHandle, 0, cdbuffer, read_size);
+			if (handleecm("test.ecm", cdimage_buffer, accurate_length) != -1) {
+				cdimg_read_func_archive = cdread_ecm_decode;
+				cdimg_read_func = cdread_archive;
+				SysPrintf("[+ecm]");
+			}
+#endif
+		}
+		else {
+			SysPrintf("[+ecm]");
+		}
+	}
+	return ret;
+}
+#else
+int aropen(FILE* fparchive, const char* _fn) { return -1; }
+static int cdread_archive(FILE *f, unsigned int base, void *dest, int sector) { return -1; }
+int handlearchive(const char *isoname, s32* accurate_length) { return -1; }
+#endif
+
 // this function tries to get the .cue file of the given .bin
 // the necessary data is put into the ti (trackinformation)-array
 static int parsecue(const char *isofile) {
@@ -1488,157 +1643,6 @@ int handleecm(const char *isoname, FILE* cdh, s32* accurate_length) {
 	}
 	return -1;
 }
-
-int (*cdimg_read_func_archive)(FILE *f, unsigned int base, void *dest, int sector) = NULL;
-#ifdef HAVE_LIBARCHIVE
-#include <archive.h>
-#include <archive_entry.h>
-
-struct archive *a = NULL;
-u32 len_uncompressed_buffer = 0;
-void *cdimage_buffer_mem = NULL;
-FILE* cdimage_buffer = NULL; //cdHandle to store file
-
-int aropen(FILE* fparchive, const char* _fn) {
-	s32 r;
-	u64 length = 0, length_peek;
-	boolean use_temp_file = FALSE; // TODO make a config param
-	static struct archive_entry *ae=NULL;
-	struct archive_entry *ae_peek;
-
-	if (a == NULL && cdimage_buffer == NULL) {
-		// We open file twice. First to peek sizes. This nastyness due used interface.
-		a = archive_read_new();
-		r = archive_read_support_compression_all(a);
-		r = archive_read_support_format_all(a);
-		//r = archive_read_support_filter_all(a);
-		//r = archive_read_support_format_raw(a);
-		//r = archive_read_open_FILE(a, archive);
-		archive_read_open_filename(a, _fn, 75*CD_FRAMESIZE_RAW);
-		if (r != ARCHIVE_OK) {
-			SysPrintf("Archive open failed (%i).\n", r);
-			archive_read_free(a);
-			a = NULL;
-			return -1;
-		}
-		// Get the biggest file in archive
-		while ((r=archive_read_next_header(a, &ae_peek)) == ARCHIVE_OK) {
-			length_peek = archive_entry_size(ae_peek);
-			//printf("Entry canditate %s %i\n", archive_entry_pathname(ae_peek), length_peek);
-			length = MAX(length_peek, length);
-			ae = (ae == NULL ? ae_peek : ae);
-		}
-		archive_read_free(a);
-		if (ae == NULL) {
-			SysPrintf("Archive entry read failed (%i).\n", r);
-			a = NULL;
-			return -1;
-		}
-		//Now really open the file
-		a = archive_read_new();
-		r = archive_read_support_compression_all(a);
-		r = archive_read_support_format_all(a);
-		archive_read_open_filename(a, _fn, 75*CD_FRAMESIZE_RAW);
-		while ((r=archive_read_next_header(a, &ae)) == ARCHIVE_OK) {
-			length_peek = archive_entry_size(ae);
-			if (length_peek == length) {
-				//ae = ae_peek;
-				SysPrintf(" -- Selected entry %s %i", archive_entry_pathname(ae), length);
-				break;
-			}
-		}
-
-		len_uncompressed_buffer = length?length:700*1024*1024;
-	}
-
-	if (use_temp_file && (cdimage_buffer == NULL || cdHandle != cdimage_buffer)) {
-		cdimage_buffer = fopen("/tmp/pcsxr.tmp.bin", "w+b");
-	}
-	else if (!use_temp_file && (cdimage_buffer == NULL || cdHandle != cdimage_buffer)) {
-		if (cdimage_buffer_mem == NULL && ((cdimage_buffer_mem = malloc(len_uncompressed_buffer)) == NULL)) {
-			SysMessage("Could not reserve enough memory for full image buffer.\n");
-			exit(3);
-		}
-		//printf("Memory ok2 %u %p\n", len_uncompressed_buffer, cdimage_buffer_mem);
-		cdimage_buffer = fmemopen(cdimage_buffer_mem, len_uncompressed_buffer, "w+b");
-	} else {
-
-	}
-
-	if (cdHandle != cdimage_buffer) {
-		fclose(cdHandle); // opened thru archive so this not needed anymore
-		cdHandle = cdimage_buffer;
-	}
-
-	return 0; 
-}
-
-static int cdread_archive(FILE *f, unsigned int base, void *dest, int sector)
-{
-	s32 r;
-	size_t size;
-	size_t readsize;
-	static off_t offset = 0; // w/o read always or static/ftell
-	const void *buff;
-
-	// If not pointing to archive file but CDDA file or some other track
-	if(f != cdHandle) {
-		return cdimg_read_func_archive(f, base, dest, sector);
-	}
-
-	// Jump if already completely read
-	if (a != NULL /*&& (ecm_file_detected || sector*CD_FRAMESIZE_RAW <= len_uncompressed_buffer)*/) {
-		readsize = (sector+1) * CD_FRAMESIZE_RAW; 
-		for (fseek(cdimage_buffer, offset, SEEK_SET); offset < readsize;) {
-			r = archive_read_data_block(a, &buff, &size, &offset);
-			offset += size;
-			SysPrintf("ReadArchive seek:%u(%u) cur:%u(%u)\r", sector, readsize/1024, offset/CD_FRAMESIZE_RAW, offset/1024);
-			fwrite(buff, size, 1, cdimage_buffer);
-			if (r != ARCHIVE_OK) {
-				//SysPrintf("End of archive.\n");
-				archive_read_free(a);
-				a = NULL;
-				readsize = offset;
-				fflush(cdimage_buffer);
-				fseek(cdimage_buffer, 0, SEEK_SET);
-			}
-		}
-	} else {
-		//SysPrintf("ReadSectorArchSector: %u(%u)\n", sector, sector*CD_FRAMESIZE_RAW);
-	}
-
-	// TODO what causes req sector to be greater than CD size?
-	r = cdimg_read_func_archive(cdimage_buffer, base, dest, sector);
-	return r;
-}
-int handlearchive(const char *isoname, s32* accurate_length) {
-	u32 read_size = accurate_length?MSF2SECT(70,70,16) : MSF2SECT(0,0,16);
-	int ret = -1;
-	if ((ret=aropen(cdHandle, isoname)) == 0) {
-		cdimg_read_func = cdread_archive;
-		SysPrintf("[+archive]");
-		if (!ecm_file_detected) {
-#ifndef ENABLE_ECM_FULL
-			//Detect ECM inside archive
-			cdimg_read_func_archive = cdread_normal;
-			cdread_archive(cdHandle, 0, cdbuffer, read_size);
-			if (handleecm("test.ecm", cdimage_buffer, accurate_length) != -1) {
-				cdimg_read_func_archive = cdread_ecm_decode;
-				cdimg_read_func = cdread_archive;
-				SysPrintf("[+ecm]");
-			}
-#endif
-		} else {
-			SysPrintf("[+ecm]");
-		}
-	}
-	return ret;
-}
-#else
-int aropen(FILE* fparchive, const char* _fn) {return -1;}
-static int cdread_archive(FILE *f, unsigned int base, void *dest, int sector) {return -1;}
-int handlearchive(const char *isoname, s32* accurate_length) {return -1;}
-#endif
 
 static unsigned char * CALLBACK ISOgetBuffer_compr(void) {
 	return compr_img->buff_raw[compr_img->sector_in_blk] + 12;

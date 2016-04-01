@@ -1744,7 +1744,7 @@ static void buopen(int mcd, u8 *ptr, u8 *cfg)
 			SysPrintf("openC %s %d\n", ptr, nblk);
 			v0 = 1 + mcd;
 			/* just go ahead and resave them all */
-			SaveMcd(cfg, ptr, 128, 128 * 15);
+			SaveMcd(mcd, cfg, ptr, 128, 128 * 15);
 			break;
 		}
 		/* shouldn't this return ENOSPC if i == 16? */
@@ -1839,7 +1839,7 @@ void psxBios_read() { // 0x34
 	ptr = Mcd##mcd##Data + offset; \
 	memcpy(ptr, Ra1, a2); \
 	FDesc[1 + mcd].offset += a2; \
-	SaveMcd(Config.Mcd##mcd, Mcd##mcd##Data, offset, a2); \
+	SaveMcd(mcd, Config.Mcd##mcd, Mcd##mcd##Data, offset, a2); \
 	if (FDesc[1 + mcd].mode & 0x8000) v0 = 0; \
 	else v0 = a2; \
 		DeliverEvent(0x11, 0x2); /* 0xf0000011, 0x0004 */ \
@@ -2023,7 +2023,7 @@ void psxBios_nextfile() { // 43
 		memset(ptr+0xa+namelen, 0, 0x75-namelen); \
 		for (j=0; j<127; j++) xor^= ptr[j]; \
 		ptr[127] = xor; \
-		SaveMcd(Config.Mcd##mcd, Mcd##mcd##Data, 128 * i + 0xa, 0x76); \
+		SaveMcd(mcd, Config.Mcd##mcd, Mcd##mcd##Data, 128 * i + 0xa, 0x76); \
 		v0 = 1; \
 		break; \
 	} \
@@ -2061,7 +2061,7 @@ void psxBios_rename() { // 44
 		if ((*ptr & 0xF0) != 0x50) continue; \
 		if (strcmp(Ra0+5, ptr+0xa)) continue; \
 		*ptr = (*ptr & 0xf) | 0xA0; \
-		SaveMcd(Config.Mcd##mcd, Mcd##mcd##Data, 128 * i, 1); \
+		SaveMcd(mcd, Config.Mcd##mcd, Mcd##mcd##Data, 128 * i, 1); \
 		SysPrintf("delete %s\n", ptr+0xa); \
 		v0 = 1; \
 		break; \
@@ -2135,10 +2135,10 @@ void psxBios__card_write() { // 0x4e
 
 	if (port == 0) {
 		memcpy(Mcd1Data + (sect * MCD_SECT_SIZE), Ra2, MCD_SECT_SIZE);
-		SaveMcd(Config.Mcd1, Mcd1Data, sect * MCD_SECT_SIZE, MCD_SECT_SIZE);
+		SaveMcd(1, Config.Mcd1, Mcd1Data, sect * MCD_SECT_SIZE, MCD_SECT_SIZE);
 	} else {
 		memcpy(Mcd2Data + (sect * MCD_SECT_SIZE), Ra2, MCD_SECT_SIZE);
-		SaveMcd(Config.Mcd2, Mcd2Data, sect * MCD_SECT_SIZE, MCD_SECT_SIZE);
+		SaveMcd(2, Config.Mcd2, Mcd2Data, sect * MCD_SECT_SIZE, MCD_SECT_SIZE);
 	}
 
 	DeliverEvent(0x11, 0x2); // 0xf0000011, 0x0004

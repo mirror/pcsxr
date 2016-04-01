@@ -84,9 +84,11 @@ int LoadConfig() {
 	QueryKeyV("Widescreen",  Conf->Widescreen);
 	QueryKeyV("HideCursor",  Conf->HideCursor);
 	QueryKeyV("SaveWindowPos",  Conf->SaveWindowPos);
+	QueryKeyV("PerGameMcd", Conf->PerGameMcd);
 	QueryKeyV("WindowPosX",  Conf->WindowPos[0]);
 	QueryKeyV("WindowPosY",  Conf->WindowPos[1]);
 	QueryKeyV("HackFix", Conf->HackFix);
+	QueryKeyV("MemHack", Conf->MemHack);
 
 	QueryKeyV("Cpu",      Conf->Cpu);
 	QueryKeyV("PsxType",  Conf->PsxType);
@@ -142,9 +144,11 @@ void SaveConfig() {
 	SetKeyV("Widescreen", Conf->Widescreen);
 	SetKeyV("HideCursor", Conf->HideCursor);
 	SetKeyV("SaveWindowPos",  Conf->SaveWindowPos);
+	SetKeyV("PerGameMcd", Conf->PerGameMcd);
 	SetKeyV("WindowPosX",  Conf->WindowPos[0]);
 	SetKeyV("WindowPosY",  Conf->WindowPos[1]);
 	SetKeyV("HackFix", Conf->HackFix);
+	SetKeyV("MemHack", Conf->MemHack);
 
 	SetKeyV("Cpu",     Conf->Cpu);
 	SetKeyV("PsxType", Conf->PsxType);
