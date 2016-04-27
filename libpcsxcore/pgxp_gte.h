@@ -32,11 +32,15 @@
 
 void	PGXP_Init();	// initialise memory
 char*	PGXP_GetMem();	// return pointer to precision memory
+u32		PGXP_ConvertAddress(u32 addr);
 
 // -- GTE functions
 // Transforms
-void	PGXP_pushSXYZ2f(float _x, float _y, float _z);
-void	PGXP_pushSXYZ2s(s64 _x, s64 _y, s64 _z);
+void	PGXP_pushSXYZ2f(float _x, float _y, float _z, unsigned int _v);
+void	PGXP_pushSXYZ2s(s64 _x, s64 _y, s64 _z, u32 v);
+
+void	PGXP_RTPS(u32 _n, u32 _v);
+
 int		PGXP_NLCIP_valid();
 float	PGXP_NCLIP();
 

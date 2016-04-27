@@ -499,7 +499,9 @@ int docop2(int op) {
 		
 		PGXP_pushSXYZ2s(Lm_G1_ia((s64)OFX + (s64)(IR1 * h_over_sz3) * (Config.Widescreen ? 0.75 : 1)), 
 			Lm_G2_ia((s64)OFY + (s64)(IR2 * h_over_sz3)),
-			SZ3);
+			SZ3, SXY2);
+
+		//PGXP_RTPS(0, SXY2);
 		
 		MAC0 = F((s64) DQB + ((s64) DQA * h_over_sz3));
 		IR0 = Lm_H(m_mac0, 1);
@@ -889,7 +891,9 @@ int docop2(int op) {
 			
 			PGXP_pushSXYZ2s(Lm_G1_ia((s64)OFX + (s64)(IR1 * h_over_sz3) * (Config.Widescreen ? 0.75 : 1)),
 				Lm_G2_ia((s64)OFY + (s64)(IR2 * h_over_sz3)), 
-				SZ3);
+				SZ3, SXY2);
+
+			//PGXP_RTPS(v, SXY2);
 		}
 
 		MAC0 = F((s64) DQB + ((s64) DQA * h_over_sz3));

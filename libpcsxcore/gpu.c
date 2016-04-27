@@ -143,7 +143,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 #endif
 				break;
 			}
-			GPU_pgxpMemory(madr, PGXP_GetMem());
+			GPU_pgxpMemory(PGXP_ConvertAddress(madr), PGXP_GetMem());
 			GPU_writeDataMem(ptr, size);
 
 #if 0

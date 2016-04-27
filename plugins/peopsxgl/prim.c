@@ -1936,7 +1936,7 @@ void primBlkFill(unsigned char * baseAddr)
  lx0 = lx3 = sprtX;
  lx1 = lx2 = (sprtX+sprtW);
 
- offsetBlk();
+ offsetBlk(baseAddr);
 
  if(ClipVertexListScreen())                           
   {
@@ -2283,7 +2283,7 @@ void primTileS(unsigned char * baseAddr)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST();
+ offsetST(baseAddr);
 
  if((dwActFixes&1) &&                                  // FF7 special game gix (battle cursor)
     sprtX==0 && sprtY==0 && sprtW==24 && sprtH==16) 
@@ -2346,7 +2346,7 @@ void primTile1(unsigned char * baseAddr)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST();
+ offsetST(baseAddr);
 
  bDrawTextured = FALSE;
  bDrawSmoothShaded = FALSE;
@@ -2393,7 +2393,7 @@ void primTile8(unsigned char * baseAddr)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST();
+ offsetST(baseAddr);
 
  bDrawTextured = FALSE;
  bDrawSmoothShaded = FALSE;
@@ -2440,7 +2440,7 @@ void primTile16(unsigned char * baseAddr)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST();
+ offsetST(baseAddr);
 
  bDrawTextured = FALSE;
  bDrawSmoothShaded = FALSE;
@@ -2555,7 +2555,7 @@ void primSprt8(unsigned char * baseAddr)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST();
+ offsetST(baseAddr);
 
  // do texture stuff
  gl_ux[0]=gl_ux[3]=baseAddr[8];//gpuData[2]&0xff;
@@ -2676,7 +2676,7 @@ void primSprt16(unsigned char * baseAddr)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST();
+ offsetST(baseAddr);
 
  // do texture stuff
  gl_ux[0]=gl_ux[3]=baseAddr[8];//gpuData[2]&0xff;
@@ -2878,7 +2878,7 @@ void primSprtSRest(unsigned char * baseAddr,unsigned short type)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST();
+ offsetST(baseAddr);
 
  ulClutID=(gpuData[2]>>16);
 
@@ -3008,7 +3008,7 @@ void primSprtS(unsigned char * baseAddr)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST();
+ offsetST(baseAddr);
 
  ulClutID=(gpuData[2]>>16);
 

@@ -38,6 +38,7 @@ typedef struct
 	float	z;
 	unsigned int	valid;
 	unsigned int	count;
+	unsigned int	value;
 } PGXP_vertex;
 
 const unsigned int primStrideTable[] = { 1, 2, 1, 2, 2, 3, 2, 3, 0 };
@@ -60,15 +61,55 @@ void PGXP_SetAddress(unsigned int addr)
 	currentAddr = addr;
 }
 
-// Get parallel vertex values
-int PGXP_GetVertices(unsigned int* addr, void* pOutput)
+void PGXP_SetMatrix(float left, float right, float bottom, float top, float zNear, float zFar)
 {
-	unsigned int	primCmd		= ((*addr >> 24) & 0xff);		// primitive command
-	unsigned int	primIdx		= min((primCmd - 0x20) >> 2, 8);		// index to primitive lookup
-	OGLVertex*		pVertex		= (OGLVertex*)pOutput;			// pointer to output vertices
-	unsigned int	stride		= primStrideTable[primIdx];		// stride between vertices
-	unsigned int	count		= primCountTable[primIdx];		// number of vertices
-	PGXP_vertex*	primStart	= NULL;							// pointer to first vertex
+	GLfloat m[16];
+	for (unsigned int i = 0; i < 16; ++i)
+		m[i] = 0.f;
+
+	//if ((right-left) != 0)
+	//{
+	//	m[0] = 2 / (right - left);
+	//	m[12] = -((right + left) / (right - left));
+	//}
+	//if ((top-bottom) != 0)
+	//{
+	//	m[5] = 2 / (top - bottom);
+	//	m[13] = -((top + bottom) / (top - bottom));
+	//}
+	//m[10] = -2 / (zFar - zNear);
+	//m[14] = -((zFar + zNear) / (zFar - zNear));
+	//m[15] = 1;
+
+	if ((right-left) != 0)
+	{
+		m[0] = 2 / (right - left);
+		m[8] = -((right + left) / (right - left));
+	}
+	if ((top-bottom) != 0)
+	{
+		m[5] = 2 / (top - bottom);
+		m[9] = -((top + bottom) / (top - bottom));
+	}
+	m[10] = -2 / (zFar - zNear);
+	m[14] = -((zFar + zNear) / (zFar - zNear));
+	m[11] = 1;
+
+	glLoadMatrixf(m);
+	//glOrtho(left, right, bottom, top, zNear, zFar);
+}
+
+// Get parallel vertex values
+int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
+{
+	unsigned int	primCmd		= ((*addr >> 24) & 0xff);			// primitive command
+	unsigned int	primIdx		= min((primCmd - 0x20) >> 2, 8);	// index to primitive lookup
+	OGLVertex*		pVertex		= (OGLVertex*)pOutput;				// pointer to output vertices
+	unsigned int	stride		= primStrideTable[primIdx];			// stride between vertices
+	unsigned int	count		= primCountTable[primIdx];			// number of vertices
+	PGXP_vertex*	primStart	= NULL;								// pointer to first vertex
+	char			invalidVert	= 0;								// Number of vertices without valid PGXP values
+	float			w = 0;											// W coordinate of transformed vertex
 
 	if (PGXP_Mem == NULL)
 		return 0;
@@ -76,12 +117,27 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput)
 	// Offset to start of primitive
 	primStart = &PGXP_Mem[currentAddr + 1];
 
+	// Find any invalid vertices
 	for (unsigned i = 0; i < count; ++i)
 	{
+		if(!primStart[stride * i].valid)
+			invalidVert++;
+	}
+
+	for (unsigned i = 0; i < count; ++i)
+	{
+		w = primStart[stride * i].z;
+		// If there are any invalid vertices set all w values to 1
+		// iCB: Could use plane equation to find w for single invalid vertex in a quad
+		if (invalidVert > 0)
+			w = 1;
+
 		if (primStart[stride * i].valid)
 		{
-			pVertex[i].x = primStart[stride * i].x;
-			pVertex[i].y = primStart[stride * i].y;
+			// Premultiply x,y coorindates by w because they've already been divided by w
+			pVertex[i].x = (primStart[stride * i].x + xOffs) * w;
+			pVertex[i].y = (primStart[stride * i].y + yOffs) * w;
+			pVertex[i].z = w;
 		}
 	}
 

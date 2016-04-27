@@ -599,8 +599,10 @@ int GLinitialize()
 
  glMatrixMode(GL_PROJECTION);                          // init projection with psx resolution
  glLoadIdentity();
- glOrtho(0,PSXDisplay.DisplayMode.x,
-         PSXDisplay.DisplayMode.y, 0, -1, 1);
+ //glOrtho(0,PSXDisplay.DisplayMode.x,
+ //        PSXDisplay.DisplayMode.y, 0, -1, 1);
+
+ PGXP_SetMatrix(0, PSXDisplay.DisplayMode.x, PSXDisplay.DisplayMode.y, 0, -1, 1);
 
  if(iZBufferDepth)                                     // zbuffer?
   {
@@ -1019,8 +1021,6 @@ BOOL offsetline(unsigned int* addr)
  vertex[2].y=(short)((float)y1+py);
 
 
-	PGXP_GetVertices(addr, vertex);
-
  if(vertex[0].x==vertex[3].x &&                        // ortho rect? done
     vertex[1].x==vertex[2].x &&
     vertex[0].y==vertex[1].y &&
@@ -1038,6 +1038,8 @@ BOOL offsetline(unsigned int* addr)
  vertex[2].y-=VERTEX_OFFY;
  vertex[3].x-=VERTEX_OFFX;
  vertex[3].y-=VERTEX_OFFY;
+
+ PGXP_GetVertices(addr, vertex, -VERTEX_OFFX, -VERTEX_OFFY);
 
  return FALSE;
 }
@@ -1070,12 +1072,12 @@ BOOL offset2(unsigned int* addr)
 	vertex[1].y=ly1;
  }
 
- PGXP_GetVertices(addr, vertex);
-
  vertex[0].x+=PSXDisplay.CumulOffset.x;
  vertex[1].x+=PSXDisplay.CumulOffset.x;
  vertex[0].y+=PSXDisplay.CumulOffset.y;
  vertex[1].y+=PSXDisplay.CumulOffset.y;
+
+ PGXP_GetVertices(addr, vertex, PSXDisplay.CumulOffset.x, PSXDisplay.CumulOffset.y);
 
  return FALSE;
 }
@@ -1115,14 +1117,14 @@ BOOL offset3(unsigned int* addr)
 	vertex[2].y=ly2;
  }
 
- PGXP_GetVertices(addr, vertex);
-
  vertex[0].x+=PSXDisplay.CumulOffset.x;
  vertex[1].x+=PSXDisplay.CumulOffset.x;
  vertex[2].x+=PSXDisplay.CumulOffset.x;
  vertex[0].y+=PSXDisplay.CumulOffset.y;
  vertex[1].y+=PSXDisplay.CumulOffset.y;
  vertex[2].y+=PSXDisplay.CumulOffset.y;
+
+ PGXP_GetVertices(addr, vertex, PSXDisplay.CumulOffset.x, PSXDisplay.CumulOffset.y);
 
  return FALSE;
 }
@@ -1168,8 +1170,6 @@ BOOL offset4(unsigned int* addr)
 	vertex[3].x=lx3;
 	vertex[3].y=ly3;
  }
- 
- PGXP_GetVertices(addr, vertex);
 
  vertex[0].x+=PSXDisplay.CumulOffset.x;
  vertex[1].x+=PSXDisplay.CumulOffset.x;
@@ -1180,12 +1180,14 @@ BOOL offset4(unsigned int* addr)
  vertex[2].y+=PSXDisplay.CumulOffset.y;
  vertex[3].y+=PSXDisplay.CumulOffset.y;
 
+ PGXP_GetVertices(addr, vertex, PSXDisplay.CumulOffset.x, PSXDisplay.CumulOffset.y);
+
  return FALSE;
 }
 
 ///////////////////////////////////////////////////////// 
 
-void offsetST(void)
+void offsetST(unsigned int* addr)
 {
  if(bDisplayNotSet)
   SetOGLDisplaySettings(1);
@@ -1215,6 +1217,8 @@ void offsetST(void)
  vertex[1].y=ly1+PSXDisplay.CumulOffset.y;
  vertex[2].y=ly2+PSXDisplay.CumulOffset.y;
  vertex[3].y=ly3+PSXDisplay.CumulOffset.y;
+
+ PGXP_GetVertices(addr, vertex, PSXDisplay.CumulOffset.x, PSXDisplay.CumulOffset.y);
 }
 
 ///////////////////////////////////////////////////////// 
@@ -1282,7 +1286,7 @@ void offsetScreenUpload(int Position)
  
 ///////////////////////////////////////////////////////// 
 
-void offsetBlk(void)
+void offsetBlk(unsigned int* addr)
 {
  if(bDisplayNotSet)
   SetOGLDisplaySettings(1);
@@ -1295,6 +1299,8 @@ void offsetBlk(void)
  vertex[1].y=ly1-PSXDisplay.GDrawOffset.y + PreviousPSXDisplay.Range.y0;
  vertex[2].y=ly2-PSXDisplay.GDrawOffset.y + PreviousPSXDisplay.Range.y0;
  vertex[3].y=ly3-PSXDisplay.GDrawOffset.y + PreviousPSXDisplay.Range.y0;
+
+ PGXP_GetVertices(addr, vertex, PreviousPSXDisplay.Range.x0, PreviousPSXDisplay.Range.y0);
 
  if(iUseMask)
   {

@@ -1314,8 +1314,11 @@ void SetScanLines(void)
   }
 
  glLoadIdentity();
- glOrtho(0,PSXDisplay.DisplayMode.x,
-         PSXDisplay.DisplayMode.y, 0, -1, 1);
+ //glOrtho(0,PSXDisplay.DisplayMode.x,
+ //        PSXDisplay.DisplayMode.y, 0, -1, 1);
+
+ PGXP_SetMatrix(0, PSXDisplay.DisplayMode.x, PSXDisplay.DisplayMode.y, 0, -1, 1);
+
 
  if(bKeepRatio)
   glViewport(rRatioRect.left,
@@ -1889,8 +1892,12 @@ void updateDisplayIfChanged(void)
  else                                                  // some res change?
   {
    glLoadIdentity();
-   glOrtho(0,PSXDisplay.DisplayModeNew.x,              // -> new psx resolution
-             PSXDisplay.DisplayModeNew.y, 0, -1, 1);
+   //glOrtho(0,PSXDisplay.DisplayModeNew.x,              // -> new psx resolution
+   //          PSXDisplay.DisplayModeNew.y, 0, -1, 1);
+
+   PGXP_SetMatrix(0, PSXDisplay.DisplayModeNew.x, PSXDisplay.DisplayModeNew.y, 0, -1, 1);
+
+
    if(bKeepRatio) SetAspectRatio();
   }
 
@@ -2985,6 +2992,11 @@ ENDVRAM:
      if(gpuDataP == gpuDataC)
       {
        gpuDataC=gpuDataP=0;
+	   for (unsigned int i = 0; i < 4; i++)	//iCB: remove stale vertex data
+	   {
+		   vertex[i].x = vertex[i].y = 0.f;
+		   vertex[i].z = 1.f;
+	   }
        primFunc[gpuCommand]((unsigned char *)gpuDataM);
 
        if(dwEmuFixes&0x0001 || dwActFixes&0x20000)     // hack for emulating "gpu busy" in some games
