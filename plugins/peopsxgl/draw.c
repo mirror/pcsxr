@@ -599,10 +599,10 @@ int GLinitialize()
 
  glMatrixMode(GL_PROJECTION);                          // init projection with psx resolution
  glLoadIdentity();
- //glOrtho(0,PSXDisplay.DisplayMode.x,
- //        PSXDisplay.DisplayMode.y, 0, -1, 1);
+ glOrtho(0,PSXDisplay.DisplayMode.x,
+         PSXDisplay.DisplayMode.y, 0, -1, 1);
 
- PGXP_SetMatrix(0, PSXDisplay.DisplayMode.x, PSXDisplay.DisplayMode.y, 0, -1, 1);
+ //PGXP_SetMatrix(0, PSXDisplay.DisplayMode.x, PSXDisplay.DisplayMode.y, 0, -1, 1);
 
  if(iZBufferDepth)                                     // zbuffer?
   {

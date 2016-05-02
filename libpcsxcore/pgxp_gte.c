@@ -306,8 +306,8 @@ void PGXP_RTPS(u32 _n, u32 _v)
 	float MAC2 = TRY + (R21 * VX(_n)) + (R22 * VY(_n)) + (R23 * VZ(_n));
 	float MAC3 = TRZ + (R31 * VX(_n)) + (R32 * VY(_n)) + (R33 * VZ(_n));
 
-	float SZ3 = MAC3;
 	float H = psxRegs.CP2C.p[26].sw.l;
+	float SZ3 = max(MAC3, H);
 	float h_over_sz3 = H / SZ3;
 
 	// Offsets with 16-bit shift
@@ -333,26 +333,26 @@ int PGXP_NLCIP_valid()
 
 float PGXP_NCLIP()
 {
-//	float nclip = ((SX0 * SY1) + (SX1 * SY2) + (SX2 * SY0) - (SX0 * SY2) - (SX1 * SY0) - (SX2 * SY1));
+	float nclip = ((SX0 * SY1) + (SX1 * SY2) + (SX2 * SY0) - (SX0 * SY2) - (SX1 * SY0) - (SX2 * SY1));
 
 	// ensure fractional values are not incorrectly rounded to 0
-	//if ((fabs(nclip) < 1.0f) && (nclip != 0))
-	//	nclip += (nclip < 0.f ? -1 : 1);
+	if ((fabs(nclip) < 1.0f) && (nclip != 0))
+		nclip += (nclip < 0.f ? -1 : 1);
 
-	float AX = SX1 - SX0;
-	float AY = SY1 - SY0;
+	//float AX = SX1 - SX0;
+	//float AY = SY1 - SY0;
 
-	float BX = SX2 - SX0;
-	float BY = SY2 - SY0;
+	//float BX = SX2 - SX0;
+	//float BY = SY2 - SY0;
 
-	// normalise A and B
-	float mA = sqrt((AX*AX) + (AY*AY));
-	float mB = sqrt((BX*BX) + (BY*BY));
+	//// normalise A and B
+	//float mA = sqrt((AX*AX) + (AY*AY));
+	//float mB = sqrt((BX*BX) + (BY*BY));
 
-	// calculate AxB to get Z component of C
-	float CZ = ((AX * BY) - (AY * BX)) * (1 << 12);
+	//// calculate AxB to get Z component of C
+	//float CZ = ((AX * BY) - (AY * BX)) * (1 << 12);
 
-	return CZ;// nclip;
+	return nclip;
 }
 
 static precise_value PGXP_MFC2_int(u32 reg)

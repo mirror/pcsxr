@@ -183,6 +183,7 @@ typedef struct OGLVertexTag
  GLfloat x;
  GLfloat y;
  GLfloat z;
+ GLfloat w;
 
  GLfloat sow;
  GLfloat tow;

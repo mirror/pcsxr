@@ -151,16 +151,16 @@ static __inline void PRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex2
 {
  glBegin(GL_TRIANGLE_STRIP);
   glTexCoord2fv(&vertex1->sow);
-  glVertex3fv(&vertex1->x);
+  PGXP_glVertexfv(&vertex1->x);
   
   glTexCoord2fv(&vertex2->sow);
-  glVertex3fv(&vertex2->x);
+  PGXP_glVertexfv(&vertex2->x);
   
   glTexCoord2fv(&vertex4->sow);
-  glVertex3fv(&vertex4->x);
+  PGXP_glVertexfv(&vertex4->x);
   
   glTexCoord2fv(&vertex3->sow);
-  glVertex3fv(&vertex3->x);
+  PGXP_glVertexfv(&vertex3->x);
  glEnd();
 }
 
@@ -171,13 +171,13 @@ static __inline void PRIMdrawTexturedTri(OGLVertex* vertex1, OGLVertex* vertex2,
 {
  glBegin(GL_TRIANGLES);
   glTexCoord2fv(&vertex1->sow);
-  glVertex3fv(&vertex1->x);
+  PGXP_glVertexfv(&vertex1->x);
 
   glTexCoord2fv(&vertex2->sow);
-  glVertex3fv(&vertex2->x);
+  PGXP_glVertexfv(&vertex2->x);
 
   glTexCoord2fv(&vertex3->sow);
-  glVertex3fv(&vertex3->x);
+  PGXP_glVertexfv(&vertex3->x);
  glEnd();
 }
 
@@ -190,15 +190,15 @@ static __inline void PRIMdrawTexGouraudTriColor(OGLVertex* vertex1, OGLVertex* v
 
   SETPCOL(vertex1); 
   glTexCoord2fv(&vertex1->sow);
-  glVertex3fv(&vertex1->x);
+  PGXP_glVertexfv(&vertex1->x);
 
   SETPCOL(vertex2); 
   glTexCoord2fv(&vertex2->sow);
-  glVertex3fv(&vertex2->x);
+  PGXP_glVertexfv(&vertex2->x);
 
   SETPCOL(vertex3); 
   glTexCoord2fv(&vertex3->sow);
-  glVertex3fv(&vertex3->x);
+  PGXP_glVertexfv(&vertex3->x);
  glEnd();
 }
 
@@ -210,19 +210,19 @@ static __inline void PRIMdrawTexGouraudTriColorQuad(OGLVertex* vertex1, OGLVerte
  glBegin(GL_TRIANGLE_STRIP);
   SETPCOL(vertex1); 
   glTexCoord2fv(&vertex1->sow);
-  glVertex3fv(&vertex1->x);
+  PGXP_glVertexfv(&vertex1->x);
 
   SETPCOL(vertex2); 
   glTexCoord2fv(&vertex2->sow);
-  glVertex3fv(&vertex2->x);
+  PGXP_glVertexfv(&vertex2->x);
 
   SETPCOL(vertex4); 
   glTexCoord2fv(&vertex4->sow);
-  glVertex3fv(&vertex4->x);
+  PGXP_glVertexfv(&vertex4->x);
 
   SETPCOL(vertex3); 
   glTexCoord2fv(&vertex3->sow);
-  glVertex3fv(&vertex3->x);
+  PGXP_glVertexfv(&vertex3->x);
  glEnd();
 }
 
@@ -231,9 +231,9 @@ static __inline void PRIMdrawTexGouraudTriColorQuad(OGLVertex* vertex1, OGLVerte
 static __inline void PRIMdrawTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3) 
 {
  glBegin(GL_TRIANGLES);
-  glVertex3fv(&vertex1->x);
-  glVertex3fv(&vertex2->x);
-  glVertex3fv(&vertex3->x);
+  PGXP_glVertexfv(&vertex1->x);
+  PGXP_glVertexfv(&vertex2->x);
+  PGXP_glVertexfv(&vertex3->x);
  glEnd();
 }
 
@@ -243,10 +243,10 @@ static __inline void PRIMdrawTri2(OGLVertex* vertex1, OGLVertex* vertex2,
                            OGLVertex* vertex3, OGLVertex* vertex4) 
 {
  glBegin(GL_TRIANGLE_STRIP);                           
-  glVertex3fv(&vertex1->x);
-  glVertex3fv(&vertex3->x);
-  glVertex3fv(&vertex2->x);
-  glVertex3fv(&vertex4->x);
+  PGXP_glVertexfv(&vertex1->x);
+  PGXP_glVertexfv(&vertex3->x);
+  PGXP_glVertexfv(&vertex2->x);
+  PGXP_glVertexfv(&vertex4->x);
  glEnd();
 }
 
@@ -257,13 +257,13 @@ static __inline void PRIMdrawGouraudTriColor(OGLVertex* vertex1, OGLVertex* vert
 {
  glBegin(GL_TRIANGLES);                           
   SETPCOL(vertex1); 
-  glVertex3fv(&vertex1->x);
+  PGXP_glVertexfv(&vertex1->x);
        
   SETPCOL(vertex2); 
-  glVertex3fv(&vertex2->x);
+  PGXP_glVertexfv(&vertex2->x);
 
   SETPCOL(vertex3); 
-  glVertex3fv(&vertex3->x);
+  PGXP_glVertexfv(&vertex3->x);
  glEnd();
 }
 
@@ -274,16 +274,16 @@ static __inline void PRIMdrawGouraudTri2Color(OGLVertex* vertex1, OGLVertex* ver
 {
  glBegin(GL_TRIANGLE_STRIP);                           
   SETPCOL(vertex1); 
-  glVertex3fv(&vertex1->x);
+  PGXP_glVertexfv(&vertex1->x);
        
   SETPCOL(vertex3); 
-  glVertex3fv(&vertex3->x);
+  PGXP_glVertexfv(&vertex3->x);
 
   SETPCOL(vertex2); 
-  glVertex3fv(&vertex2->x);
+  PGXP_glVertexfv(&vertex2->x);
 
   SETPCOL(vertex4); 
-  glVertex3fv(&vertex4->x);
+  PGXP_glVertexfv(&vertex4->x);
  glEnd();
 }
 
@@ -295,10 +295,10 @@ static __inline void PRIMdrawFlatLine(OGLVertex* vertex1, OGLVertex* vertex2,OGL
 
   SETPCOL(vertex1); 
 
-  glVertex3fv(&vertex1->x);
-  glVertex3fv(&vertex2->x);
-  glVertex3fv(&vertex3->x);
-  glVertex3fv(&vertex4->x);
+  PGXP_glVertexfv(&vertex1->x);
+  PGXP_glVertexfv(&vertex2->x);
+  PGXP_glVertexfv(&vertex3->x);
+  PGXP_glVertexfv(&vertex4->x);
  glEnd();
 }
 
@@ -309,16 +309,16 @@ static __inline void PRIMdrawGouraudLine(OGLVertex* vertex1, OGLVertex* vertex2,
  glBegin(GL_QUADS);
 
   SETPCOL(vertex1); 
-  glVertex3fv(&vertex1->x);
+  PGXP_glVertexfv(&vertex1->x);
 
   SETPCOL(vertex2); 
-  glVertex3fv(&vertex2->x);
+  PGXP_glVertexfv(&vertex2->x);
 
   SETPCOL(vertex3); 
-  glVertex3fv(&vertex3->x);
+  PGXP_glVertexfv(&vertex3->x);
 
   SETPCOL(vertex4); 
-  glVertex3fv(&vertex4->x);
+  PGXP_glVertexfv(&vertex4->x);
  glEnd();
 }
 
@@ -328,10 +328,10 @@ static __inline void PRIMdrawQuad(OGLVertex* vertex1, OGLVertex* vertex2,
                            OGLVertex* vertex3, OGLVertex* vertex4) 
 {
  glBegin(GL_QUADS);
-  glVertex3fv(&vertex1->x);
-  glVertex3fv(&vertex2->x);
-  glVertex3fv(&vertex3->x);
-  glVertex3fv(&vertex4->x);
+  PGXP_glVertexfv(&vertex1->x);
+  PGXP_glVertexfv(&vertex2->x);
+  PGXP_glVertexfv(&vertex3->x);
+  PGXP_glVertexfv(&vertex4->x);
  glEnd();
 }
 

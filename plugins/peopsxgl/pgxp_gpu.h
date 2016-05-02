@@ -28,8 +28,11 @@
 #ifndef _PGXP_GPU_H_
 #define _PGXP_GPU_H_
 
+#include "stdafx.h"
+
 void	PGXP_SetMatrix(float left, float right, float bottom, float top, float zNear, float zFar);
 void	PGXP_SetAddress(unsigned int addr);
 int		PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs);
+void	PGXP_glVertexfv(GLfloat* pVertex);
 
 #endif // _PGXP_GPU_H_

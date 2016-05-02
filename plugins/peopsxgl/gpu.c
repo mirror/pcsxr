@@ -1222,16 +1222,16 @@ static __inline void XPRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex
 
  glBegin(GL_QUAD_STRIP);
   glTexCoord2fv(&vertex1->sow);
-  glVertex3fv(&vertex1->x);
+  PGXP_glVertexfv(&vertex1->x);
   
   glTexCoord2fv(&vertex2->sow);
-  glVertex3fv(&vertex2->x);
+  PGXP_glVertexfv(&vertex2->x);
   
   glTexCoord2fv(&vertex4->sow);
-  glVertex3fv(&vertex4->x);
+  PGXP_glVertexfv(&vertex4->x);
   
   glTexCoord2fv(&vertex3->sow);
-  glVertex3fv(&vertex3->x);
+  PGXP_glVertexfv(&vertex3->x);
  glEnd();
 }
 
@@ -1314,10 +1314,10 @@ void SetScanLines(void)
   }
 
  glLoadIdentity();
- //glOrtho(0,PSXDisplay.DisplayMode.x,
- //        PSXDisplay.DisplayMode.y, 0, -1, 1);
+ glOrtho(0,PSXDisplay.DisplayMode.x,
+         PSXDisplay.DisplayMode.y, 0, -1, 1);
 
- PGXP_SetMatrix(0, PSXDisplay.DisplayMode.x, PSXDisplay.DisplayMode.y, 0, -1, 1);
+ //PGXP_SetMatrix(0, PSXDisplay.DisplayMode.x, PSXDisplay.DisplayMode.y, 0, -1, 1);
 
 
  if(bKeepRatio)
@@ -1892,10 +1892,10 @@ void updateDisplayIfChanged(void)
  else                                                  // some res change?
   {
    glLoadIdentity();
-   //glOrtho(0,PSXDisplay.DisplayModeNew.x,              // -> new psx resolution
-   //          PSXDisplay.DisplayModeNew.y, 0, -1, 1);
+   glOrtho(0,PSXDisplay.DisplayModeNew.x,              // -> new psx resolution
+             PSXDisplay.DisplayModeNew.y, 0, -1, 1);
 
-   PGXP_SetMatrix(0, PSXDisplay.DisplayModeNew.x, PSXDisplay.DisplayModeNew.y, 0, -1, 1);
+ //  PGXP_SetMatrix(0, PSXDisplay.DisplayModeNew.x, PSXDisplay.DisplayModeNew.y, 0, -1, 1);
 
 
    if(bKeepRatio) SetAspectRatio();

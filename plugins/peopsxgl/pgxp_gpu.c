@@ -47,6 +47,9 @@ const unsigned int primCountTable[] = { 3, 3, 4, 4, 3, 3, 4, 4, 0 };
 PGXP_vertex*	PGXP_Mem = NULL;	// pointer to parallel memory
 unsigned int	currentAddr = 0;	// address of current DMA
 
+unsigned int	numVertices = 0;	// iCB: Used for glVertex3fv fix
+unsigned int	vertexIdx = 0;
+
 // Set current DMA address and pointer to parallel memory
 void CALLBACK GPUpgxpMemory(unsigned int addr, unsigned char* pVRAM)
 {
@@ -99,6 +102,26 @@ void PGXP_SetMatrix(float left, float right, float bottom, float top, float zNea
 	//glOrtho(left, right, bottom, top, zNear, zFar);
 }
 
+// Wrap glVertex3fv/glVertex4fv
+void PGXP_glVertexfv(GLfloat* pV)
+{
+	// If there are PGXP vertices expected
+	if (vertexIdx < numVertices)
+	{
+		// pre-multiply each element by w (to negate perspective divide)
+		for (unsigned int i = 0; i < 3; i++)
+			pV[i] *= pV[3];
+
+		// pass complete vertex to OpenGL
+		glVertex4fv(pV);
+		vertexIdx++;
+	}
+	else
+	{
+		glVertex3fv(pV);
+	}
+}
+
 // Get parallel vertex values
 int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 {
@@ -113,6 +136,10 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 
 	if (PGXP_Mem == NULL)
 		return 0;
+
+	// Reset vertex count
+	numVertices = count;
+	vertexIdx = 0;
 
 	// Offset to start of primitive
 	primStart = &PGXP_Mem[currentAddr + 1];
@@ -134,10 +161,10 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 
 		if (primStart[stride * i].valid)
 		{
-			// Premultiply x,y coorindates by w because they've already been divided by w
-			pVertex[i].x = (primStart[stride * i].x + xOffs) * w;
-			pVertex[i].y = (primStart[stride * i].y + yOffs) * w;
-			pVertex[i].z = w;
+			pVertex[i].x = (primStart[stride * i].x + xOffs);
+			pVertex[i].y = (primStart[stride * i].y + yOffs);
+			pVertex[i].z = 0.95f;
+			pVertex[i].w = w;
 		}
 	}
 
