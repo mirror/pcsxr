@@ -115,6 +115,8 @@ void PGXP_glVertexfv(GLfloat* pV)
 		// pass complete vertex to OpenGL
 		glVertex4fv(pV);
 		vertexIdx++;
+
+		pV[3] = 1.f;
 	}
 	else
 	{

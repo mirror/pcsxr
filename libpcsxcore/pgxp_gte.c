@@ -306,17 +306,18 @@ void PGXP_RTPS(u32 _n, u32 _v)
 	float MAC2 = TRY + (R21 * VX(_n)) + (R22 * VY(_n)) + (R23 * VZ(_n));
 	float MAC3 = TRZ + (R31 * VX(_n)) + (R32 * VY(_n)) + (R33 * VZ(_n));
 
-	float H = psxRegs.CP2C.p[26].sw.l;
-	float SZ3 = max(MAC3, H);
-	float h_over_sz3 = H / SZ3;
+	float H = psxRegs.CP2C.p[26].sw.l;	// Near plane
+	float F = 0xFFFF;					// Far plane?
+	float SZ3 = max(MAC3, H);			// Clamp SZ3 to near plane because we have no clipping (no proper Z)
+	//	float h_over_sz3 = H / SZ3;
 
 	// Offsets with 16-bit shift
-	float OFX = (float)psxRegs.CP2C.p[ 24 ].sd / (float)(1 << 16);
-	float OFY = (float)psxRegs.CP2C.p[ 25 ].sd / (float)(1 << 16);
+	float OFX = (float)psxRegs.CP2C.p[24].sd / (float)(1 << 16);
+	float OFY = (float)psxRegs.CP2C.p[25].sd / (float)(1 << 16);
 
 	// PSX Screen space X,Y,W components
-	float sx = OFX + (MAC1 * h_over_sz3) * (Config.Widescreen ? 0.75 : 1);
-	float sy = OFY + (MAC2 * h_over_sz3);
+	float sx = OFX + (MAC1 * (H / SZ3)) * (Config.Widescreen ? 0.75 : 1);
+	float sy = OFY + (MAC2 * (H / SZ3));
 	float sw = SZ3;
 
 	PGXP_pushSXYZ2f(sx , sy , sw, _v);

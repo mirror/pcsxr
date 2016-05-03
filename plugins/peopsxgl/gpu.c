@@ -2995,7 +2995,8 @@ ENDVRAM:
 	   for (unsigned int i = 0; i < 4; i++)	//iCB: remove stale vertex data
 	   {
 		   vertex[i].x = vertex[i].y = 0.f;
-		   vertex[i].z = 1.f;
+		   vertex[i].z = 0.95f;
+		   vertex[i].w = 1.f;
 	   }
        primFunc[gpuCommand]((unsigned char *)gpuDataM);
 
