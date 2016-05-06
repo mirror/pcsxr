@@ -106,22 +106,25 @@ void PGXP_SetMatrix(float left, float right, float bottom, float top, float zNea
 void PGXP_glVertexfv(GLfloat* pV)
 {
 	// If there are PGXP vertices expected
-	if (vertexIdx < numVertices)
-	{
+	//if (vertexIdx < numVertices)
+	//{
+	float temp[4];
+	memcpy(temp, pV, sizeof(float) * 4);
+
 		// pre-multiply each element by w (to negate perspective divide)
 		for (unsigned int i = 0; i < 3; i++)
-			pV[i] *= pV[3];
+			temp[i] *= temp[3];
 
 		// pass complete vertex to OpenGL
-		glVertex4fv(pV);
+		glVertex4fv(temp);
 		vertexIdx++;
 
-		pV[3] = 1.f;
-	}
-	else
-	{
-		glVertex3fv(pV);
-	}
+	//	pV[3] = 1.f;
+	//}
+	//else
+	//{
+	//	glVertex3fv(pV);
+	//}
 }
 
 // Get parallel vertex values
