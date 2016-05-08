@@ -356,6 +356,41 @@ int CheckCdrom() {
 		else Config.PsxType = PSX_TYPE_NTSC; // ntsc
 	}
 
+
+	if (Config.OverClock == 0) 
+	{
+		PsxClockSpeed = 33868800; // 33.8688 MHz (stock)
+	}
+	else 
+	{
+		switch (Config.PsxClock)
+		{
+		case 0:
+			PsxClockSpeed = 16934400; // 16.9344 MHz (0.5x)
+			break;
+		case 1:
+			PsxClockSpeed = 25401600; // 25.4016 MHz (0.75x)
+			break;
+		case 2:
+			PsxClockSpeed = 50803200; // 50.8032 MHz (1.5x)
+			break;
+		case 3:
+			PsxClockSpeed = 67737600; // 67.7376 MHz (2x)
+			break;
+		case 4:
+			PsxClockSpeed = 101606400; // 101.6064 MHz (3x)
+			break;
+		case 5:
+			PsxClockSpeed = 135475200; // 135.4752 MHz (4x)
+			break;
+		case 6:
+			PsxClockSpeed = 169344000; // 169.3440 MHz (5x)
+			break;
+		default:
+			PsxClockSpeed = 33868800; // 33.8688 MHz (stock)
+		}
+	}
+
 	if (CdromLabel[0] == ' ') {
 		strncpy(CdromLabel, CdromId, 9);
 	}

@@ -90,8 +90,11 @@ int LoadConfig() {
 	QueryKeyV("HackFix", Conf->HackFix);
 	QueryKeyV("MemHack", Conf->MemHack);
 
+	QueryKeyV("OverClock", Conf->OverClock);
+
 	QueryKeyV("Cpu",      Conf->Cpu);
 	QueryKeyV("PsxType",  Conf->PsxType);
+	QueryKeyV("PsxClock", Conf->PsxClock);
 
 	if (Config.Cpu == CPU_DYNAREC) {
 		Config.Debug = 0; // don't enable debugger if using dynarec core
@@ -149,9 +152,11 @@ void SaveConfig() {
 	SetKeyV("WindowPosY",  Conf->WindowPos[1]);
 	SetKeyV("HackFix", Conf->HackFix);
 	SetKeyV("MemHack", Conf->MemHack);
+	SetKeyV("OverClock", Conf->OverClock);
 
 	SetKeyV("Cpu",     Conf->Cpu);
 	SetKeyV("PsxType", Conf->PsxType);
+	SetKeyV("PsxClock", Conf->PsxClock);
 
 	RegCloseKey(myKey);
 }

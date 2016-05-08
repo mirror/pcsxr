@@ -56,6 +56,7 @@
 #define IDC_BREAK                       1012
 #define IDC_DISCPUQKEYS                 1012
 #define IDC_QKEYS                       1012
+#define IDC_OVRCLOCK                    1012
 #define IDC_EDIT1                       1013
 #define IDC_CDDA                        1013
 #define IDC_DESCR                       1013
@@ -72,6 +73,7 @@
 #define IDC_CDTIMING                    1017
 #define IDC_SLOWBOOT                    1017
 #define IDC_ASMCHECK4                   1018
+#define IDC_PSXCLOCK                    1018
 #define IDC_ASMCHECK5                   1019
 #define IDC_RELOAD1                     1019
 #define IDC_CP07                        1020
@@ -113,6 +115,8 @@
 #define IDC_CP021                       1034
 #define IDC_ASMCHECK20                  1034
 #define IDC_FIRSTCONTROLLER             1034
+#define IDC_SELPSX2                     1034
+#define IDC_SELPSXCLOCK                 1034
 #define IDC_CP022                       1035
 #define IDC_ASMCHECK21                  1035
 #define IDC_SECONDCONTROLLER            1035
@@ -359,7 +363,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        116
+#define _APS_NEXT_RESOURCE_VALUE        117
 #define _APS_NEXT_COMMAND_VALUE         40047
 #define _APS_NEXT_CONTROL_VALUE         1054
 #define _APS_NEXT_SYMED_VALUE           102

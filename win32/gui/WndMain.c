@@ -1356,9 +1356,11 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Button_SetText(GetDlgItem(hW,IDC_SAVEWINDOWPOS), _("Save window position"));
 			Button_SetText(GetDlgItem(hW,IDC_HACKFIX), _("Compatibility hacks (Raystorm/VH-D/MML/Cart World/...)"));
 			Button_SetText(GetDlgItem(hW,IDC_MEMHACK), _("Wipeout MemHack"));
+			Button_SetText(GetDlgItem(hW,IDC_OVRCLOCK), _("CPU Overclocking"));
 
 			Static_SetText(GetDlgItem(hW,IDC_MISCOPT), _("Options"));
 			Static_SetText(GetDlgItem(hW,IDC_SELPSX),  _("Psx System Type"));
+			Static_SetText(GetDlgItem(hW,IDC_SELPSXCLOCK), _("CPU Overclocking"));
 
 			Button_SetCheck(GetDlgItem(hW,IDC_XA),      Config.Xa);
 			Button_SetCheck(GetDlgItem(hW,IDC_SIO),     Config.SioIrq);
@@ -1377,10 +1379,20 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Button_SetCheck(GetDlgItem(hW,IDC_SAVEWINDOWPOS), Config.SaveWindowPos);
 			Button_SetCheck(GetDlgItem(hW,IDC_HACKFIX), Config.HackFix);
 			Button_SetCheck(GetDlgItem(hW,IDC_MEMHACK), Config.MemHack);
+			Button_SetCheck(GetDlgItem(hW,IDC_OVRCLOCK), Config.OverClock);
 
 			ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "NTSC");
 			ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "PAL");
 			ComboBox_SetCurSel(GetDlgItem(hW,IDC_PSXTYPES),Config.PsxType);
+
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "0.5x");
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "0.75");
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "1.5x");
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "2.0x");
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "3.0x");
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "4.0x");
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "5.0x");
+			ComboBox_SetCurSel(GetDlgItem(hW,IDC_PSXCLOCK), Config.PsxClock);
 
 			if (Config.Cpu == CPU_DYNAREC) {
 				Config.Debug = 0;
@@ -1389,6 +1401,11 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			}
 
 			EnableWindow(GetDlgItem(hW,IDC_PSXTYPES), !Config.PsxAuto);
+
+			if (Config.OverClock)
+				EnableWindow(GetDlgItem(hW, IDC_PSXCLOCK), TRUE);
+			else 
+				EnableWindow(GetDlgItem(hW, IDC_PSXCLOCK), FALSE);
 			break;
 
 		case WM_COMMAND: {
@@ -1398,6 +1415,8 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					tmp = ComboBox_GetCurSel(GetDlgItem(hW,IDC_PSXTYPES));
 					if (tmp == 0) Config.PsxType = 0;
 					else Config.PsxType = 1;
+
+					Config.PsxClock= ComboBox_GetCurSel(GetDlgItem(hW, IDC_PSXCLOCK));
 
 					Config.Xa      = Button_GetCheck(GetDlgItem(hW,IDC_XA));
 					Config.SioIrq  = Button_GetCheck(GetDlgItem(hW,IDC_SIO));
@@ -1426,6 +1445,8 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					Config.SaveWindowPos = Button_GetCheck(GetDlgItem(hW,IDC_SAVEWINDOWPOS));
 					Config.HackFix = Button_GetCheck(GetDlgItem(hW, IDC_HACKFIX));
 					Config.MemHack = Button_GetCheck(GetDlgItem(hW, IDC_MEMHACK));
+					Config.OverClock = Button_GetCheck(GetDlgItem(hW, IDC_OVRCLOCK));
+
 
 					if(Config.SaveWindowPos) {
 						GetWindowRect(gApp.hWnd, &rect);
@@ -1447,6 +1468,13 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					else CloseConsole();
 
 					return TRUE;
+
+				case IDC_OVRCLOCK:
+					if (Button_GetCheck(GetDlgItem(hW, IDC_OVRCLOCK)))
+						EnableWindow(GetDlgItem(hW, IDC_PSXCLOCK), TRUE);
+					else
+						EnableWindow(GetDlgItem(hW, IDC_PSXCLOCK), FALSE);
+					break;
 
 				case IDC_CPU:
 					if (Button_GetCheck(GetDlgItem(hW,IDC_CPU))) {

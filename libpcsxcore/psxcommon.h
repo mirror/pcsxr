@@ -165,6 +165,8 @@ typedef struct {
 	u32 AltSpeed2;
 	u8 HackFix;
 	u8 MemHack;
+	boolean OverClock;	// enable overclocking
+	u8 PsxClock;
 #ifdef _WIN32
 	char Lang[256];
 #endif
@@ -185,8 +187,9 @@ extern u8 vblank_count_hideafter;
 // Make the timing events trigger faster as we are currently assuming everything
 // takes one cycle, which is not the case on real hardware.
 // FIXME: Count the proper cycle and get rid of this
+u32 PsxClockSpeed;
 #define BIAS	2
-#define PSXCLK	33868800	/* 33.8688 MHz */
+#define PSXCLK	PsxClockSpeed	/* 33.8688 MHz */
 
 enum {
 	PSX_TYPE_NTSC = 0,
