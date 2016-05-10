@@ -45,6 +45,7 @@ GPUdmaChain           GPU_dmaChain;
 GPUkeypressed         GPU_keypressed;
 GPUdisplayText        GPU_displayText;
 GPUmakeSnapshot       GPU_makeSnapshot;
+GPUtoggleDebug		  GPU_toggleDebug;
 GPUfreeze             GPU_freeze;
 GPUgetScreenPic       GPU_getScreenPic;
 GPUshowScreenPic      GPU_showScreenPic;
@@ -207,6 +208,7 @@ long CALLBACK GPU__configure(void) { return 0; }
 long CALLBACK GPU__test(void) { return 0; }
 void CALLBACK GPU__about(void) {}
 void CALLBACK GPU__makeSnapshot(void) {}
+void CALLBACK GPU__toggleDebug(void) {}
 void CALLBACK GPU__keypressed(int key) {}
 long CALLBACK GPU__getScreenPic(unsigned char *pMem) { return -1; }
 long CALLBACK GPU__showScreenPic(unsigned char *pMem) { return -1; }
@@ -254,6 +256,7 @@ static int LoadGPUplugin(const char *GPUdll) {
 	LoadGpuSym0(keypressed, "GPUkeypressed");
 	LoadGpuSym0(displayText, "GPUdisplayText");
 	LoadGpuSym0(makeSnapshot, "GPUmakeSnapshot");
+	LoadGpuSym0(toggleDebug, "GPUtoggleDebug");
 	LoadGpuSym1(freeze, "GPUfreeze");
 	LoadGpuSym0(getScreenPic, "GPUgetScreenPic");
 	LoadGpuSym0(showScreenPic, "GPUshowScreenPic");

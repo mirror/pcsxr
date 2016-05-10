@@ -188,6 +188,10 @@ void PADhandleKey(int key) {
 		LidInterrupt();
 		break;
 
+	case VK_F11:
+		GPU_toggleDebug();
+		break;
+
 	case VK_F12:
 		SysPrintf("*PCSXR*: CpuReset\n");
 		psxReset();

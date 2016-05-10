@@ -30,9 +30,20 @@
 
 #include "stdafx.h"
 
+//struct OGLVertex;
+
+struct OGLVertexTag;
+typedef struct OGLVertexTag OGLVertex;
+
 void	PGXP_SetMatrix(float left, float right, float bottom, float top, float zNear, float zFar);
 void	PGXP_SetAddress(unsigned int addr);
 int		PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs);
 void	PGXP_glVertexfv(GLfloat* pVertex);
+
+extern unsigned int PGXP_vDebug;
+extern unsigned int PGXP_debugFlags[4];
+void PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4);
+void PGXP_DrawDebugTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3);
+void PGXP_DrawDebugQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4);
 
 #endif // _PGXP_GPU_H_

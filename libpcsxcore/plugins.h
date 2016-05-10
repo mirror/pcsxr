@@ -79,6 +79,7 @@ typedef long (CALLBACK* GPUconfigure)(void);
 typedef long (CALLBACK* GPUtest)(void);
 typedef void (CALLBACK* GPUabout)(void);
 typedef void (CALLBACK* GPUmakeSnapshot)(void);
+typedef void (CALLBACK* GPUtoggleDebug)(void);
 typedef void (CALLBACK* GPUkeypressed)(int);
 typedef void (CALLBACK* GPUdisplayText)(char *);
 typedef struct {
@@ -118,6 +119,7 @@ extern GPUdmaChain      GPU_dmaChain;
 extern GPUkeypressed    GPU_keypressed;
 extern GPUdisplayText   GPU_displayText;
 extern GPUmakeSnapshot  GPU_makeSnapshot;
+extern GPUtoggleDebug	GPU_toggleDebug;
 extern GPUfreeze        GPU_freeze;
 extern GPUgetScreenPic  GPU_getScreenPic;
 extern GPUshowScreenPic GPU_showScreenPic;

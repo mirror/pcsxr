@@ -35,3 +35,5 @@ EXPORTS
 	GPUvisualVibration  @28
 	GPUaddVertex        @29
 	GPUpgxpMemory		@30
+
+	GPUtoggleDebug		@31

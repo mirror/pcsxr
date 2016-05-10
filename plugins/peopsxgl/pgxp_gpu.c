@@ -106,25 +106,25 @@ void PGXP_SetMatrix(float left, float right, float bottom, float top, float zNea
 void PGXP_glVertexfv(GLfloat* pV)
 {
 	// If there are PGXP vertices expected
-	//if (vertexIdx < numVertices)
-	//{
+	if (1)//(vertexIdx < numVertices)
+	{
 	float temp[4];
 	memcpy(temp, pV, sizeof(float) * 4);
 
-		// pre-multiply each element by w (to negate perspective divide)
+		//pre-multiply each element by w (to negate perspective divide)
 		for (unsigned int i = 0; i < 3; i++)
 			temp[i] *= temp[3];
 
-		// pass complete vertex to OpenGL
+		//pass complete vertex to OpenGL
 		glVertex4fv(temp);
 		vertexIdx++;
 
-	//	pV[3] = 1.f;
-	//}
-	//else
-	//{
-	//	glVertex3fv(pV);
-	//}
+		//pV[3] = 1.f;
+	}
+	else
+	{
+		glVertex3fv(pV);
+	}
 }
 
 // Get parallel vertex values
@@ -170,9 +170,173 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 			pVertex[i].y = (primStart[stride * i].y + yOffs);
 			pVertex[i].z = 0.95f;
 			pVertex[i].w = w;
+			pVertex[i].PGXP_flag = 1;
 		}
+		else
+			pVertex[i].PGXP_flag = 2;
 	}
 
 	return 1;
 }
 
+/////////////////////////////////
+//// Visual Debugging Functions
+/////////////////////////////////
+unsigned int PGXP_vDebug = 0;
+
+const char blue[4] = { 0, 0, 255, 255 };
+const char red[4] = { 255, 0, 0, 255 };
+const char black[4] = { 0, 0, 0, 255 };
+const char yellow[4] = { 255, 255, 0, 255 };
+
+void CALLBACK GPUtoggleDebug(void)
+{
+	if (PGXP_vDebug)
+		PGXP_vDebug = 0;
+	else
+		PGXP_vDebug = 1;
+}
+
+const char* PGXP_colour(unsigned int flag)
+{
+	switch (flag)
+	{
+	case 0:
+		return yellow;
+	case 1:
+		return blue;
+	case 2:
+		return red;
+	default:
+		return black;
+	}
+}
+
+void PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4)
+{
+	GLboolean bTexture = glIsEnabled(GL_TEXTURE_2D);
+	GLfloat		fColour[4];
+	glGetFloatv(GL_CURRENT_COLOR, fColour);
+	glDisable(GL_TEXTURE_2D);
+
+	glBegin(GL_TRIANGLE_STRIP);
+
+	glColor4ubv(PGXP_colour(vertex1->PGXP_flag));
+	PGXP_glVertexfv(&vertex1->x);
+
+	glColor4ubv(PGXP_colour(vertex2->PGXP_flag));
+	PGXP_glVertexfv(&vertex2->x);
+
+	glColor4ubv(PGXP_colour(vertex3->PGXP_flag));
+	PGXP_glVertexfv(&vertex3->x);
+
+	glColor4ubv(PGXP_colour(vertex4->PGXP_flag));
+	PGXP_glVertexfv(&vertex4->x);
+
+	glEnd();
+
+	glPolygonMode(GL_FRONT, GL_LINE);
+	glPolygonMode(GL_BACK, GL_LINE);
+
+	glBegin(GL_TRIANGLE_STRIP);
+
+	glColor4ubv(black);
+	PGXP_glVertexfv(&vertex1->x);
+	PGXP_glVertexfv(&vertex2->x);
+	PGXP_glVertexfv(&vertex3->x);
+	PGXP_glVertexfv(&vertex4->x);
+
+	glColor4fv(fColour);
+
+	glEnd();
+
+	glPolygonMode(GL_FRONT, GL_FILL);
+	glPolygonMode(GL_BACK, GL_FILL);
+
+	if(bTexture == GL_TRUE)
+		glEnable(GL_TEXTURE_2D);
+}
+
+void PGXP_DrawDebugTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3)
+{
+	GLboolean bTexture = glIsEnabled(GL_TEXTURE_2D);
+	GLfloat		fColour[4];
+	glGetFloatv(GL_CURRENT_COLOR, fColour);
+	glDisable(GL_TEXTURE_2D);
+
+	glBegin(GL_TRIANGLES);
+
+	glColor4ubv(PGXP_colour(vertex1->PGXP_flag));
+	PGXP_glVertexfv(&vertex1->x);
+
+	glColor4ubv(PGXP_colour(vertex2->PGXP_flag));
+	PGXP_glVertexfv(&vertex2->x);
+
+	glColor4ubv(PGXP_colour(vertex3->PGXP_flag));
+	PGXP_glVertexfv(&vertex3->x);
+
+	glEnd();
+
+	glPolygonMode(GL_FRONT, GL_LINE);
+	glPolygonMode(GL_BACK, GL_LINE);
+
+	glBegin(GL_TRIANGLE_STRIP);
+
+	glColor4ubv(black);
+	PGXP_glVertexfv(&vertex1->x);
+	PGXP_glVertexfv(&vertex2->x);
+	PGXP_glVertexfv(&vertex3->x);
+
+	glColor4fv(fColour);
+
+	glEnd();
+
+	glPolygonMode(GL_FRONT, GL_FILL);
+	glPolygonMode(GL_BACK, GL_FILL);
+
+	if (bTexture == GL_TRUE)
+		glEnable(GL_TEXTURE_2D);
+}
+
+void PGXP_DrawDebugQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4)
+{
+	GLboolean bTexture = glIsEnabled(GL_TEXTURE_2D);
+	GLfloat		fColour[4];
+	glGetFloatv(GL_CURRENT_COLOR, fColour);
+	glDisable(GL_TEXTURE_2D);
+
+	glBegin(GL_QUADS);
+	glColor4ubv(PGXP_colour(vertex1->PGXP_flag));
+	PGXP_glVertexfv(&vertex1->x);
+
+	glColor4ubv(PGXP_colour(vertex2->PGXP_flag));
+	PGXP_glVertexfv(&vertex2->x);
+
+	glColor4ubv(PGXP_colour(vertex3->PGXP_flag));
+	PGXP_glVertexfv(&vertex3->x);
+
+	glColor4ubv(PGXP_colour(vertex4->PGXP_flag));
+	PGXP_glVertexfv(&vertex4->x);
+	glEnd();
+
+	glPolygonMode(GL_FRONT, GL_LINE);
+	glPolygonMode(GL_BACK, GL_LINE);
+
+	glBegin(GL_TRIANGLE_STRIP);
+
+	glColor4ubv(black);
+	PGXP_glVertexfv(&vertex1->x);
+	PGXP_glVertexfv(&vertex2->x);
+	PGXP_glVertexfv(&vertex3->x);
+	PGXP_glVertexfv(&vertex4->x);
+
+	glColor4fv(fColour);
+
+	glEnd();
+
+	glPolygonMode(GL_FRONT, GL_FILL);
+	glPolygonMode(GL_BACK, GL_FILL);
+
+	if (bTexture == GL_TRUE)
+		glEnable(GL_TEXTURE_2D);
+}
