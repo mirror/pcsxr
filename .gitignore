@@ -1,5 +1,8 @@
-﻿################################################################################
+################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
 /SyncToy_b769e033-01a5-40b2-9c12-6b3a0fbe40a4.dat
+macosx/build
+xcuserdata
+macosx/Info.plistvers.plist

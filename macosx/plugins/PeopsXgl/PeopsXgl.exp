@@ -29,7 +29,6 @@ _GPUshowScreenPic
 _GPUgetScreenPic
 
 _GPUkeypressed
-_GPUhSync
 _GPUvBlank
 _GPUaddVertex
 
