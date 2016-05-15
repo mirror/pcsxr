@@ -34,6 +34,9 @@ FILE *emuLog = NULL;
 u32 rewind_counter=0;
 u8 vblank_count_hideafter=0;
 
+// Used for overclocking
+u32 PsxClockSpeed = 33868800;
+
 int EmuInit() {
 	return psxInit();
 }

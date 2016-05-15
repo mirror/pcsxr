@@ -187,7 +187,7 @@ extern u8 vblank_count_hideafter;
 // Make the timing events trigger faster as we are currently assuming everything
 // takes one cycle, which is not the case on real hardware.
 // FIXME: Count the proper cycle and get rid of this
-u32 PsxClockSpeed;
+extern u32 PsxClockSpeed;
 #define BIAS	2
 #define PSXCLK	PsxClockSpeed	/* 33.8688 MHz */
 
