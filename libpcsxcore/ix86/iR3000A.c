@@ -1511,6 +1511,13 @@ static void recLW() {
 
 			MOV32MtoR(EAX, (u32)&psxH[addr & 0xfff]);
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
+
+			// iCB: PGXP hook
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+			PUSH32I(addr);
+			CALLFunc((u32)PGXP_psxMemRead32Trace);
+			resp += 8;
+			// iCB: PGXP /hook
 			return;
 		}
 		if (t == 0x1f80) {
@@ -1529,6 +1536,13 @@ static void recLW() {
 
 					MOV32MtoR(EAX, (u32)&psxH[addr & 0xffff]);
 					MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
+
+					// iCB: PGXP hook
+					PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+					PUSH32I(addr);
+					CALLFunc((u32)PGXP_psxMemRead32Trace);
+					resp += 8;
+					// iCB: PGXP /hook
 					return;
 
 				case 0x1f801810:
@@ -1597,6 +1611,13 @@ void recLWL() {
 
 			iRegs[_Rt_].state = ST_UNK;
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
+
+			// iCB: PGXP hook
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+			PUSH32I(addr);
+			CALLFunc((u32)PGXP_psxMemRead32Trace);
+			resp += 8;
+			// iCB: PGXP /hook
 			return;
 		}
 	}
@@ -1752,6 +1773,13 @@ void recLWR() {
 
 			iRegs[_Rt_].state = ST_UNK;
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
+
+			// iCB: PGXP hook
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+			PUSH32I(addr);
+			CALLFunc((u32)PGXP_psxMemRead32Trace);
+			resp += 8;
+			// iCB: PGXP /hook
 			return;
 		}
 	}
@@ -1939,6 +1967,19 @@ static void recSW() {
 				MOV32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rt_]);
 				MOV32RtoM((u32)&psxH[addr & 0xfff], EAX);
 			}
+
+			// iCB: PGXP hook
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+			if (IsConst(_Rt_)) {
+				PUSH32I(iRegs[_Rt_].k);
+			}
+			else {
+				PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			}
+			PUSH32I(addr);
+			CALLFunc((u32)PGXP_psxMemWrite32Trace);
+			resp += 12;
+			// iCB: PGXP /hook
 			return;
 		}
 		if (t == 0x1f80) {
@@ -1958,6 +1999,19 @@ static void recSW() {
 						MOV32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rt_]);
 						MOV32RtoM((u32)&psxH[addr & 0xffff], EAX);
 					}
+
+					// iCB: PGXP hook
+					PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+					if (IsConst(_Rt_)) {
+						PUSH32I(iRegs[_Rt_].k);
+					}
+					else {
+						PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+					}
+					PUSH32I(addr);
+					CALLFunc((u32)PGXP_psxMemWrite32Trace);
+					resp += 12;
+					// iCB: PGXP /hook
 					return;
 
 				case 0x1f801810:
@@ -2104,6 +2158,19 @@ void recSWL() {
 			MOV32MtoR(EAX, (u32)&psxH[addr & 0xffc]);
 			iSWLk(addr & 3);
 			MOV32RtoM((u32)&psxH[addr & 0xffc], EAX);
+
+			// iCB: PGXP hook
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+			if (IsConst(_Rt_)) {
+				PUSH32I(iRegs[_Rt_].k);
+			}
+			else {
+				PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			}
+			PUSH32I(addr);
+			CALLFunc((u32)PGXP_psxMemWrite32Trace);
+			resp += 12;
+			// iCB: PGXP /hook
 			return;
 		}
 	}
@@ -2189,6 +2256,19 @@ void recSWR() {
 			MOV32MtoR(EAX, (u32)&psxH[addr & 0xffc]);
 			iSWRk(addr & 3);
 			MOV32RtoM((u32)&psxH[addr & 0xffc], EAX);
+
+			// iCB: PGXP hook
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+			if (IsConst(_Rt_)) {
+				PUSH32I(iRegs[_Rt_].k);
+			}
+			else {
+				PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			}
+			PUSH32I(addr);
+			CALLFunc((u32)PGXP_psxMemWrite32Trace);
+			resp += 12;
+			// iCB: PGXP /hook
 			return;
 		}
 	}
