@@ -258,6 +258,9 @@ void gteMFC2() {
 void gteCFC2() {
 	if (!_Rt_) return;
 	psxRegs.GPR.r[_Rt_] = psxRegs.CP2C.p[_Rd_].d;
+#ifdef GTE_LOG
+	GTE_LOG("GTE_CFC2 [%x]<-[%x] %x (%u %u)|", _Rt_, _Rd_, psxRegs.CP2C.p[_Rd_].d);
+#endif
 }
 
 void gteMTC2() {
@@ -266,6 +269,9 @@ void gteMTC2() {
 }
 
 void gteCTC2() {
+#ifdef GTE_LOG
+	GTE_LOG("GTE_CFC2 [%x]->[%x] %x (%u %u)|", _Rt_, _Rd_, psxRegs.GPR.r[_Rt_]);
+#endif
 	CTC2(psxRegs.GPR.r[_Rt_], _Rd_);
 }
 
@@ -478,7 +484,7 @@ int docop2(int op) {
 	case 0x00:
 	case 0x01:
 #ifdef GTE_LOG
-		GTELOG("%08x RTPS", op);
+		GTE_LOG("%08x RTPS", op);
 #endif
 		
 		MAC1 = A1(/*int44*/(s64)((s64) TRX << 12) + (R11 * VX0) + (R12 * VY0) + (R13 * VZ0));
@@ -509,7 +515,7 @@ int docop2(int op) {
 
 	case 0x06:
 #ifdef GTE_LOG
-		GTELOG("%08x NCLIP", op);
+		GTE_LOG("%08x NCLIP", op);
 #endif
 		if (PGXP_NLCIP_valid())
 			MAC0 = F(PGXP_NCLIP());
@@ -519,7 +525,7 @@ int docop2(int op) {
 
 	case 0x0c:
 #ifdef GTE_LOG
-		GTELOG("%08x OP", op);
+		GTE_LOG("%08x OP", op);
 #endif
 
 		MAC1 = A1((s64) (R22 * IR3) - (R33 * IR2));
@@ -532,7 +538,7 @@ int docop2(int op) {
 
 	case 0x10:
 #ifdef GTE_LOG
-		GTELOG("%08x DPCS", op);
+		GTE_LOG("%08x DPCS", op);
 #endif
 
 		MAC1 = A1((R << 16) + (IR0 * Lm_B1(A1(((s64) RFC << 12) - (R << 16)), 0)));
@@ -551,7 +557,7 @@ int docop2(int op) {
 
 	case 0x11:
 #ifdef GTE_LOG
-		GTELOG("%08x INTPL", op);
+		GTE_LOG("%08x INTPL", op);
 #endif
 
 		MAC1 = A1((IR1 << 12) + (IR0 * Lm_B1(A1(((s64) RFC << 12) - (IR1 << 12)), 0)));
@@ -570,7 +576,7 @@ int docop2(int op) {
 
 	case 0x12:
 #ifdef GTE_LOG
-		GTELOG("%08x MVMVA", op);
+		GTE_LOG("%08x MVMVA", op);
 #endif
 
 		mx = GTE_MX(gteop);
@@ -601,7 +607,7 @@ int docop2(int op) {
 
 	case 0x13:
 #ifdef GTE_LOG
-		GTELOG("%08x NCDS", op);
+		GTE_LOG("%08x NCDS", op);
 #endif
 
 		MAC1 = A1((s64) (L11 * VX0) + (L12 * VY0) + (L13 * VZ0));
@@ -632,7 +638,7 @@ int docop2(int op) {
 
 	case 0x14:
 #ifdef GTE_LOG
-		GTELOG("%08x CDP", op);
+		GTE_LOG("%08x CDP", op);
 #endif
 
 		MAC1 = A1(/*int44*/(s64)((s64) RBK << 12) + (LR1 * IR1) + (LR2 * IR2) + (LR3 * IR3));
@@ -657,7 +663,7 @@ int docop2(int op) {
 
 	case 0x16:
 #ifdef GTE_LOG
-		GTELOG("%08x NCDT", op);
+		GTE_LOG("%08x NCDT", op);
 #endif
 
 		for(v = 0; v < 3; v++) {
@@ -690,7 +696,7 @@ int docop2(int op) {
 
 	case 0x1b:
 #ifdef GTE_LOG
-		GTELOG("%08x NCCS", op);
+		GTE_LOG("%08x NCCS", op);
 #endif
 
 		MAC1 = A1((s64) (L11 * VX0) + (L12 * VY0) + (L13 * VZ0));
@@ -721,7 +727,7 @@ int docop2(int op) {
 
 	case 0x1c:
 #ifdef GTE_LOG
-		GTELOG("%08x CC", op);
+		GTE_LOG("%08x CC", op);
 #endif
 
 		MAC1 = A1(/*int44*/(s64)(((s64) RBK) << 12) + (LR1 * IR1) + (LR2 * IR2) + (LR3 * IR3));
@@ -746,7 +752,7 @@ int docop2(int op) {
 
 	case 0x1e:
 #ifdef GTE_LOG
-		GTELOG("%08x NCS", op);
+		GTE_LOG("%08x NCS", op);
 #endif
 
 		MAC1 = A1((s64) (L11 * VX0) + (L12 * VY0) + (L13 * VZ0));
@@ -771,7 +777,7 @@ int docop2(int op) {
 
 	case 0x20:
 #ifdef GTE_LOG
-		GTELOG("%08x NCT", op);
+		GTE_LOG("%08x NCT", op);
 #endif
 
 		for(v = 0; v < 3; v++) {
@@ -798,7 +804,7 @@ int docop2(int op) {
 
 	case 0x28:
 #ifdef GTE_LOG
-		GTELOG("%08x SQR", op);
+		GTE_LOG("%08x SQR", op);
 #endif
 
 		MAC1 = A1(IR1 * IR1);
@@ -811,7 +817,7 @@ int docop2(int op) {
 
 	case 0x29:
 #ifdef GTE_LOG
-		GTELOG("%08x DPCL", op);
+		GTE_LOG("%08x DPCL", op);
 #endif
 
 		MAC1 = A1(((R << 4) * IR1) + (IR0 * Lm_B1(A1(((s64) RFC << 12) - ((R << 4) * IR1)), 0)));
@@ -830,7 +836,7 @@ int docop2(int op) {
 
 	case 0x2a:
 #ifdef GTE_LOG
-		GTELOG("%08x DPCT", op);
+		GTE_LOG("%08x DPCT", op);
 #endif
 
 		for(v = 0; v < 3; v++) {
@@ -851,7 +857,7 @@ int docop2(int op) {
 
 	case 0x2d:
 #ifdef GTE_LOG
-		GTELOG("%08x AVSZ3", op);
+		GTE_LOG("%08x AVSZ3", op);
 #endif
 
 		MAC0 = F((s64) (ZSF3 * SZ1) + (ZSF3 * SZ2) + (ZSF3 * SZ3));
@@ -860,7 +866,7 @@ int docop2(int op) {
 
 	case 0x2e:
 #ifdef GTE_LOG
-		GTELOG("%08x AVSZ4", op);
+		GTE_LOG("%08x AVSZ4", op);
 #endif
 
 		MAC0 = F((s64) (ZSF4 * SZ0) + (ZSF4 * SZ1) + (ZSF4 * SZ2) + (ZSF4 * SZ3));
@@ -869,7 +875,7 @@ int docop2(int op) {
 
 	case 0x30:
 #ifdef GTE_LOG
-		GTELOG("%08x RTPT", op);
+		GTE_LOG("%08x RTPT", op);
 #endif
 
 		for(v = 0; v < 3; v++) {
@@ -909,7 +915,7 @@ int docop2(int op) {
 
 	case 0x3d:
 #ifdef GTE_LOG
-		GTELOG("%08x GPF", op);
+		GTE_LOG("%08x GPF", op);
 #endif
 
 		MAC1 = A1(IR0 * IR1);
@@ -928,7 +934,7 @@ int docop2(int op) {
 
 	case 0x3e:
 #ifdef GTE_LOG
-		GTELOG("%08x GPL", op);
+		GTE_LOG("%08x GPL", op);
 #endif
 
 		MAC1 = A1(gte_shift(MAC1, -m_sf) + (IR0 * IR1));
@@ -947,7 +953,7 @@ int docop2(int op) {
 
 	case 0x3f:
 #ifdef GTE_LOG
-		GTELOG("%08x NCCT", op);
+		GTE_LOG("%08x NCCT", op);
 #endif
 
 		for(v = 0; v < 3; v++) {

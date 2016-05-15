@@ -99,6 +99,7 @@ typedef void (CALLBACK* GPUcursor)(int, int, int);
 typedef void (CALLBACK* GPUaddVertex)(short,short,s64,s64,s64);
 typedef void (CALLBACK* GPUsetSpeed)(float); // 1.0 = natural speed
 typedef void (CALLBACK* GPUpgxpMemory)(unsigned int, unsigned char*);
+typedef void (CALLBACK* GPUpgxpCacheVertex)(short sx, short sy, const unsigned char* _pVertex);
 
 // GPU function pointers
 extern GPUupdateLace    GPU_updateLace;
@@ -131,6 +132,7 @@ extern GPUcursor        GPU_cursor;
 extern GPUaddVertex     GPU_addVertex;
 extern GPUsetSpeed		GPU_setSpeed;
 extern GPUpgxpMemory	GPU_pgxpMemory;
+extern GPUpgxpCacheVertex GPU_pgxpCacheVertex;
 
 // CD-ROM Functions
 typedef long (CALLBACK* CDRinit)(void);

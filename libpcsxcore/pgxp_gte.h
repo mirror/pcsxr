@@ -65,4 +65,5 @@ void	PGXP_psxMemWrite16Trace(u32 mem, u16 value, u32 code);
 u8		PGXP_psxMemRead8Trace(u32 mem, u32 code);
 void	PGXP_psxMemWrite8Trace(u32 mem, u8 value, u32 code);
 
+void	PGXP_psxTrace(u32 code, u32 rtv);
 #endif /* _PGXP_GTE_H_ */

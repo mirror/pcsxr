@@ -60,6 +60,8 @@ const u32 ScratchOffset		= 2048 * 1024 / 4;
 const u32 RegisterOffset	= 2 * 2048 * 1024 / 4;
 const u32 InvalidAddress	= 3 * 2048 * 1024 / 4;
 
+unsigned int pgxp_debug = 0;
+
 //precise_value Scratch[2048 * 1024 / 4]; // mirror 2MB in 32-bit words
 //precise_value Registers[2048 * 1024 / 4]; // mirror 2MB in 32-bit words
 
@@ -220,6 +222,7 @@ precise_value PGXP_validateXY(precise_value *high, u32 low)
 	//	high->x = temp.x;
 	//	high->y = temp.y;
 	//	high->valid = 1;
+	//	high->value = low;
 	//}
 
 	return *high;
@@ -243,10 +246,12 @@ precise_value PGXP_copyXY(u32 low)
 	ret.valid = 0;
 	temp.word = low;
 
+	ret.z= 1;
 	ret.x = temp.x;
 	ret.y = temp.y;
 	ret.count = 0;
 	ret.valid = 1;
+	ret.value = low;
 
 	return ret;
 }
@@ -254,6 +259,7 @@ precise_value PGXP_copyXY(u32 low)
 void PGXP_pushSXYZ2f(float _x, float _y, float _z, unsigned int _v)
 {
 	static unsigned int uCount = 0;
+	low_value temp;
 	// push values down FIFO
 	SXY0 = SXY1;
 	SXY1 = SXY2;
@@ -264,6 +270,10 @@ void PGXP_pushSXYZ2f(float _x, float _y, float _z, unsigned int _v)
 	SXY2.value	= _v;
 	SXY2.valid	= 1;
 	SXY2.count	= uCount++;
+
+	// cache value in GPU plugin
+	temp.word = _v;
+	GPU_pgxpCacheVertex(temp.x, temp.y, &SXY2);
 
 #ifdef GTE_LOG
 	GTE_LOG("PGPR_PUSH (%f, %f) %u %u|", SXY2.x, SXY2.y, SXY2.valid, SXY2.count);
@@ -483,7 +493,7 @@ void PGPR_L32(u32 addr, u32 code, u32 value)
 	case 35:	//LW
 		CPU_reg[reg] = PGXP_validateXY(ReadMem(addr), value);
 		break;
-	case 37:	//LWR
+	case 38:	//LWR
 		CPU_reg[reg] = PGXP_validateXY(ReadMem(addr), value);
 		break;
 	case 50:	//LWC2 (GTE vertex reads)
@@ -603,6 +613,10 @@ void PGXP_psxMemWrite32Trace(u32 mem, u32 value, u32 code)
 u16 PGXP_psxMemRead16Trace(u32 mem, u32 code)
 {
 	u16 value = psxMemRead16(mem);
+#ifdef GTE_LOG
+	u32 reg = ((code >> 16) & 0x1F); // The rt part of the instruction register 
+	GTE_LOG("PGPR_L16 %x %x[%x %x]|", mem, value, code, reg);
+#endif
 	PGPR_InvalidLoad(mem, code, 116);
 	return value;
 }
@@ -610,12 +624,20 @@ u16 PGXP_psxMemRead16Trace(u32 mem, u32 code)
 void PGXP_psxMemWrite16Trace(u32 mem, u16 value, u32 code)
 {
 	PGPR_InvalidStore(mem, code, 216);
+#ifdef GTE_LOG
+	u32 reg = ((code >> 16) & 0x1F); // The rt part of the instruction register 
+	GTE_LOG("PGPR_S16 %x %x[%x %x]|", mem, value, code, reg);
+#endif
 	psxMemWrite16(mem, value);
 }
 
 u8 PGXP_psxMemRead8Trace(u32 mem, u32 code)
 {
 	u8 value = psxMemRead8(mem);
+#ifdef GTE_LOG
+	u32 reg = ((code >> 16) & 0x1F); // The rt part of the instruction register 
+	GTE_LOG("PGPR_L8 %x %x[%x %x]|", mem, value, code, reg);
+#endif
 	PGPR_InvalidLoad(mem, code, 18);
 	return value;
 }
@@ -623,5 +645,22 @@ u8 PGXP_psxMemRead8Trace(u32 mem, u32 code)
 void PGXP_psxMemWrite8Trace(u32 mem, u8 value, u32 code)
 {
 	PGPR_InvalidStore(mem, code, 28);
+#ifdef GTE_LOG
+	u32 reg = ((code >> 16) & 0x1F); // The rt part of the instruction register 
+	GTE_LOG("PGPR_S8 %x %x[%x %x]|", mem, value, code, reg);
+#endif
 	psxMemWrite8(mem, value);
+}
+
+void PGXP_psxTrace(u32 code, u32 rtv)
+{
+#ifdef GTE_LOG
+//u32 reg = ((code >> 16) & 0x1F); // The rt part of the instruction register 
+	u32 op	 = ((code >> 26));
+	u32 func =	((code      ) & 0x3F);  // The funct part of the instruction register 
+	u32 rd	 =	((code >> 11) & 0x1F);  // The rd part of the instruction register 
+	u32 rt	 =	((code >> 16) & 0x1F);  // The rt part of the instruction register 
+	u32 rs	 =	((code >> 21) & 0x1F);  // The rs part of the instruction register 
+	GTE_LOG("PGPR_Trace op:%u func:%u [rt:%x (%x) rs:%x rd:%x] %x|", op, func, rt, rtv, rs, rd, code);
+#endif
 }
