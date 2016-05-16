@@ -26,6 +26,7 @@
 ***************************************************************************/
 
 #include "pgxp_gte.h"
+#include "psxcommon.h"
 #include "psxmem.h"
 #include "r3000a.h"
 
@@ -72,7 +73,7 @@ void PGXP_Init()
 
 char* PGXP_GetMem()
 {
-	return (char*)(Mem);
+	return Config.PGXP_GTE ? (char*)(Mem) : NULL;
 }
 
 /*  Playstation Memory Map (from Playstation doc by Joshua Walker)
@@ -266,14 +267,17 @@ void PGXP_pushSXYZ2f(float _x, float _y, float _z, unsigned int _v)
 	
 	SXY2.x		= _x;
 	SXY2.y		= _y;
-	SXY2.z		= _z;
+	SXY2.z		= Config.PGXP_Texture ? _z : 1.f;
 	SXY2.value	= _v;
 	SXY2.valid	= 1;
 	SXY2.count	= uCount++;
 
 	// cache value in GPU plugin
 	temp.word = _v;
-	GPU_pgxpCacheVertex(temp.x, temp.y, &SXY2);
+	if(Config.PGXP_Cache)
+		GPU_pgxpCacheVertex(temp.x, temp.y, &SXY2);
+	else
+		GPU_pgxpCacheVertex(0, 0, NULL);
 
 #ifdef GTE_LOG
 	GTE_LOG("PGPR_PUSH (%f, %f) %u %u|", SXY2.x, SXY2.y, SXY2.valid, SXY2.count);

@@ -703,6 +703,10 @@ LRESULT WINAPI MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 					DialogBox(gApp.hInstance, MAKEINTRESOURCE(IDD_CPUCONF), hWnd, (DLGPROC)ConfigureCpuDlgProc);
 					return TRUE;
 
+				case ID_CONFIGURATION_PGXP:
+					DialogBox(gApp.hInstance, MAKEINTRESOURCE(IDD_PGXPCONF), hWnd, (DLGPROC)ConfigurePGXPDlgProc);
+					return TRUE;
+
 				case ID_CONFIGURATION:
 					ConfigurePlugins(hWnd);
 					return TRUE;
@@ -1328,6 +1332,53 @@ BOOL CALLBACK ConfigureMcdsDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPa
 	return FALSE;
 }
 
+
+BOOL CALLBACK ConfigurePGXPDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) 
+{
+	long tmp;
+	RECT rect;
+
+	switch (uMsg) 
+	{
+	case WM_INITDIALOG:
+		SetWindowText(hW, _("PGXP Config"));
+
+		Button_SetCheck(GetDlgItem(hW, IDC_PGXP_GTE), Config.PGXP_GTE);
+		Button_SetCheck(GetDlgItem(hW, IDC_PGXP_CACHE), Config.PGXP_Cache);
+		Button_SetCheck(GetDlgItem(hW, IDC_PGXP_PERSP), Config.PGXP_Texture);
+
+	case WM_COMMAND: 
+		switch (LOWORD(wParam))
+		{
+		case IDCANCEL:
+			EndDialog(hW, FALSE);
+			return TRUE;
+		case IDOK:
+			Config.PGXP_GTE = Button_GetCheck(GetDlgItem(hW, IDC_PGXP_GTE));
+			Config.PGXP_Cache = Button_GetCheck(GetDlgItem(hW, IDC_PGXP_CACHE));
+			Config.PGXP_Texture = Button_GetCheck(GetDlgItem(hW, IDC_PGXP_PERSP));
+
+			if (Config.SaveWindowPos)
+			{
+				GetWindowRect(gApp.hWnd, &rect);
+				Config.WindowPos[0] = rect.left;
+				Config.WindowPos[1] = rect.top;
+			}
+
+			SaveConfig();
+
+			EndDialog(hW, TRUE);
+
+			if (Config.PsxOut) OpenConsole();
+			else CloseConsole();
+
+			return TRUE;
+		}
+	}
+	
+	return FALSE;
+}
+
 BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	long tmp;
 	RECT rect;
@@ -1762,6 +1813,8 @@ void CreateMainMenu() {
 #endif
 	ADDMENUITEM(0, _("&Memory cards..."), ID_CONFIGURATION_MEMORYCARDMANAGER);
 	ADDMENUITEM(0, _("C&PU..."), ID_CONFIGURATION_CPU);
+	ADDSEPARATOR(0);
+	ADDMENUITEM(0, _("&PGXP..."), ID_CONFIGURATION_PGXP);
 	ADDSEPARATOR(0);
 	ADDMENUITEM(0, _("&NetPlay..."), ID_CONFIGURATION_NETPLAY);
 	ADDSEPARATOR(0);

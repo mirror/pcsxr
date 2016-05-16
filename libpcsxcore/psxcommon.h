@@ -167,6 +167,10 @@ typedef struct {
 	u8 MemHack;
 	boolean OverClock;	// enable overclocking
 	u8 PsxClock;
+	// PGXP variables
+	boolean PGXP_GTE;
+	boolean PGXP_Cache;
+	boolean PGXP_Texture;
 #ifdef _WIN32
 	char Lang[256];
 #endif

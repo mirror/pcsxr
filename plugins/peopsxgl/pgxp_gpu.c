@@ -47,6 +47,7 @@ typedef struct
 const unsigned int mode_init = 0;
 const unsigned int mode_write = 1;
 const unsigned int mode_read = 2;
+const unsigned int mode_fail = 3;
 
 PGXP_vertex vertexCache[0x800 * 2][0x800 * 2];
 
@@ -77,7 +78,10 @@ void CALLBACK GPUpgxpCacheVertex(short sx, short sy, const unsigned char* _pVert
 	PGXP_vertex*		pOldVertex = NULL;
 
 	if (!pNewVertex)
+	{
+		cacheMode = mode_fail;
 		return;
+	}
 
 	//if (bGteAccuracy)
 	{
@@ -124,6 +128,9 @@ PGXP_vertex* PGXP_GetCachedVertex(short sx, short sy)
 	{
 		if (cacheMode != mode_read)
 		{
+			if (cacheMode == mode_fail)
+				return NULL;
+
 			// Initialise cache on first use
 			if (cacheMode == mode_init)
 				memset(vertexCache, 0x00, sizeof(vertexCache));
@@ -160,8 +167,7 @@ unsigned int	vertexIdx = 0;
 // Set current DMA address and pointer to parallel memory
 void CALLBACK GPUpgxpMemory(unsigned int addr, unsigned char* pVRAM)
 {
-	if (pVRAM)
-		PGXP_Mem = (PGXP_vertex*)(pVRAM);
+	PGXP_Mem = (PGXP_vertex*)(pVRAM);
 	currentAddr = addr;
 }
 
@@ -245,30 +251,32 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 	PGXP_vertex*	primStart	= NULL;								// pointer to first vertex
 	char			invalidVert	= 0;								// Number of vertices without valid PGXP values
 
-	short*			pPrimData	= (short*)addr;						// primitive data for cache lookups
+	short*			pPrimData	= ((short*)addr) + 2;				// primitive data for cache lookups
 	PGXP_vertex*	pCacheVert	= NULL;
-
-	if (PGXP_Mem == NULL)
-		return 0;
 
 	// Reset vertex count
 	numVertices = count;
 	vertexIdx = 0;
 
-	// Offset to start of primitive
-	primStart = &PGXP_Mem[currentAddr + 1];
-	pPrimData += 2;
-
-	// Find any invalid vertices
-	for (unsigned i = 0; i < count; ++i)
+	// if PGXP is enabled
+	if (PGXP_Mem != NULL)
 	{
-		if(!primStart[stride * i].valid)
-			invalidVert++;
+		// Offset to start of primitive
+		primStart = &PGXP_Mem[currentAddr + 1];
+
+		// Find any invalid vertices
+		for (unsigned i = 0; i < count; ++i)
+		{
+			if (!primStart[stride * i].valid)
+				invalidVert++;
+		}
 	}
+	else
+		invalidVert = count;
 
 	for (unsigned i = 0; i < count; ++i)
 	{
-		if (primStart[stride * i].valid)
+		if (primStart && primStart[stride * i].valid)
 		{
 			pVertex[i].x = (primStart[stride * i].x + xOffs);
 			pVertex[i].y = (primStart[stride * i].y + yOffs);

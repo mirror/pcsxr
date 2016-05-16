@@ -35,6 +35,7 @@
 #define IDD_COP2C                       117
 #define MAIN_LOGO                       118
 #define IDD_CONFIG                      120
+#define IDD_PGXPCONF                    121
 #define IDD_MEMVIEW                     136
 #define IDC_EDIT2                       1001
 #define IDC_CODE                        1001
@@ -115,7 +116,6 @@
 #define IDC_CP021                       1034
 #define IDC_ASMCHECK20                  1034
 #define IDC_FIRSTCONTROLLER             1034
-#define IDC_SELPSX2                     1034
 #define IDC_SELPSXCLOCK                 1034
 #define IDC_CP022                       1035
 #define IDC_ASMCHECK21                  1035
@@ -158,10 +158,13 @@
 #define IDC_LISTCDR                     1054
 #define IDC_GPR8                        1055
 #define IDC_LISTBIOS                    1055
+#define IDC_PGXP_GTE                    1055
 #define IDC_GPR9                        1056
 #define IDC_CONFIGGPU                   1056
+#define IDC_PGXP_CACHE                  1056
 #define IDC_GPR10                       1057
 #define IDC_TESTGPU                     1057
+#define IDC_PGXP_PERSP                  1057
 #define IDC_ABOUTGPU                    1058
 #define IDC_CONFIGSPU                   1059
 #define IDC_TESTSPU                     1060
@@ -332,6 +335,7 @@
 #define ID_CONFIGURATION_CONTROLLERS    40017
 #define ID_CONFIGURATION                40018
 #define ID_CONFIGURATION_LINKCABLE      40019
+#define ID_CONFIGURATION_PGXP           40021
 #define ID_FILE_RUNBIOS                 40026
 #define ID_CONFIGURATION_NETPLAY        40043
 #define ID_EMULATOR_SWITCH_ISO          40044
@@ -365,7 +369,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        117
 #define _APS_NEXT_COMMAND_VALUE         40047
-#define _APS_NEXT_CONTROL_VALUE         1054
-#define _APS_NEXT_SYMED_VALUE           102
+#define _APS_NEXT_CONTROL_VALUE         1056
+#define _APS_NEXT_SYMED_VALUE           103
 #endif
 #endif
