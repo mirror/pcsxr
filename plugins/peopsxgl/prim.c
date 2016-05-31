@@ -2553,6 +2553,13 @@ void DrawMultiBlur(void)
  fx=(float)PSXDisplay.DisplayMode.x/(float)(iResX); 
  fy=(float)PSXDisplay.DisplayMode.y/(float)(iResY);
 
+
+ for (unsigned int i = 0; i < 4; ++i)
+ {
+	 vertex[i].PGXP_flag = 5;
+	 vertex[i].w = 1.f;
+ }
+
  vertex[0].x+=fx;vertex[1].x+=fx;
  vertex[2].x+=fx;vertex[3].x+=fx;
 
