@@ -156,6 +156,7 @@
 #define IDC_DEBUG                       1053
 #define IDC_GPR7                        1054
 #define IDC_LISTCDR                     1054
+#define IDC_PERGAMEMCD                  1054
 #define IDC_GPR8                        1055
 #define IDC_LISTBIOS                    1055
 #define IDC_PGXP_GTE                    1055
@@ -367,9 +368,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        117
+#define _APS_NEXT_RESOURCE_VALUE        118
 #define _APS_NEXT_COMMAND_VALUE         40047
-#define _APS_NEXT_CONTROL_VALUE         1056
+#define _APS_NEXT_CONTROL_VALUE         1057
 #define _APS_NEXT_SYMED_VALUE           103
 #endif
 #endif

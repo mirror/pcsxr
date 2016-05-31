@@ -1151,6 +1151,7 @@ BOOL CALLBACK ConfigureMcdsDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPa
             ListView_SetImageList(GetDlgItem(mcdDlg, IDC_LIST2), Iiml[1], LVSIL_SMALL);
 
 			Button_Enable(GetDlgItem(hW, IDC_PASTE), FALSE);
+			Button_SetCheck(GetDlgItem(hW, IDC_PERGAMEMCD), Config.PerGameMcd);
 
 			LoadMcdDlg();
 
@@ -1160,6 +1161,12 @@ BOOL CALLBACK ConfigureMcdsDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPa
 
 		case WM_COMMAND:
 			switch (LOWORD(wParam)) {
+				case IDC_PERGAMEMCD:
+					if (IDC_PERGAMEMCD)
+						if (HIWORD(wParam) == BN_CLICKED)
+						{
+							Config.PerGameMcd = Button_GetCheck(GetDlgItem(hW, IDC_PERGAMEMCD));
+						}
 				case IDC_COPYTO1:
 					copy = ListView_GetSelectionMark(GetDlgItem(mcdDlg, IDC_LIST2));
 					copymcd = 1;
