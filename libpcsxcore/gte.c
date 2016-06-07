@@ -8,6 +8,7 @@
 #include "gte.h"
 #include "psxmem.h"
 #include "pgxp_gte.h"
+#include "pgxp_debug.h"
 
 #define GTE_SF(op) ((op >> 19) & 1)
 #define GTE_MX(op) ((op >> 17) & 3)

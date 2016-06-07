@@ -30,7 +30,7 @@
 #include "NoPic.h"
 #include "misc.h"
 #include "sio.h"
-#include "pgxp_gte.h"
+#include "pgxp_mem.h"
 
 extern void LidInterrupt();
 

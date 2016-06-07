@@ -19,7 +19,7 @@
 #include "psxhw.h"
 #include "gpu.h"
 #include "psxdma.h"
-#include "pgxp_gte.h"
+#include "pgxp_mem.h"
 
 #define GPUSTATUS_ODDLINES            0x80000000
 #define GPUSTATUS_DMABITS             0x60000000 // Two bits

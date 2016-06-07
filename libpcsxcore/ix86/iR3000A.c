@@ -25,7 +25,8 @@
 
 #include "ix86.h"
 #include <sys/mman.h>
-#include "pgxp_gte.h"
+#include "pgxp_cpu.h"
+#include "pgxp_debug.h"
 
 #ifndef MAP_ANONYMOUS
 #define MAP_ANONYMOUS MAP_ANON
@@ -553,6 +554,15 @@ static void recADDIU()  {
 
 //	iFlushRegs();
 
+	#if PGXP_TRACE >= 1 // iCB: Tracing
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
+
+
+
 	if (_Rs_ == _Rt_) {
 		if (IsConst(_Rt_)) {
 			iRegs[_Rt_].k+= _Imm_;
@@ -582,11 +592,89 @@ static void recADDIU()  {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 		}
 	}
+
+	#if PGXP_TRACE >= 1 // iCB: Tracing
+	if (IsConst(_Rt_)) 
+			PUSH32I(iRegs[_Rt_].k);
+	else 
+			PUSH32M((u32)&psxRegs.GPR.r[_Rt_]); 
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+	CALLFunc((u32)PGXP_CPU_ADDI);
+#endif
+	resp += 12;
+	#endif // iCB: /Tracing
 }
 
 static void recADDI()  {
-// Rt = Rs + Im
-	recADDIU();
+	// Rt = Rs + Im
+	if (!_Rt_) return;
+
+	//	iFlushRegs();
+
+#if PGXP_TRACE >= 1 // iCB: Tracing
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+#endif // iCB: /Tracing
+
+
+
+	if (_Rs_ == _Rt_) {
+		if (IsConst(_Rt_)) {
+			iRegs[_Rt_].k += _Imm_;
+		}
+		else {
+			if (_Imm_ == 1) {
+				INC32M((u32)&psxRegs.GPR.r[_Rt_]);
+			}
+			else if (_Imm_ == -1) {
+				DEC32M((u32)&psxRegs.GPR.r[_Rt_]);
+			}
+			else if (_Imm_) {
+				ADD32ItoM((u32)&psxRegs.GPR.r[_Rt_], _Imm_);
+			}
+		}
+	}
+	else {
+		if (IsConst(_Rs_)) {
+			MapConst(_Rt_, iRegs[_Rs_].k + _Imm_);
+		}
+		else {
+			iRegs[_Rt_].state = ST_UNK;
+
+			MOV32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rs_]);
+			if (_Imm_ == 1) {
+				INC32R(EAX);
+			}
+			else if (_Imm_ == -1) {
+				DEC32R(EAX);
+			}
+			else if (_Imm_) {
+				ADD32ItoR(EAX, _Imm_);
+			}
+			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
+		}
+	}
+
+#if PGXP_TRACE >= 1 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+	CALLFunc((u32)PGXP_CPU_ADDIU);
+#endif
+	resp += 12;
+#endif // iCB: /Tracing
 }
 
 static void recSLTI() {
@@ -594,6 +682,13 @@ static void recSLTI() {
 	if (!_Rt_) return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 1 // iCB: Tracing
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rs_)) {
 		MapConst(_Rt_, (s32)iRegs[_Rs_].k < _Imm_);
@@ -606,6 +701,21 @@ static void recSLTI() {
 	    AND32ItoR(EAX, 0xff);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 	}
+
+	#if PGXP_TRACE >= 1 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+	CALLFunc((u32)PGXP_CPU_SLTI);
+#endif
+	resp += 12;
+	#endif // iCB: /Tracing
 }
 
 static void recSLTIU() {
@@ -613,6 +723,13 @@ static void recSLTIU() {
 	if (!_Rt_) return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 1 // iCB: Tracing
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rs_)) {
 		MapConst(_Rt_, iRegs[_Rs_].k < _ImmU_);
@@ -625,6 +742,21 @@ static void recSLTIU() {
 	    AND32ItoR(EAX, 0xff);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 	}
+
+	#if PGXP_TRACE >= 1 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+	CALLFunc((u32)PGXP_CPU_SLTIU);
+#endif
+	resp += 12;
+	#endif // iCB: /Tracing
 }
 
 static void recANDI() {
@@ -632,6 +764,13 @@ static void recANDI() {
 	if (!_Rt_) return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 1 // iCB: Tracing
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
 
 	if (_Rs_ == _Rt_) {
 		if (IsConst(_Rt_)) {
@@ -650,13 +789,33 @@ static void recANDI() {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 		}
 	}
+
+	#if PGXP_TRACE >= 1 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+	CALLFunc((u32)PGXP_CPU_ANDI);
+#endif
+	resp += 12;
+	#endif // iCB: /Tracing
 }
 
 static void recORI() {
 // Rt = Rs Or Im
 	if (!_Rt_) return;
 
-//	iFlushRegs();
+	#if PGXP_TRACE >= 1 // iCB: Tracing
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
 
 	if (_Rs_ == _Rt_) {
 		if (IsConst(_Rt_)) {
@@ -675,13 +834,33 @@ static void recORI() {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 		}
 	}
+
+	#if PGXP_TRACE >= 1 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+	CALLFunc((u32)PGXP_CPU_ORI);
+#endif
+	resp += 12;
+	#endif // iCB: /Tracing
 }
 
 static void recXORI() {
 // Rt = Rs Xor Im
 	if (!_Rt_) return;
 
-//	iFlushRegs();
+	#if PGXP_TRACE >= 1 // iCB: Tracing
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
 
 	if (_Rs_ == _Rt_) {
 		if (IsConst(_Rt_)) {
@@ -700,6 +879,21 @@ static void recXORI() {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 		}
 	}
+
+	#if PGXP_TRACE >= 1 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+	CALLFunc((u32)PGXP_CPU_XORI);
+#endif
+	resp += 12;
+	#endif // iCB: /Tracing
 }
 //#endif
 //end of * Arithmetic with immediate operand  
@@ -715,6 +909,21 @@ static void recLUI()  {
 	if (!_Rt_) return;
 
 	MapConst(_Rt_, psxRegs.code << 16);
+
+	#if PGXP_TRACE >= 2 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp1);
+#else
+	CALLFunc((u32)PGXP_CPU_LUI);
+#endif
+	resp += 8;
+	#endif // iCB: /Tracing
 }
 //#endif
 //End of Load Higher .....
@@ -742,6 +951,19 @@ static void recADDU() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
+
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rs_].k + iRegs[_Rt_].k);
@@ -804,6 +1026,21 @@ static void recADDU() {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 		}
 	}
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rd_))
+		PUSH32I(iRegs[_Rd_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp3);
+#else
+	CALLFunc((u32)PGXP_CPU_ADDU);
+#endif
+	resp += 16;
+	#endif // iCB: /Tracing
 }
 
 static void recADD() {
@@ -816,6 +1053,18 @@ static void recSUBU() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rs_].k - iRegs[_Rt_].k);
@@ -838,6 +1087,21 @@ static void recSUBU() {
 		SUB32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rt_]);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rd_))
+		PUSH32I(iRegs[_Rd_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp3);
+#else
+	CALLFunc((u32)PGXP_CPU_SUBU);
+#endif
+	resp += 16;
+	#endif // iCB: /Tracing
 }   
 
 static void recSUB() {
@@ -850,6 +1114,18 @@ static void recAND() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rs_].k & iRegs[_Rt_].k);
@@ -888,6 +1164,21 @@ static void recAND() {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 		}
 	}
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rd_))
+		PUSH32I(iRegs[_Rd_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp3);
+#else
+	CALLFunc((u32)PGXP_CPU_AND);
+#endif
+	resp += 16;
+	#endif // iCB: /Tracing
 }   
 
 static void recOR() {
@@ -895,6 +1186,18 @@ static void recOR() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rs_].k | iRegs[_Rt_].k);
@@ -917,6 +1220,21 @@ static void recOR() {
 		OR32MtoR (EAX, (u32)&psxRegs.GPR.r[_Rt_]);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rd_))
+		PUSH32I(iRegs[_Rd_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp3);
+#else
+	CALLFunc((u32)PGXP_CPU_OR);
+#endif
+	resp += 16;
+	#endif // iCB: /Tracing
 }   
 
 static void recXOR() {
@@ -924,6 +1242,18 @@ static void recXOR() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rs_].k ^ iRegs[_Rt_].k);
@@ -946,6 +1276,21 @@ static void recXOR() {
 		XOR32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rt_]);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rd_))
+		PUSH32I(iRegs[_Rd_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp3);
+#else
+	CALLFunc((u32)PGXP_CPU_XOR);
+#endif
+	resp += 16;
+	#endif // iCB: /Tracing
 }
 
 static void recNOR() {
@@ -953,6 +1298,18 @@ static void recNOR() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, ~(iRegs[_Rs_].k | iRegs[_Rt_].k));
@@ -978,6 +1335,21 @@ static void recNOR() {
 		NOT32R   (EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rd_))
+		PUSH32I(iRegs[_Rd_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp3);
+#else
+	CALLFunc((u32)PGXP_CPU_NOR);
+#endif
+	resp += 16;
+	#endif // iCB: /Tracing
 }
 
 static void recSLT() {
@@ -985,6 +1357,18 @@ static void recSLT() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, (s32)iRegs[_Rs_].k < (s32)iRegs[_Rt_].k);
@@ -1013,6 +1397,21 @@ static void recSLT() {
 		AND32ItoR(EAX, 0xff);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rd_))
+		PUSH32I(iRegs[_Rd_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp3);
+#else
+	CALLFunc((u32)PGXP_CPU_SLT);
+#endif
+	resp += 16;
+	#endif // iCB: /Tracing
 }  
 
 static void recSLTU() { 
@@ -1020,6 +1419,18 @@ static void recSLTU() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rs_].k < iRegs[_Rt_].k);
@@ -1048,6 +1459,21 @@ static void recSLTU() {
 		NEG32R   (EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
+
+	#if PGXP_TRACE >= 3 // iCB: Tracing
+	if (IsConst(_Rd_))
+		PUSH32I(iRegs[_Rd_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp3);
+#else
+	CALLFunc((u32)PGXP_CPU_SLTU);
+#endif
+	resp += 16;
+	#endif // iCB: /Tracing
 }
 //#endif
 //End of * Register arithmetic
@@ -1067,11 +1493,35 @@ static void recMULT() {
 
 //	iFlushRegs();
 
+	#if PGXP_TRACE >= 4 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
+
 	if ((IsConst(_Rs_) && iRegs[_Rs_].k == 0) ||
 		(IsConst(_Rt_) && iRegs[_Rt_].k == 0)) {
 		XOR32RtoR(EAX, EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.n.lo, EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.n.hi, EAX);
+
+		#if PGXP_TRACE >= 4 // iCB: Tracing
+		PUSH32M((u32)&psxRegs.GPR.n.lo);
+		PUSH32M((u32)&psxRegs.GPR.n.hi);
+
+		PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+		CALLFunc((u32)PGXP_psxTraceOp4);
+#else
+		CALLFunc((u32)PGXP_CPU_MULT);
+#endif
+		resp += 20;
+		#endif // iCB: /Tracing
 		return;
 	}
 
@@ -1088,6 +1538,19 @@ static void recMULT() {
 	}
 	MOV32RtoM((u32)&psxRegs.GPR.n.lo, EAX);
 	MOV32RtoM((u32)&psxRegs.GPR.n.hi, EDX);
+
+	#if PGXP_TRACE >= 4 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.n.lo);
+	PUSH32M((u32)&psxRegs.GPR.n.hi);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp4);
+#else
+	CALLFunc((u32)PGXP_CPU_MULT);
+#endif
+	resp += 20;
+	#endif // iCB: /Tracing
 }
 
 static void recMULTU() {
@@ -1095,11 +1558,36 @@ static void recMULTU() {
 
 //	iFlushRegs();
 
+	#if PGXP_TRACE >= 4 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
+
+
 	if ((IsConst(_Rs_) && iRegs[_Rs_].k == 0) ||
 		(IsConst(_Rt_) && iRegs[_Rt_].k == 0)) {
 		XOR32RtoR(EAX, EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.n.lo, EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.n.hi, EAX);
+
+		#if PGXP_TRACE >= 4 // iCB: Tracing
+		PUSH32M((u32)&psxRegs.GPR.n.lo);
+		PUSH32M((u32)&psxRegs.GPR.n.hi);
+
+		PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+		CALLFunc((u32)PGXP_psxTraceOp4);
+#else
+		CALLFunc((u32)PGXP_CPU_MULTU);
+#endif
+		resp += 20;
+		#endif // iCB: /Tracing
 		return;
 	}
 
@@ -1116,12 +1604,37 @@ static void recMULTU() {
 	}
 	MOV32RtoM((u32)&psxRegs.GPR.n.lo, EAX);
 	MOV32RtoM((u32)&psxRegs.GPR.n.hi, EDX);
+
+	#if PGXP_TRACE >= 4 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.n.lo);
+	PUSH32M((u32)&psxRegs.GPR.n.hi);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp4);
+#else
+	CALLFunc((u32)PGXP_CPU_MULTU);
+#endif
+	resp += 20;
+	#endif // iCB: /Tracing
 }
 
 static void recDIV() {
 // Lo/Hi = Rs / Rt (signed)
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 4 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
+
 
 	if (IsConst(_Rt_)) {
 		if (iRegs[_Rt_].k == 0) {
@@ -1132,6 +1645,19 @@ static void recDIV() {
 				MOV32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rs_]);
 				MOV32RtoM((u32)&psxRegs.GPR.n.hi, EAX);
 			}
+
+			#if PGXP_TRACE >= 4 // iCB: Tracing
+			PUSH32M((u32)&psxRegs.GPR.n.lo);
+			PUSH32M((u32)&psxRegs.GPR.n.hi);
+
+			PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp4);
+#else
+			CALLFunc((u32)PGXP_CPU_DIV);
+#endif
+			resp += 20;
+			#endif // iCB: /Tracing
 			return;
 		}
 		MOV32ItoR(ECX, iRegs[_Rt_].k);// printf("divrtk %x\n", iRegs[_Rt_].k);
@@ -1165,12 +1691,37 @@ static void recDIV() {
 
 		x86SetJ8(j8Ptr[1]);
 	}
+
+	#if PGXP_TRACE >= 4 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.n.lo);
+	PUSH32M((u32)&psxRegs.GPR.n.hi);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp4);
+#else
+	CALLFunc((u32)PGXP_CPU_DIV);
+#endif
+	resp += 20;
+	#endif // iCB: /Tracing
 }
 
 static void recDIVU() {
 // Lo/Hi = Rs / Rt (unsigned)
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 4 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
+
 
 	if (IsConst(_Rt_)) {
 		if (iRegs[_Rt_].k == 0) {
@@ -1181,6 +1732,19 @@ static void recDIVU() {
 				MOV32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rs_]);
 				MOV32RtoM((u32)&psxRegs.GPR.n.hi, EAX);
 			}
+
+			#if PGXP_TRACE >= 4 // iCB: Tracing
+			PUSH32M((u32)&psxRegs.GPR.n.lo);
+			PUSH32M((u32)&psxRegs.GPR.n.hi);
+
+			PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp4);
+#else
+			CALLFunc((u32)PGXP_CPU_DIVU);
+#endif
+			resp += 20;
+			#endif // iCB: /Tracing
 			return;
 		}
 		MOV32ItoR(ECX, iRegs[_Rt_].k);// printf("divurtk %x\n", iRegs[_Rt_].k);
@@ -1214,6 +1778,19 @@ static void recDIVU() {
 
 		x86SetJ8(j8Ptr[1]);
 	}
+
+	#if PGXP_TRACE >= 4 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.n.lo);
+	PUSH32M((u32)&psxRegs.GPR.n.hi);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp4);
+#else
+	CALLFunc((u32)PGXP_CPU_DIVU);
+#endif
+	resp += 20;
+	#endif // iCB: /Tracing
 }
 //#endif
 //End of * Register mult/div & Register trap logic  
@@ -1248,6 +1825,17 @@ static void iPushOfB() {
 	}
 }
 
+u8 PGXP_LB_psxMemRead8(u32 mem, u32 code)
+{
+	u8 value = psxMemRead8(mem);
+#ifdef PGXP_CPU_DEBUG
+	PGXP_psxTraceOp2(code, value, mem);
+#else
+	PGXP_CPU_LB(code, value, mem);
+#endif
+	return value;
+}
+
 //#if 0
 static void recLB() {
 // Rt = mem[Rs + Im] (signed)
@@ -1270,6 +1858,18 @@ static void recLB() {
 
 			MOVSX32M8toR(EAX, (u32)&psxM[addr & 0x1fffff]);
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
+
+			// iCB: PGXP hook
+			PUSH32I(addr);
+			PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_LB);
+#endif
+			resp += 12;
+			// iCB: PGXP /hook
 			return;
 		}
 		if (t == 0x1f80 && addr < 0x1f801000) {
@@ -1278,6 +1878,18 @@ static void recLB() {
 
 			MOVSX32M8toR(EAX, (u32)&psxH[addr & 0xfff]);
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
+
+			// iCB: PGXP hook
+			PUSH32I(addr);
+			PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_LB);
+#endif
+			resp += 12;
+			// iCB: PGXP /hook
 			return;
 		}
 //		SysPrintf("unhandled r8 %x\n", addr);
@@ -1285,7 +1897,7 @@ static void recLB() {
 
 	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	iPushOfB();
-	CALLFunc((u32)PGXP_psxMemRead8Trace);
+	CALLFunc((u32)PGXP_LB_psxMemRead8);
 	if (_Rt_) {
 		iRegs[_Rt_].state = ST_UNK;
 		MOVSX32R8toR(EAX, EAX);
@@ -1293,6 +1905,17 @@ static void recLB() {
 	}
 //	ADD32ItoR(ESP, 4);
 	resp+= 8;
+}
+
+u8 PGXP_LBU_psxMemRead8(u32 mem, u32 code)
+{
+	u8 value = psxMemRead8(mem);
+#ifdef PGXP_CPU_DEBUG
+	PGXP_psxTraceOp2(code, value, mem);
+#else
+	PGXP_CPU_LBU(code, value, mem);
+#endif
+	return value;
 }
 
 static void recLBU() {
@@ -1316,6 +1939,18 @@ static void recLBU() {
 
 			MOVZX32M8toR(EAX, (u32)&psxM[addr & 0x1fffff]);
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
+
+			// iCB: PGXP hook
+			PUSH32I(addr);
+			PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_LBU);
+#endif
+			resp += 12;
+			// iCB: PGXP /hook
 			return;
 		}
 		if (t == 0x1f80 && addr < 0x1f801000) {
@@ -1324,6 +1959,18 @@ static void recLBU() {
 
 			MOVZX32M8toR(EAX, (u32)&psxH[addr & 0xfff]);
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
+
+			// iCB: PGXP hook
+			PUSH32I(addr);
+			PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_LBU);
+#endif
+			resp += 12;
+			// iCB: PGXP /hook
 			return;
 		}
 //		SysPrintf("unhandled r8u %x\n", addr);
@@ -1331,7 +1978,7 @@ static void recLBU() {
 
 	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	iPushOfB();
-	CALLFunc((u32)PGXP_psxMemRead8Trace);
+	CALLFunc((u32)PGXP_LBU_psxMemRead8);
 	if (_Rt_) {
 		iRegs[_Rt_].state = ST_UNK;
 		MOVZX32R8toR(EAX, EAX);
@@ -1339,6 +1986,17 @@ static void recLBU() {
 	}
 //	ADD32ItoR(ESP, 4);
 	resp+= 8;
+}
+
+u16 PGXP_LH_psxMemRead16(u32 mem, u32 code)
+{
+	u16 value = psxMemRead16(mem);
+#ifdef PGXP_CPU_DEBUG
+	PGXP_psxTraceOp2(code, value, mem);
+#else
+	PGXP_CPU_LH(code, value, mem);
+#endif
+	return value;
 }
 
 static void recLH() {
@@ -1362,6 +2020,18 @@ static void recLH() {
 
 			MOVSX32M16toR(EAX, (u32)&psxM[addr & 0x1fffff]);
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
+
+			// iCB: PGXP hook
+			PUSH32I(addr);
+			PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_LH);
+#endif
+			resp += 12;
+			// iCB: PGXP /hook
 			return;
 		}
 		if (t == 0x1f80 && addr < 0x1f801000) {
@@ -1370,6 +2040,18 @@ static void recLH() {
 
 			MOVSX32M16toR(EAX, (u32)&psxH[addr & 0xfff]);
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
+
+			// iCB: PGXP hook
+			PUSH32I(addr);
+			PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_LH);
+#endif
+			resp += 12;
+			// iCB: PGXP /hook
 			return;
 		}
 //		SysPrintf("unhandled r16 %x\n", addr);
@@ -1377,7 +2059,7 @@ static void recLH() {
 
 	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	iPushOfB();
-	CALLFunc((u32)PGXP_psxMemRead16Trace);
+	CALLFunc((u32)PGXP_LH_psxMemRead16);
 	if (_Rt_) {
 		iRegs[_Rt_].state = ST_UNK;
 		MOVSX32R16toR(EAX, EAX);
@@ -1385,6 +2067,17 @@ static void recLH() {
 	}
 //	ADD32ItoR(ESP, 4);
 	resp+= 8;
+}
+
+u16 PGXP_LHU_psxMemRead16(u32 mem, u32 code)
+{
+	u16 value = psxMemRead16(mem);
+#ifdef PGXP_CPU_DEBUG
+	PGXP_psxTraceOp2(code, value, mem);
+#else
+	PGXP_CPU_LHU(code, value, mem);
+#endif
+	return value;
 }
 
 static void recLHU() {
@@ -1408,6 +2101,18 @@ static void recLHU() {
 
 			MOVZX32M16toR(EAX, (u32)&psxM[addr & 0x1fffff]);
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
+
+			// iCB: PGXP hook
+			PUSH32I(addr);
+			PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_LHU);
+#endif
+			resp += 12;
+			// iCB: PGXP /hook
 			return;
 		}
 		if (t == 0x1f80 && addr < 0x1f801000) {
@@ -1416,6 +2121,18 @@ static void recLHU() {
 
 			MOVZX32M16toR(EAX, (u32)&psxH[addr & 0xfff]);
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
+
+			// iCB: PGXP hook
+			PUSH32I(addr);
+			PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_LHU);
+#endif
+			resp += 12;
+			// iCB: PGXP /hook
 			return;
 		}
 		if (t == 0x1f80) {
@@ -1472,7 +2189,7 @@ static void recLHU() {
 
 	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	iPushOfB();
-	CALLFunc((u32)PGXP_psxMemRead16Trace);
+	CALLFunc((u32)PGXP_LHU_psxMemRead16);
 	if (_Rt_) {
 		iRegs[_Rt_].state = ST_UNK;
 		MOVZX32R16toR(EAX, EAX);
@@ -1480,6 +2197,17 @@ static void recLHU() {
 	}
 //	ADD32ItoR(ESP, 4);
 	resp+= 8;
+}
+
+u32 PGXP_LW_psxMemRead32(u32 mem, u32 code)
+{
+	u32 value = psxMemRead32(mem);
+#ifdef PGXP_CPU_DEBUG
+	PGXP_psxTraceOp2(code, value, mem);
+#else
+	PGXP_CPU_LW(code, value, mem);
+#endif
+	return value;
 }
 
 static void recLW() {
@@ -1513,10 +2241,15 @@ static void recLW() {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 
 			// iCB: PGXP hook
-			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 			PUSH32I(addr);
-			CALLFunc((u32)PGXP_psxMemRead32Trace);
-			resp += 8;
+			PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_LW);
+#endif
+			resp += 12;
 			// iCB: PGXP /hook
 			return;
 		}
@@ -1538,10 +2271,15 @@ static void recLW() {
 					MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 
 					// iCB: PGXP hook
-					PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 					PUSH32I(addr);
-					CALLFunc((u32)PGXP_psxMemRead32Trace);
-					resp += 8;
+					PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+					PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+					CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+					CALLFunc((u32)PGXP_CPU_LW);
+#endif
+					resp += 12;
 					// iCB: PGXP /hook
 					return;
 
@@ -1567,7 +2305,7 @@ static void recLW() {
 
 	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	iPushOfB();
-	CALLFunc((u32)PGXP_psxMemRead32Trace);
+	CALLFunc((u32)PGXP_LW_psxMemRead32);
 	if (_Rt_) {
 		iRegs[_Rt_].state = ST_UNK;
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
@@ -1588,6 +2326,17 @@ void iLWLk(u32 shift) {
 	AND32ItoR(ECX, LWL_MASK[shift]);
 	SHL32ItoR(EAX, LWL_SHIFT[shift]);
 	OR32RtoR (EAX, ECX);
+}
+
+u32 PGXP_LWL_psxMemRead32(u32 mem, u32 code)
+{
+	u32 value = psxMemRead32(mem);
+#ifdef PGXP_CPU_DEBUG
+	PGXP_psxTraceOp2(code, value, mem);
+#else
+	PGXP_CPU_LWL(code, value, mem);
+#endif
+	return value;
 }
 
 void recLWL() {
@@ -1613,10 +2362,15 @@ void recLWL() {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 
 			// iCB: PGXP hook
-			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 			PUSH32I(addr);
-			CALLFunc((u32)PGXP_psxMemRead32Trace);
-			resp += 8;
+			PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			PUSH32I(psxRegs.code);				// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_LWL);
+#endif
+			resp += 12;
 			// iCB: PGXP /hook
 			return;
 		}
@@ -1631,7 +2385,7 @@ void recLWL() {
 	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	AND32ItoR(EAX, ~3);
 	PUSH32R  (EAX);
-	CALLFunc((u32)PGXP_psxMemRead32Trace);
+	CALLFunc((u32)PGXP_LWL_psxMemRead32);
 
 	if (_Rt_) {
 		ADD32ItoR(ESP, 8);
@@ -1752,6 +2506,17 @@ void iLWRk(u32 shift) {
 	OR32RtoR(EAX, ECX);
 }
 
+u32 PGXP_LWR_psxMemRead32(u32 mem, u32 code)
+{
+	u32 value = psxMemRead32(mem);
+#ifdef PGXP_CPU_DEBUG
+	PGXP_psxTraceOp2(code, value, mem);
+#else
+	PGXP_CPU_LWR(code, value, mem);
+#endif
+	return value;
+}
+
 void recLWR() {
 // Rt = Rt Merge mem[Rs + Im]
 
@@ -1775,10 +2540,15 @@ void recLWR() {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 
 			// iCB: PGXP hook
-			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 			PUSH32I(addr);
-			CALLFunc((u32)PGXP_psxMemRead32Trace);
-			resp += 8;
+			PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_LWR);
+#endif
+			resp += 12;
 			// iCB: PGXP /hook
 			return;
 		}
@@ -1794,7 +2564,7 @@ void recLWR() {
 	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	AND32ItoR(EAX, ~3);
 	PUSH32R  (EAX);
-	CALLFunc((u32)PGXP_psxMemRead32Trace);
+	CALLFunc((u32)PGXP_LWR_psxMemRead32);
 
 	if (_Rt_) {
 		ADD32ItoR(ESP, 8);
@@ -1823,6 +2593,16 @@ void recLWR() {
 //		ADD32ItoR(ESP, 8);
 		resp+= 12;
 	}
+}
+
+void PGXP_SB_psxMemWrite8(u32 addr, u16 value, u32 code)
+{
+#ifdef PGXP_CPU_DEBUG
+	PGXP_psxTraceOp2(code, value, addr);
+#else
+	PGXP_CPU_SH(code, value, addr);
+#endif
+	psxMemWrite8(addr, value);
 }
 
 static void recSB() {
@@ -1856,6 +2636,23 @@ static void recSB() {
 				MOV8MtoR(EAX, (u32)&psxRegs.GPR.r[_Rt_]);
 				MOV8RtoM((u32)&psxH[addr & 0xfff], EAX);
 			}
+
+			// iCB: PGXP hook
+			PUSH32I(addr);
+			if (IsConst(_Rt_)) {
+				PUSH32I(iRegs[_Rt_].k);
+			}
+			else {
+				PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			}
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_SB);
+#endif
+			resp += 12;
+			// iCB: PGXP /hook
 			return;
 		}
 //		SysPrintf("unhandled w8 %x\n", addr);
@@ -1868,9 +2665,19 @@ static void recSB() {
 		PUSH32M  ((u32)&psxRegs.GPR.r[_Rt_]);
 	}
 	iPushOfB();
-	CALLFunc((u32)PGXP_psxMemWrite8Trace);
+	CALLFunc((u32)PGXP_SB_psxMemWrite8);
 //	ADD32ItoR(ESP, 8);
 	resp+= 12;
+}
+
+void PGXP_SH_psxMemWrite16(u32 addr, u16 value, u32 code)
+{
+#ifdef PGXP_CPU_DEBUG
+	PGXP_psxTraceOp2(code, value, addr);
+#else
+	PGXP_CPU_SH(code, value, addr);
+#endif
+	psxMemWrite16(addr, value);
 }
 
 static void recSH() {
@@ -1904,6 +2711,23 @@ static void recSH() {
 				MOV16MtoR(EAX, (u32)&psxRegs.GPR.r[_Rt_]);
 				MOV16RtoM((u32)&psxH[addr & 0xfff], EAX);
 			}
+
+			// iCB: PGXP hook
+			PUSH32I(addr);
+			if (IsConst(_Rt_)) {
+				PUSH32I(iRegs[_Rt_].k);
+			}
+			else {
+				PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+			}
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_SH);
+#endif
+			resp += 12;
+			// iCB: PGXP /hook
 			return;
 		}
 		if (t == 0x1f80) {
@@ -1931,9 +2755,19 @@ static void recSH() {
 		PUSH32M  ((u32)&psxRegs.GPR.r[_Rt_]);
 	}
 	iPushOfB();
-	CALLFunc((u32)PGXP_psxMemWrite16Trace);
+	CALLFunc((u32)PGXP_SH_psxMemWrite16);
 //	ADD32ItoR(ESP, 8);
 	resp+= 12;
+}
+
+void PGXP_SW_psxMemWrite32(u32 addr, u32 value, u32 code)
+{
+#ifdef PGXP_CPU_DEBUG
+	PGXP_psxTraceOp2(code, value, addr);
+#else
+	PGXP_CPU_SW(code, value, addr);
+#endif
+	psxMemWrite32(addr, value);
 }
 
 static void recSW() {
@@ -1969,15 +2803,19 @@ static void recSW() {
 			}
 
 			// iCB: PGXP hook
-			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+			PUSH32I(addr);
 			if (IsConst(_Rt_)) {
 				PUSH32I(iRegs[_Rt_].k);
 			}
 			else {
 				PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
 			}
-			PUSH32I(addr);
-			CALLFunc((u32)PGXP_psxMemWrite32Trace);
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_SW);
+#endif
 			resp += 12;
 			// iCB: PGXP /hook
 			return;
@@ -2001,15 +2839,19 @@ static void recSW() {
 					}
 
 					// iCB: PGXP hook
-					PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+					PUSH32I(addr);
 					if (IsConst(_Rt_)) {
 						PUSH32I(iRegs[_Rt_].k);
 					}
 					else {
 						PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
 					}
-					PUSH32I(addr);
-					CALLFunc((u32)PGXP_psxMemWrite32Trace);
+					PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+					CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+					CALLFunc((u32)PGXP_CPU_SW);
+#endif
 					resp += 12;
 					// iCB: PGXP /hook
 					return;
@@ -2049,7 +2891,7 @@ static void recSW() {
 		PUSH32M  ((u32)&psxRegs.GPR.r[_Rt_]);
 	}
 	iPushOfB();
-	CALLFunc((u32)PGXP_psxMemWrite32Trace);
+	CALLFunc((u32)PGXP_SW_psxMemWrite32);
 //	ADD32ItoR(ESP, 8);
 	resp+= 12;
 }
@@ -2139,6 +2981,16 @@ void iSWLk(u32 shift) {
 	OR32RtoR (EAX, ECX);
 }
 
+void PGXP_SWL_psxMemWrite32(u32 addr, u32 value, u32 code)
+{
+#ifdef PGXP_CPU_DEBUG
+	PGXP_psxTraceOp2(code, value, addr);
+#else
+	PGXP_CPU_SWL(code, value, addr);
+#endif
+	psxMemWrite32(addr, value);
+}
+
 void recSWL() {
 // mem[Rs + Im] = Rt Merge mem[Rs + Im]
 
@@ -2160,15 +3012,19 @@ void recSWL() {
 			MOV32RtoM((u32)&psxH[addr & 0xffc], EAX);
 
 			// iCB: PGXP hook
-			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+			PUSH32I(addr);
 			if (IsConst(_Rt_)) {
 				PUSH32I(iRegs[_Rt_].k);
 			}
 			else {
 				PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
 			}
-			PUSH32I(addr);
-			CALLFunc((u32)PGXP_psxMemWrite32Trace);
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_SWL);
+#endif
 			resp += 12;
 			// iCB: PGXP /hook
 			return;
@@ -2182,13 +3038,12 @@ void recSWL() {
 		if (_Imm_) ADD32ItoR(EAX, _Imm_);
 	}
 	PUSH32R  (EAX);
-	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	AND32ItoR(EAX, ~3);
 	PUSH32R  (EAX);
 
-	CALLFunc((u32)PGXP_psxMemRead32Trace);
+	CALLFunc((u32)psxMemRead32);
 
-	ADD32ItoR(ESP, 8);
+	ADD32ItoR(ESP, 4);
 	POP32R   (EDX);
 	AND32ItoR(EDX, 0x3); // shift = addr & 3;
 
@@ -2218,7 +3073,7 @@ void recSWL() {
 	AND32ItoR(EAX, ~3);
 	PUSH32R  (EAX);
 
-	CALLFunc((u32)PGXP_psxMemWrite32Trace);
+	CALLFunc((u32)PGXP_SWL_psxMemWrite32);
 //	ADD32ItoR(ESP, 8);
 	resp+= 12;
 }
@@ -2235,6 +3090,16 @@ void iSWRk(u32 shift) {
 	SHL32ItoR(ECX, SWR_SHIFT[shift]);
 	AND32ItoR(EAX, SWR_MASK[shift]);
 	OR32RtoR (EAX, ECX);
+}
+
+void PGXP_SWR_psxMemWrite32(u32 addr, u32 value, u32 code)
+{
+#ifdef PGXP_CPU_DEBUG
+	PGXP_psxTraceOp2(code, value, addr);
+#else
+	PGXP_CPU_SWR(code, value, addr);
+#endif
+	psxMemWrite32(addr, value);
 }
 
 void recSWR() {
@@ -2258,15 +3123,19 @@ void recSWR() {
 			MOV32RtoM((u32)&psxH[addr & 0xffc], EAX);
 
 			// iCB: PGXP hook
-			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+			PUSH32I(addr);
 			if (IsConst(_Rt_)) {
 				PUSH32I(iRegs[_Rt_].k);
 			}
 			else {
 				PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
 			}
-			PUSH32I(addr);
-			CALLFunc((u32)PGXP_psxMemWrite32Trace);
+			PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
+#ifdef PGXP_CPU_DEBUG
+			CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+			CALLFunc((u32)PGXP_CPU_SWR);
+#endif
 			resp += 12;
 			// iCB: PGXP /hook
 			return;
@@ -2280,13 +3149,12 @@ void recSWR() {
 		if (_Imm_) ADD32ItoR(EAX, _Imm_);
 	}
 	PUSH32R  (EAX);
-	PUSH32I(psxRegs.code);	// iCB: Needed to extract reg and opcode
 	AND32ItoR(EAX, ~3);
 	PUSH32R  (EAX);
 
-	CALLFunc((u32)PGXP_psxMemRead32Trace);
+	CALLFunc((u32)psxMemRead32);
 
-	ADD32ItoR(ESP, 8);
+	ADD32ItoR(ESP, 4);
 	POP32R   (EDX);
 	AND32ItoR(EDX, 0x3); // shift = addr & 3;
 
@@ -2316,7 +3184,7 @@ void recSWR() {
 	AND32ItoR(EAX, ~3);
 	PUSH32R  (EAX);
 
-	CALLFunc((u32)PGXP_psxMemWrite32Trace);
+	CALLFunc((u32)PGXP_SWR_psxMemWrite32);
 //	ADD32ItoR(ESP, 8);
 	resp += 12;
 }
@@ -2332,6 +3200,14 @@ static void recSLL() {
 
 //	iFlushRegs();
 
+	#if PGXP_TRACE >= 5 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+	#endif // iCB: /Tracing
+
+
 	if (IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rt_].k << _Sa_);
 	} else {
@@ -2341,6 +3217,18 @@ static void recSLL() {
 		if (_Sa_) SHL32ItoR(EAX, _Sa_);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
+
+	#if PGXP_TRACE >= 5 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+	CALLFunc((u32)PGXP_CPU_SLL);
+#endif
+	resp += 12;
+	#endif // iCB: /Tracing
 }
 
 static void recSRL() {
@@ -2349,6 +3237,13 @@ static void recSRL() {
 		return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 5 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rt_].k >> _Sa_);
@@ -2359,6 +3254,18 @@ static void recSRL() {
 		if (_Sa_) SHR32ItoR(EAX, _Sa_);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
+
+	#if PGXP_TRACE >= 5 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+	CALLFunc((u32)PGXP_CPU_SRL); 
+#endif
+	resp += 12;
+	#endif // iCB: /Tracing
 }
 
 static void recSRA() {
@@ -2367,6 +3274,13 @@ static void recSRA() {
 		return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 5 // iCB: Tracing
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rt_)) {
 		MapConst(_Rd_, (s32)iRegs[_Rt_].k >> _Sa_);
@@ -2377,6 +3291,18 @@ static void recSRA() {
 		if (_Sa_) SAR32ItoR(EAX, _Sa_);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
+
+	#if PGXP_TRACE >= 5 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+	CALLFunc((u32)PGXP_CPU_SRA);
+#endif
+	resp += 12;
+	#endif // iCB: /Tracing
 }
 //#endif
 
@@ -2390,6 +3316,17 @@ static void recSLLV() {
 		return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 6 // iCB: Tracing
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rt_) && IsConst(_Rs_)) {
 		MapConst(_Rd_, iRegs[_Rt_].k << iRegs[_Rs_].k);
@@ -2415,6 +3352,18 @@ static void recSLLV() {
 		SHL32CLtoR(EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
+
+	#if PGXP_TRACE >= 6 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp3);
+#else
+	CALLFunc((u32)PGXP_CPU_SLLV);
+#endif
+	resp += 16;
+	#endif // iCB: /Tracing
 }
 
 static void recSRLV() {
@@ -2422,6 +3371,17 @@ static void recSRLV() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 6 // iCB: Tracing
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rt_) && IsConst(_Rs_)) {
 		MapConst(_Rd_, iRegs[_Rt_].k >> iRegs[_Rs_].k);
@@ -2447,6 +3407,18 @@ static void recSRLV() {
 		SHR32CLtoR(EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
+
+	#if PGXP_TRACE >= 6 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp3);
+#else
+	CALLFunc((u32)PGXP_CPU_SRLV);
+#endif
+	resp += 16;
+	#endif // iCB: /Tracing
 }
 
 static void recSRAV() {
@@ -2455,6 +3427,17 @@ static void recSRAV() {
 		return;
 
 //	iFlushRegs();
+
+	#if PGXP_TRACE >= 6 // iCB: Tracing
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	if (IsConst(_Rt_))
+		PUSH32I(iRegs[_Rt_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rt_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rt_) && IsConst(_Rs_)) {
 		MapConst(_Rd_, (s32)iRegs[_Rt_].k >> iRegs[_Rs_].k);
@@ -2480,6 +3463,18 @@ static void recSRAV() {
 		SAR32CLtoR(EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
+
+	#if PGXP_TRACE >= 6 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp3);
+#else
+	CALLFunc((u32)PGXP_CPU_SRAV);
+#endif
+	resp += 16;
+	#endif // iCB: /Tracing
 }
 //#endif
 
@@ -2517,13 +3512,36 @@ static void recMFHI() {
 	if (!_Rd_)
 		return;
 
+	#if PGXP_TRACE >= 7 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.n.hi);
+	#endif // iCB: /Tracing
+
 	iRegs[_Rd_].state = ST_UNK;
 	MOV32MtoR(EAX, (u32)&psxRegs.GPR.n.hi);
 	MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
+
+	#if PGXP_TRACE >= 7 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+	CALLFunc((u32)PGXP_CPU_MFHI);
+#endif
+	resp += 12;
+	#endif // iCB: /Tracing
 }
 
 static void recMTHI() {
 // Hi = Rs
+
+	#if PGXP_TRACE >= 7 // iCB: Tracing
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rs_)) {
 		MOV32ItoM((u32)&psxRegs.GPR.n.hi, iRegs[_Rs_].k);
@@ -2531,6 +3549,18 @@ static void recMTHI() {
 		MOV32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rs_]);
 		MOV32RtoM((u32)&psxRegs.GPR.n.hi, EAX);
 	}
+
+	#if PGXP_TRACE >= 7 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.n.hi);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+	CALLFunc((u32)PGXP_CPU_MTHI);
+#endif
+	resp += 12;
+	#endif // iCB: /Tracing
 }
 
 static void recMFLO() {
@@ -2538,13 +3568,35 @@ static void recMFLO() {
 	if (!_Rd_)
 		return;
 
+	#if PGXP_TRACE >= 7 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.n.lo);
+	#endif // iCB: /Tracing
+
 	iRegs[_Rd_].state = ST_UNK;
 	MOV32MtoR(EAX, (u32)&psxRegs.GPR.n.lo);
 	MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
+
+	#if PGXP_TRACE >= 7 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.r[_Rd_]);
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+	CALLFunc((u32)PGXP_CPU_MFLO);
+#endif
+	resp += 12;
+	#endif // iCB: /Tracing
 }
 
 static void recMTLO() {
 // Lo = Rs
+
+	#if PGXP_TRACE >= 7 // iCB: Tracing
+	if (IsConst(_Rs_))
+		PUSH32I(iRegs[_Rs_].k);
+	else
+		PUSH32M((u32)&psxRegs.GPR.r[_Rs_]);
+	#endif // iCB: /Tracing
 
 	if (IsConst(_Rs_)) {
 		MOV32ItoM((u32)&psxRegs.GPR.n.lo, iRegs[_Rs_].k);
@@ -2552,6 +3604,18 @@ static void recMTLO() {
 		MOV32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rs_]);
 		MOV32RtoM((u32)&psxRegs.GPR.n.lo, EAX);
 	}
+
+	#if PGXP_TRACE >= 7 // iCB: Tracing
+	PUSH32M((u32)&psxRegs.GPR.n.lo);
+
+	PUSH32I(psxRegs.code);
+#ifdef PGXP_CPU_DEBUG
+	CALLFunc((u32)PGXP_psxTraceOp2);
+#else
+	CALLFunc((u32)PGXP_CPU_MTLO);
+#endif
+	resp += 12;
+	#endif // iCB: /Tracing
 }
 //#endif
 

@@ -30,10 +30,6 @@
 
 #include "psxcommon.h"
 
-void	PGXP_Init();	// initialise memory
-char*	PGXP_GetMem();	// return pointer to precision memory
-u32		PGXP_ConvertAddress(u32 addr);
-
 // -- GTE functions
 // Transforms
 void	PGXP_pushSXYZ2f(float _x, float _y, float _z, unsigned int _v);
@@ -49,23 +45,6 @@ void	PGXP_MFC2(u32 gpr, u32 gtr, u32 value);		// copy GTE reg to GPR reg (MFC2)
 void	PGXP_MTC2(u32 gpr, u32 gtr, u32 value);		// copy GPR reg to GTR reg (MTC2)
 void	PGXP_LWC2(u32 addr, u32 gtr, u32 value);	// copy memory to GTE reg
 void	PGXP_SWC2(u32 addr, u32 gtr, u32 value);	// copy GTE reg to memory
-
-// -- CPU functions
-// Data transfer tracking
-void	PGPR_L32(u32 addr, u32 code, u32 value);	// load 32bit word
-void	PGPR_S32(u32 addr, u32 code, u32 value);	// store 32bit word
-
-// Memory Read/Write hooks
-u32		PGXP_psxMemRead32Trace(u32 mem, u32 code);
-void	PGXP_psxMemWrite32Trace(u32 mem, u32 value, u32 code);
-
-u16		PGXP_psxMemRead16Trace(u32 mem, u32 code);
-void	PGXP_psxMemWrite16Trace(u32 mem, u16 value, u32 code);
-
-u8		PGXP_psxMemRead8Trace(u32 mem, u32 code);
-void	PGXP_psxMemWrite8Trace(u32 mem, u8 value, u32 code);
-
-void	PGXP_psxTrace(u32 code, u32 rtv);
 
 #ifndef max
 #   define max(a, b) ((a) > (b) ? (a) : (b))

@@ -195,6 +195,15 @@
     <ClCompile Include="..\libpcsxcore\pgxp_gte.c">
       <Filter>libpcsxcore</Filter>
     </ClCompile>
+    <ClCompile Include="..\libpcsxcore\pgxp_cpu.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\pgxp_mem.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpcsxcore\pgxp_debug.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\libpcsxcore\cdriso.h">
@@ -359,6 +368,18 @@
       <Filter>zlib</Filter>
     </ClInclude>
     <ClInclude Include="..\libpcsxcore\pgxp_gte.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\pgxp_cpu.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\pgxp_mem.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\pgxp_value.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\pgxp_debug.h">
       <Filter>libpcsxcore</Filter>
     </ClInclude>
   </ItemGroup>
