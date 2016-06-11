@@ -455,15 +455,18 @@ void PGXP_CPU_DIV(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 	Validate(&CPU_reg[rs(instr)], rsVal);
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
-	// iCB: Only require one valid input
+	//// iCB: Only require one valid input
 	//if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
 	//{
 	//	MakeValid(&CPU_reg[rs(instr)], rsVal);
 	//	MakeValid(&CPU_reg[rt(instr)], rtVal);
 	//}
 
-	CPU_Lo.x = CPU_reg[rs(instr)].x / CPU_reg[rt(instr)].x;
-	CPU_Hi.x = fmod(CPU_reg[rs(instr)].x, CPU_reg[rt(instr)].x);
+	float vs = CPU_reg[rs(instr)].y + (CPU_reg[rs(instr)].x / (float)(1 << 16));
+	float vt = CPU_reg[rt(instr)].y + (CPU_reg[rt(instr)].x / (float)(1 << 16));
+
+	CPU_Lo.x = vs / vt;
+	CPU_Hi.x = fmod(vs, vt);
 	CPU_Lo.x -= CPU_Hi.x;
 
 	CPU_Lo.valid = CPU_Hi.valid = CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid;
@@ -479,15 +482,18 @@ void PGXP_CPU_DIVU(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 	Validate(&CPU_reg[rs(instr)], rsVal);
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
-	// iCB: Only require one valid input
+	//// iCB: Only require one valid input
 	//if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
 	//{
 	//	MakeValid(&CPU_reg[rs(instr)], rsVal);
 	//	MakeValid(&CPU_reg[rt(instr)], rtVal);
 	//}
 
-	CPU_Lo.x = fabs(CPU_reg[rs(instr)].x) / fabs(CPU_reg[rt(instr)].x);
-	CPU_Hi.x = fmod(fabs(CPU_reg[rs(instr)].x), fabs(CPU_reg[rt(instr)].x));
+	float vs = CPU_reg[rs(instr)].y + (CPU_reg[rs(instr)].x / (float)(1 << 16));
+	float vt = CPU_reg[rt(instr)].y + (CPU_reg[rt(instr)].x / (float)(1 << 16));
+
+	CPU_Lo.x = fabs(vs) / fabs(vt);
+	CPU_Hi.x = fmod(fabs(vs), fabs(vt));
 	CPU_Lo.x -= CPU_Hi.x;
 
 	CPU_Lo.valid = CPU_Hi.valid = CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid;
@@ -502,23 +508,23 @@ void PGXP_CPU_DIVU(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 void PGXP_CPU_SLL(u32 instr, u32 rdVal, u32 rtVal)
 {
 	// Rd = Rt << Sa
+	u32 sh = sa(instr);
 	Validate(&CPU_reg[rt(instr)], rtVal);
 	CPU_reg[rd(instr)] = CPU_reg[rt(instr)];
 
 	// Shift y into x?
-	if (sa(instr) == 16)
+	if (sh >= 16)
 	{
 		CPU_reg[rd(instr)].y = CPU_reg[rd(instr)].x;
 		CPU_reg[rd(instr)].x = 0;
 		CPU_reg[rd(instr)].hFlags = CPU_reg[rd(instr)].lFlags;
 		CPU_reg[rd(instr)].lFlags = 0;
+		sh -= 16;
 	}
-	else
-	{
-		// assume multiply with no overflow
-		CPU_reg[rd(instr)].x *= (float)(1 << sa(instr));
-		CPU_reg[rd(instr)].y *= (float)(1 << sa(instr));
-	}
+	
+	// assume multiply with no overflow
+	CPU_reg[rd(instr)].x *= (float)(1 << sh);
+	CPU_reg[rd(instr)].y *= (float)(1 << sh);
 
 	CPU_reg[rd(instr)].value = rdVal;
 }
@@ -526,23 +532,23 @@ void PGXP_CPU_SLL(u32 instr, u32 rdVal, u32 rtVal)
 void PGXP_CPU_SRL(u32 instr, u32 rdVal, u32 rtVal)
 {
 	// Rd = Rt >> Sa
+	u32 sh = sa(instr);
 	Validate(&CPU_reg[rt(instr)], rtVal);
 	CPU_reg[rd(instr)] = CPU_reg[rt(instr)];
 
 	// Shift x into y?
-	if (sa(instr) == 16)
+	if (sh >= 16)
 	{
 		CPU_reg[rd(instr)].x = CPU_reg[rd(instr)].y;
 		CPU_reg[rd(instr)].y = 0;
 		CPU_reg[rd(instr)].lFlags = CPU_reg[rd(instr)].hFlags;
 		CPU_reg[rd(instr)].hFlags = 0;
+		sh -= 16;
 	}
-	else
-	{
-		// assume divide with no overflow
-		CPU_reg[rd(instr)].x /= (float)(1 << sa(instr));
-		CPU_reg[rd(instr)].y /= (float)(1 << sa(instr));
-	}
+	
+	// assume divide with no overflow
+	CPU_reg[rd(instr)].x /= (float)(1 << sh);
+	CPU_reg[rd(instr)].y /= (float)(1 << sh);
 
 	CPU_reg[rd(instr)].value = rdVal;
 }
@@ -559,25 +565,25 @@ void PGXP_CPU_SRA(u32 instr, u32 rdVal, u32 rtVal)
 void PGXP_CPU_SLLV(u32 instr, u32 rdVal, u32 rtVal, u32 rsVal)
 {
 	// Rd = Rt << Rs
+	u32 sh = rsVal & 0x1F;
 	Validate(&CPU_reg[rt(instr)], rtVal);
 	Validate(&CPU_reg[rs(instr)], rsVal);
 
 	CPU_reg[rd(instr)] = CPU_reg[rt(instr)];
 
 	// Shift y into x?
-	if ((rsVal & 0x1F) == 16)
+	if (sh >= 16)
 	{
 		CPU_reg[rd(instr)].y = CPU_reg[rd(instr)].x;
 		CPU_reg[rd(instr)].x = 0;
 		CPU_reg[rd(instr)].hFlags = CPU_reg[rd(instr)].lFlags;
 		CPU_reg[rd(instr)].lFlags = 0;
+		sh -= 16;
 	}
-	else
-	{
-		// assume multiply with no overflow
-		CPU_reg[rd(instr)].x *= (float)(1 << (rsVal & 0x1F));
-		CPU_reg[rd(instr)].y *= (float)(1 << (rsVal & 0x1F));
-	}
+
+	// assume multiply with no overflow
+	CPU_reg[rd(instr)].x *= (float)(1 << sh);
+	CPU_reg[rd(instr)].y *= (float)(1 << sh);
 
 	CPU_reg[rd(instr)].value = rdVal;
 }
@@ -585,25 +591,25 @@ void PGXP_CPU_SLLV(u32 instr, u32 rdVal, u32 rtVal, u32 rsVal)
 void PGXP_CPU_SRLV(u32 instr, u32 rdVal, u32 rtVal, u32 rsVal)
 {
 	// Rd = Rt >> Sa
+	u32 sh = rsVal & 0x1F;
 	Validate(&CPU_reg[rt(instr)], rtVal);
 	Validate(&CPU_reg[rs(instr)], rsVal);
 
 	CPU_reg[rd(instr)] = CPU_reg[rt(instr)];
 
 	// Shift x into y?
-	if ((rsVal & 0x1F) == 16)
+	if (sh >= 16)
 	{
 		CPU_reg[rd(instr)].x = CPU_reg[rd(instr)].y;
 		CPU_reg[rd(instr)].y = 0;
 		CPU_reg[rd(instr)].lFlags = CPU_reg[rd(instr)].hFlags;
 		CPU_reg[rd(instr)].hFlags = 0;
+		sh -= 16;
 	}
-	else
-	{
-		// assume divide with no overflow
-		CPU_reg[rd(instr)].x /= (float)(1 << (rsVal & 0x1F));
-		CPU_reg[rd(instr)].y /= (float)(1 << (rsVal & 0x1F));
-	}
+
+	// assume divide with no overflow
+	CPU_reg[rd(instr)].x /= (float)(1 << sh);
+	CPU_reg[rd(instr)].y /= (float)(1 << sh);
 
 	CPU_reg[rd(instr)].value = rdVal;
 }
@@ -725,7 +731,8 @@ void PGXP_CPU_SWR(u32 instr, u32 rtVal, u32 addr)
 // Store 16-bit
 void PGXP_CPU_SH(u32 instr, u16 rtVal, u32 addr)
 {
-	Validate(&CPU_reg[rt(instr)], rtVal);
+	// validate and copy half value
+	MaskValidate(&CPU_reg[rt(instr)], rtVal, 0xFFFF);
 	WriteMem16(&CPU_reg[rt(instr)], addr);
 }
 
