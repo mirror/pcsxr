@@ -6,7 +6,7 @@
 // PGXP wrapper functions
 /////////////////////////////////////////////
 
-pgxpRecNULL() {}
+void pgxpRecNULL() {}
 
 // Choose between debug and direct function
 #ifdef PGXP_CPU_DEBUG
