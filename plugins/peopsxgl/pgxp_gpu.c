@@ -278,18 +278,27 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 
 	for (unsigned i = 0; i < count; ++i)
 	{
-		if (primStart && primStart[stride * i].valid)
+		if (primStart && primStart[stride * i].valid && (primStart[stride * i].value == *(unsigned int*)(&pPrimData[stride * i * 2])))
 		{
 			pVertex[i].x = (primStart[stride * i].x + xOffs);
 			pVertex[i].y = (primStart[stride * i].y + yOffs);
 			pVertex[i].z = 0.95f;
 			pVertex[i].w = primStart[stride * i].z;
 			pVertex[i].PGXP_flag = 1;
+
+			// Log incorrect vertices
+			//if (PGXP_tDebug && 
+			//	(fabs((float)pPrimData[stride * i * 2] - pVertex[i].x) > debug_tolerance) || 
+			//	(fabs((float)pPrimData[(stride * i * 2) + 1] - pVertex[i].y) > debug_tolerance))
+			//	__Log("GPPV: v:%x (%d, %d) pgxp(%f, %f)|\n", (currentAddr + 1 + (i * stride)) * 4, pPrimData[stride * i * 2], pPrimData[(stride * i * 2) + 1], pVertex[i].x, pVertex[i].y);
 		}
 		else
 		{
 			// Default to low precision vertex data
-			pVertex[i].PGXP_flag = 2;
+			if (primStart  && primStart[stride * i].valid && primStart[stride * i].value != *(unsigned int*)(&pPrimData[stride * i * 2]))
+				pVertex[i].PGXP_flag = 6;
+			else
+				pVertex[i].PGXP_flag = 2;
 
 			// Look in cache for valid vertex
 			pCacheVert = PGXP_GetCachedVertex(pPrimData[stride * i * 2], pPrimData[(stride * i * 2) + 1]);
@@ -312,8 +321,9 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 				}
 			}
 
-		//	if(PGXP_tDebug)
-		//		__Log("GPPV: v:%x (%d, %d)|\n", (currentAddr + 1 + (i * stride))*4, pPrimData[stride * i * 2], pPrimData[(stride * i * 2) + 1]);
+			// Log unprocessed vertices
+			//if(PGXP_tDebug)
+			//	__Log("GPPV: v:%x (%d, %d)|\n", (currentAddr + 1 + (i * stride))*4, pPrimData[stride * i * 2], pPrimData[(stride * i * 2) + 1]);
 		}
 	}
 
@@ -332,13 +342,14 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 unsigned int		PGXP_vDebug = 0;
 const unsigned int	PGXP_maxDebug = 3;
 
-const char red[4]	= { 255, 0, 0, 255 };
-const char blue[4]	= { 0, 0, 255, 255 };
-const char green[4]	= { 0, 255, 0, 255 };
+const char red[4]		= { 255, 0, 0, 255 };
+const char blue[4]		= { 0, 0, 255, 255 };
+const char green[4]		= { 0, 255, 0, 255 };
 
-const char yellow[4] = { 255, 255, 0, 255 };
-const char magenta[4] = { 255, 0, 255, 255 };
-const char black[4] = { 0, 0, 0, 255 };
+const char yellow[4]	= { 255, 255, 0, 255 };
+const char magenta[4]	= { 255, 0, 255, 255 };
+const char cyan[4]		= { 0, 255, 255, 255 };
+const char black[4]		= { 0, 0, 0, 255 };
 
 
 //void CALLBACK GPUtoggleDebug(void)
@@ -379,6 +390,9 @@ void PGXP_colour(OGLVertex* vertex)
 			break;
 		case 4:
 			pColour = magenta;
+			break;
+		case 6:
+			pColour = cyan;
 			break;
 		default:
 			pColour = black;

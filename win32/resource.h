@@ -167,8 +167,12 @@
 #define IDC_TESTGPU                     1057
 #define IDC_PGXP_PERSP                  1057
 #define IDC_ABOUTGPU                    1058
+#define IDC_PGXP_MODE                   1058
 #define IDC_CONFIGSPU                   1059
+#define IDC_PGXPMODESEL                 1059
 #define IDC_TESTSPU                     1060
+#define IDC_PGXPMODETEXT                1060
+#define IDC_PGXP_MODETEXT               1060
 #define IDC_ABOUTSPU                    1061
 #define IDC_CONFIGCDR                   1062
 #define IDC_GPR11                       1063
@@ -370,7 +374,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        118
 #define _APS_NEXT_COMMAND_VALUE         40047
-#define _APS_NEXT_CONTROL_VALUE         1057
+#define _APS_NEXT_CONTROL_VALUE         1061
 #define _APS_NEXT_SYMED_VALUE           103
 #endif
 #endif

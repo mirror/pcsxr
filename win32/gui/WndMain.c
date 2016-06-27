@@ -1354,6 +1354,26 @@ BOOL CALLBACK ConfigurePGXPDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPa
 		Button_SetCheck(GetDlgItem(hW, IDC_PGXP_CACHE), Config.PGXP_Cache);
 		Button_SetCheck(GetDlgItem(hW, IDC_PGXP_PERSP), Config.PGXP_Texture);
 
+		ComboBox_InsertString(GetDlgItem(hW, IDC_PGXP_MODE), 0, "Disabled");
+		ComboBox_InsertString(GetDlgItem(hW, IDC_PGXP_MODE), 1, "Memory only");
+		ComboBox_InsertString(GetDlgItem(hW, IDC_PGXP_MODE), 2, "Mem + CPU Logic");
+		ComboBox_SetCurSel(GetDlgItem(hW, IDC_PGXP_MODE), Config.PGXP_Mode);
+
+		switch (ComboBox_GetCurSel(GetDlgItem(hW, IDC_PGXP_MODE)))
+		{
+		case 0:
+			Static_SetText(GetDlgItem(hW, IDC_PGXP_MODETEXT), _("Disabled\n\nPGXP is no longer mirroring any functions."));
+			break;
+		case 1:
+			Static_SetText(GetDlgItem(hW, IDC_PGXP_MODETEXT), _("Memory operations only\n\nPGXP is mirroring load, store and processor transfer operations of the CPU and GTE."));
+			break;
+		case 2:
+			Static_SetText(GetDlgItem(hW, IDC_PGXP_MODETEXT), _("Memory and CPU arithmetic operations\n\nPGXP is mirroring load, store and transfer operations of the CPU and GTE and arithmetic/logic functions of the PSX CPU.\n\n(WARNING: This mode is currently unfinished and may cause incorrect behaviour in some games)"));
+			break;
+		default:
+			Static_SetText(GetDlgItem(hW, IDC_PGXP_MODETEXT), _("Error: Uknown mode"));
+		}
+
 	case WM_COMMAND: 
 		switch (LOWORD(wParam))
 		{
@@ -1361,9 +1381,13 @@ BOOL CALLBACK ConfigurePGXPDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPa
 			EndDialog(hW, FALSE);
 			return TRUE;
 		case IDOK:
-			Config.PGXP_GTE = Button_GetCheck(GetDlgItem(hW, IDC_PGXP_GTE));
-			Config.PGXP_Cache = Button_GetCheck(GetDlgItem(hW, IDC_PGXP_CACHE));
+			Config.PGXP_GTE		= Button_GetCheck(GetDlgItem(hW, IDC_PGXP_GTE));
+			Config.PGXP_Cache	= Button_GetCheck(GetDlgItem(hW, IDC_PGXP_CACHE));
 			Config.PGXP_Texture = Button_GetCheck(GetDlgItem(hW, IDC_PGXP_PERSP));
+			Config.PGXP_Mode	= ComboBox_GetCurSel(GetDlgItem(hW, IDC_PGXP_MODE));
+
+			EmuSetPGXPMode(Config.PGXP_Mode);
+
 
 			if (Config.SaveWindowPos)
 			{
@@ -1378,6 +1402,23 @@ BOOL CALLBACK ConfigurePGXPDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPa
 
 			if (Config.PsxOut) OpenConsole();
 			else CloseConsole();
+
+			return TRUE;
+		case IDC_PGXP_MODE:
+			switch (ComboBox_GetCurSel(GetDlgItem(hW, IDC_PGXP_MODE)))
+			{
+			case 0:
+				Static_SetText(GetDlgItem(hW, IDC_PGXP_MODETEXT), _("Disabled\n\nPGXP is no longer mirroring any functions."));
+				break;
+			case 1:
+				Static_SetText(GetDlgItem(hW, IDC_PGXP_MODETEXT), _("Memory operations only\n\nPGXP is mirroring load, store and processor transfer operations of the CPU and GTE."));
+				break;
+			case 2:
+				Static_SetText(GetDlgItem(hW, IDC_PGXP_MODETEXT), _("Memory and CPU arithmetic operations\n\nPGXP is mirroring load, store and transfer operations of the CPU and GTE and arithmetic/logic functions of the PSX CPU.\n\n(WARNING: This mode is currently unfinished and may cause incorrect behaviour in some games)"));
+				break;
+			default:
+				Static_SetText(GetDlgItem(hW, IDC_PGXP_MODETEXT), _("Error: Uknown mode"));
+			}
 
 			return TRUE;
 		}
@@ -1930,7 +1971,7 @@ int SysInit() {
 
 #ifdef EMU_LOG
 	emuLog = fopen("emuLog.txt","w");
-	setvbuf(emuLog, NULL,  _IONBF, 0);
+	setvbuf(emuLog, NULL, _IONBF, 0);
 #endif
 
 	while (LoadPlugins(0) == -1) {

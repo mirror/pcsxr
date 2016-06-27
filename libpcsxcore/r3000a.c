@@ -275,3 +275,9 @@ void psxExecuteBios() {
 	while (psxRegs.pc != 0x80030000)
 		psxCpu->ExecuteBlock();
 }
+
+void psxSetPGXPMode(u32 pgxpMode)
+{
+	psxCpu->SetPGXPMode(pgxpMode);
+	//psxCpu->Reset();
+}

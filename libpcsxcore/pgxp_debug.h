@@ -30,8 +30,10 @@
 
 #include "psxcommon.h"
 
+#define PGXP_CPU_DEBUG
+
 // Debug wrappers
-void	PGXP_psxTrace(u32 code);
+void	PGXP_psxTraceOp(u32 code);
 void	PGXP_psxTraceOp1(u32 code, u32 op1);
 void	PGXP_psxTraceOp2(u32 code, u32 op1, u32 op2);
 void	PGXP_psxTraceOp3(u32 code, u32 op1, u32 op2, u32 op3);

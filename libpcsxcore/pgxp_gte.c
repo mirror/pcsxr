@@ -35,19 +35,37 @@
 #include "psxmem.h"
 #include "r3000a.h"
 
-PGXP_value GTE_reg[32];
 
-#define SX0 (GTE_reg[ 12 ].x)
-#define SY0 (GTE_reg[ 12 ].y)
-#define SX1 (GTE_reg[ 13 ].x)
-#define SY1 (GTE_reg[ 13 ].y)
-#define SX2 (GTE_reg[ 14 ].x)
-#define SY2 (GTE_reg[ 14 ].y)
+// GTE registers
+PGXP_value GTE_data_reg_mem[32];
+PGXP_value GTE_ctrl_reg_mem[32];
 
-#define SXY0 (GTE_reg[ 12 ])
-#define SXY1 (GTE_reg[ 13 ])
-#define SXY2 (GTE_reg[ 14 ])
-#define SXYP (GTE_reg[ 15 ])
+
+PGXP_value* GTE_data_reg = GTE_data_reg_mem;
+PGXP_value* GTE_ctrl_reg = GTE_ctrl_reg_mem;
+
+
+
+// Instruction register decoding
+#define op(_instr)		(_instr >> 26)			// The op part of the instruction register 
+#define func(_instr)	((_instr) & 0x3F)		// The funct part of the instruction register 
+#define sa(_instr)		((_instr >>  6) & 0x1F) // The sa part of the instruction register
+#define rd(_instr)		((_instr >> 11) & 0x1F)	// The rd part of the instruction register 
+#define rt(_instr)		((_instr >> 16) & 0x1F)	// The rt part of the instruction register 
+#define rs(_instr)		((_instr >> 21) & 0x1F)	// The rs part of the instruction register 
+#define imm(_instr)		(_instr & 0xFFFF)		// The immediate part of the instruction register
+
+#define SX0 (GTE_data_reg[ 12 ].x)
+#define SY0 (GTE_data_reg[ 12 ].y)
+#define SX1 (GTE_data_reg[ 13 ].x)
+#define SY1 (GTE_data_reg[ 13 ].y)
+#define SX2 (GTE_data_reg[ 14 ].x)
+#define SY2 (GTE_data_reg[ 14 ].y)
+
+#define SXY0 (GTE_data_reg[ 12 ])
+#define SXY1 (GTE_data_reg[ 13 ])
+#define SXY2 (GTE_data_reg[ 14 ])
+#define SXYP (GTE_data_reg[ 15 ])
 
 void PGXP_pushSXYZ2f(float _x, float _y, float _z, unsigned int _v)
 {
@@ -82,7 +100,8 @@ void PGXP_pushSXYZ2s(s64 _x, s64 _y, s64 _z, u32 v)
 	float fy = (float)(_y) / (float)(1 << 16);
 	float fz = (float)(_z);
 
-	PGXP_pushSXYZ2f(fx, fy, fz, v);
+	if(Config.PGXP_GTE)
+		PGXP_pushSXYZ2f(fx, fy, fz, v);
 }
 
 #define VX(n) (psxRegs.CP2D.p[ n << 1 ].sw.l)
@@ -156,7 +175,7 @@ void PGXP_RTPS(u32 _n, u32 _v)
 
 int PGXP_NLCIP_valid()
 {
-	if (SXY0.valid && SXY1.valid && SXY2.valid)
+	if (SXY0.valid && SXY1.valid && SXY2.valid && Config.PGXP_GTE && (Config.PGXP_Mode > 0))
 		return 1;
 	return 0;
 }
@@ -190,11 +209,11 @@ static PGXP_value PGXP_MFC2_int(u32 reg)
 	switch (reg) 
 	{
 	case 15:
-		GTE_reg[reg] = SXYP = SXY2;
+		GTE_data_reg[reg] = SXYP = SXY2;
 		break;
 	}
 
-	return GTE_reg[reg];
+	return GTE_data_reg[reg];
 }
 
 
@@ -214,63 +233,91 @@ static void PGXP_MTC2_int(PGXP_value value, u32 reg)
 			return;
 	}
 
-	GTE_reg[reg] = value;
+	GTE_data_reg[reg] = value;
 }
 
-// copy GTE data reg to GPR reg (MFC2)
-void PGXP_MFC2(u32 gpr, u32 gtr, u32 value)
-{
-	if (!gpr) return;
-#ifdef GTE_LOG
-	GTE_LOG("PGXP_MFC2 [%x]<-[%x] %x (%u %u)|", gpr, gtr, value, GTE_reg[gtr].valid, GTE_reg[gtr].count);
-#endif
+////////////////////////////////////
+// Data transfer tracking
+////////////////////////////////////
 
-	Validate(&GTE_reg[gtr], value);
-	CPU_reg[gpr] = GTE_reg[gtr];
+void MFC2(int reg) {
+	psx_value val;
+	val.d = GTE_data_reg[reg].value;
+	switch (reg) {
+	case 1:
+	case 3:
+	case 5:
+	case 8:
+	case 9:
+	case 10:
+	case 11:
+		GTE_data_reg[reg].value = (s32)val.sw.l;
+		GTE_data_reg[reg].y = 0.f;
+		break;
+
+	case 7:
+	case 16:
+	case 17:
+	case 18:
+	case 19:
+		GTE_data_reg[reg].value = (u32)val.w.l;
+		GTE_data_reg[reg].y = 0.f;
+		break;
+
+	case 15:
+		GTE_data_reg[reg] = SXY2;
+		break;
+
+	case 28:
+	case 29:
+	//	psxRegs.CP2D.p[reg].d = LIM(IR1 >> 7, 0x1f, 0, 0) | (LIM(IR2 >> 7, 0x1f, 0, 0) << 5) | (LIM(IR3 >> 7, 0x1f, 0, 0) << 10);
+		break;
+	}
 }
 
-// copy GPR reg to GTE data reg (MTC2)
-void PGXP_MTC2(u32 gpr, u32 gtr, u32 value)
+void PGXP_GTE_MFC2(u32 instr, u32 rdVal)
 {
-#ifdef GTE_LOG
-	GTE_LOG("PGXP_MTC2 [%x]->[%x] %x (%u %u)|", gpr, gtr, value, CPU_reg[gpr].valid, CPU_reg[gpr].count);
-#endif
-	Validate(&CPU_reg[gpr], value);
-	PGXP_MTC2_int(CPU_reg[gpr], gtr);
+	// CPU[Rt] = GTE_D[Rd]
+	Validate(&GTE_data_reg[rd(instr)], rdVal);
+	//MFC2(rd(instr));
+	CPU_reg[rt(instr)] = GTE_data_reg[rd(instr)];
 }
 
-// copy memory to GTE reg
-void PGXP_LWC2(u32 addr, u32 gtr, u32 value)
+void PGXP_GTE_MTC2(u32 instr, u32 rtVal)
 {
+	// GTE_D[Rd] = CPU[Rt]
+	Validate(&CPU_reg[rt(instr)], rtVal);
+	PGXP_MTC2_int(CPU_reg[rt(instr)], rd(instr));
+}
+
+void PGXP_GTE_CFC2(u32 instr, u32 rdVal)
+{
+	// CPU[Rt] = GTE_C[Rd]
+	Validate(&GTE_ctrl_reg[rd(instr)], rdVal);
+	CPU_reg[rt(instr)] = GTE_ctrl_reg[rd(instr)];
+}
+
+void PGXP_GTE_CTC2(u32 instr, u32 rtVal)
+{
+	// GTE_C[Rd] = CPU[Rt]
+	Validate(&CPU_reg[rt(instr)], rtVal);
+	GTE_ctrl_reg[rd(instr)] = CPU_reg[rt(instr)];
+}
+
+////////////////////////////////////
+// Memory Access
+////////////////////////////////////
+void	PGXP_GTE_LWC2(u32 instr, u32 rtVal, u32 addr)
+{
+	// GTE_D[Rt] = Mem[addr]
 	PGXP_value val;
-	ValidateAndCopyMem(&val, addr, value);
-#ifdef GTE_LOG
-	PGXP_value* pp = ReadMem(addr);
-	PGXP_value p;
-	low_value temp;
-	temp.word = value;
-
-	p.x = p.y = p.valid = 0;
-
-	if (pp)
-		p = *pp;
-
-	GTE_LOG("PGXP_LWC2 %x [%x] %x (%d, %d) (%f, %f) %u %u|", addr, gtr, value, temp.x, temp.y, p.x, p.y, p.valid, p.count);
-#endif
-	PGXP_MTC2_int(val, gtr);
+	ValidateAndCopyMem(&val, addr, rtVal);
+	PGXP_MTC2_int(val, rt(instr));
 }
 
-//copy GTE reg to memory
-void PGXP_SWC2(u32 addr, u32 gtr, u32 value)
+void	PGXP_GTE_SWC2(u32 instr, u32 rtVal, u32 addr)
 {
-#ifdef GTE_LOG
-	low_value temp;
-	temp.word = value;
-
-//	if (PGXP_compareXY(GTE_reg[gtr], value))
-		GTE_LOG("PGXP_SWC2 %x [%x] %x (%d, %d) (%f, %f) %u %u|", addr, gtr, value, temp.x, temp.y, GTE_reg[gtr].x, GTE_reg[gtr].y, GTE_reg[gtr].valid, GTE_reg[gtr].count);
-#endif
-	Validate(&GTE_reg[gtr], value);
-	WriteMem(&GTE_reg[gtr], addr);
+	//  Mem[addr] = GTE_D[Rt]
+	Validate(&GTE_data_reg[rt(instr)], rtVal);
+	WriteMem(&GTE_data_reg[rt(instr)], addr);
 }
-

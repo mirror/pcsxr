@@ -38,7 +38,9 @@ u8 vblank_count_hideafter=0;
 u32 PsxClockSpeed = 33868800;
 
 int EmuInit() {
-	return psxInit();
+	int ret = psxInit();
+	EmuSetPGXPMode(Config.PGXP_Mode);
+	return ret;
 }
 
 void EmuReset() {
@@ -76,6 +78,11 @@ void EmuUpdate() {
 	if (Config.RewindInterval > 0 && !(++rewind_counter%Config.RewindInterval)) {
 		CreateRewindState();
 	}
+}
+
+void EmuSetPGXPMode(u32 pgxpMode)
+{
+	psxSetPGXPMode(pgxpMode);
 }
 
 void __Log(char *fmt, ...) {

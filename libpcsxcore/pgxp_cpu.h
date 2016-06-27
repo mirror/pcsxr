@@ -30,15 +30,14 @@
 
 #include "psxcommon.h"
 
-#define PGXP_TRACE 9
-#define PGXP_CPU_DEBUG
-
 struct PGXP_value_Tag;
 typedef struct PGXP_value_Tag PGXP_value;
 
 extern PGXP_value* CPU_reg;
+extern PGXP_value* CP0_reg;
 #define CPU_Hi CPU_reg[33]
 #define CPU_Lo CPU_reg[34]
+
 
 // -- CPU functions
 
@@ -111,5 +110,11 @@ void PGXP_CPU_MFHI(u32 instr, u32 rdVal, u32 hiVal);
 void PGXP_CPU_MTHI(u32 instr, u32 hiVal, u32 rdVal);
 void PGXP_CPU_MFLO(u32 instr, u32 rdVal, u32 loVal);
 void PGXP_CPU_MTLO(u32 instr, u32 loVal, u32 rdVal);
+
+// CP0 Data transfer tracking
+void PGXP_CP0_MFC0(u32 instr, u32 rdVal);
+void PGXP_CP0_MTC0(u32 instr, u32 rtVal);
+void PGXP_CP0_CFC0(u32 instr, u32 rdVal);
+void PGXP_CP0_CTC0(u32 instr, u32 rtVal);
 
 #endif //_PGXP_CPU_H_

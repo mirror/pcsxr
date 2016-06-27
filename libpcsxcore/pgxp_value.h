@@ -62,8 +62,14 @@ typedef struct PGXP_value_Tag
 
 typedef enum
 {
-	INVALID_ADDRESS = (1 << 1),
-} PGXP_value_flags;
+	UNINITIALISED		= 0,
+	INVALID_PSX_VALUE	= 1,
+	INVALID_ADDRESS		= 2,
+	INVALID_BITWISE_OP	= 3,
+	DIVIDE_BY_ZERO		= 4,
+	INVALID_8BIT_LOAD	= 5,
+	INVALID_8BIT_STORE	= 6
+} PGXP_error_states;
 
 typedef enum
 {
@@ -73,30 +79,10 @@ typedef enum
 static const PGXP_value PGXP_value_invalid_address = { 0.f, 0.f, 0.f, 0, 0, 0, INVALID_ADDRESS, 0, 0 };
 static const PGXP_value PGXP_value_zero = { 0.f, 0.f, 0.f, 0, 0, 1, 0, 0, 0 };
 
-inline void MakeValid(PGXP_value *pV, u32 psxV)
-{
-	psx_value psx;
-	psx.d = psxV;
-	if (!pV->valid)
-	{
-		pV->x = (float)psx.sw.l;
-		pV->y = (float)psx.sw.h;
-		pV->valid = 1;
-		pV->value = psx.d;
-	}
-}
+void MakeValid(PGXP_value *pV, u32 psxV);
+void Validate(PGXP_value *pV, u32 psxV);
+void MaskValidate(PGXP_value *pV, u32 psxV, u32 mask);
 
-inline void Validate(PGXP_value *pV, u32 psxV)
-{
-	// assume pV is not NULL
-	pV->valid = (pV->valid) && (pV->value == psxV);
-}
-
-inline void MaskValidate(PGXP_value *pV, u32 psxV, u32 mask)
-{
-	// assume pV is not NULL
-	pV->valid = (pV->valid) && ((pV->value & mask) == (psxV & mask));
-}
 
 typedef union
 {

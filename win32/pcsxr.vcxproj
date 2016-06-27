@@ -201,6 +201,7 @@
     <ClCompile Include="..\libpcsxcore\pgxp_debug.c" />
     <ClCompile Include="..\libpcsxcore\pgxp_gte.c" />
     <ClCompile Include="..\libpcsxcore\pgxp_mem.c" />
+    <ClCompile Include="..\libpcsxcore\pgxp_value.c" />
     <ClCompile Include="..\libpcsxcore\plugins.c">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -418,6 +419,7 @@
     <ClInclude Include="..\libpcsxcore\gpu.h" />
     <ClInclude Include="..\libpcsxcore\gte.h" />
     <ClInclude Include="..\libpcsxcore\gte_divider.h" />
+    <ClInclude Include="..\libpcsxcore\ix86\iPGXP.h" />
     <ClInclude Include="..\libpcsxcore\mdec.h" />
     <ClInclude Include="..\libpcsxcore\misc.h" />
     <ClInclude Include="..\libpcsxcore\pgxp_cpu.h" />
@@ -434,6 +436,7 @@
     <ClInclude Include="..\libpcsxcore\psxdma.h" />
     <ClInclude Include="..\libpcsxcore\psxhle.h" />
     <ClInclude Include="..\libpcsxcore\psxhw.h" />
+    <ClInclude Include="..\libpcsxcore\psxinterpreter_pgxp.h" />
     <ClInclude Include="..\libpcsxcore\psxmem.h" />
     <ClInclude Include="..\libpcsxcore\r3000a.h" />
     <ClInclude Include="..\libpcsxcore\sio.h" />

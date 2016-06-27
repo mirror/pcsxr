@@ -14,7 +14,7 @@ void PGXP_Init()
 
 char* PGXP_GetMem()
 {
-	return Config.PGXP_GTE ? (char*)(Mem) : NULL;
+	return (char*)(Mem); // Config.PGXP_GTE ? (char*)(Mem) : NULL;
 }
 
 /*  Playstation Memory Map (from Playstation doc by Joshua Walker)

@@ -99,6 +99,7 @@ int LoadConfig() {
 	QueryKeyV("PGXP_GTE", Conf->PGXP_GTE);
 	QueryKeyV("PGXP_Cache", Conf->PGXP_Cache);
 	QueryKeyV("PGXP_Texture", Conf->PGXP_Texture);
+	QueryKeyV("PGXP_Mode", Conf->PGXP_Mode);
 
 	if (Config.Cpu == CPU_DYNAREC) {
 		Config.Debug = 0; // don't enable debugger if using dynarec core
@@ -165,6 +166,7 @@ void SaveConfig() {
 	SetKeyV("PGXP_GTE", Conf->PGXP_GTE);
 	SetKeyV("PGXP_Cache", Conf->PGXP_Cache);
 	SetKeyV("PGXP_Texture", Conf->PGXP_Texture);
+	SetKeyV("PGXP_Mode", Conf->PGXP_Mode);
 
 
 	RegCloseKey(myKey);

@@ -6,8 +6,10 @@
 // CPU registers
 PGXP_value CPU_reg_mem[34];
 //PGXP_value CPU_Hi, CPU_Lo;
+PGXP_value CP0_reg_mem[32];
 
 PGXP_value* CPU_reg = CPU_reg_mem;
+PGXP_value* CP0_reg = CP0_reg_mem;
 
 // Instruction register decoding
 #define op(_instr)		(_instr >> 26)			// The op part of the instruction register 
@@ -197,6 +199,7 @@ void PGXP_CPU_LUI(u32 instr, u32 rtVal)
 void PGXP_CPU_ADD(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 {
 	// Rd = Rs + Rt (signed)
+	PGXP_value ret;
 	Validate(&CPU_reg[rs(instr)], rsVal);
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
@@ -207,17 +210,19 @@ void PGXP_CPU_ADD(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 		MakeValid(&CPU_reg[rt(instr)], rtVal);
 	}
 
-	CPU_reg[rd(instr)] = CPU_reg[rs(instr)];
+	ret = CPU_reg[rs(instr)];
 
-	CPU_reg[rd(instr)].x += CPU_reg[rt(instr)].x;
-	CPU_reg[rd(instr)].y += CPU_reg[rt(instr)].y;
+	ret.x += CPU_reg[rt(instr)].x;
+	ret.y += CPU_reg[rt(instr)].y;
 
-	CPU_reg[rd(instr)].valid &= CPU_reg[rt(instr)].valid;
-	CPU_reg[rd(instr)].gFlags |= CPU_reg[rt(instr)].gFlags;
-	CPU_reg[rd(instr)].lFlags |= CPU_reg[rt(instr)].lFlags;
-	CPU_reg[rd(instr)].hFlags |= CPU_reg[rt(instr)].hFlags;
+	ret.valid &= CPU_reg[rt(instr)].valid;
+	ret.gFlags |= CPU_reg[rt(instr)].gFlags;
+	ret.lFlags |= CPU_reg[rt(instr)].lFlags;
+	ret.hFlags |= CPU_reg[rt(instr)].hFlags;
 
-	CPU_reg[rd(instr)].value = rdVal;
+	ret.value = rdVal;
+
+	CPU_reg[rd(instr)] = ret;
 }
 
 void PGXP_CPU_ADDU(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
@@ -229,27 +234,30 @@ void PGXP_CPU_ADDU(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 void PGXP_CPU_SUB(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 {
 	// Rd = Rs - Rt (signed)
+	PGXP_value ret;
 	Validate(&CPU_reg[rs(instr)], rsVal);
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	// iCB: Only require one valid input
-	//if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
-	//{
-	//	MakeValid(&CPU_reg[rs(instr)], rsVal);
-	//	MakeValid(&CPU_reg[rt(instr)], rtVal);
-	//}
+	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	{
+		MakeValid(&CPU_reg[rs(instr)], rsVal);
+		MakeValid(&CPU_reg[rt(instr)], rtVal);
+	}
 
-	CPU_reg[rd(instr)] = CPU_reg[rs(instr)];
+	ret = CPU_reg[rs(instr)];
 
-	CPU_reg[rd(instr)].x -= CPU_reg[rt(instr)].x;
-	CPU_reg[rd(instr)].y -= CPU_reg[rt(instr)].y;
+	ret.x -= CPU_reg[rt(instr)].x;
+	ret.y -= CPU_reg[rt(instr)].y;
 
-	CPU_reg[rd(instr)].valid &= CPU_reg[rt(instr)].valid;
-	CPU_reg[rd(instr)].gFlags |= CPU_reg[rt(instr)].gFlags;
-	CPU_reg[rd(instr)].lFlags |= CPU_reg[rt(instr)].lFlags;
-	CPU_reg[rd(instr)].hFlags |= CPU_reg[rt(instr)].hFlags;
+	ret.valid &= CPU_reg[rt(instr)].valid;
+	ret.gFlags |= CPU_reg[rt(instr)].gFlags;
+	ret.lFlags |= CPU_reg[rt(instr)].lFlags;
+	ret.hFlags |= CPU_reg[rt(instr)].hFlags;
 
-	CPU_reg[rd(instr)].value = rdVal;
+	ret.value = rdVal;
+
+	CPU_reg[rd(instr)] = ret;
 }
 
 void PGXP_CPU_SUBU(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
@@ -262,76 +270,78 @@ void PGXP_CPU_AND(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 {
 	// Rd = Rs & Rt
 	psx_value vald, vals, valt;
+	PGXP_value ret;
 
 	Validate(&CPU_reg[rs(instr)], rsVal);
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	// iCB: Only require one valid input
-	//if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
-	//{
-	//	MakeValid(&CPU_reg[rs(instr)], rsVal);
-	//	MakeValid(&CPU_reg[rt(instr)], rtVal);
-	//}
+	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	{
+		MakeValid(&CPU_reg[rs(instr)], rsVal);
+		MakeValid(&CPU_reg[rt(instr)], rtVal);
+	}
 
 	vald.d = rdVal;
 	vals.d = rsVal;
 	valt.d = rtVal;
 
 	//	CPU_reg[rd(instr)].valid = CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid;
-	CPU_reg[rd(instr)].valid = 1;
+	ret.valid = 1;
 
 	if (vald.w.l == 0)
 	{
-		CPU_reg[rd(instr)].x = 0.f;
-		CPU_reg[rd(instr)].lFlags = VALID_HALF;
+		ret.x = 0.f;
+		ret.lFlags = VALID_HALF;
 	}
 	else if (vald.w.l == vals.w.l)
 	{
-		CPU_reg[rd(instr)].x = CPU_reg[rs(instr)].x;
-		CPU_reg[rd(instr)].lFlags = CPU_reg[rs(instr)].lFlags;
-		CPU_reg[rd(instr)].valid &= CPU_reg[rs(instr)].valid;
+		ret.x = CPU_reg[rs(instr)].x;
+		ret.lFlags = CPU_reg[rs(instr)].lFlags;
+		ret.valid &= CPU_reg[rs(instr)].valid;
 	}
 	else if (vald.w.l == valt.w.l)
 	{
-		CPU_reg[rd(instr)].x = CPU_reg[rt(instr)].x;
-		CPU_reg[rd(instr)].lFlags = CPU_reg[rt(instr)].lFlags;
-		CPU_reg[rd(instr)].valid &= CPU_reg[rt(instr)].valid;
+		ret.x = CPU_reg[rt(instr)].x;
+		ret.lFlags = CPU_reg[rt(instr)].lFlags;
+		ret.valid &= CPU_reg[rt(instr)].valid;
 	}
 	else
 	{
-		CPU_reg[rd(instr)].valid = 0;
-		CPU_reg[rd(instr)].lFlags = 0;
+		ret.valid = 0;
+		ret.lFlags = 0;
 	}
 
 	if (vald.w.h == 0)
 	{
-		CPU_reg[rd(instr)].y = 0.f;
-		CPU_reg[rd(instr)].hFlags = VALID_HALF;
+		ret.y = 0.f;
+		ret.hFlags = VALID_HALF;
 	}
 	else if (vald.w.h == vals.w.h)
 	{
-		CPU_reg[rd(instr)].y = CPU_reg[rs(instr)].y;
-		CPU_reg[rd(instr)].hFlags = CPU_reg[rs(instr)].hFlags;
-		CPU_reg[rd(instr)].valid &= CPU_reg[rs(instr)].valid;
+		ret.y = CPU_reg[rs(instr)].y;
+		ret.hFlags = CPU_reg[rs(instr)].hFlags;
+		ret.valid &= CPU_reg[rs(instr)].valid;
 	}
 	else if (vald.w.h == valt.w.h)
 	{
-		CPU_reg[rd(instr)].y = CPU_reg[rt(instr)].y;
-		CPU_reg[rd(instr)].hFlags = CPU_reg[rt(instr)].hFlags;
-		CPU_reg[rd(instr)].valid &= CPU_reg[rt(instr)].valid;
+		ret.y = CPU_reg[rt(instr)].y;
+		ret.hFlags = CPU_reg[rt(instr)].hFlags;
+		ret.valid &= CPU_reg[rt(instr)].valid;
 	}
 	else
 	{
-		CPU_reg[rd(instr)].valid = 0;
-		CPU_reg[rd(instr)].hFlags = 0;
+		ret.valid = 0;
+		ret.hFlags = 0;
 	}
 
 	// iCB Hack: Force validity if even one half is valid
-	if ((CPU_reg[rd(instr)].hFlags & VALID_HALF) || (CPU_reg[rd(instr)].lFlags & VALID_HALF))
-		CPU_reg[rd(instr)].valid = 1;
+	if ((ret.hFlags & VALID_HALF) || (ret.lFlags & VALID_HALF))
+		ret.valid = 1;
 	// /iCB Hack
 
-	CPU_reg[rd(instr)].value = rdVal;
+	ret.value = rdVal;
+	CPU_reg[rd(instr)] = ret;
 }
 
 void PGXP_CPU_OR(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
@@ -355,44 +365,48 @@ void PGXP_CPU_NOR(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 void PGXP_CPU_SLT(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 {
 	// Rd = Rs < Rt (signed)
+	PGXP_value ret;
 	Validate(&CPU_reg[rs(instr)], rsVal);
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	// iCB: Only require one valid input
-	//if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
-	//{
-	//	MakeValid(&CPU_reg[rs(instr)], rsVal);
-	//	MakeValid(&CPU_reg[rt(instr)], rtVal);
-	//}
+	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	{
+		MakeValid(&CPU_reg[rs(instr)], rsVal);
+		MakeValid(&CPU_reg[rt(instr)], rtVal);
+	}
 
-	CPU_reg[rd(instr)] = CPU_reg[rs(instr)];
+	ret = CPU_reg[rs(instr)];
 
 	// TODO: fix for single or double values?
-	CPU_reg[rd(instr)].y = 0.f;
-	CPU_reg[rd(instr)].x = (CPU_reg[rs(instr)].x < CPU_reg[rt(instr)].x) ? 1.f : 0.f;
+	ret.y = 0.f;
+	ret.x = (CPU_reg[rs(instr)].x < CPU_reg[rt(instr)].x) ? 1.f : 0.f;
 
-	CPU_reg[rd(instr)].value = rdVal;
+	ret.value = rdVal;
+	CPU_reg[rd(instr)] = ret;
 }
 
 void PGXP_CPU_SLTU(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 {
 	// Rd = Rs < Rt (unsigned)
+	PGXP_value ret;
 	Validate(&CPU_reg[rs(instr)], rsVal);
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	// iCB: Only require one valid input
-	//if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
-	//{
-	//	MakeValid(&CPU_reg[rs(instr)], rsVal);
-	//	MakeValid(&CPU_reg[rt(instr)], rtVal);
-	//}
+	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	{
+		MakeValid(&CPU_reg[rs(instr)], rsVal);
+		MakeValid(&CPU_reg[rt(instr)], rtVal);
+	}
 
-	CPU_reg[rd(instr)] = CPU_reg[rs(instr)];
+	ret = CPU_reg[rs(instr)];
 
-	CPU_reg[rd(instr)].y = 0.f;
-	CPU_reg[rd(instr)].x = (fabs(CPU_reg[rs(instr)].x) < fabs(CPU_reg[rt(instr)].x)) ? 1.f : 0.f;
+	ret.y = 0.f;
+	ret.x = (fabs(CPU_reg[rs(instr)].x) < fabs(CPU_reg[rt(instr)].x)) ? 1.f : 0.f;
 
-	CPU_reg[rd(instr)].value = rdVal;
+	ret.value = rdVal;
+	CPU_reg[rd(instr)] = ret;
 }
 
 ////////////////////////////////////
@@ -414,8 +428,8 @@ void PGXP_CPU_MULT(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 	float vs = CPU_reg[rs(instr)].y + (CPU_reg[rs(instr)].x / (float)(1 << 16));
 	float vt = CPU_reg[rt(instr)].y + (CPU_reg[rt(instr)].x / (float)(1 << 16));
 
-	CPU_Lo.x = 0;// CPU_reg[rs(instr)].x * CPU_reg[rt(instr)].x;
 	CPU_Hi.x = vs * vt;// CPU_reg[rs(instr)].y * CPU_reg[rt(instr)].y;
+	CPU_Lo.y = (CPU_Hi.x - ((s32)CPU_Hi.x)) * (float)(1 << 16);// CPU_reg[rs(instr)].x * CPU_reg[rt(instr)].x; // Get fractional part
 
 	CPU_Lo.valid = CPU_Hi.valid = CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid;
 
@@ -439,8 +453,8 @@ void PGXP_CPU_MULTU(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 	float vs = fabs(CPU_reg[rs(instr)].y) + (fabs(CPU_reg[rs(instr)].x) / (float)(1 << 16));
 	float vt = fabs(CPU_reg[rt(instr)].y) + (fabs(CPU_reg[rt(instr)].x) / (float)(1 << 16));
 
-	CPU_Lo.x = 0;// fabs(CPU_reg[rs(instr)].x) * fabs(CPU_reg[rt(instr)].x);
 	CPU_Hi.x = vs * vt;// fabs(CPU_reg[rs(instr)].y) * fabs(CPU_reg[rt(instr)].y);
+	CPU_Lo.y = (CPU_Hi.x - ((s32)CPU_Hi.x)) * (float)(1 << 16);// fabs(CPU_reg[rs(instr)].x) * fabs(CPU_reg[rt(instr)].x);	// Get fractional part
 
 	CPU_Lo.valid = CPU_Hi.valid = CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid;
 
@@ -456,11 +470,11 @@ void PGXP_CPU_DIV(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	//// iCB: Only require one valid input
-	//if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
-	//{
-	//	MakeValid(&CPU_reg[rs(instr)], rsVal);
-	//	MakeValid(&CPU_reg[rt(instr)], rtVal);
-	//}
+	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	{
+		MakeValid(&CPU_reg[rs(instr)], rsVal);
+		MakeValid(&CPU_reg[rt(instr)], rtVal);
+	}
 
 	float vs = CPU_reg[rs(instr)].y + (CPU_reg[rs(instr)].x / (float)(1 << 16));
 	float vt = CPU_reg[rt(instr)].y + (CPU_reg[rt(instr)].x / (float)(1 << 16));
@@ -483,11 +497,11 @@ void PGXP_CPU_DIVU(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	//// iCB: Only require one valid input
-	//if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
-	//{
-	//	MakeValid(&CPU_reg[rs(instr)], rsVal);
-	//	MakeValid(&CPU_reg[rt(instr)], rtVal);
-	//}
+	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	{
+		MakeValid(&CPU_reg[rs(instr)], rsVal);
+		MakeValid(&CPU_reg[rt(instr)], rtVal);
+	}
 
 	float vs = CPU_reg[rs(instr)].y + (CPU_reg[rs(instr)].x / (float)(1 << 16));
 	float vt = CPU_reg[rt(instr)].y + (CPU_reg[rt(instr)].x / (float)(1 << 16));
@@ -508,49 +522,53 @@ void PGXP_CPU_DIVU(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 void PGXP_CPU_SLL(u32 instr, u32 rdVal, u32 rtVal)
 {
 	// Rd = Rt << Sa
+	PGXP_value ret;
 	u32 sh = sa(instr);
 	Validate(&CPU_reg[rt(instr)], rtVal);
-	CPU_reg[rd(instr)] = CPU_reg[rt(instr)];
+	ret = CPU_reg[rt(instr)];
 
 	// Shift y into x?
 	if (sh >= 16)
 	{
-		CPU_reg[rd(instr)].y = CPU_reg[rd(instr)].x;
-		CPU_reg[rd(instr)].x = 0;
-		CPU_reg[rd(instr)].hFlags = CPU_reg[rd(instr)].lFlags;
-		CPU_reg[rd(instr)].lFlags = 0;
+		ret.y = ret.x;
+		ret.x = 0;
+		ret.hFlags = ret.lFlags;
+		ret.lFlags = 0;
 		sh -= 16;
 	}
 	
 	// assume multiply with no overflow
-	CPU_reg[rd(instr)].x *= (float)(1 << sh);
-	CPU_reg[rd(instr)].y *= (float)(1 << sh);
+	ret.x *= (float)(1 << sh);
+	ret.y *= (float)(1 << sh);
 
-	CPU_reg[rd(instr)].value = rdVal;
+	ret.value = rdVal;
+	CPU_reg[rd(instr)] = ret;
 }
 
 void PGXP_CPU_SRL(u32 instr, u32 rdVal, u32 rtVal)
 {
 	// Rd = Rt >> Sa
+	PGXP_value ret;
 	u32 sh = sa(instr);
 	Validate(&CPU_reg[rt(instr)], rtVal);
-	CPU_reg[rd(instr)] = CPU_reg[rt(instr)];
+	ret = CPU_reg[rt(instr)];
 
 	// Shift x into y?
 	if (sh >= 16)
 	{
-		CPU_reg[rd(instr)].x = CPU_reg[rd(instr)].y;
-		CPU_reg[rd(instr)].y = 0;
-		CPU_reg[rd(instr)].lFlags = CPU_reg[rd(instr)].hFlags;
-		CPU_reg[rd(instr)].hFlags = 0;
+		ret.x = ret.y;
+		ret.y = 0;
+		ret.lFlags = ret.hFlags;
+		ret.hFlags = 0;
 		sh -= 16;
 	}
 	
 	// assume divide with no overflow
-	CPU_reg[rd(instr)].x /= (float)(1 << sh);
-	CPU_reg[rd(instr)].y /= (float)(1 << sh);
+	ret.x /= (float)(1 << sh);
+	ret.y /= (float)(1 << sh);
 
-	CPU_reg[rd(instr)].value = rdVal;
+	ret.value = rdVal;
+	CPU_reg[rd(instr)] = ret;
 }
 
 void PGXP_CPU_SRA(u32 instr, u32 rdVal, u32 rtVal)
@@ -565,53 +583,57 @@ void PGXP_CPU_SRA(u32 instr, u32 rdVal, u32 rtVal)
 void PGXP_CPU_SLLV(u32 instr, u32 rdVal, u32 rtVal, u32 rsVal)
 {
 	// Rd = Rt << Rs
+	PGXP_value ret;
 	u32 sh = rsVal & 0x1F;
 	Validate(&CPU_reg[rt(instr)], rtVal);
 	Validate(&CPU_reg[rs(instr)], rsVal);
 
-	CPU_reg[rd(instr)] = CPU_reg[rt(instr)];
+	ret = CPU_reg[rt(instr)];
 
 	// Shift y into x?
 	if (sh >= 16)
 	{
-		CPU_reg[rd(instr)].y = CPU_reg[rd(instr)].x;
-		CPU_reg[rd(instr)].x = 0;
-		CPU_reg[rd(instr)].hFlags = CPU_reg[rd(instr)].lFlags;
-		CPU_reg[rd(instr)].lFlags = 0;
+		ret.y = ret.x;
+		ret.x = 0;
+		ret.hFlags = ret.lFlags;
+		ret.lFlags = 0;
 		sh -= 16;
 	}
 
 	// assume multiply with no overflow
-	CPU_reg[rd(instr)].x *= (float)(1 << sh);
-	CPU_reg[rd(instr)].y *= (float)(1 << sh);
+	ret.x *= (float)(1 << sh);
+	ret.y *= (float)(1 << sh);
 
-	CPU_reg[rd(instr)].value = rdVal;
+	ret.value = rdVal;
+	CPU_reg[rd(instr)] = ret;
 }
 
 void PGXP_CPU_SRLV(u32 instr, u32 rdVal, u32 rtVal, u32 rsVal)
 {
 	// Rd = Rt >> Sa
+	PGXP_value ret;
 	u32 sh = rsVal & 0x1F;
 	Validate(&CPU_reg[rt(instr)], rtVal);
 	Validate(&CPU_reg[rs(instr)], rsVal);
 
-	CPU_reg[rd(instr)] = CPU_reg[rt(instr)];
+	ret = CPU_reg[rt(instr)];
 
 	// Shift x into y?
 	if (sh >= 16)
 	{
-		CPU_reg[rd(instr)].x = CPU_reg[rd(instr)].y;
-		CPU_reg[rd(instr)].y = 0;
-		CPU_reg[rd(instr)].lFlags = CPU_reg[rd(instr)].hFlags;
-		CPU_reg[rd(instr)].hFlags = 0;
+		ret.x = ret.y;
+		ret.y = 0;
+		ret.lFlags = ret.hFlags;
+		ret.hFlags = 0;
 		sh -= 16;
 	}
 
 	// assume divide with no overflow
-	CPU_reg[rd(instr)].x /= (float)(1 << sh);
-	CPU_reg[rd(instr)].y /= (float)(1 << sh);
+	ret.x /= (float)(1 << sh);
+	ret.y /= (float)(1 << sh);
 
-	CPU_reg[rd(instr)].value = rdVal;
+	ret.value = rdVal;
+	CPU_reg[rd(instr)] = ret;
 }
 
 void PGXP_CPU_SRAV(u32 instr, u32 rdVal, u32 rtVal, u32 rsVal)
@@ -742,3 +764,33 @@ void PGXP_CPU_SB(u32 instr, u8 rtVal, u32 addr)
 	InvalidStore(addr, instr, 208);
 }
 
+////////////////////////////////////
+// Data transfer tracking
+////////////////////////////////////
+void PGXP_CP0_MFC0(u32 instr, u32 rdVal)
+{
+	// CPU[Rt] = CP0[Rd]
+	Validate(&CP0_reg[rd(instr)], rdVal);
+	CPU_reg[rt(instr)] = CP0_reg[rd(instr)];
+}
+
+void PGXP_CP0_MTC0(u32 instr, u32 rtVal)
+{
+	// CP0[Rd] = CPU[Rt]
+	Validate(&CPU_reg[rt(instr)], rtVal);
+	CP0_reg[rd(instr)] = CPU_reg[rt(instr)];
+}
+
+void PGXP_CP0_CFC0(u32 instr, u32 rdVal)
+{
+	// CPU[Rt] = CP0[Rd]
+	Validate(&CP0_reg[rd(instr)], rdVal);
+	CPU_reg[rt(instr)] = CP0_reg[rd(instr)];
+}
+
+void PGXP_CP0_CTC0(u32 instr, u32 rtVal)
+{
+	// CP0[Rd] = CPU[Rt]
+	Validate(&CPU_reg[rt(instr)], rtVal);
+	CP0_reg[rd(instr)] = CPU_reg[rt(instr)];
+}

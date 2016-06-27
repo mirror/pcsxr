@@ -30,6 +30,12 @@
 
 #include "psxcommon.h"
 
+struct PGXP_value_Tag;
+typedef struct PGXP_value_Tag PGXP_value;
+
+extern PGXP_value* GTE_data_reg;
+extern PGXP_value* GTE_ctrl_reg;
+
 // -- GTE functions
 // Transforms
 void	PGXP_pushSXYZ2f(float _x, float _y, float _z, unsigned int _v);
@@ -41,10 +47,13 @@ int		PGXP_NLCIP_valid();
 float	PGXP_NCLIP();
 
 // Data transfer tracking
-void	PGXP_MFC2(u32 gpr, u32 gtr, u32 value);		// copy GTE reg to GPR reg (MFC2)
-void	PGXP_MTC2(u32 gpr, u32 gtr, u32 value);		// copy GPR reg to GTR reg (MTC2)
-void	PGXP_LWC2(u32 addr, u32 gtr, u32 value);	// copy memory to GTE reg
-void	PGXP_SWC2(u32 addr, u32 gtr, u32 value);	// copy GTE reg to memory
+void	PGXP_GTE_MFC2(u32 instr, u32 rdVal);		// copy GTE data reg to GPR reg (MFC2)
+void	PGXP_GTE_MTC2(u32 instr, u32 rtVal);		// copy GPR reg to GTE data reg (MTC2)
+void	PGXP_GTE_CFC2(u32 instr, u32 rdVal);		// copy GTE ctrl reg to GPR reg (CFC2)
+void	PGXP_GTE_CTC2(u32 instr, u32 rtVal);		// copy GPR reg to GTE ctrl reg (CTC2)
+// Memory Access
+void	PGXP_GTE_LWC2(u32 instr, u32 rtVal, u32 addr);	// copy memory to GTE reg
+void	PGXP_GTE_SWC2(u32 instr, u32 rtVal, u32 addr);	// copy GTE reg to memory
 
 #ifndef max
 #   define max(a, b) ((a) > (b) ? (a) : (b))

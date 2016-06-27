@@ -250,29 +250,27 @@ static void CTC2(u32 value, int reg) {
 	psxRegs.CP2C.p[reg].d = value;
 }
 
-void gteMFC2() {
+void gteMFC2()
+{
+	// CPU[Rt] = GTE_D[Rd]
 	if (!_Rt_) return;
 	psxRegs.GPR.r[_Rt_] = MFC2(_Rd_);
-	PGXP_MFC2(_Rt_, _Rd_, psxRegs.CP2D.p[_Rd_].d);
 }
 
-void gteCFC2() {
+void gteCFC2()
+{
+	// CPU[Rt] = GTE_C[Rd]
 	if (!_Rt_) return;
 	psxRegs.GPR.r[_Rt_] = psxRegs.CP2C.p[_Rd_].d;
-#ifdef GTE_LOG
-	GTE_LOG("GTE_CFC2 [%x]<-[%x] %x (%u %u)|", _Rt_, _Rd_, psxRegs.CP2C.p[_Rd_].d);
-#endif
 }
 
-void gteMTC2() {
-	PGXP_MTC2(_Rt_, _Rd_, psxRegs.GPR.p[_Rt_].d);
+void gteMTC2()
+{
 	MTC2(psxRegs.GPR.r[_Rt_], _Rd_);
 }
 
-void gteCTC2() {
-#ifdef GTE_LOG
-	GTE_LOG("GTE_CFC2 [%x]->[%x] %x (%u %u)|", _Rt_, _Rd_, psxRegs.GPR.r[_Rt_]);
-#endif
+void gteCTC2()
+{
 	CTC2(psxRegs.GPR.r[_Rt_], _Rd_);
 }
 
@@ -280,13 +278,11 @@ void gteCTC2() {
 
 void gteLWC2() {
 	u32 val = psxMemRead32(_oB_);
-	PGXP_LWC2(_oB_, _Rt_, val);
 	MTC2(val, _Rt_);
 }
 
 void gteSWC2() {
 	u32 val = MFC2(_Rt_);
-	PGXP_SWC2(_oB_, _Rt_, val);
 	psxMemWrite32(_oB_, val);
 }
 

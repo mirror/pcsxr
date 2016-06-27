@@ -171,6 +171,7 @@ typedef struct {
 	boolean PGXP_GTE;
 	boolean PGXP_Cache;
 	boolean PGXP_Texture;
+	u32		PGXP_Mode;
 #ifdef _WIN32
 	char Lang[256];
 #endif
@@ -215,6 +216,7 @@ int EmuInit();
 void EmuReset();
 void EmuShutdown();
 void EmuUpdate();
+void EmuSetPGXPMode(u32 pgxpMode);
 
 #ifdef __cplusplus
 }

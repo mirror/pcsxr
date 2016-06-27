@@ -204,6 +204,9 @@
     <ClCompile Include="..\libpcsxcore\pgxp_debug.c">
       <Filter>libpcsxcore</Filter>
     </ClCompile>
+    <ClCompile Include="..\libpcsxcore\pgxp_value.c">
+      <Filter>libpcsxcore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\libpcsxcore\cdriso.h">
@@ -380,6 +383,12 @@
       <Filter>libpcsxcore</Filter>
     </ClInclude>
     <ClInclude Include="..\libpcsxcore\pgxp_debug.h">
+      <Filter>libpcsxcore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\ix86\iPGXP.h">
+      <Filter>libpcsxcore\ix86</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpcsxcore\psxinterpreter_pgxp.h">
       <Filter>libpcsxcore</Filter>
     </ClInclude>
   </ItemGroup>
