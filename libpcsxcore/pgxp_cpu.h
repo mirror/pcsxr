@@ -116,5 +116,6 @@ void PGXP_CP0_MFC0(u32 instr, u32 rdVal);
 void PGXP_CP0_MTC0(u32 instr, u32 rtVal);
 void PGXP_CP0_CFC0(u32 instr, u32 rdVal);
 void PGXP_CP0_CTC0(u32 instr, u32 rtVal);
+void PGXP_CP0_RFE(u32 instr);
 
 #endif //_PGXP_CPU_H_

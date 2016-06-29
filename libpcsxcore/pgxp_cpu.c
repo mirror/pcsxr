@@ -794,3 +794,6 @@ void PGXP_CP0_CTC0(u32 instr, u32 rtVal)
 	Validate(&CPU_reg[rt(instr)], rtVal);
 	CP0_reg[rd(instr)] = CPU_reg[rt(instr)];
 }
+
+void PGXP_CP0_RFE(u32 instr)
+{}
