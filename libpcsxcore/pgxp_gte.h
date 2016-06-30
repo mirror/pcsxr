@@ -36,6 +36,8 @@ typedef struct PGXP_value_Tag PGXP_value;
 extern PGXP_value* GTE_data_reg;
 extern PGXP_value* GTE_ctrl_reg;
 
+void PGXP_InitGTE();
+
 // -- GTE functions
 // Transforms
 void	PGXP_pushSXYZ2f(float _x, float _y, float _z, unsigned int _v);

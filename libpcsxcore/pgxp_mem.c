@@ -1,4 +1,6 @@
 #include "pgxp_mem.h"
+#include "pgxp_cpu.h"
+#include "pgxp_gte.h"
 #include "pgxp_value.h"
 
 PGXP_value Mem[3 * 2048 * 1024 / 4];		// mirror 2MB in 32-bit words * 3
@@ -7,9 +9,16 @@ const u32 ScratchOffset = 2048 * 1024 / 4;
 const u32 RegisterOffset = 2 * 2048 * 1024 / 4;
 const u32 InvalidAddress = 3 * 2048 * 1024 / 4;
 
-void PGXP_Init()
+void PGXP_InitMem()
 {
 	memset(Mem, 0, sizeof(Mem));
+}
+
+void PGXP_Init()
+{
+	PGXP_InitMem();
+	PGXP_InitCPU();
+	PGXP_InitGTE();
 }
 
 char* PGXP_GetMem()

@@ -44,7 +44,11 @@ PGXP_value GTE_ctrl_reg_mem[32];
 PGXP_value* GTE_data_reg = GTE_data_reg_mem;
 PGXP_value* GTE_ctrl_reg = GTE_ctrl_reg_mem;
 
-
+void PGXP_InitGTE()
+{
+	memset(GTE_data_reg_mem, 0, sizeof(GTE_data_reg_mem));
+	memset(GTE_ctrl_reg_mem, 0, sizeof(GTE_ctrl_reg_mem));
+}
 
 // Instruction register decoding
 #define op(_instr)		(_instr >> 26)			// The op part of the instruction register 
