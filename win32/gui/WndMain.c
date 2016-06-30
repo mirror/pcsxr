@@ -1533,6 +1533,7 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 							SysClose();
 							exit(1);
 						}
+						psxCpu->SetPGXPMode(Config.PGXP_Mode);
 						psxCpu->Reset();
 					}
 					Config.PsxOut  = Button_GetCheck(GetDlgItem(hW,IDC_PSXOUT));

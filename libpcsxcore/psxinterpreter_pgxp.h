@@ -23,12 +23,13 @@ pgxpPsxNULL() {}
 #define PGXP_INT_FUNC(pu, op) \
 static void pgxpPsx##op() { \
 	PGXP_PSX_FUNC_OP(pu, op, )(psxRegs.code); \
+	psx##op(); \
 }
 
 #define PGXP_INT_FUNC_0_1(pu, op, test, nReg, reg1) \
 static void pgxpPsx##op()	\
 { \
-	if (test) return; \
+	if (test) {psx##op(); return;} \
 		psx##op(); \
 	PGXP_PSX_FUNC_OP(pu, op, nReg)(psxRegs.code, reg1); \
 }
@@ -36,7 +37,7 @@ static void pgxpPsx##op()	\
 #define PGXP_INT_FUNC_1_0(pu, op, test, nReg, reg1)\
 static void pgxpPsx##op()	\
 { \
-	if (test) return; \
+	if (test) {psx##op(); return;} \
 	PGXP_PSX_FUNC_OP(pu, op, nReg)(psxRegs.code, reg1); \
 	psx##op(); \
 }
@@ -44,7 +45,7 @@ static void pgxpPsx##op()	\
 #define PGXP_INT_FUNC_1_1(pu, op, test, nReg, reg1, reg2)\
 static void pgxpPsx##op()	\
 { \
-	if (test) return; \
+	if (test) {psx##op(); return;} \
 	u32 temp2 = reg2; \
 	psx##op(); \
 	PGXP_PSX_FUNC_OP(pu, op, nReg)(psxRegs.code, reg1, temp2); \
@@ -53,15 +54,25 @@ static void pgxpPsx##op()	\
 #define PGXP_INT_FUNC_0_2(pu, op, test, nReg, reg1, reg2) \
 static void pgxpPsx##op()	\
 { \
-	if (test) return; \
+	if (test) {psx##op(); return;} \
 		psx##op(); \
 	PGXP_PSX_FUNC_OP(pu, op, nReg)(psxRegs.code, reg1, reg2); \
+}
+
+#define PGXP_INT_FUNC_2_0(pu, op, test, nReg, reg1, reg2) \
+static void pgxpPsx##op()	\
+{ \
+	if (test) {psx##op(); return;} \
+	u32 temp1 = reg1; \
+	u32 temp2 = reg2; \
+		psx##op(); \
+	PGXP_PSX_FUNC_OP(pu, op, nReg)(psxRegs.code, temp1, temp2); \
 }
 
 #define PGXP_INT_FUNC_2_1(pu, op, test, nReg, reg1, reg2, reg3) \
 static void pgxpPsx##op()	\
 { \
-	if (test) return; \
+	if (test) {psx##op(); return;} \
 	u32 temp2 = reg2; \
 	u32 temp3 = reg3; \
 	psx##op(); \
@@ -71,7 +82,7 @@ static void pgxpPsx##op()	\
 #define PGXP_INT_FUNC_2_2(pu, op, test, nReg, reg1, reg2, reg3, reg4) \
 static void pgxpPsx##op()	\
 { \
-	if (test) return; \
+	if (test) {psx##op(); return;} \
 	u32 temp3 = reg3; \
 	u32 temp4 = reg4; \
 	psx##op(); \
@@ -109,20 +120,20 @@ PGXP_INT_FUNC_2_2(CPU, DIV,		0, 4, psxRegs.GPR.n.hi, psxRegs.GPR.n.lo, psxRegs.G
 PGXP_INT_FUNC_2_2(CPU, DIVU,	0, 4, psxRegs.GPR.n.hi, psxRegs.GPR.n.lo, psxRegs.GPR.r[_Rs_], psxRegs.GPR.r[_Rt_])
 
 // Mem[addr] = Rt
-PGXP_INT_FUNC_0_2(CPU, SB,	0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
-PGXP_INT_FUNC_0_2(CPU, SH,	0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
-PGXP_INT_FUNC_0_2(CPU, SW,	0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
-PGXP_INT_FUNC_0_2(CPU, SWL, 0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
-PGXP_INT_FUNC_0_2(CPU, SWR, 0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
+PGXP_INT_FUNC_1_1(CPU, SB,	0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
+PGXP_INT_FUNC_1_1(CPU, SH,	0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
+PGXP_INT_FUNC_1_1(CPU, SW,	0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
+PGXP_INT_FUNC_1_1(CPU, SWL, 0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
+PGXP_INT_FUNC_1_1(CPU, SWR, 0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
 
 // Rt = Mem[addr]
-PGXP_INT_FUNC_0_2(CPU, LWL, 0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
-PGXP_INT_FUNC_0_2(CPU, LW,	0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
-PGXP_INT_FUNC_0_2(CPU, LWR, 0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
-PGXP_INT_FUNC_0_2(CPU, LH,	0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
-PGXP_INT_FUNC_0_2(CPU, LHU, 0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
-PGXP_INT_FUNC_0_2(CPU, LB,	0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
-PGXP_INT_FUNC_0_2(CPU, LBU, 0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
+PGXP_INT_FUNC_1_1(CPU, LWL, 0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
+PGXP_INT_FUNC_1_1(CPU, LW,	0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
+PGXP_INT_FUNC_1_1(CPU, LWR, 0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
+PGXP_INT_FUNC_1_1(CPU, LH,	0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
+PGXP_INT_FUNC_1_1(CPU, LHU, 0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
+PGXP_INT_FUNC_1_1(CPU, LB,	0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
+PGXP_INT_FUNC_1_1(CPU, LBU, 0, 2, psxRegs.GPR.r[_Rt_],  _oB_)
 
 //Rd = Rt op Sa
 PGXP_INT_FUNC_1_1(CPU, SLL, !_Rd_, 2, psxRegs.GPR.r[_Rd_], psxRegs.GPR.r[_Rt_])
@@ -146,8 +157,8 @@ PGXP_INT_FUNC_0_1(GTE, CFC2, !_Rt_, 1, psxRegs.CP2C.r[_Rd_])
 PGXP_INT_FUNC_1_0(GTE, MTC2, 0, 1, psxRegs.GPR.r[_Rt_])
 PGXP_INT_FUNC_1_0(GTE, CTC2, 0, 1, psxRegs.GPR.r[_Rt_])
 
-PGXP_INT_FUNC_0_2(GTE, LWC2, 0, 2, psxRegs.CP2D.r[_Rt_], _oB_)
-PGXP_INT_FUNC_0_2(GTE, SWC2, 0, 2, psxRegs.CP2D.r[_Rt_], _oB_)
+PGXP_INT_FUNC_1_1(GTE, LWC2, 0, 2, psxRegs.CP2D.r[_Rt_], _oB_)
+PGXP_INT_FUNC_1_1(GTE, SWC2, 0, 2, psxRegs.CP2D.r[_Rt_], _oB_)
 
 // COP0
 PGXP_INT_FUNC_0_1(CP0, MFC0, !_Rd_, 1, psxRegs.CP0.r[_Rd_])

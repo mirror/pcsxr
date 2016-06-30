@@ -39,7 +39,7 @@ static void pgxpRec##op() { \
 
 #define PGXP_REC_FUNC_2_2(pu, op, test, nReg, reg1, reg2, reg3, reg4) \
 static void pgxpRec##op() { \
-	if(test) return;\
+	if(test) { rec##op(); return; }\
 	reg1;\
 	reg2;\
 	rec##op();\
