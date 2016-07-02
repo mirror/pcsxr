@@ -114,10 +114,10 @@ void PGXP_CPU_MFLO(u32 instr, u32 rdVal, u32 loVal);
 void PGXP_CPU_MTLO(u32 instr, u32 loVal, u32 rdVal);
 
 // CP0 Data transfer tracking
-void PGXP_CP0_MFC0(u32 instr, u32 rdVal);
-void PGXP_CP0_MTC0(u32 instr, u32 rtVal);
-void PGXP_CP0_CFC0(u32 instr, u32 rdVal);
-void PGXP_CP0_CTC0(u32 instr, u32 rtVal);
+void PGXP_CP0_MFC0(u32 instr, u32 rtVal, u32 rdVal);
+void PGXP_CP0_MTC0(u32 instr, u32 rdVal, u32 rtVal);
+void PGXP_CP0_CFC0(u32 instr, u32 rtVal, u32 rdVal);
+void PGXP_CP0_CTC0(u32 instr, u32 rdVal, u32 rtVal);
 void PGXP_CP0_RFE(u32 instr);
 
 #endif //_PGXP_CPU_H_

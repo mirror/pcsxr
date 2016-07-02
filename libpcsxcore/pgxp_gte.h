@@ -49,10 +49,10 @@ int		PGXP_NLCIP_valid();
 float	PGXP_NCLIP();
 
 // Data transfer tracking
-void	PGXP_GTE_MFC2(u32 instr, u32 rdVal);		// copy GTE data reg to GPR reg (MFC2)
-void	PGXP_GTE_MTC2(u32 instr, u32 rtVal);		// copy GPR reg to GTE data reg (MTC2)
-void	PGXP_GTE_CFC2(u32 instr, u32 rdVal);		// copy GTE ctrl reg to GPR reg (CFC2)
-void	PGXP_GTE_CTC2(u32 instr, u32 rtVal);		// copy GPR reg to GTE ctrl reg (CTC2)
+void	PGXP_GTE_MFC2(u32 instr, u32 rtVal, u32 rdVal);		// copy GTE data reg to GPR reg (MFC2)
+void	PGXP_GTE_MTC2(u32 instr, u32 rdVal, u32 rtVal);		// copy GPR reg to GTE data reg (MTC2)
+void	PGXP_GTE_CFC2(u32 instr, u32 rtVal, u32 rdVal);		// copy GTE ctrl reg to GPR reg (CFC2)
+void	PGXP_GTE_CTC2(u32 instr, u32 rdVal, u32 rtVal);		// copy GPR reg to GTE ctrl reg (CTC2)
 // Memory Access
 void	PGXP_GTE_LWC2(u32 instr, u32 rtVal, u32 addr);	// copy memory to GTE reg
 void	PGXP_GTE_SWC2(u32 instr, u32 rtVal, u32 addr);	// copy GTE reg to memory

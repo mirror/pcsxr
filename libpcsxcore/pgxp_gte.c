@@ -279,33 +279,37 @@ void MFC2(int reg) {
 	}
 }
 
-void PGXP_GTE_MFC2(u32 instr, u32 rdVal)
+void PGXP_GTE_MFC2(u32 instr, u32 rtVal, u32 rdVal)
 {
 	// CPU[Rt] = GTE_D[Rd]
 	Validate(&GTE_data_reg[rd(instr)], rdVal);
 	//MFC2(rd(instr));
 	CPU_reg[rt(instr)] = GTE_data_reg[rd(instr)];
+	CPU_reg[rt(instr)].value = rtVal;
 }
 
-void PGXP_GTE_MTC2(u32 instr, u32 rtVal)
+void PGXP_GTE_MTC2(u32 instr, u32 rdVal, u32 rtVal)
 {
 	// GTE_D[Rd] = CPU[Rt]
 	Validate(&CPU_reg[rt(instr)], rtVal);
 	PGXP_MTC2_int(CPU_reg[rt(instr)], rd(instr));
+	GTE_data_reg[rd(instr)].value = rdVal;
 }
 
-void PGXP_GTE_CFC2(u32 instr, u32 rdVal)
+void PGXP_GTE_CFC2(u32 instr, u32 rtVal, u32 rdVal)
 {
 	// CPU[Rt] = GTE_C[Rd]
 	Validate(&GTE_ctrl_reg[rd(instr)], rdVal);
 	CPU_reg[rt(instr)] = GTE_ctrl_reg[rd(instr)];
+	CPU_reg[rt(instr)].value = rtVal;
 }
 
-void PGXP_GTE_CTC2(u32 instr, u32 rtVal)
+void PGXP_GTE_CTC2(u32 instr, u32 rdVal, u32 rtVal)
 {
 	// GTE_C[Rd] = CPU[Rt]
 	Validate(&CPU_reg[rt(instr)], rtVal);
 	GTE_ctrl_reg[rd(instr)] = CPU_reg[rt(instr)];
+	GTE_ctrl_reg[rd(instr)].value = rdVal;
 }
 
 ////////////////////////////////////

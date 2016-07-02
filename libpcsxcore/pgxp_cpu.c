@@ -773,32 +773,36 @@ void PGXP_CPU_SB(u32 instr, u8 rtVal, u32 addr)
 ////////////////////////////////////
 // Data transfer tracking
 ////////////////////////////////////
-void PGXP_CP0_MFC0(u32 instr, u32 rdVal)
+void PGXP_CP0_MFC0(u32 instr, u32 rtVal, u32 rdVal)
 {
 	// CPU[Rt] = CP0[Rd]
 	Validate(&CP0_reg[rd(instr)], rdVal);
 	CPU_reg[rt(instr)] = CP0_reg[rd(instr)];
+	CPU_reg[rt(instr)].value = rtVal;
 }
 
-void PGXP_CP0_MTC0(u32 instr, u32 rtVal)
+void PGXP_CP0_MTC0(u32 instr, u32 rdVal, u32 rtVal)
 {
 	// CP0[Rd] = CPU[Rt]
 	Validate(&CPU_reg[rt(instr)], rtVal);
 	CP0_reg[rd(instr)] = CPU_reg[rt(instr)];
+	CP0_reg[rd(instr)].value = rdVal;
 }
 
-void PGXP_CP0_CFC0(u32 instr, u32 rdVal)
+void PGXP_CP0_CFC0(u32 instr, u32 rtVal, u32 rdVal)
 {
 	// CPU[Rt] = CP0[Rd]
 	Validate(&CP0_reg[rd(instr)], rdVal);
 	CPU_reg[rt(instr)] = CP0_reg[rd(instr)];
+	CPU_reg[rt(instr)].value = rtVal;
 }
 
-void PGXP_CP0_CTC0(u32 instr, u32 rtVal)
+void PGXP_CP0_CTC0(u32 instr, u32 rdVal, u32 rtVal)
 {
 	// CP0[Rd] = CPU[Rt]
 	Validate(&CPU_reg[rt(instr)], rtVal);
 	CP0_reg[rd(instr)] = CPU_reg[rt(instr)];
+	CP0_reg[rd(instr)].value = rdVal;
 }
 
 void PGXP_CP0_RFE(u32 instr)

@@ -16,13 +16,15 @@ pgxpPsxNULL() {}
 // Choose between debug and direct function
 #ifdef PGXP_CPU_DEBUG
 #define PGXP_PSX_FUNC_OP(pu, op, nReg) PGXP_psxTraceOp##nReg
+#define PGXP_DBG_OP_E(op) DBG_E_##op,
 #else
 #define PGXP_PSX_FUNC_OP(pu, op, nReg) PGXP_##pu##_##op
+#define PGXP_DBG_OP_E(op)
 #endif
 
 #define PGXP_INT_FUNC(pu, op) \
 static void pgxpPsx##op() { \
-	PGXP_PSX_FUNC_OP(pu, op, )(psxRegs.code); \
+	PGXP_PSX_FUNC_OP(pu, op, )(PGXP_DBG_OP_E(op) psxRegs.code); \
 	psx##op(); \
 }
 
@@ -30,15 +32,16 @@ static void pgxpPsx##op() { \
 static void pgxpPsx##op()	\
 { \
 	if (test) {psx##op(); return;} \
+	u32 tempInstr = psxRegs.code;\
 		psx##op(); \
-	PGXP_PSX_FUNC_OP(pu, op, nReg)(psxRegs.code, reg1); \
+	PGXP_PSX_FUNC_OP(pu, op, nReg)(PGXP_DBG_OP_E(op) tempInstr, reg1); \
 }
 
 #define PGXP_INT_FUNC_1_0(pu, op, test, nReg, reg1)\
 static void pgxpPsx##op()	\
 { \
 	if (test) {psx##op(); return;} \
-	PGXP_PSX_FUNC_OP(pu, op, nReg)(psxRegs.code, reg1); \
+	PGXP_PSX_FUNC_OP(pu, op, nReg)(PGXP_DBG_OP_E(op) psxRegs.code, reg1); \
 	psx##op(); \
 }
 
@@ -46,47 +49,52 @@ static void pgxpPsx##op()	\
 static void pgxpPsx##op()	\
 { \
 	if (test) {psx##op(); return;} \
+	u32 tempInstr = psxRegs.code;\
 	u32 temp2 = reg2; \
 	psx##op(); \
-	PGXP_PSX_FUNC_OP(pu, op, nReg)(psxRegs.code, reg1, temp2); \
+	PGXP_PSX_FUNC_OP(pu, op, nReg)(PGXP_DBG_OP_E(op) tempInstr, reg1, temp2); \
 }
 
 #define PGXP_INT_FUNC_0_2(pu, op, test, nReg, reg1, reg2) \
 static void pgxpPsx##op()	\
 { \
 	if (test) {psx##op(); return;} \
+	u32 tempInstr = psxRegs.code;\
 		psx##op(); \
-	PGXP_PSX_FUNC_OP(pu, op, nReg)(psxRegs.code, reg1, reg2); \
+	PGXP_PSX_FUNC_OP(pu, op, nReg)(PGXP_DBG_OP_E(op) tempInstr, reg1, reg2); \
 }
 
 #define PGXP_INT_FUNC_2_0(pu, op, test, nReg, reg1, reg2) \
 static void pgxpPsx##op()	\
 { \
 	if (test) {psx##op(); return;} \
+	u32 tempInstr = psxRegs.code;\
 	u32 temp1 = reg1; \
 	u32 temp2 = reg2; \
 		psx##op(); \
-	PGXP_PSX_FUNC_OP(pu, op, nReg)(psxRegs.code, temp1, temp2); \
+	PGXP_PSX_FUNC_OP(pu, op, nReg)(PGXP_DBG_OP_E(op) tempInstr, temp1, temp2); \
 }
 
 #define PGXP_INT_FUNC_2_1(pu, op, test, nReg, reg1, reg2, reg3) \
 static void pgxpPsx##op()	\
 { \
 	if (test) {psx##op(); return;} \
+	u32 tempInstr = psxRegs.code;\
 	u32 temp2 = reg2; \
 	u32 temp3 = reg3; \
 	psx##op(); \
-	PGXP_PSX_FUNC_OP(pu, op, nReg)(psxRegs.code, reg1, temp2, temp3); \
+	PGXP_PSX_FUNC_OP(pu, op, nReg)(PGXP_DBG_OP_E(op) tempInstr, reg1, temp2, temp3); \
 }
 
 #define PGXP_INT_FUNC_2_2(pu, op, test, nReg, reg1, reg2, reg3, reg4) \
 static void pgxpPsx##op()	\
 { \
 	if (test) {psx##op(); return;} \
+	u32 tempInstr = psxRegs.code;\
 	u32 temp3 = reg3; \
 	u32 temp4 = reg4; \
 	psx##op(); \
-	PGXP_PSX_FUNC_OP(pu, op, nReg)(psxRegs.code, reg1, reg2, temp3, temp4); \
+	PGXP_PSX_FUNC_OP(pu, op, nReg)(PGXP_DBG_OP_E(op) tempInstr, reg1, reg2, temp3, temp4); \
 }
 
 // Rt = Rs op imm 
@@ -152,19 +160,19 @@ PGXP_INT_FUNC_1_1(CPU, MTLO, 0		, 2, psxRegs.GPR.n.lo, psxRegs.GPR.r[_Rd_])
 
 
 // COP2 (GTE)
-PGXP_INT_FUNC_0_1(GTE, MFC2, !_Rt_, 1, psxRegs.CP2D.r[_Rd_])
-PGXP_INT_FUNC_0_1(GTE, CFC2, !_Rt_, 1, psxRegs.CP2C.r[_Rd_])
-PGXP_INT_FUNC_1_0(GTE, MTC2, 0, 1, psxRegs.GPR.r[_Rt_])
-PGXP_INT_FUNC_1_0(GTE, CTC2, 0, 1, psxRegs.GPR.r[_Rt_])
+PGXP_INT_FUNC_1_1(GTE, MFC2, !_Rt_, 2, psxRegs.GPR.r[_Rt_], psxRegs.CP2D.r[_Rd_])
+PGXP_INT_FUNC_1_1(GTE, CFC2, !_Rt_, 2, psxRegs.GPR.r[_Rt_], psxRegs.CP2C.r[_Rd_])
+PGXP_INT_FUNC_1_1(GTE, MTC2, 0, 2, psxRegs.CP2D.r[_Rd_], psxRegs.GPR.r[_Rt_])
+PGXP_INT_FUNC_1_1(GTE, CTC2, 0, 2, psxRegs.CP2C.r[_Rd_], psxRegs.GPR.r[_Rt_])
 
 PGXP_INT_FUNC_1_1(GTE, LWC2, 0, 2, psxRegs.CP2D.r[_Rt_], _oB_)
 PGXP_INT_FUNC_1_1(GTE, SWC2, 0, 2, psxRegs.CP2D.r[_Rt_], _oB_)
 
 // COP0
-PGXP_INT_FUNC_0_1(CP0, MFC0, !_Rd_, 1, psxRegs.CP0.r[_Rd_])
-PGXP_INT_FUNC_0_1(CP0, CFC0, !_Rd_, 1, psxRegs.CP0.r[_Rd_])
-PGXP_INT_FUNC_1_0(CP0, MTC0, !_Rt_, 1, psxRegs.CP2D.r[_Rt_])
-PGXP_INT_FUNC_1_0(CP0, CTC0, !_Rt_, 1, psxRegs.CP2D.r[_Rt_])
+PGXP_INT_FUNC_1_1(CP0, MFC0, !_Rd_, 2, psxRegs.GPR.r[_Rt_], psxRegs.CP0.r[_Rd_])
+PGXP_INT_FUNC_1_1(CP0, CFC0, !_Rd_, 2, psxRegs.GPR.r[_Rt_], psxRegs.CP0.r[_Rd_])
+PGXP_INT_FUNC_1_1(CP0, MTC0, !_Rt_, 2, psxRegs.CP0.r[_Rd_], psxRegs.GPR.r[_Rt_])
+PGXP_INT_FUNC_1_1(CP0, CTC0, !_Rt_, 2, psxRegs.CP0.r[_Rd_], psxRegs.GPR.r[_Rt_])
 PGXP_INT_FUNC(CP0, RFE)
 
 #endif//_PSX_INTERPRETER_PGXP_H_
