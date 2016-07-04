@@ -141,6 +141,7 @@ void ValidateAndCopyMem(PGXP_value* dest, u32 addr, u32 value)
 
 void ValidateAndCopyMem16(PGXP_value* dest, u32 addr, u32 value)
 {
+	u32 validMask = 0;
 	psx_value val, mask;
 	PGXP_value* pMem = GetPtr(addr);
 	if (pMem != NULL)
@@ -151,15 +152,17 @@ void ValidateAndCopyMem16(PGXP_value* dest, u32 addr, u32 value)
 		{
 			val.w.h = value;
 			mask.w.h = 0xFFFF;
+			validMask = VALID_1;
 		}
 		else
 		{
 			val.w.l = value;
 			mask.w.l = 0xFFFF;
+			validMask = VALID_0;
 		}
 
 		// validate and copy whole value
-		MaskValidate(pMem, val.d, mask.d);
+		MaskValidate(pMem, val.d, mask.d, validMask);
 		*dest = *pMem;
 
 		// if high word then shift
@@ -167,12 +170,14 @@ void ValidateAndCopyMem16(PGXP_value* dest, u32 addr, u32 value)
 		{
 			dest->x = dest->y;
 			dest->lFlags = dest->hFlags;
+			dest->compFlags[0] = dest->compFlags[1];
 		}
 
 		// truncate value
 		dest->y = 0.f;
 		dest->hFlags = 0;
 		dest->value = value;
+		dest->compFlags[1] = VALID;	// iCB: High word is valid, just 0
 		return;
 	}
 
@@ -200,16 +205,18 @@ void WriteMem16(PGXP_value* src, u32 addr)
 		{
 			dest->y = src->x;
 			dest->hFlags = src->lFlags;
+			dest->compFlags[1] = src->compFlags[0];
 			pVal->w.h = (u16)src->value;
 		}
 		else
 		{
 			dest->x = src->x;
 			dest->lFlags = src->lFlags;
+			dest->compFlags[0] = src->compFlags[0];
 			pVal->w.l = (u16)src->value;
 		}
 
-		dest->valid = dest->valid && src->valid;
+		//dest->valid = dest->valid && src->valid;
 		dest->gFlags |= src->gFlags;				// inherit flags from both values (?)
 	}
 }

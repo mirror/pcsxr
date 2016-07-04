@@ -5,12 +5,12 @@ void MakeValid(PGXP_value *pV, u32 psxV)
 {
 	psx_value psx;
 	psx.d = psxV;
-	if (!pV->valid)
+	if (VALID_01 != (pV->flags & VALID_01))
 	{
 		pV->x = psx.sw.l;
 		pV->y = psx.sw.h;
 		pV->z = 1.f;
-		pV->valid = 1;
+		pV->flags |= VALID_ALL;
 		pV->value = psx.d;
 	}
 }
@@ -18,11 +18,11 @@ void MakeValid(PGXP_value *pV, u32 psxV)
 void Validate(PGXP_value *pV, u32 psxV)
 {
 	// assume pV is not NULL
-	pV->valid = (pV->valid) && (pV->value == psxV);
+	pV->flags &= pV->value == psxV ? ALL : INV_VALID_ALL;
 }
 
-void MaskValidate(PGXP_value *pV, u32 psxV, u32 mask)
+void MaskValidate(PGXP_value *pV, u32 psxV, u32 mask, u32 validMask)
 {
 	// assume pV is not NULL
-	pV->valid = (pV->valid) && ((pV->value & mask) == (psxV & mask));
+	pV->flags &= ((pV->value & mask) == (psxV & mask)) ? ALL : (ALL ^ (validMask));
 }

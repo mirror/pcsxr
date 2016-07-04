@@ -83,7 +83,7 @@ void PGXP_pushSXYZ2f(float _x, float _y, float _z, unsigned int _v)
 	SXY2.y		= _y;
 	SXY2.z		= Config.PGXP_Texture ? _z : 1.f;
 	SXY2.value	= _v;
-	SXY2.valid	= 1;
+	SXY2.flags	= VALID_ALL;
 	SXY2.count	= uCount++;
 
 	// cache value in GPU plugin
@@ -94,7 +94,7 @@ void PGXP_pushSXYZ2f(float _x, float _y, float _z, unsigned int _v)
 		GPU_pgxpCacheVertex(0, 0, NULL);
 
 #ifdef GTE_LOG
-	GTE_LOG("PGXP_PUSH (%f, %f) %u %u|", SXY2.x, SXY2.y, SXY2.valid, SXY2.count);
+	GTE_LOG("PGXP_PUSH (%f, %f) %u %u|", SXY2.x, SXY2.y, SXY2.flags, SXY2.count);
 #endif
 }
 
@@ -179,7 +179,7 @@ void PGXP_RTPS(u32 _n, u32 _v)
 
 int PGXP_NLCIP_valid()
 {
-	if (SXY0.valid && SXY1.valid && SXY2.valid && Config.PGXP_GTE && (Config.PGXP_Mode > 0))
+	if (((SXY0.flags & SXY1.flags & SXY2.flags & VALID_01) == VALID_01) && Config.PGXP_GTE && (Config.PGXP_Mode > 0))
 		return 1;
 	return 0;
 }

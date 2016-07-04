@@ -49,7 +49,7 @@ void InvalidLoad(u32 addr, u32 code, u32 value)
 		p.count = value;
 	}
 
-	p.valid = 0;
+	p.flags = 0;
 
 	// invalidate register
 	CPU_reg[reg] = p;
@@ -69,7 +69,7 @@ void InvalidStore(u32 addr, u32 code, u32 value)
 	if (pD)
 		p = *pD;
 
-	p.valid = 0;
+	p.flags = 0;
 	p.count = (reg * 1000) + value;
 
 	// invalidate memory
@@ -128,7 +128,7 @@ void PGXP_CPU_ANDI(u32 instr, u32 rtVal, u32 rsVal)
 		break;
 	default:
 		// x is undefined, invalidate value
-		CPU_reg[rt(instr)].valid = 0;
+		CPU_reg[rt(instr)].flags = 0;
 	}
 
 	CPU_reg[rt(instr)].value = rtVal;
@@ -142,7 +142,7 @@ void PGXP_CPU_ORI(u32 instr, u32 rtVal, u32 rsVal)
 
 	// Invalidate on non-zero values for now
 	if (imm(instr) != 0)
-		CPU_reg[rt(instr)].valid = 0;
+		CPU_reg[rt(instr)].flags = 0;
 
 	CPU_reg[rt(instr)].value = rtVal;
 }
@@ -155,7 +155,7 @@ void PGXP_CPU_XORI(u32 instr, u32 rtVal, u32 rsVal)
 
 	// Invalidate on non-zero values for now
 	if (imm(instr) != 0)
-		CPU_reg[rt(instr)].valid = 0;
+		CPU_reg[rt(instr)].flags = 0;
 
 	CPU_reg[rt(instr)].value = rtVal;
 }
@@ -210,7 +210,7 @@ void PGXP_CPU_ADD(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	// iCB: Only require one valid input
-	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	if (((CPU_reg[rt(instr)].flags & VALID_01) != VALID_01) != ((CPU_reg[rs(instr)].flags & VALID_01) != VALID_01))
 	{
 		MakeValid(&CPU_reg[rs(instr)], rsVal);
 		MakeValid(&CPU_reg[rt(instr)], rtVal);
@@ -221,7 +221,7 @@ void PGXP_CPU_ADD(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 	ret.x += CPU_reg[rt(instr)].x;
 	ret.y += CPU_reg[rt(instr)].y;
 
-	ret.valid &= CPU_reg[rt(instr)].valid;
+	ret.halfFlags[0] &= CPU_reg[rt(instr)].halfFlags[0];
 	ret.gFlags |= CPU_reg[rt(instr)].gFlags;
 	ret.lFlags |= CPU_reg[rt(instr)].lFlags;
 	ret.hFlags |= CPU_reg[rt(instr)].hFlags;
@@ -245,7 +245,7 @@ void PGXP_CPU_SUB(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	// iCB: Only require one valid input
-	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	if (((CPU_reg[rt(instr)].flags & VALID_01) != VALID_01) != ((CPU_reg[rs(instr)].flags & VALID_01) != VALID_01))
 	{
 		MakeValid(&CPU_reg[rs(instr)], rsVal);
 		MakeValid(&CPU_reg[rt(instr)], rtVal);
@@ -256,7 +256,7 @@ void PGXP_CPU_SUB(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 	ret.x -= CPU_reg[rt(instr)].x;
 	ret.y -= CPU_reg[rt(instr)].y;
 
-	ret.valid &= CPU_reg[rt(instr)].valid;
+	ret.halfFlags[0] &= CPU_reg[rt(instr)].halfFlags[0];
 	ret.gFlags |= CPU_reg[rt(instr)].gFlags;
 	ret.lFlags |= CPU_reg[rt(instr)].lFlags;
 	ret.hFlags |= CPU_reg[rt(instr)].hFlags;
@@ -282,7 +282,7 @@ void PGXP_CPU_AND(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	// iCB: Only require one valid input
-	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	if (((CPU_reg[rt(instr)].flags & VALID_01) != VALID_01) != ((CPU_reg[rs(instr)].flags & VALID_01) != VALID_01))
 	{
 		MakeValid(&CPU_reg[rs(instr)], rsVal);
 		MakeValid(&CPU_reg[rt(instr)], rtVal);
@@ -293,7 +293,7 @@ void PGXP_CPU_AND(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 	valt.d = rtVal;
 
 	//	CPU_reg[rd(instr)].valid = CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid;
-	ret.valid = 1;
+	ret.flags = VALID_01;
 
 	if (vald.w.l == 0)
 	{
@@ -304,17 +304,18 @@ void PGXP_CPU_AND(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 	{
 		ret.x = CPU_reg[rs(instr)].x;
 		ret.lFlags = CPU_reg[rs(instr)].lFlags;
-		ret.valid &= CPU_reg[rs(instr)].valid;
+		ret.compFlags[0] = CPU_reg[rs(instr)].compFlags[0];
 	}
 	else if (vald.w.l == valt.w.l)
 	{
 		ret.x = CPU_reg[rt(instr)].x;
 		ret.lFlags = CPU_reg[rt(instr)].lFlags;
-		ret.valid &= CPU_reg[rt(instr)].valid;
+		ret.compFlags[0] = CPU_reg[rt(instr)].compFlags[0];
 	}
 	else
 	{
-		ret.valid = 0;
+		ret.x = (float)vald.sw.l;
+		ret.compFlags[0] = VALID;
 		ret.lFlags = 0;
 	}
 
@@ -327,23 +328,24 @@ void PGXP_CPU_AND(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 	{
 		ret.y = CPU_reg[rs(instr)].y;
 		ret.hFlags = CPU_reg[rs(instr)].hFlags;
-		ret.valid &= CPU_reg[rs(instr)].valid;
+		ret.compFlags[1] &= CPU_reg[rs(instr)].compFlags[1];
 	}
 	else if (vald.w.h == valt.w.h)
 	{
 		ret.y = CPU_reg[rt(instr)].y;
 		ret.hFlags = CPU_reg[rt(instr)].hFlags;
-		ret.valid &= CPU_reg[rt(instr)].valid;
+		ret.compFlags[1] &= CPU_reg[rt(instr)].compFlags[1];
 	}
 	else
 	{
-		ret.valid = 0;
+		ret.y = (float)vald.sw.h;
+		ret.compFlags[1] = VALID;
 		ret.hFlags = 0;
 	}
 
 	// iCB Hack: Force validity if even one half is valid
-	if ((ret.hFlags & VALID_HALF) || (ret.lFlags & VALID_HALF))
-		ret.valid = 1;
+	//if ((ret.hFlags & VALID_HALF) || (ret.lFlags & VALID_HALF))
+	//	ret.valid = 1;
 	// /iCB Hack
 
 	ret.value = rdVal;
@@ -376,7 +378,7 @@ void PGXP_CPU_SLT(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	// iCB: Only require one valid input
-	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	if (((CPU_reg[rt(instr)].flags & VALID_01) != VALID_01) != ((CPU_reg[rs(instr)].flags & VALID_01) != VALID_01))
 	{
 		MakeValid(&CPU_reg[rs(instr)], rsVal);
 		MakeValid(&CPU_reg[rt(instr)], rtVal);
@@ -400,7 +402,7 @@ void PGXP_CPU_SLTU(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	// iCB: Only require one valid input
-	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	if (((CPU_reg[rt(instr)].flags & VALID_01) != VALID_01) != ((CPU_reg[rs(instr)].flags & VALID_01) != VALID_01))
 	{
 		MakeValid(&CPU_reg[rs(instr)], rsVal);
 		MakeValid(&CPU_reg[rt(instr)], rtVal);
@@ -425,7 +427,7 @@ void PGXP_CPU_MULT(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	// iCB: Only require one valid input
-	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	if (((CPU_reg[rt(instr)].flags & VALID_01) != VALID_01) != ((CPU_reg[rs(instr)].flags & VALID_01) != VALID_01))
 	{
 		MakeValid(&CPU_reg[rs(instr)], rsVal);
 		MakeValid(&CPU_reg[rt(instr)], rtVal);
@@ -437,7 +439,7 @@ void PGXP_CPU_MULT(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 	CPU_Hi.x = vs * vt;// CPU_reg[rs(instr)].y * CPU_reg[rt(instr)].y;
 	CPU_Lo.y = (CPU_Hi.x - ((s32)CPU_Hi.x)) * (float)(1 << 16);// CPU_reg[rs(instr)].x * CPU_reg[rt(instr)].x; // Get fractional part
 
-	CPU_Lo.valid = CPU_Hi.valid = CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid;
+	CPU_Lo.halfFlags[0] = CPU_Hi.halfFlags[0] = (CPU_reg[rs(instr)].halfFlags[0] & CPU_reg[rt(instr)].halfFlags[0]);
 
 	CPU_Lo.value = loVal;
 	CPU_Hi.value = hiVal;
@@ -450,7 +452,7 @@ void PGXP_CPU_MULTU(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	// iCB: Only require one valid input
-	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	if (((CPU_reg[rt(instr)].flags & VALID_01) != VALID_01) != ((CPU_reg[rs(instr)].flags & VALID_01) != VALID_01))
 	{
 		MakeValid(&CPU_reg[rs(instr)], rsVal);
 		MakeValid(&CPU_reg[rt(instr)], rtVal);
@@ -462,7 +464,7 @@ void PGXP_CPU_MULTU(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 	CPU_Hi.x = vs * vt;// fabs(CPU_reg[rs(instr)].y) * fabs(CPU_reg[rt(instr)].y);
 	CPU_Lo.y = (CPU_Hi.x - ((s32)CPU_Hi.x)) * (float)(1 << 16);// fabs(CPU_reg[rs(instr)].x) * fabs(CPU_reg[rt(instr)].x);	// Get fractional part
 
-	CPU_Lo.valid = CPU_Hi.valid = CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid;
+	CPU_Lo.halfFlags[0] = CPU_Hi.halfFlags[0] = (CPU_reg[rs(instr)].halfFlags[0] & CPU_reg[rt(instr)].halfFlags[0]);
 
 	CPU_Lo.value = loVal;
 	CPU_Hi.value = hiVal;
@@ -476,7 +478,7 @@ void PGXP_CPU_DIV(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	//// iCB: Only require one valid input
-	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	if (((CPU_reg[rt(instr)].flags & VALID_01) != VALID_01) != ((CPU_reg[rs(instr)].flags & VALID_01) != VALID_01))
 	{
 		MakeValid(&CPU_reg[rs(instr)], rsVal);
 		MakeValid(&CPU_reg[rt(instr)], rtVal);
@@ -489,7 +491,7 @@ void PGXP_CPU_DIV(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 	CPU_Hi.x = fmod(vs, vt);
 	CPU_Lo.x -= CPU_Hi.x;
 
-	CPU_Lo.valid = CPU_Hi.valid = CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid;
+	CPU_Lo.halfFlags[0] = CPU_Hi.halfFlags[0] = (CPU_reg[rs(instr)].halfFlags[0] & CPU_reg[rt(instr)].halfFlags[0]);
 
 	CPU_Lo.value = loVal;
 	CPU_Hi.value = hiVal;
@@ -503,7 +505,7 @@ void PGXP_CPU_DIVU(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
 	//// iCB: Only require one valid input
-	if (!(CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid) && (CPU_reg[rs(instr)].valid || CPU_reg[rt(instr)].valid))
+	if (((CPU_reg[rt(instr)].flags & VALID_01) != VALID_01) != ((CPU_reg[rs(instr)].flags & VALID_01) != VALID_01))
 	{
 		MakeValid(&CPU_reg[rs(instr)], rsVal);
 		MakeValid(&CPU_reg[rt(instr)], rtVal);
@@ -516,7 +518,7 @@ void PGXP_CPU_DIVU(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 	CPU_Hi.x = fmod(fabs(vs), fabs(vt));
 	CPU_Lo.x -= CPU_Hi.x;
 
-	CPU_Lo.valid = CPU_Hi.valid = CPU_reg[rs(instr)].valid && CPU_reg[rt(instr)].valid;
+	CPU_Lo.halfFlags[0] = CPU_Hi.halfFlags[0] = (CPU_reg[rs(instr)].halfFlags[0] & CPU_reg[rt(instr)].halfFlags[0]);
 
 	CPU_Lo.value = loVal;
 	CPU_Hi.value = hiVal;
@@ -760,7 +762,7 @@ void PGXP_CPU_SWR(u32 instr, u32 rtVal, u32 addr)
 void PGXP_CPU_SH(u32 instr, u16 rtVal, u32 addr)
 {
 	// validate and copy half value
-	MaskValidate(&CPU_reg[rt(instr)], rtVal, 0xFFFF);
+	MaskValidate(&CPU_reg[rt(instr)], rtVal, 0xFFFF, VALID_0);
 	WriteMem16(&CPU_reg[rt(instr)], addr);
 }
 

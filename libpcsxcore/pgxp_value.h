@@ -51,7 +51,12 @@ typedef struct PGXP_value_Tag
 	float			x;
 	float			y;
 	float			z;
-	unsigned int	valid;
+	union
+	{
+		unsigned int	flags;
+		unsigned char	compFlags[4];
+		unsigned short	halfFlags[2];
+	};
 	unsigned int	count;
 	unsigned int	value;
 
@@ -76,12 +81,26 @@ typedef enum
 	VALID_HALF = (1 << 0)
 } PGXP_half_flags;
 
+//typedef enum
+//{
+#define NONE	 0
+#define ALL		 0xFFFFFFFF
+#define VALID	 1
+#define VALID_0  (VALID << 0)
+#define VALID_1  (VALID << 8)
+#define VALID_2  (VALID << 16)
+#define VALID_3  (VALID << 24)
+#define VALID_01  (VALID_0 | VALID_1)
+#define VALID_ALL  (VALID_0 | VALID_1 | VALID_2 | VALID_3)
+#define INV_VALID_ALL  (ALL ^ VALID_ALL)
+//} PGXP_value_flags;
+
 static const PGXP_value PGXP_value_invalid_address = { 0.f, 0.f, 0.f, 0, 0, 0, INVALID_ADDRESS, 0, 0 };
-static const PGXP_value PGXP_value_zero = { 0.f, 0.f, 0.f, 0, 0, 1, 0, 0, 0 };
+static const PGXP_value PGXP_value_zero = { 0.f, 0.f, 0.f, 0, 0, VALID_ALL, 0, 0, 0 };
 
 void MakeValid(PGXP_value *pV, u32 psxV);
 void Validate(PGXP_value *pV, u32 psxV);
-void MaskValidate(PGXP_value *pV, u32 psxV, u32 mask);
+void MaskValidate(PGXP_value *pV, u32 psxV, u32 mask, u32 validMask);
 
 
 typedef union

@@ -36,11 +36,28 @@ typedef struct
 	float	x;
 	float	y;
 	float	z;
-	unsigned int	valid;
+	union
+	{
+		unsigned int	flags;
+		unsigned char	compFlags[4];
+	};
 	unsigned int	count;
 	unsigned int	value;
-	unsigned int	flags;
+	unsigned int	mFlags;
 } PGXP_vertex;
+
+#define NONE	 0
+#define ALL		 0xFFFFFFFF
+#define VALID	 1
+#define VALID_0  (VALID << 0)
+#define VALID_1  (VALID << 8)
+#define VALID_2  (VALID << 16)
+#define VALID_3  (VALID << 24)
+#define VALID_01  (VALID_0 | VALID_1)
+#define VALID_012  (VALID_0 | VALID_1 | VALID_2)
+#define VALID_ALL  (VALID_0 | VALID_1 | VALID_2 | VALID_3)
+#define INV_VALID_ALL  (ALL ^ VALID_ALL)
+
 
 unsigned int PGXP_tDebug = 0;
 /////////////////////////////////
@@ -113,13 +130,14 @@ void CALLBACK GPUpgxpCacheVertex(short sx, short sy, const unsigned char* _pVert
 					(fabsf(pOldVertex->y - pNewVertex->y) > 0.1f) ||
 					(fabsf(pOldVertex->z - pNewVertex->z) > 0.1f))
 				{			
-					pOldVertex->valid = 5;
+					pOldVertex->mFlags = 5;
 					return;
 				}
 			}
 
 			// Write vertex into cache
 			*pOldVertex = *pNewVertex;
+			pOldVertex->mFlags = 1;
 		}
 	}
 }
@@ -269,7 +287,7 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 		// Find any invalid vertices
 		for (unsigned i = 0; i < count; ++i)
 		{
-			if (!primStart[stride * i].valid)
+			if (!((primStart[stride * i].flags & VALID_012) == VALID_012))
 				invalidVert++;
 		}
 	}
@@ -278,13 +296,16 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 
 	for (unsigned i = 0; i < count; ++i)
 	{
-		if (primStart && primStart[stride * i].valid && (primStart[stride * i].value == *(unsigned int*)(&pPrimData[stride * i * 2])))
+		if (primStart && ((primStart[stride * i].flags & VALID_01) == VALID_01) && (primStart[stride * i].value == *(unsigned int*)(&pPrimData[stride * i * 2])))
 		{
 			pVertex[i].x = (primStart[stride * i].x + xOffs);
 			pVertex[i].y = (primStart[stride * i].y + yOffs);
 			pVertex[i].z = 0.95f;
 			pVertex[i].w = primStart[stride * i].z;
 			pVertex[i].PGXP_flag = 1;
+
+			if ((primStart[stride * i].flags & VALID_2) != VALID_2)
+				pVertex[i].PGXP_flag = 6;
 
 			// Log incorrect vertices
 			//if (PGXP_tDebug && 
@@ -295,7 +316,7 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 		else
 		{
 			// Default to low precision vertex data
-			if (primStart  && primStart[stride * i].valid && primStart[stride * i].value != *(unsigned int*)(&pPrimData[stride * i * 2]))
+			if (primStart  && ((primStart[stride * i].flags & VALID_01) == VALID_01) && primStart[stride * i].value != *(unsigned int*)(&pPrimData[stride * i * 2]))
 				pVertex[i].PGXP_flag = 6;
 			else
 				pVertex[i].PGXP_flag = 2;
@@ -306,7 +327,7 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 			{
 				if (IsSessionID(pCacheVert->count))
 				{
-					if (pCacheVert->valid == 1)
+					if (pCacheVert->mFlags == 1)
 					{
 						pVertex[i].x = (pCacheVert->x + xOffs);
 						pVertex[i].y = (pCacheVert->y + yOffs);
@@ -316,7 +337,7 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 						// reduce number of invalid vertices
 						invalidVert--;
 					}
-					else if(pCacheVert->valid > 1)
+					else if(pCacheVert->mFlags > 1)
 						pVertex[i].PGXP_flag = 4;
 				}
 			}

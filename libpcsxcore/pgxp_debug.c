@@ -299,20 +299,20 @@ void PrintOperands(char* szBuffer, u32 instr, u32 flags, const char* szDelim, ps
 
 			if (pReg)
 			{
-				sprintf(szTempBuffer, "%s %s [%x(%d, %d) %x(%.2f, %.2f, %.2f)%x : %x] ", szPre, szOpdName,
+				sprintf(szTempBuffer, "%s %s [%x(%d, %d) %x(%.2f, %.2f, %.2f)%x : %x:%x:%x:%x] ", szPre, szOpdName,
 					psx_reg.d, psx_reg.sw.l, psx_reg.sw.h,
-					pReg->value, pReg->x, pReg->y, pReg->z, pReg->count, pReg->valid);
+					pReg->value, pReg->x, pReg->y, pReg->z, pReg->count, pReg->compFlags[0], pReg->compFlags[1], pReg->compFlags[2], pReg->compFlags[3]);
 				strcat(szBuffer, szTempBuffer);
 			}
 			else if(flag == fOp_Ad)
 			{
 				pReg = GetPtr(psx_reg.d);
 				if(pReg)
-					sprintf(szTempBuffer, "%s %s [%x(%d, %d) (%x) %x(%.2f, %.2f, %.2f)%x : %x] ", szPre, szOpdName,
+					sprintf(szTempBuffer, "%s %s [%x(%d, %d) (%x) %x(%.2f, %.2f, %.2f)%x : %x:%x:%x:%x] ", szPre, szOpdName,
 						psx_reg.d, psx_reg.sw.l, psx_reg.sw.h, PGXP_ConvertAddress(psx_reg.d),
-						pReg->value, pReg->x, pReg->y, pReg->z, pReg->count, pReg->valid);
+						pReg->value, pReg->x, pReg->y, pReg->z, pReg->count, pReg->compFlags[0], pReg->compFlags[1], pReg->compFlags[2], pReg->compFlags[3]);
 				else
-					sprintf(szTempBuffer, "%s %s [%x(%d, %d) INVALID_ADDRESS!] ", szPre, szOpdName,
+					sprintf(szTempBuffer, "%s %s [%x(%d, %d) (%x) INVALID_ADDRESS!] ", szPre, szOpdName,
 						psx_reg.d, psx_reg.sw.l, psx_reg.sw.h, PGXP_ConvertAddress(psx_reg.d));
 				strcat(szBuffer, szTempBuffer);
 			}
