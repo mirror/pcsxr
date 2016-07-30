@@ -521,6 +521,10 @@ s32 psxRcntFreeze( gzFile f, s32 Mode )
 
     if (Mode == 0) {
         psxHsyncCalculate();
+		// iCB: recalculate target count in case overclock is changed
+		rcnts[3].target = (PSXCLK / (FrameRate[Config.PsxType] * HSyncTotal[Config.PsxType]));
+		if(rcnts[1].rate != 1)
+			rcnts[1].rate = (PSXCLK / (FrameRate[Config.PsxType] * HSyncTotal[Config.PsxType]));
     }
 
     return 0;
