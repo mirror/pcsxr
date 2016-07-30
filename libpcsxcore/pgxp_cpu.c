@@ -3,6 +3,8 @@
 #include "pgxp_value.h"
 #include "pgxp_mem.h"
 
+#include "pgxp_debug.h"
+
 // CPU registers
 PGXP_value CPU_reg_mem[34];
 //PGXP_value CPU_Hi, CPU_Lo;
@@ -83,108 +85,155 @@ void PGXP_CPU_ADDI(u32 instr, u32 rtVal, u32 rsVal)
 {
 	// Rt = Rs + Imm (signed)
 	psx_value tempImm;
-
+	PGXP_value ret;
+	
 	Validate(&CPU_reg[rs(instr)], rsVal);
-	CPU_reg[rt(instr)] = CPU_reg[rs(instr)];
+	ret = CPU_reg[rs(instr)];
+	tempImm.d = imm(instr);
+	tempImm.sd = (tempImm.sd << 16) >> 16;	// sign extend
 
-	tempImm.w.h = imm(instr);
-	CPU_reg[rt(instr)].x += tempImm.sw.h;
-	// handle x overflow in to y?
+	ret.x = f16Unsign(ret.x);
+	ret.x += tempImm.w.l;
 
+	// carry on over/underflow
+	float of = (ret.x > USHRT_MAX) ? 1.f : (ret.x < 0) ? -1.f : 0.f;
+	ret.x = f16Sign(ret.x);
+	//ret.x -= of * (USHRT_MAX + 1);
+	ret.y += tempImm.sw.h + of;
+
+	// truncate on overflow/underflow
+	ret.y += (ret.y > SHRT_MAX) ? -(USHRT_MAX + 1) : (ret.y < SHRT_MIN) ? USHRT_MAX + 1 : 0.f;
+
+	CPU_reg[rt(instr)] = ret;
 	CPU_reg[rt(instr)].value = rtVal;
 }
 
 void PGXP_CPU_ADDIU(u32 instr, u32 rtVal, u32 rsVal)
 {
 	// Rt = Rs + Imm (signed) (unsafe?)
-	psx_value tempImm;
-
-	Validate(&CPU_reg[rs(instr)], rsVal);
-	CPU_reg[rt(instr)] = CPU_reg[rs(instr)];
-
-	tempImm.w.h = imm(instr);
-	CPU_reg[rt(instr)].x += tempImm.sw.h;
-	// handle x overflow in to y?
-
-	CPU_reg[rt(instr)].value = rtVal;
+	PGXP_CPU_ADDI(instr, rtVal, rsVal);
 }
 
 void PGXP_CPU_ANDI(u32 instr, u32 rtVal, u32 rsVal)
 {
 	// Rt = Rs & Imm
-	Validate(&CPU_reg[rs(instr)], rsVal);
-	CPU_reg[rt(instr)] = CPU_reg[rs(instr)];
+	psx_value vRt;
+	PGXP_value ret;
 
-	CPU_reg[rt(instr)].y = 0.f;	// remove upper 16-bits
+	Validate(&CPU_reg[rs(instr)], rsVal);
+	ret = CPU_reg[rs(instr)];
+
+	vRt.d = rtVal;
+
+	ret.y = 0.f;	// remove upper 16-bits
 
 	switch (imm(instr))
 	{
 	case 0:
 		// if 0 then x == 0
-		CPU_reg[rt(instr)].x = 0.f;
+		ret.x = 0.f;
 		break;
 	case 0xFFFF:
-		// if saturated then x = x
+		// if saturated then x == x
 		break;
 	default:
-		// x is undefined, invalidate value
-		CPU_reg[rt(instr)].flags = 0;
+		// otherwise x is low precision value
+		ret.x = vRt.sw.l;
+		ret.flags |= VALID_0;
 	}
 
+	ret.flags |= VALID_1;
+
+	CPU_reg[rt(instr)] = ret;
 	CPU_reg[rt(instr)].value = rtVal;
 }
 
 void PGXP_CPU_ORI(u32 instr, u32 rtVal, u32 rsVal)
 {
 	// Rt = Rs | Imm
+	psx_value vRt;
+	PGXP_value ret;
+
 	Validate(&CPU_reg[rs(instr)], rsVal);
-	CPU_reg[rt(instr)] = CPU_reg[rs(instr)];
+	ret = CPU_reg[rs(instr)];
 
-	// Invalidate on non-zero values for now
-	if (imm(instr) != 0)
-		CPU_reg[rt(instr)].flags = 0;
+	vRt.d = rtVal;
 
-	CPU_reg[rt(instr)].value = rtVal;
+	switch (imm(instr))
+	{
+	case 0:
+		// if 0 then x == x
+		break;
+	default:
+		// otherwise x is low precision value
+		ret.x = vRt.sw.l;
+		ret.flags |= VALID_0;
+	}
+
+	ret.value = rtVal;
+	CPU_reg[rt(instr)] = ret;
 }
 
 void PGXP_CPU_XORI(u32 instr, u32 rtVal, u32 rsVal)
 {
 	// Rt = Rs ^ Imm
+	psx_value vRt;
+	PGXP_value ret;
+
 	Validate(&CPU_reg[rs(instr)], rsVal);
-	CPU_reg[rt(instr)] = CPU_reg[rs(instr)];
+	ret = CPU_reg[rs(instr)];
 
-	// Invalidate on non-zero values for now
-	if (imm(instr) != 0)
-		CPU_reg[rt(instr)].flags = 0;
+	vRt.d = rtVal;
 
-	CPU_reg[rt(instr)].value = rtVal;
+	switch (imm(instr))
+	{
+	case 0:
+		// if 0 then x == x
+		break;
+	default:
+		// otherwise x is low precision value
+		ret.x = vRt.sw.l;
+		ret.flags |= VALID_0;
+	}
+
+	ret.value = rtVal;
+	CPU_reg[rt(instr)] = ret;
 }
 
 void PGXP_CPU_SLTI(u32 instr, u32 rtVal, u32 rsVal)
 {
 	// Rt = Rs < Imm (signed)
 	psx_value tempImm;
+	PGXP_value ret;
 
 	Validate(&CPU_reg[rs(instr)], rsVal);
-	CPU_reg[rt(instr)] = CPU_reg[rs(instr)];
+	ret = CPU_reg[rs(instr)];
 
 	tempImm.w.h = imm(instr);
-	CPU_reg[rt(instr)].y = 0.f;
-	CPU_reg[rt(instr)].x = (CPU_reg[rs(instr)].x < tempImm.sw.h) ? 1.f : 0.f;
+	ret.y		= 0.f;
+	ret.x		= (CPU_reg[rs(instr)].x < tempImm.sw.h) ? 1.f : 0.f;
+	ret.flags	|= VALID_1;
+	ret.value	= rtVal;
 
-	CPU_reg[rt(instr)].value = rtVal;
+	CPU_reg[rt(instr)] = ret;
 }
 
 void PGXP_CPU_SLTIU(u32 instr, u32 rtVal, u32 rsVal)
 {
-	// Rt = Rs < Imm (signed)
+	// Rt = Rs < Imm (Unsigned)
+	psx_value tempImm;
+	PGXP_value ret;
+
 	Validate(&CPU_reg[rs(instr)], rsVal);
-	CPU_reg[rt(instr)] = CPU_reg[rs(instr)];
+	ret = CPU_reg[rs(instr)];
 
-	CPU_reg[rt(instr)].y = 0.f;
-	CPU_reg[rt(instr)].x = (fabs(CPU_reg[rs(instr)].x) < (u32)imm(instr)) ? 1.f : 0.f;
+	tempImm.w.h	= imm(instr);
+	ret.y		= 0.f;
+	ret.x		= (f16Unsign(CPU_reg[rs(instr)].x) < tempImm.w.h) ? 1.f : 0.f;
+	ret.flags	|= VALID_1;
+	ret.value	= rtVal;
 
-	CPU_reg[rt(instr)].value = rtVal;
+	CPU_reg[rt(instr)] = ret;
 }
 
 ////////////////////////////////////
@@ -197,11 +246,13 @@ void PGXP_CPU_LUI(u32 instr, u32 rtVal)
 	CPU_reg[rt(instr)].y = (float)(s16)imm(instr);
 	CPU_reg[rt(instr)].hFlags = VALID_HALF;
 	CPU_reg[rt(instr)].value = rtVal;
+	CPU_reg[rt(instr)].flags = VALID_01;
 }
 
 ////////////////////////////////////
 // Register Arithmetic
 ////////////////////////////////////
+
 void PGXP_CPU_ADD(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 {
 	// Rd = Rs + Rt (signed)
@@ -218,8 +269,19 @@ void PGXP_CPU_ADD(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 
 	ret = CPU_reg[rs(instr)];
 
-	ret.x += CPU_reg[rt(instr)].x;
-	ret.y += CPU_reg[rt(instr)].y;
+	ret.x = f16Unsign(ret.x);
+	ret.x += f16Unsign(CPU_reg[rt(instr)].x);
+
+	// carry on over/underflow
+	float of = (ret.x > USHRT_MAX) ? 1.f : (ret.x < 0) ? -1.f : 0.f;
+	ret.x = f16Sign(ret.x);
+	//ret.x -= of * (USHRT_MAX + 1);
+	ret.y += CPU_reg[rt(instr)].y + of;
+
+	// truncate on overflow/underflow
+	ret.y += (ret.y > SHRT_MAX) ? -(USHRT_MAX + 1) : (ret.y < SHRT_MIN) ? USHRT_MAX + 1 : 0.f;
+
+	// TODO: decide which "z/w" component to use
 
 	ret.halfFlags[0] &= CPU_reg[rt(instr)].halfFlags[0];
 	ret.gFlags |= CPU_reg[rt(instr)].gFlags;
@@ -253,8 +315,17 @@ void PGXP_CPU_SUB(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 
 	ret = CPU_reg[rs(instr)];
 
-	ret.x -= CPU_reg[rt(instr)].x;
-	ret.y -= CPU_reg[rt(instr)].y;
+	ret.x = f16Unsign(ret.x);
+	ret.x -= f16Unsign(CPU_reg[rt(instr)].x);
+
+	// carry on over/underflow
+	float of = (ret.x > USHRT_MAX) ? 1.f : (ret.x < 0) ? -1.f : 0.f;
+	ret.x = f16Sign(ret.x);
+	//ret.x -= of * (USHRT_MAX + 1);
+	ret.y -= CPU_reg[rt(instr)].y - of;
+
+	// truncate on overflow/underflow
+	ret.y += (ret.y > SHRT_MAX) ? -(USHRT_MAX + 1) : (ret.y < SHRT_MIN) ? USHRT_MAX + 1 : 0.f;
 
 	ret.halfFlags[0] &= CPU_reg[rt(instr)].halfFlags[0];
 	ret.gFlags |= CPU_reg[rt(instr)].gFlags;
@@ -348,6 +419,18 @@ void PGXP_CPU_AND(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 	//	ret.valid = 1;
 	// /iCB Hack
 
+	// Get a valid W
+	if ((CPU_reg[rs(instr)].flags & VALID_2) == VALID_2)
+	{
+		ret.z = CPU_reg[rs(instr)].z;
+		ret.compFlags[2] = CPU_reg[rs(instr)].compFlags[2];
+	}
+	else if((CPU_reg[rt(instr)].flags & VALID_2) == VALID_2)
+	{
+		ret.z = CPU_reg[rt(instr)].z;
+		ret.compFlags[2] = CPU_reg[rt(instr)].compFlags[2];
+	}
+
 	ret.value = rdVal;
 	CPU_reg[rd(instr)] = ret;
 }
@@ -385,10 +468,10 @@ void PGXP_CPU_SLT(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 	}
 
 	ret = CPU_reg[rs(instr)];
-
-	// TODO: fix for single or double values?
 	ret.y = 0.f;
-	ret.x = (CPU_reg[rs(instr)].x < CPU_reg[rt(instr)].x) ? 1.f : 0.f;
+	ret.compFlags[1] = VALID;
+
+	ret.x = (CPU_reg[rs(instr)].y < CPU_reg[rt(instr)].y) ? 1.f : (f16Unsign(CPU_reg[rs(instr)].x) < f16Unsign(CPU_reg[rt(instr)].x)) ? 1.f : 0.f;
 
 	ret.value = rdVal;
 	CPU_reg[rd(instr)] = ret;
@@ -409,9 +492,10 @@ void PGXP_CPU_SLTU(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 	}
 
 	ret = CPU_reg[rs(instr)];
-
 	ret.y = 0.f;
-	ret.x = (fabs(CPU_reg[rs(instr)].x) < fabs(CPU_reg[rt(instr)].x)) ? 1.f : 0.f;
+	ret.compFlags[1] = VALID;
+
+	ret.x = (f16Unsign(CPU_reg[rs(instr)].y) < f16Unsign(CPU_reg[rt(instr)].y)) ? 1.f : (f16Unsign(CPU_reg[rs(instr)].x) < f16Unsign(CPU_reg[rt(instr)].x)) ? 1.f : 0.f;
 
 	ret.value = rdVal;
 	CPU_reg[rd(instr)] = ret;
@@ -420,6 +504,7 @@ void PGXP_CPU_SLTU(u32 instr, u32 rdVal, u32 rsVal, u32 rtVal)
 ////////////////////////////////////
 // Register mult/div
 ////////////////////////////////////
+
 void PGXP_CPU_MULT(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 {
 	// Hi/Lo = Rs * Rt (signed)
@@ -433,13 +518,35 @@ void PGXP_CPU_MULT(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 		MakeValid(&CPU_reg[rt(instr)], rtVal);
 	}
 
-	float vs = CPU_reg[rs(instr)].y + (CPU_reg[rs(instr)].x / (float)(1 << 16));
-	float vt = CPU_reg[rt(instr)].y + (CPU_reg[rt(instr)].x / (float)(1 << 16));
-
-	CPU_Hi.x = vs * vt;// CPU_reg[rs(instr)].y * CPU_reg[rt(instr)].y;
-	CPU_Lo.y = (CPU_Hi.x - ((s32)CPU_Hi.x)) * (float)(1 << 16);// CPU_reg[rs(instr)].x * CPU_reg[rt(instr)].x; // Get fractional part
+	CPU_Lo = CPU_Hi = CPU_reg[rs(instr)];
 
 	CPU_Lo.halfFlags[0] = CPU_Hi.halfFlags[0] = (CPU_reg[rs(instr)].halfFlags[0] & CPU_reg[rt(instr)].halfFlags[0]);
+
+	double xx, xy, yx, yy;
+	double lx = 0, ly = 0, hx = 0, hy = 0;
+	s64 of = 0;
+
+	// Multiply out components
+	xx = f16Unsign(CPU_reg[rs(instr)].x) * f16Unsign(CPU_reg[rt(instr)].x);
+	xy = f16Unsign(CPU_reg[rs(instr)].x) * (CPU_reg[rt(instr)].y);
+	yx = (CPU_reg[rs(instr)].y) * f16Unsign(CPU_reg[rt(instr)].x);
+	yy = (CPU_reg[rs(instr)].y) * (CPU_reg[rt(instr)].y);
+
+	// Split values into outputs
+	lx = xx;
+
+	ly = f16Overflow(xx);
+	ly += xy + yx;
+
+	hx = f16Overflow(ly);
+	hx += yy;
+
+	hy = f16Overflow(hx);
+
+	CPU_Lo.x = f16Sign(lx);
+	CPU_Lo.y = f16Sign(ly);
+	CPU_Hi.x = f16Sign(hx);
+	CPU_Hi.y = f16Sign(hy);
 
 	CPU_Lo.value = loVal;
 	CPU_Hi.value = hiVal;
@@ -458,13 +565,35 @@ void PGXP_CPU_MULTU(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 		MakeValid(&CPU_reg[rt(instr)], rtVal);
 	}
 
-	float vs = fabs(CPU_reg[rs(instr)].y) + (fabs(CPU_reg[rs(instr)].x) / (float)(1 << 16));
-	float vt = fabs(CPU_reg[rt(instr)].y) + (fabs(CPU_reg[rt(instr)].x) / (float)(1 << 16));
-
-	CPU_Hi.x = vs * vt;// fabs(CPU_reg[rs(instr)].y) * fabs(CPU_reg[rt(instr)].y);
-	CPU_Lo.y = (CPU_Hi.x - ((s32)CPU_Hi.x)) * (float)(1 << 16);// fabs(CPU_reg[rs(instr)].x) * fabs(CPU_reg[rt(instr)].x);	// Get fractional part
+	CPU_Lo = CPU_Hi = CPU_reg[rs(instr)];
 
 	CPU_Lo.halfFlags[0] = CPU_Hi.halfFlags[0] = (CPU_reg[rs(instr)].halfFlags[0] & CPU_reg[rt(instr)].halfFlags[0]);
+
+	double xx, xy, yx, yy;
+	double lx = 0, ly = 0, hx = 0, hy = 0;
+	s64 of = 0;
+
+	// Multiply out components
+	xx = f16Unsign(CPU_reg[rs(instr)].x) * f16Unsign(CPU_reg[rt(instr)].x);
+	xy = f16Unsign(CPU_reg[rs(instr)].x) * f16Unsign(CPU_reg[rt(instr)].y);
+	yx = f16Unsign(CPU_reg[rs(instr)].y) * f16Unsign(CPU_reg[rt(instr)].x);
+	yy = f16Unsign(CPU_reg[rs(instr)].y) * f16Unsign(CPU_reg[rt(instr)].y);
+
+	// Split values into outputs
+	lx = xx;
+
+	ly = f16Overflow(xx);
+	ly += xy + yx;
+
+	hx = f16Overflow(ly);
+	hx += yy;
+
+	hy = f16Overflow(hx);
+
+	CPU_Lo.x = f16Sign(lx);
+	CPU_Lo.y = f16Sign(ly);
+	CPU_Hi.x = f16Sign(hx);
+	CPU_Hi.y = f16Sign(hy);
 
 	CPU_Lo.value = loVal;
 	CPU_Hi.value = hiVal;
@@ -472,8 +601,8 @@ void PGXP_CPU_MULTU(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 
 void PGXP_CPU_DIV(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 {
-	// Hi = Rs / Rt (signed)
-	// Lo = Rs % Rt (signed)
+	// Lo = Rs / Rt (signed)
+	// Hi = Rs % Rt (signed)
 	Validate(&CPU_reg[rs(instr)], rsVal);
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
@@ -484,14 +613,20 @@ void PGXP_CPU_DIV(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 		MakeValid(&CPU_reg[rt(instr)], rtVal);
 	}
 
-	float vs = CPU_reg[rs(instr)].y + (CPU_reg[rs(instr)].x / (float)(1 << 16));
-	float vt = CPU_reg[rt(instr)].y + (CPU_reg[rt(instr)].x / (float)(1 << 16));
-
-	CPU_Lo.x = vs / vt;
-	CPU_Hi.x = fmod(vs, vt);
-	CPU_Lo.x -= CPU_Hi.x;
+	CPU_Lo = CPU_Hi = CPU_reg[rs(instr)];
 
 	CPU_Lo.halfFlags[0] = CPU_Hi.halfFlags[0] = (CPU_reg[rs(instr)].halfFlags[0] & CPU_reg[rt(instr)].halfFlags[0]);
+
+	double vs = f16Unsign(CPU_reg[rs(instr)].x) + (CPU_reg[rs(instr)].y) * (double)(1 << 16);
+	double vt = f16Unsign(CPU_reg[rt(instr)].x) + (CPU_reg[rt(instr)].y) * (double)(1 << 16);
+
+	double lo = vs / vt;
+	CPU_Lo.y = f16Sign(f16Overflow(lo));
+	CPU_Lo.x = f16Sign(lo);
+
+	double hi = fmod(vs, vt);
+	CPU_Hi.y = f16Sign(f16Overflow(hi));
+	CPU_Hi.x = f16Sign(hi);
 
 	CPU_Lo.value = loVal;
 	CPU_Hi.value = hiVal;
@@ -499,8 +634,8 @@ void PGXP_CPU_DIV(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 
 void PGXP_CPU_DIVU(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 {
-	// Hi = Rs / Rt (unsigned)
-	// Lo = Rs % Rt (unsigned)
+	// Lo = Rs / Rt (unsigned)
+	// Hi = Rs % Rt (unsigned)
 	Validate(&CPU_reg[rs(instr)], rsVal);
 	Validate(&CPU_reg[rt(instr)], rtVal);
 
@@ -511,14 +646,20 @@ void PGXP_CPU_DIVU(u32 instr, u32 hiVal, u32 loVal, u32 rsVal, u32 rtVal)
 		MakeValid(&CPU_reg[rt(instr)], rtVal);
 	}
 
-	float vs = CPU_reg[rs(instr)].y + (CPU_reg[rs(instr)].x / (float)(1 << 16));
-	float vt = CPU_reg[rt(instr)].y + (CPU_reg[rt(instr)].x / (float)(1 << 16));
-
-	CPU_Lo.x = fabs(vs) / fabs(vt);
-	CPU_Hi.x = fmod(fabs(vs), fabs(vt));
-	CPU_Lo.x -= CPU_Hi.x;
+	CPU_Lo = CPU_Hi = CPU_reg[rs(instr)];
 
 	CPU_Lo.halfFlags[0] = CPU_Hi.halfFlags[0] = (CPU_reg[rs(instr)].halfFlags[0] & CPU_reg[rt(instr)].halfFlags[0]);
+
+	double vs = f16Unsign(CPU_reg[rs(instr)].x) + f16Unsign(CPU_reg[rs(instr)].y) * (double)(1 << 16);
+	double vt = f16Unsign(CPU_reg[rt(instr)].x) + f16Unsign(CPU_reg[rt(instr)].y) * (double)(1 << 16);
+
+	double lo = vs / vt;
+	CPU_Lo.y = f16Sign(f16Overflow(lo));
+	CPU_Lo.x = f16Sign(lo);
+
+	double hi = fmod(vs, vt);
+	CPU_Hi.y = f16Sign(f16Overflow(hi));
+	CPU_Hi.x = f16Sign(hi);
 
 	CPU_Lo.value = loVal;
 	CPU_Hi.value = hiVal;
@@ -533,21 +674,89 @@ void PGXP_CPU_SLL(u32 instr, u32 rdVal, u32 rtVal)
 	PGXP_value ret;
 	u32 sh = sa(instr);
 	Validate(&CPU_reg[rt(instr)], rtVal);
+	
 	ret = CPU_reg[rt(instr)];
 
-	// Shift y into x?
-	if (sh >= 16)
+	// TODO: Shift flags
+#if 1 
+	double x = f16Unsign(CPU_reg[rt(instr)].x);
+	double y = f16Unsign(CPU_reg[rt(instr)].y);
+	if (sh >= 32)
 	{
-		ret.y = ret.x;
-		ret.x = 0;
-		ret.hFlags = ret.lFlags;
-		ret.lFlags = 0;
-		sh -= 16;
+		x = 0.f;
+		y = 0.f;
 	}
-	
-	// assume multiply with no overflow
-	ret.x *= (float)(1 << sh);
-	ret.y *= (float)(1 << sh);
+	else if (sh == 16)
+	{
+		y = f16Sign(x);
+		x = 0.f;
+	}
+	else if (sh >= 16)
+	{
+		y = x * (1 << (sh - 16));
+		y = f16Sign(y);
+		x = 0.f;
+	}
+	else
+	{
+		x = x * (1 << sh);
+		y = y * (1 << sh);
+		y += f16Overflow(x);
+		x = f16Sign(x);
+		y = f16Sign(y);
+	}
+#else
+	double x = CPU_reg[rt(instr)].x, y = f16Unsign(CPU_reg[rt(instr)].y);
+
+	psx_value iX; iX.d = rtVal;
+	psx_value iY; iY.d = rtVal;
+
+	iX.w.h = 0;		// remove Y
+	iY.w.l = 0;		// remove X
+
+					// Shift test values
+	psx_value dX;
+	dX.d = iX.d << sh;
+	psx_value dY;
+	dY.d = iY.d << sh;
+
+
+	if ((dY.sw.h == 0) || (dY.sw.h == -1))
+		y = dY.sw.h;
+	else
+		y = y * (1 << sh);
+
+	if (dX.sw.h != 0.f)
+	{
+		if (sh == 16)
+		{
+			y = x;
+		}
+		else if (sh < 16)
+		{
+			y += f16Unsign(x) / (1 << (16 - sh));
+			//if (in.x < 0)
+			//	y += 1 << (16 - sh);
+		}
+		else
+		{
+			y += x * (1 << (sh - 16));
+		}
+	}
+
+	// if there's anything left of X write it in
+	if (dX.w.l != 0.f)
+		x = x * (1 << sh);
+	else
+		x = 0;
+
+	x = f16Sign(x);
+	y = f16Sign(y);
+
+#endif
+
+	ret.x = x;
+	ret.y = y;
 
 	ret.value = rdVal;
 	CPU_reg[rd(instr)] = ret;
@@ -559,21 +768,90 @@ void PGXP_CPU_SRL(u32 instr, u32 rdVal, u32 rtVal)
 	PGXP_value ret;
 	u32 sh = sa(instr);
 	Validate(&CPU_reg[rt(instr)], rtVal);
+
 	ret = CPU_reg[rt(instr)];
 
-	// Shift x into y?
-	if (sh >= 16)
+#if 0
+	double x = f16Unsign(CPU_reg[rt(instr)].x);
+	double y = f16Unsign(CPU_reg[rt(instr)].y);
+	if (sh >= 32)
 	{
-		ret.x = ret.y;
-		ret.y = 0;
-		ret.lFlags = ret.hFlags;
-		ret.hFlags = 0;
-		sh -= 16;
+		x = y = 0.f;
 	}
-	
-	// assume divide with no overflow
-	ret.x /= (float)(1 << sh);
-	ret.y /= (float)(1 << sh);
+	else if (sh >= 16)
+	{
+		x = y / (1 << (sh - 16));
+		x = f16Sign(x);
+		y = (y < 0) ? -1.f : 0.f;	// sign extend
+	}
+	else
+	{
+		x = x / (1 << sh);
+
+		// check for potential sign extension in overflow
+		psx_value valt;
+		valt.d = rtVal;
+		u16 mask = 0xFFFF >> (16 - sh);
+		if ((valt.w.h & mask) == mask)
+			x += mask << (16 - sh);
+		else if ((valt.w.h & mask) == 0)
+			x = x;
+		else
+			x += y * (1 << (16 - sh));//f16Overflow(y);	
+
+		y = y / (1 << sh);
+		x = f16Sign(x);
+		y = f16Sign(y);
+	}
+#else
+	double x = CPU_reg[rt(instr)].x, y = f16Unsign(CPU_reg[rt(instr)].y);
+
+	psx_value iX; iX.d = rtVal;
+	psx_value iY; iY.d = rtVal;
+
+	iX.sd = (iX.sd << 16) >> 16;	// remove Y
+	iY.sw.l = iX.sw.h;				// overwrite x with sign(x)
+
+									// Shift test values
+	psx_value dX;
+	dX.sd = iX.sd >> sh;
+	psx_value dY;
+	dY.d = iY.d >> sh;
+
+	if (dX.sw.l != iX.sw.h)
+		x = x / (1 << sh);
+	else
+		x = dX.sw.l;	// only sign bits left
+
+	if (dY.sw.l != iX.sw.h)
+	{
+		if (sh == 16)
+		{
+			x = y;
+		}
+		else if (sh < 16)
+		{
+			x += y * (1 << (16 - sh));
+			if (CPU_reg[rt(instr)].x < 0)
+				x += 1 << (16 - sh);
+		}
+		else
+		{
+			x += y / (1 << (sh - 16));
+		}
+	}
+
+	if ((dY.sw.h == 0) || (dY.sw.h == -1))
+		y = dY.sw.h;
+	else
+		y = y / (1 << sh);
+
+	x = f16Sign(x);
+	y = f16Sign(y);
+
+#endif
+	ret.x = x;
+	ret.y = y;
 
 	ret.value = rdVal;
 	CPU_reg[rd(instr)] = ret;
@@ -582,7 +860,98 @@ void PGXP_CPU_SRL(u32 instr, u32 rdVal, u32 rtVal)
 void PGXP_CPU_SRA(u32 instr, u32 rdVal, u32 rtVal)
 {
 	// Rd = Rt >> Sa
-	PGXP_CPU_SRL(instr, rdVal, rtVal);
+	PGXP_value ret;
+	u32 sh = sa(instr);
+	Validate(&CPU_reg[rt(instr)], rtVal);
+	ret = CPU_reg[rt(instr)];
+
+#if 0
+	double x = f16Unsign(CPU_reg[rt(instr)].x);
+	double y = (CPU_reg[rt(instr)].y);
+	if (sh >= 32)
+	{
+		// sign extend
+		x = y = (y < 0) ? -1.f : 0.f;
+	}
+	else if (sh >= 16)
+	{
+		x = y / (1 << (sh - 16));
+		x = f16Sign(x);
+		y = (y < 0) ? -1.f : 0.f;	// sign extend
+	}
+	else
+	{
+		x = x / (1 << sh);
+		
+		// check for potential sign extension in overflow
+		psx_value valt;
+		valt.d = rtVal;
+		u16 mask = 0xFFFF >> (16 - sh);
+		if ((valt.w.h & mask) == mask)
+			x += mask << (16 - sh);
+		else if ((valt.w.h & mask) == 0)
+			x = x;
+		else
+			x += y * (1 << (16 - sh));//f16Overflow(y);	
+
+		y = y / (1 << sh);
+		x = f16Sign(x);
+		y = f16Sign(y);
+	}
+
+#else
+	double x = CPU_reg[rt(instr)].x, y = CPU_reg[rt(instr)].y;
+
+	psx_value iX; iX.d = rtVal;
+	psx_value iY; iY.d = rtVal;
+
+	iX.sd = (iX.sd << 16) >> 16;	// remove Y
+	iY.sw.l = iX.sw.h;				// overwrite x with sign(x)
+
+									// Shift test values
+	psx_value dX;
+	dX.sd = iX.sd >> sh;
+	psx_value dY;
+	dY.sd = iY.sd >> sh;
+
+	if (dX.sw.l != iX.sw.h)
+		x = x / (1 << sh);
+	else
+		x = dX.sw.l;	// only sign bits left
+
+	if (dY.sw.l != iX.sw.h)
+	{
+		if (sh == 16)
+		{
+			x = y;
+		}
+		else if (sh < 16)
+		{
+			x += y * (1 << (16 - sh));
+			if (CPU_reg[rt(instr)].x < 0)
+				x += 1 << (16 - sh);
+		}
+		else
+		{
+			x += y / (1 << (sh - 16));
+		}
+	}
+
+	if ((dY.sw.h == 0) || (dY.sw.h == -1))
+		y = dY.sw.h;
+	else
+		y = y / (1 << sh);
+
+	x = f16Sign(x);
+	y = f16Sign(y);
+
+#endif
+
+	ret.x = x;
+	ret.y = y;
+
+	ret.value = rdVal;
+	CPU_reg[rd(instr)] = ret;
 }
 
 ////////////////////////////////////
@@ -598,19 +967,84 @@ void PGXP_CPU_SLLV(u32 instr, u32 rdVal, u32 rtVal, u32 rsVal)
 
 	ret = CPU_reg[rt(instr)];
 
-	// Shift y into x?
-	if (sh >= 16)
+#if 1
+	double x = f16Unsign(CPU_reg[rt(instr)].x);
+	double y = f16Unsign(CPU_reg[rt(instr)].y);
+	if (sh >= 32)
 	{
-		ret.y = ret.x;
-		ret.x = 0;
-		ret.hFlags = ret.lFlags;
-		ret.lFlags = 0;
-		sh -= 16;
+		x = 0.f;
+		y = 0.f;
+	}
+	else if (sh == 16)
+	{
+		y = f16Sign(x);
+		x = 0.f;
+	}
+	else if (sh >= 16)
+	{
+		y = x * (1 << (sh - 16));
+		y = f16Sign(y);
+		x = 0.f;
+	}
+	else
+	{
+		x = x * (1 << sh);
+		y = y * (1 << sh);
+		y += f16Overflow(x);
+		x = f16Sign(x);
+		y = f16Sign(y);
+	}
+#else
+	double x = CPU_reg[rt(instr)].x, y = f16Unsign(CPU_reg[rt(instr)].y);
+
+	psx_value iX; iX.d = rtVal;
+	psx_value iY; iY.d = rtVal;
+
+	iX.w.h = 0;		// remove Y
+	iY.w.l = 0;		// remove X
+
+					// Shift test values
+	psx_value dX;
+	dX.d = iX.d << sh;
+	psx_value dY;
+	dY.d = iY.d << sh;
+
+
+	if ((dY.sw.h == 0) || (dY.sw.h == -1))
+		y = dY.sw.h;
+	else
+		y = y * (1 << sh);
+
+	if (dX.sw.h != 0.f)
+	{
+		if (sh == 16)
+		{
+			y = x;
+		}
+		else if (sh < 16)
+		{
+			y += f16Unsign(x) / (1 << (16 - sh));
+			//if (in.x < 0)
+			//	y += 1 << (16 - sh);
+		}
+		else
+		{
+			y += x * (1 << (sh - 16));
+		}
 	}
 
-	// assume multiply with no overflow
-	ret.x *= (float)(1 << sh);
-	ret.y *= (float)(1 << sh);
+	// if there's anything left of X write it in
+	if (dX.w.l != 0.f)
+		x = x * (1 << sh);
+	else
+		x = 0;
+
+	x = f16Sign(x);
+	y = f16Sign(y);
+
+#endif
+	ret.x = x;
+	ret.y = y;
 
 	ret.value = rdVal;
 	CPU_reg[rd(instr)] = ret;
@@ -626,19 +1060,89 @@ void PGXP_CPU_SRLV(u32 instr, u32 rdVal, u32 rtVal, u32 rsVal)
 
 	ret = CPU_reg[rt(instr)];
 
-	// Shift x into y?
-	if (sh >= 16)
+#if 0
+	double x = f16Unsign(CPU_reg[rt(instr)].x);
+	double y = f16Unsign(CPU_reg[rt(instr)].y);
+	if (sh >= 32)
 	{
-		ret.x = ret.y;
-		ret.y = 0;
-		ret.lFlags = ret.hFlags;
-		ret.hFlags = 0;
-		sh -= 16;
+		x = y = 0.f;
+	}
+	else if (sh >= 16)
+	{
+		x = y / (1 << (sh - 16));
+		x = f16Sign(x);
+		y = (y < 0) ? -1.f : 0.f;	// sign extend
+	}
+	else
+	{
+		x = x / (1 << sh);
+		
+		// check for potential sign extension in overflow
+		psx_value valt;
+		valt.d = rtVal;
+		u16 mask = 0xFFFF >> (16 - sh);
+		if ((valt.w.h & mask) == mask)
+			x += mask << (16 - sh);
+		else if ((valt.w.h & mask) == 0)
+			x = x;
+		else
+			x += y * (1 << (16 - sh));//f16Overflow(y);	
+
+		y = y / (1 << sh);
+		x = f16Sign(x);
+		y = f16Sign(y);
 	}
 
-	// assume divide with no overflow
-	ret.x /= (float)(1 << sh);
-	ret.y /= (float)(1 << sh);
+#else
+	double x = CPU_reg[rt(instr)].x, y = f16Unsign(CPU_reg[rt(instr)].y);
+
+	psx_value iX; iX.d = rtVal;
+	psx_value iY; iY.d = rtVal;
+
+	iX.sd = (iX.sd << 16) >> 16;	// remove Y
+	iY.sw.l = iX.sw.h;				// overwrite x with sign(x)
+
+									// Shift test values
+	psx_value dX;
+	dX.sd = iX.sd >> sh;
+	psx_value dY;
+	dY.d = iY.d >> sh;
+
+	if (dX.sw.l != iX.sw.h)
+		x = x / (1 << sh);
+	else
+		x = dX.sw.l;	// only sign bits left
+
+	if (dY.sw.l != iX.sw.h)
+	{
+		if (sh == 16)
+		{
+			x = y;
+		}
+		else if (sh < 16)
+		{
+			x += y * (1 << (16 - sh));
+			if (CPU_reg[rt(instr)].x < 0)
+				x += 1 << (16 - sh);
+		}
+		else
+		{
+			x += y / (1 << (sh - 16));
+		}
+	}
+
+	if ((dY.sw.h == 0) || (dY.sw.h == -1))
+		y = dY.sw.h;
+	else
+		y = y / (1 << sh);
+
+	x = f16Sign(x);
+	y = f16Sign(y);
+
+#endif
+
+	ret.x = x;
+	ret.y = y;
 
 	ret.value = rdVal;
 	CPU_reg[rd(instr)] = ret;
@@ -646,7 +1150,99 @@ void PGXP_CPU_SRLV(u32 instr, u32 rdVal, u32 rtVal, u32 rsVal)
 
 void PGXP_CPU_SRAV(u32 instr, u32 rdVal, u32 rtVal, u32 rsVal)
 {
-	PGXP_CPU_SRLV(instr, rdVal, rtVal, rsVal);
+	// Rd = Rt >> Sa
+	PGXP_value ret;
+	u32 sh = rsVal & 0x1F;
+	Validate(&CPU_reg[rt(instr)], rtVal);
+	Validate(&CPU_reg[rs(instr)], rsVal);
+
+	ret = CPU_reg[rt(instr)];
+#if 0
+	double x = f16Unsign(CPU_reg[rt(instr)].x);
+	double y = f16Unsign(CPU_reg[rt(instr)].y);
+	if (sh >= 32)
+	{
+		x = y = 0.f;
+	}
+	else if (sh >= 16)
+	{
+		x = y / (1 << (sh - 16));
+		x = f16Sign(x);
+		y = (y < 0) ? -1.f : 0.f;	// sign extend
+	}
+	else
+	{
+		x = x / (1 << sh);
+		
+		// check for potential sign extension in overflow
+		psx_value valt;
+		valt.d = rtVal;
+		u16 mask = 0xFFFF >> (16 - sh);
+		if ((valt.w.h & mask) == mask)
+			x += mask << (16 - sh);
+		else if ((valt.w.h & mask) == 0)
+			x = x;
+		else
+			x += y * (1 << (16 - sh));//f16Overflow(y);	
+
+		y = y / (1 << sh);
+		x = f16Sign(x);
+		y = f16Sign(y);
+	}
+
+#else
+	double x = CPU_reg[rt(instr)].x, y = CPU_reg[rt(instr)].y;
+
+	psx_value iX; iX.d = rtVal;
+	psx_value iY; iY.d = rtVal;
+
+	iX.sd = (iX.sd << 16) >> 16;	// remove Y
+	iY.sw.l = iX.sw.h;				// overwrite x with sign(x)
+
+									// Shift test values
+	psx_value dX;
+	dX.sd = iX.sd >> sh;
+	psx_value dY;
+	dY.sd = iY.sd >> sh;
+
+	if (dX.sw.l != iX.sw.h)
+		x = x / (1 << sh);
+	else
+		x = dX.sw.l;	// only sign bits left
+
+	if (dY.sw.l != iX.sw.h)
+	{
+		if (sh == 16)
+		{
+			x = y;
+		}
+		else if (sh < 16)
+		{
+			x += y * (1 << (16 - sh));
+			if (CPU_reg[rt(instr)].x < 0)
+				x += 1 << (16 - sh);
+		}
+		else
+		{
+			x += y / (1 << (sh - 16));
+		}
+	}
+
+	if ((dY.sw.h == 0) || (dY.sw.h == -1))
+		y = dY.sw.h;
+	else
+		y = y / (1 << sh);
+
+	x = f16Sign(x);
+	y = f16Sign(y);
+
+#endif
+
+	ret.x = x;
+	ret.y = y;
+
+	ret.value = rdVal;
+	CPU_reg[rd(instr)] = ret;
 }
 
 ////////////////////////////////////
@@ -699,7 +1295,6 @@ void PGXP_CPU_LW(u32 instr, u32 rtVal, u32 addr)
 {
 	// Rt = Mem[Rs + Im]
 	ValidateAndCopyMem(&CPU_reg[rt(instr)], addr, rtVal);
-	//CPU_reg[rt(instr)] = PGXP_validateXY(ReadMem(addr), rtVal);
 }
 
 void PGXP_CPU_LWR(u32 instr, u32 rtVal, u32 addr)
@@ -714,7 +1309,7 @@ void PGXP_CPU_LH(u32 instr, u16 rtVal, u32 addr)
 	// Rt = Mem[Rs + Im] (sign extended)
 	psx_value val;
 	val.sd = (s32)(s16)rtVal;
-	ValidateAndCopyMem16(&CPU_reg[rt(instr)], addr, val.d);
+	ValidateAndCopyMem16(&CPU_reg[rt(instr)], addr, val.d, 1);
 }
 
 void PGXP_CPU_LHU(u32 instr, u16 rtVal, u32 addr)
@@ -723,7 +1318,7 @@ void PGXP_CPU_LHU(u32 instr, u16 rtVal, u32 addr)
 	psx_value val;
 	val.d = rtVal;
 	val.w.h = 0;
-	ValidateAndCopyMem16(&CPU_reg[rt(instr)], addr, val.d);
+	ValidateAndCopyMem16(&CPU_reg[rt(instr)], addr, val.d, 0);
 }
 
 // Load 8-bit
@@ -749,7 +1344,6 @@ void PGXP_CPU_SW(u32 instr, u32 rtVal, u32 addr)
 	// Mem[Rs + Im] = Rt
 	Validate(&CPU_reg[rt(instr)], rtVal);
 	WriteMem(&CPU_reg[rt(instr)], addr);
-	//WriteMemOld(PGXP_validateXY(&CPU_reg[rt(instr)], rtVal), addr);
 }
 
 void PGXP_CPU_SWR(u32 instr, u32 rtVal, u32 addr)

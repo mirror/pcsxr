@@ -41,7 +41,7 @@ PGXP_value* GetPtr(u32 addr);
 PGXP_value* ReadMem(u32 addr);
 
 void ValidateAndCopyMem(PGXP_value* dest, u32 addr, u32 value);
-void ValidateAndCopyMem16(PGXP_value* dest, u32 addr, u32 value);
+void ValidateAndCopyMem16(PGXP_value* dest, u32 addr, u32 value, int sign);
 
 void WriteMem(PGXP_value* value, u32 addr);
 void WriteMem16(PGXP_value* src, u32 addr);

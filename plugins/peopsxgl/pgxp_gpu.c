@@ -305,20 +305,23 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 			pVertex[i].PGXP_flag = 1;
 
 			if ((primStart[stride * i].flags & VALID_2) != VALID_2)
+			{
 				pVertex[i].PGXP_flag = 6;
+		//		__Log("GPPV No W: v:%x (%d, %d) pgxp(%f, %f)|\n", (currentAddr + 1 + (i * stride)) * 4, pPrimData[stride * i * 2], pPrimData[(stride * i * 2) + 1], primStart[stride * i].x, primStart[stride * i].y);
+			}
 
 			// Log incorrect vertices
 			//if (PGXP_tDebug && 
-			//	(fabs((float)pPrimData[stride * i * 2] - pVertex[i].x) > debug_tolerance) || 
-			//	(fabs((float)pPrimData[(stride * i * 2) + 1] - pVertex[i].y) > debug_tolerance))
-			//	__Log("GPPV: v:%x (%d, %d) pgxp(%f, %f)|\n", (currentAddr + 1 + (i * stride)) * 4, pPrimData[stride * i * 2], pPrimData[(stride * i * 2) + 1], pVertex[i].x, pVertex[i].y);
+			//	(fabs((float)pPrimData[stride * i * 2] - primStart[stride * i].x) > debug_tolerance) ||
+			//	(fabs((float)pPrimData[(stride * i * 2) + 1] - primStart[stride * i].y) > debug_tolerance))
+			//	__Log("GPPV: v:%x (%d, %d) pgxp(%f, %f)|\n", (currentAddr + 1 + (i * stride)) * 4, pPrimData[stride * i * 2], pPrimData[(stride * i * 2) + 1], primStart[stride * i].x, primStart[stride * i].y);
 		}
 		else
 		{
 			// Default to low precision vertex data
-			if (primStart  && ((primStart[stride * i].flags & VALID_01) == VALID_01) && primStart[stride * i].value != *(unsigned int*)(&pPrimData[stride * i * 2]))
-				pVertex[i].PGXP_flag = 6;
-			else
+			//if (primStart  && ((primStart[stride * i].flags & VALID_01) == VALID_01) && primStart[stride * i].value != *(unsigned int*)(&pPrimData[stride * i * 2]))
+			//	pVertex[i].PGXP_flag = 6;
+			//else
 				pVertex[i].PGXP_flag = 2;
 
 			// Look in cache for valid vertex
@@ -354,6 +357,10 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 		for (unsigned i = 0; i < count; ++i)
 			pVertex[i].w = 1;
 
+	if(PGXP_vDebug == 3)
+		for (unsigned i = 0; i < count; ++i)
+			pVertex[i].PGXP_flag = primIdx;
+
 	return 1;
 }
 
@@ -361,7 +368,7 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 //// Visual Debugging Functions
 /////////////////////////////////
 unsigned int		PGXP_vDebug = 0;
-const unsigned int	PGXP_maxDebug = 3;
+const unsigned int	PGXP_maxDebug = 4;
 
 const char red[4]		= { 255, 0, 0, 255 };
 const char blue[4]		= { 0, 0, 255, 255 };
@@ -370,6 +377,9 @@ const char green[4]		= { 0, 255, 0, 255 };
 const char yellow[4]	= { 255, 255, 0, 255 };
 const char magenta[4]	= { 255, 0, 255, 255 };
 const char cyan[4]		= { 0, 255, 255, 255 };
+
+const char orange[4]	= { 255, 128 ,0 ,255 };
+
 const char black[4]		= { 0, 0, 0, 255 };
 
 
@@ -426,21 +436,57 @@ void PGXP_colour(OGLVertex* vertex)
 		fDepth = vertex->w / (float)(0xFFFF);
 		glColor4f(fDepth, fDepth, fDepth, 1.f);
 		break;
+	case 3:
+		// Primitive type
+		switch (vertex->PGXP_flag)
+		{
+		case 0:
+			pColour = yellow;
+			break;
+		case 1:
+			pColour = blue;
+			break;
+		case 2:
+			pColour = red;
+			break;
+		case 3:
+			pColour = green;
+			break;
+		case 4:
+			pColour = magenta;
+			break;
+		case 6:
+			pColour = cyan;
+			break;
+		case 7:
+			pColour = orange;
+		default:
+			pColour = black;
+			break;
+		}
+		glColor4ubv(pColour);
+		break;
 	}
 }
 
-void PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4)
+int PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4)
 {
 	GLboolean	bTexture = glIsEnabled(GL_TEXTURE_2D);
 	GLfloat		fColour[4];
 	GLint		iShadeModel;
+
+	//if ((vertex1->PGXP_flag == 0) ||
+	//	(vertex2->PGXP_flag == 0) ||
+	//	(vertex3->PGXP_flag == 0) ||
+	//	(vertex4->PGXP_flag == 0))
+	//	return 0;
 
 	// Quit if PGXP_flag == ignore
 	if ((vertex1->PGXP_flag == 5) ||
 		(vertex2->PGXP_flag == 5) ||
 		(vertex3->PGXP_flag == 5) ||
 		(vertex4->PGXP_flag == 5))
-		return;
+		return 1;
 
 	glGetIntegerv(GL_SHADE_MODEL, &iShadeModel);
 	glGetFloatv(GL_CURRENT_COLOR, fColour);
@@ -486,19 +532,28 @@ void PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* ve
 		glEnable(GL_TEXTURE_2D);
 
 	glShadeModel(iShadeModel);
+
+	return 1;
 }
 
-void PGXP_DrawDebugTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3)
+int PGXP_DrawDebugTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3)
 {
 	GLboolean	bTexture = glIsEnabled(GL_TEXTURE_2D);
 	GLfloat		fColour[4];
 	GLint		iShadeModel;
 
+
+	//if ((vertex1->PGXP_flag == 0) ||
+	//	(vertex2->PGXP_flag == 0) ||
+	//	(vertex3->PGXP_flag == 0))
+	//	return 0;
+
+
 	// Quit if PGXP_flag == ignore
 	if ((vertex1->PGXP_flag == 5) ||
 		(vertex2->PGXP_flag == 5) ||
 		(vertex3->PGXP_flag == 5))
-		return;
+		return 1;
 
 	glGetIntegerv(GL_SHADE_MODEL, &iShadeModel);
 	glGetFloatv(GL_CURRENT_COLOR, fColour);
@@ -540,20 +595,30 @@ void PGXP_DrawDebugTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex
 		glEnable(GL_TEXTURE_2D);
 
 	glShadeModel(iShadeModel);
+
+	return 1;
 }
 
-void PGXP_DrawDebugQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4)
+int PGXP_DrawDebugQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4)
 {
 	GLboolean	bTexture = glIsEnabled(GL_TEXTURE_2D);
 	GLfloat		fColour[4];
 	GLint		iShadeModel;
+
+
+	//if ((vertex1->PGXP_flag == 0) ||
+	//	(vertex2->PGXP_flag == 0) ||
+	//	(vertex3->PGXP_flag == 0) ||
+	//	(vertex4->PGXP_flag == 0))
+	//	return 0;
+
 
 	// Quit if PGXP_flag == ignore
 	if ((vertex1->PGXP_flag == 5) ||
 		(vertex2->PGXP_flag == 5) ||
 		(vertex3->PGXP_flag == 5) ||
 		(vertex4->PGXP_flag == 5))
-		return;
+		return 1;
 
 	glGetIntegerv(GL_SHADE_MODEL, &iShadeModel);
 	glGetFloatv(GL_CURRENT_COLOR, fColour);
@@ -599,4 +664,6 @@ void PGXP_DrawDebugQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* verte
 		glEnable(GL_TEXTURE_2D);
 
 	glShadeModel(iShadeModel);
+
+	return 1;
 }

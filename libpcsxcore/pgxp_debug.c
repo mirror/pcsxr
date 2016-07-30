@@ -119,14 +119,14 @@ static PGXP_CPU_OpData PGXP_BSC_LUT[64] = {
 #define PGXP_Data_DIVU	{ DBG_E_DIVU,	fOp_CPU_Hi | fOp_CPU_Lo, fOp_CPU_Rs | fOp_CPU_Rt, 4, 4, "/", "DIVU",	(void(*)())PGXP_CPU_DIVU }
 
 // Shift operations (sa)
-#define PGXP_Data_SLL	{ DBG_E_SLL,	fOp_CPU_Rd, fOp_CPU_Rt | fOp_Sa, 2, 2, ">>", "SLL",	(void(*)())PGXP_CPU_SLL }
-#define PGXP_Data_SRL	{ DBG_E_SRL,	fOp_CPU_Rd, fOp_CPU_Rt | fOp_Sa, 2, 2, "<<", "SRL",	(void(*)())PGXP_CPU_SRL }
-#define PGXP_Data_SRA	{ DBG_E_SRA,	fOp_CPU_Rd, fOp_CPU_Rt | fOp_Sa, 2, 2, "<<", "SRA",	(void(*)())PGXP_CPU_SRA }
+#define PGXP_Data_SLL	{ DBG_E_SLL,	fOp_CPU_Rd, fOp_CPU_Rt | fOp_Sa, 2, 2, "<<", "SLL",	(void(*)())PGXP_CPU_SLL }
+#define PGXP_Data_SRL	{ DBG_E_SRL,	fOp_CPU_Rd, fOp_CPU_Rt | fOp_Sa, 2, 2, ">>", "SRL",	(void(*)())PGXP_CPU_SRL }
+#define PGXP_Data_SRA	{ DBG_E_SRA,	fOp_CPU_Rd, fOp_CPU_Rt | fOp_Sa, 2, 2, ">>", "SRA",	(void(*)())PGXP_CPU_SRA }
 
 // Shift operations variable
-#define PGXP_Data_SLLV	{ DBG_E_SLLV,	fOp_CPU_Rd, fOp_CPU_Rt | fOp_CPU_Rs, 3, 3, ">>", "SLLV",	(void(*)())PGXP_CPU_SLLV }
-#define PGXP_Data_SRLV	{ DBG_E_SRLV,	fOp_CPU_Rd, fOp_CPU_Rt | fOp_CPU_Rs, 3, 3, "<<", "SRLV",	(void(*)())PGXP_CPU_SRLV }
-#define PGXP_Data_SRAV	{ DBG_E_SRAV,	fOp_CPU_Rd, fOp_CPU_Rt | fOp_CPU_Rs, 3, 3, "<<", "SRAV",	(void(*)())PGXP_CPU_SRAV }
+#define PGXP_Data_SLLV	{ DBG_E_SLLV,	fOp_CPU_Rd, fOp_CPU_Rt | fOp_CPU_Rs, 3, 3, "<<", "SLLV",	(void(*)())PGXP_CPU_SLLV }
+#define PGXP_Data_SRLV	{ DBG_E_SRLV,	fOp_CPU_Rd, fOp_CPU_Rt | fOp_CPU_Rs, 3, 3, ">>", "SRLV",	(void(*)())PGXP_CPU_SRLV }
+#define PGXP_Data_SRAV	{ DBG_E_SRAV,	fOp_CPU_Rd, fOp_CPU_Rt | fOp_CPU_Rs, 3, 3, ">>", "SRAV",	(void(*)())PGXP_CPU_SRAV }
 
 // Move registers
 #define PGXP_Data_MFHI	{ DBG_E_MFHI,	fOp_CPU_Rd, fOp_CPU_Hi, 2, 2, "<-", "MFHI",	(void(*)())PGXP_CPU_MFHI }
@@ -203,11 +203,96 @@ PGXP_CPU_OpData GetOpData(u32 instr)
 	return pOpData;
 }
 
-void PrintOperands(char* szBuffer, u32 instr, u32 flags, const char* szDelim, psx_value* psx_regs, u32* regIdx)
+PGXP_value* GetReg(u32 instr, u32 flag, u32 psxValue)
+{
+	// iCB Hack: reorder Rs and Rt for SLLV SRLV and SRAV
+	if ((op(instr) == 0) && (func(instr) > 3) && (func(instr) < 8))
+		flag = (flag == fOp_CPU_Rs) ? fOp_CPU_Rt : ((flag == fOp_CPU_Rt) ? fOp_CPU_Rs : flag);
+	// /iCB Hack
+
+	switch (flag)
+	{
+	case fOp_CPU_Hi:
+		return &CPU_Hi;
+	case fOp_CPU_Lo:
+		return &CPU_Lo;
+	case fOp_CPU_Rd:
+		return &CPU_reg[rd(instr)];
+	case fOp_CPU_Rs:
+		return &CPU_reg[rs(instr)];
+	case fOp_CPU_Rt:
+		return &CPU_reg[rt(instr)];
+	case fOp_GTE_Dd:
+		return &GTE_data_reg[rd(instr)];
+	case fOp_GTE_Dt:
+		return &GTE_data_reg[rt(instr)];
+	case fOp_GTE_Cd:
+		return &GTE_ctrl_reg[rd(instr)];
+	case fOp_GTE_Ct:
+		return &GTE_ctrl_reg[rt(instr)];
+	case fOp_CP0_Dd:
+		return &CP0_reg[rd(instr)];
+	case fOp_CP0_Cd:
+		return &CP0_reg[rd(instr)];
+	case fOp_Ad:
+		return GetPtr(psxValue);
+	default:
+		return NULL;
+	}
+}
+
+void ForceValues(u32 instr, u32 flags, psx_value* psx_regs, u32 startIdx)
+{
+	PGXP_value* pReg = NULL;
+	u32			regIdx = startIdx;
+
+	for (u32 opdIdx = 0; opdIdx < 14; opdIdx++)
+	{
+		u32 flag = 1 << opdIdx;
+
+		// iCB: Skip Load operations as data at address is unknown
+		if ((flags & flag) && (flag != fOp_Ad))
+		{
+			pReg = GetReg(instr, flag, psx_regs[regIdx].d);
+
+			if (pReg)
+			{
+				SetValue(pReg, psx_regs[regIdx].d);
+				regIdx++;
+			}
+		}
+	}
+}
+
+void TestValues(u32 instr, u32 flags, psx_value* psx_regs, u32 *test_flags, u32 startIdx)
+{
+	PGXP_value* pReg = NULL;
+	u32			regIdx = startIdx;
+
+	for (u32 opdIdx = 0; opdIdx < 14; opdIdx++)
+	{
+		u32 flag = 1 << opdIdx;
+
+		// iCB: Skip Store operations as data at address is unknown
+		if ((flags & flag) && (flag != fOp_Ad))
+		{
+			pReg = GetReg(instr, flag, psx_regs[regIdx].d);
+
+			if (pReg)
+			{
+				test_flags[regIdx] = ValueToTolerance(pReg, psx_regs[regIdx].d, PGXP_DEBUG_TOLERANCE);
+				regIdx++;
+			}
+		}
+	}
+}
+
+void PrintOperands(char* szBuffer, u32 instr, u32 flags, const char* szDelim, psx_value* psx_regs, u32 startIdx)
 {
 	char		szTempBuffer[256];
 	PGXP_value* pReg = NULL;
 	psx_value	psx_reg;
+	u32			regIdx = startIdx;
 	char		szOpdName[16];
 	const char*	szPre = "";
 
@@ -217,7 +302,7 @@ void PrintOperands(char* szBuffer, u32 instr, u32 flags, const char* szDelim, ps
 		u32 flag = 1 << opdIdx;
 
 		// iCB Hack: reorder Rs and Rt for SLLV SRLV and SRAV
-		if ((op(instr) < 8) && (op(instr) > 3))
+		if ((op(instr) == 0) && (func(instr) > 3) && (func(instr) < 8))
 			flag = (flag == fOp_CPU_Rs) ? fOp_CPU_Rt : ((flag == fOp_CPU_Rt) ? fOp_CPU_Rs : flag);
 		// /iCB Hack
 
@@ -228,62 +313,62 @@ void PrintOperands(char* szBuffer, u32 instr, u32 flags, const char* szDelim, ps
 			case fOp_CPU_Hi:
 				pReg = &CPU_Hi;
 				sprintf(szOpdName, "Hi");
-				psx_reg = psx_regs[(*regIdx)++];
+				psx_reg = psx_regs[regIdx++];
 				break;
 			case fOp_CPU_Lo:
 				pReg = &CPU_Lo;
 				sprintf(szOpdName, "Lo");
-				psx_reg = psx_regs[(*regIdx)++];
+				psx_reg = psx_regs[regIdx++];
 				break;
 			case fOp_CPU_Rd:
 				pReg = &CPU_reg[rd(instr)];
 				sprintf(szOpdName, "Rd[%d]", rd(instr));
-				psx_reg = psx_regs[(*regIdx)++];
+				psx_reg = psx_regs[regIdx++];
 				break;
 			case fOp_CPU_Rs:
 				pReg = &CPU_reg[rs(instr)];
 				sprintf(szOpdName, "Rs[%d]", rs(instr));
-				psx_reg = psx_regs[(*regIdx)++];
+				psx_reg = psx_regs[regIdx++];
 				break;
 			case fOp_CPU_Rt:
 				pReg = &CPU_reg[rt(instr)];
 				sprintf(szOpdName, "Rt[%d]", rt(instr));
-				psx_reg = psx_regs[(*regIdx)++];
+				psx_reg = psx_regs[regIdx++];
 				break;
 			case fOp_GTE_Dd:
 				pReg = &GTE_data_reg[rd(instr)];
 				sprintf(szOpdName, "GTE_Dd[%d]", rd(instr));
-				psx_reg = psx_regs[(*regIdx)++];
+				psx_reg = psx_regs[regIdx++];
 				break;
 			case fOp_GTE_Dt:
 				pReg = &GTE_data_reg[rt(instr)];
 				sprintf(szOpdName, "GTE_Dt[%d]", rt(instr));
-				psx_reg = psx_regs[(*regIdx)++];
+				psx_reg = psx_regs[regIdx++];
 				break;
 			case fOp_GTE_Cd:
 				pReg = &GTE_ctrl_reg[rd(instr)];
 				sprintf(szOpdName, "GTE_Cd[%d]", rd(instr));
-				psx_reg = psx_regs[(*regIdx)++];
+				psx_reg = psx_regs[regIdx++];
 				break;
 			case fOp_GTE_Ct:
 				pReg = &GTE_ctrl_reg[rt(instr)];
 				sprintf(szOpdName, "GTE_Ct[%d]", rt(instr));
-				psx_reg = psx_regs[(*regIdx)++];
+				psx_reg = psx_regs[regIdx++];
 				break;
 			case fOp_CP0_Dd:
 				pReg = &CP0_reg[rd(instr)];
 				sprintf(szOpdName, "CP0_Dd[%d]", rd(instr));
-				psx_reg = psx_regs[(*regIdx)++];
+				psx_reg = psx_regs[regIdx++];
 				break;
 			case fOp_CP0_Cd:
 				pReg = &CP0_reg[rd(instr)];
 				sprintf(szOpdName, "CP0_Cd[%d]", rd(instr));
-				psx_reg = psx_regs[(*regIdx)++];
+				psx_reg = psx_regs[regIdx++];
 				break;
 			case fOp_Ad:
 				pReg = NULL;
 				sprintf(szOpdName, "Addr");
-				psx_reg = psx_regs[(*regIdx)++];
+				psx_reg = psx_regs[regIdx++];
 				break;
 			case fOp_Sa:
 				pReg = NULL;
@@ -333,8 +418,9 @@ void PGXP_CPU_DebugOutput(u32 eOp, u32 instr, u32 numOps, u32 op1, u32 op2, u32 
 	char szOutputBuffer[256];
 	char szInputBuffer[512];
 	PGXP_CPU_OpData opData = GetOpData(instr);
-	psx_value psx_regs[4];
-	u32 regIdx = 0;
+	u32			test_flags[4] = { VALID_ALL, VALID_ALL, VALID_ALL, VALID_ALL };
+	psx_value	psx_regs[4];
+	u32 inIdx = 0;
 	psx_regs[0].d = op1;
 	psx_regs[1].d = op2;
 	psx_regs[2].d = op3;
@@ -353,22 +439,29 @@ void PGXP_CPU_DebugOutput(u32 eOp, u32 instr, u32 numOps, u32 op1, u32 op2, u32 
 
 	// /iCB Hack
 
+	// skip output arguments to find first input
+	for (u32 opdIdx = 0; opdIdx < 12; opdIdx++)
+	{
+		if (opData.OutputFlags & (1 << opdIdx))
+			inIdx++;
+	}
+
+#ifdef PGXP_FORCE_INPUT_VALUES
+	ForceValues(instr, opData.InputFlags, psx_regs, inIdx);
+#endif
+
+
+#ifdef PGXP_OUTPUT_ALL
 	// reset buffers
 	if (pgxp_debug)
 	{
 		memset(szInputBuffer, 0, sizeof(szInputBuffer));
 		memset(szOutputBuffer, 0, sizeof(szOutputBuffer));
 
-		// skip output arguments
-		for (u32 opdIdx = 0; opdIdx < 12; opdIdx++)
-		{
-			if (opData.OutputFlags & (1 << opdIdx))
-				regIdx++;
-		}
-
 		// Print inputs
-		PrintOperands(szInputBuffer, instr, opData.InputFlags, opData.szOpString, psx_regs, &regIdx);
+		PrintOperands(szInputBuffer, instr, opData.InputFlags, opData.szOpString, psx_regs, inIdx);
 	}
+#endif
 
 	// Call function
 	if (numOps != opData.numArgs)
@@ -396,19 +489,28 @@ void PGXP_CPU_DebugOutput(u32 eOp, u32 instr, u32 numOps, u32 op1, u32 op2, u32 
 		break;
 	}
 
+#ifdef	PGXP_TEST_OUTPUT_VALUES
+	TestValues(instr, opData.OutputFlags, psx_regs, test_flags, 0);
+#endif//PGXP_TEST_OUTPUT_VALUES
+
+#ifdef PGXP_OUTPUT_ALL
 	// Print operation details
 	if (pgxp_debug)
 	{
 		sprintf(szOutputBuffer, "%s %x %x: ", opData.szOpName, op(instr), func(instr));
 		// Print outputs
-		regIdx = 0;
-		PrintOperands(szOutputBuffer, instr, opData.OutputFlags, "/", psx_regs, &regIdx);
+		PrintOperands(szOutputBuffer, instr, opData.OutputFlags, "/", psx_regs, 0);
 		strcat(szOutputBuffer, "=");
 
 #ifdef GTE_LOG
-		GTE_LOG("PGXP_Trace: %s %s|", szOutputBuffer, szInputBuffer);
-#endif
+#ifdef	PGXP_TEST_OUTPUT_VALUES
+		if((test_flags[0] & test_flags[1] & VALID_01) != VALID_01)
+#endif//PGXP_TEST_OUTPUT_VALUES
+			GTE_LOG("PGXP_Trace: %s %s|", szOutputBuffer, szInputBuffer);
+#endif//GTE_LOG
+
 	}
+#endif//PGXP_OUTPUT_ALL
 }
 
 void PGXP_psxTraceOp(u32 eOp, u32 instr)

@@ -98,10 +98,16 @@ typedef enum
 static const PGXP_value PGXP_value_invalid_address = { 0.f, 0.f, 0.f, 0, 0, 0, INVALID_ADDRESS, 0, 0 };
 static const PGXP_value PGXP_value_zero = { 0.f, 0.f, 0.f, 0, 0, VALID_ALL, 0, 0, 0 };
 
-void MakeValid(PGXP_value *pV, u32 psxV);
-void Validate(PGXP_value *pV, u32 psxV);
-void MaskValidate(PGXP_value *pV, u32 psxV, u32 mask, u32 validMask);
+void	SetValue(PGXP_value *pV, u32 psxV);
+void	MakeValid(PGXP_value *pV, u32 psxV);
+void	Validate(PGXP_value *pV, u32 psxV);
+void	MaskValidate(PGXP_value *pV, u32 psxV, u32 mask, u32 validMask);
+u32		ValueToTolerance(PGXP_value *pV, u32 psxV, float tolerance);
 
+double f16Sign(double in);
+double f16Unsign(double in);
+double fu16Trunc(double in);
+double f16Overflow(double in);
 
 typedef union
 {

@@ -139,7 +139,7 @@ void ValidateAndCopyMem(PGXP_value* dest, u32 addr, u32 value)
 	*dest = PGXP_value_invalid_address;
 }
 
-void ValidateAndCopyMem16(PGXP_value* dest, u32 addr, u32 value)
+void ValidateAndCopyMem16(PGXP_value* dest, u32 addr, u32 value, int sign)
 {
 	u32 validMask = 0;
 	psx_value val, mask;
@@ -174,7 +174,7 @@ void ValidateAndCopyMem16(PGXP_value* dest, u32 addr, u32 value)
 		}
 
 		// truncate value
-		dest->y = 0.f;
+		dest->y = (dest->x < 0) ? -1.f * sign : 0.f;// 0.f;
 		dest->hFlags = 0;
 		dest->value = value;
 		dest->compFlags[1] = VALID;	// iCB: High word is valid, just 0
@@ -215,6 +215,14 @@ void WriteMem16(PGXP_value* src, u32 addr)
 			dest->compFlags[0] = src->compFlags[0];
 			pVal->w.l = (u16)src->value;
 		}
+
+		// overwrite z/w if valid
+		if (src->compFlags[2] == VALID)
+		{
+			dest->z = src->z;
+			dest->compFlags[2] = src->compFlags[2];
+		}
+
 
 		//dest->valid = dest->valid && src->valid;
 		dest->gFlags |= src->gFlags;				// inherit flags from both values (?)

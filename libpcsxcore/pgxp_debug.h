@@ -30,7 +30,13 @@
 
 #include "psxcommon.h"
 
-#define PGXP_CPU_DEBUG
+//#define PGXP_CPU_DEBUG
+//#define PGXP_OUTPUT_ALL
+//#define PGXP_FORCE_INPUT_VALUES
+//#define PGXP_TEST_OUTPUT_VALUES
+
+#define PGXP_DEBUG_TOLERANCE 2.f
+
 
 // Debug wrappers
 void	PGXP_psxTraceOp(u32 eOp, u32 code);
