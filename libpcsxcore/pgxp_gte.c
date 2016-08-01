@@ -177,8 +177,11 @@ void PGXP_RTPS(u32 _n, u32 _v)
 	return;
 }
 
-int PGXP_NLCIP_valid()
+int PGXP_NLCIP_valid(u32 sxy0, u32 sxy1, u32 sxy2)
 {
+	Validate(&SXY0, sxy0);
+	Validate(&SXY1, sxy1);
+	Validate(&SXY2, sxy2);
 	if (((SXY0.flags & SXY1.flags & SXY2.flags & VALID_01) == VALID_01) && Config.PGXP_GTE && (Config.PGXP_Mode > 0))
 		return 1;
 	return 0;
@@ -189,7 +192,8 @@ float PGXP_NCLIP()
 	float nclip = ((SX0 * SY1) + (SX1 * SY2) + (SX2 * SY0) - (SX0 * SY2) - (SX1 * SY0) - (SX2 * SY1));
 
 	// ensure fractional values are not incorrectly rounded to 0
-	if ((fabs(nclip) < 1.0f) && (nclip != 0))
+	float nclipAbs = fabs(nclip);
+	if (( 0.1f < nclipAbs) && (nclipAbs < 1.f))
 		nclip += (nclip < 0.f ? -1 : 1);
 
 	//float AX = SX1 - SX0;
