@@ -69,7 +69,7 @@ static void(**pPsxCP2BSC)() = psxCP2BSC;
 
 
 static void intReset();
-void intSetPGXPMode(u32 pgxpMode)
+static void intSetPGXPMode(u32 pgxpMode)
 {
 	switch (pgxpMode)
 	{

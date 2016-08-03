@@ -347,7 +347,6 @@ void psxDelayTest(int reg, u32 bpc);
 void psxTestSWInts();
 void psxJumpTest();
 
-void intSetPGXPMode(u32 pgxpMode);
 void psxSetPGXPMode(u32 pgxpMode);
 
 #ifdef __cplusplus

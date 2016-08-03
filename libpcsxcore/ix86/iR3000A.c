@@ -98,7 +98,7 @@ static void(**pRecCP2BSC)() = recCP2BSC;
 
 
 static void recReset();
-void recSetPGXPMode(u32 pgxpMode)
+static void recSetPGXPMode(u32 pgxpMode)
 {
 	switch(pgxpMode)
 	{
@@ -129,7 +129,7 @@ void recSetPGXPMode(u32 pgxpMode)
 	}
 
 	// set interpreter mode too
-	intSetPGXPMode(pgxpMode);
+	psxInt.SetPGXPMode(pgxpMode);
 	// reset to ensure new func tables are used
 	recReset();
 }
