@@ -6,7 +6,7 @@
 // PGXP wrapper functions
 /////////////////////////////////////////////
 
-pgxpPsxNULL() {}
+void pgxpPsxNULL() {}
 
 #define psxMTC2 gteMTC2
 #define psxCTC2 gteCTC2

@@ -223,6 +223,10 @@
 		6F5FF71B1CE4D3B2005D8636 /* pgxp_gpu.h in Sources */ = {isa = PBXBuildFile; fileRef = 6F5FF7181CE4D1D5005D8636 /* pgxp_gpu.h */; };
 		6F5FF71E1CE4D791005D8636 /* cfg.c in Sources */ = {isa = PBXBuildFile; fileRef = 6F5FF71C1CE4D791005D8636 /* cfg.c */; };
 		6F5FF7211CE4DE68005D8636 /* pgxp_gte.c in Sources */ = {isa = PBXBuildFile; fileRef = 6F5FF71F1CE4DE68005D8636 /* pgxp_gte.c */; };
+		6FAC15EB1D4CCA6C0028E89C /* pgxp_value.c in Sources */ = {isa = PBXBuildFile; fileRef = 6FAC15E91D4CCA6C0028E89C /* pgxp_value.c */; };
+		6FDBDA711D0DB58300313918 /* pgxp_cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 6FDBDA6A1D0DB58300313918 /* pgxp_cpu.c */; };
+		6FDBDA721D0DB58300313918 /* pgxp_debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 6FDBDA6C1D0DB58300313918 /* pgxp_debug.c */; };
+		6FDBDA731D0DB58300313918 /* pgxp_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 6FDBDA6E1D0DB58300313918 /* pgxp_mem.c */; };
 		712FD1E81093096F00575A92 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E51093096F00575A92 /* debug.c */; };
 		712FD1E91093096F00575A92 /* socket.c in Sources */ = {isa = PBXBuildFile; fileRef = 712FD1E61093096F00575A92 /* socket.c */; };
 		713B530E110B75650002F164 /* ppf.c in Sources */ = {isa = PBXBuildFile; fileRef = 713B530C110B75650002F164 /* ppf.c */; };
@@ -813,12 +817,26 @@
 		55EE2D9017E2323400FED42A /* ecm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ecm.h; sourceTree = "<group>"; };
 		55F41A2017EF774500605DF8 /* version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = version.sh; sourceTree = "<group>"; };
 		55F41A2117EF7A3300605DF8 /* Info.plistvers.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plistvers.plist; path = ../Info.plistvers.plist; sourceTree = "<group>"; };
+		6F4B24AB1D54D67E000B7071 /* iPGXP-64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iPGXP-64.h"; sourceTree = "<group>"; };
 		6F5FF7171CE4D1D5005D8636 /* pgxp_gpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pgxp_gpu.c; sourceTree = "<group>"; };
 		6F5FF7181CE4D1D5005D8636 /* pgxp_gpu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pgxp_gpu.h; sourceTree = "<group>"; };
 		6F5FF71C1CE4D791005D8636 /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cfg.c; sourceTree = "<group>"; };
 		6F5FF71D1CE4D791005D8636 /* cfg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cfg.h; sourceTree = "<group>"; };
 		6F5FF71F1CE4DE68005D8636 /* pgxp_gte.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pgxp_gte.c; sourceTree = "<group>"; };
 		6F5FF7201CE4DE68005D8636 /* pgxp_gte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pgxp_gte.h; sourceTree = "<group>"; };
+		6FAC15E91D4CCA6C0028E89C /* pgxp_value.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pgxp_value.c; sourceTree = "<group>"; };
+		6FAC15EA1D4CCA6C0028E89C /* psxinterpreter_pgxp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psxinterpreter_pgxp.h; sourceTree = "<group>"; };
+		6FAC15EC1D4CCAC00028E89C /* pgxp_value.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pgxp_value.c; sourceTree = "<group>"; };
+		6FDBDA6A1D0DB58300313918 /* pgxp_cpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pgxp_cpu.c; sourceTree = "<group>"; };
+		6FDBDA6B1D0DB58300313918 /* pgxp_cpu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pgxp_cpu.h; sourceTree = "<group>"; };
+		6FDBDA6C1D0DB58300313918 /* pgxp_debug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pgxp_debug.c; sourceTree = "<group>"; };
+		6FDBDA6D1D0DB58300313918 /* pgxp_debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pgxp_debug.h; sourceTree = "<group>"; };
+		6FDBDA6E1D0DB58300313918 /* pgxp_mem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pgxp_mem.c; sourceTree = "<group>"; };
+		6FDBDA6F1D0DB58300313918 /* pgxp_mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pgxp_mem.h; sourceTree = "<group>"; };
+		6FDBDA701D0DB58300313918 /* pgxp_value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pgxp_value.h; sourceTree = "<group>"; };
+		6FDBDA741D0DB63800313918 /* pgxp_cpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pgxp_cpu.c; sourceTree = "<group>"; };
+		6FDBDA751D0DB63800313918 /* pgxp_debug.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pgxp_debug.c; sourceTree = "<group>"; };
+		6FDBDA761D0DB63800313918 /* pgxp_mem.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pgxp_mem.c; sourceTree = "<group>"; };
 		712FD1E51093096F00575A92 /* debug.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = debug.c; sourceTree = "<group>"; };
 		712FD1E61093096F00575A92 /* socket.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = socket.c; sourceTree = "<group>"; };
 		712FD1E71093096F00575A92 /* socket.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
@@ -1101,6 +1119,19 @@
 		2BCE23B204C6B52C007C2DA3 /* libpcsxcore */ = {
 			isa = PBXGroup;
 			children = (
+				6FAC15EC1D4CCAC00028E89C /* pgxp_value.c */,
+				6FDBDA741D0DB63800313918 /* pgxp_cpu.c */,
+				6FDBDA751D0DB63800313918 /* pgxp_debug.c */,
+				6FDBDA761D0DB63800313918 /* pgxp_mem.c */,
+				6FAC15E91D4CCA6C0028E89C /* pgxp_value.c */,
+				6FAC15EA1D4CCA6C0028E89C /* psxinterpreter_pgxp.h */,
+				6FDBDA6A1D0DB58300313918 /* pgxp_cpu.c */,
+				6FDBDA6B1D0DB58300313918 /* pgxp_cpu.h */,
+				6FDBDA6C1D0DB58300313918 /* pgxp_debug.c */,
+				6FDBDA6D1D0DB58300313918 /* pgxp_debug.h */,
+				6FDBDA6E1D0DB58300313918 /* pgxp_mem.c */,
+				6FDBDA6F1D0DB58300313918 /* pgxp_mem.h */,
+				6FDBDA701D0DB58300313918 /* pgxp_value.h */,
 				6F5FF71F1CE4DE68005D8636 /* pgxp_gte.c */,
 				6F5FF7201CE4DE68005D8636 /* pgxp_gte.h */,
 				559366BF12B694DF004ACC1E /* ix86_64 */,
@@ -1757,6 +1788,7 @@
 		559366BF12B694DF004ACC1E /* ix86_64 */ = {
 			isa = PBXGroup;
 			children = (
+				6F4B24AB1D54D67E000B7071 /* iPGXP-64.h */,
 				559366C012B694DF004ACC1E /* iGte.h */,
 				559366C112B694DF004ACC1E /* iR3000A-64.c */,
 				559366C212B694DF004ACC1E /* ix86-64.c */,
@@ -2263,6 +2295,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FAC15EB1D4CCA6C0028E89C /* pgxp_value.c in Sources */,
+				6FDBDA711D0DB58300313918 /* pgxp_cpu.c in Sources */,
+				6FDBDA721D0DB58300313918 /* pgxp_debug.c in Sources */,
+				6FDBDA731D0DB58300313918 /* pgxp_mem.c in Sources */,
 				2BB3D6BE05427FE200831ACB /* main.m in Sources */,
 				6F5FF7211CE4DE68005D8636 /* pgxp_gte.c in Sources */,
 				6F5FF7191CE4D1D5005D8636 /* pgxp_gpu.c in Sources */,
