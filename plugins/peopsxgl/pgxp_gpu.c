@@ -175,11 +175,86 @@ PGXP_vertex* PGXP_GetCachedVertex(short sx, short sy)
 //// PGXP Implementation
 /////////////////////////////////
 
+const unsigned char primSizeTable[256] =
+{
+    // 00
+    0,0,3,0,0,0,0,0,
+    // 08
+    0,0,0,0,0,0,0,0,
+    // 10
+    0,0,0,0,0,0,0,0,
+    // 18
+    0,0,0,0,0,0,0,0,
+    // 20
+    4,4,4,4,7,7,7,7,
+    // 28
+    5,5,5,5,9,9,9,9,
+    // 30
+    6,6,6,6,9,9,9,9,
+    // 38
+    8,8,8,8,12,12,12,12,
+    // 40
+    3,3,3,3,0,0,0,0,
+    // 48
+//    5,5,5,5,6,6,6,6,      //FLINE
+    254,254,254,254,254,254,254,254,
+    // 50
+    4,4,4,4,0,0,0,0,
+    // 58
+//    7,7,7,7,9,9,9,9,    //    LINEG3    LINEG4
+    255,255,255,255,255,255,255,255,
+    // 60
+    3,3,3,3,4,4,4,4,    //    TILE    SPRT
+    // 68
+    2,2,2,2,3,3,3,3,    //    TILE1
+    // 70
+    2,2,2,2,3,3,3,3,
+    // 78
+    2,2,2,2,3,3,3,3,
+    // 80
+    4,0,0,0,0,0,0,0,
+    // 88
+    0,0,0,0,0,0,0,0,
+    // 90
+    0,0,0,0,0,0,0,0,
+    // 98
+    0,0,0,0,0,0,0,0,
+    // a0
+    3,0,0,0,0,0,0,0,
+    // a8
+    0,0,0,0,0,0,0,0,
+    // b0
+    0,0,0,0,0,0,0,0,
+    // b8
+    0,0,0,0,0,0,0,0,
+    // c0
+    3,0,0,0,0,0,0,0,
+    // c8
+    0,0,0,0,0,0,0,0,
+    // d0
+    0,0,0,0,0,0,0,0,
+    // d8
+    0,0,0,0,0,0,0,0,
+    // e0
+    0,1,1,1,1,1,1,0,
+    // e8
+    0,0,0,0,0,0,0,0,
+    // f0
+    0,0,0,0,0,0,0,0,
+    // f8
+    0,0,0,0,0,0,0,0
+};
+
 const unsigned int primStrideTable[] = { 1, 2, 1, 2, 2, 3, 2, 3, 0 };
 const unsigned int primCountTable[] = { 3, 3, 4, 4, 3, 3, 4, 4, 0 };
 
 PGXP_vertex*	PGXP_Mem = NULL;	// pointer to parallel memory
 unsigned int	currentAddr = 0;	// address of current DMA
+uint32_t*		pDMABlock = NULL;
+int				blockSize = 0;
+
+unsigned int	currentDepth = 0;
+static float minZ = 0xffffffff, maxZ = 0.f;
 
 unsigned int	numVertices = 0;	// iCB: Used for glVertex3fv fix
 unsigned int	vertexIdx = 0;
@@ -192,9 +267,17 @@ void CALLBACK GPUpgxpMemory(unsigned int addr, unsigned char* pVRAM)
 }
 
 // Set current DMA address
-void PGXP_SetAddress(unsigned int addr)
+void PGXP_SetAddress(unsigned int addr, uint32_t *baseAddrL, int size)
 {
 	currentAddr = addr;
+	pDMABlock = baseAddrL;
+	blockSize = size;
+}
+
+void PGXP_SetDepth(unsigned int addr)
+{
+	currentDepth = addr/* & 0xFFFF*/;
+	maxZ = (currentDepth > maxZ) ? currentDepth : maxZ;
 }
 
 void PGXP_SetMatrix(float left, float right, float bottom, float top, float zNear, float zFar)
@@ -274,6 +357,27 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 	short*			pPrimData	= ((short*)addr) + 2;				// primitive data for cache lookups
 	PGXP_vertex*	pCacheVert	= NULL;
 
+	// calculate offset to actual data
+	int offset = 0;
+	while ((pDMABlock[offset] != *addr) && (offset < blockSize))
+	{
+		unsigned char command = (unsigned char)((pDMABlock[offset] >> 24) & 0xff);
+		unsigned int primSize = primSizeTable[command];
+
+		if (primSize == 0)
+		{
+			offset++;
+			continue;
+		}
+		else if (primSize > 128)
+		{
+			while (((pDMABlock[offset] & 0xF000F000) != 0x50005000) && (offset < blockSize))
+				++offset;
+		}
+		else
+			offset += primSize;
+	}
+
 	// Reset vertex count
 	numVertices = count;
 	vertexIdx = 0;
@@ -282,7 +386,7 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 	if (PGXP_Mem != NULL)
 	{
 		// Offset to start of primitive
-		primStart = &PGXP_Mem[currentAddr + 1];
+		primStart = &PGXP_Mem[currentAddr + offset + 1];
 
 		// Find any invalid vertices
 		for (unsigned i = 0; i < count; ++i)
@@ -298,8 +402,16 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 	{
 		if (primStart && ((primStart[stride * i].flags & VALID_01) == VALID_01) && (primStart[stride * i].value == *(unsigned int*)(&pPrimData[stride * i * 2])))
 		{
-			pVertex[i].x = (primStart[stride * i].x + xOffs);
-			pVertex[i].y = (primStart[stride * i].y + yOffs);
+			// clear upper 4 bits
+			float x = primStart[stride * i].x *(1 << 16);
+			float y = primStart[stride * i].y *(1 << 16);
+			x = (float)(((int)x << 4) >> 4);
+			y = (float)(((int)y << 4) >> 4);
+			x /= (1 << 16);
+			y /= (1 << 16);
+
+			pVertex[i].x = x + xOffs;
+			pVertex[i].y = y + yOffs;
 			pVertex[i].z = 0.95f;
 			pVertex[i].w = primStart[stride * i].z;
 			pVertex[i].PGXP_flag = 1;
@@ -314,7 +426,7 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 			//if (PGXP_tDebug && 
 			//	(fabs((float)pPrimData[stride * i * 2] - primStart[stride * i].x) > debug_tolerance) ||
 			//	(fabs((float)pPrimData[(stride * i * 2) + 1] - primStart[stride * i].y) > debug_tolerance))
-			//	__Log("GPPV: v:%x (%d, %d) pgxp(%f, %f)|\n", (currentAddr + 1 + (i * stride)) * 4, pPrimData[stride * i * 2], pPrimData[(stride * i * 2) + 1], primStart[stride * i].x, primStart[stride * i].y);
+			//	__Log("GPPV: v:%x (%d, %d) pgxp(%f, %f)|\n", (currentAddr + offset + 1 + (i * stride)) * 4, pPrimData[stride * i * 2], pPrimData[(stride * i * 2) + 1], primStart[stride * i].x, primStart[stride * i].y);
 		}
 		else
 		{
@@ -347,7 +459,7 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 
 			// Log unprocessed vertices
 			//if(PGXP_tDebug)
-			//	__Log("GPPV: v:%x (%d, %d)|\n", (currentAddr + 1 + (i * stride))*4, pPrimData[stride * i * 2], pPrimData[(stride * i * 2) + 1]);
+			//	__Log("GPPV: v:%x (%d, %d)|\n", (currentAddr + offset + 1 + (i * stride))*4, pPrimData[stride * i * 2], pPrimData[(stride * i * 2) + 1]);
 		}
 	}
 
@@ -357,9 +469,9 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 		for (unsigned i = 0; i < count; ++i)
 			pVertex[i].w = 1;
 
-	if(PGXP_vDebug == 3)
+	if(PGXP_vDebug == 4)
 		for (unsigned i = 0; i < count; ++i)
-			pVertex[i].PGXP_flag = primIdx;
+			pVertex[i].PGXP_flag = primIdx + 10;
 
 	return 1;
 }
@@ -381,6 +493,7 @@ const char cyan[4]		= { 0, 255, 255, 255 };
 const char orange[4]	= { 255, 128 ,0 ,255 };
 
 const char black[4]		= { 0, 0, 0, 255 };
+const char mid_grey[4]	= { 128, 128, 128, 255 };
 
 
 //void CALLBACK GPUtoggleDebug(void)
@@ -396,10 +509,67 @@ void CALLBACK GPUtoggleDebug(void)
 		PGXP_vDebug = 0;
 }
 
-void PGXP_colour(OGLVertex* vertex)
+void ColourFromRange(float val, float min, float max, GLubyte alpha, int wrap)
+{
+	float r=0.f, g=0.f, b=0.f;
+
+	// normalise input
+	val = val - min;
+	val /= (max - min);
+	val *= 4.f;
+
+	if (wrap)
+		val = fmod(val, 1);
+
+	if (0 <= val && val<= 1.f / 8.f) 
+	{
+		r = 0;
+		g = 0;
+		b = 4 * val + .5; // .5 - 1 // b = 1/2
+	}
+	else if (1.f / 8.f < val && val <= 3.f / 8.f)
+	{
+		r = 0;
+		g = 4 * val - .5; // 0 - 1 // b = - 1/2
+		b = 1; // small fix
+	}
+	else if (3.f / 8.f < val && val <= 5.f / 8.f)
+	{
+		r = 4 * val - 1.5; // 0 - 1 // b = - 3/2
+		g = 1;
+		b = -4 * val + 2.5; // 1 - 0 // b = 5/2
+	}
+	else if (5.f / 8.f < val && val <= 7.f / 8.f)
+	{
+		r = 1;
+		g = -4 * val + 3.5; // 1 - 0 // b = 7/2
+		b = 0;
+	}
+	else if (7.f / 8.f < val && val <= 1.f)
+	{
+		r = -4 * val + 4.5; // 1 - .5 // b = 9/2
+		g = 0;
+		b = 0;
+	}
+	else
+	{    // should never happen - value > 1
+		r = .5;
+		g = 0;
+		b = 0;
+	}
+
+	glColor4f(r, g, b, (float)alpha/255.f);
+}
+
+void PGXP_colour(OGLVertex* vertex, GLubyte alpha)
 {
 	const char* pColour;
 	float fDepth;
+	static float minW = 0xffffffff, maxW = 0.f;
+
+
+	PGXP_vertex* pVal = NULL;
+
 
 	switch (PGXP_vDebug)
 	{
@@ -426,19 +596,22 @@ void PGXP_colour(OGLVertex* vertex)
 			pColour = cyan;
 			break;
 		default:
-			pColour = black;
+			pColour = mid_grey;
 			break;
 		}
-		glColor4ubv(pColour);
+		glColor4ub(pColour[0], pColour[1], pColour[2], alpha);
 		break;
 	case 2:
 		// W component visualisation
-		fDepth = vertex->w / (float)(0xFFFF);
-		glColor4f(fDepth, fDepth, fDepth, 1.f);
+		ColourFromRange(vertex->w, 0, 0xFFFF, alpha, 0);
 		break;
 	case 3:
+		// draw order visualisation
+		ColourFromRange(maxZ - currentDepth, 0, maxZ * 5, alpha, 0);// 1024 * 16);
+		break;
+	case 4:
 		// Primitive type
-		switch (vertex->PGXP_flag)
+		switch (vertex->PGXP_flag - 10)
 		{
 		case 0:
 			pColour = yellow;
@@ -464,7 +637,7 @@ void PGXP_colour(OGLVertex* vertex)
 			pColour = black;
 			break;
 		}
-		glColor4ubv(pColour);
+		glColor4ub(pColour[0], pColour[1], pColour[2], alpha);
 		break;
 	}
 }
@@ -472,8 +645,10 @@ void PGXP_colour(OGLVertex* vertex)
 int PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4)
 {
 	GLboolean	bTexture = glIsEnabled(GL_TEXTURE_2D);
+	GLboolean	bBlend = glIsEnabled(GL_BLEND);
 	GLfloat		fColour[4];
 	GLint		iShadeModel;
+	GLubyte		alpha = 255;
 
 	//if ((vertex1->PGXP_flag == 0) ||
 	//	(vertex2->PGXP_flag == 0) ||
@@ -488,6 +663,13 @@ int PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* ver
 		(vertex4->PGXP_flag == 5))
 		return 1;
 
+	if (bBlend == GL_TRUE)
+	{
+		alpha = 128;
+	//	glDisable(GL_BLEND);
+	//	return 1;
+	}
+
 	glGetIntegerv(GL_SHADE_MODEL, &iShadeModel);
 	glGetFloatv(GL_CURRENT_COLOR, fColour);
 
@@ -496,19 +678,23 @@ int PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* ver
 
 	glBegin(GL_TRIANGLE_STRIP);
 
-	PGXP_colour(vertex1);
+	PGXP_colour(vertex1, alpha);
 	PGXP_glVertexfv(&vertex1->x);
 
-	PGXP_colour(vertex2);
+	PGXP_colour(vertex2, alpha);
 	PGXP_glVertexfv(&vertex2->x);
 
-	PGXP_colour(vertex3);
+	PGXP_colour(vertex3, alpha);
 	PGXP_glVertexfv(&vertex3->x);
 
-	PGXP_colour(vertex4);
+	PGXP_colour(vertex4, alpha);
 	PGXP_glVertexfv(&vertex4->x);
 
 	glEnd();
+
+
+	if (bBlend == GL_TRUE)
+		glDisable(GL_BLEND);
 
 	glPolygonMode(GL_FRONT, GL_LINE);
 	glPolygonMode(GL_BACK, GL_LINE);
@@ -531,6 +717,9 @@ int PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* ver
 	if(bTexture == GL_TRUE)
 		glEnable(GL_TEXTURE_2D);
 
+	if (bBlend == GL_TRUE)
+		glEnable(GL_BLEND);
+
 	glShadeModel(iShadeModel);
 
 	return 1;
@@ -538,9 +727,11 @@ int PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* ver
 
 int PGXP_DrawDebugTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3)
 {
-	GLboolean	bTexture = glIsEnabled(GL_TEXTURE_2D);
+	GLboolean	bTexture	= glIsEnabled(GL_TEXTURE_2D);
+	GLboolean	bBlend		= glIsEnabled(GL_BLEND);
 	GLfloat		fColour[4];
 	GLint		iShadeModel;
+	GLubyte		alpha = 255;
 
 
 	//if ((vertex1->PGXP_flag == 0) ||
@@ -555,6 +746,13 @@ int PGXP_DrawDebugTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3
 		(vertex3->PGXP_flag == 5))
 		return 1;
 
+	if (bBlend == GL_TRUE)
+	{
+		alpha = 128;
+		//	glDisable(GL_BLEND);
+		//	return 1;
+	}
+
 	glGetIntegerv(GL_SHADE_MODEL, &iShadeModel);
 	glGetFloatv(GL_CURRENT_COLOR, fColour);
 
@@ -563,16 +761,19 @@ int PGXP_DrawDebugTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3
 
 	glBegin(GL_TRIANGLES);
 
-	PGXP_colour(vertex1);
+	PGXP_colour(vertex1, alpha);
 	PGXP_glVertexfv(&vertex1->x);
 
-	PGXP_colour(vertex2);
+	PGXP_colour(vertex2, alpha);
 	PGXP_glVertexfv(&vertex2->x);
 
-	PGXP_colour(vertex3);
+	PGXP_colour(vertex3, alpha);
 	PGXP_glVertexfv(&vertex3->x);
 
 	glEnd();
+
+	if (bBlend == GL_TRUE)
+		glDisable(GL_BLEND);
 
 	glPolygonMode(GL_FRONT, GL_LINE);
 	glPolygonMode(GL_BACK, GL_LINE);
@@ -594,6 +795,9 @@ int PGXP_DrawDebugTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3
 	if (bTexture == GL_TRUE)
 		glEnable(GL_TEXTURE_2D);
 
+	if (bBlend == GL_TRUE)
+		glEnable(GL_BLEND);
+
 	glShadeModel(iShadeModel);
 
 	return 1;
@@ -602,8 +806,10 @@ int PGXP_DrawDebugTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3
 int PGXP_DrawDebugQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4)
 {
 	GLboolean	bTexture = glIsEnabled(GL_TEXTURE_2D);
+	GLboolean	bBlend = glIsEnabled(GL_BLEND);
 	GLfloat		fColour[4];
 	GLint		iShadeModel;
+	GLubyte		alpha = 255;
 
 
 	//if ((vertex1->PGXP_flag == 0) ||
@@ -620,6 +826,13 @@ int PGXP_DrawDebugQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex
 		(vertex4->PGXP_flag == 5))
 		return 1;
 
+	if (bBlend == GL_TRUE)
+	{
+		alpha = 128;
+		//	glDisable(GL_BLEND);
+		//	return 1;
+	}
+
 	glGetIntegerv(GL_SHADE_MODEL, &iShadeModel);
 	glGetFloatv(GL_CURRENT_COLOR, fColour);
 
@@ -628,22 +841,25 @@ int PGXP_DrawDebugQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex
 
 	glBegin(GL_QUADS);
 
-	PGXP_colour(vertex1);
+	PGXP_colour(vertex1, alpha);
 	PGXP_glVertexfv(&vertex1->x);
 
-	PGXP_colour(vertex2);
+	PGXP_colour(vertex2, alpha);
 	PGXP_glVertexfv(&vertex2->x);
 
-	PGXP_colour(vertex3);
+	PGXP_colour(vertex3, alpha);
 	PGXP_glVertexfv(&vertex3->x);
 
-	PGXP_colour(vertex4);
+	PGXP_colour(vertex4, alpha);
 	PGXP_glVertexfv(&vertex4->x);
 
 	glEnd();
 
 	glPolygonMode(GL_FRONT, GL_LINE);
 	glPolygonMode(GL_BACK, GL_LINE);
+
+	if (bBlend == GL_TRUE)
+		glDisable(GL_BLEND);
 
 	glBegin(GL_TRIANGLE_STRIP);
 
@@ -662,6 +878,9 @@ int PGXP_DrawDebugQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex
 
 	if (bTexture == GL_TRUE)
 		glEnable(GL_TEXTURE_2D);
+
+	if (bBlend == GL_TRUE)
+		glEnable(GL_BLEND);
 
 	glShadeModel(iShadeModel);
 

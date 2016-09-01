@@ -716,7 +716,7 @@ long CALLBACK GPUopen(HWND hwndGPU)
  InitializeTextureStore();                             // init texture mem
 
  resetGteVertices();
- 
+
 // lGPUstatusRet = 0x74000000;
 
 // with some emus, we could do the OGL init right here... oh my
@@ -3138,6 +3138,7 @@ long CALLBACK GPUdmaChain(uint32_t *baseAddrL, uint32_t addr)
 
  baseAddrB = (unsigned char*) baseAddrL;
 
+ uint32_t depthCount = 0;
  do
   {
    if(iGPUHeight==512) addr&=0x1FFFFC;
@@ -3151,9 +3152,11 @@ long CALLBACK GPUdmaChain(uint32_t *baseAddrL, uint32_t addr)
 
    if (count > 0)
    {
-	   PGXP_SetAddress(dmaMem >> 2);
+	   PGXP_SetAddress(dmaMem >> 2, &baseAddrL[dmaMem >> 2], count);
 	   GPUwriteDataMem(&baseAddrL[dmaMem >> 2], count);
    }
+   else
+	   PGXP_SetDepth(depthCount++);
 
    addr = baseAddrL[addr>>2]&0xffffff;
   }

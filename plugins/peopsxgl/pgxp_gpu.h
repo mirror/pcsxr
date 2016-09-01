@@ -36,7 +36,8 @@ struct OGLVertexTag;
 typedef struct OGLVertexTag OGLVertex;
 
 void	PGXP_SetMatrix(float left, float right, float bottom, float top, float zNear, float zFar);
-void	PGXP_SetAddress(unsigned int addr);
+void	PGXP_SetAddress(unsigned int addr, uint32_t *baseAddrL, int size);
+void	PGXP_SetDepth(unsigned int addr);
 int		PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs);
 void	PGXP_glVertexfv(GLfloat* pVertex);
 
