@@ -286,7 +286,7 @@ void gteSWC2() {
 	psxMemWrite32(_oB_, val);
 }
 
-inline s64 gte_shift(s64 a, int sf) {
+static inline s64 gte_shift(s64 a, int sf) {
 	if(sf > 0)
 		return a >> 12;
 	else if(sf < 0)
