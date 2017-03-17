@@ -58,6 +58,17 @@ typedef struct
 #define VALID_ALL  (VALID_0 | VALID_1 | VALID_2 | VALID_3)
 #define INV_VALID_ALL  (ALL ^ VALID_ALL)
 
+enum PGXP_source
+{
+	SRC_2D = 0,
+	SRC_PGXP,
+	SRC_PGXP_NO_W,
+	SRC_NATIVE,
+	SRC_CACHE,
+	SRC_CACHE_AMBIGUOUS,
+	SRC_UNKNOWN
+};
+
 
 unsigned int PGXP_tDebug = 0;
 /////////////////////////////////
@@ -87,6 +98,26 @@ unsigned int IsSessionID(unsigned int vertID)
 	// vertID is < baseID, If it is <= lastID it is post-wrap and in session
 	if (vertID <= lastID)
 		return 1;
+
+	return 0;
+}
+
+unsigned int GetSessionIndex(unsigned int vertID)
+{
+	if (!IsSessionID(vertID))
+		return 0;
+
+	// No wrapping
+	if (lastID >= baseID)
+		return (vertID - baseID);
+
+	// If vertID is >= baseID it is pre-wrap and in session
+	if (vertID >= baseID)
+		return (vertID - baseID);
+
+	// vertID is < baseID, If it is <= lastID it is post-wrap and in session
+	if (vertID <= lastID)
+		return vertID + (0xFFFFFFFF - baseID);
 
 	return 0;
 }
@@ -414,11 +445,12 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 			pVertex[i].y = y + yOffs;
 			pVertex[i].z = 0.95f;
 			pVertex[i].w = primStart[stride * i].z;
-			pVertex[i].PGXP_flag = 1;
+			pVertex[i].PGXP_flag = SRC_PGXP;
+			pVertex[i].Vert_ID = primStart[stride * i].count;
 
 			if ((primStart[stride * i].flags & VALID_2) != VALID_2)
 			{
-				pVertex[i].PGXP_flag = 6;
+				pVertex[i].PGXP_flag = SRC_PGXP_NO_W;
 		//		__Log("GPPV No W: v:%x (%d, %d) pgxp(%f, %f)|\n", (currentAddr + 1 + (i * stride)) * 4, pPrimData[stride * i * 2], pPrimData[(stride * i * 2) + 1], primStart[stride * i].x, primStart[stride * i].y);
 			}
 
@@ -434,7 +466,7 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 			//if (primStart  && ((primStart[stride * i].flags & VALID_01) == VALID_01) && primStart[stride * i].value != *(unsigned int*)(&pPrimData[stride * i * 2]))
 			//	pVertex[i].PGXP_flag = 6;
 			//else
-				pVertex[i].PGXP_flag = 2;
+				pVertex[i].PGXP_flag = SRC_NATIVE;
 
 			// Look in cache for valid vertex
 			pCacheVert = PGXP_GetCachedVertex(pPrimData[stride * i * 2], pPrimData[(stride * i * 2) + 1]);
@@ -448,12 +480,13 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 						pVertex[i].y = (pCacheVert->y + yOffs);
 						pVertex[i].z = 0.95f;
 						pVertex[i].w = pCacheVert->z;
-						pVertex[i].PGXP_flag = 3;
+						pVertex[i].PGXP_flag = SRC_CACHE;
+						pVertex[i].Vert_ID = pCacheVert->count;
 						// reduce number of invalid vertices
 						invalidVert--;
 					}
 					else if(pCacheVert->mFlags > 1)
-						pVertex[i].PGXP_flag = 4;
+						pVertex[i].PGXP_flag = SRC_CACHE_AMBIGUOUS;
 				}
 			}
 
@@ -469,9 +502,9 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 		for (unsigned i = 0; i < count; ++i)
 			pVertex[i].w = 1;
 
-	if(PGXP_vDebug == 4)
-		for (unsigned i = 0; i < count; ++i)
-			pVertex[i].PGXP_flag = primIdx + 10;
+	//if(PGXP_vDebug == 5)
+	//	for (unsigned i = 0; i < count; ++i)
+	//		pVertex[i].PGXP_flag = primIdx + 10;
 
 	return 1;
 }
@@ -480,7 +513,21 @@ int PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs)
 //// Visual Debugging Functions
 /////////////////////////////////
 unsigned int		PGXP_vDebug = 0;
-const unsigned int	PGXP_maxDebug = 4;
+
+enum PGXP_vDebugMode
+{
+	vDEBUG_NONE = 0,
+	vDEBUG_SOURCE,
+	vDEBUG_W,
+	vDEBUG_OTZ,
+	vDEBUG_COLOUR,
+	vDEBUG_PRIMTYPE,
+
+	vDEBUG_MAX,
+
+	vDEBUG_TEXCOORD,
+	vDEBUG_ID, 
+};
 
 const char red[4]		= { 255, 0, 0, 255 };
 const char blue[4]		= { 0, 0, 255, 255 };
@@ -505,8 +552,8 @@ void CALLBACK GPUtoggleDebug(void)
 {
 	PGXP_vDebug++;
 
-	if (PGXP_vDebug == PGXP_maxDebug)
-		PGXP_vDebug = 0;
+	if (PGXP_vDebug == vDEBUG_MAX)
+		PGXP_vDebug = vDEBUG_NONE;
 }
 
 void ColourFromRange(float val, float min, float max, GLubyte alpha, int wrap)
@@ -561,7 +608,7 @@ void ColourFromRange(float val, float min, float max, GLubyte alpha, int wrap)
 	glColor4f(r, g, b, (float)alpha/255.f);
 }
 
-void PGXP_colour(OGLVertex* vertex, GLubyte alpha)
+void PGXP_colour(OGLVertex* vertex, GLubyte alpha, int prim, int isTextured, int colourMode, unsigned char* flatColour)
 {
 	const char* pColour;
 	float fDepth;
@@ -573,27 +620,27 @@ void PGXP_colour(OGLVertex* vertex, GLubyte alpha)
 
 	switch (PGXP_vDebug)
 	{
-	case 1:
-		// Vertex origin mode
+	case vDEBUG_SOURCE:
+		// Vertex source mode
 		switch (vertex->PGXP_flag)
 		{
-		case 0:
+		case SRC_2D:
 			pColour = yellow;
 			break;
-		case 1:
+		case SRC_PGXP:
 			pColour = blue;
 			break;
-		case 2:
+		case SRC_PGXP_NO_W:
+			pColour = cyan;
+			break;
+		case SRC_NATIVE:
 			pColour = red;
 			break;
-		case 3:
+		case SRC_CACHE:
 			pColour = green;
 			break;
-		case 4:
+		case SRC_CACHE_AMBIGUOUS:
 			pColour = magenta;
-			break;
-		case 6:
-			pColour = cyan;
 			break;
 		default:
 			pColour = mid_grey;
@@ -601,48 +648,49 @@ void PGXP_colour(OGLVertex* vertex, GLubyte alpha)
 		}
 		glColor4ub(pColour[0], pColour[1], pColour[2], alpha);
 		break;
-	case 2:
+	case vDEBUG_W:
 		// W component visualisation
 		ColourFromRange(vertex->w, 0, 0xFFFF, alpha, 0);
 		break;
-	case 3:
-		// draw order visualisation
+	case vDEBUG_OTZ:
+		// order table position visualisation
 		ColourFromRange(maxZ - currentDepth, 0, maxZ * 5, alpha, 0);// 1024 * 16);
 		break;
-	case 4:
-		// Primitive type
-		switch (vertex->PGXP_flag - 10)
+	case vDEBUG_COLOUR:
+		// Vertex colour only
+		switch (colourMode)
 		{
-		case 0:
-			pColour = yellow;
+		case COLOUR_NONE:
+			glColor4ub(255, 255, 255, 255);
 			break;
-		case 1:
-			pColour = blue;
+		case COLOUR_FLAT:
+			glColor4ubv(flatColour);
 			break;
-		case 2:
-			pColour = red;
-			break;
-		case 3:
-			pColour = green;
-			break;
-		case 4:
-			pColour = magenta;
-			break;
-		case 6:
-			pColour = cyan;
-			break;
-		case 7:
-			pColour = orange;
-		default:
-			pColour = black;
+		case COLOUR_SMOOTH:
+			glColor4ubv(vertex->c.col);
 			break;
 		}
-		glColor4ub(pColour[0], pColour[1], pColour[2], alpha);
+		
 		break;
+	case vDEBUG_PRIMTYPE:
+		// Primitive type
+		glColor4ub((prim+1) * 64, (isTextured) * 255, colourMode * 64, alpha);
+		break;
+	case vDEBUG_TEXCOORD:
+		// texture coordinates
+		glColor4f(vertex->sow, vertex->tow, isTextured, alpha);
+		break;
+	case vDEBUG_ID:
+		// Vertex ID
+		ColourFromRange(GetSessionIndex(vertex->Vert_ID), 0, GetSessionIndex(lastID-1), alpha, 1);
 	}
 }
 
-int PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4)
+#define DRAW_QUAD		0
+#define DRAW_TRI		1
+#define DRAW_TRIQUAD	2
+
+int DrawDebugPrim(int prim, OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4, int colourMode, int isTextured)
 {
 	GLboolean	bTexture = glIsEnabled(GL_TEXTURE_2D);
 	GLboolean	bBlend = glIsEnabled(GL_BLEND);
@@ -657,16 +705,18 @@ int PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* ver
 	//	return 0;
 
 	// Quit if PGXP_flag == ignore
-	if ((vertex1->PGXP_flag == 5) ||
-		(vertex2->PGXP_flag == 5) ||
-		(vertex3->PGXP_flag == 5) ||
-		(vertex4->PGXP_flag == 5))
+	if ((vertex1->PGXP_flag >= SRC_UNKNOWN) ||
+		(vertex2->PGXP_flag >= SRC_UNKNOWN) ||
+		(vertex3->PGXP_flag >= SRC_UNKNOWN))
 		return 1;
 
 	if (bBlend == GL_TRUE)
 	{
-		alpha = 128;
-	//	glDisable(GL_BLEND);
+	//		alpha = 128;
+		glDisable(GL_BLEND);
+		glPolygonMode(GL_FRONT, GL_LINE);
+		glPolygonMode(GL_BACK, GL_LINE);
+		glLineWidth(5.f);
 	//	return 1;
 	}
 
@@ -676,19 +726,33 @@ int PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* ver
 	glDisable(GL_TEXTURE_2D);
 	glShadeModel(GL_SMOOTH);
 
-	glBegin(GL_TRIANGLE_STRIP);
+	switch (prim)
+	{
+	case DRAW_QUAD:
+		glBegin(GL_QUADS);
+		break;
+	case DRAW_TRI:
+		glBegin(GL_TRIANGLES);
+		break;
+	case DRAW_TRIQUAD:
+		glBegin(GL_TRIANGLE_STRIP);
+		break;
+	}
 
-	PGXP_colour(vertex1, alpha);
+	PGXP_colour(vertex1, alpha, prim, isTextured, colourMode, vertex1->c.col);
 	PGXP_glVertexfv(&vertex1->x);
 
-	PGXP_colour(vertex2, alpha);
+	PGXP_colour(vertex2, alpha, prim, isTextured, colourMode, vertex1->c.col);
 	PGXP_glVertexfv(&vertex2->x);
 
-	PGXP_colour(vertex3, alpha);
+	PGXP_colour(vertex3, alpha, prim, isTextured, colourMode, vertex1->c.col);
 	PGXP_glVertexfv(&vertex3->x);
 
-	PGXP_colour(vertex4, alpha);
-	PGXP_glVertexfv(&vertex4->x);
+	if (prim != DRAW_TRI)
+	{
+		PGXP_colour(vertex4, alpha, prim, isTextured, colourMode, vertex1->c.col);
+		PGXP_glVertexfv(&vertex4->x);
+	}
 
 	glEnd();
 
@@ -696,16 +760,29 @@ int PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* ver
 	if (bBlend == GL_TRUE)
 		glDisable(GL_BLEND);
 
+	glLineWidth(1.f);
 	glPolygonMode(GL_FRONT, GL_LINE);
 	glPolygonMode(GL_BACK, GL_LINE);
 
-	glBegin(GL_TRIANGLE_STRIP);
+	switch (prim)
+	{
+	case DRAW_QUAD:
+		glBegin(GL_QUADS);
+		break;
+	case DRAW_TRI:
+		glBegin(GL_TRIANGLES);
+		break;
+	case DRAW_TRIQUAD:
+		glBegin(GL_TRIANGLE_STRIP);
+		break;
+	}
 
 	glColor4ubv(black);
 	PGXP_glVertexfv(&vertex1->x);
 	PGXP_glVertexfv(&vertex2->x);
 	PGXP_glVertexfv(&vertex3->x);
-	PGXP_glVertexfv(&vertex4->x);
+	if (prim != DRAW_TRI)
+		PGXP_glVertexfv(&vertex4->x);
 
 	glColor4fv(fColour);
 
@@ -725,164 +802,17 @@ int PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* ver
 	return 1;
 }
 
-int PGXP_DrawDebugTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3)
+int PGXP_DrawDebugTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, int colourMode, int isTextured)
 {
-	GLboolean	bTexture	= glIsEnabled(GL_TEXTURE_2D);
-	GLboolean	bBlend		= glIsEnabled(GL_BLEND);
-	GLfloat		fColour[4];
-	GLint		iShadeModel;
-	GLubyte		alpha = 255;
-
-
-	//if ((vertex1->PGXP_flag == 0) ||
-	//	(vertex2->PGXP_flag == 0) ||
-	//	(vertex3->PGXP_flag == 0))
-	//	return 0;
-
-
-	// Quit if PGXP_flag == ignore
-	if ((vertex1->PGXP_flag == 5) ||
-		(vertex2->PGXP_flag == 5) ||
-		(vertex3->PGXP_flag == 5))
-		return 1;
-
-	if (bBlend == GL_TRUE)
-	{
-		alpha = 128;
-		//	glDisable(GL_BLEND);
-		//	return 1;
-	}
-
-	glGetIntegerv(GL_SHADE_MODEL, &iShadeModel);
-	glGetFloatv(GL_CURRENT_COLOR, fColour);
-
-	glDisable(GL_TEXTURE_2D);
-	glShadeModel(GL_SMOOTH);
-
-	glBegin(GL_TRIANGLES);
-
-	PGXP_colour(vertex1, alpha);
-	PGXP_glVertexfv(&vertex1->x);
-
-	PGXP_colour(vertex2, alpha);
-	PGXP_glVertexfv(&vertex2->x);
-
-	PGXP_colour(vertex3, alpha);
-	PGXP_glVertexfv(&vertex3->x);
-
-	glEnd();
-
-	if (bBlend == GL_TRUE)
-		glDisable(GL_BLEND);
-
-	glPolygonMode(GL_FRONT, GL_LINE);
-	glPolygonMode(GL_BACK, GL_LINE);
-
-	glBegin(GL_TRIANGLE_STRIP);
-
-	glColor4ubv(black);
-	PGXP_glVertexfv(&vertex1->x);
-	PGXP_glVertexfv(&vertex2->x);
-	PGXP_glVertexfv(&vertex3->x);
-
-	glColor4fv(fColour);
-
-	glEnd();
-
-	glPolygonMode(GL_FRONT, GL_FILL);
-	glPolygonMode(GL_BACK, GL_FILL);
-
-	if (bTexture == GL_TRUE)
-		glEnable(GL_TEXTURE_2D);
-
-	if (bBlend == GL_TRUE)
-		glEnable(GL_BLEND);
-
-	glShadeModel(iShadeModel);
-
-	return 1;
+	return DrawDebugPrim(DRAW_TRI, vertex1, vertex2, vertex3, NULL, colourMode, isTextured);
 }
 
-int PGXP_DrawDebugQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4)
+int PGXP_DrawDebugQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4, int colourMode, int isTextured)
 {
-	GLboolean	bTexture = glIsEnabled(GL_TEXTURE_2D);
-	GLboolean	bBlend = glIsEnabled(GL_BLEND);
-	GLfloat		fColour[4];
-	GLint		iShadeModel;
-	GLubyte		alpha = 255;
+	return DrawDebugPrim(DRAW_QUAD, vertex1, vertex2, vertex3, vertex4, colourMode, isTextured);
+}
 
-
-	//if ((vertex1->PGXP_flag == 0) ||
-	//	(vertex2->PGXP_flag == 0) ||
-	//	(vertex3->PGXP_flag == 0) ||
-	//	(vertex4->PGXP_flag == 0))
-	//	return 0;
-
-
-	// Quit if PGXP_flag == ignore
-	if ((vertex1->PGXP_flag == 5) ||
-		(vertex2->PGXP_flag == 5) ||
-		(vertex3->PGXP_flag == 5) ||
-		(vertex4->PGXP_flag == 5))
-		return 1;
-
-	if (bBlend == GL_TRUE)
-	{
-		alpha = 128;
-		//	glDisable(GL_BLEND);
-		//	return 1;
-	}
-
-	glGetIntegerv(GL_SHADE_MODEL, &iShadeModel);
-	glGetFloatv(GL_CURRENT_COLOR, fColour);
-
-	glDisable(GL_TEXTURE_2D);
-	glShadeModel(GL_SMOOTH);
-
-	glBegin(GL_QUADS);
-
-	PGXP_colour(vertex1, alpha);
-	PGXP_glVertexfv(&vertex1->x);
-
-	PGXP_colour(vertex2, alpha);
-	PGXP_glVertexfv(&vertex2->x);
-
-	PGXP_colour(vertex3, alpha);
-	PGXP_glVertexfv(&vertex3->x);
-
-	PGXP_colour(vertex4, alpha);
-	PGXP_glVertexfv(&vertex4->x);
-
-	glEnd();
-
-	glPolygonMode(GL_FRONT, GL_LINE);
-	glPolygonMode(GL_BACK, GL_LINE);
-
-	if (bBlend == GL_TRUE)
-		glDisable(GL_BLEND);
-
-	glBegin(GL_TRIANGLE_STRIP);
-
-	glColor4ubv(black);
-	PGXP_glVertexfv(&vertex1->x);
-	PGXP_glVertexfv(&vertex2->x);
-	PGXP_glVertexfv(&vertex3->x);
-	PGXP_glVertexfv(&vertex4->x);
-
-	glColor4fv(fColour);
-
-	glEnd();
-
-	glPolygonMode(GL_FRONT, GL_FILL);
-	glPolygonMode(GL_BACK, GL_FILL);
-
-	if (bTexture == GL_TRUE)
-		glEnable(GL_TEXTURE_2D);
-
-	if (bBlend == GL_TRUE)
-		glEnable(GL_BLEND);
-
-	glShadeModel(iShadeModel);
-
-	return 1;
+int PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4, int colourMode, int isTextured)
+{
+	return DrawDebugPrim(DRAW_TRIQUAD, vertex1, vertex2, vertex3, vertex4, colourMode, isTextured);
 }

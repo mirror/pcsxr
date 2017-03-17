@@ -41,10 +41,14 @@ void	PGXP_SetDepth(unsigned int addr);
 int		PGXP_GetVertices(unsigned int* addr, void* pOutput, int xOffs, int yOffs);
 void	PGXP_glVertexfv(GLfloat* pVertex);
 
+#define COLOUR_NONE		0
+#define COLOUR_FLAT		1
+#define COLOUR_SMOOTH	2
+
 extern unsigned int PGXP_vDebug;
 extern unsigned int PGXP_debugFlags[4];
-int PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4);
-int PGXP_DrawDebugTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3);
-int PGXP_DrawDebugQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4);
+int PGXP_DrawDebugTriQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4, int colourMode, int isTextured);
+int PGXP_DrawDebugTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, int colourMode, int isTextured);
+int PGXP_DrawDebugQuad(OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* vertex3, OGLVertex* vertex4, int colourMode, int isTextured);
 
 #endif // _PGXP_GPU_H_

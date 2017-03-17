@@ -195,6 +195,7 @@ typedef struct OGLVertexTag
   } c;
 
  unsigned int PGXP_flag;
+ unsigned int Vert_ID;
 } OGLVertex;
 
 typedef union EXShortTag

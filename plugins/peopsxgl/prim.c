@@ -152,7 +152,7 @@ static __inline void PRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex2
 {
 	if (PGXP_vDebug)
 	{
-		if(PGXP_DrawDebugTriQuad(vertex1, vertex2, vertex4, vertex3))
+		if(PGXP_DrawDebugTriQuad(vertex1, vertex2, vertex4, vertex3, COLOUR_NONE, 1))
 		return;
 	}
 		
@@ -179,7 +179,7 @@ static __inline void PRIMdrawTexturedTri(OGLVertex* vertex1, OGLVertex* vertex2,
 {
 	if (PGXP_vDebug)
 	{
-		if(PGXP_DrawDebugTri(vertex1, vertex2, vertex3))
+		if(PGXP_DrawDebugTri(vertex1, vertex2, vertex3, COLOUR_NONE, 1))
 		return;
 	}
 
@@ -202,7 +202,7 @@ static __inline void PRIMdrawTexGouraudTriColor(OGLVertex* vertex1, OGLVertex* v
 {
 	if (PGXP_vDebug)
 	{
-		if(PGXP_DrawDebugTri(vertex1, vertex2, vertex3))
+		if(PGXP_DrawDebugTri(vertex1, vertex2, vertex3, COLOUR_SMOOTH, 1))
 		return;
 	}
 
@@ -229,7 +229,7 @@ static __inline void PRIMdrawTexGouraudTriColorQuad(OGLVertex* vertex1, OGLVerte
 {
 	if (PGXP_vDebug)
 	{
-		if(PGXP_DrawDebugTriQuad(vertex1, vertex2, vertex4, vertex3))
+		if(PGXP_DrawDebugTriQuad(vertex1, vertex2, vertex4, vertex3, COLOUR_SMOOTH, 1))
 		return;
 	}
 
@@ -258,7 +258,7 @@ static __inline void PRIMdrawTri(OGLVertex* vertex1, OGLVertex* vertex2, OGLVert
 {
 	if (PGXP_vDebug)
 	{
-		if(PGXP_DrawDebugTri(vertex1, vertex2, vertex3))
+		if(PGXP_DrawDebugTri(vertex1, vertex2, vertex3, COLOUR_NONE, 0))
 		return;
 	}
 
@@ -276,7 +276,7 @@ static __inline void PRIMdrawTri2(OGLVertex* vertex1, OGLVertex* vertex2,
 {
 	if (PGXP_vDebug)
 	{
-		if(PGXP_DrawDebugTriQuad(vertex1, vertex3, vertex2, vertex4))
+		if(PGXP_DrawDebugTriQuad(vertex1, vertex3, vertex2, vertex4, 0, 0))
 		return;
 	}
 
@@ -295,7 +295,7 @@ static __inline void PRIMdrawGouraudTriColor(OGLVertex* vertex1, OGLVertex* vert
 {
 	if (PGXP_vDebug)
 	{
-		if(PGXP_DrawDebugTri(vertex1, vertex2, vertex3))
+		if(PGXP_DrawDebugTri(vertex1, vertex2, vertex3, COLOUR_SMOOTH, 0))
 		return;
 	}
 
@@ -318,7 +318,7 @@ static __inline void PRIMdrawGouraudTri2Color(OGLVertex* vertex1, OGLVertex* ver
 {
 	if (PGXP_vDebug)
 	{
-		if(PGXP_DrawDebugTriQuad(vertex1, vertex3, vertex2, vertex4))
+		if(PGXP_DrawDebugTriQuad(vertex1, vertex3, vertex2, vertex4, COLOUR_SMOOTH, 0))
 		return;
 	}
 
@@ -343,7 +343,7 @@ static __inline void PRIMdrawFlatLine(OGLVertex* vertex1, OGLVertex* vertex2,OGL
 {
 	if (PGXP_vDebug)
 	{
-		if(PGXP_DrawDebugQuad(vertex1, vertex2, vertex3, vertex4))
+		if(PGXP_DrawDebugQuad(vertex1, vertex2, vertex3, vertex4, COLOUR_FLAT, 0))
 		return;
 	}
 
@@ -364,7 +364,7 @@ static __inline void PRIMdrawGouraudLine(OGLVertex* vertex1, OGLVertex* vertex2,
 {
 	if (PGXP_vDebug)
 	{
-		if(PGXP_DrawDebugQuad(vertex1, vertex2, vertex3, vertex4))
+		if(PGXP_DrawDebugQuad(vertex1, vertex2, vertex3, vertex4, COLOUR_SMOOTH, 0))
 		return;
 	}
 
@@ -391,7 +391,7 @@ static __inline void PRIMdrawQuad(OGLVertex* vertex1, OGLVertex* vertex2,
 {
 	if (PGXP_vDebug)
 	{
-		if(PGXP_DrawDebugQuad(vertex1, vertex2, vertex3, vertex4))
+		if(PGXP_DrawDebugQuad(vertex1, vertex2, vertex3, vertex4, COLOUR_NONE, 0))
 		return;
 	}
 
@@ -2556,7 +2556,7 @@ void DrawMultiBlur(void)
 
  for (unsigned int i = 0; i < 4; ++i)
  {
-	 vertex[i].PGXP_flag = 5;
+	 vertex[i].PGXP_flag = 999;
 	 vertex[i].w = 1.f;
  }
 
