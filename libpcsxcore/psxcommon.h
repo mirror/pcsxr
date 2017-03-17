@@ -166,7 +166,7 @@ typedef struct {
 	u8 HackFix;
 	u8 MemHack;
 	boolean OverClock;	// enable overclocking
-	u8 PsxClock;
+	float PsxClock;
 	// PGXP variables
 	boolean PGXP_GTE;
 	boolean PGXP_Cache;

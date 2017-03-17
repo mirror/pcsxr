@@ -94,7 +94,7 @@ int LoadConfig() {
 
 	QueryKeyV("Cpu",      Conf->Cpu);
 	QueryKeyV("PsxType",  Conf->PsxType);
-	QueryKeyV("PsxClock", Conf->PsxClock);
+	QueryKey(sizeof(Conf->PsxClock), "PsxClock", &Conf->PsxClock);
 
 	QueryKeyV("PGXP_GTE", Conf->PGXP_GTE);
 	QueryKeyV("PGXP_Cache", Conf->PGXP_Cache);
@@ -161,7 +161,7 @@ void SaveConfig() {
 
 	SetKeyV("Cpu",     Conf->Cpu);
 	SetKeyV("PsxType", Conf->PsxType);
-	SetKeyV("PsxClock", Conf->PsxClock);
+	SetKey("PsxClock", &Conf->PsxClock, sizeof(Conf->PsxClock), REG_BINARY);
 
 	SetKeyV("PGXP_GTE", Conf->PGXP_GTE);
 	SetKeyV("PGXP_Cache", Conf->PGXP_Cache);

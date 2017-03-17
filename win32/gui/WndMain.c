@@ -1430,6 +1430,7 @@ BOOL CALLBACK ConfigurePGXPDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPa
 BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	long tmp;
 	RECT rect;
+	char cs[256];
 
 	switch(uMsg) {
 		case WM_INITDIALOG:
@@ -1484,14 +1485,16 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 			ComboBox_AddString(GetDlgItem(hW,IDC_PSXTYPES), "PAL");
 			ComboBox_SetCurSel(GetDlgItem(hW,IDC_PSXTYPES),Config.PsxType);
 
-			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "0.5x");
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "0.5");
 			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "0.75");
-			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "1.5x");
-			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "2.0x");
-			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "3.0x");
-			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "4.0x");
-			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "5.0x");
-			ComboBox_SetCurSel(GetDlgItem(hW,IDC_PSXCLOCK), Config.PsxClock);
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "1.5");
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "2.0");
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "3.0");
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "4.0");
+			ComboBox_AddString(GetDlgItem(hW,IDC_PSXCLOCK), "5.0");
+			//ComboBox_SetCurSel(GetDlgItem(hW,IDC_PSXCLOCK), Config.PsxClock);
+			sprintf(cs, "%.2f", Config.PsxClock);
+			SetDlgItemText(hW, IDC_PSXCLOCK, cs);
 
 			if (Config.Cpu == CPU_DYNAREC) {
 				Config.Debug = 0;
@@ -1515,7 +1518,13 @@ BOOL CALLBACK ConfigureCpuDlgProc(HWND hW, UINT uMsg, WPARAM wParam, LPARAM lPar
 					if (tmp == 0) Config.PsxType = 0;
 					else Config.PsxType = 1;
 
-					Config.PsxClock= ComboBox_GetCurSel(GetDlgItem(hW, IDC_PSXCLOCK));
+					//Config.PsxClock= ComboBox_GetCurSel(GetDlgItem(hW, IDC_PSXCLOCK));
+
+					GetDlgItemText(hW, IDC_PSXCLOCK, cs, 255);
+					Config.PsxClock = (float)atof(cs);
+					//if (Config.PsxClock<0.0f)   Config.PsxClock = 0.0f;
+					//if (Config.PsxClock>100.0f) Config.PsxClock = 100.0f;
+
 
 					Config.Xa      = Button_GetCheck(GetDlgItem(hW,IDC_XA));
 					Config.SioIrq  = Button_GetCheck(GetDlgItem(hW,IDC_SIO));
