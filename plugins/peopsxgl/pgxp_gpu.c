@@ -660,9 +660,10 @@ void PGXP_colour(OGLVertex* vertex, GLubyte alpha, int prim, int isTextured, int
 		// Vertex colour only
 		switch (colourMode)
 		{
-		case COLOUR_NONE:
-			glColor4ub(255, 255, 255, 255);
-			break;
+			// Flat shaded primitives have their colour set earlier so we'll just leave it.
+		//case COLOUR_NONE:
+		//	glColor4ub(255, 255, 255, 255);
+		//	break;
 		case COLOUR_FLAT:
 			glColor4ubv(flatColour);
 			break;
@@ -762,7 +763,7 @@ int DrawDebugPrim(int prim, OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* v
 
 
 	if (bBlend == GL_TRUE)
-		glDisable(GL_BLEND);
+//		glDisable(GL_BLEND);
 
 	glLineWidth(1.f);
 	glPolygonMode(GL_FRONT, GL_LINE);
