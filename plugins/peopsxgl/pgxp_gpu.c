@@ -712,8 +712,12 @@ int DrawDebugPrim(int prim, OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* v
 
 	if (bBlend == GL_TRUE)
 	{
-	//		alpha = 128;
+		//		alpha = 128;
 		glDisable(GL_BLEND);
+	}
+
+	if(DrawSemiTrans)
+	{
 		glPolygonMode(GL_FRONT, GL_LINE);
 		glPolygonMode(GL_BACK, GL_LINE);
 		glLineWidth(5.f);
