@@ -521,6 +521,7 @@ enum PGXP_vDebugMode
 	vDEBUG_W,
 	vDEBUG_OTZ,
 	vDEBUG_COLOUR,
+	vDEBUG_TEXTURE,
 	vDEBUG_PRIMTYPE,
 
 	vDEBUG_MAX,
@@ -673,6 +674,10 @@ void PGXP_colour(OGLVertex* vertex, GLubyte alpha, int prim, int isTextured, int
 		}
 		
 		break;
+	case vDEBUG_TEXTURE:
+		// Texture only
+		glColor4ub(255, 255, 255, 255);
+		break;
 	case vDEBUG_PRIMTYPE:
 		// Primitive type
 		glColor4ub((prim+1) * 64, (isTextured) * 255, colourMode * 64, alpha);
@@ -728,7 +733,8 @@ int DrawDebugPrim(int prim, OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* v
 	glGetIntegerv(GL_SHADE_MODEL, &iShadeModel);
 	glGetFloatv(GL_CURRENT_COLOR, fColour);
 
-	glDisable(GL_TEXTURE_2D);
+	if(PGXP_vDebug != vDEBUG_TEXTURE)
+		glDisable(GL_TEXTURE_2D);
 	glShadeModel(GL_SMOOTH);
 
 	switch (prim)
@@ -745,24 +751,28 @@ int DrawDebugPrim(int prim, OGLVertex* vertex1, OGLVertex* vertex2, OGLVertex* v
 	}
 
 	PGXP_colour(vertex1, alpha, prim, isTextured, colourMode, vertex1->c.col);
+	glTexCoord2fv(&vertex1->sow);
 	PGXP_glVertexfv(&vertex1->x);
 
 	PGXP_colour(vertex2, alpha, prim, isTextured, colourMode, vertex1->c.col);
+	glTexCoord2fv(&vertex2->sow);
 	PGXP_glVertexfv(&vertex2->x);
 
 	PGXP_colour(vertex3, alpha, prim, isTextured, colourMode, vertex1->c.col);
+	glTexCoord2fv(&vertex3->sow);
 	PGXP_glVertexfv(&vertex3->x);
 
 	if (prim != DRAW_TRI)
 	{
 		PGXP_colour(vertex4, alpha, prim, isTextured, colourMode, vertex1->c.col);
+		glTexCoord2fv(&vertex4->sow);
 		PGXP_glVertexfv(&vertex4->x);
 	}
 
 	glEnd();
 
 
-	if (bBlend == GL_TRUE)
+//	if (bBlend == GL_TRUE)
 //		glDisable(GL_BLEND);
 
 	glLineWidth(1.f);
