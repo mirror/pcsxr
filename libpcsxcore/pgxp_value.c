@@ -22,7 +22,7 @@ void MakeValid(PGXP_value *pV, u32 psxV)
 		pV->x = psx.sw.l;
 		pV->y = psx.sw.h;
 		pV->z = 0.f;
-		pV->flags |= VALID_01;
+		pV->flags = VALID_01;
 		pV->value = psx.d;
 	}
 }

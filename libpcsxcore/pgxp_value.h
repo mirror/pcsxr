@@ -91,6 +91,7 @@ typedef enum
 #define VALID_2  (VALID << 16)
 #define VALID_3  (VALID << 24)
 #define VALID_01  (VALID_0 | VALID_1)
+#define VALID_012  (VALID_0 | VALID_1 | VALID_2)
 #define VALID_ALL  (VALID_0 | VALID_1 | VALID_2 | VALID_3)
 #define INV_VALID_ALL  (ALL ^ VALID_ALL)
 //} PGXP_value_flags;

@@ -182,7 +182,7 @@ int PGXP_NLCIP_valid(u32 sxy0, u32 sxy1, u32 sxy2)
 	Validate(&SXY0, sxy0);
 	Validate(&SXY1, sxy1);
 	Validate(&SXY2, sxy2);
-	if (((SXY0.flags & SXY1.flags & SXY2.flags & VALID_01) == VALID_01) && Config.PGXP_GTE && (Config.PGXP_Mode > 0))
+	if (((SXY0.flags & SXY1.flags & SXY2.flags & VALID_012) == VALID_012) && Config.PGXP_GTE && (Config.PGXP_Mode > 0))
 		return 1;
 	return 0;
 }
