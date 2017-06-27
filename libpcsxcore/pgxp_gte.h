@@ -60,5 +60,8 @@ void	PGXP_GTE_SWC2(u32 instr, u32 rtVal, u32 addr);	// copy GTE reg to memory
 #ifndef max
 #   define max(a, b) ((a) > (b) ? (a) : (b))
 #endif
+#ifndef min
+#   define min(a, b) ((a) < (b) ? (a) : (b))
+#endif
 
 #endif /* _PGXP_GTE_H_ */

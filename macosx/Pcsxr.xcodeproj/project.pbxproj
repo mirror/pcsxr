@@ -218,10 +218,7 @@
 		55E0ACE0178B69620005C945 /* LaunchArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E0ACDF178B69600005C945 /* LaunchArg.m */; };
 		55EC05FB1788B1230053AC23 /* PcsxrMemCardArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */; };
 		55EC05FE178916E80053AC23 /* MemBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC05FD178916E70053AC23 /* MemBadgeView.m */; };
-		6F5FF7191CE4D1D5005D8636 /* pgxp_gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 6F5FF7171CE4D1D5005D8636 /* pgxp_gpu.c */; };
 		6F5FF71A1CE4D3B2005D8636 /* pgxp_gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 6F5FF7171CE4D1D5005D8636 /* pgxp_gpu.c */; };
-		6F5FF71B1CE4D3B2005D8636 /* pgxp_gpu.h in Sources */ = {isa = PBXBuildFile; fileRef = 6F5FF7181CE4D1D5005D8636 /* pgxp_gpu.h */; };
-		6F5FF71E1CE4D791005D8636 /* cfg.c in Sources */ = {isa = PBXBuildFile; fileRef = 6F5FF71C1CE4D791005D8636 /* cfg.c */; };
 		6F5FF7211CE4DE68005D8636 /* pgxp_gte.c in Sources */ = {isa = PBXBuildFile; fileRef = 6F5FF71F1CE4DE68005D8636 /* pgxp_gte.c */; };
 		6FAC15EB1D4CCA6C0028E89C /* pgxp_value.c in Sources */ = {isa = PBXBuildFile; fileRef = 6FAC15E91D4CCA6C0028E89C /* pgxp_value.c */; };
 		6FDBDA711D0DB58300313918 /* pgxp_cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 6FDBDA6A1D0DB58300313918 /* pgxp_cpu.c */; };
@@ -826,7 +823,6 @@
 		6F5FF7201CE4DE68005D8636 /* pgxp_gte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pgxp_gte.h; sourceTree = "<group>"; };
 		6FAC15E91D4CCA6C0028E89C /* pgxp_value.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pgxp_value.c; sourceTree = "<group>"; };
 		6FAC15EA1D4CCA6C0028E89C /* psxinterpreter_pgxp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = psxinterpreter_pgxp.h; sourceTree = "<group>"; };
-		6FAC15EC1D4CCAC00028E89C /* pgxp_value.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pgxp_value.c; sourceTree = "<group>"; };
 		6FDBDA6A1D0DB58300313918 /* pgxp_cpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pgxp_cpu.c; sourceTree = "<group>"; };
 		6FDBDA6B1D0DB58300313918 /* pgxp_cpu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pgxp_cpu.h; sourceTree = "<group>"; };
 		6FDBDA6C1D0DB58300313918 /* pgxp_debug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pgxp_debug.c; sourceTree = "<group>"; };
@@ -834,9 +830,6 @@
 		6FDBDA6E1D0DB58300313918 /* pgxp_mem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pgxp_mem.c; sourceTree = "<group>"; };
 		6FDBDA6F1D0DB58300313918 /* pgxp_mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pgxp_mem.h; sourceTree = "<group>"; };
 		6FDBDA701D0DB58300313918 /* pgxp_value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pgxp_value.h; sourceTree = "<group>"; };
-		6FDBDA741D0DB63800313918 /* pgxp_cpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pgxp_cpu.c; sourceTree = "<group>"; };
-		6FDBDA751D0DB63800313918 /* pgxp_debug.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pgxp_debug.c; sourceTree = "<group>"; };
-		6FDBDA761D0DB63800313918 /* pgxp_mem.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pgxp_mem.c; sourceTree = "<group>"; };
 		712FD1E51093096F00575A92 /* debug.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = debug.c; sourceTree = "<group>"; };
 		712FD1E61093096F00575A92 /* socket.c */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.c; path = socket.c; sourceTree = "<group>"; };
 		712FD1E71093096F00575A92 /* socket.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
@@ -1119,11 +1112,6 @@
 		2BCE23B204C6B52C007C2DA3 /* libpcsxcore */ = {
 			isa = PBXGroup;
 			children = (
-				6FAC15EC1D4CCAC00028E89C /* pgxp_value.c */,
-				6FDBDA741D0DB63800313918 /* pgxp_cpu.c */,
-				6FDBDA751D0DB63800313918 /* pgxp_debug.c */,
-				6FDBDA761D0DB63800313918 /* pgxp_mem.c */,
-				6FAC15E91D4CCA6C0028E89C /* pgxp_value.c */,
 				6FAC15EA1D4CCA6C0028E89C /* psxinterpreter_pgxp.h */,
 				6FDBDA6A1D0DB58300313918 /* pgxp_cpu.c */,
 				6FDBDA6B1D0DB58300313918 /* pgxp_cpu.h */,
@@ -1131,6 +1119,7 @@
 				6FDBDA6D1D0DB58300313918 /* pgxp_debug.h */,
 				6FDBDA6E1D0DB58300313918 /* pgxp_mem.c */,
 				6FDBDA6F1D0DB58300313918 /* pgxp_mem.h */,
+				6FAC15E91D4CCA6C0028E89C /* pgxp_value.c */,
 				6FDBDA701D0DB58300313918 /* pgxp_value.h */,
 				6F5FF71F1CE4DE68005D8636 /* pgxp_gte.c */,
 				6F5FF7201CE4DE68005D8636 /* pgxp_gte.h */,
@@ -2301,7 +2290,6 @@
 				6FDBDA731D0DB58300313918 /* pgxp_mem.c in Sources */,
 				2BB3D6BE05427FE200831ACB /* main.m in Sources */,
 				6F5FF7211CE4DE68005D8636 /* pgxp_gte.c in Sources */,
-				6F5FF7191CE4D1D5005D8636 /* pgxp_gpu.c in Sources */,
 				2BB3D6BF05427FE200831ACB /* PcsxrController.m in Sources */,
 				2BB3D6C005427FE200831ACB /* ConfigurationController.m in Sources */,
 				2BB3D6C105427FE200831ACB /* PluginList.m in Sources */,
@@ -2344,7 +2332,6 @@
 				55BBA693149455E1003B2CEC /* PcsxrMemCardHandler.m in Sources */,
 				55BBA69614945628003B2CEC /* PcsxrPluginHandler.m in Sources */,
 				55BBA69914953887003B2CEC /* PcsxrDiscHandler.m in Sources */,
-				6F5FF71E1CE4D791005D8636 /* cfg.c in Sources */,
 				55BBA69C1495839A003B2CEC /* PcsxrFreezeStateHandler.m in Sources */,
 				0280B7AD16764CC5007B8001 /* HotkeyController.m in Sources */,
 				02717968167884C9004AED62 /* hotkeys.m in Sources */,
@@ -2478,7 +2465,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F5FF71A1CE4D3B2005D8636 /* pgxp_gpu.c in Sources */,
-				6F5FF71B1CE4D3B2005D8636 /* pgxp_gpu.h in Sources */,
 				551A775217869C8B0052D185 /* draw.c in Sources */,
 				551A775317869C8D0052D185 /* fps.c in Sources */,
 				551A775417869C900052D185 /* gpu.c in Sources */,
