@@ -191,16 +191,6 @@ static void iFlushRegs() {
 	}
 }
 
-static void iPushReg(int reg)
-{
-	if (IsConst(reg)) {
-		PUSH32I(iRegs[reg].k);
-	}
-	else {
-		PUSH64M((uptr)&psxRegs.GPR.r[reg]);
-	}
-}
-
 static void iStoreCycle() {
 	count = ((pc - pcold) / 4) * BIAS;
 	ADD32ItoM((uptr)&psxRegs.cycle, count);
