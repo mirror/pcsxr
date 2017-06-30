@@ -218,6 +218,7 @@
 		55E0ACE0178B69620005C945 /* LaunchArg.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E0ACDF178B69600005C945 /* LaunchArg.m */; };
 		55EC05FB1788B1230053AC23 /* PcsxrMemCardArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC05FA1788B1230053AC23 /* PcsxrMemCardArray.m */; };
 		55EC05FE178916E80053AC23 /* MemBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC05FD178916E70053AC23 /* MemBadgeView.m */; };
+		662A3D691F05E8D500232572 /* PgxpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A3D681F05E8D500232572 /* PgxpController.m */; };
 		6F5FF71A1CE4D3B2005D8636 /* pgxp_gpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 6F5FF7171CE4D1D5005D8636 /* pgxp_gpu.c */; };
 		6F5FF7211CE4DE68005D8636 /* pgxp_gte.c in Sources */ = {isa = PBXBuildFile; fileRef = 6F5FF71F1CE4DE68005D8636 /* pgxp_gte.c */; };
 		6FAC15EB1D4CCA6C0028E89C /* pgxp_value.c in Sources */ = {isa = PBXBuildFile; fileRef = 6FAC15E91D4CCA6C0028E89C /* pgxp_value.c */; };
@@ -814,6 +815,8 @@
 		55EE2D9017E2323400FED42A /* ecm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ecm.h; sourceTree = "<group>"; };
 		55F41A2017EF774500605DF8 /* version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = version.sh; sourceTree = "<group>"; };
 		55F41A2117EF7A3300605DF8 /* Info.plistvers.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plistvers.plist; path = ../Info.plistvers.plist; sourceTree = "<group>"; };
+		662A3D671F05E8D500232572 /* PgxpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PgxpController.h; sourceTree = "<group>"; };
+		662A3D681F05E8D500232572 /* PgxpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PgxpController.m; sourceTree = "<group>"; };
 		6F4B24AB1D54D67E000B7071 /* iPGXP-64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iPGXP-64.h"; sourceTree = "<group>"; };
 		6F5FF7171CE4D1D5005D8636 /* pgxp_gpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pgxp_gpu.c; sourceTree = "<group>"; };
 		6F5FF7181CE4D1D5005D8636 /* pgxp_gpu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pgxp_gpu.h; sourceTree = "<group>"; };
@@ -1770,6 +1773,8 @@
 				D422E67916DC495800526DCF /* CheatController.m */,
 				0280B7AB16764CC3007B8001 /* HotkeyController.h */,
 				0280B7AC16764CC3007B8001 /* HotkeyController.m */,
+				662A3D671F05E8D500232572 /* PgxpController.h */,
+				662A3D681F05E8D500232572 /* PgxpController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -2336,6 +2341,7 @@
 				0280B7AD16764CC5007B8001 /* HotkeyController.m in Sources */,
 				02717968167884C9004AED62 /* hotkeys.m in Sources */,
 				5529EA11169CBE3400BAA2A5 /* RecentItemsMenu.m in Sources */,
+				662A3D691F05E8D500232572 /* PgxpController.m in Sources */,
 				D422E67A16DC495800526DCF /* CheatController.m in Sources */,
 				55EC05FB1788B1230053AC23 /* PcsxrMemCardArray.m in Sources */,
 				55EC05FE178916E80053AC23 /* MemBadgeView.m in Sources */,

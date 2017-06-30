@@ -1,6 +1,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PcsxrController.h"
 #import "ConfigurationController.h"
+#import "PgxpController.h"
 #import "CheatController.h"
 #import "EmuThread.h"
 #import "PcsxrMemCardHandler.h"
@@ -767,6 +768,9 @@ otherblock();\
 	else {
 			strcpy(Config.Net, "Disabled");
 	}
+
+	// PGXP settings
+	[PgxpController loadPgxpSettings];
 }
 
 + (void)setDefaultFromConfig:(NSString *)defaultKey
