@@ -691,6 +691,7 @@ otherblock();\
 	// special cases
 	//str = [[defaults stringForKey:@"PluginPAD"] fileSystemRepresentation];
 	//if (str != nil) strncpy(Config.Pad2, str, 255);
+	Config.PsxClock = [defaults floatForKey:@"CpuOverclockingValue"];
 
 	str = [[defaults stringForKey:@"Bios"] fileSystemRepresentation];
 	if (str) {
@@ -823,7 +824,10 @@ otherblock();\
 								  @"Widescreen": @NO,
 								  @"NetPlay": @NO,
 								  @"DidMoveMemoryObjects": @NO,
-								  @"NoFastBoot": @NO};
+								  @"NoFastBoot": @NO,
+								  @"CpuOverclocking": @NO,
+								  @"CpuOverclockingValue": @1.5f,
+								  @"WipeoutMemHack": @NO};
 	
 	[defaults registerDefaults:appDefaults];
 
@@ -849,7 +853,9 @@ otherblock();\
 		@"RootCounterFix": [NSValue valueWithPointer:&Config.RCntFix],
 		@"VideoSyncWAFix": [NSValue valueWithPointer:&Config.VSyncWA],
 		@"Widescreen": [NSValue valueWithPointer:&Config.Widescreen],
-					 @"NoFastBoot": [NSValue valueWithPointer:&Config.SlowBoot]};
+		@"NoFastBoot": [NSValue valueWithPointer:&Config.SlowBoot],
+		@"CpuOverclocking": [NSValue valueWithPointer:&Config.OverClock],
+		@"WipeoutMemHack": [NSValue valueWithPointer:&Config.MemHack]};
 
 	// setup application support paths
     NSFileManager *manager = [NSFileManager defaultManager];

@@ -41,6 +41,9 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 @synthesize memCardEdit;
 @synthesize hkController;
 @synthesize hkTab;
+@synthesize cpuOverclocking;
+@synthesize wipeoutMemHack;
+@synthesize cpuOverclockingValue;
 
 + (void)setMemoryCard:(NSInteger)theCard toURL:(NSURL *)theURL;
 {
@@ -178,6 +181,26 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 	}
 }
 
+- (IBAction)setOverclockValue:(NSComboBox *)sender
+{
+	float value = sender.floatValue;
+	if (value < 0.5) value = 0.5;
+	if (value > 5.0) value = 5.0;
+
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setFloat:value forKey:@"CpuOverclockingValue"];
+	[PcsxrController setConfigFromDefaults];
+
+	[self setOverclockValueText];
+}
+
+- (void)setOverclockValueText
+{
+	NSString *value = [NSString stringWithFormat:@"%.2f", Config.PsxClock];
+	[cpuOverclockingValue setStringValue:value];
+	[cpuOverclockingValue selectItemWithObjectValue:value];
+}
+
 - (void)awakeFromNib
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -218,6 +241,10 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 		_checkBoxDefaults[@"NoFastBoot"] = noFastBootCell;
 	if (widescreen)
 		_checkBoxDefaults[@"Widescreen"] = widescreen;
+	if (cpuOverclocking)
+		_checkBoxDefaults[@"CpuOverclocking"] = cpuOverclocking;
+	if (wipeoutMemHack)
+		_checkBoxDefaults[@"WipeoutMemHack"] = wipeoutMemHack;
 
 	// make the visuals match the defaults
 	
@@ -234,6 +261,7 @@ NSString *const memCardChangeNumberKey = @"PcsxrMemoryCardThatChangedKey";
 		[usesHleCell setEnabled:NO];
 	}
 	
+	[self setOverclockValueText];
 
 	// setup labels
 

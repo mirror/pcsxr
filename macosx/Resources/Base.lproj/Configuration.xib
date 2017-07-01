@@ -10,6 +10,8 @@
             <connections>
                 <outlet property="cdromPlugin" destination="397" id="401"/>
                 <outlet property="consoleOutputCell" destination="1278" id="1281"/>
+                <outlet property="cpuOverclocking" destination="03L-mr-xTn" id="lVg-X9-WHd"/>
+                <outlet property="cpuOverclockingValue" destination="vyM-WJ-sZf" id="5Sf-Nn-E1N"/>
                 <outlet property="enableNetPlayCell" destination="640" id="651"/>
                 <outlet property="graphicsPlugin" destination="384" id="402"/>
                 <outlet property="hkController" destination="656" id="832"/>
@@ -31,6 +33,7 @@
                 <outlet property="vTypePALCell" destination="560" id="569"/>
                 <outlet property="widescreen" destination="652" id="653"/>
                 <outlet property="window" destination="21" id="345"/>
+                <outlet property="wipeoutMemHack" destination="Qij-Wg-2W0" id="Iyu-pP-Pk8"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -247,6 +250,63 @@
                                                 <constraint firstAttribute="bottom" secondItem="512" secondAttribute="bottom" constant="11" id="cEU-jj-8QW"/>
                                                 <constraint firstItem="512" firstAttribute="leading" secondItem="509" secondAttribute="leading" constant="16" id="tPW-vX-VNM"/>
                                             </constraints>
+                                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </box>
+                                        <box fixedFrame="YES" title="CPU Overclocking" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="8gb-HW-f3X">
+                                            <rect key="frame" x="194" y="234" width="256" height="73"/>
+                                            <view key="contentView">
+                                                <rect key="frame" x="1" y="1" width="254" height="57"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwn-ba-l80">
+                                                        <rect key="frame" x="18" y="10" width="145" height="40"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        <size key="cellSize" width="145" height="18"/>
+                                                        <size key="intercellSpacing" width="4" height="4"/>
+                                                        <buttonCell key="prototype" type="check" title="Switch" bezelStyle="regularSquare" imagePosition="left" inset="2" id="opj-md-u7G">
+                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <cells>
+                                                            <column>
+                                                                <buttonCell type="check" title="CPU Overclocking" bezelStyle="regularSquare" imagePosition="left" inset="2" id="03L-mr-xTn">
+                                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                </buttonCell>
+                                                                <buttonCell type="check" title="WipeOut MemHack" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Qij-Wg-2W0">
+                                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                </buttonCell>
+                                                            </column>
+                                                        </cells>
+                                                        <connections>
+                                                            <action selector="setCheckbox:" target="-2" id="mb4-BQ-gqt"/>
+                                                        </connections>
+                                                    </matrix>
+                                                    <comboBox focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vyM-WJ-sZf">
+                                                        <rect key="frame" x="170" y="26" width="69" height="26"/>
+                                                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" focusRingType="none" title="1.50" drawsBackground="YES" completes="NO" numberOfVisibleItems="8" id="9wB-0E-Yoz">
+                                                            <font key="font" metaFont="system"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <objectValues>
+                                                                <string>0.50</string>
+                                                                <string>0.75</string>
+                                                                <string>1.25</string>
+                                                                <string>1.50</string>
+                                                                <string>2.00</string>
+                                                                <string>3.00</string>
+                                                                <string>4.00</string>
+                                                                <string>5.00</string>
+                                                            </objectValues>
+                                                        </comboBoxCell>
+                                                        <connections>
+                                                            <action selector="setOverclockValue:" target="-2" id="UxU-V7-Zr2"/>
+                                                        </connections>
+                                                    </comboBox>
+                                                </subviews>
+                                            </view>
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
