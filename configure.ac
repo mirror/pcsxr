@@ -177,6 +177,7 @@ if test "$BUILD_CCDDA" = "yes"; then
 	AC_CHECK_LIB([avcodec], [main], [LIBS="$LIBS -lavcodec"], AC_MSG_ERROR("No avcodec library"))
 	AC_CHECK_LIB([avutil], [main], [LIBS="$LIBS -lavutil"], AC_MSG_ERROR("No avutil library"))
 	AC_CHECK_LIB([avformat], [main], [LIBS="$LIBS -lavformat"], AC_MSG_ERROR("No avformat library"))
+	AC_CHECK_LIB([swresample], [main], [LIBS="$LIBS -lswresample"], AC_MSG_ERROR("No swresample library"))
 	#AC_CHECK_LIB(avcodec  ,[main],AC_DEFINE([HAVE_LIBAVCODEC],   [1], [ ]),AC_MSG_ERROR([$errormsgl]))
 	#AC_CHECK_LIB(swscale  ,[main],AC_DEFINE([HAVE_LIBSWSCALE],   [1], [ ]),AC_MSG_ERROR([$errormsgl]), [-lavutil])
 	#AC_CHECK_LIB(avdevice ,[main],AC_DEFINE([HAVE_LIBAVDEVICE],  [1], [ ]),AC_MSG_ERROR([$errormsgl]), [-lavcodec -lavutil -lavformat])
