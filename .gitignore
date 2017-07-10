@@ -6,3 +6,4 @@
 macosx/build
 xcuserdata
 macosx/Info.plistvers.plist
+*.kdev4

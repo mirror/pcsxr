@@ -441,7 +441,7 @@ static int GetFreeMemcardSlot(gint target_card, gint count, u8* blocks) {
 	return -1;
 }
 
-void CopyMemcardData(char *from, char *to, gint srci, gint dsti,
+void CopyMemcardData(gint dstmcd, char *from, char *to, gint srci, gint dsti,
 						gchar *str, const u16 linkindex) {
 	u16* linkptr;
 	u8* checksumptr;
@@ -463,11 +463,11 @@ void CopyMemcardData(char *from, char *to, gint srci, gint dsti,
 		//printf("link = %i %i\n", dsti, linkindex);
 	}
 
-	SaveMcd((char *)str, to, dsti * 128, 128);
+	SaveMcd(dstmcd, (char *)str, to, dsti * 128, 128);
 
 	// data	
 	memcpy(to + dsti * 1024 * 8, from + srci * 1024 * 8, 1024 * 8);
-	SaveMcd((char *)str, to, dsti * 1024 * 8, 1024 * 8);
+	SaveMcd(dstmcd, (char *)str, to, dsti * 1024 * 8, 1024 * 8);
 
 	//printf("data = %s\n", from + (srci+1) * 128);
 }
@@ -548,7 +548,7 @@ static void OnMcd_CopyTo(GtkWidget *widget, gpointer user_data) {
 
 	for (j=0; srctbl[j] > 0; j++) {
 		// last parameter specifies link index (next block)
-		CopyMemcardData(source, destination, 
+		CopyMemcardData(dstmcd, source, destination,
 					srctbl[j], dsttbl[j], str, dsttbl[j+1]-1);
 		//printf("count = %i, indices=(%x,%x) jindex=%i\n", count, srctbl[j], dsttbl[j], j);
 	}
@@ -620,7 +620,7 @@ static void OnMemcardDelete(GtkWidget *widget, gpointer user_data) {
 			}
 			*ptr = xorsum;
 
-			SaveMcd((char *)filename, data, i * 128, 128);
+			SaveMcd(memcard, (char *)filename, data, i * 128, 128);
 
 			// Check links
 			i = GETLINKFORBLOCK(data, i); //0...15 index when ++i at top of loop

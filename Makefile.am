@@ -1,3 +1,5 @@
+ACLOCAL_AMFLAGS = -I m4
+
 SUBDIRS =  data
 SUBDIRS += doc
 SUBDIRS += pixmaps
@@ -6,7 +8,7 @@ SUBDIRS += libpcsxcore
 SUBDIRS += gui
 SUBDIRS += plugins/dfinput
 SUBDIRS += plugins/dfsound
-SUBDIRS += plugins/dfxvideo 
+SUBDIRS += plugins/dfxvideo
 SUBDIRS += plugins/dfcdrom
 SUBDIRS += plugins/dfnet
 

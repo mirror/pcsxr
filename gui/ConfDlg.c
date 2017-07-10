@@ -1032,3 +1032,6 @@ void OnConf_Cpu() {
 	g_signal_connect_data(G_OBJECT(CpuDlg), "response",
 			G_CALLBACK(OnCpu_Clicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }
+
+void OnConf_Pgxp() {
+}

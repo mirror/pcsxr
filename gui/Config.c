@@ -142,10 +142,20 @@ int LoadConfig(PcsxConfig *Conf) {
 	Config.VSyncWA = GetValueb(data, "VSyncWA");
 	Config.NoMemcard = GetValueb(data, "NoMemcard");
 	Config.Widescreen = GetValueb(data, "Widescreen");
+    Config.PerGameMcd = GetValueb(data, "PerGameMcd");
+    Config.MemHack = GetValuel(data, "MemHack");
+    Config.OverClock = GetValueb(data, "OverClock");
 
 	Config.Cpu     = GetValuel(data, "Cpu");
 	Config.PsxType = GetValuel(data, "PsxType");
-	Config.RewindCount = GetValuel(data, "RewindCount");
+    //GetValue(data, "PsxClock", &(Config.PsxClock));
+
+    Config.PGXP_GTE = GetValueb(data, "PGXP_GTE");
+    Config.PGXP_Cache = GetValueb(data, "PGXP_Cache");
+    Config.PGXP_Texture = GetValueb(data, "PGXP_Texture");
+    Config.PGXP_Mode = GetValuel(data, "PGXP_Mode");
+
+    Config.RewindCount = GetValuel(data, "RewindCount");
 	Config.RewindInterval = GetValuel(data, "RewindInterval");
 
 	Config.AltSpeed1 = GetValuel(data, "AltSpeed1");
@@ -191,7 +201,7 @@ void SaveConfig() {
 	SetValueb("SioIrq",  Config.SioIrq);
 	SetValueb("Mdec",    Config.Mdec);
 	SetValueb("PsxAuto", Config.PsxAuto);
-	SetValuel("Cdda",    Config.Cdda);
+	SetValuel("Cdda",    (long)Config.Cdda);
 	SetValueb("SlowBoot",Config.SlowBoot);
 	SetValueb("Dbg",     Config.Debug);
 	SetValueb("PsxOut",  Config.PsxOut);
@@ -200,16 +210,26 @@ void SaveConfig() {
 	SetValueb("VSyncWA", Config.VSyncWA);
 	SetValueb("NoMemcard", Config.NoMemcard);
 	SetValueb("Widescreen", Config.Widescreen);
+    SetValueb("PerGameMcd", Config.PerGameMcd);
+    SetValuel("MemHack", (long)Config.MemHack);
+    SetValueb("OverClock", Config.OverClock);
 
-	SetValuel("Cpu",     Config.Cpu);
-	SetValuel("PsxType", Config.PsxType);
-	SetValuel("RewindCount", Config.RewindCount);
-	SetValuel("RewindInterval", Config.RewindInterval);
+	SetValuel("Cpu",     (long)Config.Cpu);
+    SetValuel("PsxType", (long)Config.PsxType);
+    //SetValue("PsxClock", Config.PsxClock);
 
-	SetValuel("AltSpeed1", Config.AltSpeed1);
-	SetValuel("AltSpeed2", Config.AltSpeed2);
+    SetValueb("PGXP_GTE", Config.PGXP_GTE);
+    SetValueb("PGXP_Cache", Config.PGXP_Cache);
+    SetValueb("PGXP_Texture", Config.PGXP_Texture);
+    SetValuel("PGXP_Mode", (long)Config.PGXP_Mode);
 
-	SetValuel("HackFix", Config.HackFix);
+    SetValuel("RewindCount", (long)Config.RewindCount);
+    SetValuel("RewindInterval", (long)Config.RewindInterval);
+
+    SetValuel("AltSpeed1", (long)Config.AltSpeed1);
+    SetValuel("AltSpeed2", (long)Config.AltSpeed2);
+
+    SetValuel("HackFix", (long)Config.HackFix);
 
 	fclose(f);
 }

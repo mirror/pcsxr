@@ -25,7 +25,7 @@
 #include "draw.h"
 #include "soft.h"
 #include "texture.h"
-#include "PGXP_gpu.h"
+#include "pgxp_gpu.h"
 
 ////////////////////////////////////////////////////////////////////////                                          
 // defines

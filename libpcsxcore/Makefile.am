@@ -54,7 +54,17 @@ libpcsxcore_a_SOURCES = \
 	socket.c \
 	socket.h \
 	ppf.c \
-	ppf.h
+	ppf.h \
+	pgxp_cpu.c \
+	pgxp_cpu.h \
+	pgxp_debug.c \
+	pgxp_debug.h \
+	pgxp_gte.c \
+	pgxp_gte.h \
+	pgxp_mem.c \
+	pgxp_mem.h \
+	pgxp_value.c \
+	pgxp_value.h
 
 if ARCH_X86_64
 libpcsxcore_a_SOURCES += \
@@ -66,14 +76,16 @@ libpcsxcore_a_SOURCES += \
 	ix86_64/ix86_fpu.c	\
 	ix86_64/ix86_3dnow.c	\
 	ix86_64/ix86_mmx.c	\
-	ix86_64/ix86_sse.c
-else		
+	ix86_64/ix86_sse.c	\
+	ix86_64/iPGXP.h
+else
 if ARCH_X86
 libpcsxcore_a_SOURCES += \
 	ix86/iGte.h	\
 	ix86/iR3000A.c	\
 	ix86/ix86.c	\
-	ix86/ix86.h
+	ix86/ix86.h	\
+	ix86/iPGXP.h
 endif
 endif
 
