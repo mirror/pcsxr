@@ -1,8 +1,8 @@
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS =  data
+SUBDIRS =  gui/data
 SUBDIRS += doc
-SUBDIRS += pixmaps
+SUBDIRS += gui/data/pixmaps
 SUBDIRS += po
 SUBDIRS += libpcsxcore
 SUBDIRS += gui

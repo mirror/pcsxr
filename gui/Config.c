@@ -62,6 +62,16 @@ static boolean GetValueb(char *src, char *name) {
 	return FALSE;
 }
 
+static long GetValuef(char *src, char *name) {
+    char *tmp = strstr(src, name);
+    if (tmp != NULL) {
+        tmp += strlen(name);
+        while ((*tmp == ' ') || (*tmp == '=')) tmp++;
+        if (*tmp != '\n') return atof(tmp);
+    }
+    return 0.0f;
+}
+
 #define SetValue(name, var) \
 	fprintf(f, "%s = %s\n", name, var);
 
@@ -70,6 +80,9 @@ static boolean GetValueb(char *src, char *name) {
 
 #define SetValueb(name, var) \
 	fprintf(f, "%s = %d\n", name, (var) ? 1 : 0);
+
+#define SetValuef(name, var) \
+    fprintf(f, "%s = %f\n", name, var);
 
 int LoadConfig(PcsxConfig *Conf) {
 	struct stat buf;
@@ -148,7 +161,7 @@ int LoadConfig(PcsxConfig *Conf) {
 
 	Config.Cpu     = GetValuel(data, "Cpu");
 	Config.PsxType = GetValuel(data, "PsxType");
-    //GetValue(data, "PsxClock", &(Config.PsxClock));
+    Config.PsxClock = GetValuef(data, "PsxClock");
 
     Config.PGXP_GTE = GetValueb(data, "PGXP_GTE");
     Config.PGXP_Cache = GetValueb(data, "PGXP_Cache");
@@ -216,7 +229,7 @@ void SaveConfig() {
 
 	SetValuel("Cpu",     (long)Config.Cpu);
     SetValuel("PsxType", (long)Config.PsxType);
-    //SetValue("PsxClock", Config.PsxClock);
+    SetValuef("PsxClock", Config.PsxClock);
 
     SetValueb("PGXP_GTE", Config.PGXP_GTE);
     SetValueb("PGXP_Cache", Config.PGXP_Cache);

@@ -3,7 +3,7 @@ AC_INIT([pcsxr], [1.9.95])
 AC_CONFIG_MACRO_DIRS([m4])
 AC_CANONICAL_HOST
 AC_CANONICAL_BUILD
-AM_INIT_AUTOMAKE(foreign)
+AM_INIT_AUTOMAKE(foreign subdir-objects)
 AM_MAINTAINER_MODE
 
 AC_CONFIG_HEADERS([include/config.h:include/config.h.in])
@@ -40,7 +40,7 @@ AC_SUBST(GTK3_CFLAGS)
 AC_SUBST(GTK3_LIBS)
 
 AC_CONFIG_FILES([Makefile
-data/Makefile
+gui/data/Makefile
 doc/Makefile
 libpcsxcore/Makefile
 gui/Makefile
@@ -51,7 +51,7 @@ plugins/dfxvideo/Makefile
 plugins/dfcdrom/Makefile
 plugins/dfnet/Makefile
 plugins/peopsxgl/Makefile
-pixmaps/Makefile
+gui/data/pixmaps/Makefile
 po/Makefile.in])
 
 AC_CHECK_LIB(dl, dlsym, [LIBS="$LIBS -ldl"], [])

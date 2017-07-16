@@ -4,16 +4,16 @@
   <requires lib="gtk+" version="3.0"/>
   <object class="GtkIconFactory" id="iconfactory1">
     <sources>
-      <source stock-id="generated-icon-iso-open-png" filename="iso-open.png"/>
-      <source stock-id="generated-icon-pad-png" filename="pad.png"/>
-      <source stock-id="generated-icon-cdr-png" filename="cdr.png"/>
-      <source stock-id="generated-icon-gpu-png" filename="gpu.png"/>
-      <source stock-id="generated-icon-sio1-png" filename="sio1.png"/>
-      <source stock-id="generated-icon-memcard-png" filename="memcard.png"/>
-      <source stock-id="generated-icon-iso-reopen-png" filename="iso-reopen.png"/>
-      <source stock-id="generated-icon-spu-png" filename="spu.png"/>
-      <source stock-id="generated-icon-play-png" filename="play.png"/>
-      <source stock-id="generated-icon-cd-png" filename="cd.png"/>
+      <source stock-id="generated-icon-iso-open-png" filename="pcsxr-iso-open.png"/>
+      <source stock-id="generated-icon-pad-png" filename="pcsxr-plugin-pad.png"/>
+      <source stock-id="generated-icon-cdr-png" filename="pcsxr-plugin-cdr.png"/>
+      <source stock-id="generated-icon-gpu-png" filename="pcsxr-plugin-gpu.png"/>
+      <source stock-id="generated-icon-sio1-png" filename="pcsxr-plugin-sio1.png"/>
+      <source stock-id="generated-icon-memcard-png" filename="pcsxr-memcard.png"/>
+      <source stock-id="generated-icon-iso-reopen-png" filename="pcsxr-iso-reopen.png"/>
+      <source stock-id="generated-icon-spu-png" filename="pcsxr-plugin-spu.png"/>
+      <source stock-id="generated-icon-play-png" filename="pcsxr-play.png"/>
+      <source stock-id="generated-icon-cd-png" filename="pcsxr-cd-open.png"/>
     </sources>
   </object>
   <object class="GtkAboutDialog" id="AboutDlg">
