@@ -236,7 +236,6 @@ static void LoadListItems(int mcd, boolean newstore) {
 	if (newstore) {
 		gtk_tree_view_set_model(GTK_TREE_VIEW(List), GTK_TREE_MODEL(store));
 		g_object_unref(G_OBJECT(store));
-		gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(List), TRUE);
 	} else {
 		OnTreeSelectionChanged(gtk_tree_view_get_selection(GTK_TREE_VIEW(List)), GINT_TO_POINTER(mcd));
 	}
@@ -308,8 +307,8 @@ static void OnMcd_FileChange(GtkWidget *widget, gpointer user_data) {
 	// Ask for name of memory card
 	chooser = gtk_file_chooser_dialog_new(_("Select A File"),
 		NULL, GTK_FILE_CHOOSER_ACTION_OPEN,
-		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_OPEN, GTK_RESPONSE_OK,
+		"_Cancel", GTK_RESPONSE_CANCEL,
+		"_OK", GTK_RESPONSE_OK,
 		NULL);
 
 	if (memcard == 1)
@@ -350,7 +349,7 @@ static void OnMcd_Format(GtkWidget *widget, gpointer user_data) {
 	gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(message_dialog),
 		_("If you format the memory card, the card will be empty, and any existing data overwritten."));
 	gtk_dialog_add_buttons(GTK_DIALOG(message_dialog),
-		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		"_Cancel", GTK_RESPONSE_CANCEL,
 		_("Format card"), GTK_RESPONSE_YES, NULL);
 
 	result = gtk_dialog_run(GTK_DIALOG(message_dialog));
@@ -375,8 +374,8 @@ static void OnMcd_New(GtkWidget *widget, gpointer user_data) {
 	// Ask for name of new memory card
 	chooser = gtk_file_chooser_dialog_new(_("Create a new Memory Card"),
 		NULL, GTK_FILE_CHOOSER_ACTION_SAVE,
-		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_SAVE, GTK_RESPONSE_OK,
+		"_Cancel", GTK_RESPONSE_CANCEL,
+		"_Save", GTK_RESPONSE_OK,
 		NULL);
 
 	// Card should be put into $HOME/.pcsxr/memcards
@@ -709,7 +708,7 @@ void OnConf_Mcds() {
 
 	builder = gtk_builder_new();
 
-	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+	if (!gtk_builder_add_from_resource(builder, "/org/pcsxr/gui/pcsxr.ui", NULL)) {
 		g_warning("Error: interface could not be loaded!");
 		return;
 	}

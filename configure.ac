@@ -34,6 +34,9 @@ PKG_CHECK_MODULES([SDL2], [sdl2 >= 2.0.0],
     ], AC_MSG_ERROR([*** SDL >= 1.2.12 not found!]))
 ])
 
+AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
+AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
+
 AC_SUBST(GLIB2_CFLAGS)
 AC_SUBST(GLIB2_LIBS)
 AC_SUBST(GTK3_CFLAGS)
