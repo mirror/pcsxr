@@ -52,3 +52,6 @@ GtkResources.h: peopsxgl.gresource.xml $(peopsxgl_gresource)
 #glade_DATA = gpucfg/peopsxgl.ui
 #gladedir = $(datadir)/psemu/
 EXTRA_DIST = $(glade_DATA)
+
+CLEANFILES = peopsxgl.gresource.xml GtkResources.c GtkResources.h
+

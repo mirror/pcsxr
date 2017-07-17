@@ -38,3 +38,6 @@ GtkResources.h: bladesio1.gresource.xml $(bladesio1_gresource)
 #glade_DATA = sio1.ui
 #gladedir = $(datadir)/psemu/
 EXTRA_DIST = $(glade_DATA)
+
+CLEANFILES = bladesio1.gresource.xml GtkResources.c GtkResources.h
+

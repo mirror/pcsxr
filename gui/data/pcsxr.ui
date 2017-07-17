@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.19.0 -->
+<!-- Generated with glade 3.20.0 -->
 <interface>
   <requires lib="gtk+" version="3.14"/>
   <object class="GtkAboutDialog" id="AboutDlg">
@@ -31,6 +31,9 @@
           <placeholder/>
         </child>
       </object>
+    </child>
+    <child>
+      <placeholder/>
     </child>
   </object>
   <object class="GtkDialog" id="CheatListDlg">
@@ -214,6 +217,9 @@
     <action-widgets>
       <action-widget response="0">closbutton1</action-widget>
     </action-widgets>
+    <child>
+      <placeholder/>
+    </child>
   </object>
   <object class="GtkDialog" id="ConfDlg">
     <property name="can_focus">False</property>
@@ -919,6 +925,9 @@
     <action-widgets>
       <action-widget response="-6">btn_ConfClose</action-widget>
     </action-widgets>
+    <child>
+      <placeholder/>
+    </child>
   </object>
   <object class="GtkDialog" id="McdsDlg">
     <property name="can_focus">False</property>
@@ -1731,6 +1740,9 @@
     <action-widgets>
       <action-widget response="-5">McdClose</action-widget>
     </action-widgets>
+    <child>
+      <placeholder/>
+    </child>
   </object>
   <object class="GtkDialog" id="MemViewDlg">
     <property name="can_focus">False</property>
@@ -2013,6 +2025,9 @@
     <action-widgets>
       <action-widget response="0">memview_close</action-widget>
     </action-widgets>
+    <child>
+      <placeholder/>
+    </child>
   </object>
   <object class="GtkDialog" id="NetDlg">
     <property name="can_focus">False</property>
@@ -2169,6 +2184,9 @@
     <action-widgets>
       <action-widget response="-6">closebutton2</action-widget>
     </action-widgets>
+    <child>
+      <placeholder/>
+    </child>
   </object>
   <object class="GtkImage" id="image1">
     <property name="visible">True</property>
@@ -2239,7 +2257,6 @@
   <object class="GtkImage" id="image2">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="xalign">0.49000000953674316</property>
     <property name="icon_name">pcsxr-cd-open</property>
     <property name="icon_size">1</property>
   </object>
@@ -2301,6 +2318,12 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">pcsxr-plugin-sio1</property>
+    <property name="icon_size">1</property>
+  </object>
+  <object class="GtkImage" id="image43">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">pcsxr-pgxp</property>
     <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image5">
@@ -2836,6 +2859,23 @@
                       </object>
                     </child>
                     <child>
+                      <object class="GtkImageMenuItem" id="pgxp1">
+                        <property name="label" translatable="yes">_PGXP...</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="image">image43</property>
+                        <property name="use_stock">False</property>
+                        <signal name="activate" handler="OnConf_Pgxp" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSeparatorMenuItem" id="separator10">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkImageMenuItem" id="cpu1">
                         <property name="label" translatable="yes">_CPU...</property>
                         <property name="visible">True</property>
@@ -3127,6 +3167,9 @@
           </packing>
         </child>
       </object>
+    </child>
+    <child type="titlebar">
+      <placeholder/>
     </child>
   </object>
   <object class="GtkListStore" id="liststore1">
@@ -3745,6 +3788,9 @@
     <action-widgets>
       <action-widget response="0">closebutton</action-widget>
     </action-widgets>
+    <child>
+      <placeholder/>
+    </child>
   </object>
   <object class="GtkListStore" id="liststore5">
     <columns>
@@ -4417,5 +4463,249 @@
     <action-widgets>
       <action-widget response="-6">closebutton1</action-widget>
     </action-widgets>
+    <child>
+      <placeholder/>
+    </child>
+  </object>
+  <object class="GtkListStore" id="liststore6">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Disabled</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Memory only</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Memory + Cpu logic</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkDialog" id="PgxpDlg">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Configure PGXP</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="type_hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="PgxpDlg_close">
+                <property name="label">gtk-close</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">5</property>
+            <child>
+              <object class="GtkFrame" id="PgxpDlg_Options">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label_xalign">0</property>
+                <child>
+                  <object class="GtkAlignment">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="left_padding">12</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkCheckButton" id="PGXP_GTE">
+                            <property name="label" translatable="yes">Enable PGXP GTE vertex creation</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="draw_indicator">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="PGXP_Cache">
+                            <property name="label" translatable="yes">Enable vertex caching.</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="draw_indicator">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="PGXP_Texture">
+                            <property name="label" translatable="yes">Enable perspective correct texturing.</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="draw_indicator">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child type="label">
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Options</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFrame" id="PgxpDlg_Mode">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label_xalign">0</property>
+                <child>
+                  <object class="GtkAlignment">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="left_padding">12</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <property name="baseline_position">top</property>
+                        <child>
+                          <object class="GtkComboBox" id="PGXP_Mode">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_left">40</property>
+                            <property name="margin_right">40</property>
+                            <property name="model">liststore6</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext6"/>
+                              <attributes>
+                                <attribute name="text">0</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="PGXP_Mode_title">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="margin_top">4</property>
+                            <property name="margin_bottom">4</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="PGXP_Mode_description">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_right">10</property>
+                            <property name="wrap">True</property>
+                            <property name="max_width_chars">20</property>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child type="label">
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Select PGXP Mode</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="0">PgxpDlg_close</action-widget>
+    </action-widgets>
+    <child>
+      <placeholder/>
+    </child>
   </object>
 </interface>

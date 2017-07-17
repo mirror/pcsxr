@@ -52,3 +52,6 @@ GtkResources.h: dfxvideo.gresource.xml $(dfxvideo_gresource)
 #glade_DATA = gpucfg-0.1df/dfxvideo.ui
 #gladedir = $(datadir)/psemu/
 EXTRA_DIST = $(glade_DATA)
+
+CLEANFILES = dfxvideo.gresource.xml GtkResources.c GtkResources.h
+

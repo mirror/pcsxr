@@ -53,3 +53,6 @@ GtkResources.h: dfcdrom.gresource.xml $(dfcdrom_gresource)
 #glade_DATA = cdrcfg-0.1df/dfcdrom.ui
 #gladedir = $(datadir)/psemu/
 EXTRA_DIST = $(glade_DATA)
+
+CLEANFILES = dfcdrom.gresource.xml GtkResources.c GtkResources.h
+

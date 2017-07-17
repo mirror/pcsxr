@@ -77,3 +77,5 @@ GtkResources.h: pcsxr.gresource.xml $(pcsxr_gresource)
 pcsxr_LDADD = \
 	../libpcsxcore/libpcsxcore.a \
 	$(GTK3_LIBS) -lpthread -lz -lm -lXext -lXtst
+
+CLEANFILES = pcsxr.gresource.xml GtkResources.c GtkResources.h

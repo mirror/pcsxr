@@ -39,3 +39,5 @@ GtkResources.h: dfinput.gresource.xml $(dfinput_gresource)
 #glade_DATA = dfinput.ui
 #gladedir = $(datadir)/psemu/
 EXTRA_DIST = $(glade_DATA)
+
+CLEANFILES = dfinput.gresource.xml GtkResources.c GtkResources.h

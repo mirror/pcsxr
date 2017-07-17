@@ -38,3 +38,5 @@ GtkResources.h: dfnet.gresource.xml $(dfnet_gresource)
 #glade_DATA = dfnet.ui
 #gladedir = $(datadir)/psemu/
 EXTRA_DIST = $(glade_DATA)
+
+CLEANFILES = dfnet.gresource.xml GtkResources.c GtkResources.h
