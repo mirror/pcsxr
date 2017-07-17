@@ -82,6 +82,7 @@ int main(int argc, char *argv[])
 	if (strcmp(argv[1], "about") == 0) {
 		const char *authors[]= {"Pete Bernert and the P.E.Op.S. team", "Ryan Schultz", "Andrew Burton", NULL};
 		widget = gtk_about_dialog_new ();
+		gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG(widget), "help-about");
 		gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG (widget), "dfsound PCSXR Sound Plugin");
 		gtk_about_dialog_set_version (GTK_ABOUT_DIALOG (widget), "1.6");
 		gtk_about_dialog_set_authors (GTK_ABOUT_DIALOG (widget), authors);
@@ -98,7 +99,7 @@ int main(int argc, char *argv[])
 	else if (strcmp(argv[1], "configure") == 0) {
 		builder = gtk_builder_new();
 
-		if (!gtk_builder_add_from_file(builder, DATADIR "dfsound.ui", NULL)) {
+		if (!gtk_builder_add_from_resource(builder, "/org/pcsxr/dfsound/dfsound.ui", NULL)) {
 			g_warning("We could not load the interface!");
 			return 0;
 		}

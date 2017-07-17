@@ -246,7 +246,6 @@ static void UpdateKeyList() {
 
 		gtk_tree_view_set_model(GTK_TREE_VIEW(widget), GTK_TREE_MODEL(store));
 		g_object_unref(G_OBJECT(store));
-		gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(widget), TRUE);
 		gtk_widget_show(widget);
 	}
 }
@@ -655,7 +654,7 @@ long PADconfigure() {
 
 	xml = gtk_builder_new();
 
-	if (!gtk_builder_add_from_file(xml, DATADIR "dfinput.ui", NULL)) {
+	if (!gtk_builder_add_from_resource(xml, "/org/pcsxr/dfinput/dfinput.ui", NULL)) {
 		g_warning("We could not load the interface!");
 		return -1;
 	}
@@ -837,6 +836,7 @@ void PADabout() {
 	GtkWidget *widget;
 
 	widget = gtk_about_dialog_new();
+	gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG(widget), "help-about");
 	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(widget), "Gamepad/Keyboard Input");
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(widget), "1.2");
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(widget), authors);

@@ -26,9 +26,29 @@ libDFXVideo_la_LDFLAGS = -module -avoid-version
 libDFXVideo_la_LIBADD = -lX11 -lXv -lXext -lm
 
 bin_PROGRAMS = cfgDFXVideo
-cfgDFXVideo_SOURCES = gpucfg-0.1df/main.c
+cfgDFXVideo_SOURCES = gpucfg-0.1df/main.c GtkResources.c GtkResources.h
 cfgDFXVideo_LDADD = $(GTK3_LIBS) -lXext
 
-glade_DATA = gpucfg-0.1df/dfxvideo.ui
-gladedir = $(datadir)/psemu/
+# gresource.xml is dynamically generated in CMake. Mirror that here in a static way.
+define gresource_xml =
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/pcsxr/dfxvideo">
+    <file>dfxvideo.ui</file>
+  </gresource>
+</gresources>
+endef
+
+dfxvideo.gresource.xml:
+	$(file >$@,$(gresource_xml))
+dfxvideo_gresource: dfxvideo.gresource.xml
+	$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir)/gpucfg-0.1df --generate-dependencies $(srcdir)/$<)
+GtkResources.c: dfxvideo.gresource.xml $(dfxvideo_gresource)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir)/gpucfg-0.1df --generate-source --c-name dfxvideo $<
+GtkResources.h: dfxvideo.gresource.xml $(dfxvideo_gresource)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir)/gpucfg-0.1df --generate-header --c-name dfxvideo $<
+
+
+#glade_DATA = gpucfg-0.1df/dfxvideo.ui
+#gladedir = $(datadir)/psemu/
 EXTRA_DIST = $(glade_DATA)

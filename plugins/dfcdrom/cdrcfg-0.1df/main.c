@@ -208,7 +208,7 @@ long CDRconfigure() {
 
 	builder = gtk_builder_new();
 		
-	if (!gtk_builder_add_from_file(builder, DATADIR "dfcdrom.ui", NULL)) {
+	if (!gtk_builder_add_from_resource(builder, "/org/pcsxr/dfcdrom/dfcdrom.ui", NULL)) {
 		g_warning("We could not load the interface!");
 		return 0;
 	}
@@ -256,6 +256,7 @@ void CDRabout() {
 							"Wei Mingzhi <whistler_wmz@users.sf.net>", NULL};
 
 	widget = gtk_about_dialog_new();
+	gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG(widget), "help-about");
 	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(widget), "CD-ROM Device Reader");
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(widget), "1.0");
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(widget), authors);
@@ -276,13 +277,13 @@ int main(int argc, char *argv[]) {
 	gtk_init(&argc, &argv);
 
 	if (argc < 2) {
-		printf ("Usage: cfgBladeSio1 {about | configure}\n");
+		printf ("Usage: cfgDFCdrom {about | configure}\n");
 		return 0;
 	}
 
 	if (strcmp(argv[1], "configure") != 0 && 
 		strcmp(argv[1], "about") != 0) {
-		printf ("Usage: cfgBladeSio1 {about | configure}\n");
+		printf ("Usage: cfgDFCdrom {about | configure}\n");
 		return 0;
 	}
 
