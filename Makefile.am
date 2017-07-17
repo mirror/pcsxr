@@ -11,6 +11,7 @@ SUBDIRS += plugins/dfsound
 SUBDIRS += plugins/dfxvideo
 SUBDIRS += plugins/dfcdrom
 SUBDIRS += plugins/dfnet
+SUBDIRS += plugins/nullsio1
 
 SUBDIRS += $(BLADESIO1)
 SUBDIRS += $(PEOPSXGL)
