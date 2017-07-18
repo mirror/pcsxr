@@ -294,6 +294,9 @@ static void UpdateMcdDlg(GtkWidget *widget) {
 }
 
 static void OnMcd_Close(GtkDialog *dialog, gint arg1, gpointer user_data) {
+
+    Config.PerGameMcd = gtk_toggle_button_get_active(
+        GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_PerGameMcd")));
 	quit = TRUE;
 	SaveConfig();
 	gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -747,6 +750,12 @@ void OnConf_Mcds() {
 	g_signal_connect_data(G_OBJECT(treesel2), "changed",
 						  G_CALLBACK(OnTreeSelectionChanged),
 						  GINT_TO_POINTER(2), NULL, G_CONNECT_AFTER);
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(
+        gtk_builder_get_object(builder, "GtkCheckButton_PerGameMcd")), Config.PerGameMcd);
+    // Disable it because it is not working yet
+    gtk_widget_set_sensitive(GTK_WIDGET(
+        gtk_builder_get_object(builder, "GtkCheckButton_PerGameMcd")), FALSE);
 
 	LoadMcdDlg(dialog);
 

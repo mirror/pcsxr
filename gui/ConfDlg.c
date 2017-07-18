@@ -877,6 +877,14 @@ static void OnCpu_CpuClicked(GtkWidget *widget, gpointer user_data) {
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
 }
 
+// When overclock checkbutton is changed, enable/disable the selection spinbutton
+static void OnCpu_OverClockClicked(GtkWidget *widget, gpointer user_data){
+    GtkWidget *spin;
+
+    spin = GTK_WIDGET(gtk_builder_get_object(builder, "GtkSpinButton_PsxClock"));
+    gtk_widget_set_sensitive(spin, gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)));
+}
+
 void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 	GtkWidget *widget;
 	long unsigned int tmp;
@@ -936,6 +944,7 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 			SysClose();
 			exit(1);
 		}
+		psxCpu->SetPGXPMode(Config.PGXP_Mode);
 		psxCpu->Reset();
 	}
 
@@ -947,7 +956,14 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 	Config.Widescreen = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Widescreen")));
 	Config.HackFix = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_HackFix")));
 
-	SaveConfig();
+    Config.OverClock = gtk_toggle_button_get_active(
+        GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_OverClock")));
+    Config.PsxClock = gtk_spin_button_get_value(
+        GTK_SPIN_BUTTON(gtk_builder_get_object(builder, "GtkSpinButton_PsxClock")));
+    Config.MemHack = gtk_toggle_button_get_active(
+        GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_MemHack")));
+
+    SaveConfig();
 
 	gtk_widget_destroy(CpuDlg);
 	CpuDlg = NULL;
@@ -1029,12 +1045,24 @@ void OnConf_Cpu() {
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Widescreen")), Config.Widescreen);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_HackFix")), Config.HackFix);
 
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(
+        gtk_builder_get_object(builder, "GtkCheckButton_OverClock")), Config.OverClock);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(
+        gtk_builder_get_object(builder, "GtkSpinButton_PsxClock")), Config.PsxClock);
+    OnCpu_OverClockClicked(GTK_WIDGET(
+        gtk_builder_get_object(builder, "GtkCheckButton_OverClock")), NULL);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(
+        gtk_builder_get_object(builder, "GtkCheckButton_MemHack")), Config.MemHack);
+
+    g_signal_connect_data(G_OBJECT(gtk_builder_get_object(builder, "GtkCheckButton_OverClock")), "toggled",
+                          G_CALLBACK(OnCpu_OverClockClicked), builder, NULL, G_CONNECT_AFTER);
+
 	// Setup a handler for when Close or Cancel is clicked
 	g_signal_connect_data(G_OBJECT(CpuDlg), "response",
-			G_CALLBACK(OnCpu_Clicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+                          G_CALLBACK(OnCpu_Clicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }
 
-//When a different mode is selected, display some informational text
+//When a different PGXP mode is selected, display some informational text
 static void OnPgxp_ModeChanged(GtkWidget *widget, gpointer user_data) {
     uint8_t mode;
 
@@ -1099,7 +1127,6 @@ void OnConf_Pgxp() {
     }
 
     PgxpDlg = GTK_WIDGET(gtk_builder_get_object(builder, "PgxpDlg"));
-    gtk_window_set_default_size(GTK_WINDOW(PgxpDlg), 320, 320);
     gtk_widget_show (PgxpDlg);
 
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(
