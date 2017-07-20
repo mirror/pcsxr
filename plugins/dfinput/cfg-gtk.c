@@ -624,9 +624,9 @@ static void PopulateDevList() {
 		for (j = 0; j < n; j++) {
 			#if SDL_VERSION_ATLEAST(2, 0, 0)
 				SDL_Joystick *joystick = SDL_JoystickOpen(j);
-				sprintf(buf, "%d: %s", j + 1, SDL_JoystickName(joystick));
+				snprintf(buf, sizeof(buf), "%d: %s", j + 1, SDL_JoystickName(joystick));
 			#else
-				sprintf(buf, "%d: %s", j + 1, SDL_JoystickName(j));
+				snprintf(buf, sizeof(buf), "%d: %s", j + 1, SDL_JoystickName(j));
 			#endif
 			gtk_list_store_append(store, &iter);
 			gtk_list_store_set(store, &iter, 0, buf, -1);

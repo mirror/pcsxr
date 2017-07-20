@@ -17,10 +17,14 @@
  */
 
 #include "pad.h"
-#if !SDL_VERSION_ATLEAST(2,0,0) && defined(__linux__)
+#if defined(__linux__)
+#include <sys/types.h>
+#include <sys/wait.h>
+#if !SDL_VERSION_ATLEAST(2,0,0)
 #include <linux/input.h>
 #include <sys/file.h>
 #include <time.h>
+#endif
 #endif
 
 #if SDL_VERSION_ATLEAST(2,0,0)
@@ -121,11 +125,13 @@ long PADopen(unsigned long *Disp) {
 		}
  
 #if SDL_VERSION_ATLEAST(2,0,0)
-		SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
-		
-    has_haptic = 0;
-    if (SDL_InitSubSystem(SDL_INIT_HAPTIC) == 0)
-      has_haptic = 1;
+        SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
+        if (SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER) == -1)
+            return PSE_PAD_ERR_FAILURE;
+	
+        has_haptic = 0;
+        if (SDL_InitSubSystem(SDL_INIT_HAPTIC) == 0)
+            has_haptic = 1;
 #endif
 
 		InitSDLJoy();
