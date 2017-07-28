@@ -34,6 +34,7 @@
 
 #include "../libpcsxcore/plugins.h"
 #include "../libpcsxcore/cheat.h"
+#include "../libpcsxcore/cdrom.h"
 
 #include "MemcardDlg.h"
 #include "ConfDlg.h"
@@ -775,11 +776,9 @@ static gchar *Open_Iso_Proc() {
 		  strncpy(current_folder, filename, strrchr(filename, '/') - filename);
 		}
 
-		/* If ISO path is NULL save current path. */
-		if (!S_ISDIR(sb.st_mode)) {
+		/* Save current path. */
 		  strcpy(Config.IsoImgDir, current_folder);
 		  SaveConfig();
-		}
 
 		/* free useless data */
 		GSList * ll = l;

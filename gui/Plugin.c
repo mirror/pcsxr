@@ -30,6 +30,7 @@
 #include "../libpcsxcore/plugins.h"
 #include "../libpcsxcore/spu.h"
 #include "../libpcsxcore/cdriso.h"
+#include "../libpcsxcore/pgxp_mem.h"
 
 #include "nopic.h"
 
@@ -241,6 +242,9 @@ void PADhandleKey(int key) {
 
 			LidInterrupt();
 			break;
+        case XK_F11:
+            GPU_toggleDebug();
+            break;
 		case XK_F12:
 			psxReset();
 			break;
@@ -329,6 +333,7 @@ int _OpenPlugins() {
 	SPU_registerCallback(SPUirq);
 	ret = GPU_open(&gpuDisp, "PCSXR", NULL);
 	if (ret < 0) { SysMessage(_("Error opening GPU plugin!")); return -1; }
+	GPU_pgxpMemory(0, PGXP_GetMem());
 	ret = PAD1_open(&gpuDisp);
 	ret |= PAD1_init(1); // Allow setting to change during run
 	if (ret < 0) { SysMessage(_("Error opening Controller 1 plugin!")); return -1; }
