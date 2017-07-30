@@ -29,6 +29,7 @@
 #define DEFAULT_MEM_CARD_1 "/.pcsxr/memcards/card1.mcd"
 #define DEFAULT_MEM_CARD_2 "/.pcsxr/memcards/card2.mcd"
 #define MEMCARD_DIR "/.pcsxr/memcards/"
+#define MEMCARD_PERGAME_DIR "/.pcsxr/memcards/games"
 #define PLUGINS_DIR "/.pcsxr/plugins/"
 #define PLUGINS_CFG_DIR "/.pcsxr/plugins/cfg/"
 #define PCSXR_DOT_DIR "/.pcsxr/"

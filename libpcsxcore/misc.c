@@ -356,13 +356,9 @@ int CheckCdrom() {
 		else Config.PsxType = PSX_TYPE_NTSC; // ntsc
 	}
 
-
-	if (Config.OverClock == 0) 
-	{
+	if (Config.OverClock == 0) {
 		PsxClockSpeed = 33868800; // 33.8688 MHz (stock)
-	}
-	else 
-	{
+	} else {
 		PsxClockSpeed = 33868800 * Config.PsxClock;
 	}
 
@@ -376,9 +372,22 @@ int CheckCdrom() {
 	memset(Config.PsxExeName, 0, sizeof(Config.PsxExeName));
 	strncpy(Config.PsxExeName, exename, 11);
 
-	if(Config.PerGameMcd)
-		LoadMcds(Config.Mcd1, Config.Mcd2);
-	
+	if(Config.PerGameMcd) {
+        char mcd1path[MAXPATHLEN] = { '\0' };
+        char mcd2path[MAXPATHLEN] = { '\0' };
+#ifdef _WINDOWS
+        sprintf(mcd1path, "memcards\\games\\%s-%02d.mcd", Config.PsxExeName, 1);
+        sprintf(mcd2path, "memcards\\games\\%s-%02d.mcd", Config.PsxExeName, 2);
+#else
+        //lk: dot paths should not be hardcoded here, this is for testing only
+        sprintf(mcd1path, "%s/.pcsxr/memcards/games/%s-%02d.mcd", getenv("HOME"), Config.PsxExeName, 1);
+        sprintf(mcd2path, "%s/.pcsxr/memcards/games/%s-%02d.mcd", getenv("HOME"), Config.PsxExeName, 2);
+#endif
+        strcpy(Config.Mcd1, mcd1path);
+        strcpy(Config.Mcd2, mcd2path);
+ 		LoadMcds(Config.Mcd1, Config.Mcd2);
+    }
+
 	BuildPPFCache();
 	LoadSBI(NULL);
 
@@ -612,7 +621,7 @@ int SaveStateMem(const u32 id) {
 	char name[32];
 	int ret = -1;
 
-	snprintf(name, 32, SHM_SS_NAME_TEMPLATE, id);
+	snprintf(name, sizeof(name), SHM_SS_NAME_TEMPLATE, id);
 	int fd = shm_open(name, O_CREAT | O_RDWR | O_TRUNC, 0666);
 
 	if (fd >= 0) {
@@ -635,7 +644,7 @@ int LoadStateMem(const u32 id) {
 	char name[32];
 	int ret = -1;
 
-	snprintf(name, 32, SHM_SS_NAME_TEMPLATE, id);
+	snprintf(name, sizeof(name), SHM_SS_NAME_TEMPLATE, id);
 	int fd = shm_open(name, O_RDONLY, 0444);
 
 	if (fd >= 0) {

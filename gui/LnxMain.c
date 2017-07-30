@@ -83,6 +83,7 @@ static void CheckSubDir() {
 
 	CreateHomeConfigDir(BIOS_DIR);
 	CreateHomeConfigDir(MEMCARD_DIR);
+    CreateHomeConfigDir(MEMCARD_PERGAME_DIR);
 	CreateHomeConfigDir(STATES_DIR);
 	CreateHomeConfigDir(PLUGINS_DIR);
 	CreateHomeConfigDir(PLUGINS_CFG_DIR);

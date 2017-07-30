@@ -25,6 +25,7 @@
 #include "cdriso.h"
 
 static char IsoFile[MAXPATHLEN] = "";
+static char AppPath[MAXPATHLEN] = "";		//Application path(== pcsxr.exe directory)
 static s64 cdOpenCaseTime = 0;
 
 GPUupdateLace         GPU_updateLace;
@@ -845,8 +846,21 @@ void SetIsoFile(const char *filename) {
 	strncpy(IsoFile, filename, MAXPATHLEN);
 }
 
+// Set pcsxr.exe directory. This is not contain filename(and ext)).
+void SetAppPath(const char *apppath ) {
+	if (apppath == NULL) {
+		AppPath[0] = '\0';
+		return;
+	}
+	strncpy(AppPath, apppath, MAXPATHLEN);
+}
+
 const char *GetIsoFile(void) {
 	return IsoFile;
+}
+
+const char *GetAppPath(void) {
+	return AppPath;
 }
 
 boolean UsingIso(void) {
