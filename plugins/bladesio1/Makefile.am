@@ -40,4 +40,3 @@ GtkResources.h: bladesio1.gresource.xml $(bladesio1_gresource)
 EXTRA_DIST = $(glade_DATA)
 
 CLEANFILES = bladesio1.gresource.xml GtkResources.c GtkResources.h
-

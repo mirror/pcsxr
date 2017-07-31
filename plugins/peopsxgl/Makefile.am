@@ -54,4 +54,3 @@ GtkResources.h: peopsxgl.gresource.xml $(peopsxgl_gresource)
 EXTRA_DIST = $(glade_DATA)
 
 CLEANFILES = peopsxgl.gresource.xml GtkResources.c GtkResources.h
-

@@ -76,4 +76,3 @@ GtkResources.h: dfsound.gresource.xml $(dfsound_gresource)
 EXTRA_DIST = $(glade_DATA)
 
 CLEANFILES = dfsound.gresource.xml GtkResources.c GtkResources.h
-

@@ -54,4 +54,3 @@ GtkResources.h: dfxvideo.gresource.xml $(dfxvideo_gresource)
 EXTRA_DIST = $(glade_DATA)
 
 CLEANFILES = dfxvideo.gresource.xml GtkResources.c GtkResources.h
-

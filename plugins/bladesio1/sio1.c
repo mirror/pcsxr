@@ -30,7 +30,10 @@
 void AboutDlgProc();
 void ConfDlgProc();
 #else
+#include <unistd.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #endif
 
 #include "typedefs.h"

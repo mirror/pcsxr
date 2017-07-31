@@ -46,6 +46,7 @@ int psxInit() {
 
 	if (psxMemInit() == -1) return -1;
 	PGXP_Init();
+    PauseDebugger();
 
 	return psxCpu->Init();
 }

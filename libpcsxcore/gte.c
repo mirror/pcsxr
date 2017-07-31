@@ -250,43 +250,37 @@ static void CTC2(u32 value, int reg) {
 	psxRegs.CP2C.p[reg].d = value;
 }
 
-void gteMFC2()
-{
+void gteMFC2() {
 	// CPU[Rt] = GTE_D[Rd]
 	if (!_Rt_) return;
 	psxRegs.GPR.r[_Rt_] = MFC2(_Rd_);
 }
 
-void gteCFC2()
-{
+void gteCFC2() {
 	// CPU[Rt] = GTE_C[Rd]
 	if (!_Rt_) return;
 	psxRegs.GPR.r[_Rt_] = psxRegs.CP2C.p[_Rd_].d;
 }
 
-void gteMTC2()
-{
+void gteMTC2() {
 	MTC2(psxRegs.GPR.r[_Rt_], _Rd_);
 }
 
-void gteCTC2()
-{
+void gteCTC2() {
 	CTC2(psxRegs.GPR.r[_Rt_], _Rd_);
 }
 
 #define _oB_ (psxRegs.GPR.r[_Rs_] + _Imm_)
 
 void gteLWC2() {
-	u32 val = psxMemRead32(_oB_);
-	MTC2(val, _Rt_);
+	MTC2(psxMemRead32(_oB_), _Rt_);
 }
 
 void gteSWC2() {
-	u32 val = MFC2(_Rt_);
-	psxMemWrite32(_oB_, val);
+	psxMemWrite32(_oB_, MFC2(_Rt_));
 }
 
-inline s64 gte_shift(s64 a, int sf) {
+static inline s64 gte_shift(s64 a, int sf) {
 	if(sf > 0)
 		return a >> 12;
 	else if(sf < 0)

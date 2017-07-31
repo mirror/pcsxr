@@ -22,7 +22,7 @@
 #include <string.h>
 #include <stdint.h>
 
-#include "psxcommon.h"
+#include "typedefs.h"
 #include "psemu_plugin_defs.h"
 
 #include "sio1.h"

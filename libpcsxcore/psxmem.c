@@ -114,7 +114,6 @@ void psxMemReset() {
 
 	// Load BIOS
 	if (strcmp(Config.Bios, "HLE") != 0) {
-
 	   //AppPath's priority is high.
 		const char* apppath = GetAppPath();
 		if( strlen(apppath) > 0 )
@@ -150,8 +149,7 @@ u8 psxMemRead8(u32 mem) {
 	char *p;
 	u32 t;
 
-	if (!Config.MemHack)
-	{
+	if (!Config.MemHack) {
 		psxRegs.cycle += 0;
 	}
 
@@ -180,8 +178,7 @@ u16 psxMemRead16(u32 mem) {
 	char *p;
 	u32 t;
 
-	if (!Config.MemHack)
-	{
+	if (!Config.MemHack) {
 		psxRegs.cycle += 1;
 	}
 	
@@ -210,8 +207,7 @@ u32 psxMemRead32(u32 mem) {
 	char *p;
 	u32 t;
 
-	if (!Config.MemHack)
-	{
+	if (!Config.MemHack) {
 		psxRegs.cycle += 1;
 	}
 
@@ -240,8 +236,7 @@ void psxMemWrite8(u32 mem, u8 value) {
 	char *p;
 	u32 t;
 
-	if (!Config.MemHack)
-	{
+	if (!Config.MemHack) {
 		psxRegs.cycle += 1;
 	}
 	
@@ -272,8 +267,7 @@ void psxMemWrite16(u32 mem, u16 value) {
 	char *p;
 	u32 t;
 
-	if (!Config.MemHack)
-	{
+	if (!Config.MemHack) {
 		psxRegs.cycle += 1;
 	}
 		
@@ -304,8 +298,7 @@ void psxMemWrite32(u32 mem, u32 value) {
 	char *p;
 	u32 t;
 
-	if (!Config.MemHack)
-	{
+	if (!Config.MemHack) {
 		psxRegs.cycle += 1;
 	}
 

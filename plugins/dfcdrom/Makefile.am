@@ -55,4 +55,3 @@ GtkResources.h: dfcdrom.gresource.xml $(dfcdrom_gresource)
 EXTRA_DIST = $(glade_DATA)
 
 CLEANFILES = dfcdrom.gresource.xml GtkResources.c GtkResources.h
-

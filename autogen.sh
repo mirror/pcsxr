@@ -8,8 +8,10 @@ for dir in include m4; do
         mkdir "$dir"
     fi
 done
-autoreconf -f -i .
+autoreconf -f -i
 if [ $? -ne 0 ]; then
   echo "autoreconf failed"
   exit $?
 fi
+
+./configure --enable-maintainer-mode "$@"

@@ -230,6 +230,10 @@ Error messages (5xx):
 */
 
 static int debugger_active = 0, paused = 0, trace = 0, printpc = 0, reset = 0, resetting = 0;
+static int run_to = 0;
+static u32 run_to_addr = 0;
+static int step_over = 0;
+static u32 step_over_addr = 0;
 static int mapping_e = 0, mapping_r8 = 0, mapping_r16 = 0, mapping_r32 = 0, mapping_w8 = 0, mapping_w16 = 0, mapping_w32 = 0;
 static int breakmp_e = 0, breakmp_r8 = 0, breakmp_r16 = 0, breakmp_r32 = 0, breakmp_w8 = 0, breakmp_w16 = 0, breakmp_w32 = 0;
 
@@ -393,12 +397,33 @@ void ProcessDebug() {
         }
     }
     if (!paused) {
-		if(trace && printpc)
-		{
+		if(trace && printpc) {
 			char reply[256];
 			sprintf(reply, "219 %s\r\n", disR3000AF(psxMemRead32(psxRegs.pc), psxRegs.pc));
 			WriteSocket(reply, strlen(reply));
 		}
+		
+        if(step_over) {
+            if(psxRegs.pc == step_over_addr) {
+                char reply[256];
+                step_over = 0;
+                step_over_addr = 0;
+                sprintf(reply, "050 @%08X\r\n", psxRegs.pc);
+                WriteSocket(reply, strlen(reply));
+                paused = 1;
+            }
+        }
+        
+        if(run_to) {
+            if(psxRegs.pc == run_to_addr) {
+                char reply[256];
+                run_to = 0;
+                run_to_addr = 0;
+                sprintf(reply, "040 @%08X\r\n", psxRegs.pc);
+                WriteSocket(reply, strlen(reply));
+                paused = 1;
+            }
+        }
 		
         DebugCheckBP(psxRegs.pc, BE);
     }
@@ -1078,6 +1103,37 @@ static void ProcessCommands() {
             reset = 1;
             sprintf(reply, "499 Resetting\r\n");
             break;
+        case 0x3A0:
+            // run to
+            p = arguments;
+            if (arguments) {
+                run_to = 1;
+                run_to_addr = strtol(arguments, &p, 16);
+                paused = 0;
+            }
+            if (p == arguments) {
+                sprintf(reply, "500 Malformed 3A0 command '%s'\r\n", arguments);
+                break;
+            }
+            sprintf(reply, "4A0 run to addr %08X\r\n", run_to_addr);
+            break;
+        case 0x3A1:
+            // step over (jal)
+            if(paused) {
+                u32 opcode = psxMemRead32(psxRegs.pc);
+                if((opcode >> 26) == 3) {
+                    step_over = 1;
+                    step_over_addr = psxRegs.pc + 8;
+                    paused = 0;
+                    
+                    sprintf(reply, "4A1 step over addr %08X\r\n", psxRegs.pc);
+                }
+                else {
+                    trace = 1;
+                    paused = 0;
+                }
+            }
+            break;
         default:
             sprintf(reply, "500 Unknown command '%s'\r\n", cmd);
             break;
@@ -1100,6 +1156,7 @@ void DebugCheckBP(u32 address, enum breakpoint_types type) {
 
     if (!debugger_active || reset)
         return;
+    
     for (bp = first; bp; bp = next_breakpoint(bp)) {
         if ((bp->type == type) && (bp->address == address)) {
             sprintf(reply, "030 %X@%08X\r\n", bp->number, psxRegs.pc);

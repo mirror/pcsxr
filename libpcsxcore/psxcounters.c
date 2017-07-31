@@ -68,10 +68,12 @@ static const u32 FrameRate[]      = { 60, 50 };
 static const u32 VBlankStart[]    = { 243, 256 };
 static const u32 SpuUpdInterval[] = { 23, 22 };
 
-#if defined(PSXHW_LOG) && defined(PSXMEM_LOG) && defined(PSXDMA_LOG) // automatic guess if we want trace level logging
+#if defined(PSXHW_LOG)
+#if defined(PSXMEM_LOG) && defined(PSXDMA_LOG) // automatic guess if we want trace level logging
 static const s32 VerboseLevel     = 4;
 #else
 static const s32 VerboseLevel     = 0;
+#endif
 #endif
 static const u16 JITTER_FLAGS     = (Rc2OneEighthClock|RcIrqRegenerate|RcCountToTarget);
 

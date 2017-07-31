@@ -80,8 +80,7 @@ void EmuUpdate() {
 	}
 }
 
-void EmuSetPGXPMode(u32 pgxpMode)
-{
+void EmuSetPGXPMode(u32 pgxpMode) {
 	psxSetPGXPMode(pgxpMode);
 }
 

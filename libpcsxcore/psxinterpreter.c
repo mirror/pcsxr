@@ -559,13 +559,19 @@ void psxSLTU() 	{ if (!_Rd_) return; _rRd_ = _u32(_rRs_) < _u32(_rRt_); }	// Rd 
 * Format:  OP rs, rt                                     *
 *********************************************************/
 void psxDIV() {
-	if (_i32(_rRt_) != 0) {
+	if (!_i32(_rRt_)) {
+		if (_i32(_rRs_) & 0x80000000) {
+			_i32(_rLo_) = 1;
+		} else {
+		_i32(_rLo_) = 0xFFFFFFFF;
+		_i32(_rHi_) = _i32(_rRs_);
+		}
+	} else if (_i32(_rRs_) == 0x80000000 && _i32(_rRt_) == 0xFFFFFFFF) {
+		_i32(_rLo_) = 0x80000000;
+		_i32(_rHi_) = 0;
+	} else {
 		_i32(_rLo_) = _i32(_rRs_) / _i32(_rRt_);
 		_i32(_rHi_) = _i32(_rRs_) % _i32(_rRt_);
-	}
-	else {
-		_i32(_rLo_) = 0xffffffff;
-		_i32(_rHi_) = _i32(_rRs_);
 	}
 }
 
@@ -1115,7 +1121,6 @@ void (*psxCP2BSC[32])() = {
 };
 
 #include "psxinterpreter_pgxp.h"
-
 // Trace all functions using PGXP
 static void(*pgxpPsxBSC[64])() = {
 	psxSPECIAL, psxREGIMM, psxJ   , psxJAL  , psxBEQ , psxBNE , psxBLEZ, psxBGTZ,

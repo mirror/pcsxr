@@ -156,12 +156,10 @@ static void iFlushRegs() {
 	}
 }
 
-static void iPushReg(int reg) 
-{
+static void iPushReg(int reg) {
 	if (IsConst(reg)) {
 		PUSH32I(iRegs[reg].k);
-	}
-	else {
+	} else {
 		PUSH32M((u32)&psxRegs.GPR.r[reg]);
 	}
 }
@@ -619,9 +617,6 @@ static void recADDIU()  {
 
 //	iFlushRegs();
 
-
-
-
 	if (_Rs_ == _Rt_) {
 		if (IsConst(_Rt_)) {
 			iRegs[_Rt_].k+= _Imm_;
@@ -651,7 +646,6 @@ static void recADDIU()  {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 		}
 	}
-
 }
 
 static void recADDI()  {
@@ -660,46 +654,35 @@ static void recADDI()  {
 
 	//	iFlushRegs();
 
-
-
-
 	if (_Rs_ == _Rt_) {
 		if (IsConst(_Rt_)) {
 			iRegs[_Rt_].k += _Imm_;
-		}
-		else {
+		} else {
 			if (_Imm_ == 1) {
 				INC32M((u32)&psxRegs.GPR.r[_Rt_]);
-			}
-			else if (_Imm_ == -1) {
+			} else if (_Imm_ == -1) {
 				DEC32M((u32)&psxRegs.GPR.r[_Rt_]);
-			}
-			else if (_Imm_) {
+			} else if (_Imm_) {
 				ADD32ItoM((u32)&psxRegs.GPR.r[_Rt_], _Imm_);
 			}
 		}
-	}
-	else {
+	} else {
 		if (IsConst(_Rs_)) {
 			MapConst(_Rt_, iRegs[_Rs_].k + _Imm_);
-		}
-		else {
+		} else {
 			iRegs[_Rt_].state = ST_UNK;
 
 			MOV32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rs_]);
 			if (_Imm_ == 1) {
 				INC32R(EAX);
-			}
-			else if (_Imm_ == -1) {
+			} else if (_Imm_ == -1) {
 				DEC32R(EAX);
-			}
-			else if (_Imm_) {
+			} else if (_Imm_) {
 				ADD32ItoR(EAX, _Imm_);
 			}
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 		}
 	}
-
 }
 
 static void recSLTI() {
@@ -707,7 +690,6 @@ static void recSLTI() {
 	if (!_Rt_) return;
 
 //	iFlushRegs();
-
 
 	if (IsConst(_Rs_)) {
 		MapConst(_Rt_, (s32)iRegs[_Rs_].k < _Imm_);
@@ -720,8 +702,6 @@ static void recSLTI() {
 	    AND32ItoR(EAX, 0xff);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 	}
-
-
 }
 
 static void recSLTIU() {
@@ -729,7 +709,6 @@ static void recSLTIU() {
 	if (!_Rt_) return;
 
 //	iFlushRegs();
-
 
 	if (IsConst(_Rs_)) {
 		MapConst(_Rt_, iRegs[_Rs_].k < _ImmU_);
@@ -742,8 +721,6 @@ static void recSLTIU() {
 	    AND32ItoR(EAX, 0xff);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 	}
-
-
 }
 
 static void recANDI() {
@@ -751,7 +728,6 @@ static void recANDI() {
 	if (!_Rt_) return;
 
 //	iFlushRegs();
-
 
 	if (_Rs_ == _Rt_) {
 		if (IsConst(_Rt_)) {
@@ -770,14 +746,13 @@ static void recANDI() {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 		}
 	}
-
-
 }
 
 static void recORI() {
 // Rt = Rs Or Im
 	if (!_Rt_) return;
 
+//	iFlushRegs();
 
 	if (_Rs_ == _Rt_) {
 		if (IsConst(_Rt_)) {
@@ -796,14 +771,13 @@ static void recORI() {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 		}
 	}
-
-
 }
 
 static void recXORI() {
 // Rt = Rs Xor Im
 	if (!_Rt_) return;
 
+//	iFlushRegs();
 
 	if (_Rs_ == _Rt_) {
 		if (IsConst(_Rt_)) {
@@ -822,8 +796,6 @@ static void recXORI() {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rt_], EAX);
 		}
 	}
-
-
 }
 //#endif
 //end of * Arithmetic with immediate operand  
@@ -839,8 +811,6 @@ static void recLUI()  {
 	if (!_Rt_) return;
 
 	MapConst(_Rt_, psxRegs.code << 16);
-
-
 }
 //#endif
 //End of Load Higher .....
@@ -868,9 +838,6 @@ static void recADDU() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
-
-
-
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rs_].k + iRegs[_Rt_].k);
@@ -933,8 +900,6 @@ static void recADDU() {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 		}
 	}
-
-
 }
 
 static void recADD() {
@@ -947,8 +912,6 @@ static void recSUBU() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
-
-
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rs_].k - iRegs[_Rt_].k);
@@ -971,8 +934,6 @@ static void recSUBU() {
 		SUB32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rt_]);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-
-
 }   
 
 static void recSUB() {
@@ -985,7 +946,6 @@ static void recAND() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
-
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rs_].k & iRegs[_Rt_].k);
@@ -1024,8 +984,6 @@ static void recAND() {
 			MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 		}
 	}
-
-
 }   
 
 static void recOR() {
@@ -1033,8 +991,6 @@ static void recOR() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
-
-
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rs_].k | iRegs[_Rt_].k);
@@ -1057,8 +1013,6 @@ static void recOR() {
 		OR32MtoR (EAX, (u32)&psxRegs.GPR.r[_Rt_]);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-
-
 }   
 
 static void recXOR() {
@@ -1066,8 +1020,6 @@ static void recXOR() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
-
-
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rs_].k ^ iRegs[_Rt_].k);
@@ -1090,8 +1042,6 @@ static void recXOR() {
 		XOR32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rt_]);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-
-
 }
 
 static void recNOR() {
@@ -1099,7 +1049,6 @@ static void recNOR() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
-
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, ~(iRegs[_Rs_].k | iRegs[_Rt_].k));
@@ -1125,8 +1074,6 @@ static void recNOR() {
 		NOT32R   (EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-
-
 }
 
 static void recSLT() {
@@ -1134,8 +1081,6 @@ static void recSLT() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
-
-
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, (s32)iRegs[_Rs_].k < (s32)iRegs[_Rt_].k);
@@ -1164,8 +1109,6 @@ static void recSLT() {
 		AND32ItoR(EAX, 0xff);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-
-
 }  
 
 static void recSLTU() { 
@@ -1173,8 +1116,6 @@ static void recSLTU() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
-
-
 
 	if (IsConst(_Rs_) && IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rs_].k < iRegs[_Rt_].k);
@@ -1203,8 +1144,6 @@ static void recSLTU() {
 		NEG32R   (EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-
-
 }
 //#endif
 //End of * Register arithmetic
@@ -1224,14 +1163,11 @@ static void recMULT() {
 
 //	iFlushRegs();
 
-
 	if ((IsConst(_Rs_) && iRegs[_Rs_].k == 0) ||
 		(IsConst(_Rt_) && iRegs[_Rt_].k == 0)) {
 		XOR32RtoR(EAX, EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.n.lo, EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.n.hi, EAX);
-
-
 		return;
 	}
 
@@ -1248,8 +1184,6 @@ static void recMULT() {
 	}
 	MOV32RtoM((u32)&psxRegs.GPR.n.lo, EAX);
 	MOV32RtoM((u32)&psxRegs.GPR.n.hi, EDX);
-
-
 }
 
 static void recMULTU() {
@@ -1257,15 +1191,11 @@ static void recMULTU() {
 
 //	iFlushRegs();
 
-
-
 	if ((IsConst(_Rs_) && iRegs[_Rs_].k == 0) ||
 		(IsConst(_Rt_) && iRegs[_Rt_].k == 0)) {
 		XOR32RtoR(EAX, EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.n.lo, EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.n.hi, EAX);
-
-
 		return;
 	}
 
@@ -1282,16 +1212,12 @@ static void recMULTU() {
 	}
 	MOV32RtoM((u32)&psxRegs.GPR.n.lo, EAX);
 	MOV32RtoM((u32)&psxRegs.GPR.n.hi, EDX);
-
-
 }
 
 static void recDIV() {
 // Lo/Hi = Rs / Rt (signed)
 
 //	iFlushRegs();
-
-
 
 	if (IsConst(_Rt_)) {
 		if (iRegs[_Rt_].k == 0) {
@@ -1302,8 +1228,6 @@ static void recDIV() {
 				MOV32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rs_]);
 				MOV32RtoM((u32)&psxRegs.GPR.n.hi, EAX);
 			}
-
-
 			return;
 		}
 		MOV32ItoR(ECX, iRegs[_Rt_].k);// printf("divrtk %x\n", iRegs[_Rt_].k);
@@ -1337,16 +1261,12 @@ static void recDIV() {
 
 		x86SetJ8(j8Ptr[1]);
 	}
-
-
 }
 
 static void recDIVU() {
 // Lo/Hi = Rs / Rt (unsigned)
 
 //	iFlushRegs();
-
-
 
 	if (IsConst(_Rt_)) {
 		if (iRegs[_Rt_].k == 0) {
@@ -1357,8 +1277,6 @@ static void recDIVU() {
 				MOV32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rs_]);
 				MOV32RtoM((u32)&psxRegs.GPR.n.hi, EAX);
 			}
-
-
 			return;
 		}
 		MOV32ItoR(ECX, iRegs[_Rt_].k);// printf("divurtk %x\n", iRegs[_Rt_].k);
@@ -1392,8 +1310,6 @@ static void recDIVU() {
 
 		x86SetJ8(j8Ptr[1]);
 	}
-
-
 }
 //#endif
 //End of * Register mult/div & Register trap logic  
@@ -1474,7 +1390,6 @@ static void recLB() {
 	resp+= 4;
 }
 
-
 static void recLBU() {
 // Rt = mem[Rs + Im] (unsigned)
 
@@ -1520,7 +1435,6 @@ static void recLBU() {
 	resp+= 4;
 }
 
-
 static void recLH() {
 // Rt = mem[Rs + Im] (signed)
 
@@ -1565,7 +1479,6 @@ static void recLH() {
 //	ADD32ItoR(ESP, 4);
 	resp+= 4;
 }
-
 
 static void recLHU() {
 // Rt = mem[Rs + Im] (unsigned)
@@ -1660,7 +1573,6 @@ static void recLHU() {
 //	ADD32ItoR(ESP, 4);
 	resp+= 4;
 }
-
 
 static void recLW() {
 // Rt = mem[Rs + Im] (unsigned)
@@ -1974,7 +1886,6 @@ void recLWR() {
 	}
 }
 
-
 static void recSB() {
 // mem[Rs + Im] = Rt
 
@@ -2053,7 +1964,6 @@ static void recSH() {
 				MOV16MtoR(EAX, (u32)&psxRegs.GPR.r[_Rt_]);
 				MOV16RtoM((u32)&psxH[addr & 0xfff], EAX);
 			}
-
 			return;
 		}
 		if (t == 0x1f80) {
@@ -2261,7 +2171,6 @@ void iSWLk(u32 shift) {
 	OR32RtoR (EAX, ECX);
 }
 
-
 void recSWL() {
 // mem[Rs + Im] = Rt Merge mem[Rs + Im]
 
@@ -2281,7 +2190,6 @@ void recSWL() {
 			MOV32MtoR(EAX, (u32)&psxH[addr & 0xffc]);
 			iSWLk(addr & 3);
 			MOV32RtoM((u32)&psxH[addr & 0xffc], EAX);
-
 			return;
 		}
 	}
@@ -2424,8 +2332,6 @@ static void recSLL() {
 
 //	iFlushRegs();
 
-
-
 	if (IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rt_].k << _Sa_);
 	} else {
@@ -2435,8 +2341,6 @@ static void recSLL() {
 		if (_Sa_) SHL32ItoR(EAX, _Sa_);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-
-
 }
 
 static void recSRL() {
@@ -2445,7 +2349,6 @@ static void recSRL() {
 		return;
 
 //	iFlushRegs();
-
 
 	if (IsConst(_Rt_)) {
 		MapConst(_Rd_, iRegs[_Rt_].k >> _Sa_);
@@ -2456,8 +2359,6 @@ static void recSRL() {
 		if (_Sa_) SHR32ItoR(EAX, _Sa_);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-
-
 }
 
 static void recSRA() {
@@ -2466,7 +2367,6 @@ static void recSRA() {
 		return;
 
 //	iFlushRegs();
-
 
 	if (IsConst(_Rt_)) {
 		MapConst(_Rd_, (s32)iRegs[_Rt_].k >> _Sa_);
@@ -2477,8 +2377,6 @@ static void recSRA() {
 		if (_Sa_) SAR32ItoR(EAX, _Sa_);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-
-
 }
 //#endif
 
@@ -2492,7 +2390,6 @@ static void recSLLV() {
 		return;
 
 //	iFlushRegs();
-
 
 	if (IsConst(_Rt_) && IsConst(_Rs_)) {
 		MapConst(_Rd_, iRegs[_Rt_].k << iRegs[_Rs_].k);
@@ -2518,8 +2415,6 @@ static void recSLLV() {
 		SHL32CLtoR(EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-
-
 }
 
 static void recSRLV() {
@@ -2527,7 +2422,6 @@ static void recSRLV() {
 	if (!_Rd_) return;
 
 //	iFlushRegs();
-
 
 	if (IsConst(_Rt_) && IsConst(_Rs_)) {
 		MapConst(_Rd_, iRegs[_Rt_].k >> iRegs[_Rs_].k);
@@ -2553,8 +2447,6 @@ static void recSRLV() {
 		SHR32CLtoR(EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-
-
 }
 
 static void recSRAV() {
@@ -2563,7 +2455,6 @@ static void recSRAV() {
 		return;
 
 //	iFlushRegs();
-
 
 	if (IsConst(_Rt_) && IsConst(_Rs_)) {
 		MapConst(_Rd_, (s32)iRegs[_Rt_].k >> iRegs[_Rs_].k);
@@ -2589,8 +2480,6 @@ static void recSRAV() {
 		SAR32CLtoR(EAX);
 		MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
 	}
-
-
 }
 //#endif
 
@@ -2628,17 +2517,13 @@ static void recMFHI() {
 	if (!_Rd_)
 		return;
 
-
 	iRegs[_Rd_].state = ST_UNK;
 	MOV32MtoR(EAX, (u32)&psxRegs.GPR.n.hi);
 	MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
-
-
 }
 
 static void recMTHI() {
 // Hi = Rs
-
 
 	if (IsConst(_Rs_)) {
 		MOV32ItoM((u32)&psxRegs.GPR.n.hi, iRegs[_Rs_].k);
@@ -2646,8 +2531,6 @@ static void recMTHI() {
 		MOV32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rs_]);
 		MOV32RtoM((u32)&psxRegs.GPR.n.hi, EAX);
 	}
-
-
 }
 
 static void recMFLO() {
@@ -2655,16 +2538,13 @@ static void recMFLO() {
 	if (!_Rd_)
 		return;
 
-
 	iRegs[_Rd_].state = ST_UNK;
 	MOV32MtoR(EAX, (u32)&psxRegs.GPR.n.lo);
 	MOV32RtoM((u32)&psxRegs.GPR.r[_Rd_], EAX);
-
 }
 
 static void recMTLO() {
 // Lo = Rs
-
 
 	if (IsConst(_Rs_)) {
 		MOV32ItoM((u32)&psxRegs.GPR.n.lo, iRegs[_Rs_].k);
@@ -2672,8 +2552,6 @@ static void recMTLO() {
 		MOV32MtoR(EAX, (u32)&psxRegs.GPR.r[_Rs_]);
 		MOV32RtoM((u32)&psxRegs.GPR.n.lo, EAX);
 	}
-
-
 }
 //#endif
 
@@ -3089,7 +2967,6 @@ static void recHLE() {
 }
 
 //
-
 #include "iPGXP.h"
 
 static void (*recBSC[64])() = {
@@ -3145,7 +3022,6 @@ static void (*recCP2BSC[32])() = {
 	recNULL, recNULL, recNULL, recNULL, recNULL, recNULL, recNULL, recNULL,
 	recNULL, recNULL, recNULL, recNULL, recNULL, recNULL, recNULL, recNULL
 };
-
 
 // Trace all functions using PGXP
 static void(*pgxpRecBSC[64])() = {

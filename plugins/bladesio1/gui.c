@@ -32,7 +32,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
-#include "psxcommon.h"
+//#include "psxcommon.h"
 #include "psemu_plugin_defs.h"
 
 #include "cfg.c"

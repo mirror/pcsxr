@@ -48,12 +48,12 @@ doc/Makefile
 libpcsxcore/Makefile
 gui/Makefile
 plugins/bladesio1/Makefile
+plugins/nullsio1/Makefile
 plugins/dfinput/Makefile
 plugins/dfsound/Makefile
 plugins/dfxvideo/Makefile
 plugins/dfcdrom/Makefile
 plugins/dfnet/Makefile
-plugins/nullsio1/Makefile
 plugins/peopsxgl/Makefile
 gui/data/pixmaps/Makefile
 po/Makefile.in])
