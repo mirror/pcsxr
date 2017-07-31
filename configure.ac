@@ -17,6 +17,13 @@ AM_PROG_AS
 LT_PREREQ([2.2.6])
 LT_INIT([disable-static])
 
+AX_APPEND_LINK_FLAGS([-fno-pie])
+AX_COMPILER_VENDOR
+if test "$ax_cv_c_compiler_vendor" = "gnu"; then
+    AX_CHECK_LINK_FLAG([-no-pie],[AX_APPEND_LINK_FLAGS([-no-pie])],)
+    AX_CHECK_LINK_FLAG([-nopie],[AX_APPEND_LINK_FLAGS([-nopie])],)
+fi
+
 AM_GLIB_GNU_GETTEXT
 IT_PROG_INTLTOOL([0.35.0])
 
