@@ -25,9 +25,9 @@
 
 #include "ix86.h"
 #include <sys/mman.h>
-#include "pgxp_cpu.h"
-#include "pgxp_gte.h"
-#include "pgxp_debug.h"
+#include "../pgxp_cpu.h"
+#include "../pgxp_gte.h"
+#include "../pgxp_debug.h"
 
 #ifndef MAP_ANONYMOUS
 #define MAP_ANONYMOUS MAP_ANON

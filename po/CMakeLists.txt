@@ -1,4 +1,4 @@
-message("Configuring langs")
+message(STATUS "* Configuring langs")
 include(Gettext)
 
 #find_package(LibArchive REQUIRED)

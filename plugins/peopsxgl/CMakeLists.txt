@@ -1,4 +1,4 @@
-message("Configuring peopsxgl")
+message(STATUS "* Configuring peopsxgl")
 
 include(GlibCompileResourcesSupport)
 
@@ -40,6 +40,7 @@ set(PLUGIN_SRCS
     prim.c
     soft.c
     texture.c
+    pgxp_gpu.c
 )
 
 set(GUI_SRCS

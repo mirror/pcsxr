@@ -1,4 +1,4 @@
-message("Configuring gui")
+message(STATUS "* Configuring gui")
 
 include(GlibCompileResourcesSupport)
 
@@ -27,6 +27,10 @@ find_library(RT_LIB rt REQUIRED)
 find_package(X11 REQUIRED)
 include_directories(${X11_XTest_INCLUDE_PATH})
 
+if (${DYNAREC} STREQUAL "no")
+    message(STATUS "User selected to not build dynarec")
+    add_definitions(-DNOPSXREC)
+endif()
 
 #defs
 add_definitions(-DLOCALE_DIR="${CMAKE_INSTALL_FULL_DATAROOTDIR}/locale/" -DPSEMU_DATA_DIR="${CMAKE_INSTALL_FULL_DATAROOTDIR}/psemu" -DDEF_PLUGIN_DIR="${CMAKE_INSTALL_FULL_LIBDIR}/games/psemu")
@@ -95,4 +99,3 @@ install(TARGETS pcsxr RUNTIME DESTINATION bin)
 install(FILES data/pcsxr.desktop DESTINATION share/applications)
 install(FILES data/pixmaps/pcsxr-icon.png DESTINATION share/icons/hicolor/48x48/apps)
 
-add_subdirectory("po")

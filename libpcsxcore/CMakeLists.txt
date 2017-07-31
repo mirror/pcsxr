@@ -1,4 +1,4 @@
-message("Configuring core")
+message(STATUS "* Configuring core")
 
 set(DYNAREC "auto" CACHE STRING "Build dynarec for arch.")
 set_property(CACHE DYNAREC PROPERTY STRINGS auto x86_64 x86 ppc no)
@@ -19,44 +19,47 @@ if (USE_LIBARCHIVE)
 endif()
 
 # Architecture detection and arch specific settings
-message(${CMAKE_SYSTEM_PROCESSOR})
-if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "^powerpc")
+message(STATUS "Building PCSXr on arch " ${CMAKE_SYSTEM_PROCESSOR})
+include(TargetArch)
+target_architecture(PCSXR_TARGET_ARCH)
+message(STATUS "Targeting arch " ${PCSXR_TARGET_ARCH})
+if (${PCSXR_TARGET_ARCH} MATCHES "ppc")
     set(_ARCH_PPC 1)
-elseif(${CMAKE_SYSTEM_PROCESSOR} MATCHES "^i.86")
+elseif(${PCSXR_TARGET_ARCH} MATCHES "i386")
     set(_ARCH_32 1)
-elseif(${CMAKE_SYSTEM_PROCESSOR} MATCHES "^x86_64")
+elseif(${PCSXR_TARGET_ARCH} MATCHES "x86_64")
     set(_ARCH_64 1)
 else()
-    message("Unsupported arch. Will not build dynarec")
+    message(STATUS "Unsupported arch. Will not build dynarec")
     add_definitions(-DNOPSXREC)
 endif()
-
+set(CMAKE_POSITION_INDEPENDENT_CODE OFF) #for x86
 
 if (${DYNAREC} STREQUAL "auto")
     if (_ARCH_PPC)
         set(DYNAREC_PPC 1)
-        message("Using PPC Dynarec")
+        message(STATUS "Autodetected PPC dynarec.")
     elseif(_ARCH_64)
         set(DYNAREC_64 1)
-        message("Using x86_64 Dynarec")
+        message(STATUS "Autodetected x86_64 dynarec.")
     elseif(_ARCH_32)
         set(DYNAREC_32 1)
-        message("Using x86 Dynarec")
+        message(STATUS "Autodetected x86 dynarec.")
     endif()
 elseif (${DYNAREC} STREQUAL "ppc")
 #if anyone ever fixes ppc dynarec
 #    set(DYNAREC_PPC 1)
-#    message("Using PPC Dynarec")
-    message("PPC Dynarec is broken, sorry.")
+#    message(STATUS "User selected PPC dynarec")
+    message(STATUS "User selected PPC dynarec is broken, sorry.")
     add_definitions(-DNOPSXREC)
 elseif (${DYNAREC} STREQUAL "x86_64")
     set(DYNAREC_64 1)
-    message("Using x86_64 Dynarec")
+    message(STATUS "User selected x86_64 dynarec.")
 elseif (${DYNAREC} STREQUAL "x86")
     set(DYNAREC_32 1)
-    message("Using x86 Dynarec")
+    message(STATUS "User selected x86 dynarec.")
 elseif (${DYNAREC} STREQUAL "no")
-    message("Will not build dynarec")
+    message(STATUS "User selected to not build dynarec.")
     add_definitions(-DNOPSXREC)
 endif()
 
@@ -84,7 +87,13 @@ set(SRCS  psxbios.c
           cdriso.c
           cheat.c
           socket.c
-          ppf.c)
+          ppf.c
+          pgxp_cpu.c
+          pgxp_debug.c
+          pgxp_gte.c
+          pgxp_mem.c
+          pgxp_value.c
+)
 
 set(LIBS "-lm")
 

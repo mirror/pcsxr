@@ -25,7 +25,7 @@ MACRO(FFMPEG_FIND varname shortname headername)
     ENDIF()
         
     IF(${varname}_INCLUDE_DIR STREQUAL "${varname}_INCLUDE_DIR-NOTFOUND")
-        message(STATUS "look for newer strcture")
+        message(STATUS "Look for newer structure")
         IF(NOT WIN32)
             PKG_CHECK_MODULES(PC_${varname} "lib${shortname}")
 

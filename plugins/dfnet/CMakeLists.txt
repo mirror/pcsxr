@@ -1,4 +1,4 @@
-message("Configuring dfnet")
+message(STATUS "* Configuring dfnet")
 
 include(GlibCompileResourcesSupport)
 

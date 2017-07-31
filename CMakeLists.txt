@@ -11,7 +11,7 @@ project(pcsxr)
 
 set(PCSXR_VERSION_MAJOR "1")
 set(PCSXR_VERSION_MINOR "9")
-set(PCSXR_VERSION_PATCH "94")
+set(PCSXR_VERSION_PATCH "95")
 add_definitions(-DPACKAGE_VERSION="${PCSXR_VERSION_MAJOR}.${PCSXR_VERSION_MINOR}.${PCSXR_VERSION_PATCH}")
 add_definitions(-DPACKAGE_NAME="PCSXr")
 add_definitions(-DPACKAGE_STRING="PCSXr ${PCSXR_VERSION_MAJOR}.${PCSXR_VERSION_MINOR}.${PCSXR_VERSION_PATCH}")
@@ -38,14 +38,15 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL GNU)
     endif()
 endif()
 
-option(BUILD_SIO1 "Build SIO1 plugin." On)
-option(BUILD_OPENGL "Build OpenGL plugin." On)
+option(BUILD_SIO1 "Build SIO1 plugin." ON)
+option(BUILD_OPENGL "Build OpenGL plugin." ON)
 
 if (BUILD_SIO1)
   add_definitions(-DENABLE_SIO1API)
 endif()
 
 #components
+add_subdirectory(po)
 add_subdirectory(libpcsxcore)
 add_subdirectory(gui)
 add_subdirectory(plugins)

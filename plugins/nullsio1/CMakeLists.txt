@@ -1,4 +1,4 @@
-message("Configuring nullsio1")
+message(STATUS "* Configuring nullsio1")
 
 
 #deps

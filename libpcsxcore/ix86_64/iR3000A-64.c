@@ -27,9 +27,9 @@
 #include "../r3000a.h"
 #include "../psxhle.h"
 
-#include "pgxp_cpu.h"
-#include "pgxp_gte.h"
-#include "pgxp_debug.h"
+#include "../pgxp_cpu.h"
+#include "../pgxp_gte.h"
+#include "../pgxp_debug.h"
 
 #include <sys/mman.h>
 

@@ -2,18 +2,18 @@
 #
 
 # This module defines
-#  CDIO_INCLUDE_DIR, where to find iso9660.h, etc.
+#  CDIO_INCLUDE_DIR, where to find cdio.h, etc.
 #  CDIO_LIBRARIES, the libraries to link against.
 #  CDIO_FOUND, If false, do not try to use cdio.
 
 SET(CDIO_FOUND FALSE)
 
-FIND_PATH(CDIO_INCLUDE_DIR iso9660.h
+FIND_PATH(CDIO_INCLUDE_DIR cdio.h
     /usr/include/cdio
     /usr/local/include/cdio
 )
 
-FIND_LIBRARY(CDIO_C_LIB iso9660
+FIND_LIBRARY(CDIO_C_LIB cdio
     /usr/lib
     /usr/local/lib
 )
