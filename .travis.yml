@@ -1,0 +1,13 @@
+language: c
+compiler:
+  - clang
+  - gcc
+  
+addons:
+  apt:
+    packages:
+      - autoconf-archive
+  
+script:
+  - ./autogen.sh
+  - make
