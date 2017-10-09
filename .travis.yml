@@ -6,9 +6,11 @@ compiler:
 addons:
   apt:
     packages:
-      - autoconf
       - autoconf-archive
-      - automake
+      - intltool
+      - libgtk-3-dev
+      - libsdl2-dev
+      - libxtst-dev
 
 script:
   - ./autogen.sh
