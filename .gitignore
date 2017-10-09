@@ -11,3 +11,5 @@ linux_build.sh
 project.xcworkspace
 .DS_Store
 build/
+*.suo
+*.VC.db
