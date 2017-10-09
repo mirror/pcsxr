@@ -29,7 +29,8 @@ pcsxr_SOURCES = \
 	GtkResources.h
 
 # gresource.xml is dynamically generated in CMake. Mirror that here in a static way.
-define gresource_xml =
+#define gresource_xml =
+define gresource_xml
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/pcsxr/gui">
@@ -64,9 +65,12 @@ define gresource_xml =
   </gresource>
 </gresources>
 endef
+# FIXME
+export gresource_xml
 
 pcsxr.gresource.xml:
-	$(file >$@,$(gresource_xml))
+#	$(file >$@,$(gresource_xml))
+	@echo "$$gresource_xml" >$@
 pcsxr_gresource: pcsxr.gresource.xml
 	$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir)/data --generate-dependencies $(srcdir)/$<)
 GtkResources.c: pcsxr.gresource.xml $(pcsxr_gresource)

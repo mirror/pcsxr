@@ -16,7 +16,8 @@ cfgDFNet_SOURCES = gui.c GtkResources.c GtkResources.h
 cfgDFNet_LDADD = $(GTK3_LIBS)
 
 # gresource.xml is dynamically generated in CMake. Mirror that here in a static way.
-define gresource_xml =
+#define gresource_xml =
+define gresource_xml
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/pcsxr/dfnet">
@@ -24,9 +25,12 @@ define gresource_xml =
   </gresource>
 </gresources>
 endef
+# FIXME
+export gresource_xml
 
 dfnet.gresource.xml:
-	$(file >$@,$(gresource_xml))
+#	$(file >$@,$(gresource_xml))
+	@echo "$$gresource_xml" >$@
 dfnet_gresource: dfnet.gresource.xml
 	$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/$<)
 GtkResources.c: dfnet.gresource.xml $(dfnet_gresource)

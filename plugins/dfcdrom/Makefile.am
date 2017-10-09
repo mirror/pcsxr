@@ -31,7 +31,8 @@ cfgDFCdrom_SOURCES = cdrcfg-0.1df/main.c GtkResources.c GtkResources.h
 cfgDFCdrom_LDADD = $(GTK3_LIBS)
 
 # gresource.xml is dynamically generated in CMake. Mirror that here in a static way.
-define gresource_xml =
+#define gresource_xml =
+define gresource_xml
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/pcsxr/dfcdrom">
@@ -39,9 +40,12 @@ define gresource_xml =
   </gresource>
 </gresources>
 endef
+# FIXME
+export gresource_xml
 
 dfcdrom.gresource.xml:
-	$(file >$@,$(gresource_xml))
+#	$(file >$@,$(gresource_xml))
+	@echo "$$gresource_xml" >$@
 dfcdrom_gresource: dfcdrom.gresource.xml
 	$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir)/cdrcfg-0.1df --generate-dependencies $(srcdir)/$<)
 GtkResources.c: dfcdrom.gresource.xml $(dfcdrom_gresource)

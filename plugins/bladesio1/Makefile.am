@@ -16,7 +16,8 @@ cfgBladeSio1_SOURCES = gui.c sio1.h GtkResources.c GtkResources.h
 cfgBladeSio1_LDADD = $(GTK3_LIBS)
 
 # gresource.xml is dynamically generated in CMake. Mirror that here in a static way.
-define gresource_xml =
+#define gresource_xml =
+define gresource_xml
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/pcsxr/bladesio1">
@@ -24,9 +25,12 @@ define gresource_xml =
   </gresource>
 </gresources>
 endef
+# FIXME
+export gresource_xml
 
 bladesio1.gresource.xml:
-	$(file >$@,$(gresource_xml))
+#	$(file >$@,$(gresource_xml))
+	@echo "$$gresource_xml" >$@
 bladesio1_gresource: bladesio1.gresource.xml
 	$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/$<)
 GtkResources.c: bladesio1.gresource.xml $(bladesio1_gresource)

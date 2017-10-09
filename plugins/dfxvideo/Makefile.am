@@ -30,7 +30,8 @@ cfgDFXVideo_SOURCES = gpucfg-0.1df/main.c GtkResources.c GtkResources.h
 cfgDFXVideo_LDADD = $(GTK3_LIBS) -lXext
 
 # gresource.xml is dynamically generated in CMake. Mirror that here in a static way.
-define gresource_xml =
+#define gresource_xml =
+define gresource_xml
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/pcsxr/dfxvideo">
@@ -38,9 +39,12 @@ define gresource_xml =
   </gresource>
 </gresources>
 endef
+# FIXME
+export gresource_xml
 
 dfxvideo.gresource.xml:
-	$(file >$@,$(gresource_xml))
+#	$(file >$@,$(gresource_xml))
+	@echo "$$gresource_xml" >$@
 dfxvideo_gresource: dfxvideo.gresource.xml
 	$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir)/gpucfg-0.1df --generate-dependencies $(srcdir)/$<)
 GtkResources.c: dfxvideo.gresource.xml $(dfxvideo_gresource)

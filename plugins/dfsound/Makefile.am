@@ -53,7 +53,8 @@ cfgDFSound_SOURCES = spucfg-0.1df/main.c GtkResources.c GtkResources.h
 cfgDFSound_LDADD = $(GTK3_LIBS)
 
 # gresource.xml is dynamically generated in CMake. Mirror that here in a static way.
-define gresource_xml =
+#define gresource_xml =
+define gresource_xml
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/pcsxr/dfsound">
@@ -61,9 +62,12 @@ define gresource_xml =
   </gresource>
 </gresources>
 endef
+# FIXME
+export gresource_xml
 
 dfsound.gresource.xml:
-	$(file >$@,$(gresource_xml))
+#	$(file >$@,$(gresource_xml))
+	@echo "$$gresource_xml" >$@
 dfsound_gresource: dfsound.gresource.xml
 	$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir)/spucfg-0.1df --generate-dependencies $(srcdir)/$<)
 GtkResources.c: dfsound.gresource.xml $(dfsound_gresource)

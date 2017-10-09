@@ -1,6 +1,6 @@
 AC_INIT([pcsxr], [1.9.95])
 
-AC_CONFIG_MACRO_DIRS([m4])
+AC_CONFIG_MACRO_DIR([m4])
 AC_CANONICAL_HOST
 AC_CANONICAL_BUILD
 AM_INIT_AUTOMAKE(foreign subdir-objects)
@@ -17,6 +17,7 @@ AM_PROG_AS
 LT_PREREQ([2.2.6])
 LT_INIT([disable-static])
 
+AX_APPEND_COMPILE_FLAGS([-std=gnu99])
 AX_APPEND_LINK_FLAGS([-fno-pie])
 AX_COMPILER_VENDOR
 if test "$ax_cv_c_compiler_vendor" = "gnu"; then

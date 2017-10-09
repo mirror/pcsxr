@@ -17,7 +17,8 @@ cfgDFInput_SOURCES = cfg-gtk.c pad.h GtkResources.c GtkResources.h
 cfgDFInput_LDADD = $(GTK3_LIBS) $(SDL2_LIBS) $(SDL_LIBS) -lX11
 
 # gresource.xml is dynamically generated in CMake. Mirror that here in a static way.
-define gresource_xml =
+#define gresource_xml =
+define gresource_xml
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/pcsxr/dfinput">
@@ -25,9 +26,12 @@ define gresource_xml =
   </gresource>
 </gresources>
 endef
+# FIXME
+export gresource_xml
 
 dfinput.gresource.xml:
-	$(file >$@,$(gresource_xml))
+#	$(file >$@,$(gresource_xml))
+	@echo "$$gresource_xml" >$@
 dfinput_gresource: dfinput.gresource.xml
 	$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/$<)
 GtkResources.c: dfinput.gresource.xml $(dfinput_gresource)

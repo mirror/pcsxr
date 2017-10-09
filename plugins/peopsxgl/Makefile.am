@@ -30,7 +30,8 @@ cfgpeopsxgl_SOURCES = gpucfg/main.c GtkResources.c GtkResources.h
 cfgpeopsxgl_LDADD = $(GTK3_LIBS)
 
 # gresource.xml is dynamically generated in CMake. Mirror that here in a static way.
-define gresource_xml =
+#define gresource_xml =
+define gresource_xml
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/pcsxr/peopsxgl">
@@ -38,9 +39,12 @@ define gresource_xml =
   </gresource>
 </gresources>
 endef
+# FIXME
+export gresource_xml
 
 peopsxgl.gresource.xml:
-	$(file >$@,$(gresource_xml))
+#	$(file >$@,$(gresource_xml))
+	@echo "$$gresource_xml" >$@
 peopsxgl_gresource: peopsxgl.gresource.xml
 	$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir)/gpucfg --generate-dependencies $(srcdir)/$<)
 GtkResources.c: peopsxgl.gresource.xml $(peopsxgl_gresource)
