@@ -1,0 +1,12 @@
+version: 1.9.95.{branch}.{build}
+
+pull_requests:
+  do_not_increment_build_number: true
+
+build:
+  project: win32/pcsxr.sln
+  verbosity: minimal
+
+artifacts:
+  - path: win32\build\*\*.exe
+  - path: win32\build\*\plugins\*.dll
