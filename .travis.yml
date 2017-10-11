@@ -5,6 +5,8 @@ compiler:
   
 addons:
   apt:
+    sources:
+      - ubuntu-sdk-team
     packages:
       - autoconf-archive
       - intltool
@@ -15,4 +17,4 @@ addons:
 
 script:
   - ./autogen.sh
-  - make
+  - make -j1
