@@ -11,7 +11,7 @@ project(pcsxr)
 
 set(PCSXR_VERSION_MAJOR "1")
 set(PCSXR_VERSION_MINOR "9")
-set(PCSXR_VERSION_PATCH "95")
+set(PCSXR_VERSION_PATCH "94")
 add_definitions(-DPACKAGE_VERSION="${PCSXR_VERSION_MAJOR}.${PCSXR_VERSION_MINOR}.${PCSXR_VERSION_PATCH}")
 add_definitions(-DPACKAGE_NAME="PCSXr")
 add_definitions(-DPACKAGE_STRING="PCSXr ${PCSXR_VERSION_MAJOR}.${PCSXR_VERSION_MINOR}.${PCSXR_VERSION_PATCH}")
@@ -46,7 +46,6 @@ if (BUILD_SIO1)
 endif()
 
 #components
-add_subdirectory(po)
 add_subdirectory(libpcsxcore)
 add_subdirectory(gui)
 add_subdirectory(plugins)

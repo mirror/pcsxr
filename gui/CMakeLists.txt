@@ -99,3 +99,4 @@ install(TARGETS pcsxr RUNTIME DESTINATION bin)
 install(FILES data/pcsxr.desktop DESTINATION share/applications)
 install(FILES data/pixmaps/pcsxr-icon.png DESTINATION share/icons/hicolor/48x48/apps)
 
+add_subdirectory("po")
