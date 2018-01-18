@@ -1,9 +1,8 @@
-message(STATUS "* Configuring dfinput")
+message(STATUS "* Configuring DFInput")
 
 include(GlibCompileResourcesSupport)
 
 #deps
-
 find_package(GLib REQUIRED)
 if(NOT GLib_FOUND)
     message(FATAL_ERROR "GLIB2 library not found")

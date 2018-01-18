@@ -1,4 +1,4 @@
-message(STATUS "* Configuring bladesio1")
+message(STATUS "* Configuring BladeSio1")
 
 include(GlibCompileResourcesSupport)
 
