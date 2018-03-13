@@ -90,6 +90,8 @@ extern x86IntRegType g_x86non8bitregs[3];
 #define X86ARG2 RSI
 #define X86ARG3 RDX
 #define X86ARG4 RCX
+#define X86ARG5 R8
+#define X86ARG6 R9
 #endif
 
 #else

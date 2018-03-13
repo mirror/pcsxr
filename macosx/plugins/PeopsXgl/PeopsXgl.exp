@@ -36,3 +36,7 @@ _GPUcursor
 _GPUsetfix
 
 _GPUvisualVibration
+
+_GPUpgxpMemory
+_GPUpgxpCacheVertex
+_GPUtoggleDebug
