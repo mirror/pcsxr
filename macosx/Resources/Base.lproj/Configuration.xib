@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="14F2411" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <development version="6300" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ConfigurationController">
             <connections>
                 <outlet property="cdromPlugin" destination="397" id="401"/>
                 <outlet property="consoleOutputCell" destination="1278" id="1281"/>
+                <outlet property="cpuOverclocking" destination="03L-mr-xTn" id="lVg-X9-WHd"/>
+                <outlet property="cpuOverclockingValue" destination="vyM-WJ-sZf" id="5Sf-Nn-E1N"/>
                 <outlet property="enableNetPlayCell" destination="640" id="651"/>
                 <outlet property="graphicsPlugin" destination="384" id="402"/>
                 <outlet property="hkController" destination="656" id="832"/>
@@ -30,6 +33,7 @@
                 <outlet property="vTypePALCell" destination="560" id="569"/>
                 <outlet property="widescreen" destination="652" id="653"/>
                 <outlet property="window" destination="21" id="345"/>
+                <outlet property="wipeoutMemHack" destination="Qij-Wg-2W0" id="Iyu-pP-Pk8"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -37,7 +41,7 @@
         <window title="PCSXR Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" animationBehavior="documentWindow" id="21">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="55" y="345" width="513" height="473"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="513" height="473"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -246,6 +250,63 @@
                                                 <constraint firstAttribute="bottom" secondItem="512" secondAttribute="bottom" constant="11" id="cEU-jj-8QW"/>
                                                 <constraint firstItem="512" firstAttribute="leading" secondItem="509" secondAttribute="leading" constant="16" id="tPW-vX-VNM"/>
                                             </constraints>
+                                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </box>
+                                        <box fixedFrame="YES" title="CPU Overclocking" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="8gb-HW-f3X">
+                                            <rect key="frame" x="194" y="234" width="256" height="73"/>
+                                            <view key="contentView">
+                                                <rect key="frame" x="1" y="1" width="254" height="57"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwn-ba-l80">
+                                                        <rect key="frame" x="18" y="10" width="145" height="40"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        <size key="cellSize" width="145" height="18"/>
+                                                        <size key="intercellSpacing" width="4" height="4"/>
+                                                        <buttonCell key="prototype" type="check" title="Switch" bezelStyle="regularSquare" imagePosition="left" inset="2" id="opj-md-u7G">
+                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <cells>
+                                                            <column>
+                                                                <buttonCell type="check" title="CPU Overclocking" bezelStyle="regularSquare" imagePosition="left" inset="2" id="03L-mr-xTn">
+                                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                </buttonCell>
+                                                                <buttonCell type="check" title="WipeOut MemHack" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Qij-Wg-2W0">
+                                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                </buttonCell>
+                                                            </column>
+                                                        </cells>
+                                                        <connections>
+                                                            <action selector="setCheckbox:" target="-2" id="mb4-BQ-gqt"/>
+                                                        </connections>
+                                                    </matrix>
+                                                    <comboBox focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vyM-WJ-sZf">
+                                                        <rect key="frame" x="170" y="26" width="69" height="26"/>
+                                                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" focusRingType="none" title="1.50" drawsBackground="YES" completes="NO" numberOfVisibleItems="8" id="9wB-0E-Yoz">
+                                                            <font key="font" metaFont="system"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <objectValues>
+                                                                <string>0.50</string>
+                                                                <string>0.75</string>
+                                                                <string>1.25</string>
+                                                                <string>1.50</string>
+                                                                <string>2.00</string>
+                                                                <string>3.00</string>
+                                                                <string>4.00</string>
+                                                                <string>5.00</string>
+                                                            </objectValues>
+                                                        </comboBoxCell>
+                                                        <connections>
+                                                            <action selector="setOverclockValue:" target="-2" id="UxU-V7-Zr2"/>
+                                                        </connections>
+                                                    </comboBox>
+                                                </subviews>
+                                            </view>
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
@@ -1120,6 +1181,96 @@
                                     </connections>
                                 </view>
                             </tabViewItem>
+                            <tabViewItem label="PGXP" identifier="5" id="ItE-eF-wNU">
+                                <view key="view" id="uj1-Je-S5K">
+                                    <rect key="frame" x="10" y="33" width="467" height="411"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <box fixedFrame="YES" title="Options" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="Rt6-IS-wqH">
+                                            <rect key="frame" x="6" y="271" width="455" height="120"/>
+                                            <view key="contentView">
+                                                <rect key="frame" x="1" y="1" width="453" height="104"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tsJ-kM-vyh">
+                                                        <rect key="frame" x="16" y="78" width="421" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="Enable PGXP GTE Vertex Creation" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="UNI-6T-hmi">
+                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="onOptionChange:" target="UdY-FQ-YOS" id="15S-hO-egW"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="Wdx-wr-geL">
+                                                        <rect key="frame" x="16" y="45" width="421" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="Enable Vertex Caching" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="kLH-VO-dOD">
+                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="onOptionChange:" target="UdY-FQ-YOS" id="VDM-Oe-3Dk"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="Tkd-qg-5M6">
+                                                        <rect key="frame" x="16" y="12" width="421" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="Enable Perspective Correct Texturing" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="IvO-v3-jAg">
+                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="onOptionChange:" target="UdY-FQ-YOS" id="azW-yM-Zed"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </view>
+                                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </box>
+                                        <box fixedFrame="YES" title="PGXP Mode" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="7QK-TQ-CUh">
+                                            <rect key="frame" x="6" y="65" width="455" height="192"/>
+                                            <view key="contentView">
+                                                <rect key="frame" x="1" y="1" width="453" height="176"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2dk-sa-eo0">
+                                                        <rect key="frame" x="127" y="142" width="200" height="26"/>
+                                                        <popUpButtonCell key="cell" type="push" title="Memory + CPU Logic" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="TUy-0G-7uN" id="kbY-zW-v7U">
+                                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="menu"/>
+                                                            <menu key="menu" id="nNG-em-hU1">
+                                                                <items>
+                                                                    <menuItem title="Disabled" id="fAx-O9-gEO"/>
+                                                                    <menuItem title="Memory only" id="sgV-aX-jWN"/>
+                                                                    <menuItem title="Memory + CPU Logic" state="on" id="TUy-0G-7uN"/>
+                                                                </items>
+                                                            </menu>
+                                                        </popUpButtonCell>
+                                                        <connections>
+                                                            <action selector="onModeChange:" target="UdY-FQ-YOS" id="H4c-zg-rOQ"/>
+                                                        </connections>
+                                                    </popUpButton>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="hf8-BH-ZfI">
+                                                        <rect key="frame" x="18" y="14" width="419" height="119"/>
+                                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="EFJ-3O-jnA">
+                                                            <font key="font" metaFont="system"/>
+                                                            <string key="title">Memory and CPU arithmetic operations
+
+PGXP is mirroring load, store and transfer operations of the CPU and GTE and arithmetic/logic functions of the PSX CPU.
+
+(WARNING: This mode is currently unfinished and may cause incorrect behaviour in some games)</string>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </subviews>
+                                            </view>
+                                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </box>
+                                    </subviews>
+                                </view>
+                            </tabViewItem>
                         </tabViewItems>
                         <connections>
                             <outlet property="delegate" destination="-2" id="780"/>
@@ -1136,6 +1287,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="478"/>
             </connections>
+            <point key="canvasLocation" x="232.5" y="363.5"/>
         </window>
         <view id="957" userLabel="MemCardObjectView">
             <rect key="frame" x="0.0" y="0.0" width="180" height="107"/>
@@ -1327,6 +1479,15 @@
                 <outlet property="memCard2Label" destination="935" id="1004"/>
                 <outlet property="memCard2view" destination="951" id="998"/>
                 <outlet property="view" destination="580" id="993"/>
+            </connections>
+        </viewController>
+        <viewController id="UdY-FQ-YOS" customClass="PgxpController">
+            <connections>
+                <outlet property="perspectiveCorrect" destination="Tkd-qg-5M6" id="4nW-Sp-e4F"/>
+                <outlet property="pgxpModeButton" destination="2dk-sa-eo0" id="JXH-gN-MI4"/>
+                <outlet property="pgxpModeLabel" destination="hf8-BH-ZfI" id="EFr-NH-bnq"/>
+                <outlet property="vertexCaching" destination="Wdx-wr-geL" id="NFe-s6-ajV"/>
+                <outlet property="vertexCreation" destination="tsJ-kM-vyh" id="WPB-EW-N0e"/>
             </connections>
         </viewController>
     </objects>

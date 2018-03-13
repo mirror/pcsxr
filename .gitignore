@@ -6,3 +6,5 @@
 macosx/build
 xcuserdata
 macosx/Info.plistvers.plist
+project.xcworkspace
+.DS_Store
