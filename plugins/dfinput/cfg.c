@@ -37,6 +37,8 @@ static void SetDefaultConfig() {
 
 	g.cfg.PadDef[0].VisualVibration = 0;
 	g.cfg.PadDef[1].VisualVibration = 0;
+    g.cfg.PadDef[0].PhysicalVibration = 1;
+    g.cfg.PadDef[1].PhysicalVibration = 1;
 
 	// Pad1 keyboard
 	g.cfg.PadDef[0].KeyDef[DKEY_SELECT].Key = XK_c;
@@ -164,6 +166,8 @@ void LoadPADConfig() {
 			g.cfg.PadDef[current].Type = atoi(&buf[5]);
 		} else if (strncmp(buf, "VisualVibration=", 16) == 0) {
 			g.cfg.PadDef[current].VisualVibration = atoi(&buf[16]);
+        } else if (strncmp(buf, "PhysicalVibration=", 18) == 0) {
+            g.cfg.PadDef[current].PhysicalVibration = atoi(&buf[18]);
 		} else if (strncmp(buf, "EmuDev=", 7) == 0) {
 			g.cfg.E.DevNum = atoi(&buf[5]);
 		} else if (strncmp(buf, "EMU_FASTFORWARDS=", 17) == 0) {
@@ -362,6 +366,7 @@ void SavePADConfig() {
 		fprintf(fp, "DevNum=%d\n", g.cfg.PadDef[i].DevNum);
 		fprintf(fp, "Type=%d\n", g.cfg.PadDef[i].Type);
 		fprintf(fp, "VisualVibration=%d\n", g.cfg.PadDef[i].VisualVibration);
+        fprintf(fp, "PhysicalVibration=%d\n", g.cfg.PadDef[i].PhysicalVibration);
 
 		fprintf(fp, "Select=%d,%d,%d\n", g.cfg.PadDef[i].KeyDef[DKEY_SELECT].Key,
 			g.cfg.PadDef[i].KeyDef[DKEY_SELECT].JoyEvType, g.cfg.PadDef[i].KeyDef[DKEY_SELECT].J.d);

@@ -257,7 +257,7 @@ int main( int argc, char **argv ) {
     builder = gtk_builder_new();
 
     // Load the glade file
-    if ( !gtk_builder_add_from_file( builder, DATADIR "peopsxgl.ui", &error ) ) {
+    if ( !gtk_builder_add_from_resource( builder, "/org/pcsxr/peopsxgl/peopsxgl.ui", &error ) ) {
         g_warning( "%s", error->message );
         g_free( error );
         return( 1 );
@@ -269,6 +269,7 @@ int main( int argc, char **argv ) {
         const char *authors[]= {"Adapted from P.E.Op.S OpenGL GPU by Pete Bernert", NULL};
 
         widget = gtk_about_dialog_new();
+        gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG(widget), "help-about");
         gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(widget), "OpenGL GPU Driver");
         gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(widget), "1.18");
         gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(widget), authors);

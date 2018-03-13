@@ -1,14 +1,17 @@
-SUBDIRS =  data
+ACLOCAL_AMFLAGS = -I m4
+
+SUBDIRS =  gui/data
 SUBDIRS += doc
-SUBDIRS += pixmaps
+SUBDIRS += gui/data/pixmaps
 SUBDIRS += po
 SUBDIRS += libpcsxcore
 SUBDIRS += gui
 SUBDIRS += plugins/dfinput
 SUBDIRS += plugins/dfsound
-SUBDIRS += plugins/dfxvideo 
+SUBDIRS += plugins/dfxvideo
 SUBDIRS += plugins/dfcdrom
 SUBDIRS += plugins/dfnet
+SUBDIRS += plugins/nullsio1
 
 SUBDIRS += $(BLADESIO1)
 SUBDIRS += $(PEOPSXGL)

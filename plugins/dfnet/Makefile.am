@@ -12,9 +12,31 @@ AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-I$(top_srcdir)/libpcsxcore -I../../include
 
 bin_PROGRAMS = cfgDFNet
-cfgDFNet_SOURCES = gui.c
+cfgDFNet_SOURCES = gui.c GtkResources.c GtkResources.h
 cfgDFNet_LDADD = $(GTK3_LIBS)
 
-glade_DATA = dfnet.ui
-gladedir = $(datadir)/psemu/
+# gresource.xml is dynamically generated in CMake. Mirror that here in a static way.
+define gresource_xml =
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/pcsxr/dfnet">
+    <file>dfnet.ui</file>
+  </gresource>
+</gresources>
+endef
+
+dfnet.gresource.xml:
+	$(file >$@,$(gresource_xml))
+dfnet_gresource: dfnet.gresource.xml
+	$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/$<)
+GtkResources.c: dfnet.gresource.xml $(dfnet_gresource)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-source --c-name dfnet $<
+GtkResources.h: dfnet.gresource.xml $(dfnet_gresource)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-header --c-name dfnet $<
+
+
+#glade_DATA = dfnet.ui
+#gladedir = $(datadir)/psemu/
 EXTRA_DIST = $(glade_DATA)
+
+CLEANFILES = dfnet.gresource.xml GtkResources.c GtkResources.h

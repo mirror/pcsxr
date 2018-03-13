@@ -49,7 +49,6 @@ static void LoadCheatListItems(int index) {
 
 	gtk_tree_view_set_model(GTK_TREE_VIEW(widget), GTK_TREE_MODEL(store));
 	g_object_unref(G_OBJECT(store));
-	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(widget), TRUE);
 	gtk_tree_view_set_search_column(GTK_TREE_VIEW(widget), 1);
 	gtk_widget_show(widget);
 
@@ -99,8 +98,8 @@ static void OnCheatListDlg_AddClicked(GtkWidget *widget, gpointer user_data) {
 	GtkWidget *box, *scroll, *label, *descr_edit, *code_edit;
 
 	dlg = gtk_dialog_new_with_buttons(_("Add New Cheat"), GTK_WINDOW(CheatListDlg),
-		GTK_DIALOG_MODAL, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
+		GTK_DIALOG_MODAL, "_Cancel", GTK_RESPONSE_CANCEL,
+		"_OK", GTK_RESPONSE_ACCEPT, NULL);
 
 	gtk_window_set_default_size(GTK_WINDOW(dlg), 350, 350);
 
@@ -125,7 +124,7 @@ static void OnCheatListDlg_AddClicked(GtkWidget *widget, gpointer user_data) {
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll),
 		GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(scroll), code_edit);
+	gtk_container_add(GTK_CONTAINER(scroll), code_edit);
 	gtk_widget_show(code_edit);
 
 	gtk_box_pack_start(GTK_BOX(box), scroll, TRUE, TRUE, 5);
@@ -183,8 +182,8 @@ static void OnCheatListDlg_EditClicked(GtkWidget *widget, gpointer user_data) {
 	gtk_tree_path_free(path);
 
 	dlg = gtk_dialog_new_with_buttons(_("Edit Cheat"), GTK_WINDOW(CheatListDlg),
-		GTK_DIALOG_MODAL, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
+		GTK_DIALOG_MODAL, "_Cancel", GTK_RESPONSE_CANCEL,
+		"_OK", GTK_RESPONSE_ACCEPT, NULL);
 
 	gtk_window_set_default_size(GTK_WINDOW(dlg), 350, 350);
 
@@ -220,7 +219,7 @@ static void OnCheatListDlg_EditClicked(GtkWidget *widget, gpointer user_data) {
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll),
 		GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(scroll), code_edit);
+	gtk_container_add(GTK_CONTAINER(scroll), code_edit);
 	gtk_widget_show(code_edit);
 
 	gtk_box_pack_start(GTK_BOX(box), scroll, TRUE, TRUE, 5);
@@ -311,8 +310,8 @@ static void OnCheatListDlg_OpenClicked(GtkWidget *widget, gpointer user_data) {
 	GtkFileFilter *filter;
 
 	chooser = gtk_file_chooser_dialog_new (_("Open Cheat File"),
-		NULL, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_OK, GTK_RESPONSE_OK, NULL);
+		NULL, GTK_FILE_CHOOSER_ACTION_OPEN, "_Cancel", GTK_RESPONSE_CANCEL,
+		"_OK", GTK_RESPONSE_OK, NULL);
 
 	filename = g_build_filename(getenv("HOME"), CHEATS_DIR, NULL);
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser), filename);
@@ -355,8 +354,8 @@ static void OnCheatListDlg_SaveClicked(GtkWidget *widget, gpointer user_data) {
 	GtkFileFilter *filter;
 
 	chooser = gtk_file_chooser_dialog_new(_("Save Cheat File"),
-		NULL, GTK_FILE_CHOOSER_ACTION_SAVE, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_OK, GTK_RESPONSE_OK, NULL);
+		NULL, GTK_FILE_CHOOSER_ACTION_SAVE, "_Cancel", GTK_RESPONSE_CANCEL,
+		"_OK", GTK_RESPONSE_OK, NULL);
 
 	filename = g_build_filename(getenv("HOME"), CHEATS_DIR, NULL);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(chooser), filename);
@@ -424,7 +423,7 @@ void RunCheatListDialog() {
 
 	builder = gtk_builder_new();
 
-	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+	if (!gtk_builder_add_from_resource(builder, "/org/pcsxr/gui/pcsxr.ui", NULL)) {
 		g_warning("Error: interface could not be loaded!");
 		return;
 	}
@@ -621,7 +620,6 @@ static void UpdateCheatSearchDialog() {
 
 	gtk_tree_view_set_model(GTK_TREE_VIEW(widget), GTK_TREE_MODEL(store));
 	g_object_unref(G_OBJECT(store));
-	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(widget), TRUE);
 	gtk_widget_show(widget);
 }
 
@@ -659,8 +657,8 @@ static void OnCheatSearchDlg_FreezeClicked(GtkWidget *widget, gpointer user_data
 	addr = SearchResults[GetSelectedResultIndex()];
 
 	dlg = gtk_dialog_new_with_buttons(_("Freeze value"), GTK_WINDOW(CheatListDlg),
-		GTK_DIALOG_MODAL, GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
-		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
+		GTK_DIALOG_MODAL, "_OK", GTK_RESPONSE_ACCEPT,
+		"_Cancel", GTK_RESPONSE_CANCEL, NULL);
 
 	box = GTK_WIDGET(gtk_dialog_get_content_area(GTK_DIALOG(dlg)));
 
@@ -672,7 +670,7 @@ static void OnCheatSearchDlg_FreezeClicked(GtkWidget *widget, gpointer user_data
 	gtk_box_pack_start(GTK_BOX(box), descr_edit, FALSE, FALSE, 10);
 	gtk_widget_show(descr_edit);
 
-	hbox = gtk_hbox_new(FALSE, 0);
+	hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 	gtk_box_pack_start(GTK_BOX(box), hbox, FALSE, FALSE, 15);
 
 	label = gtk_label_new(_("Value:"));
@@ -758,11 +756,11 @@ static void OnCheatSearchDlg_ModifyClicked(GtkWidget *widget, gpointer user_data
 	addr = SearchResults[GetSelectedResultIndex()];
 
 	dlg = gtk_dialog_new_with_buttons(_("Modify value"), GTK_WINDOW(CheatListDlg),
-		GTK_DIALOG_MODAL, GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
-		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
+		GTK_DIALOG_MODAL, "_OK", GTK_RESPONSE_ACCEPT,
+		"_Cancel", GTK_RESPONSE_CANCEL, NULL);
 
 	box = GTK_WIDGET(gtk_dialog_get_content_area(GTK_DIALOG(dlg)));
-	hbox = gtk_hbox_new(FALSE, 0);
+	hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 	gtk_box_pack_start(GTK_BOX(box), hbox, FALSE, FALSE, 5);
 
 	label = gtk_label_new(_("New value:"));
@@ -1136,7 +1134,7 @@ void RunCheatSearchDialog() {
 
 	builder = gtk_builder_new();
 
-	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+	if (!gtk_builder_add_from_resource(builder, "/org/pcsxr/gui/pcsxr.ui", NULL)) {
 		g_warning("Error: interface could not be loaded!");
 		return;
 	}

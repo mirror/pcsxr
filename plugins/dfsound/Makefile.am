@@ -49,9 +49,31 @@ bin_PROGRAMS = cfgDFSound
 cfgDFSound_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-DDATADIR=\"${datadir}/psemu/\" \
 	$(GTK3_CFLAGS) $(AM_CPPFLAGS)
-cfgDFSound_SOURCES = spucfg-0.1df/main.c
+cfgDFSound_SOURCES = spucfg-0.1df/main.c GtkResources.c GtkResources.h
 cfgDFSound_LDADD = $(GTK3_LIBS)
 
-glade_DATA = spucfg-0.1df/dfsound.ui
-gladedir = $(datadir)/psemu/
+# gresource.xml is dynamically generated in CMake. Mirror that here in a static way.
+define gresource_xml =
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/pcsxr/dfsound">
+    <file>dfsound.ui</file>
+  </gresource>
+</gresources>
+endef
+
+dfsound.gresource.xml:
+	$(file >$@,$(gresource_xml))
+dfsound_gresource: dfsound.gresource.xml
+	$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir)/spucfg-0.1df --generate-dependencies $(srcdir)/$<)
+GtkResources.c: dfsound.gresource.xml $(dfsound_gresource)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir)/spucfg-0.1df --generate-source --c-name dfsound $<
+GtkResources.h: dfsound.gresource.xml $(dfsound_gresource)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir)/spucfg-0.1df --generate-header --c-name dfsound $<
+
+#glade_DATA = spucfg-0.1df/dfsound.ui
+#gladedir = $(datadir)/psemu/
 EXTRA_DIST = $(glade_DATA)
+
+CLEANFILES = dfsound.gresource.xml GtkResources.c GtkResources.h
+

@@ -12,9 +12,32 @@ AM_CPPFLAGS = -DLOCALE_DIR=\"${datadir}/locale/\" \
 	-I$(top_srcdir)/libpcsxcore -I../../include
 
 bin_PROGRAMS = cfgBladeSio1
-cfgBladeSio1_SOURCES = gui.c sio1.h
+cfgBladeSio1_SOURCES = gui.c sio1.h GtkResources.c GtkResources.h
 cfgBladeSio1_LDADD = $(GTK3_LIBS)
 
-glade_DATA = sio1.ui
-gladedir = $(datadir)/psemu/
+# gresource.xml is dynamically generated in CMake. Mirror that here in a static way.
+define gresource_xml =
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/pcsxr/bladesio1">
+    <file>sio1.ui</file>
+  </gresource>
+</gresources>
+endef
+
+bladesio1.gresource.xml:
+	$(file >$@,$(gresource_xml))
+bladesio1_gresource: bladesio1.gresource.xml
+	$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/$<)
+GtkResources.c: bladesio1.gresource.xml $(bladesio1_gresource)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-source --c-name bladesio1 $<
+GtkResources.h: bladesio1.gresource.xml $(bladesio1_gresource)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-header --c-name bladesio1 $<
+
+
+#glade_DATA = sio1.ui
+#gladedir = $(datadir)/psemu/
 EXTRA_DIST = $(glade_DATA)
+
+CLEANFILES = bladesio1.gresource.xml GtkResources.c GtkResources.h
+

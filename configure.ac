@@ -1,8 +1,9 @@
 AC_INIT([pcsxr], [1.9.95])
 
+AC_CONFIG_MACRO_DIRS([m4])
 AC_CANONICAL_HOST
 AC_CANONICAL_BUILD
-AM_INIT_AUTOMAKE(foreign)
+AM_INIT_AUTOMAKE(foreign subdir-objects)
 AM_MAINTAINER_MODE
 
 AC_CONFIG_HEADERS([include/config.h:include/config.h.in])
@@ -15,6 +16,13 @@ AM_PROG_AS
 
 LT_PREREQ([2.2.6])
 LT_INIT([disable-static])
+
+AX_APPEND_LINK_FLAGS([-fno-pie])
+AX_COMPILER_VENDOR
+if test "$ax_cv_c_compiler_vendor" = "gnu"; then
+    AX_CHECK_LINK_FLAG([-no-pie],[AX_APPEND_LINK_FLAGS([-no-pie])],)
+    AX_CHECK_LINK_FLAG([-nopie],[AX_APPEND_LINK_FLAGS([-nopie])],)
+fi
 
 AM_GLIB_GNU_GETTEXT
 IT_PROG_INTLTOOL([0.35.0])
@@ -33,13 +41,16 @@ PKG_CHECK_MODULES([SDL2], [sdl2 >= 2.0.0],
     ], AC_MSG_ERROR([*** SDL >= 1.2.12 not found!]))
 ])
 
+AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
+AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
+
 AC_SUBST(GLIB2_CFLAGS)
 AC_SUBST(GLIB2_LIBS)
 AC_SUBST(GTK3_CFLAGS)
 AC_SUBST(GTK3_LIBS)
 
 AC_CONFIG_FILES([Makefile
-data/Makefile
+gui/data/Makefile
 doc/Makefile
 libpcsxcore/Makefile
 gui/Makefile
@@ -49,8 +60,9 @@ plugins/dfsound/Makefile
 plugins/dfxvideo/Makefile
 plugins/dfcdrom/Makefile
 plugins/dfnet/Makefile
+plugins/nullsio1/Makefile
 plugins/peopsxgl/Makefile
-pixmaps/Makefile
+gui/data/pixmaps/Makefile
 po/Makefile.in])
 
 AC_CHECK_LIB(dl, dlsym, [LIBS="$LIBS -ldl"], [])
@@ -176,6 +188,7 @@ if test "$BUILD_CCDDA" = "yes"; then
 	AC_CHECK_LIB([avcodec], [main], [LIBS="$LIBS -lavcodec"], AC_MSG_ERROR("No avcodec library"))
 	AC_CHECK_LIB([avutil], [main], [LIBS="$LIBS -lavutil"], AC_MSG_ERROR("No avutil library"))
 	AC_CHECK_LIB([avformat], [main], [LIBS="$LIBS -lavformat"], AC_MSG_ERROR("No avformat library"))
+	AC_CHECK_LIB([swresample], [main], [LIBS="$LIBS -lswresample"], AC_MSG_ERROR("No swresample library"))
 	#AC_CHECK_LIB(avcodec  ,[main],AC_DEFINE([HAVE_LIBAVCODEC],   [1], [ ]),AC_MSG_ERROR([$errormsgl]))
 	#AC_CHECK_LIB(swscale  ,[main],AC_DEFINE([HAVE_LIBSWSCALE],   [1], [ ]),AC_MSG_ERROR([$errormsgl]), [-lavutil])
 	#AC_CHECK_LIB(avdevice ,[main],AC_DEFINE([HAVE_LIBAVDEVICE],  [1], [ ]),AC_MSG_ERROR([$errormsgl]), [-lavcodec -lavutil -lavformat])

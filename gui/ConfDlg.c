@@ -101,7 +101,7 @@ void ConfigurePlugins() {
 	UpdatePluginsBIOS();
 
 	builder = gtk_builder_new();
-	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+	if (!gtk_builder_add_from_resource(builder, "/org/pcsxr/gui/pcsxr.ui", NULL)) {
 		g_warning("Error: interface could not be loaded!");
 		return;
 	}
@@ -213,7 +213,7 @@ void OnConf_Net() {
 	}
 
 	builder = gtk_builder_new();
-	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+	if (!gtk_builder_add_from_resource(builder, "/org/pcsxr/gui/pcsxr.ui", NULL)) {
 		g_warning("Error: interface could not be loaded!");
 		return;
 	}
@@ -845,6 +845,7 @@ static void FindNetPlugin() {
 }
 
 GtkWidget *CpuDlg;
+GtkWidget *PgxpDlg;
 GList *psxglist;
 char *psxtypes[] = {
 	"NTSC",
@@ -874,6 +875,14 @@ static void OnCpu_CpuClicked(GtkWidget *widget, gpointer user_data) {
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
 	gtk_widget_set_sensitive (rew,
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
+}
+
+// When overclock checkbutton is changed, enable/disable the selection spinbutton
+static void OnCpu_OverClockClicked(GtkWidget *widget, gpointer user_data){
+    GtkWidget *spin;
+
+    spin = GTK_WIDGET(gtk_builder_get_object(builder, "GtkSpinButton_PsxClock"));
+    gtk_widget_set_sensitive(spin, gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)));
 }
 
 void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
@@ -935,6 +944,7 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 			SysClose();
 			exit(1);
 		}
+		psxCpu->SetPGXPMode(Config.PGXP_Mode);
 		psxCpu->Reset();
 	}
 
@@ -946,7 +956,14 @@ void OnCpu_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
 	Config.Widescreen = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Widescreen")));
 	Config.HackFix = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_HackFix")));
 
-	SaveConfig();
+    Config.OverClock = gtk_toggle_button_get_active(
+        GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_OverClock")));
+    Config.PsxClock = gtk_spin_button_get_value(
+        GTK_SPIN_BUTTON(gtk_builder_get_object(builder, "GtkSpinButton_PsxClock")));
+    Config.MemHack = gtk_toggle_button_get_active(
+        GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_MemHack")));
+
+    SaveConfig();
 
 	gtk_widget_destroy(CpuDlg);
 	CpuDlg = NULL;
@@ -958,7 +975,7 @@ void OnConf_Cpu() {
 
 	builder = gtk_builder_new();
 	
-	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+	if (!gtk_builder_add_from_resource(builder, "/org/pcsxr/gui/pcsxr.ui", NULL)) {
 		g_warning("Error: interface could not be loaded!");
 		return;
 	}
@@ -1028,7 +1045,103 @@ void OnConf_Cpu() {
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_Widescreen")), Config.Widescreen);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "GtkCheckButton_HackFix")), Config.HackFix);
 
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(
+        gtk_builder_get_object(builder, "GtkCheckButton_OverClock")), Config.OverClock);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(
+        gtk_builder_get_object(builder, "GtkSpinButton_PsxClock")), Config.PsxClock);
+    OnCpu_OverClockClicked(GTK_WIDGET(
+        gtk_builder_get_object(builder, "GtkCheckButton_OverClock")), NULL);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(
+        gtk_builder_get_object(builder, "GtkCheckButton_MemHack")), Config.MemHack);
+
+    g_signal_connect_data(G_OBJECT(gtk_builder_get_object(builder, "GtkCheckButton_OverClock")), "toggled",
+                          G_CALLBACK(OnCpu_OverClockClicked), builder, NULL, G_CONNECT_AFTER);
+
 	// Setup a handler for when Close or Cancel is clicked
 	g_signal_connect_data(G_OBJECT(CpuDlg), "response",
-			G_CALLBACK(OnCpu_Clicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+                          G_CALLBACK(OnCpu_Clicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
+}
+
+//When a different PGXP mode is selected, display some informational text
+static void OnPgxp_ModeChanged(GtkWidget *widget, gpointer user_data) {
+    uint8_t mode;
+
+    mode = gtk_combo_box_get_active(GTK_COMBO_BOX(
+        gtk_builder_get_object(builder, "PGXP_Mode")));
+
+    switch (mode) {
+        case 0:
+            gtk_label_set_text(GTK_LABEL(gtk_builder_get_object(builder, "PGXP_Mode_title")),
+                                         _("Disabled"));
+            gtk_label_set_text(GTK_LABEL(gtk_builder_get_object(builder, "PGXP_Mode_description")),
+                                         _("PGXP is not mirroring any functions currently."));
+            break;
+        case 1:
+            gtk_label_set_text(GTK_LABEL(gtk_builder_get_object(builder, "PGXP_Mode_title")),
+                                         _("Memory operations only"));
+            gtk_label_set_text(GTK_LABEL(gtk_builder_get_object(builder, "PGXP_Mode_description")),
+                                         _("PGXP is mirroring load, store and processor transfer operations of the CPU and GTE."));
+            break;
+        case 2:
+            gtk_label_set_text(GTK_LABEL(gtk_builder_get_object(builder, "PGXP_Mode_title")),
+                                         _("Memory and CPU arithmetic operations"));
+            gtk_label_set_text(GTK_LABEL(gtk_builder_get_object(builder, "PGXP_Mode_description")),
+                                         _("PGXP is mirroring load, store and transfer operations of the CPU and GTE and arithmetic/logic functions of the PSX CPU.\n(WARNING: This mode is currently unfinished and may cause incorrect behaviour in some games)."));
+            break;
+        default:
+            gtk_label_set_text(GTK_LABEL(gtk_builder_get_object(builder, "PGXP_Mode_title")),
+                                         _("Error"));
+            gtk_label_set_text(GTK_LABEL(gtk_builder_get_object(builder, "PGXP_Mode_description")),
+                                         _("Unknown mode."));
+    }
+}
+
+static void OnPgxp_Clicked(GtkDialog *dialog, gint arg1, gpointer user_data) {
+
+    Config.PGXP_GTE = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(
+        gtk_builder_get_object(builder, "PGXP_GTE")));
+    Config.PGXP_Cache = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(
+        gtk_builder_get_object(builder, "PGXP_Cache")));
+    Config.PGXP_Texture = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(
+        gtk_builder_get_object(builder, "PGXP_Texture")));
+
+    Config.PGXP_Mode = gtk_combo_box_get_active(GTK_COMBO_BOX(
+        gtk_builder_get_object(builder, "PGXP_Mode")));
+
+    EmuSetPGXPMode(Config.PGXP_Mode);
+    SaveConfig();
+
+    gtk_widget_destroy(PgxpDlg);
+    PgxpDlg = NULL;
+}
+
+void OnConf_Pgxp() {
+    GtkWidget *widget;
+    char buf[25];
+
+    builder = gtk_builder_new();
+
+    if (!gtk_builder_add_from_resource(builder, "/org/pcsxr/gui/pcsxr.ui", NULL)) {
+        g_warning("Error: interface could not be loaded!");
+        return;
+    }
+
+    PgxpDlg = GTK_WIDGET(gtk_builder_get_object(builder, "PgxpDlg"));
+    gtk_widget_show (PgxpDlg);
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(
+        gtk_builder_get_object(builder, "PGXP_GTE")), Config.PGXP_GTE);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(
+        gtk_builder_get_object(builder, "PGXP_Cache")), Config.PGXP_Cache);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(
+        gtk_builder_get_object(builder, "PGXP_Texture")), Config.PGXP_Texture);
+
+    gtk_combo_box_set_active(GTK_COMBO_BOX(
+        gtk_builder_get_object(builder, "PGXP_Mode")), Config.PGXP_Mode);
+    OnPgxp_ModeChanged(NULL, NULL);
+
+    g_signal_connect_data(G_OBJECT(gtk_builder_get_object(builder, "PGXP_Mode")), "changed",
+                          G_CALLBACK(OnPgxp_ModeChanged), builder, NULL, G_CONNECT_AFTER);
+    g_signal_connect_data(G_OBJECT(PgxpDlg), "response",
+                          G_CALLBACK(OnPgxp_Clicked), builder, (GClosureNotify)g_object_unref, G_CONNECT_AFTER);
 }

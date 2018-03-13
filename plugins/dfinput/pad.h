@@ -158,6 +158,7 @@ typedef struct tagPadDef {
 	int8_t			DevNum;
 	uint16_t		Type;
 	uint8_t			VisualVibration;
+    uint8_t         PhysicalVibration;
 	KEYDEF			KeyDef[DKEY_TOTAL];
 	KEYDEF			AnalogDef[ANALOG_TOTAL][4];
 #if SDL_VERSION_ATLEAST(2,0,0)

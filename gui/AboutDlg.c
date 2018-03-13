@@ -19,11 +19,12 @@
 #include "Linux.h"
 #include <gtk/gtk.h>
 
-#define ABOUT_VERSION "svn"
+#define ABOUT_VERSION "git"
 
 void RunAboutDialog(void) {
 	GtkBuilder *builder;
 	GtkWidget *AboutDlg;
+	GdkPixbuf *logo;
 
 	const gchar *authors[] = {
 		"PCSX-Reloaded Team:",
@@ -87,9 +88,11 @@ void RunAboutDialog(void) {
 		"You should have received a copy of the GNU General Public License "
 		"along with this program. If not, see <http://www.gnu.org/licenses/>.");
 
+	logo = gdk_pixbuf_new_from_resource("/org/pcsxr/gui/pixmaps/pcsxr-icon.png", NULL);
+
 	builder = gtk_builder_new();
 	
-	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+	if (!gtk_builder_add_from_resource(builder, "/org/pcsxr/gui/pcsxr.ui", NULL)) {
 		g_warning("Error: interface could not be loaded!");
 		return;
 	}
@@ -109,6 +112,9 @@ void RunAboutDialog(void) {
 	gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG (AboutDlg), _("A PlayStation emulator."));
 	gtk_about_dialog_set_license(GTK_ABOUT_DIALOG(AboutDlg), _(license));
 	gtk_about_dialog_set_wrap_license(GTK_ABOUT_DIALOG(AboutDlg), TRUE);
+	gtk_about_dialog_set_logo(GTK_ABOUT_DIALOG(AboutDlg), logo);
+	
+	g_object_unref(G_OBJECT(logo));
 	
 	gtk_dialog_run(GTK_DIALOG(AboutDlg));
 	gtk_widget_destroy(AboutDlg);

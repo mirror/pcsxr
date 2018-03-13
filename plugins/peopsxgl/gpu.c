@@ -48,7 +48,7 @@ static int iOldMode=0;
 #include "fps.h"
 #include "key.h"
 #include "gte_accuracy.h"
-#include "PGXP_gpu.h"
+#include "pgxp_gpu.h"
 #ifdef _WINDOWS
 #include "resource.h"
 #include "ssave.h"
