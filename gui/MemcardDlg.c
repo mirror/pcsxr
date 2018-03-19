@@ -443,7 +443,7 @@ static int GetFreeMemcardSlot(gint target_card, gint count, u8* blocks) {
 	return -1;
 }
 
-void CopyMemcardData(gint dstmcd, char *from, char *to, gint srci, gint dsti,
+void CopyMemcardData(char *from, char *to, gint srci, gint dsti,
 						gchar *str, const u16 linkindex) {
 	u16* linkptr;
 	u8* checksumptr;
@@ -465,11 +465,11 @@ void CopyMemcardData(gint dstmcd, char *from, char *to, gint srci, gint dsti,
 		//printf("link = %i %i\n", dsti, linkindex);
 	}
 
-	SaveMcd(dstmcd, (char *)str, to, dsti * 128, 128);
+	SaveMcd((char *)str, to, dsti * 128, 128);
 
 	// data	
 	memcpy(to + dsti * 1024 * 8, from + srci * 1024 * 8, 1024 * 8);
-	SaveMcd(dstmcd, (char *)str, to, dsti * 1024 * 8, 1024 * 8);
+	SaveMcd((char *)str, to, dsti * 1024 * 8, 1024 * 8);
 
 	//printf("data = %s\n", from + (srci+1) * 128);
 }
@@ -550,7 +550,7 @@ static void OnMcd_CopyTo(GtkWidget *widget, gpointer user_data) {
 
 	for (j=0; srctbl[j] > 0; j++) {
 		// last parameter specifies link index (next block)
-		CopyMemcardData(dstmcd, source, destination,
+		CopyMemcardData(source, destination,
 					srctbl[j], dsttbl[j], str, dsttbl[j+1]-1);
 		//printf("count = %i, indices=(%x,%x) jindex=%i\n", count, srctbl[j], dsttbl[j], j);
 	}
@@ -622,7 +622,7 @@ static void OnMemcardDelete(GtkWidget *widget, gpointer user_data) {
 			}
 			*ptr = xorsum;
 
-			SaveMcd(memcard, (char *)filename, data, i * 128, 128);
+			SaveMcd((char *)filename, data, i * 128, 128);
 
 			// Check links
 			i = GETLINKFORBLOCK(data, i); //0...15 index when ++i at top of loop
@@ -753,9 +753,6 @@ void OnConf_Mcds() {
 
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(
         gtk_builder_get_object(builder, "GtkCheckButton_PerGameMcd")), Config.PerGameMcd);
-    // Disable it because it is not working yet
-    gtk_widget_set_sensitive(GTK_WIDGET(
-        gtk_builder_get_object(builder, "GtkCheckButton_PerGameMcd")), FALSE);
 
 	LoadMcdDlg(dialog);
 

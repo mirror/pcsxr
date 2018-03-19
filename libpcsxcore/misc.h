@@ -60,6 +60,7 @@ int LoadCdrom();
 int LoadCdromFile(const char *filename, EXE_HEADER *head);
 int CheckCdrom();
 int Load(const char *ExePath);
+int LoadLdrFile(const char *LdrPath);
 
 int SaveState(const char *file);
 int SaveStateMem(const u32 id);

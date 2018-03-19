@@ -1,0 +1,28 @@
+os: linux
+
+dist: trusty
+
+language: c
+
+compiler:
+  - clang
+  - gcc
+  
+addons:
+  apt:
+    sources:
+      - ubuntu-sdk-team
+    packages:
+      - intltool
+      - libavformat-dev
+      - libavcodec-dev
+      - libavutil-dev
+      - libgtk-3-dev
+      - libsdl2-dev
+      - libxtst-dev
+      - libxml2-utils
+
+script:
+  - mkdir build && cd build
+  - cmake .. -DCMAKE_BUILD_TYPE='Release' -DCMAKE_INSTALL_PREFIX='/usr' -DCMAKE_INSTALL_LIBDIR='/usr/lib'
+  - make -j1

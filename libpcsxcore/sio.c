@@ -801,11 +801,11 @@ unsigned char sioRead8() {
 					switch (CtrlReg & 0x2002) {
 						case 0x0002:
 							memcpy(Mcd1Data + (adrL | (adrH << 8)) * 128, &buf[1], 128);
-							SaveMcd(1, Config.Mcd1, Mcd1Data, (adrL | (adrH << 8)) * 128, 128);
+							SaveMcd(Config.Mcd1, Mcd1Data, (adrL | (adrH << 8)) * 128, 128);
 							break;
 						case 0x2002:
 							memcpy(Mcd2Data + (adrL | (adrH << 8)) * 128, &buf[1], 128);
-							SaveMcd(2, Config.Mcd2, Mcd2Data, (adrL | (adrH << 8)) * 128, 128);
+							SaveMcd(Config.Mcd2, Mcd2Data, (adrL | (adrH << 8)) * 128, 128);
 							break;
 					}
 				}
@@ -884,29 +884,30 @@ void sioInterrupt() {
 void LoadMcd(int mcd, char *str) {
 	FILE *f;
 	char *data = NULL;
-	char Mcd[MAXPATHLEN];
+	char filepath[MAXPATHLEN] = { '\0' };
+	const char *apppath = GetAppPath();
 
 	if (mcd == 1) data = Mcd1Data;
 	if (mcd == 2) data = Mcd2Data;
 
-	if (Config.PerGameMcd && mcd && strlen(Config.PsxExeName))
-		sprintf(Mcd, "memcards\\games\\%s-%02d.mcr", Config.PsxExeName, mcd-1);
-	else
-		strcpy(Mcd, str);
-
-	if (*Mcd == 0) {
+	if (*str == 0) {
 		SysPrintf(_("No memory card value was specified - card %i is not plugged.\n"), mcd);
 		return;
 	}
-	f = fopen(Mcd, "rb");
+
+	//Getting full application path.
+	memmove(filepath, apppath, strlen(apppath));
+	strcat(filepath, str);
+
+	f = fopen(filepath, "rb");
 	if (f == NULL) {
-		SysPrintf(_("The memory card %s doesn't exist - creating it\n"), Mcd);
-		CreateMcd(Mcd);
-		f = fopen(Mcd, "rb");
+		SysPrintf(_("The memory card %s doesn't exist - creating it\n"), filepath);
+		CreateMcd(filepath);
+		f = fopen(filepath, "rb");
 		if (f != NULL) {
 			struct stat buf;
 
-			if (stat(Mcd, &buf) != -1) {
+			if (stat(filepath, &buf) != -1) {
 				if (buf.st_size == MCD_SIZE + 64)
 					fseek(f, 64, SEEK_SET);
 				else if(buf.st_size == MCD_SIZE + 3904)
@@ -916,12 +917,12 @@ void LoadMcd(int mcd, char *str) {
 			fclose(f);
 		}
 		else
-			SysMessage(_("Memory card %s failed to load!\n"), Mcd);
+			SysMessage(_("Memory card %s failed to load!\n"), filepath);
 	}
 	else {
 		struct stat buf;
-		SysPrintf(_("Loading memory card %s\n"), Mcd);
-		if (stat(Mcd, &buf) != -1) {
+		SysPrintf(_("Loading memory card %s\n"), filepath);
+		if (stat(filepath, &buf) != -1) {
 			if (buf.st_size == MCD_SIZE + 64)
 				fseek(f, 64, SEEK_SET);
 			else if(buf.st_size == MCD_SIZE + 3904)
@@ -940,20 +941,14 @@ void LoadMcds(char *mcd1, char *mcd2) {
 	LoadMcd(2, mcd2);
 }
 
-void SaveMcd(int mcd, char *str, char *data, uint32_t adr, int size) {
+void SaveMcd(char *mcd, char *data, uint32_t adr, int size) {
 	FILE *f;
-	char Mcd[MAXPATHLEN];
 
-	if (Config.PerGameMcd && mcd && strlen(Config.PsxExeName))
-		sprintf(Mcd, "memcards\\games\\%s-%02d.mcr", Config.PsxExeName, mcd-1);
-	else
-		strcpy(Mcd, str);
-
-	f = fopen(Mcd, "r+b");
+	f = fopen(mcd, "r+b");
 	if (f != NULL) {
 		struct stat buf;
 
-		if (stat(Mcd, &buf) != -1) {
+		if (stat(mcd, &buf) != -1) {
 			if (buf.st_size == MCD_SIZE + 64)
 				fseek(f, adr + 64, SEEK_SET);
 			else if (buf.st_size == MCD_SIZE + 3904)
@@ -965,9 +960,7 @@ void SaveMcd(int mcd, char *str, char *data, uint32_t adr, int size) {
 
 		fwrite(data + adr, 1, size, f);
 		fclose(f);
-
-		SysPrintf(_("Saving memory card %s\n"), Mcd);
-
+		SysPrintf(_("Saving memory card %s\n"), mcd);
 		return;
 	}
 
@@ -980,7 +973,7 @@ void SaveMcd(int mcd, char *str, char *data, uint32_t adr, int size) {
 	}
 #endif
 
-	ConvertMcd(str, data);
+	ConvertMcd(mcd, data);
 }
 
 void CreateMcd(char *mcd) {

@@ -35,6 +35,10 @@ static int iOldMode=0;
 
 #endif
 
+#if defined(__linux__)
+#include <sys/wait.h>
+#endif
+
 #define _IN_GPU
 
 #include "externals.h"
@@ -1088,13 +1092,7 @@ long GPUopen(unsigned long * disp,char * CapText,char * CfgFile)
  GLinitialize();                                       // init opengl
 
  if(disp)
-  {
-#if defined (_MACGL)
-   *disp = display;
-#else
-   *disp=(unsigned long *)display;                       // return display ID to main emu
-#endif
-  }
+   *disp = (unsigned long)display;                     // return display ID to main emu
 
  if(display) return 0;
  return -1;
@@ -1316,7 +1314,6 @@ void SetScanLines(void)
          PSXDisplay.DisplayMode.y, 0, -1, 1);
 
  //PGXP_SetMatrix(0, PSXDisplay.DisplayMode.x, PSXDisplay.DisplayMode.y, 0, -1, 1);
-
 
  if(bKeepRatio)
   glViewport(rRatioRect.left,
@@ -1894,7 +1891,6 @@ void updateDisplayIfChanged(void)
              PSXDisplay.DisplayModeNew.y, 0, -1, 1);
 
  //  PGXP_SetMatrix(0, PSXDisplay.DisplayModeNew.x, PSXDisplay.DisplayModeNew.y, 0, -1, 1);
-
 
    if(bKeepRatio) SetAspectRatio();
   }

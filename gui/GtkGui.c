@@ -69,6 +69,8 @@ GtkWidget *Window = NULL;
 
 int destroy = 0;
 
+extern void LidInterrupt();
+
 #define MAX_SLOTS 9
 
 /* TODO - If MAX_SLOTS changes, need to find a way to automatically set all positions */
@@ -777,8 +779,8 @@ static gchar *Open_Iso_Proc() {
 		}
 
 		/* Save current path. */
-		  strcpy(Config.IsoImgDir, current_folder);
-		  SaveConfig();
+		strcpy(Config.IsoImgDir, current_folder);
+		SaveConfig();
 
 		/* free useless data */
 		GSList * ll = l;

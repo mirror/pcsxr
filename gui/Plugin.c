@@ -182,7 +182,7 @@ void PADhandleKey(int key) {
 				return;
 			if (modalt) KeyStateLoad(slot);
 			else if (modctrl) KeyStateSave(slot);
-			else KeyStateLoad(OLD_SLOT + slot);
+			//else KeyStateLoad(OLD_SLOT + slot);
 			break;
 
 		case XK_F1:

@@ -68,7 +68,9 @@ void psxDma4(u32 madr, u32 bcr, u32 chcr) { // SPU
 			}
 			size = (bcr >> 16) * (bcr & 0xffff) * 2;
 			SPU_readDMAMem(ptr, size);
+#ifdef PSXREC
 			psxCpu->Clear(madr, size);
+#endif
 
 #if 1
 			SPUDMA_INT((bcr >> 16) * (bcr & 0xffff) / 2);

@@ -1020,7 +1020,6 @@ BOOL offsetline(unsigned int* addr)
  vertex[1].y=(short)((float)y1+px);
  vertex[2].y=(short)((float)y1+py);
 
-
  if(vertex[0].x==vertex[3].x &&                        // ortho rect? done
     vertex[1].x==vertex[2].x &&
     vertex[0].y==vertex[1].y &&

@@ -107,16 +107,21 @@ int psxMemInit() {
 
 void psxMemReset() {
 	FILE *f = NULL;
-	char bios[1024];
+	char bios[1024] = { '\0' };
 
 	memset(psxM, 0, 0x00200000);
 	memset(psxP, 0, 0x00010000);
 
 	// Load BIOS
 	if (strcmp(Config.Bios, "HLE") != 0) {
-		sprintf(bios, "%s/%s", Config.BiosDir, Config.Bios);
-		f = fopen(bios, "rb");
+	   //AppPath's priority is high.
+		const char* apppath = GetAppPath();
+		if( strlen(apppath) > 0 )
+			strcat( strcat( strcat( bios, GetAppPath() ), "bios\\"), Config.Bios );
+		else
+			sprintf(bios, "%s/%s", Config.BiosDir, Config.Bios);
 
+		f = fopen(bios, "rb");
 		if (f == NULL) {
 			SysMessage(_("Could not open BIOS:\"%s\". Enabling HLE Bios!\n"), bios);
 			memset(psxR, 0, 0x80000);
@@ -125,6 +130,7 @@ void psxMemReset() {
 			fread(psxR, 1, 0x80000, f);
 			fclose(f);
 			Config.HLE = FALSE;
+			SysPrintf(_("Loaded BIOS: %s\n"), bios );
 		}
 	} else Config.HLE = TRUE;
 }
@@ -143,8 +149,7 @@ u8 psxMemRead8(u32 mem) {
 	char *p;
 	u32 t;
 
-	if (!Config.MemHack)
-	{
+	if (!Config.MemHack) {
 		psxRegs.cycle += 0;
 	}
 
@@ -173,8 +178,7 @@ u16 psxMemRead16(u32 mem) {
 	char *p;
 	u32 t;
 
-	if (!Config.MemHack)
-	{
+	if (!Config.MemHack) {
 		psxRegs.cycle += 1;
 	}
 	
@@ -203,8 +207,7 @@ u32 psxMemRead32(u32 mem) {
 	char *p;
 	u32 t;
 
-	if (!Config.MemHack)
-	{
+	if (!Config.MemHack) {
 		psxRegs.cycle += 1;
 	}
 
@@ -233,8 +236,7 @@ void psxMemWrite8(u32 mem, u8 value) {
 	char *p;
 	u32 t;
 
-	if (!Config.MemHack)
-	{
+	if (!Config.MemHack) {
 		psxRegs.cycle += 1;
 	}
 	
@@ -265,8 +267,7 @@ void psxMemWrite16(u32 mem, u16 value) {
 	char *p;
 	u32 t;
 
-	if (!Config.MemHack)
-	{
+	if (!Config.MemHack) {
 		psxRegs.cycle += 1;
 	}
 		
@@ -297,8 +298,7 @@ void psxMemWrite32(u32 mem, u32 value) {
 	char *p;
 	u32 t;
 
-	if (!Config.MemHack)
-	{
+	if (!Config.MemHack) {
 		psxRegs.cycle += 1;
 	}
 

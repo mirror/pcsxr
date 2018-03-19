@@ -155,7 +155,6 @@ static __inline void PRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex2
 		if(PGXP_DrawDebugTriQuad(vertex1, vertex2, vertex4, vertex3, COLOUR_NONE, 1))
 		return;
 	}
-		
 
  glBegin(GL_TRIANGLE_STRIP);
   glTexCoord2fv(&vertex1->sow);
@@ -2552,7 +2551,6 @@ void DrawMultiBlur(void)
 
  fx=(float)PSXDisplay.DisplayMode.x/(float)(iResX); 
  fy=(float)PSXDisplay.DisplayMode.y/(float)(iResY);
-
 
  for (unsigned int i = 0; i < 4; ++i)
  {
