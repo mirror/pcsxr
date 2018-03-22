@@ -8,9 +8,7 @@ matrix:
       before_install:
         - docker pull ubuntu:17.10
       script:
-        - export CC=gcc
-        - export CXX=g++
-        - docker build .
+        - docker build -f Dockerfile.gcc .
     - os: linux
       language: c
       sudo: required
@@ -19,9 +17,7 @@ matrix:
       before_install:
         - docker pull ubuntu:17.10
       script:
-        - export CC=clang
-        - export CXX=clang++
-        - docker build .
+        - docker build -f Dockerfile.clang .
     - os: osx
       osx_image: xcode7.3
       before_install:
