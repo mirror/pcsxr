@@ -1,28 +1,33 @@
-os: linux
-
-dist: trusty
-
-language: c
-
-compiler:
-  - clang
-  - gcc
-  
-addons:
-  apt:
-    sources:
-      - ubuntu-sdk-team
-    packages:
-      - intltool
-      - libavformat-dev
-      - libavcodec-dev
-      - libavutil-dev
-      - libgtk-3-dev
-      - libsdl2-dev
-      - libxtst-dev
-      - libxml2-utils
-
-script:
-  - mkdir build && cd build
-  - cmake .. -DCMAKE_BUILD_TYPE='Release' -DCMAKE_INSTALL_PREFIX='/usr' -DCMAKE_INSTALL_LIBDIR='/usr/lib'
-  - make -j1
+matrix:
+  include:
+    - os: linux
+      language: c
+      sudo: required
+      compiler: gcc
+      services: docker
+      before_install:
+        - docker pull ubuntu:17.10
+      script:
+        - export CC=gcc
+        - export CXX=g++
+        - docker build .
+    - os: linux
+      language: c
+      sudo: required
+      compiler: clang
+      services: docker
+      before_install:
+        - docker pull ubuntu:17.10
+      script:
+        - export CC=clang
+        - export CXX=clang++
+        - docker build .
+    - os: osx
+      osx_image: xcode7.3
+      before_install:
+        - curl -O -L https://www.libsdl.org/release/SDL2-2.0.8.dmg
+        - hdiutil attach SDL2-2.0.8.dmg
+        - sudo cp -a /Volumes/SDL2/SDL2.framework /Library/Frameworks/
+      language: objective-c
+      xcode_project: macosx/Pcsxr.xcodeproj
+      xcode_scheme: PCSXR
