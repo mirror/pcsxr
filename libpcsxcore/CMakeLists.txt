@@ -1,4 +1,4 @@
-message(STATUS "* Configuring core")
+message(STATUS "* Configuring Core")
 
 set(DYNAREC "auto" CACHE STRING "Build dynarec for arch.")
 set_property(CACHE DYNAREC PROPERTY STRINGS auto x86_64 x86 ppc no)

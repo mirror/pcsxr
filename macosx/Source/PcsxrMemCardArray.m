@@ -16,11 +16,11 @@ static inline void CopyMemcardData(char *from, char *to, int srci, int dsti, cha
 {
 	// header
 	memmove(to + (dsti + 1) * 128, from + (srci + 1) * 128, 128);
-	SaveMcd(0, str, to, (dsti + 1) * 128, 128);
+	SaveMcd(str, to, (dsti + 1) * 128, 128);
 	
 	// data
 	memmove(to + (dsti + 1) * 1024 * 8, from + (srci+1) * 1024 * 8, 1024 * 8);
-	SaveMcd(0, str, to, (dsti + 1) * 1024 * 8, 1024 * 8);
+	SaveMcd(str, to, (dsti + 1) * 1024 * 8, 1024 * 8);
 }
 
 static inline char* BlankHeader()
@@ -56,11 +56,11 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	// header
 	char *header = BlankHeader();
 	memcpy(to + (dsti + 1) * 128, header, 128);
-	SaveMcd(0, str, to, (dsti + 1) * 128, 128);
+	SaveMcd(str, to, (dsti + 1) * 128, 128);
 	
 	// data
 	memset(to + (dsti + 1) * 1024 * 8, 0, 1024 * 8);
-	SaveMcd(0, str, to, (dsti + 1) * 1024 * 8, 1024 * 8);
+	SaveMcd(str, to, (dsti + 1) * 1024 * 8, 1024 * 8);
 }
 
 @interface PcsxrMemCardArray ()
@@ -338,7 +338,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 		for (unsigned char j = 0; j < 127; j++) xor ^= *ptr++;
 		*ptr = xor;
 		
-		SaveMcd(0, filename, data, i * 128, 128);
+		SaveMcd(filename, data, i * 128, 128);
 	}
 }
 

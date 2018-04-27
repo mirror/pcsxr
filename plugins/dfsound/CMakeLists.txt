@@ -1,4 +1,4 @@
-message(STATUS "* Configuring dfsound")
+message(STATUS "* Configuring DFSound")
 
 include(GlibCompileResourcesSupport)
 

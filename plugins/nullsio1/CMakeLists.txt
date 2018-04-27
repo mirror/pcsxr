@@ -1,8 +1,6 @@
-message(STATUS "* Configuring nullsio1")
-
+message(STATUS "* Configuring NullSio1")
 
 #deps
-
 
 #defs
 add_definitions(-DLOCALE_DIR="${CMAKE_INSTALL_FULL_DATAROOTDIR}/locale/" -DPSEMU_DATA_DIR="${CMAKE_INSTALL_FULL_DATAROOTDIR}/psemu" -DDEF_PLUGIN_DIR="${CMAKE_INSTALL_FULL_LIBDIR}/games/psemu")
