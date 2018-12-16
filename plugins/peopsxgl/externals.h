@@ -353,6 +353,7 @@ extern BOOL           bUseFastMdec;
 extern BOOL           bUse15bitMdec;
 extern int            iFrameTexType;
 extern int            iFrameReadType;
+extern int			  iLineHackMode;
 extern int            iClampType;
 extern int            iSortTexCnt;
 extern BOOL           bFakeFrontBuffer; 

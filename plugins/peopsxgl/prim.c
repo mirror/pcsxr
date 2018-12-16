@@ -3326,167 +3326,194 @@ void primPolyG4(unsigned char * baseAddr)
 // cmd: flat shaded Texture3
 ////////////////////////////////////////////////////////////////////////
 
-BOOL DoLineCheck(uint32_t *gpuData)
+
+// 0 = disabled
+// 1 = enabled (default mode) 
+// 2 = enabled (aggressive mode)
+
+typedef struct 
 {
- BOOL bQuad=FALSE;short dx,dy;
+	short x, y;
+	short padding[2];
+}sourceVert;
 
- if(lx0==lx1)
-  {
-   dx=lx0-lx2;if(dx<0) dx=-dx;
+// Hack to deal with PS1 games rendering axis aligned lines using 1 pixel wide triangles with UVs that describe a line
+// Suitable for games like Soul Blade, Doom and Hexen
+BOOL Hack_FindLine(uint32_t *gpuData)
+{
+	int pxWidth = 1;	// width of a single pixel
+	unsigned short cornerIdx, shortIdx, longIdx;
 
-   if(ly1==ly2) 
-    {
-     dy=ly1-ly0;if(dy<0) dy=-dy;
-     if(dx<=1)
-      {
-       vertex[3]=vertex[2];
-       vertex[2]=vertex[0];
-       vertex[2].x=vertex[3].x;
-      }
-     else
-     if(dy<=1)
-      {
-       vertex[3]=vertex[2];
-       vertex[2].y=vertex[0].y;
-      }
-     else return FALSE;
+	sourceVert* pSourceVerts = (sourceVert*)&gpuData[1];
 
-     bQuad=TRUE;
-    }
-   else
-   if(ly0==ly2) 
-    {
-     dy=ly0-ly1;if(dy<0) dy=-dy;
-     if(dx<=1)
-      {
-       vertex[3]=vertex[1];
-       vertex[3].x=vertex[2].x;
-      }
-     else
-     if(dy<=1)
-      {
-       vertex[3]=vertex[2];
-       vertex[3].y=vertex[1].y;
-      }
-     else return FALSE;
+	// reject 3D elements
+	if ((vertex[0].w != vertex[1].w) ||
+		(vertex[1].w != vertex[2].w))
+		return FALSE;
 
-     bQuad=TRUE;
-    }
-  }
+	// find short side of triangle / end of line with 2 vertices (guess which vertex is the right angle)
+	if ((vertex[0].sow == vertex[1].sow) && (vertex[0].tow == vertex[1].tow))
+		cornerIdx = 0;
+	else if ((vertex[1].sow == vertex[2].sow) && (vertex[1].tow == vertex[2].tow))
+		cornerIdx = 1;
+	else if ((vertex[2].sow == vertex[0].sow) && (vertex[2].tow == vertex[0].tow))
+		cornerIdx = 2;
+	else
+		return FALSE;
 
- if(lx0==lx2)
-  {
-   dx=lx0-lx1;if(dx<0) dx=-dx;
+	// assign other indices to remaining vertices
+	shortIdx = (cornerIdx + 1) % 3;
+	longIdx = (shortIdx + 1) % 3;
 
-   if(ly2==ly1) 
-    {
-     dy=ly2-ly0;if(dy<0) dy=-dy;
-     if(dx<=1)
-      {
-       vertex[3]=vertex[1];
-       vertex[1]=vertex[0];
-       vertex[1].x=vertex[3].x;
-      }
-     else
-     if(dy<=1)
-      {
-       vertex[3]=vertex[1];
-       vertex[1].y=vertex[0].y;
-      }
-     else return FALSE;
+	// determine line orientation and check width
+	if ((vertex[cornerIdx].x == vertex[shortIdx].x) && (abs(pSourceVerts[cornerIdx].y - pSourceVerts[shortIdx].y) == pxWidth))
+	{
+		// line is horizontal
+		// determine which is truly the corner by checking against the long side, while making sure it is axis aligned
+		if (vertex[shortIdx].y == vertex[longIdx].y)
+		{
+			unsigned short tempIdx = shortIdx;
+			shortIdx = cornerIdx;
+			cornerIdx = tempIdx;
+		}
+		else if (vertex[cornerIdx].y != vertex[longIdx].y)
+			return FALSE;
 
-     bQuad=TRUE;
-    }
-   else
-   if(ly0==ly1)
-    {
-     dy=ly2-ly0;if(dy<0) dy=-dy;
-     if(dx<=1)
-      {
-       vertex[3]=vertex[2];
-       vertex[3].x=vertex[1].x;
-      }
-     else
-     if(dy<=1)
-      {
-       vertex[3]=vertex[1];
-       vertex[3].y=vertex[2].y;
-      }
-     else return FALSE;
+		// flip corner index to other side of quad
+		vertex[3] = vertex[longIdx];
+		vertex[3].y = vertex[shortIdx].y;
+	}
+	else if ((vertex[cornerIdx].y == vertex[shortIdx].y) && (abs(pSourceVerts[cornerIdx].x - pSourceVerts[shortIdx].x) == pxWidth))
+	{
+		// line is vertical
+		// determine which is truly the corner by checking against the long side, while making sure it is axis aligned
+		if (vertex[shortIdx].x == vertex[longIdx].x)
+		{
+			unsigned short tempIdx = shortIdx;
+			shortIdx = cornerIdx;
+			cornerIdx = tempIdx;
+		}
+		else if (vertex[cornerIdx].x != vertex[longIdx].x)
+			return FALSE;
 
-     bQuad=TRUE;
-    }
-  }
+		// flip corner index to other side of quad
+		vertex[3] = vertex[longIdx];
+		vertex[3].x = vertex[shortIdx].x;
+	}
+	else
+		return FALSE;
+	
+	// Draw Quad
+	PRIMdrawTexturedQuad(&vertex[cornerIdx], &vertex[longIdx], &vertex[3], &vertex[shortIdx]);
+	
+	if(bDrawMultiPass)
+	{
+		SetSemiTransMulti(1);
+		PRIMdrawTexturedQuad(&vertex[cornerIdx], &vertex[longIdx], &vertex[3], &vertex[shortIdx]);
+	}
+	
+	if(ubOpaqueDraw)
+	{
+		SetZMask4O();
+		if(bUseMultiPass) SetOpaqueColor(gpuData[0]);
+		DEFOPAQUEON
+		PRIMdrawTexturedQuad(&vertex[cornerIdx], &vertex[longIdx], &vertex[3], &vertex[shortIdx]);
+		DEFOPAQUEOFF
+	}
+	
+	iDrawnSomething=1;
+	
+	return TRUE;
+}
 
- if(lx1==lx2)
-  {
-   dx=lx1-lx0;if(dx<0) dx=-dx;
 
-   if(ly1==ly0)
-    {
-     dy=ly1-ly2;if(dy<0) dy=-dy;
+// Hack to deal with PS1 games rendering axis aligned lines using 1 pixel wide triangles and force UVs to describe a line
+// Required for games like Dark Forces and Duke Nukem
+BOOL Hack_ForceLine(uint32_t *gpuData)
+{
+	int pxWidth = 1;	// width of a single pixel
+	unsigned short cornerIdx, shortIdx, longIdx;
 
-     if(dx<=1)
-      {
-       vertex[3]=vertex[2];
-       vertex[2].x=vertex[0].x;
-      }
-     else
-     if(dy<=1)
-      {
-       vertex[3]=vertex[2];
-       vertex[2]=vertex[0];
-       vertex[2].y=vertex[3].y;
-      }
-     else return FALSE;
+	sourceVert* pSourceVerts = (sourceVert*)&gpuData[1];
 
-     bQuad=TRUE;
-    }
-   else
-   if(ly2==ly0)
-    {
-     dy=ly2-ly1;if(dy<0) dy=-dy;
+	// reject 3D elements
+	if ((vertex[0].w != vertex[1].w) ||
+		(vertex[1].w != vertex[2].w))
+		return FALSE;
 
-     if(dx<=1)
-      {
-       vertex[3]=vertex[1];
-       vertex[1].x=vertex[0].x;
-      }
-     else
-     if(dy<=1)
-      {
-       vertex[3]=vertex[1];
-       vertex[1]=vertex[0];
-       vertex[1].y=vertex[3].y;
-      }
-     else return FALSE;
+	// find vertical AB
+	unsigned short A, B, C;
+	if (vertex[0].x == vertex[1].x)
+		A = 0;
+	else if (vertex[1].x == vertex[2].x)
+		A = 1;
+	else if (vertex[2].x == vertex[0].x)
+		A = 2;
+	else
+		return FALSE;
 
-     bQuad=TRUE;
-    }
-  }
+	// assign other indices to remaining vertices
+	B = (A + 1) % 3;
+	C = (B + 1) % 3;
 
- if(!bQuad) return FALSE;
+	// find horizontal AC or BC
+	if (vertex[A].y == vertex[C].y)
+		cornerIdx = A;
+	else if (vertex[B].y == vertex[C].y)
+		cornerIdx = B;
+	else
+		return FALSE;
 
- PRIMdrawTexturedQuad(&vertex[0], &vertex[1], &vertex[3], &vertex[2]);
+	// determine lengths of sides
+	if (abs(pSourceVerts[A].y - pSourceVerts[B].y) == pxWidth)
+	{
+		// is Horizontal
+		shortIdx = (cornerIdx == A) ? B : A;
+		longIdx = C;
 
- if(bDrawMultiPass)
-  {
-   SetSemiTransMulti(1);
-   PRIMdrawTexturedQuad(&vertex[0], &vertex[1], &vertex[3], &vertex[2]);
-  }
+		// flip corner index to other side of quad
+		vertex[3] = vertex[longIdx];
+		vertex[3].y = vertex[shortIdx].y;
+	}
+	else if (abs(pSourceVerts[A].x - pSourceVerts[C].x) == pxWidth)
+	{
+		// is Vertical
+		shortIdx = C;
+		longIdx = (cornerIdx == A) ? B : A;
 
- if(ubOpaqueDraw)
-  {
-   SetZMask4O();
-   if(bUseMultiPass) SetOpaqueColor(gpuData[0]);
-   DEFOPAQUEON
-   PRIMdrawTexturedQuad(&vertex[0], &vertex[1], &vertex[3], &vertex[2]);
-   DEFOPAQUEOFF
-  }
+		// flip corner index to other side of quad
+		vertex[3] = vertex[longIdx];
+		vertex[3].x = vertex[shortIdx].x;
+	}
+	else
+		return FALSE;
 
- iDrawnSomething=1;
+	// force UVs into a line along the upper or left most edge of the triangle
+	// Otherwise the wrong UVs will be sampled on second triangle and by hardware renderers
+	vertex[shortIdx].sow = vertex[cornerIdx].sow;
+	vertex[shortIdx].tow = vertex[cornerIdx].tow;
 
- return TRUE;
+	// Draw Quad
+	PRIMdrawTexturedQuad(&vertex[cornerIdx], &vertex[longIdx], &vertex[3], &vertex[shortIdx]);
+
+	if (bDrawMultiPass)
+	{
+		SetSemiTransMulti(1);
+		PRIMdrawTexturedQuad(&vertex[cornerIdx], &vertex[longIdx], &vertex[3], &vertex[shortIdx]);
+	}
+
+	if (ubOpaqueDraw)
+	{
+		SetZMask4O();
+		if (bUseMultiPass) SetOpaqueColor(gpuData[0]);
+		DEFOPAQUEON
+			PRIMdrawTexturedQuad(&vertex[cornerIdx], &vertex[longIdx], &vertex[3], &vertex[shortIdx]);
+		DEFOPAQUEOFF
+	}
+
+	iDrawnSomething = 1;
+
+	return TRUE;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -3536,9 +3563,18 @@ void primPolyFT3(unsigned char * baseAddr)
 
  assignTexture3();
 
- if(!(dwActFixes&0x10))
-  {
-   if(DoLineCheck(gpuData)) return;
+ switch(iLineHackMode)
+ {
+ case 0: 
+	 break;	// disabled
+ case 1:
+	 if (Hack_FindLine(gpuData))	// default mode
+		 return;
+	 break;
+ case 2:
+	 if (Hack_ForceLine(gpuData))	// aggressive mode
+		 return;
+	 break;
   }
 
  PRIMdrawTexturedTri(&vertex[0], &vertex[1], &vertex[2]);
@@ -3571,6 +3607,10 @@ void RectTexAlign(void)
 {
  int UFlipped = FALSE;
  int VFlipped = FALSE;
+
+ // Leverage PGXP to further avoid 3D polygons that just happen to align this way after projection
+ if ((vertex[0].w != vertex[1].w) || (vertex[1].w != vertex[2].w))
+	 return;
 
  if(gTexName==gTexFrameName) return;
 
