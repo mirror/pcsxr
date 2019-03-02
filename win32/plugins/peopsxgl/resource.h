@@ -87,6 +87,7 @@
 #define IDC_QUALTXT4                    1063
 #define IDC_GAMEFIX2                    1064
 #define IDC_GTEACCURACY                 1065
+#define IDC_USEEXT                      1066
 #define IDC_F14_STATIC3                 1083
 #define IDC_F14_STATIC4                 1084
 #define IDC_F14_STATIC5                 1085

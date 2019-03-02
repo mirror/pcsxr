@@ -179,6 +179,7 @@ BOOL OnInitCfgDialog(HWND hW)                          // INIT CONFIG DIALOG
  if(bUse15bitMdec)    CheckDlgButton(hW,IDC_FASTMDEC2,TRUE);
  if(bUseFixes)        CheckDlgButton(hW,IDC_GAMEFIX,TRUE);
  if(bGteAccuracy)     CheckDlgButton(hW,IDC_GTEACCURACY,TRUE);
+ if(iUseExts)		  CheckDlgButton(hW,IDC_USEEXT, TRUE);
  if(iUseScanLines)    CheckDlgButton(hW,IDC_USESCANLINES,TRUE);
  if(iShowFPS)         CheckDlgButton(hW,IDC_SHOWFPS,TRUE);
  if(bKeepRatio)       CheckDlgButton(hW,IDC_ARATIO,TRUE);
@@ -339,6 +340,9 @@ void GetSettings(HWND hW)
 
  if(IsDlgButtonChecked(hW,IDC_GTEACCURACY))
   bGteAccuracy=TRUE; else bGteAccuracy=FALSE;
+
+ if(IsDlgButtonChecked(hW, IDC_USEEXT))
+	 iUseExts = TRUE; else iUseExts = FALSE;
 
  if(IsDlgButtonChecked(hW,IDC_USESCANLINES))
   iUseScanLines=1; else iUseScanLines=0;
@@ -627,6 +631,7 @@ void ReadConfig(void)                                  // read all config vals
  dwCfgFixes=0;
  bUseFixes=FALSE;
  bGteAccuracy=FALSE;
+ iUseExts=TRUE;
  iUseScanLines=0;
  iFrameTexType=0;
  iFrameReadType=0;
@@ -730,6 +735,9 @@ void ReadConfig(void)                                  // read all config vals
    size = 4;
    if(RegQueryValueEx(myKey,"GteAccuracy",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
     bGteAccuracy=(BOOL)temp;
+   size = 4;
+   if(RegQueryValueEx(myKey,"UseExtensions",0,&type,(LPBYTE)&temp, &size)==ERROR_SUCCESS)
+	   iUseExts = (BOOL)temp;
    size = 4;
    if(RegQueryValueEx(myKey,"UseMask",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
     iUseMask=(int)temp;
@@ -881,6 +889,8 @@ void WriteConfig(void)
  RegSetValueEx(myKey,"UseFixes",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=bGteAccuracy;
  RegSetValueEx(myKey,"GteAccuracy",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
+ temp = iUseExts;
+ RegSetValueEx(myKey,"UseExtensions",0,REG_DWORD,(LPBYTE)&temp,sizeof(temp));
  temp=iUseMask;
  RegSetValueEx(myKey,"UseMask",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=bUseFastMdec;
