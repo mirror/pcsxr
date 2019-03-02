@@ -2003,7 +2003,7 @@ void primBlkFill(unsigned char * baseAddr)
  lx0 = lx3 = sprtX;
  lx1 = lx2 = (sprtX+sprtW);
 
- offsetBlk(baseAddr);
+ offsetBlk(gpuData);
 
  if(ClipVertexListScreen())                           
   {
@@ -2350,7 +2350,7 @@ void primTileS(unsigned char * baseAddr)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST(baseAddr);
+ offsetST(gpuData);
 
  if((dwActFixes&1) &&                                  // FF7 special game gix (battle cursor)
     sprtX==0 && sprtY==0 && sprtW==24 && sprtH==16) 
@@ -2413,7 +2413,7 @@ void primTile1(unsigned char * baseAddr)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST(baseAddr);
+ offsetST(gpuData);
 
  bDrawTextured = FALSE;
  bDrawSmoothShaded = FALSE;
@@ -2460,7 +2460,7 @@ void primTile8(unsigned char * baseAddr)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST(baseAddr);
+ offsetST(gpuData);
 
  bDrawTextured = FALSE;
  bDrawSmoothShaded = FALSE;
@@ -2507,7 +2507,7 @@ void primTile16(unsigned char * baseAddr)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST(baseAddr);
+ offsetST(gpuData);
 
  bDrawTextured = FALSE;
  bDrawSmoothShaded = FALSE;
@@ -2628,7 +2628,7 @@ void primSprt8(unsigned char * baseAddr)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST(baseAddr);
+ offsetST(gpuData);
 
  // do texture stuff
  gl_ux[0]=gl_ux[3]=baseAddr[8];//gpuData[2]&0xff;
@@ -2749,7 +2749,7 @@ void primSprt16(unsigned char * baseAddr)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST(baseAddr);
+ offsetST(gpuData);
 
  // do texture stuff
  gl_ux[0]=gl_ux[3]=baseAddr[8];//gpuData[2]&0xff;
@@ -2951,7 +2951,7 @@ void primSprtSRest(unsigned char * baseAddr,unsigned short type)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST(baseAddr);
+ offsetST(gpuData);
 
  ulClutID=(gpuData[2]>>16);
 
@@ -3081,7 +3081,7 @@ void primSprtS(unsigned char * baseAddr)
  lx0 = sprtX;
  ly0 = sprtY;
 
- offsetST(baseAddr);
+ offsetST(gpuData);
 
  ulClutID=(gpuData[2]>>16);
 
@@ -3178,7 +3178,7 @@ void primPolyF4(unsigned char *baseAddr)
  lx3 = sgpuData[8];
  ly3 = sgpuData[9];
 
- if(offset4(baseAddr)) return;
+ if(offset4(gpuData)) return;
 
  bDrawTextured = FALSE;
  bDrawSmoothShaded = FALSE;
@@ -3287,7 +3287,7 @@ void primPolyG4(unsigned char * baseAddr)
  lx3 = sgpuData[14];
  ly3 = sgpuData[15];
 
- if(offset4(baseAddr)) return;
+ if(offset4(gpuData)) return;
 
  bDrawTextured = FALSE;
  bDrawSmoothShaded = TRUE;
@@ -3530,7 +3530,7 @@ void primPolyFT3(unsigned char * baseAddr)
  lx2 = sgpuData[10];
  ly2 = sgpuData[11];
 
- if(offset3(baseAddr)) return;
+ if(offset3(gpuData)) return;
     
  // do texture UV coordinates stuff
  gl_ux[0]=gl_ux[3]=baseAddr[8];//gpuData[2]&0xff;
@@ -3981,7 +3981,7 @@ void primPolyFT4(unsigned char * baseAddr)
  lx3 = sgpuData[14];
  ly3 = sgpuData[15];
 
- if(offset4(baseAddr)) return;
+ if(offset4(gpuData)) return;
 
  gl_vy[0]=baseAddr[9];//((gpuData[2]>>8)&0xff);
  gl_vy[1]=baseAddr[17];//((gpuData[4]>>8)&0xff);
@@ -4066,7 +4066,7 @@ void primPolyGT3(unsigned char *baseAddr)
  lx2 = sgpuData[14];
  ly2 = sgpuData[15];
 
- if(offset3(baseAddr)) return;
+ if(offset3(gpuData)) return;
 
  // do texture stuff
  gl_ux[0]=gl_ux[3]=baseAddr[8];//gpuData[2]&0xff;
@@ -4175,7 +4175,7 @@ void primPolyG3(unsigned char *baseAddr)
  lx2 = sgpuData[10];
  ly2 = sgpuData[11];
 
- if(offset3(baseAddr)) return;
+ if(offset3(gpuData)) return;
 
  bDrawTextured = FALSE;
  bDrawSmoothShaded = TRUE;
@@ -4222,7 +4222,7 @@ void primPolyGT4(unsigned char *baseAddr)
  lx3 = sgpuData[20];
  ly3 = sgpuData[21];
 
- if(offset4(baseAddr)) return;
+ if(offset4(gpuData)) return;
 
  // do texture stuff
  gl_ux[0]=baseAddr[8];//gpuData[2]&0xff;
@@ -4340,7 +4340,7 @@ void primPolyF3(unsigned char *baseAddr)
  lx2 = sgpuData[6];
  ly2 = sgpuData[7];
 
- if(offset3(baseAddr)) return;
+ if(offset3(gpuData)) return;
 
  bDrawTextured     = FALSE;
  bDrawSmoothShaded = FALSE;
@@ -4431,7 +4431,7 @@ void primLineGEx(unsigned char *baseAddr)
    ly1 = (short)((gpuData[i]>>16) & 0xffff);
    lx1 = (short)(gpuData[i] & 0xffff);
 
-   if(offsetline(baseAddr)) bDraw=FALSE; else bDraw=TRUE;
+   if(offsetline(gpuData)) bDraw=FALSE; else bDraw=TRUE;
   
    if (bDraw && ((lx0 != lx1) || (ly0 != ly1)))
     {
@@ -4480,7 +4480,7 @@ void primLineG2(unsigned char *baseAddr)
 
  if((lx0 == lx1) && (ly0 == ly1)) return;
     
- if(offsetline(baseAddr)) return;
+ if(offsetline(gpuData)) return;
     
  SetRenderState(gpuData[0]);
  SetRenderMode(gpuData[0], FALSE);
@@ -4558,7 +4558,7 @@ void primLineFEx(unsigned char *baseAddr)
    ly1 = (short)((gpuData[i]>>16) & 0xffff);
    lx1 = (short)(gpuData[i] & 0xffff);
 
-   if(!offsetline(baseAddr))
+   if(!offsetline(gpuData))
     {
      if(iOffscreenDrawing)
       {
@@ -4594,7 +4594,7 @@ void primLineF2(unsigned char *baseAddr)
  lx1 = sgpuData[4];
  ly1 = sgpuData[5];
 
- if(offsetline(baseAddr)) return;
+ if(offsetline(gpuData)) return;
 
  bDrawTextured = FALSE;
  bDrawSmoothShaded = FALSE;
