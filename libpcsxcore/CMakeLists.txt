@@ -37,8 +37,11 @@ set(CMAKE_POSITION_INDEPENDENT_CODE OFF) #for x86
 
 if (${DYNAREC} STREQUAL "auto")
     if (_ARCH_PPC)
-        set(DYNAREC_PPC 1)
-        message(STATUS "Autodetected PPC dynarec.")
+#if anyone ever fixes ppc dynarec
+#        set(DYNAREC_PPC 1)
+#        message(STATUS "Autodetected PPC dynarec.")
+    message(STATUS "Autodetected PPC dynarec is broken, sorry.")
+    add_definitions(-DNOPSXREC)
     elseif(_ARCH_64)
         set(DYNAREC_64 1)
         message(STATUS "Autodetected x86_64 dynarec.")
