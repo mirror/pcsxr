@@ -111,6 +111,11 @@ void ReadConfigFile()
  if(iFrameReadType==4) bFullVRam=TRUE;
  else                  bFullVRam=FALSE;
 
+ strcpy(t,"\nLineHackMode");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
+ if(p) iLineHackMode=atoi(p+len);
+ if(iLineHackMode<0) iLineHackMode=0;
+ if(iLineHackMode>2) iLineHackMode=2;
+
  strcpy(t,"\nTexFilter");p=strstr(pB,t);if(p) {p=strstr(p,"=");len=1;}
  if(p) iFilterType=atoi(p+len);
  if(iFilterType<0) iFilterType=0;
@@ -239,6 +244,7 @@ void ReadConfig(void)                                  // read config (linux fil
  bUseFixes=FALSE;
  iFrameTexType=1;
  iFrameReadType=0;
+ iLineHackMode=0;
  bUse15bitMdec=FALSE;
  iShowFPS=0;
  bGteAccuracy=0;

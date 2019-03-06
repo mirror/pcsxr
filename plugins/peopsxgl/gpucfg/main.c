@@ -33,6 +33,7 @@ GtkWidget *window,
           *cbxOffscreen,
           *cbxFBTex,
           *cbxFBAccess,
+          *cbxLineHackMode,
           *chkMaskDetect,
           *chkOpaquePass,
           *chkAdvancedBlend,
@@ -98,7 +99,7 @@ void on_btnSave_clicked( GObject *object, gpointer user_data ) {
 
         // Print data to the config file
         fprintf( out, "\nResX             = %i", gtk_spin_button_get_value_as_int( GTK_SPIN_BUTTON(   spinXSize           ) ) );
-        fprintf( out, "\nResY             = %i", gtk_spin_button_get_value_as_int( GTK_SPIN_BUTTON(   spinYSize           ) ) );        
+        fprintf( out, "\nResY             = %i", gtk_spin_button_get_value_as_int( GTK_SPIN_BUTTON(   spinYSize           ) ) );
         fprintf( out, "\nKeepRatio        = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkKeepRatio        ) ) );
 		fprintf( out, "\nForceRatio43     = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkForceRatio43     ) ) );
         fprintf( out, "\nDithering        = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkDithering        ) ) );
@@ -106,7 +107,7 @@ void on_btnSave_clicked( GObject *object, gpointer user_data ) {
         fprintf( out, "\nTexQuality       = %i", gtk_combo_box_get_active(         GTK_COMBO_BOX(     cbxTexQuality       ) ) );
         fprintf( out, "\nTexFilter        = %i", gtk_combo_box_get_active(         GTK_COMBO_BOX(     cbxTexFiltering     ) ) );
         fprintf( out, "\nHiResTextures    = %i", gtk_combo_box_get_active(         GTK_COMBO_BOX(     cbxHiResTex         ) ) );
-        fprintf( out, "\nVRamSize         = %i", gtk_spin_button_get_value_as_int( GTK_SPIN_BUTTON(   spinVRam            ) ) );        
+        fprintf( out, "\nVRamSize         = %i", gtk_spin_button_get_value_as_int( GTK_SPIN_BUTTON(   spinVRam            ) ) );
         fprintf( out, "\nShowFPS          = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkShowFPS          ) ) );
         fprintf( out, "\nUseFrameLimit    = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkUseFPSLimit      ) ) );
         fprintf( out, "\nFPSDetection     = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( radFPSLimitAuto     ) ) );
@@ -115,6 +116,7 @@ void on_btnSave_clicked( GObject *object, gpointer user_data ) {
         fprintf( out, "\nOffscreenDrawing = %i", gtk_combo_box_get_active(         GTK_COMBO_BOX(     cbxOffscreen        ) ) );
         fprintf( out, "\nFrameTextures    = %i", gtk_combo_box_get_active(         GTK_COMBO_BOX(     cbxFBTex            ) ) );
         fprintf( out, "\nFrameAccess      = %i", gtk_combo_box_get_active(         GTK_COMBO_BOX(     cbxFBAccess         ) ) );
+        fprintf( out, "\nLineHackMode     = %i", gtk_combo_box_get_active(         GTK_COMBO_BOX(     cbxLineHackMode     ) ) );
         fprintf( out, "\nMaskDetect       = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkMaskDetect       ) ) );
         fprintf( out, "\nOpaquePass       = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkOpaquePass       ) ) );
         fprintf( out, "\nAdvancedBlend    = %i", gtk_toggle_button_get_active(     GTK_TOGGLE_BUTTON( chkAdvancedBlend    ) ) );
@@ -157,6 +159,7 @@ void on_btnFast_clicked( GObject *object, gpointer user_data ) {
     gtk_combo_box_set_active(     GTK_COMBO_BOX(     cbxOffscreen ),          1 );
     gtk_combo_box_set_active(     GTK_COMBO_BOX(     cbxFBTex ),              1 );
     gtk_combo_box_set_active(     GTK_COMBO_BOX(     cbxFBAccess ),           0 );
+    gtk_combo_box_set_active(     GTK_COMBO_BOX(     cbxLineHackMode ),       0 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkMaskDetect ),         0 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkOpaquePass ),         1 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkAdvancedBlend ),      0 );
@@ -190,6 +193,7 @@ void on_btnBeautiful_clicked( GObject *object, gpointer user_data ) {
     gtk_combo_box_set_active(     GTK_COMBO_BOX(     cbxOffscreen ),          3 );
     gtk_combo_box_set_active(     GTK_COMBO_BOX(     cbxFBTex ),              2 );
     gtk_combo_box_set_active(     GTK_COMBO_BOX(     cbxFBAccess ),           0 );
+    gtk_combo_box_set_active(     GTK_COMBO_BOX(     cbxLineHackMode ),       0 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkMaskDetect ),         1 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkOpaquePass ),         1 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkAdvancedBlend ),      1 );
@@ -200,8 +204,8 @@ void on_btnBeautiful_clicked( GObject *object, gpointer user_data ) {
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkLineMode ),           0 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkAntiAlias ),          0 );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkOGLExtensions ),      1 );
-    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkScreenSmoothing ),    0 );   
-	gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkGteAccuracy ),        0 );   
+    gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkScreenSmoothing ),    0 );
+	gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( chkGteAccuracy ),        0 );
 }
 
 // Callbacks used to toggle the sensitivity of some parts of the GUI
@@ -305,7 +309,8 @@ int main( int argc, char **argv ) {
 		cbxOffscreen        = GTK_WIDGET( gtk_builder_get_object( builder, "cbxOffscreen"        ) );
 		cbxFBTex            = GTK_WIDGET( gtk_builder_get_object( builder, "cbxFBTex"            ) );
 		cbxFBAccess         = GTK_WIDGET( gtk_builder_get_object( builder, "cbxFBAccess"         ) );
-		chkMaskDetect       = GTK_WIDGET( gtk_builder_get_object( builder, "chkMaskDetect"       ) );
+        cbxLineHackMode     = GTK_WIDGET( gtk_builder_get_object( builder, "cbxLineHackMode"     ) );
+        chkMaskDetect       = GTK_WIDGET( gtk_builder_get_object( builder, "chkMaskDetect"       ) );
 		chkOpaquePass       = GTK_WIDGET( gtk_builder_get_object( builder, "chkOpaquePass"       ) );
 		chkAdvancedBlend    = GTK_WIDGET( gtk_builder_get_object( builder, "chkAdvancedBlend"    ) );
 		chkScanLines        = GTK_WIDGET( gtk_builder_get_object( builder, "chkScanLines"        ) );
@@ -541,8 +546,8 @@ int main( int argc, char **argv ) {
 			}
 		}
 		gtk_combo_box_set_active( GTK_COMBO_BOX( cbxOffscreen ), val );
-		
-		val = 1;
+
+        val = 1;
 		if ( pB ) {
 			strcpy( t, "\nFrameTextures" );
 			p = strstr( pB, t );
@@ -553,7 +558,7 @@ int main( int argc, char **argv ) {
 			}
 		}
 		gtk_combo_box_set_active( GTK_COMBO_BOX( cbxFBTex ), val );
-		
+
 		val = 0;
 		if ( pB ) {
 			strcpy( t, "\nFrameAccess" );
@@ -565,6 +570,18 @@ int main( int argc, char **argv ) {
 			}
 		}
 		gtk_combo_box_set_active( GTK_COMBO_BOX( cbxFBAccess ), val );
+
+        val = 0;
+        if ( pB ) {
+            strcpy( t, "\nLineHackMode" );
+            p = strstr( pB, t );
+            if ( p ) {
+                p = strstr( p, "=" );
+                len = 1;
+                val = atoi( p + len );
+            }
+        }
+        gtk_combo_box_set_active( GTK_COMBO_BOX( cbxLineHackMode ), val );
 
 		val = 0;
 		if ( pB ) {
