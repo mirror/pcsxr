@@ -28,19 +28,19 @@
 //
 //==============================================================================
 
-typedef NS_ENUM(NSInteger, PCSXRMemFlags) {
-	memFlagDeleted,
-	memFlagFree,
-	memFlagUsed,
-	memFlagLink,
-	memFlagEndLink
+typedef NS_ENUM(char, PCSXRMemFlags) {
+	PCSXRMemFlagDeleted = 0,
+	PCSXRMemFlagFree,
+	PCSXRMemFlagUsed,
+	PCSXRMemFlagLink,
+	PCSXRMemFlagEndLink
 };
 
 static void GetSoloBlockInfo(unsigned char *data, int block, McdBlock *Info)
 {
 	unsigned char *ptr = data + block * 8192 + 2;
 	unsigned char *str = Info->Title;
-	unsigned char *	sstr = Info->sTitle;
+	unsigned char *sstr = Info->sTitle;
 	unsigned short c;
 	int i, x = 0;
 	
@@ -103,31 +103,31 @@ static void GetSoloBlockInfo(unsigned char *data, int block, McdBlock *Info)
 	Info->Flags = *ptr;
 	
 	ptr += 0xa;
-	strlcpy(Info->ID, ptr, 12);
+	strlcpy(Info->ID, ptr, 13);
 	ptr += 12;
-	strlcpy(Info->Name, ptr, 16);
+	strlcpy(Info->Name, ptr, 17);
 }
 
 static inline PCSXRMemFlags MemBlockFlag(unsigned char blockFlags)
 {
 	if ((blockFlags & 0xF0) == 0xA0) {
 		if ((blockFlags & 0xF) >= 1 && (blockFlags & 0xF) <= 3)
-			return memFlagDeleted;
+			return PCSXRMemFlagDeleted;
 		else
-			return memFlagFree;
+			return PCSXRMemFlagFree;
 	} else if ((blockFlags & 0xF0) == 0x50) {
 		if ((blockFlags & 0xF) == 0x1)
-			return memFlagUsed;
+			return PCSXRMemFlagUsed;
 		else if ((blockFlags & 0xF) == 0x2)
-			return memFlagLink;
+			return PCSXRMemFlagLink;
 		else if ((blockFlags & 0xF) == 0x3)
-			return memFlagEndLink;
+			return PCSXRMemFlagEndLink;
 	} else
-		return memFlagFree;
+		return PCSXRMemFlagFree;
 	
 	//Xcode complains unless we do this...
 	//NSLog(@"Unknown flag %x", blockFlags);
-	return memFlagFree;
+	return PCSXRMemFlagFree;
 }
 
 Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attributes, CFStringRef contentTypeUTI, CFStringRef pathToFile)
@@ -167,7 +167,7 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 
 			GetSoloBlockInfo((unsigned char *)fileCData, i + 1, &memBlock);
 			
-			if (MemBlockFlag(memBlock.Flags) == memFlagFree) {
+			if (MemBlockFlag(memBlock.Flags) == PCSXRMemFlagFree) {
 				//Free space: ignore
 				i++;
 				continue;
@@ -184,9 +184,9 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
 					break;
 				}
 			};
-			// Ignore deleted blocks
 			i += x;
-			if (MemBlockFlag(memBlock.Flags) == memFlagDeleted) {
+			// Ignore deleted blocks
+			if (MemBlockFlag(memBlock.Flags) == PCSXRMemFlagDeleted) {
 				continue;
 			}
 			memCount++;

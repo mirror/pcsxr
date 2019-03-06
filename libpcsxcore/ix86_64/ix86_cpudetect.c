@@ -145,7 +145,7 @@ u64 GetCPUTick( void )
 #endif
 }
 
-#if defined(__LINUX__) || defined(__APPLE__)
+#if defined(__linux__) || defined(__APPLE__)
 
 #include <sys/time.h>
 #include <errno.h>

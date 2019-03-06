@@ -30,6 +30,7 @@
 #include "../libpcsxcore/plugins.h"
 #include "../libpcsxcore/spu.h"
 #include "../libpcsxcore/cdriso.h"
+#include "../libpcsxcore/pgxp_mem.h"
 
 #include "nopic.h"
 
@@ -42,6 +43,8 @@ extern void LidInterrupt();
 unsigned long gpuDisp;
 
 int StatesC = 0;
+unsigned char loadedOld = FALSE;
+int speed = 100;
 extern int UseGui;
 
 void gpuShowPic() {
@@ -77,15 +80,31 @@ void gpuShowPic() {
 
 void KeyStateSave(int i) {
 	gchar *state_filename;
+	gchar *oldname, *newname;
+	int j;
 
 	state_filename = get_state_filename (i);
+	if (i < OLD_SLOT && !loadedOld) {
+		newname = get_state_filename (LAST_OLD_SLOT);
+		for (j = LAST_OLD_SLOT - 1; j >= OLD_SLOT; --j) {
+			oldname = get_state_filename (j);
+			rename(oldname, newname);
+			g_free (newname);
+			newname = oldname;
+		}
+		rename(state_filename, newname);
+		g_free (newname);
+	}
 	state_save (state_filename);
+	loadedOld = FALSE;
 
 	g_free (state_filename);
 }
 
 void KeyStateLoad(int i) {
 	gchar *state_filename;
+
+	loadedOld = (i >= OLD_SLOT && i <= LAST_OLD_SLOT);
 
 	state_filename = get_state_filename (i);
 	state_load (state_filename);
@@ -108,6 +127,7 @@ void PADhandleKey(int key) {
 	char Text[MAXPATHLEN];
 	gchar *state_filename;
 	time_t now;
+	int slot;
 
 	short rel = 0;	//released key flag
 
@@ -155,69 +175,20 @@ void PADhandleKey(int key) {
 			if (modalt) KeyStateLoad(10);
 			break;
 
-		case XK_1:
+		case XK_1: case XK_2: case XK_3: case XK_4: case XK_5:
+		case XK_6: case XK_7: case XK_8: case XK_9:
+			slot = key - XK_1;
 			if (modalt && modctrl)
 				return;
-			if (modalt) KeyStateLoad(0);
-			if (modctrl) KeyStateSave(0);
-			break;
-		case XK_2:
-			if (modalt && modctrl)
-				return;
-			if (modalt) KeyStateLoad(1);
-			if (modctrl) KeyStateSave(1);
-			break;
-		case XK_3:
-			if (modalt && modctrl)
-				return;
-			if (modalt) KeyStateLoad(2);
-			if (modctrl) KeyStateSave(2);
-			break;
-		case XK_4:
-			if (modalt && modctrl)
-				return;
-			if (modalt) KeyStateLoad(3);
-			if (modctrl) KeyStateSave(3);
-			break;
-		case XK_5:
-			if (modalt && modctrl)
-				return;
-			if (modalt) KeyStateLoad(4);
-			if (modctrl) KeyStateSave(4);
-			break;
-		case XK_6:
-			if (modalt && modctrl)
-				return;
-			if (modalt) KeyStateLoad(5);
-			if (modctrl) KeyStateSave(5);
-			break;
-		case XK_7:
-			if (modalt && modctrl)
-				return;
-			if (modalt) KeyStateLoad(6);
-			if (modctrl) KeyStateSave(6);
-			break;
-		case XK_8:
-			if (modalt && modctrl)
-				return;
-			if (modalt) KeyStateLoad(7);
-			if (modctrl) KeyStateSave(7);
-			break;
-		case XK_9:
-			if (modalt && modctrl)
-				return;
-			if (modalt) KeyStateLoad(8);
-			if (modctrl) KeyStateSave(8);
+			if (modalt) KeyStateLoad(slot);
+			else if (modctrl) KeyStateSave(slot);
+			//else KeyStateLoad(OLD_SLOT + slot);
 			break;
 
 		case XK_F1:
 			GPU_freeze(2, (GPUFreeze_t *)&StatesC);
-			state_filename = get_state_filename (StatesC);
-			state_save (state_filename);
-
-			g_free (state_filename);
+			KeyStateSave(StatesC);
 			gpuShowPic();
-
 			break;
 		case XK_F2:
 			if (StatesC < (MAX_SLOTS - 1)) StatesC++;
@@ -226,15 +197,7 @@ void PADhandleKey(int key) {
 			gpuShowPic();
 			break;
 		case XK_F3:
-			state_filename = get_state_filename (StatesC);
-			state_load (state_filename);
-
-			g_free (state_filename);
-
-			// HACKHACK: prevent crash when using recompiler due to execution not
-			// returned from compiled code. This WILL cause memory leak, however a
-			// large amount of refactor is needed for a proper fix.
-			if (Config.Cpu == CPU_DYNAREC) psxCpu->Execute();
+			KeyStateLoad(StatesC);
 			gpuShowPic();
 			break;
 		case XK_F4:
@@ -279,6 +242,9 @@ void PADhandleKey(int key) {
 
 			LidInterrupt();
 			break;
+        case XK_F11:
+            GPU_toggleDebug();
+            break;
 		case XK_F12:
 			psxReset();
 			break;
@@ -290,6 +256,22 @@ void PADhandleKey(int key) {
 			tslastpressed = now;
 			RewindState();
 			break;
+		case XK_bracketleft:
+			if (speed == Config.AltSpeed1) {
+				speed = 100;
+			} else {
+				speed = Config.AltSpeed1;
+			}
+			GPU_setSpeed(speed / 100.0);
+			break;
+		case XK_bracketright:
+			if (speed == Config.AltSpeed2) {
+				speed = 100;
+			} else {
+				speed = Config.AltSpeed2;
+			}
+			GPU_setSpeed(speed / 100.0);
+			break;
 		case XK_Escape:
 			// TODO
 			// the architecture is too broken to actually restart the GUI
@@ -298,8 +280,10 @@ void PADhandleKey(int key) {
 			// Fixing this would probably require a complete reworking of
 			// all functions, so that they return 0 or 1 for success
 			// that way, execution wouldn't continue
-			if (CdromId[0] != '\0')
+			if (CdromId[0] != '\0') {
+				loadedOld = TRUE;
 				KeyStateSave(10);
+			}
 			ClosePlugins();
 			UpdateMenuSlots();
 			if (!UseGui) OnFile_Exit();
@@ -349,6 +333,7 @@ int _OpenPlugins() {
 	SPU_registerCallback(SPUirq);
 	ret = GPU_open(&gpuDisp, "PCSXR", NULL);
 	if (ret < 0) { SysMessage(_("Error opening GPU plugin!")); return -1; }
+	GPU_pgxpMemory(0, PGXP_GetMem());
 	ret = PAD1_open(&gpuDisp);
 	ret |= PAD1_init(1); // Allow setting to change during run
 	if (ret < 0) { SysMessage(_("Error opening Controller 1 plugin!")); return -1; }

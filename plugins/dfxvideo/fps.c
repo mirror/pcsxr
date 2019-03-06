@@ -36,7 +36,15 @@ BOOL   bInitCap = TRUE;
 float  fps_skip = 0;
 float  fps_cur  = 0;
 
+float  speed  = 1;
+
 #define MAXLACE 16
+
+void CALLBACK GPUsetSpeed(float newSpeed) {
+ if (newSpeed > 0 && newSpeed <= 1000) {
+  speed = newSpeed;
+ }
+}
 
 void CheckFrameRate(void)
 {
@@ -74,6 +82,7 @@ void FrameCap (void)
 {
  static unsigned long curticks, lastticks, _ticks_since_last_update;
  static unsigned int TicksToWait = 0;
+ unsigned int frTicks = dwFrameRateTicks / speed;
  int overslept=0, tickstogo=0;
  BOOL Waiting = TRUE;
 
@@ -86,10 +95,10 @@ void FrameCap (void)
     {
      lastticks = curticks;
      overslept = _ticks_since_last_update - TicksToWait;
-     if((_ticks_since_last_update-TicksToWait) > dwFrameRateTicks)
+     if((_ticks_since_last_update-TicksToWait) > frTicks)
           TicksToWait=0;
      else
-          TicksToWait=dwFrameRateTicks - overslept;
+          TicksToWait=frTicks - overslept;
     }
    else
     {
@@ -104,7 +113,7 @@ void FrameCap (void)
          Waiting = FALSE;
          lastticks = curticks;
          overslept = _ticks_since_last_update - TicksToWait;
-         TicksToWait = dwFrameRateTicks - overslept;
+         TicksToWait = frTicks - overslept;
          return;
         }
 	if (tickstogo >= 200 && !(dwActFixes&16))
@@ -123,6 +132,7 @@ void FrameSkip(void)
  static DWORD curticks, lastticks, _ticks_since_last_update;
  int tickstogo=0;
  static int overslept=0;
+ unsigned int frTicks = dwFrameRateTicks / speed;
 
  if(!dwLaceCnt) return;                                // important: if no updatelace happened, we ignore it completely
 
@@ -146,12 +156,12 @@ void FrameSkip(void)
        curticks = timeGetTime();                       // -> now we calc the time of the last drawn frame + the time we spent skipping
        _ticks_since_last_update= dwT+curticks - lastticks;
 
-       dwWaitTime=dwLastLace*dwFrameRateTicks;         // -> and now we calc the time the real psx would have needed
+       dwWaitTime=dwLastLace*frTicks;                  // -> and now we calc the time the real psx would have needed
 
        if(_ticks_since_last_update<dwWaitTime)         // -> we were too fast?
         {
          if((dwWaitTime-_ticks_since_last_update)>     // -> some more security, to prevent
-            (60*dwFrameRateTicks))                     //    wrong waiting times
+            (60*frTicks))                              //    wrong waiting times
           _ticks_since_last_update=dwWaitTime;
 
          while(_ticks_since_last_update<dwWaitTime)    // -> loop until we have reached the real psx time
@@ -188,7 +198,7 @@ void FrameSkip(void)
    _ticks_since_last_update = curticks - lastticks;
 
    dwLastLace=dwLaceCnt;                               // store curr count (frame limitation helper)
-   dwWaitTime=dwLaceCnt*dwFrameRateTicks;              // calc the 'real psx lace time'
+   dwWaitTime=dwLaceCnt*frTicks;                       // calc the 'real psx lace time'
    if (dwWaitTime >= overslept)
    	dwWaitTime-=overslept;
 

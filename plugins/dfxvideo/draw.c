@@ -902,11 +902,10 @@ static XVisualInfo   *myvisual;
 Display              *display;
 static Colormap      colormap;
 Window        window;
+Window        overlay;
 static GC            hGC;
 static XImage      * Ximage;
-static XvImage     * XCimage;
 static XImage      * XPimage=0;
-char *               Xpixels;
 char *               pCaptionText;
 
 static int fx=0;
@@ -949,15 +948,15 @@ void DestroyDisplay(void)
      XFreeGC(display,hGC);
      hGC = 0;
     }
+   if (overlay)
+    {
+     XDestroyWindow(display, overlay);
+     overlay = 0;
+    }
    if(Ximage)
     {
      XDestroyImage(Ximage);
      Ximage=0;
-    }
-   if(XCimage)
-    {
-     XFree(XCimage);
-     XCimage=0;
     }
 
 	XShmDetach(display,&shminfo);
@@ -1254,6 +1253,22 @@ void CreateDisplay(void)
    return;
   }
 
+ overlay=XCreateWindow(display,window,
+                      iResX - 128,0,128,96,
+                      0,myvisual->depth,
+                      InputOutput,myvisual->visual,
+                      CWBorderPixel | CWBackPixel |
+                      CWEventMask | CWDontPropagate |
+                      CWColormap | CWCursor | CWEventMask,
+                      &winattr);
+
+ if(!overlay)
+  {
+   fprintf(stderr,"Failed in XCreateWindow()!!!\n");
+   DestroyDisplay();
+   return;
+  }
+
  delwindow = XInternAtom(display,"WM_DELETE_WINDOW",0);
  XSetWMProtocols(display, window, &delwindow, 1);
 
@@ -1351,14 +1366,6 @@ void CreateDisplay(void)
 	 color = rgb_to_yuv(0x00, 0x00, 0x00);
  else
 	 color = 0;
-
- Xpixels = (char *)malloc(8*8*4);
- for(i = 0; i < 8*8; ++i)
-	 ((uint32_t *)Xpixels)[i] = color;
-
- XCimage = XvCreateImage(display,xv_port,xv_id,
-                      (char *)Xpixels, 8, 8);
-
 
 /*
 Allocate max that could be needed:
@@ -1676,6 +1683,7 @@ void DoBufferSwap(void)
 		_w, _h,		//dst w,h
 		1
 		);
+	DisplayPic();
 
 	if(ulKeybits&KEY_SHOWFPS) //DisplayText();   c            // paint menu text
 	{
@@ -1695,7 +1703,6 @@ void DoBufferSwap(void)
 		XDrawImageString(display,window,hGC,2,13,szDispBuf,strlen(szDispBuf));
 	}
 
-	//if(XPimage) DisplayPic();
 
 	XFree(xvi);
 }
@@ -1707,15 +1714,11 @@ void DoClearScreenBuffer(void)                         // CLEAR DX BUFFER
 
  XGetGeometry(display, window, &_dw, (int *)&_d, (int *)&_d, &_w, &_h, &_d, &_d);
 
- XvPutImage(display, xv_port, window, hGC, XCimage,
-           0, 0, 8, 8, 0, 0, _w, _h);
  //XSync(display,False);
 }
 
 void DoClearFrontBuffer(void)                          // CLEAR DX BUFFER
 {/*
- XPutImage(display,window,hGC, XCimage,
-           0, 0, 0, 0, iResX, iResY);
  XSync(display,False);*/
 }
 
@@ -1877,9 +1880,7 @@ void CreatePic(unsigned char * pMem)
 void DestroyPic(void)
 {
  if(XPimage)
-  { /*
-   XPutImage(display,window,hGC, XCimage,
-	  0, 0, 0, 0, iResX, iResY);*/
+  {
    XDestroyImage(XPimage);
    XPimage=0;
   }
@@ -1887,8 +1888,20 @@ void DestroyPic(void)
 
 void DisplayPic(void)
 {
- XPutImage(display,window,hGC, XPimage,
-           0, 0, iResX-128, 0,128,96);
+  static int mapped = 0;
+  if (XPimage) {
+    if (!mapped) {
+      XMapWindow(display, overlay);
+      mapped = 1;
+    }
+    XPutImage(display,overlay,hGC, XPimage,
+	      0,0, 0,0, 128,96);
+  } else {
+    if (mapped) {
+     XUnmapWindow(display, overlay);
+     mapped = 0;
+    }
+  }
 }
 
 void ShowGpuPic(void)

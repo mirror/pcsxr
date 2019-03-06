@@ -29,7 +29,6 @@ _GPUshowScreenPic
 _GPUgetScreenPic
 
 _GPUkeypressed
-_GPUhSync
 _GPUvBlank
 _GPUaddVertex
 
@@ -37,3 +36,7 @@ _GPUcursor
 _GPUsetfix
 
 _GPUvisualVibration
+
+_GPUpgxpMemory
+_GPUpgxpCacheVertex
+_GPUtoggleDebug

@@ -31,7 +31,8 @@ extern "C" {
 #include "plugins.h"
 #include "psemu_plugin_defs.h"
 
-#define MCD_SIZE	(1024 * 8 * 16)
+#define MCD_SECT_SIZE   (8 * 16)
+#define MCD_SIZE        (1024 * MCD_SECT_SIZE)
 
 extern char Mcd1Data[MCD_SIZE], Mcd2Data[MCD_SIZE];
 

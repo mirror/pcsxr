@@ -98,31 +98,31 @@ static void GetSoloBlockInfo(unsigned char *data, int block, McdBlock *Info)
 	Info->Flags = *ptr;
 	
 	ptr += 0xa;
-	strlcpy(Info->ID, ptr, 12);
+	strlcpy(Info->ID, ptr, 13);
 	ptr += 12;
-	strlcpy(Info->Name, ptr, 16);
+	strlcpy(Info->Name, ptr, 17);
 }
 
 static inline PCSXRMemFlag MemBlockFlag(unsigned char blockFlags)
 {
 	if ((blockFlags & 0xF0) == 0xA0) {
 		if ((blockFlags & 0xF) >= 1 && (blockFlags & 0xF) <= 3)
-			return memFlagDeleted;
+			return PCSXRMemFlagDeleted;
 		else
-			return memFlagFree;
+			return PCSXRMemFlagFree;
 	} else if ((blockFlags & 0xF0) == 0x50) {
 		if ((blockFlags & 0xF) == 0x1)
-			return memFlagUsed;
+			return PCSXRMemFlagUsed;
 		else if ((blockFlags & 0xF) == 0x2)
-			return memFlagLink;
+			return PCSXRMemFlagLink;
 		else if ((blockFlags & 0xF) == 0x3)
-			return memFlagEndLink;
+			return PCSXRMemFlagEndLink;
 	} else
-		return memFlagFree;
+		return PCSXRMemFlagFree;
 	
 	//Xcode complains unless we do this...
 	//NSLog(@"Unknown flag %x", blockFlags);
-	return memFlagFree;
+	return PCSXRMemFlagFree;
 }
 
 
@@ -151,7 +151,7 @@ NSArray *CreateArrayByEnumeratingMemoryCardAtURL(NSURL *location)
 		McdBlock memBlock;
 		GetSoloBlockInfo((unsigned char *)memPtr, i + 1, &memBlock);
 		
-		if (MemBlockFlag(memBlock.Flags) == memFlagFree) {
+		if (MemBlockFlag(memBlock.Flags) == PCSXRMemFlagFree) {
 			//Free space: ignore
 			i++;
 			continue;
@@ -170,7 +170,7 @@ NSArray *CreateArrayByEnumeratingMemoryCardAtURL(NSURL *location)
 		};
 		PcsxrMemoryObject *obj = [[PcsxrMemoryObject alloc] initWithMcdBlock:&memBlock startingIndex:i size:x];
 		i += x;
-		if (MemBlockFlag(memBlock.Flags) == memFlagDeleted) {
+		if (MemBlockFlag(memBlock.Flags) == PCSXRMemFlagDeleted) {
 			continue;
 		}
 		[memArray addObject:obj];

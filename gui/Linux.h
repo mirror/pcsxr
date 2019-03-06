@@ -29,6 +29,7 @@
 #define DEFAULT_MEM_CARD_1 "/.pcsxr/memcards/card1.mcd"
 #define DEFAULT_MEM_CARD_2 "/.pcsxr/memcards/card2.mcd"
 #define MEMCARD_DIR "/.pcsxr/memcards/"
+#define MEMCARD_PERGAME_DIR "/.pcsxr/memcards/games"
 #define PLUGINS_DIR "/.pcsxr/plugins/"
 #define PLUGINS_CFG_DIR "/.pcsxr/plugins/cfg/"
 #define PCSXR_DOT_DIR "/.pcsxr/"
@@ -36,6 +37,10 @@
 #define STATES_DIR "/.pcsxr/sstates/"
 #define CHEATS_DIR "/.pcsxr/cheats/"
 #define PATCHES_DIR "/.pcsxr/patches/"
+
+#define OLD_SLOT 1000
+#define NUM_OLD_SLOTS 2
+#define LAST_OLD_SLOT (OLD_SLOT + NUM_OLD_SLOTS - 1)
 
 extern gboolean UseGui;
 extern int StatesC;

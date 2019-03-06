@@ -19,6 +19,7 @@
 #include "psxhw.h"
 #include "gpu.h"
 #include "psxdma.h"
+#include "pgxp_mem.h"
 
 #define GPUSTATUS_ODDLINES            0x80000000
 #define GPUSTATUS_DMABITS             0x60000000 // Two bits
@@ -117,8 +118,9 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			// BA blocks * BS words (word = 32-bits)
 			size = (bcr >> 16) * (bcr & 0xffff);
 			GPU_readDataMem(ptr, size);
+#ifdef PSXREC
 			psxCpu->Clear(madr, size);
-
+#endif
 #if 1
 			// already 32-bit word size ((size * 4) / 4)
 			GPUDMA_INT(size);
@@ -142,6 +144,7 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 #endif
 				break;
 			}
+			GPU_pgxpMemory(PGXP_ConvertAddress(madr), PGXP_GetMem());
 			GPU_writeDataMem(ptr, size);
 
 #if 0

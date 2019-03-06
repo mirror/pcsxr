@@ -650,11 +650,11 @@ void psxHwWrite32(u32 add, u32 value) {
 			PSXHW_LOG("DMA2 CHCR 32bit write %x\n", value);
 #endif
 			/* A hack that makes Vampire Hunter D title screen visible,
-			/* but makes Tomb Raider II water effect to stay opaque
-			/* Root cause for this problem is that when DMA2 is issued
-			/* it is incompletele and still beign built by the game.
-			/* Maybe it is ready when some signal comes in or within given delay?
-			*/
+             * but makes Tomb Raider II water effect to stay opaque
+			 * Root cause for this problem is that when DMA2 is issued
+			 * it is incompletele and still beign built by the game.
+			 * Maybe it is ready when some signal comes in or within given delay?
+			 */
 			if (dmaGpuListHackEn && value == 0x00000401 && HW_DMA2_BCR == 0x0) {
 				psxDma2(SWAPu32(HW_DMA2_MADR), SWAPu32(HW_DMA2_BCR), SWAPu32(value));
 				return;

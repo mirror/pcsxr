@@ -1,0 +1,13 @@
+#plugins
+if (BUILD_SIO1)
+add_subdirectory(bladesio1)
+endif()
+add_subdirectory(nullsio1)
+add_subdirectory(dfcdrom)
+add_subdirectory(dfinput)
+add_subdirectory(dfnet)
+add_subdirectory(dfsound)
+add_subdirectory(dfxvideo)
+if (BUILD_OPENGL)
+add_subdirectory(peopsxgl)
+endif()

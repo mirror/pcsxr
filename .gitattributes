@@ -1,0 +1,14 @@
+* text=auto
+*.h text=auto
+*.c text=auto
+*.cpp text=auto
+*.m text=lf
+*.swift text=lf
+*.rc text=crlf
+
+*.pdf binary
+*.gif binary
+*.jpg binary
+*.png binary
+*.bmp binary
+*.ico binary

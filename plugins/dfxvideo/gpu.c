@@ -2219,46 +2219,53 @@ void CALLBACK GPUgetScreenPic(unsigned char * pMem)
 
 // LINUX version:
 
-extern char * Xpixels;
-
 void GPUgetScreenPic(unsigned char * pMem)
 {
-/*
- unsigned short c;unsigned char * pf;int x,y;
+  unsigned char *pf=pMem;
+  unsigned char *buf, *line, *pD;
 
- float XS=(float)iResX/128;
- float YS=(float)iResY/96;
-
- pf=pMem;
- memset(pMem, 0, 128*96*3);
-
- if(Xpixels)
-  {
-   unsigned char * ps=(unsigned char *)Xpixels;
-    {
-     long lPitch=iResX<<2;
-     uint32_t sx;
-
-     for(y=0;y<96;y++)
-      {
-       for(x=0;x<128;x++)
-        {
-         sx=*((uint32_t *)((ps)+
-              (((int)((float)y*YS))*lPitch)+
-               ((int)((float)x*XS))*4));
-         *(pf+0)=(sx&0xff);
-         *(pf+1)=(sx&0xff00)>>8;
-         *(pf+2)=(sx&0xff0000)>>16;
-         pf+=3;
-        }
+  int w = PreviousPSXDisplay.Range.x1, h = PreviousPSXDisplay.DisplayMode.y;
+  int x, y;
+  float XS = w / 128.0, YS = h / 96.0;
+  line = pf;
+  for (y = 0; y < 96; ++y) {
+    for (x = 0; x < 128; ++x) {
+      float r = 0, g = 0, b = 0, sr, sg, sb;
+      uint32_t cnt = 0, i, j;
+      for (j = 0; j < (int)((y+1)*YS) - (int)(y*YS); ++j) {
+	for (i = 0; i < (int)((x+1)*XS) - (int)(x*XS); ++i) {
+	  pD = (unsigned char *)&psxVuw[(int)(y*YS +
+	      PSXDisplay.DisplayPosition.y - 1 + j) * 1024 +
+	      PSXDisplay.DisplayPosition.x] +
+	      (PSXDisplay.RGB24 ? 3 : 2) * (int)(x*XS + i);
+	  if (PSXDisplay.RGB24) {
+	    uint32_t lu = *(uint32_t *)pD;
+	    sr = RED(lu);
+	    sg = GREEN(lu);
+	    sb = BLUE(lu);
+	  } else {
+	    int32_t color = GETLE16(pD);
+	    sr = (color << 3) & 0xf1;
+	    sg = (color >> 2) & 0xf1;
+	    sb = (color >> 7) & 0xf1;
+	  }
+	  r += sr * sr;
+	  g += sg * sg;
+	  b += sb * sb;
+	  cnt += 1;
+	}
+	line[x * 3 + 2] = sqrt(r / cnt);
+	line[x * 3 + 1] = sqrt(g / cnt);
+	line[x * 3 + 0] = sqrt(b / cnt);
       }
     }
+    line += 128 * 3;
   }
-
 
  /////////////////////////////////////////////////////////////////////
  // generic number/border painter
 
+ unsigned short c;
  pf=pMem+(103*3);                                      // offset to number rect
 
  for(y=0;y<20;y++)                                     // loop the number rect pixel
@@ -2289,7 +2296,6 @@ void GPUgetScreenPic(unsigned char * pMem)
    *(pf+(127*3))=0xff;*pf++=0xff;
    pf+=127*3;                                          // offset to next line
   }
-*/
 }
 
 #endif

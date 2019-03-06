@@ -26,6 +26,7 @@
 #include "mdec.h"
 #include "gpu.h"
 #include "gte.h"
+#include "pgxp_mem.h"
 
 R3000Acpu *psxCpu = NULL;
 psxRegisters psxRegs;
@@ -44,6 +45,8 @@ int psxInit() {
 	Log = 0;
 
 	if (psxMemInit() == -1) return -1;
+	PGXP_Init();
+    PauseDebugger();
 
 	return psxCpu->Init();
 }
@@ -272,4 +275,10 @@ void psxJumpTest() {
 void psxExecuteBios() {
 	while (psxRegs.pc != 0x80030000)
 		psxCpu->ExecuteBlock();
+}
+
+void psxSetPGXPMode(u32 pgxpMode)
+{
+	psxCpu->SetPGXPMode(pgxpMode);
+	//psxCpu->Reset();
 }

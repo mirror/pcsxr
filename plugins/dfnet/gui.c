@@ -103,7 +103,7 @@ long CFGopen() {
 
 	builder = gtk_builder_new();
 
-	if (!gtk_builder_add_from_file(builder, DATADIR "dfnet.ui", NULL)) {
+	if (!gtk_builder_add_from_resource(builder, "/org/pcsxr/dfnet/dfnet.ui", NULL)) {
 		g_warning("We could not load the interface!");
 		return 0;
 	}
@@ -182,6 +182,7 @@ void CFGabout() {
 	GtkWidget *widget;
 
 	widget = gtk_about_dialog_new();
+	gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG(widget), "help-about");
 	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(widget), "Socket NetPlay Driver");
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(widget), "0.21");
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(widget), authors);

@@ -36,6 +36,7 @@ typedef struct {
 	void (*ExecuteBlock)();	/* executes up to a jump */
 	void (*Clear)(u32 Addr, u32 Size);
 	void (*Shutdown)();
+	void (*SetPGXPMode)(u32 pgxpMode);
 } R3000Acpu;
 
 extern R3000Acpu *psxCpu;
@@ -345,6 +346,8 @@ int  psxTestLoadDelay(int reg, u32 tmp);
 void psxDelayTest(int reg, u32 bpc);
 void psxTestSWInts();
 void psxJumpTest();
+
+void psxSetPGXPMode(u32 pgxpMode);
 
 #ifdef __cplusplus
 }

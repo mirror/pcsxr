@@ -1,0 +1,29 @@
+matrix:
+  include:
+    - os: linux
+      language: c
+      sudo: required
+      compiler: gcc
+      services: docker
+      before_install:
+        - docker pull ubuntu:17.10
+      script:
+        - docker build -f Dockerfile.gcc .
+    - os: linux
+      language: c
+      sudo: required
+      compiler: clang
+      services: docker
+      before_install:
+        - docker pull ubuntu:17.10
+      script:
+        - docker build -f Dockerfile.clang .
+    - os: osx
+      osx_image: xcode7.3
+      before_install:
+        - curl -O -L https://www.libsdl.org/release/SDL2-2.0.8.dmg
+        - hdiutil attach SDL2-2.0.8.dmg
+        - sudo cp -a /Volumes/SDL2/SDL2.framework /Library/Frameworks/
+      language: objective-c
+      xcode_project: macosx/Pcsxr.xcodeproj
+      xcode_scheme: PCSXR

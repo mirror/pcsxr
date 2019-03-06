@@ -28,6 +28,7 @@ void OnConf_Sound();
 void OnConf_CdRom();
 void OnConf_Pad();
 void OnConf_Cpu();
+void OnConf_Pgxp();
 void OnConf_Net();
 void OnConf_Sio1();
 

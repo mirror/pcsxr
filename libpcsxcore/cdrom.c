@@ -1328,7 +1328,7 @@ void cdrWrite1(unsigned char rt) {
 			set_loc[i] = btoi(cdr.Param[i]);
 
 		i = msf2sec(cdr.SetSectorPlay);
-		i = abs(i - msf2sec(set_loc));
+		i = abs(i - (int)msf2sec(set_loc));
 		if (i > 16)
 			cdr.Seeked = SEEK_PENDING;
 
@@ -1516,9 +1516,9 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 				cdr.transferIndex++;
 				adjustTransferIndex();
 			}
-
+#ifdef PSXREC
 			psxCpu->Clear(madr, cdsize / 4);
-
+#endif
 			// burst vs normal
 			if( chcr == 0x11400100 ) {
 				CDRDMA_INT( (cdsize/4) / 4 );

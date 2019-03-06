@@ -61,7 +61,9 @@ const char *EmuKeyText[EMU_TOTAL] = {
 	N_("Save state"),
 	N_("Screenshot"),
 	N_("Escape"),
-	N_("Rewind")
+	N_("Rewind"),
+	N_("Alt Speed 1"),
+	N_("Alt Speed 2")
 };
 
 const char *DPadText[DKEY_TOTAL] = {
@@ -244,7 +246,6 @@ static void UpdateKeyList() {
 
 		gtk_tree_view_set_model(GTK_TREE_VIEW(widget), GTK_TREE_MODEL(store));
 		g_object_unref(G_OBJECT(store));
-		gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(widget), TRUE);
 		gtk_widget_show(widget);
 	}
 }
@@ -325,6 +326,7 @@ static void OnDeviceChanged(GtkWidget *widget, gpointer user_data) {
 
 static void OnTypeChanged(GtkWidget *widget, gpointer user_data) {
 	uint n = GPOINTER_TO_UINT(user_data), current = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
+    char checkbtn[9];
 
 	int padTypeList[] = {
 		PSE_PAD_TYPE_STANDARD,
@@ -333,6 +335,10 @@ static void OnTypeChanged(GtkWidget *widget, gpointer user_data) {
 	};
 
 	g.cfg.PadDef[n].Type = padTypeList[current];
+
+    snprintf(checkbtn, sizeof(checkbtn), "checkpv%d", n+1);
+    gtk_widget_set_sensitive(GTK_WIDGET(
+        gtk_builder_get_object(xml, checkbtn)), (g.cfg.PadDef[n].Type == PSE_PAD_TYPE_ANALOGPAD));
 
 	UpdateKeyList();
 }
@@ -347,6 +353,14 @@ static void OnVisualVibration1Toggled(GtkWidget *widget, gpointer user_data) {
 
 static void OnVisualVibration2Toggled(GtkWidget *widget, gpointer user_data) {
 	g.cfg.PadDef[1].VisualVibration = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+}
+
+static void OnPhysicalVibration1Toggled(GtkWidget *widget, gpointer user_data) {
+    g.cfg.PadDef[0].PhysicalVibration = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+}
+
+static void OnPhysicalVibration2Toggled(GtkWidget *widget, gpointer user_data) {
+    g.cfg.PadDef[1].PhysicalVibration = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 }
 
 static void OnHideCursorToggled(GtkWidget *widget, gpointer user_data) {
@@ -610,9 +624,9 @@ static void PopulateDevList() {
 		for (j = 0; j < n; j++) {
 			#if SDL_VERSION_ATLEAST(2, 0, 0)
 				SDL_Joystick *joystick = SDL_JoystickOpen(j);
-				sprintf(buf, "%d: %s", j + 1, SDL_JoystickName(joystick));
+				snprintf(buf, sizeof(buf), "%d: %s", j + 1, SDL_JoystickName(joystick));
 			#else
-				sprintf(buf, "%d: %s", j + 1, SDL_JoystickName(j));
+				snprintf(buf, sizeof(buf), "%d: %s", j + 1, SDL_JoystickName(j));
 			#endif
 			gtk_list_store_append(store, &iter);
 			gtk_list_store_set(store, &iter, 0, buf, -1);
@@ -653,7 +667,7 @@ long PADconfigure() {
 
 	xml = gtk_builder_new();
 
-	if (!gtk_builder_add_from_file(xml, DATADIR "dfinput.ui", NULL)) {
+	if (!gtk_builder_add_from_resource(xml, "/org/pcsxr/dfinput/dfinput.ui", NULL)) {
 		g_warning("We could not load the interface!");
 		return -1;
 	}
@@ -746,12 +760,14 @@ long PADconfigure() {
 	widget = GTK_WIDGET(gtk_builder_get_object(xml, "combotype1"));
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget),
 		padTypeList[g.cfg.PadDef[0].Type]);
+    OnTypeChanged(widget, GUINT_TO_POINTER(0u));
 	g_signal_connect_data(G_OBJECT(widget), "changed",
 		G_CALLBACK(OnTypeChanged), GUINT_TO_POINTER(0u), NULL, G_CONNECT_AFTER);
 
 	widget = GTK_WIDGET(gtk_builder_get_object(xml, "combotype2"));
 	gtk_combo_box_set_active(GTK_COMBO_BOX(widget),
 		padTypeList[g.cfg.PadDef[1].Type]);
+    OnTypeChanged(widget, GUINT_TO_POINTER(1u));
 	g_signal_connect_data(G_OBJECT(widget), "changed",
 		G_CALLBACK(OnTypeChanged), GUINT_TO_POINTER(1u), NULL, G_CONNECT_AFTER);
 
@@ -764,6 +780,16 @@ long PADconfigure() {
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.PadDef[1].VisualVibration);
 	g_signal_connect_data(G_OBJECT(widget), "toggled",
 		G_CALLBACK(OnVisualVibration2Toggled), NULL, NULL, G_CONNECT_AFTER);
+
+    widget = GTK_WIDGET(gtk_builder_get_object(xml, "checkpv1"));
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.PadDef[0].PhysicalVibration);
+    g_signal_connect_data(G_OBJECT(widget), "toggled",
+                          G_CALLBACK(OnPhysicalVibration1Toggled), NULL, NULL, G_CONNECT_AFTER);
+
+    widget = GTK_WIDGET(gtk_builder_get_object(xml, "checkpv2"));
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), g.cfg.PadDef[1].PhysicalVibration);
+    g_signal_connect_data(G_OBJECT(widget), "toggled",
+                          G_CALLBACK(OnPhysicalVibration2Toggled), NULL, NULL, G_CONNECT_AFTER);
 
 	widget = GTK_WIDGET(gtk_builder_get_object(xml, widgetname_change[1]));
 	gtk_widget_set_sensitive(widget, FALSE);
@@ -835,6 +861,7 @@ void PADabout() {
 	GtkWidget *widget;
 
 	widget = gtk_about_dialog_new();
+	gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG(widget), "help-about");
 	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(widget), "Gamepad/Keyboard Input");
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(widget), "1.2");
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(widget), authors);

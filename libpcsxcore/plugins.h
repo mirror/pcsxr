@@ -79,6 +79,7 @@ typedef long (CALLBACK* GPUconfigure)(void);
 typedef long (CALLBACK* GPUtest)(void);
 typedef void (CALLBACK* GPUabout)(void);
 typedef void (CALLBACK* GPUmakeSnapshot)(void);
+typedef void (CALLBACK* GPUtoggleDebug)(void);
 typedef void (CALLBACK* GPUkeypressed)(int);
 typedef void (CALLBACK* GPUdisplayText)(char *);
 typedef struct {
@@ -96,6 +97,9 @@ typedef void (CALLBACK* GPUvBlank)(int);
 typedef void (CALLBACK* GPUvisualVibration)(uint32_t, uint32_t);
 typedef void (CALLBACK* GPUcursor)(int, int, int);
 typedef void (CALLBACK* GPUaddVertex)(short,short,s64,s64,s64);
+typedef void (CALLBACK* GPUsetSpeed)(float); // 1.0 = natural speed
+typedef void (CALLBACK* GPUpgxpMemory)(unsigned int, unsigned char*);
+typedef void (CALLBACK* GPUpgxpCacheVertex)(short sx, short sy, const unsigned char* _pVertex);
 
 // GPU function pointers
 extern GPUupdateLace    GPU_updateLace;
@@ -116,6 +120,7 @@ extern GPUdmaChain      GPU_dmaChain;
 extern GPUkeypressed    GPU_keypressed;
 extern GPUdisplayText   GPU_displayText;
 extern GPUmakeSnapshot  GPU_makeSnapshot;
+extern GPUtoggleDebug	GPU_toggleDebug;
 extern GPUfreeze        GPU_freeze;
 extern GPUgetScreenPic  GPU_getScreenPic;
 extern GPUshowScreenPic GPU_showScreenPic;
@@ -125,6 +130,9 @@ extern GPUvBlank        GPU_vBlank;
 extern GPUvisualVibration GPU_visualVibration;
 extern GPUcursor        GPU_cursor;
 extern GPUaddVertex     GPU_addVertex;
+extern GPUsetSpeed		GPU_setSpeed;
+extern GPUpgxpMemory	GPU_pgxpMemory;
+extern GPUpgxpCacheVertex GPU_pgxpCacheVertex;
 
 // CD-ROM Functions
 typedef long (CALLBACK* CDRinit)(void);
@@ -414,7 +422,13 @@ extern SIO1registerCallback   SIO1_registerCallback;
 void CALLBACK clearDynarec(void);
 
 void SetIsoFile(const char *filename);
+void SetExeFile(const char *filename);
+void SetAppPath(const char *filename);
+void SetLdrFile(const char *ldrfile );
 const char *GetIsoFile(void);
+const char *GetExeFile(void);
+const char *GetAppPath(void);
+const char *GetLdrFile(void);
 boolean UsingIso(void);
 void SetCdOpenCaseTime(s64 time);
 
