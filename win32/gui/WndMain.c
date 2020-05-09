@@ -1909,7 +1909,7 @@ void CreateMainWindow(int nCmdShow) {
 
 	hWnd = CreateWindow("PCSXR Main",
 						"PCSXR",
-						WS_CAPTION | WS_POPUPWINDOW | WS_MINIMIZEBOX,
+						WS_OVERLAPPED | WS_MINIMIZEBOX | WS_SYSMENU,
 						CW_USEDEFAULT,
 						0,
 						426,
