@@ -76,6 +76,7 @@
 #define IDC_QUALTXT2                    1053
 #define IDC_QUALTXT3                    1054
 #define IDC_GARBAGE                     1055
+#define IDC_LINEHACK                    1055
 #define IDC_PALTEXWND                   1056
 #define IDC_HIRESTEX                    1057
 #define IDC_GAMEFIX                     1058
@@ -86,6 +87,7 @@
 #define IDC_QUALTXT4                    1063
 #define IDC_GAMEFIX2                    1064
 #define IDC_GTEACCURACY                 1065
+#define IDC_USEEXT                      1066
 #define IDC_F14_STATIC3                 1083
 #define IDC_F14_STATIC4                 1084
 #define IDC_F14_STATIC5                 1085
@@ -127,7 +129,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        140
+#define _APS_NEXT_RESOURCE_VALUE        141
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         2070
 #define _APS_NEXT_SYMED_VALUE           101

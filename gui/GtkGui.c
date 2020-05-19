@@ -28,11 +28,13 @@
 #include <signal.h>
 #include <sys/time.h>
 #include <regex.h>
+#include <libintl.h>
 
 #include "Linux.h"
 
 #include "../libpcsxcore/plugins.h"
 #include "../libpcsxcore/cheat.h"
+#include "../libpcsxcore/cdrom.h"
 
 #include "MemcardDlg.h"
 #include "ConfDlg.h"
@@ -66,6 +68,8 @@ static GtkBuilder *builder;
 GtkWidget *Window = NULL;
 
 int destroy = 0;
+
+extern void LidInterrupt();
 
 #define MAX_SLOTS 9
 
@@ -229,7 +233,11 @@ gchar* get_state_filename(int i) {
 
 	trimlabel = get_cdrom_label_trim();
 
-	sprintf(SStateFile, "%.32s-%.9s.%3.3d", trimlabel, CdromId, i);
+	if (i >= OLD_SLOT && i <= LAST_OLD_SLOT) {
+		sprintf(SStateFile, "%.32s-%.9s.old_%d", trimlabel, CdromId, i - OLD_SLOT);
+	} else {
+		sprintf(SStateFile, "%.32s-%.9s.%3.3d", trimlabel, CdromId, i);
+	}
 	state_filename = g_build_filename (getenv("HOME"), STATES_DIR, SStateFile, NULL);
 
 	g_free(trimlabel);
@@ -316,9 +324,13 @@ void StartGui() {
 		gtk_window_present (GTK_WINDOW (Window));
 		return;
 	}*/
+	GtkIconTheme *itheme = gtk_icon_theme_get_default();
+	gtk_icon_theme_add_resource_path(itheme,"/org/pcsxr/gui");
+	gtk_icon_theme_add_resource_path(itheme,"/org/pcsxr/gui/pixmaps/");
+
 	builder = gtk_builder_new();
 	
-	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+	if (!gtk_builder_add_from_resource(builder, "/org/pcsxr/gui/pcsxr.ui", NULL)) {
 		g_warning("Error: interface could not be loaded!");
 		return;
 	}
@@ -327,8 +339,8 @@ void StartGui() {
 	gtk_widget_show(GTK_WIDGET(Window));
 
 	gtk_window_set_title(GTK_WINDOW(Window), "PCSXR");
-	gtk_window_set_icon_from_file(GTK_WINDOW(Window), PIXMAPDIR "pcsxr-icon.png", NULL);
-	gtk_window_set_default_icon_from_file(PIXMAPDIR "pcsxr-icon.png", NULL);
+	gtk_window_set_icon(GTK_WINDOW(Window), gdk_pixbuf_new_from_resource("/org/pcsxr/gui/pixmaps/pcsxr-icon.png", NULL));
+	gtk_window_set_default_icon(gdk_pixbuf_new_from_resource("/org/pcsxr/gui/pixmaps/pcsxr-icon.png", NULL));
 	ResetMenuSlots();
 
 	// Set up callbacks
@@ -459,7 +471,10 @@ void StartGui() {
 #endif
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "cpu1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
-			G_CALLBACK(OnConf_Cpu), NULL, NULL, G_CONNECT_AFTER);
+            G_CALLBACK(OnConf_Cpu), NULL, NULL, G_CONNECT_AFTER);
+    widget = GTK_WIDGET(gtk_builder_get_object(builder, "pgxp1"));
+    g_signal_connect_data(G_OBJECT(widget), "activate",
+            G_CALLBACK(OnConf_Pgxp), NULL, NULL, G_CONNECT_AFTER);
 	widget = GTK_WIDGET(gtk_builder_get_object(builder, "memory_cards1"));
 	g_signal_connect_data(G_OBJECT(widget), "activate",
 			G_CALLBACK(OnConf_Mcds), NULL, NULL, G_CONNECT_AFTER);
@@ -567,8 +582,8 @@ void OnFile_RunExe() {
 	} else {
 		file_chooser = gtk_file_chooser_dialog_new(_("Select PSX EXE File"),
 			NULL, GTK_FILE_CHOOSER_ACTION_OPEN,
-			GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-			GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
+			"_Cancel", GTK_RESPONSE_CANCEL,
+			"_Open", GTK_RESPONSE_ACCEPT, NULL);
 
 		// Add file filters
 		GtkFileFilter *exefilter = gtk_file_filter_new ();
@@ -704,8 +719,8 @@ static gchar *Open_Iso_Proc() {
 	static char current_folder[MAXPATHLEN] = "";
 
 	chooser = gtk_file_chooser_dialog_new (_("Open PSX Disc Image File"),
-		NULL, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_OK, GTK_RESPONSE_OK,
+		NULL, GTK_FILE_CHOOSER_ACTION_OPEN, "_Cancel", GTK_RESPONSE_CANCEL,
+		"_Open", GTK_RESPONSE_ACCEPT,
 		NULL);
 
 	if (stat(Config.IsoImgDir, &sb) == 0 && S_ISDIR(sb.st_mode)) {
@@ -742,7 +757,7 @@ static gchar *Open_Iso_Proc() {
 	gtk_file_filter_set_name(allfilter, _("All Files"));
 	gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (chooser), allfilter);
 
-	if (gtk_dialog_run(GTK_DIALOG(chooser)) == GTK_RESPONSE_OK) {
+	if (gtk_dialog_run(GTK_DIALOG(chooser)) == GTK_RESPONSE_ACCEPT) {
 		gchar *path = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(chooser));
 		
 		/* Workaround:
@@ -763,11 +778,9 @@ static gchar *Open_Iso_Proc() {
 		  strncpy(current_folder, filename, strrchr(filename, '/') - filename);
 		}
 
-		/* If ISO path is NULL save current path. */
-		if (!S_ISDIR(sb.st_mode)) {
-		  strcpy(Config.IsoImgDir, current_folder);
-		  SaveConfig();
-		}
+		/* Save current path. */
+		strcpy(Config.IsoImgDir, current_folder);
+		SaveConfig();
 
 		/* free useless data */
 		GSList * ll = l;
@@ -1079,8 +1092,8 @@ void on_states_load_other() {
 	SStateFile = g_strconcat(getenv("HOME"), STATES_DIR, NULL);
 
 	file_chooser = gtk_file_chooser_dialog_new(_("Select State File"), NULL, GTK_FILE_CHOOSER_ACTION_OPEN,
-		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+		"_Cancel", GTK_RESPONSE_CANCEL,
+		"_Open", GTK_RESPONSE_ACCEPT,
 		NULL);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER (file_chooser), SStateFile);
 	g_free(SStateFile);
@@ -1108,8 +1121,8 @@ void on_states_save_other() {
 
 	file_chooser = gtk_file_chooser_dialog_new(_("Select State File"),
 			NULL, GTK_FILE_CHOOSER_ACTION_SAVE,
-			GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-			GTK_STOCK_SAVE, GTK_RESPONSE_OK,
+			"_Cancel", GTK_RESPONSE_CANCEL,
+			"_Save", GTK_RESPONSE_OK,
 			NULL);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(file_chooser), SStateFile);
 	g_free(SStateFile);
@@ -1150,7 +1163,7 @@ void SysMessage(const char *fmt, ...) {
 	}
 
 	MsgDlg = gtk_dialog_new_with_buttons(_("Notice"), NULL,
-		GTK_DIALOG_DESTROY_WITH_PARENT, GTK_STOCK_OK, GTK_RESPONSE_NONE, NULL);
+		GTK_DIALOG_DESTROY_WITH_PARENT, "_OK", GTK_RESPONSE_NONE, NULL);
 
 	gtk_window_set_position (GTK_WINDOW(MsgDlg), GTK_WIN_POS_CENTER);
 

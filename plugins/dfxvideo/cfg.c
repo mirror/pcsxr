@@ -20,6 +20,10 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <stdlib.h>
+#if defined(__linux__)
+#include <sys/types.h>
+#include <sys/wait.h>
+#endif
 
 #undef FALSE
 #undef TRUE

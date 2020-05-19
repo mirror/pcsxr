@@ -37,6 +37,8 @@ static void SetDefaultConfig() {
 
 	g.cfg.PadDef[0].VisualVibration = 0;
 	g.cfg.PadDef[1].VisualVibration = 0;
+    g.cfg.PadDef[0].PhysicalVibration = 1;
+    g.cfg.PadDef[1].PhysicalVibration = 1;
 
 	// Pad1 keyboard
 	g.cfg.PadDef[0].KeyDef[DKEY_SELECT].Key = XK_c;
@@ -126,6 +128,8 @@ static void SetDefaultConfig() {
 	g.cfg.E.EmuDef[EMU_SCREENSHOT].EmuKeyEvent = XK_F8;
 	g.cfg.E.EmuDef[EMU_ESCAPE].EmuKeyEvent = XK_Escape;
 	g.cfg.E.EmuDef[EMU_REWIND].EmuKeyEvent = XK_BackSpace;
+	g.cfg.E.EmuDef[EMU_ALTSPEED1].EmuKeyEvent = XK_bracketleft;
+	g.cfg.E.EmuDef[EMU_ALTSPEED2].EmuKeyEvent = XK_bracketright;
 }
 
 void LoadPADConfig() {
@@ -162,6 +166,8 @@ void LoadPADConfig() {
 			g.cfg.PadDef[current].Type = atoi(&buf[5]);
 		} else if (strncmp(buf, "VisualVibration=", 16) == 0) {
 			g.cfg.PadDef[current].VisualVibration = atoi(&buf[16]);
+        } else if (strncmp(buf, "PhysicalVibration=", 18) == 0) {
+            g.cfg.PadDef[current].PhysicalVibration = atoi(&buf[18]);
 		} else if (strncmp(buf, "EmuDev=", 7) == 0) {
 			g.cfg.E.DevNum = atoi(&buf[5]);
 		} else if (strncmp(buf, "EMU_FASTFORWARDS=", 17) == 0) {
@@ -199,6 +205,16 @@ void LoadPADConfig() {
 			g.cfg.E.EmuDef[EMU_REWIND].Mapping.Key = a;
 			g.cfg.E.EmuDef[EMU_REWIND].Mapping.JoyEvType = b;
 			g.cfg.E.EmuDef[EMU_REWIND].Mapping.J.d = c;
+		} else if (strncmp(buf, "EMU_ALTSPEED1=", 14) == 0) {
+			sscanf(buf, "EMU_ALTSPEED1=%d,%d,%d", &a, &b, &c);
+			g.cfg.E.EmuDef[EMU_ALTSPEED1].Mapping.Key = a;
+			g.cfg.E.EmuDef[EMU_ALTSPEED1].Mapping.JoyEvType = b;
+			g.cfg.E.EmuDef[EMU_ALTSPEED1].Mapping.J.d = c;
+		} else if (strncmp(buf, "EMU_ALTSPEED2=", 14) == 0) {
+			sscanf(buf, "EMU_ALTSPEED2=%d,%d,%d", &a, &b, &c);
+			g.cfg.E.EmuDef[EMU_ALTSPEED2].Mapping.Key = a;
+			g.cfg.E.EmuDef[EMU_ALTSPEED2].Mapping.JoyEvType = b;
+			g.cfg.E.EmuDef[EMU_ALTSPEED2].Mapping.J.d = c;
 		} else if (strncmp(buf, "Select=", 7) == 0) {
 			sscanf(buf, "Select=%d,%d,%d", &a, &b, &c);
 			g.cfg.PadDef[current].KeyDef[DKEY_SELECT].Key = a;
@@ -350,6 +366,7 @@ void SavePADConfig() {
 		fprintf(fp, "DevNum=%d\n", g.cfg.PadDef[i].DevNum);
 		fprintf(fp, "Type=%d\n", g.cfg.PadDef[i].Type);
 		fprintf(fp, "VisualVibration=%d\n", g.cfg.PadDef[i].VisualVibration);
+        fprintf(fp, "PhysicalVibration=%d\n", g.cfg.PadDef[i].PhysicalVibration);
 
 		fprintf(fp, "Select=%d,%d,%d\n", g.cfg.PadDef[i].KeyDef[DKEY_SELECT].Key,
 			g.cfg.PadDef[i].KeyDef[DKEY_SELECT].JoyEvType, g.cfg.PadDef[i].KeyDef[DKEY_SELECT].J.d);
@@ -437,5 +454,13 @@ void SavePADConfig() {
 	fprintf(fp, "EMU_REWIND=%d,%d,%d\n", g.cfg.E.EmuDef[EMU_REWIND].Mapping.Key,
 			g.cfg.E.EmuDef[EMU_REWIND].Mapping.JoyEvType,
 			g.cfg.E.EmuDef[EMU_REWIND].Mapping.J.d);
+	fprintf(fp, "EMU_ALTSPEED1=%d,%d,%d\n",
+			g.cfg.E.EmuDef[EMU_ALTSPEED1].Mapping.Key,
+			g.cfg.E.EmuDef[EMU_ALTSPEED1].Mapping.JoyEvType,
+			g.cfg.E.EmuDef[EMU_ALTSPEED1].Mapping.J.d);
+	fprintf(fp, "EMU_ALTSPEED2=%d,%d,%d\n",
+			g.cfg.E.EmuDef[EMU_ALTSPEED2].Mapping.Key,
+			g.cfg.E.EmuDef[EMU_ALTSPEED2].Mapping.JoyEvType,
+			g.cfg.E.EmuDef[EMU_ALTSPEED2].Mapping.J.d);
 	fclose(fp);
 }

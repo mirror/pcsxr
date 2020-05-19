@@ -103,7 +103,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 			McdBlock memBlock;
 			GetMcdBlockInfo(carNum, i + 1, &memBlock);
 			
-			if ([PcsxrMemoryObject memFlagsFromBlockFlags:memBlock.Flags] == memFlagFree) {
+			if ([PcsxrMemoryObject memFlagsFromBlockFlags:memBlock.Flags] == PCSXRMemFlagFree) {
 				//Free space: ignore
 				i++;
 				continue;
@@ -220,7 +220,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 {
 	int memSize = MAX_MEMCARD_BLOCKS;
 	for (PcsxrMemoryObject *memObj in rawArray) {
-		if (memObj.flag != memFlagDeleted) {
+		if (memObj.flag != PCSXRMemFlagDeleted) {
 			memSize -= memObj.blockSize;
 		}
 	}
@@ -272,9 +272,9 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 		GetMcdBlockInfo(cardNumber, i+1, &baseBlock);
 		PCSXRMemFlag theFlags = [PcsxrMemoryObject memFlagsFromBlockFlags:baseBlock.Flags];
 		
-		if (theFlags == memFlagDeleted || theFlags == memFlagFree) {
+		if (theFlags == PCSXRMemFlagDeleted || theFlags == PCSXRMemFlagFree) {
 			PCSXRMemFlag up1Flags = theFlags;
-			while ((up1Flags == memFlagDeleted || up1Flags == memFlagFree) && x < MAX_MEMCARD_BLOCKS) {
+			while ((up1Flags == PCSXRMemFlagDeleted || up1Flags == PCSXRMemFlagFree) && x < MAX_MEMCARD_BLOCKS) {
 				x++;
 				McdBlock up1Block;
 				GetMcdBlockInfo(cardNumber, x+1, &up1Block);
@@ -300,7 +300,6 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 
 - (void)deleteMemoryBlocksAtIndex:(int)slotnum
 {
-	int xor = 0, i, j;
 	char *data, *ptr, *filename;
 	if (cardNumber == 1) {
 		filename = Config.Mcd1;
@@ -321,8 +320,9 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 	
 	McdBlock flagBlock;
 	
-	for(i = theObj.startingIndex + 1; i < (theObj.startingIndex + theObj.blockSize + 1); i++)
+	for(int i = theObj.startingIndex + 1; i < (theObj.startingIndex + theObj.blockSize + 1); i++)
 	{
+		char xor = 0;
 		GetMcdBlockInfo(cardNumber, i, &flagBlock);
 		ptr = data + i * 128;
 		
@@ -335,7 +335,7 @@ static inline void ClearMemcardData(char *to, int dsti, char *str)
 			*ptr = 0xA0 | (flagBlock.Flags & 0xF);
 		} else { continue; }
 		
-		for (j = 0; j < 127; j++) xor ^= *ptr++;
+		for (unsigned char j = 0; j < 127; j++) xor ^= *ptr++;
 		*ptr = xor;
 		
 		SaveMcd(filename, data, i * 128, 128);

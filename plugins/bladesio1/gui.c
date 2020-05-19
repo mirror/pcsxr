@@ -32,7 +32,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
-#include "psxcommon.h"
+//#include "psxcommon.h"
 #include "psemu_plugin_defs.h"
 
 #include "cfg.c"
@@ -103,7 +103,7 @@ void configure() {
 
 	builder = gtk_builder_new();
 
-	if(!gtk_builder_add_from_file(builder, DATADIR "sio1.ui", NULL))
+	if(!gtk_builder_add_from_resource(builder, "/org/pcsxr/bladesio1/sio1.ui", NULL))
 		g_warning("We could not load the interface!");
 
 	settingsRead();
@@ -166,6 +166,7 @@ void about() {
 	GtkWidget *widget;
 
 	widget = gtk_about_dialog_new();
+	gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG(widget), "help-about");
 	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(widget), "Link Cable");
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(widget), "1.0");
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(widget), authors);

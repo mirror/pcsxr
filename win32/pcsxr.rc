@@ -87,6 +87,7 @@ BEGIN
     PUSHBUTTON      "Paste",IDC_PASTE,180,70,45,14
     PUSHBUTTON      "<- Un/Delete",IDC_DELETE1,180,90,45,14
     PUSHBUTTON      "Un/Delete ->",IDC_DELETE2,180,110,45,14
+    CONTROL         "Per Game MCD",IDC_PERGAMEMCD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,175,172,80,10
 END
 
 ABOUT_DIALOG DIALOGEX 0, 0, 332, 209
@@ -98,19 +99,19 @@ BEGIN
     CTEXT           "PCSXR EMU\nVersion x.x",IDC_PCSXR_ABOUT_TEXT,22,10,112,15,0,WS_EX_TRANSPARENT
     CTEXT           "PCSXR a psx emulator...",IDC_PCSXR_ABOUT_AUTHORS,10,35,135,63,0,WS_EX_TRANSPARENT
     CTEXT           "Greets to...",IDC_PCSXR_ABOUT_GREETS,45,110,232,65
-    CONTROL         113,IDC_STATIC,"Static",SS_BITMAP | WS_BORDER,155,10,171,101
+    CONTROL         SPLASH_LOGO,IDC_STATIC,"Static",SS_BITMAP | WS_BORDER,155,10,171,101
     GROUPBOX        "",IDC_STATIC,5,25,145,77
     GROUPBOX        "",IDC_STATIC,43,100,234,79
 END
 
-IDD_CPUCONF DIALOGEX 0, 0, 232, 311
+IDD_CPUCONF DIALOGEX 0, 0, 241, 363
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Cpu Config"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,51,289,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,120,289,50,14
-    GROUPBOX        "Misc Options",IDC_MISCOPT,5,5,220,236
+    DEFPUSHBUTTON   "OK",IDOK,51,334,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,119,334,50,14
+    GROUPBOX        "Misc Options",IDC_MISCOPT,6,5,220,247
     CONTROL         "Disable Xa Decoding",IDC_XA,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,15,205,10
     CONTROL         "Sio Irq Always Enabled",IDC_SIO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,30,205,10
     CONTROL         "Spu Irq Always Enabled",IDC_SPUIRQ,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,45,205,10
@@ -124,13 +125,17 @@ BEGIN
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,150,205,10
     CONTROL         "InuYasha Sengoku Battle Fix",IDC_VSYNCWA,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,165,205,10
     CONTROL         "Widescreen (GTE Hack)",IDC_WIDESCREEN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,180,205,10
-    GROUPBOX        "Select Psx System Type",IDC_SELPSX,5,246,220,35
-    CONTROL         "Autodetect",IDC_PSXAUTO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,260,80,10
-    COMBOBOX        IDC_PSXTYPES,105,260,53,50,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Select Psx System Type",IDC_SELPSX,6,255,220,35
+    CONTROL         "Autodetect",IDC_PSXAUTO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,265,80,10
+    COMBOBOX        IDC_PSXTYPES,105,265,53,50,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
     CONTROL         "Hide cursor",IDC_HIDECURSOR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,195,205,10
     CONTROL         "Save window position",IDC_SAVEWINDOWPOS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,210,205,10
     CONTROL         "Compatibility hacks (Raystorm/VH-D/MML/Cart World/...)",IDC_HACKFIX,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,225,205,10
+    CONTROL         "Memhack (formally Wipeout)",IDC_MEMHACK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,314,205,10
+    GROUPBOX        "Overclocking",IDC_SELPSXCLOCK,7,290,220,37
+    CONTROL         "Enable",IDC_OVRCLOCK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,300,80,10
+    COMBOBOX        IDC_PSXCLOCK,105,297,53,50,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
 END
 
 IDD_NETPLAY DIALOG 0, 0, 165, 95
@@ -266,6 +271,23 @@ BEGIN
     EDITTEXT        IDC_VALUE,41,22,113,12,ES_AUTOHSCROLL
 END
 
+IDD_PGXPCONF DIALOGEX 0, 0, 241, 205
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "PGXP Config"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,55,184,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,127,184,50,14
+    GROUPBOX        "Options",IDC_MISCOPT,6,7,229,191
+    CONTROL         "Enable PGXP GTE Vertex Creation",IDC_PGXP_GTE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,21,126,10
+    CONTROL         "Enable Vertex Caching",IDC_PGXP_CACHE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,34,88,10
+    CONTROL         "Enable Perspective Correct Texturing",IDC_PGXP_PERSP,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,46,133,10
+    COMBOBOX        IDC_PGXP_MODE,43,78,158,50,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Select Pgxp Mode",IDC_PGXPMODESEL,6,65,229,113
+    LTEXT           "Text goes here",IDC_PGXP_MODETEXT,14,95,211,80
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -292,9 +314,9 @@ BEGIN
     IDD_CPUCONF, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 225
+        RIGHTMARGIN, 226
         TOPMARGIN, 7
-        BOTTOMMARGIN, 287
+        BOTTOMMARGIN, 348
     END
 
     IDD_NETPLAY, DIALOG
@@ -337,6 +359,14 @@ BEGIN
     IDD_CHEATVALEDIT, DIALOG
     BEGIN
     END
+
+    IDD_PGXPCONF, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 235
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 198
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -350,13 +380,16 @@ END
 // remains consistent on all systems.
 IDI_APP_ICON            ICON                    "gui\\pcsxr.ico"
 
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Bitmap
 //
 
 SPLASH_LOGO             BITMAP                  "gui\\about.bmp"
+
 MAIN_LOGO               BITMAP                  "gui\\pcsxr.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -364,6 +397,28 @@ MAIN_LOGO               BITMAP                  "gui\\pcsxr.bmp"
 //
 
 1                       RT_MANIFEST             "gui\\pcsxr.exe.manifest"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_CPUCONF AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_PGXPCONF AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_MCDCONF AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 

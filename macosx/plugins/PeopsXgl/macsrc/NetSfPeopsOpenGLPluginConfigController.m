@@ -162,6 +162,7 @@ void PrepFactoryDefaultPreferences(void)
 			 @"Texture Enhancement Level": @0,
 			 @"Texture Filter Level": @0,
 			 @"Frame Buffer Level": @0,
+			 @"Frame Buffer Access": @0,
 			 kWindowSize: NSStringFromSize(NSMakeSize(800, 600)),
 			 @"Draw Scanlines": @NO,
 			 // nasty:
@@ -199,7 +200,9 @@ void ReadConfig(void)
 		iFrameLimit = 2; // required
 		fFrameRate = 60; // required (some number, 60 seems ok)
 	}
-	
+
+	iForceVSync = [keyValues[kVSync] boolValue] ? 1 : 0;
+
 	// Dithering is either on or off in OpenGL plug, but hey
 	bDrawDither = [keyValues[@"Dither Mode"] intValue];
 	
@@ -241,13 +244,17 @@ void ReadConfig(void)
 	if (iFrameTexType > 3) iFrameTexType = 3;
 	if (iFrameTexType < 0) iFrameTexType = 0;
 	
+	iFrameReadType = [keyValues[@"Frame Buffer Access"] intValue];
+	if (iFrameReadType > 4) iFrameReadType = 4;
+	if (iFrameReadType < 0) iFrameReadType = 0;
+
 	iTexQuality = [keyValues[@"Texture Color Depth Level"] intValue];
 	if (iTexQuality > 4) iTexQuality = 4;
 	if (iTexQuality < 0) iTexQuality = 0;
 	
 	// MAG_FILTER = LINEAR, etc.
 	iFilterType = [keyValues[@"Texture Filter Level"] intValue];
-	if (iFilterType > 2) iFilterType = 2;
+	if (iFilterType > 6) iFilterType = 6;
 	if (iFilterType < 0) iFilterType = 0;
 	
 	// stretches textures (more detail). You'd think it would look great, but it's not massively better. NEEDS iFilterType to be of any use.
@@ -294,7 +301,7 @@ void ReadConfig(void)
 
 @implementation NetSfPeopsOpenGLPluginConfigController
 @synthesize autoFullScreen;
-@synthesize ditherMode;
+@synthesize limitFrameRate;
 @synthesize fpsCounter;
 @synthesize frameSkipping;
 @synthesize vSync;
@@ -307,6 +314,7 @@ void ReadConfig(void)
 @synthesize texFiltering;
 @synthesize texEnhancment;
 @synthesize frameBufferEffects;
+@synthesize frameBufferAccess;
 @synthesize drawScanlines;
 @synthesize advancedBlending;
 @synthesize opaquePass;
@@ -316,6 +324,7 @@ void ReadConfig(void)
 @synthesize mjpegDecoder;
 @synthesize mjpegDecoder15bit;
 @synthesize gteAccuracy;
+@synthesize colorDithering;
 @synthesize scanlineColorWell;
 @synthesize hacksMatrix;
 @synthesize hackEnable;
@@ -337,14 +346,14 @@ void ReadConfig(void)
 	writeDic[@"Scanline Color"] = [NSArchiver archivedDataWithRootObject:[scanlineColorWell color]];
 	writeDic[kFrameSkipping] = ([frameSkipping integerValue] ? @YES : @NO);
 	writeDic[kAutoFullScreen] = ([autoFullScreen integerValue] ? @YES : @NO);
-	//[writeDic setObject:([frameLimit integerValue] ? @YES : @NO) forKey:kFrameLimit];
+	writeDic[kFrameLimit] = ([limitFrameRate integerValue] ? @YES : @NO);
 	writeDic[@"Proportional Resize"] = ([proportionalResize integerValue] ? @YES : @NO);
-	writeDic[@"Dither Mode"] = @([ditherMode indexOfSelectedItem]);
 	writeDic[@"Offscreen Drawing Level"] = @([offscreenDrawing indexOfSelectedItem]);
 	writeDic[@"Texture Color Depth Level"] = @([texColorDepth indexOfSelectedItem]);
 	writeDic[@"Texture Enhancement Level"] = @([texEnhancment integerValue]);
 	writeDic[@"Texture Filter Level"] = @([texFiltering integerValue]);
 	writeDic[@"Frame Buffer Level"] = @([frameBufferEffects indexOfSelectedItem]);
+	writeDic[@"Frame Buffer Access"] = @([frameBufferAccess indexOfSelectedItem]);
 	writeDic[@"Draw Scanlines"] = ([drawScanlines integerValue] ? @YES : @NO);
 	writeDic[@"Advanced Blending"] = ([advancedBlending integerValue] ? @YES : @NO);
 	writeDic[@"Opaque Pass"] = ([opaquePass integerValue] ? @YES : @NO);
@@ -354,6 +363,7 @@ void ReadConfig(void)
 	writeDic[@"Emulate mjpeg decoder"] = ([mjpegDecoder integerValue] ? @YES : @NO);
 	writeDic[@"Fast mjpeg decoder"] = ([mjpegDecoder15bit integerValue] ? @YES : @NO);
 	writeDic[@"GteAccuracy"] = ([gteAccuracy integerValue] ? @YES : @NO);
+	writeDic[@"Dither Mode"] = @([colorDithering integerValue]);
 	writeDic[kVSync] = ([vSync integerValue] ? @YES : @NO);
 	writeDic[kWindowSize] = NSStringFromSize(NSMakeSize([windowWidth integerValue], [windowHeighth integerValue]));
 	
@@ -408,7 +418,7 @@ void ReadConfig(void)
 	[self loadHacksValues];
 	
 	[autoFullScreen setIntegerValue:[keyValues[kAutoFullScreen] boolValue]];
-	[ditherMode selectItemAtIndex:[keyValues[@"Dither Mode"] integerValue]];
+	[limitFrameRate setIntegerValue:[keyValues[kFrameLimit] boolValue]];
 	[fpsCounter setIntegerValue:[keyValues[kFPSCounter] boolValue]];
 	[scanlineColorWell setColor:[NSUnarchiver unarchiveObjectWithData: keyValues[@"Scanline Color"]]];
 	[frameSkipping setIntegerValue:[keyValues[kFrameSkipping] boolValue]];
@@ -426,8 +436,10 @@ void ReadConfig(void)
 	[blurEffect setIntegerValue:[keyValues[@"Blur"] boolValue]];
 	[texColorDepth selectItemAtIndex:[keyValues[@"Texture Color Depth Level"] integerValue]];
 	[gteAccuracy setIntegerValue:[keyValues[@"GteAccuracy"] boolValue]];
+	[colorDithering setIntegerValue:[keyValues[@"Dither Mode"] integerValue]];
 	[scanlineColorWell setEnabled:[keyValues[@"Draw Scanlines"] boolValue]];
 	[frameBufferEffects selectItemAtIndex:[keyValues[@"Frame Buffer Level"] integerValue]];
+	[frameBufferAccess selectItemAtIndex:[keyValues[@"Frame Buffer Access"] integerValue]];
 	[vSync setIntegerValue:[keyValues[kVSync] boolValue]];
 	[proportionalResize setIntegerValue:[keyValues[@"Proportional Resize"] boolValue]];
 	NSSize winSize = NSSizeFromString(keyValues[kWindowSize]);
@@ -438,6 +450,9 @@ void ReadConfig(void)
 - (void)awakeFromNib
 {
     [[NSColorPanel sharedColorPanel] setShowsAlpha:YES]; // eliminate dumb behavior!
+
+	// Kludge fix for windowWidth field layout problem on OS X 10.10+
+	windowWidth.titleWidth = windowWidth.titleWidth + FLT_MIN;
 }
 
 - (void)hacksSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
@@ -475,9 +490,7 @@ void ReadConfig(void)
 
 - (IBAction)toggleCheck:(id)sender
 {
-	if([sender tag] == 1) {
-		[scanlineColorWell setEnabled: [sender intValue] ? YES : NO];
-	}
+	scanlineColorWell.enabled = drawScanlines.integerValue;
 }
 
 @end

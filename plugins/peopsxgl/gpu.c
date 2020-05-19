@@ -35,6 +35,10 @@ static int iOldMode=0;
 
 #endif
 
+#if defined(__linux__)
+#include <sys/wait.h>
+#endif
+
 #define _IN_GPU
 
 #include "externals.h"
@@ -48,6 +52,7 @@ static int iOldMode=0;
 #include "fps.h"
 #include "key.h"
 #include "gte_accuracy.h"
+#include "pgxp_gpu.h"
 #ifdef _WINDOWS
 #include "resource.h"
 #include "ssave.h"
@@ -181,7 +186,6 @@ int             iFakePrimBusy = 0;
 int             iRumbleVal    = 0;
 int             iRumbleTime   = 0;
 uint32_t        vBlank=0;
-BOOL			oddLines;
 
 ////////////////////////////////////////////////////////////////////////
 // stuff to make this a true PDK module
@@ -579,7 +583,6 @@ long CALLBACK GPUinit()
  // device initialised already !
  //lGPUstatusRet = 0x74000000;
  vBlank = 0;
- oddLines = FALSE;
 
  STATUSREG = 0x14802000;
  GPUIsIdle;
@@ -717,7 +720,7 @@ long CALLBACK GPUopen(HWND hwndGPU)
  InitializeTextureStore();                             // init texture mem
 
  resetGteVertices();
- 
+
 // lGPUstatusRet = 0x74000000;
 
 // with some emus, we could do the OGL init right here... oh my
@@ -1089,13 +1092,7 @@ long GPUopen(unsigned long * disp,char * CapText,char * CfgFile)
  GLinitialize();                                       // init opengl
 
  if(disp)
-  {
-#if defined (_MACGL)
-   *disp = display;
-#else
-   *disp=(unsigned long *)display;                       // return display ID to main emu
-#endif
-  }
+   *disp = (unsigned long)display;                     // return display ID to main emu
 
  if(display) return 0;
  return -1;
@@ -1221,16 +1218,16 @@ static __inline void XPRIMdrawTexturedQuad(OGLVertex* vertex1, OGLVertex* vertex
 
  glBegin(GL_QUAD_STRIP);
   glTexCoord2fv(&vertex1->sow);
-  glVertex3fv(&vertex1->x);
+  PGXP_glVertexfv(&vertex1->x);
   
   glTexCoord2fv(&vertex2->sow);
-  glVertex3fv(&vertex2->x);
+  PGXP_glVertexfv(&vertex2->x);
   
   glTexCoord2fv(&vertex4->sow);
-  glVertex3fv(&vertex4->x);
+  PGXP_glVertexfv(&vertex4->x);
   
   glTexCoord2fv(&vertex3->sow);
-  glVertex3fv(&vertex3->x);
+  PGXP_glVertexfv(&vertex3->x);
  glEnd();
 }
 
@@ -1315,6 +1312,8 @@ void SetScanLines(void)
  glLoadIdentity();
  glOrtho(0,PSXDisplay.DisplayMode.x,
          PSXDisplay.DisplayMode.y, 0, -1, 1);
+
+ //PGXP_SetMatrix(0, PSXDisplay.DisplayMode.x, PSXDisplay.DisplayMode.y, 0, -1, 1);
 
  if(bKeepRatio)
   glViewport(rRatioRect.left,
@@ -1890,6 +1889,9 @@ void updateDisplayIfChanged(void)
    glLoadIdentity();
    glOrtho(0,PSXDisplay.DisplayModeNew.x,              // -> new psx resolution
              PSXDisplay.DisplayModeNew.y, 0, -1, 1);
+
+ //  PGXP_SetMatrix(0, PSXDisplay.DisplayModeNew.x, PSXDisplay.DisplayModeNew.y, 0, -1, 1);
+
    if(bKeepRatio) SetAspectRatio();
   }
 
@@ -2023,8 +2025,8 @@ static unsigned short usFirstPos=2;
 
 void CALLBACK GPUupdateLace(void)
 {
- if(!(dwActFixes&0x1000))                               
-  STATUSREG^=0x80000000;                               // interlaced bit toggle, if the CC game fix is not active (see gpuReadStatus)
+ //if(!(dwActFixes&0x1000))                               
+ // STATUSREG^=0x80000000;                               // interlaced bit toggle, if the CC game fix is not active (see gpuReadStatus)
 
  if(!(dwActFixes&128))                                 // normal frame limit func
   CheckFrameRate();
@@ -2036,7 +2038,7 @@ void CALLBACK GPUupdateLace(void)
 
  if(PSXDisplay.Interlaced)                             // interlaced mode?
   {
-   //STATUSREG^=0x80000000;
+   STATUSREG^=0x80000000;
    if(PSXDisplay.DisplayMode.x>0 && PSXDisplay.DisplayMode.y>0)
     {
      updateDisplay();                                  // -> swap buffers (new frame)
@@ -2061,16 +2063,7 @@ void CALLBACK GPUupdateLace(void)
 ////////////////////////////////////////////////////////////////////////
 
 uint32_t CALLBACK GPUreadStatus(void)
-{   
- if (vBlank || oddLines == FALSE) 
-  { // vblank or even lines
-   STATUSREG &= ~(0x80000000);
-  } 
- else 
-  { // Oddlines and not vblank
-   STATUSREG |= 0x80000000;
-  }
- 
+{
  if(dwActFixes&0x1000)                                 // CC game fix
   {
    static int iNumRead=0;
@@ -2097,7 +2090,7 @@ uint32_t CALLBACK GPUreadStatus(void)
     }
   }
 
- return STATUSREG;
+ return STATUSREG | (vBlank ? 0x80000000 : 0 );;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -2984,6 +2977,13 @@ ENDVRAM:
      if(gpuDataP == gpuDataC)
       {
        gpuDataC=gpuDataP=0;
+	   for (unsigned int i = 0; i < 4; i++)	//iCB: remove stale vertex data
+	   {
+		   vertex[i].x = vertex[i].y = 0.f;
+		   vertex[i].z = 0.95f;
+		   vertex[i].w = 1.f;
+		   vertex[i].PGXP_flag = 0;
+	   }
        primFunc[gpuCommand]((unsigned char *)gpuDataM);
 
        if(dwEmuFixes&0x0001 || dwActFixes&0x20000)     // hack for emulating "gpu busy" in some games
@@ -3134,6 +3134,7 @@ long CALLBACK GPUdmaChain(uint32_t *baseAddrL, uint32_t addr)
 
  baseAddrB = (unsigned char*) baseAddrL;
 
+ uint32_t depthCount = 0;
  do
   {
    if(iGPUHeight==512) addr&=0x1FFFFC;
@@ -3145,7 +3146,13 @@ long CALLBACK GPUdmaChain(uint32_t *baseAddrL, uint32_t addr)
 
    dmaMem=addr+4;
 
-   if(count>0) GPUwriteDataMem(&baseAddrL[dmaMem>>2],count);
+   if (count > 0)
+   {
+	   PGXP_SetAddress(dmaMem >> 2, &baseAddrL[dmaMem >> 2], count);
+	   GPUwriteDataMem(&baseAddrL[dmaMem >> 2], count);
+   }
+   else
+	   PGXP_SetDepth(depthCount++);
 
    addr = baseAddrL[addr>>2]&0xffffff;
   }
@@ -3608,15 +3615,5 @@ void CALLBACK GPUdisplayFlags(uint32_t dwFlags)
 
 void CALLBACK GPUvBlank( int val )
 {
- vBlank = val;
- oddLines = oddLines ? FALSE : TRUE; // bit changes per frame when not interlaced
- //printf("VB %x (%x)\n", oddLines, vBlank);
-}
-
-void CALLBACK GPUhSync( int val ) {
- // Interlaced mode - update bit every scanline
- if (PSXDisplay.Interlaced) {
-   oddLines = (val%2 ? FALSE : TRUE);
- }
- //printf("HS %x (%x)\n", oddLines, vBlank);
+    vBlank = val;
 }

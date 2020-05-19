@@ -127,7 +127,11 @@ void attachHotkeys() {
     // GPU key presses
     NSEvent* (^gpuKeypress)(NSEvent*) = ^(NSEvent *event) {
 		if (event.modifierFlags & NSControlKeyMask) {
-			GPU_keypressed([event keyCode]);
+			if ([event keyCode] == 0x67) {	// F11
+				GPU_toggleDebug();
+			} else {
+				GPU_keypressed([event keyCode]);
+			}
 			return (NSEvent*)nil;
 		} else {
 			return event;

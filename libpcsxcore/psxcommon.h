@@ -71,7 +71,7 @@ typedef uint8_t boolean;
 #include "system.h"
 #include "debug.h"
 
-#if defined (__LINUX__) || defined (__MACOSX__)
+#if defined (__linux__) || defined (__MACOSX__)
 #define strnicmp strncasecmp
 #endif
 #define __inline inline
@@ -137,6 +137,7 @@ typedef struct {
 	char PluginsDir[MAXPATHLEN];
 	char PatchesDir[MAXPATHLEN];
 	char IsoImgDir[MAXPATHLEN];
+	char PsxExeName[12];
 	boolean Xa;
 	boolean SioIrq;
 	boolean Mdec;
@@ -151,6 +152,7 @@ typedef struct {
 	boolean UseNet;
 	boolean VSyncWA;
 	boolean NoMemcard;
+	boolean PerGameMcd;
 	boolean Widescreen;
 	boolean HideCursor;
 	boolean SaveWindowPos;
@@ -159,7 +161,17 @@ typedef struct {
 	u8 PsxType; // PSX_TYPE_NTSC or PSX_TYPE_PAL
 	u32 RewindCount;
 	u32 RewindInterval;
+	u32 AltSpeed1; // Percent relative to natural speed.
+	u32 AltSpeed2;
 	u8 HackFix;
+	u8 MemHack;
+	boolean OverClock;	// enable overclocking
+	float PsxClock;
+	// PGXP variables
+	boolean PGXP_GTE;
+	boolean PGXP_Cache;
+	boolean PGXP_Texture;
+	u32		PGXP_Mode;
 #ifdef _WIN32
 	char Lang[256];
 #endif
@@ -180,8 +192,9 @@ extern u8 vblank_count_hideafter;
 // Make the timing events trigger faster as we are currently assuming everything
 // takes one cycle, which is not the case on real hardware.
 // FIXME: Count the proper cycle and get rid of this
+extern u32 PsxClockSpeed;
 #define BIAS	2
-#define PSXCLK	33868800	/* 33.8688 MHz */
+#define PSXCLK	PsxClockSpeed	/* 33.8688 MHz */
 
 enum {
 	PSX_TYPE_NTSC = 0,
@@ -203,6 +216,7 @@ int EmuInit();
 void EmuReset();
 void EmuShutdown();
 void EmuUpdate();
+void EmuSetPGXPMode(u32 pgxpMode);
 
 #ifdef __cplusplus
 }

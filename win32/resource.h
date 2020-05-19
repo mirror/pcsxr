@@ -35,6 +35,7 @@
 #define IDD_COP2C                       117
 #define MAIN_LOGO                       118
 #define IDD_CONFIG                      120
+#define IDD_PGXPCONF                    121
 #define IDD_MEMVIEW                     136
 #define IDC_EDIT2                       1001
 #define IDC_CODE                        1001
@@ -56,6 +57,7 @@
 #define IDC_BREAK                       1012
 #define IDC_DISCPUQKEYS                 1012
 #define IDC_QKEYS                       1012
+#define IDC_OVRCLOCK                    1012
 #define IDC_EDIT1                       1013
 #define IDC_CDDA                        1013
 #define IDC_DESCR                       1013
@@ -72,6 +74,7 @@
 #define IDC_CDTIMING                    1017
 #define IDC_SLOWBOOT                    1017
 #define IDC_ASMCHECK4                   1018
+#define IDC_PSXCLOCK                    1018
 #define IDC_ASMCHECK5                   1019
 #define IDC_RELOAD1                     1019
 #define IDC_CP07                        1020
@@ -113,6 +116,7 @@
 #define IDC_CP021                       1034
 #define IDC_ASMCHECK20                  1034
 #define IDC_FIRSTCONTROLLER             1034
+#define IDC_SELPSXCLOCK                 1034
 #define IDC_CP022                       1035
 #define IDC_ASMCHECK21                  1035
 #define IDC_SECONDCONTROLLER            1035
@@ -152,15 +156,23 @@
 #define IDC_DEBUG                       1053
 #define IDC_GPR7                        1054
 #define IDC_LISTCDR                     1054
+#define IDC_PERGAMEMCD                  1054
 #define IDC_GPR8                        1055
 #define IDC_LISTBIOS                    1055
+#define IDC_PGXP_GTE                    1055
 #define IDC_GPR9                        1056
 #define IDC_CONFIGGPU                   1056
+#define IDC_PGXP_CACHE                  1056
 #define IDC_GPR10                       1057
 #define IDC_TESTGPU                     1057
+#define IDC_PGXP_PERSP                  1057
 #define IDC_ABOUTGPU                    1058
+#define IDC_PGXP_MODE                   1058
 #define IDC_CONFIGSPU                   1059
+#define IDC_PGXPMODESEL                 1059
 #define IDC_TESTSPU                     1060
+#define IDC_PGXPMODETEXT                1060
+#define IDC_PGXP_MODETEXT               1060
 #define IDC_ABOUTSPU                    1061
 #define IDC_CONFIGCDR                   1062
 #define IDC_GPR11                       1063
@@ -306,6 +318,7 @@
 #define IDC_HIDECURSOR                  1265
 #define IDC_SAVEWINDOWPOS               1266
 #define IDC_HACKFIX                     1267
+#define IDC_MEMHACK                     1268
 #define ID_FILE_EXIT                    40001
 #define ID_HELP_ABOUT                   40002
 #define ID_FILE_RUN_CD                  40003
@@ -327,6 +340,7 @@
 #define ID_CONFIGURATION_CONTROLLERS    40017
 #define ID_CONFIGURATION                40018
 #define ID_CONFIGURATION_LINKCABLE      40019
+#define ID_CONFIGURATION_PGXP           40021
 #define ID_FILE_RUNBIOS                 40026
 #define ID_CONFIGURATION_NETPLAY        40043
 #define ID_EMULATOR_SWITCH_ISO          40044
@@ -358,9 +372,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        116
+#define _APS_NEXT_RESOURCE_VALUE        118
 #define _APS_NEXT_COMMAND_VALUE         40047
-#define _APS_NEXT_CONTROL_VALUE         1054
-#define _APS_NEXT_SYMED_VALUE           102
+#define _APS_NEXT_CONTROL_VALUE         1061
+#define _APS_NEXT_SYMED_VALUE           103
 #endif
 #endif

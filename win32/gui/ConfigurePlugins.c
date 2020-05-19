@@ -84,12 +84,22 @@ int LoadConfig() {
 	QueryKeyV("Widescreen",  Conf->Widescreen);
 	QueryKeyV("HideCursor",  Conf->HideCursor);
 	QueryKeyV("SaveWindowPos",  Conf->SaveWindowPos);
+	QueryKeyV("PerGameMcd", Conf->PerGameMcd);
 	QueryKeyV("WindowPosX",  Conf->WindowPos[0]);
 	QueryKeyV("WindowPosY",  Conf->WindowPos[1]);
 	QueryKeyV("HackFix", Conf->HackFix);
+	QueryKeyV("MemHack", Conf->MemHack);
+
+	QueryKeyV("OverClock", Conf->OverClock);
 
 	QueryKeyV("Cpu",      Conf->Cpu);
 	QueryKeyV("PsxType",  Conf->PsxType);
+	QueryKey(sizeof(Conf->PsxClock), "PsxClock", &Conf->PsxClock);
+
+	QueryKeyV("PGXP_GTE", Conf->PGXP_GTE);
+	QueryKeyV("PGXP_Cache", Conf->PGXP_Cache);
+	QueryKeyV("PGXP_Texture", Conf->PGXP_Texture);
+	QueryKeyV("PGXP_Mode", Conf->PGXP_Mode);
 
 	if (Config.Cpu == CPU_DYNAREC) {
 		Config.Debug = 0; // don't enable debugger if using dynarec core
@@ -142,12 +152,22 @@ void SaveConfig() {
 	SetKeyV("Widescreen", Conf->Widescreen);
 	SetKeyV("HideCursor", Conf->HideCursor);
 	SetKeyV("SaveWindowPos",  Conf->SaveWindowPos);
+	SetKeyV("PerGameMcd", Conf->PerGameMcd);
 	SetKeyV("WindowPosX",  Conf->WindowPos[0]);
 	SetKeyV("WindowPosY",  Conf->WindowPos[1]);
 	SetKeyV("HackFix", Conf->HackFix);
+	SetKeyV("MemHack", Conf->MemHack);
+	SetKeyV("OverClock", Conf->OverClock);
 
 	SetKeyV("Cpu",     Conf->Cpu);
 	SetKeyV("PsxType", Conf->PsxType);
+	SetKey("PsxClock", &Conf->PsxClock, sizeof(Conf->PsxClock), REG_BINARY);
+
+	SetKeyV("PGXP_GTE", Conf->PGXP_GTE);
+	SetKeyV("PGXP_Cache", Conf->PGXP_Cache);
+	SetKeyV("PGXP_Texture", Conf->PGXP_Texture);
+	SetKeyV("PGXP_Mode", Conf->PGXP_Mode);
+
 
 	RegCloseKey(myKey);
 }

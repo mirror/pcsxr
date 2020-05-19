@@ -45,6 +45,9 @@
     <ClCompile Include="..\..\..\plugins\peopsxgl\texture.c">
       <Filter>peopsxgl</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\plugins\peopsxgl\pgxp_gpu.c">
+      <Filter>peopsxgl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="winsrc\ssave.h">
@@ -90,6 +93,9 @@
       <Filter>peopsxgl</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="..\..\..\plugins\peopsxgl\pgxp_gpu.h">
+      <Filter>peopsxgl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\gpu.bmp" />

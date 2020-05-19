@@ -18,6 +18,7 @@
 
 #include "Linux.h"
 #include "../libpcsxcore/psxmem.h"
+#include "../libpcsxcore/r3000a.h"
 #include <gtk/gtk.h>
 
 #define MEMVIEW_MAX_LINES 256
@@ -86,7 +87,6 @@ static void UpdateMemViewDlg() {
 
 	gtk_tree_view_set_model(GTK_TREE_VIEW(widget), GTK_TREE_MODEL(store));
 	g_object_unref(G_OBJECT(store));
-	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(widget), TRUE);
 	gtk_widget_show(widget);
 }
 
@@ -150,30 +150,32 @@ static void MemView_Dump() {
 	char buf[10];
 
 	dlg = gtk_dialog_new_with_buttons(_("Memory Dump"), GTK_WINDOW(MemViewDlg),
-		GTK_DIALOG_MODAL, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
+		GTK_DIALOG_MODAL, "_Cancel", GTK_RESPONSE_CANCEL,
+		"_OK", GTK_RESPONSE_ACCEPT, NULL);
 
 	box = GTK_WIDGET(gtk_dialog_get_content_area(GTK_DIALOG(dlg)));
 
-	table = gtk_table_new(2, 2, FALSE);
+	table = gtk_grid_new();
+	gtk_grid_set_row_spacing(GTK_GRID(table), 5);
+	gtk_grid_set_column_spacing(GTK_GRID(table), 5);
 
 	label = gtk_label_new(_("Start Address (Hexadecimal):"));
-	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 0, 1, 0, 0, 5, 5);
+	gtk_grid_attach(GTK_GRID(table), label, 0, 0, 1, 1);
 	gtk_widget_show(label);
 
 	start_edit = gtk_entry_new();
 	gtk_entry_set_max_length(GTK_ENTRY(start_edit), 8);
 	sprintf(buf, "%.8X", MemViewAddress | 0x80000000);
 	gtk_entry_set_text(GTK_ENTRY(start_edit), buf);
-	gtk_table_attach(GTK_TABLE(table), start_edit, 1, 2, 0, 1, 0, 0, 5, 5);
+	gtk_grid_attach(GTK_GRID(table), start_edit, 1, 0, 1, 1);
 	gtk_widget_show(start_edit);
 
 	label = gtk_label_new(_("Length (Decimal):"));
-	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 1, 2, 0, 0, 5, 5);
+	gtk_grid_attach(GTK_GRID(table), label, 0, 1, 1, 1);
 	gtk_widget_show(label);
 
 	length_edit = gtk_entry_new();
-	gtk_table_attach(GTK_TABLE(table), length_edit, 1, 2, 1, 2, 0, 0, 5, 5);
+	gtk_grid_attach(GTK_GRID(table), length_edit, 1, 1, 1, 1);
 	gtk_widget_show(length_edit);
 
 	gtk_box_pack_start(GTK_BOX(box), table, FALSE, FALSE, 5);
@@ -196,8 +198,8 @@ static void MemView_Dump() {
 		if (length > 0) {
 			GtkWidget *file_chooser = gtk_file_chooser_dialog_new(_("Dump to File"),
 				NULL, GTK_FILE_CHOOSER_ACTION_SAVE,
-				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT, NULL);
+				"_Cancel", GTK_RESPONSE_CANCEL,
+				"_Save", GTK_RESPONSE_ACCEPT, NULL);
 
 			gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(file_chooser), getenv("HOME"));
 
@@ -228,32 +230,34 @@ static void MemView_Patch() {
 	char buf[12];
 
 	dlg = gtk_dialog_new_with_buttons(_("Memory Patch"), GTK_WINDOW(MemViewDlg),
-		GTK_DIALOG_MODAL, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
+		GTK_DIALOG_MODAL, "_Cancel", GTK_RESPONSE_CANCEL,
+		"_OK", GTK_RESPONSE_ACCEPT, NULL);
 
 	box = GTK_WIDGET(gtk_dialog_get_content_area(GTK_DIALOG(dlg)));
 
-	table = gtk_table_new(2, 2, FALSE);
+	table = gtk_grid_new();
+	gtk_grid_set_row_spacing(GTK_GRID(table), 5);
+	gtk_grid_set_column_spacing(GTK_GRID(table), 5);
 
 	label = gtk_label_new(_("Address (Hexadecimal):"));
-	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 0, 1, 0, 0, 5, 5);
+	gtk_grid_attach(GTK_GRID(table), label, 0, 0, 1, 1);
 	gtk_widget_show(label);
 
 	addr_edit = gtk_entry_new();
 	gtk_entry_set_max_length(GTK_ENTRY(addr_edit), 8);
 	sprintf(buf, "%.8X", MemViewAddress | 0x80000000);
 	gtk_entry_set_text(GTK_ENTRY(addr_edit), buf);
-	gtk_table_attach(GTK_TABLE(table), addr_edit, 1, 2, 0, 1, 0, 0, 5, 5);
+	gtk_grid_attach(GTK_GRID(table), addr_edit, 1, 0, 1, 1);
 	gtk_widget_show(addr_edit);
 
 	label = gtk_label_new(_("Value (Hexa string):"));
-	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 1, 2, 0, 0, 5, 5);
+	gtk_grid_attach(GTK_GRID(table), label, 0, 1, 1, 1);
 	gtk_widget_show(label);
 
 	val_edit = gtk_entry_new();
 	sprintf(buf, "%.2X", MemViewValue);
 	gtk_entry_set_text(GTK_ENTRY(val_edit), buf);
-	gtk_table_attach(GTK_TABLE(table), val_edit, 1, 2, 1, 2, 0, 0, 5, 5);
+	gtk_grid_attach(GTK_GRID(table), val_edit, 1, 1, 1, 1);
 	gtk_widget_show(val_edit);
 
 	gtk_box_pack_start(GTK_BOX(box), table, FALSE, FALSE, 5);
@@ -283,6 +287,9 @@ static void MemView_Patch() {
 				}
 
 				psxMemWrite8(addr, (u8)val);
+#ifdef PSXREC
+				psxCpu->Clear(addr, 1);
+#endif
 				addr++;
 			}
 
@@ -303,12 +310,11 @@ void RunDebugMemoryDialog() {
 	GtkWidget *widget;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
-	PangoFontDescription *pfd;
 	int i;
 	
 	builder = gtk_builder_new();
 	
-	if (!gtk_builder_add_from_file(builder, PACKAGE_DATA_DIR "pcsxr.ui", NULL)) {
+	if (!gtk_builder_add_from_resource(builder, "/org/pcsxr/gui/pcsxr.ui", NULL)) {
 		g_warning("Error: interface could not be loaded!");
 		return;
 	}
@@ -343,12 +349,6 @@ void RunDebugMemoryDialog() {
 		renderer, "text", 17, NULL);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(widget), column);
 
-	pfd = pango_font_description_from_string("Bitstream Vera Sans Mono, "
-		"DejaVu Sans Mono, Liberation Mono, FreeMono, Sans Mono 9");
-
-	gtk_widget_override_font(widget, pfd);
-
-	pango_font_description_free(pfd);
 
 	UpdateMemViewDlg();
 

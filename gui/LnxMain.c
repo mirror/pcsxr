@@ -83,6 +83,7 @@ static void CheckSubDir() {
 
 	CreateHomeConfigDir(BIOS_DIR);
 	CreateHomeConfigDir(MEMCARD_DIR);
+    CreateHomeConfigDir(MEMCARD_PERGAME_DIR);
 	CreateHomeConfigDir(STATES_DIR);
 	CreateHomeConfigDir(PLUGINS_DIR);
 	CreateHomeConfigDir(PLUGINS_CFG_DIR);
@@ -232,9 +233,7 @@ static void ScanAllPlugins (void) {
 	ScanBios("/usr/local/share/psemu/bios");
 	ScanBios("/usr/local/share/pcsxr");
 	ScanBios("/usr/local/share/pcsxr/bios");
-	ScanBios(PACKAGE_DATA_DIR);
 	ScanBios(PSEMU_DATA_DIR);
-	ScanBios(PACKAGE_DATA_DIR "/bios");
 	ScanBios(PSEMU_DATA_DIR "/bios");
 
 	currentdir = g_strconcat(getenv("HOME"), "/.psemu-plugins/", NULL);

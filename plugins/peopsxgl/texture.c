@@ -139,6 +139,7 @@ BOOL  bUseFastMdec=FALSE;
 BOOL  bUse15bitMdec=FALSE;
 int   iFrameTexType=0;
 int   iFrameReadType=0;
+int	  iLineHackMode=0;
 
 uint32_t       (*TCF[2]) (uint32_t);
 unsigned short (*PTCF[2]) (unsigned short);

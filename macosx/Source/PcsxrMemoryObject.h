@@ -10,11 +10,11 @@
 #include "sio.h"
 
 typedef NS_ENUM(char, PCSXRMemFlag) {
-	memFlagDeleted,
-	memFlagFree,
-	memFlagUsed,
-	memFlagLink,
-	memFlagEndLink
+	PCSXRMemFlagDeleted,
+	PCSXRMemFlagFree,
+	PCSXRMemFlagUsed,
+	PCSXRMemFlagLink,
+	PCSXRMemFlagEndLink
 };
 
 @interface PcsxrMemoryObject : NSObject

@@ -192,7 +192,7 @@
 
 - (IBAction)closeCheatEdit:(id)sender
 {
-	[NSApp endSheet:editCheatWindow returnCode:[sender tag] == 1 ? NSCancelButton : NSOKButton];
+	[[self window] endSheet:editCheatWindow returnCode:[sender tag] == 1 ? NSCancelButton : NSOKButton];
 }
 
 - (IBAction)changeCheat:(id)sender

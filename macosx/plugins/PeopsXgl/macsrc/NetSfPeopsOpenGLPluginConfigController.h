@@ -9,7 +9,7 @@
 
 @interface NetSfPeopsOpenGLPluginConfigController : NSWindowController
 @property (weak) IBOutlet NSCell *autoFullScreen;
-@property (weak) IBOutlet NSPopUpButton *ditherMode;
+@property (weak) IBOutlet NSCell *limitFrameRate;
 @property (weak) IBOutlet NSCell *fpsCounter;
 @property (weak) IBOutlet NSCell *frameSkipping;
 @property (weak) IBOutlet NSCell *vSync;
@@ -22,6 +22,7 @@
 @property (weak) IBOutlet NSSlider *texFiltering;
 @property (weak) IBOutlet NSSlider *texEnhancment;
 @property (weak) IBOutlet NSPopUpButton *frameBufferEffects;
+@property (weak) IBOutlet NSPopUpButton *frameBufferAccess;
 @property (weak) IBOutlet NSCell *drawScanlines;
 @property (weak) IBOutlet NSCell *advancedBlending;
 @property (weak) IBOutlet NSCell *opaquePass;
@@ -31,6 +32,7 @@
 @property (weak) IBOutlet NSCell *mjpegDecoder;
 @property (weak) IBOutlet NSCell *mjpegDecoder15bit;
 @property (weak) IBOutlet NSCell *gteAccuracy;
+@property (weak) IBOutlet NSCell *colorDithering;
 @property (weak) IBOutlet NSColorWell *scanlineColorWell;
 @property (weak) IBOutlet NSMatrix *hacksMatrix;
 @property (weak) IBOutlet NSControl *hackEnable;

@@ -179,6 +179,7 @@ BOOL OnInitCfgDialog(HWND hW)                          // INIT CONFIG DIALOG
  if(bUse15bitMdec)    CheckDlgButton(hW,IDC_FASTMDEC2,TRUE);
  if(bUseFixes)        CheckDlgButton(hW,IDC_GAMEFIX,TRUE);
  if(bGteAccuracy)     CheckDlgButton(hW,IDC_GTEACCURACY,TRUE);
+ if(iUseExts)		  CheckDlgButton(hW,IDC_USEEXT, TRUE);
  if(iUseScanLines)    CheckDlgButton(hW,IDC_USESCANLINES,TRUE);
  if(iShowFPS)         CheckDlgButton(hW,IDC_SHOWFPS,TRUE);
  if(bKeepRatio)       CheckDlgButton(hW,IDC_ARATIO,TRUE);
@@ -234,6 +235,14 @@ BOOL OnInitCfgDialog(HWND hW)                          // INIT CONFIG DIALOG
  ComboBox_AddString(hWC,"3: Gfx card buffer reads & moves");
  ComboBox_AddString(hWC,"4: Full software drawing (FVP)");
  ComboBox_SetCurSel(hWC,iFrameReadType);
+
+ //----------------------------------------------------// line hack mode
+
+ hWC = GetDlgItem(hW, IDC_LINEHACK);
+ ComboBox_AddString(hWC, "0: Disabled");
+ ComboBox_AddString(hWC, "1: Default (Doom, Hexen, Soul Blade)");
+ ComboBox_AddString(hWC, "2: Aggressive (Dark Forces, Duke Nukem)");
+ ComboBox_SetCurSel(hWC, iLineHackMode);
 
  //----------------------------------------------------// framerate stuff
 
@@ -306,6 +315,7 @@ void GetSettings(HWND hW)
 
  iFrameTexType=ComboBox_GetCurSel(GetDlgItem(hW,IDC_FRAMETEX));
  iFrameReadType=ComboBox_GetCurSel(GetDlgItem(hW,IDC_FRAMEREAD));
+ iLineHackMode = ComboBox_GetCurSel(GetDlgItem(hW,IDC_LINEHACK));
 
  if(IsDlgButtonChecked(hW,IDC_USELIMIT))
   bUseFrameLimit=TRUE; else bUseFrameLimit=FALSE;
@@ -330,6 +340,9 @@ void GetSettings(HWND hW)
 
  if(IsDlgButtonChecked(hW,IDC_GTEACCURACY))
   bGteAccuracy=TRUE; else bGteAccuracy=FALSE;
+
+ if(IsDlgButtonChecked(hW, IDC_USEEXT))
+	 iUseExts = TRUE; else iUseExts = FALSE;
 
  if(IsDlgButtonChecked(hW,IDC_USESCANLINES))
   iUseScanLines=1; else iUseScanLines=0;
@@ -504,6 +517,7 @@ void OnCfgDef1(HWND hW)
  ComboBox_SetCurSel(GetDlgItem(hW,IDC_SUBCACHE),2);
  ComboBox_SetCurSel(GetDlgItem(hW,IDC_FRAMETEX),1);
  ComboBox_SetCurSel(GetDlgItem(hW,IDC_FRAMEREAD),0);
+ ComboBox_SetCurSel(GetDlgItem(hW,IDC_LINEHACK), 1);
 
  CheckDlgButton(hW,IDC_USEMASK,FALSE);
  CheckDlgButton(hW,IDC_FASTMDEC,TRUE);
@@ -562,6 +576,7 @@ void OnCfgDef2(HWND hW)
  ComboBox_SetCurSel(GetDlgItem(hW,IDC_SUBCACHE),2);
  ComboBox_SetCurSel(GetDlgItem(hW,IDC_FRAMETEX),2);
  ComboBox_SetCurSel(GetDlgItem(hW,IDC_FRAMEREAD),0);
+ ComboBox_SetCurSel(GetDlgItem(hW,IDC_LINEHACK), 1);
 
  CheckDlgButton(hW,IDC_USEMASK,TRUE);
  CheckDlgButton(hW,IDC_FASTMDEC,FALSE);
@@ -616,9 +631,11 @@ void ReadConfig(void)                                  // read all config vals
  dwCfgFixes=0;
  bUseFixes=FALSE;
  bGteAccuracy=FALSE;
+ iUseExts=TRUE;
  iUseScanLines=0;
  iFrameTexType=0;
  iFrameReadType=0;
+ iLineHackMode=0;
  iShowFPS=0;
  bKeepRatio=FALSE;
  bForceRatio43=FALSE;
@@ -719,6 +736,9 @@ void ReadConfig(void)                                  // read all config vals
    if(RegQueryValueEx(myKey,"GteAccuracy",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
     bGteAccuracy=(BOOL)temp;
    size = 4;
+   if(RegQueryValueEx(myKey,"UseExtensions",0,&type,(LPBYTE)&temp, &size)==ERROR_SUCCESS)
+	   iUseExts = (BOOL)temp;
+   size = 4;
    if(RegQueryValueEx(myKey,"UseMask",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
     iUseMask=(int)temp;
    size = 4;
@@ -748,6 +768,9 @@ void ReadConfig(void)                                  // read all config vals
    size = 4;
    if(RegQueryValueEx(myKey,"FrameReadType",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
     iFrameReadType=(int)temp;
+   size = 4;
+   if (RegQueryValueEx(myKey, "LineHackMode", 0, &type, (LPBYTE)&temp, &size) == ERROR_SUCCESS)
+	   iLineHackMode = (int)temp;
    size = 4;
    if(RegQueryValueEx(myKey,"FullscreenBlur",0,&type,(LPBYTE)&temp,&size)==ERROR_SUCCESS)
     iBlurBuffer=(int)temp;
@@ -866,6 +889,8 @@ void WriteConfig(void)
  RegSetValueEx(myKey,"UseFixes",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=bGteAccuracy;
  RegSetValueEx(myKey,"GteAccuracy",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
+ temp = iUseExts;
+ RegSetValueEx(myKey,"UseExtensions",0,REG_DWORD,(LPBYTE)&temp,sizeof(temp));
  temp=iUseMask;
  RegSetValueEx(myKey,"UseMask",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=bUseFastMdec;
@@ -880,6 +905,8 @@ void WriteConfig(void)
  RegSetValueEx(myKey,"FrameTexType",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=iFrameReadType;
  RegSetValueEx(myKey,"FrameReadType",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
+ temp = iLineHackMode;
+ RegSetValueEx(myKey, "LineHackMode", 0, REG_DWORD, (LPBYTE)&temp, sizeof(temp));
  temp=bKeepRatio;
  RegSetValueEx(myKey,"KeepRatio",0,REG_DWORD,(LPBYTE) &temp,sizeof(temp));
  temp=bForceRatio43;

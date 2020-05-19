@@ -64,7 +64,7 @@ int JoyHapticRumble(int pad, uint32_t low, uint32_t high)
 #if SDL_VERSION_ATLEAST(2,0,0)
   float mag;
 
-  if (g.PadState[pad].haptic) {
+  if (g.PadState[pad].haptic && g.cfg.PadDef[pad].PhysicalVibration) {
 
     /* Stop the effect if it was playing. */
     SDL_HapticRumbleStop(g.PadState[pad].haptic);
@@ -74,7 +74,7 @@ int JoyHapticRumble(int pad, uint32_t low, uint32_t high)
 
     if(SDL_HapticRumblePlay(g.PadState[pad].haptic, mag, 500) != 0)
     {
-      printf("\nFailed to play rumble: %s\n", SDL_GetError());
+      printf("\nFailed to play rumble on pad %d with error: %s\n", pad, SDL_GetError());
       return 1;
     }
   }
